@@ -35,6 +35,7 @@ Nel tracking di J&T ogni scansione ha solo data, ora e una frase: nessun luogo. 
 | `Your package has been loaded and is on its way to you` | È sul furgone: in consegna. | «In consegna» |
 | `Delivery failed because the address could not be found` | Il corriere non ha trovato il tuo indirizzo. | «Tentativo di consegna» |
 | `Delivery failed, customer refused to accept` | Il destinatario ha rifiutato il pacco. | «Tentativo di consegna» |
+| `Your parcel has been delivered to the pickup point. Please check your email for details` | Il corriere ha lasciato il pacco in un punto di ritiro: J&T ti manda per e-mail i dettagli per ritirarlo. | «Pronto per il ritiro» |
 | `Your package has been successfully delivered.` | Consegnato. J&T aggiunge il tipo di consegna (vedi sotto). | «Consegnato» |
 | `Returns have begun` | Dopo una consegna non riuscita, il pacco sta tornando al mittente. | «Restituito al mittente» |
 | `The shipment has been returned` | Il pacco è tornato al mittente. | «Restituito al mittente» |
@@ -56,7 +57,7 @@ Un pacco lasciato a un vicino, quindi, in Peek si legge `Your package has been s
 
 ## Consegna J&T in Germania: cosa ti dice il tracking
 
-Nelle cronologie che il codice di Peek conosce, il corriere di J&T carica il pacco sul furgone per un giro di consegna e poi lo consegna, oppure scrive perché non ci è riuscito. Il codice di Peek non mostra nessun passaggio a un altro corriere: il tracking di J&T segue il pacco fino alla tua porta. Il corriere che ti suona alla porta può lavorare per uno dei partner in franchising di J&T: secondo jtexpress.de, J&T cerca in tutta la Germania partner i cui team consegnano pacchi.
+Nelle cronologie che il codice di Peek conosce, il corriere di J&T carica il pacco sul furgone per un giro di consegna e poi lo consegna, lo lascia in un punto di ritiro oppure scrive perché non ci è riuscito. Il codice di Peek non mostra nessun passaggio a un altro corriere: il tracking di J&T segue il pacco fino alla consegna. Il corriere che ti suona alla porta può lavorare per uno dei partner in franchising di J&T: secondo jtexpress.de, J&T cerca in tutta la Germania partner i cui team consegnano pacchi.
 
 **In consegna.** `Your package has been loaded and is on its way to you` vuol dire che il pacco è partito per il giro di consegna. In quelle cronologie la riga compare la mattina, qualche ora prima della consegna. Il tracking di J&T non dà né una fascia oraria né un giorno di consegna previsto, quindi nemmeno Peek può mostrarli.
 
@@ -66,7 +67,7 @@ Nelle cronologie che il codice di Peek conosce, il corriere di J&T carica il pac
 
 **Rifiutato o indirizzo non trovato.** Dopo `Delivery failed, customer refused to accept`, nelle cronologie che il codice di Peek conosce il corriere ha ricaricato il pacco per un altro giro la mattina dopo. Dopo `Delivery failed because the address could not be found`, controlla l'indirizzo dell'ordine. Se manca qualcosa, come il numero dell'appartamento o il tuo nome sul campanello, avvisa subito il negozio: ha spedito il pacco all'indirizzo che gli hai dato tu. Anche le FAQ di J&T dicono di contattare subito il mittente o la piattaforma: dopo la spedizione, se l'indirizzo si possa ancora cambiare dipende da dove si trova il pacco e dalle regole del mittente. Dopo una consegna non riuscita può comparire anche `Returns have begun`. Vedi [come cambiare l'indirizzo di consegna](guide:change-delivery-address) e [consegna mancata](guide:missed-delivery).
 
-**Tentativi e ritiro.** Il sito di J&T non dice quante volte J&T riprova, per quanto tiene un pacco in giacenza né a che ora consegna, e non elenca punti di ritiro, locker o depositi dove andare a prendere un pacco. Tra le righe di J&T Express Germany che il codice di Peek conosce, nessuna manda il pacco in un punto di ritiro o in un locker. Chiedi al negozio, o guarda i messaggi che hai ricevuto sulla consegna.
+**Tentativi e ritiro.** Il sito di J&T non dice quante volte J&T riprova, per quanto tiene un pacco in giacenza né a che ora consegna, e non elenca punti di ritiro, locker o depositi dove andare a prendere un pacco. Una riga di J&T Express Germany che il codice di Peek conosce dice però che il pacco è stato consegnato in un punto di ritiro, con i dettagli in un'e-mail di J&T. Chiedi al negozio, o guarda i messaggi che hai ricevuto sulla consegna.
 
 ## Pacco J&T in ritardo, sparito o rispedito
 
@@ -114,7 +115,7 @@ Te lo dice il tracking di J&T: sotto la scansione di consegna clicca `Zustelldet
 
 ### J&T Express ha punti di ritiro in Germania?
 
-Il sito tedesco di J&T non ne elenca, e nessuna riga di J&T Express Germany che Peek conosce manda un pacco in un punto di ritiro o in un locker. Dalla pagina delle preferenze di consegna puoi chiedere la consegna a te, a un vicino, alla reception o in un posto al tuo indirizzo.
+Il sito tedesco di J&T non ne elenca, ma una riga di J&T Express Germany che Peek conosce dice che il pacco è stato consegnato in un punto di ritiro, con i dettagli in un'e-mail di J&T. Dalla pagina delle preferenze di consegna puoi chiedere la consegna a te, a un vicino, alla reception o in un posto al tuo indirizzo.
 
 ### Perché il tracking J&T non trova il mio numero?
 

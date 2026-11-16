@@ -37,6 +37,7 @@ In der Sendungsverfolgung von J&T besteht jeder Scan aus einer Uhrzeit und einem
 | `Your package has been loaded and is on its way to you` | Es liegt im Zustellfahrzeug: in Zustellung. | „In Zustellung“ |
 | `Delivery failed because the address could not be found` | Der Fahrer hat deine Adresse nicht gefunden. | „Zustellversuch“ |
 | `Delivery failed, customer refused to accept` | Der Empfänger hat die Annahme verweigert. | „Zustellversuch“ |
+| `Your parcel has been delivered to the pickup point. Please check your email for details` | Der Fahrer hat das Paket an einem Abholpunkt abgegeben: Die Details zur Abholung schickt J&T per E-Mail. | „Abholbereit“ |
 | `Your package has been successfully delivered.` | Zugestellt. J&T schreibt dazu, wie (siehe unten). | „Zugestellt“ |
 | `Returns have begun` | Nach einer gescheiterten Zustellung geht das Paket zurück an den Versender. | „Zurück an Absender“ |
 | `The shipment has been returned` | Die Rücksendung ist abgeschlossen. | „Zurück an Absender“ |
@@ -58,7 +59,7 @@ Ein beim Nachbarn abgegebenes Paket steht in Peek also als `Your package has bee
 
 ## J&T Zustellung: Nachbar, Ablageort und Zustellfoto
 
-In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket für eine Zustelltour ein und stellt es dann zu oder meldet, warum die Zustellung gescheitert ist. Eine Übergabe an einen anderen Paketdienst zeigt Peeks Code nicht: Die Sendungsverfolgung von J&T begleitet das Paket bis zu deiner Tür. Wer klingelt, kann auch für einen Franchise-Partner von J&T fahren: Laut jtexpress.de sucht J&T in ganz Deutschland Partner, deren Teams Pakete zustellen.
+In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket für eine Zustelltour ein und stellt es dann zu, gibt es an einem Abholpunkt ab oder meldet, warum die Zustellung gescheitert ist. Eine Übergabe an einen anderen Paketdienst zeigt Peeks Code nicht: Die Sendungsverfolgung von J&T begleitet das Paket bis zur Zustellung. Wer klingelt, kann auch für einen Franchise-Partner von J&T fahren: Laut jtexpress.de sucht J&T in ganz Deutschland Partner, deren Teams Pakete zustellen.
 
 **In Zustellung.** `Your package has been loaded and is on its way to you` heißt: Dein Paket ist auf einer Zustelltour. In diesen Verläufen kommt die Zeile Stunden vor der Zustellung, am selben Morgen. Ein Zeitfenster oder einen erwarteten Zustelltag gibt die Sendungsverfolgung von J&T nicht an, also kann Peek auch keinen zeigen.
 
@@ -68,7 +69,7 @@ In den Verläufen, die Peeks Code kennt, lädt der Zusteller von J&T das Paket f
 
 **Verweigert oder Adresse nicht gefunden.** Nach `Delivery failed, customer refused to accept` hat der Zusteller das Paket in den Verläufen, die Peeks Code kennt, am nächsten Morgen für eine neue Tour verladen. Nach `Delivery failed because the address could not be found` prüf die Adresse in deiner Bestellung. Fehlt etwas, etwa der Name am Klingelschild oder die Wohnungsnummer, sag dem Shop sofort Bescheid: Er hat die Zustellung mit der Adresse gebucht, die du ihm gegeben hast. Auch die FAQ von J&T schickt dich bei einer falschen Adresse gleich zum Absender oder zur Einkaufsplattform: Ob sich die Adresse nach dem Versand noch ändern lässt, hängt davon ab, wo das Paket gerade ist und was der Absender zulässt. Auf eine gescheiterte Zustellung kann `Returns have begun` folgen. Mehr in [Lieferadresse ändern](guide:change-delivery-address) und [Zustellung verpasst](guide:missed-delivery).
 
-**Zustellversuche und Abholung.** Wie oft J&T eine Zustellung versucht, wie lange es ein Paket lagert und zu welchen Uhrzeiten es zustellt, nennt die Website von J&T nicht. Paketshops, Paketautomaten oder Depots zum Abholen nennt sie auch keine, und keine Zeile von J&T Express Germany, die Peeks Code kennt, schickt ein Paket dorthin. Frag den Shop oder schau in deine Nachrichten zur Zustellung.
+**Zustellversuche und Abholung.** Wie oft J&T eine Zustellung versucht, wie lange es ein Paket lagert und zu welchen Uhrzeiten es zustellt, nennt die Website von J&T nicht. Paketshops, Paketautomaten oder Depots zum Abholen nennt sie auch keine. Eine Zeile von J&T Express Germany, die Peeks Code kennt, meldet allerdings, dass das Paket an einen Abholpunkt geliefert wurde und die Details per E-Mail kommen. Frag den Shop oder schau in deine Nachrichten zur Zustellung.
 
 ## J&T-Paket kommt nicht an, ist weg oder geht zurück
 
@@ -116,7 +117,7 @@ Das zeigt die Sendungsverfolgung von J&T: Klick unter dem Zustellscan auf `Zuste
 
 ### Hat J&T Express Paketshops in Deutschland?
 
-Die deutsche Website von J&T nennt keine, und keine Zeile von J&T Express Germany, die Peek kennt, schickt ein Paket in einen Paketshop oder an einen Paketautomaten. Über die Zustellpräferenzen kannst du dir die Zustellung an dich, an einen Nachbarn, am Empfang oder an einen Ablageort an deiner Adresse wünschen.
+Die deutsche Website von J&T nennt keine, aber eine Zeile von J&T Express Germany, die Peek kennt, meldet, dass das Paket an einen Abholpunkt geliefert wurde: Die Details schickt J&T per E-Mail. Über die Zustellpräferenzen kannst du dir die Zustellung an dich, an einen Nachbarn, am Empfang oder an einen Ablageort an deiner Adresse wünschen.
 
 ### Warum findet die J&T Sendungsverfolgung meine Nummer nicht?
 

@@ -35,6 +35,7 @@ Svako skeniranje u J&T-ovu sustavu za praćenje sastoji se od vremena i jedne re
 | `Your package has been loaded and is on its way to you` | Paket je u dostavnom vozilu: u dostavi je. | "Out for delivery" (u dostavi) |
 | `Delivery failed because the address could not be found` | Dostavljač nije mogao pronaći tvoju adresu. | "Delivery attempted" (pokušaj dostave) |
 | `Delivery failed, customer refused to accept` | Primatelj je odbio preuzeti paket. | "Delivery attempted" |
+| `Your parcel has been delivered to the pickup point. Please check your email for details` | Dostavljač je paket ostavio na mjestu za preuzimanje: J&T ti e-porukom šalje pojedinosti o tome kako ga preuzeti. | "Ready for pickup" (spremno za preuzimanje) |
 | `Your package has been successfully delivered.` | Dostavljeno. J&T dodaje i način dostave (vidi niže). | "Delivered" (dostavljeno) |
 | `Returns have begun` | Nakon neuspjele dostave paket se vraća pošiljatelju. | "Returned to sender" (vraćeno pošiljatelju) |
 | `The shipment has been returned` | Povrat je završen. | "Returned to sender" |
@@ -56,7 +57,7 @@ Za paket ostavljen kod susjeda Peek zato prikazuje `Your package has been succes
 
 ## J&T dostava u Njemačkoj: što ti govori praćenje
 
-U povijestima praćenja koje sadrži Peekov kod, J&T-ov dostavljač utovari paket za dostavnu turu, a zatim ga ili dostavi ili javi zašto dostava nije uspjela. Peekov kod ne pokazuje predaju drugom prijevozniku: J&T-ov sustav prati paket sve do tvojih vrata. Dostavljač na tvojim vratima može raditi za nekog od J&T-ovih franšiznih partnera: J&T na jtexpress.de piše da u cijeloj Njemačkoj traži partnere čiji timovi dostavljaju pakete.
+U povijestima praćenja koje sadrži Peekov kod, J&T-ov dostavljač utovari paket za dostavnu turu, a zatim ga dostavi, ostavi na mjestu za preuzimanje ili javi zašto dostava nije uspjela. Peekov kod ne pokazuje predaju drugom prijevozniku: J&T-ov sustav prati paket sve do dostave. Dostavljač na tvojim vratima može raditi za nekog od J&T-ovih franšiznih partnera: J&T na jtexpress.de piše da u cijeloj Njemačkoj traži partnere čiji timovi dostavljaju pakete.
 
 **U dostavi.** `Your package has been loaded and is on its way to you` znači da je paket na dostavnoj turi. U tim povijestima taj redak dolazi nekoliko sati prije dostave, istog jutra. J&T-ov sustav ne daje vremenski okvir ni očekivani dan dostave, pa ih ni Peek ne može pokazati.
 
@@ -66,7 +67,7 @@ U povijestima praćenja koje sadrži Peekov kod, J&T-ov dostavljač utovari pake
 
 **Odbijeno ili adresa nije pronađena.** Nakon `Delivery failed, customer refused to accept` dostavljač je, u povijestima iz Peekova koda, paket sljedećeg jutra utovario za novu dostavnu turu. Nakon `Delivery failed because the address could not be found` provjeri adresu u narudžbi. Ako nešto nedostaje, primjerice broj stana ili ime na zvonu, odmah javi trgovini: ona je dostavu naručila s adresom koju si joj dao. I J&T-ova česta pitanja savjetuju da se odmah javiš pošiljatelju ili platformi: može li se adresa nakon slanja još promijeniti, ovisi o tome gdje je paket i o pravilima pošiljatelja. Nakon neuspjele dostave može uslijediti `Returns have begun`.
 
-**Pokušaji dostave i preuzimanje.** J&T-ova web-stranica ne navodi koliko puta J&T pokušava dostaviti, koliko dugo čuva paket ni u koje sate dostavlja, a ne navodi ni mjesta za preuzimanje, paketomate ni skladišta gdje bi mogao preuzeti paket. Među retcima J&T Express Germany koje Peekov kod poznaje nijedan ne šalje paket na mjesto za preuzimanje ili u paketomat. Pitaj trgovinu ili pogledaj poruke o dostavi.
+**Pokušaji dostave i preuzimanje.** J&T-ova web-stranica ne navodi koliko puta J&T pokušava dostaviti, koliko dugo čuva paket ni u koje sate dostavlja, a ne navodi ni mjesta za preuzimanje, paketomate ni skladišta gdje bi mogao preuzeti paket. Jedan redak J&T Express Germany koji Peekov kod poznaje ipak javlja da je paket dostavljen na mjesto za preuzimanje, a pojedinosti J&T šalje e-porukom. Pitaj trgovinu ili pogledaj poruke o dostavi.
 
 ## J&T paket kasni, nestao je ili je vraćen
 
@@ -114,7 +115,7 @@ To pokazuje J&T-ova stranica za praćenje: ispod skeniranja o dostavi klikni `Zu
 
 ### Ima li J&T Express u Njemačkoj mjesta za preuzimanje ili paketomate?
 
-J&T-ova njemačka web-stranica ne navodi ni jedno ni drugo, a nijedan redak J&T Express Germany koji Peek poznaje ne šalje paket na mjesto za preuzimanje ili u paketomat. Na stranici za odabir načina dostave možeš zatražiti dostavu sebi, susjedu, na recepciju ili na neko mjesto na svojoj adresi.
+J&T-ova njemačka web-stranica ne navodi ni jedno ni drugo, ali jedan redak J&T Express Germany koji Peek poznaje javlja da je paket dostavljen na mjesto za preuzimanje, a pojedinosti J&T šalje e-porukom. Na stranici za odabir načina dostave možeš zatražiti dostavu sebi, susjedu, na recepciju ili na neko mjesto na svojoj adresi.
 
 ### Zašto J&T ne pronalazi moj broj za praćenje?
 

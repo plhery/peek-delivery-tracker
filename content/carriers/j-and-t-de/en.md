@@ -37,6 +37,7 @@ J&T's tracker gives each scan as a time and one sentence, with no place. It open
 | `Your package has been loaded and is on its way to you` | It's in the delivery van: out for delivery. | "Out for delivery" |
 | `Delivery failed because the address could not be found` | The driver couldn't find your address. | "Delivery attempted" |
 | `Delivery failed, customer refused to accept` | The recipient refused to accept the parcel. | "Delivery attempted" |
+| `Your parcel has been delivered to the pickup point. Please check your email for details` | The driver left the parcel at a pickup point: J&T emails you the details for collecting it. | "Ready for pickup" |
 | `Your package has been successfully delivered.` | Delivered. J&T adds how (see below). | "Delivered" |
 | `Returns have begun` | After a failed delivery, the parcel is on its way back to the sender. | "Returned to sender" |
 | `The shipment has been returned` | The return is complete. | "Returned to sender" |
@@ -58,7 +59,7 @@ So a parcel left with a neighbour reads `Your package has been successfully deli
 
 ## J&T Express Germany delivery: neighbours, safe places and photos
 
-In the histories Peek's code holds, J&T's courier loads the parcel for a delivery run and then either delivers it or reports why the delivery failed. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel to your door. The driver at your door may work for one of J&T's franchise partners: J&T's website says it is looking for partners all over Germany whose teams deliver parcels.
+In the histories Peek's code holds, J&T's courier loads the parcel for a delivery run and then delivers it, leaves it at a pickup point or reports why the delivery failed. Peek's code shows no hand-over to another carrier: J&T's tracker follows the parcel until it is delivered. The driver at your door may work for one of J&T's franchise partners: J&T's website says it is looking for partners all over Germany whose teams deliver parcels.
 
 **Out for delivery.** `Your package has been loaded and is on its way to you` means your parcel is on a delivery run. In those histories it comes hours before the delivery, the same morning. J&T's tracker gives no delivery window or expected day, so Peek can't show one either.
 
@@ -68,7 +69,7 @@ In the histories Peek's code holds, J&T's courier loads the parcel for a deliver
 
 **Refused or not found.** After `Delivery failed, customer refused to accept`, the courier loaded the parcel for another run the next morning in the histories Peek's code holds. After `Delivery failed because the address could not be found`, check the address on your order. If anything is missing, such as a flat number or the name on your bell, tell the shop at once: it booked the delivery with the address you gave it. J&T's FAQ also says to contact the sender or the shopping platform straight away: once a parcel has shipped, whether its address can still be changed depends on where it is and on the sender's rules. `Returns have begun` can follow a failed delivery. See [how to change a delivery address](guide:change-delivery-address) and [missed deliveries](guide:missed-delivery).
 
-**Attempts and pickup.** J&T's website gives no number of delivery attempts, no storage period and no delivery hours, and it lists no parcel shops, lockers or depots where you could collect a parcel. Among the J&T Express Germany lines Peek's code knows, none sends a parcel to a shop or locker for collection. Ask the shop, or look at your delivery messages.
+**Attempts and pickup.** J&T's website gives no number of delivery attempts, no storage period and no delivery hours, and it lists no parcel shops, lockers or depots where you could collect a parcel. One J&T Express Germany line Peek's code knows does say the parcel was delivered to a pickup point, with the details in an email from J&T. Ask the shop, or look at your delivery messages.
 
 ## J&T Express parcel late, missing or returned
 
@@ -116,7 +117,7 @@ J&T's tracker tells you: under the delivered scan, click `Zustelldetails anzeige
 
 ### Does J&T Express have parcel shops in Germany?
 
-J&T's German website lists none, and no J&T Express Germany line Peek knows sends a parcel to a shop or locker. On the delivery preferences page you can ask for delivery to you, to a neighbour, at a reception desk or at a safe place at your address.
+J&T's German website lists none, but one J&T Express Germany line Peek knows says the parcel was delivered to a pickup point, with the details in an email from J&T. On the delivery preferences page you can ask for delivery to you, to a neighbour, at a reception desk or at a safe place at your address.
 
 ### Why is my J&T tracking number not found?
 

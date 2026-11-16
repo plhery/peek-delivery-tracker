@@ -35,6 +35,7 @@ Trackerul J&T primește până la 10 numere într-o căutare, despărțite prin 
 | `Your package has been loaded and is on its way to you` | E în duba curierului: coletul e în livrare. | „Out for delivery” (în livrare) |
 | `Delivery failed because the address could not be found` | Curierul nu ți-a găsit adresa. | „Delivery attempted” (încercare de livrare) |
 | `Delivery failed, customer refused to accept` | Destinatarul a refuzat coletul. | „Delivery attempted” |
+| `Your parcel has been delivered to the pickup point. Please check your email for details` | Curierul a lăsat coletul la un punct de ridicare: J&T îți trimite pe email detaliile ca să-l iei de acolo. | „Ready for pickup” (gata de ridicare) |
 | `Your package has been successfully delivered.` | Livrat. J&T adaugă și cum (vezi mai jos). | „Delivered” (livrat) |
 | `Returns have begun` | După o livrare nereușită, coletul se întoarce la expeditor. | „Returned to sender” (returnat la expeditor) |
 | `The shipment has been returned` | Returul s-a încheiat. | „Returned to sender” |
@@ -56,7 +57,7 @@ Un colet lăsat la un vecin apare deci în Peek ca `Your package has been succes
 
 ## Livrarea J&T în Germania: ce-ți spune urmărirea
 
-În istoricele pe care le are codul Peek, curierul J&T încarcă coletul pentru o cursă de livrare și apoi fie îl livrează, fie scrie de ce n-a reușit livrarea. Codul Peek nu arată nicio predare către alt curier: trackerul J&T urmărește coletul până la ușa ta. Curierul care îți sună la ușă poate lucra pentru unul dintre partenerii în franciză ai J&T: pe jtexpress.de, J&T scrie că își caută în toată Germania parteneri ale căror echipe livrează colete.
+În istoricele pe care le are codul Peek, curierul J&T încarcă coletul pentru o cursă de livrare și apoi fie îl livrează, fie îl lasă la un punct de ridicare, fie scrie de ce n-a reușit livrarea. Codul Peek nu arată nicio predare către alt curier: trackerul J&T urmărește coletul până la livrare. Curierul care îți sună la ușă poate lucra pentru unul dintre partenerii în franciză ai J&T: pe jtexpress.de, J&T scrie că își caută în toată Germania parteneri ale căror echipe livrează colete.
 
 **În livrare.** `Your package has been loaded and is on its way to you` înseamnă că coletul e într-o cursă de livrare. În istoricele acelea, rândul apare cu câteva ore înainte de livrare, în aceeași dimineață. Trackerul J&T nu dă un interval orar sau o zi estimată de livrare, așa că nici Peek nu poate arăta așa ceva.
 
@@ -66,7 +67,7 @@ Un colet lăsat la un vecin apare deci în Peek ca `Your package has been succes
 
 **Refuzat sau adresă negăsită.** După `Delivery failed, customer refused to accept`, în istoricele din codul Peek, curierul a încărcat coletul pentru o nouă cursă a doua zi dimineață. După `Delivery failed because the address could not be found`, verifică adresa din comandă. Dacă lipsește ceva, de exemplu numărul apartamentului sau numele de pe sonerie, anunță imediat magazinul: el a comandat livrarea cu adresa pe care i-ai dat-o. Și FAQ-ul J&T îți spune să contactezi imediat expeditorul sau platforma: după expediere, dacă adresa se mai poate schimba depinde de unde e coletul și de regulile expeditorului. După o livrare nereușită poate urma `Returns have begun`.
 
-**Încercări și ridicare.** Site-ul J&T nu spune de câte ori încearcă J&T să livreze, cât păstrează un colet sau la ce ore livrează și nu dă nicio listă de puncte de ridicare, lockere sau depozite de unde să-ți iei coletul. Dintre rândurile J&T Express Germany pe care le cunoaște codul Peek, niciunul nu trimite coletul la un punct de ridicare sau la un locker, ca să-l iei de acolo. Întreabă magazinul sau uită-te în mesajele despre livrare.
+**Încercări și ridicare.** Site-ul J&T nu spune de câte ori încearcă J&T să livreze, cât păstrează un colet sau la ce ore livrează și nu dă nicio listă de puncte de ridicare, lockere sau depozite de unde să-ți iei coletul. Unul dintre rândurile J&T Express Germany pe care le cunoaște codul Peek spune totuși că coletul a fost livrat la un punct de ridicare, cu detaliile într-un email de la J&T. Întreabă magazinul sau uită-te în mesajele despre livrare.
 
 ## Colet J&T întârziat, pierdut sau returnat
 
@@ -114,7 +115,7 @@ Da. J&T Express Germany GmbH, cu sediul la Frankfurt pe Main, e firma germană a
 
 ### Are J&T Express puncte de ridicare în Germania?
 
-Site-ul german al J&T nu dă niciunul, iar niciun rând J&T Express Germany cunoscut de Peek nu trimite coletul la un punct de ridicare sau la un locker. Pe pagina cu preferințele de livrare poți cere livrarea la tine, la un vecin, la recepție sau într-un loc de la adresa ta.
+Site-ul german al J&T nu dă niciunul, dar un rând J&T Express Germany cunoscut de Peek spune că coletul a fost livrat la un punct de ridicare, cu detaliile într-un email de la J&T. Pe pagina cu preferințele de livrare poți cere livrarea la tine, la un vecin, la recepție sau într-un loc de la adresa ta.
 
 ### De ce nu găsește J&T numărul meu de urmărire?
 

@@ -2124,6 +2124,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-sendungsverfolgung",
+      "title": "Vinted Go Sendungsverfolgung: Status, Fristen & Hilfe",
+      "name": "Vinted Go",
+      "color": "#004654"
+    },
+    {
       "id": "amazon-logistics",
       "catalog": "amazon-logistics",
       "slug": "amazon-logistics-tracking",
@@ -2764,6 +2772,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "UniUni suivi colis\u00a0: statuts, livraison et contact",
       "name": "UniUni",
       "color": "#f68841"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-allemagne-suivi",
+      "title": "Suivi J&T Express Allemagne\u00a0: numéro JTDE et statuts",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     },
     {
       "id": "juxi-express",
@@ -3458,6 +3474,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#55207a"
     },
     {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-alemania-seguimiento",
+      "title": "Seguimiento J&T Express Alemania: número JTDE y estados",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
+    },
+    {
       "id": "lingdong",
       "catalog": "lingdong",
       "slug": "lingdong-seguimiento",
@@ -3812,6 +3836,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da202a"
     },
     {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-alemanha-rastreio",
+      "title": "J&T Express Alemanha rastreio: código JTDE e estados",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-rastreio",
@@ -3952,6 +3984,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#8cbe1e"
     },
     {
+      "id": "vinted-go",
+      "catalog": "vinted-go",
+      "slug": "vinted-go-sledzenie",
+      "title": "Vinted Go śledzenie przesyłki: statusy, automaty i pomoc",
+      "name": "Vinted Go",
+      "color": "#004654"
+    },
+    {
       "id": "amazon-logistics",
       "catalog": "amazon-logistics",
       "slug": "amazon-logistics-sledzenie-przesylki",
@@ -4038,6 +4078,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket śledzenie przesyłki: numer, statusy i odbiór",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "j-and-t-de",
+      "catalog": "j-and-t-de",
+      "slug": "jt-express-niemcy-sledzenie",
+      "title": "J&T Express Germany śledzenie: numer JTDE i statusy",
+      "name": "J&T Express Germany",
+      "color": "#e60000"
     },
     {
       "id": "jcex",

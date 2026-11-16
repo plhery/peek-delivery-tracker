@@ -30,7 +30,8 @@ The tests in `app/src/androidTest`, and Google Play's own in `app/src/androidTes
 `-Pandroid.testInstrumentationRunnerArguments.class=<class>`). `AccessibilityChecksDeviceTest` runs the
 Accessibility Test Framework's checks, Accessibility Scanner's, on the main screens in both appearances through
 Compose's accessibility checks: an error fails it, and the text contrast it warns of goes to the log under `PeekAccessibility`. Robolectric
-skips these checks.
+skips these checks. On the same screens `TalkBackScreensTest` holds what TalkBack reads, in order and as it says it,
+so a pass with TalkBack on a phone only has to confirm it.
 
 ## CI
 

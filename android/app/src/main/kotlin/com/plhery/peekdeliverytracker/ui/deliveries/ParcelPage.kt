@@ -99,6 +99,7 @@ import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
+import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
@@ -534,6 +535,7 @@ private fun SyncStatus(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
  * goes, and the parcel's ••• menu on its own at the trailing edge while the page shows a parcel of the deliveries
  * (none for the sample, nor for a parcel gone). No title: the pass names the parcel. In the first open's stack
  * ([LocalPageStack]) ‹ goes back to the first open, and reads as UIKit's back button over a screen with no title.
+ * TalkBack reaches the bar before the page that scrolls under it ([readFirst]), as VoiceOver reaches a navigation bar.
  */
 @Composable
 internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
@@ -543,7 +545,7 @@ internal fun ParcelPageBar(state: DeliveriesState, parcelId: UUID) {
     val navigator = state.navigator
     val stack = LocalPageStack.current
     val zoom = stack?.zoom ?: state.zoom
-    Box(Modifier.fillMaxWidth().padding(top = barRowTop()).height(BAR_ROW).testTag(PAGE_BAR)) {
+    Box(Modifier.readFirst().fillMaxWidth().padding(top = barRowTop()).height(BAR_ROW).testTag(PAGE_BAR)) {
         GlassSurface(
             CapsuleShape,
             Modifier

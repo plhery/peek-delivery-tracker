@@ -683,6 +683,21 @@ describe('one-off parcels and their links', () => {
     });
   });
 
+  it('reads the recipient details of the alerts\' parcels, and nothing else of their carrier data', async () => {
+    const client = service();
+    const details = { receiver_name: 'Ada Example', receiver_address: null };
+    const request = vi.spyOn(client, 'request').mockResolvedValue([
+      { id: 'k7Qm2xHd9RtW', package: details }, { id: 'm8Rn3yJe4SuX', package: null },
+    ]);
+    await expect(client.linkRecipientDetails(['k7Qm2xHd9RtW', 'm8Rn3yJe4SuX', 'k7Qm2xHd9RtW'], ['receiver_name', 'receiver_address']))
+      .resolves.toEqual(new Map([['k7Qm2xHd9RtW', details]]));
+    const [path] = request.mock.calls[0]!;
+    expect(Object.fromEntries(params(path))).toEqual({
+      id: 'in.(k7Qm2xHd9RtW,m8Rn3yJe4SuX)',
+      select: 'id,package:packages(receiver_name:carrier_data->receiver_name,receiver_address:carrier_data->receiver_address)',
+    });
+  });
+
   it('shares an account\'s parcel under its own token, and reads another account\'s as missing', async () => {
     const user = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const stored = { id: 'k7Qm2xHd9RtW', show_number: true, gift: false, created_at: '2026-10-02T08:00:00+00:00' };

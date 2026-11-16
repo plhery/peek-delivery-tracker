@@ -51,6 +51,7 @@ let handled: MockInstance<SupabaseServiceClient['recordParcelLinkAlertDeliveries
 let removed: MockInstance<SupabaseServiceClient['deleteParcelLinkAlert']>;
 let failures: MockInstance<SupabaseServiceClient['setParcelLinkAlertFailures']>;
 let hiding: MockInstance<SupabaseServiceClient['numberHidingParcels']>;
+let recipients: MockInstance<SupabaseServiceClient['linkRecipientDetails']>;
 const pending = (rows: JsonObject[]) => vi.spyOn(client, 'listPendingParcelLinkAlerts').mockResolvedValue(rows);
 const apnsKey = () => generateKeyPairSync('ec', { namedCurve: 'prime256v1' }).privateKey.export({ type: 'pkcs8', format: 'pem' }).toString();
 const refused = (statusCode: number) => Object.assign(new Error('Received unexpected response code'), { statusCode });
@@ -64,6 +65,7 @@ beforeEach(() => {
   removed = vi.spyOn(client, 'deleteParcelLinkAlert').mockResolvedValue();
   failures = vi.spyOn(client, 'setParcelLinkAlertFailures').mockResolvedValue();
   hiding = vi.spyOn(client, 'numberHidingParcels').mockResolvedValue(new Map());
+  recipients = vi.spyOn(client, 'linkRecipientDetails').mockResolvedValue(new Map());
   vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map());
   vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map());
   vi.spyOn(client, 'handoffScans').mockResolvedValue([]);
@@ -432,6 +434,25 @@ describe('what an alert says', () => {
     pending([row({ stage: 'delivered', package_stage: 'delivered', event_id: 'event-2' })]);
     await alerts.dispatch();
     expect(send.mock.calls[2]![1]?.body).not.toContain('Example Town');
+  });
+
+  it('tells a viewer no place that names a recipient detail the parcel holds, nor any place when those could not be read', async () => {
+    // Synthetic details, as a carrier's answer stores them (Dachser's recipient and address).
+    recipients.mockResolvedValue(new Map([[linkId, { receiver_name: 'Ada Example', receiver_address: '12 Example Street' }]]));
+    pending([row({ location: '12 EXAMPLE STREET, Example Town' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[0]![1]?.body).toBe('One step closer');
+    expect(recipients).toHaveBeenLastCalledWith([linkId], ['signed_by', 'receiver_name', 'receiver_address', 'pickup_code']);
+    pending([row({ event_id: 'event-2' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[1]![1]?.body).toBe('One step closer\nExample Town');
+    pending([row({ owner: true, location: '12 Example Street, Example Town' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[2]![1]?.body).toBe('One step closer\n12 Example Street, Example Town');
+    recipients.mockRejectedValue(new Error('database down'));
+    pending([row({ event_id: 'event-3' })]);
+    await alerts.dispatch();
+    expect(send.mock.calls[3]![1]?.body).toBe('One step closer');
   });
 
   it('tells the owner of a gift lookup like the owner of any parcel', () => {

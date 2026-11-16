@@ -2559,6 +2559,18 @@ export class SupabaseServiceClient extends SupabaseClient {
     return new Map(found.flat().flatMap((row) => typeof row.id === 'string' && isRecord(row.package) ? [[row.id, row.package]] : []));
   }
 
+  /** These fields of each link's parcel's carrier data: the recipient details a viewer's alert names in no scan's place. */
+  async linkRecipientDetails(linkIds: string[], keys: readonly string[]): Promise<Map<string, JsonObject>> {
+    const ids = [...new Set(linkIds)];
+    const pages = Array.from({ length: Math.ceil(ids.length / 100) }, (_, page) => ids.slice(page * 100, page * 100 + 100));
+    const fields = keys.map((key) => `${key}:carrier_data->${key}`).join(',');
+    const found = await Promise.all(pages.map(async (page) => rows(await this.request(`/rest/v1/parcel_links?${query([
+      ['id', `in.(${page.join(',')})`],
+      ['select', `id,package:packages(${fields})`],
+    ])}`))));
+    return new Map(found.flat().flatMap((row) => typeof row.id === 'string' && isRecord(row.package) ? [[row.id, row.package]] : []));
+  }
+
   async recordParcelLinkAlertDeliveries(alertId: string, eventIds: string[]): Promise<void> {
     if (eventIds.length === 0) return;
     await this.request(`/rest/v1/parcel_link_alert_deliveries?${query({ on_conflict: 'alert_id,event_id' })}`, {

@@ -164,7 +164,8 @@ Key server modules:
     that names one is left out, and so are a place and a status line that do. A text names one
     when the scraper's `hasPrivateDeliveryDetails` matches it or it contains the signatory,
     recipient name, address or pickup code the parcel's carrier data holds (`privateDetails.ts`).
-    A viewer's delivery alert names no place. The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
+    A viewer's delivery alert names no place, and another alert no place that names one (with
+    none when the parcel's details can't be read). The owner reads them as the carrier wrote them. A viewer's carrier link opens the carrier's page for typing a number in (the
     catalog's `trackingSearchUrl`), or is left out when the carrier has none.
   - A parcel with no new scan for four days links the help page of the carrier that has it,
     else of the one it is filed under (the catalog's `helpUrl`; no link when neither has

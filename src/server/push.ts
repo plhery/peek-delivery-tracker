@@ -7,7 +7,6 @@ import { createHash, createPrivateKey, type KeyObject } from 'node:crypto';
 import { SignJWT } from 'jose';
 import { DateTime, FixedOffsetZone, IANAZone, type Zone } from 'luxon';
 import webpush from 'web-push';
-import { hasPrivateDeliveryDetails } from 'universal-parcel-scraper';
 import { countryName } from 'universal-parcel-scraper/app';
 import { locatePlace } from 'universal-parcel-scraper/places';
 import { CARRIER_CAPABILITIES, type ApiParcelAlertPreset } from '../generated/apiContract';
@@ -17,6 +16,7 @@ import { deliveryWallClock, languageTags } from '../lib/messages';
 import { ALERT_PRESET_STAGES } from '../lib/notificationPresets';
 import { romanisesPlace } from '../lib/scanPlace';
 import { capitalized } from '../peek/parcel/summary';
+import { namesRecipient, PRIVATE_CARRIER_DATA, privateValues } from './privateDetails';
 import { FCMAuthError, FcmClient, FCMError, fcmTokenGone } from './fcm';
 import { parcelNumberMask } from './hiddenNumbers';
 import { NonPublicAddressError, postToPublicEndpoint, type AddressLookup } from './publicAddress';
@@ -1028,7 +1028,8 @@ const FINISHED_STAGES = new Set(['delivered', 'returned']);
  *   without the scans its page leaves out.
  * - A link that hides its number masks the parcel's numbers in the scan's
  *   place, as its page does (`viewerScan`), and no viewer is told where a
- *   parcel was delivered or a place that names a signatory, a code or a door.
+ *   parcel was delivered or a place that names a signatory, a code, a door or a
+ *   recipient detail the parcel holds.
  * - An alert on a browser or phone the parcel's owner gets account
  *   notifications on is passed over, so nobody is told twice.
  * - An alert ends with the journey, when the push service says its
@@ -1087,6 +1088,8 @@ export class ParcelLinkAlertService {
     ]);
     const viewers = [...grouped.values()].filter((events) => events[0]!.owner !== true).map((events) => stringField(events[0]!, 'link_id'));
     const hiding = viewers.length ? await orNone(() => client.numberHidingParcels(viewers), null) : new Map<string, JsonObject>();
+    const recipients = viewers.length
+      ? await orNone(() => client.linkRecipientDetails(viewers, PRIVATE_CARRIER_DATA), null) : new Map<string, JsonObject>();
     for (const [alertId, events] of grouped) {
       signal?.throwIfAborted();
       const owner = events[0]!.owner === true;
@@ -1118,7 +1121,7 @@ export class ParcelLinkAlertService {
         continue;
       }
       summary.attempted += 1;
-      const told = this.viewerScan(toldScan(newest, announced, times), hiding);
+      const told = this.viewerScan(toldScan(newest, announced, times), hiding, recipients);
       try {
         if (transport !== 'web') await app!.send(this.appDevice(told), this.appPayload(told), `link-${stringField(told, 'link_id')}`);
         else await this.web!.send(told, this.payload(told));
@@ -1163,14 +1166,16 @@ export class ParcelLinkAlertService {
 
   /**
    * The scan as the alert may tell it: for a viewer, without a delivery's place or a place that names a signatory,
-   * a code or a door (`hasPrivateDeliveryDetails`); for a viewer of a link that hides its number, its
-   * place with the parcel's numbers masked as its page masks them (`parcelNumberMask`), or without its place when
-   * they could not be read.
+   * a code, a door or a recipient detail its parcel holds (`namesRecipient`), as its page leaves it out; for a viewer
+   * of a link that hides its number, its place with the parcel's numbers masked as its page masks them
+   * (`parcelNumberMask`). Without its place when either could not be read.
    */
-  viewerScan(row: JsonObject, hiding: ReadonlyMap<string, JsonObject> | null): JsonObject {
+  viewerScan(row: JsonObject, hiding: ReadonlyMap<string, JsonObject> | null,
+    recipients: ReadonlyMap<string, JsonObject> | null = new Map()): JsonObject {
     if (row.owner === true || typeof row.location !== 'string') return row;
     // A delivery's place can be the recipient's door; the page names it only when it names nobody's details.
-    if (hiding === null || row.stage === 'delivered' || hasPrivateDeliveryDetails(row.location)) return { ...row, location: null };
+    if (hiding === null || recipients === null || row.stage === 'delivered'
+      || namesRecipient(row.location, privateValues(recipients.get(stringField(row, 'link_id'))))) return { ...row, location: null };
     const parcel = hiding.get(stringField(row, 'link_id'));
     if (!parcel) return row;
     const events = Array.isArray(parcel.tracking_events) ? parcel.tracking_events.filter(isRecord) : [];

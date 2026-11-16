@@ -6,7 +6,7 @@ import { isRecord } from './types';
 export const VIEWER_DELIVERY_DESCRIPTION = 'Delivered';
 
 /** The recipient details a carrier gave, which only the parcel's owner reads. */
-const PRIVATE_CARRIER_DATA = ['signed_by', 'receiver_name', 'receiver_address', 'pickup_code'];
+export const PRIVATE_CARRIER_DATA = ['signed_by', 'receiver_name', 'receiver_address', 'pickup_code'] as const;
 
 interface Scan {
   stage: string;

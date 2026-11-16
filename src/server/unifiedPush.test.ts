@@ -195,6 +195,7 @@ describe('a parcel link\'s alert in the Android app without Google\'s services',
     removed = vi.spyOn(client, 'deleteParcelLinkAlert').mockResolvedValue();
     failures = vi.spyOn(client, 'setParcelLinkAlertFailures').mockResolvedValue();
     vi.spyOn(client, 'numberHidingParcels').mockResolvedValue(new Map());
+    vi.spyOn(client, 'linkRecipientDetails').mockResolvedValue(new Map());
     vi.spyOn(client, 'latestScanTimes').mockResolvedValue(new Map());
     vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map());
     vi.spyOn(client, 'handoffScans').mockResolvedValue([]);

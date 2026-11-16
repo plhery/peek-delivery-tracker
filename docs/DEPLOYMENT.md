@@ -294,35 +294,22 @@ in the app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and 
 
 ## Assistants
 
-Optional. An account it is open to can connect Claude, ChatGPT or another MCP client to
-Peek, and make personal tokens for its own scripts. Without the setting, nothing in the
-app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and checked.
+Optional. An account it is open to can connect Claude, ChatGPT, Gemini or another MCP
+client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTURE.md](ARCHITECTURE.md) has what is kept and checked.
 
 - **App**: `ASSISTANT_ACCOUNTS` lists the accounts that may connect, by id or email, or `*`
   for everyone. It needs `CANONICAL_ORIGIN`, which is the OAuth issuer; `<origin>/mcp` is
   the address assistants connect to. A malformed list stops the server at startup.
+  `PERSONAL_TOKENS=on` turns on personal tokens for scripts, which Settings doesn't make.
 - **Cloudflare**: assistants call `/mcp`, `/oauth/token`, `/oauth/register`,
-  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, and tools read
-  `/api/parcels`. A challenge there
+  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, and scripts with a
+  personal token read `/api/parcels`. A challenge there
   (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
   so skip them for these paths with a custom rule; keep rate limiting.
 - **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
-  Settings › Connectors. It opens `/oauth/authorize` to sign in and ask. A script sends a
-  personal token from Settings as `Authorization: Bearer <token>`, to `/mcp` or to
-  `GET /api/parcels`. A Home Assistant rest sensor, with `peek_token: "Bearer <token>"` in
-  its `secrets.yaml`:
-
-  ```yaml
-  rest:
-    - resource: <origin>/api/parcels
-      headers:
-        Authorization: !secret peek_token
-      scan_interval: 900
-      sensor:
-        - name: Parcels on the way
-          value_template: "{{ value_json.total }}"
-          json_attributes: [parcels]
-  ```
+  Customize › Connectors; Settings shows the steps for Claude, ChatGPT and Gemini. It opens
+  `/oauth/authorize` to sign in and ask. With personal tokens on, a script sends one as
+  `Authorization: Bearer <token>`, to `/mcp` or to `GET /api/parcels`.
 
 ## Moving to another host
 

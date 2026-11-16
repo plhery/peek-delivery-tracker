@@ -4598,9 +4598,19 @@ enum TokenParcelStatus: String, Codable, CaseIterable, Hashable, Sendable, Ident
     case active
     case attention
     case today
+    case week
     case delivered
     case archived
     case all
+
+    var id: String { rawValue }
+}
+
+enum TokenParcelSort: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case expected
+    case delivered
+    case updated
+    case added
 
     var id: String { rawValue }
 }
@@ -4620,6 +4630,7 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var statusText: String? = nil
     var needsAttention: String? = nil
     var expectedDelivery: String? = nil
+    var deliveredAt: String? = nil
     var lastUpdate: TokenParcelUpdate? = nil
     var pickupPoint: String? = nil
     var sender: String? = nil
@@ -4629,6 +4640,8 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
 
 struct TokenParcelsResponse: Codable, Equatable, Hashable, Sendable {
     var total: Int
+    var status: TokenParcelStatus
+    var sort: TokenParcelSort
     var parcels: [TokenParcel]
 }
 

@@ -6,7 +6,7 @@ import { captureOperationalError } from '../observability';
 import { RateLimiter } from '../rateLimit';
 import type { AssistantTokenOwner, SupabaseServiceClient } from '../supabase';
 import { assistantsOpenToAccount } from './access';
-import { SCOPES, secretDigest, type AssistantSettings } from './settings';
+import { personalTokensOpen, SCOPES, secretDigest, type AssistantSettings } from './settings';
 import { assistantServer, type AssistantCaller } from './tools';
 
 /** Requests one grant may make a minute. */
@@ -77,7 +77,9 @@ export async function tokenOwner(
   const network = clientNetwork(clientIp(request));
   const refusedUntil = refusedNetworks.get(network) ?? 0;
   if (refusedUntil > now) return tooMany(Math.ceil((refusedUntil - now) / 1_000));
-  const owner = await service.assistantToken(secretDigest(token));
+  const found = await service.assistantToken(secretDigest(token));
+  // While personal tokens are off, one counts as unknown: it is kept, and works again once they are on.
+  const owner = found && (found.kind !== 'personal' || personalTokensOpen()) ? found : null;
   if (!owner) {
     const wait = unknownTokens.retryAfter(network, { limit: UNKNOWN_TOKENS_PER_MINUTE, window: 60 });
     if (wait) {
@@ -95,8 +97,8 @@ export async function tokenOwner(
 }
 
 /**
- * Serves `POST /mcp`: the bearer token must be an access or personal token of a live grant, whose account the
- * setting is open to. The tools then work on that account alone.
+ * Serves `POST /mcp`: the bearer token must be an access token of a live grant, or a personal token while those are on,
+ * whose account the setting is open to. The tools then work on that account alone.
  */
 export async function serveMcp(
   settings: AssistantSettings,

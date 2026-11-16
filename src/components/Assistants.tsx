@@ -1,23 +1,11 @@
-import { Fragment, useEffect, useRef, useState, type FormEvent } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import type { ApiAssistantConnection, ApiAssistantScope, ApiAssistantsResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
-import { ApiRecentSignInError, type ApiAuth } from '../lib/apiClient';
-import { createPersonalToken, readAssistants, revokeAssistant } from '../lib/assistants';
+import type { ApiAuth } from '../lib/apiClient';
+import { readAssistants, revokeAssistant } from '../lib/assistants';
 import { localizedRelativeTime, type MessageKey, type Translate } from '../lib/messages';
-import { dropSignInAgain, noteSignInAgain } from '../lib/signInAgain';
 import { userErrorMessage } from '../lib/userMessages';
-import type { SignInMethods } from '../peek/session';
 import { Icon } from './Icon';
-import { SignInAgain } from './SignInAgain';
-
-/** A token typed before a sign-in asked for again, and whether to make it now: the same account signed in again. */
-export interface TokenDraft {
-  name: string;
-  writes: boolean;
-  make: boolean;
-}
-
-const MOST_NAME_LENGTH = 100;
 
 /** A line of a setup: its text, and the names of the assistant's menus and buttons its `{{…}}` stand for. */
 type SetupLine = readonly [MessageKey, Readonly<Record<string, string>>?];
@@ -137,105 +125,47 @@ function Connection({ connection, working, onRevoke }: {
   const used = connection.lastUsedAt
     ? t('assistants.lastUsed', { time: localizedRelativeTime(connection.lastUsedAt, t, languageTag) })
     : t('assistants.neverUsed');
-  const where = connection.kind === 'oauth' && connection.redirectHost ? `${connection.redirectHost} · ` : '';
+  const where = connection.redirectHost ? `${connection.redirectHost} · ` : '';
   return <div className="settings-row assistants__item">
     <span className="assistants__what"><strong>{connection.name}</strong><small>{where}{scopeText(t, connection.scopes)} · {used}</small></span>
     <button className="assistants__revoke" type="button" disabled={working} onClick={onRevoke}
-      aria-label={t('assistants.revokeNamed', { name: connection.name })}>{t(connection.kind === 'oauth' ? 'assistants.disconnect' : 'assistants.revoke')}</button>
+      aria-label={t('assistants.revokeNamed', { name: connection.name })}>{t('assistants.disconnect')}</button>
   </div>;
 }
 
 /**
  * The assistants' page in Settings: the address to give an assistant, how to add it to Claude, ChatGPT and Gemini, what
- * to ask one, the ones connected, and personal tokens for scripts and tools that can't sign in. A token needs a recent sign-in: the page asks for one in place, with `signIn`,
- * and makes the token once signed in again.
+ * to ask one, and the ones connected. Personal tokens have no screen: the server makes none while they are off.
  */
-export function AssistantsPage({ apiAuth, offer, onChange, onBusy, signIn, email, draft }: {
+export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
   apiAuth: ApiAuth;
   offer: ApiAssistantsResponse;
   onChange: (next: ApiAssistantsResponse) => void;
   onBusy?: (busy: boolean) => void;
-  signIn?: SignInMethods;
-  /** The account's address, which the sign-in asked for again starts with. */
-  email?: string;
-  /** What was typed before a sign-in that left the page or changed the account. */
-  draft?: TokenDraft;
 }) {
   const { t } = useI18n();
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [copied, setCopied] = useState<'address' | 'token' | null>(null);
-  const [name, setName] = useState(draft?.name ?? '');
-  const [writes, setWrites] = useState(draft?.writes ?? false);
-  const [signingInAgain, setSigningInAgain] = useState(false);
-  const resumed = useRef(false);
-  // A new token, shown until the page closes: the server keeps only its digest.
-  const [token, setToken] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
   const assistants = offer.connections.filter((connection) => connection.kind === 'oauth');
-  const tokens = offer.connections.filter((connection) => connection.kind === 'personal');
 
-  async function run(operation: () => Promise<void>) {
-    if (working) return;
-    setWorking(true); onBusy?.(true); setError(null);
-    try { await operation(); }
-    catch (reason) { setError(userErrorMessage(reason, t, 'assistants.failed')); }
-    finally { setWorking(false); onBusy?.(false); }
-  }
-
-  async function copy(text: string, what: 'address' | 'token') {
-    try { await navigator.clipboard.writeText(text); setCopied(what); }
+  async function copy() {
+    try { await navigator.clipboard.writeText(offer.mcpUrl); setCopied(true); }
     catch { /* It stays on screen to select by hand. */ }
   }
 
-  const revoke = (id: string) => void run(async () => {
-    await revokeAssistant(apiAuth, id);
-    onChange({ ...offer, connections: offer.connections.filter((connection) => connection.id !== id) });
-  });
-
-  function make(named: string, withWrites: boolean) {
-    const scopes: ApiAssistantScope[] = withWrites ? ['parcels:read', 'parcels:write'] : ['parcels:read'];
-    void run(async () => {
-      let created;
-      try {
-        created = await createPersonalToken(apiAuth, named, scopes);
-      } catch (reason) {
-        if (!(reason instanceof ApiRecentSignInError && signIn)) throw reason;
-        setSigningInAgain(true);
-        return;
-      }
-      onChange({ ...offer, connections: [created.connection, ...offer.connections] });
-      setToken(created.token); setCopied(null); setName(''); setWrites(false);
-    });
-  }
-
-  function create(event: FormEvent) {
-    event.preventDefault();
-    const named = name.trim();
-    if (named) make(named, writes);
-  }
-
-  // Back from a provider, signed in again: the token is made as it was typed, once.
-  useEffect(() => {
-    if (resumed.current || !draft?.make || !draft.name.trim()) return;
-    resumed.current = true;
-    make(draft.name.trim(), draft.writes);
-  });
-
-  if (signingInAgain && signIn) {
-    // Noted before a sign-in leaves the page or brings another account, whose Settings then say what happened.
-    const note = () => noteSignInAgain({ action: 'personal-token', userId: apiAuth.userId, name, writes });
-    return <SignInAgain methods={signIn} email={email} title={t('assistants.signInAgain')} subtitle={t('assistants.signInAgainBody')}
-      onLeave={note} onVerify={note} onFailed={() => dropSignInAgain(['personal-token'])}
-      onSignedIn={() => {
-        // Another account signed in: its own Settings open, and this one is gone.
-        if (apiAuth.signal?.aborted) return;
-        dropSignInAgain(['personal-token']);
-        setSigningInAgain(false);
-        const named = name.trim();
-        if (named) make(named, writes);
-      }}
-      onCancel={() => setSigningInAgain(false)} />;
-  }
+  const revoke = (id: string) => void (async () => {
+    if (working) return;
+    setWorking(true); onBusy?.(true); setError(null);
+    try {
+      await revokeAssistant(apiAuth, id);
+      onChange({ ...offer, connections: offer.connections.filter((connection) => connection.id !== id) });
+    } catch (reason) {
+      setError(userErrorMessage(reason, t, 'assistants.failed'));
+    } finally {
+      setWorking(false); onBusy?.(false);
+    }
+  })();
 
   return <>
     <p className="settings-description">{t('assistants.intro')}</p>
@@ -243,7 +173,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy, signIn, email
     <section className="settings-group" aria-labelledby="assistants-address"><h3 className="settings-group__title" id="assistants-address">{t('assistants.address')}</h3>
       <div className="settings-box">
         <p className="add-by-email__address" translate="no">{offer.mcpUrl}</p>
-        <button className="settings-row" type="button" onClick={() => void copy(offer.mcpUrl, 'address')}><Icon name={copied === 'address' ? 'check' : 'copy'} />{t(copied === 'address' ? 'inbox.copied' : 'inbox.copy')}</button>
+        <button className="settings-row" type="button" onClick={() => void copy()}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.copy')}</button>
       </div>
     </section>
     <Setups />
@@ -254,26 +184,6 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy, signIn, email
           ? assistants.map((connection) => <Connection key={connection.id} connection={connection} working={working} onRevoke={() => revoke(connection.id)} />)
           : <p className="assistants__empty">{t('assistants.none')}</p>}
       </div>
-    </section>
-    <section className="settings-group" aria-labelledby="assistants-tokens"><h3 className="settings-group__title" id="assistants-tokens">{t('assistants.tokens')}</h3>
-      <div className="settings-box">
-        {token && <div className="assistants__token">
-          <p className="add-by-email__address" translate="no">{token}</p>
-          <p className="assistants__token-note">{t('assistants.tokenOnce')}</p>
-          <button className="settings-row" type="button" onClick={() => void copy(token, 'token')}><Icon name={copied === 'token' ? 'check' : 'copy'} />{t(copied === 'token' ? 'assistants.tokenCopied' : 'assistants.copyToken')}</button>
-        </div>}
-        {tokens.map((connection) => <Connection key={connection.id} connection={connection} working={working} onRevoke={() => revoke(connection.id)} />)}
-        <form className="assistants__new" onSubmit={create}>
-          <label className="field" htmlFor="assistants-token-name"><span>{t('assistants.tokenName')}</span>
-            <input className="field__input" id="assistants-token-name" type="text" autoComplete="off" maxLength={MOST_NAME_LENGTH}
-              placeholder={t('assistants.tokenPlaceholder')} value={name} onChange={(event) => setName(event.target.value)} /></label>
-          <label className="assistants__writes"><input type="checkbox" checked={writes} onChange={(event) => setWrites(event.target.checked)} />
-            <span>{t('assistants.tokenWrites')}</span></label>
-          <button className="button button--secondary" type="submit" disabled={working || !name.trim()} aria-busy={working || undefined}>{t('assistants.createToken')}</button>
-        </form>
-      </div>
-      <p className="add-by-email__note">{t('assistants.tokensNote')}</p>
-      <p className="add-by-email__note">{t('assistants.feed', { url: new URL('/api/parcels', offer.mcpUrl).href })}</p>
     </section>
   </>;
 }

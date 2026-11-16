@@ -4536,6 +4536,7 @@ enum class TokenParcelStatus(val rawValue: String) {
     @SerialName("active") Active("active"),
     @SerialName("attention") Attention("attention"),
     @SerialName("today") Today("today"),
+    @SerialName("week") Week("week"),
     @SerialName("delivered") Delivered("delivered"),
     @SerialName("archived") Archived("archived"),
     @SerialName("all") All("all"),
@@ -4543,6 +4544,19 @@ enum class TokenParcelStatus(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): TokenParcelStatus? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class TokenParcelSort(val rawValue: String) {
+    @SerialName("expected") Expected("expected"),
+    @SerialName("delivered") Delivered("delivered"),
+    @SerialName("updated") Updated("updated"),
+    @SerialName("added") Added("added"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): TokenParcelSort? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 
@@ -4563,6 +4577,7 @@ data class TokenParcel(
     val statusText: String? = null,
     val needsAttention: String? = null,
     val expectedDelivery: String? = null,
+    val deliveredAt: String? = null,
     val lastUpdate: TokenParcelUpdate? = null,
     val pickupPoint: String? = null,
     val sender: String? = null,
@@ -4573,6 +4588,8 @@ data class TokenParcel(
 @Serializable
 data class TokenParcelsResponse(
     val total: Int,
+    val status: TokenParcelStatus,
+    val sort: TokenParcelSort,
     val parcels: List<TokenParcel>,
 )
 

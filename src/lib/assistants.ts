@@ -1,9 +1,7 @@
 import type {
   ApiAssistantConsentRequest,
   ApiAssistantConsentResponse,
-  ApiAssistantScope,
   ApiAssistantsResponse,
-  ApiPersonalTokenResponse,
 } from '../generated/apiContract';
 import { authenticatedFetch, type ApiAuth } from './apiClient';
 
@@ -23,18 +21,13 @@ async function answer<T>(response: Response): Promise<T> {
   return body;
 }
 
-/** The account's connections and personal tokens, or null when the server connects no assistant to this account. */
+/** The account's connections, or null when the server connects no assistant to this account. */
 export async function readAssistants(auth: ApiAuth): Promise<ApiAssistantsResponse | null> {
   const response = await authenticatedFetch(PATH, auth);
   return response.status === 404 ? null : answer(response);
 }
 
-/** A new personal token, which the answer holds once. */
-export async function createPersonalToken(auth: ApiAuth, name: string, scopes: ApiAssistantScope[]): Promise<ApiPersonalTokenResponse> {
-  return answer(await authenticatedFetch(PATH, auth, { method: 'POST', body: JSON.stringify({ name, scopes }) }));
-}
-
-/** Disconnects an assistant or ends a personal token; one already gone counts as done. */
+/** Disconnects an assistant; one already gone counts as done. */
 export async function revokeAssistant(auth: ApiAuth, id: string): Promise<void> {
   const response = await authenticatedFetch(`${PATH}/${encodeURIComponent(id)}`, auth, { method: 'DELETE' });
   if (!response.ok && response.status !== 404) throw new AssistantRequestError(response.status, `Assistants request failed (${response.status})`);

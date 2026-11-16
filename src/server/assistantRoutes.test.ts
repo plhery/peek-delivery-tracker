@@ -44,16 +44,16 @@ const service = SupabaseServiceClient.prototype;
 const owners = new Map<string, AssistantTokenOwner>();
 let grants = 0;
 
-function connect(scopes: Scope[], user = userId): string {
+function connect(scopes: Scope[], user = userId, kind: 'access' | 'personal' = 'access'): string {
   grants += 1;
-  const secret = newSecret('access');
+  const secret = newSecret(kind);
   owners.set(secretDigest(secret), {
     userId: user,
     grantId: `6c000000-0000-4000-a000-${String(grants).padStart(12, '0')}`,
     scopes,
-    kind: 'access',
-    clientId: newClientId(),
-    expiresAt: Math.floor(Date.now() / 1_000) + 3_600,
+    kind,
+    clientId: kind === 'access' ? newClientId() : null,
+    expiresAt: kind === 'access' ? Math.floor(Date.now() / 1_000) + 3_600 : null,
   });
   return secret;
 }
@@ -126,23 +126,32 @@ async function call(secret: string, name: string, args: Record<string, unknown> 
 }
 
 /** A stored parcel row, as the database gives it to the server, with a receiver and a postcode that must not reach an assistant. */
-function stored(index: number, stage: string, options: { archived?: boolean; trackingNumber?: string } = {}) {
+function stored(index: number, stage: string, options: {
+  archived?: boolean; trackingNumber?: string; label?: string; sender?: string; expected?: string; latest?: string;
+} = {}) {
   const id = `7d000000-0000-4000-a000-${String(index).padStart(12, '0')}`;
   return {
     id,
     tracking_number: options.trackingNumber ?? `SYNTHETIC${index}`,
-    label: `Synthetic parcel ${index}`,
+    label: options.label ?? `Synthetic parcel ${index}`,
     carrier: 'ups',
     created_at: ADDED,
     sync_status: 'ok',
     archived_at: options.archived ? ago(2) : null,
+    expected_delivery: options.expected ?? null,
     dpd_postcode: POSTCODE,
-    carrier_data: { receiver_name: RECEIVER, sender_name: 'Example Shop' },
+    carrier_data: { receiver_name: RECEIVER, sender_name: options.sender ?? 'Example Shop' },
     tracking_events: [
       { id: `${id}-0`, package_id: id, stage: 'accepted', description: 'Parcel received', location: 'Example Depot', occurred_at: ACCEPTED, provider_event_id: `carrier:${index}:0` },
-      { id: `${id}-1`, package_id: id, stage, description: 'Latest scan', location: 'Example Hub', occurred_at: LATEST, provider_event_id: `carrier:${index}:1` },
+      { id: `${id}-1`, package_id: id, stage, description: 'Latest scan', location: 'Example Hub', occurred_at: options.latest ?? LATEST, provider_event_id: `carrier:${index}:1` },
     ],
   };
+}
+
+/** A day from today on the server's clock, as the `today` and `week` lists read it. */
+function dayFromToday(days: number): string {
+  const date = new Date(Date.now() + days * 86_400_000);
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
 
 describe('the MCP endpoint', () => {
@@ -190,6 +199,15 @@ describe('the MCP endpoint', () => {
     expect((await mcp(secret, 'tools/list')).status).toBe(200);
     expect((await mcp(secret, 'tools/list')).status).toBe(200);
     expect(auth).toHaveBeenCalledTimes(2);
+  });
+
+  it('takes a personal token only while personal tokens are on', async () => {
+    const personal = connect(['parcels:read'], userId, 'personal');
+    const refused = await mcp(personal, 'tools/list');
+    expect(refused.status).toBe(401);
+    expect(refused.headers.get('www-authenticate')).toContain('error="invalid_token"');
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
+    expect((await mcp(personal, 'tools/list')).status).toBe(200);
   });
 
   it('limits each grant to 120 requests a minute', async () => {
@@ -241,6 +259,8 @@ describe('the MCP endpoint', () => {
     expect(list).toHaveBeenCalledWith(userId);
     expect(answer.result!.structuredContent).toEqual({
       total: 1,
+      status: 'active',
+      sort: 'expected',
       parcels: [{
         id: '7d000000-0000-4000-a000-000000000001',
         name: 'Synthetic parcel 1',
@@ -250,6 +270,7 @@ describe('the MCP endpoint', () => {
         statusText: 'Latest scan',
         needsAttention: null,
         expectedDelivery: null,
+        deliveredAt: null,
         lastUpdate: { time: LATEST, description: 'Latest scan', location: 'Example Hub' },
         pickupPoint: null,
         sender: 'Example Shop',
@@ -275,6 +296,38 @@ describe('the MCP endpoint', () => {
     const parcels = answer.result!.structuredContent!.parcels as Array<{ id: string }>;
     expect(parcels.find((parcel) => parcel.id === handedOver.id)).toMatchObject({ statusText: 'Latest scan', lastUpdate: { description: 'Latest scan' } });
     expect(parcels.find((parcel) => parcel.id === unscanned.id)).toMatchObject({ statusText: 'Label created', lastUpdate: null });
+  });
+
+  it('answers "my latest delivered parcel", "what arrives this week" and "the one from a shop" in one call each', async () => {
+    const parcels = [
+      stored(11, 'delivered', { latest: ago(30) }),
+      // Archived by hand after its delivery, which is the latest.
+      stored(12, 'delivered', { latest: ago(5), archived: true, label: 'Synthetic lamp' }),
+      stored(13, 'in_transit', { expected: dayFromToday(2), sender: 'Synthetic Furniture' }),
+      stored(14, 'in_transit', { expected: dayFromToday(10), latest: ago(3) }),
+      stored(15, 'out_for_delivery', { expected: dayFromToday(0), latest: ago(2) }),
+      stored(16, 'in_transit', { expected: dayFromToday(-1) }),
+    ];
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue(parcels);
+    const secret = connect(['parcels:read']);
+    const listed = async (args: Record<string, unknown>) => {
+      const content = (await call(secret, 'list_parcels', args)).result!.structuredContent as {
+        total: number; status: string; sort: string; parcels: Array<{ id: string; deliveredAt: string | null; archived: boolean }>;
+      };
+      return { ...content, ids: content.parcels.map(({ id }) => Number(id.slice(-2))) };
+    };
+
+    const latest = await listed({ status: 'delivered', limit: 1 });
+    expect(latest).toMatchObject({ total: 2, status: 'delivered', sort: 'delivered', ids: [12] });
+    expect(latest.parcels[0]).toMatchObject({ deliveredAt: parcels[1]!.tracking_events[1]!.occurred_at, archived: true });
+    expect(await listed({ status: 'week' })).toMatchObject({ total: 2, sort: 'expected', ids: [15, 13] });
+    expect(await listed({ status: 'today' })).toMatchObject({ ids: [15] });
+    expect(await listed({ search: 'furniture' })).toMatchObject({ status: 'all', sort: 'updated', ids: [13] });
+    expect(await listed({ search: 'LAMP' })).toMatchObject({ ids: [12] });
+    expect(await listed({ search: 'lamp', status: 'active' })).toMatchObject({ total: 0, ids: [] });
+    expect((await listed({ status: 'all', sort: 'delivered' })).ids.slice(0, 2)).toEqual([12, 11]);
+    expect((await listed({ sort: 'updated' })).ids).toEqual([13, 16, 15, 14]);
+    expect((await call(secret, 'list_parcels', { sort: 'cheapest' })).result).toMatchObject({ isError: true });
   });
 
   it('reads the scans as a link\'s viewer does: no recipient, signatory, code or door in any text', async () => {
@@ -452,6 +505,8 @@ describe('the OAuth endpoints', () => {
 });
 
 describe('the parcels a token reads as JSON', () => {
+  beforeEach(() => { vi.stubEnv('PERSONAL_TOKENS', 'on'); });
+
   function read(secret: string | null, query = '') {
     const headers: Record<string, string> = secret ? { authorization: `Bearer ${secret}` } : {};
     return tokenParcels(new NextRequest(`https://peek.example/api/parcels${query}`, { headers }), none);
@@ -468,6 +523,8 @@ describe('the parcels a token reads as JSON', () => {
     const body = await response.json();
     expect(body).toEqual((await call(secret, 'list_parcels')).result!.structuredContent);
     expect(body).toMatchObject({ total: 1, parcels: [{ name: 'Synthetic parcel 1', carrier: 'UPS', status: 'in_transit' }] });
+    expect(await (await read(secret, '?status=delivered&sort=updated&search=synthetic')).json())
+      .toEqual((await call(secret, 'list_parcels', { status: 'delivered', sort: 'updated', search: 'synthetic' })).result!.structuredContent);
     const all = await (await read(secret, '?status=all&limit=2')).json();
     expect(all.total).toBe(3);
     expect(all.parcels).toHaveLength(2);
@@ -480,7 +537,9 @@ describe('the parcels a token reads as JSON', () => {
   it('refuses a bad query, a missing or unknown token, and a token that may only write', async () => {
     vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
     const reader = connect(['parcels:read']);
-    for (const query of ['?status=lost', '?limit=0', '?limit=51', '?limit=2.5']) expect((await read(reader, query)).status, query).toBe(400);
+    for (const query of ['?status=lost', '?sort=cheapest', `?search=${'x'.repeat(101)}`, '?limit=0', '?limit=51', '?limit=2.5']) {
+      expect((await read(reader, query)).status, query.slice(0, 20)).toBe(400);
+    }
     const anonymous = await read(null);
     expect(anonymous.status).toBe(401);
     expect(anonymous.headers.get('www-authenticate')).toContain('Bearer resource_metadata=');
@@ -498,9 +557,15 @@ describe('the parcels a token reads as JSON', () => {
     expect((await mcp(secret, 'tools/list')).status).toBe(429);
   });
 
-  it('is not there when no account may connect', async () => {
+  it('is not there when no account may connect, or while personal tokens are off', async () => {
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
+    const secret = connect(['parcels:read']);
+    vi.stubEnv('PERSONAL_TOKENS', '');
+    expect((await read(secret)).status).toBe(404);
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
     vi.stubEnv('ASSISTANT_ACCOUNTS', '');
-    expect((await read(connect(['parcels:read']))).status).toBe(404);
+    expect((await read(secret)).status).toBe(404);
+    expect(service.listAccountPackages).not.toHaveBeenCalled();
   });
 });
 
@@ -524,6 +589,7 @@ describe('the account\'s assistants', () => {
     expect((await readAssistants(signedIn('GET'), none)).status).toBe(404);
     vi.stubEnv('ASSISTANT_ACCOUNTS', otherUser);
     expect((await readAssistants(signedIn('GET'), none)).status).toBe(404);
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
     expect((await createToken(signedIn('POST', undefined, { name: 'Home script', scopes: ['parcels:read'] }), none)).status).toBe(404);
     expect(read).not.toHaveBeenCalled();
   });
@@ -546,7 +612,14 @@ describe('the account\'s assistants', () => {
     expect(read).toHaveBeenCalledWith(userId);
   });
 
+  it('makes no personal token while personal tokens are off', async () => {
+    const create = vi.spyOn(service, 'createPersonalToken').mockResolvedValue(connection);
+    expect((await createToken(signedIn('POST', undefined, { name: 'Home script', scopes: ['parcels:read'] }), none)).status).toBe(404);
+    expect(create).not.toHaveBeenCalled();
+  });
+
   it('makes a personal token, shown once and stored as its digest', async () => {
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
     const create = vi.spyOn(service, 'createPersonalToken').mockResolvedValue(connection);
     const response = await createToken(signedIn('POST', undefined, { name: '  Home\nscript ', scopes: ['parcels:write', 'parcels:read'] }), none);
     expect(response.status).toBe(201);
@@ -558,6 +631,7 @@ describe('the account\'s assistants', () => {
   });
 
   it('refuses a token without a name or a known scope, and an eleventh one', async () => {
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
     const create = vi.spyOn(service, 'createPersonalToken').mockResolvedValue(connection);
     for (const payload of [
       { scopes: ['parcels:read'] }, { name: ' \u0000 ', scopes: ['parcels:read'] }, { name: 'Home script' }, { name: 'Home script', scopes: [] },
@@ -672,6 +746,7 @@ describe('the account\'s assistants', () => {
     });
 
     it('make a personal token only for a session Auth confirms now, signed in within ten minutes', async () => {
+      vi.stubEnv('PERSONAL_TOKENS', 'on');
       const create = vi.spyOn(service, 'createPersonalToken').mockResolvedValue(connection);
       const make = (token: string) => createToken(withToken(token, 'POST', undefined, { name: 'Home script', scopes: ['parcels:read'] }), none);
       const recent = accessToken(START - 60_000, START + 3_600_000);

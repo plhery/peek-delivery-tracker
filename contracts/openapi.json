@@ -60004,7 +60004,7 @@
     "/api/parcels": {
       "get": {
         "operationId": "listTokenParcels",
-        "description": "The account's parcels with a status, most urgent first, for a token that may read them: a personal token from Settings in a script or a Home Assistant rest sensor, or an assistant's access token. Each request counts against the token's grant, 120 a minute. 404 when assistants may connect to no account.",
+        "description": "The account's parcels, for a token that may read them: a personal token in a script, or an assistant's access token. Each request counts against the token's grant, 120 a minute. 404 while personal tokens are off (`PERSONAL_TOKENS`), or when assistants may connect to no account.",
         "security": [
           {
             "peekToken": []
@@ -60017,6 +60017,24 @@
             "required": false,
             "schema": {
               "$ref": "#/components/schemas/TokenParcelStatus"
+            }
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/TokenParcelSort"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "description": "Words the parcel's name, shop, carrier, tracking number or scans hold.",
+            "schema": {
+              "type": "string",
+              "maxLength": 100
             }
           },
           {
@@ -62582,7 +62600,7 @@
       },
       "post": {
         "operationId": "createPersonalToken",
-        "description": "Makes a personal token for a script, at most ten an account. It needs a sign-in from the last ten minutes, checked with Auth afresh: a 401 with code recent_sign_in otherwise.",
+        "description": "Makes a personal token for a script, at most ten an account. It needs a sign-in from the last ten minutes, checked with Auth afresh: a 401 with code recent_sign_in otherwise. 404 while personal tokens are off (`PERSONAL_TOKENS`).",
         "requestBody": {
           "required": true,
           "content": {
@@ -68067,12 +68085,23 @@
           "active",
           "attention",
           "today",
+          "week",
           "delivered",
           "archived",
           "all"
         ],
         "default": "active",
-        "description": "Which parcels: those on their way, those that need the user, those expected today, delivered, archived, or all of them."
+        "description": "Which parcels: those on their way, those that need the user, those expected today, those expected in the next seven days, those delivered (archived or not), those archived, or all of them. With a search, all unless given."
+      },
+      "TokenParcelSort": {
+        "type": "string",
+        "enum": [
+          "expected",
+          "delivered",
+          "updated",
+          "added"
+        ],
+        "description": "The order: soonest expected day first (parcels on their way), latest delivery first (delivered), latest scan first (archived, all and a search), or latest added first. Each status has its own default, given in parentheses."
       },
       "TokenParcelUpdate": {
         "type": "object",
@@ -68112,6 +68141,7 @@
           "statusText",
           "needsAttention",
           "expectedDelivery",
+          "deliveredAt",
           "lastUpdate",
           "pickupPoint",
           "sender",
@@ -68161,6 +68191,13 @@
             ],
             "description": "The day the carrier expects to deliver it (YYYY-MM-DD)."
           },
+          "deliveredAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "When it was delivered: the delivery scan's time, or its day (YYYY-MM-DD) when the carrier gave only the day; null until then."
+          },
           "lastUpdate": {
             "anyOf": [
               {
@@ -68198,13 +68235,21 @@
         "additionalProperties": false,
         "required": [
           "total",
+          "status",
+          "sort",
           "parcels"
         ],
         "properties": {
           "total": {
             "type": "integer",
             "minimum": 0,
-            "description": "How many parcels have the status; the list holds the first of them."
+            "description": "How many parcels match; the list holds the first of them."
+          },
+          "status": {
+            "$ref": "#/components/schemas/TokenParcelStatus"
+          },
+          "sort": {
+            "$ref": "#/components/schemas/TokenParcelSort"
           },
           "parcels": {
             "type": "array",

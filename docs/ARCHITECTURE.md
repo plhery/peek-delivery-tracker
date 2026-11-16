@@ -17,7 +17,7 @@ Next.js route handlers --- user token ---> PostgREST + Postgres RLS
           +--------------------> SMTP (delivery email)
           ^
           +--- signed POST <--- Cloudflare Email Worker <--- forwarded shipping email
-          +--- MCP + OAuth <--- assistants (Claude, ChatGPT…) and personal tokens
+          +--- MCP + OAuth <--- assistants (Claude, ChatGPT, Gemini…)
 ```
 
 ## Where things live
@@ -364,7 +364,7 @@ Key server modules:
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
     only.
 - **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an
-  assistant (Claude, ChatGPT, Gemini, any MCP client) or make a personal token for a script. Every
+  assistant (Claude, ChatGPT, Gemini, any MCP client); Settings marks it experimental. Every
   other account gets 404 from `/api/account/assistants`, so Settings shows no row; with no
   list, `/mcp`, `/oauth/*` and their `.well-known` documents are not there.
   - Peek is the OAuth 2.1 authorization server of its own MCP endpoint, `/mcp`, with the
@@ -383,14 +383,15 @@ Key server modules:
     once for ten minutes; one used twice ends its grant.
   - Access tokens last an hour. A refresh token lasts 60 days and is replaced at each use;
     a replaced one used again after two minutes ends the grant. Google's assistants keep
-    theirs, as they require. A personal token lasts until it is deleted. Making one, or
-    allowing an assistant, needs a sign-in from the last ten minutes, which the server
+    theirs, as they require. A personal token lasts until it is deleted. Allowing an
+    assistant, or making a personal token, needs a sign-in from the last ten minutes, which the server
     checks with Auth afresh; the consent page then asks to sign in again in place and
     allows the same request ([AUTHENTICATION.md](AUTHENTICATION.md)). The database keeps
     tokens and codes as their SHA-256, and only the service role reaches those tables.
   - A grant makes at most 120 requests a minute. A network may present 600 unknown tokens
     a minute, open the consent page 30 times a minute and register 20 clients an hour. An
-    account has at most 50 grants and 10 personal tokens; Settings lists them and ends any.
+    account has at most 50 grants and 10 personal tokens; Settings lists the assistants and
+    disconnects any.
   - Settings also shows how to add Peek to Claude, ChatGPT and Gemini, with each one's menu
     names in English as its help pages give them and the plans and places that can, and what
     to ask a connected assistant, first to add the tracking numbers in the user's emails.
@@ -399,8 +400,16 @@ Key server modules:
     its allowances. Their answers leave out the receiver's name and postcode and read the
     scans as a link's viewer does (`viewerScans`): a delivery reads "Delivered", and a scan,
     status line or place that names the recipient, who signed, a code or a door is left out.
-  - `GET /api/parcels` gives a token that may read the list `list_parcels` gives, as JSON,
-    for a Home Assistant rest sensor or a script. It counts against the grant's allowance.
+  - `list_parcels` takes a status (on the way, needing the user, expected today or in the
+    next seven days, delivered whether archived or not, archived, all), an order (expected
+    day, delivery, latest scan, added) and a search over the name, shop, carrier, number and
+    scans, so one call answers "my latest delivered parcel"; each parcel gives its expected
+    day and delivery time. Parcel details go out as JSON fields, and the server's
+    instructions tell the assistant to read them as data, never as instructions.
+  - Personal tokens, for scripts that can't sign in, are off unless `PERSONAL_TOKENS` is
+    `on`: Settings has no screen that makes one, so making one and `GET /api/parcels` answer
+    404 and `/mcp` takes none. When on, `GET /api/parcels` gives a token that may read what
+    `list_parcels` gives, as JSON, and counts against the grant's allowance.
 - **Private data**: tracking numbers, labels, carrier history, push endpoints and capability
   URLs (the tracking links a carrier keeps, such as Planzer's or a Freightways network's) never
   go into analytics. They do appear in operator logs and Sentry; see

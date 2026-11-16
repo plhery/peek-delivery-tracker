@@ -9,7 +9,7 @@ import type { SignInMethods } from '../peek/session';
 import { AccountMenu } from './AccountMenu';
 
 vi.mock('../lib/addByEmail', () => ({ readAddByEmail: vi.fn(async () => null), openAddByEmail: vi.fn(), closeAddByEmail: vi.fn() }));
-vi.mock('../lib/assistants', () => ({ readAssistants: vi.fn(async () => null), createPersonalToken: vi.fn(), revokeAssistant: vi.fn() }));
+vi.mock('../lib/assistants', () => ({ readAssistants: vi.fn(async () => null), revokeAssistant: vi.fn() }));
 vi.mock('./NotificationControl', () => ({ NotificationControl: () => null }));
 
 const apiAuth = { userId: 'user-a', getAccessToken: async () => 'session' };

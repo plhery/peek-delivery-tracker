@@ -6,7 +6,6 @@ import type { ApiAssistantScope } from '../generated/apiContract';
  * person was, what they typed, and for which account, so that it goes on there for that account alone.
  */
 export type SignInAgainNote =
-  | { action: 'personal-token'; userId: string; name: string; writes: boolean }
   | { action: 'delete-account'; userId: string }
   | { action: 'assistant-consent'; userId: string; query: string; scopes: ApiAssistantScope[] };
 
@@ -29,9 +28,6 @@ function shaped(value: unknown): SignInAgainNote | null {
   const note = value as Record<string, unknown>;
   if (typeof note.userId !== 'string' || !note.userId) return null;
   const text = (field: unknown) => typeof field === 'string' && field.length <= MOST_TEXT_LENGTH;
-  if (note.action === 'personal-token' && text(note.name) && typeof note.writes === 'boolean') {
-    return { action: 'personal-token', userId: note.userId, name: note.name as string, writes: note.writes };
-  }
   if (note.action === 'delete-account') return { action: 'delete-account', userId: note.userId };
   if (note.action === 'assistant-consent' && text(note.query) && Array.isArray(note.scopes)) {
     return { action: 'assistant-consent', userId: note.userId, query: note.query as string, scopes: SCOPES.filter((scope) => (note.scopes as unknown[]).includes(scope)) };

@@ -4,6 +4,7 @@ import { assistantsOpenToAccount } from '../../../../src/server/assistants/acces
 import {
   assistantsConfigured,
   newSecret,
+  personalTokensOpen,
   SCOPES,
   secretDigest,
   type AssistantSettings,
@@ -32,9 +33,10 @@ export const GET = apiRoute(async (context) => {
 
 /**
  * Makes a personal token for a script, `{"name": "…", "scopes": ["parcels:read"]}`. The token is shown this once. It
- * lasts until deleted, so it needs a sign-in from the last ten minutes.
+ * lasts until deleted, so it needs a sign-in from the last ten minutes. It is not there while personal tokens are off.
  */
 export const POST = apiRoute(async (context) => {
+  if (!personalTokensOpen()) throw new HttpError(404, 'Not found');
   await openSettings(context);
   const payload = await readJsonObject(context.request);
   const name = clientName(payload.name);

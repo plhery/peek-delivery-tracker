@@ -10,7 +10,7 @@ import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signIn
 import { followInPlace } from '../peek/landing/links';
 import type { SignInMethods } from '../peek/session';
 import { AddByEmailPage, useAddByEmail } from './AddByEmail';
-import { AssistantsPage, useAssistants, type TokenDraft } from './Assistants';
+import { AssistantsPage, useAssistants } from './Assistants';
 import { Icon } from './Icon';
 import { NotificationControl } from './NotificationControl';
 import { PreferenceSettings } from './Preferences';
@@ -53,8 +53,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   const [error, setError] = useState<string | null>(null);
   // The deletion waits for a sign-in asked for again, then for its confirmation once more.
   const [signingInAgain, setSigningInAgain] = useState(false);
-  const [tokenDraft, setTokenDraft] = useState<TokenDraft>();
-  const [otherAccount, setOtherAccount] = useState<'personal-token' | 'delete-account' | null>(null);
+  const [otherAccount, setOtherAccount] = useState(false);
   const resumed = useRef(false);
   const closeButton = useRef<HTMLButtonElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
@@ -64,32 +63,27 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
   const busy = Boolean(working) || inboxBusy || assistantsBusy;
   // What the person leaves behind stays behind: a sign-in asked for again, a draft, a word about another account.
   function leaveActions() {
-    setConfirmingReset(false); setConfirmingDelete(false); setSigningInAgain(false); setTokenDraft(undefined); setOtherAccount(null); setError(null);
-    dropSignInAgain(['personal-token', 'delete-account']);
+    setConfirmingReset(false); setConfirmingDelete(false); setSigningInAgain(false); setOtherAccount(false); setError(null);
+    dropSignInAgain(['delete-account']);
   }
   const [dialog, close] = useSheetDialog<HTMLDivElement>(open, () => {
     setOpen(false); setPage('home'); leaveActions();
   }, closeButton, busy);
   const accountTitle = t(onExitDemo ? 'settings.demoData' : 'settings.accountData');
 
-  // Back from a provider: Settings open where the sign-in was asked for. The same account makes its token at once, or
-  // confirms its deletion once more; another account is told that nothing was done, and does nothing.
+  // Back from a provider: Settings open where the sign-in was asked for. The same account confirms its deletion once
+  // more; another account is told that nothing was done, and does nothing.
   useEffect(() => {
     if (resumed.current || !apiAuth) return;
     resumed.current = true;
-    const note = takeSignInAgain(['personal-token', 'delete-account']);
+    const note = takeSignInAgain(['delete-account']);
     if (!note) return;
     const same = note.userId === apiAuth.userId;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- session storage, which only the live page can read
     setOpen(true);
-    if (!same) setOtherAccount(note.action);
-    if (note.action === 'personal-token') {
-      setPage('assistants');
-      setTokenDraft({ name: note.name, writes: note.writes, make: same });
-    } else {
-      setPage('account');
-      if (same && email) { setConfirmingDelete(true); setConfirmation(email); }
-    }
+    setPage('account');
+    if (!same) setOtherAccount(true);
+    else if (email) { setConfirmingDelete(true); setConfirmation(email); }
   }, [apiAuth, email]);
 
   function navigate(next: Page) {
@@ -100,7 +94,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
 
   async function run(action: AccountAction, operation: () => Promise<void>) {
     if (working) return;
-    setWorking(action); setError(null); setOtherAccount(null);
+    setWorking(action); setError(null); setOtherAccount(false);
     try { await operation(); if (action === 'export' || action === 'reset-demo') setWorking(null); }
     catch (reason) {
       setWorking(null);
@@ -112,7 +106,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
 
   const noteDeletion = () => { if (apiAuth) noteSignInAgain({ action: 'delete-account', userId: apiAuth.userId }); };
   const otherAccountNotice = otherAccount && email
-    ? <p className="settings-notice" role="status">{t(otherAccount === 'personal-token' ? 'assistants.otherAccount' : 'account.otherAccount', { email })}</p>
+    ? <p className="settings-notice" role="status">{t('account.otherAccount', { email })}</p>
     : null;
 
   return <>
@@ -122,22 +116,20 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
       <div ref={dialog} className="sheet settings-sheet account-menu refined-settings" role="dialog" aria-modal="true" aria-labelledby="settings-title" tabIndex={-1} onClick={(event) => event.stopPropagation()}>
         <div className="sheet__grabber" aria-hidden="true" />
         {page !== 'home' && <button type="button" className="settings-back" disabled={busy} onClick={() => navigate('home')}><span aria-hidden="true">‹</span>{t('settings.title')}</button>}
-        <div className="sheet__heading"><h2 ref={heading} tabIndex={-1} className="sheet__title" id="settings-title">{page === 'home' ? t('settings.title') : page === 'inbox' ? <>{t('inbox.row')} <span className="settings-badge">{t('inbox.experimental')}</span></> : page === 'assistants' ? t('assistants.row') : accountTitle}</h2>
+        <div className="sheet__heading"><h2 ref={heading} tabIndex={-1} className="sheet__title" id="settings-title">{page === 'home' ? t('settings.title') : page === 'inbox' ? <>{t('inbox.row')} <span className="settings-badge">{t('inbox.experimental')}</span></> : page === 'assistants' ? <>{t('assistants.row')} <span className="settings-badge">{t('assistants.experimental')}</span></> : accountTitle}</h2>
           <button ref={closeButton} className="sheet__close" type="button" disabled={busy} onClick={close} aria-label={t('common.close')}><Icon name="close" /></button></div>
         <div hidden={page !== 'home'}>
           <div className="settings-profile"><span className="settings-profile__avatar">{initial || 'D'}</span>
             <div><strong>{email || t('app.demo')}</strong>{email && <span>{t('account.signedIn')}</span>}</div></div>
           {apiAuth && <section className="settings-group" aria-labelledby="settings-deliveries"><h3 id="settings-deliveries" className="settings-group__title">{t('native.deliveries')}</h3><div className="settings-box"><NotificationControl apiAuth={apiAuth} email={email} variant="row" />
             {addByEmail && <button ref={inboxButton} className="settings-row" type="button" onClick={() => navigate('inbox')}><Icon name="mail" /><span>{t('inbox.row')}</span><span className="settings-badge">{t('inbox.experimental')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}
-            {assistants && <button ref={assistantsButton} className="settings-row" type="button" onClick={() => navigate('assistants')}><Icon name="globe" /><span>{t('assistants.row')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}</div></section>}
+            {assistants && <button ref={assistantsButton} className="settings-row" type="button" onClick={() => navigate('assistants')}><Icon name="globe" /><span>{t('assistants.row')}</span><span className="settings-badge">{t('assistants.experimental')}</span><span className="settings-chevron" aria-hidden="true">›</span></button>}</div></section>}
           <PreferenceSettings apiAuth={apiAuth} language />
           <div className="settings-box"><button ref={accountButton} className="settings-row" type="button" onClick={() => navigate('account')}>{accountTitle}<span className="settings-chevron" aria-hidden="true">›</span></button>
             {onOpenLanding && <a className="settings-row" href={LANDING_PATH} onClick={(event) => followInPlace(event, onOpenLanding)}>{t('app.homePage')}<span className="settings-value">{window.location.host}</span><span className="settings-chevron" aria-hidden="true">›</span></a>}</div>
         </div>
         {page === 'inbox' && apiAuth && addByEmail && <AddByEmailPage apiAuth={apiAuth} email={email} offer={addByEmail} onChange={setAddByEmail} onBusy={setInboxBusy} />}
-        {page === 'assistants' && otherAccountNotice}
-        {page === 'assistants' && apiAuth && assistants && <AssistantsPage apiAuth={apiAuth} offer={assistants} onChange={setAssistants}
-          onBusy={(next) => { setAssistantsBusy(next); if (next) setOtherAccount(null); }} signIn={signIn} email={email} draft={tokenDraft} />}
+        {page === 'assistants' && apiAuth && assistants && <AssistantsPage apiAuth={apiAuth} offer={assistants} onChange={setAssistants} onBusy={setAssistantsBusy} />}
         {page === 'account' && <>
           <p className="settings-description">{email || t('app.demo')}</p>
           {otherAccountNotice}
@@ -175,7 +167,7 @@ export function AccountMenu({ email, onExport, onDelete, onSignOut, onExitDemo, 
               {onExitDemo && <button type="button" className="settings-row" disabled={Boolean(working)} onClick={onExitDemo}>{t('native.exitDemo')}</button>}
             </div></section>}
             {onSignOut && <div className="settings-box"><button className="settings-row" type="button" disabled={Boolean(working)} onClick={() => void run('sign-out', onSignOut)}>{working === 'sign-out' ? t('account.signingOut') : t('account.signOut')}</button></div>}
-            {onDelete && <button className="settings-delete-link" type="button" disabled={Boolean(working)} onClick={() => { setConfirmingDelete(true); setOtherAccount(null); }}>{t('account.delete')}</button>}
+            {onDelete && <button className="settings-delete-link" type="button" disabled={Boolean(working)} onClick={() => { setConfirmingDelete(true); setOtherAccount(false); }}>{t('account.delete')}</button>}
           </>}
         </>}
       </div>

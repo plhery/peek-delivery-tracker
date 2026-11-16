@@ -62315,7 +62315,9 @@ export interface ApiAssistantConsentResponse {
   "redirect": string;
 }
 
-export type ApiTokenParcelStatus = "active" | "attention" | "today" | "delivered" | "archived" | "all";
+export type ApiTokenParcelStatus = "active" | "attention" | "today" | "week" | "delivered" | "archived" | "all";
+
+export type ApiTokenParcelSort = "expected" | "delivered" | "updated" | "added";
 
 export interface ApiTokenParcelUpdate {
   "time": string;
@@ -62332,6 +62334,7 @@ export interface ApiTokenParcel {
   "statusText": string | null;
   "needsAttention": string | null;
   "expectedDelivery": string | null;
+  "deliveredAt": string | null;
   "lastUpdate": ApiTokenParcelUpdate | null;
   "pickupPoint": string | null;
   "sender": string | null;
@@ -62341,5 +62344,7 @@ export interface ApiTokenParcel {
 
 export interface ApiTokenParcelsResponse {
   "total": number;
+  "status": ApiTokenParcelStatus;
+  "sort": ApiTokenParcelSort;
   "parcels": Array<ApiTokenParcel>;
 }

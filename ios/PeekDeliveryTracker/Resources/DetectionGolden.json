@@ -1423,7 +1423,8 @@
       "dpd-fr",
       "hermes-de",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -3102,7 +3103,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -3541,7 +3543,8 @@
       "dpd-fr",
       "hermes-de",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -5006,6 +5009,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -5233,7 +5237,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -6323,7 +6328,8 @@
       "brt",
       "yunda",
       "dpd-pt",
-      "dpd-uk"
+      "dpd-uk",
+      "ozon-logistics"
     ],
     "preferred": [
       "dpd-de"
@@ -6935,7 +6941,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -7003,6 +7010,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -7483,7 +7491,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -8515,7 +8524,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -8533,6 +8543,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -8545,6 +8556,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -8612,7 +8624,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -8876,6 +8889,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -8905,6 +8919,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -8917,6 +8932,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -9040,7 +9056,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9056,6 +9073,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -9072,6 +9090,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -9088,6 +9107,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -9104,6 +9124,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -9120,6 +9141,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -9263,6 +9285,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -9275,6 +9298,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -9287,6 +9311,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -9639,7 +9664,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9652,7 +9678,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9665,7 +9692,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9678,7 +9706,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9691,7 +9720,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9704,7 +9734,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9717,7 +9748,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9730,7 +9762,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -9743,7 +9776,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -10340,6 +10374,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -10452,7 +10487,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -10465,7 +10501,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -11360,7 +11397,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -11417,6 +11455,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -11434,6 +11473,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -11450,6 +11490,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -11464,6 +11505,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -11959,6 +12001,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -13826,7 +13869,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -14248,6 +14292,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -14534,6 +14579,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -14550,6 +14596,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -14564,6 +14611,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -14580,6 +14628,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -14593,6 +14642,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -14607,6 +14657,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -15043,6 +15094,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -15403,6 +15455,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -15417,7 +15470,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -16087,6 +16141,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -16415,6 +16470,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -16473,6 +16529,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -16680,6 +16737,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -16766,7 +16824,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -16857,6 +16916,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -16870,6 +16930,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -16884,6 +16945,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -16927,6 +16989,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -16944,6 +17007,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -16961,6 +17025,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -17323,7 +17388,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -17722,7 +17788,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -18529,6 +18596,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -18547,6 +18615,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -18563,6 +18632,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -19315,6 +19385,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -19350,7 +19421,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -20027,6 +20099,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -20114,6 +20187,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -20185,6 +20259,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -20201,6 +20276,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -20215,6 +20291,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -20232,6 +20309,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -20248,6 +20326,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -20533,7 +20612,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -20567,7 +20647,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -20750,7 +20831,8 @@
       "brt",
       "yunda",
       "dpd-de",
-      "dpd-pt"
+      "dpd-pt",
+      "ozon-logistics"
     ],
     "preferred": [
       "dpd-uk"
@@ -20776,7 +20858,8 @@
       "brt",
       "yunda",
       "dpd-de",
-      "dpd-pt"
+      "dpd-pt",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex",
@@ -21265,7 +21348,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -21681,6 +21765,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -21931,6 +22016,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -22226,6 +22312,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -22464,6 +22551,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -22659,6 +22747,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -22695,6 +22784,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -22713,6 +22803,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -22738,6 +22829,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -22799,6 +22891,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -22812,6 +22905,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -22825,6 +22919,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -22878,6 +22973,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -23412,7 +23508,8 @@
     "candidates": [
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -23439,6 +23536,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -23528,7 +23626,8 @@
       "fedex",
       "dpd-fr",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -23591,6 +23690,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -23608,6 +23708,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -24314,6 +24415,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -24330,6 +24432,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -24967,6 +25070,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -25083,6 +25187,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -26221,6 +26326,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -26239,6 +26345,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -26257,6 +26364,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -26275,6 +26383,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -26292,6 +26401,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -27313,7 +27423,8 @@
     "candidates": [
       "brt",
       "yunda",
-      "j-and-t-cargo"
+      "j-and-t-cargo",
+      "ozon-logistics"
     ],
     "asked": [
       "j-and-t-cargo",
@@ -28140,6 +28251,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -28459,6 +28571,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -28476,6 +28589,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -28525,6 +28639,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -28638,6 +28753,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28660,6 +28776,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28682,6 +28799,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28706,6 +28824,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28729,6 +28848,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -28749,6 +28869,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28774,6 +28895,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28853,6 +28975,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28876,6 +28999,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28925,6 +29049,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28955,6 +29080,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -28977,6 +29103,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -29434,6 +29561,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -29966,6 +30094,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -29983,6 +30112,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -30035,6 +30165,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -30081,6 +30212,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -30404,7 +30536,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -30749,6 +30882,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31015,6 +31149,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31352,6 +31487,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31436,6 +31572,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31671,6 +31808,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31800,6 +31938,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31818,6 +31957,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31861,6 +32001,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31878,6 +32019,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31894,6 +32036,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -31959,6 +32102,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -32169,6 +32313,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -32198,6 +32343,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -32422,6 +32568,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -32551,6 +32698,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -32892,6 +33040,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -33038,6 +33187,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -33315,6 +33465,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -33386,6 +33537,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -33528,6 +33680,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -33545,6 +33698,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -34634,6 +34788,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -34776,6 +34931,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -34890,6 +35046,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "raben"
     ],
     "asked": [
@@ -34904,6 +35061,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "raben"
     ],
     "asked": [
@@ -35047,6 +35205,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35077,6 +35236,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35178,6 +35338,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "raben"
     ],
     "asked": [
@@ -35193,6 +35354,7 @@
       "fedex",
       "brt",
       "yunda",
+      "ozon-logistics",
       "raben"
     ],
     "preferred": [
@@ -35226,6 +35388,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35368,6 +35531,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35386,6 +35550,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35404,6 +35569,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35422,6 +35588,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35440,6 +35607,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -35735,6 +35903,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -36014,6 +36183,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -36665,7 +36835,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -36711,7 +36882,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -36728,7 +36900,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -36807,6 +36980,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -37663,6 +37837,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -37678,7 +37853,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -37827,7 +38003,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -37844,7 +38021,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -38206,7 +38384,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -38224,7 +38403,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -38350,6 +38530,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -38399,6 +38580,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -38764,6 +38946,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -38880,6 +39063,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -39385,6 +39569,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -39462,6 +39647,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -40149,6 +40335,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -40260,6 +40447,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -40280,6 +40468,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -40329,6 +40518,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -40374,6 +40564,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -40544,6 +40735,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -41025,7 +41217,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -41042,7 +41235,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -41059,7 +41253,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -41076,7 +41271,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -41093,7 +41289,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -41110,7 +41307,8 @@
     "candidates": [
       "andreani",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "andreani"
@@ -41661,6 +41859,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -41877,6 +42076,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -42492,6 +42692,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -42511,6 +42712,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -43184,6 +43386,7 @@
       "econt",
       "fan-courier",
       "imile",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -44051,6 +44254,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -45148,6 +45352,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -45379,7 +45584,8 @@
       "yunda",
       "dpd-de",
       "dpd-pt",
-      "dpd-uk"
+      "dpd-uk",
+      "ozon-logistics"
     ],
     "asked": [
       "dpd",
@@ -45625,7 +45831,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -45768,6 +45975,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -45972,6 +46180,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -46083,7 +46292,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -46096,7 +46306,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -46597,6 +46808,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -47810,6 +48022,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "sp-express"
     ],
     "asked": [
@@ -47824,6 +48037,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "sp-express"
     ],
     "asked": [
@@ -47838,6 +48052,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "sp-express"
     ],
     "asked": [
@@ -47852,6 +48067,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "sp-express"
     ],
     "asked": [
@@ -47866,6 +48082,7 @@
     "candidates": [
       "brt",
       "yunda",
+      "ozon-logistics",
       "sp-express"
     ],
     "asked": [
@@ -48264,6 +48481,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -48418,7 +48636,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -50027,7 +50246,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -50103,6 +50323,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -50161,6 +50382,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -51299,6 +51521,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -51901,7 +52124,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -52018,7 +52242,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -52280,7 +52505,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -52322,7 +52548,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -52628,7 +52855,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -52662,7 +52890,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -52697,6 +52926,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -52989,6 +53219,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -53081,6 +53312,7 @@
       "korea-post",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -54424,6 +54656,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -54804,6 +55037,7 @@
       "aras-kargo",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -54856,6 +55090,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -54874,6 +55109,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -54998,6 +55234,7 @@
       "aras-kargo",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55021,6 +55258,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55043,6 +55281,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55061,6 +55300,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55079,6 +55319,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55097,6 +55338,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55115,6 +55357,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55132,6 +55375,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55149,6 +55393,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55166,6 +55411,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55184,6 +55430,7 @@
       "aras-kargo",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55203,6 +55450,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55220,6 +55468,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55269,6 +55518,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55292,6 +55542,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55316,6 +55567,7 @@
       "aras-kargo",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55345,6 +55597,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55364,6 +55617,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55386,6 +55640,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55403,6 +55658,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55419,6 +55675,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55468,6 +55725,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55489,6 +55747,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55511,6 +55770,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -55558,6 +55818,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55576,6 +55837,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55594,6 +55856,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55661,6 +55924,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55679,6 +55943,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55749,6 +56014,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -55864,6 +56130,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56352,6 +56619,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -56605,6 +56873,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56625,6 +56894,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56646,6 +56916,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56667,6 +56938,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56688,6 +56960,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56709,6 +56982,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56730,6 +57004,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -56751,6 +57026,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -58001,6 +58277,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58020,6 +58297,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58039,6 +58317,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58057,6 +58336,7 @@
       "korea-post",
       "aras-kargo",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58299,6 +58579,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58349,6 +58630,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58367,6 +58649,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58385,6 +58668,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58402,6 +58686,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58418,6 +58703,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58436,6 +58722,7 @@
       "econt",
       "fedex-pl",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58455,6 +58742,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58472,6 +58760,7 @@
       "korea-post",
       "econt",
       "liccardi",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -58640,6 +58929,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -59282,6 +59572,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -59298,6 +59589,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -59437,6 +59729,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -59454,6 +59747,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -59544,6 +59838,7 @@
       "yunda",
       "korea-post",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -59701,6 +59996,7 @@
       "korea-post",
       "econt",
       "fedex-pl",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -60376,6 +60672,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -60480,6 +60777,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -61297,7 +61595,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -61310,7 +61609,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -61325,7 +61625,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -62320,6 +62621,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -62660,6 +62962,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -62750,6 +63053,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -62774,6 +63078,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -62883,6 +63188,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -63123,6 +63429,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -63155,7 +63462,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -63850,7 +64158,8 @@
     "candidates": [
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "sto"
@@ -63998,7 +64307,8 @@
     "candidates": [
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "sto"
@@ -64015,7 +64325,8 @@
     "candidates": [
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "sto"
@@ -64032,7 +64343,8 @@
     "candidates": [
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "sto"
@@ -64181,7 +64493,8 @@
     "candidates": [
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "sto"
@@ -64276,7 +64589,8 @@
       "fedex",
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex",
@@ -64294,7 +64608,8 @@
     "candidates": [
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "sto"
@@ -64312,7 +64627,8 @@
       "fedex",
       "sto",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex",
@@ -65125,6 +65441,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -65277,6 +65594,7 @@
       "yunda",
       "econt",
       "fan-courier",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -66006,6 +66324,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -66017,6 +66336,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -66030,6 +66350,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -66046,6 +66367,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -66061,6 +66383,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -67087,6 +67410,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -67194,6 +67518,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -67478,6 +67803,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67498,6 +67824,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67518,6 +67845,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67538,6 +67866,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67558,6 +67887,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67578,6 +67908,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67597,6 +67928,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -67645,6 +67977,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "preferred": [
@@ -68690,7 +69023,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -68803,7 +69137,8 @@
     "candidates": [
       "la-poste",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "la-poste",
@@ -68819,6 +69154,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -69027,6 +69363,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -69036,7 +69373,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -69368,6 +69706,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -69624,7 +69963,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -69705,7 +70045,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -69745,6 +70086,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -70368,6 +70710,7 @@
       "correos-chile",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ]
   },
@@ -70381,6 +70724,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -70610,6 +70954,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -70625,6 +70970,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -72776,7 +73122,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -73471,7 +73818,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -73483,7 +73831,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -73495,7 +73844,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -73507,7 +73857,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -73519,7 +73870,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -73699,7 +74051,8 @@
     "candidates": [
       "fedex",
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "preferred": [
       "fedex"
@@ -74667,7 +75020,8 @@
     "confidence": "low",
     "candidates": [
       "brt",
-      "yunda"
+      "yunda",
+      "ozon-logistics"
     ],
     "asked": [
       "brt"
@@ -75013,6 +75367,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -75775,6 +76130,7 @@
       "delhivery",
       "yunda",
       "econt",
+      "ozon-logistics",
       "paquetexpress"
     ],
     "asked": [
@@ -106013,6 +106369,22 @@
   },
   {
     "input": "TBM502887274000",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
+    "input": "TBR376073880",
+    "carrier": "amazon-logistics",
+    "confidence": "high",
+    "candidates": [
+      "amazon-logistics"
+    ]
+  },
+  {
+    "input": "TBR446498521",
     "carrier": "amazon-logistics",
     "confidence": "high",
     "candidates": [

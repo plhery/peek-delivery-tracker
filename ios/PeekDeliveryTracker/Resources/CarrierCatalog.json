@@ -852,7 +852,7 @@
       ],
       "detectionRules": [
         {
-          "pattern": "^(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)[0-9]{10}|TB[ACM][0-9]{12}|TBAU[0-9]{9})$",
+          "pattern": "^(?:(?:FR|DE|BE|UK|GB|IT|ES|NL|AT|IE|PL|SE|PT|LU|DK|FI|CZ|SK|HU|RO|HR|SI|EE|LV|LT|GR|CY|MT|CH|NO|IS|LI|TR)[0-9]{10}|TB[ACM][0-9]{12}|TBAU[0-9]{9}|TBR[0-9]{9})$",
           "confidence": "high"
         }
       ],
@@ -897,7 +897,8 @@
         "US",
         "CA",
         "MX",
-        "AU"
+        "AU",
+        "BR"
       ]
     },
     "amazon-shipping": {
@@ -20117,6 +20118,7 @@
         "adapter": "ozon-logistics",
         "recognitionRank": 37,
         "recognitionPattern": "^(?:\\d{13}|\\d{15})$",
+        "recognitionServedCountriesOnly": true,
         "browserRecognitionRank": 37
       },
       "trackingUrlTemplate": "https://tracking.ozon.ru/?track={trackingNumber}",
@@ -20150,6 +20152,10 @@
           "pattern": "^PL\\d{6}[0-9A-Z]+$",
           "confidence": "high",
           "rawPattern": "^PL-\\d{6}-[0-9A-Z]+(?:-[0-9A-Z]+)*$"
+        },
+        {
+          "pattern": "^(?:\\d{13}|\\d{15})$",
+          "confidence": "low"
         }
       ],
       "trackingSearchUrl": "https://tracking.ozon.ru/"

@@ -1,0 +1,10 @@
+// The release's public settings, which F-Droid's build reads (-Ppeek.releaseXcconfig=fdroid/release.xcconfig): the
+// server, sign-in's switches, and the Supabase URL and publishable key that https://peektracker.com's own scripts carry.
+// Google Play's build has these and its Firebase keys in an xcconfig outside the repository (android/README.md).
+SDT_USE_API = YES
+SDT_API_BASE_URL = https:/$()/peektracker.com
+SDT_SUPABASE_URL = https:/$()/auth.peektracker.com
+SDT_SUPABASE_PUBLISHABLE_KEY = eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdXBhYmFzZSIsImlhdCI6MTc4Mzk1MDQ4MCwiZXhwIjo0OTM5NjI0MDgwLCJyb2xlIjoiYW5vbiJ9.Rej03Sj_5wfXELHeG1oplIk1M3pMsnV1F5ahhMK43os // gitleaks:allow (the anon key every visitor of the website receives)
+SDT_GOOGLE_AUTH_ENABLED = YES
+SDT_APPLE_AUTH_ENABLED = YES
+SDT_EMAIL_OTP_ENABLED = YES

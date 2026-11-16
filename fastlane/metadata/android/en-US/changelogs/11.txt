@@ -1,0 +1,1 @@
+The first build for F-Droid: notifications through UnifiedPush, or a check for news about every 15 minutes, and no Google libraries.

@@ -389,7 +389,9 @@ Key server modules:
     account has at most 50 grants and 10 personal tokens; Settings lists them and ends any.
   - The tools work on the token's account alone, through the owner-checked functions the
     app uses. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
-    its allowances. Their answers leave out the receiver's name and postcode.
+    its allowances. Their answers leave out the receiver's name and postcode and read the
+    scans as a link's viewer does (`viewerScans`): a delivery reads "Delivered", and a scan,
+    status line or place that names the recipient, who signed, a code or a door is left out.
   - `GET /api/parcels` gives a token that may read the list `list_parcels` gives, as JSON,
     for a Home Assistant rest sensor or a script. It counts against the grant's allowance.
 - **Private data**: tracking numbers, labels, carrier history, push endpoints and capability

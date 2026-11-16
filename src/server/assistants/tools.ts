@@ -11,6 +11,7 @@ import { toParcel } from '../../store/apiRepo';
 import type { ParcelWithEvents } from '../../types';
 import { withEventPlaces } from '../eventPlaces';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
+import { privateValues, viewerScans, viewerStatusText } from '../privateDetails';
 import type { SupabaseServiceClient } from '../supabase';
 import type { Scope } from './settings';
 
@@ -58,8 +59,17 @@ export async function listParcels(
   return { total: parcels.length, parcels: parcels.slice(0, limit).map((parcel) => parcelSummary(parcel, now)) };
 }
 
+/**
+ * A parcel as a tool reads it: its scans and status line as a link's viewer reads them (`viewerScans`). A delivery
+ * reads "Delivered", and a scan or status line that names the recipient, who signed, a code or a door is left out,
+ * as is a place that does: an assistant gets none of them (PRIVACY.md).
+ */
 function asParcel(row: Parameters<typeof withEventPlaces>[0]): ParcelWithEvents {
-  return toParcel(withEventPlaces(row) as unknown as ApiPackageRow);
+  const placed = withEventPlaces(row) as unknown as ApiPackageRow;
+  const recipient = privateValues(placed.carrier_data);
+  const parcel = toParcel({ ...placed, tracking_events: viewerScans(placed.tracking_events ?? [], recipient) });
+  const statusText = viewerStatusText(parcel.lastStatusText ?? null, currentStage(parcel.events, parcel.returnHeld), recipient);
+  return { ...parcel, lastStatusText: statusText ?? undefined };
 }
 
 /** The account's parcel a tool's `parcel` names: its id, or its tracking number. */

@@ -268,6 +268,40 @@ describe('the MCP endpoint', () => {
     expect(parcels.find((parcel) => parcel.id === unscanned.id)).toMatchObject({ statusText: 'Label created', lastUpdate: null });
   });
 
+  it('reads the scans as a link\'s viewer does: no recipient, signatory, code or door in any text', async () => {
+    // Synthetic wording: a delivery that names who took it, a scan and a place that name the receiver, a status line
+    // that names the signatory, and a scan with a collection code.
+    const base = stored(7, 'in_transit');
+    const named = { ...base, last_status_text: 'Handed to Synthetic Signatory',
+      carrier_data: { ...base.carrier_data, signed_by: 'Synthetic Signatory' },
+      tracking_events: [
+        ...base.tracking_events,
+        { ...base.tracking_events[1]!, id: `${base.id}-2`, description: `Notice left for ${RECEIVER}`, occurred_at: ago(30), provider_event_id: 'carrier:7:2' },
+        { ...base.tracking_events[1]!, id: `${base.id}-3`, description: 'Sorted', location: `${RECEIVER}'s street`, occurred_at: ago(20), provider_event_id: 'carrier:7:3' },
+        { ...base.tracking_events[1]!, id: `${base.id}-4`, description: 'Ready, collection code 4815', occurred_at: ago(10), provider_event_id: 'carrier:7:4' },
+      ] };
+    const delivered = stored(8, 'delivered');
+    delivered.tracking_events[1] = { ...delivered.tracking_events[1]!, description: 'Delivered, signed by Synthetic Signatory' };
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([named, delivered]);
+    vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id) => (id === named.id ? named : null));
+    const secret = connect(['parcels:read']);
+    const list = await call(secret, 'list_parcels', { status: 'all' });
+    const parcels = list.result!.structuredContent!.parcels as Array<{ id: string }>;
+    expect(parcels.find((parcel) => parcel.id === delivered.id)).toMatchObject({ statusText: 'Delivered', lastUpdate: { description: 'Delivered' } });
+    expect(parcels.find((parcel) => parcel.id === named.id)).toMatchObject({ statusText: 'Latest scan' });
+    const read = await call(secret, 'get_parcel', { parcel: named.id });
+    expect(read.result!.structuredContent!.history).toEqual([
+      { time: LATEST, status: 'in_transit', description: 'Latest scan', location: 'Example Hub' },
+      { time: expect.any(String), status: 'in_transit', description: 'Sorted', location: null },
+      { time: ACCEPTED, status: 'accepted', description: 'Parcel received', location: 'Example Depot' },
+    ]);
+    for (const text of [JSON.stringify(list), JSON.stringify(read)]) {
+      expect(text).not.toContain(RECEIVER);
+      expect(text).not.toContain('Signatory');
+      expect(text).not.toContain('4815');
+    }
+  });
+
   it('adds parcels from a text for the caller\'s own account, with the write scope only', async () => {
     vi.mocked(addParcelsFromText).mockResolvedValue([
       { trackingNumber: UPS, carrier: 'ups', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000aa', jobId: null },

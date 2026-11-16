@@ -1694,6 +1694,26 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let servipost = CarrierID(rawValue: "servipost")
     static let sitraEs = CarrierID(rawValue: "sitra-es")
     static let trablisaExpres = CarrierID(rawValue: "trablisa-expres")
+    static let alftaFrakt = CarrierID(rawValue: "alfta-frakt")
+    static let bergenTransportSentral = CarrierID(rawValue: "bergen-transport-sentral")
+    static let bftLogistik = CarrierID(rawValue: "bft-logistik")
+    static let bhsLogistics = CarrierID(rawValue: "bhs-logistics")
+    static let ctsGroup = CarrierID(rawValue: "cts-group")
+    static let diera = CarrierID(rawValue: "diera")
+    static let eekLogistikk = CarrierID(rawValue: "eek-logistikk")
+    static let emDistribusjon = CarrierID(rawValue: "em-distribusjon")
+    static let fennoroad = CarrierID(rawValue: "fennoroad")
+    static let hadelandBud = CarrierID(rawValue: "hadeland-bud")
+    static let loadmasterNo = CarrierID(rawValue: "loadmaster-no")
+    static let partsExpress = CarrierID(rawValue: "parts-express")
+    static let scanGlobalLogistics = CarrierID(rawValue: "scan-global-logistics")
+    static let spedTrans = CarrierID(rawValue: "sped-trans")
+    static let svennsTransport = CarrierID(rawValue: "svenns-transport")
+    static let totenTransport = CarrierID(rawValue: "toten-transport")
+    static let tromsoBudbilSentral = CarrierID(rawValue: "tromso-budbil-sentral")
+    static let tsnGroen = CarrierID(rawValue: "tsn-groen")
+    static let ubsend = CarrierID(rawValue: "ubsend")
+    static let varubud = CarrierID(rawValue: "varubud")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3338,6 +3358,26 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .servipost,
         .sitraEs,
         .trablisaExpres,
+        .alftaFrakt,
+        .bergenTransportSentral,
+        .bftLogistik,
+        .bhsLogistics,
+        .ctsGroup,
+        .diera,
+        .eekLogistikk,
+        .emDistribusjon,
+        .fennoroad,
+        .hadelandBud,
+        .loadmasterNo,
+        .partsExpress,
+        .scanGlobalLogistics,
+        .spedTrans,
+        .svennsTransport,
+        .totenTransport,
+        .tromsoBudbilSentral,
+        .tsnGroen,
+        .ubsend,
+        .varubud,
     ]
 
     init(from decoder: Decoder) throws {

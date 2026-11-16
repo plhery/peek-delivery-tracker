@@ -568,6 +568,10 @@
       "flags": "gi"
     },
     {
+      "source": "\\b\\d{5}\\/(?:\\d{7}|[A-Z]\\d{6})\\b",
+      "flags": "gi"
+    },
+    {
       "source": "\\b\\d{26}\\b",
       "flags": "g"
     },

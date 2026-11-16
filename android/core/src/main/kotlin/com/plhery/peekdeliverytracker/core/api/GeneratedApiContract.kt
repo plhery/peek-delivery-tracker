@@ -1703,6 +1703,26 @@ value class CarrierId(val rawValue: String) {
         val Servipost = CarrierId("servipost")
         val SitraEs = CarrierId("sitra-es")
         val TrablisaExpres = CarrierId("trablisa-expres")
+        val AlftaFrakt = CarrierId("alfta-frakt")
+        val BergenTransportSentral = CarrierId("bergen-transport-sentral")
+        val BftLogistik = CarrierId("bft-logistik")
+        val BhsLogistics = CarrierId("bhs-logistics")
+        val CtsGroup = CarrierId("cts-group")
+        val Diera = CarrierId("diera")
+        val EekLogistikk = CarrierId("eek-logistikk")
+        val EmDistribusjon = CarrierId("em-distribusjon")
+        val Fennoroad = CarrierId("fennoroad")
+        val HadelandBud = CarrierId("hadeland-bud")
+        val LoadmasterNo = CarrierId("loadmaster-no")
+        val PartsExpress = CarrierId("parts-express")
+        val ScanGlobalLogistics = CarrierId("scan-global-logistics")
+        val SpedTrans = CarrierId("sped-trans")
+        val SvennsTransport = CarrierId("svenns-transport")
+        val TotenTransport = CarrierId("toten-transport")
+        val TromsoBudbilSentral = CarrierId("tromso-budbil-sentral")
+        val TsnGroen = CarrierId("tsn-groen")
+        val Ubsend = CarrierId("ubsend")
+        val Varubud = CarrierId("varubud")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3347,6 +3367,26 @@ value class CarrierId(val rawValue: String) {
             Servipost,
             SitraEs,
             TrablisaExpres,
+            AlftaFrakt,
+            BergenTransportSentral,
+            BftLogistik,
+            BhsLogistics,
+            CtsGroup,
+            Diera,
+            EekLogistikk,
+            EmDistribusjon,
+            Fennoroad,
+            HadelandBud,
+            LoadmasterNo,
+            PartsExpress,
+            ScanGlobalLogistics,
+            SpedTrans,
+            SvennsTransport,
+            TotenTransport,
+            TromsoBudbilSentral,
+            TsnGroen,
+            Ubsend,
+            Varubud,
         )
     }
 }

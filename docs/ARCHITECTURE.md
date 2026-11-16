@@ -364,7 +364,7 @@ Key server modules:
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
     only.
 - **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an
-  assistant (Claude, ChatGPT, any MCP client) or make a personal token for a script. Every
+  assistant (Claude, ChatGPT, Gemini, any MCP client) or make a personal token for a script. Every
   other account gets 404 from `/api/account/assistants`, so Settings shows no row; with no
   list, `/mcp`, `/oauth/*` and their `.well-known` documents are not there.
   - Peek is the OAuth 2.1 authorization server of its own MCP endpoint, `/mcp`, with the
@@ -391,8 +391,11 @@ Key server modules:
   - A grant makes at most 120 requests a minute. A network may present 600 unknown tokens
     a minute, open the consent page 30 times a minute and register 20 clients an hour. An
     account has at most 50 grants and 10 personal tokens; Settings lists them and ends any.
+  - Settings also shows how to add Peek to Claude, ChatGPT and Gemini, with each one's menu
+    names in English as its help pages give them and the plans and places that can, and what
+    to ask a connected assistant, first to add the tracking numbers in the user's emails.
   - The tools work on the token's account alone, through the owner-checked functions the
-    app uses. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
+    app uses. They archive a parcel at most: none deletes one, and `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. Their answers leave out the receiver's name and postcode and read the
     scans as a link's viewer does (`viewerScans`): a delivery reads "Delivered", and a scan,
     status line or place that names the recipient, who signed, a code or a door is left out.

@@ -121,7 +121,9 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     { name: 'peek', title: 'Peek', version: '1.0.0' },
     {
       instructions: 'Peek follows the user\'s parcels. add_parcels reads tracking numbers out of text, such as a shipping '
-        + 'email\'s, and follows them; list_parcels and get_parcel tell where each parcel is.',
+        + 'email\'s, and follows them; list_parcels and get_parcel tell where each parcel is; archive_parcel puts one away. '
+        + 'When you can also read the user\'s mail, for example through a Gmail connector, and they ask, look through their '
+        + 'recent order and shipping emails and send each one\'s shipping part to add_parcels.',
     },
   );
   const reads = caller.scopes.includes('parcels:read');

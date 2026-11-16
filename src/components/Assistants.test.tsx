@@ -69,6 +69,26 @@ describe('assistants in Settings', () => {
     expect(screen.getByText('Home script')).toBeInTheDocument();
   });
 
+  it('shows how to add Peek to Claude, ChatGPT and Gemini, in their own words, and what to ask', async () => {
+    const user = userEvent.setup();
+    render(<AssistantsPage apiAuth={apiAuth} offer={offer([])} onChange={vi.fn()} />);
+    const setup = screen.getByRole('region', { name: 'Add Peek to your assistant' });
+    const names = Array.from(setup.querySelectorAll('summary')).map((summary) => summary.textContent);
+    expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›']);
+    await user.click(screen.getByText('Gemini'));
+    const steps = Array.from(setup.querySelectorAll('details[open] li')).map((step) => step.textContent);
+    expect(steps).toEqual([
+      'Open Settings, then Connected Apps.',
+      'Under Custom apps, paste the address above and select Next.',
+      'Sign in to Peek when it asks, then select Allow.',
+      'In a chat, type @ and pick Peek.',
+    ]);
+    // The assistant's own names stay as its help pages give them, out of a page translator's reach.
+    expect(screen.getByText('Connected Apps')).toHaveAttribute('translate', 'no');
+    const uses = screen.getByRole('region', { name: 'What to ask it' });
+    expect(uses.querySelector('li')).toHaveTextContent('Ask it to look through your emails and add the tracking numbers it finds. This works when it can read your mail too, for example through its Gmail connector.');
+  });
+
   it('makes a personal token and shows it once', async () => {
     vi.mocked(createPersonalToken).mockResolvedValue({ connection: made, token });
     const onChange = vi.fn();

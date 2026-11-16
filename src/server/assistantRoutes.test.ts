@@ -8,6 +8,7 @@ import { DELETE as deleteAccount } from '../../app/api/account/route';
 import { DELETE as disconnect } from '../../app/api/account/assistants/[id]/route';
 import { POST as consent } from '../../app/api/account/assistants/consent/route';
 import { GET as readAssistants, POST as createToken } from '../../app/api/account/assistants/route';
+import * as tokenApi from '../../app/api/parcels/route';
 import { GET as tokenParcels } from '../../app/api/parcels/route';
 import { DELETE as mcpDelete, GET as mcpGet, POST as mcpPost } from '../../app/mcp/route';
 import { POST as register } from '../../app/oauth/register/route';
@@ -215,6 +216,14 @@ describe('the MCP endpoint', () => {
     expect(await names(reader)).toEqual(['get_parcel', 'list_parcels']);
     expect(await names(writer)).toEqual(['add_parcels', 'archive_parcel', 'get_parcel', 'list_parcels']);
     expect(await names(reader, 'modern')).toEqual(['get_parcel', 'list_parcels']);
+  });
+
+  it('can archive a parcel but never delete one: these four tools, none destructive, and a token API that only reads', async () => {
+    const response = await mcp(connect(['parcels:read', 'parcels:write']), 'tools/list');
+    const tools = (await rpc(response)).result!.tools! as Array<{ name: string; annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean } }>;
+    expect(tools.map(({ name }) => name).sort()).toEqual(['add_parcels', 'archive_parcel', 'get_parcel', 'list_parcels']);
+    for (const { annotations } of tools) expect(annotations?.readOnlyHint === true || annotations?.destructiveHint === false).toBe(true);
+    expect(Object.keys(tokenApi).filter((name) => /^[A-Z]+$/.test(name))).toEqual(['GET']);
   });
 
   it('answers a 2026-07-28 client in JSON', async () => {

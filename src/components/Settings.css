@@ -137,6 +137,16 @@
 .add-by-email__renew + .settings-row { border-top: 1px solid var(--line); }
 .add-by-email__renew .sheet__actions { margin-top: 12px; }
 .assistants__item { justify-content: space-between; }
+.assistants__setup + .assistants__setup { border-top: 1px solid var(--line); }
+.assistants__setup > summary { cursor: pointer; list-style: none; font-weight: 550; }
+.assistants__setup > summary::-webkit-details-marker { display: none; }
+.assistants__setup > summary .settings-chevron { transition: transform .15s ease; }
+.assistants__setup[open] > summary .settings-chevron { transform: rotate(90deg); }
+.assistants__setup-body { padding: 0 14px 4px; }
+.assistants__who { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
+.assistants__uses { margin: 0; padding: 12px 14px 12px 32px; display: grid; gap: 8px; font-size: 13px; line-height: 1.5; }
+.assistants__uses strong { font-weight: 550; }
+@media (prefers-reduced-motion: reduce) { .assistants__setup > summary .settings-chevron { transition: none; } }
 .assistants__what { display: grid; gap: 3px; min-width: 0; }
 .assistants__what strong { font-weight: 550; overflow-wrap: anywhere; }
 .assistants__what small { color: var(--ink-soft); font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }

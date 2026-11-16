@@ -641,11 +641,10 @@ describe('carrier detection', () => {
     // REPORTED REAL 00/other Track IDs.
     // Sources: https://forum.quechoisir.org/probleme-colis-mondial-relay-gls-t286523.html (00E7V8YY)
     // https://forum.quechoisir.org/probleme-colis-mondial-relay-gls-t286523-40.html (ZBH2FY7Q)
-    // GLS Netherlands issues 00 track IDs too, so the release that adds it lists GLS France first instead of
-    // choosing it. Either answer passes until that release is adopted.
+    // GLS Netherlands issues 00 track IDs too, so GLS France is listed first, and its recognition confirms
+    // its own parcels.
     for (const number of ['00AB12CD', '00E7V8YY', '00IU9SEC']) {
-      const match = detectCarrierMatch(number);
-      expect(match.carrier === 'gls-fr' || (match.confidence === 'low' && match.preferred[0] === 'gls-fr')).toBe(true);
+      expect(detectCarrierMatch(number)).toMatchObject({ carrier: 'unknown', confidence: 'low', preferred: ['gls-fr'] });
     }
     for (const number of ['ZBH2FY7Q', '20189360332']) {
       const match = detectCarrierMatch(number);

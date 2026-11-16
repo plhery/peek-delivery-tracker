@@ -593,15 +593,17 @@ begin
     raise exception 'A number already in the box was kept again: %', answer;
   end if;
 
-  -- A viewer's copy has the number and the visible history, nothing the sharer entered.
+  -- A viewer's copy has the number and carrier, nothing the sharer entered and none of its history: the scans a
+  -- link hides from viewers, or a carrier told only the sharer's postcode, come from the copy's own first check.
   answer := public.claim_parcel_link(current_setting('parcel_test.shown_link'), null, 'Shared with me');
   if answer->>'outcome' <> 'kept' or not exists (
         select 1 from public.packages
         where id = (answer->>'package_id')::uuid and tracking_number = 'ONEOFFKEEP0005' and label = 'Shared with me'
           and carrier = 'gls-ch' and dpd_postcode is null and tracking_url is null and carrier_data = '{}'::jsonb
-          and current_stage = 'in_transit' and sync_status = 'pending' and last_synced_at is null
+          and current_stage = 'pending' and expected_delivery is null and last_status_text is null
+          and sync_status = 'pending' and last_synced_at is null
       )
-      or (select count(*) from public.tracking_events where package_id = (answer->>'package_id')::uuid) <> 2 then
+      or (select count(*) from public.tracking_events where package_id = (answer->>'package_id')::uuid) <> 1 then
     raise exception 'A viewer''s copy is wrong: %', answer;
   end if;
 

@@ -240,6 +240,11 @@ Key server modules:
     without the number asks for it from whoever shared the parcel while they can be paid
     online. The owner sees everything. A gift cannot be kept by a viewer before it is
     delivered; the database refuses it, not only the page.
+  - **Keeping**: a viewer who keeps a parcel gets its number and carrier, not its stored
+    history. The copy's own first check fills its scans, so the scans and status line a link
+    hides from viewers, and whatever the carrier told only the owner's postcode or phone
+    digits, stay with the owner (`claim_parcel_link`). A lookup's own key or account keeps
+    the history.
   - The page's metadata and preview image are built from the viewer's answer
     (`viewerParcel`), never from the stored row.
   - **Stopping** makes the link answer "not shared" to everyone but a lookup's owner and

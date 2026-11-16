@@ -82,6 +82,13 @@ begin
     perform public.create_one_off_parcel('JTMXTEST0102', 'dhl', null, null, key_a, '0472');
     raise exception 'A lookup kept phone digits for a carrier that never reads them' using errcode = 'P0001';
   exception when check_violation then null; end;
+  -- What the digits brought: a delivery naming its recipient, and the carrier's status line.
+  insert into public.tracking_events (package_id, provider_event_id, stage, description, location, occurred_at, raw_data)
+  values ((first#>>'{package,id}')::uuid, 'test:private', 'delivered', 'Synthetic delivery signed by a synthetic name',
+    'Synthetic Street 1', now(), '{"signed_by":"Synthetic Name"}');
+  update public.packages
+  set current_stage = 'delivered', expected_delivery = '2026-11-16', last_status_text = 'Synthetic status line'
+  where id = (first#>>'{package,id}')::uuid;
 end;
 $$;
 
@@ -96,6 +103,7 @@ begin
       or (select phone_digits from public.packages where id = (answer->>'package_id')::uuid) is distinct from '0472' then
     raise exception 'The key holder''s copy lost the phone digits: %', answer->>'outcome';
   end if;
+  perform set_config('digits_test.key_holder_copy', answer->>'package_id', true);
 end;
 $$;
 
@@ -108,6 +116,26 @@ begin
   if answer->>'outcome' <> 'kept'
       or (select phone_digits from public.packages where id = (answer->>'package_id')::uuid) is not null then
     raise exception 'A viewer''s copy was given someone else''s phone digits: %', answer->>'outcome';
+  end if;
+  perform set_config('digits_test.viewer_copy', answer->>'package_id', true);
+end;
+$$;
+
+-- The key holder's copy keeps the parcel's history; a viewer's starts as a new lookup of the number.
+set local role service_role;
+do $$
+declare
+  mine uuid := current_setting('digits_test.key_holder_copy')::uuid;
+  seen uuid := current_setting('digits_test.viewer_copy')::uuid;
+begin
+  if not exists (select 1 from public.tracking_events where package_id = mine and provider_event_id = 'test:private')
+      or (select last_status_text from public.packages where id = mine) is distinct from 'Synthetic status line' then
+    raise exception 'The key holder''s copy lost the parcel''s history';
+  end if;
+  if exists (select 1 from public.tracking_events where package_id = seen and provider_event_id like 'test:%')
+      or exists (select 1 from public.packages where id = seen and (current_stage <> 'pending'
+        or expected_delivery is not null or last_status_text is not null)) then
+    raise exception 'A viewer''s copy was given the parcel''s scans or status';
   end if;
 end;
 $$;

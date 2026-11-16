@@ -52,6 +52,7 @@ struct ParcelLinkSheet: View {
         .task(id: links.presentationID) {
             errorMessage = nil
             await links.load()
+            await links.followCheck()
         }
         .task(id: handOver == nil ? nil : links.presentationID) {
             guard let response = handOver, handedOver != links.presentationID else { return }

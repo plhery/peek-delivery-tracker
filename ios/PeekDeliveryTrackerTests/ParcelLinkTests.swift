@@ -313,6 +313,67 @@ final class ParcelLinkTests: XCTestCase {
         XCTAssertNil(ParcelLinkFailure(URLError(.cancelled)))
     }
 
+    @MainActor func testTheSheetReadsAgainUntilTheCheckItWaitsForLands() async throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        var checked = try fixture().publicParcel
+        checked.package.syncStatus = .ok
+        checked.checkQueued = nil
+        var queued = checked
+        queued.checkQueued = true
+        var first = checked
+        first.package.syncStatus = .pending
+
+        // A check queued on opening: read again at 2 s, then 3 s, until an answer no longer waits for it.
+        var answers = [queued, queued, checked]
+        var reads = 0
+        let store = ParcelLinkStore(defaults: defaults, read: { _, _ in reads += 1; return answers.isEmpty ? checked : answers.removeFirst() })
+        store.open(ParcelLinkRoute(id: linkID))
+        await store.load()
+        var waits: [Duration] = []
+        await store.followCheck(sleep: { waits.append($0) })
+        XCTAssertEqual(waits, [.seconds(2), .seconds(3)])
+        XCTAssertEqual(reads, 3)
+        XCTAssertEqual(store.phase, .shown(checked))
+
+        // Nothing on its way: nothing read again.
+        waits = []
+        await store.followCheck(sleep: { waits.append($0) })
+        XCTAssertEqual(waits, [])
+        XCTAssertEqual(reads, 3)
+
+        // A first check that never lands is read for about a minute, ten seconds apart at most.
+        answers = Array(repeating: first, count: 20)
+        store.open(ParcelLinkRoute(id: linkID))
+        await store.load()
+        await store.followCheck(sleep: { waits.append($0) })
+        XCTAssertEqual(waits.count, 9)
+        XCTAssertEqual(waits.last, .seconds(10))
+        XCTAssertLessThan(waits.dropLast().reduce(Duration.zero, +), .seconds(60))
+        XCTAssertGreaterThanOrEqual(waits.reduce(Duration.zero, +), .seconds(60))
+
+        // The link opened again, or the service asking for a pause, ends the reads.
+        answers = Array(repeating: queued, count: 20)
+        store.open(ParcelLinkRoute(id: linkID))
+        await store.load()
+        reads = 0
+        await store.followCheck(sleep: { _ in store.open(ParcelLinkRoute(id: self.linkID)) })
+        XCTAssertEqual(reads, 0)
+        var paused = false
+        let limited = ParcelLinkStore(defaults: defaults, read: { _, _ in
+            if paused { throw DeliveryAPIError.rateLimited(30) }
+            paused = true
+            return queued
+        })
+        limited.open(ParcelLinkRoute(id: linkID))
+        await limited.load()
+        waits = []
+        await limited.followCheck(sleep: { waits.append($0) })
+        XCTAssertEqual(waits, [.seconds(2)])
+        XCTAssertEqual(limited.refreshFailure, .rateLimited)
+        XCTAssertEqual(limited.phase, .shown(queued))
+    }
+
     @MainActor func testABuildWithoutAServerNeverReadsALink() async {
         let (defaults, suite) = defaults()
         defer { defaults.removePersistentDomain(forName: suite) }

@@ -259,6 +259,33 @@ final class ParcelLinkStore: ObservableObject {
         }
     }
 
+    /// Reads the link again while its parcel waits for a check: until the first one lands, and while an answer says one
+    /// is queued or under way (`checkQueued`, as opening the link queues one when the parcel is due). After 2 s, then
+    /// ever more slowly up to 10 s, for about a minute, as the web page does: the check's result shows as it lands
+    /// rather than at the next pull. A link opened again or gone, or the service asking for a pause, ends it.
+    func followCheck(sleep: @MainActor (Duration) async throws -> Void = { try await Task.sleep(for: $0) }) async {
+        let presentation = presentationID
+        var wait = Self.checkReadFirst
+        var waited = Duration.zero
+        while waited < Self.checkReadFor, presentationID == presentation, route != nil, refreshFailure != .rateLimited,
+              case .shown(let response) = phase, Self.awaitsCheck(response) {
+            do { try await sleep(wait) } catch { return }
+            guard !Task.isCancelled, presentationID == presentation else { return }
+            waited += wait
+            wait = min(wait * 1.5, Self.checkReadMax)
+            await load()
+        }
+    }
+
+    static let checkReadFirst = Duration.seconds(2)
+    static let checkReadMax = Duration.seconds(10)
+    static let checkReadFor = Duration.seconds(60)
+
+    /// The parcel's first check has not landed yet, or the service says a check is on its way.
+    static func awaitsCheck(_ response: PublicParcelResponse) -> Bool {
+        response.checkQueued == true || response.package.syncStatus == .pending || response.package.syncStatus == .syncing
+    }
+
     /// Keeps the link across sign-in. The sheet closes; `resume` opens it again.
     func rememberForSignIn() {
         guard let route else { return }

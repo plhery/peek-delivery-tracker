@@ -172,7 +172,8 @@ Key server modules:
     (`hidesDestinationLeg`). An account's parcel and the iPhone app show the same note.
   - Opening a lookup's link queues a check once its cadence has come round, and the answer
     says so (`checkQueued`): the page reads again after 2 s, then more slowly up to 10 s, for a
-    minute at most, so the check's result shows as it lands rather than 30 s later.
+    minute at most, so the check's result shows as it lands rather than 30 s later. The iPhone
+    app's link sheet does the same, also until the parcel's first check lands.
   - `parcel_links` and the lookup counters are service-role only. An unknown, forgotten,
     expired or malformed link and a wrong key all get the same answer.
   - Keeping a parcel runs under the user's own token: the database checks the key, the

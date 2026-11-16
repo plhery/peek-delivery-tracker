@@ -704,6 +704,7 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   A postcode stored for it that it refuses, asking for it again or finding it invalid, or
   finding no parcel with it while the parcel is past its label, is flagged to the owner as DPD's
   own refusal is, until the carrier answers or the owner changes the postcode (`routing.postcode_refused`).
+  Before the parcel's first scan the list then says it wasn't found with that postcode, not that it waits for the carrier.
   A carrier that finds the parcel by its number alone and only shows more with the postcode
   (DPD) finding no parcel has lost the number, which is no refusal. A lookup without an account shows the request
   to whoever holds the link's owner key, and to no viewer

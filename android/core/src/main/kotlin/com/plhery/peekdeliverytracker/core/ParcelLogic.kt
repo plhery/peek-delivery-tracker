@@ -455,6 +455,8 @@ val Parcel.displayStatus: ParcelDisplayStatus
         if (!hasCarrierUpdate && (syncStatus == SyncStatus.Pending || syncStatus == SyncStatus.Syncing)) {
             return ParcelDisplayStatus("status.syncing", ParcelTone.Normal, syncing = true)
         }
+        // Its own carrier refused the postcode its owner gave: the owner should check that one, not wait for the carrier.
+        if (!hasCarrierUpdate && refusedPostcode != null) return ParcelDisplayStatus("status.postcodeRefused", ParcelTone.Normal, syncing = false)
         // Its carrier has not listed the number yet, or could not be reached: Peek keeps asking.
         if (awaitedCarrier != null) return ParcelDisplayStatus("status.waitingFor", ParcelTone.Normal, syncing = false)
         if (!hasCarrierUpdate && syncStatus == SyncStatus.Error) {

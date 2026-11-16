@@ -101,6 +101,11 @@ export function parcelIsUnannounced(parcel: ParcelWithEvents): boolean {
   return !parcelHasCarrierUpdate(parcel) && parcel.syncStatus === 'waiting';
 }
 
+/** The parcel's own carrier found no parcel with the postcode stored for it (PostNL's refusal), as its page says. */
+function ownCarrierRefusedPostcode(parcel: ParcelWithEvents): boolean {
+  return parcel.postcodeRefused === true && Boolean(parcel.dpdPostcode?.trim());
+}
+
 /** Keep the app's sync lifecycle separate from the carrier's delivery stage. */
 export function parcelDisplayStatus(parcel: ParcelWithEvents): ParcelDisplayStatus {
   const current = currentEvent(parcel.events, parcel.returnHeld);
@@ -116,6 +121,7 @@ export function parcelDisplayStatus(parcel: ParcelWithEvents): ParcelDisplayStat
   if (!hasCarrierUpdate && (parcel.syncStatus === 'pending' || parcel.syncStatus === 'syncing')) {
     return { label: 'Checking for updates', tone: 'ok', syncing: true };
   }
+  if (!hasCarrierUpdate && ownCarrierRefusedPostcode(parcel)) return { label: 'Not found with your postcode', tone: 'warn', syncing: false };
   if (awaitedCarrier(parcel)) return { label: 'Waiting for the carrier', tone: 'ok', syncing: false };
   if (!hasCarrierUpdate && parcel.syncStatus === 'error') {
     return { label: 'Update unavailable', tone: 'warn', syncing: false };
@@ -156,6 +162,8 @@ export function parcelDisplayStatusKey(parcel: ParcelWithEvents): MessageKey {
   if (!hasCarrierUpdate && (parcel.syncStatus === 'pending' || parcel.syncStatus === 'syncing')) {
     return 'status.syncing';
   }
+  // Its own carrier refused the postcode its owner gave: the owner should check that one, not wait for the carrier.
+  if (!hasCarrierUpdate && ownCarrierRefusedPostcode(parcel)) return 'status.postcodeRefused';
   // Its carrier has not listed the number yet, or could not be reached: Peek keeps asking.
   if (awaitedCarrier(parcel)) return 'status.waitingFor';
   if (!hasCarrierUpdate && parcel.syncStatus === 'error') return 'status.failed';

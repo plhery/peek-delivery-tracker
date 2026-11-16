@@ -504,6 +504,12 @@ class ParcelLogicTests {
             ),
         )
         assertEquals("8000", refused.refusedPostcode)
+        // Before its first scan the list says the postcode wasn't found, not that it waits for the carrier.
+        val unscanned = refused.copy(trackingEvents = emptyList(), syncStatus = SyncStatus.Waiting)
+        assertEquals("status.postcodeRefused", unscanned.displayStatus.key)
+        assertEquals("status.postcodeRefused", unscanned.copy(syncStatus = SyncStatus.Error, syncError = "carrier:input_required").displayStatus.key)
+        assertEquals("status.waitingFor", withPostcode.copy(trackingEvents = emptyList(), syncStatus = SyncStatus.Waiting).displayStatus.key)
+        assertEquals("stage.in_transit", refused.displayStatus.key)
         refused = refused.copy(carrier = CarrierId.Dpd)
         assertNull(refused.refusedPostcode)
         val archived = parcel.copy(archivedAt = "2026-08-10T10:00:00Z")

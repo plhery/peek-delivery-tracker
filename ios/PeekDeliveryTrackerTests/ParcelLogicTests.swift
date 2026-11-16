@@ -522,6 +522,20 @@ final class ParcelLogicTests: XCTestCase {
         var refused = withPostcode
         refused.carrierData?.routing?.postcodeRefused = CarrierPostcodeRefused(carrier: .glsCh)
         XCTAssertEqual(refused.refusedPostcode, "8000")
+        // Before its first scan the list says the postcode wasn't found, not that it waits for the carrier.
+        var unscanned = refused
+        unscanned.trackingEvents = []
+        unscanned.syncStatus = .waiting
+        XCTAssertEqual(unscanned.displayStatus.key, "status.postcodeRefused")
+        unscanned.syncStatus = .error
+        unscanned.syncError = "carrier:input_required"
+        XCTAssertEqual(unscanned.displayStatus.key, "status.postcodeRefused")
+        var unrefused = unscanned
+        unrefused.carrierData?.routing?.postcodeRefused = nil
+        unrefused.syncStatus = .waiting
+        unrefused.syncError = nil
+        XCTAssertEqual(unrefused.displayStatus.key, "status.waitingFor")
+        XCTAssertEqual(refused.displayStatus.key, "stage.in_transit")
         refused.carrier = .dpd
         XCTAssertNil(refused.refusedPostcode)
         var archived = parcel

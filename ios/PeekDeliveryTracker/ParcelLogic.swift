@@ -375,6 +375,10 @@ extension Parcel {
         if !hasCarrierUpdate && (syncStatus == .pending || syncStatus == .syncing) {
             return ParcelDisplayStatus(key: "status.syncing", tone: .normal, syncing: true)
         }
+        // Its own carrier refused the postcode its owner gave: the owner should check that one, not wait for the carrier.
+        if !hasCarrierUpdate && refusedPostcode != nil {
+            return ParcelDisplayStatus(key: "status.postcodeRefused", tone: .normal, syncing: false)
+        }
         // Its carrier has not listed the number yet, or could not be reached: Peek keeps asking.
         if awaitedCarrier != nil {
             return ParcelDisplayStatus(key: "status.waitingFor", tone: .normal, syncing: false)

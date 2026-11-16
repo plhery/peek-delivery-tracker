@@ -72,6 +72,21 @@ describe('parcelDisplayStatus', () => {
     }
   });
 
+  it('says its own carrier did not find the parcel with the postcode its owner gave, rather than waiting for it', () => {
+    const waiting = { ...parcel('waiting'), carrier: 'spring-gds' as const, trackingNumber: '3SABCD826405193', dpdPostcode: '1234 AB' };
+    expect(parcelDisplayStatusKey(waiting)).toBe('status.waitingFor');
+    for (const refused of [{ ...waiting, postcodeRefused: true }, { ...waiting, postcodeRefused: true, syncStatus: 'error' as const, syncError: 'carrier:transport' },
+      { ...waiting, postcodeRefused: true, syncStatus: 'error' as const, syncError: 'carrier:input_required' }]) {
+      expect(parcelDisplayStatusKey(refused)).toBe('status.postcodeRefused');
+      expect(parcelDisplayStatus(refused)).toEqual({ label: en['status.postcodeRefused'], tone: 'warn', syncing: false });
+      // Its first scan says more; a check under way says so.
+      expect(parcelDisplayStatusKey({ ...refused, events: parcel('waiting', 'in_transit').events })).toBe('stage.in_transit');
+      expect(parcelDisplayStatusKey({ ...refused, syncStatus: 'syncing' })).toBe('status.syncing');
+    }
+    // Without a postcode stored there is none to check.
+    expect(parcelDisplayStatusKey({ ...waiting, dpdPostcode: undefined, postcodeRefused: true })).toBe('status.waitingFor');
+  });
+
   it.each(['carrier:refused_number', 'carrier:placeholder_number', 'carrier:number_unknown'])('asks to check a number no carrier will answer for (%s)', (syncError) => {
     for (const carrier of ['swiss-post', 'unknown'] as const) {
       const refused = { ...parcel('error'), carrier, syncError };

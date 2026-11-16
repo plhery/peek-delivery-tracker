@@ -19,6 +19,8 @@ import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.PushNotifications
 import java.io.File
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * POST_NOTIFICATIONS' question (Android 13 and later), asked from the window on screen as iOS's
@@ -35,7 +37,11 @@ class NotificationPermission(context: Context) {
     private class Window(val activity: ComponentActivity, val launcher: ActivityResultLauncher<String>)
 
     private val windows = mutableListOf<Window>()
-    private val marker = File(context.noBackupFilesDir, MARKER)
+    private val marker by lazy { File(context.noBackupFilesDir, MARKER) }
+
+    /** The marker as last read or written; null until then. */
+    @Volatile
+    private var marked: Boolean? = null
     private var answer: CompletableDeferred<Boolean>? = null
 
     /** The window that asked, or the next one made after it while it is made again; null while none waits for it. */
@@ -68,8 +74,11 @@ class NotificationPermission(context: Context) {
         })
     }
 
-    /** Whether the question was answered before, granted or refused. */
-    val answered: Boolean get() = marker.exists()
+    /** Whether the question was answered before, granted or refused: the marker, read once. */
+    val answered: Boolean get() = marked ?: marker.exists().also { marked = it }
+
+    /** [answered], read away from the main thread the first time. */
+    suspend fun answered(): Boolean = marked ?: withContext(Dispatchers.IO) { answered }
 
     /** `shouldShowRequestPermissionRationale`: refused once, Android would still ask. */
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -112,7 +121,7 @@ class NotificationPermission(context: Context) {
         lastRationale = rationale
         // A first refusal asks for a rationale, a second ends it; a dismissal leaves it as it was, unanswered; a refusal
         // without the question is Android's own, which no longer asks.
-        if (granted || rationale || rationaleBefore || !shown) runCatching { marker.createNewFile() }
+        if (granted || rationale || rationaleBefore || !shown) runCatching { marker.createNewFile() }.onSuccess { marked = true }
         end(granted)
     }
 
@@ -191,7 +200,7 @@ class AndroidPushNotifications(
     override suspend fun authorizationStatus(): NotificationAuthorizationStatus = NotificationAuthorizationStatus.fromAndroid(
         sdkInt = Build.VERSION.SDK_INT,
         granted = granted(),
-        askedBefore = permission.answered,
+        askedBefore = permission.answered(),
         shouldShowRationale = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU && permission.rationale(),
         areNotificationsEnabled = enabled(),
     )

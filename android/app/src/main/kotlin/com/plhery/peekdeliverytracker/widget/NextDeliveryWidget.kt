@@ -62,6 +62,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * `NextDeliveryWidget`: the next deliveries on the home screen, in the app's language, as the app's cards once it has
@@ -77,8 +78,8 @@ class NextDeliveryWidget : GlanceAppWidget() {
     override val previewSizeMode = SizeMode.Responsive(PREVIEW_SIZES)
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val source = DeliveryWidgetSource.of(context)
-        DeliveryWidgetUpdates.schedule(context, source.store)
+        val source = DeliveryWidgetSource.placed(context)
+        source.decode(AppClock.now())
         provideContent { NextDeliveryWidgetBody(source) }
     }
 
@@ -87,12 +88,14 @@ class NextDeliveryWidget : GlanceAppWidget() {
      * them, the demo's until then.
      */
     override suspend fun providePreview(context: Context, widgetCategory: Int) {
-        val source = DeliveryWidgetSource.of(context)
+        val entries = withContext(Dispatchers.IO) {
+            val source = DeliveryWidgetSource.of(context)
+            val at = AppClock.now()
+            listOf(false, true).associateWith { medium -> source.preview(medium, at) }
+        }
         provideContent {
             val size = LocalSize.current
-            val medium = isMedium(size)
-            val entry = remember(medium) { source.preview(medium, AppClock.now()) }
-            DeliveryWidgetContent(entry, size)
+            DeliveryWidgetContent(entries.getValue(isMedium(size)), size)
         }
     }
 
@@ -222,6 +225,14 @@ class DeliveryWidgetSource(
     fun preview(medium: Boolean, at: Instant): DeliveryWidgetEntry<WidgetCardArt> =
         current(medium, at).takeIf { it.art.isNotEmpty() } ?: placeholder(medium, at)
 
+    /**
+     * The cards' pictures [current] shows at either size, decoded away from the main thread, which the widget's layout
+     * is composed on and then finds them decoded ([WidgetPictures]).
+     */
+    suspend fun decode(at: Instant) {
+        withContext(Dispatchers.IO) { for (medium in listOf(false, true)) current(medium, at) }
+    }
+
     /** `DeliveryWidgetCardArt`: the mark, and the route as `shape` shows it; null while the mark isn't there. */
     internal fun read(card: DeliveryWidgetCard, shape: DeliveryWidgetPicture): WidgetCardArt? {
         fun image(picture: DeliveryWidgetPicture, dark: Boolean): Bitmap? = picture.file(card, dark, folder).let { file ->
@@ -252,6 +263,14 @@ class DeliveryWidgetSource(
             DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context.applicationContext, BuildSettings.configuration.appGroupIdentifier)),
             WidgetCardPictures.folder(context.applicationContext),
         )
+
+        /**
+         * A placed widget's source, its timeline's next entry set: away from the main thread, which Glance asks for a
+         * widget's content on.
+         */
+        suspend fun placed(context: Context): DeliveryWidgetSource = withContext(Dispatchers.IO) {
+            of(context).also { DeliveryWidgetUpdates.schedule(context, it.store) }
+        }
     }
 }
 
@@ -294,23 +313,25 @@ object DeliveryWidgetUpdates {
         ParcelsWidget.draw(app)
     }
 
-    /** [update], from where nothing waits for it but `done`. */
+    /** [update], from where nothing waits for it but `done`: off the main thread, which the app's store publishes on. */
     fun reload(context: Context, done: () -> Unit = {}) {
         val app = context.applicationContext
-        invalidate(app)
         scope.launch {
             try {
-                NextDeliveryWidget().updateAll(app)
-                ParcelsWidget.draw(app)
+                update(app)
             } finally {
                 done()
             }
         }
     }
 
-    private fun invalidate(context: Context) {
+    /** A widget shown reads the store again, the cards' pictures decoded first while one is placed; and the next refresh. */
+    private suspend fun invalidate(context: Context) {
+        val source = DeliveryWidgetSource.of(context)
+        val placed = isPlaced(context)
+        if (placed) source.decode(AppClock.now())
         revisionState.update { it + 1 }
-        schedule(context, DeliveryWidgetSource.of(context).store)
+        schedule(context, source.store, placed = placed)
     }
 
     /**

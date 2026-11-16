@@ -359,6 +359,22 @@ class NextDeliveryWidgetTest {
         assertEquals(2, own.cards.size)
     }
 
+    /**
+     * The cards' pictures are decoded away from the main thread, before the widget's layout is composed there: once
+     * decoded, the layout has them with their files gone.
+     */
+    @Test
+    fun decodedPicturesNeedNoDiskToBeShown() = runBlocking {
+        val folder = files.newFolder("WidgetCards")
+        val store = DeliveryWidgetSharedStore(com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults())
+        val source = widgetSource(app, folder, store)
+        publishDemo(app, store, folder, scale = 2.0)
+        source.decode(CAPTURED)
+        folder.listFiles().orEmpty().forEach { it.delete() }
+        assertEquals(1, source.current(medium = false, CAPTURED).cards.size)
+        assertEquals(2, source.current(medium = true, CAPTURED).cards.size)
+    }
+
     /** A widget on the home screen, as a launcher binds one. */
     private fun place() = shadowOf(AppWidgetManager.getInstance(app)).bindAppWidgetId(1, ComponentName(app, NextDeliveryWidgetReceiver::class.java))
 

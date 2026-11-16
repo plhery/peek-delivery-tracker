@@ -27,6 +27,7 @@ import kotlin.math.floor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * `ParcelsWidget`: the parcels on their way on the home screen, next to [NextDeliveryWidget], in its order and from what
@@ -42,18 +43,14 @@ class ParcelsWidget : GlanceAppWidget() {
     override val previewSizeMode = SizeMode.Responsive(PREVIEW_SIZES)
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
-        val source = DeliveryWidgetSource.of(context)
-        DeliveryWidgetUpdates.schedule(context, source.store)
+        val source = DeliveryWidgetSource.placed(context)
         provideContent { ParcelsWidgetBody(source) }
     }
 
     /** The gallery's picture: the sample's parcels, never the reader's, in the reader's language. */
     override suspend fun providePreview(context: Context, widgetCategory: Int) {
-        val source = DeliveryWidgetSource.of(context)
-        provideContent {
-            val list = remember { source.listSample(AppClock.now()) }
-            ParcelsWidgetContent(list, LocalSize.current)
-        }
+        val list = withContext(Dispatchers.IO) { DeliveryWidgetSource.of(context).listSample(AppClock.now()) }
+        provideContent { ParcelsWidgetContent(list, LocalSize.current) }
     }
 
     companion object {

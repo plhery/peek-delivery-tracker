@@ -1789,6 +1789,34 @@ value class CarrierId(val rawValue: String) {
         val PickupMtaani = CarrierId("pickup-mtaani")
         val PostnetZa = CarrierId("postnet-za")
         val RedStarExpress = CarrierId("red-star-express")
+        val AlfaDeliveryKz = CarrierId("alfa-delivery-kz")
+        val Chapar = CarrierId("chapar")
+        val Citypak = CarrierId("citypak")
+        val FardarExpressLk = CarrierId("fardar-express-lk")
+        val Gaaubesi = CarrierId("gaaubesi")
+        val GeorgianPost = CarrierId("georgian-post")
+        val GfsExpress = CarrierId("gfs-express")
+        val JanaPost = CarrierId("jana-post")
+        val JananiExpress = CarrierId("janani-express")
+        val Koombiyo = CarrierId("koombiyo")
+        val KuwaitPost = CarrierId("kuwait-post")
+        val Mahex = CarrierId("mahex")
+        val MnpostMn = CarrierId("mnpost-mn")
+        val MongolPost = CarrierId("mongol-post")
+        val NepalCanMove = CarrierId("nepal-can-move")
+        val NomexKg = CarrierId("nomex-kg")
+        val OnwayGe = CarrierId("onway-ge")
+        val QuickboxKg = CarrierId("quickbox-kg")
+        val SendoKg = CarrierId("sendo-kg")
+        val Tipax = CarrierId("tipax")
+        val TmCargoPk = CarrierId("tm-cargo-pk")
+        val TrackingsGe = CarrierId("trackings-ge")
+        val TransExpressLk = CarrierId("trans-express-lk")
+        val TurboEg = CarrierId("turbo-eg")
+        val UnitedAz = CarrierId("united-az")
+        val Wakilni = CarrierId("wakilni")
+        val XalqGlobal = CarrierId("xalq-global")
+        val ZmcExpress = CarrierId("zmc-express")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3519,6 +3547,34 @@ value class CarrierId(val rawValue: String) {
             PickupMtaani,
             PostnetZa,
             RedStarExpress,
+            AlfaDeliveryKz,
+            Chapar,
+            Citypak,
+            FardarExpressLk,
+            Gaaubesi,
+            GeorgianPost,
+            GfsExpress,
+            JanaPost,
+            JananiExpress,
+            Koombiyo,
+            KuwaitPost,
+            Mahex,
+            MnpostMn,
+            MongolPost,
+            NepalCanMove,
+            NomexKg,
+            OnwayGe,
+            QuickboxKg,
+            SendoKg,
+            Tipax,
+            TmCargoPk,
+            TrackingsGe,
+            TransExpressLk,
+            TurboEg,
+            UnitedAz,
+            Wakilni,
+            XalqGlobal,
+            ZmcExpress,
         )
     }
 }

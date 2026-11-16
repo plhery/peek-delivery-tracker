@@ -1780,6 +1780,34 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let pickupMtaani = CarrierID(rawValue: "pickup-mtaani")
     static let postnetZa = CarrierID(rawValue: "postnet-za")
     static let redStarExpress = CarrierID(rawValue: "red-star-express")
+    static let alfaDeliveryKz = CarrierID(rawValue: "alfa-delivery-kz")
+    static let chapar = CarrierID(rawValue: "chapar")
+    static let citypak = CarrierID(rawValue: "citypak")
+    static let fardarExpressLk = CarrierID(rawValue: "fardar-express-lk")
+    static let gaaubesi = CarrierID(rawValue: "gaaubesi")
+    static let georgianPost = CarrierID(rawValue: "georgian-post")
+    static let gfsExpress = CarrierID(rawValue: "gfs-express")
+    static let janaPost = CarrierID(rawValue: "jana-post")
+    static let jananiExpress = CarrierID(rawValue: "janani-express")
+    static let koombiyo = CarrierID(rawValue: "koombiyo")
+    static let kuwaitPost = CarrierID(rawValue: "kuwait-post")
+    static let mahex = CarrierID(rawValue: "mahex")
+    static let mnpostMn = CarrierID(rawValue: "mnpost-mn")
+    static let mongolPost = CarrierID(rawValue: "mongol-post")
+    static let nepalCanMove = CarrierID(rawValue: "nepal-can-move")
+    static let nomexKg = CarrierID(rawValue: "nomex-kg")
+    static let onwayGe = CarrierID(rawValue: "onway-ge")
+    static let quickboxKg = CarrierID(rawValue: "quickbox-kg")
+    static let sendoKg = CarrierID(rawValue: "sendo-kg")
+    static let tipax = CarrierID(rawValue: "tipax")
+    static let tmCargoPk = CarrierID(rawValue: "tm-cargo-pk")
+    static let trackingsGe = CarrierID(rawValue: "trackings-ge")
+    static let transExpressLk = CarrierID(rawValue: "trans-express-lk")
+    static let turboEg = CarrierID(rawValue: "turbo-eg")
+    static let unitedAz = CarrierID(rawValue: "united-az")
+    static let wakilni = CarrierID(rawValue: "wakilni")
+    static let xalqGlobal = CarrierID(rawValue: "xalq-global")
+    static let zmcExpress = CarrierID(rawValue: "zmc-express")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3510,6 +3538,34 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .pickupMtaani,
         .postnetZa,
         .redStarExpress,
+        .alfaDeliveryKz,
+        .chapar,
+        .citypak,
+        .fardarExpressLk,
+        .gaaubesi,
+        .georgianPost,
+        .gfsExpress,
+        .janaPost,
+        .jananiExpress,
+        .koombiyo,
+        .kuwaitPost,
+        .mahex,
+        .mnpostMn,
+        .mongolPost,
+        .nepalCanMove,
+        .nomexKg,
+        .onwayGe,
+        .quickboxKg,
+        .sendoKg,
+        .tipax,
+        .tmCargoPk,
+        .trackingsGe,
+        .transExpressLk,
+        .turboEg,
+        .unitedAz,
+        .wakilni,
+        .xalqGlobal,
+        .zmcExpress,
     ]
 
     init(from decoder: Decoder) throws {

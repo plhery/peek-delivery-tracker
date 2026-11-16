@@ -58971,6 +58971,728 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://redstarplc.com/tracker/"
+    },
+    "alfa-delivery-kz": {
+      "displayName": "Alfa Delivery Services",
+      "aliases": [
+        "Alfa Delivery"
+      ],
+      "countries": [
+        "KZ"
+      ],
+      "color": "#011689",
+      "selectable": true,
+      "timezone": "Asia/Almaty",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://adskz.com/en"
+    },
+    "chapar": {
+      "displayName": "Chapar",
+      "aliases": [
+        "Kalaresanan Chapar",
+        "چاپار",
+        "کالارسانان چاپار"
+      ],
+      "countries": [
+        "IR"
+      ],
+      "color": "#034694",
+      "selectable": true,
+      "timezone": "Asia/Tehran",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.chaparnet.com/track/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "chaparnet.com",
+            "www.chaparnet.com"
+          ],
+          "path": "^/track/([0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.chaparnet.com/track"
+    },
+    "citypak": {
+      "displayName": "Citypak",
+      "aliases": [
+        "CityPak"
+      ],
+      "countries": [
+        "LK"
+      ],
+      "color": "#fd0100",
+      "selectable": true,
+      "timezone": "Asia/Colombo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.citypak.lk/track?tracking_number={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.citypak.lk"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "tracking_number"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.citypak.lk/"
+    },
+    "fardar-express-lk": {
+      "displayName": "Fardar Express Domestic",
+      "aliases": [
+        "FDE Domestic",
+        "Fardar Domestic"
+      ],
+      "countries": [
+        "LK"
+      ],
+      "color": "#28ace2",
+      "selectable": true,
+      "timezone": "Asia/Colombo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.fdedomestic.com/"
+    },
+    "gaaubesi": {
+      "displayName": "Gaaubesi",
+      "aliases": [
+        "Gaaubesi Logistics"
+      ],
+      "countries": [
+        "NP"
+      ],
+      "color": "#21428a",
+      "selectable": true,
+      "timezone": "Asia/Kathmandu",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://delivery.gaaubesi.com/orders/track-order/?track_id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "delivery.gaaubesi.com"
+          ],
+          "pathPattern": "^/orders/track-order/?$",
+          "params": [
+            "track_id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://delivery.gaaubesi.com/orders/track-order/"
+    },
+    "georgian-post": {
+      "displayName": "Georgian Post",
+      "aliases": [
+        "საქართველოს ფოსტა"
+      ],
+      "countries": [
+        "GE"
+      ],
+      "color": "#0075ac",
+      "selectable": true,
+      "timezone": "Asia/Tbilisi",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.gpost.ge/"
+    },
+    "gfs-express": {
+      "displayName": "GFS Express",
+      "aliases": [
+        "GFS Xpress"
+      ],
+      "countries": [
+        "SA",
+        "KW"
+      ],
+      "color": "#1f63ac",
+      "selectable": true,
+      "timezone": "Asia/Riyadh",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://track.gfsxpress.com/#/track-order?trackingStr={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "track.gfsxpress.com"
+          ],
+          "pathPattern": "^/?$",
+          "fragment": "^/track-order\\?trackingStr=([A-Za-z0-9-]+)$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://track.gfsxpress.com/"
+    },
+    "jana-post": {
+      "displayName": "Jańa Post",
+      "aliases": [
+        "Jana Post",
+        "JAŃA POST"
+      ],
+      "countries": [
+        "KZ",
+        "KG",
+        "UZ",
+        "TJ",
+        "MN"
+      ],
+      "color": "#1b8918",
+      "selectable": true,
+      "timezone": "Asia/Almaty",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://janapost.kz/en/track-order?code={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "janapost.kz",
+            "www.janapost.kz"
+          ],
+          "pathPattern": "^/(?:en|ru|kk|ky|uz|tg|mn|zh)/track-order/?$",
+          "params": [
+            "code"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://janapost.kz/en/track-order"
+    },
+    "janani-express": {
+      "displayName": "Janani Express",
+      "aliases": [
+        "Janani Express Parcel Service"
+      ],
+      "countries": [
+        "BD"
+      ],
+      "color": "#02a550",
+      "selectable": true,
+      "timezone": "Asia/Dhaka",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://jananiexpress.com/tracking?cn={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "jananiexpress.com",
+            "www.jananiexpress.com"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "cn"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://jananiexpress.com/tracking"
+    },
+    "koombiyo": {
+      "displayName": "Koombiyo Delivery",
+      "aliases": [
+        "Koombiyo"
+      ],
+      "countries": [
+        "LK"
+      ],
+      "color": "#00aeef",
+      "selectable": true,
+      "timezone": "Asia/Colombo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://koombiyodelivery.lk/track?id={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "koombiyodelivery.lk",
+            "www.koombiyodelivery.lk"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://koombiyodelivery.lk/track"
+    },
+    "kuwait-post": {
+      "displayName": "Kuwait Post",
+      "countries": [
+        "KW"
+      ],
+      "color": "#243a61",
+      "selectable": true,
+      "timezone": "Asia/Kuwait",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://moc.gov.kw/en/shipment-tracking"
+    },
+    "mahex": {
+      "displayName": "Mahex",
+      "aliases": [
+        "ماهکس"
+      ],
+      "countries": [
+        "IR"
+      ],
+      "color": "#002654",
+      "selectable": true,
+      "timezone": "Asia/Tehran",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://mahex.com/tracking"
+    },
+    "mnpost-mn": {
+      "displayName": "MNPOST",
+      "aliases": [
+        "MNPOST LLC",
+        "Марин Нью Пост"
+      ],
+      "countries": [
+        "MN"
+      ],
+      "color": "#f73237",
+      "selectable": true,
+      "timezone": "Asia/Ulaanbaatar",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://mnpost.mn/tracking?nums={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "mnpost.mn",
+            "www.mnpost.mn"
+          ],
+          "pathPattern": "^/tracking/?$",
+          "params": [
+            "nums"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://mnpost.mn/tracking"
+    },
+    "mongol-post": {
+      "displayName": "Mongol Post",
+      "aliases": [
+        "Монгол Шуудан"
+      ],
+      "countries": [
+        "MN"
+      ],
+      "color": "#ec1c24",
+      "selectable": true,
+      "timezone": "Asia/Ulaanbaatar",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.mongolpost.mn/mn/track?trackingNumber={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "mongolpost.mn",
+            "www.mongolpost.mn"
+          ],
+          "pathPattern": "^/(?:mn/|en/)?track/?$",
+          "params": [
+            "trackingNumber"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.mongolpost.mn/mn/track"
+    },
+    "nepal-can-move": {
+      "displayName": "Nepal Can Move",
+      "countries": [
+        "NP"
+      ],
+      "color": "#d32f2f",
+      "selectable": true,
+      "timezone": "Asia/Kathmandu",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://portal.nepalcanmove.com/track/"
+    },
+    "nomex-kg": {
+      "displayName": "Nomex",
+      "aliases": [
+        "Nomad Express Delivery",
+        "Nomad Express"
+      ],
+      "countries": [
+        "KG"
+      ],
+      "color": "#ff2a00",
+      "selectable": true,
+      "timezone": "Asia/Bishkek",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://nomex.kg/?iShip_Invoice={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "nomex.kg",
+            "www.nomex.kg"
+          ],
+          "pathPattern": "^/?$",
+          "params": [
+            "iShip_Invoice"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://nomex.kg/"
+    },
+    "onway-ge": {
+      "displayName": "OnWay",
+      "aliases": [
+        "OnWay Delivery"
+      ],
+      "countries": [
+        "GE"
+      ],
+      "color": "#5b4bb4",
+      "selectable": true,
+      "timezone": "Asia/Tbilisi",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://onway.ge/"
+    },
+    "quickbox-kg": {
+      "displayName": "QuickBox",
+      "aliases": [
+        "Quick BOX"
+      ],
+      "countries": [
+        "KG"
+      ],
+      "color": "#546d80",
+      "selectable": true,
+      "timezone": "Asia/Bishkek",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.quickbox.pro/search-express"
+    },
+    "sendo-kg": {
+      "displayName": "Sendo",
+      "aliases": [
+        "Sendo Express",
+        "СЕНДО"
+      ],
+      "countries": [
+        "KG"
+      ],
+      "color": "#016028",
+      "selectable": true,
+      "timezone": "Asia/Bishkek",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.sendoexpress.net/tracking.html?code={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "sendoexpress.net",
+            "www.sendoexpress.net"
+          ],
+          "pathPattern": "^/tracking\\.html$",
+          "params": [
+            "code"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.sendoexpress.net/tracking.html"
+    },
+    "tipax": {
+      "displayName": "Tipax",
+      "aliases": [
+        "تیپاکس"
+      ],
+      "countries": [
+        "IR"
+      ],
+      "color": "#00784a",
+      "selectable": true,
+      "timezone": "Asia/Tehran",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tipaxco.com/tracking"
+    },
+    "tm-cargo-pk": {
+      "displayName": "TM Cargo",
+      "aliases": [
+        "T.M. Cargo & Logistics",
+        "TM Cargo Express"
+      ],
+      "countries": [
+        "PK"
+      ],
+      "color": "#c41d1d",
+      "selectable": true,
+      "timezone": "Asia/Karachi",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.tmcargo.net/track.php?cn={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "tmcargo.net",
+            "www.tmcargo.net"
+          ],
+          "pathPattern": "^/track\\.php$",
+          "params": [
+            "cn"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://www.tmcargo.net/track.php"
+    },
+    "trackings-ge": {
+      "displayName": "Trackings.GE",
+      "countries": [
+        "GE"
+      ],
+      "color": "#45ace7",
+      "selectable": true,
+      "timezone": "Asia/Tbilisi",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://trackings.ge/en/track?track_num={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "trackings.ge",
+            "www.trackings.ge"
+          ],
+          "pathPattern": "^/(?:en|ka|ru)/track/?$",
+          "params": [
+            "track_num"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://trackings.ge/en/track"
+    },
+    "trans-express-lk": {
+      "displayName": "Trans Express",
+      "aliases": [
+        "TransExpress",
+        "Trans Express Services Lanka"
+      ],
+      "countries": [
+        "LK"
+      ],
+      "color": "#ed1c24",
+      "selectable": true,
+      "timezone": "Asia/Colombo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://tracking.transexpress.lk/tracking"
+    },
+    "turbo-eg": {
+      "displayName": "Turbo",
+      "aliases": [
+        "Turbo Logistics",
+        "Turbo EG"
+      ],
+      "countries": [
+        "EG"
+      ],
+      "color": "#e80505",
+      "selectable": true,
+      "timezone": "Africa/Cairo",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://turbo.info/en/track/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "turbo.info",
+            "www.turbo.info"
+          ],
+          "path": "^/(?:en|ar)/track/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://turbo.info/en/track"
+    },
+    "united-az": {
+      "displayName": "United.az",
+      "aliases": [
+        "United.az International Shipping Company",
+        "Expargo",
+        "Kargolux",
+        "Kango",
+        "Morex",
+        "166 Cargo",
+        "Findex"
+      ],
+      "countries": [
+        "AZ"
+      ],
+      "color": "#f47b31",
+      "selectable": true,
+      "timezone": "Asia/Baku",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://cui.united.az/tracking-code?trackingCode={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "cui.united.az"
+          ],
+          "pathPattern": "^/tracking-code/?$",
+          "params": [
+            "trackingCode"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://cui.united.az/tracking-code"
+    },
+    "wakilni": {
+      "displayName": "Wakilni",
+      "countries": [
+        "LB"
+      ],
+      "color": "#00426b",
+      "selectable": true,
+      "timezone": "Asia/Beirut",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://portal.wakilni.com/orders/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "portal.wakilni.com"
+          ],
+          "path": "^/orders/([A-Za-z0-9]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://wakilni.com/"
+    },
+    "xalq-global": {
+      "displayName": "Xalq Global",
+      "aliases": [
+        "Xalq.Global"
+      ],
+      "countries": [
+        "UZ"
+      ],
+      "color": "#1e5cd7",
+      "selectable": true,
+      "timezone": "Asia/Tashkent",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://xalq.global/"
+    },
+    "zmc-express": {
+      "displayName": "ZMC Express",
+      "aliases": [
+        "ZMC Express Cargo",
+        "ZMC Iraq"
+      ],
+      "countries": [
+        "IQ",
+        "AE",
+        "OM",
+        "TR",
+        "LB"
+      ],
+      "color": "#ff0000",
+      "selectable": true,
+      "timezone": "Asia/Baghdad",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://apps.zmc-iraq.com/tracking.php"
     }
   },
   "servers": [
@@ -63932,7 +64654,35 @@
           "paps",
           "pickup-mtaani",
           "postnet-za",
-          "red-star-express"
+          "red-star-express",
+          "alfa-delivery-kz",
+          "chapar",
+          "citypak",
+          "fardar-express-lk",
+          "gaaubesi",
+          "georgian-post",
+          "gfs-express",
+          "jana-post",
+          "janani-express",
+          "koombiyo",
+          "kuwait-post",
+          "mahex",
+          "mnpost-mn",
+          "mongol-post",
+          "nepal-can-move",
+          "nomex-kg",
+          "onway-ge",
+          "quickbox-kg",
+          "sendo-kg",
+          "tipax",
+          "tm-cargo-pk",
+          "trackings-ge",
+          "trans-express-lk",
+          "turbo-eg",
+          "united-az",
+          "wakilni",
+          "xalq-global",
+          "zmc-express"
         ]
       },
       "Stage": {

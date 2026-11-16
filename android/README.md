@@ -177,9 +177,18 @@ in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on th
 raw.githubusercontent.com serves, and attaches the APK to a pre-release. The app's entry in the repository is
 [`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml).
 
-F-Droid's own catalog builds from source and signs with its own key, from the `fdroid` flavor:
-`./gradlew :app:assembleFdroidRelease` with the same release settings gives its APK in
-`app/build/outputs/apk/fdroid/release/`.
+F-Droid's own catalog builds the `fdroid` flavor from source and signs it with its own key. Its recipe, in
+[fdroiddata](https://gitlab.com/fdroid/fdroiddata), finds each release's commit by the tag
+`android-source-<versionName>-<versionCode>`, which the script pushes over SSH, and builds it with
+`-Ppeek.releaseXcconfig=fdroid/release.xcconfig`: the release's public settings, the ones https://peektracker.com's
+own scripts carry. The catalog's listing is in the repository's `fastlane/metadata/android/en-US`, where each release
+adds what is new in `changelogs/<versionCode>.txt`. The same build here:
+
+```sh
+./gradlew :app:assembleFdroidRelease -Ppeek.releaseXcconfig=fdroid/release.xcconfig
+```
+
+gives the APK, unsigned, in `app/build/outputs/apk/fdroid/release/`.
 
 ## Macrobenchmarks and the baseline profile
 

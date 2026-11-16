@@ -23,9 +23,10 @@ val xcconfig: Map<String, String> = listOf("Shared.xcconfig", "Local.xcconfig")
     .map { xcconfigSettings("../ios/Configuration/$it").orEmpty() }
     .reduce { shared, local -> shared + local }
 
-// A release's server settings, from the xcconfig the Gradle property `peek.releaseXcconfig` names, kept outside the
-// repository: they override the release build type's alone, over the iPhone build's. A fresh checkout has no
-// Local.xcconfig, and a release built from it would ship the demo.
+// A release's server settings, from the xcconfig the Gradle property `peek.releaseXcconfig` names: Google Play's, with
+// its Firebase keys, outside the repository, and F-Droid's, fdroid/release.xcconfig. They override the release build
+// type's alone, over the iPhone build's. A fresh checkout has no Local.xcconfig, and a release built from it without
+// them would ship the demo.
 val releaseXcconfig: String? = providers.gradleProperty("peek.releaseXcconfig").orNull
 val releaseRead: Map<String, String>? = releaseXcconfig?.let { xcconfigSettings(it) }
 val releaseOverrides: Map<String, String> = releaseRead.orEmpty()

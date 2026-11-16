@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Puts a beta's APK, as Google Play signed it, in the F-Droid repository of the Android beta and on GitHub Releases.
+# Puts a beta's APK, as Google Play signed it, in the F-Droid repository of the Android beta and on GitHub Releases, and
+# tags the commit it was built from for F-Droid's own catalog.
 #
 #   scripts/publish-fdroid.sh <play-signed.apk> <commit> [notes.md]
 #
@@ -84,5 +85,13 @@ else
   } > "$site/notes.md"
   gh release create "$tag" "$site/peek-$name-$code.apk" --repo "$github" --verify-tag --prerelease \
     --title "Peek for Android $name ($code), beta" --notes-file "$site/notes.md"
+fi
+
+# F-Droid's own catalog (https://gitlab.com/fdroid/fdroiddata) builds the release's commit from source and finds it by
+# this tag. It goes over SSH: a token without the workflow scope may not create a ref on that commit.
+source="android-source-$name-$code"
+if ! git ls-remote --exit-code "https://github.com/$github.git" "refs/tags/$source" >/dev/null; then
+  git -C "$android" push -q "git@github.com:$github.git" "$target:refs/tags/$source" ||
+    echo "Push F-Droid's source tag by hand: git push git@github.com:$github.git $target:refs/tags/$source" >&2
 fi
 echo "$address"

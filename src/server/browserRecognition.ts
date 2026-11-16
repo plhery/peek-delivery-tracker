@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { explicitOffsetTime, isoTime, settleRecognition } from 'universal-parcel-scraper';
 import type { BrowserRecognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry } from './adapterRegistry';
 import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
@@ -91,8 +92,13 @@ export async function recognizeBrowser(carrier: string, number: string, context:
 /** Consume fresh anonymous history once; recipient credentials never share cached lookups. */
 export function takeBrowserHistory(carrier: string, number: string) {
   const entry = cache.get(`${carrier}:${number}`);
-  if (!entry?.answer?.result || Date.now() - entry.at >= TTL_MS
-    || Date.now() - Date.parse(entry.answer.lastActivityAt ?? '') >= 60 * 24 * 3_600_000) return undefined;
+  if (!entry?.answer?.known || !entry.answer.result || Date.now() - entry.at >= TTL_MS) return undefined;
+  const answer = entry.answer;
+  // Require a real clock before settlement: an undated shell can be known but has no reusable age.
+  const instant = explicitOffsetTime(answer.lastActivityAt);
+  if (!instant && !isoTime(answer.lastActivityLocal, 'UTC')) return undefined;
+  if (settleRecognition([{ carrier, needsInput: null, preferred: false, status: 'known',
+    lastActivityAt: instant ? answer.lastActivityAt ?? null : null, lastActivityLocal: answer.lastActivityLocal }]).carrier !== carrier) return undefined;
   const result = entry.answer.result;
   delete entry.answer.result;
   return structuredClone(result);

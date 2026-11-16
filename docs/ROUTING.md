@@ -686,8 +686,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   same number, at least as recent as what we have (a pre-advice is not enough, unless it is the
   only answer, as under Scenarios, "Unknown carrier"). Browser
   confirmation follows unresolved HTTP checks and uses the same candidate cooldowns. Fresh
-  browser history is consumed once by the correction lookup or the first saved sync, with the
-  "Swapped automatically" notice. A carrier whose lookup hands the parcel to its delivery
+  browser history is consumed once by the correction lookup or the first saved sync, after the
+  same activity-age check for offset timestamps and local scan clocks, with the "Swapped
+  automatically" notice. A carrier whose lookup hands the parcel to its delivery
   carrier in the same check is adopted the same way, with the delivery carrier as the parcel's
   current leg. So is the carrier the filed one's failure says holds the record: DHL Express
   finding only DHL Paket's record of a piece in its range (`parcel_de_division`) has DHL Paket

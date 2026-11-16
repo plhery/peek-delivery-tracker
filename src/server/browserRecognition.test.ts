@@ -110,3 +110,22 @@ it('holds failures briefly and never consumes stale shipment history', async () 
   await browser.recognizeBrowser('fedex', '000000000001');
   expect(browser.takeBrowserHistory('fedex', '000000000001')).toBeUndefined();
 });
+
+
+it.each([
+  ['2026-11-16T08:30', true],
+  ['2026-09-16T12:01', true],
+  ['2026-09-16T11:59', false],
+  ['2020-01-01T08:00', false],
+  ['2026-02-30T08:00', false],
+  ['broken', false],
+  [undefined, false],
+])('checks local-clock history freshness before consuming it: %s', async (lastActivityLocal, fresh) => {
+  vi.useFakeTimers();
+  vi.setSystemTime(new Date('2026-11-16T00:00:00Z'));
+  const result = { status: 'in_transit' as const, events: [{ local_time: lastActivityLocal, description: 'Sorted' }] };
+  lookup.mockResolvedValue({ known: true, lastActivityAt: null, lastActivityLocal, result });
+  await browser.recognizeBrowser('sicepat', 'SYNTHETIC0001');
+  expect(browser.takeBrowserHistory('sicepat', 'SYNTHETIC0001')).toEqual(fresh ? result : undefined);
+  expect(browser.takeBrowserHistory('sicepat', 'SYNTHETIC0001')).toBeUndefined();
+});

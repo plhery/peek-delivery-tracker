@@ -59753,6 +59753,69 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.whatsship.com/"
+  },
+  "amazon-order": {
+    "displayName": "Amazon order",
+    "displayNames": {
+      "en": "Amazon order",
+      "de": "Amazon-Bestellung",
+      "fr": "Commande Amazon",
+      "it": "Ordine Amazon",
+      "es": "Pedido de Amazon",
+      "pt": "Encomenda Amazon",
+      "pl": "Zamówienie Amazon"
+    },
+    "color": "#ff9900",
+    "selectable": false,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "amazon-order",
+      "requirements": [
+        {
+          "field": "trackingUrl",
+          "validator": "amazonShareUrl",
+          "label": "Amazon tracking link",
+          "type": "url",
+          "placeholder": "https://www.amazon.com/progress-tracker/package/share/?…",
+          "help": "In the Amazon app, open Track package, tap Share tracking and paste the link."
+        }
+      ],
+      "linkToken": true
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "amazon.com",
+          "amazon.ca",
+          "amazon.com.mx",
+          "amazon.com.br",
+          "amazon.co.uk",
+          "amazon.ie",
+          "amazon.de",
+          "amazon.fr",
+          "amazon.it",
+          "amazon.es",
+          "amazon.nl",
+          "amazon.se",
+          "amazon.pl",
+          "amazon.com.be",
+          "amazon.com.tr",
+          "amazon.ae",
+          "amazon.sa",
+          "amazon.eg",
+          "amazon.in",
+          "amazon.co.jp",
+          "amazon.sg",
+          "amazon.com.au",
+          "amazon.co.za"
+        ],
+        "pathPattern": "^/progress-tracker/package/share/?$",
+        "query": "(?:^|&)shareToken=([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})(?=&|$)",
+        "keepsCapabilityUrl": true
+      }
+    ],
+    "detectionRules": []
   }
 } as const;
 
@@ -61564,7 +61627,8 @@ export const CARRIER_IDS = [
   "xalq-global",
   "zmc-express",
   "onlog-express",
-  "whatsship"
+  "whatsship",
+  "amazon-order"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

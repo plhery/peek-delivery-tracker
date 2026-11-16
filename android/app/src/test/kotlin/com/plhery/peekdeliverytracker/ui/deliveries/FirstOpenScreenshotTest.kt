@@ -94,9 +94,19 @@ class FirstOpenScreenshotTest {
         compose.waitForIdle()
     }
 
-    /** The clock moved on `milliseconds` a frame at a time. */
-    private fun advance(milliseconds: Long) {
-        repeat(((milliseconds + FRAME - 1) / FRAME).toInt()) {
+    /**
+     * The clock moved on `milliseconds` a frame at a time, each frame drawn and the maps it asks for made before the next,
+     * as a phone has them in time. Up to `drawnFrom`, the journey's last change of scan before the shot, it moves at
+     * once: every frame on the way runs, and the window is drawn at the end.
+     */
+    private fun advance(milliseconds: Long, drawnFrom: Long = 0) {
+        val frames = (milliseconds + FRAME - 1) / FRAME
+        val atOnce = (drawnFrom - LEAD) / FRAME
+        if (atOnce > 0) {
+            compose.mainClock.advanceTimeBy(atOnce * FRAME)
+            compose.waitForIdle()
+        }
+        repeat((frames - atOnce.coerceAtLeast(0)).toInt()) {
             compose.mainClock.advanceTimeByFrame()
             compose.waitForIdle()
         }
@@ -154,7 +164,7 @@ class FirstOpenScreenshotTest {
     @Test
     fun theJourneysSecondScan() {
         show(reduceMotion = false)
-        advance(2_700 + 2_000)
+        advance(2_700 + 2_000, drawnFrom = 2_700)
         compose.screenshot("first_open_step_2")
     }
 
@@ -162,7 +172,7 @@ class FirstOpenScreenshotTest {
     @Test
     fun theJourneysFourthScan() {
         show(reduceMotion = false)
-        advance(3 * 2_700 + 2_000)
+        advance(3 * 2_700 + 2_000, drawnFrom = 3 * 2_700)
         compose.screenshot("first_open_step_4")
     }
 
@@ -170,7 +180,7 @@ class FirstOpenScreenshotTest {
     @Test
     fun theJourneysLastScan() {
         show(reduceMotion = false)
-        advance(3 * 2_700 + 3_400 + 3_000)
+        advance(3 * 2_700 + 3_400 + 3_000, drawnFrom = 3 * 2_700 + 3_400)
         compose.screenshot("first_open_step_5")
     }
 
@@ -241,6 +251,10 @@ class FirstOpenScreenshotTest {
     }
 
     private companion object {
+        /** The test clock's frame, in milliseconds. */
         const val FRAME = 16L
+
+        /** How long before a change of scan the frames are drawn one by one. */
+        const val LEAD = 100L
     }
 }

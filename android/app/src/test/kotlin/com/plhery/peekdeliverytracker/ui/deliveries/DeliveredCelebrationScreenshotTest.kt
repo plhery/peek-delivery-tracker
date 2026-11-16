@@ -149,11 +149,17 @@ class DeliveredCelebrationScreenshotTest {
         shot(200, "celebration_flight_light")
     }
 
-    /** The cards landed and the paper gone. */
+    /**
+     * The cards landed and the paper gone: a frame at a time until the flights have set off from the list's layout, then
+     * the rest of the five seconds at once, every frame on the way run and the window drawn at the end.
+     */
     @Test
     fun theListOnceTheCardsHaveLanded() {
         deliver(dark = false)
-        shot(5000, "celebration_landed_light")
+        advance(1_200)
+        compose.mainClock.advanceTimeBy(3_800)
+        compose.waitForIdle()
+        compose.screenshot("celebration_landed_light")
     }
 
     private companion object {

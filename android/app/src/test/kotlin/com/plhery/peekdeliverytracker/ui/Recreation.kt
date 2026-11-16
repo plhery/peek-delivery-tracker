@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.ui
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Looper
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.activity.ComponentActivity
@@ -17,6 +18,7 @@ import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
+import org.robolectric.Shadows.shadowOf
 
 /**
  * The content made again from what it saved, as when the window is made again (a rotation, a change of theme), with
@@ -50,17 +52,17 @@ class Recreation(private val compose: ComposeContentTestRule, private val lifecy
     fun recreate(parceled: Boolean = false, inTheBackground: Boolean = false, meanwhile: () -> Unit = {}) {
         compose.mainClock.autoAdvance = false
         if (inTheBackground) {
-            compose.runOnIdle { lifecycleTo(Lifecycle.State.CREATED) }
+            onIdle { lifecycleTo(Lifecycle.State.CREATED) }
             frame()
         }
-        compose.runOnIdle {
+        onIdle {
             if (!inTheBackground) changingConfigurations(true)
             val saved = registry.performSave()
             registry = SaveableStateRegistry(if (parceled) saved.throughParcel() else saved) { canBeSaved(it) }
             shown = false
         }
         frame()
-        compose.runOnIdle {
+        onIdle {
             meanwhile()
             if (inTheBackground) lifecycleTo(Lifecycle.State.RESUMED) else changingConfigurations(false)
             shown = true
@@ -98,5 +100,17 @@ class Recreation(private val compose: ComposeContentTestRule, private val lifecy
     private fun frame() {
         compose.runOnUiThread { Snapshot.sendApplyNotifications() }
         compose.mainClock.advanceTimeByFrame()
+    }
+
+    /**
+     * [block] run once the main thread has nothing left to do. Compose's own wait gives a window that isn't in front
+     * two seconds to come back each time, so with the activity stopped its main thread is run through by hand.
+     */
+    private fun onIdle(block: () -> Unit) {
+        val state = (activity as? ComponentActivity)?.lifecycle?.currentState
+        if (state == null || state.isAtLeast(Lifecycle.State.RESUMED)) return compose.runOnIdle(block)
+        compose.runOnUiThread { Snapshot.sendApplyNotifications() }
+        shadowOf(Looper.getMainLooper()).idle()
+        compose.runOnUiThread(block)
     }
 }

@@ -429,6 +429,33 @@ describe('the MCP endpoint', () => {
     }
   });
 
+  it('reads a scan the earlier carrier also told once, its other words as also', async () => {
+    // A handed-over parcel: the earlier carrier tells the new carrier's scans in its own language, once at the same
+    // second and once a few seconds off. Synthetic wording.
+    const minute = Math.floor(Date.now() / 60_000) * 60_000;
+    const at = (hours: number, second: number) => new Date(minute - hours * 3_600_000 + second * 1_000).toISOString();
+    const base = stored(9, 'in_transit');
+    const event = (id: number, source: string, description: string, occurred: string, location: string | null) => ({
+      id: `${base.id}-${id}`, package_id: base.id, stage: 'in_transit', description, location, occurred_at: occurred, provider_event_id: `${source}:9:${id}`,
+    });
+    const handed = { ...base, carrier: 'yanwen',
+      carrier_data: { ...base.carrier_data, original_carrier: 'yanwen', active_tracking_carrier: 'la-poste' },
+      tracking_events: [
+        { ...base.tracking_events[0]!, provider_event_id: 'yanwen:9:0' },
+        event(2, 'la-poste', 'Votre colis est arrivé sur notre site', at(5, 5), 'Example Hub'),
+        event(3, 'yanwen', 'Arrived at the delivery facility', at(5, 5), 'Example Hub'),
+        event(4, 'la-poste', 'Votre colis est en cours d\'acheminement', at(2, 20), 'Example Hub'),
+        event(5, 'yanwen', 'Parcel departed the facility', at(2, 41), null),
+      ] };
+    vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id) => (id === handed.id ? handed : null));
+    const read = await call(connect(['parcels:read']), 'get_parcel', { parcel: handed.id });
+    expect(read.result!.structuredContent!.history).toEqual([
+      { time: at(2, 20), status: 'in_transit', description: 'Votre colis est en cours d\'acheminement', location: 'Example Hub', also: ['Parcel departed the facility'] },
+      { time: at(5, 5), status: 'in_transit', description: 'Votre colis est arrivé sur notre site', location: 'Example Hub' },
+      { time: ACCEPTED, status: 'accepted', description: 'Parcel received', location: 'Example Depot' },
+    ]);
+  });
+
   it('adds parcels from a text for the caller\'s own account, with the write scope only', async () => {
     vi.mocked(addParcelsFromText).mockResolvedValue([
       { trackingNumber: UPS, carrier: 'ups', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000aa', jobId: null },

@@ -414,6 +414,8 @@ Key server modules:
     its allowances. Their answers leave out the receiver's name and postcode and read the
     scans as a link's viewer does (`viewerScans`): a delivery reads "Delivered", and a scan,
     status line or place that names the recipient, who signed, a code or a door is left out.
+    `get_parcel` lists each scan once, as the journal does: a row served under another
+    (`relay_of`) gives its other words as `also`.
   - `list_parcels` takes a status (on the way, needing the user, expected today or in the
     next seven days, delivered whether archived or not, archived, all), an order (expected
     day, delivery, latest scan, added) and a search over the name, shop, carrier, number and

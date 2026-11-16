@@ -3,31 +3,13 @@ import { dayAndTime, localizedCalendarDate, localizedClockTime, scanDate, timeZo
 import { countryFlag, countryName } from 'universal-parcel-scraper/app';
 import { localizedEventDescription, stageLabel, useI18n } from '../i18n';
 import { scanPlace } from '../lib/scanPlace';
-import { currentEvent, sortEventsDesc } from '../lib/stages';
+import { currentEvent, sortEventsDesc, withRelays } from '../lib/stages';
 import type { EventPlace as EventPlaceData, PlannedEvent, TrackingEvent } from '../types';
 
 /** A folded journal keeps this many days open, and this many more as one line each. */
 const FOLD_FROM_EVENTS = 12;
 const OPEN_DAYS = 2;
 const LISTED_DAYS = 3;
-
-/**
- * The scans the journal lists, and the relay copies each one has: a scan of a
- * relay pair (`relayOf`) is a line under the scan it names, and keeps a row of
- * its own when that scan is not there.
- */
-function withRelays(events: TrackingEvent[]): { listed: TrackingEvent[]; relays: Map<string, TrackingEvent[]> } {
-  const byId = new Map(events.map(event => [event.id, event]));
-  const relays = new Map<string, TrackingEvent[]>();
-  const folded = new Set<TrackingEvent>();
-  for (const event of events) {
-    const scan = event.relayOf ? byId.get(event.relayOf) : undefined;
-    if (!scan || scan === event || scan.relayOf) continue;
-    relays.set(scan.id, [...(relays.get(scan.id) ?? []), event]);
-    folded.add(event);
-  }
-  return { listed: events.filter(event => !folded.has(event)), relays };
-}
 
 /**
  * The whole journey grouped by local calendar day, newest first. With `fold`,

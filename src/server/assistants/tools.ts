@@ -8,7 +8,7 @@ import type {
 import { carrierInfo, normalizeTrackingNumber } from '../../lib/carriers';
 import { expectedDeliveryDay, isActiveParcel, parcelAttention } from '../../lib/parcelPriority';
 import { parcelComparator, parcelMatchesSearch, parcelMatchesStatus } from '../../lib/parcelView';
-import { currentEvent, currentStage, sortEventsDesc } from '../../lib/stages';
+import { currentEvent, currentStage, sortEventsDesc, withRelays } from '../../lib/stages';
 import { toParcel } from '../../store/apiRepo';
 import type { ParcelWithEvents } from '../../types';
 import { withEventPlaces } from '../eventPlaces';
@@ -259,18 +259,27 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
 
     server.registerTool('get_parcel', {
       title: 'Get a parcel',
-      description: 'One of the user\'s parcels: its status, expected delivery day, pickup point and the carrier\'s scans, newest first.',
+      description: 'One of the user\'s parcels: its status, expected delivery day, pickup point and the carrier\'s scans, newest first. Each scan is listed once: '
+        + 'when another carrier told it in other words, those come as also.',
       inputSchema: z.object({ parcel: z.string().min(1).max(100).describe('The parcel\'s id from list_parcels, or its tracking number') }),
       annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     }, async ({ parcel: named }) => {
       const parcel = await ownedParcel(service, caller.userId, named);
       if (!parcel) return refusal('No such parcel in this Peek account.');
-      const history = sortEventsDesc(parcel.events).slice(0, MOST_EVENTS).map((event) => ({
-        time: event.day ?? event.occurredAt,
-        status: event.stage,
-        description: event.description,
-        location: event.location ?? null,
-      }));
+      // Each scan once, as the journal lists it: another carrier's copy of a scan, its repeat or its notice is that scan,
+      // and its words come as `also` when they are other words.
+      const { listed, relays } = withRelays(parcel.events);
+      const history = sortEventsDesc(listed).slice(0, MOST_EVENTS).map((event) => {
+        const words = (row: { description: string }) => row.description.normalize('NFC').trim();
+        const also = [...new Set((relays.get(event.id) ?? []).map(words))].filter((told) => told && told !== words(event));
+        return {
+          time: event.day ?? event.occurredAt,
+          status: event.stage,
+          description: event.description,
+          location: event.location ?? null,
+          ...also.length ? { also } : {},
+        };
+      });
       return answer({ ...parcelSummary(parcel), history });
     });
   }

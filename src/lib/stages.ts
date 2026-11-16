@@ -111,15 +111,28 @@ const RETURN_HOLDING: ReadonlySet<Stage> = new Set<Stage>(['in_transit', 'custom
  * an earlier check dated at the check in a problem's stage can sit after it.
  */
 export function currentEvent(events: TrackingEvent[], returnHeld = false): TrackingEvent | null {
-  const byId = new Map(events.map((event) => [event.id, event]));
-  const underAnother = (event: TrackingEvent) => {
-    const scan = event.relayOf ? byId.get(event.relayOf) : undefined;
-    return scan !== undefined && scan !== event && !scan.relayOf;
-  };
-  const scans = sortEventsDesc(events.filter((event) => event.stage !== 'pending' && !underAnother(event)));
+  const scans = sortEventsDesc(withRelays(events).listed.filter((event) => event.stage !== 'pending'));
   const current = currentScan(scans) ?? latestEvent(events);
   return returnHeld && current && RETURN_HOLDING.has(current.stage)
     ? scans.find((scan) => scan.stage === 'returned') ?? current : current;
+}
+
+/**
+ * The scans the journal lists, and the rows each one has under it: a row served under another (`relayOf`: another
+ * carrier's copy of that scan, its repeat or a notice) is part of the scan it names, and keeps a row of its own when
+ * that scan is not there.
+ */
+export function withRelays<T extends Pick<TrackingEvent, 'id' | 'relayOf'>>(events: readonly T[]): { listed: T[]; relays: Map<string, T[]> } {
+  const byId = new Map(events.map((event) => [event.id, event]));
+  const relays = new Map<string, T[]>();
+  const folded = new Set<T>();
+  for (const event of events) {
+    const scan = event.relayOf ? byId.get(event.relayOf) : undefined;
+    if (!scan || scan === event || scan.relayOf) continue;
+    relays.set(scan.id, [...(relays.get(scan.id) ?? []), event]);
+    folded.add(event);
+  }
+  return { listed: events.filter((event) => !folded.has(event)), relays };
 }
 
 

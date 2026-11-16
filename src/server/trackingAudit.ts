@@ -382,6 +382,8 @@ export class TrackingSyncAudit {
       error_type: error === undefined ? null : errorType(error),
     };
     this.#steps.push(stored);
+    // A deferred lookup keeps what the parcel showed and is asked again later: a warning. How the check ended is the
+    // completed line's to say, an error when it was one.
     logOperationalEvent('tracking_sync_step', {
       ...this.logContext(),
       step,
@@ -389,7 +391,7 @@ export class TrackingSyncAudit {
       duration_ms: stored.duration_ms,
       error_type: stored.error_type,
       ...stored.details,
-    }, status === 'failed' ? 'error' : 'info');
+    }, status !== 'failed' ? 'info' : stored.error_type === 'RoutingDeferredError' ? 'warning' : 'error');
   }
 
   async step<T>(

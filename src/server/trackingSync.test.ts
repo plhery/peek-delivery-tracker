@@ -8523,9 +8523,36 @@ describe('TrackingSyncService', () => {
     expect(logs).toEqual(expect.arrayContaining([
       expect.objectContaining({ event: 'tracking_sync_started', package_id: 'unknown-package', tracking_number: 'TEST1234',
         number_pattern: '4 letters + 4 digits' }),
-      expect.objectContaining({ event: 'tracking_sync_step', step: 'fetch', step_status: 'failed', package_id: 'unknown-package' }),
-      expect.objectContaining({ event: 'tracking_sync_completed', outcome: 'error', package_id: 'unknown-package' }),
+      expect.objectContaining({ event: 'tracking_sync_step', step: 'fetch', step_status: 'failed', package_id: 'unknown-package',
+        level: 'error' }),
+      expect.objectContaining({ event: 'tracking_sync_completed', outcome: 'error', package_id: 'unknown-package', level: 'error' }),
     ]));
+  });
+
+  it('logs a deferred fetch as a warning, and only a check that ends in error at the error level', async () => {
+    const lines = async (consecutive: number, stale: boolean) => {
+      const parcel = { id: 'deferred', carrier: 'dhl', tracking_number: 'TEST1234', current_stage: 'in_transit' };
+      const failures = { dhl: { count: consecutive, kind: 'transport' as const, retry_at: '2026-09-10T12:30:00Z' } };
+      vi.spyOn(TrackingRouter.prototype, 'fetch')
+        .mockRejectedValue(new RoutingDeferred({ ...routingState(parcel), failures, consecutive_failures: consecutive }, stale, 1));
+      const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+      const errors = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+      const warnings = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+      const service = new TrackingSyncService(fakeClient() as unknown as SupabaseServiceClient, { fetch: vi.fn(), fetchUniversal: vi.fn() },
+        null, () => new Date('2026-09-10T12:00:00Z'));
+      await service.syncPackage(parcel, { trigger: 'scheduled' });
+      const logged = [...output.mock.calls, ...errors.mock.calls, ...warnings.mock.calls].map(([line]) => JSON.parse(String(line)));
+      output.mockRestore(); errors.mockRestore(); warnings.mockRestore();
+      const level = (event: string) => logged.filter((line) => line.event === event && line.step !== 'complete')
+        .map((line) => `${line.step ?? line.outcome}:${line.level}`);
+      return [...level('tracking_sync_step').filter((line) => line.startsWith('fetch')), ...level('tracking_sync_completed')];
+    };
+    // Its sources down a while: the check fails, and says so once.
+    expect(await lines(3, true)).toEqual(['fetch:warning', 'error:error']);
+    // Asked again later, the parcel keeping what it showed: nothing at the error level.
+    const later = await lines(1, false);
+    expect(later).toContain('fetch:warning');
+    expect(later).not.toContainEqual(expect.stringMatching(/:error$/));
   });
 
   it('keeps tracking operational when the private audit store is unavailable', async () => {

@@ -3,7 +3,7 @@ title: Yilong Logistics tracking: YIL numbers and statuses
 description: Track a Yilong Logistics (一龙物流) parcel from China: what a YIL…WL number looks like, what its scans mean from the warehouse to delivery, and who delivers.
 slug: yilong-logistics-tracking
 published: 2026-10-28
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Yilong Logistics (一龙物流) is a freight forwarder in Putian, in China's Fujian province, and its waybill numbers start with YIL and end with WL. Type yours in the 包裹追踪 (parcel tracking) box on yxhlexpress.com or in the box above. Yilong's history runs from its warehouse to the airline, and can go on through your country's customs to the delivering company's own lines.
@@ -53,7 +53,7 @@ Yilong's tracking record holds no delivery company and no second tracking number
 
 **Only the Chinese line.** The seller has created the order, but Yilong hasn't received the parcel. No warehouse scan after a few days? Check with the seller that the parcel was really sent.
 
-**Nothing found.** When Yilong's tracker doesn't know a number, its result holds only that number, under 参考号 (reference). Compare it with the seller's message, character by character.
+**Nothing found.** When Yilong's tracker doesn't know a number, its result holds only that number, under 参考号 (reference). Peek takes that answer as Yilong listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Yilong Logistics" on peektracker.com, with no request to check the number. So compare it with the seller's message yourself, character by character.
 
 **Lost, damaged or returned.** Yilong's site has no claim form and no terms. The seller is Yilong's customer, so the refund or replacement is the seller's to arrange; if the seller goes quiet, open a case with the marketplace. [Lost parcels](guide:lost-parcel) and [returned to sender](guide:returned-to-sender) cover the next steps.
 

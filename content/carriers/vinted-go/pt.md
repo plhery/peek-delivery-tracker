@@ -3,7 +3,7 @@ title: Vinted Go encomenda: rastreio, cacifos e levantamento
 description: Encomenda Vinted Go em Portugal: onde está o código de acompanhamento, o que quer dizer cada estado, quanto tempo espera no cacifo e a quem pedir ajuda.
 slug: vinted-go-encomenda
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 A Vinted Go é o serviço de entregas da própria Vinted: leva as encomendas vendidas na Vinted de um cacifo ou loja de encomendas para outro cacifo ou loja de encomendas. Para a acompanhar, abre a conversa da encomenda na Vinted e pressiona «Acompanhar encomenda», ou escreve o código na [página de acompanhamento da Vinted Go](https://vintedgo.com/pt/tracking?country=pt&region=europe).
@@ -16,7 +16,7 @@ A Vinted Go não publica o formato dos seus códigos. Estas são as formas que a
 
 | Código (inventado) | O que é |
 | --- | --- |
-| `1700000000000001` | A forma de um código Vinted Go: 16 algarismos a começar por 17 ou 18. A DHL eCommerce, a TNT e a Evri também usam 16 algarismos. |
+| `1700000000000001` | A forma de um código Vinted Go: 16 algarismos a começar por 17 ou 18. A DHL eCommerce, a TNT e a Evri também usam 16 algarismos; a Evri, só se o último algarismo bater certo também com o seu próprio cálculo. |
 | `1700000000000002` | 16 algarismos cujo último algarismo não bate certo: não tem a forma de um código Vinted Go. |
 | `VGS00000000000000` | `VGS` e 13 ou 14 algarismos: um código a que responde o acompanhamento da Vinted Go, e só o dela. |
 | `ABC0UW0000000000` | 16 caracteres: 3 letras, um algarismo, `UW`, um algarismo e 9 letras ou algarismos. O acompanhamento da Vinted Go também responde a estes códigos. |
@@ -45,7 +45,7 @@ O site de acompanhamento da Vinted Go existe em sete línguas, incluindo portugu
 | `Em falta no cacifo` | A encomenda não está no compartimento. Reporta-o na Vinted. |
 | `A devolver ao remetente` | Volta para o vendedor, por exemplo porque ninguém a levantou em 7 dias. |
 
-`Enviado` não quer dizer que a encomenda esteja perto de ti: só que o vendedor a entregou. `Entregue` aparece depois do levantamento, não quando a encomenda chega ao cacifo. Se o teu código não funcionar, a Vinted Go sugere que vejas no acompanhamento se a encomenda já está «marcada como entregue».
+`Enviado` não quer dizer que a encomenda esteja perto de ti: só que o vendedor a entregou. `Entregue` aparece depois do levantamento, não quando a encomenda chega ao cacifo. Se o teu código não funcionar, a Vinted Go sugere que vejas se o acompanhamento já indica `Pronta para recolha: cacifo`.
 
 O site escreve `Pronto para coleta`, à brasileira, mas as perguntas frequentes da Vinted Go falam em levantar. A página guarda ainda estados como `Saiu para entrega`, `A encomenda não pôde ser entregue` e `Encomenda perdida`, que só aparecem se a encomenda chegar a essa etapa.
 
@@ -87,7 +87,7 @@ A Vinted avisa que as tentativas de phishing também chegam por mensagens de tex
 
 O [Peek](/) consulta diretamente o acompanhamento da Vinted Go, sem conta nem código postal. Mostra cada leitura com a hora e a cidade de cada centro de triagem, por baixo de um título com as suas próprias palavras («Pronta para levantamento», «Entregue»). A consulta é feita em inglês, por isso o histórico aparece com os textos ingleses da Vinted Go, como `Ready to collect at the locker`, e não com os da página em português. Enquanto a encomenda está à tua espera, vês o nome do cacifo ou da loja de encomendas; depois de a levantares, onde e a que horas. Os pontos em cada zona não são indicados, e a morada do ponto, o horário e o prazo de levantamento ficam na página da Vinted Go. Também não há data prevista de entrega. Assim que a encomenda começa a voltar para o vendedor, o título passa a «Devolvida ao remetente».
 
-Um código que comece por `VGS`, o Peek reconhece-o logo como Vinted Go. Se escreveres só o código de 16 algarismos, o Peek pergunta à Vinted Go, à TNT e à DHL eCommerce se o conhecem, e fica com a Vinted Go quando é ela que o conhece; por um código `UW` pergunta à Vinted Go. Se não, carrega em «Alterar transportadora» e escolhe «Vinted Go», ou cola o link de acompanhamento do vintedgo.com, com ou sem a língua: a Vinted Go é reconhecida logo. A Vinted Go deixa de dar o acompanhamento de uma encomenda seis meses depois de a etiqueta ser criada.
+Um código que comece por `VGS`, o Peek reconhece-o logo como Vinted Go. Se escreveres só o código de 16 algarismos, o Peek pergunta à Vinted Go, à TNT e à DHL eCommerce (com alguns códigos, também a outras transportadoras) se o conhecem, e fica com a Vinted Go quando é ela que o conhece; por um código `UW` pergunta à Vinted Go. Se não, carrega em «Alterar transportadora» e escolhe «Vinted Go», ou cola o link de acompanhamento do vintedgo.com, com ou sem a língua: a Vinted Go é reconhecida logo. A Vinted Go deixa de dar o acompanhamento de uma encomenda seis meses depois de a etiqueta ser criada.
 
 O Peek verifica de 10 em 10 minutos, de hora a hora quando passam 48 horas sem uma nova leitura (ou 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora»), e pode enviar-te notificações quando o estado muda. Se a Vinted Go passar a encomenda a outra rede com um novo código de acompanhamento, o Peek pode segui-la nessa transportadora, se a ler diretamente. Quando os 13 últimos caracteres de um código de 16 caracteres com `UW` são um código de encomenda da Poste Italiane, o Peek consulta o acompanhamento da Poste Italiane com esses 13 caracteres e segue a encomenda aí assim que a Poste tiver a leitura mais recente. Não contacta a Vinted nem a Vinted Go, nem reporta problemas por ti.
 

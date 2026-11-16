@@ -3,7 +3,7 @@ title: Śledzenie iMile: numery, statusy i dostawa w Polsce
 description: Śledź przesyłkę iMile w Polsce: jak wygląda numer, co oznaczają angielskie statusy, kto doręcza paczki i jak skontaktować się z iMile, gdy paczka utknie.
 slug: imile-sledzenie
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 iMile to firma kurierska obsługująca handel internetowy, założona w Dubaju w 2017 roku. Przewozi paczki między krajami, między innymi z Chin, zajmuje się odprawą celną, a w Polsce ma własną spółkę z siedzibą w Bielanach Wrocławskich. Wpisz swój numer na [stronie śledzenia iMile](https://www.imile.com/en/track) albo wklej go w polu powyżej. Numer dostaniesz od sklepu w szczegółach wysyłki zamówienia.
@@ -17,8 +17,8 @@ iMile nie podaje na stronie przykładowego numeru. Takie formaty noszą przesył
 | `IM06010000000000` | `IM`, `0601` i dziesięć cyfr: iMile. |
 | `IM00000000000000` | `IM` i 14 cyfr: również iMile. |
 | `6010125000000` | 13 cyfr zaczynających się od `6`, po których sześć kolejnych ma układ daty (miesiąc, dzień, rok): własny numer listu przewozowego iMile. |
-| `49000000000000` | 14 cyfr zaczynających się od `49`: format spotykany na przesyłkach iMile we Włoszech, współdzielony przy 14 cyfrach m.in. z DPD, Chronopost czy BRT. |
-| `3000000000000` | 13 cyfr zaczynających się od `3`: kolejna seria obsługiwana przez iMile, używana też przez innych przewoźników z 13-cyfrowymi numerami. |
+| `49000000000000` | 14 cyfr zaczynających się od `49`: format spotykany na przesyłkach iMile we Włoszech, współdzielony przy 14 cyfrach m.in. z DPD, Chronopost czy BRT. Sam układ znaków nie wystarcza, ale Peek odpytuje iMile wśród pierwszych przewoźników. |
+| `3000000000000` | 13 cyfr zaczynających się od `3`: kolejna seria obsługiwana przez iMile, używana też przez innych przewoźników z 13-cyfrowymi numerami. Sam układ znaków nie wystarcza: Peek odpytuje iMile razem z nimi. |
 | `2000000000000` | Inne 13-cyfrowe numery: to nie jest format iMile. Takich numerów używają m.in. Delhivery, Yunda i Korea Post. |
 | `LP00000000000000` | To nie iMile, lecz [Cainiao](carrier:cainiao) – numer logistyczny z AliExpress. |
 
@@ -88,7 +88,7 @@ W sprawie samego zamówienia szybciej pomoże sklep: to on zlecił przewóz w iM
 
 ## Śledzenie przesyłki iMile w Peek
 
-[Peek](/) od razu rozpoznaje numery `IM0601…` jako iMile. Przy pozostałych numerach `IM` z 14 cyframi, przy 14-cyfrowych numerach zaczynających się od `49` oraz przy numerach 13-cyfrowych, z których korzystają też inni przewoźnicy, sam układ znaków nie wystarcza – wklej numer mimo to, bo Peek obsługuje ponad 3500 przewoźników. Po dodaniu przesyłki Peek wyświetla „Sprawdzanie usług śledzenia…”, odpytuje pasujących przewoźników (stawiając iMile wśród pierwszych dla numerów z `49` na początku oraz dla numerów z `6` i datą) i pokazuje „iMile ma tę przesyłkę.”, gdy iMile ją potwierdzi. Jeśli żaden przewoźnik jeszcze nie odpowiada lub wybierze się inna firma, wskaż iMile przyciskiem „Zmień”. Działają też linki ze strony śledzenia imile.com (`/track?waybillNo=`).
+[Peek](/) od razu rozpoznaje numery `IM0601…` jako iMile. Przy pozostałych numerach `IM` z 14 cyframi, przy 14-cyfrowych numerach zaczynających się od `49` oraz przy 13-cyfrowych numerach zaczynających się od `6` lub `3`, z których korzystają też inni przewoźnicy, sam układ znaków nie wystarcza – wklej numer mimo to, bo Peek obsługuje ponad 3500 przewoźników. Po dodaniu przesyłki Peek wyświetla „Sprawdzanie usług śledzenia…”, odpytuje pasujących przewoźników (stawiając iMile wśród pierwszych dla numerów z `49` na początku oraz dla numerów z `6` i datą) i pokazuje „iMile ma tę przesyłkę.”, gdy iMile ją potwierdzi. Jeśli żaden przewoźnik jeszcze nie odpowiada lub wybierze się inna firma, wskaż iMile przyciskiem „Zmień”. Działają też linki ze strony śledzenia imile.com (`/track?waybillNo=`).
 
 Peek odpytuje iMile po angielsku. Pokazuje aktualny status, historię z centrum lub miastem każdego skanu na mapie oraz kraj przeznaczenia, odczytując godziny według zegara tego kraju i wyświetlając je w strefie czasowej Twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w Twojej strefie czasowej: …”). Jeżeli paczkę wywozi z Chin dla iMile [Cainiao](carrier:cainiao), Peek dokłada na początku wcześniejsze skany z Cainiao: odbiór, sortowanie, eksport, lot i import.
 

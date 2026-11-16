@@ -3,7 +3,7 @@ title: Suivi colis iMile : numéro, statuts et livraison
 description: Suis un colis iMile en France, en Belgique ou en Suisse : format du numéro, sens des statuts en anglais, déroulement de la livraison et comment joindre iMile.
 slug: imile-suivi
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 iMile est une société de livraison pour le commerce en ligne fondée à Dubaï en 2017. Elle achemine des colis transfrontaliers, notamment depuis la Chine, assure le dédouanement et gère le dernier kilomètre avec ses propres livreurs dans certains pays. Suis ton numéro sur la [page de suivi d'iMile](https://www.imile.com/en/track) ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique, dans le détail d'expédition de ta commande.
@@ -17,8 +17,8 @@ iMile ne publie aucun exemple de numéro. Voici les formes portées par des coli
 | `IM06010000000000` | `IM`, `0601` et dix chiffres : iMile. |
 | `IM00000000000000` | `IM` et 14 chiffres : iMile également. |
 | `6010125000000` | 13 chiffres commençant par `6`, suivis de six chiffres en forme de date (mois, jour, année) : le bordereau propre à iMile. |
-| `49000000000000` | 14 chiffres commençant par `49` : une forme vue sur des colis iMile en Italie, partagée à 14 chiffres avec DPD, [Chronopost](carrier:chronopost) ou BRT. |
-| `3000000000000` | 13 chiffres commençant par `3` : une autre série suivie par iMile, partagée avec d'autres transporteurs à 13 chiffres. |
+| `49000000000000` | 14 chiffres commençant par `49` : une forme vue sur des colis iMile en Italie, partagée à 14 chiffres avec DPD, [Chronopost](carrier:chronopost) ou BRT. La forme seule ne suffit donc pas, mais Peek interroge iMile parmi les premiers. |
+| `3000000000000` | 13 chiffres commençant par `3` : une autre série suivie par iMile, partagée avec d'autres transporteurs à 13 chiffres. La forme seule ne suffit pas : Peek interroge iMile avec eux. |
 | `2000000000000` | Autres numéros à 13 chiffres : ce n'est pas une forme d'iMile. Delhivery, Yunda ou Korea Post en utilisent. |
 | `LP00000000000000` | Ce n'est pas iMile, mais [Cainiao](carrier:cainiao), la référence logistique d'AliExpress. |
 
@@ -90,7 +90,7 @@ Pour ta commande elle-même, passer par la boutique reste le plus rapide : c'est
 
 ## Suivre un colis iMile avec Peek
 
-[Peek](/) reconnaît immédiatement les numéros `IM0601…` comme iMile. Pour les autres numéros `IM` à 14 chiffres ainsi que pour les numéros à 14 chiffres commençant par `49` et ceux à 13 chiffres, que d'autres transporteurs utilisent aussi, la forme seule ne suffit pas : colle quand même ton numéro, Peek suit plus de 3 500 transporteurs. À l'ajout, Peek affiche « Vérification des services de suivi… », interroge les transporteurs compatibles – avec iMile parmi les premiers pour les numéros commençant par `49` et pour ceux commençant par `6` en forme de date – et indique « iMile a ce colis. » dès qu'iMile répond. Si personne ne répond encore ou qu'un autre transporteur s'affiche, choisis iMile via « Changer ». Les liens issus de la page de suivi d'imile.com (`/track?waybillNo=`) sont aussi reconnus comme iMile.
+[Peek](/) reconnaît immédiatement les numéros `IM0601…` comme iMile. Pour les autres numéros `IM` à 14 chiffres ainsi que pour les numéros à 14 chiffres commençant par `49` et ceux à 13 chiffres commençant par `6` ou `3`, que d'autres transporteurs utilisent aussi, la forme seule ne suffit pas : colle quand même ton numéro, Peek suit plus de 3 500 transporteurs. À l'ajout, Peek affiche « Vérification des services de suivi… », interroge les transporteurs compatibles – avec iMile parmi les premiers pour les numéros commençant par `49` et pour ceux commençant par `6` en forme de date – et indique « iMile a ce colis. » dès qu'iMile répond. Si personne ne répond encore ou qu'un autre transporteur s'affiche, choisis iMile via « Changer ». Les liens issus de la page de suivi d'imile.com (`/track?waybillNo=`) sont aussi reconnus comme iMile.
 
 Peek interroge le suivi d'iMile en anglais. Il affiche le statut, l'historique avec le centre ou la ville de chaque scan sur une carte et le pays de destination, en lisant les heures selon l'horloge de ce pays et en les convertissant dans le fuseau horaire de ton appareil (sur peektracker.com et dans l'application iPhone, une ligne sous l'historique le précise : « Heures dans ton fuseau horaire : … »). Lorsqu'un colis quitte la Chine avec [Cainiao](carrier:cainiao) pour le compte d'iMile, Peek ajoute en amont les étapes antérieures de Cainiao : prise en charge, tri, exportation, vol et importation.
 

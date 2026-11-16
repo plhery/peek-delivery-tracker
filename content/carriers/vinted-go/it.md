@@ -3,7 +3,7 @@ title: Vinted Go tracking: stati, ritiro in Italia e assistenza
 description: Traccia un pacco Vinted Go dall’estero all’Italia: dove trovare il codice, cosa significano gli stati in inglese, consegna con Poste Italiane e assistenza.
 slug: vinted-go-tracking
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Vinted Go è il servizio di spedizione di Vinted: gestisce una rete propria di locker, parcel shop e punti di quartiere in Francia, Belgio, Paesi Bassi, Spagna, Portogallo e Finlandia, e collega con l'Italia la Francia, la Spagna peninsulare e il Portogallo. Se acquisti su Vinted da un venditore in uno di questi Paesi (o spedisci verso di loro) e la spedizione scelta è Vinted Go, il pacco parte sulla rete Vinted Go e in Italia viene affidato a un corriere partner come [Poste Italiane](carrier:poste-italiane). Per seguirlo, apri la chat dell'ordine su Vinted e tocca «Traccia il pacco», inserisci il codice sulla [pagina di tracciamento di Vinted Go](https://vintedgo.com/en/tracking) — che non ha una versione in italiano — oppure incollalo nel riquadro qui sopra.
@@ -16,7 +16,7 @@ Vinted Go non pubblica una guida ai propri formati, ma ecco le forme riconosciut
 
 | Codice (inventato) | Che cos'è |
 | --- | --- |
-| `1700000000000001` | Formato tipico di Vinted Go: 16 cifre che iniziano per `17` o `18` con cifra di controllo valida. Anche DHL eCommerce, TNT ed Evri usano codici di 16 cifre. |
+| `1700000000000001` | Formato tipico di Vinted Go: 16 cifre che iniziano per `17` o `18` con cifra di controllo valida. Anche DHL eCommerce, TNT ed Evri usano codici di 16 cifre, Evri solo se l'ultima cifra supera anche il suo controllo. |
 | `1700000000000002` | 16 cifre la cui ultima cifra non supera il controllo: non ha la struttura di Vinted Go. |
 | `VGS00000000000000` | `VGS` seguito da 13 o 14 cifre: un codice esclusivo a cui risponde solo il tracciamento di Vinted Go. |
 | `ABC3UW0000000000` | 16 caratteri (3 lettere, una cifra, `UW`, una cifra e 9 lettere o cifre): tracciato da Vinted Go, dove gli ultimi 13 caratteri (`3UW0000000000`) possono coincidere con il codice spedizione di [Poste Italiane](carrier:poste-italiane). |
@@ -46,7 +46,7 @@ Il sito di Vinted Go, senza versione italiana, mostra in alto la tappa attuale c
 | `Missing from locker` | Lo scomparto risultava vuoto: apri subito una segnalazione nella chat di Vinted. |
 | `Returning to sender` | Sta tornando al venditore, ad esempio perché non è stato ritirato entro la scadenza. |
 
-`Shipped` indica soltanto che il venditore ha affidato il pacco al punto di partenza, mentre `Delivered` compare dopo il ritiro effettivo, non all'arrivo nel locker: se il codice di apertura non funziona, le FAQ di Vinted Go consigliano di controllare se lo stato segna già `Delivered`. Nella pagina esistono anche le etichette `Out for delivery`, `Couldn’t be delivered` e `Parcel lost`, visibili solo se la spedizione entra in uno di quei casi.
+`Shipped` indica soltanto che il venditore ha affidato il pacco al punto di partenza, mentre `Delivered` compare dopo il ritiro effettivo, non all'arrivo nel locker: se il codice di apertura non funziona, le FAQ di Vinted Go consigliano di controllare se lo stato segna già `Ready to collect at the locker`. Nella pagina esistono anche le etichette `Out for delivery`, `Couldn’t be delivered` e `Parcel lost`, visibili solo se la spedizione entra in uno di quei casi.
 
 ## Locker, punti di ritiro e consegna in Italia
 
@@ -84,7 +84,7 @@ Secondo quanto verificato il 14 novembre 2026, Vinted Go non mette a disposizion
 
 [Peek](/) legge direttamente il tracciamento di Vinted Go senza bisogno di account o codice postale: mostra ogni scansione con il suo orario e la frase originale in inglese (come `Ready to collect at the locker`), la città dei centri di smistamento sulla mappa e uno stato chiaro in italiano («Pronto per il ritiro», «Consegnato», «Restituito al mittente»). Indica il nome del locker o del parcel shop in cui il pacco ti aspetta e dove è stato ritirato, ma non i punti di quartiere; indirizzo completo, orari di apertura e scadenza del ritiro restano sulla pagina di Vinted Go, che non fornisce una data di consegna stimata.
 
-Per i codici che iniziano con `VGS` — o se incolli direttamente il link `vintedgo.com/en/tracking/...` — Peek riconosce subito Vinted Go. Se inserisci solo un numero di 16 cifre che inizia per `17` o `18`, Peek interroga Vinted Go, TNT e DHL eCommerce e assegna il pacco a Vinted Go appena risponde («Vinted Go ha questo pacco»); se non viene riconosciuto, tocca «Cambia» e scegli Vinted Go.
+Per i codici che iniziano con `VGS` — o se incolli direttamente il link `vintedgo.com/en/tracking/...` — Peek riconosce subito Vinted Go. Se inserisci solo un numero di 16 cifre che inizia per `17` o `18`, Peek interroga Vinted Go, TNT e DHL eCommerce (per alcuni codici anche altri corrieri) e assegna il pacco a Vinted Go appena risponde («Vinted Go ha questo pacco»); se non viene riconosciuto, tocca «Cambia» e scegli Vinted Go.
 
 Quando inserisci un codice `UW` di 16 caratteri le cui ultime 13 posizioni formano un codice pacco di [Poste Italiane](carrier:poste-italiane) (come `1UW` o `3UW` in `ABC3UW0000000000`), Peek interroga sia Vinted Go sia Poste Italiane e passa automaticamente a «Consegna con Poste Italiane» non appena Poste registra una scansione pari o più recente, seguendo da quel momento la cadenza oraria di Poste Italiane. Finché il pacco resta su Vinted Go, Peek controlla ogni 10 minuti, o ogni ora dopo 48 ore senza novità (12 ore se è fermo su «Etichetta creata» o «Preso in carico»), con notifiche a scelta tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna». Peek non può contattare Vinted né aprire reclami al posto tuo.
 

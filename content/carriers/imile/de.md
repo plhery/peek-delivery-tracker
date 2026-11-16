@@ -3,7 +3,7 @@ title: iMile Sendungsverfolgung: Nummer, Status, Zustellung
 description: iMile Sendungsverfolgung in Deutschland, Österreich und der Schweiz: wie die Nummer aussieht, was die Status heißen, wer zustellt und wie du iMile erreichst.
 slug: imile-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 iMile ist ein Zustelldienst für den Onlinehandel, 2017 in Dubai gegründet. Er bringt Pakete über Grenzen, auch aus China, und hat Gesellschaften in Deutschland (Düsseldorf) und Österreich (Wien). Verfolge die Nummer auf iMiles [Tracking-Seite](https://www.imile.com/en/track) oder oben im Feld. Die Nummer bekommst du vom Shop, in den Versanddaten deiner Bestellung.
@@ -17,6 +17,8 @@ iMile veröffentlicht keine Beispielnummer. Diese Formen tragen seine Pakete, mi
 | `IM06010000000000` | IM, 0601 und zehn Ziffern: iMile. |
 | `IM00000000000000` | IM und 14 Ziffern: ebenfalls iMile. |
 | `6010125000000` | 13 Ziffern, beginnend mit 6, die nächsten sechs wie ein Datum (Monat, Tag, Jahr): iMiles eigene Sendungsnummer. |
+| `49000000000000` | 14 Ziffern, beginnend mit 49: auf iMile-Paketen in Italien gesehen. Auch DPD, BRT und Chronopost nutzen 14 Ziffern, die Form allein reicht also nicht, aber Peek fragt iMile als einen der ersten. |
+| `3000000000000` | 13 Ziffern, beginnend mit 3: oft von iMile, aber auch FAN Courier und andere Paketdienste vergeben 13-stellige Nummern mit 3 vorne. Die Form allein reicht nicht: Peek fragt iMile zusammen mit ihnen. |
 | `2000000000000` | Andere 13-stellige Nummern: keine von iMiles Formen. Solche Nummern nutzen Delhivery, Yunda und Korea Post. |
 | `LP00000000000000` | Nicht iMile, sondern [Cainiao](carrier:cainiao), die Logistiknummer von AliExpress. |
 
@@ -101,7 +103,7 @@ Bei Fragen zur Bestellung ist der Shop meist schneller: Er hat iMile beauftragt 
 
 ## iMile Paket mit Peek verfolgen
 
-[Peek](/) erkennt `IM0601…`-Nummern sofort als iMile. Bei anderen IM-Nummern mit 14 Ziffern und bei 13-stelligen Nummern, die auch andere Paketdienste nutzen, reicht die Form allein nicht: Füg sie trotzdem ein, Peek verfolgt mehr als 3.500 Paketdienste. Beim Hinzufügen fragt Peek die Paketdienste mit solchen Nummern, bei datumsförmigen Nummern mit 6 vorne iMile als einen der ersten, und zeigt „iMile hat dieses Paket.“, wenn iMile sie kennt. Antwortet noch keiner oder landet sie beim falschen Dienst, wähl iMile mit „Ändern“. Links von iMiles Tracking-Seite (`/track?waybillNo=`) funktionieren auch.
+[Peek](/) erkennt `IM0601…`-Nummern sofort als iMile. Bei anderen IM-Nummern mit 14 Ziffern, bei 14-stelligen Nummern mit 49 vorne und bei 13-stelligen Nummern mit 6 oder 3 vorne, die auch andere Paketdienste nutzen, reicht die Form allein nicht: Füg sie trotzdem ein, Peek verfolgt mehr als 3.500 Paketdienste. Beim Hinzufügen fragt Peek die Paketdienste mit solchen Nummern, bei Nummern mit 49 vorne und bei datumsförmigen Nummern mit 6 vorne iMile als einen der ersten, und zeigt „iMile hat dieses Paket.“, wenn iMile sie kennt. Antwortet noch keiner oder landet sie beim falschen Dienst, wähl iMile mit „Ändern“. Links von iMiles Tracking-Seite (`/track?waybillNo=`) funktionieren auch.
 
 Peek fragt iMile auf Englisch ab. Es zeigt den Status, den Verlauf mit dem Zentrum oder Ort jedes Scans auf einer Karte und das Zielland, mit Uhrzeiten, die es nach der Uhr dieses Landes liest und in der Zeitzone deines Geräts zeigt. Bringt Cainiao das Paket für iMile aus China, setzt Peek Cainiaos frühere Scans davor: Abholung, Sortierung, Export, Flug und Import.
 

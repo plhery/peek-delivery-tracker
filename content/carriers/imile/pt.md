@@ -3,7 +3,7 @@ title: iMile rastreio: números, estados e entrega em Portugal
 description: Segue uma encomenda da iMile em Portugal: como é o número, o que significam os estados em inglês, como funciona a entrega e como contactar a iMile.
 slug: imile-rastreio
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 A iMile é uma empresa de entregas para comércio eletrónico fundada no Dubai em 2017. Faz transporte internacional de encomendas, nomeadamente a partir da China, trata do desalfandegamento e assegura a última milha com estafetas próprios em alguns mercados. Consulta o teu código na [página de rastreio da iMile](https://www.imile.com/en/track) ou cola-o na caixa acima. O número vem da loja, nos dados de envio da encomenda.
@@ -17,8 +17,8 @@ A iMile não publica nenhum código de exemplo. Estes são os formatos usados em
 | `IM06010000000000` | `IM`, `0601` e dez algarismos: iMile. |
 | `IM00000000000000` | `IM` e 14 algarismos: também iMile. |
 | `6010125000000` | 13 algarismos começados por `6`, seguidos de seis algarismos com forma de data (mês, dia, ano): número de carta de porte próprio da iMile. |
-| `49000000000000` | 14 algarismos começados por `49`: formato visto em encomendas da iMile em Itália, partilhado a 14 algarismos com transportadoras como [DPD Portugal](carrier:dpd-pt), [Chronopost](carrier:chronopost) ou [SEUR](carrier:seur). |
-| `3000000000000` | 13 algarismos começados por `3`: outra série aceite pelo seguimento da iMile, partilhada com outras transportadoras de 13 algarismos. |
+| `49000000000000` | 14 algarismos começados por `49`: formato visto em encomendas da iMile em Itália, partilhado a 14 algarismos com transportadoras como [DPD Portugal](carrier:dpd-pt), [Chronopost](carrier:chronopost) ou [SEUR](carrier:seur). O formato, por si só, não chega, mas o Peek consulta a iMile entre as primeiras. |
+| `3000000000000` | 13 algarismos começados por `3`: outra série aceite pelo seguimento da iMile, partilhada com outras transportadoras de 13 algarismos. O formato, por si só, não chega: o Peek consulta a iMile juntamente com elas. |
 | `2000000000000` | Outros números de 13 algarismos: não correspondem aos formatos da iMile. São usados por empresas como Delhivery, Yunda ou Korea Post. |
 | `LP00000000000000` | Não é da iMile, mas da [Cainiao](carrier:cainiao), a referência logística da AliExpress. |
 
@@ -90,7 +90,7 @@ Para resolver questões da própria compra, falar com a loja costuma ser mais r�
 
 ## Seguir uma encomenda da iMile com o Peek
 
-O [Peek](/) reconhece de imediato os números `IM0601…` como sendo da iMile. Nos restantes códigos `IM` de 14 algarismos, nos de 14 algarismos começados por `49` e nos de 13 algarismos, que outras transportadoras também usam, o formato por si só não chega: cola o código na mesma, porque o Peek acompanha mais de 3.500 transportadoras. Ao adicionares a encomenda, o Peek mostra «A verificar serviços de seguimento…», consulta as transportadoras compatíveis — com a iMile entre as primeiras nos códigos começados por `49` e nos começados por `6` com forma de data — e indica «iMile tem esta encomenda.» assim que a iMile responde. Se ainda nenhuma responder ou aparecer outra empresa, escolhe a iMile em «Alterar». Os links da página de seguimento em imile.com (`/track?waybillNo=`) também são lidos como iMile.
+O [Peek](/) reconhece de imediato os números `IM0601…` como sendo da iMile. Nos restantes códigos `IM` de 14 algarismos, nos de 14 algarismos começados por `49` e nos de 13 algarismos começados por `6` ou `3`, que outras transportadoras também usam, o formato por si só não chega: cola o código na mesma, porque o Peek acompanha mais de 3.500 transportadoras. Ao adicionares a encomenda, o Peek mostra «A verificar serviços de seguimento…», consulta as transportadoras compatíveis — com a iMile entre as primeiras nos códigos começados por `49` e nos começados por `6` com forma de data — e indica «iMile tem esta encomenda.» assim que a iMile responde. Se ainda nenhuma responder ou aparecer outra empresa, escolhe a iMile em «Alterar». Os links da página de seguimento em imile.com (`/track?waybillNo=`) também são lidos como iMile.
 
 O Peek consulta o seguimento da iMile em inglês. Mostra o estado, o histórico com o centro ou a localidade de cada leitura num mapa e o país de destino, lendo as horas pelo relógio desse país e convertendo-as para o fuso horário do teu dispositivo (no peektracker.com e na app para iPhone, uma linha por baixo do histórico indica-o: «Horas no teu fuso horário: …»). Quando uma encomenda sai da China pela [Cainiao](carrier:cainiao) ao serviço da iMile, o Peek acrescenta antes do histórico da iMile as leituras anteriores da Cainiao: recolha, triagem, exportação, voo e importação.
 

@@ -3,7 +3,7 @@ title: Seguimiento iMile: números, estados y quién reparte
 description: Sigue tu paquete de iMile en España: cómo es el número, qué significan sus estados en inglés, quién lo reparte y cómo contactar con iMile si se atasca.
 slug: imile-seguimiento
 published: 2026-10-22
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 iMile es una empresa de reparto para el comercio electrónico, fundada en Dubái en 2017. Lleva paquetes de un país a otro, por ejemplo desde China, se encarga del despacho de aduanas y en España tiene su propia sociedad, iMile Logistics & Transportation, S.L., con sede en Madrid. Sigue el número en la página de seguimiento de iMile, [imile.com/track](https://www.imile.com/en/track), o en el recuadro de arriba. El número te lo da la tienda, en los datos de envío del pedido.
@@ -17,6 +17,8 @@ iMile no publica ningún número de ejemplo. Estas son las formas que llevan sus
 | `IM06010000000000` | IM, 0601 y diez cifras: iMile. |
 | `IM00000000000000` | IM y 14 cifras: también iMile. |
 | `6010125000000` | 13 cifras que empiezan por 6, y las seis siguientes tienen forma de fecha (mes, día, año): el número de envío propio de iMile. |
+| `49000000000000` | 14 cifras que empiezan por 49: se ve en paquetes de iMile en Italia. DPD, BRT y Chronopost también usan 14 cifras, así que la forma no basta, pero Peek pregunta a iMile entre los primeros. |
+| `3000000000000` | 13 cifras que empiezan por 3: a menudo de iMile, pero FAN Courier y otros transportistas también tienen números de 13 cifras que empiezan por 3. La forma no basta: Peek pregunta a iMile junto con ellos. |
 | `2000000000000` | Otros números de 13 cifras: no son ninguna de las formas de iMile. Los usan Delhivery, Yunda y Korea Post. |
 | `LP00000000000000` | No es de iMile, sino de [Cainiao](carrier:cainiao), la referencia logística de AliExpress. |
 
@@ -90,7 +92,7 @@ Para el pedido en sí, la tienda suele ser más rápida: contrató a iMile y pue
 
 ## Seguir un paquete de iMile con Peek
 
-[Peek](/) reconoce al momento los números `IM0601…` como iMile. Con los demás números IM de 14 cifras y con los de 13 cifras, que también usan otros transportistas, la forma no basta: pégalo igualmente, Peek sigue más de 3500 transportistas. Al añadirlo, Peek pregunta a los transportistas que usan números así, iMile entre los primeros para los que empiezan por 6 con forma de fecha, y muestra «iMile tiene este paquete.» cuando iMile lo conoce. Si nadie responde aún o sale otro transportista, elige iMile con «Cambiar». También valen los enlaces de la página de seguimiento de imile.com (`/track?waybillNo=`).
+[Peek](/) reconoce al momento los números `IM0601…` como iMile. Con los demás números IM de 14 cifras, con los de 14 cifras que empiezan por 49 y con los de 13 cifras que empiezan por 6 o por 3, que también usan otros transportistas, la forma no basta: pégalo igualmente, Peek sigue más de 3500 transportistas. Al añadirlo, Peek pregunta a los transportistas que usan números así, iMile entre los primeros para los que empiezan por 49 y para los que empiezan por 6 con forma de fecha, y muestra «iMile tiene este paquete.» cuando iMile lo conoce. Si nadie responde aún o sale otro transportista, elige iMile con «Cambiar». También valen los enlaces de la página de seguimiento de imile.com (`/track?waybillNo=`).
 
 Peek consulta a iMile en inglés. Muestra el estado, el historial con el centro o la ciudad de cada escaneo en un mapa y el país de destino, con las horas leídas según el reloj de ese país y mostradas en la zona horaria de tu dispositivo. Si Cainiao saca el paquete de China para iMile, Peek añade delante los escaneos anteriores de Cainiao: recogida, clasificación, exportación, vuelo e importación.
 

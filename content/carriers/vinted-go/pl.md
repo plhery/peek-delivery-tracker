@@ -3,7 +3,7 @@ title: Vinted Go śledzenie przesyłki: statusy, automaty i pomoc
 description: Śledź paczkę Vinted Go: gdzie znaleźć numer śledzenia, co oznaczają angielskie statusy, ile dni paczka czeka w automacie i do kogo zgłosić problem na Vinted.
 slug: vinted-go-sledzenie
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Vinted Go to własna sieć kurierska platformy Vinted: obsługuje automaty paczkowe (*lockers*), punkty partnerskie (*parcel shops*) i punkty sąsiedzkie we Francji, Belgii, Holandii, Hiszpanii, Portugalii oraz Finlandii. W Polsce Vinted Go nie ma własnych automatów ani punktów odbioru (zintegrowaną wysyłkę na polskim Vinted realizują m.in. ORLEN Paczka, InPost, DPD, Poczta Polska / Pocztex, DHL i GLS, choć w regulaminie wysyłki zintegrowanej Vinted Polska widnieje litewska spółka Vinted Go UAB). Ze śledzeniem Vinted Go spotkasz się więc przede wszystkim wtedy, gdy kupujesz lub sprzedajesz na Vinted w Europie Zachodniej albo odbierasz tam przesyłkę, a [strona śledzenia Vinted Go](https://vintedgo.com/en/tracking) nie ma polskiej wersji językowej. Aby sprawdzić paczkę, otwórz rozmowę o zamówieniu na Vinted i naciśnij „Śledź przesyłkę”, wpisz kod na stronie Vinted Go albo wklej go w pole powyżej.
@@ -106,7 +106,7 @@ Po wysyłce może upłynąć do 48 godzin, zanim śledzenie zacznie zwracać wpi
 
 :::sources
 - [Vinted Go: Track your parcel](https://vintedgo.com/en/tracking) – anglojęzyczna strona śledzenia bez polskiej wersji i komunikat o nieznalezieniu paczki
-- [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – kod odbioru od wielkiej litery, 7 dni na odbiór, przekierowanie do pobliskiego punktu, paczka oznaczona już jako odebrana, przerwy w śledzeniu i pomoc na ekranie automatu
+- [Vinted Go: Frequently Asked Questions](https://vintedgo.com/en/faq?country=fr&region=europe) – kod odbioru od wielkiej litery, 7 dni na odbiór, przekierowanie do pobliskiego punktu, paczka oznaczona już jako dostarczona do punktu, przerwy w śledzeniu i pomoc na ekranie automatu
 - [Vinted Go: Frequently Asked Questions (Netherlands)](https://vintedgo.com/en/faq?country=nl&region=europe) – linia wsparcia przy automatach `+31 20 793 2587` w Holandii po angielsku
 - [Vinted Go: Frequently Asked Questions (Belgium)](https://vintedgo.com/en/faq?country=be&region=europe) – numer `+31 20 793 2587` w Belgii po angielsku i francusku
 - [Vinted Go: Terms and Conditions for Delivery Services](https://vintedgo.com/en/terms-and-conditions?country=fr&region=europe) – spółka Vinted Go, UAB (Wilno), rodzaje punktów, cel 3–6 dni roboczych, przypomnienie po 3 dniach, próby doręczenia do domu i zdjęcie uszkodzonej paczki przy automacie

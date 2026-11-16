@@ -3,7 +3,7 @@ title: Tracking iMile: codici, stati e consegna in Italia
 description: Tracking iMile in Italia: com'è fatto il codice, cosa vogliono dire gli stati in inglese, quanti tentativi fa, come fare reclamo e il numero del servizio clienti.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 iMile è una società di consegne per l'e-commerce, fondata a Dubai nel 2017. Porta pacchi da un paese all'altro, anche dalla Cina, e in Italia consegna con iMile Italy S.r.l., che ha sede a San Giuliano Milanese. Segui il codice sulla [pagina di tracciamento di iMile](https://www.imile.com/en/track) o nel riquadro qui sopra. Il codice te lo dà il negozio: lo trovi nei dati di spedizione dell'ordine.
@@ -17,6 +17,8 @@ iMile non pubblica esempi di codice. Queste sono le forme che hanno i suoi pacch
 | `IM06010000000000` | IM, 0601 e dieci cifre: iMile. |
 | `IM00000000000000` | IM e 14 cifre: anche questo è iMile. |
 | `6010125000000` | 13 cifre che iniziano con 6, e le sei successive hanno la forma di una data (mese, giorno, anno): il numero di spedizione di iMile. |
+| `49000000000000` | 14 cifre che iniziano con 49: un formato che si trova sui pacchi iMile in Italia. Anche DPD, BRT e Chronopost usano 14 cifre, quindi la forma da sola non basta, ma Peek chiede a iMile tra i primi. |
+| `3000000000000` | 13 cifre che iniziano con 3: spesso di iMile, ma anche FAN Courier e altri corrieri usano codici di 13 cifre che iniziano con 3. La forma da sola non basta: Peek chiede a iMile insieme a loro. |
 | `2000000000000` | Altri codici di 13 cifre: non corrispondono a nessuna forma di iMile. Li usano Delhivery, Yunda e Korea Post. |
 | `LP00000000000000` | Non è iMile ma [Cainiao](carrier:cainiao), il riferimento logistico di AliExpress. |
 
@@ -98,7 +100,7 @@ La Carta dice che iMile aiuta gli utenti fragili ad accedere alle informazioni e
 
 ## Tracking iMile con Peek
 
-[Peek](/) riconosce subito i codici `IM0601…` come iMile. Per gli altri codici IM di 14 cifre e per quelli di 13 cifre, che usano anche altri corrieri, la forma da sola non basta: incollalo lo stesso, Peek segue più di 3.500 corrieri. Quando lo aggiungi, Peek chiede ai corrieri che usano codici così, iMile tra i primi per quelli che iniziano con 6 e hanno la forma di una data, e mostra «iMile ha questo pacco.» quando iMile lo conosce. Se nessuno risponde ancora o esce il corriere sbagliato, scegli iMile con «Cambia». Funzionano anche i link della pagina di tracciamento di imile.com (`/track?waybillNo=`).
+[Peek](/) riconosce subito i codici `IM0601…` come iMile. Per gli altri codici IM di 14 cifre, per quelli di 14 cifre che iniziano con 49 e per quelli di 13 cifre che iniziano con 6 o con 3, che usano anche altri corrieri, la forma da sola non basta: incollalo lo stesso, Peek segue più di 3.500 corrieri. Quando lo aggiungi, Peek chiede ai corrieri che usano codici così, iMile tra i primi per quelli che iniziano con 49 e per quelli che iniziano con 6 e hanno la forma di una data, e mostra «iMile ha questo pacco.» quando iMile lo conosce. Se nessuno risponde ancora o esce il corriere sbagliato, scegli iMile con «Cambia». Funzionano anche i link della pagina di tracciamento di imile.com (`/track?waybillNo=`).
 
 Peek legge il tracking di iMile in inglese. Mostra lo stato, la cronologia con il centro o la città di ogni scansione su una mappa e il paese di destinazione, con gli orari letti sull'ora di quel paese e mostrati nel fuso orario del tuo dispositivo. Se il pacco lascia la Cina con Cainiao per conto di iMile, Peek aggiunge in testa le scansioni precedenti di Cainiao: ritiro, smistamento, esportazione, volo e importazione.
 

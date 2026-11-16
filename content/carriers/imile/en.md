@@ -3,7 +3,7 @@ title: iMile tracking: numbers, statuses and who delivers
 description: Track an iMile parcel: what iMile numbers look like, what its English scans mean, who delivers in your country and how to reach iMile when it stalls.
 slug: imile-tracking
 published: 2026-10-22
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 iMile is an e-commerce delivery company founded in Dubai in 2017. It carries parcels across borders, including from China, clears customs and delivers the last mile with its own couriers in some countries. Track the number on iMile's own page, [imile.com/track](https://www.imile.com/en/track), or in the box above. The number comes from the shop, in your order's shipping details.
@@ -17,6 +17,8 @@ iMile publishes no example number. The shapes iMile's parcels carry, with invent
 | `IM06010000000000` | IM, 0601 and ten digits: iMile. |
 | `IM00000000000000` | IM and 14 digits: iMile too. |
 | `6010125000000` | 13 digits starting with 6, the next six shaped like a date (month, day, year): iMile's own waybill number. |
+| `49000000000000` | 14 digits starting with 49: seen on iMile parcels in Italy. DPD, BRT and Chronopost use 14 digits too, so the shape alone isn't enough, but Peek asks iMile among the first. |
+| `3000000000000` | 13 digits starting with 3: often iMile's, but FAN Courier and other carriers start 13-digit numbers with 3 too. The shape alone isn't enough: Peek asks iMile along with them. |
 | `2000000000000` | Other 13-digit numbers: not one of iMile's shapes. Delhivery, Yunda and Korea Post use 13 digits. |
 | `LP00000000000000` | Not iMile but [Cainiao](carrier:cainiao), AliExpress's logistics reference. |
 
@@ -96,7 +98,7 @@ For the order itself, the shop is quicker. It booked iMile and can open a case w
 
 ## Track an iMile parcel with Peek
 
-[Peek](/) recognises `IM0601…` numbers as iMile straight away. For other IM numbers with 14 digits, and for 13-digit numbers, which other carriers use too, the shape alone isn't enough: paste it all the same, Peek follows more than 3,500 carriers. When you add one, Peek asks the carriers whose numbers look like this, iMile among the first for date-shaped numbers starting with 6, and shows "iMile has this parcel." when iMile knows it. If none answers yet or the wrong carrier comes up, pick iMile with "Change". Links from imile.com's tracking page (`/track?waybillNo=`) are read as iMile.
+[Peek](/) recognises `IM0601…` numbers as iMile straight away. For other IM numbers with 14 digits, for 14-digit numbers starting with 49 and for 13-digit numbers starting with 6 or 3, which other carriers use too, the shape alone isn't enough: paste it all the same, Peek follows more than 3,500 carriers. When you add one, Peek asks the carriers whose numbers look like this, iMile among the first for numbers starting with 49 and for date-shaped numbers starting with 6, and shows "iMile has this parcel." when iMile knows it. If none answers yet or the wrong carrier comes up, pick iMile with "Change". Links from imile.com's tracking page (`/track?waybillNo=`) are read as iMile.
 
 Peek reads iMile's tracker in English. It shows the status, the history with the centre or town of each scan on a map, and the destination country, with scan times read on that country's clock and shown in your device's time zone. For a parcel Cainiao carries out of China for iMile, Peek adds Cainiao's earlier scans (pickup, sorting, export, flight, import) in front of iMile's history.
 

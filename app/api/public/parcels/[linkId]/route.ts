@@ -35,7 +35,8 @@ const unavailable = () => json({ error: PARCEL_UNAVAILABLE }, 404);
  * Reads a parcel through its link. With the lookup's owner key the caller is
  * the owner; anyone else is a viewer, who is told when the sharing was
  * stopped. A read records that the link was opened, creates nothing, and
- * queues a check of a one-off parcel that is due one.
+ * queues a check of a one-off parcel that is due one, which the answer says
+ * (`checkQueued`) so the page reads its result as soon as it lands.
  */
 export const GET = apiRoute<LinkParameters>(async (context) => {
   const { linkId } = await context.route.params;
@@ -51,9 +52,12 @@ export const GET = apiRoute<LinkParameters>(async (context) => {
     recordPublicParcelRead('stopped');
     return json({ error: PARCEL_NOT_SHARED }, 410);
   }
+  let checkQueued = false;
   if (found.package.one_off === true && isOpenedParcelSyncDue(found.package, new Date())) {
     try {
+      // Queued, or one already queued or under way for the parcel.
       await service.enqueueSyncJob({ packageId: String(found.package.id), reason: 'opened' });
+      checkQueued = true;
       wakeSyncWorker();
     } catch (error) {
       // The parcel is still readable; the next read asks again.
@@ -61,7 +65,7 @@ export const GET = apiRoute<LinkParameters>(async (context) => {
     }
   }
   recordPublicParcelRead('ok');
-  return json(publicParcelResponse(found, parcelAlerts(service)) satisfies ApiPublicParcelResponse);
+  return json({ ...publicParcelResponse(found, parcelAlerts(service)), ...(checkQueued ? { checkQueued } : {}) } satisfies ApiPublicParcelResponse);
 }, {
   authenticated: false,
   serviceRequired: true,

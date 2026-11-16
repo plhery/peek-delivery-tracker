@@ -4031,6 +4031,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
 struct PublicParcelResponse: Codable, Equatable, Hashable, Sendable {
     var link: ParcelLink
     var package: PublicPackage
+    var checkQueued: Bool? = nil
 }
 
 struct PublicLookupRequest: Codable, Equatable, Hashable, Sendable {

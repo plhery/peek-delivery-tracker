@@ -63369,6 +63369,10 @@
           },
           "package": {
             "$ref": "#/components/schemas/PublicPackage"
+          },
+          "checkQueued": {
+            "type": "boolean",
+            "description": "Reading the link queued a check of the parcel, or found one queued or under way: its answer lands within seconds. Absent otherwise."
           }
         }
       },

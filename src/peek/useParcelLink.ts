@@ -9,9 +9,14 @@ import { forgetRecent, markRecentSeen, ownerKeyFor, recentFor, rememberParcel, u
 import { hashWithoutOwnerKey, linkWordsFromHash, type LinkWords } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 
-/** Until the first check lands the page asks again after 2 s, then ever more slowly up to 10 s. */
+/**
+ * Until the first check lands the page asks again after 2 s, then ever more slowly up to 10 s. So it does while
+ * an answer says a check is queued or under way (`checkQueued`), as opening the link queues one when the parcel
+ * is due: its result shows as it lands rather than at the next 30 s. That lasts a minute at most.
+ */
 const FIRST_CHECK_MS = 2_000;
 const FIRST_CHECK_MAX_MS = 10_000;
+const QUEUED_CHECK_MS = 60_000;
 /**
  * Afterwards the page asks 30 s after an answer that brought something new, and twice as
  * long after each that did not, up to the pace the server checks the parcel at: every
@@ -128,6 +133,8 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     let gone = false;
     let landed = first.current ? firstCheckLanded(first.current) : false;
     let waits = 0;
+    // Since when the answers say a check is queued or under way.
+    let queuedSince: number | null = null;
     let timer: ReturnType<typeof setTimeout> | undefined;
     let controller: AbortController | null = null;
     // What the reader saw last: the lookup's answer, or what this device kept from an earlier visit.
@@ -140,7 +147,8 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     let reading = false;
     let waiting = false;
 
-    const cadence = () => !landed ? Math.min(FIRST_CHECK_MAX_MS, FIRST_CHECK_MS * 1.5 ** waits++)
+    const quick = () => !landed || (queuedSince !== null && Date.now() - queuedSince < QUEUED_CHECK_MS);
+    const cadence = () => quick() ? Math.min(FIRST_CHECK_MAX_MS, FIRST_CHECK_MS * 1.5 ** waits++)
       : Math.min(shown && currentStage(shown.parcel.events, shown.parcel.returnHeld) === 'out_for_delivery' ? DELIVERING_MAX_MS : LIVE_MAX_MS, LIVE_MS * 2 ** quiet);
     const stop = () => { clearTimeout(timer); waiting = false; };
     const schedule = (delay: number) => {
@@ -172,9 +180,14 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
           setAnswer({ view: null, gone: 'unavailable', trouble: null });
           return false;
         }
+        // A check queued once the first has landed starts the quick reads over.
+        if (result.checkQueued && queuedSince === null && landed) waits = 0;
         landed = firstCheckLanded(result);
+        // An answer while a check was on its way, and the one it lands in, say nothing of how quiet the parcel is.
+        const waited = queuedSince !== null || result.checkQueued === true;
+        queuedSince = result.checkQueued ? queuedSince ?? Date.now() : null;
         const told = story(result);
-        quiet = told === heard ? quiet + 1 : 0;
+        quiet = told === heard ? quiet + (waited ? 0 : 1) : 0;
         heard = told;
         const scan = newScan(shown, result);
         const earlier = shown?.parcel.expectedDelivery;

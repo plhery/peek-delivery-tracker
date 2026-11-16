@@ -58322,6 +58322,7 @@ export interface ApiPublicPackage {
 export interface ApiPublicParcelResponse {
   "link": ApiParcelLink;
   "package": ApiPublicPackage;
+  "checkQueued"?: boolean;
 }
 
 export interface ApiPublicLookupRequest {

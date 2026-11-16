@@ -3936,6 +3936,7 @@ data class PublicPackage(
 data class PublicParcelResponse(
     val link: ParcelLink,
     @SerialName("package") val parcel: PublicPackage,
+    val checkQueued: Boolean? = null,
 )
 
 @Serializable

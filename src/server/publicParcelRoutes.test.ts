@@ -705,9 +705,12 @@ describe('reading a parcel link', () => {
   it('queues a check of a one-off parcel that is due one, and only then', async () => {
     vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-02T10:35:00Z') });
     find({}, { last_synced_at: '2026-10-02T09:50:00+00:00' });
-    expect((await open()).status).toBe(200);
+    const read = await open();
+    expect(read.status).toBe(200);
     expect(enqueue).toHaveBeenCalledExactlyOnceWith({ packageId, reason: 'opened' });
     expect(wake).toHaveBeenCalledOnce();
+    // The answer says so, and the page reads the check's result as it lands.
+    expect((await read.json()).checkQueued).toBe(true);
 
     // Checked a minute ago, delivered, or owned by an account: reading queues nothing.
     for (const parcel of [
@@ -719,8 +722,10 @@ describe('reading a parcel link', () => {
       vi.spyOn(console, 'log').mockImplementation(() => undefined);
       const queued = vi.spyOn(SupabaseServiceClient.prototype, 'enqueueSyncJob');
       find({}, parcel);
-      expect((await open()).status).toBe(200);
+      const quiet = await open();
+      expect(quiet.status).toBe(200);
       expect(queued).not.toHaveBeenCalled();
+      expect(await quiet.json()).not.toHaveProperty('checkQueued');
     }
   });
 
@@ -728,7 +733,9 @@ describe('reading a parcel link', () => {
     vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-02T10:35:00Z') });
     find({}, { last_synced_at: null });
     enqueue.mockRejectedValue(new SupabaseError('queue unavailable', 503));
-    expect((await open()).status).toBe(200);
+    const read = await open();
+    expect(read.status).toBe(200);
+    expect(await read.json()).not.toHaveProperty('checkQueued');
   });
 
   it('keeps the link out of request logs and error reports', async () => {

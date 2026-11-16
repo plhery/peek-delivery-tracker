@@ -128,6 +128,49 @@ describe('useParcelLink', () => {
     expect(mocks.read).toHaveBeenCalledTimes(8);
   });
 
+  it('reads again after 2 s, backing off to 10 s, while an answer says a check is on its way, then settles at 30 s', async () => {
+    const queued = { ...testView(), checkQueued: true as const };
+    const checked = testView({ stages: ['registered', 'in_transit', 'out_for_delivery'] });
+    answers(queued, queued, checked);
+    const hook = renderHook(() => useParcelLink(LINK_ID));
+    await pass(0);
+    // A check on its way is no first check: the page shows the parcel as it stands.
+    expect(hook.result.current).toMatchObject({ status: 'ready', checking: false });
+    for (const [index, wait] of [2_000, 3_000].entries()) {
+      await pass(wait - 1);
+      expect(mocks.read).toHaveBeenCalledTimes(index + 1);
+      await pass(1);
+    }
+    expect(mocks.read).toHaveBeenCalledTimes(3);
+    expect(hook.result.current.news?.stage).toBe('out_for_delivery');
+    await pass(29_999);
+    expect(mocks.read).toHaveBeenCalledTimes(3);
+    await pass(1);
+    expect(mocks.read).toHaveBeenCalledTimes(4);
+  });
+
+  it('keeps the quick reads for a check on its way to a minute, and starts them over for the next one', async () => {
+    const queued = { ...testView(), checkQueued: true as const };
+    mocks.read.mockResolvedValue(queued);
+    renderHook(() => useParcelLink(LINK_ID));
+    await pass(0);
+    // 2, 5, 9.5, 16.25, 26.25, 36.25, 46.25, 56.25 and 66.25 s; then 30 s, as nothing it says counts as quiet.
+    await pass(66_250);
+    expect(mocks.read).toHaveBeenCalledTimes(10);
+    await pass(29_999);
+    expect(mocks.read).toHaveBeenCalledTimes(10);
+    await pass(1);
+    expect(mocks.read).toHaveBeenCalledTimes(11);
+    // The check lands with nothing new; the parcel's next check is queued 30 s later and read after 2 s.
+    mocks.read.mockResolvedValueOnce(testView()).mockResolvedValueOnce(queued).mockResolvedValue(testView());
+    await pass(30_000);
+    expect(mocks.read).toHaveBeenCalledTimes(12);
+    await pass(30_000);
+    expect(mocks.read).toHaveBeenCalledTimes(13);
+    await pass(2_000);
+    expect(mocks.read).toHaveBeenCalledTimes(14);
+  });
+
   it('keeps its pace while the tab is hidden, and reads at once when it is shown again', async () => {
     const hook = renderHook(() => useParcelLink(LINK_ID));
     await pass(0);

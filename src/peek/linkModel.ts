@@ -62,6 +62,8 @@ export interface ParcelLinkView {
   parcel: ParcelWithEvents;
   /** The ends of a masked number; null when the number is shown. */
   numberHint: ParcelNumberHint | null;
+  /** Reading the link queued a check, or found one queued or under way: its answer lands within seconds. */
+  checkQueued?: true;
 }
 
 /** What a lookup sends. The parcel's name is not part of it: a name never leaves the device this way. */
@@ -238,6 +240,7 @@ export function parcelLinkView(response: ApiPublicParcelResponse): ParcelLinkVie
     parcel: { ...toParcel({ ...row, tracking_number: row.tracking_number ?? '' }), likelyCarrier: row.carrier_data?.likely_carrier ?? undefined },
     numberHint: hint && typeof hint.head === 'string' && typeof hint.tail === 'string'
       ? { head: hint.head, tail: hint.tail } : null,
+    ...(response.checkQueued === true ? { checkQueued: true as const } : {}),
   };
 }
 

@@ -7,8 +7,8 @@ do $$
 declare
   parcel public.packages;
   -- Synthetic share tokens.
-  shared text := 'https://www.amazon.co.uk/progress-tracker/package/share/?unauthenticated=1&vt=SHARED_PACKAGE_TRACKING&shareToken=0f1e2d3c-4b5a-4968-8776-a5b4c3d2e1f0';
-  other text := 'https://www.amazon.fr/progress-tracker/package/share/?unauthenticated=1&vt=SHARED_PACKAGE_TRACKING&shareToken=1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d';
+  shared text := 'https://www.amazon.co.uk/progress-tracker/package/share/?unauthenticated=1&vt=SHARED_PACKAGE_TRACKING&shareToken=0f1e2d3c-4b5a-4968-8776-a5b4c3d2e1f0'; -- gitleaks:allow: made-up share token, used only in this test
+  other text := 'https://www.amazon.fr/progress-tracker/package/share/?unauthenticated=1&vt=SHARED_PACKAGE_TRACKING&shareToken=1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d'; -- gitleaks:allow: made-up share token, used only in this test
 begin
   parcel := test_support.add_parcel('0F1E2D3C4B5A49688776A5B4C3D2E1F0', 'Amazon order fixture', 'amazon-order', shared);
   if parcel.tracking_url <> shared then raise exception 'The Amazon link was not saved'; end if;
@@ -64,7 +64,7 @@ $$;
 do $$
 begin
   update public.packages set carrier = 'amazon-order',
-    tracking_url = 'https://www.amazon.example/progress-tracker/package/share/?unauthenticated=1&vt=SHARED_PACKAGE_TRACKING&shareToken=0f1e2d3c-4b5a-4968-8776-a5b4c3d2e1f0'
+    tracking_url = 'https://www.amazon.example/progress-tracker/package/share/?unauthenticated=1&vt=SHARED_PACKAGE_TRACKING&shareToken=0f1e2d3c-4b5a-4968-8776-a5b4c3d2e1f0' -- gitleaks:allow: made-up share token, used only in this test
   where tracking_number = '0F1E2D3C4B5A49688776A5B4C3D2E1F0';
   raise exception 'The table accepted a link off Amazon''s stores';
 exception when check_violation then null;

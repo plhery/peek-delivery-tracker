@@ -134,7 +134,7 @@ describe('NotificationControl', () => {
       expect(within(sheet).queryByText(/add Peek to your Home Screen, then open it there/)).toBeNull();
       expect(within(sheet).getByText('Sign in with this account. Your parcels come along.')).toBeVisible();
       expect(within(sheet).queryByRole('switch', { name: 'Notifications' })).toBeNull();
-      expect(sheet.querySelector('.notification-app-qr')).toBeNull();
+      expect(sheet.querySelector('.notification-app-qr, .notification-app-offer')).toBeNull();
       // The choices still show, for every device of the account.
       expect(await within(sheet).findByRole('group', { name: 'Which updates? On all your devices' })).toBeVisible();
 
@@ -161,18 +161,26 @@ describe('NotificationControl', () => {
     });
   });
 
-  it.each(['prompt', 'enabled'] as const)('when %s, says the choices are for every device and shows a computer the app’s code under the switch', async (kind) => {
+  it.each(['prompt', 'enabled'] as const)('when %s, says the choices are for every device and offers the app on either phone under the switch', async (kind) => {
     vi.mocked(inspectPushState).mockResolvedValue({ kind, publicKey: 'public' });
     const apiAuth = { userId: 'user-1', getAccessToken: vi.fn().mockResolvedValue('token') };
     const user = userEvent.setup();
     render(<NotificationControl apiAuth={apiAuth} />);
     await user.click(await screen.findByRole('button', { name: kind === 'enabled' ? 'Notifications enabled' : 'Notifications' }));
     expect(await screen.findByRole('group', { name: 'Which updates? On all your devices' })).toBeVisible();
-    // The row is drawn here and shown by the stylesheet on a computer only, as the landing's code is.
-    const code = screen.getByText('On your iPhone too').closest('.notification-app-qr');
-    expect(code?.querySelector('img')).toHaveAttribute('src', '/settings/app-store-qr.svg');
+    // Both are drawn here; the stylesheet shows the code on a computer, as the landing's, and the row anywhere else.
+    const [code, row] = screen.getAllByText('On your phone too').map((title) => title.closest('.notification-app-qr, .notification-app-offer'));
+    expect(code).toHaveClass('notification-app-qr');
+    expect(code?.querySelector('img')).toHaveAttribute('src', '/settings/app-qr.svg');
     expect(within(code as HTMLElement).getByText('Get the Peek app and sign in with this account.')).toBeInTheDocument();
     expect(screen.getByRole('switch', { name: 'Notifications' }).closest('.settings-device-control')?.nextElementSibling).toBe(code);
+    // `/app` sends an iPhone or an iPad to the App Store and an Android phone to the Android app's steps.
+    expect(row).toHaveClass('notification-app-offer');
+    expect(code?.nextElementSibling).toBe(row);
+    document.addEventListener('click', stay, true);
+    await user.click(within(row as HTMLElement).getByRole('link', { name: 'Get' }));
+    expect(within(row as HTMLElement).getByRole('link', { name: 'Get' })).toHaveAttribute('href', '/app?utm_source=settings');
+    expect(mocks.track).toHaveBeenCalledWith('notifications-app-get');
     expect(screen.queryByText('Notifications in the Peek app')).toBeNull();
   });
 

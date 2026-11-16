@@ -5,7 +5,7 @@ import { holdsSignIn } from '../auth/savedSignIn';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
 import {
-  ANDROID_TEST_LINKS, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
+  ANDROID_OTHER_SOURCES, ANDROID_TEST_LINKS, neverAndroidTest, noteAndroidTestStep, readAndroidTestNote, subscribeAndroidTest, type AndroidTestStep,
 } from '../lib/androidTest';
 import { AppearanceProvider } from '../lib/appearance';
 import { backOnSite } from '../lib/backOnSite';
@@ -30,6 +30,7 @@ const nothing = () => null;
  * Each opens Google's page in a new tab, so Back returns here, where the next step then leads. Google Play lets in
  * only the group's members, so the last two steps stay locked until the group's link was followed. Anyone who
  * reaches the page sees it, on any device: a computer can join and opt in for the phone's Google account too.
+ * Under them, the same app without Google Play: Peek's F-Droid repository, whose address is copied, or GitHub.
  */
 export function AndroidTestScreen({ initialLocale, initialMessages }: { initialLocale?: Locale; initialMessages?: Messages }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
@@ -41,6 +42,7 @@ function AndroidTest() {
   const { t } = useI18n();
   const note = useSyncExternalStore(subscribeAndroidTest, readAndroidTestNote, nothing);
   const [declined, setDeclined] = useState(false);
+  const [copied, setCopied] = useState(false);
   const said = useRef<HTMLParagraphElement>(null);
   useTabTitle(`${t('app.title')} — ${t('androidTest.page.title')}`);
   useEffect(() => {
@@ -54,6 +56,12 @@ function AndroidTest() {
   const joined = !!note?.steps?.group;
   // The first step not taken yet leads; once all are, none does.
   const next = joined ? STEPS.find(({ step }) => !note?.steps?.[step])?.step : 'group';
+
+  async function copyRepository() {
+    trackAction('android-test-fdroid');
+    try { await navigator.clipboard.writeText(ANDROID_OTHER_SOURCES.fdroid); setCopied(true); }
+    catch { /* The address stays on screen to select by hand. */ }
+  }
 
   return <div className="android-steps">
     <header className="android-steps__header">
@@ -90,6 +98,18 @@ function AndroidTest() {
         })}
       </ol>
       <p className="android-steps__note">{t('androidTest.page.note')}</p>
+      <section className="android-steps__other" aria-labelledby="android-steps-other">
+        <h2 id="android-steps-other">{t('androidTest.other.title')}</h2>
+        <p>{t('androidTest.other.fdroid')}</p>
+        <p className="android-steps__address" translate="no">{ANDROID_OTHER_SOURCES.fdroid}</p>
+        <button type="button" className="button button--secondary" onClick={() => void copyRepository()}>
+          <Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'androidTest.other.copied' : 'androidTest.other.copy')}
+        </button>
+        <p>{t('androidTest.other.github')}</p>
+        <a className="button button--secondary" href={ANDROID_OTHER_SOURCES.github} target="_blank" rel="noopener noreferrer"
+          onClick={() => trackAction('android-test-github')}>{t('androidTest.other.githubAction')}<Icon name="arrow" /></a>
+        <p>{t('androidTest.other.note')}</p>
+      </section>
       {note?.never
         ? <p ref={said} className="android-steps__never" tabIndex={-1}>{t('androidTest.page.neverDone')}</p>
         : <button type="button" className="android-steps__never" onClick={() => {

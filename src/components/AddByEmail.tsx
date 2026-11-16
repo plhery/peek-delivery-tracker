@@ -99,6 +99,8 @@ function StepText({ text }: { text: string }) {
  * with its own names for its buttons. The reader names their service, which starts on the one their account's address
  * belongs to, and the languages their shops and carriers write in, which start with the language Peek shows, the
  * browser's and English.
+ * - Each service's first step names the way to its settings as well as linking there, and says what to check when they
+ *   don't show what the step speaks of: a phone, another account, an administrator who turned forwarding off.
  * - Gmail forwards only to an address it has confirmed, and then only the emails a filter picks: the address is added
  *   and confirmed first (Peek shows Gmail's confirmation in the step), then the filter is made from a search to copy.
  *   Its forwarding settings also offer to forward every email, which the steps say to leave off.
@@ -127,6 +129,7 @@ function ForwardingSteps({ email, confirmation }: { email?: string; confirmation
   }
 
   const step = (key: Parameters<typeof t>[0]) => <StepText text={t(key, { options: '[[options]]' })} />;
+  const missing = (key: Parameters<typeof t>[0]) => <p className="add-by-email__note add-by-email__missing"><StepText text={t(key)} /></p>;
   const languagePicker = <>
     <p className="add-by-email__note add-by-email__note--lead" id="add-by-email-languages">{t('inbox.filter.languages')}</p>
     <div className="add-by-email__choices" role="group" aria-labelledby="add-by-email-languages">
@@ -149,7 +152,7 @@ function ForwardingSteps({ email, confirmation }: { email?: string; confirmation
     </div>
     {service === 'yahoo' ? <p className="add-by-email__steps add-by-email__steps--none">{t('inbox.yahoo')}</p> : <ol className="add-by-email__steps">
       {service === 'gmail' && <>
-        <li>{step('inbox.gmail.add')}<StepLink href={GMAIL_FORWARDING_LINK}>{t('inbox.gmail.addLink')}</StepLink></li>
+        <li>{step('inbox.gmail.add')}<StepLink href={GMAIL_FORWARDING_LINK}>{t('inbox.gmail.addLink')}</StepLink>{missing('inbox.gmail.noButton')}</li>
         <li>{step('inbox.gmail.confirm')}
           {confirmation && <div className="settings-box add-by-email__step-box add-by-email__confirmation">
             {confirmation.link && <a className="settings-row" href={confirmation.link} target="_blank" rel="noopener noreferrer"><Icon name="mail" />{t('inbox.confirm.link')}<span className="settings-chevron" aria-hidden="true">›</span></a>}
@@ -170,12 +173,12 @@ function ForwardingSteps({ email, confirmation }: { email?: string; confirmation
         <li>{step('inbox.gmail.forward')}</li>
       </>}
       {service === 'outlook' && <>
-        <li>{step('inbox.outlook.rule')}<StepLink href={OUTLOOK_RULES_LINK}>{t('inbox.outlook.link')}</StepLink></li>
+        <li>{step('inbox.outlook.rule')}<StepLink href={OUTLOOK_RULES_LINK}>{t('inbox.outlook.link')}</StepLink>{missing('inbox.outlook.work')}</li>
         <li>{step('inbox.outlook.condition')}{words}</li>
         <li>{step('inbox.outlook.action')}</li>
       </>}
       {service === 'icloud' && <>
-        <li>{step('inbox.icloud.rule')}<StepLink href={ICLOUD_MAIL_LINK}>{t('inbox.icloud.link')}</StepLink></li>
+        <li>{step('inbox.icloud.rule')}<StepLink href={ICLOUD_MAIL_LINK}>{t('inbox.icloud.link')}</StepLink>{missing('inbox.icloud.noMail')}</li>
         <li>{step('inbox.icloud.words')}{words}</li>
         <li>{step('inbox.icloud.more')}</li>
       </>}

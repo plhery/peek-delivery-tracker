@@ -89,17 +89,20 @@ are virtual names, never real URLs.
 - **Android test** (web): the invitation to test the Android app shown (once per page load
   and place), opened (also from the thanks' "Didn't work?"), hidden for a week with ×, or never again; on its steps page
   (`android-test`), each step's link followed: the testers' group, Google Play's opt-in and the
-  install. Its events say where they come from: `spot` is `parcel` for the parcel page's row,
+  install, and below them the F-Droid repository's address copied (`android-test-fdroid`) or
+  GitHub's releases opened (`android-test-github`). Its events say where they come from: `spot` is `parcel` for the parcel page's row,
   `alerts` for its "Notify me", `home` for the home page's banner, `landing` and `footer` for
   the landing's "Android app" button and footer link, and `get-app` for the button of
   `/app`'s page (opened only). Google Play counts the testers ([Google Play](google-play/README.md)).
 - **Getting the app** (web): the landing's code to scan leads to `/app?utm_source=landing-qr`,
-  which the server answers by the user agent: an iPhone or an iPad that says so goes to the App
-  Store (campaign `web-qr`, or `web-app` without that source) and an Android phone to the
-  Android test's steps, whose view carries the source. A computer, or an iPad whose Safari says
+  Settings' app row to `/app?utm_source=settings` and Settings' code to
+  `/app?utm_source=settings-qr`. The server answers by the user agent: an iPhone or an iPad that
+  says so goes to the App Store (campaign `web-qr`, `web-settings` or `web-settings-qr`, or
+  `web-app` for any other source) and an Android phone to the Android test's steps, whose view
+  carries the source. A computer, or an iPad whose Safari says
   it is a Mac, gets a page with the code and both apps (`get-app`); the iPad goes on to the App
   Store from there, uncounted.
-- **Settings**: language, appearance, notifications and the App Store link beside them,
+- **Settings**: language, appearance, notifications and the app row beside them (`notifications-app-get`),
   widgets, export, account deletion, app opens.
 - **Delivery email**: switched on or off in Settings, the one-time offer accepted or
   declined, the example opened, and the email's opt-out page used. That page counts

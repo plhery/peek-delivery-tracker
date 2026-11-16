@@ -101,7 +101,11 @@ describe('adding parcels by email in Settings', () => {
     expect(steps).toHaveLength(6);
     expect(within(steps[0]!).getByRole('link', { name: /Open Gmail’s forwarding settings/ })).toHaveAttribute('href', 'https://mail.google.com/mail/#settings/fwdandpop');
     // Gmail's own button names stand out, and its options button, which has no name on screen, is drawn.
-    expect(within(steps[0]!).getByText('Add a forwarding address').tagName).toBe('STRONG');
+    expect(steps[0]).toHaveTextContent('click the Settings gear at the top right, then See all settings › Forwarding and POP/IMAP.');
+    expect(within(steps[0]!).getAllByText('Add a forwarding address').map((name) => name.tagName)).toEqual(['STRONG', 'STRONG']);
+    // Where the button isn't: a phone, another account, or an administrator who turned forwarding off.
+    expect(within(steps[0]!).getByText(/^No/).closest('p')).toHaveTextContent(
+      'No Add a forwarding address button? Check that you’re on a computer, in the account that gets your shipping emails: your picture at the top right switches accounts. On a work or school account, the administrator may have turned forwarding off: ask them, or forward your shipping emails by hand.');
     expect(steps[1]).toHaveTextContent(/confirmation link to your Peek address. It shows up below/);
     expect(within(steps[2]!).getByText('Disable forwarding').tagName).toBe('STRONG');
     expect(steps[3]).toHaveTextContent(/^Choose the languages your shops write in, then copy the search below/);
@@ -125,6 +129,7 @@ describe('adding parcels by email in Settings', () => {
     const services = screen.getByRole('group', { name: 'Your mail service' });
     expect(within(services).getByRole('button', { pressed: true })).toHaveTextContent('Outlook');
     expect(screen.getByRole('link', { name: /Open Outlook’s rules/ })).toHaveAttribute('href', 'https://outlook.live.com/mail/0/options/mail/rules');
+    expect(screen.getByText(/^A work or school account opens Outlook at outlook.office.com instead/)).toHaveTextContent(/organization may block forwarding to outside addresses/);
     expect(screen.queryByRole('button', { name: 'Copy search' })).not.toBeInTheDocument();
     const words = screen.getByRole('group', { name: 'Words to look for in the subject' });
     // Each language's first word comes before any second one.
@@ -136,6 +141,7 @@ describe('adding parcels by email in Settings', () => {
 
     await user.click(within(services).getByRole('button', { name: 'iCloud' }));
     expect(screen.getByRole('link', { name: /Open iCloud Mail/ })).toHaveAttribute('href', 'https://www.icloud.com/mail');
+    expect(screen.getByText('Access iCloud Data on the Web').tagName).toBe('STRONG');
     expect(screen.getByText(/Each rule looks for one word/)).toBeInTheDocument();
 
     // Yahoo forwards no chosen email: it says so and asks for nothing else.

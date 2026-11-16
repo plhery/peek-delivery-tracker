@@ -316,7 +316,10 @@ Key server modules:
     account's address belongs to, and the languages their shops and carriers write in,
     which start with the language Peek shows, the browser's and English.
     - Each service's steps follow its own help pages, in its order and with its button
-      names (`**…**` in the copy, set in bold).
+      names (`**…**` in the copy, set in bold). The first step names the way to the
+      settings as well as linking there, and says what to check when they don't show what
+      it speaks of: a computer, the account that gets the shipping emails, a work or school
+      administrator who turned forwarding off, and iCloud's Advanced Data Protection.
     - Gmail: add the address, confirm it (Gmail's confirmation shows in that step, and
       Settings reads the address again when the reader comes back to Peek), leave
       forwarding of all mail off, then a filter made from a search to copy that forwards

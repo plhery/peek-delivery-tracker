@@ -23,6 +23,16 @@ export const ANDROID_TEST_LINKS = {
 
 export type AndroidTestStep = keyof typeof ANDROID_TEST_LINKS;
 
+/**
+ * The same app without Google Play: each release, as Google Play signs it, goes to Peek's own F-Droid repository and
+ * to a GitHub pre-release (android/README.md). F-Droid takes the repository's whole address, with the fingerprint of
+ * the key its index is signed with; opened in a browser, the address is a 404.
+ */
+export const ANDROID_OTHER_SOURCES = {
+  fdroid: 'https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7',
+  github: 'https://github.com/plhery/peek-delivery-tracker/releases',
+} as const;
+
 /** The steps' page. */
 export const ANDROID_TEST_PATH = '/android';
 

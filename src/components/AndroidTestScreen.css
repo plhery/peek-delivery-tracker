@@ -21,5 +21,13 @@
 .android-steps__list > li[data-locked] .button { cursor: not-allowed; }
 .android-steps__number svg { width: 15px; height: 15px; stroke-width: 2.6; }
 .android-steps__note { margin: 0 6px; color: var(--ink-soft); font-size: 12px; line-height: 1.45; }
+/* The same app without Google Play, after the steps: Peek's F-Droid repository, whose address is copied, or GitHub. */
+.android-steps__other { display: grid; gap: 8px; padding: 16px; border-radius: 20px; background: var(--paper); }
+.android-steps__other h2 { margin: 0; font-size: 15px; font-weight: 650; }
+.android-steps__other p { margin: 0; color: var(--ink-soft); font-size: 12.5px; line-height: 1.45; }
+.android-steps__other p.android-steps__address { padding: 10px 12px; border-radius: 12px; background: var(--canvas); color: var(--ink); font: 500 11.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; user-select: all; }
+.android-steps__other .button { justify-self: start; min-height: 44px; margin-bottom: 6px; padding: 10px 16px; border-radius: 14px; font-size: 14px; }
+.android-steps__other .button svg { width: 13px; height: 13px; stroke-width: 2.4; }
+.android-steps__other > p:last-child { font-size: 12px; }
 .android-steps__never { justify-self: center; min-height: 44px; padding: 8px; background: none; color: var(--ink-soft); font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
 p.android-steps__never { margin: 0; text-decoration: none; outline: none; }

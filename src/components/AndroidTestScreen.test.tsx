@@ -72,6 +72,26 @@ describe('the steps page', () => {
     expect(screen.getByText('We won’t ask again in this browser.')).toHaveFocus();
   });
 
+  it('offers the same app without Google Play: F-Droid’s address to copy, or GitHub', async () => {
+    const user = userEvent.setup();
+    const writeText = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
+    render(<AndroidTestScreen />);
+    const other = screen.getByRole('region', { name: 'Without Google Play' });
+    const address = 'https://raw.githubusercontent.com/plhery/peek-delivery-tracker/fdroid/repo?fingerprint=2BA268AF2C76EFB2C262DA7CA8499284B7CC7D0F76DCBE47A8ABA5703067F1A7';
+    expect(within(other).getByText(address)).toHaveAttribute('translate', 'no');
+    await user.click(within(other).getByRole('button', { name: 'Copy the address' }));
+    expect(writeText).toHaveBeenCalledExactlyOnceWith(address);
+    expect(within(other).getByRole('button', { name: 'Copied' })).toBeVisible();
+    const github = within(other).getByRole('link', { name: 'Open GitHub' });
+    expect([github.getAttribute('href'), github.getAttribute('target')]).toEqual(['https://github.com/plhery/peek-delivery-tracker/releases', '_blank']);
+    github.addEventListener('click', (event) => event.preventDefault());
+    await user.click(github);
+    expect(mocks.track.mock.calls).toEqual([['android-test-fdroid'], ['android-test-github']]);
+    // Nothing here counts as a step of the test.
+    expect(stored()).toEqual({});
+    writeText.mockRestore();
+  });
+
   it('goes back to the home page from anywhere else', () => {
     render(<AndroidTestScreen />);
     expect(screen.getByRole('link', { name: 'Back' })).toHaveAttribute('href', '/');

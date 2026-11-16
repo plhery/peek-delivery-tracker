@@ -1,7 +1,9 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import { appStoreLink } from './appStore';
-import { PHONE_APP_QR_SOURCE, phoneAppDestination, phoneAppSource } from './phoneApp';
+import {
+  PHONE_APP_QR_SOURCE, PHONE_APP_SETTINGS_QR_SOURCE, PHONE_APP_SETTINGS_SOURCE, phoneAppDestination, phoneAppLink, phoneAppSource,
+} from './phoneApp';
 
 const IPHONE = 'Mozilla/5.0 (iPhone; CPU iPhone OS 19_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Mobile/15E148 Safari/604.1';
 const IPAD_MOBILE = 'Mozilla/5.0 (iPad; CPU OS 19_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Mobile/15E148 Safari/604.1';
@@ -16,6 +18,14 @@ describe('the code for both phones', () => {
     expect(phoneAppDestination(IPHONE, PHONE_APP_QR_SOURCE)).toBe(appStoreLink('web-qr'));
     expect(phoneAppDestination(IPAD_MOBILE, PHONE_APP_QR_SOURCE)).toBe(appStoreLink('web-qr'));
     expect(phoneAppDestination(IPHONE)).toBe(appStoreLink('web-app'));
+  });
+
+  it('counts Settings’ row and code under their own campaigns, and any other source as `/app` itself', () => {
+    expect(phoneAppDestination(IPHONE, PHONE_APP_SETTINGS_SOURCE)).toBe(appStoreLink('web-settings'));
+    expect(phoneAppDestination(IPHONE, PHONE_APP_SETTINGS_QR_SOURCE)).toBe(appStoreLink('web-settings-qr'));
+    expect(phoneAppDestination(ANDROID, PHONE_APP_SETTINGS_QR_SOURCE)).toBe('/android?utm_source=settings-qr');
+    for (const source of ['footer', 'constructor', '__proto__']) expect(phoneAppDestination(IPHONE, source)).toBe(appStoreLink('web-app'));
+    expect(phoneAppLink(PHONE_APP_SETTINGS_SOURCE)).toBe('/app?utm_source=settings');
   });
 
   it('sends an Android phone to the test’s steps, with the source for their page view', () => {
@@ -35,8 +45,9 @@ describe('the code for both phones', () => {
     for (const source of [undefined, '', ['landing-qr'], 'Landing', 'a b', 'x&utm_medium=y', 'a'.repeat(41)]) expect(phoneAppSource(source)).toBeUndefined();
   });
 
-  it('draws the landing’s code for its address', () => {
-    // The code itself is drawn once, by a QR encoder; its description names what it was drawn for.
+  it('draws the landing’s code and Settings’ code for their addresses', () => {
+    // Each code is drawn once, by a QR encoder; its description names what it was drawn for.
     expect(readFileSync('public/landing/app-qr.svg', 'utf8')).toContain(`<desc>https://peektracker.com/app?utm_source=${PHONE_APP_QR_SOURCE}</desc>`);
+    expect(readFileSync('public/settings/app-qr.svg', 'utf8')).toContain(`<desc>https://peektracker.com/app?utm_source=${PHONE_APP_SETTINGS_QR_SOURCE}</desc>`);
   });
 });

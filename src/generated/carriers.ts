@@ -2308,6 +2308,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0032a0"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-sendungsverfolgung",
+      "title": "DHLink Sendungsverfolgung: Nummer, Status und Zustellung",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-sendungsverfolgung",
@@ -2774,6 +2782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "imile",
+      "catalog": "imile",
+      "slug": "imile-suivi",
+      "title": "Suivi colis iMile\u00a0: numéro, statuts et livraison",
+      "name": "iMile",
+      "color": "#0032a0"
+    },
+    {
       "id": "dhlink",
       "catalog": "dhlink",
       "slug": "dhlink-suivi",
@@ -3078,6 +3094,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking PostNL: codici, stati e consegna in Italia",
       "name": "PostNL",
       "color": "#ef7d00"
+    },
+    {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-tracking",
+      "title": "Tracking DHLink: codice DHgate, stati e chi consegna",
+      "name": "DHLink",
+      "color": "#143167"
     },
     {
       "id": "tnt-it",
@@ -3466,6 +3490,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef7d00"
     },
     {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-seguimiento",
+      "title": "Seguimiento DHLink: número de DHgate, estados y reparto",
+      "name": "DHLink",
+      "color": "#143167"
+    },
+    {
       "id": "tnt",
       "catalog": "tnt",
       "slug": "tnt-seguimiento",
@@ -3788,6 +3820,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#006d46"
     },
     {
+      "id": "imile",
+      "catalog": "imile",
+      "slug": "imile-rastreio",
+      "title": "iMile rastreio: números, estados e entrega em Portugal",
+      "name": "iMile",
+      "color": "#0032a0"
+    },
+    {
       "id": "dhlink",
       "catalog": "dhlink",
       "slug": "dhlink-rastreio",
@@ -4024,12 +4064,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4d148c"
     },
     {
+      "id": "imile",
+      "catalog": "imile",
+      "slug": "imile-sledzenie",
+      "title": "Śledzenie iMile: numery, statusy i dostawa w Polsce",
+      "name": "iMile",
+      "color": "#0032a0"
+    },
+    {
       "id": "postnl",
       "catalog": "spring-gds",
       "slug": "postnl-sledzenie-przesylki",
       "title": "PostNL śledzenie przesyłki: numer, statusy, doręczenie",
       "name": "PostNL",
       "color": "#ef7d00"
+    },
+    {
+      "id": "dhlink",
+      "catalog": "dhlink",
+      "slug": "dhlink-sledzenie",
+      "title": "Śledzenie DHLink: numer z DHgate, statusy i doręczenie",
+      "name": "DHLink",
+      "color": "#143167"
     },
     {
       "id": "tnt",

@@ -129,6 +129,7 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.LocalMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
+import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.swiftUiShadow
 import java.util.UUID
@@ -642,7 +643,7 @@ private fun MenuItemRow(
             .padding(start = ROW_START, end = ROW_END, top = ROW_PADDING, bottom = ROW_PADDING),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Box(Modifier.width(SYMBOL_WIDTH), contentAlignment = Alignment.Center) {
+        Box(Modifier.width(type.menuSymbolColumn()), contentAlignment = Alignment.Center) {
             PeekSymbol(item.symbol, font = type.body, tint = ink)
         }
         Spacer(Modifier.width(SYMBOL_GAP))
@@ -676,9 +677,15 @@ internal fun parcelMenuWidth(items: List<List<ParcelMenuItem>>, shortcuts: Boole
     val measurer = rememberTextMeasurer()
     val words = items.flatten().flatMap { listOfNotNull(localizer.text(it.titleKey), it.shortcutLabel.takeIf { shortcuts }) }
     val widest = words.maxOfOrNull { measurer.measure(it, font, maxLines = 1, softWrap = false).size.width } ?: 0
-    val chrome = with(density) { (ROW_START + SYMBOL_WIDTH + SYMBOL_GAP + ROW_END).toPx() }
+    val chrome = with(density) { (ROW_START + PeekTheme.type.menuSymbolColumn() + SYMBOL_GAP + ROW_END).toPx() }
     return (widest + chrome).coerceIn(narrow, max(narrow, room))
 }
+
+/**
+ * The symbols' column: [SYMBOL_WIDTH] at Large, grown with the body as the symbols are (`@ScaledMetric`), so the widest,
+ * the truck, stays clear of its title at every text size.
+ */
+internal fun PeekTypography.menuSymbolColumn(): Dp = scaled(SYMBOL_WIDTH.value).dp
 
 @Composable
 private fun MenuSeparator() {

@@ -36,6 +36,7 @@ import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performSemanticsAction
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.rightClick
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.DpRect
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.height
@@ -48,6 +49,10 @@ import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.trackingNumbers
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.symbols.materialSymbols
+import com.plhery.peekdeliverytracker.ui.theme.DynamicTypeSize
+import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
+import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import kotlin.math.abs
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -173,6 +178,18 @@ class CardMenuTest {
         longPress("Birthday gift")
         val width = menuWidth()
         assertTrue("$width", width > 250f + 0.5f && width < window().width.value - 2 * 22f - 0.5f)
+    }
+
+    /** Each symbol's ink, drawn in the body's size, fits the symbols' column at every text size: none runs into its title. */
+    @Test
+    fun everySymbolFitsItsColumnAtEveryTextSize() {
+        for (size in DynamicTypeSize.entries) {
+            val column = PeekTypography(size, Density(2f)).menuSymbolColumn().value
+            for (item in ParcelMenuItem.entries) {
+                val ink = materialSymbols.getValue(item.symbol).sf[4] * IosTextStyle.Body.pointSize(size) / 100
+                assertTrue("$item at $size: $ink wide in $column", ink <= column)
+            }
+        }
     }
 
     /**

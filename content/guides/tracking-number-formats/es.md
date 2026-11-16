@@ -4,7 +4,7 @@ description: Pega tu número de seguimiento y mira de qué empresa es tu paquete
 slug: que-empresa-es-numero-de-seguimiento
 picture: Tres etiquetas con números de seguimiento divididos en colores, una lupa sobre el código de país CH y Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 
 Pega tu número de seguimiento en la casilla de abajo y verás de qué empresa es: Peek reconoce al transportista por la forma del número, y con «Seguir tu paquete» ves dónde está. Si sale «Podría ser», esa forma la usan varias empresas, y la buena es la que nombra el correo de envío de la tienda; si pegas un número de pedido de Amazon, Shein o Temu, te dice dónde está el de seguimiento. A ojo, las letras y la longitud suelen bastar: `1Z` y 16 letras o cifras es UPS, `0000/00000000` es NACEX, y 13 caracteres como `RR000000005ES` (dos letras, nueve cifras, dos letras) son casi siempre un número postal, de Correos si acaba en `ES`. Los números que solo llevan cifras son el caso difícil: 12, 14 o 22 cifras encajan con varias empresas.
@@ -40,7 +40,7 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 | MRW | «número de envío», en el justificante si enviaste desde una oficina MRW. En la etiqueta de ejemplo de MRW sale con 12 cifras bajo el código de barras y, junto a «N.º Etiqueta», partido en 5 cifras, una barra y 7 cifras: quita la barra antes de buscarlo. En paquetes de MRW se ha visto también la forma de 5 cifras, una letra y 6 cifras, que las páginas de MRW no muestran |
 | [NACEX](carrier:nacex) | el localizador pide la expedición en dos casillas, «Agencia» y «Albarán»; su portada pone de ejemplo `0000/00000000` y esos datos reconocen 4 cifras, una barra y 8 cifras, aunque NACEX no publica una longitud fija |
 | TIPSA | «número de envío compuesto por 22 dígitos», junto con el código postal de destino. Son dos códigos de agencia y el albarán de 10 cifras; el albarán suelto no sirve |
-| [CTT Express](carrier:ctt-express) | «código de envío»; según esos datos, 22 cifras: `00`, cuatro cifras, `00` y 14 cifras más, o 25 cifras con un contador de bultos al final. Si empieza por `00001000`, puede ser también de TIPSA |
+| [CTT Express](carrier:ctt-express) | «código de envío»; según esos datos, 22 cifras: `00`, cuatro cifras, `00` y 14 cifras más, o 25 cifras con un contador de bultos al final. Si empieza por `00001000`, esos datos apuntan primero a TIPSA |
 | [Mondial Relay](carrier:mondial-relay) | número de envío de 8 cifras, que se busca junto con el código postal del destinatario; su web belga acepta también 10 y 12 cifras, que según esos datos son un código de marca y ese número, más el número de bulto en las de 12. Esos datos reconocen también el código de barras de 26 cifras de la etiqueta por sus dos dígitos de control |
 | [InPost](carrier:inpost) (Punto Pack, Locker) | «número de expedición»; el ejemplo de su localizador tiene 8 caracteres, y según esos datos hay también números con `FV` y 8 cifras. La web de Mondial Relay en España ya lleva a la de InPost |
 | [Ecoscooting](carrier:ecoscooting) | según esos datos, `CNESP` y 20 cifras; uno de 18 cifras también puede ser suyo |
@@ -63,7 +63,7 @@ Esto es lo que dicen las empresas y la norma postal sobre los números que más 
 
 Según los datos de transportistas citados arriba, el código de un paquete de Correos tiene 23 caracteres: dos de producto (como `PQ`, `PK` o `PH` en los paquetes; en las devoluciones, el primero es una `D`), cuatro más de la etiqueta, 16 cifras y una letra de control, como el inventado `PQ0A1B1234567891234567B`. El de una expedición entera tiene 16: los 15 primeros del código del paquete y otra letra de control. La ayuda de Correos no describe estos códigos, pero el único ejemplo que enseña encaja: en su página sobre el envío de equipaje para viajeros de Renfe, el código de la columna «PK» empieza por esas dos letras y tiene 23 caracteres.
 
-En esos mismos datos, `CNG` y 14 cifras es de AliExpress y Cainiao, y `LP` y 14 cifras apunta a ellos solo como posibilidad: Cainiao no describe sus números en su centro de ayuda.
+En esos mismos datos, `CNG` y 14 cifras es de AliExpress y Cainiao, y `LP` y 14 cifras probablemente también, aunque sin certeza: Cainiao no describe sus números en su centro de ayuda.
 
 ## ¿Cuántas cifras tiene un número de seguimiento?
 

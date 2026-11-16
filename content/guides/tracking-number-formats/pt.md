@@ -4,7 +4,7 @@ description: Descobre que transportadora tem a tua encomenda pelo número de seg
 slug: como-saber-qual-e-a-transportadora
 picture: Três etiquetas de seguimento divididas em partes coloridas, uma lupa sobre o código de país CH e o Pip, curioso.
 published: 2026-10-09
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 
 As letras e o comprimento de um número de seguimento dizem muitas vezes que transportadora tem a tua encomenda. `1Z` seguido de 16 letras e algarismos é UPS, e 13 caracteres como `RR000000005CH` (duas letras, nove algarismos, duas letras) costumam ser de um operador postal, com o país que emitiu o número nas duas últimas letras: `PT` é Portugal. Os números só com algarismos são o caso difícil: 10, 12 ou 14 algarismos podem ser de várias transportadoras, e aí quem decide é o e-mail de envio, ou um serviço de seguimento que as experimente uma a uma.
@@ -48,10 +48,10 @@ Eis o que as transportadoras, e a norma postal, dizem sobre os números que mais
 | [Paack](carrier:paack) | número de pedido da loja ou código de barras da etiqueta, com o código postal de entrega; nos dados de transportadoras que o Peek usa, a maior parte destes números não tem forma fixa, por isso podem parecer de outra transportadora; as exceções são `PK` + 18 algarismos, que é da Paack (encomendas que entrega para a Evri International), `5340` + 14 algarismos, que aponta primeiro para a Paack, e um número de encomenda da SHEIN (`C` ou `E`, uma data de seis algarismos e mais 8), que pode ser da Paack |
 | Ecoscooting | a página de seguimento não indica um formato; nos dados de transportadoras que o Peek usa, `CNPRT` + 20 algarismos é Ecoscooting |
 | Amazon | nos dados de transportadoras que o Peek usa, `TBA` + 12 algarismos ou `PT` + 10 algarismos; explicados mais abaixo |
-| [Cainiao](carrier:cainiao) (AliExpress) | a Cainiao não descreve os seus números; nos dados de transportadoras que o Peek usa, `LP` + 14 algarismos pode ser Cainiao, e `CNG` + 14 algarismos ou `DOFR` ou `CNFR` + 13 algarismos + `HD` é Cainiao |
+| [Cainiao](carrier:cainiao) (AliExpress) | a Cainiao não descreve os seus números; nos dados de transportadoras que o Peek usa, `LP` + 14 algarismos é provavelmente Cainiao, e `CNG` + 14 algarismos ou `DOFR` ou `CNFR` + 13 algarismos + `HD` é Cainiao |
 | [YunExpress](carrier:yunexpress) | `YT` + 16 algarismos (`YT` + 13 algarismos é a YTO Express) |
 | [Yanwen](carrier:yanwen) | `BYS` + 9 algarismos, ou duas letras, 9 algarismos e `YP` (`UL` e `UK` são os inícios mais comuns); a Yanwen não publica nenhum número de exemplo. `YW`, três letras e 12 algarismos é o seu serviço de entrega nos Estados Unidos |
-| [4PX](carrier:4px) | `4PX` + 13 algarismos + `CN`; a 4PX não publica nenhum número de exemplo, e o site aceita de 5 a 50 letras e algarismos. `LP` + 13 algarismos + `CN` é muito provavelmente 4PX |
+| [4PX](carrier:4px) | `4PX` + 13 algarismos + `CN`; a 4PX não publica nenhum número de exemplo, e o site aceita de 5 a 50 letras e algarismos. `LP` + 13 algarismos + `CN` é provavelmente 4PX |
 | [China Post](carrier:china-post), EMS | o formato postal terminado em `CN`; os números EMS internacionais começam por `E` |
 
 ### O que significam as letras de um código de envio dos CTT?

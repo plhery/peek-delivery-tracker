@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-15
+updated: 2026-11-16
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -71,7 +71,7 @@ Delivery attempts, notice cards and how long a parcel waits at the post office f
 
 ## China Post tracking not updating, lost or returned
 
-**No scans yet.** China Post shows nothing until it has scanned the parcel; before that, the shop has only made a label. Ask the shop when it handed the parcel over.
+**No scans yet.** China Post shows nothing until it has scanned the parcel; before that, the shop has only made a label. Ask the shop when it handed the parcel over. Peek shows "Waiting for China Post" on peektracker.com meanwhile. If China Post still shows nothing for the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
 
 **Quiet after it left China.** Between the flight and your post's first scan, days can pass without news. Check your own post's tracking with the same number. A number starting with U may never get scans in your country. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
@@ -98,7 +98,7 @@ Peek reads China Post's own tracking. When China Post asks for phone digits, Pee
 
 It shows the status, the history with the office of each scan (an office written in Chinese named by its town, or as written where Peek can't place it), and the destination country. Scans appear in English where Peek knows China Post's wording, otherwise in Chinese. China Post times its own scans on China's clock, even the arrival in your country; the later scans it copies from your national post usually keep that post's local time. Peek shows each scan in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. China Post gives no expected delivery date, weight or pickup point, and Peek drops the service name, contacts, sender and recipient details, couriers' names and phone numbers, and map coordinates.
 
-For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post; Parcelforce for EMS numbers going to the UK) and switches to it once it shows fresh scans, keeping China Post's history.
+For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post; Parcelforce for EMS numbers going to the UK) and switches to it once it shows fresh scans, keeping China Post's history. If China Post names no country, Peek goes by yours: in the iPhone app, the region set on your phone; on peektracker.com, the country you added the parcel from.
 
 Peek checks every 10 minutes, or hourly once China Post has gone quiet: after 12 hours without a new scan while the parcel is still "Label created" or "Received by carrier", or after two days at any other step. Once the parcel is out for delivery, it checks every 2 minutes, or every 5 when the check has to open a browser, as it does to read China Post's public preview: on that day, from 6 a.m. local time, while China Post's own tracking answers. Through tracking services, it checks every 15 minutes. When your post takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and every 30 minutes for USPS, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
 

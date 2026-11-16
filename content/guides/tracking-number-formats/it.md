@@ -4,7 +4,7 @@ description: Dal formato del codice si risale spesso al corriere: prefissi, lung
 slug: corriere-dal-numero-di-tracking
 picture: Tre codici di tracking divisi in parti colorate, una lente sul codice paese CH e Pip che osserva incuriosito.
 published: 2026-10-09
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 
 Spesso bastano le lettere e la lunghezza del numero di tracking per capire quale corriere ha il tuo pacco. `1Z` seguito da 16 lettere e cifre è UPS, 18 cifre che iniziano con `99` sono la [Posta svizzera](carrier:swiss-post), e un codice di 13 caratteri come `RR000000005CH` (due lettere, nove cifre, due lettere) di solito è di una posta nazionale, con il Paese che l'ha emesso nelle ultime due lettere. Il caso difficile sono i codici di sole cifre: 14 cifre, per esempio, possono essere di BRT come di DPD. In quei casi l'ultima parola spetta all'e-mail di spedizione, o a un tracker che prova tutti i corrieri possibili.
@@ -56,7 +56,7 @@ Sono i prefissi che si cercano di più:
 
 - `1Z`: UPS, se seguono 16 lettere e cifre, l'ultima delle quali è una cifra di controllo.
 - `YT`: YunExpress, se seguono 16 cifre; il suo sito di tracking chiede proprio un numero che inizia con YT. Ma nei dati dei corrieri che usa Peek `YT` + 13 cifre è YTO Express, e `YT` + nove cifre + `GB` è un codice postale della Royal Mail britannica.
-- `LP`: negli stessi dati, `LP` seguito da 14 cifre è un possibile codice AliExpress/Cainiao, e `LP` + 13 cifre + `CN` un possibile codice 4PX. Cainiao non descrive il formato sul suo sito, quindi prendilo solo come un indizio.
+- `LP`: negli stessi dati, `LP` seguito da 14 cifre è probabilmente un codice AliExpress/Cainiao, e `LP` + 13 cifre + `CN` probabilmente un codice 4PX. Cainiao non descrive il formato sul suo sito, quindi prendilo solo come un indizio.
 - `5P`: negli stessi dati, `5P` seguito da 11 lettere e cifre è Poste Italiane. Il modulo di ricerca di Poste però non parla di questo formato.
 
 ## Quante cifre ha un codice di tracking?

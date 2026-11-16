@@ -4,7 +4,7 @@ description: PX i 10 cyfr to Poczta Polska, 24 cyfry to zwykle InPost, 1Z to UPS
 slug: jaki-kurier-po-numerze-przesylki
 picture: Trzy etykiety z numerami przesyłek podzielonymi na kolorowe części, lupa na kodzie kraju CH i zaciekawiony Pip.
 published: 2026-10-09
-updated: 2026-11-14
+updated: 2026-11-16
 ---
 
 Litery i długość numeru przesyłki często zdradzają, który przewoźnik ma Twoją paczkę. `1Z` i 16 liter lub cyfr to UPS, `PX` i 10 cyfr to [Poczta Polska](carrier:poczta-polska), numer [InPost](carrier:inpost) ma zwykle 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty, która go nadała. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
@@ -53,7 +53,7 @@ Oto, co przewoźnicy i standard pocztowy mówią o numerach, które w Polsce spo
 
 - **`PX` i 10 cyfr** to Poczta Polska, np. `PX1234567890`.
 - **`AD`** spotkasz przy przesyłkach Allegro Delivery: `AD0` i 14 znaków albo, w starszych numerach, `AD` i 8 liter lub cyfr. Takie paczki śledzisz w Allegro, także te, które wiezie ORLEN Paczka. Na stronie ORLEN Paczki ich nie znajdziesz.
-- **`LP` i 14 cyfr** może oznaczać AliExpress i Cainiao. Tak wynika z danych przewoźników, z których korzysta Peek, choć sam Cainiao tego formatu na swoich stronach nie opisuje.
+- **`LP` i 14 cyfr** oznacza prawdopodobnie AliExpress i Cainiao. Tak wynika z danych przewoźników, z których korzysta Peek, choć sam Cainiao tego formatu na swoich stronach nie opisuje.
 
 ## Ile cyfr ma numer przesyłki?
 
@@ -70,7 +70,7 @@ Nie ma jednej długości. Poniżej te, które przewoźnicy podają na własnych 
 | 14 znaków | DPD: w DPD Polska 13 cyfr i litera albo 14 cyfr od 13 |
 | 18 cyfr | DHL, od `34043`, w danych przewoźników, z których korzysta Peek |
 | 19 cyfr | Poczta Polska, od `00` |
-| 20 cyfr | Poczta Polska, z `5900773` po trzech pierwszych cyfrach |
+| 20 cyfr | Poczta Polska, z `5900773` po trzech pierwszych cyfrach; DHL, od `00340433`, `00340434` albo `00340435`, w danych przewoźników, z których korzysta Peek |
 | 24 cyfry | InPost, w danych przewoźników, z których korzysta Peek |
 | 14 do 20 znaków | Hermes w Niemczech, litery i cyfry |
 | 10 do 39 znaków | DHL w Niemczech, zależnie od usługi |
@@ -165,7 +165,7 @@ Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród p
 - [About Amazon Polska: Amazon.pl startuje w Polsce](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-pl-startuje-w-polsce) – śledzenie zamówień w aplikacji Amazon Shopping i w przeglądarce (2021)
 - [About Amazon Polska: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – własna sieć dostaw ostatniej mili Amazona w Europie
 - [Universal Parcel Scraper: UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – numery 1Z i ich cyfra kontrolna
-- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery InPost (24 cyfry od `20`, `52`, `62`–`66`, `80` i `82`), numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `210`) w danych przewoźników, z których korzysta Peek; Meest (`ANS`, 13 cyfr i `UA`) i DHL (18 cyfr od `34043`), odczytane 14 listopada 2026
+- [Universal Parcel Scraper: carrier catalog](https://github.com/plhery/universal-parcel-scraper/blob/main/data/catalog.json) – PX, LP, TBA oraz PL i 10 cyfr, numery InPost (24 cyfry od `20`, `52`, `62`–`66`, `80` i `82`), numery Cainiao (`DOFR`, `CNFR`, `CNG`), a także YunExpress (`YT` i 16 cyfr) i YTO Express (`YT` i 13 cyfr), numery DPD Polska (13 cyfr i litera albo 14 cyfr od 13) 4PX (`4PX` i `LP`, 13 cyfr i `CN`), Yanwen (`BYS`, `YP` i `YW`), Poczty Polskiej (19 i 20 cyfr) oraz ORLEN Paczki (13 cyfr od `210`) w danych przewoźników, z których korzysta Peek; Meest (`ANS`, 13 cyfr i `UA`) i DHL (18 cyfr od `34043` oraz 20 cyfr od `00340433` do `00340435`), odczytane 14 listopada 2026
 - [YunExpress: YunTrack](https://www.yuntrack.com/) – numery od YT
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – przy taniej wysyłce brak śledzenia po przekazaniu lokalnemu przewoźnikowi
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – numery Cainiao bez opisu formatu, tylko litery i cyfry

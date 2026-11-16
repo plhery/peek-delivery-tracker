@@ -511,42 +511,54 @@ class NextDeliveryWidgetTest {
     }
 
     /**
-     * The new-update dot (#72) on a parcel the app's list marks, and only there: before a card's status, which takes the
-     * size that fits the room the dot leaves; in words, before the badge. TalkBack says "New update." first: the card's
-     * mark, its first words, says it before the carrier; in words, the dot.
+     * The new-update dot (#72) is the Parcels widget's, as on the iPhone: its small and medium cards, Next delivery's own
+     * drawn `marked`, put it before the status of a parcel the app's list marks, which takes the size that fits the room
+     * the dot leaves, and the card's mark, its first words, says "New update." to TalkBack before the carrier. Next
+     * delivery, which shows one parcel, draws and says none, in cards or in words.
      */
     @Test
-    fun aParcelWithNewsHasTheDot() = runBlocking<Unit> {
+    fun onlyTheParcelsWidgetsCardsHaveTheDot() = runBlocking<Unit> {
         val marked = three.mapIndexed { index, parcel -> if (index == 0) parcel.copy(newUpdate = true) else parcel }
         val carded = marked.map { it.copy(card = card(it.id.toString())) }
-        for ((entry, size) in listOf(cardsEntry(carded, medium = true) to IPHONE_MEDIUM, cardsEntry(carded, medium = false) to IPHONE_SMALL)) {
-            val said = appliedViews(app, widgetViews(app, size, entry)).filter { it.isClickable && it.isImportantForAccessibility }.map { spoken(it) }
-            assertEquals("$size: $said", 1, said.count { "New update." in it })
-            assertTrue("$size: $said", said.first().startsWith("New update. FedEx Belgian chocolate"))
-            if (entry.cards.size == 2) assertTrue("$size: $said", said[1].startsWith("DPD Switzerland Trail weekend kit"))
+        val plain = three.map { it.copy(card = card(it.id.toString())) }
+        for ((medium, size) in listOf(true to IPHONE_MEDIUM, false to IPHONE_SMALL)) {
+            suspend fun said(parcels: List<DeliveryWidgetParcel>, listsCards: Boolean) =
+                appliedViews(app, widgetViews(app, size, cardsEntry(parcels, medium), marked = listsCards))
+                    .filter { it.isClickable && it.isImportantForAccessibility }.map { spoken(it) }
+            val listed = said(carded, listsCards = true)
+            assertEquals("$size: $listed", 1, listed.count { "New update." in it })
+            assertTrue("$size: $listed", listed.first().startsWith("New update. FedEx Belgian chocolate"))
+            if (medium) assertTrue("$size: $listed", listed[1].startsWith("DPD Switzerland Trail weekend kit"))
+            assertEquals("$size", said(plain, listsCards = false), said(carded, listsCards = false))
         }
-        show(wordsEntry(marked, medium = true), IPHONE_MEDIUM) {
-            onAllNodes(hasContentDescriptionEqualTo("New update.")).assertCountEquals(1)
-            onNode(opens(three[0]) and hasAnyDescendant(hasContentDescriptionEqualTo("New update."))).assertExists()
+        for ((medium, size) in listOf(true to IPHONE_MEDIUM, false to IPHONE_SMALL)) {
+            val described = appliedViews(app, widgetViews(app, size, wordsEntry(marked, medium))).mapNotNull { it.contentDescription?.toString() }
+            assertTrue("$size: $described", described.none { "New update" in it })
         }
-        show(wordsEntry(three, medium = true), IPHONE_MEDIUM) { onNode(hasContentDescriptionEqualTo("New update.")).assertDoesNotExist() }
 
-        // The status keeps to the room the dot leaves, at a smaller size where it must; its words stay whole.
+        // A listed card's status keeps to the room the dot leaves, at a smaller size where it must; its words stay whole.
         val type = WidgetText(app)
         val parcel = widgetParcel(5, "Desk lamp", detail = "Thursday 12 November")
         val caption = type.points(IosTextStyle.Caption)
         var smaller = false
         for (width in 100..240 step 10) {
             val room = DpSize(width.dp, 150.dp)
-            val plain = CardWords(parcel, card("5"), DeliveryWidgetPicture.Small, leavesNext = false, room = room, type = type, languageCode = "en")
-            val dotted = CardWords(parcel.copy(newUpdate = true), card("5"), DeliveryWidgetPicture.Small, leavesNext = false, room = room, type = type, languageCode = "en")
-            assertEquals(plain.status, dotted.status)
-            assertTrue("$width", dotted.statusPoints <= plain.statusPoints)
-            smaller = smaller || dotted.statusPoints < plain.statusPoints
+            fun words(parcel: DeliveryWidgetParcel, listed: Boolean) =
+                CardWords(parcel, card("5"), DeliveryWidgetPicture.Small, leavesNext = false, room = room, type = type, languageCode = "en", marked = listed)
+            val unmarked = words(parcel, listed = true)
+            val dotted = words(parcel.copy(newUpdate = true), listed = true)
+            assertEquals(unmarked.status, dotted.status)
+            assertTrue("$width", dotted.statusPoints <= unmarked.statusPoints)
+            smaller = smaller || dotted.statusPoints < unmarked.statusPoints
             val fits = type.lines(dotted.status, dotted.statusPoints, FontWeight.Normal, room.width - NEW_UPDATE_DOT - NEW_UPDATE_GAP) <= 1
             assertTrue("$width", fits || dotted.statusPoints <= caption * 0.8f + 0.01f)
             assertEquals("New update. ${parcel.carrier}", dotted.markDescription)
-            assertEquals(parcel.carrier, plain.markDescription)
+            assertEquals(parcel.carrier, unmarked.markDescription)
+            // Next delivery's own card: as without news.
+            val next = words(parcel.copy(newUpdate = true), listed = false)
+            assertFalse(next.newUpdate)
+            assertEquals(unmarked.statusPoints, next.statusPoints)
+            assertEquals(parcel.carrier, next.markDescription)
         }
         assertTrue(smaller)
     }

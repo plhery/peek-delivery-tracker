@@ -52,8 +52,8 @@ data class DeliveryWidgetParcel(
     val steps: List<DeliveryWidgetStep>? = null,
     /**
      * Whether its card in the app's list shows the new-update dot (#72): a scan its reader hasn't seen, while "Mark new
-     * updates" is on ([marksNewUpdate]). The widgets show the same dot, and lose it when the app does: the parcel opened
-     * on any of the account's devices, or the setting off. None from an app that didn't publish it.
+     * updates" is on ([marksNewUpdate]). The Parcels widget shows the same dot, and loses it when the app does: the
+     * parcel opened on any of the account's devices, or the setting off. None from an app that didn't publish it.
      */
     val newUpdate: Boolean? = null,
 ) {

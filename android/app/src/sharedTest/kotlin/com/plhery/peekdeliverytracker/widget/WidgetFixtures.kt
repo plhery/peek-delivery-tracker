@@ -129,10 +129,13 @@ suspend fun publishDemo(
     return snapshot
 }
 
-/** The widget's RemoteViews for `entry` at `size`, as Glance writes them for a launcher. */
+/**
+ * The widget's RemoteViews for `entry` at `size`, as Glance writes them for a launcher; `marked`, its cards as the
+ * Parcels widget's small and medium ones, with the new-update dot.
+ */
 @OptIn(ExperimentalGlanceRemoteViewsApi::class)
-suspend fun widgetViews(context: Context, size: DpSize, entry: DeliveryWidgetEntry<WidgetCardArt>): RemoteViews =
-    GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, size) }.remoteViews
+suspend fun widgetViews(context: Context, size: DpSize, entry: DeliveryWidgetEntry<WidgetCardArt>, marked: Boolean = false): RemoteViews =
+    GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, size, marked = marked) }.remoteViews
 
 /** The list widget's RemoteViews for `list` at `size`, its cards' pictures read by `art`, as Glance writes them for a launcher. */
 @OptIn(ExperimentalGlanceRemoteViewsApi::class)

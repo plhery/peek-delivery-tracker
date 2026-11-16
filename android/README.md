@@ -110,10 +110,11 @@ changes while the app runs, it words the days again for the new zone's midnights
   widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list
   (`peekdeliverytracker://parcels`).
 
-A parcel whose card in the app's list shows the new-update dot shows it in both widgets too, before its stage, and
-loses it when the card does: once it is opened on any of the account's devices, or when "Mark new updates" is off
+A parcel whose card in the app's list shows the new-update dot shows it in the Parcels widget too, before its stage,
+and loses it when the card does: once it is opened on any of the account's devices, or when "Mark new updates" is off
 (`DeliveryWidgetParcel.newUpdate`). The stage keeps to the room the dot leaves, taking a shorter wording or a smaller
-size rather than being cut short, so every size keeps its rows. TalkBack reads "New update." first.
+size rather than being cut short, so every size keeps its rows. TalkBack reads "New update." first. Next delivery,
+which shows one parcel, leaves the dot out, as the iPhone's does.
 
 Their gallery pictures show invented parcels in the phone's language (`DeliveryWidgetSample`,
 `DeliveryWidgetListSample`), never the reader's.

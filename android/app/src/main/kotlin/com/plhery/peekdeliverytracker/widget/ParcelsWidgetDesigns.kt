@@ -93,7 +93,7 @@ internal fun ListCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetPar
     when {
         listSize(size) != DeliveryWidgetList.Size.Large -> {
             val entry = DeliveryWidgetEntry(list.date, enabled = true, languageCode = list.languageCode, snapshot = null, shown = parcels, art = art)
-            DeliveryWidgetContent(entry, size, page = listIntent(context))
+            DeliveryWidgetContent(entry, size, page = listIntent(context), marked = true)
         }
         parcels.size == 1 -> CardAndSteps(list, parcels.single(), art.single(), size, type)
         parcels.size == 2 -> WideCards(list, parcels, art, size, type)
@@ -111,7 +111,7 @@ private fun CardAndSteps(list: DeliveryWidgetList, parcel: DeliveryWidgetParcel,
     val card = parcel.card ?: return
     val steps = parcel.steps.orEmpty()
     val top = DpSize(size.width, if (steps.isEmpty()) size.height else size.height / 3)
-    val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = top.inside(PAGE_MARGIN), type, list.languageCode)
+    val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = top.inside(PAGE_MARGIN), type, list.languageCode, marked = true)
     Box(root().background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))) {
         Column(GlanceModifier.fillMaxSize()) {
             Box(GlanceModifier.fillMaxWidth().height(top.height)) {
@@ -182,7 +182,7 @@ private fun WideCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetParc
             parcels.zip(art).forEachIndexed { index, (parcel, pictures) ->
                 if (index > 0) Spacer(GlanceModifier.height(CARD_GAP))
                 val card = parcel.card ?: return@forEachIndexed
-                val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = each.inside(WIDE_CARD_PADDING), type, list.languageCode)
+                val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = each.inside(WIDE_CARD_PADDING), type, list.languageCode, marked = true)
                 Box(
                     GlanceModifier.fillMaxWidth().defaultWeight().cornerRadius(16.dp).background(WidgetCardColors.pair(card.surface))
                         .clickable(openParcel(context, parcel)),

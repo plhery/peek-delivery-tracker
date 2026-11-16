@@ -59690,6 +59690,44 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://apps.zmc-iraq.com/tracking.php"
+  },
+  "onlog-express": {
+    "displayName": "Onlog Express",
+    "aliases": [
+      "ONLOG",
+      "ONLOG Express",
+      "Onlog Franqueadora"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#ed6d28",
+    "selectable": true,
+    "timezone": "UTC",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "onlog-express",
+      "browserRecognitionRank": 121,
+      "browserRecognitionPattern": "^AA\\d{10}$"
+    },
+    "trackingUrlTemplate": "https://onlog.app.br/rastreio/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "onlog.app.br"
+        ],
+        "path": "^/rastreio/(AA\\d{10})/?$",
+        "ownNumbersOnly": true
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^AA\\d{10}$",
+        "confidence": "low",
+        "preferred": true
+      }
+    ],
+    "trackingSearchUrl": "https://conecta.log.br/rastreio.php"
   }
 } as const;
 
@@ -61499,7 +61537,8 @@ export const CARRIER_IDS = [
   "united-az",
   "wakilni",
   "xalq-global",
-  "zmc-express"
+  "zmc-express",
+  "onlog-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

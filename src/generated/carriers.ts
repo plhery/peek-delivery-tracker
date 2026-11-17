@@ -1871,7 +1871,7 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "stone3pl-tracking",
       "title": "Stone3PL tracking: numbers, statuses and contact",
       "name": "Stone3PL",
-      "color": "#0066b3"
+      "color": "#003d98"
     },
     {
       "id": "j-and-t-uk",

@@ -5367,7 +5367,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "color": "#8e8e93",
+    "color": "#ea7e19",
     "selectable": true,
     "timezone": "UTC",
     "tracking": {
@@ -13538,7 +13538,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Chisinau",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "posta-moldovei"
     },
     "trackingUrlTemplate": "https://posta.md/en/track-trace/mailing/{trackingNumber}",
     "linkRules": [
@@ -32573,7 +32573,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "CN"
     ],
-    "color": "#0066b3",
+    "color": "#003d98",
     "selectable": true,
     "timezone": "UTC",
     "tracking": {
@@ -59722,7 +59722,7 @@ export const CARRIER_CAPABILITIES = {
     "countries": [
       "BR"
     ],
-    "color": "#ed6d28",
+    "color": "#1a345d",
     "selectable": true,
     "timezone": "UTC",
     "tracking": {

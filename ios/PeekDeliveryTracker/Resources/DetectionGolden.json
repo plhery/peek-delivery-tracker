@@ -80917,6 +80917,17 @@
     ]
   },
   {
+    "input": "CE456296727US",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "CE477307703IE",
     "carrier": "an-post",
     "confidence": "high",
@@ -81167,6 +81178,22 @@
     ],
     "asked": [
       "chronopost"
+    ]
+  },
+  {
+    "input": "CG013166525DE",
+    "carrier": "dhl",
+    "confidence": "high",
+    "candidates": [
+      "dhl"
+    ]
+  },
+  {
+    "input": "CG017568073DE",
+    "carrier": "dhl",
+    "confidence": "high",
+    "candidates": [
+      "dhl"
     ]
   },
   {
@@ -83404,6 +83431,14 @@
     ]
   },
   {
+    "input": "CT507133481DE",
+    "carrier": "dhl",
+    "confidence": "high",
+    "candidates": [
+      "dhl"
+    ]
+  },
+  {
     "input": "CTTY9999999980CN",
     "carrier": "cttyex",
     "confidence": "high",
@@ -83643,6 +83678,14 @@
   },
   {
     "input": "CY226550310DE",
+    "carrier": "dhl",
+    "confidence": "high",
+    "candidates": [
+      "dhl"
+    ]
+  },
+  {
+    "input": "CY295232113DE",
     "carrier": "dhl",
     "confidence": "high",
     "candidates": [
@@ -95254,6 +95297,14 @@
     ]
   },
   {
+    "input": "LX033513688NL",
+    "carrier": "spring-gds",
+    "confidence": "high",
+    "candidates": [
+      "spring-gds"
+    ]
+  },
+  {
     "input": "LX038154718NL",
     "carrier": "spring-gds",
     "confidence": "high",
@@ -102468,6 +102519,14 @@
     ]
   },
   {
+    "input": "RN756791785GB",
+    "carrier": "royal-mail",
+    "confidence": "high",
+    "candidates": [
+      "royal-mail"
+    ]
+  },
+  {
     "input": "RN766621724RO",
     "carrier": "intl-post",
     "confidence": "high",
@@ -102477,6 +102536,14 @@
     "asked": [
       "posta-romana",
       "chronopost"
+    ]
+  },
+  {
+    "input": "RN840565563GB",
+    "carrier": "royal-mail",
+    "confidence": "high",
+    "candidates": [
+      "royal-mail"
     ]
   },
   {
@@ -103676,6 +103743,14 @@
     ]
   },
   {
+    "input": "RV506878135GB",
+    "carrier": "royal-mail",
+    "confidence": "high",
+    "candidates": [
+      "royal-mail"
+    ]
+  },
+  {
     "input": "RW000336615R",
     "carrier": "speedaf",
     "confidence": "high",
@@ -103784,6 +103859,14 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "RX185939235DE",
+    "carrier": "dhl",
+    "confidence": "high",
+    "candidates": [
+      "dhl"
+    ]
   },
   {
     "input": "RX716993586CN",
@@ -107469,6 +107552,18 @@
     ],
     "asked": [
       "phlpost",
+      "chronopost"
+    ]
+  },
+  {
+    "input": "UC159812925EE",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "omniva",
       "chronopost"
     ]
   },

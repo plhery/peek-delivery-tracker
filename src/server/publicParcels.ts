@@ -21,7 +21,7 @@ import { appFollowsLinks } from './appStoreRelease';
 import { emailConfigured } from './email/config';
 import { withEventPlaces } from './eventPlaces';
 import { numberHint, parcelNumberMask, WORDED_CARRIER_DATA } from './hiddenNumbers';
-import { type AllowanceHolder, captureOverallAllowance, logOperationalEvent } from './observability';
+import { type AllowanceHolder, allowanceForecast, captureOverallAllowance, logOperationalEvent } from './observability';
 import { privateValues, viewerScans, viewerStatusText } from './privateDetails';
 import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
@@ -153,7 +153,9 @@ export interface OverallAllowance {
 
 /**
  * Says when an overall allowance is running out or used up: used up, everyone
- * who shares it is refused until its day or hour is over. Each state is said
+ * who shares it is refused until its day or hour is over. Running out, Sentry
+ * hears of it only once the pace so far uses it up before the day or hour is
+ * over; until then each server logs it. Each state Sentry hears of is said
  * once per day or hour by the first server to claim it, so a restart or
  * another instance does not say it again; if the database cannot say, this
  * server says it. An allowance of 0 was turned off on purpose and reports nothing.
@@ -165,13 +167,20 @@ export async function reportOverallAllowance(
   const state = usedUp ? 'used_up' : used >= limit * allowance.runningOut ? 'running_out' : null;
   if (state === null || limit === 0) return;
   const period = now.toISOString().slice(0, allowance.period === 'day' ? 10 : 13);
+  const forecast = state === 'running_out'
+    ? allowanceForecast(used, limit, allowance.period === 'day' ? 86_400_000 : 3_600_000, now) : null;
+  // An allowance that lasts at the pace so far is nobody's to act on: a log line, and Sentry
+  // hears of it once the pace would use it up, later the same day or hour.
+  const lasts = forecast !== null && forecast.used_up_at === null;
   const report = `${holder}:${kind}:${state}`;
-  if (reported.get(report) === period) return;
-  reported.set(report, period);
-  if (!await service.claimAllowanceReport(report, period).catch(() => true)) return;
-  logOperationalEvent(holder === 'public' ? 'public_allowance' : 'account_allowance', { kind, state, used, limit },
-    state === 'used_up' ? 'error' : 'warning');
-  captureOverallAllowance(holder, kind, state, { used, limit }, now);
+  const said = lasts ? `${report}:lasts` : report;
+  if (reported.get(said) === period) return;
+  reported.set(said, period);
+  if (!lasts && !await service.claimAllowanceReport(report, period).catch(() => true)) return;
+  logOperationalEvent(holder === 'public' ? 'public_allowance' : 'account_allowance',
+    { kind, state, used, limit, ...(forecast ? { forecast: forecast.forecast } : {}) },
+    state === 'used_up' ? 'error' : lasts ? 'info' : 'warning');
+  if (!lasts) captureOverallAllowance(holder, kind, state, { used, limit }, now);
 }
 
 /** Counts one lookup against today's allowances: the client's, its IPv6 /48's and everyone's. */

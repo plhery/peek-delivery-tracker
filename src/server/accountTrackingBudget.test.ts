@@ -62,6 +62,29 @@ it('says once an hour that every account’s allowance is running out, and that 
   expect(report).toHaveBeenCalledTimes(3);
 });
 
+it('only logs an hour whose allowance lasts at its pace, and says it is running out once the pace would use it up', async () => {
+  vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-11-05T15:42:00Z') });
+  const report = vi.spyOn(observability, 'captureOverallAllowance').mockReturnValue(null);
+  const log = vi.spyOn(observability, 'logOperationalEvent').mockReturnValue(undefined);
+  const claim = vi.spyOn(SupabaseServiceClient.prototype, 'claimAccountTracking').mockResolvedValue({ allowed: true, scope: null, overallUsed: 25 });
+  const client = new SupabaseServiceClient('https://database.example', 'test-key');
+  // Half of it by 15:42 is about 36 of 50 by the hour's end.
+  await claimAccountTracking(client, userId, 'lookup');
+  claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 26 });
+  await claimAccountTracking(client, userId, 'lookup');
+  expect(report).not.toHaveBeenCalled();
+  expect(SupabaseServiceClient.prototype.claimAllowanceReport).not.toHaveBeenCalled();
+  expect(log.mock.calls).toEqual([['account_allowance', { kind: 'lookup', state: 'running_out', used: 25, limit: 50, forecast: 36 }, 'info']]);
+  // At 45 by 15:50 it is used up before the hour is over.
+  vi.setSystemTime(new Date('2026-11-05T15:50:00Z'));
+  claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 45 });
+  await claimAccountTracking(client, userId, 'lookup');
+  await claimAccountTracking(client, userId, 'lookup');
+  expect(report.mock.calls).toEqual([['account', 'lookup', 'running_out', { used: 45, limit: 50 }, new Date('2026-11-05T15:50:00Z')]]);
+  expect(SupabaseServiceClient.prototype.claimAllowanceReport).toHaveBeenCalledExactlyOnceWith('account:lookup:running_out', '2026-11-05T15');
+  expect(log.mock.calls.at(-1)).toEqual(['account_allowance', { kind: 'lookup', state: 'running_out', used: 45, limit: 50, forecast: 54 }, 'warning']);
+});
+
 it('refuses additions and provider detection before spending provider resources', async () => {
   vi.spyOn(SupabaseServiceClient.prototype, 'claimAccountTracking').mockResolvedValue({ allowed: false, scope: 'account', overallUsed: 0 });
   const verify = vi.spyOn(amazon, 'verifyAmazonShippingAddition');

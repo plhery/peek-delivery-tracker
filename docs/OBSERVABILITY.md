@@ -873,10 +873,13 @@ Key JSON events:
 - `push_inbox_forgotten`: how many `notices` a maintenance pass deleted from the Android
   app's inbox after their day. `push_inbox_maintenance_failed` when it could not run.
 - `public_allowance`: an overall daily allowance without an account (`kind`: `lookup` or
-  `detection`) is `running_out` at 80% or `used_up`, with `used` and `limit`.
+  `detection`) is `running_out` at 80% or `used_up`, with `used` and `limit`, and for
+  `running_out` the `forecast` by the day's end at its pace so far.
   `account_allowance` says the same of the hourly allowance every account shares, at 50%.
-  Each state is logged and sent to Sentry once per day or hour, by the first server to
-  claim it in `private.allowance_reports`; if the database cannot say, a server reports it.
+  A `running_out` whose forecast stays under the limit is an info line from each server;
+  once the forecast reaches it, and for `used_up`, the state is a warning or error line and
+  goes to Sentry once per day or hour, from the first server to claim it in
+  `private.allowance_reports`; if the database cannot say, a server reports it.
 - `delivery_email` (by `package_id`): how one delivery email ended, with its `stage`, `outcome` and
   `reason`; a refusal by the mail server adds `error_code` and `smtp_status`.
   `delivery_emails_capped` when emails were skipped for a daily allowance, and
@@ -952,14 +955,15 @@ provider failure in an `AggregateError` so every cause is visible.
   email-added notifications report refusals only. Work that is running when the database goes away
   still reports its own failed writes.
 - **Allowances without an account**: `component:public-allowance` warns once a day when
-  an overall allowance is 80% used, and reports an error when it is used up: every visitor
-  without an account is then refused until midnight UTC. One issue per allowance and
-  state. The warning's `forecast` is the use by midnight at the day's pace so far, and
-  `used_up_at` when it runs out first; `impact` says the same.
+  an overall allowance is 80% used and the day's pace so far uses it up before midnight,
+  and reports an error when it is used up: every visitor without an account is then
+  refused until midnight UTC. One issue per allowance and state. The warning's `forecast`
+  is the use by midnight at the day's pace so far, and `used_up_at` when it runs out;
+  `impact` says the same. A day that lasts at its pace stays in the logs.
 - **Allowances for accounts**: `component:account-allowance` warns once an hour when the
-  allowance every account shares is half used, and reports an error when it is used up:
-  every account is then refused until the next hour (UTC). Its warning forecasts the same
-  way, by the end of the hour. Many new accounts at their daily limit in
+  allowance every account shares is half used and the hour's pace uses it up before the
+  hour is over, and reports an error when it is used up: every account is then refused
+  until the next hour (UTC). Many new accounts at their daily limit in
   `private.account_tracking_usage` point to accounts made for scraping.
 - **Routing decisions**: see [ROUTING.md](ROUTING.md).
 

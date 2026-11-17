@@ -604,8 +604,7 @@ export function reportRoutingEvent(code: string, context: RoutingEventContext): 
 
 /**
  * A provider refusing this server whatever it is asked, once it is more than a passing block: found
- * still in place after its pause, or with no other source answering the check that found it. One
- * issue per provider, beside the block's `provider_blocked` log line.
+ * still in place after its pause. One issue per provider, beside the block's `provider_blocked` log line.
  */
 export function raiseProviderBlock(context: Omit<RoutingEventContext, 'category'>): void {
   try {

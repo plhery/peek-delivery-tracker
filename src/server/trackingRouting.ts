@@ -1248,8 +1248,6 @@ export class TrackingRouter {
       else delete state.planned;
     };
     let attempts = 0;
-    // A provider this check found blocked for the first time: Sentry hears of it only if no other source answers.
-    let firstBlock: { source: UniversalSource; error: unknown } | undefined;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
     const attempted = () => attemptedDirect.size - pacedDirect.size - probeContacts + attempts;
@@ -1972,9 +1970,9 @@ export class TrackingRouter {
           ? this.options.refusals?.refused(source, universalNumber, now().getTime()) : undefined;
         if (refusal === 'blocked' || refusal === 'still_blocked') {
           report('provider_blocked', source, 'rate_limited', caught);
-          // A block still in place after its pause is raised at once; a first one only if no other source answers.
+          // Only a block still in place after its pause is raised. A first one finds a number the provider tracked, so
+          // the parcel keeps that answer, and its next check, after the pause, raises the block if it lasts.
           if (refusal === 'still_blocked') raiseBlock(source, caught);
-          else firstBlock ??= { source, error: caught };
         }
         behindBlock = refusal === 'behind';
         const error = refusal
@@ -2263,7 +2261,6 @@ export class TrackingRouter {
     // checks wait for the earliest, a day at most, rather than ask nobody hourly until then.
     const turn = nextTurn();
     if (turn > millis(state.next_check_at)) state.quiet_until = iso(Math.min(turn, now().getTime() + DAY));
-    if (firstBlock) raiseBlock(firstBlock.source, firstBlock.error);
     report('all_providers_unavailable', preferred ?? 'none');
     return defer();
   }

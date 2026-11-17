@@ -1190,7 +1190,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | --- | --- |
 | `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded; not after a step that answered |
 | `provider_failed` | A provider failed for a parcel: `category` `rate_limited` needs less traffic, `schema` parser work, `invalid_input` a number the source refuses |
-| `provider_blocked` | A provider refuses this server whatever it is asked, and rests 30 minutes (Shared provider protection). A Sentry event when the block is found still in place after its pause, or when no other source answers the check that found it |
+| `provider_blocked` | A provider refuses this server whatever it is asked, and rests 30 minutes (Shared provider protection). A Sentry event when the block is found still in place after its pause: a first block only finds numbers the provider tracked, whose parcels keep that answer |
 | `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection). A Sentry event at most once in 30 minutes |
 | `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |

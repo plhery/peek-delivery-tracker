@@ -54,7 +54,7 @@ A narrower time slot or delivery upstairs is possible only if the sender activat
 
 On delivery morning, if the sender chose notifications, GEODIS sends an SMS or email with the driver's arrival time. Wrong address or phone number? Send your details through the contact form, or ask the shop to pass them on.
 
-GEODIS doesn't publish how many attempts it makes or how long an agency keeps a parcel.
+After a failed delivery, GEODIS keeps the parcel at its local agency for 8 calendar days; if you don't get in touch, it returns it to the sender. It doesn't publish how many attempts it makes.
 
 ## GEODIS parcel late, damaged or not delivered
 
@@ -73,7 +73,7 @@ GEODIS doesn't publish how many attempts it makes or how long an agency keeps a 
 GEODIS's channels for recipients in France, as read on 12 October 2026:
 
 - **Recipient space:** the tracking page, with a help menu.
-- **Contact form** on [geodis.com](https://geodis.com/contact-us): choose "recipient" and add the tracking number. GEODIS says it calls back within about two working days.
+- **Contact form** on [geodis.com](https://geodis.com/contact-us): choose "recipient" and add the tracking number. GEODIS says the customer service nearest your delivery address gets back to you within 12 working hours.
 - **Email** dpm@geodis.com for consumer complaints about a delivery, per its terms.
 - **Agencies:** the [agency list](https://geodis.com/fr/liste-des-agences?territory=FR) gives names and addresses.
 
@@ -111,7 +111,9 @@ GEODIS quotes 24 to 48 hours within France for standard parcels and next day bef
 - [GEODIS: Track your shipment](https://geodis.com/track-your-shipment) – where the number is, what to do if it fails
 - [GEODIS: Contact us](https://geodis.com/contact-us) – contact form, recipient FAQ on notifications, slots, address, agency pickup
 - [GEODIS: Suivez votre colis](https://geodis.com/fr/suivez-votre-colis) – same in French, road tracking tool
-- [GEODIS: Nous contacter](https://geodis.com/fr/nous-contacter) – recipient choice, callback in two working days
+- [GEODIS: Nous contacter](https://geodis.com/fr/nous-contacter) – recipient choice
+- [GEODIS: FAQ, agency hold](https://geodis.com/fr/faq?question=pendant-combien-de-temps-mon-envoi-est-il-conserve-en-agence) – 8 calendar days, then back to the sender
+- [GEODIS: FAQ, recipient customer service](https://geodis.com/fr/faq?question=comment-contacter-le-service-relation-client-destinataire) – nearest customer service, 12 working hours
 - [GEODIS: Votre espace de travail](https://geodis.com/fr/votre-espace-de-travail) – Espace Client tracks Distribution & Express
 - [GEODIS: Transport de colis et de palettes](https://geodis.com/fr/transport-de-marchandises/transport-de-colis-et-de-palettes) – transit times
 - [GEODIS: Conditions générales de vente, mai 2025](https://geodis.com/sites/default/files/widen-migration/2glqzqlnw7/CGV_FR-052025.pdf) – reservations, times not guaranteed, instructions, Article 18 complaints, dpm@geodis.com, AME

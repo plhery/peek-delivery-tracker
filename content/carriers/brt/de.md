@@ -52,7 +52,7 @@ BRTs Sendungsverfolgung auf vas.brt.it öffnet auf Italienisch und lässt sich a
 | `DELIVERED` | Zugestellt. | „Zugestellt“ |
 | `RETURNED TO SENDER` | Es geht an den Absender zurück. | „Zurück an Absender“ |
 
-`COLLECTED` ist BRTs Abholung beim Absender, nicht deine. Kam das Paket mit Chronopost oder DPD aus dem Ausland zu BRT, ist `COLLECTED` die Übergabe an BRT; Peek zeigt dann „Unterwegs“. Der consignee in `UNKNOWN/INCOMPLETE CONSIGNEE` bist du, der Empfänger; ein unbekannter Empfänger oder eine unvollständige Adresse ist einer der Gründe, aus denen BRT ein Paket einlagert (siehe unten). Folgt `DELIVERED` auf `RETURNED TO SENDER`, ist das Paket wieder beim Absender, nicht bei dir, auch wenn Peek dann „Zugestellt“ zeigt.
+`COLLECTED` ist BRTs Abholung beim Absender, nicht deine. Kam das Paket mit Chronopost oder DPD aus dem Ausland zu BRT, ist `COLLECTED` die Übergabe an BRT; Peek zeigt dann „Unterwegs“. Der consignee in `UNKNOWN/INCOMPLETE CONSIGNEE` bist du, der Empfänger; ein unbekannter Empfänger oder eine unvollständige Adresse ist einer der Gründe, aus denen BRT ein Paket einlagert (siehe unten). Folgt `DELIVERED` auf `RETURNED TO SENDER`, ist das Paket wieder beim Absender, nicht bei dir: Die Zeile lautet dann `Delivered`, Peek zeigt aber weiter „Zurück an Absender“.
 
 ## BRT-Paket nach Deutschland, Österreich oder in die Schweiz
 

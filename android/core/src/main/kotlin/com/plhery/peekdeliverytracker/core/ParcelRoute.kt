@@ -130,6 +130,13 @@ enum class DistancePreference(val code: String, private val unit: DistanceUnit?)
     /** The unit distances are written in: the one chosen, else the phone's, `system`. */
     fun resolved(system: DistanceUnit): DistanceUnit = unit ?: system
 
+    /** The unit weights are written in: kilograms with kilometres chosen, pounds with miles, else the phone's, `system`. */
+    fun weightUnit(system: WeightUnit): WeightUnit = when (unit) {
+        DistanceUnit.Kilometres -> WeightUnit.Kilograms
+        DistanceUnit.Miles -> WeightUnit.Pounds
+        null -> system
+    }
+
     companion object {
         const val storageKey = "sdt.native.distanceUnit"
 

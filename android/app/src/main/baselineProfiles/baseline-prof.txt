@@ -24246,7 +24246,7 @@ PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt;->journalTime(Lcom/plhe
 SPLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt;->journalWording(Lcom/plhery/peekdeliverytracker/core/Localizer;Lcom/plhery/peekdeliverytracker/core/api/TrackingEvent;)Ljava/lang/String;
 PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt;->relayedWordings(Lcom/plhery/peekdeliverytracker/core/Localizer;Lcom/plhery/peekdeliverytracker/core/JournalEntry;)Ljava/util/List;
 PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt;->shipmentFacts$trimmed(Ljava/lang/String;)Ljava/lang/String;
-PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt;->shipmentFacts(Lcom/plhery/peekdeliverytracker/core/Localizer;Lcom/plhery/peekdeliverytracker/core/api/Parcel;)Ljava/util/List;
+PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt;->shipmentFacts(Lcom/plhery/peekdeliverytracker/core/Localizer;Lcom/plhery/peekdeliverytracker/core/api/Parcel;Lcom/plhery/peekdeliverytracker/core/WeightUnit;)Ljava/util/List;
 PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt$journalDays$$inlined$sortedByDescending$1;-><init>()V
 PLcom/plhery/peekdeliverytracker/core/ParcelDetailViewKt$journalDays$$inlined$sortedByDescending$1;->compare(Ljava/lang/Object;Ljava/lang/Object;)I
 Lcom/plhery/peekdeliverytracker/core/ParcelDisplayStatus;

@@ -83,7 +83,7 @@ A nine-digit PRO's shape doesn't tell Peek it's R+L's: nine digits fit other car
 
 With the `I` in front, the number fits R+L Carriers and Australia Post: Peek asks both and files the shipment under the one that knows it. A link to R+L's shipment tracing page with the PRO in it (`pro=`) works too: Peek names R+L at once ("Detected carrier").
 
-Peek asks R+L's tracer by the PRO alone: no account or postcode. It shows the status, each line (with the terminal's town and state when the line names them), the expected delivery day and the weight in kilograms (R+L gives pounds). It leaves out the piece count, references, the shipper and consignee, the bill of lading number and documents. R+L's tracer gives Peek no proof of delivery. "Open the R+L Carriers website", on the shipment's page, opens the PRO on R+L's tracer.
+Peek asks R+L's tracer by the PRO alone: no account or postcode. It shows the status, each line (with the terminal's town and state when the line names them), the expected delivery day and the weight in your own units (R+L gives pounds). It leaves out the piece count, references, the shipper and consignee, the bill of lading number and documents. R+L's tracer gives Peek no proof of delivery. "Open the R+L Carriers website", on the shipment's page, opens the PRO on R+L's tracer.
 
 When R+L's tracer can't be reached or can't read the shipment, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 

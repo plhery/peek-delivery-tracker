@@ -237,6 +237,39 @@ enum DistancePreference: String, CaseIterable {
         case .miles: .miles
         }
     }
+
+    /// The unit weights are written in: kilograms with kilometres chosen, pounds with miles, else the system's.
+    func weightUnit(system: WeightUnit) -> WeightUnit {
+        switch self {
+        case .automatic: system
+        case .kilometres: .kilograms
+        case .miles: .pounds
+        }
+    }
+}
+
+enum WeightUnit: String, CaseIterable {
+    case kilograms = "kg"
+    case pounds = "lb"
+
+    /// Pounds where the system measures in US units (the United States, Liberia, Myanmar), else kilograms, the UK's included.
+    static func system(_ locale: Locale = .autoupdatingCurrent) -> WeightUnit {
+        locale.measurementSystem == .us ? .pounds : .kilograms
+    }
+
+    private static let kilogramsPerPound = 0.45359237
+
+    /// A weight Peek read as a number of kilograms, in this unit and `locale`'s digits: kilograms to three decimals,
+    /// pounds to one, or to three under a tenth of a pound, as the web and Android apps write it.
+    func format(kilograms: Double, locale: Locale) -> String {
+        switch self {
+        case .kilograms:
+            return kilograms.formatted(.number.locale(locale).precision(.fractionLength(0...3))) + " kg"
+        case .pounds:
+            let pounds = kilograms / Self.kilogramsPerPound
+            return pounds.formatted(.number.locale(locale).precision(.fractionLength(0...(pounds < 0.1 ? 3 : 1)))) + " lb"
+        }
+    }
 }
 
 private struct DistanceUnitKey: EnvironmentKey {
@@ -274,8 +307,10 @@ final class Localizer: ObservableObject {
     /// What the system says, which Automatic follows. They change with the device's settings while the app is open.
     @Published private(set) var systemUses24HourTime: Bool
     @Published private(set) var systemDistanceUnit: DistanceUnit
+    @Published private(set) var systemWeightUnit: WeightUnit
     private let readSystemClock: () -> Bool
     private let readSystemDistanceUnit: () -> DistanceUnit
+    private let readSystemWeightUnit: () -> WeightUnit
     private var systemChanges: AnyCancellable?
     private let defaults: UserDefaults
     private let sharedClockDefaults: UserDefaults?
@@ -301,12 +336,14 @@ final class Localizer: ObservableObject {
         bundle: Bundle = .main, onPad: Bool = DeviceIdiom.isPad, defaults: UserDefaults = .standard,
         sharedClockDefaults: UserDefaults? = nil,
         systemUses24HourTime: @escaping () -> Bool = { DeviceClock.systemUses24HourTime() },
-        systemDistanceUnit: @escaping () -> DistanceUnit = { DistanceUnit.system() }
+        systemDistanceUnit: @escaping () -> DistanceUnit = { DistanceUnit.system() },
+        systemWeightUnit: @escaping () -> WeightUnit = { WeightUnit.system() }
     ) {
         self.defaults = defaults
         self.sharedClockDefaults = sharedClockDefaults
         readSystemClock = systemUses24HourTime
         readSystemDistanceUnit = systemDistanceUnit
+        readSystemWeightUnit = systemWeightUnit
         let clock = ClockPreference(stored: defaults.string(forKey: DeviceClock.preferenceKey))
         let distance = DistancePreference(stored: defaults.string(forKey: Self.distanceStorageKey))
         let systemClock = systemUses24HourTime(), systemUnit = systemDistanceUnit()
@@ -314,6 +351,7 @@ final class Localizer: ObservableObject {
         self.distance = distance
         self.systemUses24HourTime = systemClock
         self.systemDistanceUnit = systemUnit
+        self.systemWeightUnit = systemWeightUnit()
         use24HourTime = clock.uses24HourTime(system: systemClock)
         distanceUnit = distance.unit(system: systemUnit)
         #if os(macOS)
@@ -347,7 +385,16 @@ final class Localizer: ObservableObject {
     func systemChanged() {
         systemUses24HourTime = readSystemClock()
         systemDistanceUnit = readSystemDistanceUnit()
+        systemWeightUnit = readSystemWeightUnit()
         resolveUnits()
+    }
+
+    /// The unit weights are written in: the one that goes with the distance units chosen, else the system's.
+    var weightUnit: WeightUnit { distance.weightUnit(system: systemWeightUnit) }
+
+    /// A weight Peek read in kilograms, in `weightUnit` and the app language's digits.
+    func weight(kilograms: Double) -> String {
+        weightUnit.format(kilograms: kilograms, locale: language.locale)
     }
 
     private func resolveUnits() {

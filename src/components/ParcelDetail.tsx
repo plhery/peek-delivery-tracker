@@ -32,6 +32,7 @@ import {
 } from '../i18n';
 import { dayAndTime, localizedClockTime } from '../lib/format';
 import { NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
+import { formatWeight } from '../lib/units';
 import {
   awaitedCarrier,
   localizedParcelCompletionDate,
@@ -130,7 +131,7 @@ export function ParcelDetail({
   onArchive: (parcel: ParcelWithEvents) => Promise<unknown>;
   onDelete: (parcel: ParcelWithEvents) => Promise<unknown>;
 }) {
-  const { locale, languageTag, t, use24HourTime } = useI18n();
+  const { locale, languageTag, t, use24HourTime, weightUnit } = useI18n();
   const carrier = carrierInfo(activeTrackingCarrierId(parcel), locale);
   const displayedCarrier = carrierInfo(displayedCarrierId(parcel), locale);
   // While no carrier is known, the header names the one the number points to, as probable.
@@ -707,7 +708,7 @@ export function ParcelDetail({
             {importCharges && <div><dt>{t('detail.importCharges')}</dt><dd>{importCharges.text}</dd></div>}
             {pickupFact && <div><dt>{t(current?.stage === 'delivered' ? 'detail.collectedAt' : 'detail.pickupPoint')}</dt><dd>{pickupFact}</dd></div>}
             {parcel.receiverName && <div><dt>{t('detail.recipient')}</dt><dd>{parcel.receiverName}</dd></div>}
-            {Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0 && <div><dt>{t('detail.weight')}</dt><dd>{new Intl.NumberFormat(languageTag, { style: 'unit', unit: 'kilogram', maximumFractionDigits: 3 }).format(parcel.weightKg!)}</dd></div>}
+            {Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0 && <div><dt>{t('detail.weight')}</dt><dd>{formatWeight(parcel.weightKg!, weightUnit, languageTag)}</dd></div>}
             {parcel.dimensionsText && <div><dt>{t('detail.dimensions')}</dt><dd>{parcel.dimensionsText}</dd></div>}
           </dl>
         )}

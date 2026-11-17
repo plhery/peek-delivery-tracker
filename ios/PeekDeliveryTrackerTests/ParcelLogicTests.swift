@@ -1886,6 +1886,43 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DistanceUnit.system(Locale(identifier: "fr_FR")), .kilometres)
     }
 
+    @MainActor func testWeightsFollowTheUSMeasurementSystemOrTheDistanceChosen() throws {
+        let suite = "system-weights-\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        var systemWeight = WeightUnit.pounds
+        let localizer = Localizer(defaults: defaults, systemDistanceUnit: { .miles }, systemWeightUnit: { systemWeight })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+
+        // Automatic weighs in the system's unit, as it changes; a distance chosen brings its own.
+        XCTAssertEqual(localizer.weight(kilograms: 1.2), "2.6 lb")
+        systemWeight = .kilograms
+        localizer.systemChanged()
+        XCTAssertEqual(localizer.weight(kilograms: 1.2), "1.2 kg")
+        localizer.distance = .miles
+        XCTAssertEqual(localizer.weightUnit, .pounds)
+        localizer.distance = .kilometres
+        XCTAssertEqual(localizer.weightUnit, .kilograms)
+        localizer.distance = .automatic
+
+        // Pounds in the United States, Liberia and Myanmar; kilograms in the UK and elsewhere.
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_US")), .pounds)
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "es_US")), .pounds)
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_LR")), .pounds)
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_GB")), .kilograms)
+        XCTAssertEqual(WeightUnit.system(Locale(identifier: "fr_FR")), .kilograms)
+
+        // Kilograms to three decimals, pounds to one, or to three under a tenth of a pound, in the language's digits.
+        let english = Locale(identifier: "en"), german = Locale(identifier: "de")
+        XCTAssertEqual([1.2, 0.35, 0.0123, 8.6].map { WeightUnit.kilograms.format(kilograms: $0, locale: english) },
+                       ["1.2 kg", "0.35 kg", "0.012 kg", "8.6 kg"])
+        XCTAssertEqual([1.2, 0.35, 0.02, 0.4536, 8.6, 25].map { WeightUnit.pounds.format(kilograms: $0, locale: english) },
+                       ["2.6 lb", "0.8 lb", "0.044 lb", "1 lb", "19 lb", "55.1 lb"])
+        XCTAssertEqual(WeightUnit.pounds.format(kilograms: 1.2, locale: german), "2,6 lb")
+    }
+
     func testScheduledDeliveryMatchesWebApp() {
         let id = UUID()
         var delivered = makeParcel(id: id, events: [event(id, .delivered, "2026-08-08T12:00:00Z")])

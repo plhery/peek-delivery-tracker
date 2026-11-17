@@ -173,6 +173,7 @@ class AppContainer(
         systemUses24HourTime = Device.uses24HourTime(context),
         distancePreference = DistancePreference.from(defaults.string(DistancePreference.storageKey)),
         systemDistanceUnit = Device.distanceUnit(),
+        systemWeightUnit = Device.weightUnit(),
     )
 
     /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
@@ -562,10 +563,11 @@ class AppContainer(
         localizer.language = language
     }
 
-    /** The phone's clock and distance unit read again, which the localizer's Automatic choices follow. */
+    /** The phone's clock, distance and weight units read again, which the localizer's Automatic choices follow. */
     private fun deviceFormatsChanged() {
         localizer.systemUses24HourTime = Device.uses24HourTime(context)
         localizer.systemDistanceUnit = Device.distanceUnit()
+        localizer.systemWeightUnit = Device.weightUnit()
     }
 
     /**

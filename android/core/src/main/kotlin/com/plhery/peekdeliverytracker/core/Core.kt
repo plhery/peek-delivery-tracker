@@ -227,6 +227,8 @@ class Localizer(
     /** The distance units chosen in Settings, and the phone's, which Automatic follows. */
     distancePreference: DistancePreference = DistancePreference.Automatic,
     systemDistanceUnit: DistanceUnit = DistanceUnit.Kilometres,
+    /** The phone's weight unit, which Automatic follows: pounds where it measures in US units. */
+    systemWeightUnit: WeightUnit = WeightUnit.Kilograms,
 ) {
     private val clockPreferenceState = MutableStateFlow(clockPreference)
     private val systemClockState = MutableStateFlow(systemUses24HourTime)
@@ -262,6 +264,8 @@ class Localizer(
     private val distancePreferenceState = MutableStateFlow(distancePreference)
     private val systemDistanceState = MutableStateFlow(systemDistanceUnit)
     private val distanceState = MutableStateFlow(distancePreference.resolved(systemDistanceUnit))
+    private val systemWeightState = MutableStateFlow(systemWeightUnit)
+    private val weightState = MutableStateFlow(distancePreference.weightUnit(systemWeightUnit))
 
     /** The distance units chosen as they change, for Settings and for saving them. */
     val distancePreferenceFlow: StateFlow<DistancePreference> = distancePreferenceState.asStateFlow()
@@ -272,11 +276,15 @@ class Localizer(
     /** The unit distances are written in ([distanceUnit]) as it changes, so they are written again. */
     val distanceUnitFlow: StateFlow<DistanceUnit> = distanceState.asStateFlow()
 
+    /** The unit weights are written in ([weightUnit]) as it changes, so they are written again. */
+    val weightUnitFlow: StateFlow<WeightUnit> = weightState.asStateFlow()
+
     var distancePreference: DistancePreference
         get() = distancePreferenceState.value
         set(value) {
             distancePreferenceState.value = value
             distanceState.value = value.resolved(systemDistanceUnit)
+            weightState.value = value.weightUnit(systemWeightUnit)
         }
 
     /** The unit the phone's region measures roads in: the app sets it again when the phone's changes. */
@@ -289,6 +297,17 @@ class Localizer(
 
     /** The unit distances are written in: the one chosen, else the phone's. */
     val distanceUnit: DistanceUnit get() = distanceState.value
+
+    /** The phone's weight unit: the app sets it again when the phone's region changes. */
+    var systemWeightUnit: WeightUnit
+        get() = systemWeightState.value
+        set(value) {
+            systemWeightState.value = value
+            weightState.value = distancePreference.weightUnit(value)
+        }
+
+    /** The unit weights are written in: the one that goes with the distance units chosen, else the phone's. */
+    val weightUnit: WeightUnit get() = weightState.value
 
     private val languageState = MutableStateFlow(language)
 

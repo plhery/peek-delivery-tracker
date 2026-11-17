@@ -4,7 +4,10 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { formatKm } from '../components/map/route';
 import { I18nProvider, useI18n } from '../i18n';
 import { localizedClockTime } from './format';
-import { browserDistanceUnit, clockPreference, distancePreference, localeDistanceUnit, localeUses24HourTime } from './units';
+import {
+  browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, formatWeight, localeDistanceUnit, localeUses24HourTime,
+  localeWeightUnit, resolvedWeightUnit,
+} from './units';
 
 /** A browser set to `locale` in `timeZone`: its clock, which `Intl` gives when no locale is named, its language and its zone. */
 function browser(locale: string, timeZone: string) {
@@ -20,10 +23,11 @@ function browser(locale: string, timeZone: string) {
 }
 
 function Probe() {
-  const { languageTag, use24HourTime, distanceUnit, clock, setClock, distance, setDistance } = useI18n();
+  const { languageTag, use24HourTime, distanceUnit, weightUnit, clock, setClock, distance, setDistance } = useI18n();
   return <>
     <output aria-label="time">{localizedClockTime(new Date(2026, 10, 14, 16, 51), languageTag, use24HourTime)}</output>
     <output aria-label="distance">{formatKm(447, languageTag, distanceUnit)}</output>
+    <output aria-label="weight">{formatWeight(1.2, weightUnit, languageTag)}</output>
     <output aria-label="saved">{clock} {distance}</output>
     <button type="button" onClick={() => setClock('24')}>24-hour</button>
     <button type="button" onClick={() => setClock('12')}>12-hour</button>
@@ -138,5 +142,62 @@ describe('the clock and the units of distance', () => {
     window.localStorage.setItem('deliveryTrackerClock', '12');
     act(() => { window.dispatchEvent(new StorageEvent('storage', { key: 'deliveryTrackerClock' })); });
     expect(shown()).toEqual(['4:51 PM', '450 km']);
+  });
+});
+
+describe('the units of weight', () => {
+  const weight = () => screen.getByLabelText('weight').textContent;
+
+  it('weighs in pounds only where the region measures in US units, the UK in kilograms', () => {
+    expect(['en-US', 'es-US', 'en', 'en-LR', 'my-MM', 'en-GB', 'en-CA', 'fr-FR', 'de-CH'].map(localeWeightUnit))
+      .toEqual(['lb', 'lb', 'lb', 'lb', 'lb', 'kg', 'kg', 'kg', 'kg']);
+    expect([undefined, '', 'not a language'].map(localeWeightUnit)).toEqual(['kg', 'kg', 'kg']);
+    const zones = ['America/New_York', 'America/Indiana/Knox', 'Pacific/Honolulu', 'US/Eastern', 'Africa/Monrovia', 'Asia/Yangon',
+      'Europe/London', 'Europe/Jersey', 'Europe/Zurich', 'America/Toronto'];
+    expect(zones.map((zone) => browserWeightUnit('en-US', zone))).toEqual(['lb', 'lb', 'lb', 'lb', 'lb', 'lb', 'kg', 'kg', 'kg', 'kg']);
+    // A zone that names no place leaves it to the language.
+    expect([['en-US', 'UTC'], ['en-GB', 'Etc/UTC'], ['de-CH', undefined]].map(([locale, zone]) => browserWeightUnit(locale, zone)))
+      .toEqual(['lb', 'kg', 'kg']);
+  });
+
+  it('goes with the distance units chosen, else the browser’s', () => {
+    expect([resolvedWeightUnit('auto', 'lb'), resolvedWeightUnit('auto', 'kg'), resolvedWeightUnit('km', 'lb'), resolvedWeightUnit('mi', 'kg')])
+      .toEqual(['lb', 'kg', 'kg', 'lb']);
+  });
+
+  it('writes kilograms to three decimals, pounds to one, or to three under a tenth of a pound', () => {
+    expect([1.2, 0.35, 0.0123, 8.6].map((kg) => formatWeight(kg, 'kg', 'en-US'))).toEqual(['1.2 kg', '0.35 kg', '0.012 kg', '8.6 kg']);
+    expect([1.2, 0.35, 0.02, 0.4536, 8.6, 25].map((kg) => formatWeight(kg, 'lb', 'en-US')))
+      .toEqual(['2.6 lb', '0.8 lb', '0.044 lb', '1 lb', '19 lb', '55.1 lb']);
+    expect(formatWeight(1.2, 'lb', 'es-US')).toBe('2.6 lb');
+    expect(formatWeight(1.2, 'lb', 'de-DE')).toBe('2,6 lb');
+  });
+
+  it('weighs in pounds in a browser in the United States, and in kilograms in the UK and in Switzerland', () => {
+    browser('en-US', 'America/Chicago');
+    const view = render(<I18nProvider><Probe /></I18nProvider>);
+    expect(weight()).toBe('2.6 lb');
+    view.unmount();
+    vi.restoreAllMocks();
+
+    browser('en-GB', 'Europe/London');
+    const british = render(<I18nProvider><Probe /></I18nProvider>);
+    expect([shown()[1], weight()]).toEqual(['280 mi', '1.2 kg']);
+    british.unmount();
+    vi.restoreAllMocks();
+
+    browser('en-US', 'Europe/Zurich');
+    render(<I18nProvider><Probe /></I18nProvider>);
+    expect(weight()).toBe('1.2 kg');
+  });
+
+  it('follows a choice of kilometres or miles', async () => {
+    browser('en-US', 'America/New_York');
+    const user = userEvent.setup();
+    render(<I18nProvider><Probe /></I18nProvider>);
+    await user.click(screen.getByRole('button', { name: 'Kilometres' }));
+    expect(weight()).toBe('1.2 kg');
+    await user.click(screen.getByRole('button', { name: 'Miles' }));
+    expect(weight()).toBe('2.6 lb');
   });
 });

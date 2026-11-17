@@ -37,13 +37,33 @@ val TrackingEvent.quotedWords: String?
 /** A fact of the shipment the parcel's page lists (`shipmentFact`): the key of its label, and its value. */
 data class ShipmentFact(val key: String, val value: String)
 
+/** The unit a weight is written in: kilograms, or pounds where the phone measures in US units (`WeightUnit`). */
+enum class WeightUnit(val code: String) {
+    Kilograms("kg"),
+    Pounds("lb"),
+    ;
+
+    /**
+     * A weight Peek read as a number of kilograms, in this unit and the language's digits: kilograms to three decimals,
+     * pounds to one, or to three under a tenth of a pound, as the iPhone and web apps write it.
+     */
+    fun format(kilograms: Double, language: AppLanguage): String = when (this) {
+        Kilograms -> foundationDecimal(kilograms, 3, language) + " kg"
+        Pounds -> (kilograms / KILOGRAMS_PER_POUND).let { pounds -> foundationDecimal(pounds, if (pounds < 0.1) 3 else 1, language) + " lb" }
+    }
+
+    private companion object {
+        const val KILOGRAMS_PER_POUND = 0.45359237
+    }
+}
+
 /**
  * The facts of the shipment the parcel's page lists under its numbers, in `liveParcelPass`'s order: what importing it
  * costs (`importCharges`); its pickup point, or where it was picked up once delivered, unless a card shows it
- * ([waitingAt]); who receives it; its weight in the app language's digits with up to three decimals, then " kg"; and
- * its dimensions, each trimmed and left out when empty. Null without carrier data, where the page lists nothing.
+ * ([waitingAt]); who receives it; its weight in [weightUnit] ([WeightUnit.format]); and its dimensions, each trimmed
+ * and left out when empty. Null without carrier data, where the page lists nothing.
  */
-fun Localizer.shipmentFacts(parcel: Parcel): List<ShipmentFact>? {
+fun Localizer.shipmentFacts(parcel: Parcel, weightUnit: WeightUnit = this.weightUnit): List<ShipmentFact>? {
     val details = parcel.carrierData ?: return null
     fun trimmed(value: String?) = value?.trimmingWhitespacesAndNewlines()?.nonEmpty
     val facts = mutableListOf<ShipmentFact>()
@@ -55,7 +75,7 @@ fun Localizer.shipmentFacts(parcel: Parcel): List<ShipmentFact>? {
     trimmed(details.receiverName)?.let { facts += ShipmentFact("detail.recipient", it) }
     val weight = details.weightKg
     if (weight != null && weight.isFinite() && weight > 0) {
-        facts += ShipmentFact("detail.weight", foundationDecimal(weight, 3, language) + " kg")
+        facts += ShipmentFact("detail.weight", weightUnit.format(weight, language))
     }
     trimmed(details.dimensionsText)?.let { facts += ShipmentFact("detail.dimensions", it) }
     return facts

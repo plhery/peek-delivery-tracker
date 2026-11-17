@@ -112,7 +112,7 @@ Any other number doesn't tell Peek it's Mainfreight. Paste it all the same: Peek
 
 Peek needs no account or postcode. When Mainfreight's search doesn't find 11 digits, Peek tries its New Zealand, Australian and American services at once; if more than one knows the number, Peek can't tell which shipment is yours. For a house bill, a master bill or the sender's reference, Peek shows the number Mainfreight answers under as "Mainfreight tracks this as".
 
-Peek shows the status, each step in Mainfreight's wording with its place, and the weight in kilograms when the tracker gives it. It leaves out branch contacts, postcodes, the sender's reference and documents. "Open the Mainfreight website" opens the number on Mainfreight's tracker. When that tracker can't be reached or can't read the shipment, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
+Peek shows the status, each step in Mainfreight's wording with its place, and the weight in your own units when the tracker gives it. It leaves out branch contacts, postcodes, the sender's reference and documents. "Open the Mainfreight website" opens the number on Mainfreight's tracker. When that tracker can't be reached or can't read the shipment, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 
 Road steps that name a New Zealand, Australian or US time zone (`NZDT`, `AEST`, `PST` and the like) give their exact time. Others, such as air and ocean milestones, have no zone: Peek reads them on the clock of the step's place, the steps around it or the destination, else New Zealand's, so now and then one can be off.
 

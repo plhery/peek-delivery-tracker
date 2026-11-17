@@ -53,9 +53,9 @@ until it arrives.
 
 Also in the box: light and dark themes, ten languages (English, German, French, Italian,
 Spanish, Portuguese, Brazilian Portuguese, Polish, Russian and Simplified Chinese), a web app you can install, and on iPhone a barcode
-scanner, a Share extension and widgets. Times and distances follow your device's own settings, a 12- or
-24-hour clock and kilometres or miles; **Time format** and **Distance units** in **Settings → Preferences**
-choose them yourself.
+scanner, a Share extension and widgets. Times, distances and weights follow your device's own settings, a 12- or
+24-hour clock, kilometres or miles, and kilograms or (in US units) pounds; **Time format** and **Distance units**
+in **Settings → Preferences** choose them yourself, pounds going with miles.
 
 Peek shows no ads and sells no data. A parcel followed without an account is forgotten 30
 days after it arrives. The [privacy notice](PRIVACY.md) has the rest.

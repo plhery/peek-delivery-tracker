@@ -13,6 +13,7 @@ import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DistanceUnit
+import com.plhery.peekdeliverytracker.core.WeightUnit
 import java.util.Locale
 
 /** What the app reads of the phone, where the iPhone reads UIDevice, Locale and its bundle. */
@@ -44,6 +45,10 @@ object Device {
     /** The unit the phone's [region] measures roads in: kilometres where it is metric, miles elsewhere (the US, the UK). */
     fun distanceUnit(): DistanceUnit =
         if (LocaleData.getMeasurementSystem(ULocale.forLocale(region())) == LocaleData.MeasurementSystem.SI) DistanceUnit.Kilometres else DistanceUnit.Miles
+
+    /** The unit the phone's [region] weighs in: pounds where it measures in US units (the US, Liberia, Myanmar), else kilograms. */
+    fun weightUnit(): WeightUnit =
+        if (LocaleData.getMeasurementSystem(ULocale.forLocale(region())) == LocaleData.MeasurementSystem.US) WeightUnit.Pounds else WeightUnit.Kilograms
 
     /**
      * `UIDevice.current.name`, which the iPhone gives apps as its model alone ("iPhone") without the entitlement for

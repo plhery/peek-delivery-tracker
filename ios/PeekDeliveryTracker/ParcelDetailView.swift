@@ -579,7 +579,7 @@ struct ParcelDetailView: View {
                         shipmentFact("detail.recipient", value: value)
                     }
                     if let weight = details.weightKg, weight.isFinite, weight > 0 {
-                        shipmentFact("detail.weight", value: weight.formatted(.number.locale(localizer.language.locale).precision(.fractionLength(0...3))) + " kg")
+                        shipmentFact("detail.weight", value: localizer.weight(kilograms: weight))
                     }
                     if let value = details.dimensionsText?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
                         shipmentFact("detail.dimensions", value: value)

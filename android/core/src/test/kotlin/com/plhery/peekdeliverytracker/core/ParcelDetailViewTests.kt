@@ -96,6 +96,34 @@ class ParcelDetailViewTests {
     }
 
     @Test
+    fun aPhoneThatMeasuresInUSUnitsWeighsInPoundsAndADistanceChosenBringsItsOwn() {
+        val weighed = parcel(TrackingStage.InTransit, CarrierData(weightKg = 1.2))
+        fun weight(localizer: Localizer) = localizer.shipmentFacts(weighed)!!.single().value
+        val american = Localizer(AppLanguage.En, systemDistanceUnit = DistanceUnit.Miles, systemWeightUnit = WeightUnit.Pounds)
+        assertEquals("2.6 lb", weight(american))
+        // The UK writes miles but kilograms.
+        assertEquals("1.2 kg", weight(Localizer(AppLanguage.En, systemDistanceUnit = DistanceUnit.Miles)))
+        american.distancePreference = DistancePreference.Kilometres
+        assertEquals(WeightUnit.Kilograms, american.weightUnitFlow.value)
+        assertEquals("1.2 kg", weight(american))
+        american.distancePreference = DistancePreference.Automatic
+        american.systemWeightUnit = WeightUnit.Kilograms
+        assertEquals("1.2 kg", weight(american))
+        american.distancePreference = DistancePreference.Miles
+        assertEquals("2.6 lb", weight(american))
+        // The page passes the unit it shows.
+        assertEquals("1.2 kg", american.shipmentFacts(weighed, WeightUnit.Kilograms)!!.single().value)
+    }
+
+    @Test
+    fun kilogramsToThreeDecimalsAndPoundsToOneOrThreeUnderATenthOfAPound() {
+        assertEquals(listOf("1.2 kg", "0.35 kg", "0.012 kg", "8.6 kg"), listOf(1.2, 0.35, 0.0123, 8.6).map { WeightUnit.Kilograms.format(it, AppLanguage.En) })
+        assertEquals(listOf("2.6 lb", "0.8 lb", "0.044 lb", "1 lb", "19 lb", "55.1 lb"),
+            listOf(1.2, 0.35, 0.02, 0.4536, 8.6, 25.0).map { WeightUnit.Pounds.format(it, AppLanguage.En) })
+        assertEquals("2,6 lb", WeightUnit.Pounds.format(1.2, AppLanguage.De))
+    }
+
+    @Test
     fun aWeightThatIsNoneAndBlankValuesAreLeftOutAndNoCarrierDataListsNothing() {
         val localizer = Localizer(AppLanguage.De)
         for (weight in listOf(0.0, -1.0, Double.NaN, Double.POSITIVE_INFINITY)) {

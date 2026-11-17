@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testParcel, testView } from '../test/parcelLinks';
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../types';
+import { I18nProvider } from '../i18n';
 import { takeCarrierHandoff } from '../lib/carrierHandoff';
 import { carrierInfo } from '../lib/carriers';
 import { ACCOUNT_INVITATION_STORAGE_KEY } from './accountInvitation';
@@ -569,6 +570,17 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('1.2 kg');
     expect(screen.getByText('Dimensions').nextElementSibling).toHaveTextContent('30 × 20 × 10 cm');
     expect(screen.getByText('Pickup point').nextElementSibling).toHaveTextContent('Example Kiosk');
+  });
+
+  it('weighs the parcel in pounds for a browser in the United States, never rewriting the carrier’s scans', async () => {
+    const zone = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
+      .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'America/Chicago' });
+    mocks.read.mockResolvedValue(view([...journey.slice(0, 2), scan('in_transit', 6, 'Weighed 1.2 kg at the depot')], { weightKg: 1.2 }));
+    render(<I18nProvider><ParcelPage linkId={LINK_ID} /></I18nProvider>);
+    await screen.findByRole('heading', { level: 1 });
+    expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('2.6 lb');
+    expect(screen.getByText('Weighed 1.2 kg at the depot')).toBeVisible();
+    zone.mockRestore();
   });
 
   it('lists the import charges first, and sends a viewer without the number to whoever shared the parcel to pay online', async () => {

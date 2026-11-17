@@ -12,7 +12,7 @@ import {
 } from 'react';
 import { detectLocale, documentLanguage, isLocale, languagePath, LOCALE_COOKIE, manifestPath, pathLanguage, SUPPORTED_LOCALES, type Locale } from './lib/locale';
 import { languageTags, translateMessage, type MessageKey, type Messages, type Translate } from './lib/messages';
-import { browserDistanceUnit, clockPreference, distancePreference, localeUses24HourTime, type ClockPreference, type DistancePreference } from './lib/units';
+import { browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, localeUses24HourTime, resolvedWeightUnit, type ClockPreference, type DistancePreference, type WeightUnit } from './lib/units';
 import type { DistanceUnit } from './components/map/route';
 
 export { detectLocale, SUPPORTED_LOCALES, type Locale };
@@ -76,13 +76,15 @@ interface I18nValue {
   use24HourTime: boolean;
   /** The unit distances are written in: the choice in Settings, or the browser's region's. */
   distanceUnit: DistanceUnit;
+  /** The unit weights are written in: the one that goes with the distance units chosen, or the browser's region's. */
+  weightUnit: WeightUnit;
   /** What Settings keeps for each, `auto` following the browser. */
   clock: ClockPreference;
   setClock: (clock: ClockPreference) => void;
   distance: DistancePreference;
   setDistance: (distance: DistancePreference) => void;
   /** What `auto` gives here, for Settings to name. */
-  automatic: { use24HourTime: boolean; distanceUnit: DistanceUnit };
+  automatic: { use24HourTime: boolean; distanceUnit: DistanceUnit; weightUnit: WeightUnit };
   t: Translate;
 }
 
@@ -97,7 +99,7 @@ export function translate(
 }
 
 /** What the server writes, and a page before it has read the browser. */
-const SERVER_UNITS: I18nValue['automatic'] = { use24HourTime: true, distanceUnit: 'km' };
+const SERVER_UNITS: I18nValue['automatic'] = { use24HourTime: true, distanceUnit: 'km', weightUnit: 'kg' };
 
 const defaultValue: I18nValue = {
   locale: 'en',
@@ -105,6 +107,7 @@ const defaultValue: I18nValue = {
   setLocale: () => undefined,
   use24HourTime: true,
   distanceUnit: 'km',
+  weightUnit: 'kg',
   clock: 'auto',
   setClock: () => undefined,
   distance: 'auto',
@@ -118,7 +121,8 @@ const I18nContext = createContext<I18nValue>(defaultValue);
 /** What the browser's own settings give: its clock, and the units of the place its time zone names. */
 function browserUnits(): I18nValue['automatic'] {
   const timeZone = new Intl.DateTimeFormat().resolvedOptions().timeZone;
-  return { use24HourTime: localeUses24HourTime(), distanceUnit: browserDistanceUnit(window.navigator.language, timeZone) };
+  const language = window.navigator.language;
+  return { use24HourTime: localeUses24HourTime(), distanceUnit: browserDistanceUnit(language, timeZone), weightUnit: browserWeightUnit(language, timeZone) };
 }
 
 function savedLocale(): Locale | null {
@@ -207,6 +211,7 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
 
   const use24HourTime = clock === 'auto' ? automatic.use24HourTime : clock === '24';
   const distanceUnit = distance === 'auto' ? automatic.distanceUnit : distance;
+  const weightUnit = resolvedWeightUnit(distance, automatic.weightUnit);
 
   const show = useCallback((next: Locale) => {
     requested.current = next;
@@ -268,13 +273,14 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     setLocale: chooseLocale,
     use24HourTime,
     distanceUnit,
+    weightUnit,
     clock,
     setClock,
     distance,
     setDistance,
     automatic,
     t,
-  }), [language, chooseLocale, use24HourTime, distanceUnit, clock, setClock, distance, setDistance, automatic, t]);
+  }), [language, chooseLocale, use24HourTime, distanceUnit, weightUnit, clock, setClock, distance, setDistance, automatic, t]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

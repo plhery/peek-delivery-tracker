@@ -102,7 +102,7 @@ Pitney Bowes ships the parcel for the seller or the marketplace, so ask them fir
 
 [Peek](/) names Pitney Bowes at once from a UPAA, UPBE or PBX number ("Detected carrier") and asks its tracker by that number alone: no postcode or account. A tracking link from trackpb.shipment.co or parceltracking.pb.com works too. If all you have is the seller's first-leg number or the post's number, paste it all the same: Peek follows more than 3,500 carriers. Picking Pitney Bowes with "Change" for another shape doesn't help: Peek says it "doesn’t issue numbers like this one".
 
-Peek shows the status, each line with its place, and the weight in kilograms (the tracker gives pounds and ounces). It leaves out the next carrier's link and number. The tracker gives no expected delivery date or proof of delivery, so Peek shows neither. "Open the Pitney Bowes website", on the parcel's page, opens the number on Pitney Bowes's tracker.
+Peek shows the status, each line with its place, and the weight in your own units (the tracker gives pounds and ounces). It leaves out the next carrier's link and number. The tracker gives no expected delivery date or proof of delivery, so Peek shows neither. "Open the Pitney Bowes website", on the parcel's page, opens the number on Pitney Bowes's tracker.
 
 Peek doesn't hand the parcel over to the post: the post's scans reach you through Pitney Bowes's tracker. When that tracker can't be reached or can't read the parcel, Peek asks tracking services and shows their history, in their own words.
 

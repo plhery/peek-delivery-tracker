@@ -6,6 +6,7 @@ import type { Locale } from '../../lib/locale';
 import { numberToCheck, type Translate } from '../../lib/messages';
 import { trackAction } from '../../lib/analytics';
 import { importChargesLine } from '../../lib/importCharges';
+import { formatWeight } from '../../lib/units';
 import {
   activeTrackingCarrierId,
   carrierInfo,
@@ -202,12 +203,12 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
  * whoever shared the parcel.
  */
 export function ShipmentFacts({ parcel, stage }: { parcel: ParcelWithEvents; stage: Stage | null }) {
-  const { t, languageTag } = useI18n();
+  const { t, languageTag, weightUnit } = useI18n();
   const sender = parcel.senderName?.trim();
   // While the parcel waits, its pickup point has a card of its own.
   const pickup = stage === 'ready_for_pickup' ? undefined : parcel.pickupPoint?.trim();
   const weight = Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0
-    ? new Intl.NumberFormat(languageTag, { style: 'unit', unit: 'kilogram', maximumFractionDigits: 3 }).format(parcel.weightKg!) : null;
+    ? formatWeight(parcel.weightKg!, weightUnit, languageTag) : null;
   const charges = importChargesLine(parcel.importCharges, stage === 'delivered', t, languageTag);
   if (!sender && !charges && !pickup && !weight && !parcel.dimensionsText) return null;
   return <div className="peekp-facts">

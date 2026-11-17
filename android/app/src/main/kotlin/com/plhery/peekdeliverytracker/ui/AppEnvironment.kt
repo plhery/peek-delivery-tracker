@@ -19,6 +19,7 @@ import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.WeightUnit
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PeekTypography
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
@@ -42,8 +43,11 @@ val LocalUse24HourTime = compositionLocalOf { true }
 /** The unit the localizer writes distances in, as it changes, so the distances are written again. */
 val LocalDistanceUnit = compositionLocalOf { DistanceUnit.Kilometres }
 
+/** The unit the localizer writes weights in, as it changes, so the weights are written again. */
+val LocalWeightUnit = compositionLocalOf { WeightUnit.Kilograms }
+
 /**
- * `localizer`, its language, its clock and its distance unit for `content`, with the fonts spaced for the language
+ * `localizer`, its language, its clock and its distance and weight units for `content`, with the fonts spaced for the language
  * ([PeekTypography]).
  */
 @Composable
@@ -51,11 +55,13 @@ fun ProvideLocalizer(localizer: Localizer, content: @Composable () -> Unit) {
     val language by localizer.languageFlow.collectAsState()
     val use24HourTime by localizer.use24HourTimeFlow.collectAsState()
     val distanceUnit by localizer.distanceUnitFlow.collectAsState()
+    val weightUnit by localizer.weightUnitFlow.collectAsState()
     CompositionLocalProvider(
         LocalLocalizer provides localizer,
         LocalLanguage provides language,
         LocalUse24HourTime provides use24HourTime,
         LocalDistanceUnit provides distanceUnit,
+        LocalWeightUnit provides weightUnit,
     ) {
         ProvideDynamicTypeSize(PeekTheme.dynamicTypeSize, language, content)
     }

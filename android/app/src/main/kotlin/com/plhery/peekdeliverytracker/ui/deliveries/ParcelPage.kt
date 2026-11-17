@@ -94,6 +94,7 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalWeightUnit
 import com.plhery.peekdeliverytracker.ui.WindowKey
 import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
@@ -459,7 +460,7 @@ private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUI
 @Composable
 private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val localizer = LocalLocalizer.current
-    localizer.shipmentFacts(parcel)?.let { ShipmentFacts(it, Modifier.testTag(PAGE_FACTS)) }
+    localizer.shipmentFacts(parcel, LocalWeightUnit.current)?.let { ShipmentFacts(it, Modifier.testTag(PAGE_FACTS)) }
     val identity = shownCarrierIdentity(parcel, localizer, LocalLanguage.current) ?: return
     val sample = state.sample(pageId) != null
     TrackingNotes(

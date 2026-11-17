@@ -15,6 +15,9 @@ dist/
 *.p12
 *.pfx
 *.pem
+# Public attestation certificate chains, test fixtures with no key in them.
+!src/server/fixtures/android-attestation/*.pem
+!android/*/src/test/resources/android-attestation/*.pem
 *.key
 *.mobileprovision
 *.har

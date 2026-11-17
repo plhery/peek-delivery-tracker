@@ -132,6 +132,7 @@ describe('native verification', () => {
     await expect(verifyNativeRequest(other, service, signedBody)).rejects.toMatchObject({ status: 403, reason: 'challenge_mismatch' });
     const unconfigured = await signedRequest();
     vi.stubEnv('APP_ATTEST_APP_ID', '');
+    vi.stubEnv('ANDROID_KEY_ATTESTATION', 'off');
     await expect(verifyNativeRequest(unconfigured, service, signedBody)).rejects.toMatchObject({ status: 403, reason: 'unconfigured' });
   });
   it('rejects replayed counters, unknown or incorrectly scoped keys and malformed assertions', async () => {
@@ -198,8 +199,8 @@ describe('native verification', () => {
     const lines: string[] = [];
     vi.spyOn(console, 'log').mockImplementation((line: string) => { lines.push(line); });
     const events = () => lines.map((line) => JSON.parse(line) as Record<string, unknown>).filter((line) => line.event === 'native_verification');
-    const rejectedSignature = 'native_verification_total{kind="detection",outcome="rejected",reason="signature"}';
-    const verifiedLookup = 'native_verification_total{kind="lookup",outcome="verified",reason="none"}';
+    const rejectedSignature = 'native_verification_total{kind="detection",outcome="rejected",reason="signature",platform="apple"}';
+    const verifiedLookup = 'native_verification_total{kind="lookup",outcome="verified",reason="none",platform="apple"}';
     const attested = 'lookup_proof_total{kind="lookup",proof="app_attest"}';
     const before = [await series(rejectedSignature), await series(verifiedLookup), await series(attested)];
     const req = await signedRequest();
@@ -220,7 +221,7 @@ describe('native verification', () => {
   it('exposes the free fallback without enabling App Attest and returns no-store challenges', async () => {
     vi.stubEnv('APP_ATTEST_APP_ID', '');
     const config = await configuration(new NextRequest('https://peek.example/api/public/native/verification'), { params: Promise.resolve({}) });
-    expect(await config.json()).toEqual({ appAttestAppId: null, turnstile: true });
+    expect(await config.json()).toEqual({ appAttestAppId: null, androidAttestAppId: 'android:com.plhery.peekdeliverytracker', turnstile: true });
     const unavailable = await register(request('/api/public/native/verification', '{}'), { params: Promise.resolve({}) });
     expect(unavailable.status).toBe(503);
     vi.stubEnv('APP_ATTEST_APP_ID', appID);

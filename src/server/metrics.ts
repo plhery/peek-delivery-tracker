@@ -80,7 +80,7 @@ interface PrometheusRuntime {
   syncAnomalyTotal: Counter<'carrier' | 'anomaly'>;
   healthIncidentTotal: Counter<'kind' | 'subject' | 'state'>;
   scheduledRunGaveWayTotal: Counter<'to'>;
-  nativeVerificationTotal: Counter<'kind' | 'outcome' | 'reason'>;
+  nativeVerificationTotal: Counter<'kind' | 'outcome' | 'reason' | 'platform'>;
   lookupProofTotal: Counter<'kind' | 'proof'>;
   publicLookupClients: Gauge;
   publicLookupsPerClient: Gauge<'stat'>;
@@ -312,13 +312,13 @@ function createRuntime(): PrometheusRuntime {
     }),
     nativeVerificationTotal: new Counter({
       name: 'native_verification_total',
-      help: 'App Attest attestations and assertions by kind (attestation, lookup, detection, account_lookup, account_detection, account_refresh), outcome and reason code.',
-      labelNames: ['kind', 'outcome', 'reason'] as const,
+      help: 'App Attest and Android key attestations and assertions by kind (attestation, lookup, detection, account_lookup, account_detection, account_refresh), outcome, reason code and platform (apple, android, unknown).',
+      labelNames: ['kind', 'outcome', 'reason', 'platform'] as const,
       registers: [registry],
     }),
     lookupProofTotal: new Counter({
       name: 'lookup_proof_total',
-      help: 'Lookups and detections without an account by the proof that let them through (app_attest, turnstile, none) or refused.',
+      help: 'Lookups and detections without an account by the proof that let them through (app_attest, key_attestation, turnstile, none) or refused.',
       labelNames: ['kind', 'proof'] as const,
       registers: [registry],
     }),
@@ -519,21 +519,24 @@ export function recordPublicDetection(outcome: 'asked' | 'limited_burst' | 'limi
 export type NativeVerificationKind = 'attestation' | 'lookup' | 'detection' | 'account_lookup' | 'account_detection' | 'account_refresh';
 
 /**
- * An App Attest check: an attestation `verified` or `rejected`, an assertion
- * of a lookup without an account `verified`, `rejected` or `limited` by the
- * device's allowance, and one of a signed-in request `verified`, `invalid` or
- * `missing`. `reason` is a short code, `none` when there is nothing to explain.
+ * An App Attest or Android key attestation check: an attestation `verified` or
+ * `rejected`, an assertion of a lookup without an account `verified`,
+ * `rejected` or `limited` by the device's allowance, and one of a signed-in
+ * request `verified`, `invalid` or `missing`. `reason` is a short code, `none`
+ * when there is nothing to explain; `platform` is the key's, or the
+ * user-agent's before a key is read.
  */
 export function recordNativeVerification(
   kind: NativeVerificationKind,
   outcome: 'verified' | 'rejected' | 'limited' | 'invalid' | 'missing',
   reason: string,
+  platform: 'apple' | 'android' | 'unknown',
 ): void {
-  count(runtime.nativeVerificationTotal, 'native_verification_total', { kind, outcome, reason });
+  count(runtime.nativeVerificationTotal, 'native_verification_total', { kind, outcome, reason, platform });
 }
 
 /** What let a lookup or detection without an account through, or that it was refused. */
-export function recordLookupProof(kind: 'lookup' | 'detection', proof: 'app_attest' | 'turnstile' | 'none' | 'refused'): void {
+export function recordLookupProof(kind: 'lookup' | 'detection', proof: 'app_attest' | 'key_attestation' | 'turnstile' | 'none' | 'refused'): void {
   count(runtime.lookupProofTotal, 'lookup_proof_total', { kind, proof });
 }
 

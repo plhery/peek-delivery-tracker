@@ -1,5 +1,5 @@
 import { apiRoute, json, readJsonObject, requireService, noContent } from '../../../../../src/server/api';
-import { nativeAttestSettings, registerNativeKey } from '../../../../../src/server/nativeVerification';
+import { androidAttestSettings, nativeAttestSettings, registerNativeKey } from '../../../../../src/server/nativeVerification';
 import { turnstileSettings } from '../../../../../src/server/lookupVerification';
 
 export const dynamic = 'force-dynamic';
@@ -7,6 +7,7 @@ export const runtime = 'nodejs';
 
 export const GET = apiRoute(async () => json({
   appAttestAppId: nativeAttestSettings()?.appId ?? null,
+  androidAttestAppId: androidAttestSettings()?.appId ?? null,
   turnstile: turnstileSettings() !== null,
 }), { authenticated: false, loadService: false, publicRateLimit: { limit: 30, window: 60 } });
 

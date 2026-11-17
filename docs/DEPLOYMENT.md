@@ -406,8 +406,9 @@ every container that shares the key. Only parcel creation and detection that
 contacts a carrier need verification. Saved parcels and shared links remain
 readable during a verification outage. Keep the origin behind the trusted proxy
 and avoid Cloudflare challenge pages on JSON APIs and native app traffic.
-No user-agent is exempt: the iPhone and Mac apps verify with App Attest or the
-hosted Turnstile check, like every other anonymous caller.
+No user-agent is exempt: the iPhone and Mac apps verify with App Attest, the
+Android app with key attestation, or either with the hosted Turnstile check,
+like every other anonymous caller.
 
 Native builds signed with a free Personal Team use the hosted Turnstile check
 and keep its proof in memory. Apple App Attest needs paid Developer membership.
@@ -424,12 +425,33 @@ and `NATIVE_DETECTIONS_PER_DAY` for installation budgets; `0` disables that work
 Network and global budgets still apply. Apple outages and unsupported devices
 use Turnstile. Signed-in requests use account budgets.
 
+Android key attestation needs no Google service, so both Android builds use it.
+The app makes a key in the phone's secure hardware with the SHA-256 of a
+challenge as its attestation challenge, and registers the key's certificate
+chain. The server accepts a chain signed up to one of Google's hardware roots,
+its intermediates in their validity period (a chain keyed in the factory stays
+trusted after it expires, as Google says), none of it on Google's revocation
+list (read hourly; past a day without a copy, registration waits for one), for
+a key generated in the TEE or StrongBox of a phone with a locked bootloader and
+a verified system, or a self-signed one whose boot key it knows (GrapheneOS,
+CalyxOS), made for the app's package and one of its signing certificates
+([androidKeyAttestation.ts](../src/server/androidKeyAttestation.ts)). Each
+anonymous lookup is then signed with that key, under the same challenges,
+installation budgets and network and global budgets as App Attest. Anything
+else, emulators, unlocked or custom systems and older hardware included, uses
+Turnstile; the app stops asking on a system the server is sure to refuse until
+the system updates. It is on wherever `TURNSTILE_SECRET_KEY` is set;
+`ANDROID_KEY_ATTESTATION=off` turns it off, and the app then uses Turnstile.
+`ANDROID_KEY_ATTESTATION_SIGNERS` adds signing certificates' SHA-256 digests,
+separated by commas, such as a debug key on a development server or the F-Droid
+catalog's key once it signs the app.
+
 Signed-in parcel additions, detections that contact a carrier and refreshes can
 carry the same signature. `NATIVE_ATTEST_ACCOUNT_MODE` sets what the server does with them. `log`, the
 default, checks a signature that is sent and counts the result; it never refuses
-and spends no installation budget. `enforce` refuses a request from the app's
-user-agent without a valid signature, as an anonymous lookup is refused, once
-`APP_ATTEST_APP_ID` is set. Browsers are never refused, and the user-agent can be
+and spends no installation budget. `enforce` refuses a request from the iPhone
+app's user-agent without a valid signature, as an anonymous lookup is refused, once
+`APP_ATTEST_APP_ID` is set; Android requests are checked but never refused. Browsers are never refused, and the user-agent can be
 forged, so account budgets remain the limit. `off` checks nothing. Builds that do
 not sign take the refusal for an ended session and sign the user out, so enforce
 only once they are gone ([OBSERVABILITY.md](OBSERVABILITY.md)).

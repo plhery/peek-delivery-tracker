@@ -63709,7 +63709,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Registered Apple App Attest key identifier. Supply all three App Attest headers together instead of a browser proof."
+            "description": "Registered Apple App Attest or Android key attestation key identifier. Supply all three App Attest headers together instead of a browser proof."
           },
           {
             "in": "header",
@@ -63727,7 +63727,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Base64 CBOR assertion signing SHA256 of the UTF-8 payload native-request-v1, challenge, HTTP method, URL pathname, and lowercase SHA256 hex of the exact request body, separated by newlines."
+            "description": "Signature over SHA256 of the UTF-8 payload native-request-v1, challenge, HTTP method, URL pathname, and lowercase SHA256 hex of the exact request body, separated by newlines: a Base64 CBOR App Attest assertion, or for an Android key the Base64 DER ECDSA (SHA-256) signature of that hash."
           }
         ]
       }
@@ -63861,7 +63861,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Registered Apple App Attest key identifier. Supply all three App Attest headers together instead of a browser proof."
+            "description": "Registered Apple App Attest or Android key attestation key identifier. Supply all three App Attest headers together instead of a browser proof."
           },
           {
             "in": "header",
@@ -63879,7 +63879,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Base64 CBOR assertion signing SHA256 of the UTF-8 payload native-request-v1, challenge, HTTP method, URL pathname, and lowercase SHA256 hex of the exact request body, separated by newlines."
+            "description": "Signature over SHA256 of the UTF-8 payload native-request-v1, challenge, HTTP method, URL pathname, and lowercase SHA256 hex of the exact request body, separated by newlines: a Base64 CBOR App Attest assertion, or for an Android key the Base64 DER ECDSA (SHA-256) signature of that hash."
           }
         ]
       }
@@ -64749,7 +64749,7 @@
         "security": [],
         "responses": {
           "200": {
-            "description": "App Attest app ID is null when disabled; Turnstile indicates the hosted fallback is available",
+            "description": "App Attest app ID and the app ID Android keys register under are null when disabled; Turnstile indicates the hosted fallback is available",
             "content": {
               "application/json": {
                 "schema": {
@@ -64760,6 +64760,12 @@
                   ],
                   "properties": {
                     "appAttestAppId": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "androidAttestAppId": {
                       "type": [
                         "string",
                         "null"
@@ -64780,7 +64786,7 @@
       },
       "post": {
         "operationId": "registerNativeAttestation",
-        "summary": "Register an App Attest key against an attestation challenge",
+        "summary": "Register an App Attest or Android key attestation key against an attestation challenge",
         "security": [],
         "responses": {
           "204": {
@@ -64790,7 +64796,7 @@
             "description": "Invalid or replayed attestation"
           },
           "503": {
-            "description": "App Attest unavailable"
+            "description": "App Attest or Android key attestation unavailable"
           },
           "429": {
             "description": "Rate limited"
@@ -64818,7 +64824,8 @@
                   },
                   "attestation": {
                     "type": "string",
-                    "maxLength": 14000
+                    "maxLength": 14000,
+                    "description": "Base64 CBOR: Apple's App Attest attestation, or for Android a map whose fmt is android-key and whose attStmt.x5c is the key's certificate chain, leaf first, for a key made with SHA256 of the challenge as its attestation challenge"
                   }
                 }
               }
@@ -64859,7 +64866,7 @@
             "description": "Invalid challenge request"
           },
           "503": {
-            "description": "App Attest unavailable"
+            "description": "App Attest or Android key attestation unavailable"
           },
           "429": {
             "description": "Rate limited"

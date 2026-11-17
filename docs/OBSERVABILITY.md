@@ -14,15 +14,21 @@ works on another network. Each line has the request `kind`, the address family
 the proof was issued on and used from (`issued_family`, `used_family`: `v4`,
 `v6` or `none`) and its `age_s`; a move or `too_many_networks` adds the
 `networks` the proof works on. It never has an address or the proof.
-`native_verification` logs each App Attest check with its `kind` (`attestation`,
-or the `lookup` or `detection` an assertion signed), its `outcome` (`verified`,
+`native_verification` logs each App Attest or Android key attestation check with
+its `kind` (`attestation`, or the `lookup` or `detection` an assertion signed),
+its `platform` (`apple` or `android`, the key's or, before a key is read, the
+user-agent's; `unknown` for neither), its `outcome` (`verified`,
 `rejected`, or `limited` by the device's daily allowance) and, for a rejection, a
 `reason`: `malformed`, `unconfigured`, `challenge_expired`, `challenge_mismatch`
 (issued for another network, hostname, key or purpose), `replayed` (a used
 challenge, or a counter another request moved past), `unknown_key`, a failed step
 of Apple's validation (`chain`, `certificate_time`, `nonce`, `key_id`, `app_id`,
 `counter`, `aaguid`, `environment` for a development key, `signature`), the signed
-launch `category` or `bundle_version`, or `unknown`. Signed-in parcel additions,
+launch `category` or `bundle_version`, a failed step of Android's (`chain`,
+`root` for an emulator's or software attestation, `certificate_time`, `revoked`,
+`revocation_unavailable`, `security_level`, `nonce`, `unlocked` for an unlocked
+bootloader, `boot_state` for an unverified or unknown self-signed system,
+`origin` for an imported key, `key`, `app_id`, `signer`), or `unknown`. Signed-in parcel additions,
 detections that contact a carrier and refreshes log `account_lookup`,
 `account_detection` or `account_refresh` with the `mode` that answered (`log` or
 `enforce`): `verified`, `invalid` with the same reasons (`unavailable` when the
@@ -1131,8 +1137,8 @@ dashboard's failure panels leave out.
 | `typo_candidate_total` (checksum, carrier, origin, first_check) | Parcels just added whose number reads as a digit typed twice, by whether their first check found scans, as the `typo_candidate` line says |
 | `public_lookup_total` (outcome) | Lookups without an account: `created`, `reused` (the number was already stored), `limited_burst`, `limited_daily` (the client's day is used up), `limited_network` (its IPv6 /48's day), `limited_global` |
 | `public_detection_total` (outcome) | Detections without an account that needed a carrier's answer: `asked`, or refused first as `limited_burst`, `limited_daily` or `limited_global` |
-| `native_verification_total` (kind, outcome, reason) | App Attest checks, as the `native_verification` log line names them; `reason` is `none` when there is nothing to explain |
-| `lookup_proof_total` (kind, proof) | What let a `lookup` or `detection` without an account through: `app_attest`, `turnstile` (a browser proof) or `none` (no verification configured), or that it was `refused` |
+| `native_verification_total` (kind, outcome, reason, platform) | App Attest and Android key attestation checks, as the `native_verification` log line names them; `reason` is `none` when there is nothing to explain |
+| `lookup_proof_total` (kind, proof) | What let a `lookup` or `detection` without an account through: `app_attest`, `key_attestation` (Android), `turnstile` (a browser proof) or `none` (no verification configured), or that it was `refused` |
 | `public_parcel_read_total` (outcome) | Reads of a parcel link: `ok`, `not_found` or `stopped` (its sharing was stopped) |
 | `parcel_claim_total` (outcome) | Links kept after sign-in: `kept`, `already`, `quota`, `unavailable` |
 | `parcel_forgotten_total` (kind, reason) | Forgotten links and parcels (`kind`): `asked` by their owner, `expired`, or `stopped` 30 days ago |
@@ -1217,7 +1223,7 @@ Useful questions:
   `PUBLIC_DETECTIONS_PER_DAY` read the same way.
 
 - **Why do installations fall back to Turnstile?** `native_verification_total{outcome="rejected"}`
-  by `reason`.
+  by `platform` and `reason`.
 
 - **Can signed-in requests require App Attest?** `native_verification_total` for the
   `account_*` kinds. Builds that never sign count `outcome="missing",reason="legacy"`

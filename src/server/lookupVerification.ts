@@ -143,8 +143,8 @@ export async function verifyLookupRequest(request: Request, service: SupabaseSer
   }
   try {
     if (hasNativeAssertion(request)) {
-      await verifyNativeRequest(request, service, body);
-      recordLookupProof(kind, 'app_attest');
+      const platform = await verifyNativeRequest(request, service, body);
+      recordLookupProof(kind, platform === 'android' ? 'key_attestation' : 'app_attest');
       return;
     }
     recordLookupProof(kind, requireLookupProof(request));

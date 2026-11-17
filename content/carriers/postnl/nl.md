@@ -3,7 +3,7 @@ title: PostNL pakket volgen: track & trace, statussen, bezorging
 description: PostNL pakket volgen met track & trace: hoe de barcode eruitziet, wat de statussen betekenen, wat er gebeurt als je niet thuis bent en wat je doet als er niets komt.
 slug: postnl-pakket-volgen
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 PostNL bezorgt post en pakketten in Nederland. Je volgt een pakket met PostNL's track & trace op postnl.nl of in de PostNL-app, of in het vak hierboven. Een webshop kan je ook een mail sturen met een directe track & trace-link, waarin je barcode en postcode al staan. Komt je pakket uit het buitenland of gaat het de grens over, dan kun je het ook volgen op [postnl.post](https://postnl.post/), PostNL's Engelstalige site voor internationale zendingen.
@@ -86,7 +86,7 @@ Heb je een pakket verstuurd met PostNL en kom je er met je klacht niet uit, dan 
 
 Peek leest PostNL via postnl.post, in het Engels. Bij een 3S-barcode kun je ook je postcode invullen ('Delivery postcode', optioneel, met het land bij een postcode buiten Nederland): dan kijkt Peek eerst in PostNL's eigen track & trace, die een pakket binnen Nederland alleen met postcode toont. Je ziet de status, de scans met het land waar ze plaatsvonden, het bezorgmoment en het land van bestemming. Een verwachte bezorgdatum geeft postnl.post niet. postnl.post neemt 3S-barcodes van 13 tekens niet aan; zonder postcode zoekt Peek zo'n barcode via [universele volgdiensten](guide:universal-tracker) (in het Engels). Vindt geen ervan iets, vul dan je postcode in of volg je pakket in PostNL's eigen track & trace. Bij een internationale code die op NL eindigt, vraagt Peek de post van het land van bestemming naar hetzelfde nummer zodra PostNL dat land noemt, en schakelt over als die nieuwere scans heeft.
 
-Peek kijkt elke 30 minuten bij PostNL, ook als de bezorger onderweg is, en kan je bij elke scan, bij belangrijke stappen of alleen op de bezorgdag een melding sturen. Peek kan geen contact opnemen met PostNL of de webshop.
+Peek kijkt hoogstens elke 30 minuten bij PostNL, ook als de bezorger onderweg is, en kan je bij elke scan, bij belangrijke stappen of alleen op de bezorgdag een melding sturen. Peek kan geen contact opnemen met PostNL of de webshop.
 
 ## Vragen over PostNL track & trace
 

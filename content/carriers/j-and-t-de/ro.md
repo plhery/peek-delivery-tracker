@@ -3,7 +3,7 @@ title: Urmărire colet J&T Germania: numărul JTDE și statusurile
 description: Urmărește un colet J&T Express în Germania: cum arată numărul JTDE, ce înseamnă fiecare status și ce faci dacă coletul întârzie, se pierde sau nu ajunge.
 slug: jt-express-germania-urmarire-colet
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt pe Main) este rețeaua germană a J&T Express: livrează colete în Germania. Dacă un magazin online ți-a trimis comanda cu J&T, numărul de urmărire începe cu `JTDE`: lipește-l în căsuța de mai sus sau caută-l în [trackerul J&T de pe jtexpress.de](https://www.jtexpress.de/tracking). Numărul ți-l dă magazinul: e în emailul de expediere sau pe pagina comenzii.
@@ -101,7 +101,7 @@ Peek arată statusul, fiecare scanare la ora ei exactă și ora livrării. Pentr
 
 Până când J&T scanează coletul, Peek continuă să întrebe și arată pe peektracker.com „Waiting for J&T Express Germany” (sau, dacă J&T tot nu cunoaște numărul după două zile, rugămintea de a-l verifica). Când trackerul J&T nu poate fi accesat sau nu cunoaște numărul, Peek întreabă servicii de urmărire și îți arată istoricul dat de ele, cu propriile lor formulări. Dacă apoi trackerul J&T și serviciile de urmărire răspund toate fără nicio scanare pentru un colet care are deja scanări, Peek le păstrează pe cele găsite și, dacă situația durează, scrie „The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking.” (curierul nu are deocamdată scanări noi; cele găsite rămân, iar Peek verifică în continuare).
 
-Peek verifică coletul la fiecare 10 minute și, cât e în livrare, la fiecare 2 minute: doar în ziua aceea, de la ora 6:00, ora locală, și cât timp răspunde trackerul J&T însuși. Prin servicii de urmărire, îl verifică la fiecare 15 minute. Dacă trec două zile fără o scanare nouă (12 ore, cât timp arată „Received by carrier”), îl verifică o dată pe oră. Pentru notificări alegi „Every scan” (fiecare scanare), „Important steps” (pașii importanți) sau „Delivery only” (doar livrarea). Peek nu poate contacta J&T sau magazinul în locul tău, nu poate schimba adresa și nu poate programa o nouă livrare.
+Peek verifică coletul cel mult o dată la 10 minute și, cât e în livrare, cel mult o dată la 2 minute: doar în ziua aceea, de la ora 6:00, ora locală, și cât timp răspunde trackerul J&T însuși. Prin servicii de urmărire, îl verifică o dată pe oră, iar în ziua în care e în livrare, cel mult o dată la 15 minute. Dacă trec două zile fără o scanare nouă (12 ore, cât timp arată „Received by carrier”), îl verifică o dată pe oră. Pentru notificări alegi „Every scan” (fiecare scanare), „Important steps” (pașii importanți) sau „Delivery only” (doar livrarea). Peek nu poate contacta J&T sau magazinul în locul tău, nu poate schimba adresa și nu poate programa o nouă livrare.
 
 ## Întrebări despre urmărirea J&T Express în Germania
 

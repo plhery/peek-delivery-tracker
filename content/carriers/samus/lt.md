@@ -3,7 +3,7 @@ title: SAMUS siuntų sekimas: numeris, būsenos ir atsiėmimas
 description: Sekite SAMUS laišką ar siuntą: kur rasti siuntos numerį, ką reiškia būsenos, kur atsiimti siuntą Vilniuje ir kaip susisiekti su SAMUS.
 slug: samus-siuntu-sekimas
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 „SAMUS“ – nuo 2011 m. Lietuvoje veikianti kurjerių tarnyba, pristatanti korespondenciją ir siuntas. Ji dirba su sutartį sudariusiomis įmonėmis: pristato registruotus ir skubius laiškus, įteikia juos gavėjams asmeniškai pasirašytinai, veža skubias siuntas Lietuvoje ir į užsienį. Siuntą sekite [samus.lt skiltyje „Siuntų sekimas“](https://www.samus.lt/siuntu-sekimas/) arba įklijuokite numerį į laukelį viršuje.
@@ -101,7 +101,7 @@ Galite įklijuoti ir „SAMUS“ lietuviško sekimo puslapio nuorodą, kuri baig
 
 Kai siunta priskirta „SAMUS“, Peek paeiliui klausia „ParcelsApp“, „Ship24“ ir „17TRACK“ ir pasilieka pirmąją paslaugą, kuri siuntą turi; numerio su tinkamu kontroliniu skaitmeniu galiausiai klausiama ir Pasaulinės pašto sąjungos (UPU) sekimo. Kol siunta keliauja, pirmąsias 30 dienų Peek pirmiausia klausia Lietuvos pašto ir „Chronopost“; jei kuris nors jų rodo tikrą siuntos judėjimą, Peek siuntą perkelia ten („Swapped automatically from SAMUS“). Peek rodo paslaugos turimą būseną ir istoriją, jos žodžiais. Ji gali atsilikti nuo „SAMUS“ sekimo, o kai kurių siuntų joje nėra visai. Jei vežėjo nepasirinkote, o paslaugos nurodo „SAMUS“ ir rodo siuntos judėjimą, Peek „SAMUS“ priskiria pats. Kol nė viena paslauga siuntos neturi, Peek nuoroda atidaro „SAMUS“ sekimo puslapį su jūsų numeriu, o vėliau – tos paslaugos puslapį. Jūsų IP adreso ar šalies Peek paslaugoms neperduoda.
 
-Kol nė viena paslauga numerio nežino, „SAMUS“ priskirta siunta svetainėje peektracker.com rodo „Waiting for SAMUS“. Kol paslauga siuntą turi, Peek ją tikrina kas 15 minučių, taip pat ir tą dieną, kai siunta išvežta pristatyti. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei dvi dienas naujų įrašų nėra, Peek tikrina kartą per valandą. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „SAMUS“ ar siuntėju už jus Peek negali.
+Kol nė viena paslauga numerio nežino, „SAMUS“ priskirta siunta svetainėje peektracker.com rodo „Waiting for SAMUS“. Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, o tą dieną, kai siunta išvežta pristatyti, – net kas 15 minučių. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei parą naujų įrašų nėra, Peek tikrina kas 3 valandas. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „SAMUS“ ar siuntėju už jus Peek negali.
 
 ## Dažni klausimai apie „SAMUS“ siuntų sekimą
 

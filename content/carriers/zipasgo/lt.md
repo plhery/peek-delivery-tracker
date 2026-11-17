@@ -3,7 +3,7 @@ title: ZipasGo siuntų sekimas: Parcel Stars, kurjeriai ir pagalba
 description: Sekite ZipasGo (anksčiau Parcel Stars) siuntą: kurį numerį naudoti, kuris kurjeris ją pristato, ką daryti, jei ji pažeista, ir kur kreiptis.
 slug: zipasgo-siuntu-sekimas
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 „ZipasGo“ – tarptautinių siuntų tarnyba, siunčianti siuntas į visas pasaulio šalis. Siuntėjas užsakymą pateikia jos platformoje, palygina kelių kurjerių pasiūlymus ir išsirenka tinkamiausią, o siuntą paima „ZipasGo“ arba partnerių kurjeris. Ankstesnis „ZipasGo“ pavadinimas – „Parcel Stars“, taip ją vadina ir „Ebay“. Visą siuntos kelią organizuoja „ZipasGo“, tačiau galutinį pristatymą gali atlikti partneris – kurjerių ar pašto tarnyba, pavyzdžiui, UPS, DHL, DPD ar Lietuvos paštas. Siuntą sekite [zipasgo.com skiltyje „Kur mano siunta?“](https://zipasgo.com/lt/siuntimas) arba įklijuokite numerį į laukelį viršuje.
@@ -73,7 +73,7 @@ Galite įklijuoti ir „ZipasGo“ lietuviško sekimo puslapio nuorodą, kuri ba
 
 Kol nė viena paslauga numerio nežino, „ZipasGo“ priskirta siunta svetainėje peektracker.com rodo „Waiting for ZipasGo“. Kai siunta priskirta „ZipasGo“, paslauga gali nurodyti ją perėmusį vežėją su jo numeriu. Jei Peek gali skaityti to vežėjo sekimą, jis klausia ir jo. Kai to vežėjo naujausias įrašas yra ne senesnis už naujausią istorijoje, Peek toliau seka siuntą ten, išsaugodamas ankstesnius įrašus. Tada siunta rodo „Delivery with“ ir vežėjo pavadinimą, o kol vežėjas tik informuotas, kad siunta atvyks, – „Announced to …, not received yet“.
 
-Kol paslauga siuntą turi, Peek ją tikrina kas 15 minučių, taip pat ir tą dieną, kai siunta išvežta pristatyti. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei dvi dienas naujų įrašų nėra, Peek tikrina kartą per valandą. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „ZipasGo“ ar pardavėju už jus Peek negali.
+Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, o tą dieną, kai siunta išvežta pristatyti, – net kas 15 minučių. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei parą naujų įrašų nėra, Peek tikrina kas 3 valandas. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „ZipasGo“ ar pardavėju už jus Peek negali.
 
 ## Dažni klausimai apie „ZipasGo“ siuntų sekimą
 

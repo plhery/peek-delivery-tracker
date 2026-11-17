@@ -3,7 +3,7 @@ title: Jet Expressi saadetise jälgimine: tarneajad ja kontakt
 description: Jälgige Jet Expressi (kuller.ee) saadetist: millist numbrit on vaja, kelle leht on portal.kuller.ee, tarneajad Eestis ja välismaal, kahjunõue ja kontaktid.
 slug: jet-expressi-saadetise-jalgimine
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Jet Express (Jet Express OÜ) on Tallinnas tegutsev kullerfirma, mille koduleht on kuller.ee. Firma toimetab pakke iga päev üle kogu Eesti, pakub Tallinnas sama päeva kullerit ning saadab pakke ja kaupa maanteed ja õhuteed pidi välismaale. Jet Express on ka Jetpaki ametlik esindaja Eestis. Saadetist saate jälgida tellimuse numbri järgi Jet Expressi jälgimislehel portal.kuller.ee või siin: kleepige number ülalolevasse lahtrisse.
@@ -83,7 +83,7 @@ Kui jätate vedaja valimata, otsib Peek seda jälgimisteenuste kaudu. Kui number
 
 Peek ei loe Jet Expressi jälgimislehte ise. Jet Expressi paki kohta küsib Peek järjest teenustelt ParcelsApp, Ship24 ja 17TRACK (kümnekohalise numbri puhul Ship24-lt esimesena) ning jääb esimese juurde, millel pakk olemas on. Peek näitab selle teenuse olekuid ja ajalugu teenuse enda sõnastuses. See ajalugu võib Jet Expressi omast maha jääda ja mõne saadetise kohta pole seal midagi. Kuni ükski teenus pakki ei tea, avab paki jälgimislink Jet Expressi Track & Trace'i lehe sama numbriga, hiljem aga teenuse lehe. Teie IP-aadressi ega riiki Peek teenustele ei edasta.
 
-Peek kontrollib pakki iga 15 minuti järel, ka siis, kui see on kulleriga teel; teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest Jet Expressi ega saatjaga ühendust võtta.
+Peek kontrollib pakki kord tunnis, pärast päeva ilma uue sammuta iga 3 tunni järel ja päeval, mil pakk on kulleriga teel, kuni iga 15 minuti järel; teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest Jet Expressi ega saatjaga ühendust võtta.
 
 ## Küsimused Jet Expressi saadetise jälgimise kohta
 

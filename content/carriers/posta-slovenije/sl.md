@@ -3,7 +3,7 @@ title: Sledenje pošiljk Pošte Slovenije: statusi, prevzem, kontakt
 description: Sledite pošiljki Pošte Slovenije: oblika sprejemne številke, pomen statusov, koliko časa paket čaka na pošti ali v PS Paketomatu in kje dobite pomoč.
 slug: posta-slovenije-sledenje-posiljk
 published: 2026-10-25
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Pošta Slovenije je izvajalec univerzalne poštne storitve v Sloveniji: pisma in pakete dostavlja po vsej državi, tudi tiste, ki prispejo iz tujine. Pošiljki sledite v storitvi [Sledenje pošiljk](https://moja.posta.si/tracking) na moja.posta.si, v aplikaciji MojaPošta ali tako, da številko prilepite v polje zgoraj. Številko običajno najdete v sporočilu pošiljatelja, na primer v e-pošti spletne trgovine o odpremi.
@@ -91,7 +91,7 @@ Kot je posta.si navajala 25. oktobra 2026:
 
 Pošiljko iz tujine Peek najprej spremlja pri tuji pošti. Če ta kot namembno državo navede Slovenijo ali je sploh ne navede, vi pa pošiljko dodate iz Slovenije, Peek isto številko preveri še pri Pošti Slovenije. Ko ta pokaže korak, ki ni starejši od zadnjega koraka tuje pošte, Peek pošiljko naprej spremlja pri njej, zgodovina tuje pošte pa ostane. Pošto Slovenije lahko pod »Change« izberete tudi sami, saj njeno iskanje sprejme vsako poštno številko te oblike.
 
-Peek bere storitev, na kateri deluje aplikacija MojaPošta. Pošiljko preveri vsakih 10 minut, ko je v dostavi vsaki 2 minuti (le na dan dostave, od 6. ure zjutraj po slovenskem času in dokler odgovarja sama Pošta Slovenije; prek storitev za sledenje vsakih 15 minut), in vas lahko obvesti, ko se status spremeni. Če dva dni ni novic (ali 12 ur, dokler je pošiljka šele prijavljena ali oddana prevozniku), jo Peek preverja le še enkrat na uro. Pri korakih vidite pošto, pri dostavljeni pošiljki čas dostave, pri pošiljki, ki čaka na pošti, pa to pošto (pri PS Paketomatu ne). Pričakovanega dneva dostave in teže ni. Korake v tujini Peek bere po tamkajšnjem času in jih prikaže v časovnem pasu vaše naprave.
+Peek bere storitev, na kateri deluje aplikacija MojaPošta. Pošiljko preveri največ enkrat na 10 minut, ko je v dostavi največ enkrat na 2 minuti (le na dan dostave, od 6. ure zjutraj po slovenskem času in dokler odgovarja sama Pošta Slovenije; prek storitev za sledenje vsakih 15 minut), in vas lahko obvesti, ko se status spremeni. Če dva dni ni novic (ali 12 ur, dokler je pošiljka šele prijavljena ali oddana prevozniku), jo Peek preverja le še enkrat na uro. Pri korakih vidite pošto, pri dostavljeni pošiljki čas dostave, pri pošiljki, ki čaka na pošti, pa to pošto (pri PS Paketomatu ne). Pričakovanega dneva dostave in teže ni. Korake v tujini Peek bere po tamkajšnjem času in jih prikaže v časovnem pasu vaše naprave.
 
 ## Vprašanja o sledenju pošiljk Pošte Slovenije
 

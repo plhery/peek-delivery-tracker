@@ -3,7 +3,7 @@ title: Siuntos autobusais: sekimas, terminalai ir atsiėmimas
 description: Sekite „Siuntos autobusais“ siuntą Lietuvoje: kur rasti kvito numerį, kur ir kada atsiimti siuntą, kiek ji laukia terminale ir kur kreiptis.
 slug: siuntos-autobusais-siuntu-sekimas
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 „Siuntos autobusais“ siuntas veža tarpmiestiniais autobusais visoje Lietuvoje, dažnai tą pačią dieną, taip pat siunčia jas į kitas Europos šalis. Siuntos priduodamos ir atsiimamos autobusų stotyse įsikūrusiuose terminaluose. Svetainės apačioje nurodyta UAB „Kautra“, o svetainėje skelbiamos kainos galioja UAB „Kautra“ terminaluose. Siuntą sekite [siuntosautobusais.lt skiltyje „Siuntos sekimas“](https://www.siuntosautobusais.lt/siuntos-lietuvoje/siuntos-sekimas/) arba įklijuokite numerį į laukelį viršuje.
@@ -89,7 +89,7 @@ Kad siunta būtų sekama kaip „Siuntos autobusais“, paspauskite „Change“
 
 „Siuntos autobusais“ sekimo, kurį Peek galėtų nuskaityti, nėra. Todėl Peek paeiliui klausia „ParcelsApp“, „Ship24“ ir „17TRACK“ ir pasilieka pirmąją paslaugą, kuri siuntą turi. Peek rodo tos paslaugos turimą būseną ir istoriją, jos žodžiais. Ši istorija gali atsilikti nuo siuntosautobusais.lt sekimo, o daugelio siuntų joje gali nebūti visai. Jei vežėjo nepasirinkote, o paslaugos nurodo „Siuntos autobusais“ ar „Kautra“ ir rodo siuntos judėjimą, Peek „Siuntos autobusais“ priskiria pats. Nuorodos, kuri atvertų „Siuntos autobusais“ sekimą su jūsų numeriu, Peek neturi: numerį įveskite siuntosautobusais.lt. Kai siuntą turi kuri nors paslauga, Peek nuoroda atidaro tos paslaugos puslapį. Jūsų IP adreso ar šalies Peek paslaugoms neperduoda.
 
-Kol nė viena paslauga numerio nežino, „Siuntos autobusais“ priskirta siunta svetainėje peektracker.com rodo „Waiting for Siuntos autobusais“. Kol paslauga siuntą turi, Peek ją tikrina kas 15 minučių, taip pat ir tą dieną, kai siunta išvežta pristatyti. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei dvi dienas naujų įrašų nėra, Peek tikrina kartą per valandą. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „Siuntos autobusais“ ar siuntėju už jus Peek negali.
+Kol nė viena paslauga numerio nežino, „Siuntos autobusais“ priskirta siunta svetainėje peektracker.com rodo „Waiting for Siuntos autobusais“. Kol paslauga siuntą turi, Peek ją tikrina kartą per valandą, o tą dieną, kai siunta išvežta pristatyti, – net kas 15 minučių. Numerio nežinojusios paslaugos Peek dar kartą klausia po paros. Jei parą naujų įrašų nėra, Peek tikrina kas 3 valandas. Peek gali pranešti apie kiekvieną įrašą („Every scan“), svarbius žingsnius („Important steps“) arba tik apie pristatymą („Delivery only“). Susisiekti su „Siuntos autobusais“ ar siuntėju už jus Peek negali.
 
 ## Dažni klausimai apie „Siuntos autobusais“ siuntų sekimą
 

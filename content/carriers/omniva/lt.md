@@ -3,7 +3,7 @@ title: Omniva siuntų sekimas: statusai, paštomatai ir kontaktai
 description: Sekite Omniva siuntą Lietuvoje: kaip atrodo siuntos numeris, ką reiškia statusai, kiek siunta laukia paštomate, kaip pristato kurjeris ir kur kreiptis.
 slug: omniva-siuntu-sekimas
 published: 2026-10-23
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Omniva – logistikos ir technologijų bendrovė, kurios paštomatai ir kurjeriai pristato siuntas Lietuvoje, Latvijoje ir Estijoje. Lietuvoje paslaugas teikia Omniva LT, UAB. Siuntą sekite svetainėje [mano.omniva.lt](https://mano.omniva.lt/track), OMNIVA programėlėje arba tiesiog įklijuokite numerį į laukelį viršuje. Sekimo numerį rasite Omniva SMS žinutėje ar el. laiške apie siuntą, o jei pirkote internetu – ir parduotuvės laiške apie išsiuntimą.
@@ -100,7 +100,7 @@ Numerį, kuris baigiasi `EE`, prasideda raide C, R, E ar L (bet ne CR, CV ar RO)
 
 Siuntą su kitos šalies pašto numeriu Peek seks per Omniva, jei pasirinksite Omniva per „Change“ (jau pridėtai siuntai – per „Change carrier“) arba įklijuosite Omniva sekimo nuorodą. Pats Peek tokios siuntos Omniva neperduoda.
 
-Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žingsnio vietą Omniva tinkle, paskirties šalį, įteikimo laiką ir paštomatą, kuriame siunta laukia ar iš kurio buvo atsiimta. Pašto kodų ir nepavykusio pristatymo priežasčių jis nerodo, numatomos pristatymo dienos ir svorio taip pat nėra. Peek tikrina kas 10 minučių, o tą dieną, kai siunta išvežta pristatyti, nuo 6 val. vietos laiku – kas 2 minutes, kol atsako pati Omniva (per sekimo paslaugas – kas 15 minučių); žingsnius rodo žemėlapyje ir pasikeitus būsenai gali jums pranešti. Jei dvi dienas nėra naujienų (arba 12 valandų, kol siunta tik užregistruota ar vežėjo priimta), Peek ją tikrina kartą per valandą. Peek negali už jus susisiekti su Omniva ar parduotuve.
+Peek rodo Omniva būsenas angliškai, kaip lentelėje aukščiau, kiekvieno žingsnio vietą Omniva tinkle, paskirties šalį, įteikimo laiką ir paštomatą, kuriame siunta laukia ar iš kurio buvo atsiimta. Pašto kodų ir nepavykusio pristatymo priežasčių jis nerodo, numatomos pristatymo dienos ir svorio taip pat nėra. Peek tikrina ne dažniau kaip kas 10 minučių, o tą dieną, kai siunta išvežta pristatyti, nuo 6 val. vietos laiku – ne dažniau kaip kas 2 minutes, kol atsako pati Omniva (per sekimo paslaugas – kas 15 minučių); žingsnius rodo žemėlapyje ir pasikeitus būsenai gali jums pranešti. Jei dvi dienas nėra naujienų (arba 12 valandų, kol siunta tik užregistruota ar vežėjo priimta), Peek ją tikrina kartą per valandą. Peek negali už jus susisiekti su Omniva ar parduotuve.
 
 ## Dažni klausimai apie Omniva siuntų sekimą
 

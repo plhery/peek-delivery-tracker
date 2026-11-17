@@ -3,7 +3,7 @@ title: SmartPosti paki jälgimine: olekud, pakiautomaat ja toll
 description: Jälgi SmartPosti pakki Eestis: kust leiad pakikoodi, mida olekud tähendavad, kui kaua pakk pakiautomaadis ootab, kuidas käib tollivormistus ja kuhu pöörduda.
 slug: smartposti-paki-jalgimine
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 SmartPosti on osa Posti Grupist ja toob Eestis pakke pakiautomaatidesse ja pakipunktidesse ning kulleriga koju. Peekis leiad SmartPosti Posti nime alt. Paki teekonda näed SmartPosti lehel [smartposti.ee/saadetise-jalgimine](https://www.smartposti.ee/saadetise-jalgimine) või siin: kleebi pakikood ülalolevasse lahtrisse. Pakikoodi või jälgimislingi annab sulle paki saatja. Kui sulle pole koodi saadetud, küsi seda saatjalt.
@@ -107,7 +107,7 @@ Välismaa postinumbriga pakki jälgib Peek saatjariigi posti juures ja Eestis v�
 
 Peek näitab pakki ainult siis, kui Posti vastuses on üks pakk täpselt sama koodiga, mille sisestasid, nii et mitme paki ühist koodi Peek ei jälgi. SmartPosti Eesti koodide puhul pole see ette kindel: kui Peek pakki ei leia, jälgi seda smartposti.ee lehel.
 
-Peek loeb Posti andmeid inglise keeles, nii et sammud on ingliskeelsed, näiteks `Item is ready for a pick up` (pakk ootab väljavõtmist) või `Item accepted from transport` (pakk on sõnastusest hoolimata endiselt teel). Peek näitab ka sammude asukohti kaardil, paki kaalu ja mõõte ning pakiautomaati või pakipunkti, kus pakk ootab. Uksekoodi, sinu aadressi, eeldatavat tarneaega ega saatjat Peek ei näita, nii et kapi avamiseks on sul vaja SmartPosti SMSi. Peek kontrollib pakki iga 10 minuti järel (kui pakk on kulleriga teel, iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Posti enda jälgimine vastab; jälgimisteenuste kaudu iga 15 minuti järel) ning võib muutustest teada anda. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis. Vana pakk võib jääda leidmata. Peek ei saa sinu eest SmartPosti ega e-poega ühendust võtta.
+Peek loeb Posti andmeid inglise keeles, nii et sammud on ingliskeelsed, näiteks `Item is ready for a pick up` (pakk ootab väljavõtmist) või `Item accepted from transport` (pakk on sõnastusest hoolimata endiselt teel). Peek näitab ka sammude asukohti kaardil, paki kaalu ja mõõte ning pakiautomaati või pakipunkti, kus pakk ootab. Uksekoodi, sinu aadressi, eeldatavat tarneaega ega saatjat Peek ei näita, nii et kapi avamiseks on sul vaja SmartPosti SMSi. Peek kontrollib pakki kuni iga 10 minuti järel (kui pakk on kulleriga teel, kuni iga 2 minuti järel: sel päeval alates kella 6-st kohaliku aja järgi ja seni, kuni Posti enda jälgimine vastab; jälgimisteenuste kaudu iga 15 minuti järel) ning võib muutustest teada anda. Kui kaks päeva pole uudiseid (või 12 tundi, kui pakk on alles registreeritud või vedaja vastu võetud), kontrollib Peek seda kord tunnis. Vana pakk võib jääda leidmata. Peek ei saa sinu eest SmartPosti ega e-poega ühendust võtta.
 
 ## Küsimused SmartPosti paki jälgimise kohta
 

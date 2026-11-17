@@ -3,7 +3,7 @@ title: DK Logisticsi saadetise jälgimine: saateleht ja kontaktid
 description: Jälgige DK Logisticsi (DKL) saadetist: millist numbrit kasutada, mida Tallinna kuller- ja ekspedeerimisfirma veab, kuidas käib toll ja kuhu pöörduda.
 slug: dk-logistics-saadetise-jalgimine
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 DK Logistics (DKL, ametlikult DK Logistics OÜ) on Tallinnas asuv rahvusvaheline kuller- ja ekspedeerimisfirma. Firma veab kullerposti, väikepakke ja kaupa Eestisse, Lätti ja Leetu ning sealt välja. Ta teeb tihedat koostööd Euroopa ja SRÜ riikide kuller- ja transpordifirmadega. Saadetist saate jälgida dkl.ee jälgimislehel saatelehe numbri järgi või siin: kleepige number ülalolevasse lahtrisse.
@@ -73,7 +73,7 @@ Kui jätate vedaja valimata, otsib Peek seda jälgimisteenuste kaudu. Kui number
 
 DK Logisticsil pole jälgimisliidest, mida Peek saaks lugeda. Seepärast küsib Peek DK Logisticsi paki kohta järjest teenustelt ParcelsApp, Ship24 ja 17TRACK (kümnekohalise numbri puhul Ship24-lt esimesena) ning jääb esimese juurde, millel pakk olemas on. Peek näitab selle teenuse olekuid ja ajalugu teenuse enda sõnastuses. See ajalugu võib DKL-i omast maha jääda ja mõne saadetise kohta pole seal midagi. Kui mõni teenus pakki teab, avab paki jälgimislink selle teenuse lehe sama numbriga; seni pole pakil jälgimislinki. Teie IP-aadressi ega riiki Peek teenustele ei edasta.
 
-Peek kontrollib pakki iga 15 minuti järel, ka siis, kui see on kulleriga teel; teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest DK Logisticsi ega saatjaga ühendust võtta.
+Peek kontrollib pakki kord tunnis, pärast päeva ilma uue sammuta iga 3 tunni järel ja päeval, mil pakk on kulleriga teel, kuni iga 15 minuti järel; teenuselt, mis numbrit ei teadnud, küsitakse uuesti päeva pärast. Teavitusi saab iga sammu kohta („Every scan“), ainult tähtsate sammude kohta („Important steps“) või ainult kättetoimetamisel („Delivery only“). Peek ei saa teie eest DK Logisticsi ega saatjaga ühendust võtta.
 
 ## Küsimused DK Logisticsi saadetise jälgimise kohta
 

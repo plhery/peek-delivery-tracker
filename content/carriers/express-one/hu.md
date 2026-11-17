@@ -3,7 +3,7 @@ title: Express One csomagkövetés: státuszok, Exopoint, elérhetőség
 description: Így követheti az Express One-csomagot: mit jelentenek a státuszok, hogyan irányíthatja Exopointba, hogyan fizeti ki az utánvétet, és hol reklamálhat.
 slug: express-one-csomagkovetes
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Az Express One Hungary Kft. az [Osztrák Posta](carrier:austrian-post) tulajdonában álló magyar futárszolgálat. Házhoz szállít, és Exopoint néven több mint 2300 csomagpontra és csomagautomatába is kézbesít. A csomagot a [tracking.expressone.hu](https://tracking.expressone.hu/) oldalon követheti, vagy beírhatja a számát a fenti mezőbe.
@@ -86,7 +86,7 @@ A [Peek](/) felülete angol nyelvű. A Peek a számból nem ismeri fel, hogy Exp
 
 A lépéseket angolul mutatja, a depós beolvasásoknál a településsel együtt; az időpontokat magyar idő szerint értelmezi, és az eszköze időzónájában jeleníti meg. Az ismeretlen kódú lépéseket állapot nélkül jeleníti meg. Várható kézbesítési időt (az Express One időablakát), súlyt, feladót és aláírást nem mutat.
 
-Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek 10 percenként ellenőrzi, `Out for delivery` állapotban 2 percenként (aznap, reggel 6-tól magyar idő szerint, amíg az Express One saját nyomkövetése válaszol; nyomkövető szolgáltatásokon keresztül 15 percenként); egyébként óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
+Ha valaki várja a csomagot (értesítést kért rá, vagy az elmúlt órában megnézte), a Peek akár 10 percenként ellenőrzi, `Out for delivery` állapotban akár 2 percenként (aznap, reggel 6-tól magyar idő szerint, amíg az Express One saját nyomkövetése válaszol; nyomkövető szolgáltatásokon keresztül 15 percenként); egyébként óránként. Változáskor értesítést küldhet. Az Express One-nal vagy a webáruházzal Ön helyett nem veszi fel a kapcsolatot.
 
 ## Gyakori kérdések az Express One-csomagkövetésről
 

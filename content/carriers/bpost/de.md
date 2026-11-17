@@ -3,7 +3,7 @@ title: bpost Sendungsverfolgung: Status, Abholung, bbox, Zoll
 description: bpost-Paket verfolgen: wo der Strichcode steht, was die Status heißen, wie lange Abholstelle und bbox warten, was der Zoll kostet und wie du bpost erreichst.
 slug: bpost-sendungsverfolgung
 published: 2026-10-27
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 bpost ist die Post Belgiens. Dein Paket verfolgst du mit dem Strichcode, so heißt bei bpost die Sendungsnummer: in [Track & Trace](https://track.bpost.cloud/), das es auch auf Deutsch gibt, in der App My bpost oder oben im Feld. Den Strichcode schickt dir meist der Absender per E-Mail oder SMS. Er steht auch auf dem Versandetikett, dem Beleg vom Postamt und der Abwesenheitsbenachrichtigung.
@@ -100,7 +100,7 @@ Ein Geschenk von einer Privatperson an eine andere, ohne kommerziellen Charakter
 
 **Schon im Shop bezahlt?** Fehlen dem Zoll die Angaben des Shops, können die Abgaben noch einmal anfallen. Lehn das Paket dann in der App oder in Track & Trace ab und fordere dein Geld vom Verkäufer zurück, oder zahl und lass es dir von ihm erstatten. Bei falsch geschätztem Wert oder einem Geschenk beantragst du mit dem Widerspruchsformular über der Bezahlschaltfläche eine Neuberechnung, so lange ruht die Zahlungsfrist. Mehr in [Paket beim Zoll](guide:customs).
 
-> bpost verlangt nie eine Überweisung oder deine Kontonummer, fragt per E-Mail oder SMS nie nach persönlichen Daten und droht nicht mit dem Gerichtsvollzieher. Für Sendungen innerhalb der EU fordert bpost per E-Mail oder SMS keine Zahlung, solange sie unterwegs sind. Zahl nur in der App, in Track & Trace oder im Postamt, und leite Verdächtiges an abuse@bpost.be weiter. Mehr unter [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
+> bpost verlangt nie eine Überweisung oder deine Kontonummer, fragt per E-Mail oder SMS nie nach persönlichen Daten und droht nicht mit dem Gerichtsvollzieher. Für Sendungen innerhalb der EU fordert bpost per E-Mail oder SMS keine Zahlung, solange sie unterwegs sind. Sind für ein Paket von außerhalb der EU Einfuhrabgaben zu zahlen, schickt dir bpost dagegen sehr wohl eine Zahlungsaufforderung per E-Mail, SMS, Mitteilung in der App My bpost oder Brief: Zahl sie nur in der App My bpost, in Track & Trace oder im Postamt, und leite Verdächtiges an abuse@bpost.be weiter. Mehr unter [Fake-Paket-SMS erkennen](guide:delivery-scam-texts).
 
 ## bpost Kontakt: Telefon, Formular, Ombudsdienst
 

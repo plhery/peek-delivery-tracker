@@ -3,20 +3,21 @@ title: GOFO Express rastreo: número GFUS, estados y qué hacer
 description: Rastrea tu paquete de GOFO Express en Estados Unidos: cómo es el número de rastreo, qué significa cada estado en inglés y qué hacer si tu paquete no avanza.
 slug: gofo-express-rastreo
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 GOFO Express es una empresa de paquetería que reparte en Estados Unidos: recoge los paquetes en el almacén del remitente y los lleva de centro en centro hasta la estación desde la que se reparten. Para rastrear tu paquete, pega el número de rastreo en la casilla de arriba; GOFO tiene además su propio rastreador, en gofo.com/us/track. El número te lo da la tienda que te envió el pedido. Si no lo encuentras, mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 
 ## Número de rastreo de GOFO: cómo es
 
-GOFO usa tres formas de número en Estados Unidos. Aquí van, con cifras inventadas, junto a una que se les parece:
+GOFO usa cuatro formas de número en Estados Unidos. Aquí van, con cifras inventadas, junto a una que se les parece:
 
 | Número (inventado) | Qué es |
 | --- | --- |
 | `GFUS12345678901234` | GFUS y 14 cifras: el número de guía de GOFO en Estados Unidos. Si tras GFUS se escribe una letra O en vez de un cero, Peek la lee como cero. |
 | `GF1234567890123` | GF y 13 cifras: una serie más antigua que GOFO sigue rastreando. |
 | `CR123456789012` | CR y 12 cifras: otra serie antigua de GOFO. |
+| `MGP1234567890123` | MGP y 13 cifras: un número de rastreo que algunos paquetes llevan junto a su guía GFUS. |
 | `YT1234567890123456` | YT y 16 cifras: es de [YunExpress](carrier:yunexpress), aunque GOFO haga la entrega. |
 
 **Dos números para un mismo paquete.** Algunos paquetes llevan a la vez un número GFUS, la guía, y un número de rastreo CR o MGP (MGP y 13 cifras). Con cualquiera de los dos se encuentra el mismo paquete, en Peek y en el rastreador de GOFO. En los paquetes de DHgate que GOFO entrega por cuenta de DHLink, el número de rastreo es el propio de DHLink, `FC` y 13 cifras, y el rastreador de GOFO también encuentra el paquete con él.
@@ -72,9 +73,9 @@ Para cualquier problema con tu pedido, habla primero con la tienda que te lo ven
 
 ## Rastrear un paquete de GOFO Express con Peek
 
-Con un número `GFUS`, [Peek](/) reconoce GOFO Express al momento («Transportista detectado»). Con un número `GF` o `CR`, le pregunta a GOFO si tiene el paquete («Comprobando servicios de seguimiento…»); si lo tiene, verás «GOFO Express tiene este paquete.» y Peek lo rastrea con GOFO. Da igual que el número lleve espacios. [Cainiao](carrier:cainiao) sigue algunos pedidos de AliExpress con el número `GFUS` de GOFO: si GOFO solo muestra la etiqueta desde hace dos días, Peek consulta también a Cainiao por el tramo anterior. Más en [pedidos de AliExpress](guide:aliexpress-orders).
+Con un número `GFUS`, [Peek](/) reconoce GOFO Express al momento («Transportista detectado»). Con un número `GF`, `CR` o `MGP`, le pregunta a GOFO si tiene el paquete («Comprobando servicios de seguimiento…»); si lo tiene, verás «GOFO Express tiene este paquete.» y Peek lo rastrea con GOFO. Da igual que el número lleve espacios. [Cainiao](carrier:cainiao) sigue algunos pedidos de AliExpress con el número `GFUS` de GOFO: si GOFO solo muestra la etiqueta desde hace dos días, Peek consulta también a Cainiao por el tramo anterior. Más en [pedidos de AliExpress](guide:aliexpress-orders).
 
-Mientras GOFO no conozca un número `GF` o `CR`, Peek sigue comprobando y verás «Esperando el primer escaneo de GOFO Express». Si sabes que es de GOFO, elígelo con «Cambiar». Con un número `GFUS`, o una vez elegido GOFO, verás en peektracker.com «Esperando a GOFO Express». Si dos días después GOFO sigue sin reconocer el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste. También puedes pegar un enlace de rastreo de GOFO para Estados Unidos (de gofo.com/us o gofoexpress.com) que lleve `searchID=` y el número.
+Mientras GOFO no conozca un número `GF`, `CR` o `MGP`, Peek sigue comprobando y verás «Esperando el primer escaneo de GOFO Express». Si sabes que es de GOFO, elígelo con «Cambiar». Con un número `GFUS`, o una vez elegido GOFO, verás en peektracker.com «Esperando a GOFO Express». Si dos días después GOFO sigue sin reconocer el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste. También puedes pegar un enlace de rastreo de GOFO para Estados Unidos (de gofo.com/us o gofoexpress.com) que lleve `searchID=` y el número.
 
 Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, que Peek muestra hasta que el paquete sale a reparto, se entrega, se devuelve o llega a un punto de recogida; Peek deja fuera las fotos de entrega, las coordenadas y el peso.
 

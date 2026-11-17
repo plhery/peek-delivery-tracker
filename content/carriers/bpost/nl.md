@@ -3,7 +3,7 @@ title: bpost pakje volgen: barcode, statussen en Afhaalpunt
 description: Volg je bpost-pakje: waar je de barcode vindt, wat Track & Trace toont, hoelang een Afhaalpunt of bbox-automaat je pakje bewaart en hoe je bpost bereikt.
 slug: bpost-pakje-volgen
 published: 2026-10-22
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 bpost is het Belgische postbedrijf. Binnen de bnode-groep, tot december 2025 bpostgroup, is bpost het merk dat pakjes en post aan de deur brengt in België en Nederland. Je volgt je pakje met de barcode in [bpost Track & Trace](https://track.bpost.cloud/) of in de My bpost app, of je plakt de barcode in het veld hierboven. Die barcode staat in de verzendmail van de webshop, in de e-mail of sms van bpost, op het verzendetiket of op het afwezigheidsbericht in je brievenbus.
@@ -27,7 +27,7 @@ De barcodes die bpost zelf het vaakst noemt (voorbeelden verzonnen):
 
 **Track & Trace vraagt ook een postcode.** Met de barcode alleen toont bpost om privacyredenen maar beperkte informatie. Vul je ook de postcode van het afleveradres in, dan zie je alle details en kan je eventuele invoerkosten betalen. Je kan tot 100 barcodes tegelijk opzoeken.
 
-**Nummers die op elkaar lijken.** Een postnummer dat op de letters van een ander land eindigt, komt van de post van dat land. Een tikfout in een nummer dat op BE eindigt, klopt niet meer met het controlecijfer; dan kan Peek [Chronopost](carrier:chronopost) voorstellen. Sommige nummers van 24 cijfers zijn van [InPost](carrier:inpost), [Ciblex](carrier:ciblex) of [Austrian Post](carrier:austrian-post): kijk bij twijfel welke vervoerder de webshop in zijn mail noemt.
+**Nummers die op elkaar lijken.** Een postnummer dat op de letters van een ander land eindigt, komt van de post van dat land. Een tikfout in een nummer dat op BE eindigt, klopt niet meer met het controlecijfer; dan stelt Peek geen vervoerder voor. Sommige nummers van 24 cijfers zijn van [InPost](carrier:inpost), [Ciblex](carrier:ciblex) of [Austrian Post](carrier:austrian-post): kijk bij twijfel welke vervoerder de webshop in zijn mail noemt.
 
 ## Wat de statussen in Track & Trace betekenen
 
@@ -85,7 +85,7 @@ In Peek, en in de Engelstalige Track & Trace, lees je de scans in het Engels. Di
 
 **Douane.** Een pakje van buiten de EU gaat langs de douane. Betaalde je de btw en invoerkosten niet al bij de webshop, dan betaal je ze vooraf, bij voorkeur in de My bpost app of Track & Trace, met Bancontact, Mastercard, Visa of mobiel bankieren (geen PayPal of overschrijving). Uitzonderlijk kan het in een Postkantoor. Je hebt 14 dagen om te betalen. Voor een online aankoop van buiten de EU tot € 150 betaal je sinds 1 juli 2026, door nieuwe EU-regels, € 3 invoerrechten per type product: twee identieke broeken kosten € 3, een broek en een paar schoenen € 6. Sinds 1 november 2026 komen daar € 2 Europese afhandelingskosten per type product bij: de twee broeken kosten dan € 5, de broek en de schoenen € 10. Daarnaast betaal je btw (meestal 21 %) en € 21,50 administratiekosten van bpost, die laatste alleen als je de btw en invoerrechten niet vooraf bij de webshop betaalde. Boven € 150 betaal je invoerrechten volgens het soort product, btw, € 40 administratiekosten en, sinds 1 november 2026, de € 2 afhandelingskosten. In Track & Trace zie je dan meldingen als `Betaling vereist` of `Factuur ontbreekt`. Meer in de gids over [pakjes bij de douane](guide:customs) (in het Engels).
 
-> Voor zendingen binnen de EU vraagt bpost je nooit om te betalen terwijl je pakje onderweg is, en nooit om persoonlijke gegevens via e-mail of sms. bpost dreigt ook nooit met een deurwaarder. Stuur verdachte berichten door naar abuse@bpost.be.
+> Voor zendingen binnen de EU vraagt bpost je nooit om te betalen terwijl je pakje onderweg is, en nooit om persoonlijke gegevens via e-mail of sms. bpost dreigt ook nooit met een deurwaarder. Moet je voor een pakje van buiten de EU invoerkosten betalen, dan stuurt bpost je wel een betalingsverzoek via e-mail, sms, een melding in de My bpost app of een brief: betaal het alleen in de My bpost app, in Track & Trace of in een Postkantoor. Stuur verdachte berichten door naar abuse@bpost.be.
 
 ## Klantendienst van bpost contacteren
 

@@ -3,7 +3,7 @@ title: bpost suivi : code-barres, statuts et point relais
 description: Suivre un colis bpost : où trouver le code-barres, ce que veut dire chaque statut du Track & Trace, combien de temps le colis attend et comment joindre bpost.
 slug: bpost-suivi
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 bpost est l'entreprise postale belge, la marque du groupe bnode qui livre les colis en Belgique et aux Pays-Bas. Pour suivre ton colis, saisis son code-barres sur le [Track & Trace de bpost](https://track.bpost.cloud/), dans l'app My bpost ou dans le champ ci-dessus. Ce code-barres figure dans l'e-mail d'expédition de la boutique, dans le SMS ou l'e-mail de bpost, sur l'étiquette ou sur l'avis de passage.
@@ -25,7 +25,7 @@ Les formes les plus courantes selon bpost (numéros inventés) :
 
 Un code-barres qui commence par U sert seulement au passage en douane : l'expéditeur ou l'acheteur a choisi un envoi sans Track & Trace. Selon bpost, il arrive au plus tard 5 jours ouvrables après le dédouanement.
 
-**Attention aux numéros qui se ressemblent.** Un numéro postal qui finit par FR ou CH appartient à la poste de ce pays, pas à bpost. Une erreur de frappe dans un numéro en BE casse sa clé de contrôle, et Peek peut alors proposer [Chronopost](carrier:chronopost). Certains numéros à 24 chiffres sont ceux d'InPost ou de [Ciblex](carrier:ciblex) : en cas de doute, regarde le transporteur cité dans l'e-mail de la boutique.
+**Attention aux numéros qui se ressemblent.** Un numéro postal qui finit par FR ou CH appartient à la poste de ce pays, pas à bpost. Une erreur de frappe dans un numéro en BE casse sa clé de contrôle, et Peek ne propose alors aucun transporteur. Certains numéros à 24 chiffres sont ceux d'InPost ou de [Ciblex](carrier:ciblex) : en cas de doute, regarde le transporteur cité dans l'e-mail de la boutique.
 
 ## bpost suivi colis : ce que veulent dire les statuts
 
@@ -77,7 +77,7 @@ Dans Peek, qui affiche les libellés anglais de bpost, une tournée interrompue 
 
 **Douane.** Un colis venu de l'extérieur de l'UE n'est livré qu'après paiement des frais d'importation, de préférence dans l'app My bpost ou sur le Track & Trace, dans les 14 jours. Pour une commande de moins de 150 €, bpost indique 3 € de droits par article depuis le 1er juillet 2026 et, depuis le 1er novembre 2026, 2 € de frais de traitement européens par article, un article étant un type de produit : deux t-shirts identiques coûtent alors 5 € de droits et de frais, un t-shirt et un maillot de bain 10 €. S'y ajoutent la TVA, généralement 21 %, et 21,50 € de frais administratifs si la boutique n'a pas encaissé la TVA et les droits à l'avance. Au-delà de 150 €, tu paies des droits selon le type de produit, la TVA, 40 € de frais administratifs et, depuis le 1er novembre 2026, les 2 € de frais de traitement européens. Vérifie la [page de bpost sur les achats hors UE](https://www.bpost.be/fr/shopping-hors-ue) et le guide [colis bloqué en douane](guide:customs).
 
-> Pour les envois au sein de l'UE, bpost ne te demandera jamais de payer pendant que ton colis est en cours de livraison, ni de donner tes données personnelles par e-mail ou SMS. Transfère les messages suspects à abuse@bpost.be.
+> Pour les envois au sein de l'UE, bpost ne te demandera jamais de payer pendant que ton colis est en cours de livraison, ni de donner tes données personnelles par e-mail ou SMS. Quand un colis venu de l'extérieur de l'UE a des frais d'importation à payer, bpost t'envoie en revanche bien une demande de paiement par e-mail, SMS, notification dans l'app My bpost ou courrier : paie-la uniquement dans l'app My bpost, sur le Track & Trace ou dans un bureau de poste. Transfère les messages suspects à abuse@bpost.be.
 
 ## bpost contact : téléphone, chat et plainte
 

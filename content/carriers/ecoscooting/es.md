@@ -3,7 +3,7 @@ title: Ecoscooting seguimiento: estados, entregas y teléfono
 description: Sigue tu paquete de Ecoscooting en España: qué número usar, qué significa cada estado, qué pasa si falla la entrega, puntos de recogida y teléfonos.
 slug: ecoscooting-seguimiento
 published: 2026-10-12
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Ecoscooting es una empresa de reparto de compras online de plataformas extranjeras en España y Portugal, del grupo Cainiao, la logística de Alibaba. Solo hace el último tramo: lleva el paquete a tu casa o a un punto de recogida. Para seguirlo, escribe en ecoscooting.com el número que aparece en sus correos, o pégalo en la casilla de arriba.
@@ -87,7 +87,7 @@ El aviso legal da otro teléfono para consultas y reclamaciones, el 931 222 879,
 
 [Peek](/) reconoce enseguida como de Ecoscooting un número CNESP o CNPRT con 20 cifras y la mayoría de las etiquetas españolas de 18 cifras que empiezan por el código postal seguido de `0000`. Para un número de paquete de SHEIN (C o E, una fecha de seis cifras y luego ocho cifras), que [Paack](carrier:paack) también reparte en España, Peek pregunta a Ecoscooting si lo conoce. Otro número de 18 cifras también podría ser de bpost o de GLS en España. Si no aparece Ecoscooting, pulsa «Cambiar» y elígelo, o pega el enlace de seguimiento de ecoscooting.com, que lleva a Ecoscooting.
 
-Cuando Cainiao o CACESA dan un número CNESP o CNPRT, o una etiqueta que Peek reconoce como de Ecoscooting, Peek puede seguir el paquete hasta Ecoscooting; con otro número de 18 cifras no.
+Cuando Cainiao o CACESA dan un número CNESP o CNPRT, o una etiqueta que Peek reconoce como de Ecoscooting, Peek puede seguir el paquete hasta Ecoscooting; con otro número de 18 cifras, solo si Cainiao o CACESA nombran a Ecoscooting como transportista.
 
 Peek muestra el estado, el historial con las horas exactas de Ecoscooting pero sin lugares, el peso, la hora de entrega y, cuando el paquete llega a un punto de recogida, su nombre y dirección, que se quedan después de recogerlo. No hay fecha de entrega prevista. Las horas salen en tu zona horaria, y tanto en peektracker.com como en la app para iPhone una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». Cuando el repartidor deja el paquete en el punto (`Delivered to PUDO`), Peek sigue mostrando «En reparto»: solo pasa a «Listo para recoger» cuando el punto lo recibe. Aun así, espera el correo o el SMS con el PIN. Deja fuera el PIN, el teléfono y el horario del punto, los códigos postales y las referencias del pedido. Las líneas salen en el inglés de Ecoscooting, porque Peek lo consulta en ese idioma, salvo un `Out for delivery` a secas, que aparece como «En reparto». Ecoscooting responde igual con un número desconocido que con uno que no puede consultar, así que un número equivocado simplemente se queda sin novedades.
 

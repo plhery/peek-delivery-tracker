@@ -3,7 +3,7 @@ title: Ecoscooting rastreio: estados, pontos de recolha e contacto
 description: Rastreio Ecoscooting em Portugal: que número usar, o que querem dizer os estados, entregas falhadas, pontos de recolha e como contactar a Ecoscooting.
 slug: ecoscooting-rastreio
 published: 2026-10-12
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 A Ecoscooting é uma empresa de entregas em Portugal e Espanha para compras feitas em plataformas internacionais, e pertence à Cainiao, a empresa de logística do grupo Alibaba. Faz só a última parte do caminho: a entrega em casa ou num ponto de recolha. Segue a encomenda no ecoscooting.com com o número que vem nos e-mails da Ecoscooting, ou cola-o na caixa no topo desta página.
@@ -85,7 +85,7 @@ A Ecoscooting não publica o preço das chamadas. A empresa é a Ecoscooting Del
 
 O [Peek](/) reconhece logo como sendo da Ecoscooting um número CNPRT ou CNESP com 20 algarismos e a maioria das etiquetas espanholas de 18 algarismos que começam pelo código postal seguido de `0000`. Para um número de pacote da SHEIN (C ou E, uma data de seis algarismos e depois oito algarismos), que a [Paack](carrier:paack) também entrega em Espanha, o Peek pergunta à Ecoscooting se o conhece. Outro número de 18 algarismos também pode ser da bpost ou da GLS em Espanha. Se a Ecoscooting não aparecer, carrega em «Alterar transportadora» e escolhe-a, ou cola a ligação de seguimento do ecoscooting.com, que leva à Ecoscooting seja qual for o número.
 
-Quando a Cainiao ou a CACESA dão um número CNPRT ou CNESP, ou uma etiqueta que o Peek reconhece como da Ecoscooting, a encomenda é acompanhada até à Ecoscooting; outro número de 18 algarismos não é acompanhado.
+Quando a Cainiao ou a CACESA dão um número CNPRT ou CNESP, ou uma etiqueta que o Peek reconhece como da Ecoscooting, a encomenda é acompanhada até à Ecoscooting; outro número de 18 algarismos só é acompanhado se a Cainiao ou a CACESA indicarem a Ecoscooting como transportadora.
 
 O Peek mostra o estado, o histórico com as horas exatas da Ecoscooting mas sem locais, o peso, a hora da entrega e, quando a encomenda chega a um ponto de recolha, o nome e a morada do ponto, que ficam depois do levantamento. Não há data prevista de entrega. As horas aparecem no teu fuso horário, e tanto no peektracker.com como na app para iPhone uma linha no fim do histórico lembra-o: «Horas no teu fuso horário: …». Quando o estafeta deixa a encomenda no ponto de recolha (`Delivered to PUDO`), o Peek ainda mostra «Em distribuição»: só passa a «Pronta para levantamento» quando o ponto a recebe. Espera mesmo assim pelo e-mail ou SMS com o PIN. Ficam de fora o PIN, o telefone e o horário do ponto, os códigos postais e as referências do pedido. O seguimento é pedido em inglês, por isso as linhas aparecem no inglês da Ecoscooting, por exemplo `Your shipment is out for delivery`; um `Out for delivery` simples aparece nas palavras do Peek, «Em distribuição». A Ecoscooting nunca diz que um número não existe, por isso um número errado fica simplesmente sem atualizações.
 

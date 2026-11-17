@@ -3,7 +3,7 @@ title: Ecoscooting suivi colis : statuts, point relais et contact
 description: Suivre un colis Ecoscooting en Espagne ou au Portugal : quel numéro utiliser, ce que veulent dire les statuts, les points relais et comment joindre Ecoscooting.
 slug: ecoscooting-suivi
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Ecoscooting livre en Espagne et au Portugal les commandes passées sur des plateformes de vente en ligne transfrontalières. Il ne fait que la dernière étape : la livraison locale, à ta porte ou dans un point de retrait. Avant lui, le suivi montre les étapes de [Cainiao](carrier:cainiao), qui achemine le colis jusqu'en Espagne ou au Portugal. Suis ton colis sur ecoscooting.com avec le numéro des e-mails d'Ecoscooting, ou colle-le dans le champ ci-dessus.
@@ -87,7 +87,7 @@ Pages d'Ecoscooting citées ici, en espagnol, en anglais et en portugais : sur w
 
 [Peek](/) reconnaît tout de suite comme Ecoscooting un numéro `CNESP` ou `CNPRT` suivi de 20 chiffres et la plupart des étiquettes espagnoles de 18 chiffres qui commencent par le code postal puis `0000`. Pour un numéro de colis SHEIN (`C` ou `E`, une date en six chiffres, puis 8 chiffres), que [Paack](carrier:paack) livre aussi en Espagne, Peek demande à Ecoscooting s'il le connaît. Un autre numéro de 18 chiffres peut aussi être un numéro [bpost](carrier:bpost) ou GLS Espagne. Si Ecoscooting n'est pas proposé, appuie sur « Changer » et choisis-le, ou colle le lien de suivi d'ecoscooting.com, qui nomme Ecoscooting.
 
-Quand Cainiao ou CACESA donne un numéro `CNESP` ou `CNPRT`, ou une étiquette que Peek reconnaît comme celle d'Ecoscooting, il suit le colis jusque chez Ecoscooting ; un autre numéro de 18 chiffres n'est pas suivi.
+Quand Cainiao ou CACESA donne un numéro `CNESP` ou `CNPRT`, ou une étiquette que Peek reconnaît comme celle d'Ecoscooting, il suit le colis jusque chez Ecoscooting ; un autre numéro de 18 chiffres ne l'est que si Cainiao ou CACESA nomme Ecoscooting comme transporteur.
 
 Tu vois le statut, l'historique avec l'heure de chaque scan d'Ecoscooting (mais pas les lieux), le poids, l'heure de livraison et, une fois le colis au point de retrait, le nom et l'adresse du point, gardés après le retrait. Pas de date de livraison prévue. Les heures s'affichent dans ton fuseau horaire, et sur peektracker.com comme dans l'application iPhone, une ligne sous l'historique le rappelle (« Heures dans ton fuseau horaire : … »). Le code PIN, le téléphone et les horaires du point, le code postal de destination et les références de commande ne sont pas repris. Les lignes restent dans l'anglais d'Ecoscooting, sauf un simple `Out for delivery`, qui s'affiche « En livraison ». Quand le livreur dépose le colis au point de retrait (`Delivered to PUDO`), Peek affiche encore « En livraison » ; il ne passe à « Prêt à être retiré » qu'une fois le colis reçu par le point. Attends quand même l'e-mail ou le SMS avec le code PIN. Ecoscooting ne dit jamais qu'un numéro n'existe pas : un mauvais numéro reste simplement sans nouvelles.
 

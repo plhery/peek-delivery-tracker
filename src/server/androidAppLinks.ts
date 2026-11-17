@@ -1,13 +1,18 @@
 import 'server-only';
 
 /**
- * Peek's Android app on Google Play, and the SHA-256 fingerprint of the
- * certificate Google signs it with (Play App Signing). Both are public: the
- * Play Console shows them, and the app's manifest names only Peek's own hosts,
- * so another site that serves this file opens nothing in the app.
+ * Peek's Android app, and the SHA-256 fingerprints of the certificates it is
+ * signed with: Google's on Google Play (Play App Signing), and Peek's upload
+ * key on the fdroid build in Peek's F-Droid repository and on GitHub. They are
+ * public: the Play Console and `apksigner verify --print-certs` show them, and
+ * the app's manifest names only Peek's own hosts, so another site that serves
+ * this file opens nothing in the app.
  */
 const PEEK_PACKAGE = 'com.plhery.peekdeliverytracker';
-const PEEK_FINGERPRINTS = ['F1:55:DB:E7:76:F4:5F:EA:F2:51:4F:73:3B:98:4D:A3:FC:5F:56:2A:DA:66:F2:BD:65:1F:C5:89:D2:BD:DE:60'];
+const PEEK_FINGERPRINTS = [
+  'F1:55:DB:E7:76:F4:5F:EA:F2:51:4F:73:3B:98:4D:A3:FC:5F:56:2A:DA:66:F2:BD:65:1F:C5:89:D2:BD:DE:60',
+  'F4:33:CB:F0:3C:68:76:6D:1E:6B:32:1D:10:20:E8:FE:E5:1F:75:78:0B:56:C0:39:3F:F7:42:0F:93:10:3F:73',
+];
 
 const packagePattern = /^[A-Za-z][A-Za-z0-9_]*(?:\.[A-Za-z][A-Za-z0-9_]*)+$/;
 const fingerprintPattern = /^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$/;

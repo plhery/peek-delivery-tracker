@@ -10,11 +10,12 @@ const other = '01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB:CD:EF:01:23:45:67:89:AB
 afterEach(() => { vi.unstubAllEnvs(); });
 
 describe('androidApp', () => {
-  it("names Peek's app on Google Play when nothing is set", () => {
+  it("names Peek's app, as Google Play and the F-Droid repository sign it, when nothing is set", () => {
     const app = androidApp(env({}));
     expect(app?.package).toBe('com.plhery.peekdeliverytracker');
-    expect(app?.fingerprints).toHaveLength(1);
-    expect(app?.fingerprints[0]).toMatch(/^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$/);
+    // Google's app signing key, then Peek's upload key, which signs the fdroid build.
+    expect(app?.fingerprints.map((value) => value.slice(0, 11))).toEqual(['F1:55:DB:E7', 'F4:33:CB:F0']);
+    for (const value of app?.fingerprints ?? []) expect(value).toMatch(/^(?:[0-9A-F]{2}:){31}[0-9A-F]{2}$/);
   });
 
   it('prefers the configured app, with each fingerprint once and in capitals', () => {

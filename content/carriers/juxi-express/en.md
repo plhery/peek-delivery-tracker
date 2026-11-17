@@ -44,7 +44,7 @@ For the gaps and handovers typical of parcels from China, see [tracking a parcel
 Juxi gets parcels out of China, and a carrier in your country delivers them. Its line terms name that carrier for some destinations:
 
 - **UK.** The UK line flies from Shanghai Pudong to London Heathrow, and [Royal Mail](carrier:royal-mail) delivers some UK orders. Juxi's small-parcel line to the UK and Germany doesn't serve offshore islands, military areas or Northern Ireland (BT postcodes), and destroys a UK parcel it can't deliver, with no second attempt.
-- **Germany.** After customs, [DHL Paket](carrier:dhl) delivers parcels on that line, not to P.O. boxes. One it can't deliver comes back and is destroyed or sent again, as the sender chooses and pays for.
+- **Germany.** After customs, [DHL Paket](carrier:dhl) delivers parcels on that line, not to P.O. boxes. For Germany, Juxi takes only parcels up to 5 kg with a declared value up to €22 on it. That's Juxi's own limit, not a threshold for duty or VAT. One it can't deliver comes back and is destroyed or sent again, as the sender chooses and pays for.
 - **Canada.** The Canada line lands in Vancouver or Toronto and goes to [Canada Post](carrier:canada-post). A parcel refused or wrongly addressed comes back, at the sender's cost.
 - **Japan.** The Japan line is named after Sagawa Express. Its delivery depot usually keeps a parcel about a week before it goes back.
 - **United States.** The US economy line doesn't serve Alaska, Hawaii, Puerto Rico, Guam or other territories. Juxi doesn't name the delivering carrier. Some JXC numbers on a US line are also on the tracker of [DHLink](carrier:dhlink), DHgate's logistics platform: when another company delivers, DHLink's result shows a "Last Leg No.", that company's own number, to track the parcel with it.
@@ -82,7 +82,7 @@ Juxi has no tracking page left for Peek to read: the tracking button on its home
 
 If a tracking service names the carrier that took the parcel over, with that carrier's own number, Peek shows "Delivery with" and that carrier's name, with its number. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. Where Peek can read that carrier's own tracking, it asks there too, and once a scan there is at least as new as the newest in the history, it follows the parcel there and keeps the earlier scans.
 
-While Peek follows the parcel through tracking services, it checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
+While Peek follows the parcel through tracking services, it checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery, while you have it open or notifications are on. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
 
 ## Questions about Juxi Express tracking
 
@@ -106,7 +106,7 @@ It depends on the line the seller chose. Juxi quotes 5 to 8 days on its UK line,
 - [Juxi Express: 上海驹隙国际物流有限公司 (home page)](https://www.juxiex.com/) – company and English name, start in 2016, lines, untracked economy small packet, tracking button with no working link, hotline, address
 - [Juxi Express: 关于我们 (about)](https://www.juxiex.com/about.php) – own lines, express and postal services, UK line (Pudong to Heathrow, 5 to 8 days), Canada line (Vancouver, Toronto), postal delivery by each country's post, pickup and offices, landline
 - [Juxi Express: 托运条款 (consignment terms)](https://www.juxiex.com/server.php) – claims by the shipper within 30 days, held parcels and website notice
-- [Juxi Express: JX英德小包 (small parcel to the UK and Germany)](https://www.juxiex.com/product_show.php?id=65) – DHL Packet in Germany, UK areas not served, undeliverable parcels, 17TRACK for tracking
+- [Juxi Express: JX英德小包 (small parcel to the UK and Germany)](https://www.juxiex.com/product_show.php?id=65) – DHL Packet in Germany, up to 5 kg and €22 declared for Germany, UK areas not served, undeliverable parcels, 17TRACK for tracking (read 17 November 2026)
 - [Juxi Express: JX特惠专线 (dedicated line)](https://www.juxiex.com/product_show.php?id=71) – DDP and VAT, Royal Mail last mile, trace and claim windows (30 and 60 days from shipping, investigations up to 30 days), compensation limits
 - [Juxi Express: JX美国经济专线 (US economy line)](https://www.juxiex.com/product_show.php?id=74) – mainland US only, 17TRACK for tracking
 - [Juxi Express: JX加拿大专线-普货 (Canada line)](https://www.juxiex.com/product_show.php?id=76) – 8 to 12 working days, Canada Post, duty above 20 CAD, return fee

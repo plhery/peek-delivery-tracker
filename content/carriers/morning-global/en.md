@@ -3,7 +3,7 @@ title: Morning Global tracking: BR…MG numbers, statuses, contact
 description: Track a Morning Global parcel from Hong Kong or China: what its numbers look like, what each status means, who delivers it near you and who to contact.
 slug: morning-global-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Morning Global (MG), founded in 1987, is the international arm of Morning Express Group, a Hong Kong courier group. It ships parcels abroad for online shops and marketplaces, has offices in Hong Kong and across mainland China, and usually hands your parcel to a partner in your country for the delivery. Track the number the shop gives you on Morning Global's [Trace & Track page](https://www.morninglobal.com/trace-track/), in English, or paste it in the box above.
@@ -67,7 +67,7 @@ With `Handed Over for Delivery`, Morning Global hands the parcel to the partner 
 
 Morning Global's customers are the shops that book it. For a late, lost, damaged or returned parcel, contact the shop or the marketplace first.
 
-**Not found yet.** If Peek doesn't know the carrier yet but the number is in Morning Global's BR…MG shape, Peek says "Probably Morning Global" and shows "Waiting for Morning Global’s first scan" while it keeps asking. For a parcel already filed under Morning Global, it shows "Waiting for Morning Global" on peektracker.com. If nothing comes after a week, check the number with the shop.
+**Not found yet.** If Peek doesn't know the carrier yet but the number is in Morning Global's BR…MG shape, Peek says "Probably Morning Global" and shows "Waiting for Morning Global’s first scan" while it keeps asking. A BR…MG number that also passes the check digit postal numbers carry gets neither: Peek asks Morning Global and Chronopost, and names the one that knows the number. For a parcel already filed under Morning Global, it shows "Waiting for Morning Global" on peektracker.com. If nothing comes after a week, check the number with the shop.
 
 **Stuck at `Order Created`.** The shop has booked the shipment but hasn't handed the parcel over yet. Ask the shop when it will.
 
@@ -83,12 +83,13 @@ Morning Global's customers are the shops that book it. For a late, lost, damaged
 
 ## Morning Global customer service and contact
 
-As read on 31 October 2026 on Morning Global's [Contact page](https://www.morninglobal.com/contact/), for shipment enquiries:
+As read on 17 November 2026 on Morning Global's [Contact page](https://www.morninglobal.com/contact/), for shipment enquiries:
 
 - **United States**: cs.mgus@morninglobal.com, +1 888 981 8688.
 - **United Kingdom**: cs.mgeu@morninglobal.com, +44 20 7019 9035.
 - **Hong Kong and Macao** (Hong Kong is its global headquarters): cs.mghk@morninglobal.com, +852 3669 6360.
-- **Elsewhere**: cs.mgworldwide@morninglobal.com, Morning Global's worldwide team, also on WhatsApp through a QR code on the same page.
+- **Other regional teams**: mainland China, India, Italy, the Philippines and Singapore each have their own address on the same page.
+- **Elsewhere**: cs.mgworldwide@morninglobal.com, Morning Global's worldwide team, also on WhatsApp at +1 (479) 777 3307 or through a QR code on the same page.
 - **Online form**: on the same page, with your name, email and a message.
 
 Morning Global gives no opening hours. Its tracker asks you to give your tracking number when you contact support. About your order itself, ask the shop first: it booked Morning Global, not you.
@@ -97,7 +98,7 @@ Morning Global gives no opening hours. Its tracker asks you to give your trackin
 
 [Peek](/) doesn't name Morning Global from a BR…MG number alone. Paste it all the same: Peek follows more than 3,500 carriers. It checks the number ("Checking tracking services…") and says "Morning Global has this parcel." when Morning Global's tracker knows it. A morninglobal.com tracking link with `tracking_number=` files the parcel under Morning Global at once ("Detected carrier"). If Peek doesn't find it, tap "Change" and pick Morning Global under "Fits this number" or "All carriers", or use "Change carrier" on a parcel you've already added.
 
-Peek reads Morning Global's own tracker by the number alone, with no postcode. It shows the status, each line with its place, the destination country and the delivery time. It reads a line's time on the UTC offset given beside the country, a line without one on the clock of its place, a neighbouring line's, your country's or Hong Kong's, and shows every time in your device's time zone. It leaves out the origin, the `Estimated Delivery`, the weight, the pieces, the `Reference` and who signed, so it shows no expected delivery date.
+Peek reads Morning Global's own tracker by the number alone, with no postcode. It shows the status, each line with its place, the destination country and the delivery time. It reads a line's time on the UTC offset given beside the country, a line without one on the clock of its place, a neighbouring line's, your country's or Hong Kong's, and shows every time in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It leaves out the origin, the `Estimated Delivery`, the weight, the pieces, the `Reference` and who signed, so it shows no expected delivery date.
 
 As Morning Global names no delivering partner, Peek follows the parcel on Morning Global's tracker to the end, even when the number also passes the check digit postal numbers carry: it doesn't ask your country's post about it.
 
@@ -131,7 +132,7 @@ Email cs.mgus@morninglobal.com in the US, cs.mgeu@morninglobal.com in the UK, or
 - [Morning Global: About Us](https://www.morninglobal.com/about-us/) – international division of Morning Express Group, Hong Kong, brands, retailers and marketplaces
 - [Morning Global: Services](https://www.morninglobal.com/services/) – MGIE and MGIP, more than 220 destinations, up to 30 kg
 - [Morning Global: Global Network](https://www.morninglobal.com/global-network/) – self-operated locations (UK, USA), partner networks (Australia), United States & Canada
-- [Morning Global: Contact](https://www.morninglobal.com/contact/) – regional teams' mailboxes and phones, worldwide team and WhatsApp, form, global and regional headquarters, offices across mainland China
+- [Morning Global: Contact](https://www.morninglobal.com/contact/) – regional teams' mailboxes and phones, worldwide team and its WhatsApp number, form, global and regional headquarters, offices across mainland China (read 17 November 2026)
 - [Morning Global: Upload Clearance Documents](https://www.morninglobal.com/upload-clearance-documents/) – customs documents form
 - [Morning Global: Terms and Conditions (Privacy Policy page)](https://www.morninglobal.com/privacy-policy/) – failed deliveries, claim deadlines, US$50 cap
 - [Morning Global: EUR 2 Customs Handling Fee for EU-bound B2C Shipments](https://www.morninglobal.com/morning-global-service-update-introduction-of-eur-2-customs-handling-fee-for-eu-bound-b2c-shipments-from-1-november-2026/) – EUR 2 per declaration line since 1 November 2026, VAT on the fee

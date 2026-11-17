@@ -81,11 +81,11 @@ From the United States, Plus reaches more than 30 countries, among them the UK, 
 
 **Delivered, but nothing came.** Ask the delivery company named in the tracking, then the seller. See [delivered but not received](guide:delivered-not-received).
 
-**Undeliverable or returned.** GlobalPost names the usual causes: a wrong or incomplete address, unpaid duties or taxes, missed customs notifications, restricted items, or a parcel that can't be cleared into the country. The destination country's post then handles it: in most cases it goes back to the seller or waits at the local post. GlobalPost can't give a date for a return, and gets no new tracking number for it from the post. See [returned to sender](guide:returned-to-sender).
+**Undeliverable or returned.** GlobalPost names the usual causes: a wrong or incomplete address, unpaid duties or taxes, missed customs notifications, restricted items, or a parcel that can't be cleared into the country. The destination country's post then handles it: in most cases it goes back to the seller or waits at the local post. GlobalPost can't give a date for a return, and gets no new tracking number for it from the post. Its terms leave undeliverable parcels out of claims, so ask the seller about a refund or a new parcel. See [returned to sender](guide:returned-to-sender).
 
 ## GlobalPost customer service and contact
 
-As read on 1 November 2026, GlobalPost's customer support answers on info@goglobalpost.com and on (888) 899-1255, Monday to Friday from 6 am to 6 pm Pacific time. Its [contact form](https://www.goglobalpost.com/contact-support/) takes recipients too: choose "Recipient" and give the tracking number. GlobalPost says its support team sees the same information as its tracking page.
+As read on 17 November 2026, GlobalPost's customer support answers on info@goglobalpost.com and on (888) 899-1255, Monday to Friday from 6 am to 6 pm Pacific time. Its [contact form](https://www.goglobalpost.com/contact-support/) takes recipients too: choose "Recipient" and give the tracking number. GlobalPost says its support team sees the same information as its tracking page.
 
 For a parcel that hasn't come, GlobalPost sends you to the seller first: the seller booked the delivery and files any claim. A parcel from China sent with China Post is not a GlobalPost shipment, GlobalPost says: ask the sender.
 
@@ -95,11 +95,11 @@ For a parcel that hasn't come, GlobalPost sends you to the seller first: the sel
 
 Peek shows the status, each scan with its place, the destination country, and the delivery company with its number when GlobalPost names them. It leaves out the progress bar, the sender's and your towns, and postcodes. GlobalPost gives no expected delivery date, weight or proof of delivery, so Peek shows none. "Open the GlobalPost website" opens the number on GlobalPost's tracker.
 
-GlobalPost's times carry no time zone: Peek reads each scan on the clock of its place, or of the leg the parcel was on, and shows it in your device's time zone.
+GlobalPost's times carry no time zone: Peek reads each scan on the clock of its place, or of the leg the parcel was on, and shows it in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
 When GlobalPost names a delivery company Peek knows by that name, the parcel card says "Delivery with" that company and lists its number after the GP number, and Peek asks that company too. While that company has only the announcement of the parcel, with no scan of its own, the card says "Announced to …, not received yet" instead. With a number but no company Peek knows, Peek asks your country's post for a postal number, or the one carrier the number's shape points to. Once that company has a scan at least as recent as GlobalPost's newest, Peek follows the parcel there and keeps GlobalPost's history.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open GlobalPost's tracker in a browser) from 6 a.m. local time on the day the parcel goes out for delivery, while GlobalPost's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact GlobalPost or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open GlobalPost's tracker in a browser) from 6 a.m. local time on the day the parcel goes out for delivery, while GlobalPost's own tracker answers (through tracking services, every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact GlobalPost or the seller for you.
 
 ## Questions about GlobalPost tracking
 
@@ -124,9 +124,9 @@ Yes. GlobalPost is part of Auctane and is sold through shipping platforms such a
 Email info@goglobalpost.com or call (888) 899-1255, weekdays from 6 am to 6 pm Pacific time. If the parcel hasn't arrived 30 days after shipping, GlobalPost asks you to go to the seller first.
 
 :::sources
-- [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, how it works, tracking, delays, delivery times, returns, claims
+- [GlobalPost: FAQs](https://www.goglobalpost.com/faqs/) – Auctane, how it works, tracking, delays, delivery times, returns, claims, no claims for undeliverable parcels (read 17 November 2026)
 - [GlobalPost: Standard](https://www.goglobalpost.com/standard/) – services compared: tracking, duties, transit times
-- [GlobalPost: Contact Support](https://www.goglobalpost.com/contact-support/) – email, phone, hours, form, China Post
+- [GlobalPost: Contact Support](https://www.goglobalpost.com/contact-support/) – email, phone, hours, form, China Post (read 17 November 2026)
 - [GlobalPost: Home](https://www.goglobalpost.com/) – countries, shipments delivered
 - [GlobalPost: Track your package](https://www.goglobalpost.com/tracking/) – the tracker
 - [GlobalPost: Terms and Conditions](https://www.goglobalpost.com/conditions/) – shipping centres, transit time as an estimate

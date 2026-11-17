@@ -22,10 +22,11 @@ Les formes qu'on rencontre, avec des chiffres inventés :
 | `UUSC000000000000` | `UUSC` suivi de 12 chiffres. |
 | `4C000000000US` | `4C`, 9 chiffres, puis `US`. |
 | `U000000000000000` | `U` suivi de 15 chiffres, `U9999…` compris. |
-| `AA00CAA0U000000000` | 2 lettres, 2 chiffres, `CAA0`, une lettre et 9 chiffres. |
+| `AA00CAA0U000000000` | 2 lettres, 2 chiffres, `CAA0` ou `USA0`, une lettre et 9 chiffres. |
 | `JY00CA00A000000000` | `JY`, 2 chiffres, `CA`, 2 chiffres, `A` et 9 chiffres. |
+| `UR00000000000000000` | `UR` et 17 chiffres, un numéro de la plateforme d'UniUni pour les expéditeurs. |
 
-La page de suivi d'UniUni accepte jusqu'à 25 numéros à la fois, séparés par des virgules.
+Une référence qui commence par `UNI` est un numéro de commande, et `URB` suivi de 16 chiffres un numéro de lot : ni l'un ni l'autre n'est le numéro de suivi du colis. La page de suivi d'UniUni accepte jusqu'à 25 numéros à la fois, séparés par des virgules.
 
 ## Suivi UniUni : ce que veulent dire les statuts
 
@@ -47,11 +48,13 @@ Voici les lignes de l'historique qu'un colis rencontre le plus souvent, telles q
 | `The parcel will be transferred to a third-party courier for delivery.` | UniUni va confier le colis à un autre transporteur. |
 | `Parcel has been handed over to a third-party courier` | L'autre transporteur l'a maintenant ; ses propres scans suivent, dans ses mots. |
 
+Certains expéditeurs transfrontaliers écrivent `Shipping information received. Your parcel is on its way to UniUni for delivery to you` : comme `Order received`, cela veut dire qu'UniUni a les détails de l'envoi, mais pas encore le colis. Après une deuxième tentative ratée, le statut devient `storage` (« stockage ») : voir plus bas comment obtenir une nouvelle livraison.
+
 ## Livraison UniUni : tentatives, NIP, photos et récupération
 
 UniUni livre seulement à une adresse physique, jamais à un bureau de poste ni à une boîte postale : au Canada, rappelle sa FAQ, seule Postes Canada livre aux boîtes postales. Ses pages ne proposent ni casier ni point de retrait ; les Magasins UniUni et les Points UniUni servent aux expéditeurs qui viennent y déposer leurs envois. Aux marchands, UniUni annonce la « livraison le lendemain » dans les principales zones métropolitaines. La date estimée n'apparaît qu'une fois le colis arrivé dans ses installations, parfois avec une plage horaire.
 
-**Livraison manquée.** Après une première tentative ratée, UniUni réessaie dans les 48 heures dans la plupart des cas ; tu n'as rien à faire, sauf si tes informations de livraison doivent changer. Après une deuxième, le colis retourne à l'entrepôt. Quand le suivi affiche le statut « stockage », contacte le service à la clientèle pour fixer une nouvelle livraison : UniUni garde le colis 30 jours. Une tentative peut aussi être rejetée si l'adresse est invalide : corrige-la.
+**Livraison manquée.** Après une première tentative ratée, UniUni réessaie dans les 48 heures dans la plupart des cas ; tu n'as rien à faire, sauf si tes informations de livraison doivent changer. Après une deuxième, le colis retourne à l'entrepôt. Quand le suivi affiche le statut « stockage », contacte le service à la clientèle pour fixer une nouvelle livraison, avec l'adresse de livraison complète, tes coordonnées et tes consignes de livraison : UniUni garde le colis 30 jours. Une tentative peut aussi être rejetée si l'adresse est une boîte postale USPS, qu'UniUni ne dessert pas, ou si elle est invalide : corrige-la.
 
 **Aller chercher le colis.** C'est possible seulement à Montréal, à Toronto et à North York. Ailleurs, demande une nouvelle livraison.
 
@@ -65,7 +68,7 @@ UniUni livre seulement à une adresse physique, jamais à un bureau de poste ni 
 
 **Aucune mise à jour.** Le plus souvent, le marchand prépare encore ta commande et n'a pas remis le colis à UniUni : demande-lui où en est ta commande. Si les scans s'arrêtent après la prise en charge, lis [suivi de colis qui ne bouge plus](guide:tracking-not-updating).
 
-**« Acheminement incorrect ».** Ce statut veut dire que le colis est parti par erreur vers l'entrepôt d'une autre ville. [Postes Canada](carrier:canada-post) prend alors le relais automatiquement et le livre à ton adresse. Il aura du retard, mais tu n'as rien à faire ; au statut « transbordement terminé », il est de nouveau en route.
+**« Acheminement incorrect ».** Ce statut veut dire que le colis est parti par erreur vers l'entrepôt d'une autre ville. [Postes Canada](carrier:canada-post), ou USPS aux États-Unis, prend alors le relais automatiquement et le livre à ton adresse. Il aura du retard, mais tu n'as rien à faire ; au statut « transbordement terminé », il est de nouveau en route.
 
 **Indiqué livré, mais introuvable.** Regarde d'abord les photos de preuve. Demande ensuite aux gens de ton foyer, aux voisins, à la gestion de l'immeuble et à la salle de courrier, et fais le tour de ta propriété : le colis a peut-être été déplacé. Toujours rien ? Passe par le chatbot, qui ouvre une demande s'il voit un problème. La suite dans [colis livré mais non reçu](guide:delivered-not-received).
 
@@ -87,9 +90,10 @@ Les pages d'UniUni ne parlent ni de droits de douane ni de taxes. Selon l'OPC, l
 
 ## Service à la clientèle UniUni : téléphone et chatbot
 
-Les canaux qu'UniUni affiche sur son site en français, lus le 27 octobre 2026 :
+Les canaux qu'UniUni affiche sur son site en français, lus le 17 novembre 2026 :
 
 - **Téléphone, Canada** : 1 604 229-2007 pour les fuseaux horaires du Pacifique et des Rocheuses ; 1 647 360-4178 pour ceux du Centre, de l'Est et de l'Atlantique.
+- **Téléphone, États-Unis** : 1 424 284-2432 pour les fuseaux du Pacifique et des Rocheuses ; 1 315 533-4690 pour ceux du Centre et de l'Est.
 - **Heures** : du lundi au samedi, de 10 h à 21 h (HE).
 - **Chatbot** sur la [page de soutien](https://www.uniuni.com/support/), en anglais.
 - Le résultat de suivi affiche aussi un numéro à appeler pour ce colis.
@@ -98,13 +102,13 @@ Les canaux qu'UniUni affiche sur son site en français, lus le 27 octobre 2026 :
 
 ## Suivre un colis UniUni avec Peek
 
-[Peek](/) reconnaît tout de suite UniUni pour les numéros qui commencent par `UUS`, `UUSC` ou `U9999`, les numéros `4C` terminés par `US`, les numéros `UR` d'UniUni Platform et la forme `CAA0` suivie d'un `U`. Pour les autres numéros `U` à 15 chiffres, la forme `CAA0` suivie d'une autre lettre et la forme `JY`, il pose la question à UniUni et rattache le colis à UniUni si elle connaît le numéro. Un lien de suivi uniuni.com qui contient le numéro fonctionne aussi. Le numéro principal d'un envoi en plusieurs colis ne se suit pas : ajoute le numéro de chaque colis.
+[Peek](/) reconnaît tout de suite UniUni pour les numéros qui commencent par `UUS`, `UUSC` ou `U9999`, les numéros `4C` terminés par `US`, les numéros `UR` d'UniUni Platform et la forme `CAA0` suivie d'un `U`. Pour les autres numéros `U` à 15 chiffres, la forme `CAA0` suivie d'une autre lettre, la forme `USA0` et la forme `JY`, il pose la question à UniUni et rattache le colis à UniUni si elle connaît le numéro. Un lien de suivi uniuni.com qui contient le numéro fonctionne aussi. Le numéro principal d'un envoi en plusieurs colis ne se suit pas : ajoute le numéro de chaque colis.
 
-Peek lit le suivi d'UniUni et affiche le statut, chaque scan avec sa ville et sa province sur une carte, la date prévue ou la plage horaire quand UniUni en donne une, et l'heure de livraison. Les lignes restent dans l'anglais d'UniUni, même si Peek est en français, sauf deux que Peek remplace par ses propres mots : « Livré » pour `Delivered` et « En livraison » pour `Out for delivery`. Il laisse de côté les adresses, le nom du livreur, le détail des scans et les photos, que tu trouves sur le site d'UniUni.
+Peek lit le suivi d'UniUni et affiche le statut, chaque scan avec sa ville et sa province sur une carte, la date prévue ou la plage horaire quand UniUni en donne une, et l'heure de livraison. Les lignes restent dans l'anglais d'UniUni, même si Peek est en français, sauf deux que Peek remplace par ses propres mots : « Livré » pour `Delivered` et « En livraison » pour `Out for delivery`. Il laisse de côté les adresses, le nom du livreur, le détail des scans et les photos, que tu trouves sur le site d'UniUni. Les heures s'affichent dans le fuseau horaire de ton appareil ; sur peektracker.com et dans l'application iPhone, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »).
 
 Quand UniUni passe le colis à un autre transporteur, les scans de celui-ci s'affichent dans l'historique d'UniUni, mais Peek ne suit pas le numéro de l'autre transporteur. À l'inverse, un colis [SpeedPAK](carrier:speedpak) peut nommer UniUni pour la dernière étape : Peek peut alors le suivre chez UniUni.
 
-Peek vérifie le suivi jusqu'à toutes les 10 minutes. Un colis en livraison est vérifié jusqu'à toutes les 2 minutes le jour même, dès 6 h, heure locale, tant que c'est le suivi d'UniUni qui répond ; si UniUni annonce une plage horaire, à partir d'une demi-heure avant son début. Via des services de suivi, c'est toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Tant que tu as le colis ouvert à l'écran, ou le jour de sa livraison si tes notifications sont activées, Peek vérifie le suivi jusqu'à toutes les 10 minutes. Dans ces mêmes conditions, le jour où le colis est en livraison, c'est jusqu'à toutes les 2 minutes dès 6 h, heure locale, tant que c'est le suivi d'UniUni qui répond ; si UniUni annonce une plage horaire, à partir d'une demi-heure avant son début. Via des services de suivi, c'est alors toutes les 15 minutes. Le reste du temps, et après deux jours sans nouvelles (12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge »), Peek vérifie toutes les heures.
 
 ## Questions sur le suivi UniUni
 
@@ -125,9 +129,9 @@ Non. UniUni, c'est Uni Express inc., une entreprise de livraison fondée à Vanc
 Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date estimée n'apparaît qu'une fois le colis arrivé dans ses installations : écris d'abord au marchand.
 
 :::sources
-- [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, photos, récupération, boîtes postales
-- [UniUni : Questions fréquemment posées](https://www.uniuni.com/fr/faqs-fr/) – acheminement incorrect, Postes Canada, Shein, Temu et TikTok, photos floues, chatbot, commentaires sur un livreur
-- [UniUni : Accueil](https://www.uniuni.com/fr/home-fr/) – téléphones au Canada, heures
+- [UniUni : Suivi](https://www.uniuni.com/fr/suivi/) – date estimée, tentatives, stockage 30 jours, informations pour une nouvelle livraison, boîte postale USPS, photos, récupération, boîtes postales (relu le 17 novembre 2026)
+- [UniUni : Questions fréquemment posées](https://www.uniuni.com/fr/faqs-fr/) – acheminement incorrect, Postes Canada ou USPS, Shein, Temu et TikTok, photos floues, chatbot, commentaires sur un livreur (relu le 17 novembre 2026)
+- [UniUni : Accueil](https://www.uniuni.com/fr/home-fr/) – téléphones au Canada et aux États-Unis, heures (relu le 17 novembre 2026)
 - [UniUni : Services](https://www.uniuni.com/fr/services-fr/) – livraison le lendemain, photos de preuve, textos et courriels
 - [UniUni : En savoir plus](https://www.uniuni.com/fr/en-savoir-plus/) – fondée à Vancouver en 2019
 - [UniUni : Termes et conditions](https://www.uniuni.com/fr/termes-et-conditions/) – Uni Express inc., Richmond (C.-B.)
@@ -136,7 +140,7 @@ Le plus souvent, le marchand n'a pas encore remis le colis à UniUni. La date es
 - [UniUni Platform : Vérification de livraison](https://help.ship.uniuni.com/fr/shipments/canada/delivery-verification) – NIP au Canada
 - [UniUni Platform : Déposer une réclamation](https://help.ship.uniuni.com/fr/services/add-on/deposer-une-reclamation) – réclamations des expéditeurs
 - [UniUni Platform : Points de dépôt](https://help.ship.uniuni.com/fr/services/drop-off/drop-spots) – Magasins UniUni et Points UniUni
-- [UniUni Platform : Suivre une expédition](https://help.ship.uniuni.com/fr/api/endpoints/tracking/track) – numéros UR
+- [UniUni Platform : Suivre une expédition](https://help.ship.uniuni.com/fr/api/endpoints/tracking/track) – numéros UR, numéros de lot URB, numéros de commande UNI
 - [OPC : Retard de livraison ou vol de colis](https://www.opc.gouv.qc.ca/consommateur/sujet/achat/internet/livraison) – 30 jours, colis volé, photo à la porte
 - [OPC : Démarche pour annuler un achat en ligne](https://www.opc.gouv.qc.ca/consommateur/sujet/achat/internet/annulation) – remboursement, rétrofacturation, frais exigés par un tiers
 - [OPC : Achats d'un commerçant à l'extérieur du Québec](https://www.opc.gouv.qc.ca/consommateur/sujet/achat/internet/exterieur-quebec) – commerçants hors du Québec

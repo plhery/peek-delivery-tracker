@@ -97,7 +97,7 @@ Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追�
 
 Si un service de suivi nomme le transporteur qui a pris le relais, avec son propre numéro, Peek affiche « Livraison par » suivi du nom de ce transporteur, et son numéro. Tant que Peek ne trouve chez ce transporteur que l'annonce du colis, sans scan de sa part, il affiche à la place « Annoncé à …, pas encore reçu ». Quand Peek sait lire le suivi de ce transporteur, il l'interroge aussi ; dès qu'un scan y est au moins aussi récent que le dernier de l'historique, Peek suit le colis chez lui et garde les scans d'avant.
 
-Tant que Peek suit le colis via des services de suivi, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu'à toutes les 15 minutes le jour où le colis est en livraison. Peek peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
+Tant que Peek suit le colis via des services de suivi, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu'à toutes les 15 minutes le jour où le colis est en livraison, tant que tu l'as ouvert à l'écran ou que tes notifications sont activées. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Peek peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
 
 ## Questions sur le suivi Juxi Express
 

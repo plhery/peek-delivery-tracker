@@ -2340,6 +2340,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-sendungsverfolgung",
+      "title": "GOFO Express Sendungsverfolgung: GFUS-Nummer & Status",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-sendungsverfolgung",
@@ -2878,6 +2886,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f68841"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-suivi",
+      "title": "Suivi GOFO Express\u00a0: numéro GFUS, statuts et aide",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-allemagne-suivi",
@@ -3144,6 +3160,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "bpost-tracciamento",
+      "title": "Tracciamento bpost: codice a barre, stati e punti di ritiro",
+      "name": "bpost",
+      "color": "#ef2637"
+    },
+    {
       "id": "gofo-it",
       "catalog": "gofo-it",
       "slug": "gofo-italy-tracking",
@@ -3238,6 +3262,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Royal Mail: numero, stati, dogana e Poste",
       "name": "Royal Mail",
       "color": "#da202a"
+    },
+    {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-tracciamento",
+      "title": "Tracciamento GOFO Express: numero GFUS, stati e aiuto",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
     },
     {
       "id": "j-and-t-de",
@@ -3520,6 +3552,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Logistics seguimiento: dónde mirarlo y qué hacer",
       "name": "Amazon Logistics",
       "color": "#ff9900"
+    },
+    {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "bpost-seguimiento",
+      "title": "Seguimiento bpost: código de barras, estados y recogida",
+      "name": "bpost",
+      "color": "#ef2637"
     },
     {
       "id": "gls-es",
@@ -3980,6 +4020,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "bpost-seguimento",
+      "title": "Seguimento bpost: código de barras, estados e levantamento",
+      "name": "bpost",
+      "color": "#ef2637"
+    },
+    {
       "id": "dhl-ecommerce-es",
       "catalog": "dhl-ecommerce-es",
       "slug": "dhl-ecommerce-iberia-rastreio",
@@ -4074,6 +4122,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Royal Mail rastreio: estados, IVA e entrega em Portugal",
       "name": "Royal Mail",
       "color": "#da202a"
+    },
+    {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-seguimento",
+      "title": "Seguimento GOFO Express: número GFUS, estados e ajuda",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
     },
     {
       "id": "j-and-t-de",
@@ -4318,6 +4374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Logistics tracking: gdzie śledzić paczkę Amazon",
       "name": "Amazon Logistics",
       "color": "#ff9900"
+    },
+    {
+      "id": "bpost",
+      "catalog": "bpost",
+      "slug": "bpost-sledzenie",
+      "title": "Śledzenie bpost: kod kreskowy, statusy i punkty odbioru",
+      "name": "bpost",
+      "color": "#ef2637"
     },
     {
       "id": "dhl-ecommerce-pl",

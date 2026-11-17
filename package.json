@@ -19,16 +19,7 @@
   },
   "overrides": {
     "browserslist": "4.29.3",
-    "zod": "4.6.7",
-    "@sentry/bundler-plugins": {
-      "glob": "14.0.3"
-    },
-    "@serwist/build": {
-      "glob": "14.0.3"
-    },
-    "@serwist/next": {
-      "glob": "14.0.3"
-    }
+    "zod": "4.6.7"
   },
   "scripts": {
     "contract:generate": "node scripts/generate-api-contract.mjs && node scripts/generate-brand.mjs",
@@ -63,9 +54,9 @@
   "dependencies": {
     "@modelcontextprotocol/server": "2.4.0",
     "@prometheus-io/client": "^0.16.1",
-    "@sentry/browser": "^11.5.0",
-    "@sentry/node": "^11.5.0",
-    "@serwist/next": "^9.5.13",
+    "@sentry/browser": "^11.13.0",
+    "@sentry/node": "^11.13.0",
+    "@serwist/next": "^9.5.15",
     "@supabase/auth-js": "^2.117.3",
     "cbor": "10.0.12",
     "d3-geo": "^3.1.1",
@@ -79,7 +70,7 @@
     "postal-mime": "4.2.0",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "serwist": "^9.5.13",
+    "serwist": "^9.5.15",
     "sharp": "0.35.5",
     "undici": "^8.12.3",
     "universal-parcel-scraper": "0.1146.1-main.6543",
@@ -88,7 +79,7 @@
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "@resvg/resvg-js": "^2.6.2",
-    "@serwist/build": "^9.5.13",
+    "@serwist/build": "^9.5.15",
     "@testing-library/dom": "^10.4.2",
     "@testing-library/jest-dom": "^7.0.1",
     "@testing-library/react": "^16.3.3",

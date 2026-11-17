@@ -116,7 +116,10 @@ const savedKey = (url) => `https://saved.edge-guard.invalid/${url.hostname}${url
 
 async function savePage(url, response) {
   const type = response.headers.get('content-type') ?? '';
-  if (response.status !== 200 || !type.includes('text/html') || response.headers.has('set-cookie')) return;
+  if (response.status !== 200 || !type.includes('text/html')) return;
+  // A page that sets a cookie is someone's, unless it is only the site's language cookie.
+  const cookies = response.headers.getSetCookie?.() ?? [response.headers.get('set-cookie')].filter(Boolean);
+  if (cookies.some((cookie) => !site.harmlessCookies?.test(cookie.split('=')[0].trim()))) return;
   const headers = new Headers({ 'Content-Type': type, 'Cache-Control': `public, max-age=${SAVED_COPY_SECONDS}`, 'X-Saved-At': new Date().toISOString() });
   // The policy goes with the page: its scripts carry the nonce it names.
   const policy = response.headers.get('content-security-policy');
@@ -137,9 +140,11 @@ export async function savedPage(url, reader, found) {
   if (!saved) return null;
   const html = await saved.text();
   const note = site.savedNote(reader.lang, { planned: Boolean(found), backAround: found?.backAround ?? null, timeZone: reader.timeZone });
-  // Drawn by a style rule, not an element: the page's own scripts redraw its body as they start, and would drop one.
+  // Drawn by a style rule, not an element: the page's own scripts redraw its body as they start, and would drop
+  // one. The rule first undoes whatever the site's own style gives body::before.
   const nonce = /'nonce-([^']+)'/.exec(saved.headers.get('Content-Security-Policy') ?? '')?.[1];
-  const style = `<style${nonce ? ` nonce="${nonce}"` : ''}>body::before{content:${JSON.stringify(note).replace(/</g, '\\3c ')};${site.savedNoteStyle}}</style>`;
+  const content = JSON.stringify(note).replace(/</g, '\\3c ');
+  const style = `<style${nonce ? ` nonce="${nonce}"` : ''}>body::before{all:initial;${site.savedNoteStyle};content:${content}}</style>`;
   const body = /<\/head>/i.test(html) ? html.replace(/<\/head>/i, `${style}</head>`) : style + html;
   const headers = new Headers(saved.headers);
   headers.set('Cache-Control', 'no-store');
@@ -176,7 +181,7 @@ export function maintenancePage(request, url, found) {
   const lang = language(request, url);
   const state = JSON.stringify({ ...status(found), lang }).replace(/</g, '\\u003c');
   const html = page
-    .replace(/<html lang="[^"]*"/, `<html lang="${lang}"`)
+    .replace(/<html lang="[^"]*"/, `<html lang="${lang}" dir="${site.rtl?.includes(lang) ? 'rtl' : 'ltr'}"`)
     .replace('/*__STATE__*/null', state);
   return new Response(request.method === 'HEAD' ? null : html, {
     status: 503,
@@ -187,7 +192,7 @@ export function maintenancePage(request, url, found) {
       'X-Maintenance': found ? 'planned' : 'unplanned',
       'X-Robots-Tag': 'noindex',
       // The page is one file: its own style and script, nothing else.
-      'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+      'Content-Security-Policy': "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
     },
   });
 }

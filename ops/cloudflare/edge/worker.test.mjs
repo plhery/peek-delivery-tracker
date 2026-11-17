@@ -119,7 +119,7 @@ describe('edge guard', () => {
     assert.equal(response.headers.get('cache-control'), 'no-store');
     assert.equal(response.headers.get('content-security-policy'), "script-src 'nonce-abc'");
     const html = await response.text();
-    assert.match(html, /<style nonce="abc">body::before\{content:"You’re reading a saved copy[^"]*";display:block/);
+    assert.match(html, /<style nonce="abc">body::before\{all:initial;display:block;[^}]*;content:"You’re reading a saved copy[^"]*"\}<\/style>/);
     assert.match(html, /<\/style><\/head><body class="x"><h1>/);
     assert.match(html, /<h1>DHL Paket<\/h1>/);
   });

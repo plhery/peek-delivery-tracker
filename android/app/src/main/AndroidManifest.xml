@@ -4,6 +4,9 @@
 
     <!-- The API, sign-in, the carrier catalog and parcel links (platform/OkHttpTransport.kt). -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Whether the phone is online: a request that gets no answer while it is means Peek's server is down for
+         maintenance, said calmly over the parcels kept (PeekApplication.kt). WorkManager declares it too. -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <!-- Haptics at the iPhone's intensities (VibrationEffect compositions, Haptics.kt). -->
     <uses-permission android:name="android.permission.VIBRATE" />
     <!-- The label scanner, asked for as it first opens, as the iPhone's camera is (src/play/.../CameraLabelScanner.kt).

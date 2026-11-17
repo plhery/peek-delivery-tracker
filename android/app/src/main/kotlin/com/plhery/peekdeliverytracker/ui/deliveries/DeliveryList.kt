@@ -104,6 +104,7 @@ import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.LocalPipSight
+import com.plhery.peekdeliverytracker.ui.draw.MaintenanceBanner
 import com.plhery.peekdeliverytracker.ui.draw.NoticeBanner
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
@@ -176,6 +177,8 @@ internal fun DeliveryList(state: DeliveriesState) {
     val errorMessage by source.errorMessage.collectAsState()
     val authenticationRequired by source.authenticationRequired.collectAsState()
     val cached by source.usingCachedData.collectAsState()
+    val serverDown by source.serverDown.collectAsState()
+    val listReadAt by source.listReadAt.collectAsState()
     val colors = PeekTheme.colors
     val edges = LocalColumnEdges.current
     val sideBySide = state.arrangement == DeliveriesArrangement.SideBySide
@@ -202,7 +205,18 @@ internal fun DeliveryList(state: DeliveriesState) {
 
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val notice = errorMessage?.let { ListItem.Notice(it, authenticationRequired, cached) }
-    val entries = listEntries(state, sideBySide, guest, loading, notice, firstLoad, invitation = state.invitationShown && largeText)
+    val localizer = LocalLocalizer.current
+    val maintenance = serverDown?.let { down ->
+        if (state.parcels.isEmpty()) {
+            ListItem.MaintenanceEmpty(
+                localizer.text("maintenance.title"),
+                if (down.planned && down.backAround != null) localizer.maintenanceText(down, readAt = null) else localizer.text("maintenance.description"),
+            )
+        } else {
+            ListItem.Maintenance(localizer.maintenanceText(down, readAt = listReadAt))
+        }
+    }
+    val entries = listEntries(state, sideBySide, guest, loading, notice, maintenance, firstLoad, invitation = state.invitationShown && largeText)
     state.itemKeys = entries.map { it.key }
     state.itemTops = entries.map { with(density) { it.top.toPx() } }
     val keptCard = state.navigator.keptCard
@@ -498,6 +512,14 @@ private sealed interface ListItem {
     @Immutable
     data object Chips : ListItem
 
+    /** The server is down for maintenance: the parcels shown stay, and come back up to date by themselves ([MaintenanceBanner]). */
+    @Immutable
+    data class Maintenance(val text: String) : ListItem
+
+    /** The server is down and nothing is saved to show: when it is back, not an invitation to add a first parcel. */
+    @Immutable
+    data class MaintenanceEmpty(val title: String, val description: String) : ListItem
+
     /** What went wrong as the parcels last loaded ([ListNotice]). */
     @Immutable
     data class Notice(val message: String, val authenticationRequired: Boolean, val cached: Boolean) : ListItem
@@ -548,6 +570,7 @@ private fun listEntries(
     guest: Boolean,
     loading: Boolean,
     notice: ListItem.Notice?,
+    maintenance: ListItem?,
     firstLoad: Boolean,
     invitation: Boolean,
 ): List<ListEntry> {
@@ -567,9 +590,12 @@ private fun listEntries(
     val custom = state.hasCustomView
     if (parcels.isNotEmpty()) first(OVERVIEW_KEY, "overview", ListItem.Overview(layout.active.size, sideBySide, change))
     if (custom) first("chips", "chips", ListItem.Chips)
+    if (maintenance is ListItem.Maintenance) first("maintenance", "maintenance", maintenance)
     notice?.let { first("notice", "notice", it) }
     if (!loading) {
-        if (parcels.isEmpty()) {
+        if (parcels.isEmpty() && maintenance is ListItem.MaintenanceEmpty) {
+            first("maintenanceEmpty", "maintenanceEmpty", maintenance)
+        } else if (parcels.isEmpty()) {
             first("empty", "empty", ListItem.Empty)
         } else if (layout.visible.isEmpty()) {
             first("noResults", "noResults", ListItem.NoResults)
@@ -621,6 +647,13 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         }
         ListItem.AllArrived -> AllArrived(state)
         ListItem.Chips -> FilterChips(state)
+        is ListItem.Maintenance -> MaintenanceBanner(item.text, Modifier.testTag(LIST_MAINTENANCE))
+        is ListItem.MaintenanceEmpty -> ContentUnavailable(
+            "clock",
+            item.title,
+            item.description,
+            Modifier.fillMaxWidth().padding(vertical = 32.dp).testTag(LIST_MAINTENANCE_EMPTY),
+        )
         is ListItem.Notice -> ListNotice(state, item)
         ListItem.NoResults -> NoResults(state)
         is ListItem.Next -> NextCard(state, item)
@@ -1057,6 +1090,8 @@ const val ANNOUNCEMENT = "deliveries.announcement"
 
 /** The store's error over the list ([ListNotice]); iOS gives it no id. */
 const val LIST_NOTICE = "deliveries.notice"
+const val LIST_MAINTENANCE = "deliveries.maintenanceBanner"
+const val LIST_MAINTENANCE_EMPTY = "deliveries.maintenance"
 
 /** iOS's ids for the guest's offer of an account (`DeviceAccountRow`) and its ×; the account button has its own. */
 const val DEVICE_ACCOUNT_ROW = "deliveries.account"

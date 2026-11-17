@@ -341,7 +341,7 @@ internal class StoredSnapshot(val generatedAt: Double, val languageCode: String,
  * `Date(timeIntervalSinceReferenceDate:)` to the microsecond, about the Double's step at today's dates, so that a date
  * written from an Instant reads back as that Instant, as the iPhone's Date, which is the Double, does.
  */
-private fun referenceDate(seconds: Double): Instant {
+internal fun referenceDate(seconds: Double): Instant {
     val micros = Math.round(seconds * 1_000_000)
     return Instant.ofEpochSecond(978_307_200 + Math.floorDiv(micros, 1_000_000L), Math.floorMod(micros, 1_000_000L) * 1_000)
 }

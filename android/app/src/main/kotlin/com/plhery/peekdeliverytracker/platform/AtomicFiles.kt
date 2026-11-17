@@ -13,6 +13,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.nio.file.Files
 import java.nio.file.StandardCopyOption
+import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
@@ -142,13 +143,21 @@ class QueuedDeviceParcelStorage(
 
 /** Each account's list, in `filesDir/ParcelCache/<user ID>.json` with the ID in upper case, as `uuidString` writes it. */
 class ParcelCacheFolder(private val folder: File) : ParcelCacheFiles {
-    private fun file(userId: UUID) = AtomicBytesFile(File(folder, "${userId.toString().uppercase(Locale.ROOT)}.json"))
+    private fun path(userId: UUID) = File(folder, "${userId.toString().uppercase(Locale.ROOT)}.json")
+
+    private fun file(userId: UUID) = AtomicBytesFile(path(userId))
 
     override fun read(userId: UUID): ByteArray? = file(userId).read()
 
     override fun write(userId: UUID, data: ByteArray) = file(userId).write(data)
 
     override fun delete(userId: UUID) = file(userId).delete()
+
+    override fun modifiedAt(userId: UUID): Instant? = path(userId).lastModified().takeIf { it > 0 }?.let(Instant::ofEpochMilli)
+
+    override fun setModifiedAt(userId: UUID, at: Instant) {
+        path(userId).takeIf { it.exists() }?.setLastModified(at.toEpochMilli())
+    }
 
     companion object {
         fun of(context: Context): ParcelCacheFolder = ParcelCacheFolder(File(context.filesDir, "ParcelCache"))

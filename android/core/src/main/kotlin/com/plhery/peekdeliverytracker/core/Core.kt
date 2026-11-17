@@ -350,6 +350,7 @@ class Localizer(
             }
         }
         if (error is DeviceLookupsSpent) return text("peek.dailyLimit")
+        if (error is ServerDown) return maintenanceText(error.notice ?: MaintenanceNotice.Unannounced, readAt = null)
         if (error is AuthenticationError) {
             return when (error) {
                 is AuthenticationError.NotConfigured -> text("native.auth.notConfigured")
@@ -585,6 +586,24 @@ class Localizer(
             else -> shortDate(date, withYear = FoundationDates.dateFields(date, zone).yearOfEra != FoundationDates.dateFields(now, zone).yearOfEra)
         }
         return if (step.calendarDay == null) dayAndTime(day, clockTime(date)) else day
+    }
+
+    /** A moment as a notice gives it: its clock time today, else its day and time ("yesterday, 14:02"). */
+    fun moment(date: Instant, now: Instant = AppClock.now()): String {
+        val zone = ZoneId.systemDefault()
+        val today = date.atZone(zone).toLocalDate() == now.atZone(zone).toLocalDate()
+        return if (today) clockTime(date) else dayAndTime(deliveryDate(date, now), clockTime(date))
+    }
+
+    /**
+     * What the list says while the server is down for maintenance: that Peek is down for a few minutes, or until when an
+     * announced maintenance runs, and how old the parcels below are. Without a time for them, only the first part.
+     */
+    fun maintenanceText(notice: MaintenanceNotice, readAt: Instant?, now: Instant = AppClock.now()): String {
+        val back = if (notice.planned) notice.backAround?.let { moment(it, now) } else null
+        if (readAt == null) return back?.let { text("maintenance.shortPlanned", mapOf("back" to it)) } ?: text("maintenance.short")
+        val time = moment(readAt, now)
+        return back?.let { text("maintenance.listPlanned", mapOf("back" to it, "time" to time)) } ?: text("maintenance.list", mapOf("time" to time))
     }
 
     /**

@@ -274,6 +274,8 @@ class ParcelStore(
     private val undoParcelState = MutableStateFlow<Parcel?>(null)
     private val leftOnDeviceState = MutableStateFlow<LeftOnDevice?>(null)
     private val unlistedDeviceParcelsState = MutableStateFlow(0)
+    private val serverDownState = MutableStateFlow<MaintenanceNotice?>(null)
+    private val listReadAtState = MutableStateFlow<Instant?>(null)
 
     val parcelsFlow: StateFlow<List<Parcel>> = parcelsState.asStateFlow()
     val loadingFlow: StateFlow<Boolean> = loadingState.asStateFlow()
@@ -298,6 +300,18 @@ class ParcelStore(
     val deliveryLiveActivityErrorFlow: StateFlow<String?> = deliveryLiveActivityErrorState.asStateFlow()
     val undoParcelFlow: StateFlow<Parcel?> = undoParcelState.asStateFlow()
     val leftOnDeviceFlow: StateFlow<LeftOnDevice?> = leftOnDeviceState.asStateFlow()
+
+    /**
+     * The server is down for maintenance: the list keeps what it shows under a calm notice instead of an error, and asks
+     * again by itself until the server answers. Nothing signs out or forgets a parcel for it.
+     */
+    val serverDownFlow: StateFlow<MaintenanceNotice?> = serverDownState.asStateFlow()
+
+    /**
+     * When the list shown was last read from the server: kept on the account's saved list, and a guest's parcels' last
+     * answer. Nil when this phone never read it.
+     */
+    val listReadAtFlow: StateFlow<Instant?> = listReadAtState.asStateFlow()
 
     /**
      * Signed out, the parcels of this phone's own kept by their key alone, their saved copy lost and not read again yet
@@ -355,6 +369,18 @@ class ParcelStore(
         get() = usingCachedDataState.value
         private set(value) {
             usingCachedDataState.value = value
+        }
+
+    var serverDown: MaintenanceNotice?
+        get() = serverDownState.value
+        private set(value) {
+            serverDownState.value = value
+        }
+
+    var listReadAt: Instant?
+        get() = listReadAtState.value
+        private set(value) {
+            listReadAtState.value = value
         }
 
     var notificationEnableInProgress: Boolean
@@ -437,6 +463,11 @@ class ParcelStore(
     private var jobMonitoringTask: Job? = null
     private var refreshTask: Job? = null
 
+    /** While the server is down: how many quiet retries ran, the next one, and whether `/maintenance.json` was asked. */
+    private var downRetries = 0
+    private var downRetryTask: Job? = null
+    private var askedEdge = false
+
     /** Optimistic changes in flight; a list loaded meanwhile could undo them on screen. */
     private val pendingMutations = mutableSetOf<UUID>()
 
@@ -496,6 +527,7 @@ class ParcelStore(
         NotificationDevicePolicy.repairAccountChangeOptOut(defaults)
         deliveryWidgetStore.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
         cacheOwnerId = session.user?.id
+        listReadAt = if (session.isGuest) device.lastCheckedAt else null
         notificationInvitationDismissed = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) } ?: false
         identityObservation = session.identityChanges.sink { resetForSessionChange() }
         // The delivery email writes a time and a distance as the app does: those chosen in Settings go to the account.
@@ -510,6 +542,7 @@ class ParcelStore(
         jobMonitoringTask = null
         refreshTask?.cancel()
         refreshTask = null
+        noteUp()
         pendingMutations.clear()
         pendingJobIds.clear()
         seenHere.clear()
@@ -539,6 +572,7 @@ class ParcelStore(
         showingSavedParcels = saved != null
         // Open on content: the saved list, or the demo box, instead of an empty frame.
         parcels = saved ?: if (session.isDemo) demo.list() else if (session.isGuest) device.list() else emptyList()
+        listReadAt = if (saved != null) session.user?.let { cache.readAt(it.id) } else if (session.isGuest) device.lastCheckedAt else null
         undoParcel = null
         leftOnDevice = null
         loading = session.isAuthenticated && parcels.isEmpty()
@@ -737,6 +771,10 @@ class ParcelStore(
                 cache.save(next, ownerId)
                 cacheCurrent = true
             }
+            val readAt = now()
+            ownerId?.let { cache.markRead(it, readAt) }
+            listReadAt = readAt
+            noteUp()
             if (errorMessage != null) errorMessage = null
             if (authenticationRequired) authenticationRequired = false
             if (usingCachedData) usingCachedData = false
@@ -748,12 +786,17 @@ class ParcelStore(
                 return LoadOutcome.Skipped
             }
             val message = localizer.errorMessage(error)
-            if (errorMessage != message) errorMessage = message
-            val expired = error is DeliveryApiError.AuthenticationExpired
-            if (authenticationRequired != expired) authenticationRequired = expired
+            if (error is ServerDown) {
+                noteDown(error)
+            } else {
+                if (errorMessage != message) errorMessage = message
+                val expired = error is DeliveryApiError.AuthenticationExpired
+                if (authenticationRequired != expired) authenticationRequired = expired
+            }
             val cached = if (parcels.isEmpty() && ownerId != null) cache.load(ownerId) else null
             if (cached != null) {
                 parcels = cached
+                listReadAt = ownerId?.let { cache.readAt(it) }
                 usingCachedData = true
             } else if (showingSavedParcels && !usingCachedData) {
                 usingCachedData = true
@@ -1133,6 +1176,8 @@ class ParcelStore(
             }
             if (generation != session.generation) throw CancellationException("The signed-in account changed.")
             parcels = device.list()
+            listReadAt = device.lastCheckedAt
+            if (trouble is ServerDown) noteDown(trouble) else if (trouble == null) noteUp()
             // The caller's own cancellation goes on, once the list is shown as it is.
             val givenUp = trouble is CancellationException && !currentCoroutineContext().isActive
             val result = when {
@@ -1149,7 +1194,10 @@ class ParcelStore(
         val jobIds = try {
             api.queueRefreshAll().also { session.checkGeneration(generation) }
         } catch (error: Exception) {
-            if (generation == session.generation) refreshing = false
+            if (generation == session.generation) {
+                refreshing = false
+                if (error is ServerDown) noteDown(error)
+            }
             throw error
         }
         refreshTask = scope.launch { finishRefresh(jobIds, before, generation) }
@@ -1172,6 +1220,7 @@ class ParcelStore(
             RefreshResult.StillChecking
         } catch (error: Exception) {
             if (error is CancellationException) return
+            if (error is ServerDown && generation == session.generation) noteDown(error)
             RefreshResult.Failed(localizer.errorMessage(error))
         }
         if (!stillCurrent(generation)) return
@@ -1814,8 +1863,17 @@ class ParcelStore(
      */
     private suspend fun loadDeviceParcels() {
         val generation = session.generation
-        tryQuietly { device.refresh() }
+        var trouble: Exception? = null
+        try {
+            device.refresh()
+        } catch (error: Exception) {
+            if (error is CancellationException) currentCoroutineContext().ensureActive()
+            trouble = error
+        }
         if (generation != session.generation || !isGuest) return
+        // A round that read nothing new says nothing of the server; one that failed for it says it is down.
+        if (trouble is ServerDown) noteDown(trouble) else if (trouble == null) noteUp()
+        listReadAt = device.lastCheckedAt
         if (pendingMutations.isEmpty()) {
             val next = device.list()
             if (next != parcels) {
@@ -1827,6 +1885,41 @@ class ParcelStore(
             }
         }
         retryDeviceAlerts()
+    }
+
+    /**
+     * The server is down: no error, and a quiet retry, as soon as it asked for and at least once a minute. The edge is
+     * asked once whether the maintenance was announced, and until when.
+     */
+    private fun noteDown(down: ServerDown) {
+        if (errorMessage != null) errorMessage = null
+        if (authenticationRequired) authenticationRequired = false
+        val notice = down.notice ?: serverDown ?: MaintenanceNotice.Unannounced
+        if (serverDown != notice) serverDown = notice
+        if (down.notice == null && !askedEdge) {
+            askedEdge = true
+            val generation = session.generation
+            scope.launch {
+                val announced = api.maintenance() ?: return@launch
+                if (session.generation == generation && serverDown != null) serverDown = announced
+            }
+        }
+        downRetryTask?.cancel()
+        val wait = Maintenance.retryDelay(downRetries, down.retryAfter)
+        downRetries += 1
+        downRetryTask = scope.launch {
+            delay(wait.seconds)
+            if (appActive) load()
+        }
+    }
+
+    /** The server answered, or the account changed: the notice goes, and with it the retries. */
+    private fun noteUp() {
+        downRetryTask?.cancel()
+        downRetryTask = null
+        downRetries = 0
+        askedEdge = false
+        if (serverDown != null) serverDown = null
     }
 
     /**

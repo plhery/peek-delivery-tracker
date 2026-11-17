@@ -149,6 +149,23 @@ class BrandParityTests {
         }
     }
 
+    /** ContrastTests.swift's: the maintenance banner's ink reads on its soft yellow at 4.5:1 at least, in every appearance. */
+    @Test
+    fun theMaintenanceBannerReadsOnItsYellow() {
+        fun luminance(color: RgbaColor): Double {
+            fun linear(channel: Double) = if (channel <= 0.04045) channel / 12.92 else Math.pow((channel + 0.055) / 1.055, 2.4)
+            return 0.2126 * linear(color.red) + 0.7152 * linear(color.green) + 0.0722 * linear(color.blue)
+        }
+        for (dark in listOf(false, true)) {
+            for (highContrast in listOf(false, true)) {
+                val ink = luminance(Brand.ink.resolve(dark, highContrast))
+                val ground = luminance(Brand.yellowSoft.resolve(dark, highContrast))
+                val ratio = (Math.max(ink, ground) + 0.05) / (Math.min(ink, ground) + 0.05)
+                assertTrue("dark $dark, more contrast $highContrast: $ratio", ratio >= 4.5)
+            }
+        }
+    }
+
     @Test
     fun carriersWithoutAPaletteUseTheSharedMixAmounts() {
         val brand = brand()

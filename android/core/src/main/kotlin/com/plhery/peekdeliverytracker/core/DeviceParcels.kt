@@ -230,7 +230,11 @@ class DeviceParcelClient(
                 if (method == "POST" && (path == "api/public/parcels" || path == "api/public/detect")) {
                     return verification.send(request, configuration.apiBaseUrl, allowPresentation = path == "api/public/parcels", using = transport)
                 }
-                return transport.data(request)
+                return try {
+                    transport.data(request)
+                } catch (error: Exception) {
+                    throw Maintenance.failure(error)
+                }
             }
 
             fun failure(response: HttpResponse): Exception {
@@ -241,7 +245,7 @@ class DeviceParcelClient(
                 }
                 val message = payload?.get("error")
                 if (response.statusCode == 400 && message != null) return DeliveryApiError.Service(message)
-                return DeliveryApiError.ServiceFailed(response.statusCode)
+                return Maintenance.serverDown(response) ?: DeliveryApiError.ServiceFailed(response.statusCode)
             }
 
             // JSONDecoder.deliveryTracker reads each key convertFromSnakeCase, as decodeSwiftKeys does.
@@ -555,6 +559,9 @@ class DeviceParcels(
 
     /** The parcels as the list shows them, under the names this device gave them. */
     fun list(): List<Parcel> = entries.map(::shown)
+
+    /** When the service last answered about one of the parcels: how old what the list shows is at most. */
+    val lastCheckedAt: Instant? get() = entries.maxOfOrNull { it.checkedAt }?.let(::referenceDate)
 
     /** Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon. */
     val isWaiting: Boolean get() = entries.any { waiting(it.parcel) }

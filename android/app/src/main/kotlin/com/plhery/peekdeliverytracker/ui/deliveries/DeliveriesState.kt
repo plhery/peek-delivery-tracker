@@ -1741,20 +1741,25 @@ internal class DeliveriesState(
                 result?.let(::showResult)
                 return@launch
             }
-            when (result) {
-                is ParcelStore.RefreshResult.Failed -> {
+            when {
+                result is ParcelStore.RefreshResult.Failed && source.serverDown.value != null -> {
+                    // The notice above the list already says the server is down: no warning on top of it.
+                    finishPull(succeeded = false, label = text("maintenance.title"))
+                    delay(PULL_RESULT)
+                }
+                result is ParcelStore.RefreshResult.Failed -> {
                     finishPull(succeeded = false, label = text("detail.checkFailed"))
                     delay(PULL_RESULT)
                     show(result.message, warning = true, announce = false)
                 }
-                ParcelStore.RefreshResult.StillChecking -> {
+                result == ParcelStore.RefreshResult.StillChecking -> {
                     // The checks keep running, so the arrow keeps turning under the message.
                     val label = text("app.refreshTimeout")
                     pull.update(label)
                     announce(label)
                     delay(PULL_RESULT)
                 }
-                null -> Unit
+                result == null -> Unit
                 else -> {
                     finishPull(succeeded = true, label = text(result.messageKey))
                     delay(PULL_SUCCESS)
@@ -1778,9 +1783,13 @@ internal class DeliveriesState(
         source.scope.launch { source.checkAllParcels()?.let(::showResult) }
     }
 
-    /** How a check went, under the list. */
+    /** How a check went, under the list: only said aloud while the server is down, as the notice above the list shows it. */
     private fun showResult(result: ParcelStore.RefreshResult) {
-        if (result is ParcelStore.RefreshResult.Failed) show(result.message, warning = true) else show(text(result.messageKey))
+        when {
+            result is ParcelStore.RefreshResult.Failed && source.serverDown.value != null -> announce(text("maintenance.short"))
+            result is ParcelStore.RefreshResult.Failed -> show(result.message, warning = true)
+            else -> show(text(result.messageKey))
+        }
     }
 
     /**

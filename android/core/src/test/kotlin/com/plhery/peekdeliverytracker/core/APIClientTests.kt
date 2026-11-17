@@ -33,6 +33,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
+import org.junit.After
 import org.junit.Assert.fail
 import org.junit.Test
 
@@ -80,7 +81,13 @@ class APIClientTests {
         }
     }
 
+    @After
+    fun backOnline() {
+        Maintenance.deviceOnline = { true }
+    }
+
     private fun describe(error: Throwable): String = when (error) {
+        is ServerDown -> "serverDown(${error.retryAfter})"
         is DeliveryApiError.AuthenticationExpired -> "authenticationExpired"
         is DeliveryApiError.DuplicateTracking -> "duplicateTracking(${error.parcelId.uuidString})"
         is DeliveryApiError.InvalidResponse -> "invalidResponse"
@@ -183,6 +190,7 @@ class APIClientTests {
             jsonResponse(500) to "serviceFailed(500)",
             IOException("offline") to "network",
         )
+        Maintenance.deviceOnline = { false }
         for ((answered, expected) in cases) {
             assertEquals(expected, outcome { client(serving(answered), TestSession()).sendFeedback(parcelId, answer) })
         }
@@ -395,10 +403,20 @@ class APIClientTests {
             jsonResponse(429, """{"error":"private diagnostics","scope":"daily"}""", mapOf("Retry-After" to "3600")) to "allowanceUsed",
             jsonResponse(429, """{"error":"Today’s tracking allowance is used up. Try again tomorrow."}""") to "allowanceUsed",
             jsonResponse(403, """{"error":"Please verify"}""", mapOf("X-Lookup-Verification" to "required")) to "verificationFailed",
-            SocketTimeoutException("timeout") to "network",
-            IOException("offline") to "network",
+            // No answer while the phone is online: the server down, as the proxy's and Cloudflare's own errors are.
+            SocketTimeoutException("timeout") to "serverDown(0.0)",
+            IOException("no answer") to "serverDown(0.0)",
             HttpResponse(400, body = """{"error":"Bad request"}""".toByteArray(Charsets.UTF_16LE)) to "service(Bad request)",
-            jsonResponse(502, "<html>Bad gateway</html>") to "serviceFailed(502)",
+            jsonResponse(502, "<html>Bad gateway</html>") to "serverDown(0.0)",
+            jsonResponse(502, """{"error":"The delivery database is temporarily unavailable"}""") to "serverDown(0.0)",
+            jsonResponse(530, "error code: 1033") to "serverDown(0.0)",
+            jsonResponse(404, "404 page not found\n") to "serverDown(0.0)",
+            jsonResponse(404, """{"error":"Package not found"}""") to "service(Package not found)",
+            jsonResponse(503, """{"error":"Push notifications are not configured"}""") to "service(Push notifications are not configured)",
+            jsonResponse(
+                503, """{"error":"Peek is down for maintenance","maintenance":{"planned":false,"mode":"hard","since":null,"backAround":null}}""",
+                mapOf("Retry-After" to "45"),
+            ) to "serverDown(45.0)",
             jsonResponse(202, """{"ok":true}""") to "ok kotlin.Unit",
             jsonResponse(304, """{"ok":true}""") to "serviceFailed(304)",
         )
@@ -412,6 +430,11 @@ class APIClientTests {
             assertEquals(expected, listOf("token"), session.log)
             val counted = if (answer is HttpResponse && answer.statusCode == 202) "accepted" else if (expected.startsWith("ok")) "success" else "error"
             assertEquals(expected, listOf("parcel-archive $counted"), analytics)
+        }
+        // Offline, it is the phone's own trouble, said as before.
+        Maintenance.deviceOnline = { false }
+        for (failure in listOf(IOException("offline"), SocketTimeoutException("timeout"))) {
+            assertEquals("network", outcome { client(serving(failure), TestSession()).archive(parcelId) })
         }
     }
 
@@ -691,11 +714,12 @@ class APIClientTests {
             jsonResponse(410, """{"error":"Parcel not shared"}""") to "stopped",
             jsonResponse(404, """{"error":"Parcel unavailable"}""") to "ok null",
             // The proxy's own 404 while the server restarts: the server failing, not a link that leads nowhere.
-            jsonResponse(404, "404 page not found\n", mapOf("Content-Type" to "text/plain; charset=utf-8")) to "serviceFailed(404)",
+            jsonResponse(404, "404 page not found\n", mapOf("Content-Type" to "text/plain; charset=utf-8")) to "serverDown(0.0)",
             jsonResponse(429, headers = mapOf("Retry-After" to "12")) to "rateLimited(12.0)",
             // A date already gone.
             jsonResponse(429, headers = mapOf("Retry-After" to "Mon, 21 Sep 2026 14:14:20 GMT")) to "rateLimited(0.0)",
-            jsonResponse(503) to "serviceFailed(503)",
+            jsonResponse(503) to "serverDown(0.0)",
+            jsonResponse(530, "error code: 1033") to "serverDown(0.0)",
             jsonResponse(200, "{}") to "invalidResponse",
         )
         for ((answer, expected) in cases) {

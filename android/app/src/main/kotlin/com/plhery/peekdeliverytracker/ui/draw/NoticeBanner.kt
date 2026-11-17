@@ -16,6 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
@@ -25,6 +27,30 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
+
+/**
+ * `MaintenanceBanner` (DesignSystem.swift): the calm notice shown in place of an error while the server is down for
+ * maintenance, [text] in subheadline in the ink after the clock in semibold subheadline, 10 apart, 16 in and 12 down
+ * from the edges of Peek's soft yellow with corners of 14. What is shown stays, and the app asks again by itself, so
+ * there is nothing to press.
+ */
+@Composable
+fun MaintenanceBanner(text: String, modifier: Modifier = Modifier) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Row(
+        modifier
+            .fillMaxWidth()
+            .background(colors.yellowSoft, ContinuousRoundedShape(Radii.noticeBanner))
+            .padding(horizontal = 16.dp, vertical = 12.dp)
+            .semantics(mergeDescendants = true) {},
+        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        verticalAlignment = Alignment.Top,
+    ) {
+        PeekSymbol("clock", Modifier.clearAndSetSemantics {}, font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.ink)
+        Text(text, Modifier.weight(1f), color = colors.ink, style = type.style(IosTextStyle.Subheadline).sfLines())
+    }
+}
 
 /**
  * `NoticeBanner` (DesignSystem.swift): [symbol] in semibold body in [tint], in a circle of the tint at 12 %, 28 across

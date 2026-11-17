@@ -59,6 +59,7 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.MaintenanceNotice
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -719,6 +720,41 @@ class DeliveryListTest {
         compose.runOnUiThread { source.errorMessage.value = null }
         compose.waitForIdle()
         compose.onNodeWithTag(LIST_NOTICE).assertDoesNotExist()
+    }
+
+    /**
+     * The server down for maintenance (ParcelListView's `MaintenanceBanner`): the cards stay under a calm notice that
+     * says how old they are, with no error and no button; with nothing saved, the list says when Peek is back instead
+     * of inviting a first parcel. Both go once the server answers.
+     */
+    @Test
+    fun whileTheServerIsDownTheListKeepsItsCardsUnderACalmNotice() {
+        show(width = 600.dp, session = reader)
+        compose.onNodeWithTag(LIST_MAINTENANCE).assertDoesNotExist()
+        compose.runOnUiThread {
+            source.serverDown.value = MaintenanceNotice.Unannounced
+            source.listReadAt.value = java.time.Instant.now().minusSeconds(40 * 60)
+        }
+        compose.waitForIdle()
+        val short = localizer.text("maintenance.short")
+        // One node to TalkBack, the clock left out.
+        compose.onNode(hasTestTag(LIST_MAINTENANCE) and hasText(short, substring = true)).assertExists()
+        compose.onNodeWithTag(LIST_NOTICE).assertDoesNotExist()
+        // Over the cards.
+        val next = checkNotNull(deliveries.layout.next)
+        assertTrue(compose.onNodeWithTag(LIST_MAINTENANCE).getBoundsInRoot().bottom < compose.card(next.label).getBoundsInRoot().top)
+
+        compose.runOnUiThread { source.parcels.value = emptyList() }
+        compose.waitForIdle()
+        compose.onNodeWithTag(LIST_MAINTENANCE).assertDoesNotExist()
+        compose.onNodeWithTag(LIST_MAINTENANCE_EMPTY).assertExists()
+        compose.onNode(hasText(localizer.text("maintenance.title")) and hasAnyAncestor(hasTestTag(LIST_MAINTENANCE_EMPTY))).assertExists()
+        compose.onNode(hasText(localizer.text("maintenance.description")) and hasAnyAncestor(hasTestTag(LIST_MAINTENANCE_EMPTY))).assertExists()
+        compose.onNodeWithTag(EMPTY_ADD).assertDoesNotExist()
+
+        compose.runOnUiThread { source.serverDown.value = null }
+        compose.waitForIdle()
+        compose.onNodeWithTag(LIST_MAINTENANCE_EMPTY).assertDoesNotExist()
     }
 
     /** As NoticeBanner's at the accessibility sizes: its circle, grown with the text, stands 8 over the words. */

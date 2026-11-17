@@ -12,6 +12,7 @@ import kotlinx.coroutines.Dispatchers
 /** The offline lists in memory: a relaunched store given the same instance finds what the first one saved. */
 internal class MemoryParcelCacheFiles : ParcelCacheFiles {
     private val files = ConcurrentHashMap<UUID, ByteArray>()
+    private val modified = ConcurrentHashMap<UUID, Instant>()
 
     val saved: Map<UUID, ByteArray>
         get() = HashMap(files)
@@ -20,10 +21,18 @@ internal class MemoryParcelCacheFiles : ParcelCacheFiles {
 
     override fun write(userId: UUID, data: ByteArray) {
         files[userId] = data
+        modified[userId] = Instant.now()
     }
 
     override fun delete(userId: UUID) {
         files.remove(userId)
+        modified.remove(userId)
+    }
+
+    override fun modifiedAt(userId: UUID): Instant? = modified[userId]
+
+    override fun setModifiedAt(userId: UUID, at: Instant) {
+        if (files.containsKey(userId)) modified[userId] = at
     }
 }
 

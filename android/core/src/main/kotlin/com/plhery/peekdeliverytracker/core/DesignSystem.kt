@@ -197,6 +197,9 @@ object Brand {
 
     /** The tray behind a swiped card. */
     val warningSoft = color(light = "#FFDDC7", dark = "#341F14")
+
+    /** Peek's soft yellow, under the ink: the calm notice while the server is down (the web's `--yellow-soft`). */
+    val yellowSoft = color(light = "#FFEBAB", dark = "#413410")
     val background = color(light = "#F4F5F1", dark = "#13110E")
 
     // A sheet stands one step up from the page in dark: a ground of its own under raised rows, with its own controls

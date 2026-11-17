@@ -9,6 +9,7 @@ import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.MaintenanceNotice
 import com.plhery.peekdeliverytracker.core.TurnstilePresenter
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
@@ -97,6 +98,8 @@ class FakeDeliveries(
     override val errorMessage = MutableStateFlow<String?>(null)
     override val authenticationRequired = MutableStateFlow(false)
     override val usingCachedData = MutableStateFlow(false)
+    override val serverDown = MutableStateFlow<MaintenanceNotice?>(null)
+    override val listReadAt = MutableStateFlow<Instant?>(null)
 
     /** How many times the list asked for the parcels again (`store.load(showSpinner: true)`). */
     var reloads = 0

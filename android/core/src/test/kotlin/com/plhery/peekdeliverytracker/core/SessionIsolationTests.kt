@@ -43,6 +43,7 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
+import org.junit.After
 import org.junit.Assert.fail
 import org.junit.Test
 
@@ -69,8 +70,15 @@ class SessionIsolationTests {
         handler = { jsonResponse(status, body) }
     }
 
+    /** The phone offline: a request that gets no answer is the phone's own trouble, not the server down. */
     private fun RecordingTransport.offline() {
+        Maintenance.deviceOnline = { false }
         handler = { throw IOException("The Internet connection appears to be offline.") }
+    }
+
+    @After
+    fun backOnline() {
+        Maintenance.deviceOnline = { true }
     }
 
     private fun sessionJson(user: AuthUser, expired: Boolean = false, accessToken: String = "access"): String {
@@ -552,6 +560,73 @@ class SessionIsolationTests {
     }
 
     /**
+     * A host restart: Cloudflare answers 530 in the server's place. The account's saved list stays, with when it was
+     * last read, under a calm notice instead of an error, the sign-in stays, and the notice goes once the server answers.
+     */
+    @Test
+    fun theServerDownForMaintenanceKeepsTheSavedListAndTheSignInAndSaysSoCalmly() = runTest {
+        val transport = RecordingTransport()
+        val persistence = MemorySessionPersistence()
+        val session = sessionStore(transport, persistence)
+        authorize(session, transport)
+        val store = store(session, transport)
+        val list = packageList(parcel())
+        transport.respond(list)
+        store.load()
+        val ids = store.parcels.map { it.id }
+        assertEquals(now, store.listReadAt)
+
+        // /maintenance.json too: before the edge is in front, nothing says whether the maintenance was announced.
+        transport.respond("error code: 1033", status = 530)
+        val relaunched = store(session, transport)
+        relaunched.load()
+        assertEquals(ids, relaunched.parcels.map { it.id })
+        assertEquals(MaintenanceNotice.Unannounced, relaunched.serverDown)
+        assertNull(relaunched.errorMessage)
+        assertFalse(relaunched.authenticationRequired)
+        assertEquals(now, relaunched.listReadAt)
+        assertNotNull(session.user)
+        assertNotNull(persistence.data)
+        runCurrent()
+        assertEquals(1, transport.requests.count { it.path == "/maintenance.json" })
+
+        // Asked again quietly, after five seconds the first time: once the server answers, the notice goes.
+        transport.respond(list)
+        advanceTimeBy(5_001)
+        runCurrent()
+        assertNull(relaunched.serverDown)
+        assertEquals(ids, relaunched.parcels.map { it.id })
+    }
+
+    /**
+     * The sign-in server down for an announced maintenance, as the edge answers for it: an expired session's refresh
+     * and a refused token's both keep the session, and the list says when Peek should be back, not to sign in again.
+     */
+    @Test
+    fun aSignInServerDownForMaintenanceKeepsTheSessionWithoutAskingToSignInAgain() = runTest {
+        val maintenance = """{"error":"Peek is down for maintenance","maintenance":{"planned":true,"mode":"soft","since":null,"backAround":"2026-11-17T15:00:00Z"}}"""
+        val announced = MaintenanceNotice(planned = true, backAround = DateParser.date("2026-11-17T15:00:00Z"))
+        for (expired in listOf(true, false)) {
+            val transport = RecordingTransport()
+            val persistence = MemorySessionPersistence()
+            val session = sessionStore(transport, persistence)
+            authorize(session, transport, expired = expired)
+            val store = store(session, transport)
+            transport.handler = { request ->
+                // An unexpired token the API refuses is refreshed, from a sign-in server that is down.
+                if (request.path == "/api/packages") jsonResponse(401, """{"error":"Unauthorized"}""")
+                else jsonResponse(503, maintenance, mapOf("Retry-After" to "120"))
+            }
+            store.load()
+            assertEquals("expired: $expired", announced, store.serverDown)
+            assertNull(store.errorMessage)
+            assertFalse(store.authenticationRequired)
+            assertNotNull(session.user)
+            assertNotNull(persistence.data)
+        }
+    }
+
+    /**
      * C-ST29: a sign-in the server refuses even with a fresh token ends the session (`forceSignOut`), and the answer,
      * the old session's, leaves the store as it is: no error and no "sign in again" over the welcome that follows, as
      * the iPhone's `load()` drops an answer once `session.generation` has moved on.
@@ -746,6 +821,7 @@ class SessionIsolationTests {
             SyncJobListResponse(listOf(SyncJobResponse(id = job, status = SyncJobStatus.Succeeded, requestedAt = "2026-09-25T10:00:00Z"))),
         )
         var listOnline = true
+        Maintenance.deviceOnline = { listOnline }
         transport.handler = { request ->
             when (request.method to request.path) {
                 "POST" to "/api/sync" -> jsonResponse(202, queued)
@@ -963,7 +1039,7 @@ class SessionIsolationTests {
         assertEquals(true, store.parcels.firstOrNull()?.allAlertsMuted)
 
         // A refusal leaves the parcel as it was.
-        transport.respond("""{"error":"Alerts unavailable"}""", status = 502)
+        transport.respond("""{"error":"Alerts unavailable"}""", status = 400)
         try {
             store.setEmailMuted(parcel, muted = false)
             fail("Expected the refusal")

@@ -66,6 +66,7 @@ class AuthenticationTests {
         is AuthenticationError.Server -> "server(${error.serverMessage})"
         is AuthenticationError.RequestFailed -> "requestFailed(${error.status})"
         is DecodingError -> "decoding"
+        is ServerDown -> "serverDown"
         else -> error.toString()
     }
 
@@ -459,7 +460,8 @@ class AuthenticationTests {
             Triple(403, "<html>Attention Required</html>", "requestFailed(403)"),
             Triple(403, """{"code":"session_not_found","msg":"Session not found"}""", "missingSession"),
             Triple(500, "", "requestFailed(500)"),
-            Triple(503, """{"message":"Unavailable"}""", "server(Unavailable)"),
+            // The sign-in server down, or the proxy in front of it: the session stays, and is asked again.
+            Triple(503, """{"message":"Unavailable"}""", "serverDown"),
             Triple(422, """{"error_description":"d","message":"m","msg":"g"}""", "server(d)"),
             // The older shape, whose `code` is the HTTP status: `error_code` is the code, and comes before `code`.
             Triple(400, """{"code":400,"msg":"numeric code"}""", "server(numeric code)"),
@@ -478,9 +480,10 @@ class AuthenticationTests {
             Triple(400, """{"code":"refresh_token_not_found","error_code":{"a":1}}""", "missingSession"),
             Triple(400, """{"code":{"x":"invalid_grant"},"error":"user_not_found"}""", "missingSession"),
             Triple(400, """{"error":5,"error_description":"Five"}""", "server(Five)"),
-            Triple(503, """{"error_description":5,"message":["m"],"msg":"g"}""", "server(g)"),
-            Triple(503, """{"error_description":false,"message":null,"msg":0}""", "requestFailed(503)"),
-            Triple(502, "garbage", "requestFailed(502)"),
+            Triple(500, """{"error_description":5,"message":["m"],"msg":"g"}""", "server(g)"),
+            Triple(500, """{"error_description":false,"message":null,"msg":0}""", "requestFailed(500)"),
+            Triple(502, "garbage", "serverDown"),
+            Triple(530, "error code: 1033", "serverDown"),
             Triple(400, """["invalid_grant"]""", "requestFailed(400)"),
             // A bare word anywhere is no JSON, and nothing in the body is read.
             Triple(400, """{"error_code":"invalid_grant","code":nope}""", "requestFailed(400)"),
@@ -518,7 +521,9 @@ class AuthenticationTests {
             Triple(401, """{"code":"invalid_grant"}""", "requestFailed(401)"),
             Triple(500, """{"message":null,"msg":"second"}""", "server(second)"),
             Triple(500, """{"error_description":""}""", "server()"),
-            Triple(404, "[]", "requestFailed(404)"),
+            // Not the service's own answer: the proxy's while the server starts.
+            Triple(404, "[]", "serverDown"),
+            Triple(404, "404 page not found", "serverDown"),
             Triple(300, null, "requestFailed(300)"),
             // An answer without a body of its own may be any JSON, or none.
             Triple(200, "garbage", "decoding"),

@@ -27,6 +27,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DemoRepository
+import com.plhery.peekdeliverytracker.core.MaintenanceNotice
 import com.plhery.peekdeliverytracker.core.ParcelStore
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
@@ -378,6 +379,36 @@ class ListFeedbackTest {
         advance(100)
         toast("Tracking updated").assertExists()
         assertEquals(1, source.refreshes)
+    }
+
+    /** While the server is down, the notice over the list already says so: a failed check shows no warning on top of it. */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun whileTheServerIsDownAFailedCheckShowsNoWarning() {
+        show()
+        compose.runOnUiThread { source.serverDown.value = MaintenanceNotice.Unannounced }
+        source.checkResult = ParcelStore.RefreshResult.Failed("Peek is down for a few minutes of maintenance.")
+        compose.mainClock.autoAdvance = false
+        compose.onNodeWithTag(REFRESH_BUTTON).performClick()
+        advance(100)
+        assertEquals(1, source.refreshes)
+        assertEquals("Peek is down for a few minutes of maintenance.", announced())
+        advance(1500)
+        assertFalse(toastShown())
+    }
+
+    @Test
+    fun whileTheServerIsDownAFailedPullShowsNoWarning() {
+        show()
+        compose.runOnUiThread { source.serverDown.value = MaintenanceNotice.Unannounced }
+        val checked = CompletableDeferred<ParcelStore.RefreshResult?>()
+        source.checking = checked
+        compose.mainClock.autoAdvance = false
+        pull(520f)
+        checked.complete(ParcelStore.RefreshResult.Failed("Peek is down for a few minutes of maintenance."))
+        advanceUntil { announced() == "Back in a few minutes" }
+        advance(1500)
+        assertFalse(toastShown())
     }
 
     /** A pull's check goes on as the window is made again; the window made again, with no pull open, says how it went under the list. */

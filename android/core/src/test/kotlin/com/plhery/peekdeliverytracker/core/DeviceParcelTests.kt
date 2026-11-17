@@ -31,6 +31,7 @@ import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import java.io.IOException
 import java.time.Instant
+import java.time.temporal.ChronoUnit
 import java.util.Locale
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
@@ -1389,9 +1390,9 @@ class DeviceParcelTests {
 
         try {
             device.refresh()
-            fail("Expected the server's failure")
-        } catch (error: DeliveryApiError.ServiceFailed) {
-            assertEquals(404, error.status)
+            fail("Expected the server down")
+        } catch (error: ServerDown) {
+            assertEquals(ServerDown(), error)
         }
         assertEquals(listOf("Running shoes"), device.list().map { it.label })
         assertEquals("A key went for a proxy's 404", mapOf("22222222222A" to key, "22222222222B" to key), storage.keys)
@@ -1399,8 +1400,8 @@ class DeviceParcelTests {
         try {
             DeliveryApiClient.publicParcel("22222222222A", configuration = postcodeConfiguration, transport = transport)
             fail("A link sheet would say the parcel was forgotten")
-        } catch (error: DeliveryApiError.ServiceFailed) {
-            assertEquals(404, error.status)
+        } catch (error: ServerDown) {
+            assertEquals(ServerDown(), error)
         }
 
         answer = jsonResponse(404, """{"error":"Parcel unavailable"}""")
@@ -1409,6 +1410,80 @@ class DeviceParcelTests {
         assertEquals(emptyMap<String, String>(), storage.keys)
         assertEquals(emptyMap<String, String>(), storage.pendingForgets)
         assertNull(DeliveryApiClient.publicParcel("22222222222A", configuration = postcodeConfiguration, transport = transport))
+    }
+
+    /**
+     * A database being upgraded, a host restarting or the edge answering for them: the server down, which keeps every
+     * parcel. The app's own 503 about one part it was never set up for is that part failing.
+     */
+    @Test
+    fun theServerDownForMaintenanceIsToldFromTheAppsOwnTrouble() = runTest {
+        var answer = jsonResponse(200)
+        val transport = RecordingTransport { answer }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val client = DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.UK })
+        val answers = listOf(
+            Triple(502, """{"error":"The delivery database is temporarily unavailable"}""", ServerDown()),
+            Triple(530, "error code: 1033", ServerDown()),
+            Triple(
+                503, """{"error":"Peek is down for maintenance","maintenance":{"planned":true,"mode":"soft","since":null,"backAround":"2026-11-17T15:00:00Z"}}""",
+                ServerDown(notice = MaintenanceNotice(planned = true, backAround = DateParser.date("2026-11-17T15:00:00Z"))),
+            ),
+            Triple(503, """{"error":"Push notifications are not configured"}""", null),
+        )
+        for ((status, body, expected) in answers) {
+            answer = jsonResponse(status, body)
+            try {
+                client.read("22222222222A", key)
+                fail("Expected a failure for $status")
+            } catch (down: ServerDown) {
+                assertEquals("$status $body", expected, down)
+            } catch (failed: DeliveryApiError.ServiceFailed) {
+                assertNull("$status $body", expected)
+                assertEquals(status, failed.status)
+            }
+        }
+    }
+
+    /**
+     * Without an account, the list keeps the device's parcels through the server down and says how old they are; the
+     * next round that reads one takes the notice away.
+     */
+    @Test
+    fun aGuestsListKeepsItsParcelsThroughTheServerDownAndSaysSo() = runTest {
+        // /maintenance.json is the app's own 404 page before the edge is in front.
+        val transport = RecordingTransport { jsonResponse(404, "<!doctype html><title>Not found</title>") }
+        val id = UUID.randomUUID()
+        val checkedAt = Instant.now().minusSeconds(60 * 60).truncatedTo(ChronoUnit.SECONDS)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Running shoes", id, at = date(checkedAt)))
+        var down = true
+        val answered = PublicParcelResponse(link = link("22222222222A"), parcel = pkg(id))
+        val device = device(client(Calls(), read = { if (down) throw ServerDown() else answered }), storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        store.load()
+        assertEquals(listOf("Running shoes"), store.parcels.map { it.label })
+        assertEquals(MaintenanceNotice.Unannounced, store.serverDown)
+        assertNull(store.errorMessage)
+        assertEquals(checkedAt, store.listReadAt)
+        assertEquals(mapOf("22222222222A" to key), storage.keys)
+        runCurrent()
+        assertEquals("/maintenance.json read once", 1, transport.requests.count { it.path == "/maintenance.json" })
+
+        down = false
+        store.load()
+        assertNull(store.serverDown)
+        assertEquals(listOf("Running shoes"), store.parcels.map { it.label })
+        assertTrue(store.listReadAt!! > checkedAt)
     }
 
     @Test

@@ -841,9 +841,9 @@ class ParcelLinkTests {
         notFound = "404 page not found\n"
         try {
             client.setAlert(linkId, null, alert)
-            fail("Expected the server's failure")
-        } catch (error: DeliveryApiError.ServiceFailed) {
-            assertEquals(404, error.status)
+            fail("Expected the server down")
+        } catch (error: ServerDown) {
+            assertEquals(ServerDown(), error)
         }
         status = 429
         try {

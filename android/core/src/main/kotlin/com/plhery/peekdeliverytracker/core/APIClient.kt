@@ -48,10 +48,12 @@ import com.plhery.peekdeliverytracker.core.api.ShareParcelRequest
 import com.plhery.peekdeliverytracker.core.api.SyncJobListResponse
 import com.plhery.peekdeliverytracker.core.api.SyncJobStatus
 import com.plhery.peekdeliverytracker.core.api.UuidSerializer
+import java.io.IOException
 import java.time.Instant
 import java.util.Locale
 import java.util.UUID
 import kotlin.coroutines.cancellation.CancellationException
+import kotlin.math.pow
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope
@@ -72,6 +74,10 @@ import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.booleanOrNull
 
 // APIClient.swift. URLSession is the app's: :core builds every request and reads every answer as the iPhone app does,
 // and the app sends them through an `HttpTransport` it makes of OkHttp.
@@ -223,6 +229,108 @@ sealed class DeliveryApiError(message: String) : Exception(message) {
     class ServiceFailed(val status: Int) : DeliveryApiError("Delivery service failed ($status).")
 }
 
+/** What the edge in front of the server says about a maintenance: announced or not, and the end it gave, if any. */
+data class MaintenanceNotice(val planned: Boolean, val backAround: Instant? = null) {
+    companion object {
+        val Unannounced = MaintenanceNotice(planned = false)
+    }
+}
+
+/**
+ * The server is down for a few minutes of maintenance: the machine restarting, or its database being upgraded. Screens
+ * keep what they show, say so calmly and ask again by themselves; nothing signs out or forgets a parcel for it.
+ * `retryAfter` is what the server asked for before asking again, in seconds, 0 when it said nothing; `notice` what the
+ * edge's own answer announced, which a database's or a proxy's does not.
+ */
+data class ServerDown(val retryAfter: Double = 0.0, val notice: MaintenanceNotice? = null) : Exception("Peek is down for maintenance")
+
+/** Tells the server down for maintenance from the server refusing or failing, as the web app does (docs/ARCHITECTURE.md). */
+object Maintenance {
+    /** Statuses a proxy or Cloudflare answers with for a server that does not answer itself. */
+    val downStatuses = setOf(502, 503, 504, 520, 521, 522, 523, 524, 525, 526, 527, 530)
+
+    /** The app's own 503s about one part it can't use now, which it words itself: not the server down. */
+    private val partUnavailable = Regex("not configured|amazon|carrier|verification", RegexOption.IGNORE_CASE)
+
+    /**
+     * Whether the phone has a network, which the app tells from its connectivity: a request that got no answer while it
+     * has one means the server is down, and one while it has none that the phone is offline, which keeps saying so.
+     */
+    @Volatile
+    var deviceOnline: () -> Boolean = { true }
+
+    /**
+     * Whether an answer means the server is down rather than refusing: a proxy's or Cloudflare's error status (the
+     * database's 502 and the sign-in server's 503 too), or a 404 the app did not write, such as the proxy's "404 page
+     * not found" while the app starts.
+     */
+    fun isServerDown(status: Int, body: ByteArray): Boolean {
+        val message = JsonSerialization.stringsOfObject(body)?.get("error")
+        if (status == 404) return message == null
+        if (status !in downStatuses) return false
+        if (status != 503 || message == null || notice(body) != null) return true
+        return !partUnavailable.containsMatchIn(message)
+    }
+
+    /** The server down, with what it asked for and what the edge announced, or nil for any other answer. */
+    fun serverDown(response: HttpResponse): ServerDown? {
+        if (!isServerDown(response.statusCode, response.body)) return null
+        return ServerDown(DeliveryApiClient.retryAfterSeconds(response.header("Retry-After")), notice(response.body))
+    }
+
+    /** The maintenance an answer's `maintenance` object announces, or nil. */
+    fun notice(body: ByteArray): MaintenanceNotice? = (objectOf(body)?.get("maintenance") as? JsonObject)?.let(::notice)
+
+    private fun notice(value: JsonObject): MaintenanceNotice {
+        val planned = (value["planned"] as? JsonPrimitive)?.takeIf { !it.isString }?.booleanOrNull == true
+        val back = (value["backAround"] as? JsonPrimitive)?.takeIf { planned && it.isString }?.content?.let(DateParser::date)
+        return MaintenanceNotice(planned, back)
+    }
+
+    private fun objectOf(body: ByteArray): JsonObject? = try {
+        Json.parseToJsonElement(body.decodeToString()) as? JsonObject
+    } catch (_: Exception) {
+        null
+    }
+
+    /**
+     * The error to throw for a request that failed on its way: the server down when it got no answer while the phone is
+     * online. Not one that was cancelled, and not a phone that is offline.
+     */
+    suspend fun failure(error: Exception): Exception =
+        if (error is IOException && currentCoroutineContext().isActive && deviceOnline()) ServerDown() else error
+
+    /** How long to wait before asking again, in seconds: what the server asked for and the backoff from 5 s, whichever is longer, at most a minute. */
+    fun retryDelay(attempt: Int, retryAfter: Double = 0.0): Double {
+        val backoff = minOf(60.0, 5.0 * 2.0.pow(attempt.coerceIn(0, 10)))
+        return minOf(60.0, maxOf(backoff, retryAfter))
+    }
+
+    /**
+     * What `/maintenance.json` says, asked only once something failed: nil when it is not there to say (the edge not in
+     * front yet answers the app's own 404 page) or says nothing readable. Never cached, as no request here is.
+     */
+    suspend fun read(configuration: AppConfiguration, transport: HttpTransport): MaintenanceNotice? {
+        val request = HttpRequest(
+            url = configuration.apiBaseUrl.appendingPath("/maintenance.json"),
+            headers = mapOf("Accept" to "application/json"),
+            timeout = 10.0,
+            handlesCookies = false,
+        )
+        val response = try {
+            transport.data(request)
+        } catch (error: CancellationException) {
+            throw error
+        } catch (_: Exception) {
+            return null
+        }
+        if (response.statusCode != 200 && response.statusCode != 503) return null
+        val payload = objectOf(response.body) ?: return null
+        (payload["maintenance"] as? JsonObject)?.let { return notice(it) }
+        return if ((payload["planned"] as? JsonPrimitive)?.takeIf { !it.isString }?.booleanOrNull != null) notice(payload) else null
+    }
+}
+
 /**
  * The account's requests. Used from the main thread, as the iPhone's client is `@MainActor`; a large answer is read
  * off it. `deviceName` is the name the account's device list shows for this one (`UIDevice.current.name`); `region`
@@ -366,6 +474,9 @@ class DeliveryApiClient(
 
     /** Queues a check of every parcel; follow it with `waitForJobs`. */
     suspend fun queueRefreshAll(): List<UUID> = request("/api/sync", QueueResponse.serializer(), "POST").jobIds
+
+    /** What the edge says of the maintenance under way, asked once something failed ([Maintenance.read]). */
+    suspend fun maintenance(): MaintenanceNotice? = Maintenance.read(configuration, transport)
 
     suspend fun refresh(id: UUID) {
         val generation = session.generation
@@ -564,7 +675,11 @@ class DeliveryApiClient(
             if (body != null) headers["Content-Type"] = "application/json"
             if (token != null) headers["Authorization"] = "Bearer $token"
             val request = HttpRequest(url, method, headers, body, timeout = 30.0)
-            val result = if (signs) verification.sendSignedIn(request, configuration.apiBaseUrl, using = transport) else transport.data(request)
+            val result = try {
+                if (signs) verification.sendSignedIn(request, configuration.apiBaseUrl, using = transport) else transport.data(request)
+            } catch (error: Exception) {
+                throw Maintenance.failure(error)
+            }
             session.checkGeneration(generation)
             // An App Attest refusal says nothing about the session, so it never signs the user out.
             if (NativeVerification.needsVerification(result)) throw NativeVerificationFailed()
@@ -587,6 +702,7 @@ class DeliveryApiClient(
             throw DeliveryApiError.AuthenticationExpired()
         }
         if (result.statusCode !in 200 until 300 && result.statusCode != missing) {
+            Maintenance.serverDown(result)?.let { throw it }
             // The plain JSONDecoder, as on the iPhone: the keys exactly as the contract names them.
             val error = try {
                 decodeJson(ErrorResponse.serializer(), result.body)
@@ -673,17 +789,21 @@ class DeliveryApiClient(
                 timeout = 15.0,
                 handlesCookies = false,
             )
-            val response = transport.data(request)
+            val response = try {
+                transport.data(request)
+            } catch (error: Exception) {
+                throw Maintenance.failure(error)
+            }
             return when (response.statusCode) {
                 200 -> try {
                     decodeSwiftKeys(PublicParcelResponse.serializer(), response.body)
                 } catch (_: Exception) {
                     throw DeliveryApiError.InvalidResponse()
                 }
-                404 -> if (response.isServiceNotFound) null else throw DeliveryApiError.ServiceFailed(404)
+                404 -> if (response.isServiceNotFound) null else throw Maintenance.serverDown(response) ?: DeliveryApiError.ServiceFailed(404)
                 410 -> throw ParcelLinkStopped()
                 429 -> throw DeliveryApiError.RateLimited(retryAfterSeconds(response.header("Retry-After")))
-                else -> throw DeliveryApiError.ServiceFailed(response.statusCode)
+                else -> throw Maintenance.serverDown(response) ?: DeliveryApiError.ServiceFailed(response.statusCode)
             }
         }
 

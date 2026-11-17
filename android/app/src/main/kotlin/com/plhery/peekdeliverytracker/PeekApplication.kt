@@ -1,6 +1,8 @@
 package com.plhery.peekdeliverytracker
 
 import android.app.Application
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import androidx.annotation.VisibleForTesting
 import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.text.font.createFontFamilyResolver
@@ -11,6 +13,7 @@ import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.FriendInvitationLink
 import com.plhery.peekdeliverytracker.core.LinkDeliveries
+import com.plhery.peekdeliverytracker.core.Maintenance
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.SharedResources
@@ -104,6 +107,16 @@ open class PeekApplication : Application() {
         // measured off the main thread while a composition was open, that composition couldn't, and the app stopped.
         TextMeasurer(createFontFamilyResolver(this), Density(1f), LayoutDirection.Ltr).measure(" ")
         registerActivityLifecycleCallbacks(foreground)
+        // A request that gets no answer while the phone is online means the server is down for maintenance; offline,
+        // it is the phone's own trouble, said as before.
+        val connectivity = getSystemService(ConnectivityManager::class.java)
+        Maintenance.deviceOnline = {
+            try {
+                connectivity?.getNetworkCapabilities(connectivity.activeNetwork)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+            } catch (_: SecurityException) {
+                true
+            }
+        }
         // Google Play's build starts Firebase, which the manifest no longer does: before a push or a new token reaches it.
         Store.start(this)
         val assets = assets

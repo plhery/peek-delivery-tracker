@@ -117,6 +117,9 @@ class PeekColors(val dark: Boolean, val highContrast: Boolean = false) {
     val raised = resolve(Brand.raised)
     val warning = resolve(Brand.warning)
     val warningSoft = resolve(Brand.warningSoft)
+
+    /** [Brand.yellowSoft]: the calm notice while the server is down for maintenance. */
+    val yellowSoft = resolve(Brand.yellowSoft)
     val background = resolve(Brand.background)
 
     /** A sheet's ground ([Brand.sheet]): the page's in light. */

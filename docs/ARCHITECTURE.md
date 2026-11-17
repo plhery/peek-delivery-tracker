@@ -750,7 +750,8 @@ and nothing typed is sent.
 When the host restarts or Peek's database is upgraded, the server is down for a few minutes,
 and the edge guard answers in its place once it is deployed ([DEPLOYMENT.md](DEPLOYMENT.md)).
 The clients read that as maintenance, not as an error ([`maintenance.ts`](../src/lib/maintenance.ts),
-`Maintenance` in the iPhone and Mac app's [`APIClient.swift`](../ios/PeekDeliveryTracker/APIClient.swift)):
+`Maintenance` in the iPhone and Mac app's [`APIClient.swift`](../ios/PeekDeliveryTracker/APIClient.swift) and in the
+Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekdeliverytracker/core/APIClient.kt)):
 
 - **What counts**: a request that gets no answer while the device is online; a 502, 503,
   504, 520 to 527 or 530; a 404 that isn't the service's JSON, such as the proxy's text
@@ -758,8 +759,8 @@ The clients read that as maintenance, not as an error ([`maintenance.ts`](../src
   Amazon's, a carrier's or the browser check, is that part failing, as is any other status.
 - **What stays**: the deliveries, the device's parcels and an open parcel page keep what
   they last read, under a soft yellow strip that says Peek is down for a few minutes of
-  maintenance and how old what is shown is; the browser and the iPhone and Mac app keep when
-  the list was last read beside their copy. Nothing signs out, forgets a parcel or empties a list: a sign-in whose
+  maintenance and how old what is shown is; the browser and the apps keep when the list was
+  last read beside their copy. Nothing signs out, forgets a parcel or empties a list: a sign-in whose
   refresh gets no answer or a 5xx keeps its session. A list with nothing saved says Peek is
   down rather than that there are no parcels, and an action that fails says so in place of
   its error.

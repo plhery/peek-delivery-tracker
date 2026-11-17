@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import java.time.Instant
 import java.util.UUID
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executor
@@ -32,6 +33,12 @@ interface ParcelCacheFiles {
 
     /** Removes the account's file, if there is one. */
     fun delete(userId: UUID)
+
+    /** When the account's file was last written or marked read, or nil when there is none or it can't tell. */
+    fun modifiedAt(userId: UUID): Instant? = null
+
+    /** Gives the account's file, if there is one, `at` as its time: the list was read from the server then. */
+    fun setModifiedAt(userId: UUID, at: Instant) {}
 }
 
 /**
@@ -79,6 +86,36 @@ internal class ParcelCache(private val files: ParcelCacheFiles, private val queu
 
     fun delete(userId: UUID) {
         queue.execute { remove(userId) }
+    }
+
+    /** Notes that the list was read from the server at `at`, on the saved list's own file: it goes with it. */
+    fun markRead(userId: UUID, at: Instant) {
+        queue.execute {
+            try {
+                files.setModifiedAt(userId, at)
+            } catch (_: Exception) {
+            }
+        }
+    }
+
+    /** When the saved list was last read from the server, or nil without one. Waits for pending writes. */
+    fun readAt(userId: UUID): Instant? {
+        val task = FutureTask {
+            try {
+                files.modifiedAt(userId)
+            } catch (_: Exception) {
+                null
+            }
+        }
+        queue.execute(task)
+        return try {
+            task.get()
+        } catch (_: ExecutionException) {
+            null
+        } catch (_: InterruptedException) {
+            Thread.currentThread().interrupt()
+            null
+        }
     }
 
     private fun remove(userId: UUID) {

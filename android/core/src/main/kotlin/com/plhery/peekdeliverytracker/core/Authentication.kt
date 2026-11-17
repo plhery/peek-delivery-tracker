@@ -720,8 +720,14 @@ class SessionStore(
         if (bearer != null) headers["Authorization"] = "Bearer $bearer"
         // JSONSerialization's bytes, the members in the order given where Swift's follow its dictionary's hash order.
         val request = HttpRequest(url, method, headers, JsonEncoder().encode(JsonObject.serializer(), jsonObject), timeout = 30.0)
-        val http = transport.data(request)
+        // A sign-in server that is down, or gives no answer, says nothing of the session: it stays, and is asked again.
+        val http = try {
+            transport.data(request)
+        } catch (error: Exception) {
+            throw Maintenance.failure(error)
+        }
         if (http.statusCode !in 200 until 300) {
+            Maintenance.serverDown(http)?.let { throw it }
             val payload = try {
                 decodeSwiftKeys(AuthErrorPayload.Reader, http.body)
             } catch (_: Exception) {

@@ -23,6 +23,7 @@ import com.plhery.peekdeliverytracker.core.FriendsClient
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.ImportChargesPreview
+import com.plhery.peekdeliverytracker.core.MaintenanceNotice
 import com.plhery.peekdeliverytracker.core.NativeRoute
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.OnTheWayRecord
@@ -46,6 +47,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import java.io.File
+import java.time.Instant
 import java.util.UUID
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -92,6 +94,12 @@ interface DeliveriesSource {
 
     /** `store.usingCachedData`: the parcels shown are those this phone kept from the account's last load. */
     val usingCachedData: StateFlow<Boolean>
+
+    /** `store.serverDown`: the server is down for maintenance, as the edge announced it; the store asks again by itself. */
+    val serverDown: StateFlow<MaintenanceNotice?>
+
+    /** `store.listReadAt`: when the parcels shown were last read from the server, for the maintenance notice. */
+    val listReadAt: StateFlow<Instant?>
 
     /**
      * `store.load(showSpinner: true)`: the account's parcels (or this phone's, for a guest) asked for again, the first
@@ -446,6 +454,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val errorMessage get() = container.parcels.errorMessageFlow
     override val authenticationRequired get() = container.parcels.authenticationRequiredFlow
     override val usingCachedData get() = container.parcels.usingCachedDataFlow
+    override val serverDown get() = container.parcels.serverDownFlow
+    override val listReadAt get() = container.parcels.listReadAtFlow
 
     override suspend fun reload() = container.parcels.load(showSpinner = true)
 

@@ -9,6 +9,7 @@ import type { AssistantClient } from './assistants/clients';
 import type { SyncQueue } from './metrics';
 import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
+import { withReviewDemo } from './reviewDemo';
 import { keptStage } from './stageNotices';
 import type { SyncReason } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
@@ -1632,13 +1633,14 @@ export class SupabaseServiceClient extends SupabaseClient {
    */
   async getOwnedPackage(packageId: string, userId: string): Promise<JsonObject | null> {
     const params = query({ select: PACKAGE_SELECT, id: `eq.${packageId}`, user_id: `eq.${userId}`, limit: '1' });
-    return rows(await this.request(`/rest/v1/packages?${params}`))[0] ?? null;
+    const parcel = rows(await this.request(`/rest/v1/packages?${params}`))[0];
+    return parcel ? withReviewDemo(parcel, userId) : null;
   }
 
   /** An account's parcels as its apps read them, archived ones included. */
   async listAccountPackages(userId: string): Promise<JsonObject[]> {
     const params = query({ select: PACKAGE_SELECT, user_id: `eq.${userId}`, order: 'created_at.desc' });
-    return rows(await this.request(`/rest/v1/packages?${params}`));
+    return rows(await this.request(`/rest/v1/packages?${params}`)).map((parcel) => withReviewDemo(parcel, userId));
   }
 
   /**
@@ -2794,6 +2796,23 @@ export class SupabaseServiceClient extends SupabaseClient {
 }
 
 export class SupabaseUserClient extends SupabaseClient {
+  /** The account the token signs in, when the server read it: a review demo parcel reads as its scenario (reviewDemo.ts). */
+  ownerId: string | null = null;
+
+  override async listPackages(includeArchived = false): Promise<JsonObject[]> {
+    return (await super.listPackages(includeArchived)).map((parcel) => withReviewDemo(parcel, this.ownerId));
+  }
+
+  override async getPackage(packageId: string): Promise<JsonObject | null> {
+    const parcel = await super.getPackage(packageId);
+    return parcel ? withReviewDemo(parcel, this.ownerId) : null;
+  }
+
+  override async getPackageByTrackingNumber(trackingNumber: string): Promise<JsonObject | null> {
+    const parcel = await super.getPackageByTrackingNumber(trackingNumber);
+    return parcel ? withReviewDemo(parcel, this.ownerId) : null;
+  }
+
   /**
    * Keeps the parcel behind a link in this account. Null when the link is
    * unknown or the caller has no right to it; the database does not say which.

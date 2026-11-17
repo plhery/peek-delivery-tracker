@@ -126,8 +126,11 @@ export class SupabaseAuthenticator {
     return user;
   }
 
-  userClient(token: string): SupabaseUserClient {
-    return new SupabaseUserClient(this.url, this.publishableKey, token);
+  /** A client that reads and writes as the token's account; `ownerId` is that account's id, when known. */
+  userClient(token: string, ownerId: string | null = null): SupabaseUserClient {
+    const client = new SupabaseUserClient(this.url, this.publishableKey, token);
+    client.ownerId = ownerId;
+    return client;
   }
 }
 

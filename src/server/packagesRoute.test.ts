@@ -3,7 +3,7 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 import { GET, POST } from '../../app/api/packages/route';
 import { SupabaseAuthenticator } from './auth';
 import * as observability from './observability';
-import { SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
+import { SupabaseClient, SupabaseError, SupabaseServiceClient, SupabaseUserClient } from './supabase';
 
 // Synthetic identifiers only.
 const userId = '55000000-0000-4000-a000-000000000001';
@@ -92,4 +92,30 @@ it('answers 409 with the parcel when a second add of it races the first', async 
   expect(first.status).toBe(201);
   expect(second.status).toBe(409);
   expect(await second.json()).toEqual({ error: 'This tracking number is already in your delivery box', packageId: parcel.id });
+});
+
+it('adds and lists a review demo number in a listed account, with no allowance, check or carrier asked', async () => {
+  vi.stubEnv('REVIEW_DEMO_ACCOUNTS', userId);
+  const demo = { ...parcel, tracking_number: 'TESTOUT01', carrier: 'swiss-post', label: 'IKEA', carrier_data: {}, tracking_events: [] };
+  const allowance = vi.spyOn(SupabaseServiceClient.prototype, 'claimAccountTracking');
+  const create = vi.spyOn(SupabaseServiceClient.prototype, 'createAccountPackage').mockResolvedValue(parcel.id);
+  const queue = vi.spyOn(SupabaseServiceClient.prototype, 'enqueueSyncJob');
+  vi.spyOn(SupabaseClient.prototype, 'getPackage').mockResolvedValue(demo);
+  vi.spyOn(SupabaseClient.prototype, 'listPackages').mockResolvedValue([demo]);
+  vi.spyOn(SupabaseUserClient.prototype, 'recordOpened').mockResolvedValue(undefined);
+  const added = await POST(new NextRequest('https://delivery.example/api/packages', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer add-test' },
+    body: JSON.stringify({ trackingNumber: 'TEST-OUT-01', label: 'IKEA', carrier: 'unknown' }),
+  }), { params: Promise.resolve({}) });
+  expect(added.status).toBe(201);
+  const body = await added.json();
+  expect(body.jobIds).toEqual([]);
+  expect(body.package.tracking_events.at(-1)).toMatchObject({ stage: 'out_for_delivery', description: 'Out for delivery' });
+  expect(create).toHaveBeenCalledExactlyOnceWith(userId, 'TESTOUT01', 'IKEA', 'swiss-post', null, null);
+  expect(allowance).not.toHaveBeenCalled();
+  expect(queue).not.toHaveBeenCalled();
+  const [listed] = (await (await list()).json()).packages;
+  expect(listed).toMatchObject({ label: 'IKEA', sync_status: 'ok', last_status_text: 'Out for delivery' });
+  expect(listed.tracking_events).toHaveLength(5);
 });

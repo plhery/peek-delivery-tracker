@@ -6,6 +6,7 @@ import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
 import { HttpError } from './api';
 import { wakeSyncWorker } from './background';
+import { reviewDemoCarrier, reviewDemoNumbersInText } from './reviewDemo';
 import { settleTypedSupportCases } from './reviewQueues';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
 import { newPackageValues } from './validation';
@@ -105,7 +106,9 @@ export async function addNumbersToAccount(
   const additions: ParcelAddition[] = [];
   let stopped: ParcelAddition | null = null;
   for (const { normalized, match } of numbers) {
-    const carrier = match.carrier;
+    // A review demo number is filed under its scenario's carrier, costs no allowance and is never checked (reviewDemo.ts).
+    const demo = reviewDemoCarrier(userId, normalized);
+    const carrier = demo ?? match.carrier;
     if (known.has(normalized)) {
       additions.push({ trackingNumber: normalized, carrier, outcome: 'known', packageId: known.get(normalized) ?? null });
       continue;
@@ -117,7 +120,7 @@ export async function addNumbersToAccount(
     }
     let values;
     try {
-      values = newPackageValues({ trackingNumber: match.trackingNumber, label, carrier, trackingUrl: match.trackingUrl ?? '' });
+      values = newPackageValues({ trackingNumber: match.trackingNumber, label, carrier, trackingUrl: demo ? '' : match.trackingUrl ?? '' });
     } catch (error) {
       if (!(error instanceof HttpError)) throw error;
       additions.push({ trackingNumber: normalized, carrier, outcome: 'refused', reason: error.message });
@@ -125,7 +128,7 @@ export async function addNumbersToAccount(
     }
     const trackingNumber = values.trackingNumber;
     try {
-      await claimAccountTracking(service, userId, 'lookup');
+      if (!demo) await claimAccountTracking(service, userId, 'lookup');
     } catch (error) {
       if (!(error instanceof HttpError) || error.status !== 429) throw error;
       stopped = { trackingNumber, carrier: values.carrier, outcome: 'limited', retryAfter: retryAfter(error) };
@@ -133,7 +136,7 @@ export async function addNumbersToAccount(
       continue;
     }
     try {
-      await verifyAmazonShippingAddition(values.carrier, trackingNumber);
+      if (!demo) await verifyAmazonShippingAddition(values.carrier, trackingNumber);
     } catch (error) {
       if (!(error instanceof HttpError)) throw error;
       additions.push(error.status === 400
@@ -157,6 +160,10 @@ export async function addNumbersToAccount(
       throw error;
     }
     known.set(normalized, packageId);
+    if (demo) {
+      additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId: null });
+      continue;
+    }
     await settleTypedSupportCases(service, trackingNumber);
     const jobId = await queueFirstCheck(service, userId, packageId);
     additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId });
@@ -166,7 +173,8 @@ export async function addNumbersToAccount(
 
 /**
  * Reads a text's tracking numbers and adds them to the account (addNumbersToAccount), named `label`. `carriers`
- * are those the text's writer is, for a carrier's own email (trackingNumbersInText).
+ * are those the text's writer is, for a carrier's own email (trackingNumbersInText). In a review demo account the
+ * text's demo numbers come first (reviewDemo.ts).
  */
 export async function addParcelsFromText(
   service: SupabaseServiceClient,
@@ -176,6 +184,9 @@ export async function addParcelsFromText(
   carriers: readonly CarrierId[] = [],
   options: AddingOptions = {},
 ): Promise<ParcelAddition[]> {
-  const numbers = trackingNumbersInText(text, carriers);
+  const demos = reviewDemoNumbersInText(userId, text.slice(0, MOST_TEXT_LENGTH));
+  const named = new Set(demos.map(({ normalized }) => normalized));
+  const numbers = [...demos, ...trackingNumbersInText(text, carriers).filter(({ normalized }) => !named.has(normalized))]
+    .slice(0, MOST_NUMBERS_PER_TEXT);
   return numbers.length ? addNumbersToAccount(service, userId, numbers, label, options) : [];
 }

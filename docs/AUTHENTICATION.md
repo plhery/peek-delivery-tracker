@@ -283,6 +283,14 @@ checks. A password sign-in counts as a recent sign-in.
 Without `REVIEW_ACCOUNT_EMAIL`, the page asks no one for a password, but Auth still takes
 the account's password until it changes or the account is deleted.
 
+`REVIEW_DEMO_ACCOUNTS` lists accounts by id, the review account among them, that may hold
+demo parcels: a number shaped `TEST`, a scenario and two to six digits, such as `TESTOUT01`.
+Each scenario ([reviewDemo.ts](../src/server/reviewDemo.ts)) has a carrier and scans timed
+back from the current hour, so a parcel due today stays due today. Peek never checks one;
+adding one charges no allowance and asks no carrier, and the apps and assistants read its
+scans as any other. In any other account the same number is any unknown number. Delete the
+demo parcels before taking an account off the list.
+
 ## Checklist
 
 1. Request a code for a non-team address; the branded email arrives once.

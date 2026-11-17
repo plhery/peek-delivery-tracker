@@ -17,6 +17,7 @@ import { retainDetectionSupport } from './trackingSupport';
 import type { JsonObject } from './types';
 import { PLACEHOLDER_MESSAGE } from './validation';
 import { getRecognitionPriorities } from './recognitionRanking';
+import { reviewDemoCarrier } from './reviewDemo';
 import { suggestedPostcodeCarrier } from './trackingRouting';
 
 /** The Add sheet waits this long for each batch of carriers it asks; the first sync asks again after saving. */
@@ -141,6 +142,9 @@ export async function detectCarrier(
   // A mobile number as dialled in the reader's country is refused as a placeholder is when added: no carrier, and no
   // universal provider either, is asked about it.
   if (isPhoneNumber(trackingNumber, countryHint)) throw new HttpError(400, PLACEHOLDER_MESSAGE);
+  // A review demo number is its scenario's carrier's, and nobody is asked about it (reviewDemo.ts).
+  const demo = reviewDemoCarrier(userId, trackingNumber);
+  if (demo) return { trackingNumber, carrier: demo };
   if (isAmazonTrackingNumber(trackingNumber)) {
     // Every carrier's lookup refuses a placeholder, but Amazon's eligibility check asks its tracker directly.
     if (isPlaceholderNumber(trackingNumber)) throw new HttpError(400, PLACEHOLDER_MESSAGE);

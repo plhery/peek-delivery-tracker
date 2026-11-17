@@ -393,7 +393,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
             'Retry-After': String(retryAfter),
           });
         }
-        userClient = auth.userClient(token);
+        userClient = auth.userClient(token, user.id);
       }
 
       let service: SupabaseServiceClient | null = null;

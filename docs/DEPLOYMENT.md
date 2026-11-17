@@ -305,7 +305,8 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   verify the domain; `/.well-known/openai-apps-challenge` serves it as text, and answers
   404 without it. `REVIEW_ACCOUNT_EMAIL` names the one account that may sign in with a
   password on the sign-in page `/oauth/authorize` shows, for a directory's reviewers;
-  `npm run review-password -- <email>` sets that password
+  `npm run review-password -- <email>` sets that password, and `REVIEW_DEMO_ACCOUNTS` lists
+  by id the accounts whose `TEST…` numbers are demo parcels
   ([AUTHENTICATION.md](AUTHENTICATION.md)).
 - **Cloudflare**: assistants call `/mcp`, `/oauth/token`, `/oauth/register`,
   `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, OpenAI fetches

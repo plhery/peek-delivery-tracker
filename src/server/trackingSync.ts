@@ -74,6 +74,7 @@ import { trackingSupportEvidence } from './trackingSupport';
 import { noteTypoCandidate } from './typoCandidate';
 import { confirmationLookup } from './trackingHealth';
 import { carrierMapAgrees, deployedVersion, statusMapClosings, universalMapAgrees } from './reviewQueues';
+import { isReviewDemoParcel } from './reviewDemo';
 import { carrierLookupKey, recognitionKey, SharedLookups, universalLookupKey, type ParcelLookups } from './sharedLookups';
 import { carrierLookupInput } from './postcodeCountry';
 import { accountPostcodeWrite, ACCOUNT_POSTCODE, wantsAccountPostcode } from './accountPostcode';
@@ -467,6 +468,8 @@ function handedTo(parcel: JsonObject): string | null {
  * nothing holds it back, infinity when it is never checked.
  */
 export function trackingSyncDueAt(parcel: JsonObject): number {
+  // A review demo parcel's scans are written in Peek: no carrier or provider is ever asked (reviewDemo.ts).
+  if (isReviewDemoParcel(parcel)) return Infinity;
   if (parcel.sync_status === 'unsupported' && parcel.carrier === 'amazon-shipping' && parcel.sync_error === AMAZON_HISTORY_EXPIRED) return Infinity;
   if (parcel.sync_status === 'unsupported' && requiresAmazonAccount(String(parcel.carrier), String(parcel.tracking_number ?? ''))) return Infinity;
   const deferred = Date.parse(String(routingState(parcel).next_check_at ?? ''));

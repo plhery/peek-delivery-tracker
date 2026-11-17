@@ -15,6 +15,7 @@ import { SupabaseError } from '../../../src/server/supabase';
 import { lookupCountry, rememberLookupCountry } from '../../../src/server/lookupCountry';
 import { checkAccountRequest } from '../../../src/server/nativeVerification';
 import { queueFirstCheck } from '../../../src/server/parcelsFromText';
+import { reviewDemoCarrier } from '../../../src/server/reviewDemo';
 import { settleTypedSupportCases } from '../../../src/server/reviewQueues';
 import { newPackageValues } from '../../../src/server/validation';
 
@@ -44,8 +45,12 @@ export const POST = apiRoute(async (context) => {
   const { raw, value: body } = await readJsonBody(context.request);
   const values = newPackageValues(body, lookupCountry(context.request, body.lookupCountryHint));
   await checkAccountRequest(context.request, requireService(context), raw, 'account_lookup');
-  await claimAccountTracking(requireService(context), requireUser(context).id, 'lookup');
-  await verifyAmazonShippingAddition(values.carrier, values.trackingNumber);
+  // A review demo number is filed under its scenario's carrier, costs no allowance and is never checked (reviewDemo.ts).
+  const demo = reviewDemoCarrier(requireUser(context).id, values.trackingNumber);
+  if (!demo) {
+    await claimAccountTracking(requireService(context), requireUser(context).id, 'lookup');
+    await verifyAmazonShippingAddition(values.carrier, values.trackingNumber);
+  }
   const client = requireUserClient(context);
   const service = requireService(context);
   let packageId;
@@ -54,9 +59,9 @@ export const POST = apiRoute(async (context) => {
       requireUser(context).id,
       values.trackingNumber,
       values.label,
-      values.carrier,
-      values.trackingUrl,
-      values.dpdPostcode,
+      demo ?? values.carrier,
+      demo ? null : values.trackingUrl,
+      demo ? null : values.dpdPostcode,
     );
   } catch (error) {
     if (error instanceof SupabaseError && error.code === 'P0001') {
@@ -74,10 +79,11 @@ export const POST = apiRoute(async (context) => {
     throw error;
   }
   // Kept beside the parcel rather than in create_account_package, which every carrier list redefines.
-  if (values.phoneDigits) await service.updatePackage(packageId, { phone_digits: values.phoneDigits });
+  if (values.phoneDigits && !demo) await service.updatePackage(packageId, { phone_digits: values.phoneDigits });
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new SupabaseError('The new package could not be reloaded');
 
+  if (demo) return json({ package: withEventPlaces(parcel), jobIds: [] }, 201);
   await rememberLookupCountry(service, parcel, context.request, body.lookupCountryHint, values.dpdPostcodeCountry);
   await settleTypedSupportCases(service, values.trackingNumber);
   const jobId = await queueFirstCheck(service, requireUser(context).id, String(parcel.id));

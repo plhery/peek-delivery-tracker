@@ -470,11 +470,18 @@ fi
 
 # A repeat of a closed case is listed as a case of its own; one of an open case counts under it.
 psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_support_repeats.sql"
-support=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql" \
-  | awk '/^== Support cases/ { section = 1; next } /^== / { section = 0 } section' | awk '/^unknown\|/' | cut -d '|' -f 5-6)
+review=$(psql "$database_url" -X -A -F '|' -v hours=24 -v until=2026-01-01T09:00Z -f "$repo_root/ops/review/signals.sql")
 psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from public.tracking_support_cases where tracking_number like 'REVIEW%'"
-if [[ "$support" != "2|1" ]]; then
-  echo "support cases: cases|repeats = '$support'" >&2
+support=$(awk '/^== Support cases/ { section = 1; next } /^== / { section = 0 } section' <<< "$review")
+if [[ "$(awk '/^unknown\|/' <<< "$support" | cut -d '|' -f 5-6)" != "2|1" ]]; then
+  echo "support cases: cases|repeats = '$(awk '/^unknown\|/' <<< "$support" | cut -d '|' -f 5-6)'" >&2
+  exit 1
+fi
+# A case whose filed carrier tracked the number is listed apart: nothing waits on it.
+learn=$(awk '/^== Shapes detection could learn/ { section = 1; next } /^== / { section = 0 } section' <<< "$review" \
+  | awk '/^paack\|/' | cut -d '|' -f 3-5)
+if grep -q '^paack|' <<< "$support" || [[ "$learn" != "recognition_unknown|carriers|1" ]]; then
+  echo "a case its carrier tracked: support cases '$(grep '^paack|' <<< "$support")', shapes to learn '$learn'" >&2
   exit 1
 fi
 

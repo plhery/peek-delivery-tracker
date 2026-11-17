@@ -352,10 +352,27 @@ from public.tracking_support_cases c
 -- no work: the next release's replay marks it fixed (reviewQueues.ts).
 where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
   and cardinality(reasons) > 0
+  -- One whose filed carrier tracked the number is in the next list.
+  and direct_verified_carrier is distinct from configured_carrier
   -- A repeat counts under its first case while that is open, and stands on its own once it is closed.
   and (duplicate_of is null or not exists (
     select from public.tracking_support_cases as t where t.id = c.duplicate_of and t.fix_status = 'open'))
 group by 1, 2, 3, 4
+order by cases desc, carrier;
+
+\echo '== Shapes detection could learn: support cases as above whose filed carrier, the one the reader chose or the check'
+\echo '   moved the parcel to, tracked the number with dated scans of its own. The parcel is tracked, so nothing waits on'
+\echo '   these; the next release''s replay closes the ones whose shape that carrier''s rules already fit'
+select configured_carrier as carrier, detection_carrier as detected, array_to_string(reasons, ',') as reasons,
+       'carriers' as lane, count(*) as cases,
+       sum((select count(*) from public.tracking_support_cases r where r.duplicate_of = c.id and r.fix_status = 'open')) as repeats,
+       array_to_string((array_agg(distinct private.tracking_number_pattern(tracking_number)))[1:3], '; ') as patterns
+from public.tracking_support_cases c
+where coalesce(held_until, first_seen) >= :since and coalesce(held_until, first_seen) < :upto and fix_status = 'open'
+  and cardinality(reasons) > 0 and direct_verified_carrier = configured_carrier
+  and (duplicate_of is null or not exists (
+    select from public.tracking_support_cases as t where t.id = c.duplicate_of and t.fix_status = 'open'))
+group by 1, 2, 3
 order by cases desc, carrier;
 
 \echo '== Health incidents: notified in the window, or open and failing in it'

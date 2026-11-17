@@ -3,7 +3,7 @@ title: Poste Italiane tracking: numbers, statuses and pickup
 description: Track a Poste Italiane parcel: where the code is, what the Italian statuses mean, missed deliveries, Punto Poste lockers, claims and how to call from abroad.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 Poste Italiane is the Italian post, based in Rome, and it delivers parcels from Italian shops and from abroad. Track one with "Cerca Spedizioni" on poste.it, in the Poste Italiane app or by pasting the code in the box above. The code is on the sender's receipt; for an online order, the shop gives it to you.
@@ -59,7 +59,7 @@ The notice or SMS gives the last day; Poste's pages give between 3 working days 
 
 **Changing a delivery.** If the sender activated Scegli Tu, its link lets you, once per parcel, pick another day, another address in Italy, a pickup point, a neighbour, a safe place or a holiday hold.
 
-**From outside the EU**, import charges are paid on delivery or at a post office, or beforehand online for a lower fee. Poste's clearance fee for a commercial item is €3.00 up to €22, €7.00 up to €150 and €21.00 above (online: €1.00 up to €150, €18.00 above), and since 1 July 2026, says the European Commission, a temporary flat duty of €3 per item applies to parcels worth up to €150; since 1 November 2026, online orders also carry the EU's €2 handling fee per item, whatever their value. Poste Italiane warns that, after problems with an update to Italy's national customs IT systems, customs clearance of shipments from outside the EU has been heavily slowed and it has had to suspend clearance temporarily; for now, it says, it isn't possible to estimate when clearance will resume. See [parcels held at customs](guide:customs).
+**From outside the EU**, import charges are paid on delivery or at a post office, or beforehand online for a lower fee. Poste's clearance fee for a commercial item is €3.00 up to €22, €7.00 up to €150 and €21.00 above (online: €1.00 up to €150, €18.00 above), and since 1 July 2026, says the European Commission, a temporary flat duty of €3 per kind of product applies to parcels worth up to €150; since 1 November 2026, online orders also carry the EU's €2 handling fee per kind of product, whatever their value. Poste Italiane warns that technical problems are affecting customs clearance of shipments from outside the EU and slowing it down significantly; for now, it says, it can't estimate when the delays will be cleared. See [parcels held at customs](guide:customs).
 
 ## Poste Italiane lost, late or damaged parcel
 
@@ -84,7 +84,7 @@ Poste's channels, as listed on poste.it on 11 October 2026:
 
 [Peek](/) names Poste Italiane at once for `RA`, `1UW`, `3UW`, `2IMA`, `2IVC` and `5P` codes, and for Poste Delivery codes starting `EF`, `EG`, `GF`, `JG` or `LF`. A digits-only `5P` code that also fits La Poste is asked of both, Poste Italiane first for readers in Italy; SDA-style codes are asked of Poste Italiane alone. Other codes, such as 12 digits, fit several carriers: Peek checks with those that use the shape, Poste Italiane included, and "Change" lets you pick the carrier yourself. A poste.it link ending in `#/risultati-spedizioni/` and the code works too. Peek asks Poste Italiane itself about international postal numbers ending in `IT` as well, and names it at once for those starting with `C`, `E`, `L` or `R`.
 
-Peek checks hourly, out for delivery too, and an hour after a failed check; it can notify you when it moves. It shows the status, the newest 20 scans with their post office or town on a map, and the expected delivery day, in Poste's Italian wording with exact times. It drops the sender, recipient, address, signature, weight, size and pickup office. An unknown code and one too old to track both show as not found, and Peek doesn't follow parcels to another carrier.
+Peek checks hourly, out for delivery too, and an hour after a failed check; it can notify you when it moves. It shows the status, the newest 20 scans with their post office or town on a map, and the expected delivery day, in Poste's Italian wording with exact times. It doesn't show the sender, weight, size or pickup office. An unknown code and one too old to track both show as not found. When Poste's scans show a valid postal number ending in `IT` (such as `RR…IT`, `CW…IT` or `ZC…IT`) going abroad, Peek also checks it with the carrier delivering it there, such as Royal Mail, USPS or DHL, and switches to that carrier when it has newer scans.
 
 ## Questions about Poste Italiane tracking
 
@@ -111,7 +111,7 @@ Yes: Punto Poste lockers, chosen at the shop's checkout and opened with the PIN 
 - [Poste Italiane: FAQ Scegli Tu](https://www.poste.it/assistenza/faq-scegli-tu) – delivery options
 - [Poste Italiane: FAQ Rete Punto Poste](https://www.poste.it/assistenza/faq-rete-punto-poste) – choosing a point
 - [Poste Italiane: Ricevere dall'estero (Italian)](https://www.poste.it/ricevere-spedizioni-da-estero) – import charges, Union handling fee, clearance fees, online payment
-- [Poste Italiane: Aggiornamenti operativi posta e pacchi (Italian)](https://www.poste.it/aggiornamenti-operativi) – customs clearance delays and suspension
+- [Poste Italiane: Aggiornamenti operativi posta e pacchi (Italian)](https://www.poste.it/aggiornamenti-operativi) – customs clearance delays
 - [Poste Italiane: Reclami e conciliazione](https://www.poste.it/assistenza/reclami) – complaint channels
 - [Poste Italiane: Chiamaci](https://www.poste.it/assistenza/chiamaci/) – phone numbers, hours, chat
 - [Poste Italiane: Contact us](https://www.poste.it/assistenza/scrivici-en) – email, form
@@ -119,6 +119,6 @@ Yes: Punto Poste lockers, chosen at the shop's checkout and opened with the PIN 
 - [Poste Italiane: Poste Delivery Express](https://www.poste.it/prodotti/poste-delivery-express.html) – delivery time
 - [Poste Italiane: Carta dei servizi postali](https://www.media.poste.it/37381c9f-a87e-4292-8b89-00e88fa53323/web/carta-servizi-non-universali) – Crono, damage, claims, Saturday
 - [Poste Italiane: Carta dei servizi postali universali](https://www.media.poste.it/c919f7cf-8236-428e-82fc-f8b2be8428b8/web/carta-servizi-universali) – Standard complaint window
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 duty per item from 1 July 2026, up to €150; €2 handling fee per item from 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – temporary €3 duty per kind of product from 1 July 2026, up to €150; €2 handling fee per kind of product from 1 November 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

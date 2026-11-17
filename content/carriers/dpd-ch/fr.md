@@ -3,7 +3,7 @@ title: DPD Suisse : suivre un colis, points relais et contact
 description: Suivre un colis DPD Suisse : le numéro à 14 chiffres qui commence par 060, les statuts de myDPD, les points relais, utilisables le samedi, et le téléphone de DPD.
 slug: suivi-dpd-suisse
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 DPD Suisse, c'est DPD (Schweiz) AG, à Buchs ZH : un service de colis du réseau Geopost, avec plus de 1000 points relais DPD Pickup Location dans tout le pays. Pour suivre ton colis, saisis son numéro de colis à 14 chiffres sur [myDPD](https://www.dpdgroup.com/ch/mydpd/), le site de suivi de DPD, ou colle-le dans le champ ci-dessus. Tu le reçois en général par e-mail, et il figure aussi sur l'avis de passage que DPD laisse dans ta boîte aux lettres quand tu n'es pas là.
@@ -77,7 +77,7 @@ Relevé sur les pages suisses de DPD le 10 octobre 2026. DPD donne les mêmes ca
 
 ## Suivre un colis DPD Suisse avec Peek
 
-[Peek](/) accepte les 14 chiffres, avec ou sans caractère de contrôle, et interroge les transporteurs probables, en général DPD Switzerland en premier (c'est son nom dans Peek). DPD Switzerland ne répond que pour les colis que DPD place en Suisse : tu vois alors « DPD Switzerland a ce colis. », sinon choisis-le avec « Changer ». Fais-le aussi pour les numéros de 14 chiffres commençant par 10 ou 1550 : Peek n'interroge alors aucun réseau DPD. Un lien de dpd.com ou de dpdgroup.com contenant `parcelNumber=` marche aussi : si son chemin commence par `/ch/`, il est lu comme DPD Switzerland, et s'il commence par un autre pays, comme `/de/`, comme le DPD de ce pays quand Peek le suit.
+[Peek](/) accepte les 14 chiffres, avec ou sans caractère de contrôle, et interroge les transporteurs probables, en général DPD Switzerland en premier (c'est son nom dans Peek). DPD Switzerland ne répond que pour les colis que DPD place en Suisse : tu vois alors « DPD Switzerland a ce colis. », sinon choisis-le avec « Changer ». Fais-le aussi pour les numéros de 14 chiffres commençant par 10 : Peek n'interroge alors pas DPD Switzerland. Pour ceux qui commencent par 1550, il interroge DPD UK en premier et DPD Switzerland dans la même première série. Un lien de dpd.com ou de dpdgroup.com contenant `parcelNumber=` marche aussi : si son chemin commence par `/ch/`, il est lu comme DPD Switzerland, et s'il commence par un autre pays, comme `/de/`, comme le DPD de ce pays quand Peek le suit.
 
 Le champ « Code postal de livraison » est facultatif et accepte le format de n'importe quel pays ; le code est envoyé à DPD et, si besoin, à des services de suivi. Sans lui, tu vois une ligne par étape et le jour prévu quand DPD en donne un. Avec lui, s'ajoutent les scans de DPD sur la carte avec ville et pays, ses messages, le créneau de livraison à l'heure suisse, le nom de l'expéditeur et le poids. Si DPD refuse le code, la page du colis le dit et propose « Modifier le code postal ».
 

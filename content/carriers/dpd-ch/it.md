@@ -3,7 +3,7 @@ title: DPD Svizzera tracking: stati, giacenza e contatti
 description: Segui un pacco DPD in Ticino e nel resto della Svizzera: il numero di 14 cifre, cosa vogliono dire gli stati, la giacenza, la consegna mancata e i contatti.
 slug: dpd-svizzera-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 DPD Svizzera è DPD (Schweiz) AG di Buchs ZH, un corriere pacchi della rete Geopost con oltre 1'000 DPD Pickup Location in tutta la Svizzera. Per seguire un pacco inserisci il suo numero di 14 cifre su [myDPD](https://www.dpdgroup.com/ch/mydpd/), il portale di DPD che esiste anche in italiano, oppure incollalo nel box qui sopra. Di solito il numero arriva per e-mail, e se DPD non ti trova è anche sulla cartolina informativa che lascia nella bucalettere.
@@ -77,7 +77,7 @@ DPD ha gli stessi canali per tutta la Svizzera, Ticino compreso. Come risultavan
 
 ## Seguire un pacco DPD Svizzera con Peek
 
-[Peek](/) accetta le 14 cifre, con o senza carattere di controllo (se è quello giusto), e chiede ai corrieri probabili, di solito per primo a DPD Switzerland. DPD Switzerland risponde solo quando il tracking di DPD colloca il pacco in Svizzera: vedi «DPD Switzerland ha questo pacco.» oppure lo scegli tu con «Cambia», come devi fare per i numeri di 14 cifre che iniziano con 10 o 1550. Funziona anche un link di dpd.com o dpdgroup.com con `parcelNumber=`, come quello di myDPD: se il percorso inizia con `/ch/` viene letto come DPD Switzerland, se inizia con un altro paese, come `/de/`, come il DPD di quel paese, quando Peek lo segue.
+[Peek](/) accetta le 14 cifre, con o senza carattere di controllo (se è quello giusto), e chiede ai corrieri probabili, di solito per primo a DPD Switzerland. DPD Switzerland risponde solo quando il tracking di DPD colloca il pacco in Svizzera: vedi «DPD Switzerland ha questo pacco.» oppure lo scegli tu con «Cambia», come devi fare per i numeri di 14 cifre che iniziano con 10, per i quali Peek non interroga DPD Switzerland. Per quelli che iniziano con 1550 Peek interroga per primo DPD UK e, nello stesso primo giro, DPD Switzerland. Funziona anche un link di dpd.com o dpdgroup.com con `parcelNumber=`, come quello di myDPD: se il percorso inizia con `/ch/` viene letto come DPD Switzerland, se inizia con un altro paese, come `/de/`, come il DPD di quel paese, quando Peek lo segue.
 
 Il campo «Codice postale di consegna» è facoltativo e accetta il formato di qualsiasi paese. L'NPA va a DPD e, se serve, a servizi di tracciamento. Senza, vedi una riga per passaggio, senza luoghi, e il giorno previsto quando DPD lo indica. Con l'NPA, che DPD confronta con l'indirizzo, vedi le scansioni di DPD con città e paese, anche sulla mappa, i suoi avvisi in inglese nella cronologia (`Your parcel will be delivered to a safe place according to your instructions` vuol dire che vale la tua autorizzazione al deposito), il giorno e la fascia oraria di consegna (in ora svizzera), il nome del mittente e il peso. Se DPD non accetta l'NPA, la pagina del pacco te lo dice e propone «Modifica codice postale».
 

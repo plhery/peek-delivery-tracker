@@ -3,7 +3,7 @@ title: DPD Switzerland tracking: statuses, delivery and contact
 description: Track a DPD parcel in Switzerland: the 14-digit number, what DPD's statuses mean, Pickup Locations, missed deliveries and who to contact.
 slug: dpd-switzerland-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 DPD Switzerland is DPD (Schweiz) AG in Buchs ZH, a parcel carrier in the Geopost network with over 1,000 DPD Pickup Locations. Track a parcel on [myDPD](https://www.dpdgroup.com/ch/mydpd/) with its 14-digit parcel number, or paste it in the box above. It usually comes by email, and it's on the card DPD leaves if it misses you.
@@ -73,7 +73,7 @@ As listed on DPD's Swiss pages on 10 October 2026, for the whole country:
 
 ## Tracking a DPD Switzerland parcel with Peek
 
-[Peek](/) takes the 14 digits, with or without the check character, and asks the likely carriers, usually DPD Switzerland first. DPD Switzerland answers only for parcels DPD places in Switzerland: you'll see "DPD Switzerland has this parcel." or can pick it with "Change", as you must for 14-digit numbers starting 10 or 1550. A dpd.com or dpdgroup.com link with `parcelNumber=` works too: one whose path starts with `/ch/` is read as DPD Switzerland, and one starting with another country, such as `/de/`, as that country's DPD when Peek follows it.
+[Peek](/) takes the 14 digits, with or without the check character, and asks the likely carriers, usually DPD Switzerland first. DPD Switzerland answers only for parcels DPD places in Switzerland: you'll see "DPD Switzerland has this parcel." or can pick it with "Change", as you must for 14-digit numbers starting 10, which Peek doesn't ask DPD Switzerland about. For numbers starting 1550, Peek asks DPD UK first and DPD Switzerland in the same first round. A dpd.com or dpdgroup.com link with `parcelNumber=` works too: one whose path starts with `/ch/` is read as DPD Switzerland, and one starting with another country, such as `/de/`, as that country's DPD when Peek follows it.
 
 The optional "Delivery postcode" field takes any country's format and is sent to DPD and, when needed, to tracking services. Without it you get one line per step and the expected day, when DPD has one. With it, DPD's scans appear on the map with town and country, plus its notices, the delivery window (in Swiss time), the sender's name and the weight. If DPD refuses the postcode, the parcel page says so and offers "Edit postcode".
 

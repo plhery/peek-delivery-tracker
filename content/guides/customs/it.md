@@ -4,7 +4,7 @@ description: «In attesa di sdoganamento» o fermo da settimane? Cosa vuol dire,
 slug: pacco-fermo-in-dogana
 picture: Una cabina della dogana con la sbarra a strisce, un documento timbrato con una spunta e Pip che aspetta paziente davanti alla sbarra.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-17
 ---
 
 «Fermo in dogana» di solito vuol dire che il tuo pacco sta passando il controllo di routine previsto per la merce che arriva da fuori UE (in Ticino, da qualsiasi Paese estero), non che è stato sequestrato. Se resta fermo a lungo, forse il corriere aspetta che tu paghi dazio e IVA o che gli mandi una fattura. Per saperlo apri tu il sito o l'app del corriere, mai il link di un SMS.
@@ -43,7 +43,7 @@ Quasi mai la dogana: comincia dal corriere (passo 4). Poste sdogana solo i pacch
 
 Poste non indica tempi. La Posta svizzera parla di tre o quattro giorni lavorativi, se tutte le informazioni sono complete e corrette; se ne mancano, fa degli accertamenti e il pacco può tardare. Nel suo blog per i venditori, [YunExpress](carrier:yunexpress) parla di tempi da qualche giorno lavorativo a oltre un mese, a seconda del controllo.
 
-Poste Italiane avvisa che, per problemi dovuti all'aggiornamento dei sistemi informatici doganali nazionali, le operazioni di sdoganamento delle spedizioni da Paesi extra-UE sono state «fortemente rallentate» e che Poste è stata «costretta a sospendere temporaneamente le operazioni di sdoganamento»: «al momento non è possibile stimarne i tempi di ripristino».
+Poste Italiane avvisa che, a seguito di «criticità tecniche» nello sdoganamento delle spedizioni da Paesi extra-UE, si registrano «significativi rallentamenti nelle lavorazioni» e che «i tempi di completo riassorbimento dei ritardi non sono al momento stimabili».
 
 Un pacco resta fermo più a lungo quando:
 

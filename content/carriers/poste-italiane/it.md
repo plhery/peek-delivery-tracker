@@ -3,7 +3,7 @@ title: Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza
 description: Tracking Poste Italiane: dove trovi il codice spedizione (anche 1UW e 3UW), cosa vogliono dire gli stati, giacenza, Punto Poste, reclami e numero verde.
 slug: poste-italiane-tracking
 published: 2026-10-11
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 Poste Italiane consegna i pacchi dei negozi online italiani e quelli che arrivano dall'estero. Per seguire il tuo pacco cerca il codice spedizione in «Cerca Spedizioni» su poste.it (il servizio che prima si chiamava Dove Quando) o nell'App Poste Italiane, oppure incollalo nel box qui sopra. Il codice è sulla ricevuta di chi ha spedito; se hai comprato online, te lo dà il venditore.
@@ -73,7 +73,7 @@ Poste prevede 2 tentativi a domicilio, al piano strada. Dopo il primo il portale
 
 **Cambiare la consegna.** Se il mittente ha attivato Scegli Tu, dal link puoi scegliere, una sola volta per spedizione, un altro giorno, un altro indirizzo in Italia, un ufficio postale o un Punto Poste, un vicino o il portiere, un luogo sicuro o il fermo del pacco mentre sei in vacanza. Con PostePlus, gratuito per chi vive in Italia e ha un account poste.it, ricevi notifiche e scegli indirizzo e giorni preferiti per i pacchi che il mittente ha abilitato.
 
-**Pacchi da fuori UE.** Gli oneri d'importazione si pagano alla consegna o in ufficio postale, oppure prima, online, spendendo meno. La tariffa di sdoganamento di Poste per un bene commerciale è di 3,00 € fino a 22 €, 7,00 € fino a 150 € e 21,00 € oltre (online: 1,00 € fino a 150 €, 18,00 € oltre); dal 1° luglio 2026, secondo la Commissione europea, sulle spedizioni fino a 150 € si applica anche un dazio forfettario temporaneo di 3 € per articolo; dal 1° novembre 2026 sugli acquisti online si aggiunge la Tassa di Gestione dell'Unione, 2 € per articolo a prescindere dal valore. Poste Italiane avvisa che, per problemi dovuti all'aggiornamento dei sistemi informatici doganali nazionali, le operazioni di sdoganamento delle spedizioni da Paesi extra-UE sono state «fortemente rallentate» e che Poste è stata «costretta a sospendere temporaneamente le operazioni di sdoganamento»: «al momento non è possibile stimarne i tempi di ripristino». Vedi [pacco fermo in dogana](guide:customs).
+**Pacchi da fuori UE.** Gli oneri d'importazione si pagano alla consegna o in ufficio postale, oppure prima, online, spendendo meno. La tariffa di sdoganamento di Poste per un bene commerciale è di 3,00 € fino a 22 €, 7,00 € fino a 150 € e 21,00 € oltre (online: 1,00 € fino a 150 €, 18,00 € oltre); dal 1° luglio 2026, secondo la Commissione europea, sulle spedizioni fino a 150 € si applica anche un dazio forfettario temporaneo di 3 € per voce doganale; dal 1° novembre 2026 sugli acquisti online si aggiunge la Tassa di Gestione dell'Unione, 2 € per voce doganale a prescindere dal valore. Poste Italiane avvisa che, a seguito di «criticità tecniche» nello sdoganamento delle spedizioni da Paesi extra-UE, si registrano «significativi rallentamenti nelle lavorazioni» e che «i tempi di completo riassorbimento dei ritardi non sono al momento stimabili». Vedi [pacco fermo in dogana](guide:customs).
 
 ## Pacco Poste Italiane non arriva, smarrito o danneggiato
 
@@ -102,7 +102,7 @@ Per la privacy, l'assistenza risponde solo all'intestatario della registrazione:
 
 [Peek](/) riconosce subito Poste Italiane dai codici `RA`, `1UW`, `3UW`, `2IMA`, `2IVC` e `5P`, e dai codici Poste Delivery che iniziano con `EF`, `EG`, `GF`, `JG` o `LF`. Un codice `5P` di sole cifre che vale anche per La Poste viene chiesto a entrambi, prima a Poste Italiane se sei in Italia; i codici in stile SDA vengono chiesti solo a Poste Italiane. Altri codici, per esempio di 12 cifre, vanno bene per più corrieri: Peek verifica con quelli che usano quella forma, Poste Italiane compresa, e con «Cambia» puoi scegliere tu il corriere. Funziona anche un link di poste.it che finisce con `#/risultati-spedizioni/` e il codice. Anche per i numeri postali internazionali che finiscono con `IT` Peek interroga direttamente Poste Italiane, e quelli che iniziano con `C`, `E`, `L` o `R` li attribuisce subito a Poste.
 
-Peek controlla ogni ora, anche quando il pacco è in consegna, e un'ora dopo un controllo non riuscito; può mandarti notifiche quando lo stato cambia. Mostra lo stato, le 20 scansioni più recenti con l'ufficio postale o la città su una mappa e il giorno di consegna previsto, con le frasi italiane di Poste e gli orari esatti. Lascia fuori mittente, destinatario, indirizzo, firma, peso, dimensioni e ufficio di ritiro. Un codice sconosciuto e uno troppo vecchio risultano entrambi non trovati, e Peek non segue il pacco se passa a un altro corriere.
+Peek controlla ogni ora, anche quando il pacco è in consegna, e un'ora dopo un controllo non riuscito; può mandarti notifiche quando lo stato cambia. Mostra lo stato, le 20 scansioni più recenti con l'ufficio postale o la città su una mappa e il giorno di consegna previsto, con le frasi italiane di Poste e gli orari esatti. Non mostra mittente, peso, dimensioni e ufficio di ritiro. Un codice sconosciuto e uno troppo vecchio risultano entrambi non trovati. Quando le scansioni di Poste mostrano che un codice postale valido che finisce con `IT` (come `RR…IT`, `CW…IT` o `ZC…IT`) va all'estero, Peek lo controlla anche presso il corriere che lo consegna lì, come Royal Mail, USPS o DHL, e passa a quel corriere quando ha scansioni più recenti.
 
 ## Domande sul tracking Poste Italiane
 
@@ -151,6 +151,6 @@ Chiama l'803 160 da rete fissa o il +39 06 4526 3160 da cellulare, dal lunedì a
 - [Poste Italiane: Nuove condizioni del Servizio Universale](https://www.poste.it/variazione-servizio-postale-universale) – fine di Posta1, Postapriority Internazionale in ufficio postale
 - [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – oneri d'importazione, Tassa di Gestione dell'Unione, tariffe di sdoganamento, pagamento online
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi) – Ritardi sdoganamento
-- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € per articolo dal 1° luglio 2026, fino a 150 €; 2 € per articolo dal 1° novembre 2026
+- [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – dazio temporaneo di 3 € per voce doganale dal 1° luglio 2026, fino a 150 €; 2 € per voce doganale dal 1° novembre 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – cosa legge e mostra Peek
 :::

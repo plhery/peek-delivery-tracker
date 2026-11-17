@@ -3,7 +3,7 @@ title: DPD Schweiz Tracking: Status, Zustellung und Kontakt
 description: DPD-Paket in der Schweiz verfolgen: wo die 14-stellige Paketnummer steht, was die Status heißen, wie Pickup Locations funktionieren und wen du fragst.
 slug: dpd-schweiz-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 DPD Schweiz ist die DPD (Schweiz) AG aus Buchs ZH, ein Paketdienst im Geopost-Netz mit über 1000 DPD Pickup Locations im ganzen Land. Dein Paket verfolgst du auf [myDPD](https://www.dpdgroup.com/ch/mydpd/) mit der 14-stelligen Paketnummer, oder du fügst sie oben ins Feld ein. Die Nummer kommt meist per E-Mail, und hat DPD dich verpasst, steht sie auf der Paketinfokarte im Briefkasten.
@@ -82,7 +82,7 @@ So stand es am 10. Oktober 2026 auf den Seiten von DPD Schweiz, für alle Sprach
 
 ## DPD Schweiz Paket mit Peek verfolgen
 
-[Peek](/) nimmt die 14 Ziffern an, mit oder ohne passendes Prüfzeichen, und fragt die wahrscheinlichen Paketdienste, meist DPD Switzerland zuerst. DPD Switzerland antwortet nur, wenn DPD das Paket in der Schweiz verortet. Dann siehst du „DPD Switzerland hat dieses Paket.“, sonst tippst du auf „Ändern“ und wählst DPD Switzerland. Bei 14-stelligen Nummern, die mit 10 oder 1550 beginnen, musst du das immer tun, denn dort wird kein DPD-Netz gefragt. Einen Link von dpd.com oder dpdgroup.com mit `parcelNumber=`, etwa aus myDPD, kannst du ebenfalls einfügen. Beginnt sein Pfad mit `/ch/`, gilt er als DPD Switzerland; beginnt er mit einem anderen Land, etwa `/de/`, gilt er als DPD dieses Landes, sofern Peek es verfolgt.
+[Peek](/) nimmt die 14 Ziffern an, mit oder ohne passendes Prüfzeichen, und fragt die wahrscheinlichen Paketdienste, meist DPD Switzerland zuerst. DPD Switzerland antwortet nur, wenn DPD das Paket in der Schweiz verortet. Dann siehst du „DPD Switzerland hat dieses Paket.“, sonst tippst du auf „Ändern“ und wählst DPD Switzerland. Bei 14-stelligen Nummern, die mit 10 beginnen, musst du das immer tun, denn bei ihnen fragt Peek DPD Switzerland nicht. Nummern, die mit 1550 beginnen, fragt Peek zuerst bei DPD UK und in derselben ersten Runde auch bei DPD Switzerland ab. Einen Link von dpd.com oder dpdgroup.com mit `parcelNumber=`, etwa aus myDPD, kannst du ebenfalls einfügen. Beginnt sein Pfad mit `/ch/`, gilt er als DPD Switzerland; beginnt er mit einem anderen Land, etwa `/de/`, gilt er als DPD dieses Landes, sofern Peek es verfolgt.
 
 Das Feld „Postleitzahl der Lieferadresse“ ist optional und nimmt Postleitzahlen jedes Landes an. Sie geht an DPD und bei Bedarf an Tracking-Dienste, auf geteilten Links ist sie nie zu sehen. Ohne sie gibt DPD nur eine Zeile pro Schritt, ohne Orte, und den erwarteten Tag, wenn es einen nennt. Mit ihr prüft DPD die Adresse und liefert seine einzelnen Scans mit Ort und Land für die Karte, seine Hinweise wie die E-Mail mit dem Zustelltag, das Zeitfenster mit Tag und Uhrzeit, den Namen des Absenders und das Gewicht. Lehnt DPD die Postleitzahl ab, sagt die Paketseite das und bietet „Postleitzahl ändern“ an.
 

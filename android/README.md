@@ -8,9 +8,10 @@ builds alone.
 ## Two builds
 
 The app comes in two flavors of the `store` dimension. `play`, the default, is Google Play's, with Google's libraries:
-Firebase Cloud Messaging, Play In-App Review, and ML Kit's barcode model behind the label scanner. `fdroid` has none of
-them, for F-Droid's catalog: its notifications come through UnifiedPush or an inbox (see Pushes), it asks for no rating
-and scans no label. Code only one build has lives in `app/src/play` or `app/src/fdroid`, each behind the same
+Firebase Cloud Messaging, Play In-App Review, Play Integrity (a token with the attested key's registration, where the
+server asks for one) and ML Kit's barcode model behind the label scanner. `fdroid` has none of them, for F-Droid's
+catalog: its notifications come through UnifiedPush or an inbox (see Pushes), its key registers on key attestation
+alone, it asks for no rating and scans no label. Code only one build has lives in `app/src/play` or `app/src/fdroid`, each behind the same
 `platform/Store.kt`. The task names without a flavor (`testDebugUnitTest`, `verifyRoborazziDebug`,
 `recordRoborazziDebug`, `compareRoborazziDebug`) run Google Play's build, and `lintDebug` lints both.
 

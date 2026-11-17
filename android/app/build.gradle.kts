@@ -415,6 +415,8 @@ dependencies {
     implementation(libs.window)
     // StoreKit's `requestReview`: the rating prompt, through Play In-App Review (src/play/…/platform/PlayReviews.kt).
     "playImplementation"(libs.play.review.ktx)
+    // Play Integrity's standard token with the attested key's registration (src/play/…/platform/GooglePlayIntegrity.kt).
+    "playImplementation"(libs.play.integrity)
     // WKWebView's script message handler for the browser check: WebViewCompat's message listener and document-start
     // script (ui/TurnstileSheet.kt, platform/WebViewTurnstilePages.kt).
     implementation(libs.webkit)

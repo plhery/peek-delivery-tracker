@@ -64,7 +64,7 @@ class NativeVerificationTests {
     private fun refresh(): HttpRequest = HttpRequest(url = base.appendingPath("api/sync"), method = "POST")
 
     private val registered: Map<String, NativeAttestRecord>
-        get() = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = true))
+        get() = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.plhery.peekdeliverytracker", registered = true))
 
     private val neverRegisters = NativeAttestProvider(
         supported = { true },
@@ -87,7 +87,8 @@ class NativeVerificationTests {
         present: TurnstilePresenter,
         records: Map<String, NativeAttestRecord> = emptyMap(),
         save: (Map<String, NativeAttestRecord>) -> Unit = {},
-    ): NativeVerification = NativeVerification(provider, present, records, save, language = { AppLanguage.En })
+        now: () -> Instant = AppClock::now,
+    ): NativeVerification = NativeVerification(provider, present, records, save, language = { AppLanguage.En }, now = now)
 
     private fun unexpectedCheck(message: String = "Unexpected browser check") = TurnstilePresenter {
         xctFail(message)
@@ -97,6 +98,17 @@ class NativeVerificationTests {
     private fun sha256(text: String): List<Byte> = MessageDigest.getInstance("SHA-256").digest(text.toByteArray()).toList()
 
     private fun base64(text: String): String = Base64.getEncoder().encodeToString(text.toByteArray())
+
+    @Test
+    fun neverAttestsUnderAppAttestsAppId() = runTest {
+        // The server offers App Attest's app ID and no Android one: no key is made, registered or asked to sign.
+        val server = NativeTestServer(paid = false)
+        val verifier = verification(neverRegisters, TurnstilePresenter { "synthetic-turnstile-token" })
+        verifier.prepare(base, server.transport)
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertEquals(0, server.requests.count { it.path == "/api/public/native/challenge" })
+        assertEquals("synthetic-proof", server.requests.last().header("X-Lookup-Proof"))
+    }
 
     @Test
     fun freeBuildExchangesTokenThroughNativeTransportAndReusesProof() = runTest {
@@ -219,7 +231,7 @@ class NativeVerificationTests {
         )
         val verifier = verification(
             provider, TurnstilePresenter { "token" },
-            records = mapOf(base to NativeAttestRecord(keyId = "old", appId = "TESTTEAM01.com.example.Peek", registered = true)),
+            records = mapOf(base to NativeAttestRecord(keyId = "old", appId = "android:com.plhery.peekdeliverytracker", registered = true)),
             save = { records ->
                 xctAssertEqual(records.isEmpty(), true, "records left")
                 removed += 1
@@ -251,6 +263,196 @@ class NativeVerificationTests {
         assertTrue(results.all { it.statusCode == 201 })
         assertEquals(1, server.presented.size)
         assertEquals(1, server.maximumConcurrent)
+    }
+
+    // Android attestation's modes
+
+    /** A key the phone's keystore attests, with Play Integrity's [token] where the build has one. */
+    private class Attestation(private val token: String? = null, private val onPrepare: () -> Unit = {}) : DeviceAttestation {
+        val prepared = mutableListOf<Long>()
+        val attested = mutableListOf<Long?>()
+        val outcomes = mutableListOf<Boolean>()
+        var keys = 0
+
+        override fun supported() = true
+
+        override suspend fun generateKey(): String = "synthetic-key-${++keys}"
+
+        override suspend fun prepare(playIntegrityProject: Long) {
+            onPrepare()
+            prepared += playIntegrityProject
+        }
+
+        override suspend fun attest(keyId: String, clientDataHash: ByteArray, playIntegrityProject: Long?): DeviceAttestation.Statement {
+            attested += playIntegrityProject
+            return DeviceAttestation.Statement("synthetic-attestation".toByteArray(), token)
+        }
+
+        override suspend fun assert(keyId: String, clientDataHash: ByteArray) = "synthetic-assertion".toByteArray()
+
+        override fun registered(accepted: Boolean) {
+            outcomes += accepted
+        }
+    }
+
+    private fun HttpRequest.fields(): Map<String, String> = ApiJson.decodeFromString(MapSerializer(String.serializer(), String.serializer()), body!!.decodeToString())
+
+    private val NativeTestServer.registrations get() = requests.filter { it.path == "/api/public/native/verification" && it.method == "POST" }
+
+    @Test
+    fun logModeRegistersTheKeyAtLaunchUnderItsAppIdAndSignsNothing() = runTest {
+        val server = NativeTestServer(mode = "log")
+        val provider = Attestation()
+        var saved = emptyMap<String, NativeAttestRecord>()
+        val verifier = verification(provider, TurnstilePresenter { "synthetic-turnstile-token" }, save = { saved = it })
+        verifier.prepare(base, server.transport)
+        // No token: the field is left out.
+        assertEquals(
+            mapOf("keyId" to "synthetic-key-1", "challenge" to "synthetic-attestation-challenge", "attestation" to base64("synthetic-attestation")),
+            server.registrations.single().fields(),
+        )
+        assertEquals(mapOf(base to NativeAttestRecord(keyId = "synthetic-key-1", appId = "android:com.plhery.peekdeliverytracker", registered = true)), saved)
+        assertEquals(listOf(true), provider.outcomes)
+        assertEquals(listOf<Long?>(null), provider.attested)
+        assertTrue(provider.prepared.isEmpty())
+
+        // Lookups go through the browser check, as before.
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertTrue(server.requests.none { it.header("X-App-Attest-Assertion") != null })
+        assertEquals(1, server.requests.count { it.path == "/api/public/native/challenge" })
+        assertEquals("synthetic-proof", server.requests.last().header("X-Lookup-Proof"))
+    }
+
+    @Test
+    fun thePlayBuildReadiesPlayIntegrityBeforeTheChallengeAndSendsItsToken() = runTest {
+        val server = NativeTestServer(mode = "log", playIntegrityProject = "123456789012")
+        var challengesBeforePrepare = -1
+        val provider = Attestation(token = "synthetic.integrity-token") {
+            challengesBeforePrepare = server.requests.count { it.path == "/api/public/native/challenge" }
+        }
+        verification(provider, unexpectedCheck()).prepare(base, server.transport)
+        assertEquals(0, challengesBeforePrepare)
+        assertEquals(listOf(123456789012L), provider.prepared)
+        assertEquals(listOf<Long?>(123456789012L), provider.attested)
+        assertEquals("synthetic.integrity-token", server.registrations.single().fields()["playIntegrity"])
+
+        // A registered key readies nothing and registers nothing.
+        val registeredProvider = Attestation(token = "unused")
+        verification(registeredProvider, unexpectedCheck(), registered).prepare(base, server.transport)
+        assertTrue(registeredProvider.prepared.isEmpty())
+        assertEquals(1, server.registrations.size)
+    }
+
+    @Test
+    fun aLookupDoesNotWaitOnTheRegistrationsPlayIntegrityToken() = runTest {
+        val server = NativeTestServer(mode = "log", playIntegrityProject = "123456789012")
+        val asked = CompletableDeferred<Unit>()
+        val token = CompletableDeferred<String>()
+        val provider = object : DeviceAttestation {
+            override fun supported() = true
+            override suspend fun generateKey() = "synthetic-key"
+            override suspend fun attest(keyId: String, clientDataHash: ByteArray, playIntegrityProject: Long?): DeviceAttestation.Statement {
+                asked.complete(Unit)
+                return DeviceAttestation.Statement("synthetic-attestation".toByteArray(), token.await())
+            }
+            override suspend fun assert(keyId: String, clientDataHash: ByteArray) = "synthetic-assertion".toByteArray()
+        }
+        val verifier = verification(provider, TurnstilePresenter { "synthetic-turnstile-token" })
+        val preparing = launch { verifier.prepare(base, server.transport) }
+        asked.await()
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertTrue(preparing.isActive)
+        token.complete("synthetic.integrity-token")
+        preparing.join()
+        assertEquals("synthetic.integrity-token", server.registrations.single().fields()["playIntegrity"])
+    }
+
+    @Test
+    fun aRefusedOrUnreadableRegistrationDropsTheKeyAndLeavesTheBrowserCheck() = runTest {
+        for (status in listOf(403, 400, 413)) {
+            val server = NativeTestServer(mode = "log", registrationStatus = status)
+            val provider = Attestation()
+            var saved = emptyMap<String, NativeAttestRecord>()
+            val verifier = verification(provider, TurnstilePresenter { "synthetic-turnstile-token" }, save = { saved = it })
+            verifier.prepare(base, server.transport)
+            assertEquals("status $status", emptyMap<String, NativeAttestRecord>(), saved)
+            assertEquals("status $status", if (status == 403) listOf(false) else emptyList(), provider.outcomes)
+            // Paused: the next launch's attempt waits 10 minutes.
+            verifier.prepare(base, server.transport)
+            assertEquals("status $status", 1, server.registrations.size)
+            assertEquals("status $status", 201, verifier.send(lookup(), base, using = server.transport).statusCode)
+            assertEquals("synthetic-proof", server.requests.last().header("X-Lookup-Proof"))
+        }
+    }
+
+    @Test
+    fun aLimitedOrUnavailableRegistrationKeepsTheKeyForLater() = runTest {
+        for (status in listOf(429, 503)) {
+            val server = NativeTestServer(mode = "log", registrationStatus = status)
+            val provider = Attestation()
+            var clock = Instant.parse("2026-01-01T12:00:00Z")
+            var saved = emptyMap<String, NativeAttestRecord>()
+            val verifier = verification(provider, unexpectedCheck(), save = { saved = it }, now = { clock })
+            verifier.prepare(base, server.transport)
+            assertEquals(mapOf(base to NativeAttestRecord(keyId = "synthetic-key-1", appId = "android:com.plhery.peekdeliverytracker", registered = false)), saved)
+            assertTrue(provider.outcomes.isEmpty())
+            verifier.prepare(base, server.transport)
+            assertEquals(1, server.registrations.size)
+
+            clock = clock.plusSeconds(601)
+            server.registrationStatus = 204
+            verifier.prepare(base, server.transport)
+            assertEquals(1, provider.keys)
+            assertEquals("synthetic-key-1", server.registrations.last().fields()["keyId"])
+            assertEquals(true, saved[base]?.registered)
+        }
+    }
+
+    @Test
+    fun aKeyPastItsAllowanceIsKeptAndThatKindGoesUnsignedUntilRetryAfter() = runTest {
+        val server = NativeTestServer(paid = true, refuseAssertions = true, refusal = "limited", retryAfter = "3600")
+        var clock = Instant.now()
+        val verifier = verification(signs, TurnstilePresenter { "synthetic-turnstile-token" }, registered, save = { xctFail("Unexpected key change") }, now = { clock })
+        verifier.prepare(base, server.transport)
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        val lookups = { server.requests.filter { it.path == "/api/public/parcels" } }
+        // Signed once, then straight to the browser check, with no signed retry.
+        assertEquals(listOf(true, false), lookups().map { it.header("X-App-Attest-Assertion") != null })
+        assertEquals(1, server.requests.count { it.path == "/api/public/verification" })
+
+        // Lookups go unsigned, with the proof; detections are still signed.
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertNull(lookups().last().header("X-App-Attest-Assertion"))
+        val detection = HttpRequest(url = base.appendingPath("api/public/detect"), method = "POST", body = "{\"trackingNumber\":\"SYNTHETIC\"}".toByteArray())
+        assertEquals(201, verifier.send(detection, base, using = server.transport).statusCode)
+        assertEquals(base64("synthetic-assertion"), server.requests.last().header("X-App-Attest-Assertion"))
+
+        clock = clock.plusSeconds(3601)
+        verifier.send(lookup(), base, using = server.transport)
+        assertEquals(base64("synthetic-assertion"), lookups()[3].header("X-App-Attest-Assertion"))
+    }
+
+    @Test
+    fun aServerNoLongerEnforcingKeepsTheKeyAndIsAskedItsConfigurationAgain() = runTest {
+        val server = NativeTestServer(paid = true, refuseAssertions = true, refusal = "mode")
+        val verifier = verification(signs, TurnstilePresenter { "synthetic-turnstile-token" }, registered, save = { xctFail("Unexpected key change") })
+        verifier.prepare(base, server.transport)
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertEquals(1, server.requests.count { it.header("X-App-Attest-Assertion") != null })
+        assertEquals(2, server.requests.count { it.path == "/api/public/native/verification" && it.method == "GET" })
+        assertEquals("synthetic-proof", server.requests.last().header("X-Lookup-Proof"))
+    }
+
+    @Test
+    fun aRefusedKeySignsOnceMoreThenIsDroppedForTheBrowserCheck() = runTest {
+        val server = NativeTestServer(paid = true, refuseAssertions = true)
+        var saved: Map<String, NativeAttestRecord>? = null
+        val verifier = verification(signs, TurnstilePresenter { "synthetic-turnstile-token" }, registered, save = { saved = it })
+        verifier.prepare(base, server.transport)
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertEquals(2, server.requests.count { it.header("X-App-Attest-Assertion") != null })
+        assertEquals(emptyMap<String, NativeAttestRecord>(), saved)
+        assertEquals("synthetic-proof", server.requests.last().header("X-Lookup-Proof"))
     }
 
     // Signed-in requests
@@ -289,8 +491,8 @@ class NativeVerificationTests {
 
     @Test
     fun signedInRequestGoesUnsignedWhenThisInstallationCannotSign() = runTest {
-        val unregistered = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = false))
-        val otherApp = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Other", registered = true))
+        val unregistered = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.plhery.peekdeliverytracker", registered = false))
+        val otherApp = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.example.other", registered = true))
         val cases = listOf(
             Triple(unsupported, registered, true), Triple(neverRegisters, emptyMap<String, NativeAttestRecord>(), true), Triple(neverRegisters, unregistered, true),
             Triple(neverRegisters, otherApp, true), Triple(neverRegisters, registered, false),
@@ -450,7 +652,7 @@ class NativeVerificationTests {
         val server = NativeTestServer(paid = true)
         val verifier = verification(
             signs, unexpectedCheck(),
-            records = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = true)),
+            records = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.plhery.peekdeliverytracker", registered = true)),
         )
         val preparing = launch { verifier.prepare(base, held) }
         withTimeout(2.seconds) { started.await() }
@@ -549,7 +751,7 @@ class NativeVerificationTests {
         val secret = "synthetic-secret-proof"
         val transport = HttpTransport { request ->
             when (request.path) {
-                "/api/public/native/verification" -> HttpResponse(200, body = """{"appAttestAppId":null,"turnstile":true}""".toByteArray())
+                "/api/public/native/verification" -> HttpResponse(200, body = """{"androidAttestAppId":null,"turnstile":true}""".toByteArray())
                 "/api/public/verification" -> HttpResponse(200, body = """{"proof":"$secret","expiresAt":"soon"}""".toByteArray())
                 else -> HttpResponse(403, mapOf("X-Lookup-Verification" to "required"))
             }
@@ -605,12 +807,20 @@ class NativeVerificationTests {
 
 /** The Swift tests' `NativeTestServer` actor. Every request takes 10 ms, a challenge `challengeDelay` more. */
 private class NativeTestServer(
+    /** Android attestation enforced: lookups are signed. */
     private val paid: Boolean = false,
     private val initialStatus: Int = 403,
     private val rejectProof: Boolean = false,
     private val refuseAssertions: Boolean = false,
     private val challengeStatus: Int = 200,
     private val challengeDelay: Duration = Duration.ZERO,
+    /** `androidAttestation.mode`, null where Android attestation is off. */
+    private val mode: String? = if (paid) "enforce" else null,
+    private val playIntegrityProject: String? = null,
+    var registrationStatus: Int = 204,
+    /** The `X-Native-Assertion` a refused signed request gets, and its `Retry-After`. */
+    private val refusal: String = "refused",
+    private val retryAfter: String? = null,
 ) {
     val requests = mutableListOf<HttpRequest>()
     val presented = mutableListOf<String>()
@@ -635,9 +845,14 @@ private class NativeTestServer(
             when (request.path) {
                 "/api/public/native/verification" ->
                     if (request.method == "POST") {
-                        status = 204
+                        status = registrationStatus
+                        if (status == 403) headers["X-Lookup-Verification"] = "required"
                     } else {
-                        body = """{"appAttestAppId":${if (paid) "\"TESTTEAM01.com.example.Peek\"" else "null"},"turnstile":true}"""
+                        val appId = "\"android:com.plhery.peekdeliverytracker\""
+                        val project = playIntegrityProject?.let { "\"$it\"" } ?: "null"
+                        val attestation = mode?.let { """{"mode":"$it","appId":$appId,"playIntegrityCloudProjectNumber":$project}""" } ?: "null"
+                        body = """{"appAttestAppId":"TESTTEAM01.com.example.Peek","androidAttestAppId":${if (paid) appId else "null"},""" +
+                            """"androidAttestation":$attestation,"turnstile":true}"""
                     }
                 "/api/public/native/challenge" -> {
                     delay(challengeDelay)
@@ -651,6 +866,10 @@ private class NativeTestServer(
                     val proven = !rejectProof && request.header("X-Lookup-Proof") != null
                     status = if (signed || proven) 201 else initialStatus
                     if (status == 403) headers["X-Lookup-Verification"] = "required"
+                    if (status == 403 && request.header("X-App-Attest-Assertion") != null) {
+                        headers["X-Native-Assertion"] = refusal
+                        retryAfter?.let { headers["Retry-After"] = it }
+                    }
                 }
             }
             return HttpResponse(status, headers, body.toByteArray())

@@ -29,20 +29,19 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
-// NativeVerification.swift. App Attest is a `DeviceAttestation` the app gives (none that the server accepts on Android
-// yet) and the browser check a `TurnstilePresenter` (a WebView, by NativeTurnstilePresenter's rules); what is asked,
-// signed and sent, and in which order, is here.
+// NativeVerification.swift. App Attest is a `DeviceAttestation` the app gives (on Android, a key attested by the phone's
+// secure hardware, with Play Integrity's word in the Play build: KeystoreAttestation) and the browser check a
+// `TurnstilePresenter` (a WebView, by NativeTurnstilePresenter's rules); what is asked, signed and sent, and in which
+// order, is here. Android keys register under `androidAttestation.appId` and sign only under `androidAttestAppId`
+// (the server's enforce mode), never under App Attest's `appAttestAppId`.
 
 class NativeVerificationFailed : Exception()
 
 /**
- * The device's attestation service, which keeps the private key on the device: DCAppAttestService on the iPhone.
- * A key the device no longer has (a reinstall) or refuses fails with `InvalidKey`, and is dropped.
- *
- * The server verifies Apple App Attest alone. On Android `supported()` returns false until it accepts an Android
- * attestation (Play Integrity is the one planned): before then it refuses every registration and assertion, and each
- * refusal pauses attestation for 10 minutes, so the requests and attestations are spent for nothing and lookups reach
- * the browser check no sooner.
+ * The device's attestation service, which keeps the private key on the device: DCAppAttestService on the iPhone, the
+ * Android Keystore here. A key the device no longer has (a reinstall) or refuses fails with `InvalidKey`, and is
+ * dropped. Any other failure, and a refusal by the server, pauses attestation for 10 minutes, the browser check
+ * standing in.
  */
 interface DeviceAttestation {
     /** Whether this installation attests: the build enables it and the device supports it. */
@@ -51,11 +50,26 @@ interface DeviceAttestation {
     /** A new key's id. */
     suspend fun generateKey(): String
 
-    /** The key's attestation of `clientDataHash`, the SHA-256 of the server's challenge; it registers the key. */
-    suspend fun attest(keyId: String, clientDataHash: ByteArray): ByteArray
+    /**
+     * Readies what a registration that asks Play Integrity of the Cloud project [playIntegrityProject] needs, ahead of
+     * its challenge, which lasts 120 s: the Play build's token provider, which can take seconds. Nothing by default.
+     */
+    suspend fun prepare(playIntegrityProject: Long) = Unit
+
+    /**
+     * The key's attestation of `clientDataHash`, the SHA-256 of the server's challenge, which registers the key; with
+     * Play Integrity's token for it where [playIntegrityProject] asks for one and the build has one.
+     */
+    suspend fun attest(keyId: String, clientDataHash: ByteArray, playIntegrityProject: Long?): Statement
 
     /** The key's assertion of `clientDataHash`, the SHA-256 of a request's `NativeVerification.payload`. */
     suspend fun assert(keyId: String, clientDataHash: ByteArray): ByteArray
+
+    /** What the server made of the key [attest] last attested: registered it, or refused it (a 403). Nothing by default. */
+    fun registered(accepted: Boolean) = Unit
+
+    /** A registration's `attestation`, and its `playIntegrity` token when there is one. */
+    class Statement(val attestation: ByteArray, val playIntegrity: String? = null)
 
     /** `DCError.invalidKey`. */
     class InvalidKey : Exception()
@@ -72,7 +86,8 @@ fun NativeAttestProvider(
 
     override suspend fun generateKey(): String = generateKey()
 
-    override suspend fun attest(keyId: String, clientDataHash: ByteArray): ByteArray = attest(keyId, clientDataHash)
+    override suspend fun attest(keyId: String, clientDataHash: ByteArray, playIntegrityProject: Long?): DeviceAttestation.Statement =
+        DeviceAttestation.Statement(attest(keyId, clientDataHash))
 
     override suspend fun assert(keyId: String, clientDataHash: ByteArray): ByteArray = assert(keyId, clientDataHash)
 }
@@ -123,8 +138,23 @@ class NativeVerification(
         language, now,
     )
 
+    /**
+     * The server's: `androidAttestation`, null where Android attestation is off, and `androidAttestAppId`, the app ID
+     * lookups are signed under, null but where it is enforced.
+     */
     @Serializable
-    private class Configuration(val appAttestAppId: String? = null, val turnstile: Boolean)
+    private class Configuration(
+        val androidAttestAppId: String? = null,
+        val androidAttestation: AndroidAttestation? = null,
+        val turnstile: Boolean,
+    ) {
+        /** The Cloud project the Play build asks Play Integrity tokens for, or null. */
+        val playIntegrityProject: Long? get() = androidAttestation?.playIntegrityCloudProjectNumber?.toLongOrNull()
+    }
+
+    /** `log` or `enforce`; the app ID keys register under; the Play build's Cloud project for Play Integrity. */
+    @Serializable
+    private class AndroidAttestation(val mode: String, val appId: String, val playIntegrityCloudProjectNumber: String? = null)
 
     @Serializable
     private class Challenge(val challenge: String)
@@ -138,23 +168,36 @@ class NativeVerification(
     private val configurations = ConcurrentHashMap<String, Pair<Configuration, Instant>>()
     private val proofs = ConcurrentHashMap<String, Proof>()
     private val pauseAttestUntil = ConcurrentHashMap<String, Instant>()
+
+    /** Until when each kind of request (`base lookup`, `base detection`) goes unsigned: its daily allowance is used. */
+    private val limitedUntil = ConcurrentHashMap<String, Instant>()
     private val lock = Mutex()
+
+    /**
+     * One registration at a time. Apart from `lock`, which preparation doesn't take: a registration can wait seconds on
+     * Play Integrity, and lookups, which don't need the key until the server enforces, go on meanwhile.
+     */
+    private val registering = Mutex()
 
     /** Signed-in requests waiting for their signature or their deadline, whichever comes first. */
     private val accountWaiters = ConcurrentHashMap<UUID, CompletableDeferred<HttpRequest?>>()
 
-    /** Registers this installation's key ahead of the first lookup, at launch. */
+    /**
+     * Registers this installation's key ahead of the first lookup, at launch, where the server takes Android keys, with
+     * Play Integrity's provider readied first. Neither holds the lock lookups wait on, since either can take seconds.
+     */
     suspend fun prepare(baseUrl: String, using: HttpTransport) {
-        if (!provider.supported()) return
-        lock.withLock {
-            try {
-                val config = configuration(baseUrl, using)
-                config.appAttestAppId?.let { registeredKey(baseUrl, it, using) }
-            } catch (error: Exception) {
-                throwIfCancelled(error)
-                forgetInvalidKey(error, baseUrl)
-                pauseAttestUntil[baseUrl] = now().plusSeconds(600)
-            }
+        if (!provider.supported() || !mayAttest(baseUrl)) return
+        try {
+            val config = configuration(baseUrl, using)
+            val attestation = config.androidAttestation ?: return
+            val project = config.playIntegrityProject
+            if (project != null && record(baseUrl)?.let { it.appId == attestation.appId && it.registered } != true) provider.prepare(project)
+            registeredKey(baseUrl, attestation.appId, project, using)
+        } catch (error: Exception) {
+            throwIfCancelled(error)
+            forgetInvalidKey(error, baseUrl)
+            pauseAttestUntil[baseUrl] = now().plusSeconds(600)
         }
     }
 
@@ -167,10 +210,14 @@ class NativeVerification(
             proofs[base]?.let { proof ->
                 if (proof.expiresAt > millisecondsSince1970(now()) + 5_000) request = request.setting("X-Lookup-Proof", proof.proof)
             }
-            val appId = configurations[base]?.first?.appAttestAppId
-            if (appId != null && record(base)?.let { it.appId == appId && it.registered } == true && provider.supported() && mayAttest(base)) {
+            val kind = kind(original)
+            val cached = configurations[base]?.first
+            val appId = cached?.androidAttestAppId
+            if (appId != null && record(base)?.let { it.appId == appId && it.registered } == true && provider.supported() && mayAttest(base) &&
+                !limited(base, kind)
+            ) {
                 try {
-                    request = signed(request, baseUrl, appId, transport)
+                    request = signed(request, baseUrl, appId, cached.playIntegrityProject, transport)
                 } catch (error: Exception) {
                     throwIfCancelled(error)
                     forgetInvalidKey(error, base)
@@ -182,21 +229,24 @@ class NativeVerification(
             if (!needsVerification(first)) return first
             proofs.remove(base)
             request = request.setting("X-Lookup-Proof", null)
+            // A key's refusal that is no fault of the key (`limited`, `mode`) keeps it and goes to the browser check.
+            val kept = keptKey(first, base, kind)
             val config = configuration(baseUrl, transport)
-            val attestAppId = config.appAttestAppId
-            if (provider.supported() && attestAppId != null && mayAttest(base)) {
+            val attestAppId = config.androidAttestAppId
+            if (!kept && provider.supported() && attestAppId != null && mayAttest(base) && !limited(base, kind)) {
+                var drop = true
                 try {
-                    request = signed(request, baseUrl, attestAppId, transport)
+                    request = signed(request, baseUrl, attestAppId, config.playIntegrityProject, transport)
                     val result = transport.data(request)
                     if (!needsVerification(result)) return result
                     // A reinstall, expired registry entry or rejected key gets a new key after a short backoff.
-                    changeRecords { it.remove(base) }
+                    if (keptKey(result, base, kind)) drop = false else changeRecords { it.remove(base) }
                 } catch (error: Exception) {
                     throwIfCancelled(error)
                     forgetInvalidKey(error, base)
                     // Apple or the network can be unavailable; the browser check remains usable.
                 }
-                pauseAttestUntil[base] = now().plusSeconds(600)
+                if (drop) pauseAttestUntil[base] = now().plusSeconds(600)
             }
             // Detection runs while typing; only an explicit lookup may interrupt with a sheet.
             if (!config.turnstile || !allowPresentation) throw NativeVerificationFailed()
@@ -292,15 +342,16 @@ class NativeVerification(
     private suspend fun accountSignature(request: HttpRequest, baseUrl: String, transport: HttpTransport): HttpRequest? {
         val base = baseUrl
         if (!mayAttest(base)) return null
-        val appId = try {
-            configuration(baseUrl, transport).appAttestAppId
+        val config = try {
+            configuration(baseUrl, transport)
         } catch (_: Exception) {
             null
-        } ?: return null
+        }
+        val appId = config?.androidAttestAppId ?: return null
         val record = record(base)
         if (record?.appId != appId || !record.registered) return null
         return try {
-            signed(request, baseUrl, appId, transport)
+            signed(request, baseUrl, appId, config.playIntegrityProject, transport)
         } catch (error: Exception) {
             forgetInvalidKey(error, base)
             pauseAttestUntil[base] = now().plusSeconds(600)
@@ -333,8 +384,29 @@ class NativeVerification(
 
     private fun mayAttest(base: String): Boolean = (pauseAttestUntil[base] ?: Instant.MIN) <= now()
 
-    private suspend fun signed(original: HttpRequest, baseUrl: String, appId: String, transport: HttpTransport): HttpRequest {
-        val key = registeredKey(baseUrl, appId, transport)
+    /** Whether today's allowance for this kind of request is used: it goes unsigned until then. */
+    private fun limited(base: String, kind: String?): Boolean = kind != null && (limitedUntil["$base $kind"] ?: Instant.MIN) > now()
+
+    /**
+     * Whether an Android key's refusal (`X-Native-Assertion`) keeps the key: `limited`, its allowance for this kind of
+     * request used until `Retry-After`, which goes unsigned until then; or `mode`, a configuration from before the server
+     * stopped enforcing, which is dropped. Either way the browser check decides, with no signed retry.
+     */
+    private fun keptKey(response: HttpResponse, base: String, kind: String?): Boolean = when (response.header("X-Native-Assertion")) {
+        "limited" -> {
+            val seconds = response.header("Retry-After")?.trim()?.toLongOrNull()?.takeIf { it > 0 } ?: secondsToMidnight(now())
+            if (kind != null) limitedUntil["$base $kind"] = now().plusSeconds(seconds)
+            true
+        }
+        "mode" -> {
+            configurations.remove(base)
+            true
+        }
+        else -> false
+    }
+
+    private suspend fun signed(original: HttpRequest, baseUrl: String, appId: String, playIntegrityProject: Long?, transport: HttpTransport): HttpRequest {
+        val key = registeredKey(baseUrl, appId, playIntegrityProject, transport)
         val challenge = challenge(baseUrl, key, "assertion", transport)
         val payload = payload(original, challenge)
         val assertion = provider.assert(key, sha256(payload.wellFormed().toByteArray(Charsets.UTF_8)))
@@ -352,27 +424,38 @@ class NativeVerification(
         return config
     }
 
-    private suspend fun registeredKey(baseUrl: String, appId: String, transport: HttpTransport): String {
-        val base = baseUrl
-        synchronized(records) { if (records[base]?.appId != appId) records.remove(base) }
-        if (record(base) == null) {
-            val keyId = provider.generateKey()
-            changeRecords { it[base] = NativeAttestRecord(keyId = keyId, appId = appId, registered = false) }
+    /**
+     * This installation's key under [appId], registered first where it isn't. A refusal (403) or a body the server can't
+     * read (400, 413) drops the key, which the next attempt replaces; a limit (429) or the server's outage keeps it. Each
+     * fails with NativeVerificationFailed.
+     */
+    private suspend fun registeredKey(baseUrl: String, appId: String, playIntegrityProject: Long?, transport: HttpTransport): String =
+        registering.withLock {
+            val base = baseUrl
+            synchronized(records) { if (records[base]?.appId != appId) records.remove(base) }
+            if (record(base) == null) {
+                val keyId = provider.generateKey()
+                changeRecords { it[base] = NativeAttestRecord(keyId = keyId, appId = appId, registered = false) }
+            }
+            var record = record(base) ?: throw NativeVerificationFailed()
+            if (!record.registered) {
+                val nonce = challenge(baseUrl, record.keyId, "attestation", transport)
+                val statement = provider.attest(record.keyId, sha256(nonce.wellFormed().toByteArray(Charsets.UTF_8)), playIntegrityProject)
+                val body = linkedMapOf("keyId" to record.keyId, "challenge" to nonce, "attestation" to Base64.getEncoder().encodeToString(statement.attestation))
+                // Left out, never null or empty, where there is no token.
+                statement.playIntegrity?.takeIf { it.isNotEmpty() }?.let { body["playIntegrity"] = it }
+                val response = transport.data(apiRequest(baseUrl, "api/public/native/verification", body))
+                if (response.statusCode !in 200 until 300) {
+                    if (response.statusCode in setOf(400, 403, 413)) changeRecords { it.remove(base) }
+                    if (response.statusCode == 403) provider.registered(false)
+                    throw NativeVerificationFailed()
+                }
+                record = record.copy(registered = true)
+                changeRecords { it[base] = record }
+                provider.registered(true)
+            }
+            record.keyId
         }
-        var record = record(base) ?: throw NativeVerificationFailed()
-        if (!record.registered) {
-            val nonce = challenge(baseUrl, record.keyId, "attestation", transport)
-            val attestation = provider.attest(record.keyId, sha256(nonce.wellFormed().toByteArray(Charsets.UTF_8)))
-            api(
-                baseUrl, "api/public/native/verification",
-                linkedMapOf("keyId" to record.keyId, "challenge" to nonce, "attestation" to Base64.getEncoder().encodeToString(attestation)),
-                transport,
-            )
-            record = record.copy(registered = true)
-            changeRecords { it[base] = record }
-        }
-        return record.keyId
-    }
 
     private suspend fun challenge(baseUrl: String, key: String, purpose: String, transport: HttpTransport): String {
         val data = api(baseUrl, "api/public/native/challenge", linkedMapOf("keyId" to key, "purpose" to purpose), transport)
@@ -384,9 +467,15 @@ class NativeVerification(
      * JSONSerialization writes in an order of its own each launch; here they go in the order given.
      */
     private suspend fun api(baseUrl: String, path: String, body: Map<String, String>? = null, transport: HttpTransport): ByteArray {
+        val response = transport.data(apiRequest(baseUrl, path, body))
+        if (response.statusCode !in 200 until 300) throw NativeVerificationFailed()
+        return response.body
+    }
+
+    private fun apiRequest(baseUrl: String, path: String, body: Map<String, String>?): HttpRequest {
         val headers = linkedMapOf("Accept" to "application/json")
         if (body != null) headers["Content-Type"] = "application/json"
-        val request = HttpRequest(
+        return HttpRequest(
             url = baseUrl.appendingPath(path),
             method = if (body != null) "POST" else "GET",
             headers = headers,
@@ -394,9 +483,6 @@ class NativeVerification(
             timeout = 15.0,
             handlesCookies = false,
         )
-        val response = transport.data(request)
-        if (response.statusCode !in 200 until 300) throw NativeVerificationFailed()
-        return response.body
     }
 
     companion object {
@@ -423,6 +509,18 @@ class NativeVerification(
 
         fun needsVerification(response: HttpResponse): Boolean =
             response.statusCode == 403 && response.header("X-Lookup-Verification") == "required"
+
+        /** Which daily allowance a request counts against, as the server tells them apart by path; null for others. */
+        private fun kind(request: HttpRequest): String? = when (Url.parse(request.url)?.path) {
+            "/api/public/parcels" -> "lookup"
+            "/api/public/detect" -> "detection"
+            else -> null
+        }
+
+        /** Seconds to the next UTC midnight, when the allowances start again. */
+        private fun secondsToMidnight(date: Instant): Long =
+            java.time.Duration.between(date, date.atZone(java.time.ZoneOffset.UTC).toLocalDate().plusDays(1).atStartOfDay(java.time.ZoneOffset.UTC).toInstant())
+                .seconds.coerceAtLeast(1)
 
         private fun sha256(data: ByteArray): ByteArray = MessageDigest.getInstance("SHA-256").digest(data)
 

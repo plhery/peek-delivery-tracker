@@ -460,6 +460,16 @@ the two verdicts registers the key, so a key the hardware can't vouch for can
 still register on Play Integrity's word, and Google being down leaves the
 hardware's. Without the number the app sends no token.
 
+The app
+([KeystoreAttestation.kt](../android/app/src/main/kotlin/com/plhery/peekdeliverytracker/platform/KeystoreAttestation.kt))
+registers its key at launch whenever the server's configuration has
+`androidAttestation`, and signs only once `androidAttestAppId` says the server
+enforces. It makes the key in StrongBox where the phone has one. Without a Play
+Integrity token, it stops asking on a system whose attestation no server takes
+(software keys, a failed boot, no key description) until the system changes, and
+after three refused registrations in a row until the system or the app changes.
+A failed registration leaves the Turnstile check as it was.
+
 When enforced, each anonymous lookup is signed with the key, under the same
 challenges and network and global budgets as App Attest: a `strong` key has
 `NATIVE_LOOKUPS_PER_DAY` and `NATIVE_DETECTIONS_PER_DAY`, a `basic` one

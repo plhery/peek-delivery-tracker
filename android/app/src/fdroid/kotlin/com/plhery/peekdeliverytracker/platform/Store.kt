@@ -11,12 +11,13 @@ import androidx.compose.ui.platform.LocalContext
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.ReviewRequester
+import com.plhery.peekdeliverytracker.core.StandardIntegrity
 import com.plhery.peekdeliverytracker.ui.deliveries.LabelScanner
 import com.plhery.peekdeliverytracker.ui.deliveries.NoLabelScanner
 
 /**
  * F-Droid's build, without Google's libraries, where Google Play's has Google's services (src/play): the pushes through
- * UnifiedPush or the inbox ([PushRoute]), no rating prompt and no label scanner.
+ * UnifiedPush or the inbox ([PushRoute]), no rating prompt, no label scanner and no Play Integrity.
  */
 internal object Store {
     /** Nothing to start: the distributor's connector and WorkManager start themselves. */
@@ -36,6 +37,10 @@ internal object Store {
         override suspend fun prepare(): Boolean = false
         override fun launch() = Unit
     }
+
+    /** No Play Integrity: the key's attestation registers it alone. */
+    @Suppress("UNUSED_PARAMETER")
+    fun standardIntegrity(context: Context): StandardIntegrity? = null
 
     /** No label scanner: ML Kit's barcode model is Google's. */
     val scanner: LabelScanner = NoLabelScanner

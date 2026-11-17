@@ -47,6 +47,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkReader
 import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.ParcelSharePreview
 import com.plhery.peekdeliverytracker.core.ParcelStore
+import com.plhery.peekdeliverytracker.core.PlayIntegrityTokens
 import com.plhery.peekdeliverytracker.core.PostcodeMemory
 import com.plhery.peekdeliverytracker.core.PushNotifications
 import com.plhery.peekdeliverytracker.core.ReviewPrompt
@@ -65,12 +66,13 @@ import com.plhery.peekdeliverytracker.platform.CarrierCatalogLoader
 import com.plhery.peekdeliverytracker.platform.CustomTabSignIn
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.platform.DeviceParcelsFile
+import com.plhery.peekdeliverytracker.platform.AndroidAttestationKeys
+import com.plhery.peekdeliverytracker.platform.KeystoreAttestation
 import com.plhery.peekdeliverytracker.platform.KeystoreSecretStore
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.NotificationPermission
 import com.plhery.peekdeliverytracker.platform.NoAppleSignIn
-import com.plhery.peekdeliverytracker.platform.NoDeviceAttestation
 import com.plhery.peekdeliverytracker.platform.OkHttpTransport
 import com.plhery.peekdeliverytracker.platform.ParcelCacheFolder
 import com.plhery.peekdeliverytracker.platform.PeekHttp
@@ -213,11 +215,18 @@ class AppContainer(
     val turnstile = TurnstileSheet(WebViewTurnstilePages)
 
     /**
-     * `NativeVerification.shared`, its records in the keychain service the iPhone keeps them in. The browser check is
-     * its only way through (X-AD29): no device attestation stands in for App Attest.
+     * `NativeVerification.shared`, its records in the keychain service the iPhone keeps them in. A key the phone's secure
+     * hardware attests stands in for App Attest (KeystoreAttestation), with Play Integrity's word in the Play build, the
+     * browser check where it cannot. The app has no Sentry: a Play Integrity configuration bug goes to the log.
      */
     val verification = NativeVerification(
-        provider = NoDeviceAttestation,
+        provider = KeystoreAttestation(
+            defaults,
+            tokens = Store.standardIntegrity(context)?.let { api ->
+                PlayIntegrityTokens(api, report = { code -> Log.w("NativeVerification", "Play Integrity error $code") })
+            },
+            keys = AndroidAttestationKeys(context),
+        ),
         present = turnstile,
         persistence = KeystoreSecretStore.of(context, "com.plhery.PeekDeliveryTracker.appAttest"),
         language = { localizer.language },

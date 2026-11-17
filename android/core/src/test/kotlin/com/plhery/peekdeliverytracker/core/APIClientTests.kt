@@ -338,7 +338,7 @@ class APIClientTests {
         var challenges = 0
         val transport = RecordingTransport { request ->
             when (request.path) {
-                "/api/public/native/verification" -> jsonResponse(200, """{"appAttestAppId":"TESTTEAM01.com.example.Peek","turnstile":true}""")
+                "/api/public/native/verification" -> jsonResponse(200, """{"androidAttestAppId":"android:com.plhery.peekdeliverytracker","turnstile":true}""")
                 "/api/public/native/challenge" -> {
                     challenges += 1
                     jsonResponse(200, """{"challenge":"synthetic-assertion-$challenges"}""")
@@ -350,7 +350,7 @@ class APIClientTests {
             supported = { true }, generateKey = { "unused" }, attest = { _, _ -> ByteArray(0) },
             assert = { key, hash -> "assertion:$key:${hex(hash)}".toByteArray() },
         )
-        val records = mapOf("https://peek.example" to NativeAttestRecord(keyId = "synthetic-key-0", appId = "TESTTEAM01.com.example.Peek", registered = true))
+        val records = mapOf("https://peek.example" to NativeAttestRecord(keyId = "synthetic-key-0", appId = "android:com.plhery.peekdeliverytracker", registered = true))
         val queued = client(transport, TestSession(), verification(provider, records)).queueRefreshAll()
 
         assertEquals(listOf(UUID.fromString("42000000-0000-0000-0000-000000000004")), queued)

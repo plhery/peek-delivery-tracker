@@ -23,9 +23,9 @@ Kopier die Nummer lieber, statt sie abzutippen. Fehlt eine Ziffer, ist eine zu v
 
 ## Post Sendungsverfolgung: was die Status bedeuten
 
-post.ch zeigt jeden Scan in der Sprache, in der du die Seite liest: Deutsch, Französisch, Italienisch oder Englisch. Die Tabelle nennt die deutschen Texte in der Reihenfolge, in der ein Paket sie meist durchläuft, daneben den englischen Text, den du in Peek siehst:
+post.ch zeigt jeden Scan in der Sprache, in der du die Seite liest: Deutsch, Französisch, Italienisch oder Englisch. Die Tabelle nennt die deutschen Texte, die du auch in Peek auf Deutsch siehst, in der Reihenfolge, in der ein Paket sie meist durchläuft, daneben den englischen Text:
 
-| Post.ch (Deutsch) | In Peek (Englisch) | Was es für dich heißt |
+| Post.ch und Peek (Deutsch) | Englisch | Was es für dich heißt |
 | --- | --- | --- |
 | `Ihre Sendung wird demnächst der Post übergeben` | `Your shipment will shortly be handed over to the Swiss Post` | Der Absender hat das Paket angemeldet. Die Post hat es noch nicht. |
 | `Zeitpunkt der Aufgabe Ihrer Sendung` | `Time at which your consignment was mailed` | Aufgegeben, mit der Poststelle, bei der es abgegeben wurde. |
@@ -89,9 +89,9 @@ Eine E-Mail-Adresse für Empfänger steht auf den Kontaktseiten nicht.
 
 [Peek](/) erkennt beide Nummernformen sofort, auch mit Punkten oder Leerzeichen. Links funktionieren ebenso: von service.post.ch, wenn sie auf `/entry/search/` oder `/external/view/` und die Nummer enden, und von www.post.ch oder mys.post.ch zu `/swisspost-tracking` oder `/my-consignments/deeplink-search` mit der Nummer in `formattedParcelCodes`. Andere post.ch-Links nur, wenn eine der beiden Nummern darin steht. Eine Postleitzahl braucht es nicht. Auf der Seite des Pakets öffnet „Website von Swiss Post öffnen“ die Nummer auf der Tracking-Seite der Post, www.post.ch/swisspost-tracking, die zu „Meine Sendungen“ gehört.
 
-Es liest die englischen Texte der Post, egal in welcher Sprache du die Seite nutzt, und zeigt den Status, die Stelle jedes Scans auf der Karte, die voraussichtliche Zustellung (den Tag, mit Zeitfenster, wenn die Post eines nennt, oder mehrere Tage, wenn sie keinen einzelnen nennt), Gewicht, Maße, Zeitpunkt der Zustellung und Zielland. Wartet das Paket auf dich, siehst du Namen und Adresse der Filiale oder des My Post 24-Automaten, bis es abgeholt ist. Deinen Namen, deine Adresse, die Unterschrift und Zustellanweisungen zeigt es nicht, und die Abholfrist liest es nicht.
+Es liest die Texte der Post auf Deutsch, wenn du Peek auf Deutsch nutzt (auf Französisch oder Italienisch in diesen Sprachen, sonst auf Englisch), und zeigt den Status, die Stelle jedes Scans auf der Karte, die voraussichtliche Zustellung (den Tag, mit Zeitfenster, wenn die Post eines nennt, oder mehrere Tage, wenn sie keinen einzelnen nennt), Gewicht, Maße, Zeitpunkt der Zustellung und Zielland. Wartet das Paket auf dich, siehst du Namen und Adresse der Filiale oder des My Post 24-Automaten, bis es abgeholt ist. Deinen Namen, deine Adresse, die Unterschrift und Zustellanweisungen zeigt es nicht, und die Abholfrist liest es nicht.
 
-`Delivered` erscheint als „Zugestellt“, `Delivered to the mailbox/letter box` so, wie die Post es schreibt. Bei `Registered for collection` und `Deposited in the MyPost24 machine` steht das Paket auf „Abholbereit“, die Zeile selbst bleibt englisch.
+`Zugestellt im Ablagefach` erscheint so, wie die Post es schreibt. Bei `Zur Abholung gemeldet (Abholungseinladung)` und `Eingelagert im MyPost24-Automaten` steht das Paket auf „Abholbereit“.
 
 Peek schaut bis zu alle 10 Minuten nach und, sobald das Paket in Zustellung ist, ab 06:00 Uhr Schweizer Zeit bis zu alle 2 Minuten, am Tag der Zustelltour und solange die Post selbst antwortet (nennt die Post ein Zeitfenster, erst ab einer halben Stunde vor dessen Beginn); über Tracking-Dienste alle 15 Minuten. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Auf Wunsch bekommst du Mitteilungen für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Pakete von [GLS Schweiz](carrier:gls-ch) und ausländische Postnummern, die in die Schweiz gehen, kann Peek bis zur Post weiterverfolgen. Eine `CH`-Nummer ins Ausland kann es bei der nationalen Post des Ziellands weiterverfolgen, wenn es diese kennt (etwa in Deutschland, Frankreich oder Italien), sobald sie neuere Schritte zeigt. Die Post für dich kontaktieren kann Peek nicht.
 
@@ -117,7 +117,7 @@ Laut Post benachrichtigt sie sehr selten die falsche Person. Die Sendung geht tr
 - [Die Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Suchfeld, „Meine Sendungen“, Zeitfenster, kostenlos
 - [Die Post: Ereignisse Sendungen verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Bedeutung der Ereignisse
 - [Die Post: Statustexte der Sendungsverfolgung (de)](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – deutsche Scan-Texte
-- [Die Post: Statustexte der Sendungsverfolgung (en)](https://service.post.ch/ekp-web/core/rest/translations/en/shipment-text-messages) – englische Scan-Texte, die Peek zeigt
+- [Die Post: Statustexte der Sendungsverfolgung (en)](https://service.post.ch/ekp-web/core/rest/translations/en/shipment-text-messages) – englische Scan-Texte
 - [Die Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholfrist, QR-Code, Einmal-Vollmacht, Preise
 - [Die Post: Fragen und Antworten zum Empfangen](https://www.post.ch/de/hilfe-und-kontakt/empfangen) – Vortag, nächster Tag, Mitternacht, WhatsApp, Nachforschung, falsche Benachrichtigung
 - [Swiss Post: Manage and receive parcels](https://www.post.ch/en/receiving-mail/manage-consignment/manage-one-off) – Umleiten, Ablageort, Nachbarn, Samstag

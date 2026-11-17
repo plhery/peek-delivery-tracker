@@ -23,7 +23,7 @@ Copia il numero invece di riscriverlo: con una cifra sbagliata, in meno o in pi�
 
 ## Posta Svizzera tracciamento: cosa vogliono dire gli stati
 
-Su post.ch ogni scansione appare nella lingua in cui guardi il sito: in italiano se lo apri in italiano. Peek invece legge il tracking della Posta in inglese, quindi qui trovi entrambe le diciture, nell'ordine in cui le incontra di solito un pacco:
+Su post.ch ogni scansione appare nella lingua in cui guardi il sito: in italiano se lo apri in italiano. Peek legge il tracking della Posta in italiano se lo usi in italiano, in inglese se lo usi in una lingua che la Posta non ha: qui trovi entrambe le diciture, nell'ordine in cui le incontra di solito un pacco:
 
 | La Posta scrive (italiano / inglese) | Cosa vuol dire per te |
 | --- | --- |
@@ -82,7 +82,7 @@ Come risultavano su post.ch l'11 ottobre 2026:
 
 [Peek](/) riconosce subito entrambe le forme, anche con punti o spazi. Funzionano anche i link di service.post.ch con `/entry/search/` o `/external/view/` seguito dal numero e quelli di www.post.ch o mys.post.ch verso `/swisspost-tracking` o `/my-consignments/deeplink-search` con il numero in `formattedParcelCodes`; gli altri link di post.ch solo se contengono uno di questi numeri. Non serve un NPA. Nella pagina del pacco, «Apri il sito Swiss Post» apre il numero sulla pagina di tracking della Posta, www.post.ch/swisspost-tracking, che fa parte di «I miei invii».
 
-Legge i testi inglesi della Posta, in qualunque lingua usi Peek. Mostra lo stato, il luogo di ogni scansione su una mappa, il giorno di consegna previsto (con una fascia oraria quando la Posta la dà) o l'intervallo di giorni, peso, dimensioni, ora di consegna e paese di destinazione. Mentre il pacco aspetta, mostra nome e indirizzo della filiale o del My Post 24, che spariscono dopo il ritiro. Lascia fuori nome e indirizzo del destinatario, firma e istruzioni di recapito, e non legge il termine di ritiro.
+Legge i testi della Posta nella tua lingua se è italiano, tedesco o francese, altrimenti in inglese. Mostra lo stato, il luogo di ogni scansione su una mappa, il giorno di consegna previsto (con una fascia oraria quando la Posta la dà) o l'intervallo di giorni, peso, dimensioni, ora di consegna e paese di destinazione. Mentre il pacco aspetta, mostra nome e indirizzo della filiale o del My Post 24, che spariscono dopo il ritiro. Lascia fuori nome e indirizzo del destinatario, firma e istruzioni di recapito, e non legge il termine di ritiro.
 
 Peek mostra `Delivered` con la sua etichetta «Consegnato» e segna `Registered for collection` e `Deposited in the MyPost24 machine` come «Pronto per il ritiro»; `Delivered to the mailbox/letter box` resta come lo scrive la Posta.
 

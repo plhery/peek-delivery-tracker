@@ -99,7 +99,7 @@ Depende do serviço que a loja contratou, e a MRW não publica um prazo para as 
 
 ### Até que horas entrega a MRW?
 
-Para os envios contratados no próprio site da MRW, as condições prometem a entrega em 24/48 horas úteis antes das 19:00 em Portugal continental. Para as encomendas das lojas, a MRW não publica horário.
+Para os envios contratados no próprio site da MRW, as condições dizem que a entrega segue o serviço contratado. Para as encomendas das lojas, a MRW não publica horário.
 
 ### O que fazer com uma encomenda MRW não entregue?
 
@@ -112,7 +112,7 @@ Usa a ligação do SMS da MRW para escolher outro dia, ou liga para o +351 219 5
 - [MRW: Conoce el estado de tu envío](https://blog.mrw.es/conoce-el-estado-de-tu-envio/) – significado dos estados
 - [MRW: MRW Point, cómo funciona](https://www.mrw.es/oficina_transporte_urgente/MRW_point_funcionamiento.asp) – tipos de Point, aviso, identificação, PIN
 - [MRW Portugal: MRW Point](https://www.mrw.pt/mrw-point/) – definição de MRW Point, mais de 550 lojas
-- [MRW: Condiciones generales del servicio nacional](https://www.mrw.es/uso_MRW_mensajeria/condiciones_venta/) – entrega, identificação, cacifos, 15 dias, prazos de reclamação, 24/48 horas para Portugal
+- [MRW: Condiciones generales del servicio nacional](https://www.mrw.es/uso_MRW_mensajeria/condiciones_venta/) – entrega, identificação, cacifos, 15 dias, prazos de reclamação
 - [MRW Portugal: Reclamação](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_formulario_reclamacion.asp) – formulário, motivos, envios pagos através de terceiros
 - [MRW Portugal: Contate-nos](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_contacto_paqueteria.asp) – telefone e custo da chamada, temas
 - [MRW Portugal: As nossas lojas](https://www.mrw.pt/oficina_transporte_urgente/MRW_franquicia.asp) – Localizar loja, horários em férias, @mrw_portugal

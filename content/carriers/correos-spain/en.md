@@ -71,13 +71,13 @@ Correos's channels, as read on 13 October 2026, are the same for English speaker
 - **Social media:** Facebook, Instagram and X (@CorreosAtiende), Monday to Friday 9am to 8pm.
 - **In person:** any Correos post office.
 
-> Correos says it never asks for personal information, bank details or payments by email or SMS. Customs charges are real, but pay them only by going to correosaduanas.es or the Correos app yourself, not through a link in a message.
+> Correos says it never asks for personal information, bank details or payments by email or SMS. Customs charges are real, but pay them only by going to correosaduanas.es, mioficina.correos.es or the Correos app yourself, or to the postman or at a post office, not through a link in a message.
 
 ## Tracking Correos parcels with Peek
 
 [Peek](/) names Correos at once for 23-character parcel codes, 16-character shipment codes, `PR` numbers and postal numbers ending ES. A code whose check letter fails names no carrier: check it for a typo, or pick Correos with "Change". For a shipment code with one parcel, Peek follows that parcel; with several, track each parcel's 23-character code. correos.es links with `tracking-number=` work, and so do older links with `numero=`.
 
-Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads times on Madrid's clock, except a Canary Islands delivery office's, on Canary time, and the origin post's scans on an item from abroad, on that country's clock.
+Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your address and signature (your name, when Correos gives it, shows under "Recipient" only to whoever added the parcel, never on a shared link). It shows no expected delivery date, and it reads times on Madrid's clock, except a Canary Islands delivery office's, on Canary time, and the origin post's scans on an item from abroad, on that country's clock.
 
 A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks up to every 10 minutes (up to every 2 from 6 a.m. local time on the day Correos scans the parcel out for delivery, while Correos's own tracker answers; through tracking services, every 15 minutes) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
 

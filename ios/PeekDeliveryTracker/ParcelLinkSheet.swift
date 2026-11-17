@@ -715,7 +715,8 @@ private struct LinkRefreshButton: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        .foregroundStyle(tint.opacity(0.75))
+        // The card's ink: the age is words, and anything fainter reads under 4.5:1 on some cards (`ContrastTests`).
+        .foregroundStyle(tint)
         .disabled(refreshing)
         .accessibilityLabel(localizer.text("detail.checkNow"))
         // Voice Control answers to the age the button shows, as well as to its name.

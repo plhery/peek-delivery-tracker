@@ -1775,12 +1775,13 @@ private struct ExperimentalNextDeliveryPass: View {
                 CarrierFleetMark(identity: identity)
                 Spacer(minLength: 0)
                 // A parcel that has arrived is nobody's next: the words keep their room and go.
-                // It keeps to the top of the card, clear of the route drawn below it.
+                // It keeps to the top of the card, clear of the route drawn below it, in the card's ink: anything fainter
+                // reads under 4.5:1 on some carriers' cards (`ContrastTests`).
                 Text(localizer.text("app.nextUp"))
                     .font(.caption2)
                     .textCase(.uppercase)
                     .tracking(1.2)
-                    .foregroundStyle(identity.ink.opacity(0.75))
+                    .foregroundStyle(identity.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .dynamicTypeSize(...DynamicTypeSize.accessibility1)

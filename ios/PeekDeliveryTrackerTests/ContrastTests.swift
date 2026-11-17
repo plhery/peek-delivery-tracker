@@ -89,6 +89,22 @@ final class ContrastTests: XCTestCase {
         }
     }
 
+    /// A card's quieter words in its ink, as Next up on the list's first card and a shared link's age, read at 4.5:1 or
+    /// more on every carrier's card, and a gift's on its lilac.
+    func testACardsInkReadsOnEveryCarriersCardAndAGiftsOnItsLilac() {
+        let catalog = CarrierCatalog(cacheURL: nil)
+        let cards = catalog.definitions.map { id, definition in (id.rawValue, CarrierVisualIdentity(id: id.rawValue, carrier: definition)) }
+        XCTAssertGreaterThan(cards.count, 1000)
+        for (appearance, traits) in appearances {
+            for (name, identity) in cards {
+                let card = shown(identity.surface, traits)
+                XCTAssertGreaterThanOrEqual(ratio(shown(identity.ink, over: card, traits), card), 4.5, "on \(name)'s card, \(appearance)")
+            }
+            let gift = shown(ExperimentalPalette.lilacSurface, traits)
+            XCTAssertGreaterThanOrEqual(ratio(shown(ExperimentalPalette.lilac, over: gift, traits), gift), 4.5, "on the gift, \(appearance)")
+        }
+    }
+
     /// A widget, which can't reach the app's palette, writes its quieter words in the app's grey.
     func testTheWidgetsGreyIsTheApps() {
         for (scheme, traits) in [(ColorScheme.light, appearances[0].traits), (.dark, appearances[1].traits)] {

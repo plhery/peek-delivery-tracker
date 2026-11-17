@@ -3,7 +3,7 @@ title: Colis Privé suivi : statuts, relais et service client
 description: Suivi Colis Privé en France, en Belgique et au Luxembourg : le numéro de 12 caractères et le code postal, chaque statut, les relais et qui contacter.
 slug: suivi-colis-prive
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Colis Privé est un transporteur de colis français pour les boutiques en ligne, qui livre en France, en Belgique et au Luxembourg, à domicile ou en point relais. Pour suivre ton colis, saisis son numéro de 12 caractères et le code postal de livraison sur [colisprive.fr](https://colisprive.fr/) (France) ou [colisprive.be](https://colisprive.be/) (Belgique, Luxembourg). Le numéro arrive dans l'e-mail de la boutique ou dans les notifications de Colis Privé. Rapprochés à l'été 2026, Colis Privé et [Paack](carrier:paack) passent sous une marque commune, Paack, déployée progressivement à partir de janvier 2027 ; d'ici là, la livraison et le suivi des colis continuent comme d'habitude, selon l'annonce de Colis Privé du 16 octobre 2026.
@@ -77,7 +77,7 @@ Aucune page de Colis Privé ne donne de moyen de joindre le livreur.
 
 [Peek](/) a besoin du numéro de 12 caractères et du code postal de livraison. Saisis le numéro et choisis Colis Privé comme transporteur : un champ apparaît pour le code postal, cinq chiffres en France, quatre en Belgique, ou L et quatre chiffres au Luxembourg. Ou saisis le numéro suivi de son code postal : `AB1234567890 75001` (France), `AB1234567890 B1000` (Belgique) ou `AB1234567890 L1234` (Luxembourg), tous inventés. Espaces et tirets passent, mais garde le B ou le L : Peek trouve alors Colis Privé tout seul. Tu peux aussi coller un lien de colisprive.com ou de colisprive.fr.
 
-Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Colis Privé qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il affiche le statut, l'historique en français jour par jour, et un jour de livraison prévu quand une ligne en annonce un, mais ne peut ni réclamer ni contacter Colis Privé à ta place. Le suivi de Colis Privé ne donne pas le lieu des scans, donc pas de carte, et le nom et l'adresse du destinataire sont laissés de côté.
+Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Colis Privé qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il affiche le statut, l'historique en français jour par jour, et un jour de livraison prévu quand une ligne en annonce un, mais ne peut ni réclamer ni contacter Colis Privé à ta place. Le suivi de Colis Privé ne donne pas le lieu des scans, donc pas de carte, et le nom et l'adresse du destinataire sont laissés de côté.
 
 ## Questions sur le suivi Colis Privé
 

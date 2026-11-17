@@ -83,7 +83,7 @@ Tant que GOFO ne connaît pas encore un numéro `GF`, `CR` ou `MGP`, Peek affich
 
 Peek affiche chaque scan avec la ville et l'État américain indiqués par GOFO (par exemple `Jamaica, NY`), place ces étapes sur une carte, indique l'heure de livraison ainsi que le pays de destination. Les libellés des scans restent en anglais tels que GOFO les transmet, tandis que l'étape principale s'affiche en français (« Étiquette créée », « Pris en charge », « En transit », « En livraison », « Livré » — sans le détail que GOFO ajoute parfois après la virgule). GOFO fournit une date de livraison estimée que Peek affiche jusqu'à ce que le colis passe « En livraison », « Livré » ou « Retourné à l’expéditeur » ; en revanche, Peek écarte les photos de livraison, les coordonnées GPS et le poids.
 
-Peek interroge GOFO toutes les 30 minutes, y compris pendant que le colis est « En livraison », attend 60 minutes après un échec de connexion, et passe à un contrôle toutes les heures après deux jours sans nouveauté (ou après 12 heures si le colis reste sur « Étiquette créée » ou « Pris en charge »). Tu peux activer des notifications sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni GOFO ni le vendeur à ta place.
+Peek interroge GOFO jusqu'à toutes les 30 minutes, y compris pendant que le colis est « En livraison », attend 60 minutes après un échec de connexion, et passe à un contrôle toutes les heures après deux jours sans nouveauté (ou après 12 heures si le colis reste sur « Étiquette créée » ou « Pris en charge »). Tu peux activer des notifications sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni GOFO ni le vendeur à ta place.
 
 ## Questions fréquentes sur le suivi GOFO Express
 

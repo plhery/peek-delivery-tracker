@@ -3,7 +3,7 @@ title: SpeedPAK suivi : colis eBay, statuts et qui contacter
 description: Suivre un colis eBay SpeedPAK : à quoi ressemble le numéro de 28 caractères, ce que veut dire chaque statut, qui le livre et qui contacter s'il bloque.
 slug: speedpak-suivi
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 SpeedPAK est le service d'expédition d'eBay pour les commandes venues de l'étranger, conçu avec la société logistique Orange Connex pour les colis qui partent de Chine. Son numéro compte 28 caractères et commence par ES, EE ou EX : saisis-le sur la page de suivi d'Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), ou colle-le dans le champ ci-dessus. Sur eBay.fr, tu le trouves sous forme de lien à côté de l'objet, dans « Mon eBay », puis « Objets achetés ».
@@ -87,7 +87,7 @@ Le site ne dit pas que ces lignes servent aux destinataires, et elles sont en Ch
 
 Quand SpeedPAK nomme le transporteur qui livre, Peek peut l'interroger et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde le numéro que tu as ajouté, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Tant que Peek ne trouve chez ce transporteur que l'annonce du colis, sans scan de sa part, la page indique à la place « Annoncé à …, pas encore reçu ». Ça dépend de ce que SpeedPAK publie, donc pas pour chaque colis.
 
-Peek vérifie le suivi toutes les 10 minutes (toutes les 2 minutes une fois le colis en livraison : le jour même, dès 6 h, heure locale, et tant que c'est le suivi de SpeedPAK qui répond ; via des services de suivi, toutes les 15 minutes), place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL et USPS, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas contacter SpeedPAK ni le vendeur, ni ouvrir une réclamation à ta place.
+Peek vérifie le suivi jusqu'à toutes les 10 minutes (jusqu'à toutes les 2 minutes une fois le colis en livraison : le jour même, dès 6 h, heure locale, et tant que c'est le suivi de SpeedPAK qui répond ; via des services de suivi, toutes les 15 minutes), place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL et USPS, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas contacter SpeedPAK ni le vendeur, ni ouvrir une réclamation à ta place.
 
 ## Questions sur le suivi SpeedPAK
 

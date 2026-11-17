@@ -3,7 +3,7 @@ title: GEODIS suivi : numéro 1G, étapes et livraison
 description: Suivi GEODIS en France : où trouver le numéro 1G, ce que veut dire chaque étape, comment changer la date de livraison et qui contacter en cas de souci.
 slug: geodis-suivi
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 GEODIS est un groupe de transport français, filiale de la SNCF, dont le réseau de colis et de palettes livre les commandes en ligne partout en France. Pour suivre ta livraison, saisis le numéro de 12 caractères qui commence par `1G` dans l'« Espace destinataire » de GEODIS, [espace-client.geodis.com/services/destinataires](https://espace-client.geodis.com/services/destinataires/), ou colle-le dans la case ci-dessus. Pas besoin de compte : « Mon espace GEODIS » est réservé aux clients de GEODIS qui expédient. C'est le magasin ou l'expéditeur qui te donne ce numéro, le plus souvent dans l'e-mail de confirmation ou d'expédition.
@@ -98,7 +98,7 @@ Colle un numéro `1G` et [Peek](/) reconnaît GEODIS tout de suite : aucun autre
 
 Peek lit le suivi de GEODIS en français et affiche ses étapes telles que GEODIS les écrit (la première colonne ci-dessus) ; `Livraison effectuée` devient « Livré ». Il montre le site GEODIS de chaque scan sur une carte, lit les heures de GEODIS comme celles de Paris et affiche le jour de livraison prévu, l'expéditeur et le poids. Une livraison manquée, un problème, un retour ou un colis à retirer passe avant l'étape de la frise. Quand GEODIS donne des étapes sans scans datés, Peek date le statut du moment où il l'a vu.
 
-Il ne reprend pas le nombre de colis, ton nom, ton adresse, les instructions de livraison ni les documents de livraison. Les envois de plus de 12 mois apparaissent comme introuvables. Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (le jour même dès 6 h, heure locale, tant que c'est GEODIS qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas changer ta date de livraison : fais-le dans l'Espace destinataire.
+Il ne reprend pas le nombre de colis, ton nom, ton adresse, les instructions de livraison ni les documents de livraison. Les envois de plus de 12 mois apparaissent comme introuvables. Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même dès 6 h, heure locale, tant que c'est GEODIS qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas changer ta date de livraison : fais-le dans l'Espace destinataire.
 
 ## Questions sur le suivi GEODIS
 

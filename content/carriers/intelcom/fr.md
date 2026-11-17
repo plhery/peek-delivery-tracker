@@ -3,7 +3,7 @@ title: Intelcom / Dragonfly suivi colis : statuts et contact
 description: Suivre un colis Intelcom ou Dragonfly au Québec et au Canada : où trouver le numéro, ce que disent les statuts, la livraison retardée, les arnaques et qui appeler.
 slug: intelcom-dragonfly-suivi-colis
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Intelcom est un livreur montréalais du dernier kilomètre : il apporte chez toi les commandes en ligne de marchands comme Amazon, Walmart, Canadian Tire ou Simons. Au Québec, il garde le nom Intelcom ; dans les autres provinces, la même compagnie s'appelle maintenant Dragonfly. Ton numéro de suivi est dans le courriel d'expédition du marchand ou sur ta page de commande : entre-le sur intelcom.ca ou dragonflyshipping.ca, ou colle-le dans le champ ci-dessus.
@@ -87,7 +87,7 @@ Les agents ont accès aux mêmes informations que toi : garde ton numéro de sui
 
 Peek lit directement le suivi de Dragonfly et affiche les statuts dans leur version anglaise, tels qu'écrits, même pour un colis du Québec : `Nous approchons!` y devient `On our way to you!`, et `Hourra! Votre colis a été livré!` devient `Hooray! Your package is here`. Chaque étape a son heure exacte, mais Dragonfly ne donne pas de lieu. Peek montre la livraison prévue (une plage horaire une fois le colis chez le livreur, un jour avant cela) et, pour les gros marchands comme Amazon, Walmart ou Canadian Tire, le nom de l'expéditeur. Il laisse de côté le nom du livreur, tes coordonnées et la preuve de livraison, et n'affiche ni point de retrait ni poids. Il ne peut pas modifier la livraison ni montrer la photo.
 
-Peek vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison, livraisons du soir comprises (le jour même, dès 6 h, heure locale, et à partir d'une demi-heure avant le début de la plage horaire quand Dragonfly en donne une, tant que c'est le suivi de Dragonfly qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer une notification quand le statut change. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Peek vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison, livraisons du soir comprises (le jour même, dès 6 h, heure locale, et à partir d'une demi-heure avant le début de la plage horaire quand Dragonfly en donne une, tant que c'est le suivi de Dragonfly qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer une notification quand le statut change. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi Intelcom
 

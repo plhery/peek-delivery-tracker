@@ -3,7 +3,7 @@ title: SunYou tracking : suivi du colis, statuts et qui livre
 description: Suivre un colis SunYou (SYPost) venu de Chine : à quoi ressemble le numéro SY, ce que veut dire chaque statut, qui le livre chez toi et qui contacter s'il bloque.
 slug: sunyou-suivi
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 SunYou, aussi appelé SYPost, est une entreprise logistique de Shenzhen qui expédie à l'étranger les petits colis de vendeurs en ligne chinois, puis les confie à un transporteur de ton pays pour la fin du trajet. Ses numéros commencent par SY : saisis le tien sur son site de suivi, [sypost.net](https://www.sypost.net), qui existe en français, ou colle-le dans le champ ci-dessus. C'est la boutique qui te donne ce numéro, avec les informations d'expédition de ta commande.
@@ -88,7 +88,7 @@ Peek interroge SunYou en anglais : les lignes restent en anglais, sauf les libel
 
 Quand SunYou donne le numéro du transporteur local, Peek peut l'interroger, par exemple La Poste pour un numéro postal à destination de la France, et passer à lui dès qu'il montre des étapes plus récentes. Le colis garde son numéro SunYou, sa page indique « Livraison par » ce transporteur et donne son numéro, avec un lien vers son suivi. Tant que Peek ne trouve chez ce transporteur que l'annonce du colis, sans scan de sa part, la page indique à la place « Annoncé à …, pas encore reçu ». Pas pour chaque colis : Meest en Grèce, par exemple, n'est pas suivi.
 
-Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de SunYou qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL, USPS et GOFO aux États-Unis, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni SunYou ni le vendeur à ta place.
+Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de SunYou qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL, USPS et GOFO aux États-Unis, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut contacter ni SunYou ni le vendeur à ta place.
 
 ## Questions sur le suivi SunYou
 

@@ -3,7 +3,7 @@ title: Suivi China Post : numéro, statuts chinois et livraison
 description: Suivre un colis China Post : à quoi ressemble un numéro en CN, ce que veulent dire les statuts en chinois et qui le livre en France, en Belgique ou en Suisse.
 slug: china-post-suivi
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 China Post, c'est la poste nationale chinoise, une entreprise publique, et EMS est sa marque express. Si ta commande AliExpress, Temu, Shein ou d'une autre boutique a un numéro de suivi qui finit par `CN`, c'est China Post qui l'a créé, et chez toi c'est la poste nationale qui livre le colis sous ce même numéro : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique, [La Poste suisse](carrier:swiss-post) en Suisse. Suis-le sur ems.com.cn, le site de China Post, sur celui de ta poste une fois le colis arrivé, ou dans le champ ci-dessus. Le numéro est dans les détails d'expédition de ta commande, sur le site de la boutique.
@@ -103,7 +103,7 @@ Il affiche le statut, l'historique avec le bureau de chaque scan (un bureau écr
 
 Pour un numéro qui finit par `CN`, quand China Post indique la France, la Belgique ou la Suisse comme destination, Peek interroge aussi La Poste, bpost ou La Poste suisse avec le même numéro et passe sur elle dès qu'elle montre des scans récents, sans perdre l'historique de China Post. Sans destination ou sans réponse de China Post, Peek se fie à la région de ton téléphone (iPhone ou Android) ou, sur le web, au pays de ta connexion au moment de l'ajout.
 
-Peek vérifie toutes les 10 minutes, ou toutes les heures une fois que China Post se tait : après 12 heures sans nouveau scan tant que le colis en est à « Étiquette créée » ou « Pris en charge », ou après deux jours à toute autre étape. Une fois le colis en cours de livraison, il vérifie toutes les 2 minutes, ou toutes les 5 quand la vérification doit ouvrir un navigateur, comme pour lire l'aperçu public de China Post : ce jour-là, dès 6 h, heure locale, et tant que c'est le suivi de China Post qui répond. Via des services de suivi, il vérifie toutes les 15 minutes. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni China Post, ni ta poste, ni la boutique à ta place.
+Peek vérifie toutes les heures, même une fois le colis en cours de livraison. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni China Post, ni ta poste, ni la boutique à ta place.
 
 ## Questions sur le suivi China Post
 

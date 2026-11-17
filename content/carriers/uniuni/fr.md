@@ -3,7 +3,7 @@ title: UniUni suivi colis : statuts, livraison et contact
 description: Suivre un colis UniUni au Québec et au Canada : où trouver le numéro, ce que disent les statuts, la livraison manquée, les photos de preuve et qui appeler.
 slug: uniuni-suivi-colis
 published: 2026-10-27
-updated: 2026-11-06
+updated: 2026-11-17
 ---
 
 UniUni (Uni Express inc.) est une entreprise de livraison du dernier kilomètre fondée à Vancouver en 2019 et établie à Richmond, en Colombie-Britannique. Elle livre au Canada et aux États-Unis des commandes en ligne, notamment de Shein, de Temu ou de TikTok. Ton numéro de suivi vient du marchand : entre-le sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/) ou colle-le dans le champ ci-dessus.
@@ -104,7 +104,7 @@ Peek lit le suivi d'UniUni et affiche le statut, chaque scan avec sa ville et sa
 
 Quand UniUni passe le colis à un autre transporteur, les scans de celui-ci s'affichent dans l'historique d'UniUni, mais Peek ne suit pas le numéro de l'autre transporteur. À l'inverse, un colis [SpeedPAK](carrier:speedpak) peut nommer UniUni pour la dernière étape : Peek peut alors le suivre chez UniUni.
 
-Peek vérifie le suivi toutes les 10 minutes. Un colis en livraison est vérifié toutes les 2 minutes le jour même, dès 6 h, heure locale, tant que c'est le suivi d'UniUni qui répond ; si UniUni annonce une plage horaire, à partir d'une demi-heure avant son début. Via des services de suivi, c'est toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Peek vérifie le suivi jusqu'à toutes les 10 minutes. Un colis en livraison est vérifié jusqu'à toutes les 2 minutes le jour même, dès 6 h, heure locale, tant que c'est le suivi d'UniUni qui répond ; si UniUni annonce une plage horaire, à partir d'une demi-heure avant son début. Via des services de suivi, c'est toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi UniUni
 

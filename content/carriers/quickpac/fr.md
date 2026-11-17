@@ -3,7 +3,7 @@ title: Quickpac tracking : suivi du colis, statuts et contact
 description: Suivre un colis Quickpac en Suisse : où trouver le numéro à 18 chiffres, pourquoi Shipped veut dire livré, l'avis de passage et qui contacter.
 slug: quickpac-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Quickpac est un service de colis suisse, intégré depuis 2024 à [Planzer Paket](carrier:planzer) (Planzer Colis en français), qui livre à domicile les colis des boutiques dans certaines zones de Suisse. Ton numéro de suivi à 18 chiffres vient de l'expéditeur, en général dans son e-mail d'expédition, et il est aussi imprimé sous le code-barres du colis. Saisis-le dans [le suivi de Quickpac](https://quickpac.ch/de/tracking), en français si ton navigateur l'est, ou colle-le dans le cadre ci-dessus.
@@ -90,7 +90,7 @@ Impossible d'appeler le livreur directement. Aucune page ne dit si le 0848 fonct
 
 ## Suivre un colis Quickpac avec Peek
 
-[Peek](/) reconnaît un numéro de 18 chiffres commençant par 44 comme Quickpac et le lit sur le site de suivi de Planzer ; un lien de suivi de quickpac.ch ou de tracking.app.planzer.ch se colle aussi. Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et tant que c'est le site de suivi de Planzer qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+[Peek](/) reconnaît un numéro de 18 chiffres commençant par 44 comme Quickpac et le lit sur le site de suivi de Planzer ; un lien de suivi de quickpac.ch ou de tracking.app.planzer.ch se colle aussi. Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et tant que c'est le site de suivi de Planzer qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 Il affiche le statut, l'historique, la livraison prévue, le poids, les dimensions, l'heure de livraison et le pays de destination, mais pas l'adresse du destinataire. `Shipped` y apparaît comme livré. Peek ne peut ni contacter Quickpac à ta place, ni accélérer le colis.
 

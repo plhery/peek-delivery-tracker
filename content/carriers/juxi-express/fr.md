@@ -3,7 +3,7 @@ title: Juxi Express suivi : numéro JXC, livraison et contact
 description: Suivre un colis Juxi Express (SHJX) venu de Chine : à quoi ressemble le numéro JXC, pourquoi Juxi n'a pas de suivi, qui le livre et qui contacter s'il bloque.
 slug: juxi-express-suivi
 published: 2026-10-23
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) est un transitaire de Shanghai qui expédie à l'étranger les colis de vendeurs en ligne chinois, sur ses propres lignes ou par la poste. Il n'a pas de page de suivi à lui : colle le numéro dans le champ ci-dessus, ou cherche-le sur un service de suivi comme 17TRACK, où Juxi s'appelle SHJX. C'est le vendeur qui a choisi Juxi : il te donne le numéro avec les informations d'expédition de ta commande.
@@ -97,7 +97,7 @@ Juxi n'a plus de page de suivi que Peek pourrait lire : le bouton « 在线追�
 
 Si un service de suivi nomme le transporteur qui a pris le relais, avec son propre numéro, Peek affiche « Livraison par » suivi du nom de ce transporteur, et son numéro. Tant que Peek ne trouve chez ce transporteur que l'annonce du colis, sans scan de sa part, il affiche à la place « Annoncé à …, pas encore reçu ». Quand Peek sait lire le suivi de ce transporteur, il l'interroge aussi ; dès qu'un scan y est au moins aussi récent que le dernier de l'historique, Peek suit le colis chez lui et garde les scans d'avant.
 
-Tant que Peek suit le colis via des services de suivi, il vérifie toutes les 15 minutes, même quand le colis est en livraison. Après deux jours sans nouveau scan (12 heures tant que le colis affiche « Étiquette créée » ou « Pris en charge »), il ne vérifie plus qu'une fois par heure. Peek peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
+Tant que Peek suit le colis via des services de suivi, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan, et jusqu'à toutes les 15 minutes le jour où le colis est en livraison. Peek peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut contacter ni Juxi Express ni le vendeur à ta place.
 
 ## Questions sur le suivi Juxi Express
 

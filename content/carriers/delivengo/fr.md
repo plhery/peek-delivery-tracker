@@ -3,7 +3,7 @@ title: Delivengo suivi : ton colis La Poste envoyé de France
 description: Suivi Delivengo hors de France : le numéro en FR, ce que dit le suivi de La Poste, qui livre en Belgique, en Suisse ou au Canada et qui contacter.
 slug: delivengo-suivi
 published: 2026-10-12
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Delivengo est le service d'export de [La Poste](carrier:la-poste) pour les petits colis internationaux. Si une boutique française l'a choisi, ton colis quitte la France avec La Poste et c'est la poste de ton pays qui fait le dernier kilomètre : bpost en Belgique, la Poste suisse, [Postes Canada](carrier:canada-post) au Québec. Tu le suis sur le suivi de La Poste, sur laposte.fr, avec le numéro que la boutique te donne, ou en le collant dans la case ci-dessus.
@@ -73,7 +73,7 @@ Peek affiche ce que La Poste affiche : le statut, l'historique avec le pays de c
 
 Quand La Poste nomme un partenaire ou donne le pays de destination, Peek interroge aussi la poste qu'il suit dans ce pays et passe sur elle dès qu'elle montre une étape plus récente. Il le fait pour la Belgique, le Luxembourg, la Suisse et le Canada, comme pour tous les pays de l'UE, le Royaume-Uni ou les États-Unis. L'historique de La Poste peut toutefois rester muet après l'export : la dernière étape n'apparaît donc pas toujours.
 
-Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de La Poste ou de la poste du pays de destination qui répond ; Royal Mail et Poste Italiane sont interrogés toutes les heures, PostNL et USPS toutes les 30 minutes ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
+Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de La Poste ou de la poste du pays de destination qui répond ; Royal Mail et Poste Italiane sont interrogés toutes les heures, PostNL et USPS toutes les 30 minutes ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures.
 
 ## Questions sur le suivi Delivengo
 

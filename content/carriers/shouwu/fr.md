@@ -3,7 +3,7 @@ title: Suivi colis Shouwu : numéro SWECN…YQ, statuts et livraison
 description: Suivre un colis Shouwu International (守务国际) venu de Chine : à quoi ressemble le numéro SWECN…YQ, ce que veulent dire les statuts et qui livre en France.
 slug: shouwu-suivi
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. En France, c'est surtout Colissimo, et Shouwu annonce 4 à 7 jours ouvrés. Le vendeur choisit le numéro qu'il te transmet : celui de Shouwu, qui commence par SWECN et finit par YQ, ou celui de Colissimo. Colle l'un ou l'autre dans le champ ci-dessus, ou le numéro Shouwu sur son site de suivi, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Pas de numéro ? Demande-le au vendeur : Shouwu n'a aucun contact pour les destinataires.
@@ -132,7 +132,7 @@ Peek tire l'étape du colis du statut de Shouwu, comme dans les tableaux ci-dess
 
 Shouwu ne nomme pas à part le transporteur qui livre : Peek n'affiche donc pas de ligne « Livraison par » et ne suit pas le colis chez ce transporteur, même quand un scan nomme Colis Privé. Si tu as le numéro du transporteur, ajoute-le dans Peek comme un colis à part.
 
-Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Shouwu qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Pour les notifications, tu choisis entre « Chaque scan », « Étapes importantes » (livraison, retrait, douane, tentatives de livraison échouées et retours) et « Livraison seulement ». Peek ne peut contacter ni Shouwu ni le vendeur à ta place.
+Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Shouwu qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Pour les notifications, tu choisis entre « Chaque scan », « Étapes importantes » (livraison, retrait, douane, tentatives de livraison échouées et retours) et « Livraison seulement ». Peek ne peut contacter ni Shouwu ni le vendeur à ta place.
 
 ## Questions sur le suivi Shouwu
 

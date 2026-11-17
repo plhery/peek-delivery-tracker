@@ -3,7 +3,7 @@ title: POST Luxembourg : suivi de colis, PackUp et douane
 description: Suivre un colis POST Luxembourg : le numéro, les étapes du Track and Trace, l'avis de passage, PackUp, les frais de douane hors UE et qui contacter.
 slug: post-luxembourg-suivi-colis
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 POST Luxembourg est la poste nationale du Grand-Duché. Pour suivre un colis ou un recommandé, saisis son numéro dans le [Track and Trace de POST](https://www.post.lu/fr/particuliers/colis-courrier/track-and-trace) (ou sur www.trackandtrace.lu), dans l'application POST Colis & Courrier ou dans le champ ci-dessus. C'est l'expéditeur qui te donne le numéro : il figure sur le bordereau d'expédition.
@@ -103,7 +103,7 @@ Pour un numéro en `LU` dont la clé de contrôle est valide, [Peek](/) demande 
 
 Un envoi venu de l'étranger est d'abord suivi chez la poste d'origine. Peek interroge POST quand celle-ci indique le Luxembourg comme destination, ou n'en indique aucune (voire ne répond pas) et que Peek te situe au Luxembourg, puis passe à POST dès que POST montre une étape au moins aussi récente. Tu peux aussi choisir « POST Luxembourg » avec « Changer ».
 
-Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait. Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de POST qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Les étapes s'affichent dans l'ordre de POST et leurs libellés restent en anglais ; `Item out for delivery` fait passer le colis à « En livraison », `Final delivery` à « Livré ». Peek n'affiche ni date de livraison prévue, ni poids, ni point de retrait. Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de POST qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi des colis POST Luxembourg
 

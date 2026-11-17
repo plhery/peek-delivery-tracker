@@ -3,7 +3,7 @@ title: Suivi colis Speedaf Express : numéro, statuts et contacts
 description: Suivre un colis Speedaf Express envoyé de Chine au Maroc, au Nigeria, au Kenya ou aux Émirats : le numéro, chaque statut, les tentatives de livraison, les contacts.
 slug: speedaf-suivi
 published: 2026-11-01
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Speedaf Express (速达非) est un réseau de livraison fondé en 2019 qui envoie par avion les colis de ses entrepôts en Chine vers l'Afrique, le Moyen-Orient, le Pakistan et quelques pays d'Europe, puis les livre lui-même. Pour suivre ton colis, saisis son numéro sous « Track » sur [speedaf.com](https://www.speedaf.com/cn-en/send-parcel) ou colle-le ci-dessus. Le numéro figure dans les détails d'expédition de ta commande.
@@ -111,7 +111,7 @@ Peek lit directement le suivi de Speedaf : statut, historique, pays de destinati
 
 Les lignes s'affichent telles qu'écrites, en anglais sinon en chinois, sans les noms du livreur, de l'agent et du signataire ni le téléphone du livreur. Peek écarte aussi la preuve de livraison, le lien de paiement des droits et le nombre de colis, et ne suit que ton numéro, pas les autres colis de la même lettre de transport.
 
-Peek vérifie toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Speedaf qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Ses notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni payer les droits, ni reprogrammer une livraison, ni contacter Speedaf ou la boutique à ta place.
+Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Speedaf qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Ses notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni payer les droits, ni reprogrammer une livraison, ni contacter Speedaf ou la boutique à ta place.
 
 ## Questions sur le suivi Speedaf
 

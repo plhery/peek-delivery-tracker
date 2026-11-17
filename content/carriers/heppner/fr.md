@@ -3,7 +3,7 @@ title: Heppner suivi : numéro, code postal et rendez-vous
 description: Suivi Heppner en France et en Suisse : où trouver le numéro à 8 chiffres, pourquoi il faut ton code postal, ce que veut dire chaque étape et qui contacter.
 slug: heppner-suivi
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Heppner est un transporteur routier français, « du petit colis au camion complet » : messagerie, palettes et lots complets. Son service Heppner CONNECT livre aux particuliers les commandes en ligne, même celles de plus de 30 kilos ; en Suisse, Heppner passe par SAFRAM, qui fait partie du groupe. Pour suivre ta livraison, saisis sur [la page destinataire de Heppner](https://www.heppner-group.com/destinataire-suivez-votre-marchandise/) le numéro reçu dans ses notifications et ton code postal de livraison, ou colle ce numéro dans la case ci-dessus et choisis Heppner.
@@ -91,7 +91,7 @@ Peek demande alors le code postal de livraison et ne suit rien sans lui : 5 chif
 
 Il affiche le statut et l'historique, à l'heure exacte, et nomme chaque étape avec ses propres mots : « Colis pris en charge », « En transit », « Colis acheminé », « En livraison », « Livré », « Retourné à l’expéditeur », « En attente d’instructions de livraison », « Problème avec le colis ». L'attente d'instructions, l'anomalie de prise en charge et une expédition annulée (« Shipment cancelled », en anglais) comptent comme des problèmes. Le message de Heppner qui annonce une livraison à une nouvelle adresse, sous une nouvelle référence, apparaît en anglais (« Forwarded to a new address under a new reference ») et le colis reste en transit. Pas de lieu pour les scans, pas de date prévue ni de point de retrait ; l'expéditeur, ton nom, ton adresse et les instructions de livraison ne sont pas repris.
 
-Peek vérifie toutes les 10 minutes, toutes les 2 minutes une fois la commande en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Heppner qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
+Peek vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois la commande en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Heppner qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas réserver ton créneau : fais-le sur la page de Heppner.
 
 ## Questions sur le suivi Heppner
 

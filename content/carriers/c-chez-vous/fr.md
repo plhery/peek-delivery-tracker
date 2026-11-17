@@ -3,7 +3,7 @@ title: C Chez Vous suivi : numéro de commande, étapes et contact
 description: Suivi C Chez Vous pour un meuble ou un gros électroménager : où trouver le numéro de commande, ce que veut dire chaque étape et comment changer ta date.
 slug: c-chez-vous-suivi
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 C Chez Vous livre les colis volumineux de plus de 30 kg commandés en ligne, comme les meubles et le gros électroménager, à domicile sur rendez-vous ou en point retrait. C'est le magasin qui l'a choisi quand tu as commandé. Pour suivre ta livraison, saisis sur [la page de suivi de C Chez Vous](https://www.cchezvous.fr/suivi-colis) le numéro de commande reçu par e-mail ou par SMS, ou colle-le dans la case ci-dessus.
@@ -99,7 +99,7 @@ Le statut de Peek indique « Étiquette créée » à l'enregistrement de la com
 
 Quelques limites. `En livraison` reste « En transit » dans Peek, puisque la phrase de C Chez Vous parle encore de la plateforme régionale, et la page de suivi n'a pas d'étape « en cours de livraison ». Il ne lit pas `Annulée` : une commande annulée cesse simplement d'avancer.
 
-Il laisse de côté le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie toutes les 10 minutes et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Sans étape « en cours de livraison », il ne passe jamais aux vérifications toutes les 2 minutes du jour de livraison, et « Livraison seulement » ne t'envoie que l'alerte « Livré » ; les étapes importantes te préviennent aussi quand une commande en point retrait est disponible. Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas déplacer ton rendez-vous.
+Il laisse de côté le magasin, ton nom, ton adresse, tes coordonnées et les articles commandés. Il vérifie jusqu'à toutes les 10 minutes et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Sans étape « en cours de livraison », il ne passe jamais aux vérifications toutes les 2 minutes du jour de livraison, et « Livraison seulement » ne t'envoie que l'alerte « Livré » ; les étapes importantes te préviennent aussi quand une commande en point retrait est disponible. Après deux jours sans nouvelles, ou après 12 heures si la commande en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut pas déplacer ton rendez-vous.
 
 ## Questions sur le suivi C Chez Vous
 

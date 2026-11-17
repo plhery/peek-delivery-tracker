@@ -3,7 +3,7 @@ title: Swiss Post : suivi colis La Poste suisse et statuts
 description: Suivre un colis de La Poste suisse : à quoi ressemble le numéro, ce que veut dire chaque statut, que faire après une invitation à retirer, et qui contacter.
 slug: swiss-post-suivi-colis
 published: 2026-10-11
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 La Poste suisse (Swiss Post, Die Post, La Posta) est le service postal national : elle livre les colis en Suisse et au Liechtenstein. Tu suis ton colis gratuitement sur [post.ch](https://www.post.ch/fr/reception/suivi-des-envois) avec son numéro d'envoi, ou en le collant dans le champ ci-dessus. Ce numéro vient de l'expéditeur : cherche d'abord dans l'e-mail d'expédition de la boutique.
@@ -87,7 +87,7 @@ Peek lit le suivi de La Poste en anglais, quelle que soit ta langue : tu y verra
 
 Il affiche le statut, l'office de chaque scan sur une carte, la livraison prévue (le jour, avec un créneau quand La Poste en donne un, ou une fourchette de jours), le poids, les dimensions, l'heure de livraison et le pays de destination. Pendant que le colis t'attend, il montre le nom et l'adresse de l'office ou de l'automate My Post 24, qui disparaissent une fois le colis retiré. Il laisse de côté ton nom, ton adresse, la signature et les instructions de livraison, et ne lit pas le délai de retrait.
 
-Il vérifie le suivi toutes les 10 minutes, toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et à partir d'une demi-heure avant le début du créneau quand La Poste en donne un, tant que c'est le suivi de La Poste qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Un colis [GLS Suisse](carrier:gls-ch) ou un numéro postal étranger à destination de la Suisse peut être suivi jusque chez La Poste ; un numéro `CH` qui part à l'étranger, jusqu'à la poste nationale du pays de destination quand Peek la connaît (l'Allemagne, la France ou l'Italie, par exemple), une fois qu'elle montre du nouveau.
+Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et à partir d'une demi-heure avant le début du créneau quand La Poste en donne un, tant que c'est le suivi de La Poste qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Un colis [GLS Suisse](carrier:gls-ch) ou un numéro postal étranger à destination de la Suisse peut être suivi jusque chez La Poste ; un numéro `CH` qui part à l'étranger, jusqu'à la poste nationale du pays de destination quand Peek la connaît (l'Allemagne, la France ou l'Italie, par exemple), une fois qu'elle montre du nouveau.
 
 ## Questions sur le suivi des colis La Poste suisse
 

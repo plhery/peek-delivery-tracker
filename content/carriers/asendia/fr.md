@@ -3,7 +3,7 @@ title: Asendia suivi : colis, statuts et qui contacter
 description: Suivre un colis Asendia : d'où vient le numéro, ce que veulent dire les statuts, qui le livre en France, en Belgique ou en Suisse et qui contacter s'il bloque.
 slug: asendia-suivi
 published: 2026-10-11
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Asendia, détenue par La Poste et la Poste suisse, transporte d'un pays à l'autre les commandes en ligne des boutiques. Elle ne livre pas jusqu'à ta porte : elle amène le colis de l'entrepôt du vendeur à l'étranger jusqu'à ton pays, où un transporteur que tu connais sans doute prend le relais. Pour le suivre, prends le numéro donné par la boutique dans son e-mail d'expédition et saisis-le sur [le suivi d'Asendia](https://track.asendia.com/track) ou, pour Asendia USA, sur [A1 Tracking](https://a1.asendiausa.com/tracking/).
@@ -87,7 +87,7 @@ Peek interroge d'abord le suivi A1 d'Asendia USA. Si A1 ne répond pas, il ouvre
 
 Quand A1 répond, tu vois le statut, l'historique avec la ville, la région et le pays, le poids, le pays de destination et le transporteur qui livre avec son propre numéro. Pas de date de livraison prévue. Peek laisse de côté les adresses, les codes postaux, le nom du service, les références de commande et tout scan sans fuseau horaire. Les lignes restent dans l'anglais d'A1. Quand le transporteur qui livre est suivi par Peek, comme La Poste, la Poste suisse ou USPS, le colis peut être suivi chez lui : sa page indique alors « Livraison par » ce transporteur. Ça ne vaut pas pour chaque colis.
 
-Peek vérifie toutes les 10 minutes (une fois le colis en livraison, toutes les 2 minutes, ou toutes les 5 tant qu'il lit track.asendia.com), place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Ces vérifications rapprochées ne valent que le jour où le colis part en livraison, dès 6 h, heure locale, et tant que ce sont les suivis d'Asendia qui répondent ; quand ce sont des services de suivi qui répondent, c'est toutes les 15 minutes. Une fois le colis suivi chez USPS, Peek vérifie toutes les 30 minutes, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut ni contacter Asendia ou la boutique, ni faire de réclamation à ta place.
+Peek vérifie jusqu'à toutes les 10 minutes (une fois le colis en livraison, jusqu'à toutes les 2 minutes, ou toutes les 5 tant qu'il lit track.asendia.com), place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Ces vérifications rapprochées ne valent que le jour où le colis part en livraison, dès 6 h, heure locale, et tant que ce sont les suivis d'Asendia qui répondent ; quand ce sont des services de suivi qui répondent, c'est toutes les 15 minutes. Une fois le colis suivi chez USPS, Peek vérifie toutes les 30 minutes, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut ni contacter Asendia ou la boutique, ni faire de réclamation à ta place.
 
 ## Questions sur le suivi Asendia
 

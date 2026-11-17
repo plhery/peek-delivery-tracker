@@ -3,7 +3,7 @@ title: Suivi J&T Express Allemagne : numéro JTDE et statuts
 description: Suivre un colis J&T Express en Allemagne : format du numéro JTDE, sens des statuts en anglais et que faire si le colis est bloqué, perdu ou non reçu.
 slug: jt-express-allemagne-suivi
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Francfort-sur-le-Main) est le réseau allemand du groupe de livraison J&T Express : il livre des colis en Allemagne. Si une boutique a expédié ta commande vers une adresse allemande avec J&T, le numéro de suivi commence par `JTDE` : colle-le dans le champ ci-dessus, ou recherche-le sur [le suivi de J&T sur jtexpress.de](https://www.jtexpress.de/tracking). C'est la boutique qui a expédié ta commande qui détient ce numéro, dans son e-mail d'expédition ou sur la page de ta commande.
@@ -103,7 +103,7 @@ Peek affiche le statut, chaque scan à son heure exacte ainsi que le moment de l
 
 Tant que J&T n'a pas scanné le colis, Peek continue d'interroger le suivi et affiche sur peektracker.com « En attente de J&T Express Germany » (ou, si J&T ne connaît toujours pas le numéro deux jours plus tard, l'invitation à le vérifier). Lorsque le suivi de J&T est injoignable ou ne connaît pas le numéro, Peek interroge des services de suivi et montre leur historique, avec leurs propres libellés. Si par la suite le suivi de J&T et les services de suivi répondent tous sans aucun scan pour un colis qui en possède déjà, Peek garde les scans déjà trouvés et, si cela dure, indique : « Le transporteur n’a pas de nouveau scan pour l’instant. Ceux déjà trouvés sont gardés, et Peek continue de vérifier. »
 
-Tant que le suivi de J&T répond directement, Peek vérifie toutes les 10 minutes, et toutes les 2 minutes le jour où J&T scanne le colis en livraison, dès 6 h, heure locale (via des services de suivi, toutes les 15 minutes). Après deux jours sans nouveau scan (ou 12 heures tant que le colis reste à « Pris en charge »), Peek passe à une vérification par heure. Tu peux activer les alertes sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni J&T ni la boutique à ta place, ni modifier l'adresse ou reprogrammer une livraison.
+Tant que le suivi de J&T répond directement, Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes le jour où J&T scanne le colis en livraison, dès 6 h, heure locale (via des services de suivi, toutes les heures, et jusqu'à toutes les 15 minutes ce jour-là). Après deux jours sans nouveau scan (ou 12 heures tant que le colis reste à « Pris en charge »), Peek passe à une vérification par heure. Tu peux activer les alertes sur « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek ne peut contacter ni J&T ni la boutique à ta place, ni modifier l'adresse ou reprogrammer une livraison.
 
 ## Questions fréquentes sur le suivi J&T Express Germany
 

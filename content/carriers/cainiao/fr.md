@@ -3,7 +3,7 @@ title: Cainiao suivi : numéros, statuts et qui contacter
 description: Suivre un colis Cainiao venu d'AliExpress : à quoi ressemble le numéro, ce que veut dire chaque statut, où il t'attend en France et qui contacter s'il bloque.
 slug: cainiao-suivi
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Cainiao est le groupe logistique d'Alibaba : il achemine à l'étranger les colis de vendeurs de plateformes comme AliExpress et, en France, il a aussi son propre réseau de livraison. Pour suivre ton colis, saisis son numéro sur [global.cainiao.com](https://global.cainiao.com/), le site de suivi de Cainiao, qui ne suit que les colis Cainiao et AliExpress, ou colle-le dans le champ ci-dessus. Sur AliExpress, le numéro se trouve dans le suivi de ta commande : l'aide d'AliExpress indique « My Orders », puis la commande, puis « Tracking ».
@@ -81,7 +81,7 @@ Rien pour la Belgique et la Suisse : fr.cainiao.com ne couvre que la « France m
 
 AliExpress donne parfois déjà le numéro du transporteur qui livrera, par exemple un numéro SDA pour un colis vers l'Italie, alors que Cainiao a encore le colis. Pour certaines de ces formes, Peek interroge Cainiao en plus de ce transporteur. Si les deux connaissent le numéro, Peek range le colis sous « AliExpress / Cainiao », qui a les scans d'avant la frontière, et interroge aussi le transporteur qui livre pour le dernier kilomètre : ses scans rejoignent l'historique dès qu'il signale le colis.
 
-Il vérifie le suivi toutes les 30 minutes, y compris quand le colis est en livraison (après une vérification qui échoue, il attend une heure), place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL, USPS et GOFO aux États-Unis, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il affiche le statut, l'historique en anglais, le lieu d'un scan quand Cainiao en donne un, la livraison prévue sous forme de fourchette de dates quand elle existe, l'heure de livraison et le numéro du transporteur local quand Cainiao le publie. Il ne peut ni contacter Cainiao ni réclamer à ta place.
+Il vérifie le suivi jusqu'à toutes les 30 minutes, y compris quand le colis est en livraison (après une vérification qui échoue, il attend une heure), place chaque scan sur une carte et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL, USPS et GOFO aux États-Unis, même en livraison. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il affiche le statut, l'historique en anglais, le lieu d'un scan quand Cainiao en donne un, la livraison prévue sous forme de fourchette de dates quand elle existe, l'heure de livraison et le numéro du transporteur local quand Cainiao le publie. Il ne peut ni contacter Cainiao ni réclamer à ta place.
 
 ## Questions sur le suivi Cainiao
 

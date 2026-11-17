@@ -3,7 +3,7 @@ title: Canpar suivi : numéro, avis de livraison et SMARTSpot
 description: Suivre un colis Canpar Express : où trouver le numéro de repérage, ce que disent les statuts, l'avis de livraison, les SMARTSpots, les réclamations et qui appeler.
 slug: canpar-suivi
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Canpar Express est un transporteur canadien de petits colis, propriété de TFI International. Pour suivre ton colis, entre son numéro de repérage dans l'outil Repérer un colis de [canpar.com](https://www.canpar.com/fr/tracking/track.htm) ou colle-le dans le champ ci-dessus. Ce numéro vient de la boutique : il est dans son courriel d'expédition ou sur ta page de commande, et il est imprimé sur l'étiquette du colis.
@@ -97,7 +97,7 @@ Garde ton code à barres ou le numéro W de ton avis sous la main.
 
 Peek affiche le statut dans l'anglais de Canpar, chaque scan avec sa ville et sa province sur une carte, ainsi que la date de livraison prévue. Un colis au SMARTSpot apparaît comme « Prêt à être retiré », sans le nom ni l'adresse du comptoir : vois-les sur canpar.com. Peek laisse de côté la preuve de livraison, le destinataire, les adresses et les références. Un colis confié à un livreur partenaire reste « En transit » : Peek ne suit pas ce partenaire. Il ne peut ni réacheminer le colis ni joindre Canpar pour toi.
 
-Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à l'heure du lieu du scan. Il vérifie le suivi toutes les 10 minutes, et toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Canpar qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Les heures des scans de Canpar n'ont pas de fuseau horaire : Peek lit chacune à l'heure du lieu du scan. Il vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Canpar qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions sur le suivi Canpar
 

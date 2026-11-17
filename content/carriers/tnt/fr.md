@@ -3,7 +3,7 @@ title: TNT suivi colis : bon de transport, statuts et livraison
 description: Suivre un colis TNT : le bon de transport à 16 ou 9 chiffres, le sens des statuts, l'avis de passage, le retrait, la douane, les réclamations et le contact.
 slug: tnt-suivi-colis
 published: 2026-10-27
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 En France, les services TNT sont proposés par FedEx Express FR. Ton colis porte un numéro de bon de transport : 16 chiffres pour un envoi en France, 9 pour un envoi international (8 ou 9 selon la FAQ de TNT). Suis-le sur le [Suivi colis de tnt.fr](https://www.tnt.fr/public/suivi_colis/recherche/index.do), sur tnt.com, ou colle-le dans le champ ci-dessus.
@@ -99,7 +99,7 @@ Colle le bon de transport. Pour un numéro à 9 chiffres dont la clé de contrô
 
 À 9 chiffres, Peek lit tnt.com : le statut, l'historique avec la ville et le pays de chaque scan, le pays de destination et la date de livraison prévue tant que TNT en donne une. Comme les numéros reviennent, il retient l'envoi dont le dernier scan est le plus récent : vérifie que le trajet est bien le tien. À 16 chiffres, il lit tnt.fr : l'étape en cours et chaque ligne avec son lieu, sans date prévue. Les heures s'affichent dans le fuseau horaire de ton appareil. La référence de l'expéditeur et la signature restent sur les sites de TNT.
 
-Peek vérifie le suivi toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de TNT qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut ni contacter TNT ou l'expéditeur, ni payer la douane, ni changer une livraison.
+Peek vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de TNT qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Il ne peut ni contacter TNT ou l'expéditeur, ni payer la douane, ni changer une livraison.
 
 ## Questions sur le suivi TNT
 

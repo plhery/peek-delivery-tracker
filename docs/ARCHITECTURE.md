@@ -53,9 +53,9 @@ Key server modules:
   or double-run work. This is the only code path with cross-account access. An idle
   worker asks for a job less often, down to every 10 s; a job its own process queues
   wakes it at once, so only a job another container queued or handed back can wait. Each
-  server runs two: one takes every job, the other only readers' checks, beside the
+  server runs three: one takes every job, the other two only readers' checks, beside the
   scheduled run ([ROUTING.md](ROUTING.md)), and `checkHolds.ts` keeps what the checks
-  under way hold across the two.
+  under way hold across them.
 - `trackingSync.ts` runs one refresh through the adapter registry;
   `trackingRouting.ts` decides which source to ask ([ROUTING.md](ROUTING.md)), and
   `sharedLookups.ts` lets the copies of a number in one scheduled run share their lookups,

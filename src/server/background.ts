@@ -130,6 +130,12 @@ export function readerLaneEnabled(env: Record<string, string | undefined> = proc
 }
 
 /**
+ * How many readers' checks the lane runs at once: a link opened behind a slow check (a browser read, a provider's)
+ * starts beside it. Checks holding the same account, number, carrier or provider still take turns (checkKeys).
+ */
+export const READER_LANE_SLOTS = 2;
+
+/**
  * Claims and runs the queue's jobs, one at a time. The `readers` lane claims only readers' checks (claim_reader_sync_job)
  * and runs them beside the other lane's scheduled run; the other lane claims every job.
  */
@@ -684,8 +690,11 @@ interface BackgroundRuntime {
   client: SupabaseServiceClient;
   state: BackgroundState;
   worker: SyncJobWorker;
-  /** The readers' lane, when it is on. Its state is its own: readiness follows the other worker's heartbeat. */
-  readerWorker?: SyncJobWorker | null;
+  /**
+   * The readers' lane's workers (READER_LANE_SLOTS), none when it is off. Their state is their own: readiness follows
+   * the other worker's heartbeat.
+   */
+  readerWorkers: SyncJobWorker[];
   scheduler: ScheduledSync;
   friendshipWorker: FriendshipPushWorker;
   reviews: ReviewQueueReplay;
@@ -702,14 +711,14 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   if (current?.state.draining) return current;
   if (current?.client === client && current.friendshipWorker && current.reviews) {
     current.worker.start();
-    current.readerWorker?.start();
+    for (const reader of current.readerWorkers) reader.start();
     current.scheduler.start();
     current.friendshipWorker.start();
     current.reviews.start();
     return current;
   }
   current?.worker.stop();
-  current?.readerWorker?.stop();
+  for (const reader of current?.readerWorkers ?? []) reader.stop();
   current?.scheduler.stop();
   current?.friendshipWorker?.stop();
   current?.reviews?.stop();
@@ -720,25 +729,26 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   // The Android app's inbox needs nothing but the database, so every deployment has a channel to send to.
   const service = new TrackingSyncService(client, undefined, notifier, undefined, emails, { readerLane: readerLaneEnabled() });
   const worker = new SyncJobWorker(service, state);
-  const readerWorker = service.readerLane ? new SyncJobWorker(service, initialState(), undefined, 'readers') : null;
+  const readerWorkers = service.readerLane
+    ? Array.from({ length: READER_LANE_SLOTS }, () => new SyncJobWorker(service, initialState(), undefined, 'readers')) : [];
   const scheduler = new ScheduledSync(client, worker, state);
   const friendshipWorker = new FriendshipPushWorker(new FriendshipPushService(
     client, notifier.web, notifier.native, notifier.fcm, notifier.unifiedpush, notifier.inbox,
   ));
   // Once per deployed version, the support backlog is replayed against it.
   const reviews = new ReviewQueueReplay(client);
-  const runtime = { client, state, worker, readerWorker, scheduler, friendshipWorker, reviews };
+  const runtime = { client, state, worker, readerWorkers, scheduler, friendshipWorker, reviews };
   globalBackground.__deliveryBackgroundRuntime = runtime;
   // Each scrape reads the queue this worker serves.
   readSyncQueueWith(() => client.syncQueue());
   worker.start();
-  readerWorker?.start();
+  for (const reader of readerWorkers) reader.start();
   scheduler.start();
   friendshipWorker.start();
   reviews.start();
   logOperationalEvent('background_services_started', {
     sync_enabled: true,
-    reader_lane: Boolean(readerWorker),
+    reader_lane: readerWorkers.length > 0,
     web_push_enabled: Boolean(notifier.web),
     native_push_enabled: Boolean(notifier.native),
     fcm_push_enabled: Boolean(notifier.fcm),
@@ -751,7 +761,7 @@ export function startBackgroundServices(): BackgroundRuntime | null {
 
 export function wakeSyncWorker(): void {
   globalBackground.__deliveryBackgroundRuntime?.worker.wake();
-  globalBackground.__deliveryBackgroundRuntime?.readerWorker?.wake();
+  for (const reader of globalBackground.__deliveryBackgroundRuntime?.readerWorkers ?? []) reader.wake();
 }
 
 export function wakeFriendshipWorker(): void { globalBackground.__deliveryBackgroundRuntime?.friendshipWorker?.wake(); }
@@ -767,5 +777,5 @@ export async function drainBackgroundServices(): Promise<void> {
   runtime.scheduler.stop();
   runtime.friendshipWorker.stop();
   runtime.reviews.stop();
-  await Promise.all([runtime.worker.drain(), runtime.readerWorker?.drain()]);
+  await Promise.all([runtime.worker.drain(), ...runtime.readerWorkers.map((reader) => reader.drain())]);
 }

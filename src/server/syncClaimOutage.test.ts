@@ -12,7 +12,7 @@ let network: MockInstance<typeof fetch> | null = null;
 afterEach(() => {
   for (const runtime of started.splice(0)) {
     runtime.worker.stop();
-    runtime.readerWorker?.stop();
+    for (const reader of runtime.readerWorkers) reader.stop();
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
     runtime.reviews.stop();

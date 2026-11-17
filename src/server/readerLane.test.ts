@@ -147,6 +147,22 @@ describe('the limits the lanes share', () => {
     expect(gated.peak()).toBe(3);
   });
 
+  it('runs two readers\' checks at once, and two holding the same carrier one after the other', async () => {
+    const gated = gatedAdapter();
+    const { sync } = service([], gated.adapter);
+    const first = sync.syncPackage(parcel('a', 'one', 'la-poste', 'TEST0001'), { trigger: 'refresh' });
+    const other = sync.syncPackage(parcel('b', 'two', 'dhl', 'TEST0002'), { trigger: 'refresh' });
+    const same = sync.syncPackage(parcel('c', 'three', 'la-poste', 'TEST0003'), { trigger: 'refresh' });
+    await vi.waitFor(() => expect(gated.asked()).toEqual(['la-poste TEST0001', 'dhl TEST0002']));
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    expect(gated.asked()).not.toContain('la-poste TEST0003');
+    await gated.pass('la-poste TEST0001');
+    await gated.pass('la-poste TEST0003');
+    await gated.pass('dhl TEST0002');
+    await Promise.all([first, other, same]);
+    expect(gated.peak()).toBe(2);
+  });
+
   it('gives way only to the checks the readers\' lane does not take', async () => {
     const gated = gatedAdapter();
     const { db, sync } = service([parcel('a', 'one', 'la-poste', 'TEST0001'), parcel('c', 'three', 'ups', '1Z0000000000000003')], gated.adapter);

@@ -454,7 +454,7 @@ end; the next run takes the parcels it left, which are still due.
 A run that checked every parcel it took and left more lookups due than its twenty (below) is queued again at once rather
 than in the next window, and does its upkeep at most once in 2 minutes.
 Readers' checks, a new parcel's or lookup's first check, a link opened and a refresh, have a lane of their own beside
-the run, which takes them one at a time as they are queued (`claim_reader_sync_job`); `SYNC_READER_LANE=off` switches it
+the run, which takes them as they are queued, two at once (`claim_reader_sync_job`); `SYNC_READER_LANE=off` switches it
 off ([DEPLOYMENT.md](DEPLOYMENT.md)). Such a check holds what the run's checks hold and waits for any check under way that
 holds the same, and the run starts no check that needs what a waiting one needs. A check of a number another check is
 asking about waits for it and takes its answers rather than asking again; one of the same parcel takes that check as its

@@ -27,7 +27,7 @@ beforeEach(() => {
 afterEach(() => {
   for (const runtime of started.splice(0)) {
     runtime.worker.stop();
-    runtime.readerWorker?.stop();
+    for (const reader of runtime.readerWorkers) reader.stop();
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
     runtime.reviews.stop();
@@ -58,16 +58,22 @@ it('sends delivery emails on a deployment without push, and says so at startup',
 it('runs the readers\' checks in a lane of their own, unless switched off', () => {
   const lane = start();
   expect(lane.worker.service.readerLane).toBe(true);
-  expect(lane.readerWorker?.lane).toBe('readers');
-  expect(lane.readerWorker?.service).toBe(lane.worker.service);
-  expect(lane.readerWorker?.state).not.toBe(lane.state);
+  // Two readers' checks at once, each worker with its own state.
+  expect(lane.readerWorkers).toHaveLength(2);
+  for (const reader of lane.readerWorkers) {
+    expect(reader.lane).toBe('readers');
+    expect(reader.service).toBe(lane.worker.service);
+    expect(reader.state).not.toBe(lane.state);
+  }
+  expect(lane.readerWorkers[0]!.state).not.toBe(lane.readerWorkers[1]!.state);
+  expect(new Set(lane.readerWorkers.map((reader) => reader.workerId)).size).toBe(2);
   lane.worker.stop();
-  lane.readerWorker?.stop();
+  for (const reader of lane.readerWorkers) reader.stop();
   delete globalRuntime.__deliveryBackgroundRuntime;
   vi.stubEnv('SYNC_READER_LANE', 'off');
   const off = start();
   expect(off.worker.service.readerLane).toBe(false);
-  expect(off.readerWorker).toBeNull();
+  expect(off.readerWorkers).toEqual([]);
 });
 
 it('sends no email without mail settings', () => {

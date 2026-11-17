@@ -1000,6 +1000,9 @@ export class TrackingRouter {
       const at = now().getTime();
       return end === undefined || at >= end - HOUR ? retryAt : Math.min(retryAt, Math.max(end - HOUR, at + HOUR / 2));
     };
+    // A carrier a provider named for the number, other than the filed one and not confirmed for it.
+    const providerNamed = (carrier: string) => carrier !== declared && carrier === state.discovered_carrier
+      && !(state.confirmed_carrier === carrier && state.confirmed_number === number);
     const fail = (provider: string, error: unknown, universalSource = false): Failure => {
       const classified = routingFailure(error);
       const kind = classified.kind === 'transport' && answeredWithoutHistory(error, !universalSource)
@@ -1013,15 +1016,22 @@ export class TrackingRouter {
       const count = firstScanAwaited && previous?.kind !== 'no_history' ? 1 : Math.min(20, (previous?.count ?? 0) + 1);
       // A provider's "not found" holds for a day. A carrier often doesn't know a
       // label before its first scan, so its own "not found" is asked again within hours.
-      const daily = kind === 'not_found' && universalSource;
+      // A carrier a provider named for the number, while that provider tracks it, holds its own for a
+      // day too: it lists the parcel only once the parcel reaches it, and the provider's next progress
+      // asks it again at once.
+      const daily = kind === 'not_found' && (universalSource || providerNamed(provider));
+      // A carrier asking for what no reader can give for the number (no field its catalog lists, as
+      // SwiftX's recipient verification) answers the same until it scans the parcel: 6 h, then daily.
+      const unanswerable = !universalSource && kind === 'input_required' && AUTOMATIC_CARRIER_IDS.has(provider)
+        && activeRequirements(provider, number).length === 0;
       // A carrier's bot check comes and goes, as a lost connection does: its own adapter is asked again
       // as soon, and the wait still doubles while every read meets one. A provider's refusal holds an hour.
       const hourly = ['verification', 'schema', 'invalid_input', 'not_found'].includes(kind)
         && !(kind === 'verification' && !universalSource && carrierErrorKind(error) === 'challenge');
-      const base = daily ? DAY : hourly ? HOUR : 15 * 60_000;
+      const base = daily ? DAY : unanswerable ? 6 * HOUR : hourly ? HOUR : 15 * 60_000;
       const userError = trackingFailureCode(error);
       const wait = unanswered ? UNANSWERED_PROVIDER_WAITS[Math.min(count, UNANSWERED_PROVIDER_WAITS.length) - 1]!
-        : Math.min(daily ? DAY : 6 * HOUR, base * 2 ** (count - 1));
+        : Math.min(daily || unanswerable ? DAY : 6 * HOUR, base * 2 ** (count - 1));
       const retryAt = now().getTime() + Math.max(retryAfterMs, wait);
       const unseen = kind === 'no_history' || (kind === 'not_found' && !daily);
       const abstained = kind === 'verification' && ABSTAINED_REASONS.has(carrierErrorReason(error) ?? '');
@@ -1454,7 +1464,8 @@ export class TrackingRouter {
         // The carrier does not issue this number (a failed check digit): a
         // provider's name for it, saved by an older check, stops being asked.
         if (carrierErrorKind(error) === 'invalid_input' && state.discovered_carrier === carrier) delete state.discovered_carrier;
-        state.direct_retry_at = failure.retry_at;
+        // A provider-named carrier's day-long "not found" is its own wait: the filed carrier's turn is not put off with it.
+        if (!(failure.kind === 'not_found' && providerNamed(carrier))) state.direct_retry_at = failure.retry_at;
         if (failure.kind === 'rate_limited' && recent()) {
           state.next_check_at = iso(Math.min(millis(failure.retry_at), millis(state.last_success_at) + FRESHNESS_WINDOW_MS));
           report('fallback_deferred_fresh', carrier, failure.kind);

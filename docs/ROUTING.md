@@ -165,9 +165,10 @@ A failed source waits before it is retried for that parcel:
 
 | Failure | First wait | Backs off to |
 | --- | --- | --- |
-| Transport, a bot check met by a carrier's own adapter (`challenge`), a missing input, and `no_history` (a provider answered but has nothing, or the carrier lists the parcel without scans or does not know it yet; either answered with a reused number's earlier parcel) | 15 min | 6 h |
+| Transport, a bot check met by a carrier's own adapter (`challenge`), a missing input its owner can give, and `no_history` (a provider answered but has nothing, or the carrier lists the parcel without scans or does not know it yet; either answered with a reused number's earlier parcel) | 15 min | 6 h |
 | Other verification, schema, or a number or input the source refuses (`invalid_input`), as one it does not issue or one it finds several parcels under; not found by a carrier's own adapter | 1 h | 6 h |
-| Not found by a universal provider | 24 h | 24 h |
+| A carrier's own adapter asking for an input no field gives for the number (SwiftX's recipient verification) | 6 h, then 12 h | 24 h |
+| Not found by a universal provider, or by a carrier a provider named that the parcel is neither filed under nor confirmed for | 24 h | 24 h |
 | `no_history` from a universal provider for a number nothing has answered for yet | 45 min, then 4 h, then 12 h | 24 h |
 
 A carrier's bot check comes and goes, so the next read often passes; a provider's
@@ -177,7 +178,10 @@ transport, rate-limit, verification or schema failure; a failure of the number s
 leg may answer under its own number. The owner changing the postcode or link
 of the parcel's own carrier ends that carrier's wait, whatever the failure, since it answered
 for the old one, so the check that follows asks it again. A carrier often doesn't know a label
-before its first scan, hence its shorter not-found wait. While a number nobody has seen is
+before its first scan, hence its shorter not-found wait. One a provider named lists the parcel
+only once the parcel reaches it, and the provider's next progress asks it again (below), so its
+not-found holds a day, and the filed carrier's turn is not put off with it. A carrier asking for
+what no reader can give answers the same until it scans the parcel. While a number nobody has seen is
 checked hourly (Refresh cadence, below), a `no_history` or carrier not-found wait that would outlast
 those checks ends an hour before they do, half an hour after the ask at the soonest, so the
 last of them asks again. When a universal provider shows
@@ -870,7 +874,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   asked without the parcel's data, as for a parcel filed under no carrier, keeps the same
   wait. A partner with a minimum interval of its own (Refresh cadence) is not asked sooner,
   the origin's news included: the news it waited through asks once the interval has passed.
-  A probe our own pacing refuses counts no miss, and the next check asks again.
+  A probe our own pacing refuses counts no miss, and the next check asks again. A partner
+  asking for an input no field gives for the number (SwiftX's recipient verification) is asked
+  again after 6 h, then 12 h, then daily, whatever the origin's news, and 5 min after a refresh by hand.
   A partner that does not know the item yet, or answers inconclusively, is not
   reported as `provider_failed`; its network failures and server errors still are.
 - A parcel filed under a carrier only universal providers track has no origin adapter to name

@@ -6417,6 +6417,41 @@ describe('TrackingSyncService', () => {
     expect(parcel.carrier_data).toMatchObject({ delivery_probe: { at: '2026-09-10T22:40:00.000Z', origin_update: originUpdate, misses: 1 } });
   });
 
+  it('asks a partner that wants an input nobody can give after 6 h, then 12 h, then daily, whatever the origin\'s news', async () => {
+    const client = fakeClient();
+    let now = new Date('2026-09-10T10:00:00Z');
+    let originUpdate = '2026-09-09T10:00:00+02:00';
+    const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
+      if (carrier === 'swiftx') throw new InputRequiredError('SwiftX', 'recipient verification');
+      return { status: 'in_transit', delivery_carrier: 'swiftx', delivery_tracking_number: 'SX000000000001', last_update: originUpdate,
+        timezone: 'Europe/Paris', events: [{ time: originUpdate, description: 'In transit', stage: 'in_transit' }] };
+    }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+    let parcel: JsonObject = { id: 'withheld', carrier: 'la-poste', tracking_number: 'LX123456785FR' };
+    const refresh = async (at: string, trigger: 'scheduled' | 'refresh' = 'scheduled') => {
+      now = new Date(at);
+      adapter.fetch.mockClear();
+      await service.syncPackage(parcel, { trigger });
+      parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
+      return adapter.fetch.mock.calls.map((call) => call[0]);
+    };
+
+    expect(await refresh('2026-09-10T10:00:00Z')).toEqual(['la-poste', 'swiftx']);
+    expect(parcel.carrier_data).toMatchObject({ delivery_probe: { carrier: 'swiftx', withheld: true, misses: 1 } });
+    // The origin's news asks such a partner nothing: it answers the same until it scans the parcel.
+    originUpdate = '2026-09-10T12:30:00+02:00';
+    expect(await refresh('2026-09-10T11:00:00Z')).toEqual(['la-poste']);
+    expect(await refresh('2026-09-10T15:55:00Z')).toEqual(['la-poste']);
+    for (const [at, asked, misses] of [['2026-09-10T16:00:00Z', true, 2], ['2026-09-11T03:55:00Z', false, 2],
+      ['2026-09-11T04:00:00Z', true, 3], ['2026-09-12T03:55:00Z', false, 3], ['2026-09-12T04:00:00Z', true, 4],
+      ['2026-09-13T04:00:00Z', true, 5]] as const) {
+      expect(await refresh(at)).toEqual(asked ? ['la-poste', 'swiftx'] : ['la-poste']);
+      expect(parcel.carrier_data).toMatchObject({ delivery_probe: { withheld: true, misses } });
+    }
+    // A refresh by hand still asks it after a few minutes.
+    expect(await refresh('2026-09-13T04:10:00Z', 'refresh')).toEqual(['la-poste', 'swiftx']);
+  });
+
   it('counts a probe made while the origin post cannot answer toward the gap before the next', async () => {
     const client = fakeClient();
     let now = new Date('2026-09-10T10:00:00Z');

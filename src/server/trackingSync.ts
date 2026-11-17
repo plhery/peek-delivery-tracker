@@ -212,6 +212,13 @@ const DELIVERY_PROBE_SHORT_INTERVAL_MS = 5 * 60 * 1_000;
  */
 const DELIVERY_PROBE_MAX_INTERVAL_MS = 6 * 60 * 60 * 1_000;
 /**
+ * A partner asking for what no reader can give for the number (no field its catalog lists: SwiftX's recipient
+ * verification) answers the same until it scans the parcel. It is asked again after this, doubling with each
+ * such answer up to a day, whatever news the origin has.
+ */
+const DELIVERY_PROBE_WITHHELD_INTERVAL_MS = 6 * 60 * 60 * 1_000;
+const DELIVERY_PROBE_WITHHELD_MAX_INTERVAL_MS = 24 * 60 * 60 * 1_000;
+/**
  * A carrier publishes some scans after it handed the parcel over. The earlier
  * carrier is asked again this long after the handoff, at most once per
  * DELIVERY_PROBE_INTERVAL_MS, alongside the delivery carrier.
@@ -239,6 +246,8 @@ interface DeliveryProbe extends JsonObject {
   held?: true;
   /** The probes in a row that found nothing while the origin (Cainiao for Swiss Post) had no news. */
   misses?: number;
+  /** The partner asked for an input no reader can give for the number (DELIVERY_PROBE_WITHHELD_INTERVAL_MS). */
+  withheld?: true;
 }
 
 /**
@@ -332,6 +341,7 @@ function previousDeliveryProbe(parcel: JsonObject, carrier: string, number: stri
     ...(stored.announced === true ? { announced: true as const } : {}),
     ...(stored.listed === true ? { listed: true as const } : {}),
     ...(stored.held === true ? { held: true as const } : {}),
+    ...(stored.withheld === true ? { withheld: true as const } : {}),
     ...(Number.isSafeInteger(stored.misses) && Number(stored.misses) > 0 ? { misses: Number(stored.misses) } : {}) };
 }
 
@@ -3615,9 +3625,12 @@ export class TrackingSyncService {
       const originUpdate = typeof origin.last_update === 'string' ? origin.last_update : previousProbe?.origin_update ?? null;
       const sinceProbe = previousProbe ? this.now().getTime() - Date.parse(previousProbe.at) : Number.NaN;
       const misses = previousProbe?.misses ?? 1;
+      // A partner that withheld the parcel behind an input nobody can give is not asked again on the origin's news.
+      const withheld = previousProbe?.withheld === true;
       // While the origin is down, the saved partner alone can show the delivery: its gap does not grow.
       const gap = byHand || previousProbe?.announced ? DELIVERY_PROBE_SHORT_INTERVAL_MS
-        : Math.min(DELIVERY_PROBE_MAX_INTERVAL_MS, DELIVERY_PROBE_INTERVAL_MS * 2 ** (originError ? 0 : misses - 1));
+        : withheld ? Math.min(DELIVERY_PROBE_WITHHELD_MAX_INTERVAL_MS, DELIVERY_PROBE_WITHHELD_INTERVAL_MS * 2 ** (misses - 1))
+          : Math.min(DELIVERY_PROBE_MAX_INTERVAL_MS, DELIVERY_PROBE_INTERVAL_MS * 2 ** (originError ? 0 : misses - 1));
       // The partner's minimum interval between two lookups of a number (Poste Italiane's searches an hour) holds
       // whatever would ask it sooner: the origin's news, its announcement, a refresh by hand. The probe waits, with
       // no miss counted, and the origin's news it waited through asks once the interval has passed.
@@ -3626,7 +3639,7 @@ export class TrackingSyncService {
       const minimum = candidate ? minimumInterval(candidate.carrier) : 0;
       const sinceAsked = candidate && minimum ? this.now().getTime() - (keep.askedAt?.(candidate.carrier, candidate.number) || Number.NaN) : Number.NaN;
       const askedRecently = (previousProbe !== null && sinceProbe >= 0
-        && (sinceProbe < minimum || (originUpdate === previousProbe.origin_update && sinceProbe < gap)))
+        && (sinceProbe < minimum || ((withheld || originUpdate === previousProbe.origin_update) && sinceProbe < gap)))
         || (sinceAsked >= 0 && sinceAsked < minimum);
       if (candidate && askedRecently) {
         // carrier_data is rebuilt from the result on every refresh: carry the marker forward.
@@ -3634,7 +3647,7 @@ export class TrackingSyncService {
         else delete origin.delivery_probe;
       } else if (candidate) {
         const probe: DeliveryProbe = { at: this.now().toISOString(), origin_update: originUpdate, carrier: candidate.carrier, number: candidate.number,
-          misses: previousProbe && originUpdate === previousProbe.origin_update ? misses + 1 : 1 };
+          misses: previousProbe && (withheld || originUpdate === previousProbe.origin_update) ? misses + 1 : 1 };
         origin.delivery_probe = probe;
         try {
           const delivery = normalizeCarrierResult(await confirmationLookup(() => this.fetchCarrier(checks, candidate.carrier, candidate.number,
@@ -3689,6 +3702,9 @@ export class TrackingSyncService {
           if (deliveryTime > 0 && originFirst > 0 && deliveryTime >= originFirst) probe.held = true;
         } catch (error) {
           fallbackError = errorType(error);
+          if (carrierErrorKind(error) === 'input_required' && activeRequirements(candidate.carrier, candidate.number).length === 0) {
+            probe.withheld = true;
+          }
           if (selfPacedRefusal(error)) {
             // Our own pacing refused the probe before any request (Poste Italiane's searches an hour): the partner
             // was not asked, so it counts no miss, and the next check asks it.

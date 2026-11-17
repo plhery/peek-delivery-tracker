@@ -604,6 +604,42 @@ describe('persistent tracking routing', () => {
     expect(result.result.tracking_provider).toBe('ParcelsApp');
     expect(result.result.routing).not.toHaveProperty('confirmed_carrier');
   });
+  it('holds a provider-named carrier\'s not found for a day, without putting off the filed carrier', async () => {
+    const { router, direct, universal } = setup();
+    universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups' });
+    direct.mockRejectedValue(new NotFoundError('UPS'));
+    const result = await router.fetch(parcel(), false);
+    expect(result.result.tracking_provider).toBe('ParcelsApp');
+    const routing = result.result.routing as JsonObject & { failures: JsonObject };
+    expect(routing.failures.ups).toMatchObject({ kind: 'not_found', count: 1, retry_at: '2026-09-11T12:00:00.000Z' });
+    // The filed carrier's turn is due as it was.
+    expect(routing.direct_retry_at).toBe(time.toISOString());
+    // Filed under it, or confirmed for the number, its not found is asked again within the hour.
+    const filed = setup();
+    filed.direct.mockRejectedValue(new NotFoundError('UPS'));
+    filed.universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups' });
+    const own = await filed.router.fetch(parcel({ carrier: 'ups' }), false);
+    expect((own.result.routing as JsonObject & { failures: JsonObject }).failures.ups)
+      .toMatchObject({ kind: 'not_found', retry_at: '2026-09-10T13:00:00.000Z' });
+  });
+  it.each([
+    ['no field for the number', 'swiftx', 'SX000000000001', ['2026-09-10T18:00:00.000Z', '2026-09-11T00:00:00.000Z', '2026-09-11T12:00:00.000Z', '2026-09-11T12:00:00.000Z']],
+    ['a field the owner can fill', 'heppner', 'TEST1234', ['2026-09-10T12:15:00.000Z', '2026-09-10T12:30:00.000Z', '2026-09-10T13:00:00.000Z', '2026-09-10T14:00:00.000Z']],
+  ])('waits for a carrier asking for an input with %s', async (_label, carrier, number, waits) => {
+    let routing: JsonObject = state({ configured_carrier: carrier });
+    for (const wait of waits) {
+      const { router, direct, universal } = setup();
+      direct.mockRejectedValue(new InputRequiredError(carrier, 'recipient verification'));
+      universal.mockRejectedValue(new NoHistoryError('ParcelsApp'));
+      const failed = await router.fetch(parcel({ carrier, tracking_number: number, carrier_data: { routing } }), false)
+        .catch((error: { routing: JsonObject }) => ({ result: { routing: error.routing } }));
+      routing = failed.result.routing as JsonObject;
+      const failure = (routing as { failures: Record<string, JsonObject> }).failures[carrier]!;
+      expect(failure.retry_at).toBe(wait);
+      // The next check comes once the wait is over.
+      routing = { ...routing, failures: { [carrier]: { ...failure, retry_at: time.toISOString() } } };
+    }
+  });
   it('records a named carrier\'s answer behind the provider\'s delivered stage it sets aside', async () => {
     const { router, direct, universal } = setup();
     universal.mockResolvedValue({ ...history(), discovered_carrier: 'ups', current_stage: 'delivered', status: 'delivered' });

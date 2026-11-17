@@ -1,7 +1,8 @@
 import 'server-only';
 
 import type { SupabaseServiceClient } from '../supabase';
-import { findClient, redirectMatches, redirectUriProblem, type AssistantClient } from './clients';
+import { clientFromDocument, findClient, redirectMatches, redirectUriProblem, type AssistantClient } from './clients';
+import { homeAssistantClientDocument, homeAssistantClientId } from './oauth';
 import { knownScopes, PKCE_CHALLENGE, SCOPES, type AssistantSettings, type Scope } from './settings';
 
 /** An authorization request Peek can ask the owner about. */
@@ -35,6 +36,15 @@ function sameResource(settings: AssistantSettings, value: string): boolean {
 }
 
 /**
+ * The client a request names. Peek's own Home Assistant client is read as Peek serves it, not fetched back from Peek's
+ * public address: no round trip through the internet, and a development server, on HTTP, can connect it too.
+ */
+function requestClient(settings: AssistantSettings, service: SupabaseServiceClient, id: string): Promise<AssistantClient | null> {
+  if (id === homeAssistantClientId(settings)) return Promise.resolve(clientFromDocument(id, homeAssistantClientDocument(settings)));
+  return findClient(service, id);
+}
+
+/**
  * Reads an authorization request (OAuth 2.1 with PKCE S256), as the consent page and its answer both do. Lenient
  * where clients differ: scopes Peek doesn't know are left out, and a missing `resource` means `/mcp`.
  */
@@ -44,7 +54,7 @@ export async function readAuthorizationRequest(
   parameters: URLSearchParams,
 ): Promise<{ request: AuthorizationRequest } | { problem: AuthorizationProblem }> {
   const clientId = parameters.get('client_id') ?? '';
-  const client = clientId ? await findClient(service, clientId) : null;
+  const client = clientId ? await requestClient(settings, service, clientId) : null;
   if (!client) return { problem: { kind: 'shown', reason: 'client' } };
   const presented = parameters.get('redirect_uri');
   const redirectUri = presented === null

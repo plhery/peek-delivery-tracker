@@ -66,8 +66,8 @@ export function homeAssistantClientId(settings: Pick<AssistantSettings, 'issuer'
 
 /**
  * The Home Assistant integration's metadata document. Every Home Assistant answers at the same redirect, its own
- * `my.home-assistant.io`, so Peek publishes the document the integration names as its client id, and reads it back from
- * its public address as any client's.
+ * `my.home-assistant.io`, so Peek publishes the document the integration names as its client id. An authorization
+ * request reads that client from here (`readAuthorizationRequest`), not through Peek's public address.
  */
 export function homeAssistantClientDocument(settings: Pick<AssistantSettings, 'issuer'>) {
   return {

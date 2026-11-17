@@ -422,8 +422,8 @@ Key server modules:
     recently; those of clients whose tokens reach `/mcp` go last, and once due stand in for a
     day while a fresh one can't be read. The server serves one itself for the Home Assistant
     integration, `/oauth/clients/home-assistant.json`, since every Home Assistant answers at
-    the same redirect (`my.home-assistant.io`), and reads it back through the public address
-    as any other.
+    the same redirect (`my.home-assistant.io`), and reads that client from memory rather
+    than fetching the document back.
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`) and

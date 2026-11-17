@@ -52,6 +52,28 @@ describe('an authorization request', () => {
     }
   });
 
+  it("reads Peek's own Home Assistant client without fetching its document, on a development server too", async () => {
+    const fetching = vi.spyOn(globalThis, 'fetch');
+    // A development server's page is on HTTP, which the consent page never links to.
+    for (const [origin, uri] of [['https://peek.example', 'https://peek.example/assistants'], ['http://127.0.0.1:3418', null]] as const) {
+      const local = assistantSettings({ ASSISTANT_ACCOUNTS: '*', CANONICAL_ORIGIN: origin } as unknown as NodeJS.ProcessEnv)!;
+      const id = `${origin}/oauth/clients/home-assistant.json`;
+      const redirect = 'https://my.home-assistant.io/redirect/oauth';
+      const read = await readAuthorizationRequest(local, service, query({ client_id: id, redirect_uri: redirect, resource: null }));
+      expect(read).toEqual({ request: {
+        client: { id, name: 'Home Assistant', uri, redirectUris: [redirect] },
+        redirectUri: redirect, state: 'state-123', challenge, scopes: ['parcels:read'],
+      } });
+      await expect(readAuthorizationRequest(local, service, query({ client_id: id, redirect_uri: 'https://attacker.example.net/redirect/oauth' })))
+        .resolves.toEqual({ problem: { kind: 'shown', reason: 'redirect' } });
+    }
+    // Another server's Home Assistant document is not Peek's own: on HTTP it is not read at all.
+    await expect(readAuthorizationRequest(settings, service, query({ client_id: 'http://127.0.0.1:3418/oauth/clients/home-assistant.json' })))
+      .resolves.toEqual({ problem: { kind: 'shown', reason: 'client' } });
+    expect(fetching).not.toHaveBeenCalled();
+    fetching.mockRestore();
+  });
+
   it('uses the one registered redirect when none is given, and a loopback one on any port', async () => {
     const implied = await readAuthorizationRequest(settings, service, query({ redirect_uri: null }));
     expect('request' in implied && implied.request.redirectUri).toBe(callback);

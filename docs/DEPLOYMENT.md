@@ -321,8 +321,8 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   `/oauth/authorize` to sign in and ask. `/mcp` and `GET /api/parcels` take the access
   token it gets as `Authorization: Bearer <token>`, and a personal token the same way while
   those are on. The Home Assistant integration signs in as
-  `<origin>/oauth/clients/home-assistant.json`, so it needs an origin that is HTTPS on a
-  public address without a port.
+  `<origin>/oauth/clients/home-assistant.json`, on any origin, a development server's
+  included.
 
 ## Moving to another host
 

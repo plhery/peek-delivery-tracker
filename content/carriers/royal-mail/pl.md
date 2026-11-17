@@ -109,7 +109,7 @@ Nowy wpis pojawia się dopiero przy kolejnym fizycznym skanie przesyłki, a mię
 
 ### Co oznacza `Customs charges raised` lub `Your item is currently with Customs`?
 
-`Your item is currently with Customs in the destination country.` oznacza, że paczka przechodzi odprawę celną w kraju docelowym. `Customs charges raised` informuje o naliczeniu opłat importowych — w Polsce Poczta Polska pobiera je przy doręczeniu przesyłki lub przed jej odbiorem.
+`Your item is currently with Customs in the destination country.` oznacza, że paczka przechodzi odprawę celną w kraju docelowym. `Customs charges raised` informuje o naliczeniu opłat importowych — w Polsce Poczta Polska może je pobrać przed doręczeniem przesyłki lub przy jej odbiorze.
 
 :::sources
 - [Citizens Advice: Check Royal Mail collection and delivery times](https://www.citizensadvice.org.uk/consumer/post-and-parcels/post-collection-delivery-times/) – dni i godziny doręczeń w Wielkiej Brytanii, doręczanie listów 2nd Class co drugi dzień roboczy, Customer Service Points oraz infolinia

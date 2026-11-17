@@ -2076,6 +2076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-sendungsverfolgung",
+      "title": "Evri Sendungsverfolgung: Nummer, Status, Zoll und Zustellung",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-sendungsverfolgung",
@@ -2484,6 +2492,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Paack suivi colis\u00a0: numéro, code postal et statuts",
       "name": "Paack",
       "color": "#5b2dee"
+    },
+    {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "evri-suivi",
+      "title": "Suivi colis Evri\u00a0: numéro, statuts, douane et livraison",
+      "name": "Evri",
+      "color": "#00014d"
     },
     {
       "id": "chronopost",
@@ -2952,6 +2968,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc05"
     },
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "tracciamento-evri",
+      "title": "Tracciamento Evri: numero, stati, dogana e consegna",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-tracking",
@@ -3272,6 +3296,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Paack seguimiento: estados, entrega fallida y teléfono",
       "name": "Paack",
       "color": "#5b2dee"
+    },
+    {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "seguimiento-evri",
+      "title": "Seguimiento Evri: número, estados, aduanas y entrega",
+      "name": "Evri",
+      "color": "#00014d"
     },
     {
       "id": "chronopost",
@@ -3708,6 +3740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#5b2dee"
     },
     {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "seguimento-evri",
+      "title": "Seguimento Evri: número, estados, alfândega e entrega",
+      "name": "Evri",
+      "color": "#00014d"
+    },
+    {
       "id": "chronopost",
       "catalog": "chronopost",
       "slug": "chronopost-rastreio",
@@ -4014,6 +4054,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "InPost śledzenie przesyłki: numer, statusy i Paczkomat",
       "name": "InPost",
       "color": "#ffcc05"
+    },
+    {
+      "id": "evri",
+      "catalog": "evri-uk",
+      "slug": "sledzenie-evri",
+      "title": "Śledzenie przesyłek Evri: numer, statusy, cło i doręczenie",
+      "name": "Evri",
+      "color": "#00014d"
     },
     {
       "id": "chronopost",

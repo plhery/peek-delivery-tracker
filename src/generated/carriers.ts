@@ -2108,6 +2108,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "ctt-portugal-sendungsverfolgung",
+      "title": "CTT Portugal Sendungsverfolgung: Status, Abholung und Zoll",
+      "name": "CTT",
+      "color": "#df0024"
+    },
+    {
       "id": "packeta",
       "catalog": "packeta",
       "slug": "packeta-sendungsverfolgung",
@@ -2130,6 +2138,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Swiss Post Sendungsverfolgung: Status, Abholung, Kontakt",
       "name": "Swiss Post",
       "color": "#ffcc00"
+    },
+    {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "ctt-express-sendungsverfolgung",
+      "title": "CTT Express Sendungsverfolgung: Status, Punkte & Kontakt",
+      "name": "CTT Express",
+      "color": "#df0024"
     },
     {
       "id": "austrian-post",
@@ -2542,6 +2558,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "suivi-ctt-portugal",
+      "title": "Suivi CTT Portugal\u00a0: numéros, statuts, relais et douane",
+      "name": "CTT",
+      "color": "#df0024"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "4px-suivi",
@@ -2556,6 +2580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Swiss Post\u00a0: suivi colis La Poste suisse et statuts",
       "name": "Swiss Post",
       "color": "#ffcc00"
+    },
+    {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "suivi-ctt-express",
+      "title": "Suivi CTT Express\u00a0: statuts en français, relais et contact",
+      "name": "CTT Express",
+      "color": "#df0024"
     },
     {
       "id": "dpd-fr",
@@ -3016,6 +3048,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "ctt-portugal-tracking",
+      "title": "Tracking CTT Portugal: codici, stati, ritiro e dogana",
+      "name": "CTT",
+      "color": "#df0024"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "4px-traccia-pacco",
@@ -3030,6 +3070,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Swiss Post tracking: Posta Svizzera, stati e ritiro",
       "name": "Swiss Post",
       "color": "#ffcc00"
+    },
+    {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "ctt-express-tracking",
+      "title": "Tracking CTT Express: stati in italiano, punti e contatti",
+      "name": "CTT Express",
+      "color": "#df0024"
     },
     {
       "id": "gls-it",
@@ -4136,6 +4184,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "ctt",
+      "catalog": "ctt",
+      "slug": "sledzenie-ctt-portugal",
+      "title": "Śledzenie paczek CTT Portugal: numery, statusy i odbiór",
+      "name": "CTT",
+      "color": "#df0024"
+    },
+    {
       "id": "packeta",
       "catalog": "packeta",
       "slug": "packeta-sledzenie",
@@ -4158,6 +4214,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "4PX śledzenie przesyłki: numery, statusy i kontakt",
       "name": "4PX",
       "color": "#005add"
+    },
+    {
+      "id": "ctt-express",
+      "catalog": "ctt-express",
+      "slug": "sledzenie-ctt-express",
+      "title": "Śledzenie CTT Express: statusy po polsku, punkty i kontakt",
+      "name": "CTT Express",
+      "color": "#df0024"
     },
     {
       "id": "poczta-polska",

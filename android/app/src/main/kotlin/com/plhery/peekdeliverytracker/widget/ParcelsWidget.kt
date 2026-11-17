@@ -27,6 +27,8 @@ import kotlin.math.floor
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 
 /**
@@ -73,15 +75,23 @@ class ParcelsWidget : GlanceAppWidget() {
             }
         }
 
-        /** A widget removed meanwhile is left alone: Glance no longer takes its id. */
+        /**
+         * One at a time ([drawing]): the launcher's update and the app's reload can come at once, and Glance ends a
+         * widget's [compose] with an exception when another for it starts. A widget removed meanwhile is left alone:
+         * Glance no longer takes its id.
+         */
         suspend fun draw(context: Context, id: Int, options: Bundle) {
             val glanceId = try {
                 GlanceAppWidgetManager(context).getGlanceIdBy(id)
             } catch (_: IllegalArgumentException) {
                 return
             }
-            AppWidgetManager.getInstance(context).updateAppWidget(id, ParcelsWidget().compose(context, glanceId, fitting(options)))
+            drawing.withLock {
+                AppWidgetManager.getInstance(context).updateAppWidget(id, ParcelsWidget().compose(context, glanceId, fitting(options)))
+            }
         }
+
+        private val drawing = Mutex()
 
         /**
          * `options` with each size the launcher gives (and, where it gives none, its least and most width and height)

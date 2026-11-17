@@ -49,6 +49,8 @@ import java.time.Duration
 import java.util.Locale
 import kotlin.math.ceil
 import kotlin.math.pow
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -317,6 +319,25 @@ class ParcelsWidgetTest {
         assertNotSame(placed, widgets.getViewFor(3))
         // Removed meanwhile: nothing to draw.
         runBlocking { ParcelsWidget.draw(app, 4, Bundle()) }
+    }
+
+    /**
+     * The launcher's update and the app's own reload can come at once, as when the app starts right after it is updated:
+     * Glance ends a widget's composition with an exception when another for it starts, so the second waits.
+     */
+    @Test
+    fun aPlacedListDrawnTwiceAtOnceIsDrawnTwice() {
+        val manager = AppWidgetManager.getInstance(app)
+        val widgets = shadowOf(manager)
+        val component = ComponentName(app, NextDeliveryWidgetReceiver::class.java)
+        widgets.addInstalledProvider(AppWidgetProviderInfo().apply { provider = component })
+        widgets.bindAppWidgetId(3, component)
+        val options = Bundle().apply { putParcelableArrayList(AppWidgetManager.OPTION_APPWIDGET_SIZES, arrayListOf(SizeF(LIST_SMALL.width.value, LIST_SMALL.height.value))) }
+        manager.updateAppWidgetOptions(3, options)
+        runBlocking {
+            listOf(launch { ParcelsWidget.draw(app, 3, options) }, launch { ParcelsWidget.draw(app) }).joinAll()
+        }
+        assertNotEquals(null, widgets.getViewFor(3))
     }
 
     /**

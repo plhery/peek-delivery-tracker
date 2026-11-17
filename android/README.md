@@ -119,7 +119,8 @@ parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the sma
 The app draws it itself (`ParcelsWidget.draw`) rather than through Glance's sessions, at each size the launcher gives
 taken to its whole dp and 2 dp under (`ParcelsWidget.fitting`): a launcher can frame a widget a little smaller than the
 size it gives, and the launcher shows the closest layout that fits the frame, which would otherwise be another
-screen's.
+screen's. It draws one widget at a time: Glance ends a widget's composition with an exception when another for the same
+widget starts, and the launcher's update and the app's own reload can come together.
 
 Cards and passes use the pictures the app draws for the first 8 parcels (`WidgetCardPictures`); until those are drawn,
 the widget shows rows. Each card, pass or row opens its parcel; the rest of the widget opens the list

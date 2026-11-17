@@ -14,15 +14,15 @@ Sendungsnummern von Royal Mail kommen in drei Formaten vor. Fehlt sie in den Nac
 
 | Format (erfundenes Beispiel) | Bedeutung |
 | --- | --- |
-| `AB000000005GB` | Die klassische internationale und nationale Sendungsnummer nach UPU-Standard S10: 2 Buchstaben, 9 Ziffern und `GB`. Die neunte Ziffer ist eine Prüfziffer. |
+| `AB482910576GB` | Die klassische internationale und nationale Sendungsnummer nach UPU-Standard S10: 2 Buchstaben, 9 Ziffern und `GB`. Die neunte Ziffer ist eine Prüfziffer. |
 | `0A1234567000000000ABC` | 21-stellige Referenz aus einem 2D-Barcode auf innerbritischen Versandetiketten. |
-| `1234567890ABCDEF` | 16-stellige Referenz aus Ziffern und den Buchstaben `A` bis `F`. |
+| `4829105738ABCDEF` | 16-stellige Referenz aus Ziffern und den Buchstaben `A` bis `F`. |
 
 Ähnliche Nummern, die zu anderen Netzen gehören:
 
 - Beginnt der Code mit `E` und einem weiteren Buchstaben (`EA`, `EB`…), `CP` oder `GI` vor 9 Ziffern und `GB`, gehört das Paket zu Parcelforce Worldwide (der Tracker von Royal Mail liest auch 14-stellige Parcelforce-Nummern aus `PB`, zwei Buchstaben und zehn Ziffern).
-- Derselbe S10-Aufbau mit einem anderen Länderkürzel am Ende (`RR000000005DE`, `RR000000005AT`, `RR000000005CH`) stammt von der Absenderpost. Laut UPU-Norm S10 behält eine Postsendung diese eine Nummer bis zur Haustür; auf dem Weg nach Großbritannien übernimmt Royal Mail sie nach der Ankunft (außer bei `E…`-EMS-Sendungen, die Parcelforce zustellt).
-- 16 reine Ziffern ohne Buchstaben sind kein Royal-Mail-Format: Peek fragt dafür gleichzeitig [DHL eCommerce](carrier:dhl-ecommerce) und [TNT](carrier:tnt) ab.
+- Derselbe S10-Aufbau mit einem anderen Länderkürzel am Ende (`RR482910576DE`, `RR482910576AT`, `RR482910576CH`) stammt von der Absenderpost. Laut UPU-Norm S10 behält eine Postsendung diese eine Nummer bis zur Haustür; auf dem Weg nach Großbritannien übernimmt Royal Mail sie nach der Ankunft (außer bei `E…`-EMS-Sendungen, die Parcelforce zustellt).
+- 16 reine Ziffern ohne Buchstaben sind kein Royal-Mail-Format: Peek fragt dafür gleichzeitig andere Paketdienste ab, darunter [DHL eCommerce](carrier:dhl-ecommerce) und [TNT](carrier:tnt).
 
 ## Was die englischen Statusmeldungen von Royal Mail bedeuten
 
@@ -99,9 +99,9 @@ Innerhalb Großbritanniens stellt Royal Mail montags bis samstags meist bis 16:3
 
 ## Royal-Mail-Pakete mit Peek verfolgen
 
-[Peek](/) erkennt eine gültige Nummer im Stil `AB000000005GB` sofort als Royal Mail und zeigt „Erkannter Paketdienst“. Geht die Prüfziffer nicht auf, meldet Peek „Die Prüfziffer dieser Nummer geht nicht auf.“: Vergleiche den Code mit deiner Versandmail, übernimm den Korrekturvorschlag bei verwechselten Zeichen wie `O` und `0` oder tippe auf „Wie eingegeben verfolgen“ und wähle über „Ändern“ Royal Mail aus. Bei 21- und 16-stelligen Inlandsreferenzen fragt Peek zuerst Trackingdienste ab und öffnet erst zuletzt die Website von Royal Mail; wird eine seltene 21-stellige Referenz Australia Post zugeordnet oder nicht gefunden, wähle Royal Mail über „Ändern“. Ein `royalmail.com`-Link mit `trackNumber=` erkennt Royal Mail sofort mit jedem dieser Formate, ein `#/tracking-results/`-Link nur mit einer `GB`-Nummer.
+[Peek](/) erkennt eine gültige Nummer im Stil `AB482910576GB` sofort als Royal Mail und zeigt „Erkannter Paketdienst“. Geht die Prüfziffer nicht auf, meldet Peek „Die Prüfziffer dieser Nummer geht nicht auf.“: Vergleiche den Code mit deiner Versandmail, übernimm den Korrekturvorschlag bei verwechselten Zeichen wie `O` und `0` oder tippe auf „Wie eingegeben verfolgen“ und wähle über „Ändern“ Royal Mail aus. Bei 21- und 16-stelligen Inlandsreferenzen fragt Peek zuerst Trackingdienste ab und öffnet erst zuletzt die Website von Royal Mail; wird eine seltene 21-stellige Referenz Australia Post zugeordnet oder nicht gefunden, wähle Royal Mail über „Ändern“. Ein `royalmail.com`-Link mit `trackNumber=` erkennt Royal Mail sofort mit jedem dieser Formate, ein `#/tracking-results/`-Link nur mit einer `GB`-Nummer.
 
-Da Peek die Seite von Royal Mail in einem Browser auf dem eigenen Server öffnet und Royal Mail automatisierte Abrufe streng begrenzt, prüft Peek eine Royal-Mail-Sendung von sich aus etwa einmal pro Stunde – an normalen Tagen ebenso wie am Zustelltag, selbst wenn ein Zeitfenster vorliegt (manuelles Aktualisieren kann früher nachsehen). Du siehst den Status, jeden Scan auf einer Karte mit Ort (ohne Postleitzahlen), den voraussichtlichen Liefertag samt Zeitfenster, die Zustellzeit und das Zielland, umgerechnet unter „Uhrzeiten in deiner Zeitzone: …“. Zugestellte Sendungen erscheinen als „Zugestellt“ ohne Empfängername, Unterschrift, Adresse oder Foto; alle übrigen Meldungen behalten den englischen Wortlaut. Benachrichtigungen stellst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Da Peek die Seite von Royal Mail in einem Browser auf dem eigenen Server öffnet und Royal Mail automatisierte Abrufe streng begrenzt, prüft Peek eine Royal-Mail-Sendung von sich aus etwa einmal pro Stunde – an normalen Tagen ebenso wie am Zustelltag, selbst wenn ein Zeitfenster vorliegt. Du siehst den Status, jeden Scan auf einer Karte mit Ort (ohne Postleitzahlen), den voraussichtlichen Liefertag samt Zeitfenster, die Zustellzeit und das Zielland, umgerechnet unter „Uhrzeiten in deiner Zeitzone: …“. Zugestellte Sendungen erscheinen als „Zugestellt“ ohne Empfängername, Unterschrift, Adresse oder Foto; alle übrigen Meldungen behalten den englischen Wortlaut. Benachrichtigungen stellst du auf „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 Geht ein `…GB`-Paket ins Ausland, fragt Peek in über 60 Ländern – darunter [DHL Paket](carrier:dhl) in Deutschland, die [Österreichische Post](carrier:austrian-post) in Österreich und die [Schweizerische Post](carrier:swiss-post) in der Schweiz – automatisch auch die Zielpost ab, wechselt bei neuen lokalen Scans auf „Zustellung durch …“ und übernimmt dann deren dichteren Abfragetakt. Zollzahlungen, Umleitungen und Reklamationen erledigst du direkt auf den Seiten von Royal Mail oder deiner Zielpost.
 

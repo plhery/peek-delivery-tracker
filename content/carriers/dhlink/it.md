@@ -14,15 +14,15 @@ DHLink non pubblica un formato fisso per i propri codici. La pagina di ricerca a
 
 | Codice | Cos'è |
 | --- | --- |
-| `FC0000000000000` | `FC` e 13 cifre: il numero interno di DHLink («DHLink No.»). Su alcune linee fa anche da codice di tracciamento. |
-| `XZG000000000WL` | `XZG`, 9 cifre e `WL`: codice di un partner di linea che DHLink riconosce come numero di tracking. |
-| `YLUS0000000000` | `YLUS` e 10 cifre: una linea verso gli Stati Uniti consegnata da GOFO. |
-| `QH000000000000FS` | `QH`, 12 cifre e `FS`: un'altra linea verso gli Stati Uniti consegnata da GOFO. |
-| `EYT0000000000HZ` | `EYT`, 10 cifre e `HZ`: una linea verso gli Stati Uniti consegnata da SwiftX. |
-| `CYS00000000000` | `CYS` e 11 cifre: una linea verso gli Stati Uniti consegnata da UniUni. |
-| `JXCYI0000000000YQ` | `JXC`, `YI`, `ZO`, `US` o `ZI`, 10 cifre e `YQ`: un formato di lettera di vettura di Juxi Express a cui risponde anche il tracking di DHLink su alcuni pacchi diretti negli Stati Uniti. Per questa forma Peek interroga prima DHLink; gli altri codici `JXC` vanno a Juxi Express. |
-| `RR000000005CN` | Due lettere, 9 cifre e `CN`: un codice di [China Post](carrier:china-post), usato quando la spedizione viaggia per posta. |
-| `GFUS00000000000000` | Non è di DHLink: è un codice GOFO Express per l'ultimo miglio di alcune linee statunitensi. |
+| `FC9999999999980` | `FC` e 13 cifre: il numero interno di DHLink («DHLink No.»). Su alcune linee fa anche da codice di tracciamento. |
+| `XZG999999980WL` | `XZG`, 9 cifre e `WL`: codice di un partner di linea che DHLink riconosce come numero di tracking. |
+| `YLUS9999999980` | `YLUS` e 10 cifre: una linea verso gli Stati Uniti consegnata da GOFO. |
+| `QH999999999980FS` | `QH`, 12 cifre e `FS`: un'altra linea verso gli Stati Uniti consegnata da GOFO. |
+| `EYT9999999980HZ` | `EYT`, 10 cifre e `HZ`: una linea verso gli Stati Uniti consegnata da SwiftX. |
+| `CYS99999999980` | `CYS` e 11 cifre: una linea verso gli Stati Uniti consegnata da UniUni. |
+| `JXCYI9999999990YQ` | `JXC`, `YI`, `ZO`, `US` o `ZI`, 10 cifre e `YQ`: un formato di lettera di vettura di Juxi Express a cui risponde anche il tracking di DHLink su alcuni pacchi diretti negli Stati Uniti. Per questa forma Peek interroga prima DHLink; gli altri codici `JXC` vanno a Juxi Express. |
+| `RR482910576CN` | Due lettere, 9 cifre e `CN`: un codice di [China Post](carrier:china-post), usato quando la spedizione viaggia per posta. |
+| `GFUS99999999999980` | Non è di DHLink: è un codice GOFO Express per l'ultimo miglio di alcune linee statunitensi. |
 
 In un risultato DHLink elenca il «DHLink No.», il «Tracking No.» e, quando consegna un altro corriere, il «Last Leg No.» di quest'ultimo. Se il codice di tracciamento è diverso dal numero DHLink, cerca con il codice di tracciamento: interrogato solo con il numero `FC`, un pacco che ha un altro codice di tracking può non comparire. Senza `lang=en` nell'indirizzo, la pagina si apre in cinese.
 
@@ -80,7 +80,7 @@ Consultata il 16 novembre 2026, la pagina dei contatti di DHLink riporta un solo
 
 Peek legge direttamente il tracking di DHLink, mostra lo stato, il Paese di destinazione e la località di ogni passaggio, ed elenca ciascuna scansione una sola volta (così come la scrive DHLink, per lo più in inglese), eliminando i doppioni tra flussi oltre a codici postali e riferimenti d'ordine. Le scansioni in Cina sono lette sull'ora di Pechino, quelle di USPS sull'ora dello Stato americano interessato e quelle di Pactic, sulla rotta via Ungheria, sull'ora di Budapest, e vengono mostrate nel fuso orario del tuo dispositivo (su peektracker.com e nell'app per iPhone lo ricorda una riga sotto la cronologia: «Orari nel tuo fuso orario: …»); le altre mantengono l'orario fornito da DHLink. DHLink non comunica peso, nome del servizio né orario di consegna; l'unica stima mostrata da Peek viene da un'eventuale scansione USPS inoltrata del tipo `Out for Delivery, Expected Delivery …` finché resta la più recente e indica una fascia oraria per la giornata stessa. Quando il «Last Leg No.» è un codice GOFO (`GFUS` e 14 cifre), SwiftX (`SWX` e 18 cifre) o [DPD Svizzera](carrier:dpd-ch) (14 cifre che iniziano per `060` o `061`), Peek mostra quel corriere e il suo numero, lo interroga e passa a seguirlo appena riporta avanzamenti più recenti; gli altri codici di ultimo miglio restano sulla cronologia di DHLink.
 
-Finché risponde direttamente il tracking di DHLink, Peek controlla fino a ogni 10 minuti, e fino a ogni 2 minuti il giorno in cui il pacco esce in consegna (dalle 6:00 ora locale oppure, se è indicata una fascia oraria, da mezz'ora prima dell'inizio); tramite i servizi di tracciamento controlla ogni ora, e fino a ogni 15 minuti il giorno della consegna. Una volta passato il pacco su GOFO, il controllo avviene ogni 30 minuti, anche in consegna. Dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), Peek passa a un controllo ogni ora. Puoi attivare gli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare DHLink, DHgate o il venditore al posto tuo.
+Finché risponde direttamente il tracking di DHLink, Peek controlla fino a ogni 10 minuti, e fino a ogni 2 minuti il giorno in cui il pacco esce in consegna (dalle 6:00 ora locale oppure, se è indicata una fascia oraria, da mezz'ora prima dell'inizio); tramite i servizi di tracciamento controlla ogni ora, e fino a ogni 15 minuti il giorno della consegna. Una volta passato il pacco su GOFO, il controllo avviene al massimo ogni 30 minuti, anche in consegna. Dopo due giorni senza novità (12 ore finché il pacco resta su «Etichetta creata» o «Preso in carico»), Peek passa a un controllo ogni ora. Puoi attivare gli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare DHLink, DHgate o il venditore al posto tuo.
 
 ## Domande frequenti sul tracking DHLink
 

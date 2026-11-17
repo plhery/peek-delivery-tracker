@@ -14,9 +14,9 @@ Listy przewozowe JS Express składają się z liter JSE, dwóch kolejnych liter,
 
 | Numer | Co oznacza |
 | --- | --- |
-| `JSEAA0000000000YQ` | JSE, dwie litery, dziesięć cyfr i YQ: numer przesyłki JS Express. |
-| `JSEAA000000000YQ` | Tylko dziewięć cyfr: to nie jest układ JS Express. Sprawdź, czy nie brakuje jednej cyfry. |
-| `JXCAA0000000000YQ` | Też kończy się na YQ, ale zaczyna od JXC: to numer Juxi Express (który Peek sprawdza najpierw w [DHLink](carrier:dhlink), gdy po JXC stoją litery YI, ZO, US lub ZI), a nie JS Express. |
+| `JSEAA9999999980YQ` | JSE, dwie litery, dziesięć cyfr i YQ: numer przesyłki JS Express. |
+| `JSEAA999999980YQ` | Tylko dziewięć cyfr: to nie jest układ JS Express. Sprawdź, czy nie brakuje jednej cyfry. |
+| `JXCAA9999999980YQ` | Też kończy się na YQ, ale zaczyna od JXC: to numer Juxi Express (który Peek sprawdza najpierw w [DHLink](carrier:dhlink), gdy po JXC stoją litery YI, ZO, US lub ZI), a nie JS Express. |
 
 Inni chińscy spedytorzy używają tej samej budowy z własnym trzyliterowym początkiem: FEI w 17FEIA, WNB w WanbExpress, SFC w SFC, CJP w CJ Packet. JSE oznacza JS Express. Spacje i małe litery nie przeszkadzają w Peek: zero wpisane zamiast drugiej z dwóch liter jest odczytywane jako O, a litera O wśród dziesięciu cyfr jako zero. Wyszukiwarka JS Express wymaga pełnego numeru – jego fragment nic nie znajdzie.
 
@@ -112,7 +112,7 @@ Skany z Chin są przeliczane według czasu pekińskiego, a pozostałe według st
 
 Gdy drugi numer jednoznacznie pasuje do przewoźnika działającego w Polsce, Peek pokazuje „Doręcza: …” wraz z tym numerem i sprawdza go równolegle; prawidłowy międzynarodowy numer pocztowy jest sprawdzany w Poczcie Polskiej. Dopóki u tego przewoźnika widnieje tylko elektroniczna zapowiedź bez fizycznego skanu, zobaczysz „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”. Gdy pojawi się tam skan co najmniej tak świeży jak ostatni wpis JS Express, Peek przełącza śledzenie na tego przewoźnika, pokazując oba numery i zachowując wcześniejsze skany JS Express.
 
-Peek sprawdza paczkę nawet co 10 minut, a nawet co 2 minuty (co 5, gdy musi otworzyć stronę JS Express w przeglądarce) od 6:00 czasu lokalnego w dniu, w którym przesyłka ma status „W doręczeniu”, dopóki odpowiada własne śledzenie JS Express (przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL i USPS co 30 minut, także gdy paczka jest w doręczeniu. Po dwóch dniach bez nowych wpisów (albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza raz na godzinę. Możesz włączyć powiadomienia: „Każdy skan”, „Ważne etapy” (urząd celny, problemy, próby doręczenia, „Do odbioru”, wydanie do doręczenia, doręczenie i zwrot) albo „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z JS Express ani ze sprzedawcą.
+Peek sprawdza paczkę nawet co 10 minut, a nawet co 2 minuty (co 5, gdy musi otworzyć stronę JS Express w przeglądarce) od 6:00 czasu lokalnego w dniu, w którym przesyłka ma status „W doręczeniu”, dopóki odpowiada własne śledzenie JS Express (przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane nie częściej niż co godzinę, PostNL i USPS nie częściej niż co 30 minut, także gdy paczka jest w doręczeniu. Po dwóch dniach bez nowych wpisów (albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza raz na godzinę. Możesz włączyć powiadomienia: „Każdy skan”, „Ważne etapy” (urząd celny, problemy, próby doręczenia, „Do odbioru”, wydanie do doręczenia, doręczenie i zwrot) albo „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z JS Express ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie JS Express
 

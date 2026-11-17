@@ -14,8 +14,8 @@ Według FAQ J&T numery przesyłek w tej sieci zaczynają się od JTDE. Peek zna 
 
 | Numer (zmyślony) | Co oznacza |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` i 12 cyfr: paczka J&T Express Germany. Peek od razu wskazuje J&T Express Germany. |
-| `JTDE00000000000` | O jedną cyfrę za mało: to nie jest format J&T Express Germany i Peek nie rozpoznaje żadnego przewoźnika. Sprawdź, czy nie pominąłeś cyfry. |
+| `JTDE999999999980` | `JTDE` i 12 cyfr: paczka J&T Express Germany. Peek od razu wskazuje J&T Express Germany. |
+| `JTDE99999999980` | O jedną cyfrę za mało: to nie jest format J&T Express Germany i Peek nie rozpoznaje żadnego przewoźnika. Sprawdź, czy nie pominąłeś cyfry. |
 
 Gdy po `JTDE` jest o jedną cyfrę za mało lub za dużo i żaden przewoźnik nie odpowiada dla takiego numeru, strona przesyłki na peektracker.com zwraca na to uwagę („Zaczyna się jak numer śledzenia przewoźnika J&T Express Germany, ale brakuje jednego znaku: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.” albo „… ale ma o jeden znak za dużo: może jest w nim literówka. Porównaj go z wiadomością o wysyłce.”).
 

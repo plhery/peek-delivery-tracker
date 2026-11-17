@@ -19,8 +19,8 @@ Formati più comuni indicati da bpost (esempi inventati):
 | 24 cifre che iniziano con `3232` o `3299` | `323200000000000000000001` | Codice a barre per pacco bpost |
 | 18 cifre che iniziano con `3232` | `323212345000000001` | Codice a barre per pacco bpost |
 | 23 o 27 caratteri con `JJBE` + lettera | `JJBEA0000000000000000000001` | Codice nazionale bpost (pacco o raccomandata) |
-| 2 lettere (esclusa `U`), 9 cifre e `BE` | `CE000000005BE` | Pacco postale internazionale spedito dal Belgio |
-| `R` + lettera, 9 cifre e `BE` | `RR000000005BE` | Raccomandata internazionale dal Belgio |
+| 2 lettere (esclusa `U`), 9 cifre e `BE` | `CE482910576BE` | Pacco postale internazionale spedito dal Belgio |
+| `R` + lettera, 9 cifre e `BE` | `RR482910576BE` | Raccomandata internazionale dal Belgio |
 | 30 cifre che iniziano con `010` | `010000000000000000000000000001` | Raccomandata nazionale in Belgio |
 
 Un codice che inizia con `U` (`UA…BE`) serve solo per la dogana: non ha Track & Trace, viaggia come posta ordinaria e arriva entro 5 giorni lavorativi dallo sdoganamento.

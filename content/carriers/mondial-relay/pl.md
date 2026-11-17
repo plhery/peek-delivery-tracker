@@ -16,12 +16,12 @@ Mondial Relay nazywa go *numéro d'expédition*: to 8 cyfr przesyłanych w e-mai
 
 | Format (przykład zmyślony) | Co oznacza |
 | --- | --- |
-| `12345678` | Podstawowy 8-cyfrowy numer nadania (taką samą długość stosują m.in. Colisweb i Heppner). |
+| `48291057` | Podstawowy 8-cyfrowy numer nadania (taką samą długość stosują m.in. Colisweb i Heppner). |
 | `0012345678` | 10 cyfr: dwucyfrowy kod nadawcy/sklepu oraz numer nadania. Tę samą długość mają [DHL Express](carrier:dhl-express), Relais Colis i inni. |
 | `001234567802` | 12 cyfr: powyższy układ plus numer kolejny paczki (podobnie jak DPD France, Colis Privé czy BRT). |
 | `00123456780101` | 14 cyfr: początek kodu kreskowego z kodem sklepu, numerem nadania, numerem paczki i liczbą paczek. Spotykany też w DPD i [Chronopost](carrier:chronopost). |
 | `00123456780101700000000000` | 26 cyfr: pełny kod kreskowy z etykiety — wyłącznie w Mondial Relay, z 8-cyfrowym numerem nadania na pozycjach od 3 do 10. |
-| `FV12345678` | `FV` i 8 cyfr: numer przesyłki InPost Hiszpania (w Hiszpanii i Portugalii dawne Mondial Relay działa od 2021 r. pod marką InPost). |
+| `FV48291057` | `FV` i 8 cyfr: numer przesyłki InPost Hiszpania (w Hiszpanii i Portugalii dawne Mondial Relay działa od 2021 r. pod marką InPost). |
 
 Na części francuskich etykiet numer nadania bywa sklejony bez spacji z 5-cyfrowym francuskim kodem pocztowym (łącznie 13, 15 lub 17 cyfr). Jeżeli natomiast sklep lub aplikacja InPost Mobile pokaże Ci osobny, 24-cyfrowy krajowy numer [InPost](carrier:inpost) na polski odcinek dostawy, to właśnie nim prześledzisz ostatni etap w Polsce; zobacz też [jak rozpoznać przewoźnika po formacie numeru](guide:tracking-number-formats).
 

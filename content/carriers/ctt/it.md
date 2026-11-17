@@ -16,8 +16,8 @@ La maggior parte dei codici seguiti su `ctt.pt` segue lo standard postale intern
 
 | Formato (inventato) | Che cos'è |
 | --- | --- |
-| `RR000000005PT` | Codice postale o CTT Expresso emesso in Portogallo (`RR`, `CA`, `DA`, `EA`…). La nona cifra è una cifra di controllo. |
-| `RR000000005IT` | Stesso formato creato da un'altra posta nazionale: qui [Poste Italiane](carrier:poste-italiane) (`CH` per la [Posta Svizzera](carrier:swiss-post)). |
+| `RR482910576PT` | Codice postale o CTT Expresso emesso in Portogallo (`RR`, `CA`, `DA`, `EA`…). La nona cifra è una cifra di controllo. |
+| `RR482910576IT` | Stesso formato creato da un'altra posta nazionale: qui [Poste Italiane](carrier:poste-italiane) (`CH` per la [Posta Svizzera](carrier:swiss-post)). |
 | `0012340012345678901234` | 22 cifre (`00`, quattro cifre, `00` e 14 cifre): spedizione iberica di [CTT Express](carrier:ctt-express), consultabile anche su `ctt.pt`. |
 | `0012340012345678901234001` | 25 cifre: le stesse 22 cifre seguite da `001`. |
 
@@ -87,7 +87,7 @@ Canali ufficiali verificati sulle pagine CTT il 17 novembre 2026:
 
 ## Tracciare un pacco CTT con Peek
 
-[Peek](/) riconosce subito i codici postali ed Expresso di CTT (`PT` con cifra di controllo valida) e i link di `ctt.pt` contenenti `objects=`. Se una cifra è errata (ad esempio `RR000000004PT`), la verifica fallisce e Peek non assegna alcun corriere: ricontrolla il codice o tocca «Cambia». Gli altri riferimenti CTT fuori dallo standard postale vengono letti tramite servizi universali di tracciamento, mentre i codici di 22 e 25 cifre passano a [CTT Express](carrier:ctt-express).
+[Peek](/) riconosce subito i codici postali ed Expresso di CTT (`PT` con cifra di controllo valida) e i link di `ctt.pt` contenenti `objects=`. Se una cifra è errata (ad esempio `RR482910575PT`), la verifica fallisce e Peek non assegna alcun corriere: ricontrolla il codice o tocca «Cambia». Gli altri riferimenti CTT fuori dallo standard postale vengono letti tramite servizi universali di tracciamento, mentre i codici di 22 e 25 cifre passano a [CTT Express](carrier:ctt-express).
 
 Peek mostra lo stato attuale, fino alle 20 scansioni più recenti posizionate in modo indicativo sulla mappa (centro operativo o punto di ritiro) e il codice numerico di stato di CTT; CTT non fornisce una data di consegna stimata. Gli orari portoghesi vengono letti sul fuso di Lisbona (o delle Azzorre dai CAP `9500`) e quelli delle filiali spagnole di CTT Express su Madrid o Canarie, convertiti poi nel fuso del tuo dispositivo (su peektracker.com e nell'app per iPhone compare in fondo alla cronologia: «Orari nel tuo fuso orario: …»). Se una spedizione `PT` è diretta in Italia o in Svizzera, Peek interroga anche [Poste Italiane](carrier:poste-italiane) o la [Posta Svizzera](carrier:swiss-post): finché la posta di destinazione registra solo il preavviso senza una scansione propria, la scheda mostra ad esempio «Annunciato a Poste Italiane, non ancora ricevuto», passando a «Consegna con Poste Italiane» appena compare una scansione altrettanto recente e mantenendo lo storico CTT (e viceversa verso «CTT Portugal» per i pacchi diretti in Portogallo).
 

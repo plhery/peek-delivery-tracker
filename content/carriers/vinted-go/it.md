@@ -18,7 +18,7 @@ Vinted Go non pubblica una guida ai propri formati, ma ecco le forme riconosciut
 | --- | --- |
 | `1700000000000001` | Formato tipico di Vinted Go: 16 cifre che iniziano per `17` o `18` con cifra di controllo valida. Anche DHL eCommerce, TNT ed Evri usano codici di 16 cifre, Evri solo se l'ultima cifra supera anche il suo controllo. |
 | `1700000000000002` | 16 cifre la cui ultima cifra non supera il controllo: non ha la struttura di Vinted Go. |
-| `VGS00000000000000` | `VGS` seguito da 13 o 14 cifre: un codice esclusivo a cui risponde solo il tracciamento di Vinted Go. |
+| `VGS48291057364829` | `VGS` seguito da 13 o 14 cifre: un codice esclusivo a cui risponde solo il tracciamento di Vinted Go. |
 | `ABC3UW0000000000` | 16 caratteri (3 lettere, una cifra, `UW`, una cifra e 9 lettere o cifre): tracciato da Vinted Go, dove gli ultimi 13 caratteri (`3UW0000000000`) possono coincidere con il codice spedizione di [Poste Italiane](carrier:poste-italiane). |
 
 Attenzione a non confondere due elementi diversi:

@@ -16,8 +16,8 @@ Die meisten Sendungen auf `ctt.pt` tragen einen 13-stelligen internationalen Pos
 
 | Format (erfunden) | Bedeutung |
 | --- | --- |
-| `RR000000005PT` | Post- oder CTT-Expresso-Code aus Portugal (`RR`, `CA`, `DA`, `EA` usw.). Die neunte Ziffer ist eine Prüfziffer. |
-| `RR000000005DE` | Gleiches Muster einer anderen Landespost – hier [DHL](carrier:dhl) / Deutsche Post (`AT` bei der [Österreichischen Post](carrier:austrian-post), `CH` bei der [Schweizerischen Post](carrier:swiss-post)). |
+| `RR482910576PT` | Post- oder CTT-Expresso-Code aus Portugal (`RR`, `CA`, `DA`, `EA` usw.). Die neunte Ziffer ist eine Prüfziffer. |
+| `RR482910576DE` | Gleiches Muster einer anderen Landespost – hier [DHL](carrier:dhl) / Deutsche Post (`AT` bei der [Österreichischen Post](carrier:austrian-post), `CH` bei der [Schweizerischen Post](carrier:swiss-post)). |
 | `0012340012345678901234` | 22 Ziffern (`00`, vier Ziffern, `00` und 14 Ziffern): iberisches Paket von [CTT Express](carrier:ctt-express), auch auf `ctt.pt` abfragbar. |
 | `0012340012345678901234001` | 25 Ziffern: dieselben 22 Ziffern gefolgt von `001`. |
 
@@ -87,7 +87,7 @@ Offizielle Kontaktwege laut CTT (geprüft am 17. November 2026):
 
 ## CTT-Pakete mit Peek verfolgen
 
-[Peek](/) erkennt portugiesische `PT`-Sendungsnummern mit gültiger Prüfziffer sowie `ctt.pt`-Links mit `objects=` sofort als CTT. Ist eine Ziffer vertauscht (etwa `RR000000004PT`), schlägt die Prüfziffer fehl und Peek ordnet keinen Paketdienst zu – prüfe dann die Nummer oder tippe auf „Ändern“. Andere CTT-Referenzen außerhalb des internationalen Postformats liest Peek über universelle Tracking-Dienste; 22- und 25-stellige Nummern gehen an [CTT Express](carrier:ctt-express).
+[Peek](/) erkennt portugiesische `PT`-Sendungsnummern mit gültiger Prüfziffer sowie `ctt.pt`-Links mit `objects=` sofort als CTT. Ist eine Ziffer vertauscht (etwa `RR482910575PT`), schlägt die Prüfziffer fehl und Peek ordnet keinen Paketdienst zu – prüfe dann die Nummer oder tippe auf „Ändern“. Andere CTT-Referenzen außerhalb des internationalen Postformats liest Peek über universelle Tracking-Dienste; 22- und 25-stellige Nummern gehen an [CTT Express](carrier:ctt-express).
 
 Peek zeigt den aktuellen Status, bis zu 20 neueste Scans mit grober Ortsangabe (Zentrum oder Abholpunkt) auf der Karte sowie den numerischen CTT-Statuscode; ein voraussichtliches Lieferdatum liefert CTT nicht. Portugiesische Scans liest Peek in Lissabon-Zeit (bzw. Azoren-Zeit ab Postleitzahl `9500`) und spanische CTT-Express-Stationen in Madrider oder Kanaren-Zeit, umgerechnet in deine Gerätezeitzone (auf peektracker.com und in der iPhone-App steht unter dem Verlauf: „Uhrzeiten in deiner Zeitzone: …“). Reist ein `PT`-Paket nach Deutschland, Österreich oder in die Schweiz, fragt Peek zusätzlich [DHL](carrier:dhl), die [Österreichische Post](carrier:austrian-post) oder die [Schweizerische Post](carrier:swiss-post) ab: Solange dort nur die Vorankündigung ohne eigenen Scan vorliegt, steht auf der Karte z. B. „Bei DHL angekündigt, noch nicht eingetroffen“; ab einem mindestens ebenso aktuellen Scan wechselt die Anzeige auf „Zustellung durch DHL“ und behält den CTT-Verlauf bei (umgekehrt „CTT Portugal“ bei Paketen nach Portugal).
 

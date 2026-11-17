@@ -19,8 +19,8 @@ Najczęstsze formaty podawane przez bpost (przykłady zmyślone):
 | 24 cyfry od `3232` lub `3299` | `323200000000000000000001` | Kod kreskowy paczki bpost |
 | 18 cyfr od `3232` | `323212345000000001` | Kod kreskowy paczki bpost |
 | 23 lub 27 znaków z `JJBE` + literą | `JJBEA0000000000000000000001` | Krajowy kod bpost (paczka lub list polecony) |
-| 2 litery (poza `U`), 9 cyfr i `BE` | `CE000000005BE` | Międzynarodowa paczka pocztowa z Belgii |
-| `R` + litera, 9 cyfr i `BE` | `RR000000005BE` | Międzynarodowa przesyłka polecona z Belgii |
+| 2 litery (poza `U`), 9 cyfr i `BE` | `CE482910576BE` | Międzynarodowa paczka pocztowa z Belgii |
+| `R` + litera, 9 cyfr i `BE` | `RR482910576BE` | Międzynarodowa przesyłka polecona z Belgii |
 | 30 cyfr od `010` | `010000000000000000000000000001` | Krajowa przesyłka polecona w Belgii |
 
 Kod zaczynający się od `U` (`UA…BE`) służy wyłącznie do odprawy celnej: nie ma Track & Trace, idzie jak zwykły list i dociera maksymalnie w 5 dni roboczych po ocleniu.

@@ -19,8 +19,8 @@ Formatos mais comuns indicados pela bpost (exemplos inventados):
 | 24 dígitos começados por `3232` ou `3299` | `323200000000000000000001` | Código de barras de encomenda bpost |
 | 18 dígitos começados por `3232` | `323212345000000001` | Código de barras de encomenda bpost |
 | 23 ou 27 caracteres com `JJBE` + letra | `JJBEA0000000000000000000001` | Código doméstico bpost (encomenda ou registado) |
-| 2 letras (exceto `U`), 9 dígitos e `BE` | `CE000000005BE` | Encomenda postal internacional expedida da Bélgica |
-| `R` + letra, 9 dígitos e `BE` | `RR000000005BE` | Correio registado internacional da Bélgica |
+| 2 letras (exceto `U`), 9 dígitos e `BE` | `CE482910576BE` | Encomenda postal internacional expedida da Bélgica |
+| `R` + letra, 9 dígitos e `BE` | `RR482910576BE` | Correio registado internacional da Bélgica |
 | 30 dígitos começados por `010` | `010000000000000000000000000001` | Correio registado nacional na Bélgica |
 
 Um código começado por `U` (`UA…BE`) serve apenas para a alfândega: o envio não tem Track & Trace, segue como correio normal e chega até 5 dias úteis após o desalfandegamento.

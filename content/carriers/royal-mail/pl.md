@@ -14,15 +14,15 @@ Przesyłki rejestrowane Royal Mail mają trzy główne formaty numerów. Jeśli 
 
 | Format (przykład zmyślony) | Co oznacza |
 | --- | --- |
-| `AB000000005GB` | Standardowy międzynarodowy numer pocztowy (norma UPU S10): 2 litery, 9 cyfr oraz `GB`. Dziewiąta cyfra to cyfra kontrolna. |
+| `AB482910576GB` | Standardowy międzynarodowy numer pocztowy (norma UPU S10): 2 litery, 9 cyfr oraz `GB`. Dziewiąta cyfra to cyfra kontrolna. |
 | `0A1234567000000000ABC` | 21-znakowy identyfikator z kodu 2D na krajowych etykietach w Wielkiej Brytanii. |
-| `1234567890ABCDEF` | 16-znakowy identyfikator złożony z cyfr oraz liter od `A` do `F`. |
+| `4829105738ABCDEF` | 16-znakowy identyfikator złożony z cyfr oraz liter od `A` do `F`. |
 
 Podobne numery, których nie warto mylić:
 
 - Prefiks zaczynający się od `E` (`EA`, `EB`…), `CP` albo `GI` przed 9 cyframi i końcówką `GB` należy do Parcelforce Worldwide (śledzenie Royal Mail przyjmuje również 14-znakowe numery Parcelforce zaczynające się od `PB` oraz dwóch liter i dziesięciu cyfr).
-- Ten sam układ S10 zakończony kodem innego kraju (np. `RR000000005PL`) pochodzi od poczty nadania: zgodnie ze standardem UPU S10 przesyłka zachowuje ten sam identyfikator aż do doręczenia, a Royal Mail skanuje ją po dotarciu do Wielkiej Brytanii (z wyjątkiem przesyłek ekspresowych EMS zaczynających się od `E`, które doręcza tam Parcelforce).
-- Ciąg 16 samych cyfr bez liter nie jest numerem Royal Mail — przy takim formacie Peek odpytuje jednocześnie DHL eCommerce oraz [TNT](carrier:tnt).
+- Ten sam układ S10 zakończony kodem innego kraju (np. `RR482910576PL`) pochodzi od poczty nadania: zgodnie ze standardem UPU S10 przesyłka zachowuje ten sam identyfikator aż do doręczenia, a Royal Mail skanuje ją po dotarciu do Wielkiej Brytanii (z wyjątkiem przesyłek ekspresowych EMS zaczynających się od `E`, które doręcza tam Parcelforce).
+- Ciąg 16 samych cyfr bez liter nie jest numerem Royal Mail — przy takim formacie Peek odpytuje jednocześnie kilku przewoźników, m.in. DHL eCommerce oraz [TNT](carrier:tnt).
 
 ## Co oznaczają statusy Royal Mail po polsku
 
@@ -87,9 +87,9 @@ Pod nieobecność pod brytyjskim adresem listonosz może zostawić paczkę w bez
 
 ## Śledzenie przesyłki Royal Mail w Peek
 
-[Peek](/) od razu rozpoznaje prawidłowy numer w układzie `AB000000005GB` i pokazuje „Wykryty przewoźnik”. Jeśli cyfra kontrolna się nie zgadza, zobaczysz komunikat „Cyfra kontrolna tego numeru się nie zgadza.”: sprawdź kod w wiadomości ze sklepu, przyjmij podpowiedzianą korektę przy pomylonej literze i cyfrze (`O` i `0`) albo wybierz „Śledź tak, jak wpisano” i wskaż Royal Mail przyciskiem „Zmień”. Przy brytyjskich numerach krajowych o długości 21 i 16 znaków Peek najpierw pyta serwisy śledzenia, a stronę Royal Mail w przeglądarce otwiera na końcu, co może chwilę potrwać; jeśli nic nie odpowie albo rzadki 21-znakowy numer zostanie przypisany do Australia Post, wybierz Royal Mail przez „Zmień”. Link `royalmail.com` z parametrem `trackNumber=` wskazuje Royal Mail natychmiast dla każdego formatu, natomiast link `#/tracking-results/` działa tylko dla numerów S10 zakończonych na `GB`.
+[Peek](/) od razu rozpoznaje prawidłowy numer w układzie `AB482910576GB` i pokazuje „Wykryty przewoźnik”. Jeśli cyfra kontrolna się nie zgadza, zobaczysz komunikat „Cyfra kontrolna tego numeru się nie zgadza.”: sprawdź kod w wiadomości ze sklepu, przyjmij podpowiedzianą korektę przy pomylonej literze i cyfrze (`O` i `0`) albo wybierz „Śledź tak, jak wpisano” i wskaż Royal Mail przyciskiem „Zmień”. Przy brytyjskich numerach krajowych o długości 21 i 16 znaków Peek najpierw pyta serwisy śledzenia, a stronę Royal Mail w przeglądarce otwiera na końcu, co może chwilę potrwać; jeśli nic nie odpowie albo rzadki 21-znakowy numer zostanie przypisany do Australia Post, wybierz Royal Mail przez „Zmień”. Link `royalmail.com` z parametrem `trackNumber=` wskazuje Royal Mail natychmiast dla każdego formatu, natomiast link `#/tracking-results/` działa tylko dla numerów S10 zakończonych na `GB`.
 
-Peek otwiera śledzenie Royal Mail w przeglądarce na własnym serwerze. Ponieważ Royal Mail mocno ogranicza ruch automatyczny, Peek sam sprawdza przesyłkę Royal Mail mniej więcej raz na godzinę — zarówno w zwykły dzień, jak i w dniu dostawy, nawet gdy podane jest okno godzinowe; ręczne odświeżenie może uruchomić sprawdzenie wcześniej. Na ekranie widzisz aktualny etap, każdy skan na mapie z nazwą miejscowości (bez kodów pocztowych), przewidywany dzień doręczenia (wraz z przedziałem godzinowym, jeśli jest podany), godzinę wydania oraz kraj docelowy. Brytyjskie godziny są przeliczane z dopiskiem „Godziny w Twojej strefie czasowej: …”. Wpisy doręczenia pokazują „Dostarczona” bez nazwiska odbiorcy, adresu ani zdjęcia, a pozostałe zdarzenia zachowują oryginalne angielskie brzmienie. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+Peek otwiera śledzenie Royal Mail w przeglądarce na własnym serwerze. Ponieważ Royal Mail mocno ogranicza ruch automatyczny, Peek sam sprawdza przesyłkę Royal Mail mniej więcej raz na godzinę — zarówno w zwykły dzień, jak i w dniu dostawy, nawet gdy podane jest okno godzinowe. Na ekranie widzisz aktualny etap, każdy skan na mapie z nazwą miejscowości (bez kodów pocztowych), przewidywany dzień doręczenia (wraz z przedziałem godzinowym, jeśli jest podany), godzinę wydania oraz kraj docelowy. Brytyjskie godziny są przeliczane z dopiskiem „Godziny w Twojej strefie czasowej: …”. Wpisy doręczenia pokazują „Dostarczona” bez nazwiska odbiorcy, adresu ani zdjęcia, a pozostałe zdarzenia zachowują oryginalne angielskie brzmienie. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 W przypadku paczek z końcówką `…GB` wysyłanych poza Wielką Brytanię, gdy tylko Royal Mail poda kraj przeznaczenia (albo na podstawie kraju ustawionego w Peek), Peek odpytuje również narodowego operatora pocztowego w ponad 60 krajach — w tym [Pocztę Polską](carrier:poczta-polska) — i przełącza widok na „Doręcza: …”, jak tylko pojawią się tam nowe skany, przechodząc wtedy na częstsze sprawdzanie (nawet co 10 minut, a w dniu doręczenia nawet co 2 minuty). Opłaty celno-podatkowe, przekierowania i reklamacje załatwia się bezpośrednio w Royal Mail lub Poczcie Polskiej.
 

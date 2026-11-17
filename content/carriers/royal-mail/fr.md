@@ -14,15 +14,15 @@ Les numéros suivis par Royal Mail prennent trois formes principales. Si tu ne t
 
 | Format (exemple inventé) | Ce que c'est |
 | --- | --- |
-| `AB000000005GB` | Le numéro suivi habituel (norme UPU S10) : 2 lettres, 9 chiffres et `GB`. Le 9e chiffre est une clé de contrôle. |
+| `AB482910576GB` | Le numéro suivi habituel (norme UPU S10) : 2 lettres, 9 chiffres et `GB`. Le 9e chiffre est une clé de contrôle. |
 | `0A1234567000000000ABC` | Référence à 21 caractères issue d'un code-barres 2D sur les étiquettes intérieures britanniques. |
-| `1234567890ABCDEF` | Référence à 16 caractères composée de chiffres et des lettres `A` à `F`. |
+| `4829105738ABCDEF` | Référence à 16 caractères composée de chiffres et des lettres `A` à `F`. |
 
 Numéros proches à ne pas confondre :
 
 - Un préfixe commençant par `E` (`EA`, `EB`…), `CP` ou `GI` suivi de 9 chiffres et `GB` désigne un colis Parcelforce Worldwide (le suivi Royal Mail accepte aussi les références Parcelforce de 14 caractères commençant par `PB` suivi de deux lettres et dix chiffres).
-- Le même format S10 terminé par le code d'un autre pays (`RR000000005FR`, `RR000000005BE`, `RR000000005CH`) vient de la poste d'expédition. L'envoi garde cet identifiant unique jusqu'à ta porte, conformément à la norme S10 de l'UPU, et Royal Mail le prend en charge à l'arrivée au Royaume-Uni (sauf les envois EMS commençant par `E`, confiés à Parcelforce).
-- Une suite de 16 chiffres sans aucune lettre n'est pas un format Royal Mail : Peek interroge en même temps d'autres transporteurs qui utilisent cette longueur, à savoir DHL eCommerce et [TNT](carrier:tnt).
+- Le même format S10 terminé par le code d'un autre pays (`RR482910576FR`, `RR482910576BE`, `RR482910576CH`) vient de la poste d'expédition. L'envoi garde cet identifiant unique jusqu'à ta porte, conformément à la norme S10 de l'UPU, et Royal Mail le prend en charge à l'arrivée au Royaume-Uni (sauf les envois EMS commençant par `E`, confiés à Parcelforce).
+- Une suite de 16 chiffres sans aucune lettre n'est pas un format Royal Mail : Peek interroge en même temps d'autres transporteurs qui utilisent cette longueur, dont DHL eCommerce et [TNT](carrier:tnt).
 
 ## Que signifient les statuts Royal Mail en français
 
@@ -99,9 +99,9 @@ En cas d'absence, remise en lieu sûr (*safe place*) ou chez un voisin (préfér
 
 ## Suivre un colis Royal Mail avec Peek
 
-[Peek](/) reconnaît aussitôt un numéro valide comme `AB000000005GB` (« Transporteur détecté »). Si la clé ne tombe pas juste, Peek affiche « Le chiffre de contrôle de ce numéro ne correspond pas. » : accepte la correction proposée en cas de confusion entre lettre et chiffre (`O`/`0`), ou choisis « Suivre tel quel » puis sélectionne Royal Mail via « Changer ». Pour les références domestiques de 21 et 16 caractères, Peek teste d'abord des services de suivi avant d'ouvrir le navigateur Royal Mail en dernier ; si rien ne répond ou qu'une référence rare à 21 caractères est attribuée à Australia Post, choisis Royal Mail avec « Changer ». Un lien `royalmail.com` avec `trackNumber=` fonctionne pour tout format ; `#/tracking-results/` ne vaut que pour un code S10 en `GB`.
+[Peek](/) reconnaît aussitôt un numéro valide comme `AB482910576GB` (« Transporteur détecté »). Si la clé ne tombe pas juste, Peek affiche « Le chiffre de contrôle de ce numéro ne correspond pas. » : accepte la correction proposée en cas de confusion entre lettre et chiffre (`O`/`0`), ou choisis « Suivre tel quel » puis sélectionne Royal Mail via « Changer ». Pour les références domestiques de 21 et 16 caractères, Peek teste d'abord des services de suivi avant d'ouvrir le navigateur Royal Mail en dernier ; si rien ne répond ou qu'une référence rare à 21 caractères est attribuée à Australia Post, choisis Royal Mail avec « Changer ». Un lien `royalmail.com` avec `trackNumber=` fonctionne pour tout format ; `#/tracking-results/` ne vaut que pour un code S10 en `GB`.
 
-Peek ouvre le suivi Royal Mail dans un navigateur sur son serveur et, vu le filtrage anti-robots de Royal Mail, vérifie l'envoi environ une fois par heure, même le jour de la livraison ou avec un créneau annoncé (un rafraîchissement manuel peut relancer plus tôt). Tu vois le statut, chaque scan sur une carte sans codes postaux, la date et le créneau prévus, l'heure de remise (« Heures dans ton fuseau horaire : … ») et le pays de destination. La remise affiche « Livré » sans nom, adresse ni photo, et les autres scans gardent l'anglais d'origine. Alertes au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Peek ouvre le suivi Royal Mail dans un navigateur sur son serveur et, vu le filtrage anti-robots de Royal Mail, vérifie l'envoi environ une fois par heure, même le jour de la livraison ou avec un créneau annoncé. Tu vois le statut, chaque scan sur une carte sans codes postaux, la date et le créneau prévus, l'heure de remise (« Heures dans ton fuseau horaire : … ») et le pays de destination. La remise affiche « Livré » sans nom, adresse ni photo, et les autres scans gardent l'anglais d'origine. Alertes au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 Sur un envoi `…GB` vers l'étranger, Peek interroge aussi la poste de destination dans plus de 60 pays — dont [La Poste](carrier:la-poste), [bpost](carrier:bpost) et [La Poste suisse](carrier:swiss-post) — et passe sur « Livraison par … » dès qu'elle publie de nouveaux scans, à sa cadence plus fréquente (jusqu'à toutes les 10 minutes, ou jusqu'à toutes les 2 minutes en tournée). Douane, reprogrammation et réclamations se règlent directement auprès des postes concernées.
 

@@ -16,9 +16,9 @@ Voici les formats que Peek reconnaît, avec des exemples inventés :
 
 | Numéro (inventé) | Ce que c'est |
 | --- | --- |
-| `00000000000` | 11 chiffres. Même format chez [GLS Suisse](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Autriche, GLS Pologne, PostLogistics et d'autres. |
+| `48291057364` | 11 chiffres. Même format chez [GLS Suisse](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Autriche, GLS Pologne, PostLogistics et d'autres. |
 | `000000000009` | 12 chiffres, dont le dernier est une clé de contrôle. Même format chez BRT, [Mondial Relay](carrier:mondial-relay), [Colis Privé](carrier:colis-prive), [DPD France](carrier:dpd-fr) et d'autres. |
-| `AB000000` | 8 lettres et chiffres : un Track-ID peut aussi prendre cette forme. Commun à [GLS Suisse](carrier:gls-ch), [GLS France](carrier:gls-fr) et Loggi. |
+| `AB482910` | 8 lettres et chiffres : un Track-ID peut aussi prendre cette forme. Commun à [GLS Suisse](carrier:gls-ch), [GLS France](carrier:gls-fr), GLS Pays-Bas et Loggi. |
 | `ABCDEF` | Track-ID de six lettres sur l'avis de passage. Peek le lit comme un numéro de colis ; s'il n'est pas reconnu, utilise le numéro de colis complet. |
 
 Numéro refusé ? Si l'e-mail du vendeur mentionne un autre transporteur, le numéro est le sien : consulte [les formats de numéros de suivi](guide:tracking-number-formats).
@@ -81,7 +81,7 @@ Pour une commande en ligne, ton premier interlocuteur reste le marchand. Les coo
 
 Comme GLS exige le code postal du destinataire pour livrer le détail des événements, le champ « Code postal de livraison » est requis : sans lui, Peek sait seulement si GLS connaît le numéro, et si GLS ne trouve pas le colis avec le code saisi (« GLS Germany n’a pas trouvé ce colis avec le code postal … »), tu peux le corriger via « Modifier le code postal ». Tous les formats de codes postaux nationaux sont acceptés.
 
-Tu vois alors le statut, les étapes telles que GLS les écrit (en anglais), la ville et le pays de chaque scan sur une carte, le jour prévu, le poids, l'heure de remise et, en cas de dépôt en relais, le nom et l'adresse du ParcelShop sous le statut « Prêt à être retiré ». Ton nom, ton adresse, tes coordonnées, la signature et la référence expéditeur sont écartés. Les heures sont lues à l'heure allemande et affichées dans le fuseau horaire de ton appareil ; sur peektracker.com et dans l'application iPhone, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »). Peek vérifie GLS environ une fois par heure, jour de livraison compris (toutes les 4 heures après un échec), et rafraîchir manuellement n'accélère pas ce délai. Seuls les colis remis à [La Poste suisse](carrier:swiss-post) basculent automatiquement vers un second transporteur. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Tu vois alors le statut, les étapes telles que GLS les écrit (en anglais), la ville et le pays de chaque scan sur une carte, le jour prévu, le poids, l'heure de remise et, en cas de dépôt en relais, le nom et l'adresse du ParcelShop sous le statut « Prêt à être retiré ». Ton nom, ton adresse, tes coordonnées, la signature et la référence expéditeur sont écartés. Les heures sont lues à l'heure allemande et affichées dans le fuseau horaire de ton appareil ; sur peektracker.com et dans l'application iPhone, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »). Peek vérifie GLS environ une fois par heure, jour de livraison compris (toutes les 4 heures après un échec), et rafraîchir manuellement n'accélère pas ce délai. Seuls les colis remis à [La Poste suisse](carrier:swiss-post) basculent automatiquement vers un second transporteur. Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Notifications au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions fréquentes sur le suivi GLS Allemagne
 

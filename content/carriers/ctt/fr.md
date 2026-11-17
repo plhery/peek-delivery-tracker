@@ -16,8 +16,8 @@ Sur `ctt.pt`, la plupart des codes suivent la norme postale internationale : deu
 
 | Format (inventé) | Ce qu'il désigne |
 | --- | --- |
-| `RR000000005PT` | Code postal ou CTT Expresso créé au Portugal (`DA`, `EA`, `RR`, `CA`…). Le 9e chiffre est une clé de contrôle. |
-| `RR000000005FR` | Même format émis par une autre poste — ici [La Poste](carrier:la-poste) (`BE` [bpost](carrier:bpost), `CH` [La Poste suisse](carrier:swiss-post)). |
+| `RR482910576PT` | Code postal ou CTT Expresso créé au Portugal (`DA`, `EA`, `RR`, `CA`…). Le 9e chiffre est une clé de contrôle. |
+| `RR482910576FR` | Même format émis par une autre poste — ici [La Poste](carrier:la-poste) (`BE` [bpost](carrier:bpost), `CH` [La Poste suisse](carrier:swiss-post)). |
 | `0012340012345678901234` | 22 chiffres (`00`, quatre chiffres, `00` et 14 chiffres) : envoi [CTT Express](carrier:ctt-express), aussi lisible sur `ctt.pt`. |
 | `0012340012345678901234001` | 25 chiffres : les 22 chiffres précédents suivis de `001`. |
 
@@ -87,9 +87,9 @@ Coordonnées vérifiées sur `ctt.pt` le 17 novembre 2026 :
 
 ## Suivre un colis CTT avec Peek
 
-[Peek](/) reconnaît aussitôt les codes postaux et Expresso de CTT (`PT` à clé de contrôle valide) et les liens `ctt.pt` contenant `objects=`. Si un chiffre est faux (p. ex. `RR000000004PT`), la clé échoue et aucun transporteur n'est reconnu : corrigez le code ou touchez « Changer ». Les références CTT hors norme postale passent par des services universels de suivi ; les codes à 22 ou 25 chiffres vont vers [CTT Express](carrier:ctt-express).
+[Peek](/) reconnaît aussitôt les codes postaux et Expresso de CTT (`PT` à clé de contrôle valide) et les liens `ctt.pt` contenant `objects=`. Si un chiffre est faux (p. ex. `RR482910575PT`), la clé échoue et aucun transporteur n'est reconnu : corrigez le code ou touchez « Changer ». Les références CTT hors norme postale passent par des services universels de suivi ; les codes à 22 ou 25 chiffres vont vers [CTT Express](carrier:ctt-express).
 
-Peek affiche le statut, jusqu'aux 20 derniers scans placés approximativement sur la carte et le code d'état numérique CTT (CTT ne fournit pas de date estimée). Les heures portugaises sont lues sur Lisbonne (Açores dès le code postal `9500`), et celles des agences espagnoles CTT Express sur Madrid ou Canaries, puis converties dans le vôtre (« Heures dans ton fuseau horaire : … » sous l'historique sur peektracker.com et iPhone). Pour un envoi `PT` vers la France, la Belgique ou la Suisse, Peek interroge aussi [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) : « Annoncé à La Poste / Colissimo, pas encore reçu » tant que seule l'annonce existe, puis « Livraison par La Poste / Colissimo » dès un scan au moins aussi récent, en gardant l'historique CTT (et vers « CTT Portugal » à l'arrivée au Portugal).
+Peek affiche le statut, jusqu'aux 20 derniers scans placés approximativement sur la carte et le code d'état numérique CTT (CTT ne fournit pas de date estimée). Les heures portugaises sont lues sur Lisbonne (Açores dès le code postal `9500`), et celles des agences espagnoles CTT Express sur Madrid ou Canaries, puis converties dans le vôtre (« Heures dans ton fuseau horaire : … » sous l'historique sur peektracker.com et iPhone). Pour un envoi `PT` vers la France, la Belgique ou la Suisse, Peek interroge aussi [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) : « Annoncé à La Poste / Colissimo, pas encore reçu » tant que seule l'annonce existe, puis « Livraison par La Poste / Colissimo » dès un scan au moins aussi récent, en gardant l'historique CTT (et vers « CTT Portugal » à l'arrivée au Portugal).
 
 Peek vérifie CTT jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h locales le jour « En livraison » tant que CTT répond directement (15 minutes via services universels), et chaque heure après 48 h sans mouvement ou 12 h sur « Étiquette créée » / « Pris en charge ». Alertes au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 

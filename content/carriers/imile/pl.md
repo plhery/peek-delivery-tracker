@@ -15,12 +15,12 @@ iMile nie podaje na stronie przykładowego numeru. Takie formaty noszą przesył
 | Numer | Czyj to numer |
 | --- | --- |
 | `IM06010000000000` | `IM`, `0601` i dziesięć cyfr: iMile. |
-| `IM00000000000000` | `IM` i 14 cyfr: również iMile. |
+| `IM99999999999980` | `IM` i 14 cyfr: również iMile. |
 | `6010125000000` | 13 cyfr zaczynających się od `6`, po których sześć kolejnych ma układ daty (miesiąc, dzień, rok): własny numer listu przewozowego iMile. |
 | `49000000000000` | 14 cyfr zaczynających się od `49`: format spotykany na przesyłkach iMile we Włoszech, współdzielony przy 14 cyfrach m.in. z DPD, Chronopost czy BRT. Sam układ znaków nie wystarcza, ale Peek odpytuje iMile wśród pierwszych przewoźników. |
 | `3000000000000` | 13 cyfr zaczynających się od `3`: kolejna seria obsługiwana przez iMile, używana też przez innych przewoźników z 13-cyfrowymi numerami. Sam układ znaków nie wystarcza: Peek odpytuje iMile razem z nimi. |
 | `2000000000000` | Inne 13-cyfrowe numery: to nie jest format iMile. Takich numerów używają m.in. Delhivery, Yunda i Korea Post. |
-| `LP00000000000000` | To nie iMile, lecz [Cainiao](carrier:cainiao) – numer logistyczny z AliExpress. |
+| `LP99999999999980` | To nie iMile, lecz [Cainiao](carrier:cainiao) – numer logistyczny z AliExpress. |
 
 Na stronie śledzenia iMile wpisz numer pod „TYPE YOUR ORDER NUMBER”; historia pojawi się w sekcji „ORDER STATUS”. Jeśli iMile nie zna numeru, to pole zostaje puste, bez komunikatu o błędzie. Gdy nie możesz znaleźć numeru nadania, zajrzyj do poradnika [gdzie znaleźć numer śledzenia](guide:find-tracking-number), a potem zapytaj sklep.
 

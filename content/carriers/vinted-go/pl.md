@@ -18,7 +18,7 @@ Vinted Go nie publikuje wzorów swoich numerów. Oto formaty rozpoznawane przez 
 | --- | --- |
 | `1700000000000001` | Typowy format Vinted Go: 16 cyfr zaczynających się od `17` lub `18` z poprawną cyfrą kontrolną na końcu. 16-cyfrowych numerów używają też DHL eCommerce oraz [TNT](carrier:tnt). |
 | `1700000000000002` | 16 cyfr, w których ostatnia cyfra nie przechodzi weryfikacji kontrolnej: to nie jest prawidłowy numer Vinted Go. |
-| `VGS00000000000000` | `VGS` i 13 lub 14 cyfr: kod, na który odpowiada wyłącznie śledzenie Vinted Go. |
+| `VGS48291057364829` | `VGS` i 13 lub 14 cyfr: kod, na który odpowiada wyłącznie śledzenie Vinted Go. |
 | `ABC0UW0000000000` | 16 znaków: 3 litery, cyfra, `UW`, cyfra oraz 9 liter lub cyfr. Śledzenie Vinted Go odpowiada również na te kody, a na trasach do Włoch ostatnie 13 znaków bywa jednocześnie kodem paczki Poste Italiane. |
 
 Łatwo pomylić ze sobą dwie różne rzeczy:

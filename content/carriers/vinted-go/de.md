@@ -18,7 +18,7 @@ Vinted Go veröffentlicht keine Beschreibung seiner Nummernformate. Diese Formen
 | --- | --- |
 | `1700000000000001` | Typische Form einer Vinted-Go-Nummer: 16 Ziffern, beginnend mit `17` oder `18`, mit gültiger Prüfziffer am Ende. Auch [DHL eCommerce](carrier:dhl-ecommerce) und [TNT](carrier:tnt) nutzen 16-stellige Nummern. |
 | `1700000000000002` | 16 Ziffern, deren letzte Ziffer die Prüfung nicht besteht: hat nicht die Form einer Vinted-Go-Nummer. |
-| `VGS00000000000000` | `VGS` gefolgt von 13 oder 14 Ziffern: eine Nummer, auf die ausschließlich die Sendungsverfolgung von Vinted Go antwortet. |
+| `VGS48291057364829` | `VGS` gefolgt von 13 oder 14 Ziffern: eine Nummer, auf die ausschließlich die Sendungsverfolgung von Vinted Go antwortet. |
 | `ABC0UW0000000000` | 16 Zeichen: 3 Buchstaben, eine Ziffer, `UW`, eine Ziffer und 9 Buchstaben oder Ziffern. Auch auf solche Codes antwortet Vinted Go; bei Sendungen nach Italien können die letzten 13 Zeichen zugleich der Paketcode von Poste Italiane sein. |
 
 Zwei Dinge werden leicht verwechselt:

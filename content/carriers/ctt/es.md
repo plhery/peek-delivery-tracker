@@ -16,8 +16,8 @@ La mayoría de los códigos de CTT llevan dos letras de producto, nueve cifras y
 
 | Formato (inventado) | Qué es |
 | --- | --- |
-| `RR000000005PT` | Código postal de CTT. La novena cifra es un dígito de control. |
-| `RR000000005ES` | Mismo formato de otro correo nacional: aquí [Correos](carrier:correos-spain) en España. |
+| `RR482910576PT` | Código postal de CTT. La novena cifra es un dígito de control. |
+| `RR482910576ES` | Mismo formato de otro correo nacional: aquí [Correos](carrier:correos-spain) en España. |
 | `0000200000000000000000` | 22 cifras (`00`, cuatro cifras, `00` y 14 cifras): en ctt.pt indica un envío iniciado en España; también es el formato de [CTT Express](carrier:ctt-express). |
 | `0000200000000000000000001` | 25 cifras: las 22 anteriores seguidas de `001`. |
 
@@ -82,9 +82,9 @@ Canales leídos el 14 de noviembre de 2026:
 
 ## Seguimiento de CTT con Peek
 
-[Peek](/) reconoce al instante los códigos postales de CTT (`PT` con dígito de control válido) y enlaces de ctt.pt con `objects=`. Si baila una cifra (`RR000000004PT`), el control falla y Peek no reconoce ningún transportista: revisa el número o pulsa «Cambiar». Otros formatos de CTT se leen mediante servicios de seguimiento.
+[Peek](/) reconoce al instante los códigos postales de CTT (`PT` con dígito de control válido) y enlaces de ctt.pt con `objects=`. Si baila una cifra (`RR482910575PT`), el control falla y Peek no reconoce ningún transportista: revisa el número o pulsa «Cambiar». Otros formatos de CTT se leen mediante servicios de seguimiento.
 
-Peek muestra el estado, los 20 escaneos más recientes en un mapa aproximado y el código de estado de CTT, sin datos personales; las horas (Lisboa o Azores) salen en tu zona horaria, y tanto en peektracker.com como en la app para iPhone una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». Si un paquete `PT` va a España, consulta también a [Correos](carrier:correos-spain): mientras Correos solo tenga el aviso del envío, verás «Anunciado a Correos, aún no recibido», y pasa a «Entrega con Correos» cuando Correos tiene un escaneo igual o más reciente, siguiendo entonces su ritmo. Los números de 22 y 25 cifras van a [CTT Express](carrier:ctt-express), con fecha prevista, peso y textos en español.
+Peek muestra el estado, los 20 escaneos más recientes en un mapa aproximado y el código de estado de CTT (el nombre del «Destinatario», cuando aparece, solo lo ve quien añadió el paquete y se oculta siempre en enlaces compartidos); las horas (Lisboa o Azores) salen en tu zona horaria, y tanto en peektracker.com como en la app para iPhone una línea al final del historial lo recuerda: «Horas en tu zona horaria: …». Si un paquete `PT` va a España, consulta también a [Correos](carrier:correos-spain): mientras Correos solo tenga el aviso del envío, verás «Anunciado a Correos, aún no recibido», y pasa a «Entrega con Correos» cuando Correos tiene un escaneo igual o más reciente, siguiendo entonces su ritmo. Los números de 22 y 25 cifras van a [CTT Express](carrier:ctt-express), con fecha prevista, peso y textos en español.
 
 Peek comprueba CTT hasta una vez cada 10 minutos, o hasta una vez cada 2 cuando el paquete está «En reparto» (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de CTT; a través de servicios de seguimiento, cada 15 minutos), y cada hora tras 48 horas sin cambios o 12 en «Etiqueta creada» o «Admitido por el transportista». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 

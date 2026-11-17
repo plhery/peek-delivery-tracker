@@ -14,10 +14,10 @@ Omniva nazywa ten numer po angielsku *shipment tracking code* lub *shipment code
 
 | Kod (wymyślony) | Co oznacza |
 | --- | --- |
-| `JJEE00000000000000000` | Paczka Omniva: prefiks `JJEE` i 17 cyfr (łącznie 21 znaków). |
-| `JJEEABC00000000000` | Drugi format paczkowy Omniva: `JJEE`, trzy litery i 11 cyfr. |
-| `CE000000005EE` | Dwie litery, dziewięć cyfr z cyfrą kontrolną i `EE`: międzynarodowy format pocztowy nadawany przez Omniva. Takie numery z końcówką `EE` noszą też paczki do automatów na Łotwie i Litwie oraz przesyłki pocztowe wysyłane do Polski. |
-| `RR000000005CN` | Przesyłka z zagranicy zachowuje numer kraju nadania — tutaj z końcówką `CN` (nadana w Chinach). |
+| `JJEE48291057364829105` | Paczka Omniva: prefiks `JJEE` i 17 cyfr (łącznie 21 znaków). |
+| `JJEEABC48291057364` | Drugi format paczkowy Omniva: `JJEE`, trzy litery i 11 cyfr. |
+| `CE482910576EE` | Dwie litery, dziewięć cyfr z cyfrą kontrolną i `EE`: międzynarodowy format pocztowy nadawany przez Omniva. Takie numery z końcówką `EE` noszą też paczki do automatów na Łotwie i Litwie oraz przesyłki pocztowe wysyłane do Polski. |
+| `RR482910576CN` | Przesyłka z zagranicy zachowuje numer kraju nadania — tutaj z końcówką `CN` (nadana w Chinach). |
 
 Sześciocyfrowy kod otwarcia skrytki z SMS-a o doręczeniu nie służy do śledzenia paczki — podobnie jak sześciocyfrowy kod zwrotu (jeśli wkleisz 6 cyfr w pole Peek, zobaczysz komunikat „To wygląda na kod odbioru”).
 
@@ -85,7 +85,7 @@ Na każdej z trzech stron dostępne są formularze zapytania o status przesyłki
 
 [Peek](/) od razu rozpoznaje oba formaty `JJEE` jako przesyłki Omniva, bez konieczności podawania kodu pocztowego. Działają też linki z `minu.omniva.ee`, `mana.omniva.lv` i `mano.omniva.lt` zawierające `/track/` oraz linki `omniva.ee` i `omniva.lt` z parametrem `barcode=`.
 
-Numery pocztowe zakończone na `EE`, zaczynające się od `C`, `R`, `E` lub `L` (z wyjątkiem `CR`, `CV` i `RO`) i mające poprawną cyfrę kontrolną są przypisywane do Omniva natychmiast. Przy innych dwuliterowych prefiksach z końcówką `EE` (na przykład `CR000000005EE`) Peek rozpoznaje format poczty międzynarodowej, odpytuje Omniva razem z Chronopost i zapisuje przesyłkę pod przewoźnikiem, który potwierdzi numer; jeśli paczki jeszcze nie ma w systemie, Peek sprawdza ją dalej. Gdy pomylisz cyfrę (np. `CE000000004EE`), cyfra kontrolna przestaje się zgadzać — Peek nie wskaże żadnego przewoźnika, a Omniva odrzuci taki numer nawet po ręcznym wyborze przez „Zmień”.
+Numery pocztowe zakończone na `EE`, zaczynające się od `C`, `R`, `E` lub `L` (z wyjątkiem `CR`, `CV` i `RO`) i mające poprawną cyfrę kontrolną są przypisywane do Omniva natychmiast. Przy innych dwuliterowych prefiksach z końcówką `EE` (na przykład `CR482910576EE`) Peek rozpoznaje format poczty międzynarodowej, odpytuje Omniva razem z Chronopost i zapisuje przesyłkę pod przewoźnikiem, który potwierdzi numer; jeśli paczki jeszcze nie ma w systemie, Peek sprawdza ją dalej. Gdy pomylisz cyfrę (np. `CE482910575EE`), cyfra kontrolna przestaje się zgadzać — Peek nie wskaże żadnego przewoźnika, a Omniva odrzuci taki numer nawet po ręcznym wyborze przez „Zmień”.
 
 Gdy przesyłka pocztowa z końcówką `EE` jedzie do Polski, Peek pyta też [Pocztę Polską](carrier:poczta-polska) o ten sam numer. Dopóki Poczta Polska ma tylko zapis bez własnego skanu, zobaczysz „Zgłoszona przewoźnikowi Poczta Polska, jeszcze nieprzyjęta”, a po jej pierwszym skanie „Doręcza: Poczta Polska”. Gdy ten skan jest co najmniej tak świeży jak najnowszy skan Omniva, Peek śledzi paczkę dalej w Poczcie Polskiej. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. W drugą stronę polską przesyłkę pocztową (`PL`) wysłaną do Estonii Peek potrafi śledzić dalej w Omniva (dla Łotwy i Litwy odpytuje odpowiednio Latvijas Pasts lub Lietuvos paštas).
 

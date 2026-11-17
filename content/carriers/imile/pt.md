@@ -15,12 +15,12 @@ A iMile não publica nenhum código de exemplo. Estes são os formatos usados em
 | Número | A quem pertence |
 | --- | --- |
 | `IM06010000000000` | `IM`, `0601` e dez algarismos: iMile. |
-| `IM00000000000000` | `IM` e 14 algarismos: também iMile. |
+| `IM99999999999980` | `IM` e 14 algarismos: também iMile. |
 | `6010125000000` | 13 algarismos começados por `6`, seguidos de seis algarismos com forma de data (mês, dia, ano): número de carta de porte próprio da iMile. |
 | `49000000000000` | 14 algarismos começados por `49`: formato visto em encomendas da iMile em Itália, partilhado a 14 algarismos com transportadoras como [DPD Portugal](carrier:dpd-pt), [Chronopost](carrier:chronopost) ou [SEUR](carrier:seur). O formato, por si só, não chega, mas o Peek consulta a iMile entre as primeiras. |
 | `3000000000000` | 13 algarismos começados por `3`: outra série aceite pelo seguimento da iMile, partilhada com outras transportadoras de 13 algarismos. O formato, por si só, não chega: o Peek consulta a iMile juntamente com elas. |
 | `2000000000000` | Outros números de 13 algarismos: não correspondem aos formatos da iMile. São usados por empresas como Delhivery, Yunda ou Korea Post. |
-| `LP00000000000000` | Não é da iMile, mas da [Cainiao](carrier:cainiao), a referência logística da AliExpress. |
+| `LP99999999999980` | Não é da iMile, mas da [Cainiao](carrier:cainiao), a referência logística da AliExpress. |
 
 Na página de rastreio da iMile, introduz o código em «TYPE YOUR ORDER NUMBER»; o histórico aparece em «ORDER STATUS». Quando a iMile não conhece o número, essa área fica vazia, sem mensagem de erro. Se não encontrares nenhum código, vê [onde encontrar o número de rastreio](guide:find-tracking-number) e pergunta depois à loja.
 

@@ -14,8 +14,8 @@ Nas perguntas frequentes da J&T lê-se que os seus números de envio começam po
 
 | Número (inventado) | O que é |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` e 12 algarismos: uma encomenda da J&T Express Germany. O Peek indica logo a J&T Express Germany. |
-| `JTDE00000000000` | Um algarismo a menos: não tem a forma da J&T Express Germany e o Peek não reconhece nenhuma transportadora. Confirma se não saltaste um dígito. |
+| `JTDE999999999980` | `JTDE` e 12 algarismos: uma encomenda da J&T Express Germany. O Peek indica logo a J&T Express Germany. |
+| `JTDE99999999980` | Um algarismo a menos: não tem a forma da J&T Express Germany e o Peek não reconhece nenhuma transportadora. Confirma se não saltaste um dígito. |
 
 Se o código tiver um algarismo a menos ou a mais depois de `JTDE` e nenhuma transportadora responder por ele, a página da encomenda em peektracker.com avisa-te («Começa como um número de seguimento de J&T Express Germany, mas falta-lhe um carácter: pode estar mal escrito. Compara-o com a tua mensagem de envio.» ou «… mas tem um carácter a mais: pode estar mal escrito. Compara-o com a tua mensagem de envio.»).
 

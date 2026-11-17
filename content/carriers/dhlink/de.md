@@ -14,15 +14,15 @@ DHLink veröffentlicht kein festes Nummernformat. Die Tracking-Seite nimmt bis z
 
 | Nummer | Was es ist |
 | --- | --- |
-| `FC0000000000000` | `FC` und 13 Ziffern: DHLinks eigene Nummer, im Ergebnis „DHLink No.“ genannt. Auf manchen Linien ist sie zugleich die Sendungsnummer. |
-| `XZG000000000WL` | `XZG`, 9 Ziffern und `WL`: Nummer eines Linienpartners, die DHLink als Sendungsnummer erkennt. |
-| `YLUS0000000000` | `YLUS` und 10 Ziffern: eine US-Linie, die GOFO zustellt. |
-| `QH000000000000FS` | `QH`, 12 Ziffern und `FS`: eine weitere US-Linie mit Zustellung durch GOFO. |
-| `EYT0000000000HZ` | `EYT`, 10 Ziffern und `HZ`: eine US-Linie, die SwiftX zustellt. |
-| `CYS00000000000` | `CYS` und 11 Ziffern: eine US-Linie, die UniUni zustellt. |
-| `JXCYI0000000000YQ` | `JXC`, `YI`, `ZO`, `US` oder `ZI`, 10 Ziffern und `YQ`: ein Frachtbriefformat von [Juxi Express](carrier:juxi-express), auf das bei manchen US-Paketen auch DHLinks Tracking antwortet. Peek fragt bei dieser Form zuerst DHLink; andere `JXC`-Nummern gehen an Juxi Express. |
-| `RR000000005CN` | Zwei Buchstaben, 9 Ziffern und `CN`: eine Nummer von [China Post](carrier:china-post). Manche DHLink-Sendungen laufen unter einer solchen Nummer über den Postweg. |
-| `GFUS00000000000000` | Keine DHLink-Nummer: eine Nummer von GOFO Express für die letzte Meile mancher US-Linien. |
+| `FC9999999999980` | `FC` und 13 Ziffern: DHLinks eigene Nummer, im Ergebnis „DHLink No.“ genannt. Auf manchen Linien ist sie zugleich die Sendungsnummer. |
+| `XZG999999980WL` | `XZG`, 9 Ziffern und `WL`: Nummer eines Linienpartners, die DHLink als Sendungsnummer erkennt. |
+| `YLUS9999999980` | `YLUS` und 10 Ziffern: eine US-Linie, die GOFO zustellt. |
+| `QH999999999980FS` | `QH`, 12 Ziffern und `FS`: eine weitere US-Linie mit Zustellung durch GOFO. |
+| `EYT9999999980HZ` | `EYT`, 10 Ziffern und `HZ`: eine US-Linie, die SwiftX zustellt. |
+| `CYS99999999980` | `CYS` und 11 Ziffern: eine US-Linie, die UniUni zustellt. |
+| `JXCYI9999999990YQ` | `JXC`, `YI`, `ZO`, `US` oder `ZI`, 10 Ziffern und `YQ`: ein Frachtbriefformat von [Juxi Express](carrier:juxi-express), auf das bei manchen US-Paketen auch DHLinks Tracking antwortet. Peek fragt bei dieser Form zuerst DHLink; andere `JXC`-Nummern gehen an Juxi Express. |
+| `RR482910576CN` | Zwei Buchstaben, 9 Ziffern und `CN`: eine Nummer von [China Post](carrier:china-post). Manche DHLink-Sendungen laufen unter einer solchen Nummer über den Postweg. |
+| `GFUS99999999999980` | Keine DHLink-Nummer: eine Nummer von GOFO Express für die letzte Meile mancher US-Linien. |
 
 Im Ergebnis zeigt DHLink „DHLink No.“ und „Tracking No.“ sowie – wenn ein anderer Dienst zustellt – eine „Last Leg No.“ dieses Paketdiensts. Weicht die Sendungsnummer von der DHLink-Nummer ab, such nach der Sendungsnummer: Mit der `FC`-Nummer allein erscheint ein solches Paket unter Umständen nicht. Ohne `lang=en` in der Adresse öffnet sich die Seite auf Chinesisch.
 
@@ -80,7 +80,7 @@ Stand 16. November 2026 nennt die Kontaktseite von DHLink eine E-Mail-Adresse f�
 
 Peek liest DHLinks eigene Sendungsverfolgung, zeigt den Status, das Zielland und jeden Schritt nur einmal (so wie DHLink ihn schreibt, meist auf Englisch) und lässt Dubletten zwischen den Feeds ebenso weg wie Postleitzahlen und Bestellreferenzen. Scans in China liest Peek nach Pekinger Zeit, USPS-Scans nach der Zeit des jeweiligen US-Bundesstaats und Zeilen von Pactic über Ungarn nach Budapester Zeit, und zeigt sie in der Zeitzone deines Geräts; auf peektracker.com und in der iPhone-App nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Andere Scans behalten die Uhrzeit, die DHLink angibt. Gewicht, Dienstname oder Lieferzeit liefert DHLink nicht; eine Lieferschätzung zeigt Peek nur dann, wenn ein weitergereichter USPS-Scan vom Typ `Out for Delivery, Expected Delivery …` der neueste ist und für denselben Tag ein Zeitfenster nennt. Ist die „Last Leg No.“ eine Nummer von GOFO (`GFUS` und 14 Ziffern), SwiftX (`SWX` und 18 Ziffern) oder [DPD Schweiz](carrier:dpd-ch) (14 Ziffern mit `060` oder `061` am Anfang), zeigt Peek diesen Dienst samt Nummer, fragt ihn ab und wechselt dorthin, sobald er neueren Fortschritt meldet; andere Nummern der letzten Meile bleiben auf DHLinks Verlauf.
 
-Solange DHLinks eigenes Tracking direkt antwortet, prüft Peek bis zu alle 10 Minuten, und am Tag der Zustellung bis zu alle 2 Minuten (ab 6:00 Uhr Ortszeit oder, wenn ein Zeitfenster genannt ist, ab einer halben Stunde vor dessen Beginn); über Tracking-Dienste stündlich, am Tag der Zustellung bis zu alle 15 Minuten. Sobald Peek das Paket bei GOFO weiterverfolgt, prüft es alle 30 Minuten, auch in Zustellung. Nach zwei Tagen ohne neuen Scan (oder nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) fragt Peek stündlich nach. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. DHLink, DHgate oder den Verkäufer kann Peek nicht für dich kontaktieren.
+Solange DHLinks eigenes Tracking direkt antwortet, prüft Peek bis zu alle 10 Minuten, und am Tag der Zustellung bis zu alle 2 Minuten (ab 6:00 Uhr Ortszeit oder, wenn ein Zeitfenster genannt ist, ab einer halben Stunde vor dessen Beginn); über Tracking-Dienste stündlich, am Tag der Zustellung bis zu alle 15 Minuten. Sobald Peek das Paket bei GOFO weiterverfolgt, prüft es höchstens alle 30 Minuten, auch in Zustellung. Nach zwei Tagen ohne neuen Scan (oder nach 12 Stunden, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht) fragt Peek stündlich nach. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. DHLink, DHgate oder den Verkäufer kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur DHLink Sendungsverfolgung
 

@@ -14,15 +14,15 @@ DHLink nie publikuje stałego wzoru numeracji. Jego wyszukiwarka przyjmuje do 40
 
 | Numer | Co oznacza |
 | --- | --- |
-| `FC0000000000000` | `FC` i 13 cyfr: własny numer DHLink („DHLink No.”). Na części linii pełni też funkcję numeru śledzenia. |
-| `XZG000000000WL` | `XZG`, 9 cyfr i `WL`: numer partnera liniowego, który DHLink rozpoznaje jako numer śledzenia. |
-| `YLUS0000000000` | `YLUS` i 10 cyfr: linia do USA doręczana przez GOFO. |
-| `QH000000000000FS` | `QH`, 12 cyfr i `FS`: inna linia do USA doręczana przez GOFO. |
-| `EYT0000000000HZ` | `EYT`, 10 cyfr i `HZ`: linia do USA doręczana przez SwiftX. |
-| `CYS00000000000` | `CYS` i 11 cyfr: linia do USA doręczana przez UniUni. |
-| `JXCYI0000000000YQ` | `JXC`, `YI`, `ZO`, `US` lub `ZI`, 10 cyfr i `YQ`: format listu przewozowego Juxi Express, na który przy części paczek do USA odpowiada też śledzenie DHLink. Peek pyta najpierw DHLink; pozostałe numery `JXC` przypisuje do Juxi Express. |
-| `RR000000005CN` | Dwie litery, 9 cyfr i `CN`: numer [China Post](carrier:china-post), używany, gdy paczka idzie drogą pocztową. |
-| `GFUS00000000000000` | To nie numer DHLink, lecz GOFO Express z ostatniego odcinka niektórych linii amerykańskich. |
+| `FC9999999999980` | `FC` i 13 cyfr: własny numer DHLink („DHLink No.”). Na części linii pełni też funkcję numeru śledzenia. |
+| `XZG999999980WL` | `XZG`, 9 cyfr i `WL`: numer partnera liniowego, który DHLink rozpoznaje jako numer śledzenia. |
+| `YLUS9999999980` | `YLUS` i 10 cyfr: linia do USA doręczana przez GOFO. |
+| `QH999999999980FS` | `QH`, 12 cyfr i `FS`: inna linia do USA doręczana przez GOFO. |
+| `EYT9999999980HZ` | `EYT`, 10 cyfr i `HZ`: linia do USA doręczana przez SwiftX. |
+| `CYS99999999980` | `CYS` i 11 cyfr: linia do USA doręczana przez UniUni. |
+| `JXCYI9999999990YQ` | `JXC`, `YI`, `ZO`, `US` lub `ZI`, 10 cyfr i `YQ`: format listu przewozowego Juxi Express, na który przy części paczek do USA odpowiada też śledzenie DHLink. Peek pyta najpierw DHLink; pozostałe numery `JXC` przypisuje do Juxi Express. |
+| `RR482910576CN` | Dwie litery, 9 cyfr i `CN`: numer [China Post](carrier:china-post), używany, gdy paczka idzie drogą pocztową. |
+| `GFUS99999999999980` | To nie numer DHLink, lecz GOFO Express z ostatniego odcinka niektórych linii amerykańskich. |
 
 W wyniku wyszukiwania DHLink pokazuje „DHLink No.”, „Tracking No.” oraz – gdy doręcza inna firma – „Last Leg No.” tego przewoźnika. Jeśli numer śledzenia różni się od numeru DHLink, szukaj po numerze śledzenia: przy wyszukiwaniu samym kodem `FC` przesyłka mająca odrębny numer śledzenia może się nie pojawić. Bez parametru `lang=en` w adresie strona otwiera się po chińsku.
 
@@ -80,7 +80,7 @@ Według stanu na 16 listopada 2026 roku strona kontaktowa DHLink podaje jeden ad
 
 Peek czyta bezpośrednio śledzenie DHLink, pokazuje status, kraj przeznaczenia i miejscowość każdego zdarzenia oraz wyświetla każdy skan tylko raz (tak jak zapisuje go DHLink, zazwyczaj po angielsku), odrzucając duplikaty między źródłami, kody pocztowe i numery referencyjne zamówienia. Skany z Chin odczytuje według czasu pekińskiego, skany USPS według czasu danego stanu USA, a wpisy Pactic z trasy przez Węgry według czasu w Budapeszcie, po czym przelicza je na strefę czasową Twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w Twojej strefie czasowej: …”); pozostałe wpisy zachowują czas podany przez DHLink. DHLink nie podaje wagi, nazwy usługi ani godziny doręczenia, a jedyną prognozą w Peek jest przekazany skan USPS typu `Out for Delivery, Expected Delivery …`, o ile pozostaje najnowszy i zawiera przedział godzinowy na ten sam dzień. Gdy „Last Leg No.” to numer GOFO (`GFUS` i 14 cyfr), SwiftX (`SWX` i 18 cyfr) lub szwajcarskiego DPD (14 cyfr zaczynających się od `060` lub `061`), Peek pokazuje tego przewoźnika i jego numer, odpytuje go i przełącza na niego, gdy tylko pojawi się tam nowszy postęp; inne numery ostatniej mili zostają na historii DHLink.
 
-Dopóki odpowiada bezpośrednio śledzenie DHLink, Peek sprawdza paczkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego albo – jeśli podano okno doręczenia – od pół godziny przed jego początkiem); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po przełączeniu na GOFO sprawdza co 30 minut, także w doręczeniu. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z DHLink, DHgate ani sprzedawcą.
+Dopóki odpowiada bezpośrednio śledzenie DHLink, Peek sprawdza paczkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego albo – jeśli podano okno doręczenia – od pół godziny przed jego początkiem); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po przełączeniu na GOFO sprawdza najwyżej co 30 minut, także w doręczeniu. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z DHLink, DHgate ani sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie DHLink
 

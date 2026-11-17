@@ -16,12 +16,12 @@ Mondial Relay lo chiama *numéro d'expédition*: 8 cifre riportate nell'e-mail o
 
 | Formato (esempio inventato) | Che cos'è |
 | --- | --- |
-| `12345678` | Il numero di spedizione standard a 8 cifre (stessa lunghezza usata anche da Colisweb e Heppner). |
+| `48291057` | Il numero di spedizione standard a 8 cifre (stessa lunghezza usata anche da Colisweb e Heppner). |
 | `0012345678` | 10 cifre: codice insegna seguito dal numero di spedizione. Condivide la lunghezza con [DHL Express](carrier:dhl-express), Relais Colis e altri. |
 | `001234567802` | 12 cifre: codice insegna, numero di spedizione e progressivo del collo. Stessa lunghezza di DPD France, Colis Privé, [BRT](carrier:brt) e altri. |
 | `00123456780101` | 14 cifre: parte iniziale del codice a barre con codice insegna, spedizione, progressivo e numero totale dei colli. Usato anche da DPD e [Chronopost](carrier:chronopost). |
 | `00123456780101700000000000` | 26 cifre: il codice a barre completo dell'etichetta, esclusivo di Mondial Relay, con il numero di spedizione dalla 3ª alla 10ª cifra. |
-| `FV12345678` | `FV` più 8 cifre: codice di InPost Spagna (in Spagna e Portogallo Mondial Relay opera dal 2021 con il marchio InPost). |
+| `FV48291057` | `FV` più 8 cifre: codice di InPost Spagna (in Spagna e Portogallo Mondial Relay opera dal 2021 con il marchio InPost). |
 
 Su alcune etichette francesi il numero di spedizione è seguito senza spazi dal CAP francese a 5 cifre (13, 15 o 17 cifre complessive). Se invece nella chat di Vinted o nell'e-mail del negozio trovi un secondo codice nazionale italiano di [InPost](carrier:inpost), [BRT](carrier:brt) o [Poste Italiane](carrier:poste-italiane), quel codice identifica la tratta italiana; vedi anche [come riconoscere il corriere dal numero di tracciamento](guide:tracking-number-formats).
 

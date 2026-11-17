@@ -14,8 +14,8 @@ Según las preguntas frecuentes de J&T, sus números de envío comienzan por JTD
 
 | Número (inventado) | Qué es |
 | --- | --- |
-| `JTDE000000000000` | `JTDE` y 12 cifras: un paquete de J&T Express Germany. Peek identifica a J&T Express Germany al instante. |
-| `JTDE00000000000` | Una cifra de menos: no tiene el formato de J&T Express Germany y Peek no reconoce ningún transportista. Revisa si falta algún dígito. |
+| `JTDE999999999980` | `JTDE` y 12 cifras: un paquete de J&T Express Germany. Peek identifica a J&T Express Germany al instante. |
+| `JTDE99999999980` | Una cifra de menos: no tiene el formato de J&T Express Germany y Peek no reconoce ningún transportista. Revisa si falta algún dígito. |
 
 Si un código tiene una cifra de menos o de más detrás de `JTDE` y ningún transportista responde por él, la ficha del envío en peektracker.com te lo advierte («Empieza como un número de seguimiento de J&T Express Germany, pero le falta un carácter: puede que tenga una errata. Compáralo con tu mensaje de envío.» o «… pero le sobra un carácter: puede que tenga una errata. Compáralo con tu mensaje de envío.»).
 

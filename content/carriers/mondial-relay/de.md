@@ -16,12 +16,12 @@ Mondial Relay nennt den Code *numéro d'expédition*: eine 8-stellige Ziffernfol
 
 | Format (erfundenes Beispiel) | Was dahintersteckt |
 | --- | --- |
-| `12345678` | Die klassische 8-stellige Sendungsnummer. Dieselbe Länge nutzen auch Colisweb und [Heppner](carrier:heppner). |
+| `48291057` | Die klassische 8-stellige Sendungsnummer. Dieselbe Länge nutzen auch Colisweb und [Heppner](carrier:heppner). |
 | `0012345678` | 10 Ziffern: zweistelliger Markencode plus Sendungsnummer. Passt auch zu [DHL Express](carrier:dhl-express), Relais Colis und anderen. |
 | `001234567802` | 12 Ziffern: Markencode, Sendungsnummer und Paketnummer. Dieselbe Länge haben DPD Frankreich, Colis Privé, [BRT](carrier:brt) u. a. |
 | `00123456780101` | 14 Ziffern: Anfang des Etikett-Barcodes mit Markencode, Sendungsnummer, Paketfolge und Paketanzahl. Auch bei [DPD](carrier:dpd-de) und [Chronopost](carrier:chronopost) üblich. |
 | `00123456780101700000000000` | 26 Ziffern: der vollständige Barcode des Versandetiketts (allein bei Mondial Relay), mit der Sendungsnummer an Stelle 3 bis 10. |
-| `FV12345678` | `FV` gefolgt von 8 Ziffern: Sendungsnummer von InPost Spanien (seit der Übernahme von Mondial Relay 2021 tritt das Netz in Spanien und Portugal als InPost auf). |
+| `FV48291057` | `FV` gefolgt von 8 Ziffern: Sendungsnummer von InPost Spanien (seit der Übernahme von Mondial Relay 2021 tritt das Netz in Spanien und Portugal als InPost auf). |
 
 Auf manchen französischen Etiketten hängen Sendungsnummer und 5-stellige französische Postleitzahl direkt aneinander (13, 15 oder 17 Ziffern). Und falls dir der Vinted-Chat oder die Shop-Mail zusätzlich eine deutsche oder österreichische Nummer von [Hermes](carrier:hermes-de), [DPD](carrier:dpd-de) oder [DHL Paket](carrier:dhl) anzeigt, gehört diese dem Zusteller für die letzte Meile; siehe [Sendungsnummern den richtigen Paketdiensten zuordnen](guide:tracking-number-formats).
 

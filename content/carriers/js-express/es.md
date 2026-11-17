@@ -14,9 +14,9 @@ Los albaranes de JS Express llevan JSE, dos letras, diez cifras y YQ: 17 caracte
 
 | Número | Qué es |
 | --- | --- |
-| `JSEAA0000000000YQ` | JSE, dos letras, diez cifras y YQ: un número de envío de JS Express. |
-| `JSEAA000000000YQ` | Solo nueve cifras: no es el formato de JS Express. Revisa si falta algún dígito. |
-| `JXCAA0000000000YQ` | También acaba en YQ, pero empieza por JXC: es un número de Juxi Express (que Peek comprueba primero en [DHLink](carrier:dhlink) cuando tras JXC van YI, ZO, US o ZI), no de JS Express. |
+| `JSEAA9999999980YQ` | JSE, dos letras, diez cifras y YQ: un número de envío de JS Express. |
+| `JSEAA999999980YQ` | Solo nueve cifras: no es el formato de JS Express. Revisa si falta algún dígito. |
+| `JXCAA9999999980YQ` | También acaba en YQ, pero empieza por JXC: es un número de Juxi Express (que Peek comprueba primero en [DHLink](carrier:dhlink) cuando tras JXC van YI, ZO, US o ZI), no de JS Express. |
 
 Otros transitarios chinos usan esa misma estructura con sus propias letras delante: FEI en 17FEIA, WNB en WanbExpress, SFC en SFC, CJP en CJ Packet. JSE identifica a JS Express. En Peek no importan los espacios ni las minúsculas: lee un cero escrito en la segunda de las dos letras como una O, y una O entre las diez cifras como un cero. El buscador de JS Express necesita el número entero: con una parte no encuentra nada.
 
@@ -114,7 +114,7 @@ Los escaneos en China se leen en hora de Pekín y los europeos según la zona ho
 
 Cuando el número local encaja con seguridad en una empresa que trabaja en España (como CTT Express), Peek muestra «Entrega con …» junto con su código y la consulta también; si es un número postal internacional válido, consulta a Correos. Mientras ese transportista solo tenga el preaviso electrónico sin escaneo físico, verás «Anunciado a …, aún no recibido». En cuanto publique un escaneo igual de reciente o posterior al último de JS Express, Peek sigue el envío allí mostrando ambos números y conservando el historial de JS Express.
 
-Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos (cada 5 cuando tiene que abrir la web de JS Express en un navegador) desde las 6:00, hora local, el día en que el paquete sale «En reparto», mientras responda el propio seguimiento de JS Express (a través de servicios de seguimiento, cada 15 minutos). Si otra empresa asume la entrega, Peek sigue el ritmo de quien reparte el paquete: cada hora con Royal Mail y Poste Italiane, y cada 30 minutos con PostNL y USPS, también en reparto. Tras dos días sin novedades (o 12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), pasa a comprobar cada hora. Puedes elegir avisos para «Cada escaneo», «Pasos importantes» (aduana, incidencias, intentos, «Listo para recoger», reparto, entrega y devolución) o «Solo la entrega». Peek no puede contactar con JS Express ni con la tienda por ti.
+Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos (cada 5 cuando tiene que abrir la web de JS Express en un navegador) desde las 6:00, hora local, el día en que el paquete sale «En reparto», mientras responda el propio seguimiento de JS Express (a través de servicios de seguimiento, cada 15 minutos). Si otra empresa asume la entrega, Peek sigue el ritmo de quien reparte el paquete: como mucho una vez por hora con Royal Mail y Poste Italiane, y como mucho cada 30 minutos con PostNL y USPS, también en reparto. Tras dos días sin novedades (o 12 horas si sigue en «Etiqueta creada» o «Admitido por el transportista»), pasa a comprobar cada hora. Puedes elegir avisos para «Cada escaneo», «Pasos importantes» (aduana, incidencias, intentos, «Listo para recoger», reparto, entrega y devolución) o «Solo la entrega». Peek no puede contactar con JS Express ni con la tienda por ti.
 
 ## Preguntas frecuentes sobre el seguimiento de JS Express
 

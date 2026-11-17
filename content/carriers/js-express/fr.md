@@ -14,9 +14,9 @@ Un bordereau JS Express se compose de JSE, deux lettres, dix chiffres et YQ, soi
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `JSEAA0000000000YQ` | JSE, deux lettres, dix chiffres et YQ : un bordereau JS Express. |
-| `JSEAA000000000YQ` | Neuf chiffres seulement : ce n'est pas le format de JS Express. Vérifie s'il manque un chiffre. |
-| `JXCAA0000000000YQ` | Finit aussi par YQ, mais commence par JXC : un numéro [Juxi Express](carrier:juxi-express) (que Peek vérifie d'abord chez [DHLink](carrier:dhlink) lorsque JXC est suivi de YI, ZO, US ou ZI). |
+| `JSEAA9999999980YQ` | JSE, deux lettres, dix chiffres et YQ : un bordereau JS Express. |
+| `JSEAA999999980YQ` | Neuf chiffres seulement : ce n'est pas le format de JS Express. Vérifie s'il manque un chiffre. |
+| `JXCAA9999999980YQ` | Finit aussi par YQ, mais commence par JXC : un numéro [Juxi Express](carrier:juxi-express) (que Peek vérifie d'abord chez [DHLink](carrier:dhlink) lorsque JXC est suivi de YI, ZO, US ou ZI). |
 
 D'autres transitaires chinois utilisent la même structure avec leurs propres lettres au début : FEI pour 17FEIA, WNB pour WanbExpress, SFC pour SFC, CJP pour CJ Packet. JSE désigne JS Express. Les espaces et les minuscules ne gênent pas Peek : un zéro tapé à la place de la seconde des deux lettres est lu comme un O, et un O parmi les dix chiffres comme un zéro. Le suivi de JS Express exige en revanche le numéro complet : un extrait ne donne rien.
 
@@ -124,7 +124,7 @@ Les scans enregistrés en Chine sont lus à l'heure de Pékin, et ceux des trans
 
 Lorsque la fiche de JS Express contient un numéro local dont la forme appartient sans ambiguïté à un transporteur actif dans ton pays, Peek affiche « Livraison par » suivi de ce transporteur et de son numéro, et l'interroge aussi ; un numéro postal international valide est vérifié auprès de la poste du pays de destination (La Poste, bpost ou La Poste suisse). Tant que ce transporteur n'a enregistré que l'annonce de l'envoi sans scan propre, Peek affiche « Annoncé à …, pas encore reçu ». Dès que ce transporteur publie un scan au moins aussi récent que le dernier de JS Express, Peek suit le colis chez lui en affichant les deux numéros et en conservant l'historique de JS Express. Jusque-là, Peek reste sur JS Express, qui relaie souvent déjà les scans du livreur.
 
-Peek vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes (toutes les 5 lorsqu'il faut ouvrir la page de JS Express dans un navigateur) dès 6 h, heure locale, le jour où le colis passe « En livraison », tant que le suivi de JS Express répond lui-même (via des services de suivi, toutes les 15 minutes). Lorsqu'un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : toutes les heures pour Royal Mail et Poste Italiane, toutes les 30 minutes pour PostNL et USPS, même en livraison. Après deux jours sans nouveau scan (ou 12 heures tant que le colis reste à « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure. Tu peux choisir les alertes « Chaque scan », « Étapes importantes » (douane, problèmes, tentatives, « Prêt à être retiré », mise en livraison, livraison et retour) ou « Livraison seulement ». Peek ne peut contacter ni JS Express ni le vendeur à ta place.
+Peek vérifie le suivi jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes (toutes les 5 lorsqu'il faut ouvrir la page de JS Express dans un navigateur) dès 6 h, heure locale, le jour où le colis passe « En livraison », tant que le suivi de JS Express répond lui-même (via des services de suivi, toutes les 15 minutes). Lorsqu'un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis : au plus une fois par heure pour Royal Mail et Poste Italiane, au plus toutes les 30 minutes pour PostNL et USPS, même en livraison. Après deux jours sans nouveau scan (ou 12 heures tant que le colis reste à « Étiquette créée » ou « Pris en charge »), Peek passe à une vérification par heure. Tu peux choisir les alertes « Chaque scan », « Étapes importantes » (douane, problèmes, tentatives, « Prêt à être retiré », mise en livraison, livraison et retour) ou « Livraison seulement ». Peek ne peut contacter ni JS Express ni le vendeur à ta place.
 
 ## Questions fréquentes sur le suivi JS Express
 

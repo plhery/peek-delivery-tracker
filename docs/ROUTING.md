@@ -167,7 +167,7 @@ A failed source waits before it is retried for that parcel:
 | --- | --- | --- |
 | Transport, a bot check met by a carrier's own adapter (`challenge`), a missing input its owner can give, and `no_history` (a provider answered but has nothing, or the carrier lists the parcel without scans or does not know it yet; either answered with a reused number's earlier parcel) | 15 min | 6 h |
 | Other verification, schema, or a number or input the source refuses (`invalid_input`), as one it does not issue or one it finds several parcels under; not found by a carrier's own adapter | 1 h | 6 h |
-| A carrier's own adapter asking for an input no field gives for the number (SwiftX's recipient verification) | 6 h, then 12 h | 24 h |
+| A carrier's own adapter asking for an input no field gives for the number | 6 h, then 12 h | 24 h |
 | Not found by a universal provider, or by a carrier a provider named that the parcel is neither filed under nor confirmed for | 24 h | 24 h |
 | `no_history` from a universal provider for a number nothing has answered for yet | 45 min, then 4 h, then 12 h | 24 h |
 
@@ -876,8 +876,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   wait. A partner with a minimum interval of its own (Refresh cadence) is not asked sooner,
   the origin's news included: the news it waited through asks once the interval has passed.
   A probe our own pacing refuses counts no miss, and the next check asks again. A partner
-  asking for an input no field gives for the number (SwiftX's recipient verification) is asked
-  again after 6 h, then 12 h, then daily, whatever the origin's news, and 5 min after a refresh by hand.
+  asking for an input the probe cannot give it (anything but its brand's postcode, as SwiftX's
+  recipient phone digits, which a parcel keeps for its own carrier alone) is asked again after
+  6 h, then 12 h, then daily, whatever the origin's news, and 5 min after a refresh by hand.
   A partner that does not know the item yet, or answers inconclusively, is not
   reported as `provider_failed`; its network failures and server errors still are.
 - A parcel filed under a carrier only universal providers track has no origin adapter to name

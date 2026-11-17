@@ -212,8 +212,8 @@ const DELIVERY_PROBE_SHORT_INTERVAL_MS = 5 * 60 * 1_000;
  */
 const DELIVERY_PROBE_MAX_INTERVAL_MS = 6 * 60 * 60 * 1_000;
 /**
- * A partner asking for what no reader can give for the number (no field its catalog lists: SwiftX's recipient
- * verification) answers the same until it scans the parcel. It is asked again after this, doubling with each
+ * A partner asking for an input the probe cannot give it (anything but its brand's postcode: SwiftX's recipient
+ * phone digits) answers the same until it scans the parcel. It is asked again after this, doubling with each
  * such answer up to a day, whatever news the origin has.
  */
 const DELIVERY_PROBE_WITHHELD_INTERVAL_MS = 6 * 60 * 60 * 1_000;
@@ -3705,7 +3705,11 @@ export class TrackingSyncService {
           if (deliveryTime > 0 && originFirst > 0 && deliveryTime >= originFirst) probe.held = true;
         } catch (error) {
           fallbackError = errorType(error);
-          if (carrierErrorKind(error) === 'input_required' && activeRequirements(candidate.carrier, candidate.number).length === 0) {
+          // The probe gives a partner no input but its brand's postcode (handoffPostcode): a partner asking for
+          // another (no field its catalog lists, or SwiftX's recipient phone digits, which a parcel keeps for its
+          // own carrier alone) answers the same until it scans the parcel.
+          if (carrierErrorKind(error) === 'input_required'
+            && !activeRequirements(candidate.carrier, candidate.number).some(({ field }) => field === 'postcode')) {
             probe.withheld = true;
           }
           if (selfPacedRefusal(error)) {

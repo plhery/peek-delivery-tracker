@@ -1020,8 +1020,8 @@ export class TrackingRouter {
       // day too: it lists the parcel only once the parcel reaches it, and the provider's next progress
       // asks it again at once.
       const daily = kind === 'not_found' && (universalSource || providerNamed(provider));
-      // A carrier asking for what no reader can give for the number (no field its catalog lists, as
-      // SwiftX's recipient verification) answers the same until it scans the parcel: 6 h, then daily.
+      // A carrier asking for what no reader can give for the number (no field its catalog lists)
+      // answers the same until it scans the parcel: 6 h, then daily.
       const unanswerable = !universalSource && kind === 'input_required' && AUTOMATIC_CARRIER_IDS.has(provider)
         && activeRequirements(provider, number).length === 0;
       // A carrier's bot check comes and goes, as a lost connection does: its own adapter is asked again

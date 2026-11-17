@@ -623,7 +623,7 @@ describe('persistent tracking routing', () => {
       .toMatchObject({ kind: 'not_found', retry_at: '2026-09-10T13:00:00.000Z' });
   });
   it.each([
-    ['no field for the number', 'swiftx', 'SX000000000001', ['2026-09-10T18:00:00.000Z', '2026-09-11T00:00:00.000Z', '2026-09-11T12:00:00.000Z', '2026-09-11T12:00:00.000Z']],
+    ['no field for the number', 'fedex', '999999999999', ['2026-09-10T18:00:00.000Z', '2026-09-11T00:00:00.000Z', '2026-09-11T12:00:00.000Z', '2026-09-11T12:00:00.000Z']],
     ['a field the owner can fill', 'heppner', 'TEST1234', ['2026-09-10T12:15:00.000Z', '2026-09-10T12:30:00.000Z', '2026-09-10T13:00:00.000Z', '2026-09-10T14:00:00.000Z']],
   ])('waits for a carrier asking for an input with %s', async (_label, carrier, number, waits) => {
     let routing: JsonObject = state({ configured_carrier: carrier });

@@ -6442,7 +6442,7 @@ describe('TrackingSyncService', () => {
     let originUpdate = '2026-09-09T10:00:00+02:00';
     const adapter = { fetch: vi.fn(async (carrier: string): Promise<CarrierResult> => {
       if (carrier === 'swiftx') throw new InputRequiredError('SwiftX', 'recipient verification');
-      return { status: 'in_transit', delivery_carrier: 'swiftx', delivery_tracking_number: 'SX000000000001', last_update: originUpdate,
+      return { status: 'in_transit', delivery_carrier: 'swiftx', delivery_tracking_number: 'SWX000000000000000001', last_update: originUpdate,
         timezone: 'Europe/Paris', events: [{ time: originUpdate, description: 'In transit', stage: 'in_transit' }] };
     }) };
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);

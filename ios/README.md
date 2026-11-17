@@ -196,7 +196,10 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   out (`DeliveryWidgetList.fits`). The small widget and that line open the list (`peekdeliverytracker://parcels`);
   in the medium and large ones, a card, pass or row opens its parcel. A card, pass or row carries the list's dot for
   new updates, which VoiceOver reads first; "Mark new updates" hides it, and opening the parcel clears it. Its kind
-  is `NextDeliveryWidget`, the name of the widget it replaced, which the widgets readers placed carry.
+  is `NextDeliveryWidget`, the name of the widget it replaced, which the widgets readers placed carry. On the iPhone
+  and iPad it also answers to `ParcelListWidget`, the kind it had while it stood beside Next delivery, so the widgets
+  placed then keep updating; that one is disfavored everywhere a widget is chosen, which keeps it out of the gallery
+  (`EarlierParcelListWidget`). The app reloads both kinds.
 - **The widget's pictures**: a card has the carrier's colours and mark over the parcel's route, or Pip alone for a
   parcel without places. A widget hasn't the memory to draw the map, so the app draws the cards and each listed
   carrier's truck into the App Group (`DeliveryWidgetPictures`); until it has drawn every listed parcel's card, the

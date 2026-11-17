@@ -466,7 +466,7 @@ final class ParcelStore: ObservableObject {
         publishedWidgetState = nil
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: [], in: widgetPictures) }
         if let widgetTrucks { DeliveryWidgetPictures.drawTrucks([], drawn: &widgetTrucksDrawn, localizer: localizer, in: widgetTrucks) }
-        WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
+        for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
         scheduleDeliveryLiveActivities(forceEnd: true)
     }
 
@@ -1480,7 +1480,7 @@ final class ParcelStore: ObservableObject {
             deliveryWidgetStore?.clearSnapshot()
         }
         if let widgetPictures { DeliveryWidgetPictures.sweep(keeping: snapshot?.parcels.compactMap(\.card) ?? [], in: widgetPictures) }
-        WidgetCenter.shared.reloadTimelines(ofKind: DeliveryWidgetSharedStore.kind)
+        for kind in DeliveryWidgetSharedStore.kinds { WidgetCenter.shared.reloadTimelines(ofKind: kind) }
     }
 
     /// Gives each of the first `DeliveryWidgetSelection.limit` parcels its card once the card's pictures are drawn, and

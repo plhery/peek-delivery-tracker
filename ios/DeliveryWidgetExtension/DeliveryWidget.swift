@@ -140,6 +140,7 @@ struct DeliveryTrackerWidgetBundle: WidgetBundle {
     var body: some Widget {
         ParcelListWidget()
         #if os(iOS)
+        EarlierParcelListWidget()
         DeliveryLiveActivityWidget()
         #endif
     }

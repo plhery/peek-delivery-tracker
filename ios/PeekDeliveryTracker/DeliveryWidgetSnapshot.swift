@@ -457,6 +457,11 @@ struct DeliveryWidgetSharedStore {
     /// The Parcels widget's kind. It keeps the name of the Next delivery widget it replaced: the widgets readers placed
     /// carry it.
     static let kind = "NextDeliveryWidget"
+    /// The kind the Parcels widget had while it stood beside Next delivery, which the widgets readers placed then carry:
+    /// on the iPhone and iPad the widget answers to it too, out of the gallery (`EarlierParcelListWidget`).
+    static let earlierKind = "ParcelListWidget"
+    /// The kinds the app reloads when the parcels change.
+    static let kinds = [kind, earlierKind]
     static let defaultAppGroupIdentifier = "group.com.plhery.PeekDeliveryTracker"
 
     private static let enabledKey = "sdt.deliveryWidget.enabled.v1"

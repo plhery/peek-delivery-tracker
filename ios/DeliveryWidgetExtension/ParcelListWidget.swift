@@ -807,15 +807,35 @@ private struct ParcelListState: View {
 /// widget as cards; up to twice as many as passes; more as rows under the app list's sections. It has the kind of the
 /// Next delivery widget it replaced, so that the widgets readers placed show it.
 struct ParcelListWidget: Widget {
+    static let families: [WidgetFamily] = [.systemSmall, .systemMedium, .systemLarge]
+
     var body: some WidgetConfiguration {
+        Self.configuration(kind: DeliveryWidgetSharedStore.kind)
+    }
+
+    static func configuration(kind: String) -> some WidgetConfiguration {
         let store = DeliveryWidgetSharedStore(appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier())
         // The app's language, else the device's: the gallery can open before the app has.
         let copy = ExtensionLocalizer(savedLanguageCode: store?.languageCode)
-        return StaticConfiguration(kind: DeliveryWidgetSharedStore.kind, provider: ParcelListProvider()) { entry in
+        return StaticConfiguration(kind: kind, provider: ParcelListProvider()) { entry in
             ParcelListWidgetView(entry: entry)
         }
         .configurationDisplayName(copy.text("widget.listGalleryName"))
         .description(copy.text("widget.listGalleryDescription"))
-        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
+        .supportedFamilies(families)
     }
 }
+
+#if os(iOS)
+/// The same widget under the kind the Parcels widget had while it stood beside Next delivery, so that the widgets
+/// readers placed then keep showing their parcels. Each place a widget is chosen from disfavors it, which keeps it out
+/// of the gallery, where Parcels is offered once.
+struct EarlierParcelListWidget: Widget {
+    var body: some WidgetConfiguration {
+        var places: [WidgetLocation] = [.homeScreen, .lockScreen, .standBy, .iPhoneWidgetsOnMac]
+        if #available(iOS 26.0, *) { places.append(.carPlay) }
+        return ParcelListWidget.configuration(kind: DeliveryWidgetSharedStore.earlierKind)
+            .disfavoredLocations(places, for: ParcelListWidget.families)
+    }
+}
+#endif

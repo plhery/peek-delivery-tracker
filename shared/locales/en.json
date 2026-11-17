@@ -1274,7 +1274,7 @@
   "guides.checker.none": "No carrier Peek knows writes numbers like this. Check it for a typo, or find the carrier in the shipping email.",
   "inbox.row": "Add parcels by email",
   "inbox.experimental": "Experimental",
-  "inbox.intro": "Forward a shipping email to your Peek address and Peek adds the parcel. Peek keeps the emails you forward for 7 days, to learn to read them better, then deletes them. This feature is experimental: it can miss a parcel, and it may change.",
+  "inbox.intro": "Forward a shipping email to your Peek address and Peek adds the parcel. This feature is experimental: it can miss a parcel, and it may change.",
   "inbox.start": "Get my address",
   "inbox.address": "Your address",
   "inbox.copy": "Copy address",

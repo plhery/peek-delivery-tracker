@@ -1274,7 +1274,7 @@
   "guides.checker.none": "Kein Paketdienst, den Peek kennt, vergibt Nummern wie diese. Prüfe sie auf Tippfehler oder such den Paketdienst in der Versandmail.",
   "inbox.row": "Pakete per E-Mail hinzufügen",
   "inbox.experimental": "Experimentell",
-  "inbox.intro": "Leite eine Versand-E-Mail an deine Peek-Adresse weiter, und Peek fügt das Paket hinzu. Peek bewahrt die weitergeleiteten E-Mails 7 Tage lang auf, um sie besser lesen zu lernen, und löscht sie dann. Diese Funktion ist experimentell: Sie kann ein Paket übersehen und sich ändern.",
+  "inbox.intro": "Leite eine Versand-E-Mail an deine Peek-Adresse weiter, und Peek fügt das Paket hinzu. Diese Funktion ist experimentell: Sie kann ein Paket übersehen und sich ändern.",
   "inbox.start": "Meine Adresse erstellen",
   "inbox.address": "Deine Adresse",
   "inbox.copy": "Adresse kopieren",

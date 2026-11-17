@@ -1274,7 +1274,7 @@
   "guides.checker.none": "Nenhuma transportadora que o Peek conheça escreve os números assim. Verifica se há alguma gralha ou procura a transportadora no e-mail de envio.",
   "inbox.row": "Adicionar encomendas por e-mail",
   "inbox.experimental": "Experimental",
-  "inbox.intro": "Reencaminha um e-mail de envio para o teu endereço Peek e o Peek adiciona a encomenda. O Peek guarda os e-mails reencaminhados durante 7 dias, para aprender a lê-los melhor, e depois apaga-os. Esta funcionalidade é experimental: pode deixar escapar uma encomenda e pode mudar.",
+  "inbox.intro": "Reencaminha um e-mail de envio para o teu endereço Peek e o Peek adiciona a encomenda. Esta funcionalidade é experimental: pode deixar escapar uma encomenda e pode mudar.",
   "inbox.start": "Obter o meu endereço",
   "inbox.address": "O teu endereço",
   "inbox.copy": "Copiar endereço",

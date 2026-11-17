@@ -1274,7 +1274,7 @@
   "guides.checker.none": "Żaden przewoźnik znany Peek nie zapisuje numerów w ten sposób. Sprawdź, czy nie ma literówki, albo poszukaj przewoźnika w e-mailu o wysyłce.",
   "inbox.row": "Dodawaj przesyłki e-mailem",
   "inbox.experimental": "Eksperymentalne",
-  "inbox.intro": "Przekaż e-mail o wysyłce na swój adres Peek, a Peek doda przesyłkę. Peek przechowuje przekazane e-maile przez 7 dni, żeby uczyć się lepiej je czytać, a potem je usuwa. Ta funkcja jest eksperymentalna: może pominąć przesyłkę i może się zmienić.",
+  "inbox.intro": "Przekaż e-mail o wysyłce na swój adres Peek, a Peek doda przesyłkę. Ta funkcja jest eksperymentalna: może pominąć przesyłkę i może się zmienić.",
   "inbox.start": "Utwórz mój adres",
   "inbox.address": "Twój adres",
   "inbox.copy": "Kopiuj adres",

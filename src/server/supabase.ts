@@ -1459,7 +1459,7 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
-   * Keeps an email the account's address received, as received, for seven days (forgetOldInboundMail). False when the
+   * Keeps an email the account's address received, as received, for 30 days (forgetOldInboundMail). False when the
    * account has no address any more.
    */
   async keepInboundMail(userId: string, raw: Uint8Array): Promise<boolean> {
@@ -1469,7 +1469,7 @@ export class SupabaseServiceClient extends SupabaseClient {
     }) === true;
   }
 
-  /** Deletes the emails kept over seven days ago; returns how many. */
+  /** Deletes the emails kept over 30 days ago; returns how many. */
   async forgetOldInboundMail(): Promise<number> {
     return Number(await this.request('/rest/v1/rpc/forget_old_inbound_mail', { method: 'POST', body: {} }) ?? 0);
   }

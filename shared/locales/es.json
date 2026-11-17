@@ -1274,7 +1274,7 @@
   "guides.checker.none": "Ningún transportista que Peek conozca escribe así sus números. Revisa que no haya una errata o busca al transportista en el correo de envío.",
   "inbox.row": "Añadir paquetes por correo",
   "inbox.experimental": "Experimental",
-  "inbox.intro": "Reenvía un correo de envío a tu dirección de Peek y Peek añade el paquete. Peek guarda los correos reenviados 7 días para aprender a leerlos mejor y después los borra. Esta función es experimental: se le puede escapar un paquete y puede cambiar.",
+  "inbox.intro": "Reenvía un correo de envío a tu dirección de Peek y Peek añade el paquete. Esta función es experimental: se le puede escapar un paquete y puede cambiar.",
   "inbox.start": "Obtener mi dirección",
   "inbox.address": "Tu dirección",
   "inbox.copy": "Copiar dirección",

@@ -40,7 +40,7 @@ using Peek involves.
   emails reached it today, of its last twenty emails when each came, the
   sender's name and what it did, and the code and link of a Gmail forwarding
   confirmation until the next email. Each email the service reads is kept as it
-  came, with your account's id and when it came, for seven days. It is used to
+  came, with your account's id and when it came, for 30 days. It is used to
   learn to read such emails better. An email a limit held back and Gmail's
   forwarding confirmation are not kept.
 - When you connect an assistant or make a personal token: its name, the site
@@ -86,7 +86,7 @@ carrier updates, synchronize devices, send requested notifications, prevent
 abuse, diagnose failures, and honor export or deletion requests. Following your
 parcels, with what you switch on, is the service you ask for. Abuse limits,
 diagnostics and usage analytics rest on a legitimate interest in keeping Peek
-safe and working. Keeping the emails you forward for seven days rests on a
+safe and working. Keeping the emails you forward for 30 days rests on a
 legitimate interest in reading them better. The delivery email rests on your
 consent.
 
@@ -101,6 +101,11 @@ ChatGPT, receives what you allowed it: your parcels' names, senders, carriers,
 tracking numbers, statuses, expected days, pickup points and scans, never the
 recipient's name, postcode or phone digits. Its provider's own privacy terms then apply to what it receives.
 A tool you give a personal token, such as Home Assistant, receives the same.
+
+To check and improve how it reads the emails you forward, Peek may send some of
+the kept emails to Anthropic, PBC, in the United States, whose AI model Claude
+reads them. Anthropic keeps them for about 30 days under its own terms. This
+rests on the same legitimate interest in reading your emails better.
 
 Cloudflare Turnstile checks the browser or an in-app verification sheet when you start a new parcel lookup to
 prevent automated abuse. It processes browser and network signals; Peek sends
@@ -175,8 +180,8 @@ terms. The app may also show Google Play's in-app review prompt, which runs
 through Google Play.
 
 Outside Switzerland and the European Union, data therefore goes to the United
-States (Cloudflare, Google, Apple, Sentry, Resend and your browser's push
-service), to the countries of the carriers and tracking services asked
+States (Cloudflare, Google, Apple, Sentry, Resend, Anthropic and your browser's
+push service), to the countries of the carriers and tracking services asked
 about a parcel, and to wherever the UnifiedPush distributor you chose runs.
 
 The service places scan locations on its map itself, with
@@ -404,7 +409,7 @@ number's carrier also goes after 90 days without a new check. The record of a
 delivery email goes with the account; Resend deletes its own copy after 30 days.
 Turning off adding parcels by email deletes the forwarding address, what it
 recorded and the emails kept from it; a new address replaces the old one, which
-then takes no more email. A kept email is deleted seven days after it came, or
+then takes no more email. A kept email is deleted 30 days after it came, or
 sooner once the account has 100 newer ones. The count of emails an account
 forwarded each day is kept for seven days.
 Disconnecting an assistant or deleting a personal token removes it and its

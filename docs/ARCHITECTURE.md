@@ -373,8 +373,8 @@ Key server modules:
     export holds them all. An email's outcome is its most telling one: a parcel added; then
     the parcel limit, then an allowance, which the owner can act on; a followed parcel named;
     parcels followed already; a delivery told of; nothing.
-  - Each email read is kept as it came for seven days (`private.inbound_mail_kept`), to
-    learn to read emails better; not one an allowance or the parcel limit stopped, nor
+  - Each email read is kept as it came for 30 days (`private.inbound_mail_kept`), the
+    account's newest 100 at most, to learn to read emails better; not one an allowance or the parcel limit stopped, nor
     Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning
     the address off or deleting the account deletes the account's. A failure to keep one is
     reported and changes nothing else.

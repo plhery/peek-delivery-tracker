@@ -546,7 +546,7 @@ export class SyncJobWorker {
       });
     }
     try {
-      // An email forwarded to an account's address is kept seven days.
+      // An email forwarded to an account's address is kept 30 days.
       const forgotten = await this.service.client.forgetOldInboundMail();
       if (forgotten > 0) logOperationalEvent('inbound_mail_forgotten', { emails: forgotten });
     } catch (maintenanceError) {

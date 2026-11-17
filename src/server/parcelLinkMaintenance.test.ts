@@ -268,7 +268,7 @@ it('finishes the scheduled sync when forgetting inbox notices fails, and reports
   expect(state.lastError).toBeNull();
 });
 
-it('deletes the emails forwarded to an address seven days ago, after each scheduled sync', async () => {
+it('deletes the emails forwarded to an address 30 days ago, after each scheduled sync', async () => {
   const { client, mail, worker } = scheduledRun();
   vi.spyOn(client, 'forgetExpiredParcelLinks').mockResolvedValue({ links: 0, packages: 0, stopped: 0, alerts: 0 });
   vi.spyOn(client, 'publicLookupUsageSummary').mockResolvedValue({ buckets: 0, p50: 0, p90: 0, max: 0, detection: { buckets: 0, p50: 0, p90: 0, max: 0 } });

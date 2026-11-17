@@ -1274,7 +1274,7 @@
   "guides.checker.none": "Aucun transporteur connu de Peek n’écrit ses numéros ainsi. Vérifie qu’il n’y a pas de faute de frappe, ou cherche le transporteur dans l’e-mail d’expédition.",
   "inbox.row": "Ajouter des colis par e-mail",
   "inbox.experimental": "Expérimental",
-  "inbox.intro": "Transfère un e-mail d’expédition à ton adresse Peek et Peek ajoute le colis. Peek garde les e-mails transférés 7 jours pour apprendre à mieux les lire, puis les supprime. Cette fonction est expérimentale : elle peut rater un colis et peut changer.",
+  "inbox.intro": "Transfère un e-mail d’expédition à ton adresse Peek et Peek ajoute le colis. Cette fonction est expérimentale : elle peut rater un colis et peut changer.",
   "inbox.start": "Obtenir mon adresse",
   "inbox.address": "Ton adresse",
   "inbox.copy": "Copier l’adresse",

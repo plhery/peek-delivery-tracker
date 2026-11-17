@@ -80,17 +80,20 @@ begin
     raise exception 'An empty email was kept';
   exception when check_violation then null;
   end;
-  update private.inbound_mail_kept set received_at = now() - interval '7 days 1 minute'
+  update private.inbound_mail_kept set received_at = now() - interval '30 days 1 minute'
   where id = (select min(id) from private.inbound_mail_kept where user_id = one);
+  -- One kept for 29 days stays.
+  update private.inbound_mail_kept set received_at = now() - interval '29 days'
+  where id = (select max(id) from private.inbound_mail_kept where user_id = one);
 end;
 $$;
 
--- The sweep deletes what is over seven days old, and only that.
+-- The sweep deletes what is over 30 days old, and only that.
 set local role service_role;
 do $$
 begin
   if public.forget_old_inbound_mail() <> 1 or public.forget_old_inbound_mail() <> 0 then
-    raise exception 'The sweep did not delete exactly the email over seven days old';
+    raise exception 'The sweep did not delete exactly the email over 30 days old';
   end if;
 end;
 $$;
@@ -98,7 +101,7 @@ reset role;
 do $$
 begin
   if (select count(*) from private.inbound_mail_kept) <> 2 then
-    raise exception 'The sweep deleted an email under seven days old';
+    raise exception 'The sweep deleted an email under 30 days old';
   end if;
 end;
 $$;

@@ -1274,7 +1274,7 @@
   "guides.checker.none": "Nessun corriere che Peek conosce scrive i numeri così. Controlla che non ci siano errori di battitura, o cerca il corriere nell’e-mail di spedizione.",
   "inbox.row": "Aggiungi pacchi via email",
   "inbox.experimental": "Sperimentale",
-  "inbox.intro": "Inoltra un’email di spedizione al tuo indirizzo Peek e Peek aggiunge il pacco. Peek conserva le email inoltrate per 7 giorni, per imparare a leggerle meglio, poi le elimina. Questa funzione è sperimentale: può perdere un pacco e potrebbe cambiare.",
+  "inbox.intro": "Inoltra un’email di spedizione al tuo indirizzo Peek e Peek aggiunge il pacco. Questa funzione è sperimentale: può perdere un pacco e potrebbe cambiare.",
   "inbox.start": "Ottieni il mio indirizzo",
   "inbox.address": "Il tuo indirizzo",
   "inbox.copy": "Copia indirizzo",

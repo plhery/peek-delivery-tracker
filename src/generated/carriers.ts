@@ -2100,6 +2100,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "inpost",
+      "catalog": "inpost",
+      "slug": "inpost-sendungsverfolgung",
+      "title": "InPost Sendungsverfolgung: Nummern, Status & Abholung",
+      "name": "InPost",
+      "color": "#ffcc05"
+    },
+    {
       "id": "paack",
       "catalog": "paack",
       "slug": "paack-sendungsverfolgung",
@@ -2572,6 +2580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DPD Suisse\u00a0: suivre un colis, points relais et contact",
       "name": "DPD Switzerland",
       "color": "#dc0032"
+    },
+    {
+      "id": "inpost",
+      "catalog": "inpost",
+      "slug": "inpost-suivi",
+      "title": "Suivi InPost\u00a0: numéros, statuts, Lockers et Mondial Relay",
+      "name": "InPost",
+      "color": "#ffcc05"
     },
     {
       "id": "paack",
@@ -3240,6 +3256,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005d69"
     },
     {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "landmark-global-tracking",
+      "title": "Landmark Global tracking: stati, consegna, dogana e aiuto",
+      "name": "Landmark Global",
+      "color": "#e62337"
+    },
+    {
       "id": "sunyou",
       "catalog": "sunyou",
       "slug": "sunyou-tracking",
@@ -3640,6 +3664,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SpeedPAK seguimiento: paquetes de eBay, estados y contacto",
       "name": "SpeedPAK",
       "color": "#ee7532"
+    },
+    {
+      "id": "asendia",
+      "catalog": "asendia",
+      "slug": "asendia-seguimiento",
+      "title": "Seguimiento Asendia: estados, reparto en España y aduanas",
+      "name": "Asendia",
+      "color": "#005d69"
     },
     {
       "id": "landmark-global",
@@ -4084,6 +4116,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "asendia",
+      "catalog": "asendia",
+      "slug": "asendia-rastreio",
+      "title": "Rastreio Asendia: estados, entrega em Portugal e alfândega",
+      "name": "Asendia",
+      "color": "#005d69"
+    },
+    {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "landmark-global-rastreio",
+      "title": "Rastreio Landmark Global: estados, parceiros e alfândega",
+      "name": "Landmark Global",
+      "color": "#e62337"
+    },
+    {
       "id": "cacesa",
       "catalog": "cacesa",
       "slug": "cacesa-rastreio",
@@ -4454,6 +4502,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL eCommerce Poland śledzenie przesyłki: statusy i punkty",
       "name": "DHL eCommerce Poland",
       "color": "#ffcc00"
+    },
+    {
+      "id": "asendia",
+      "catalog": "asendia",
+      "slug": "asendia-sledzenie-przesylek",
+      "title": "Asendia śledzenie przesyłek: statusy, doręczenie i cło",
+      "name": "Asendia",
+      "color": "#005d69"
+    },
+    {
+      "id": "landmark-global",
+      "catalog": "landmark-global",
+      "slug": "landmark-global-sledzenie-przesylek",
+      "title": "Landmark Global śledzenie przesyłek: LTN, statusy i cło",
+      "name": "Landmark Global",
+      "color": "#e62337"
     },
     {
       "id": "allegro-one",

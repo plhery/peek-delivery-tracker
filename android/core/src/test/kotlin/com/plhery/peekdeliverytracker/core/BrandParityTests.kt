@@ -310,8 +310,7 @@ class BrandParityTests {
     fun carriersWithoutAVerifiedBrandColorStayNeutral() {
         val brand = brand()
         val neutral = catalog.definitions.filter { it.value.color == CarrierVisualIdentity.defaultCarrierColor }
-        // OMGO takes the colour its site shows from the scraper release that names it.
-        assertEquals(setOf(CarrierId.Unknown), neutral.keys - CarrierId.Omgo)
+        assertEquals(setOf(CarrierId.Unknown), neutral.keys)
         for (id in neutral.keys) {
             assertNull(id.rawValue, brand.palettes[id.rawValue])
             assertEquals(id.rawValue, "default", identity(id.rawValue).decal)

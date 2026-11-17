@@ -1048,8 +1048,7 @@ describe('carrier brand', () => {
     const neutral = Object.entries(CARRIER_DEFINITIONS)
       .filter(([, definition]) => definition.color === DEFAULT_CARRIER_COLOR)
       .map(([id]) => id).sort();
-    // OMGO takes the colour its site shows from the scraper release that names it.
-    expect(neutral.filter(id => id !== 'omgo')).toEqual(['unknown']);
+    expect(neutral).toEqual(['unknown']);
     for (const id of neutral) {
       expect(CARRIER_PALETTES[id]).toBeUndefined();
       expect(carrierDecal(id)).toBe('default');

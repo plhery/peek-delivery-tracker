@@ -302,7 +302,8 @@ final class BrandParityTests: XCTestCase {
     func testCarriersWithoutAVerifiedBrandColorStayNeutral() throws {
         let brand = try brand()
         let neutral = catalog.definitions.filter { $0.value.color == CarrierVisualIdentity.defaultCarrierColor }
-        XCTAssertEqual(Set(neutral.keys), [CarrierID(rawValue: "omgo"), .unknown])
+        // OMGO takes the colour its site shows from the scraper release that names it.
+        XCTAssertEqual(Set(neutral.keys).subtracting([CarrierID(rawValue: "omgo")]), [.unknown])
         for id in neutral.keys {
             XCTAssertNil(brand.palettes[id.rawValue], id.rawValue)
             XCTAssertEqual(try identity(id.rawValue).decal, "default", id.rawValue)

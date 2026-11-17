@@ -1,0 +1,5 @@
+Peek now has one widget, “Parcels”. A “Next delivery” widget turns into it; a “Parcels” one added before is removed: add it again.
+Small text is darker and easier to read, in light and dark mode.
+Before your first parcel, the sample parcel’s globe now opens its map.
+TalkBack reads a parcel page’s top bar first and names a sheet’s drag handle in the app’s language, not the phone’s.
+With notifications off on the phone, checks for news every 15 minutes stop until you open Peek with them on.

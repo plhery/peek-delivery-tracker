@@ -4,7 +4,7 @@ description: Tracking says delivered but there's no parcel? What to check first,
 slug: parcel-delivered-but-not-received
 picture: A closed door, a notification with a green tick, an empty box outline on the doormat, and a worried Pip.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 If tracking says delivered but you haven't received the parcel, don't assume it's gone: "delivered" is a scan on the driver's handheld, not proof it reached you. Look for a photo or a name in the tracking, search the usual spots and give it a day. If it's still missing, go to the seller, not the carrier: in the UK and Ireland, a parcel bought from a business stays the seller's responsibility until you physically have it.
@@ -120,7 +120,7 @@ Often, as a last resort:
 
 ### Can Peek find my parcel?
 
-No. [Peek](/) shows only what the carrier publishes and can't contact a carrier or file a claim, and [no other tracker can](guide:universal-tracker) either. It does check up to every 2 minutes once a parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers) and can notify you, so you reach the door soon after the "delivered" scan. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US and Cainiao).
+No. [Peek](/) shows only what the carrier publishes and can't contact a carrier or file a claim, and [no other tracker can](guide:universal-tracker) either. It does check up to every 2 minutes once a parcel is out for delivery (on that day, from 6 a.m. local time, while the carrier's own tracker answers) and can notify you, so you reach the door soon after the "delivered" scan. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France, the Netherlands and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane, for China Post and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US, Cainiao, J&T Express in Brazil and Onlog Express).
 
 ### Should I report a stolen parcel to the police?
 

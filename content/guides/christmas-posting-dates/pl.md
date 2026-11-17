@@ -4,7 +4,7 @@ description: Do kiedy nadać paczkę, żeby doszła przed Wigilią: zeszłoroczn
 slug: do-kiedy-wyslac-paczke-przed-swietami
 picture: Kartka z kalendarza z zakreślonym jednym grudniowym dniem, samochód dostawczy wiozący przez padający śnieg paczkę przewiązaną czerwoną wstążką i biegnący obok Pip.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 InPost, Poczta Polska, ORLEN Paczka, DPD i GLS nie podały jeszcze terminów na święta 2026, a u DHL eCommerce też ich nie znaleźliśmy. W 2025 roku [Poczta Polska](carrier:poczta-polska) radziła nadać paczkę najpóźniej w niedzielę 21 grudnia, a [InPost](carrier:inpost) gwarantował, że paczki nadane do poniedziałku 22 grudnia dotrą do wtorku 23 grudnia. Wszystkie terminy w tabelach poniżej są więc zeszłoroczne: Poczty Polskiej i DPD z ich stron, a InPostu za portalem Super Biznes.
@@ -91,7 +91,7 @@ Dni wolne InPostu, DHL eCommerce i ORLEN Paczki sprawdzisz na ich stronach.
 - Paczka stoi po świętach? | Przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 :::
 
-Czekasz na prezent? Wklej jego numer do [Peeka](/) i ustaw powiadomienia na „Tylko doręczenie”: gdy paczka wyjedzie do doręczenia, Peek sprawdza ją nawet co 2 minuty u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), ale nie sprawi, że dotrze szybciej. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane i Morning Global; co 30 minut PostNL, USPS, GOFO w USA i Cainiao). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+Czekasz na prezent? Wklej jego numer do [Peeka](/) i ustaw powiadomienia na „Tylko doręczenie”: gdy paczka wyjedzie do doręczenia, Peek sprawdza ją nawet co 2 minuty u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), ale nie sprawi, że dotrze szybciej. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 :::sources
 - [Poczta Polska: Uwaga, ważne terminy! Sprawdź, kiedy wysłać prezenty, by dotarły pod choinkę](https://www.poczta-polska.pl/news/uwaga-wazne-terminy-sprawdz-kiedy-wyslac-prezenty-by-dotarly-pod-choinke/) – terminy z 2025 r.: 21 i 22 grudnia

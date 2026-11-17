@@ -4,7 +4,7 @@ description: Hasta qué día enviar un paquete para que llegue en Navidad o Reye
 slug: fecha-limite-envio-paquetes-navidad
 picture: Una hoja de calendario con un día de diciembre rodeado con un círculo, una furgoneta de reparto que lleva un paquete atado con un lazo rojo bajo la nieve y Pip corriendo a su lado.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 GLS, Correos, Correos Express, MRW y NACEX aún no han publicado sus fechas límite para la Navidad de 2026, y de [SEUR](carrier:seur) no hemos encontrado ninguna: consúltala en su web antes de enviar. En la web de Correos no hay tabla de Navidad, ni de este año ni del pasado: con Correos, haz la cuenta con sus plazos de entrega. De 2025, la única fecha oficial que hemos encontrado es la de [GLS](carrier:gls-es): enviar como tarde el lunes 22 de diciembre para entregar en la Península el miércoles 24. Por tanto, ninguna fecha límite de esta guía es de 2026: las tablas dan las de 2025 donde las hay y, si no, el plazo de entrega de cada empresa.
@@ -113,7 +113,7 @@ Para Correos, el Black Friday es «el pistoletazo de salida de la temporada más
 - ¿Sigue parado después de Navidad? | Mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating).
 :::
 
-¿Esperas un regalo? Pega su número en [Peek](/) y elige las notificaciones «Solo la entrega»: lo consulta hasta una vez cada 2 minutos cuando sale a reparto con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa), aunque no puede hacer que llegue antes. A través de servicios de seguimiento como 17TRACK lo consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos y Cainiao). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete.
+¿Esperas un regalo? Pega su número en [Peek](/) y elige las notificaciones «Solo la entrega»: lo consulta hasta una vez cada 2 minutos cuando sale a reparto con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa), aunque no puede hacer que llegue antes. A través de servicios de seguimiento como 17TRACK lo consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia, Países Bajos y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane, China Post y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos, Cainiao, J&T Express en Brasil y Onlog Express). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete.
 
 :::sources
 - [GLS: Navidad 2025, plazos de entrega](https://gls-group.com/ES/es/navidad-plazos-de-entrega/) – fechas de 2025, festivos, pedidos, Etiqueta creada

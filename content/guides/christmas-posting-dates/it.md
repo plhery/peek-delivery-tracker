@@ -4,7 +4,7 @@ description: Entro quando spedire per Natale con Poste Italiane, SDA, GLS e BRT 
 slug: spedire-pacco-per-natale-ultimo-giorno
 picture: Una pagina di calendario con un giorno di dicembre cerchiato, un furgone che porta un pacco legato con un nastro rosso sotto la neve e Pip che gli corre accanto.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 [Poste Italiane](carrier:poste-italiane) non ha ancora pubblicato le date di Natale 2026: nel 2025 garantiva la consegna entro Natale in Italia per i pacchi affidati entro giovedì 18 dicembre con i servizi a 2 giorni lavorativi, ed entro venerdì 19 dicembre con quelli a 1 giorno. In Ticino [la Posta](carrier:swiss-post) ha già le date 2026: mercoledì 23 dicembre per Posta A e PostPac Priority, martedì 22 per PostPac Economy. È l'unico corriere di questa guida ad averle già: per Poste Italiane, SDA e GLS Italy le tabelle danno quelle del 2025, e BRT non ne pubblica.
@@ -107,7 +107,7 @@ Hai spedito dopo l'ultima data? Nel 2025 Poste avvisava che le spedizioni affida
 - Ancora fermo dopo Natale? | Leggi [perché il tracking non si aggiorna](guide:tracking-not-updating).
 :::
 
-Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo la consegna»: quando il pacco è in consegna con un corriere che Peek legge direttamente, lo controlla fino a ogni 2 minuti, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), ma non può farlo arrivare prima. Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti e Cainiao). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
+Aspetti un regalo? Incolla il numero su [Peek](/) e scegli le notifiche «Solo la consegna»: quando il pacco è in consegna con un corriere che Peek legge direttamente, lo controlla fino a ogni 2 minuti, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), ma non può farlo arrivare prima. Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia, Paesi Bassi e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane, China Post e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti, Cainiao, J&T Express in Brasile e Onlog Express). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco.
 
 :::sources
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi/) – nessuna data 2026, sospensioni e ritardi per l'estero, Raccomandata Internazionale, Stati Uniti

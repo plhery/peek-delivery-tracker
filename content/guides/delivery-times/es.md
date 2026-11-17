@@ -4,7 +4,7 @@ description: Correos reparte paquetes de lunes a viernes, sin horario publicado.
 slug: a-que-hora-reparte-correos
 picture: Un reloj que marca las ocho de la tarde bajo una luna creciente, un calendario con los fines de semana marcados, una furgoneta con los faros encendidos y Pip mirando desde una ventana.
 published: 2026-10-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Un paquete puede llegarte desde primera hora de la mañana hasta bien entrada la tarde, y casi ninguna empresa te promete una hora. Correos no publica horario de reparto, GLS reparte más o menos de 9:00 a 20:00, CTT Express en general de 9:00 a 19:00, y Amazon, con «Entrega hoy», hasta las 22:00. La mayoría reparte de lunes a viernes: el sábado depende casi siempre del servicio que pagó quien envía, y el domingo solo lo anuncia Amazon, en determinados códigos postales.
@@ -96,7 +96,7 @@ Cada una da su propio plazo. Correos dice que, tras su SMS de entrega a domicili
 
 ¿Te han dejado un aviso porque no estabas? Mira [qué hacer si no estabas cuando pasó el repartidor](guide:missed-delivery). ¿Varios días sin un escaneo nuevo? Mira [por qué el seguimiento no se actualiza](guide:tracking-not-updating).
 
-Peek consulta el seguimiento hasta una vez cada 2 minutos cuando el paquete está en reparto con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa), y puedes dejar sus notificaciones en «Solo la entrega» para no tener que refrescar. A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos y Cainiao). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete.
+Peek consulta el seguimiento hasta una vez cada 2 minutos cuando el paquete está en reparto con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa), y puedes dejar sus notificaciones en «Solo la entrega» para no tener que refrescar. A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia, Países Bajos y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane, China Post y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos, Cainiao, J&T Express en Brasil y Onlog Express). Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete.
 
 ## ¿Reparten paquetes los festivos?
 

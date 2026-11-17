@@ -4,7 +4,7 @@ description: Laut Sendungsverfolgung zugestellt, aber kein Paket da? Wo du suchs
 slug: paket-zugestellt-aber-nicht-erhalten
 picture: Eine geschlossene Haustür, eine Mitteilung mit grünem Haken, auf der Fußmatte der gestrichelte Umriss eines Pakets mit Fragezeichen und ein besorgter Pip.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Die Sendungsverfolgung sagt „zugestellt“, aber bei dir ist kein Paket? Dann ist es noch lange nicht verloren: „Zugestellt“ ist nur ein Scan im Handgerät des Zustellers, kein Beweis, dass das Paket bei dir angekommen ist. Schau nach, an wen oder wohin es laut Sendungsverfolgung ging, such die üblichen Stellen ab und warte ein, zwei Tage. Fehlt es dann immer noch, wende dich an den Händler, nicht an den Paketdienst. Der Händler hat den Paketdienst beauftragt, und hast du bei einem Shop bestellt, trägt er in Deutschland und Österreich das Risiko, bis du das Paket wirklich in den Händen hältst.
@@ -123,7 +123,7 @@ Oft, als letzter Schritt. Schreib vorher dem Händler, denn Banken wollen sehen,
 
 ### Kann Peek mein Paket finden?
 
-Nein. [Peek](/) zeigt wie [jeder Paket-Tracker](guide:universal-tracker) nur, was der Paketdienst veröffentlicht, und kann weder den Paketdienst kontaktieren noch für dich reklamieren. Ist ein Paket in Zustellung, fragt Peek aber bis zu alle 2 Minuten nach (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange der Paketdienst selbst antwortet) und kann dir eine Mitteilung schicken, sobald es zugestellt ist. So stehst du kurz nach dem Scan an der Tür. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail, Poste Italiane und Morning Global; alle 30 Minuten PostNL, USPS, GOFO in den USA und Cainiao).
+Nein. [Peek](/) zeigt wie [jeder Paket-Tracker](guide:universal-tracker) nur, was der Paketdienst veröffentlicht, und kann weder den Paketdienst kontaktieren noch für dich reklamieren. Ist ein Paket in Zustellung, fragt Peek aber bis zu alle 2 Minuten nach (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange der Paketdienst selbst antwortet) und kann dir eine Mitteilung schicken, sobald es zugestellt ist. So stehst du kurz nach dem Scan an der Tür. Über Tracking-Dienste wie 17TRACK fragt Peek alle 15 Minuten nach, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich, den Niederlanden und Polen, DHL eCommerce in Polen, Royal Mail, Poste Italiane, China Post und Morning Global; alle 30 Minuten PostNL, USPS, GOFO in den USA, Cainiao, J&T Express in Brasilien und Onlog Express).
 
 ### Soll ich den Diebstahl bei der Polizei anzeigen?
 

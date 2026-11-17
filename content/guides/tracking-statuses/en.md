@@ -4,7 +4,7 @@ description: What each tracking status means, from "label created" to "delivered
 slug: tracking-status-meanings
 picture: A winding route with ticked stops (label, depot, plane), a van at the current stop, a house ahead and Pip hurrying.
 published: 2026-10-09
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 A tracking status is the carrier's latest scan in a few words, and most ask nothing of you. "Label created" means the carrier doesn't have your parcel yet, "in transit" means it's somewhere between two scans, and "out for delivery" means it's on today's van. Only a few need you: a missed delivery, a parcel waiting for pickup, a customs charge and a "delivered" with nothing at the door.
@@ -66,7 +66,7 @@ Usually, yes:
 
 Two look-alikes: Peek counts Royal Mail's `Ready for delivery` as in transit, not out for delivery. And at [DHL](carrier:dhl) in Germany, a loading scan shown more than once means the round wasn't finished: a delay of 1 to 2 days is possible.
 
-[Peek](/) checks up to every 2 minutes once a parcel is out for delivery, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and its notifications can be set to "Delivery only", for when the parcel goes out for delivery and when it arrives. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US and Cainiao). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+[Peek](/) checks up to every 2 minutes once a parcel is out for delivery, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and its notifications can be set to "Delivery only", for when the parcel goes out for delivery and when it arrives. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France, the Netherlands and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane, for China Post and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US, Cainiao, J&T Express in Brazil and Onlog Express). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## "Delivery attempted" or "notice left": what now?
 

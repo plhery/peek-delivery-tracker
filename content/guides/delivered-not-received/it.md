@@ -4,7 +4,7 @@ description: Il tracking dice consegnato ma il pacco non c'è? I controlli da fa
 slug: pacco-consegnato-ma-non-ricevuto
 picture: Una porta chiusa, una notifica con la spunta verde, la sagoma vuota di un pacco sullo zerbino e Pip preoccupato.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Se il tracking dice consegnato ma il pacco non ce l'hai, non darlo per perso: «consegnato» è una scansione sul palmare del corriere, non la prova che il pacco è arrivato a te. Cerca nel tracking una foto o un nome, guarda nei soliti posti e aspetta un giorno. Se non salta fuori, scrivi al venditore, non al corriere: in Italia, se hai comprato da un'azienda, il pacco resta a rischio del venditore finché non lo hai materialmente in mano. In Ticino questa tutela non c'è, ma per un pacco spedito in Svizzera con [la Posta](carrier:swiss-post) puoi aprire tu una ricerca.
@@ -120,7 +120,7 @@ Spesso sì, come ultima strada:
 
 ### Peek può trovare il mio pacco?
 
-No. [Peek](/) mostra solo quello che pubblica il corriere e non può contattarlo né fare reclamo per te. Però, quando il pacco è in consegna, lo ricontrolla fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking del corriere stesso) e può mandarti una notifica: così arrivi alla porta poco dopo la scansione «consegnato». Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti e Cainiao). Cosa non può vedere nessun tracker lo spiega [la guida al tracking universale](guide:universal-tracker).
+No. [Peek](/) mostra solo quello che pubblica il corriere e non può contattarlo né fare reclamo per te. Però, quando il pacco è in consegna, lo ricontrolla fino a ogni 2 minuti (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking del corriere stesso) e può mandarti una notifica: così arrivi alla porta poco dopo la scansione «consegnato». Quando rispondono servizi di tracciamento come 17TRACK, lo controlla ogni 15 minuti, e alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia, Paesi Bassi e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane, China Post e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti, Cainiao, J&T Express in Brasile e Onlog Express). Cosa non può vedere nessun tracker lo spiega [la guida al tracking universale](guide:universal-tracker).
 
 ### Pacco rubato: serve la denuncia?
 

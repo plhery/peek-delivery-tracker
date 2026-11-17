@@ -4,7 +4,7 @@ description: Jusqu'à quelle heure livrent Colissimo, Chronopost, Mondial Relay,
 slug: a-quelle-heure-livre-colissimo
 picture: Une horloge qui marque huit heures du soir sous un croissant de lune, un calendrier aux week-ends marqués, une camionnette phares allumés, et Pip qui regarde par la fenêtre.
 published: 2026-10-14
-updated: 2026-11-09
+updated: 2026-11-17
 ---
 
 Un colis peut arriver du petit matin jusqu'au soir, et presque aucun transporteur ne te promet une heure. La Poste ne publie aucun horaire pour Colissimo ; Colis Privé livre de 8 h à 19 h, et GLS du lundi au vendredi, de 8 h à 18 h. Le samedi, Chronopost livre aussi, par exemple avant 13 h avec Chrono 13 ; le dimanche dépend presque toujours du service que l'expéditeur a payé.
@@ -98,7 +98,7 @@ La Poste suisse accepte une demande de recherche quand le délai habituel est d�
 
 Un avis de passage alors que tu attendais chez toi ? Lis [que faire après un avis de passage](guide:missed-delivery). Plus aucun scan depuis des jours ? Lis [pourquoi le suivi ne bouge plus](guide:tracking-not-updating).
 
-Peek vérifie jusqu'à toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond), et peut te prévenir seulement quand le colis part en livraison et quand il arrive (« Livraison seulement ») : plus besoin de rafraîchir la page. Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail, pour Poste Italiane et pour Morning Global ; toutes les 30 minutes pour PostNL, USPS, GOFO aux États-Unis et Cainiao). Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis.
+Peek vérifie jusqu'à toutes les 2 minutes un colis en cours de livraison chez les transporteurs qu'il lit directement, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (le jour même, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond), et peut te prévenir seulement quand le colis part en livraison et quand il arrive (« Livraison seulement ») : plus besoin de rafraîchir la page. Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France, aux Pays-Bas et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail, pour Poste Italiane, pour China Post et pour Morning Global ; toutes les 30 minutes pour PostNL, USPS, GOFO aux États-Unis, Cainiao, J&T Express au Brésil et Onlog Express). Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis.
 
 ## Les colis sont-ils livrés les jours fériés ?
 

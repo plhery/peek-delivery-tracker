@@ -4,7 +4,7 @@ description: Pone «entregado» y no tienes el paquete: qué comprobar primero, 
 slug: paquete-entregado-pero-no-recibido
 picture: Una puerta cerrada, una notificación con un tic verde, el contorno vacío de una caja con un interrogante sobre el felpudo y Pip, preocupado.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-17
 ---
 
 Si el seguimiento pone «Entregado» pero no tienes el paquete, no lo des por perdido: «entregado» es un escaneo en la PDA del repartidor, no la prueba de que llegó a tus manos. Mira si el seguimiento dice dónde o con quién se quedó, busca en los sitios de siempre y date un margen. Si sigue sin aparecer, reclama a la tienda, no al transportista: en España, si compraste a una empresa, el paquete es responsabilidad del vendedor hasta que lo tengas en tus manos.
@@ -116,7 +116,7 @@ A veces, como último recurso:
 
 ### ¿Puede Peek encontrar mi paquete?
 
-No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) solo muestra lo que publica el transportista y no puede contactar con él ni reclamar por ti. Eso sí, consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa) y puede enviarte una notificación, así llegas a la puerta poco después del escaneo «Entregado». A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos y Cainiao).
+No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) solo muestra lo que publica el transportista y no puede contactar con él ni reclamar por ti. Eso sí, consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa) y puede enviarte una notificación, así llegas a la puerta poco después del escaneo «Entregado». A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia, Países Bajos y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane, China Post y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos, Cainiao, J&T Express en Brasil y Onlog Express).
 
 ### ¿Tengo que denunciar el robo a la policía?
 

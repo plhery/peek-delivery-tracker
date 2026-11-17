@@ -4,7 +4,7 @@ description: A encomenda aparece como entregue e não está lá? O que verificar
 slug: encomenda-dada-como-entregue-nao-recebi
 picture: Uma porta fechada, uma notificação com um visto verde, o contorno vazio de uma caixa no tapete e o Pip preocupado.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Se o seguimento diz que a encomenda foi entregue mas não a recebeste, não a dês já como perdida: «entregue» é um registo no terminal do estafeta, não a prova de que chegou às tuas mãos. Vê no seguimento quem assinou ou com quem ficou, procura nos sítios do costume e espera um dia. Se continuar sem aparecer, fala com a loja, não com a transportadora: em Portugal, quando compras a uma empresa, a encomenda corre por conta e risco da loja até a teres fisicamente nas mãos.
@@ -119,7 +119,7 @@ Muitas vezes, como último recurso:
 
 ### O Peek consegue encontrar a minha encomenda?
 
-Não. O [Peek](/), como qualquer [serviço de seguimento](guide:universal-tracker), só mostra o que a transportadora publica e não pode contactá-la nem fazer reclamações por ti. Mas, no dia da entrega, verifica o seguimento até de 2 em 2 minutos (com a encomenda já em distribuição, a partir das 6h00, hora local, e enquanto for o próprio seguimento da transportadora a responder) e pode enviar-te uma notificação, para chegares à porta pouco depois de aparecer «entregue». Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos e a Cainiao).
+Não. O [Peek](/), como qualquer [serviço de seguimento](guide:universal-tracker), só mostra o que a transportadora publica e não pode contactá-la nem fazer reclamações por ti. Mas, no dia da entrega, verifica o seguimento até de 2 em 2 minutos (com a encomenda já em distribuição, a partir das 6h00, hora local, e enquanto for o próprio seguimento da transportadora a responder) e pode enviar-te uma notificação, para chegares à porta pouco depois de aparecer «entregue». Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França, nos Países Baixos e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane, a China Post e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos, a Cainiao, a J&T Express no Brasil e a Onlog Express).
 
 ### Devo apresentar queixa à polícia se a encomenda foi roubada?
 

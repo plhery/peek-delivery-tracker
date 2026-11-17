@@ -4,7 +4,7 @@ description: Os CTT entregam ao sábado e, nas zonas mais povoadas, ao domingo; 
 slug: a-que-horas-entrega-ctt
 picture: Um relógio a marcar as oito da noite sob uma lua em quarto crescente, um calendário com os fins de semana assinalados, uma carrinha de faróis acesos e o Pip a espreitar de uma janela.
 published: 2026-10-14
-updated: 2026-11-10
+updated: 2026-11-17
 ---
 
 Uma encomenda pode chegar de manhã cedo ou já de noite, e quase nenhuma transportadora te promete uma hora. Nos CTT, uma Encomenda Expresso pode ter uma janela entre as 8h00 e as 22h00, e a GLS entrega em horário comercial, de segunda a sexta. O sábado depende da transportadora; ao domingo, só entregam os CTT, nas zonas mais povoadas, e o CTT Now.
@@ -85,7 +85,7 @@ A InPost aceita uma reclamação por atraso quando passam mais de 5 dias desde a
 
 Deixaram um aviso porque não estavas em casa? Vê [encomenda não entregue](guide:missed-delivery). Há dias sem uma leitura nova? Vê [porque é que o tracking não atualiza](guide:tracking-not-updating).
 
-O Peek verifica até de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e pode enviar-te notificações com a opção «Só a entrega». Assim não tens de atualizar a página. Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos e a Cainiao). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
+O Peek verifica até de 2 em 2 minutos quando a encomenda sai para entrega, nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e pode enviar-te notificações com a opção «Só a entrega». Assim não tens de atualizar a página. Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França, nos Países Baixos e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane, a China Post e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos, a Cainiao, a J&T Express no Brasil e a Onlog Express). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
 
 ## Há entregas nos feriados?
 

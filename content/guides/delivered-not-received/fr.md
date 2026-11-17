@@ -4,7 +4,7 @@ description: Le suivi dit « livré » mais rien n'est arrivé ? Où chercher, c
 slug: colis-livre-mais-non-recu
 picture: Une porte fermée, une notification avec une coche verte, la silhouette d'un colis en pointillés sur le paillasson et Pip, inquiet.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Si le suivi indique « livré » mais que tu n'as rien reçu, ne considère pas encore le colis comme perdu : « livré » est un scan sur le terminal du livreur, pas la preuve que le colis est entre tes mains. Cherche une photo ou un nom dans le suivi, fais le tour des endroits habituels et laisse passer un jour. S'il manque toujours, adresse-toi au vendeur, pas au transporteur : en France et en Belgique, un colis acheté à un professionnel reste à ses risques tant que tu ne l'as pas en main.
@@ -125,7 +125,7 @@ Souvent, en dernier recours :
 
 ### Peek peut-il retrouver mon colis ?
 
-Non. [Peek](/), comme tout [suivi de colis universel](guide:universal-tracker), ne montre que ce que le transporteur publie, et ne peut ni le contacter ni réclamer à ta place. En revanche, il vérifie le suivi jusqu'à toutes les 2 minutes le jour de la livraison (une fois le colis remis au livreur, dès 6 h, heure locale, et tant que c'est le suivi du transporteur qui répond) et peut t'envoyer une notification : tu peux ainsi aller voir à ta porte juste après le scan « livré ». Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail, pour Poste Italiane et pour Morning Global ; toutes les 30 minutes pour PostNL, USPS, GOFO aux États-Unis et Cainiao).
+Non. [Peek](/), comme tout [suivi de colis universel](guide:universal-tracker), ne montre que ce que le transporteur publie, et ne peut ni le contacter ni réclamer à ta place. En revanche, il vérifie le suivi jusqu'à toutes les 2 minutes le jour de la livraison (une fois le colis remis au livreur, dès 6 h, heure locale, et tant que c'est le suivi du transporteur qui répond) et peut t'envoyer une notification : tu peux ainsi aller voir à ta porte juste après le scan « livré ». Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les 15 minutes, et quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France, aux Pays-Bas et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail, pour Poste Italiane, pour China Post et pour Morning Global ; toutes les 30 minutes pour PostNL, USPS, GOFO aux États-Unis, Cainiao, J&T Express au Brésil et Onlog Express).
 
 ### Faut-il porter plainte pour un colis volé ?
 

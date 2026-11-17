@@ -4,7 +4,7 @@ description: Bis wann musst du Pakete und Briefe für Weihnachten abgeben? Die F
 slug: weihnachten-paket-letzter-termin
 picture: Ein Kalenderblatt mit einem eingekreisten Dezembertag, ein Lieferwagen, der ein Paket mit roter Schleife durch fallenden Schnee fährt, und Pip, der nebenher eilt.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-17
 ---
 
 DHL, die Deutsche Post, Hermes, [GLS](carrier:gls-de) und die [Schweizerische Post](carrier:swiss-post) haben ihre Weihnachtstermine für 2026 veröffentlicht: Innerhalb Deutschlands gibst du Pakete, Briefe und Postkarten bei DHL und der Deutschen Post bis Montag, 21. Dezember, ab, Pakete bei GLS bis Montag, 21. Dezember, 12 Uhr, und im Hermes PaketShop bis Samstag, 19. Dezember. In der Schweiz gilt Mittwoch, 23. Dezember, für A-Post und PostPac Priority. DPD und die Österreichische Post haben noch keine Termine für 2026 genannt: Für sie zeigen die Tabellen die Daten vom Vorjahr.
@@ -116,7 +116,7 @@ Den letzten Termin verpasst? Ein schnellerer Dienst schließt oft später, etwa 
 - Nach Weihnachten immer noch nichts? | Lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 :::
 
-Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell die Mitteilungen auf „Nur die Zustellung“: Sobald das Paket in Zustellung ist, prüft Peek bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten oder alle 5 Minuten, wenn die Abfrage einen Browser öffnen muss (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet). Schneller ankommen lässt es das Paket allerdings nicht. Über Tracking-Dienste wie 17TRACK prüft Peek alle 15 Minuten, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich und Polen, DHL eCommerce in Polen, Royal Mail, Poste Italiane und Morning Global; alle 30 Minuten PostNL, USPS, GOFO in den USA und Cainiao). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt.
+Wartest du auf ein Geschenk? Füg die Sendungsnummer in [Peek](/) ein und stell die Mitteilungen auf „Nur die Zustellung“: Sobald das Paket in Zustellung ist, prüft Peek bei Paketdiensten, die es direkt abruft, bis zu alle 2 Minuten oder alle 5 Minuten, wenn die Abfrage einen Browser öffnen muss (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange der Paketdienst selbst antwortet). Schneller ankommen lässt es das Paket allerdings nicht. Über Tracking-Dienste wie 17TRACK prüft Peek alle 15 Minuten, und einige Paketdienste setzen einen längeren Abstand (stündlich GLS in Deutschland, Österreich, der Schweiz, Frankreich, den Niederlanden und Polen, DHL eCommerce in Polen, Royal Mail, Poste Italiane, China Post und Morning Global; alle 30 Minuten PostNL, USPS, GOFO in den USA, Cainiao, J&T Express in Brasilien und Onlog Express). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt.
 
 :::sources
 - [GLS: Versandfristen Weihnachten 2026](https://newsroom.de.gls-group.com/news/versandfristen-weihnachten-2026/s/4f03daaf-07d4-47bb-9cc0-a36d97901bdb) – Termine 2026, 12 Uhr, Verzögerungen, Spitzenmengen

@@ -4,7 +4,7 @@ description: „Doręczona” to wpis z terminala kuriera, a nie dowód, że pac
 slug: paczka-doreczona-a-jej-nie-ma
 picture: Zamknięte drzwi, powiadomienie z zielonym ptaszkiem, pusty, przerywany kontur paczki ze znakiem zapytania na wycieraczce i zmartwiony Pip.
 published: 2026-10-09
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Jeśli śledzenie pokazuje „doręczona”, a paczki nie ma, nie zakładaj od razu, że przepadła: „doręczona” to wpis z terminala kuriera, a nie dowód, że paczka trafiła w Twoje ręce. Sprawdź w szczegółach przesyłki, kto ją odebrał, zapytaj domowników i sąsiadów, rozejrzyj się wokół drzwi i odczekaj dzień lub dwa. Jeśli nadal jej nie ma, napisz do sprzedawcy, a nie do kuriera: przy zakupie od firmy to sprzedawca odpowiada za paczkę, dopóki jej nie dostaniesz.
@@ -115,7 +115,7 @@ Często tak, jako ostatni krok:
 
 ### Czy Peek znajdzie moją paczkę?
 
-Nie. [Peek](/), jak [każdy tracker](guide:universal-tracker), pokazuje tylko to, co publikuje przewoźnik, i nie skontaktuje się z nim ani nie złoży za Ciebie reklamacji. W dniu doręczenia sprawdza śledzenie nawet co 2 minuty (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika) i może wysłać Ci powiadomienie, więc dotrzesz do drzwi niedługo po skanie „doręczona”. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane i Morning Global; co 30 minut PostNL, USPS, GOFO w USA i Cainiao).
+Nie. [Peek](/), jak [każdy tracker](guide:universal-tracker), pokazuje tylko to, co publikuje przewoźnik, i nie skontaktuje się z nim ani nie złoży za Ciebie reklamacji. W dniu doręczenia sprawdza śledzenie nawet co 2 minuty (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie przewoźnika) i może wysłać Ci powiadomienie, więc dotrzesz do drzwi niedługo po skanie „doręczona”. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express).
 
 ### Czy zgłaszać kradzież paczki na policję?
 

@@ -4,7 +4,7 @@ description: O której przyjedzie kurier DPD, GLS czy Pocztex, kto dostarcza w s
 slug: o-ktorej-dostarczaja-paczki
 picture: Zegar wskazujący ósmą wieczorem pod sierpem księżyca, kalendarz z zaznaczonymi weekendami, furgonetka z zapalonymi światłami i Pip patrzący przez okno.
 published: 2026-10-14
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Kurierzy rozwożą paczki przez cały dzień i prawie żaden nie obiecuje Ci konkretnej godziny. DPD dokładny czas dostawy podaje Ci SMS-em lub e-mailem. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
@@ -71,7 +71,7 @@ W DPD numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile i na tt.dpd.co
 
 Kurier był, ale Cię nie zastał? Zobacz [awizo i nieudana próba doręczenia](guide:missed-delivery). Brak nowego skanu od kilku dni? Przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
-Peek sprawdza paczkę nawet co 2 minuty, gdy jest wydana do doręczenia u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i może dać Ci znać tylko wtedy, gdy przesyłka trafia do doręczenia i gdy dociera („Tylko doręczenie”), więc nie musisz w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane i Morning Global; co 30 minut PostNL, USPS, GOFO w USA i Cainiao). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+Peek sprawdza paczkę nawet co 2 minuty, gdy jest wydana do doręczenia u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i może dać Ci znać tylko wtedy, gdy przesyłka trafia do doręczenia i gdy dociera („Tylko doręczenie”), więc nie musisz w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 ## Czy kurierzy dostarczają paczki w święta?
 

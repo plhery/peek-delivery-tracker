@@ -4,7 +4,7 @@ description: What time USPS, UPS, Amazon, Royal Mail, Evri, Canada Post and othe
 slug: what-time-do-parcels-get-delivered
 picture: A clock at eight in the evening under a crescent moon, a calendar with its weekends marked, a van with its headlights on, and Pip watching from a window.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Parcels get delivered any time from early morning to late evening, and almost no carrier promises you an hour. USPS aims to finish by 5 p.m., UPS delivers to homes from 9 a.m. to 7 p.m., Evri from 8 a.m. to 8 p.m., and Amazon brings UK Same-Day orders by 10 p.m. Saturday is a normal delivery day for most of them; Sunday usually depends on the service the sender paid for.
@@ -89,7 +89,7 @@ USPS asks you to wait one full postal business day after `Out for Delivery` befo
 
 A card saying the driver came while you were out? See [missed delivery](guide:missed-delivery). No new scan for days? See [why tracking stops updating](guide:tracking-not-updating).
 
-Peek checks up to every 2 minutes once a parcel is out for delivery with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you just when the parcel goes out for delivery and when it arrives ("Delivery only"), so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US and Cainiao). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+Peek checks up to every 2 minutes once a parcel is out for delivery with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers), and can notify you just when the parcel goes out for delivery and when it arrives ("Delivery only"), so you can stop refreshing. Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval (hourly for GLS in Germany, Austria, Switzerland, France, the Netherlands and Poland, for DHL eCommerce Poland, for Royal Mail, for Poste Italiane, for China Post and for Morning Global; every 30 minutes for PostNL, USPS, GOFO in the US, Cainiao, J&T Express in Brazil and Onlog Express). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Do parcels get delivered on bank holidays?
 

@@ -787,7 +787,7 @@
   "androidTest.other.copied": "已复制",
   "androidTest.other.github": "或者从 GitHub 下载：在最新版本中轻点 .apk 文件，然后允许浏览器安装它。",
   "androidTest.other.githubAction": "打开 GitHub",
-  "androidTest.other.note": "它和 Google Play 上的是同一个 App，由 Google 签名，适用于 Android 12 或更高版本。只有 Google Play 上的测试人员能帮助它向所有人开放。",
+  "androidTest.other.note": "这个版本无需 Google Play 服务，由我们而非 Google 签名，适用于 Android 12 或更高版本。更新来自我们的 F-Droid 存储库。如果你装的是 Google Play 上的 App，请先卸载它。只有 Google Play 上的测试人员能帮助它向所有人开放。",
   "androidTest.page.never": "不再询问",
   "androidTest.page.neverDone": "在这个浏览器中不会再问了。",
   "alerts.demo": "这是演示：不会发送任何内容。",

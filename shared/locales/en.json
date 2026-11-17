@@ -787,7 +787,7 @@
   "androidTest.other.copied": "Copied",
   "androidTest.other.github": "Or download it from GitHub: in the newest release, tap the .apk file, then let your browser install it.",
   "androidTest.other.githubAction": "Open GitHub",
-  "androidTest.other.note": "It’s the same app as on Google Play, signed by Google, for Android 12 or later. Only testers on Google Play help open it to everyone.",
+  "androidTest.other.note": "This version works without Google Play services and is signed by us, not Google, for Android 12 or later. Updates come through our F-Droid repository. If you have the app from Google Play, uninstall it first. Only testers on Google Play help open it to everyone.",
   "androidTest.page.never": "Don’t ask me again",
   "androidTest.page.neverDone": "We won’t ask again in this browser.",
   "alerts.demo": "This is the demo: nothing is sent.",

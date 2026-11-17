@@ -787,7 +787,7 @@
   "androidTest.other.copied": "Kopiert",
   "androidTest.other.github": "Oder lade die App von GitHub herunter: Tippe in der neuesten Version auf die .apk-Datei und erlaube dann deinem Browser, sie zu installieren.",
   "androidTest.other.githubAction": "GitHub öffnen",
-  "androidTest.other.note": "Es ist dieselbe App wie bei Google Play, von Google signiert, für Android 12 oder neuer. Nur Tester bei Google Play helfen, sie für alle freizugeben.",
+  "androidTest.other.note": "Diese Version läuft ohne Google-Play-Dienste und ist von uns signiert, nicht von Google, für Android 12 oder neuer. Updates kommen über unsere F-Droid-Paketquelle. Hast du die App von Google Play, deinstalliere sie vorher. Nur Tester bei Google Play helfen, sie für alle freizugeben.",
   "androidTest.page.never": "Nicht mehr fragen",
   "androidTest.page.neverDone": "Wir fragen in diesem Browser nicht mehr.",
   "alerts.demo": "Das ist die Demo: Es wird nichts gesendet.",

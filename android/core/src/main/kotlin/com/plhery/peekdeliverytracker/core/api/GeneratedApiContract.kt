@@ -1820,6 +1820,18 @@ value class CarrierId(val rawValue: String) {
         val OnlogExpress = CarrierId("onlog-express")
         val Whatsship = CarrierId("whatsship")
         val AmazonOrder = CarrierId("amazon-order")
+        val AtualCargas = CarrierId("atual-cargas")
+        val Azems = CarrierId("azems")
+        val BestFreightCn = CarrierId("best-freight-cn")
+        val Domina = CarrierId("domina")
+        val G4sKenya = CarrierId("g4s-kenya")
+        val Khazenly = CarrierId("khazenly")
+        val MaldivesPost = CarrierId("maldives-post")
+        val Patrus = CarrierId("patrus")
+        val ReunidasCargas = CarrierId("reunidas-cargas")
+        val SilpoPack = CarrierId("silpo-pack")
+        val SprintEg = CarrierId("sprint-eg")
+        val ViaPajucara = CarrierId("via-pajucara")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3581,6 +3593,18 @@ value class CarrierId(val rawValue: String) {
             OnlogExpress,
             Whatsship,
             AmazonOrder,
+            AtualCargas,
+            Azems,
+            BestFreightCn,
+            Domina,
+            G4sKenya,
+            Khazenly,
+            MaldivesPost,
+            Patrus,
+            ReunidasCargas,
+            SilpoPack,
+            SprintEg,
+            ViaPajucara,
         )
     }
 }

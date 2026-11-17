@@ -1811,6 +1811,18 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let onlogExpress = CarrierID(rawValue: "onlog-express")
     static let whatsship = CarrierID(rawValue: "whatsship")
     static let amazonOrder = CarrierID(rawValue: "amazon-order")
+    static let atualCargas = CarrierID(rawValue: "atual-cargas")
+    static let azems = CarrierID(rawValue: "azems")
+    static let bestFreightCn = CarrierID(rawValue: "best-freight-cn")
+    static let domina = CarrierID(rawValue: "domina")
+    static let g4sKenya = CarrierID(rawValue: "g4s-kenya")
+    static let khazenly = CarrierID(rawValue: "khazenly")
+    static let maldivesPost = CarrierID(rawValue: "maldives-post")
+    static let patrus = CarrierID(rawValue: "patrus")
+    static let reunidasCargas = CarrierID(rawValue: "reunidas-cargas")
+    static let silpoPack = CarrierID(rawValue: "silpo-pack")
+    static let sprintEg = CarrierID(rawValue: "sprint-eg")
+    static let viaPajucara = CarrierID(rawValue: "via-pajucara")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3572,6 +3584,18 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .onlogExpress,
         .whatsship,
         .amazonOrder,
+        .atualCargas,
+        .azems,
+        .bestFreightCn,
+        .domina,
+        .g4sKenya,
+        .khazenly,
+        .maldivesPost,
+        .patrus,
+        .reunidasCargas,
+        .silpoPack,
+        .sprintEg,
+        .viaPajucara,
     ]
 
     init(from decoder: Decoder) throws {

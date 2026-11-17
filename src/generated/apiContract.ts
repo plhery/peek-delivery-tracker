@@ -15490,7 +15490,22 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "swiftx"
+      "adapter": "swiftx",
+      "requirements": [
+        {
+          "field": "phoneDigits",
+          "validator": "phoneLastFour",
+          "optional": true,
+          "showsMore": true,
+          "label": "Last 4 digits of the recipient's phone",
+          "type": "text",
+          "help": "SwiftX shows the scans only with the last four digits of the recipient's phone. Without them, other sources are asked.",
+          "pattern": "^[0-9]{4}$",
+          "maxLength": 4,
+          "inputMode": "numeric",
+          "autoComplete": "off"
+        }
+      ]
     },
     "trackingUrlTemplate": "https://swiftx-express.com/track?trackingNumber={trackingNumber}",
     "linkRules": [
@@ -42313,7 +42328,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lhtex"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -59822,6 +59837,269 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": []
+  },
+  "atual-cargas": {
+    "displayName": "Atual Cargas",
+    "aliases": [
+      "Atual Cargas Transportes"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#0d3b70",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cliente.atualcargas.com.br/rastreamento"
+  },
+  "azems": {
+    "displayName": "Azer Express Post",
+    "aliases": [
+      "AZEMS",
+      "Azərekspresspoçt"
+    ],
+    "countries": [
+      "AZ"
+    ],
+    "color": "#f79122",
+    "selectable": true,
+    "timezone": "Asia/Baku",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.azems.az/az/gonderis-izle?package_id={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "azems.az",
+          "www.azems.az"
+        ],
+        "pathPattern": "^/(?:az/gonderis-izle|en/track-shipment|ru/otsledit-posylku)/?$",
+        "params": [
+          "package_id"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.azems.az/az/gonderis-izle"
+  },
+  "best-freight-cn": {
+    "displayName": "BEST Freight China",
+    "aliases": [
+      "百世快运",
+      "百世物流",
+      "BEST Inc CN",
+      "BEST Freight (China)"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#d50032",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "best-freight-cn"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.800best.com/freight/track"
+  },
+  "domina": {
+    "displayName": "Domina",
+    "aliases": [
+      "Domina Entrega Total",
+      "Domina Entrega Total S.A.S."
+    ],
+    "countries": [
+      "CO"
+    ],
+    "color": "#1722ff",
+    "selectable": true,
+    "timezone": "America/Bogota",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://tracking.domina.com.co/"
+  },
+  "g4s-kenya": {
+    "displayName": "G4S Courier Kenya",
+    "aliases": [
+      "G4S Kenya",
+      "G4S Kenya Limited"
+    ],
+    "countries": [
+      "KE"
+    ],
+    "color": "#ef3e42",
+    "selectable": true,
+    "timezone": "Africa/Nairobi",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.g4s.com/en-ke/track-my-shipment"
+  },
+  "khazenly": {
+    "displayName": "Khazenly",
+    "countries": [
+      "EG"
+    ],
+    "color": "#0073ff",
+    "selectable": true,
+    "timezone": "Africa/Cairo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://track.khazenly.com/?referenceNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "track.khazenly.com"
+        ],
+        "pathPattern": "^/?$",
+        "params": [
+          "referenceNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://track.khazenly.com/"
+  },
+  "maldives-post": {
+    "displayName": "Maldives Post",
+    "aliases": [
+      "Maldives Post Limited"
+    ],
+    "countries": [
+      "MV"
+    ],
+    "color": "#c02f34",
+    "selectable": true,
+    "timezone": "Indian/Maldives",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.maldivespost.com/tracker?tracking_number={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "maldivespost.com",
+          "www.maldivespost.com"
+        ],
+        "pathPattern": "^/tracker/?$",
+        "params": [
+          "tracking_number"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.maldivespost.com/tracker"
+  },
+  "patrus": {
+    "displayName": "Patrus Transportes",
+    "aliases": [
+      "Patrus"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#c60c35",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://patrus.com.br/rastreie-sua-carga/"
+  },
+  "reunidas-cargas": {
+    "displayName": "Reunidas Cargas",
+    "aliases": [
+      "Reunidas Transportadora Rodoviária de Cargas"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#273e74",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://reunidas.com.br/cargas"
+  },
+  "silpo-pack": {
+    "displayName": "Silpo Pack",
+    "aliases": [
+      "Silpo Systems SRL"
+    ],
+    "countries": [
+      "DO"
+    ],
+    "color": "#16163f",
+    "selectable": true,
+    "timezone": "America/Santo_Domingo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://silposystems.com/tracking/"
+  },
+  "sprint-eg": {
+    "displayName": "Sprint",
+    "countries": [
+      "EG"
+    ],
+    "color": "#ff007d",
+    "selectable": true,
+    "timezone": "Africa/Cairo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://portal.sprint.xyz/orderTracking"
+  },
+  "via-pajucara": {
+    "displayName": "Via Pajuçara",
+    "aliases": [
+      "Empresa de Transportes Pajuçara"
+    ],
+    "countries": [
+      "BR"
+    ],
+    "color": "#003e83",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://cliente.viapajucara.com.br/rastrear"
   }
 } as const;
 
@@ -61634,7 +61912,19 @@ export const CARRIER_IDS = [
   "zmc-express",
   "onlog-express",
   "whatsship",
-  "amazon-order"
+  "amazon-order",
+  "atual-cargas",
+  "azems",
+  "best-freight-cn",
+  "domina",
+  "g4s-kenya",
+  "khazenly",
+  "maldives-post",
+  "patrus",
+  "reunidas-cargas",
+  "silpo-pack",
+  "sprint-eg",
+  "via-pajucara"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

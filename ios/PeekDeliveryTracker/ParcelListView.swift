@@ -1776,12 +1776,12 @@ private struct ExperimentalNextDeliveryPass: View {
                 Spacer(minLength: 0)
                 // A parcel that has arrived is nobody's next: the words keep their room and go.
                 // It keeps to the top of the card, clear of the route drawn below it, in the card's ink: anything fainter
-                // reads under 4.5:1 on some carriers' cards (`ContrastTests`).
+                // reads under 4.5:1 on some carriers' cards. Over the map, the ink that reads on its countries (`ContrastTests`).
                 Text(localizer.text("app.nextUp"))
                     .font(.caption2)
                     .textCase(.uppercase)
                     .tracking(1.2)
-                    .foregroundStyle(identity.ink)
+                    .foregroundStyle(placed ? identity.mapInk : identity.ink)
                     .lineLimit(1)
                     .minimumScaleFactor(0.7)
                     .dynamicTypeSize(...DynamicTypeSize.accessibility1)
@@ -1962,7 +1962,8 @@ private struct ExperimentalParcelPassCard: View {
                         }
                     }
                         .font(.caption)
-                        .foregroundStyle(identity.ink)
+                        // A long status runs over the start of the route's map.
+                        .foregroundStyle(drawsRoute ? identity.mapInk : identity.ink)
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if let flag {

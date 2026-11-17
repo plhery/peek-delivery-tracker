@@ -90,15 +90,33 @@ final class ContrastTests: XCTestCase {
     }
 
     /// A card's quieter words in its ink, as Next up on the list's first card and a shared link's age, read at 4.5:1 or
-    /// more on every carrier's card, and a gift's on its lilac.
-    func testACardsInkReadsOnEveryCarriersCardAndAGiftsOnItsLilac() {
+    /// more on every carrier's card, and a gift's on its lilac. Over the card's map (`MapPalette.tint`), as on a card with a
+    /// route, the map's ink reads on the card, on its land and on a country the parcel passed through, on a past
+    /// delivery's paler card too, and the first open's alert on its capsule there.
+    func testACardsInkReadsOnEveryCarriersCardAndItsMapAndAGiftsOnItsLilac() {
         let catalog = CarrierCatalog(cacheURL: nil)
         let cards = catalog.definitions.map { id, definition in (id.rawValue, CarrierVisualIdentity(id: id.rawValue, carrier: definition)) }
         XCTAssertGreaterThan(cards.count, 1000)
+        let dhl = CarrierVisualIdentity.of(.dhl, catalog: catalog, language: .en)
         for (appearance, traits) in appearances {
             for (name, identity) in cards {
                 let card = shown(identity.surface, traits)
                 XCTAssertGreaterThanOrEqual(ratio(shown(identity.ink, over: card, traits), card), 4.5, "on \(name)'s card, \(appearance)")
+                // A past delivery's card in the list is its colour at 35% on the paper.
+                for (ground, surface) in [("card", card), ("past card", shown(identity.surface, over: shown(Brand.paper, traits), opacity: 0.35, traits))] {
+                    let land = shown(identity.ink, over: surface, opacity: MapPalette.landInk, traits)
+                    let visited = shown(identity.ink, over: land, opacity: MapPalette.visitedInk, traits)
+                    for (place, color) in [("", surface), ("'s land", land), ("'s visited country", visited)] {
+                        XCTAssertGreaterThanOrEqual(ratio(shown(identity.mapInk, traits), color), 4.5,
+                                                    "over the map on \(name)'s \(ground)\(place), \(appearance)")
+                    }
+                }
+            }
+            let card = shown(dhl.surface, traits)
+            let land = shown(dhl.ink, over: card, opacity: MapPalette.landInk, traits)
+            for ground in [card, land, shown(dhl.ink, over: land, opacity: MapPalette.visitedInk, traits)] {
+                let capsule = shown(dhl.ink, over: ground, opacity: 0.1, traits)
+                XCTAssertGreaterThanOrEqual(ratio(shown(dhl.mapInk(backing: 0.1), traits), capsule), 4.5, "the first open's alert, \(appearance)")
             }
             let gift = shown(ExperimentalPalette.lilacSurface, traits)
             XCTAssertGreaterThanOrEqual(ratio(shown(ExperimentalPalette.lilac, over: gift, traits), gift), 4.5, "on the gift, \(appearance)")

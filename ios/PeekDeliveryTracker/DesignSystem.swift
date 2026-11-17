@@ -109,6 +109,78 @@ enum Brand {
         return Color(uiColor: dynamic)
     }
 
+    /// `ink` (as `color(light:dark:)` resolves it) where it reads at 4.5:1 or more on everything a card's map puts under
+    /// words (`MapPalette.tint`): the card's `surface`, land (the ink at `MapPalette.landInk` on the card) and a country
+    /// the parcel passed through (at `MapPalette.visitedInk` over that land), each under the ink at `backing` where the
+    /// words have a backing of their own. Where it doesn't, it moves toward the label's black or white in steps of 10%,
+    /// channel by channel, until it does.
+    static func readableOnMap(ink: (light: String, dark: String), surface: (light: String, dark: String), backing: CGFloat = 0) -> Color {
+        let key = "map|\(ink.light)|\(ink.dark)|\(surface.light)|\(surface.dark)|\(backing)" as NSString
+        if let cached = dynamicColors.object(forKey: key) { return Color(uiColor: cached) }
+        func shade(dark: Bool, high: Bool) -> PlatformColor {
+            func resolved(_ hex: String) -> [CGFloat] {
+                var color = PlatformColor(Color(hex: hex))
+                #if os(macOS)
+                color = color.usingColorSpace(.sRGB) ?? color
+                #endif
+                return channels(high ? contrasted(color) : color)
+            }
+            let shown = readableOnMap(resolved(dark ? ink.dark : ink.light), on: resolved(dark ? surface.dark : surface.light),
+                                      label: dark ? 1 : 0, backing: backing)
+            return PlatformColor(red: shown[0], green: shown[1], blue: shown[2], alpha: 1)
+        }
+        let (light, dark) = (shade(dark: false, high: false), shade(dark: true, high: false))
+        let (lightHigh, darkHigh) = (shade(dark: false, high: true), shade(dark: true, high: true))
+        #if os(macOS)
+        let dynamic = NSColor(name: nil) { appearance in
+            switch appearance.bestMatch(from: [.aqua, .darkAqua, .accessibilityHighContrastAqua, .accessibilityHighContrastDarkAqua]) {
+            case .darkAqua: dark
+            case .accessibilityHighContrastAqua: lightHigh
+            case .accessibilityHighContrastDarkAqua: darkHigh
+            default: light
+            }
+        }
+        #else
+        let dynamic = UIColor { traits in
+            let high = traits.accessibilityContrast == .high
+            return traits.userInterfaceStyle == .dark ? (high ? darkHigh : dark) : (high ? lightHigh : light)
+        }
+        #endif
+        dynamicColors.setObject(dynamic, forKey: key)
+        return Color(uiColor: dynamic)
+    }
+
+    /// `ink`'s sRGB channels, mixed toward `label` (0 or 1) by the first tenth that reads at 4.5:1 on the card and on
+    /// its map's land and visited countries, each under the ink at `backing`.
+    static func readableOnMap(_ ink: [CGFloat], on surface: [CGFloat], label: CGFloat, backing: CGFloat = 0) -> [CGFloat] {
+        func over(_ ground: [CGFloat], _ opacity: CGFloat) -> [CGFloat] {
+            zip(ink, ground).map { $0 * opacity + $1 * (1 - opacity) }
+        }
+        let land = over(surface, MapPalette.landInk)
+        let grounds = [surface, land, over(land, MapPalette.visitedInk)].map { over($0, backing) }
+        for tenth in 0...10 {
+            let mixed = ink.map { $0 + (label - $0) * CGFloat(tenth) / 10 }
+            if grounds.allSatisfy({ contrast(mixed, $0) >= 4.5 }) { return mixed }
+        }
+        return [label, label, label]
+    }
+
+    /// WCAG 2's contrast ratio of two opaque sRGB colours.
+    static func contrast(_ first: [CGFloat], _ second: [CGFloat]) -> CGFloat {
+        func luminance(_ rgb: [CGFloat]) -> CGFloat {
+            let linear = rgb.map { $0 <= 0.04045 ? $0 / 12.92 : pow(($0 + 0.055) / 1.055, 2.4) }
+            return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
+        }
+        let (one, other) = (luminance(first), luminance(second))
+        return (max(one, other) + 0.05) / (min(one, other) + 0.05)
+    }
+
+    private static func channels(_ color: PlatformColor) -> [CGFloat] {
+        var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0
+        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        return [red, green, blue]
+    }
+
     /// A little further from the middle grey, for increased contrast.
     private static func contrasted(_ color: PlatformColor) -> PlatformColor {
         var red: CGFloat = 0, green: CGFloat = 0, blue: CGFloat = 0, alpha: CGFloat = 0

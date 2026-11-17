@@ -478,7 +478,8 @@ private struct SharedParcelCard: View {
             HStack(alignment: .firstMark, spacing: 4) {
                 marks(identity, delivery: delivery).layoutPriority(1)
                 Spacer(minLength: 8)
-                LinkRefreshButton(parcel: parcel, refreshing: refreshing, tint: identity.ink, action: onRefresh)
+                // Over the map, the ink that reads on its countries.
+                LinkRefreshButton(parcel: parcel, refreshing: refreshing, tint: placed ? identity.mapInk : identity.ink, action: onRefresh)
                     .onGeometryChange(for: CGRect.self) { $0.frame(in: .named(Self.cardSpace)) } action: { refreshButton = $0 }
                 if placed {
                     Button { showingMap = true } label: {
@@ -715,7 +716,8 @@ private struct LinkRefreshButton: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
-        // The card's ink: the age is words, and anything fainter reads under 4.5:1 on some cards (`ContrastTests`).
+        // The card's ink, or over its map the ink that reads there: the age is words, and anything fainter reads under
+        // 4.5:1 on some cards (`ContrastTests`).
         .foregroundStyle(tint)
         .disabled(refreshing)
         .accessibilityLabel(localizer.text("detail.checkNow"))

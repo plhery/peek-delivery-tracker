@@ -488,6 +488,12 @@ struct CarrierVisualIdentity {
 
     var surface: Color { Brand.color(light: colors[0], dark: colors[1]) }
     var ink: Color { Brand.color(light: colors[2], dark: colors[3]) }
+    /// The ink for words over the card's map, which reads on every country it draws (`Brand.readableOnMap`).
+    var mapInk: Color { mapInk(backing: 0) }
+    /// The same, for words on a backing of the ink at `backing` over the map.
+    func mapInk(backing: CGFloat) -> Color {
+        Brand.readableOnMap(ink: (colors[2], colors[3]), surface: (colors[0], colors[1]), backing: backing)
+    }
     var brand: Color { Brand.color(light: colors[4], dark: colors[5]) }
     var truck: Color { Color(hex: colors[6]) }
     var edge: Color { Color(hex: colors[7]) }

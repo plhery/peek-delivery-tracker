@@ -277,7 +277,7 @@ struct FirstOpenView: View {
                                 Text(status(FirstOpenJourney.parcel(step: step, name: name))).hidden()
                             }
                             Text(status(parcel))
-                                .foregroundStyle(identity.ink)
+                                .foregroundStyle(identity.mapInk)
                                 .id(step)
                                 .transition(.opacity)
                         }
@@ -460,7 +460,7 @@ struct FirstOpenView: View {
                 Text(parcel.label).font(.largeTitle.weight(.semibold)).foregroundStyle(Color.primary)
                 Text(status(parcel))
                     .font(.subheadline)
-                    .foregroundStyle(identity.ink)
+                    .foregroundStyle(identity.mapInk)
                     .id(step)
                     .transition(.opacity)
             }
@@ -666,16 +666,18 @@ struct FirstOpenHeroLayout: Hashable {
 private struct FirstOpenPing: View {
     let detail: String
     let identity: CarrierVisualIdentity
+    /// The capsule under the words: the ink at 10%.
+    static let backing: CGFloat = 0.1
 
     var body: some View {
         HStack(spacing: 6) {
             Image(systemName: "bell.fill").font(.system(size: 9))
             Text(detail).font(.caption.weight(.medium)).lineLimit(1).minimumScaleFactor(0.8)
         }
-        .foregroundStyle(identity.ink)
+        .foregroundStyle(identity.mapInk(backing: Self.backing))
         .padding(.horizontal, 10)
         .frame(height: FirstOpenHeroLayout.pingHeight)
-        .background(identity.ink.opacity(0.1), in: Capsule())
+        .background(identity.ink.opacity(Self.backing), in: Capsule())
         .accessibilityHidden(true)
     }
 }

@@ -514,10 +514,15 @@ struct MapPalette {
         )
     }
 
+    /// How much of a card's ink its engraving's land takes, and a country the parcel passed through over that land.
+    /// Words a card writes over its map read on both (`Brand.readableOnMap`).
+    static let landInk: CGFloat = 0.10
+    static let visitedInk: CGFloat = 0.17
+
     /// The card's engraving: the carrier's ink on the card's own colour.
     static func tint(ink: Color, surface: Color) -> MapPalette {
         MapPalette(
-            space: nil, ocean: nil, land: ink.opacity(0.10), visited: ink.opacity(0.17), urban: ink.opacity(0.07), road: ink.opacity(0.18),
+            space: nil, ocean: nil, land: ink.opacity(landInk), visited: ink.opacity(visitedInk), urban: ink.opacity(0.07), road: ink.opacity(0.18),
             border: surface.opacity(0.8),
             night: nil, grid: nil, limb: ink.opacity(0.16), shade: nil, route: ink, routeMuted: ink.opacity(0.45),
             accent: ink, label: ink, labelStrong: ink, labelBackground: surface.opacity(0.92), dotRing: surface,

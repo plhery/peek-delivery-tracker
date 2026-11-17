@@ -69,7 +69,7 @@ Correos Express no explica `EN DESTINO`, `NUEVO REPARTO`, `ENTREGADO EN PUNTO DE
 El contrato lo tiene el remitente, por ejemplo la tienda, y Correos Express te manda a él en la mayoría de los problemas.
 
 - **No llega o no se actualiza:** el seguimiento puede tardar unas horas en actualizarse entre centros logísticos. Tras 24-48 horas sin cambios, Correos Express dice que contactes con el remitente. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating).
-- **Mal tiempo:** la página de [restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales1) recoge las zonas afectadas en cada momento. El 9 de octubre de 2026 tenía un aviso temporal por lluvias intensas en Tarragona, Castellón y Valencia: si el tiempo no permite repartir con seguridad, el envío se registra con la incidencia `Fuerza mayor / Área inaccesible / Meteorología`.
+- **Mal tiempo:** Correos Express puede restringir los envíos a ciertos destinos por el tiempo; la página de [restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) recoge las vigentes.
 - **Entregado pero no recibido:** revisa el detalle de la entrega en el seguimiento de Correos Express y, si hace falta, contacta con el remitente. Ver [paquete entregado pero no recibido](guide:delivered-not-received).
 - **Dañado o incompleto:** en envíos nacionales, las condiciones de transporte piden anotar las reservas por escrito al recibirlo, o en los 7 días naturales siguientes si el daño o la pérdida no se veían.
 - **Perdido o devuelto:** Correos Express no publica un procedimiento para destinatarios. Habla con la tienda.
@@ -125,7 +125,7 @@ Correos Express avisa al remitente y espera sus instrucciones, según sus condic
 - [Correos Express: Términos y condiciones del transporte](https://www.correosexpress.es/es/atencion-al-cliente/tyc-transporte) – rehúse, reservas, reclamaciones
 - [Correos Express: Aviso Legal](https://www.correosexpress.es/es/legales/aviso-legal) – nombre legal
 - [Correos Express: Alerta de seguridad](https://www.correosexpress.es/es/legales/alerta-de-seguridad) – fraudes
-- [Correos Express: Restricciones y avisos de distribución](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales1) – meteorología
+- [Correos Express: Restricciones y avisos de distribución](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) – meteorología
 - [Correos Express: Envío rápido y seguro a España y Portugal](https://www.correosexpress.es/) – servicios, segundo intento
 - [Correos Express: Quiénes somos](https://www.correosexpress.es/es/sobre-correos-express/quienes-somos) – Grupo Correos, 24 horas
 - [Correos Express: Envíos a España y Portugal](https://www.correosexpress.es/es/atencion-al-cliente/envios-en-espana-y-portugal) – 24/48 horas

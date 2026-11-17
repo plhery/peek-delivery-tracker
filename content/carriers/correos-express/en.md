@@ -69,7 +69,7 @@ The sender, usually the shop, holds the contract; Correos Express sends recipien
 - **Attempted delivery while you were home:** check the tracking detail. Correos Express says access problems or incomplete details can stop a delivery; then rebook as above.
 - **Delivered but not received:** in Spain, check the delivery detail on Correos Express's tracking, then contact the sender. In Portugal, write to destinatarioscep@correosexpress.com. See [delivered but not received](guide:delivered-not-received).
 - **Damaged:** within Spain, the transport terms ask for written reservations at handover, or within 7 calendar days for hidden damage or loss. In Portugal, photograph the packaging and contents, and contact the sender within 7 days.
-- **Bad weather:** "Fuerza mayor / Área inaccesible / Meteorología" means delivery wasn't safe. The [notices page](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales1) lists current restrictions.
+- **Bad weather:** Correos Express can restrict shipments to some destinations because of the weather; its [notices page](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) lists current restrictions.
 - **Returned:** after `DEVUELTO`, ask the sender.
 
 ## Correos Express contact number and customer service
@@ -121,7 +121,7 @@ No: it lists no English channel, and its tracking and help are only in Spanish a
 - [Correos Express: Internacional Express para empresas](https://www.correosexpress.es/es/empresas/productos/internacional-express) – two attempts, customs outside the EU
 - [Correos: Correos delivery tracker](https://www.correos.es/es/en/tools/tracker/items) – Correos's English tracker
 - [Correos Express: Términos y condiciones del transporte](https://www.correosexpress.es/es/atencion-al-cliente/tyc-transporte) – reservations
-- [Correos Express: Restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales1) – weather incident
+- [Correos Express: Restricciones y avisos](https://www.correosexpress.es/es/atencion-al-cliente/situaciones-especiales) – weather restrictions
 - [Correos Express: Alerta de seguridad](https://www.correosexpress.es/es/legales/alerta-de-seguridad) – scam warning
 - [Correos Express Portugal: Siga seu envio](https://s.correosexpress.com/SeguimientoSinCP/search-pt) – Portuguese tracker, Portuguese menus
 - [Correos Express Portugal: Perguntas frequentes](https://www.correosexpress.pt/pt/apoio-ao-cliente/perguntas-frequentes) – deliveries, ESTACIONADO, damage

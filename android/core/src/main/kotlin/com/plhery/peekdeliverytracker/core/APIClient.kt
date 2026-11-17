@@ -117,6 +117,13 @@ class HttpResponse(val statusCode: Int, headers: Map<String, String> = emptyMap(
 
     /** `value(forHTTPHeaderField:)`. */
     fun header(name: String): String? = headers.entries.firstOrNull { it.key.equals(name, ignoreCase = true) }?.value
+
+    /**
+     * The service's own answer that what was asked for isn't there: a 404 with its JSON error. Any other 404, such as
+     * the proxy's text while the server is up and the app isn't yet, is the server failing, and forgets nothing.
+     */
+    val isServiceNotFound: Boolean
+        get() = statusCode == 404 && JsonSerialization.stringsOfObject(body)?.get("error") != null
 }
 
 /**
@@ -666,7 +673,7 @@ class DeliveryApiClient(
                 } catch (_: Exception) {
                     throw DeliveryApiError.InvalidResponse()
                 }
-                404 -> null
+                404 -> if (response.isServiceNotFound) null else throw DeliveryApiError.ServiceFailed(404)
                 410 -> throw ParcelLinkStopped()
                 429 -> throw DeliveryApiError.RateLimited(retryAfterSeconds(response.header("Retry-After")))
                 else -> throw DeliveryApiError.ServiceFailed(response.statusCode)

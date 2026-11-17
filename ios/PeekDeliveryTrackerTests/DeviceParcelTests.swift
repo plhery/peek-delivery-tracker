@@ -423,6 +423,46 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(storage.keys["22222222222C"])
     }
 
+    /// While the server restarts, its proxy answers "404 page not found" as text: the server failing, and nothing on
+    /// this iPhone goes. Only the service's own 404, with its JSON error, forgets a parcel and its key.
+    func testAProxysNotFoundWhileTheServerRestartsForgetsNothing() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        nonisolated(unsafe) var answer = (404, Data("404 page not found\n".utf8))
+        PostcodeTestURLProtocol.handler = { _ in answer }
+        let configuration = PostcodeTestURLProtocol.configuration
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "Running shoes", archivedAt: nil,
+                                        parcel: Parcel(shared: package(UUID())), checkedAt: .distantPast)]
+        storage.forgetting = ["22222222222C": key]
+        let device = DeviceParcels(client: DeviceParcelClient.api(configuration: configuration, transport: transport), storage: storage)
+
+        do {
+            try await device.refresh()
+            XCTFail("Expected the server's failure")
+        } catch DeliveryAPIError.serviceFailed(let status) {
+            XCTAssertEqual(status, 404)
+        }
+        XCTAssertEqual(device.list().map(\.label), ["Running shoes"])
+        XCTAssertEqual(storage.keys, ["22222222222A": key, "22222222222B": key], "A key went for a proxy's 404")
+        XCTAssertEqual(storage.forgetting, ["22222222222C": key], "A forget counted as told for a proxy's 404")
+        do {
+            _ = try await DeliveryAPIClient.publicParcel(linkID: "22222222222A", configuration: configuration, transport: transport)
+            XCTFail("A link sheet would say the parcel was forgotten")
+        } catch DeliveryAPIError.serviceFailed(let status) {
+            XCTAssertEqual(status, 404)
+        }
+
+        answer = (404, Data(#"{"error":"Parcel unavailable"}"#.utf8))
+        try await device.refresh()
+        XCTAssertEqual(device.list().map(\.label), [])
+        XCTAssertEqual(storage.keys, [:])
+        XCTAssertEqual(storage.forgetting, [:])
+        let gone = try await DeliveryAPIClient.publicParcel(linkID: "22222222222A", configuration: configuration, transport: transport)
+        XCTAssertNil(gone)
+    }
+
     func testAParcelWaitingForItsCarrierIsAskedAboutAtOnce() async throws {
         let id = UUID()
         var now = Date(timeIntervalSince1970: 1_800_000_000)

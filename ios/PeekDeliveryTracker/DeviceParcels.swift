@@ -109,8 +109,9 @@ struct DeviceLookupsSpent: Error, Equatable {}
 /// its owner key only.
 struct DeviceParcelClient: Sendable {
     var lookup: @Sendable (PublicLookupRequest) async throws -> PublicLookupResponse
-    /// Nil when the service no longer has the parcel, or no longer shares it with a reader without the key. `hidden`:
-    /// read with no window on screen, so the service doesn't count it as a look.
+    /// Nil when the service no longer has the parcel, or no longer shares it with a reader without the key: its own 404
+    /// or 410. A proxy's 404 while the server restarts throws, and the parcel stays. `hidden`: read with no window on
+    /// screen, so the service doesn't count it as a look.
     var read: @Sendable (_ linkID: String, _ key: String?, _ hidden: Bool) async throws -> PublicParcelResponse?
     var forget: @Sendable (_ linkID: String, _ key: String) async throws -> Void
     /// Changes what the link shows to others, or stops and resumes its sharing.
@@ -171,13 +172,13 @@ struct DeviceParcelClient: Sendable {
             read: { linkID, key, hidden in
                 let (data, response) = try await send("api/public/parcels/\(linkID)", method: "GET", key: key,
                                                       query: hidden ? [URLQueryItem(name: "hidden", value: "true")] : [])
-                if response.statusCode == 404 || response.statusCode == 410 { return nil }
+                if response.statusCode == 410 || response.isServiceNotFound(data) { return nil }
                 guard response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicParcelResponse.self, data)
             },
             forget: { linkID, key in
                 let (data, response) = try await send("api/public/parcels/\(linkID)", method: "DELETE", key: key)
-                guard response.statusCode == 204 || response.statusCode == 404 else { throw failure(data, response) }
+                guard response.statusCode == 204 || response.isServiceNotFound(data) else { throw failure(data, response) }
             },
             update: { linkID, key, change in
                 let (data, response) = try await send("api/public/parcels/\(linkID)", method: "PATCH", key: key, body: try JSONEncoder.deliveryTracker.encode(change))
@@ -201,7 +202,7 @@ struct DeviceParcelClient: Sendable {
                 let (data, response) = try await send("api/public/parcels/\(linkID)/app-alerts", method: "PUT", key: key, body: try JSONEncoder.deliveryTracker.encode(alert))
                 switch response.statusCode {
                 case 204: return .on
-                case 404: return .gone
+                case 404 where response.isServiceNotFound(data): return .gone
                 case 409: return .full
                 case 410: return .stopped
                 case 503: return .unavailable

@@ -636,7 +636,7 @@ private class DebugFixtures(val publicParcel: PublicParcelResponse, val publicGi
  *   not;
  * - with `X-Parcel-Key` only when there is a key, and the key in that header alone. The device's app alerts follow
  *   the same rule (`DeviceParcels.setAlert`): the key goes along only for a parcel whose owner key this phone holds;
- * - a 404 is null, a 410 throws `ParcelLinkStopped`, a 429 throws `DeliveryApiError.RateLimited` with the wait its
+ * - the service's own 404, with its JSON error (`HttpResponse.isServiceNotFound`), is null, a 410 throws `ParcelLinkStopped`, a 429 throws `DeliveryApiError.RateLimited` with the wait its
  *   `Retry-After` asks for (`DeliveryApiClient.retryAfterSeconds`), a 200 whose body is not a link (`{}`) throws
  *   `DeliveryApiError.InvalidResponse` and any other status `DeliveryApiError.ServiceFailed`: both a service failure.
  *

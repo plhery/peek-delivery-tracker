@@ -187,7 +187,10 @@ class DeviceLookupsSpent : Exception() {
  */
 class DeviceParcelClient(
     val lookup: suspend (PublicLookupRequest) -> PublicLookupResponse,
-    /** Nil when the service no longer has the parcel, or no longer shares it with a reader without the key. */
+    /**
+     * Nil when the service no longer has the parcel, or no longer shares it with a reader without the key: its own 404 or
+     * 410. A proxy's 404 while the server restarts throws, and the parcel stays.
+     */
     val read: suspend (linkId: String, key: String?) -> PublicParcelResponse?,
     val forget: suspend (linkId: String, key: String) -> Unit,
     /** Changes what the link shows to others, or stops and resumes its sharing. */
@@ -258,7 +261,7 @@ class DeviceParcelClient(
                 },
                 read = { linkId, key ->
                     val response = send("api/public/parcels/$linkId", "GET", key)
-                    if (response.statusCode == 404 || response.statusCode == 410) {
+                    if (response.statusCode == 410 || response.isServiceNotFound) {
                         null
                     } else {
                         if (response.statusCode != 200) throw failure(response)
@@ -267,7 +270,7 @@ class DeviceParcelClient(
                 },
                 forget = { linkId, key ->
                     val response = send("api/public/parcels/$linkId", "DELETE", key)
-                    if (response.statusCode != 204 && response.statusCode != 404) throw failure(response)
+                    if (response.statusCode != 204 && !response.isServiceNotFound) throw failure(response)
                 },
                 update = { linkId, key, change ->
                     val response = send("api/public/parcels/$linkId", "PATCH", key, encoder.encode(UpdateParcelLinkRequest.serializer(), change))
@@ -294,7 +297,7 @@ class DeviceParcelClient(
                     val response = send("api/public/parcels/$linkId/app-alerts", "PUT", key, encoder.encode(ParcelAppAlertRequest.serializer(), alert))
                     when (response.statusCode) {
                         204 -> DeviceAlertAnswer.On
-                        404 -> DeviceAlertAnswer.Gone
+                        404 -> if (response.isServiceNotFound) DeviceAlertAnswer.Gone else throw failure(response)
                         409 -> DeviceAlertAnswer.Full
                         410 -> DeviceAlertAnswer.Stopped
                         503 -> DeviceAlertAnswer.Unavailable

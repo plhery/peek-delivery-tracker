@@ -60,12 +60,16 @@ function retryAfterSeconds(response: Response): number | null {
   return Number.isFinite(seconds) ? Math.max(1, seconds) : null;
 }
 
-/** Every answer that is not a success becomes one typed failure; the response itself never escapes. */
+/**
+ * Every answer that is not a success becomes one typed failure; the response itself never escapes. Only the
+ * service's own not-found, a 404 with its JSON error, means the link leads nowhere: a proxy's 404 (its text
+ * "404 page not found" while the server is up and the app isn't yet) is the server failing, and forgets nothing.
+ */
 async function failure(response: Response): Promise<ParcelLinkError> {
   const payload = await response.json().catch(() => null) as { error?: unknown; scope?: unknown } | null;
   const message = typeof payload?.error === 'string' ? payload.error : undefined;
   const retry = retryAfterSeconds(response);
-  if (response.status === 404) return new ParcelLinkError('unavailable');
+  if (response.status === 404 && message !== undefined) return new ParcelLinkError('unavailable');
   if (response.status === 410) return new ParcelLinkError('stopped');
   if (response.status === 409) return new ParcelLinkError('full', { message });
   if (response.status === 429) {
@@ -192,8 +196,12 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
       // A malformed id is a link that leads nowhere; it is not worth a request.
       if (!isParcelLinkId(id)) return 'unavailable';
       const response = await send(`/api/public/parcels/${id}${hidden ? '?hidden=true' : ''}`, { headers: keyHeader(key) }, signal);
-      if (response.status === 404 || (response.status === 410 && !tellStopped)) return 'unavailable';
-      if (!response.ok) throw await failure(response);
+      if (response.status === 410 && !tellStopped) return 'unavailable';
+      if (!response.ok) {
+        const error = await failure(response);
+        if (error.kind === 'unavailable') return 'unavailable';
+        throw error;
+      }
       return parcelLinkView(await answer<ApiPublicParcelResponse>(response));
     },
 

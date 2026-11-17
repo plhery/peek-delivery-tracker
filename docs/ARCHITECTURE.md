@@ -178,7 +178,10 @@ Key server modules:
     minute at most, so the check's result shows as it lands rather than 30 s later. The iPhone
     and Android apps' link sheets do the same, also until the parcel's first check lands.
   - `parcel_links` and the lookup counters are service-role only. An unknown, forgotten,
-    expired or malformed link and a wrong key all get the same answer.
+    expired or malformed link and a wrong key all get the same answer: a 404 with the
+    service's JSON error. The web app and the iPhone and Android apps forget a parcel, or
+    say its link leads nowhere, on that answer alone; any other 404, such as the proxy's
+    text while the server restarts, is the server failing, and the device keeps the parcel.
   - Keeping a parcel runs under the user's own token: the database checks the key, the
     quotas and the duplicate, and gives a viewer's copy none of what the sharer entered.
   - Link ids and keys stay out of request logs, metric labels, analytics and error reports.

@@ -1369,6 +1369,48 @@ class DeviceParcelTests {
         assertFalse("Only an explicit forget asks the service to forget", calls.all.any { it.startsWith("forget") })
     }
 
+    /**
+     * While the server restarts, its proxy answers "404 page not found" as text: the server failing, and nothing on this
+     * phone goes. Only the service's own 404, with its JSON error, forgets a parcel and its key.
+     */
+    @Test
+    fun aProxysNotFoundWhileTheServerRestartsForgetsNothing() = runTest {
+        var answer = HttpResponse(404, mapOf("Content-Type" to "text/plain; charset=utf-8"), "404 page not found\n".toByteArray())
+        val transport = RecordingTransport { answer }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Running shoes", UUID.randomUUID(), at = 0.0))
+        storage.pendingForgets = mapOf("22222222222C" to key)
+        val device = device(DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.UK }), storage, this)
+
+        try {
+            device.refresh()
+            fail("Expected the server's failure")
+        } catch (error: DeliveryApiError.ServiceFailed) {
+            assertEquals(404, error.status)
+        }
+        assertEquals(listOf("Running shoes"), device.list().map { it.label })
+        assertEquals("A key went for a proxy's 404", mapOf("22222222222A" to key, "22222222222B" to key), storage.keys)
+        assertEquals("A forget counted as told for a proxy's 404", mapOf("22222222222C" to key), storage.pendingForgets)
+        try {
+            DeliveryApiClient.publicParcel("22222222222A", configuration = postcodeConfiguration, transport = transport)
+            fail("A link sheet would say the parcel was forgotten")
+        } catch (error: DeliveryApiError.ServiceFailed) {
+            assertEquals(404, error.status)
+        }
+
+        answer = jsonResponse(404, """{"error":"Parcel unavailable"}""")
+        device.refresh()
+        assertTrue(device.isEmpty)
+        assertEquals(emptyMap<String, String>(), storage.keys)
+        assertEquals(emptyMap<String, String>(), storage.pendingForgets)
+        assertNull(DeliveryApiClient.publicParcel("22222222222A", configuration = postcodeConfiguration, transport = transport))
+    }
+
     @Test
     fun aRefreshWithOnlyAnUnreadableCopyLeftFailsWhenItsParcelCannotBeReadAgain() = runTest {
         // A copy this build could not read: its key is kept, its parcel isn't listed.

@@ -665,7 +665,8 @@ final class ParcelLinkTests: XCTestCase {
         defer { transport.invalidateAndCancel() }
         nonisolated(unsafe) var requests: [URLRequest] = []
         nonisolated(unsafe) var status = 204
-        LinkTestURLProtocol.handler = { request in requests.append(request); return (status, [:], Data()) }
+        nonisolated(unsafe) var notFound = Data(#"{"error":"Parcel unavailable"}"#.utf8)
+        LinkTestURLProtocol.handler = { request in requests.append(request); return (status, [:], status == 404 ? notFound : Data()) }
         let client = DeviceParcelClient.api(configuration: LinkTestURLProtocol.configuration, transport: transport)
         let key = String(repeating: "K", count: 43)
         let alert = ParcelAppAlertRequest(token: "a1b2c3d4", environment: .production, preset: .all, locale: .fr)
@@ -688,6 +689,15 @@ final class ParcelLinkTests: XCTestCase {
             status = code
             let answer = try await client.setAlert(linkID, nil, alert)
             XCTAssertEqual(answer, expected, "\(code)")
+        }
+        // A proxy's 404 while the server restarts says nothing of the link.
+        status = 404
+        notFound = Data("404 page not found\n".utf8)
+        do {
+            _ = try await client.setAlert(linkID, nil, alert)
+            XCTFail("Expected the server's failure")
+        } catch DeliveryAPIError.serviceFailed(let code) {
+            XCTAssertEqual(code, 404)
         }
         status = 429
         do {

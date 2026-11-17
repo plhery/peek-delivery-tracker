@@ -203,7 +203,11 @@ class ApiOverOkHttpTest {
     fun appAlertsGoWithTheKeyOnlyForTheOwnerAndStopWithTheTokenAlone() = runBlocking {
         keepACookie()
         var code = 204
-        answer = { MockResponse.Builder().code(code).build() }
+        // The service's own 404 says so in JSON; a proxy's would not.
+        answer = {
+            if (code == 404) MockResponse.Builder().code(404).body("""{"error":"Parcel unavailable"}""").addHeader("Content-Type", "application/json").build()
+            else MockResponse.Builder().code(code).build()
+        }
         val client = DeviceParcelClient.api(configuration, transport, verification(), region = { Locale.UK })
         val key = "K".repeat(43)
         val alert = ParcelAppAlertRequest(

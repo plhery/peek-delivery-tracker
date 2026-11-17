@@ -804,7 +804,8 @@ class ParcelLinkTests {
     @Test
     fun appAlertsGoWithTheKeyOnlyForTheOwnerAndStopWithTheTokenAlone() = runTest {
         var status = 204
-        val transport = RecordingTransport { HttpResponse(status) }
+        var notFound = """{"error":"Parcel unavailable"}"""
+        val transport = RecordingTransport { HttpResponse(status, body = if (status == 404) notFound.toByteArray() else ByteArray(0)) }
         val verification = NativeVerification(
             NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
             TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
@@ -834,6 +835,15 @@ class ParcelLinkTests {
         )) {
             status = code
             assertEquals("$code", expected, client.setAlert(linkId, null, alert))
+        }
+        // A proxy's 404 while the server restarts says nothing of the link.
+        status = 404
+        notFound = "404 page not found\n"
+        try {
+            client.setAlert(linkId, null, alert)
+            fail("Expected the server's failure")
+        } catch (error: DeliveryApiError.ServiceFailed) {
+            assertEquals(404, error.status)
         }
         status = 429
         try {

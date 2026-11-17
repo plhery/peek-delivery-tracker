@@ -690,6 +690,8 @@ class APIClientTests {
         val cases = listOf(
             jsonResponse(410, """{"error":"Parcel not shared"}""") to "stopped",
             jsonResponse(404, """{"error":"Parcel unavailable"}""") to "ok null",
+            // The proxy's own 404 while the server restarts: the server failing, not a link that leads nowhere.
+            jsonResponse(404, "404 page not found\n", mapOf("Content-Type" to "text/plain; charset=utf-8")) to "serviceFailed(404)",
             jsonResponse(429, headers = mapOf("Retry-After" to "12")) to "rateLimited(12.0)",
             // A date already gone.
             jsonResponse(429, headers = mapOf("Retry-After" to "Mon, 21 Sep 2026 14:14:20 GMT")) to "rateLimited(0.0)",
@@ -707,7 +709,7 @@ class APIClientTests {
         }
         // URLRequest never sets a value with a line break; other characters go as they are.
         for ((key, sent) in listOf("a\nb" to null, "a\rb" to null, "kéy" to "kéy")) {
-            val transport = serving(jsonResponse(404))
+            val transport = serving(jsonResponse(404, """{"error":"Parcel unavailable"}"""))
             DeliveryApiClient.publicParcel("k7Qm2xHd9RtW", key, configuration, transport)
             assertEquals(sent, transport.requests.single().header("X-Parcel-Key"))
         }

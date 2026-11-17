@@ -220,6 +220,14 @@ describe('the API backend', () => {
     expect(request).toHaveBeenCalledTimes(1);
   });
 
+  it('reads a proxy’s 404, while the server is up and the app is not yet, as the server failing: nothing leads nowhere', async () => {
+    const proxy = () => new Response('404 page not found\n', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
+    const { links } = api(proxy(), proxy(), new Response('<!doctype html><title>404</title>', { status: 404, headers: { 'Content-Type': 'text/html' } }));
+    expect((await failure(links.readParcelLink(ID))).kind).toBe('server');
+    expect((await failure(links.forgetParcelLink(ID, KEY))).kind).toBe('server');
+    expect((await failure(links.readParcelLink(ID, { tellStopped: true }))).kind).toBe('server');
+  });
+
   it('reads a link whose sharing was stopped as unavailable, and as stopped for a page that asks to be told', async () => {
     const { links, request } = api(json({ error: 'Parcel not shared' }, 410), json({ error: 'Parcel not shared' }, 410));
     expect(await links.readParcelLink(ID)).toBe('unavailable');

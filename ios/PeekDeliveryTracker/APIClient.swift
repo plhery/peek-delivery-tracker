@@ -52,6 +52,15 @@ enum DeliveryAPIError: LocalizedError {
     }
 }
 
+extension HTTPURLResponse {
+    /// The service's own answer that what was asked for isn't there: a 404 with its JSON error. Any other 404, such as
+    /// the proxy's text while the server is up and the app isn't yet, is the server failing, and forgets nothing.
+    func isServiceNotFound(_ data: Data) -> Bool {
+        guard statusCode == 404, let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return false }
+        return payload["error"] is String
+    }
+}
+
 @MainActor
 final class DeliveryAPIClient {
     private let configuration: AppConfiguration
@@ -124,7 +133,7 @@ final class DeliveryAPIClient {
         case 200:
             do { return try JSONDecoder.deliveryTracker.decode(PublicParcelResponse.self, from: data) }
             catch { throw DeliveryAPIError.invalidResponse }
-        case 404: return nil
+        case 404 where response.isServiceNotFound(data): return nil
         case 410: throw ParcelLinkStopped()
         case 429: throw DeliveryAPIError.rateLimited(retryAfterSeconds(response.value(forHTTPHeaderField: "Retry-After")))
         default: throw DeliveryAPIError.serviceFailed(response.statusCode)

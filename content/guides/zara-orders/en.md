@@ -4,7 +4,7 @@ description: Where to track a Zara order in the UK and US, what each status mean
 slug: zara-order-tracking
 picture: A paper shopping bag with rope handles beside a delivery van, and Pip peeking out of the bag.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-17
 ---
 
 You track a Zara order in your Zara account, under Purchases, or through the link in any email Zara sent you if you bought as a guest. Zara's pages don't say which couriers deliver; in the US and Canada, the courier's tracking number is in the shipping email and your order details. If a parcel shows as delivered but isn't there, contact Zara; in the UK and Ireland, it may ask you to fill in a denial of receipt form.
@@ -127,9 +127,9 @@ Zara refunds you on the payment method you used. It processes a return within 72
 
 ## Can I track a Zara parcel in Peek?
 
-Yes, with the courier's tracking number. Zara doesn't name its delivery couriers in these countries, so paste the number into [Peek](/) all the same: Peek follows more than 3,500 carriers. When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right courier. Paste a return label's number the same way.
+Yes, with the courier's tracking number. Zara doesn't name its delivery couriers in these countries, so paste the number into [Peek](/) all the same: Peek follows more than 3,500 carriers. When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right courier. Paste a return label's number the same way. For a return in Canada, Peek recognises a Canada Post number of two letters, nine digits and `CA`, such as `RR000000005CA`, by its shape alone. A 16-digit Canada Post number and a Purolator number (12 digits, or three letters and nine digits) share their shapes with other carriers' numbers, so Peek asks Canada Post or Purolator along with those carriers and shows the one that knows it.
 
-If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the courier publishes. Reports, refunds and returns stay with Zara.
+If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek checks up to every 10 minutes while you have the parcel open, or on its delivery day with notifications on; otherwise hourly. Set notifications to "Delivery only" to hear just when it's out for delivery and when it's delivered. Peek shows what the courier publishes. Reports, refunds and returns stay with Zara.
 
 :::sources
 - [Zara UK: Shipping methods, times and costs](https://www.zara.com/uk/en/help-center/DeliveryMethods) – options, times, prices, working days, store and drop point collection, absent at delivery, new date, large Zara Home items
@@ -167,5 +167,5 @@ If a parcel changes carrier on the way and the first carrier names the one takin
 - [Zara Australia: Order status](https://www.zara.com/au/en/help-center/OrderStatus) – statuses
 - [Zara Australia: How to return](https://www.zara.com/au/en/help-center/HowToReturn) – 30 days, $3.95
 - [Zara Australia: Customer service](https://www.zara.com/au/en/contact) – chat
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – carriers Peek knows
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – carriers Peek knows, Canada Post and Purolator number shapes
 :::

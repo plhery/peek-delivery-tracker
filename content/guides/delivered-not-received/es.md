@@ -20,9 +20,9 @@ Dónde puede estar, según quién lo lleve:
 
 | Transportista | Dónde puede estar |
 | --- | --- |
-| Correos | En tu buzón: el Paq Ligero se entrega «en el buzón, sin necesidad de firma» |
+| Correos | En tu buzón: el Paq Ligero se entrega «en el buzón, sin necesidad de firma». Si Correos no puede dejarlo, te avisa por correo electrónico, SMS o con un papel en el buzón, y te lo guarda 15 días en la oficina que indique |
 | [SEUR](carrier:seur) | Con un vecino, si el seguimiento pone `EL ENVÍO HA SIDO ENTREGADO A UN VECINO.` |
-| [GLS](carrier:gls-es) | En el Parcel Shop que elegiste: GLS te dice que vayas a recogerlo cuando el seguimiento ponga «Entregado». Con EconomyParcel, tras un solo intento, en el Parcel Shop más cercano |
+| [GLS](carrier:gls-es) | En el Parcel Shop que elegiste: GLS te dice que vayas a recogerlo cuando el seguimiento ponga «Entregado», en horario de apertura y con un documento oficial que te identifique. Con EconomyParcel, tras un solo intento, en el Parcel Shop más cercano |
 | InPost | En el Locker o el Punto Pack que elegiste al pedir, donde te espera 5 días naturales. Las taquillas solo se abren con el código que recibe el destinatario |
 
 ¿El seguimiento nunca llegó a poner «Entregado»? Mira [por qué no se actualiza el seguimiento](guide:tracking-not-updating) o [qué significa cada estado](guide:tracking-statuses).
@@ -95,10 +95,10 @@ A veces, pero la indemnización suele ir al remitente, así que por la tienda ll
 
 | Transportista | Qué puedes hacer | Plazo |
 | --- | --- | --- |
-| Correos | Abrir una incidencia o una reclamación en su web, o ir a cualquier oficina, pero la indemnización es para el remitente, salvo que firme una solicitud para que la cobres tú. El Paq Ligero no tiene indemnización por pérdida ni robo | Paq Premium, a partir de 3 días; Paq Estándar, a partir de 4; hasta 1 año desde la admisión. Responde en 1 mes como máximo |
+| Correos | Abrir una incidencia o una reclamación en su web, ir a cualquier oficina o llamar al 915 197 197 o al 900 400 004 (de lunes a viernes, de 8:00 a 20:00; los sábados, de 9:00 a 13:00), pero la indemnización es para el remitente, salvo que firme una solicitud para que la cobres tú. El Paq Ligero no tiene indemnización por pérdida ni robo | Paq Premium, a partir de 3 días; Paq Estándar, a partir de 4; hasta 1 año desde la admisión. Responde en 1 mes como máximo (10 días de media) |
 | GLS | Mirar la nota de paso. Si no basta, escribir a su asistente virtual o por redes sociales, o llamar al 91 080 62 29, con el número de seguimiento a mano | Sus preguntas frecuentes no lo indican |
 | CTT Express | Revisar el estado del envío en su web. Si no se trata de una ausencia ni de una dirección incompleta, usar su formulario de contacto: CTT Express abre un expediente y te contacta | Daños: 7 días naturales. Para lo demás, sus preguntas frecuentes no lo indican |
-| InPost | ¿La taquilla del Locker estaba vacía? Avisa con una foto de la taquilla. Si no, abre una incidencia con su formulario: responde en 15 días como máximo. Si se pierde, InPost indemniza al remitente según el seguro contratado | Taquilla vacía: 24 horas desde la entrega registrada. Retraso: más de 5 días desde el aviso de envío. Pérdida total: a los 30 días de ese aviso |
+| InPost | ¿La taquilla del Locker estaba vacía? Avisa con una foto de la taquilla. Si no, abre una incidencia con su formulario: responde en 15 días como máximo. Si se pierde, InPost indemniza al remitente según el seguro contratado | Taquilla vacía: 24 horas desde la entrega registrada. Retraso: más de 5 días desde el aviso de envío, y como mucho 21 días después de que el pedido esté disponible o se entregue. Pérdida total: a los 30 días de ese aviso |
 
 ### ¿Responde Correos si se pierde un paquete?
 
@@ -116,7 +116,7 @@ A veces, como último recurso:
 
 ### ¿Puede Peek encontrar mi paquete?
 
-No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) solo muestra lo que publica el transportista y no puede contactar con él ni reclamar por ti. Eso sí, consulta el seguimiento hasta una vez cada 2 minutos cuando un paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa) y puede enviarte una notificación, así llegas a la puerta poco después del escaneo «Entregado». A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia, Países Bajos y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane, China Post y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos, Cainiao, J&T Express en Brasil y Onlog Express).
+No. Como cualquier [localizador universal](guide:universal-tracker), [Peek](/) solo muestra lo que publica el transportista y no puede contactar con él ni reclamar por ti. Eso sí, cuando un paquete está en reparto, consulta el seguimiento hasta una vez cada 2 minutos mientras lo tienes abierto en pantalla o con las notificaciones activadas (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de la empresa) y puede enviarte una notificación, así llegas a la puerta poco después del escaneo «Entregado». A través de servicios de seguimiento como 17TRACK, ese día consulta hasta una vez cada 15 minutos mientras lo tienes abierto o con las notificaciones activadas, y algunas empresas fijan un intervalo más largo (cada hora, GLS en Alemania, Austria, Suiza, Francia, Países Bajos y Polonia, DHL eCommerce en Polonia, Royal Mail, Poste Italiane, China Post y Morning Global; cada 30 minutos, PostNL, USPS, GOFO en Estados Unidos, Cainiao, J&T Express en Brasil y Onlog Express).
 
 ### ¿Tengo que denunciar el robo a la policía?
 
@@ -132,14 +132,14 @@ Puedes, aunque ninguna de las normas de arriba lo exige para devolverte el diner
 - [Wallapop: El estado del envío no se actualiza](https://ayuda.wallapop.com/hc/es-es/articles/360015264778-El-estado-del-env%C3%ADo-no-se-actualiza) – entregado pero no recibido: contactar con Wallapop, código de seguimiento
 - [Wallapop: He realizado la compra, ¿ahora qué?](https://ayuda.wallapop.com/hc/es-es/articles/360013447218-He-realizado-la-compra-ahora-qu%C3%A9) – 48 horas, «Todo OK», pago automático al vendedor
 - [Wallapop: ¿Cómo abro una disputa al vendedor?](https://ayuda.wallapop.com/hc/es-es/articles/360004532197--C%C3%B3mo-abro-una-disputa-al-vendedor) – la disputa, solo para un producto recibido
-- [Correos: Paq Ligero](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paq-ligero) – buzón sin firma, sin indemnización
+- [Correos: Paq Ligero](https://www.correos.es/es/es/empresas/enviar/envios-nacionales/paq-ligero) – buzón sin firma, sin indemnización; aviso electrónico o en el buzón y 15 días en la oficina si no se puede entregar (leído el 17 de noviembre de 2026)
 - [Correos: Extravío, envíos nacionales](https://www.correos.es/es/es/atencion-al-cliente/coberturas-y-garantias/nacionales/extravio-nacional) – indemnización al remitente, 3 y 4 días, 1 año
-- [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes
+- [Correos: Tratamiento de consultas y reclamaciones](https://www.correos.es/es/es/atencion-al-cliente/tu-consulta-tu-reclamacion/tratamiento-consultas-reclamaciones) – respuesta en 1 mes, 10 días de media; teléfonos 915 197 197 y 900 400 004 y su horario (leído el 17 de noviembre de 2026)
 - [Correos: Incidencias en el envío](https://www.correos.es/es/es/atencion-al-cliente/recibir/incidencias) – incidencia o reclamación en la web, cualquier oficina
 - [CTT Express: Preguntas frecuentes de incidencias con envíos](https://www.cttexpress.com/preguntas-frecuentes/incidencias) – estado del envío, ausencia o dirección incompleta, formulario, expediente, daños en 7 días naturales
 - [Universal Parcel Scraper: estados de SEUR](https://github.com/plhery/universal-parcel-scraper/blob/main/carriers/seur/statuses.json) – entregado a un vecino
-- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Parcel Shop, «Entregado», EconomyParcel, nota de paso, asistente virtual, redes sociales y teléfono
-- [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Locker y Punto Pack, códigos, 5 días, taquilla vacía en 24 horas, 15 días, retraso, pérdida, remitente
+- [GLS: Preguntas frecuentes para recibir paquetes](https://gls-group.com/ES/es/faq/recibir-paquetes/) – Parcel Shop, «Entregado», horario y documento oficial, EconomyParcel, nota de paso, asistente virtual, redes sociales y teléfono (leído el 17 de noviembre de 2026)
+- [InPost: Atención al cliente, contacto y ayuda](https://www.inpost.es/contacta-con-nosotros) – Locker y Punto Pack, códigos, 5 días, taquilla vacía en 24 horas, 15 días, retraso y su plazo de 21 días, pérdida, remitente (leído el 17 de noviembre de 2026)
 - [BOE: Ley General para la Defensa de los Consumidores y Usuarios](https://www.boe.es/buscar/act.php?id=BOE-A-2007-20555) – Real Decreto Legislativo 1/2007, arts. 2, 66 bis (entrega con la posesión material, carga de la prueba) y 66 ter
 - [Tu Europa: Envío y entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_es.htm) – el vendedor responde de los daños hasta que lo recibes, 30 días
 - [Centro Europeo del Consumidor en España: ECC-Net publica un informe sobre los servicios de mensajería](https://portal-cec.consumo.gob.es/sites/default/files/documentos/NI_PARCEL_DELIVERY_16_08_2024.pdf) – terceros autorizados, portero, firma o clave, foto, denuncias policiales

@@ -4,7 +4,7 @@ description: Why tracking from China goes quiet or changes number, who delivers 
 slug: parcel-tracking-from-china
 picture: A plane's dotted arc over the globe from a red pin to a green home pin, and Pip travelling between two vans.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 A parcel (or package) from AliExpress, Temu or Shein changes hands: a Chinese logistics firm flies it out, your country's customs checks it, and your local post or courier delivers it, often under a new number. Each company scans only its own leg, so expect up to 11 days before the first scan, silence during the flight and a wait after "arrived at destination country". Follow the shop's tracking, then the local carrier's; on the cheapest shipping, tracking can stop at that handover for good. Items shipped from a warehouse in your country (or, for Ireland, in the EU) skip the flight and customs.
@@ -120,7 +120,7 @@ It depends on the line you paid for. Cainiao counts calendar days; Shein counts 
 | Shein UK | Standard 5–8 working days, Express 4–7 |
 | Shein Ireland | Standard 6–8 business days |
 | Shein Canada | A delivery window, shown as dates |
-| Shein Australia | Standard 5–9 business days, Express 3–7 |
+| Shein Australia | Standard 5–10 business days, Express 3–7 |
 
 Buying for Christmas? Order early: carriers give [Christmas posting dates](guide:christmas-posting-dates) for parcels you send, not for ones coming in from abroad.
 

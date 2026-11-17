@@ -4,7 +4,7 @@ description: Pourquoi le suivi AliExpress, Temu ou Shein ne bouge plus ou change
 slug: suivi-colis-chine-aliexpress-temu-shein
 picture: Au-dessus du globe, un avion file en pointillés d'un repère rouge au repère vert de la maison, et Pip voyage entre deux camionnettes.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Un colis AliExpress, Temu ou Shein change de mains en route : une société logistique chinoise l'expédie hors de Chine, la douane le contrôle à l'arrivée, puis ta poste ou un transporteur local le livre, souvent sous un nouveau numéro. Chacun ne scanne que sa part du trajet. Le premier scan peut mettre jusqu'à 11 jours à apparaître, le suivi reste muet pendant le vol, et il faut encore patienter après « arrivé dans le pays de destination ». Suis le numéro donné par la boutique, puis celui du transporteur local. En livraison économique, le suivi peut s'arrêter pour de bon à ce passage de relais. Un article expédié depuis un entrepôt dans l'UE évite l'avion et, en France et en Belgique, la douane.
@@ -115,7 +115,7 @@ En Suisse, c'est différent : un colis parti d'un entrepôt en France ou en Alle
 | AliExpress | Un délai par commande, sur la page du produit et de la commande. Articles Choice : 6 à 8 jours vers la France, suivis sur tout le trajet |
 | Lignes Cainiao | Premium 5 à 10 jours vers des pays comme la Belgique ; Standard 10 à 18 jours (7 au mieux vers la France) ; Économique 20 à 45 jours |
 | Shein France | Standard et Point Relais 5 à 9 jours ouvrés, Express 4 à 8 |
-| Shein Belgique | Standard 4 à 8 jours ouvrés, Point Relais 5 à 9 |
+| Shein Belgique | Standard 4 à 8 jours ouvrés, Point Relais 5 à 8 |
 | Shein Suisse | Standard 6 à 8 jours ouvrés |
 
 Pour un cadeau, vois aussi [les dates limites de Noël](guide:christmas-posting-dates).

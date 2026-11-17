@@ -4,10 +4,10 @@ description: Como seguir uma encomenda do AliExpress, da Temu ou da Shein até P
 slug: rastrear-encomenda-da-china
 picture: Um avião traça um arco pontilhado sobre o globo, de um marcador vermelho até ao marcador verde de casa, e o Pip viaja entre duas carrinhas.
 published: 2026-10-09
-updated: 2026-11-07
+updated: 2026-11-17
 ---
 
-Uma encomenda do AliExpress, da Temu ou da Shein muda de mãos pelo caminho: uma empresa de logística chinesa leva-a de avião, a alfândega verifica-a à chegada e os [CTT](carrier:ctt) ou outra transportadora entregam-na, muitas vezes com um número novo. Cada empresa só regista leituras no seu troço do percurso. Por isso, conta com até 11 dias sem nenhuma leitura no início, silêncio durante o voo e uma espera depois de «arrived at destination country». Segue primeiro o tracking da loja e depois o da transportadora local. No envio mais barato, o seguimento pode acabar de vez nessa troca. O que sai de um armazém na UE poupa o voo e a alfândega.
+Uma encomenda do AliExpress, da Temu ou da Shein muda de mãos pelo caminho: uma empresa de logística chinesa leva-a de avião, a alfândega verifica-a à chegada e os [CTT](carrier:ctt) ou outra transportadora entregam-na, muitas vezes com um número novo. Cada empresa só regista leituras no seu troço do percurso. Por isso, conta com até 11 dias sem nenhuma leitura no início, silêncio durante o voo e uma espera depois de «arrived at destination country». Segue primeiro o tracking da loja e depois o da transportadora local. No envio mais barato, o seguimento pode acabar de vez nessa troca. Um número dos correios chineses, com duas letras, nove algarismos e `CN`, costuma servir também no «Seguir objeto» dos CTT. O que sai de um armazém na UE poupa o voo e a alfândega.
 
 ## O tracking do AliExpress é fiável?
 
@@ -30,7 +30,7 @@ Quando uma encomenda parece presa «em trânsito», normalmente está a passar d
 
 - **Antes da primeira leitura.** O AliExpress e a Cainiao dizem que o seguimento costuma demorar até 11 dias a aparecer depois de o vendedor enviar. Entretanto, a Cainiao mostra `Not Found`. Ao fim de 12 dias continua sem nada? Contacta o vendedor.
 - **Em `Aguarda entrada nos CTT`.** Os CTT já receberam a informação eletrónica do envio, mas a encomenda ainda não entrou na rede deles: o expedidor pode ainda estar a prepará-la. O estado seguinte, `Aceite`, pode querer dizer que entrou nos serviços postais do país de origem, e não nos CTT.
-- **Na alfândega.** Depois de aterrar, espera pelo desalfandegamento (secção seguinte).
+- **Na alfândega.** Depois de aterrar, espera pelo desalfandegamento (secção seguinte). Desde 1 de novembro de 2026, numa compra até 150 €, o vendedor tem de pôr na declaração aduaneira os dados que identificam cada produto, e os CTT avisam que um objeto que chegue sem eles pode ser devolvido.
 - **No envio económico.** A Cainiao não deixa dúvidas: o envio económico não tem seguimento depois de a encomenda passar para a transportadora do país de destino.
 - **À volta dos feriados chineses.** Os feriados na China, como o Ano Novo chinês (no fim de janeiro ou em fevereiro) e o Dia Nacional (na primeira semana de outubro), podem atrasar o tratamento e o desalfandegamento. Para os feriados de outubro de 2026, a SF International avisou que alguns portos deixariam de desalfandegar envios postais de particulares.
 
@@ -42,7 +42,7 @@ Depende da alfândega e da transportadora local (antes, às vezes, um agente adu
 
 Se nada mexer depois dessa leitura, a Cainiao explica que normalmente é o país de destino que ainda não atualizou e sugere perguntar aos correios locais, ou seja, aos CTT. No «Seguir objeto» dos CTT, `Em importação` quer dizer que a encomenda está em processo aduaneiro no país de destino. Antes disso, `Em exportação` quer dizer que ainda está no processo aduaneiro do país de origem. `Em trânsito` pode aparecer várias vezes ao longo do percurso, também quando a encomenda passa por vários países. Já em Portugal, pode aparecer `O envio foi selecionado para apresentação à Alfândega.` e, depois de os CTT te avisarem, `Foi enviada notificação ao destinatário. O envio está em desalfandegamento.`
 
-Se os CTT te pedirem para a desalfandegar, tens 20 dias desde a chegada a Portugal; se o processo não estiver concluído na data limite, a encomenda volta ao remetente. Se a loja deu o teu telemóvel ou e-mail no envio, o aviso pode chegar por SMS ou e-mail logo que a encomenda sai do país de origem, e podes adiantar o processo no Portal de Desalfandegamento dos CTT antes de ela chegar. Com as regras novas de 1 de julho de 2026, os CTT avisam que, nesta fase inicial, o desalfandegamento pode demorar mais do que o habitual. Os pormenores estão em [encomenda retida na alfândega](guide:customs).
+Se os CTT te pedirem para a desalfandegar, tens 20 dias desde a chegada a Portugal; se o processo não estiver concluído na data limite, a encomenda volta ao remetente. O aviso chega por carta, SMS ou e-mail; por SMS ou e-mail, os CTT voltam a avisar 2 dias antes da data limite, que também vês no Portal de Desalfandegamento dos CTT, no separador «Desalfandegar», na coluna «Data Limite». Se a loja deu o teu telemóvel ou e-mail no envio, o aviso pode chegar por SMS ou e-mail logo que a encomenda sai do país de origem, e podes adiantar o processo no Portal de Desalfandegamento dos CTT antes de ela chegar. Com as regras novas de 1 de julho de 2026, os CTT avisam que, nesta fase inicial, o desalfandegamento pode demorar mais do que o habitual. Os pormenores estão em [encomenda retida na alfândega](guide:customs).
 
 ### O que querem dizer os outros estados?
 
@@ -116,18 +116,18 @@ Depende da linha que pagaste. A Cainiao conta dias seguidos; a Shein conta dias 
 | --- | --- |
 | AliExpress | Um prazo para cada encomenda, na página do produto e da encomenda |
 | Linhas da Cainiao | Premium de 5 a 10 dias para países como Espanha; Standard de 10 a 18 dias; Economy de 20 a 45 dias |
-| Shein Portugal | Envio padrão de 6 a 10 dias úteis, Ponto Pickup de 6 a 11. A etiqueta «Entregue em 5 dias úteis/Envio Rápido» quer dizer que o artigo pode sair de um armazém na Europa |
+| Shein Portugal | Envio padrão e Ponto Pickup de 7 a 11 dias úteis, e a Shein indica 1 a 3 dias para processar a encomenda. A etiqueta «Entregue em 5 dias úteis/Envio Rápido» quer dizer que o artigo pode sair de um armazém na Europa |
 
 É um presente de Natal? Vê também [os prazos de envio no Natal](guide:christmas-posting-dates).
 
 ## Vais pagar alfândega além do preço?
 
-Em princípio não: hoje pagas quase tudo logo na compra, e o resumo da encomenda ou a fatura dizem-to. Numa compra até 150 € enviada de fora da UE, os encargos são o IVA e, desde 1 de julho de 2026, 3 € de direitos aduaneiros por tipo de produto, não por peça. Desde 1 de novembro de 2026 junta-se uma taxa de tratamento da União de 2 €, contada da mesma maneira, mas seja qual for o valor. É devida por quem declara a encomenda na alfândega, no momento em que a declaração de importação é aceite: em geral a loja ou a transportadora, que ta podem cobrar. Há duas exceções:
+Em princípio não: hoje pagas quase tudo logo na compra, e o resumo da encomenda ou a fatura dizem-to. Numa compra até 150 € enviada de fora da UE, os encargos são o IVA e, desde 1 de julho de 2026, 3 € de direitos aduaneiros por tipo de produto, não por peça. Desde 1 de novembro de 2026 junta-se uma taxa de tratamento da União de 2 € (os CTT chamam-lhe Taxa de Manuseamento Aduaneiro), contada da mesma maneira, mas seja qual for o valor. É devida por quem declara a encomenda na alfândega, no momento em que a declaração de importação é aceite: em geral a loja ou a transportadora, que ta podem cobrar. Há duas exceções:
 
-- **A loja não cobrou os encargos:** antes da entrega, pagas no Portal de Desalfandegamento dos CTT o IVA, os 3 € e os 2 € por tipo de produto e o Serviço CTT.
+- **A loja não cobrou os encargos:** antes da entrega, pagas no Portal de Desalfandegamento dos CTT o IVA, os 3 € e os 2 € por tipo de produto, cada um com IVA, e o Serviço CTT, que custa 7 € + IVA numa compra até 150 €.
 - **Cobrou só o IVA, sem os direitos:** os CTT não te podem cobrar os direitos à parte e a encomenda é devolvida.
 
-Quanto custa o Serviço CTT, os prazos e como reconhecer um SMS falso a pedir taxas: [encomenda retida na alfândega](guide:customs).
+Se a encomenda voltar ao remetente, os CTT avisam que os 3 € e os 2 € já cobrados não são reembolsados. E os CTT não pedem pagamentos por e-mail nem por SMS: tudo se paga no portal. Os prazos e como reconhecer um SMS falso a pedir taxas: [encomenda retida na alfândega](guide:customs).
 
 ## A encomenda não chegou: quando pedir o reembolso?
 
@@ -165,11 +165,11 @@ Ecrãs, estados, créditos e reclamações de cada loja: [rastrear uma encomenda
 - [AliExpress: AliExpress Commitment (em inglês)](https://pt.aliexpress.com/p/service-mindset/index.html) – cupão, reembolso, 60–120 dias
 - [AliExpress: Política de Entrega Rápida do Aliexpress](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=pt_PT&m_station=BuyerHelp&questionId=k01000000000000000000000000014mi) – etiqueta «Entrega rápida»
 - [AliExpress: Do I have to pay for customs and import taxes? (em inglês)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – armazém no teu país, sem direitos nem impostos a mais
-- [Shein Portugal: Informação de envio](https://pt.shein.com/Shipping-Info-a-280.html) – prazos, Ponto Pickup, armazém na Europa, 45 e 30 dias, 500 pontos
+- [Shein Portugal: Informação de envio](https://pt.shein.com/Shipping-Info-a-280.html) – prazos de 7 a 11 dias úteis, 1 a 3 dias de processamento, Ponto Pickup, armazém na Europa, 45 e 30 dias, 500 pontos (lido a 17 de novembro de 2026)
 - [CTT: Resultados que podem aparecer na pesquisa do «Seguir objeto»](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto) – Aguarda entrada nos CTT, Aceite, Em exportação, Em importação, Em trânsito, Em entrega
 - [CTT: Desalfandegar encomendas](https://www.ctt.pt/particulares/receber/desalfandegar/desalfandegar-encomendas) – aviso antecipado, adiantar o processo
-- [CTT: Prazo para desalfandegar a minha encomenda](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 dias, devolução ao remetente
-- [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – 3 € por tipo de produto, Serviço CTT, só IVA pago, demoras
+- [CTT: Prazo para desalfandegar a minha encomenda](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 dias, devolução ao remetente, aviso por carta, SMS ou e-mail, novo aviso 2 dias antes, «Data Limite» (lido a 17 de novembro de 2026)
+- [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – 3 € por tipo de produto, Serviço CTT, só IVA pago, demoras; Taxa de Manuseamento Aduaneiro de 2 € + IVA, Serviço CTT de 7 € + IVA até 150 €, identificação dos produtos, sem reembolso na devolução, sem pagamentos por e-mail ou SMS (lido a 17 de novembro de 2026)
 - [CTT: Parceiro de distribuição estratégico da Temu](https://www.ctt.pt/grupo-ctt/media/noticias/ctt-sao-o-parceiro-de-distribuicao-estrategico-da-temu-para-a-peninsula-iberica) – parceiro exclusivo em 2023
 - [CTT: Temu alarga entrega em Portugal](https://www.ctt.pt/grupo-ctt/media/noticias/temu-alarga-entrega-em-portugal-atraves-de-parceria-estrategica-com-os-ctt) – Açores, Madeira, Lojas e Pontos CTT, Agentes Payshop, cacifos Locky, vendedores locais, até 80 % das vendas na Europa
 - [Comissão Europeia: Buying goods online coming from a non-EU country (em inglês)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – artigos já na UE: sem formalidades aduaneiras, IVA no preço

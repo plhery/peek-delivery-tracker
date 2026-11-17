@@ -4,7 +4,7 @@ description: Perché il tracking di AliExpress, Temu e Shein resta fermo o cambi
 slug: tracciare-pacco-dalla-cina
 picture: Un aereo traccia un arco tratteggiato sul globo, da una puntina rossa a quella verde di casa, e Pip viaggia tra due furgoni.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Un pacco AliExpress, Temu o Shein passa di mano più volte: un'azienda logistica cinese lo manda in aereo verso l'Europa, la dogana lo controlla e alla fine te lo consegnano [Poste Italiane](carrier:poste-italiane), un corriere o, in Ticino, [la Posta](carrier:swiss-post), spesso con un codice nuovo. Ognuno scansiona solo il suo tratto, quindi metti in conto fino a 11 giorni prima del primo aggiornamento, nessuna notizia durante il volo e un'attesa dopo «arrivato nel paese di destinazione». Segui il tracking del negozio, poi quello del corriere locale: con le spedizioni più economiche il tracking può fermarsi lì per sempre. Un articolo spedito da un magazzino nell'UE salta il volo e, in Italia, anche la dogana.
@@ -115,14 +115,14 @@ Dipende dalla linea che hai pagato. Cainiao conta i giorni di calendario, Shein 
 | --- | --- |
 | AliExpress | Un tempo di consegna per ogni ordine, sulla pagina del prodotto e dell'ordine |
 | Linee Cainiao | Premium 5-10 giorni verso Paesi come Spagna, Paesi Bassi e Belgio; Standard 10-18 giorni (nei casi più veloci 7, verso Francia e Germania); Economy 20-45 giorni |
-| Shein Italia | Standard 6-12 giorni lavorativi, locker o punto di ritiro 6-12, express 6-11 |
+| Shein Italia | Standard 7-15 giorni lavorativi, locker o punto di ritiro 7-15, express 7-14 |
 | Shein Svizzera | Standard 6-8 giorni lavorativi |
 
 ## Paghi anche la dogana?
 
 Di solito Temu, Shein e AliExpress ti fanno pagare l'IVA già al checkout, ma non sempre finisce lì:
 
-- **Italia:** dal 1° luglio 2026 anche le spedizioni fino a 150 € pagano un dazio di 3 € per articolo (per tipo di merce, non per pezzo), e dal 1° novembre 2026 la tassa di gestione dell'Unione, 2 € per articolo. Quello che il sito non ha incassato lo paghi a Poste o al corriere, online o alla consegna, più un loro compenso.
+- **Italia:** dal 1° luglio 2026 anche le spedizioni fino a 150 € pagano un dazio di 3 € per articolo (per tipo di merce, non per pezzo), e dal 1° novembre 2026 la tassa di gestione dell'Unione, 2 € per articolo, che si paga qualunque sia il valore della spedizione. Quello che il sito non ha incassato lo paghi a Poste o al corriere, online o alla consegna, più un loro compenso.
 - **Ticino:** le imposte fino a 5 franchi non vengono riscosse, e dal 2025 le grandi piattaforme devono applicare l'IVA svizzera. Altrimenti la Posta ti chiede IVA, dazio e il suo prezzo di sdoganamento.
 
 Importi, eccezioni e come riconoscere un falso SMS sulla dogana: [pacco fermo in dogana](guide:customs).
@@ -174,7 +174,7 @@ Schermate, stati, crediti e reclami di ogni negozio: [tracciare un ordine AliExp
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici, stati
 - [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – sdoganamento degli invii postali, 3 € per articolo, IVA, tracking dalla presa in carico in Italia
 - [Poste Italiane: Cerca spedizioni, legenda degli stati](https://www.poste.it/cerca/views/risultati-spedizioni.html) – In attesa di sdoganamento
-- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, non per pezzo
+- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, non per pezzo; tassa di gestione di 2 € per articolo, qualunque sia il valore
 - [Commissione europea: Buying goods online coming from a non-EU country (in inglese)](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – merce già nell'UE: niente formalità doganali, IVA nel prezzo
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
 - [La Posta: Sdoganamento all'importazione](https://www.post.ch/it/ricezione/sdoganamento-all-importazione) – rete GLS, prezzo di sdoganamento

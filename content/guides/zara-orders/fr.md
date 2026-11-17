@@ -15,7 +15,7 @@ Les pages d'aide de Zara ne nomment pas les transporteurs : elles parlent du « 
 
 | Pays | Transporteurs cités par Zara | Retour en point de dépôt |
 | --- | --- | --- |
-| France (zara.com/fr) | [Paack](carrier:paack), [Chronopost](carrier:chronopost), [Amazon](carrier:amazon-shipping), [Mondial Relay](carrier:mondial-relay), [UPS](carrier:ups), [GLS](carrier:gls-fr), VIR, [Relais Colis](carrier:relais-colis), [DHL Express](carrier:dhl-express), [Asendia](carrier:asendia) ([Colissimo](carrier:la-poste)) | Le transporteur que Zara t'indique |
+| France (zara.com/fr) | [Paack](carrier:paack), [Chronopost](carrier:chronopost), [Amazon](carrier:amazon-logistics), [Mondial Relay](carrier:mondial-relay), [UPS](carrier:ups), [GLS](carrier:gls-fr), VIR, [Relais Colis](carrier:relais-colis), [DHL Express](carrier:dhl-express), [Asendia](carrier:asendia) ([Colissimo](carrier:la-poste)) | Le transporteur que Zara t'indique |
 | Belgique (zara.com/be) | Aucun | Le transporteur que Zara t'indique |
 | Suisse (zara.com/ch) | Aucun | [La Poste suisse](carrier:swiss-post) |
 

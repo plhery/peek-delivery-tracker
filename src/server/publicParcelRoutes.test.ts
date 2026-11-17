@@ -729,6 +729,18 @@ describe('reading a parcel link', () => {
     }
   });
 
+  it('neither records the opening nor queues a check for a page out of sight', async () => {
+    vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-02T10:35:00Z') });
+    const found = find({}, { last_synced_at: '2026-10-02T09:50:00+00:00' });
+    const answer = await read(new NextRequest(`https://delivery.example/api/public/parcels/${linkId}?hidden=true`, {
+      headers: { 'x-real-ip': nextIp() },
+    }), route(linkId));
+    expect(answer.status).toBe(200);
+    expect(found).toHaveBeenCalledExactlyOnceWith(linkId, null, false);
+    expect(enqueue).not.toHaveBeenCalled();
+    expect(await answer.json()).not.toHaveProperty('checkQueued');
+  });
+
   it('still shows the parcel when the check cannot be queued', async () => {
     vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-02T10:35:00Z') });
     find({}, { last_synced_at: null });

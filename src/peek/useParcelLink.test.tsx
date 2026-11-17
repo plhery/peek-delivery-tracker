@@ -183,11 +183,14 @@ describe('useParcelLink', () => {
       await pass(1);
       expect(mocks.read).toHaveBeenCalledTimes(index + 2);
     }
+    // Its reads say it is out of sight, so they do not count as the link opened.
+    expect(mocks.read.mock.calls.map(([, options]) => options.hidden)).toEqual([false, true, true, true, true, true, true]);
     await pass(60_000);
     act(() => setHidden(false));
     expect(hook.result.current.live).toBe(true);
     await pass(0);
     expect(mocks.read).toHaveBeenCalledTimes(8);
+    expect(mocks.read.mock.calls.at(-1)![1].hidden).toBe(false);
     // The window's focus comes with it: one read answers both.
     await act(async () => { window.dispatchEvent(new Event('focus')); });
     await pass(0);

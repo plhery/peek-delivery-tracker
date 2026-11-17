@@ -350,8 +350,9 @@ export function createApiRepo(
     const sequence = ++listSequence;
     const startedRevision = revision;
     const signal = lifecycle.signal;
+    // A read while the page is out of sight, after a notification, does not count as the account's apps open.
     const payload = await request<ApiPackageListResponse>(
-      '/api/packages?includeArchived=true',
+      `/api/packages?includeArchived=true${typeof document === 'undefined' || document.visibilityState === 'visible' ? '' : '&hidden=true'}`,
       auth,
     );
     signal.throwIfAborted();

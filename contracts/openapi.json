@@ -61401,6 +61401,16 @@
               "type": "boolean",
               "default": false
             }
+          },
+          {
+            "name": "hidden",
+            "in": "query",
+            "required": false,
+            "description": "true from an app or page out of sight: the read does not record that the account's apps were opened.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {
@@ -62907,6 +62917,16 @@
             "schema": {
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]{43}$"
+            }
+          },
+          {
+            "name": "hidden",
+            "in": "query",
+            "required": false,
+            "description": "true from a page out of sight: the read does not record that the link was opened, and queues no check.",
+            "schema": {
+              "type": "boolean",
+              "default": false
             }
           }
         ],

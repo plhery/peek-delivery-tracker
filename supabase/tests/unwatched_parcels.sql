@@ -19,6 +19,11 @@ begin
       or not has_function_privilege('service_role', 'public.unwatched_package_ids(timestamptz)', 'EXECUTE') then
     raise exception 'Listing the unwatched parcels must be reserved to the server';
   end if;
+  if has_function_privilege('anon', 'public.waiting_package_ids(timestamptz, timestamptz)', 'EXECUTE')
+      or has_function_privilege('authenticated', 'public.waiting_package_ids(timestamptz, timestamptz)', 'EXECUTE')
+      or not has_function_privilege('service_role', 'public.waiting_package_ids(timestamptz, timestamptz)', 'EXECUTE') then
+    raise exception 'Listing the parcels someone waits for must be reserved to the server';
+  end if;
   if has_function_privilege('anon', 'public.record_account_opened()', 'EXECUTE')
       or has_function_privilege('service_role', 'public.record_account_opened()', 'EXECUTE')
       or not has_function_privilege('authenticated', 'public.record_account_opened()', 'EXECUTE') then
@@ -55,6 +60,48 @@ as $$
   from public.unwatched_package_ids(now() - interval '1 hour') as quiet
   join public.packages as package on package.id = quiet.id
   where package.tracking_number like 'UNWATCHED%';
+$$;
+
+-- The parcels of this test someone waits for, and why: on screen meaning within the last 15 minutes, an alert on, or
+-- neither, only opened within the hour.
+create function pg_temp.waiting()
+returns text[]
+language sql
+as $$
+  select coalesce(array_agg(package.tracking_number
+      || case when waiting.on_screen then ' on screen' else '' end
+      || case when waiting.alerted then ' alerted' else '' end
+    order by package.tracking_number), '{}')
+  from public.waiting_package_ids(now() - interval '1 hour', now() - interval '15 minutes') as waiting
+  join public.packages as package on package.id = waiting.id
+  where package.tracking_number like 'UNWATCHED%';
+$$;
+
+-- Each open parcel of this test is in one list or the other.
+create function pg_temp.check_lists()
+returns void
+language plpgsql
+as $$
+declare
+  open_parcels text[];
+  listed text[];
+begin
+  select coalesce(array_agg(tracking_number order by tracking_number), '{}') into open_parcels
+  from public.packages
+  where tracking_number like 'UNWATCHED%' and archived_at is null
+    and (current_stage not in ('delivered', 'returned') or last_status_text = 'TO_BE_DELIVERED'
+      or (current_stage = 'returned' and carrier_data ->> 'return_held' = 'true'));
+  select coalesce(array_agg(number order by number), '{}') into listed
+  from (
+    select unnest(pg_temp.unwatched()) as number
+    union all
+    select split_part(unnest(pg_temp.waiting()), ' ', 1)
+  ) as lists;
+  if listed <> open_parcels then
+    raise exception 'The open parcels % are listed as % (unwatched %, waiting %)', open_parcels, listed,
+      pg_temp.unwatched(), pg_temp.waiting();
+  end if;
+end;
 $$;
 
 -- An account: what it switched on, the parcels it muted, and when its apps were last open.
@@ -108,6 +155,11 @@ begin
   if pg_temp.unwatched() <> array['UNWATCHED01', 'UNWATCHED04', 'UNWATCHED05', 'UNWATCHED11', 'UNWATCHED21', 'UNWATCHED41'] then
     raise exception 'Nobody would be waiting for %', pg_temp.unwatched();
   end if;
+  if pg_temp.waiting() <> array['UNWATCHED10 alerted', 'UNWATCHED20 alerted', 'UNWATCHED30 alerted', 'UNWATCHED40 alerted',
+      'UNWATCHED50 on screen'] then
+    raise exception 'Someone would be waiting for %', pg_temp.waiting();
+  end if;
+  perform pg_temp.check_lists();
 
   -- A subscription, a phone or a Live Activity that was switched off reaches nobody, nor does an email that was declined.
   update public.push_subscriptions set disabled_at = now() where user_id = browser;
@@ -118,12 +170,23 @@ begin
       'UNWATCHED21', 'UNWATCHED30', 'UNWATCHED40', 'UNWATCHED41'] then
     raise exception 'With everything switched off, nobody would be waiting for %', pg_temp.unwatched();
   end if;
+  perform pg_temp.check_lists();
 
   -- A read counts for an hour, and is recorded at most every five minutes.
   update public.account_activity set last_opened_at = now() - interval '61 minutes' where user_id = reader;
   if not 'UNWATCHED50' = any(pg_temp.unwatched()) then
     raise exception 'An account that left an hour ago keeps the full schedule';
   end if;
+  -- On screen for 15 minutes, then only opened.
+  update public.account_activity set last_opened_at = now() - interval '14 minutes' where user_id = reader;
+  if not 'UNWATCHED50 on screen' = any(pg_temp.waiting()) then
+    raise exception 'An account that read its parcels 14 minutes ago is not on screen: %', pg_temp.waiting();
+  end if;
+  update public.account_activity set last_opened_at = now() - interval '16 minutes' where user_id = reader;
+  if not 'UNWATCHED50' = any(pg_temp.waiting()) then
+    raise exception 'An account that read its parcels 16 minutes ago is not just waiting: %', pg_temp.waiting();
+  end if;
+  perform pg_temp.check_lists();
   update public.account_activity set last_opened_at = now() - interval '4 minutes' where user_id = reader;
   perform public.record_account_opened();
   if (select last_opened_at from public.account_activity where user_id = reader) <> now() - interval '4 minutes' then
@@ -160,6 +223,9 @@ begin
   if 'UNWATCHED60' = any(pg_temp.unwatched()) then
     raise exception 'A lookup that was just made is checked hourly';
   end if;
+  if not 'UNWATCHED60 on screen' = any(pg_temp.waiting()) then
+    raise exception 'A lookup that was just made is not on screen: %', pg_temp.waiting();
+  end if;
   -- After an hour it is checked hourly, whatever account opened its apps since, and it stays on the schedule for 24 hours.
   update public.parcel_links set last_opened_at = now() - interval '2 hours' where id = lookup_link;
   insert into public.account_activity (user_id, last_opened_at) values (quiet, now());
@@ -171,6 +237,9 @@ begin
   perform public.add_parcel_link_alert(lookup_link, null, 'https://fcm.googleapis.com/fcm/send/unwatched-viewer', 'k', 'a', 'en', 'all');
   if 'UNWATCHED60' = any(pg_temp.unwatched()) then
     raise exception 'A lookup with an alert on is checked hourly';
+  end if;
+  if not 'UNWATCHED60 alerted' = any(pg_temp.waiting()) then
+    raise exception 'A lookup with an alert on is not alerted: %', pg_temp.waiting();
   end if;
   update public.parcel_links set shared = false, stopped_at = now() where id = lookup_link;
   if not 'UNWATCHED60' = any(pg_temp.unwatched()) then
@@ -200,6 +269,14 @@ begin
   if 'UNWATCHED01' = any(pg_temp.unwatched()) or not 'UNWATCHED04' = any(pg_temp.unwatched()) then
     raise exception 'Opening a shared link did not put that parcel, and only it, on the full schedule';
   end if;
+  if not 'UNWATCHED01 on screen' = any(pg_temp.waiting()) then
+    raise exception 'A shared link opened 10 minutes ago is not on screen: %', pg_temp.waiting();
+  end if;
+  update public.parcel_links set last_opened_at = now() - interval '20 minutes' where id = shared_link;
+  if not 'UNWATCHED01' = any(pg_temp.waiting()) then
+    raise exception 'A shared link opened 20 minutes ago is not just waiting: %', pg_temp.waiting();
+  end if;
+  perform pg_temp.check_lists();
 end;
 $$;
 

@@ -16,7 +16,7 @@ function client() {
     listActivePackages: vi.fn().mockResolvedValue([]), getPackage: vi.fn().mockResolvedValue(null),
     syncJobQueuedAhead: vi.fn().mockResolvedValue(null), listFollowedOneOffPackages: vi.fn().mockResolvedValue([]),
     listUnfiledOneOffPackages: vi.fn().mockResolvedValue([]), listSyncCandidates: vi.fn().mockResolvedValue([]),
-    listUnwatchedPackageIds: vi.fn().mockResolvedValue([]), sharedAlertPackageIds: vi.fn().mockResolvedValue(new Set()),
+    listUnwatchedPackageIds: vi.fn().mockResolvedValue([]), listWaitingPackages: vi.fn().mockResolvedValue(new Map()), sharedAlertPackageIds: vi.fn().mockResolvedValue(new Set()),
     autoLinkPackages: vi.fn().mockResolvedValue(0), reopenScanAnnouncements: vi.fn(async (_id: string, ids: string[]) => ids.length),
     updatePackage, insertEvents: vi.fn().mockResolvedValue(undefined), deleteEventsByDescriptions: vi.fn().mockResolvedValue(undefined),
     startSyncAttempt: vi.fn().mockResolvedValue(undefined), completeSyncAttempt: vi.fn().mockResolvedValue(true),

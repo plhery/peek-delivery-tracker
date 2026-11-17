@@ -36,13 +36,16 @@ const unavailable = () => json({ error: PARCEL_UNAVAILABLE }, 404);
  * the owner; anyone else is a viewer, who is told when the sharing was
  * stopped. A read records that the link was opened, creates nothing, and
  * queues a check of a one-off parcel that is due one, which the answer says
- * (`checkQueued`) so the page reads its result as soon as it lands.
+ * (`checkQueued`) so the page reads its result as soon as it lands. A page out
+ * of sight says so (`hidden=true`): its read does neither, so a tab left in the
+ * background does not keep the parcel's checks at the pace of one on screen.
  */
 export const GET = apiRoute<LinkParameters>(async (context) => {
   const { linkId } = await context.route.params;
   const service = requireService(context);
+  const hidden = new URL(context.request.url).searchParams.get('hidden') === 'true';
   const found = isParcelLinkId(linkId)
-    ? await service.publicParcel(linkId, ownerKeyHash(context.request.headers.get('x-parcel-key')), true)
+    ? await service.publicParcel(linkId, ownerKeyHash(context.request.headers.get('x-parcel-key')), !hidden)
     : null;
   if (!found) {
     recordPublicParcelRead('not_found');
@@ -53,7 +56,7 @@ export const GET = apiRoute<LinkParameters>(async (context) => {
     return json({ error: PARCEL_NOT_SHARED }, 410);
   }
   let checkQueued = false;
-  if (found.package.one_off === true && isOpenedParcelSyncDue(found.package, new Date())) {
+  if (!hidden && found.package.one_off === true && isOpenedParcelSyncDue(found.package, new Date())) {
     try {
       // Queued, or one already queued or under way for the parcel.
       await service.enqueueSyncJob({ packageId: String(found.package.id), reason: 'opened' });

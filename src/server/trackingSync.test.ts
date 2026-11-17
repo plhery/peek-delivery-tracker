@@ -1418,6 +1418,7 @@ function fakeClient(packages: JsonObject[] = []) {
       return listed.filter((parcel) => ids.includes(String(parcel.id)));
     }),
     listUnwatchedPackageIds: vi.fn().mockResolvedValue([]),
+    listWaitingPackages: vi.fn().mockResolvedValue(new Map()),
     sharedAlertPackageIds: vi.fn().mockResolvedValue(new Set()),
     autoLinkPackages: vi.fn().mockResolvedValue(0),
     reopenScanAnnouncements: vi.fn(async (_packageId: string, ids: string[]) => ids.length),
@@ -4152,6 +4153,51 @@ describe('TrackingSyncService', () => {
     expect(client.listFollowedOneOffPackages).toHaveBeenCalledExactlyOnceWith(new Date(now.getTime() - 86_400_000));
     // A manual refresh is never held back by it.
     if (!checked) await expect(service.syncPackage({ ...parcel, id: 'owned', user_id: 'a' })).resolves.toMatchObject({ checked: 1 });
+  });
+
+  // Up to every 10 minutes, and on the last mile every 2, only while someone has the parcel on screen, or has an alert
+  // on and the parcel is out for delivery or expected today; otherwise hourly, a lookup without an account too.
+  it.each([
+    { name: 'on screen', waiting: 'on_screen', time: '10:10:00', checked: 2 },
+    { name: 'with an alert on', waiting: 'alert', time: '10:10:00', checked: 0 },
+    { name: 'with an alert on', waiting: 'alert', time: '11:00:00', checked: 2 },
+    { name: 'with an alert on, expected today', waiting: 'alert', expected: '2026-09-09', time: '10:10:00', checked: 2 },
+    { name: 'with an alert on, expected tomorrow', waiting: 'alert', expected: '2026-09-10', time: '10:10:00', checked: 0 },
+    { name: 'with an alert on, out for delivery', waiting: 'alert', stage: 'out_for_delivery', time: '10:02:00', checked: 2 },
+    { name: 'out for delivery, on screen', waiting: 'on_screen', stage: 'out_for_delivery', time: '10:02:00', checked: 2 },
+    { name: 'out for delivery, opened in the last hour', waiting: 'opened', stage: 'out_for_delivery', time: '10:10:00', checked: 0 },
+    { name: 'opened in the last hour', waiting: 'opened', time: '10:10:00', checked: 0 },
+    { name: 'opened in the last hour', waiting: 'opened', time: '11:00:00', checked: 2 },
+    // One the list leaves out keeps the cadence of one on screen.
+    { name: 'the list leaves out', waiting: undefined, time: '10:10:00', checked: 2 },
+  ] as const)('checks a parcel $name at $time: $checked checks', async ({ waiting, stage = 'in_transit', expected, time, checked }) => {
+    const parcel = { carrier: 'swiss-post', current_stage: stage, tracking_number: ON_THE_HOUR, expected_delivery: expected,
+      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok' };
+    const client = fakeClient([{ ...parcel, id: 'owned', user_id: 'a' }]);
+    client.listFollowedOneOffPackages.mockResolvedValue([{ ...parcel, id: 'one-off', user_id: null, one_off: true }]);
+    client.listWaitingPackages.mockResolvedValue(new Map(waiting ? [['owned', waiting], ['one-off', waiting]] : [['another', 'on_screen']]));
+    const now = new Date(`2026-09-09T${time}Z`);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
+    await expect(service.sync()).resolves.toMatchObject({ checked });
+    // Read within the last 15 minutes is on screen, within the hour waited for.
+    expect(client.listWaitingPackages).toHaveBeenCalledExactlyOnceWith(new Date(now.getTime() - 3_600_000),
+      new Date(now.getTime() - 900_000));
+    // Opening a link queues a check at the cadence of one on screen.
+    expect(isOpenedParcelSyncDue({ ...parcel, id: 'one-off', one_off: true }, now)).toBe(true);
+  });
+
+  it('checks every parcel as one on screen when the parcels someone waits for cannot be read', async () => {
+    const report = vi.spyOn(observability, 'captureOperationalError').mockReturnValue(null);
+    const parcel = { id: 'owned', user_id: 'a', carrier: 'swiss-post', current_stage: 'in_transit', tracking_number: ON_THE_HOUR,
+      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'ok' };
+    const client = fakeClient([parcel]);
+    const failure = new Error('unavailable');
+    client.listWaitingPackages.mockRejectedValue(failure);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date('2026-09-09T10:10:00Z'));
+    await expect(service.sync()).resolves.toMatchObject({ checked: 1 });
+    expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'tracking', operation: 'list_waiting_packages' });
   });
 
   it.each([

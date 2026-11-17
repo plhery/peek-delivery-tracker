@@ -23,6 +23,8 @@ const QUEUED_CHECK_MS = 60_000;
  * 2 minutes out for delivery, otherwise every 10 minutes at most, and hourly once the
  * parcel is idle. A tab in the background keeps that pace, so its title can count the
  * scans that land there, and it slows down by itself since nothing changes on screen.
+ * Its reads say it is out of sight: they do not count as the link being opened, so the
+ * server checks the parcel at the pace of one nobody has on screen.
  * Showing it again, or coming back to its window, asks at once unless the last answer
  * is that fresh.
  */
@@ -171,7 +173,9 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
       controller?.abort();
       const current = controller = new AbortController();
       try {
-        const result = await readParcelLink(linkId, { key: ownerKeyFor(linkId), signal: current.signal, advance, tellStopped: true, locale: language.current });
+        const result = await readParcelLink(linkId, {
+          key: ownerKeyFor(linkId), signal: current.signal, advance, tellStopped: true, hidden: document.hidden, locale: language.current,
+        });
         if (disposed || current.signal.aborted) return false;
         if (result === 'unavailable') {
           // Nothing is left to follow, on the server or here.

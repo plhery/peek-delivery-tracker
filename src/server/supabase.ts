@@ -172,6 +172,11 @@ function forgotten(value: unknown): { links: number; packages: number } {
 
 /** A link and its whole package row, as the database returns them to the server. */
 export interface StoredParcelLink { link: JsonObject; package: JsonObject }
+/**
+ * Why someone waits for an open parcel (listWaitingPackages): it is on screen, an alert is on, or its link or
+ * account's apps were only read lately.
+ */
+export type Waiting = 'on_screen' | 'alert' | 'opened';
 
 /** One use to count: against the client, its network when it has one, and everyone together. */
 export interface PublicAllowanceClaim {
@@ -1331,6 +1336,28 @@ export class SupabaseServiceClient extends SupabaseClient {
       })).flatMap((row) => typeof row.id === 'string' && !ids.has(row.id) ? [row.id] : []);
       if (page.length === 0) return [...ids];
       for (const id of page) ids.add(id);
+    }
+  }
+
+  /**
+   * The open parcels someone is waiting for, the ones listUnwatchedPackageIds leaves out, by id, and why: `on_screen`
+   * when one of their links or their account's apps were read since `onScreenSince`, otherwise `alert` when a
+   * notification can reach someone about them, otherwise `opened`, read since `openedSince` only. They come in pages
+   * by id, as the unwatched ones do.
+   */
+  async listWaitingPackages(openedSince: Date, onScreenSince: Date): Promise<Map<string, Waiting>> {
+    const waiting = new Map<string, Waiting>();
+    for (;;) {
+      const after = [...waiting.keys()].at(-1);
+      const params = query([['select', 'id,on_screen,alerted'], ['order', 'id.asc'], ['limit', String(UNWATCHED_PAGE)],
+        ...(after === undefined ? [] : [['id', `gt.${after}`] as const])]);
+      const page = rows(await this.request(`/rest/v1/rpc/waiting_package_ids?${params}`, {
+        method: 'POST', body: { p_opened_since: openedSince.toISOString(), p_on_screen_since: onScreenSince.toISOString() },
+      })).filter((row) => typeof row.id === 'string' && !waiting.has(row.id));
+      if (page.length === 0) return waiting;
+      for (const row of page) {
+        waiting.set(String(row.id), row.on_screen === true ? 'on_screen' : row.alerted === true ? 'alert' : 'opened');
+      }
     }
   }
 

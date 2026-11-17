@@ -392,10 +392,10 @@ and providers scan parcels across every time zone.
 
 | Parcels | Cadence |
 | --- | --- |
-| Out for delivery (direct adapter), from 06:00 on the carrier's clock | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
-| Out for delivery, until 30 min before its delivery window opens | every 10 min |
-| Out for delivery since an earlier day | every 10 min |
-| Other stages (direct adapter) | every 10 min |
+| Out for delivery today (direct adapter), on screen or with an alert on, from 06:00 on the carrier's clock | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
+| The same, until 30 min before its delivery window opens | every 10 min |
+| On screen, or with an alert on and out for delivery or expected today (direct adapter) | every 10 min |
+| Someone waiting for it otherwise: an alert on, or a read in the last hour (direct adapter) | hourly around the clock; manual refresh still allowed |
 | A universal provider alone answers for it (its carrier's own adapter did not answer beside it) | hourly, whoever waits for it; every 3 h once its newest scan is a day old; out for delivery today, every 15 min |
 | A universal provider answers beside the carrier's own partial answer, label or local clocks | the carrier's cadence; the providers every 15 min at most |
 | PostNL | every 30 min, also after a failure and out for delivery |
@@ -495,9 +495,19 @@ open parcel, a held return among them, is checked hourly
 pages by id: the database's API ends each answer at its row limit, and a parcel left past it
 would keep the cadence of one someone is waiting for).
 
+A parcel is **on screen** for 15 minutes after the account's apps or one of its links read it:
+an open page reads at least every 10 minutes. A page or app out of sight says so (`hidden=true`
+on the read): a web page in a background tab keeps reading, so its title can count new scans,
+but its reads record no opening and queue no check. A parcel is checked up to every 10 minutes,
+and on the last mile every 2 or 5, only while it is on screen, or while an alert is on and it is
+out for delivery or expected today; any other parcel someone waits for is checked hourly
+([`waiting_package_ids`](../supabase/migrations/20261117171000_waiting_parcels.sql), read in
+pages as the unwatched ones are; a parcel neither list holds, or every parcel when the list
+cannot be read, keeps the cadence of one on screen). Opening a link counts as on screen.
+
 **Out for delivery**, the news is the delivery. A carrier's own adapter is cheap and as
-fresh as the carrier, so a parcel it answers for is checked every 2 minutes whether or not
-anyone is looking, unless nobody is waiting for it or its refresh limit (above) sets a longer
+fresh as the carrier, so a parcel it answers for is checked every 2 minutes while it is on
+screen or has an alert on (above), unless its refresh limit (above) sets a longer
 interval. While its lookups open a browser, as FedEx's and UPS's do, each takes seconds of
 the browser service, so it is checked every 5 minutes: the last check that ran a lookup
 says which (`browser_check` in its routing). A lookup that only sends a plain HTTP request

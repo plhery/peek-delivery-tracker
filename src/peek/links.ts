@@ -188,10 +188,10 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
       return { id: view.link.id, key: result.key, view };
     },
 
-    async readParcelLink(id, { key, signal, tellStopped = false } = {}) {
+    async readParcelLink(id, { key, signal, tellStopped = false, hidden = false } = {}) {
       // A malformed id is a link that leads nowhere; it is not worth a request.
       if (!isParcelLinkId(id)) return 'unavailable';
-      const response = await send(`/api/public/parcels/${id}`, { headers: keyHeader(key) }, signal);
+      const response = await send(`/api/public/parcels/${id}${hidden ? '?hidden=true' : ''}`, { headers: keyHeader(key) }, signal);
       if (response.status === 404 || (response.status === 410 && !tellStopped)) return 'unavailable';
       if (!response.ok) throw await failure(response);
       return parcelLinkView(await answer<ApiPublicParcelResponse>(response));

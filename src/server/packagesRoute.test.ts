@@ -43,6 +43,15 @@ it('records that the account read its parcels, which keeps them on the full sche
   expect(recorded).toHaveBeenCalledOnce();
 });
 
+it('does not record a read from an app or page out of sight', async () => {
+  vi.spyOn(SupabaseUserClient.prototype, 'listPackages').mockResolvedValue([parcel]);
+  const recorded = vi.spyOn(SupabaseUserClient.prototype, 'recordOpened').mockResolvedValue(undefined);
+  const response = await list('?includeArchived=true&hidden=true');
+  expect(response.status).toBe(200);
+  expect((await response.json()).packages).toMatchObject([{ id: parcel.id }]);
+  expect(recorded).not.toHaveBeenCalled();
+});
+
 it('still lists the parcels when the read cannot be recorded', async () => {
   vi.spyOn(SupabaseUserClient.prototype, 'listPackages').mockResolvedValue([parcel]);
   const failure = new SupabaseError('function unavailable');

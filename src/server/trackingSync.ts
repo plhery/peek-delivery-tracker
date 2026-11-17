@@ -43,7 +43,7 @@ import {
 } from './observability';
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
-import { LOOKUP_SYNC_PRIORITY, READER_SYNC_REASONS, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient } from './supabase';
+import { LOOKUP_SYNC_PRIORITY, READER_SYNC_REASONS, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient, type Waiting } from './supabase';
 import { CheckHolds } from './checkHolds';
 import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
@@ -113,8 +113,16 @@ const MAX_UNSEEN_RECHECKS_PER_SYNC = 3;
 const ONE_OFF_FOLLOWED_MS = 24 * 60 * 60 * 1_000;
 /** A catalog queues the checks of parcels its rules point to another carrier this many at a time. */
 const MAX_REDETECTIONS = 50;
-/** A parcel no notification can reach keeps the regular cadence this long after its account's apps or one of its links were last opened; then it is checked hourly. */
+/**
+ * Someone waits for a parcel no notification can reach this long after its account's apps or one of its links were
+ * last opened: a lookup without an account is checked hourly until then, and every 3 hours after.
+ */
 const WATCHED_AFTER_OPEN_MS = 60 * 60 * 1_000;
+/**
+ * A parcel counts as on screen, checked up to every 10 minutes, this long after its account's apps or one of its links
+ * were last read: an open page reads at least every 10 minutes, and the read is recorded at most every 5.
+ */
+const ON_SCREEN_MS = 15 * 60_000;
 const VALID_STAGES = new Set<string>(STAGES);
 /**
  * A parcel out for delivery is checked this often while its carrier's
@@ -568,6 +576,12 @@ function expectedDayAhead(parcel: JsonObject, now: Date): boolean {
   return day !== undefined && day >= deliveryToday(parcel, now);
 }
 
+/** Whether the parcel, still to be delivered, is expected today on the delivery clock (`deliveryClock`). */
+function expectedToday(parcel: JsonObject, now: Date): boolean {
+  return !['delivered', 'returned'].includes(String(parcel.current_stage))
+    && /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0] === deliveryToday(parcel, now);
+}
+
 /** The date `now` falls on on the delivery clock (`deliveryClock`), against which an expected day has passed or not. */
 function deliveryToday(parcel: JsonObject, now: Date): string {
   return DateTime.fromJSDate(now, { zone: deliveryClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
@@ -659,8 +673,7 @@ function deliveringToday(parcel: JsonObject, now: Date): boolean {
 export function urgentFirst(parcels: JsonObject[], now: Date): JsonObject[] {
   const carrier = (parcel: JsonObject) => pacedBy(parcel)!;
   const urgent = (parcel: JsonObject) => (parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now))
-    || (!['delivered', 'returned'].includes(String(parcel.current_stage))
-      && /^\d{4}-\d{2}-\d{2}/.exec(typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery.trim() : '')?.[0] === deliveryToday(parcel, now));
+    || expectedToday(parcel, now);
   const queues = new Map<string, JsonObject[]>();
   for (const parcel of parcels.filter((parcel) => refreshLimit(parcel) !== undefined)) {
     queues.set(carrier(parcel), [...queues.get(carrier(parcel)) ?? [], parcel]);
@@ -750,6 +763,12 @@ interface ScheduleContext {
   sharedAlerts?: boolean;
   /** One of the parcel's links was just opened: a number nobody has seen is checked daily rather than weekly. */
   opened?: boolean;
+  /**
+   * Why someone waits for the parcel, from the run's list (waitingPackages): its page or the account's apps on
+   * screen, an alert on, or a read in the last hour alone. A parcel the list leaves out, someone waits for or not
+   * (`unwatched`), keeps the cadence of one on screen, as every parcel does when the list cannot be read.
+   */
+  waiting?: Waiting;
 }
 
 function isScheduledTrackingSyncDue(parcel: JsonObject, now: Date, context: ScheduleContext = {}): boolean {
@@ -764,7 +783,7 @@ function isScheduledTrackingSyncDue(parcel: JsonObject, now: Date, context: Sche
 function scheduledSyncDue(
   parcel: JsonObject,
   now: Date,
-  { unwatched = false, oneOff = false, unfollowed = false, sharedAlerts = false, opened = false }: ScheduleContext = {},
+  { unwatched = false, oneOff = false, unfollowed = false, sharedAlerts = false, opened = false, waiting }: ScheduleContext = {},
 ): boolean | 'last_mile' {
   if (!isTrackingSyncDue(parcel, now)) return false;
   // Every source a scheduled check may ask still waits its turn: it would ask nobody. Opening one of
@@ -850,7 +869,11 @@ function scheduledSyncDue(
   const activity = lastActivity(parcel);
   const idleAfter = NOT_YET_MOVING.has(String(parcel.current_stage)) ? EARLY_IDLE_AFTER_MS : IDLE_AFTER_MS;
   const idle = unwatched || (activity !== null && now.getTime() - activity >= idleAfter);
-  const byTheMinute = !idle;
+  // Up to every 10 minutes, and on the last mile every 2 or 5, only while someone has the parcel on screen, or has an
+  // alert on and the parcel is out for delivery or expected today. Otherwise hourly, as an idle parcel is.
+  const hurried = opened || waiting === undefined || waiting === 'on_screen'
+    || (waiting === 'alert' && (delivering || expectedToday(parcel, now)));
+  const byTheMinute = hurried && !idle;
   // After a failed check, the last mile waits LAST_MILE_BACKOFF_MS. Routing already holds a parcel
   // that long when its carrier's lookup fails; the error the check saved holds the others, a lookup
   // outside routing (Amazon Shipping) or the carrier's answer without the parcel's progress. The
@@ -1850,13 +1873,15 @@ export class TrackingSyncService {
       const started = performance.now();
       // The lists the run starts from are read at once: none needs another's answer but the shared
       // alerts, which need the parcels, so the run waits for the slowest rather than for them all.
-      const [unwatched, { active, shared }, lookupLists] = await allRead([
+      const [unwatched, waitedFor, { active, shared }, lookupLists] = await allRead([
         this.unwatchedPackages(now, context.signal),
+        this.waitingPackages(now, context.signal),
         this.client.listActivePackages().then(async (active) => ({ active, shared: await this.sharedAlertPackages(active, context.signal) })),
         this.readOneOffPackages(now, context.signal),
       ]);
       const schedule = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => scheduledSyncDue(parcel, at, {
         unwatched: unwatched.has(String(parcel.id)), oneOff, unfollowed, sharedAlerts: shared.has(String(parcel.id)),
+        waiting: waitedFor.get(String(parcel.id)),
       });
       const due = (oneOff: boolean, unfollowed = false) => (parcel: JsonObject, at: Date) => schedule(oneOff, unfollowed)(parcel, at) !== false;
       const owned = active.filter((parcel) => due(false)(parcel, now));
@@ -2156,6 +2181,21 @@ export class TrackingSyncService {
       signal?.throwIfAborted();
       captureOperationalError(error, { component: 'tracking', operation: 'list_unwatched_packages' });
       return new Set();
+    }
+  }
+
+  /**
+   * Why someone waits for each open parcel anyone waits for (listWaitingPackages). When it cannot be read, every
+   * parcel keeps the cadence of one on screen.
+   */
+  private async waitingPackages(now: Date, signal?: AbortSignal): Promise<Map<string, Waiting>> {
+    try {
+      return await this.client.listWaitingPackages(new Date(now.getTime() - WATCHED_AFTER_OPEN_MS),
+        new Date(now.getTime() - ON_SCREEN_MS));
+    } catch (error) {
+      signal?.throwIfAborted();
+      captureOperationalError(error, { component: 'tracking', operation: 'list_waiting_packages' });
+      return new Map();
     }
   }
 

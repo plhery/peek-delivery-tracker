@@ -126,6 +126,8 @@ export interface ParcelLinkReadOptions {
   signal?: AbortSignal;
   advance?: boolean;
   tellStopped?: boolean;
+  /** The page is out of sight: its read does not count as the link opened, and queues no check. */
+  hidden?: boolean;
   /** The reader's language. The sample parcel is told in it; a server's answer is the carrier's own words. */
   locale?: Locale;
 }

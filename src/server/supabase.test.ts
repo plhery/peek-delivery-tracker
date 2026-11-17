@@ -405,6 +405,30 @@ describe('one-off parcels and their links', () => {
     expect(recorded).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/record_account_opened', { method: 'POST', body: {} });
   });
 
+  it('lists the parcels someone is waiting for and why, in pages past the API\'s row limit', async () => {
+    const client = service();
+    const request = vi.spyOn(client, 'request')
+      .mockResolvedValueOnce([
+        { id: 'alert', on_screen: false, alerted: true }, { id: 'read', on_screen: true, alerted: true },
+        { id: null, on_screen: true, alerted: false },
+      ])
+      .mockResolvedValueOnce([{ id: 'zz-opened', on_screen: false, alerted: false }, { id: 'alert', on_screen: true, alerted: true }])
+      .mockResolvedValueOnce([]);
+    await expect(client.listWaitingPackages(new Date('2026-10-01T10:00:00Z'), new Date('2026-10-01T10:45:00Z')))
+      .resolves.toEqual(new Map([['alert', 'alert'], ['read', 'on_screen'], ['zz-opened', 'opened']]));
+    expect(request).toHaveBeenCalledTimes(3);
+    for (const [index, after] of [undefined, 'read', 'zz-opened'].entries()) {
+      const [path, options] = request.mock.calls[index]!;
+      expect(path).toMatch(/^\/rest\/v1\/rpc\/waiting_package_ids\?/);
+      expect(Object.fromEntries(params(path))).toEqual({
+        select: 'id,on_screen,alerted', order: 'id.asc', limit: '1000', ...(after === undefined ? {} : { id: `gt.${after}` }),
+      });
+      expect(options).toEqual({
+        method: 'POST', body: { p_opened_since: '2026-10-01T10:00:00.000Z', p_on_screen_since: '2026-10-01T10:45:00.000Z' },
+      });
+    }
+  });
+
   it('reads when an account\'s apps last read its parcels, for its export', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ last_opened_at: '2026-10-03T21:05:00+00:00' }]).mockResolvedValue([]);

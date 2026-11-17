@@ -203,6 +203,14 @@ describe('the API backend', () => {
     expect(new Headers(request.mock.calls[1][1]!.headers).has('X-Parcel-Key')).toBe(false);
     await links.readParcelLink(ID, { key: 'not a key' });
     expect(new Headers(request.mock.calls[2][1]!.headers).has('X-Parcel-Key')).toBe(false);
+    expect(request.mock.calls.map(([path]) => path)).toEqual(Array(3).fill(`/api/public/parcels/${ID}`));
+  });
+
+  it('says when the page reading the link is out of sight', async () => {
+    const { links, request } = api(json(owner));
+    await links.readParcelLink(ID, { key: KEY, hidden: true });
+    expect(request.mock.calls[0][0]).toBe(`/api/public/parcels/${ID}?hidden=true`);
+    expect(new Headers(request.mock.calls[0][1]!.headers).get('X-Parcel-Key')).toBe(KEY);
   });
 
   it('reads a link that leads nowhere as unavailable, and a malformed id without asking', async () => {

@@ -586,6 +586,14 @@ describe('createApiRepo', () => {
     expect(onChange).toHaveBeenCalledTimes(2);
   });
 
+  it('says when it reads the list out of sight, which does not count as the account\'s apps open', async () => {
+    vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('hidden');
+    const fetch = vi.fn().mockResolvedValue(response({ packages: [packageRow] }));
+    vi.stubGlobal('fetch', fetch);
+    await createApiRepo().list();
+    expect(fetch.mock.calls[0][0]).toBe('/api/packages?includeArchived=true&hidden=true');
+  });
+
   it('polls only the lightweight job endpoint before reloading a newly added parcel', async () => {
     vi.spyOn(document, 'visibilityState', 'get').mockReturnValue('visible');
     const pendingRow = {

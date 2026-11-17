@@ -20,6 +20,7 @@ function store() {
     listUnfiledOneOffPackages: vi.fn().mockResolvedValue([]),
     listSyncCandidates: vi.fn().mockResolvedValue([]),
     listUnwatchedPackageIds: vi.fn().mockResolvedValue([]),
+    listWaitingPackages: vi.fn().mockResolvedValue(new Map()),
     sharedAlertPackageIds: vi.fn().mockResolvedValue(new Set()),
     autoLinkPackages: vi.fn().mockResolvedValue(0),
     reopenScanAnnouncements: vi.fn(async (_id: string, ids: string[]) => ids.length),

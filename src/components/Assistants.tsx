@@ -8,6 +8,7 @@ import { readAssistants, revokeAssistant } from '../lib/assistants';
 import { localizedRelativeTime, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
+import { PipEmpty, PipPerch } from './PipPerch';
 
 /**
  * Each assistant's steps to add Peek, folded under its name, then a line for any other assistant. Signing in to Peek is
@@ -124,10 +125,10 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
     <p className="settings-description">{t('assistants.intro')} <a href={assistantsPath(locale)} target="_blank" rel="noopener">{t('assistants.page.link')}</a></p>
     {error && <p className="sheet__error" role="alert">{error}</p>}
     <section className="settings-group" aria-labelledby="assistants-address"><h3 className="settings-group__title" id="assistants-address">{t('assistants.address')}</h3>
-      <div className="settings-box">
+      <PipPerch happy={copied}><div className="settings-box">
         <p className="add-by-email__address" translate="no">{offer.mcpUrl}</p>
         <button className="settings-row" type="button" onClick={() => void copy()}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.copy')}</button>
-      </div>
+      </div></PipPerch>
     </section>
     <Setups />
     <Uses />
@@ -135,7 +136,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
       <div className="settings-box">
         {assistants.length
           ? assistants.map((connection) => <Connection key={connection.id} connection={connection} working={working} onRevoke={() => revoke(connection.id)} />)
-          : <p className="assistants__empty">{t('assistants.none')}</p>}
+          : <PipEmpty>{t('assistants.none')}</PipEmpty>}
       </div>
     </section>
   </>;

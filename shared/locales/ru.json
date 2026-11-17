@@ -1314,6 +1314,7 @@
   "inbox.filter.languages": "Языки, на которых вам пишут магазины и службы доставки",
   "inbox.filter.copy": "Скопировать запрос",
   "inbox.recent": "Последние письма",
+  "inbox.empty": "Писем пока нет. Перешлите письмо на ваш адрес, и оно появится здесь.",
   "inbox.result.added.one": "Добавлена {{count}} посылка",
   "inbox.result.added.few": "Добавлено {{count}} посылки",
   "inbox.result.added.many": "Добавлено {{count}} посылок",

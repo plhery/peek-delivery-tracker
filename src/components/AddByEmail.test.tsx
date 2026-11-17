@@ -59,6 +59,8 @@ describe('adding parcels by email in Settings', () => {
     await user.click(screen.getByRole('button', { name: 'Copy address' }));
     expect(copy).toHaveBeenCalledWith(inbox.address);
     expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument();
+    // Pip, peeking over the address, smiles once it is copied.
+    expect(screen.getByText(inbox.address).closest('.pip-perch')).toHaveAttribute('data-happy', 'true');
   });
 
   it('offers the filter for the languages the reader picks, and copies it', async () => {
@@ -68,7 +70,8 @@ describe('adding parcels by email in Settings', () => {
     render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} />);
     // Forwarding by a filter is folded away: one email forwarded by hand needs none of it.
     expect(screen.getByText('Forward automatically').closest('details')).not.toHaveAttribute('open');
-    expect(screen.queryByRole('heading', { name: 'Recent emails' })).not.toBeInTheDocument();
+    // Before the first email, the list keeps its place and says what will show there.
+    expect(within(screen.getByRole('region', { name: 'Recent emails' })).getByText('No email yet. Forward one to your address and it shows up here.')).toBeInTheDocument();
     await user.click(screen.getByText('Forward automatically'));
     const languages = screen.getByRole('group', { name: 'Languages your shops and carriers write in' });
     const chosen = () => within(languages).getAllByRole('button', { pressed: true }).map((button) => button.textContent);

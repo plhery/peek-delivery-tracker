@@ -1314,6 +1314,7 @@
   "inbox.filter.languages": "Sprachen, in denen dir Shops und Paketdienste schreiben",
   "inbox.filter.copy": "Suche kopieren",
   "inbox.recent": "Letzte E-Mails",
+  "inbox.empty": "Noch keine E-Mail. Leite eine an deine Adresse weiter, dann erscheint sie hier.",
   "inbox.result.added.one": "{{count}} Paket hinzugefügt",
   "inbox.result.added.few": "{{count}} Pakete hinzugefügt",
   "inbox.result.added.many": "{{count}} Pakete hinzugefügt",

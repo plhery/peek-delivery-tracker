@@ -1314,6 +1314,7 @@
   "inbox.filter.languages": "Línguas em que as lojas e as transportadoras te escrevem",
   "inbox.filter.copy": "Copiar pesquisa",
   "inbox.recent": "Últimos e-mails",
+  "inbox.empty": "Ainda não há nenhum e-mail. Reencaminha um para o teu endereço e ele aparece aqui.",
   "inbox.result.added.one": "{{count}} encomenda adicionada",
   "inbox.result.added.few": "{{count}} encomendas adicionadas",
   "inbox.result.added.many": "{{count}} encomendas adicionadas",

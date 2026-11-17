@@ -108,6 +108,20 @@
 .add-by-email__code { margin: 0; padding: 14px; font-size: 13px; overflow-wrap: anywhere; }
 .settings-row + .add-by-email__code { border-top: 1px solid var(--line); }
 .add-by-email__recent { margin: 0; padding: 0; list-style: none; }
+/* Pip stands behind the address's box and peeks over its top edge; his eyes turn into happy arcs once it is copied. */
+.pip-perch { position: relative; }
+.pip-perch > .settings-box { position: relative; z-index: 1; }
+.pip-perch__pip { position: absolute; z-index: 0; right: 22px; bottom: calc(100% - 12px); width: 58px; }
+/* A long title wraps before it reaches him. */
+.settings-group__title:has(+ .pip-perch) { padding-right: 86px; }
+.pip-perch .small-pip, .pip-empty .small-pip { width: 100%; }
+.pip-perch[data-happy] .parcel-illustration__eye { opacity: 0; }
+.pip-perch[data-happy] .parcel-illustration__happy-eye { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .pip-perch .parcel-illustration__eye, .pip-perch .parcel-illustration__happy-eye { transition: none; } }
+/* Pip in an empty list, looking up. */
+.pip-empty { display: grid; justify-items: center; gap: 8px; padding: 20px 14px 18px; text-align: center; }
+.pip-empty__pip { width: 58px; }
+.pip-empty p { margin: 0; max-width: 30ch; color: var(--ink-soft); font-size: 12.5px; line-height: 1.5; }
 .add-by-email__mail { justify-content: space-between; }
 .add-by-email__what { display: grid; gap: 3px; min-width: 0; }
 .add-by-email__what strong { font-weight: 550; overflow-wrap: anywhere; }
@@ -155,4 +169,3 @@
 .assistants__what strong { font-weight: 550; overflow-wrap: anywhere; }
 .assistants__what small { color: var(--ink-soft); font-size: 11px; line-height: 1.4; overflow-wrap: anywhere; }
 .assistants__revoke { flex: none; min-height: 36px; padding: 0 12px; border-radius: 12px; background: var(--yellow-soft); color: var(--ink); font-size: 12px; }
-.assistants__empty { margin: 0; padding: 14px; color: var(--ink-soft); font-size: 13px; background: var(--paper); }

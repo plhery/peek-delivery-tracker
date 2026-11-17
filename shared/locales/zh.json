@@ -1314,6 +1314,7 @@
   "inbox.filter.languages": "商家和快递公司给你写信用的语言",
   "inbox.filter.copy": "复制搜索条件",
   "inbox.recent": "最近的邮件",
+  "inbox.empty": "还没有邮件。把一封邮件转发到你的地址，它就会显示在这里。",
   "inbox.result.added.one": "已添加 {{count}} 个包裹",
   "inbox.result.added.few": "已添加 {{count}} 个包裹",
   "inbox.result.added.many": "已添加 {{count}} 个包裹",

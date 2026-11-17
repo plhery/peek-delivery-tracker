@@ -280,9 +280,12 @@ export function ParcelIllustration({ className = '', label, ribbon = false }: {
   </svg>;
 }
 
-/** Pip at sticker size, closed and still, with a face large enough to read. */
-export function SmallPip() {
-  return <svg className="small-pip" viewBox="48 88 204 196" fill="none" aria-hidden="true">
+/**
+ * Pip at sticker size, closed, with a face large enough to read. `look` turns his eyes; with `blinks` he blinks as on
+ * the arrival screen, unless the reader asks for less motion.
+ */
+export function SmallPip({ look, blinks = false }: { look?: PaperPoint; blinks?: boolean } = {}) {
+  return <svg className={blinks ? 'small-pip parcel-illustration' : 'small-pip'} viewBox="48 88 204 196" fill="none" aria-hidden="true">
     <path d={PARCEL.inside} fill="#806345" />
     <polygon points={flapPoints(PARCEL.flaps.backRight, false)} fill="#D8B997" />
     <path d={PARCEL.left} fill="#C9A47B" />
@@ -290,7 +293,7 @@ export function SmallPip() {
     <path d={PARCEL.hairlines} stroke="#987450" strokeOpacity=".25" strokeWidth=".8" />
     <path d={PARCEL.edges} stroke="#FFF2CF" strokeOpacity=".4" strokeWidth="1" />
     <polygon points={flapPoints(PARCEL.flaps.frontLeft, false)} fill="#DDBD96" />
-    <PipFace k={1.3} />
+    <PipFace k={1.3} look={look} />
     <path d={PARCEL.tape} fill="#EBDDCA" />
   </svg>;
 }

@@ -1314,6 +1314,7 @@
   "inbox.filter.languages": "Languages your shops and carriers write in",
   "inbox.filter.copy": "Copy search",
   "inbox.recent": "Recent emails",
+  "inbox.empty": "No email yet. Forward one to your address and it shows up here.",
   "inbox.result.added.one": "{{count}} parcel added",
   "inbox.result.added.few": "{{count}} parcels added",
   "inbox.result.added.many": "{{count}} parcels added",

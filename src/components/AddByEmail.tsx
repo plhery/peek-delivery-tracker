@@ -10,6 +10,7 @@ import {
 import { localizedRelativeTime, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
+import { PipEmpty, PipPerch } from './PipPerch';
 
 /** How soon the reader coming back to Peek reads the offer again: the tab and the window tell of the same return. */
 const REREAD_AFTER_MS = 2_000;
@@ -231,21 +232,21 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
     {!inbox ? <button className="button button--primary add-by-email__start" type="button" disabled={working} aria-busy={working || undefined}
       onClick={() => void run(() => openAddByEmail(apiAuth))}><Icon name="mail" />{t('inbox.start')}</button> : <>
       <section className="settings-group" aria-labelledby="add-by-email-address"><h3 className="settings-group__title" id="add-by-email-address">{t('inbox.address')}</h3>
-        <div className="settings-box">
+        <PipPerch happy={copied}><div className="settings-box">
           <p className="add-by-email__address" translate="no">{inbox.address}</p>
           <button className="settings-row" type="button" onClick={() => void copy(inbox.address)}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.copy')}</button>
-        </div>
+        </div></PipPerch>
       </section>
-      {recent.length > 0 && <section className="settings-group" aria-labelledby="add-by-email-recent"><h3 className="settings-group__title" id="add-by-email-recent">{t('inbox.recent')}</h3>
-        <ul className="settings-box add-by-email__recent">
+      <section className="settings-group" aria-labelledby="add-by-email-recent"><h3 className="settings-group__title" id="add-by-email-recent">{t('inbox.recent')}</h3>
+        {recent.length ? <ul className="settings-box add-by-email__recent">
           {recent.map((entry) => <li key={entry.at} className="settings-row add-by-email__mail">
             <span className="add-by-email__what">{entry.sender ? <><strong>{entry.sender}</strong><small>{resultText(t, entry)}</small></> : <strong>{resultText(t, entry)}</strong>}</span>
             <span className="settings-value">{localizedRelativeTime(entry.at, t, languageTag)}</span>
           </li>)}
-        </ul>
+        </ul> : <div className="settings-box"><PipEmpty>{t('inbox.empty')}</PipEmpty></div>}
         {recent.some(({ result }) => result === 'none') && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
         {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
-      </section>}
+      </section>
       <details className="settings-box add-by-email__auto" open={Boolean(inbox.confirmation) || undefined}>
         <summary className="settings-row"><Icon name="settings" /><span>{t('inbox.auto.title')}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
         <div className="add-by-email__auto-body">

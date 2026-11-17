@@ -1314,6 +1314,7 @@
   "inbox.filter.languages": "Idiomas en los que te escriben tiendas y transportistas",
   "inbox.filter.copy": "Copiar búsqueda",
   "inbox.recent": "Últimos correos",
+  "inbox.empty": "Aún no hay ningún correo. Reenvía uno a tu dirección y aparecerá aquí.",
   "inbox.result.added.one": "{{count}} paquete añadido",
   "inbox.result.added.few": "{{count}} paquetes añadidos",
   "inbox.result.added.many": "{{count}} paquetes añadidos",

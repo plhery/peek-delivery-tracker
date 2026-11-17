@@ -91,7 +91,7 @@ CTT's channels, as read on 11 October 2026:
 
 [Peek](/) recognises CTT's postal codes (two letters, nine digits, `PT`, valid check digit) at once and reads them from CTT's tracking; ctt.pt links with `objects=` work too. With one digit wrong, the check digit no longer fits and Peek recognises no carrier, so check the number. Other CTT codes aren't read from CTT; Peek uses universal tracking services.
 
-Peek shows the status and the newest 20 scans with a rough place (depot or point) on a map, plus CTT's status code. It drops the sender and recipient, and CTT gives no expected delivery day. Times are read on Lisbon time, or Azores time for the islands, and shown in your device's time zone.
+Peek shows the status and the newest 20 scans with a rough place (depot or point) on a map, plus CTT's status code. It drops the sender (the recipient's name, when CTT gives it, shows under "Recipient" only to whoever added the parcel, never on a shared link), and CTT gives no expected delivery day. Times are read on Lisbon time, or Azores time for the islands, and shown in your device's time zone.
 
 CTT Express's 22- and 25-digit numbers (`00`, four digits, `00`, then 14 digits, plus `001` for 25) go to CTT Express, which Peek lists separately: history without places, the expected delivery day, weight, delivery time and Spanish wordings such as `El envío fue entregado correctamente`.
 

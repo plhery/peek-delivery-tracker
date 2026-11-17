@@ -18,7 +18,7 @@ GLS Germany (General Logistics Systems Germany GmbH & Co. OHG) доставля�
 | --- | --- |
 | `11111111111` | 11 цифр. Такий самий формат мають [GLS Switzerland](carrier:gls-ch), [GLS France](carrier:gls-fr), [GLS Austria](carrier:gls-at), GLS Poland, PostLogistics та інші. |
 | `123459999981` | 12 цифр, остання контрольна. Такий самий формат мають [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), [Colis Privé](carrier:colis-prive) та інші. |
-| `AB123456` | 8 знаків, літери й цифри: так буває записаний Track-ID. Так само виглядають номери GLS Switzerland, GLS France і Loggi. |
+| `AB123456` | 8 знаків, літери й цифри: так буває записаний Track-ID. Так само виглядають номери GLS Switzerland, GLS France, GLS Netherlands і Loggi. |
 | Track-ID з 6 літер | З картки-повідомлення. Peek читає його як номер посилки; якщо ваш Peek не приймає, введіть номер посилки. |
 
 Номер не підходить? Перевірте, кого називає лист магазину: якщо там [DHL](carrier:dhl), [Hermes](carrier:hermes-de) чи [DPD](carrier:dpd-de), номер належить їм, а не GLS.

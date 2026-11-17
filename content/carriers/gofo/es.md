@@ -53,7 +53,7 @@ Los escaneos de GOFO que lee Peek están en inglés. Estos son los que puede enc
 
 `Delivery Exception` es un intento de entrega fallido, y el motivo que va después de la coma cambia de un intento a otro; `Business Closed` es solo uno. Peek pone entonces el paquete en «Intento de entrega» y copia la línea de GOFO bajo «Lo que dice GOFO Express». Con `Incorrect/Insufficient Address…`, el estado pasa a «Incidencia»: avísale a la tienda para que corrija la dirección. Con `Label Cancelled`, el estado también pasa a «Incidencia» y no llega ningún escaneo más: pídele a la tienda que te confirme si tu pedido salió con otro número.
 
-**Horas.** GOFO fecha cada escaneo con la zona horaria que asigna a cada centro, y la creación de la etiqueta, siempre con la del Pacífico. Peek te muestra cada hora en la zona de tu celular o computadora y en formato de 24 horas (15:40 son las 3:40 p. m.): una etiqueta creada a las 10 p. m., hora del Pacífico, aparece como 01:00 del día siguiente si estás en la hora del Este.
+**Horas.** GOFO fecha cada escaneo con la zona horaria que asigna a cada centro, y la creación de la etiqueta, siempre con la del Pacífico. Peek te muestra cada hora en la zona de tu celular o computadora y en el formato horario de tu dispositivo: una etiqueta creada a las 10 p. m., hora del Pacífico, aparece como 01:00 del día siguiente si estás en la hora del Este.
 
 ## Paquete de GOFO retrasado, sin movimiento o no entregado: qué hacer
 
@@ -79,7 +79,7 @@ Mientras GOFO no conozca un número `GF`, `CR` o `MGP`, Peek sigue comprobando y
 
 Peek muestra el estado, cada escaneo con la ciudad y el estado que indica GOFO, esos lugares en un mapa, la hora de entrega y el país de destino. Los escaneos salen en inglés, como los escribe GOFO, salvo la entrega, que aparece como «Entregado», sin el detalle que GOFO añade a veces tras la coma. GOFO calcula una fecha estimada de entrega, que Peek muestra hasta que el paquete sale a reparto, se entrega, se devuelve o llega a un punto de recogida; Peek deja fuera las fotos de entrega, las coordenadas y el peso.
 
-Peek consulta a GOFO cada 30 minutos, también con el paquete en reparto, y espera una hora tras una consulta fallida. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
+Peek consulta a GOFO hasta cada 30 minutos, también con el paquete en reparto, y espera una hora tras una consulta fallida. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede comunicarse con GOFO ni con la tienda por ti.
 
 ## Preguntas sobre el rastreo de GOFO Express
 

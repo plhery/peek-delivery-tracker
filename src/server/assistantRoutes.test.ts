@@ -430,8 +430,9 @@ describe('the MCP endpoint', () => {
   });
 
   it('reads a scan the earlier carrier also told once, its other words as also', async () => {
-    // A handed-over parcel: the earlier carrier tells the new carrier's scans in its own language, once at the same
-    // second and once a few seconds off. Synthetic wording.
+    // A handed-over parcel: the earlier carrier tells the new carrier's scans in its own language, at the same second
+    // and a few seconds off, and once a few seconds off in words that show no language, which may be a scan of its own.
+    // Synthetic wording.
     const minute = Math.floor(Date.now() / 60_000) * 60_000;
     const at = (hours: number, second: number) => new Date(minute - hours * 3_600_000 + second * 1_000).toISOString();
     const base = stored(9, 'in_transit');
@@ -446,11 +447,14 @@ describe('the MCP endpoint', () => {
         event(3, 'yanwen', 'Arrived at the delivery facility', at(5, 5), 'Example Hub'),
         event(4, 'la-poste', 'Votre colis est en cours d\'acheminement', at(2, 20), 'Example Hub'),
         event(5, 'yanwen', 'Parcel departed the facility', at(2, 41), null),
+        event(6, 'la-poste', 'Votre colis est en cours de traitement', at(3, 10), 'Example Hub'),
+        event(7, 'yanwen', 'In transit', at(3, 30), null),
       ] };
     vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id) => (id === handed.id ? handed : null));
     const read = await call(connect(['parcels:read']), 'get_parcel', { parcel: handed.id });
     expect(read.result!.structuredContent!.history).toEqual([
-      { time: at(2, 20), status: 'in_transit', description: 'Votre colis est en cours d\'acheminement', location: 'Example Hub', also: ['Parcel departed the facility'] },
+      { time: at(2, 20), status: 'in_transit', description: 'Votre colis est en cours d\'acheminement', location: 'Example Hub' },
+      { time: at(3, 10), status: 'in_transit', description: 'Votre colis est en cours de traitement', location: 'Example Hub', also: ['In transit'] },
       { time: at(5, 5), status: 'in_transit', description: 'Votre colis est arrivé sur notre site', location: 'Example Hub' },
       { time: ACCEPTED, status: 'accepted', description: 'Parcel received', location: 'Example Depot' },
     ]);

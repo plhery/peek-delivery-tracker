@@ -7,6 +7,7 @@ import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/place
 import { clockDay, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, relayCopies } from './relayCopies';
+import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
@@ -243,24 +244,28 @@ function textWords(text: unknown): string[] {
 }
 
 /**
- * Whether an earlier carrier's copy tells its scan and nothing more: in the same stage, at the same second (not a
- * minute's first, which a carrier keeping minutes gives every scan, nor of a row dated by its day), in words of three
- * letters or more that share none with the scan's, or that add none to the scan's words and place. The copy is then
- * the scan in its own language (TopYou tells GOFO France's "Colis en cours d'acheminement" as "The package left
- * sorting center"), or the scan cut short (4PX tells iMile's "Your order has been received" at a centre as
- * "【<centre>】received"); a copy that shares a word and adds one may say more. A copy in the scan's very words is
- * served in the upper row's spelling (`spelt`).
+ * Whether an earlier carrier's copy tells its scan and nothing more, in the same stage, neither row dated by its day,
+ * in words of three letters or more: at the scan's second (not a minute's first, which a carrier keeping minutes gives
+ * every scan), sharing none with the scan's words or adding none to its words and place; or within a minute of the
+ * scan, a minute's first second included, sharing none and plainly in another language (`otherLanguages`). The copy
+ * is then the scan in its own language (TopYou tells GOFO France's "Colis en cours d'acheminement" as "The package
+ * left sorting center", HayPost a Russian Post bagging to the minute), or the scan cut short (4PX tells iMile's "Your
+ * order has been received" at a centre as "【<centre>】received"); a copy that shares a word and adds one may say
+ * more, and one a second or more away in the same language may be a scan of its own. A copy in the scan's very words
+ * is served in the upper row's spelling (`spelt`).
  */
 function toldAgain(copy: JsonObject, scan: JsonObject): boolean {
-  const second = (row: JsonObject) => row.observed === true || scanDay(row) || clockDay(row)
-    ? NaN : Math.floor(Date.parse(String(row.occurred_at)) / 1000);
+  const time = (row: JsonObject) => row.observed === true || scanDay(row) || clockDay(row) ? NaN : Date.parse(String(row.occurred_at));
+  const second = (row: JsonObject) => Math.floor(time(row) / 1000);
   const copyWords = longWords(copy);
   const scanWords = longWords(scan);
-  if (copy.stage !== scan.stage || second(copy) !== second(scan) || second(copy) % 60 === 0
-    || !copyWords.length || !scanWords.length) return false;
+  if (copy.stage !== scan.stage || !copyWords.length || !scanWords.length) return false;
+  const shared = copyWords.some((word) => scanWords.includes(word));
+  if (second(copy) !== second(scan) || second(copy) % 60 === 0) {
+    return !shared && Math.abs(time(copy) - time(scan)) <= 60_000 && otherLanguages(copy.description, scan.description);
+  }
   const told = [...scanWords, ...textWords(scan.location)];
-  return !copyWords.some((word) => scanWords.includes(word))
-    || (copyWords.every((word) => told.includes(word)) && !sameWords(copy, scan));
+  return !shared || (copyWords.every((word) => told.includes(word)) && !sameWords(copy, scan));
 }
 
 /**
@@ -466,7 +471,7 @@ function placedEvents(row: JsonObject): JsonObject {
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
   // otherwise, it is served in the other row's spelling, so they are shown once. So is an earlier carrier's copy whose
-  // words read as a stage neither row is in, or that tells the scan's second and stage and nothing more (`toldAgain`),
+  // words read as a stage neither row is in, or that tells the scan's stage and nothing more (`toldAgain`),
   // in the words of the carrier whose scan it tells, whichever row is on top.
   const retold = new Map([...pairs].map(([copy, scan]) => [byId.get(copy)!, byId.get(scan)!] as const)
     .filter(([copy, scan]) => copyMisleads(copy, scan) || (toldAgain(copy, scan) && !copyTellsProblem(copy, scan)))

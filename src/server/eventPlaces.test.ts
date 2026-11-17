@@ -451,7 +451,7 @@ describe('withEventPlaces', () => {
       .toBe('Shipment is out for delivery');
   });
 
-  it('serves an earlier carrier\'s copy telling a scan\'s second and stage in words that share none in the scan\'s words', () => {
+  it('serves an earlier carrier\'s copy telling a scan\'s stage within its minute in words that share none in the scan\'s words', () => {
     const scan = (id: string, source: string, occurredAt: string, description: string, stage = 'in_transit', extra: Record<string, unknown> = {}) => ({
       ...event(id, 'Lyon', occurredAt), stage, description, provider_event_id: `${source}:${id}`, ...extra,
     });
@@ -466,13 +466,18 @@ describe('withEventPlaces', () => {
         // A copy sharing a word may say more: it keeps its line.
         scan('out', 'gofo-fr', '2026-11-01T20:25:28+00:00', 'Out for delivery', 'out_for_delivery'),
         scan('out-copy', 'topyou', '2026-11-01T20:25:28+00:00', 'The driver is out for delivery', 'out_for_delivery'),
-        // A second apart, on a minute's first second, or dated by its day, it may be a scan of its own.
+        // Within the minute, on a minute's first second too, it is the scan in the copy's language.
         scan('sorted', 'gofo-fr', '2026-10-30T17:51:05+00:00', 'Colis trié'),
         scan('sorted-copy', 'topyou', '2026-10-30T17:51:06+00:00', 'Arrived at the hub'),
         scan('hub', 'gofo-fr', '2026-10-29T09:12:00+00:00', 'Arrivé au centre'),
         scan('hub-copy', 'topyou', '2026-10-29T09:12:00+00:00', 'Parcel scanned'),
+        scan('bagged', 'gofo-fr', '2026-10-29T07:40:37+00:00', 'Colis mis en sac'),
+        scan('bagged-copy', 'topyou', '2026-10-29T07:40:00+00:00', 'Parcel bagged'),
+        // Dated by its day, or hours away on another clock, it may be a scan of its own.
         scan('day', 'gofo-fr', '2026-10-28T09:12:07+00:00', 'Pris en charge'),
         scan('day-copy', 'topyou', '2026-10-28T09:12:07+00:00', 'Parcel scanned', 'in_transit', { time: '2026-10-28' }),
+        scan('posted', 'gofo-fr', '2026-10-27T10:20:30+00:00', 'Déposé'),
+        { ...scan('posted-copy', 'topyou', '2026-10-27T09:20:30+00:00', 'Shipment in transit'), location: null },
         // On top, as it alone names the place, the copy is served in the carrier's words too.
         { ...scan('arrived', 'gofo-fr', '2026-11-01T06:02:41+00:00', 'Arrivé au dépôt'), location: null },
         scan('arrived-copy', 'topyou', '2026-11-01T06:02:41+00:00', 'Parcel reached the depot'),
@@ -487,11 +492,15 @@ describe('withEventPlaces', () => {
       ['out', undefined, 'Out for delivery'],
       ['out-copy', 'out', 'The driver is out for delivery'],
       ['sorted', undefined, 'Colis trié'],
-      ['sorted-copy', 'sorted', 'Arrived at the hub'],
+      ['sorted-copy', 'sorted', 'Colis trié'],
       ['hub', undefined, 'Arrivé au centre'],
-      ['hub-copy', 'hub', 'Parcel scanned'],
+      ['hub-copy', 'hub', 'Arrivé au centre'],
+      ['bagged', undefined, 'Colis mis en sac'],
+      ['bagged-copy', 'bagged', 'Colis mis en sac'],
       ['day', undefined, 'Pris en charge'],
       ['day-copy', 'day', 'Parcel scanned'],
+      ['posted', undefined, 'Déposé'],
+      ['posted-copy', 'posted', 'Shipment in transit'],
       ['arrived', 'arrived-copy', 'Arrivé au dépôt'],
       ['arrived-copy', undefined, 'Arrivé au dépôt'],
     ]);

@@ -105,7 +105,7 @@ describe('carrier brand', () => {
     ['dpd-de', 'dpd'], ['dpd-uk', 'dpd'], ['evri-uk', 'evri'], ['delivengo', 'la-poste'],
     ['gofo-ca', 'gofo'], ['gofo-fr', 'gofo'], ['gofo-it', 'gofo'], ['gofo-nl', 'gofo'],
     ['wedo', 'allegro-one'], ['yamato-america', 'yamato'],
-    ['ait-home-delivery', 'ait-worldwide'],
+    ['ait-home-delivery', 'ait-worldwide'], ['jumppoint-international', 'jumppoint'],
   ])('shares %s branding with %s', (id, owner) => {
     expect(carrierBrandFamily(id)).toBe(owner);
     expect(carrierDecal(id)).toBe(carrierDecal(owner));
@@ -976,6 +976,29 @@ describe('carrier brand', () => {
       'yqs',
       'yusuda',
       'memphis-courier',
+      'atual-cargas',
+      'azems',
+      'dai-post',
+      'domina',
+      'g4s-kenya',
+      'js-express',
+      'khazenly',
+      'linhan',
+      'mailamericas',
+      'maldives-post',
+      'meihoo-pegasus',
+      'mtscn',
+      'packlink',
+      'patrus',
+      'reunidas-cargas',
+      'silpo-pack',
+      'speedaf',
+      'sprint-eg',
+      'tiptop',
+      'topyou',
+      'via-pajucara',
+      'yypost',
+      'z-leading',
     ] as const) {
       for (const shape of SOURCE_DECALS[name]) {
         if (shape.type === 'circle') {

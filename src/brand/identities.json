@@ -351,6 +351,9 @@
   "ats-healthcare": {
     "decal": "ats-healthcare"
   },
+  "atual-cargas": {
+    "decal": "atual-cargas"
+  },
   "auexpress": {
     "decal": "auexpress"
   },
@@ -372,6 +375,9 @@
   },
   "aymakan": {
     "decal": "aymakan"
+  },
+  "azems": {
+    "decal": "azems"
   },
   "azerpost": {
     "decal": "azerpost"
@@ -1014,6 +1020,9 @@
   "dago-express": {
     "decal": "dago-express"
   },
+  "dai-post": {
+    "decal": "dai-post"
+  },
   "daiichi": {
     "decal": "daiichi"
   },
@@ -1213,6 +1222,9 @@
   },
   "domex": {
     "decal": "domex"
+  },
+  "domina": {
+    "decal": "domina"
   },
   "dongdu": {
     "decal": "dongdu"
@@ -1741,6 +1753,9 @@
   "fxdc-post": {
     "decal": "fxdc-post"
   },
+  "g4s-kenya": {
+    "decal": "g4s-kenya"
+  },
   "gaash": {
     "decal": "gaash"
   },
@@ -2260,6 +2275,9 @@
   "j-and-t-br": {
     "decal": "j-and-t-cn"
   },
+  "j-and-t-cargo-br": {
+    "decal": "j-and-t-cargo"
+  },
   "j-and-t-co": {
     "decal": "j-and-t-cn"
   },
@@ -2407,8 +2425,14 @@
   "jrt": {
     "decal": "jrt"
   },
+  "js-express": {
+    "decal": "js-express"
+  },
   "jumppoint": {
     "decal": "jumppoint"
+  },
+  "jumppoint-international": {
+    "family": "jumppoint"
   },
   "junfeng-international": {
     "decal": "junfeng-international"
@@ -2448,6 +2472,9 @@
   },
   "kex-express-hk": {
     "decal": "kex-express-hk"
+  },
+  "khazenly": {
+    "decal": "khazenly"
   },
   "king-kong-express": {
     "decal": "king-kong-express"
@@ -2621,6 +2648,9 @@
   "lingdong": {
     "decal": "lingdong"
   },
+  "linhan": {
+    "decal": "linhan"
+  },
   "lion-parcel": {
     "decal": "lion-parcel"
   },
@@ -2708,6 +2738,9 @@
   "magyar-posta": {
     "decal": "magyar-posta"
   },
+  "mailamericas": {
+    "decal": "mailamericas"
+  },
   "mailex": {
     "decal": "mailex"
   },
@@ -2728,6 +2761,9 @@
   },
   "makesend": {
     "decal": "makesend"
+  },
+  "maldives-post": {
+    "decal": "maldives-post"
   },
   "maltapost": {
     "decal": "maltapost"
@@ -2779,6 +2815,9 @@
   },
   "megacity-courier": {
     "decal": "megacity-courier"
+  },
+  "meihoo-pegasus": {
+    "decal": "meihoo-pegasus"
   },
   "meitetsu-unyu": {
     "decal": "meitetsu-unyu"
@@ -2885,6 +2924,9 @@
   },
   "mte-xpress": {
     "decal": "mte-xpress"
+  },
+  "mtscn": {
+    "decal": "mtscn"
   },
   "multientrega": {
     "decal": "multientrega"
@@ -3124,6 +3166,9 @@
       "accent": "#f9e937"
     }
   },
+  "packlink": {
+    "decal": "packlink"
+  },
   "packs": {
     "decal": "packs"
   },
@@ -3195,6 +3240,9 @@
   },
   "pathao-courier": {
     "decal": "pathao-courier"
+  },
+  "patrus": {
+    "decal": "patrus"
   },
   "patuen": {
     "decal": "patuen"
@@ -3570,6 +3618,9 @@
   "relais-colis": {
     "decal": "relais-colis"
   },
+  "reunidas-cargas": {
+    "decal": "reunidas-cargas"
+  },
   "rex-indonesia": {
     "decal": "rex-indonesia"
   },
@@ -3856,6 +3907,9 @@
   "sicepat": {
     "decal": "sicepat"
   },
+  "silpo-pack": {
+    "decal": "silpo-pack"
+  },
   "sinapseria": {
     "decal": "sinapseria"
   },
@@ -3952,6 +4006,9 @@
   "speed-and-safe": {
     "decal": "speed-and-safe"
   },
+  "speedaf": {
+    "decal": "speedaf"
+  },
   "speedex": {
     "decal": "speedex"
   },
@@ -3972,6 +4029,9 @@
   },
   "spring-gds": {
     "decal": "postnl"
+  },
+  "sprint-eg": {
+    "decal": "sprint-eg"
   },
   "spt-logistics": {
     "decal": "spt-logistics"
@@ -4254,6 +4314,9 @@
     },
     "decal": "tipsa"
   },
+  "tiptop": {
+    "decal": "tiptop"
+  },
   "tirupati-courier": {
     "decal": "tirupati-courier"
   },
@@ -4307,6 +4370,9 @@
   },
   "toptrans": {
     "decal": "toptrans"
+  },
+  "topyou": {
+    "decal": "topyou"
   },
   "torrestir": {
     "decal": "torrestir"
@@ -4562,6 +4628,9 @@
   },
   "via-cargo": {
     "decal": "via-cargo"
+  },
+  "via-pajucara": {
+    "decal": "via-pajucara"
   },
   "viadireta": {
     "decal": "viadireta"
@@ -4866,6 +4935,12 @@
   },
   "ywe": {
     "decal": "ywe"
+  },
+  "yypost": {
+    "decal": "yypost"
+  },
+  "z-leading": {
+    "decal": "z-leading"
   },
   "zajel": {
     "decal": "zajel"

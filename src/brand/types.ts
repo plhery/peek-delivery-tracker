@@ -859,7 +859,30 @@ export type CarrierDecal = 'default' | 'dhl' | 'ups' | 'fedex' | 'dpd' | 'amazon
   | 'extrans'
   | 'yqs'
   | 'yusuda'
-  | 'memphis-courier';
+  | 'memphis-courier'
+  | 'atual-cargas'
+  | 'azems'
+  | 'dai-post'
+  | 'domina'
+  | 'g4s-kenya'
+  | 'js-express'
+  | 'khazenly'
+  | 'linhan'
+  | 'mailamericas'
+  | 'maldives-post'
+  | 'meihoo-pegasus'
+  | 'mtscn'
+  | 'packlink'
+  | 'patrus'
+  | 'reunidas-cargas'
+  | 'silpo-pack'
+  | 'speedaf'
+  | 'sprint-eg'
+  | 'tiptop'
+  | 'topyou'
+  | 'via-pajucara'
+  | 'yypost'
+  | 'z-leading';
 
 /** How one property is mixed out of the carrier's catalog color. */
 export interface BrandDerivationStep {

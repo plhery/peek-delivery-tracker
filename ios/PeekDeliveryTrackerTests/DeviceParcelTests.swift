@@ -77,7 +77,10 @@ final class DeviceParcelTests: XCTestCase {
                 guard let lookup else { throw DeviceLookupsSpent() }
                 return lookup
             },
-            read: { linkID, key in calls.add("read \(linkID) \((key ?? "-").prefix(1))"); return try read(linkID) },
+            read: { linkID, key, hidden in
+                calls.add("read \(linkID) \((key ?? "-").prefix(1))\(hidden ? " hidden" : "")")
+                return try read(linkID)
+            },
             forget: { linkID, _ in calls.add("forget \(linkID)") },
             update: { linkID, _, change in
                 calls.add("update \(linkID) shared=\(change.shared.map(String.init) ?? "-")")
@@ -437,6 +440,23 @@ final class DeviceParcelTests: XCTestCase {
 
         XCTAssertEqual(calls.all, ["read 22222222222A k"])
         XCTAssertFalse(device.isWaiting)
+    }
+
+    func testAReadWithNothingOnScreenSaysSo() async throws {
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        let followed = UUID()
+        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(followed)), checkedAt: .now)]
+        let calls = Calls()
+        let answers = ["22222222222A": PublicParcelResponse(link: link("22222222222A"), package: package(followed)),
+                       "22222222222B": PublicParcelResponse(link: link("22222222222B"), package: package(UUID()))]
+        let device = DeviceParcels(client: client(calls, read: { answers[$0] }), storage: storage)
+
+        try await device.refresh(all: true, hidden: true)
+        try await device.refresh(all: true)
+
+        // The lost one comes back from a hidden read too.
+        XCTAssertEqual(calls.all, ["read 22222222222A k hidden", "read 22222222222B k hidden", "read 22222222222A k", "read 22222222222B k"])
     }
 
     private func news(_ package: PublicPackage, at newsAt: String?) -> PublicPackage {

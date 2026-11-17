@@ -3342,6 +3342,26 @@ final class SessionIsolationTests: XCTestCase {
         XCTAssertTrue(store.parcels.isEmpty)
         XCTAssertNil(store.errorMessage)
     }
+    @MainActor func testAListReadWithNothingOnScreenSaysSo() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let data = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [parcel()]))
+        nonisolated(unsafe) var queries: [String?] = []
+        SessionTestURLProtocol.handler = { request, callback in
+            if request.url?.path == "/api/packages", request.httpMethod == "GET" { queries.append(request.url?.query) }
+            callback(.success((200, data)))
+        }
+
+        await store.load()
+        await store.load(hidden: true)
+
+        XCTAssertEqual(queries, ["includeArchived=true", "includeArchived=true&hidden=true"])
+        XCTAssertEqual(store.parcels.count, 1)
+    }
     @MainActor func testListStartedBeforeDeleteCannotRestoreDeletedParcel() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

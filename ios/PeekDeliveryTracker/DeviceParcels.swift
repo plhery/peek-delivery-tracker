@@ -109,8 +109,9 @@ struct DeviceLookupsSpent: Error, Equatable {}
 /// its owner key only.
 struct DeviceParcelClient: Sendable {
     var lookup: @Sendable (PublicLookupRequest) async throws -> PublicLookupResponse
-    /// Nil when the service no longer has the parcel, or no longer shares it with a reader without the key.
-    var read: @Sendable (_ linkID: String, _ key: String?) async throws -> PublicParcelResponse?
+    /// Nil when the service no longer has the parcel, or no longer shares it with a reader without the key. `hidden`:
+    /// read with no window on screen, so the service doesn't count it as a look.
+    var read: @Sendable (_ linkID: String, _ key: String?, _ hidden: Bool) async throws -> PublicParcelResponse?
     var forget: @Sendable (_ linkID: String, _ key: String) async throws -> Void
     /// Changes what the link shows to others, or stops and resumes its sharing.
     var update: @Sendable (_ linkID: String, _ key: String, UpdateParcelLinkRequest) async throws -> PublicParcelResponse
@@ -125,8 +126,10 @@ struct DeviceParcelClient: Sendable {
     var removeAlert: @Sendable (_ linkID: String, DeleteParcelAppAlertRequest) async throws -> Void = { _, _ in }
 
     static func api(configuration: AppConfiguration, transport: URLSession = .shared, verification: NativeVerification = .shared) -> DeviceParcelClient {
-        @Sendable func send(_ path: String, method: String, key: String? = nil, body: Data? = nil) async throws -> (Data, HTTPURLResponse) {
-            var request = URLRequest(url: configuration.apiBaseURL.appending(path: path),
+        @Sendable func send(_ path: String, method: String, key: String? = nil, query: [URLQueryItem] = [], body: Data? = nil) async throws -> (Data, HTTPURLResponse) {
+            var url = configuration.apiBaseURL.appending(path: path)
+            if !query.isEmpty { url.append(queryItems: query) }
+            var request = URLRequest(url: url,
                                      cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 30)
             request.httpMethod = method
             request.httpShouldHandleCookies = false
@@ -165,8 +168,9 @@ struct DeviceParcelClient: Sendable {
                 guard response.statusCode == 201 || response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicLookupResponse.self, data)
             },
-            read: { linkID, key in
-                let (data, response) = try await send("api/public/parcels/\(linkID)", method: "GET", key: key)
+            read: { linkID, key, hidden in
+                let (data, response) = try await send("api/public/parcels/\(linkID)", method: "GET", key: key,
+                                                      query: hidden ? [URLQueryItem(name: "hidden", value: "true")] : [])
                 if response.statusCode == 404 || response.statusCode == 410 { return nil }
                 guard response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicParcelResponse.self, data)
@@ -422,8 +426,9 @@ final class DeviceParcels {
 
     /// Reads every parcel whose answer has gone stale, or every one when `all`, and brings back
     /// the ones whose last answer was lost. A parcel the service no longer has leaves the list.
-    /// The first trouble ends the round and is thrown; the list keeps what the device has.
-    func refresh(all: Bool = false, only id: UUID? = nil) async throws {
+    /// The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
+    /// window on screen.
+    func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws {
         guard let client else { return }
         await stopForgottenAlerts(client)
         await tellForgotten(client)
@@ -436,7 +441,7 @@ final class DeviceParcels {
             let fresh = Self.waiting(entry.parcel) ? Self.waitingFresh : settled ? Self.settledFresh : Self.fresh
             guard all || id != nil || age < 0 || age >= fresh else { continue }
             do {
-                let response = try await client.read(entry.linkID, key)
+                let response = try await client.read(entry.linkID, key, hidden)
                 guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { continue }
                 if let response {
                     entries[index].take(Parcel(shared: response.package))
@@ -451,7 +456,7 @@ final class DeviceParcels {
                 break
             }
         }
-        if id == nil, let error = await recover(client) { trouble = trouble ?? error }
+        if id == nil, let error = await recover(client, hidden: hidden) { trouble = trouble ?? error }
         save()
         if let trouble { throw trouble }
     }
@@ -460,10 +465,10 @@ final class DeviceParcels {
     /// be read, and puts it back on the list, without the name it had here. Only a link the service
     /// no longer has, or no longer owns with the key, lets its key go: losing the list never forgets
     /// anything on the service. The first trouble ends the round and is returned; the rest wait.
-    private func recover(_ client: DeviceParcelClient) async -> Error? {
+    private func recover(_ client: DeviceParcelClient, hidden: Bool) async -> Error? {
         for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
             let response: PublicParcelResponse?
-            do { response = try await client.read(linkID, key) } catch { return error }
+            do { response = try await client.read(linkID, key, hidden) } catch { return error }
             // Forgotten, followed or let go meanwhile.
             guard keys[linkID] == key, !entries.contains(where: { $0.linkID == linkID }) else { continue }
             // A parcel already here through another link stays as it is.
@@ -600,7 +605,7 @@ final class DeviceParcels {
     /// The parcel's link as others may open it, or nil once its sharing was stopped.
     func share(id: UUID) async throws -> ParcelShare? {
         guard let client, let entry = entries.first(where: { $0.parcel.id == id }), let key = keys[entry.linkID] else { throw DeliveryAPIError.parcelMissing }
-        guard let response = try await client.read(entry.linkID, key) else { throw DeliveryAPIError.parcelMissing }
+        guard let response = try await client.read(entry.linkID, key, false) else { throw DeliveryAPIError.parcelMissing }
         return Self.share(response.link)
     }
 

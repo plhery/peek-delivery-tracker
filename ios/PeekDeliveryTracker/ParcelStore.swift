@@ -526,9 +526,11 @@ final class ParcelStore: ObservableObject {
         }
     }
 
-    func load(showSpinner: Bool = false) async {
-        if isGuest { await loadDeviceParcels(); return }
-        await loadAccountParcels(showSpinner: showSpinner)
+    /// `hidden`: read with no window on screen, as the menu bar reads it; the service then doesn't count it as a look
+    /// at the parcels, which would check them sooner.
+    func load(showSpinner: Bool = false, hidden: Bool = false) async {
+        if isGuest { await loadDeviceParcels(hidden: hidden); return }
+        await loadAccountParcels(showSpinner: showSpinner, hidden: hidden)
         // The links forgotten on this iPhone before the service could be told reach it as a guest's refresh sends them,
         // rather than wait for a sign-out with their parcels and pushes.
         if session.isAuthenticated && !isDemo { await device.tellForgotten() }
@@ -536,7 +538,7 @@ final class ParcelStore: ObservableObject {
 
     /// Reads the account's list and says how the read ended, so a refresh compares parcels only with a list it read.
     @discardableResult
-    private func loadAccountParcels(showSpinner: Bool) async -> LoadOutcome {
+    private func loadAccountParcels(showSpinner: Bool, hidden: Bool = false) async -> LoadOutcome {
         guard session.isAuthenticated else { return .skipped }
         let generation = session.generation
         let revision = mutationRevision
@@ -546,7 +548,7 @@ final class ParcelStore: ObservableObject {
         if showSpinner && parcels.isEmpty && !loading { loading = true }
         defer { if generation == session.generation && sequence == loadSequence && loading { loading = false } }
         do {
-            let read = try await list()
+            let read = try await list(hidden: hidden)
             try session.checkGeneration(generation)
             guard revision == mutationRevision, sequence == loadSequence, pendingMutations.isEmpty else { return .skipped }
             holdingDeliverySurfaces = false
@@ -1334,9 +1336,9 @@ final class ParcelStore: ObservableObject {
         }
     }
 
-    private func list() async throws -> [Parcel] {
+    private func list(hidden: Bool = false) async throws -> [Parcel] {
         if isDemo { return demo.list() }
-        return try await api.listPackages()
+        return try await api.listPackages(hidden: hidden)
     }
 
     private func upsert(_ parcel: Parcel) {
@@ -1961,9 +1963,9 @@ final class ParcelStore: ObservableObject {
     }
 
     /// Brings the device's own parcels up to date, quietly: trouble leaves the list as it is.
-    private func loadDeviceParcels() async {
+    private func loadDeviceParcels(hidden: Bool = false) async {
         let generation = session.generation
-        try? await device.refresh()
+        try? await device.refresh(hidden: hidden)
         guard generation == session.generation, isGuest, pendingMutations.isEmpty else { return }
         let next = device.list()
         if next != parcels { parcels = next } else { publishDeliverySurfaces() }

@@ -158,8 +158,9 @@ final class DeliveryAPIClient {
         _ = try await rawRequest("/api/packages/\(id.uuidString)/feedback", method: "POST", body: try JSONEncoder.deliveryTracker.encode(value))
     }
 
-    func listPackages() async throws -> [Parcel] {
-        let response: PackageListResponse = try await request("/api/packages?includeArchived=true")
+    /// `hidden`: read with no window on screen, as the menu bar reads it, so the service doesn't count it as a look.
+    func listPackages(hidden: Bool = false) async throws -> [Parcel] {
+        let response: PackageListResponse = try await request("/api/packages?includeArchived=true\(hidden ? "&hidden=true" : "")")
         return response.packages
     }
 

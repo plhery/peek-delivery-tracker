@@ -498,7 +498,8 @@ would keep the cadence of one someone is waiting for).
 A parcel is **on screen** for 15 minutes after the account's apps or one of its links read it:
 an open page reads at least every 10 minutes. A page or app out of sight says so (`hidden=true`
 on the read): a web page in a background tab keeps reading, so its title can count new scans,
-but its reads record no opening and queue no check. A parcel is checked up to every 10 minutes,
+and the Mac menu bar reloads its deliveries with the window closed, but those reads record no
+opening and queue no check. A parcel is checked up to every 10 minutes,
 and on the last mile every 2 or 5, only while it is on screen, or while an alert is on and it is
 out for delivery or expected today; any other parcel someone waits for is checked hourly
 ([`waiting_package_ids`](../supabase/migrations/20261117171000_waiting_parcels.sql), read in

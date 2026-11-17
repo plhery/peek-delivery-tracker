@@ -65,19 +65,19 @@ enum MenuBarRequests {
 extension ParcelStore {
     /// Keeps the menu bar's deliveries current, with the window closed too: they are read again every 15 minutes and
     /// when a parcel's notification comes in, from the list the window reads. That asks no carrier, so it spends none
-    /// of the signed checks.
+    /// of the signed checks, and it isn't a look at the parcels: the service checks them no sooner for it.
     func keepMenuBarCurrent() {
         Task { [weak self] in
             while !Task.isCancelled {
                 try? await Task.sleep(for: MenuBarExtraSettings.refreshInterval)
                 guard let self else { return }
-                if MenuBarExtraSettings.shown { await self.load() }
+                if MenuBarExtraSettings.shown { await self.load(hidden: true) }
             }
         }
         Task { [weak self] in
             for await _ in NotificationCenter.default.notifications(named: .didReceiveParcelNotification) {
                 guard let self else { return }
-                if MenuBarExtraSettings.shown { await self.load() }
+                if MenuBarExtraSettings.shown { await self.load(hidden: true) }
             }
         }
     }

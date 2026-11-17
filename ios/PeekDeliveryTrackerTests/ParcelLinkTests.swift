@@ -645,6 +645,21 @@ final class ParcelLinkTests: XCTestCase {
         XCTAssertNil(request.value(forHTTPHeaderField: "Authorization"))
     }
 
+    @MainActor func testALinkReadWithNothingOnScreenSaysSo() async throws {
+        let transport = LinkTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let body = try JSONEncoder.deliveryTracker.encode(try fixture().publicParcel)
+        nonisolated(unsafe) var requests: [URLRequest] = []
+        LinkTestURLProtocol.handler = { request in requests.append(request); return (200, [:], body) }
+        let client = DeviceParcelClient.api(configuration: LinkTestURLProtocol.configuration, transport: transport)
+
+        _ = try await client.read(linkID, nil, false)
+        _ = try await client.read(linkID, nil, true)
+
+        XCTAssertEqual(requests.map { $0.url?.absoluteString }, ["https://links.test/api/public/parcels/\(linkID)",
+                                                                 "https://links.test/api/public/parcels/\(linkID)?hidden=true"])
+    }
+
     @MainActor func testAppAlertsGoWithTheKeyOnlyForTheOwnerAndStopWithTheTokenAlone() async throws {
         let transport = LinkTestURLProtocol.transport()
         defer { transport.invalidateAndCancel() }

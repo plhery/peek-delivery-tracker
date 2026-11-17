@@ -71,6 +71,6 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Nuovo widget «Pacchi»: i pacchi in arrivo a colpo d’occhio, il prossimo per primo. A seconda di quanti sono, li mostra come schede simili a quelle del widget «Prossima consegna», come schede più piccole nei colori del loro corriere o come elenco con tutte le righe che ci stanno. In un widget medio o grande, tocca un pacco per aprirlo.
-• Peek ora ti avvisa quando è stato aggiunto un numero d’ordine Mercado Libre al posto di un numero di tracciamento.
+• Ora Peek ha un solo widget, «Pacchi». I widget «Prossima consegna» che hai aggiunto diventano widget «Pacchi» restando al loro posto, e i tuoi widget «Pacchi» continuano ad aggiornarsi.
+• I testi grigi piccoli ora sono più scuri e più facili da leggere.
 ```

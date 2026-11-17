@@ -73,6 +73,6 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Nouveau widget « Colis » : tes colis en route en un coup d’œil, le prochain en premier. Selon leur nombre, il les affiche en cartes comme celles du widget « Prochaine livraison », en cartes plus petites aux couleurs de leur transporteur, ou en liste avec autant de lignes que la place le permet. Dans un widget moyen ou grand, touche un colis pour l’ouvrir.
-• Peek te signale désormais quand un numéro de commande Mercado Libre a été ajouté à la place d’un numéro de suivi.
+• Peek n’a plus qu’un widget, « Colis ». Les widgets « Prochaine livraison » que tu as ajoutés deviennent des widgets « Colis » sans changer de place, et tes widgets « Colis » continuent de se mettre à jour.
+• Les petits textes gris sont désormais plus foncés et plus faciles à lire.
 ```

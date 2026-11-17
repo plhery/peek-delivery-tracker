@@ -71,6 +71,6 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Novo widget “Encomendas”: veja de relance as encomendas a caminho, a próxima primeiro. Dependendo da quantidade, ele as mostra como cartões iguais aos do widget “Próxima entrega”, como cartões menores com as cores da transportadora ou como uma lista com quantas linhas couberem. Em um widget médio ou grande, toque em uma encomenda para abri-la.
-• O Peek agora avisa quando um número de pedido do Mercado Livre foi adicionado no lugar de um código de rastreamento.
+• O Peek agora tem um só widget, “Encomendas”. Os widgets “Próxima entrega” que você adicionou viram widgets “Encomendas” no mesmo lugar, e seus widgets “Encomendas” continuam sendo atualizados.
+• Os textos cinza pequenos agora estão mais escuros e fáceis de ler.
 ```

@@ -73,6 +73,6 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• New “Parcels” widget: see the parcels on their way at a glance, the next one first. Depending on how many there are, it shows them as cards like those of the “Next delivery” widget, as smaller cards in their carriers’ colours, or as a list with as many rows as fit. In a medium or large widget, tap a parcel to open it.
-• Peek now tells you when a Mercado Libre order number was added instead of a tracking number.
+• Peek now has just one widget, “Parcels”. The “Next delivery” widgets you’ve added become “Parcels” widgets where they are, and your “Parcels” widgets keep updating.
+• Small grey text is now darker and easier to read.
 ```

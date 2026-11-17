@@ -94,8 +94,9 @@ sealed class ParcelFeedbackSubject {
 
 /**
  * What this phone remembers of the question, one entry per parcel: when its reader last answered and about which
- * scan, and the scan the way back from a carrier's site last asked about. The question on the page stands on every
- * visit; the way back asks about a scan once, and about a parcel at most once a day. Nothing of it leaves the device.
+ * scan, the scan they last said was right, and the scan the way back from a carrier's site last asked about. The
+ * question on the page stands on every visit, kept quiet while the page ends on the scan its reader said was right;
+ * the way back asks about a scan once, and about a parcel at most once a day. Nothing of it leaves the device.
  */
 class ParcelFeedbackMemory(private val defaults: UserDefaults, private val now: () -> Instant = AppClock::now) {
     /** `answeredAt` and `savedAt` are Swift's `Date` in JSON: seconds since 2001. */
@@ -104,6 +105,8 @@ class ParcelFeedbackMemory(private val defaults: UserDefaults, private val now: 
         val answeredAt: Double? = null,
         /** What the page ended on when its reader answered. */
         val scan: String? = null,
+        /** The scan its reader last said was right. Any other answer since forgets it; an older entry has none. */
+        val right: String? = null,
         /** The scan the question was asked about on the way back. */
         val back: String? = null,
         val savedAt: Double,
@@ -123,9 +126,12 @@ class ParcelFeedbackMemory(private val defaults: UserDefaults, private val now: 
         return age < 0 || age >= quiet
     }
 
-    /** An answer about what the page ends on. */
-    fun rememberAnswer(subject: ParcelFeedbackSubject, scan: String) {
-        update(subject) { it.copy(answeredAt = now().timeIntervalSinceReferenceDate, scan = scan) }
+    /** Whether its reader said this scan was right, and has said nothing else since. */
+    fun saidRight(subject: ParcelFeedbackSubject, scan: String): Boolean = read()[subject.memoryKey]?.right?.equalsCanonically(scan) == true
+
+    /** An answer about what the page ends on: a "Yes" (`right`), or anything else. */
+    fun rememberAnswer(subject: ParcelFeedbackSubject, scan: String, right: Boolean = false) {
+        update(subject) { it.copy(answeredAt = now().timeIntervalSinceReferenceDate, scan = scan, right = if (right) scan else null) }
     }
 
     fun rememberAskedOnReturn(subject: ParcelFeedbackSubject, scan: String) {
@@ -263,6 +269,12 @@ class ParcelFeedbackModel(
     /** What stands where the question is asked. */
     enum class Moment {
         Ask,
+
+        /**
+         * Its reader said on an earlier visit that what the page ends on is right: only a way to report a problem
+         * stands, until the next scan.
+         */
+        Quiet,
 
         /** "Not quite": the reasons are offered, nothing is sent yet. */
         Reasons,
@@ -432,12 +444,16 @@ class ParcelFeedbackModel(
     private var visit: Visit? = null
 
     /**
-     * The question standing on the page, or nil while there is none to ask. It stands on every visit: something may
-     * happen that its reader tells only later.
+     * The question standing on the page, or nil while there is none to ask. It stands on every visit, for what its
+     * reader tells only later; Pip asks it until they say the scan the page ends on is right, then it keeps quiet until
+     * the next scan.
      */
     val standing: ParcelFeedbackQuestion? get() = page?.question
 
-    /** Takes what the page shows now. Another parcel, or a carrier found while the page was open, starts over. */
+    /**
+     * Takes what the page shows now. Another parcel, or a carrier found while the page was open, starts over; a new
+     * scan brings back a question kept quiet.
+     */
     fun show(page: Page?, through: ParcelFeedbackClient?) {
         client = through
         if (page == this.page) return
@@ -451,9 +467,17 @@ class ParcelFeedbackModel(
             reviewDue = false
         }
         if (before?.subject != page?.subject || before?.question != page?.question) {
-            moment = Moment.Ask
+            moment = start(page)
             given = null
+        } else if (moment == Moment.Quiet && before != null && page != null && !before.scan.equalsCanonically(page.scan)) {
+            moment = Moment.Ask
         }
+    }
+
+    /** Where the question starts: kept quiet about the scan its reader said was right. */
+    private fun start(page: Page?): Moment {
+        if (page == null || page.question != ParcelFeedbackQuestion.Found || !memory.saidRight(page.subject, scan = page.scan)) return Moment.Ask
+        return Moment.Quiet
     }
 
     // On the way back
@@ -481,7 +505,7 @@ class ParcelFeedbackModel(
         this.visit = null
         val page = page ?: return
         if (page.question != ParcelFeedbackQuestion.Found || busy || words != null || namingCarrier ||
-            !(moment == Moment.Ask || moment == Moment.Reasons) ||
+            !(moment == Moment.Ask || moment == Moment.Quiet || moment == Moment.Reasons) ||
             now().timeIntervalSince(left) < away ||
             !memory.asksOnReturn(page.subject, scan = page.scan)
         ) {
@@ -516,8 +540,9 @@ class ParcelFeedbackModel(
         }
     }
 
+    /** "Not quite", or "Report a problem" while the question keeps quiet. */
     fun notQuite() {
-        if (moment != Moment.Ask) return
+        if (moment != Moment.Ask && moment != Moment.Quiet) return
         // Something is off: no rating is asked for today.
         review.noteBadMoment(at = now())
         moment = Moment.Reasons
@@ -641,7 +666,7 @@ class ParcelFeedbackModel(
             return false
         }
         if (counted) report(action, DeliveryAnalytics.Outcome.Success)
-        memory.rememberAnswer(page.subject, scan = page.scan)
+        memory.rememberAnswer(page.subject, scan = page.scan, right = feedback.answer == ParcelFeedbackAnswer.Right)
         // The reader found the page right: on a parcel with nothing wrong, the moment to ask for a rating.
         if (feedback.answer == ParcelFeedbackAnswer.Right && review.isDue(at = now(), calm = page.untroubled)) reviewDue = true
         return true
@@ -661,14 +686,15 @@ class ParcelFeedbackModel(
 
     /**
      * Puts the question in the state `ParcelFeedbackPreview` names, whatever was answered before (the iPhone's
-     * `-sdt.debug.parcelFeedback`): `reasons`, `right`, `sent`, `noted`, `early`, `named`, `back`, `backSent`,
-     * `failed`, `words` or `carrier`; anything else asks. Debug builds only.
+     * `-sdt.debug.parcelFeedback`): `quiet`, `reasons`, `right`, `sent`, `noted`, `early`, `named`, `back`,
+     * `backSent`, `failed`, `words` or `carrier`; anything else asks. Debug builds only.
      */
     fun preview(variant: String) {
         val page = page ?: return
         val given = Words(id = UUID.randomUUID(), reasons = setOf(ParcelFeedbackReason.Steps), asked = ParcelFeedbackRequestAsked.Page)
         this.given = given
         when (variant) {
+            "quiet" -> moment = Moment.Quiet
             "reasons" -> moment = Moment.Reasons
             "right" -> moment = Moment.Right
             "sent" -> moment = Moment.Sent

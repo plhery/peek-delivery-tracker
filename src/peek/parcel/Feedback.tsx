@@ -1,4 +1,4 @@
-import { useEffect, useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
+import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type CSSProperties, type ReactNode, type RefObject } from 'react';
 import { Icon, SmallPip } from '../../components/Icon';
 import type { ApiParcelFeedbackReason } from '../../generated/apiContract';
 import { useI18n, type MessageKey } from '../../i18n';
@@ -20,8 +20,10 @@ import './Feedback.css';
  * answers for, Pip asks where the history ends whether he got it right, and
  * the page asks once more on the way back from the carrier's own site. For a
  * parcel no carrier was found for, a row asks whether the carrier's site
- * shows it. Both stand on every visit: something may happen that the reader
- * tells only later. An answer is given in place; a sheet takes the words.
+ * shows it. Both stand on every visit, for what the reader tells only later,
+ * except Pip's once its reader said he got it right: until the next scan only
+ * a way to report a problem stays. An answer is given in place; a sheet takes
+ * the words.
  */
 export interface FeedbackSubject {
   /** A carrier answers for the parcel, or none was found. Null asks nothing. */
@@ -39,7 +41,8 @@ export interface FeedbackSubject {
   send: SendParcelFeedback;
 }
 
-type Moment = 'ask' | 'reasons' | 'sent' | 'noted' | 'right' | 'early' | 'named';
+/** `quiet`: its reader said this scan is right, and only a way to report a problem stands. */
+type Moment = 'ask' | 'quiet' | 'reasons' | 'sent' | 'noted' | 'right' | 'early' | 'named';
 type Open =
   | { sheet: 'wrong'; id: string; reasons: readonly ApiParcelFeedbackReason[]; asked: 'page' | 'back' }
   | { sheet: 'carrier' };
@@ -91,9 +94,12 @@ export interface ParcelFeedbackState {
 
 export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = false, notes, send }: FeedbackSubject): ParcelFeedbackState {
   const { locale } = useI18n();
-  const [flow, setFlow] = useState<{ notes: FeedbackNotes; kind: FeedbackSubject['kind']; moment: Moment }>({ notes, kind, moment: 'ask' });
-  // Another parcel, or a carrier found while the page was open, starts over.
-  const moment = flow.notes === notes && flow.kind === kind ? flow.moment : 'ask';
+  // Said right about the scan the page ends on: the question keeps quiet until the next one.
+  const quiet = useMemo(() => kind === 'found' && notes.read().right === scan, [kind, notes, scan]);
+  const start: Moment = quiet ? 'quiet' : 'ask';
+  const [flow, setFlow] = useState<{ notes: FeedbackNotes; kind: FeedbackSubject['kind']; moment: Moment }>({ notes, kind, moment: start });
+  // Another parcel, or a carrier found while the page was open, starts over; a new scan brings the question back.
+  const moment = flow.notes === notes && flow.kind === kind && !(flow.moment === 'quiet' && !quiet) ? flow.moment : start;
   const go = (next: Moment) => setFlow({ notes, kind, moment: next });
   const [open, setOpen] = useState<Open | null>(null);
   const [word, setWord] = useState<Word | null>(null);
@@ -104,13 +110,14 @@ export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = 
   // hands the focus back to, and the page would jump to its first control instead.
   const after = useRef<Moment | null>(null);
 
-  const remember = (answeredFor: string) => notes.write({ ...notes.read(), at: new Date().toISOString(), scan: answeredFor });
+  const remember = (answeredFor: string, right: boolean) =>
+    notes.write({ ...notes.read(), at: new Date().toISOString(), scan: answeredFor, right: right ? answeredFor : undefined });
 
   async function deliver(feedback: ParcelFeedback, first = true): Promise<boolean> {
     try {
       await send({ ...feedback, app: 'web', locale });
       if (first) trackAction(ACTIONS[feedback.answer], 'success');
-      remember(scan);
+      remember(scan, feedback.answer === 'right');
       return true;
     } catch {
       if (first) trackAction(ACTIONS[feedback.answer], 'error');
@@ -236,7 +243,7 @@ const HAPPY: readonly Moment[] = ['right', 'sent', 'noted'];
  * The first time the question is in view, Pip hops up and what he says opens from beside him; the row rises.
  * Until then it waits out of sight, so nothing is seen to vanish and come back.
  */
-function useArrival(stand: RefObject<HTMLDivElement | null>, kind: ParcelFeedbackState['kind']) {
+function useArrival(stand: RefObject<HTMLDivElement | null>, kind: ParcelFeedbackState['kind'], quiet: boolean) {
   useLayoutEffect(() => {
     const element = stand.current;
     if (!element?.animate || still()) return;
@@ -249,6 +256,7 @@ function useArrival(stand: RefObject<HTMLDivElement | null>, kind: ParcelFeedbac
         ? { opacity: [0, 1], transform: ['scale(.84)', 'none'] }
         : { opacity: [0, 1], transform: ['translateY(10px)', 'none'] }, { duration: 460, delay: pip ? 150 : 0, easing: pip ? SPRING : SETTLE, fill: 'backwards' }),
     ].filter((move): move is Animation => !!move);
+    if (!moves.length) return;
     for (const move of moves) move.pause();
     const play = () => { for (const move of moves) move.play(); };
     const box = element.getBoundingClientRect();
@@ -270,15 +278,17 @@ function useArrival(stand: RefObject<HTMLDivElement | null>, kind: ParcelFeedbac
       watch.disconnect();
       for (const move of moves) move.cancel();
     };
-  }, [stand, kind]);
+  }, [stand, kind, quiet]);
 }
 
 /** The standing question, where the history ends: Pip's for a parcel a carrier answers for, a row for one none was found for. */
 export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }) {
   const { t } = useI18n();
   const { kind, moment, place } = feedback;
+  const quiet = moment === 'quiet';
   const stand = useRef<HTMLDivElement>(null);
-  useArrival(stand, kind);
+  // Pip comes when he is asked for, as he does when the page opens on him.
+  useArrival(stand, kind, quiet);
   // What is said after an answer comes in; what the page opened on was simply there.
   const [opened, setOpened] = useState<Moment | null>(moment);
   if (opened !== null && moment !== opened) setOpened(null);
@@ -292,7 +302,7 @@ export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }
     const watch = new ResizeObserver(() => { height.current = element.offsetHeight; });
     watch.observe(element);
     return () => watch.disconnect();
-  }, [place, kind]);
+  }, [place, kind, quiet]);
 
   // An answer replaces the buttons it was given with: the bubble or the row grows or shrinks to it from where it
   // stood, the focus stays where the reader was, and what follows is in view. The focus and the scroll wait for a
@@ -300,7 +310,7 @@ export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }
   const answered = useRef(moment);
   useLayoutEffect(() => {
     const element = place.current;
-    if (answered.current === moment || !element) return;
+    if (answered.current === moment || answered.current === 'quiet' || !element) return;
     const [from, to] = [height.current, element.offsetHeight];
     if (from && from !== to && element.animate && !still()) element.animate({ height: [`${from}px`, `${to}px`] }, { duration: 420, easing: SETTLE });
   }, [moment, place]);
@@ -324,6 +334,13 @@ export function FeedbackQuestion({ feedback }: { feedback: ParcelFeedbackState }
                 <Answers yes={t('feedback.yes')} no={t('feedback.unknown.notYet')} onYes={feedback.elsewhere} onNo={feedback.notYet} />
               </>}
         </div>
+      </div>
+    </div>;
+  }
+  if (quiet) {
+    return <div ref={stand} className="peekfb">
+      <div ref={place} className="peekfb-quiet" tabIndex={-1}>
+        <button type="button" className="peekfb-report" onClick={feedback.notQuite}>{t('feedback.report')}</button>
       </div>
     </div>;
   }

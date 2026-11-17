@@ -5,7 +5,8 @@ import UIKit
 
 /// The standing question, below a page's history: Pip's for a parcel a carrier answers for, a
 /// row for one none was found for. It stands on every visit, for a reader who has more to say
-/// later. An answer is given in place; a sheet takes the words.
+/// later; once they said the scan the page ends on is right, only a quiet way to report a
+/// problem stands until the next scan. An answer is given in place; a sheet takes the words.
 struct ParcelFeedbackQuestionView: View {
     @ObservedObject var model: ParcelFeedbackModel
 
@@ -26,7 +27,7 @@ struct ParcelFeedbackQuestionView: View {
     var body: some View {
         Group {
             switch model.standing {
-            case .found: pip
+            case .found: if model.moment == .quiet { report } else { pip }
             case .unknown: row
             case nil: EmptyView()
             }
@@ -115,7 +116,7 @@ struct ParcelFeedbackQuestionView: View {
                         }
                     }
                 }
-            case .ask, .early, .named:
+            case .ask, .quiet, .early, .named:
                 beside {
                     question("feedback.pip.question")
                 } then: {
@@ -136,6 +137,22 @@ struct ParcelFeedbackQuestionView: View {
         .shadow(color: .black.opacity(0.04), radius: 1, y: 1)
     }
 
+    /// Its reader said what the page ends on is right: no Pip, only a low-key way to say otherwise,
+    /// which opens his reasons as "Not quite" does.
+    private var report: some View {
+        Button { model.notQuite() } label: {
+            Text(localizer.text("feedback.report"))
+                .font(.footnote)
+                .underline(color: Brand.secondaryText.opacity(0.45))
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(Brand.secondaryText)
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
     /// No Pip here: he found nothing to show.
     private var row: some View {
         let shown = arrived || reduceMotion
@@ -146,7 +163,7 @@ struct ParcelFeedbackQuestionView: View {
                 said("feedback.unknown.early")
             case .named:
                 said("feedback.unknown.sent")
-            case .ask, .reasons, .right, .sent, .noted:
+            case .ask, .quiet, .reasons, .right, .sent, .noted:
                 beside {
                     question("feedback.unknown.question")
                 } then: {
@@ -461,7 +478,7 @@ private struct ParcelFeedbackOverlays: ViewModifier {
         case .sent, .noted: "feedback.pip.sent"
         case .early: "feedback.unknown.early"
         case .named: "feedback.unknown.sent"
-        case .ask, .reasons: nil
+        case .ask, .quiet, .reasons: nil
         }
     }
 }
@@ -762,7 +779,7 @@ private struct FeedbackPromise: View {
 
 #if DEBUG
 /// Opens a demo parcel's page at launch with its question in a given state, to look at it in
-/// the simulator: `-sdt.debug.parcelFeedback ask`, `reasons`, `right`, `sent`, `noted`, `early`,
+/// the simulator: `-sdt.debug.parcelFeedback ask`, `quiet`, `reasons`, `right`, `sent`, `noted`, `early`,
 /// `named`, `back` (asked on the way back), `backSent`, `failed`, `words` or `carrier` (the
 /// sheets). `-sdt.debug.parcelFeedback.parcel <id>` names the parcel. Start the demo with
 /// `-sdt.native.experience.v1 demo`: it asks nothing of its parcels but under this argument.

@@ -33,6 +33,10 @@ describe('when a parcel’s question is asked', () => {
     expect(feedbackMemory({ at: hoursAgo(1), scan: 'a', back: 'b', more: 1 })).toEqual({ at: hoursAgo(1), scan: 'a', back: 'b' });
     expect(feedbackMemory({ at: hoursAgo(1) })).toEqual({ at: hoursAgo(1), scan: '' });
     expect(feedbackMemory({ back: 'b' })).toEqual({ back: 'b' });
+    // A yes is kept with the answer it was.
+    expect(feedbackMemory({ at: hoursAgo(1), scan: 'a', right: 'a' })).toEqual({ at: hoursAgo(1), scan: 'a', right: 'a' });
+    expect(feedbackMemory({ right: 'a', back: 'b' })).toEqual({ back: 'b' });
+    expect(feedbackMemory({ at: hoursAgo(1), scan: 'a', right: 7 })).toEqual({ at: hoursAgo(1), scan: 'a' });
     // A time that is none, or words too long to be this page's, are dropped.
     expect(feedbackMemory({ at: 'yesterday', scan: 'a' })).toBeNull();
     expect(feedbackMemory({ at: hoursAgo(1), scan: 'x'.repeat(81) })).toEqual({ at: hoursAgo(1), scan: '' });

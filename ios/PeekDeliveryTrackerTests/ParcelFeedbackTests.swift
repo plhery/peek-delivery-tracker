@@ -163,6 +163,39 @@ final class ParcelFeedbackTests: XCTestCase {
         XCTAssertTrue(memory.asksOnReturn(subject, scan: third))
     }
 
+    func testAYesIsRememberedUntilAnyOtherAnswer() {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        let memory = ParcelFeedbackMemory(defaults: store)
+        let subject = ParcelFeedbackSubject.parcel(UUID())
+        let next = "4:2026-10-03T09:30:00Z"
+
+        XCTAssertFalse(memory.saidRight(subject, scan: scan))
+        memory.rememberAnswer(subject, scan: scan, right: true)
+        XCTAssertTrue(memory.saidRight(subject, scan: scan))
+        XCTAssertFalse(memory.saidRight(subject, scan: next), "Only about the scan it was said of")
+        XCTAssertFalse(memory.saidRight(.parcel(UUID()), scan: scan))
+        memory.rememberAskedOnReturn(subject, scan: next)
+        XCTAssertTrue(memory.saidRight(subject, scan: scan), "Being asked is not an answer")
+
+        memory.rememberAnswer(subject, scan: scan)
+        XCTAssertFalse(memory.saidRight(subject, scan: scan))
+        XCTAssertFalse(memory.asksOnReturn(subject, scan: scan), "Still an answer")
+    }
+
+    func testAnEntryKeptBeforeAYesWasRememberedHasNone() throws {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        let id = UUID()
+        let old = #"{"\#(id.uuidString)":{"answeredAt":810000000,"scan":"\#(scan)","back":"\#(scan)","savedAt":810000000}}"#
+        store.set(Data(old.utf8), forKey: "sdt.parcelFeedback.v1")
+        let memory = ParcelFeedbackMemory(defaults: store)
+
+        XCTAssertFalse(memory.saidRight(.parcel(id), scan: scan))
+        XCTAssertFalse(memory.asksOnReturn(.parcel(id), scan: scan), "The rest of it still reads")
+        XCTAssertEqual(visit(page(.parcel(id)), Sent(), store, Clock()).moment, .ask)
+    }
+
     func testALinkIsRememberedByItsDigestOnly() throws {
         let (store, suite) = defaults()
         defer { store.removePersistentDomain(forName: suite) }
@@ -266,7 +299,7 @@ final class ParcelFeedbackTests: XCTestCase {
 
     // MARK: - Pip asks
 
-    func testYesIsShownAtOnceSentAndAskedAgainOnALaterVisit() async {
+    func testYesIsShownAtOnceSentAndKeptQuietUntilTheNextScan() async {
         let (store, suite) = defaults()
         defer { store.removePersistentDomain(forName: suite) }
         let clock = Clock()
@@ -288,11 +321,88 @@ final class ParcelFeedbackTests: XCTestCase {
         XCTAssertEqual(model.standing, .found, "On this visit the thanks stay to be read")
         XCTAssertNil(model.word)
 
-        // Something may happen that its reader tells only later: Pip asks again on the next visit.
+        // A later visit to the same scan keeps the question quiet: only a way to report a problem stands.
         clock.now += 2 * 3_600
         let later = visit(page(subject), Sent(), store, clock)
         XCTAssertEqual(later.standing, .found)
+        XCTAssertEqual(later.moment, .quiet)
+        let next = "4:2026-10-03T09:30:00Z"
+        XCTAssertEqual(visit(page(subject, scan: next), Sent(), store, clock).moment, .ask, "A new scan is asked about")
+        XCTAssertEqual(visit(page(.parcel(UUID())), Sent(), store, clock).moment, .ask, "Another parcel was never answered for")
+
+        // What else the page shows changes nothing; a new scan while it is open asks.
+        var calm = page(subject)
+        calm.untroubled = true
+        later.show(calm, through: Sent().client)
+        XCTAssertEqual(later.moment, .quiet)
+        later.show(page(subject, scan: next), through: Sent().client)
         XCTAssertEqual(later.moment, .ask)
+    }
+
+    func testReportAProblemOffersTheReasonsAndAWrongAnswerAsksAgain() async {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        let clock = Clock()
+        let subject = ParcelFeedbackSubject.parcel(UUID())
+        let review = ReviewPrompt(defaults: store)
+        review.used(at: clock.now - 2 * 86_400)
+        review.used(at: clock.now - 86_400)
+        await visit(page(subject), Sent(), store, clock).right()
+        XCTAssertTrue(review.isDue(at: clock.now, calm: true))
+
+        let sent = Sent()
+        let quiet = visit(page(subject), sent, store, clock)
+        XCTAssertEqual(quiet.moment, .quiet)
+        quiet.notQuite()
+
+        XCTAssertEqual(quiet.moment, .reasons, "As \"Not quite\" does")
+        XCTAssertFalse(review.isDue(at: clock.now, calm: true), "Something is off: no rating is asked for today")
+        XCTAssertTrue(sent.requests.isEmpty)
+        XCTAssertEqual(visit(page(subject), Sent(), store, clock).moment, .quiet, "Nothing was answered yet")
+
+        await quiet.pick(.status)
+
+        XCTAssertEqual(quiet.moment, .sent)
+        XCTAssertEqual(sent.requests.map(\.answer), [.wrong])
+        XCTAssertEqual(sent.requests.first?.reasons, [.status])
+        XCTAssertEqual(visit(page(subject), Sent(), store, clock).moment, .ask, "Something is off: Pip asks again")
+    }
+
+    func testEveryOtherAnswerForgetsAYes() async {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        let clock = Clock()
+        func saidRight(_ subject: ParcelFeedbackSubject) async -> ParcelFeedbackModel {
+            await visit(page(subject), Sent(), store, clock).right()
+            let quiet = visit(page(subject), Sent(), store, clock)
+            XCTAssertEqual(quiet.moment, .quiet)
+            return quiet
+        }
+
+        // The sheet the way back's "No" opens.
+        let back = ParcelFeedbackSubject.link(linkID)
+        let fromBack = await saidRight(back)
+        fromBack.wrongOnReturn()
+        _ = await fromBack.sendWords([], note: "Their site says it was returned")
+        XCTAssertEqual(visit(page(back), Sent(), store, clock).moment, .ask)
+
+        // The carrier named for the parcel.
+        let named = ParcelFeedbackSubject.parcel(UUID())
+        _ = await saidRight(named)
+        let unknown = visit(page(named, .unknown), Sent(), store, clock)
+        unknown.elsewhere()
+        _ = await unknown.sendCarrier(name: "Example Parcels", page: "")
+        XCTAssertEqual(visit(page(named), Sent(), store, clock).moment, .ask)
+
+        // An answer that could not be sent forgets nothing.
+        let failed = ParcelFeedbackSubject.parcel(UUID())
+        _ = await saidRight(failed)
+        let refused = Sent()
+        refused.fails = true
+        let model = visit(page(failed), refused, store, clock)
+        model.notQuite()
+        await model.pick(.status)
+        XCTAssertEqual(visit(page(failed), Sent(), store, clock).moment, .quiet)
     }
 
     func testAnAnswerThatCouldNotBeSentIsTakenBack() async {
@@ -487,7 +597,9 @@ final class ParcelFeedbackTests: XCTestCase {
         XCTAssertEqual(model.moment, .right)
         XCTAssertEqual(sent.counted, ["parcel-feedback-right success"])
         XCTAssertNil(comeBackOnALaterVisit(.link(linkID), store, clock), "Not asked again on the way back")
-        XCTAssertEqual(visit(page(.link(linkID)), Sent(), store, clock).standing, .found, "Pip still asks")
+        let later = visit(page(.link(linkID)), Sent(), store, clock)
+        XCTAssertEqual(later.standing, .found)
+        XCTAssertEqual(later.moment, .quiet, "Nor by Pip, until the next scan")
     }
 
     func testNoOnTheWayBackOpensTheSheetWithNothingChosen() async {

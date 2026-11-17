@@ -59,7 +59,21 @@ describe('the question on a parcel’s page', () => {
     expect(fresh.compareDocumentPosition(bubble()!) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     await user.click(within(bubble()!).getByRole('button', { name: 'Yes' }));
     expect(mocks.feedback).toHaveBeenCalledExactlyOnceWith(LINK_ID, expect.objectContaining({ answer: 'right', asked: 'page', app: 'web', locale: 'en' }), OWNER_KEY);
-    await waitFor(() => expect(linkNote(LINK_ID).feedback).toMatchObject({ scan: `3:${journey[2].occurredAt}` }));
+    await waitFor(() => expect(linkNote(LINK_ID).feedback).toMatchObject({ scan: `3:${journey[2].occurredAt}`, right: `3:${journey[2].occurredAt}` }));
+  });
+
+  it('keeps quiet about the same history on the next visit after a yes, and asks again after a new scan', async () => {
+    const user = userEvent.setup();
+    const first = await open(view());
+    await user.click(within(bubble()!).getByRole('button', { name: 'Yes' }));
+    await waitFor(() => expect(linkNote(LINK_ID).feedback).toMatchObject({ right: `3:${journey[2].occurredAt}` }));
+    first.unmount();
+    const again = await open(view());
+    expect(bubble()).toBeNull();
+    expect(screen.getByRole('button', { name: 'Report a problem' })).toBeVisible();
+    again.unmount();
+    await open(view({ events: [...journey, scan('out_for_delivery', 1)] }));
+    expect(within(bubble()!).getByText('Did I get this one right?')).toBeVisible();
   });
 
   it('asks whoever opened a shared link, without a key, and names the carrier in what the sheet promises', async () => {

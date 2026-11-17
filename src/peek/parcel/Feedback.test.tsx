@@ -69,7 +69,7 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     // The answer replaced the buttons: the focus stays on the question.
     expect(bubble()).toHaveFocus();
     expect(send).toHaveBeenCalledExactlyOnceWith({ id: expect.stringMatching(UUID), answer: 'right', asked: 'page', app: 'web', locale: 'en' });
-    await waitFor(() => expect(notes.memory).toEqual({ at: expect.any(String), scan: SCAN }));
+    await waitFor(() => expect(notes.memory).toEqual({ at: expect.any(String), scan: SCAN, right: SCAN }));
     expect(mocks.track).toHaveBeenCalledExactlyOnceWith('parcel-feedback-right', 'success');
     expect(screen.queryByRole('dialog')).toBeNull();
   });
@@ -168,8 +168,42 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     expect(within(sheet).getByText('1 character left')).toBeVisible();
   });
 
-  it('stands on every visit, for a reader who has more to say about a scan already answered for', () => {
+  it('stands on every visit after something was said to be off, for a reader who has more to say', () => {
     open({ notes: memoryNotes({ at: hoursAgo(1), scan: SCAN }) });
+    expect(within(bubble()).getByText('Did I get this one right?')).toBeVisible();
+  });
+
+  it('keeps quiet on a later visit about a scan said to be right, with a way to report a problem', async () => {
+    const user = userEvent.setup();
+    const { send } = open({ notes: memoryNotes({ at: hoursAgo(30), scan: SCAN, right: SCAN }) });
+    expect(bubble()).toBeNull();
+    expect(screen.queryByText('Did I get this one right?')).toBeNull();
+    await user.click(screen.getByRole('button', { name: 'Report a problem' }));
+    expect(within(bubble()).getByText('What’s off?')).toBeVisible();
+    expect(bubble()).toHaveFocus();
+    expect(screen.queryByRole('button', { name: 'Report a problem' })).toBeNull();
+    await user.click(within(bubble()).getByRole('button', { name: 'Wrong status' }));
+    expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ answer: 'wrong', reasons: ['status'], asked: 'page' }));
+  });
+
+  it('asks again once there is a new scan, on a later visit or while the page is open', () => {
+    const later = open({ scan: '4:2026-10-09T09:00:00.000Z', notes: memoryNotes({ at: hoursAgo(30), scan: SCAN, right: SCAN }) });
+    expect(within(bubble()).getByText('Did I get this one right?')).toBeVisible();
+    later.unmount();
+    const { subject, rerender } = open({ notes: memoryNotes({ at: hoursAgo(30), scan: SCAN, right: SCAN }) });
+    expect(screen.getByRole('button', { name: 'Report a problem' })).toBeVisible();
+    rerender(<Page {...subject} scan="4:2026-10-09T09:00:00.000Z" />);
+    expect(within(bubble()).getByText('Did I get this one right?')).toBeVisible();
+  });
+
+  it('forgets a yes once something is said to be off, so the next visit asks again', async () => {
+    const user = userEvent.setup();
+    const first = open({ notes: memoryNotes({ at: hoursAgo(30), scan: SCAN, right: SCAN }) });
+    await user.click(screen.getByRole('button', { name: 'Report a problem' }));
+    await user.click(within(bubble()).getByRole('button', { name: 'Missing steps' }));
+    await waitFor(() => expect(first.notes.memory).toEqual({ at: expect.any(String), scan: SCAN }));
+    first.unmount();
+    open({ notes: first.notes });
     expect(within(bubble()).getByText('Did I get this one right?')).toBeVisible();
   });
 
@@ -212,7 +246,7 @@ describe('the question on the way back from the carrier’s site', () => {
     expect(screen.getByText('Thanks, good to know.')).toBeVisible();
     expect(within(bubble()).getByRole('status')).toHaveTextContent('Good to know, thanks!');
     expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ answer: 'right', asked: 'back' }));
-    await waitFor(() => expect(notes.memory).toEqual({ back: SCAN, at: expect.any(String), scan: SCAN }));
+    await waitFor(() => expect(notes.memory).toEqual({ back: SCAN, at: expect.any(String), scan: SCAN, right: SCAN }));
     // Another visit to the carrier asks nothing more.
     await leaveAndReturn(user);
     expect(screen.queryByText('Does UPS say the same?')).toBeNull();

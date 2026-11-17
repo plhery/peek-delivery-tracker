@@ -23,7 +23,7 @@ val ParcelFeedbackModel.Moment.thanksKey: String?
         ParcelFeedbackModel.Moment.Sent, ParcelFeedbackModel.Moment.Noted -> "feedback.pip.sent"
         ParcelFeedbackModel.Moment.Early -> "feedback.unknown.early"
         ParcelFeedbackModel.Moment.Named -> "feedback.unknown.sent"
-        ParcelFeedbackModel.Moment.Ask, ParcelFeedbackModel.Moment.Reasons -> null
+        ParcelFeedbackModel.Moment.Ask, ParcelFeedbackModel.Moment.Quiet, ParcelFeedbackModel.Moment.Reasons -> null
     }
 
 /** What a word at the bottom of the page says. */

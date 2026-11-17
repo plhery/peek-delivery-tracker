@@ -18,6 +18,17 @@
   text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); text-underline-offset: 3px; white-space: nowrap;
 }
 
+/* Said right about this scan: only a way to report a problem stays, quietly. */
+.peekfb-quiet { display: flex; }
+.peekfb-quiet:focus { outline: none; }
+.peekfb-report {
+  position: relative; min-height: 32px; padding: 0; background: none; color: var(--ink-soft); font-size: 12px; text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 45%, transparent); text-underline-offset: 3px;
+}
+/* 44 px to the touch. */
+.peekfb-report::before { content: ''; position: absolute; inset: -6px -8px; }
+.detail--postcard .peekfb:has(> .peekfb-quiet) { padding-top: 36px; }
+
 /* A row, for a parcel no carrier was found for. */
 .peekfb-ask { min-height: 52px; padding: 8px 8px 8px 16px; border-radius: 16px; background: var(--control); overflow: clip; }
 .peekfb-ask:focus, .peekfb-bubble:focus { outline: none; }

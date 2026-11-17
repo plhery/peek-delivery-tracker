@@ -22,6 +22,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -37,11 +38,12 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * The question under a parcel's page, with the iPhone's bars: Pip asking, offering the reasons, thanking for a "Yes",
- * for a reason with the way to a note, and for a note; the row asked where no carrier was found, as it asks, after
- * "Not yet" and once a carrier was named; the words and carrier sheets with what was written; the question asked at
- * the page's foot on the way back from the carrier's site, and an answer that couldn't go. Light and dark, and at the
- * largest Android text size, under Reduce Motion so each stands at rest; Pip asking, the reasons and the thanks for a
- * "Yes" also with motion, once their springs, rows and tick have settled where Reduce Motion puts them at once.
+ * for a reason with the way to a note, and for a note; kept quiet on a later visit after a "Yes"; the row asked where
+ * no carrier was found, as it asks, after "Not yet" and once a carrier was named; the words and carrier sheets with
+ * what was written; the question asked at the page's foot on the way back from the carrier's site, and an answer that
+ * couldn't go. Light and dark, and at the largest Android text size, under Reduce Motion so each stands at rest; Pip
+ * asking, the reasons and the thanks for a "Yes" also with motion, once their springs, rows and tick have settled where
+ * Reduce Motion puts them at once.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -188,6 +190,31 @@ class ParcelFeedbackScreenshotTest {
         show()
         tap(FEEDBACK_YES)
         compose.screenshot("parcel_feedback_right_light")
+    }
+
+    /** The page opened again after a "Yes" about the scan it still ends on. */
+    private fun quiet() {
+        tap(FEEDBACK_YES)
+        compose.runOnUiThread { deliveries.navigator.pop(emptyList()) }
+        settle()
+        compose.runOnUiThread { deliveries.navigator.open(gift.id) }
+        settle()
+        toTheEnd()
+        check(work().moment == ParcelFeedbackModel.Moment.Quiet)
+    }
+
+    @Test
+    fun keptQuietAfterAYes() {
+        show()
+        quiet()
+        compose.screenshot("parcel_feedback_quiet_light")
+    }
+
+    @Test
+    fun keptQuietAfterAYesInDark() {
+        show(dark = true)
+        quiet()
+        compose.screenshot("parcel_feedback_quiet_dark")
     }
 
     @Test

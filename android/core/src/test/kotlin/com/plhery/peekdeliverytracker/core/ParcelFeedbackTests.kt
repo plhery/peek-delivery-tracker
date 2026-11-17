@@ -237,6 +237,46 @@ class ParcelFeedbackTests {
     }
 
     @Test
+    fun aYesIsRememberedForItsScanUntilAnyOtherAnswer() {
+        val store = MemoryDefaults()
+        val clock = Clock()
+        val memory = ParcelFeedbackMemory(store) { clock.now }
+        val subject = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        val next = "4:2026-10-03T09:30:00Z"
+
+        assertFalse(memory.saidRight(subject, scan = scan))
+        memory.rememberAnswer(subject, scan = scan, right = true)
+
+        assertTrue(memory.saidRight(subject, scan = scan))
+        assertFalse("Only about that scan", memory.saidRight(subject, scan = next))
+        assertFalse("Only about that parcel", memory.saidRight(ParcelFeedbackSubject.Parcel(UUID.randomUUID()), scan = scan))
+        clock.now += 30 * ParcelFeedbackMemory.quiet
+        assertTrue("For as long as the page ends on it", memory.saidRight(subject, scan = scan))
+
+        // Any other answer forgets it.
+        memory.rememberAnswer(subject, scan = scan)
+        assertFalse(memory.saidRight(subject, scan = scan))
+        memory.rememberAnswer(subject, scan = next, right = true)
+        assertTrue(memory.saidRight(subject, scan = next))
+        // Asked on the way back is no answer.
+        memory.rememberAskedOnReturn(subject, scan = next)
+        assertTrue(memory.saidRight(subject, scan = next))
+    }
+
+    @Test
+    fun anEntryKeptBeforeTheYesWasRememberedHasNone() {
+        val store = MemoryDefaults()
+        val subject = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        // As an earlier version kept it: when, about which scan, and the scan the way back asked about.
+        val entry = """{"answeredAt":800000000,"scan":"$scan","back":"$scan","savedAt":800000000}"""
+        store.set("""{"${subject.memoryKey}":$entry}""".toByteArray(), forKey = "sdt.parcelFeedback.v1")
+        val memory = ParcelFeedbackMemory(store)
+
+        assertFalse(memory.saidRight(subject, scan = scan))
+        assertFalse("The rest of it still reads", memory.asksOnReturn(subject, scan = scan))
+    }
+
+    @Test
     fun aLinkIsRememberedByItsDigestOnly() {
         val store = MemoryDefaults()
         val memory = ParcelFeedbackMemory(store)
@@ -413,7 +453,7 @@ class ParcelFeedbackTests {
     // Pip asks
 
     @Test
-    fun yesIsShownAtOnceSentAndAskedAgainOnALaterVisit() = runTest {
+    fun yesIsShownAtOnceSentAndKeptQuietOnALaterVisitUntilTheNextScan() = runTest {
         val store = MemoryDefaults()
         val clock = Clock()
         val sent = Sent()
@@ -434,11 +474,115 @@ class ParcelFeedbackTests {
         assertEquals("On this visit the thanks stay to be read", ParcelFeedbackQuestion.Found, model.standing)
         assertNull(model.word)
 
-        // Something may happen that its reader tells only later: Pip asks again on the next visit.
+        // The next visit with the same scan keeps quiet: only a way to report a problem stands.
         clock.now += 2 * 3_600.0
         val later = visit(page(subject), Sent(), store, clock)
         assertEquals(ParcelFeedbackQuestion.Found, later.standing)
+        assertEquals(ParcelFeedbackModel.Moment.Quiet, later.moment)
+        assertNull(later.moment.thanksKey)
+        clock.now += 30 * 86_400.0
+        assertEquals("Days later too", ParcelFeedbackModel.Moment.Quiet, visit(page(subject), Sent(), store, clock).moment)
+
+        // A new scan while the page is open brings the question back.
+        later.show(page(subject, scan = "4:2026-10-03T09:30:00Z"), through = Sent().client)
         assertEquals(ParcelFeedbackModel.Moment.Ask, later.moment)
+        // As it does on a later visit.
+        assertEquals(ParcelFeedbackModel.Moment.Ask, visit(page(subject, scan = "4:2026-10-03T09:30:00Z"), Sent(), store, clock).moment)
+        // Nothing else of the page changes it.
+        val quiet = visit(page(subject), Sent(), store, clock)
+        quiet.show(page(subject).copy(carrier = "Swiss Post", untroubled = true), through = Sent().client)
+        assertEquals(ParcelFeedbackModel.Moment.Quiet, quiet.moment)
+    }
+
+    @Test
+    fun reportingAProblemOffersTheReasonsAsNotQuiteDoes() = runTest {
+        val store = MemoryDefaults()
+        val clock = Clock()
+        val days = ReviewPrompt(store, version = appVersion)
+        days.used(at = clock.now.minusSeconds(2 * 86_400))
+        days.used(at = clock.now.minusSeconds(86_400))
+        val subject = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        visit(page(subject), Sent(), store, clock).right()
+        clock.now += 86_400.0
+        val sent = Sent()
+        val model = visit(page(subject), sent, store, clock)
+        assertEquals(ParcelFeedbackModel.Moment.Quiet, model.moment)
+        assertTrue(ReviewPrompt(store, version = appVersion).isDue(at = clock.now, calm = true))
+
+        model.notQuite()
+
+        assertEquals(ParcelFeedbackModel.Moment.Reasons, model.moment)
+        assertFalse("Something is off: no rating today", ReviewPrompt(store, version = appVersion).isDue(at = clock.now, calm = true))
+        assertTrue(sent.requests.isEmpty())
+        assertEquals("Nothing answered yet", ParcelFeedbackModel.Moment.Quiet, visit(page(subject), Sent(), store, clock).moment)
+
+        // A reason given in place is a wrong answer: the next visit asks again.
+        model.pick(ParcelFeedbackReason.Steps)
+        assertEquals(ParcelFeedbackModel.Moment.Sent, model.moment)
+        assertEquals(listOf(ParcelFeedbackAnswer.Wrong), sent.requests.map { it.answer })
+        assertEquals(ParcelFeedbackModel.Moment.Ask, visit(page(subject), Sent(), store, clock).moment)
+    }
+
+    @Test
+    fun everyOtherAnswerTheServiceTookAsksAgainOnTheNextVisit() = runTest {
+        val store = MemoryDefaults()
+        val clock = Clock()
+        suspend fun saidRight(subject: ParcelFeedbackSubject) {
+            visit(page(subject), Sent(), store, clock).right()
+            assertEquals(ParcelFeedbackModel.Moment.Quiet, visit(page(subject), Sent(), store, clock).moment)
+        }
+
+        // A note in the sheet, after a reason given in place.
+        val noted = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        saidRight(noted)
+        visit(page(noted), Sent(), store, clock).run {
+            notQuite()
+            pick(ParcelFeedbackReason.Other)
+            addNote()
+            assertTrue(sendWords(setOf(ParcelFeedbackReason.Other), note = "The box was empty"))
+        }
+        assertEquals(ParcelFeedbackModel.Moment.Ask, visit(page(noted), Sent(), store, clock).moment)
+
+        // "No" on the way back.
+        val back = ParcelFeedbackSubject.Link(linkId)
+        saidRight(back)
+        visit(page(back), Sent(), store, clock).run {
+            wrongOnReturn()
+            assertTrue(sendWords(emptySet(), note = "Their site says it was returned"))
+        }
+        assertEquals(ParcelFeedbackModel.Moment.Ask, visit(page(back), Sent(), store, clock).moment)
+
+        // The carrier named, while no carrier was found for it.
+        val named = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        saidRight(named)
+        visit(page(named, ParcelFeedbackQuestion.Unknown, scan = scan), Sent(), store, clock).run {
+            elsewhere()
+            assertTrue(sendCarrier(name = "Example Parcels", page = ""))
+        }
+        assertEquals(ParcelFeedbackModel.Moment.Ask, visit(page(named), Sent(), store, clock).moment)
+
+        // An answer the service refused forgets nothing.
+        val refused = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        saidRight(refused)
+        val failing = Sent().apply { fails = true }
+        visit(page(refused), failing, store, clock).run {
+            notQuite()
+            pick(ParcelFeedbackReason.Status)
+        }
+        assertEquals(1, failing.requests.size)
+        assertEquals(ParcelFeedbackModel.Moment.Quiet, visit(page(refused), Sent(), store, clock).moment)
+    }
+
+    @Test
+    fun theRowWhereNoCarrierWasFoundNeverKeepsQuiet() = runTest {
+        val store = MemoryDefaults()
+        val clock = Clock()
+        val subject = ParcelFeedbackSubject.Parcel(UUID.randomUUID())
+        ParcelFeedbackMemory(store) { clock.now }.rememberAnswer(subject, scan = "", right = true)
+
+        val model = visit(page(subject, ParcelFeedbackQuestion.Unknown, scan = ""), Sent(), store, clock)
+
+        assertEquals(ParcelFeedbackModel.Moment.Ask, model.moment)
     }
 
     @Test
@@ -726,7 +870,9 @@ class ParcelFeedbackTests {
         assertEquals(ParcelFeedbackModel.Moment.Right, model.moment)
         assertEquals(listOf("parcel-feedback-right success"), sent.counted)
         assertNull("Not asked again on the way back", comeBackOnALaterVisit(ParcelFeedbackSubject.Link(linkId), store, clock))
-        assertEquals("Pip still asks", ParcelFeedbackQuestion.Found, visit(page(ParcelFeedbackSubject.Link(linkId)), Sent(), store, clock).standing)
+        val later = visit(page(ParcelFeedbackSubject.Link(linkId)), Sent(), store, clock)
+        assertEquals(ParcelFeedbackQuestion.Found, later.standing)
+        assertEquals("Pip keeps quiet about the scan said right", ParcelFeedbackModel.Moment.Quiet, later.moment)
     }
 
     @Test
@@ -1179,8 +1325,9 @@ class ParcelFeedbackTests {
     /** The words the question's views say (ParcelFeedbackViews.swift), in every language the app speaks. */
     @Test
     fun theViewsWordsAreInEveryLanguage() {
-        val keys = ParcelFeedbackReason.entries.map { it.labelKey } + ParcelFeedbackModel.Moment.entries.mapNotNull { it.thanksKey }
-        assertEquals(6 + 5, keys.size)
+        val keys = ParcelFeedbackReason.entries.map { it.labelKey } + ParcelFeedbackModel.Moment.entries.mapNotNull { it.thanksKey } +
+            "feedback.report"
+        assertEquals(6 + 5 + 1, keys.size)
         for (language in AppLanguage.entries) {
             val localizer = Localizer(language)
             for (key in keys) assertNotEquals("$key in ${language.rawValue}", key, localizer.text(key))

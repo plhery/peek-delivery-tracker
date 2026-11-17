@@ -15,6 +15,7 @@ import androidx.compose.ui.layout.findRootCoordinates
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.ViewRootForTest
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
+import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
@@ -56,6 +57,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
+import com.plhery.peekdeliverytracker.core.api.TrackingEvent
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.currentEvent
 import com.plhery.peekdeliverytracker.ui.PHONE
@@ -1282,7 +1284,7 @@ class ParcelFeedbackTest {
     }
 
     @Test
-    fun aPageDrawnAgainOnItsWayOutMakesNoQuestionAndOpenedAgainAsksAfresh() {
+    fun aPageDrawnAgainOnItsWayOutMakesNoQuestionAndOpenedAgainMakesItAfresh() {
         show()
         openQuestion()
         tap(FEEDBACK_YES)
@@ -1301,6 +1303,80 @@ class ParcelFeedbackTest {
         assertNull(source.feedbacks.of(gift.id))
         openQuestion()
         assertNotEquals(first, work())
+        // The Yes was said about the scan the page still ends on.
+        assertEquals(ParcelFeedbackModel.Moment.Quiet, work().moment)
+        assertTrue(shows(FEEDBACK_REPORT, "Report a problem"))
+    }
+
+    // Said right on an earlier visit.
+
+    @Test
+    fun afterAYesThePageOpenedAgainKeepsQuietWithOnlyAWayToReportAProblem() {
+        show()
+        openQuestion()
+        tap(FEEDBACK_YES)
+        settle()
+        assertTrue("The thanks stay on this visit", shows(FEEDBACK_BUBBLE, "Good to know, thanks!"))
+        assertFalse(exists(FEEDBACK_REPORT))
+        back()
+        openQuestion()
+        assertEquals(ParcelFeedbackModel.Moment.Quiet, work().moment)
+        assertFalse(exists(FEEDBACK_PIP))
+        assertFalse(exists(FEEDBACK_BUBBLE))
+        assertFalse(exists(FEEDBACK_YES))
+        assertFalse(exists(FEEDBACK_NOT_QUITE))
+        assertTrue(shows(FEEDBACK_REPORT, "Report a problem"))
+        // A button at the question's leading side, 48 tall to the touch.
+        assertEquals(Role.Button, node(FEEDBACK_REPORT).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
+        val report = node(FEEDBACK_REPORT).getUnclippedBoundsInRoot()
+        val question = node(FEEDBACK_QUESTION).getUnclippedBoundsInRoot()
+        assertEquals(48f, (report.bottom - report.top).value, 0.5f)
+        assertEquals(question.left.value, report.left.value, 0.5f)
+        assertTrue("$report is narrower than the question $question", report.right < question.right)
+
+        // It offers Pip's reasons, as Not quite does, and sends nothing yet.
+        tap(FEEDBACK_REPORT)
+        settle()
+        assertEquals(ParcelFeedbackModel.Moment.Reasons, work().moment)
+        assertTrue(exists(FEEDBACK_PIP))
+        assertTrue(shows(FEEDBACK_BUBBLE, "What’s off?"))
+        assertFalse(exists(FEEDBACK_REPORT))
+        assertEquals(1, source.feedbackRequests.size)
+        tap(FEEDBACK_REASON + ParcelFeedbackReason.Status.name)
+        settle()
+        assertTrue(shows(FEEDBACK_BUBBLE, "Thanks! I’ll look into it."))
+        assertEquals(ParcelFeedbackAnswer.Wrong, source.feedbackRequests.last().second.answer)
+
+        // Something was off: the next visit asks again.
+        back()
+        openQuestion()
+        assertEquals(ParcelFeedbackModel.Moment.Ask, work().moment)
+        assertTrue(shows(FEEDBACK_BUBBLE, "Did I get this one right?"))
+    }
+
+    @Test
+    fun aNewScanWhileThePageKeepsQuietBringsPipsQuestionBack() {
+        show()
+        openQuestion()
+        tap(FEEDBACK_YES)
+        settle()
+        back()
+        openQuestion()
+        assertTrue(exists(FEEDBACK_REPORT))
+
+        val newest = gift.trackingEvents.maxOf { it.occurredAt }
+        val scanned = TrackingEvent(
+            id = UUID(2, 1), packageId = gift.id, stage = TrackingStage.InTransit, description = "Arrived at the sorting centre",
+            occurredAt = java.time.Instant.parse(newest).plusSeconds(3_600).toString(),
+        )
+        source.parcels.value = listOf(gift.copy(trackingEvents = gift.trackingEvents + scanned), lamp)
+        settle()
+        node(FEEDBACK_QUESTION).performScrollTo()
+        settle()
+
+        assertEquals(ParcelFeedbackModel.Moment.Ask, work().moment)
+        assertFalse(exists(FEEDBACK_REPORT))
+        assertTrue(exists(FEEDBACK_PIP))
         assertTrue(shows(FEEDBACK_BUBBLE, "Did I get this one right?"))
     }
 

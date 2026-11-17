@@ -47,9 +47,10 @@ enum ParcelFeedbackSubject: Equatable, Sendable {
 }
 
 /// What this iPhone remembers of the question, one entry per parcel: when its reader last
-/// answered and about which scan, and the scan the way back from a carrier's site last asked
-/// about. The question on the page stands on every visit; the way back asks about a scan
-/// once, and about a parcel at most once a day. Nothing of it leaves the device.
+/// answered and about which scan, the scan they last said was right, and the scan the way back
+/// from a carrier's site last asked about. The question on the page stands on every visit, kept
+/// quiet while the page ends on the scan its reader said was right; the way back asks about a
+/// scan once, and about a parcel at most once a day. Nothing of it leaves the device.
 struct ParcelFeedbackMemory {
     private static let key = "sdt.parcelFeedback.v1"
     /// Only the latest parcels can still matter.
@@ -61,6 +62,8 @@ struct ParcelFeedbackMemory {
         var answeredAt: Date?
         /// What the page ended on when its reader answered.
         var scan: String?
+        /// The scan its reader last said was right. Any other answer since forgets it.
+        var right: String?
         /// The scan the question was asked about on the way back.
         var back: String?
         var savedAt: Date
@@ -86,11 +89,17 @@ struct ParcelFeedbackMemory {
         return age < 0 || age >= Self.quiet
     }
 
-    /// An answer about what the page ends on.
-    func rememberAnswer(_ subject: ParcelFeedbackSubject, scan: String) {
+    /// Whether its reader said this scan was right, and has said nothing else since.
+    func saidRight(_ subject: ParcelFeedbackSubject, scan: String) -> Bool {
+        read()[subject.memoryKey]?.right == scan
+    }
+
+    /// An answer about what the page ends on: a "Yes" (`right`), or anything else.
+    func rememberAnswer(_ subject: ParcelFeedbackSubject, scan: String, right: Bool = false) {
         update(subject) {
             $0.answeredAt = now()
             $0.scan = scan
+            $0.right = right ? scan : nil
         }
     }
 
@@ -190,6 +199,9 @@ final class ParcelFeedbackModel: ObservableObject {
     /// What stands where the question is asked.
     enum Moment: Equatable {
         case ask
+        /// Its reader said on an earlier visit that what the page ends on is right: only a way
+        /// to report a problem stands, until the next scan.
+        case quiet
         /// "Not quite": the reasons are offered, nothing is sent yet.
         case reasons
         case right
@@ -280,10 +292,12 @@ final class ParcelFeedbackModel: ObservableObject {
     }
 
     /// The question standing on the page, or nil while there is none to ask. It stands on every
-    /// visit: something may happen that its reader tells only later.
+    /// visit, for what its reader tells only later; Pip asks it until they say the scan the page
+    /// ends on is right, then it keeps quiet until the next scan.
     var standing: ParcelFeedbackQuestion? { page?.question }
 
-    /// Takes what the page shows now. Another parcel, or a carrier found while the page was open, starts over.
+    /// Takes what the page shows now. Another parcel, or a carrier found while the page was open, starts over;
+    /// a new scan brings back a question kept quiet.
     func show(_ page: Page?, through client: ParcelFeedbackClient?) {
         self.client = client
         guard page != self.page else { return }
@@ -297,9 +311,17 @@ final class ParcelFeedbackModel: ObservableObject {
             reviewDue = false
         }
         if before?.subject != page?.subject || before?.question != page?.question {
-            moment = .ask
+            moment = start(page)
             given = nil
+        } else if moment == .quiet, before?.scan != page?.scan {
+            moment = .ask
         }
+    }
+
+    /// Where the question starts: kept quiet about the scan its reader said was right.
+    private func start(_ page: Page?) -> Moment {
+        guard let page, page.question == .found, memory.saidRight(page.subject, scan: page.scan) else { return .ask }
+        return .quiet
     }
 
     // MARK: - On the way back
@@ -349,8 +371,9 @@ final class ParcelFeedbackModel: ObservableObject {
         word = .failed
     }
 
+    /// "Not quite", or "Report a problem" while the question keeps quiet.
     func notQuite() {
-        guard moment == .ask else { return }
+        guard moment == .ask || moment == .quiet else { return }
         // Something is off: no rating is asked for today.
         review.noteBadMoment(at: now())
         moment = .reasons
@@ -432,7 +455,7 @@ final class ParcelFeedbackModel: ObservableObject {
             guard let client else { throw DeliveryAPIError.parcelMissing }
             try await client.send(feedback)
             if counted { report(action, .success) }
-            memory.rememberAnswer(page.subject, scan: page.scan)
+            memory.rememberAnswer(page.subject, scan: page.scan, right: feedback.answer == .right)
             // The reader found the page right: on a parcel with nothing wrong, the moment to ask for a rating.
             if feedback.answer == .right, review.isDue(at: now(), calm: page.untroubled) { reviewDue = true }
             return true
@@ -460,6 +483,7 @@ extension ParcelFeedbackModel {
         guard let page else { return }
         given = Words(id: UUID(), reasons: [.steps], asked: .page)
         switch variant {
+        case "quiet": moment = .quiet
         case "reasons": moment = .reasons
         case "right": moment = .right
         case "sent": moment = .sent

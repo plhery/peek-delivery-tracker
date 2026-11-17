@@ -5,9 +5,10 @@ import type { ParcelWithEvents } from '../../types';
 /**
  * What a reader says of a parcel: that what is shown is right, what is off,
  * or who carries a parcel no carrier was found for. The question stands on
- * the page whenever there is something to judge, for a reader who has more to
- * say later; only the one asked on the way back from the carrier's site keeps
- * quiet about what was answered.
+ * the page whenever there is something to judge, until its reader says it is
+ * right: then only a way to report a problem stays, until the next scan. The
+ * one asked on the way back from the carrier's site keeps quiet about what was
+ * answered.
  */
 
 /** An answer as the page words it; sending adds the app and the language. */
@@ -27,6 +28,8 @@ export interface FeedbackMemory {
   at?: string;
   /** The scan the page ended on then. */
   scan?: string;
+  /** The scan its reader last said was right; any other answer since forgets it. */
+  right?: string;
   /** The scan the question was asked about on the way back from the carrier's site. */
   back?: string;
 }
@@ -63,10 +66,10 @@ function text(value: unknown, limit: number): string | undefined {
 /** A stored memory, read back: anything else is no memory. */
 export function feedbackMemory(value: unknown): FeedbackMemory | null {
   if (!value || typeof value !== 'object') return null;
-  const { at, scan, back } = value as Record<string, unknown>;
+  const { at, scan, right, back } = value as Record<string, unknown>;
   const answered = text(at, 40);
   const kept: FeedbackMemory = {
-    ...(answered && Number.isFinite(Date.parse(answered)) ? { at: answered, scan: text(scan, 80) ?? '' } : {}),
+    ...(answered && Number.isFinite(Date.parse(answered)) ? { at: answered, scan: text(scan, 80) ?? '', ...(text(right, 80) ? { right: text(right, 80) } : {}) } : {}),
     ...(text(back, 80) ? { back: text(back, 80) } : {}),
   };
   return kept.at || kept.back ? kept : null;

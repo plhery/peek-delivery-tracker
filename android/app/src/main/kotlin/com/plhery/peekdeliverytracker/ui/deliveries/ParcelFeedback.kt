@@ -433,7 +433,9 @@ internal class ParcelFeedbackWork(val model: ParcelFeedbackModel, private val sc
  * whose `viewport` is where it is seen (`onScrollVisibilityChange(threshold: 0.2)`), whatever the page's zoom as it
  * opens; at once under Reduce Motion; and keeps having come through the window made again. Each change of moment
  * settles with `spring(response: 0.42, dampingFraction: 0.86)`, or eases in and out over 0.2 s under Reduce Motion;
- * and each answer taken makes Pip hop, except under Reduce Motion.
+ * and each answer taken makes Pip hop, except under Reduce Motion. Once its reader said the scan the page ends on is
+ * right, Pip's keeps quiet until the next scan: only a way to report a problem stands ([ReportProblem]), with nothing
+ * to come in, and Pip comes in as it is taken.
  */
 @Composable
 internal fun ParcelFeedbackQuestion(work: ParcelFeedbackWork, viewport: () -> LayoutCoordinates?, modifier: Modifier = Modifier) {
@@ -452,7 +454,11 @@ internal fun ParcelFeedbackQuestion(work: ParcelFeedbackWork, viewport: () -> La
         if (whole.height > 0f && seen.height >= whole.height * ARRIVAL) arrived = true
     }
     when (standing) {
-        ParcelFeedbackQuestion.Found -> PipQuestion(work, shown, hops, modifier.fillMaxWidth().then(arrival))
+        ParcelFeedbackQuestion.Found -> if (work.moment == Moment.Quiet) {
+            ReportProblem(work, modifier.fillMaxWidth())
+        } else {
+            PipQuestion(work, shown, hops, modifier.fillMaxWidth().then(arrival))
+        }
         ParcelFeedbackQuestion.Unknown -> UnknownCarrierRow(work, shown, modifier.fillMaxWidth().then(arrival))
     }
 }
@@ -553,13 +559,50 @@ private fun Bubble(work: ParcelFeedbackWork, large: Boolean, modifier: Modifier)
                         }
                     }
                 }
-                Moment.Ask, Moment.Early, Moment.Named -> Beside({ Question(localizer.text("feedback.pip.question")) }) {
+                Moment.Ask, Moment.Quiet, Moment.Early, Moment.Named -> Beside({ Question(localizer.text("feedback.pip.question")) }) {
                     Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                         FeedbackPill(localizer.text("feedback.yes"), FEEDBACK_YES) { work.right() }
                         FeedbackPill(localizer.text("feedback.notQuite"), FEEDBACK_NOT_QUITE) { work.notQuite() }
                     }
                 }
             }
+        }
+    }
+}
+
+/**
+ * `report`: its reader said what the page ends on is right, so no Pip and no bubble, only "feedback.report" at the
+ * leading side in footnote, in the secondary text and underlined in it at 45 %, 48 tall to the touch, a plain button.
+ * It opens Pip's reasons as "Not quite" does.
+ */
+@Composable
+private fun ReportProblem(work: ParcelFeedbackWork, modifier: Modifier) {
+    val colors = PeekTheme.colors
+    val underline = colors.secondaryText.copy(alpha = colors.secondaryText.alpha * 0.45f)
+    var layout by remember { mutableStateOf<TextLayoutResult?>(null) }
+    Box(modifier.testTag(FEEDBACK_QUESTION), contentAlignment = Alignment.CenterStart) {
+        Box(
+            Modifier
+                .testTag(FEEDBACK_REPORT)
+                .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = work::notQuite)
+                .heightIn(min = 48.dp)
+                .padding(end = 6.dp),
+            contentAlignment = Alignment.CenterStart,
+        ) {
+            Text(
+                LocalLocalizer.current.text("feedback.report"),
+                Modifier.drawBehind {
+                    val lines = layout ?: return@drawBehind
+                    val thickness = 1.dp.toPx()
+                    for (line in 0 until lines.lineCount) {
+                        val y = lines.getLineBaseline(line) + UNDERLINE_GAP.toPx()
+                        drawLine(underline, Offset(lines.getLineLeft(line), y), Offset(lines.getLineRight(line), y), thickness)
+                    }
+                },
+                color = colors.secondaryText,
+                style = PeekTheme.type.footnote.sfLines(),
+                onTextLayout = { layout = it },
+            )
         }
     }
 }
@@ -594,7 +637,7 @@ private fun UnknownCarrierRow(work: ParcelFeedbackWork, shown: Boolean, modifier
             when (moment) {
                 Moment.Early -> Said(localizer.text("feedback.unknown.early"))
                 Moment.Named -> Said(localizer.text("feedback.unknown.sent"))
-                Moment.Ask, Moment.Reasons, Moment.Right, Moment.Sent, Moment.Noted ->
+                Moment.Ask, Moment.Quiet, Moment.Reasons, Moment.Right, Moment.Sent, Moment.Noted ->
                     Beside({ Question(localizer.text("feedback.unknown.question")) }) {
                         Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                             FeedbackPill(localizer.text("feedback.yes"), FEEDBACK_YES, onControl = true) { work.elsewhere() }
@@ -1450,6 +1493,7 @@ const val FEEDBACK_ROW = "parcelFeedback.row"
 const val FEEDBACK_YES = "parcelFeedback.yes"
 const val FEEDBACK_NOT_QUITE = "parcelFeedback.notQuite"
 const val FEEDBACK_NOT_YET = "parcelFeedback.notYet"
+const val FEEDBACK_REPORT = "parcelFeedback.report"
 const val FEEDBACK_REASON = "parcelFeedback.reason."
 const val FEEDBACK_ADD_NOTE = "parcelFeedback.addNote"
 const val FEEDBACK_WORD = "parcelFeedback.word"

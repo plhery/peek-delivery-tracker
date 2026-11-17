@@ -2036,6 +2036,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "mondial-relay",
+      "catalog": "mondial-relay",
+      "slug": "mondial-relay-sendungsverfolgung",
+      "title": "Mondial Relay Sendungsverfolgung: Status, Vinted & Abholung",
+      "name": "Mondial Relay",
+      "color": "#ef3026"
+    },
+    {
       "id": "gls-de",
       "catalog": "gls-de",
       "slug": "gls-sendungsverfolgung-deutschland",
@@ -2306,6 +2314,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket Sendungsverfolgung: Nummer, Status, Packstation",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "royal-mail-sendungsverfolgung",
+      "title": "Royal Mail Sendungsverfolgung: Nummer, Status und Zoll",
+      "name": "Royal Mail",
+      "color": "#da202a"
     },
     {
       "id": "usps",
@@ -2814,6 +2830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcf00"
     },
     {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "suivi-royal-mail",
+      "title": "Suivi colis Royal Mail\u00a0: numéro, statuts, douane et relais",
+      "name": "Royal Mail",
+      "color": "#da202a"
+    },
+    {
       "id": "canada-post",
       "catalog": "canada-post",
       "slug": "canada-post-suivi",
@@ -2990,6 +3014,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Cainiao tracking: numero, stati e pacco che non arriva",
       "name": "Cainiao",
       "color": "#e62e04"
+    },
+    {
+      "id": "mondial-relay",
+      "catalog": "mondial-relay",
+      "slug": "tracciamento-mondial-relay",
+      "title": "Tracciamento Mondial Relay: stati, Vinted, InPost e ritiro",
+      "name": "Mondial Relay",
+      "color": "#ef3026"
     },
     {
       "id": "gls-ch",
@@ -3198,6 +3230,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket tracking: numero, stati e consegna in Italia",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "tracciamento-royal-mail",
+      "title": "Tracciamento Royal Mail: numero, stati, dogana e Poste",
+      "name": "Royal Mail",
+      "color": "#da202a"
     },
     {
       "id": "j-and-t-de",
@@ -3608,6 +3648,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Correos seguimiento: estados, entregas, aduanas y teléfono",
       "name": "Correos",
       "color": "#ffcd00"
+    },
+    {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "seguimiento-royal-mail",
+      "title": "Seguimiento Royal Mail: número, estados, aduanas y Correos",
+      "name": "Royal Mail",
+      "color": "#da202a"
     },
     {
       "id": "usps",
@@ -4136,6 +4184,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "mondial-relay",
+      "catalog": "mondial-relay",
+      "slug": "sledzenie-mondial-relay",
+      "title": "Śledzenie Mondial Relay: statusy, InPost, Vinted i odbiór",
+      "name": "Mondial Relay",
+      "color": "#ef3026"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "dpd-szwajcaria-sledzenie",
@@ -4350,6 +4406,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket śledzenie przesyłki: numer, statusy i odbiór",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "royal-mail",
+      "catalog": "royal-mail",
+      "slug": "sledzenie-royal-mail",
+      "title": "Śledzenie Royal Mail: numer GB, statusy, cło i doręczenie",
+      "name": "Royal Mail",
+      "color": "#da202a"
     },
     {
       "id": "j-and-t-de",

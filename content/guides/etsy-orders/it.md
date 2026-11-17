@@ -104,7 +104,7 @@ Etsy dice che di solito dazi, imposte e spese di sdoganamento sono a carico di c
 | Ordine | Cosa si applica |
 | --- | --- |
 | Da un Paese dell'UE | L'IVA è inclusa nel prezzo, non paghi altro |
-| Da fuori UE, sotto i 150 € | Etsy addebita l'IVA al pagamento. Si aggiunge un onere doganale di 3 € per articolo, al pagamento o alla consegna |
+| Da fuori UE, sotto i 150 € | Etsy addebita l'IVA al pagamento. Si aggiunge un onere doganale di 3 € per voce doganale, al pagamento o alla consegna |
 | Da fuori UE, sopra i 150 € | IVA e dazi possono esserti addebitati alla consegna, a meno che il venditore non spedisca con dazi già pagati |
 
 Un pacco in ritardo o mai arrivato perché hai rifiutato o non hai pagato gli oneri dovuti alla consegna non è coperto dalla Protezione degli acquisti di Etsy. Di più su oneri e tempi: [pacco fermo in dogana](guide:customs).
@@ -147,7 +147,7 @@ Sì, con il codice del corriere. Incollalo in [Peek](/): riconosce i codici dell
 - [Etsy: Global Postal Shipping Labels on Etsy (in inglese)](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, due etichette, Tracked on Etsy
 - [Etsy: How to Ship First-Class Flats and Letters (in inglese)](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – tracciamento tramite Pitney Bowes, buste rigide
 - [Etsy: Informazioni per la gestione delle spedizioni internazionali](https://help.etsy.com/hc/it/articles/360001987487-Informazioni-per-la-gestione-delle-spedizioni-internazionali) – corrieri usati di solito in ogni Paese
-- [Etsy: Dovrò pagare imposte, oneri o dazi sul mio ordine?](https://help.etsy.com/hc/it/articles/115015691007-Dovr%C3%B2-pagare-imposte-oneri-o-dazi-sul-mio-ordine) – regole UE, 150 €, 3 € per articolo
+- [Etsy: Dovrò pagare imposte, oneri o dazi sul mio ordine?](https://help.etsy.com/hc/it/articles/115015691007-Dovr%C3%B2-pagare-imposte-oneri-o-dazi-sul-mio-ordine) – regole UE, 150 €, 3 € per voce doganale
 - [Etsy: Programma di Protezione degli acquisti di Etsy](https://help.etsy.com/hc/it/articles/7471925990807-Programma-di-Protezione-degli-acquisti-di-Etsy) – cosa è coperto, oneri doganali, scioperi e meteo, ospiti
 - [Etsy: Come ottenere assistenza per un ordine](https://help.etsy.com/hc/it/articles/4402660818583-Come-ottenere-assistenza-per-un-ordine) – Assistenza per l'ordine, cosa può fare il venditore
 - [Etsy: Come aprire una disputa](https://help.etsy.com/hc/it/articles/5745586898199-Come-aprire-una-disputa) – 48 ore, 30 giorni, 180 giorni, PayPal, contestazioni bancarie

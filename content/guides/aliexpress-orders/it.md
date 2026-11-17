@@ -23,7 +23,7 @@ Chi trovi linea per linea, dagli invii postali con il codice che finisce in `CN`
 - home | Tu | Conferma la ricezione solo quando hai il pacco in mano
 :::
 
-Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per articolo. AliExpress ricorda che dazi e tasse non li copre mai lei e che di solito li incassa il corriere alla consegna; chi spedisce da un magazzino in Italia non te li fa pagare. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
+Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per voce doganale anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale. AliExpress ricorda che dazi e tasse non li copre mai lei e che di solito li incassa il corriere alla consegna; chi spedisce da un magazzino in Italia non te li fa pagare. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
 ## Dove trovo il codice di tracciamento AliExpress?
 
@@ -152,6 +152,6 @@ Peek mostra quello che pubblicano i corrieri. Protezione acquirenti, controversi
 - [AliExpress: How do I cancel a dispute? (in inglese)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015101&language=en) – nessuna riapertura dopo la Protezione acquirenti
 - [Cainiao: About Cainiao (in inglese)](https://www.cainiao.com/en/about-us-brief-introduction.html) – parte del gruppo Alibaba
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
-- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per articolo
+- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici, cosa controlla Peek
 :::

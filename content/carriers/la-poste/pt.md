@@ -78,7 +78,7 @@ Quando a encomenda sai de França, o rastreio da La Poste pode nomear a empresa 
 
 ### Há alfândega numa encomenda vinda de França?
 
-Não. Segundo a Autoridade Tributária, só as remessas postais vindas de fora do território aduaneiro da União são apresentadas à alfândega, e o direito aduaneiro de 3 € por artigo, segundo o Your Europe, aplica-se às compras online feitas fora da UE.
+Não. Segundo a Autoridade Tributária, só as remessas postais vindas de fora do território aduaneiro da União são apresentadas à alfândega, e o direito aduaneiro de 3 € por tipo de produto, segundo o Your Europe, aplica-se às compras online feitas fora da UE.
 
 ### Porque é que o rastreio Colissimo não funciona?
 
@@ -88,7 +88,7 @@ Compara o número com as formas acima: se acabar em `FR` e começar por XU, XR, 
 - [Arcep: Comment résoudre un litige avec un opérateur postal ?](https://www.arcep.fr/mes-demarches-et-services/consommateurs/fiches-pratiques/la-resolution-des-litiges-postaux.html) – reclamação gratuita, remetente ou destinatário, telefones e horários, site, morada postal, serviço de recurso, Médiateur
 - [Le Médiateur du Groupe La Poste: Foire aux questions](https://mediateur.groupelaposte.com/pages/foire-aux-questions) – gratuito, dois níveis de reclamação antes, dois meses, um ano
 - [Service-Public.fr: Service consommateur de La Poste](https://lannuaire.service-public.gouv.fr/centres-contact/R11647) – 3631, horário e custo, serviço de clientes internacional, morada postal
-- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, reembolso, vendedor responsável pelos danos até à entrega, 3 € por artigo nas compras feitas fora da UE
+- [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, reembolso, vendedor responsável pelos danos até à entrega, 3 € por tipo de produto nas compras feitas fora da UE
 - [Portal das Finanças: Encomendas Postais](https://info.portaldasfinancas.gov.pt/pt/apoio_ao_contribuinte/Cidadaos/Compras/Encomendas_postais/Encomendas_Postais_Comercio_Eletronico/Paginas/default.aspx) – só as remessas de fora do território aduaneiro da União vão à alfândega
 - [Cybermalveillance.gouv.fr: L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – a La Poste não pede pagamentos por SMS nem por email
 - [Universal Parcel Scraper: La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – formas do número, chaves de controlo, frases da La Poste e etapas do Peek, empresa que entrega fora de França, o que o Peek lê

@@ -106,7 +106,7 @@ Chronopost a son propre nom et son propre suivi, et fait partie de Geopost, la h
 - [La Poste Groupe : Chronopost](https://www.lapostegroupe.com/en/focus/la-poste-groupes-subsidiaries/chronopost) – colis express ; points de retrait en France : agences, bureaux de poste, points Pickup
 - [La Poste Groupe : 2025 Integrated Report](https://www.lapostegroupe.com/assets/media/le-groupe-laposte/ad4Q_p1ZCF7ETKqb_MEL_LAPO_RI_seul_2025_EN_14042026.pdf) – Léonard, le chatbot de Chronopost (p. 18)
 - [La Poste : Chronopost](https://www.laposte.fr/marques/chronopost) – numéro de 13 caractères, délais Chrono 13, Chrono 10, Shop2Shop et Europe, îles et Corse, avis de passage
-- [Douane : Mesures e-commerce européennes](https://www.douane.gouv.fr/fiche/mesures-e-commerce-europeennes) – 2 € de frais de traitement par article
+- [Douane : Mesures e-commerce européennes](https://www.douane.gouv.fr/fiche/mesures-e-commerce-europeennes) – 2 € de frais de traitement par type de produit
 - [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de 2 € depuis le 1er novembre 2026
 - [Pickup : FAQ](https://www.pickup.fr/faq-particulier/) – message de mise à disposition, 8 jours en relais pour Chronopost, 5 en consigne, retour à l'expéditeur, Pickup Pass et codes, retrait par un proche, consignes jusqu'à 24 h/24, numéro de Chronopost, réserves en relais
 - [Service-Public : Achat à distance, livraison du bien](https://www.service-public.gouv.fr/particuliers/vosdroits/F10037) – le vendeur répond de la livraison, retard, colis abîmé ou non reçu

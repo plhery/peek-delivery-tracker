@@ -91,8 +91,8 @@ Desconfia. O Gabinete Cibercrime da Procuradoria-Geral da República alertou, em
 :::sources
 - [Autoridade Tributária e Aduaneira: Mercadorias eCommerce](https://info.portaldasfinancas.gov.pt/pt/destaques/Paginas/Mercadorias_eCommerce.aspx) – 3 € por adição desde 1 de julho de 2026, remessas até 150 €, exemplo de 6 €
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – 30 dias, prazo suplementar, rescisão e reembolso, responsabilidade do vendedor, quem cobra os 3 €
-- [Comissão Europeia: EU customs reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € por artigo até 150 € desde 1 de julho de 2026, taxa de 2 € desde 1 de novembro de 2026
-- [Comissão Europeia: guia sobre o direito de 3 € e a Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, seja qual for o valor
+- [Comissão Europeia: EU customs reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 3 € por tipo de produto até 150 € desde 1 de julho de 2026, taxa de 2 € desde 1 de novembro de 2026
+- [Comissão Europeia: guia sobre o direito de 3 € e a Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por tipo de produto, seja qual for o valor
 - [Ministério Público, Gabinete Cibercrime: alerta de 5 de julho de 2023](https://cibercrime.ministeriopublico.pt/sites/default/files/documentos/pdf/2023.07.05_alerta_phishing_ctt_visa_4.pdf) – mensagens falsas de encomenda pendente, pequena taxa, o que fazer
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – formatos do número, dígito de controlo, leituras da FedEx, o que o Peek lê da FedEx
 :::

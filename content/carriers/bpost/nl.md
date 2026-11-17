@@ -155,7 +155,7 @@ Niet echt. Track & Trace aanvaardt ook een referentie, maar toont dan om privacy
 - [bpost: Mijn pakje is terug naar de afzender](https://www.bpost.be/nl/faq/mijn-pakje-zou-thuis-geleverd-worden-maar-terug-naar-de-afzender-waarom-en-hoe-kan-ik-het-toch-nog) – redenen
 - [bpost: Een pakje ontvangen uit België](https://www.bpost.be/nl/pakje-ontvangen) – 14 dagen om invoerkosten te betalen
 - [bpost: Pakje langs de douane](https://www.bpost.be/nl/pakje-ontvangen/douane) – vooraf betalen, Postkantoor
-- [bpost: Een pakje van buiten de EU?](https://www.bpost.be/nl/shoppen-buiten-eu) – € 3 en € 2 per item, btw, € 21,50 en € 40
+- [bpost: Een pakje van buiten de EU?](https://www.bpost.be/nl/shoppen-buiten-eu) – € 3 en € 2 per soort product, btw, € 21,50 en € 40
 - [bpost: Wanneer betaal ik € 3 en € 2 voor elk verschillend type product?](https://www.bpost.be/nl/faq/wanneer-betaal-ik-eu-3-en-eu-2-voor-elk-verschillend-type-product-voor-pakjes-van-buiten-de-eu) – per type product, broeken en schoenen
 - [bpost: Hoe kan ik de invoerkosten betalen?](https://www.bpost.be/nl/faq/hoe-kan-ik-de-invoerkosten-betalen) – betaalmiddelen
 - [bpost: Verdachte sms of e-mail](https://www.bpost.be/nl/faq/i-received-suspicious-text-message-or-email-allegedly-bpost-what-should-i-do) – phishing

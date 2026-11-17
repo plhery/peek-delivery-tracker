@@ -26,7 +26,7 @@ Nemmeno un numero di tre lettere, una `U` e sette cifre, come `TEMU1234565` (inv
 
 Di solito lo dice il codice di tracciamento: il campo qui sopra indica il corriere a cui rimanda la sua forma, o i pochi a cui può appartenere. Chi puoi trovare nell'ultimo tratto, da Poste Italiane per gli invii postali ai corrieri privati, è nella tabella di [come tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per articolo anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per articolo. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
+Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per voce doganale anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
 ## Pacco Temu fermo, in ritardo o mai arrivato
 
@@ -47,7 +47,7 @@ Peek vede quello che pubblicano i corrieri. Le segnalazioni e i rimborsi restano
 
 :::sources
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
-- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, 2 € per articolo
+- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce doganale, 2 € per voce doganale
 - [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei codici, corrieri che Peek riconosce
 - [BIC: Container Identification Number (in inglese)](https://www.bic-code.org/identification-number/) – codice del proprietario, U per i container da carico, numero di serie di sei cifre e cifra di controllo
 - [BIC: Registered BIC Code TEMU (in inglese)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management

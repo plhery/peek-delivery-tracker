@@ -15,7 +15,7 @@ D'après AliExpress, ce sont les vendeurs qui proposent les modes de livraison, 
 
 Sur sa page « L'engagement AliExpress » pour la France, AliExpress affiche Colissimo, [Colis Privé](carrier:colis-prive) et [La Poste](carrier:la-poste) parmi ses transporteurs. Qui livre le plus souvent en Belgique et en Suisse : voir le tableau par pays du [suivi d'un colis venant de Chine](guide:tracking-from-china). En livraison économique, Cainiao prévient que « la livraison économique n'inclut pas le suivi du colis après remise au transporteur du pays/de la région de destination ».
 
-Ce que tu peux devoir payer à la frontière : voir [la douane](guide:customs). Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par article, selon la Commission européenne ; rien de tel en Suisse.
+Ce que tu peux devoir payer à la frontière : voir [la douane](guide:customs). Depuis le 1er novembre 2026, l'UE ajoute des frais de traitement de 2 € par type de produit, selon la Commission européenne ; rien de tel en Suisse.
 
 :::journey
 - warehouse | Vendeur | Expédie dans le délai indiqué sur ta commande, sinon AliExpress l'annule et te rembourse
@@ -152,6 +152,6 @@ Peek montre ce que publient les transporteurs. La protection acheteur, les litig
 - [Cainiao : Guidance (en anglais)](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – coordonnées des transporteurs quand il y en a
 - [Cainiao : fichier de langue du suivi](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – livraison économique, « Voir les informations de contact »
 - [Commission européenne : EU Customs Reform (en anglais)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € au 1er novembre 2026
-- [Commission européenne : The temporary EUR 3 customs duty and the Union handling fee (en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par article, vente à distance
+- [Commission européenne : The temporary EUR 3 customs duty and the Union handling fee (en anglais)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € par type de produit, vente à distance
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – ce que Peek vérifie
 :::

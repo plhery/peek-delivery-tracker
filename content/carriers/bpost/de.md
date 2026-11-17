@@ -89,8 +89,8 @@ Für eine Bestellung bis 150 €, ohne Versandkosten, nennt bpost diese Beträge
 
 | Posten | Betrag |
 | --- | --- |
-| Einfuhrzoll, seit 1. Juli 2026 | 3 € pro Artikel |
-| Europäische Bearbeitungsgebühr, seit 1. November 2026 | 2 € pro Artikel |
+| Einfuhrzoll, seit 1. Juli 2026 | 3 € pro Warenart |
+| Europäische Bearbeitungsgebühr, seit 1. November 2026 | 2 € pro Warenart |
 | Mehrwertsteuer | meist 21 % |
 | Verwaltungskosten von bpost | 21,50 €, wenn der Webshop Mehrwertsteuer und Zoll nicht schon kassiert hat |
 

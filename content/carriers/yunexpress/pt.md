@@ -63,7 +63,7 @@ A YunExpress não dá a quem recebe passos, formulário nem prazo para uma encom
 
 Parada em `Customs inspection - Import`? No seu blog para vendedores, a YunExpress diz que ser escolhida para inspeção não quer dizer, só por si, uma longa espera: o que conta é o nível da verificação. Uma verificação de documentos costuma levar de alguns dias úteis a cerca de uma semana; uma passagem por scanner ou uma inspeção física acrescenta muitas vezes uma a duas semanas, por vezes com custos de armazenagem ou de inspeção; uma recolha de amostras ou uma análise pelas autoridades, de semanas a mais de um mês.
 
-Para a UE, a YunExpress informou a 18 de junho de 2026 que as encomendas até 150 € deixam de estar isentas de direitos aduaneiros a partir de 1 de julho de 2026 e passam a ter um direito provisório fixo de 3 € por artigo («€3 per item»). Não diz quem o paga na tua encomenda. O que podes ter de pagar em Portugal está em [encomenda retida na alfândega](guide:customs).
+Para a UE, a YunExpress informou a 18 de junho de 2026 que as encomendas até 150 € deixam de estar isentas de direitos aduaneiros a partir de 1 de julho de 2026 e passam a ter um direito provisório fixo de 3 € por tipo de produto («€3 per item»). Não diz quem o paga na tua encomenda. O que podes ter de pagar em Portugal está em [encomenda retida na alfândega](guide:customs).
 
 Pagaste com PayPal? Segundo a YunExpress, o seguimento que partilha com o PayPal é uma base importante para o PayPal tratar as disputas e libertar fundos.
 

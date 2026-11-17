@@ -59,7 +59,7 @@ Le contrat MRW est conclu avec l’expéditeur (la boutique) : contacte-la d’a
 - **Réclamations :** le [formulaire de réclamation MRW](https://www.mrw.es/empresa_mensajeria_urgente/MRW_formulario_reclamacion.asp) couvre aussi les achats payés via un tiers comme Amazon (retard, perte, casse, vol, `falso aviso`). Au Portugal, le [formulaire de réclamation MRW Portugal](https://www.mrw.pt/empresa_mensajeria_urgente/MRW_formulario_reclamacion.asp) renvoie aussi en pied de page au `Livro de Reclamações`.
 - **Avarie :** note par écrit tout dommage visible à la remise ; tu as 7 jours calendaires pour les dommages cachés et 21 jours après livraison pour un retard. Voir [colis endommagé](guide:damaged-parcel) et [livré mais non reçu](guide:delivered-not-received).
 
-> MRW écrit depuis `@mrw.es` ou `@mrw.pt`, n’agit jamais comme tiers de confiance entre particuliers, ne demande jamais de paiement par lien pour livrer ni d’appeler un numéro surtaxé (comme le `11827`), et déconseille d’ouvrir toute pièce jointe ou lien ne menant pas à son site officiel. Les frais d’envoi dus, droits de douane, TVA et frais analogues restent payables au moment même de la livraison. Teste tout numéro suspect directement sur `mrw.es` ou `mrw.pt` : sans résultat, le message ne vient pas de MRW ([faux SMS de livraison](guide:delivery-scam-texts)).
+> MRW écrit depuis `@mrw.es` ou `@mrw.pt`, n’agit jamais comme tiers de confiance entre particuliers, ne demande jamais de paiement par lien pour livrer ni d’appeler un numéro (comme le `11827`) pour localiser ton colis, et déconseille d’ouvrir toute pièce jointe ou lien ne menant pas à son site officiel. Les frais d’envoi dus, droits de douane, TVA et frais analogues restent payables au moment même de la livraison. Teste tout numéro suspect directement sur `mrw.es` ou `mrw.pt` : sans résultat, le message ne vient pas de MRW ([faux SMS de livraison](guide:delivery-scam-texts)).
 
 ## Contacter le service client MRW
 
@@ -73,9 +73,9 @@ D’après les sites officiels de MRW :
 
 [Peek](/) reconnaît aussitôt la forme `48291A573649`. Un numéro de 12 chiffres (`482910573649`, ou `48291/0573649` sans la barre) convenant à plusieurs transporteurs sans vérification automatique possible chez MRW, choisis MRW via « Changer de transporteur ». Un lien `mrw.es` ne marche qu’avec la forme à lettre (pas les liens SMS).
 
-Peek interroge `mrw.es` (valable aussi pour MRW Portugal), affiche jusqu’à 100 statuts en espagnol (remplaçant les libellés inconnus pouvant contenir ton nom par « Actualización de seguimiento ») et place chaque agence sur la carte (sans l’adresse exacte d’un `PointCorner` ni date estimée). Si `mrw.es` ne donne qu’un résumé, l’historique vient de services de suivi universels si disponible.
+Peek interroge `mrw.es` (valable aussi pour MRW Portugal), affiche les statuts en espagnol (remplaçant les libellés inconnus par « Actualización de seguimiento ») et place chaque agence sur la carte (sans l’adresse exacte d’un `PointCorner` ni date estimée). Si `mrw.es` ne donne qu’un résumé, l’historique vient de services de suivi universels si disponible.
 
-Les heures de l’Espagne péninsulaire, des Baléares, de Ceuta et Melilla sont lues sur Madrid, Gibraltar sur `Europe/Gibraltar` et Andorre sur `Europe/Andorra` (« Heures dans ton fuseau horaire : … »), tandis que Canaries et Portugal gardent l’heure affichée. Tant que tu as le colis ouvert à l’écran, ou le jour de la livraison avec les notifications activées, Peek vérifie jusqu’à toutes les 10 minutes, et jusqu’à toutes les 2 minutes une fois en cours de livraison dès 6 h locales ce jour-là tant que MRW répond (via les services de suivi : jusqu’à toutes les 15 minutes ce jour-là, sinon toutes les heures ou toutes les 3 h après un jour sans nouvelle) ; le reste du temps, ainsi qu’après deux jours sans nouvelle (12 h sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures, avec alertes « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
+Les heures de MRW n’ont pas de fuseau : Peek les lit à l’heure du lieu de chaque agence (« Heures dans ton fuseau horaire : … »). Tant que tu as le colis ouvert à l’écran, ou le jour de la livraison avec les notifications activées, Peek vérifie jusqu’à toutes les 10 minutes, et jusqu’à toutes les 2 minutes une fois en cours de livraison dès 6 h locales ce jour-là tant que MRW répond (via les services de suivi : jusqu’à toutes les 15 minutes ce jour-là, sinon toutes les heures ou toutes les 3 h après un jour sans nouvelle) ; le reste du temps, ainsi qu’après deux jours sans nouvelle (12 h sur « Étiquette créée » ou « Pris en charge »), il vérifie toutes les heures, avec alertes « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 
 ## Questions fréquentes sur le suivi MRW
 
@@ -85,7 +85,7 @@ Non : `mrw.es` existe en espagnol, portugais et catalan ; le tableau plus haut t
 
 ### Quels sont les horaires et délais de livraison MRW ?
 
-Aucun horaire général n’est publié pour les commandes de boutiques. Sur `mrw.es` en Espagne péninsulaire, la FAQ promet avant 19 h le jour ouvré suivant (48/72 h ouvrées en maritime vers les Baléares, 24/48 h ouvrées avant 19 h vers le Portugal continental selon les conditions générales).
+Aucun horaire général n’est publié pour les commandes de boutiques. Sur `mrw.es` en Espagne péninsulaire, la FAQ promet avant 19 h le jour ouvré suivant (48/72 h ouvrées en maritime vers les Baléares).
 
 ### Que veut dire « Pendiente de recoger » ?
 

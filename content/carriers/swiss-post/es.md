@@ -44,18 +44,18 @@ En `post.ch` puedes ver los eventos en cuatro idiomas (y en inglés desde Peek e
 
 En `PostPac International`, Swiss Post indica que la aduana y la entrega bajo firma corresponden al operador postal de destino: en España, [Correos](carrier:correos-spain), donde puedes buscar el mismo código acabado en `CH`. Si la tienda usa `Swiss Post GLS` (servicio empresarial), el paquete viaja por la red GLS y se sigue en la web de GLS.
 
-En la tabla por países de `PostPac International`, el tránsito medio a España es de 5 días laborables (lunes a viernes, sin contar el día de admisión ni aduanas). Si no estás en casa en España, [Correos](carrier:correos-spain) guarda el envío en oficina 15 días desde el día siguiente al SMS de aviso (acude con DNI, pasaporte, carné de conducir o tarjeta de residencia original).
+En la tabla por países de `PostPac International`, el tránsito medio a España es de 5 días laborables (lunes a viernes, sin contar el día de admisión). Si no estás en casa en España, [Correos](carrier:correos-spain) guarda el envío en oficina 15 días desde el día siguiente al SMS de aviso (acude con DNI, pasaporte, carné de conducir o tarjeta de residencia original).
 
 ## Aduanas de Suiza a España: cargos y canales de pago
 
-Al no pertenecer Suiza a la UE, las mercancías hacia Península y Baleares pasan por importación en [Correos](carrier:correos-spain) (y en Canarias por sus propios trámites):
+Al no pertenecer Suiza a la UE, las mercancías hacia Península y Baleares pasan por importación, en [Correos](carrier:correos-spain) cuando es Correos quien las entrega (y en Canarias por sus propios trámites):
 
-- **Hasta 150 € (`Bajo Valor/H7`, sin impuestos especiales ni controles paraduaneros):** IVA (salvo pago previo por `IOSS` o `PDDP`), tarifa de Correos y, entre el 1 de julio de 2026 y el 1 de julio de 2028 en ventas a distancia a Península, Baleares y Canarias, el arancel fijo UE de 3,00 € por tipo de artículo (salvo origen preferencial declarado bajo acuerdo comercial UE).
-- **Desde el 1 de noviembre de 2026:** toda venta a distancia desde fuera de la UE suma la tasa de tramitación UE de 2 € por categoría de producto (no reembolsable tras el levante), sea cual sea el valor.
+- **Hasta 150 € (`Bajo Valor/H7`, sin impuestos especiales ni controles paraduaneros):** IVA (salvo pago previo por `IOSS` o `PDDP`), tarifa de Correos y, entre el 1 de julio de 2026 y el 1 de julio de 2028 en ventas a distancia a Península, Baleares y Canarias, el arancel fijo UE de 3,00 € por tipo de artículo (salvo origen preferencial declarado bajo acuerdo comercial UE, posible solo si el IVA no se cobró por `IOSS`).
+- **Desde el 1 de noviembre de 2026:** toda venta a distancia desde fuera de la UE suma la tasa de tramitación UE de 2 € por categoría de producto (no reembolsable una vez admitida la declaración aduanera), sea cual sea el valor.
 - **Más de 150 €:** `D.U.A.` ordinario con IVA, aranceles, tasa UE de 2 € y tarifas de Correos.
 - **PDDP de Swiss Post:** algunas tiendas suizas contratan `Postal Delivered Duty Paid (PDDP)`, disponible para España hasta 150 € (excluidos alimentos, productos médicos o sanitarios, plantas y semillas, CITES o tabaco), adelantando IVA, derechos y recargo postal.
 
-**Cómo pagar en España:** Cuando [Correos](carrier:correos-spain) gestiona el despacho, puedes pagar antes del reparto en `www.correosaduanas.es`, en `mioficina.correos.es` o en la `App de Correos` (en `D.U.A.` ordinario mayor de 150 €, en `www.correosaduanas.es` o por transferencia bancaria), o en persona al cartero (`al cartero`, en metálico exacto o con tarjeta donde haya cobertura móvil) o con efectivo o tarjeta en oficinas informatizadas de Correos. Más en [aduanas](guide:customs).
+**Cómo pagar en España:** Cuando [Correos](carrier:correos-spain) gestiona el despacho, puedes pagar antes del reparto en `www.correosaduanas.es`, en `mioficina.correos.es` o en la `App de Correos` (en `D.U.A.` ordinario mayor de 150 €, solo antes del reparto, en `www.correosaduanas.es` o por transferencia bancaria), o en persona al cartero (`al cartero`, en metálico exacto o con tarjeta donde haya cobertura móvil) o con efectivo o tarjeta en oficinas informatizadas de Correos. Más en [aduanas](guide:customs).
 
 ## Si vives en Suiza: aviso, redirección e importación
 
@@ -71,16 +71,16 @@ La víspera del reparto en Suiza llega aviso por SMS, e-mail o `Post-App` (franj
 
 Según las webs oficiales de ambos operadores:
 
-- **Swiss Post:** `+41 848 888 888` (`CHF 0.08/min.` desde fijo suizo), lunes–viernes 7:30–18:00 y sábados 8:00–12:00 (aduanas suizas: `+41 848 48 48 47`, lunes–viernes 8:00–17:30), además de chat, WhatsApp y formularios en [ayuda al destinatario](https://www.post.ch/en/help-and-contact/receiving-mail).
+- **Swiss Post:** `+41 848 888 888` (`CHF 0.08/min.` desde fijo suizo), lunes–viernes 7:30–18:00 y sábados 8:00–12:00 (despacho aduanero de Swiss Post, cartas y paquetes: `+41 848 48 48 47`, lunes–viernes 8:00–17:30), además de chat, WhatsApp y formularios en [ayuda al destinatario](https://www.post.ch/en/help-and-contact/receiving-mail).
 - **Correos (en España):** `915 197 197` o `900 400 004`, lunes–viernes 8:00–20:00 y sábados 9:00–13:00.
 
-> Swiss Post advierte contra mensajes falsos de paquetes «retenidos» con enlaces de pago: nunca pide contraseñas, códigos de seguridad ni datos completos de tarjeta por SMS o correo. Revisa tus envíos directamente en `swisspost.ch` o en la `Post-App` oficial, y en España paga aduanas solo por las vías oficiales de Correos descritas arriba. Más en [SMS falsos de reparto](guide:delivery-scam-texts).
+> Swiss Post advierte contra mensajes falsos de paquetes «retenidos» con enlaces de pago: nunca pide contraseñas, códigos de seguridad ni datos completos de tarjeta por SMS o correo. Revisa tus envíos directamente en `swisspost.ch` o en la `Post-App` oficial, y en España paga aduanas solo por las vías oficiales: las de Correos descritas arriba o, en un paquete `Swiss Post GLS`, la factura del socio local de GLS o el pago en efectivo a la entrega. Más en [SMS falsos de reparto](guide:delivery-scam-texts).
 
 ## Seguir un paquete de Swiss Post con Peek
 
 [Peek](/) reconoce al instante los códigos acabados en `CH` y los de 18 cifras (`98`/`99`), sin código postal, así como enlaces de `service.post.ch` (`/entry/search/`, `/external/view/`) y de `www.post.ch` o `mys.post.ch` (`/swisspost-tracking`, `/my-consignments/deeplink-search` con `formattedParcelCodes`). «Abrir la web de Swiss Post» lleva a `www.post.ch/swisspost-tracking`.
 
-En español, Peek lee los textos en inglés de Swiss Post (alemán, francés o italiano en esos idiomas). Muestra hasta 100 eventos en el mapa, fecha o rango previsto (con franja horaria si existe), peso, medidas, hora de entrega, país de destino y, durante la espera en Suiza, nombre y dirección de la filial o `My Post 24` (`Registered for collection` y `Deposited in the MyPost24 machine` pasan a «Listo para recoger»). La consulta anónima no recibe tu nombre ni tu calle (solo código postal y localidad de destino, visibles únicamente para ti y nunca al compartir), descarta firma e instrucciones y omite plazos no numéricos.
+En español, Peek lee los textos en inglés de Swiss Post (alemán, francés o italiano en esos idiomas). Muestra hasta 100 eventos en el mapa, fecha o rango previsto (con franja horaria si existe), peso, medidas, hora de entrega, país de destino y, durante la espera en Suiza, nombre y dirección de la filial o `My Post 24` (`Registered for collection` y `Deposited in the MyPost24 machine` pasan a «Listo para recoger»). Deja fuera tu nombre, tu dirección, la firma y las instrucciones de entrega, y no lee el plazo de recogida.
 
 Un código `…CH` hacia España pasa a [Correos](carrier:correos-spain) cuando este publica avances más recientes; envíos extranjeros, GLS Switzerland y códigos `LA…CH` de [Cainiao](carrier:cainiao) hacia Suiza pasan a Swiss Post. Mientras tienes el envío abierto en pantalla, o el día de la entrega con las notificaciones activadas, Peek consulta hasta cada 10 minutos y hasta cada 2 minutos cuando está en reparto (ese día desde las 6:00 suizas o media hora antes de la franja anunciada mientras responda el localizador de Swiss Post o Correos; vía servicios de seguimiento, hasta cada 15 minutos ese día, y el resto del tiempo cada hora o cada 3 h tras un día sin novedades); en los demás casos, y tras dos días sin novedades (12 h en «Etiqueta creada» o «Admitido por el transportista»), consulta cada hora, con avisos «Todas las novedades», «Solo importantes» o «Solo el día de entrega».
 
@@ -88,7 +88,7 @@ Un código `…CH` hacia España pasa a [Correos](carrier:correos-spain) cuando 
 
 ### ¿Cuánto tarda un paquete de Suiza a España?
 
-En `PostPac International`, Swiss Post indica una media de 5 días laborables (lunes a viernes), sin contar el día de admisión ni aduanas.
+En `PostPac International`, Swiss Post indica una media de 5 días laborables (lunes a viernes), sin contar el día de admisión.
 
 ### ¿Quién entrega Swiss Post en España?
 

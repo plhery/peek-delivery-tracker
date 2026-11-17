@@ -44,15 +44,15 @@ Dwa wpisy często mylą odbiorców: `Delivery date unknown` oznacza, że Swiss P
 
 **Doręczenie w Polsce:** Przy usłudze `PostPac International` Swiss Post podaje, że odprawę celną oraz doręczenie realizuje operator pocztowy kraju docelowego – w Polsce [Poczta Polska](carrier:poczta-polska) –, za podpisem odbiorcy. Po dotarciu przesyłki z końcówką `CH` do Polski jej dalsze losy (takie jak `Przyjęta w Polsce`, `Obsługa celna` czy `W doręczeniu`) oraz lokalne terminy awiza sprawdzisz w [Poczcie Polskiej](carrier:poczta-polska). Niektóre sklepy korzystają z firmowej usługi `Swiss Post GLS`: takie paczki idą siecią GLS i śledzi się je bezpośrednio na stronie GLS.
 
-**Czas transportu do Polski:** W tabeli krajów `PostPac International` Swiss Post podaje dla Polski średni czas przewozu 3–5 dni roboczych (od poniedziałku do piątku, nie licząc dnia nadania ani czasu ewentualnej odprawy celnej).
+**Czas transportu do Polski:** W tabeli krajów `PostPac International` Swiss Post podaje dla Polski średni czas przewozu 3–5 dni roboczych (od poniedziałku do piątku, nie licząc dnia nadania).
 
 ## Cło i VAT na paczkę ze Szwajcarii do Polski
 
 Szwajcaria nie należy do Unii Europejskiej, a Polska nie figuruje na liście krajów objętych usługą przedpłaconych opłat `Postal Delivered Duty Paid (PDDP)` Swiss Post – dlatego należności importowe są rozliczane przy wwozie do UE:
 
-- **VAT i odprawa pocztowa:** Jeśli sklep nie pobrał podatku VAT przy zakupie w procedurze `IOSS`, podatek VAT oraz opłatę operatora za przedstawienie przesyłki do kontroli celnej pobiera w Polsce operator doręczający (zasady i stawki lokalne znajdziesz na stronie [Poczty Polskiej](carrier:poczta-polska)).
-- **Tymczasowe cło UE 3 EUR (od 1 lipca 2026 do 1 lipca 2028 r.):** Zgodnie z wytycznymi Komisji Europejskiej przesyłki ze sprzedaży na odległość spoza UE o wartości do 150 EUR podlegają zryczałtowanemu cłu 3 EUR za każdą pozycję taryfową. Wyjątkiem są towary ze zgłoszonym preferencyjnym pochodzeniem w ramach umowy handlowej UE (np. ze Szwajcarii, o ile w zgłoszeniu zadeklarowano preferencyjne pochodzenie), dla których utrzymana jest stawka zerowa.
-- **Unijna opłata manipulacyjna 2 EUR (od 1 listopada 2026 r.):** Od 1 listopada 2026 r. do przesyłek e-commerce spoza UE doliczana jest unijna opłata manipulacyjna (`Union handling fee`) w wysokości 2 EUR za pozycję towarową; po dopuszczeniu towaru do obrotu opłata ta nie podlega zwrotowi.
+- **VAT i odprawa pocztowa:** Jeśli sklep nie pobrał podatku VAT przy zakupie w procedurze `IOSS`, podatek VAT oraz opłatę operatora za zgłoszenie celne pobiera w Polsce operator doręczający (zasady i stawki lokalne znajdziesz na stronie [Poczty Polskiej](carrier:poczta-polska)).
+- **Tymczasowe cło UE 3 EUR (od 1 lipca 2026 do 1 lipca 2028 r.):** Zgodnie z wytycznymi Komisji Europejskiej przesyłki ze sprzedaży na odległość spoza UE o wartości do 150 EUR podlegają zryczałtowanemu cłu 3 EUR za każdą pozycję taryfową. Wyjątkiem są towary ze zgłoszonym preferencyjnym pochodzeniem w ramach umowy handlowej UE (np. ze Szwajcarii, o ile w zgłoszeniu zadeklarowano preferencyjne pochodzenie, co jest możliwe tylko wtedy, gdy VAT nie został pobrany w `IOSS`).
+- **Unijna opłata manipulacyjna 2 EUR (od 1 listopada 2026 r.):** Od 1 listopada 2026 r. do przesyłek e-commerce spoza UE doliczana jest unijna opłata manipulacyjna (`Union handling fee`) w wysokości 2 EUR za pozycję towarową; od przyjęcia zgłoszenia celnego opłata ta nie podlega zwrotowi.
 
 Więcej o dokumentach i progach celnych przeczytasz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
@@ -65,14 +65,14 @@ Po zalogowaniu w `My consignments` możesz bezpłatnie upoważnić inną osobę 
 ## Paczka Swiss Post stoi w miejscu, zaginęła lub uległa uszkodzeniu
 
 - **Brak aktualizacji po wyjeździe ze Szwajcarii:** Sprawdź ten sam numer w [Poczcie Polskiej](carrier:poczta-polska); Swiss Post zaznacza też, że odprawa celna może potrwać kilka dni. Zobacz [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
-- **Zaginięcie:** Nadawca lub odbiorca mogą zgłosić reklamację poszukiwawczą (`enquiry`), gdy brakuje statusu doręczenia i minęły ponad dwa dni od publikowanego czasu przewozu albo gdy odbiorca potwierdzi brak doręczenia. Na zgłoszenie jest 6 miesięcy od nadania dla przesyłek międzynarodowych (1 rok w Szwajcarii), przy czym w ruchu międzynarodowym strony pomocy Swiss Post wskazują nadawcę (zwykle sklep) jako osobę dysponującą dowodem nadania. Więcej w [zaginiona paczka](guide:lost-parcel).
+- **Zaginięcie:** Nadawca lub odbiorca mogą zgłosić reklamację poszukiwawczą (`enquiry`), gdy brakuje statusu doręczenia i minęły ponad dwa dni od publikowanego czasu przewozu albo gdy odbiorca potwierdzi brak doręczenia. Na zgłoszenie jest 6 miesięcy od nadania dla przesyłek międzynarodowych (1 rok w Szwajcarii), przy czym w ruchu międzynarodowym strony pomocy Swiss Post kierują tę możliwość do nadawcy (zwykle sklepu). Więcej w [zaginiona paczka](guide:lost-parcel).
 - **Uszkodzenie lub zwrot:** W Szwajcarii szkodę zgłasza się w ciągu 8 dni od doręczenia online, w `Post-App` (`Receive` > `Report damage`) albo w placówce wraz z paczką i opakowaniem. Zobacz też [uszkodzona paczka](guide:damaged-parcel), [dostarczona, ale nieodebrana](guide:delivered-not-received) oraz [zwrot do nadawcy](guide:returned-to-sender).
 
 ## Kontakt z obsługą klienta Swiss Post
 
 Według oficjalnych stron Swiss Post:
 
-- **Infolinia Swiss Post:** `+41 848 888 888` (`CHF 0.08/min` ze szwajcarskiej sieci stacjonarnej), od poniedziałku do piątku w godz. 7:30–18:00 oraz w soboty 8:00–12:00 (szwajcarska odprawa celna i przesyłki międzynarodowe: `+41 848 48 48 47`, poniedziałek–piątek 8:00–17:30).
+- **Infolinia Swiss Post:** `+41 848 888 888` (`CHF 0.08/min` ze szwajcarskiej sieci stacjonarnej), od poniedziałku do piątku w godz. 7:30–18:00 oraz w soboty 8:00–12:00 (odprawa celna Swiss Post, listy i paczki: `+41 848 48 48 47`, poniedziałek–piątek 8:00–17:30).
 - **Online:** czat (dostępny na niemieckiej, francuskiej i włoskiej stronie kontaktowej), WhatsApp do dyspozycji doręczeniowych oraz formularze reklamacyjne na [stronie pomocy dla odbiorców](https://www.post.ch/en/help-and-contact/receiving-mail).
 
 > Swiss Post ostrzega przed fałszywymi wiadomościami o „wstrzymanej paczce” lub drobnej dopłacie celnej przez link i przypomina, że nigdy nie prosi SMS-em ani e-mailem o hasła, kody bezpieczeństwa ani pełne dane karty płatniczej. Status przesyłki sprawdzaj bezpośrednio na `swisspost.ch`, w oficjalnej aplikacji `Post-App` albo na stronie operatora doręczającego w Polsce ([Poczta Polska](carrier:poczta-polska)). Więcej w poradniku o [fałszywych SMS-ach o paczkach](guide:delivery-scam-texts).
@@ -81,7 +81,7 @@ Według oficjalnych stron Swiss Post:
 
 [Peek](/) od razu rozpoznaje zarówno międzynarodowe numery zakończone na `CH`, jak i 18-cyfrowe kody szwajcarskie zaczynające się od `98` lub `99` (z kropkami, spacjami lub bez nich), bez pytania o kod pocztowy. Obsługuje również linki `service.post.ch` zakończone na `/entry/search/` lub `/external/view/` z numerem oraz linki `www.post.ch` i `mys.post.ch` prowadzące do `/swisspost-tracking` lub `/my-consignments/deeplink-search` z parametrem `formattedParcelCodes`. Przycisk „Otwórz stronę przewoźnika Swiss Post” otwiera przesyłkę bezpośrednio na `www.post.ch/swisspost-tracking`.
 
-Gdy korzystasz z Peek po polsku, aplikacja pobiera angielskie opisy zdarzeń Swiss Post (a po niemiecku, francusku lub włosku – odpowiednie wersje językowe). Pokazuje do 100 najnowszych skanów z lokalizacją placówek na mapie, przewidywaną datę doręczenia (z oknem godzinowym, jeśli Swiss Post je podaje) lub przedział dni, wagę, wymiary, godzinę doręczenia i kraj przeznaczenia; gdy przesyłka czeka na odbiór w Szwajcarii, wyświetla nazwę i adres placówki lub automatu `My Post 24` (`Registered for collection` oraz `Deposited in the MyPost24 machine` oznacza jako „Do odbioru”). Anonimowe zapytanie nie zwraca Twojego imienia ani ulicy (jedynie kod pocztowy i miejscowość docelową, widoczne wyłącznie dla Ciebie i ukrywane w udostępnianych linkach), pomija podpis oraz instrukcje doręczenia i nie odczytuje terminu odbioru, jeśli nie jest podany jako data liczbowa.
+Gdy korzystasz z Peek po polsku, aplikacja pobiera angielskie opisy zdarzeń Swiss Post (a po niemiecku, francusku lub włosku – odpowiednie wersje językowe). Pokazuje do 100 najnowszych skanów z lokalizacją placówek na mapie, przewidywaną datę doręczenia (z oknem godzinowym, jeśli Swiss Post je podaje) lub przedział dni, wagę, wymiary, godzinę doręczenia i kraj przeznaczenia; gdy przesyłka czeka na odbiór w Szwajcarii, wyświetla nazwę i adres placówki lub automatu `My Post 24` (`Registered for collection` oraz `Deposited in the MyPost24 machine` oznacza jako „Do odbioru”). Pomija Twoje imię i nazwisko, adres, podpis oraz instrukcje doręczenia i nie odczytuje terminu odbioru.
 
 Międzynarodowy numer `…CH` jadący do Polski może w Peek automatycznie przełączyć się na [Pocztę Polską](carrier:poczta-polska), gdy tylko pokaże ona nowsze zdarzenia; w drugą stronę zagraniczne numery pocztowe, paczki GLS Switzerland oraz przesyłki `LA…CH` od [Cainiao](carrier:cainiao) kierowane do Szwajcarii przełączają się na Swiss Post. Gdy masz przesyłkę otwartą na ekranie lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza status do co 10 minut, a w doręczeniu od 6:00 czasu lokalnego tego dnia (lub na pół godziny przed początkiem okna doręczenia) do co 2 minut, dopóki odpowiada własny tracker Swiss Post lub Poczty Polskiej (przez serwisy śledzenia tego dnia do co 15 minut, poza tym co godzinę lub co 3 godziny po dobie bez nowości); w pozostałych sytuacjach oraz po dwóch dniach bez nowości (12 godzinach w stanie „Zarejestrowana” albo „Przyjęta przez przewoźnika”) sprawdza co godzinę, oferując powiadomienia „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”.
 
@@ -89,7 +89,7 @@ Międzynarodowy numer `…CH` jadący do Polski może w Peek automatycznie prze�
 
 ### Ile idzie paczka Swiss Post ze Szwajcarii do Polski?
 
-Według tabeli krajów Swiss Post dla usługi `PostPac International` średni czas przewozu do Polski wynosi 3–5 dni roboczych (od poniedziałku do piątku), nie licząc dnia nadania ani czasu odprawy celnej.
+Według tabeli krajów Swiss Post dla usługi `PostPac International` średni czas przewozu do Polski wynosi 3–5 dni roboczych (od poniedziałku do piątku), nie licząc dnia nadania.
 
 ### Kto doręcza przesyłki Swiss Post w Polsce?
 

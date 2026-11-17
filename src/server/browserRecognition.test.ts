@@ -129,3 +129,82 @@ it.each([
   expect(browser.takeBrowserHistory('sicepat', 'SYNTHETIC0001')).toEqual(fresh ? result : undefined);
   expect(browser.takeBrowserHistory('sicepat', 'SYNTHETIC0001')).toBeUndefined();
 });
+
+it('gives scheduled Onlog recognition 40 seconds while other carriers keep 20', async () => {
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'performance'] });
+  lookup.mockImplementation((_number: string, context: TrackingContext) => new Promise(resolve => {
+    expect(context.budgetMs).toBe(40_000);
+    setTimeout(() => resolve(known()), 30_000);
+  }));
+  const result = browser.recognizeBrowser('onlog-express', 'SYNTHETIC0001', { budgetMs: 40_000 });
+  await vi.advanceTimersByTimeAsync(30_000);
+  await expect(result).resolves.toMatchObject({ known: true });
+  expect(browser.browserRecognitionWorkBudget('onlog-express')).toBe(40_000);
+  expect(browser.browserRecognitionWorkBudget('royal-mail')).toBe(20_000);
+  expect(browser.browserRecognitionWorkBudget('fedex')).toBe(20_000);
+  expect(browser.MAX_BROWSER_RECOGNITIONS).toBe(2);
+});
+
+it.each(['preflight-first', 'background-first'])('keeps joined Onlog work when a preflight caller expires: %s', async order => {
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'performance'] });
+  let signal!: AbortSignal;
+  lookup.mockImplementation((_number: string, context: TrackingContext) => {
+    signal = context.signal!;
+    expect(context.budgetMs).toBe(40_000);
+    return new Promise(resolve => setTimeout(() => resolve(known()), 30_000));
+  });
+  const short = () => browser.recognizeBrowser('onlog-express', 'SYNTHETIC0001', { budgetMs: 20_000 });
+  const long = () => browser.recognizeBrowser('onlog-express', 'SYNTHETIC0001', { budgetMs: 40_000 });
+  const [preflight, background] = order === 'preflight-first' ? [short(), long()] : (() => {
+    const background = long(); return [short(), background];
+  })();
+  const expired = expect(preflight).rejects.toThrow('budget exceeded');
+  await vi.advanceTimersByTimeAsync(20_000);
+  await expired;
+  expect(signal.aborted).toBe(false);
+  await vi.advanceTimersByTimeAsync(10_000);
+  await expect(background).resolves.toMatchObject({ known: true });
+  expect(lookup).toHaveBeenCalledOnce();
+});
+
+it('keeps Onlog preflight at 20 seconds and aborts a lone caller', async () => {
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'performance'] });
+  let signal!: AbortSignal;
+  lookup.mockImplementation((_number: string, context: TrackingContext) => {
+    signal = context.signal!;
+    return new Promise((_resolve, reject) => signal.addEventListener('abort', () => reject(signal.reason)));
+  });
+  const result = browser.recognizeBrowser('onlog-express', 'SYNTHETIC0001');
+  const expired = expect(result).rejects.toThrow('budget exceeded');
+  await vi.advanceTimersByTimeAsync(20_000);
+  await expired;
+  expect(signal.aborted).toBe(true);
+});
+
+it('caps a non-Onlog caller at 20 seconds even when given a longer background allowance', async () => {
+  vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout', 'performance'] });
+  lookup.mockImplementation((_number: string, context: TrackingContext) => {
+    expect(context.budgetMs).toBe(20_000);
+    return new Promise((_resolve, reject) => context.signal!.addEventListener('abort', () => reject(context.signal!.reason)));
+  });
+  const result = browser.recognizeBrowser('sicepat', 'SYNTHETIC0001', { budgetMs: 40_000 });
+  const expired = expect(result).rejects.toThrow('budget exceeded');
+  await vi.advanceTimersByTimeAsync(20_000);
+  await expired;
+});
+
+it('aborts extended Onlog work when the last joined caller cancels', async () => {
+  let signal!: AbortSignal;
+  lookup.mockImplementation((_number: string, context: TrackingContext) => {
+    signal = context.signal!;
+    return new Promise((_resolve, reject) => signal.addEventListener('abort', () => reject(signal.reason)));
+  });
+  const left = new AbortController(), right = new AbortController();
+  const preflight = browser.recognizeBrowser('onlog-express', 'SYNTHETIC0001', { signal: left.signal });
+  const background = browser.recognizeBrowser('onlog-express', 'SYNTHETIC0001', { signal: right.signal, budgetMs: 40_000 });
+  await Promise.resolve(); left.abort(); await expect(preflight).rejects.toThrow();
+  expect(signal.aborted).toBe(false);
+  right.abort(); await expect(background).rejects.toThrow();
+  expect(signal.aborted).toBe(true);
+  expect(lookup).toHaveBeenCalledOnce();
+});

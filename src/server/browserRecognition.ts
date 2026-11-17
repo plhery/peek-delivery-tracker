@@ -6,6 +6,11 @@ import { createAdapterRegistry } from './adapterRegistry';
 import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
 
 export const BROWSER_RECOGNITION_BUDGET_MS = 20_000;
+const ONLOG_BROWSER_RECOGNITION_BUDGET_MS = 40_000;
+/** Shared work and saved-parcel callers allow Onlog's guest verification time to finish. */
+export function browserRecognitionWorkBudget(carrier: string): number {
+  return carrier === 'onlog-express' ? ONLOG_BROWSER_RECOGNITION_BUDGET_MS : BROWSER_RECOGNITION_BUDGET_MS;
+}
 export const MAX_BROWSER_RECOGNITIONS = 2;
 
 /** Every browser slot of the process is taken: refused before any browser opens, so the carrier was not asked. */
@@ -35,7 +40,8 @@ function remember(key: string, answer?: BrowserRecognition) {
 /** Shared by preflight and sync; identical requests share work until their last caller cancels. */
 export async function recognizeBrowser(carrier: string, number: string, context: TrackingContext = {}, previousError?: unknown): Promise<BrowserRecognition> {
   context.signal?.throwIfAborted();
-  const deadline = performance.now() + Math.min(context.budgetMs ?? BROWSER_RECOGNITION_BUDGET_MS, BROWSER_RECOGNITION_BUDGET_MS);
+  const workBudget = browserRecognitionWorkBudget(carrier);
+  const deadline = performance.now() + Math.min(context.budgetMs ?? BROWSER_RECOGNITION_BUDGET_MS, workBudget);
   const key = `${carrier}:${number}`;
   const cached = cache.get(key);
   if (cached && Date.now() - cached.at < (cached.answer ? TTL_MS : FAILURE_TTL_MS)) {
@@ -55,7 +61,8 @@ export async function recognizeBrowser(carrier: string, number: string, context:
     const adapter = (registry ??= createAdapterRegistry()).for(carrier);
     if (!adapter?.recognizeWithBrowser) throw new RangeError(`${carrier} cannot confirm through a browser`);
     const promise = Promise.resolve().then(() => adapter.recognizeWithBrowser!(number, {
-      signal: controller.signal, budgetMs: BROWSER_RECOGNITION_BUDGET_MS,
+      // The first caller can be preflight; a joined saved-parcel caller must not inherit its shorter deadline.
+      signal: controller.signal, budgetMs: workBudget,
     }, previousError)).then((answer) => {
       controller.signal.throwIfAborted();
       remember(key, structuredClone(answer));

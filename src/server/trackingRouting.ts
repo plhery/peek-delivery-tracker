@@ -27,7 +27,7 @@ import { plannedStepsOf, type PlannedStep } from './plannedSteps';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
-import { BROWSER_RECOGNITION_BUDGET_MS, BrowserRecognitionBusy, MAX_BROWSER_RECOGNITIONS } from './browserRecognition';
+import { BROWSER_RECOGNITION_BUDGET_MS, browserRecognitionWorkBudget, BrowserRecognitionBusy, MAX_BROWSER_RECOGNITIONS } from './browserRecognition';
 import { namesBrandOf, providerCarrier } from './providerCarrier';
 import { normalizedLookupCountry } from './lookupCountry';
 import manifest from '../../package.json';
@@ -1698,12 +1698,15 @@ export class TrackingRouter {
         // A browser read turned away before it opened (every slot taken, or the browser paused) asked nothing:
         // it neither starts the carrier's interval nor counts as a probe.
         const turnedAway = new Set<string>();
-        const read = await recognizeAll(browserDue, (candidate, context) => this.options.recognizeBrowser!(candidate, number, context, errors.get(candidate))
+        const browserBudget = browserDue.reduce((budget, candidate) => Math.max(budget, browserRecognitionWorkBudget(candidate.carrier)), BROWSER_RECOGNITION_BUDGET_MS);
+        const read = await recognizeAll(browserDue, (candidate, context) => this.options.recognizeBrowser!(candidate, number, {
+          ...context, budgetMs: Math.min(context.budgetMs ?? browserBudget, browserRecognitionWorkBudget(candidate)),
+        }, errors.get(candidate))
           .then((answer) => { settled(candidate); return answer; }, (error: unknown) => {
             if (error instanceof BrowserRecognitionBusy || error instanceof RoyalBrowserPaused) turnedAway.add(candidate);
             else settled(candidate, error);
             throw error;
-          }), BROWSER_RECOGNITION_BUDGET_MS, signal);
+          }), browserBudget, signal);
         outcomes.push(...read.filter((outcome) => !(outcome.status === 'failed' && turnedAway.has(outcome.carrier))));
       }
       for (const outcome of outcomes) if (!refused.has(outcome.carrier)) noteAsk(outcome.carrier);

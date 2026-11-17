@@ -627,6 +627,12 @@ Post 17TRACK route skip shadow checks.
 
 ## Carrier recognition
 
+Add preflight browser confirmation has a 20-second caller deadline. Saved-parcel recognition allows
+40 seconds when Onlog Express is due; other carriers keep 20 seconds. Identical lookups share
+one browser job, with a 40-second ceiling for Onlog so a shorter preflight caller can join or
+leave without cancelling a saved-parcel caller. Each caller keeps its own deadline, and the last
+caller leaving aborts the work. The process still allows two browser recognitions at once.
+
 A number whose shape fits several carriers or only the generic postal carrier is checked
 with eligible direct carriers ([`carrierDetection.ts`](../src/server/carrierDetection.ts)).
 HTTP recognition uses the catalog's `tracking.recognition` and the adapter's `recognize()`.

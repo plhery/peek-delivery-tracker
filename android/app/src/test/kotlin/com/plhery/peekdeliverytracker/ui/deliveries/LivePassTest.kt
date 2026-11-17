@@ -588,6 +588,18 @@ class LivePassTest {
     }
 
     @Test
+    fun aLabelTheSenderHasKeptForDaysHasNoQuietNote() {
+        val parcels = quietParcels().map { parcel ->
+            if (!parcel.label.startsWith("Cat tree")) parcel else parcel.copy(trackingEvents = parcel.trackingEvents.map { it.copy(stage = TrackingStage.Registered) })
+        }
+        assertEquals(ParcelAttention.Stalled, parcels.first { it.label.startsWith("Cat tree") }.attention(CAPTURED))
+        show(parcels = parcels)
+        open("Cat tree")
+        assertTrue(textExists("hasn’t handed it"))
+        assertFalse(exists(PAGE_QUIET))
+    }
+
+    @Test
     fun aMovingParcelHasNoQuietNote() {
         show()
         open("Birthday gift")

@@ -283,6 +283,12 @@ describe('ParcelPage stages and troubles', () => {
     expect(within(card()).queryByText(/hasn’t scanned the parcel yet/)).toBeNull();
   });
 
+  it('leaves the quiet note off a label the sender has kept for days', async () => {
+    await shown(view([scan('registered', 140)], { carrier: 'chronopost' }));
+    expect(within(card()).getByText('The sender hasn’t handed it to Chronopost yet. Tracking starts when they do.')).toBeVisible();
+    expect(screen.queryByText(/go quiet on long flights/)).toBeNull();
+  });
+
   it('says the carrier writes its timeline ahead', async () => {
     await shown(view([scan('in_transit', 30)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
     expect(within(card()).getByText(/^.+’s site shows steps written in advance, even a delivery\. Peek can’t confirm them, so it leaves them out\. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller\.$/)).toBeVisible();

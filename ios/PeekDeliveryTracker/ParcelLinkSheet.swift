@@ -134,7 +134,8 @@ struct ParcelLinkSheet: View {
                 }
                 // A gift cannot be kept before it is delivered: that would show its number.
                 keeping(response, keepable: response.link.canKeep && !wrapped, followable: !wrapped)
-                if !wrapped, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled {
+                // A label waiting for its handover has not gone quiet on the way: the card says the sender still has it.
+                if !wrapped, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled, !parcel.awaitingHandover() {
                     ParcelQuietNote(parcel: parcel, tint: tint)
                 }
                 VStack(alignment: .leading, spacing: 20) {

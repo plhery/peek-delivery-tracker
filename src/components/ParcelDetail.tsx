@@ -148,8 +148,10 @@ export function ParcelDetail({
   // the page says so and quotes it.
   const carrierWaits = !parcel.archivedAt
     && (current?.recipientAction || current?.stage === 'failed_attempt' || current?.stage === 'exception') ? current : null;
-  // A carrier to name: without one the note would say Peek keeps asking an unknown carrier.
-  const stalled = !parcel.archivedAt && displayedCarrier.id !== 'unknown' && parcelAttention(parcel) === 'stalled';
+  // A carrier to name: without one the note would say Peek keeps asking an unknown carrier. A label waiting for its
+  // handover has not gone quiet on the way: its stage note says the sender still has it.
+  const stalled = !parcel.archivedAt && displayedCarrier.id !== 'unknown' && parcelAttention(parcel) === 'stalled'
+    && !awaitingHandover(parcel.events);
   const pickupFact = waitingAt ? undefined : parcel.pickupPoint?.trim();
   // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over.
   // A delivery its carrier writes on a schedule: if nothing came, the seller is who to ask.

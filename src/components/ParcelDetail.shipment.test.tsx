@@ -219,6 +219,12 @@ describe('shipment details', () => {
     expect(within(document.querySelector<HTMLElement>('.detail__quiet')!).queryByRole('link')).toBeNull();
   });
 
+  it('leaves the quiet note off a label the sender has kept for days', () => {
+    show({ carrier: 'dhl', events: [{ id: 'label', parcelId: 'parcel', stage: 'registered', description: 'Label', occurredAt: new Date(Date.now() - 5 * 86_400_000).toISOString() }] });
+    expect(screen.getByText('The sender hasn’t handed it to DHL yet. Tracking starts when they do.')).toBeVisible();
+    expect(document.querySelector('.detail__quiet')).toBeNull();
+  });
+
   it('shows a waiting parcel\'s pickup point as a card and a collected one as a fact', async () => {
     const at = (stage: 'ready_for_pickup' | 'delivered') => [{ id: stage, parcelId: 'parcel', stage, description: 'Scan', occurredAt: '2026-09-11T12:00:00Z' }];
     const writeText = vi.fn().mockResolvedValue(undefined);

@@ -624,7 +624,10 @@ private fun LinkShared(
                 }
                 // A gift cannot be kept before it is delivered: that would show its number.
                 Keeping(source, state, response, keeping, keepable = response.link.canKeep && !wrapped, followable = !wrapped)
-                if (!wrapped && parcel.displayedCarrier != CarrierId.Unknown && parcel.attention(now()) == ParcelAttention.Stalled) {
+                // A label waiting for its handover has not gone quiet on the way: the card says the sender still has it.
+                if (!wrapped && parcel.displayedCarrier != CarrierId.Unknown && parcel.attention(now()) == ParcelAttention.Stalled &&
+                    !parcel.awaitingHandover(now())
+                ) {
                     ParcelQuietNote(parcel, tint, onHelp = { source.action("parcel-carrier-help") })
                 }
                 Column(Modifier.padding(start = 6.dp, top = 6.dp, end = 6.dp), verticalArrangement = Arrangement.spacedBy(20.dp)) {

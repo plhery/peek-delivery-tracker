@@ -21,7 +21,7 @@ import {
 } from '../../lib/carriers';
 import type { ParcelAttention } from '../../lib/parcelPriority';
 import { awaitedCarrier } from '../../lib/parcelStatus';
-import { currentEvent } from '../../lib/stages';
+import { awaitingHandover, currentEvent } from '../../lib/stages';
 import type { ParcelWithEvents, Stage } from '../../types';
 import { maskedNumber, parcelLinkErrorKey, type ParcelLinkError, type ParcelLinkView } from '../links';
 import { Glyph } from './glyphs';
@@ -182,7 +182,8 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
     notes.push({ id: 'sync', icon: <Glyph name="info" />,
       body: awaited ? t('detail.waitingForCarrier', { carrier: carrierInfo(awaited, locale).name }) : trackingFailureMessage(parcel.syncError, t) });
   }
-  if (flag === 'stalled') notes.push(quietNote(parcel, carrier, t, locale));
+  // A label waiting for its handover has not gone quiet on the way: the card says the sender still has it.
+  if (flag === 'stalled' && !awaitingHandover(parcel.events)) notes.push(quietNote(parcel, carrier, t, locale));
   if (flag === 'generated') notes.push({ id: 'generated', icon: <Glyph name="warning" />, body: t('link.generated', { carrier: carrier.name }), paper: true });
   if ((stage === 'exception' || stage === 'failed_attempt' || scan?.recipientAction) && scan?.description.trim()) {
     notes.push({ id: 'says', icon: <Glyph name="info" />, title: t('link.carrierSays', { carrier: carrier.name }), body: scan.description.trim(), quoted: true, paper: true });

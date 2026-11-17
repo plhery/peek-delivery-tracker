@@ -560,8 +560,9 @@ struct ParcelDetailView: View {
             if let words = carrierWaits(parcel)?.description.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty {
                 carrierSaysNote(words, carrier: carrier.displayName)
             }
-            // A carrier to name: without one the note would say Peek keeps asking an unknown carrier.
-            if !parcel.isArchived, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled {
+            // A carrier to name: without one the note would say Peek keeps asking an unknown carrier. A label waiting for
+            // its handover has not gone quiet on the way: the card says the sender still has it.
+            if !parcel.isArchived, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled, !parcel.awaitingHandover() {
                 ParcelQuietNote(parcel: parcel, tint: branding.ink)
             }
             shipmentIdentity(parcel, links: trackingLinks, tint: branding.ink)

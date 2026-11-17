@@ -82,6 +82,7 @@ import com.plhery.peekdeliverytracker.core.activeTrackingCarrier
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.attention
+import com.plhery.peekdeliverytracker.core.awaitingHandover
 import com.plhery.peekdeliverytracker.core.displayedCarrier
 import com.plhery.peekdeliverytracker.core.hasCarrierUpdate
 import com.plhery.peekdeliverytracker.core.hasNewUpdate
@@ -412,7 +413,12 @@ private fun CarrierNotes(state: DeliveriesState, parcel: Parcel) {
         val carrier = LocalCarrierIdentities.current?.displayName(parcel.activeTrackingCarrier, language)
         if (carrier != null) CarrierSaysNote(words, carrier, Modifier.testTag(PAGE_CARRIER_SAYS))
     }
-    if (parcel.isArchived || parcel.displayedCarrier == CarrierId.Unknown || parcel.attention(now) != ParcelAttention.Stalled) return
+    // A label waiting for its handover has not gone quiet on the way: the card says the sender still has it.
+    if (parcel.isArchived || parcel.displayedCarrier == CarrierId.Unknown || parcel.attention(now) != ParcelAttention.Stalled ||
+        parcel.awaitingHandover(now)
+    ) {
+        return
+    }
     val identity = shownCarrierIdentity(parcel, localizer, language) ?: return
     ParcelQuietNote(
         parcel, PeekTheme.colors.resolve(identity.ink), onHelp = { state.source.action("parcel-carrier-help") },

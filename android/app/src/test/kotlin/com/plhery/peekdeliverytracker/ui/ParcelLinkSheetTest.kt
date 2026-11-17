@@ -60,6 +60,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestAsked
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.core.api.TrackingStage
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.ui.deliveries.ACTION_ERROR
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
@@ -743,11 +744,19 @@ class ParcelLinkSheetTest {
     }
 
     @Test
-    fun aParcelThatStoppedMovingIsToldWhyUnlessItIsAWrappedGiftOrItsCarrierIsUnknown() {
+    fun aParcelThatStoppedMovingIsToldWhyUnlessItIsAWrappedGiftOrItsCarrierIsUnknownOrTheSenderStillHasIt() {
         val unknown = "u6Wq5aLg4XzZ"
+        val labelled = "p3Kd8vNs5TeY"
         val links = FakeParcelLinks().apply {
             read = { id, _ ->
                 when (id) {
+                    // A label alone: the sender still has the parcel, so it has not gone quiet on the way.
+                    labelled -> LinkFixtures.viewer().let { response ->
+                        response.copy(
+                            link = response.link.copy(id = labelled),
+                            parcel = response.parcel.copy(trackingEvents = response.parcel.trackingEvents.map { it.copy(stage = TrackingStage.Registered) }),
+                        )
+                    }.earlier(5)
                     // Its scan in transit, from before it was handed out for delivery.
                     giftId -> LinkFixtures.wrappedGift().let { it.copy(parcel = it.parcel.copy(trackingEvents = it.parcel.trackingEvents.drop(1))) }.earlier(5)
                     unknown -> LinkFixtures.viewer().let { it.copy(link = it.link.copy(id = unknown), parcel = it.parcel.copy(carrier = CarrierId.Unknown)) }.earlier(5)
@@ -764,6 +773,9 @@ class ParcelLinkSheetTest {
         assertFalse(shows(quiet))
         open(unknown)
         check(exists(LINK_CARD))
+        assertFalse(shows(quiet))
+        open(labelled)
+        check(shows(text("parcel.awaitingHandover", mapOf("carrier" to "")).substringBefore(" to ")))
         assertFalse(shows(quiet))
     }
 

@@ -4837,7 +4837,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-mondial-relay" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
-<lastmod>2026-11-06</lastmod>
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/de/carriers/mondial-relay-sendungsverfolgung</loc>
@@ -4863,7 +4863,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-mondial-relay" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
-<lastmod>2026-11-06</lastmod>
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/it/carriers/tracciamento-mondial-relay</loc>
@@ -4889,7 +4889,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-mondial-relay" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
-<lastmod>2026-11-06</lastmod>
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/mondial-relay-rastreio</loc>
@@ -4902,7 +4902,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-mondial-relay" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
-<lastmod>2026-11-06</lastmod>
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pl/carriers/sledzenie-mondial-relay</loc>
@@ -4928,7 +4928,7 @@
 <xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-mondial-relay" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/mondial-relay-pakket-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mondial-relay-tracking" />
-<lastmod>2026-11-06</lastmod>
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/gls-tracking-germany</loc>
@@ -6375,6 +6375,10 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
 <lastmod>2026-11-14</lastmod>
@@ -6384,6 +6388,10 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
 <lastmod>2026-11-14</lastmod>
@@ -6393,15 +6401,75 @@
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
 <lastmod>2026-11-14</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/bpost-tracciamento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/bpost-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/bpost-seguimento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/bpost-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
+<xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/nl/carriers/bpost-pakje-volgen</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/bpost-tracking" />
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/bpost-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/bpost-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/bpost-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/bpost-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/bpost-seguimento" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/bpost-sledzenie" />
 <xhtml:link rel="alternate" hreflang="nl" href="https://peektracker.com/nl/carriers/bpost-pakje-volgen" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/bpost-tracking" />
 <lastmod>2026-11-14</lastmod>
@@ -8467,16 +8535,68 @@
 <url>
 <loc>https://peektracker.com/carriers/gofo-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gofo-express-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/gofo-express-tracciamento" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/gofo-express-rastreo" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/gofo-express-seguimento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
 <lastmod>2026-11-15</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gofo-express-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/gofo-express-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/gofo-express-rastreo" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/gofo-express-seguimento" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/gofo-express-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gofo-express-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/gofo-express-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/gofo-express-rastreo" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/gofo-express-seguimento" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/gofo-express-tracciamento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gofo-express-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/gofo-express-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/gofo-express-rastreo" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/gofo-express-seguimento" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/es/carriers/gofo-express-rastreo</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gofo-express-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/gofo-express-tracciamento" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/gofo-express-rastreo" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/gofo-express-seguimento" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
 <lastmod>2026-11-15</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/gofo-express-seguimento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/gofo-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/gofo-express-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/gofo-express-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/gofo-express-rastreo" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/gofo-express-seguimento" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/gofo-express-tracking" />
+<lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/carriers/speedx-tracking</loc>

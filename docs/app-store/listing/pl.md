@@ -71,6 +71,6 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Nowy widżet „Przesyłki”: zobacz od razu przesyłki w drodze, najbliższą na początku. Zależnie od ich liczby pokazuje je jako karty takie jak w widżecie „Najbliższa dostawa”, jako mniejsze karty w kolorach ich przewoźnika albo jako listę z tyloma wierszami, ile się zmieści. W średnim lub dużym widżecie dotknij przesyłki, aby ją otworzyć.
-• Peek informuje teraz, gdy zamiast numeru śledzenia dodano numer zamówienia Mercado Libre.
+• Peek ma teraz jeden widżet: „Przesyłki”. Dodane widżety „Najbliższa dostawa” stają się widżetami „Przesyłki” w tym samym miejscu, a twoje widżety „Przesyłki” nadal się aktualizują.
+• Drobny szary tekst jest teraz ciemniejszy i łatwiejszy do odczytania.
 ```

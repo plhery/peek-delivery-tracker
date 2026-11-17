@@ -120,7 +120,7 @@ Yes: GLS Germany is General Logistics Systems Germany GmbH & Co. OHG, of Neuenst
 - [Gesetze im Internet: § 475 BGB](https://www.gesetze-im-internet.de/bgb/__475.html) – transit risk, unless the buyer hired a carrier the seller hadn't named
 - [Gesetze im Internet: § 355 BGB](https://www.gesetze-im-internet.de/bgb/__355.html) – withdrawal declared to the seller, no reason needed, 14 days
 - [Gesetze im Internet: § 356 BGB](https://www.gesetze-im-internet.de/bgb/__356.html) – distance and off-premises contracts, when the withdrawal period starts
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is, owed by the declarant
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value, what an item is, owed by the declarant
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, GLS's English wordings (customs and returns too), Track-ID, hourly checks
 :::

@@ -81,7 +81,7 @@ For a missing or damaged parcel, DPD sends you to the shop or sender, which then
 
 **Returned.** `Return to sender` means the parcel is going back. Ask the shop to send it again or refund you. See [returned to sender](guide:returned-to-sender).
 
-**Customs.** Goods bought online from outside the EU carry a €3 EU customs duty per item on orders worth up to €150, since 1 July 2026. A €2 Union handling fee per item is also due, whatever the value, since 1 November 2026. DPD's receiving page doesn't name these two charges. It says you may have to pay VAT, import duties and administration costs. If you agreed with the shop to pay the import costs yourself, DPD sends you a payment request with a 14-digit parcel number. Enter that number and your postcode in DPD's Track & Trace to check that the request really comes from DPD. If you disagree with the VAT or duties, you can object to the Tax and Customs Administration. See [parcels held at customs](guide:customs).
+**Customs.** Goods bought online from outside the EU carry a €3 EU customs duty per kind of product on orders worth up to €150, since 1 July 2026. A €2 Union handling fee per kind of product is also due, whatever the value, since 1 November 2026. DPD's receiving page doesn't name these two charges. It says you may have to pay VAT, import duties and administration costs. If you agreed with the shop to pay the import costs yourself, DPD sends you a payment request with a 14-digit parcel number. Enter that number and your postcode in DPD's Track & Trace to check that the request really comes from DPD. If you disagree with the VAT or duties, you can object to the Tax and Customs Administration. See [parcels held at customs](guide:customs).
 
 ## DPD Netherlands contact and customer service
 
@@ -140,7 +140,7 @@ Yes. In myDPD, up to 30 minutes before delivery, you can choose another day, ano
 - [DPD Netherlands: DPD Parcel Points](https://www.dpd.com/nl/en/dpd-parcel-point/) – Parcel Points, lockers, Business Points, ViaTim, De Buren
 - [DPD Netherlands: Until when can I collect my parcel?](https://www.dpd.com/nl/en/faq/until-when-can-i-collect-my-parcel/) – 5 days in a locker
 - [DPD Netherlands: Terms of use (PDF)](https://www.dpd.com/wp-content/uploads/sites/220/2022/01/Disclaimer-ENG-2022-01.pdf) – DPD (Nederland) B.V.
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, the step wordings Peek shows, the hand-over to other DPD companies
 :::

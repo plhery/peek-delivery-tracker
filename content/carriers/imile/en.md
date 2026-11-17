@@ -132,7 +132,7 @@ Yes. iMile is a delivery company founded in Dubai in 2017, with its own tracking
 - [iMile: Legal Notice (United Kingdom)](https://www.imile.com/GB-en/LegalNotice) – iMile Logistics Co., Ltd., registered address only
 - [iMile: Customer Support](https://www.imile.com/en/CustomerService/CustomerSupport) – contact form and its fields
 - [iMile: iMile Chat](https://help.imile.com/) – virtual assistant and its languages
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 EU handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3, whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 EU handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product like the €3, whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – number shapes, status wordings, what Peek shows
 :::

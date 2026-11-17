@@ -54,7 +54,7 @@ Delhivery's tracking has a progress bar of steps, and the scans so far with thei
 
 **Who delivers.** Delhivery names FedEx and Aramex among its strategic partners abroad, without saying which one carries your parcel. Peek follows the AWB on Delhivery's tracking. If the shop gives you another carrier's number for the last leg, paste that one too.
 
-**Customs.** Delhivery promises shops full visibility on duties and taxes, but doesn't say there who pays them: ask the shop whether your price included them. In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. Elsewhere your own country's rules apply: see [parcels held at customs](guide:customs).
+**Customs.** Delhivery promises shops full visibility on duties and taxes, but doesn't say there who pays them: ask the shop whether your price included them. In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. Elsewhere your own country's rules apply: see [parcels held at customs](guide:customs).
 
 ## Delhivery tracking not updating, lost or returned
 
@@ -117,7 +117,7 @@ Delhivery says its support is reachable only through its website or app: log in 
 - [Delhivery: Terms and Conditions](https://www.delhivery.com/terms-and-conditions) – calls, SMS and WhatsApp about deliveries
 - [Delhivery: TnC (Direct National Courier)](https://www.delhivery.com/tnc-direct) – airway bill number, failed attempts, delivery address, claims, liability
 - [Delhivery: Fraud Disclaimer](https://www.delhivery.com/fraud-disclaimer) – official channels, fake SMS, OTP and payments, 1930 and cybercrime.gov.in
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150, €2 Union handling fee
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150, €2 Union handling fee
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Delhivery's wordings, what Peek reads, number shapes
 :::

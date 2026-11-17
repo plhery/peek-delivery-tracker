@@ -69,7 +69,7 @@ From the United States, Plus reaches more than 30 countries, among them the UK, 
 
 **Missed delivery and pickup.** The company delivering in your country makes the attempts and keeps a missed parcel: ask it, with its number. See [missed delivery](guide:missed-delivery), [uncollected parcels](guide:uncollected-parcel) and the posts' pages: [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post), [Australia Post](carrier:australia-post), [USPS](carrier:usps).
 
-**Customs.** On Economy and Standard, the duties and taxes are yours to pay ("Delivered Duties Unpaid"). In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. GlobalPost's service pages don't say how the €2 fee is charged: ask the seller whether your price included it. Elsewhere, see [parcels held at customs](guide:customs).
+**Customs.** On Economy and Standard, the duties and taxes are yours to pay ("Delivered Duties Unpaid"). In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. GlobalPost's service pages don't say how the €2 fee is charged: ask the seller whether your price included it. Elsewhere, see [parcels held at customs](guide:customs).
 
 ## GlobalPost parcel not updating, lost or returned
 
@@ -130,8 +130,8 @@ Email info@goglobalpost.com or call (888) 899-1255, weekdays from 6 am to 6 pm P
 - [GlobalPost: Home](https://www.goglobalpost.com/) – countries, shipments delivered
 - [GlobalPost: Track your package](https://www.goglobalpost.com/tracking/) – the tracker
 - [GlobalPost: Terms and Conditions](https://www.goglobalpost.com/conditions/) – shipping centres, transit time as an estimate
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150, €2 Union handling fee, dates
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150, €2 Union handling fee, dates
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
 - [Universal Parcel Scraper: GlobalPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/globalpost) – number shapes, wordings, delivery partner, returns, clocks
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – USPS number shape, hand-off to the delivery company
 :::

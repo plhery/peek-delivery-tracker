@@ -56,7 +56,7 @@ The carrier the sender chose. Packlink's tracking page lists [SEUR](carrier:seur
 
 See also [missed deliveries](guide:missed-delivery) and [uncollected parcels](guide:uncollected-parcel).
 
-**Customs.** If your parcel comes from outside the EU and holds goods bought online, a €3 EU customs duty per item applies on orders worth up to €150 since 1 July 2026. A €2 Union handling fee per item is also due, whatever the value, since 1 November 2026. Packlink's terms say the recipient pays the duties and taxes of an import. They don't say how these two charges reach you. See [parcels held at customs](guide:customs).
+**Customs.** If your parcel comes from outside the EU and holds goods bought online, a €3 EU customs duty per kind of product applies on orders worth up to €150 since 1 July 2026. A €2 Union handling fee per kind of product is also due, whatever the value, since 1 November 2026. Packlink's terms say the recipient pays the duties and taxes of an import. They don't say how these two charges reach you. See [parcels held at customs](guide:customs).
 
 ## Packlink parcel not arriving, damaged or returned
 
@@ -113,7 +113,7 @@ In the confirmation email Packlink sent when the shipment was booked: two letter
 - [Packlink: ¿Y cómo funciona esto de Packlink?](https://www.packlink.es/como-funciona/) – comparing and booking carriers, labels, Packlink PRO integrations with eBay and Amazon
 - [Packlink: Teléfono Packlink](https://www.packlink.es/telefono-packlink/) – comparison site, no phone support, numbers on other websites not verified, contact form, live chat, reference in the confirmation email
 - [Packlink: Términos y Condiciones](https://www.packlink.es/terminos-condiciones/) – company in Madrid, only the person who booked can claim, home or pickup point, notices, attempts and their cost, collection deadline, refused parcels, import duties, claim deadlines, damage reservations, 30-day search
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, for goods sold at a distance
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value, for goods sold at a distance
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – reference shape, carriers' number shapes, status wordings and codes, Madrid time, what Peek reads from Packlink's tracking, hand-off to the carrier
 :::

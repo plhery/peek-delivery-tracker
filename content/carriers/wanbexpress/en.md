@@ -78,7 +78,7 @@ WanbExpress's scans follow the parcel out of China, through customs and on to a 
 
 **Stuck on `Shipping Order Created.` or `Parcel Data Received`.** The shop has booked the shipment, but WanbExpress hasn't scanned the parcel yet. Ask the shop when it handed the parcel over.
 
-**Stuck after `Parcel arrives at Airport, Parcel Arrival`.** The parcel is most likely waiting for import customs. Into the EU (Germany or Italy, for example), goods bought online owe €3 customs duty per item on parcels worth up to €150 and, since 1 November 2026, a €2 Union handling fee per item, whatever the value. If you're asked to pay import charges, see [parcels held at customs](guide:customs); if it sits there for long, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
+**Stuck after `Parcel arrives at Airport, Parcel Arrival`.** The parcel is most likely waiting for import customs. Into the EU (Germany or Italy, for example), goods bought online owe €3 customs duty per kind of product on parcels worth up to €150 and, since 1 November 2026, a €2 Union handling fee per kind of product, whatever the value. If you're asked to pay import charges, see [parcels held at customs](guide:customs); if it sits there for long, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Nothing after `Custom clearance completed`.** The delivering carrier has the parcel, or soon will, and its own tracking may be ahead of WanbExpress's. Find its name and number on WanbExpress's tracker, or ask the seller which carrier delivers and under which number.
 
@@ -128,6 +128,6 @@ The seller you ordered from: it booked the parcel with WanbExpress. Peek couldn'
 
 :::sources
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, WNB number shape, the tracker, its reCAPTCHA check and the link that opens one parcel, scan wordings and their stages, iMile's relayed scans on a parcel to Germany and its next-run line, the US last-mile partner's and other partners' relayed moves, InPost's relayed lines on a parcel to the UK and its account-settings note that moves nothing, the scan naming Poste Italiane's network, times with UTC offsets, what the tracker shows (delivering carrier, its number, delivery photos, recipient's address), what Peek keeps and leaves out, and the tracking services it turns to
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3 duty, whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product like the €3 duty, whatever the value
 :::

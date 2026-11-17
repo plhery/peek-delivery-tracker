@@ -63,7 +63,7 @@ China Post flies the parcel out; in your country the national post takes over, t
 
 - **United States**: [USPS](carrier:usps).
 - **United Kingdom**: [Royal Mail](carrier:royal-mail). It takes the parcel through UK customs and tells you if VAT or duty is due. EMS numbers (starting with E) go to [Parcelforce](carrier:parcelforce), the UK's EMS operator, instead.
-- **Ireland**: [An Post](carrier:an-post). Since 1 November 2026, the EU adds a €2 handling fee per item; if the shop didn't charge it at checkout, An Post asks for it, with the duty and any VAT, before delivering.
+- **Ireland**: [An Post](carrier:an-post). Since 1 November 2026, the EU adds a €2 handling fee per kind of product; if the shop didn't charge it at checkout, An Post asks for it, with the duty and any VAT, before delivering.
 - **Canada**: [Canada Post](carrier:canada-post). Look the number up in its Track tool; if nothing appears, Canada Post asks you to have the sender investigate with their country's post.
 - **Australia**: [Australia Post](carrier:australia-post). It says tracking for items from overseas depends on the service used in the sending country, and that customs can take up to 15 days.
 
@@ -131,7 +131,7 @@ Your national post: USPS in the US, Royal Mail in the UK. They deliver it under 
 - [China Post: Home page (English)](https://english.chinapost.com.cn/) – Logistics and EMS and Postal Business numbers
 - [UPU: S10 standard, Identification of postal items](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – number format, service letters, U range without tracking, one number per item
 - [GOV.UK: Tax and customs for goods sent from abroad: Overview](https://www.gov.uk/goods-sent-from-abroad) – Royal Mail takes goods through UK customs and says if VAT or duty is due
-- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per item from 1 November 2026, paid at checkout or to the postal service before delivery
+- [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per kind of product from 1 November 2026, paid at checkout or to the postal service before delivery
 - [Canada Post: Tracking international packages](https://www.canadapost-postescanada.ca/cpc/en/support/kb/tracking/tracking-international-packages.page) – packages coming to Canada, sender investigates, timelines
 - [Australia Post: International tracking](https://auspost.com.au/help/parcel-tracking/international-parcel/tracking) – tracking depends on the sending country's service
 - [Australia Post: Customs](https://auspost.com.au/help/parcel-tracking/international-parcel/customs) – up to 15 days

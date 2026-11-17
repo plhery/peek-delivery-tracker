@@ -68,7 +68,7 @@ CACESA doesn't handle returns from private buyers. Arrange a return with the sho
 
 **A letter from the Tax Agency.** For "Decomiso - Depósito temporal" or "Validación de datos", scan it and email it to atc@cacesa.com. CACESA tells you whether the parcel can still be recovered.
 
-What you owe depends on the rules covered in [parcel held at customs](guide:customs). CACESA's FAQ notes a €3 customs charge per item on orders up to €150 since 1 July 2026, with identical items counted once; if the marketplace charged VAT and duties at checkout, nothing more is due on delivery.
+What you owe depends on the rules covered in [parcel held at customs](guide:customs). CACESA's FAQ notes a €3 customs charge per kind of product on orders up to €150 since 1 July 2026, with identical items counted once; if the marketplace charged VAT and duties at checkout, nothing more is due on delivery.
 
 **Late, lost or damaged.** For anything other than customs payments, CACESA sends you to the seller, who agreed the delivery terms. The parcel was cleared but never arrived? If it was never held and CACESA never contacted you, ask the seller. Tips for a quiet tracker are in [tracking not updating](guide:tracking-not-updating).
 

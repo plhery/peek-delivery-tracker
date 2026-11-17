@@ -120,7 +120,7 @@ No. DHL Päckchen and DHL Päckchen International have no tracking; only parcels
 - [DHL: Kontakt zum Kundenservice DHL Paket](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/probleme-loesungen/kontaktkanal.html) – contact form and chat
 - [DHL: Schadensanzeige](https://www.dhl.de/dam/jcr:582dc504-3ad1-43b3-b722-4060607cfc12/dhl-schadensanzeige.pdf) – damage form, post office hand-in, sender contacted, postal address
 - [DHL: Einfuhrabgaben](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – import charges, 7.50 EUR fee, 3 EUR duty
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [DHL: Security notices](https://www.dhl.de/en/toolbar/footer/sicherheitshinweise.html) – fake SMS, QR-code cards, phishing@dhl.com
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – never asks for personal data or payment by SMS
 - [Deutsche Post/DHL: Leistungen und Preise](https://www.dhl.de/dam/jcr:c0eb1285-9a22-40b2-8c51-3f70c1a897be/dp-leistungen-und-preise-092026.pdf) – free tracking, Post & DHL app, hotline hours

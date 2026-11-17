@@ -108,7 +108,7 @@ Etsy says buyers are "generally responsible" for duties, taxes and clearance fee
 | --- | --- |
 | US | Sellers must ship Delivered Duty Paid. You're "not responsible for unexpected customs fees": ask the seller, then open a case |
 | UK | VAT taken at checkout on parcels up to £135; above that, charged at the border |
-| Ireland | From outside the EU: under €150, VAT at checkout plus a €3 customs duty per item, at checkout or on delivery; above €150, VAT and duty on delivery unless the seller prepaid them |
+| Ireland | From outside the EU: under €150, VAT at checkout plus a €3 customs duty per kind of product, at checkout or on delivery; above €150, VAT and duty on delivery unless the seller prepaid them |
 | Canada | GST/HST, plus PST, RST or QST where due, included at checkout |
 | Australia | GST taken at checkout up to AUD 1,000; above that, at the border |
 

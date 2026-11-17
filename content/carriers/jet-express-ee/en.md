@@ -48,7 +48,7 @@ Its site mentions no parcel lockers or pickup points.
 
 Jet Express carries imports and exports worldwide, and its customs service helps with import, export and transit clearance in Estonia and abroad. Its terms say that the customer who ordered the transport pays all customs duties, taxes and fees unless agreed otherwise, and that Jet Express isn't liable for delays at customs.
 
-Since 1 July 2026, goods from outside the EU worth up to €150 pay an EU customs duty of €3 per item. Since 1 November 2026, a Union handling fee of €2 per item comes on top, whatever the value. The Estonian Tax and Customs Board (EMTA) says that a gift from one private person to another doesn't pay the handling fee. If you didn't order the transport yourself, ask the sender who pays. More in [parcels held at customs](guide:customs).
+Since 1 July 2026, goods from outside the EU worth up to €150 pay an EU customs duty of €3 per kind of product. Since 1 November 2026, a Union handling fee of €2 per kind of product comes on top, whatever the value. The Estonian Tax and Customs Board (EMTA) says that a gift from one private person to another doesn't pay the handling fee. If you didn't order the transport yourself, ask the sender who pays. More in [parcels held at customs](guide:customs).
 
 ## Jet Express shipment late, stuck or lost
 
@@ -120,7 +120,7 @@ Call +372 646 3222 on weekdays, 8:00–18:00, or write to info@kuller.ee. For a 
 - [Jet Express: Tellimistingimused ja transpordireeglid](https://kuller.ee/tellimistingimused/) – failed delivery, refusal, signature, subcontractors, lost after 30 working days, claims in 7 days, duties paid by the customer
 - [Jet Express: Damaged or Lost Shipment – Filing a Claim](https://kuller.ee/en/a-case-with-a-shipment/) – claims within 7 days, form fields, liability insurance, CMR and the Law of Obligations Act
 - [Jet Express: Contact](https://kuller.ee/en/contact/) – phone, email, address
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 from 1 July 2026, €2 handling fee from 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150 from 1 July 2026, €2 handling fee from 1 November 2026
 - [Maksu- ja Tolliamet: Saadetise maksustamine](https://www.emta.ee/eraklient/saadetised-reisimine-elama-asumine/saadetised/saadetise-maksustamine) – the same rules in Estonia, whatever the value, no handling fee on gifts between private persons
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – no Jet Express number shape or tracker, portal.kuller.ee links read by their keyword, Jet Express OÜ as a name, the Track & Trace link, how Peek follows Jet Express parcels through tracking services
 :::

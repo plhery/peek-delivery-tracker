@@ -49,7 +49,7 @@ If you ask FedEx to hold the parcel at a pickup location, a scan can read `Deliv
 A parcel from outside the UK, or from outside the EU for Ireland, may owe import charges. The tracking shows `Clearance in progress` or `Clearance delay` while it's at customs, and `International shipment release - Import` once customs lets it go.
 
 - **UK**: GOV.UK says the courier contacts you with a bill for any VAT, duty or delivery charges, and normally holds the parcel for about 3 weeks. Unpaid, it goes back to the sender.
-- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per item, and since 1 November 2026 online orders from outside the EU also owe a €2 Union handling fee per item, whatever their value. If the shop didn't collect them at checkout, Revenue says the courier will ask you for both before delivering, and couriers charge their own administration fee on top.
+- **Ireland**: since 1 July 2026, most parcels worth €150 or less from outside the EU owe €3 customs duty per kind of product, and since 1 November 2026 online orders from outside the EU also owe a €2 Union handling fee per kind of product, whatever their value. If the shop didn't collect them at checkout, Revenue says the courier will ask you for both before delivering, and couriers charge their own administration fee on top.
 
 More in [parcels held at customs](guide:customs).
 
@@ -93,11 +93,11 @@ It can be. Citizens Advice says a message asking you to pay to get a parcel or t
 - [GOV.UK: Tax and customs for goods sent from abroad](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – the courier's bill, about 3 weeks, return to sender
 - [GOV.UK: Report internet scams and phishing](https://www.gov.uk/report-suspicious-emails-websites-phishing) – forward scam texts to 7726
 - [CCPC: Your consumer rights if your order is not delivered](https://www.ccpc.ie/consumer-advice/consumer-rights/buying-goods/non-delivery-of-goods) – 30 days, new date, refund, responsible until you have it (Ireland)
-- [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per item since 1 July 2026, paid to the courier before delivery
+- [Revenue: Buying goods from outside the EU](https://www.revenue.ie/en/customs/individuals/buying-online-personal/outside-eu.aspx) – €3 per kind of product since 1 July 2026, paid to the courier before delivery
 - [Revenue: Buying goods online for personal use](https://www.revenue.ie/en/customs/individuals/buying-online-personal/index.aspx) – couriers' administration fee
-- [Revenue: Union Handling Fee, what does this mean for consumers?](https://www.revenue.ie/en/customs/individuals/union-handling-fee/what-does-this-mean.aspx) – duty and the €2 fee per item paid at checkout, or to the courier before delivery
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item, whatever its value
+- [Revenue: Union Handling Fee, what does this mean for consumers?](https://www.revenue.ie/en/customs/individuals/union-handling-fee/what-does-this-mean.aspx) – duty and the €2 fee per kind of product paid at checkout, or to the courier before delivery
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product, whatever its value
 - [FTC: Fake shipping notification emails and text messages](https://consumer.ftc.gov/consumer-alerts/2023/12/fake-shipping-notification-emails-text-messages-what-you-need-know-holiday-season) – contact the shipping company through a website or number you know
 - [Universal Parcel Scraper: FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – number shapes, check digits, FedEx's scan wordings, what Peek reads from FedEx
 :::

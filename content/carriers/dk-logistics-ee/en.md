@@ -41,7 +41,7 @@ DKL doesn't publish how many delivery attempts it makes, whether it leaves a not
 
 DKL brings goods by air from any country in the world to Estonia, Latvia and Lithuania. It offers customs broker services (customs declarations and shipping documents) and customs warehousing. A shipment from outside the EU goes through customs before it is delivered.
 
-Since 1 July 2026, goods from outside the EU worth up to €150 pay an EU customs duty of €3 per item. Since 1 November 2026, a Union handling fee of €2 per item comes on top, whatever the value. The Estonian Tax and Customs Board (EMTA) says that a gift from one private person to another doesn't pay the handling fee.
+Since 1 July 2026, goods from outside the EU worth up to €150 pay an EU customs duty of €3 per kind of product. Since 1 November 2026, a Union handling fee of €2 per kind of product comes on top, whatever the value. The Estonian Tax and Customs Board (EMTA) says that a gift from one private person to another doesn't pay the handling fee.
 
 DKL says it has no fixed price list for import deliveries, and it doesn't say how it passes duties and fees on to the recipient. If you expect a shipment from outside the EU, ask DKL or the sender who clears it and who pays. More in [parcels held at customs](guide:customs).
 
@@ -105,7 +105,7 @@ Call customer service on +372 640 4014 or write to info@dkl.ee, Monday to Friday
 - [DK Logistics: About company](https://www.dkl.ee/en/menu/7-ABOUT_COMPANY.html) – head office in Tallinn, European and CIS partners
 - [DK Logistics: Telli kuller](https://www.dkl.ee/ee/menu/3-TELLI_KULLER_.html) – courier order form for senders
 - [DK Logistics: Contacts](https://www.dkl.ee/en/menu/6-CONTACTS.html) – phone, fax, email, hours, booking until 16:00, address
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 from 1 July 2026, €2 handling fee from 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150 from 1 July 2026, €2 handling fee from 1 November 2026
 - [Maksu- ja Tolliamet: Saadetise maksustamine](https://www.emta.ee/eraklient/saadetised-reisimine-elama-asumine/saadetised/saadetise-maksustamine) – the same rules in Estonia, whatever the value, no handling fee on gifts between private persons
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – no DKL number shape, no dkl.ee link reading and no DKL tracker, DKL and DK Logistics OÜ as names, how Peek follows DKL parcels through tracking services
 :::

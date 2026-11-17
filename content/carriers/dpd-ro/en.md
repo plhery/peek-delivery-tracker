@@ -71,7 +71,7 @@ For a refund or a new parcel, ask the shop: it holds the contract with DPD.
 
 **Complaints.** The sender and the recipient can both complain within 6 months of posting, on DPD's form: by email to reclamatii@dpd.ro, online, at a staffed DPD point or by registered post. DPD settles within 3 months and pays within 15 days of settling. For a lost or damaged parcel sent without a declared value or cash on delivery, DPD pays 5 times the service price. Within 1 year of posting, you can also go to ANCOM, Romania's communications regulator, or to court. See [lost parcels](guide:lost-parcel).
 
-**Customs.** Goods bought online from outside the EU carry a €3 EU customs duty per item on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. DPD Romania's pages don't say how it passes these on: ask the shop whether your price included them. Its notice of 22 December 2025 also explains Romania's fixed 25 RON fee on each parcel from outside the EU declared under €150, introduced on 1 January 2026: the seller, sender or marketplace pays it, and DPD collects it from them. See [parcels held at customs](guide:customs).
+**Customs.** Goods bought online from outside the EU carry a €3 EU customs duty per kind of product on parcels worth up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. DPD Romania's pages don't say how it passes these on: ask the shop whether your price included them. Its notice of 22 December 2025 also explains Romania's fixed 25 RON fee on each parcel from outside the EU declared under €150, introduced on 1 January 2026: the seller, sender or marketplace pays it, and DPD collects it from them. See [parcels held at customs](guide:customs).
 
 ## DPD Romania contact and customer service
 
@@ -132,7 +132,7 @@ Yes. DPD's tracker has an English version, and Peek shows DPD's English wordings
 - [DPD Romania: Legal and copyright notice](https://www.dpd.com/ro/en/support/legal-notice/) – company, head office
 - [DPD Romania: 25 RON fee for non-EU parcels under EUR 150](https://www.dpd.com/ro/en/2025/12/22/25-ron-fee-for-non-eu-parcels-under-eur-150-2/) – Romania's parcel fee
 - [DPD Romania: Campanie de informare phishing](https://www.dpd.com/ro/ro/2025/08/01/campanie-de-informare-phishing/) – fake SMS and emails
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads, DPD Romania's wordings, the hand-over to ACS
 :::

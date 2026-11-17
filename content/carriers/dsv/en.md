@@ -69,7 +69,7 @@ On the way it also shows `Linehaul departed`, `Linehaul arrived`, `Terminal inve
 
 **Updates and proof of delivery.** In myDSV, users can set up notifications, for example for pickup or customs clearance, see estimated arrival times for road cargo and download the proof of delivery once the shipment is complete. If you didn't book DSV, ask the sender. DSV's pages don't say how many delivery attempts it makes or how long a terminal keeps goods: ask the DSV office handling the delivery.
 
-**Customs.** In most countries where it has offices, DSV is a licensed customs broker; elsewhere it works with agents. For help with a clearance, DSV says to contact DSV in that country. In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per item on orders up to €150, since 1 July 2026, and a €2 Union handling fee per item, whatever the value, since 1 November 2026. Elsewhere, your country's own rules apply: see [parcels held at customs](guide:customs).
+**Customs.** In most countries where it has offices, DSV is a licensed customs broker; elsewhere it works with agents. For help with a clearance, DSV says to contact DSV in that country. In Ireland and the rest of the EU, goods bought online from outside the EU carry a €3 customs duty per kind of product on orders up to €150, since 1 July 2026, and a €2 Union handling fee per kind of product, whatever the value, since 1 November 2026. Elsewhere, your country's own rules apply: see [parcels held at customs](guide:customs).
 
 ## DSV shipment late, stuck or damaged
 
@@ -136,7 +136,7 @@ Its help pages give none for tracking. Use the contact form or find your local D
 - [DSV: History](https://www.dsv.com/en/about-dsv/history) – founded in 1976, road, air and sea, Schenker bought from Deutsche Bahn in 2025
 - [DSV: DSV completes acquisition of Schenker](https://www.dsv.com/en/about-dsv/press/news/dsv-completes-acquisition-of-schenker-2628130) – completed 30 April 2025, integration
 - [DSV: Legal notice](https://www.dsv.com/en/about-dsv/legal-notice) – DSV A/S in Denmark, telephone, misuse of the DSV name
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150, €2 Union handling fee
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150, €2 Union handling fee
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value
 - [Universal Parcel Scraper: DSV](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/dsv) – number shapes and links, the two trackers, DSV's wordings and stages, local clocks, what Peek reads
 :::

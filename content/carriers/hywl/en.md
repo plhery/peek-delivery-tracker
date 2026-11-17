@@ -126,6 +126,6 @@ The seller you ordered from: it booked the parcel with HYWL. HYWL's website list
 :::sources
 - [Huiyi Logistics: 深圳市汇一物流有限公司 (home page)](https://www.szhywl.it.com/) – company name, Shenzhen, 2013, customers and services, delivery abroad, the tracker's two buttons, address in Yantian, phone and email "to be added"
 - [Huiyi Logistics: 物流轨迹查询 (tracking)](https://www.szhywl.it.com/track.html) – public tracker, orders and tracking maintained in the back office, its messages, times printed as stored, the link that opens one parcel
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per item up to €150 since 1 July 2026, €2 handling fee since 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 duty per kind of product up to €150 since 1 July 2026, €2 handling fee since 1 November 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, number layouts and their weak match, links, codes, wordings and their stages, English half of two-language steps, places and postcodes, Beijing clock, steps dated ahead held back, no delivering company, what Peek shows and leaves out
 :::

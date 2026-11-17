@@ -51,7 +51,7 @@ After a missed delivery, the tracking can say what comes next: another delivery 
 
 **Complaining to La Poste.** ARCEP, France's postal regulator, says a complaint is free and that the sender or the recipient can make one, though their rights differ. Use the channels below. If the answer doesn't satisfy you, ask La Poste's appeals service (service recours) through the same channels. After that, or with no answer two months later, the Médiateur du Groupe La Poste can take the case, for free, within a year of your first written complaint.
 
-**Customs.** A parcel coming into France from outside the EU may owe VAT and, on orders up to €150, the EU's flat €3 customs duty per item, in force since 1 July 2026; the seller or the carrier collects it. French customs says the carrier, La Poste for example, may ask you for these taxes on delivery and may add its own clearance fees, which have nothing to do with what customs collects. More in [parcels held at customs](guide:customs).
+**Customs.** A parcel coming into France from outside the EU may owe VAT and, on orders up to €150, the EU's flat €3 customs duty per kind of product, in force since 1 July 2026; the seller or the carrier collects it. French customs says the carrier, La Poste for example, may ask you for these taxes on delivery and may add its own clearance fees, which have nothing to do with what customs collects. More in [parcels held at customs](guide:customs).
 
 ## Colissimo contact number and customer service
 
@@ -96,7 +96,7 @@ Check the number against the shapes above: one ending FR that starts XU, XR, XT,
 - [Le Médiateur du Groupe La Poste: Foire aux questions](https://mediateur.groupelaposte.com/pages/foire-aux-questions) – free, two-level complaint first, two months, one year
 - [Service-Public.fr: Service consommateur de La Poste](https://lannuaire.service-public.gouv.fr/centres-contact/R11647) – 3631 hours and cost, international customer service, postal address
 - [Your Europe: Shipping and delivery](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_en.htm) – 30 days, extra time, refund, trader responsible for damage, €3 duty collected by the seller or carrier
-- [Douane: Droit de douane forfaitaire de 3 euros sur les ventes à distance de biens importés](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – €3 per item up to €150, since 1 July 2026
+- [Douane: Droit de douane forfaitaire de 3 euros sur les ventes à distance de biens importés](https://www.douane.gouv.fr/fiche/droit-de-douane-forfaitaire-de-3-euros-sur-les-ventes-distance-de-biens-importes) – €3 per kind of product up to €150, since 1 July 2026
 - [Douane: Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – taxes asked on delivery by the carrier (La Poste named), its own clearance fees
 - [Cybermalveillance.gouv.fr: L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – La Poste never asks for payment by SMS or email, phishing@laposte.fr, 33700
 - [Universal Parcel Scraper: La Poste](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/la-poste) – number shapes, check characters, La Poste's scan wordings and Peek's stages, pickup points, partners abroad, what Peek reads

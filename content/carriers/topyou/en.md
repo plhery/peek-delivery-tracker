@@ -87,7 +87,7 @@ In Spain, the delivering partner's scan after customs can read `Parcel in transi
 
 ## TopYou parcel not arriving or tracking stuck
 
-**Stuck on `Shipment started the customs clearance process at destination`.** Your country's customs have the parcel. If you're asked for import charges, which in the EU now include a €2 handling fee per item (due since 1 November 2026), see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
+**Stuck on `Shipment started the customs clearance process at destination`.** Your country's customs have the parcel. If you're asked for import charges, which in the EU now include a €2 handling fee per kind of product (due since 1 November 2026), see [parcels held at customs](guide:customs); if it stays there for days, tell the seller. More in [why tracking stops updating](guide:tracking-not-updating).
 
 **Nothing after `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` or `Import clearance success`.** The delivering carrier should have the parcel. Look for its number on TopYou's tracker, or ask the seller which carrier delivers and under which number. Background in [tracking a parcel from China](guide:tracking-from-china).
 
@@ -134,6 +134,6 @@ The seller you ordered from: it booked the parcel with TopYou. TopYou's website 
 - [TopYou: 关于我们 (about)](https://www.szty56.com/view?path=about/about) – founded 2016, branches, orders a day, services
 - [TopYou: 轨迹查询 (tracking)](https://track.szty56.com/) – TopYou's tracker
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee from 1 November 2026
-- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item sold at a distance, whatever its value
+- [European Commission: Guidance on the 3 EUR customs duty and Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product sold at a distance, whatever its value
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – company name and other names, TYZR number shape, capitals on TopYou's tracker, no link Peek reads, scan wordings and their stages, the destination country beside TopYou's own scans, Beijing time and the relayed scans' clocks, USPS taking over in the US, GOFO in France and Italy, iMile in Germany and DPD in Austria, the delivering carrier's relayed scans and a pickup point's notice, the second number, the Lastmile number on a post's line and the line name, unknown numbers and numbers without scans, the parcel's data before TopYou has it, what Peek shows and how it hands a parcel over
 :::

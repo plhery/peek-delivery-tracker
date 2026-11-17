@@ -62,7 +62,7 @@ SF's terms for shipments from mainland China abroad say:
 
 ## SF Express customs: duties on parcels from China
 
-Duties and taxes depend on the country you live in: see [the customs guide](guide:customs). In Ireland, as everywhere in the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to parcels worth up to €150 bought from outside the EU. Since 1 November 2026, a €2 EU handling fee per item applies too.
+Duties and taxes depend on the country you live in: see [the customs guide](guide:customs). In Ireland, as everywhere in the EU, a flat €3 customs duty per item type has applied since 1 July 2026 to parcels worth up to €150 bought from outside the EU. Since 1 November 2026, a €2 EU handling fee per kind of product applies too.
 
 If you refuse the parcel or won't pay the duties, SF's terms let it send the parcel back to the sender, at the sender's cost. If customs holds the parcel and the sender doesn't sort it out within 30 calendar days of SF's written notice, the parcel counts as abandoned and SF may deal with it as it sees fit, including destroying it.
 

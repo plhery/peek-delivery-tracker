@@ -59,7 +59,7 @@ Peek doesn't know who delivers Xinghe parcels in your country. The tracker's ste
 
 Xinghe's own site says nothing about parcels for online shoppers: no delivery times, delivery attempts or pickup points. Those are the delivering company's rules. Ask the seller which company delivers your order, and for its tracking number.
 
-**Customs fees in the EU.** Since 1 July 2026, goods bought online from outside the EU, in parcels worth up to €150, pay a €3 customs duty per item. Since 1 November 2026, a €2 Union handling fee per item is due as well, whatever the value. An item here means the goods in a parcel that share the same tariff classification and description, and origin where it must be declared, whatever their number. For what you pay, and how, in the UK, Ireland, the US, Canada and Australia, see [parcels held at customs](guide:customs).
+**Customs fees in the EU.** Since 1 July 2026, goods bought online from outside the EU, in parcels worth up to €150, pay a €3 customs duty per kind of product. Since 1 November 2026, a €2 Union handling fee per kind of product is due as well, whatever the value. An item here means the goods in a parcel that share the same tariff classification and description, and origin where it must be declared, whatever their number. For what you pay, and how, in the UK, Ireland, the US, Canada and Australia, see [parcels held at customs](guide:customs).
 
 ## Xinghe Freight parcel not arriving or tracking stuck
 
@@ -120,7 +120,7 @@ The tracker may not have the order yet, or only steps written ahead, which can e
 - [Xinghe Freight: 关于我们 (about)](http://xinghe-express.cn/about.html) – founded in 2014, sea, air and land freight, ship agency, customs declaration
 - [Xinghe Freight: 产品服务 (services)](http://xinghe-express.cn/services.html) – services offered, nothing on parcels for online shoppers
 - [Xinghe Freight: 联系我们 (contact)](http://xinghe-express.cn/contact.html) – 24-hour hotline, email for business enquiries and quotes, address given as Guangzhou only, get in touch before visiting, contact form opening an email
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, GZXH…YQ number shape, Xinghe read on GZYL's tracker, step wordings and stages, Hong Kong acceptance, Chinese line, Beijing clock, timelines written ahead, tracking services as fallback, the tracker's answer for an unknown number, Swiss Post hand-over, what Peek shows, holds back and leaves out
 :::

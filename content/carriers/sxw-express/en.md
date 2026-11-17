@@ -56,7 +56,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 **Delivery attempts and pickup.** These follow the delivering company's rules, and SXW's site gives none. Ask the seller which company delivers and for its tracking number, and see [missed delivery](guide:missed-delivery).
 
-**Customs fees in the EU.** Since 1 July 2026, goods bought online from outside the EU, in parcels worth up to €150, pay a €3 customs duty per item. Since 1 November 2026, a €2 Union handling fee per item is due as well, whatever the value. An item here means the goods in a parcel that share the same tariff classification and description, and origin where it must be declared, whatever their number. For what you pay, and how, in the UK, Ireland, the US, Canada and Australia, see [parcels held at customs](guide:customs).
+**Customs fees in the EU.** Since 1 July 2026, goods bought online from outside the EU, in parcels worth up to €150, pay a €3 customs duty per kind of product. Since 1 November 2026, a €2 Union handling fee per kind of product is due as well, whatever the value. An item here means the goods in a parcel that share the same tariff classification and description, and origin where it must be declared, whatever their number. For what you pay, and how, in the UK, Ireland, the US, Canada and Australia, see [parcels held at customs](guide:customs).
 
 ## SXW Express parcel not arriving or tracking stuck
 
@@ -119,7 +119,7 @@ The seller you ordered from: it booked the parcel with SXW. SXW's website lists 
 - [SXW Express: Contact US](http://www.sxwexpress.cn/contact.html) – a contact page with no phone number, email or address, empty "Online Support" panel
 - [SXW Express: 会员登录 (member login)](http://www.sxwexpress.cn:8082/) – company name in Chinese, on SXW's tracking system
 - [SXW Express: trace (tracker, English page)](http://www.sxwexpress.cn:8082/en/trackIndex.htm) – SXW's tracker in English; the Chinese page opens from the home page's box
-- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
+- [European Commission: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product on parcels up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and the Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – handling fee per item whatever the value, what an item is
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, SXW number shape, Peek reading SXW's own tracker, step wordings and stages, Beijing clock, steps dated ahead or written ahead held back, tracking services as fallback, GOFO Express number and hand-over unless the record's channel names another carrier, what Peek shows and leaves out
 :::

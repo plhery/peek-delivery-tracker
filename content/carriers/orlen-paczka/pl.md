@@ -3,7 +3,7 @@ title: ORLEN Paczka śledzenie: numer, statusy i odbiór paczki
 description: Śledzenie przesyłki ORLEN Paczka: gdzie jest numer paczki, co znaczą statusy, ile czasu masz na odbiór z automatu, paczki z Allegro i reklamacja.
 slug: orlen-paczka-sledzenie
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 ORLEN Paczka, dawniej Paczka w RUCHu, to polska sieć, która dowozi paczki do automatów paczkowych i punktów odbioru. Paczkę śledzisz na stronie śledzenia ORLEN Paczki na orlenpaczka.pl albo wklejasz numer w pole powyżej. Numer paczki ma 13 cyfr i znajdziesz go w wiadomości od sklepu albo sprzedającego.
@@ -83,7 +83,7 @@ ORLEN Paczka nie wysyła linków w SMS-ach i nie prosi o dopłatę do paczki prz
 
 Statusy widzisz po polsku, tak jak pisze je ORLEN Paczka, z miastem sortowni na mapie, gdy komunikat je podaje, i z godziną odbioru. Godziny Peek odczytuje według czasu warszawskiego i pokazuje w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w Twojej strefie czasowej:” z nazwą tej strefy. Peek nie pokazuje punktu odbioru, przewidywanej daty dostawy, wagi ani nadawcy, a numer paczki zwrotnej pomija. Paczka z Vinted przekazana przewoźnikowi w innym kraju nie jest śledzona dalej i zostaje w drodze. Odebrane paczki po kilku miesiącach znikają ze śledzenia ORLEN Paczki.
 
-Peek sprawdza śledzenie co 10 minut i może Cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
+Peek sprawdza śledzenie nawet co 10 minut i może Cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
 
 ## Pytania o śledzenie ORLEN Paczka
 

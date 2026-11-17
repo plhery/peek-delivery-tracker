@@ -3,7 +3,7 @@ title: SunYou tracking: numer SY, statusy i kontakt
 description: Paczka SunYou (SYPost) z Chin: jak wygląda numer SY, co znaczą angielskie statusy, kto doręcza ostatni odcinek i do kogo pisać, gdy paczka stoi.
 slug: sunyou-sledzenie
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 SunYou, pisane też SYPost, to firma logistyczna z Shenzhen, która wysyła małe paczki za granicę dla sprzedawców internetowych z Chin, a ostatni odcinek oddaje lokalnemu przewoźnikowi w kraju odbiorcy. Jej numery zaczynają się od SY: wpisz swój na stronie śledzenia SunYou, [sypost.net](https://www.sypost.net), albo wklej go w pole powyżej. Numer dostajesz od sklepu, razem z danymi wysyłki zamówienia.
@@ -92,7 +92,7 @@ Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takim
 
 Gdy SunYou podaje numer lokalnego przewoźnika, aplikacja może zapytać tego przewoźnika i przełączyć się na niego, gdy pokaże nowsze postępy. Gdy tym numerem jest numer pocztowy (dwie litery, 9 cyfr, dwie litery) paczki do Polski, pyta [Pocztę Polską](carrier:poczta-polska). Paczka zachowuje numer SunYou, a jej strona pokazuje „Doręcza:” z nazwą przewoźnika oraz jego numer z linkiem. Dopóki Peek widzi paczkę u tego przewoźnika tylko jako zgłoszoną, bez jego własnego skanu, strona pokazuje zamiast tego „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”. Nie dzieje się tak przy każdej paczce.
 
-Śledzenie jest sprawdzane co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie SunYou; przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z SunYou ani ze sklepem.
+Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie SunYou; przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z SunYou ani ze sklepem.
 
 ## Pytania o SunYou tracking
 

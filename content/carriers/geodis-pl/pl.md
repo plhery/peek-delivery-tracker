@@ -3,7 +3,7 @@ title: GEODIS Polska (Pekaes): śledzenie przesyłki i statusy
 description: Śledzenie przesyłki GEODIS (dawniej Pekaes) po numerze z PL i 16 cyframi: co znaczą statusy, jak wygląda dostawa i odbiór z terminala, reklamacja i telefon.
 slug: geodis-polska-sledzenie
 published: 2026-10-30
-updated: 2026-11-06
+updated: 2026-11-17
 ---
 
 GEODIS Polska to polska sieć przewozu palet i paczek francuskiej grupy GEODIS, której właścicielem są koleje SNCF. GEODIS przejął PEKAES w 2021 roku, a dziś sieć prowadzi spółka GEODIS Road Network z siedzibą w Błoniu. Co zrobić, zależy od tego, co przekazał Ci nadawca:
@@ -82,7 +82,7 @@ PL i 16 cyfr to nie znak rozpoznawczy GEODIS (PL oznacza Polskę), więc Peek ni
 
 Peek czyta angielską wersję Strefy Klienta i pokazuje status, każdy skan w angielskim brzmieniu GEODIS z lokalizacją terminala, godzinę doręczenia i kraj dostawy. Skany z polskich terminali odczytuje w czasie warszawskim, a skan z terminala za granicą ma godzinę lokalną tego terminala. Gdy wiersz `Pseudoscan` skasuje wcześniejsze skany, Peek też je pomija, a `Claim Received` nie zmienia statusu. Strona GEODIS nie podaje przewidywanej daty dostawy, wagi, nazwy usługi, nazwiska odbiorcy ani dowodu doręczenia. Peek pomija kod pocztowy i adres dostawy, liczbę sztuk, kody terminali i uwagi, w których może paść nazwisko osoby podpisującej odbiór.
 
-Peek sprawdza przesyłkę co 10 minut, a gdy jedzie już do Ciebie – co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie GEODIS; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni terminu dostawy, nie umówi odbioru z terminala i nie złoży reklamacji: zadzwoń do GEODIS albo napisz do sklepu.
+Peek sprawdza przesyłkę nawet co 10 minut, a gdy jedzie już do Ciebie – nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie GEODIS; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni terminu dostawy, nie umówi odbioru z terminala i nie złoży reklamacji: zadzwoń do GEODIS albo napisz do sklepu.
 
 ## Pytania o śledzenie przesyłek GEODIS
 

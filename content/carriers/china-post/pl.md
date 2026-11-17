@@ -3,7 +3,7 @@ title: China Post śledzenie przesyłki: numer, statusy, doręczenie
 description: Śledzenie przesyłki China Post: jak wygląda numer z CN, co znaczą chińskie statusy, kiedy przejmuje ją Poczta Polska i co zrobić, gdy utknie po drodze.
 slug: china-post-sledzenie
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 China Post to państwowa poczta Chin, a EMS to jej marka ekspresowa. Jeśli Twoje zamówienie z AliExpress, Temu, Shein lub innego sklepu ma numer kończący się na `CN`, nadała go China Post. W Polsce paczkę przejmuje zwykle [Poczta Polska](carrier:poczta-polska) i doręcza ją pod tym samym numerem. Śledzić ją możesz na stronie China Post, ems.com.cn, albo w polu powyżej. Numer znajdziesz w szczegółach wysyłki zamówienia w sklepie.
@@ -112,7 +112,7 @@ Peek pokazuje status, historię z urzędem przy każdym skanie (urząd zapisany 
 
 Jeśli numer kończy się na `CN`, a China Post poda Polskę jako kraj przeznaczenia, Peek pyta też Pocztę Polską o ten sam numer. Przechodzi na nią, gdy pokaże świeże skany, i zachowuje historię z China Post. Pocztę Polską Peek pyta po polsku, gdy używasz go po polsku: jej zdarzenia zobaczysz wtedy pod jej polskimi nazwami, a w innym języku po angielsku. Jeśli China Post nie poda kraju albo nie odpowie, Peek bierze Twój kraj: w aplikacji na iPhone’a lub Androida region ustawiony w telefonie, w przeglądarce kraj, z którego dodajesz paczkę.
 
-Peek sprawdza paczkę co 10 minut albo co godzinę, gdy China Post milknie: po 12 godzinach bez nowego skanu, dopóki paczka ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”, a na każdym innym etapie po dwóch dniach. Gdy paczka jest w doręczeniu, sprawdza ją co 2 minuty albo co 5, jeśli sprawdzenie wymaga otwarcia przeglądarki, jak przy publicznym podglądzie China Post: tego dnia, od 6:00 czasu lokalnego, i dopóki odpowiada samo śledzenie China Post. Przez serwisy śledzenia przesyłek sprawdza co 15 minut. Gdy doręczenie przejmuje inny przewoźnik, na przykład Poczta Polska, Peek sprawdza paczkę w tempie tego, który ją doręcza. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z China Post, Pocztą Polską ani sklepem.
+Peek sprawdza paczkę co godzinę, także gdy jest w doręczeniu. Gdy doręczenie przejmuje inny przewoźnik, na przykład Poczta Polska, Peek sprawdza paczkę w tempie tego, który ją doręcza. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z China Post, Pocztą Polską ani sklepem.
 
 ## Pytania o śledzenie China Post
 

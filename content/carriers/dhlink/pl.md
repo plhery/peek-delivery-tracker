@@ -3,7 +3,7 @@ title: Śledzenie DHLink: numer z DHgate, statusy i doręczenie
 description: Śledź paczkę DHLink z zamówienia na DHgate: jakie numery przyjmuje wyszukiwarka, co znaczą angielskie statusy, kto doręcza przesyłkę i do kogo pisać.
 slug: dhlink-sledzenie
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 DHLink (驼飞侠) to transgraniczna platforma logistyczna serwisu DHgate (敦煌网). Założona w 2014 roku, wysyła zamówienia sprzedawców z DHgate i innych klientów z Chin lub ze swoich magazynów zagranicznych, a na ostatnim odcinku przekazuje je lokalnemu przewoźnikowi w kraju docelowym. Wpisz swój numer na [stronie śledzenia DHLink](https://www.dhlink.com/trackQuery?lang=en) albo wklej go w polu powyżej. Numer znajdziesz w szczegółach zamówienia na DHgate; jeśli go tam nie ma, poproś o niego sprzedawcę.
@@ -80,7 +80,7 @@ Według stanu na 16 listopada 2026 roku strona kontaktowa DHLink podaje jeden ad
 
 Peek czyta bezpośrednio śledzenie DHLink, pokazuje status, kraj przeznaczenia i miejscowość każdego zdarzenia oraz wyświetla każdy skan tylko raz (tak jak zapisuje go DHLink, zazwyczaj po angielsku), odrzucając duplikaty między źródłami, kody pocztowe i numery referencyjne zamówienia. Skany z Chin odczytuje według czasu pekińskiego, skany USPS według czasu danego stanu USA, a wpisy Pactic z trasy przez Węgry według czasu w Budapeszcie, po czym przelicza je na strefę czasową Twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w Twojej strefie czasowej: …”); pozostałe wpisy zachowują czas podany przez DHLink. DHLink nie podaje wagi, nazwy usługi ani godziny doręczenia, a jedyną prognozą w Peek jest przekazany skan USPS typu `Out for Delivery, Expected Delivery …`, o ile pozostaje najnowszy i zawiera przedział godzinowy na ten sam dzień. Gdy „Last Leg No.” to numer GOFO (`GFUS` i 14 cyfr), SwiftX (`SWX` i 18 cyfr) lub szwajcarskiego DPD (14 cyfr zaczynających się od `060` lub `061`), Peek pokazuje tego przewoźnika i jego numer, odpytuje go i przełącza na niego, gdy tylko pojawi się tam nowszy postęp; inne numery ostatniej mili zostają na historii DHLink.
 
-Dopóki odpowiada bezpośrednio śledzenie DHLink, Peek sprawdza paczkę co 10 minut, a w dniu wydania do doręczenia co 2 minuty (od 6:00 czasu lokalnego albo – jeśli podano okno doręczenia – od pół godziny przed jego początkiem); przez serwisy śledzące co 15 minut. Po przełączeniu na GOFO sprawdza co 30 minut, także w doręczeniu. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z DHLink, DHgate ani sprzedawcą.
+Dopóki odpowiada bezpośrednio śledzenie DHLink, Peek sprawdza paczkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego albo – jeśli podano okno doręczenia – od pół godziny przed jego początkiem); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po przełączeniu na GOFO sprawdza co 30 minut, także w doręczeniu. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z DHLink, DHgate ani sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie DHLink
 

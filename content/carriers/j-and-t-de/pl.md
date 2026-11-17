@@ -3,7 +3,7 @@ title: J&T Express Germany śledzenie: numer JTDE i statusy
 description: Śledź paczkę J&T Express w Niemczech: jak wygląda numer JTDE, co oznaczają angielskie statusy i co zrobić, gdy przesyłka stoi, ginie lub nie dociera.
 slug: jt-express-niemcy-sledzenie
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt nad Menem) to niemiecka sieć grupy kurierskiej J&T Express: doręcza paczki na terenie Niemiec. Jeśli sklep wysłał Twoje zamówienie na niemiecki adres przez J&T, numer śledzenia zaczyna się od `JTDE`: wklej go w pole powyżej albo sprawdź bezpośrednio na [stronie śledzenia J&T pod adresem jtexpress.de](https://www.jtexpress.de/tracking). Numer przekazuje sklep, który wysłał zamówienie — znajdziesz go w wiadomości o wysyłce lub na stronie zamówienia.
@@ -103,7 +103,7 @@ Peek pokazuje aktualny etap, każdy skan z dokładną godziną oraz moment dorę
 
 Dopóki J&T nie zeskanuje paczki po raz pierwszy, Peek ponawia zapytania i wyświetla na peektracker.com „Oczekiwanie na przewoźnika J&T Express Germany” (albo po dwóch dniach bez rozpoznania numeru — prośbę o jego sprawdzenie). Gdy strona J&T jest nieosiągalna lub nie zna numeru, Peek odpytuje zewnętrzne serwisy śledzenia przesyłek i pokazuje ich historię w ich własnym brzmieniu. Jeżeli później zarówno śledzenie J&T, jak i serwisy śledzenia odpowiedzą pustą listą dla paczki mającej już zapisane skany, Peek zachowuje dotychczasowe wpisy, a gdy ten stan się utrzymuje, wyświetla komunikat: „Przewoźnik nie ma na razie nowych skanów. Te już znalezione zostają, a Peek sprawdza dalej.”
 
-Peek sprawdza śledzenie co 10 minut, a gdy paczka jest w doręczeniu, co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie J&T; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się w Twoim imieniu z J&T ani ze sklepem, zmienić adresu dostawy ani zamówić ponownego doręczenia.
+Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie J&T; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie może skontaktować się w Twoim imieniu z J&T ani ze sklepem, zmienić adresu dostawy ani zamówić ponownego doręczenia.
 
 ## Najczęstsze pytania o śledzenie J&T Express Germany
 

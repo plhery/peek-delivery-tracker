@@ -3,7 +3,7 @@ title: PostNL śledzenie przesyłki: numer, statusy, doręczenie
 description: Śledzenie przesyłki PostNL: jak wygląda numer z 3S lub NL, co znaczą statusy na postnl.post, kto doręcza paczkę w Polsce i co zrobić, gdy utknie po drodze.
 slug: postnl-sledzenie-przesylki
 published: 2026-10-22
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 PostNL to holenderska poczta. Wysyła za granicę paczki z holenderskich sklepów, a przez Spring GDS, swój oddział międzynarodowy, przewozi też przesyłki sprzedawców internetowych z całego świata. Paczkę śledzisz na [postnl.post](https://postnl.post/), międzynarodowej stronie PostNL po angielsku, albo wklejając numer w polu powyżej. W Polsce doręcza ją zwykle Poczta Polska, a paczki Parcel EU z kodem 3S partner PostNL. Numer znajdziesz w e-mailu o wysyłce ze sklepu.
@@ -84,7 +84,7 @@ W pozostałych sprawach najszybciej pomoże sklep albo platforma, na której kup
 
 Peek odczytuje postnl.post. Widzisz status, historię z krajem każdego skanu, godzinę doręczenia i kraj docelowy. Godziny skanów Peek odczytuje według czasu lokalnego każdego kraju i pokazuje w strefie czasowej Twojego urządzenia. PostNL nie podaje przewidywanej daty doręczenia ani nadawcy. Przy numerze z NL, gdy PostNL wskaże Polskę jako cel, Peek pyta też Pocztę Polską o ten sam numer i przełącza się na nią, gdy pokaże nowsze skany. Gdy PostNL nie podaje kraju docelowego, Peek bierze Twój kraj: w aplikacji na iPhone'a ustawiony region, w przeglądarce kraj, z którego dodano paczkę. Kodów 3S z 13 znakami postnl.post nie przyjmuje, więc gdy nie wypełnisz dla nich opcjonalnego pola „Kod pocztowy odbiorcy” (z krajem doręczenia), Peek szuka paczki w [uniwersalnych serwisach śledzenia](guide:universal-tracker); gdy je wypełnisz, najpierw pyta własne śledzenie PostNL.
 
-Peek sprawdza PostNL co 30 minut, także gdy paczka jest w doręczeniu. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Peek nie skontaktuje się za Ciebie z PostNL, Pocztą Polską ani ze sklepem.
+Peek sprawdza PostNL nawet co 30 minut, także gdy paczka jest w doręczeniu. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Peek nie skontaktuje się za Ciebie z PostNL, Pocztą Polską ani ze sklepem.
 
 ## Pytania o śledzenie przesyłki PostNL
 

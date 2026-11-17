@@ -3,7 +3,7 @@ title: JCEX śledzenie przesyłki: numer JCZ, statusy, kto doręcza
 description: Paczka JCEX z Chin: jak wygląda numer JCZ, co znaczą statusy po angielsku i chińsku, kto doręcza ją w Polsce i do kogo pisać, gdy utknie.
 slug: jcex-sledzenie
 published: 2026-10-23
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) to chińska firma logistyczna z Hangzhou, która wysyła za granicę paczki sprzedawców internetowych, a w kraju odbiorcy przekazuje je przewoźnikowi na ostatni odcinek. Paczkę śledzisz na stronie JCEX, [track.jcex.com](https://track.jcex.com/), albo wklejasz numer w pole powyżej. Numer dostajesz od sklepu, razem z danymi wysyłki zamówienia.
@@ -96,7 +96,7 @@ Peek odczytuje śledzenie JCEX i pokazuje status, historię z miejscami skanów 
 
 JCEX nie podaje nazwy przewoźnika doręczającego, a Peek nie odczytuje pola „跟踪单号”, więc śledzi paczkę numerem JCEX do końca i nie przełącza się na przewoźnika w Polsce. Nie pokazuje też przewidywanej daty doręczenia, nazwy usługi ani potwierdzenia doręczenia.
 
-Śledzenie jest sprawdzane co 10 minut, a co 2 minuty, gdy paczka jest w doręczeniu (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie JCEX; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z JCEX ani ze sklepem.
+Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie JCEX; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z JCEX ani ze sklepem.
 
 ## Pytania o śledzenie JCEX
 

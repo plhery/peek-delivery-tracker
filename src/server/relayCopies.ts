@@ -90,6 +90,17 @@ function wholeHours(at: number, other: number): boolean {
   return (Math.floor(at / unit) - Math.floor(other / unit)) * unit % HOUR_MS === 0;
 }
 
+/**
+ * How far a copy lies from a scan. A time on a minute's first second beside one with seconds is the minute a carrier
+ * keeping minutes cut it to, and stands for that whole minute: La Poste's 12:05 tells DHL's 12:05:38, not its 12:04:38.
+ */
+function relayGap(at: number, other: number): number {
+  const onMinute = (time: number) => time % MINUTE_MS === 0;
+  if (onMinute(at) === onMinute(other)) return Math.abs(at - other);
+  const [minute, exact] = onMinute(at) ? [at, other] : [other, at];
+  return exact < minute ? minute - exact : Math.max(0, exact - (minute + MINUTE_MS - 1));
+}
+
 /** Whether two times lie one to `TWIN_HOURS` whole hours apart, to the second. */
 function twinHours(at: number, other: number): boolean {
   const gap = Math.abs(Math.floor(at / SECOND_MS) - Math.floor(other / SECOND_MS)) * SECOND_MS;
@@ -144,7 +155,8 @@ function sameSecond(copy: { at: number; words: string[]; text: string }, scan: {
 /**
  * The relay pairs of a handed-over parcel, each copy with the id of the scan it repeats. The earlier carrier's scans
  * repeat a scan of another source at the same stage within a minute, or in any stage at the same second, the closest
- * pairs first and, of pairs as close, those telling the same words, then the same stage. Then, in any stage, a row on
+ * pairs first (`relayGap`: a row on a minute's first second is as close as can be to a scan within that minute) and, of
+ * pairs as close, the nearer to the second, then those telling the same words, then the same stage. Then, in any stage, a row on
  * a minute's first second repeats one with seconds within that minute (`sameMinuteScan`, which the sync's
  * `relayedScans` shares). Then a row of the new carrier placed only in a country
  * the earlier carrier delivers in, and the new carrier does not, repeats the earlier carrier's latest scan of its
@@ -168,7 +180,7 @@ export function relayCopies(row: JsonObject): Map<string, string> {
   const candidates = scans.filter((copy) => copy.source === earlier).flatMap((copy) => scans
     .filter((scan) => scan.source !== earlier
       && ((scan.stage === copy.stage && Math.abs(scan.at - copy.at) <= RELAY_WINDOW_MS) || sameSecond(copy, scan)))
-    .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
+    .map((scan) => ({ copy, scan, gap: relayGap(copy.at, scan.at) })));
   const minutes = scans.filter((copy) => copy.source === earlier).flatMap((copy) => scans
     .filter((scan) => scan.source !== earlier && sameMinuteScan(copy.at, copy.words, scan.at, scan.words))
     .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
@@ -187,7 +199,8 @@ export function relayCopies(row: JsonObject): Map<string, string> {
   // Of pairs as close, those telling the same words, then the same stage, so that each copy goes under its own scan.
   const unlike = ({ copy, scan }: (typeof candidates)[number]) => (copy.text === scan.text ? 0 : 2) + (copy.stage === scan.stage ? 0 : 1);
   for (const list of [candidates, minutes, exchanged, twins]) {
-    list.sort((a, b) => a.gap - b.gap || unlike(a) - unlike(b) || a.copy.at - b.copy.at
+    const apart = ({ copy, scan }: (typeof candidates)[number]) => Math.abs(scan.at - copy.at);
+    list.sort((a, b) => a.gap - b.gap || apart(a) - apart(b) || unlike(a) - unlike(b) || a.copy.at - b.copy.at
       || a.copy.id.localeCompare(b.copy.id) || a.scan.id.localeCompare(b.scan.id));
     for (const { copy, scan } of list) {
       if (paired.has(copy.id) || paired.has(scan.id)) continue;

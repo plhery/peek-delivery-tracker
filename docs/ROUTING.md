@@ -935,7 +935,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   pairs two scans of their own. A row of the earlier carrier at the same stage as another
   source's, within 60 s either way, or in any stage at the same second, is served with
   `relay_of`, that row's id (closest pairs first, then those in the same words, then in the
-  same stage, one pair per row): both carriers tell a
+  same stage, one pair per row; a row on a minute's first second is closest to a row with
+  seconds within that minute, so La Poste's 12:05 pairs with DHL's 12:05:38, not its
+  12:04:38): both carriers tell a
   hand-over at one second, each in its own stage (4PX's "Parcel handed to dpd" and DPD's
   acceptance). At that second the places must not conflict, and on a minute's first second,
   which a carrier keeping minutes gives every scan, they must share a word or tell the same

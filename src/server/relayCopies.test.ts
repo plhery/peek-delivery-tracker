@@ -152,6 +152,18 @@ describe('relayCopies', () => {
     ]))).toEqual(new Map([['copy-1', 'sorted'], ['copy-2', 'accepted']]));
   });
 
+  it('pairs a row cut to the minute with the scan within that minute, not a nearer one of the minute before', () => {
+    // La Poste cuts DHL's scans of two minutes running to the minute: 12:05 is DHL's 12:05:38, not its 12:04:38.
+    expect(relayCopies({
+      carrier: 'la-poste', carrier_data: { original_carrier: 'la-poste', active_tracking_carrier: 'dhl' }, tracking_events: [
+        scan('first', 'dhl', 'in_transit', '2026-10-24T12:04:38Z'),
+        scan('first-copy', 'la-poste', 'in_transit', '2026-10-24T12:04:00Z'),
+        scan('second', 'dhl', 'in_transit', '2026-10-24T12:05:38Z'),
+        scan('second-copy', 'la-poste', 'in_transit', '2026-10-24T12:05:00Z'),
+      ],
+    })).toEqual(new Map([['first-copy', 'first'], ['second-copy', 'second']]));
+  });
+
   it('pairs the new post\'s record of a step the earlier one sent it under that post\'s latest scan of the stage', () => {
     // Slovenská pošta stamps Poczta Polska's posting and departure when their messages arrive, placed in Poland alone.
     const placed = (id: string, source: string, stage: string, at: string, location: string) => ({ ...scan(id, source, stage, at), location });

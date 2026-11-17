@@ -100,8 +100,9 @@ export const config = {
     {
       // The example email is not a page of the app: it answers with a policy and a lifetime of its own.
       // Nor are the files written for crawlers and other sites' checks, which every host answers itself, the IndexNow key's among them.
-      // Nor are the map's tiles, which are kept like the scripts, nor what assistants call from their servers.
-      source: '/((?!api|health|_next/static|_next/image|icons|atlas|sw\\.js|push-sw\\.js|og(?:-[a-z]{2}(?:-[a-z]{2})?)?\\.png|favicon\\.ico|robots\\.txt|sitemap\\.xml|[0-9a-f]{32}\\.txt|\\.well-known/(?:apple-app-site-association|assetlinks\\.json|oauth-|openai-apps-challenge)|mcp|oauth/(?:token|register|revoke)|email/example).*)',
+      // Nor are the map's tiles, which are kept like the scripts, nor what assistants call from their servers, nor the
+      // client documents Peek reads back from its own address.
+      source: '/((?!api|health|_next/static|_next/image|icons|atlas|sw\\.js|push-sw\\.js|og(?:-[a-z]{2}(?:-[a-z]{2})?)?\\.png|favicon\\.ico|robots\\.txt|sitemap\\.xml|[0-9a-f]{32}\\.txt|\\.well-known/(?:apple-app-site-association|assetlinks\\.json|oauth-|openai-apps-challenge)|mcp|oauth/(?:token|register|revoke|clients/)|email/example).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'purpose', value: 'prefetch' },

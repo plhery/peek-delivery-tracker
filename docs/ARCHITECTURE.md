@@ -420,7 +420,10 @@ Key server modules:
     last two labels), and closes a connection as soon as it refuses the answer. It keeps a
     document an hour, at most 200 and 10 of one site, pushing out the one used least
     recently; those of clients whose tokens reach `/mcp` go last, and once due stand in for a
-    day while a fresh one can't be read.
+    day while a fresh one can't be read. The server serves one itself for the Home Assistant
+    integration, `/oauth/clients/home-assistant.json`, since every Home Assistant answers at
+    the same redirect (`my.home-assistant.io`), and reads it back through the public address
+    as any other.
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`) and

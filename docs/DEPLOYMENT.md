@@ -310,8 +310,8 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   ([AUTHENTICATION.md](AUTHENTICATION.md)).
 - **Cloudflare**: assistants call `/mcp`, `/api/parcels`, `/oauth/token`,
   `/oauth/register`, `/oauth/revoke` and `/.well-known/oauth-*` from their own servers,
-  as do scripts with a personal token, and OpenAI fetches
-  `/.well-known/openai-apps-challenge`. A challenge there
+  as do scripts with a personal token, the server reads its own `/oauth/clients/*` through
+  the public address, and OpenAI fetches `/.well-known/openai-apps-challenge`. A challenge there
   (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
   so skip them for these paths with a custom rule; keep rate limiting.
 - **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
@@ -320,7 +320,9 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   shares and what to do when a connection fails. Without the setting that page is a 404. It opens
   `/oauth/authorize` to sign in and ask. `/mcp` and `GET /api/parcels` take the access
   token it gets as `Authorization: Bearer <token>`, and a personal token the same way while
-  those are on.
+  those are on. The Home Assistant integration signs in as
+  `<origin>/oauth/clients/home-assistant.json`, so it needs an origin that is HTTPS on a
+  public address without a port.
 
 ## Moving to another host
 

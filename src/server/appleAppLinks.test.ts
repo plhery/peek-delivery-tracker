@@ -66,9 +66,10 @@ describe('the app site association', () => {
     expect(pages.test('/.well-known/security.txt')).toBe(true);
     expect(pages.test('/p/k7Qm2xW9bTfR')).toBe(true);
     expect(pages.test('/demo')).toBe(true);
-    // Nor are the endpoints assistants call from their servers, while the page that asks the owner is one.
+    // Nor are the endpoints assistants call from their servers, or the client documents Peek reads back, while the page
+    // that asks the owner is one.
     for (const path of ['/mcp', '/oauth/token', '/oauth/register', '/oauth/revoke', '/.well-known/oauth-authorization-server',
-      '/.well-known/oauth-protected-resource/mcp']) expect(pages.test(path)).toBe(false);
+      '/.well-known/oauth-protected-resource/mcp', '/oauth/clients/home-assistant.json']) expect(pages.test(path)).toBe(false);
     expect(pages.test('/oauth/authorize')).toBe(true);
   });
 });

@@ -1,6 +1,7 @@
 import type { LookupAddress } from 'node:dns';
 import type { RequestOptions } from 'node:https';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import { GET as homeAssistantDocument } from '../../../app/oauth/clients/home-assistant.json/route';
 import type { SupabaseServiceClient } from '../supabase';
 import {
   clientFromDocument,
@@ -75,6 +76,7 @@ afterEach(() => {
   network.addresses.clear();
   network.requests.length = 0;
   vi.useRealTimers();
+  vi.unstubAllEnvs();
 });
 
 describe('redirect addresses a client may register', () => {
@@ -282,6 +284,21 @@ describe('finding a client', () => {
     forgetClientDocuments();
     await findClient(client, id);
     expect(network.requests).toHaveLength(2);
+  });
+
+  it('reads the document Peek serves for its Home Assistant integration as any other, from Peek\'s own address', async () => {
+    vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example');
+    vi.stubEnv('ASSISTANT_ACCOUNTS', '*');
+    const homeAssistant = 'https://peek.example/oauth/clients/home-assistant.json';
+    const served = homeAssistantDocument();
+    const body = await served.text();
+    network.documents.set(homeAssistant, { status: served.status, type: served.headers.get('content-type')!, body });
+    const client: AssistantClient = {
+      id: homeAssistant, name: 'Home Assistant', uri: 'https://peek.example/assistants', redirectUris: ['https://my.home-assistant.io/redirect/oauth'],
+    };
+    expect(clientFromDocument(homeAssistant, JSON.parse(body))).toEqual(client);
+    await expect(findClient(service().client, homeAssistant)).resolves.toEqual(client);
+    expect(network.requests.map(({ url }) => url)).toEqual([homeAssistant]);
   });
 
   it('serves no client from a document that is missing, not JSON, too large or for another id, and tries again a minute later', async () => {

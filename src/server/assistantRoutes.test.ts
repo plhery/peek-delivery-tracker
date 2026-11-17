@@ -11,6 +11,7 @@ import { GET as readAssistants, POST as createToken } from '../../app/api/accoun
 import * as tokenApi from '../../app/api/parcels/route';
 import { GET as tokenParcels } from '../../app/api/parcels/route';
 import { DELETE as mcpDelete, GET as mcpGet, POST as mcpPost } from '../../app/mcp/route';
+import { GET as homeAssistant } from '../../app/oauth/clients/home-assistant.json/route';
 import { POST as register } from '../../app/oauth/register/route';
 import { POST as revoke } from '../../app/oauth/revoke/route';
 import { POST as token } from '../../app/oauth/token/route';
@@ -588,6 +589,23 @@ describe('the OAuth endpoints', () => {
     expect(await authorizationServer().json()).toMatchObject({ issuer: 'https://peek.example', token_endpoint: 'https://peek.example/oauth/token' });
   });
 
+  it('publish the Home Assistant integration\'s client document at the address it names as its id', async () => {
+    const response = homeAssistant();
+    expect(response.status).toBe(200);
+    expect(response.headers.get('content-type')).toMatch(/^application\/json/);
+    expect(response.headers.get('cache-control')).toBe('public, max-age=3600');
+    expect(await response.json()).toEqual({
+      client_id: 'https://peek.example/oauth/clients/home-assistant.json',
+      client_name: 'Home Assistant',
+      client_uri: 'https://peek.example/assistants',
+      redirect_uris: ['https://my.home-assistant.io/redirect/oauth'],
+      grant_types: ['authorization_code', 'refresh_token'],
+      response_types: ['code'],
+      token_endpoint_auth_method: 'none',
+      scope: 'parcels:read parcels:write',
+    });
+  });
+
   it('trade a code for tokens from a form, and refuse JSON with an OAuth error', async () => {
     const redeem = vi.spyOn(service, 'redeemAssistantCode').mockResolvedValue({ userId, grantId: '6c000000-0000-4000-a000-0000000000f1', scopes: ['parcels:read'] });
     const verifier = 'v'.repeat(64);
@@ -659,7 +677,7 @@ describe('the OAuth endpoints', () => {
   it('and the MCP endpoint are not there when no account may connect', async () => {
     vi.stubEnv('ASSISTANT_ACCOUNTS', '');
     expect((await mcp(connect(['parcels:read']), 'tools/list')).status).toBe(404);
-    for (const handler of [protectedResource, mcpResource, authorizationServer]) expect(handler().status).toBe(404);
+    for (const handler of [protectedResource, mcpResource, authorizationServer, homeAssistant]) expect(handler().status).toBe(404);
     expect((await token(form('/oauth/token', { grant_type: 'refresh_token' }), none)).status).toBe(404);
     expect((await revoke(form('/oauth/revoke', { token: 'x' }), none)).status).toBe(404);
     expect((await register(new NextRequest('https://peek.example/oauth/register', {

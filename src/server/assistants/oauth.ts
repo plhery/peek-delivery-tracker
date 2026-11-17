@@ -59,6 +59,29 @@ export function authorizationServerMetadata(settings: AssistantSettings) {
   };
 }
 
+/** Where Peek serves the Client ID Metadata Document of its Home Assistant integration. */
+export function homeAssistantClientId(settings: Pick<AssistantSettings, 'issuer'>): string {
+  return `${settings.issuer}/oauth/clients/home-assistant.json`;
+}
+
+/**
+ * The Home Assistant integration's metadata document. Every Home Assistant answers at the same redirect, its own
+ * `my.home-assistant.io`, so Peek publishes the document the integration names as its client id, and reads it back from
+ * its public address as any client's.
+ */
+export function homeAssistantClientDocument(settings: Pick<AssistantSettings, 'issuer'>) {
+  return {
+    client_id: homeAssistantClientId(settings),
+    client_name: 'Home Assistant',
+    client_uri: `${settings.issuer}/assistants`,
+    redirect_uris: ['https://my.home-assistant.io/redirect/oauth'],
+    grant_types: ['authorization_code', 'refresh_token'],
+    response_types: ['code'],
+    token_endpoint_auth_method: 'none',
+    scope: SCOPES.join(' '),
+  };
+}
+
 export class OAuthRequestError extends Error {
   constructor(readonly error: string, message: string) {
     super(message);

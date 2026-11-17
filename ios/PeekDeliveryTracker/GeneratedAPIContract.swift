@@ -4630,6 +4630,7 @@ struct AddByEmail: Codable, Equatable, Hashable, Sendable {
     var lastAdded: Int? = nil
     var recent: [AddByEmailEntry]
     var confirmation: ForwardingConfirmation? = nil
+    var notify: Bool? = nil
 }
 
 struct AddByEmailEntry: Codable, Equatable, Hashable, Sendable {

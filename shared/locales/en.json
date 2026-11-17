@@ -1315,6 +1315,8 @@
   "inbox.filter.copy": "Copy search",
   "inbox.recent": "Recent emails",
   "inbox.empty": "No email yet. Forward one to your address and it shows up here.",
+  "inbox.notify": "Notify me when an email adds a parcel",
+  "inbox.notify.hint": "Once per parcel, on each device with Peek’s notifications on.",
   "inbox.result.added.one": "{{count}} parcel added",
   "inbox.result.added.few": "{{count}} parcels added",
   "inbox.result.added.many": "{{count}} parcels added",

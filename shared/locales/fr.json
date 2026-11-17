@@ -1315,6 +1315,8 @@
   "inbox.filter.copy": "Copier la recherche",
   "inbox.recent": "Derniers e-mails",
   "inbox.empty": "Aucun e-mail pour l’instant. Transfère-en un à ton adresse et il s’affichera ici.",
+  "inbox.notify": "M’avertir quand un e-mail ajoute un colis",
+  "inbox.notify.hint": "Une fois par colis, sur chaque appareil où les notifications de Peek sont activées.",
   "inbox.result.added.one": "{{count}} colis ajouté",
   "inbox.result.added.few": "{{count}} colis ajoutés",
   "inbox.result.added.many": "{{count}} colis ajoutés",

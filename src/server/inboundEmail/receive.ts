@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { wakeEmailAddedWorker } from '../background';
 import { ownSenderAddress } from '../email/config';
 import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
 import { addParcelsFromText, type ParcelAddition } from '../parcelsFromText';
@@ -57,7 +58,22 @@ async function nameFollowedParcels(
   return named;
 }
 
-/** Keeps the email seven days, to learn to read emails better. A failure is reported, and the email's parcels stay. */
+/** Keeps the email 30 days, to learn to read emails better. A failure is reported, and the email's parcels stay. */
+/**
+ * The parcels the email added start unseen, and are notified to the account's browsers and phones unless it switched
+ * that off. A failure leaves them added, seen and unannounced, and is reported.
+ */
+async function announce(service: SupabaseServiceClient, userId: string, additions: readonly ParcelAddition[]): Promise<void> {
+  const added = additions.flatMap((addition) => (addition.outcome === 'added' ? [addition.packageId] : []));
+  if (!added.length) return;
+  try {
+    if (await service.parcelsAddedByEmail(userId, added) > 0) wakeEmailAddedWorker();
+  } catch (error) {
+    logOperationalEvent('inbound_email_announce_failed', { error_type: errorType(error) }, 'error');
+    captureOperationalError(error, { component: 'inbound-email', operation: 'announce' });
+  }
+}
+
 async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Array): Promise<void> {
   try {
     await service.keepInboundMail(userId, raw);
@@ -72,7 +88,7 @@ async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Ar
  * counts it against the allowances and adds the numbers it holds, labelled with its sender, or with the shop a
  * carrier's email names. A followed parcel without a name takes that name. An email that says its parcel was
  * delivered adds none. Gmail's request to confirm forwarding is kept for the owner instead, and the server's own
- * emails are dropped. What an email did is noted with its sender's name, and the email itself is kept seven days,
+ * emails are dropped. What an email did is noted with its sender's name, and the email itself is kept 30 days,
  * but for one an allowance or the parcel limit stopped and Gmail's request, which holds a code.
  */
 export async function receiveInboundMail(
@@ -121,6 +137,7 @@ export async function receiveInboundMail(
   const delivered = deliveredSubject(mail.subject);
   const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered });
   const named = await nameFollowedParcels(service, userId, additions, label);
+  await announce(service, userId, additions);
   const result = mailResult(additions, { named, delivered });
   const added = additions.filter(({ outcome }) => outcome === 'added').length;
   await service.recordInboundMail(userId, result, added, null, label || mail.sender);

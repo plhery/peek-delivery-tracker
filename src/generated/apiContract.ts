@@ -63849,6 +63849,7 @@ export interface ApiAddByEmail {
   "lastAdded": number | null;
   "recent": Array<ApiAddByEmailEntry>;
   "confirmation": ApiForwardingConfirmation | null;
+  "notify"?: boolean;
 }
 
 export interface ApiAddByEmailEntry {

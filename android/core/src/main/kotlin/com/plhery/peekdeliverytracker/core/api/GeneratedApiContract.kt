@@ -4555,6 +4555,7 @@ data class AddByEmail(
     val lastAdded: Int? = null,
     val recent: List<AddByEmailEntry>,
     val confirmation: ForwardingConfirmation? = null,
+    val notify: Boolean? = null,
 )
 
 @Serializable

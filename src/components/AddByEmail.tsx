@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import type { ApiAddByEmail, ApiAddByEmailEntry, ApiAddByEmailResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
-import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
+import { closeAddByEmail, openAddByEmail, readAddByEmail, setAddByEmailNotify } from '../lib/addByEmail';
 import type { ApiAuth } from '../lib/apiClient';
 import {
   FILTER_LANGUAGES, GMAIL_SETTINGS_LINK, ICLOUD_MAIL_LINK, MAIL_SERVICES, OUTLOOK_RULES_LINK, filterLanguagesFor, gmailFilter,
@@ -194,8 +194,8 @@ function ForwardingSteps({ email, confirmation }: { email?: string; confirmation
 
 /**
  * The forwarding address's page in Settings. Forwarding one email by hand is all it asks: the address to copy, then
- * what the last emails did. Having the mail service forward by itself, with its steps, stays folded away until wanted,
- * or until Gmail's confirmation is waiting.
+ * what the last emails did, and whether each parcel an email adds is notified (on unless switched off). Having the mail
+ * service forward by itself, with its steps, stays folded away until wanted, or until Gmail's confirmation is waiting.
  */
 export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
   apiAuth: ApiAuth;
@@ -226,6 +226,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
   }
 
   const recent = inbox ? recentEmails(inbox) : [];
+  const notify = inbox?.notify !== false;
   return <>
     <p className="settings-description">{t('inbox.intro')}</p>
     {error && <p className="sheet__error" role="alert">{error}</p>}
@@ -247,6 +248,18 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
         {recent.some(({ result }) => result === 'none') && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
         {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
       </section>
+      <div className="settings-box">
+        <button className="settings-row notification-email__switch" type="button" role="switch" aria-checked={notify}
+          aria-labelledby="add-by-email-notify" aria-describedby="add-by-email-notify-hint" aria-busy={working || undefined} disabled={working}
+          onClick={() => void run(() => setAddByEmailNotify(apiAuth, !notify))}>
+          <Icon name="bell" />
+          <span className="notification-email__text">
+            <strong id="add-by-email-notify">{t('inbox.notify')}</strong>
+            <small id="add-by-email-notify-hint">{t('inbox.notify.hint')}</small>
+          </span>
+          <span className="settings-switch" aria-hidden="true" />
+        </button>
+      </div>
       <details className="settings-box add-by-email__auto" open={Boolean(inbox.confirmation) || undefined}>
         <summary className="settings-row"><Icon name="settings" /><span>{t('inbox.auto.title')}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
         <div className="add-by-email__auto-body">

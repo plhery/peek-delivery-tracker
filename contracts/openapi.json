@@ -64109,6 +64109,53 @@
           }
         }
       },
+      "patch": {
+        "operationId": "setAddByEmailNotify",
+        "description": "Switches the notification of each parcel an email adds on or off. 404 when the account has no address.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "notify"
+                ],
+                "properties": {
+                  "notify": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The address, with the choice saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddByEmailResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      },
       "delete": {
         "operationId": "closeAddByEmail",
         "description": "Turns adding by email off; emails to the address are dropped.",
@@ -69361,7 +69408,7 @@
       "AddByEmail": {
         "type": "object",
         "additionalProperties": false,
-        "description": "An account's forwarding address for adding parcels by email, and what its last emails did. The emails themselves are kept seven days, then deleted.",
+        "description": "An account's forwarding address for adding parcels by email, and what its last emails did. The emails themselves are kept 30 days, then deleted.",
         "required": [
           "address",
           "createdAt",
@@ -69427,6 +69474,10 @@
                 "type": "null"
               }
             ]
+          },
+          "notify": {
+            "type": "boolean",
+            "description": "Whether each parcel an email adds is notified to the account's browsers and phones. Missing means on."
           }
         }
       },

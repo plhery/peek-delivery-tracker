@@ -1315,6 +1315,8 @@
   "inbox.filter.copy": "Suche kopieren",
   "inbox.recent": "Letzte E-Mails",
   "inbox.empty": "Noch keine E-Mail. Leite eine an deine Adresse weiter, dann erscheint sie hier.",
+  "inbox.notify": "Mitteilung, wenn eine E-Mail ein Paket hinzufügt",
+  "inbox.notify.hint": "Einmal pro Paket, auf jedem Gerät mit eingeschalteten Peek-Mitteilungen.",
   "inbox.result.added.one": "{{count}} Paket hinzugefügt",
   "inbox.result.added.few": "{{count}} Pakete hinzugefügt",
   "inbox.result.added.many": "{{count}} Pakete hinzugefügt",

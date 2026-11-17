@@ -1,11 +1,12 @@
 import { NextRequest } from 'next/server';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { GET as exportAccount } from '../../app/api/account/export/route';
-import { DELETE as closeInbox, GET as readInbox, POST as openInbox } from '../../app/api/account/inbox/route';
+import { DELETE as closeInbox, GET as readInbox, PATCH as notifyInbox, POST as openInbox } from '../../app/api/account/inbox/route';
 import { POST as receive } from '../../app/api/inbound/email/route';
 import contract from '../../contracts/openapi.json';
 import { sign } from '../../ops/cloudflare/inbound-email-worker.js';
 import { SupabaseAuthenticator } from './auth';
+import * as background from './background';
 import { mailResult } from './inboundEmail/receive';
 import * as monitoring from './observability';
 import { addParcelsFromText, trackingNumbersInText, type ParcelAddition } from './parcelsFromText';
@@ -22,6 +23,7 @@ const none = { params: Promise.resolve({}) };
 const earlier = { at: '2026-11-02T09:00:00.000Z', sender: 'Example Shop', result: 'added' as const, added: 1 };
 const mailbox: InboundMailbox = {
   token, createdAt: '2026-11-03T10:00:00.000Z', usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null,
+  notify: true,
 };
 
 beforeEach(() => {
@@ -58,10 +60,11 @@ describe('the account\'s forwarding address', () => {
     vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(mailbox);
     const answer = await (await readInbox(signedIn('GET'), none)).json();
     expect(answer).toEqual({
-      inbox: { address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null },
+      inbox: { address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null, notify: true },
       dailyLimit: 30,
     });
-    expect(Object.keys(answer.inbox).sort()).toEqual([...contract.components.schemas.AddByEmail.required].sort());
+    expect(Object.keys(answer.inbox).sort()).toEqual(Object.keys(contract.components.schemas.AddByEmail.properties).sort());
+    expect(contract.components.schemas.AddByEmail.required).not.toContain('notify');
   });
 
   it('is made once, and renewed only when asked', async () => {
@@ -88,7 +91,28 @@ describe('the account\'s forwarding address', () => {
     vi.spyOn(SupabaseUserClient.prototype, 'getNotificationPreferences').mockResolvedValue({ enabled_stages: [], email_on_delivery: null } as never);
     vi.spyOn(SupabaseUserClient.prototype, 'listDeliveryEmails').mockResolvedValue([]);
     const exported = await (await exportAccount(signedIn('GET'), none)).json();
-    expect(exported.addByEmail).toEqual({ address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null });
+    expect(exported.addByEmail).toEqual({ address: recipient, createdAt: mailbox.createdAt, usedToday: 2, lastMailAt: null, lastResult: null, lastAdded: null, recent: [earlier], confirmation: null, notify: true });
+  });
+
+  it('switches the notification of each parcel an email adds, once the account has an address', async () => {
+    const set = vi.spyOn(SupabaseServiceClient.prototype, 'setInboundMailboxNotify').mockImplementation(async (_, notify) => ({ ...mailbox, notify }));
+    const answer = await (await notifyInbox(signedIn('PATCH', { notify: false }), none)).json();
+    expect(set).toHaveBeenCalledExactlyOnceWith(userId, false);
+    expect(answer).toMatchObject({ inbox: { address: recipient, notify: false }, dailyLimit: 30 });
+    expect(answer.inbox).not.toHaveProperty('token');
+    expect((await notifyInbox(signedIn('PATCH', { notify: 'no' }), none)).status).toBe(400);
+    expect((await notifyInbox(signedIn('PATCH', {}), none)).status).toBe(400);
+    expect(set).toHaveBeenCalledOnce();
+    set.mockResolvedValue(null);
+    expect((await notifyInbox(signedIn('PATCH', { notify: true }), none)).status).toBe(404);
+    vi.stubEnv('INBOUND_EMAIL_ACCOUNTS', 'someone@example.com');
+    expect((await notifyInbox(signedIn('PATCH', { notify: true }), none)).status).toBe(404);
+    expect(set).toHaveBeenCalledTimes(2);
+  });
+
+  it('reads a mailbox from before the choice as notified', async () => {
+    vi.spyOn(SupabaseServiceClient.prototype, 'request').mockResolvedValue({ token, created_at: mailbox.createdAt, used_today: 0, recent: [] });
+    expect((await (await readInbox(signedIn('GET'), none)).json()).inbox.notify).toBe(true);
   });
 
   it('is turned off, even by an account the setting is no longer open to', async () => {
@@ -134,6 +158,7 @@ function account(options: { known?: string[]; allowance?: number } = {}) {
     keep: vi.spyOn(service, 'keepInboundMail').mockResolvedValue(true),
     // A followed parcel has a name unless a test says otherwise.
     name: vi.spyOn(service, 'nameUnnamedPackage').mockResolvedValue(false),
+    announce: vi.spyOn(service, 'parcelsAddedByEmail').mockResolvedValue(0),
   };
 }
 
@@ -147,6 +172,40 @@ describe('an email to a forwarding address', () => {
     expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([[UPS, 'Example Shop', 'ups'], [DHL, 'Example Shop', 'dhl']]);
     expect(db.queue).toHaveBeenCalledWith({ userId, packageId: `new-${UPS}`, reason: 'added' });
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Example Shop');
+  });
+
+  it('marks the parcels it added unseen and wakes their notifications, and announces none it did not add', async () => {
+    const wake = vi.spyOn(background, 'wakeEmailAddedWorker').mockImplementation(() => undefined);
+    let db = account({ known: [UPS] });
+    db.announce.mockResolvedValue(2);
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Your parcels ${UPS} and ${DHL} are on their way.`));
+    expect(db.announce).toHaveBeenCalledExactlyOnceWith(userId, [`new-${DHL}`]);
+    expect(wake).toHaveBeenCalledOnce();
+    // Switched off, or without a device: nothing is queued, and nothing woken.
+    db.announce.mockResolvedValue(0);
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${DHL}`));
+    expect(db.announce).toHaveBeenCalledTimes(2);
+    expect(wake).toHaveBeenCalledOnce();
+    // Followed already, delivered or stopped by a limit: none is announced.
+    vi.restoreAllMocks();
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    db = account({ known: [UPS], allowance: 0 });
+    await posted(mail('Shop <a@example.com>', 'Shipped', `Tracking: ${UPS}`));
+    await posted(mail('Shop <a@example.com>', 'Your parcel has been delivered', `Tracking: ${DHL}`));
+    await posted(mail('Shop <a@example.com>', 'Shipped', `Tracking: ${DHL}`));
+    expect(db.record.mock.calls.map(([, result]) => result)).toEqual(['known', 'delivered', 'limited']);
+    expect(db.announce).not.toHaveBeenCalled();
+  });
+
+  it('keeps the parcels it added when announcing them fails, and reports it', async () => {
+    const db = account();
+    const failure = new SupabaseError('database down', 503);
+    db.announce.mockRejectedValue(failure);
+    const report = vi.spyOn(monitoring, 'captureOperationalError').mockReturnValue(null);
+    expect((await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${UPS}`))).status).toBe(202);
+    expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'inbound-email', operation: 'announce' });
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'Example Shop');
+    expect(db.keep).toHaveBeenCalledOnce();
   });
 
   it('names a carrier\'s parcel after the shop its email carries for, and gives the number its carrier', async () => {

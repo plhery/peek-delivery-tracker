@@ -920,11 +920,12 @@ provider failure in an `AggregateError` so every cause is visible.
   late. A run whose worker died three times is failed by the next claim; the next run closes
   its check-in as `error` before opening its own, so the monitor alerts. Each reclaim
   before that was reported.
-- **Background work**: each run of the sync worker, the scheduler, the friendship
-  notifications and the review queue replay has Sentry scopes and a trace of its own
+- **Background work**: each run of the sync worker, the scheduler, the friendship and
+  email-added notifications and the review queue replay has Sentry scopes and a trace of its own
   (`inBackgroundScope`). A request that wakes a worker leaves its transaction, headers, tags,
   user and trace out of the worker's reports. Their transaction and `background_job` tag name
-  the work: `sync-worker`, `sync-scheduler`, `friendship-notifications` or `review-queues`.
+  the work: `sync-worker`, `sync-scheduler`, `friendship-notifications`,
+  `email-added-notifications` or `review-queues`.
 - **Alerts**: notify on new issues and regressions in `production`, and keep the Cron
   alerts. Avoid "more than 0 times in 5 minutes" rules: they fire on every failed check.
 - **Incidents**: carrier and provider outages open once, from thresholds computed in
@@ -945,10 +946,10 @@ provider failure in an `AggregateError` so every cause is visible.
   owner supplied for a provider logs `provider_input_lookup` with its result.
 - **Database outages**: when the database does not answer (`database_code:unreachable`), or
   its gateway answers 502, 503 or 504, the sync worker's claims, the scheduler and the
-  friendship notifications keep it in the logs. The sync worker reports it once its claims
+  friendship and email-added notifications keep it in the logs. The sync worker reports it once its claims
   have failed for two minutes, and again each time the outage has doubled. A claim the
-  database refuses is also reported at once. The scheduler and the friendship
-  notifications report refusals only. Work that is running when the database goes away
+  database refuses is also reported at once. The scheduler and the friendship and
+  email-added notifications report refusals only. Work that is running when the database goes away
   still reports its own failed writes.
 - **Allowances without an account**: `component:public-allowance` warns once a day when
   an overall allowance is 80% used, and reports an error when it is used up: every visitor

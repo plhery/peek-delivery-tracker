@@ -264,6 +264,9 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/inbound_mail_kept.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/email_added_push.sql"
+
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/assistant_access.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \

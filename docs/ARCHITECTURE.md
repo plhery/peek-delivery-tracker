@@ -376,6 +376,15 @@ Key server modules:
     export holds them all. An email's outcome is its most telling one: a parcel added; then
     the parcel limit, then an allowance, which the owner can act on; a followed parcel named;
     parcels followed already; a delivery told of; nothing.
+  - Each parcel an email adds starts unseen, so the list marks it new once it has a scan
+    (`parcels_added_by_email`: its `seen_at` is the epoch, which its first answer keeps and
+    its opening replaces). It is also notified once, "Added from your email" with its name
+    and carrier, to each browser and phone of the account with notifications on, whichever
+    stages they follow, after quiet hours (`email_added_push_deliveries`,
+    `src/server/emailAddedPush.ts`). One opened, archived or more than twelve hours old is
+    dropped. The address's page switches it off (`PATCH /api/account/inbox`, kept as
+    `inbound_mailboxes.notify_added`). A parcel already followed, a delivered email and a
+    limit add nothing, so nothing is sent.
   - Each email read is kept as it came for 30 days (`private.inbound_mail_kept`), the
     account's newest 100 at most, to learn to read emails better; not one an allowance or the parcel limit stopped, nor
     Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning

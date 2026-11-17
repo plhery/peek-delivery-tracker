@@ -15,6 +15,7 @@ afterEach(() => {
     for (const reader of runtime.readerWorkers) reader.stop();
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
+    runtime.emailAddedWorker.stop();
     runtime.reviews.stop();
   }
   // A request still on its way when the file ends logs after its worker has closed.
@@ -44,6 +45,7 @@ function background(): Runtime {
   // The readers' lane polls too: it finds nothing, and stops with the rest after each test.
   vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
   vi.spyOn(runtime.client, 'claimFriendshipPush').mockResolvedValue([]);
+  vi.spyOn(runtime.client, 'claimEmailAddedPush').mockResolvedValue([]);
   // The review replay starts a minute in, and finds this version's done.
   vi.spyOn(runtime.client, 'claimTrackingReviewRun').mockResolvedValue('done');
   return runtime;

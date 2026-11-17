@@ -25,3 +25,8 @@ export async function closeAddByEmail(auth: ApiAuth): Promise<void> {
   const response = await authenticatedFetch(PATH, auth, { method: 'DELETE' });
   if (!response.ok) throw new Error(`Forwarding address request failed (${response.status})`);
 }
+
+/** Switches the notification of each parcel an email adds on or off. */
+export async function setAddByEmailNotify(auth: ApiAuth, notify: boolean): Promise<ApiAddByEmailResponse> {
+  return answer(await authenticatedFetch(PATH, auth, { method: 'PATCH', body: JSON.stringify({ notify }) }));
+}

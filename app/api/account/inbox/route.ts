@@ -36,6 +36,16 @@ export const POST = apiRoute(async (context) => {
   return json(shown(settings, await service.openInboundMailbox(userId, newInboxToken())), current ? 200 : 201);
 }, { serviceRequired: true });
 
+/** Switches the notification of each parcel an email adds on or off (`{"notify": false}`). */
+export const PATCH = apiRoute(async (context) => {
+  const settings = openSettings(context);
+  const payload = await readJsonObject(context.request);
+  if (typeof payload.notify !== 'boolean') throw new HttpError(400, 'notify must be true or false');
+  const mailbox = await requireService(context).setInboundMailboxNotify(requireUser(context).id, payload.notify);
+  if (!mailbox) throw new HttpError(404, 'Adding by email is off');
+  return json(shown(settings, mailbox));
+}, { serviceRequired: true });
+
 /**
  * Turns adding by email off: the address goes, and emails to it are dropped. An account the setting is no longer
  * open to may still do it.

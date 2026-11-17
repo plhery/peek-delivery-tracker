@@ -2,12 +2,12 @@ import { fireEvent, render, screen, waitFor, within } from '@testing-library/rea
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ApiAddByEmail, ApiAddByEmailResponse } from '../generated/apiContract';
-import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
+import { closeAddByEmail, openAddByEmail, readAddByEmail, setAddByEmailNotify } from '../lib/addByEmail';
 import { gmailFilter } from '../lib/emailFilter';
 import { AccountMenu } from './AccountMenu';
 import { AddByEmailPage } from './AddByEmail';
 
-vi.mock('../lib/addByEmail', () => ({ readAddByEmail: vi.fn(), openAddByEmail: vi.fn(), closeAddByEmail: vi.fn() }));
+vi.mock('../lib/addByEmail', () => ({ readAddByEmail: vi.fn(), openAddByEmail: vi.fn(), closeAddByEmail: vi.fn(), setAddByEmailNotify: vi.fn() }));
 vi.mock('./NotificationControl', () => ({ NotificationControl: () => null }));
 
 const apiAuth = { userId: 'user-a', getAccessToken: async () => 'token' };
@@ -61,6 +61,34 @@ describe('adding parcels by email in Settings', () => {
     expect(screen.getByRole('button', { name: 'Copied' })).toBeInTheDocument();
     // Pip, peeking over the address, smiles once it is copied.
     expect(screen.getByText(inbox.address).closest('.pip-perch')).toHaveAttribute('data-happy', 'true');
+  });
+
+  it('notifies each parcel an email adds until switched off, and says so for an address from before the choice', async () => {
+    const onChange = vi.fn();
+    vi.mocked(setAddByEmailNotify).mockResolvedValue(offer({ ...inbox, notify: false }));
+    const user = userEvent.setup();
+    const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={onChange} />);
+    const notify = screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' });
+    expect(notify).toHaveAttribute('aria-checked', 'true');
+    expect(notify).toHaveAccessibleDescription('Once per parcel, on each device with Peek’s notifications on.');
+    await user.click(notify);
+    expect(setAddByEmailNotify).toHaveBeenCalledExactlyOnceWith(apiAuth, false);
+    expect(onChange).toHaveBeenCalledWith(offer({ ...inbox, notify: false }));
+    rerender(<AddByEmailPage apiAuth={apiAuth} offer={offer({ ...inbox, notify: false })} onChange={onChange} />);
+    expect(screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' })).toHaveAttribute('aria-checked', 'false');
+    await user.click(screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' }));
+    expect(setAddByEmailNotify).toHaveBeenLastCalledWith(apiAuth, true);
+  });
+
+  it('keeps the switch as it was when saving the choice fails', async () => {
+    vi.mocked(setAddByEmailNotify).mockRejectedValue(new Error('offline'));
+    const onChange = vi.fn();
+    const user = userEvent.setup();
+    render(<AddByEmailPage apiAuth={apiAuth} offer={offer({ ...inbox, notify: true })} onChange={onChange} />);
+    await user.click(screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' }));
+    expect(await screen.findByRole('alert')).toBeInTheDocument();
+    expect(onChange).not.toHaveBeenCalled();
+    expect(screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' })).toHaveAttribute('aria-checked', 'true');
   });
 
   it('offers the filter for the languages the reader picks, and copies it', async () => {

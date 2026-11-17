@@ -162,6 +162,7 @@ function inboundMailbox(value: unknown): InboundMailbox | null {
     confirmation: confirmedAt
       ? { code: text(row.confirmation_code), link: text(row.confirmation_link), receivedAt: confirmedAt }
       : null,
+    notify: row.notify_added !== false,
   };
 }
 
@@ -333,6 +334,8 @@ export interface InboundMailbox {
   recent: InboundMailEntry[];
   /** What Gmail sent to confirm forwarding, for the owner to finish its setup. */
   confirmation: { code: string | null; link: string | null; receivedAt: string } | null;
+  /** Whether each parcel an email adds is notified to the account's browsers and phones. */
+  notify: boolean;
 }
 
 export type InboundMailResult = 'added' | 'known' | 'named' | 'delivered' | 'none' | 'limited' | 'full' | 'confirmation';
@@ -1408,6 +1411,36 @@ export class SupabaseServiceClient extends SupabaseClient {
   /** Takes the account's forwarding address away: emails to it are dropped from then on. */
   async closeInboundMailbox(userId: string): Promise<void> {
     await this.request('/rest/v1/rpc/close_inbound_mailbox', { method: 'POST', body: { p_user_id: userId } });
+  }
+
+  /** Switches the notification of each parcel an email adds on or off. Null for an account without an address. */
+  async setInboundMailboxNotify(userId: string, notify: boolean): Promise<InboundMailbox | null> {
+    return inboundMailbox(await this.request('/rest/v1/rpc/set_inbound_mailbox_notify', {
+      method: 'POST', body: { p_user_id: userId, p_notify: notify },
+    }));
+  }
+
+  /**
+   * The parcels an email just added to the account: each starts unseen and, unless the account switched it off, is
+   * queued to be notified to each of its browsers and phones. Returns how many notifications were queued.
+   */
+  async parcelsAddedByEmail(userId: string, packageIds: readonly string[]): Promise<number> {
+    const queued = await this.request('/rest/v1/rpc/parcels_added_by_email', {
+      method: 'POST', body: { p_user_id: userId, p_package_ids: packageIds },
+    });
+    return typeof queued === 'number' ? queued : 0;
+  }
+
+  async claimEmailAddedPush(web: boolean, native: boolean, fcm = false, unifiedpush = false, inbox = false): Promise<JsonObject[]> {
+    return rows(await this.request('/rest/v1/rpc/claim_email_added_push', {
+      method: 'POST', body: { p_web: web, p_native: native, p_limit: 10, p_fcm: fcm, p_unifiedpush: unifiedpush, p_inbox: inbox },
+    }));
+  }
+
+  async finishEmailAddedPush(id: string, lease: string, success: boolean): Promise<void> {
+    await this.request('/rest/v1/rpc/finish_email_added_push', {
+      method: 'POST', body: { p_id: id, p_lease: lease, p_success: success },
+    });
   }
 
   /** The account a forwarding address's token names, or null. Counts nothing. */

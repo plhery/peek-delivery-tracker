@@ -36,9 +36,10 @@ using Peek involves.
   turned it on, the parcels you muted for it, and a record of each of these
   emails: the parcel, whether it told a delivery or a parcel ready for pickup,
   when it was sent and whether sending worked.
-- When you turn on adding parcels by email: your forwarding address, how many
-  emails reached it today, of its last twenty emails when each came, the
-  sender's name and what it did, and the code and link of a Gmail forwarding
+- When you turn on adding parcels by email: your forwarding address, whether
+  you want a notification for each parcel an email adds, how many emails
+  reached it today, of its last twenty emails when each came, the sender's
+  name and what it did, and the code and link of a Gmail forwarding
   confirmation until the next email. Each email the service reads is kept as it
   came, with your account's id and when it came, for 30 days. It is used to
   learn to read such emails better. An email a limit held back and Gmail's

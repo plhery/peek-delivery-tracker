@@ -46,6 +46,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'This device gets a notification for the steps you chose. Change them any time in Settings › Notifications.',
     friend_title: '{{name}} is in',
     friend_body: 'Your passports are side by side now. Have a peek.',
+    email_added_title: 'Added from your email',
     update: 'Parcel update',
     title_registered: 'Label created',
     title_in_transit: 'On its way',
@@ -83,6 +84,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Dieses Gerät bekommt Mitteilungen für die Schritte, die du gewählt hast. Ändern kannst du sie jederzeit unter Einstellungen › Mitteilungen.',
     friend_title: '{{name}} ist dabei',
     friend_body: 'Eure Reisepässe liegen jetzt nebeneinander. Wirf einen Blick drauf.',
+    email_added_title: 'Aus deiner E-Mail hinzugefügt',
     update: 'Neues vom Paket',
     title_registered: 'Etikett erstellt',
     title_in_transit: 'Unterwegs',
@@ -120,6 +122,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Cet appareil reçoit une notification pour les étapes que tu as choisies. Change-les quand tu veux dans Réglages › Notifications.',
     friend_title: '{{name}} est de la partie',
     friend_body: 'Vos passeports sont maintenant côte à côte. Jette un œil.',
+    email_added_title: 'Ajouté depuis ton e-mail',
     update: 'Des nouvelles du colis',
     title_registered: 'Étiquette créée',
     title_in_transit: 'En route',
@@ -157,6 +160,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Questo dispositivo riceve notifiche per i passaggi che hai scelto. Puoi cambiarli quando vuoi in Impostazioni › Notifiche.',
     friend_title: '{{name}} è nella tua cerchia',
     friend_body: 'I vostri passaporti ora sono fianco a fianco. Dai un’occhiata.',
+    email_added_title: 'Aggiunto dalla tua email',
     update: 'Novità sul pacco',
     title_registered: 'Etichetta creata',
     title_in_transit: 'In viaggio',
@@ -194,6 +198,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Este dispositivo recibe notificaciones de los pasos que has elegido. Cámbialos cuando quieras en Ajustes › Notificaciones.',
     friend_title: '{{name}} se apunta',
     friend_body: 'Vuestros pasaportes ya están uno al lado del otro. Echa un vistazo.',
+    email_added_title: 'Añadido desde tu correo',
     update: 'Novedades del paquete',
     title_registered: 'Etiqueta creada',
     title_in_transit: 'En camino',
@@ -231,6 +236,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Este dispositivo recebe notificações dos passos que escolheste. Podes alterá-los quando quiseres em Definições › Notificações.',
     friend_title: '{{name}} juntou-se a ti',
     friend_body: 'Os vossos passaportes já estão lado a lado. Dá uma espreitadela.',
+    email_added_title: 'Adicionado a partir do teu e-mail',
     update: 'Atualização da encomenda',
     title_registered: 'Etiqueta criada',
     title_in_transit: 'A caminho',
@@ -268,6 +274,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'To urządzenie dostaje powiadomienia o wybranych przez Ciebie krokach. Zmienisz je w każdej chwili tutaj: Ustawienia › Powiadomienia.',
     friend_title: '{{name}} jest już w Twoim kręgu',
     friend_body: 'Wasze paszporty leżą teraz obok siebie. Zerknij.',
+    email_added_title: 'Dodano z Twojego e-maila',
     update: 'Nowe wieści o przesyłce',
     title_registered: 'Zarejestrowana przez nadawcę',
     title_in_transit: 'W drodze',
@@ -305,6 +312,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Este dispositivo recebe notificações das etapas que você escolheu. Altere quando quiser em Configurações › Notificações.',
     friend_title: '{{name}} entrou no seu círculo',
     friend_body: 'Agora seus passaportes estão lado a lado. Dê uma espiada.',
+    email_added_title: 'Adicionado a partir do seu e-mail',
     update: 'Atualização da encomenda',
     title_registered: 'Etiqueta criada',
     title_in_transit: 'A caminho',
@@ -342,6 +350,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: 'Это устройство будет получать уведомления о выбранных вами этапах. Изменить их можно в любой момент: Настройки › Уведомления.',
     friend_title: '{{name}} теперь в вашем круге',
     friend_body: 'Ваши паспорта теперь рядом. Загляните.',
+    email_added_title: 'Добавлено из вашего письма',
     update: 'Новости о посылке',
     title_registered: 'Этикетка создана',
     title_in_transit: 'Уже в пути',
@@ -379,6 +388,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     test_body: '这台设备会收到你所选环节的通知。随时可以在“设置 › 通知”中更改。',
     friend_title: '{{name}} 已加入',
     friend_body: '你们的护照现在并排放在一起了。快去看看吧。',
+    email_added_title: '已从你的邮件添加',
     update: '包裹动态',
     title_registered: '已生成面单',
     title_in_transit: '在路上了',
@@ -468,6 +478,17 @@ export function friendNotificationCopy(language: unknown, name: string): { local
   const copy = PUSH_COPY[locale];
   // A function, so that a nickname with a dollar sign is written as it is.
   return { locale, title: copy.friend_title!.replace('{{name}}', () => name), body: copy.friend_body! };
+}
+
+/**
+ * What tells someone an email they forwarded added a parcel, in the language of the device it goes to: the parcel's
+ * name and its carrier, or the carrier alone. Never its number, like the other notifications.
+ */
+export function emailAddedNotificationCopy(language: unknown, label: unknown, carrier: unknown): { locale: Locale; title: string; body: string } {
+  const locale = notificationLocale(language);
+  const name = notificationText(label, 80);
+  const carrierName = notificationText(carrierDisplayName(carrier, locale), 80);
+  return { locale, title: PUSH_COPY[locale].email_added_title!, body: name ? `${name} · ${carrierName}` : carrierName };
 }
 
 /** One of the app's own words in a notification's language, so both say the same. */

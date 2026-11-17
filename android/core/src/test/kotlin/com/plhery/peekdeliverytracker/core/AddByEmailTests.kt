@@ -72,14 +72,22 @@ class AddByEmailTests {
     fun otherFailuresThrowAsTheAccountsOtherRequestsDo() = runTest {
         val cases = listOf(
             jsonResponse(500) to DeliveryApiError.ServiceFailed::class,
-            jsonResponse(502, """{"error":"Upstream failed"}""") to DeliveryApiError.Service::class,
+            jsonResponse(409, """{"error":"Already linked"}""") to DeliveryApiError.Service::class,
+            // A 502 is the server down, as for every request (Maintenance).
+            jsonResponse(502, """{"error":"Upstream failed"}""") to ServerDown::class,
             jsonResponse(200, "<html></html>") to DeliveryApiError.InvalidResponse::class,
         )
         for ((answer, expected) in cases) {
             val error = runCatching { client(serving(answer)).readAddByEmail() }.exceptionOrNull()
             assertEquals(expected, error?.let { it::class })
         }
-        val offline = runCatching { client(RecordingTransport { throw IOException("offline") }).readAddByEmail() }.exceptionOrNull()
+        // A phone that is offline, not a server that doesn't answer (Maintenance).
+        Maintenance.deviceOnline = { false }
+        val offline = try {
+            runCatching { client(RecordingTransport { throw IOException("offline") }).readAddByEmail() }.exceptionOrNull()
+        } finally {
+            Maintenance.deviceOnline = { true }
+        }
         assertTrue(offline is IOException)
         // A refused sign-in signs out, as anywhere else, rather than reading as no offer.
         val session = TestSession()

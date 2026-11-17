@@ -60100,6 +60100,41 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://cliente.viapajucara.com.br/rastrear"
+  },
+  "ftd-nz": {
+    "displayName": "FTD New Zealand",
+    "aliases": [
+      "新西兰富腾达",
+      "富腾达",
+      "富腾达国际货运代理",
+      "FTD Express (NZ)"
+    ],
+    "countries": [
+      "NZ",
+      "CN"
+    ],
+    "color": "#00a54f",
+    "selectable": true,
+    "timezone": "Pacific/Auckland",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ftd-nz"
+    },
+    "trackingUrlTemplate": "https://www.ftd.nz/query/?code={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.ftd.nz",
+          "ftd.nz"
+        ],
+        "pathPattern": "^/query/?$",
+        "params": [
+          "code"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.ftd.nz/query/"
   }
 } as const;
 
@@ -61924,7 +61959,8 @@ export const CARRIER_IDS = [
   "reunidas-cargas",
   "silpo-pack",
   "sprint-eg",
-  "via-pajucara"
+  "via-pajucara",
+  "ftd-nz"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

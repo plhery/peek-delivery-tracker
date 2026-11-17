@@ -6,7 +6,7 @@ published: 2026-11-02
 updated: 2026-11-17
 ---
 
-R+L Carriers is a freight carrier in the United States. In Peek's code, it picks the freight up from the shipper, moves it from terminal to terminal and delivers it from the destination terminal. If a large order or other freight is coming to you with R+L, you track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. R+L's own tracer is the shipment tracing page on rlcarriers.com.
+R+L Carriers is a freight carrier in the United States. In Peek's code, it picks the freight up from the shipper, moves it from terminal to terminal and delivers it from the destination terminal. If a large order or other freight is coming to you with R+L, you track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. R+L's own tracer is the shipment tracing page on rlcarriers.com: it takes a PRO number or a pickup request ID, up to 25 numbers at a time, and with a MyRLC account, other reference numbers too.
 
 ## R+L Carriers tracking number: the PRO number
 
@@ -47,7 +47,7 @@ Peek's code knows no R+L wording for out for delivery, a missed delivery, a prob
 
 While the freight moves, R+L's tracer gives an expected delivery day, and Peek shows it until the shipment is delivered. R+L's tracer names no other carrier for the delivery, and Peek's code hands the shipment over to none.
 
-Peek couldn't read R+L Carriers' website, so this page gives no delivery times, delivery appointments, attempts or rules for collecting freight at a terminal. Ask the shop or the business that booked the freight how and when it comes to your door: they hold the booking with R+L.
+This page gives no delivery times, delivery appointments, attempts or rules for collecting freight at a terminal. Ask the shop or the business that booked the freight how and when it comes to your door: they hold the booking with R+L.
 
 ## R+L Carriers shipment not found, late, damaged or lost
 
@@ -69,13 +69,17 @@ If tracking says `Delivered` and nothing came, see [delivered but not received](
 
 ## R+L Carriers customer service and contact
 
-As of 1 November 2026, Peek couldn't read R+L Carriers' website, so this page lists no phone number or email: Peek gives only contacts read on a carrier's own pages.
+As read on R+L Carriers' website on 17 November 2026:
+
+- **Phone:** 800-543-5589, the number R+L gives at the top of its pages.
+- **R+L Cares:** a form on R+L's site for an outstanding issue, a question or feedback; R+L says it goes straight to its executive leadership.
+- **Claims:** R+L's site links to Cargo Claims, its instructions on filing a cargo claim.
 
 R+L carries the freight for whoever booked it, so ask them first: the shop for an online order, the sending business for freight between businesses. They hold the booking and can take it up with R+L.
 
 ## Track an R+L Carriers shipment with Peek
 
-A PRO's shape doesn't tell Peek it's R+L's: nine digits fit other carriers too. Paste it all the same: Peek follows more than 3,500 carriers. With the dash before its last digit, Peek asks R+L at once and shows "R+L Carriers has this parcel." when R+L knows the PRO; R+L Carriers is also listed under "Fits this number". Without the dash, press "Change" and search for R+L Carriers by name. On a shipment you've already added, use "Change carrier". Left to itself, Peek doesn't ask R+L about a PRO without the dash at first: for a nine-digit PRO it asks TNT, TForce Freight, XPO and tracking services, and for one with two letters, tracking services only. If a tracking service then shows the freight moving and names R+L Carriers, Peek files the shipment under R+L and asks R+L's tracer on later checks.
+A nine-digit PRO's shape doesn't tell Peek it's R+L's: nine digits fit other carriers too. Paste it all the same: Peek follows more than 3,500 carriers. Peek drops the dash as you add the number, so a PRO reads the same with or without it. For two letters and seven digits, Peek asks R+L at once and shows "R+L Carriers has this parcel." when R+L knows the PRO. For nine digits, it asks TNT, TForce Freight and XPO when the number passes their check, but not R+L: press "Change" and search for R+L Carriers by name. On a shipment you've already added, use "Change carrier". If a tracking service then shows the freight moving and names R+L Carriers, Peek files the shipment under R+L and asks R+L's tracer on later checks.
 
 With the `I` in front, the number fits R+L Carriers and Australia Post: Peek asks both and files the shipment under the one that knows it. A link to R+L's shipment tracing page with the PRO in it (`pro=`) works too: Peek names R+L at once ("Detected carrier").
 
@@ -85,7 +89,7 @@ When R+L's tracer can't be reached or can't read the shipment, Peek asks [tracki
 
 R+L's lines have a date and a time but no time zone. Peek reads each one on the clock of its terminal's town, else of the terminal's state (the main one where a state has more than one), else of the line before or after it, else on Eastern time, and shows every time in your device's time zone.
 
-Peek checks up to every 10 minutes; a shipment with no new line for two days (12 hours while it still shows "Label created" or "Received by carrier") is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact R+L, the shop or the shipper for you, book a delivery or file a claim.
+Peek checks up to every 10 minutes while you have the shipment open, or on its delivery day with notifications on; otherwise, and once a shipment has had no new line for two days (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact R+L, the shop or the shipper for you, book a delivery or file a claim.
 
 ## Questions about R+L Carriers tracking
 
@@ -103,11 +107,13 @@ Something has held the freight up on its way. The line gives no reason; R+L's su
 
 ### How long do I have to file a freight claim with R+L Carriers?
 
-For freight carried between US states, federal law gives you at least 9 months to file a claim with the trucking company, and at least 2 years to go to court after it turns down any part of the claim in writing. The bill of lading or contract sets the actual limit; Peek couldn't read R+L's own rules. Start with whoever booked the freight.
+For freight carried between US states, federal law gives you at least 9 months to file a claim with the trucking company, and at least 2 years to go to court after it turns down any part of the claim in writing. The bill of lading or contract sets the actual limit; this page doesn't give R+L's own rules. Start with whoever booked the freight; R+L's instructions on filing a cargo claim are under Cargo Claims on its site.
 
 :::sources
 - [Universal Parcel Scraper: R+L Carriers](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/rl-carriers) – names, PRO shapes and the `I` in front, tracing links, the tracer's wordings and their stages, the summary, not-found and check-digit answers, expected delivery day, weight, clocks, what Peek leaves out
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – carriers sharing the shapes, no hand-off, tracking services as a fallback
+- [R+L Carriers: Shipment Tracing](https://www.rlcarriers.com/freight/shipping/shipment-tracing) – PRO number or pickup request ID, up to 25 numbers, other references with MyRLC (read 17 November 2026)
+- [R+L Carriers: R+L Cares](https://www.rlcarriers.com/contact/rl-cares) – the form for issues, questions and feedback, sent to R+L's executive leadership; 800-543-5589 at the top of the page; the Cargo Claims link to instructions on filing a cargo claim (read 17 November 2026)
 - [GovInfo: 49 U.S.C. 14706, Liability of carriers under receipts and bills of lading](https://www.govinfo.gov/content/pkg/USCODE-2024-title49/html/USCODE-2024-title49-subtitleIV-partB-chap147-sec14706.htm) – liability to the person entitled under the bill of lading, limited value, 9 months to claim and 2 years to sue
 - [GovInfo: 49 CFR Part 370, Investigation and voluntary disposition of loss and damage claims and processing salvage](https://www.govinfo.gov/content/pkg/CFR-2025-title49-vol5/xml/CFR-2025-title49-vol5-part370.xml) – what a claim contains, notes on delivery receipts, supporting documents, 30, 120 and 60 days
 :::

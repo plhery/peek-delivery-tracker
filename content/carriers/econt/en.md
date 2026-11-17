@@ -31,6 +31,7 @@ econt.com opens in Bulgarian, with a switch to English. These are Econt's scan l
 | `Failed delivery` | The courier couldn't deliver and took it back to an office. |
 | `Delivered` | Delivered to you, or picked up. |
 | `Delivery return` | It's going back to the sender. |
+| `Shipment destruction` | The parcel is being destroyed; Peek shows "Needs attention". Ask the shop or Econt. |
 | `Return receipt: Delivered` | The signed return receipt reached the sender; it says nothing new about your parcel. |
 
 `Submitted to courier` is the confusing one: the same words mean a pickup at the start and the last mile at the end, so read what came before it. `Failed delivery` gives a reason in brackets. A `Change delivery terms` line names what changed.
@@ -70,7 +71,7 @@ Econt's channels, as read on 12 October 2026 on its [customer service page](http
 
 It then shows its own status, set from Econt's summary when that settles one, the history with the office of each office scan on a map (an office Econt names in Bulgarian shows as its town where Peek can place it), and the delivery time. While the parcel waits, it shows the name of the Econt office storing it. Econt gives no expected delivery day or weight. The parcel count, courier's and recipient's names, sender and order references are left out.
 
-Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October shows in the history once a later scan arrives, in order, though not at its exact time. It checks up to every 10 minutes, or every 2 minutes from 6 a.m. Sofia time on the day Econt scans the parcel out for delivery, while Econt's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Scans keep the English labels above, except `Delivered`, shown in Peek's own words; `Return receipt: …` lines change nothing. Times are read as Sofia time; a scan in the hour the clocks repeat in late October shows in the history once a later scan arrives, in order, though not at its exact time. While you have the parcel open, or on its delivery day with notifications on, it checks up to every 10 minutes, or every 2 minutes from 6 a.m. Sofia time on the day Econt scans the parcel out for delivery, while Econt's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It can notify you of every scan, important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Econt tracking
 

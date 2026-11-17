@@ -723,6 +723,16 @@ function sameTruncated(left: number, right: number): boolean {
   });
 }
 
+/**
+ * Whether a row falls later in the whole minute or second a scan is dated to: the scan, to that minute or second,
+ * may stand for it as well as for a row at its own instant (HayPost's relay of a Russian Post dispatch to the minute,
+ * beside Russian Post's two scans of that minute to the second).
+ */
+function laterIn(at: number, row: JsonObject): boolean {
+  const other = instantOf(row);
+  return other !== at && !dayAlone(row) && [1_000, MINUTE_MS].some((unit) => at % unit === 0 && Math.floor(other / unit) * unit === at);
+}
+
 /** Stages that can name one scan: the same, or one source left it unclassified. */
 function stagesAgree(left: string, right: string): boolean {
   return left === right || [left, right].some((stage) => stage === '' || stage === 'pending');
@@ -1165,7 +1175,10 @@ export function rewordedScans(
  * A row matches a scan at the exact same instant when it is the only row there
  * with the same wording, or the only row there at all, with a stage that
  * agrees (La Poste's French scan and a provider's unclassified English copy),
- * and the scan the only new scan there. With no row at that instant, a row at
+ * and the scan the only new scan there, unless the scan is dated to a whole
+ * minute or second that holds other rows later in it, any of which it may
+ * stand for (HayPost's relay of a Russian Post dispatch to the minute, beside
+ * Russian Post's two scans of that minute). With no row at that instant, a row at
  * an instant no scan of the batch shows matches when one of the two is dated
  * to the second or minute the other falls in (UPS to the second, a provider to
  * the minute): with the same wording, or else alone in other wording when a
@@ -1232,7 +1245,8 @@ export function rewordedScans(
  * them dated by its day alone, unless the row is an earlier carrier's relay
  * (Ship24 copies a CTT Express scan twice, in CTT Express's words and in CTT
  * Portugal's, without the milliseconds). A provider that copies the one scan a
- * carrier holds or answers at an instant, by any of these rules, tells it
+ * carrier holds or answers at an instant, with none of the carrier's later in
+ * the whole minute or second the instant may be, by any of these rules, tells it
  * again in its other scans or rows of that instant in a stage that agrees,
  * from any place and in any words: they are left out or absorbed too (Ship24
  * gives a Poste Italiane scan in Poste Italiane's words and again in capitals
@@ -1384,7 +1398,8 @@ export function sharedScans(
       && stagesAgree(stageOf(row), stageOf(event))
     ));
     const clocked = universal ? [] : apart.filter((row) => readsClock(row, event));
-    const staged = exact.length === 1 && alone && stageOf(event) !== '' && stagesAgree(stageOf(exact[0]!), stageOf(event));
+    const staged = exact.length === 1 && alone && stageOf(event) !== '' && stagesAgree(stageOf(exact[0]!), stageOf(event))
+      && !eligible.some((row) => laterIn(at, row));
     return worded.length === 1 ? worded[0]
       : worded.length === 0 && staged ? exact[0]
         : minuted.length > 0 ? (minuted.length === 1 ? minuted[0] : undefined)
@@ -1436,8 +1451,8 @@ export function sharedScans(
     // The provider of a copy of the one scan a carrier gives and holds at the instant tells it again in its other rows
     // there in a stage that agrees, from any place and in any words.
     const [only] = scans;
-    if (scans.length === 1 && only && stageOf(only) !== '' && !stored.some((row) => (
-      heldByCarrier(row) && !observedOnly(row) && instantOf(row) === at && identity(row) !== identity(only)))) {
+    if (scans.length === 1 && only && stageOf(only) !== '' && ![...stored, ...events].some((row) => (
+      heldByCarrier(row) && !observedOnly(row) && ((instantOf(row) === at && identity(row) !== identity(only)) || laterIn(at, row))))) {
       const taken = storedById.get(shared.reused.get(identity(only)) ?? reused.get(identity(only)) ?? '');
       const told = [...copied, ...(taken && instantOf(taken) === at ? [taken] : [])];
       const providers = new Set(told.map(providerOf).filter(Boolean));
@@ -1481,7 +1496,8 @@ export function sharedScans(
     const id = identity(event);
     if (sourceOf(id) !== UNIVERSAL || shared.skipped.has(id) || shared.reused.has(id) || stageOf(event) === '' || dayAlone(event)) continue;
     const there = held.filter((row) => instantOf(row) === instantOf(event));
-    const row = there.length === 1 ? there[0]! : undefined;
+    const row = there.length === 1 && ![...held, ...events].some((other) => heldByCarrier(other) && !observedOnly(other)
+      && laterIn(instantOf(event), other)) ? there[0]! : undefined;
     if (row && stagesAgree(stageOf(row), stageOf(event)) && copiedBy(event, identity(row))) shared.skipped.set(id, identity(row));
   }
   // A provider's copy to the whole minute of the one scan a carrier holds or answers in that minute, in a stage that

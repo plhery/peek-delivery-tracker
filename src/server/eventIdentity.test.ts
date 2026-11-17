@@ -1790,6 +1790,32 @@ describe('every copy at a carrier scan\'s instant', () => {
       .toBe(0);
   });
 
+  it('folds a copy dated to a minute that holds several of the carriers\' steps by its words alone', () => {
+    // Russian Post dispatches a parcel in two scans of one minute, to the second; HayPost, the next carrier, relays the
+    // bagging to the minute under a row it took over; ParcelsApp tells the departure to the minute at the exchange office.
+    const minute = '2026-11-16T06:00:00';
+    const prepared = placed(row('russian-post:prepared', `${minute.slice(0, -2)}22+00:00`, 'Prepared for shipment', 'in_transit'), 'Moscow PCI');
+    const released = placed(row('russian-post:released', `${minute.slice(0, -2)}23+00:00`, 'Released from the country', 'in_transit'), 'Moscow PCI');
+    const bagged = placed(row('unknown:bagged', `${minute}+00:00`, 'Insert item into bag (Otb)', 'in_transit'), 'Moscow');
+    const departed = named(placed(scan('unknown:departed', `${minute}Z`, 'Departed country of origin', 'in_transit'), 'RUMRVA'), 'ParcelsApp');
+    const bagCopy = named(placed(scan('unknown:bag-copy', `${minute}Z`, 'Insert item into bag (Otb)', 'in_transit'), 'Moscow'), 'ParcelsApp');
+    const stored = [prepared, released, bagged];
+    // The copy in the relay's words is the same step; the departure, alone or beside it, may be Russian Post's other step.
+    expect(pairs(sharedScans([bagCopy, departed], stored).skipped)).toEqual([['unknown:bag-copy', 'unknown:bagged']]);
+    expect(sharedScans([departed], stored).skipped.size).toBe(0);
+    // With the minute's one row, the lone copy in its stage repeats it, and a second copy beside a copy in its words too.
+    expect(pairs(sharedScans([departed], [bagged]).skipped)).toEqual([['unknown:departed', 'unknown:bagged']]);
+    expect(pairs(sharedScans([bagCopy, departed], [bagged]).skipped))
+      .toEqual([['unknown:bag-copy', 'unknown:bagged'], ['unknown:departed', 'unknown:bagged']]);
+    // The carrier's scan of that minute takes the copy in its words over and leaves the provider's other row.
+    const bagging = placed(scan('haypost:bagged', `${minute}Z`, 'Insert item into bag (Otb)', 'in_transit'), 'Moscow');
+    const providerRows = [{ ...bagCopy, package_id: undefined }, { ...departed, package_id: undefined }];
+    const fromCarrier = sharedScans([bagging], [prepared, released, ...providerRows]);
+    expect(pairs(fromCarrier.reused)).toEqual([['haypost:bagged', 'unknown:bag-copy']]);
+    expect(fromCarrier.absorbed.size).toBe(0);
+    expect([...sharedScans([bagging], providerRows).absorbed]).toEqual(['unknown:departed']);
+  });
+
   it('leaves out a provider\'s later copies of a scan a carrier holds, so absorbed copies do not come back', () => {
     const instant = '2026-01-09T08:45:32.000Z';
     const carrier = row('speedaf:accepted', instant, 'Guangzhou warehouse', 'accepted');

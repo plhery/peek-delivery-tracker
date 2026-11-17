@@ -5765,14 +5765,38 @@
 <url>
 <loc>https://peektracker.com/carriers/mrw-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mrw-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/mrw-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mrw-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mrw-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mrw-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mrw-tracking" />
 <lastmod>2026-10-26</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/de/carriers/mrw-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mrw-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/mrw-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mrw-suivi" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mrw-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mrw-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mrw-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/mrw-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mrw-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/mrw-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mrw-suivi" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mrw-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mrw-rastreio" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mrw-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/es/carriers/mrw-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mrw-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/mrw-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mrw-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mrw-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mrw-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mrw-tracking" />
@@ -5781,6 +5805,8 @@
 <url>
 <loc>https://peektracker.com/pt/carriers/mrw-rastreio</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/mrw-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/mrw-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/mrw-suivi" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/mrw-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/mrw-rastreio" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/mrw-tracking" />
@@ -6058,7 +6084,9 @@
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
@@ -6068,7 +6096,9 @@
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
@@ -6078,7 +6108,9 @@
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
@@ -6088,7 +6120,21 @@
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/swiss-post-seguimiento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/swiss-post-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
@@ -6098,7 +6144,21 @@
 <xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
 <xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
 <xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/swiss-post-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/swiss-post-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/swiss-post-suivi-colis" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/swiss-post-tracking-posta-svizzera" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/swiss-post-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correios-suicos-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/poczta-szwajcarska-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/swiss-post-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
@@ -8751,24 +8811,84 @@
 <url>
 <loc>https://peektracker.com/carriers/correos-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/correos-espagne-suivi</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/correos-spagna-tracciamento</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/es/carriers/seguimiento-correos</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
 <url>
 <loc>https://peektracker.com/pt/carriers/correos-espanha-rastreio</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
 <xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
+<lastmod>2026-11-17</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/correos-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/correos-spanien-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/correos-espagne-suivi" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/correos-spagna-tracciamento" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-correos" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/correos-espanha-rastreio" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/correos-hiszpania-sledzenie" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/correos-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>

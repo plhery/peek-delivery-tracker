@@ -355,6 +355,12 @@ describe('withEventPlaces', () => {
         // Unless the copy alone tells a problem: the parcel held as damaged goes over "on its way".
         { ...scan('moving', 'ecoscooting', '2026-10-23T09:00:12+00:00', 'Salamanca'), stage: 'in_transit' },
         { ...scan('held', 'yunexpress', '2026-10-23T09:00:12+00:00', null), stage: 'exception' },
+        // A copy behind a scan past transit goes under it, place and all: Royal Mail's row in transit beside An Post's
+        // out for delivery. One behind a scan in transit still leads: Poczta Polska's posting beside PostNord's first row.
+        { ...scan('round', 'ecoscooting', '2026-10-24T07:13:21+00:00', null), stage: 'out_for_delivery' },
+        scan('round-copy', 'yunexpress', '2026-10-24T07:13:21+00:00', 'Salamanca'),
+        scan('flown', 'ecoscooting', '2026-10-24T15:28:21+00:00', null),
+        { ...scan('flown-copy', 'yunexpress', '2026-10-24T15:28:21+00:00', 'Salamanca'), stage: 'accepted' },
       ],
     };
     const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
@@ -364,6 +370,8 @@ describe('withEventPlaces', () => {
       ['out', undefined], ['out-copy', 'out'],
       ['left', undefined], ['left-copy', 'left'],
       ['moving', 'held'], ['held', undefined],
+      ['round', undefined], ['round-copy', 'round'],
+      ['flown', 'flown-copy'], ['flown-copy', undefined],
     ]);
   });
 

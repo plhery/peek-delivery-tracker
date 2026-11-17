@@ -293,8 +293,9 @@ function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
  * Each relay pair as it is served: the row the apps show under the other, and that row's id
  * (`relay_of`). The earlier carrier's copy goes under the scan it repeats, unless the copy alone
  * says where it was: YunExpress and Yanwen tell Ecoscooting's scans with the town Ecoscooting's
- * own leave out, Chronopost tells DPD's with the depot. Nor does a copy that alone tells a problem
- * beside the scan's routine step (relayCopies.ts), nor one in the scan's stage and words that names
+ * own leave out, Chronopost tells DPD's with the depot. A scan past transit that the copy has not
+ * reached stays on top all the same (Royal Mail's row in transit beside An Post's out for delivery).
+ * Nor does a copy that alone tells a problem beside the scan's routine step (relayCopies.ts), nor one in the scan's stage and words that names
  * more of the place, nor one further on than a scan that only tells again, in its stage and words, a step its carrier
  * told before: La Poste tells Posti's deposit again whenever Posti's data reaches it, at the minute of Posti's sort.
  * The apps show the lower row's words, not its place.
@@ -306,7 +307,10 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>):
     && sameWords(other, scan) && Date.parse(String(other.occurred_at)) < Date.parse(String(scan.occurred_at)));
   const further = (copy: JsonObject, scan: JsonObject) =>
     EVENT_STAGE_ORDER.indexOf(String(copy.stage)) > EVENT_STAGE_ORDER.indexOf(String(scan.stage));
-  const leads = (copy: JsonObject, scan: JsonObject) => (placed(copy) && !placed(scan)) || copyTellsProblem(copy, scan)
+  const pastTransit = (scan: JsonObject, copy: JsonObject) => further(scan, copy)
+    && EVENT_STAGE_ORDER.indexOf(String(scan.stage)) > EVENT_STAGE_ORDER.indexOf('in_transit');
+  const leads = (copy: JsonObject, scan: JsonObject) => (placed(copy) && !placed(scan) && !pastTransit(scan, copy))
+    || copyTellsProblem(copy, scan)
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
     || (further(copy, scan) && toldBefore(scan));
   return new Map([...relays].map(([copy, scan]): [string, string] => (

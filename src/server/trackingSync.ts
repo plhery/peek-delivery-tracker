@@ -1184,6 +1184,7 @@ export function buildEvents(
   result: CarrierResult,
   sourceCarrierId?: string,
   observedAt?: Date,
+  beside: readonly JsonObject[] = [],
 ): JsonObject[] {
   const reportedCurrent = resultStage(result);
   const current = reportedCurrent ?? 'in_transit';
@@ -1233,8 +1234,10 @@ export function buildEvents(
   // A notice its carrier's map says keeps the stage of the scan before it takes that stage (keptNotices).
   const read = keptNotices(carrierId, scans, instants);
   const stages = scanStages(read, instants);
-  // Such a scan also follows the scans of its day before it from any source; the stages stay as read.
-  const ordered = afterSameDayScans(read, days, dayZone, instants, stages, storedEventIdentities(parcel), observedAt);
+  // Such a scan also follows the scans of its day before it from any source, stored or of the other leg of the check
+  // (`beside`: BRT gives its relay of the partner's delivery round by its day); the stages stay as read.
+  const ordered = afterSameDayScans(read, days, dayZone, instants, stages, [...storedEventIdentities(parcel), ...beside.map(asStoredRow)],
+    observedAt);
   const dated = scanStages(read, ordered).every((stage, index) => stage === stages[index]) ? ordered : instants;
   for (const [index, raw] of read.entries()) {
     const description = String(raw.description ?? UNWORDED_STEP).trim();
@@ -2833,7 +2836,7 @@ export class TrackingSyncService {
         // The delivery carrier answers for the parcel's stage: the earlier
         // carrier's stage, seen without a time of its own, dates no row.
         const earlierEvents = fetched.earlierResult && fetched.earlierCarrierId
-          ? buildEvents(parcel, fetched.earlierResult, fetched.earlierCarrierId) : [];
+          ? buildEvents(parcel, fetched.earlierResult, fetched.earlierCarrierId, undefined, normalizedEvents) : [];
         // Unless the earlier carrier, asked again, has followed the parcel far past everything the partner shows.
         const partnerAt = Math.max(...[newestEvents[0]?.occurred_at,
           eventTimestamp(result!.last_update, resultTimezone(sourceCarrierId!, result!))]
@@ -3849,6 +3852,13 @@ function providerIdentification(
 function storedEventIdentities(parcel: JsonObject): JsonObject[] {
   const stored = parcel[STORED_EVENT_IDENTITIES];
   return Array.isArray(stored) ? stored.filter(isRecord) : [];
+}
+
+/** A row `buildEvents` wrote, read as its stored row reads (SYNC_EVENT_IDENTITIES in supabase.ts): its clocks out of its raw data. */
+function asStoredRow(row: JsonObject): JsonObject {
+  const raw = isRecord(row.raw_data) ? row.raw_data : {};
+  return { provider_event_id: row.provider_event_id, occurred_at: row.occurred_at, stage: row.stage, time: raw.time,
+    local_time: raw.local_time, observed_without_provider_timestamp: raw.observed_without_provider_timestamp };
 }
 
 /**

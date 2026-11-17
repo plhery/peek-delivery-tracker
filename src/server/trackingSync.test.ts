@@ -5267,6 +5267,25 @@ describe('TrackingSyncService', () => {
     expect(adapter.fetchUniversal).not.toHaveBeenCalled();
   });
 
+  it('dates an earlier carrier\'s scan given by its day alone after the delivery carrier\'s scans of that day in the same check', async () => {
+    // BRT gives its copy of the partner's delivery round by its day; the partner timed its own (synthetic scans).
+    const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
+    const origin: CarrierResult = { status: 'in_transit', destination_country: 'FI', delivery_carrier: 'posti', last_update: '2026-01-11T10:00:00Z',
+      events: [{ local_time: '2026-01-12', description: 'Out for delivery', stage: 'out_for_delivery' },
+        { time: '2026-01-11T10:00:00Z', description: 'In transport', stage: 'in_transit' }] };
+    const delivery: CarrierResult = { status: 'delivered', current_stage: 'delivered', last_update: '2026-01-12T10:00:00Z', events: [
+      { time: '2026-01-12T10:00:00Z', description: 'Delivered', stage: 'delivered' },
+      { time: '2026-01-12T07:00:00Z', description: 'Out for delivery today', stage: 'out_for_delivery' },
+      { time: '2026-01-12T04:00:00Z', description: 'Arrived at the delivery depot', stage: 'in_transit' }] };
+    const adapter = { fetch: vi.fn(async (carrier: string) => carrier === 'posti' ? delivery : origin), fetchUniversal: vi.fn() };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-01-12T10:30:00Z'));
+    await service.syncPackage({ id: 'by-its-day', carrier: 'la-poste', tracking_number: 'CW123456785FR' });
+    const rows = client.insertEvents.mock.calls.flatMap((call) => call[0] as JsonObject[]);
+    // A second after the partner's round, not at midnight in Paris (23:00 UTC the day before): the relay of that round.
+    expect(rows.filter((row) => String(row.provider_event_id).startsWith('la-poste:')).map((row) => [row.description, row.occurred_at]))
+      .toEqual([['Out for delivery', '2026-01-12T07:00:01Z'], ['In transport', '2026-01-11T10:00:00Z']]);
+  });
+
   it('asks an earlier carrier with a minimum interval of its own no sooner than it allows', async () => {
     const client = { ...fakeClient(), acquireTrackingProvider: vi.fn(), finishTrackingProvider: vi.fn() };
     let now = new Date('2026-01-12T10:30:00Z');

@@ -110,6 +110,16 @@ describe('edge guard', () => {
   it('keeps the health check’s own failure, so watchers see the server down', async () => {
     const response = await run(page('/health'), tunnelDown);
     assert.equal(response.status, 530);
+    assert.equal(response.headers.get('x-edge-guard'), 'on');
+    assert.equal((await run(page('/health'), refused)).status, 502);
+  });
+
+  it('marks the health check’s answer, so the watcher knows the guard is on', async () => {
+    const response = await run(page('/health'), Response.json({ ok: true }));
+    assert.equal(response.status, 200);
+    assert.equal(response.headers.get('x-edge-guard'), 'on');
+    assert.deepEqual(await response.json(), { ok: true });
+    assert.equal((await run(page('/carriers/dhl-paket-tracking'), carrierPage)).headers.get('x-edge-guard'), null);
   });
 
   it('serves the saved copy of a carrier page, with a note, while the server is down', async () => {

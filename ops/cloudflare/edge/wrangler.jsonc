@@ -8,11 +8,15 @@
   "compatibility_date": "2026-10-01",
   "workers_dev": false,
   "preview_urls": false,
-  "routes": [
-    { "pattern": "peektracker.com/*", "zone_name": "peektracker.com" },
-    // Supabase's auth: a 503 there keeps everyone signed in, where Cloudflare's own error page would not be JSON.
-    { "pattern": "auth.peektracker.com/*", "zone_name": "peektracker.com" }
-  ],
+  // Only `/maintenance.json` is routed here for good: the apps and the web app ask it once something
+  // failed, for the time an announced maintenance should end. The routes that put the guard in front of
+  // the whole site, `peektracker.com/*` and `auth.peektracker.com/*` (Supabase's auth: a 503 there keeps
+  // everyone signed in, where Cloudflare's own error page would not be JSON), plus `peektracker.com/_next/*`
+  // without a Worker, are added only while the server is down or about to be, by the netcup server's
+  // `maint` switch and its outside watcher, and removed after (docs/DEPLOYMENT.md, "Edge guard"). They
+  // are not listed here, or every request of the day would run the Worker; a deploy during a
+  // maintenance removes them, so deploy outside one.
+  "routes": [{ "pattern": "peektracker.com/maintenance.json", "zone_name": "peektracker.com" }],
   // The announcements, shared with the other sites on the server (RUNBOOK). Its id is the account's own.
   "kv_namespaces": [{ "binding": "MAINTENANCE", "id": "REPLACE_WITH_MAINTENANCE_NAMESPACE_ID" }],
   "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],

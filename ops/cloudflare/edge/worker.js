@@ -11,6 +11,12 @@
 // `/maintenance.json` is always answered here, without the server: it says whether maintenance
 // was announced and until when, for the apps and the web app to word their notice.
 //
+// The guard stands in front of the whole site only while its routes are on: they are added just
+// before a planned reboot (the `maint` switch) or once the server stops answering (the outside
+// watcher), and removed once it answers again, so the Worker runs only around a maintenance
+// rather than for every request of the day. `/maintenance.json` keeps a route of its own. The
+// health check's answer goes out marked `X-Edge-Guard: on`, which tells the watcher the routes are on.
+//
 // The announcement is a JSON value in the MAINTENANCE KV namespace, shared by every site: the key
 // `all` (the server, e.g. a reboot) and the site's own key (its database, e.g. a Supabase upgrade).
 // RUNBOOK.md describes the switch. Without the binding, nothing is announced and the rest works.
@@ -234,24 +240,33 @@ function toOrigin(request, env) {
   return new Request(url, request);
 }
 
+/** The health check's answer as the server gave it, marked as having come through the guard. */
+function throughGuard(response) {
+  const marked = new Response(response.body, response);
+  marked.headers.set('X-Edge-Guard', 'on');
+  return marked;
+}
+
 const worker = {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
     if (url.pathname === '/maintenance.json') {
       return Response.json(status(await readAnnouncement(env)), { headers: { 'Cache-Control': 'no-store', 'Access-Control-Allow-Origin': '*' } });
     }
+    const health = site.healthPath.test(url.pathname);
     const found = await readAnnouncement(env);
     // Switched to hard: the server is left alone, apart from what checks it is up.
-    if (found?.mode === 'hard' && !site.healthPath.test(url.pathname)) return fallback(request, url, found);
+    if (found?.mode === 'hard' && !health) return fallback(request, url, found);
 
     let response;
     try {
       response = await fetch(toOrigin(request, env));
     } catch {
-      return fallback(request, url, found);
+      return health ? throughGuard(new Response(null, { status: 502 })) : fallback(request, url, found);
     }
+    // What checks the server sees its answer as it is, so a watcher still sees the server down.
+    if (health) return throughGuard(response);
     if (unreachable(response) || appMissing(request, url, response) || (response.status === 500 && isPageRequest(request) && site.savedPages.test(url.pathname))) {
-      if (site.healthPath.test(url.pathname)) return response;
       const saved = isPageRequest(request) ? await savedPage(request, url, found) : null;
       if (saved) return saved;
       return response.status === 500 ? response : fallback(request, url, found);

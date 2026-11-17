@@ -136,7 +136,7 @@ describe('tracking support audit persistence', () => {
   });
 
   it.each([
-    ['opens no case once the filed carrier confirmed it', 'success', 'russian-post', {}],
+    ['opens no case once the filed carrier confirmed it', 'success', 'kazpost', {}],
     ['leaves the gap undecided while the filed carrier\'s lookup failed', 'error', null,
       { support_gap_reason: 'generic_postal', support_gap_undecided: true }],
     ['leaves the gap undecided while our own pacing refused the filed carrier\'s lookup', 'paced', null,
@@ -145,14 +145,14 @@ describe('tracking support audit persistence', () => {
   ] as const)('for an S10 number detection leaves to international post, %s', async (_case, lookup, answeredBy, gap) => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue(true);
-    // A synthetic S10 number filed under Russian Post on its first check: nothing confirmed it yet.
-    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'RR123456785RU', 'russian-post', 'pending', { trigger: 'added' });
+    // A synthetic S10 number filed under Kazpost on its first check: nothing confirmed it yet.
+    const audit = new TrackingSyncAudit(client, 'synthetic-package', 'RR123456785KZ', 'kazpost', 'pending', { trigger: 'added' });
     await audit.start();
     await audit.observeFetch(async () => {
-      reportTrackingLookup('russian-post', lookup, { error: 'transport', paced: 'self_paced' }[lookup as string]);
+      reportTrackingLookup('kazpost', lookup, { error: 'transport', paced: 'self_paced' }[lookup as string]);
       reportTrackingLookup('ParcelsApp', 'success');
     });
-    audit.filed('russian-post', answeredBy);
+    audit.filed('kazpost', answeredBy);
     await audit.finish({ outcome: 'updated', sourceCarrier: answeredBy ?? 'unknown', evaluateHealth: false });
     expect(request).toHaveBeenNthCalledWith(1, '/rest/v1/tracking_sync_attempts', expect.objectContaining({
       body: expect.objectContaining({ support_context: expect.objectContaining({ detection_carrier: 'intl-post', reasons: [] }) }),

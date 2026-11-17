@@ -3,7 +3,7 @@ title: Tianhui Hengyuan (THHY) Sendungsverfolgung: AT…TH-Nummer
 description: Tianhui-Hengyuan-Paket (天汇恒源, THHY) aus China verfolgen: wie die AT…TH-Nummer aussieht, welche Zeilen echte Scans sind und wen du fragst.
 slug: tianhui-hengyuan-sendungsverfolgung
 published: 2026-10-31
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Tianhui Hengyuan (天汇恒源, auch THHY oder TH) ist ein chinesischer Spediteur. Hat ein Shop in China deine Bestellung mit Tianhui Hengyuan verschickt, besteht deine Sendungsnummer aus AT, zehn Ziffern und TH: Füg sie oben ins Feld ein. Eine Website der Firma kennt Peek nicht, und ihre Tracking-Seite hat nicht einmal einen Domainnamen, nur eine Serveradresse aus Ziffern. Was sie anzeigt, ist mit Vorsicht zu genießen: Nach den ersten eigenen Zeilen von Tianhui Hengyuan folgen Zeilen, die nach einer Vorlage geschrieben sind und nicht zeigen, wo dein Paket ist.
@@ -85,7 +85,7 @@ Von der Tracking-Seite lässt Peek die Zeilen nach Vorlage weg, außerdem jede Z
 
 **Schweizerische Post.** Peek übergibt ein Paket nur, wenn der Datensatz von Tianhui Hengyuan die Schweizerische Post als Linie nennt, eine Nummer der Schweizerischen Post enthält und kein Zielland außerhalb der Schweiz und Liechtensteins angibt. Das Paket zeigt dann „Zustellung durch Swiss Post“ und diese Nummer. Solange Peek das Paket bei der Post nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei Swiss Post angekündigt, noch nicht eingetroffen“. Sobald die Schweizerische Post einen Scan zeigt, der mindestens so neu ist wie der letzte von Tianhui Hengyuan, verfolgt Peek das Paket dort weiter und behält die Zeilen von Tianhui Hengyuan im Verlauf. Sonst bleibt Peek bei der Tracking-Seite von Tianhui Hengyuan: Gibt dir der Shop die Nummer des Paketdiensts, der zustellt, füg sie als eigenes Paket hinzu.
 
-Peek schaut alle 10 Minuten nach und stündlich, sobald es bei Tianhui Hengyuan still wird: 12 Stunden lang nichts nach der ersten Zeile oder dem ersten Scan, oder zwei Tage lang nichts Neues danach. Die eigenen Zeilen von Tianhui Hengyuan sind alle frühe Schritte, deshalb meldet Peek sie dir nur mit „Jeden Scan“. „Wichtige Schritte“ (Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen) und „Nur die Zustellung“ warten auf spätere Schritte. Tianhui Hengyuan oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach und stündlich, sobald es bei Tianhui Hengyuan still wird: 12 Stunden lang nichts nach der ersten Zeile oder dem ersten Scan, oder zwei Tage lang nichts Neues danach. Die eigenen Zeilen von Tianhui Hengyuan sind alle frühe Schritte, deshalb meldet Peek sie dir nur mit „Jeden Scan“. „Wichtige Schritte“ (Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen) und „Nur die Zustellung“ warten auf spätere Schritte. Tianhui Hengyuan oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur Tianhui Hengyuan Sendungsverfolgung
 

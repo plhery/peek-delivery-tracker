@@ -3,7 +3,7 @@ title: Vinted Go Sendungsverfolgung: Status, Fristen & Hilfe
 description: Vinted-Go-Paket verfolgen: Wo die Sendungsnummer steht, was die englischen Statuszeilen heißen, wie Versand nach Deutschland läuft und wer bei Problemen hilft.
 slug: vinted-go-sendungsverfolgung
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Vinted Go ist der eigene Paketdienst von Vinted: Er betreibt ein Netz aus Paketautomaten (*Lockers*), Paketshops und Nachbarschaftspunkten in Frankreich, Belgien, den Niederlanden, Spanien, Portugal und Finnland. Eigene Automaten oder Shops in Deutschland, Österreich oder der Schweiz führt Vinted Go nicht — laut dem französischen Vinted-Hilfe-Center sind vorfrankierte Vinted-Go-Versandscheine aber auch für Sendungen zwischen Frankreich und Deutschland nutzbar, und Pakete, die das eigene Netz von Vinted Go verlassen, reisen im Zielland mit einem Partnernetz weiter. Um deine Sendung zu verfolgen, öffne den Bestell-Chat auf Vinted und tippe auf „Sendung verfolgen“, gib die Nummer auf der [Sendungsverfolgungsseite von Vinted Go](https://vintedgo.com/en/tracking) ein — die keine deutsche Sprachversion hat — oder füge sie oben in das Suchfeld ein.
@@ -84,7 +84,7 @@ Wie am 16. November 2026 geprüft, stellt Vinted Go Käufern weder eine Kundense
 
 Bei einer Nummer mit `VGS` — oder wenn du einen `vintedgo.com`-Tracking-Link einfügst — erkennt Peek Vinted Go sofort („Erkannter Paketdienst“). Gibst du eine 16-stellige Nummer mit `17` oder `18` allein ein, fragt Peek bei Vinted Go, [TNT](carrier:tnt) und [DHL eCommerce](carrier:dhl-ecommerce) (bei manchen Nummern auch bei weiteren Paketdiensten) nach und ordnet das Paket Vinted Go zu, sobald Vinted Go antwortet („Vinted Go hat dieses Paket.“); bei einem `UW`-Code fragt Peek direkt Vinted Go ab. Andernfalls tippe auf „Ändern“ und wähle Vinted Go aus.
 
-Übergibt Vinted Go das Paket unter einer neuen Sendungsnummer an ein anderes Netz, folgt Peek ihm dort weiter, sofern Peek diesen Paketdienst direkt unterstützt; wenn die letzten 13 Zeichen eines 16-stelligen `UW`-Codes ein Paketcode von Poste Italiane sind, fragt Peek zusätzlich Poste Italiane ab und wechselt auf „Zustellung durch Poste Italiane“, sobald dort der neueste Scan vorliegt. Solange das Paket bei Vinted Go läuft, schaut Peek alle 10 Minuten nach, oder stündlich nach zwei Tagen ohne neuen Scan (schon nach 12 Stunden, solange es auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht). Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Vinted oder Vinted Go kontaktieren oder ein Problem melden kann Peek nicht für dich.
+Übergibt Vinted Go das Paket unter einer neuen Sendungsnummer an ein anderes Netz, folgt Peek ihm dort weiter, sofern Peek diesen Paketdienst direkt unterstützt; wenn die letzten 13 Zeichen eines 16-stelligen `UW`-Codes ein Paketcode von Poste Italiane sind, fragt Peek zusätzlich Poste Italiane ab und wechselt auf „Zustellung durch Poste Italiane“, sobald dort der neueste Scan vorliegt. Solange das Paket bei Vinted Go läuft, schaut Peek bis zu alle 10 Minuten nach, oder stündlich nach zwei Tagen ohne neuen Scan (schon nach 12 Stunden, solange es auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht). Auf Wunsch schickt es dir Mitteilungen: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Vinted oder Vinted Go kontaktieren oder ein Problem melden kann Peek nicht für dich.
 
 ## Häufige Fragen zur Vinted Go Sendungsverfolgung
 

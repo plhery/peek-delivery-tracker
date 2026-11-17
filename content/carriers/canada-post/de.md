@@ -3,7 +3,7 @@ title: Canada Post Sendungsverfolgung: Paket aus Kanada, Status
 description: Canada-Post-Paket verfolgen: wie die Trackingnummer aussieht, was die Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Zoll.
 slug: canada-post-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Canada Post ist die Post Kanadas. Ein Paket verfolgst du in der Sendungsverfolgung von Canada Post auf canadapost-postescanada.ca oder hier: Füg die Trackingnummer oben ins Feld ein. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops. Endet sie auf `CA`, fragt Peek mit derselben Nummer auch die Post deines Landes.
@@ -90,7 +90,7 @@ Für ein Paket aus Kanada ist meist der Absender oder der Shop dein erster Anspr
 
 Peek fragt Canada Post direkt, ohne Browser. Du siehst den Status, den Verlauf mit dem Ort jedes Scans (in Kanada mit Provinz), den voraussichtlichen Liefertag, ein Zeitfenster, sobald das Paket in Kanada in Zustellung ist und Canada Post eines nennt, die Uhrzeit der Zustellung und, wenn Canada Post ihn nennt, den Namen der Firma, die das Paket verschickt hat. Scans in Kanada liest Peek mit der Uhrzeit, die Canada Post angibt, Scans aus Ländern mit nur einer Zeitzone, etwa Deutschland, Österreich oder der Schweiz, in deren Ortszeit; angezeigt werden alle in der Zeitzone deines Geräts. Zustelloptionen, Empfängerdaten, Adressen, Unterschriften und Zustellfotos lässt Peek weg.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist und Canada Post selbst antwortet: am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn Canada Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn; über Tracking-Dienste alle 15 Minuten. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist und Canada Post selbst antwortet: am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn Canada Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn; über Tracking-Dienste alle 15 Minuten. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 **Von dir nach Kanada.** Geht ein Paket mit internationaler Postnummer auf `DE`, `AT` oder `CH` nach Kanada, fragt Peek mit derselben Nummer auch Canada Post: sobald DHL oder die Schweizerische Post Kanada als Ziel nennt, oder wenn dein Land für Peek Kanada ist, etwa beim Empfänger dort. Die Österreichische Post nennt kein Ziel; bei ihr zählt nur dein Land. Für Nummern der Schweizerischen Post, die mit `L` beginnen, fragt Peek Canada Post nicht. Kontaktieren kann Peek Canada Post oder den Shop nicht für dich.
 

@@ -3,7 +3,7 @@ title: Cainiao Sendungsverfolgung: Nummern, Status und Kontakt
 description: AliExpress-Paket mit Cainiao verfolgen: welche Nummern dazugehören, was die englischen Status bedeuten und wen du in Deutschland, Österreich und der Schweiz fragst.
 slug: cainiao-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Cainiao ist die Logistiksparte der Alibaba-Gruppe und verschickt Pakete über Grenzen hinweg, für Händler auf Plattformen wie AliExpress. Seine Tracking-Seite [global.cainiao.com](https://global.cainiao.com/) verfolgt nur Cainiao- und AliExpress-Pakete: Gib die Nummer dort ein oder füg sie oben ins Feld ein. Bei AliExpress steht sie in der Bestellung, laut AliExpress-Hilfe unter „My Orders“ und dann „Tracking“.
@@ -83,7 +83,7 @@ Die Nummern auf Cainiaos chinesischer Seite sind für Kunden in China und für H
 
 Manchmal gibt dir AliExpress schon die Nummer des Paketdiensts vor Ort, etwa eine SDA-Nummer für ein Paket nach Italien, während Cainiao das Paket noch hat. Bei einigen dieser Formen fragt Peek Cainiao neben diesem Paketdienst ab. Kennen beide die Nummer, legt Peek das Paket unter „AliExpress / Cainiao“ ab, wo die Scans von vor der Grenze stehen, und fragt für die letzte Meile auch den Paketdienst vor Ort: Seine Scans kommen in den Verlauf, sobald er das Paket meldet.
 
-Es schaut alle 30 Minuten nach, auch während der Zustellung (nach einer fehlgeschlagenen Abfrage erst nach einer Stunde), zeigt jeden Scan auf einer Karte und kann dir Mitteilungen schicken, für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL, USPS und GOFO in den USA, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Du siehst Status und Verlauf auf Englisch, den Ort eines Scans, wenn Cainiao einen nennt, die voraussichtliche Zustellung als Zeitfenster von Tagen, wenn Cainiao eines angibt, die Zustellzeit und die Nummer des Paketdiensts vor Ort, wenn Cainiao sie veröffentlicht. Cainiao kontaktieren oder etwas reklamieren kann es nicht für dich.
+Es schaut bis zu alle 30 Minuten nach, auch während der Zustellung (nach einer fehlgeschlagenen Abfrage erst nach einer Stunde), zeigt jeden Scan auf einer Karte und kann dir Mitteilungen schicken, für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL, USPS und GOFO in den USA, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Du siehst Status und Verlauf auf Englisch, den Ort eines Scans, wenn Cainiao einen nennt, die voraussichtliche Zustellung als Zeitfenster von Tagen, wenn Cainiao eines angibt, die Zustellzeit und die Nummer des Paketdiensts vor Ort, wenn Cainiao sie veröffentlicht. Cainiao kontaktieren oder etwas reklamieren kann es nicht für dich.
 
 ## Fragen zur Cainiao Sendungsverfolgung
 

@@ -3,7 +3,7 @@ title: 4PX Sendungsverfolgung: Nummer, Status und Kontakt
 description: 4PX-Paket aus China verfolgen: wie die Sendungsnummer aussieht, was die Status bedeuten, welcher Paketdienst zustellt und wen du fragst, wenn nichts passiert.
 slug: 4px-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 4PX (递四方速递, 4PX Express Co., Ltd.) ist ein Logistikunternehmen aus Shenzhen in China, das Pakete von Onlinehändlern ins Ausland bringt und sie dort einem Paketdienst für die letzte Strecke übergibt. Verfolgen kannst du die Nummer auf 4PX' eigener Seite [track.4px.com](https://track.4px.com/), die es auch auf Deutsch gibt, oder oben im Feld. Die Nummer bekommst du vom Shop oder Marktplatz, bei dem du bestellt hast, in den Versanddetails deiner Bestellung.
@@ -76,7 +76,7 @@ Einen Kontakt für Empfänger in Deutschland, Österreich oder der Schweiz verö
 
 Peek liest 4PX auf Englisch und zeigt den Status, den Verlauf mit dem Ort jedes Scans auf einer Karte, die Zustellzeit, das Zielland und den Paketdienst vor Ort mit seiner Nummer, wenn dieser in Peeks Liste steht, etwa USPS. Dann fragt Peek auch ihn und wechselt zu ihm, sobald er neuere Schritte zeigt. `Out for delivery` und `Delivery attempt unsuccessful` erscheinen in Peeks eigenen Worten auf Deutsch, die übrigen Zeilen so, wie 4PX sie schreibt. Ein voraussichtliches Lieferdatum, Angaben zur Abholstelle oder ein Gewicht zeigt Peek bei 4PX nicht.
 
-Scanzeiten liest Peek in den Zeitzonen von 4PX, Scans ohne Zeitzone in der Ortszeit des Scanorts, und zeigt sie in der Zeitzone deines Geräts. Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange 4PX selbst antwortet; über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL und USPS, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen schickt es dir für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. 4PX oder den Shop kontaktieren kann es nicht für dich.
+Scanzeiten liest Peek in den Zeitzonen von 4PX, Scans ohne Zeitzone in der Ortszeit des Scanorts, und zeigt sie in der Zeitzone deines Geräts. Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange 4PX selbst antwortet; über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL und USPS, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen schickt es dir für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. 4PX oder den Shop kontaktieren kann es nicht für dich.
 
 ## Fragen zur 4PX Sendungsverfolgung
 

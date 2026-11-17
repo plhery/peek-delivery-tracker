@@ -3,7 +3,7 @@ title: SF Express Sendungsverfolgung: Nummer, Status, Zustellung
 description: SF-Express-Paket aus China verfolgen: die 12-stellige oder SF-Sendungsnummer, was die Status bedeuten, wie SF International zustellt und wen du fragst.
 slug: sf-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 SF Express (顺丰, kurz SF) ist ein chinesisches Logistikunternehmen, 1993 gegründet, mit Sitz in Shenzhen. Sein Auslandszweig SF International verschickt Sendungen ins Ausland, für Firmen, Onlinehändler und Privatkunden. Jede regionale Website von SF hat eine eigene Sendungsverfolgung: www.sf-express.com für Festlandchina, hk.sf-express.com für Hongkong und htm.sf-express.com für Taiwan. Oder du fügst die Nummer oben ins Feld ein.
@@ -94,7 +94,7 @@ SFs Seiten, die hier zitiert sind, gelesen am 2. November 2026: auf www.sf-expre
 
 Peek liest die englische Sendungsverfolgung von SFs Taiwan-Seite: den Status und den Verlauf in SFs Worten, zugestellte Zeilen als „Zugestellt“ und SFs Gesamtstatus als „Cancelled“ (storniert), „Forwarded“ (weitergeleitet), „Zurück an Absender“, „Held“ (festgehalten) oder „Lost“ (verloren). Es liest SFs Uhrzeiten nach chinesischer Zeit und zeigt jeden Scan in der Zeitzone deines Geräts, nicht in der chinesischen; auf peektracker.com und in der iPhone-App nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Ein voraussichtliches Lieferdatum oder einen Zustellnachweis gibt es nicht, und Peek verfolgt die SF-Nummer bis zum Ende, nicht die Nummer eines Partners vor Ort.
 
-Peek schaut alle 10 Minuten nach, alle 5 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour von 6:00 bis 24:00 Uhr chinesischer Zeit (in Deutschland und Österreich also bis 17:00 Uhr, im Sommer bis 18:00 Uhr) und solange SF selbst antwortet. Über Tracking-Dienste fragt Peek alle 15 Minuten nach. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Mitteilungen kann Peek dir schicken: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. SF oder den Händler kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach, bis zu alle 5 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour von 6:00 bis 24:00 Uhr chinesischer Zeit (in Deutschland und Österreich also bis 17:00 Uhr, im Sommer bis 18:00 Uhr) und solange SF selbst antwortet. Über Tracking-Dienste fragt Peek stündlich nach, am Tag der Zustelltour bis zu alle 15 Minuten. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Mitteilungen kann Peek dir schicken: „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. SF oder den Händler kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur SF Express Sendungsverfolgung
 

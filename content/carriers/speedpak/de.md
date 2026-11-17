@@ -3,7 +3,7 @@ title: SpeedPAK Sendungsverfolgung: eBay-Pakete, Status, Kontakt
 description: eBay-Paket mit SpeedPAK verfolgen: wie die 28-stellige Nummer aussieht, was die englischen Status bedeuten, wer zustellt und wen du fragst, wenn nichts passiert.
 slug: speedpak-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 SpeedPAK ist der Versandservice von eBay für grenzüberschreitende Bestellungen, betrieben mit dem Logistiker Orange Connex und gedacht für Pakete aus China. Die Nummer hat 28 Zeichen und beginnt mit ES, EE oder EX: Gib sie auf der Tracking-Seite von Orange Connex ein, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), oder füg sie oben ins Feld ein. Bei eBay findest du sie unter „Mein eBay“ und „Käufe“, als Link neben dem Artikel.
@@ -89,7 +89,7 @@ Steht der Paketdienst vor Ort fest, ist sein Kundenservice derjenige, der bei ei
 
 Nennt SpeedPAK den Paketdienst vor Ort, kann Peek auch diesen fragen und zu ihm wechseln, sobald er neuere Schritte zeigt. Das Paket behält die Nummer, die du eingegeben hast, seine Seite zeigt „Zustellung durch“ diesen Paketdienst und listet dessen Nummer mit einem Link zu seinem Tracking. Solange Peek das Paket bei diesem Paketdienst nur angekündigt findet, noch ohne eigenen Scan, zeigt die Seite stattdessen „Bei … angekündigt, noch nicht eingetroffen“. Das hängt davon ab, was SpeedPAK veröffentlicht, und klappt nicht bei jedem Paket.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange SpeedPAK selbst antwortet; über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL und USPS, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur die Zustellung“. Peek kann aber weder SpeedPAK noch den Verkäufer für dich kontaktieren und keine Reklamation einreichen.
+Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange SpeedPAK selbst antwortet; über Tracking-Dienste alle 15 Minuten). Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL und USPS, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur die Zustellung“. Peek kann aber weder SpeedPAK noch den Verkäufer für dich kontaktieren und keine Reklamation einreichen.
 
 ## Fragen zur SpeedPAK Sendungsverfolgung
 

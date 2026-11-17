@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -144,7 +144,7 @@ Peek übernimmt die Phase des Pakets aus Shouwus Status, wie in den Tabellen obe
 
 Shouwu nennt den Paketdienst nicht eigens, deshalb zeigt Peek keine Zeile „Zustellung durch“ und verfolgt das Paket nicht beim Paketdienst weiter. Hast du dessen Nummer, füg sie in Peek als eigenes Paket hinzu.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Shouwu selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen bekommst du für „Jeden Scan“, für „Wichtige Schritte“ (Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen) oder für „Nur die Zustellung“. Shouwu oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Shouwu selbst antwortet; über Tracking-Dienste alle 15 Minuten). Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Mitteilungen bekommst du für „Jeden Scan“, für „Wichtige Schritte“ (Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen) oder für „Nur die Zustellung“. Shouwu oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur Shouwu Sendungsverfolgung
 

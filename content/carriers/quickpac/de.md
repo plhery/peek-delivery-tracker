@@ -3,7 +3,7 @@ title: Quickpac Tracking: Paket verfolgen und Status verstehen
 description: Quickpac-Paket verfolgen: wo die 18-stellige Sendungsnummer steht, warum „Shipped“ zugestellt bedeutet und wen du bei verpassten oder verlorenen Paketen fragst.
 slug: quickpac-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Quickpac ist ein Schweizer Paketdienst, seit 2024 Teil von Planzer Paket, und bringt Pakete von Shops und Firmen zu Privatpersonen in ausgewählten Postleitzahlgebieten der Schweiz. Die 18-stellige Sendungsnummer bekommst du vom Absender, meist in der Versand-E-Mail, und sie steht unter dem Barcode auf dem Paket. Gib sie auf [Quickpacs Tracking-Seite](https://quickpac.ch/de/tracking) ein oder füg sie oben ins Feld ein.
@@ -100,7 +100,7 @@ Zusteller kannst du nicht direkt anrufen.
 
 ## Quickpac-Sendung mit Peek verfolgen
 
-[Peek](/) erkennt eine 18-stellige Nummer, die mit 44 beginnt, als Quickpac und liest sie auf Planzers Tracking-Seite ab, wo Quickpac-Pakete verfolgt werden. Ein Tracking-Link von quickpac.ch oder tracking.app.planzer.ch geht auch. Es schaut alle 10 Minuten nach, ab 6 Uhr Schweizer Zeit alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour und solange Planzers Tracking-Seite antwortet; über Tracking-Dienste alle 15 Minuten), zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach.
+[Peek](/) erkennt eine 18-stellige Nummer, die mit 44 beginnt, als Quickpac und liest sie auf Planzers Tracking-Seite ab, wo Quickpac-Pakete verfolgt werden. Ein Tracking-Link von quickpac.ch oder tracking.app.planzer.ch geht auch. Es schaut bis zu alle 10 Minuten nach, ab 6 Uhr Schweizer Zeit bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour und solange Planzers Tracking-Seite antwortet; über Tracking-Dienste alle 15 Minuten), zeigt jeden Scan auf einer Karte und schickt dir Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach.
 
 Du siehst Status, Verlauf, voraussichtliche Zustellung, Gewicht, Abmessungen, Zustellzeit und Zielland. Die Empfängeradresse, die Planzers Seite zeigt, lässt Peek weg, und `Shipped` erscheint als zugestellt. Deponierungsauftrag, neuen Zustelltag oder Reklamation erledigst du weiter bei Quickpac, Planzer Paket oder dem Shop: Peek kann sie nicht für dich kontaktieren.
 

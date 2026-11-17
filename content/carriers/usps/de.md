@@ -3,7 +3,7 @@ title: USPS Sendungsverfolgung: Nummer, Status, Paket aus den USA
 description: USPS-Paket aus den USA verfolgen: wo die Trackingnummer steht, was die Status bedeuten, Zoll, verlorene Pakete und wie du USPS erreichst.
 slug: usps-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 USPS, der United States Postal Service, ist die Post der USA. Bei vielen Sendungen ist die Sendungsverfolgung (USPS Tracking) ohne Aufpreis dabei, auch bei vielen, aber nicht allen internationalen Produkten. Gib die Trackingnummer in USPS Tracking auf usps.com ein oder füg sie oben ins Feld ein; in den USA kannst du sie auch per SMS an 28777 schicken. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops.
@@ -88,7 +88,7 @@ Die Seiten von USPS, die hier zitiert sind, gelesen am 2. November 2026: auf faq
 
 Peek öffnet die Tracking-Seite von USPS in einem Browser auf seinem Server. Das dauert etwas länger. Schickt USPS die Abfragen auf seine Störungsseite, fragt Peek Tracking-Dienste, die nicht immer den ganzen Verlauf haben. Peek zeigt den Status, den Verlauf mit dem Ort jedes Scans und den voraussichtlichen Liefertag. Die Uhrzeit eines Scans liest Peek in der Zeitzone des Bundesstaats, in dem er passiert ist, und zeigt sie in der Zeitzone deines Geräts. Den Namen dessen, der unterschrieben hat, und Zustellanweisungen lässt Peek weg. Die Scans zeigt Peek auf Englisch, so wie USPS sie schreibt; nur `Delivered` erscheint im Verlauf auf Deutsch, als „Zugestellt“. Kommt ein zurückgeschicktes Paket wieder beim Absender an, steht im Verlauf statt „Zugestellt“ auf Englisch „Returned to the sender“ (zurück beim Absender).
 
-Peek schaut alle 30 Minuten nach, auch wenn das Paket in Zustellung ist oder ein Tracking-Dienst antwortet, und nach einer gescheiterten Abfrage erst nach einer Stunde wieder. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
+Peek schaut bis zu alle 30 Minuten nach, auch wenn das Paket in Zustellung ist, und nach einer gescheiterten Abfrage erst nach einer Stunde wieder. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“.
 
 Übergeben [UPS](carrier:ups) oder [FedEx](carrier:fedex) ein Paket an USPS, kann Peek es bei USPS weiterverfolgen, sobald USPS Fortschritt zeigt. Geht ein Paket mit internationaler Postnummer auf `DE`, `AT` oder `CH` in die USA, fragt Peek mit derselben Nummer auch USPS: sobald DHL oder die Schweizerische Post die USA als Ziel nennt, oder wenn dein Land für Peek die USA sind, etwa beim Empfänger dort. Die Österreichische Post nennt kein Ziel; bei ihr zählt nur dein Land. Für Nummern der Schweizerischen Post, die mit `L` beginnen, fragt Peek USPS nicht. Erneute Zustellung, Informed Delivery und Nachforschungen bleiben bei USPS: Kontaktieren kann Peek USPS oder den Shop nicht für dich.
 

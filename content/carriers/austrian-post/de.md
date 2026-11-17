@@ -3,7 +3,7 @@ title: Austrian Post Sendungsverfolgung: Status, Abholung, Hilfe
 description: Paket der Österreichischen Post verfolgen: wie die Sendungsnummer aussieht, was jeder Status heißt, wie lange die Filiale wartet und wen du fragst.
 slug: austrian-post-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Die Österreichische Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) stellt in Österreich Briefe und Pakete zu. Dein Paket verfolgst du auf post.at unter „Sendungsverfolgung“, in der Post App oder mit der Nummer im Feld oben. Die Sendungsnummer bekommst du vom Shop, aus der e-Benachrichtigung der Post oder vom gelben Zettel nach einem verpassten Zustellversuch.
@@ -95,7 +95,7 @@ So nennt die Post ihre Kanäle für Privatkunden (gelesen am 11. Oktober 2026):
 
 Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen oder in Verteilung ist; sobald es in Zustellung ist, nur noch ein Zeitfenster für diesen Tag. Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`. Die Zollscans der Post, etwa `Lagereingang - Zollanmeldungshindernis`, zeigt Peek als „Beim Zoll“.
 
-Peek prüft das Paket alle 10 Minuten, in Zustellung alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn die Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange die Post selbst antwortet; über Tracking-Dienste alle 15 Minuten), und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
+Peek prüft das Paket bis zu alle 10 Minuten, in Zustellung bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn die Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange die Post selbst antwortet; über Tracking-Dienste alle 15 Minuten), und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
 
 ## Fragen zur Sendungsverfolgung der Post
 

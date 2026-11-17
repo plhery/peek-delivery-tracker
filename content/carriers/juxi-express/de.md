@@ -3,7 +3,7 @@ title: Juxi Express Sendungsverfolgung: JXC-Nummer, Zusteller, Zoll
 description: Juxi-Express-Paket (SHJX) aus China verfolgen: wie die JXC-Sendungsnummer aussieht, wer in Deutschland, Österreich und der Schweiz zustellt und wen du fragst.
 slug: juxi-express-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-17
 ---
 
 Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) ist ein Spediteur aus Shanghai, der Pakete von Onlinehändlern in China ins Ausland bringt, auf eigenen Linien und über die Post. Steht bei deiner Bestellung SHJX oder 驹隙, ist ebenfalls Juxi gemeint. Eine eigene Sendungsverfolgung hat Juxi nicht: Füg die Sendungsnummer oben ins Feld ein. Du bekommst sie vom Shop, der Juxi gebucht hat, mit den Versanddaten deiner Bestellung.
@@ -87,7 +87,7 @@ Juxi hat keine Tracking-Seite mehr, die Peek lesen könnte: Der Tracking-Button 
 
 Nennt ein Tracking-Dienst den Paketdienst, der das Paket übernommen hat, samt dessen eigener Nummer, zeigt Peek „Zustellung durch“ mit dem Namen dieses Paketdienstes und dazu seine Nummer. Solange Peek das Paket bei diesem Paketdienst nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei … angekündigt, noch nicht eingetroffen“. Kann Peek dessen eigene Sendungsverfolgung lesen, fragt es auch dort nach. Sobald dort ein Scan auftaucht, der mindestens so neu ist wie der neueste im Verlauf, verfolgt Peek das Paket dort weiter und behält die bisherigen Scans. Nennt dir der Shop die Nummer des Zustellers, kannst du sie auch selbst in Peek einfügen: Peek verfolgt mehr als 3.500 Paketdienste.
 
-Solange Peek das Paket über Tracking-Dienste verfolgt, schaut es alle 15 Minuten nach, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang kein neuer Scan (solange das Paket „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Juxi Express oder den Shop kann Peek nicht für dich kontaktieren.
+Solange Peek das Paket über Tracking-Dienste verfolgt, schaut es stündlich nach, nach einem Tag ohne neuen Scan nur noch alle 3 Stunden und an dem Tag, an dem das Paket in Zustellung ist, bis zu alle 15 Minuten. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Juxi Express oder den Shop kann Peek nicht für dich kontaktieren.
 
 ## Fragen zur Juxi Express Sendungsverfolgung
 

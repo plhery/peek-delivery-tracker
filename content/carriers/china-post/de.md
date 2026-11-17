@@ -3,7 +3,7 @@ title: China Post Sendungsverfolgung: Nummer, Status, Zustellung
 description: China-Post-Paket verfolgen: wie die CN-Nummer aussieht, was die chinesischen Status bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: china-post-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 China Post ist die staatliche Post Chinas, EMS ihre Expressmarke. Kam deine Bestellung bei AliExpress, Temu, Shein oder einem anderen Shop mit einer Nummer, die auf `CN` endet, hat China Post sie vergeben. In Deutschland, Österreich und der Schweiz übernimmt meist die Post vor Ort das Paket und stellt es unter derselben Nummer zu. Verfolgen kannst du es auf China Posts Seite ems.com.cn oder oben im Feld. Die Nummer steht in den Versanddetails deiner Bestellung.
@@ -106,7 +106,7 @@ Du siehst den Status, den Verlauf mit dem Amt jedes Scans (ein auf Chinesisch ge
 
 Endet die Nummer auf `CN` und nennt China Post Deutschland, Österreich oder die Schweiz als Ziel, fragt Peek mit derselben Nummer auch DHL, die Österreichische Post bzw. die Schweizerische Post. Zeigt diese frische Scans, wechselt Peek dorthin und behält China Posts Verlauf. DHL und die Schweizerische Post fragt Peek auf Deutsch, wenn du Peek auf Deutsch nutzt (DHL sonst auf Englisch): Ihre Scans erscheinen dann mit ihren deutschen Texten; die Österreichische Post liefert ihre Texte ohnehin auf Deutsch. Nennt China Post kein Ziel oder antwortet nicht, nimmt Peek dein Land: in der iPhone- und der Android-App die eingestellte Region, im Browser das Land, aus dem du das Paket hinzugefügt hast.
 
-Peek fragt alle 10 Minuten nach, oder stündlich, sobald China Post still geworden ist: nach 12 Stunden ohne neuen Scan, solange das Paket noch auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ steht, oder nach zwei Tagen bei jedem anderen Schritt. Ist das Paket in Zustellung, fragt Peek alle 2 Minuten nach, oder alle 5, wenn die Abfrage einen Browser öffnen muss, wie für China Posts öffentliche Vorschau: an diesem Tag ab 6:00 Uhr Ortszeit, solange China Post selbst antwortet. Über Tracking-Dienste fragt Peek alle 15 Minuten nach. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. China Post, deine Post oder den Shop kontaktieren kann Peek nicht für dich.
+Peek fragt stündlich bei China Post nach, auch wenn das Paket in Zustellung ist. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Mitteilungen gibt es für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. China Post, deine Post oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur China Post Sendungsverfolgung
 

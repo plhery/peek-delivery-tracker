@@ -83,7 +83,7 @@ Solange GOFO eine `GF`-, `CR`- oder `MGP`-Nummer noch nicht kennt, prüft Peek w
 
 Peek zeigt den aktuellen Status, jeden Scan mit Ort und US-Bundesstaat laut GOFO (etwa `Jamaica, NY`), die Stationen auf einer Karte, die Zustellzeit und das Zielland. Die Scan-Texte bleiben auf Englisch, während die Hauptphase auf Deutsch erscheint („Etikett erstellt“, „Beim Paketdienst eingegangen“, „Unterwegs“, „In Zustellung“, „Zugestellt“ – ohne den Zusatz, den GOFO bei der Zustellung manchmal hinter ein Komma setzt). Ein von GOFO berechnetes voraussichtliches Lieferdatum zeigt Peek so lange an, bis das Paket auf „In Zustellung“, „Zugestellt“ oder „Zurück an Absender“ wechselt; Zustellfotos, GPS-Koordinaten und Gewicht lässt Peek weg.
 
-Peek fragt GOFO alle 30 Minuten ab (auch während „In Zustellung“), wartet nach einer fehlgeschlagenen Abfrage 60 Minuten und wechselt nach zwei Tagen ohne Neuigkeiten – oder nach 12 Stunden auf „Etikett erstellt“ beziehungsweise „Beim Paketdienst eingegangen“ – auf stündliche Prüfungen. Benachrichtigungen lassen sich für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einschalten. Weder GOFO noch den Shop kann Peek für dich kontaktieren.
+Peek fragt GOFO bis zu alle 30 Minuten ab (auch während „In Zustellung“), wartet nach einer fehlgeschlagenen Abfrage 60 Minuten und wechselt nach zwei Tagen ohne Neuigkeiten – oder nach 12 Stunden auf „Etikett erstellt“ beziehungsweise „Beim Paketdienst eingegangen“ – auf stündliche Prüfungen. Benachrichtigungen lassen sich für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“ einschalten. Weder GOFO noch den Shop kann Peek für dich kontaktieren.
 
 ## Häufige Fragen zur GOFO Express Sendungsverfolgung
 

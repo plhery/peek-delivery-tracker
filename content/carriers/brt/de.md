@@ -3,7 +3,7 @@ title: BRT Sendungsverfolgung: Paket aus Italien, Status
 description: BRT-Paket verfolgen: wo die Sendungsnummer steht, was BRTs Statusmeldungen bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Kontakt.
 slug: brt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 BRT ist ein italienischer Expresskurier und gehört wie DPD zur Geopost-Gruppe. Ein Paket verfolgst du mit dem Link in BRTs SMS oder E-Mail, im Suchfeld auf brt.it oder hier: Füg die Nummer oben ins Feld ein. Diese Nummer, den BRTcode, schickt dir BRT, sobald es das Paket hat und der Absender deine Kontaktdaten weitergegeben hat.
@@ -101,7 +101,7 @@ Peek fragt BRT direkt, ohne Browser. Du siehst den Status, den Verlauf mit dem O
 
 **Aus dem Ausland nach Italien.** Bringen Chronopost oder DPD ein Paket nach Italien und stellt BRT es zu, ergänzt Peek bei der 14-stelligen Nummer die früheren Scans des Partners. Kennt BRT die Nummer noch nicht, fragt Peek Chronopost und DPD und zeigt deren Verlauf, sobald er das Paket auf dem Weg nach Italien zeigt. Ist BRTs Sendungsverfolgung wegen Wartung nicht erreichbar, zeigt Peek bei 14 Ziffern die Schritte aus dem DPD-Netz, jeden einmal und ohne Ort.
 
-Peek schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour ab 6:00 Uhr oder, wenn der Termin ein Zeitfenster hat, ab einer halben Stunde vor dessen Beginn, und solange BRT oder DPD selbst antwortet (alle 5 Minuten, wenn DPDs Abfrage einen Browser braucht); über Tracking-Dienste alle 15 Minuten. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. BRT oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist: am Tag der Zustelltour ab 6:00 Uhr oder, wenn der Termin ein Zeitfenster hat, ab einer halben Stunde vor dessen Beginn, und solange BRT oder DPD selbst antwortet (alle 5 Minuten, wenn DPDs Abfrage einen Browser braucht); über Tracking-Dienste alle 15 Minuten. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. BRT oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur BRT Sendungsverfolgung
 

@@ -3,7 +3,7 @@ title: Chronopost Sendungsverfolgung: Paket aus Frankreich, Status
 description: Chronopost-Paket aus Frankreich verfolgen: wie die Sendungsnummer aussieht, was die französischen Status bedeuten, wer zustellt, Pickup-Relais und Kontakt.
 slug: chronopost-sendungsverfolgung
 published: 2026-11-04
-updated: 2026-11-04
+updated: 2026-11-17
 ---
 
 Chronopost ist der Expressdienst für Pakete der französischen Gruppe La Poste und gehört zu Geopost, der Paketsparte der Gruppe, zu der auch DPD gehört. Ein Paket verfolgst du in Chronoposts Sendungsverfolgung auf chronopost.fr oder hier: Füg die Nummer oben ins Feld ein.
@@ -95,7 +95,7 @@ Bei 15 Zeichen fragt Peek Chronopost zusammen mit den vier DPD-Netzen, die diese
 
 Du siehst den Status, den Verlauf mit dem Ort jedes Scans auf der Karte, das Zielland, den Zeitpunkt der Zustellung und, solange das Paket an einer Abholstelle wartet, Name und Adresse des Relais oder Automaten. Einen voraussichtlichen Liefertag zeigt Peek nur, wenn Chronopost einen Termin für die neue Zustellung oder ein Zeitfenster nennt oder zwischen Freitag und Sonntag `Livraison prévue lundi prochain` schreibt. Deine Adresse und die Kontaktdaten der Abholstelle zeigt Peek nicht. Nennt Chronopost zu einem Scan keine Zeitzone, gilt die Uhrzeit des Orts, an dem er entstand.
 
-Peek schaut alle 10 Minuten nach, in Zustellung ab 6:00 Uhr französischer Zeit (wie in Deutschland, Österreich und der Schweiz) alle 2 Minuten, solange Chronopost selbst antwortet, nach einer fehlgeschlagenen Abfrage nach 15 Minuten; über Tracking-Dienste alle 15 Minuten. Nennt Chronopost ein Zeitfenster, bleibt es bis 30 Minuten vor dessen Beginn bei 10 Minuten, ebenso bei einer Zustellung, die seit einem früheren Tag läuft. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Chronopost oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach, in Zustellung ab 6:00 Uhr französischer Zeit (wie in Deutschland, Österreich und der Schweiz) bis zu alle 2 Minuten, solange Chronopost selbst antwortet, nach einer fehlgeschlagenen Abfrage nach 15 Minuten; über Tracking-Dienste alle 15 Minuten. Nennt Chronopost ein Zeitfenster, bleibt es bis 30 Minuten vor dessen Beginn beim üblichen Takt, ebenso bei einer Zustellung, die seit einem früheren Tag läuft. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt. Nach zwei Tagen ohne neuen Scan (nach 12 Stunden, solange es „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt) schaut Peek nur noch stündlich nach. Für Mitteilungen wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Chronopost oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur Chronopost Sendungsverfolgung
 

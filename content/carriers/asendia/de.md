@@ -3,7 +3,7 @@ title: Asendia Sendungsverfolgung: Status, Zustellung, Kontakt
 description: Asendia-Paket verfolgen: woher die Nummer kommt, was die Status bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt und wen du fragst.
 slug: asendia-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Asendia gehört La Poste und der Schweizerischen Post und bringt Online-Bestellungen für Shops über die Grenze. Bis an deine Tür liefert Asendia nicht: Es holt das Paket aus dem Lager des Shops im Ausland und bringt es in dein Land, dort übernimmt ein Paketdienst, den du wahrscheinlich kennst. Verfolgen kannst du es mit der Nummer aus der Versandbestätigung des Shops, auf [Asendias Tracking-Seite](https://track.asendia.com/track) oder, bei Asendia USA, auf [A1 Tracking](https://a1.asendiausa.com/tracking/).
@@ -98,7 +98,7 @@ Peek fragt zuerst den A1-Tracker von Asendia USA. Antwortet A1 nicht, öffnet es
 
 Antwortet A1, siehst du den Status, den Verlauf mit Ort, Region und Land, das Gewicht, das Zielland und den Paketdienst vor Ort mit seiner eigenen Nummer. Ein voraussichtliches Lieferdatum gibt es nicht, Adressen, Postleitzahlen und Bestellreferenzen fehlen, ebenso Scans ohne Zeitzone. Die Scans stehen auf Englisch, wie A1 sie schreibt. Ist der Paketdienst vor Ort einer, den Peek verfolgt, etwa USPS, die Schweizerische Post oder La Poste, fragt es auch ihn und wechselt zu ihm, sobald er neuere Schritte zeigt; die Seite des Pakets zeigt dann „Zustellung durch“ diesen Paketdienst. Das klappt nicht bei jedem Paket.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist (alle 5, solange es track.asendia.com liest). Das gilt am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Asendias eigene Sendungsverfolgung antwortet; über Tracking-Dienste fragt Peek alle 15 Minuten nach. Ist Peek zu USPS gewechselt, schaut es alle 30 Minuten nach, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur die Zustellung“. Asendia oder den Shop kontaktieren kann es nicht.
+Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (alle 5, solange es track.asendia.com liest). Das gilt am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange Asendias eigene Sendungsverfolgung antwortet; über Tracking-Dienste fragt Peek alle 15 Minuten nach. Ist Peek zu USPS gewechselt, schaut es alle 30 Minuten nach, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Jeder Scan landet auf einer Karte, und du bekommst Mitteilungen: bei jedem Scan, nur bei wichtigen Schritten oder „Nur die Zustellung“. Asendia oder den Shop kontaktieren kann es nicht.
 
 ## Fragen zur Asendia Sendungsverfolgung
 

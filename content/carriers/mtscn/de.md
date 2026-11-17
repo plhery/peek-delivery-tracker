@@ -3,7 +3,7 @@ title: Meiteshun (MTSCN) Sendungsverfolgung: AMTS-Nummer, Status
 description: Meiteshun-Paket (美特顺) aus Shenzhen verfolgen: wie die AMTS-Nummer aussieht, was die Schritte bedeuten und warum Meiteshun es vorab als zugestellt anzeigen kann.
 slug: meiteshun-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司, auch MTSCN) ist ein Spediteur aus Shenzhen in China. Hat ein Shop in China deine Bestellung mit Meiteshun verschickt, beginnt deine Sendungsnummer mit AMTS und endet auf FS: Füg sie oben ins Feld ein. Lies Meiteshuns Sendungsverfolgung aber mit Vorsicht: Das System trägt den ganzen Weg eines Pakets samt Zustellung schon ein, wenn die Bestellung angelegt wird. Ein `Delivered` dort beweist also nicht, dass dein Paket angekommen ist.
@@ -81,7 +81,7 @@ Peek hält jeden Schritt zurück, der mehr als zwölf Stunden vor seiner eigenen
 
 Peek verfolgt das Paket auf Meiteshuns Tracking-Seite. Übergeben kann es ein Meiteshun-Paket nur an die Schweizerische Post, und nur wenn der Datensatz sie als Linie nennt, eine Nummer der Schweizerischen Post enthält und kein Zielland außerhalb der Schweiz und Liechtensteins angibt. Das Paket zeigt dann „Zustellung durch Swiss Post“ und diese Nummer. Solange Peek das Paket bei der Post nur angekündigt findet, noch ohne eigenen Scan, zeigt es stattdessen „Bei Swiss Post angekündigt, noch nicht eingetroffen“. Gibt dir der Shop die Nummer eines anderen Paketdiensts, der zustellt, füg sie als eigenes Paket hinzu.
 
-Peek schaut alle 10 Minuten nach und alle 2 Minuten, sobald das Paket in Zustellung ist (`package is on the way` zählt nicht dazu), am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange Meiteshun oder die Schweizerische Post selbst antwortet; über Tracking-Dienste alle 15 Minuten. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach, und bei einer Bestellung, deren ganzer Ablauf beim Anlegen geschrieben wurde, ist das bald so weit. Als Benachrichtigung wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Von den Schritten des Ablaufs meldet „Wichtige Schritte“ nur `Customs clearanceisin progress` und `Delivered`. Meiteshun oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach und bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (`package is on the way` zählt nicht dazu), am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn der Paketdienst ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange Meiteshun oder die Schweizerische Post selbst antwortet; über Tracking-Dienste alle 15 Minuten. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach, und bei einer Bestellung, deren ganzer Ablauf beim Anlegen geschrieben wurde, ist das bald so weit. Als Benachrichtigung wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Von den Schritten des Ablaufs meldet „Wichtige Schritte“ nur `Customs clearanceisin progress` und `Delivered`. Meiteshun oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur Meiteshun Sendungsverfolgung
 

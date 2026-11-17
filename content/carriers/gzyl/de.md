@@ -3,7 +3,7 @@ title: GZYL Sendungsverfolgung: YL…YQ-Nummer, Status und Zustellung
 description: GZYL-Paket (广州云链) aus Guangzhou verfolgen: wie die YL…YQ-Nummer aussieht, was die Schritte heißen und warum ein Paket dort vorab als zugestellt stehen kann.
 slug: gzyl-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 GZYL (广州云链, Guangzhou Yunlian) ist 广州云链货运代理有限公司, ein Spediteur aus Guangzhou in China. Hat ein Shop in China deine Bestellung mit GZYL verschickt, besteht deine Sendungsnummer aus YL, zehn Ziffern und YQ: Füg sie oben ins Feld ein. GZYLs Website, yunlianhouyun.com, ist auf Chinesisch, und ihre Paketsuche (小包查询) öffnet eine Tracking-Seite, die nur unter einer IP-Adresse läuft. Lies die Tracking-Seite mit Vorsicht: GZYL schreibt einen großen Teil des Verlaufs im Voraus, deshalb ist ein Schritt dort, selbst `Delivered`, nicht immer ein Scan.
@@ -90,7 +90,7 @@ Peek hält jeden Schritt zurück, der mehr als zwölf Stunden vor seiner eigenen
 
 Ohne Übergabe an die Schweizerische Post bleibt Peek bei GZYL: Gibt dir der Shop die Nummer des Paketdiensts, der zustellt, füg sie als eigenes Paket hinzu.
 
-Peek schaut alle 10 Minuten nach. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Als Benachrichtigung wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“: „Wichtige Schritte“ umfasst die beiden Zollschritte von GZYL und die Zustellung, nicht die Flüge oder die Sortierung. GZYL oder den Shop kontaktieren kann Peek nicht für dich.
+Peek schaut bis zu alle 10 Minuten nach. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Als Benachrichtigung wählst du „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“: „Wichtige Schritte“ umfasst die beiden Zollschritte von GZYL und die Zustellung, nicht die Flüge oder die Sortierung. GZYL oder den Shop kontaktieren kann Peek nicht für dich.
 
 ## Fragen zur GZYL Sendungsverfolgung
 

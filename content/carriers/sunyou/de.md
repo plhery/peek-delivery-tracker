@@ -3,7 +3,7 @@ title: SunYou Tracking: Sendungsverfolgung, Status und Kontakt
 description: SunYou-Paket (SYPost) aus China verfolgen: wie die SY-Nummer aussieht, was die Status bedeuten, wer in Deutschland zustellt und wen du fragst, wenn nichts kommt.
 slug: sunyou-sendungsverfolgung
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 SunYou, auch SYPost geschrieben, ist ein Logistikunternehmen aus Shenzhen, das kleine Pakete für Onlinehändler in China ins Ausland bringt und sie im Zielland einem Paketdienst vor Ort übergibt. Seine Nummern beginnen mit SY: Gib deine auf SunYous Tracking-Seite [sypost.net](https://www.sypost.net) ein oder oben ins Feld. Die Nummer bekommst du vom Shop, mit den Versanddaten deiner Bestellung.
@@ -90,7 +90,7 @@ Peek liest SunYous Tracking auf Englisch, darum stehen die Zeilen dort englisch,
 
 Nennt SunYou die Nummer des Paketdiensts vor Ort, kann Peek diesen Dienst abfragen, etwa DHL in Deutschland oder bei einer Postnummer die Post des Ziellands, und wechselt zu ihm, sobald er neuere Schritte zeigt. Das Paket behält seine SunYou-Nummer, seine Seite zeigt „Zustellung durch“ und den Dienst, mit dessen eigener Nummer und einem Link. Solange Peek das Paket bei diesem Dienst nur angekündigt findet, noch ohne eigenen Scan, zeigt die Seite stattdessen „Bei … angekündigt, noch nicht eingetroffen“. Das klappt nicht bei jedem Paket.
 
-Es schaut alle 10 Minuten nach, alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange SunYou selbst antwortet; über Tracking-Dienste alle 15 Minuten), und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL, USPS und GOFO in den USA, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. SunYou oder den Händler kontaktieren kann es nicht für dich.
+Es schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket in Zustellung ist (am Tag der Zustelltour ab 6:00 Uhr Ortszeit und solange SunYou selbst antwortet; über Tracking-Dienste alle 15 Minuten), und kann dir Mitteilungen schicken: für jeden Scan, nur für wichtige Schritte oder nur am Liefertag. Übernimmt ein anderer Paketdienst die Zustellung, richtet sich Peek nach dem Takt dessen, der das Paket zustellt: stündlich bei Royal Mail und Poste Italiane, alle 30 Minuten bei PostNL, USPS und GOFO in den USA, auch wenn das Paket in Zustellung ist. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. SunYou oder den Händler kontaktieren kann es nicht für dich.
 
 ## Fragen zur SunYou Sendungsverfolgung
 

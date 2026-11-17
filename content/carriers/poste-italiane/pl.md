@@ -2,8 +2,8 @@
 title: Poste Italiane śledzenie: kody 1UW i 3UW oraz statusy
 description: Śledzenie przesyłki Poste Italiane z Włoch do Polski: jak wygląda numer (1UW, 3UW, 8UW, 5P), co znaczą włoskie statusy, odbiór w Punto Poste i kontakt.
 slug: poste-italiane-sledzenie
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 Poste Italiane to włoski operator pocztowy, który przez sieci Crono i SDA doręcza też zamówienia z włoskich sklepów internetowych, z Vinted czy eBaya. Przesyłkę sprawdzisz w „Cerca Spedizioni” na poste.it (dawniej Dove Quando), w aplikacji Poste Italiane albo wklejając kod powyżej. W drodze z Włoch do Polski poste.it pokazuje etapy do międzynarodowego centrum wymiany; przy numerach pocztowych z końcówką `IT` dalszą obsługę przejmuje operator w Polsce.
@@ -62,7 +62,7 @@ Każdy skan ma włoskie zdanie z *Legenda degli stati di spedizione*, pokazywane
 
 - **Terminy i pełnomocnictwo:** od 3 dni roboczych w automacie do 10 na poczcie (Poste Delivery Web: 10 poczta, 7 Punto Poste, 3 automat; Crono: 10 w Punto Poste; polecone: 30 dni, Raccomandata 1: 15 dni). Rezerwacja wizyty przez „Prenota” lub pod 06 4526 4526; na poczcie osoba trzecia odbiera ze szczegółowym upoważnieniem, swoim dokumentem i kopią Twojego, a w Punto Poste/automacie kodem PIN.
 - **Scegli Tu i PostePlus:** w Scegli Tu jednorazowo zmienisz dzień, adres we Włoszech, placówkę/Punto Poste, sąsiada, bezpieczne miejsce lub urlop; PostePlus działa dla mieszkańców Włoch.
-- **Odprawa spoza UE we Włoszech:** płatna przy odbiorze, na poczcie lub taniej na www.poste.it przyciskiem „Paga” (opłata handlowa Poste: 3 € do 22 €, 7 € do 150 €, 21 € powyżej; online: 1 € do 150 €, 18 € powyżej). Według Komisji Europejskiej od 1 lipca 2026 r. dochodzi cło 3 € za pozycję do 150 €, a od 1 listopada 2026 r. opłata unijna 2 € za artykuł przy zakupach online. Poste ostrzega też o znacznych spowolnieniach (*significativi rallentamenti*) odpraw spoza UE z przyczyn technicznych, bez możliwego terminu rozładowania zaległości; zobacz [paczka na cle](guide:customs).
+- **Odprawa spoza UE we Włoszech:** płatna przy odbiorze, na poczcie lub taniej na www.poste.it przyciskiem „Paga” (opłata handlowa Poste: 3 € do 22 €, 7 € do 150 €, 21 € powyżej; online: 1 € do 150 €, 18 € powyżej). Według Komisji Europejskiej od 1 lipca 2026 r. dochodzi cło 3 € za każdy rodzaj towaru w przesyłkach do 150 €, a od 1 listopada 2026 r. opłata unijna 2 € za każdy rodzaj towaru przy zakupach online, niezależnie od wartości. Poste ostrzega też o znacznych spowolnieniach (*significativi rallentamenti*) odpraw spoza UE z przyczyn technicznych, bez możliwego terminu rozładowania zaległości; zobacz [paczka na cle](guide:customs).
 
 ## Paczka utknęła, zaginęła lub przyszła uszkodzona
 
@@ -84,9 +84,9 @@ Sprawdzone na poste.it 16 listopada 2026 r.:
 
 [Peek](/) od razu rozpoznaje Poste Italiane po `RA`, `1UW`, `3UW`, `8UW`, `JJITA`, `2IMA`, `2IVC`, `EF`, `EG`, `GF`, `JF`, `JG`, `LF` i `ZC…IT`, po poprawnych numerach pocztowych na `IT` zaczynających się od `C`, `E`, `L` lub `R` oraz po `5P` (chyba że po `5P` stoi jedenaście cyfr zgodnych z Colissimo: wtedy pyta La Poste i Poste Italiane, we Włoszech najpierw Poste). Inne poprawne numery pocztowe na `IT` pokazują „Nieznany operator pocztowy” (Poste, potem [Chronopost](carrier:chronopost)); `X…IT` bez cyfry pocztowej (poza Chronopost) oraz kody SDA/Crono idą tylko do Poste (`000A00000000B`, `9C0000I000000`, `9C0000J000000` też do [AliExpress / Cainiao](carrier:cainiao)). Przy 12 poprawnych cyfrach sprawdza m.in. Poste, BRT i Colis Privé („Sprawdzanie usług śledzenia…”), a ręczny wybór daje „Zmień” / „Zmień przewoźnika”. Działają linki `poste.it` (`#/risultati-spedizioni/`) i `sda.it` (`tracing.letteraVettura=`) bez kodu pocztowego.
 
-Z Polski Peek sprawdza też poprawne numery pocztowe na `IT` (`RR…IT`, `CW…IT`, poza `ZC…IT`) w [Poczcie Polskiej](carrier:poczta-polska) i przełącza na nią przy nowszych skanach; w drugą stronę 16-znakowe etykiety [Vinted Go](carrier:vinted-go) lub [Cainiao](carrier:cainiao) z kodem `1UW`, `3UW`, `8UW` albo `5P` przechodzą automatycznie na Poste Italiane.
+Z Polski Peek sprawdza też poprawne numery pocztowe na `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) w [Poczcie Polskiej](carrier:poczta-polska) i przełącza na nią przy nowszych skanach; w drugą stronę 16-znakowe etykiety [Vinted Go](carrier:vinted-go) lub [Cainiao](carrier:cainiao) z kodem `1UW`, `3UW`, `8UW` albo `5P` przechodzą automatycznie na Poste Italiane.
 
-Odpytywanie co godzinę i powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje do 20 skanów na mapie, planowany dzień, usługę, „Opłaty importowe” i godziny lokalne („Godziny w Twojej strefie czasowej: …” na peektracker.com i iPhonie). Odbiorcę, adres i podpis widzi tylko właściciel paczki (ukryte w linkach); nadawcy, wagi, wymiarów i adresu placówki Peek nie zapisuje. Po dwóch dniach bez rozpoznania: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
+Odpytywanie co godzinę i powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje do 20 skanów na mapie, planowany dzień, usługę, „Opłaty importowe” i godziny lokalne („Godziny w Twojej strefie czasowej: …” na peektracker.com i iPhonie). Nadawcy, wagi, wymiarów ani adresu placówki Peek nie pokazuje. Po dwóch dniach bez rozpoznania: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
 
 ## Najczęstsze pytania o śledzenie Poste Italiane
 

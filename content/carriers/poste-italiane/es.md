@@ -2,8 +2,8 @@
 title: Seguimiento Poste Italiane: códigos 1UW y 3UW y estados
 description: Rastrear un paquete de Poste Italiane en España: cómo es el código de envío (1UW, 3UW, 8UW, 5P), qué significan los estados italianos, plazos y contacto.
 slug: seguimiento-poste-italiane
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 Poste Italiane es el operador postal público de Italia y reparte también, mediante sus redes Crono y SDA, compras en tiendas online italianas, Vinted o eBay. Puedes seguir tu envío en «Cerca Spedizioni» dentro de poste.it (antiguo Dove Quando), en la app Poste Italiane o pegando el código arriba. En envíos de Italia a España, poste.it muestra los pasos hasta el centro de cambio internacional; en códigos postales terminados en `IT`, el reparto pasa después al operador español.
@@ -62,7 +62,7 @@ Cada lectura muestra una frase en italiano de la *Legenda degli stati di spedizi
 
 - **Plazos y autorización:** de 3 días laborables en locker a 10 en oficina postal (Poste Delivery Web: 10 oficina, 7 Punto Poste, 3 locker; Crono: 10 en Punto Poste; certificados: 30 días, Raccomandata 1: 15 días). Cita previa con «Prenota» o en el 06 4526 4526; un tercero retira en oficina con delegación específica, su documento y copia del tuyo, y en Punto Poste/locker con el PIN.
 - **Scegli Tu y PostePlus:** con Scegli Tu puedes cambiar una vez día, dirección en Italia, oficina/Punto Poste, vecino, lugar seguro o vacaciones; PostePlus es para residentes en Italia.
-- **Aduanas extracomunitarias en Italia:** se abonan al cartero, en oficina o más barato en www.poste.it pulsando «Paga» (despacho Poste comercial: 3 € hasta 22 €, 7 € hasta 150 €, 21 € encima; online: 1 € hasta 150 €, 18 € encima). Según la Comisión Europea, desde el 1 de julio de 2026 se suma un arancel temporal de 3 € por artículo hasta 150 € y, desde el 1 de noviembre de 2026, la tasa de gestión de la Unión de 2 € por artículo en compras online. Poste advierte además de ralentizaciones importantes (*significativi rallentamenti*) por incidencias técnicas en el despacho extracomunitario, sin plazo estimado de normalización; ver [paquete en aduanas](guide:customs).
+- **Aduanas extracomunitarias en Italia:** se abonan al cartero, en oficina o más barato en www.poste.it pulsando «Paga» (despacho Poste comercial: 3 € hasta 22 €, 7 € hasta 150 €, 21 € encima; online: 1 € hasta 150 €, 18 € encima). Según la Comisión Europea, desde el 1 de julio de 2026 se suma un arancel temporal de 3 € por tipo de producto en envíos de hasta 150 € y, desde el 1 de noviembre de 2026, la tasa de gestión de la Unión de 2 € por tipo de producto en compras online, sea cual sea su valor. Poste advierte además de ralentizaciones importantes (*significativi rallentamenti*) por incidencias técnicas en el despacho extracomunitario, sin plazo estimado de normalización; ver [paquete en aduanas](guide:customs).
 
 ## Paquete parado, perdido o dañado
 
@@ -84,9 +84,9 @@ Consultado en poste.it el 16 de noviembre de 2026:
 
 [Peek](/) reconoce al instante a Poste Italiane en `RA`, `1UW`, `3UW`, `8UW`, `JJITA`, `2IMA`, `2IVC`, `EF`, `EG`, `GF`, `JF`, `JG`, `LF` y `ZC…IT`, en códigos postales válidos acabados en `IT` que empiezan por `C`, `E`, `L` o `R`, y en `5P` (salvo once dígitos tras `5P` válidos en Colissimo: entonces consulta a [La Poste](carrier:la-poste) y a Poste Italiane, Poste primero desde Italia). Otros postales válidos en `IT` muestran «Operador postal desconocido» (Poste y luego [Chronopost](carrier:chronopost)); `X…IT` sin control postal (fuera de Chronopost) y referencias SDA/Crono van solo a Poste (`000A00000000B`, `9C0000I000000`, `9C0000J000000` también a [AliExpress / Cainiao](carrier:cainiao)). En 12 cifras válidas comprueba varios operadores como [Sending](carrier:sending), Poste y BRT («Comprobando servicios de seguimiento…»), o elígela con «Cambiar» / «Cambiar transportista». Admite enlaces `poste.it` (`#/risultati-spedizioni/`) y `sda.it` (`tracing.letteraVettura=`) sin código postal.
 
-Desde España, Peek comprueba además los números postales válidos acabados en `IT` (`RR…IT`, `CW…IT`, salvo `ZC…IT`) en [Correos](carrier:correos-spain) y cambia en cuanto publica escaneos más recientes; a la inversa, etiquetas de 16 caracteres de [Vinted Go](carrier:vinted-go) o [Cainiao](carrier:cainiao) con un código `1UW`, `3UW`, `8UW` o `5P` pasan automáticamente a Poste Italiane.
+Desde España, Peek comprueba además los números postales válidos acabados en `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) en [Correos](carrier:correos-spain) y cambia en cuanto publica escaneos más recientes; a la inversa, etiquetas de 16 caracteres de [Vinted Go](carrier:vinted-go) o [Cainiao](carrier:cainiao) con un código `1UW`, `3UW`, `8UW` o `5P` pasan automáticamente a Poste Italiane.
 
-Consulta cada hora y avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Muestra hasta 20 escaneos en el mapa, fecha prevista, servicio, «Gastos de importación» y horas locales («Horas en tu zona horaria: …» en peektracker.com y iPhone). Nombre, dirección y firma solo los ve el dueño del envío (ocultos al compartir); remitente, peso, medidas y oficina no se guardan. Tras dos días sin datos: «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
+Consulta cada hora y avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Muestra hasta 20 escaneos en el mapa, fecha prevista, servicio, «Gastos de importación» y horas locales («Horas en tu zona horaria: …» en peektracker.com y iPhone). Remitente, peso, medidas y oficina de recogida no se muestran. Tras dos días sin datos: «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
 
 ## Preguntas frecuentes sobre el seguimiento de Poste Italiane
 

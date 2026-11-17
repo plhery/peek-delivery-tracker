@@ -2,8 +2,8 @@
 title: DPD Suíça rastreio: seguir encomenda, Pickup e contacto
 description: Seguir encomenda DPD Suíça (DPD Switzerland): número de 14 algarismos começado por 060, estados do myDPD, pontos DPD Pickup ao sábado e telefone.
 slug: rastreio-dpd-suica
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 A DPD Suíça é a DPD (Schweiz) AG, em Buchs ZH: integra a rede Geopost e tem mais de 1000 pontos DPD Pickup Location na Suíça. Segue a tua encomenda introduzindo o número de 14 algarismos no portal [myDPD](https://www.dpdgroup.com/ch/mydpd/?lang=de) ou colando-o na caixa acima. Normalmente recebe-lo por email da loja, e também vem no aviso deixado na caixa do correio se não estavas em casa.

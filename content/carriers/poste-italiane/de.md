@@ -2,8 +2,8 @@
 title: Poste Italiane Sendungsverfolgung: 1UW, 3UW, Status
 description: Poste Italiane Paket verfolgen: wie Sendungsnummern (auch 1UW, 3UW, 8UW und 5P) aussehen, was die italienischen Status bedeuten, Abholung und Kontakt.
 slug: poste-italiane-sendungsverfolgung
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 Poste Italiane ist die staatliche Post Italiens und stellt über ihre Netze Crono und SDA auch Bestellungen aus italienischen Onlineshops, von Vinted oder eBay zu. Deine Sendung verfolgst du unter „Cerca Spedizioni“ auf poste.it (früher Dove Quando), in der App Poste Italiane oder direkt hier, indem du den Code oben einfügst. Bei Paketen aus Italien nach Deutschland, Österreich oder in die Schweiz zeigt poste.it den Weg bis zum internationalen Austauschzentrum; bei Postnummern auf `IT` übernimmt danach die Landespost.
@@ -62,7 +62,7 @@ Auf poste.it steht je Scan ein italienischer Satz aus der *Legenda degli stati d
 
 - **Fristen & Vollmacht:** Je nach Dienst 3 Werktage im Locker bis 10 Werktage im Postamt (Poste Delivery Web: 10 im Postamt, 7 im Punto Poste, 3 im Locker; Crono: 10 im Punto Poste; Einschreiben: 30 Tage, Raccomandata 1: 15 Tage). Terminbuchung via „Prenota“ oder unter 06 4526 4526; Abholung durch Dritte im Postamt mit Vollmacht, eigenem Ausweis und Ausweiskopie, im Punto Poste/Locker per PIN.
 - **Scegli Tu & PostePlus:** Ist Scegli Tu aktiv, lässt sich einmalig Tag, Adresse in Italien, Postamt/Punto Poste, Nachbar, Ablageort oder Urlaubspause wählen; PostePlus speichert Vorlieben für Wohnsitzinhaber in Italien.
-- **Nicht-EU-Zoll in Italien:** Zahlbar bei Zustellung, am Schalter oder günstiger auf www.poste.it über „Paga“ (Entgelt für Handelswaren: 3 € bis 22 €, 7 € bis 150 €, 21 € darüber; online 1 € bis 150 €, 18 € darüber). Hinzu kommen laut EU-Kommission seit 1. Juli 2026 3 € Pauschalzoll je Position bis 150 € und seit 1. November 2026 bei Online-Käufen 2 € Unions-Bearbeitungsgebühr je Artikel. Laut Betriebsmeldungen von Poste sorgen IT-Störungen derzeit für erhebliche Verzögerungen (*significativi rallentamenti*) bei der Nicht-EU-Verzollung ohne absehbares Ende des Rückstaus.
+- **Nicht-EU-Zoll in Italien:** Zahlbar bei Zustellung, am Schalter oder günstiger auf www.poste.it über „Paga“ (Entgelt für Handelswaren: 3 € bis 22 €, 7 € bis 150 €, 21 € darüber; online 1 € bis 150 €, 18 € darüber). Hinzu kommen laut EU-Kommission seit 1. Juli 2026 3 € Pauschalzoll je Warenart bei Sendungen bis 150 € und seit 1. November 2026 bei Online-Käufen 2 € Unions-Bearbeitungsgebühr je Warenart, unabhängig vom Wert. Laut Betriebsmeldungen von Poste sorgen technische Störungen derzeit für erhebliche Verzögerungen (*significativi rallentamenti*) bei der Nicht-EU-Verzollung ohne absehbares Ende des Rückstaus.
 
 ## Paket hängt fest, verloren oder beschädigt
 
@@ -84,9 +84,9 @@ Geprüft auf poste.it am 16. November 2026:
 
 [Peek](/) erkennt Poste Italiane sofort an `RA`, `1UW`, `3UW`, `8UW`, `JJITA`, `2IMA`, `2IVC`, `EF`, `EG`, `GF`, `JF`, `JG`, `LF` und `ZC…IT`, an gültigen Postnummern auf `IT` mit `C`, `E`, `L` oder `R` am Anfang sowie an `5P`-Codes (außer elf Ziffern nach `5P` mit Colissimo-Prüfziffer: dann fragt Peek La Poste und Poste Italiane, in Italien zuerst Poste). Übrige gültige `…IT`-Postnummern starten als „Postanbieter unbekannt“ (Poste vor [Chronopost](carrier:chronopost)); `X…IT` ohne Postprüfziffer (außer Chronopost-Präfixen) und SDA-/Crono-Codes gehen allein an Poste (`000A00000000B`, `9C0000I000000`, `9C0000J000000` auch an [AliExpress / Cainiao](carrier:cainiao)). Bei 12 Ziffern mit Poste-Prüfziffer prüft Peek mehrere Dienste wie Poste und [BRT](carrier:brt) („Tracking-Dienste werden geprüft…“); manuelle Wahl jederzeit über „Ändern“ oder „Paketdienst ändern“. Links von `poste.it` (`#/risultati-spedizioni/`) und `sda.it` (`tracing.letteraVettura=`) klappen ohne PLZ.
 
-Außerhalb Italiens prüft Peek gültige Postnummern auf `IT` (wie `RR…IT`, `CW…IT`, nicht `ZC…IT`) zusätzlich bei [DHL](carrier:dhl), der [Österreichischen Post](carrier:austrian-post) oder der [Schweizerischen Post](carrier:swiss-post) und wechselt bei neueren Scans; 16-stellige Etiketten von [Vinted Go](carrier:vinted-go) oder [Cainiao](carrier:cainiao) mit eingebettetem `1UW`-, `3UW`-, `8UW`- oder `5P`-Code übergibt Peek automatisch an Poste Italiane.
+Außerhalb Italiens prüft Peek gültige Postnummern auf `IT` (wie `RR…IT`, `CW…IT`, `ZC…IT`) zusätzlich bei [DHL](carrier:dhl), der [Österreichischen Post](carrier:austrian-post) oder der [Schweizerischen Post](carrier:swiss-post) und wechselt bei neueren Scans; 16-stellige Etiketten von [Vinted Go](carrier:vinted-go) oder [Cainiao](carrier:cainiao) mit eingebettetem `1UW`-, `3UW`-, `8UW`- oder `5P`-Code übergibt Peek automatisch an Poste Italiane.
 
-Abfrage stündlich, Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek zeigt bis zu 20 Scans auf der Karte, Liefertag, Dienst, „Einfuhrabgaben“ und Zeiten mit dem Hinweis „Uhrzeiten in deiner Zeitzone: …“ (auf peektracker.com und iPhone). Empfängername, Adresse und Unterschrift sieht nur der Paketbesitzer (in geteilten Links ausgeblendet); Absender, Gewicht, Maße und Filialadresse entfallen. Nach zwei Tagen ohne Treffer erscheint: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
+Abfrage stündlich, Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek zeigt bis zu 20 Scans auf der Karte, Liefertag, Dienst, „Einfuhrabgaben“ und Zeiten mit dem Hinweis „Uhrzeiten in deiner Zeitzone: …“ (auf peektracker.com und iPhone). Absender, Gewicht, Maße und Filialadresse zeigt Peek nicht. Nach zwei Tagen ohne Treffer erscheint: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
 
 ## Fragen zur Poste Italiane Sendungsverfolgung
 

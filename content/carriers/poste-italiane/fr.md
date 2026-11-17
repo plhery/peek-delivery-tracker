@@ -2,8 +2,8 @@
 title: Suivi Poste Italiane : codes 1UW et 3UW, statuts et délais
 description: Suivre un colis Poste Italiane depuis la France, la Belgique ou la Suisse : codes 1UW, 3UW, 8UW et 5P, sens des statuts italiens, retrait et contact.
 slug: suivi-poste-italiane
-published: 2026-11-16
-updated: 2026-11-16
+published: 2026-11-17
+updated: 2026-11-17
 ---
 
 Poste Italiane est l'opérateur postal italien et livre aussi, via ses réseaux Crono et SDA, les achats sur des boutiques italiennes, Vinted ou eBay. Suis ton envoi dans « Cerca Spedizioni » sur poste.it (ancien Dove Quando), dans l'app Poste Italiane ou en collant son code ci-dessus. Vers la France, la Belgique ou la Suisse, poste.it montre le trajet jusqu'au centre d'échange international ; sur un code postal finissant par `IT`, la poste de ton pays prend ensuite le relais.
@@ -62,7 +62,7 @@ Chaque scan comporte une phrase italienne issue de la *Legenda degli stati di sp
 
 - **Délais et procuration :** de 3 jours ouvrés en locker à 10 en bureau de poste (Poste Delivery Web : 10 bureau, 7 Punto Poste, 3 locker ; Crono : 10 en Punto Poste ; recommandé : 30 jours, Raccomandata 1 : 15 jours). Rendez-vous via « Prenota » ou au 06 4526 4526 ; retrait par un tiers au guichet avec procuration, sa pièce d'identité et copie de la tienne, ou en Punto Poste/locker par code PIN.
 - **Scegli Tu et PostePlus :** si activé, Scegli Tu permet une modification unique (jour, adresse en Italie, bureau/Punto Poste, voisin, lieu sûr, vacances) ; PostePlus est réservé aux résidents en Italie.
-- **Douane hors UE en Italie :** payable à la livraison, au guichet ou moins cher sur www.poste.it via « Paga » (frais Poste sur marchandise : 3 € jusqu'à 22 €, 7 € jusqu'à 150 €, 21 € au-delà ; en ligne : 1 € jusqu'à 150 €, 18 € au-delà). S'y ajoutent, selon la Commission européenne, 3 € par article jusqu'à 150 € depuis le 1er juillet 2026 et la taxe de gestion de l'Union de 2 € par article en ligne depuis le 1er novembre 2026. Poste signale aussi d'importants ralentissements (*significativi rallentamenti*) techniques du dédouanement hors UE, sans délai estimé de retour à la normale.
+- **Douane hors UE en Italie :** payable à la livraison, au guichet ou moins cher sur www.poste.it via « Paga » (frais Poste sur marchandise : 3 € jusqu'à 22 €, 7 € jusqu'à 150 €, 21 € au-delà ; en ligne : 1 € jusqu'à 150 €, 18 € au-delà). S'y ajoutent, selon la Commission européenne, un droit de douane de 3 € par type de produit sur les colis jusqu'à 150 € depuis le 1er juillet 2026 et, pour les achats en ligne, la taxe de gestion de l'Union de 2 € par type de produit, quelle que soit la valeur, depuis le 1er novembre 2026. Poste signale aussi d'importants ralentissements (*significativi rallentamenti*) techniques du dédouanement hors UE, sans délai estimé de retour à la normale.
 
 ## Colis bloqué, perdu ou endommagé
 
@@ -84,9 +84,9 @@ Relevé sur poste.it le 16 novembre 2026 :
 
 [Peek](/) reconnaît aussitôt Poste Italiane sur `RA`, `1UW`, `3UW`, `8UW`, `JJITA`, `2IMA`, `2IVC`, `EF`, `EG`, `GF`, `JF`, `JG`, `LF` et `ZC…IT`, sur les numéros postaux valides en `IT` débutant par `C`, `E`, `L` ou `R`, et sur `5P` (sauf onze chiffres après `5P` vérifiant Colissimo : Peek interroge alors [La Poste](carrier:la-poste) et Poste Italiane, Poste d'abord en Italie). Les autres numéros postaux valides en `IT` affichent « Transporteur postal inconnu » (Poste puis [Chronopost](carrier:chronopost)) ; `X…IT` sans clé postale (hors Chronopost) et les codes SDA/Crono vont à Poste seule (`000A00000000B`, `9C0000I000000`, `9C0000J000000` aussi à [AliExpress / Cainiao](carrier:cainiao)). Sur 12 chiffres valides, Peek interroge Poste, [Colis Privé](carrier:colis-prive), BRT et leurs pairs (« Vérification des services de suivi… »), avec choix manuel via « Changer » ou « Changer de transporteur ». Liens `poste.it` (`#/risultati-spedizioni/`) et `sda.it` (`tracing.letteraVettura=`) acceptés sans code postal.
 
-Hors d'Italie, Peek vérifie aussi les numéros postaux valides en `IT` (`RR…IT`, `CW…IT`, hors `ZC…IT`) chez [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) et bascule dès qu'un scan plus récent paraît ; à l'inverse, les étiquettes de 16 caractères de [Vinted Go](carrier:vinted-go) ou [Cainiao](carrier:cainiao) contenant un code `1UW`, `3UW`, `8UW` ou `5P` basculent vers Poste Italiane.
+Hors d'Italie, Peek vérifie aussi les numéros postaux valides en `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) chez [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) et bascule dès qu'un scan plus récent paraît ; à l'inverse, les étiquettes de 16 caractères de [Vinted Go](carrier:vinted-go) ou [Cainiao](carrier:cainiao) contenant un code `1UW`, `3UW`, `8UW` ou `5P` basculent vers Poste Italiane.
 
-Vérification horaire et alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek affiche jusqu'à 20 scans sur la carte, date prévue, service, « Frais d’importation » et horaires (« Heures dans ton fuseau horaire : … » sur peektracker.com et iPhone). Nom, adresse et signature ne sont visibles que par le propriétaire (masqués en partage) ; expéditeur, poids, dimensions et adresse du bureau sont omis. Après deux jours sans résultat : « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. »
+Vérification horaire et alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek affiche jusqu'à 20 scans sur la carte, date prévue, service, « Frais d’importation » et horaires (« Heures dans ton fuseau horaire : … » sur peektracker.com et iPhone). Expéditeur, poids, dimensions et adresse du bureau ne sont pas affichés. Après deux jours sans résultat : « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. »
 
 ## Questions fréquentes sur le suivi Poste Italiane
 

@@ -1833,6 +1833,39 @@ value class CarrierId(val rawValue: String) {
         val SprintEg = CarrierId("sprint-eg")
         val ViaPajucara = CarrierId("via-pajucara")
         val FtdNz = CarrierId("ftd-nz")
+        val Ader = CarrierId("ader")
+        val Aparcels = CarrierId("aparcels")
+        val CargoInternational = CarrierId("cargo-international")
+        val Cargoboard = CarrierId("cargoboard")
+        val ColisGrosVolume = CarrierId("colis-gros-volume")
+        val ConwestLogistics = CarrierId("conwest-logistics")
+        val EcCourierNetwork = CarrierId("ec-courier-network")
+        val Expressgodo = CarrierId("expressgodo")
+        val FiegeNetherlands = CarrierId("fiege-netherlands")
+        val Furdeco = CarrierId("furdeco")
+        val GuernseyPost = CarrierId("guernsey-post")
+        val Hellmann = CarrierId("hellmann")
+        val Hintzen = CarrierId("hintzen")
+        val IsleOfManPost = CarrierId("isle-of-man-post")
+        val Jidi11000miles = CarrierId("jidi-11000miles")
+        val KdzExpress = CarrierId("kdz-express")
+        val KleineSpedition = CarrierId("kleine-spedition")
+        val Lionwheel = CarrierId("lionwheel")
+        val Mazet = CarrierId("mazet")
+        val MeyerJumbo = CarrierId("meyer-jumbo")
+        val Multidrop = CarrierId("multidrop")
+        val Palletforce = CarrierId("palletforce")
+        val Palletonline = CarrierId("palletonline")
+        val PdsDirect = CarrierId("pds-direct")
+        val PosteSanMarino = CarrierId("poste-san-marino")
+        val Pwb = CarrierId("pwb")
+        val Schaeflein = CarrierId("schaeflein")
+        val TdvGroup = CarrierId("tdv-group")
+        val TransnetCouriers = CarrierId("transnet-couriers")
+        val Trusk = CarrierId("trusk")
+        val Tuffnells = CarrierId("tuffnells")
+        val UnitedPalletNetwork = CarrierId("united-pallet-network")
+        val WalkersTransport = CarrierId("walkers-transport")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3607,6 +3640,39 @@ value class CarrierId(val rawValue: String) {
             SprintEg,
             ViaPajucara,
             FtdNz,
+            Ader,
+            Aparcels,
+            CargoInternational,
+            Cargoboard,
+            ColisGrosVolume,
+            ConwestLogistics,
+            EcCourierNetwork,
+            Expressgodo,
+            FiegeNetherlands,
+            Furdeco,
+            GuernseyPost,
+            Hellmann,
+            Hintzen,
+            IsleOfManPost,
+            Jidi11000miles,
+            KdzExpress,
+            KleineSpedition,
+            Lionwheel,
+            Mazet,
+            MeyerJumbo,
+            Multidrop,
+            Palletforce,
+            Palletonline,
+            PdsDirect,
+            PosteSanMarino,
+            Pwb,
+            Schaeflein,
+            TdvGroup,
+            TransnetCouriers,
+            Trusk,
+            Tuffnells,
+            UnitedPalletNetwork,
+            WalkersTransport,
         )
     }
 }

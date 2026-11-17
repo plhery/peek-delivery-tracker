@@ -1824,6 +1824,39 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let sprintEg = CarrierID(rawValue: "sprint-eg")
     static let viaPajucara = CarrierID(rawValue: "via-pajucara")
     static let ftdNz = CarrierID(rawValue: "ftd-nz")
+    static let ader = CarrierID(rawValue: "ader")
+    static let aparcels = CarrierID(rawValue: "aparcels")
+    static let cargoInternational = CarrierID(rawValue: "cargo-international")
+    static let cargoboard = CarrierID(rawValue: "cargoboard")
+    static let colisGrosVolume = CarrierID(rawValue: "colis-gros-volume")
+    static let conwestLogistics = CarrierID(rawValue: "conwest-logistics")
+    static let ecCourierNetwork = CarrierID(rawValue: "ec-courier-network")
+    static let expressgodo = CarrierID(rawValue: "expressgodo")
+    static let fiegeNetherlands = CarrierID(rawValue: "fiege-netherlands")
+    static let furdeco = CarrierID(rawValue: "furdeco")
+    static let guernseyPost = CarrierID(rawValue: "guernsey-post")
+    static let hellmann = CarrierID(rawValue: "hellmann")
+    static let hintzen = CarrierID(rawValue: "hintzen")
+    static let isleOfManPost = CarrierID(rawValue: "isle-of-man-post")
+    static let jidi11000miles = CarrierID(rawValue: "jidi-11000miles")
+    static let kdzExpress = CarrierID(rawValue: "kdz-express")
+    static let kleineSpedition = CarrierID(rawValue: "kleine-spedition")
+    static let lionwheel = CarrierID(rawValue: "lionwheel")
+    static let mazet = CarrierID(rawValue: "mazet")
+    static let meyerJumbo = CarrierID(rawValue: "meyer-jumbo")
+    static let multidrop = CarrierID(rawValue: "multidrop")
+    static let palletforce = CarrierID(rawValue: "palletforce")
+    static let palletonline = CarrierID(rawValue: "palletonline")
+    static let pdsDirect = CarrierID(rawValue: "pds-direct")
+    static let posteSanMarino = CarrierID(rawValue: "poste-san-marino")
+    static let pwb = CarrierID(rawValue: "pwb")
+    static let schaeflein = CarrierID(rawValue: "schaeflein")
+    static let tdvGroup = CarrierID(rawValue: "tdv-group")
+    static let transnetCouriers = CarrierID(rawValue: "transnet-couriers")
+    static let trusk = CarrierID(rawValue: "trusk")
+    static let tuffnells = CarrierID(rawValue: "tuffnells")
+    static let unitedPalletNetwork = CarrierID(rawValue: "united-pallet-network")
+    static let walkersTransport = CarrierID(rawValue: "walkers-transport")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3598,6 +3631,39 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .sprintEg,
         .viaPajucara,
         .ftdNz,
+        .ader,
+        .aparcels,
+        .cargoInternational,
+        .cargoboard,
+        .colisGrosVolume,
+        .conwestLogistics,
+        .ecCourierNetwork,
+        .expressgodo,
+        .fiegeNetherlands,
+        .furdeco,
+        .guernseyPost,
+        .hellmann,
+        .hintzen,
+        .isleOfManPost,
+        .jidi11000miles,
+        .kdzExpress,
+        .kleineSpedition,
+        .lionwheel,
+        .mazet,
+        .meyerJumbo,
+        .multidrop,
+        .palletforce,
+        .palletonline,
+        .pdsDirect,
+        .posteSanMarino,
+        .pwb,
+        .schaeflein,
+        .tdvGroup,
+        .transnetCouriers,
+        .trusk,
+        .tuffnells,
+        .unitedPalletNetwork,
+        .walkersTransport,
     ]
 
     init(from decoder: Decoder) throws {

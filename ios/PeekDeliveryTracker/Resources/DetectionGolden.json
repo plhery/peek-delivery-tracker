@@ -1788,6 +1788,20 @@
     ]
   },
   {
+    "input": "00343177845170952648",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "swiss-post-cargo",
+      "usps",
+      "nz-post"
+    ],
+    "asked": [
+      "swiss-post-cargo",
+      "nz-post"
+    ]
+  },
+  {
     "input": "00357059930440074440",
     "carrier": "unknown",
     "confidence": "low",
@@ -23743,6 +23757,38 @@
     ],
     "asked": [
       "delhivery"
+    ]
+  },
+  {
+    "input": "18022407171682",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd",
+      "dpd-fr",
+      "mondial-relay",
+      "chronopost",
+      "ciblex",
+      "seur",
+      "brt",
+      "delhivery",
+      "dhl-ecommerce-uk",
+      "dpd-be",
+      "dpd-de",
+      "dpd-hu",
+      "dpd-nl",
+      "dpd-pt",
+      "dpd-uk",
+      "gls-nl",
+      "jadlog",
+      "xpressbees"
+    ],
+    "asked": [
+      "dpd-be",
+      "dpd",
+      "dpd-nl",
+      "dpd-de",
+      "chronopost"
     ]
   },
   {
@@ -77252,6 +77298,14 @@
     ]
   },
   {
+    "input": "ABCDE0000000017NPG",
+    "carrier": "nova-global",
+    "confidence": "high",
+    "candidates": [
+      "nova-global"
+    ]
+  },
+  {
     "input": "ABSINE1031240022",
     "carrier": "unknown",
     "confidence": "none",
@@ -100259,6 +100313,14 @@
     "confidence": "high",
     "candidates": [
       "pickupp-sg"
+    ]
+  },
+  {
+    "input": "PWB999999970CN",
+    "carrier": "pwb",
+    "confidence": "high",
+    "candidates": [
+      "pwb"
     ]
   },
   {

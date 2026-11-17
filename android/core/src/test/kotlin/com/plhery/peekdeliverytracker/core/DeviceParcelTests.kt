@@ -900,7 +900,7 @@ class DeviceParcelTests {
     fun aBrowserCheckClosedEndsAnAddOnThisPhoneAsACancellationWithNoErrorAndNothingAdded() = runTest {
         val transport = RecordingTransport { request ->
             when (request.method to request.path) {
-                "GET" to "/api/public/native/verification" -> jsonResponse(200, """{"appAttestAppId":null,"turnstile":true}""")
+                "GET" to "/api/public/native/verification" -> jsonResponse(200, """{"androidAttestAppId":null,"turnstile":true}""")
                 "POST" to "/api/public/parcels" -> jsonResponse(403, """{"error":"Please verify"}""", mapOf("X-Lookup-Verification" to "required"))
                 else -> jsonResponse(404)
             }

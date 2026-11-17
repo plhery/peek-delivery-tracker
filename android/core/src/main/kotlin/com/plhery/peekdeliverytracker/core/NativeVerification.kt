@@ -29,20 +29,18 @@ import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
-// NativeVerification.swift. App Attest is a `DeviceAttestation` the app gives (none that the server accepts on Android
-// yet) and the browser check a `TurnstilePresenter` (a WebView, by NativeTurnstilePresenter's rules); what is asked,
-// signed and sent, and in which order, is here.
+// NativeVerification.swift. App Attest is a `DeviceAttestation` the app gives (on Android, a key attested by the phone's
+// secure hardware: KeystoreAttestation) and the browser check a `TurnstilePresenter` (a WebView, by
+// NativeTurnstilePresenter's rules); what is asked, signed and sent, and in which order, is here. Android keys register
+// under the server's `androidAttestAppId`, never App Attest's `appAttestAppId`.
 
 class NativeVerificationFailed : Exception()
 
 /**
- * The device's attestation service, which keeps the private key on the device: DCAppAttestService on the iPhone.
- * A key the device no longer has (a reinstall) or refuses fails with `InvalidKey`, and is dropped.
- *
- * The server verifies Apple App Attest alone. On Android `supported()` returns false until it accepts an Android
- * attestation (Play Integrity is the one planned): before then it refuses every registration and assertion, and each
- * refusal pauses attestation for 10 minutes, so the requests and attestations are spent for nothing and lookups reach
- * the browser check no sooner.
+ * The device's attestation service, which keeps the private key on the device: DCAppAttestService on the iPhone, the
+ * Android Keystore here. A key the device no longer has (a reinstall) or refuses fails with `InvalidKey`, and is
+ * dropped. Any other failure, and a refusal by the server, pauses attestation for 10 minutes, the browser check
+ * standing in.
  */
 interface DeviceAttestation {
     /** Whether this installation attests: the build enables it and the device supports it. */
@@ -123,8 +121,9 @@ class NativeVerification(
         language, now,
     )
 
+    /** The app ID this installation's keys register under, `androidAttestAppId`: null where the server takes none. */
     @Serializable
-    private class Configuration(val appAttestAppId: String? = null, val turnstile: Boolean)
+    private class Configuration(val androidAttestAppId: String? = null, val turnstile: Boolean)
 
     @Serializable
     private class Challenge(val challenge: String)
@@ -149,7 +148,7 @@ class NativeVerification(
         lock.withLock {
             try {
                 val config = configuration(baseUrl, using)
-                config.appAttestAppId?.let { registeredKey(baseUrl, it, using) }
+                config.androidAttestAppId?.let { registeredKey(baseUrl, it, using) }
             } catch (error: Exception) {
                 throwIfCancelled(error)
                 forgetInvalidKey(error, baseUrl)
@@ -167,7 +166,7 @@ class NativeVerification(
             proofs[base]?.let { proof ->
                 if (proof.expiresAt > millisecondsSince1970(now()) + 5_000) request = request.setting("X-Lookup-Proof", proof.proof)
             }
-            val appId = configurations[base]?.first?.appAttestAppId
+            val appId = configurations[base]?.first?.androidAttestAppId
             if (appId != null && record(base)?.let { it.appId == appId && it.registered } == true && provider.supported() && mayAttest(base)) {
                 try {
                     request = signed(request, baseUrl, appId, transport)
@@ -183,7 +182,7 @@ class NativeVerification(
             proofs.remove(base)
             request = request.setting("X-Lookup-Proof", null)
             val config = configuration(baseUrl, transport)
-            val attestAppId = config.appAttestAppId
+            val attestAppId = config.androidAttestAppId
             if (provider.supported() && attestAppId != null && mayAttest(base)) {
                 try {
                     request = signed(request, baseUrl, attestAppId, transport)
@@ -293,7 +292,7 @@ class NativeVerification(
         val base = baseUrl
         if (!mayAttest(base)) return null
         val appId = try {
-            configuration(baseUrl, transport).appAttestAppId
+            configuration(baseUrl, transport).androidAttestAppId
         } catch (_: Exception) {
             null
         } ?: return null

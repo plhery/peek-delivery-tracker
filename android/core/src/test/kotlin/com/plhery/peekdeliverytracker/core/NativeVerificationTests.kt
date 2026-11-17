@@ -64,7 +64,7 @@ class NativeVerificationTests {
     private fun refresh(): HttpRequest = HttpRequest(url = base.appendingPath("api/sync"), method = "POST")
 
     private val registered: Map<String, NativeAttestRecord>
-        get() = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = true))
+        get() = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.plhery.peekdeliverytracker", registered = true))
 
     private val neverRegisters = NativeAttestProvider(
         supported = { true },
@@ -97,6 +97,17 @@ class NativeVerificationTests {
     private fun sha256(text: String): List<Byte> = MessageDigest.getInstance("SHA-256").digest(text.toByteArray()).toList()
 
     private fun base64(text: String): String = Base64.getEncoder().encodeToString(text.toByteArray())
+
+    @Test
+    fun neverAttestsUnderAppAttestsAppId() = runTest {
+        // The server offers App Attest's app ID and no Android one: no key is made, registered or asked to sign.
+        val server = NativeTestServer(paid = false)
+        val verifier = verification(neverRegisters, TurnstilePresenter { "synthetic-turnstile-token" })
+        verifier.prepare(base, server.transport)
+        assertEquals(201, verifier.send(lookup(), base, using = server.transport).statusCode)
+        assertEquals(0, server.requests.count { it.path == "/api/public/native/challenge" })
+        assertEquals("synthetic-proof", server.requests.last().header("X-Lookup-Proof"))
+    }
 
     @Test
     fun freeBuildExchangesTokenThroughNativeTransportAndReusesProof() = runTest {
@@ -219,7 +230,7 @@ class NativeVerificationTests {
         )
         val verifier = verification(
             provider, TurnstilePresenter { "token" },
-            records = mapOf(base to NativeAttestRecord(keyId = "old", appId = "TESTTEAM01.com.example.Peek", registered = true)),
+            records = mapOf(base to NativeAttestRecord(keyId = "old", appId = "android:com.plhery.peekdeliverytracker", registered = true)),
             save = { records ->
                 xctAssertEqual(records.isEmpty(), true, "records left")
                 removed += 1
@@ -289,8 +300,8 @@ class NativeVerificationTests {
 
     @Test
     fun signedInRequestGoesUnsignedWhenThisInstallationCannotSign() = runTest {
-        val unregistered = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = false))
-        val otherApp = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Other", registered = true))
+        val unregistered = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.plhery.peekdeliverytracker", registered = false))
+        val otherApp = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.example.other", registered = true))
         val cases = listOf(
             Triple(unsupported, registered, true), Triple(neverRegisters, emptyMap<String, NativeAttestRecord>(), true), Triple(neverRegisters, unregistered, true),
             Triple(neverRegisters, otherApp, true), Triple(neverRegisters, registered, false),
@@ -450,7 +461,7 @@ class NativeVerificationTests {
         val server = NativeTestServer(paid = true)
         val verifier = verification(
             signs, unexpectedCheck(),
-            records = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "TESTTEAM01.com.example.Peek", registered = true)),
+            records = mapOf(base to NativeAttestRecord(keyId = "synthetic-key", appId = "android:com.plhery.peekdeliverytracker", registered = true)),
         )
         val preparing = launch { verifier.prepare(base, held) }
         withTimeout(2.seconds) { started.await() }
@@ -549,7 +560,7 @@ class NativeVerificationTests {
         val secret = "synthetic-secret-proof"
         val transport = HttpTransport { request ->
             when (request.path) {
-                "/api/public/native/verification" -> HttpResponse(200, body = """{"appAttestAppId":null,"turnstile":true}""".toByteArray())
+                "/api/public/native/verification" -> HttpResponse(200, body = """{"androidAttestAppId":null,"turnstile":true}""".toByteArray())
                 "/api/public/verification" -> HttpResponse(200, body = """{"proof":"$secret","expiresAt":"soon"}""".toByteArray())
                 else -> HttpResponse(403, mapOf("X-Lookup-Verification" to "required"))
             }
@@ -637,7 +648,7 @@ private class NativeTestServer(
                     if (request.method == "POST") {
                         status = 204
                     } else {
-                        body = """{"appAttestAppId":${if (paid) "\"TESTTEAM01.com.example.Peek\"" else "null"},"turnstile":true}"""
+                        body = """{"appAttestAppId":"TESTTEAM01.com.example.Peek","androidAttestAppId":${if (paid) "\"android:com.plhery.peekdeliverytracker\"" else "null"},"turnstile":true}"""
                     }
                 "/api/public/native/challenge" -> {
                     delay(challengeDelay)

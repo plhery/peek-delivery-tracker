@@ -131,9 +131,18 @@ their usage counters. New verified requests clear daily counters older than
 seven days and expired challenges. The app signs signed-in requests with the same
 key; checking one updates its counter and last-use time and records nothing
 about the account. Keys are not linked to accounts or parcel inputs. Turnstile
-remains available when App Attest cannot be used. The Android app has no App
-Attest: it shows the Turnstile check in a web view each time it needs a new
-proof, and Cloudflare processes the same signals there as on the website.
+remains available when App Attest cannot be used.
+
+The Android app verifies itself the same way with key attestation. The phone's
+secure hardware makes a key and certifies it with a certificate chain up to
+Google's attestation roots, which says whether the bootloader is locked, how
+the system booted and which app asked for the key. Nothing is sent to Google
+for this: Peek's server checks the chain itself and reads Google's public list
+of revoked certificates. Peek stores and removes the same data as for App
+Attest. Where the phone cannot attest, as on an emulator, with an unlocked
+bootloader or with a system Peek does not know, the app shows the Turnstile
+check in a web view each time it needs a new proof, and Cloudflare processes
+the same signals there as on the website.
 
 To get a parcel's history, the service sends its tracking number to the
 carrier. When needed, it also asks other carriers the number could belong to, a

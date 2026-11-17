@@ -830,7 +830,9 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "aliases": [
-      "United Parcel Service"
+      "United Parcel Service",
+      "UPS Mail Innovations",
+      "Mail Innovations"
     ],
     "trackingSearchUrl": "https://www.ups.com/track",
     "helpUrl": "https://www.ups.com/gb/en/support/contact-us"
@@ -21107,7 +21109,9 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "472",
       "Servicios Postales Nacionales",
-      "SPN"
+      "SPN",
+      "Colombia Post",
+      "Columbia Post"
     ],
     "countries": [
       "CO"
@@ -43033,7 +43037,9 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "TooExpress",
       "TOOEXPRESS",
-      "TOO EXPRESS"
+      "TOO EXPRESS",
+      "EPARCEL EXPRESS",
+      "Eparcel Express"
     ],
     "countries": [
       "US"
@@ -61215,6 +61221,74 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://viapost.com.mk/"
+  },
+  "aloha-freight": {
+    "displayName": "Aloha Freight",
+    "aliases": [
+      "Aloha Freight Forwarders"
+    ],
+    "countries": [
+      "US",
+      "GU"
+    ],
+    "color": "#2c96d2",
+    "selectable": true,
+    "timezone": "America/Los_Angeles",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.alohafreight.com/portal/"
+  },
+  "two-day-transportation": {
+    "displayName": "2 Day Transportation",
+    "countries": [
+      "US"
+    ],
+    "color": "#282d65",
+    "selectable": true,
+    "timezone": "America/New_York",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.2daytranspo.com/admin/code/PopUp/PopUp_ShippingTrackingItem.aspx?ProNumber={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "www.2daytranspo.com"
+        ],
+        "pathPattern": "^/admin/code/PopUp/PopUp_ShippingTrackingItem\\.aspx$",
+        "params": [
+          "ProNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.2daytranspo.com/"
+  },
+  "western-post": {
+    "displayName": "Western Post",
+    "aliases": [
+      "西邮物流",
+      "Western Post Logistics"
+    ],
+    "countries": [
+      "US",
+      "DE"
+    ],
+    "color": "#f0845d",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.wpglb.com/"
   }
 } as const;
 
@@ -63080,7 +63154,10 @@ export const CARRIER_IDS = [
   "rohlig-suus",
   "szendex",
   "unitrade",
-  "viapost"
+  "viapost",
+  "aloha-freight",
+  "two-day-transportation",
+  "western-post"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -1,0 +1,15 @@
+# The names of the anti-features the app's entry lists, in F-Droid's own words (fdroiddata's config/antiFeatures.yml).
+# scripts/publish-fdroid.sh puts them in the repository's index: F-Droid shows an app's anti-features only when its
+# repository names them.
+NonFreeDep:
+  description: This app depends on other non-free apps
+  name: Non-Free Dependencies
+NonFreeNet:
+  description: This app promotes or depends entirely on a non-free network service
+  name: Non-Free Network Services
+TetheredNet:
+  description: This app depends entirely on a certain instance of a network service
+  name: Tethered Network Services
+Tracking:
+  description: This app tracks and reports your activity
+  name: Tracking

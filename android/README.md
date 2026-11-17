@@ -175,7 +175,9 @@ The APK is Play Console's signed universal APK (App bundle explorer, the version
 Google Play did not sign, signs the repository's index with the repository's key, which stays outside the repository
 in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on the `fdroid` branch, which
 raw.githubusercontent.com serves, and attaches the APK to a pre-release. The app's entry in the repository is
-[`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml).
+[`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml), and
+[`fdroid/antiFeatures.yml`](fdroid/antiFeatures.yml) names its anti-features in the index, without which F-Droid shows
+none of them.
 
 F-Droid's own catalog builds the `fdroid` flavor from source and signs it with its own key. Its recipe, in
 [fdroiddata](https://gitlab.com/fdroid/fdroiddata), finds each release's commit by the tag

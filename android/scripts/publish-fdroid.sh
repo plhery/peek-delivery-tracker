@@ -40,12 +40,13 @@ target=$(git -C "$android" rev-parse --verify "$commit^{commit}")
 tag="android-$name-$code"
 
 # The index, signed with the repository's key. Peek's icon is the repository's and the app's.
-mkdir -p "$dir/metadata/$app/en-US" "$dir/older"
+mkdir -p "$dir/metadata/$app/en-US" "$dir/older" "$dir/config"
 cp "$android/../public/icons/icon-512.png" "$dir/icon.png"
 cp "$android/../public/icons/icon-512.png" "$dir/metadata/$app/en-US/icon.png"
 find "$dir/repo" -maxdepth 1 -name "${app}_*.apk" ! -name "${app}_$code.apk" -exec mv {} "$dir/older/" \;
 cp "$apk" "$dir/repo/${app}_$code.apk"
 cp "$android/fdroid/$app.yml" "$dir/metadata/$app.yml"
+cp "$android/fdroid/antiFeatures.yml" "$dir/config/antiFeatures.yml"
 (cd "$dir" && fdroid update)
 fingerprint=$(keytool -printcert -jarfile "$dir/repo/index-v1.jar" | sed -n 's/^[[:space:]]*SHA256: //p' | tr -d ':')
 address="https://raw.githubusercontent.com/$github/fdroid/repo?fingerprint=$fingerprint"

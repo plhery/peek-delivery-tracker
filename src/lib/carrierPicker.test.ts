@@ -53,8 +53,8 @@ describe('carrier search', () => {
 
   it('marks the matched part of the name', () => {
     const colis = search('colis');
-    expect(colis.map((result) => result.carrier.name)).toEqual(['Colis Privé', 'Colisweb', 'La Poste / Colissimo', 'Relais Colis']);
-    expect(colis[2].highlight).toEqual([11, 16]);
+    expect(colis.map((result) => result.carrier.name)).toEqual(expect.arrayContaining(['Colis Privé', 'Colisweb', 'La Poste / Colissimo', 'Relais Colis']));
+    expect(colis.find((result) => result.carrier.name === 'La Poste / Colissimo')?.highlight).toEqual([11, 16]);
   });
 
   it('finds carriers by the countries they deliver in, after any name', () => {

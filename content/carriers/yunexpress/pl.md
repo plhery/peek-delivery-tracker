@@ -62,7 +62,7 @@ Gdy paczka stoi w miejscu, spóźnia się, zginęła albo przyszła uszkodzona, 
 
 Utknęła na `Customs inspection - Import`? Na blogu dla sprzedawców YunExpress pisze, że samo wytypowanie do kontroli nie oznacza długiego postoju; liczy się jej poziom. Kontrola dokumentów trwa zwykle od kilku dni roboczych do około tygodnia, prześwietlenie lub kontrola fizyczna często dodaje od jednego do dwóch tygodni, czasem z opłatami za magazyn lub kontrolę, a pobranie próbek albo ocena przez urząd od kilku tygodni do ponad miesiąca. To typowe przedziały, nie obietnice.
 
-18 czerwca 2026 roku YunExpress napisał, że od 1 lipca 2026 roku UE zniesie zwolnienie z cła dla paczek o wartości do 150 euro i wprowadzi tymczasowe stałe cło „€3 per item”. Kto płaci je przy Twoim zamówieniu, YunExpress nie podaje. Co może Cię czekać w Polsce, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
+18 czerwca 2026 roku YunExpress napisał, że od 1 lipca 2026 roku UE zniesie zwolnienie z cła dla paczek o wartości do 150 euro i wprowadzi tymczasowe stałe cło w wysokości 3 € za rodzaj produktu („€3 per item”). Kto płaci je przy Twoim zamówieniu, YunExpress nie podaje. Co może Cię czekać w Polsce, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
 
 Przy płatności PayPalem YunExpress przekazuje dane śledzenia do PayPala, jeśli sprzedawca to włączył, a tam, jak podaje YunExpress, służą one jako dowód w sporach. Jakie zasady wtedy obowiązują, sprawdź u PayPala.
 

@@ -15,10 +15,10 @@ Los números de SEUR suelen tener 14 o 21 cifras, pero el seguimiento acepta otr
 | Número | Qué es |
 | --- | --- |
 | `19999999999980` | 14 cifras |
-| `123456789012345678901` | 21 cifras |
-| `1234567` | 7 cifras |
+| `739204815620374815264` | 21 cifras |
+| `7392048` | 7 cifras |
 | `2026150812345678901234` | 22 cifras que empiezan por una fecha (año, día y mes): una referencia del remitente |
-| `REC123456789012` | «REC» y 12 cifras: la referencia de una recogida |
+| `REC739204815620` | «REC» y 12 cifras: la referencia de una recogida |
 
 Búscalo en el correo de envío de la tienda o en la página de tu pedido. Si no encuentras el número por ningún lado, mira [cómo localizar un paquete sin número de seguimiento](guide:find-tracking-number).
 

@@ -15,8 +15,8 @@ SEUR's numbers are usually 14 or 21 digits, and a 7-digit code works too:
 | Shape (invented) | What it is |
 | --- | --- |
 | `19999999999980` | 14 digits |
-| `123456789012345678901` | 21 digits |
-| `1234567` | 7 digits |
+| `739204815620374815264` | 21 digits |
+| `7392048` | 7 digits |
 
 Look in the shop's shipping email or your order page. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 

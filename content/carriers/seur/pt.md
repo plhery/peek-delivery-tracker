@@ -15,9 +15,9 @@ Os números da SEUR costumam ter 14 ou 21 algarismos, e um código de 7 também 
 | Número | O que é |
 | --- | --- |
 | `19999999999980` | 14 dígitos, forma partilhada com a DPD, a BRT e outras. |
-| `123456789012345678901` | 21 dígitos: só a SEUR. |
-| `1234567` | 7 dígitos: só a SEUR. |
-| `12345678901234567890123` | 23 dígitos: não é da SEUR, é da [Correos Express](carrier:correos-express). |
+| `739204815620374815264` | 21 dígitos: só a SEUR. |
+| `7392048` | 7 dígitos: só a SEUR. |
+| `73920481562037481526492` | 23 dígitos: não é da SEUR, é da [Correos Express](carrier:correos-express). |
 
 Procura no e-mail de envio da loja ou na página da encomenda. Sem número nenhum, vê [onde encontrar o número de seguimento](guide:find-tracking-number).
 

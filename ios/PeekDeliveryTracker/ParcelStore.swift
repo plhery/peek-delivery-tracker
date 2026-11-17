@@ -138,7 +138,7 @@ final class ParcelStore: ObservableObject {
     /// Counts the choices made about the list's mark: the answer to an earlier one does not undo a later one.
     private var markNewUpdatesChoices = 0
     /// The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken.
-    private var markNewUpdatesSaving = 0
+    private(set) var markNewUpdatesSaving = 0
     /// The clock and units sent with the account's preferences and not yet kept, so a server that does not keep them
     /// is not asked again and again.
     private var unitsSent: String?

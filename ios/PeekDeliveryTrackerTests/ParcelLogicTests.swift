@@ -4129,7 +4129,9 @@ extension SessionIsolationTests {
         // Switched off while the server cannot take it: the next read, which still says on, leaves it off and saves it.
         offline()
         store.setMarkNewUpdates(false)
-        try await Task.sleep(for: .milliseconds(100))
+        // The failed save has to be over before the server answers again, however slow the simulator.
+        for _ in 0..<300 where store.markNewUpdatesSaving > 0 { try await Task.sleep(for: .milliseconds(10)) }
+        XCTAssertEqual(store.markNewUpdatesSaving, 0)
         var off = on
         off.markNewUpdates = false
         let log = RequestLog()

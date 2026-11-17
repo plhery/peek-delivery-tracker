@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 SEUR è un corriere espresso spagnolo del gruppo Geopost, lo stesso di [BRT](carrier:brt) in Italia e di [DPD Svizzera](carrier:dpd-ch). Puoi seguire la spedizione senza account nell’area miSEUR su seur.com, tramite link SEUR o incollando il codice qui sopra.
 
-Per gli ordini dalla Spagna verso l’Italia o la Svizzera italiana, SEUR gestisce la partenza in Spagna (con stati in spagnolo) e affida la consegna nella rete Geopost a [BRT](carrier:brt) o a [DPD Svizzera](carrier:dpd-ch).
+Per gli ordini dalla Spagna verso l’Italia o la Svizzera italiana, SEUR gestisce la partenza in Spagna (con stati in spagnolo).
 
 ## Numero di tracciamento SEUR: formato e dove trovarlo
 
@@ -68,7 +68,7 @@ Dopo il ritiro in un negozio Pickup spagnolo appare `EL DESTINATARIO HA RETIRADO
 Nessuna dogana tra Spagna peninsulare (o Baleari) e Italia (esclusi Livigno e Campione d’Italia). Fanno eccezione due casi:
 
 - **Svizzera:** fuori dall’unione doganale UE; secondo l’UFDSC possono applicarsi IVA all’importazione, dazi e spese di sdoganamento del corriere (a cui l’UFDSC rimanda per costi e stato).
-- **Canarie, Ceuta, Melilla o Paesi extra-UE:** le Canarie sono fuori dall’area IVA UE, mentre Ceuta e Melilla sono fuori sia dal territorio doganale sia dall’area IVA UE. Nell’UE dal 1° luglio 2026 si applica un dazio temporaneo di 3 € per articolo sugli invii extra-UE fino a 150 €, più dal 1° novembre 2026 la commissione dell’Unione di 2 € per articolo distinto (riaddebitabile). Vedi [pacco fermo in dogana](guide:customs).
+- **Canarie, Ceuta, Melilla o Paesi extra-UE:** le Canarie sono fuori dall’area IVA UE, mentre Ceuta e Melilla sono fuori sia dal territorio doganale sia dall’area IVA UE. Nell’UE dal 1° luglio 2026 si applica un dazio temporaneo di 3 € per articolo sugli invii extra-UE fino a 150 €, più dal 1° novembre 2026 la commissione dell’Unione di 2 € per articolo distinto (riaddebitabile); entrambi valgono per gli invii da fuori del territorio doganale UE, Ceuta e Melilla compresi, non per i pacchi dalle Canarie. Vedi [pacco fermo in dogana](guide:customs).
 
 ## Pacco non trovato, in ritardo o segnato consegnato
 

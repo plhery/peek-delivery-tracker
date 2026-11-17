@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 SEUR ist ein spanischer Paket- und Expressdienst der Geopost-Gruppe, zu der auch [DPD Deutschland](carrier:dpd-de), DPD Österreich und [DPD Schweiz](carrier:dpd-ch) gehören. Du verfolgst deine Sendung ohne Konto unter miSEUR auf seur.com, per SEUR-Link oder oben im Suchfeld.
 
-Bei Bestellungen aus Spanien nach Deutschland, Österreich oder in die Schweiz übernimmt SEUR den Start in Spanien (mit spanischen Statusmeldungen) und übergibt das Paket im Geopost-Netz an die jeweilige DPD-Landesgesellschaft.
+Bei Bestellungen aus Spanien nach Deutschland, Österreich oder in die Schweiz übernimmt SEUR den Start in Spanien (mit spanischen Statusmeldungen).
 
 ## SEUR-Sendungsnummer: Formate und Fundort
 
@@ -69,7 +69,7 @@ Nach Abholung im spanischen Pickup-Shop steht `EL DESTINATARIO HA RETIRADO EL EN
 Sendungen vom spanischen Festland oder den Balearen nach Deutschland (ohne Helgoland und Büsingen) oder Österreich sind innerhalb der EU zollfrei. Zoll fällt in zwei Fällen an:
 
 - **Schweiz:** Nicht Teil der EU-Zollunion; laut BAZG können Einfuhrsteuer, Zölle und Verzollungsgebühren des Zustellers anfallen (Ansprechpartner für Gebühren und Status ist der Paketdienst).
-- **Kanarische Inseln, Ceuta, Melilla oder Drittländer:** Die Kanaren liegen außerhalb des EU-Mehrwertsteuergebiets, Ceuta und Melilla außerhalb des EU-Zoll- und Mehrwertsteuergebiets. In der EU gilt seit dem 1. Juli 2026 bei Nicht-EU-Sendungen bis 150 € ein vorläufiger Zollsatz von 3 € pro Artikel und seit dem 1. November 2026 zusätzlich eine EU-Bearbeitungsgebühr von 2 € pro unterschiedlichem Artikel (weitergabefähig). Mehr unter [Paket beim Zoll](guide:customs).
+- **Kanarische Inseln, Ceuta, Melilla oder Drittländer:** Die Kanaren liegen außerhalb des EU-Mehrwertsteuergebiets, Ceuta und Melilla außerhalb des EU-Zoll- und Mehrwertsteuergebiets. In der EU gilt seit dem 1. Juli 2026 bei Nicht-EU-Sendungen bis 150 € ein vorläufiger Zollsatz von 3 € pro Artikel und seit dem 1. November 2026 zusätzlich eine EU-Bearbeitungsgebühr von 2 € pro unterschiedlichem Artikel (weitergabefähig); beides gilt für Sendungen von außerhalb des EU-Zollgebiets, auch aus Ceuta und Melilla, nicht für Pakete von den Kanaren. Mehr unter [Paket beim Zoll](guide:customs).
 
 ## Paket nicht gefunden, verspätet oder zugestellt ohne Erhalt
 
@@ -91,7 +91,7 @@ SEUR erreichst du im Supportbereich von miSEUR auf seur.com. Lokal im Geopost-Ne
 
 [Peek](/) fragt 21-stellige Nummern und `REC`-Codes direkt bei SEUR ab (außer `000` an Stelle 13 bis 15 für Australia Post: tippe auf „Ändern“ und wähle SEUR unter „Passt zu dieser Nummer“). Bei 22 Ziffern fragt Peek SEUR und [Österreichische Post](carrier:austrian-post) vor Tracking-Diensten und [USPS](carrier:usps). Bei 14 Ziffern prüft Peek in Deutschland erst [Hermes](carrier:hermes-de), [DPD Deutschland](carrier:dpd-de), DPD Belgium, [DPD Schweiz](carrier:dpd-ch) und DPD Niederlande, dann [Chronopost](carrier:chronopost), SEUR, [BRT](carrier:brt), DPD UK und DPD Portugal. Nach „Tracking-Dienste werden geprüft…“ erscheint „SEUR hat dieses Paket.“, wenn nur SEUR antwortet; sonst wählst du SEUR über „Ändern“ (oder „Paketdienst ändern“) – ebenso bei 7-stelligen Nummern, die SEUR wiederverwendet. Links mit `tracking=` gehen ohne Postleitzahl.
 
-Peek zeigt Status, Verlauf und Gewicht, ohne Karte mangels Ortsangaben. Spanische Texte bleiben erhalten, nur Zustellungen heißen `Delivered` („Zugestellt“); Verspätungsmeldungen ändern die Phase nicht. Paketanzahl, Absender, Empfänger, PIN und QR-Code verwirft Peek, liest Zeiten als Madrider Zeit („Zeiten in deiner Zeitzone: …“) und verfolgt Mehrpaketsendungen über andere Tracking-Dienste.
+Peek zeigt Status, Verlauf und Gewicht, ohne Karte mangels Ortsangaben. Spanische Texte bleiben erhalten, nur Zustellungen heißen `Delivered` („Zugestellt“); Verspätungsmeldungen ändern die Phase nicht. Paketanzahl, Absender, Empfänger, PIN und QR-Code verwirft Peek, liest Zeiten als Madrider Zeit („Uhrzeiten in deiner Zeitzone: …“) und verfolgt Mehrpaketsendungen über andere Tracking-Dienste.
 
 Peek prüft bis zu alle 10 Minuten, solange du das Paket geöffnet hast oder am Zustelltag Benachrichtigungen eingeschaltet sind, sonst stündlich (auch nach zwei Tagen ohne Neuigkeiten oder nach 12 Stunden auf „Etikett erstellt“ oder „Beim Paketdienst eingegangen“). Bei „In Zustellung“ prüft Peek ab 6:00 Uhr Madrider Zeit bis zu alle 2 Minuten, solange SEUR direkt antwortet; über reine Tracking-Dienste stündlich, nach einem ruhigen Tag alle 3 Stunden und am Zustelltag bis zu alle 15 Minuten, solange du das Paket geöffnet hast oder Benachrichtigungen eingeschaltet sind („Jeden Scan“, „Wichtige Schritte“, „Nur die Zustellung“).
 

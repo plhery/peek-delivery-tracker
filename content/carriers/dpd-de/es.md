@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 DPD en Alemania es DPD Deutschland GmbH (Aschaffenburg), empresa del grupo Geopost con 10.000 Paketshops en territorio alemán. Si compras en una tienda alemana con envío a España o dentro de Alemania, puedes seguir el paquete con el número de 14 cifras en la web de DPD o en la casilla de arriba.
 
-Mientras viaja por Alemania lo gestiona DPD Deutschland; al cruzar a España dentro de Geopost, el reparto pasa a [SEUR](carrier:seur) con esas mismas 14 cifras.
+Mientras viaja por Alemania lo gestiona DPD Deutschland.
 
 ## Número de paquete de DPD Alemania: cómo es y dónde está
 
@@ -51,7 +51,7 @@ En la web alemana, seguir sin código postal solo muestra un estado general; si 
 
 **En Alemania.** DPD estima de 1 a 2 días laborables tras recibir el paquete (sin plazo garantizado en DPD CLASSIC). Si el vendedor dio tu e-mail o móvil, el día del reparto Predict anuncia una ventana de 2 horas, afinada hasta 30 minutos en directo (no disponible en islas). Desde la app DPD, myDPD o el seguimiento con código postal puedes desviar a un vecino cercano, un Paketshop, un lugar seguro (*Abstell-Okay*, con foto obligatoria y traspaso a ti del riesgo de pérdida o daño) u otro día; vale el último cambio antes del escaneo de reparto. El segundo intento es el mismo día o al siguiente laborable, aunque las condiciones generales permiten ya tras el primer intento dejarlo a un vecino a un máximo de 50 m o en el punto Pickup más cercano (salvo oposición). Para recogerlo en Alemania basta documento oficial con foto (o [autorización firmada](https://www.dpd.com/de/de/support/vollmacht/) y documento de quien acude): la FAQ señala 7 días naturales en Paketshop y 3 en Paketstation (7 días hábiles en las condiciones generales tras intento fallido). El reparto en sábado solo existe contratando DPD 12 Uhr (sin islas), y no se admiten recogidas particulares en delegación.
 
-**Hacia España ([SEUR](carrier:seur)).** En las rutas europeas por carretera de Geopost, [SEUR](carrier:seur) asume el tramo español con las mismas 14 cifras y cuenta con miles de puntos SEUR Pickup y taquillas consultables en seur.com (con gestión de entregas desde miSEUR).
+**Hacia España ([SEUR](carrier:seur)).** Según Geopost, [SEUR](carrier:seur), su empresa en España, cuenta con más de 7.000 tiendas y taquillas.
 
 **Devoluciones.** Con etiqueta de devolución de la tienda, entrega gratuita en Alemania en Paketshop, Pickup Station o al repartidor de DPD (también con QR móvil en la app DPD o myDPD); consulta [seguimiento de devoluciones](guide:returns-tracking).
 
@@ -79,9 +79,9 @@ El contrato lo firma el remitente con DPD: según DPD Deutschland, el vendedor g
 
 ## Seguir un paquete de DPD Alemania con Peek
 
-[Peek](/) admite las 14 cifras con o sin carácter de control y enlaces de `tracking.dpd.de`, `my.dpd.de` y `dpd.com/de`. El prefijo `01` incluye a DPD Germany en la primera tanda junto con [SEUR](carrier:seur); con otros prefijos en España Peek consulta primero a [SEUR](carrier:seur), [Hermes](carrier:hermes-de), DPD Belgium, [DPD Suiza](carrier:dpd-ch) y DPD Países Bajos y enseguida a DPD Germany, mientras que `10` y `1550` apuntan de entrada a DPD France o DPD UK. En automático DPD Germany solo confirma («DPD Germany tiene este paquete.») mientras DPD ubique el envío en Alemania; si no, toca «Cambiar» (o «Cambiar transportista») y elige DPD Germany bajo «Encaja con este número». Una vez elegido, cuando el paquete pasa a otro país, Peek lo mantiene bajo DPD Germany y lee en paralelo el servicio de grupo y la unidad local ([SEUR](carrier:seur), [BRT](carrier:brt), DPD France).
+[Peek](/) admite las 14 cifras con o sin carácter de control y enlaces de `tracking.dpd.de`, `my.dpd.de` y `dpd.com/de`. El prefijo `01` (salvo `0100`) incluye a DPD Germany en la primera tanda junto con [SEUR](carrier:seur); con otros prefijos en España Peek consulta primero a [SEUR](carrier:seur), [Hermes](carrier:hermes-de), DPD Belgium, [DPD Suiza](carrier:dpd-ch) y DPD Países Bajos y enseguida a DPD Germany, mientras que `10` y `1550` apuntan de entrada a DPD France o DPD UK. En automático DPD Germany solo confirma («DPD Germany tiene este paquete.») mientras DPD ubique el envío en Alemania; si no, toca «Cambiar» (o «Cambiar transportista») y elige DPD Germany bajo «Encaja con este número». Una vez elegido, cuando el paquete pasa a otro país, Peek lo mantiene bajo DPD Germany y lee el seguimiento de grupo de DPD y, cuando puede, el de la empresa DPD del país.
 
-El campo «Código postal de entrega» es opcional y solo acepta códigos alemanes de 5 cifras (déjalo vacío para España). Sin código postal, Peek lee la app alemana de DPD: escaneos con mapa, peso, dimensiones, fecha o franja prevista y, en espera Pickup, nombre y dirección del punto. Con un código alemán válido de 5 cifras lee el seguimiento verificado: escaneos verificados, remitente, peso y franja (sin dimensiones ni dirección Pickup). Si DPD rechaza el código, Peek vuelve al modo sin código y avisa: «DPD Germany no ha aceptado el código postal …, así que muestra menos detalles.». Justificante descartado, nombre de receptor no catalogado mostrado como `Delivery update` y horas alemanas convertidas («Horas en tu zona horaria: …»).
+El campo «Código postal de entrega» es opcional y solo acepta códigos alemanes de 5 cifras (déjalo vacío para España). Sin código postal, Peek lee la app alemana de DPD: escaneos con mapa, peso, dimensiones, fecha o franja prevista y, en espera Pickup, nombre y dirección del punto. Con un código alemán válido de 5 cifras lee el seguimiento verificado: escaneos verificados, remitente y franja (sin dimensiones ni dirección Pickup). Si DPD rechaza el código, Peek avisa: «DPD Germany no ha aceptado el código postal …, así que muestra menos detalles.». Justificante descartado, nombre de receptor no catalogado mostrado como `Delivery update` y horas alemanas convertidas («Horas en tu zona horaria: …»).
 
 Peek revisa el estado hasta cada 10 minutos mientras tienes el paquete abierto, o el día de la entrega con las notificaciones activadas, y cada hora en los demás casos (también tras dos días sin cambios o 12 horas en «Etiqueta creada» o «Admitido por el transportista»). En «En reparto» comprueba hasta cada 2 minutos desde las 6:00 locales —o 30 minutos antes de la franja DPD— mientras responda directamente DPD. Mediante servicios externos consulta cada hora, cada 3 horas tras un día sin escaneos y hasta cada 15 minutos el día de la entrega mientras tienes el paquete abierto o las notificaciones activadas («Cada escaneo», «Pasos importantes» o «Solo la entrega»).
 
@@ -93,7 +93,7 @@ La página de aviso de myDPD cita tres causas: error al escribirlo (`O` por `0` 
 
 ### ¿Cuánto tarda en llegar un paquete de DPD Alemania?
 
-En Alemania suele tardar 1–2 días laborables tras la entrega a DPD (no garantizados en tarifa estándar); por carretera en Europa con la red Geopost/SEUR Classic, Packlink sitúa el plazo orientativo en 2 a 4 días.
+En Alemania suele tardar 1–2 días laborables tras la entrega a DPD (no garantizados en tarifa estándar).
 
 ### ¿DPD Alemania reparte los sábados?
 

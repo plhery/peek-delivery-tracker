@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 SEUR est un transporteur espagnol de colis et d’express du groupe Geopost, comme DPD et [Chronopost](carrier:chronopost). Tu peux suivre ton envoi sans compte dans miSEUR sur seur.com, avec un lien SEUR ou en collant le numéro ci-dessus.
 
-Lorsqu’une boutique espagnole expédie vers la France, la Belgique ou la Suisse, SEUR achemine le colis dans le réseau Geopost : les scans de SEUR s’affichent en espagnol, puis la remise locale relève de [DPD France](carrier:dpd-fr), DPD Belgium ou [DPD Suisse](carrier:dpd-ch).
+Lorsqu’une boutique espagnole expédie vers la France, la Belgique ou la Suisse, SEUR prend le colis en charge en Espagne et ses scans s’affichent en espagnol.
 
 ## Numéro de suivi SEUR : format et où le trouver
 
@@ -69,7 +69,7 @@ Une fois retiré en boutique Pickup espagnole, le suivi affiche `EL DESTINATARIO
 Aucun dédouanement ne s’applique entre l’Espagne péninsulaire (ou les Baléares) et la France métropolitaine ou la Belgique (hors outre-mer français, exclus du territoire TVA ou douanier de l’UE). Deux cas font exception :
 
 - **Suisse :** hors union douanière de l’UE, tout colis venant d’Espagne passe la douane suisse. Selon l’OFDF, TVA à l’importation, droits éventuels et frais de dédouanement du transporteur peuvent s’appliquer ; pour ces frais et le suivi, l’OFDF renvoie au transporteur.
-- **Canaries, Ceuta, Melilla ou pays hors UE :** les Canaries sont hors territoire TVA de l’UE, et Ceuta et Melilla hors territoire douanier et TVA de l’UE. Dans l’UE, un droit temporaire de 3 € par article s’applique depuis le 1er juillet 2026 aux envois hors UE jusqu’à 150 €, plus des frais de traitement de l’Union de 2 € par article distinct depuis le 1er novembre 2026 (répercutables par le vendeur ou le livreur). Voir [colis bloqué en douane](guide:customs).
+- **Canaries, Ceuta, Melilla ou pays hors UE :** les Canaries sont hors territoire TVA de l’UE, et Ceuta et Melilla hors territoire douanier et TVA de l’UE. Dans l’UE, un droit temporaire de 3 € par article s’applique depuis le 1er juillet 2026 aux envois hors UE jusqu’à 150 €, plus des frais de traitement de l’Union de 2 € par article distinct depuis le 1er novembre 2026 (répercutables par le vendeur ou le livreur) ; ils visent les colis venus de hors du territoire douanier de l’UE, dont Ceuta et Melilla, pas ceux des Canaries. Voir [colis bloqué en douane](guide:customs).
 
 ## Colis introuvable, en retard ou marqué livré
 

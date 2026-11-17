@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 SEUR to hiszpańska firma kurierska z grupy Geopost — tej samej, do której należą [DPD Polska](carrier:dpd-pl), [DPD Szwajcaria](carrier:dpd-ch), [Chronopost](carrier:chronopost) i [BRT](carrier:brt). Paczkę sprawdzisz bez konta w miSEUR na seur.com, przez link SEUR albo wklejając numer powyżej.
 
-Przy zamówieniach z Hiszpanii do Polski SEUR odbiera przesyłkę w Hiszpanii (z komunikatami po hiszpańsku) i przekazuje ją w sieci Geopost do doręczenia przez [DPD Polska](carrier:dpd-pl).
+Przy zamówieniach z Hiszpanii do Polski SEUR odbiera przesyłkę w Hiszpanii (z komunikatami po hiszpańsku).
 
 ## Numer śledzenia SEUR: format i gdzie go znaleźć
 
@@ -58,9 +58,9 @@ Po odbiorze w hiszpańskim sklepie Pickup pojawia się `EL DESTINATARIO HA RETIR
 
 **W Hiszpanii.** SEUR ma tysiące sklepów i automatów Pickup na seur.com. Przekierowanie do punktu daje status `LOS DATOS DEL ENVÍO HAN SIDO MODIFICADOS Y SE ENTREGARÁ EN UN PUNTO SEUR PICKUP.`, a brak miejsca w automacie — `EL ENVÍO NO HA SIDO DEPOSITADO EN EL LOCKER SELECCIONADO. SE DEBE ELEGIR OTRO PUNTO SEUR PICKUP.`
 
-**Do Polski.** W usłudze SEUR Classic serwis Packlink podaje orientacyjnie 2–4 dni do głównych miast europejskich (bez gwarantowanego okna godzinowego). W Polsce paczkę doręcza [DPD Polska](carrier:dpd-pl): dyspozycje wydasz w aplikacji DPD Mobile lub na mojapaczka.dpd.com.pl, a w punkcie lub automacie DPD Pickup przesyłka czeka 2 pełne dni robocze.
+**Do Polski.** W usłudze SEUR Classic serwis Packlink podaje orientacyjnie 2–4 dni do głównych miast europejskich (bez gwarantowanego okna godzinowego). Jeśli w Polsce paczkę doręcza [DPD Polska](carrier:dpd-pl), dyspozycje wydasz w aplikacji DPD Mobile lub na mojapaczka.dpd.com.pl, a w punkcie lub automacie DPD Pickup przesyłka czeka 2 pełne dni robocze.
 
-**Urząd celny.** Między kontynentalną Hiszpanią (lub Balearami) a Polską nie ma odprawy celnej. Odprawa dotyczy natomiast Wysp Kanaryjskich (poza obszarem VAT UE), Ceuty i Melilli (poza obszarem celnym i VAT UE) oraz przesyłek spoza UE: od 1 lipca 2026 r. w UE obowiązuje tymczasowe cło 3 € za artykuł dla paczek spoza UE do 150 €, a od 1 listopada 2026 r. unijna opłata manipulacyjna 2 € za każdy odrębny towar (możliwa do przeniesienia na kupującego). Zobacz [przesyłka w urzędzie celnym](guide:customs).
+**Urząd celny.** Między kontynentalną Hiszpanią (lub Balearami) a Polską nie ma odprawy celnej. Odprawa dotyczy natomiast Wysp Kanaryjskich (poza obszarem VAT UE), Ceuty i Melilli (poza obszarem celnym i VAT UE) oraz przesyłek spoza UE: od 1 lipca 2026 r. w UE obowiązuje tymczasowe cło 3 € za artykuł dla paczek spoza UE do 150 €, a od 1 listopada 2026 r. unijna opłata manipulacyjna 2 € za każdy odrębny towar (możliwa do przeniesienia na kupującego); obie kwoty dotyczą przesyłek spoza obszaru celnego UE, także z Ceuty i Melilli, ale nie z Wysp Kanaryjskich. Zobacz [przesyłka w urzędzie celnym](guide:customs).
 
 ## Paczka nieznaleziona, opóźniona lub oznaczona jako doręczona
 

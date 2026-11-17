@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 DPD in Germania è gestita da DPD Deutschland GmbH (Aschaffenburg), società del gruppo Geopost con 10.000 Paketshop in territorio tedesco. Se attendi un ordine spedito dalla Germania verso l’Italia, la Svizzera italiana o un indirizzo in Germania, puoi tracciarlo con il numero a 14 cifre sul sito DPD o nel campo qui sopra.
 
-Finché viaggia in Germania è seguito da DPD Deutschland; oltre confine la consegna passa alle società locali Geopost, ossia [BRT](carrier:brt) in Italia e [DPD Svizzera](carrier:dpd-ch) in Svizzera, con lo stesso codice a 14 cifre.
+Finché viaggia in Germania è seguito da DPD Deutschland.
 
 ## Numero di pacco DPD Germania: formato e dove trovarlo
 
@@ -53,7 +53,7 @@ Sul sito tedesco, proseguire senza CAP mostra solo uno stato generico; se `Im Pa
 
 **Verso l’Italia e la Svizzera:**
 
-- **Italia ([BRT](carrier:brt)):** con le stesse 14 cifre (o il BRTcode) segui il collo anche su brt.it; la rete [BRT-fermopoint](https://www.brt.it/en/brt-fermopoint/) conta oltre 11.600 punti di ritiro in Italia con 10 giorni di custodia.
+- **Italia ([BRT](carrier:brt)):** se il collo passa a BRT, con il BRTcode o il numero di spedizione lo segui anche su brt.it; la rete [BRT-fermopoint](https://www.brt.it/en/brt-fermopoint/) conta oltre 11.600 punti di ritiro in Italia con 10 giorni di custodia.
 - **Svizzera ([DPD Svizzera](carrier:dpd-ch)):** ritiro presso un [DPD Pickup Location](https://www.dpd.com/ch/it/dpd-pickup-location/) con documento ufficiale con foto (o procura e documento di chi ritira).
 
 **Resi.** Con etichetta di reso del negozio, consegna gratuita in Germania in Paketshop, Pickup Station o all’autista DPD (anche con QR mobile in app DPD o myDPD); vedi [tracciamento dei resi](guide:returns-tracking).
@@ -83,9 +83,9 @@ Il contratto lega DPD al mittente: secondo DPD Deutschland toccano al venditore 
 
 ## Seguire un pacco DPD Germania con Peek
 
-[Peek](/) accetta le 14 cifre con o senza controllo e i link `tracking.dpd.de`, `my.dpd.de` e `dpd.com/de`. Il prefisso `01` mette DPD Germany in prima ondata; in Italia altri prefissi interrogano prima [BRT](carrier:brt), Hermes, DPD Belgium, [DPD Svizzera](carrier:dpd-ch) e DPD Paesi Bassi e subito dopo DPD Germany, mentre `10` e `1550` puntano di base a DPD France o DPD UK. In automatico DPD Germany risponde («DPD Germany ha questo pacco.») solo finché DPD colloca il pacco in Germania; altrimenti tocca «Cambia» (o «Cambia corriere») e scegli DPD Germany sotto «Compatibili con questo numero». Una volta scelto, quando il pacco passa in un altro Paese, Peek lo mantiene sotto DPD Germany leggendo in parallelo il servizio di gruppo e l’unità locale ([BRT](carrier:brt), [SEUR](carrier:seur), DPD France).
+[Peek](/) accetta le 14 cifre con o senza controllo e i link `tracking.dpd.de`, `my.dpd.de` e `dpd.com/de`. Il prefisso `01` (salvo `0100`) mette DPD Germany in prima ondata; in Italia altri prefissi interrogano prima [BRT](carrier:brt), Hermes, DPD Belgium, [DPD Svizzera](carrier:dpd-ch) e DPD Paesi Bassi e subito dopo DPD Germany, mentre `10` e `1550` puntano di base a DPD France o DPD UK. In automatico DPD Germany risponde («DPD Germany ha questo pacco.») solo finché DPD colloca il pacco in Germania; altrimenti tocca «Cambia» (o «Cambia corriere») e scegli DPD Germany sotto «Compatibili con questo numero». Una volta scelto, quando il pacco passa in un altro Paese, Peek lo mantiene sotto DPD Germany leggendo il tracciamento di gruppo di DPD e, se possibile, quello della società DPD del Paese.
 
-Il campo «Codice postale di consegna» è facoltativo e accetta solo CAP tedeschi di 5 cifre (lascialo vuoto fuori dalla Germania). Senza CAP Peek legge l’app tedesca DPD: scansioni con luogo su mappa, peso, dimensioni, data o fascia stimata e, in giacenza Pickup, nome e indirizzo del punto. Con un CAP tedesco valido di 5 cifre legge il tracciamento verificato: scansioni verificate, nome del mittente, peso e fascia oraria (senza dimensioni né indirizzo Pickup). Se DPD rifiuta il CAP, Peek torna alla vista base e mostra «DPD Germany non ha accettato il codice postale …, quindi mostra meno dettagli.». Prova di consegna scartata, nome del ricevente non mappato sostituito con `Delivery update` e orari tedeschi convertiti («Orari nel tuo fuso orario: …»).
+Il campo «Codice postale di consegna» è facoltativo e accetta solo CAP tedeschi di 5 cifre (lascialo vuoto fuori dalla Germania). Senza CAP Peek legge l’app tedesca DPD: scansioni con luogo su mappa, peso, dimensioni, data o fascia stimata e, in giacenza Pickup, nome e indirizzo del punto. Con un CAP tedesco valido di 5 cifre legge il tracciamento verificato: scansioni verificate, nome del mittente e fascia oraria (senza dimensioni né indirizzo Pickup). Se DPD rifiuta il CAP, Peek mostra «DPD Germany non ha accettato il codice postale …, quindi mostra meno dettagli.». Prova di consegna scartata, nome del ricevente non mappato sostituito con `Delivery update` e orari tedeschi convertiti («Orari nel tuo fuso orario: …»).
 
 Peek aggiorna lo stato fino a ogni 10 minuti mentre hai il pacco aperto sullo schermo, o nel giorno della consegna con le notifiche attive, e ogni ora negli altri casi (anche dopo due giorni senza novità o dopo 12 ore su «Etichetta creata» o «Preso in carico»). In «In consegna» controlla fino a ogni 2 minuti dalle 6:00 locali — o da 30 minuti prima della fascia DPD — finché DPD risponde direttamente. Tramite i soli servizi di tracciamento esterni controlla ogni ora, ogni 3 ore dopo un giorno senza scansioni e fino a ogni 15 minuti nel giorno della consegna mentre hai il pacco aperto o le notifiche attive («Ogni scansione», «Passaggi importanti» o «Solo la consegna»).
 

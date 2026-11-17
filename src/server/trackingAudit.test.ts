@@ -499,6 +499,63 @@ describe('a check waiting for its carrier\'s retry', () => {
   });
 });
 
+describe('a check counted apart from failed refreshes', () => {
+  const client = () => ({ completeSyncAttempt: vi.fn().mockResolvedValue(true),
+    recordTrackingHealth: vi.fn().mockResolvedValue([]), ackTrackingHealth: vi.fn() });
+  const deferred = Object.assign(new Error('Previous tracking has been kept; another check is scheduled.'), { name: 'RoutingDeferredError' });
+  const refresh = (database: ReturnType<typeof client>) => ((database.recordTrackingHealth.mock.lastCall?.[2] ?? []) as JsonObject[])
+    .find((sample) => sample.kind === 'refresh');
+
+  it('waits on a partner carrier\'s rate limit, or its own, when no lookup of the check failed otherwise', async () => {
+    const check = async (failures: JsonObject, lookups: () => void = () => {}) => {
+      const database = client();
+      const audit = new TrackingSyncAudit(database as unknown as SupabaseServiceClient,
+        'synthetic-package', 'TEST1234', 'aliexpress', 'in_transit', { trigger: 'scheduled' }, new Date(), null, null, 'spring-gds');
+      await audit.observeFetch(async () => lookups());
+      audit.record('fetch', 'failed', 100, {}, deferred);
+      await audit.finish({ outcome: 'waiting', sourceCarrier: 'aliexpress', error: deferred, providerFailures: failures });
+      return refresh(database);
+    };
+    const answered = () => healthStepRecorder.lookup({ carrier: 'aliexpress', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
+    expect(await check({ 'spring-gds': { kind: 'rate_limited', count: 1 } }, answered)).toMatchObject({ subject: 'spring-gds', healthy: true,
+      details: { category: 'rate_limit_wait', error_type: 'RoutingDeferredError', provider_failures: 'spring-gds:rate_limited' } });
+    expect(await check({ aliexpress: { kind: 'rate_limited', count: 1 }, 'spring-gds': { kind: 'no_history', count: 1 } }))
+      .toMatchObject({ healthy: true, details: { category: 'rate_limit_wait' } });
+    // A source failing otherwise, then or in this check, is a failed refresh.
+    expect(await check({ aliexpress: { kind: 'rate_limited', count: 1 }, '17TRACK': { kind: 'transport', count: 1 } })).toMatchObject({ healthy: false });
+    expect(await check({ 'spring-gds': { kind: 'rate_limited', count: 1 } }, () => healthStepRecorder.lookup({ carrier: 'ParcelsApp',
+      finalStep: 'direct', outcome: 'transport', errorType: 'TransportError', durationMs: 1, attempts: 1, error: new TransportError('ParcelsApp') })))
+      .toMatchObject({ healthy: false });
+  });
+
+  it('tells nothing of the carrier for a parcel nothing has answered for since it was added', async () => {
+    const check = async (unanswered: boolean) => {
+      const database = client();
+      const audit = new TrackingSyncAudit(database as unknown as SupabaseServiceClient,
+        'synthetic-package', 'TEST1234', 'evri-uk', 'pending', { trigger: 'scheduled' }, new Date(), null, null, null, null, unanswered);
+      const unconfirmed = new IndeterminateError('Evri UK', 'Evri UK could not confirm a domestic parcel', { reason: 'parcel_unconfirmed' });
+      await audit.observeFetch(async () => healthStepRecorder.lookup({ carrier: 'evri-uk', finalStep: 'direct', outcome: 'indeterminate',
+        errorType: 'IndeterminateError', durationMs: 1, attempts: 1, error: unconfirmed }));
+      audit.record('fetch', 'failed', 100, {}, unconfirmed);
+      await audit.finish({ outcome: 'error', sourceCarrier: 'evri-uk', error: unconfirmed,
+        providerFailures: { 'evri-uk': { kind: 'transport', count: 1 }, Ship24: { kind: 'not_found', count: 1 } } });
+      return refresh(database);
+    };
+    expect(await check(true)).toMatchObject({ subject: 'evri-uk', healthy: true,
+      details: { category: 'unanswered', error_type: 'IndeterminateError', provider_failures: 'evri-uk:transport,Ship24:not_found' } });
+    expect(await check(false)).toMatchObject({ subject: 'evri-uk', healthy: false, details: { reason: 'parcel_unconfirmed' } });
+    // A carrier that is down fails the refresh of a new parcel too.
+    const database = client();
+    const audit = new TrackingSyncAudit(database as unknown as SupabaseServiceClient,
+      'synthetic-package', 'TEST1234', 'evri-uk', 'pending', { trigger: 'scheduled' }, new Date(), null, null, null, null, true);
+    await audit.observeFetch(async () => healthStepRecorder.lookup({ carrier: 'evri-uk', finalStep: 'direct', outcome: 'transport',
+      errorType: 'TransportError', durationMs: 1, attempts: 1, error: new TransportError('Evri UK') }));
+    audit.record('fetch', 'failed', 100, {}, new TransportError('Evri UK'));
+    await audit.finish({ outcome: 'error', sourceCarrier: 'evri-uk', error: new TransportError('Evri UK') });
+    expect(refresh(database)).toMatchObject({ subject: 'evri-uk', healthy: false });
+  });
+});
+
 describe('a check while the carrier waits for the owner', () => {
   it('is an answer when the carrier, not asked again yet, last asked for an input or found several parcels', async () => {
     const client = { completeSyncAttempt: vi.fn().mockResolvedValue(true),

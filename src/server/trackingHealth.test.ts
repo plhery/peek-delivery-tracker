@@ -65,7 +65,7 @@ describe('tracking health evidence', () => {
     expect([...samples.values()]).toEqual([expect.objectContaining({ kind: 'provider', subject: 'dhl', healthy: false })]);
   });
 
-  it('takes no sample of a refusal under the quota PostNL shares with every caller, which Spring GDS goes through', async () => {
+  it('counts a refusal under the quota PostNL shares with every caller, which Spring GDS goes through, apart', async () => {
     const samples = new Map<string, HealthSample>();
     const quota = new RateLimitedError('PostNL', 30_000, 'PostNL refused the request with HTTP 429',
       { cause: new UpstreamHttpError('PostNL', 429, 30_000), status: 429 });
@@ -77,13 +77,17 @@ describe('tracking health evidence', () => {
         healthStepRecorder.lookup({ carrier: 'spring-gds', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1, error: quota });
       });
     });
-    expect(samples.size).toBe(0);
-    // Its other failures still count.
+    expect([...samples.values()]).toEqual([{ kind: 'provider', subject: 'spring-gds', healthy: true,
+      details: expect.objectContaining({ category: 'shared_quota', error_type: 'RateLimitedError', http_status: 429 }) }]);
+    // Its other failures still count, and a refusal after one leaves it standing.
+    samples.clear();
     await observeTrackingHealth(samples, async () => {
       healthStepRecorder.lookup({ carrier: 'spring-gds', finalStep: 'direct', outcome: 'error', errorType: 'UpstreamHttpError', durationMs: 1, attempts: 1,
         error: new UpstreamHttpError('PostNL', 503) });
+      healthStepRecorder.lookup({ carrier: 'spring-gds', finalStep: 'direct', outcome: 'rate_limited', errorType: 'RateLimitedError', durationMs: 1, attempts: 1, error: quota });
     });
-    expect([...samples.values()]).toEqual([expect.objectContaining({ kind: 'provider', subject: 'spring-gds', healthy: false })]);
+    expect([...samples.values()]).toEqual([expect.objectContaining({ kind: 'provider', subject: 'spring-gds', healthy: false,
+      details: expect.objectContaining({ http_status: 503 }) })]);
   });
 
   it('files a number that names several parcels with the missing inputs', async () => {
@@ -235,6 +239,26 @@ describe('tracking health evidence', () => {
       healthStepRecorder.step({ ...step, carrier: 'paack', outcome: 'schema', errorType: 'SchemaError', error: new SchemaError('paack') });
     });
     expect([...samples.values()].map((sample) => sample.details.reason)).toEqual(['puzzle_unsolved', null]);
+  });
+
+  it('gives a tracking proxy\'s refusal of the tunnel its own reason, a 402 apart from a gateway error', async () => {
+    const samples = new Map<string, HealthSample>();
+    // The scraper's transport error over undici's chain for a proxy refusing the tunnel.
+    const refused = (status: number) => new Error('Russian Post is unreachable', { cause: Object.assign(new TypeError('fetch failed'), {
+      cause: Object.assign(new Error(`Proxy response (${status}) !== 200 when HTTP Tunneling`), { name: 'AbortError' }) }) });
+    await observeTrackingHealth(samples, async () => {
+      healthStepRecorder.step({ ...step, carrier: 'russian-post', error: refused(402) });
+      healthStepRecorder.lookup({ carrier: 'dhl-express', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1, error: refused(502) });
+      healthStepRecorder.lookup({ carrier: 'ups', finalStep: 'direct', outcome: 'transport', errorType: 'UpstreamNetworkError', durationMs: 1, attempts: 1, error: new TypeError('fetch failed') });
+    });
+    expect([...samples.values()].map(({ subject, details }) => [subject, details.category, details.reason, details.proxy_status, details.http_status])).toEqual([
+      ['russian-post', 'transport', 'proxy_payment_required', 402, null],
+      ['dhl-express', 'transport', 'proxy_refused', 502, null],
+      ['ups', 'transport', null, undefined, null],
+    ]);
+    expect(healthMessage({ subject: 'russian-post', kind: 'direct', state: 'open', evidence: { reason: 'proxy_payment_required', proxy_status: 402 } }).nextSteps)
+      .toContain('out of credit');
+    expect(healthMessage({ subject: 'dhl-express', state: 'open', evidence: { reason: 'proxy_refused', proxy_status: 502 } }).nextSteps).toContain('with 502');
   });
 
   it('explains user impact, maintenance and rate-limit next steps', () => {

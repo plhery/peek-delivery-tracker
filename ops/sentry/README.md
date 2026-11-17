@@ -82,8 +82,8 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   own, such as a number that trips the carrier's bot defences: it neither opens a refresh
   incident nor holds one open. Each copy of a number (followed in several accounts, or also
   without one) counts its own checks, since a scheduled run gives every copy a sample of the one
-  lookup they share; copies of one number in a streak are one parcel. Missing input, not-found, repeated and no-news answers don't count as
-  answering. A carrier whose other parcels fail too, or that has no other parcel, opens at the
+  lookup they share; copies of one number in a streak are one parcel. Missing input, not-found, repeated and no-news answers,
+  and the samples counted apart (below), don't count as answering. A carrier whose other parcels fail too, or that has no other parcel, opens at the
   first streak.
 - A step skipped during a cooldown is not a success. A check that contacted nobody because
   everything was cooling down records nothing.
@@ -122,6 +122,18 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   and asks no provider in its place ([docs/ROUTING.md](../../docs/ROUTING.md)) refreshed
   nothing yet: it records the carrier's failed lookup but no refresh sample. A check that then
   asks the providers records its refresh as usual.
+- Three samples are counted apart, each healthy under its own category: they open nothing, count toward
+  recovery and never toward the failure rate, and don't count as answering beside another parcel's streak.
+  - `shared_quota`: a lookup refused under a quota the carrier's API shares with every caller (Spring GDS's 429 under
+    PostNL's API, 20 calls a minute for everyone) says how busy that API is, not whether the carrier works. Its
+    direct step records no sample.
+  - `rate_limit_wait`: a scheduled check routing holds back only for rate limits, the carrier's own or a partner's
+    (AliExpress's or Spring GDS's for a parcel relayed between them), refreshed nothing yet. Every failing source
+    is rate limited or has no history, and none of the check's lookups failed otherwise.
+  - `unanswered`: a failed check of a parcel nothing has answered for since it was added, no answer and no scan
+    saved, whose carrier was not asked or answered without confirming it (a number Evri UK never confirms as one of
+    its domestic parcels), says nothing of the carrier. A carrier that fails otherwise, as when it is down, still
+    fails the refresh, and its lookups record their samples as usual.
 
 ## Delivery
 

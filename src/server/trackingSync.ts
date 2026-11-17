@@ -2448,6 +2448,7 @@ export class TrackingSyncService {
       typeof parcel.expected_delivery === 'string' ? parcel.expected_delivery : null,
       handedTo(parcel),
       typeof parcel.expected_delivery === 'string' && parcel.expected_delivery.trim() ? deliveryToday(parcel, now) : null,
+      !routing.last_success_at && String(parcel.current_stage ?? 'pending') === 'pending',
     );
     await audit.start();
     // A parcel just added, or looked up, with no progress saved yet: its first answer.

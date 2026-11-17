@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 import { ProxyAgent } from 'undici';
-import { trackingProxyFetcher } from './trackingProxy';
+import { proxyTunnelStatus, trackingProxyFetcher } from './trackingProxy';
 
 describe('tracking proxy scope', () => {
   it('uses a CONNECT proxy only for exact configured HTTPS hosts and preserves request options', async () => {
@@ -83,6 +83,9 @@ describe('tracking proxy scope', () => {
       return { outcome, calls: fetcher.mock.calls.length };
     };
     for (const status of [502, 503, 504]) expect(await run([refused(status)])).toEqual({ outcome: 200, calls: 2 });
+    expect([refused(402), refused(502), new TypeError('fetch failed')].map(proxyTunnelStatus)).toEqual([402, 502, null]);
+    // Out of credit: the proxy would refuse again.
+    expect((await run([refused(402)])).calls).toBe(1);
     // Once: a second refusal is the lookup's failure.
     const twice = await run([refused(502), refused(502)]);
     expect(twice.calls).toBe(2);

@@ -184,6 +184,23 @@ begin
   for i in 1..30 loop perform pg_temp.quiet_refresh('quiet-rate',gen_random_uuid()); end loop;
   for i in 1..5 loop result := pg_temp.health_sample('quiet-rate',false,'refresh',gen_random_uuid()); end loop;
   assert result->0->>'state'='open' and (result->0->>'attempts')::int=5, 'Answers without news must not dilute the outage rate';
+  -- Samples counted apart (a shared quota's refusal, a wait on rate limits, a parcel nothing has answered for) open
+  -- nothing, and neither dilute the rate nor answer for another parcel.
+  for i in 1..30 loop
+    perform public.record_tracking_health(gen_random_uuid(),gen_random_uuid(),jsonb_build_array(jsonb_build_object(
+      'kind','refresh','subject','apart-rate','healthy',true,'details',jsonb_build_object('category',(array['rate_limit_wait','unanswered'])[i%2+1]))));
+    perform public.record_tracking_health(gen_random_uuid(),null,jsonb_build_array(jsonb_build_object(
+      'kind','provider','subject','apart-rate','healthy',true,'details',jsonb_build_object('category','shared_quota'))));
+  end loop;
+  for i in 1..5 loop result := pg_temp.health_sample('apart-rate',false,'refresh',gen_random_uuid()); end loop;
+  assert result->0->>'state'='open' and (result->0->>'attempts')::int=5, 'Samples counted apart must not dilute the refresh rate';
+  for i in 1..10 loop result := pg_temp.health_sample('apart-rate',false); end loop;
+  assert result->0->>'state'='open' and (result->0->>'attempts')::int=10, 'Shared quota refusals must not dilute the lookup rate';
+  perform pg_temp.health_sample('apart-streak',false,'refresh','20000000-0000-4000-8000-000000000001');
+  perform public.record_tracking_health(gen_random_uuid(),'10000000-0000-4000-8000-000000000001',jsonb_build_array(jsonb_build_object(
+    'kind','refresh','subject','apart-streak','healthy',true,'details',jsonb_build_object('category','rate_limit_wait'))));
+  for i in 1..3 loop result := pg_temp.health_sample('apart-streak',false,'refresh','30000000-0000-4000-8000-000000000001'); end loop;
+  assert result->0->>'consecutive_failures'='true', 'A parcel only waiting must not stand for an answer beside another parcel''s streak';
 
   for i in 1..10 loop result := pg_temp.health_sample('half-failing',i%2=0); end loop;
   assert result='[]', 'Exactly 50 percent must not alert';

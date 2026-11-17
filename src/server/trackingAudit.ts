@@ -171,6 +171,13 @@ function refusedNumber(completion: SyncAuditCompletion, carrier: string): boolea
     || Object.values(failures).some((other) => isRecord(other) && other.user_error === PLACEHOLDER_NUMBER);
 }
 
+/** Routing waits on rate limits and nothing else: one source is rate limited, and every other failing one has no history. */
+function waitsOnRateLimit(failures: unknown): boolean {
+  if (!isRecord(failures)) return false;
+  const kinds = Object.values(failures).map((failure) => isRecord(failure) ? String(failure.kind) : '');
+  return kinds.includes('rate_limited') && kinds.every((kind) => ['rate_limited', 'not_found', 'no_history'].includes(kind));
+}
+
 /**
  * What a failed refresh adds to its health sample beyond its error class: the
  * check's anomaly codes and routing's failure per source. A check that failed
@@ -283,6 +290,11 @@ export class TrackingSyncAudit {
     readonly trackedBy: string | null = null,
     /** With an expected day, the date the check began on, on the clock that day is read on: the review tells whether it had passed. */
     readonly deliveryClockDate: string | null = null,
+    /**
+     * No source has answered for the parcel since it was added: no answer and no scan saved, as for a number its carrier
+     * never confirmed. Its failed refresh says nothing of the carrier's health and is counted apart (`unanswered`).
+     */
+    readonly unanswered = false,
   ) {
     this.#startedAtIso = now.toISOString();
   }
@@ -528,12 +540,23 @@ export class TrackingSyncAudit {
       const repeated = !refused && completion.thinAnswer !== undefined && ownAnswer?.healthy === true
         && ownAnswer.details.category === 'ok' && await this.previousThinAnswer(subject) === completion.thinAnswer;
       const quiet = !refused && completion.answeredWithoutNews === true;
-      const healthy = refused || repeated || quiet || (completion.outcome !== 'error' && !failedFetch);
+      const answered = refused || repeated || quiet || (completion.outcome !== 'error' && !failedFetch);
+      // A check routing holds back only for rate limits, a carrier's or a provider's, its own or a partner's (PostNL's
+      // quota for Spring GDS, a pause after a slider), none of its lookups failing otherwise, has refreshed nothing yet;
+      // a failed check of a parcel nothing has answered for since it was added, whose carrier was not asked or answered
+      // without confirming it (a number Evri UK never confirmed), tells nothing of the carrier. Each is counted apart
+      // under its own category: healthy, so it opens nothing, and left out of the refresh rate by Postgres. A carrier
+      // that fails otherwise, as when it is down, still fails the refresh.
+      const waits = !answered && values.error_type === 'RoutingDeferredError' && waitsOnRateLimit(completion.providerFailures)
+        && [...this.#healthSamples.values()].every((sample) => sample.kind !== 'provider' || sample.healthy);
+      const unconfirmed = this.unanswered && (!ownAnswer || ownAnswer.healthy || ownAnswer.details.category === 'indeterminate');
+      const apart = answered ? null : waits ? 'rate_limit_wait' : unconfirmed ? 'unanswered' : null;
+      const healthy = answered || apart !== null;
       // A carrier whose adapter declined its verification on purpose, in this check or in the one whose
       // cooldown deferred it, failed no refresh while every other source answered: the check keeps its
       // lookups' samples. Postgres counts deliberate JD abstentions as review data, not an outage.
       const ownFailure = isRecord(completion.providerFailures) ? completion.providerFailures[subject] : undefined;
-      const abstained = !healthy && (ownAnswer
+      const abstained = !answered && (ownAnswer
         ? !ownAnswer.healthy && !ownAnswer.recovered && ABSTAINED_REASONS.has(String(ownAnswer.details.reason))
         : isRecord(ownFailure) && ownFailure.abstained === true)
         && [...this.#healthSamples.values()].every((sample) => sample === ownAnswer || sample.healthy || sample.recovered);
@@ -546,6 +569,7 @@ export class TrackingSyncAudit {
         details: refused ? { category: 'input_required', ...refreshEvidence(completion) }
           : repeated ? { category: 'repeated_answer', ...refreshEvidence(completion), ...thin }
           : quiet ? { category: 'no_new_scans', ...refreshEvidence(completion) }
+          : apart ? { category: apart, ...(values.error_type ? { error_type: values.error_type } : {}), ...refreshEvidence(completion) }
           : { ...(values.error_type ? { error_type: values.error_type } : {}),
             ...[...this.#healthSamples.values()].reverse().find(sample => !sample.healthy && !sample.recovered)?.details,
             ...(healthy ? {} : refreshEvidence(completion)), ...thin },

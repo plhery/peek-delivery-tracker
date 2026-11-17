@@ -1,15 +1,25 @@
 import { ProxyAgent } from 'undici';
 
 const HOST = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
-/** undici's error when the proxy answers the tunnel with a gateway error: its exit could not reach the host. */
-const TUNNEL_REFUSED = /^Proxy response \((?:502|503|504)\) !== 200 when HTTP Tunneling$/;
+/** undici's error when the proxy answers the tunnel with another status than 200: it sent nothing to the host. */
+const TUNNEL_REFUSED = /^Proxy response \((\d{3})\) !== 200 when HTTP Tunneling$/;
+
+/**
+ * The status the tracking proxy answered a request's tunnel with, when it refused it: a gateway error (502–504) when
+ * its exit could not reach the host, 402 when the proxy account has run out of credit or traffic. Null otherwise.
+ */
+export function proxyTunnelStatus(error: unknown): number | null {
+  for (let cause = error, depth = 0; cause && depth < 8; cause = (cause as { cause?: unknown }).cause, depth += 1) {
+    const message = (cause as { message?: unknown }).message;
+    const refused = typeof message === 'string' ? TUNNEL_REFUSED.exec(message) : null;
+    if (refused) return Number(refused[1]);
+  }
+  return null;
+}
 
 function tunnelRefused(error: unknown): boolean {
-  for (let cause = error, depth = 0; cause && depth < 5; cause = (cause as { cause?: unknown }).cause, depth += 1) {
-    const message = (cause as { message?: unknown }).message;
-    if (typeof message === 'string' && TUNNEL_REFUSED.test(message)) return true;
-  }
-  return false;
+  const status = proxyTunnelStatus(error);
+  return status !== null && status >= 502 && status <= 504;
 }
 
 function proxySettings(raw: string, setting: string): { key: string; uri: string; token?: string } {

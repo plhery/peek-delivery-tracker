@@ -8349,9 +8349,11 @@ describe('TrackingSyncService', () => {
       await expect(service.syncPackage(parcel, { trigger: 'scheduled' })).resolves.toMatchObject({ waiting: failing ? 0 : 1, errors: failing ? 1 : 0 });
       parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
       expect(parcel).toMatchObject({ sync_status: failing ? 'error' : 'waiting' });
-      // The provider's outage is its own incident: the refresh got the carrier's answer, or it did not.
+      // The provider's outage is its own incident: the refresh got the carrier's answer, or it did not. Nothing
+      // has answered for the parcel yet, so a carrier answering without confirming it is counted apart.
       expect(client.recordTrackingHealth).toHaveBeenLastCalledWith(expect.any(String), 'sf-parcel', expect.arrayContaining([
-        expect.objectContaining({ kind: 'refresh', subject: 'sf-express', healthy: answered })]));
+        expect.objectContaining({ kind: 'refresh', subject: 'sf-express', healthy: true,
+          ...(failing ? { details: expect.objectContaining({ category: 'unanswered' }) } : {}) })]));
     }
   });
 

@@ -81,7 +81,10 @@ The server can route each tracking hostname through its country's egress using
 name separate hosts. Configured destinations require HTTPS. Credentials stay in runtime
 settings; requests to other carriers and the browser service stay direct. A proxy that
 answers the tunnel with a gateway error (502, 503, 504) has sent nothing to the host: the
-request goes through it once more.
+request goes through it once more. A lookup the proxy refused fails as a transport error whose
+health sample keeps the proxy's status (`proxy_status`) and a reason of its own:
+`proxy_payment_required` for a 402, the proxy account out of credit or traffic, which no retry
+helps, and `proxy_refused` for any other.
 
 1. **The carrier's own adapter**, when it has one. Cainiao (`aliexpress`) is an aggregator
    too, but it is only queried for AliExpress-style numbers (also beside another carrier's
@@ -379,8 +382,8 @@ provider's answer then leaves the carrier to be asked again once its search free
 later as after another answer. Either way the carrier counts no failure and takes no health sample. A carrier asked as a
 candidate stays unanswered. A carrier's own 429 has no reason.
 Spring GDS's lookups go through PostNL's API, whose 20 calls a minute every caller shares: its
-429 is waited out like any other, but takes no health sample, since it says how busy the API
-is rather than whether Spring GDS works.
+429 is waited out like any other, but its health sample is counted apart (`shared_quota`), since
+it says how busy the API is rather than whether Spring GDS works.
 
 ## Refresh cadence
 

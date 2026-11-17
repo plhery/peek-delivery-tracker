@@ -3,6 +3,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { CarrierError, NoHistoryError, UpstreamHttpError } from 'universal-parcel-scraper';
 import type { LookupRecord, StepRecord } from 'universal-parcel-scraper/node';
 import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason, selfPacedRefusal, sharedQuotaRefusal } from './trackingFailure';
+import { proxyTunnelStatus } from './trackingProxy';
 import type { JsonObject } from './types';
 
 export interface HealthSample extends JsonObject {
@@ -50,7 +51,10 @@ function category(record: StepRecord | LookupRecord): string {
 /**
  * The status of the HTTP response a provider rejected. Other carrier errors
  * carry an HTTP-like `status` of their own (404 for not found, 400 for a
- * number a parser refuses), which no server sent.
+ * number a parser refuses), which no server sent. A tracking proxy that refused
+ * the request's tunnel sent it nowhere: its status is the proxy's (`proxy_status`),
+ * with a reason of its own, `proxy_payment_required` for a 402 (the proxy account
+ * out of credit or traffic) and `proxy_refused` for any other, such as a 502.
  */
 function details(record: StepRecord | LookupRecord, outcome: string): JsonObject {
   let status: number | null = null;
@@ -58,8 +62,10 @@ function details(record: StepRecord | LookupRecord, outcome: string): JsonObject
   for (let depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
     if (current instanceof UpstreamHttpError && current.status >= 100 && current.status <= 599) status = current.status;
   }
-  return { error_type: record.errorType, category: outcome, reason: carrierErrorReason(record.error) ?? null, http_status: status,
-    step: 'step' in record ? record.step : record.finalStep };
+  const proxy = proxyTunnelStatus(record.error);
+  const reason = carrierErrorReason(record.error) ?? (proxy === null ? null : proxy === 402 ? 'proxy_payment_required' : 'proxy_refused');
+  return { error_type: record.errorType, category: outcome, reason, http_status: status,
+    ...(proxy === null ? {} : { proxy_status: proxy }), step: 'step' in record ? record.step : record.finalStep };
 }
 /**
  * A confirmation's inconclusive answer, such as an item listed without scans: the carrier may
@@ -79,14 +85,16 @@ function save(kind: 'provider' | 'direct', record: StepRecord | LookupRecord): v
   if (!store) return;
   const key = `${kind}:${record.carrier}`;
   const previous = store.get(key);
-  const outcome = category(record);
+  // A lookup refused under a quota the carrier's API shares with every caller (PostNL's for Spring
+  // GDS) tells how busy that API is, not whether the carrier works: it is counted apart, as
+  // `shared_quota`, which Postgres leaves out of the outage rate. Its direct step takes no sample.
+  const shared = sharedQuotaRefusal(record.carrier, record.error);
+  const outcome = shared ? 'shared_quota' : category(record);
   // Neither healthy nor failing: no sample. Nor is a hand-off to the group's unit abroad, which
   // the next step asks: counted as failures, three parcels bound for France made DPD Germany's
-  // direct step look broken on 95% of its checks. Nor a lookup our own pacing refused, which asked nobody,
-  // nor one refused under a quota the carrier's API shares with every caller (PostNL's for Spring GDS).
-  if (outcome === 'handed_off' || inconclusive(record, outcome) || selfPacedRefusal(record.error)
-    || sharedQuotaRefusal(record.carrier, record.error)) return;
-  const sample: HealthSample = { kind, subject: record.carrier.slice(0, 100), healthy: answered.has(outcome), details: details(record, outcome) };
+  // direct step look broken on 95% of its checks. Nor a lookup our own pacing refused, which asked nobody.
+  if (outcome === 'handed_off' || inconclusive(record, outcome) || selfPacedRefusal(record.error) || (shared && kind === 'direct')) return;
+  const sample: HealthSample = { kind, subject: record.carrier.slice(0, 100), healthy: shared || answered.has(outcome), details: details(record, outcome) };
   // A retry cannot count as another lookup. One that answered counts the lookup by its final
   // outcome; a direct step keeps its failure, marked recovered.
   if (previous && !previous.healthy) {
@@ -107,7 +115,8 @@ export const healthStepRecorder = {
     save('provider', record);
     // The lookup answered after its direct step failed: a later step, such as a retry, recovered it.
     const direct = observations.getStore()?.get(`direct:${record.carrier}`);
-    if (direct && !direct.healthy && observations.getStore()?.get(`provider:${record.carrier}`)?.healthy) direct.recovered = true;
+    const lookup = observations.getStore()?.get(`provider:${record.carrier}`);
+    if (direct && !direct.healthy && lookup?.healthy && lookup.details.category !== 'shared_quota') direct.recovered = true;
   },
 };
 export function observeTrackingHealth<T>(samples: Map<string, HealthSample>, operation: () => Promise<T>): Promise<T> {
@@ -171,7 +180,9 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
   const title = recovered ? `${scope} recovered: ${subject}`
     : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${incident.consecutive_failures ? '; 3 checks in a row failed for two parcels, or for one while no other answered' : ''})`;
   let nextSteps = 'Inspect the carrier scraper dashboard and the latest error type. Check the provider response and adapter parsing; retain the working fallback and scheduled backoff.';
-  if (evidence?.http_status === 429 || evidence?.category === 'rate_limited') nextSteps = 'Honor Retry-After and inspect provider cooldowns. Reduce request frequency; do not increase retries or browser parallelism.';
+  if (evidence?.reason === 'proxy_payment_required') nextSteps = 'The tracking proxy refused the tunnel with 402 Payment Required: its account is out of credit or traffic. Top it up or move the route to another proxy; retries will not help.';
+  else if (evidence?.reason === 'proxy_refused') nextSteps = `The tracking proxy refused the tunnel with ${String(evidence.proxy_status)}: a gateway error means its exit could not reach the carrier. Check the proxy provider's status before the carrier's.`;
+  else if (evidence?.http_status === 429 || evidence?.category === 'rate_limited') nextSteps = 'Honor Retry-After and inspect provider cooldowns. Reduce request frequency; do not increase retries or browser parallelism.';
   else if (['input_required','not_found'].includes(String(evidence?.category))) nextSteps = 'Check whether the shipment has been announced and whether its required postcode or tracking credentials were supplied. Do not retry invalid inputs immediately.';
   else if (evidence?.http_status === 403 || evidence?.category === 'challenge') nextSteps = 'Check for carrier maintenance or a verification challenge. Use the browser or alternate provider, keep the cooldown, and inspect the direct adapter if the refusal persists.';
   else if (subject === 'ups' && incident.kind === 'direct') nextSteps = 'Plain HTTP runs only without a browser service and Akamai holds its status call open until the timeout. Configure FLARESOLVERR_URL so the status reply is read from the browser page.';

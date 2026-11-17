@@ -1231,7 +1231,12 @@ export function rewordedScans(
  * whole second repeats the one row a carrier holds in that second, neither of
  * them dated by its day alone, unless the row is an earlier carrier's relay
  * (Ship24 copies a CTT Express scan twice, in CTT Express's words and in CTT
- * Portugal's, without the milliseconds).
+ * Portugal's, without the milliseconds). A provider that copies the one scan a
+ * carrier holds or answers at an instant, by any of these rules, tells it
+ * again in its other scans or rows of that instant in a stage that agrees,
+ * from any place and in any words: they are left out or absorbed too (Ship24
+ * gives a Poste Italiane scan in Poste Italiane's words and again in capitals
+ * at the province's main town).
  *
  * A provider's scan that matched nothing repeats another provider's row at the
  * shift most of its scans show from that provider's rows, in whole quarter
@@ -1428,6 +1433,19 @@ export function sharedScans(
       shared.reused.set(id, identity(row));
       copied.splice(copied.indexOf(row), 1);
     }
+    // The provider of a copy of the one scan a carrier gives and holds at the instant tells it again in its other rows
+    // there in a stage that agrees, from any place and in any words.
+    const [only] = scans;
+    if (scans.length === 1 && only && stageOf(only) !== '' && !stored.some((row) => (
+      heldByCarrier(row) && !observedOnly(row) && instantOf(row) === at && identity(row) !== identity(only)))) {
+      const taken = storedById.get(shared.reused.get(identity(only)) ?? reused.get(identity(only)) ?? '');
+      const told = [...copied, ...(taken && instantOf(taken) === at ? [taken] : [])];
+      const providers = new Set(told.map(providerOf).filter(Boolean));
+      copied.push(...rows.filter((row) => (
+        instantOf(row) === at && sourceOf(identity(row)) === UNIVERSAL && !kept.has(identity(row)) && !told.includes(row)
+        && providers.has(providerOf(row)) && stagesAgree(stageOf(row), stageOf(only))
+      )));
+    }
     for (const row of copied) shared.absorbed.add(identity(row));
   }
   // A copy of a scan a carrier holds stays out, so the copies it absorbed do not come back.
@@ -1451,6 +1469,20 @@ export function sharedScans(
     if (sourceOf(id) !== UNIVERSAL || shared.skipped.has(id) || shared.reused.has(id)) continue;
     const twin = heldCopy(event);
     if (twin) shared.skipped.set(id, identity(twin));
+  }
+  // A provider that copies the one scan a carrier holds at an instant tells it again in its other scans there in a
+  // stage that agrees, from any place and in any words: Ship24 gives a Poste Italiane scan in Poste Italiane's words
+  // and again in capitals at the province's main town.
+  const copiedBy = (event: JsonObject, rowId: string) => events.some((other) => (
+    other !== event && sourceOf(identity(other)) === UNIVERSAL && providerOf(other) !== '' && providerOf(other) === providerOf(event)
+    && instantOf(other) === instantOf(event) && (shared.skipped.get(identity(other)) === rowId || identity(other) === rowId)
+  ));
+  for (const event of pending) {
+    const id = identity(event);
+    if (sourceOf(id) !== UNIVERSAL || shared.skipped.has(id) || shared.reused.has(id) || stageOf(event) === '' || dayAlone(event)) continue;
+    const there = held.filter((row) => instantOf(row) === instantOf(event));
+    const row = there.length === 1 ? there[0]! : undefined;
+    if (row && stagesAgree(stageOf(row), stageOf(event)) && copiedBy(event, identity(row))) shared.skipped.set(id, identity(row));
   }
   // A provider's copy to the whole minute of the one scan a carrier holds or answers in that minute, in a stage that
   // agrees, from no conflicting place and with no row at the copy's own instant, repeats that scan when no other copy

@@ -1752,6 +1752,44 @@ describe('every copy at a carrier scan\'s instant', () => {
     expect(claimed(sharedScans([{ ...scans[0]!, stage: undefined }], [stored.at(-2)!]))).toBe(0);
   });
 
+  // Ship24 gives a Poste Italiane scan twice at its instant: in Poste Italiane's words, and in capitals at the
+  // province's main town, a place that shares no word with the carrier's.
+  const told = '2026-11-12T11:05:00.000Z';
+  const posted = placed(row('poste-italiane:accepted', told, 'Spedizione accettata', 'accepted'), 'Favara (AG), IT');
+  const inWords = named(placed(scan('unknown:words', told, 'Spedizione accettata', 'accepted'), 'Favara (AG), IT'), 'Ship24');
+  const inCapitals = named(placed(scan('unknown:capitals', told, 'SPEDIZIONE ACCETTATA IN UFFICIO', 'accepted'), 'Agrigento'), 'Ship24');
+
+  it('leaves out a provider\'s second copy of a carrier\'s scan at its instant, from any place and in any words', () => {
+    expect(pairs(sharedScans([inWords, inCapitals], [posted]).skipped))
+      .toEqual([['unknown:capitals', 'poste-italiane:accepted'], ['unknown:words', 'poste-italiane:accepted']]);
+    // Once the carrier took the provider's copy over, the row keeps the carrier's words and names no provider.
+    const takenOver = placed(row('unknown:words', told, 'Spedizione accettata', 'accepted'), 'Favara (AG), IT');
+    expect(pairs(sharedScans([inWords, inCapitals], [takenOver]).skipped)).toEqual([['unknown:capitals', 'unknown:words']]);
+    const skipped = (events: JsonObject[], stored: JsonObject[] = [posted]) => pairs(sharedScans(events, stored).skipped)
+      .map(([id]) => id);
+    // Alone, the lone copy in the scan's stage repeats it already. In another stage, from another provider, or beside
+    // two of the carrier's rows, the second copy stays.
+    expect(skipped([inCapitals])).toEqual(['unknown:capitals']);
+    expect(skipped([inWords, { ...inCapitals, stage: 'in_transit' }])).toEqual(['unknown:words']);
+    expect(skipped([inWords, named(inCapitals, 'ParcelsApp')])).toEqual(['unknown:words']);
+    expect(skipped([inWords, inCapitals], [posted, placed(row('poste-italiane:sorted', told, 'In lavorazione', 'accepted'), 'Favara (AG), IT')]))
+      .toEqual(['unknown:words']);
+  });
+
+  it('absorbs a provider\'s second copy once the carrier\'s scan takes its first over, from any place and in any words', () => {
+    const scanned = placed(scan('poste-italiane:accepted', told, 'Spedizione accettata', 'accepted'), 'Favara (AG), IT');
+    const stored = [{ ...inWords, package_id: undefined }, { ...inCapitals, package_id: undefined }];
+    const shared = sharedScans([scanned], stored);
+    expect(pairs(shared.reused)).toEqual([['poste-italiane:accepted', 'unknown:words']]);
+    expect([...shared.absorbed]).toEqual(['unknown:capitals']);
+    // In another stage, from another provider, or beside another of the carrier's scans, it stays.
+    const absorbed = (events: JsonObject[], rows: JsonObject[]) => sharedScans(events, rows).absorbed.size;
+    expect(absorbed([scanned], [stored[0]!, { ...stored[1]!, stage: 'in_transit' }])).toBe(0);
+    expect(absorbed([scanned], [stored[0]!, named(stored[1]!, 'ParcelsApp')])).toBe(0);
+    expect(absorbed([scanned, placed(scan('poste-italiane:sorted', told, 'In lavorazione', 'accepted'), 'Favara (AG), IT')], stored))
+      .toBe(0);
+  });
+
   it('leaves out a provider\'s later copies of a scan a carrier holds, so absorbed copies do not come back', () => {
     const instant = '2026-01-09T08:45:32.000Z';
     const carrier = row('speedaf:accepted', instant, 'Guangzhou warehouse', 'accepted');

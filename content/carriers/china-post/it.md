@@ -3,7 +3,7 @@ title: Tracking China Post: codice, stati in cinese e consegna
 description: Tracking China Post: com'è fatto un codice che finisce con CN, cosa vogliono dire gli stati in cinese, quando passa a Poste Italiane e cosa fare se si blocca.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 China Post è la posta statale cinese, ed EMS è il suo marchio espresso. Se il tuo ordine su AliExpress, Temu, Shein o un altro negozio ha un codice che finisce con `CN`, l'ha assegnato China Post. In Italia di solito il pacco passa a [Poste Italiane](carrier:poste-italiane), che lo consegna con lo stesso codice. Puoi seguirlo sul sito di China Post, ems.com.cn, o nel box qui sopra. Il codice è nei dettagli di spedizione del tuo ordine.
@@ -106,7 +106,7 @@ Mostra lo stato, la cronologia con l'ufficio di ogni scansione (un ufficio scrit
 
 Per un codice che finisce con `CN`, quando China Post indica l'Italia come destinazione, Peek chiede anche a Poste Italiane con lo stesso codice. Passa a Poste appena mostra scansioni nuove e tiene la cronologia di China Post. Se China Post non indica una destinazione o non risponde, Peek usa il tuo Paese: nell'app per iPhone o Android la regione impostata, nel browser il Paese da cui hai aggiunto il pacco.
 
-Peek controlla ogni 10 minuti, oppure ogni ora quando China Post tace: dopo 12 ore senza nuove scansioni se il pacco è ancora a «Etichetta creata» o «Preso in carico», dopo due giorni negli altri passaggi. Quando il pacco è in consegna, controlla ogni 2 minuti, o ogni 5 quando il controllo deve aprire un browser, come per leggere l'anteprima pubblica di China Post: quel giorno, dalle 6.00 ora locale, finché risponde il tracking di China Post stesso. Tramite i servizi di tracciamento controlla ogni 15 minuti. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: con Poste Italiane ogni ora, anche quando il pacco è in consegna. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare China Post, Poste o il negozio al posto tuo.
+Peek controlla una volta all'ora, anche il giorno della consegna. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: con Poste Italiane ogni ora, anche quando il pacco è in consegna. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare China Post, Poste o il negozio al posto tuo.
 
 ## Domande sul tracking China Post
 

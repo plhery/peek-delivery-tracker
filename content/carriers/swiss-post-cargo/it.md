@@ -3,7 +3,7 @@ title: Swiss Post Cargo tracking: stati, consegna e contatti
 description: Segui una spedizione Swiss Post Cargo: quale numero usare, cosa vuol dire Loaded for Delivery, come arriva la merce e chi chiamare.
 slug: swiss-post-cargo-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Swiss Post Cargo è il marchio della Posta Svizzera per il trasporto merci: pallet e altra merce viaggiano su camion, dal singolo collo al carico completo, non come pacchi normali. Segui la spedizione sulla pagina Track & Trace (tt.swisspost-cargo.com) con il codice a barre o il riferimento che ti ha dato il mittente, oppure incollalo nel box qui sopra. Se hai un numero di pacco della Posta, usa invece la [pagina della Posta Svizzera](carrier:swiss-post).
@@ -71,7 +71,7 @@ Un codice a barre di 20 cifre che inizia con `00`, con una cifra di controllo va
 
 Peek mostra lo stato e la cronologia con il comune di ogni scansione su una mappa, con gli orari letti sull'ora di Zurigo e mostrati nel fuso orario del tuo dispositivo, e l'ora di consegna. Le diciture restano in inglese; `Loaded for Delivery` vale come in consegna. Le righe della firma e della foto confluiscono nella scansione di consegna, senza l'immagine. Peek lascia fuori il tuo nome e indirizzo e non ha data di consegna prevista, peso o punto di ritiro.
 
-Un riferimento condiviso da più spedizioni viene letto solo se una di queste ha scansioni degli ultimi 60 giorni; altrimenti risulta non trovato, quindi usa il codice a barre. Peek controlla ogni 10 minuti, ogni 2 quando la merce è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Swiss Post Cargo; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se la spedizione è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora.
+Un riferimento condiviso da più spedizioni viene letto solo se una di queste ha scansioni degli ultimi 60 giorni; altrimenti risulta non trovato, quindi usa il codice a barre. Peek controlla fino a ogni 10 minuti, fino a ogni 2 quando la merce è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Swiss Post Cargo; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se la spedizione è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora.
 
 ## Domande sul tracking Swiss Post Cargo
 

@@ -3,7 +3,7 @@ title: Swiss Post tracking: Posta Svizzera, stati e ritiro
 description: Segui un pacco della Posta Svizzera in Ticino: com'è fatto il numero, cosa vogliono dire gli stati, cosa fare con l'invito di ritiro e come contattare la Posta.
 slug: swiss-post-tracking-posta-svizzera
 published: 2026-10-11
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 La Posta Svizzera (Swiss Post, Die Post, La Poste) consegna pacchi e raccomandate in tutta la Svizzera e nel Principato del Liechtenstein. Puoi seguire il pacco gratis su [post.ch](https://www.post.ch/it/ricezione/monitorare-gli-invii) con il numero d'invio, oppure incollare il numero nel box qui sopra. Il numero lo crea il mittente: cercalo prima nell'e-mail di spedizione del negozio.
@@ -86,7 +86,7 @@ Legge i testi inglesi della Posta, in qualunque lingua usi Peek. Mostra lo stato
 
 Peek mostra `Delivered` con la sua etichetta «Consegnato» e segna `Registered for collection` e `Deposited in the MyPost24 machine` come «Pronto per il ritiro»; `Delivered to the mailbox/letter box` resta come lo scrive la Posta.
 
-Controlla il pacco ogni 10 minuti, ogni 2 dalle 6.00 (ora svizzera) quando è in consegna (solo il giorno stesso e, se la Posta indica una fascia oraria, da mezz'ora prima che inizi, finché risponde il tracking della Posta; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. I pacchi di [GLS Svizzera](carrier:gls-ch) e i numeri postali stranieri diretti in Svizzera possono essere seguiti fino alla Posta; un numero `CH` diretto all'estero, fino alla posta nazionale del paese di destinazione, se Peek la conosce (per esempio Italia, Francia o Germania), appena questa mostra progressi più recenti. Peek non può contattare la Posta al posto tuo.
+Controlla il pacco fino a ogni 10 minuti, fino a ogni 2 dalle 6.00 (ora svizzera) quando è in consegna (solo il giorno stesso e, se la Posta indica una fascia oraria, da mezz'ora prima che inizi, finché risponde il tracking della Posta; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche: «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. I pacchi di [GLS Svizzera](carrier:gls-ch) e i numeri postali stranieri diretti in Svizzera possono essere seguiti fino alla Posta; un numero `CH` diretto all'estero, fino alla posta nazionale del paese di destinazione, se Peek la conosce (per esempio Italia, Francia o Germania), appena questa mostra progressi più recenti. Peek non può contattare la Posta al posto tuo.
 
 ## Domande sul tracking della Posta Svizzera
 

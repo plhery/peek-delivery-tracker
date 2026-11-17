@@ -3,7 +3,7 @@ title: SunYou tracking: numero SY, stati e chi consegna in Italia
 description: Traccia un pacco SunYou (SYPost) dalla Cina: com'è fatto il numero SY, cosa vogliono dire gli stati, chi lo consegna in Italia e a chi chiedere se si ferma.
 slug: sunyou-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 SunYou, scritto anche SYPost, è un'azienda di logistica di Shenzhen che spedisce all'estero i piccoli pacchi dei venditori online cinesi e li affida, nel Paese di arrivo, a un corriere locale per l'ultimo tratto. I suoi numeri cominciano con SY: inserisci il tuo sul sito di tracciamento di SunYou, [sypost.net](https://www.sypost.net), oppure nel box qui sopra. Il numero te lo dà il negozio, con i dati di spedizione dell'ordine.
@@ -88,7 +88,7 @@ Peek legge il tracking di SunYou in inglese, quindi su Peek le righe compaiono i
 
 Quando SunYou dà il numero del corriere locale, Peek può chiedere a quel corriere, per esempio Royal Mail o DHL in Germania, e passare a lui appena mostra passaggi più recenti. Il pacco tiene il numero SunYou e la sua pagina dice «Consegna con» seguito dal corriere, con il suo numero e un link. Finché Peek trova il pacco solo annunciato a quel corriere, senza una sua scansione, la pagina dice invece «Annunciato a …, non ancora ricevuto». Non succede per ogni pacco: un numero postale diretto in Svizzera può passare alla Posta Svizzera, ma per l'Italia Peek non ha una regola che lo passi a Poste Italiane: lo segue semmai sulla posta che ha emesso il numero, se la traccia.
 
-Controlla ogni 10 minuti, ogni 2 quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di SunYou; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: ogni ora con Royal Mail e Poste Italiane, ogni 30 minuti con PostNL, USPS e GOFO negli Stati Uniti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare SunYou o il venditore al posto tuo.
+Controlla fino a ogni 10 minuti, fino a ogni 2 quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di SunYou; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: ogni ora con Royal Mail e Poste Italiane, ogni 30 minuti con PostNL, USPS e GOFO negli Stati Uniti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare SunYou o il venditore al posto tuo.
 
 ## Domande sul tracking SunYou
 

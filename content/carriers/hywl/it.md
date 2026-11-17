@@ -3,7 +3,7 @@ title: HYWL tracking: numero TRK e stati di Huiyi Logistics
 description: Tracking HYWL (Huiyi Logistics, 汇一物流) per i pacchi dalla Cina: com'è fatto il numero TRK, cosa vogliono dire i passaggi in inglese e in cinese e a chi rivolgersi.
 slug: hywl-tracking
 published: 2026-11-01
-updated: 2026-11-06
+updated: 2026-11-17
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) è 深圳市汇一物流有限公司, un'azienda di logistica di Shenzhen, in Cina, che spedisce all'estero i pacchi dei venditori online. Se un negozio ha spedito il tuo ordine con HYWL, il numero è TRK seguito da dodici caratteri, oppure quattro lettere, due cifre, una D, quattro cifre e quattro lettere: incollalo nel box qui sopra. Il tracking di HYWL è sul suo sito, in cinese, e i passaggi sono in inglese, in cinese o in entrambe le lingue. HYWL non dice quale corriere consegna il pacco in Italia.
@@ -99,7 +99,7 @@ Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL l
 
 Quando il tracking di HYWL non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che hanno, con le loro parole. Le loro copie possono mostrare passaggi con una data futura, ma un passaggio datato più di un'ora dopo il controllo di Peek non diventa mai lo stato del pacco. Quindi guarda l'ora di ogni passaggio.
 
-Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla ogni 10 minuti. Con `Dispatching` o `出门投递` il pacco passa a «In consegna» e Peek controlla ogni 2 minuti, ma solo finché risponde il tracking di HYWL, nel giorno di quel passaggio e dalle 6 del mattino, ora locale; quando rispondono i servizi di tracciamento, ogni 15 minuti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Anche in consegna passa a una volta all'ora o meno se nessuna notifica può raggiungerti e non apri Peek da un'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
+Peek resta sul tracking di HYWL: se il venditore ti dà il numero del corriere che consegna, aggiungilo come pacco separato. Peek controlla fino a ogni 10 minuti. Con `Dispatching` o `出门投递` il pacco passa a «In consegna» e Peek controlla fino a ogni 2 minuti, ma solo finché risponde il tracking di HYWL, nel giorno di quel passaggio e dalle 6 del mattino, ora locale; quando rispondono i servizi di tracciamento, ogni ora, e fino a ogni 15 minuti il giorno della consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Anche in consegna passa a una volta all'ora o meno se nessuna notifica può raggiungerti e non apri Peek da un'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» e «Solo la consegna»: «Passaggi importanti» comprende `Dispatching` e `Delivered`, non la dogana d'esportazione né lo smistamento di HYWL. Peek non può contattare HYWL o il venditore al posto tuo.
 
 ## Domande sul tracking HYWL
 

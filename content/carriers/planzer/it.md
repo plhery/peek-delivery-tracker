@@ -3,7 +3,7 @@ title: Planzer tracking: stati del pacco, ritiro e contatti
 description: Segui un pacco Planzer in Ticino e nel resto della Svizzera: dove trovi il numero, perché Shipped vuol dire consegnato, punti di ritiro e contatti.
 slug: planzer-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Planzer Pacchi (Planzer Paket in tedesco) è il servizio pacchi del gruppo svizzero Planzer: consegna i pacchi dei mittenti, fino a 30 kg, in Svizzera e nel Principato del Liechtenstein. Il numero di spedizione è nell'e-mail o nell'SMS «A breve riceverà una spedizione», che ti manda il mittente o Planzer Pacchi. Il link del messaggio apre il portale destinatari di Planzer; in alternativa incolla il numero nel box qui sopra.
@@ -88,7 +88,7 @@ Come risultavano sulle pagine di Planzer il 9 ottobre 2026:
 
 Per un numero di 13 cifre che inizia con 99990 ti chiede il link di tracciamento condiviso completo (trackandtrace.planzergroup.com/shared/…, con il suo accessKey), poi legge i passaggi raggiunti finora, con i loro orari, e una data prevista.
 
-Controlla il pacco ogni 10 minuti, ogni 2 minuti dalle 06.00 (ora svizzera) quando è in consegna (solo il giorno stesso e finché risponde il tracking di Planzer; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Il tracking di Planzer non dice dove avvengono le scansioni, quindi non ci sono luoghi da mostrarti. Peek non può contattare Planzer al posto tuo.
+Controlla il pacco fino a ogni 10 minuti, fino a ogni 2 minuti dalle 06.00 (ora svizzera) quando è in consegna (solo il giorno stesso e finché risponde il tracking di Planzer; quando rispondono i servizi di tracciamento, ogni 15 minuti), e può mandarti notifiche per ogni scansione, solo per i passaggi importanti o solo il giorno di consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Il tracking di Planzer non dice dove avvengono le scansioni, quindi non ci sono luoghi da mostrarti. Peek non può contattare Planzer al posto tuo.
 
 ## Domande sul tracking Planzer
 

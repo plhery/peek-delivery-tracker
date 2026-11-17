@@ -3,7 +3,7 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
@@ -129,7 +129,7 @@ Peek ricava la fase del pacco dallo stato di Shouwu, come nelle tabelle qui sopr
 
 Shouwu non indica a parte chi consegna, quindi Peek non mostra la riga «Consegna con» e non segue il pacco sul tracking del corriere, nemmeno quando una riga nomina Poste Italiane o riprende quelle di iMile. Se hai il numero del corriere, aggiungilo a Peek come pacco a sé.
 
-Peek controlla ogni 10 minuti e ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Shouwu; quando rispondono i servizi di tracciamento, ogni 15 minuti). Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
+Peek controlla fino a ogni 10 minuti e fino a ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di Shouwu; quando rispondono i servizi di tracciamento, ogni 15 minuti). Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Per le notifiche scegli tra «Ogni scansione», «Passaggi importanti» (consegna, ritiro, dogana, tentativi non riusciti e resi) e «Solo la consegna». Peek non può contattare Shouwu o il venditore al posto tuo.
 
 ## Domande sul tracking Shouwu
 

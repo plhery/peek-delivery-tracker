@@ -3,7 +3,7 @@ title: Asendia tracking: stati, consegna in Italia e contatti
 description: Tracking Asendia: dove trovi il numero, cosa vogliono dire gli stati, chi consegna il pacco in Italia, dogana e a chi scrivere se il pacco si blocca.
 slug: asendia-tracking
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Asendia è una società di spedizioni internazionali di proprietà di La Poste e della Posta Svizzera, con uffici anche in Italia. Lavora per i negozi online: porta il pacco dal magazzino del venditore all'estero fino in Italia, dove la consegna passa a un corriere locale. Il numero che ti dà il negozio inseriscilo sul [sito di tracciamento di Asendia](https://track.asendia.com/track), disponibile anche in italiano, oppure incollalo nel box qui sopra. Per i pacchi di Asendia USA c'è anche [A1 Tracking](https://a1.asendiausa.com/tracking/), solo in inglese.
@@ -101,7 +101,7 @@ Peek chiede prima ad A1 e, se A1 non trova il pacco o non risponde, apre in un b
 
 Da A1 vedi lo stato, la cronologia con città, provincia e Paese, il peso, il Paese di destinazione e il corriere che consegna con il suo numero, ma nessuna data di consegna prevista; indirizzi e codici postali restano fuori. Quando A1 nomina un corriere che Peek segue (per esempio Poste Italiane, se è lei a consegnare, o USPS), la scheda del pacco dice «Consegna con» quel corriere e il tracking può passare a lui. Finché Peek trova il pacco solo annunciato a quel corriere, senza una sua scansione, la scheda dice invece «Annunciato a …, non ancora ricevuto».
 
-Peek controlla ogni 10 minuti (ogni 2 minuti quando il pacco è in consegna, o ogni 5 se lo legge su track.asendia.com). I controlli più fitti valgono solo il giorno in cui il pacco è in consegna, dalle 6.00 ora locale, e finché rispondono i tracking di Asendia; quando rispondono i servizi di tracciamento, ogni 15 minuti. Quando Peek lo segue su Poste Italiane controlla ogni ora, su USPS ogni 30 minuti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra le scansioni su una mappa e può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Asendia o il negozio al posto tuo, né aprire un reclamo.
+Peek controlla fino a ogni 10 minuti (fino a ogni 2 minuti quando il pacco è in consegna, o ogni 5 se lo legge su track.asendia.com). I controlli più fitti valgono solo il giorno in cui il pacco è in consegna, dalle 6.00 ora locale, e finché rispondono i tracking di Asendia; quando rispondono i servizi di tracciamento, ogni 15 minuti. Quando Peek lo segue su Poste Italiane controlla ogni ora, su USPS ogni 30 minuti, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Mostra le scansioni su una mappa e può avvisarti con «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Non può contattare Asendia o il negozio al posto tuo, né aprire un reclamo.
 
 ## Domande sul tracking Asendia
 

@@ -3,7 +3,7 @@ title: Amazon Shipping tracking: dov'è il pacco e chi contattare
 description: Amazon Shipping: com'è fatto l'ID di tracciamento, quale tracker lo conosce e chi contattare se il pacco non arriva, arriva danneggiato o risulta consegnato.
 slug: amazon-shipping-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Amazon Shipping è Amazon che consegna pacchi per conto di altri venditori: un venditore che non è Amazon può spedirti l'ordine con la rete di Amazon. Lo segui con il suo ID di tracciamento sul tracker pubblico di Amazon Shipping (track.amazon.it per i numeri italiani). Secondo quel tracker, è il venditore ad affidare la spedizione ad Amazon Shipping, che tu abbia acquistato «su Amazon.it o qualsiasi altro sito web». Gli altri ordini di Amazon.it si seguono da I miei ordini.
@@ -39,7 +39,7 @@ Se il pacco non arriva o arriva danneggiato, il tuo interlocutore è il negozio,
 
 Incolla in [Peek](/) il numero o un link di track.amazon.it (`/tracking/` seguito dal numero). Peek chiede al tracker pubblico di Amazon se conosce il numero: per i numeri `IT` a track.amazon.it, per `ES` a track.amazon.es, per `UK` e `GB` a track.amazon.co.uk, per `TBA`, `TBC` e `TBM` a track.amazon.com, per `CH` e gli altri prefissi europei a track.amazon.fr. Se Amazon risponde, vedi «Il tracciamento pubblico è disponibile con Amazon Shipping. Peek terrà aggiornata questa consegna.» Se no, è una consegna Amazon Logistics, che di solito si segue da I miei ordini su Amazon. Se la verifica non riesce, premi «Riprova». Amazon Shipping non è nell'elenco di «Cambia corriere»: questa verifica è l'unica strada. Non serve il CAP.
 
-Peek mostra lo stato, la cronologia con città, regione e Paese di ogni scansione, il giorno di consegna previsto e l'ora di consegna. Controlla ogni 10 minuti (ogni 2 quando il pacco è in consegna, il giorno stesso, dalle 6.00 ora locale), mette ogni scansione su una mappa e può mandarti notifiche quando lo stato cambia. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Usa le sue etichette brevi in italiano al posto delle frasi di Amazon, tranne «Arrived at sorting center», «Arrived at delivery center» e «Departed facility», che restano in inglese. Lascia fuori il nome del negozio, il tuo nome e indirizzo, la firma e la foto di consegna. Amazon è l'unica fonte: quando smette di dare la cronologia, Peek lo dice e smette di controllare. Non segue il pacco se passa a un altro corriere.
+Peek mostra lo stato, la cronologia con città, regione e Paese di ogni scansione, il giorno di consegna previsto e l'ora di consegna. Controlla fino a ogni 10 minuti (fino a ogni 2 quando il pacco è in consegna, il giorno stesso, dalle 6.00 ora locale), mette ogni scansione su una mappa e può mandarti notifiche quando lo stato cambia. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Usa le sue etichette brevi in italiano al posto delle frasi di Amazon, tranne «Arrived at sorting center», «Arrived at delivery center» e «Departed facility», che restano in inglese. Lascia fuori il nome del negozio, il tuo nome e indirizzo, la firma e la foto di consegna. Amazon è l'unica fonte: quando smette di dare la cronologia, Peek lo dice e smette di controllare. Non segue il pacco se passa a un altro corriere.
 
 ## Domande sul tracking Amazon Shipping
 

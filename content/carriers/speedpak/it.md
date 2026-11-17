@@ -3,7 +3,7 @@ title: SpeedPAK tracking: pacchi eBay, stati e chi consegna
 description: Tracking SpeedPAK per i pacchi eBay: com'è fatto il numero di 28 caratteri, cosa vogliono dire gli stati in inglese e a chi chiedere se il pacco si ferma.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 SpeedPAK è il servizio di spedizione di eBay per gli ordini dall'estero, gestito con la società di logistica Orange Connex e pensato per i pacchi che partono dalla Cina. Il numero ha 28 caratteri e comincia con ES, EE o EX: inseriscilo sulla pagina di tracciamento di Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), oppure incollalo nel box qui sopra. Su eBay lo trovi come link accanto all'oggetto, in «Cronologia acquisti».
@@ -87,7 +87,7 @@ eBay riporta la stessa e-mail con gli orari nel fuso della Cina, su una pagina p
 
 Quando SpeedPAK nomina il corriere che consegna, Peek può chiedere anche a lui e passare alle sue scansioni appena mostra progressi più recenti. Il pacco resta sotto il numero che hai aggiunto, la sua pagina dice «Consegna con» e il nome del corriere, ed elenca il numero di quel corriere con un link al suo tracking. Finché Peek trova il pacco solo annunciato a quel corriere, senza una sua scansione, la pagina dice invece «Annunciato a …, non ancora ricevuto». Dipende da cosa pubblica SpeedPAK, quindi non succede per ogni pacco.
 
-Peek controlla ogni 10 minuti (ogni 2 quando il pacco è in consegna: il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di SpeedPAK; quando rispondono i servizi di tracciamento, ogni 15 minuti), mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: ogni ora con Royal Mail e Poste Italiane, ogni 30 minuti con PostNL e USPS, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare SpeedPAK o il venditore, né aprire una richiesta al posto tuo.
+Peek controlla fino a ogni 10 minuti (fino a ogni 2 quando il pacco è in consegna: il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di SpeedPAK; quando rispondono i servizi di tracciamento, ogni 15 minuti), mette ogni scansione su una mappa e può mandarti notifiche: per ogni scansione, solo per i passaggi importanti o «Solo la consegna». Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco: ogni ora con Royal Mail e Poste Italiane, ogni 30 minuti con PostNL e USPS, anche in consegna. Dopo due giorni senza novità, o dopo 12 ore se il pacco è ancora su «Etichetta creata» o «Preso in carico», Peek controlla solo una volta all'ora. Non può contattare SpeedPAK o il venditore, né aprire una richiesta al posto tuo.
 
 ## Domande sul tracking SpeedPAK
 

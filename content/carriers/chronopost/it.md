@@ -3,7 +3,7 @@ title: Chronopost tracking: pacco dalla Francia, stati e ritiro
 description: Segui un pacco Chronopost dalla Francia in Italia: com'è fatto il numero, cosa significano gli stati in francese, punti Pickup, problemi e contatti.
 slug: chronopost-tracking
 published: 2026-11-14
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Chronopost è il corriere espresso francese del gruppo La Poste e fa parte di Geopost, la divisione pacchi a cui appartengono anche DPD e [BRT](carrier:brt). Questa guida è pensata per chi aspetta in Italia o nella Svizzera italiana una spedizione partita dalla Francia con Chronopost, per esempio da un negozio online, con una parte dedicata ai punti di ritiro in Francia. Segui il pacco su chronopost.fr o incolla il codice qui sopra. Anche laposte.fr risponde ai numeri Chronopost, ma può omettere scansioni e riferimenti presenti su Chronopost.
@@ -92,7 +92,7 @@ Con 15 caratteri mostra «Verifica dei servizi di tracciamento…» e interroga 
 
 Peek mette ogni filiale sulla mappa e mostra il Paese di destinazione, l'ora di consegna, il numero partner per Germania o Portogallo e, durante l'attesa, nome e indirizzo del punto di ritiro (scartando il tuo indirizzo e i contatti del punto). Mostra una data prevista solo con riconsegna o fascia prenotata, o con `Livraison prévue lundi prochain` tra venerdì e domenica. Le scansioni con fuso appaiono nel tuo fuso orario («Orari nel tuo fuso orario: …» su peektracker.com e nell'app per iPhone); quelle senza fuso Peek le legge nell'ora locale del luogo della scansione.
 
-Controlla ogni 10 minuti, e in consegna ogni 2 minuti dalle 6.00 (ora francese, italiana e svizzera) se risponde Chronopost — 15 minuti dopo un errore o tramite servizi di tracciamento. Resta a 10 minuti fino a 30 minuti prima di una fascia oraria o se è in consegna da un giorno precedente; dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Scegli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non invia reclami per te.
+Controlla fino a ogni 10 minuti, e in consegna fino a ogni 2 minuti dalle 6.00 (ora francese, italiana e svizzera) se risponde Chronopost — 15 minuti dopo un errore o tramite servizi di tracciamento. Resta al ritmo normale fino a 30 minuti prima di una fascia oraria o se è in consegna da un giorno precedente; dopo due giorni senza novità (12 ore su «Etichetta creata» o «Preso in carico»), controlla ogni ora. Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Scegli avvisi per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non invia reclami per te.
 
 ## Domande sul tracking Chronopost
 

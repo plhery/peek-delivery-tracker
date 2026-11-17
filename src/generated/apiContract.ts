@@ -13173,7 +13173,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "oca",
-      "recognitionRank": 974
+      "recognitionRank": 974,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://www.oca.com.ar/Seguimiento/Paquetes/{trackingNumber}",
     "linkRules": [
@@ -13216,7 +13217,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{5}0000\\d{10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.oca.com.ar/Seguimiento/BuscarEnvio"
   },
   "olva-courier": {

@@ -319,11 +319,15 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>):
 
 /**
  * Each notice in the stage of its scan before it, with the row it is shown under (stageNotices.ts): that scan, or the
- * row the scan itself is shown under as a carrier's repeat. Rows of a relay pair (`apart`) are neither.
+ * row the scan itself is shown under as a copy (`relays`) or a carrier's repeat. A row of a relay pair is no notice,
+ * but its source's notices after it go under its step: a notice the evening after a failed delivery whose row is
+ * shown under the delivery partner's own goes under that step, not under the attempt of the day before.
  */
-function noticeLeads(events: readonly JsonObject[], apart: ReadonlySet<string>, repeats: ReadonlyMap<string, string>): Map<string, string> {
-  const notices = stageNotices(events.filter((event) => !apart.has(String(event.id))).map(noticeScan));
-  return new Map([...notices].map(([notice, scan]) => [notice, repeats.get(scan) ?? scan]));
+function noticeLeads(events: readonly JsonObject[], relays: ReadonlyMap<string, string>,
+  repeats: ReadonlyMap<string, string>): Map<string, string> {
+  const paired = new Set([...relays.keys(), ...relays.values()]);
+  const notices = stageNotices(events.map(noticeScan), paired);
+  return new Map([...notices].map(([notice, scan]) => [notice, relays.get(scan) ?? repeats.get(scan) ?? scan]));
 }
 
 /**
@@ -480,7 +484,7 @@ function placedEvents(row: JsonObject): JsonObject {
   const relays = relayLeads(events, pairs);
   const apart = new Set([...relays.keys(), ...relays.values()]);
   const repeats = repeatLeads(events, apart);
-  const notices = noticeLeads(events, apart, repeats);
+  const notices = noticeLeads(events, relays, repeats);
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
   // otherwise, it is served in the other row's spelling, so they are shown once. So is an earlier carrier's copy whose

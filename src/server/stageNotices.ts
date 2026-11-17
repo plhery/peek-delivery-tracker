@@ -27,13 +27,15 @@ export function noticeScan(event: JsonObject): NoticeScan {
 /**
  * Each notice in the stage of its scan before it, with that scan's id: the newest scan of the
  * notice's source in a stage dated at or before it, other such notices aside (a mail notice and a
- * text message of one instant both go under the scan). Peek's own rows are neither.
+ * text message of one instant both go under the scan). Peek's own rows are neither. Rows already
+ * shown with another (`paired`) are no notices, but can be the scan before one.
  */
-export function stageNotices(scans: readonly NoticeScan[]): Map<string, string> {
+export function stageNotices(scans: readonly NoticeScan[], paired: ReadonlySet<string> = new Set()): Map<string, string> {
   const ordered = scans.filter((scan) => Number.isFinite(scan.at)).sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
   const notices = new Map<string, string>();
   for (const notice of ordered) {
-    if (notice.stageSource !== 'none' || notice.source === '' || notice.source === 'app' || NOT_NOTICES.has(notice.stage)) continue;
+    if (notice.stageSource !== 'none' || notice.source === '' || notice.source === 'app' || NOT_NOTICES.has(notice.stage)
+      || paired.has(notice.id)) continue;
     let lead: NoticeScan | undefined;
     for (const scan of ordered) {
       if (scan.at > notice.at) break;

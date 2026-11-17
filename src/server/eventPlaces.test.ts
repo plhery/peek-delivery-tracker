@@ -676,6 +676,29 @@ describe('withEventPlaces', () => {
     expect((withoutEventSources(row).tracking_events as Record<string, unknown>[]).some((event) => 'stage_source' in event)).toBe(false);
   });
 
+  it('serves a notice after a relay copy under the step that copy is part of, not an older scan of its carrier', () => {
+    // Synthetic rows: the earlier carrier tells each failed delivery of the new one, and a notice of its own after each.
+    const scan = (id: string, source: string, occurredAt: string, stageSource = 'carrier_map') => ({
+      ...event(id, null, occurredAt), stage: 'failed_attempt', description: `Fixture ${id}`, provider_event_id: `${source}:${id}`,
+      stage_source: stageSource,
+    });
+    const row = {
+      id: 'parcel', carrier: 'dhl', carrier_data: { original_carrier: 'dhl', active_tracking_carrier: 'swiss-post' }, tracking_events: [
+        scan('first', 'swiss-post', '2026-11-04T12:11:40Z'),
+        scan('first-copy', 'dhl', '2026-11-04T12:11:00Z'),
+        scan('first-notice', 'dhl', '2026-11-04T17:41:36Z', 'none'),
+        scan('second', 'swiss-post', '2026-11-05T11:25:08Z'),
+        scan('second-copy', 'dhl', '2026-11-05T11:25:00Z'),
+        scan('second-notice', 'dhl', '2026-11-05T18:44:55Z', 'none'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([
+      ['first', undefined], ['first-copy', 'first'], ['first-notice', 'first'],
+      ['second', undefined], ['second-copy', 'second'], ['second-notice', 'second'],
+    ]);
+  });
+
   it('leaves out a provider\'s copy of a confirmed carrier\'s scan, and pairs relay copies without it', () => {
     const scan = (id: string, source: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), provider_event_id: `${source}:${id}`, ...extra,

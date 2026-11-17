@@ -572,8 +572,9 @@ and nothing typed is sent.
   stored as `pending`: it stays in the timeline as the carrier's news, but the parcel's stage,
   the apps' headline, alerts and the delivery email go by the newest scan in a stage, which a
   pending scan never makes look out of date. A notice in that scan's stage keeps it, but after a
-  delivery or a return: it is served under the scan (`relay_of`), so the headline stays on the
-  scan, and it announces nothing (`src/server/stageNotices.ts`). A scan its adapter leaves in no
+  delivery or a return: it is served under the scan (`relay_of`), or under the row that scan is
+  itself shown under as another carrier's copy, so the headline stays on the scan, and it
+  announces nothing (`src/server/stageNotices.ts`). A scan its adapter leaves in no
   stage whose code or wording the carrier's map notes keeps the stage of the scan before it (Royal
   Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of
   the scan dated before it (`keptNotices`). A scan

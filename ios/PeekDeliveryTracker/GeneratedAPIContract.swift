@@ -1867,6 +1867,42 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
     static let alohaFreight = CarrierID(rawValue: "aloha-freight")
     static let twoDayTransportation = CarrierID(rawValue: "two-day-transportation")
     static let westernPost = CarrierID(rawValue: "western-post")
+    static let actLogistics = CarrierID(rawValue: "act-logistics")
+    static let adsIntl = CarrierID(rawValue: "ads-intl")
+    static let airwaysCourierIn = CarrierID(rawValue: "airways-courier-in")
+    static let alphaCargoTh = CarrierID(rawValue: "alpha-cargo-th")
+    static let aslAsia = CarrierID(rawValue: "asl-asia")
+    static let chemcouriers = CarrierID(rawValue: "chemcouriers")
+    static let cristaoShipping = CarrierID(rawValue: "cristao-shipping")
+    static let deleo = CarrierID(rawValue: "deleo")
+    static let delibox = CarrierID(rawValue: "delibox")
+    static let dpdHk = CarrierID(rawValue: "dpd-hk")
+    static let fastExpressCargo = CarrierID(rawValue: "fast-express-cargo")
+    static let fastExpressTr = CarrierID(rawValue: "fast-express-tr")
+    static let focusLogisticsIl = CarrierID(rawValue: "focus-logistics-il")
+    static let fynex = CarrierID(rawValue: "fynex")
+    static let gkGlobalKr = CarrierID(rawValue: "gk-global-kr")
+    static let intrasJp = CarrierID(rawValue: "intras-jp")
+    static let jpLogistics = CarrierID(rawValue: "jp-logistics")
+    static let kexpressIl = CarrierID(rawValue: "kexpress-il")
+    static let khubaniAirPack = CarrierID(rawValue: "khubani-air-pack")
+    static let lexTh = CarrierID(rawValue: "lex-th")
+    static let line1Logistics = CarrierID(rawValue: "line-1-logistics")
+    static let litexpress = CarrierID(rawValue: "litexpress")
+    static let m5Continent = CarrierID(rawValue: "m5-continent")
+    static let maxExpressAe = CarrierID(rawValue: "max-express-ae")
+    static let movicarga = CarrierID(rawValue: "movicarga")
+    static let newayTransport = CarrierID(rawValue: "neway-transport")
+    static let pmlTw = CarrierID(rawValue: "pml-tw")
+    static let qiantongHk = CarrierID(rawValue: "qiantong-hk")
+    static let relayExpress = CarrierID(rawValue: "relay-express")
+    static let sgxpress = CarrierID(rawValue: "sgxpress")
+    static let shipwaysIn = CarrierID(rawValue: "shipways-in")
+    static let shivaInnovatrix = CarrierID(rawValue: "shiva-innovatrix")
+    static let useaExpress = CarrierID(rawValue: "usea-express")
+    static let wyngs = CarrierID(rawValue: "wyngs")
+    static let xindus = CarrierID(rawValue: "xindus")
+    static let xportel = CarrierID(rawValue: "xportel")
 
     static let allCases: [CarrierID] = [
         .swissPost,
@@ -3684,6 +3720,42 @@ struct CarrierID: RawRepresentable, Codable, CaseIterable, Hashable, Sendable, I
         .alohaFreight,
         .twoDayTransportation,
         .westernPost,
+        .actLogistics,
+        .adsIntl,
+        .airwaysCourierIn,
+        .alphaCargoTh,
+        .aslAsia,
+        .chemcouriers,
+        .cristaoShipping,
+        .deleo,
+        .delibox,
+        .dpdHk,
+        .fastExpressCargo,
+        .fastExpressTr,
+        .focusLogisticsIl,
+        .fynex,
+        .gkGlobalKr,
+        .intrasJp,
+        .jpLogistics,
+        .kexpressIl,
+        .khubaniAirPack,
+        .lexTh,
+        .line1Logistics,
+        .litexpress,
+        .m5Continent,
+        .maxExpressAe,
+        .movicarga,
+        .newayTransport,
+        .pmlTw,
+        .qiantongHk,
+        .relayExpress,
+        .sgxpress,
+        .shipwaysIn,
+        .shivaInnovatrix,
+        .useaExpress,
+        .wyngs,
+        .xindus,
+        .xportel,
     ]
 
     init(from decoder: Decoder) throws {

@@ -1876,6 +1876,42 @@ value class CarrierId(val rawValue: String) {
         val AlohaFreight = CarrierId("aloha-freight")
         val TwoDayTransportation = CarrierId("two-day-transportation")
         val WesternPost = CarrierId("western-post")
+        val ActLogistics = CarrierId("act-logistics")
+        val AdsIntl = CarrierId("ads-intl")
+        val AirwaysCourierIn = CarrierId("airways-courier-in")
+        val AlphaCargoTh = CarrierId("alpha-cargo-th")
+        val AslAsia = CarrierId("asl-asia")
+        val Chemcouriers = CarrierId("chemcouriers")
+        val CristaoShipping = CarrierId("cristao-shipping")
+        val Deleo = CarrierId("deleo")
+        val Delibox = CarrierId("delibox")
+        val DpdHk = CarrierId("dpd-hk")
+        val FastExpressCargo = CarrierId("fast-express-cargo")
+        val FastExpressTr = CarrierId("fast-express-tr")
+        val FocusLogisticsIl = CarrierId("focus-logistics-il")
+        val Fynex = CarrierId("fynex")
+        val GkGlobalKr = CarrierId("gk-global-kr")
+        val IntrasJp = CarrierId("intras-jp")
+        val JpLogistics = CarrierId("jp-logistics")
+        val KexpressIl = CarrierId("kexpress-il")
+        val KhubaniAirPack = CarrierId("khubani-air-pack")
+        val LexTh = CarrierId("lex-th")
+        val Line1Logistics = CarrierId("line-1-logistics")
+        val Litexpress = CarrierId("litexpress")
+        val M5Continent = CarrierId("m5-continent")
+        val MaxExpressAe = CarrierId("max-express-ae")
+        val Movicarga = CarrierId("movicarga")
+        val NewayTransport = CarrierId("neway-transport")
+        val PmlTw = CarrierId("pml-tw")
+        val QiantongHk = CarrierId("qiantong-hk")
+        val RelayExpress = CarrierId("relay-express")
+        val Sgxpress = CarrierId("sgxpress")
+        val ShipwaysIn = CarrierId("shipways-in")
+        val ShivaInnovatrix = CarrierId("shiva-innovatrix")
+        val UseaExpress = CarrierId("usea-express")
+        val Wyngs = CarrierId("wyngs")
+        val Xindus = CarrierId("xindus")
+        val Xportel = CarrierId("xportel")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3693,6 +3729,42 @@ value class CarrierId(val rawValue: String) {
             AlohaFreight,
             TwoDayTransportation,
             WesternPost,
+            ActLogistics,
+            AdsIntl,
+            AirwaysCourierIn,
+            AlphaCargoTh,
+            AslAsia,
+            Chemcouriers,
+            CristaoShipping,
+            Deleo,
+            Delibox,
+            DpdHk,
+            FastExpressCargo,
+            FastExpressTr,
+            FocusLogisticsIl,
+            Fynex,
+            GkGlobalKr,
+            IntrasJp,
+            JpLogistics,
+            KexpressIl,
+            KhubaniAirPack,
+            LexTh,
+            Line1Logistics,
+            Litexpress,
+            M5Continent,
+            MaxExpressAe,
+            Movicarga,
+            NewayTransport,
+            PmlTw,
+            QiantongHk,
+            RelayExpress,
+            Sgxpress,
+            ShipwaysIn,
+            ShivaInnovatrix,
+            UseaExpress,
+            Wyngs,
+            Xindus,
+            Xportel,
         )
     }
 }

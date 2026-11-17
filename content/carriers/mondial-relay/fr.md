@@ -3,7 +3,7 @@ title: Mondial Relay suivi : statuts, Point Relais et contact
 description: Suivi Mondial Relay en France et en Belgique : le numéro à 8 chiffres, ce que veut dire chaque statut, le délai de retrait en Point Relais et qui contacter.
 slug: mondial-relay-suivi
 published: 2026-10-11
-updated: 2026-11-06
+updated: 2026-11-17
 ---
 
 Mondial Relay est un transporteur français du groupe InPost qui livre en Point Relais (des commerces de proximité), en Locker et à domicile. Pour suivre ton colis, saisis le numéro d'expédition à 8 chiffres et le code postal du destinataire sur le site de Mondial Relay, ou colle le numéro dans le champ ci-dessus.
@@ -79,7 +79,7 @@ Relevé le 10 octobre 2026 :
 
 Un numéro à 8 chiffres demande aussi le « Code postal de livraison » : tape le numéro seul, puis le code postal dans son champ. Seuls des codes postaux français et portugais ont été testés, et un code portugais doit avoir ses sept chiffres (1234-567, avec ou sans tiret). Avec un mauvais code, le colis reste introuvable. Il est envoyé à Mondial Relay et, si besoin, à des services de suivi.
 
-Peek affiche les libellés français de Mondial Relay tels quels, le site logistique de chaque scan sur une carte et, quand le site les donne, le jour de livraison prévu, l'heure à laquelle il a été livré et le pays de destination. Pendant que le colis attend, il montre le nom et l'adresse du Point Relais ou du Locker, jamais ses horaires ni ton code de retrait. Il vérifie toutes les 10 minutes, toutes les 2 minutes une fois le colis en livraison (toutes les 5 quand il doit ouvrir le suivi de Mondial Relay dans un navigateur), et peut t'envoyer des notifications. Ces vérifications rapprochées ne valent que le jour où Mondial Relay met le colis en livraison, dès 6 h, heure locale, et tant que c'est le suivi de Mondial Relay qui répond ; quand ce sont des services de suivi qui répondent, c'est toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Mondial Relay réutilise ses numéros : un ancien numéro peut afficher un colis plus récent. Peek ne suit pas le colis chez un autre transporteur et ne promet pas de trouver les colis d'InPost en Espagne ou au Portugal.
+Peek affiche les libellés français de Mondial Relay tels quels, le site logistique de chaque scan sur une carte et, quand le site les donne, le jour de livraison prévu, l'heure à laquelle il a été livré et le pays de destination. Pendant que le colis attend, il montre le nom et l'adresse du Point Relais ou du Locker, jamais ses horaires ni ton code de retrait. Il vérifie jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes une fois le colis en livraison (toutes les 5 quand il doit ouvrir le suivi de Mondial Relay dans un navigateur), et peut t'envoyer des notifications. Ces vérifications rapprochées ne valent que le jour où Mondial Relay met le colis en livraison, dès 6 h, heure locale, et tant que c'est le suivi de Mondial Relay qui répond ; quand ce sont des services de suivi qui répondent, c'est toutes les 15 minutes. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Mondial Relay réutilise ses numéros : un ancien numéro peut afficher un colis plus récent. Peek ne suit pas le colis chez un autre transporteur et ne promet pas de trouver les colis d'InPost en Espagne ou au Portugal.
 
 ## Questions sur le suivi Mondial Relay
 

@@ -3,7 +3,7 @@ import type { AddressInfo } from 'node:net';
 import { afterEach, expect, it, vi } from 'vitest';
 import * as Sentry from '@sentry/node';
 import type { Event } from '@sentry/node';
-import { captureOperationalError, captureOverallAllowance, captureTrackingHealth, flushObservability, initObservability, reportRoutingEvent,
+import { captureOperationalError, captureOverallAllowance, captureTrackingHealth, flushObservability, initObservability, raiseProviderBlock, reportRoutingEvent,
   withTrackingAttempt, type RoutingSignal,
 } from './observability';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
@@ -182,12 +182,16 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
     expect.objectContaining({ category: 'tracking-routing', message: 'carrier_coverage_discovered', data: { provider: 'Example Parcel Co' } }),
   ]));
 
-  // So does a provider refusing this server whatever it is asked: an event for each pause.
+  // A provider refusing this server whatever it is asked is a log line; raised, it is an issue per provider.
   reportRoutingEvent('provider_blocked', { carrier: 'unknown', provider: 'ParcelsApp', category: 'rate_limited', trackingNumber: 'TEST-first' });
+  await flushObservability();
+  expect(captured.events.some((event) => event.message === 'Tracking routing: provider_blocked')).toBe(false);
+  raiseProviderBlock({ carrier: 'unknown', provider: 'ParcelsApp', trackingNumber: 'TEST-first' });
   await flushObservability();
   const blocked = captured.events.find((event) => event.message === 'Tracking routing: provider_blocked')!;
   expect(blocked.level).toBe('warning');
-  expect(blocked.tags).toMatchObject({ provider: 'ParcelsApp', failure_category: 'rate_limited' });
+  expect(blocked.tags).toMatchObject({ component: 'tracking-routing', operation: 'provider_blocked', provider: 'ParcelsApp', failure_category: 'rate_limited' });
+  expect(blocked.fingerprint).toEqual(['delivery-tracker', 'tracking-routing', 'provider_blocked', 'ParcelsApp', 'rate_limited']);
   // And a provider's spent budget of answers without history, the step before it refuses.
   reportRoutingEvent('provider_budget_spent', { carrier: 'unknown', provider: 'ParcelsApp', category: 'no_history' });
   await flushObservability();

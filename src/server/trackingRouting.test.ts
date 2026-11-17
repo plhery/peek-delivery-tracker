@@ -90,7 +90,10 @@ describe('FedEx public-page fallback', () => {
     expect(universal.mock.calls.map(call => call[0])).not.toContain('Track123');
   });
 });
-beforeEach(() => vi.spyOn(monitoring, 'reportRoutingEvent').mockImplementation(() => undefined));
+beforeEach(() => {
+  vi.spyOn(monitoring, 'reportRoutingEvent').mockImplementation(() => undefined);
+  vi.spyOn(monitoring, 'raiseProviderBlock').mockImplementation(() => undefined);
+});
 afterEach(() => vi.restoreAllMocks());
 
 describe('persistent tracking routing', () => {
@@ -4340,6 +4343,30 @@ describe('a provider refusing numbers it tracked', () => {
       routing: { failures: { ParcelsApp: { kind: 'rate_limited', retry_at: '2026-09-10T12:30:00.000Z' } } } });
     expect(parcelsApp(health)).toEqual([['not_found', expect.any(Number)], ['rate_limited', 1_800_000]]);
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_blocked', expect.objectContaining({ provider: 'ParcelsApp', category: 'rate_limited' }));
+    // Ship24 answered: a first block is no issue.
+    expect(monitoring.raiseProviderBlock).not.toHaveBeenCalled();
+  });
+  it('raises a first block that leaves the parcel without an answer, and a block still in place after its pause', async () => {
+    fixedPlan('ParcelsApp', 'Ship24');
+    const refusals = new ProviderRefusals();
+    const at = (iso: string, others: 'answer' | 'nothing') => {
+      const value = setup(new Date(iso), { refusals });
+      value.universal.mockImplementation(async (source: string) => {
+        if (source === 'ParcelsApp' || others === 'nothing') throw new NoHistoryError(source, `${source} has no usable shipment history`);
+        return { ...history(), tracking_provider: source };
+      });
+      return value;
+    };
+    await at('2026-09-10T11:50:00Z', 'nothing').router.fetch(tracked('TEST1234'), false).catch(() => null);
+    expect(monitoring.raiseProviderBlock).not.toHaveBeenCalled();
+    await expect(at('2026-09-10T12:00:00Z', 'nothing').router.fetch(tracked('TEST5678'), false)).rejects.toBeInstanceOf(RoutingDeferred);
+    expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('all_providers_unavailable', expect.anything());
+    expect(vi.mocked(monitoring.raiseProviderBlock).mock.calls).toEqual([[expect.objectContaining({ provider: 'ParcelsApp', carrier: 'unknown', trackingNumber: 'TEST5678' })]]);
+    // The pause is over and a third number it tracked finds the block still in place: raised though Ship24 answers.
+    const later = await at('2026-09-10T12:40:00Z', 'answer').router.fetch(tracked('TEST9012'), false);
+    expect(later.result).toMatchObject({ tracking_provider: 'Ship24' });
+    expect(vi.mocked(monitoring.raiseProviderBlock).mock.calls).toHaveLength(2);
+    expect(vi.mocked(monitoring.raiseProviderBlock).mock.calls[1]).toEqual([expect.objectContaining({ provider: 'ParcelsApp', trackingNumber: 'TEST9012' })]);
   });
   it('waits out a number behind the block for its parcel alone, and takes it as no lack of history', async () => {
     fixedPlan('ParcelsApp', 'Ship24');

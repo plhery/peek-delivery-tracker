@@ -13,7 +13,7 @@ import { priorityUniversalSource, universalPlan, universalSourceBudget } from 'u
 import type { UniversalSource } from 'universal-parcel-scraper';
 import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universal-parcel-scraper/app';
 import { brandCarrierIds, carrierBrand, carrierIdFromName, universalCarrierHints } from 'universal-parcel-scraper/app';
-import { errorType, reportRoutingEvent, reportTrackingRecognition } from './observability';
+import { errorType, raiseProviderBlock, reportRoutingEvent, reportTrackingRecognition } from './observability';
 import { markLookup, unmarkLookups } from './stepRecorder';
 import { recordChecksumRejection, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
@@ -981,6 +981,9 @@ export class TrackingRouter {
       carrier: declared, provider, category: kind, trackingNumber: number,
       ...(error ? { errorClass: errorType(error), error } : {}),
     });
+    const raiseBlock = (provider: string, error: unknown) => raiseProviderBlock({
+      carrier: declared, provider, trackingNumber: number, errorClass: errorType(error), error,
+    });
     // A carrier tracked through a provider for want of an adapter is reported once per number,
     // not on every check that tracks it.
     const opportunity = (carrier: string) => {
@@ -1245,6 +1248,8 @@ export class TrackingRouter {
       else delete state.planned;
     };
     let attempts = 0;
+    // A provider this check found blocked for the first time: Sentry hears of it only if no other source answers.
+    let firstBlock: { source: UniversalSource; error: unknown } | undefined;
     // Probes are this parcel's own guesses: they are no evidence of provider health.
     let probeContacts = 0;
     const attempted = () => attemptedDirect.size - pacedDirect.size - probeContacts + attempts;
@@ -1965,11 +1970,16 @@ export class TrackingRouter {
         const refusal = token !== null && !answered && tracked
           && (caught instanceof NoHistoryError || carrierErrorKind(caught) === 'not_found')
           ? this.options.refusals?.refused(source, universalNumber, now().getTime()) : undefined;
-        if (refusal === 'blocked') report('provider_blocked', source, 'rate_limited', caught);
+        if (refusal === 'blocked' || refusal === 'still_blocked') {
+          report('provider_blocked', source, 'rate_limited', caught);
+          // A block still in place after its pause is raised at once; a first one only if no other source answers.
+          if (refusal === 'still_blocked') raiseBlock(source, caught);
+          else firstBlock ??= { source, error: caught };
+        }
         behindBlock = refusal === 'behind';
         const error = refusal
-          ? new RateLimitedError(source, BLOCK_PAUSE_MS, refusal === 'blocked' ? `${source} finds no history for numbers it tracked`
-            : `${source} still finds no history for a number behind its block`, { reason: 'refuses_tracked_numbers', cause: caught })
+          ? new RateLimitedError(source, BLOCK_PAUSE_MS, refusal === 'behind' ? `${source} still finds no history for a number behind its block`
+            : `${source} finds no history for numbers it tracked`, { reason: 'refuses_tracked_numbers', cause: caught })
           : !inputPlausible && carrierErrorKind(caught) === 'input_required'
             ? new NoHistoryError(source, `${source} asked for a postcode for a number that no carrier issues`, { cause: caught }) : caught;
         const failure = fail(source, error, true);
@@ -2253,6 +2263,7 @@ export class TrackingRouter {
     // checks wait for the earliest, a day at most, rather than ask nobody hourly until then.
     const turn = nextTurn();
     if (turn > millis(state.next_check_at)) state.quiet_until = iso(Math.min(turn, now().getTime() + DAY));
+    if (firstBlock) raiseBlock(firstBlock.source, firstBlock.error);
     report('all_providers_unavailable', preferred ?? 'none');
     return defer();
   }

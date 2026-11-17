@@ -535,14 +535,33 @@ function routingSignal(code: string, category: string | undefined): code is Rout
   return (ROUTING_SIGNALS as readonly string[]).includes(code) && !(code === 'carrier_auto_swapped' && category === 'detected');
 }
 
-/**
- * Every routing decision is a log line and a breadcrumb. A routing signal also goes
- * to the check that reported it; only a failed coordination store, or a provider blocked or near it, opens an issue.
- */
-export function reportRoutingEvent(code: string, context: {
+interface RoutingEventContext {
   carrier: string; provider: string; category?: string; trackingNumber?: string; errorClass?: string; error?: unknown;
   attemptId?: string;
-}): void {
+}
+
+/** A routing event's Sentry tags, context and grouping: by decision, provider and category. */
+function applyRoutingScope(scope: Sentry.Scope, code: string, context: RoutingEventContext, metadata: OperationalErrorMetadata): void {
+  applyContext(scope, { component: 'tracking-routing', operation: code,
+    carrier: context.carrier, trackingNumber: context.trackingNumber });
+  scope.setTag('provider', context.provider.slice(0, 80));
+  scope.setTag('failure_category', context.category ?? 'none');
+  if (context.errorClass) scope.setTag('error_type', context.errorClass);
+  applyUpstreamHttpContext(scope, metadata);
+  if (metadata.upstreamStatus !== undefined) scope.setTag('upstream_status', metadata.upstreamStatus);
+  if (metadata.providerFailureReason) scope.setTag('provider_failure_reason', metadata.providerFailureReason);
+  if (metadata.providerCode !== undefined) scope.setTag('provider_code', metadata.providerCode);
+  scope.setFingerprint(['delivery-tracker', 'tracking-routing', code,
+    context.provider, context.category ?? 'none']);
+  scope.setLevel('warning');
+}
+
+/**
+ * Every routing decision is a log line and a breadcrumb. A routing signal also goes
+ * to the check that reported it; only a failed coordination store, or a provider near a block, opens an issue.
+ * A block is raised apart (raiseProviderBlock).
+ */
+export function reportRoutingEvent(code: string, context: RoutingEventContext): void {
   try {
     if (routingSignal(code, context.category)) {
       trackingAttempts.getStore()?.signal?.({ signal: code, carrier: context.carrier, subject: context.provider });
@@ -563,23 +582,11 @@ export function reportRoutingEvent(code: string, context: {
     }, warnsOf(code, context.category) ? 'warning' : 'info');
     if (!initObservability()) return;
     Sentry.withScope((scope) => {
-      applyContext(scope, { component: 'tracking-routing', operation: code,
-        carrier: context.carrier, trackingNumber: context.trackingNumber });
-      scope.setTag('provider', context.provider.slice(0, 80));
-      scope.setTag('failure_category', context.category ?? 'none');
-      if (context.errorClass) scope.setTag('error_type', context.errorClass);
-      applyUpstreamHttpContext(scope, metadata);
-      if (metadata.upstreamStatus !== undefined) scope.setTag('upstream_status', metadata.upstreamStatus);
-      if (metadata.providerFailureReason) scope.setTag('provider_failure_reason', metadata.providerFailureReason);
-      if (metadata.providerCode !== undefined) scope.setTag('provider_code', metadata.providerCode);
-      scope.setFingerprint(['delivery-tracker', 'tracking-routing', code,
-        context.provider, context.category ?? 'none']);
-      scope.setLevel('warning');
+      applyRoutingScope(scope, code, context, metadata);
       // Failures for one parcel, recoveries and routing signals stay in logs and
-      // breadcrumbs; signals also go to the review queues. A provider refusing every
-      // number, or near refusing, is no one parcel's failure: each pause it starts, and
-      // each budget it spends, is an event.
-      if (code === 'provider_blocked' || code === 'provider_budget_spent') Sentry.captureMessage(`Tracking routing: ${code}`);
+      // breadcrumbs; signals also go to the review queues. A provider near refusing
+      // every number is no one parcel's failure: each budget it spends is an event.
+      if (code === 'provider_budget_spent') Sentry.captureMessage(`Tracking routing: ${code}`);
       else if (code === 'health_store_unavailable') {
         const message = `Tracking routing: ${code}`;
         if (context.error !== undefined) {
@@ -589,6 +596,23 @@ export function reportRoutingEvent(code: string, context: {
         } else Sentry.captureMessage(message);
       }
       else Sentry.addBreadcrumb({ category: 'tracking-routing', message: code, data: { provider: context.provider } });
+    });
+  } catch {
+    // Monitoring must never prevent fallback or turn valid data into an error.
+  }
+}
+
+/**
+ * A provider refusing this server whatever it is asked, once it is more than a passing block: found
+ * still in place after its pause, or with no other source answering the check that found it. One
+ * issue per provider, beside the block's `provider_blocked` log line.
+ */
+export function raiseProviderBlock(context: Omit<RoutingEventContext, 'category'>): void {
+  try {
+    if (!initObservability()) return;
+    Sentry.withScope((scope) => {
+      applyRoutingScope(scope, 'provider_blocked', { ...context, category: 'rate_limited' }, operationalErrorMetadata(context.error));
+      Sentry.captureMessage('Tracking routing: provider_blocked');
     });
   } catch {
     // Monitoring must never prevent fallback or turn valid data into an error.

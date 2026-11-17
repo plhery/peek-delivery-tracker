@@ -15,7 +15,8 @@ export const BEHIND_BLOCK_MS = 24 * 60 * 60_000;
  * block count toward no other for BEHIND_BLOCK_MS: one may be a number the provider lost, whose own
  * retry at the end of every pause would otherwise find the provider blocked again for every parcel.
  * Their own refusals meanwhile are `behind`: no lack of history for them either, while the block may
- * still be in place, and waited out by their parcel alone.
+ * still be in place, and waited out by their parcel alone. A block found again after its pause is
+ * `still_blocked`: it lasts beyond one pause.
  */
 export class ProviderRefusals {
   private readonly recent = new Map<string, Map<string, number>>();
@@ -24,9 +25,10 @@ export class ProviderRefusals {
 
   /**
    * Records that `provider` found no history for `number`, which it had tracked: `blocked` when that finds it
-   * blocked, `behind` for a number behind a block, undefined for the parcel's own lack of history.
+   * blocked, `still_blocked` when that finds a block still in place after its pause, `behind` for a number
+   * behind a block, undefined for the parcel's own lack of history.
    */
-  refused(provider: string, number: string, at: number): 'blocked' | 'behind' | undefined {
+  refused(provider: string, number: string, at: number): 'blocked' | 'still_blocked' | 'behind' | undefined {
     const behind = this.behind.get(provider) ?? new Map<string, number>();
     for (const [seen, time] of behind) if (at - time >= BEHIND_BLOCK_MS) behind.delete(seen);
     this.behind.set(provider, behind);
@@ -36,12 +38,11 @@ export class ProviderRefusals {
     numbers.set(number, at);
     this.recent.set(provider, numbers);
     const last = this.blockedAt.get(provider);
-    const blocked = numbers.size >= 2 || (last !== undefined && at - last < BLOCK_PAUSE_MS + REFUSAL_WINDOW_MS);
-    if (blocked) {
-      this.blockedAt.set(provider, at);
-      for (const seen of numbers.keys()) behind.set(seen, at);
-    }
-    return blocked ? 'blocked' : undefined;
+    const still = last !== undefined && at - last < BLOCK_PAUSE_MS + REFUSAL_WINDOW_MS;
+    if (!still && numbers.size < 2) return undefined;
+    this.blockedAt.set(provider, at);
+    for (const seen of numbers.keys()) behind.set(seen, at);
+    return still ? 'still_blocked' : 'blocked';
   }
 }
 

@@ -21,8 +21,10 @@ describe('provider refusals', () => {
     const refusals = new ProviderRefusals();
     refusals.refused('ParcelsApp', 'A', 0);
     expect(refusals.refused('ParcelsApp', 'B', 10 * MINUTE)).toBe('blocked');
-    expect(refusals.refused('ParcelsApp', 'C', 69 * MINUTE)).toBe('blocked');
+    expect(refusals.refused('ParcelsApp', 'C', 69 * MINUTE)).toBe('still_blocked');
     expect(refusals.refused('ParcelsApp', 'D', 129 * MINUTE)).toBeUndefined();
+    // Two numbers long after the last block find a new one.
+    expect(refusals.refused('ParcelsApp', 'E', 140 * MINUTE)).toBe('blocked');
   });
   it('counts a number behind a block toward no other for a day, so a number it lost does not keep it blocked', () => {
     const refusals = new ProviderRefusals();
@@ -33,7 +35,7 @@ describe('provider refusals', () => {
     expect(refusals.refused('ParcelsApp', 'B', 41 * MINUTE)).toBe('behind');
     expect(refusals.refused('ParcelsApp', 'A', 70 * MINUTE)).toBe('behind');
     // Another number still finds a block in place, and a day on A counts again.
-    expect(refusals.refused('ParcelsApp', 'C', 45 * MINUTE)).toBe('blocked');
+    expect(refusals.refused('ParcelsApp', 'C', 45 * MINUTE)).toBe('still_blocked');
     expect(refusals.refused('ParcelsApp', 'A', 24 * 60 * MINUTE + 10 * MINUTE)).toBeUndefined();
     expect(refusals.refused('ParcelsApp', 'D', 24 * 60 * MINUTE + 20 * MINUTE)).toBe('blocked');
   });

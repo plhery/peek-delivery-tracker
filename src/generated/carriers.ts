@@ -2220,6 +2220,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef2637"
     },
     {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "gofo-france-sendungsverfolgung",
+      "title": "GOFO France Sendungsverfolgung: GFFR-Nummern, Status & Hilfe",
+      "name": "GOFO France",
+      "color": "#fc4c02"
+    },
+    {
       "id": "speedpak",
       "catalog": "speedpak",
       "slug": "speedpak-sendungsverfolgung",
@@ -2418,6 +2426,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "iMile Sendungsverfolgung: Nummer, Status, Zustellung",
       "name": "iMile",
       "color": "#0032a0"
+    },
+    {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "postnl-sendungsverfolgung",
+      "title": "PostNL Sendungsverfolgung: 3S- und NL-Nummern & Status",
+      "name": "PostNL",
+      "color": "#ef7d00"
     },
     {
       "id": "dhlink",
@@ -2990,6 +3006,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0032a0"
     },
     {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "postnl-suivi",
+      "title": "Suivi PostNL\u00a0: numéros 3S et NL, statuts et livraison",
+      "name": "PostNL",
+      "color": "#ef7d00"
+    },
+    {
       "id": "dhlink",
       "catalog": "dhlink",
       "slug": "dhlink-suivi",
@@ -3246,6 +3270,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento bpost: codice a barre, stati e punti di ritiro",
       "name": "bpost",
       "color": "#ef2637"
+    },
+    {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "gofo-france-tracciamento",
+      "title": "Tracciamento GOFO France: codici GFFR, stati e assistenza",
+      "name": "GOFO France",
+      "color": "#fc4c02"
     },
     {
       "id": "gofo-it",
@@ -4164,6 +4196,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "gofo-france-rastreio",
+      "title": "Rastreio GOFO France: códigos GFFR, estados e apoio",
+      "name": "GOFO France",
+      "color": "#fc4c02"
+    },
+    {
       "id": "asendia",
       "catalog": "asendia",
       "slug": "asendia-rastreio",
@@ -4194,6 +4234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SunYou rastreamento: número SY, estados e quem entrega",
       "name": "SunYou",
       "color": "#02a232"
+    },
+    {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-rastreio",
+      "title": "Rastreio GEODIS: número 1G, estados, entrega e contacto",
+      "name": "GEODIS",
+      "color": "#3100e6"
     },
     {
       "id": "ecoscooting",
@@ -4298,6 +4346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "iMile rastreio: números, estados e entrega em Portugal",
       "name": "iMile",
       "color": "#0032a0"
+    },
+    {
+      "id": "postnl",
+      "catalog": "spring-gds",
+      "slug": "postnl-rastreio",
+      "title": "Rastreio PostNL: códigos 3S e NL, estados e entrega",
+      "name": "PostNL",
+      "color": "#ef7d00"
     },
     {
       "id": "dhlink",
@@ -4558,6 +4614,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL eCommerce Poland śledzenie przesyłki: statusy i punkty",
       "name": "DHL eCommerce Poland",
       "color": "#ffcc00"
+    },
+    {
+      "id": "gofo-fr",
+      "catalog": "gofo-fr",
+      "slug": "gofo-france-sledzenie",
+      "title": "Śledzenie GOFO France: numery GFFR, statusy i pomoc",
+      "name": "GOFO France",
+      "color": "#fc4c02"
     },
     {
       "id": "asendia",

@@ -417,8 +417,7 @@ its own maintenance strip.
   database); `"mode": "hard"` turns requests away before the server goes down, `/health`
   aside. The switch and its steps are in the server's runbook.
 
-Deploy by hand with `npx wrangler@4 deploy --config ops/cloudflare/edge/wrangler.jsonc`,
-after putting the namespace's id in that file, and not during a maintenance: a deploy keeps
+Deploy by hand with `npx wrangler@4 deploy --config ops/cloudflare/edge/wrangler.jsonc`, not during a maintenance: a deploy keeps
 only the routes in that file, so it would take the guard away. `node --test
 ops/cloudflare/edge/worker.test.mjs` tests it.
 

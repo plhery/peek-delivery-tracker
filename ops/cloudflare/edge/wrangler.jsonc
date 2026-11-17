@@ -18,7 +18,7 @@
   // maintenance removes them, so deploy outside one.
   "routes": [{ "pattern": "peektracker.com/maintenance.json", "zone_name": "peektracker.com" }],
   // The announcements, shared with the other sites on the server (RUNBOOK). Its id is the account's own.
-  "kv_namespaces": [{ "binding": "MAINTENANCE", "id": "REPLACE_WITH_MAINTENANCE_NAMESPACE_ID" }],
+  "kv_namespaces": [{ "binding": "MAINTENANCE", "id": "8b0f39fd21c2415e83cffc05a0307b37" }],
   "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],
   "observability": { "enabled": true, "head_sampling_rate": 0.01 }
 }

@@ -166,16 +166,21 @@ It waits for the device to finish starting, installs the release in place of any
 finds its window and fails unless it is still up 15 seconds later: what R8 removes shows only when the shrunk app
 runs. CI's "Release build opens" job does the same on each change, with a key and settings made up for the run.
 
-Once Google Play has a beta, its APK as Google Play signs it goes to the F-Droid repository and GitHub Releases:
+Once Google Play has a beta, the same commit's `fdroid` build, signed with the upload key, goes to the F-Droid
+repository and GitHub Releases. Play's own copies don't: Play protects the copies it signs, and they refuse to open on a
+phone without the Play Store.
 
 ```sh
-PEEK_FDROID_DIR=<path> scripts/publish-fdroid.sh <play-signed.apk> <commit> [notes.md]
+./gradlew :app:assembleFdroidRelease -Ppeek.releaseXcconfig=fdroid/release.xcconfig -Ppeek.uploadProperties=<path>
+PEEK_FDROID_DIR=<path> scripts/publish-fdroid.sh app/build/outputs/apk/fdroid/release/app-fdroid-release.apk <commit> [notes.md]
 ```
 
-The APK is Play Console's signed universal APK (App bundle explorer, the version, Downloads). The script refuses an APK
-Google Play did not sign, signs the repository's index with the repository's key, which stays outside the repository
-in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on the `fdroid` branch, which
-raw.githubusercontent.com serves, and attaches the APK to a pre-release. The app's entry in the repository is
+The script refuses an APK that the upload key alone did not sign, or that carries Google's libraries (Firebase, Play
+services, ML Kit, Play Core). It signs the repository's index with the repository's key, which stays outside the
+repository in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on the `fdroid` branch, which
+raw.githubusercontent.com serves, and attaches the APK to a pre-release. Copies from Google Play, and the ones this
+repository and GitHub had up to 1.1.18 (12), are signed by Google Play, so they have to be uninstalled before this one
+goes on; the release notes and the repository's entry say so. The app's entry in the repository is
 [`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml), and
 [`fdroid/antiFeatures.yml`](fdroid/antiFeatures.yml) names its anti-features in the index, without which F-Droid shows
 none of them.

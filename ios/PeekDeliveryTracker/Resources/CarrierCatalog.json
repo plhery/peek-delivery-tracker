@@ -2188,7 +2188,7 @@
       "linkRules": [],
       "detectionRules": [
         {
-          "pattern": "^(?![CLR][A-Z]\\d{9}DE$)(?!U[A-TV-Z]\\d{9}DE$)(?!(?:[CELR][A-Z]|F[TZ])\\d{9}TW$)(?![CEL][A-Z]\\d{9}AU$)(?![CELR][A-Z]\\d{9}SK$)(?![CELR][A-Z]\\d{9}AL$)(?![CELR][A-Z]\\d{9}RS$)(?![CELR][A-Z]\\d{9}UA$)(?![CELR][A-Z]\\d{9}SI$)(?![CELR][A-Z]\\d{9}HR$)(?![CELR][A-Z]\\d{9}LV$)(?!(?:[CE][A-Z]|HC)\\d{9}LT$)(?![CELR][A-Z]\\d{9}AE$)(?!(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$)(?!(?:C[A-QS-UW-Z]|R[A-NP-Z]|[EL][A-Z])\\d{9}EE$)(?!AS\\d{9}US$)(?!(?:C[A-DF-UW-Z]|[ELR][A-Z])\\d{9}US$)(?![CELR][A-Z]\\d{9}IT$)(?!ZC\\d{9}IT$)(?!(?:PZ|XR|XT|XU|XW|XY))[A-Z]{2}\\d{9}(?!WW$|CA$|CH$|FR$|IN$|NL$|GB$|IE$|BE$|PT$|NZ$|SG$|JP$|KR$|TH$|HK$|MY$|CN$|NO$|BR$|ES$|SE$|DK$|AT$|YP$|TS$|JF$|JB$|RV$|VF$|TY$|MI$|XX$|GO$|MH$|YW$|CS$|EN$|CL$)[A-Z]{2}$",
+          "pattern": "^(?![CLR][A-Z]\\d{9}DE$)(?!U[A-TV-Z]\\d{9}DE$)(?!(?:[CELR][A-Z]|F[TZ])\\d{9}TW$)(?![CEL][A-Z]\\d{9}AU$)(?![CELR][A-Z]\\d{9}SK$)(?![CELR][A-Z]\\d{9}AL$)(?![CELR][A-Z]\\d{9}RS$)(?![CELR][A-Z]\\d{9}UA$)(?![CELR][A-Z]\\d{9}RU$)(?![CELR][A-Z]\\d{9}SI$)(?![CELR][A-Z]\\d{9}HR$)(?![CELR][A-Z]\\d{9}LV$)(?!(?:[CE][A-Z]|HC)\\d{9}LT$)(?![CELR][A-Z]\\d{9}AE$)(?!(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$)(?!(?:C[A-QS-UW-Z]|R[A-NP-Z]|[EL][A-Z])\\d{9}EE$)(?!AS\\d{9}US$)(?!(?:C[A-DF-UW-Z]|[ELR][A-Z])\\d{9}US$)(?![CELR][A-Z]\\d{9}IT$)(?!ZC\\d{9}IT$)(?!(?:PZ|XR|XT|XU|XW|XY))[A-Z]{2}\\d{9}(?!WW$|CA$|CH$|FR$|IN$|NL$|GB$|IE$|BE$|PT$|NZ$|SG$|JP$|KR$|TH$|HK$|MY$|CN$|NO$|BR$|ES$|SE$|DK$|AT$|YP$|TS$|JF$|JB$|RV$|VF$|TY$|MI$|XX$|GO$|MH$|YW$|CS$|EN$|CL$)[A-Z]{2}$",
           "confidence": "high",
           "checksum": "s10"
         }
@@ -2636,7 +2636,13 @@
         "Direct Link",
         "Direct Link Worldwide",
         "Døgnposten",
-        "Dognposten"
+        "Dognposten",
+        "PostNord Sweden",
+        "PostNord Sverige",
+        "PostNord Norway",
+        "PostNord AS",
+        "PostNord Finland",
+        "PostNord Oy"
       ],
       "helpUrl": "https://www.postnord.se/kundservice-faq/"
     },
@@ -7573,7 +7579,8 @@
       "displayName": "Latvijas Pasts",
       "aliases": [
         "Latvian Post",
-        "Latvia Post"
+        "Latvia Post",
+        "Eksprespasts"
       ],
       "countries": [
         "LV"
@@ -8157,6 +8164,11 @@
           "confidence": "low",
           "checksum": "gs1",
           "preferred": true
+        },
+        {
+          "pattern": "^[CELR][A-Z]\\d{9}RU$",
+          "confidence": "high",
+          "checksum": "s10"
         },
         {
           "pattern": "^[CELR][A-Z]\\d{9}RU$",
@@ -8857,7 +8869,8 @@
       "aliases": [
         "Earlybird",
         "Early Bird AB",
-        "Morgontidig Distribution"
+        "Morgontidig Distribution",
+        "MTD KB"
       ],
       "countries": [
         "SE"
@@ -40088,7 +40101,8 @@
       "aliases": [
         "UTEC",
         "UTEC Express",
-        "UTEC Group"
+        "UTEC Group",
+        "EasyGet"
       ],
       "countries": [
         "UA"
@@ -61011,6 +61025,195 @@
       "linkRules": [],
       "detectionRules": [],
       "trackingSearchUrl": "https://tracking.walkers-transport.co.uk/"
+    },
+    "altex-curier": {
+      "displayName": "Altex Curier",
+      "aliases": [
+        "Altex Romania S.R.L."
+      ],
+      "countries": [
+        "RO"
+      ],
+      "color": "#d71440",
+      "selectable": true,
+      "timezone": "Europe/Bucharest",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://curier.altex.ro/"
+    },
+    "atc-express": {
+      "displayName": "ATC Express",
+      "aliases": [
+        "ООО «ТРАНС АТЛАНТИК»"
+      ],
+      "countries": [
+        "RU"
+      ],
+      "color": "#3858ad",
+      "selectable": true,
+      "timezone": "Europe/Moscow",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://atc.express/search/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "atc.express"
+          ],
+          "path": "^/search/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://atc.express/search"
+    },
+    "gbs-broker": {
+      "displayName": "GBS",
+      "aliases": [
+        "ГБС",
+        "GBS-Broker",
+        "ГБС-Брокер",
+        "ООО «ГБС-Брокер»",
+        "ООО «Глобальные Брокерские Решения»"
+      ],
+      "countries": [
+        "RU"
+      ],
+      "color": "#1041ae",
+      "selectable": true,
+      "timezone": "Europe/Moscow",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://gbs.ru/track/?numbers={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "gbs.ru"
+          ],
+          "pathPattern": "^/track/?$",
+          "params": [
+            "numbers"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://gbs.ru/track/"
+    },
+    "rohlig-suus": {
+      "displayName": "Rohlig SUUS Logistics",
+      "aliases": [
+        "Rohlig SUUS",
+        "SUUS",
+        "Rohlig Suus Logistics S.A."
+      ],
+      "countries": [
+        "PL"
+      ],
+      "color": "#003f8a",
+      "selectable": true,
+      "timezone": "Europe/Warsaw",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://portal.suus.com/order-details/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "portal.suus.com"
+          ],
+          "path": "^/order-details/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://portal.suus.com/visibility"
+    },
+    "szendex": {
+      "displayName": "Szendex",
+      "aliases": [
+        "Szendex, S.L."
+      ],
+      "countries": [
+        "ES"
+      ],
+      "color": "#13294b",
+      "selectable": true,
+      "timezone": "Europe/Madrid",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://erp.szendex.com/DlWebTrackingVWE/?seg={trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "erp.szendex.com"
+          ],
+          "pathPattern": "^/DlWebTrackingVWE/?$",
+          "params": [
+            "seg"
+          ]
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://erp.szendex.com/DlWebTrackingVWE/"
+    },
+    "unitrade": {
+      "displayName": "Unitrade",
+      "aliases": [
+        "Юнитрейд",
+        "АО «Юнитрейд»",
+        "UNI DIGITAL LOGISTICS"
+      ],
+      "countries": [
+        "RU"
+      ],
+      "color": "#1e3ebc",
+      "selectable": true,
+      "timezone": "Europe/Moscow",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "linkRules": [],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://unitrade.youtrack.info/"
+    },
+    "viapost": {
+      "displayName": "Viapost",
+      "aliases": [
+        "Via Post",
+        "ВИА ПОСТ",
+        "ДУТП ВИА ПОСТ увоз-извоз ДООЕЛ Скопје"
+      ],
+      "countries": [
+        "MK"
+      ],
+      "color": "#f3cb13",
+      "selectable": true,
+      "timezone": "Europe/Skopje",
+      "tracking": {
+        "mode": "automatic",
+        "adapter": "universal"
+      },
+      "trackingUrlTemplate": "https://www.viapost.solutions/Order/Track/{trackingNumber}",
+      "linkRules": [
+        {
+          "domains": [
+            "viapost.solutions"
+          ],
+          "path": "^/Order/Track/([^/?#]+)/?$"
+        }
+      ],
+      "detectionRules": [],
+      "trackingSearchUrl": "https://viapost.com.mk/"
     }
   }
 }

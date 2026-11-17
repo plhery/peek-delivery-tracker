@@ -84871,14 +84871,10 @@
   },
   {
     "input": "EA222769728RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
@@ -94822,62 +94818,42 @@
   },
   {
     "input": "LS013640784RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
     "input": "LS013640798RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
     "input": "LS013640807RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
     "input": "LS022720358RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
     "input": "LS032330034RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
@@ -101103,26 +101079,18 @@
   },
   {
     "input": "RA049086449RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
     "input": "RA055625916RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {
@@ -102653,14 +102621,10 @@
   },
   {
     "input": "RO176297048RU",
-    "carrier": "intl-post",
+    "carrier": "russian-post",
     "confidence": "high",
     "candidates": [
-      "intl-post"
-    ],
-    "asked": [
-      "russian-post",
-      "chronopost"
+      "russian-post"
     ]
   },
   {

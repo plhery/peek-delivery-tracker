@@ -3,7 +3,7 @@ title: Praćenje pošiljke Pošte Srbije: statusi, rokovi i kontakt
 description: Pratite pošiljku Pošte Srbije ili Post-ekspresa: prijemni broj, značenje statusa, koliko pošiljka čeka u pošti, reklamacije, carina i kontakt.
 slug: posta-srbije-pracenje-posiljke
 published: 2026-10-26
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Pošta Srbije je nacionalni poštanski operator, a Post-ekspres (Post Express) je njen kurirski servis. Pošiljku besplatno pratite na posta.rs, u alatu [Praćenje pošiljke](https://www.posta.rs/lat/alati/pracenje-posiljke.aspx), u aplikaciji Pošte Srbije ili tako što broj nalepite u polje iznad. Broj dobijate od pošiljaoca: internet prodavnica ga obično šalje u imejlu o slanju.
@@ -105,7 +105,7 @@ Podaci sa sajta posta.rs, 26. oktobra 2026:
 
 Ako kontrolna cifra nije ispravna, Peek ne pita nijednog prevoznika i javlja „This number’s check digit doesn’t add up.” Uporedite broj sa porukom o slanju: ni kod Pošte Srbije Peek ne prati broj sa pogrešnom kontrolnom cifrom, pa izbor preko „Change” tu ne pomaže. Link za praćenje sa posta.rs Peek uvek vezuje za Poštu Srbije. Pošiljku iz inostranstva Peek prati kod strane pošte, a kod Pošte Srbije je traži kad strana pošta kao odredište navede Srbiju ili kao partnera navede „Serbian Post” ili „Post Express”. Pošta Srbije prima i brojeve stranih pošta, pa je možete izabrati i sami.
 
-Peek proverava pošiljku na svakih 10 minuta, a posle 48 sati bez promene jednom na sat. Nijedan od ovih statusa ne znači da je pošiljka kod dostavljača, pa češćih provera pred dostavu nema. Obaveštenja dobijate za promene koje izaberete u „Which updates?”. Svaki korak Peek prikazuje na mapi sa imenom pošte, a u inostranstvu samo sa zemljom; vreme Peek čita kao beogradsko, odnosno kao vreme te zemlje, a prikazuje ga u vremenskoj zoni vašeg uređaja. Uz to stoje težina i vreme uručenja. Pošta Srbije ne daje očekivani dan dostave ni mesto preuzimanja, a ko je potpisao, poštanske brojeve i podatke o plaćanju Peek izostavlja.
+Peek proverava pošiljku najviše jednom u 10 minuta, a posle 48 sati bez promene jednom na sat. Nijedan od ovih statusa ne znači da je pošiljka kod dostavljača, pa češćih provera pred dostavu nema. Obaveštenja dobijate za promene koje izaberete u „Which updates?”. Svaki korak Peek prikazuje na mapi sa imenom pošte, a u inostranstvu samo sa zemljom; vreme Peek čita kao beogradsko, odnosno kao vreme te zemlje, a prikazuje ga u vremenskoj zoni vašeg uređaja. Uz to stoje težina i vreme uručenja. Pošta Srbije ne daje očekivani dan dostave ni mesto preuzimanja, a ko je potpisao, poštanske brojeve i podatke o plaćanju Peek izostavlja.
 
 ## Pitanja o praćenju pošiljke Pošte Srbije
 

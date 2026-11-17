@@ -2140,6 +2140,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "seur",
+      "catalog": "seur",
+      "slug": "seur-sendungsverfolgung",
+      "title": "SEUR Sendungsverfolgung: Nummer, Status und Pickup",
+      "name": "SEUR",
+      "color": "#0063b3"
+    },
+    {
       "id": "mrw",
       "catalog": "mrw",
       "slug": "mrw-sendungsverfolgung",
@@ -2614,6 +2622,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffdd00"
     },
     {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "suivi-dpd-allemagne",
+      "title": "Suivi DPD Allemagne (DPD Germany)\u00a0: numéro, statuts et aide",
+      "name": "DPD Germany",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-ch",
       "catalog": "gls-ch",
       "slug": "gls-suisse-suivi-colis",
@@ -2676,6 +2692,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi Poste Italiane\u00a0: codes 1UW et 3UW, statuts et délais",
       "name": "Poste Italiane",
       "color": "#eedc00"
+    },
+    {
+      "id": "seur",
+      "catalog": "seur",
+      "slug": "suivi-seur",
+      "title": "Suivi SEUR\u00a0: numéro, statuts espagnols et points Pickup",
+      "name": "SEUR",
+      "color": "#0063b3"
     },
     {
       "id": "mrw",
@@ -3176,6 +3200,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "tracciamento-dpd-germania",
+      "title": "Tracciamento DPD Germania: numero, stati e consegna",
+      "name": "DPD Germany",
+      "color": "#dc0032"
+    },
+    {
       "id": "gls-ch",
       "catalog": "gls-ch",
       "slug": "gls-svizzera-tracking",
@@ -3230,6 +3262,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Poste Italiane tracking: codici 1UW e 3UW, stati e giacenza",
       "name": "Poste Italiane",
       "color": "#eedc00"
+    },
+    {
+      "id": "seur",
+      "catalog": "seur",
+      "slug": "tracciamento-seur",
+      "title": "Tracciamento SEUR: numero, stati spagnoli e punti Pickup",
+      "name": "SEUR",
+      "color": "#0063b3"
     },
     {
       "id": "ctt",
@@ -3600,6 +3640,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Mondial Relay seguimiento: estados, Punto Pack e InPost",
       "name": "Mondial Relay",
       "color": "#ef3026"
+    },
+    {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "seguimiento-dpd-alemania",
+      "title": "Seguimiento DPD Alemania: número, estados y ayuda",
+      "name": "DPD Germany",
+      "color": "#dc0032"
     },
     {
       "id": "hermes-de",
@@ -4520,6 +4568,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "sledzenie-dpd-niemcy",
+      "title": "Śledzenie DPD Niemcy (DPD Germany): numer, statusy i pomoc",
+      "name": "DPD Germany",
+      "color": "#dc0032"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "dpd-szwajcaria-sledzenie",
@@ -4566,6 +4622,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Poste Italiane śledzenie: kody 1UW i 3UW oraz statusy",
       "name": "Poste Italiane",
       "color": "#eedc00"
+    },
+    {
+      "id": "seur",
+      "catalog": "seur",
+      "slug": "sledzenie-seur",
+      "title": "Śledzenie przesyłek SEUR: numer, statusy i punkty Pickup",
+      "name": "SEUR",
+      "color": "#0063b3"
     },
     {
       "id": "ctt",

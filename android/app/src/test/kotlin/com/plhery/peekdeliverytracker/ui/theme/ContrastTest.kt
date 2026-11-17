@@ -87,13 +87,12 @@ class ContrastTest {
     }
 
     /**
-     * Words a card writes in a lighter shade of its ink ([readableInk]): the list's "Next up" (the ink at 75 %) and a
-     * shared link's "Updated … ago" (at 56 %), on every carrier's card and its map, and the gift's age in its lilac at
-     * 75 % on the lilac card. Each reads at 4.5:1 or more on everything under it, the ink mixed toward the label where
-     * even the whole ink doesn't.
+     * Words a card writes in its ink ([readableInk]), the list's "Next up" and a shared link's "Updated … ago", read at
+     * 4.5:1 or more on every carrier's card and on its map, the ink moved toward the label only where the map needs it,
+     * and the gift's age in its lilac on the lilac card.
      */
     @Test
-    fun aCardsLighterInkReadsOnTheCardAndItsMap() {
+    fun aCardsInkReadsOnTheCardAndItsMap() {
         val identities = CarrierCatalog(cacheFile = null).definitions.map { (id, definition) ->
             id.rawValue to CarrierVisualIdentity(id.rawValue, definition)
         }
@@ -102,18 +101,11 @@ class ContrastTest {
             val checks = identities.flatMap { (id, identity) ->
                 val ink = colors.resolve(identity.ink)
                 val surface = colors.resolve(identity.surface)
-                listOf(
-                    Triple("$id's Next up", ink to 0.75f, cardGrounds(ink, surface, map = true)),
-                    Triple("$id's age", ink to 0.75f * 0.75f, cardGrounds(ink, surface, map = true)),
-                )
-            } + Triple(
-                "gift's age",
-                colors.resolve(ExperimentalPalette.lilac) to 0.75f,
-                listOf(colors.resolve(ExperimentalPalette.lilacSurface)),
-            )
-            for ((name, shade, grounds) in checks) {
-                val (ink, strength) = shade
-                val drawn = readableInk(ink, strength, grounds, colors.label)
+                listOf("$id's Next up and age" to readableInk(ink, cardGrounds(ink, surface, map = true), colors.label) to
+                    cardGrounds(ink, surface, map = true))
+            } + ("gift's age" to colors.resolve(ExperimentalPalette.lilac) to listOf(colors.resolve(ExperimentalPalette.lilacSurface)))
+            for ((named, grounds) in checks) {
+                val (name, drawn) = named
                 for (ground in grounds) {
                     val measured = ratio(drawn.compositeOver(ground), ground)
                     if (measured < 4.5) short += String.format(Locale.ROOT, "%.2f:1 for %s, %s", measured, name, appearance)

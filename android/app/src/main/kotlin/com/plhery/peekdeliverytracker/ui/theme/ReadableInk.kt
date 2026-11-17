@@ -9,19 +9,12 @@ import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
 const val TEXT_CONTRAST = 4.5
 
 /**
- * [ink] at [strength] of its own alpha, or as little more of it as reads at [TEXT_CONTRAST] on each of [grounds], in
- * steps of 5 %. Where the ink itself doesn't, it is mixed toward [label] (the words' own colour, which reads on every
- * ground) in steps of 10 %, channel by channel, until it does. Words a card writes in a lighter shade of its ink keep
- * it on the cards where it reads, and darken only where it doesn't.
+ * [ink] where it reads at [TEXT_CONTRAST] on each of [grounds], as the iPhone writes a card's quieter words. Where it
+ * doesn't, which only a country the parcel passed through on some cards' maps does, it is moved toward [label] (the
+ * words' own colour, which reads on every ground) in steps of 10 %, channel by channel, until it does.
  */
-fun readableInk(ink: Color, strength: Float, grounds: List<Color>, label: Color): Color {
+fun readableInk(ink: Color, grounds: List<Color>, label: Color): Color {
     val reads = { shade: Color -> grounds.all { contrast(shade.compositeOver(it), it) >= TEXT_CONTRAST } }
-    var step = strength
-    while (step < 1f) {
-        val shade = ink.copy(alpha = ink.alpha * step)
-        if (reads(shade)) return shade
-        step += 0.05f
-    }
     for (tenth in 0..10) {
         val amount = tenth / 10f
         val mixed = Color(

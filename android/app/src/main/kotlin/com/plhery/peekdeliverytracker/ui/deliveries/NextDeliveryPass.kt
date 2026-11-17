@@ -229,8 +229,8 @@ fun NextDeliveryPass(
 }
 
 /**
- * "Next up" in caption2 capitals, tracked 1.2 and in the carrier's ink at 75 %, or as much more as reads at 4.5:1 on the
- * card and on its map where it draws one ([readableInk]), on one line that shrinks to 70 % before it ends in an
+ * "Next up" in caption2 capitals, tracked 1.2 and in the carrier's ink, as on the iPhone, moved toward the label's colour
+ * where it wouldn't read at 4.5:1 on the card's map ([readableInk]), on one line that shrinks to 70 % before it ends in an
  * ellipsis, and no larger than at the first accessibility size.
  */
 @Composable
@@ -238,7 +238,7 @@ private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: j
     val colors = PeekTheme.colors
     val ink = colors.resolve(identity.ink)
     val surface = colors.resolve(identity.surface)
-    val shade = remember(ink, surface, map, colors.label) { readableInk(ink, 0.75f, cardGrounds(ink, surface, map), colors.label) }
+    val shade = remember(ink, surface, map, colors.label) { readableInk(ink, cardGrounds(ink, surface, map), colors.label) }
     CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {
         val type = PeekTheme.type
         val style = type.tracking(type.caption2, 1.2f).sfLines().copy(color = shade)

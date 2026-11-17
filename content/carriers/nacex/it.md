@@ -10,7 +10,7 @@ NACEX è un corriere espresso del gruppo Logista con agenzie in Spagna, Portogal
 
 ## Numero di tracciamento NACEX: formato ed errori comuni
 
-Il riquadro NACEX mostra il modello `0000/00000000`, mentre la [pagina di tracciamento NACEX](https://www.nacex.es/irSeguimiento.do) separa *Agencia* ed *Expedición*. Con cifre inventate:
+Il riquadro NACEX mostra il modello `0000/00000000`, mentre la [pagina di tracciamento NACEX](https://www.nacex.es/irSeguimiento.do) separa *Agencia* e *Albarán*. Con cifre inventate:
 
 :::anatomy 0100 / 00000005
 - 0100 | Agenzia: codice a 4 cifre della filiale affiliata NACEX di partenza
@@ -24,7 +24,7 @@ NACEX non indica in quale messaggio arrivi il codice né il mittente degli SMS; 
 | --- | --- |
 | `0100/00000005` | Numero NACEX completo: incollalo così com'è (spazi attorno alla barra come `0100 / 00000005` sono accettati inserendo il numero). |
 | `010000000005` | 12 cifre senza barra: probabile codice NACEX privo di `/` dopo la quarta cifra. Senza `/`, Peek non propone NACEX e controlla corrieri con [codici a 12 cifre](guide:tracking-number-formats) come [BRT](carrier:brt). Aggiungi `/`. |
-| `0100000005` | Fino a 10 cifre: probabile «riferimento alternativo» (*referencia alternativa*) sull'etichetta. Sul sito NACEX richiede anche il codice agenzia/cliente del mittente; Peek non interroga NACEX con questo formato. |
+| `0100000005` | Fino a 10 cifre: probabile «riferimento alternativo» (*referencia alternativa*) sull'etichetta. NACEX non dice dove inserirlo; Peek non interroga NACEX con questo formato. |
 | `3230 0000 0000 0000` | 16 cifre (o 23 cifre) senza barra: [Correos Express](carrier:correos-express) o un altro corriere, non NACEX. |
 
 Verifica anche di non aver scritto la lettera `O` al posto dello zero `0`. Se il [modulo esterno NACEX](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) risponde *«No existe ningún albarán introducido en el sistema cumpliendo los criterios especificados. Consulte con su agencia NACEX más cercana»* («Nessuna bolla nel sistema soddisfa i criteri indicati. Consulta l'agenzia NACEX più vicina»), ricontrolla le quattro cifre, la barra e le otto cifre finali, o attendi qualche ora se la spedizione è appena stata creata.
@@ -35,7 +35,7 @@ Il sito `nacex.es` offre un selettore di lingua (spagnolo, portoghese, inglese, 
 
 | Stato NACEX (spagnolo) | Cosa significa per te |
 | --- | --- |
-| `Notificado` | «Notificato»: registrazione elettronica attorno al ritiro, non ancora una scansione fisica. |
+| `Notificado` | «Notificato»: registrazione elettronica della spedizione il giorno della prenotazione, prima o dopo la presa in carico; non una scansione fisica. |
 | `Aceptada` | «Accettata»: pacco preso in carico in agenzia (seguito da `WEB`, indica solo una prenotazione online non ancora consegnata a NACEX). |
 | `En tránsito` | «In transito»: trasferimento tra agenzie affiliate e piattaforme NACEX. |
 | `En reparto` | «In consegna»: l'autista ha il pacco sul furgone per la consegna di giornata. |
@@ -70,7 +70,7 @@ Attenzione: `Solución de entrega concertada` e `Solución de entrega en punto` 
 Dalla Spagna peninsulare, dalle Baleari o dal Portogallo continentale verso l'Italia i pacchi circolano nel territorio IVA dell'UE senza dogana. Fanno eccezione:
 
 - **Svizzera:** si applica l'IVA svizzera all'importazione dell'**8,1%** (**2,6%** ridotta). Secondo l'UDSC, dazi e tributi **inferiori a 5 CHF** non vengono riscossi (fino a 62 CHF imponibili all'8,1% o 193 CHF al 2,6%); oltre tale soglia maturano IVA, eventuali dazi sul peso e spese del vettore (come [La Posta Svizzera](carrier:swiss-post)); vedi [dogana e dazi sui pacchi](guide:customs).
-- **Canarie, Ceuta, Melilla, Andorra e Gibilterra:** Canarie, Ceuta e Melilla sono fuori dall'area IVA UE; NACEX richiede fattura commerciale (o dichiarazione giurata tra privati) e segnala possibili tempi doganali aggiuntivi.
+- **Canarie, Ceuta, Melilla, Andorra e Gibilterra:** le spedizioni di merci verso queste destinazioni passano dalla dogana; NACEX richiede fattura commerciale (o dichiarazione giurata tra privati) e segnala possibili tempi doganali aggiuntivi.
 
 ## Pacco NACEX in ritardo, fermo o danneggiato
 
@@ -78,7 +78,7 @@ I reclami formali spettano al cliente che ha pagato il trasporto (di norma il ne
 
 - **Tracciamento fermo o mancata consegna:** le FAQ indicano `atencion.cliente@nacex.com` o `900 100 000`, senza attesa minima. Consulta anche [tracciamento che non si aggiorna](guide:tracking-not-updating) e [`Entregado` ma non ricevuto](guide:delivered-not-received).
 - **Ritardo:** reclamabile dal cliente entro **31 giorni solari** (*31 días naturales*) se il termine garantito è superato senza causa giustificata (con possibili rallentamenti per Black Friday, Natale o dogana).
-- **Perdita, ammanchi o danni:** annota subito alla consegna i danni visibili; il reclamo con foto e fattura va inviato entro **7 giorni solari** dalla consegna, in linea con l'art. 60 della legge spagnola *Ley 15/2009*.
+- **Perdita, ammanchi o danni:** NACEX accetta il reclamo entro **7 giorni solari** (dalla consegna per ammanchi o danni), con foto e fattura. L'art. 60 della legge spagnola *Ley 15/2009* chiede riserve scritte alla consegna, o entro 7 giorni solari per danni non visibili.
 
 Negli acquisti online nell'UE, *Your Europe* ricorda che il venditore risponde dei beni fino alla consegna fisica (entro **30 giorni** salvo diverso accordo): contatta quindi sempre anche il venditore.
 
@@ -86,7 +86,7 @@ Negli acquisti online nell'UE, *Your Europe* ricorda che il venditore risponde d
 
 Sulle pagine spagnole NACEX indica questi recapiti (senza orari pubblicati né WhatsApp):
 
-- **Telefono (Spagna e Andorra):** `900 100 000` (gratuito in Spagna da fisso e mobile secondo FAQ NACEX e CNMC; spesso non raggiungibile dall'estero, da cui conviene usare e-mail o chat).
+- **Telefono (Spagna e Andorra):** `900 100 000` (gratuito in Spagna da fisso e mobile secondo FAQ NACEX e CNMC; NACEX non dice se funziona dall'estero).
 - **E-mail:** `atencion.cliente@nacex.com` (e `shop@nacex.com` sulla pagina contatti).
 - **Chat online:** sulla [pagina di contatto NACEX](https://www.nacex.es/irContactenosContacto.do) (*«Chatee ahora con nuestros agentes»*).
 - **Agenzie e reclami:** sedi nel [localizzatore NACEX](https://www.nacex.es/irCerca.do); regole per i clienti nella [pagina reclami NACEX](https://www.nacex.es/irReclamaciones.do) (prima verifica entro 48 ore lavorative, chiusura prevista entro 7 giorni solari secondo il caso).
@@ -113,7 +113,7 @@ Il cambio di indirizzo civico va autorizzato dal cliente pagante (di norma il ne
 
 ### Perché il mio codice NACEX a 12 cifre non funziona?
 
-Perché NACEX richiede sempre la barra obliqua dopo le prime quattro cifre (`0100/00000005`). Senza `/`, NACEX rifiuta la ricerca e Peek interroga corrieri a 12 cifre come [BRT](carrier:brt): aggiungi `/` dopo la quarta cifra.
+Perché il modello NACEX ha una barra obliqua dopo le prime quattro cifre (`0100/00000005`). Senza `/`, Peek interroga corrieri a 12 cifre come [BRT](carrier:brt): aggiungi `/` dopo la quarta cifra.
 
 :::sources
 - [NACEX: Pagina iniziale](https://www.nacex.es/irHome.do) – casella di ricerca, Logista, rete, lingue

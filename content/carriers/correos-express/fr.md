@@ -26,7 +26,7 @@ Correos Express ne détaille pas la structure de son *número de envío*. Peek r
 | `RR100000003ES` | **Lettres et chiffres** au [format postal international](guide:tracking-number-formats) : Correos, pas Correos Express. |
 | `0100/00000005` | **4 chiffres, barre oblique, 8 chiffres** : [NACEX](carrier:nacex), autre expressiste ibérique. |
 
-Colle **uniquement le numéro** (espaces, points ou tirets sont retirés), pas un lien `s.correosexpress.com` ni l'e-mail entier : ce format numérique étant partagé, Peek ne l'extrait pas d'une URL ou d'un texte long. Un chiffre erroné invalide la clé GS1 et écarte Correos Express sur 16 chiffres (sélection manuelle possible via « Changer »). Correos Express n'indique pas d'identifiant SMS ; vois [comment trouver son numéro de suivi](guide:find-tracking-number).
+Colle **uniquement le numéro** (espaces, points ou tirets sont retirés), pas un lien `s.correosexpress.com` ni l'e-mail entier : Peek ne retrouve pas toujours ce numéro dans un lien ou un texte. Un chiffre erroné invalide la clé GS1 et écarte Correos Express sur 16 chiffres. Correos Express n'indique pas d'identifiant SMS ; vois [comment trouver son numéro de suivi](guide:find-tracking-number).
 
 Face au message *« Lo sentimos, no se ha encontrado ningún envío con el número indicado »*, vérifie le numéro et patiente quelques heures pour un envoi récent. Sans évolution après 24 à 48 heures, contacte le vendeur.
 
@@ -43,7 +43,7 @@ Le suivi n'existe qu'en espagnol et sur la [page portugaise](https://s.correosex
 | `EN REPARTO` | En tournée avec le chauffeur ; les options de livraison flexible sont verrouillées. |
 | `Su envío no ha podido ser entregado` | « Votre envoi n'a pas pu être livré » : tentative infructueuse. |
 | `NUEVO REPARTO` | « Nouvelle tournée » : nouvelle mise en livraison prévue. |
-| `CAMBIO DE DESTINO` | « Changement de destination » : redirection vers une autre adresse ou un relais. |
+| `Cambio de destino` | « Changement de destination » : l'expéditeur a demandé la livraison à une nouvelle adresse. |
 | `ESTACIONADO` | « En attente » : selon la FAQ portugaise, livraison non aboutie et colis gardé dans les locaux Correos Express. |
 | `EN ALMACÉN` / `EN GESTIÓN` | « En entrepôt » / « En traitement » : retenu en agence pour traiter un incident. |
 | `ENTREGADO EN PUNTO DE CONVENIENCIA` | Déposé au relais *Punto Correos*, mais **pas encore prêt** au retrait client. |
@@ -55,7 +55,7 @@ Le suivi n'existe qu'en espagnol et sur la [page portugaise](https://s.correosex
 
 ## Livraison en Europe, modification et retrait Punto Correos
 
-**Depuis l'Espagne vers la France, la Belgique, la Suisse et le monde :** Correos Express propose *Internacional Estándar* (routier monocolis en Europe, délai indicatif de 2 à 3 jours ouvrés vers les principaux pays de l'UE) et *Internacional Express* (aérien vers plus de 180 pays, 1 à 2 jours ouvrés indicatifs en Europe selon destination, jusqu'à deux tentatives et suivi en ligne). Week-ends et jours fériés des pays traversés sont exclus.
+**Depuis l'Espagne vers la France, la Belgique, la Suisse et le monde :** Correos Express propose *Internacional Estándar* (monocolis porte à porte en Europe, délai indicatif de 2 à 3 jours ouvrés vers les principaux pays de l'UE) et *Internacional Express* (aérien vers plus de 180 pays, 1 à 2 jours ouvrés indicatifs en Europe selon destination, jusqu'à deux tentatives et suivi en ligne). Week-ends et jours fériés des pays traversés sont exclus.
 
 **En Espagne :** avant `EN REPARTO`, si l'expéditeur l'autorise, **Gestionar entrega** permet de choisir un *Punto Correos*, une autre adresse ou une autre date. *Paq 24* et *Paq 14* incluent deux tentatives gratuites ; après un échec, [Solicita nueva entrega](https://s.correosexpress.com/SeguimientoSinCP/saveNewDelivery) propose un nouveau jour (matin ou après-midi), un bureau Correos ou un relais, et *Paq e-Commerce* peut être déposé au *Punto Correos* libre le plus proche. En contre-remboursement (*contra reembolso*), Correos Express recommande de préparer l'appoint en espèces.
 
@@ -72,9 +72,9 @@ Le suivi n'existe qu'en espagnol et sur la [page portugaise](https://s.correosex
 Entre l'Espagne péninsulaire (ou les Baléares) et la France ou la Belgique, les envois circulent sans douane dans la zone TVA de l'UE. Des taxes et formalités s'appliquent en revanche hors de ce périmètre :
 
 - **Suisse :** TVA d'importation de **8,1 %** (**2,6 %** taux réduit). Selon l'OFDF, droits et taxes **inférieurs à 5 CHF** ne sont pas perçus (jusqu'à 62 CHF à 8,1 % ou 193 CHF à 2,6 %) ; au-delà s'ajoutent TVA, droits éventuels au poids et frais du transporteur (comme [La Poste suisse](carrier:swiss-post)). Voir [la douane et les frais d'importation](guide:customs).
-- **Canaries, Ceuta, Melilla, Andorre, Gibraltar, Açores, Madère et hors UE :** Canaries, Ceuta et Melilla sont hors zone TVA UE. Les envois vers les Canaries, Andorre, Ceuta, Melilla ou Gibraltar exigent une facture commerciale ou proforma (plus une déclaration sur l'honneur signée pour les Canaries) et peuvent entraîner taxes locales et frais douaniers non inclus ; les envois aériens vers les Açores et Madère ainsi que ceux vers le Royaume-Uni depuis fin 2020 requièrent aussi des documents douaniers (*Internacional Express* dédouane hors UE).
+- **Canaries, Ceuta, Melilla, Andorre, Gibraltar, Açores, Madère et hors UE :** Les envois vers les Canaries, Andorre, Ceuta, Melilla ou Gibraltar exigent une facture commerciale ou proforma (plus une déclaration sur l'honneur signée pour les Canaries) et peuvent entraîner taxes locales et frais douaniers non inclus ; les envois aériens vers les Açores et Madère ainsi que ceux vers le Royaume-Uni depuis fin 2020 requièrent aussi des documents douaniers (*Internacional Express* dédouane hors UE).
 
-> **Attention aux faux SMS (*smishing*) :** sur *Alerta de seguridad*, Correos Express précise ne **jamais demander tes coordonnées bancaires ni tes identifiants web** et ne **gérer aucun numéro surtaxé en 807** ; en cas de doute, passe par `www.correosexpress.es` ou le `900 122 333`. En mars 2022, l'INCIBE a signalé des SMS frauduleux imitant Correos et Correos Express qui réclamaient de faux frais de douane ou d'envoi via un lien piégé. Même si de vrais frais existent (Suisse, hors UE, Canaries, Ceuta, Melilla) ou un contre-remboursement à la porte, n'ouvre aucun lien reçu par SMS : vérifie ton numéro sur `s.correosexpress.com` et préviens ta banque si tu as saisi ta carte.
+> **Attention aux faux SMS (*smishing*) :** sur *Alerta de seguridad*, Correos Express précise ne **jamais demander tes coordonnées bancaires ni tes identifiants web** et ne **gérer aucun numéro surtaxé en 807** ; en cas de doute, passe par `www.correosexpress.es` ou le `900 122 333`. En mars 2022, l'INCIBE a signalé des SMS frauduleux imitant Correos et Correos Express qui réclamaient de faux frais de douane ou d'envoi via un lien piégé. Un SMS au nom de Correos Express disant que ton colis n'a pas pu être livré faute de frais payés et t'invitant à ouvrir un lien est une fraude : ne l'ouvre pas. Un contre-remboursement se règle au livreur, à la remise. Vérifie ton numéro sur `s.correosexpress.com` et préviens ta banque si tu as saisi ta carte.
 
 ## Colis en retard, non reçu ou endommagé
 
@@ -90,14 +90,14 @@ Le contrat lie Correos Express à l'expéditeur et une seule réclamation est ad
 
 L'assistance fonctionne uniquement en espagnol et en portugais :
 
-- **Espagne :** `900 122 333` (sans horaires publiés ; gratuit en Espagne selon la CNMC, souvent bloqué depuis l'étranger) et fixe madrilène `913 277 020` (`+34 913 277 020` depuis l'étranger au tarif international), ainsi que le [formulaire client](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente) et `@Cex_responde` sur X.
+- **Espagne :** `900 122 333` (sans horaires publiés ; gratuit en Espagne selon la CNMC) et `913 277 020` (affiché sur le suivi), ainsi que le [formulaire client](https://www.correosexpress.es/es/atencion-al-cliente/contacto/atencion-al-cliente) et `@Cex_responde` sur X.
 - **Portugal :** `229 762 810` (tarif fixe national), lun.–ven. 08 h 30–19 h 00, et `destinatarioscep@correosexpress.com` pour les destinataires.
 
 ## Suivre un colis Correos Express avec Peek
 
-Sur 16 chiffres, [Peek](/) interroge les cinq transporteurs compatibles ; un 23 chiffres valide cible Correos Express seul (hors plage `000` d'Australia Post). Si Correos Express associe un code colis à 23 chiffres à son numéro d'envoi à 16 chiffres, Peek l'affiche sous « Correos Express le suit sous le numéro ». En consultant à la fois Correos Express et le localisateur Correos, Peek conserve l'historique même quand le site de Correos Express masque un ancien colis livré.
+Sur 16 chiffres, [Peek](/) interroge les cinq transporteurs compatibles ; un 23 chiffres valide cible Correos Express seul (hors plage `000` d'Australia Post).
 
-Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes dès 6 h 00 locales le jour « En livraison » tant que le suivi direct Correos Express répond (via des services de suivi, jusqu'à toutes les 15 minutes). Après deux jours sans nouveauté — ou 12 heures sur « Étiquette créée » ou « Pris en charge » — le relevé devient horaire. Choisis des alertes pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek traduit le statut, affiche la livraison prévue en transit et place chaque scan sur une carte ; les heures d'Espagne péninsulaire, Baléares, Ceuta, Melilla et Portugal continental sont converties avec « Heures dans ton fuseau horaire : … » (Canaries et Açores restent en heure locale). Peek laisse de côté preuve de livraison, signataire, code PIN, coordonnées et notes libres du livreur, et ne contacte pas Correos Express pour toi.
+Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes dès 6 h 00 locales le jour « En livraison » tant que le suivi direct Correos Express répond (via des services de suivi, jusqu'à toutes les 15 minutes). Après deux jours sans nouveauté — ou 12 heures sur « Étiquette créée » ou « Pris en charge » — le relevé devient horaire. Choisis des alertes pour « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek traduit le statut, affiche la livraison prévue en transit et place chaque scan sur une carte. Peek laisse de côté preuve de livraison, coordonnées et commentaires de livraison, et ne contacte pas Correos Express pour toi.
 
 ## Questions fréquentes sur le suivi Correos Express
 
@@ -107,7 +107,7 @@ Correos assure le service postal universel espagnol ; Correos Express (*Correos 
 
 ### Quels sont les délais et horaires de livraison de Correos Express ?
 
-Sur la péninsule Ibérique, Correos Express annonce 24 heures (*Paq 24*), 24 à 48 heures entre l'Espagne et le Portugal continental, et le 2e jour ouvrable vers Ceuta, Melilla, Andorre et Gibraltar (option samedi *Entrega en sábados* sur *Paq 24* péninsulaire ; pas de livraison le dimanche). *Paq 10* et *Paq 14* livrent avant 10 h 00 ou 14 h 00 ; en Europe, compte à titre indicatif 2 à 3 jours ouvrés (*Internacional Estándar*) ou 1 à 2 jours ouvrés (*Internacional Express*). L'heure estimée dépend de l'historique de ton code postal.
+Sur la péninsule Ibérique, Correos Express annonce 24 heures (*Paq 24*), 24 à 48 heures entre l'Espagne et le Portugal continental, et le 2e jour ouvrable vers Ceuta, Melilla, Andorre et Gibraltar (option samedi *Entrega en sábados* sur *Paq 24* péninsulaire). *Paq 10* et *Paq 14* livrent avant 10 h 00 ou 14 h 00 ; en Europe, compte à titre indicatif 2 à 3 jours ouvrés (*Internacional Estándar*) ou 1 à 2 jours ouvrés (*Internacional Express*). L'heure estimée dépend de l'historique de ton code postal.
 
 ### Pourquoi vois-je `ENTREGADO EN PUNTO DE CONVENIENCIA` sans code PIN ?
 

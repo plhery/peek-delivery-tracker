@@ -10,7 +10,7 @@ NACEX to firma kurierska ekspresowa należąca do grupy Logista, która posiada 
 
 ## Numer śledzenia NACEX: jak wygląda i z czym go nie mylić
 
-Pole wyszukiwania na stronie NACEX podpowiada wzór `0000/00000000`, a szczegółowy formularz na [stronie śledzenia NACEX](https://www.nacex.es/irSeguimiento.do) prosi o wpisanie obu części osobno (*Agencia* oraz *Expedición*). Na przykładzie zmyślonego numeru:
+Pole wyszukiwania na stronie NACEX podpowiada wzór `0000/00000000`, a szczegółowy formularz na [stronie śledzenia NACEX](https://www.nacex.es/irSeguimiento.do) prosi o wpisanie obu części osobno (*Agencia* oraz *Albarán*). Na przykładzie zmyślonego numeru:
 
 :::anatomy 0100 / 00000005
 - 0100 | Agencja: czterocyfrowy kod oddziału franczyzowego NACEX nadającego paczkę
@@ -24,7 +24,7 @@ NACEX nie podaje, w której wiadomości odbiorca znajdzie ten numer ani pod jak�
 | --- | --- |
 | `0100/00000005` | Pełny numer przesyłki NACEX: wklej go bez zmian (spacje wokół ukośnika, np. `0100 / 00000005`, są również akceptowane przy bezpośrednim wpisywaniu numeru). |
 | `010000000005` | 12 cyfr bez ukośnika: prawdopodobnie numer NACEX, w którym sklep pominął znak `/` po czwartej cyfrze. Bez ukośnika Peek nie podpowiada NACEX i sprawdza przewoźników używających [12-cyfrowych numerów](guide:tracking-number-formats). Dopisz `/` po czwartej cyfrze. |
-| `0100000005` | Do 10 cyfr: to zapewne „numer referencyjny alternatywny” (*referencia alternativa*) widoczny na etykiecie NACEX. W formularzu NACEX działa wyłącznie w parze z kodem agencji/klienta nadawcy; Peek nie odpytuje po nim systemu NACEX. |
+| `0100000005` | Do 10 cyfr: to zapewne „numer referencyjny alternatywny” (*referencia alternativa*) widoczny na etykiecie NACEX. NACEX nie podaje, gdzie go wpisać; Peek nie odpytuje po nim systemu NACEX. |
 | `3230 0000 0000 0000` | 16 cyfr (lub 23 cyfry) bez ukośnika: to format należący do [Correos Express](carrier:correos-express) albo kurierów takich jak [TNT](carrier:tnt), a nie do NACEX. |
 
 Upewnij się też, że zamiast cyfry `0` nie wpisano litery `O` – obecność liter uniemożliwia rozpoznanie numeru. Jeśli [zewnętrzny formularz śledzenia](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) wyświetla komunikat *„No existe ningún albarán introducido en el sistema cumpliendo los criterios especificados. Consulte con su agencia NACEX más cercana”* („W systemie nie ma żadnego listu przewozowego spełniającego podane kryteria. Skontaktuj się z najbliższą agencją NACEX”), sprawdź cztery pierwsze cyfry, ukośnik i osiem kolejnych cyfr. Gdy sprzedawca dopiero wygenerował wysyłkę, odczekaj kilka godzin lub poproś sklep o potwierdzenie numeru.
@@ -35,7 +35,7 @@ Serwis `nacex.es` oferuje u góry strony wybór języka (hiszpański, portugalsk
 
 | Hiszpański status NACEX | Co oznacza dla Ciebie |
 | --- | --- |
-| `Notificado` | „Zgłoszono”: elektroniczna informacja związana ze zleceniem odbioru, jeszcze przed fizycznym skanem paczki. |
+| `Notificado` | „Zgłoszono”: elektroniczna informacja o przesyłce z dnia jej zlecenia, przed przyjęciem paczki lub po nim, a nie fizyczny skan. |
 | `Aceptada` | „Przyjęta”: oddział NACEX przyjął paczkę (jeśli obok widnieje dopisek `WEB`, oznacza to jedynie rejestrację online, a przewoźnik nie ma jeszcze paczki w rękach). |
 | `En tránsito` | „W transporcie”: przesyłka przemieszcza się między agencjami franczyzowymi i sortowniami NACEX. |
 | `En reparto` | „W doręczeniu”: kurier zabrał paczkę na dzisiejszą trasę. |
@@ -67,7 +67,7 @@ Zwróć uwagę na statusy `Solución de entrega concertada` oraz `Solución de e
 
 ## Cło i podatki: Polska oraz hiszpańskie terytoria specjalne
 
-Przesyłki z kontynentalnej Hiszpanii, Balearów lub kontynentalnej Portugalii do Polski przemieszczają się wewnątrz unijnego obszaru VAT bez odprawy celnej. Wyjątkiem są terytoria poza obszarem VAT UE oraz kraje trzecie: Wyspy Kanaryjskie, Ceuta i Melilla (a także Andora i Gibraltar) wymagają w NACEX faktury handlowej lub oświadczenia w obrocie prywatnym, a formalności celne mogą wydłużyć dostawę; zobacz też poradnik o [odprawie celnej i opłatach importowych](guide:customs).
+Przesyłki z kontynentalnej Hiszpanii, Balearów lub kontynentalnej Portugalii do Polski przemieszczają się wewnątrz unijnego obszaru VAT bez odprawy celnej. Wyjątkiem są przesyłki towarów na Wyspy Kanaryjskie, do Ceuty, Melilli, Andory i Gibraltaru: przechodzą przez odprawę celną, a NACEX wymaga faktury handlowej lub oświadczenia w obrocie prywatnym, a formalności celne mogą wydłużyć dostawę; zobacz też poradnik o [odprawie celnej i opłatach importowych](guide:customs).
 
 ## Opóźniona, zagubiona lub uszkodzona paczka NACEX
 
@@ -75,7 +75,7 @@ Formalną reklamację w NACEX składa klient zlecający przewóz (zwykle sklep i
 
 - **Brak ruchu w śledzeniu lub niedoręczona paczka:** FAQ NACEX zaleca kontakt pod adresem `atencion.cliente@nacex.com` lub numerem `900 100 000` (bez minimalnego czasu oczekiwania). Sprawdź też, co zrobić, gdy [śledzenie przestaje się aktualizować](guide:tracking-not-updating) albo gdy paczka ma status [`Entregado`, ale jej nie masz](guide:delivered-not-received).
 - **Opóźnienie:** klient NACEX ma **31 dni kalendarzowych** (*31 días naturales*) na reklamację przekroczenia terminu bez uzasadnionej przyczyny (NACEX uprzedza o możliwych utrudnieniach podczas Black Friday i świąt Bożego Narodzenia).
-- **Zaginięcie, brak zawartości lub uszkodzenie:** widoczne szkody zewnętrzne lub braki najlepiej wpisać **od razu przy odbiorze**; reklamacje z tytułu zaginięcia, braku towaru lub uszkodzenia składa się w ciągu **7 dni kalendarzowych** od doręczenia (ze zdjęciami i fakturą), zgodnie z art. 60 hiszpańskiej ustawy *Ley 15/2009*.
+- **Zaginięcie, brak zawartości lub uszkodzenie:** widoczne szkody zewnętrzne lub braki zgłoś na piśmie **od razu przy odbiorze**, a szkody niewidoczne w ciągu 7 dni kalendarzowych (art. 60 hiszpańskiej ustawy *Ley 15/2009*). NACEX przyjmuje reklamacje z tytułu zaginięcia, braku towaru lub uszkodzenia w ciągu **7 dni kalendarzowych** (przy braku towaru lub uszkodzeniu od doręczenia), ze zdjęciami i fakturą.
 
 Przy zakupach konsumenckich w UE serwis *Your Europe* przypomina, że sprzedawca odpowiada za towar aż do fizycznego wydania paczki (chyba że sam wybrałeś przewoźnika spoza opcji sklepu) i ma dostarczyć zamówienie w ciągu **30 dni**, o ile nie ustalono inaczej. Zgłaszaj więc problem również sprzedawcy.
 
@@ -83,7 +83,7 @@ Przy zakupach konsumenckich w UE serwis *Your Europe* przypomina, że sprzedawca
 
 Dane ze stron hiszpańskich NACEX (bez opublikowanych godzin pracy infolinii, e-maila czy czatu i bez numeru WhatsApp):
 
-- **Telefon (Hiszpania i Andora):** `900 100 000` (w Hiszpanii bezpłatny z sieci stacjonarnych i komórkowych według FAQ NACEX oraz CNMC; z Polski numery `900` bywają niedostępne, więc wybierz e-mail lub czat).
+- **Telefon (Hiszpania i Andora):** `900 100 000` (w Hiszpanii bezpłatny z sieci stacjonarnych i komórkowych według FAQ NACEX oraz CNMC; NACEX nie podaje, czy działa z zagranicy).
 - **E-mail:** `atencion.cliente@nacex.com` (oraz `shop@nacex.com` na stronie kontaktowej).
 - **Czat online:** na [stronie kontaktowej NACEX](https://www.nacex.es/irContactenosContacto.do) (*„Chatee ahora con nuestros agentes”*).
 - **Oddziały lokalne:** adresy i godziny w [wyszukiwarce punktów NACEX](https://www.nacex.es/irCerca.do).
@@ -111,7 +111,7 @@ Zmiana adresu domowego wymaga zgody płatnika przesyłki (zwykle sklepu): w rejo
 
 ### Dlaczego mój 12-cyfrowy numer NACEX nie działa?
 
-Numer NACEX wymaga ukośnika po czwartej cyfrze (`0100/00000005`). Bez `/` system NACEX odrzuca numer, a Peek sprawdza przewoźników z 12 cyframi ciągiem – wstaw `/` między czwartą a piątą cyfrą.
+Wzór numeru NACEX ma ukośnik po czwartej cyfrze (`0100/00000005`). Bez `/` Peek sprawdza przewoźników z 12 cyframi ciągiem – wstaw `/` między czwartą a piątą cyfrą.
 
 :::sources
 - [NACEX: Strona główna](https://www.nacex.es/irHome.do) – wyszukiwarka, Logista, sieć, języki

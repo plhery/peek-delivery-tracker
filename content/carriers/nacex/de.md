@@ -10,7 +10,7 @@ NACEX ist ein Express-Paketdienst der Logista-Gruppe mit eigenem Franchisenetz i
 
 ## NACEX-Sendungsnummer: Aufbau und häufige Verwechslungen
 
-Das Suchfeld auf der Startseite zeigt das Muster `0000/00000000`, während das ausführliche Formular auf der [NACEX-Tracking-Seite](https://www.nacex.es/irSeguimiento.do) beide Teile getrennt abfragt (*Agencia* und *Expedición*). Anhand einer frei erfundenen Nummer:
+Das Suchfeld auf der Startseite zeigt das Muster `0000/00000000`, während das ausführliche Formular auf der [NACEX-Tracking-Seite](https://www.nacex.es/irSeguimiento.do) beide Teile getrennt abfragt (*Agencia* und *Albarán*). Anhand einer frei erfundenen Nummer:
 
 :::anatomy 0100 / 00000005
 - 0100 | Agentur: vierstelliger Code der absendenden NACEX-Franchise-Niederlassung
@@ -24,7 +24,7 @@ NACEX gibt nicht an, in welcher Nachricht Empfänger die Nummer erhalten oder un
 | --- | --- |
 | `0100/00000005` | Vollständige NACEX-Sendungsnummer: direkt so verfolgen (Leerzeichen rund um den Schrägstrich wie `0100 / 00000005` werden beim direkten Einfügen ebenfalls akzeptiert). |
 | `010000000005` | 12 Ziffern ohne Schrägstrich: vermutlich eine NACEX-Nummer, bei der der `/` nach der vierten Ziffer weggelassen wurde. Ohne Schrägstrich schlägt Peek nicht NACEX vor, sondern prüft andere Paketdienste mit [12-stelligen Nummern](guide:tracking-number-formats). Setze den `/` nach der vierten Ziffer ein. |
-| `0100000005` | Bis zu 10 Ziffern: möglicherweise die auf dem Etikett gedruckte „alternative Referenz“ (*referencia alternativa*). Im NACEX-Formular funktioniert sie nur zusammen mit dem Agentur-/Kundencode des Absenders; Peek fragt NACEX damit nicht ab. |
+| `0100000005` | Bis zu 10 Ziffern: möglicherweise die auf dem Etikett gedruckte „alternative Referenz“ (*referencia alternativa*). Wo man sie eingibt, sagt NACEX nicht; Peek fragt NACEX damit nicht ab. |
 | `3230 0000 0000 0000` | 16 Ziffern (oder 23 Ziffern) ohne Schrägstrich: kein NACEX-Format, sondern [Correos Express](carrier:correos-express) oder ein anderer Paketdienst wie [DHL eCommerce](carrier:dhl-ecommerce). |
 
 Achte außerdem darauf, nicht den Buchstaben `O` statt der Ziffer `0` einzutippen – Buchstaben verhindern die Erkennung. Meldet das [externe NACEX-Suchformular](https://www.nacex.es/seguimientoFormularioExterno.do?intcli=0000/00000000) *„No existe ningún albarán introducido en el sistema cumpliendo los criterios especificados. Consulte con su agencia NACEX más cercana“* („Kein Lieferschein im System entspricht den angegebenen Kriterien. Wenden Sie sich an Ihre nächstgelegene NACEX-Agentur“), prüfe die vier Ziffern vor und die acht Ziffern nach dem Schrägstrich. Wurde das Paket gerade erst angekündigt, warte einige Stunden oder frag beim Shop nach.
@@ -35,7 +35,7 @@ Die Website `nacex.es` lässt sich oben zwar auf Deutsch, Englisch, Französisch
 
 | Spanischer NACEX-Status | Bedeutung für deine Lieferung |
 | --- | --- |
-| `Notificado` | „Angekündigt“: elektronische Meldung rund um die Abholung, noch kein physischer Scan. |
+| `Notificado` | „Angekündigt“: elektronische Meldung der Sendung am Tag der Buchung, vor oder nach der Annahme; kein physischer Scan. |
 | `Aceptada` | „Angenommen“: NACEX hat das Paket in einer Agentur übernommen (steht dahinter `WEB`, handelt es sich nur um eine Online-Anmeldung und das Paket wurde noch nicht übergeben). |
 | `En tránsito` | „Unterwegs“: Transport zwischen NACEX-Franchise-Agenturen und Umschlagplattformen. |
 | `En reparto` | „In Zustellung“: der Fahrer hat das Paket heute auf seiner Tour dabei. |
@@ -70,7 +70,7 @@ Wichtig für Abholer: `Solución de entrega concertada` und `Solución de entreg
 Zwischen dem spanischen oder portugiesischen Festland (sowie den Balearen) und Deutschland oder Österreich bewegen sich Pakete innerhalb des EU-Mehrwertsteuergebiets ohne Zollkontrolle. Anders sieht es in zwei Fällen aus:
 
 - **Lieferungen in die Schweiz:** Die Schweiz gehört nicht zur EU. Bei der Einfuhr fällt die Schweizer Mehrwertsteuer von **8,1 %** an (bzw. **2,6 %** ermäßigter Satz etwa für Bücher, Lebensmittel oder Medikamente). Laut Bundesamt für Zoll und Grenzsicherheit (BAZG) werden Zollabgaben und Steuerbeträge **bis 5 CHF** aus verwaltungsökonomischen Gründen nicht erhoben (das entspricht einer Bemessungsgrundlage von 62 CHF bei 8,1 % bzw. 193 CHF bei 2,6 %). Liegt der Betrag darüber, kommen Einfuhrabgaben und Verzollungskosten des Zustellers (etwa der [Schweizerischen Post](carrier:swiss-post) oder eines Kurierpartners) hinzu; mehr dazu im Leitfaden [Zoll und Einfuhrabgaben](guide:customs).
-- **Kanarische Inseln, Ceuta, Melilla, Andorra und Gibraltar:** Die Kanaren, Ceuta und Melilla gehören nicht zum EU-Mehrwertsteuergebiet. NACEX verlangt für diese Ziele sowie für Andorra und Gibraltar Handelsrechnungen bzw. eidesstattliche Erklärungen bei Privatsendungen und weist auf mögliche Verzögerungen durch die Zollabfertigung hin.
+- **Kanarische Inseln, Ceuta, Melilla, Andorra und Gibraltar:** Warensendungen an diese Ziele laufen über den Zoll. NACEX verlangt dafür Handelsrechnungen bzw. eidesstattliche Erklärungen bei Privatsendungen und weist auf mögliche Verzögerungen durch die Zollabfertigung hin.
 
 ## Paket verspätet, verschwunden oder beschädigt
 
@@ -78,7 +78,7 @@ Offizielle Reklamationen wickelt NACEX mit seinem Auftraggeber ab – beim Onlin
 
 - **Sendung hängt fest oder kommt nicht an:** Laut NACEX-FAQ kannst du dich per E-Mail an `atencion.cliente@nacex.com` oder telefonisch unter `900 100 000` melden; eine Mindestwartezeit nennt NACEX nicht. Hilfreiche Schritte findest du unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) sowie bei Status [`Entregado` ohne erhaltene Lieferung](guide:delivered-not-received).
 - **Verspätung:** Der Auftraggeber kann innerhalb von **31 Kalendertagen** (*31 días naturales*) reklamieren, wenn die vereinbarte Laufzeit ohne gerechtfertigten Grund überschritten wurde (für Black Friday und Weihnachten weist NACEX auf mögliche Beeinträchtigungen bei Privatzustellungen hin).
-- **Verlust, fehlender Inhalt oder Transportschaden:** Sichtbare Schäden oder Teilverluste sollten **direkt bei der Übergabe** vermerkt werden; Reklamationen wegen Verlust, fehlendem Inhalt oder Beschädigung müssen binnen **7 Kalendertagen** ab Lieferung mit Fotos und Inhaltsrechnung eingereicht werden – gemäß Artikel 60 des spanischen Landtransportgesetzes (*Ley 15/2009*).
+- **Verlust, fehlender Inhalt oder Transportschaden:** Sichtbare Schäden oder Teilverluste vermerkst du schriftlich **direkt bei der Übergabe**, nicht erkennbare binnen 7 Kalendertagen (Artikel 60 des spanischen Landtransportgesetzes, *Ley 15/2009*). Reklamationen wegen Verlust, fehlendem Inhalt oder Beschädigung nimmt NACEX binnen **7 Kalendertagen** an (bei fehlendem Inhalt oder Schaden ab Lieferung), mit Fotos und Inhaltsrechnung.
 
 Bei Verbraucherkäufen in der EU haftet laut *Your Europe* der Onlinehändler für die Ware bis zur physischen Übergabe (sofern du den Frachtführer nicht selbst unabhängig vom Shop beauftragt hast) und muss mangels anderer Vereinbarung binnen **30 Tagen** liefern. Melde Schäden oder Verluste daher immer sofort auch dem Verkäufer.
 
@@ -86,7 +86,7 @@ Bei Verbraucherkäufen in der EU haftet laut *Your Europe* der Onlinehändler f�
 
 Auf seinen spanischen Kontaktseiten nennt NACEX folgende Kanäle (ohne veröffentlichte Servicezeiten und ohne WhatsApp-Nummer):
 
-- **Telefon (Spanien und Andorra):** `900 100 000` (innerhalb Spaniens laut NACEX-FAQ und CNMC kostenlos aus Fest- und Mobilnetz; aus dem Ausland sind spanische `900`-Nummern oft gesperrt – nutze dann E-Mail oder Live-Chat).
+- **Telefon (Spanien und Andorra):** `900 100 000` (innerhalb Spaniens laut NACEX-FAQ und CNMC kostenlos aus Fest- und Mobilnetz; ob die Nummer aus dem Ausland erreichbar ist, sagt NACEX nicht).
 - **E-Mail:** `atencion.cliente@nacex.com` (sowie `shop@nacex.com` auf der Kontaktseite).
 - **Live-Chat:** auf der [NACEX-Kontaktseite](https://www.nacex.es/irContactenosContacto.do) (*„Chatee ahora con nuestros agentes“*).
 - **Lokale Agenturen:** Adressen und Öffnungszeiten im [NACEX-Punktefinder](https://www.nacex.es/irCerca.do).
@@ -114,7 +114,7 @@ Eine Änderung der Hausadresse muss vom zahlenden Auftraggeber (meist dem Shop) 
 
 ### Warum erkennt Peek meine 12-stellige NACEX-Nummer nicht?
 
-Weil NACEX den Schrägstrich nach den ersten vier Ziffern verlangt (`0100/00000005`). Ohne `/` lehnt NACEX die Abfrage ab und Peek prüft Paketdienste mit durchgehend 12 Ziffern – füge den `/` nach der vierten Ziffer ein.
+Weil das NACEX-Muster nach den ersten vier Ziffern einen Schrägstrich hat (`0100/00000005`). Ohne `/` prüft Peek Paketdienste mit durchgehend 12 Ziffern – füge den `/` nach der vierten Ziffer ein.
 
 :::sources
 - [NACEX: Startseite](https://www.nacex.es/irHome.do) – Suchfeld, Logista, Netz, Sprachen

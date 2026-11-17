@@ -2140,6 +2140,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "mrw",
+      "catalog": "mrw",
+      "slug": "mrw-sendungsverfolgung",
+      "title": "MRW Sendungsverfolgung: 12-stellige Nummer, Status & Kontakt",
+      "name": "MRW",
+      "color": "#19133b"
+    },
+    {
       "id": "ctt",
       "catalog": "ctt",
       "slug": "ctt-portugal-sendungsverfolgung",
@@ -2354,6 +2362,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket Sendungsverfolgung: Nummer, Status, Packstation",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "correos-spain",
+      "catalog": "correos-spain",
+      "slug": "correos-spanien-sendungsverfolgung",
+      "title": "Correos Sendungsverfolgung: Pakete aus Spanien verfolgen",
+      "name": "Correos",
+      "color": "#ffcd00"
     },
     {
       "id": "royal-mail",
@@ -2662,6 +2678,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#eedc00"
     },
     {
+      "id": "mrw",
+      "catalog": "mrw",
+      "slug": "mrw-suivi",
+      "title": "Suivi MRW\u00a0: numéro à 12 chiffres, statuts et contacts",
+      "name": "MRW",
+      "color": "#19133b"
+    },
+    {
       "id": "ctt",
       "catalog": "ctt",
       "slug": "suivi-ctt-portugal",
@@ -2916,6 +2940,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "La Poste / Colissimo\u00a0: suivi de colis, numéro et statuts",
       "name": "La Poste / Colissimo",
       "color": "#ffcf00"
+    },
+    {
+      "id": "correos-spain",
+      "catalog": "correos-spain",
+      "slug": "correos-espagne-suivi",
+      "title": "Suivi Correos\u00a0: suivre un colis d’Espagne vers la France",
+      "name": "Correos",
+      "color": "#ffcd00"
     },
     {
       "id": "royal-mail",
@@ -3384,6 +3416,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "correos-spain",
+      "catalog": "correos-spain",
+      "slug": "correos-spagna-tracciamento",
+      "title": "Correos tracciamento: seguire un pacco dalla Spagna",
+      "name": "Correos",
+      "color": "#ffcd00"
+    },
+    {
       "id": "royal-mail",
       "catalog": "royal-mail",
       "slug": "tracciamento-royal-mail",
@@ -3648,6 +3688,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "4PX seguimiento: estados, quién entrega y contacto",
       "name": "4PX",
       "color": "#005add"
+    },
+    {
+      "id": "swiss-post",
+      "catalog": "swiss-post",
+      "slug": "swiss-post-seguimiento",
+      "title": "Seguimiento Swiss Post: correo suizo y entrega en España",
+      "name": "Swiss Post",
+      "color": "#ffcc00"
     },
     {
       "id": "ctt-express",
@@ -4552,6 +4600,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005add"
     },
     {
+      "id": "swiss-post",
+      "catalog": "swiss-post",
+      "slug": "poczta-szwajcarska-sledzenie",
+      "title": "Swiss Post śledzenie przesyłek: paczki ze Szwajcarii",
+      "name": "Swiss Post",
+      "color": "#ffcc00"
+    },
+    {
       "id": "ctt-express",
       "catalog": "ctt-express",
       "slug": "sledzenie-ctt-express",
@@ -4726,6 +4782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket śledzenie przesyłki: numer, statusy i odbiór",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "correos-spain",
+      "catalog": "correos-spain",
+      "slug": "correos-hiszpania-sledzenie",
+      "title": "Correos śledzenie przesyłek: paczki z Hiszpanii do Polski",
+      "name": "Correos",
+      "color": "#ffcd00"
     },
     {
       "id": "royal-mail",

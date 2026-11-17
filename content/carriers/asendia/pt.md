@@ -6,7 +6,7 @@ published: 2026-11-17
 updated: 2026-11-17
 ---
 
-A Asendia — detida em partes iguais pelo grupo francês La Poste e pela Swiss Post, com escritórios em 17 países e envios para mais de 220 países e territórios — transporta compras online além-fronteiras para lojas eletrónicas. A empresa não faz a entrega final à tua porta: leva a encomenda do armazém do vendedor no estrangeiro até Portugal, onde a entrega passa para um operador postal ou transportadora local. Para acompanhar o percurso, introduz o código enviado pela loja no [seguimento global da Asendia](https://track.asendia.com/track) (ou no [A1 Tracking da Asendia USA](https://a1.asendiausa.com/tracking/) para envios dos Estados Unidos) ou cola-o na caixa acima.
+A Asendia — detida pelo grupo francês La Poste e pela Swiss Post, com escritórios em 17 países e envios para mais de 220 países e territórios — transporta compras online além-fronteiras para lojas eletrónicas. A empresa não faz a entrega final à tua porta: leva a encomenda do armazém do vendedor no estrangeiro até Portugal, onde a entrega passa para um operador postal ou transportadora local. Para acompanhar o percurso, introduz o código enviado pela loja no [seguimento global da Asendia](https://track.asendia.com/track) (ou no [A1 Tracking da Asendia USA](https://a1.asendiausa.com/tracking/) para envios dos Estados Unidos) ou cola-o na caixa acima.
 
 ## Número de seguimento da Asendia: formatos e onde o encontrar
 
@@ -37,7 +37,7 @@ O rastreador A1 da Asendia USA apresenta eventos detalhados apenas em inglês e 
 | `Check-in Asendia facility` / `Processed by Asendia` | Entrada e processamento num centro logístico da Asendia. |
 | `Sorted by Asendia` / `Dispatched by Asendia` | Triado e expedido para o trajeto internacional. |
 | `Customs` / `Customs released` | Em controlo aduaneiro ou já libertado pela alfândega. |
-| `In delivery` / `Out for Delivery` | Entregue ao transportador em Portugal ou em distribuição hoje. |
+| `In delivery` / `Out for Delivery` | Em distribuição para entrega. |
 | `Delivered` | Encomenda entregue. |
 | `Exception` | Incidência no transporte ou na entrega: lê a linha de detalhe ou verifica o site do transportador local. |
 
@@ -45,13 +45,13 @@ No portal europeu `track.asendia.com`, as grandes etapas surgem como `Informatio
 
 ## Quem entrega a Asendia em Portugal, tentativas e levantamento
 
-A Asendia não possui estafetas próprios nem cacifos em Portugal. Segundo a sua página de perguntas frequentes, a última milha é assegurada por uma combinação de operadores postais nacionais — como os [CTT](carrier:ctt) — e transportadoras comerciais (como [CTT Expresso](carrier:ctt-express) ou outros parceiros ibéricos), escolhidos conforme o serviço e-PAQ contratado pela loja. O nome e o eventual link do parceiro aparecem nos detalhes do rastreio da Asendia assim que a encomenda chega à fase local.
+A Asendia não possui estafetas próprios nem cacifos em Portugal. Segundo a sua página de perguntas frequentes, a última milha é assegurada por uma combinação de operadores postais nacionais, fornecedores alternativos de entrega e transportadoras comerciais. O nome e o eventual link do parceiro aparecem nos detalhes do rastreio da Asendia assim que a encomenda chega à fase local.
 
 De acordo com a Asendia, a maioria dos seus parceiros efetua duas ou três tentativas de entrega e deixa aviso físico ou eletrónico em cada passagem para reagendar ou levantar num posto de correio ou ponto próximo. Alguns serviços permitem reagendar online ou mudar a morada após uma primeira tentativa falhada; quando não é possível, a encomenda segue para o balcão postal ou ponto de recolha mais próximo. O prazo de permanência depende das regras do operador local (por exemplo, na [Swiss Post](carrier:swiss-post) é habitualmente de 15 dias em envios internacionais). Não sendo levantada a tempo, regressa à origem: vê [encomenda não levantada](guide:uncollected-parcel) e [entrega falhada](guide:missed-delivery).
 
 ## Alfândega, taxas de 2026 e como distinguir pagamentos reais de burlas
 
-As encomendas enviadas de outro país da União Europeia para Portugal não passam pela alfândega. Em contrapartida, **um pedido de pagamento é verdadeiro** quando a compra vem de fora da UE (Reino Unido, EUA, Suíça ou Ásia) sem encargos totalmente pré-pagos na loja:
+As encomendas enviadas de outro país da União Europeia para Portugal não passam pela alfândega. Em contrapartida, **um pedido de pagamento pode ser verdadeiro** quando a compra vem de fora da UE (Reino Unido, EUA, Suíça ou Ásia) sem encargos totalmente pré-pagos na loja:
 
 - **Regras em Portugal desde julho e novembro de 2026:** segundo os CTT, terminou a 1 de julho de 2026 a isenção aduaneira até 150 €, aplicando-se desde então um direito simplificado de **3 € + IVA por tipo de artigo/conteúdo** (código harmonizado) nas compras particulares extracomunitárias até 150 € (acima de 150 € mantém-se o regime geral *ad valorem*; ofertas entre particulares até 45 € continuam isentas). A partir de **1 de novembro de 2026**, acresce em todas as compras online fora da UE, independentemente do valor, a **Taxa de Manuseamento Aduaneiro de 2 € + IVA por tipo de artigo/conteúdo** (não reembolsável mesmo em caso de devolução), além do IVA de importação e, quando os encargos não foram pagos no *checkout*, do serviço de desalfandegamento dos CTT (**7 € + IVA** até 150 € ou **14 €** entre 150 € e 1 000 €). Os CTT alertam ainda que, se a loja tiver cobrado apenas o IVA na compra sem os direitos devidos, esses direitos não podem ser pedidos ao destinatário em Portugal e o objeto é devolvido.
 - **Como chegam os avisos legítimos segundo a Asendia e os CTT:** nas suas páginas sobre despacho aduaneiro, a Asendia explica que, enquanto na modalidade **DDP/DTP** a loja paga tudo antecipadamente, na modalidade **DAP/DDU** o comprador pode receber um pedido separado através de um **portal seguro da Asendia** (que pode também pedir verificação de identificação e retém o pacote normalmente até 30 dias antes de o devolver se não for pago) ou diretamente do despachante local — normalmente o operador postal ou transportadora que entrega. Ao mesmo tempo, a página corporativa de prevenção de fraude da Asendia (focada sobretudo em burlas de faturas a empresas) indica que a Asendia só envia e-mails a partir de `@asendia.com` (nunca de imitações como `asnedia.com`, `ascendia.com` ou `axendia.com`) e nunca envia links URL de pagamento nem pede palavras-passe por e-mail.
@@ -73,7 +73,7 @@ O [Peek](/) identifica de imediato códigos `ASE`, `AS…US` e `AHOY`, e consult
 
 O Peek consulta primeiro o A1 Tracking da Asendia USA e, se este não responder, abre `track.asendia.com` num navegador. Esse portal europeu só mostra o histórico de eventos quando preenches o «Código postal de entrega» opcional ao adicionar a encomenda (o nome do «Destinatário», quando devolvido, só aparece a quem adicionou o pacote e nunca em links partilhados); sem código postal, o Peek lê ali o estado atual e obtém o histórico através de serviços universais de rastreio quando disponível.
 
-Quando o A1 responde, vês o estado, até 100 eventos em inglês no mapa (cidade, região e país), o peso, o país de destino e o parceiro de entrega com o respetivo código — sem data prevista de entrega e omitindo moradas, códigos postais, referências de encomenda e eventos sem fuso horário. Se o parceiro final for suportado pelo Peek e identificado pelo link ou nome (como [La Poste / Colissimo](carrier:la-poste), [Swiss Post](carrier:swiss-post) ou USPS), a página passa a mostrar «Entrega: …» com seguimento nesse operador (nem todas as encomendas mudam automaticamente).
+Quando o A1 responde, vês o estado, os eventos em inglês no mapa (cidade, região e país), o peso, o país de destino e o parceiro de entrega com o respetivo código — sem data prevista de entrega e omitindo moradas, códigos postais, referências de encomenda e eventos sem fuso horário. Se o parceiro final for suportado pelo Peek e identificado pelo link ou nome (como [La Poste / Colissimo](carrier:la-poste), [Swiss Post](carrier:swiss-post) ou USPS), a página passa a mostrar «Entrega: …» com seguimento nesse operador (nem todas as encomendas mudam automaticamente).
 
 O Peek verifica **até a cada 10 minutos** — ou **até a cada 2 minutos** desde as 6h locais no dia em que sai para entrega (**até a cada 5 minutos** enquanto lê `track.asendia.com`, **até a cada 15 minutos** via serviços universais, e **até a cada 30 minutos** quando o pacote passa para a USPS) — com notificações «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega». Ao fim de dois dias sem novidades (ou 12 horas em «Etiqueta criada» ou «Aceite pela transportadora»), passa a verificar de hora a hora. O Peek não pode contactar a Asendia nem a loja por ti.
 
@@ -85,7 +85,7 @@ Sim. A Asendia é uma empresa internacional de comércio eletrónico e correio d
 
 ### Quem entrega as encomendas da Asendia em Portugal?
 
-A Asendia faz apenas o transporte internacional até Portugal e entrega a última milha a operadores postais ou transportadoras locais (como os [CTT](carrier:ctt) ou parceiros expresso). O nome do operador responsável aparece no rastreio quando a encomenda chega ao país.
+A Asendia faz apenas o transporte internacional até Portugal e entrega a última milha a operadores postais ou transportadoras locais. O nome do operador responsável aparece no rastreio quando a encomenda chega ao país.
 
 ### Quanto tempo demora uma encomenda da Asendia a chegar?
 

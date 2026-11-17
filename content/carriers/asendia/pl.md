@@ -38,7 +38,7 @@ System A1 firmy Asendia USA podaje szczegółowe skany wyłącznie po angielsku 
 | `Sorted by Asendia` / `Departed from Asendia` | Posortowana i wysłana w trasę międzynarodową (`Dispatched by Asendia`). |
 | `Arrived at Destination` | Dotarła do Polski (lub innego kraju docelowego). |
 | `Customs` / `Customs released` | Trwa odprawa celna albo paczka została już zwolniona przez urząd celny. |
-| `In delivery` / `Out for Delivery` | Przekazana lokalnemu przewoźnikowi w Polsce lub wydana dziś kurierowi do doręczenia. |
+| `In delivery` / `Out for Delivery` | Wydana do doręczenia. |
 | `Delivered` | Doręczona. |
 | `Exception` | Utrudnienie w transporcie, odprawie lub doręczeniu — sprawdź szczegółowy opis skanu oraz stronę lokalnego przewoźnika. |
 
@@ -46,13 +46,13 @@ Dwie rzeczy bywają mylące, choć są normalne: paczka może pojawić się w ni
 
 ## Kto doręcza paczki Asendia w Polsce, awizo i punkty odbioru
 
-Asendia nie wymienia na swoich stronach jednego stałego partnera na Polskę: wyjaśnia, że ostatnią milę realizuje kombinacja narodowych operatorów pocztowych — w Polsce jest to zazwyczaj [Poczta Polska](carrier:poczta-polska) — oraz alternatywnych sieci kurierskich i punktów odbioru (zależnie od wybranej przez sklep usługi e-PAQ, np. [DPD Polska](carrier:dpd-pl), [DHL](carrier:dhl) lub [InPost](carrier:inpost)). Nazwę przewoźnika oraz link do jego śledzenia zobaczysz w szczegółach przesyłki po jej dotarciu do kraju.
+Asendia nie wymienia na swoich stronach jednego stałego partnera na Polskę: wyjaśnia, że ostatnią milę realizuje kombinacja narodowych operatorów pocztowych, alternatywnych dostawców i komercyjnych firm kurierskich. Nazwę przewoźnika oraz link do jego śledzenia zobaczysz w szczegółach przesyłki po jej dotarciu do kraju.
 
-Według Asendii większość jej partnerów podejmuje dwie lub trzy próby doręczenia, zostawiając za każdym razem papierowe lub elektroniczne powiadomienie z instrukcją ponownego umówienia dostawy albo odbioru w pobliskiej placówce pocztowej lub punkcie. Niektóre warianty e-PAQ pozwalają zmienić termin lub adres po pierwszej nieudanej próbie; czas oczekiwania paczki w punkcie zależy od regulaminu polskiego doręczyciela, po czym nieodebrana przesyłka wraca do nadawcy. Zobacz też [nieudane doręczenie](guide:missed-delivery) oraz [nieodebrana paczka](guide:uncollected-parcel).
+Według Asendii większość jej partnerów podejmuje dwie lub trzy próby doręczenia, zostawiając za każdym razem papierowe lub elektroniczne powiadomienie z instrukcją ponownego umówienia dostawy albo odbioru w pobliskiej placówce pocztowej lub punkcie. Niektóre usługi Asendii pozwalają zmienić termin, a niektórzy partnerzy po pierwszej nieudanej próbie proponują zmianę adresu; czas oczekiwania paczki w punkcie zależy od regulaminu polskiego doręczyciela, po czym nieodebrana przesyłka wraca do nadawcy. Zobacz też [nieudane doręczenie](guide:missed-delivery) oraz [nieodebrana paczka](guide:uncollected-parcel).
 
 ## Cło i VAT w Polsce (zmiany 2026) a fałszywe wezwania do zapłaty
 
-Przesyłki nadawane do Polski z innego kraju Unii Europejskiej nie przechodzą odprawy celnej. **Żądanie zapłaty jest natomiast prawdziwe**, gdy zamawiasz towar spoza UE (np. z Wielkiej Brytanii, USA, Chin lub Szwajcarii), a należności importowe nie zostały w pełni opłacone w sklepie:
+Przesyłki nadawane do Polski z innego kraju Unii Europejskiej nie przechodzą odprawy celnej. **Żądanie zapłaty może być natomiast prawdziwe**, gdy zamawiasz towar spoza UE (np. z Wielkiej Brytanii, USA, Chin lub Szwajcarii), a należności importowe nie zostały w pełni opłacone w sklepie:
 
 - **Nowe opłaty w Polsce od lipca i listopada 2026 r.:** zgodnie z komunikatami Poczty Polskiej od **1 lipca 2026 r.** zniesiono zwolnienie z cła dla zakupów spoza UE do 150 EUR — naliczane jest zryczałtowane cło **3 EUR za każdy rodzaj produktu** (kategorię towaru, przeliczane na złote i przekazywane Krajowej Administracji Skarbowej; prezenty między osobami prywatnymi do 45 EUR pozostają zwolnione). Od **1 listopada 2026 r.** dochodzi unijna **opłata manipulacyjna w wysokości 2 EUR za każdą pozycję towarową** przy zakupach na odległość spoza UE, a oprócz tego podatek VAT (jeśli sklep nie pobrał go w procedurze IOSS) oraz opłata przewoźnika za zgłoszenie celne — pobierane przy doręczeniu lub przed odbiorem.
 - **Jak wyglądają oficjalne powiadomienia według Asendii:** na stronach o odprawie celnej Asendia wyjaśnia, że o ile w modelu **DDP/DTP** koszty pokrywa z góry sprzedawca, o tyle w modelu **DAP/DDU** kupujący otrzymuje osobne wezwanie do opłacenia należności przez **bezpieczny portal Asendia** (który może też poprosić o weryfikację tożsamości i wstrzymuje paczkę zwykle do **30 dni** przed zwrotem) albo od **lokalnego agenta celnego** — czyli najczęściej operatora pocztowego lub kuriera doręczającego paczkę — przed wydaniem lub przy odbiorze. Równocześnie polska strona `asendia.pl/ochrona-przed-oszustwami` (skierowana głównie do firm ostrzeganych przed fałszywymi fakturami) podkreśla, że Asendia pisze wyłącznie z domeny `@asendia.com` (nigdy z podróbek takich jak `asnedia.com`, `ascendia.com` czy `axendia.com`) i nigdy nie wysyła e-mailem linków URL do płatności ani nie prosi o hasła.
@@ -74,7 +74,7 @@ Według stanu na listopad 2026 r. polska witryna [asendia.pl](https://www.asendi
 
 Peek najpierw pyta amerykański system A1, a gdy ten nie odpowie, otwiera w przeglądarce `track.asendia.com`. Ten europejski portal ujawnia historię zdarzeń tylko wtedy, gdy przy dodawaniu paczki wpiszesz opcjonalny „Kod pocztowy odbiorcy” (zwrócona nazwa „Odbiorca” jest widoczna wyłącznie dla osoby, która dodała przesyłkę, i znika w udostępnianych linkach); bez kodu pocztowego Peek odczytuje tam bieżący status, a historię pobiera z uniwersalnych serwisów śledzenia, o ile ją posiadają.
 
-Gdy odpowiada A1, widzisz status, do 100 angielskich skanów na mapie (miasto, region i kraj), wagę, kraj docelowy oraz przewoźnika doręczającego wraz z jego numerem — bez przewidywanej daty dostawy oraz z pominięciem adresów ulic, kodów pocztowych, referencji zamówienia i skanów bez strefy czasowej. Jeśli Peek obsługuje rozpoznanego partnera końcowego (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) lub USPS), karta paczki pokazuje „Doręcza: …” i może przejąć dalsze śledzenie (nie dla każdej paczki; po przejściu na USPS odpytywanie odbywa się do co 30 minut).
+Gdy odpowiada A1, widzisz status, angielskie skany na mapie (miasto, region i kraj), wagę, kraj docelowy oraz przewoźnika doręczającego wraz z jego numerem — bez przewidywanej daty dostawy oraz z pominięciem adresów ulic, kodów pocztowych, referencji zamówienia i skanów bez strefy czasowej. Jeśli Peek obsługuje rozpoznanego partnera końcowego (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) lub USPS), karta paczki pokazuje „Doręcza: …” i może przejąć dalsze śledzenie (nie dla każdej paczki; po przejściu na USPS odpytywanie odbywa się do co 30 minut).
 
 Peek sprawdza zmiany **do co 10 minut** — a w dniu wydania do doręczenia od 6:00 czasu lokalnego **do co 2 minuty** (**do co 5 minut** podczas odczytu `track.asendia.com` oraz **do co 15 minut** przez serwisy uniwersalne) — z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach bez ruchu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Peek nie kontaktuje się w Twoim imieniu z Asendią ani ze sklepem.
 
@@ -82,7 +82,7 @@ Peek sprawdza zmiany **do co 10 minut** — a w dniu wydania do doręczenia od 6
 
 ### Kto doręcza paczki Asendia w Polsce?
 
-Asendia odpowiada za przewóz międzynarodowy do Polski, a doręczenie na miejscu zleca lokalnemu operatorowi pocztowemu (najczęściej jest to [Poczta Polska](carrier:poczta-polska)) lub firmie kurierskiej wybranej dla danej usługi e-PAQ. Nazwa doręczyciela pojawia się w śledzeniu po dotarciu przesyłki do kraju.
+Asendia odpowiada za przewóz międzynarodowy do Polski, a doręczenie na miejscu zleca lokalnemu operatorowi pocztowemu lub firmie kurierskiej. Nazwa doręczyciela pojawia się w śledzeniu po dotarciu przesyłki do kraju.
 
 ### Czy Asendia to prawdziwa i bezpieczna firma?
 

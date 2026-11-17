@@ -10,7 +10,7 @@ Landmark Global obsługuje międzynarodowe zamówienia dla sklepów internetowyc
 
 ## Numer śledzenia Landmark Global (LTN): formaty i gdzie go znaleźć
 
-W polskiej sekcji pomocy Landmark nazywa swój kod **LTN** (*Landmark Tracking Number*) — unikalnym identyfikatorem tworzonym dla każdej paczki, aby monitorować całą jej drogę — i wyjaśnia, że zazwyczaj otrzymujesz go od sprzedawcy w potwierdzeniu zamówienia. Jeśli nie widzisz wiadomości, sprawdź poradnik [jak znaleźć numer przesyłki](guide:find-tracking-number).
+W polskiej sekcji pomocy Landmark nazywa swój kod **LTN** (*Landmark Tracking Number*) — unikalnym identyfikatorem tworzonym dla każdej paczki, aby monitorować całą jej drogę — i wyjaśnia, że zazwyczaj otrzymujesz go od sprzedawcy. Jeśli nie widzisz wiadomości, sprawdź poradnik [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
 Formaty przyjmowane przez wyszukiwarkę Landmark (przykłady ze zmyślonymi cyframi):
 
@@ -18,9 +18,9 @@ Formaty przyjmowane przez wyszukiwarkę Landmark (przykłady ze zmyślonymi cyfr
 | --- | --- |
 | `LTN48291057` | `LTN` i 8 cyfr: własny numer śledzenia Landmark Global. |
 | `LTN482910573` | `LTN` i 9 cyfr: własny numer śledzenia Landmark Global. |
-| `LTN482910573N1` | `LTN`, 8 lub 9 cyfr oraz końcówka `N1`: wariant Landmark (portal wyświetla go bez `N1`). |
+| `LTN482910573N1` | `LTN`, 8 lub 9 cyfr oraz końcówka `N1`: wariant numeru Landmark. |
 | `ORD4829105738` | Numer zamówienia lub paczki nadany przez sklep, również rozpoznawany na stronie Landmark. |
-| Numer innego przewoźnika | Własny numer partnera ostatniej mili (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost), [DPD Polska](carrier:dpd-pl), [bpost](carrier:bpost) lub [UPS](carrier:ups)). |
+| Numer innego przewoźnika | Własny numer partnera ostatniej mili (np. [bpost](carrier:bpost) w Belgii lub [UPS](carrier:ups) w USA). |
 
 Na stronie śledzenia Landmark możesz wpisać jednocześnie do 25 numerów oddzielonych przecinkami. Gdy zostanie wyznaczony polski lub europejski doręczyciel, portal podaje jego nazwę, lokalny numer nadania i odnośnik (w wersji angielskiej pod `Delivery Partner`) — ta sama paczka ma więc dwa numery. Kod `LTN` z 7 albo 10 cyframi bądź z inną końcówką niż `N1` zawiera literówkę: zobacz [formaty numerów śledzenia](guide:tracking-number-formats).
 
@@ -45,16 +45,16 @@ Witryna Landmark ma polską wersję językową, natomiast Peek odczytuje jej str
 
 ## Kto doręcza paczki Landmark Global w Polsce, awizo i zmiana adresu
 
-W większości państw Landmark nie doręcza przesyłek własnymi autami: współpracuje z operatorami pocztowymi i lokalnymi sieciami kurierskimi (w Belgii wskazuje [bpost](carrier:bpost), a w USA [UPS](carrier:ups) i DHL eCommerce; dla Polski nie podaje na stronie jednego stałego przewoźnika). O tym, kto doręczy Twoją paczkę — np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost), [DPD Polska](carrier:dpd-pl) czy [DHL](carrier:dhl) — decyduje wpis partnera widoczny w szczegółach Twojej przesyłki na stronie Landmark.
+W większości państw Landmark nie doręcza przesyłek własnymi autami: współpracuje z operatorami pocztowymi i lokalnymi sieciami kurierskimi (w Belgii wskazuje [bpost](carrier:bpost), a w USA [UPS](carrier:ups) i DHL eCommerce; dla Polski nie podaje na stronie jednego stałego przewoźnika). O tym, kto doręczy Twoją paczkę, decyduje wpis partnera widoczny w szczegółach Twojej przesyłki na stronie Landmark.
 
 Powiadomienia SMS/e-mail, punkty odbioru, termin odbioru i ponowna próba doręczenia podlegają zasadom tego polskiego przewoźnika. W razie nieobecności polska strona pomocy Landmark radzi postępować zgodnie z instrukcjami kuriera albo skontaktować się z obsługą klienta w celu zmiany terminu lub odbioru, zastrzegając, że nie wszystkie firmy kurierskie oferują ponowną dostawę lub punkt odbioru. Zmiana adresu dostawy po nadaniu nie jest już możliwa, gdy przesyłka została przetworzona i otrzymała etykietę. Zobacz też [nieudane doręczenie](guide:missed-delivery) oraz [nieodebrana paczka](guide:uncollected-parcel).
 
 ## Cło i VAT w Polsce (2026) oraz jak odróżnić prawdziwą dopłatę od oszustwa
 
-Zamówienia wysyłane do Polski z innego państwa Unii Europejskiej nie przechodzą odprawy celnej. **Wezwanie do zapłaty jest natomiast prawdziwe**, gdy paczka jedzie spoza UE (np. z Wielkiej Brytanii, USA, Kanady, Szwajcarii lub Azji), a sklep nie rozliczył wszystkich należności przy zakupie:
+Zamówienia wysyłane do Polski z innego państwa Unii Europejskiej nie przechodzą odprawy celnej. **Wezwanie do zapłaty może być natomiast prawdziwe**, gdy paczka jedzie spoza UE (np. z Wielkiej Brytanii, USA, Kanady, Szwajcarii lub Azji), a sklep nie rozliczył wszystkich należności przy zakupie:
 
 - **Stawki obowiązujące w Polsce od lipca i listopada 2026 r.:** według komunikatów Poczty Polskiej od **1 lipca 2026 r.** dla przesyłek spoza UE o wartości do 150 EUR zniesiono zwolnienie celne i obowiązuje ryczałtowe cło **3 EUR za każdy rodzaj produktu** (kategorię towaru, przeliczane na złote dla Krajowej Administracji Skarbowej; prezenty między osobami prywatnymi do 45 EUR pozostają zwolnione). Od **1 listopada 2026 r.** do zakupów internetowych spoza UE doliczana jest unijna **opłata manipulacyjna 2 EUR za każdą pozycję towarową** niezależnie od wartości zamówienia, a ponadto podatek VAT (jeśli nie został pobrany w procedurze IOSS) oraz opłata przewoźnika za zgłoszenie celne — płatne przed odbiorem lub przy doręczeniu.
-- **Jak bezpiecznie zweryfikować i opłacić należność:** przy przesyłkach z nieopłaconym cłem (np. oznaczonych w skanach trasą `DDU`) oficjalny portal `track.landmarkglobal.com` może wyświetlić komunikat płatniczy albo pobór przejmuje polski operator doręczający. Nigdy nie klikaj linków z niespodziewanych SMS-ów o dopłacie — [Poczta Polska](carrier:poczta-polska) ostrzega przed fałszywymi kampaniami SMS podszywającymi się pod Pocztex z podrobionymi domenami. Zawsze otwórz przeglądarkę ręcznie, sprawdź status na `track.landmarkglobal.com/?lang=pl` lub na `www.poczta-polska.pl/sledzenie-przesylek` i ureguluj należność wyłącznie przy odbiorze/w placówce albo w oficjalnym serwisie wskazanego przewoźnika (w razie wątpliwości potwierdź model rozliczenia u sprzedawcy). Więcej w poradnikach [paczka na cle](guide:customs) i [fałszywe SMS-y o dostawie](guide:delivery-scam-texts).
+- **Jak bezpiecznie zweryfikować i opłacić należność:** według Poczty Polskiej należności nieopłacone w sklepie mogą być pobierane przed doręczeniem przesyłki lub przy jej odbiorze. Nigdy nie klikaj linków z niespodziewanych SMS-ów o dopłacie — [Poczta Polska](carrier:poczta-polska) ostrzega przed fałszywymi kampaniami SMS podszywającymi się pod Pocztex z podrobionymi domenami. Zawsze otwórz przeglądarkę ręcznie, sprawdź status na `track.landmarkglobal.com/?lang=pl` lub na `www.poczta-polska.pl/sledzenie-przesylek` i ureguluj należność wyłącznie przy odbiorze/w placówce albo w oficjalnym serwisie wskazanego przewoźnika (w razie wątpliwości potwierdź model rozliczenia u sprzedawcy). Więcej w poradnikach [paczka na cle](guide:customs) i [fałszywe SMS-y o dostawie](guide:delivery-scam-texts).
 
 ## Paczka stoi w miejscu, zaginęła, przyszła uszkodzona lub wróciła
 
@@ -74,9 +74,9 @@ Ogólna strona kontaktowa Landmark (`landmarkglobal.com/eu/pl/contact/`) służy
 
 ## Śledzenie Landmark Global w Peek
 
-[Peek](/) natychmiast rozpoznaje numery `LTN` (z końcówką `N1` lub bez niej) oraz linki z `track.landmarkglobal.com` i `landmarkglobal.com` zawierające `search=` lub `trck=`. Jeśli wpisujesz sam numer zamówienia albo paczki ze sklepu (bez spacji, kropek i myślników — wyszukiwarka Landmark nie odnajduje referencji zapisanych ze znakami przestankowymi), kliknij „Zmień” i wybierz Landmark Global.
+[Peek](/) natychmiast rozpoznaje numery `LTN` (z końcówką `N1` lub bez niej) oraz linki z `track.landmarkglobal.com` i `landmarkglobal.com` zawierające `search=` lub `trck=`. Jeśli wpisujesz sam numer zamówienia albo paczki ze sklepu, kliknij „Zmień” i wybierz Landmark Global.
 
-Peek pobiera dane z angielskiej strony Landmark: widzisz aktualny status, do 100 angielskich skanów na mapie (doręczenia Landmark wyświetlają się jako „Dostarczona”), kraj przeznaczenia, główny numer `LTN` oraz przewoźnika doręczającego wraz z jego numerem. Brak przewidywanej daty dostawy, a miejscowość odbiorcy, referencje zamówienia i przyciski płatności są pomijane. Ponieważ Landmark zapisuje czasy zdarzeń w amerykańskiej strefie centralnej (`CST`/`CDT`), Peek automatycznie przelicza każdą godzinę na strefę czasową Twojego urządzenia.
+Peek pobiera dane z angielskiej strony Landmark: widzisz aktualny status, angielskie skany na mapie (doręczenia Landmark wyświetlają się jako „Dostarczona”), kraj przeznaczenia oraz przewoźnika doręczającego wraz z jego numerem. Brak przewidywanej daty dostawy, a referencje zamówienia i paczki są pomijane.
 
 Gdy partner końcowy jest bezpośrednio obsługiwany przez Peek (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost), [DPD Polska](carrier:dpd-pl), [bpost](carrier:bpost), [Evri](carrier:evri) lub [UPS](carrier:ups)), karta paczki może przełączyć się na „Doręcza: …” po pojawieniu się nowszych zdarzeń u tego przewoźnika (nie dzieje się tak dla każdej przesyłki). Peek odpytuje o zmiany **do co 10 minut** — a w dniu doręczenia od 6:00 **do co 2 minuty** (**do co 15 minut** przez serwisy uniwersalne) — z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach ciszy (lub 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika”) sprawdza status raz na godzinę. Peek nie kontaktuje się z Landmark ani ze sklepem w Twoim imieniu.
 
@@ -111,5 +111,5 @@ Według polskiej strony pomocy Landmark czas dostawy zależy od wybranej przez s
 - [UKE: Reklamacje usług pocztowych](https://cik.uke.gov.pl/uslugi-pocztowe/dochodzenie-roszczen/reklamacje/) – 12 miesięcy na reklamację i 30 dni na odpowiedź
 - [UKE: Reklamacje i odszkodowania FAQ](https://cik.uke.gov.pl/uslugi-pocztowe/pytania-i-odpowiedzi/reklamacje-i-odszkodowania-faq/2.html) – 7 dni na zgłoszenie niewidocznych uszkodzeń
 - [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – odpowiedzialność sprzedawcy i 30-dniowy termin dostawy
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – numery LTN, referencje bez znaków przestankowych, czasy US Central, zwroty, prywatność i interwały sprawdzania w Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – numery LTN, zwroty, prywatność i interwały sprawdzania w Peek
 :::

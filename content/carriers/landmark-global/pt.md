@@ -10,7 +10,7 @@ A Landmark Global transporta compras online além-fronteiras para lojas eletrón
 
 ## Número de seguimento Landmark Global (LTN): formatos e onde encontrá-lo
 
-A Landmark chama ao seu código **LTN** (*Landmark Tracking Number*) — um identificador único criado para acompanhar toda a viagem de cada pacote — e indica que o recebes normalmente no e-mail de confirmação da loja. Não encontraste a mensagem? Vê [como encontrar o número de seguimento](guide:find-tracking-number).
+A Landmark chama ao seu código **LTN** (*Landmark Tracking Number*) — um identificador único criado para acompanhar toda a viagem de cada pacote — e indica que o recebes normalmente da loja. Não encontraste a mensagem? Vê [como encontrar o número de seguimento](guide:find-tracking-number).
 
 Exemplos inventados dos formatos aceites pelo seguimento da Landmark:
 
@@ -18,15 +18,15 @@ Exemplos inventados dos formatos aceites pelo seguimento da Landmark:
 | --- | --- |
 | `LTN48291057` | `LTN` seguido de 8 algarismos: código próprio da Landmark Global. |
 | `LTN482910573` | `LTN` seguido de 9 algarismos: código próprio da Landmark Global. |
-| `LTN482910573N1` | `LTN`, 8 ou 9 algarismos e o sufixo `N1`: variante própria da Landmark (o portal mostra-o sem `N1`). |
+| `LTN482910573N1` | `LTN`, 8 ou 9 algarismos e o sufixo `N1`: variante própria da Landmark. |
 | `ORD4829105738` | Referência de encomenda ou de volume da loja, também aceite na pesquisa da Landmark. |
-| Código de outra transportadora | O número próprio do parceiro de entrega final (como [CTT](carrier:ctt), [bpost](carrier:bpost), [Evri](carrier:evri) ou [UPS](carrier:ups)). |
+| Código de outra transportadora | O número próprio do parceiro de entrega final (como a [bpost](carrier:bpost) na Bélgica ou a [UPS](carrier:ups) nos EUA). |
 
 No portal da Landmark podes pesquisar até 25 números de uma só vez, separados por vírgulas. Assim que o transportador português (ou europeu) é atribuído, a secção `Delivery Partner` indica o nome dessa empresa, o número local do pacote e um link direto — pelo que a mesma encomenda fica com dois códigos. Um `LTN` com 7 ou 10 algarismos, ou com outra terminação diferente de `N1`, não existe: revê o e-mail da loja e consulta [formatos de números de seguimento](guide:tracking-number-formats).
 
 ## Estados do rastreio Landmark Global: o que significam
 
-Tanto o Peek como o portal da Landmark quando aberto a partir de Portugal apresentam os estados em inglês (e os registos do parceiro final surgem nas palavras desse operador). Ordem habitual:
+O Peek, tal como a versão inglesa do portal da Landmark, apresenta os estados em inglês (e os registos do parceiro final surgem nas palavras desse operador). Ordem habitual:
 
 | O que mostra a Landmark | O que significa para ti |
 | --- | --- |
@@ -45,16 +45,16 @@ Tanto o Peek como o portal da Landmark quando aberto a partir de Portugal aprese
 
 ## Quem entrega em Portugal, ausência em casa e alteração de morada
 
-Na maioria dos países, a Landmark não entrega por meios próprios: recorre a operadores postais e parceiros logísticos locais (na Bélgica nomeia a [bpost](carrier:bpost) e nos EUA a [UPS](carrier:ups) e a DHL eCommerce; para Portugal não publica um parceiro fixo). O operador que conta para a tua encomenda — por exemplo [CTT](carrier:ctt), [CTT Expresso](carrier:ctt-express) ou outra transportadora ibérica — é o que aparece em `Delivery Partner` no seguimento da Landmark.
+Na maioria dos países, a Landmark não entrega por meios próprios: recorre a operadores postais e parceiros logísticos locais (na Bélgica nomeia a [bpost](carrier:bpost) e nos EUA a [UPS](carrier:ups) e a DHL eCommerce; para Portugal não publica um parceiro fixo). O operador que conta para a tua encomenda é o que aparece em `Delivery Partner` no seguimento da Landmark.
 
 Avisos de passagem, pontos de levantamento, prazos de guarda e nova tentativa seguem as regras desse parceiro local. Se não estavas em casa, a Landmark aconselha seguir as instruções deixadas pelo distribuidor ou contactar o apoio ao cliente para reagendar ou combinar recolha, avisando que nem todos os serviços de envio incluem nova entrega ou ponto de recolha. Quanto a mudar a morada depois do envio, a FAQ europeia da Landmark esclarece que deixa de ser possível assim que a encomenda foi processada e tem etiqueta gerada. Vê também [entrega falhada](guide:missed-delivery) e [encomenda não levantada](guide:uncollected-parcel).
 
 ## Alfândega, taxas de 2026 e como pagar sem cair em burlas
 
-Compras expedidas de outro Estado-Membro da UE para Portugal não têm controlo aduaneiro. Pelo contrário, **um pedido de pagamento é real** quando a encomenda vem de fora da UE (Reino Unido, EUA, Canadá, Suíça ou Ásia) sem impostos e direitos pré-pagos na compra:
+Compras expedidas de outro Estado-Membro da UE para Portugal não têm controlo aduaneiro. Pelo contrário, **um pedido de pagamento pode ser real** quando a encomenda vem de fora da UE (Reino Unido, EUA, Canadá, Suíça ou Ásia) sem impostos e direitos pré-pagos na compra:
 
 - **O que se paga em Portugal desde julho e novembro de 2026:** segundo os CTT, desde **1 de julho de 2026** terminou a isenção de direitos aduaneiros até 150 €, aplicando-se um direito simplificado de **3 € + IVA por tipo de artigo/conteúdo** (código harmonizado) nas compras particulares fora da UE até 150 € (ofertas entre particulares até 45 € continuam isentas; acima de 150 € aplicam-se direitos variáveis *ad valorem*). Desde **1 de novembro de 2026**, soma-se em todas as compras online extracomunitárias, qualquer que seja o valor, a **Taxa de Manuseamento Aduaneiro de 2 € + IVA por tipo de artigo/conteúdo** (não reembolsável), além do IVA de importação e, quando não houve pré-pagamento na loja, da taxa de apresentação à alfândega dos CTT (**7 € + IVA** até 150 € ou **14 €** entre 150 € e 1 000 €). Atenção: os CTT avisam que, se a loja tiver cobrado apenas o IVA na compra sem os direitos aduaneiros devidos, não é possível cobrar esses direitos ao destinatário em Portugal e o envio é devolvido.
-- **Por onde chegam os avisos legítimos e onde pagar em segurança:** num envio com direitos pagos no destino (como indica a rota `DDU` em certos registos da Landmark), o próprio portal oficial `track.landmarkglobal.com` pode apresentar uma indicação de pagamento aduaneiro ou o desalfandegamento passa para o operador local em Portugal. Nunca cliques em links de pagamento enviados por SMS ou e-mail inesperado: os [CTT](carrier:ctt) sublinham que **não pedem pagamentos por e-mail nem por SMS** e que todo o processo decorre exclusivamente no **Portal de Desalfandegamento dos CTT** em `www.ctt.pt`, escrevendo tu próprio o endereço no navegador e consultando o objeto (ou confirmando junto do vendedor). Mais informação em [encomendas na alfândega](guide:customs) e [SMS falsos de entregas](guide:delivery-scam-texts).
+- **Por onde chegam os avisos legítimos e onde pagar em segurança:** segundo os CTT, o que não foi pago no *checkout* fica sujeito a pagamento à chegada a Portugal. Nunca cliques em links de pagamento enviados por SMS ou e-mail inesperado: os [CTT](carrier:ctt) sublinham que **não pedem pagamentos por e-mail nem por SMS** e que todo o processo decorre exclusivamente no **Portal de Desalfandegamento dos CTT** em `www.ctt.pt`, escrevendo tu próprio o endereço no navegador e consultando o objeto (ou confirmando junto do vendedor). Mais informação em [encomendas na alfândega](guide:customs) e [SMS falsos de entregas](guide:delivery-scam-texts).
 
 ## Encomenda parada, atrasada, danificada, perdida ou devolvida
 
@@ -74,9 +74,9 @@ O formulário geral de contacto comercial da Landmark destina-se apenas a empres
 
 ## Seguir a Landmark Global com o Peek
 
-O [Peek](/) reconhece imediatamente qualquer código `LTN` (com ou sem `N1`) e também aceita links de `track.landmarkglobal.com` ou `landmarkglobal.com` com `search=` ou `trck=`. Se introduzires apenas a referência de encomenda ou de volume da loja (sem espaços, pontos ou hífenes, pois a pesquisa da Landmark falha em referências com pontuação), carrega em «Alterar» e escolhe Landmark Global.
+O [Peek](/) reconhece imediatamente qualquer código `LTN` (com ou sem `N1`) e também aceita links de `track.landmarkglobal.com` ou `landmarkglobal.com` com `search=` ou `trck=`. Se introduzires apenas a referência de encomenda ou de volume da loja, carrega em «Alterar» e escolhe Landmark Global.
 
-O Peek lê a página inglesa da Landmark: mostra o estado atual, até 100 eventos em inglês no mapa (traduzindo as entregas da Landmark para «Entregue»), o país de destino, o número canónico `LTN` e o parceiro de entrega com o respetivo código. Não existe data prevista de entrega, e o Peek descarta a localidade do destinatário, referências de encomenda e botões de pagamento da página. Como a Landmark grava todas as horas no fuso horário central dos EUA (`CST`/`CDT`), o Peek converte cada registo para o fuso horário do teu dispositivo.
+O Peek lê a página inglesa da Landmark: mostra o estado atual, os eventos em inglês no mapa (traduzindo as entregas da Landmark para «Entregue»), o país de destino e o parceiro de entrega com o respetivo código. Não existe data prevista de entrega, e o Peek descarta as referências de encomenda e de volume.
 
 Quando o parceiro final é seguido diretamente pelo Peek (como [bpost](carrier:bpost), [CTT](carrier:ctt), [Evri](carrier:evri) ou [UPS](carrier:ups)), a ficha passa a indicar «Entrega: …» com ligação direta assim que esse operador publica passos mais recentes (nem todos os envios mudam automaticamente). O Peek verifica **até a cada 10 minutos** — ou **até a cada 2 minutos** a partir das 6h no dia de distribuição (**até a cada 15 minutos** via serviços universais) — com alertas «Todas as atualizações», «Só as importantes» ou «Só no dia da entrega», passando a consultas de hora a hora após dois dias sem novidades ou 12 horas em «Etiqueta criada» / «Aceite pela transportadora». O Peek não contacta a Landmark nem a loja por ti.
 
@@ -84,7 +84,7 @@ Quando o parceiro final é seguido diretamente pelo Peek (como [bpost](carrier:b
 
 ### O que é a Landmark Global?
 
-É o braço internacional de logística de comércio eletrónico do grupo belga Bnode (detentor da [bpost](carrier:bpost) desde 2016 na Landmark), especializado em transportar encomendas de lojas online para mais de 220 destinos através de parceiros locais de última milha.
+É o braço internacional de logística de comércio eletrónico do grupo belga Bnode (casa-mãe da [bpost](carrier:bpost)), a que pertence desde 2016, especializado em transportar encomendas de lojas online para mais de 220 destinos através de parceiros locais de última milha.
 
 ### Porque é que o meu código LTN não devolve resultados?
 
@@ -106,5 +106,5 @@ Segundo a Landmark, o prazo varia consoante o serviço contratado pelo vendedor 
 - [CTT: Fim da isenção aduaneira até 150 €](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – 3 € + IVA (julho 2026), 2 € + IVA (novembro 2026), tarifas CTT e Portal de Desalfandegamento sem pagamentos por SMS/e-mail
 - [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – prazo de 6 meses para envios postais internacionais
 - [Your Europe: Envios e entregas](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – responsabilidade do vendedor e prazo de 30 dias
-- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos LTN e referências sem pontuação, estados em inglês, fuso horário US Central, devoluções, privacidade e intervalos do Peek
+- [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos LTN, estados em inglês, devoluções, privacidade e intervalos do Peek
 :::

@@ -5,7 +5,8 @@
 // - a page: the copy of it saved the last time someone without a session read it, under a short
 //   note, or else the site's maintenance page (503, Retry-After);
 // - anything else (the API, the auth host, a script): a 503 with Retry-After, JSON for the API,
-//   never a 4xx, so no client signs out or forgets what it keeps.
+//   never a 4xx, so no client signs out or forgets what it keeps. The proxy's own 404, while the
+//   server is up but the app isn't yet, counts as the server not answering.
 //
 // `/maintenance.json` is always answered here, without the server: it says whether maintenance
 // was announced and until when, for the apps and the web app to word their notice.
@@ -92,6 +93,15 @@ const isJsonRequest = (request, url) => site.jsonHosts.includes(url.hostname) ||
 /** The server did not answer: its proxy's or Cloudflare's error, not one the app wrote itself as JSON. */
 export function unreachable(response) {
   return UNREACHABLE.has(response.status) && !(response.headers.get('content-type') ?? '').includes('application/json');
+}
+
+/**
+ * The proxy's own "404 page not found" (Traefik's, as text): the server is up but the site's app isn't yet,
+ * as just after a reboot. The app's own 404s are pages or JSON, so they pass through.
+ */
+export function appMissing(request, url, response) {
+  return response.status === 404 && (response.headers.get('content-type') ?? '').startsWith('text/plain')
+    && (isPageRequest(request) || isJsonRequest(request, url));
 }
 
 /** A page whose copy may be saved and shown to anyone: public, the same for every reader, asked for without a session. */
@@ -228,7 +238,7 @@ const worker = {
     } catch {
       return fallback(request, url, found);
     }
-    if (unreachable(response) || (response.status === 500 && isPageRequest(request) && site.savedPages.test(url.pathname))) {
+    if (unreachable(response) || appMissing(request, url, response) || (response.status === 500 && isPageRequest(request) && site.savedPages.test(url.pathname))) {
       if (site.healthPath.test(url.pathname)) return response;
       const saved = isPageRequest(request) ? await savedPage(url, reader(request, url), found) : null;
       if (saved) return saved;

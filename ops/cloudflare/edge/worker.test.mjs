@@ -76,6 +76,19 @@ describe('edge guard', () => {
     assert.match(html, /<html lang="pt-br"/);
   });
 
+  it('treats the proxy’s own 404 as the app not being there yet', async () => {
+    const proxy404 = new Response('404 page not found\n', { status: 404, headers: { 'content-type': 'text/plain; charset=utf-8' } });
+    const answer = await run(api('/api/packages/abc'), proxy404);
+    assert.equal(answer.status, 503);
+    assert.equal(typeof (await answer.json()).maintenance.planned, 'boolean');
+    assert.equal((await run(page('/'), proxy404)).status, 503);
+    // The app's own 404s go out as they are.
+    const gone = await run(api('/api/packages/abc'), Response.json({ error: 'Not found' }, { status: 404 }));
+    assert.equal(gone.status, 404);
+    const missing = await run(page('/nope'), new Response('<html>Not found</html>', { status: 404, headers: { 'content-type': 'text/html' } }));
+    assert.equal(missing.status, 404);
+  });
+
   it('never answers the API with a 4xx, nor with HTML', async () => {
     for (const origin of [tunnelDown, refused, new Response('Bad Gateway', { status: 502, headers: { 'content-type': 'text/plain' } })]) {
       const response = await run(api('/api/public/parcels/abc', { method: 'GET' }), origin);

@@ -463,9 +463,12 @@ final class SessionStore: ObservableObject {
         // Without it Supabase Auth answers errors in its older shape, with the HTTP status as `code`.
         request.setValue("2024-01-01", forHTTPHeaderField: "X-Supabase-Api-Version")
         if let bearer { request.setValue("Bearer \(bearer)", forHTTPHeaderField: "Authorization") }
-        let (data, rawResponse) = try await transport.data(for: request)
+        // A sign-in server that is down, or gives no answer, says nothing of the session: it stays, and is asked again.
+        let (data, rawResponse): (Data, URLResponse)
+        do { (data, rawResponse) = try await transport.data(for: request) } catch { throw Maintenance.failure(error) }
         guard let http = rawResponse as? HTTPURLResponse else { throw AuthenticationError.invalidResponse }
         if !(200..<300).contains(http.statusCode) {
+            if let down = Maintenance.serverDown(data, http) { throw down }
             let payload = (try? JSONDecoder.deliveryTracker.decode(AuthErrorPayload.self, from: data))
             if path == "token?grant_type=refresh_token", Self.invalidRefresh(status: http.statusCode, code: payload?.code ?? payload?.error) {
                 throw AuthenticationError.missingSession

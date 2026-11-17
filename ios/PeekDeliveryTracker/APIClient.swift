@@ -61,6 +61,97 @@ extension HTTPURLResponse {
     }
 }
 
+/// What the edge in front of the server says about a maintenance: announced or not, and the end it gave, if any.
+struct MaintenanceNotice: Equatable, Sendable {
+    var planned: Bool
+    var backAround: Date?
+
+    static let unannounced = MaintenanceNotice(planned: false, backAround: nil)
+}
+
+/// The server is down for a few minutes of maintenance: the machine restarting, or its database being upgraded.
+/// Screens keep what they show, say so calmly and ask again by themselves; nothing signs out or forgets a parcel for it.
+struct ServerDown: Error, Equatable {
+    /// What the server asked for before asking again, in seconds; 0 when it said nothing.
+    var retryAfter: TimeInterval = 0
+    /// The edge's own answer says whether the maintenance was announced; a database's or a proxy's does not.
+    var notice: MaintenanceNotice?
+}
+
+/// Tells the server down for maintenance from the server refusing or failing, as the web app does (docs/ARCHITECTURE.md).
+enum Maintenance {
+    /// Statuses a proxy or Cloudflare answers with for a server that does not answer itself.
+    static let downStatuses: Set<Int> = [502, 503, 504, 520, 521, 522, 523, 524, 525, 526, 527, 530]
+    /// The app's own 503s about one part it can't use now, which it words itself: not the server down.
+    private static let partUnavailable = "not configured|amazon|carrier|verification"
+    /// Errors that say this device has no network: it is offline, not the server down.
+    private static let offlineCodes: Set<URLError.Code> = [.notConnectedToInternet, .dataNotAllowed, .internationalRoamingOff, .callIsActive]
+
+    /// Whether an answer means the server is down rather than refusing: a proxy's or Cloudflare's error status (the
+    /// database's 502 and the sign-in server's 503 too), or a 404 the app did not write, such as the proxy's
+    /// "404 page not found" while the app starts.
+    static func isServerDown(status: Int, data: Data) -> Bool {
+        let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        let message = payload?["error"] as? String
+        if status == 404 { return message == nil }
+        guard downStatuses.contains(status) else { return false }
+        guard status == 503, let message, notice(in: data) == nil else { return true }
+        return message.range(of: partUnavailable, options: [.regularExpression, .caseInsensitive]) == nil
+    }
+
+    /// The server down, with what it asked for and what the edge announced, or nil for any other answer.
+    static func serverDown(_ data: Data, _ response: HTTPURLResponse) -> ServerDown? {
+        guard isServerDown(status: response.statusCode, data: data) else { return nil }
+        let retryAfter = DeliveryAPIClient.retryAfterSeconds(response.value(forHTTPHeaderField: "Retry-After"))
+        return ServerDown(retryAfter: retryAfter, notice: notice(in: data))
+    }
+
+    /// The maintenance an answer's `maintenance` object announces, or nil.
+    static func notice(in data: Data) -> MaintenanceNotice? {
+        guard let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let maintenance = payload["maintenance"] as? [String: Any] else { return nil }
+        return notice(maintenance)
+    }
+
+    private static func notice(_ value: [String: Any]) -> MaintenanceNotice {
+        let planned = value["planned"] as? Bool == true
+        return MaintenanceNotice(planned: planned, backAround: planned ? (value["backAround"] as? String).flatMap(DateParser.date) : nil)
+    }
+
+    /// Whether a request got no answer while the device is online: the network failed or timed out on the way to the
+    /// server. Not one that was cancelled, and not a device that is offline, which keeps saying so.
+    static func unanswered(_ error: Error) -> Bool {
+        guard let error = error as? URLError, error.code != .cancelled else { return false }
+        return !offlineCodes.contains(error.code)
+    }
+
+    /// The error to throw for a request that failed on its way: the server down when it got no answer.
+    static func failure(_ error: Error) -> Error {
+        unanswered(error) ? ServerDown() : error
+    }
+
+    /// How long to wait before asking again: what the server asked for and the backoff from 5 s, whichever is longer,
+    /// at most a minute.
+    static func retryDelay(attempt: Int, retryAfter: TimeInterval = 0) -> TimeInterval {
+        let backoff = min(60, 5 * pow(2, Double(max(0, min(attempt, 10)))))
+        return min(60, max(backoff, retryAfter))
+    }
+
+    /// What `/maintenance.json` says, asked only once something failed: nil when it is not there to say (the edge not
+    /// in front yet answers the app's own 404 page) or says nothing readable. Never cached.
+    static func read(configuration: AppConfiguration = .current, transport: URLSession = .shared) async -> MaintenanceNotice? {
+        var request = URLRequest(url: configuration.apiBaseURL.appending(path: "maintenance.json"),
+                                 cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
+        request.httpShouldHandleCookies = false
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        guard let (data, response) = try? await transport.data(for: request),
+              let status = (response as? HTTPURLResponse)?.statusCode, status == 200 || status == 503,
+              let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return nil }
+        if let maintenance = payload["maintenance"] as? [String: Any] { return notice(maintenance) }
+        return payload["planned"] is Bool ? notice(payload) : nil
+    }
+}
+
 @MainActor
 final class DeliveryAPIClient {
     private let configuration: AppConfiguration
@@ -127,7 +218,8 @@ final class DeliveryAPIClient {
         request.httpShouldHandleCookies = false
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         if let key { request.setValue(key, forHTTPHeaderField: "X-Parcel-Key") }
-        let (data, response) = try await transport.data(for: request)
+        let (data, response): (Data, URLResponse)
+        do { (data, response) = try await transport.data(for: request) } catch { throw Maintenance.failure(error) }
         guard let response = response as? HTTPURLResponse else { throw DeliveryAPIError.invalidResponse }
         switch response.statusCode {
         case 200:
@@ -136,7 +228,7 @@ final class DeliveryAPIClient {
         case 404 where response.isServiceNotFound(data): return nil
         case 410: throw ParcelLinkStopped()
         case 429: throw DeliveryAPIError.rateLimited(retryAfterSeconds(response.value(forHTTPHeaderField: "Retry-After")))
-        default: throw DeliveryAPIError.serviceFailed(response.statusCode)
+        default: throw Maintenance.serverDown(data, response) ?? DeliveryAPIError.serviceFailed(response.statusCode)
         }
     }
 
@@ -517,7 +609,8 @@ final class DeliveryAPIClient {
         }
 
         let send: NativeVerification.Send = { [transport] request in
-            let (data, response) = try await transport.data(for: request)
+            let (data, response): (Data, URLResponse)
+            do { (data, response) = try await transport.data(for: request) } catch { throw Maintenance.failure(error) }
             guard let http = response as? HTTPURLResponse else { throw DeliveryAPIError.invalidResponse }
             return (data, http)
         }
@@ -559,6 +652,7 @@ final class DeliveryAPIClient {
             throw DeliveryAPIError.authenticationExpired
         }
         guard (200..<300).contains(result.1.statusCode) || result.1.statusCode == accepted else {
+            if let down = Maintenance.serverDown(result.0, result.1) { throw down }
             let error = try? JSONDecoder().decode(ErrorResponse.self, from: result.0)
             if result.1.statusCode == 429 {
                 if let error, Self.allowanceUsed(error) { throw DeliveryAPIError.allowanceUsed }
@@ -600,7 +694,7 @@ final class DeliveryAPIClient {
         }
     }
 
-    static func retryAfterSeconds(_ value: String?, now: Date = Date()) -> TimeInterval {
+    nonisolated static func retryAfterSeconds(_ value: String?, now: Date = Date()) -> TimeInterval {
         guard let value else { return 0 }
         if let seconds = TimeInterval(value), seconds.isFinite { return max(0, seconds) }
         let formatter = DateFormatter()

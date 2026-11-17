@@ -690,14 +690,14 @@ final class ParcelLinkTests: XCTestCase {
             let answer = try await client.setAlert(linkID, nil, alert)
             XCTAssertEqual(answer, expected, "\(code)")
         }
-        // A proxy's 404 while the server restarts says nothing of the link.
+        // A proxy's 404 while the server restarts says nothing of the link: the server is down.
         status = 404
         notFound = Data("404 page not found\n".utf8)
         do {
             _ = try await client.setAlert(linkID, nil, alert)
-            XCTFail("Expected the server's failure")
-        } catch DeliveryAPIError.serviceFailed(let code) {
-            XCTAssertEqual(code, 404)
+            XCTFail("Expected the server down")
+        } catch let down as ServerDown {
+            XCTAssertEqual(down, ServerDown())
         }
         status = 429
         do {

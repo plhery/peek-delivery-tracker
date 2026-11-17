@@ -823,6 +823,10 @@ private struct DeliveryListView: View {
                         if !store.parcels.isEmpty { listOverview(layout) }
                         if showingSearch { searchControls }
                         if hasCustomView { filterChips }
+                        // The server is down for maintenance: the list stays, and comes back up to date by itself.
+                        if let notice = store.serverDown, !store.parcels.isEmpty {
+                            MaintenanceBanner(text: localizer.maintenanceText(notice, readAt: store.listReadAt))
+                        }
                         if let message = store.errorMessage {
                             NoticeBanner(
                                 symbol: "wifi.exclamationmark",
@@ -1100,7 +1104,17 @@ private struct DeliveryListView: View {
 
     @ViewBuilder private func listEmptyState(_ layout: DeliveryListLayout) -> some View {
         if !store.loading {
-            if store.parcels.isEmpty {
+            if store.parcels.isEmpty, let notice = store.serverDown {
+                // Nothing saved to show while the server is down: no invitation to add a first parcel, only when it is back.
+                ContentUnavailableView {
+                    Label(localizer.text("maintenance.title"), systemImage: "clock")
+                } description: {
+                    Text(notice.planned && notice.backAround != nil
+                         ? localizer.maintenanceText(notice, readAt: nil) : localizer.text("maintenance.description"))
+                }
+                .frame(maxWidth: .infinity).padding(.vertical, 32)
+                .accessibilityIdentifier("deliveries.maintenance")
+            } else if store.parcels.isEmpty {
                 DeliveriesEmptyState(transition: parcelTransition, onAdd: add) {
                     sample = FirstOpenJourney.delivered(localizer: localizer)
                     open(FirstOpenJourney.parcelID)
@@ -1137,6 +1151,10 @@ private struct DeliveryListView: View {
         // A check that answers at once still shows the arrow turning.
         try? await Task.sleep(until: started + .milliseconds(900), clock: .continuous)
         switch result {
+        case .failed? where store.serverDown != nil:
+            // The notice above the list already says the server is down: no warning on top of it.
+            finishPull(succeeded: false, label: localizer.text("maintenance.title"))
+            try? await Task.sleep(for: .milliseconds(1100))
         case .failed(let message)?:
             finishPull(succeeded: false, label: localizer.text("detail.checkFailed"))
             try? await Task.sleep(for: .milliseconds(1100))
@@ -1160,6 +1178,8 @@ private struct DeliveryListView: View {
     /// The button turns while the parcels are checked, then says how it went.
     private func refreshFromButton() async {
         switch await checkAllParcels() {
+        case .failed? where store.serverDown != nil:
+            AccessibilityNotification.Announcement(localizer.text("maintenance.short")).post()
         case .failed(let message)?:
             toast = ListToast(text: message, warning: true)
             AccessibilityNotification.Announcement(message).post()

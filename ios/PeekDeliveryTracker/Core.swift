@@ -424,6 +424,7 @@ final class Localizer: ObservableObject {
             }
         }
         if error is DeviceLookupsSpent { return text("peek.dailyLimit") }
+        if let down = error as? ServerDown { return maintenanceText(down.notice ?? .unannounced, readAt: nil) }
         if let error = error as? AuthenticationError {
             switch error {
             case .notConfigured:
@@ -672,6 +673,20 @@ final class Localizer: ObservableObject {
         default: shortDate(date) + (year == calendar.component(.year, from: now) ? "" : " \(year)")
         }
         return step.calendarDay == nil ? dayAndTime(day, clockTime(date)) : day
+    }
+
+    /// A moment as a notice gives it: its clock time today, else its day and time ("yesterday, 14:02").
+    func moment(_ date: Date, now: Date = Date()) -> String {
+        Calendar.current.isDate(date, inSameDayAs: now) ? clockTime(date) : dayAndTime(deliveryDate(date, now: now), clockTime(date))
+    }
+
+    /// What the list says while the server is down for maintenance: that Peek is down for a few minutes, or until when
+    /// an announced maintenance runs, and how old the parcels below are. Without a time for them, only the first part.
+    func maintenanceText(_ notice: MaintenanceNotice, readAt: Date?, now: Date = Date()) -> String {
+        let back = notice.planned ? notice.backAround.map { moment($0, now: now) } : nil
+        guard let readAt else { return back.map { text("maintenance.shortPlanned", ["back": $0]) } ?? text("maintenance.short") }
+        let time = moment(readAt, now: now)
+        return back.map { text("maintenance.listPlanned", ["back": $0, "time": time]) } ?? text("maintenance.list", ["time": time])
     }
 
     /// A day and a time of it, as Chinese writes them without a comma: "9月12日周六 14:05".

@@ -123,6 +123,14 @@ final class ContrastTests: XCTestCase {
         }
     }
 
+    /// The maintenance banner's ink reads on its soft yellow.
+    func testTheMaintenanceBannerReadsOnItsYellow() {
+        for (appearance, traits) in appearances {
+            let yellow = shown(Brand.yellowSoft, traits)
+            XCTAssertGreaterThanOrEqual(ratio(shown(Brand.ink, traits), yellow), 4.5, appearance)
+        }
+    }
+
     /// A widget, which can't reach the app's palette, writes its quieter words in the app's grey.
     func testTheWidgetsGreyIsTheApps() {
         for (scheme, traits) in [(ColorScheme.light, appearances[0].traits), (.dark, appearances[1].traits)] {

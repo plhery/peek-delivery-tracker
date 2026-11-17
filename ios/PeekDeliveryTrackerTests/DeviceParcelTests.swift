@@ -440,9 +440,9 @@ final class DeviceParcelTests: XCTestCase {
 
         do {
             try await device.refresh()
-            XCTFail("Expected the server's failure")
-        } catch DeliveryAPIError.serviceFailed(let status) {
-            XCTAssertEqual(status, 404)
+            XCTFail("Expected the server down")
+        } catch let down as ServerDown {
+            XCTAssertEqual(down, ServerDown())
         }
         XCTAssertEqual(device.list().map(\.label), ["Running shoes"])
         XCTAssertEqual(storage.keys, ["22222222222A": key, "22222222222B": key], "A key went for a proxy's 404")
@@ -450,8 +450,8 @@ final class DeviceParcelTests: XCTestCase {
         do {
             _ = try await DeliveryAPIClient.publicParcel(linkID: "22222222222A", configuration: configuration, transport: transport)
             XCTFail("A link sheet would say the parcel was forgotten")
-        } catch DeliveryAPIError.serviceFailed(let status) {
-            XCTAssertEqual(status, 404)
+        } catch let down as ServerDown {
+            XCTAssertEqual(down, ServerDown())
         }
 
         answer = (404, Data(#"{"error":"Parcel unavailable"}"#.utf8))
@@ -461,6 +461,75 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.forgetting, [:])
         let gone = try await DeliveryAPIClient.publicParcel(linkID: "22222222222A", configuration: configuration, transport: transport)
         XCTAssertNil(gone)
+    }
+
+    /// A database being upgraded, a host restarting or the edge answering for them: the server down, which keeps every
+    /// parcel. The app's own 503 about one part it was never set up for is that part failing.
+    func testTheServerDownForMaintenanceIsToldFromTheAppsOwnTrouble() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let configuration = PostcodeTestURLProtocol.configuration
+        let client = DeviceParcelClient.api(configuration: configuration, transport: transport)
+        let answers: [(Int, String, ServerDown?)] = [
+            (502, #"{"error":"The delivery database is temporarily unavailable"}"#, ServerDown()),
+            (530, "error code: 1033", ServerDown()),
+            (503, #"{"error":"Peek is down for maintenance","maintenance":{"planned":true,"mode":"soft","since":null,"backAround":"2026-11-17T15:00:00Z"}}"#,
+             ServerDown(notice: MaintenanceNotice(planned: true, backAround: DateParser.date("2026-11-17T15:00:00Z")))),
+            (503, #"{"error":"Push notifications are not configured"}"#, nil),
+        ]
+        for (status, body, expected) in answers {
+            PostcodeTestURLProtocol.handler = { _ in (status, Data(body.utf8)) }
+            do {
+                _ = try await client.read("22222222222A", key)
+                XCTFail("Expected a failure for \(status)")
+            } catch let down as ServerDown {
+                XCTAssertEqual(down, expected, "\(status) \(body)")
+            } catch DeliveryAPIError.serviceFailed(let failed) {
+                XCTAssertNil(expected, "\(status) \(body)")
+                XCTAssertEqual(failed, status)
+            }
+        }
+    }
+
+    /// Without an account, the list keeps the device's parcels through the server down and says how old they are; the
+    /// next round that reads one takes the notice away.
+    @MainActor func testAGuestsListKeepsItsParcelsThroughTheServerDownAndSaysSo() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        // /maintenance.json is the app's own 404 page before the edge is in front.
+        PostcodeTestURLProtocol.handler = { _ in (404, Data("<!doctype html><title>Not found</title>".utf8)) }
+        let id = UUID()
+        let checkedAt = Date().addingTimeInterval(-60 * 60)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "Running shoes", archivedAt: nil,
+                                        parcel: Parcel(shared: package(id)), checkedAt: checkedAt)]
+        nonisolated(unsafe) var down = true
+        let answered = PublicParcelResponse(link: link("22222222222A"), package: package(id))
+        let device = DeviceParcels(client: client(Calls(), read: { _ in
+            if down { throw ServerDown() }
+            return answered
+        }), storage: storage)
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.showWelcome()
+
+        await store.load()
+        XCTAssertEqual(store.parcels.map(\.label), ["Running shoes"])
+        XCTAssertEqual(store.serverDown, .unannounced)
+        XCTAssertNil(store.errorMessage)
+        XCTAssertEqual(store.listReadAt, checkedAt)
+        XCTAssertEqual(storage.keys, ["22222222222A": key])
+
+        down = false
+        await store.load()
+        XCTAssertNil(store.serverDown)
+        XCTAssertEqual(store.parcels.map(\.label), ["Running shoes"])
+        XCTAssertGreaterThan(try XCTUnwrap(store.listReadAt), checkedAt)
     }
 
     func testAParcelWaitingForItsCarrierIsAskedAboutAtOnce() async throws {

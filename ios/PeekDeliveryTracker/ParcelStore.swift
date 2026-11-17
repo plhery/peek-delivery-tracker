@@ -58,6 +58,12 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var errorMessage: String?
     @Published private(set) var authenticationRequired = false
     @Published private(set) var usingCachedData = false
+    /// The server is down for maintenance: the list keeps what it shows under a calm notice instead of an error, and
+    /// asks again by itself until the server answers. Nothing signs out or forgets a parcel for it.
+    @Published private(set) var serverDown: MaintenanceNotice?
+    /// When the list shown was last read from the server: saved beside the account's saved list, and a guest's
+    /// parcels' last answer. Nil when this device never read it.
+    @Published private(set) var listReadAt: Date?
     @Published private(set) var notificationEnableInProgress = false
     @Published private(set) var notificationStateLoaded = false
     @Published private(set) var notificationInvitationDismissed = false
@@ -99,6 +105,11 @@ final class ParcelStore: ObservableObject {
     private let shareNotes = ParcelShareNotes()
     private let deliveryWidgetStore: DeliveryWidgetSharedStore?
     private let cache = ParcelCache()
+    private let transport: URLSession
+    /// While the server is down: how many quiet retries ran, the next one, and whether `/maintenance.json` was asked.
+    private var downRetries = 0
+    private var downRetryTask: Task<Void, Never>?
+    private var askedEdge = false
     private var pollingTask: Task<Void, Never>?
     private var jobMonitoringTask: Task<Void, Never>?
     private var refreshTask: Task<Void, Never>?
@@ -159,6 +170,7 @@ final class ParcelStore: ObservableObject {
         self.deviceNotifications = deviceNotifications
         self.session = session
         self.localizer = localizer
+        self.transport = transport
         installationID = Self.installationIdentifier()
         NotificationDevicePolicy.repairAccountChangeOptOut(.standard)
         deliveryWidgetStore = DeliveryWidgetSharedStore(
@@ -176,6 +188,7 @@ final class ParcelStore: ObservableObject {
         deliveryLiveActivityRegistrationRemovalPending = !deliveryLiveActivitiesEnabled
         deliveryWidgetStore?.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
         cacheOwnerID = session.user?.id
+        listReadAt = session.isGuest ? self.device.lastCheckedAt : nil
         notificationInvitationDismissed = session.user.map { NotificationInvitationPreference.isDismissed(for: $0.id) } ?? false
         identityObservation = session.identityChanges.sink { [weak self] in self?.resetForSessionChange() }
         timeZoneObservation = NotificationCenter.default.publisher(for: .NSSystemTimeZoneDidChange)
@@ -203,6 +216,7 @@ final class ParcelStore: ObservableObject {
         jobMonitoringTask = nil
         refreshTask?.cancel()
         refreshTask = nil
+        noteUp()
         pendingMutations.removeAll()
         pendingJobIDs.removeAll()
         seenHere.removeAll()
@@ -233,6 +247,7 @@ final class ParcelStore: ObservableObject {
         showingSavedParcels = saved != nil
         // Open on content: the saved list, or the demo box, instead of an empty frame.
         parcels = saved ?? (session.isDemo ? demo.list() : session.isGuest ? device.list() : [])
+        listReadAt = saved != nil ? session.user.flatMap { cache.readAt(userID: $0.id) } : session.isGuest ? device.lastCheckedAt : nil
         undoParcel = nil
         leftOnDevice = nil
         loading = session.isAuthenticated && parcels.isEmpty
@@ -566,6 +581,9 @@ final class ParcelStore: ObservableObject {
                 cache.save(next, userID: ownerID)
                 cacheCurrent = true
             }
+            if let ownerID { cache.markRead(userID: ownerID) }
+            listReadAt = Date()
+            noteUp()
             if errorMessage != nil { errorMessage = nil }
             if authenticationRequired { authenticationRequired = false }
             if usingCachedData { usingCachedData = false }
@@ -575,12 +593,17 @@ final class ParcelStore: ObservableObject {
                   revision == mutationRevision, sequence == loadSequence,
                   !error.isCancellation else { return .skipped }
             let message = localizer.errorMessage(error)
-            if errorMessage != message { errorMessage = message }
-            var expired = false
-            if let apiError = error as? DeliveryAPIError, case .authenticationExpired = apiError { expired = true }
-            if authenticationRequired != expired { authenticationRequired = expired }
+            if let down = error as? ServerDown {
+                noteDown(down)
+            } else {
+                if errorMessage != message { errorMessage = message }
+                var expired = false
+                if let apiError = error as? DeliveryAPIError, case .authenticationExpired = apiError { expired = true }
+                if authenticationRequired != expired { authenticationRequired = expired }
+            }
             if parcels.isEmpty, let ownerID, let cached = cache.load(userID: ownerID) {
                 parcels = cached
+                listReadAt = cache.readAt(userID: ownerID)
                 usingCachedData = true
             } else if showingSavedParcels, !usingCachedData {
                 usingCachedData = true
@@ -974,7 +997,9 @@ final class ParcelStore: ObservableObject {
             do { try await device.refresh(all: true) } catch { trouble = error }
             guard generation == session.generation else { throw CancellationError() }
             parcels = device.list()
+            listReadAt = device.lastCheckedAt
             refreshing = false
+            if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil { noteUp() }
             if let trouble {
                 // A check given up on says nothing went wrong.
                 if trouble.isCancellation { throw CancellationError() }
@@ -987,7 +1012,10 @@ final class ParcelStore: ObservableObject {
             jobIDs = try await api.queueRefreshAll()
             try session.checkGeneration(generation)
         } catch {
-            if generation == session.generation { refreshing = false }
+            if generation == session.generation {
+                refreshing = false
+                if let down = error as? ServerDown { noteDown(down) }
+            }
             throw error
         }
         refreshTask = Task { [weak self] in
@@ -1013,6 +1041,7 @@ final class ParcelStore: ObservableObject {
             result = .stillChecking
         } catch {
             guard !error.isCancellation else { return }
+            if let down = error as? ServerDown, generation == session.generation { noteDown(down) }
             result = .failed(localizer.errorMessage(error))
         }
         guard (try? session.checkGeneration(generation)) != nil else { return }
@@ -1979,13 +2008,52 @@ final class ParcelStore: ObservableObject {
     /// requests cut short is tried again once its time comes.
     private func loadDeviceParcels(hidden: Bool = false) async {
         let generation = session.generation
-        try? await device.refresh(hidden: hidden)
+        var trouble: Error?
+        do { try await device.refresh(hidden: hidden) } catch { trouble = error }
         guard generation == session.generation, isGuest else { return }
+        // A round that read nothing new says nothing of the server; one that failed for it says it is down.
+        if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil { noteUp() }
+        listReadAt = device.lastCheckedAt
         if pendingMutations.isEmpty {
             let next = device.list()
             if next != parcels { parcels = next } else { publishDeliverySurfaces() }
         }
         await retryDeviceAlerts()
+    }
+
+    /// The server is down: no error, and a quiet retry, as soon as it asked for and at least once a minute. The edge
+    /// is asked once whether the maintenance was announced, and until when.
+    private func noteDown(_ down: ServerDown) {
+        if errorMessage != nil { errorMessage = nil }
+        if authenticationRequired { authenticationRequired = false }
+        let notice = down.notice ?? serverDown ?? .unannounced
+        if serverDown != notice { serverDown = notice }
+        if down.notice == nil, !askedEdge {
+            askedEdge = true
+            let generation = session.generation
+            Task { [weak self, configuration = self.configuration, transport = self.transport] in
+                guard let announced = await Maintenance.read(configuration: configuration, transport: transport),
+                      let self, self.session.generation == generation, self.serverDown != nil else { return }
+                self.serverDown = announced
+            }
+        }
+        downRetryTask?.cancel()
+        let delay = Maintenance.retryDelay(attempt: downRetries, retryAfter: down.retryAfter)
+        downRetries += 1
+        downRetryTask = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(delay))
+            guard !Task.isCancelled, let self, self.isActive else { return }
+            await self.load()
+        }
+    }
+
+    /// The server answered, or the account changed: the notice goes, and with it the retries.
+    private func noteUp() {
+        downRetryTask?.cancel()
+        downRetryTask = nil
+        downRetries = 0
+        askedEdge = false
+        if serverDown != nil { serverDown = nil }
     }
 
     /// Asks again while the list is on screen: soon and a few times while a parcel waits for its
@@ -2166,6 +2234,22 @@ private final class ParcelCache: @unchecked Sendable {
 
     func delete(userID: UUID) {
         Self.queue.async { Self.remove(userID: userID) }
+    }
+
+    /// Notes that the list was read from the server now, on the saved list's own file: it goes with it.
+    func markRead(userID: UUID, at date: Date = Date()) {
+        Self.queue.async {
+            guard let url = try? Self.fileURL(userID: userID) else { return }
+            try? FileManager.default.setAttributes([.modificationDate: date], ofItemAtPath: url.path(percentEncoded: false))
+        }
+    }
+
+    /// When the saved list was last read from the server, or nil without one.
+    func readAt(userID: UUID) -> Date? {
+        Self.queue.sync {
+            guard let url = try? Self.fileURL(userID: userID) else { return nil }
+            return (try? FileManager.default.attributesOfItem(atPath: url.path(percentEncoded: false)))?[.modificationDate] as? Date
+        }
     }
 
     private static func remove(userID: UUID) {

@@ -31,6 +31,8 @@ enum Brand {
     static let warning = color(light: "#963E19", dark: "#FFB184")
     /// The tray behind a swiped card, like the web's soft orange.
     static let warningSoft = color(light: "#FFDDC7", dark: "#341F14")
+    /// Peek's soft yellow, under the ink: the calm notice while the server is down (the web's `--yellow-soft`).
+    static let yellowSoft = color(light: "#FFEBAB", dark: "#413410")
     static let background = color(light: "#F4F5F1", dark: "#13110E")
     static let separator = Color(uiColor: .separator)
 
@@ -710,6 +712,26 @@ struct CountPill: View {
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
             .background(.secondary.opacity(0.1), in: Capsule())
+    }
+}
+
+/// The calm notice shown in place of an error while the server is down for maintenance, in Peek's soft yellow: what is
+/// shown stays, and the app asks again by itself, so there is nothing to press.
+struct MaintenanceBanner: View {
+    let text: String
+
+    var body: some View {
+        HStack(alignment: .firstTextBaseline, spacing: 10) {
+            Image(systemName: "clock").font(.subheadline.weight(.semibold)).accessibilityHidden(true)
+            Text(text).font(.subheadline).fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 0)
+        }
+        .foregroundStyle(Brand.ink)
+        .padding(.horizontal, 16)
+        .padding(.vertical, 12)
+        .background(Brand.yellowSoft, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .accessibilityElement(children: .combine)
+        .accessibilityIdentifier("deliveries.maintenance")
     }
 }
 

@@ -3304,6 +3304,80 @@ final class SessionIsolationTests: XCTestCase {
             relaunched.forceSignOut()
         }
     }
+    /// Waits for work the store starts on its own, such as asking `/maintenance.json`, for up to two seconds.
+    @MainActor private func waitUntil(_ condition: () -> Bool) async {
+        for _ in 0..<100 where !condition() { try? await Task.sleep(for: .milliseconds(20)) }
+    }
+
+    /// A host restart: Cloudflare answers 530 in the server's place. The account's saved list stays, with when it was
+    /// last read, under a calm notice instead of an error, the sign-in stays, and the notice goes once the server answers.
+    @MainActor func testTheServerDownForMaintenanceKeepsTheSavedListAndTheSignInAndSaysSoCalmly() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let persistence = MemorySessionPersistence()
+        let session = SessionStore(configuration: configuration, persistence: persistence, transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        let parcel = parcel()
+        let list = try JSONEncoder.deliveryTracker.encode(PackageListResponse(packages: [parcel]))
+        respond(list)
+        await store.load()
+        let readAt = try XCTUnwrap(store.listReadAt)
+
+        // /maintenance.json too: before the edge is in front, nothing says whether the maintenance was announced.
+        nonisolated(unsafe) var asked: [String] = []
+        SessionTestURLProtocol.handler = { request, complete in
+            asked.append(request.url?.path ?? "")
+            complete(.success((530, Data("error code: 1033".utf8))))
+        }
+        let relaunched = self.store(session, transport)
+        await relaunched.load()
+        XCTAssertEqual(relaunched.parcels.map(\.id), [parcel.id])
+        XCTAssertEqual(relaunched.serverDown, .unannounced)
+        XCTAssertNil(relaunched.errorMessage)
+        XCTAssertFalse(relaunched.authenticationRequired)
+        XCTAssertEqual(try XCTUnwrap(relaunched.listReadAt).timeIntervalSince1970, readAt.timeIntervalSince1970, accuracy: 1)
+        XCTAssertNotNil(session.user)
+        XCTAssertNotNil(persistence.data)
+        await waitUntil { asked.contains("/maintenance.json") }
+        XCTAssertTrue(asked.contains("/maintenance.json"))
+
+        respond(list)
+        await relaunched.load()
+        XCTAssertNil(relaunched.serverDown)
+        XCTAssertEqual(relaunched.parcels.map(\.id), [parcel.id])
+    }
+
+    /// The sign-in server down for an announced maintenance, as the edge answers for it: an expired session's refresh
+    /// and a refused token's both keep the session, and the list says when Peek should be back, not to sign in again.
+    @MainActor func testASignInServerDownForMaintenanceKeepsTheSessionWithoutAskingToSignInAgain() async throws {
+        let maintenance = Data(#"{"error":"Peek is down for maintenance","maintenance":{"planned":true,"mode":"soft","since":null,"backAround":"2026-11-17T15:00:00Z"}}"#.utf8)
+        let announced = MaintenanceNotice(planned: true, backAround: DateParser.date("2026-11-17T15:00:00Z"))
+        SessionTestURLProtocol.headers = ["Retry-After": "120"]
+        defer { SessionTestURLProtocol.headers = [:] }
+        for expired in [true, false] {
+            let transport = transport()
+            defer { transport.invalidateAndCancel() }
+            let persistence = MemorySessionPersistence()
+            let session = SessionStore(configuration: configuration, persistence: persistence, transport: transport)
+            defer { session.forceSignOut() }
+            try await authorize(session, expired: expired)
+            let store = store(session, transport)
+            SessionTestURLProtocol.handler = { request, complete in
+                // An unexpired token the API refuses is refreshed, from a sign-in server that is down.
+                if request.url?.path == "/api/packages" { complete(.success((401, Data(#"{"error":"Unauthorized"}"#.utf8)))) }
+                else { complete(.success((503, maintenance))) }
+            }
+            await store.load()
+            XCTAssertEqual(store.serverDown, announced, "expired: \(expired)")
+            XCTAssertNil(store.errorMessage)
+            XCTAssertFalse(store.authenticationRequired)
+            XCTAssertNotNil(session.user)
+            XCTAssertNotNil(persistence.data)
+        }
+    }
+
     @MainActor func testInvalidRefreshTokenClearsSavedSession() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }
@@ -5499,4 +5573,73 @@ private struct DetailPage: View {
 private final class RenderTestStorage: DeviceParcelStorage {
     func load() -> (parcels: [DeviceParcel], keys: [String: String]) { ([], [:]) }
     func save(_ parcels: [DeviceParcel], keys: [String: String]) {}
+}
+
+/// The server down for maintenance, told from the app refusing or failing as the web app tells it.
+final class MaintenanceTests: XCTestCase {
+    private func answer(_ status: Int, _ body: String = "") -> Bool {
+        Maintenance.isServerDown(status: status, data: Data(body.utf8))
+    }
+
+    func testAProxysOrCloudflaresErrorTheDatabasesAndTheEdgesAreTheServerDown() {
+        for status in [502, 503, 504, 520, 521, 522, 523, 524, 525, 526, 527, 530] { XCTAssertTrue(answer(status), "\(status)") }
+        XCTAssertTrue(answer(502, #"{"error":"The delivery database is temporarily unavailable"}"#))
+        XCTAssertTrue(answer(503, #"{"error":"Peek is down for maintenance","maintenance":{"planned":false,"mode":null,"since":null,"backAround":null}}"#))
+        XCTAssertTrue(answer(503, #"{"error":"Supabase authentication is temporarily unavailable"}"#))
+        // A 404 the app did not write, as the proxy's while the app starts; never the app's own.
+        XCTAssertTrue(answer(404, "404 page not found\n"))
+        XCTAssertFalse(answer(404, #"{"error":"Parcel unavailable"}"#))
+    }
+
+    func testTheAppRefusingFailingOrNeverSetUpForSomethingIsNot() {
+        for status in [400, 401, 403, 409, 410, 429, 500] { XCTAssertFalse(answer(status, #"{"error":"No"}"#), "\(status)") }
+        XCTAssertFalse(answer(503, #"{"error":"Push notifications are not configured"}"#))
+        XCTAssertFalse(answer(503, #"{"error":"Amazon Shipping could not be checked. Try again."}"#))
+        XCTAssertFalse(answer(503, #"{"error":"The carrier could not be asked. Try again later."}"#))
+        XCTAssertFalse(answer(503, #"{"error":"Browser verification is temporarily unavailable. Try again shortly."}"#))
+    }
+
+    func testARequestWithNoAnswerWhileOnlineIsTheServerDownAndAnOfflineDeviceStaysOffline() {
+        XCTAssertTrue(Maintenance.unanswered(URLError(.timedOut)))
+        XCTAssertTrue(Maintenance.unanswered(URLError(.cannotConnectToHost)))
+        XCTAssertTrue(Maintenance.unanswered(URLError(.networkConnectionLost)))
+        XCTAssertFalse(Maintenance.unanswered(URLError(.notConnectedToInternet)))
+        XCTAssertFalse(Maintenance.unanswered(URLError(.cancelled)))
+        XCTAssertFalse(Maintenance.unanswered(CancellationError()))
+        XCTAssertTrue(Maintenance.failure(URLError(.notConnectedToInternet)) is URLError)
+        XCTAssertEqual(Maintenance.failure(URLError(.timedOut)) as? ServerDown, ServerDown())
+    }
+
+    func testOnlyAnAnnouncedMaintenanceSaysWhenItEnds() {
+        XCTAssertEqual(Maintenance.notice(in: Data(#"{"maintenance":{"planned":true,"backAround":"2026-11-17T09:30:00Z"}}"#.utf8)),
+                       MaintenanceNotice(planned: true, backAround: DateParser.date("2026-11-17T09:30:00Z")))
+        XCTAssertEqual(Maintenance.notice(in: Data(#"{"maintenance":{"planned":false,"backAround":"2026-11-17T09:30:00Z"}}"#.utf8)), .unannounced)
+        XCTAssertEqual(Maintenance.notice(in: Data(#"{"maintenance":{"planned":true,"backAround":"soon"}}"#.utf8)),
+                       MaintenanceNotice(planned: true, backAround: nil))
+        XCTAssertNil(Maintenance.notice(in: Data(#"{"error":"The delivery database is temporarily unavailable"}"#.utf8)))
+    }
+
+    func testItIsAskedAgainAsSoonAsTheServerAsksAndAtLeastOnceAMinute() {
+        XCTAssertEqual((0...5).map { Maintenance.retryDelay(attempt: $0) }, [5, 10, 20, 40, 60, 60])
+        XCTAssertEqual(Maintenance.retryDelay(attempt: 0, retryAfter: 30), 30)
+        XCTAssertEqual(Maintenance.retryDelay(attempt: 0, retryAfter: 900), 60)
+    }
+
+    @MainActor func testTheNoticeSaysHowOldTheListIsAndWhenAnAnnouncedMaintenanceEnds() {
+        let localizer = Localizer(systemUses24HourTime: { true })
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        let now = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!
+        let readAt = now.addingTimeInterval(-30 * 60), back = now.addingTimeInterval(30 * 60)
+        let read = localizer.clockTime(readAt), end = localizer.clockTime(back)
+        XCTAssertEqual(localizer.maintenanceText(.unannounced, readAt: readAt, now: now),
+                       "Peek is down for a few minutes of maintenance. Your parcels below are from \(read).")
+        XCTAssertEqual(localizer.maintenanceText(MaintenanceNotice(planned: true, backAround: back), readAt: readAt, now: now),
+                       "Scheduled maintenance, back around \(end). Your parcels below are from \(read).")
+        XCTAssertEqual(localizer.maintenanceText(.unannounced, readAt: nil, now: now), "Peek is down for a few minutes of maintenance.")
+        XCTAssertEqual(localizer.maintenanceText(.unannounced, readAt: now.addingTimeInterval(-86_400), now: now),
+                       "Peek is down for a few minutes of maintenance. Your parcels below are from yesterday, \(localizer.clockTime(now)).")
+        XCTAssertEqual(localizer.errorMessage(ServerDown()), "Peek is down for a few minutes of maintenance.")
+    }
 }

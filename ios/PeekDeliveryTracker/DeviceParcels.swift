@@ -141,7 +141,8 @@ struct DeviceParcelClient: Sendable {
                 request.httpBody = body
             }
             let perform: NativeVerification.Send = { request in
-                let (data, response) = try await transport.data(for: request)
+                let (data, response): (Data, URLResponse)
+                do { (data, response) = try await transport.data(for: request) } catch { throw Maintenance.failure(error) }
                 guard let response = response as? HTTPURLResponse else { throw DeliveryAPIError.invalidResponse }
                 return (data, response)
             }
@@ -157,7 +158,7 @@ struct DeviceParcelClient: Sendable {
                 return DeliveryAPIError.rateLimited(response.value(forHTTPHeaderField: "Retry-After").flatMap(TimeInterval.init) ?? 60)
             }
             if response.statusCode == 400, let message = payload?["error"] as? String { return DeliveryAPIError.service(message) }
-            return DeliveryAPIError.serviceFailed(response.statusCode)
+            return Maintenance.serverDown(data, response) ?? DeliveryAPIError.serviceFailed(response.statusCode)
         }
         @Sendable func decode<T: Decodable>(_ type: T.Type, _ data: Data) throws -> T {
             do { return try JSONDecoder.deliveryTracker.decode(type, from: data) }
@@ -376,6 +377,9 @@ final class DeviceParcels {
 
     /// The parcels as the list shows them, under the names this device gave them.
     func list() -> [Parcel] { entries.map(Self.shown) }
+
+    /// When the service last answered about one of the parcels: how old what the list shows is at most.
+    var lastCheckedAt: Date? { entries.map(\.checkedAt).max() }
 
     /// Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon.
     var isWaiting: Bool { entries.contains { Self.waiting($0.parcel) } }

@@ -109,7 +109,10 @@ describe('stored scan replay', () => {
     expect(changes).toEqual([expect.objectContaining({ row: 'mapped', from: 'delivered', to: 'pending', reason: 'notice', declared: 'delivered', stageSource: 'none' })]);
     const sql = replaySql(changes);
     expect(sql).toContain("set stage = 'pending'");
-    expect(sql).toContain(`'{"stage":"delivered","stage_source":"none"}'::jsonb`);
+    // Marked a notice, as the sync marks it; a row restaged otherwise loses the mark.
+    expect(sql).toContain(`raw_data = (raw_data - 'kept_stage') || '{"stage":"delivered","stage_source":"none","kept_stage":true}'::jsonb`);
+    expect(replaySql([{ ...changes[0], kind: 'stage', reason: 'mapped', stageSource: 'carrier_map' } as typeof changes[0]]))
+      .toContain(`raw_data = (raw_data - 'kept_stage') || '{"stage":"delivered","stage_source":"carrier_map"}'::jsonb`);
   });
 
   it('dates a wall clock again on the zone the release deduces, with the identity the sync would give it', () => {

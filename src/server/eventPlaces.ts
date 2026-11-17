@@ -36,6 +36,7 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
   delete rest.stored_at;
   delete rest.universal_provider;
   delete rest.stage_source;
+  delete rest.kept_stage;
   delete rest.recipient_action;
   if (tieOrder(rest.tie_order) < 0) delete rest.tie_order;
   return action ? { ...rest, recipient_action: action } : rest;
@@ -201,6 +202,7 @@ export function withoutEventSources(row: JsonObject): JsonObject {
       delete rest.stored_at;
       delete rest.universal_provider;
       delete rest.stage_source;
+      delete rest.kept_stage;
       return rest;
     }),
   };

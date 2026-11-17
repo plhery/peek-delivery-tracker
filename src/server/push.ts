@@ -741,6 +741,7 @@ const NO_SCANS: RecentScans = new Map();
 function noticesIn(recent: RecentScans): Set<string> {
   return new Set([...recent.values()].flatMap((scans) => [...stageNotices(scans.map((scan) => ({
     id: scan.id, source: scan.source, stage: scan.stage, stageSource: scan.stageSource ?? null, at: Date.parse(scan.occurredAt),
+    ...(scan.kept ? { kept: true } : {}),
   }))).keys()]));
 }
 

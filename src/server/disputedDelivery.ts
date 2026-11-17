@@ -100,16 +100,20 @@ export const KEEPS_STAGE = /keeps? the stage/;
  * notice): the carrier's map leaves its code or wording without a stage, noting that it keeps the stage of the scan
  * before it (Royal Mail's retention seconds after a customs hold). `scanStages` then reads it as a notice, not as
  * news that the parcel moves. A notice dated first takes registered. Oldest first; of two scans at one instant, the
- * one listed after is older, as carriers list theirs newest first. The stored replay restages stored rows alike.
+ * one listed after is older, as carriers list theirs newest first. Every scan the map reads so, whoever kept its
+ * stage, is marked `kept_stage`: in transit too, where no stage of its own tells it from a scan no rule reads, the
+ * apps then show it under the scan before it (stageNotices.ts). The stored replay restages stored rows alike.
  */
 export function keptNotices(carrier: string, scans: readonly JsonObject[], instants: readonly (string | null)[]): JsonObject[] {
-  const notices = scans.map((scan) => {
-    if (VALID_STAGES.has(String(scan.stage ?? '')) && scan.stage_source === 'none') return false;
+  const marked = scans.map((scan) => {
     const answer = statusMapAnswer({ carrier, providerCode: typeof scan.provider_code === 'string' ? scan.provider_code : null,
       description: String(scan.description ?? '') });
     return answer.kind === 'intentional_gap' && KEEPS_STAGE.test(answer.note);
   });
-  if (!notices.includes(true)) return [...scans];
+  if (!marked.includes(true)) return [...scans];
+  // An adapter that kept the stage itself leaves the scan as it gave it, marked.
+  const notices = scans.map((scan, index) => marked[index] && !(VALID_STAGES.has(String(scan.stage ?? '')) && scan.stage_source === 'none'));
+  if (!notices.includes(true)) return scans.map((scan, index) => marked[index] ? { ...scan, kept_stage: true } : scan);
   const read = scanStages(scans, instants);
   const times = instants.map((instant) => Date.parse(instant ?? ''));
   const order = scans.map((_, index) => index).filter((index) => Number.isFinite(times[index]))
@@ -118,10 +122,10 @@ export function keptNotices(carrier: string, scans: readonly JsonObject[], insta
   let previous: string | null = null;
   for (const index of order) {
     const declared = String(scans[index].stage ?? '');
-    if (notices[index]) kept[index] = { ...scans[index], stage: previous ?? 'registered', stage_source: 'none' };
+    if (notices[index]) kept[index] = { ...scans[index], stage: previous ?? 'registered', stage_source: 'none', kept_stage: true };
     previous = notices[index] ? String(kept[index].stage) : VALID_STAGES.has(declared) ? declared : read[index];
   }
-  return kept;
+  return kept.map((scan, index) => marked[index] && !notices[index] ? { ...scan, kept_stage: true } : scan);
 }
 
 function scanTime(event: JsonObject, zone: string): number {

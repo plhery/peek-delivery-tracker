@@ -472,9 +472,10 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
     raw_data = raw_data || ${literal(JSON.stringify({ time: change.time, time_zone: change.timeZone, time_zone_basis: change.basis }))}::jsonb
    where id = ${literal(change.row)} and occurred_at = ${literal(change.from)} and provider_event_id = ${literal(change.previousProviderEventId)};
   get diagnostics n = row_count; total := total + n;`
+    // A row restaged as a notice is marked one, as the sync marks it (keptNotices); any other restaging unmarks it.
     : `  update public.tracking_events set stage = ${literal(change.to)},
-    raw_data = raw_data || ${literal(JSON.stringify(change.declared
-      ? { stage: change.declared, stage_source: change.stageSource } : { stage_source: change.stageSource }))}::jsonb
+    raw_data = (raw_data - 'kept_stage') || ${literal(JSON.stringify({ ...change.declared ? { stage: change.declared } : {},
+      stage_source: change.stageSource, ...change.reason === 'notice' ? { kept_stage: true } : {} }))}::jsonb
    where id = ${literal(change.row)} and stage = ${literal(change.from)};
   get diagnostics n = row_count; total := total + n;`);
   const deletions = copies.map((copy) => `  delete from public.tracking_events

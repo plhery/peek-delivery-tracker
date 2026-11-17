@@ -9,6 +9,7 @@ import type { AssistantClient } from './assistants/clients';
 import type { SyncQueue } from './metrics';
 import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
+import { keptStage } from './stageNotices';
 import type { SyncReason } from './trackingAudit';
 import { isRecord, type JsonObject } from './types';
 
@@ -42,7 +43,7 @@ const PACKAGE_COLUMNS = [
  * carries neither, nor when a scan was stored (`stored_at`), which dates the parcel's news (`news_at`).
  * The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
-const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source)`;
+const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage)`;
 /**
  * The columns the schedule reads, `one_off` among them: a lookup without an account leaves the
  * schedule once nobody has answered for its number (unseenLookup.ts).
@@ -255,7 +256,7 @@ export interface WebPushKeys {
 export type DeliveryEmailOutcome = 'sent' | 'failed' | 'skipped';
 
 /** One of a package's newest scans, with its words and its source (`scanSource`). */
-export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string; stageSource?: string };
+export type RecentScan = Pick<TrackingEvent, 'id' | 'stage' | 'location' | 'occurredAt' | 'description'> & { source: string; stageSource?: string; kept?: boolean };
 
 /** A connected assistant or personal token of an account, as its owner sees it in Settings. */
 export interface AssistantGrant {
@@ -850,15 +851,16 @@ export class SupabaseClient {
     await Promise.all([...new Set(packageIds)].map(async (packageId) => {
       const events = rows(await this.request(`/rest/v1/tracking_events?${query([
         ['package_id', `eq.${packageId}`],
-        ['select', 'id,stage,location,occurred_at,description,provider_event_id,universal_provider:raw_data->>universal_provider,stage_source:raw_data->>stage_source'],
+        ['select', 'id,stage,location,occurred_at,description,provider_event_id,universal_provider:raw_data->>universal_provider,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage'],
         ['order', 'occurred_at.desc'],
         ['limit', '60'],
       ])}`));
-      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, description, provider_event_id, universal_provider, stage_source }) =>
+      recent.set(packageId, events.flatMap(({ id, stage, location, occurred_at, description, provider_event_id, universal_provider, stage_source, kept_stage }) =>
         typeof id === 'string' && typeof occurred_at === 'string' ? [{
           id, stage: stage as TrackingEvent['stage'], occurredAt: occurred_at, ...(typeof location === 'string' ? { location } : {}),
           description: typeof description === 'string' ? description.trim() : '', source: scanSource(provider_event_id, universal_provider),
           ...(typeof stage_source === 'string' ? { stageSource: stage_source } : {}),
+          ...(keptStage(kept_stage) ? { kept: true } : {}),
         }] : []));
     }));
     return recent;

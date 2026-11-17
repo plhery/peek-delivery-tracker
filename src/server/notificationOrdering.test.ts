@@ -541,6 +541,47 @@ it.each(['web', 'native'] as const)('records a carrier\'s notice in the stage of
   expect(await dispatched('mail')).toEqual(['mail']);
 });
 
+it.each(['web', 'native'] as const)('records a notice in transit its carrier\'s map says keeps the stage as handled, for %s', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const clock = clocks('2026-11-05T14:05:00Z');
+  const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+  const service = channel === 'web' ? new WebPushNotificationService(client, '', '', '', clock.web) : apns;
+  const send = vi.spyOn(service, 'send').mockResolvedValue();
+  if (channel === 'web') vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue(); else vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+  const pending = channel === 'web' ? vi.spyOn(client, 'listPendingPushNotifications') : vi.spyOn(client, 'listPendingNativePushNotifications');
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  // Synthetic Royal Mail rows: a depot scan, a retention stored as a notice in its stage, and a scan no rule reads.
+  const scans: { id: string; stage: 'in_transit'; occurredAt: string; stageSource: string; kept?: boolean }[] = [
+    { id: 'depot', stage: 'in_transit', occurredAt: '2026-11-05T09:00:00Z', stageSource: 'carrier_map' },
+    { id: 'retention', stage: 'in_transit', occurredAt: '2026-11-05T11:00:00Z', stageSource: 'none', kept: true },
+    { id: 'unread', stage: 'in_transit', occurredAt: '2026-11-05T12:00:00Z', stageSource: 'none' },
+  ];
+  let stored: readonly string[] = [];
+  const kept = () => scans.filter((scan) => stored.includes(scan.id)).reverse();
+  vi.mocked(client.recentScans).mockImplementation(async () => new Map([['pkg', kept().map((scan) => ({
+    ...scan, description: `Fixture ${scan.id}`, location: `Fixture ${scan.id} place`, source: 'royal-mail',
+  }))]]));
+  vi.spyOn(client, 'latestScanTimes').mockImplementation(async () => new Map([['pkg', kept()[0]!.occurredAt]]));
+  const dispatched = async (...ids: string[]) => {
+    stored = [...new Set([...stored, ...ids])];
+    pending.mockResolvedValueOnce(ids.map((id) => {
+      const { stage, occurredAt } = scans.find((scan) => scan.id === id)!;
+      return { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_id: id, stage, occurred_at: occurredAt,
+        event_created_at: '2026-11-05T13:00:00Z' };
+    }));
+    send.mockClear();
+    await service.dispatch();
+    return send.mock.calls.map(([event]) => event.event_id);
+  };
+  expect(await dispatched('depot', 'retention')).toEqual(['depot']);
+  stored = ['depot'];
+  expect(await dispatched('retention')).toEqual([]);
+  // A scan no rule reads is news that the parcel moves.
+  expect(await dispatched('unread')).toEqual(['unread']);
+});
+
 it.each(['web', 'native'] as const)('counts each batch by what became of it, for %s notifications', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
   const clock = clocks('2026-10-08T12:00:30Z');

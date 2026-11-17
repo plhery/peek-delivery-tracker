@@ -580,7 +580,9 @@ and nothing typed is sent.
   announces nothing (`src/server/stageNotices.ts`). A scan its adapter leaves in no
   stage whose code or wording the carrier's map notes keeps the stage of the scan before it (Royal
   Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of
-  the scan dated before it (`keptNotices`). A scan
+  the scan dated before it and marks it one (`kept_stage`, `keptNotices`), so it goes under that
+  scan in transit too, where no stage of its own tells it from news that the parcel moves, and the
+  apps' days without news count from that scan. A scan
   the carrier dated by its day alone, or on a wall clock in no zone, is served with that
   `day`: the apps list it under that day without a time, and the delivery email names that day. The apps show
   every other scan's time on the reader's clock, and a line under the history names that zone as the language names it

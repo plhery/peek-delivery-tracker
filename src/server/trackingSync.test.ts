@@ -337,6 +337,15 @@ describe('tracking event normalization', () => {
     expect(stages('royal-mail', retention('2026-09-10T06:12:40Z'), scan('2026-09-10T06:12:00Z', 'customs'))).toEqual([
       ['Item Retention', 'customs', 'none'], ['Fixture customs scan', 'customs', 'carrier_map'],
     ]);
+    // Stored marked as a notice, in transit too, where its stage can't tell it from a scan no rule reads; an adapter that
+    // kept the stage itself leaves it marked as well.
+    const marked = (...events: JsonObject[]) => buildEvents({ id: 'package-1', carrier: 'royal-mail' }, { status: 'unknown', events },
+      'royal-mail').map((row) => [row.stage, (row.raw_data as JsonObject).kept_stage]);
+    expect(marked(retention('2026-09-10T06:12:40Z'), scan('2026-09-10T06:12:00Z', 'in_transit'))).toEqual([
+      ['in_transit', true], ['in_transit', undefined],
+    ]);
+    expect(marked({ ...retention('2026-09-10T06:12:40Z'), stage: 'customs', stage_source: 'none' }, scan('2026-09-10T06:12:00Z', 'customs')))
+      .toEqual([['customs', true], ['customs', undefined]]);
     // Dated before it in whatever order the answer lists them, through another notice; first, it is registered.
     expect(stages('royal-mail', scan('2026-09-10T05:00:00Z', 'accepted'), retention('2026-09-10T07:00:00Z'),
       retention('2026-09-10T06:00:00Z'), scan('2026-09-10T08:00:00Z', 'in_transit')).map((row) => row[1])).toEqual([
@@ -351,6 +360,8 @@ describe('tracking event normalization', () => {
     expect(stages('dpd', retention('2026-09-10T06:12:40Z'), scan('2026-09-10T06:12:00Z', 'customs'))).toEqual([
       ['Item Retention', 'in_transit', 'none'], ['Fixture customs scan', 'customs', 'carrier_map'],
     ]);
+    expect(buildEvents({ id: 'package-1', carrier: 'dpd' }, { status: 'unknown', events: [retention('2026-09-10T06:12:40Z')] }, 'dpd')
+      .map((row) => (row.raw_data as JsonObject).kept_stage)).toEqual([undefined]);
   });
 
   it('dates scans a carrier gives by their day alone at that day, in its order, with no observed row', () => {

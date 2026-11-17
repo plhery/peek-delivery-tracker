@@ -6,14 +6,19 @@
  * (`scanStages`, disputedDelivery.ts). It tells the reader nothing new: the apps show it as a line
  * under that scan (`relay_of`, eventPlaces.ts), so the headline and its time stay on the scan, and
  * it announces nothing, at the check that brings it or a later one (push.ts). A scan in transit is
- * none of them: one no rule reads is in transit in `none` too, and news that the parcel moves.
+ * none of them, as one no rule reads is in transit in `none` too, and news that the parcel moves,
+ * but for one stored as a notice its carrier's map says keeps the stage (`kept_stage`, keptNotices).
  */
 import { scanSource } from './scanRepeats';
 import type { JsonObject } from './types';
 
-export type NoticeScan = { id: string; source: string; stage: string; stageSource: string | null; at: number };
+export type NoticeScan = {
+  id: string; source: string; stage: string; stageSource: string | null; at: number;
+  /** Stored as a notice its carrier's map says keeps the stage of the scan before it. */
+  kept?: boolean;
+};
 
-/** Stages a notice in `none` can't be told apart in, or that no stage of a scan's own is in. */
+/** Stages a notice in `none` can't be told apart in unless it is stored as one, or that no stage of a scan's own is in. */
 const NOT_NOTICES = new Set(['pending', 'in_transit']);
 
 /** A stored or served row as `stageNotices` reads it. */
@@ -21,7 +26,13 @@ export function noticeScan(event: JsonObject): NoticeScan {
   return {
     id: String(event.id), source: scanSource(event.provider_event_id, event.universal_provider), stage: String(event.stage ?? ''),
     stageSource: typeof event.stage_source === 'string' ? event.stage_source : null, at: Date.parse(String(event.occurred_at)),
+    ...(keptStage(event.kept_stage) ? { kept: true } : {}),
   };
+}
+
+/** Whether a row's `kept_stage`, as JSON or as text, marks it a notice. */
+export function keptStage(value: unknown): boolean {
+  return value === true || value === 'true';
 }
 
 /**
@@ -34,8 +45,8 @@ export function stageNotices(scans: readonly NoticeScan[], paired: ReadonlySet<s
   const ordered = scans.filter((scan) => Number.isFinite(scan.at)).sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
   const notices = new Map<string, string>();
   for (const notice of ordered) {
-    if (notice.stageSource !== 'none' || notice.source === '' || notice.source === 'app' || NOT_NOTICES.has(notice.stage)
-      || paired.has(notice.id)) continue;
+    if (notice.stageSource !== 'none' || notice.source === '' || notice.source === 'app' || paired.has(notice.id)
+      || (NOT_NOTICES.has(notice.stage) && !(notice.kept && notice.stage === 'in_transit'))) continue;
     let lead: NoticeScan | undefined;
     for (const scan of ordered) {
       if (scan.at > notice.at) break;

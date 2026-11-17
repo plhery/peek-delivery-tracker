@@ -653,6 +653,8 @@ describe('withEventPlaces', () => {
         // A scan no rule reads is in transit in `none` too: news that the parcel moves, a row of its own.
         scan('depot', 'in_transit', '2026-11-07T05:20:32Z', 'carrier_map'),
         scan('unread', 'in_transit', '2026-11-07T06:00:00Z', 'none'),
+        // Unless it is stored as a notice its carrier's map says keeps the stage (keptNotices), which says nothing new.
+        scan('kept', 'in_transit', '2026-11-07T06:30:00Z', 'none', { kept_stage: true }),
         scan('point', 'ready_for_pickup', '2026-11-07T09:15:46Z', 'carrier_map'),
         // A mail notice and a text message of one instant both go under the scan.
         scan('mail', 'ready_for_pickup', '2026-11-07T09:19:41Z', 'none'),
@@ -663,10 +665,10 @@ describe('withEventPlaces', () => {
     };
     const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
     expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([
-      ['collected', undefined], ['notice', 'collected'], ['depot', undefined], ['unread', undefined],
+      ['collected', undefined], ['notice', 'collected'], ['depot', undefined], ['unread', undefined], ['kept', 'unread'],
       ['point', undefined], ['mail', 'point'], ['text', 'point'], ['provider', undefined],
     ]);
-    expect(served.some((event) => 'stage_source' in event)).toBe(false);
+    expect(served.some((event) => 'stage_source' in event || 'kept_stage' in event)).toBe(false);
     // The apps' headline: the pickup point's scan, not the notices after it.
     const parcelEvents: TrackingEvent[] = served.filter((event) => event.id !== 'provider').map((event) => ({
       id: String(event.id), parcelId: 'parcel', stage: event.stage as Stage, description: String(event.description),

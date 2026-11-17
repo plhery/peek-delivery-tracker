@@ -3,7 +3,7 @@ title: Correos rastreio: encomendas de Espanha para Portugal
 description: Rastreio Correos (Espanha): como é o número, o que querem dizer os estados, quem entrega em Portugal, quanto tempo a encomenda espera e os contactos úteis.
 slug: correos-espanha-rastreio
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 A Correos é o correio nacional de Espanha. Não é a mesma empresa que a [Correos Express](carrier:correos-express), a transportadora expresso do Grupo Correos, que tem números próprios. Esta página é sobretudo para quem está em Portugal à espera de uma encomenda enviada de Espanha com a Correos; mais abaixo há uma parte para quem vive em Espanha. Segues a encomenda com o número no [localizador da Correos](https://www.correos.es/es/es/herramientas/localizador/envios), em espanhol ou inglês, ou colando-o na caixa acima. O número chega por email ou SMS, ou vem no aviso de chegada; as lojas põem-no no email de envio.
@@ -103,7 +103,7 @@ O [Peek](/) reconhece logo a Correos nos códigos de encomenda de 23 caracteres,
 
 O Peek mostra os estados com as palavras da Correos: em espanhol, português ou francês se usares o Peek numa dessas línguas, em inglês nas outras. Mostra os 20 eventos mais recentes (sem locais), o peso e as medidas, a hora de entrega e, enquanto a encomenda espera, o nome e a morada da estação de correios. Não guarda o teu nome, a tua morada nem a assinatura, e não mostra uma data prevista. Lê as horas da Correos como hora de Madrid, exceto as de uma unidade de distribuição nas Canárias, na hora das Canárias, e as do operador postal de origem num envio do estrangeiro, na hora do seu país, e mostra-as na hora do teu telemóvel ou computador.
 
-Um número postal acabado em `ES` que consultes a partir de Portugal pode ser procurado também nos CTT, e o Peek passa a segui-lo lá quando os CTT mostrarem progresso. Um código de 23 caracteres segue-se só na Correos. O Peek consulta a cada 10 minutos, a cada 2 quando a encomenda está em distribuição (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio rastreio da Correos ou dos CTT a responder; através de serviços de rastreio, a cada 15 minutos), e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue mudar uma entrega nem reclamar por ti.
+Um número postal acabado em `ES` que consultes a partir de Portugal pode ser procurado também nos CTT, e o Peek passa a segui-lo lá quando os CTT mostrarem progresso. Um código de 23 caracteres segue-se só na Correos. O Peek consulta até a cada 10 minutos, até a cada 2 quando a encomenda está em distribuição (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio rastreio da Correos ou dos CTT a responder; através de serviços de rastreio, a cada 15 minutos), e avisa-te com «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue mudar uma entrega nem reclamar por ti.
 
 ## Perguntas sobre o rastreio Correos
 

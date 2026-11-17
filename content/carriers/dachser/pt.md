@@ -3,7 +3,7 @@ title: Dachser tracking: rastrear encomenda, estados e contactos
 description: Rastrear uma encomenda Dachser em Portugal: a ligação de seguimento completa, o que querem dizer os estados, a marcação da entrega e os contactos.
 slug: rastrear-encomenda-dachser
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 A Dachser é um grupo alemão de logística cujas empresas em Portugal e Espanha transportam mercadoria e paletes, sobretudo entre empresas, e entregam encomendas volumosas em casa quando a loja contrata o serviço targo on-site. Para rastrear a encomenda, abre a ligação de seguimento do e-mail ou da mensagem que recebeste sobre a entrega: leva à página Customer Iberia da Dachser. Também a podes colar inteira na caixa acima.
@@ -96,7 +96,7 @@ O [Peek](/) não reconhece um número Dachser pelos algarismos nem o consegue pr
 
 O Peek só lê a página Customer Iberia, por isso cobre as entregas da Dachser em Portugal e Espanha. Mostra o estado, o histórico e o dia de entrega previsto até à entrega. Cada passo aparece com as palavras do próprio Peek, como «Dados da encomenda recebidos», «Encomenda recolhida», «Encomenda chegou a um centro Dachser», «Em distribuição», «Agendamento de entrega atualizado» ou «Entregue»; o texto da Dachser não é guardado. As horas são lidas no fuso horário que trazem ou, quando não o têm, como hora de Madrid, e mostradas no fuso horário do teu dispositivo. A Dachser não indica locais, por isso os passos não aparecem no mapa. O remetente, o teu nome, a morada, os contactos e a assinatura ficam de fora.
 
-O Peek verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da Dachser a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações em «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
+O Peek verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da Dachser a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações em «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Uma remessa desconhecida ou uma ligação estragada pode aparecer como não encontrada ou como uma verificação falhada.
 
 ## Perguntas sobre o Dachser tracking
 

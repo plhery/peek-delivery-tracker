@@ -3,7 +3,7 @@ title: Rastreio Meiteshun: número AMTS, estados e a quem perguntar
 description: Rastreio Meiteshun (美特顺) em Portugal: como é um número AMTS, o que quer dizer cada passo e porque é que o «Delivered» pode ser escrito antes da entrega.
 slug: meiteshun-rastreio
 published: 2026-11-01
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 A Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) é um transitário de Shenzhen, na China. Os seus números começam por AMTS e acabam em FS: se a loja que te enviou a encomenda te deu um, cola-o na caixa acima. Lê com cuidado o seguimento da Meiteshun: o seu sistema escreve a viagem toda, entrega incluída, quando a encomenda é criada, por isso um `Delivered` não prova que a encomenda chegou.
@@ -81,7 +81,7 @@ O Peek não mostra um passo escrito mais de doze horas antes da hora que traz, n
 
 O Peek segue a encomenda no site da Meiteshun. Só a passa para outra transportadora num caso: quando o registo indica uma linha e um número da [Swiss Post](carrier:swiss-post) para uma encomenda com destino à Suíça ou ao Liechtenstein. Se a loja te der o número da transportadora que entrega em Portugal, adiciona-o como uma encomenda à parte.
 
-O Peek verifica de 10 em 10 minutos, e de 2 em 2 minutos quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da Meiteshun ou da Swiss Post a responder; através de serviços de seguimento, de 15 em 15 minutos), embora nenhum passo da Meiteshun que o Peek conheça indique isso. Pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a Meiteshun nem a loja por ti.
+O Peek verifica até de 10 em 10 minutos, e até de 2 em 2 minutos quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da Meiteshun ou da Swiss Post a responder; através de serviços de seguimento, de 15 em 15 minutos), embora nenhum passo da Meiteshun que o Peek conheça indique isso. Pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a Meiteshun nem a loja por ti.
 
 ## Perguntas sobre o rastreio Meiteshun
 

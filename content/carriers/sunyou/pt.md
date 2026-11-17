@@ -3,7 +3,7 @@ title: SunYou rastreamento: número SY, estados e quem entrega
 description: Rastrear uma encomenda SunYou (SYPost) em Portugal: como é o número SY, o que quer dizer cada estado, quem faz a entrega e a quem perguntar quando fica parada.
 slug: sunyou-rastreamento
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 A SunYou, também escrita SYPost, é uma empresa de logística de Shenzhen que leva para o estrangeiro as encomendas pequenas de vendedores online chineses e as passa a uma transportadora local para o último troço. Os números começam por SY: escreve o teu no site de seguimento da SunYou, o [sypost.net](https://www.sypost.net), ou cola-o na caixa acima. O número vem da loja, nos detalhes de envio da encomenda.
@@ -92,7 +92,7 @@ O Peek pergunta à SunYou em inglês, por isso as linhas aparecem em inglês, sa
 
 Quando a SunYou dá o número da transportadora local e o Peek segue essa transportadora no país de destino, pergunta-lhe e passa para ela assim que mostra novidades mais recentes. A encomenda fica com o número SunYou, e a página dela mostra a transportadora que entrega e o número dela com uma ligação. Isto não acontece com todas as encomendas: a Meest, na Grécia, por exemplo, não é seguida.
 
-Verifica de 10 em 10 minutos, de 2 em 2 minutos quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da SunYou a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda: de hora a hora na Royal Mail e na Poste Italiane, de 30 em 30 minutos na PostNL, na USPS e na GOFO nos Estados Unidos, também quando a encomenda sai para entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a SunYou nem o vendedor por ti.
+Verifica até de 10 em 10 minutos, até de 2 em 2 minutos quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da SunYou a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda: de hora a hora na Royal Mail e na Poste Italiane, de 30 em 30 minutos na PostNL, na USPS e na GOFO nos Estados Unidos, também quando a encomenda sai para entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a SunYou nem o vendedor por ti.
 
 ## Perguntas sobre o rastreamento SunYou
 

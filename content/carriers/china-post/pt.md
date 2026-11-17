@@ -3,7 +3,7 @@ title: China Post rastreio: número, estados e entrega em Portugal
 description: Rastreio China Post: como é o número que acaba em CN, o que querem dizer os estados em chinês, quando a encomenda passa para os CTT e porque é que o seguimento para.
 slug: china-post-rastreio
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 A China Post, os Correios da China, é o correio nacional chinês, uma empresa do Estado, e a EMS é a sua marca de correio expresso. Se a tua encomenda do AliExpress, da Temu, da Shein ou de outra loja veio com um número de rastreio que acaba em `CN`, foi a China Post que o criou, e em Portugal quem a entrega são os [CTT](carrier:ctt), com esse mesmo número. Podes segui-la no site da China Post, o ems.com.cn, no Seguir objeto dos CTT depois de chegar a Portugal, ou na caixa acima. O número está nos detalhes de envio da encomenda, na loja onde compraste.
@@ -106,7 +106,7 @@ Mostra o estado, o histórico com a estação de cada leitura (uma estação esc
 
 Se o número acabar em `CN` e a China Post indicar Portugal como destino, o Peek pergunta também aos CTT com o mesmo número e passa para eles assim que mostram leituras novas, sem perder o histórico da China Post. Se a China Post não indicar o destino ou não responder, o Peek escolhe o correio nacional pela região do teu telemóvel (iPhone ou Android) ou, na web, pelo país da tua ligação quando adicionaste a encomenda.
 
-O Peek verifica de 10 em 10 minutos, ou de hora a hora quando a China Post deixa de dar notícias: ao fim de 12 horas sem leituras novas enquanto a encomenda está em «Etiqueta criada» ou «Aceite pela transportadora», ou de dois dias em qualquer outro passo. Quando a encomenda sai para entrega, verifica de 2 em 2 minutos, ou de 5 em 5 quando a verificação tem de abrir um navegador, como para ler a pré-visualização pública da China Post: nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da China Post a responder. Através de serviços de seguimento, verifica de 15 em 15 minutos. Quando outra transportadora fica com a entrega, como os CTT, o Peek segue o ritmo da que entrega a encomenda. Pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
+O Peek verifica de hora a hora, também quando a encomenda sai para entrega. Quando outra transportadora fica com a entrega, como os CTT, o Peek segue o ritmo da que entrega a encomenda. Pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
 
 ## Perguntas sobre o rastreio China Post
 

@@ -3,7 +3,7 @@ title: 4PX rastreio: números, estados e contacto em Portugal
 description: Rastreio 4PX em Portugal: como é um número 4PX, o que quer dizer cada estado, quem faz a entrega final e a quem perguntar quando a encomenda parece parada.
 slug: 4px-rastreio
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 A 4PX (递四方速递, 4PX Express Co., Ltd.) é uma empresa de logística transfronteiriça de Shenzhen, na China: envia para o estrangeiro as encomendas de lojas online e entrega-as a uma transportadora do país de destino, que faz a última parte do caminho. Podes seguir o número no site da 4PX, [track.4px.com](https://track.4px.com/), ou colá-lo na caixa no topo desta página. O número vem da loja ou da plataforma onde compraste, nos dados de envio da encomenda.
@@ -84,7 +84,7 @@ O [Peek](/) reconhece logo um número `4PX…CN`. Com um número LP terminado em
 
 O Peek lê a 4PX em inglês e mostra o estado, o histórico com o local de cada leitura num mapa, a hora de entrega, o país de destino e, quando a reconhece na sua lista (os USPS, por exemplo), a transportadora local com o número dela. A encomenda pode então passar a ser seguida aí, depois de lá aparecerem leituras mais recentes. `Out for delivery` e `Delivery attempt unsuccessful` aparecem com as palavras do Peek; o resto, como a 4PX escreve. O Peek não mostra data de entrega prevista, dados do ponto de levantamento nem peso.
 
-As horas são lidas nos fusos horários da 4PX (as de uma leitura sem fuso, na hora do local onde foi feita) e mostradas no fuso horário do teu dispositivo. O Peek verifica de 10 em 10 minutos, de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da 4PX a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda: de hora a hora na Royal Mail e na Poste Italiane, de 30 em 30 minutos na PostNL e nos USPS, também quando a encomenda sai para entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a 4PX nem a loja por ti.
+As horas são lidas nos fusos horários da 4PX (as de uma leitura sem fuso, na hora do local onde foi feita) e mostradas no fuso horário do teu dispositivo. O Peek verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento da 4PX a responder; através de serviços de seguimento, de 15 em 15 minutos), e pode enviar-te notificações de todas as leituras, só dos passos importantes ou «Só a entrega». Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda: de hora a hora na Royal Mail e na Poste Italiane, de 30 em 30 minutos na PostNL e nos USPS, também quando a encomenda sai para entrega. Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não pode contactar a 4PX nem a loja por ti.
 
 ## Perguntas sobre o rastreio 4PX
 

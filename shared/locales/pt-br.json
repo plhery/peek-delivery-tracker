@@ -721,6 +721,7 @@
   "alerts.on.body": "O Peek envia notificações para este navegador até a encomenda ser entregue.",
   "alerts.blocked": "As notificações estão bloqueadas para este site. Permita nas configurações do site, no navegador, e escolha Ativar de novo.",
   "alerts.dismissed": "O navegador não recebeu um sim. Escolha Ativar para ele perguntar de novo.",
+  "alerts.dismissed.edge": "O navegador não recebeu um sim. O Edge pode ter colocado o pedido atrás do sino à esquerda da barra de endereços. Escolha Ativar para ele perguntar de novo.",
   "alerts.unsupported": "Este navegador não consegue mostrar notificações.",
   "alerts.error.full": "O Peek já envia notificações desta encomenda para o máximo de navegadores possível.",
   "alerts.iphone.title": "Notificações no iPhone",

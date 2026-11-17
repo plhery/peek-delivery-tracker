@@ -721,6 +721,7 @@
   "alerts.on.body": "包裹送达前，Peek 会一直向这个浏览器发送通知。",
   "alerts.blocked": "这个网站的通知已被阻止。请在浏览器的网站设置中允许通知，然后再次选择“开启”。",
   "alerts.dismissed": "浏览器没有得到你的允许。选择“开启”即可再次询问。",
+  "alerts.dismissed.edge": "浏览器没有得到你的允许。Edge 可能把请求藏在了地址栏左侧的铃铛图标后面。选择“开启”即可再次询问。",
   "alerts.unsupported": "这个浏览器无法显示通知。",
   "alerts.error.full": "这个包裹能通知的浏览器数量已达上限。",
   "alerts.iphone.title": "在 iPhone 上接收通知",

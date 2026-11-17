@@ -721,6 +721,7 @@
   "alerts.on.body": "Peek notifies this browser until the parcel is delivered.",
   "alerts.blocked": "Notifications are blocked for this site. Allow them in your browser’s site settings, then choose Turn on again.",
   "alerts.dismissed": "The browser didn’t get a yes. Choose Turn on to be asked again.",
+  "alerts.dismissed.edge": "The browser didn’t get a yes. Edge may have put the request behind the bell at the left of the address bar. Choose Turn on to be asked again.",
   "alerts.unsupported": "This browser can’t show notifications.",
   "alerts.error.full": "Peek already notifies as many browsers as it can for this parcel.",
   "alerts.iphone.title": "Notifications on iPhone",

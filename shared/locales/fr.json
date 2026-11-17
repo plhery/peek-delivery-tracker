@@ -721,6 +721,7 @@
   "alerts.on.body": "Peek envoie des notifications à ce navigateur jusqu’à la livraison du colis.",
   "alerts.blocked": "Les notifications sont bloquées pour ce site. Autorise-les dans les réglages du site de ton navigateur, puis choisis à nouveau Activer.",
   "alerts.dismissed": "Le navigateur n’a pas reçu de oui. Choisis Activer pour qu’il te le redemande.",
+  "alerts.dismissed.edge": "Le navigateur n’a pas reçu de oui. Edge a peut-être mis la demande derrière la cloche à gauche de la barre d’adresse. Choisis Activer pour qu’il te le redemande.",
   "alerts.unsupported": "Ce navigateur ne peut pas afficher de notifications.",
   "alerts.error.full": "Peek envoie déjà des notifications à autant de navigateurs que possible pour ce colis.",
   "alerts.iphone.title": "Notifications sur iPhone",

@@ -36,7 +36,7 @@ async function anotherBrowser(browser: Browser, options: Parameters<Browser['new
  * stood in for: asked once, it says `answer`, and remembers it across reloads as a real one does.
  * Playwright's WebKit has no notifications at all: there the stand-in is the whole of them.
  */
-async function answerNotifications(page: Page, answer: 'granted' | 'denied') {
+async function answerNotifications(page: Page, answer: NotificationPermission) {
   await page.addInitScript((reply) => {
     const key = 'e2e.notifications';
     if (typeof Notification === 'undefined') Object.defineProperty(window, 'Notification', { configurable: true, writable: true, value: class {} });
@@ -297,6 +297,20 @@ test('alerts: a browser that refuses notifications gets plain guidance and the c
   expect(calendar).toMatch(/DTSTART;VALUE=DATE:\d{8}\r\n/);
   expect(calendar).toContain('SUMMARY:In transit\r\n');
   expect(calendar).toMatch(/URL:http:\/\/[^\r]+\/p\/[2-9A-HJ-NP-Za-km-z]{12}\r\n/);
+});
+
+test('alerts: desktop Edge, which may hold the request behind a bell in its address bar, says where to look', async ({ browser }) => {
+  const userAgent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36 Edg/157.0.0.0';
+  const { context, page } = await anotherBrowser(browser, { userAgent });
+  await answerNotifications(page, 'default');
+  await track(page, 'DEMOGLS20260001');
+  await actions(page).getByRole('button', { name: /^Notify me/ }).click();
+  const sheet = page.getByRole('dialog', { name: 'Notify me when it arrives' });
+  await sheet.getByRole('button', { name: 'Turn on' }).click();
+  await expect(sheet.getByRole('alert')).toHaveText('The browser didn’t get a yes. Edge may have put the request behind the bell at the left of the address bar. Choose Turn on to be asked again.');
+  await expect(sheet.getByRole('button', { name: 'Turn on' })).toBeEnabled();
+  expect(errors.get(page)).toEqual([]);
+  await context.close();
 });
 
 test('alerts: a browser without notifications is told so, and offered the calendar file instead', async ({ page }) => {

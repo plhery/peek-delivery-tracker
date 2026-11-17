@@ -32,6 +32,14 @@ export class AlertError extends Error {
 
 const REFUSED_KINDS: readonly string[] = ['unavailable', 'stopped', 'full', 'burst', 'daily', 'refused', 'validation'];
 
+/**
+ * Desktop Edge, which may answer a site's notification request with a crossed-out bell at the left of
+ * its address bar instead of a prompt: the page hears no yes while the bell holds the request.
+ */
+export function quietRequests(userAgent = navigator.userAgent): boolean {
+  return /\bEdg\//.test(userAgent);
+}
+
 /** Why turning alerts on failed, as analytics counts it: one fixed word, never the error itself. */
 export function alertFailure(error: unknown): AlertsReason {
   if (error instanceof AlertError) return error.kind === 'failed' ? 'subscription' : error.kind;

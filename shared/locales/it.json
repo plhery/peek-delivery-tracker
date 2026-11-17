@@ -721,6 +721,7 @@
   "alerts.on.body": "Peek invia notifiche a questo browser finché il pacco non viene consegnato.",
   "alerts.blocked": "Le notifiche sono bloccate per questo sito. Consentile nelle impostazioni del sito del browser, poi scegli di nuovo Attiva.",
   "alerts.dismissed": "Il browser non ha ricevuto un sì. Scegli Attiva per fartelo chiedere di nuovo.",
+  "alerts.dismissed.edge": "Il browser non ha ricevuto un sì. Edge potrebbe aver messo la richiesta dietro la campanella a sinistra della barra degli indirizzi. Scegli Attiva per fartelo chiedere di nuovo.",
   "alerts.unsupported": "Questo browser non può mostrare notifiche.",
   "alerts.error.full": "Peek invia già notifiche per questo pacco al numero massimo di browser.",
   "alerts.iphone.title": "Notifiche su iPhone",

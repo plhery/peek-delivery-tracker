@@ -7,7 +7,7 @@ import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
 import { appStoreLink } from '../../lib/appStore';
 import { homeScreenPath } from '../../lib/homeScreen';
-import { AlertError, alertFailure, alertSupport, deviceAlert, turnOffAlert, turnOnAlert, type AlertSupport } from '../alerts';
+import { AlertError, alertFailure, alertSupport, deviceAlert, quietRequests, turnOffAlert, turnOnAlert, type AlertSupport } from '../alerts';
 import { appParcelURL, appStoreVisited, noteAppStoreVisit } from '../appLink';
 import { useLinkNote } from '../deviceNotes';
 import { PARCEL_ALERT_PRESETS, ParcelLinkError, parcelLinkErrorKey, type ParcelAlertPreset, type ParcelAlerts } from '../links';
@@ -29,7 +29,8 @@ const SUPPORT_GUIDANCE: Partial<Record<AlertSupport, MessageKey>> = {
 
 function failureKey(error: unknown): MessageKey {
   if (error instanceof AlertError) {
-    return error.kind === 'blocked' ? 'alerts.blocked' : error.kind === 'dismissed' ? 'alerts.dismissed'
+    // Desktop Edge may have put the request behind a bell in its address bar: the reader is told where.
+    return error.kind === 'blocked' ? 'alerts.blocked' : error.kind === 'dismissed' ? quietRequests() ? 'alerts.dismissed.edge' : 'alerts.dismissed'
       : error.kind === 'unsupported' || error.kind === 'worker' ? 'alerts.unsupported' : 'notifications.error.enable';
   }
   if (error instanceof ParcelLinkError && ['full', 'unconfigured', 'stopped', 'unavailable', 'burst', 'offline'].includes(error.kind)) return parcelLinkErrorKey(error);

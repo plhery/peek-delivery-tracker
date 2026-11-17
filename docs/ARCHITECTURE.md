@@ -270,7 +270,10 @@ Key server modules:
     deleting the account keeps it too while link alerts use it, once the server has dropped
     the account's row. When the server can't be told, or the account replaces a subscription
     the push service dropped, the browser takes a new subscription and moves its link alerts
-    there. The calendar file is made in the browser.
+    there. The calendar file is made in the browser. A request the browser leaves unanswered
+    says so, and desktop Edge, which may hold it behind a crossed-out bell at the left of its
+    address bar instead of asking, names that bell; Edge blocks the site after a few such
+    requests, and the reader then gets the blocked guidance.
   - The iPhone app follows a link without an account and holds its alert with its APNs
     device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`),
     the Android app with its FCM token, or its installation token with a UnifiedPush

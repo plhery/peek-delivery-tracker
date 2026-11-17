@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { IPHONE_SAFARI, restoreAlertBrowser, stubAlertBrowser, TEST_PUSH_ENDPOINT, TEST_PUSH_KEY } from '../test/alertBrowser';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
-import { AlertError, alertFailure, alertSupport, deviceAlert, followAlertLanguage, turnOffAlert, turnOnAlert } from './alerts';
+import { AlertError, alertFailure, alertSupport, deviceAlert, followAlertLanguage, quietRequests, turnOffAlert, turnOnAlert } from './alerts';
 import { forgetAllLinkNotes, linkNote, noteLink } from './deviceNotes';
 import { ParcelLinkError } from './links';
 import { forgetAllRecents, rememberParcel } from './recents';
@@ -132,6 +132,14 @@ describe('turning alerts on', () => {
       .map((kind) => alertFailure(new ParcelLinkError(kind as ParcelLinkError['kind']))))
       .toEqual(['offline', 'server', 'server', 'refused', 'refused', 'refused', 'refused', 'refused']);
     expect(alertFailure(new TypeError('secret detail'))).toBe('other');
+  });
+
+  it('knows desktop Edge, whose address bar may hold the request, from its phone apps and from Chrome', () => {
+    const chrome = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Safari/537.36';
+    expect(quietRequests(`${chrome} Edg/157.0.0.0`)).toBe(true);
+    expect(quietRequests('Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/157.0.0.0 Mobile Safari/537.36 EdgA/157.0.0.0')).toBe(false);
+    expect(quietRequests('Mozilla/5.0 (iPhone; CPU iPhone OS 27_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/27.0 EdgiOS/157.0 Mobile/15E148 Safari/604.1')).toBe(false);
+    expect(quietRequests(chrome)).toBe(false);
   });
 
   it('passes the server’s refusal on, and drops a subscription it made only for this alert', async () => {

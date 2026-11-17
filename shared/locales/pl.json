@@ -721,6 +721,7 @@
   "alerts.on.body": "Peek powiadamia tę przeglądarkę, dopóki przesyłka nie zostanie doręczona.",
   "alerts.blocked": "Powiadomienia są zablokowane dla tej witryny. Zezwól na nie w ustawieniach witryny w przeglądarce, a potem ponownie wybierz „Włącz”.",
   "alerts.dismissed": "Przeglądarka nie dostała zgody. Wybierz „Włącz”, aby zapytała ponownie.",
+  "alerts.dismissed.edge": "Przeglądarka nie dostała zgody. Edge mógł schować prośbę pod dzwonkiem po lewej stronie paska adresu. Wybierz „Włącz”, aby zapytała ponownie.",
   "alerts.unsupported": "Ta przeglądarka nie potrafi wyświetlać powiadomień.",
   "alerts.error.full": "Dla tej przesyłki Peek powiadamia już tyle przeglądarek, ile może.",
   "alerts.iphone.title": "Powiadomienia na iPhonie",

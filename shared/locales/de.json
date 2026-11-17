@@ -721,6 +721,7 @@
   "alerts.on.body": "Peek schickt diesem Browser Mitteilungen, bis das Paket zugestellt ist.",
   "alerts.blocked": "Mitteilungen sind für diese Website blockiert. Erlaube sie in den Website-Einstellungen deines Browsers und wähle dann erneut „Einschalten“.",
   "alerts.dismissed": "Der Browser hat kein Ja bekommen. Wähle „Einschalten“, um noch einmal gefragt zu werden.",
+  "alerts.dismissed.edge": "Der Browser hat kein Ja bekommen. Edge hat die Anfrage vielleicht hinter der Glocke links in der Adresszeile abgelegt. Wähle „Einschalten“, um noch einmal gefragt zu werden.",
   "alerts.unsupported": "Dieser Browser kann keine Mitteilungen anzeigen.",
   "alerts.error.full": "Peek schickt für dieses Paket schon so vielen Browsern Mitteilungen, wie es kann.",
   "alerts.iphone.title": "Mitteilungen auf dem iPhone",

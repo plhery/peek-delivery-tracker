@@ -586,7 +586,8 @@ describe('migrations that already made a change', () => {
       missingMigrations: ledger().missingMigrations,
     });
     assert.equal(blocked, false);
-    for (const line of ['carriers added example-post,', 'carriers added example-post,, example-courier']) {
+    for (const line of ['carriers added example-post,', 'carriers added example-post,, example-courier',
+      'carriers added example-post example-courier']) {
       assert.throws(() => declaredChanges([migration('20261017100000_example', line)]), /does not understand/, line);
     }
   });

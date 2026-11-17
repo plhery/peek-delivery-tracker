@@ -392,7 +392,7 @@ const ID_FACETS = new Set(['carriers', 'providers', 'stages']);
 
 /**
  * The changes each migration declares, in the order of `migrations`. A line about ids may list several,
- * separated by commas, and one closed with a full stop, as a sentence, still declares them, as does an
+ * separated by commas (never by spaces alone), and one closed with a full stop, as a sentence, still declares them, as does an
  * input's line that ends in `optional.` or `required.`; a pattern is taken as written.
  */
 export function declaredChanges(migrations) {
@@ -404,7 +404,8 @@ export function declaredChanges(migrations) {
       }
       const entries = ID_FACETS.has(match[1]) ? match[3].replace(/\.$/, '').split(/\s*,\s*/)
         : [match[1] === 'inputs' ? match[3].replace(/, (optional|required)\.$/, ', $1') : match[3]];
-      if (entries.some((entry) => !entry)) {
+      // An id holds no space: ids listed with spaces alone would read as one id no release names.
+      if (entries.some((entry) => !entry || (ID_FACETS.has(match[1]) && /\s/.test(entry)))) {
         throw new Error(`${name} has a database gate line the gate does not understand: ${line.slice(0, 200)}`);
       }
       return entries.map((entry) => ({ migration: name, facet: match[1], change: match[2], entry }));

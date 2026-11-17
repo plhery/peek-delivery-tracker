@@ -1,6 +1,6 @@
 -- Accept seven carriers from Russia, Poland, Spain, Romania and North Macedonia, tracked through universal providers.
 -- The constraint and functions build on 20261117112500_pwb.
--- Database gate: carriers added atc-express gbs-broker unitrade rohlig-suus szendex altex-curier viapost
+-- Database gate: carriers added atc-express, gbs-broker, unitrade, rohlig-suus, szendex, altex-curier, viapost
 
 alter table public.packages
   drop constraint if exists packages_carrier_check,

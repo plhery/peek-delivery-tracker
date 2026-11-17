@@ -320,8 +320,8 @@ class ParcelsWidgetTest {
     }
 
     /**
-     * Its design by how many parcels it shows, from the demo's cards: one a small widget shows as Next delivery's card,
-     * two as passes, three as rows; a medium one two cards, four passes; a large one three cards, six passes. Until a
+     * Its design by how many parcels it shows, from the demo's cards: one a small widget shows as a card, two as passes,
+     * three as rows; a medium one two cards, four passes; a large one three cards, six passes. Until a
      * parcel's pictures are drawn, its rows.
      */
     @Test
@@ -335,7 +335,7 @@ class ParcelsWidgetTest {
         assertTrue(demo.parcels.all { it.section != null && it.carrierId != null })
         fun some(count: Int) = demo.copy(parcels = demo.parcels.take(count))
 
-        // One: the card, Next delivery's, which opens the parcel; the rest of the widget opens the list.
+        // One: the card, which opens the parcel; the rest of the widget opens the list.
         val one = some(1).parcels.single()
         show(some(1), LIST_SMALL, source::read) {
             onNode(hasTextEqualTo(one.label)).assertExists()

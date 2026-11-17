@@ -542,7 +542,7 @@ class Localizer(
     }
 
     /**
-     * A tracking step's time as the list widget writes it: its `clock`, else the time, alone on `now`'s day, else after
+     * A tracking step's time as the widget writes it: its `clock`, else the time, alone on `now`'s day, else after
      * the short weekday ("Thu 21:40"). A step dated by its day alone has an empty clock: nothing on its day, then the
      * weekday alone ("Thu").
      */

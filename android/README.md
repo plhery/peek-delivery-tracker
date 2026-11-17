@@ -99,7 +99,7 @@ as Next delivery shows the list, at the size it was placed with.
 It shows the parcels as the iPhone's list widget does. Its size stands for one of the iPhone's three (`listSize`): from
 280 dp tall the large one, else from 250 dp wide the medium one, else the small one. Its design follows how many
 parcels it shows (`DeliveryWidgetList.design`), with `k` = 1, 2 or 3 for the small, medium or large size:
-- up to `k`, cards, the app list's Next up first: the iPhone's Next delivery card or two side by side
+- up to `k`, cards, the app list's Next up first: one card, or two side by side, as the iPhone's
   (`DeliveryWidgetContent.kt`); in a large widget one wide card over the parcel's last four steps, worded as its page
   words them, a step dated by its day alone naming that day and no time, two wide cards, or three of the app list's
   cards;

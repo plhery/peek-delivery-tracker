@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.drawscope.CanvasDrawScope
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.graphics.drawscope.scale
-import androidx.compose.ui.text.font.FontWeight as ComposeFontWeight
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
@@ -31,13 +30,10 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.core.net.toUri
 import androidx.glance.GlanceModifier
-import androidx.glance.Image
-import androidx.glance.ImageProvider
 import androidx.glance.LocalContext
 import androidx.glance.action.Action
 import androidx.glance.action.clickable
 import androidx.glance.appwidget.AndroidRemoteViews
-import androidx.glance.appwidget.action.actionRunCallback
 import androidx.glance.appwidget.action.actionStartActivity
 import androidx.glance.appwidget.appWidgetBackground
 import androidx.glance.appwidget.cornerRadius
@@ -55,8 +51,6 @@ import androidx.glance.layout.height
 import androidx.glance.layout.padding
 import androidx.glance.layout.size
 import androidx.glance.layout.width
-import androidx.glance.semantics.contentDescription
-import androidx.glance.semantics.semantics
 import androidx.glance.text.FontWeight
 import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
@@ -64,38 +58,23 @@ import androidx.glance.unit.ColorProvider
 import com.plhery.peekdeliverytracker.MainActivity
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPictures
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetTimeline
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.listShortStatus
 import com.plhery.peekdeliverytracker.core.listStatus
 import com.plhery.peekdeliverytracker.core.openingLine
-import com.plhery.peekdeliverytracker.ui.draw.drawPeekMark
-import com.plhery.peekdeliverytracker.ui.symbols.SymbolRenderingMode
-import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
 import com.plhery.peekdeliverytracker.ui.symbols.drawSymbol
-import com.plhery.peekdeliverytracker.ui.symbols.materialSymbols
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import java.util.Locale
-import kotlin.math.floor
 import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
-// DeliveryWidget.swift's DeliveryWidgetView and DeliveryWidgetCards.swift: what the widget shows, in Glance's
-// RemoteViews, at the size the launcher gives it. Text is iOS's text styles at the phone's text size within WidgetKit's
-// range, shrunk to fit where the iPhone's shrinks ([WidgetText]); Glance has three weights (semibold is Medium, heavy
-// Bold) and no tracking. Glance's layouts don't give up a line where room runs out, as SwiftUI's do, so each layout
-// works out from the measured text which lines it keeps.
-
-/** `WidgetPalette`: the widget's own colours when it writes words, the same light and dark. */
-internal object WidgetPalette {
-    val accent = Color(0.96f, 0.73f, 0.13f)
-    val accentBright = Color(1f, 0.84f, 0.34f)
-    val ink = Color(0.10f, 0.10f, 0.09f)
-}
+// DeliveryWidgetCards.swift: the widget's cards, in Glance's RemoteViews, at the size the launcher gives it. Text is
+// iOS's text styles at the phone's text size within WidgetKit's range, shrunk to fit where the iPhone's shrinks
+// ([WidgetText]); Glance has three weights (semibold is Medium, heavy Bold) and no tracking. Glance's layouts don't give
+// up a line where room runs out, as SwiftUI's do, so each layout works out from the measured text which lines it keeps.
 
 /** `DeliveryWidgetCardColors`: the light and the dark one of a card's pair of hex colours, as the launcher's mode picks. */
 internal object WidgetCardColors {
@@ -134,63 +113,39 @@ fun isMedium(size: DpSize): Boolean = size.width >= MEDIUM_WIDTH && size.width.v
 /** A card's pictures as the widget reads them: its mark, and its route as the widget's shape shows it, light and dark. */
 class WidgetCardArt(val mark: Pair<Bitmap, Bitmap>, val route: Pair<Bitmap, Bitmap>?)
 
-/** The widget's next button reaches past what it shows, so that a finger finds it (`DeliveryWidgetNextMark`). */
-private object NextMark {
-    val size = 18.dp
-    val reach = 9.dp
-
-    /** What a row the button stands at the end of leaves it: the button, and the row's spacing. */
-    val room = size + 8.dp
-}
-
 /**
- * `DeliveryWidgetView`, the iPhone's Next delivery widget, whose one or two cards the Parcels widget shows for its
- * fewest parcels: the cards once the app has drawn every one the widget shows, else words, at the widget's `size`: the
- * iPhone's systemMedium family where it is wide for its height ([isMedium]). A tap opens the parcel shown, or the app
- * where none is; the page between two cards opens `page` where one is given, else the app. The cards carry the
- * new-update dot where `marked`, as the Parcels widget's do; the iPhone's Next delivery's don't.
+ * `ParcelCards`' one or two cards in a small or medium widget, each a parcel with its card and its pictures: one fills
+ * the widget, in the iPhone's systemMedium shape where the widget is wide for its height ([isMedium]); two stand side by
+ * side. A card opens its parcel, and the page between two cards opens `page`.
  */
 @Composable
-fun DeliveryWidgetContent(entry: DeliveryWidgetEntry<WidgetCardArt>, size: DpSize, page: Intent? = null, marked: Boolean = false) {
-    val context = LocalContext.current
-    val copy = remember(entry.languageCode) { ExtensionLocalizer(entry.languageCode) }
-    val type = WidgetText(context)
-    val cards = entry.cards
-    if (cards.isEmpty()) Words(entry, size, type, copy) else Cards(entry, cards, size, type, copy, page, marked)
-}
-
-@Composable
-private fun Cards(
-    entry: DeliveryWidgetEntry<WidgetCardArt>,
+internal fun OneOrTwoCards(
+    languageCode: String,
     cards: List<Triple<DeliveryWidgetParcel, DeliveryWidgetCard, WidgetCardArt>>,
     size: DpSize,
     type: WidgetText,
-    copy: ExtensionLocalizer,
-    page: Intent?,
-    marked: Boolean,
+    page: Intent,
 ) {
     val context = LocalContext.current
     val only = cards.singleOrNull()
     if (only != null) {
         val shape = if (isMedium(size)) DeliveryWidgetPicture.Wide else DeliveryWidgetPicture.Small
         val (parcel, card, art) = only
-        val words = CardWords(parcel, card, shape, leavesNext = entry.next != null, room = size.inside(MARGIN), type, entry.languageCode, marked)
+        val words = CardWords(parcel, card, shape, room = size.inside(MARGIN), type, languageCode)
         Box(root().background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))) {
             CardBackground(art, shape, size)
             Box(GlanceModifier.fillMaxSize().padding(MARGIN)) { CardView(parcel, card, art, words) }
-            NextButton(entry, isMedium(size), card.ink, copy, top = MARGIN + words.markHeight / 2, end = MARGIN + NextMark.reach)
         }
     } else {
         val half = DpSize((size.width - MARGIN * 2 - CARD_SPACING) / 2, size.height - MARGIN * 2)
-        // The page between the cards opens the app, as WidgetKit's does, but isn't an item of its own for TalkBack, as
+        // The page between the cards opens the list, as WidgetKit's does, but isn't an item of its own for TalkBack, as
         // the iPhone's page isn't one for VoiceOver: its cards are.
         Box(root().background(WidgetCardColors.page)) {
             PageTap(page)
             Row(GlanceModifier.fillMaxSize().padding(MARGIN)) {
                 cards.forEachIndexed { index, (parcel, card, art) ->
                     if (index > 0) Spacer(GlanceModifier.width(CARD_SPACING))
-                    val leavesNext = entry.next != null && index == cards.lastIndex
-                    val words = CardWords(parcel, card, DeliveryWidgetPicture.Half, leavesNext, room = half.inside(CARD_PADDING), type, entry.languageCode, marked)
+                    val words = CardWords(parcel, card, DeliveryWidgetPicture.Half, room = half.inside(CARD_PADDING), type, languageCode)
                     Box(
                         GlanceModifier.defaultWeight().fillMaxHeight().cornerRadius(14.dp).background(WidgetCardColors.pair(card.surface))
                             .clickable(openParcel(context, parcel)),
@@ -200,11 +155,6 @@ private fun Cards(
                     }
                 }
             }
-            // Over the last card, outside its link.
-            NextButton(
-                entry, isMedium(size), cards.last().second.ink, copy, top = MARGIN + CARD_PADDING + markHeight(DeliveryWidgetPicture.Half) / 2,
-                end = MARGIN + CARD_PADDING + NextMark.reach,
-            )
         }
     }
 }
@@ -212,24 +162,22 @@ private fun Cards(
 /**
  * A card's words as they fit `room`, the card inside its padding: the label on two lines where the card is tall enough
  * for them, else one, shrunk to 0.82 of its style to fit them, and the status line shrunk to 0.8 to fit its one, past
- * the new-update dot where the card is `marked` (the Parcels widget's) and the parcel has one ([newUpdate]).
+ * the new-update dot where the parcel has one ([newUpdate]).
  */
 internal class CardWords(
     parcel: DeliveryWidgetParcel,
     card: DeliveryWidgetCard,
     val shape: DeliveryWidgetPicture,
-    val leavesNext: Boolean,
     room: DpSize,
     val type: WidgetText,
     languageCode: String,
-    marked: Boolean,
 ) {
     val half = shape == DeliveryWidgetPicture.Half
     val markHeight = markHeight(shape)
     val status = if (card.status == parcel.detail) card.status else "${card.status} · ${parcel.detail}"
 
     /** Whether the status line starts with the new-update dot (#72). */
-    val newUpdate = marked && parcel.newUpdate == true
+    val newUpdate = parcel.newUpdate == true
     private val statusWidth = room.width - if (newUpdate) parcel.dotRoom else 0.dp
     val statusPoints = type.fit(status, type.points(if (half) IosTextStyle.Caption2 else IosTextStyle.Caption), FontWeight.Normal, statusWidth, 1, 0.8f)
     val spacing = if (half) 2.dp else 3.dp
@@ -242,7 +190,7 @@ internal class CardWords(
         .firstOrNull { markHeight + 4.dp + it.height + spacing + statusHeight <= room.height } ?: FittedLine.of(parcel.label, labelStyle, FontWeight.Medium, room.width, 1, 0.82f, type)
 
     /** The width the top row leaves the mark, which shrinks to it as `scaledToFit` shrinks the iPhone's. */
-    val markRoom = room.width - if (leavesNext) NextMark.room else 0.dp
+    val markRoom = room.width
 }
 
 /** A line of text at the size it fits its room, and how tall it stands. */
@@ -302,8 +250,6 @@ internal fun CardView(parcel: DeliveryWidgetParcel, card: DeliveryWidgetCard, ar
             val mark = GlanceModifier.height(words.markHeight).let { if (natural > words.markRoom) it.width(words.markRoom) else it }
             DayNightPicture(art.mark, R.layout.widget_mark, mark, description = words.markDescription)
             Spacer(GlanceModifier.defaultWeight())
-            // The end of the top row is left to the widget's next button.
-            if (words.leavesNext) Spacer(GlanceModifier.width(NextMark.room))
         }
         Spacer(GlanceModifier.height(4.dp))
         Spacer(GlanceModifier.defaultWeight())
@@ -364,293 +310,8 @@ internal val NEW_UPDATE_GAP = 5.dp
 internal const val NEW_UPDATE_OPACITY = 0.8f
 
 /**
- * `words`: the widget's own yellow, with the next parcels, or why there are none: the widget switched off in the app,
- * or nothing on its way. A small widget opens its parcel; a medium one each of its two.
- */
-@Composable
-private fun Words(entry: DeliveryWidgetEntry<WidgetCardArt>, size: DpSize, type: WidgetText, copy: ExtensionLocalizer) {
-    val context = LocalContext.current
-    val parcels = entry.shown
-    val medium = isMedium(size)
-    val tap = if (!medium && entry.enabled) parcels.firstOrNull()?.let { openParcel(context, it) } else null
-    val room = size.inside(MARGIN)
-    Box(root().background(ImageProvider(R.drawable.widget_words_background)).clickable(tap ?: openApp(context))) {
-        when {
-            !entry.enabled -> Margins {
-                StateView("rectangle.slash", copy.text("widget.disabledTitle"), copy.onAndroid("widget.disabledDescription"), medium, room, type)
-            }
-            parcels.isEmpty() -> Margins { StateView("shippingbox", copy.text("app.noneOnWay"), copy.text("app.emptyDescription"), medium, room, type) }
-            medium -> {
-                val words = MediumWords(entry, parcels.take(2), room, type, copy)
-                Margins { MediumContent(words, type) }
-                NextButton(entry, medium, null, copy, top = MARGIN + words.buttonTop, end = MARGIN + words.buttonEnd)
-            }
-            else -> {
-                val words = SmallWords(entry, parcels.first(), room, type, copy)
-                Margins { SmallContent(words, type) }
-                NextButton(entry, medium, null, copy, top = MARGIN + words.buttonTop, end = MARGIN + NextMark.reach)
-            }
-        }
-    }
-}
-
-@Composable
-private fun Margins(content: @Composable () -> Unit) {
-    Box(GlanceModifier.fillMaxSize().padding(MARGIN)) { content() }
-}
-
-/**
- * What a words widget keeps where its height runs short, the date last: the name's second line goes first (as
- * SwiftUI's would), then the header (Android's widgets can be shorter than any iPhone's or iPad's), then the carrier.
- * Without the header, the next button stands level with the badge of the parcel it stands over.
- */
-private class WordsLines(val header: Boolean, val labelLines: Int, val carrier: Boolean)
-
-/** `widgetHeader`'s height: the app's mark, or its name where the text size makes that taller. */
-private fun headerHeight(type: WidgetText): Dp = maxOf(HEADER_MARK, type.lineHeight(type.points(IosTextStyle.Caption2), FontWeight.Bold))
-
-/** `smallContent`'s lines as they fit `room`, the widget inside its margins. */
-private class SmallWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val parcel: DeliveryWidgetParcel, room: DpSize, type: WidgetText, val copy: ExtensionLocalizer) {
-    val caption = type.points(IosTextStyle.Caption)
-    val detail = lastLine(parcel, copy)
-    val lines: WordsLines
-    val badge: BadgeLine
-    val label: FittedLine
-
-    /** The next button's centre from the top inside the margins: level with the header's mark, else with the badge. */
-    val buttonTop: Dp
-
-    init {
-        val carrierHeight = type.lineHeight(caption, FontWeight.Medium)
-        val detailHeight = if (detail != null) type.lineHeight(caption, FontWeight.Bold) else 0.dp
-        fun badge(lines: WordsLines) = BadgeLine(parcel, room.width, leaves = if (!lines.header && entry.next != null) NextMark.room else 0.dp, type, copy)
-        fun label(lines: WordsLines) = FittedLine.of(parcel.label, IosTextStyle.Headline, FontWeight.Bold, room.width, lines.labelLines, 0.82f, type)
-        val choices = listOf(WordsLines(true, 2, true), WordsLines(true, 1, true), WordsLines(false, 1, true), WordsLines(false, 1, false))
-        lines = choices.firstOrNull { lines ->
-            (if (lines.header) headerHeight(type) + 6.dp else 0.dp) + badge(lines).height + 3.dp + label(lines).height + 6.dp +
-                (if (lines.carrier) carrierHeight + (if (detail != null) 1.dp else 0.dp) else 0.dp) + detailHeight <= room.height
-        } ?: choices.last()
-        badge = badge(lines)
-        label = label(lines)
-        buttonTop = if (lines.header) headerHeight(type) / 2 else badge.height / 2
-    }
-}
-
-/**
- * Inside the margins, the smallest widgets still fit a two-line name. Grouped, as a layout of Glance's shows ten
- * children at most.
- */
-@Composable
-private fun SmallContent(layout: SmallWords, type: WidgetText) {
-    val parcel = layout.parcel
-    Column(GlanceModifier.fillMaxSize()) {
-        if (layout.lines.header) {
-            Header(type, layout.copy)
-            Spacer(GlanceModifier.height(6.dp))
-        }
-        Spacer(GlanceModifier.defaultWeight())
-        Column {
-            Badge(layout.badge, type)
-            Spacer(GlanceModifier.height(3.dp))
-            Text(layout.label.text, maxLines = layout.label.lines, style = words(type, layout.label.points, FontWeight.Bold))
-        }
-        Spacer(GlanceModifier.height(6.dp))
-        Spacer(GlanceModifier.defaultWeight())
-        Column {
-            if (layout.lines.carrier) {
-                Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption, FontWeight.Medium, 0.68f))
-                if (layout.detail != null) Spacer(GlanceModifier.height(1.dp))
-            }
-            layout.detail?.let { Text(it, maxLines = 1, style = words(type, layout.caption, FontWeight.Bold)) }
-        }
-    }
-}
-
-/** `mediumContent`'s lines as they fit `room`: one or two parcels side by side, each in its column. */
-private class MediumWords(entry: DeliveryWidgetEntry<WidgetCardArt>, val shown: List<DeliveryWidgetParcel>, room: DpSize, type: WidgetText, val copy: ExtensionLocalizer) {
-    val caption = type.points(IosTextStyle.Caption)
-    val caption2 = type.points(IosTextStyle.Caption2)
-    val details = shown.map { lastLine(it, copy) }
-    val lines: WordsLines
-    val badges: List<BadgeLine>
-    val labels: List<FittedLine>
-
-    /** The next button's centre from the top and the end inside the margins: level with the header's mark, else with the last column's badge. */
-    val buttonTop: Dp
-    val buttonEnd: Dp
-
-    init {
-        // Two columns whatever is shown, as the iPhone's single parcel takes half the width.
-        val column = (room.width - COLUMN_SPACING) / 2 - COLUMN_PADDING * 2
-        val carrierHeight = type.lineHeight(caption2, FontWeight.Medium)
-        val detailHeight = if (details.any { it != null }) type.lineHeight(caption, FontWeight.Bold) + 3.dp else 0.dp
-        fun badges(lines: WordsLines) = shown.mapIndexed { index, parcel ->
-            val leavesNext = !lines.header && entry.next != null && shown.size == 2 && index == 1
-            BadgeLine(parcel, column, leaves = if (leavesNext) NextMark.room else 0.dp, type, copy)
-        }
-        labels = shown.map { FittedLine.of(it.label, IosTextStyle.Subheadline, FontWeight.Bold, column, 1, 0.85f, type) }
-        val choices = listOf(WordsLines(true, 1, true), WordsLines(false, 1, true), WordsLines(false, 1, false))
-        lines = choices.firstOrNull { lines ->
-            (if (lines.header) headerHeight(type) + 8.dp else 0.dp) + COLUMN_TOP * 2 + badges(lines).maxOf { it.height } + 3.dp +
-                labels.maxOf { it.height } + (if (lines.carrier) 3.dp + carrierHeight else 0.dp) + detailHeight <= room.height
-        } ?: choices.last()
-        badges = badges(lines)
-        buttonTop = if (lines.header) headerHeight(type) / 2 else COLUMN_TOP + badges.last().height / 2
-        buttonEnd = if (lines.header || shown.size == 1) NextMark.reach else COLUMN_PADDING + NextMark.reach
-    }
-}
-
-@Composable
-private fun MediumContent(layout: MediumWords, type: WidgetText) {
-    val context = LocalContext.current
-    Column(GlanceModifier.fillMaxSize()) {
-        if (layout.lines.header) {
-            Header(type, layout.copy)
-            Spacer(GlanceModifier.height(8.dp))
-        }
-        Row(GlanceModifier.fillMaxWidth().defaultWeight()) {
-            layout.shown.forEachIndexed { index, parcel ->
-                if (index > 0) Spacer(GlanceModifier.width(COLUMN_SPACING))
-                Column(
-                    GlanceModifier.defaultWeight().fillMaxHeight().cornerRadius(14.dp).background(ColorProvider(Color.White.copy(alpha = 0.36f)))
-                        .clickable(openParcel(context, parcel)).padding(horizontal = COLUMN_PADDING, vertical = COLUMN_TOP),
-                ) {
-                    Badge(layout.badges[index], type)
-                    Spacer(GlanceModifier.height(3.dp))
-                    Text(layout.labels[index].text, maxLines = 1, style = words(type, layout.labels[index].points, FontWeight.Bold))
-                    if (layout.lines.carrier) {
-                        Spacer(GlanceModifier.height(3.dp))
-                        Text(parcel.carrier, maxLines = 1, style = words(type, layout.caption2, FontWeight.Medium, 0.64f))
-                    }
-                    layout.details[index]?.let {
-                        Spacer(GlanceModifier.height(3.dp))
-                        Text(it, maxLines = 1, style = words(type, layout.caption, FontWeight.Bold))
-                    }
-                }
-            }
-            if (layout.shown.size == 1) {
-                Spacer(GlanceModifier.width(COLUMN_SPACING))
-                Spacer(GlanceModifier.defaultWeight())
-            }
-        }
-    }
-}
-
-/**
- * `widgetHeader`: the app's mark and name, as tall as the name where the text size makes it taller than the mark. The
- * next button is level with the mark, as the iPhone's is (`deliveryWidgetNext(markHeight: 16)`).
- */
-@Composable
-private fun Header(type: WidgetText, copy: ExtensionLocalizer) {
-    val context = LocalContext.current
-    val mark = remember { peekMark(context) }
-    Row(GlanceModifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-        Image(ImageProvider(mark), contentDescription = null, modifier = GlanceModifier.size(HEADER_MARK))
-        Spacer(GlanceModifier.width(6.dp))
-        val name = copy.text("app.title").uppercase(ExtensionLocalizer.locale(copy.languageCode))
-        Text(name, maxLines = 1, style = words(type, type.points(IosTextStyle.Caption2), FontWeight.Bold, 0.72f))
-    }
-}
-
-/**
- * `parcelBadge`'s words: out for delivery, delivered or on its way, in `width`, its symbol and its spacing included,
- * less what it `leaves` at its end to the widget's next button; the words shrink to 0.7 of caption 2 before they end in
- * an ellipsis.
- */
-private class BadgeLine(parcel: DeliveryWidgetParcel, width: Dp, leaves: Dp, type: WidgetText, copy: ExtensionLocalizer) {
-    val symbol = if (parcel.isOutForDelivery) "bicycle" else if (parcel.deliveredAt != null) "checkmark.circle.fill" else "arrow.right.circle.fill"
-    val symbolPoints = type.points(IosTextStyle.Caption2)
-    private val box = requireNotNull(materialSymbols[symbol]).box(symbolPoints, SymbolScale.Small.factor)
-    val text = badgeWords(parcel, copy).uppercase(ExtensionLocalizer.locale(copy.languageCode))
-    private val words = width - leaves - box[0].dp - 4.dp
-    /** The words' width where the badge leaves room for the button, which the row's own width wouldn't hold them to. */
-    val textWidth: Dp? = words.takeIf { leaves > 0.dp }
-    val points = type.fit(text, symbolPoints, FontWeight.Bold, words, 1, 0.7f)
-    val height = maxOf(box[1].dp, type.lineHeight(points, FontWeight.Bold))
-}
-
-/** `badge(_:)`: what a parcel's badge says, before the badge puts it in capitals. */
-private fun badgeWords(parcel: DeliveryWidgetParcel, copy: ExtensionLocalizer): String =
-    copy.text(if (parcel.isOutForDelivery) "stage.out_for_delivery" else if (parcel.deliveredAt != null) "stage.delivered" else "app.onTheWaySection")
-
-/** `detail(_:)`: the parcel's last line, unless it would say what its badge says: "Out for delivery" with no hours. */
-private fun lastLine(parcel: DeliveryWidgetParcel, copy: ExtensionLocalizer): String? =
-    parcel.detail.takeUnless { it.equals(badgeWords(parcel, copy), ignoreCase = true) }?.openingLine(ExtensionLocalizer.locale(copy.languageCode))
-
-/** `parcelBadge`: tighter than a Label, so "Out for delivery" fits a small widget. */
-@Composable
-private fun Badge(badge: BadgeLine, type: WidgetText) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Symbol(badge.symbol, badge.symbolPoints, ComposeFontWeight.Black, WidgetPalette.ink, SymbolScale.Small)
-        Spacer(GlanceModifier.width(4.dp))
-        val width = badge.textWidth?.let { GlanceModifier.width(it) } ?: GlanceModifier
-        Text(badge.text, width, maxLines = 1, style = words(type, badge.points, FontWeight.Bold))
-    }
-}
-
-/**
- * `stateView`: where space runs out, the description gives up lines before the title does (its `layoutPriority`),
- * the title shrinking to 0.82 of its style to fit its two.
- */
-@Composable
-private fun StateView(symbol: String, title: String, description: String, medium: Boolean, room: DpSize, type: WidgetText) {
-    val symbolPoints = type.points(IosTextStyle.Title3)
-    val symbolHeight = requireNotNull(materialSymbols[symbol]).box(symbolPoints)[1].dp
-    val caption = type.points(IosTextStyle.Caption)
-    val titles = listOf(2, 1).map { FittedLine.of(title, IosTextStyle.Headline, FontWeight.Bold, room.width, it, 0.82f, type) }
-    val fitted = titles.firstOrNull { symbolHeight + 6.dp + it.height <= room.height } ?: titles.last()
-    val left = room.height - symbolHeight - 6.dp - fitted.height - 6.dp
-    val first = type.lineHeight(caption, FontWeight.Normal)
-    val next = type.height("1\n2", caption, FontWeight.Normal, room.width, 2) - first
-    val lines = if (left < first) 0 else minOf(if (medium) 2 else 3, 1 + floor((left - first) / next).toInt())
-    Column(GlanceModifier.fillMaxSize(), verticalAlignment = Alignment.CenterVertically) {
-        Symbol(symbol, symbolPoints, ComposeFontWeight.Bold, WidgetPalette.ink)
-        Spacer(GlanceModifier.height(6.dp))
-        Text(fitted.text, maxLines = fitted.lines, style = words(type, fitted.points, FontWeight.Bold))
-        if (lines > 0) {
-            Spacer(GlanceModifier.height(6.dp))
-            Text(description, maxLines = lines, style = words(type, caption, FontWeight.Normal, 0.67f))
-        }
-    }
-}
-
-/**
- * The next button, shown only when there are more parcels than the widget shows at once: a small chevron in the
- * card's ink (the widget's ink over words), level with the card's mark, `top` and `end` its centre from the widget's
- * top and end. It turns the widgets of its size to the next parcels (`ShowNextParcelIntent`).
- */
-@Composable
-private fun NextButton(entry: DeliveryWidgetEntry<WidgetCardArt>, medium: Boolean, ink: List<String>?, copy: ExtensionLocalizer, top: Dp, end: Dp) {
-    val next = entry.next ?: return
-    val context = LocalContext.current
-    val box = NextMark.size + NextMark.reach * 2
-    val art = remember(ink) { nextMark(context, ink) }
-    val label = copy.text("app.nextParcel")
-    Box(GlanceModifier.fillMaxSize().padding(top = top - box / 2, end = end - box / 2), contentAlignment = Alignment.TopEnd) {
-        Box(
-            GlanceModifier.size(box).semantics { contentDescription = label }
-                .clickable(actionRunCallback<ShowNextParcelAction>(ShowNextParcelAction.parameters(next, DeliveryWidgetTimeline.turnSize(medium)))),
-        ) {
-            DayNightPicture(art, R.layout.widget_symbol, GlanceModifier.size(box), description = null)
-        }
-    }
-}
-
-/** An SF Symbol as the app draws it, at `points` (its text style's size at the widget's category), in `tint`. */
-@Composable
-private fun Symbol(name: String, points: Float, weight: ComposeFontWeight, tint: Color, scale: SymbolScale = SymbolScale.Medium) {
-    val context = LocalContext.current
-    val art = requireNotNull(materialSymbols[name])
-    val box = art.box(points, scale.factor)
-    val bitmap = remember(name, points, tint) {
-        bitmap(context, box[0], box[1]) { drawSymbol(art, points * scale.factor, weight.weight, tint, SymbolRenderingMode.Monochrome) }
-    }
-    Image(ImageProvider(bitmap), contentDescription = null, modifier = GlanceModifier.width(box[0].dp).height(box[1].dp))
-}
-
-/**
  * A picture in its light and dark forms, which the launcher swaps as the phone's mode changes, with no word from the
- * app: an image view of `layout` (widget_route, widget_mark, widget_symbol) given both.
+ * app: an image view of `layout` (widget_route, widget_mark) given both.
  */
 @Composable
 internal fun DayNightPicture(picture: Pair<Bitmap, Bitmap>, @LayoutRes layout: Int, modifier: GlanceModifier, description: String?) {
@@ -663,15 +324,14 @@ internal fun DayNightPicture(picture: Pair<Bitmap, Bitmap>, @LayoutRes layout: I
 }
 
 /**
- * A tap on the widget's page, behind what it shows, opening the app, or `intent` (widget_tap): a view TalkBack passes
- * over, as VoiceOver passes over a widget's background.
+ * A tap on the widget's page, behind what it shows, opening `intent` (widget_tap): a view TalkBack passes over, as
+ * VoiceOver passes over a widget's background.
  */
 @Composable
-internal fun PageTap(intent: Intent? = null) {
+internal fun PageTap(intent: Intent) {
     val context = LocalContext.current
-    val opened = intent ?: appIntent(context)
     val views = RemoteViews(context.packageName, R.layout.widget_tap).apply {
-        setOnClickPendingIntent(R.id.widget_tap, PendingIntent.getActivity(context, 0, opened, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT))
+        setOnClickPendingIntent(R.id.widget_tap, PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT))
     }
     AndroidRemoteViews(views, GlanceModifier.fillMaxSize())
 }
@@ -680,12 +340,6 @@ internal fun PageTap(intent: Intent? = null) {
 internal fun openParcel(context: Context, parcel: DeliveryWidgetParcel): Action =
     actionStartActivity(Intent(Intent.ACTION_VIEW, parcel.deepLink.toUri(), context, MainActivity::class.java))
 
-/** A widget with no link opens the app, as WidgetKit opens it. */
-internal fun openApp(context: Context): Action = actionStartActivity(appIntent(context))
-
-internal fun appIntent(context: Context): Intent =
-    Intent(context, MainActivity::class.java).setAction(Intent.ACTION_MAIN).addCategory(Intent.CATEGORY_LAUNCHER)
-
 /** The widget's whole surface, its corners the launcher's, as a widget's background is. */
 internal fun root(): GlanceModifier =
     GlanceModifier.fillMaxSize().appWidgetBackground().cornerRadius(android.R.dimen.system_app_widget_background_radius)
@@ -693,33 +347,9 @@ internal fun root(): GlanceModifier =
 /** The copy as Android words it where it names the iPhone's things (its `android` variant: "home screen"), else as it is. */
 internal fun ExtensionLocalizer.onAndroid(key: String): String = text("$key.android").takeIf { it != "$key.android" } ?: text(key)
 
-private fun words(type: WidgetText, points: Float, weight: FontWeight, opacity: Float = 1f) =
-    TextStyle(color = ColorProvider(WidgetPalette.ink.copy(alpha = opacity)), fontSize = type.sp(points), fontWeight = weight)
-
 internal fun markHeight(shape: DeliveryWidgetPicture): Dp = if (shape == DeliveryWidgetPicture.Half) 13.dp else 15.dp
 
 private fun DpSize.inside(padding: Dp) = DpSize(width - padding * 2, height - padding * 2)
-
-/** The app's mark at the header's size. */
-internal fun peekMark(context: Context): Bitmap = bitmap(context, HEADER_MARK.value, HEADER_MARK.value) { drawPeekMark(HEADER_MARK.value.toDouble()) }
-
-/**
- * `DeliveryWidgetNextMark`: a chevron at 8 points bold in the ink at 60%, in a circle of the ink at 7%, with its reach
- * round it; light and dark from the card's pair, or the widget's own ink.
- */
-private fun nextMark(context: Context, ink: List<String>?): Pair<Bitmap, Bitmap> {
-    val art = requireNotNull(materialSymbols["chevron.forward"])
-    val box = art.box(8f)
-    val side = (NextMark.size + NextMark.reach * 2).value
-    fun draw(color: Color) = bitmap(context, side, side) {
-        drawCircle(color.copy(alpha = 0.07f), radius = NextMark.size.value / 2, center = Offset(side / 2, side / 2))
-        drawContext.transform.translate((side - box[0]) / 2, (side - box[1]) / 2)
-        drawSymbol(art, 8f, ComposeFontWeight.Bold.weight, color.copy(alpha = 0.6f), SymbolRenderingMode.Monochrome)
-    }
-    val light = ink?.firstOrNull()?.let(WidgetCardColors::color) ?: WidgetPalette.ink
-    val dark = ink?.getOrNull(1)?.let(WidgetCardColors::color) ?: light
-    return draw(light) to draw(dark)
-}
 
 /** A transparent picture `width` × `height` dp at the screen's density, drawn one unit to the dp but for [drawSymbol]'s own density. */
 internal fun bitmap(context: Context, width: Float, height: Float, draw: DrawScope.() -> Unit): Bitmap {
@@ -734,10 +364,6 @@ internal fun bitmap(context: Context, width: Float, height: Float, draw: DrawSco
 }
 
 private val MARGIN = 16.dp
-internal val HEADER_MARK = 16.dp
 private val CARD_SPACING = 8.dp
 private val CARD_PADDING = 10.dp
-private val COLUMN_SPACING = 10.dp
-private val COLUMN_PADDING = 10.dp
-private val COLUMN_TOP = 8.dp
 private val SIDE_FADE = 16.dp

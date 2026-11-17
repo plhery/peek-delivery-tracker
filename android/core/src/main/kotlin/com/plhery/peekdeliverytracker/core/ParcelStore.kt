@@ -1704,9 +1704,9 @@ class ParcelStore(
     }
 
     /**
-     * Gives each parcel the next button turns through its card once the card's pictures are drawn, and starts drawing
-     * those that aren't, once each: a card that could not be drawn is not drawn again while the app runs. The list
-     * widget's further parcels have none.
+     * Gives each of the first [DeliveryWidgetSelection.limit] parcels its card once the card's pictures are drawn, and
+     * starts drawing those that aren't, once each: a card that could not be drawn is not drawn again while the app
+     * runs. The widget shows the others as rows.
      */
     private fun carded(shown: List<DeliveryWidgetParcel>): List<DeliveryWidgetParcel> {
         val artist = widgetPictures ?: return shown
@@ -1947,14 +1947,14 @@ class ParcelStore(
             return ordered.map { parcel -> widgetParcel(parcel, localizer, now, midnights) { localizer.parcelDeliveryEstimate(parcel, it) } }
         }
 
-        /** The parcels the widget turns through: those on their way, then those delivered within the last day, the latest first. */
+        /** The first [DeliveryWidgetSelection.limit] parcels in the widget's order ([widgetOrder]). */
         fun widgetDeliveries(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> =
             widgetOrder(parcels, localizer, now, markNewUpdates).take(DeliveryWidgetSelection.limit)
 
         /**
-         * All of them in that order ([DeliveryWidgetSelection.ordered]), of which the list widget shows as many as fit.
-         * Their details are also worded for the next midnights. Each carries the dot its card in the app shows while
-         * "Mark new updates" is on ([DeliveryWidgetParcel.newUpdate]).
+         * The widget's parcels, in its order ([DeliveryWidgetSelection.ordered]): those on their way, then those
+         * delivered within the last day, the latest first. Their details are also worded for the next midnights. Each
+         * carries the dot its card in the app shows while "Mark new updates" is on ([DeliveryWidgetParcel.newUpdate]).
          */
         fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> {
             val midnights = DeliveryWidgetDays.midnights(after = now)
@@ -1968,7 +1968,7 @@ class ParcelStore(
             val ordered = DeliveryWidgetSelection.ordered(
                 onTheWay = nextDeliveries(parcels, localizer, now, midnights), delivered = delivered, now = now,
             )
-            // What the list widget shows besides: where the app's list puts each parcel, which is its Next up, the
+            // What the widget shows besides: where the app's list puts each parcel, which is its Next up, the
             // carrier shown, and the last steps of the first parcels. Whichever ends up alone in the list is among
             // them: one on its way comes first, and with none, the one delivered last stays longest and leads. The
             // sections and Next up are also written for the next midnights, as the details are.

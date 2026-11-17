@@ -5,70 +5,14 @@ import java.io.File
 import java.security.MessageDigest
 import java.time.Instant
 import java.util.Locale
-import java.util.UUID
 
-// DeliveryWidget.swift's provider, the part of it that is logic: what a widget shows at a time, where its next button
-// turns it to and when it reads the store again. And DeliveryWidgetPictures.swift's naming of a card's pictures, which
-// the app draws for the widget (:app's widget/WidgetCardPictures.kt draws them).
-
-/**
- * `DeliveryWidgetEntry`: what a widget shows at `date`. `art` is the pictures of the cards it shows, in order, as the
- * widget reads them: none unless every one of them has its pictures.
- */
-data class DeliveryWidgetEntry<A>(
-    val date: Instant,
-    val enabled: Boolean,
-    val languageCode: String,
-    val snapshot: DeliveryWidgetSnapshot?,
-    /** The parcels the widget shows: its first ones, or those its next button turned it to. */
-    val shown: List<DeliveryWidgetParcel> = emptyList(),
-    val isFirstPage: Boolean = true,
-    /** The parcel the next button turns the widget to, the first again from the last parcels; none when all fit at once. */
-    val next: UUID? = null,
-    val art: List<A> = emptyList(),
-    /** The demo's cards, which the gallery shows as they are rather than redacted. */
-    val isSample: Boolean = false,
-) {
-    /** The parcels the widget shows as the app's cards, with their pictures, once the app has drawn every one of them. */
-    val cards: List<Triple<DeliveryWidgetParcel, DeliveryWidgetCard, A>>
-        get() {
-            if (!enabled) return emptyList()
-            val cards = shown.zip(art).mapNotNull { (parcel, art) -> parcel.card?.let { Triple(parcel, it, art) } }
-            return if (cards.size == art.size) cards else emptyList()
-        }
-
-    companion object {
-        /**
-         * `makeEntry`: the page the widget was turned to (the one holding `turn`), else its first, and the pictures of
-         * its cards as `art` reads them: a small widget shows one parcel, a medium one two side by side, or one alone,
-         * across it.
-         */
-        fun <A> make(
-            date: Instant,
-            enabled: Boolean,
-            languageCode: String,
-            snapshot: DeliveryWidgetSnapshot?,
-            medium: Boolean,
-            turn: UUID? = null,
-            art: (DeliveryWidgetCard, DeliveryWidgetPicture) -> A?,
-        ): DeliveryWidgetEntry<A> {
-            val pages = DeliveryWidgetSelection.pages(snapshot?.parcels.orEmpty(), medium = medium, now = date)
-            val index = turn?.let { id -> pages.indexOfFirst { page -> page.any { it.id == id } }.takeIf { it >= 0 } } ?: 0
-            val shown = pages.getOrNull(index).orEmpty()
-            val shape = if (medium) (if (shown.size > 1) DeliveryWidgetPicture.Half else DeliveryWidgetPicture.Wide) else DeliveryWidgetPicture.Small
-            val drawn = shown.mapNotNull { parcel -> parcel.card?.let { art(it, shape) } }
-            return DeliveryWidgetEntry(
-                date = date, enabled = enabled, languageCode = languageCode, snapshot = snapshot, shown = shown, isFirstPage = index == 0,
-                next = if (pages.size > 1) pages[(index + 1) % pages.size].firstOrNull()?.id else null,
-                art = if (shown.isNotEmpty() && drawn.size == shown.size) drawn else emptyList(),
-            )
-        }
-    }
-}
+// ParcelListWidget.swift's provider, the part of it that is logic: what the widget shows at a time and when it reads
+// the store again. And DeliveryWidgetPictures.swift's naming of a card's pictures, which the app draws for the widget
+// (:app's widget/WidgetCardPictures.kt draws them).
 
 /**
- * What the list widget ("Parcels") shows at `date`: the parcels the store published in the widgets' order, less those
- * delivered more than a day ago, worded for `date`.
+ * What the Parcels widget shows at `date`: the parcels the store published in the widget's order, less those delivered
+ * more than a day ago, worded for `date`.
  */
 data class DeliveryWidgetList(
     val date: Instant,
@@ -79,10 +23,10 @@ data class DeliveryWidgetList(
     val isSample: Boolean = false,
 ) {
     /**
-     * `Size`: the iPhone's three list widgets. `mostRows`: more rows than each size could hold in its smallest type,
-     * which bounds the layouts the widget measures ([layouts]); above the iPhone's 6 and 12 for a small and a medium
-     * one, which on Android stand up to 279 dp tall. Up to `cards` parcels it shows as cards ([Design]): one, two side
-     * by side, three one above another.
+     * `Size`: the widget's three sizes on the iPhone. `mostRows`: more rows than each size could hold in its smallest
+     * type, which bounds the layouts the widget measures ([layouts]); above the iPhone's 6 and 12 for a small and a
+     * medium one, which on Android stand up to 279 dp tall. Up to `cards` parcels it shows as cards ([Design]): one,
+     * two side by side, three one above another.
      */
     enum class Size(val mostRows: Int, val cards: Int) {
         Small(8, 1),
@@ -229,7 +173,7 @@ data class DeliveryWidgetList(
     }
 }
 
-/** `listName`: the name the list widget gives the parcel, its own, else its carrier's. */
+/** `listName`: the name the widget gives the parcel, its own, else its carrier's. */
 val DeliveryWidgetParcel.listName: String
     get() = if (named == false) carrier else label
 
@@ -256,21 +200,16 @@ val DeliveryWidgetParcel.listLine: String
 fun String.openingLine(locale: Locale): String = take(1).uppercase(locale) + drop(1)
 
 object DeliveryWidgetTimeline {
-    /** `WidgetFamily.turnSize`: widgets of one size turn together; those of the other keep their own page. */
-    fun turnSize(medium: Boolean): String = if (medium) "medium" else "small"
-
     /** The timeline's `.after(now + 20 min)`: the widget reads the store again that long after it last did. */
     const val refresh: Double = 20 * 60.0
 
     /**
-     * When a widget is drawn again: the timeline's refresh, or sooner the end of a turn's spell, where a widget turned
-     * to other parcels shows its first ones again, or a midnight where the parcels' days change ([DeliveryWidgetDays]),
-     * as the timeline's later entries. `turns` are the turns of each size.
+     * When the widget is drawn again: the timeline's refresh, or sooner a midnight where the parcels' days change
+     * ([DeliveryWidgetDays]), as the timeline's later entries.
      */
-    fun next(now: Instant, turns: List<DeliveryWidgetTurn?>, parcels: List<DeliveryWidgetParcel> = emptyList()): Instant {
+    fun next(now: Instant, parcels: List<DeliveryWidgetParcel> = emptyList()): Instant {
         val refreshed = now.plusSeconds(refresh.toLong())
-        val sooner = turns.filterNotNull().map { it.ends } + DeliveryWidgetDays.changes(parcels, after = now)
-        return sooner.filter { it > now }.fold(refreshed) { soonest, at -> minOf(soonest, at) }
+        return DeliveryWidgetDays.changes(parcels, after = now).filter { it > now }.fold(refreshed) { soonest, at -> minOf(soonest, at) }
     }
 }
 

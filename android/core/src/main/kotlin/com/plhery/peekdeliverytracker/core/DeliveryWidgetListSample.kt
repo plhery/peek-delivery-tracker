@@ -10,8 +10,8 @@ import java.util.Locale
 import java.util.UUID
 
 /**
- * The list widget's sample, which its gallery picture and its screenshots show: fifteen invented parcels across the
- * stages, the same on the iPhone, already in the widgets' order (out for delivery, the others by their day, then those
+ * The widget's sample, which its gallery picture and its screenshots show: fifteen invented parcels across the
+ * stages, the same on the iPhone, already in the widget's order (out for delivery, the others by their day, then those
  * delivered within the day), with the app list's sections, its Next up and each carrier. Their names stay in English; their stages and days are the app's words in its language,
  * dated from `now`, so the sample never goes stale.
  */

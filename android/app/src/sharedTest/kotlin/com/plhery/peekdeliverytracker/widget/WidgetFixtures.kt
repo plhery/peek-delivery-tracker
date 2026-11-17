@@ -16,7 +16,6 @@ import androidx.glance.appwidget.ExperimentalGlanceRemoteViewsApi
 import androidx.glance.appwidget.GlanceRemoteViews
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetListSample
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
@@ -82,16 +81,6 @@ fun widgetParcel(
     isOutForDelivery = outForDelivery, deliveredAt = deliveredAt, card = card,
 )
 
-/** What a widget of one size shows of `parcels`, in words: no card has pictures. */
-fun wordsEntry(
-    parcels: List<DeliveryWidgetParcel>,
-    medium: Boolean,
-    enabled: Boolean = true,
-    languageCode: String = "en",
-    turn: UUID? = null,
-): DeliveryWidgetEntry<WidgetCardArt> =
-    DeliveryWidgetEntry.make(CAPTURED, enabled, languageCode, DeliveryWidgetSnapshot(CAPTURED, languageCode, parcels), medium, turn) { _, _ -> null }
-
 /** The widget's source on a store in memory, its pictures in `folder`, the phone's languages `languages`. */
 fun widgetSource(
     context: Context,
@@ -128,14 +117,6 @@ suspend fun publishDemo(
     check(store.save(snapshot))
     return snapshot
 }
-
-/**
- * The widget's RemoteViews for `entry` at `size`, as Glance writes them for a launcher; `marked`, its cards as the
- * Parcels widget's small and medium ones, with the new-update dot.
- */
-@OptIn(ExperimentalGlanceRemoteViewsApi::class)
-suspend fun widgetViews(context: Context, size: DpSize, entry: DeliveryWidgetEntry<WidgetCardArt>, marked: Boolean = false): RemoteViews =
-    GlanceRemoteViews().compose(context, size) { DeliveryWidgetContent(entry, size, marked = marked) }.remoteViews
 
 /** The list widget's RemoteViews for `list` at `size`, its cards' pictures read by `art`, as Glance writes them for a launcher. */
 @OptIn(ExperimentalGlanceRemoteViewsApi::class)

@@ -77,13 +77,13 @@ class WidgetDayRolloverTest {
     }
 
     @Test
-    fun theNextDeliveryWidgetStillSaysTomorrowOnTheDeliveryDay() {
-        val entry = DeliveryWidgetEntry.make<Unit>(morning, enabled = true, languageCode = "en", snapshot = storedAt23h30(), medium = false) { _, _ -> null }
+    fun theParcelsWidgetsCardStillSaysTomorrowOnTheDeliveryDay() {
+        val list = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = storedAt23h30())
         assertEquals(
-            "At 08:00 on Fri 13 Nov (Zurich) the Next delivery widget should say \"Today\" for a parcel expected that " +
+            "At 08:00 on Fri 13 Nov (Zurich) the Parcels widget's card should say \"Today\" for a parcel expected that " +
                 "day; it says what the app wrote at 23:30 the evening before",
             "Today",
-            entry.shown.single().detail.openingLine(ExtensionLocalizer.locale("en")),
+            list.parcels.single().detail.openingLine(ExtensionLocalizer.locale("en")),
         )
     }
 
@@ -98,13 +98,13 @@ class WidgetDayRolloverTest {
         assertEquals(listOf(friday, saturday, tuesday), DeliveryWidgetDays.changes(parcels, after = published))
         // At 23:50 midnight comes before the refresh.
         val late = Instant.parse("2026-11-12T22:50:00Z")
-        assertEquals(friday, DeliveryWidgetTimeline.next(late, turns = emptyList(), parcels = parcels))
+        assertEquals(friday, DeliveryWidgetTimeline.next(late, parcels = parcels))
         // On Saturday the passed estimate gives way to the status.
         val list = DeliveryWidgetList.make(saturday.plusSeconds(8 * 3600), enabled = true, languageCode = "en", snapshot = storedAt23h30())
         assertEquals("In transit", list.parcels.single().listLine)
         // Mid-afternoon on Friday, the refresh comes first.
         val afternoon = Instant.parse("2026-11-13T14:00:00Z")
-        assertEquals(afternoon.plusSeconds(20 * 60), DeliveryWidgetTimeline.next(afternoon, turns = emptyList(), parcels = parcels))
+        assertEquals(afternoon.plusSeconds(20 * 60), DeliveryWidgetTimeline.next(afternoon, parcels = parcels))
     }
 
     /**
@@ -157,7 +157,7 @@ class WidgetDayRolloverTest {
         val shown = ParcelStore.widgetOrder(listOf(noEstimate), localizer, published).single()
         val midnight = Instant.parse("2026-11-12T23:00:00Z")
         assertEquals("the parcel's words stay the same at midnight", null, shown.later?.firstOrNull { it.from == midnight })
-        assertEquals(midnight, DeliveryWidgetTimeline.next(Instant.parse("2026-11-12T22:50:00Z"), turns = emptyList(), parcels = listOf(shown)))
+        assertEquals(midnight, DeliveryWidgetTimeline.next(Instant.parse("2026-11-12T22:50:00Z"), parcels = listOf(shown)))
         assertEquals("Thu 21:00", localizer.stepTime(shown.steps!!.single().at, morning))
     }
 

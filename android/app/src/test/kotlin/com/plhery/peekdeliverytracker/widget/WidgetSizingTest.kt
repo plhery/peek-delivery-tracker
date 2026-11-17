@@ -17,10 +17,10 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
+import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSnapshot
-import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.ui.deliveries.CAPTURED
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
@@ -109,9 +109,10 @@ class WidgetSizingTest {
         widgetParcel(3, "Desk lamp", carrier = "Swiss Post", detail = "Friday"),
     ).map { it.copy(card = card(it.id.toString())) }
 
-    /** Cards whose every mark is `mark`, and no route. */
-    private fun drawnWith(mark: Bitmap, medium: Boolean): DeliveryWidgetEntry<WidgetCardArt> =
-        DeliveryWidgetEntry.make(CAPTURED, true, "en", DeliveryWidgetSnapshot(CAPTURED, "en", three), medium) { _, _ -> WidgetCardArt(mark to mark, null) }
+    /** The first `count` of [three] as the list shows them, and their pictures: every mark `mark`, and no route. */
+    private fun drawnWith(mark: Bitmap, count: Int): Pair<DeliveryWidgetList, (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt?> =
+        DeliveryWidgetList.make(CAPTURED, true, "en", DeliveryWidgetSnapshot(CAPTURED, "en", three.take(count))) to
+            { _: DeliveryWidgetCard, _: DeliveryWidgetPicture -> WidgetCardArt(mark to mark, null) }
 
     /**
      * Every size the widget can be given: the smallest, small and medium, a phone's cells upright and on its side, a
@@ -124,35 +125,35 @@ class WidgetSizingTest {
     )
 
     /**
-     * `DeliveryWidgetCardView`'s mark (`resizable().scaledToFit().frame(height:)`): at every size, the demo's marks as
-     * this app draws them, one far wider than any carrier's and one narrower, keep their shape, stay inside their card
-     * clear of the next button, and stand above the card's words; at the iPhone's sizes the demo's stand as tall as the
-     * iPhone's (15 points, 13 on half a medium widget).
+     * `DeliveryWidgetCardView`'s mark (`resizable().scaledToFit().frame(height:)`): at every size, on two cards in a
+     * medium widget and one in the others, the demo's marks as this app draws them, one far wider than any carrier's and
+     * one narrower, keep their shape, stay inside their card, and stand above the card's words; at the iPhone's sizes
+     * the demo's stand as tall as the iPhone's (15 points, 13 on half a medium widget).
      */
     private fun marksKeepTheirShapeAndPlace() = runBlocking {
         val folder = files.newFolder("WidgetCards")
         val store = DeliveryWidgetSharedStore(MemoryDefaults())
         val source = widgetSource(app, folder, store)
         publishDemo(app, store, folder, scale = density.toDouble())
-        val next = ExtensionLocalizer("en").text("app.nextParcel")
+        val demo = source.list(CAPTURED)
         for (size in sizes) {
-            val medium = isMedium(size)
-            val entries = mapOf(
-                "the demo's" to source.current(medium, CAPTURED),
-                "a wide mark" to drawnWith(picture(1200, 36), medium),
-                "a narrow mark" to drawnWith(picture(24, 36), medium),
+            val count = if (listSize(size) == DeliveryWidgetList.Size.Medium) 2 else 1
+            val lists: Map<String, Pair<DeliveryWidgetList, (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt?>> = mapOf(
+                "the demo's" to (demo.copy(parcels = demo.parcels.take(count)) to source::read),
+                "a wide mark" to drawnWith(picture(1200, 36), count),
+                "a narrow mark" to drawnWith(picture(24, 36), count),
             )
-            for ((what, entry) in entries) {
+            for ((what, shows) in lists) {
+                val (list, art) = shows
                 val where = "$what at ${size.width.value} × ${size.height.value}"
-                assertTrue("$where shows cards", entry.cards.isNotEmpty())
-                val host = laidOut(widgetViews(app, size, entry), size)
-                val carriers = entry.cards.map { it.first.carrier }
+                assertEquals("$where shows cards", DeliveryWidgetList.Design.Cards, list.design(listSize(size)))
+                val host = laidOut(listViews(app, size, list, art), size)
+                val carriers = list.parcels.map { it.carrier }
                 val marks = views(host).filterIsInstance<ImageView>().filter { it.contentDescription?.toString() in carriers }
                 assertEquals("$where: a mark on each card", carriers.size, marks.size)
                 val words = views(host).filterIsInstance<TextView>().filter { it.text.isNotBlank() }.map { text ->
                     bounds(text, host).apply { right = left + (0 until text.layout.lineCount).maxOf { text.layout.getLineWidth(it) } }
                 }
-                val button = views(host).singleOrNull { it.contentDescription?.toString() == next }?.let { bounds(it, host) }
                 for (mark in marks) {
                     val picture = mark.drawable
                     val shown = RectF(picture.bounds).also { mark.imageMatrix.mapRect(it) }
@@ -164,11 +165,9 @@ class WidgetSizingTest {
                     assertTrue("$label stays inside its picture's view", view.contains(RectF(shown).apply { inset(0.5f, 0.5f) }))
                     val card = bounds(clickableAncestor(mark, host), host).apply { inset(10 * density - 0.5f, 10 * density - 0.5f) }
                     assertTrue("$label stays inside its card $card", card.contains(shown))
-                    // The button's chevron is a circle 18 dp across at the centre of its reach.
-                    if (button != null) assertTrue("$label stays clear of the next button", shown.right <= button.centerX() - 9 * density)
                     for (text in words) assertTrue("$label stays above the words $text", shown.bottom <= text.top + 0.5f || !RectF.intersects(shown, text))
                     if (what == "the demo's" && size in listOf(IPHONE_SMALL, IPHONE_MEDIUM)) {
-                        val points = if (entry.cards.size == 2) 13 else 15
+                        val points = if (count == 2) 13 else 15
                         assertTrue("$label stands $points dp tall", abs(shown.height() - points * density) <= 1f)
                     }
                 }

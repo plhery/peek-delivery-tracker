@@ -978,20 +978,17 @@ class ParcelLogicTests {
         val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp, outForDelivery, later), delivered = emptyList())
 
         assertEquals(listOf(outForDelivery, nextUp, later), parcels)
-        assertEquals(listOf(listOf(outForDelivery, nextUp), listOf(later)), DeliveryWidgetSelection.pages(parcels, medium = true))
-        assertEquals(listOf(listOf(outForDelivery), listOf(nextUp), listOf(later)), DeliveryWidgetSelection.pages(parcels, medium = false))
     }
 
     @Test
-    fun widgetShowsTwoOutForDeliveryParcelsBeforeOtherCandidates() {
+    fun widgetShowsEveryOutForDeliveryParcelBeforeOtherCandidates() {
         val nextUp = widgetParcel(label = "Next up", outForDelivery = false)
         val first = widgetParcel(label = "Courier one", outForDelivery = true)
         val second = widgetParcel(label = "Courier two", outForDelivery = true)
         val third = widgetParcel(label = "Courier three", outForDelivery = true)
         val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp, first, second, third), delivered = emptyList())
 
-        assertEquals(listOf(listOf(first, second), listOf(third, nextUp)), DeliveryWidgetSelection.pages(parcels, medium = true))
-        assertEquals(listOf(listOf(nextUp)), DeliveryWidgetSelection.pages(listOf(nextUp), medium = true))
+        assertEquals(listOf(first, second, third, nextUp), parcels)
     }
 
     /** The selection half of ParcelRouteTests.testTheWidgetGalleryShowsTheDemosNextDeliveries; its drawings wait for :app. */
@@ -999,8 +996,8 @@ class ParcelLogicTests {
     fun theWidgetGalleryShowsTwoOfTheDemosNextDeliveriesInEveryLanguage() {
         for (language in AppLanguage.entries) {
             val parcels = DemoRepository(MemoryDefaults(), language = { language }).list()
-            val shown = DeliveryWidgetSelection.pages(ParcelStore.widgetDeliveries(parcels, Localizer(language)), medium = true).firstOrNull()
-            assertEquals("$language", 2, shown?.size)
+            val shown = ParcelStore.widgetDeliveries(parcels, Localizer(language)).take(2)
+            assertEquals("$language", 2, shown.size)
         }
     }
 
@@ -1015,27 +1012,11 @@ class ParcelLogicTests {
         val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp), delivered = listOf(arrived, older), now = now)
 
         assertEquals(listOf(nextUp, arrived), parcels)
-        assertEquals(listOf(listOf(nextUp), listOf(arrived)), DeliveryWidgetSelection.pages(parcels, medium = true, now = now))
-        assertEquals(
-            listOf(listOf(nextUp)),
-            DeliveryWidgetSelection.pages(parcels, medium = false, now = now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())),
-        )
+        fun listed(at: Instant) = DeliveryWidgetList.make(at, true, "en", DeliveryWidgetSnapshot(now, "en", parcels)).parcels
+        assertEquals(listOf(nextUp, arrived), listed(now))
+        assertEquals(listOf(nextUp), listed(now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())))
         val many = (0 until 12).map { widgetParcel(label = "Parcel $it", outForDelivery = false) }
         assertEquals(DeliveryWidgetSelection.limit, DeliveryWidgetSelection.parcels(onTheWay = many, delivered = listOf(arrived), now = now).size)
-    }
-
-    /** The next button turns the widgets of one size, and for a few minutes only. */
-    @Test
-    fun widgetTurnLastsItsSpellForOneSize() {
-        val store = DeliveryWidgetSharedStore(MemoryDefaults())
-        val at = Instant.ofEpochSecond(1_800_000_000)
-        val turn = DeliveryWidgetTurn(parcel = UUID.randomUUID(), at = at)
-
-        assertNull(store.turn(size = "small", now = at))
-        store.setTurn(turn, size = "small")
-        assertEquals(turn, store.turn(size = "small", now = at.plusSeconds(60)))
-        assertNull(store.turn(size = "medium", now = at.plusSeconds(60)))
-        assertNull(store.turn(size = "small", now = turn.ends))
     }
 
     /**
@@ -1068,7 +1049,7 @@ class ParcelLogicTests {
 
         val next = ParcelStore.nextDeliveries(parcels, localizer, now).single()
         assertEquals("Waiting for DPD Switzerland’s first scan", next.detail)
-        // The list widget's fields besides: on its way, the app list's Next up, its carrier still unknown, no steps yet.
+        // The widget's fields besides: on its way, the app list's Next up, its carrier still unknown, no steps yet.
         // Two days after it was added it needs attention, which the widget follows from the midnight after.
         val attention = DeliveryWidgetWording(DeliveryWidgetDays.midnights(after = now)[2], next.detail, ParcelSectionKind.Attention.rawValue, nextUp = false)
         val published = next.copy(section = ParcelSectionKind.Active.rawValue, nextUp = true, carrierId = "unknown", later = listOf(attention))

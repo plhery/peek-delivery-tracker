@@ -288,7 +288,7 @@ class ParcelLinkRoute(
 sealed class NativeRoute {
     data class Parcel(val id: UUID) : NativeRoute()
 
-    /** The deliveries, as the list widget opens them. */
+    /** The deliveries, as the widget opens them. */
     data object Parcels : NativeRoute()
 
     data class Friend(val id: UUID) : NativeRoute()

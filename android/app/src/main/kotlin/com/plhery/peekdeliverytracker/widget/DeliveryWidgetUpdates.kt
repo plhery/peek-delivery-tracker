@@ -14,22 +14,16 @@ import android.os.SystemClock
 import android.util.LruCache
 import androidx.annotation.RequiresApi
 import androidx.collection.intSetOf
-import androidx.glance.GlanceId
-import androidx.glance.action.ActionParameters
-import androidx.glance.action.actionParametersOf
 import androidx.glance.appwidget.GlanceAppWidgetManager
-import androidx.glance.appwidget.action.ActionCallback
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AppClock
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetListSample
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetTimeline
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetTurn
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.WidgetCenter
@@ -39,7 +33,6 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import java.io.File
 import java.time.Duration
 import java.time.Instant
-import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -51,26 +44,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * `ShowNextParcelIntent`: turns the widgets of one size to the next parcels, draws them again and sets the timeline's
- * next entry for the turn's end, before the tap's work is done, as `perform` returns once WidgetKit has reloaded.
- */
-class ShowNextParcelAction : ActionCallback {
-    override suspend fun onAction(context: Context, glanceId: GlanceId, parameters: ActionParameters) {
-        val parcel = parameters[PARCEL]?.let { runCatching { UUID.fromString(it) }.getOrNull() } ?: return
-        val size = parameters[SIZE] ?: return
-        DeliveryWidgetSource.of(context).store.setTurn(DeliveryWidgetTurn(parcel = parcel, at = AppClock.now()), size = size)
-        DeliveryWidgetUpdates.update(context)
-    }
-
-    companion object {
-        val PARCEL = ActionParameters.Key<String>("parcel")
-        val SIZE = ActionParameters.Key<String>("size")
-
-        fun parameters(parcel: UUID, size: String): ActionParameters = actionParametersOf(PARCEL to parcel.toString().uppercase(), SIZE to size)
-    }
-}
-
-/**
  * `DeliveryWidgetProvider`: what the widget shows from what the app published (`store`, the app group's defaults, which
  * the widget, part of the app, reads directly) and the cards' pictures in `folder`, or the gallery's sample.
  */
@@ -80,14 +53,6 @@ class DeliveryWidgetSource(
     private val folder: File,
     private val preferredLanguages: () -> List<String> = Device::preferredLanguages,
 ) {
-    /** `currentEntry`: the page the widget's size was turned to, else its first. */
-    fun current(medium: Boolean, at: Instant): DeliveryWidgetEntry<WidgetCardArt> {
-        val snapshot = store.snapshot
-        val languageCode = snapshot?.languageCode ?: ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
-        val turn = store.turn(size = DeliveryWidgetTimeline.turnSize(medium), now = at)?.parcel
-        return DeliveryWidgetEntry.make(at, store.isEnabled, languageCode, snapshot, medium, turn) { card, shape -> read(card, shape) }
-    }
-
     /** What the list widget shows: the parcels the app published for it, in its order, those delivered over a day ago gone. */
     fun list(at: Instant): DeliveryWidgetList {
         val snapshot = store.snapshot
@@ -100,14 +65,6 @@ class DeliveryWidgetSource(
         val languageCode = ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
         val localizer = Localizer(AppLanguage.fromRawValue(languageCode) ?: AppLanguage.En)
         return DeliveryWidgetList.make(at, true, languageCode, DeliveryWidgetListSample.snapshot(localizer, at), isSample = true)
-    }
-
-    /**
-     * The cards' pictures [current] shows at either size, decoded away from the main thread, which the widget's layout
-     * is composed on and then finds them decoded ([WidgetPictures]).
-     */
-    suspend fun decode(at: Instant) {
-        withContext(Dispatchers.IO) { for (medium in listOf(false, true)) current(medium, at) }
     }
 
     /** `DeliveryWidgetCardArt`: the mark, and the route as `shape` shows it; null while the mark isn't there. */
@@ -188,19 +145,17 @@ object DeliveryWidgetUpdates {
         }
     }
 
-    /** A widget shown reads the store again, the cards' pictures decoded first while one is placed; and the next refresh. */
+    /** A widget shown reads the store again; and the next refresh. */
     private suspend fun invalidate(context: Context) {
         val source = DeliveryWidgetSource.of(context)
         val placed = isPlaced(context)
-        if (placed) source.decode(AppClock.now())
         revisionState.update { it + 1 }
         schedule(context, source.store, placed = placed)
     }
 
     /**
-     * The timeline's next entry while a widget is `placed`: the refresh, or the end of a turn's spell where a widget was
-     * turned to other parcels, or the midnight where a parcel's day changes while the app stays closed. With none
-     * placed, there is none.
+     * The timeline's next entry while a widget is `placed`: the refresh, or the midnight where a parcel's day changes
+     * while the app stays closed. With none placed, there is none.
      */
     fun schedule(context: Context, store: DeliveryWidgetSharedStore, now: Instant = AppClock.now(), placed: Boolean = isPlaced(context)) {
         val alarms = context.getSystemService(AlarmManager::class.java) ?: return
@@ -208,16 +163,15 @@ object DeliveryWidgetUpdates {
             alarms.cancel(refresh(context))
             return
         }
-        val turns = listOf(false, true).map { store.turn(size = DeliveryWidgetTimeline.turnSize(it), now = now) }
-        val next = DeliveryWidgetTimeline.next(now, turns, store.snapshot?.parcels.orEmpty())
+        val next = DeliveryWidgetTimeline.next(now, store.snapshot?.parcels.orEmpty())
         val wait = maxOf(Duration.between(now, next), MIN_FUTURITY)
         alarms.setWindow(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + wait.toMillis(), window(wait).toMillis(), refresh(context))
     }
 
     /**
      * The narrowest window an alarm `wait` away is given without the exact alarm permission (AlarmManagerService's
-     * minimum since Android 12): three quarters of the wait, ten minutes at most. A turn's end five minutes on comes
-     * up to 3 min 45 s late, the refresh up to 10 minutes; and later still while the phone sleeps, as the alarm doesn't
+     * minimum since Android 12): three quarters of the wait, ten minutes at most. A midnight five minutes on comes up
+     * to 3 min 45 s late, the refresh up to 10 minutes; and later still while the phone sleeps, as the alarm doesn't
      * wake it.
      */
     fun window(wait: Duration): Duration = minOf(wait.multipliedBy(3).dividedBy(4), MAX_WINDOW)

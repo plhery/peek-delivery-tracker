@@ -17,7 +17,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
 // From DeliveryWidgetSnapshot.swift: what the store publishes for the widget, the pictures of its cards, the sample its
-// gallery shows, and which parcels a widget shows (with DeliveryWidget.swift's provider: its entry and its timeline).
+// gallery shows, and which parcels it shows.
 
 @Serializable
 data class DeliveryWidgetParcel(
@@ -32,9 +32,9 @@ data class DeliveryWidgetParcel(
     @Serializable(with = ReferenceDateSerializer::class) val deliveredAt: Instant? = null,
     /** The parcel's card, once the app has drawn its pictures: the widget then shows the card rather than words alone. */
     val card: DeliveryWidgetCard? = null,
-    /** The parcel's stage as the app's list marks it, which the list widget shows; none from an app that didn't publish it. */
+    /** The parcel's stage as the app's list marks it, which the widget shows; none from an app that didn't publish it. */
     val stage: DeliveryWidgetStage? = null,
-    /** Whether the reader named the parcel: the list widget calls one without a name by its carrier. */
+    /** Whether the reader named the parcel: the widget calls one without a name by its carrier. */
     val named: Boolean? = null,
     /**
      * The detail, section and Next up from each of the next midnights where one changes, which the app writes ahead:
@@ -42,13 +42,13 @@ data class DeliveryWidgetParcel(
      * them.
      */
     val later: List<DeliveryWidgetWording>? = null,
-    /** The section of the app's list the parcel is in (`ParcelSectionKind`), which the list widget's sections follow. */
+    /** The section of the app's list the parcel is in (`ParcelSectionKind`), which the Parcels widget's sections follow. */
     val section: String? = null,
-    /** Whether it is the app list's Next up, which leads the list widget's cards and its section there. */
+    /** Whether it is the app list's Next up, which leads the Parcels widget's cards and its section there. */
     val nextUp: Boolean? = null,
-    /** The carrier shown, whose truck marks the parcel's row in the list widget's sections. */
+    /** The carrier shown, whose truck marks the parcel's row in the Parcels widget's sections. */
     val carrierId: String? = null,
-    /** Its last tracking steps, latest first, which the list widget shows of a parcel alone in it. */
+    /** Its last tracking steps, latest first, which the Parcels widget shows of a parcel alone in it. */
     val steps: List<DeliveryWidgetStep>? = null,
     /**
      * Whether its card in the app's list shows the new-update dot (#72): a scan its reader hasn't seen, while "Mark new
@@ -216,29 +216,33 @@ enum class DeliveryActivityPhase(val rawValue: String) {
 }
 
 object DeliveryWidgetSelection {
-    /** How many parcels the widget's next button turns through. */
+    /**
+     * How many of the first parcels the app draws cards for and gives their last steps: more than any widget shows as
+     * cards or passes.
+     */
     const val limit = 8
 
-    /** How many rows the list widget shows at most, four cells by four. */
+    /** How many rows the Parcels widget shows at most, four cells by four. */
     const val listLimit = 15
 
-    /** How many of a parcel's last steps the list widget shows of it alone, which the first [limit] parcels carry. */
+    /** How many of a parcel's last steps the widget shows of it alone, which the first [limit] parcels carry. */
     const val steps = 4
 
     /** How long a delivered parcel stays in the widget, in seconds. */
     const val deliveredFor: Double = 24 * 60 * 60.0
 
-    /**
-     * The parcels the widget turns through: those out for delivery, then the others on their way as `onTheWay` orders
-     * them, then those delivered within the last day, as `delivered` orders them.
-     */
+    /** The first [limit] parcels in the widget's order ([ordered]). */
     fun parcels(
         onTheWay: List<DeliveryWidgetParcel>,
         delivered: List<DeliveryWidgetParcel>,
         now: Instant = AppClock.now(),
     ): List<DeliveryWidgetParcel> = ordered(onTheWay, delivered, now).take(limit)
 
-    /** All the parcels in the widgets' order, of which the next button turns through the first [limit] ([parcels]). */
+    /**
+     * The parcels the widget shows, in their order: those out for delivery, then the others on their way as `onTheWay`
+     * orders them, then those delivered within the last day, as `delivered` orders them. The app publishes them all, so
+     * that the widget can count those it has no room for.
+     */
     fun ordered(
         onTheWay: List<DeliveryWidgetParcel>,
         delivered: List<DeliveryWidgetParcel>,
@@ -248,57 +252,22 @@ object DeliveryWidgetSelection {
         return onTheWay.filter { it.isOutForDelivery } + onTheWay.filter { !it.isOutForDelivery } + recent
     }
 
-    /**
-     * What a widget shows at a time, first page first, worded for `now`. A small one shows one parcel. A medium one
-     * shows a parcel out for delivery beside the parcel after it, and any other parcel alone, across it. Only the first
-     * [limit] of the parcels published.
-     */
-    fun pages(of: List<DeliveryWidgetParcel>, medium: Boolean, now: Instant = AppClock.now()): List<List<DeliveryWidgetParcel>> {
-        val rest = ArrayDeque(of.take(limit).filter { isShown(it, now) }.map { it.worded(now) })
-        val pages = mutableListOf<List<DeliveryWidgetParcel>>()
-        while (true) {
-            val first = rest.removeFirstOrNull() ?: break
-            val second = if (medium && first.isOutForDelivery) rest.removeFirstOrNull() else null
-            pages += if (second != null) listOf(first, second) else listOf(first)
-        }
-        return pages
-    }
-
     /** A delivered parcel leaves the widget a day after it arrived, whenever the app last published it. */
     fun isShown(parcel: DeliveryWidgetParcel, now: Instant): Boolean =
         parcel.deliveredAt?.let { now.timeIntervalSince(it) < deliveredFor } ?: true
 }
 
-/**
- * A widget turned to other parcels with its next button: the first of them, and when. It shows its first parcels again
- * a few minutes later, as its job is the next delivery.
- */
-@Serializable
-data class DeliveryWidgetTurn(
-    @Serializable(with = UuidSerializer::class) val parcel: UUID,
-    @Serializable(with = ReferenceDateSerializer::class) val at: Instant,
-) {
-    val ends: Instant
-        get() = at.plusNanos(Math.round(spell * 1e9))
-
-    companion object {
-        /** How long a turn lasts, in seconds. */
-        const val spell: Double = 5 * 60.0
-    }
-}
-
 data class DeliveryWidgetSnapshot(
     val generatedAt: Instant,
     val languageCode: String,
-    /** Every parcel in the widgets' order: the list widget shows as many as fit and counts the rest. */
+    /** Every parcel in the widget's order: the widget shows as many as fit and counts the rest. */
     val parcels: List<DeliveryWidgetParcel>,
 )
 
 /**
- * What the app shares with its widget: whether it shows, the language it speaks, the next deliveries and where each
- * size of widget was turned to, under the iPhone app's keys. On the iPhone `defaults` is the App Group's UserDefaults,
- * which the widget extension reads too, or the standard one where the build has no App Group. On Android the
- * preferences the app's widget reads.
+ * What the app shares with its widget: whether it shows, the language it speaks and the parcels, under the iPhone
+ * app's keys. On the iPhone `defaults` is the App Group's UserDefaults, which the widget extension reads too, or the
+ * standard one where the build has no App Group. On Android the preferences the app's widget reads.
  */
 class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
     val isEnabled: Boolean
@@ -348,40 +317,17 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
         defaults.removeObject(forKey = snapshotKey)
     }
 
-    /** Where the widgets of one size were turned to, until the turn's spell ends. */
-    fun turn(size: String, now: Instant = AppClock.now()): DeliveryWidgetTurn? =
-        turns[size]?.takeIf { now < it.ends }
-
-    fun setTurn(turn: DeliveryWidgetTurn, size: String) {
-        val turns = turns + (size to turn)
-        val data = try {
-            JsonEncoder().encode(turnsSerializer, turns)
-        } catch (_: Exception) {
-            return
-        }
-        defaults.set(data, forKey = turnsKey)
-    }
-
-    private val turns: Map<String, DeliveryWidgetTurn>
-        get() {
-            val data = defaults.data(forKey = turnsKey) ?: return emptyMap()
-            return try {
-                decodeJson(turnsSerializer, data)
-            } catch (_: Exception) {
-                emptyMap()
-            }
-        }
-
     companion object {
+        /**
+         * The Parcels widget's kind. It keeps the name of the Next delivery widget it replaced: the widgets readers
+         * placed carry it.
+         */
         const val kind = "NextDeliveryWidget"
 
         private const val enabledKey = "sdt.deliveryWidget.enabled.v1"
         private const val liveActivitiesEnabledKey = "sdt.deliveryLiveActivities.enabled.v1"
         private const val languageKey = "sdt.deliveryWidget.language.v1"
         private const val snapshotKey = "sdt.deliveryWidget.snapshot.v1"
-        private const val turnsKey = "sdt.deliveryWidget.turns.v1"
-
-        private val turnsSerializer = MapSerializer(String.serializer(), DeliveryWidgetTurn.serializer())
     }
 }
 

@@ -27,7 +27,7 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-/** DeliveryWidget.swift's provider and DeliveryWidgetPictures.swift's naming, and the store drawing the cards (ParcelRouteTests). */
+/** ParcelListWidget.swift's provider and DeliveryWidgetPictures.swift's naming, and the store drawing the cards (ParcelRouteTests). */
 @OptIn(ExperimentalCoroutinesApi::class)
 class DeliveryWidgetTests {
     private val now = Instant.parse("2026-10-28T12:00:00Z")
@@ -36,72 +36,11 @@ class DeliveryWidgetTests {
         surface = listOf("#e6deef", "#292235"), ink = listOf("#23093f", "#c1add7"), status = "In transit", pictures = name, scale = 2.0,
     )
 
-    private fun snapshot(vararg parcels: DeliveryWidgetParcel) = DeliveryWidgetSnapshot(now, "en", parcels.toList())
-
-    /** `makeEntry`: the page holding the turn, else the first, and the next button's parcel, the first again from the last. */
+    /** The timeline reads the store again 20 minutes on, or where a parcel's day changes (WidgetDayRolloverTest). */
     @Test
-    fun widgetEntryShowsThePageItWasTurnedTo() {
-        val courier = widgetParcel(label = "Courier", outForDelivery = true)
-        val nextUp = widgetParcel(label = "Next up", outForDelivery = false)
-        val later = widgetParcel(label = "Later", outForDelivery = false)
-        val shared = snapshot(courier, nextUp, later)
-        fun entry(medium: Boolean, turn: UUID? = null) =
-            DeliveryWidgetEntry.make<String>(now, enabled = true, languageCode = "en", snapshot = shared, medium = medium, turn = turn) { _, _ -> null }
-
-        val first = entry(medium = true)
-        assertEquals(listOf(courier, nextUp), first.shown)
-        assertTrue(first.isFirstPage)
-        assertEquals(later.id, first.next)
-        val turned = entry(medium = true, turn = later.id)
-        assertEquals(listOf(later), turned.shown)
-        assertFalse(turned.isFirstPage)
-        assertEquals(courier.id, turned.next)
-        // A turn to the second of a pair shows the pair.
-        assertEquals(listOf(courier, nextUp), entry(medium = true, turn = nextUp.id).shown)
-        // A turn to a parcel the widget no longer shows shows the first page.
-        assertEquals(listOf(courier), entry(medium = false, turn = UUID.randomUUID()).shown)
-        assertEquals(nextUp.id, entry(medium = false).next)
-        assertEquals(courier.id, entry(medium = false, turn = later.id).next)
-        // All at once: no next button.
-        val alone = DeliveryWidgetEntry.make<String>(now, true, "en", snapshot(courier, nextUp), medium = true) { _, _ -> null }
-        assertNull(alone.next)
-        val none = DeliveryWidgetEntry.make<String>(now, true, "en", null, medium = true) { _, _ -> null }
-        assertTrue(none.shown.isEmpty())
-        assertNull(none.next)
-    }
-
-    /** The cards' pictures are read for the shape the widget shows them in, and the cards shown only when every one has them. */
-    @Test
-    fun widgetEntryShowsCardsOnlyWhenEveryOneIsDrawn() {
-        val courier = widgetParcel(label = "Courier", outForDelivery = true).copy(card = card("a"))
-        val nextUp = widgetParcel(label = "Next up", outForDelivery = false).copy(card = card("b"))
-        val words = widgetParcel(label = "Words", outForDelivery = true)
-        fun entry(vararg parcels: DeliveryWidgetParcel, medium: Boolean, enabled: Boolean = true, drawn: Set<String> = setOf("a", "b")) =
-            DeliveryWidgetEntry.make(now, enabled, "en", snapshot(*parcels), medium = medium) { card, shape ->
-                if (card.pictures in drawn) "${card.pictures}-${shape.rawValue}" else null
-            }
-
-        assertEquals(listOf("a-half", "b-half"), entry(courier, nextUp, medium = true).art)
-        assertEquals(listOf(courier, nextUp), entry(courier, nextUp, medium = true).cards.map { it.first })
-        assertEquals(listOf("b-wide"), entry(nextUp, medium = true).art)
-        assertEquals(listOf("a-small"), entry(courier, nextUp, medium = false).art)
-        // One card short, and the widget writes words for both.
-        assertTrue(entry(courier, nextUp, medium = true, drawn = setOf("a")).cards.isEmpty())
-        assertTrue(entry(courier, words, medium = true).art.isEmpty())
-        assertTrue(entry(courier, nextUp, medium = true, enabled = false).cards.isEmpty())
-    }
-
-    /** The timeline reads the store again 20 minutes on, or at the end of a turn's spell, whichever comes first. */
-    @Test
-    fun widgetTimelineComesBackAtTheEndOfATurn() {
-        assertEquals("medium", DeliveryWidgetTimeline.turnSize(medium = true))
-        assertEquals("small", DeliveryWidgetTimeline.turnSize(medium = false))
-        assertEquals(now.plusSeconds(1_200), DeliveryWidgetTimeline.next(now, listOf(null, null)))
-        val turn = DeliveryWidgetTurn(parcel = UUID.randomUUID(), at = now.minusSeconds(60))
-        assertEquals(turn.ends, DeliveryWidgetTimeline.next(now, listOf(null, turn)))
-        val over = DeliveryWidgetTurn(parcel = UUID.randomUUID(), at = now.minusSeconds(600))
-        assertEquals(now.plusSeconds(1_200), DeliveryWidgetTimeline.next(now, listOf(over)))
-        assertEquals(DeliveryWidgetTurn(UUID.randomUUID(), now).ends, DeliveryWidgetTimeline.next(now, listOf(turn.copy(at = now), over)))
+    fun widgetTimelineComesBackTwentyMinutesOn() {
+        assertEquals(now.plusSeconds(1_200), DeliveryWidgetTimeline.next(now))
+        assertEquals(now.plusSeconds(1_200), DeliveryWidgetTimeline.next(now, listOf(widgetParcel(label = "Parcel", outForDelivery = false))))
     }
 
     /** The parcel opens on the deliveries through the app's routing, as the iPhone widget's links do. */
@@ -226,7 +165,7 @@ class DeliveryWidgetTests {
         for (language in AppLanguage.entries) {
             val localizer = Localizer(language)
             val parcels = DemoRepository(MemoryDefaults(), language = { language }).list()
-            val shown = DeliveryWidgetSelection.pages(ParcelStore.widgetDeliveries(parcels, localizer), medium = true).first()
+            val shown = ParcelStore.widgetDeliveries(parcels, localizer).take(2)
             val published = shown.map { item ->
                 item.copy(card = DeliveryWidgetPictures.card(parcels.first { it.id == item.id }, localizer, scale = 3.0))
             }
@@ -274,7 +213,7 @@ class DeliveryWidgetTests {
             val published = requireNotNull(shared.snapshot).parcels
             assertTrue(published.isNotEmpty())
             assertTrue(published.all { it.card != null })
-            // The list widget's words: each parcel's stage and whether it is named, for every parcel in the order.
+            // The widget's words: each parcel's stage and whether it is named, for every parcel in the order.
             assertEquals(ParcelStore.widgetOrder(store.parcels, Localizer(AppLanguage.En)).map { it.id }, published.map { it.id })
             assertTrue(published.all { it.stage != null && it.named != null })
             assertEquals(published.map { it.id }.toSet(), artist.drawn.map { it.first }.toSet())
@@ -357,7 +296,7 @@ class DeliveryWidgetTests {
     }
 
     /**
-     * The store publishes every parcel in the widgets' order, as the iPhone does, so the list's count follows a parcel
+     * The store publishes every parcel in the widget's order, as the iPhone does, so the list's count follows a parcel
      * leaving past the fifteenth row as it follows one among them.
      */
     /**
@@ -448,8 +387,8 @@ class DeliveryWidgetTests {
     )
 
     /**
-     * The list widget's parcels, in the widgets' order: a delivered parcel goes from them a day after it arrived, the app
-     * silent since.
+     * The widget's parcels, in their order: a delivered parcel goes from them a day after it arrived, the app silent
+     * since.
      */
     @Test
     fun theListKeepsADeliveredParcelForADay() {
@@ -469,17 +408,16 @@ class DeliveryWidgetTests {
     }
 
     /**
-     * The snapshot holds every parcel, with each one's stage and status line; the next delivery widget still pages
-     * through the first 8 only. A snapshot written before reads back without them, and one written with the count the
-     * list once kept beside its first fifteen still reads.
+     * The snapshot holds every parcel, with each one's stage and status line; the first 8 are those the app draws cards
+     * for. A snapshot written before reads back without them, and one written with the count the list once kept beside
+     * its first fifteen still reads.
      */
     @Test
-    fun theSnapshotHoldsEveryParcelAndTheNextDeliveryWidgetPagesThroughEight() {
+    fun theSnapshotHoldsEveryParcel() {
         val many = (1..20).map { widgetParcel(label = "Parcel $it", outForDelivery = false) }
         val ordered = DeliveryWidgetSelection.ordered(many, emptyList(), now)
         assertEquals(many, ordered)
         assertEquals(DeliveryWidgetSelection.limit, DeliveryWidgetSelection.parcels(many, emptyList(), now).size)
-        assertEquals(8, DeliveryWidgetSelection.pages(ordered, medium = false, now = now).size)
 
         val defaults = MemoryDefaults()
         val shared = DeliveryWidgetSharedStore(defaults)
@@ -502,9 +440,9 @@ class DeliveryWidgetTests {
         assertEquals(parcels.map { it.id }, shared.snapshot?.parcels?.map { it.id })
     }
 
-    /** The store's order for both widgets: the list's first 8 are what the next delivery widget is handed. */
+    /** The store's first parcels for the widget are the first 8 of its order. */
     @Test
-    fun theListContinuesTheNextDeliveryWidgetsOrder() {
+    fun theWidgetsFirstParcelsBeginItsOrder() {
         val localizer = Localizer(AppLanguage.En)
         val parcels = DemoRepository(MemoryDefaults(), language = { AppLanguage.En }).list()
         val order = ParcelStore.widgetOrder(parcels, localizer, now)
@@ -534,7 +472,7 @@ class DeliveryWidgetTests {
 
     /**
      * Its sections are the app list's, in its order, each with its Next up first; its cards put the Next up first. From
-     * an app that published no sections, the parcels stay together in the widgets' order.
+     * an app that published no sections, the parcels stay together in the widget's order.
      */
     @Test
     fun theListsSectionsAreTheAppListsWithItsNextUpFirst() {
@@ -815,7 +753,7 @@ class DeliveryWidgetTests {
 
     /**
      * The list's sample, which its gallery picture and screenshots show (SAMPLE.md, the same on the iPhone): fifteen
-     * invented parcels in the widgets' order, one of each stage at least, in the app's words in every language.
+     * invented parcels in the widget's order, one of each stage at least, in the app's words in every language.
      */
     @Test
     fun theListsSampleIsFifteenInventedParcelsInTheWidgetsOrder() {

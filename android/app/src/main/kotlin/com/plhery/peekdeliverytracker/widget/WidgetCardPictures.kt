@@ -244,7 +244,7 @@ class WidgetCardPictures(
         /**
          * `DeliveryWidgetPicture.folder`: where the cards' pictures are kept, which the widget reads them from. In the
          * app's caches, as the iPhone keeps them in its App Group's Library/Caches: out of backups, and drawn again
-         * at the next publishing if the system clears them, the widget showing words until then.
+         * at the next publishing if the system clears them, the widget showing rows until then.
          */
         fun folder(context: Context): File = File(context.cacheDir, "WidgetCards")
     }

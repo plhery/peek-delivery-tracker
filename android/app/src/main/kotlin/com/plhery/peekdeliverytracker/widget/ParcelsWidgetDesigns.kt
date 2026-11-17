@@ -39,7 +39,6 @@ import com.plhery.peekdeliverytracker.core.CarrierTruckGeometry
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
 import com.plhery.peekdeliverytracker.core.ClockPreference
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetCard
-import com.plhery.peekdeliverytracker.core.DeliveryWidgetEntry
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetList
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetParcel
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetPicture
@@ -60,14 +59,13 @@ import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import kotlin.math.floor
 
 // The "Parcels" widget's designs ([DeliveryWidgetList.design]), drawn from the app's design system as the iPhone's
-// list widget draws them: the iPhone's Next delivery cards for a few parcels, the app list's cards made small (passes)
+// list widget draws them: the iPhone's cards for a few parcels, the app list's cards made small (passes)
 // for a few more where every one fits, and rows under the app list's sections for the rest. Cards and passes are in
 // each parcel's carrier colours, from the pictures the app draws for the widget (WidgetCardPictures).
 
 /**
- * The pictures `count` cards show at the widget's size: one alone fills a small or medium widget as the iPhone's Next
- * delivery does, two stand side by side; at the large size one or two are wide cards, three the app list's cards with
- * half routes.
+ * The pictures `count` cards show at the widget's size: one alone fills a small or medium widget as the iPhone's does,
+ * two stand side by side; at the large size one or two are wide cards, three the app list's cards with half routes.
  */
 internal fun cardShape(listSize: DeliveryWidgetList.Size, count: Int, size: DpSize): DeliveryWidgetPicture = when {
     listSize == DeliveryWidgetList.Size.Large -> if (count >= 3) DeliveryWidgetPicture.Half else DeliveryWidgetPicture.Wide
@@ -80,16 +78,16 @@ internal fun cardShape(listSize: DeliveryWidgetList.Size, count: Int, size: DpSi
 
 /**
  * The parcels as cards, the app list's Next up first ([DeliveryWidgetList.cardOrder]), each with its pictures `art`:
- * in a small or medium widget as the iPhone's Next delivery shows one or two; in a large one a card over the parcel's
- * last steps, two wide cards one above the other, or three of the app list's cards.
+ * in a small or medium widget one, or two side by side ([OneOrTwoCards]); in a large one a card over the parcel's last
+ * steps, two wide cards one above the other, or three of the app list's cards.
  */
 @Composable
 internal fun ListCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetParcel>, art: List<WidgetCardArt>, size: DpSize, type: WidgetText) {
     val context = LocalContext.current
     when {
         listSize(size) != DeliveryWidgetList.Size.Large -> {
-            val entry = DeliveryWidgetEntry(list.date, enabled = true, languageCode = list.languageCode, snapshot = null, shown = parcels, art = art)
-            DeliveryWidgetContent(entry, size, page = listIntent(context), marked = true)
+            val cards = parcels.zip(art).mapNotNull { (parcel, pictures) -> parcel.card?.let { Triple(parcel, it, pictures) } }
+            OneOrTwoCards(list.languageCode, cards, size, type, listIntent(context))
         }
         parcels.size == 1 -> CardAndSteps(list, parcels.single(), art.single(), size, type)
         parcels.size == 2 -> WideCards(list, parcels, art, size, type)
@@ -107,7 +105,7 @@ private fun CardAndSteps(list: DeliveryWidgetList, parcel: DeliveryWidgetParcel,
     val card = parcel.card ?: return
     val steps = parcel.steps.orEmpty()
     val top = DpSize(size.width, if (steps.isEmpty()) size.height else size.height / 3)
-    val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = top.inside(PAGE_MARGIN), type, list.languageCode, marked = true)
+    val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, room = top.inside(PAGE_MARGIN), type, list.languageCode)
     Box(root().background(WidgetCardColors.pair(card.surface)).clickable(openParcel(context, parcel))) {
         Column(GlanceModifier.fillMaxSize()) {
             Box(GlanceModifier.fillMaxWidth().height(top.height)) {
@@ -178,7 +176,7 @@ private fun WideCards(list: DeliveryWidgetList, parcels: List<DeliveryWidgetParc
             parcels.zip(art).forEachIndexed { index, (parcel, pictures) ->
                 if (index > 0) Spacer(GlanceModifier.height(CARD_GAP))
                 val card = parcel.card ?: return@forEachIndexed
-                val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, leavesNext = false, room = each.inside(WIDE_CARD_PADDING), type, list.languageCode, marked = true)
+                val words = CardWords(parcel, card, DeliveryWidgetPicture.Wide, room = each.inside(WIDE_CARD_PADDING), type, list.languageCode)
                 Box(
                     GlanceModifier.fillMaxWidth().defaultWeight().cornerRadius(16.dp).background(WidgetCardColors.pair(card.surface))
                         .clickable(openParcel(context, parcel)),

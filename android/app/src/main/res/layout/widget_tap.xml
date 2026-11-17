@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- The page behind a medium widget's two cards, which opens the app (PageTap), as WidgetKit's page does: not an item
-     of its own for TalkBack, as the iPhone's isn't one for VoiceOver; its cards are. -->
+<!-- The widget's page, behind its cards, passes or rows, which opens the list (PageTap), as WidgetKit's page does: not
+     an item of its own for TalkBack, as the iPhone's isn't one for VoiceOver; its cards, passes and rows are. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/widget_tap"
     android:layout_width="match_parent"

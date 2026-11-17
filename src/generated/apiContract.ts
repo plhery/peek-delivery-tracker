@@ -2224,6 +2224,17 @@ export const CARRIER_CAPABILITIES = {
         ],
         "path": "^/(?:[a-z]{2}/)?tracking/([^/?#]+)",
         "detectFromNumber": true
+      },
+      {
+        "domains": [
+          "dpdgroup.com",
+          "dpd.com"
+        ],
+        "params": [
+          "parcelNumber",
+          "parcelnumber"
+        ],
+        "detectFromNumber": true
       }
     ],
     "detectionRules": [],

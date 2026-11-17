@@ -5,6 +5,7 @@ import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testParcel, testView } 
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../types';
 import { takeCarrierHandoff } from '../lib/carrierHandoff';
 import { carrierInfo } from '../lib/carriers';
+import { ACCOUNT_INVITATION_STORAGE_KEY } from './accountInvitation';
 import { ParcelLinkError, type ParcelLinkView } from './links';
 import { ParcelPage } from './ParcelPage';
 import { NoticeToast } from './parcel/Toast';
@@ -91,6 +92,8 @@ describe('ParcelPage', () => {
     // The owner is told when Peek forgets the parcel, and is offered an account under the card and in the header.
     expect(screen.getByText('Peek forgets this parcel 30 days after delivery.')).toBeVisible();
     expect(screen.getByRole('button', { name: /^All your parcels in one place\s*Create an account$/ })).toBeVisible();
+    // It can be closed only once it has been shown on a few visits.
+    expect(screen.queryByRole('button', { name: 'Hide for now' })).toBeNull();
     expect(within(document.querySelector('header')!).getByRole('button', { name: 'Sign in' })).toBeVisible();
     // Nothing else is on this device, and the parcel is still on its way: the page ends with its journey.
     expect(screen.queryByRole('heading', { level: 2, name: 'Also on this device' })).toBeNull();
@@ -928,6 +931,22 @@ describe('ParcelPage keeping', () => {
     await user.click(within(document.querySelector('header')!).getByRole('button', { name: 'Sign in' }));
     expect(signIn).toHaveBeenCalledTimes(2);
     expect(signIn).toHaveBeenLastCalledWith(LINK_ID, false);
+  });
+
+  it('lets a visitor close the invitation to an account once it has been shown on a few visits, and keeps the header’s way in', async () => {
+    localStorage.setItem(ACCOUNT_INVITATION_STORAGE_KEY, JSON.stringify({ displays: 5, lastShownAt: Date.now() - 2 * HOUR }));
+    const signIn = vi.fn();
+    mocks.read.mockResolvedValue(testView());
+    const user = userEvent.setup();
+    const page = open({ account: 'visitor', signIn });
+    await user.click(await screen.findByRole('button', { name: 'Hide for now' }));
+    expect(screen.queryByRole('button', { name: /Create an account/ })).toBeNull();
+    expect(signIn).not.toHaveBeenCalled();
+    expect(within(document.querySelector('header')!).getByRole('button', { name: 'Sign in' })).toBeVisible();
+    page.unmount();
+    open({ account: 'visitor', signIn });
+    await screen.findByRole('heading', { level: 1 });
+    expect(screen.queryByRole('button', { name: /Create an account/ })).toBeNull();
   });
 
   it('offers the ways to sign in on the page itself, and notes the parcel only when one is taken', async () => {

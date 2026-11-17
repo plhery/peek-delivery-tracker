@@ -429,6 +429,7 @@
   "link.chooseCarrier": "Choose the carrier",
   "link.account.title": "All your parcels in one place",
   "link.account.action": "Create an account",
+  "link.account.hide": "Hide for now",
   "link.keep.body": "Sign in and Peek will follow all your deliveries in one place.",
   "link.keep.action": "Sign in to keep it",
   "link.keep.sheet": "It joins your deliveries with its name and history, and gets notifications like your other parcels. The copy on this device is then forgotten.",

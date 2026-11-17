@@ -33,6 +33,7 @@ import androidx.window.layout.FoldingFeature.State
 import androidx.window.testing.layout.FoldingFeature
 import androidx.window.testing.layout.TestWindowLayoutInfo
 import androidx.window.testing.layout.WindowLayoutInfoPublisherRule
+import com.plhery.peekdeliverytracker.core.AccountInvitationMemory
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -196,6 +197,36 @@ class DeliveryListScreenshotTest {
         show(dark = true)
         scrollToThePast(PAST_HEADER_TOP_DARK)
         compose.screenshot("list_past_dark")
+    }
+
+    /** A guest's offer of an account on its sixth visit, its × beside the button, 400 down the window. */
+    private fun showTheClosableOffer(dark: Boolean = false, fontScale: Float = 1f) {
+        show(dark = dark, fontScale = fontScale, session = AuthenticationState.Welcome) {
+            repeat(5) { visit ->
+                val at = now.minusSeconds(7_200L * (5 - visit))
+                AccountInvitationMemory(accountInvitationDefaults) { at }.seen()
+            }
+        }
+        scrollTo("deviceAccount", { compose.onNodeWithTag(DEVICE_ACCOUNT_ROW) }, OFFER_TOP)
+    }
+
+    @Test
+    fun aGuestsOfferOfAnAccountWithItsCross() {
+        showTheClosableOffer()
+        compose.screenshot("list_guest_offer_closable_light")
+    }
+
+    @Test
+    fun aGuestsOfferOfAnAccountWithItsCrossInDark() {
+        showTheClosableOffer(dark = true)
+        compose.screenshot("list_guest_offer_closable_dark")
+    }
+
+    /** At twice the text the button goes under the words, and the × to the row's top corner. */
+    @Test
+    fun aGuestsOfferOfAnAccountWithItsCrossInTwiceTheText() {
+        showTheClosableOffer(fontScale = 2f)
+        compose.screenshot("list_guest_offer_closable_text2")
     }
 
     @Test
@@ -389,3 +420,4 @@ class DeliveryListScreenshotTest {
 /** Where the captures show the past deliveries' heading, from the window's top: the dark one is scrolled less far. */
 private const val PAST_HEADER_TOP = 579.5f
 private const val PAST_HEADER_TOP_DARK = 657.2f
+private const val OFFER_TOP = 400f

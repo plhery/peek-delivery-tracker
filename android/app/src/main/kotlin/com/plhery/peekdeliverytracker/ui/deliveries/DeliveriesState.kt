@@ -639,6 +639,15 @@ internal class DeliveriesState(
     var listChange: ListChange? by mutableStateOf(null)
         private set
 
+    /**
+     * The guest closed their invitation to an account: it leaves the list, which closes up behind it with its snappy
+     * motion, as `withAnimation(.snappy(duration: 0.32))` closes the iPhone's.
+     */
+    fun closeAccountInvitation() {
+        move(ListChange(releasing = false))
+        source.accountInvitation.close()
+    }
+
     /** The list changes: its counts roll with it, and its items move with it until the list has been laid out anew. */
     private fun move(change: ListChange) {
         listChange = change

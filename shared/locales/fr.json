@@ -429,6 +429,7 @@
   "link.chooseCarrier": "Choisir le transporteur",
   "link.account.title": "Tous tes colis au même endroit",
   "link.account.action": "Créer un compte",
+  "link.account.hide": "Masquer pour l’instant",
   "link.keep.body": "Connecte-toi et Peek suivra toutes tes livraisons au même endroit.",
   "link.keep.action": "Se connecter pour le garder",
   "link.keep.sheet": "Il rejoint tes livraisons avec son nom et son historique, et tu reçois ses notifications comme pour tes autres colis. La copie sur cet appareil est ensuite oubliée.",

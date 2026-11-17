@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import androidx.compose.runtime.MonotonicFrameClock
 import androidx.test.core.app.ApplicationProvider
+import com.plhery.peekdeliverytracker.core.AccountInvitationMemory
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.GivenPostcode
@@ -69,7 +70,8 @@ import kotlinx.coroutines.withContext
  * demo's session. The rating prompt keeps its days in a store of its own, in UTC, and the system's prompt is a fake
  * that notes each step ([reviewCalls]). The parcels' links are the service's (`shareLinks`), and the words kept for
  * them this device's (`shareDefaults`): both outlast a process, as the service and the device's store do, and so does
- * the record of the parcels the list last showed on their way (`onTheWayDefaults`). The pages' answers go to
+ * the record of the parcels the list last showed on their way (`onTheWayDefaults`), and the guest's invitation to an
+ * account (`accountInvitationDefaults`), on the pages' clock. The pages' answers go to
  * [feedbackRequests], or fail with `feedbackFailure`, once `feedbackSending` lets them go; their model keeps the time
  * of [now], which a test moves on, and remembers them in a store of its own.
  */
@@ -85,6 +87,8 @@ class FakeDeliveries(
     val invitationDefaults: UserDefaults = MemoryDefaults(),
     /** Where the list keeps the parcels it last showed on their way, in memory: it outlasts a process too. */
     val onTheWayDefaults: UserDefaults = MemoryDefaults(),
+    /** Where the guest's invitation to an account keeps its visits, in memory: it outlasts a process too. */
+    val accountInvitationDefaults: UserDefaults = MemoryDefaults(),
 ) : DeliveriesSource {
     override val parcels = MutableStateFlow(parcels)
     override val unlistedDeviceParcels = MutableStateFlow(0)
@@ -517,6 +521,12 @@ class FakeDeliveries(
     /** The pages' questions' clock: the way back asks once the app has been away a second and a half of it. */
     var now: Instant = CAPTURED
 
+    /**
+     * The guest's invitation to an account, on [now], made as the list first asks for it: a test may fill its record
+     * first.
+     */
+    override val accountInvitation by lazy { AccountInvitationVisit(AccountInvitationMemory(accountInvitationDefaults) { now }) }
+
     /** Holds each answer until the test lets it go, and what it throws when it fails. */
     var feedbackSending: CompletableDeferred<Unit>? = null
     var feedbackFailure: Exception? = null
@@ -708,7 +718,7 @@ class FakeDeliveries(
     fun newProcess(): FakeDeliveries =
         FakeDeliveries(
             parcels.value, session.value, shareLinks = shareLinks, shareDefaults = shareDefaults, invitationDefaults = invitationDefaults,
-            onTheWayDefaults = onTheWayDefaults,
+            onTheWayDefaults = onTheWayDefaults, accountInvitationDefaults = accountInvitationDefaults,
         )
 
     /**

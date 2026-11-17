@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { CarrierTruck } from '../../components/CarrierMark';
 import { Icon } from '../../components/Icon';
@@ -10,6 +10,7 @@ import { carrierInfo, type CarrierInfo } from '../../lib/carriers';
 import { useSheetDialog } from '../../lib/modal';
 import { countryName } from 'universal-parcel-scraper/app';
 import type { ParcelWithEvents } from '../../types';
+import { closeAccountInvitation, showAccountInvitation } from '../accountInvitation';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
 import type { SignInMethods } from '../session';
 import { Glyph } from './glyphs';
@@ -23,16 +24,27 @@ export function CardStack({ carrier }: { carrier: CarrierInfo }) {
   </span>;
 }
 
-/** The invitation to an account, under the card: the whole row leads to signing in. */
+/**
+ * The invitation to an account, under the card: the whole row leads to signing in. After a few visits it can be
+ * closed for a while (`accountInvitation`); what this visit shows is settled when it first appears.
+ */
 export function AccountRow({ carrier, onSignIn }: { carrier: CarrierInfo; onSignIn: () => void }) {
   const { t } = useI18n();
-  return <button type="button" className="peekp-account" onClick={onSignIn}>
-    <CardStack carrier={carrier} />
-    <span>
-      <strong>{t('link.account.title')}</strong>
-      <span className="peekp-textlink">{t('link.account.action')}<Icon name="chevron" /></span>
-    </span>
-  </button>;
+  const [visit, setVisit] = useState(showAccountInvitation);
+  if (!visit.shows) return null;
+  return <div className="peekp-account-row">
+    <button type="button" className="peekp-account" onClick={onSignIn}>
+      <CardStack carrier={carrier} />
+      <span>
+        <strong>{t('link.account.title')}</strong>
+        <span className="peekp-textlink">{t('link.account.action')}<Icon name="chevron" /></span>
+      </span>
+    </button>
+    {visit.closable && <button type="button" className="peekp-account__hide" aria-label={t('link.account.hide')} onClick={() => {
+      closeAccountInvitation();
+      setVisit({ shows: false, closable: false });
+    }}><Icon name="close" /></button>}
+  </div>;
 }
 
 /**

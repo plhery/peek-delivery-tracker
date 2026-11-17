@@ -293,6 +293,8 @@ private struct DeliveryListView: View {
     @State private var paper: DeliveredPaperBurst?
     /// A parcel seen arriving was the moment to ask for a rating (`ReviewPrompt`), and the list has not asked yet.
     @State private var reviewDue = false
+    /// The guest's invitation to an account, as this visit shows it.
+    @State private var accountInvitation = AccountInvitationVisit()
 
     @ObservedObject private var catalog = CarrierCatalog.shared
 
@@ -508,6 +510,7 @@ private struct DeliveryListView: View {
         .onDisappear { addedParcelID = nil; revealParcelID = nil; parcelBurstID = nil; flights = [] }
         .onChange(of: scenePhase) { _, phase in
             if phase != .active { addedParcelID = nil; revealParcelID = nil; parcelBurstID = nil }
+            if phase == .active { accountInvitation.resume() }
         }
         .onChange(of: navigation) { before, now in
             guard let screen = now.screen(after: before) else { return }
@@ -837,8 +840,10 @@ private struct DeliveryListView: View {
                         ForEach(layout.attention) { parcel in card(parcel, flagged: true, leaving: leaving) }
                         ForEach(layout.remaining) { parcel in card(parcel, flagged: false, leaving: leaving) }
                     }
-                    // Someone following parcels without an account is offered one, once and quietly.
-                    if session.isGuest, !store.parcels.isEmpty, !hasCustomView { DeviceAccountRow() }
+                    // Someone following parcels without an account is offered one, quietly, and may hide it after a while.
+                    if session.isGuest, !store.parcels.isEmpty, !hasCustomView, accountInvitation.stands {
+                        DeviceAccountRow(invitation: accountInvitation)
+                    }
                     ForEach(layout.sections) { section in sectionContent(section, next: layout.next) }
                     // The foot ends the list once there is one: the first load shows its own message.
                     if !(store.loading && store.parcels.isEmpty) {

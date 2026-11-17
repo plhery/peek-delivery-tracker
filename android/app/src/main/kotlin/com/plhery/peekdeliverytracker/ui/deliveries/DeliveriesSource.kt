@@ -311,6 +311,12 @@ interface DeliveriesSource {
      */
     val onTheWay: OnTheWayRecord
 
+    /**
+     * The guest's invitation to an account under their parcels, as this visit shows it ([AccountInvitationVisit]): one
+     * for the process, over a record kept in the app's preferences and never sent.
+     */
+    val accountInvitation: AccountInvitationVisit
+
     /** The system's prompt for a rating, over the window's `activity` (`requestReview`). */
     fun reviews(activity: Activity): ReviewRequester
 
@@ -597,6 +603,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val reviewSettled get() = container.reviewSettled
 
     override val onTheWay = OnTheWayRecord(container.defaults)
+
+    override val accountInvitation: AccountInvitationVisit get() = container.accountInvitation
 
     override fun reviews(activity: Activity): ReviewRequester = container.reviews(activity)
 

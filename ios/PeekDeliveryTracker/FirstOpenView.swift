@@ -851,16 +851,137 @@ private struct PipPressStyle: ButtonStyle {
     }
 }
 
-/// Under the parcels someone follows without an account: the account, offered once and quietly.
+/// When the guest's invitation to an account stands under their parcels. It shows on every visit,
+/// and from the sixth it can be closed: then it stays away 30 days, comes back for one visit, and
+/// stays away again whether or not it is closed then. One record for this iPhone, which never
+/// leaves it.
+struct AccountInvitationMemory {
+    private static let key = "sdt.accountInvitation.v1"
+    /// The row seen again within this is the same visit, counted once.
+    static let visit: TimeInterval = 30 * 60
+    /// The visits it is shown in before it can be closed.
+    static let closableAfter = 5
+    /// How long it stays away.
+    static let away: TimeInterval = 30 * 24 * 60 * 60
+
+    private struct Memory: Codable {
+        /// The visits it was shown in.
+        var displays = 0
+        /// When the last visit counted began.
+        var lastShownAt: Date?
+        var hiddenUntil: Date?
+        /// The end of the visit it came back for.
+        var showingUntil: Date?
+    }
+
+    private let defaults: UserDefaults
+    private let now: () -> Date
+
+    init(defaults: UserDefaults = .standard, now: @escaping () -> Date = Date.init) {
+        self.defaults = defaults
+        self.now = now
+    }
+
+    /// Never closed, back after its time away, or within the visit it came back for.
+    var shows: Bool {
+        let memory = read()
+        let now = now()
+        guard let hiddenUntil = memory.hiddenUntil, now < hiddenUntil else { return true }
+        return memory.showingUntil.map { now < $0 } ?? false
+    }
+
+    /// It has a × from its sixth visit on.
+    var closable: Bool { read().displays > Self.closableAfter }
+
+    /// The row came on screen. Back after its time away, it stays for this visit and is away again after it.
+    func seen() {
+        update { memory in
+            let now = now()
+            if let hiddenUntil = memory.hiddenUntil, now >= hiddenUntil {
+                memory.hiddenUntil = now + Self.away
+                memory.showingUntil = now + Self.visit
+            }
+            // A clock set back starts a visit too.
+            if let last = memory.lastShownAt, now >= last, now.timeIntervalSince(last) < Self.visit { return }
+            memory.displays += 1
+            memory.lastShownAt = now
+        }
+    }
+
+    func close() {
+        update {
+            $0.hiddenUntil = now() + Self.away
+            $0.showingUntil = nil
+        }
+    }
+
+    private func update(_ change: (inout Memory) -> Void) {
+        var memory = read()
+        change(&memory)
+        defaults.set(try? JSONEncoder().encode(memory), forKey: Self.key)
+    }
+
+    private func read() -> Memory {
+        defaults.data(forKey: Self.key).flatMap { try? JSONDecoder().decode(Memory.self, from: $0) } ?? Memory()
+    }
+}
+
+/// The invitation as a visit to the list shows it: whether it stands, decided as the visit begins, and its ×, decided
+/// as the row comes on screen. Both hold until the app is in use again, so the row does not come and go under the reader.
+@MainActor @Observable
+final class AccountInvitationVisit {
+    private(set) var stands: Bool
+    private(set) var closable: Bool
+    @ObservationIgnored private let memory: AccountInvitationMemory
+    @ObservationIgnored private var onScreen = false
+
+    init(memory: AccountInvitationMemory = AccountInvitationMemory()) {
+        self.memory = memory
+        stands = memory.shows
+        closable = memory.closable
+    }
+
+    /// The app is in use again: a visit may begin, which decides afresh, and counts the row if it is on screen.
+    func resume() {
+        stands = memory.shows
+        if stands, onScreen { seen() }
+    }
+
+    func appeared() {
+        onScreen = true
+        seen()
+    }
+
+    func disappeared() {
+        onScreen = false
+    }
+
+    func close() {
+        memory.close()
+        stands = false
+    }
+
+    private func seen() {
+        memory.seen()
+        closable = memory.closable
+    }
+}
+
+/// Under the parcels someone follows without an account: the account, offered quietly. After a few visits a × hides
+/// it for a while (`AccountInvitationMemory`).
 struct DeviceAccountRow: View {
+    let invitation: AccountInvitationVisit
+
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
+        let stacked = dynamicTypeSize.isAccessibilitySize
         Button { session.showSignIn() } label: {
             // At the largest text sizes the button goes under the words, which keep the row's width.
-            let layout = dynamicTypeSize.isAccessibilitySize
+            let layout = stacked
                 ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
                 : AnyLayout(HStackLayout(spacing: 12))
             layout {
@@ -874,7 +995,7 @@ struct DeviceAccountRow: View {
                 }
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
-                if !dynamicTypeSize.isAccessibilitySize { Spacer(minLength: 8) }
+                if !stacked { Spacer(minLength: 8) }
                 Text(localizer.text("arrival.signInTitle"))
                     .font(.footnote.weight(.medium))
                     .foregroundStyle(Brand.ink)
@@ -883,7 +1004,9 @@ struct DeviceAccountRow: View {
                     .background(Brand.cream, in: Capsule())
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 15)
+            .padding(.leading, 15)
+            // The × keeps its own room at the end of the row.
+            .padding(.trailing, invitation.closable ? 44 : 15)
             .padding(.vertical, 10)
             .frame(minHeight: 66)
             .background(Brand.paper, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
@@ -891,6 +1014,25 @@ struct DeviceAccountRow: View {
         }
         .buttonStyle(TactileButtonStyle())
         .accessibilityIdentifier("deliveries.account")
+        // Over the row, not in it: hiding it never signs in.
+        .overlay(alignment: stacked ? .topTrailing : .trailing) {
+            if invitation.closable {
+                Button {
+                    withAnimation(reduceMotion ? nil : .snappy(duration: 0.32)) { invitation.close() }
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Brand.secondaryText)
+                        .frame(minWidth: 44, minHeight: 44)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel(localizer.text("link.account.hide"))
+                .accessibilityIdentifier("deliveries.account.hide")
+            }
+        }
+        .onAppear { invitation.appeared() }
+        .onDisappear { invitation.disappeared() }
     }
 }
 

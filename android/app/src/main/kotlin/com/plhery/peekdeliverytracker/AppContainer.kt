@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.plhery.peekdeliverytracker.core.AccountInvitationMemory
 import com.plhery.peekdeliverytracker.core.AddByEmailStore
 import com.plhery.peekdeliverytracker.core.addByEmailClient
 import com.plhery.peekdeliverytracker.core.AnalyticsCatalog
@@ -82,6 +83,7 @@ import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.platform.WebViewTurnstilePages
 import com.plhery.peekdeliverytracker.ui.TurnstileSheet
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalMotionSource
+import com.plhery.peekdeliverytracker.ui.deliveries.AccountInvitationVisit
 import com.plhery.peekdeliverytracker.ui.deliveries.LaunchPreviews
 import com.plhery.peekdeliverytracker.ui.deliveries.ParcelLinkSheetState
 import com.plhery.peekdeliverytracker.ui.draw.MapTextWidths
@@ -236,6 +238,9 @@ class AppContainer(
 
     /** `ReviewPrompt.forced`: a debug build's `sdt.debug.reviewDue`, read at each use as the iPhone reads it. */
     private fun reviewForced(): Boolean = debug && defaults.bool(DEBUG_REVIEW_DUE)
+
+    /** The guest's invitation to an account under their parcels, for every window the process makes. */
+    val accountInvitation = AccountInvitationVisit(AccountInvitationMemory(defaults))
 
     /**
      * `DemoModeBar.hidden`: a debug build's `sdt.debug.storeScreenshots` leaves the demo's bar out, for the store's

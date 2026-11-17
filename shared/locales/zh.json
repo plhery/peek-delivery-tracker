@@ -429,6 +429,7 @@
   "link.chooseCarrier": "选择快递公司",
   "link.account.title": "所有包裹，集中一处",
   "link.account.action": "创建账号",
+  "link.account.hide": "暂时隐藏",
   "link.keep.body": "登录后，Peek 会把你的所有包裹集中在一处跟踪。",
   "link.keep.action": "登录并保存",
   "link.keep.sheet": "它会带着名称和物流记录加入你的包裹列表，并像其他包裹一样推送通知。随后，这台设备上的副本会被清除。",

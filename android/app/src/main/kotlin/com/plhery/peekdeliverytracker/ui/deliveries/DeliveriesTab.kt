@@ -203,6 +203,8 @@ fun DeliveriesTab(
         val lifecycle = LocalLifecycleOwner.current.lifecycle
         val resumed = lifecycle.currentStateAsState().value.isAtLeast(Lifecycle.State.RESUMED)
         state.inFront = resumed
+        // The app in use again may begin a visit: whether the guest's invitation to an account stands is decided afresh.
+        LifecycleEventEffect(Lifecycle.Event.ON_START) { source.accountInvitation.resume() }
         state.linkShown = LocalParcelLinkOpen.current
         val invited by source.shouldInviteNotifications.collectAsState()
         val enabling by source.notificationEnableInProgress.collectAsState()

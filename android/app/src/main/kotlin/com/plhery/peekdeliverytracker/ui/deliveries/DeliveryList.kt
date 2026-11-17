@@ -105,6 +105,7 @@ import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
 import com.plhery.peekdeliverytracker.ui.draw.LocalPipSight
 import com.plhery.peekdeliverytracker.ui.draw.NoticeBanner
+import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.tabs.tabContentPadding
 import com.plhery.peekdeliverytracker.ui.theme.IosTextStyle
 import com.plhery.peekdeliverytracker.ui.theme.MaterialBackdrop
@@ -581,9 +582,11 @@ private fun listEntries(
     layout.next?.let { first(cardKey("next", it.id), "next", ListItem.Next(it)) }
     for (parcel in layout.attention) first(cardKey("attention", parcel.id), "card", ListItem.OnTheWay(parcel, attention = true))
     for (parcel in layout.remaining) first(cardKey("remaining", parcel.id), "card", ListItem.OnTheWay(parcel, attention = false))
-    // Someone following parcels without an account is offered one under them, once and quietly, outside a custom view:
-    // outside the first group too, 24 under it.
-    if (guest && parcels.isNotEmpty() && !custom) section("deviceAccount", "deviceAccount", SECTION_SPACING, ListItem.DeviceAccount)
+    // Someone following parcels without an account is offered one under them, once and quietly, outside a custom view,
+    // unless they closed it a while ago ([AccountInvitationVisit]): outside the first group too, 24 under it.
+    if (guest && parcels.isNotEmpty() && !custom && state.source.accountInvitation.stands) {
+        section("deviceAccount", "deviceAccount", SECTION_SPACING, ListItem.DeviceAccount)
+    }
     for (section in layout.sections) {
         if (section.kind == ParcelSectionKind.Archived) {
             // A custom view shows the archived parcels it finds under their header, rather than on the shelf.
@@ -626,7 +629,9 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         is ListItem.Header -> SectionHeader(item.kind, item.count, item.change)
         is ListItem.SectionCard -> SectionCard(state, item)
         is ListItem.Foot -> DeliveriesFoot(item.homePageUrl, item.privacyUrl)
-        ListItem.DeviceAccount -> DeviceAccountRow { state.source.showSignIn() }
+        ListItem.DeviceAccount -> DeviceAccountRow(
+            state.source.accountInvitation, onSignIn = { state.source.showSignIn() }, onClose = state::closeAccountInvitation,
+        )
     }
 }
 
@@ -657,13 +662,23 @@ private fun ListNotice(state: DeliveriesState, notice: ListItem.Notice) {
  * words at the accessibility sizes. The row is 15 in, 10 above and below, 66 tall at least, on the paper with 16-point
  * continuous corners and a hairline of 0.75 in the separator at 0.3, and gives under the finger; a tap asks to sign in
  * (`session.showSignIn()`).
+ *
+ * From its sixth visit ([AccountInvitationVisit.closable]) an × in caption semibold secondary stands at the row's end,
+ * beside the capsule, or in its top corner at the accessibility sizes, in a target of its own 48 square that the row
+ * leaves room for: "link.account.hide" closes the invitation for a while, and never signs in. The row is counted as
+ * seen as it is drawn ([AccountInvitationVisit.appeared]).
  */
 @Composable
-private fun DeviceAccountRow(onSignIn: () -> Unit) {
+private fun DeviceAccountRow(invitation: AccountInvitationVisit, onSignIn: () -> Unit, onClose: () -> Unit) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val shape = ContinuousRoundedShape(16.dp)
     val stacked = PeekTheme.dynamicTypeSize.isAccessibilitySize
+    val closable = invitation.closable
+    DisposableEffect(invitation) {
+        invitation.appeared()
+        onDispose(invitation::disappeared)
+    }
     val words = @Composable {
         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(localized("link.account.title"), color = colors.ink, style = type.style(IosTextStyle.Subheadline, FontWeight.Medium).sfLines())
@@ -685,21 +700,42 @@ private fun DeviceAccountRow(onSignIn: () -> Unit) {
         .heightIn(min = 66.dp)
         .background(colors.paper, shape)
         .border(0.75.dp, colors.separator.copy(alpha = colors.separator.alpha * 0.3f), shape)
-        .padding(horizontal = 15.dp, vertical = 10.dp)
+        // The × keeps its own room at the end of the row.
+        .padding(start = 15.dp, top = 10.dp, end = if (closable) ACCOUNT_HIDE_SIZE else 15.dp, bottom = 10.dp)
         .semantics(mergeDescendants = true) {}
-    if (stacked) {
-        Column(frame, verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            words()
-            capsule()
+    Box(Modifier.fillMaxWidth()) {
+        if (stacked) {
+            Column(frame, verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                words()
+                capsule()
+            }
+        } else {
+            Row(frame, horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
+                Box(Modifier.weight(1f)) { words() }
+                Spacer(Modifier.width(8.dp))
+                capsule()
+            }
         }
-    } else {
-        Row(frame, horizontalArrangement = Arrangement.spacedBy(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.weight(1f)) { words() }
-            Spacer(Modifier.width(8.dp))
-            capsule()
+        // Over the row, not in it: hiding it never signs in.
+        if (closable) {
+            val label = localized("link.account.hide")
+            Box(
+                Modifier
+                    .align(if (stacked) Alignment.TopEnd else Alignment.CenterEnd)
+                    .size(ACCOUNT_HIDE_SIZE)
+                    .testTag(DEVICE_ACCOUNT_HIDE)
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClose)
+                    .semantics { contentDescription = label },
+                contentAlignment = Alignment.Center,
+            ) {
+                PeekSymbol("xmark", font = type.style(IosTextStyle.Caption, FontWeight.SemiBold), tint = colors.secondaryText)
+            }
         }
     }
 }
+
+/** The invitation's ×'s target, which the row leaves room for at its end. */
+private val ACCOUNT_HIDE_SIZE = 48.dp
 
 /**
  * Next up's card. A card on its way tells the list where it stands, its name and, on Next up, where Pip shows, which
@@ -1022,5 +1058,6 @@ const val ANNOUNCEMENT = "deliveries.announcement"
 /** The store's error over the list ([ListNotice]); iOS gives it no id. */
 const val LIST_NOTICE = "deliveries.notice"
 
-/** iOS's id for the guest's offer of an account (`DeviceAccountRow`); the account button has its own. */
+/** iOS's ids for the guest's offer of an account (`DeviceAccountRow`) and its ×; the account button has its own. */
 const val DEVICE_ACCOUNT_ROW = "deliveries.account"
+const val DEVICE_ACCOUNT_HIDE = "deliveries.account.hide"

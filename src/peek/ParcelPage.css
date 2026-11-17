@@ -222,6 +222,16 @@
 .peekp-account > span:last-child { display: grid; gap: 2px; flex: 1; min-width: 0; }
 .peekp-account strong { font-size: 14px; font-weight: 600; letter-spacing: -.1px; }
 .peekp-account .peekp-textlink { min-height: 0; }
+/* Its close, once it has one: at the row's end, clear of its words. */
+.peekp-account-row { position: relative; }
+.peekp-account-row:has(> .peekp-account__hide) .peekp-account { padding-inline-end: 52px; }
+.peekp-account__hide {
+  position: absolute; inset-inline-end: 6px; top: 50%; display: grid; place-items: center; width: 40px; height: 40px; translate: 0 -50%;
+  border-radius: 50%; background: none; color: var(--ink-soft); transition: scale .18s var(--spring);
+}
+.peekp-account__hide::before { content: ''; position: absolute; inset: -2px; }
+.peekp-account__hide:active { scale: .92; }
+.peekp-account__hide svg { width: 16px; height: 16px; }
 /* The sample's way to a parcel of one's own: the words, then the button; side by side where the map stands beside the card. */
 .peekp-yours { display: grid; gap: 12px; padding: 16px; border: 1px solid var(--line); border-radius: 20px; background: var(--paper); }
 .peekp-yours > div { display: grid; gap: 4px; }

@@ -24,7 +24,7 @@ struct AddByEmailOffer: Decodable {
         let value: AddByEmail
 
         private enum Keys: String, CodingKey {
-            case address, createdAt, usedToday, lastMailAt, lastResult, lastAdded, recent, confirmation
+            case address, createdAt, usedToday, lastMailAt, lastResult, lastAdded, recent, confirmation, notify
         }
 
         init(from decoder: any Decoder) throws {
@@ -37,7 +37,8 @@ struct AddByEmailOffer: Decodable {
                 lastResult: try? container.decodeIfPresent(AddByEmailResult.self, forKey: .lastResult),
                 lastAdded: try container.decodeIfPresent(Int.self, forKey: .lastAdded),
                 recent: (try container.decodeIfPresent([Known<AddByEmailEntry>].self, forKey: .recent) ?? []).compactMap(\.value),
-                confirmation: try? container.decodeIfPresent(ForwardingConfirmation.self, forKey: .confirmation)
+                confirmation: try? container.decodeIfPresent(ForwardingConfirmation.self, forKey: .confirmation),
+                notify: try? container.decodeIfPresent(Bool.self, forKey: .notify)
             )
         }
     }
@@ -59,6 +60,10 @@ extension AddByEmail {
         guard let lastMailAt, let lastResult else { return [] }
         return [AddByEmailEntry(at: lastMailAt, sender: "", result: lastResult, added: lastAdded ?? 0)]
     }
+
+    /// Whether each parcel an email adds is notified: on unless switched off, which a server before the switch doesn't
+    /// say.
+    var notifies: Bool { notify ?? true }
 }
 
 extension AddByEmailEntry {
@@ -90,6 +95,8 @@ final class AddByEmailModel: ObservableObject {
         var open: @MainActor (_ renew: Bool) async throws -> AddByEmailResponse
         /// Turns it off.
         var close: @MainActor () async throws -> Void
+        /// Switches the notification of each parcel an email adds on or off.
+        var notify: @MainActor (_ on: Bool) async throws -> AddByEmailResponse
     }
 
     /// Nil hides the row.
@@ -143,6 +150,11 @@ final class AddByEmailModel: ObservableObject {
     /// A new address in place of the current one, which stops working at once.
     @discardableResult func renew() async -> Bool {
         await change { try await $0.open(true) }
+    }
+
+    /// Notifies each parcel an email adds, or stops.
+    @discardableResult func setNotify(_ on: Bool) async -> Bool {
+        await change { try await $0.notify(on) }
     }
 
     @discardableResult func turnOff() async -> Bool {

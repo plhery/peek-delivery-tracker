@@ -37,6 +37,9 @@ interface AddByEmailClient {
 
     /** Turns adding by email off. */
     suspend fun close()
+
+    /** Switches the notification of each parcel an email adds on or off. */
+    suspend fun setNotify(notify: Boolean): AddByEmailResponse
 }
 
 /** The forwarding address's requests through the app's API client. */
@@ -46,6 +49,8 @@ fun DeliveryApiClient.addByEmailClient(): AddByEmailClient = object : AddByEmail
     override suspend fun open(renew: Boolean) = openAddByEmail(renew)
 
     override suspend fun close() = closeAddByEmail()
+
+    override suspend fun setNotify(notify: Boolean) = setAddByEmailNotify(notify)
 }
 
 /**
@@ -103,6 +108,10 @@ fun AddByEmailEntry.resultText(localizer: Localizer): String = when (result) {
     AddByEmailResult.Confirmation -> localizer.text("inbox.result.confirmation")
 }
 
+/** Whether each parcel an email adds is notified: on unless switched off, as an address from before the switch is. */
+val AddByEmail.notifies: Boolean
+    get() = notify ?: true
+
 /** Whether Settings says how many emails today took: once half the day's allowance is used. */
 val AddByEmailResponse.showsUsage: Boolean
     get() = inbox?.let { it.usedToday * 2 >= dailyLimit } ?: false
@@ -113,7 +122,8 @@ data class AddByEmailOffer(val account: UUID, val value: AddByEmailResponse)
 /**
  * Settings' "Add parcels by email" for the account signed in (the web's `useAddByEmail` and AddByEmailPage's runs):
  * whether the server offers it a forwarding address, read as Settings opens and again as the reader comes back to the
- * app, where Gmail's confirmation may have come in meanwhile; and the address turned on, renewed and turned off.
+ * app, where Gmail's confirmation may have come in meanwhile; and the address turned on, renewed and turned off, and
+ * its notification switched.
  *
  * [offer] is null until a read found the server offering one: it answers 404 until the feature is set up and open to
  * the account, and Settings then shows no row. A read that fails leaves what was read before, and what was read for
@@ -169,6 +179,12 @@ class AddByEmailStore(private val client: AddByEmailClient, private val now: () 
         changing { client.close() }
         val current = offerState.value?.takeIf { it.account == account } ?: return
         offerState.value = current.copy(value = current.value.copy(inbox = null))
+    }
+
+    /** Switches the notification of each parcel an email adds on or off for [account]: the address as the server answers it. */
+    suspend fun setNotify(account: UUID, notify: Boolean) {
+        val value = changing { client.setNotify(notify) }
+        offerState.value = AddByEmailOffer(account, value)
     }
 
     private suspend fun <T> changing(change: suspend () -> T): T {

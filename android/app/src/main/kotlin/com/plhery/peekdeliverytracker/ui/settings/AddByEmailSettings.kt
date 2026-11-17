@@ -82,6 +82,7 @@ import com.plhery.peekdeliverytracker.core.api.AddByEmailEntry
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResult
 import com.plhery.peekdeliverytracker.core.api.ForwardingConfirmation
+import com.plhery.peekdeliverytracker.core.notifies
 import com.plhery.peekdeliverytracker.core.recentEmails
 import com.plhery.peekdeliverytracker.core.resultText
 import com.plhery.peekdeliverytracker.core.showsUsage
@@ -118,11 +119,12 @@ import kotlin.math.max
 /**
  * The forwarding address's page, pushed in Settings for [account]: the "Experimental" badge over the intro in
  * subheadline secondary, then "inbox.start" while the account has no address yet. Forwarding one email by hand is all
- * it asks then: the address to copy or share, and what the last emails did, with what a few of them call for; having
- * the mail service forward by itself, with its steps ([ForwardingSteps]), stays folded away until wanted, or until
- * Gmail's confirmation is waiting; last, a new address, which asks first, and the address turned off. What it asks
- * runs in the app's scope ([ADD_BY_EMAIL_PAGE]); while it waits, a spinner stands at the bar's trailing end and nothing
- * on the page, the back or the sheet's close can be pressed. Why it failed shows under the intro, and TalkBack says it.
+ * it asks then: the address to copy or share, and what the last emails did, with what a few of them call for; then
+ * whether each parcel an email adds is notified, on unless switched off; having the mail service forward by itself,
+ * with its steps ([ForwardingSteps]), stays folded away until wanted, or until Gmail's confirmation is waiting; last, a
+ * new address, which asks first, and the address turned off. What it asks runs in the app's scope ([ADD_BY_EMAIL_PAGE]);
+ * while it waits, a spinner stands at the bar's trailing end and nothing on the page, the back or the sheet's close can
+ * be pressed. Why it failed shows under the intro, and TalkBack says it.
  */
 @Composable
 internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollState, onBack: () -> Unit) {
@@ -182,6 +184,13 @@ internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollSta
                 copied = true
             }
             RecentEmails(inbox, offer)
+            // The switch shows what the server last answered: it moves once the change is saved, and stays on failure.
+            SettingsGroup {
+                SettingsToggleRow(
+                    inbox.notifies, { on -> run { store.setNotify(account, on) } }, localized("inbox.notify"), ADD_BY_EMAIL_NOTIFY,
+                    symbol = "bell", detail = localized("inbox.notify.hint"), enabled = !working,
+                )
+            }
             AutomaticForwarding(inbox, email, copy)
             SettingsGroup {
                 if (confirmingRenew) {
@@ -771,6 +780,7 @@ internal const val ADD_BY_EMAIL_START = "$ADD_BY_EMAIL_TAG.start"
 internal const val ADD_BY_EMAIL_ADDRESS = "$ADD_BY_EMAIL_TAG.address"
 internal const val ADD_BY_EMAIL_COPY = "$ADD_BY_EMAIL_TAG.copy"
 internal const val ADD_BY_EMAIL_SHARE = "$ADD_BY_EMAIL_TAG.share"
+internal const val ADD_BY_EMAIL_NOTIFY = "$ADD_BY_EMAIL_TAG.notify"
 internal const val ADD_BY_EMAIL_AUTOMATIC = "$ADD_BY_EMAIL_TAG.automatic"
 internal const val ADD_BY_EMAIL_RENEW = "$ADD_BY_EMAIL_TAG.renew"
 internal const val ADD_BY_EMAIL_RENEW_CANCEL = "$ADD_BY_EMAIL_RENEW.cancel"

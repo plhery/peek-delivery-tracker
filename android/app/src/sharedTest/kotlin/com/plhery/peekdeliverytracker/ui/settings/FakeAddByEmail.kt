@@ -11,8 +11,9 @@ import kotlinx.coroutines.CompletableDeferred
 /**
  * The forwarding address as a test sets it: each read answers [offer] (null for a server that offers the account none,
  * as its 404 reads), or fails with [failure]; turning on gives [opened], renewing [renewed], turning off leaves the
- * offer without an address. A change waits for [changing] when a test holds it. [requests] notes what was asked, in
- * order. Nothing leaves the test.
+ * offer without an address, and switching the notification gives the address with it switched. A change waits for
+ * [changing] when a test holds it, then fails with [changeFailure] if a test sets one. [requests] notes what was asked,
+ * in order. Nothing leaves the test.
  */
 class FakeAddByEmailClient : AddByEmailClient {
     var offer: AddByEmailResponse? = null
@@ -43,6 +44,15 @@ class FakeAddByEmailClient : AddByEmailClient {
         changeFailure?.let { throw it }
         offer = offer?.copy(inbox = null)
     }
+
+    override suspend fun setNotify(notify: Boolean): AddByEmailResponse {
+        requests += "notify $notify"
+        changing?.await()
+        changeFailure?.let { throw it }
+        val current = checkNotNull(offer?.inbox) { "No address to switch" }
+        return AddByEmailResponse(inbox = current.copy(notify = notify), dailyLimit = offer?.dailyLimit ?: AddByEmailFixtures.DAILY_LIMIT)
+            .also { offer = it }
+    }
 }
 
 /** Synthetic forwarding addresses and emails, at the tests' fixed moment (2026-10-29 05:11 UTC). */
@@ -56,10 +66,11 @@ object AddByEmailFixtures {
         recent: List<AddByEmailEntry> = emptyList(),
         usedToday: Int = recent.size,
         confirmation: ForwardingConfirmation? = null,
+        notify: Boolean? = null,
     ) = AddByEmail(
         address = address, createdAt = "2026-10-20T08:00:00.000Z", usedToday = usedToday,
         lastMailAt = recent.firstOrNull()?.at, lastResult = recent.firstOrNull()?.result, lastAdded = recent.firstOrNull()?.added,
-        recent = recent, confirmation = confirmation,
+        recent = recent, confirmation = confirmation, notify = notify,
     )
 
     /** A week of forwarded emails, newest first, one of each kind the page words differently. */

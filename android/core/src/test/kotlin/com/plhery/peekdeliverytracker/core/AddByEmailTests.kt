@@ -19,7 +19,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 /**
- * Adding parcels by email: the client's three requests to `/api/account/inbox`, the answer read leniently, and the
+ * Adding parcels by email: the client's four requests to `/api/account/inbox`, the answer read leniently, and the
  * store Settings reads its row and page from.
  */
 class AddByEmailTests {
@@ -107,6 +107,36 @@ class AddByEmailTests {
         // Turning on where the server offers none is a failure, not an answer of none.
         val refused = runCatching { client(serving(jsonResponse(404, """{"error":"Not found"}"""))).openAddByEmail() }.exceptionOrNull()
         assertTrue(refused is DeliveryApiError.Service)
+    }
+
+    @Test
+    fun switchingTheNotificationSendsWhatTheWebSends() = runTest {
+        val transport = serving(jsonResponse(200, inbox(extra = """"confirmation":null,"notify":false""")))
+        val answer = client(transport).setAddByEmailNotify(false)
+
+        assertEquals(false, answer.inbox?.notify)
+        assertFalse(answer.inbox!!.notifies)
+        val request = transport.requests.single()
+        assertEquals("PATCH https://peek.example/api/account/inbox", "${request.method} ${request.url}")
+        assertEquals("""{"notify":false}""", request.body?.decodeToString())
+        assertEquals("application/json", request.header("Content-Type"))
+        assertEquals("Bearer synthetic-access", request.header("Authorization"))
+        val on = serving(jsonResponse(200, inbox(extra = """"notify":true""")))
+        assertTrue(client(on).setAddByEmailNotify(true).inbox!!.notifies)
+        assertEquals("""{"notify":true}""", on.requests.single().body?.decodeToString())
+        // An account without an address has nothing to switch.
+        val refused = runCatching { client(serving(jsonResponse(404, """{"error":"Adding by email is off"}"""))).setAddByEmailNotify(true) }.exceptionOrNull()
+        assertTrue(refused is DeliveryApiError.Service)
+    }
+
+    /** An address the server sends without `notify`, as one from before the switch, is notified. */
+    @Test
+    fun anAddressWithoutTheSwitchIsNotified() = runTest {
+        val read = client(serving(jsonResponse(200, inbox()))).readAddByEmail()?.inbox
+        assertNull(read?.notify)
+        assertTrue(read!!.notifies)
+        val off = client(serving(jsonResponse(200, inbox(extra = """"notify":false""")))).readAddByEmail()?.inbox
+        assertFalse(off!!.notifies)
     }
 
     @Test
@@ -247,6 +277,13 @@ class AddByEmailTests {
             calls += "close"
             failure?.let { throw it }
         }
+
+        override suspend fun setNotify(notify: Boolean): AddByEmailResponse {
+            calls += "notify $notify"
+            failure?.let { throw it }
+            val inbox = AddByEmail("parcels-synthetic@inbox.peek.example", "2026-10-28T09:00:00.000Z", 0, recent = emptyList(), notify = notify)
+            return AddByEmailResponse(inbox = inbox, dailyLimit = 50)
+        }
     }
 
     private val reader = UUID(0, 7)
@@ -304,6 +341,20 @@ class AddByEmailTests {
         client.failure = IOException("offline")
         assertTrue(runCatching { store.open(reader) }.exceptionOrNull() is IOException)
         assertEquals(offered, store.offer(reader))
+    }
+
+    @Test
+    fun switchingTheNotificationShowsTheAnswerAndAFailureKeepsWhatWasShown() = runTest {
+        val client = FakeClient()
+        val store = AddByEmailStore(client)
+        store.setNotify(reader, false)
+        assertEquals(false, store.offer(reader)?.inbox?.notify)
+        assertNull(store.offer(other))
+
+        client.failure = IOException("offline")
+        assertTrue(runCatching { store.setNotify(reader, true) }.exceptionOrNull() is IOException)
+        assertEquals(false, store.offer(reader)?.inbox?.notify)
+        assertEquals(listOf("notify false", "notify true"), client.calls)
     }
 
     @Test

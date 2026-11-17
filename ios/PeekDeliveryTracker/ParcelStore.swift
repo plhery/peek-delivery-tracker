@@ -784,6 +784,11 @@ final class ParcelStore: ObservableObject {
             close: { [self] in
                 try await api.closeAddByEmail()
                 try session.checkGeneration(generation)
+            },
+            notify: { [self] on in
+                let offer = try await api.setAddByEmailNotify(on)
+                try session.checkGeneration(generation)
+                return offer
             }
         )
     }

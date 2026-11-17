@@ -455,6 +455,13 @@ final class DeliveryAPIClient {
         return try AddByEmailOffer.decode(try await rawRequest("/api/account/inbox", method: "POST", body: body).0)
     }
 
+    /// Switches the notification of each parcel an email adds on or off. The server answers 404 when the account has no
+    /// address.
+    func setAddByEmailNotify(_ notify: Bool) async throws -> AddByEmailResponse {
+        let body = try JSONEncoder.deliveryTracker.encode(["notify": notify])
+        return try AddByEmailOffer.decode(try await rawRequest("/api/account/inbox", method: "PATCH", body: body).0)
+    }
+
     /// Turns adding by email off: emails to the address are dropped. The answer has no body.
     func closeAddByEmail() async throws {
         _ = try await rawRequest("/api/account/inbox", method: "DELETE")

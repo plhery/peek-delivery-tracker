@@ -530,6 +530,11 @@ class DeliveryApiClient(
         rawRequest(ADD_BY_EMAIL, "DELETE")
     }
 
+    /** Switches the notification of each parcel an email adds on or off: the address as it then is. */
+    suspend fun setAddByEmailNotify(notify: Boolean): AddByEmailResponse = request(
+        ADD_BY_EMAIL, AddByEmailResponseReader, "PATCH", """{"notify":$notify}""".toByteArray(Charsets.UTF_8),
+    )
+
     private fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray = JsonEncoder.deliveryTracker.encode(serializer, value)
 
     private suspend fun <T> request(path: String, response: DeserializationStrategy<T>, method: String = "GET", body: ByteArray? = null): T =

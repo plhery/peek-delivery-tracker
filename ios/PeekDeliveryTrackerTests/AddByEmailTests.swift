@@ -183,6 +183,19 @@ final class AddByEmailDecodingTests: XCTestCase {
         }
     }
 
+    func testNotifiesEachParcelAnEmailAddsUnlessSwitchedOff() throws {
+        let address = #"{"address":"test@in.example.test","createdAt":"2026-11-01T09:00:00Z","usedToday":0,"lastMailAt":null,"lastResult":null,"lastAdded":null,"recent":[],"confirmation":null"#
+        let unsaid = try XCTUnwrap(offer(#"{"inbox":\#(address)},"dailyLimit":50}"#).inbox)
+        XCTAssertNil(unsaid.notify)
+        XCTAssertTrue(unsaid.notifies, "A server before the switch says nothing: on")
+        let off = try XCTUnwrap(offer(#"{"inbox":\#(address),"notify":false},"dailyLimit":50}"#).inbox)
+        XCTAssertEqual(off.notify, false)
+        XCTAssertFalse(off.notifies)
+        XCTAssertTrue(try XCTUnwrap(offer(#"{"inbox":\#(address),"notify":true},"dailyLimit":50}"#).inbox).notifies)
+        XCTAssertTrue(try XCTUnwrap(offer(#"{"inbox":\#(address),"notify":"no"},"dailyLimit":50}"#).inbox).notifies,
+                      "A value the app can't read leaves the switch on rather than fail the page")
+    }
+
     func testListsTheLastFiveEmailsOrTheOneLastEmailOfAnOlderMailbox() {
         let entries = (0..<7).map { AddByEmailEntry(at: "2026-11-1\($0)T08:00:00Z", sender: "Shop \($0)", result: .known, added: 0) }
         var inbox = AddByEmail(address: "test@in.example.test", createdAt: "2026-11-01T09:00:00Z", usedToday: 0, recent: entries)
@@ -236,8 +249,10 @@ final class AddByEmailModelTests: XCTestCase {
 
     private func client(read: @escaping @MainActor () async throws -> AddByEmailResponse?,
                         open: @escaping @MainActor (Bool) async throws -> AddByEmailResponse = { _ in throw DeliveryAPIError.invalidResponse },
-                        close: @escaping @MainActor () async throws -> Void = {}) -> AddByEmailModel.Client {
-        AddByEmailModel.Client(read: read, open: open, close: close)
+                        close: @escaping @MainActor () async throws -> Void = {},
+                        notify: @escaping @MainActor (Bool) async throws -> AddByEmailResponse = { _ in throw DeliveryAPIError.invalidResponse })
+        -> AddByEmailModel.Client {
+        AddByEmailModel.Client(read: read, open: open, close: close, notify: notify)
     }
 
     func testTheRowShowsOnlyOnceTheServerOffersTheAddress() async {
@@ -308,6 +323,44 @@ final class AddByEmailModelTests: XCTestCase {
         XCTAssertFalse(model.working)
     }
 
+    func testSwitchingTheNotificationShowsTheAnswerAndAFailureLeavesIt() async throws {
+        nonisolated(unsafe) var asked: [Bool] = []
+        nonisolated(unsafe) var fail = false
+        let on = on
+        let model = AddByEmailModel(client: client(
+            read: { on },
+            notify: { value in
+                if fail { throw DeliveryAPIError.serviceFailed(502) }
+                asked.append(value)
+                var next = on
+                next.inbox?.notify = value
+                return next
+            }
+        ))
+        await model.load()
+        XCTAssertEqual(model.offer?.inbox?.notifies, true)
+
+        let switchedOff = await model.setNotify(false)
+        XCTAssertTrue(switchedOff)
+        XCTAssertEqual(asked, [false])
+        XCTAssertEqual(model.offer?.inbox?.notify, false, "The server's answer replaces the address")
+        XCTAssertNil(model.failure)
+
+        fail = true
+        let failed = await model.setNotify(true)
+        XCTAssertFalse(failed)
+        XCTAssertNotNil(model.failure)
+        XCTAssertEqual(model.offer?.inbox?.notify, false, "A failed change leaves the switch as it was")
+        XCTAssertEqual(Localizer().errorMessage(try XCTUnwrap(model.failure), fallback: "inbox.failed"), Localizer().text("inbox.failed"))
+        XCTAssertFalse(model.working)
+
+        fail = false
+        let switchedOn = await model.setNotify(true)
+        XCTAssertTrue(switchedOn)
+        XCTAssertNil(model.failure, "The next change clears the last failure")
+        XCTAssertEqual(model.offer?.inbox?.notifies, true)
+    }
+
     func testAReadThatBeganBeforeAChangeDoesNotUndoIt() async {
         nonisolated(unsafe) var release: CheckedContinuation<Void, Never>?
         let on = on
@@ -364,6 +417,7 @@ final class AddByEmailModelTests: XCTestCase {
             switch method {
             case "GET": return (200, Data(#"{"inbox":null,"dailyLimit":50}"#.utf8))
             case "POST": return (201, Data(address.utf8))
+            case "PATCH": return (200, Data(address.replacingOccurrences(of: #""confirmation":null}"#, with: #""confirmation":null,"notify":false}"#).utf8))
             case "DELETE": return (204, Data())
             default: return (405, Data())
             }
@@ -399,6 +453,13 @@ final class AddByEmailModelTests: XCTestCase {
         XCTAssertEqual(model.offer?.inbox?.address, "test@in.example.test")
         await model.renew()
         XCTAssertEqual(requests.last?.body, #"{"renew":true}"#)
+        XCTAssertEqual(model.offer?.inbox?.notifies, true)
+        let switchedOff = await model.setNotify(false)
+        XCTAssertTrue(switchedOff)
+        XCTAssertEqual(requests.last?.method, "PATCH")
+        XCTAssertEqual(requests.last?.body, #"{"notify":false}"#)
+        XCTAssertEqual(requests.last?.authorization, "Bearer access")
+        XCTAssertEqual(model.offer?.inbox?.notify, false)
         await model.turnOff()
         XCTAssertEqual(requests.last?.method, "DELETE")
         XCTAssertNil(model.offer?.inbox)

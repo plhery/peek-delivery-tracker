@@ -3,16 +3,24 @@ package com.plhery.peekdeliverytracker.ui.settings
 import android.content.ClipboardManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.SemanticsNodeInteraction
+import androidx.compose.ui.test.assert
+import androidx.compose.ui.test.click
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.test.performTouchInput
+import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -45,7 +53,8 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * Settings' "Add parcels by email": its row only for an account the server offers an address (the server's flag), the
  * address turned on, renewed after asking and turned off, one change at a time with the back off meanwhile and why it
- * failed, the address copied, and the forwarding steps: Gmail's while its confirmation waits, the filter's languages.
+ * failed, the address copied, the notification of each parcel an email adds switched, and the forwarding steps:
+ * Gmail's while its confirmation waits, the filter's languages.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -91,6 +100,16 @@ class AddByEmailSettingsTest {
         node(tag).performScrollTo().performClick()
         settle()
     }
+
+    /** A finger on the row's switch, at its trailing end. */
+    private fun flip(tag: String) {
+        node(tag).performScrollTo().performTouchInput { click(Offset(width - 40.dp.toPx(), height / 2f)) }
+        settle()
+    }
+
+    private fun toggled(tag: String): ToggleableState? = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ToggleableState)
+
+    private fun enabled(tag: String): Boolean = SemanticsProperties.Disabled !in node(tag).fetchSemanticsNode().config
 
     private fun back() {
         compose.runOnUiThread { compose.activity.onBackPressedDispatcher.onBackPressed() }
@@ -217,6 +236,66 @@ class AddByEmailSettingsTest {
         tap(SETTINGS_ADD_BY_EMAIL)
         assertTrue(shows("Example Books"))
         assertTrue(shows(text("inbox.noNumber")))
+    }
+
+    /**
+     * The switch stands under the last emails, over the folded steps, on for an address the server sends without
+     * `notify`, and read by TalkBack as one switch with its hint; a finger on it saves the other side, which it then shows.
+     */
+    @Test
+    fun theNotificationIsOnUntilSwitchedOff() {
+        show { addByEmailClient.offer = offer(mailbox(recent = AddByEmailFixtures.recent)) }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        node(ADD_BY_EMAIL_NOTIFY).performScrollTo()
+        settle()
+        val emails = compose.onAllNodes(hasText("Atelier Lune", substring = true)).fetchSemanticsNodes().last().boundsInRoot
+        val row = node(ADD_BY_EMAIL_NOTIFY).fetchSemanticsNode().boundsInRoot
+        // The steps' row may stand below the window, where its bounds are clipped away.
+        val steps = node(ADD_BY_EMAIL_AUTOMATIC).fetchSemanticsNode().positionInRoot.y
+        assertTrue(row.top >= emails.bottom && steps >= row.bottom)
+        assertEquals(ToggleableState.On, toggled(ADD_BY_EMAIL_NOTIFY))
+        assertEquals(Role.Switch, node(ADD_BY_EMAIL_NOTIFY).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
+        node(ADD_BY_EMAIL_NOTIFY).assert(hasText(text("inbox.notify"))).assert(hasText(text("inbox.notify.hint")))
+
+        flip(ADD_BY_EMAIL_NOTIFY)
+        assertEquals(ToggleableState.Off, toggled(ADD_BY_EMAIL_NOTIFY))
+        assertEquals(false, source.addByEmailClient.offer?.inbox?.notify)
+        // TalkBack's double tap reaches the row as one switch.
+        node(ADD_BY_EMAIL_NOTIFY).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertEquals(ToggleableState.On, toggled(ADD_BY_EMAIL_NOTIFY))
+        assertEquals(listOf("read", "notify false", "notify true"), source.addByEmailClient.requests)
+    }
+
+    @Test
+    fun anAddressSwitchedOffShowsItOff() {
+        show { addByEmailClient.offer = offer(mailbox(notify = false)) }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        assertEquals(ToggleableState.Off, toggled(ADD_BY_EMAIL_NOTIFY))
+    }
+
+    /** While the switch saves it can't be flipped again and keeps what was saved; a save that fails leaves it so. */
+    @Test
+    fun aSwitchThatFailsToSaveStaysAsItWas() {
+        show {
+            addByEmailClient.offer = offer()
+            addByEmailClient.changing = CompletableDeferred()
+        }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        flip(ADD_BY_EMAIL_NOTIFY)
+        assertTrue(exists(ADD_BY_EMAIL_WORKING))
+        assertFalse(enabled(ADD_BY_EMAIL_NOTIFY))
+        assertEquals(ToggleableState.On, toggled(ADD_BY_EMAIL_NOTIFY))
+
+        source.addByEmailClient.changeFailure = IOException("Offline")
+        compose.runOnUiThread { source.addByEmailClient.changing!!.complete(Unit) }
+        settle()
+        assertFalse(exists(ADD_BY_EMAIL_WORKING))
+        assertEquals(localizer.errorMessage(IOException("Offline"), fallback = "inbox.failed"), words(ADD_BY_EMAIL_ERROR))
+        assertTrue(enabled(ADD_BY_EMAIL_NOTIFY))
+        assertEquals(ToggleableState.On, toggled(ADD_BY_EMAIL_NOTIFY))
+        assertEquals(ADDRESS, words(ADD_BY_EMAIL_ADDRESS))
+        assertEquals(listOf("read", "notify false"), source.addByEmailClient.requests)
     }
 
     /** The steps stay folded until wanted, or until Gmail's confirmation waits: then they open on Gmail. */

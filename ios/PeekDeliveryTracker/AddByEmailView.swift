@@ -1,8 +1,9 @@
 import SwiftUI
 
 /// The forwarding address's page in Settings. Forwarding one email by hand is all it asks: the address to copy, then
-/// what the last emails did. Having the mail service forward by itself, with its steps, stays folded away until
-/// wanted, or until Gmail's confirmation is waiting.
+/// what the last emails did, and whether each parcel an email adds is notified (on unless switched off). Having the
+/// mail service forward by itself, with its steps, stays folded away until wanted, or until Gmail's confirmation is
+/// waiting.
 struct AddByEmailPage: View {
     @ObservedObject var model: AddByEmailModel
     /// The account's address, which tells the mail service the steps start on.
@@ -13,6 +14,8 @@ struct AddByEmailPage: View {
     @State private var copied = false
     @State private var confirmingRenew = false
     @State private var forwarding = false
+    /// The notification switch's position while it is saved: nil once the server has answered.
+    @State private var notifyChoice: Bool?
 
     var body: some View {
         ScrollView {
@@ -33,6 +36,7 @@ struct AddByEmailPage: View {
                     if let inbox = offer.inbox {
                         address(inbox.address)
                         recent(inbox, offer: offer)
+                        notification(inbox)
                         automatic(inbox)
                         manage
                     } else {
@@ -112,6 +116,28 @@ struct AddByEmailPage: View {
                 }
             }
         }
+    }
+
+    /// The switch shows the choice while it is saved, then the server's answer; a failure puts it back.
+    private func notification(_ inbox: AddByEmail) -> some View {
+        SettingsGroup {
+            Toggle(isOn: Binding(get: { notifyChoice ?? inbox.notifies }, set: { on in
+                guard notifyChoice == nil else { return }
+                notifyChoice = on
+                Task {
+                    await model.setNotify(on)
+                    notifyChoice = nil
+                }
+            })) {
+                SettingsRow(title: localizer.text("inbox.notify"), symbol: "bell",
+                            detail: localizer.text("inbox.notify.hint"), padded: false)
+            }
+            .rowToggle()
+            .padding(15)
+            .disabled(model.working || notifyChoice != nil)
+            .accessibilityIdentifier("addByEmail.notify")
+        }
+        .tint(settingsGreen)
     }
 
     private func automatic(_ inbox: AddByEmail) -> some View {

@@ -3,7 +3,7 @@ title: TopYou tracking: TYZR numbers, scans and who delivers
 description: Track a TopYou (通邮) parcel from China: what a TYZR…YQ number looks like, what its English scans mean and who takes the parcel over in your country.
 slug: topyou-tracking
 published: 2026-10-28
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 TopYou (通邮, Tongyou, also 通邮集团 or SZTY56) is 深圳市通邮物流科技（集团）股份有限公司, a cross-border forwarder in Shenzhen, China, that runs international lines. If a Chinese online shop sent your order with TopYou, the shop gives you a number that starts with TYZ and ends with YQ: paste it in the box above. TopYou's history runs from its warehouse in China through the flight and customs, and for parcels to the United States on to USPS's delivery.
@@ -57,7 +57,7 @@ TopYou writes its scans in English. In the order a parcel gets them:
 | --- | --- | --- |
 | `Accepted by carrier` | TopYou has the parcel in China: its first scan. | "Received by carrier" |
 | `Inbound in sorting center` | Booked in at TopYou's first warehouse, minutes later. It isn't moving yet. | "Received by carrier" |
-| `Outbound in sorting center` | It has left that warehouse. TopYou adds `, Lastmile Number:` and the number the post delivers it under, and Peek shows the line with that number. | "In transit" |
+| `Outbound in sorting center` | It has left that warehouse. TopYou adds `, Lastmile Number:` and the number the post delivers it under; Peek drops that ending from the line. | "In transit" |
 | `Received by line-haul`, `Hand over to airline` | Taken on for transport, then handed to the airline. | "In transit" |
 | `Airline arrived at transit country or district.`, `Airline departed from transit or district country.` | A stop on the way to your country. | "In transit" |
 | `Airline arrived at destination country`, `Arrive at destination country` | It has reached your country. | "In transit" |
@@ -99,7 +99,7 @@ In Spain, the delivering partner's scan after customs can read `Parcel in transi
 
 ## TopYou contact number and customer service
 
-As of 10 November 2026, TopYou's website, [szty56.com](https://www.szty56.com/), gives a phone number in Shenzhen, +86 755 8181 9898 (0755-81819898 within China). It names no opening hours and no service for recipients: its customers are the shops that ship with it. The seller booked the parcel with TopYou and is the one to ask about your order, and the marketplace if the seller doesn't answer.
+As of 16 November 2026, TopYou's website, [szty56.com](https://www.szty56.com/), gives a phone number in Shenzhen, +86 755 8181 9898 (0755-81819898 within China), and hours of 9:00 to 18:00 on working days, with no time zone. It names no service for recipients: its customers are the shops that ship with it. The seller booked the parcel with TopYou and is the one to ask about your order, and the marketplace if the seller doesn't answer.
 
 ## Track a TopYou parcel with Peek
 
@@ -107,9 +107,9 @@ As of 10 November 2026, TopYou's website, [szty56.com](https://www.szty56.com/),
 
 Peek reads TopYou's own tracker and shows the status, each scan in the words of TopYou or of the carrier it relays, the destination country and the weight on TopYou's record. A place that is only a country is left off TopYou's own scans, so the airport scan in China doesn't look like it's in your country. When TopYou's record marks the parcel delivered or returned, Peek shows "Delivered" or "Returned to sender", even if the last scan's words don't. TopYou's own scans are on Beijing time. For the delivering carrier's scans it relays, TopYou's tracker doesn't always give the right time zone, so Peek works out their time; it shows them all in your device's time zone. There's no expected delivery date: TopYou gives none.
 
-Until a hand-over, Peek shows the TopYou number only. When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is a valid international postal number (two letters, nine digits with a correct check digit, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which can show the delivering carrier's scans too.
+When TopYou's record holds the delivering carrier's number, Peek tries it with your country's post if it is a valid international postal number (two letters, nine digits with a correct check digit, two letters), or else with the one carrier its layout surely belongs to, as long as Peek reads that carrier's own tracker. Once that carrier shows a scan at least as recent as TopYou's latest, Peek follows the parcel there and shows both numbers, with TopYou's scans kept in the history. A number Peek can't pin to one carrier, such as 20 digits alone, which USPS and others use, isn't tried: Peek stays with TopYou's tracker, which can show the delivering carrier's scans too.
 
-Peek checks every 10 minutes, or hourly once TopYou has gone quiet: after 12 hours without a new scan while the parcel is still "Label created" or "Received by carrier", or after two days at any other step. Once the parcel is out for delivery, it checks every 2 minutes (every 5 when the check has to open a browser): on that day, from 6 a.m. local time, while TopYou's own tracker answers. Through tracking services, it checks every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to your country's customs (`Shipment started the customs clearance process at destination`), to GOFO's `The driver is out for delivery` and iMile's `Delivery, Our delivery associate is out for delivery.`, and to the delivery, not to the export clearance in China, the flight, the customs release or `Shipment is out for delivery`. Peek can't contact TopYou or the seller for you.
+Peek checks every 10 minutes, or hourly once TopYou has gone quiet: after 12 hours without a new scan while the parcel is still "Label created" or "Received by carrier", or after two days at any other step. Once the parcel is out for delivery, it checks every 2 minutes: on that day, from 6 a.m. local time, while TopYou's own tracker answers. Through tracking services, it checks every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) alerts you to your country's customs (`Shipment started the customs clearance process at destination`), to GOFO's `The driver is out for delivery` and iMile's `Delivery, Our delivery associate is out for delivery.`, and to the delivery, not to the export clearance in China, the flight, the customs release or `Shipment is out for delivery`. Peek can't contact TopYou or the seller for you.
 
 ## Questions about TopYou tracking
 
@@ -130,7 +130,7 @@ In the United States, USPS, which takes the parcel over from TopYou's line after
 The seller you ordered from: it booked the parcel with TopYou. TopYou's website gives a phone number in Shenzhen (above), but no service for recipients.
 
 :::sources
-- [TopYou: 通邮集团 (home page)](https://www.szty56.com/) – phone
+- [TopYou: 通邮集团 (home page)](https://www.szty56.com/) – phone, hours
 - [TopYou: 关于我们 (about)](https://www.szty56.com/view?path=about/about) – founded 2016, branches, orders a day, services
 - [TopYou: 轨迹查询 (tracking)](https://track.szty56.com/) – TopYou's tracker
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee from 1 November 2026

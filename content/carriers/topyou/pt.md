@@ -54,7 +54,7 @@ A TopYou escreve as suas leituras em inglês, e o Peek mostra-as tal como vêm. 
 | --- | --- | --- |
 | `Accepted by carrier` | A TopYou tem a encomenda na China: primeira leitura. | «Aceite pela transportadora» |
 | `Inbound in sorting center` | Registada no primeiro centro de triagem da TopYou minutos depois; ainda não saiu de lá. | «Aceite pela transportadora» |
-| `Outbound in sorting center` | Saiu desse centro de triagem. No site da TopYou vem acrescentado `, Lastmile Number:` seguido do código postal de entrega; o Peek retira esse sufixo da linha e guarda o número para o encaminhamento. | «Em trânsito» |
+| `Outbound in sorting center` | Saiu desse centro de triagem. No site da TopYou vem acrescentado `, Lastmile Number:` seguido do código postal de entrega; o Peek retira esse sufixo da linha. | «Em trânsito» |
 | `Received by line-haul`, `Hand over to airline` | Recolhida para o transporte principal e entregue à companhia aérea. | «Em trânsito» |
 | `Airline arrived at transit country or district.`, `Airline departed from transit or district country.` | Escala num país intermédio a caminho do destino. | «Em trânsito» |
 | `Airline arrived at destination country`, `Arrive at destination country` | Chegou ao país de destino. | «Em trânsito» |
@@ -131,6 +131,6 @@ Desde 1 de julho de 2026, as compras online até 150 € vindas de fora da UE pa
 - [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros fora da União Europeia](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – direito de 3 € desde 1 de julho de 2026, Taxa de Manuseamento Aduaneiro desde 1 de novembro de 2026, Portal de Desalfandegamento sem pedidos por SMS ou e-mail
 - [CTT: Prazo para levantar](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/prazo-para-levantar) – avisos de levantamento e prolongamento até 5 dias úteis
 - [Comissão Europeia: EU Customs Reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – direito de 3 € desde 1 de julho de 2026 e taxa de manuseamento de 2 € desde 1 de novembro de 2026
-- [Comissão Europeia: Guidance on the 3 EUR customs duty and Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa fixa de 2 € por item nas vendas à distância independentemente do valor
+- [Comissão Europeia: Guidance on the 3 EUR customs duty and Union handling fee (PDF, em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – taxa fixa de 2 € por tipo de artigo nas vendas à distância independentemente do valor
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos TYZR…YQ e TYZ…YQ, distinção de maiúsculas no site da TopYou, textos e fases das leituras (incluindo `The Shipment Is In Transit` e avisos de ponto de recolha), limpeza de `Lastmile Number:` e de `of`, país junto às leituras próprias, hora de Pequim, envios anunciados sem leituras, segundo código e passagem para os CTT
 :::

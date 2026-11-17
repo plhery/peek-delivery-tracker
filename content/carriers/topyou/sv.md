@@ -3,7 +3,7 @@ title: Spåra paket med TopYou: TYZR-nummer, statusar och leverans
 description: Spåra ditt TopYou-paket (通邮) från Kina: så ser TYZR-numret ut, det här betyder de engelska skanningarna och så går det till när paketet når Sverige.
 slug: topyou-spara-paket
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 TopYou (通邮, Tongyou, även 通邮集团 eller SZTY56) är 深圳市通邮物流科技（集团）股份有限公司, en speditör i Shenzhen i Kina som kör internationella fraktlinjer och skickar beställningar från kinesiska webbutiker till kunder utomlands. Skickar butiken din beställning med TopYou får du ett spårningsnummer som börjar med TYZ och slutar på YQ: klistra in det i fältet ovanför. TopYous spårning följer paketet från lagret i Kina, genom flyget och tullen, och kan sedan fortsätta med skanningar från bolaget som delar ut det.
@@ -55,7 +55,7 @@ TopYou skriver sina skanningar på engelska. I den ordning paketet får dem:
 | --- | --- | --- |
 | `Accepted by carrier` | TopYou har paketet i Kina: den första skanningen. | "Received by carrier" |
 | `Inbound in sorting center` | Paketet registreras på TopYous första lager några minuter senare. Det har inte börjat röra sig än. | "Received by carrier" |
-| `Outbound in sorting center` | Paketet har lämnat lagret. TopYou lägger till `, Lastmile Number:` och numret som posten delar ut paketet under, och Peek visar raden med det numret. | "In transit" |
+| `Outbound in sorting center` | Paketet har lämnat lagret. TopYou lägger till `, Lastmile Number:` och numret som posten delar ut paketet under. Peek tar bort tillägget från raden. | "In transit" |
 | `Received by line-haul`, `Hand over to airline` | Paketet har tagits emot för transport och sedan lämnats till flygbolaget. | "In transit" |
 | `Airline arrived at transit country or district.`, `Airline departed from transit or district country.` | Ett stopp på vägen till Sverige. | "In transit" |
 | `Airline arrived at destination country`, `Arrive at destination country` | Paketet har kommit fram till Sverige. | "In transit" |
@@ -85,7 +85,7 @@ Efter flyget och tullen lämnar TopYou över paketet till ett bolag som delar ut
 
 ## TopYous kundtjänst och kontaktuppgifter
 
-TopYous webbplats, [szty56.com](https://www.szty56.com/), anger ett telefonnummer i Shenzhen, +86 755 8181 9898 (kontrollerat 4 november 2026), men inga öppettider och ingen service för mottagare. Frågor om din beställning ställer du till säljaren, som bokade frakten hos TopYou, och till marknadsplatsen om säljaren inte svarar.
+TopYous webbplats, [szty56.com](https://www.szty56.com/), anger ett telefonnummer i Shenzhen, +86 755 8181 9898, och öppettider vardagar 9.00–18.00 utan tidszon (kontrollerat 16 november 2026), men ingen service för mottagare. Frågor om din beställning ställer du till säljaren, som bokade frakten hos TopYou, och till marknadsplatsen om säljaren inte svarar.
 
 ## Spåra TopYou-paket med Peek
 
@@ -93,9 +93,9 @@ TopYous webbplats, [szty56.com](https://www.szty56.com/), anger ett telefonnumme
 
 Peek läser TopYous egen spårning och visar statusen, varje skanning med TopYous ord (eller leveransbolagets, när TopYou för vidare dess skanningar), destinationslandet och vikten som TopYou anger. Från TopYous egna skanningar tar Peek bort en ort som bara är ett land, så att skanningen på flygplatsen i Kina inte ser ut att vara gjord i Sverige. När TopYous uppgifter säger att paketet är levererat eller returnerat visar Peek "Delivered" (levererat) eller "Returned to sender" (returnerat till avsändaren), även om den sista skanningen säger något annat. TopYous egna skanningar har Pekingtid (UTC+8). För leveransbolagets skanningar anger TopYous spårning inte alltid rätt tidszon, så där räknar Peek ut tiden själv. Alla tider visas i din enhets tidszon. Något beräknat leveransdatum visar Peek inte, eftersom TopYou inte anger något.
 
-Fram till en överlämning visar Peek bara TopYou-numret. När TopYous uppgifter innehåller leveransbolagets nummer frågar Peek posten i destinationslandet, i Sverige PostNord, om numret, förutsatt att det är ett giltigt nummer i postens internationella format. Annars frågar Peek det enda bolag som numrets form säkert hör till, förutsatt att Peek läser det bolagets egen spårning. När det bolaget visar en skanning som är minst lika ny som TopYous senaste följer Peek paketet där och visar båda numren, och TopYous skanningar finns kvar i historiken. Ett nummer som Peek inte kan knyta till ett enda bolag, till exempel bara 20 siffror, som både USPS och andra använder, provas inte. Då stannar Peek hos TopYous spårning, som också kan visa leveransbolagets skanningar.
+När TopYous uppgifter innehåller leveransbolagets nummer frågar Peek posten i destinationslandet, i Sverige PostNord, om numret, förutsatt att det är ett giltigt nummer i postens internationella format. Annars frågar Peek det enda bolag som numrets form säkert hör till, förutsatt att Peek läser det bolagets egen spårning. När det bolaget visar en skanning som är minst lika ny som TopYous senaste följer Peek paketet där och visar båda numren, och TopYous skanningar finns kvar i historiken. Ett nummer som Peek inte kan knyta till ett enda bolag, till exempel bara 20 siffror, som både USPS och andra använder, provas inte. Då stannar Peek hos TopYous spårning, som också kan visa leveransbolagets skanningar.
 
-Peek kollar paketet var tionde minut. När det är ute för leverans kollar Peek varannan minut (var femte när kontrollen måste öppna en webbläsare), men bara den dagen, från kl. 6.00 lokal tid och så länge TopYous egen spårning svarar. Via spårningstjänster kollar Peek var 15:e minut. När ett annat bolag tar över leveransen följer Peek takten hos bolaget som delar ut paketet: en gång i timmen hos Royal Mail och var 30:e minut hos Poste Italiane, PostNL och USPS, även när paketet är ute för leverans. Efter 12 timmar utan ny skanning medan paketet står på "Label created" (etikett skapad) eller "Received by carrier", och annars efter 48 timmar utan ny skanning, kollar Peek en gång i timmen. Peek kan meddela dig, och du väljer mellan "Every scan" (varje skanning), "Important steps" (viktiga steg) och "Delivery only" (bara leveransen). "Important steps" omfattar leverans, paket som väntar på att hämtas, tull, missade leveransförsök och returer. Du får alltså besked när tullen i Sverige tar hand om paketet (`Shipment started the customs clearance process at destination`), när Peek visar "Out for delivery" och vid leveransen, men inte vid exportklareringen i Kina, vid flyget, när tullen släpper paketet eller vid `Shipment is out for delivery`. Peek kan inte kontakta TopYou eller säljaren åt dig.
+Peek kollar paketet var tionde minut. När det är ute för leverans kollar Peek varannan minut, men bara den dagen, från kl. 6.00 lokal tid och så länge TopYous egen spårning svarar. Via spårningstjänster kollar Peek var 15:e minut. När ett annat bolag tar över leveransen följer Peek takten hos bolaget som delar ut paketet: en gång i timmen hos Royal Mail och Poste Italiane och var 30:e minut hos PostNL och USPS, även när paketet är ute för leverans. Efter 12 timmar utan ny skanning medan paketet står på "Label created" (etikett skapad) eller "Received by carrier", och annars efter 48 timmar utan ny skanning, kollar Peek en gång i timmen. Peek kan meddela dig, och du väljer mellan "Every scan" (varje skanning), "Important steps" (viktiga steg) och "Delivery only" (bara leveransen). "Important steps" omfattar leverans, paket som väntar på att hämtas, tull, missade leveransförsök och returer. Du får alltså besked när tullen i Sverige tar hand om paketet (`Shipment started the customs clearance process at destination`), när Peek visar "Out for delivery" och vid leveransen, men inte vid exportklareringen i Kina, vid flyget, när tullen släpper paketet eller vid `Shipment is out for delivery`. Peek kan inte kontakta TopYou eller säljaren åt dig.
 
 ## Frågor om att spåra paket med TopYou
 
@@ -120,6 +120,6 @@ Det framgår inte av TopYous uppgifter: de kan innehålla numret hos bolaget som
 Säljaren du beställde från, eftersom det var säljaren som bokade frakten hos TopYou. TopYous webbplats anger ett telefonnummer i Shenzhen (se ovan), men ingen service för mottagare.
 
 :::sources
-- [TopYou: 通邮集团 (startsida, på kinesiska)](https://www.szty56.com/) – telefonnummer
+- [TopYou: 通邮集团 (startsida, på kinesiska)](https://www.szty56.com/) – telefonnummer, öppettider
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – företagets namn och andra namn, TYZR-formen, versaler på TopYous sida, ingen länk som Peek läser, skanningarnas ord och vad Peek visar för dem, destinationslandet vid TopYous egna skanningar, Pekingtid och tiderna på leveransbolagets skanningar, USPS i USA, GOFO i Frankrike och Italien och iMile i Tyskland, leveransbolagets skanningar, det andra numret, Lastmile-numret på en postlinje och linjens namn, okända nummer och nummer utan skanningar, PostNord som Peek frågar i Sverige och hur Peek lämnar över paketet
 :::

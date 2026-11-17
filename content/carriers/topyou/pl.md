@@ -54,7 +54,7 @@ TopYou zapisuje swoje skany po angielsku, a Peek pokazuje je w oryginalnym brzmi
 | --- | --- | --- |
 | `Accepted by carrier` | TopYou ma paczkę w Chinach: pierwszy skan. | „Przyjęta przez przewoźnika” |
 | `Inbound in sorting center` | Zarejestrowana w pierwszej sortowni TopYou kilka minut później; jeszcze stamtąd nie wyjechała. | „Przyjęta przez przewoźnika” |
-| `Outbound in sorting center` | Wyjazd z pierwszej sortowni. Na stronie TopYou dopisywana jest końcówka `, Lastmile Number:` z numerem pocztowym doręczenia; Peek usuwa ten dopisek z treści wiersza i zachowuje numer do przekazania. | „W transporcie” |
+| `Outbound in sorting center` | Wyjazd z pierwszej sortowni. Na stronie TopYou dopisywana jest końcówka `, Lastmile Number:` z numerem pocztowym doręczenia; Peek usuwa ten dopisek z treści wiersza. | „W transporcie” |
 | `Received by line-haul`, `Hand over to airline` | Przejęta do transportu głównego, a następnie przekazana linii lotniczej. | „W transporcie” |
 | `Airline arrived at transit country or district.`, `Airline departed from transit or district country.` | Międzylądowanie w kraju tranzytowym po drodze do celu. | „W transporcie” |
 | `Airline arrived at destination country`, `Arrive at destination country` | Przesyłka dotarła do kraju docelowego. | „W transporcie” |

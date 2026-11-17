@@ -2076,6 +2076,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "paack",
+      "catalog": "paack",
+      "slug": "paack-sendungsverfolgung",
+      "title": "Paack Sendungsverfolgung: Bestellnummer, PLZ und Status",
+      "name": "Paack",
+      "color": "#5b2dee"
+    },
+    {
       "id": "evri",
       "catalog": "evri-uk",
       "slug": "evri-sendungsverfolgung",
@@ -2226,6 +2234,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Heppner Sendungsverfolgung: Nummer, PLZ und Liefertermin",
       "name": "Heppner",
       "color": "#005baa"
+    },
+    {
+      "id": "ecoscooting",
+      "catalog": "ecoscooting",
+      "slug": "ecoscooting-sendungsverfolgung",
+      "title": "Ecoscooting Sendungsverfolgung: Status, Paketshops & Kontakt",
+      "name": "Ecoscooting",
+      "color": "#3fa7ff"
     },
     {
       "id": "swiss-post-cargo",
@@ -2968,6 +2984,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc05"
     },
     {
+      "id": "paack",
+      "catalog": "paack",
+      "slug": "paack-tracking",
+      "title": "Paack tracking: tracciare pacco, codice postale e stati",
+      "name": "Paack",
+      "color": "#5b2dee"
+    },
+    {
       "id": "evri",
       "catalog": "evri-uk",
       "slug": "tracciamento-evri",
@@ -3078,6 +3102,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Shipping tracking: dov'è il pacco e chi contattare",
       "name": "Amazon Shipping",
       "color": "#ff9900"
+    },
+    {
+      "id": "ecoscooting",
+      "catalog": "ecoscooting",
+      "slug": "ecoscooting-tracking",
+      "title": "Ecoscooting tracking: stati, punti di ritiro e contatti",
+      "name": "Ecoscooting",
+      "color": "#3fa7ff"
     },
     {
       "id": "swiss-post-cargo",
@@ -3280,6 +3312,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Hermes seguimiento: paquetes de Alemania a España",
       "name": "Hermes",
       "color": "#0091cd"
+    },
+    {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "dpd-suiza-seguimiento",
+      "title": "DPD Suiza seguimiento: rastrear paquete, Pickup y contacto",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
     },
     {
       "id": "inpost",
@@ -4048,12 +4088,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62e04"
     },
     {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "dpd-szwajcaria-sledzenie",
+      "title": "DPD Szwajcaria śledzenie: status paczki, Pickup i kontakt",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "inpost-sledzenie-przesylki",
       "title": "InPost śledzenie przesyłki: numer, statusy i Paczkomat",
       "name": "InPost",
       "color": "#ffcc05"
+    },
+    {
+      "id": "paack",
+      "catalog": "paack",
+      "slug": "paack-sledzenie",
+      "title": "Paack śledzenie przesyłek: numer zamówienia, kod i statusy",
+      "name": "Paack",
+      "color": "#5b2dee"
     },
     {
       "id": "evri",
@@ -4174,6 +4230,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "ecoscooting",
+      "catalog": "ecoscooting",
+      "slug": "ecoscooting-sledzenie",
+      "title": "Ecoscooting śledzenie przesyłek: statusy, punkty i kontakt",
+      "name": "Ecoscooting",
+      "color": "#3fa7ff"
     },
     {
       "id": "meest",

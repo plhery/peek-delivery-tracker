@@ -1,0 +1,20 @@
+// The edge guard in front of Peek (worker.js). Deployed by hand, never by CI:
+//   npx wrangler@4 deploy --config ops/cloudflare/edge/wrangler.jsonc
+// RUNBOOK: docs/DEPLOYMENT.md ("Edge guard").
+{
+  "$schema": "https://unpkg.com/wrangler@4/config-schema.json",
+  "name": "peek-edge-guard",
+  "main": "worker.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    { "pattern": "peektracker.com/*", "zone_name": "peektracker.com" },
+    // Supabase's auth: a 503 there keeps everyone signed in, where Cloudflare's own error page would not be JSON.
+    { "pattern": "auth.peektracker.com/*", "zone_name": "peektracker.com" }
+  ],
+  // The announcements, shared with the other sites on the server (RUNBOOK). Its id is the account's own.
+  "kv_namespaces": [{ "binding": "MAINTENANCE", "id": "REPLACE_WITH_MAINTENANCE_NAMESPACE_ID" }],
+  "rules": [{ "type": "Text", "globs": ["**/*.html"], "fallthrough": true }],
+  "observability": { "enabled": true, "head_sampling_rate": 0.01 }
+}

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en" data-appearance="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#f4f5f1" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13110e" media="(prefers-color-scheme: dark)">
+<title>Peek · Back in a few minutes</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='116' fill='%23f3cf48'/%3E%3Cellipse cx='190' cy='262' rx='70' ry='77' fill='%23fffaf0'/%3E%3Cellipse cx='322' cy='262' rx='70' ry='77' fill='%23fffaf0'/%3E%3Ccircle cx='219.4' cy='269' r='35' fill='%23171714'/%3E%3Ccircle cx='351.4' cy='269' r='35' fill='%23171714'/%3E%3C/svg%3E">
+<script>
+// Peek's own appearance choice, kept on this site by the app; light when there is none, as on the site.
+try{var a=localStorage.getItem('sdt.appearance.v1');document.documentElement.dataset.appearance=a==='dark'||a==='light'||a==='system'?a:'light'}catch(e){}
+</script>
+<style>
+:root{
+  color-scheme:light;
+  --yellow:#f3cf48;--on-yellow:#20251e;--yellow-soft:#ffebab;
+  --ink:#20251e;--ink-soft:#657060;--canvas:#f4f5f1;--paper:#fff;--line:#dce0d5;
+  --green:#24613e;--green-soft:#dcf0d7;
+  --shadow:0 3px 15px rgb(25 35 20 / 4%),0 24px 60px rgb(25 35 20 / 6%);
+  --z:#8b9585;
+}
+:root[data-appearance="dark"]{
+  color-scheme:dark;
+  --ink:#faf6eb;--ink-soft:#c2baaa;--canvas:#13110e;--paper:#1f1c17;--line:#433f38;
+  --green:#9be0b5;--green-soft:#142a1d;--yellow-soft:#413410;
+  --shadow:inset 0 1px 0 rgb(255 244 220 / 8%),0 24px 64px rgb(0 0 0 / 45%);
+  --z:#8c8474;
+}
+@media (prefers-color-scheme:dark){
+  :root[data-appearance="system"]{
+    color-scheme:dark;
+    --ink:#faf6eb;--ink-soft:#c2baaa;--canvas:#13110e;--paper:#1f1c17;--line:#433f38;
+    --green:#9be0b5;--green-soft:#142a1d;--yellow-soft:#413410;
+    --shadow:inset 0 1px 0 rgb(255 244 220 / 8%),0 24px 64px rgb(0 0 0 / 45%);
+    --z:#8c8474;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;align-items:center;
+  background:var(--canvas);color:var(--ink);
+  font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","PingFang SC","Microsoft YaHei",sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding:max(20px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom));
+}
+header{width:100%;max-width:560px;display:flex;align-items:center;gap:10px;padding:4px 4px 0}
+header svg{width:34px;height:34px;flex:none;border-radius:9px}
+header b{font-size:21px;letter-spacing:-.02em}
+header span{color:var(--ink-soft);font-size:14px}
+main{flex:1;width:100%;max-width:560px;display:flex;flex-direction:column;justify-content:center;padding:28px 0 12px}
+.card{
+  background:var(--paper);border-radius:28px;box-shadow:var(--shadow);
+  padding:8px 32px 32px;text-align:center;
+}
+.scene{position:relative;width:208px;margin:0 auto -6px}
+.scene svg{display:block;width:100%;height:auto}
+.zz{position:absolute;right:-30px;top:-14px;width:60px;height:80px;font-weight:800;color:var(--z);pointer-events:none}
+.zz i{position:absolute;font-style:normal;opacity:0;animation:float 4.2s ease-in-out infinite}
+.zz i:nth-child(1){font-size:17px;right:42px;top:54px}
+.zz i:nth-child(2){font-size:23px;right:22px;top:30px;animation-delay:1.4s}
+.zz i:nth-child(3){font-size:30px;right:0;top:0;animation-delay:2.8s}
+@keyframes float{0%{opacity:0;transform:translate(-6px,10px) rotate(-8deg)}25%{opacity:1}70%{opacity:.85}100%{opacity:0;transform:translate(8px,-14px) rotate(6deg)}}
+.breathe{transform-origin:150px 282px;animation:breathe 4.2s ease-in-out infinite}
+@keyframes breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.012,.985)}}
+.pill{
+  display:inline-flex;align-items:center;gap:7px;margin:4px 0 14px;padding:5px 12px;border-radius:999px;
+  background:var(--yellow-soft);color:var(--ink);font-size:13px;font-weight:600;letter-spacing:.01em;
+}
+.pill::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 0 0 rgb(243 207 72 / 60%);animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgb(243 207 72 / 55%)}80%,100%{box-shadow:0 0 0 9px rgb(243 207 72 / 0%)}}
+h1{margin:0 0 10px;font-size:clamp(25px,6.4vw,31px);line-height:1.18;letter-spacing:-.025em;font-weight:750;text-wrap:balance}
+.lead{margin:0 auto 22px;max-width:30em;color:var(--ink-soft);font-size:17px;text-wrap:pretty}
+.lead strong{color:var(--ink);font-weight:650;white-space:nowrap}
+.safe{
+  display:flex;gap:12px;align-items:flex-start;text-align:start;margin:0 0 22px;padding:14px 16px;border-radius:18px;
+  background:var(--green-soft);color:var(--ink);font-size:15px;
+}
+.safe svg{flex:none;width:22px;height:22px;margin-top:1px;color:var(--green)}
+.safe p{margin:0}
+.safe small{display:block;margin-top:3px;color:var(--ink-soft);font-size:14px}
+button{
+  appearance:none;border:0;cursor:pointer;font:inherit;font-weight:650;font-size:16px;
+  min-height:50px;padding:0 26px;border-radius:999px;background:var(--yellow);color:var(--on-yellow);
+  transition:transform .15s ease,filter .15s ease;
+}
+button:hover{filter:brightness(1.03)}
+button:active{transform:scale(.97)}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:3px}
+button[disabled]{opacity:.7;cursor:progress}
+.auto{margin:14px 0 0;color:var(--ink-soft);font-size:13.5px;min-height:1.5em}
+footer{color:var(--ink-soft);font-size:12.5px;text-align:center;padding-top:6px}
+@media (max-width:420px){.card{padding:4px 20px 24px;border-radius:24px}.scene{width:180px}.lead{font-size:16px}}
+@media (prefers-reduced-motion:reduce){.zz i,.breathe,.pill::before{animation:none}.zz i{opacity:.8}}
+</style>
+</head>
+<body>
+<header>
+  <svg viewBox="0 0 512 512" aria-hidden="true"><rect width="512" height="512" rx="116" fill="#f3cf48"/><ellipse cx="190" cy="262" rx="70" ry="77" fill="#fffaf0"/><ellipse cx="322" cy="262" rx="70" ry="77" fill="#fffaf0"/><circle cx="219.4" cy="269" r="35" fill="#171714"/><circle cx="207.5" cy="255" r="10.5" fill="#fff"/><circle cx="351.4" cy="269" r="35" fill="#171714"/><circle cx="339.5" cy="255" r="10.5" fill="#fff"/></svg>
+  <b>Peek</b><span data-t="tagline">Universal Parcel Tracker</span>
+</header>
+<main>
+  <div class="card">
+    <div class="scene" aria-hidden="true">
+      <!-- Pip, the parcel with a face, having a nap. The box is drawn in the app's 300 × 310 frame. -->
+      <svg viewBox="20 70 270 230">
+        <ellipse cx="150" cy="279" rx="80" ry="9" fill="#20251e" opacity=".1"/>
+        <g class="breathe">
+          <path d="m55 142 95-47 95 47-95 48-95-48Z" fill="#806345"/>
+          <polygon points="55,142 150,95 190,143 95,190" fill="#C4A078" stroke="#987450" stroke-opacity=".24" stroke-width=".7"/>
+          <polygon points="150,95 245,142 197.5,166 102.5,118.5" fill="#D8B997" stroke="#987450" stroke-opacity=".24" stroke-width=".7"/>
+          <path d="m55 142 95 48v87l-95-48v-87Z" fill="#C9A47B"/>
+          <path d="m150 190 95-48v87l-95 48v-87Z" fill="#B78F66"/>
+          <path d="m55 142 95 48v87l-95-48v-87Z" fill="#FFF4D6" opacity=".12"/>
+          <path d="M56 144v84l93 47m2 0 92-46v-84" stroke="#987450" stroke-opacity=".25" stroke-width=".8" fill="none"/>
+          <path d="m55 142 95 48 95-48m-95 48v87" stroke="#FFF2CF" stroke-width="1" fill="none" opacity=".7"/>
+          <g transform="matrix(1 0.505263 0 1 55 142)">
+            <path d="M23.5 35Q32.5 43 41.5 35M54.5 35Q63.5 43 72.5 35" stroke="#20251E" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+            <ellipse cx="31.5" cy="50" rx="7" ry="3.4" fill="#E9958F" opacity=".55"/>
+            <ellipse cx="62.5" cy="50" rx="7" ry="3.4" fill="#E9958F" opacity=".55"/>
+            <ellipse cx="48" cy="54" rx="3.2" ry="3.8" fill="#20251E" opacity=".85"/>
+          </g>
+          <polygon points="245,142 150,190 102.5,166 197.5,118.5" fill="#D1AE85" stroke="#987450" stroke-opacity=".24" stroke-width=".7"/>
+          <polygon points="55,142 150,190 197.5,166 102.5,118.5" fill="#DDBD96" stroke="#987450" stroke-opacity=".24" stroke-width=".7"/>
+          <path d="m96 122 13-7 95 48-13 7-95-48Z" fill="#EBDDCA"/>
+          <path d="m103 119 94 47" stroke="#AF9474" stroke-opacity=".6" stroke-width="1" stroke-dasharray="3 3"/>
+        </g>
+      </svg>
+      <div class="zz"><i>z</i><i>z</i><i>Z</i></div>
+    </div>
+    <div class="pill" id="pill" data-t="pill_unplanned">Back in a few minutes</div>
+    <h1 id="heading" data-t="heading_unplanned">Peek will be back in a few minutes</h1>
+    <p class="lead" id="lead" data-t="lead_unplanned">Something on our side needs a moment. We’re on it, and Peek is usually back within a few minutes.</p>
+    <div class="safe">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="currentColor" opacity=".16"/><path d="m7.5 12.2 3 3 6-6.4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p><span data-t="safe">Your parcels are safe. Nothing is lost, and tracking picks up again by itself.</span><small data-t="apps">In the Peek app, your parcels stay on screen and refresh once we’re back.</small></p>
+    </div>
+    <button type="button" id="retry" data-t="retry">Try again</button>
+    <p class="auto" id="auto" role="status" aria-live="polite" data-t="auto">This page reloads by itself as soon as Peek is back.</p>
+  </div>
+</main>
+<footer>peektracker.com</footer>
+<script type="application/json" id="words">
+{
+"en":{"title":"Peek · Back in a few minutes","tagline":"Universal Parcel Tracker","pill_unplanned":"Back in a few minutes","pill_planned":"Scheduled maintenance","heading_unplanned":"Peek will be back in a few minutes","lead_unplanned":"Something on our side needs a moment. We’re on it, and Peek is usually back within a few minutes.","heading_planned":"Peek is down for a few minutes of maintenance","lead_planned":"We’re doing some planned work on Peek. Back around {{time}}.","lead_planned_notime":"We’re doing some planned work on Peek. It’ll be back shortly.","safe":"Your parcels are safe. Nothing is lost, and tracking picks up again by itself.","apps":"In the Peek app, your parcels stay on screen and refresh once we’re back.","auto":"This page reloads by itself as soon as Peek is back.","retry":"Try again","checking":"Checking…","still":"Not yet. We’ll keep checking."},
+"de":{"title":"Peek · Gleich wieder da","tagline":"Universeller Sendungsverfolger","pill_unplanned":"Gleich wieder da","pill_planned":"Geplante Wartung","heading_unplanned":"Peek ist in ein paar Minuten zurück","lead_unplanned":"Bei uns braucht gerade etwas einen Moment. Wir kümmern uns darum, meist ist Peek nach wenigen Minuten wieder da.","heading_planned":"Peek ist für ein paar Minuten in Wartung","lead_planned":"Wir arbeiten gerade geplant an Peek. Wieder da gegen {{time}}.","lead_planned_notime":"Wir arbeiten gerade geplant an Peek. Gleich wieder da.","safe":"Deine Pakete sind sicher. Nichts geht verloren, und die Sendungsverfolgung läuft von selbst weiter.","apps":"In der Peek-App bleiben deine Pakete sichtbar und werden aktualisiert, sobald wir zurück sind.","auto":"Diese Seite lädt sich von selbst neu, sobald Peek wieder da ist.","retry":"Nochmals versuchen","checking":"Wird geprüft …","still":"Noch nicht. Wir prüfen weiter."},
+"fr":{"title":"Peek · De retour dans quelques minutes","tagline":"Suivi de colis universel","pill_unplanned":"De retour dans quelques minutes","pill_planned":"Maintenance programmée","heading_unplanned":"Peek revient dans quelques minutes","lead_unplanned":"Quelque chose de notre côté a besoin d’un instant. On s’en occupe, et Peek revient en général en quelques minutes.","heading_planned":"Peek est en maintenance pour quelques minutes","lead_planned":"On fait une intervention prévue sur Peek. De retour vers {{time}}.","lead_planned_notime":"On fait une intervention prévue sur Peek. De retour très vite.","safe":"Tes colis sont en sécurité. Rien n’est perdu, et le suivi reprend tout seul.","apps":"Dans l’app Peek, tes colis restent affichés et se mettent à jour dès notre retour.","auto":"Cette page se recharge toute seule dès que Peek est de retour.","retry":"Réessayer","checking":"Vérification…","still":"Pas encore. On continue de vérifier."},
+"it":{"title":"Peek · Torna tra qualche minuto","tagline":"Tracciamento pacchi universale","pill_unplanned":"Torna tra qualche minuto","pill_planned":"Manutenzione programmata","heading_unplanned":"Peek torna tra qualche minuto","lead_unplanned":"Qualcosa da parte nostra ha bisogno di un momento. Ci stiamo lavorando e di solito Peek torna in pochi minuti.","heading_planned":"Peek è in manutenzione per qualche minuto","lead_planned":"Stiamo facendo un intervento programmato su Peek. Di nuovo attivo verso le {{time}}.","lead_planned_notime":"Stiamo facendo un intervento programmato su Peek. Torna a breve.","safe":"I tuoi pacchi sono al sicuro. Non si perde nulla e il tracciamento riprende da solo.","apps":"Nell’app Peek i tuoi pacchi restano sullo schermo e si aggiornano appena torniamo.","auto":"Questa pagina si ricarica da sola appena Peek torna attivo.","retry":"Riprova","checking":"Verifica in corso…","still":"Non ancora. Continuiamo a controllare."},
+"es":{"title":"Peek · Vuelve en unos minutos","tagline":"Seguimiento universal de paquetes","pill_unplanned":"Vuelve en unos minutos","pill_planned":"Mantenimiento programado","heading_unplanned":"Peek vuelve en unos minutos","lead_unplanned":"Algo de nuestro lado necesita un momento. Ya estamos en ello y Peek suele volver en pocos minutos.","heading_planned":"Peek está en mantenimiento unos minutos","lead_planned":"Estamos haciendo un trabajo programado en Peek. Vuelve hacia las {{time}}.","lead_planned_notime":"Estamos haciendo un trabajo programado en Peek. Vuelve enseguida.","safe":"Tus paquetes están a salvo. No se pierde nada y el seguimiento se reanuda solo.","apps":"En la app de Peek, tus paquetes siguen en pantalla y se actualizan en cuanto volvamos.","auto":"Esta página se recarga sola en cuanto Peek vuelva.","retry":"Reintentar","checking":"Comprobando…","still":"Todavía no. Seguimos comprobando."},
+"pt":{"title":"Peek · Volta dentro de alguns minutos","tagline":"Seguimento universal de encomendas","pill_unplanned":"Volta dentro de alguns minutos","pill_planned":"Manutenção programada","heading_unplanned":"O Peek volta dentro de alguns minutos","lead_unplanned":"Algo do nosso lado precisa de um momento. Já estamos a tratar disso e o Peek costuma voltar em poucos minutos.","heading_planned":"O Peek está em manutenção durante alguns minutos","lead_planned":"Estamos a fazer um trabalho programado no Peek. Volta por volta das {{time}}.","lead_planned_notime":"Estamos a fazer um trabalho programado no Peek. Volta já a seguir.","safe":"As tuas encomendas estão seguras. Nada se perde e o seguimento retoma sozinho.","apps":"Na app Peek, as tuas encomendas continuam no ecrã e atualizam-se assim que voltarmos.","auto":"Esta página recarrega sozinha assim que o Peek voltar.","retry":"Tentar novamente","checking":"A verificar…","still":"Ainda não. Continuamos a verificar."},
+"pt-br":{"title":"Peek · Volta em alguns minutos","tagline":"Rastreador universal de encomendas","pill_unplanned":"Volta em alguns minutos","pill_planned":"Manutenção programada","heading_unplanned":"O Peek volta em alguns minutos","lead_unplanned":"Algo do nosso lado precisa de um momento. Já estamos cuidando disso e o Peek costuma voltar em poucos minutos.","heading_planned":"O Peek está em manutenção por alguns minutos","lead_planned":"Estamos fazendo um trabalho programado no Peek. Volta por volta das {{time}}.","lead_planned_notime":"Estamos fazendo um trabalho programado no Peek. Volta logo.","safe":"Suas encomendas estão seguras. Nada se perde e o rastreamento continua sozinho.","apps":"No app do Peek, suas encomendas continuam na tela e são atualizadas assim que voltarmos.","auto":"Esta página recarrega sozinha assim que o Peek voltar.","retry":"Tentar de novo","checking":"Verificando…","still":"Ainda não. Vamos continuar verificando."},
+"pl":{"title":"Peek · Wracamy za kilka minut","tagline":"Uniwersalne śledzenie przesyłek","pill_unplanned":"Wracamy za kilka minut","pill_planned":"Zaplanowana przerwa techniczna","heading_unplanned":"Peek wróci za kilka minut","lead_unplanned":"Coś po naszej stronie potrzebuje chwili. Już się tym zajmujemy, a Peek zwykle wraca w ciągu kilku minut.","heading_planned":"Peek ma kilkuminutową przerwę techniczną","lead_planned":"Prowadzimy zaplanowane prace przy Peek. Wracamy około {{time}}.","lead_planned_notime":"Prowadzimy zaplanowane prace przy Peek. Zaraz wracamy.","safe":"Twoje przesyłki są bezpieczne. Nic nie ginie, a śledzenie wznowi się samo.","apps":"W aplikacji Peek przesyłki zostają na ekranie i odświeżą się, gdy wrócimy.","auto":"Ta strona odświeży się sama, gdy Peek wróci.","retry":"Spróbuj ponownie","checking":"Sprawdzanie…","still":"Jeszcze nie. Sprawdzamy dalej."},
+"ru":{"title":"Peek · Вернёмся через несколько минут","tagline":"Универсальное отслеживание посылок","pill_unplanned":"Вернёмся через несколько минут","pill_planned":"Плановое обслуживание","heading_unplanned":"Peek вернётся через несколько минут","lead_unplanned":"У нас кое-что требует пары минут. Мы уже этим занимаемся — обычно Peek возвращается в течение нескольких минут.","heading_planned":"Peek на техобслуживании несколько минут","lead_planned":"Мы проводим плановые работы. Вернёмся примерно в {{time}}.","lead_planned_notime":"Мы проводим плановые работы. Скоро вернёмся.","safe":"Ваши посылки в сохранности. Ничего не потеряется, и отслеживание продолжится само.","apps":"В приложении Peek ваши посылки остаются на экране и обновятся, как только мы вернёмся.","auto":"Страница обновится сама, как только Peek вернётся.","retry":"Попробовать снова","checking":"Проверяем…","still":"Пока нет. Продолжаем проверять."},
+"zh":{"title":"Peek · 几分钟后回来","tagline":"通用包裹追踪","pill_unplanned":"几分钟后回来","pill_planned":"计划维护","heading_unplanned":"Peek 几分钟后回来","lead_unplanned":"我们这边有点状况，需要一点时间处理。我们正在解决，Peek 通常几分钟内就会恢复。","heading_planned":"Peek 正在进行几分钟的维护","lead_planned":"我们正在对 Peek 进行计划内的维护，预计 {{time}} 左右恢复。","lead_planned_notime":"我们正在对 Peek 进行计划内的维护，很快就会恢复。","safe":"你的包裹信息很安全，不会丢失，恢复后会自动继续跟踪。","apps":"在 Peek 应用中，你的包裹会继续显示，恢复后自动刷新。","auto":"Peek 恢复后，此页面会自动重新加载。","retry":"重试","checking":"正在检查…","still":"还没有恢复，我们会继续检查。"}
+}
+</script>
+<script>
+(function(){
+  // Filled in by the edge: {maintenance, planned, mode, since, backAround, lang}. Opened as a file, it stays empty.
+  var state=/*__STATE__*/null||{};
+  var all=JSON.parse(document.getElementById('words').textContent);
+  var lang=state.lang||document.documentElement.lang||'en';
+  if(!all[lang]){var nav=(navigator.language||'en').toLowerCase();lang=all[nav]?nav:all[nav.split('-')[0]]?nav.split('-')[0]:'en';}
+  var w=all[lang];
+  document.documentElement.lang=lang;
+  document.title=w.title;
+  document.querySelectorAll('[data-t]').forEach(function(el){var k=el.getAttribute('data-t');if(w[k])el.textContent=w[k];});
+  if(state.planned){
+    document.getElementById('pill').textContent=w.pill_planned;
+    document.getElementById('heading').textContent=w.heading_planned;
+    var lead=document.getElementById('lead');
+    var at=state.backAround?new Date(state.backAround):null;
+    if(at&&!isNaN(at)){
+      var time=new Intl.DateTimeFormat(lang,{hour:'numeric',minute:'2-digit'}).format(at);
+      var parts=w.lead_planned.split('{{time}}');
+      lead.textContent=parts[0];
+      var strong=document.createElement('strong');strong.textContent=time;lead.appendChild(strong);
+      lead.appendChild(document.createTextNode(parts[1]||''));
+    }else lead.textContent=w.lead_planned_notime;
+  }
+  // Checks quietly whether the site answers again, and reloads when it does: every 20 s, then less often.
+  var button=document.getElementById('retry'),auto=document.getElementById('auto');
+  var wait=20000,timer=null;
+  function check(byHand){
+    clearTimeout(timer);
+    if(byHand){button.disabled=true;button.textContent=w.checking;}
+    fetch(location.href,{method:'HEAD',cache:'no-store',credentials:'same-origin'}).then(function(r){
+      if(r.status<500&&!r.headers.get('X-Maintenance')){location.reload();return;}
+      throw 0;
+    }).catch(function(){
+      if(byHand){button.disabled=false;button.textContent=w.retry;auto.textContent=w.still;setTimeout(function(){auto.textContent=w.auto},6000);}
+      wait=Math.min(wait*1.25,60000);
+      timer=setTimeout(function(){check(false)},wait);
+    });
+  }
+  button.addEventListener('click',function(){check(true)});
+  timer=setTimeout(function(){check(false)},wait);
+  // Opened as a file, there is nothing to ask.
+  if(location.protocol==='file:')clearTimeout(timer);
+})();
+</script>
+</body>
+</html>

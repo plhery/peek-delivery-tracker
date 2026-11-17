@@ -389,6 +389,31 @@ position.
 `npm run test:deployment` (run in CI after the build) stops the built server during a job
 that never ends, checks the handoff, restarts and finishes the job.
 
+## Edge guard
+
+When the server can't answer (a host reboot takes the Cloudflare Tunnel with it, or the
+proxy has no app behind it), a Worker in front of `peektracker.com` and `auth.peektracker.com`
+answers in its place: [`ops/cloudflare/edge/`](../ops/cloudflare/edge/worker.js).
+
+- **Pages**: a carrier's page or a guide is served from the copy the Worker saved the last
+  time someone read it without a session (the Cache API, so per Cloudflare data centre),
+  under a note that it is a saved copy. Any other page gets the maintenance page
+  (`maintenance.html`, one file in every language, 503 with `Retry-After`), which reloads
+  by itself once the site answers.
+- **API and auth**: a JSON 503 with `Retry-After` and a `maintenance` object, never a 4xx,
+  so no client signs out or drops what it keeps. The app's own JSON errors pass through.
+- **`/health`** passes through as it is, so outside checks still see the server down.
+- **`/maintenance.json`** is answered by the Worker alone: `{"planned", "mode", "since",
+  "backAround"}`. Planned maintenance is a JSON value in the account's `MAINTENANCE` KV
+  namespace, under `all` (the host) or `peek` (Peek's database); `"mode": "hard"` turns
+  requests away before the server goes down, `/health` aside. The switch and its steps are
+  in the server's runbook.
+
+Deploy by hand with `npx wrangler@4 deploy --config ops/cloudflare/edge/wrangler.jsonc`,
+after putting the namespace's id in that file. `node --test ops/cloudflare/edge/worker.test.mjs`
+tests it. Every request to the site goes through the Worker, so it needs the Workers Paid
+plan's request allowance.
+
 ## Operating
 
 ### Browser verification

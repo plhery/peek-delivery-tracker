@@ -1900,6 +1900,74 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.parcels.compactMap(\.alertToken), [])
     }
 
+    /// A round cut short by an outage or a pause is tried again: a minute later, then twice as long each time it
+    /// fails again, never before a pause the service asked for runs out, and the parcels it signed up aren't asked again.
+    func testARoundCutShortIsTriedAgainLater() async {
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        storage.parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID())), checkedAt: Date()),
+            DeviceParcel(linkID: "22222222222B", label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL999")), checkedAt: Date()),
+        ]
+        let calls = Calls()
+        let start = Date(timeIntervalSince1970: 1_800_000_000)
+        var now = start
+        let device = DeviceParcels(client: client(calls, alert: { linkID in
+            switch calls.all.count {
+            case 2: return .unavailable
+            case 3: throw DeliveryAPIError.serviceFailed(502)
+            case 4: throw DeliveryAPIError.rateLimited(600)
+            default: return .on
+            }
+        }), storage: storage, now: { now })
+        func asked() -> [String] { calls.all.map { String($0.split(separator: " ")[1]) } }
+
+        await device.registerAlerts(token: "token1", locale: .en)
+        XCTAssertEqual(asked(), ["22222222222A", "22222222222B"])
+        for (seconds, expected) in [(59.0, 2), (60, 3), (179, 3), (180, 4), (779, 4), (780, 5), (10_000, 5)] {
+            now = start.addingTimeInterval(seconds)
+            await device.retryAlerts()
+            XCTAssertEqual(calls.all.count, expected, "\(seconds) s after the first round")
+        }
+        XCTAssertEqual(asked(), ["22222222222A", "22222222222B", "22222222222B", "22222222222B", "22222222222B"])
+        XCTAssertEqual(storage.parcels.compactMap(\.alertToken), ["token1", "token1"])
+    }
+
+    /// The guest list's refresh is what tries a round cut short again.
+    func testTheGuestListsRefreshTriesNotificationsAgainAfterAnOutage() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        PostcodeTestURLProtocol.handler = { _ in (404, Data()) }
+        let shown = PublicParcelResponse(link: reader("33333333333A"), package: package(UUID(), stage: .registered))
+        let calls = Calls()
+        var now = Date()
+        let device = DeviceParcels(client: client(calls, read: { _ in shown }, alert: { _ in
+            calls.all.count { $0.hasPrefix("alert") } == 1 ? .unavailable : .on
+        }), storage: Memory(), now: { now })
+        let notifications = DeviceNotificationAccess(status: { .authorized }, request: {}, register: {}, token: { "token1" })
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device,
+                                deviceNotifications: notifications)
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        func alerts() -> Int { calls.all.count { $0.hasPrefix("alert") } }
+
+        _ = try await store.follow(ParcelLinkRoute(id: "33333333333A", name: "Books"), shown)
+        for _ in 0..<200 where device.alertsRetryAt == nil { await Task.yield() }
+        XCTAssertEqual(alerts(), 1)
+        XCTAssertEqual(device.alertsRetryAt, now.addingTimeInterval(DeviceParcels.alertRetryFirst))
+        await store.load()
+        XCTAssertEqual(alerts(), 1, "Not before its time")
+        now = now.addingTimeInterval(DeviceParcels.alertRetryFirst)
+        await store.load()
+        XCTAssertEqual(alerts(), 2)
+        await store.load()
+        XCTAssertEqual(alerts(), 2, "Once it went through, nothing is asked again")
+        XCTAssertNil(device.alertsRetryAt)
+    }
+
     func testAParcelsNotificationsTellEveryScanUntilItsCarrierHasNews() {
         func preset(_ stage: TrackingStage?) -> ParcelAlertPreset { DeviceParcels.alertPreset(for: Parcel(shared: package(UUID(), stage: stage))) }
         XCTAssertEqual(preset(nil), .all)

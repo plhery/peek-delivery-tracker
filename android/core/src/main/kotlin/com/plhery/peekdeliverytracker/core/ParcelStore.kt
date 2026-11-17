@@ -907,6 +907,13 @@ class ParcelStore(
         device.registerAlerts(token, NativePushLocale(language))
     }
 
+    /** Signs the device's parcels up again after a round cut short by an outage or a pause, on the conditions of the first. */
+    private suspend fun retryDeviceAlerts() {
+        if (!tracksWithoutAccount || isDemo) return
+        if (session.user != null && defaults.bool(forKey = notificationOptOutKey)) return
+        device.retryAlerts()
+    }
+
     /** How the share sheet reaches this parcel's link: through the service, or the demo's own made-up links, which lead nowhere. */
     fun shareClient(parcel: Parcel): ParcelShareModel.Client {
         val id = parcel.id
@@ -1801,19 +1808,25 @@ class ParcelStore(
         }
     }
 
-    /** Brings the device's own parcels up to date, quietly: trouble leaves the list as it is. */
+    /**
+     * Brings the device's own parcels up to date, quietly: trouble leaves the list as it is. A round of notification
+     * requests cut short is tried again once its time comes.
+     */
     private suspend fun loadDeviceParcels() {
         val generation = session.generation
         tryQuietly { device.refresh() }
-        if (generation != session.generation || !isGuest || pendingMutations.isNotEmpty()) return
-        val next = device.list()
-        if (next != parcels) {
-            parcels = next
-        } else {
-            // A key let go, or read again into a parcel already listed through another link, leaves the list as it was.
-            takeUnlistedDeviceParcels()
-            publishDeliverySurfaces()
+        if (generation != session.generation || !isGuest) return
+        if (pendingMutations.isEmpty()) {
+            val next = device.list()
+            if (next != parcels) {
+                parcels = next
+            } else {
+                // A key let go, or read again into a parcel already listed through another link, leaves the list as it was.
+                takeUnlistedDeviceParcels()
+                publishDeliverySurfaces()
+            }
         }
+        retryDeviceAlerts()
     }
 
     /**

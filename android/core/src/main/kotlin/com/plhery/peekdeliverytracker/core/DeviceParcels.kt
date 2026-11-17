@@ -120,7 +120,7 @@ enum class DeviceAlertAnswer {
     /** Its owner stopped sharing it. */
     Stopped,
 
-    /** The server sends no notifications to phones. */
+    /** The server sends no notifications to phones, or can't for now. */
     Unavailable,
 }
 
@@ -529,6 +529,11 @@ class DeviceParcels(
      * the service lost them.
      */
     private var alertsAsked: Map<String, String> = emptyMap()
+
+    /** The last round, when it was cut short: tried again on its token and in its language once its time comes. */
+    private var alertRetry: AlertRetry? = null
+
+    private class AlertRetry(val token: String, val locale: NativePushLocale, val at: Instant, val wait: Double)
 
     init {
         val loaded = storage.load()
@@ -998,8 +1003,8 @@ class DeviceParcels(
      * Turns notifications on, on this phone's token and in its language, for every parcel still on its way: once a
      * launch, and again when the token or the language changes. A parcel that arrived needs none; a held return still
      * does. A round is short and quiet: a few parcels at most, and it ends at the first sign that the service wants a
-     * pause or sends no notifications. A link that leads nowhere, has no room or is no longer shared is left until the
-     * next launch.
+     * pause, sends no notifications or can't be reached; [retryAlerts] tries it again later. A link that leads nowhere,
+     * has no room or is no longer shared is left until the next launch.
      *
      * On Android the token is this phone's address ([PushAddress]), which has one environment. Called from the main
      * thread: `FirebaseMessagingService.onNewToken` runs on another, and the app hands its token over to the main one.
@@ -1010,6 +1015,8 @@ class DeviceParcels(
         val round = asked.nfc()
         if (!alertRounds.add(round)) return
         val address = PushAddress.of(token)
+        // How long the service asked to be left alone, in seconds, when the round is cut short.
+        var pause: Double? = null
         try {
             val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }.take(alertsPerRound)
             for (entry in due) {
@@ -1026,10 +1033,14 @@ class DeviceParcels(
                     )
                 } catch (cancellation: CancellationException) {
                     throw cancellation
-                } catch (_: Exception) {
+                } catch (error: Exception) {
+                    pause = (error as? DeliveryApiError.RateLimited)?.retryAfter ?: 0.0
                     break
                 }
-                if (answer == DeviceAlertAnswer.Unavailable) break
+                if (answer == DeviceAlertAnswer.Unavailable) {
+                    pause = 0.0
+                    break
+                }
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
                 if (index < 0) {
                     // Forgotten, or followed through another link, while the service was asked: the link hears nothing
@@ -1048,9 +1059,34 @@ class DeviceParcels(
                     attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }
+            holdAlerts(pause, token, locale)
         } finally {
             alertRounds.remove(round)
         }
+    }
+
+    /**
+     * Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
+     * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
+     */
+    suspend fun retryAlerts() {
+        val retry = alertRetry ?: return
+        if (now().isBefore(retry.at)) return
+        registerAlerts(retry.token, retry.locale)
+    }
+
+    /**
+     * Notes how a round ended: one cut short is tried again after a wait, longer each time it fails again; one that
+     * went through leaves nothing to try again.
+     */
+    private fun holdAlerts(pause: Double?, token: String, locale: NativePushLocale) {
+        if (pause == null) {
+            alertRetry = null
+            return
+        }
+        val last = alertRetry
+        val wait = if (last != null && last.token == token && last.locale == locale) minOf(last.wait * 2, alertRetryLongest) else alertRetryFirst
+        alertRetry = AlertRetry(token, locale, now().plusMillis((maxOf(wait, pause) * 1000).toLong()), wait)
     }
 
     /**
@@ -1104,6 +1140,13 @@ class DeviceParcels(
 
         /** How many parcels one round asks notifications for; the rest wait for the next round. */
         const val alertsPerRound = 25
+
+        /**
+         * How long a round cut short waits before it is tried again, in seconds: a minute the first time, then twice as
+         * long each time, up to an hour.
+         */
+        const val alertRetryFirst: Double = 60.0
+        const val alertRetryLongest: Double = 60.0 * 60
 
         /**
          * What a parcel's notifications tell when they are first turned on, as on the site: every scan while nothing has

@@ -723,6 +723,14 @@ final class ParcelStore: ObservableObject {
         await device.registerAlerts(token: token, locale: NativePushLocale(language))
     }
 
+    /// Signs the device's parcels up again after a round cut short by an outage or a pause, on the conditions of the
+    /// first.
+    private func retryDeviceAlerts() async {
+        guard tracksWithoutAccount, !isDemo else { return }
+        if session.user != nil, UserDefaults.standard.bool(forKey: notificationOptOutKey) { return }
+        await device.retryAlerts()
+    }
+
     /// How the share sheet reaches this parcel's link: through the service, or the demo's own
     /// made-up links, which lead nowhere.
     func shareClient(for parcel: Parcel) -> ParcelShareModel.Client {
@@ -1962,13 +1970,17 @@ final class ParcelStore: ObservableObject {
         }
     }
 
-    /// Brings the device's own parcels up to date, quietly: trouble leaves the list as it is.
+    /// Brings the device's own parcels up to date, quietly: trouble leaves the list as it is. A round of notification
+    /// requests cut short is tried again once its time comes.
     private func loadDeviceParcels(hidden: Bool = false) async {
         let generation = session.generation
         try? await device.refresh(hidden: hidden)
-        guard generation == session.generation, isGuest, pendingMutations.isEmpty else { return }
-        let next = device.list()
-        if next != parcels { parcels = next } else { publishDeliverySurfaces() }
+        guard generation == session.generation, isGuest else { return }
+        if pendingMutations.isEmpty {
+            let next = device.list()
+            if next != parcels { parcels = next } else { publishDeliverySurfaces() }
+        }
+        await retryDeviceAlerts()
     }
 
     /// Asks again while the list is on screen: soon and a few times while a parcel waits for its

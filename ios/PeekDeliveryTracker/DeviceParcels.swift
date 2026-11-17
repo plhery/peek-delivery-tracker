@@ -59,7 +59,7 @@ enum DeviceAlertAnswer: Equatable, Sendable {
     case full
     /// Its owner stopped sharing it.
     case stopped
-    /// The server sends no notifications to iPhones.
+    /// The server sends no notifications to iPhones, or can't for now.
     case unavailable
 }
 
@@ -316,6 +316,10 @@ final class DeviceParcels {
     static let waitingFresh: TimeInterval = 1.5
     /// How many parcels one round asks notifications for; the rest wait for the next round.
     static let alertsPerRound = 25
+    /// How long a round cut short waits before it is tried again: a minute the first time, then twice as long each
+    /// time, up to an hour.
+    static let alertRetryFirst: TimeInterval = 60
+    static let alertRetryLongest: TimeInterval = 60 * 60
 
     private let client: DeviceParcelClient?
     private let storage: any DeviceParcelStorage
@@ -336,6 +340,16 @@ final class DeviceParcels {
     /// The token and language each parcel's notifications were asked for since launch. Each
     /// launch asks again, in case the service lost them.
     private var alertsAsked: [String: String] = [:]
+    /// The last round, when it was cut short: tried again on its token and in its language once its time comes.
+    private var alertRetry: AlertRetry?
+
+    private struct AlertRetry {
+        let token: String
+        let locale: NativePushLocale
+        let environment: NativePushEnvironment
+        let at: Date
+        let wait: TimeInterval
+    }
 
     /// A build without a server follows nothing.
     init(client: DeviceParcelClient?, storage: any DeviceParcelStorage = DeviceParcelFiles(),
@@ -748,12 +762,15 @@ final class DeviceParcels {
     /// Turns notifications on, on this iPhone's token and in its language, for every parcel still
     /// on its way: once a launch, and again when the token or the language changes. A parcel that
     /// arrived needs none; a held return still does. A round is short and quiet: a few parcels at most, and it ends at the
-    /// first sign that the service wants a pause or sends no notifications. A link that leads
-    /// nowhere, has no room or is no longer shared is left until the next launch.
+    /// first sign that the service wants a pause, sends no notifications or can't be reached; `retryAlerts` tries it
+    /// again later. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
     func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current) async {
         let asked = "\(token) \(locale.rawValue)"
         guard let client, alertRounds.insert(asked).inserted else { return }
         defer { alertRounds.remove(asked) }
+        // How long the service asked to be left alone, when the round is cut short.
+        var pause: TimeInterval?
+        defer { holdAlerts(pause, token: token, locale: locale, environment: environment) }
         let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) }.prefix(Self.alertsPerRound)
         for entry in due {
             // Forgotten, or followed through another link, since the round began.
@@ -764,9 +781,13 @@ final class DeviceParcels {
                 answer = try await client.setAlert(entry.linkID, keys[entry.linkID],
                                                    ParcelAppAlertRequest(token: token, environment: environment, preset: preset, locale: locale))
             } catch {
+                if case DeliveryAPIError.rateLimited(let after) = error { pause = after } else { pause = 0 }
                 break
             }
-            if answer == .unavailable { break }
+            if answer == .unavailable {
+                pause = 0
+                break
+            }
             guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else {
                 // Forgotten, or followed through another link, while the service was asked: the link hears
                 // nothing more here.
@@ -784,6 +805,29 @@ final class DeviceParcels {
                 try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: old))
             }
         }
+    }
+
+    /// When the last round, cut short, is to be tried again; nil once a round went through.
+    var alertsRetryAt: Date? { alertRetry?.at }
+
+    /// Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
+    /// side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
+    func retryAlerts() async {
+        guard let retry = alertRetry, now() >= retry.at else { return }
+        await registerAlerts(token: retry.token, locale: retry.locale, environment: retry.environment)
+    }
+
+    /// Notes how a round ended: one cut short is tried again after a wait, longer each time it fails again; one that
+    /// went through leaves nothing to try again.
+    private func holdAlerts(_ pause: TimeInterval?, token: String, locale: NativePushLocale, environment: NativePushEnvironment) {
+        guard let pause else {
+            alertRetry = nil
+            return
+        }
+        var wait = Self.alertRetryFirst
+        if let last = alertRetry, last.token == token, last.locale == locale { wait = min(last.wait * 2, Self.alertRetryLongest) }
+        alertRetry = AlertRetry(token: token, locale: locale, environment: environment,
+                                at: now().addingTimeInterval(max(wait, pause)), wait: wait)
     }
 
     /// Turns off a link's notifications on the token, for a link no longer followed here. Someone else's link the

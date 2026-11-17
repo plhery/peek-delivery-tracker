@@ -1856,6 +1856,80 @@ class DeviceParcelTests {
         assertEquals(emptyList<String>(), storage.parcels.mapNotNull { it.alertToken })
     }
 
+    /**
+     * A round cut short by an outage or a pause is tried again: a minute later, then twice as long each time it fails
+     * again, never before a pause the service asked for runs out, and the parcels it signed up aren't asked again.
+     */
+    @Test
+    fun aRoundCutShortIsTriedAgainLater() = runTest {
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", UUID.randomUUID()),
+            UUID.randomUUID().let { parcel("22222222222B", "", it, pkg = pkg(it, number = "TESTPARCEL999")) },
+        )
+        val calls = Calls()
+        val start = Instant.ofEpochSecond(1_800_000_000)
+        var now = start
+        val device = device(
+            client(calls, alert = {
+                when (calls.all.size) {
+                    2 -> DeviceAlertAnswer.Unavailable
+                    3 -> throw DeliveryApiError.ServiceFailed(502)
+                    4 -> throw DeliveryApiError.RateLimited(600.0)
+                    else -> DeviceAlertAnswer.On
+                }
+            }),
+            storage, this, now = { now },
+        )
+        fun asked() = calls.all.map { it.split(" ")[1] }
+
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(listOf("22222222222A", "22222222222B"), asked())
+        for ((seconds, expected) in listOf(59L to 2, 60L to 3, 179L to 3, 180L to 4, 779L to 4, 780L to 5, 10_000L to 5)) {
+            now = start.plusSeconds(seconds)
+            device.retryAlerts()
+            assertEquals("$seconds s after the first round", expected, calls.all.size)
+        }
+        assertEquals(listOf("22222222222A", "22222222222B", "22222222222B", "22222222222B", "22222222222B"), asked())
+        assertEquals(listOf("token1", "token1"), storage.parcels.mapNotNull { it.alertToken })
+    }
+
+    /** The guest list's refresh is what tries a round cut short again. */
+    @Test
+    fun theGuestListsRefreshTriesNotificationsAgainAfterAnOutage() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val shown = PublicParcelResponse(link = reader("33333333333A"), parcel = pkg(UUID.randomUUID(), stage = TrackingStage.Registered))
+        val calls = Calls()
+        var now = Instant.now()
+        fun alerts() = calls.all.count { it.startsWith("alert") }
+        val device = device(
+            client(calls, read = { shown }, alert = { if (alerts() == 1) DeviceAlertAnswer.Unavailable else DeviceAlertAnswer.On }),
+            Memory(), backgroundScope, now = { now },
+        )
+        val notifications = DeviceNotificationAccess(
+            status = { NotificationAuthorizationStatus.Authorized }, request = {}, register = {}, token = { "token1" },
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, localizer = Localizer(AppLanguage.En), device = device,
+            deviceNotifications = notifications,
+        )
+        store.setDeliveryWidgetEnabled(false)
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        store.follow(ParcelLinkRoute(id = "33333333333A", name = "Books"), shown)
+        runCurrent()
+        assertEquals(1, alerts())
+        store.load()
+        assertEquals("Not before its time", 1, alerts())
+        now = now.plusSeconds(DeviceParcels.alertRetryFirst.toLong())
+        store.load()
+        assertEquals(2, alerts())
+        store.load()
+        assertEquals("Once it went through, nothing is asked again", 2, alerts())
+    }
+
     @Test
     fun aParcelsNotificationsTellEveryScanUntilItsCarrierHasNews() {
         fun preset(stage: TrackingStage?): ParcelAlertPreset = DeviceParcels.alertPreset(Parcel(shared = pkg(UUID.randomUUID(), stage = stage)))

@@ -1,0 +1,3 @@
+Fixes a crash that could close Peek when it opened just as its “Parcels” widget updated.
+A firewall check in front of Peek’s servers no longer signs you out or clears your list.
+Without an account, your parcels stay on your phone while Peek’s servers restart.

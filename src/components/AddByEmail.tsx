@@ -4,7 +4,7 @@ import { useI18n } from '../i18n';
 import { closeAddByEmail, openAddByEmail, readAddByEmail } from '../lib/addByEmail';
 import type { ApiAuth } from '../lib/apiClient';
 import {
-  FILTER_LANGUAGES, GMAIL_FORWARDING_LINK, ICLOUD_MAIL_LINK, MAIL_SERVICES, OUTLOOK_RULES_LINK, filterLanguagesFor, gmailFilter,
+  FILTER_LANGUAGES, GMAIL_SETTINGS_LINK, ICLOUD_MAIL_LINK, MAIL_SERVICES, OUTLOOK_RULES_LINK, filterLanguagesFor, gmailFilter,
   mailServiceOf, subjectWords, type FilterLanguage, type MailService,
 } from '../lib/emailFilter';
 import { localizedRelativeTime, type Translate } from '../lib/messages';
@@ -100,7 +100,9 @@ function StepText({ text }: { text: string }) {
  * belongs to, and the languages their shops and carriers write in, which start with the language Peek shows, the
  * browser's and English.
  * - Each service's first step names the way to its settings as well as linking there, and says what to check when they
- *   don't show what the step speaks of: a phone, another account, an administrator who turned forwarding off.
+ *   don't show what the step speaks of: a phone, another account, an administrator who turned forwarding off. Gmail's
+ *   link opens its settings, not the forwarding tab: opened from a link or reloaded, that tab can leave out its button,
+ *   so the tab is a step of its own.
  * - Gmail forwards only to an address it has confirmed, and then only the emails a filter picks: the address is added
  *   and confirmed first (Peek shows Gmail's confirmation in the step), then the filter is made from a search to copy.
  *   Its forwarding settings also offer to forward every email, which the steps say to leave off.
@@ -152,7 +154,8 @@ function ForwardingSteps({ email, confirmation }: { email?: string; confirmation
     </div>
     {service === 'yahoo' ? <p className="add-by-email__steps add-by-email__steps--none">{t('inbox.yahoo')}</p> : <ol className="add-by-email__steps">
       {service === 'gmail' && <>
-        <li>{step('inbox.gmail.add')}<StepLink href={GMAIL_FORWARDING_LINK}>{t('inbox.gmail.addLink')}</StepLink>{missing('inbox.gmail.noButton')}</li>
+        <li>{step('inbox.gmail.settings')}<StepLink href={GMAIL_SETTINGS_LINK}>{t('inbox.gmail.settingsLink')}</StepLink></li>
+        <li>{step('inbox.gmail.add')}{missing('inbox.gmail.noButton')}</li>
         <li>{step('inbox.gmail.confirm')}
           {confirmation && <div className="settings-box add-by-email__step-box add-by-email__confirmation">
             {confirmation.link && <a className="settings-row" href={confirmation.link} target="_blank" rel="noopener noreferrer"><Icon name="mail" />{t('inbox.confirm.link')}<span className="settings-chevron" aria-hidden="true">›</span></a>}

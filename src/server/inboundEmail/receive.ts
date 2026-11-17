@@ -1,10 +1,11 @@
 import 'server-only';
 
 import { ownSenderAddress } from '../email/config';
-import { logOperationalEvent } from '../observability';
+import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
 import { addParcelsFromText, type ParcelAddition } from '../parcelsFromText';
 import type { InboundMailResult, SupabaseServiceClient } from '../supabase';
 import { carrierNames, carriersOfAddress } from './carrierSender';
+import { deliveredSubject } from './delivered';
 import { headerFromAddress, readInboundMail, type InboundMail } from './mail';
 import { shopNamedIn } from './shopName';
 import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } from './settings';
@@ -12,21 +13,67 @@ import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } fro
 /** What an email did; `dropped` when its address names nobody who takes email. */
 export type InboundOutcome = InboundMailResult | 'dropped';
 
-/** What an email's numbers did, said once for the whole email, its most telling outcome first. */
-export function mailResult(additions: readonly ParcelAddition[]): InboundMailResult {
+/**
+ * What an email did, said once for the whole email, its most telling outcome first: a parcel it added; then one it
+ * could not add for the parcel limit or an allowance, which the owner can act on; then a followed parcel it gave a
+ * name, a change the owner sees in the list; then parcels already followed, left as they were; then a delivery it
+ * told of, whose parcel nobody follows and it does not add; then nothing.
+ */
+export function mailResult(additions: readonly ParcelAddition[], { named = 0, delivered = false } = {}): InboundMailResult {
   const outcomes = new Set(additions.map(({ outcome }) => outcome));
   if (outcomes.has('added')) return 'added';
   if (outcomes.has('full')) return 'full';
   if (outcomes.has('limited')) return 'limited';
+  if (named > 0) return 'named';
   if (outcomes.has('known')) return 'known';
+  if (delivered) return 'delivered';
   return 'none';
+}
+
+/**
+ * Gives the email's name for its parcels to those the account follows without a name, such as one a carrier's email
+ * added before the shop's came: a name the owner or an earlier email gave is never changed. Returns how many it
+ * named. A failure leaves the parcel unnamed and is reported.
+ */
+async function nameFollowedParcels(
+  service: SupabaseServiceClient,
+  userId: string,
+  additions: readonly ParcelAddition[],
+  label: string,
+): Promise<number> {
+  // A parcel's name holds 80 characters at most, as when it is added.
+  const name = [...label.trim()].slice(0, 80).join('').trim();
+  if (!name) return 0;
+  const parcels = new Set(additions.flatMap((addition) => (addition.outcome === 'known' && addition.packageId ? [addition.packageId] : [])));
+  let named = 0;
+  for (const packageId of parcels) {
+    try {
+      if (await service.nameUnnamedPackage(userId, packageId, name)) named += 1;
+    } catch (error) {
+      logOperationalEvent('inbound_email_name_failed', { error_type: errorType(error) }, 'error');
+      captureOperationalError(error, { component: 'inbound-email', operation: 'name_parcel' });
+    }
+  }
+  return named;
+}
+
+/** Keeps the email seven days, to learn to read emails better. A failure is reported, and the email's parcels stay. */
+async function keep(service: SupabaseServiceClient, userId: string, raw: Uint8Array): Promise<void> {
+  try {
+    await service.keepInboundMail(userId, raw);
+  } catch (error) {
+    logOperationalEvent('inbound_email_keep_failed', { error_type: errorType(error) }, 'error');
+    captureOperationalError(error, { component: 'inbound-email', operation: 'keep' });
+  }
 }
 
 /**
  * Takes one email the Worker passed on: finds the account its address names and, when that account takes email,
  * counts it against the allowances and adds the numbers it holds, labelled with its sender, or with the shop a
- * carrier's email names. Gmail's request to confirm forwarding is kept for the owner instead, and the server's own
- * emails are dropped. The email itself is never stored: what it did is noted with its sender's name.
+ * carrier's email names. A followed parcel without a name takes that name. An email that says its parcel was
+ * delivered adds none. Gmail's request to confirm forwarding is kept for the owner instead, and the server's own
+ * emails are dropped. What an email did is noted with its sender's name, and the email itself is kept seven days,
+ * but for one an allowance or the parcel limit stopped and Gmail's request, which holds a code.
  */
 export async function receiveInboundMail(
   service: SupabaseServiceClient,
@@ -70,14 +117,18 @@ export async function receiveInboundMail(
   // carries for, or none. The carrier's mailbox name ("Info", "noreply") says nothing of the parcel.
   const carriers = carriersOfAddress(mail.origin);
   const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : mail.sender;
-  const additions = await addParcelsFromText(service, userId, mail.text, label, carriers);
-  const result = mailResult(additions);
+  // A delivery confirmation comes too late for following its parcel to help: it names one already followed, if any.
+  const delivered = deliveredSubject(mail.subject);
+  const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered });
+  const named = await nameFollowedParcels(service, userId, additions, label);
+  const result = mailResult(additions, { named, delivered });
   const added = additions.filter(({ outcome }) => outcome === 'added').length;
   await service.recordInboundMail(userId, result, added, null, label || mail.sender);
-  return finish(result, carriers.length ? 'carrier' : undefined, additions.length, added);
+  if (result !== 'limited' && result !== 'full') await keep(service, userId, raw);
+  return finish(result, carriers.length ? 'carrier' : undefined, additions.length, added, named);
 }
 
-function finish(outcome: InboundOutcome, reason?: string, numbers = 0, added = 0): InboundOutcome {
-  logOperationalEvent('inbound_email', { outcome, ...(reason ? { reason } : {}), numbers, added });
+function finish(outcome: InboundOutcome, reason?: string, numbers = 0, added = 0, named = 0): InboundOutcome {
+  logOperationalEvent('inbound_email', { outcome, ...(reason ? { reason } : {}), numbers, added, named });
   return outcome;
 }

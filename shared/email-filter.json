@@ -1,0 +1,179 @@
+{
+  "words": {
+    "en": [
+      "shipped",
+      "dispatched",
+      "shipment",
+      "shipping",
+      "parcel",
+      "package",
+      "delivery",
+      "tracking",
+      "on its way",
+      "on the way"
+    ],
+    "de": [
+      "versandt",
+      "versendet",
+      "verschickt",
+      "Versand",
+      "Versandbestätigung",
+      "Sendung",
+      "Sendungsverfolgung",
+      "Paket",
+      "Lieferung",
+      "Zustellung",
+      "unterwegs"
+    ],
+    "fr": [
+      "expédié",
+      "expédiée",
+      "expédition",
+      "colis",
+      "livraison",
+      "suivi",
+      "acheminement",
+      "distribution",
+      "en route",
+      "en chemin",
+      "en transit"
+    ],
+    "it": [
+      "spedito",
+      "spedita",
+      "spedizione",
+      "pacco",
+      "consegna",
+      "tracciamento"
+    ],
+    "es": [
+      "enviado",
+      "envío",
+      "paquete",
+      "entrega",
+      "seguimiento",
+      "en camino",
+      "en reparto"
+    ],
+    "pt": [
+      "enviado",
+      "enviada",
+      "envio",
+      "expedida",
+      "encomenda",
+      "pacote",
+      "entrega",
+      "rastreio",
+      "rastreamento",
+      "a caminho"
+    ],
+    "nl": [
+      "verzonden",
+      "verzending",
+      "zending",
+      "pakket",
+      "pakketje",
+      "bezorging",
+      "levering",
+      "onderweg"
+    ],
+    "pl": [
+      "wysłane",
+      "wysłana",
+      "wysłano",
+      "wysyłka",
+      "przesyłka",
+      "przesyłki",
+      "przesyłkę",
+      "paczka",
+      "paczki",
+      "paczkę",
+      "dostawa",
+      "dostawy",
+      "w drodze"
+    ],
+    "ru": [
+      "отправлен",
+      "отправлена",
+      "отправлено",
+      "отправление",
+      "посылка",
+      "посылки",
+      "посылку",
+      "доставка",
+      "доставки",
+      "в пути"
+    ],
+    "zh": [
+      "发货",
+      "包裹",
+      "快递",
+      "派送",
+      "物流"
+    ]
+  },
+  "mainWords": {
+    "en": [
+      "shipped",
+      "shipment",
+      "delivery",
+      "parcel",
+      "package"
+    ],
+    "de": [
+      "Sendung",
+      "Paket",
+      "Versand",
+      "Lieferung",
+      "versandt"
+    ],
+    "fr": [
+      "colis",
+      "livraison",
+      "expédié",
+      "expédition"
+    ],
+    "it": [
+      "spedizione",
+      "pacco",
+      "consegna",
+      "spedito"
+    ],
+    "es": [
+      "envío",
+      "paquete",
+      "entrega",
+      "enviado"
+    ],
+    "pt": [
+      "encomenda",
+      "entrega",
+      "envio",
+      "enviada"
+    ],
+    "nl": [
+      "pakket",
+      "verzonden",
+      "bezorging",
+      "zending"
+    ],
+    "pl": [
+      "przesyłka",
+      "paczka",
+      "dostawa",
+      "wysłane"
+    ],
+    "ru": [
+      "посылка",
+      "доставка",
+      "отправление",
+      "отправлен"
+    ],
+    "zh": [
+      "发货",
+      "包裹",
+      "快递",
+      "物流"
+    ]
+  }
+}

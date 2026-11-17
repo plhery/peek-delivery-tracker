@@ -32,7 +32,7 @@ const webConfiguration = new Set([
   'Dockerfile', '.dockerignore', '.env.example', 'next.config.ts', 'next-env.d.ts',
   'tsconfig.json', 'eslint.config.js', 'vitest.config.ts', 'vitest.server.config.ts',
   'playwright.config.ts', 'instrumentation.ts', 'instrumentation-node.ts', 'instrumentation-client.ts', 'proxy.ts',
-  'PRIVACY.md', 'SUPPORT.md',
+  'PRIVACY.md', 'TERMS.md', 'SUPPORT.md',
 ]);
 
 /** Unknown paths run everything. Only known, independent areas can skip suites. */

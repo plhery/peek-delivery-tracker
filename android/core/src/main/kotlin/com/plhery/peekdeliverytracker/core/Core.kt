@@ -325,14 +325,18 @@ class Localizer(
     /** `CustomStringConvertible.description`: a Double as Swift writes it ("1e+16", "100000000.0"). */
     private fun description(value: Any): String = if (value is Double) value.swiftDescription() else value.toString()
 
-    /** What to tell someone about an error. A connection failure is an `IOException`, as OkHttp throws it. */
-    fun errorMessage(error: Throwable): String {
+    /**
+     * What to tell someone about an error. A connection failure is an `IOException`, as OkHttp throws it. [fallback]:
+     * what a failure the app has no guidance for says, in place of the generic message, such as what the action that
+     * failed was.
+     */
+    fun errorMessage(error: Throwable, fallback: String? = null): String {
         if (error is NativeVerificationFailed) return text("door.verification.body")
         if (error is DeliveryApiError) {
             return when (error) {
                 is DeliveryApiError.AuthenticationExpired -> text("native.error.authenticationExpired")
                 is DeliveryApiError.DuplicateTracking -> text("native.error.duplicateTracking")
-                is DeliveryApiError.InvalidResponse -> text("native.error.invalidResponse")
+                is DeliveryApiError.InvalidResponse -> text(fallback ?: "native.error.invalidResponse")
                 is DeliveryApiError.LabelTooLong -> text("native.error.labelTooLong")
                 is DeliveryApiError.NotificationsDenied -> text("native.notificationsDenied")
                 is DeliveryApiError.ParcelMissing -> text("native.parcelMissing")
@@ -341,8 +345,8 @@ class Localizer(
                 is DeliveryApiError.RefreshTimeout -> text("app.refreshTimeout")
                 is DeliveryApiError.RateLimited -> text("native.error.rateLimited")
                 is DeliveryApiError.AllowanceUsed -> text("error.allowanceUsed")
-                is DeliveryApiError.Service -> serviceErrorMessage(error.serviceMessage)
-                is DeliveryApiError.ServiceFailed -> text("native.error.serviceFailed", mapOf("status" to error.status))
+                is DeliveryApiError.Service -> serviceErrorMessage(error.serviceMessage, fallback ?: "error.generic")
+                is DeliveryApiError.ServiceFailed -> fallback?.let { text(it) } ?: text("native.error.serviceFailed", mapOf("status" to error.status))
             }
         }
         if (error is DeviceLookupsSpent) return text("peek.dailyLimit")
@@ -360,7 +364,7 @@ class Localizer(
             }
         }
         if (error is IOException) return text("error.connection")
-        return text("error.generic")
+        return text(fallback ?: "error.generic")
     }
 
     private fun serviceErrorMessage(message: String, fallback: String = "error.generic"): String {

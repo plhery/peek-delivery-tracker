@@ -1,6 +1,7 @@
 import 'server-only';
 
 import PostalMime, { type Address, type Email } from 'postal-mime';
+import { carrierLink } from './carrierSender';
 
 /** What Peek keeps from an email: the text to read numbers from, which it drops after, and who sent it. */
 export interface InboundMail {
@@ -34,7 +35,11 @@ const MOST_FORWARD_LINES = 300;
 const MOST_LINE_LENGTH = 300;
 const MOST_LINKS = 100;
 const MOST_LINK_LENGTH = 2_000;
-/** How the text read for numbers is shared, within the reading's own bound (`MOST_TEXT_LENGTH`). */
+/**
+ * How the text read for numbers is shared, within the reading's own bound (`MOST_TEXT_LENGTH`). The body is read
+ * without its links' addresses, which take the links' share: a shop's email holds dozens, each of hundreds of
+ * characters, which would push its tracking number out of the body's share.
+ */
 const BODY_SHARE = 12_000;
 const LINKS_SHARE = 3_000;
 const GMAIL_FORWARDING = 'forwarding-noreply@google.com';
@@ -104,6 +109,23 @@ export function htmlText(html: string): string {
     .replace(/[ \t\f\v ]+/g, ' ')
     .replace(/ *\n[\s]*/g, '\n')
     .trim();
+}
+
+/**
+ * A web address in plain text, bare or between angle brackets: a mail app that writes an HTML email's text, as Gmail
+ * does for one forwarded by hand, puts each link's address after its words ("Suivre mon colis <https://…>").
+ */
+const TEXT_LINK = /<?https?:\/\/[^\s<>"]+>?/gi;
+
+/** The plain text with a space for each address it writes, and those addresses, as `htmlLinks` keeps them. */
+function withoutAddresses(text: string): { text: string; links: string[] } {
+  const links = new Set<string>();
+  const rest = text.replace(TEXT_LINK, (found) => {
+    const link = found.replace(/^<|>$/g, '');
+    if (link.length <= MOST_LINK_LENGTH && links.size < MOST_LINKS) links.add(link);
+    return ' ';
+  });
+  return { text: rest, links: [...links] };
 }
 
 /** The addresses the HTML links to, decoded, each on its own line: a carrier's link names its number. */
@@ -213,11 +235,14 @@ export function headerFromAddress(raw: Uint8Array): string {
 export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   const email = await PostalMime.parse(raw, { attachmentEncoding: 'arraybuffer', maxPartCount: 500, maxNestingDepth: 32 });
   const html = email.html ?? '';
-  const body = withoutPadding(email.text?.trim() ? email.text.slice(0, MOST_HTML_LENGTH) : htmlText(html));
-  const links = htmlLinks(html);
+  const plain = email.text?.trim() ? withoutAddresses(email.text.slice(0, MOST_HTML_LENGTH)) : null;
+  const body = withoutPadding(plain ? plain.text : htmlText(html));
+  const links = [...new Set([...htmlLinks(html), ...plain?.links ?? []])];
   const read: string[] = [];
   let room = LINKS_SHARE;
-  for (const link of links) {
+  // A link to a carrier's site names the parcel's number: those are read first, before the shop's own links.
+  const carriers = new Set(links.filter(carrierLink));
+  for (const link of [...carriers, ...links.filter((link) => !carriers.has(link))]) {
     if (link.length >= room) continue;
     read.push(link);
     room -= link.length + 1;

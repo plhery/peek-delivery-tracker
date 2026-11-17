@@ -3,7 +3,14 @@ import { FILTER_LANGUAGES, MAIN_SUBJECT_WORDS, SHIPPING_SUBJECT_WORDS, filterLan
 
 describe('the mail filter for shipping emails', () => {
   it('searches the subject for one language\'s words, quoting those of several words', () => {
-    expect(gmailFilter(['fr'])).toBe('subject:(expédié OR expédiée OR expédition OR colis OR livraison OR livré OR livrée OR suivi OR acheminement OR distribution OR "en route" OR "en chemin" OR "en transit")');
+    expect(gmailFilter(['fr'])).toBe('subject:(expédié OR expédiée OR expédition OR colis OR livraison OR suivi OR acheminement OR distribution OR "en route" OR "en chemin" OR "en transit")');
+  });
+
+  it('leaves out the words only a delivery confirmation writes: a delivered parcel comes too late to add', () => {
+    const every = gmailFilter(FILTER_LANGUAGES).toLowerCase();
+    for (const word of ['delivered', 'livré', 'livrée', 'zugestellt', 'geliefert', 'consegnato', 'entregado', 'entregue', 'bezorgd', 'doręczona', 'доставлен', '签收']) {
+      expect(every.split(/[ ():"]+/)).not.toContain(word);
+    }
   });
 
   it('joins the chosen languages in the order they are offered, naming a shared word once', () => {
@@ -40,7 +47,7 @@ describe('the mail filter for shipping emails', () => {
   });
 
   it('gives a one-word-at-a-time rule each language\'s main words, every first word before any second', () => {
-    expect(subjectWords(['fr'])).toEqual(['colis', 'livraison', 'expédié', 'livré', 'expédition']);
+    expect(subjectWords(['fr'])).toEqual(['colis', 'livraison', 'expédié', 'expédition']);
     expect(subjectWords(['fr', 'en']).slice(0, 4)).toEqual(['shipped', 'colis', 'shipment', 'livraison']);
     // "entrega" is Spanish and Portuguese: named once.
     expect(subjectWords(['es', 'pt']).filter((word) => word === 'entrega')).toHaveLength(1);

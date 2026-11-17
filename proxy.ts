@@ -1,6 +1,7 @@
 import { analyticsConfiguration } from './src/server/analytics';
 import { NextRequest, NextResponse } from 'next/server';
 import { createHash } from 'node:crypto';
+import { assistantsPathLanguage } from './src/assistants/paths';
 import { carrierPageLanguage, carrierPathLanguage, namesNoCarrier } from './src/carriers/paths';
 import { guidePathLanguage, namesNoGuide } from './src/guides/paths';
 import { APPEARANCE_BOOTSTRAP } from './src/lib/appearanceConfig';
@@ -8,10 +9,12 @@ import { ENTRY_HINT_BOOTSTRAP } from './src/lib/entryHintConfig';
 import { isPageOnlyLanguage, LOCALE_COOKIE, PAGE_LANGUAGE_HEADER, pathLanguage } from './src/lib/locale';
 import { MAIL_LINK_BOOTSTRAP } from './src/lib/mailLinkConfig';
 import { PHONE_APP_PATH, phoneAppDestination, phoneAppSource } from './src/lib/phoneApp';
+import { assistantsConfigured } from './src/server/assistants/settings';
 import { pageSupabaseOrigins } from './src/server/runtime';
 import { legacyHostRedirect } from './src/server/siteHosts';
 
-// The app and the static documents (the privacy notice, the help page and the accessibility page) use this exact, fixed prepaint script.
+// The app and the static documents (the privacy notice, the terms, the help page and the accessibility page) use this exact,
+// fixed prepaint script.
 const appearanceScriptHash = createHash('sha256').update(APPEARANCE_BOOTSTRAP).digest('base64');
 // The app's second prepaint script: who is about to see the landing.
 const entryHintScriptHash = createHash('sha256').update(ENTRY_HINT_BOOTSTRAP).digest('base64');
@@ -63,19 +66,22 @@ export function proxy(request: NextRequest) {
 
   // A language address such as `/de`, and a guides or carriers address such as `/de/guides/…` or `/carriers/…`
   // (English), is in its own language, whatever the browser prefers: the page is rendered as if that language had
-  // been chosen. A carrier's page in a language with pages alone, such as `/fi/carriers/…`, is in English around
-  // its text. Only the request the page reads says so. The browser's own cookie is not written, and no other
-  // address reads anything a client could not already choose.
+  // been chosen, and so is the page on connecting an assistant (`/assistants`, `/de/assistants`). A carrier's page in a
+  // language with pages alone, such as `/fi/carriers/…`, is in English around its text. Only the request the page
+  // reads says so. The browser's own cookie is not written, and no other address reads anything a client could not
+  // already choose.
   const { pathname } = request.nextUrl;
-  const language = pathLanguage(pathname) ?? guidePathLanguage(pathname) ?? carrierPathLanguage(pathname);
+  const assistants = assistantsPathLanguage(pathname);
+  const language = pathLanguage(pathname) ?? guidePathLanguage(pathname) ?? carrierPathLanguage(pathname) ?? assistants;
   if (language) request.cookies.set(LOCALE_COOKIE, language);
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-nonce', nonce);
   requestHeaders.set('Content-Security-Policy', contentSecurityPolicy);
   // An address below a language's guides that names none of them is the site's 404 page, written whole by the
-  // server, and so is one below its carriers that names no carrier written in that language.
-  const missing = namesNoGuide(pathname) || namesNoCarrier(pathname);
+  // server, and so is one below its carriers that names no carrier written in that language, and the page on
+  // connecting an assistant where none can connect.
+  const missing = namesNoGuide(pathname) || namesNoCarrier(pathname) || (assistants !== null && !assistantsConfigured());
   // A carrier's page in a language with pages alone declares its text's language for the whole document, and the
   // page learns which from here alone: a client's own header is never passed on.
   const written = carrierPageLanguage(pathname);
@@ -93,21 +99,23 @@ export const config = {
   matcher: [
     {
       // The example email is not a page of the app: it answers with a policy and a lifetime of its own.
-      // Nor are the files written for crawlers, which every host answers itself, the IndexNow key's among them.
+      // Nor are the files written for crawlers and other sites' checks, which every host answers itself, the IndexNow key's among them.
       // Nor are the map's tiles, which are kept like the scripts, nor what assistants call from their servers.
-      source: '/((?!api|health|_next/static|_next/image|icons|atlas|sw\\.js|push-sw\\.js|og(?:-[a-z]{2}(?:-[a-z]{2})?)?\\.png|favicon\\.ico|robots\\.txt|sitemap\\.xml|[0-9a-f]{32}\\.txt|\\.well-known/(?:apple-app-site-association|assetlinks\\.json|oauth-)|mcp|oauth/(?:token|register|revoke)|email/example).*)',
+      source: '/((?!api|health|_next/static|_next/image|icons|atlas|sw\\.js|push-sw\\.js|og(?:-[a-z]{2}(?:-[a-z]{2})?)?\\.png|favicon\\.ico|robots\\.txt|sitemap\\.xml|[0-9a-f]{32}\\.txt|\\.well-known/(?:apple-app-site-association|assetlinks\\.json|oauth-|openai-apps-challenge)|mcp|oauth/(?:token|register|revoke)|email/example).*)',
       missing: [
         { type: 'header', key: 'next-router-prefetch' },
         { type: 'header', key: 'purpose', value: 'prefetch' },
       ],
     },
-    // A language address, the guides and the carriers' pages are always answered from here, a prefetch too: this is
-    // where the page learns its language.
+    // A language address, the guides, the carriers' pages and the page on connecting an assistant are always answered
+    // from here, a prefetch too: this is where the page learns its language.
     { source: '/:language(de|fr|it|es|pt|pt-br|pl|ru|zh)' },
     { source: '/guides/:path*' },
     { source: '/:language(de|fr|it|es|pt|pl)/guides/:path*' },
     { source: '/carriers/:path*' },
     { source: '/:language(de|fr|it|es|pt|pt-br|pl|ru|zh)/carriers/:path*' },
+    { source: '/assistants' },
+    { source: '/:language(de|fr|it|es|pt|pt-br|pl|ru|zh)/assistants' },
     // The languages with pages alone (`PAGE_ONLY_LANGUAGES`), written out: the matcher is read before the app runs.
     { source: '/:language(nl|sv|da|nb|fi|cs|sk|hu|ro|bg|el|hr|sl|lt|lv|et|uk|sr)/carriers/:path*' },
   ],

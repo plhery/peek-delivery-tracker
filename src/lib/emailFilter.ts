@@ -1,23 +1,16 @@
+import rules from '../../shared/email-filter.json';
+
 /**
  * The words a shipping email's subject uses, by the language it is written in: what a shop or a carrier writes when a
- * parcel leaves, travels and arrives. A mail filter made of them forwards those emails and little else.
+ * parcel leaves and travels. A mail filter made of them forwards those emails and little else. The iPhone and Android
+ * read the same file.
  *
  * Gmail matches whole words: it ignores case and accents and takes a plural in "s", but no other ending, so each
  * form a subject uses is listed. Words that mostly name something else are left out, such as "order" and the words
- * for "sent" that a bank or a form also writes.
+ * for "sent" that a bank or a form also writes, and so are those only a delivery confirmation writes ("delivered",
+ * "livré", "zugestellt"): once a parcel is delivered, adding it is too late.
  */
-export const SHIPPING_SUBJECT_WORDS = {
-  en: ['shipped', 'dispatched', 'shipment', 'shipping', 'parcel', 'package', 'delivery', 'delivered', 'tracking', 'on its way', 'on the way'],
-  de: ['versandt', 'versendet', 'verschickt', 'Versand', 'Versandbestätigung', 'Sendung', 'Sendungsverfolgung', 'Paket', 'Lieferung', 'geliefert', 'zugestellt', 'Zustellung', 'unterwegs'],
-  fr: ['expédié', 'expédiée', 'expédition', 'colis', 'livraison', 'livré', 'livrée', 'suivi', 'acheminement', 'distribution', 'en route', 'en chemin', 'en transit'],
-  it: ['spedito', 'spedita', 'spedizione', 'pacco', 'consegna', 'consegnato', 'consegnata', 'tracciamento'],
-  es: ['enviado', 'envío', 'paquete', 'entrega', 'entregado', 'seguimiento', 'en camino', 'en reparto'],
-  pt: ['enviado', 'enviada', 'envio', 'expedida', 'encomenda', 'pacote', 'entrega', 'entregue', 'rastreio', 'rastreamento', 'a caminho'],
-  nl: ['verzonden', 'verzending', 'zending', 'pakket', 'pakketje', 'bezorging', 'bezorgd', 'levering', 'geleverd', 'onderweg'],
-  pl: ['wysłane', 'wysłana', 'wysłano', 'wysyłka', 'przesyłka', 'przesyłki', 'przesyłkę', 'paczka', 'paczki', 'paczkę', 'dostawa', 'dostawy', 'doręczona', 'doręczono', 'w drodze'],
-  ru: ['отправлен', 'отправлена', 'отправлено', 'отправление', 'посылка', 'посылки', 'посылку', 'доставка', 'доставки', 'доставлен', 'доставлена', 'в пути'],
-  zh: ['发货', '包裹', '快递', '派送', '签收', '物流'],
-} as const satisfies Record<string, readonly string[]>;
+export const SHIPPING_SUBJECT_WORDS = rules.words;
 
 export type FilterLanguage = keyof typeof SHIPPING_SUBJECT_WORDS;
 
@@ -25,18 +18,7 @@ export type FilterLanguage = keyof typeof SHIPPING_SUBJECT_WORDS;
  * The few words of each language that most shipping subjects hold, the most telling first. A mail service whose
  * rule takes its words one at a time, or one a rule, is given these rather than the whole list.
  */
-export const MAIN_SUBJECT_WORDS = {
-  en: ['shipped', 'shipment', 'delivery', 'parcel', 'package'],
-  de: ['Sendung', 'Paket', 'Versand', 'Lieferung', 'zugestellt'],
-  fr: ['colis', 'livraison', 'expédié', 'livré', 'expédition'],
-  it: ['spedizione', 'pacco', 'consegna', 'spedito'],
-  es: ['envío', 'paquete', 'entrega', 'enviado'],
-  pt: ['encomenda', 'entrega', 'envio', 'enviada'],
-  nl: ['pakket', 'verzonden', 'bezorging', 'zending'],
-  pl: ['przesyłka', 'paczka', 'dostawa', 'wysłane'],
-  ru: ['посылка', 'доставка', 'отправление', 'отправлен'],
-  zh: ['发货', '包裹', '快递', '物流'],
-} as const satisfies Record<FilterLanguage, readonly string[]>;
+export const MAIN_SUBJECT_WORDS: Record<FilterLanguage, readonly string[]> = rules.mainWords;
 
 /** The languages a filter can take, in the order they are offered. */
 export const FILTER_LANGUAGES = Object.keys(SHIPPING_SUBJECT_WORDS) as FilterLanguage[];
@@ -72,8 +54,11 @@ export function gmailFilter(languages: readonly FilterLanguage[]): string {
   return words.size ? `subject:(${[...words.values()].join(' OR ')})` : '';
 }
 
-/** Gmail's forwarding settings, where it adds a forwarding address (Settings › See all settings › Forwarding and POP/IMAP). */
-export const GMAIL_FORWARDING_LINK = 'https://mail.google.com/mail/#settings/fwdandpop';
+/**
+ * Gmail's settings (Settings › See all settings), from which the reader opens Forwarding and POP/IMAP. A link straight
+ * to that tab (`#settings/fwdandpop`), or a reload of it, can show the tab without its "Add a forwarding address" button.
+ */
+export const GMAIL_SETTINGS_LINK = 'https://mail.google.com/mail/#settings/general';
 
 /**
  * The main words of these languages, for a rule that asks "subject includes" (MAIN_SUBJECT_WORDS). Each language's

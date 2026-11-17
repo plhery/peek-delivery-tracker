@@ -255,20 +255,31 @@ describe('the MCP endpoint', () => {
     expect((await mcp(connect(['parcels:read'], otherUser), 'tools/list')).status).toBe(403);
   });
 
-  it('lists the tools a token\'s scopes allow, each request on its own', async () => {
+  it('lists every tool to every grant, each request on its own, each naming the scope it needs', async () => {
     const reader = connect(['parcels:read']);
     const writer = connect(['parcels:read', 'parcels:write']);
     const started = await mcp(reader, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });
     expect(started.status).toBe(200);
-    expect((await rpc(started)).result).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek' }, capabilities: { tools: {} } });
-    const names = async (secret: string, era?: 'legacy' | 'modern') => {
+    const initialized = (await rpc(started)).result!;
+    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek' }, capabilities: { tools: {} } });
+    // The instructions send the model to Peek's own tools alone, never to another connector.
+    expect(initialized.instructions).toContain('add_parcels');
+    expect(initialized.instructions).not.toMatch(/gmail|connector|plugin/i);
+    const listed = async (secret: string, era?: 'legacy' | 'modern') => {
       const response = await mcp(secret, 'tools/list', {}, era);
       expect(response.status).toBe(200);
-      return (await rpc(response)).result!.tools!.map(({ name }) => name).sort();
+      const tools = (await rpc(response)).result!.tools! as Array<{ name: string; _meta?: { securitySchemes?: unknown } }>;
+      return Object.fromEntries(tools.map(({ name, _meta }) => [name, _meta?.securitySchemes]));
     };
-    expect(await names(reader)).toEqual(['get_parcel', 'list_parcels']);
-    expect(await names(writer)).toEqual(['add_parcels', 'archive_parcel', 'get_parcel', 'list_parcels']);
-    expect(await names(reader, 'modern')).toEqual(['get_parcel', 'list_parcels']);
+    const schemes = {
+      add_parcels: [{ type: 'oauth2', scopes: ['parcels:write'] }],
+      archive_parcel: [{ type: 'oauth2', scopes: ['parcels:write'] }],
+      get_parcel: [{ type: 'oauth2', scopes: ['parcels:read'] }],
+      list_parcels: [{ type: 'oauth2', scopes: ['parcels:read'] }],
+    };
+    expect(await listed(reader)).toEqual(schemes);
+    expect(await listed(writer)).toEqual(schemes);
+    expect(await listed(reader, 'modern')).toEqual(schemes);
   });
 
   it('can archive a parcel but never delete one: these four tools, none destructive, and a token API that only reads', async () => {
@@ -476,10 +487,37 @@ describe('the MCP endpoint', () => {
     });
     expect(answer.result!.content![0]!.text).toContain(`${UPS} (UPS): added`);
 
-    const reader = connect(['parcels:read']);
-    expect((await call(reader, 'add_parcels', { text: UPS })).error).toMatchObject({ code: -32602 });
-    expect((await call(writer, 'list_parcels')).error).toMatchObject({ code: -32602 });
     expect(addParcelsFromText).toHaveBeenCalledTimes(1);
+  });
+
+  it('answers a call outside the token\'s scopes with the challenge that asks for a new sign-in', async () => {
+    const list = vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
+    const archive = vi.spyOn(service, 'archivePackage').mockResolvedValue(undefined);
+    const challenge = (description: string) => 'Bearer resource_metadata="https://peek.example/.well-known/oauth-protected-resource/mcp", '
+      + `scope="parcels:read parcels:write", error="insufficient_scope", error_description="${description}"`;
+    const reader = connect(['parcels:read']);
+    for (const era of ['legacy', 'modern'] as const) {
+      for (const [name, args] of [['add_parcels', { text: UPS }], ['archive_parcel', { parcel: UPS }]] as const) {
+        const refused = await call(reader, name, args, era);
+        expect(refused.result).toMatchObject({
+          isError: true,
+          content: [{ type: 'text', text: expect.stringContaining('allow it to add and archive parcels') }],
+          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add or archive parcels')] },
+        });
+      }
+    }
+    const writer = connect(['parcels:write']);
+    for (const [name, args] of [['list_parcels', {}], ['get_parcel', { parcel: UPS }]] as const) {
+      expect((await call(writer, name, args)).result).toMatchObject({
+        isError: true,
+        _meta: { 'mcp/www_authenticate': [challenge('This connection may not see parcels')] },
+      });
+    }
+    expect(addParcelsFromText).not.toHaveBeenCalled();
+    expect(list).not.toHaveBeenCalled();
+    expect(archive).not.toHaveBeenCalled();
+    // A tool Peek doesn't have is still a protocol error.
+    expect((await call(reader, 'delete_parcel', { parcel: UPS })).error).toMatchObject({ code: -32602 });
   });
 
   it('reads and archives only the caller\'s own parcels, by id or by tracking number', async () => {

@@ -1,60 +1,13 @@
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { assistantsPath } from '../assistants/paths';
+import { ASSISTANT_SETUPS, setupSteps, SetupText } from '../assistants/setups';
 import type { ApiAssistantConnection, ApiAssistantScope, ApiAssistantsResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
 import type { ApiAuth } from '../lib/apiClient';
 import { readAssistants, revokeAssistant } from '../lib/assistants';
-import { localizedRelativeTime, type MessageKey, type Translate } from '../lib/messages';
+import { localizedRelativeTime, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
-
-/** A line of a setup: its text, and the names of the assistant's menus and buttons its `{{…}}` stand for. */
-type SetupLine = readonly [MessageKey, Readonly<Record<string, string>>?];
-
-/**
- * How to add Peek to each assistant, from its own help pages: Anthropic's "Get started with custom connectors using
- * remote MCP", OpenAI's "Add custom MCP server" and "Connect and test your plugin", and Google's "Connect & manage
- * custom apps for Gemini Apps". Their menus and buttons are named in English, as those pages give them; `who` says
- * which plans and places can. Peek's own sign-in step ends each.
- */
-const SETUPS: ReadonlyArray<{ name: string; who: SetupLine; steps: readonly SetupLine[] }> = [
-  {
-    name: 'Claude',
-    who: ['assistants.setup.claude.who', { connect: 'Connect', connectors: 'Customize › Connectors' }],
-    steps: [
-      ['assistants.setup.claude.open', { connectors: 'Customize › Connectors', add: '+ Add', custom: 'Add custom connector' }],
-      ['assistants.setup.claude.add', { continue: 'Continue', add: 'Add' }],
-      ['assistants.setup.claude.use', { plus: '+', connectors: 'Connectors' }],
-    ],
-  },
-  {
-    name: 'ChatGPT',
-    who: ['assistants.setup.chatgpt.who'],
-    steps: [
-      ['assistants.setup.chatgpt.open', { plugins: 'chatgpt.com/plugins', plus: '+', custom: 'Add custom MCP server' }],
-      ['assistants.setup.chatgpt.add', { oauth: 'OAuth', accept: 'I understand and want to continue', create: 'Create as a plugin' }],
-      ['assistants.setup.chatgpt.use', { plus: '+' }],
-    ],
-  },
-  {
-    name: 'Gemini',
-    who: ['assistants.setup.gemini.who'],
-    steps: [
-      ['assistants.setup.gemini.open', { settings: 'Settings', apps: 'Connected Apps' }],
-      ['assistants.setup.gemini.add', { custom: 'Custom apps', next: 'Next' }],
-      ['assistants.setup.gemini.use'],
-    ],
-  },
-];
-
-/** A setup line's text, with the assistant's own names in bold where the translation puts `{{…}}`. */
-function SetupText({ text, labels = {} }: { text: string; labels?: Readonly<Record<string, string>> }) {
-  return <>{text.split(/(\{\{\w+\}\})/).map((piece, index) => {
-    const label = labels[piece.slice(2, -2)];
-    return piece.startsWith('{{') && label !== undefined
-      ? <strong key={index} className="add-by-email__ui" translate="no">{label}</strong>
-      : <Fragment key={index}>{piece}</Fragment>;
-  })}</>;
-}
 
 /**
  * Each assistant's steps to add Peek, folded under its name, then a line for any other assistant. Signing in to Peek is
@@ -62,11 +15,10 @@ function SetupText({ text, labels = {} }: { text: string; labels?: Readonly<Reco
  */
 function Setups() {
   const { t } = useI18n();
-  const signIn: SetupLine = ['assistants.setup.signIn', { allow: t('assistants.consent.allow') }];
   return <section className="settings-group" aria-labelledby="assistants-setup"><h3 className="settings-group__title" id="assistants-setup">{t('assistants.setup')}</h3>
     <div className="settings-box">
-      {SETUPS.map(({ name, who, steps }) => {
-        const lines = [...steps.slice(0, -1), signIn, ...steps.slice(-1)];
+      {ASSISTANT_SETUPS.map(({ name, who, steps }) => {
+        const lines = setupSteps(t, steps);
         return <details key={name} className="assistants__setup">
           <summary className="settings-row"><span translate="no">{name}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
           <div className="assistants__setup-body">
@@ -135,7 +87,8 @@ function Connection({ connection, working, onRevoke }: {
 
 /**
  * The assistants' page in Settings: the address to give an assistant, how to add it to Claude, ChatGPT and Gemini, what
- * to ask one, and the ones connected. Personal tokens have no screen: the server makes none while they are off.
+ * to ask one, and the ones connected. Its first lines lead to the public page on connecting an assistant, in a tab of
+ * its own, which says the same and more. Personal tokens have no screen: the server makes none while they are off.
  */
 export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
   apiAuth: ApiAuth;
@@ -143,7 +96,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
   onChange: (next: ApiAssistantsResponse) => void;
   onBusy?: (busy: boolean) => void;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -168,7 +121,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
   })();
 
   return <>
-    <p className="settings-description">{t('assistants.intro')}</p>
+    <p className="settings-description">{t('assistants.intro')} <a href={assistantsPath(locale)} target="_blank" rel="noopener">{t('assistants.page.link')}</a></p>
     {error && <p className="sheet__error" role="alert">{error}</p>}
     <section className="settings-group" aria-labelledby="assistants-address"><h3 className="settings-group__title" id="assistants-address">{t('assistants.address')}</h3>
       <div className="settings-box">

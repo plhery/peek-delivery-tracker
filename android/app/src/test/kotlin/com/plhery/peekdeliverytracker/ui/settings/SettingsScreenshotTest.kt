@@ -55,7 +55,8 @@ import org.robolectric.annotation.GraphicsMode
  * as a phone's bars, in light and dark: an account's, a guest's with parcels, the demo's, the data page an account's
  * and the demo's, also on a tablet, and Delivery updates an account's and the demo's; an account's at the largest text
  * and the demo's scrolled to its foot there; the iPad's form on a tablet both ways and the page sheet on an unfolded
- * foldable; the delete alert with the address typed and the demo's reset alert.
+ * foldable; the delete alert with the address typed and the demo's reset alert; Add parcels by email's row, its page
+ * in light and dark, and Gmail's steps open on its confirmation.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -277,6 +278,47 @@ class SettingsScreenshotTest {
         show(bars = Bars(top = 24, bottom = 24))
         compose.screenshot("settings_tablet_landscape")
     }
+
+    /** An account the server offers a forwarding address: Add parcels by email under Delivery updates, with its badge. */
+    @Test
+    fun anAccountOfferedAddingByEmail() {
+        show { addByEmailClient.offer = AddByEmailFixtures.offer(inbox = null) }
+        compose.screenshot("settings_inbox_row_light")
+    }
+
+    /**
+     * AddByEmailPage with its address: the intro, the address to copy or share, the last emails with the note on shops
+     * without a number and the day's emails, the steps folded, then the new address and turning off.
+     */
+    @Test
+    fun addByEmail() {
+        show { addByEmailClient.offer = inboxOffer() }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        compose.screenshot("settings_inbox_light")
+    }
+
+    @Test
+    fun addByEmailInDark() {
+        show(dark = true) { addByEmailClient.offer = inboxOffer() }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        compose.screenshot("settings_inbox_dark")
+    }
+
+    /** Gmail's confirmation come in: the steps open on Gmail, scrolled down to its link and code, then the filter. */
+    @Test
+    fun addByEmailGmailsConfirmation() {
+        show {
+            addByEmailClient.offer = AddByEmailFixtures.offer(
+                AddByEmailFixtures.mailbox(recent = AddByEmailFixtures.recent.take(1), confirmation = AddByEmailFixtures.confirmation),
+            )
+        }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        compose.onNodeWithTag(ADD_BY_EMAIL_FILTER).performScrollTo()
+        settle()
+        compose.screenshot("settings_inbox_gmail_light")
+    }
+
+    private fun inboxOffer() = AddByEmailFixtures.offer(AddByEmailFixtures.mailbox(recent = AddByEmailFixtures.recent, usedToday = 31))
 
     /** Not side by side there, so not a form: the iPad's page sheet. */
     @Test

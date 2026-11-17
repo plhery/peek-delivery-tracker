@@ -45,6 +45,8 @@ interface AuthState {
   signInWithOidc: () => Promise<void>;
   sendCode: (email: string) => Promise<void>;
   verifyCode: (email: string, code: string) => Promise<void>;
+  /** Signs in with the account's password. Only a directory's review account has one, and only the consent page asks. */
+  signInWithPassword: (email: string, password: string) => Promise<void>;
   getAccessToken: (refresh?: boolean) => Promise<string | null>;
   signOut: () => Promise<void>;
 }
@@ -299,6 +301,19 @@ export function AuthProvider({
     acceptSession(data.session);
   }, [client, requestClient, acceptSession, storage]);
 
+  const signInWithPassword = useCallback(async (email: string, password: string) => {
+    const { auth } = client ?? await requestClient();
+    await logout.current;
+    storage?.allowSignIn();
+    signingIn.current = true;
+    const { data, error } = await auth.signInWithPassword({ email, password });
+    if (error || !data.session) {
+      signingIn.current = false;
+      throw error ?? new Error('The password did not create a session');
+    }
+    acceptSession(data.session);
+  }, [client, requestClient, acceptSession, storage]);
+
   const signOut = useCallback(async () => {
     if (!configured) return;
     if (logout.current) return logout.current;
@@ -346,6 +361,7 @@ export function AuthProvider({
       signInWithOidc,
       sendCode,
       verifyCode,
+      signInWithPassword,
       getAccessToken,
       signOut,
     }),
@@ -360,6 +376,7 @@ export function AuthProvider({
       signInWithOidc,
       sendCode,
       verifyCode,
+      signInWithPassword,
       getAccessToken,
       signOut,
     ],

@@ -1325,3 +1325,26 @@ describe('database errors', () => {
     }
   });
 });
+
+describe('emails to a forwarding address', () => {
+  it('keeps an email as its bytes, forgets the old ones, and names only a parcel without a name', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request')
+      .mockResolvedValueOnce(true).mockResolvedValueOnce(4).mockResolvedValueOnce([{ id: 'parcel' }]).mockResolvedValueOnce([]);
+    const raw = new TextEncoder().encode('Subject: Shipped\r\n\r\nOn its way');
+    // A view into a larger buffer: only its own bytes go.
+    const view = new Uint8Array([0, ...raw, 0]).subarray(1, raw.length + 1);
+    await expect(client.keepInboundMail('owner', view)).resolves.toBe(true);
+    expect(request).toHaveBeenNthCalledWith(1, '/rest/v1/rpc/keep_inbound_mail', {
+      method: 'POST', body: { p_user_id: 'owner', p_raw: Buffer.from(raw).toString('base64') },
+    });
+    await expect(client.forgetOldInboundMail()).resolves.toBe(4);
+    expect(request).toHaveBeenNthCalledWith(2, '/rest/v1/rpc/forget_old_inbound_mail', { method: 'POST', body: {} });
+    await expect(client.nameUnnamedPackage('owner', 'parcel', 'Example Shop')).resolves.toBe(true);
+    await expect(client.nameUnnamedPackage('owner', 'parcel', 'Example Shop')).resolves.toBe(false);
+    const [path, options] = request.mock.calls[2];
+    const params = new URL(`https://database.example${path}`).searchParams;
+    expect([params.get('id'), params.get('user_id'), params.get('label')]).toEqual(['eq.parcel', 'eq.owner', 'eq.']);
+    expect(options).toEqual({ method: 'PATCH', body: { label: 'Example Shop' }, prefer: 'return=representation' });
+  });
+});

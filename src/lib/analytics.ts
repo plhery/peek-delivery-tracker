@@ -169,9 +169,9 @@ async function flush() {
 
 /**
  * A guides page counts under its language and the guide's id, never its address: `guides/fr`, `guides/fr/<id>`.
- * A carrier's page does the same: `carriers/fr`, `carriers/fr/<id>`.
+ * A carrier's page does the same: `carriers/fr`, `carriers/fr/<id>`; and the page on connecting an assistant, `assistants/fr`.
  */
-const GUIDE_SCREEN = new RegExp(`^(?:guides|carriers)/(?:${SUPPORTED_LOCALES.join('|')})(?:/[a-z0-9]+(?:-[a-z0-9]+)*)?$`);
+const GUIDE_SCREEN = new RegExp(`^(?:(?:guides|carriers)/(?:${SUPPORTED_LOCALES.join('|')})(?:/[a-z0-9]+(?:-[a-z0-9]+)*)?|assistants/(?:${SUPPORTED_LOCALES.join('|')}))$`);
 
 export function trackScreen(next: string, nextMode: Event['mode'] = mode) {
   if (!catalog.screens.includes(next) && !GUIDE_SCREEN.test(next)) return;

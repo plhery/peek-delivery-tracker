@@ -56,6 +56,8 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LifecycleEventEffect
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.NotificationPreset
@@ -151,7 +153,8 @@ internal fun AccountSheetHost(state: AccountHost) {
     val root = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
     val data = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
     val updates = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
-    val scrolls = remember(root, data, updates) { SettingsScrolls(root, data, updates) }
+    val inbox = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
+    val scrolls = remember(root, data, updates, inbox) { SettingsScrolls(root, data, updates, inbox) }
     Sheet(
         visible = state.showingAccount,
         onDismiss = state::closeAccount,
@@ -163,9 +166,10 @@ internal fun AccountSheetHost(state: AccountHost) {
             nav.confirmation.value = ""
             work.forget(SETTINGS_PAGE)
             work.forget(DELIVERY_UPDATES_PAGE)
+            work.forget(ADD_BY_EMAIL_PAGE)
             openings++
         },
-        dismissible = !work.working(SETTINGS_PAGE),
+        dismissible = !work.working(SETTINGS_PAGE) && !work.working(ADD_BY_EMAIL_PAGE),
         page = !state.sheetsAsForms,
         lit = true,
     ) {
@@ -178,22 +182,33 @@ internal fun AccountSheetHost(state: AccountHost) {
 /** What AccountView keeps through a window made again: the page pushed, the alert open and the address typed in it. */
 internal class SettingsNav(val pushed: MutableState<String?>, val alert: MutableState<String?>, val confirmation: MutableState<String>)
 
-private class SettingsScrolls(val root: ScrollState, val data: ScrollState, val updates: ScrollState)
+private class SettingsScrolls(val root: ScrollState, val data: ScrollState, val updates: ScrollState, val inbox: ScrollState)
 
 /**
- * AccountView's `NavigationStack`: Settings, and the data page or Delivery updates pushed over it, coming in from the
- * trailing side as Settings goes a third of the way out to the leading one, and back the same way from the bar's ‹, the
- * system's back (whose gesture it follows) or a drag from the leading edge; under Reduce Motion one fades into the
- * other. What it asked going well closes the sheet (`finish()`), and the export, once written, goes to the share sheet.
+ * AccountView's `NavigationStack`: Settings, and the data page, Delivery updates or Add parcels by email pushed over it,
+ * coming in from the trailing side as Settings goes a third of the way out to the leading one, and back the same way
+ * from the bar's ‹, the system's back (whose gesture it follows) or a drag from the leading edge; under Reduce Motion
+ * one fades into the other. What it asked going well closes the sheet (`finish()`), and the export, once written, goes
+ * to the share sheet. For an account, it reads whether the server offers it a forwarding address as it opens, and again
+ * as the reader comes back to the app (`.onChange(of: scenePhase)`); the page goes back where the offer went.
  */
 @Composable
 private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsScrolls) {
     val source = state.source
     val work = source.pageWork
     val working = work.working(SETTINGS_PAGE)
+    val inboxWorking = work.working(ADD_BY_EMAIL_PAGE)
+    val busy = working || inboxWorking
     val reduceMotion = PeekTheme.reduceMotion
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val session by source.session.collectAsState()
+    val account = (session as? AuthenticationState.SignedIn)?.user?.id
+    val offered by source.addByEmail.offerFlow.collectAsState()
+    val inboxOffered = account != null && offered?.account == account
+    // Read first, then the return's read again, which the read just begun makes wait.
+    LaunchedEffect(account) { if (account != null) source.addByEmail.read(account) }
+    LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { account?.let { scope.launch { source.addByEmail.readAgain(it) } } }
     val pushed = nav.pushed.value
     var drawn by remember { mutableStateOf(pushed) }
     if (pushed != null) drawn = pushed
@@ -219,11 +234,15 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
         shareExport(context, exported)
     }
     val rowFocus = remember { AccessibilityFocus() }
+    val inboxFocus = remember { AccessibilityFocus() }
     val pop = {
+        val from = nav.pushed.value
         nav.pushed.value = null
-        rowFocus.request()
+        if (from == PAGE_INBOX) inboxFocus.request() else rowFocus.request()
     }
-    PredictiveBackHandler(enabled = pushed != null && !working) { progress ->
+    // The offer gone, for this account or another, its page goes too.
+    LaunchedEffect(pushed, inboxOffered) { if (pushed == PAGE_INBOX && !inboxOffered) nav.pushed.value = null }
+    PredictiveBackHandler(enabled = pushed != null && !busy) { progress ->
         try {
             progress.collect { if (!reduceMotion) push.snapTo(1f - it.progress) }
             pop()
@@ -241,17 +260,18 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
                     if (reduceMotion) alpha = 1f - push.value else translationX = -push.value * size.width * PUSH_PARALLAX
                 },
             ) {
-                SettingsRootPage(state, scrolls.root, working, rowFocus) { nav.pushed.value = it }
+                SettingsRootPage(state, scrolls.root, working, rowFocus, inboxFocus, inboxOffered) { nav.pushed.value = it }
             }
             val page = drawn
             if (page != null && (pushed != null || shownPage)) {
                 Box(
                     Modifier
                         .graphicsLayer { if (reduceMotion) alpha = push.value else translationX = (1f - push.value) * size.width }
-                        .edgeSwipeBack(enabled = !working, push = push, onBack = pop),
+                        .edgeSwipeBack(enabled = !busy, push = push, onBack = pop),
                 ) {
                     when (page) {
                         PAGE_DATA -> AccountDataPage(state, nav, scrolls.data, working, onBack = pop)
+                        PAGE_INBOX -> if (account != null) AddByEmailPage(state, account, scrolls.inbox, onBack = pop)
                         else -> DeliveryUpdatesPage(state, scrolls.updates, onBack = pop)
                     }
                 }
@@ -314,9 +334,10 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
 /**
  * AccountView's `page`: "settings.title" as a large title under the bar, which goes under it as the page scrolls and
  * comes back as the bar's inline title, Close at the bar's leading end, off while the data page waits; then the
- * profile (the account, or the way to one), the deliveries' updates for an account and the widget's switch, the
- * appearance, the language, the time format and the distance units, and the data's row over the site's, 24 apart and
- * 24 in, 520 wide at most, on the app's ground. It loads the notifications' state as it opens (`.task`).
+ * profile (the account, or the way to one), the deliveries' updates for an account, Add parcels by email where the
+ * server offers it the account ([inboxOffered], with its "Experimental" badge) and the widget's switch, the appearance,
+ * the language, the time format and the distance units, and the data's row over the site's, 24 apart and 24 in, 520
+ * wide at most, on the app's ground. It loads the notifications' state as it opens (`.task`).
  */
 @Composable
 private fun SettingsRootPage(
@@ -324,6 +345,8 @@ private fun SettingsRootPage(
     scroll: ScrollState,
     working: Boolean,
     rowFocus: AccessibilityFocus,
+    inboxFocus: AccessibilityFocus,
+    inboxOffered: Boolean,
     onPush: (String) -> Unit,
 ) {
     val source = state.source
@@ -383,6 +406,16 @@ private fun SettingsRootPage(
                                 localized("settings.deliveryUpdates"), SETTINGS_DELIVERY_UPDATES, { onPush(PAGE_UPDATES) },
                                 symbol = "bell", value = summary, chevron = true,
                             )
+                            SettingsDivider()
+                        }
+                        // Only once the server offers the account a forwarding address.
+                        if (inboxOffered) {
+                            Box(Modifier.accessibilityFocus(inboxFocus)) {
+                                SettingsButtonRow(
+                                    localized("inbox.row"), SETTINGS_ADD_BY_EMAIL, { onPush(PAGE_INBOX) },
+                                    symbol = "envelope", chevron = true, badge = localized("inbox.experimental"),
+                                )
+                            }
                             SettingsDivider()
                         }
                         SettingsToggleRow(
@@ -742,6 +775,7 @@ internal val DELIVERY_UPDATES_PAGE: UUID = UUID.fromString("5e771465-0000-4000-8
 
 internal const val PAGE_DATA = "data"
 internal const val PAGE_UPDATES = "deliveryUpdates"
+internal const val PAGE_INBOX = "addByEmail"
 private const val ALERT_FORGET = "forget"
 private const val ALERT_RESET = "reset"
 private const val ALERT_DELETE = "delete"
@@ -780,6 +814,7 @@ internal const val SETTINGS_CLOSE = "$SETTINGS_SHEET.close"
 internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
+internal const val SETTINGS_ADD_BY_EMAIL = "$SETTINGS_SHEET.addByEmail"
 internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
 internal const val SETTINGS_MARK_NEW_UPDATES = "$SETTINGS_SHEET.markNewUpdates"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"

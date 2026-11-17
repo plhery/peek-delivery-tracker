@@ -546,6 +546,21 @@ export class SyncJobWorker {
       });
     }
     try {
+      // An email forwarded to an account's address is kept seven days.
+      const forgotten = await this.service.client.forgetOldInboundMail();
+      if (forgotten > 0) logOperationalEvent('inbound_mail_forgotten', { emails: forgotten });
+    } catch (maintenanceError) {
+      logOperationalEvent('inbound_mail_maintenance_failed', {
+        error_type: errorType(maintenanceError),
+      }, 'error');
+      captureOperationalError(maintenanceError, {
+        component: 'inbound-email',
+        operation: 'maintenance',
+        jobId,
+        trigger: kind,
+      });
+    }
+    try {
       // The usage dashboard's counts for today, and the last additions of yesterday.
       await this.service.client.recordUsageMetrics();
     } catch (maintenanceError) {

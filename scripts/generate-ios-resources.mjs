@@ -89,6 +89,8 @@ const outputs = new Map([
     ...JSON.parse(fs.readFileSync(path.join(root, 'shared', 'reading.json'), 'utf8')),
     candidates: TRACKING_CANDIDATE_PATTERNS.map(({ source, flags }) => ({ source, flags })),
   }, null, 2)}\n`],
+  // The words a shipping email's subject uses, from which Settings builds the mail filter as the web does.
+  ['EmailFilter.json', `${JSON.stringify(JSON.parse(fs.readFileSync(path.join(root, 'shared', 'email-filter.json'), 'utf8')), null, 2)}\n`],
   // Replayed by the native detection test so the Swift port cannot drift from the shared engine.
   ['DetectionGolden.json', fs.readFileSync(fileURLToPath(import.meta.resolve('universal-parcel-scraper/data/detection-golden.json')), 'utf8')],
   // Replayed against each Swift checksum so none can drift from its TypeScript validator.

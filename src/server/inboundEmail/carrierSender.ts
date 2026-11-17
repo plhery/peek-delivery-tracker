@@ -95,6 +95,12 @@ export function carriersOfAddress(address: string): readonly CarrierId[] {
   return known.domains.get(found.name)?.size === 1 || new Set(named.map((carrier) => carrier.split('-')[0])).size === 1 ? named : [];
 }
 
+/** Whether a link leads to a carrier's own site, as its emails' addresses do (carriersOfAddress): a parcel's page there. */
+export function carrierLink(link: string): boolean {
+  const name = host(link);
+  return Boolean(name) && carriersOfAddress(`@${name}`).length > 0;
+}
+
 /** The names the carriers go by, which their emails write where a shop's would stand. */
 export function carrierNames(carriers: readonly CarrierId[]): string[] {
   return carriers.flatMap((carrier) => {

@@ -126,6 +126,63 @@ describe('the numbers a shipping email names', () => {
   });
 });
 
+describe('a shop\'s order email forwarded by hand from Gmail', () => {
+  // A made-up DPD-shaped number, and a shop's mail system's click-tracking links, each some 420 characters long.
+  const DPD = '01234567890123';
+  const link = (index: number) => `https://t.email.shop.example/r/?id=h${String(index).padStart(6, '0')}${'a1b2c3d4'.repeat(5)},${'e5f6'.repeat(40)}&p1=${'Q2xpY2s'.repeat(30)}`;
+  const nav = ['Nouveautés', 'Femme', 'Homme', 'Enfant', 'Maison', 'Grandes tailles', 'Marques', 'Bons plans', 'Soldes', 'Inspirations'];
+  const products = ['Robe portefeuille', 'Pull col rond', 'Jean droit', 'Housse de couette', 'Coussin velours', 'Baskets cuir', 'Sac cabas', 'Écharpe laine'];
+  let linked = 0;
+  const next = () => link(linked += 1);
+  // Gmail writes a link's address after its words in the plain text it makes, as `words <address>`.
+  const plain = [
+    '---------- Forwarded message ---------',
+    'De : Example Mode <noreply@email.shop.example>',
+    'Date: lun. 10 nov. 2026 à 09:12',
+    'Subject: Votre commande 123456789 a été expédiée',
+    'To: <alex@example.com>',
+    '',
+    '',
+    `Voir la version en ligne <${next()}>`,
+    `[image: Example Mode] <${next()}>`,
+    nav.map((name) => `${name} <${next()}>`).join(' '),
+    `[image: Livraison offerte dès 49 €] <${next()}>`,
+    'Bonjour Alex,',
+    'Bonne nouvelle, votre commande n° 123456789 du 8 novembre a été expédiée.',
+    ...products.flatMap((name) => [`[image: ${name}] <${next()}>`, `${name} <${next()}>`, 'Taille : 38 - Quantité : 1']),
+    'Votre colis est confié à DPD.',
+    `Numéro de suivi : ${DPD}`,
+    `Suivre mon colis <${next()}>`,
+    ...nav.map((name) => `${name} <${next()}>`),
+    'Example Mode, service client.',
+  ].join('\n');
+  const html = `<div>---------- Forwarded message ---------<br>De : Example Mode &lt;noreply@email.shop.example&gt;</div>
+    <div class="gmail_quote"><table>${[...Array(linked)].map((_, index) => `<tr><td><a href="${link(index + 1)}">lien</a></td></tr>`).join('')}
+    <tr><td>Numéro de suivi :</td><td>${DPD}</td></tr></table></div>`;
+
+  it('reads the number past the addresses of its links', async () => {
+    expect(plain.indexOf(DPD)).toBeGreaterThan(12_000);
+    const mail = await readInboundMail(alternative({ From: 'Alex <alex@example.com>', Subject: 'Fwd: Votre commande 123456789 a été expédiée' }, plain, html));
+    expect(mail.sender).toBe('Example Mode');
+    expect(mail.text.length).toBeLessThanOrEqual(16_000);
+    expect(trackingNumbersInText(mail.text).map(({ normalized }) => normalized)).toEqual([DPD]);
+  });
+
+  it('reads a link to the carrier\'s site first, after however many of the shop\'s own', async () => {
+    const shop = [...Array(80)].map((_, index) => `https://www.shop.example/c/${String(index).padStart(4, '0')}?utm_source=email&utm_medium=x`);
+    const tracking = `https://trace.dpd.fr/fr/trace/${DPD}`;
+    const forwarded = `Votre colis est en route.\n${shop.map((address) => `Voir <${address}>`).join('\n')}\nSuivre mon colis <${tracking}>`;
+    const mail = await readInboundMail(alternative({ From: 'Example Mode <noreply@email.shop.example>', Subject: 'Votre colis est en route' },
+      forwarded, `${shop.map((address) => `<a href="${address}">Voir</a>`).join('')}<a href="${tracking}">Suivre mon colis</a>`));
+    expect(shop.join('\n').length).toBeGreaterThan(3_000);
+    expect(trackingNumbersInText(mail.text).map(({ normalized, match }) => [normalized, match.carrier])).toEqual([[DPD, 'dpd-fr']]);
+    // A text without HTML has its addresses read as links too.
+    const text = await readInboundMail(mime({ From: 'Example Mode <noreply@email.shop.example>', Subject: 'Votre colis est en route' }, forwarded));
+    expect(text.text.split('\n')[1]).toBe('Votre colis est en route.');
+    expect(trackingNumbersInText(text.text).map(({ normalized }) => normalized)).toEqual([DPD]);
+  });
+});
+
 describe('a carrier\'s own email', () => {
   async function read(from: string, subject: string, body: string) {
     const mail = await readInboundMail(mime({ From: from, Subject: subject }, body));

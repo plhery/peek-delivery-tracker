@@ -301,13 +301,22 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   for everyone. It needs `CANONICAL_ORIGIN`, which is the OAuth issuer; `<origin>/mcp` is
   the address assistants connect to. A malformed list stops the server at startup.
   `PERSONAL_TOKENS=on` turns on personal tokens for scripts, which Settings doesn't make.
+- **Directories**: `OPENAI_APPS_CHALLENGE` holds the token OpenAI's dashboard gives to
+  verify the domain; `/.well-known/openai-apps-challenge` serves it as text, and answers
+  404 without it. `REVIEW_ACCOUNT_EMAIL` names the one account that may sign in with a
+  password on the sign-in page `/oauth/authorize` shows, for a directory's reviewers;
+  `npm run review-password -- <email>` sets that password
+  ([AUTHENTICATION.md](AUTHENTICATION.md)).
 - **Cloudflare**: assistants call `/mcp`, `/oauth/token`, `/oauth/register`,
-  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, and scripts with a
+  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, OpenAI fetches
+  `/.well-known/openai-apps-challenge`, and scripts with a
   personal token read `/api/parcels`. A challenge there
   (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
   so skip them for these paths with a custom rule; keep rate limiting.
 - **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
-  Customize › Connectors; Settings shows the steps for Claude, ChatGPT and Gemini. It opens
+  Customize › Connectors; Settings shows the steps for Claude, ChatGPT and Gemini, and the
+  public page `/assistants` (`/de/assistants` and so on) shows them to anyone, with what Peek
+  shares and what to do when a connection fails. Without the setting that page is a 404. It opens
   `/oauth/authorize` to sign in and ask. With personal tokens on, a script sends one as
   `Authorization: Bearer <token>`, to `/mcp` or to `GET /api/parcels`.
 

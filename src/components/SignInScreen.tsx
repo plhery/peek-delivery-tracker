@@ -15,6 +15,8 @@ export function SignInScreen({
   signInWithOidc,
   sendCode,
   verifyCode,
+  passwordFor,
+  signInWithPassword,
   title,
   subtitle,
   showConfigurationHelp = true,
@@ -39,14 +41,22 @@ export function SignInScreen({
   signInWithOidc?: () => Promise<void>;
   sendCode: (email: string) => Promise<void>;
   verifyCode: (email: string, code: string) => Promise<void>;
+  /**
+   * Whether an address signs in with its password instead of a code: a directory's review account, on the consent
+   * page alone. Without it, every address gets a code.
+   */
+  passwordFor?: (email: string) => Promise<boolean>;
+  signInWithPassword?: (email: string, password: string) => Promise<void>;
 }) {
   const { t } = useI18n();
   const [email, setEmail] = useState(initialEmail);
   const [code, setCode] = useState('');
   const [codeSent, setCodeSent] = useState(false);
+  const [passwordAsked, setPasswordAsked] = useState(false);
+  const [password, setPassword] = useState('');
   const socialEnabled = !!((googleEnabled && signInWithGoogle) || (appleEnabled && signInWithApple) || (oidcName && signInWithOidc));
   const [emailExpanded, setEmailExpanded] = useState(!socialEnabled);
-  const [working, setWorking] = useState<'google' | 'apple' | 'oidc' | 'email' | 'code' | null>(null);
+  const [working, setWorking] = useState<'google' | 'apple' | 'oidc' | 'email' | 'code' | 'password' | null>(null);
   const [error, setError] = useState<string | null>(null);
   const emailVisible = emailOtpEnabled && (!socialEnabled || emailExpanded);
 
@@ -71,13 +81,40 @@ export function SignInScreen({
     setWorking('email');
     setError(null);
     try {
-      await sendCode(email.trim().toLowerCase());
+      const address = email.trim().toLowerCase();
+      if (signInWithPassword && await passwordFor?.(address)) {
+        setPasswordAsked(true);
+        return;
+      }
+      await sendCode(address);
       setCodeSent(true);
     } catch (reason) {
       setError(userErrorMessage(reason, t, 'auth.sendFailed'));
     } finally {
       setWorking(null);
     }
+  }
+
+  async function submitPassword(event: FormEvent) {
+    event.preventDefault();
+    if (working || !signInWithPassword) return;
+    setWorking('password');
+    setError(null);
+    try {
+      await signInWithPassword(email.trim().toLowerCase(), password);
+    } catch (reason) {
+      setError(userErrorMessage(reason, t, 'auth.passwordFailed'));
+    } finally {
+      setWorking(null);
+    }
+  }
+
+  function changeEmail() {
+    setCodeSent(false);
+    setPasswordAsked(false);
+    setCode('');
+    setPassword('');
+    setError(null);
   }
 
   async function submitCode(event: FormEvent) {
@@ -128,16 +165,30 @@ export function SignInScreen({
             <button className="button button--primary" type="submit" disabled={Boolean(working)}>
               {working === 'code' ? t('auth.signingIn') : codeAction ?? t('auth.openBox')}
             </button>
-            <button
-              className="auth-flow__text-button"
-              type="button"
-              onClick={() => {
-                setCodeSent(false);
-                setCode('');
-                setError(null);
-              }}
-              disabled={Boolean(working)}
-            >
+            <button className="auth-flow__text-button" type="button" onClick={changeEmail} disabled={Boolean(working)}>
+              {t('auth.differentEmail')}
+            </button>
+          </form>
+        ) : passwordAsked && emailOtpEnabled ? (
+          <form className="auth-flow__form auth-flow__form--code" onSubmit={(event) => void submitPassword(event)}>
+            <p className="auth-flow__intro">
+              {t('auth.passwordIntro', { email })}
+            </p>
+            <label htmlFor="sign-in-password">{t('auth.password')}</label>
+            <input
+              id="sign-in-password"
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              autoFocus
+              required
+            />
+            {error && <p className="auth-flow__error" role="alert">{error}</p>}
+            <button className="button button--primary" type="submit" disabled={Boolean(working)}>
+              {working === 'password' ? t('auth.signingIn') : codeAction ?? t('auth.openBox')}
+            </button>
+            <button className="auth-flow__text-button" type="button" onClick={changeEmail} disabled={Boolean(working)}>
               {t('auth.differentEmail')}
             </button>
           </form>

@@ -755,6 +755,29 @@ final class ParcelStore: ObservableObject {
         )
     }
 
+    /// How Settings reaches the account's forwarding address for adding parcels by email. Nil without an account: the
+    /// demo and the parcels this iPhone follows itself have none.
+    func addByEmailClient() -> AddByEmailModel.Client? {
+        guard session.user != nil, !isDemo else { return nil }
+        let generation = session.generation
+        return AddByEmailModel.Client(
+            read: { [self] in
+                let offer = try await api.addByEmail()
+                try session.checkGeneration(generation)
+                return offer
+            },
+            open: { [self] renew in
+                let offer = try await api.openAddByEmail(renew: renew)
+                try session.checkGeneration(generation)
+                return offer
+            },
+            close: { [self] in
+                try await api.closeAddByEmail()
+                try session.checkGeneration(generation)
+            }
+        )
+    }
+
     /// How a parcel's page sends what its reader says of it. The demo's pages ask nothing; an
     /// answer for one of its parcels would go nowhere.
     func feedbackClient(for parcel: Parcel) -> ParcelFeedbackClient {

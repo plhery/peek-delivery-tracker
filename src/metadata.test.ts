@@ -236,7 +236,7 @@ describe('public product metadata', () => {
     const here = await sitemap();
     expect(here.slice(0, SUPPORTED_LOCALES.length)).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: local[hrefLanguage(locale)], alternates: { languages: local } })));
     // At the end, the static documents.
-    const documents = ['/privacy.html', '/support.html', '/accessibility.html'];
+    const documents = ['/privacy.html', '/terms.html', '/support.html', '/accessibility.html'];
     expect(here.slice(-documents.length)).toEqual(documents.map((path) => ({ url: `https://delivery.example.test${path}` })));
     vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
     const origin = 'https://peek.example.test';
@@ -300,6 +300,20 @@ describe('public product metadata', () => {
       expect(pages[at].alternates?.languages).toEqual(hrefLanguages(carriers(id)));
       expect(pages[at].lastModified).toBe(checked(id, locale));
     });
+  });
+
+  it('lists the page on connecting an assistant in every language, just before the static documents, where assistants can connect', async () => {
+    vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
+    const without = await sitemap();
+    expect(without.some(({ url }) => url.includes('/assistants'))).toBe(false);
+    vi.stubEnv('ASSISTANT_ACCOUNTS', '*');
+    const entries = await sitemap();
+    const documents = 4;
+    const listed = entries.slice(-documents - SUPPORTED_LOCALES.length, -documents);
+    const address = (locale: string) => `https://peek.example.test${locale === 'en' ? '' : `/${locale}`}/assistants`;
+    const languages = { ...Object.fromEntries(SUPPORTED_LOCALES.map((locale) => [hrefLanguage(locale), address(locale)])), 'x-default': address('en') };
+    expect(listed).toEqual(SUPPORTED_LOCALES.map((locale) => ({ url: address(locale), alternates: { languages } })));
+    expect(entries).toHaveLength(without.length + SUPPORTED_LOCALES.length);
   });
 
   it('writes a sitemap that stays well-formed whatever host a request names', async () => {

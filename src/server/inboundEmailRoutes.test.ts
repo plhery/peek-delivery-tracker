@@ -6,7 +6,9 @@ import { POST as receive } from '../../app/api/inbound/email/route';
 import contract from '../../contracts/openapi.json';
 import { sign } from '../../ops/cloudflare/inbound-email-worker.js';
 import { SupabaseAuthenticator } from './auth';
-import { addParcelsFromText, trackingNumbersInText } from './parcelsFromText';
+import { mailResult } from './inboundEmail/receive';
+import * as monitoring from './observability';
+import { addParcelsFromText, trackingNumbersInText, type ParcelAddition } from './parcelsFromText';
 import { SupabaseError, SupabaseServiceClient, SupabaseUserClient, type InboundMailbox } from './supabase';
 
 // Synthetic identifiers, addresses and numbers only: UPS's published sample and made-up numbers in valid shapes.
@@ -129,6 +131,9 @@ function account(options: { known?: string[]; allowance?: number } = {}) {
     create: vi.spyOn(service, 'createAccountPackage').mockImplementation(async (_, number) => `new-${number}`),
     settle: vi.spyOn(service, 'ignoreTypedTrackingSupportCases').mockResolvedValue(0),
     queue: vi.spyOn(service, 'enqueueSyncJob').mockImplementation(async ({ packageId }) => ({ row: { id: `job-${packageId}` }, queued: true })),
+    keep: vi.spyOn(service, 'keepInboundMail').mockResolvedValue(true),
+    // A followed parcel has a name unless a test says otherwise.
+    name: vi.spyOn(service, 'nameUnnamedPackage').mockResolvedValue(false),
   };
 }
 
@@ -163,7 +168,112 @@ describe('an email to a forwarding address', () => {
     await posted(mail('Shop <a@example.com>', 'Shipped', `Tracking: ${UPS}`));
     expect(db.claim).not.toHaveBeenCalled();
     expect(db.create).not.toHaveBeenCalled();
+    expect(db.name).toHaveBeenCalledExactlyOnceWith(userId, `known-${UPS}`, 'Shop');
     expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Shop');
+  });
+
+  it('gives a followed parcel without a name the shop\'s name, and renames none', async () => {
+    let db = account({ known: [UPS] });
+    db.name.mockResolvedValue(true);
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${UPS}`));
+    expect(db.name).toHaveBeenCalledExactlyOnceWith(userId, `known-${UPS}`, 'Example Shop');
+    expect(db.record).toHaveBeenCalledWith(userId, 'named', 0, null, 'Example Shop');
+    // A carrier's email that names no shop has no name to give.
+    vi.restoreAllMocks();
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    db = account({ known: ['4612345678'] });
+    db.name.mockResolvedValue(true);
+    await posted(mail('DHL Info <noreply@dhl.com>', 'Unterwegs', 'Sendungsnummer 4612345678 ist unterwegs.'));
+    expect(db.name).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'DHL Info');
+  });
+
+  it('leaves a followed parcel unnamed when naming it fails, and reports it', async () => {
+    const db = account({ known: [UPS] });
+    const failure = new SupabaseError('database down', 503);
+    db.name.mockRejectedValue(failure);
+    const report = vi.spyOn(monitoring, 'captureOperationalError').mockReturnValue(null);
+    expect((await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${UPS}`))).status).toBe(202);
+    expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'inbound-email', operation: 'name_parcel' });
+    expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Example Shop');
+  });
+
+  it('adds no parcel from an email that says it was delivered, and names a followed one', async () => {
+    let db = account();
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Your parcel has been delivered', `Tracking: ${DHL}`));
+    expect(db.claim).not.toHaveBeenCalled();
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'delivered', 0, null, 'Example Shop');
+    vi.restoreAllMocks();
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    db = account({ known: [UPS] });
+    db.name.mockResolvedValue(true);
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Delivered: your order', `Parcels ${UPS} and ${DHL}`));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.name).toHaveBeenCalledExactlyOnceWith(userId, `known-${UPS}`, 'Example Shop');
+    expect(db.record).toHaveBeenCalledWith(userId, 'named', 0, null, 'Example Shop');
+    // A delivery still to come adds its parcel.
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Your parcel will be delivered today', `Tracking: ${DHL}`));
+    expect(db.create.mock.calls.map(([, number]) => number)).toEqual([DHL]);
+    expect(db.record).toHaveBeenLastCalledWith(userId, 'added', 1, null, 'Example Shop');
+  });
+
+  it('keeps the email it read, as it came, and none an allowance stopped, Gmail\'s request or an unknown address', async () => {
+    let db = account({ known: [DHL] });
+    const raw = mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${UPS}`);
+    await posted(raw);
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Delivered', `Tracking: ${DHL}`));
+    await posted(mail('"Example Shop" <orders@example-shop.com>', 'Thanks', 'Nothing to track.'));
+    expect(db.keep).toHaveBeenCalledTimes(3);
+    expect(db.keep.mock.calls[0]![0]).toBe(userId);
+    expect(Buffer.from(db.keep.mock.calls[0]![1]).equals(Buffer.from(raw))).toBe(true);
+    expect(db.record.mock.calls.map(([, result]) => result)).toEqual(['added', 'known', 'none']);
+
+    vi.restoreAllMocks();
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    db = account({ allowance: 0 });
+    await posted(mail('Shop <a@example.com>', 'Shipped', UPS));
+    db.claimMail.mockResolvedValue({ allowed: false, scope: 'account' });
+    await posted(mail('Shop <a@example.com>', 'Shipped', UPS));
+    db.claimMail.mockResolvedValue({ allowed: true, scope: null });
+    db.claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 });
+    db.create.mockRejectedValue(new SupabaseError('full', 400, 'P0001'));
+    await posted(mail('Shop <a@example.com>', 'Shipped', UPS));
+    await posted(mail('Gmail Team <forwarding-noreply@google.com>', '(#123456789) Gmail Forwarding Confirmation - Receive Mail from alex@example.com',
+      'Confirmation code: 123456789\nhttps://mail-settings.google.com/mail/vf-example'));
+    db.owner.mockResolvedValue(null);
+    await posted(mail('Shop <a@example.com>', 'Shipped', UPS));
+    expect(db.record.mock.calls.map(([, result]) => result)).toEqual(['limited', 'limited', 'full', 'confirmation']);
+    expect(db.keep).not.toHaveBeenCalled();
+  });
+
+  it('adds the parcels and notes the email when keeping it fails, and reports it', async () => {
+    const db = account();
+    const failure = new SupabaseError('database down', 503);
+    db.keep.mockRejectedValue(failure);
+    const report = vi.spyOn(monitoring, 'captureOperationalError').mockReturnValue(null);
+    const logged = vi.spyOn(monitoring, 'logOperationalEvent');
+    expect((await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${UPS}`))).status).toBe(202);
+    expect(db.create).toHaveBeenCalledOnce();
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'Example Shop');
+    expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'inbound-email', operation: 'keep' });
+    expect(logged).toHaveBeenCalledWith('inbound_email_keep_failed', { error_type: 'SupabaseError' }, 'error');
+    expect(logged).toHaveBeenCalledWith('inbound_email', expect.objectContaining({ outcome: 'added', added: 1 }));
+  });
+
+  it('notes what the email did by its most telling outcome', () => {
+    const parcel = (outcome: 'added' | 'known' | 'limited' | 'full' | 'unavailable') => ({
+      trackingNumber: UPS, carrier: 'ups', outcome, packageId: 'parcel', jobId: null, retryAfter: null,
+    }) as ParcelAddition;
+    expect(mailResult([parcel('known'), parcel('full'), parcel('added')])).toBe('added');
+    expect(mailResult([parcel('known'), parcel('limited'), parcel('full')], { named: 1 })).toBe('full');
+    expect(mailResult([parcel('known'), parcel('limited')], { named: 1 })).toBe('limited');
+    expect(mailResult([parcel('known')], { named: 1, delivered: true })).toBe('named');
+    expect(mailResult([parcel('known')], { delivered: true })).toBe('known');
+    expect(mailResult([parcel('unavailable')], { delivered: true })).toBe('delivered');
+    expect(mailResult([], { delivered: true })).toBe('delivered');
+    expect(mailResult([parcel('unavailable')])).toBe('none');
+    expect(mailResult([])).toBe('none');
   });
 
   it('drops the server\'s own email about a parcel, which a filter sent back', async () => {
@@ -175,7 +285,7 @@ describe('an email to a forwarding address', () => {
     expect(db.claimMail).not.toHaveBeenCalled();
     expect(db.create).not.toHaveBeenCalled();
     expect(db.record).not.toHaveBeenCalled();
-    await posted(mail('Peek fans <hello@peek-fans.example>', 'Delivered', `Your parcel ${UPS} was delivered.`));
+    await posted(mail('Peek fans <hello@peek-fans.example>', 'Shipped', `Your parcel ${UPS} is on its way.`));
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, expect.any(String));
   });
 

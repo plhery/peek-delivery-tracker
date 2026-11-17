@@ -19,6 +19,10 @@ class DeviceWordsTest {
     // message only where it offers them (`ParcelStore.offersLiveActivities`), and Android has none.
     private val iPhoneOnlyKeys = setOf("liveActivity.systemDisabled")
 
+    // Copy about iCloud Mail, the mail service, which an Android reader may use too: its link opens it on the web, and
+    // the setting it lacks there is in iCloud's settings on an Apple device, whichever phone reads the steps.
+    private val mailServiceKeys = setOf("inbox.icloud.link", "inbox.icloud.noMail")
+
     // iOS's accessibility identifiers, which the app's test tags carry: hooks for tests, not copy. The iOS generator
     // skips `.accessibilityIdentifier` for the same reason.
     private val identifiers = setOf(
@@ -49,7 +53,7 @@ class DeviceWordsTest {
 
     @Test
     fun copyNamingTheIPhoneHasAnAndroidVariantInEveryLanguage() {
-        val keys = referencedKeys().filter { !it.endsWith(".android") && it !in iPhoneOnlyKeys }
+        val keys = referencedKeys().filter { !it.endsWith(".android") && it !in iPhoneOnlyKeys && it !in mailServiceKeys }
         assertTrue(keys.contains("native.notificationsDenied"))
         val withoutVariant = keys
             .filter { key -> catalogs.values.any { catalog -> catalog[key]?.let(apple::containsMatchIn) == true } }

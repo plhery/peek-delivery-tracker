@@ -339,8 +339,10 @@ Key server modules:
     post gets 401. An unknown token, a closed account and a used-up allowance all get the
     same 202. An account the setting isn't open to has its emails dropped before they are
     counted.
-  - The server reads the subject, the text part (else the HTML's text) and the HTML's links,
-    never an attachment, and takes the tracking numbers the Add sheet would, without order
+  - The server reads the subject, the text part (else the HTML's text) and the links of
+    both, a carrier's site first, never an attachment. The text part's addresses are read as
+    links, not as text: a hand-forwarded email inlines every one, and they would fill the
+    text's share before its number. It takes the tracking numbers the Add sheet would, without order
     numbers: those a carrier's shape proves. It also takes a number the email's own label
     calls a tracking number ("Sendungsnummer 1234567899") when its shape fits a carrier
     without proving one, as most couriers' plain digits do; the carriers are then asked. A
@@ -348,7 +350,13 @@ Key server modules:
     reading. It reads at most 16,000 characters, with patterns that stay linear on any
     input, so no email holds the server up. Each is added as the Add sheet adds it, with the same daily allowance and
     parcel limit, labelled with the sender's name; one the account follows already costs
-    nothing. `src/server/parcelsFromText.ts` is that step.
+    nothing, and takes that name when it has none. A name it has is never changed.
+    `src/server/parcelsFromText.ts` is that step.
+  - An email whose subject says its parcel was delivered adds no parcel: it comes too late
+    for following to help. Only the past counts, in the languages of the Gmail filter
+    (`inboundEmail/delivered.ts`): a delivery to come, one that failed and one to a pickup
+    point are read as on the way. A parcel it names that the account follows is named as
+    above.
   - A carrier's own email is read with what its sender says. The sender is a carrier when
     its domain is one of the carrier's sites in the catalogue, or has that site's name under
     another country's ending when the name is one company's, not a word several posts use
@@ -362,17 +370,25 @@ Key server modules:
     mailbox name says nothing of the parcel.
   - The mailbox keeps what its last twenty emails did: when each came, its sender's name,
     its outcome and how many parcels it added. Settings lists the newest, and the account's
-    export holds them all.
+    export holds them all. An email's outcome is its most telling one: a parcel added; then
+    the parcel limit, then an allowance, which the owner can act on; a followed parcel named;
+    parcels followed already; a delivery told of; nothing.
+  - Each email read is kept as it came for seven days (`private.inbound_mail_kept`), to
+    learn to read emails better; not one an allowance or the parcel limit stopped, nor
+    Gmail's request, which holds a code. The scheduled upkeep deletes older ones, and turning
+    the address off or deleting the account deletes the account's. A failure to keep one is
+    reported and changes nothing else.
   - Gmail's request to confirm forwarding is kept for three days for the owner to finish in
     Gmail, never followed by the server: its code and a link only to Google's own hosts.
   - The server's own emails (`EMAIL_FROM`) are dropped, read from their From header before
     they count against the allowances: a delivery email that a filter sends back names a
     parcel the account follows already.
   - Each address takes `INBOUND_EMAILS_PER_ACCOUNT_PER_DAY` emails a UTC day, and all of
-    them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` is service-role
-    only.
+    them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` and the kept
+    emails are service-role only.
 - **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an
-  assistant (Claude, ChatGPT, Gemini, any MCP client); Settings marks it experimental. Every
+  assistant (Claude, ChatGPT, Gemini, any MCP client); Settings marks it experimental and
+  leads to the public page at `/assistants`. Every
   other account gets 404 from `/api/account/assistants`, so Settings shows no row; with no
   list, `/mcp`, `/oauth/*` and their `.well-known` documents are not there.
   - Peek is the OAuth 2.1 authorization server of its own MCP endpoint, `/mcp`, with the
@@ -380,8 +396,9 @@ Key server modules:
     address they registered (any port on this computer's loopback), and the issuer in each
     answer (RFC 9207). A redirect address is HTTPS, HTTP to the loopback, or an app's own
     scheme, never one a browser or the system handles (`javascript:`, `search-ms:`,
-    `itms-services:`…), checked again at each consent. A client registers (`/oauth/register`:
-    20 an hour per address, IPv6 /64 and /48; past 2,000 clients no grant uses, a new one
+    `itms-services:`…), checked again at each consent. A metadata document may prefer
+    another way to reach the token endpoint, as ChatGPT's does, if it lists `none` too. A
+    client registers (`/oauth/register`: 20 an hour per address, IPv6 /64 and /48; past 2,000 clients no grant uses, a new one
     pushes out the oldest of them) or names its metadata document
     by its URL; the server fetches that over HTTPS from public addresses only (IPv6 global
     unicast), at most 10 KB
@@ -396,6 +413,10 @@ Key server modules:
     `parcels:write` (`add_parcels`, `archive_parcel`). It sends the browser nowhere before
     the owner answers: a request it can't take is shown as one. The answer is a code valid
     once for ten minutes; one used twice ends its grant.
+  - Every grant lists the four tools, each naming the scope it needs in
+    `_meta.securitySchemes`, as ChatGPT reads it. A call outside the grant's scopes answers
+    an error result whose `_meta["mcp/www_authenticate"]` holds an `insufficient_scope`
+    challenge, which ChatGPT turns into a new sign-in.
   - Access tokens last an hour. A refresh token lasts 60 days and is replaced at each use;
     a replaced one used again after two minutes ends the grant. Google's assistants keep
     theirs, as they require. A personal token lasts until it is deleted. Allowing an
@@ -476,6 +497,7 @@ Key server modules:
 | `/guides`, `/guides/<slug>`; `/<language>/guides`, `/<language>/guides/<slug>` | The guides, articles for readers who arrive from a search engine, and their list, in the address's language whatever the browser prefers. English has no prefix. Any other address below a language's guides is sent to the 404 page by the proxy ([`proxy.ts`](../proxy.ts)), so the server writes that page whole. The landing's foot lists them |
 | `/carriers`, `/carriers/<slug>`; `/<language>/carriers`, `/<language>/carriers/<slug>` | A page per carrier for readers who searched for its tracking, in the languages it is written in, and their list in each language a carrier's page is written in. A language of the app with none yet lists the English pages under its own address, marked `noindex`, out of the sitemap and named by no other language, and its links to the list lead to the English one, until its first page is written (`CARRIER_LOCALES`). Above its text, a box takes a number to the landing in the page's language without putting it in the address. Any other address below a language's carriers, a carrier's in a language it is not written in too, is sent to the 404 page as a guide's is. The guides' foot and the landing's list of guides lead to them |
 | `/<page-only language>/carriers/<slug>` | A carrier's page in a language the app does not speak (`PAGE_ONLY_LANGUAGES`), such as Finnish for Posti: its title and text in that language, everything around them in English: `<html lang>` is the page's language, named by the proxy, and the frame declares English. Its links lead to a carrier's page in its language where there is one, to the English pages elsewhere. The language has no carriers' list; any other address below it is the 404 page |
+| `/assistants`; `/<language>/assistants` | How to connect an assistant to Peek, for anyone, in the address's language: what it can do, the address to give it on the canonical origin, each assistant's steps as Settings gives them, what to ask, what Peek shares, how to disconnect and what to do when it fails. Built from the app's words (`assistants.*`), so it exists in every language of the app. Settings' Assistants page leads to it, and so does the help page. Where no assistant can connect (no `ASSISTANT_ACCOUNTS`), the proxy sends it to the 404 page and the sitemap leaves it out |
 | `/email/off?lang=<language>#t=<token>` | The way out of the delivery email, from the link an email carries, in the email's language. It asks first, then switches the email off (or back on) for the account the token names, without a sign-in. The token stays after the `#` and travels only in the body of that request |
 
 Sessions belong to one origin, so every address lives on the same host. With the iPhone
@@ -496,7 +518,8 @@ address of its own, one page per language under `app/`, written in that language
 first byte: `<html lang>`, the words, the title and the link preview.
 
 - The proxy hands the page the address's language in place of the cookie the browser sent
-  ([`proxy.ts`](../proxy.ts)), at a language address, at a guide's and at a carrier's page. No other address
+  ([`proxy.ts`](../proxy.ts)), at a language address, at a guide's, at a carrier's page and at the page on
+  connecting an assistant. No other address
   reads anything a client could not already choose, and the browser's own cookie is not
   written.
 - In the browser the address's language wins over a saved choice, and a visit saves
@@ -514,7 +537,7 @@ first byte: `<html lang>`, the words, the title and the link preview.
 For search engines, `/robots.txt` lets everything be fetched and `/sitemap.xml` lists the
 pages meant to be found: the landing, the guides' list and every guide in each language,
 the carriers' list in each language a carrier's page is written in and every carrier's page in each of its languages,
-the privacy notice and the help page. A guide or a carrier's page is dated by the day its
+the page on connecting an assistant in each language where assistants can connect, the privacy notice, the terms of use and the help page. A guide or a carrier's page is dated by the day its
 facts were last checked, and never after the day the site was built: its text, its structured
 data and the sitemap show the build's day instead of a later one ([`buildDay.ts`](../src/server/buildDay.ts)). Each
 landing's HTML carries its title, description and canonical address, the address of every

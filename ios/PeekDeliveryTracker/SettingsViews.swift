@@ -388,6 +388,10 @@ struct AccountView: View {
     @State private var confirmation = ""
     @State private var errorMessage: String?
     @State private var showingHomePage = false
+    #if os(iOS)
+    @StateObject private var addByEmail = AddByEmailModel()
+    @Environment(\.scenePhase) private var scenePhase
+    #endif
 
     var body: some View {
         page
@@ -475,6 +479,18 @@ struct AccountView: View {
                             .buttonStyle(.plain)
                             settingsDivider
                         }
+                        // Only once the server offers the account a forwarding address.
+                        if addByEmail.offer != nil {
+                            NavigationLink {
+                                AddByEmailPage(model: addByEmail, email: session.user?.email)
+                            } label: {
+                                SettingsRow(title: localizer.text("inbox.row"), symbol: "envelope",
+                                            badge: localizer.text("inbox.experimental"), chevron: true)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("settings.addByEmail")
+                            settingsDivider
+                        }
                         Toggle(isOn: Binding(get: { store.deliveryWidgetEnabled }, set: { store.setDeliveryWidgetEnabled($0) })) {
                             SettingsRow(title: localizer.text("widget.settingTitle"), symbol: "rectangle.3.group", detail: localizer.text("widget.settingDescription"), padded: false)
                         }
@@ -534,6 +550,13 @@ struct AccountView: View {
             .task {
                 await store.refreshNotificationState()
                 await store.loadNotificationPreferences()
+            }
+            .task(id: session.user?.id) {
+                addByEmail.configure(store.addByEmailClient())
+                await addByEmail.load()
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active { Task { await addByEmail.reloadOnReturn() } }
             }
         }
     }
@@ -778,10 +801,23 @@ private extension String {
 }
 
 
-private let settingsGreen = Brand.color(light: "#688363", dark: "#97B084")
-private var settingsDivider: some View { Rectangle().fill(Brand.sheetLine(0.25)).frame(height: 0.5) }
+let settingsGreen = Brand.color(light: "#688363", dark: "#97B084")
+var settingsDivider: some View { Rectangle().fill(Brand.sheetLine(0.25)).frame(height: 0.5) }
 
-private struct SettingsGroup<Content: View>: View {
+/// A word that marks a group or a row, such as "New" or "Experimental".
+struct SettingsBadge: View {
+    let text: String
+
+    var body: some View {
+        Text(text.uppercased()).font(.caption2.weight(.bold)).tracking(0.4)
+            .foregroundStyle(ExperimentalPalette.ochre)
+            .padding(.horizontal, 7).padding(.vertical, 3)
+            .background(ExperimentalPalette.ochreSurface, in: RoundedRectangle(cornerRadius: 7))
+            .fixedSize()
+    }
+}
+
+struct SettingsGroup<Content: View>: View {
     var title: String? = nil
     /// A word beside the title, such as "New".
     var badge: String? = nil
@@ -793,12 +829,7 @@ private struct SettingsGroup<Content: View>: View {
                 HStack(spacing: 8) {
                     Text(title.uppercased()).font(.caption2.weight(.medium)).tracking(1)
                         .foregroundStyle(Brand.secondaryText)
-                    if let badge {
-                        Text(badge.uppercased()).font(.caption2.weight(.bold)).tracking(0.4)
-                            .foregroundStyle(ExperimentalPalette.ochre)
-                            .padding(.horizontal, 7).padding(.vertical, 3)
-                            .background(ExperimentalPalette.ochreSurface, in: RoundedRectangle(cornerRadius: 7))
-                    }
+                    if let badge { SettingsBadge(text: badge) }
                 }
                 .padding(.leading, 2)
                 .accessibilityElement(children: .combine)
@@ -812,9 +843,11 @@ private struct SettingsGroup<Content: View>: View {
     }
 }
 
-private struct SettingsRow: View {
+struct SettingsRow: View {
     let title: String
     var symbol: String? = nil
+    /// A word beside the title, such as "Experimental".
+    var badge: String? = nil
     var detail: String? = nil
     var value: String? = nil
     var chevron = false
@@ -832,7 +865,15 @@ private struct SettingsRow: View {
                     .foregroundStyle(Brand.secondaryText).frame(width: 17)
             }
             VStack(alignment: .leading, spacing: 4) {
-                Text(title).font(.subheadline).foregroundStyle(Brand.ink)
+                if let badge {
+                    // The badge follows the title, or goes under it when they don't fit side by side.
+                    ViewThatFits(in: .horizontal) {
+                        HStack(spacing: 8) { titleText; SettingsBadge(text: badge) }
+                        VStack(alignment: .leading, spacing: 4) { titleText; SettingsBadge(text: badge) }
+                    }
+                } else {
+                    titleText
+                }
                 if stacked, let value, !value.isEmpty {
                     // A value of one word, such as an address, gets smaller rather than break in the middle.
                     let oneWord = !value.contains(" ")
@@ -849,6 +890,10 @@ private struct SettingsRow: View {
         .padding(padded ? 15 : 0)
         .frame(minHeight: padded ? 54 : nil, alignment: .leading)
         .contentShape(Rectangle())
+    }
+
+    private var titleText: some View {
+        Text(title).font(.subheadline).foregroundStyle(Brand.ink)
     }
 }
 
@@ -1026,7 +1071,9 @@ private struct SettingsAppearancePicker: View {
 /// A Mac's Settings window, where iOS has the Account sheet: General, Notifications for an account, then the account.
 struct SettingsWindow: View {
     @EnvironmentObject private var session: SessionStore
+    @EnvironmentObject private var store: ParcelStore
     @EnvironmentObject private var localizer: Localizer
+    @StateObject private var addByEmail = AddByEmailModel()
 
     var body: some View {
         TabView {
@@ -1039,6 +1086,12 @@ struct SettingsWindow: View {
                     NotificationSettingsView(embedded: true).frame(height: 540)
                 }
             }
+            // Only once the server offers the account a forwarding address.
+            if addByEmail.offer != nil {
+                Tab(localizer.text("inbox.row"), systemImage: "envelope") {
+                    AddByEmailPage(model: addByEmail, email: session.user?.email).frame(height: 540)
+                }
+            }
             Tab(localizer.text("native.account"), systemImage: "person.crop.circle") {
                 AccountView().frame(height: 540)
             }
@@ -1046,6 +1099,14 @@ struct SettingsWindow: View {
         .frame(width: 560)
         // The Account sheet's ground, under the window's toolbar rather than a sheet's edge.
         .environment(\.sheetEdgeLit, false)
+        .task(id: session.user?.id) {
+            addByEmail.configure(store.addByEmailClient())
+            await addByEmail.load()
+        }
+        // Gmail's confirmation, sent while the reader was in Gmail, shows on coming back.
+        .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in
+            Task { await addByEmail.reloadOnReturn() }
+        }
     }
 }
 

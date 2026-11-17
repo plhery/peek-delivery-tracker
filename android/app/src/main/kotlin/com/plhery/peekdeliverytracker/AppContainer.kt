@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.plhery.peekdeliverytracker.core.AddByEmailStore
+import com.plhery.peekdeliverytracker.core.addByEmailClient
 import com.plhery.peekdeliverytracker.core.AnalyticsCatalog
 import com.plhery.peekdeliverytracker.core.AnalyticsLifecycleObserver
 import com.plhery.peekdeliverytracker.core.AppConfiguration
@@ -331,6 +333,9 @@ class AppContainer(
         preview = { DeliveryApiClient.invitationPreview(it, configuration, transport) },
         friends = friendsClient,
     )
+
+    /** Settings' "Add parcels by email": the account's forwarding address, where the server offers one. */
+    val addByEmail = AddByEmailStore(api.addByEmailClient())
 
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
     val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }

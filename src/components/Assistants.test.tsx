@@ -45,7 +45,11 @@ describe('assistants in Settings', () => {
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
     await user.click(await screen.findByRole('button', { name: /^Assistants ?Experimental$/ }));
     expect(screen.getByRole('heading', { name: 'Assistants Experimental' })).toBeInTheDocument();
-    expect(screen.getByText(/This feature is experimental, and it may change\.$/)).toBeInTheDocument();
+    expect(screen.getByText(/This feature is experimental, and it may change\./)).toBeInTheDocument();
+    // The public page on connecting an assistant says the same and more, in a tab of its own.
+    const how = screen.getByRole('link', { name: 'How it works' });
+    expect(how).toHaveAttribute('href', '/assistants');
+    expect(how).toHaveAttribute('target', '_blank');
     expect(screen.getByText('https://peek.example/mcp')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Copy address' }));
     expect(copy).toHaveBeenCalledWith('https://peek.example/mcp');

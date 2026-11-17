@@ -4576,6 +4576,8 @@ data class AddByEmailResponse(
 enum class AddByEmailResult(val rawValue: String) {
     @SerialName("added") Added("added"),
     @SerialName("known") Known("known"),
+    @SerialName("named") Named("named"),
+    @SerialName("delivered") Delivered("delivered"),
     @SerialName("none") None("none"),
     @SerialName("limited") Limited("limited"),
     @SerialName("full") Full("full"),

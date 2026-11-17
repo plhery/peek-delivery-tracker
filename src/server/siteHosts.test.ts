@@ -2,6 +2,7 @@ import { unstable_doesMiddlewareMatch } from 'next/experimental/testing/server';
 import { NextRequest } from 'next/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { config, proxy } from '../../proxy';
+import { assistantsPath } from '../assistants/paths';
 import { carrierPath } from '../carriers/paths';
 import { CARRIER_LINKS } from '../generated/carriers';
 import { GUIDE_LINKS } from '../generated/guides';
@@ -297,6 +298,30 @@ describe('the page proxy', () => {
     for (const path of ['/', '/de', '/xx', '/en/guides/x', '/guidesmore']) expect(rewrite(path).headers.get('x-middleware-rewrite'), path).toBeNull();
   });
 
+  it('renders the page on connecting an assistant in its address’s language, and as the 404 page where none can connect', () => {
+    const answer = (path: string) => page(`https://peek.example.test${path}`, { headers: { host: 'peek.example.test', cookie: 'sdt.locale=de; other=1' } });
+    const cookieRead = (response: Response) => response.headers.get('x-middleware-request-cookie');
+    const rewritten = (response: Response) => response.headers.get('x-middleware-rewrite');
+    vi.stubEnv('CANONICAL_ORIGIN', 'https://peek.example.test');
+    vi.stubEnv('ASSISTANT_ACCOUNTS', '*');
+    for (const locale of SUPPORTED_LOCALES) {
+      const response = answer(assistantsPath(locale));
+      expect(rewritten(response), locale).toBeNull();
+      expect(cookieRead(response), locale).toBe(`sdt.locale=${locale}; other=1`);
+      expect(response.headers.get('set-cookie'), locale).toBeNull();
+    }
+    // Neither an English address with a prefix, nor anything below the page, is the page.
+    for (const path of ['/en/assistants', '/assistants/claude', '/xx/assistants']) expect(cookieRead(answer(path)), path).toBe('sdt.locale=de; other=1');
+    vi.stubEnv('ASSISTANT_ACCOUNTS', '');
+    for (const locale of SUPPORTED_LOCALES) {
+      const response = answer(assistantsPath(locale));
+      expect(rewritten(response), locale).toBe('https://peek.example.test/_not-found');
+      expect(cookieRead(response), locale).toBe(`sdt.locale=${locale}; other=1`);
+      expect(response.headers.get('cache-control'), locale).toBe('private, no-store');
+    }
+    expect(rewritten(answer('/de'))).toBeNull();
+  });
+
   it('always answers a language address, the guides and the carriers’ pages itself, a prefetch too', () => {
     const [pages, languages] = config.matcher;
     expect(pages.missing).toHaveLength(2);
@@ -306,7 +331,7 @@ describe('the page proxy', () => {
     for (const locale of ADDRESS_LANGUAGES) expect(matches(`/${locale}`, prefetch), locale).toBe(true);
     const guides = GUIDE_LANGUAGES.flatMap((locale) => [guidePath(locale), guidePath(locale, GUIDE_LINKS[locale][0].slug), guidePath(locale, 'no-such-guide')]);
     const carriers = SUPPORTED_LOCALES.flatMap((locale) => [carrierPath(locale), carrierPath(locale, 'no-such-carrier')]);
-    for (const path of [...guides, ...carriers]) {
+    for (const path of [...guides, ...carriers, ...SUPPORTED_LOCALES.map(assistantsPath)]) {
       expect(matches(path), path).toBe(true);
       expect(matches(path, prefetch), path).toBe(true);
       expect(matches(path, { purpose: 'prefetch' }), path).toBe(true);

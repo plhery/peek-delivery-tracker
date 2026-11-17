@@ -54,9 +54,13 @@ describe('safe analytics collection', () => {
     a.trackScreen('guides/français');
     a.trackScreen('guides');
     a.trackScreen('/fr/guides');
+    // The page on connecting an assistant counts under its language alone.
+    a.trackScreen('assistants/pt-br');
+    a.trackScreen('assistants/fr/more');
+    a.trackScreen('assistants');
     await a.startAnalytics(); await settle();
     const urls = requests.filter((r) => r.url === config.endpoint).map((r) => JSON.parse(r.init!.body as string).payload.url);
-    expect(urls).toEqual(['/guides/fr', `/guides/fr/${id}`, `/guides/fr/${id}`]); // two views, then app-open on the second
+    expect(urls).toEqual(['/guides/fr', `/guides/fr/${id}`, '/assistants/pt-br', '/assistants/pt-br']); // three views, then app-open on the last
   });
 
   it('counts no app open for a page that is not the app', async () => {

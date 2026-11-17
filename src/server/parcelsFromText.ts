@@ -80,6 +80,15 @@ function retryAfter(error: HttpError): number | null {
   return Number.isFinite(value) && value > 0 ? value : null;
 }
 
+/** How a text's numbers are added. */
+export interface AddingOptions {
+  /**
+   * False to add no number the account doesn't follow yet, as for an email that says its parcel was delivered: only
+   * those it follows are then reported.
+   */
+  addNew?: boolean;
+}
+
 /**
  * Adds the numbers to an account, each as the Add sheet would, with the same daily allowance, parcel limit and
  * first check. A number the account already follows is left as it is and costs nothing. Once the allowance or the
@@ -90,6 +99,7 @@ export async function addNumbersToAccount(
   userId: string,
   numbers: readonly NumberInText[],
   label: string,
+  { addNew = true }: AddingOptions = {},
 ): Promise<ParcelAddition[]> {
   const known = await service.accountTrackingNumbers(userId, numbers.map(({ normalized }) => normalized));
   const additions: ParcelAddition[] = [];
@@ -100,6 +110,7 @@ export async function addNumbersToAccount(
       additions.push({ trackingNumber: normalized, carrier, outcome: 'known', packageId: known.get(normalized) ?? null });
       continue;
     }
+    if (!addNew) continue;
     if (stopped) {
       additions.push({ ...stopped, trackingNumber: normalized, carrier } as ParcelAddition);
       continue;
@@ -163,7 +174,8 @@ export async function addParcelsFromText(
   text: string,
   label: string,
   carriers: readonly CarrierId[] = [],
+  options: AddingOptions = {},
 ): Promise<ParcelAddition[]> {
   const numbers = trackingNumbersInText(text, carriers);
-  return numbers.length ? addNumbersToAccount(service, userId, numbers, label) : [];
+  return numbers.length ? addNumbersToAccount(service, userId, numbers, label, options) : [];
 }

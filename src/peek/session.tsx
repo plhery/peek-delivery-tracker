@@ -5,7 +5,8 @@ import type { KeepOutcome } from './pending';
 
 /** The ways to sign in that a build with accounts offers. */
 export type SignInMethods = Pick<ComponentProps<typeof SignInScreen>,
-  'configured' | 'googleEnabled' | 'appleEnabled' | 'emailOtpEnabled' | 'oidcName' | 'signInWithGoogle' | 'signInWithApple' | 'signInWithOidc' | 'sendCode' | 'verifyCode'>;
+  'configured' | 'googleEnabled' | 'appleEnabled' | 'emailOtpEnabled' | 'oidcName' | 'signInWithGoogle' | 'signInWithApple' | 'signInWithOidc' | 'sendCode' | 'verifyCode'
+  | 'passwordFor' | 'signInWithPassword'>;
 
 /**
  * Who is looking at the front door or a parcel page, and what they can do

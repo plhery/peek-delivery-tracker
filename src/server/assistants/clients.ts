@@ -256,11 +256,16 @@ function readDocument(url: string): Promise<unknown> {
   });
 }
 
-/** The client a metadata document describes, when it is one Peek can serve: a public client, with its own address as id. */
+/**
+ * The client a metadata document describes, when it is one Peek can serve: a public client, with its own address as id.
+ * A document that lists the methods it can sign in to the token endpoint with (ChatGPT's) must list `none`, whatever
+ * method it prefers; one that names a single method must name `none`.
+ */
 export function clientFromDocument(id: string, document: unknown): AssistantClient | null {
   if (!isRecord(document) || document.client_id !== id) return null;
+  const methods = document.token_endpoint_auth_methods_supported;
   const method = document.token_endpoint_auth_method;
-  if (method !== undefined && method !== 'none') return null;
+  if (methods !== undefined ? !Array.isArray(methods) || !methods.includes('none') : method !== undefined && method !== 'none') return null;
   const uris = document.redirect_uris;
   if (!Array.isArray(uris) || !uris.length || uris.length > MOST_REDIRECT_URIS) return null;
   if (!uris.every((uri) => typeof uri === 'string' && redirectUriProblem(uri) === null)) return null;

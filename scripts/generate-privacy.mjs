@@ -6,12 +6,13 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 /**
  * The site's documents, each written in Markdown at the repository's root and published
- * as a page of its own: `npm run privacy` writes the privacy notice, `npm run support` the
- * help page, `npm run accessibility` the accessibility page. Only the notice says since when
- * it applies.
+ * as a page of its own: `npm run privacy` writes the privacy notice, `npm run terms` the
+ * terms of use, `npm run support` the help page, `npm run accessibility` the accessibility
+ * page. The notice and the terms say since when they apply.
  */
 export const PAGES = {
   privacy: { source: 'PRIVACY.md', output: 'public/privacy.html', title: 'Privacy — Peek', heading: 'Privacy notice', dated: true },
+  terms: { source: 'TERMS.md', output: 'public/terms.html', title: 'Terms — Peek', heading: 'Terms of use', dated: true },
   support: { source: 'SUPPORT.md', output: 'public/support.html', title: 'Help — Peek', heading: 'Help', dated: false },
   accessibility: { source: 'ACCESSIBILITY.md', output: 'public/accessibility.html', title: 'Accessibility — Peek', heading: 'Accessibility', dated: false },
 };
@@ -42,7 +43,8 @@ function inlineHtml(text, source, scrambled) {
 
 /**
  * A document's Markdown as its page's blocks. It knows what the documents use: the title,
- * the notice's effective date, `##` headings, paragraphs, `- ` lists and a closing `> ` note.
+ * the effective date of the notice and the terms, `##` headings, paragraphs, `- ` lists
+ * and a closing `> ` note.
  */
 export function pageBlocks({ source, dated }, markdown, scrambled) {
   const inline = (text) => inlineHtml(text, source, scrambled);
@@ -113,7 +115,7 @@ export async function currentPage(name) {
   });
 }
 
-// `privacy`, `support` or `accessibility` names the page to write; without a name, all are. `--check` writes nothing.
+// `privacy`, `terms`, `support` or `accessibility` names the page to write; without a name, all are. `--check` writes nothing.
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const names = process.argv.slice(2).filter((argument) => argument !== '--check');
   const unknown = names.find((name) => !Object.hasOwn(PAGES, name));

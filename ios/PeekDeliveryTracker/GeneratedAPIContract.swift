@@ -4647,6 +4647,8 @@ struct AddByEmailResponse: Codable, Equatable, Hashable, Sendable {
 enum AddByEmailResult: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case added
     case known
+    case named
+    case delivered
     case none
     case limited
     case full

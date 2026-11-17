@@ -150,6 +150,7 @@ describe('a lease lost with the parcel intact', () => {
     vi.spyOn(client, 'forgetOldParcelFeedback').mockResolvedValue(0);
     vi.spyOn(client, 'forgetUnfollowedTrackingReview').mockResolvedValue({ cases: 0, signals: 0 });
     vi.spyOn(client, 'forgetExpiredPushInbox').mockResolvedValue(0);
+    vi.spyOn(client, 'forgetOldInboundMail').mockResolvedValue(0);
     vi.spyOn(client, 'recordUsageMetrics').mockResolvedValue();
     vi.spyOn(client, 'publicLookupUsageSummary').mockResolvedValue({ buckets: 0, p50: 0, p90: 0, max: 0, detection: { buckets: 0, p50: 0, p90: 0, max: 0 } });
     finish.mockRejectedValue(new SyncJobLeaseLost());

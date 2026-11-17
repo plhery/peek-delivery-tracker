@@ -142,7 +142,7 @@ function rows(value: unknown): JsonObject[] {
   return Array.isArray(value) ? value.filter(isRecord) : [];
 }
 
-const INBOUND_MAIL_RESULTS = new Set(['added', 'known', 'none', 'limited', 'full', 'confirmation']);
+const INBOUND_MAIL_RESULTS = new Set(['added', 'known', 'named', 'delivered', 'none', 'limited', 'full', 'confirmation']);
 
 function inboundMailbox(value: unknown): InboundMailbox | null {
   const row = Array.isArray(value) ? value[0] : value;
@@ -330,9 +330,9 @@ export interface InboundMailbox {
   confirmation: { code: string | null; link: string | null; receivedAt: string } | null;
 }
 
-export type InboundMailResult = 'added' | 'known' | 'none' | 'limited' | 'full' | 'confirmation';
+export type InboundMailResult = 'added' | 'known' | 'named' | 'delivered' | 'none' | 'limited' | 'full' | 'confirmation';
 
-/** One email to a forwarding address: when it came, who sent it and what it did. Never its content. */
+/** One email to a forwarding address: when it came, who sent it and what it did. */
 export interface InboundMailEntry {
   at: string;
   /** The shop or sender's name; empty when the email was not read. */
@@ -1429,6 +1429,31 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_sender: sender,
       },
     });
+  }
+
+  /**
+   * Keeps an email the account's address received, as received, for seven days (forgetOldInboundMail). False when the
+   * account has no address any more.
+   */
+  async keepInboundMail(userId: string, raw: Uint8Array): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/keep_inbound_mail', {
+      method: 'POST',
+      body: { p_user_id: userId, p_raw: Buffer.from(raw.buffer, raw.byteOffset, raw.byteLength).toString('base64') },
+    }) === true;
+  }
+
+  /** Deletes the emails kept over seven days ago; returns how many. */
+  async forgetOldInboundMail(): Promise<number> {
+    return Number(await this.request('/rest/v1/rpc/forget_old_inbound_mail', { method: 'POST', body: {} }) ?? 0);
+  }
+
+  /** Names the account's parcel, unless it has a name: false when it had one, or is not the account's. */
+  async nameUnnamedPackage(userId: string, packageId: string, label: string): Promise<boolean> {
+    return rows(await this.request(`/rest/v1/packages?${query({ id: `eq.${packageId}`, user_id: `eq.${userId}`, label: 'eq.', select: 'id' })}`, {
+      method: 'PATCH',
+      body: { label },
+      prefer: 'return=representation',
+    })).length > 0;
   }
 
   /** Stores a client that registered itself. */

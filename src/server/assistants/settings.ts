@@ -20,6 +20,11 @@ export interface AssistantSettings {
 export const SCOPES = ['parcels:read', 'parcels:write'] as const;
 export type Scope = (typeof SCOPES)[number];
 
+/** Where a client learns how to sign in to `/mcp`: its protected resource metadata (RFC 9728). */
+export function resourceMetadataUrl(settings: Pick<AssistantSettings, 'issuer'>): string {
+  return `${settings.issuer}/.well-known/oauth-protected-resource/mcp`;
+}
+
 export const ACCESS_TOKEN_SECONDS = 3_600;
 export const REFRESH_TOKEN_DAYS = 60;
 

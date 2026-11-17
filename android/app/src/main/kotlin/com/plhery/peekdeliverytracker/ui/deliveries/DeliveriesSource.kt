@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.BuildConfig
+import com.plhery.peekdeliverytracker.core.AddByEmailStore
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
@@ -387,6 +388,12 @@ interface DeliveriesSource {
 
     /** The app's `FriendInvitationStore()`: the invitation a link brought, shown over everything until it goes. */
     val invitation: FriendInvitationStore
+
+    /**
+     * Settings' "Add parcels by email" (the web's `useAddByEmail`): whether the server offers the account signed in a
+     * forwarding address, and the address itself, kept for the process.
+     */
+    val addByEmail: AddByEmailStore
 }
 
 /**
@@ -612,6 +619,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val friendsClient: FriendsClient get() = container.friendsClient
 
     override val invitation: FriendInvitationStore get() = container.invitation
+
+    override val addByEmail: AddByEmailStore get() = container.addByEmail
 
     override val notificationError get() = container.parcels.notificationErrorFlow
 

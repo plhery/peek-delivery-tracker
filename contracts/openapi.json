@@ -69264,7 +69264,7 @@
       "AddByEmail": {
         "type": "object",
         "additionalProperties": false,
-        "description": "An account's forwarding address for adding parcels by email, and what its last emails did. No email is kept.",
+        "description": "An account's forwarding address for adding parcels by email, and what its last emails did. The emails themselves are kept seven days, then deleted.",
         "required": [
           "address",
           "createdAt",
@@ -69336,7 +69336,7 @@
       "AddByEmailEntry": {
         "type": "object",
         "additionalProperties": false,
-        "description": "One email to the forwarding address: when it came, who sent it and what it did. Never its content.",
+        "description": "One email to the forwarding address: when it came, who sent it and what it did.",
         "required": [
           "at",
           "sender",
@@ -69425,12 +69425,14 @@
         "enum": [
           "added",
           "known",
+          "named",
+          "delivered",
           "none",
           "limited",
           "full",
           "confirmation"
         ],
-        "description": "added: it added a parcel; known: its parcels were already followed; none: it named no tracking number; limited: an allowance was used up; full: the account follows as many parcels as it may; confirmation: Gmail asked to confirm forwarding."
+        "description": "added: it added a parcel; known: its parcels were already followed; named: its parcels were already followed, and one without a name took the shop's; delivered: it said its parcel was delivered, which adds none; none: it named no tracking number; limited: an allowance was used up; full: the account follows as many parcels as it may; confirmation: Gmail asked to confirm forwarding."
       },
       "AssistantScope": {
         "type": "string",

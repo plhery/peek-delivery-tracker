@@ -7,6 +7,7 @@ import { translateMessage } from '../../../src/lib/messages';
 import { clientIp, clientNetwork, clientSite } from '../../../src/server/api';
 import { readAuthorizationRequest } from '../../../src/server/assistants/authorize';
 import { consentDetails } from '../../../src/server/assistants/consent';
+import { reviewAccountDigest } from '../../../src/server/assistants/review';
 import { assistantsConfigured } from '../../../src/server/assistants/settings';
 import { RateLimiter } from '../../../src/server/rateLimit';
 import { messagesFor, requestLanguage, requestLocale } from '../../../src/server/requestLocale';
@@ -64,5 +65,6 @@ export default async function AuthorizePage({ searchParams }: Props) {
   if (!('request' in read)) return <AssistantConsentScreen {...language} request={null} query="" />;
   // The answer goes where the page says, even if the client's document names another address by then.
   parameters.set('redirect_uri', read.request.redirectUri);
-  return <AssistantConsentScreen {...language} request={consentDetails(read.request)} query={parameters.toString()} />;
+  return <AssistantConsentScreen {...language} request={consentDetails(read.request)} query={parameters.toString()}
+    reviewAccount={reviewAccountDigest()} />;
 }

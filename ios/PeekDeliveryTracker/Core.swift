@@ -389,7 +389,9 @@ final class Localizer: ObservableObject {
         ExtensionLocalizer.countForm(count, languageCode: language.rawValue)
     }
 
-    func errorMessage(_ error: Error) -> String {
+    /// `fallback`: what a failure the app has no guidance for says, in place of the generic message, such as what the
+    /// action that failed was.
+    func errorMessage(_ error: Error, fallback: String? = nil) -> String {
         if error is NativeVerificationFailed { return text("door.verification.body") }
         if let error = error as? DeliveryAPIError {
             switch error {
@@ -398,7 +400,7 @@ final class Localizer: ObservableObject {
             case .duplicateTracking:
                 return text("native.error.duplicateTracking")
             case .invalidResponse:
-                return text("native.error.invalidResponse")
+                return text(fallback ?? "native.error.invalidResponse")
             case .labelTooLong:
                 return text("native.error.labelTooLong")
             case .notificationsDenied:
@@ -416,9 +418,9 @@ final class Localizer: ObservableObject {
             case .allowanceUsed:
                 return text("error.allowanceUsed")
             case .service(let message):
-                return serviceErrorMessage(message)
+                return serviceErrorMessage(message, fallback: fallback ?? "error.generic")
             case .serviceFailed(let status):
-                return text("native.error.serviceFailed", ["status": status])
+                return fallback.map { text($0) } ?? text("native.error.serviceFailed", ["status": status])
             }
         }
         if error is DeviceLookupsSpent { return text("peek.dailyLimit") }
@@ -445,7 +447,7 @@ final class Localizer: ObservableObject {
             }
         }
         if error is URLError { return text("error.connection") }
-        return text("error.generic")
+        return text(fallback ?? "error.generic")
     }
 
     private func serviceErrorMessage(_ message: String, fallback: String = "error.generic") -> String {

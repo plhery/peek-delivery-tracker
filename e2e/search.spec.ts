@@ -55,7 +55,7 @@ test('robots.txt lets everything be fetched and names the sitemap by its whole a
   expect(lines).toEqual(['User-Agent: *', 'Allow: /', `Sitemap: ${baseURL}/sitemap.xml`]);
 });
 
-test('sitemap.xml lists the landing, the guides and the carriers’ pages in every language, the privacy notice, the help page and the accessibility page, dating only the guides and the carriers’ pages', async ({ request, baseURL }) => {
+test('sitemap.xml lists the landing, the guides and the carriers’ pages in every language, the privacy notice, the terms, the help page and the accessibility page, dating only the guides and the carriers’ pages', async ({ request, baseURL }) => {
   test.skip(test.info().project.name !== 'desktop-chromium', 'The server answers the same whatever the browser.');
   // Hundreds of pages, each drawn when it is asked for.
   test.setTimeout(120_000);
@@ -67,7 +67,7 @@ test('sitemap.xml lists the landing, the guides and the carriers’ pages in eve
   const landings = [`${baseURL}/`, ...languages.map((language) => `${baseURL}/${language}`)];
   expect(addresses.slice(0, landings.length)).toEqual(landings);
   // At the end, the static documents.
-  const documents = ['/privacy.html', '/support.html', '/accessibility.html'].map((path) => `${baseURL}${path}`);
+  const documents = ['/privacy.html', '/terms.html', '/support.html', '/accessibility.html'].map((path) => `${baseURL}${path}`);
   expect(addresses.slice(-documents.length)).toEqual(documents);
   // Between them, the guides: their own page in every language, then each guide in every language.
   const under = (section: string) => (address: string) => new RegExp(`^(?:/(?:${languages.join('|')}))?/${section}(?:/[a-z0-9-]+)?$`).test(new URL(address).pathname);

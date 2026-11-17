@@ -216,6 +216,14 @@ describe('client id metadata documents', () => {
     expect(clientFromDocument(id, { ...document, client_uri: 'http://assistant.example.com' })?.uri).toBeNull();
   });
 
+  it('serves a client that can sign in without a secret, whichever method it prefers, as ChatGPT\'s document says', () => {
+    const chatgpt = { ...document, token_endpoint_auth_methods_supported: ['none', 'private_key_jwt'], token_endpoint_auth_method: 'private_key_jwt' };
+    expect(clientFromDocument(id, chatgpt)?.id).toBe(id);
+    expect(clientFromDocument(id, { ...chatgpt, token_endpoint_auth_methods_supported: ['private_key_jwt'] })).toBeNull();
+    expect(clientFromDocument(id, { ...chatgpt, token_endpoint_auth_methods_supported: 'none' })).toBeNull();
+    expect(clientFromDocument(id, { ...document, token_endpoint_auth_methods_supported: [] })).toBeNull();
+  });
+
   it('refuses a document for another id, a confidential client, or bad redirects', () => {
     expect(clientFromDocument(id, { ...document, client_id: 'https://assistant.example.com/other.json' })).toBeNull();
     expect(clientFromDocument(id, { ...document, client_id: undefined })).toBeNull();

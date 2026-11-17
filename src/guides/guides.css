@@ -134,6 +134,11 @@ a.guide__crumb:hover { color: var(--ink); }
 .guide-card.carrier-card { padding-top: 20px; }
 .carrier-card__name { display: flex; align-items: center; gap: 8px; padding: 0 20px 4px; color: var(--ink-soft); font: 600 11px ui-monospace, SFMono-Regular, Menlo, monospace; letter-spacing: 1.2px; text-transform: uppercase; }
 
+/* The page on connecting an assistant: the feature's badge by its name, and the address to copy, whole on one card. */
+.guide__badge { margin-left: 10px; padding: 2px 8px; border-radius: 999px; background: var(--yellow-soft); color: var(--ochre); font-size: 10px; letter-spacing: .5px; }
+.guide-body .assistants-address { padding: 16px 20px; border-radius: 18px; background: var(--paper); box-shadow: var(--shadow); }
+.guide-body .assistants-address code { padding: 0; background: none; font-size: 16px; user-select: all; }
+
 .guide-footer { display: grid; justify-items: center; gap: 2px; margin: 72px 0 0; padding-bottom: max(28px, env(safe-area-inset-bottom)); color: var(--ink-soft); font-size: 12px; }
 .guide-footer__links, .guide-footer__languages { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0 22px; }
 .guide-footer a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }

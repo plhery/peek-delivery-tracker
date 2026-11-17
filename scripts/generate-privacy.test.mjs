@@ -18,8 +18,8 @@ for (const [name, { source, output }] of Object.entries(PAGES)) {
   });
 }
 
-test('the help page and the accessibility page say where to write', () => {
-  for (const name of ['support', 'accessibility']) {
+test('the terms, the help page and the accessibility page say where to write', () => {
+  for (const name of ['terms', 'support', 'accessibility']) {
     assert.match(published(name), /<a data-mail="[0-9a-f]+">hello at peektracker\.com<\/a>/, name);
   }
 });
@@ -44,9 +44,11 @@ test('a document becomes the blocks of its page', () => {
   ]);
 });
 
-test('only the notice has an effective date', () => {
+test('only the notice and the terms have an effective date', () => {
   const markdown = '# Title\n\nEffective: at once, in most cases.';
-  assert.deepEqual(pageBlocks(PAGES.privacy, markdown, scrambled), ['<p class="effective">Effective at once, in most cases.</p>']);
+  for (const page of [PAGES.privacy, PAGES.terms]) {
+    assert.deepEqual(pageBlocks(page, markdown, scrambled), ['<p class="effective">Effective at once, in most cases.</p>']);
+  }
   for (const page of [PAGES.support, PAGES.accessibility]) {
     assert.deepEqual(pageBlocks(page, markdown, scrambled), ['<p>Effective: at once, in most cases.</p>']);
   }
@@ -58,6 +60,10 @@ test('each page frames its document under its own heading and carries the two sc
   assert.match(privacy, /^<!doctype html>\n<!-- Generated from PRIVACY\.md/);
   assert.match(privacy, /<title>Privacy — Peek<\/title>\n {4}<script>appearance\(\)<\/script>/);
   assert.match(privacy, /<h1>Privacy notice<\/h1>\n {6}<p>One paragraph\.<\/p>\n {4}<\/main>\n {4}<script>addresses\(\)<\/script>\n {2}<\/body>/);
+  const terms = frame('terms');
+  assert.match(terms, /^<!doctype html>\n<!-- Generated from TERMS\.md/);
+  assert.match(terms, /<title>Terms — Peek<\/title>\n {4}<script>appearance\(\)<\/script>/);
+  assert.match(terms, /<h1>Terms of use<\/h1>\n {6}<p>One paragraph\.<\/p>\n {4}<\/main>\n {4}<script>addresses\(\)<\/script>\n {2}<\/body>/);
   const support = frame('support');
   assert.match(support, /^<!doctype html>\n<!-- Generated from SUPPORT\.md/);
   assert.match(support, /<title>Help — Peek<\/title>\n {4}<script>appearance\(\)<\/script>/);
@@ -66,6 +72,13 @@ test('each page frames its document under its own heading and carries the two sc
   assert.match(accessibility, /^<!doctype html>\n<!-- Generated from ACCESSIBILITY\.md/);
   assert.match(accessibility, /<title>Accessibility — Peek<\/title>\n {4}<script>appearance\(\)<\/script>/);
   assert.match(accessibility, /<h1>Accessibility<\/h1>\n {6}<p>One paragraph\.<\/p>\n {4}<\/main>\n {4}<script>addresses\(\)<\/script>\n {2}<\/body>/);
+});
+
+test('the notice, the terms and the help page lead to one another', () => {
+  assert.match(published('privacy'), /<a href="https:\/\/peektracker\.com\/terms\.html">terms of use<\/a>/);
+  assert.match(published('terms'), /<a href="https:\/\/peektracker\.com\/privacy\.html">privacy notice<\/a>/);
+  assert.match(published('support'), /<a href="https:\/\/peektracker\.com\/privacy\.html">privacy notice<\/a>/);
+  assert.match(published('support'), /<a href="https:\/\/peektracker\.com\/terms\.html">terms of use<\/a>/);
 });
 
 test('Markdown a page cannot show is refused, naming its document', () => {

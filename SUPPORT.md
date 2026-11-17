@@ -60,6 +60,14 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
 - Signed in, Settings › Notifications also has
   **Email me when a parcel arrives**.
 
+## Assistants
+
+Signed in, Settings › Assistants connects Peek to Claude, ChatGPT, Gemini or
+another assistant: it can then show your parcels and add the tracking numbers
+you give it. The feature is experimental.
+[Connecting an assistant](https://peektracker.com/assistants) has the steps,
+what Peek shares and what to do when one stops working.
+
 ## Your data
 
 - A copy: Settings › Account & data › **Download my data** saves a file with
@@ -76,7 +84,8 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
   itself 30 days after delivery.
 
 The [privacy notice](https://peektracker.com/privacy.html) says what Peek
-keeps, where and for how long.
+keeps, where and for how long, and the
+[terms of use](https://peektracker.com/terms.html) what using it involves.
 
 ## Contact
 

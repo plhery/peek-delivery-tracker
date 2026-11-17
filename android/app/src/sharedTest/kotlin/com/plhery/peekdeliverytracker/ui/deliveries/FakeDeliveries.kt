@@ -14,6 +14,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
 import com.plhery.peekdeliverytracker.core.FriendInvitationStore
+import com.plhery.peekdeliverytracker.core.AddByEmailStore
 import com.plhery.peekdeliverytracker.core.FriendsActivityStore
 import com.plhery.peekdeliverytracker.core.FriendsStore
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
@@ -40,6 +41,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.friends.FakeFriendsClient
+import com.plhery.peekdeliverytracker.ui.settings.FakeAddByEmailClient
 import java.io.File
 import java.time.Instant
 import java.time.ZoneOffset
@@ -598,6 +600,10 @@ class FakeDeliveries(
         )
     }
     override val friendsActivity by lazy { FriendsActivityStore(friendsClient, signedIn = { this.session.value is AuthenticationState.SignedIn }) }
+
+    /** The forwarding address, which the server offers no account until a test sets [FakeAddByEmailClient.offer]. */
+    val addByEmailClient = FakeAddByEmailClient()
+    override val addByEmail by lazy { AddByEmailStore(addByEmailClient) }
 
     override val notificationStatus = MutableStateFlow(NotificationAuthorizationStatus.NotDetermined)
     override val notificationsEnabledOnDevice = MutableStateFlow(false)

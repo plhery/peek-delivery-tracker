@@ -51,6 +51,7 @@ elsewhere, run `:app:testDebugUnitTest` instead of `:app:verifyRoborazziDebug` a
   Never edit the generated carrier catalog in the contract by hand.
 - **Privacy notice**: edit `PRIVACY.md`, then run `npm run privacy`. It writes
   `public/privacy.html`, the page both apps open.
+- **Terms of use**: edit `TERMS.md`, then run `npm run terms`. It writes `public/terms.html`.
 - **Help page**: edit `SUPPORT.md`, then run `npm run support`. It writes
   `public/support.html`.
 - **Accessibility page**: edit `ACCESSIBILITY.md`, then run `npm run accessibility`.

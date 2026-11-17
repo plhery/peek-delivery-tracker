@@ -256,6 +256,33 @@ anyone out:
    build keep reaching the old host. Pages accept both the URL built into them and
    `SUPABASE_PUBLIC_URL`, so the build and the environment can change at different moments.
 
+## Review account
+
+An assistant directory's reviewers sign in to test the connector, without the account's
+inbox. `REVIEW_ACCOUNT_EMAIL` names one account they sign in to with a password: on the page
+where an assistant asks to connect, typing that address asks for its password instead of
+sending a code. The page knows the address only by its SHA-256 digest. No other page and no
+other address offer a password.
+
+Supabase Auth already takes a password for any account that has one
+(`/token?grant_type=password`, on with the Email provider); an account made with a code,
+Google or Apple has no password anyone knows. Auth's token limit (`GOTRUE_RATE_LIMIT_TOKEN_REFRESH`) counts
+these sign-ins per network, through `X-Client-Network`, as its verify limit counts code
+checks. A password sign-in counts as a recent sign-in.
+
+1. Sign in to Peek once with a code, at an address you own and keep for reviewers, and add
+   a few parcels.
+2. Set its password:
+   `SUPABASE_URL=https://supabase.example.com npm run review-password -- review@example.com`.
+   It asks for the service role key, unless `SUPABASE_SERVICE_ROLE_KEY` is set, then for the
+   password, at least 20 characters, at prompts that don't show them. Auth ends the
+   account's sessions. Run it again to change the password.
+3. Set `REVIEW_ACCOUNT_EMAIL` on the app, and list the account in `ASSISTANT_ACCOUNTS`
+   unless it holds `*`.
+
+Without `REVIEW_ACCOUNT_EMAIL`, the page asks no one for a password, but Auth still takes
+the account's password until it changes or the account is deleted.
+
 ## Checklist
 
 1. Request a code for a non-team address; the branded email arrives once.

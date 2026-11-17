@@ -108,7 +108,7 @@ struct ParcelFeedbackQuestionView: View {
             case .reasons:
                 VStack(alignment: .leading, spacing: 10) {
                     question("feedback.whatsOff")
-                    FeedbackFlow(spacing: 6) {
+                    PillFlow(spacing: 6) {
                         ForEach(Array((model.page?.reasons ?? ParcelFeedbackReason.allCases).enumerated()), id: \.element) { order, reason in
                             FeedbackPill(title: localizer.text(reason.labelKey)) { Task { await model.pick(reason) } }
                                 .modifier(ComesIn(order: order))
@@ -324,7 +324,7 @@ private struct FeedbackPill: View {
 }
 
 /// Lays its pills out like words: one that does not fit on the line starts the next.
-private struct FeedbackFlow: Layout {
+struct PillFlow: Layout {
     var spacing: CGFloat = 6
 
     func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
@@ -491,7 +491,7 @@ private struct ParcelFeedbackWordsSheet: View {
 
     var body: some View {
         FeedbackSheet(title: localizer.text("feedback.whatsOff"), busy: model.sending, writing: writing) {
-            FeedbackFlow(spacing: 6) {
+            PillFlow(spacing: 6) {
                 ForEach(model.page?.reasons ?? ParcelFeedbackReason.allCases) { reason in chip(reason) }
             }
             FeedbackField(label: localizer.text("feedback.note"), focused: writing) { writing = true } input: {

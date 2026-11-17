@@ -1,11 +1,12 @@
 # Peek privacy notice
 
-Effective: 15 November 2026
+Effective: 17 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
 Peek does not sell personal data, serve advertising, or use advertising
-analytics.
+analytics. The [terms of use](https://peektracker.com/terms.html) say what
+using Peek involves.
 
 ## Data the service processes
 
@@ -37,9 +38,11 @@ analytics.
   when it was sent and whether sending worked.
 - When you turn on adding parcels by email: your forwarding address, how many
   emails reached it today, of its last twenty emails when each came, the
-  sender's name and what it added, and the code and link of a Gmail forwarding
-  confirmation until the next email. Of an email, the service keeps only the
-  tracking numbers it adds and the sender's name, never the email itself.
+  sender's name and what it did, and the code and link of a Gmail forwarding
+  confirmation until the next email. Each email the service reads is kept as it
+  came, with your account's id and when it came, for seven days. It is used to
+  learn to read such emails better. An email a limit held back and Gmail's
+  forwarding confirmation are not kept.
 - When you connect an assistant or make a personal token: its name, the site
   or app it answers to, what you allowed it (to see your parcels, or also to
   add and archive them), when you connected it and when it last used Peek, and
@@ -83,7 +86,9 @@ carrier updates, synchronize devices, send requested notifications, prevent
 abuse, diagnose failures, and honor export or deletion requests. Following your
 parcels, with what you switch on, is the service you ask for. Abuse limits,
 diagnostics and usage analytics rest on a legitimate interest in keeping Peek
-safe and working. The delivery email rests on your consent.
+safe and working. Keeping the emails you forward for seven days rests on a
+legitimate interest in reading them better. The delivery email rests on your
+consent.
 
 The app, its database and sign-in (self-hosted Supabase), its logs and its
 analytics run on a server rented from netcup GmbH, in Germany. Requests reach
@@ -397,9 +402,11 @@ account was deleted or you checked the number without saving it, then deleted.
 A new check of the number restarts the 10 days. What a check learnt about a
 number's carrier also goes after 90 days without a new check. The record of a
 delivery email goes with the account; Resend deletes its own copy after 30 days.
-Turning off adding parcels by email deletes the forwarding address and what it
-recorded; a new address replaces the old one, which then takes no more email.
-The count of emails an account forwarded each day is kept for seven days.
+Turning off adding parcels by email deletes the forwarding address, what it
+recorded and the emails kept from it; a new address replaces the old one, which
+then takes no more email. A kept email is deleted seven days after it came, or
+sooner once the account has 100 newer ones. The count of emails an account
+forwarded each day is kept for seven days.
 Disconnecting an assistant or deleting a personal token removes it and its
 keys. A connection unused for 60 days, whose keys have all expired, is removed
 the next time you open the list or connect an assistant.
@@ -408,7 +415,7 @@ Use **Download my data** in the account menu for a machine-readable export,
 including your Friends profile and connections. Use **Delete account** to
 permanently delete the Auth user and, with it, your parcels, tracking events,
 shared links, browser subscriptions, native device registrations, delivery
-acknowledgements, delivery email records, forwarding address, connected
+acknowledgements, delivery email records, forwarding address and kept emails, connected
 assistants and personal tokens, and your Friends
 profile, connections and invitations. If you use Sign in with Apple, the iPhone app asks you to
 sign in with Apple once more, and the service asks Apple to revoke Peek's

@@ -63792,7 +63792,7 @@ export interface ApiAddByEmailResponse {
   "dailyLimit": number;
 }
 
-export type ApiAddByEmailResult = "added" | "known" | "none" | "limited" | "full" | "confirmation";
+export type ApiAddByEmailResult = "added" | "known" | "named" | "delivered" | "none" | "limited" | "full" | "confirmation";
 
 export type ApiAssistantScope = "parcels:read" | "parcels:write";
 

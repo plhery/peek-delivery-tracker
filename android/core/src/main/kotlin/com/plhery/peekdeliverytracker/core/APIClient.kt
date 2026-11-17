@@ -1,5 +1,6 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -502,11 +503,33 @@ class DeliveryApiClient(
         )
     }
 
+    /**
+     * The account's forwarding address for adding parcels by email ([AddByEmailResponseReader]), or null when the server
+     * offers this account none: it answers 404 until the feature is set up and open to the account.
+     */
+    suspend fun readAddByEmail(): AddByEmailResponse? {
+        val response = rawRequest(ADD_BY_EMAIL, missing = 404)
+        if (response.statusCode == 404) return null
+        return decodeAnswer(AddByEmailResponseReader, response.body)
+    }
+
+    /** Makes the forwarding address, or with `renew` a new one in its place, whose old one stops working at once. */
+    suspend fun openAddByEmail(renew: Boolean = false): AddByEmailResponse = request(
+        ADD_BY_EMAIL, AddByEmailResponseReader, "POST", (if (renew) """{"renew":true}""" else "{}").toByteArray(Charsets.UTF_8),
+    )
+
+    /** Turns adding by email off: emails to the address are dropped. The answer has no body. */
+    suspend fun closeAddByEmail() {
+        rawRequest(ADD_BY_EMAIL, "DELETE")
+    }
+
     private fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray = JsonEncoder.deliveryTracker.encode(serializer, value)
 
-    private suspend fun <T> request(path: String, response: DeserializationStrategy<T>, method: String = "GET", body: ByteArray? = null): T {
-        val data = rawRequest(path, method, body).body
-        return try {
+    private suspend fun <T> request(path: String, response: DeserializationStrategy<T>, method: String = "GET", body: ByteArray? = null): T =
+        decodeAnswer(response, rawRequest(path, method, body).body)
+
+    private suspend fun <T> decodeAnswer(response: DeserializationStrategy<T>, data: ByteArray): T =
+        try {
             // A full parcel list with its histories is large; decode it off the main thread.
             withContext(decoding) { decodeSwiftKeys(response, data) }
         } catch (error: CancellationException) {
@@ -514,9 +537,9 @@ class DeliveryApiClient(
         } catch (error: Exception) {
             throw DeliveryApiError.InvalidResponse()
         }
-    }
 
-    private suspend fun performRawRequest(path: String, method: String = "GET", body: ByteArray? = null): HttpResponse {
+    /** `missing`: a status that means the thing asked for isn't there, answered rather than thrown. */
+    private suspend fun performRawRequest(path: String, method: String = "GET", body: ByteArray? = null, missing: Int? = null): HttpResponse {
         val generation = session.generation
         session.checkGeneration(generation)
         if (!session.signedIn) throw DeliveryApiError.AuthenticationExpired()
@@ -549,7 +572,7 @@ class DeliveryApiClient(
             session.forceSignOut()
             throw DeliveryApiError.AuthenticationExpired()
         }
-        if (result.statusCode !in 200 until 300) {
+        if (result.statusCode !in 200 until 300 && result.statusCode != missing) {
             // The plain JSONDecoder, as on the iPhone: the keys exactly as the contract names them.
             val error = try {
                 decodeJson(ErrorResponse.serializer(), result.body)
@@ -568,10 +591,10 @@ class DeliveryApiClient(
         return result
     }
 
-    private suspend fun rawRequest(path: String, method: String = "GET", body: ByteArray? = null): HttpResponse {
+    private suspend fun rawRequest(path: String, method: String = "GET", body: ByteArray? = null, missing: Int? = null): HttpResponse {
         val event = AnalyticsCatalog.bundled?.event(path, method, body)
         try {
-            val result = performRawRequest(path, method, body)
+            val result = performRawRequest(path, method, body, missing)
             if (event != null) analytics(event, if (result.statusCode == 202) DeliveryAnalytics.Outcome.Accepted else DeliveryAnalytics.Outcome.Success)
             return result
         } catch (error: Exception) {

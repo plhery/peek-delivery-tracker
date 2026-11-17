@@ -9,6 +9,7 @@ import { ApiAuthenticationError, ApiRecentSignInError } from '../lib/apiClient';
 import { AppearanceProvider } from '../lib/appearance';
 import { answerAssistantConsent, AssistantRequestError } from '../lib/assistants';
 import { rememberPendingConsent } from '../lib/pendingConsent';
+import { isReviewAccount } from '../lib/reviewAccount';
 import { dropSignInAgain, noteSignInAgain, takeSignInAgain } from '../lib/signInAgain';
 import { useTabTitle } from '../lib/tabTitle';
 import type { SignInMethods } from '../peek/session';
@@ -40,7 +41,7 @@ const SCOPE_WORDS: Record<ApiAssistantScope, MessageKey> = {
  * `/oauth/authorize?…`. They sign in here if they need to, see who asks and for what, and allow or refuse. Nothing is
  * granted until Allow is pressed.
  */
-export function AssistantConsentScreen({ initialLocale, initialMessages, request, query, busy = false }: {
+export function AssistantConsentScreen({ initialLocale, initialMessages, request, query, busy = false, reviewAccount = null }: {
   initialLocale?: Locale;
   initialMessages?: Messages;
   /** Null when Peek can't take the request: an unknown client or answer address, or a request it doesn't support. */
@@ -49,10 +50,15 @@ export function AssistantConsentScreen({ initialLocale, initialMessages, request
   query: string;
   /** The page was opened too often from this network: it asks to try again shortly. */
   busy?: boolean;
+  /**
+   * The SHA-256 digest of the one account a directory's reviewers sign in to with a password, which they can't do
+   * with a code sent to an inbox they don't hold. Null for none: every address gets a code.
+   */
+  reviewAccount?: string | null;
 }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
     <AppearanceProvider>
-      <AuthProvider config={siteAuthConfig}><Consent request={request} query={query} busy={busy} /></AuthProvider>
+      <AuthProvider config={siteAuthConfig}><Consent request={request} query={query} busy={busy} reviewAccount={reviewAccount} /></AuthProvider>
     </AppearanceProvider>
   </I18nProvider>;
 }
@@ -69,7 +75,9 @@ function Card({ children }: { children: ReactNode }) {
 
 type Outcome = 'allowed' | 'denied';
 
-function Consent({ request, query, busy }: { request: ConsentRequest | null; query: string; busy: boolean }) {
+function Consent({ request, query, busy, reviewAccount }: {
+  request: ConsentRequest | null; query: string; busy: boolean; reviewAccount: string | null;
+}) {
   const { t } = useI18n();
   const auth = useAuth();
   const [kept, setKept] = useState<ApiAssistantScope[]>(() => request?.scopes ?? []);
@@ -85,6 +93,10 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
   const apiAuth = useMemo(() => userId ? { userId, getAccessToken: auth.getAccessToken, signal: auth.signal } : undefined,
     [userId, auth.getAccessToken, auth.signal]);
   useTabTitle(`${t('app.title')} — ${t('assistants.consent.tab')}`);
+  // The review account signs in with its password; any other address gets a code.
+  const password = reviewAccount
+    ? { passwordFor: (email: string) => isReviewAccount(reviewAccount, email), signInWithPassword: auth.signInWithPassword }
+    : {};
 
   async function answer(approve: boolean, scopes = kept) {
     if (working || !apiAuth || (approve && !scopes.length)) return;
@@ -160,7 +172,7 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
         subtitle={t('assistants.consent.signInBody', { name })}
         googleEnabled={auth.googleEnabled} appleEnabled={auth.appleEnabled} emailOtpEnabled={auth.emailOtpEnabled} oidcName={auth.oidcName}
         signInWithGoogle={noted(auth.signInWithGoogle)} signInWithApple={noted(auth.signInWithApple)} signInWithOidc={noted(auth.signInWithOidc)}
-        sendCode={auth.sendCode} verifyCode={auth.verifyCode} />
+        sendCode={auth.sendCode} verifyCode={auth.verifyCode} {...password} />
     </main>;
   }
 
@@ -168,6 +180,7 @@ function Consent({ request, query, busy }: { request: ConsentRequest | null; que
     const signInWith: SignInMethods = {
       configured: true, googleEnabled: auth.googleEnabled, appleEnabled: auth.appleEnabled, emailOtpEnabled: auth.emailOtpEnabled, oidcName: auth.oidcName,
       signInWithGoogle: auth.signInWithGoogle, signInWithApple: auth.signInWithApple, signInWithOidc: auth.signInWithOidc, sendCode: auth.sendCode, verifyCode: auth.verifyCode,
+      ...password,
     };
     // A provider returns to `/` alone: the request is noted so that the deliveries come back here, and allow it then.
     const noted = () => {

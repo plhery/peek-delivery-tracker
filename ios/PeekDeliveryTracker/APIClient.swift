@@ -432,6 +432,24 @@ final class DeliveryAPIClient {
         try await rawRequest("/api/account/export").0
     }
 
+    /// The account's forwarding address for adding parcels by email. Nil when the server offers none to this account:
+    /// it answers 404 until the feature is set up and open to it.
+    func addByEmail() async throws -> AddByEmailResponse? {
+        let (data, response) = try await rawRequest("/api/account/inbox", accepting: 404)
+        return response.statusCode == 404 ? nil : try AddByEmailOffer.decode(data)
+    }
+
+    /// Makes the address, or a new one in its place when `renew` is set: the old one stops working at once.
+    func openAddByEmail(renew: Bool) async throws -> AddByEmailResponse {
+        let body = try JSONEncoder.deliveryTracker.encode(renew ? ["renew": true] : [String: Bool]())
+        return try AddByEmailOffer.decode(try await rawRequest("/api/account/inbox", method: "POST", body: body).0)
+    }
+
+    /// Turns adding by email off: emails to the address are dropped. The answer has no body.
+    func closeAddByEmail() async throws {
+        _ = try await rawRequest("/api/account/inbox", method: "DELETE")
+    }
+
     func deleteAccount(confirmation: String, appleAuthorizationCode: String? = nil) async throws {
         let _: OKResponse = try await request(
             "/api/account",
@@ -467,10 +485,12 @@ final class DeliveryAPIClient {
         try JSONDecoder.deliveryTracker.decode(type, from: data)
     }
 
+    /// `accepted`: a status besides 2xx that the caller reads itself, such as a 404 that means "not offered".
     private func performRawRequest(
         _ path: String,
         method: String = "GET",
-        body: Data? = nil
+        body: Data? = nil,
+        accepting accepted: Int? = nil
     ) async throws -> (Data, HTTPURLResponse) {
         let generation = session.generation
         try session.checkGeneration(generation)
@@ -519,7 +539,7 @@ final class DeliveryAPIClient {
             session.forceSignOut()
             throw DeliveryAPIError.authenticationExpired
         }
-        guard (200..<300).contains(result.1.statusCode) else {
+        guard (200..<300).contains(result.1.statusCode) || result.1.statusCode == accepted else {
             let error = try? JSONDecoder().decode(ErrorResponse.self, from: result.0)
             if result.1.statusCode == 429 {
                 if let error, Self.allowanceUsed(error) { throw DeliveryAPIError.allowanceUsed }
@@ -549,10 +569,10 @@ final class DeliveryAPIClient {
             || (parts.count == 4 && parts[0] == "api" && parts[1] == "packages" && UUID(uuidString: String(parts[2])) != nil && parts[3] == "sync")
     }
 
-    private func rawRequest(_ path: String, method: String = "GET", body: Data? = nil) async throws -> (Data, HTTPURLResponse) {
+    private func rawRequest(_ path: String, method: String = "GET", body: Data? = nil, accepting accepted: Int? = nil) async throws -> (Data, HTTPURLResponse) {
         let event = AnalyticsCatalog.bundled?.event(path: path, method: method, body: body)
         do {
-            let result = try await performRawRequest(path, method: method, body: body)
+            let result = try await performRawRequest(path, method: method, body: body, accepting: accepted)
             if let event { DeliveryAnalytics.shared.action(event, result.1.statusCode == 202 ? .accepted : .success) }
             return result
         } catch {

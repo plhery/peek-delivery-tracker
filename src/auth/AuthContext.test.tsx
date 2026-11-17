@@ -298,6 +298,25 @@ it('keeps the account\'s requests going when it signs in again with a code, on t
   await expect(before.getAccessToken()).resolves.toBe('fresh-access-token');
 });
 
+it('signs in with a password through Supabase Auth, and says when it is refused', async () => {
+  const { client, auth } = authClient();
+  const signInWithPassword = vi.fn()
+    .mockResolvedValueOnce({ data: { session: null, user: null }, error: Object.assign(new Error('Invalid login credentials'), { status: 400 }) })
+    .mockResolvedValueOnce({ data: { session: SESSION, user: SESSION.user }, error: null });
+  Object.assign(auth, { signInWithPassword });
+  const { result } = renderHook(() => useAuth(), {
+    wrapper: ({ children }) => <AuthProvider config={null} client={client}>{children}</AuthProvider>,
+  });
+  await waitFor(() => expect(result.current.status).toBe('anonymous'));
+  await expect(act(() => result.current.signInWithPassword('review@example.test', 'wrong password')))
+    .rejects.toThrow('Invalid login credentials');
+  expect(result.current.status).toBe('anonymous');
+  await act(() => result.current.signInWithPassword('review@example.test', 'the right password'));
+  expect(signInWithPassword).toHaveBeenLastCalledWith({ email: 'review@example.test', password: 'the right password' });
+  expect(result.current.status).toBe('authenticated');
+  expect(result.current.accessToken).toBe('access-token');
+});
+
 it('ends the first account\'s requests when another signs in with a code over it', async () => {
   const { client, auth } = authClient(SESSION);
   const { result } = renderHook(() => useAuth(), {

@@ -22,6 +22,7 @@ val syncSharedResources by tasks.registering(Sync::class) {
             "CarrierCatalog.json",
             "ContractFixtures.json",
             "DeliveryDemo.json",
+            "EmailFilter.json",
             "FriendsDemo.json",
             "Localization.json",
             "PostcodeExamples.json",

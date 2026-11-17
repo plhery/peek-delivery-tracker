@@ -73,6 +73,39 @@ describe('SignInScreen', () => {
     expect(verifyCode).toHaveBeenCalledWith('owner@example.test', '123456');
   });
 
+  it('asks the one address that has a password for it instead of sending a code', async () => {
+    const sendCode = vi.fn().mockResolvedValue(undefined);
+    const signInWithPassword = vi.fn().mockRejectedValueOnce(Object.assign(new Error('Invalid login credentials'), { status: 400 }))
+      .mockResolvedValue(undefined);
+    const passwordFor = vi.fn(async (email: string) => email === 'review@example.test');
+    const user = userEvent.setup();
+    render(<SignInScreen card configured sendCode={sendCode} verifyCode={vi.fn()} passwordFor={passwordFor}
+      signInWithPassword={signInWithPassword} />);
+
+    await user.type(screen.getByLabelText('Email address'), 'owner@example.test');
+    await user.click(screen.getByRole('button', { name: 'Email me a code' }));
+    expect(sendCode).toHaveBeenCalledWith('owner@example.test');
+    expect(screen.queryByLabelText('Password')).not.toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Use a different email' }));
+
+    await user.clear(screen.getByLabelText('Email address'));
+    await user.type(screen.getByLabelText('Email address'), 'Review@Example.Test');
+    await user.click(screen.getByRole('button', { name: 'Email me a code' }));
+    expect(passwordFor).toHaveBeenLastCalledWith('review@example.test');
+    expect(sendCode).toHaveBeenCalledOnce();
+    expect(screen.getByText('Enter the password for Review@Example.Test.')).toBeInTheDocument();
+    const password = screen.getByLabelText('Password');
+    expect(password).toHaveAttribute('type', 'password');
+    expect(password).toHaveAttribute('autocomplete', 'current-password');
+    await user.type(password, 'wrong password');
+    await user.click(screen.getByRole('button', { name: 'View my parcels' }));
+    expect(await screen.findByRole('alert')).toHaveTextContent('Couldn’t sign you in. Check the password and try again.');
+    await user.clear(password);
+    await user.type(password, 'the right password');
+    await user.click(screen.getByRole('button', { name: 'View my parcels' }));
+    expect(signInWithPassword).toHaveBeenLastCalledWith('review@example.test', 'the right password');
+  });
+
   it('keeps provider errors actionable', async () => {
     const sendCode = vi.fn().mockRejectedValue(new Error('Email rate limit reached'));
     const user = userEvent.setup();

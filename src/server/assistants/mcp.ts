@@ -9,7 +9,7 @@ import { isRecord } from '../types';
 import { assistantsOpenToAccount } from './access';
 import { noteConnectedClient } from './clients';
 import { noteValidToken, validLately } from './recentTokens';
-import { personalTokensOpen, SCOPES, secretDigest, type AssistantSettings } from './settings';
+import { personalTokensOpen, resourceMetadataUrl, SCOPES, secretDigest, type AssistantSettings } from './settings';
 import { assistantServer, type AssistantCaller } from './tools';
 
 /** Requests one grant may make a minute. */
@@ -32,6 +32,7 @@ let handler: McpHttpHandler | null = null;
 interface McpRequestData {
   service: SupabaseServiceClient;
   caller: AssistantCaller;
+  resourceMetadata: string;
 }
 
 /**
@@ -42,7 +43,7 @@ function mcpHandler(): McpHttpHandler {
   handler ??= createMcpHandler(({ authInfo }) => {
     const data = authInfo?.extra?.peek as McpRequestData | undefined;
     if (!data) throw new Error('An MCP request reached the tools without its caller');
-    return assistantServer(data.service, data.caller);
+    return assistantServer(data.service, data.caller, data.resourceMetadata);
   }, {
     responseMode: 'json',
     legacy: 'stateless',
@@ -57,8 +58,7 @@ function tooMany(retryAfter: number): Response {
 }
 
 function unauthorized(settings: AssistantSettings, error?: 'invalid_token'): Response {
-  const metadata = `${settings.issuer}/.well-known/oauth-protected-resource/mcp`;
-  const challenge = `Bearer resource_metadata="${metadata}", scope="${SCOPES.join(' ')}"${error ? `, error="${error}"` : ''}`;
+  const challenge = `Bearer resource_metadata="${resourceMetadataUrl(settings)}", scope="${SCOPES.join(' ')}"${error ? `, error="${error}"` : ''}`;
   return Response.json(
     { error: error ? 'The token is unknown, expired or revoked' : 'Authentication is required' },
     { status: 401, headers: { 'WWW-Authenticate': challenge } },
@@ -144,7 +144,7 @@ export async function serveMcp(
   if (owner instanceof Response) return owner;
   const single = await oneMessage(request);
   if (single instanceof Response) return single;
-  const peek: McpRequestData = { service, caller: { userId: owner.userId, scopes: owner.scopes } };
+  const peek: McpRequestData = { service, caller: { userId: owner.userId, scopes: owner.scopes }, resourceMetadata: resourceMetadataUrl(settings) };
   return mcpHandler().fetch(single, {
     authInfo: {
       token,

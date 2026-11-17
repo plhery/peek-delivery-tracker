@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -107,16 +108,7 @@ internal fun SettingsGroup(
                     title.uppercase(locale), color = colors.secondaryText,
                     style = type.tracking(type.style(IosTextStyle.Caption2, FontWeight.Medium), 1f).sfLines(),
                 )
-                if (badge != null) {
-                    Text(
-                        badge.uppercase(locale),
-                        Modifier
-                            .background(colors.resolve(ExperimentalPalette.ochreSurface), ContinuousRoundedShape(7.dp))
-                            .padding(horizontal = 7.dp, vertical = 3.dp),
-                        color = colors.resolve(ExperimentalPalette.ochre),
-                        style = type.tracking(type.style(IosTextStyle.Caption2, FontWeight.Bold), 0.4f).sfLines(),
-                    )
-                }
+                if (badge != null) SettingsBadge(badge)
             }
         }
         val shape = ContinuousRoundedShape(16.dp)
@@ -130,6 +122,22 @@ internal fun SettingsGroup(
     }
 }
 
+/** `SettingsBadge`: a word that marks a group or a row, such as "New" or "Experimental": caption 2 bold, upper case, tracked 0.4, ochre on its surface. */
+@Composable
+internal fun SettingsBadge(text: String, modifier: Modifier = Modifier) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    Text(
+        text.uppercase(LocalLanguage.current.locale),
+        modifier
+            .background(colors.resolve(ExperimentalPalette.ochreSurface), ContinuousRoundedShape(7.dp))
+            .padding(horizontal = 7.dp, vertical = 3.dp),
+        color = colors.resolve(ExperimentalPalette.ochre),
+        style = type.tracking(type.style(IosTextStyle.Caption2, FontWeight.Bold), 0.4f).sfLines(),
+        maxLines = 1,
+    )
+}
+
 /** `settingsDivider`: a hairline of 0.5 in the sheet's line at a quarter, across the group. */
 @Composable
 internal fun SettingsDivider() {
@@ -138,16 +146,18 @@ internal fun SettingsDivider() {
 
 /**
  * `SettingsRow`: the [symbol] in 15 light in the secondary grey, 17 wide, 11 from the [title] in subheadline in the
- * ink, the [detail] under it in caption secondary, then the [value] in caption at the trailing end and a chevron of 10
- * light, both in the opaque secondary grey; 15 in and 54 tall at least where [padded]. At the accessibility sizes the
- * value goes under the title, a value of one word made smaller down to half rather than broken and ending in an
- * ellipsis past that, and the symbol gives its room to the words.
+ * ink, with its [badge], if any, 8 after it, or under it where they don't fit side by side; the [detail] under it in
+ * caption secondary, then the [value] in caption at the trailing end and a chevron of 10 light, both in the opaque
+ * secondary grey; 15 in and 54 tall at least where [padded]. At the accessibility sizes the value goes under the
+ * title, a value of one word made smaller down to half rather than broken and ending in an ellipsis past that, and the
+ * symbol gives its room to the words.
  */
 @Composable
 internal fun SettingsRow(
     title: String,
     modifier: Modifier = Modifier,
     symbol: String? = null,
+    badge: String? = null,
     detail: String? = null,
     value: String? = null,
     chevron: Boolean = false,
@@ -169,7 +179,18 @@ internal fun SettingsRow(
             }
         }
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text(title, color = colors.ink, style = type.subheadline.sfLines())
+            if (badge != null) {
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    itemVerticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(title, color = colors.ink, style = type.subheadline.sfLines())
+                    SettingsBadge(badge)
+                }
+            } else {
+                Text(title, color = colors.ink, style = type.subheadline.sfLines())
+            }
             if (stacked && !value.isNullOrEmpty()) {
                 val style = type.caption.sfLines().copy(color = colors.secondaryText)
                 if (' ' !in value) {
@@ -203,14 +224,16 @@ internal fun SettingsButtonRow(
     detail: String? = null,
     value: String? = null,
     chevron: Boolean = false,
+    badge: String? = null,
+    enabled: Boolean = true,
 ) {
     SettingsRow(
         title,
         Modifier
             .then(if (tag != null) Modifier.testTag(tag) else Modifier)
-            .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = onClick)
+            .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button, onClick = onClick)
             .semantics(mergeDescendants = true) {},
-        symbol = symbol, detail = detail, value = value, chevron = chevron,
+        symbol = symbol, badge = badge, detail = detail, value = value, chevron = chevron,
     )
 }
 
@@ -565,8 +588,8 @@ internal fun appearanceTag(option: AppAppearance) = "$SETTINGS_APPEARANCE.${opti
 
 internal fun settingsLanguageTag(language: AppLanguage) = "$SETTINGS_LANGUAGE.${language.rawValue}"
 
-private val ROW_PADDING = 15.dp
-private val ROW_HEIGHT = 54.dp
+internal val ROW_PADDING = 15.dp
+internal val ROW_HEIGHT = 54.dp
 /** The menu picker's room between its value and its chevron, and after the chevron. */
 private val PICKER_GAP = 5.dp
 private val PICKER_TRAILING = 11.dp

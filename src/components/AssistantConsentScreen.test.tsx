@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { StrictMode } from 'react';
@@ -210,6 +211,55 @@ describe('the page where an assistant asks to connect', () => {
     expect(answerAssistantConsent).toHaveBeenCalledOnce();
     expect(assign).not.toHaveBeenCalled();
     expect(note()).toBeNull();
+  });
+
+  it('lets the review account alone sign in with its password, and asks it again for a recent sign-in', async () => {
+    // The digest of review@example.test, as the server passes it.
+    const account = createHash('sha256').update('review@example.test').digest('hex');
+    const signInWithPassword = vi.fn(async () => undefined);
+    mocks.auth = {
+      status: 'anonymous', user: null, googleEnabled: false, appleEnabled: false, emailOtpEnabled: true, oidcName: null,
+      signInWithGoogle, signInWithApple: vi.fn(), signInWithOidc: vi.fn(), sendCode: vi.fn(async () => undefined), verifyCode: vi.fn(),
+      signInWithPassword,
+    };
+    const user = userEvent.setup();
+    const view = render(<AssistantConsentScreen request={request} query={QUERY} reviewAccount={account} />);
+    await user.type(screen.getByLabelText('Email address'), 'owner@example.test');
+    await user.click(screen.getByRole('button', { name: 'Email me a code' }));
+    expect(await screen.findByLabelText('Sign-in code')).toBeInTheDocument();
+    expect(mocks.auth.sendCode).toHaveBeenCalledWith('owner@example.test');
+    await user.click(screen.getByRole('button', { name: 'Use a different email' }));
+    await user.clear(screen.getByLabelText('Email address'));
+    await user.type(screen.getByLabelText('Email address'), 'Review@example.test');
+    await user.click(screen.getByRole('button', { name: 'Email me a code' }));
+    await user.type(await screen.findByLabelText('Password'), 'the reviewers’ password');
+    await user.click(screen.getByRole('button', { name: 'View my parcels' }));
+    expect(signInWithPassword).toHaveBeenCalledWith('review@example.test', 'the reviewers’ password');
+    expect(mocks.auth.sendCode).toHaveBeenCalledOnce();
+    view.unmount();
+
+    // Signed in, too long ago: the same account signs in again with its password, then allows.
+    signedIn({ user: { id: 'user-review', email: 'review@example.test' }, signInWithPassword });
+    vi.mocked(answerAssistantConsent).mockRejectedValueOnce(new ApiRecentSignInError()).mockResolvedValueOnce(CALLBACK);
+    render(<AssistantConsentScreen request={request} query={QUERY} reviewAccount={account} />);
+    await user.click(screen.getByRole('button', { name: 'Allow' }));
+    await user.click(await screen.findByRole('button', { name: 'Email me a code' }));
+    await user.type(await screen.findByLabelText('Password'), 'the reviewers’ password');
+    await user.click(screen.getByRole('button', { name: 'Sign in again' }));
+    expect(answerAssistantConsent).toHaveBeenCalledTimes(2);
+    expect(assign).toHaveBeenCalledWith(CALLBACK);
+    expect(mocks.auth.sendCode).not.toHaveBeenCalled();
+  });
+
+  it('sends every address a code without a review account', async () => {
+    signedIn();
+    mocks.auth = { ...mocks.auth, status: 'anonymous', user: null, signInWithPassword: vi.fn() };
+    const user = userEvent.setup();
+    render(<AssistantConsentScreen request={request} query={QUERY} />);
+    await user.type(screen.getByLabelText('Email address'), 'review@example.test');
+    await user.click(screen.getByRole('button', { name: 'Email me a code' }));
+    expect(await screen.findByLabelText('Sign-in code')).toBeInTheDocument();
+    expect(mocks.auth.sendCode).toHaveBeenCalledWith('review@example.test');
   });
 
   it('allows nothing by itself for another request than the one noted', () => {

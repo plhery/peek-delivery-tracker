@@ -1,7 +1,9 @@
 import type { MetadataRoute } from 'next';
+import { assistantsAlternates } from '../src/assistants/paths';
 import { CARRIER_LINKS, CARRIER_LOCALES } from '../src/generated/carriers';
 import { GUIDE_LINKS } from '../src/generated/guides';
 import { GUIDE_LANGUAGES, hrefLanguages, SUPPORTED_LOCALES, type GuideLanguage, type Locale } from '../src/lib/locale';
+import { assistantsConfigured } from '../src/server/assistants/settings';
 import { carrierAlternates, carrierLanguages, carrierUpdated } from '../src/server/carrierTexts';
 import { guideAlternates, guideUpdated } from '../src/server/guides';
 import { landingAddress, landingAlternates } from '../src/server/landingMetadata';
@@ -24,15 +26,17 @@ const carriersChecked = (locale: Locale) => CARRIER_LINKS[locale].map(({ id }) =
  * page and every guide in each language they are written in, each naming the
  * others, the carriers' own page in each language a carrier's page is written
  * in and every carrier's page in each of its languages, naming only those, as
- * hreflang names them, the privacy notice, the help page and the
- * accessibility page. A guide or a carrier's page is dated by the day its
- * facts were last checked. A parcel, an invitation and the demo are not listed.
+ * hreflang names them, the page on connecting an assistant in each language
+ * where assistants can connect, the privacy notice, the terms of use, the help
+ * page and the accessibility page. A guide or a carrier's page is dated by the
+ * day its facts were last checked. A parcel, an invitation and the demo are not listed.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const origin = await siteOrigin();
   const languages = xmlAddresses(landingAlternates(origin));
   const index = xmlAddresses(guideAlternates(origin));
   const carriers = xmlAddresses(carrierAlternates(origin));
+  const assistants = xmlAddresses(assistantsAlternates(origin));
   return [
     ...SUPPORTED_LOCALES.map((locale) => ({ url: xml(landingAddress(origin, locale)), alternates: { languages: hrefLanguages(languages) } })),
     ...GUIDE_LANGUAGES.map((locale) => ({ url: index[locale], lastModified: lastChecked(locale), alternates: { languages: hrefLanguages(index) } })),
@@ -45,7 +49,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const addresses = xmlAddresses(carrierAlternates(origin, id));
       return carrierLanguages(id).map((locale) => ({ url: addresses[locale]!, lastModified: carrierUpdated(locale, id), alternates: { languages: hrefLanguages(addresses) } }));
     }),
+    ...(assistantsConfigured() ? SUPPORTED_LOCALES.map((locale) => ({ url: assistants[locale], alternates: { languages: hrefLanguages(assistants) } })) : []),
     { url: xml(new URL('/privacy.html', origin).href) },
+    { url: xml(new URL('/terms.html', origin).href) },
     { url: xml(new URL('/support.html', origin).href) },
     { url: xml(new URL('/accessibility.html', origin).href) },
   ];

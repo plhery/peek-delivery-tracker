@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
@@ -64,7 +65,9 @@ import com.plhery.peekdeliverytracker.ui.theme.Motion
 import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.Radii
+import com.plhery.peekdeliverytracker.ui.theme.cardGrounds
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
+import com.plhery.peekdeliverytracker.ui.theme.readableInk
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
 
@@ -193,7 +196,7 @@ fun NextDeliveryPass(
                 Spacer(Modifier.weight(1f))
                 // A parcel that has arrived is nobody's next: the words keep their room and go. They keep to the top
                 // of the card, clear of the route drawn below them.
-                NextUpWords(nextUp, identity, language.locale, Modifier.alpha(if (arrived) 0f else 1f))
+                NextUpWords(nextUp, identity, language.locale, map = placed, Modifier.alpha(if (arrived) 0f else 1f))
             }
             Row(
                 Modifier.padding(top = if (placed) 101.dp else 19.dp, bottom = 15.dp),
@@ -226,15 +229,19 @@ fun NextDeliveryPass(
 }
 
 /**
- * "Next up" in caption2 capitals, tracked 1.2 and in the carrier's ink at 75 %, on one line that shrinks to 70 % before
- * it ends in an ellipsis, and no larger than at the first accessibility size.
+ * "Next up" in caption2 capitals, tracked 1.2 and in the carrier's ink at 75 %, or as much more as reads at 4.5:1 on the
+ * card and on its map where it draws one ([readableInk]), on one line that shrinks to 70 % before it ends in an
+ * ellipsis, and no larger than at the first accessibility size.
  */
 @Composable
-private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: java.util.Locale, modifier: Modifier) {
-    val ink = PeekTheme.colors.resolve(identity.ink)
+private fun NextUpWords(text: String, identity: CarrierVisualIdentity, locale: java.util.Locale, map: Boolean, modifier: Modifier) {
+    val colors = PeekTheme.colors
+    val ink = colors.resolve(identity.ink)
+    val surface = colors.resolve(identity.surface)
+    val shade = remember(ink, surface, map, colors.label) { readableInk(ink, 0.75f, cardGrounds(ink, surface, map), colors.label) }
     CappedDynamicTypeSize(DynamicTypeSize.Accessibility1) {
         val type = PeekTheme.type
-        val style = type.tracking(type.caption2, 1.2f).sfLines().copy(color = ink.copy(alpha = ink.alpha * 0.75f))
+        val style = type.tracking(type.caption2, 1.2f).sfLines().copy(color = shade)
         val probe = LocalNextUpWords.current
         BasicText(
             text.uppercase(locale),

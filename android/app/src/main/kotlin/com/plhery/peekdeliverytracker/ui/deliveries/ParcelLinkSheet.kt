@@ -166,8 +166,10 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.ProvideDynamicTypeSize
 import com.plhery.peekdeliverytracker.ui.theme.button
+import com.plhery.peekdeliverytracker.ui.theme.cardGrounds
 import com.plhery.peekdeliverytracker.ui.theme.delay
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.readableInk
 import com.plhery.peekdeliverytracker.ui.theme.rememberHaptics
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
@@ -994,6 +996,11 @@ private fun SharedParcelCard(
         }
         Column(Modifier.fillMaxWidth().padding(18.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
             val tint = ink.copy(alpha = ink.alpha * 0.75f)
+            // The age is quieter still: the tint at 75 %, darker where that wouldn't read on the card and its map.
+            val surface = colors.resolve(identity.surface)
+            val age = remember(ink, surface, placed, colors.label) {
+                readableInk(ink, 0.75f * 0.75f, cardGrounds(ink, surface, placed), colors.label)
+            }
             CardHeader(
                 marks = {
                     // Over the route the second mark takes no room, and the map keeps clear of it.
@@ -1007,7 +1014,7 @@ private fun SharedParcelCard(
                             frames.measure(density)
                         },
                     ) {
-                        LinkRefreshButton(parcel, refreshing, tint, onRefresh)
+                        LinkRefreshButton(parcel, refreshing, age, onRefresh)
                         if (placed) {
                             HeaderButton(localizer.text("map.open"), LINK_MAP, enabled = route != null, Modifier, openMap) {
                                 PeekSymbol("globe", font = type.fixed(17f), tint = tint)
@@ -1150,12 +1157,13 @@ private fun GiftMarker() {
 
 /**
  * LinkRefreshButton (B-S48, B-AN21, B-AX15): when the carrier was last asked, "parcel.updated" kept current each
- * minute, and the arrow, or a spinner while the link is read, 16 square, in caption, in `tint` at 75 %, 44 at least.
+ * minute, and the arrow, or a spinner while the link is read, 16 square, in caption, in `shade` (the card's tint at
+ * 75 %, or as much more as reads at 4.5:1 on what it stands on: [readableInk]), 44 at least.
  * Where the words don't fit beside the marks (`ViewThatFits`), the arrow alone. TalkBack hears the age where it shows,
  * then "detail.checkNow", so that Voice Access answers to either; where the arrow stands alone, the age as its value.
  */
 @Composable
-private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, action: () -> Unit) {
+private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, shade: Color, action: () -> Unit) {
     val localizer = LocalLocalizer.current
     val type = PeekTheme.type
     val now = LocalNow.current
@@ -1168,7 +1176,7 @@ private fun LinkRefreshButton(parcel: Parcel, refreshing: Boolean, tint: Color, 
         }
     }
     val updated = checked?.let { localizer.text("parcel.updated", mapOf("date" to localizer.relativeTime(from = it, now = time))) }
-    val color = tint.copy(alpha = tint.alpha * 0.75f)
+    val color = shade
     val enabled = !refreshing
     val label = localizer.text("detail.checkNow")
     // Whether the age shows beside the arrow, as the last layout found.
@@ -1255,7 +1263,11 @@ private fun GiftParcelCard(parcel: Parcel, opened: Boolean, refreshing: Boolean,
         CardHeader(
             marks = { CarrierFleetMark(identity) },
             second = delivery?.let { { CarrierFleetMark(it) } },
-            buttons = { LinkRefreshButton(parcel, refreshing, tone, onRefresh) },
+            buttons = {
+                val surface = colors.resolve(ExperimentalPalette.lilacSurface)
+                val shade = remember(tone, surface, colors.label) { readableInk(tone, 0.75f, listOf(surface), colors.label) }
+                LinkRefreshButton(parcel, refreshing, shade, onRefresh)
+            },
             reserved = 1,
         )
         OpeningParcel(

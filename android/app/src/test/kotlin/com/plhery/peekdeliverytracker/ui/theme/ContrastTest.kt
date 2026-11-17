@@ -6,6 +6,7 @@ import androidx.compose.ui.graphics.toArgb
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
+import com.plhery.peekdeliverytracker.core.ExperimentalPalette
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import java.util.Locale
 import org.junit.Assert.assertTrue
@@ -80,6 +81,43 @@ class ContrastTest {
             for ((name, ground) in grounds) {
                 val measured = ratio(colors.inkSoft, ground)
                 if (measured < 4.5) short += String.format(Locale.ROOT, "%.2f:1 on the %s, %s", measured, name, appearance)
+            }
+        }
+        assertTrue(short.joinToString("\n"), short.isEmpty())
+    }
+
+    /**
+     * Words a card writes in a lighter shade of its ink ([readableInk]): the list's "Next up" (the ink at 75 %) and a
+     * shared link's "Updated … ago" (at 56 %), on every carrier's card and its map, and the gift's age in its lilac at
+     * 75 % on the lilac card. Each reads at 4.5:1 or more on everything under it, the ink mixed toward the label where
+     * even the whole ink doesn't.
+     */
+    @Test
+    fun aCardsLighterInkReadsOnTheCardAndItsMap() {
+        val identities = CarrierCatalog(cacheFile = null).definitions.map { (id, definition) ->
+            id.rawValue to CarrierVisualIdentity(id.rawValue, definition)
+        }
+        val short = mutableListOf<String>()
+        for ((appearance, colors) in appearances) {
+            val checks = identities.flatMap { (id, identity) ->
+                val ink = colors.resolve(identity.ink)
+                val surface = colors.resolve(identity.surface)
+                listOf(
+                    Triple("$id's Next up", ink to 0.75f, cardGrounds(ink, surface, map = true)),
+                    Triple("$id's age", ink to 0.75f * 0.75f, cardGrounds(ink, surface, map = true)),
+                )
+            } + Triple(
+                "gift's age",
+                colors.resolve(ExperimentalPalette.lilac) to 0.75f,
+                listOf(colors.resolve(ExperimentalPalette.lilacSurface)),
+            )
+            for ((name, shade, grounds) in checks) {
+                val (ink, strength) = shade
+                val drawn = readableInk(ink, strength, grounds, colors.label)
+                for (ground in grounds) {
+                    val measured = ratio(drawn.compositeOver(ground), ground)
+                    if (measured < 4.5) short += String.format(Locale.ROOT, "%.2f:1 for %s, %s", measured, name, appearance)
+                }
             }
         }
         assertTrue(short.joinToString("\n"), short.isEmpty())

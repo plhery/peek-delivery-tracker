@@ -16,7 +16,7 @@ Peek knows two shapes for Ozon, and both are written with dashes. The dashes mat
 | --- | --- |
 | `00000000-0000-0` | 8 digits, 4 digits and 1 digit, joined by dashes. Peek names Ozon from this shape at once. |
 | `0000000000-0000-0` | The same with 10 digits at the start. Peek names Ozon too. |
-| `0000000000000` | The first number without its dashes, or with spaces instead of dashes. DPD France, Ukrposhta and other carriers have 13-digit numbers, so Peek doesn't suggest Ozon. Type the dashes back in, or pick Ozon yourself (below). The same goes for 15 digits, a length FedEx and others use. |
+| `0000000000000` | The first number without its dashes, or with spaces instead of dashes. DPD France, Ukrposhta and other carriers have 13-digit numbers, so the digits alone don't tell Peek it's Ozon. Added from Russia, Belarus or Kazakhstan, Peek asks Ozon among other carriers whether it knows the number; from elsewhere it doesn't ask Ozon. Type the dashes back in, or pick Ozon yourself (below). The same goes for 15 digits, a length FedEx and others use. |
 | `PL-000000-00000` | PL, 6 digits, then more letters or digits, with dashes. Peek names Ozon. |
 | `PL-000000-0000` | PL with exactly 10 digits is also the shape of Amazon's numbers. Peek takes it for an [Amazon](carrier:amazon-logistics) number and doesn't let you pick Ozon for it, so it can't follow it with Ozon. |
 
@@ -98,10 +98,10 @@ For an order you bought on Ozon, contact Ozon about it. For an order from anothe
 [Peek](/) follows an Ozon number with the number alone: no account, no phone number and no code.
 
 - **With its dashes.** Peek names Ozon at once ("Detected carrier") and files the parcel under Ozon.
-- **Without its dashes.** Peek can't tell the carrier by the digits alone. Paste it all the same: Peek follows more than 3,500 carriers. While it asks the carriers whose numbers have this shape, and tracking services, it shows "Checking tracking services…". If the tracking services name Ozon, with dated steps, Peek files the parcel under Ozon by itself. Or press "Change" and search for Ozon. On a parcel you've already added, use "Change carrier".
+- **Without its dashes.** Peek can't tell the carrier by the digits alone. Paste it all the same: Peek follows more than 3,500 carriers. While it asks the carriers whose numbers have this shape, and tracking services, it shows "Checking tracking services…". Ozon is among those carriers only when you add the number from Russia, Belarus or Kazakhstan. If the tracking services name Ozon, with dated steps, Peek files the parcel under Ozon by itself. Or press "Change" and search for Ozon. On a parcel you've already added, use "Change carrier".
 - **A link.** Paste a tracking.ozon.ru link with the number in it (`track=`), or a rocket.ozon.ru tracking link (`SearchId=`), and Peek tracks that number with Ozon.
 
-**Where the steps come from.** Peek reads Ozon's tracker and shows each step in Ozon's Russian words, as in the tables above, with its time, and Ozon's expected delivery dates. Ozon gives no place for a step, so there's no map. Until Ozon's tracker knows the number, Peek shows "Waiting for Ozon" on peektracker.com, or "No tracking history yet" for a number added without a carrier. When Ozon's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the parcel, in that service's words, which can be behind tracking.ozon.ru. Peek's Ozon lookup doesn't take a `PL-` number: Peek shows "Check the tracking number" for it until a tracking service has the parcel.
+**Where the steps come from.** Peek reads Ozon's tracker and shows each step in Ozon's Russian words, as in the tables above, with its time, and Ozon's expected delivery dates. Peek reads Ozon's times as Moscow time and shows them in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. Ozon gives no place for a step, so there's no map. Until Ozon's tracker knows the number, Peek shows "Waiting for Ozon" on peektracker.com, or "No tracking history yet" for a number added without a carrier. When Ozon's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the parcel, in that service's words, which can be behind tracking.ozon.ru. Peek's Ozon lookup doesn't take a `PL-` number: Peek shows "Check the tracking number" for it until a tracking service has the parcel.
 
 **The link on the parcel's page.** "Open the Ozon website" opens the number on Ozon's tracker. If a tracking service filled in, the link opens that service instead, such as "Open the ParcelsApp website".
 
@@ -109,7 +109,7 @@ For an order you bought on Ozon, contact Ozon about it. For an order from anothe
 
 **Another carrier delivering.** If a tracking service names another carrier for your parcel, with that carrier's number, and Peek reads that carrier's own tracking, Peek asks it too. Once it shows a scan at least as recent as the service's latest, Peek follows the parcel there.
 
-**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it is out for delivery. Once a day passes without a new step, it checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when the order is ready to collect. Peek can't contact Ozon or the seller for you.
+**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it is out for delivery while you have it open or notifications are on. Once a day passes without a new step, it checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when the order is ready to collect. Peek can't contact Ozon or the seller for you.
 
 ## Questions about Ozon tracking
 

@@ -4,7 +4,7 @@ description: Wer deine Amazon-Bestellung versendet, welcher Zusteller sie bringt
 slug: amazon-sendungsverfolgung
 picture: Ein Handy zeigt den Fortschritt einer Bestellung, zwei Lieferwagen reichen sich ein Paket weiter, und Pip schaut zu.
 published: 2026-10-16
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Eine Amazon-Bestellung verfolgst du in deinem Amazon-Konto, auf der Website oder in der App, unter „Meine Bestellungen“: Bestellung wählen, dann „Lieferung verfolgen“. Dort siehst du, wo dein Paket gerade ist und wann es ankommt, bei manchen Lieferungen auch ein Zustellfoto. Wer dir bei Problemen hilft, hängt davon ab, wer versendet: Amazon kümmert sich um eigene Bestellungen und um „Versand durch Amazon“, bei einem Verkäufer mit eigenem Versand wendest du dich zuerst an ihn.
@@ -31,6 +31,8 @@ Liefert Amazon selbst, ist es [Amazon Logistics](carrier:amazon-logistics), Amaz
 | Österreich | amazon.de | Amazon und lokale Lieferpartner, aus Amazons eigenen Verteilzentren |
 | Schweiz | amazon.de, amazon.fr, amazon.it | [Die Post](carrier:swiss-post), über ihr eigenes Logistiknetz |
 
+DHL hat mehr als 19.000 Packstationen und Poststationen. Lässt du dein Paket direkt an eine Packstation liefern, zeigt dir die Post & DHL App den Abholcode, und der gilt, bis du das Paket entnommen hast. Bei einem Paket mit DPD-Nummer nennt dir DPD am Liefertag ein Zeitfenster von zwei Stunden, und du kannst es in einen Pickup Paketshop umleiten, bei einem Nachbarn abgeben oder mit einem Abstell-Okay ablegen lassen.
+
 Versendet ein Verkäufer selbst, kann sein Zusteller einer von diesen sein oder ein anderer. Wo die Nummer bei jedem Shop steht: [Sendungsnummer finden](guide:find-tracking-number).
 
 ## Wie sieht eine Amazon-Sendungsnummer aus?
@@ -46,7 +48,7 @@ Diese Formen erkennt Peek als Amazon-Nummern, hier mit erfundenen Ziffern:
 
 | Form (erfunden) | Was es ist |
 | --- | --- |
-| `TBA123456789012` | Amazon: `TBA`, `TBC` oder `TBM` und 12 Ziffern |
+| `TBA123456789012` | Amazon: `TBA`, `TBC` oder `TBM` und 12 Ziffern; aus Australien `TBAU` und aus Brasilien `TBR`, mit 9 Ziffern |
 | `DE1234567890` | Amazon in Europa: ein Ländercode (`DE`, `AT`, `CH` und andere) und 10 Ziffern |
 | `123-1234567-1234567` | Deine Amazon-Bestellnummer: 3, 7 und 7 Ziffern. Keine Sendungsnummer |
 | Alles andere | Die Nummer des Zustellers, etwa von DHL oder Hermes |
@@ -91,8 +93,10 @@ In der EU muss dir der Händler die Ware innerhalb von 30 Tagen liefern, wenn ih
 - Umschauen | Schau in den Briefkasten und am Ablageort aus deinen Lieferanweisungen nach, und frag die Nachbarn.
 - Verkäufer kontaktieren | Hat ein Verkäufer verkauft und versendet, schreib ihm zuerst. Er muss nachweisen, dass der Artikel zugestellt wurde; sonst muss er dir einen identischen Artikel schicken oder den Kaufpreis erstatten.
 - Amazon fragen | Von Amazon versendet, oder der Verkäufer löst das Problem nicht: Kundenservice per Chat oder Rückruf, telefonisch täglich von 6 bis 24 Uhr. Dafür wählst du unter „Meine Bestellungen“ Produkt und Thema, dann „Ich benötige weitere Hilfe“.
-- Rechte nutzen | Nicht innerhalb von 30 Tagen oder zum vereinbarten Termin geliefert? Setz dem Händler eine angemessene Nachfrist. Liefert er auch dann nicht, kannst du den Vertrag beenden und dir den Betrag erstatten lassen.
+- Rechte nutzen | Nicht innerhalb von 30 Tagen oder zum vereinbarten Termin geliefert? Setz dem Händler eine angemessene Nachfrist. Liefert er auch dann nicht, kannst du den Vertrag beenden und dir den Betrag erstatten lassen. Keine Nachfrist brauchst du, wenn er die Lieferung verweigert oder der Termin wesentlich war und du ihm das vorher gesagt hast.
 :::
+
+Für Schäden an der Ware haftet der Händler ab dem Versand, bis du sie erhältst. Kommt sie beschädigt an, hast du Anspruch auf Reparatur oder Ersatz, oder auf eine teilweise oder volle Erstattung, wenn beides nicht geht.
 
 Mehr zu jedem Fall: [zugestellt, aber nicht angekommen](guide:delivered-not-received) und [Paket verloren](guide:lost-parcel).
 
@@ -114,7 +118,7 @@ Das hängt von der Nummer ab. Füge sie in [Peek](/) ein:
 
 - **Die Nummer eines Zustellers** (DHL, Hermes, DPD, Österreichische Post, Die Post…) wird wie jedes andere Paket verfolgt.
 - **Eine Amazon-Nummer** oder ein track.amazon-Link: Peek fragt zuerst Amazons öffentlichen Tracker. Antwortet Amazon, reist das Paket mit [Amazon Shipping](carrier:amazon-shipping) oder mit Amazons Multi-Channel-Versand und stammt nicht aus einer Bestellung bei Amazon selbst. Dann verfolgt Peek es automatisch.
-- Sonst liefert Amazon Logistics eine Amazon-Bestellung, und die zeigt Amazon nur in deinem Konto. Peek sagt dir das und bietet „Meine Amazon-Bestellungen öffnen“ an: Das öffnet deine Bestellübersicht auf der Amazon-Seite, zu der die Nummer passt, bei `DE` und `AT` also amazon.de. Peek fragt nie nach deinem Amazon-Login.
+- Sonst liefert Amazon Logistics eine Amazon-Bestellung, und die zeigt Amazon nur in deinem Konto. Peek sagt dir das und bietet „Meine Amazon-Bestellungen öffnen“ an: Das öffnet deine Bestellübersicht auf der Amazon-Seite, zu der die Nummer passt, bei `DE`, `AT` und `CH` also amazon.de. Peek fragt nie nach deinem Amazon-Login.
 - **Eine Bestellnummer** bekommt „Das sieht nach einer Amazon-Bestellnummer aus“. Steht in der Versandmail eine Sendungsnummer, füge stattdessen diese ein.
 
 :::sources
@@ -127,8 +131,10 @@ Das hängt von der Nummer ab. Füge sie in [Peek](/) ein:
 - [About Amazon Deutschland: Wie bekomme ich Hilfe bei meiner Amazon Bestellung?](https://www.aboutamazon.de/news/amazon-prime-und-shopping/wie-bekomme-ich-hilfe-bei-meiner-amazon-bestellung) – Chat, Rückruf, telefonisch 6 bis 24 Uhr, A-bis-z-Garantie für Lieferung und Zustand, von Verkäufern versendete Artikel
 - [About Amazon Deutschland: Amazon A-bis-z-Garantie wird künftig auch Ansprüche bei Sach- und Personenschäden abdecken](https://www.aboutamazon.de/news/customer-trust/a-bis-z-garantie-sach-und-personenschaeden) – zuerst der Verkäufer, Erstattung, Sach- und Personenschäden seit Mai 2024
 - [About Amazon Deutschland: 5 praktische Tipps, die dir helfen, sicher bei Amazon einzukaufen und Betrugsmaschen zu verhindern](https://www.aboutamazon.de/news/amazon-prime-und-shopping/5-praktische-tipps-die-dir-helfen-sicher-bei-amazon-einzukaufen-und-betrugsmaschen-zu-verhindern) – Ersatz oder Erstattung bei verspäteter Lieferung oder schlechtem Zustand
-- [Your Europe: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, angemessene Nachfrist, Vertrag beenden und Erstattung
+- [Your Europe: Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_de.htm) – 30 Tage, angemessene Nachfrist, Vertrag beenden und Erstattung, keine Nachfrist bei Weigerung oder wesentlichem Termin, Haftung für Schäden bis zum Erhalt
+- [DHL: Packstation](https://www.dhl.de/de/privatkunden/pakete-empfangen/an-einem-abholort-empfangen/packstation.html) – mehr als 19.000 Packstationen und Poststationen, Abholcode in der Post & DHL App bei Lieferung direkt an die Packstation, gilt bis zur Entnahme
+- [DPD Deutschland: Paket empfangen](https://www.dpd.com/de/de/empfangen/) – Zeitfenster von zwei Stunden am Liefertag, Pickup Paketshop, Nachbar, Abstell-Okay
 - [Your Europe: Fragen und Antworten zu Versand und Lieferung](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_de.htm) – Händler ist für die Lieferung verantwortlich, identischer Artikel oder Erstattung
 - [About Amazon Deutschland: Amazon-Studie: KMUs nutzen Daten und KI für erfolgreiche Feiertagsverkäufe](https://www.aboutamazon.de/news/company-news/amazon-studie-kmus-nutzen-daten-und-ki-fuer-erfolgreiche-feiertagsverkaeufe) – Multi-Channel-Versand, ein Amazon-Angebot für Verkäufer in Europa
-- [Universal Parcel Scraper: Zustellerdaten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Formen der Amazon-Nummern, was Peek prüft, Amazon Shipping und Multi-Channel-Versand in Amazons öffentlichem Tracker, Sendungsverfolgung von Amazon Logistics im Konto
+- [Universal Parcel Scraper: Zustellerdaten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Formen der Amazon-Nummern, `TBAU` und `TBR`, Shops je Präfix, was Peek prüft, Amazon Shipping und Multi-Channel-Versand in Amazons öffentlichem Tracker, Sendungsverfolgung von Amazon Logistics im Konto
 :::

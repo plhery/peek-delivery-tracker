@@ -40,6 +40,7 @@ post.at shows its tracking in German and, through the EN switch, in English. Eac
 | `Item arrived in Austrian Post pick-up box`, `Sendung in Post Empfangsbox eingelangt` | In the parcel box at your building. |
 | `Item handed over to delivery partner`, `Übergabe an Zustellpartner` | Another company makes the delivery. |
 | `Shipment delivered`, `Sendung wurde zugestellt` | Delivered. |
+| `Sendung an Empfänger∗in übergeben` | Handed to the recipient: delivered. |
 | `Return/addressing error`, `Rücksendung/Adressierungsfehler` | The address is wrong or incomplete, so the parcel goes back to the sender. |
 
 The help pages use summary statuses such as `Item in distribution`, while history lines read like `Shipment being processed at the logistics center`, so you won't see every row. `Electronic order information was provided by the sender` means only a label exists, and a shop's "on its way" email does not mean the parcel was handed over. If it doesn't change within a few working days, ask the sender. For a parcel from abroad, `Item received` means the carrier in the sending country has it.
@@ -60,7 +61,7 @@ The help pages use summary statuses such as `Item in distribution`, while histor
 
 **Post Empfangsbox.** The courier leaves a notice whose barcode opens your building's parcel box once only, so take the parcel out at once.
 
-**Customs.** Austrian Post declares parcels from outside the EU and collects import VAT, duty and its own import fee on delivery or at the branch. Since 1 July 2026 goods under €150 pay a flat €3 duty. More in [parcels held at customs](guide:customs).
+**Customs.** Austrian Post declares parcels from outside the EU and collects import VAT, duty and its own import fee on delivery or at the branch. Since 1 July 2026, parcels worth up to €150 pay a flat €3 customs duty per kind of product, and since 1 November 2026, a €2 Union handling fee per kind of product is due as well, whatever the value. More in [parcels held at customs](guide:customs).
 
 ## Austrian Post parcel late, lost or damaged
 
@@ -87,11 +88,11 @@ As listed on Austrian Post's pages on 11 October 2026:
 
 ## Tracking Austrian Post parcels with Peek
 
-[Peek](/) recognises an international number ending in AT with a valid check digit as Austrian Post at once. For 22 digits, shared with other carriers, Peek asks Austrian Post, [USPS](carrier:usps) and Estafeta at once and names Austrian Post when only it knows the number; if several or none do, pick with "Change". A post.at link works only with an AT number inside.
+[Peek](/) recognises an international number ending in AT with a valid check digit as Austrian Post at once. For 22 digits, shared with other carriers, Peek asks Austrian Post and [USPS](carrier:usps) at once and names Austrian Post when only it knows the number; if several or none do, pick with "Change". A post.at link works only with an AT number inside.
 
-Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted or in distribution; once it's out for delivery, only a time window for that day. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
+Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted or in distribution; once it's out for delivery, only a time window for that day. Times show in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
 
-Peek checks up to every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers (through tracking services, every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
 
 ## Questions about Austrian Post tracking
 

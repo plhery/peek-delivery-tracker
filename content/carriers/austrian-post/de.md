@@ -6,7 +6,7 @@ published: 2026-10-11
 updated: 2026-11-17
 ---
 
-Die Österreichische Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) stellt in Österreich Briefe und Pakete zu. Dein Paket verfolgst du auf post.at unter „Sendungsverfolgung“, in der Post App oder mit der Nummer im Feld oben. Die Sendungsnummer bekommst du vom Shop, aus der e-Benachrichtigung der Post oder vom gelben Zettel nach einem verpassten Zustellversuch.
+Dein Paket der Österreichischen Post verfolgst du auf post.at unter „Sendungsverfolgung“, in der Post App oder mit der Nummer im Feld oben; die Sendungsnummer reicht, ein Konto brauchst du nicht. Die Sendungsnummer bekommst du vom Shop, aus der e-Benachrichtigung der Post oder vom gelben Zettel nach einem verpassten Zustellversuch. Mit diesem Zettel holst du das Paket in der Post-Geschäftsstelle oder Poststation ab, mindestens 14 Kalendertage lang, bei manchen Versandhändlern nur 5 Werktage. Hilfe gibt es bei der Hotline der Post unter +43 800 010 100. Die Österreichische Post (Österreichische Post AG, Sitz in Wien, international Austrian Post) stellt in Österreich Briefe und Pakete zu.
 
 ## Post Sendungsnummer: wie sie aussieht und wo sie steht
 
@@ -17,7 +17,9 @@ Die Post nennt auf ihren Hilfeseiten zwei Formen (Ziffern hier erfunden):
 | `1012345678901234567890` | Die eigene Nummer der Post: 22 Ziffern, beginnt mit 10. |
 | `RR000000005AT` | Eine internationale Postnummer: zwei Buchstaben, neun Ziffern, zwei Buchstaben. Endet sie auf AT, ist es eine Nummer der Österreichischen Post. |
 
-**Wo du sie findest.** In der Versandbestätigung des Shops. In der kostenlosen e-Benachrichtigung der Post per E-Mail oder in der Post App, wenn du ein Post Konto hast und der Versender seine Versanddaten übermittelt hat. Und auf dem gelben Zettel, wenn dich der Zusteller nicht angetroffen hat. Zum Verfolgen auf post.at reicht die Sendungsnummer, ein Konto brauchst du dafür nicht.
+Als Beispiel nennt die Post auch eine internationale Nummer aus Deutschland, mit DE am Ende: Ein Paket aus dem Ausland suchst du auf post.at auch mit seiner internationalen Nummer.
+
+**Wo du sie findest.** In der Versandbestätigung des Shops. In der kostenlosen e-Benachrichtigung der Post per E-Mail oder in der Post App, wenn du ein Post Konto hast und der Versender seine Versanddaten übermittelt hat, die zu deinem Konto passen; meist fehlen sie, wenn das Paket von einer Privatperson, in einer Filiale oder bei einem Post Partner aufgegeben wurde, außer mit einer Paketmarke. Und auf dem gelben Zettel, wenn dich der Zusteller nicht angetroffen hat. Hast du selbst etwas verschickt, steht die Nummer auf dem Aufgabebeleg. Zum Verfolgen auf post.at reicht die Sendungsnummer, ein Konto brauchst du dafür nicht.
 
 Der sechsstellige CRN-Code auf dem Zollaufkleber von Paketen aus Nicht-EU-Ländern ist keine Sendungsnummer: Mit ihm lädst du die Zollanmeldung herunter.
 
@@ -44,6 +46,7 @@ Die Sendungsverfolgung auf post.at zeigt deutsche Texte, über den Umschalter EN
 | `Sendung in Post Empfangsbox eingelangt` | Es liegt in der Empfangsbox an deinem Haus. |
 | `Übergabe an Zustellpartner` | Ein anderes Unternehmen stellt das Paket zu. |
 | `Sendung wurde zugestellt` | Zugestellt. |
+| `Sendung an Empfänger∗in übergeben` | An den Empfänger übergeben: zugestellt. |
 | `Rücksendung/Adressierungsfehler` | Die Adresse ist falsch oder unvollständig, das Paket geht zurück an den Versender. Korrigieren kann sie nur der Versender. |
 
 Die Hilfeseiten der Post verwenden Kurzformen wie `Sendung in Verteilung` oder `Sendung zugestellt`, im Verlauf stehen dagegen Zeilen wie `Sendung im Logistikzentrum in Bearbeitung`. Du siehst also nicht jede Zeile der Tabelle.
@@ -54,17 +57,17 @@ Die Hilfeseiten der Post verwenden Kurzformen wie `Sendung in Verteilung` oder `
 
 **Wie lange es dauert.** Pakete innerhalb Österreichs werden laut Post in der Regel innerhalb von zwei Werktagen zugestellt, Post Express meist am nächsten Werktag bis 13 Uhr.
 
-**Nicht angetroffen.** Der Zusteller hinterlässt einen gelben Zettel im Briefkasten. Darauf steht, wo du das Paket abholst und bis wann. Die Abholfrist beginnt am Tag danach und dauert bis zum dritten darauffolgenden Montag, also mindestens 14 Tage. Onlinehändler können eine kürzere Lagerfrist von 5 Werktagen festlegen.
+**Nicht angetroffen.** Der Zusteller hinterlässt einen gelben Zettel im Briefkasten. Darauf steht, wo du das Paket abholst, ab wann und bis wann: Die Post vermerkt die Post-Geschäftsstelle, das Datum, ab dem es bereitliegt, und den letzten Abholtag. Die Abholfrist beginnt am Tag danach und dauert bis zum dritten darauffolgenden Montag, also mindestens 14 Tage. Onlinehändler können eine kürzere Lagerfrist von 5 Werktagen festlegen.
 
-**Wo es wartet.** In einer Post-Geschäftsstelle während der Öffnungszeiten oder in einer Poststation, einem Abholautomaten, der rund um die Uhr offen ist und den Benachrichtigungscode braucht. Laut Post gibt es über 1.500 Poststationen in Österreich, in Selbstbedienungsfilialen, in Wohngebieten, in Supermärkten und Einkaufszentren.
+**Wo es wartet.** In einer Post-Geschäftsstelle während der Öffnungszeiten oder in einer Poststation, einem Abholautomaten, der rund um die Uhr offen ist und den Benachrichtigungscode braucht. Laut Post gibt es über 1.500 Poststationen in Österreich, in Selbstbedienungsfilialen, in Wohngebieten, in Supermärkten und Einkaufszentren. In der Filiale, in der Poststation und in der Postempfangsbox liegt ein hinterlegtes Paket mindestens 14 Kalendertage bereit.
 
-**Abholen.** Nimm einen Lichtbildausweis und die Sendungsnummer mit. In der Filiale geht das auch ohne gelben Zettel. Mit deinem gelben Zettel kann jemand anderer das Paket abholen. Auch die e-Benachrichtigung gilt zum Abholen, und du kannst sie an jemanden weiterleiten, der es für dich holt.
+**Abholen.** Nimm einen Lichtbildausweis und die Sendungsnummer mit. In der Filiale geht das auch ohne gelben Zettel, dann mit einem gültigen amtlichen Lichtbildausweis (Reisepass, Personalausweis oder Führerschein); ab wann das Paket bereitliegt, zeigt dein Post Konto unter „Meine Sendungen“. Liegt es ohne Zettel in einer Poststation in einer Filiale, holen es die Mitarbeiter am Schalter gegen Ausweis und Sendungsnummer heraus; bei einer Poststation außerhalb einer Filiale hilft der Kundenservice. Mit deinem gelben Zettel kann jemand anderer das Paket abholen, außer bei Sendungen mit der Zusatzleistung EIGENHÄNDIG. Auch die e-Benachrichtigung gilt zum Abholen, und du kannst sie an jemanden weiterleiten, der es für dich holt.
 
-**Paket umleiten.** In deinem Post Konto unter „Empfangsoptionen“ oder in der Post App leitest du Pakete kostenlos um, einmalig oder dauerhaft: an eine Filiale, einen Post Partner, einen Hermes PaketShop, eine Poststation, einen Wunsch-Platz bei dir zu Hause oder einen Wunsch-Nachbarn. Eine dauerhafte Einstellung gilt frühestens nach 3 Werktagen.
+**Paket umleiten.** In deinem Post Konto unter „Empfangsoptionen“ oder in der Post App leitest du Pakete kostenlos um, einmalig oder dauerhaft: an eine Filiale, einen Post Partner, einen Hermes PaketShop, eine Poststation, einen Wunsch-Platz bei dir zu Hause oder einen Wunsch-Nachbarn. Eine dauerhafte Einstellung gilt frühestens nach 3 Werktagen. Für ein einzelnes Paket änderst du die Empfangsoption kurzfristig unter „Meine Sendungen“ oder in der Post App. Ist ein umgeleitetes Paket zugestellt, bekommst du eine E-Mail. Bei manchen Versendern lässt du direkt an eine Wunsch-Poststation liefern.
 
 **Post Empfangsbox.** Der Zusteller legt das Paket in die Box an deinem Haus und lässt einen Zettel mit Barcode da. Der Barcode öffnet die Box nur einmal, nimm das Paket also gleich heraus.
 
-**Zoll.** Pakete aus Nicht-EU-Ländern verzollt die Post. Einfuhrumsatzsteuer, Zoll und die Importgebühr der Post zahlst du bei der Zustellung oder in der Filiale. Seit 1. Juli 2026 zahlen Waren unter 150 € pauschal 3 € Zoll. Mehr dazu in [Paket beim Zoll](guide:customs).
+**Zoll.** Pakete aus Nicht-EU-Ländern verzollt die Post. Einfuhrumsatzsteuer, Zoll und die Importgebühr der Post zahlst du bei der Zustellung oder in der Filiale. Seit 1. Juli 2026 fallen bei Paketen bis 150 € pauschal 3 € Zoll je Warenart an, und seit 1. November 2026 kommt unabhängig vom Wert eine EU-Bearbeitungsgebühr von 2 € je Warenart hinzu. Mehr dazu in [Paket beim Zoll](guide:customs).
 
 ## Post Paket nicht angekommen: was tun?
 
@@ -74,7 +77,7 @@ Der Versender ist Kunde der Post, darum ist er bei Problemen dein erster Ansprec
 
 **Zugestellt, aber nicht erhalten.** Steht da zugestellt oder abholbereit, schau in den Briefkasten, an deinem Abstellort und bei den Nachbarn nach. Dann melde dich beim Versender.
 
-**Verloren.** Eine Nachforschung kann nur der Versender starten, bei Paketen aus dem Ausland der Versender oder der Paketdienst im Absenderland. Hast du online bezahlt, bitte den Shop darum. Der Versender hat dafür bei Inlandspaketen 3 Monate Zeit, bei internationalen 6 Monate. Eine Nachforschung dauert meist mindestens zwei Wochen.
+**Verloren.** Eine Nachforschung kann nur der Versender starten, bei Paketen aus dem Ausland der Versender oder der Paketdienst im Absenderland. Hast du online bezahlt, bitte den Shop darum. Der Versender hat dafür bei Inlandspaketen 3 Monate Zeit, bei internationalen 6 Monate. Eine Nachforschung dauert meist mindestens zwei Wochen und kostet derzeit nichts. Ob sie sich lohnt, hilft dir der Kundenservice der Post einschätzen, über das Kontaktformular oder die Hotline.
 
 **Beschädigt.** Melde den Schaden sofort, spätestens 7 Tage nach der Zustellung (Sonn- und Feiertage zählen nicht), online im Post Konto oder in einer Filiale, mit Fotos von Ware und Verpackung. Heb alles auf, bis die Post antwortet, und sag auch dem Versender Bescheid: Eine Entschädigung geht meist an ihn.
 
@@ -93,9 +96,9 @@ So nennt die Post ihre Kanäle für Privatkunden (gelesen am 11. Oktober 2026):
 
 [Peek](/) erkennt eine internationale Nummer auf AT mit gültiger Prüfziffer sofort als Austrian Post. 22 Ziffern teilen sich mehrere Paketdienste, darunter USPS und Estafeta: Peek fragt bei Austrian Post nach und meldet „Austrian Post hat dieses Paket.“, wenn die Post die Nummer kennt. Sonst wählst du den Paketdienst mit „Ändern“. Ein Link von post.at funktioniert nur, wenn eine AT-Nummer darin steht.
 
-Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen oder in Verteilung ist; sobald es in Zustellung ist, nur noch ein Zeitfenster für diesen Tag. Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`. Die Zollscans der Post, etwa `Lagereingang - Zollanmeldungshindernis`, zeigt Peek als „Beim Zoll“.
+Peek zeigt den Status, den Verlauf mit jedem Logistikzentrum auf einer Karte, Gewicht, Maße, die Zustellzeit und eine voraussichtliche Zustellung (ein Tag, ein paar Tage oder ein Zeitfenster), solange das Paket übernommen oder in Verteilung ist; sobald es in Zustellung ist, nur noch ein Zeitfenster für diesen Tag. Die Uhrzeiten siehst du in der Zeitzone deines Geräts; auf peektracker.com und in der iPhone-App nennt eine Zeile unter dem Verlauf diese Zeitzone („Uhrzeiten in deiner Zeitzone: …“). Ein abholbereites Paket zeigt Peek als abholbereit, aber nicht, wo es liegt. Der Versender fehlt ebenfalls. Die Texte der Post erscheinen auf Deutsch, so wie die Post sie liefert: Ein zugestelltes Paket zeigt `Sendung wurde zugestellt`. Die Zollscans der Post, etwa `Lagereingang - Zollanmeldungshindernis`, zeigt Peek als „Beim Zoll“.
 
-Peek prüft das Paket bis zu alle 10 Minuten, in Zustellung bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn die Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange die Post selbst antwortet; über Tracking-Dienste alle 15 Minuten), und kann dir Mitteilungen schicken: bei jedem Scan, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Kommt zwei Tage lang nichts Neues (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden), schaut Peek nur noch stündlich nach. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
+Solange du das Paket geöffnet hast oder am Zustelltag Mitteilungen eingeschaltet sind, prüft Peek das Paket bis zu alle 10 Minuten, in Zustellung bis zu alle 2 Minuten (am Tag der Zustelltour ab 6:00 Uhr Ortszeit oder, wenn die Post ein Zeitfenster nennt, ab einer halben Stunde vor dessen Beginn, und solange die Post selbst antwortet; über Tracking-Dienste alle 15 Minuten). Sonst schaut Peek stündlich nach, ebenso, wenn zwei Tage lang nichts Neues kommt (solange das Paket noch „Etikett erstellt“ oder „Beim Paketdienst eingegangen“ zeigt, schon nach 12 Stunden). Mitteilungen kann Peek dir bei jedem Scan schicken, nur bei wichtigen Schritten (dazu zählen die Zollscans) oder nur am Liefertag. Nach `Übergabe an Zustellpartner` folgt Peek dem Partner nicht, und ein Paket eines anderen Paketdienstes wechselt nie zur Post.
 
 ## Fragen zur Sendungsverfolgung der Post
 
@@ -120,18 +123,18 @@ Ja, mit deinem gelben Zettel. Oder du leitest ihm die e-Benachrichtigung weiter.
 Der Zollanmeldung deines Pakets steht etwas im Weg. Die Post lagert das Paket mit `Lagereingang - Zollanmeldungshindernis`, und in ihrer Sendungsverfolgung wirst du um die fehlenden Unterlagen gebeten. Hast du geantwortet, steht dort `Zollanmeldungshindernis - Rückmeldung vom Empfänger eingelangt`, und das Paket bleibt beim Zoll, bis es verzollt ist.
 
 :::sources
-- [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Bedeutung der Status, Abholfrist, Abholung, Schaden, Nachforschung
-- [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Nummernformen, Laufzeiten, 14 Tage, Poststation, CRN-Code, Zoll
+- [Österreichische Post: Hilfe zu Ihrem Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Bedeutung der Status, Benachrichtigung, Abholfrist, Abholung mit und ohne Zettel, Poststation in der Filiale, e-Benachrichtigung und Versanddaten, Schaden, Nachforschung (gelesen am 17. November 2026)
+- [Österreichische Post: FAQ Privatkund\*innen](https://www.post.at/p/c/faq-privat) – Nummernformen, Aufgabebeleg, Laufzeiten, 14 Tage in Filiale, Poststation und Empfangsbox, Wunsch-Poststation, CRN-Code, Zoll (gelesen am 17. November 2026)
 - [Österreichische Post: Sendungssuche](https://www.post.at/s/sendungssuche) – Sendungsverfolgung ohne Konto, Post Konto, Umschalter EN, Statustexte
 - [Österreichische Post: Kontaktieren Sie uns telefonisch](https://www.post.at/k/c/hotline) – Hotline, Zeiten, Statusliste, Nummernformen
 - [Österreichische Post: Aktuelle Informationen des Kundenservice](https://www.post.at/k/c/kundenservice) – Hotline, Kontaktformular, Chat
 - [Österreichische Post: Kontaktmöglichkeiten](https://www.post.at/k/c/kontakt) – Kontaktformular rund um die Uhr
-- [Österreichische Post: Zentrale Fragen zur Nachforschung](https://www.post.at/p/a/nachforschung) – wer sucht, Fristen, Schritte für Empfänger
+- [Österreichische Post: Zentrale Fragen zur Nachforschung](https://www.post.at/p/a/nachforschung) – wer sucht, Fristen, Schritte für Empfänger, derzeit kostenlos, Einschätzung durch den Kundenservice (gelesen am 17. November 2026)
 - [Österreichische Post: Schadensmeldung](https://www.post.at/p/a/schadensmeldung) – 7 Tage, Ablauf
 - [Österreichische Post: Poststation](https://www.post.at/p/c/abholstation) – Standorte, rund um die Uhr, Umleitung
 - [Österreichische Post: Wunsch-Poststation oder Wunsch-Postfiliale](https://www.post.at/g/c/paket-services-wunsch-poststation-postfiliale) – über 1.500 Poststationen
 - [Österreichische Post: Gelber Zettel von der Post](https://www.post.at/p/blog-gelber-zettel) – gelber Zettel, e-Benachrichtigung, Abholung ohne Zettel
-- [Österreichische Post: Pakete empfangen, wo Sie wollen](https://www.post.at/p/a/paketumleitung) – Umleitung, kostenlos, 3 Werktage
+- [Österreichische Post: Pakete empfangen, wo Sie wollen](https://www.post.at/p/a/paketumleitung) – Umleitung, kostenlos, 3 Werktage, einzelne Pakete unter „Meine Sendungen“, E-Mail nach der Zustellung (gelesen am 17. November 2026)
 - [Österreichische Post: Postempfangsbox](https://www.post.at/p/c/empfangsbox) – Empfangsbox
 - [Österreichische Post: Gefahren im Internet](https://www.post.at/i/c/gefahren-im-internet) – gefälschte SMS und Zettel
 - [Österreichische Post: Jahresfinanzbericht 2023](https://assets.post.at/-/media/Dokumente/De/Investor-Relations/Geschaefts--und-Nachhaltigkeitsberichte/Jahresfinanzbericht-Oesterreichische-Post-AG-2023.pdf) – Firmenname, Sitz

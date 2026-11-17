@@ -2020,6 +2020,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-sendungsverfolgung",
+      "title": "Correos Express Sendungsverfolgung: Status und Kontakt",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
+      "id": "nacex",
+      "catalog": "nacex",
+      "slug": "nacex-sendungsverfolgung",
+      "title": "NACEX Sendungsverfolgung: Nummer, Status und Kontakt",
+      "name": "NACEX",
+      "color": "#fe5000"
+    },
+    {
       "id": "yunexpress",
       "catalog": "yunexpress",
       "slug": "yunexpress-sendungsverfolgung",
@@ -2492,6 +2508,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Colis Privé suivi\u00a0: statuts, relais et service client",
       "name": "Colis Privé",
       "color": "#aa78ff"
+    },
+    {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-suivi",
+      "title": "Suivi Correos Express\u00a0: numéro, statuts et contact",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
+      "id": "nacex",
+      "catalog": "nacex",
+      "slug": "nacex-suivi",
+      "title": "NACEX suivi\u00a0: numéro, statuts espagnols et contact",
+      "name": "NACEX",
+      "color": "#fe5000"
     },
     {
       "id": "yunexpress",
@@ -3014,6 +3046,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "BRT tracking: dov'è il pacco e cosa fare se non arriva",
       "name": "BRT",
       "color": "#dc0032"
+    },
+    {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-tracciamento",
+      "title": "Tracciamento Correos Express: numero, stati e contatti",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
+      "id": "nacex",
+      "catalog": "nacex",
+      "slug": "nacex-tracciamento",
+      "title": "Tracciamento NACEX: numero, stati in spagnolo e contatti",
+      "name": "NACEX",
+      "color": "#fe5000"
     },
     {
       "id": "yunexpress",
@@ -4223,6 +4271,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "pl": [
+    {
+      "id": "correos-express",
+      "catalog": "correos-express",
+      "slug": "correos-express-sledzenie",
+      "title": "Śledzenie Correos Express: numer, statusy i kontakt",
+      "name": "Correos Express",
+      "color": "#ffcd00"
+    },
+    {
+      "id": "nacex",
+      "catalog": "nacex",
+      "slug": "nacex-sledzenie",
+      "title": "Śledzenie przesyłek NACEX: numer, statusy i kontakt",
+      "name": "NACEX",
+      "color": "#fe5000"
+    },
     {
       "id": "yunexpress",
       "catalog": "yunexpress",

@@ -62462,7 +62462,7 @@
     "/api/parcels": {
       "get": {
         "operationId": "listTokenParcels",
-        "description": "The account's parcels, for a token that may read them: a personal token in a script, or an assistant's access token. Each request counts against the token's grant, 120 a minute. 404 while personal tokens are off (`PERSONAL_TOKENS`), or when assistants may connect to no account.",
+        "description": "The account's parcels, for a token that may read them: an assistant's access token, or a personal token in a script while personal tokens are on (`PERSONAL_TOKENS`). Each request counts against the token's grant, 120 a minute. 404 when assistants may connect to no account.",
         "security": [
           {
             "peekToken": []
@@ -62523,7 +62523,7 @@
             "$ref": "#/components/responses/ApiError"
           },
           "401": {
-            "description": "No token, or one that is unknown, expired or revoked",
+            "description": "No token, or one that is unknown, expired or revoked, or a personal token while personal tokens are off",
             "content": {
               "application/json": {
                 "schema": {
@@ -65325,7 +65325,7 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "Peek token",
-        "description": "A personal token from Settings › Assistants and tokens, or an assistant's access token."
+        "description": "An assistant's access token, or a personal token while personal tokens are on."
       }
     },
     "parameters": {

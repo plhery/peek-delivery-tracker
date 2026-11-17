@@ -462,10 +462,11 @@ Key server modules:
     scans, so one call answers "my latest delivered parcel"; each parcel gives its expected
     day and delivery time. Parcel details go out as JSON fields, and the server's
     instructions tell the assistant to read them as data, never as instructions.
+  - `GET /api/parcels` gives a token with `parcels:read` what `list_parcels` gives, as JSON,
+    for a client that reads parcels without MCP, and counts against the grant's allowance.
   - Personal tokens, for scripts that can't sign in, are off unless `PERSONAL_TOKENS` is
-    `on`: Settings has no screen that makes one, so making one and `GET /api/parcels` answer
-    404 and `/mcp` takes none. When on, `GET /api/parcels` gives a token that may read what
-    `list_parcels` gives, as JSON, and counts against the grant's allowance.
+    `on`: Settings has no screen that makes one, so making one answers 404, and `/mcp` and
+    `GET /api/parcels` take none.
 - **Private data**: tracking numbers, labels, carrier history, push endpoints and capability
   URLs (the tracking links a carrier keeps, such as Planzer's or a Freightways network's) never
   go into analytics. They do appear in operator logs and Sentry; see

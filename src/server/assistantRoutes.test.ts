@@ -673,7 +673,8 @@ describe('the OAuth endpoints', () => {
 });
 
 describe('the parcels a token reads as JSON', () => {
-  beforeEach(() => { vi.stubEnv('PERSONAL_TOKENS', 'on'); });
+  // Personal tokens are off: an assistant's access token reads the parcels without them.
+  beforeEach(() => { vi.stubEnv('PERSONAL_TOKENS', ''); });
 
   function read(secret: string | null, query = '') {
     const headers: Record<string, string> = secret ? { authorization: `Bearer ${secret}` } : {};
@@ -725,14 +726,24 @@ describe('the parcels a token reads as JSON', () => {
     expect((await mcp(secret, 'tools/list')).status).toBe(429);
   });
 
-  it('is not there when no account may connect, or while personal tokens are off', async () => {
+  it('takes a personal token only while personal tokens are on', async () => {
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
+    const personal = connect(['parcels:read'], userId, 'personal');
+    const refused = await read(personal);
+    expect(refused.status).toBe(401);
+    expect(refused.headers.get('www-authenticate')).toContain('error="invalid_token"');
+    expect(service.listAccountPackages).not.toHaveBeenCalled();
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
+    expect((await read(personal)).status).toBe(200);
+  });
+
+  it('is not there when no account may connect', async () => {
     vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
     const secret = connect(['parcels:read']);
-    vi.stubEnv('PERSONAL_TOKENS', '');
-    expect((await read(secret)).status).toBe(404);
-    vi.stubEnv('PERSONAL_TOKENS', 'on');
     vi.stubEnv('ASSISTANT_ACCOUNTS', '');
     expect((await read(secret)).status).toBe(404);
+    vi.stubEnv('PERSONAL_TOKENS', 'on');
+    expect((await read(connect(['parcels:read'], userId, 'personal'))).status).toBe(404);
     expect(service.listAccountPackages).not.toHaveBeenCalled();
   });
 });

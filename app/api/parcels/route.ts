@@ -1,6 +1,6 @@
 import { apiRoute, HttpError, requireService } from '../../../src/server/api';
 import { tokenOwner } from '../../../src/server/assistants/mcp';
-import { assistantsConfigured, personalTokensOpen } from '../../../src/server/assistants/settings';
+import { assistantsConfigured } from '../../../src/server/assistants/settings';
 import {
   listParcels,
   MOST_LISTED,
@@ -15,13 +15,13 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 /**
- * The account's parcels as JSON, for a token that may read them: a personal token in a script, or an assistant's
- * access token. It takes `list_parcels`'s status, sort, search and limit, and counts against the grant's allowance, as
- * `/mcp` does. It is not there while personal tokens are off.
+ * The account's parcels as JSON, for a token that may read them: an assistant's access token, or a personal token in a
+ * script while those are on. It takes `list_parcels`'s status, sort, search and limit, and counts against the grant's
+ * allowance, as `/mcp` does. It is not there when no assistant can connect.
  */
 export const GET = apiRoute(async (context) => {
   const settings = assistantsConfigured();
-  if (!settings || !personalTokensOpen()) throw new HttpError(404, 'Not found');
+  if (!settings) throw new HttpError(404, 'Not found');
   const query = new URL(context.request.url).searchParams;
   const status = query.get('status') ?? undefined;
   if (status !== undefined && !(PARCEL_STATUSES as readonly string[]).includes(status)) {

@@ -308,18 +308,19 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   `npm run review-password -- <email>` sets that password, and `REVIEW_DEMO_ACCOUNTS` lists
   by id the accounts whose `TEST…` numbers are demo parcels
   ([AUTHENTICATION.md](AUTHENTICATION.md)).
-- **Cloudflare**: assistants call `/mcp`, `/oauth/token`, `/oauth/register`,
-  `/oauth/revoke` and `/.well-known/oauth-*` from their own servers, OpenAI fetches
-  `/.well-known/openai-apps-challenge`, and scripts with a
-  personal token read `/api/parcels`. A challenge there
+- **Cloudflare**: assistants call `/mcp`, `/api/parcels`, `/oauth/token`,
+  `/oauth/register`, `/oauth/revoke` and `/.well-known/oauth-*` from their own servers,
+  as do scripts with a personal token, and OpenAI fetches
+  `/.well-known/openai-apps-challenge`. A challenge there
   (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
   so skip them for these paths with a custom rule; keep rate limiting.
 - **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
   Customize › Connectors; Settings shows the steps for Claude, ChatGPT and Gemini, and the
   public page `/assistants` (`/de/assistants` and so on) shows them to anyone, with what Peek
   shares and what to do when a connection fails. Without the setting that page is a 404. It opens
-  `/oauth/authorize` to sign in and ask. With personal tokens on, a script sends one as
-  `Authorization: Bearer <token>`, to `/mcp` or to `GET /api/parcels`.
+  `/oauth/authorize` to sign in and ask. `/mcp` and `GET /api/parcels` take the access
+  token it gets as `Authorization: Bearer <token>`, and a personal token the same way while
+  those are on.
 
 ## Moving to another host
 

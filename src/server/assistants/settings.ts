@@ -51,7 +51,8 @@ export function assistantsConfigured(env: NodeJS.ProcessEnv = process.env): Assi
 
 /**
  * Whether personal tokens work: off unless `PERSONAL_TOKENS` is `on`. Settings has no screen that makes one, so while
- * they are off, making one and `GET /api/parcels` answer 404 and `/mcp` takes none.
+ * they are off, making one answers 404, and `/mcp` and `GET /api/parcels` take none: an assistant's access token still
+ * reads both.
  */
 export function personalTokensOpen(env: NodeJS.ProcessEnv = process.env): boolean {
   return env.PERSONAL_TOKENS?.trim() === 'on';

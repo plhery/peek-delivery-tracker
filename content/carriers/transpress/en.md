@@ -101,7 +101,7 @@ If you leave the carrier to Peek, it asks tracking services, and files the parce
 
 **Another carrier.** In the parcel's first 30 days, Peek also asks the carriers whose number shapes fit yours. If one of them shows the parcel moving under that number, Peek moves the parcel there and says "Swapped automatically from Transpress".
 
-**How often.** Peek checks the parcel hourly, and every 3 hours once a day passes without news. On the day it's out for delivery, Peek checks up to every 15 minutes while someone waits for it (notifications on, or you looked in the last hour). Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** Peek checks the parcel hourly, and every 3 hours once a day passes without news. On the day it's out for delivery, Peek checks up to every 15 minutes while you have it open or notifications are on. Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact Transpress, the shop or the sender for you, change the delivery or file a claim.
 

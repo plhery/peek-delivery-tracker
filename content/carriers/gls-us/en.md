@@ -94,7 +94,7 @@ On a parcel you've already added, use "Change carrier". Peek asks GLS US only ab
 
 **When GLS US doesn't answer.** If GLS US's tracker can't be reached, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 
-**How often.** While someone waits for the parcel (notifications on, or you looked in the last hour) and GLS US's tracker answers, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GLS US puts the parcel on a delivery route; through tracking services, hourly, and up to every 15 minutes on that day. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** While you have the parcel open, or on its delivery day with notifications on, and GLS US's tracker answers, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GLS US puts the parcel on a delivery route; otherwise hourly. Through tracking services, hourly, and up to every 15 minutes on that day while you have it open or notifications are on. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact GLS US or the shop for you, change the delivery or file a claim.
 

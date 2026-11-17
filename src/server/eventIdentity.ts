@@ -302,8 +302,11 @@ export function heldPastFirstStored(
   return all;
 }
 
-/** The raw data keys that hold a row's clock, which the stored identities carry (`withHeldClocks`). */
-const CLOCK_KEYS = ['time', 'local_time', 'time_zone_basis', 'time_provenance', 'provider_time_iso'] as const;
+/**
+ * The raw data keys that hold a row's clock, which the stored identities carry (`withHeldClocks`): the zone the scraper
+ * names for it too, or a held time would keep the scan's zone (the stored-scan replay reads it).
+ */
+const CLOCK_KEYS = ['time', 'local_time', 'time_zone', 'time_zone_basis', 'time_provenance', 'provider_time_iso'] as const;
 
 /**
  * The batch with each scan `held` names at the time of the row it takes over, when it still

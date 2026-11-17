@@ -329,6 +329,11 @@ describe('a wall-clock take-over past when the row was first stored', () => {
     expect(takeOver(abroad, { ...labelled, created_at: '2026-07-14T02:30:00+00:00' }, 'india-post').persisted)
       .toEqual([{ ...abroad, occurred_at: '2026-07-14T02:20:00Z', raw_data: { time: '2026-07-14T02:20:00Z', provider_code: 'ItemReceived' } }]);
     expect(takeOver(abroad, { ...labelled, created_at: '2026-07-15T09:00:00+00:00' }, 'india-post').persisted).toEqual([abroad]);
+    // The zone the scraper names for a clock goes with it: the row's, or none, never the scan's beside the row's time.
+    const zoned = { ...pacific, raw_data: { ...pacific.raw_data, time_zone: 'America/Los_Angeles' } };
+    expect(takeOver(zoned, { ...row, time_zone: 'UTC', time_zone_basis: 'carrier' }).persisted[0]!.raw_data)
+      .toEqual({ time: '2026-11-04T04:41:00Z', time_zone: 'UTC', time_zone_basis: 'carrier', stage: 'registered' });
+    expect(takeOver(zoned, row).persisted[0]!.raw_data).toEqual({ time: '2026-11-04T04:41:00Z', stage: 'registered' });
   });
 
   it('moves the row within the clocks\' skew of when it was first stored, earlier, or when that is unknown', () => {

@@ -8,7 +8,7 @@ import { readAssistants, revokeAssistant } from '../lib/assistants';
 import { localizedRelativeTime, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
-import { PipEmpty, PipPerch } from './PipPerch';
+import { PipPerch } from './PipPerch';
 
 /**
  * Each assistant's steps to add Peek, folded under its name, then a line for any other assistant. Signing in to Peek is
@@ -136,7 +136,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
       <div className="settings-box">
         {assistants.length
           ? assistants.map((connection) => <Connection key={connection.id} connection={connection} working={working} onRevoke={() => revoke(connection.id)} />)
-          : <PipEmpty>{t('assistants.none')}</PipEmpty>}
+          : <p className="assistants__empty">{t('assistants.none')}</p>}
       </div>
     </section>
   </>;

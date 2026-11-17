@@ -1318,7 +1318,6 @@
   "inbox.recent": "Ostatnie e-maile",
   "inbox.empty": "Nie ma jeszcze żadnego e-maila. Przekaż jeden na swój adres, a pojawi się tutaj.",
   "inbox.notify": "Powiadamiaj, gdy e-mail doda przesyłkę",
-  "inbox.notify.hint": "Raz na przesyłkę, na każdym urządzeniu z włączonymi powiadomieniami Peek.",
   "inbox.result.added.one": "Dodano {{count}} przesyłkę",
   "inbox.result.added.few": "Dodano {{count}} przesyłki",
   "inbox.result.added.many": "Dodano {{count}} przesyłek",

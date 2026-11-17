@@ -1318,7 +1318,6 @@
   "inbox.recent": "Ultime email",
   "inbox.empty": "Ancora nessuna email. Inoltrane una al tuo indirizzo e comparirà qui.",
   "inbox.notify": "Avvisami quando un’email aggiunge un pacco",
-  "inbox.notify.hint": "Una volta per pacco, su ogni dispositivo con le notifiche di Peek attive.",
   "inbox.result.added.one": "{{count}} pacco aggiunto",
   "inbox.result.added.few": "{{count}} pacchi aggiunti",
   "inbox.result.added.many": "{{count}} pacchi aggiunti",

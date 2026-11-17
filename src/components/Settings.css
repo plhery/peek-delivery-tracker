@@ -122,11 +122,14 @@
 .pip-empty { display: grid; justify-items: center; gap: 8px; padding: 20px 14px 18px; text-align: center; }
 .pip-empty__pip { width: 58px; }
 .pip-empty p { margin: 0; max-width: 30ch; color: var(--ink-soft); font-size: 12.5px; line-height: 1.5; }
+/* No assistant connected yet: a plain line, without Pip. */
+.assistants__empty { margin: 0; padding: 14px; color: var(--ink-soft); font-size: 13px; background: var(--paper); }
 .add-by-email__mail { justify-content: space-between; }
 .add-by-email__what { display: grid; gap: 3px; min-width: 0; }
 .add-by-email__what strong { font-weight: 550; overflow-wrap: anywhere; }
 .add-by-email__what small { color: var(--ink-soft); font-size: 11px; line-height: 1.4; }
-.add-by-email__notify, .add-by-email__auto { margin-bottom: 24px; }
+.add-by-email__auto { margin-bottom: 24px; }
+.add-by-email__notify[aria-busy] .settings-switch { opacity: .6; }
 .add-by-email__auto > summary { cursor: pointer; list-style: none; }
 .add-by-email__auto > summary::-webkit-details-marker { display: none; }
 .add-by-email__auto > summary .settings-chevron { transition: transform .15s ease; }

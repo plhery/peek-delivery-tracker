@@ -184,13 +184,6 @@ internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollSta
                 copied = true
             }
             RecentEmails(inbox, offer)
-            // The switch shows what the server last answered: it moves once the change is saved, and stays on failure.
-            SettingsGroup {
-                SettingsToggleRow(
-                    inbox.notifies, { on -> run { store.setNotify(account, on) } }, localized("inbox.notify"), ADD_BY_EMAIL_NOTIFY,
-                    symbol = "bell", detail = localized("inbox.notify.hint"), enabled = !working,
-                )
-            }
             AutomaticForwarding(inbox, email, copy)
             SettingsGroup {
                 if (confirmingRenew) {
@@ -198,6 +191,13 @@ internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollSta
                 } else {
                     SettingsButtonRow(localized("inbox.renew"), ADD_BY_EMAIL_RENEW, { confirmingRenew = true }, symbol = "arrow.clockwise")
                 }
+                SettingsDivider()
+                // One line just above turning it off. The switch shows what the server last answered: it moves once the
+                // change is saved, and stays on failure.
+                SettingsToggleRow(
+                    inbox.notifies, { on -> run { store.setNotify(account, on) } }, localized("inbox.notify"), ADD_BY_EMAIL_NOTIFY,
+                    symbol = "bell", enabled = !working,
+                )
                 SettingsDivider()
                 SettingsButtonRow(localized("inbox.off"), ADD_BY_EMAIL_OFF, { run { store.close(account) } }, symbol = "trash")
             }

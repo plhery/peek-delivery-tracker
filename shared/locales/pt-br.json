@@ -1318,7 +1318,6 @@
   "inbox.recent": "Últimos e-mails",
   "inbox.empty": "Nenhum e-mail ainda. Encaminhe um para o seu endereço e ele aparece aqui.",
   "inbox.notify": "Me avisar quando um e-mail adicionar uma encomenda",
-  "inbox.notify.hint": "Uma vez por encomenda, em cada dispositivo com as notificações do Peek ativadas.",
   "inbox.result.added.one": "{{count}} encomenda adicionada",
   "inbox.result.added.few": "{{count}} encomendas adicionadas",
   "inbox.result.added.many": "{{count}} encomendas adicionadas",

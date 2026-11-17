@@ -239,8 +239,8 @@ class AddByEmailSettingsTest {
     }
 
     /**
-     * The switch stands under the last emails, over the folded steps, on for an address the server sends without
-     * `notify`, and read by TalkBack as one switch with its hint; a finger on it saves the other side, which it then shows.
+     * The switch is one line in the last group, between a new address and turning it off, on for an address the server
+     * sends without `notify`, and read by TalkBack as one switch; a finger on it saves the other side, which it then shows.
      */
     @Test
     fun theNotificationIsOnUntilSwitchedOff() {
@@ -248,14 +248,14 @@ class AddByEmailSettingsTest {
         tap(SETTINGS_ADD_BY_EMAIL)
         node(ADD_BY_EMAIL_NOTIFY).performScrollTo()
         settle()
-        val emails = compose.onAllNodes(hasText("Atelier Lune", substring = true)).fetchSemanticsNodes().last().boundsInRoot
-        val row = node(ADD_BY_EMAIL_NOTIFY).fetchSemanticsNode().boundsInRoot
-        // The steps' row may stand below the window, where its bounds are clipped away.
-        val steps = node(ADD_BY_EMAIL_AUTOMATIC).fetchSemanticsNode().positionInRoot.y
-        assertTrue(row.top >= emails.bottom && steps >= row.bottom)
+        // Rows outside the window have their bounds clipped away, so their positions are compared.
+        val top = { tag: String -> node(tag).fetchSemanticsNode().positionInRoot.y }
+        assertTrue(top(ADD_BY_EMAIL_AUTOMATIC) < top(ADD_BY_EMAIL_RENEW))
+        assertTrue(top(ADD_BY_EMAIL_RENEW) < top(ADD_BY_EMAIL_NOTIFY) && top(ADD_BY_EMAIL_NOTIFY) < top(ADD_BY_EMAIL_OFF))
         assertEquals(ToggleableState.On, toggled(ADD_BY_EMAIL_NOTIFY))
         assertEquals(Role.Switch, node(ADD_BY_EMAIL_NOTIFY).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
-        node(ADD_BY_EMAIL_NOTIFY).assert(hasText(text("inbox.notify"))).assert(hasText(text("inbox.notify.hint")))
+        val said = node(ADD_BY_EMAIL_NOTIFY).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.map { it.text }
+        assertEquals(listOf(text("inbox.notify")), said)
 
         flip(ADD_BY_EMAIL_NOTIFY)
         assertEquals(ToggleableState.Off, toggled(ADD_BY_EMAIL_NOTIFY))

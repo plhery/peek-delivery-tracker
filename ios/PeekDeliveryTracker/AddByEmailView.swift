@@ -36,9 +36,8 @@ struct AddByEmailPage: View {
                     if let inbox = offer.inbox {
                         address(inbox.address)
                         recent(inbox, offer: offer)
-                        notification(inbox)
                         automatic(inbox)
-                        manage
+                        manage(inbox)
                     } else {
                         Button { Task { await model.turnOn() } } label: {
                             FirstParcelPrimaryLabel(title: localizer.text("inbox.start"), symbol: "envelope")
@@ -118,28 +117,6 @@ struct AddByEmailPage: View {
         }
     }
 
-    /// The switch shows the choice while it is saved, then the server's answer; a failure puts it back.
-    private func notification(_ inbox: AddByEmail) -> some View {
-        SettingsGroup {
-            Toggle(isOn: Binding(get: { notifyChoice ?? inbox.notifies }, set: { on in
-                guard notifyChoice == nil else { return }
-                notifyChoice = on
-                Task {
-                    await model.setNotify(on)
-                    notifyChoice = nil
-                }
-            })) {
-                SettingsRow(title: localizer.text("inbox.notify"), symbol: "bell",
-                            detail: localizer.text("inbox.notify.hint"), padded: false)
-            }
-            .rowToggle()
-            .padding(15)
-            .disabled(model.working || notifyChoice != nil)
-            .accessibilityIdentifier("addByEmail.notify")
-        }
-        .tint(settingsGreen)
-    }
-
     private func automatic(_ inbox: AddByEmail) -> some View {
         SettingsGroup {
             Button {
@@ -166,7 +143,8 @@ struct AddByEmailPage: View {
         }
     }
 
-    private var manage: some View {
+    /// A new address, the notification switch on one line, then turning it off.
+    private func manage(_ inbox: AddByEmail) -> some View {
         SettingsGroup {
             if confirmingRenew {
                 VStack(alignment: .leading, spacing: 12) {
@@ -185,6 +163,8 @@ struct AddByEmailPage: View {
                 .accessibilityIdentifier("addByEmail.renew")
             }
             settingsDivider
+            notification(inbox)
+            settingsDivider
             Button { Task { await model.turnOff() } } label: {
                 SettingsRow(title: localizer.text("inbox.off"), symbol: "trash")
             }
@@ -192,6 +172,25 @@ struct AddByEmailPage: View {
         }
         .buttonStyle(.plain)
         .disabled(model.working)
+    }
+
+    /// The switch shows the choice while it is saved, then the server's answer; a failure puts it back.
+    private func notification(_ inbox: AddByEmail) -> some View {
+        Toggle(isOn: Binding(get: { notifyChoice ?? inbox.notifies }, set: { on in
+            guard notifyChoice == nil else { return }
+            notifyChoice = on
+            Task {
+                await model.setNotify(on)
+                notifyChoice = nil
+            }
+        })) {
+            SettingsRow(title: localizer.text("inbox.notify"), symbol: "bell", padded: false)
+        }
+        .rowToggle()
+        .padding(15)
+        .tint(settingsGreen)
+        .disabled(model.working || notifyChoice != nil)
+        .accessibilityIdentifier("addByEmail.notify")
     }
 
     @ViewBuilder private var renewButtons: some View {

@@ -1318,7 +1318,6 @@
   "inbox.recent": "最近的邮件",
   "inbox.empty": "还没有邮件。把一封邮件转发到你的地址，它就会显示在这里。",
   "inbox.notify": "邮件添加包裹时通知我",
-  "inbox.notify.hint": "每个包裹通知一次，发送到每台开启了 Peek 通知的设备。",
   "inbox.result.added.one": "已添加 {{count}} 个包裹",
   "inbox.result.added.few": "已添加 {{count}} 个包裹",
   "inbox.result.added.many": "已添加 {{count}} 个包裹",

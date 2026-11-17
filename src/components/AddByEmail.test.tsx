@@ -70,7 +70,9 @@ describe('adding parcels by email in Settings', () => {
     const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={onChange} />);
     const notify = screen.getByRole('switch', { name: 'Notify me when an email adds a parcel' });
     expect(notify).toHaveAttribute('aria-checked', 'true');
-    expect(notify).toHaveAccessibleDescription('Once per parcel, on each device with Peek’s notifications on.');
+    // One line, just above "Turn off".
+    expect(notify).not.toHaveAccessibleDescription();
+    expect(notify.nextElementSibling).toBe(screen.getByRole('button', { name: 'Turn off' }));
     await user.click(notify);
     expect(setAddByEmailNotify).toHaveBeenCalledExactlyOnceWith(apiAuth, false);
     expect(onChange).toHaveBeenCalledWith(offer({ ...inbox, notify: false }));

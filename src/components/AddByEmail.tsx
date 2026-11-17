@@ -248,18 +248,6 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
         {recent.some(({ result }) => result === 'none') && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
         {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
       </section>
-      <div className="settings-box add-by-email__notify">
-        <button className="settings-row notification-email__switch" type="button" role="switch" aria-checked={notify}
-          aria-labelledby="add-by-email-notify" aria-describedby="add-by-email-notify-hint" aria-busy={working || undefined} disabled={working}
-          onClick={() => void run(() => setAddByEmailNotify(apiAuth, !notify))}>
-          <Icon name="bell" />
-          <span className="notification-email__text">
-            <strong id="add-by-email-notify">{t('inbox.notify')}</strong>
-            <small id="add-by-email-notify-hint">{t('inbox.notify.hint')}</small>
-          </span>
-          <span className="settings-switch" aria-hidden="true" />
-        </button>
-      </div>
       <details className="settings-box add-by-email__auto" open={Boolean(inbox.confirmation) || undefined}>
         <summary className="settings-row"><Icon name="settings" /><span>{t('inbox.auto.title')}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
         <div className="add-by-email__auto-body">
@@ -272,6 +260,10 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
             <div className="sheet__actions"><button className="button button--secondary" type="button" disabled={working} onClick={() => setConfirmingRenew(false)}>{t('common.cancel')}</button>
               <button className="button button--primary" type="button" disabled={working} aria-busy={working || undefined} onClick={() => void run(() => openAddByEmail(apiAuth, true))}>{t('inbox.renew')}</button></div></div>
           : <button className="settings-row" type="button" disabled={working} onClick={() => setConfirmingRenew(true)}><Icon name="refresh" />{t('inbox.renew')}</button>}
+        <button className="settings-row add-by-email__notify" type="button" role="switch" aria-checked={notify} aria-busy={working || undefined} disabled={working}
+          onClick={() => void run(() => setAddByEmailNotify(apiAuth, !notify))}>
+          <Icon name="bell" /><span>{t('inbox.notify')}</span><span className="settings-switch" aria-hidden="true" />
+        </button>
         <button className="settings-row" type="button" disabled={working} onClick={() => void run(async () => { await closeAddByEmail(apiAuth); return { ...offer, inbox: null }; })}><Icon name="trash" />{t('inbox.off')}</button>
       </div>
     </>}

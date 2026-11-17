@@ -59,7 +59,9 @@ describe('assistants in Settings', () => {
     expect(screen.queryByText(/token|Home Assistant|\/api\/parcels/i)).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Remove Claude' }));
     expect(revokeAssistant).toHaveBeenCalledWith(apiAuth, claude.id);
-    expect(await screen.findByText('No assistant is connected yet.')).toBeInTheDocument();
+    // The empty list says so in a plain line: Pip stays over the address only.
+    expect((await screen.findByText('No assistant is connected yet.')).closest('.pip-empty')).toBeNull();
+    expect(document.querySelectorAll('.small-pip')).toHaveLength(1);
   });
 
   it('shows how to add Peek to Claude, ChatGPT and Gemini, in their own words, and what to ask', async () => {

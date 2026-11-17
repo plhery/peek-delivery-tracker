@@ -424,11 +424,11 @@ class APIClientTests {
         val cases = listOf(
             Case(listOf(refused, fine), TestSession(), "ok kotlin.Unit", listOf("token", "refresh"), 2),
             Case(listOf(refused, refused), TestSession(), "authenticationExpired", listOf("token", "refresh", "signOut"), 2),
-            Case(listOf(jsonResponse(403, """{"error":"x"}"""), fine), TestSession(), "ok kotlin.Unit", listOf("token", "refresh"), 2),
-            // Only "required" asks for the device's check; any other 403 is the session's.
+            // A 403 other than the device's check, such as a firewall's page in front of the service, keeps the session.
+            Case(listOf(jsonResponse(403, """{"error":"x"}"""), fine), TestSession(), "service(x)", listOf("token"), 1),
             Case(
-                listOf(jsonResponse(403, headers = mapOf("X-Lookup-Verification" to "Required"))), TestSession(), "authenticationExpired",
-                listOf("token", "refresh", "signOut"), 2,
+                listOf(jsonResponse(403, headers = mapOf("X-Lookup-Verification" to "Required"))), TestSession(), "serviceFailed(403)",
+                listOf("token"), 1,
             ),
             Case(listOf(refused, fine), TestSession(refreshed = null), "authenticationExpired", listOf("token", "refresh", "signOut"), 1),
             Case(listOf(refused, fine), TestSession().apply { refreshFailure = IOException("offline") }, "network", listOf("token", "refresh"), 1),

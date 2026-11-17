@@ -4424,6 +4424,40 @@ extension SessionIsolationTests {
         }
     }
 
+    /// A firewall's page in front of the API or of Supabase Auth says nothing about the session: nobody is signed out.
+    @MainActor func testAFirewallsForbiddenPageKeepsTheSession() async throws {
+        let page = Data("<!doctype html><title>Attention Required! | Cloudflare</title>".utf8)
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let persistence = MemorySessionPersistence()
+        let session = SessionStore(configuration: configuration, persistence: persistence, transport: transport)
+        defer { session.forceSignOut() }
+        try await authorize(session)
+        let store = store(session, transport)
+        nonisolated(unsafe) var paths: [String] = []
+        let forbidden: (URLRequest, @escaping (Result<(Int, Data), Error>) -> Void) -> Void = { request, complete in
+            paths.append(request.url?.path ?? "")
+            complete(.success((403, page)))
+        }
+        SessionTestURLProtocol.handler = forbidden
+
+        await store.load()
+
+        XCTAssertNotNil(session.user)
+        XCTAssertNotNil(persistence.data)
+        XCTAssertFalse(store.authenticationRequired)
+        XCTAssertEqual(paths, ["/api/packages"], "Not a refused token, so nothing to refresh")
+
+        let expired = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { expired.forceSignOut() }
+        try await authorize(expired, expired: true)
+        SessionTestURLProtocol.handler = forbidden
+        do { _ = try await expired.accessToken(); XCTFail("Expected the failure") } catch AuthenticationError.requestFailed(let status) {
+            XCTAssertEqual(status, 403)
+        }
+        XCTAssertNotNil(expired.user)
+    }
+
     @MainActor func testAuthErrorInTheOlderShapeKeepsItsMessage() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

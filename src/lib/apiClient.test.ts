@@ -77,6 +77,19 @@ it('keeps the session when an expired token, once refreshed, needs a recent sign
   expect(onAuthenticationFailure).not.toHaveBeenCalled();
 });
 
+it('keeps the session on a forbidden answer, such as a firewall’s page in front of the server', async () => {
+  const page = () => new Response('<!doctype html><title>Attention Required! | Cloudflare</title>', { status: 403, headers: { 'content-type': 'text/html' } });
+  const fetcher = vi.fn(async () => page());
+  vi.stubGlobal('fetch', fetcher);
+  const onAuthenticationFailure = vi.fn(async () => undefined);
+  const getAccessToken = vi.fn(async () => 'token');
+  const response = await authenticatedFetch('/api/packages', { userId: 'A', getAccessToken, onAuthenticationFailure });
+  expect(response.status).toBe(403);
+  expect(getAccessToken.mock.calls).toEqual([[false]]);
+  expect(fetcher).toHaveBeenCalledOnce();
+  expect(onAuthenticationFailure).not.toHaveBeenCalled();
+});
+
 it('reads a refusal with another code, or none readable, as a lost session', async () => {
   for (const body of ['{"error":"Authentication is required","code":"other"}', 'not json']) {
     vi.stubGlobal('fetch', vi.fn(async () => new Response(body, { status: 401, headers: { 'content-type': 'application/json' } })));

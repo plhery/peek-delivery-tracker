@@ -454,7 +454,10 @@ class AuthenticationTests {
             Triple(400, """{"code":"other","msg":"Nope"}""", "server(Nope)"),
             Triple(400, """{"code":"","error":"invalid_grant"}""", "requestFailed(400)"),
             Triple(401, "{}", "missingSession"),
-            Triple(403, null, "missingSession"),
+            // A firewall's page in front of Supabase Auth, and Supabase Auth's own 403 for the session.
+            Triple(403, null, "requestFailed(403)"),
+            Triple(403, "<html>Attention Required</html>", "requestFailed(403)"),
+            Triple(403, """{"code":"session_not_found","msg":"Session not found"}""", "missingSession"),
             Triple(500, "", "requestFailed(500)"),
             Triple(503, """{"message":"Unavailable"}""", "server(Unavailable)"),
             Triple(422, """{"error_description":"d","message":"m","msg":"g"}""", "server(d)"),

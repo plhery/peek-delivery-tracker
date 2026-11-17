@@ -750,9 +750,13 @@ class SessionStore(
     }
 
     internal companion object {
+        /**
+         * Whether Supabase Auth refused the refresh token itself. A 403 counts only with one of its codes: a firewall's
+         * page in front of it says nothing about the session.
+         */
         private fun invalidRefresh(status: Int, code: String?): Boolean {
-            if (status == 401 || status == 403) return true
-            return status == 400 && (code ?: "") in listOf(
+            if (status == 401) return true
+            return (status == 400 || status == 403) && (code ?: "") in listOf(
                 "invalid_grant", "refresh_token_not_found", "refresh_token_already_used",
                 "session_not_found", "session_expired", "user_not_found", "user_banned",
             )

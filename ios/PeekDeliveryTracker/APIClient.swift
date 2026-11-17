@@ -539,13 +539,15 @@ final class DeliveryAPIClient {
         var token = try await session.accessToken()
         try session.checkGeneration(generation)
         var result = try await perform(token: token)
-        if result.1.statusCode == 401 || result.1.statusCode == 403 {
+        // Only the service's 401 is about the session: its own 403s ask for the device's check, handled above, and a
+        // 403 from the network in front of it, such as a firewall's page, says nothing about the sign-in.
+        if result.1.statusCode == 401 {
             token = try await session.accessToken(forceRefresh: true)
             try session.checkGeneration(generation)
             if token != nil { result = try await perform(token: token) }
         }
         try session.checkGeneration(generation)
-        if result.1.statusCode == 401 || result.1.statusCode == 403 {
+        if result.1.statusCode == 401 {
             session.forceSignOut()
             throw DeliveryAPIError.authenticationExpired
         }

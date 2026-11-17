@@ -83,7 +83,9 @@ async function performAuthenticatedFetch(
   let response = await perform(await token());
   // A refreshed token keeps its session's sign-in time, so it can't pass where a recent sign-in is needed.
   let recentSignIn = await abortable(asksForRecentSignIn(response), signal);
-  if (auth && !recentSignIn && (response.status === 401 || response.status === 403)) {
+  // Only the server's 401 is about the session: a 403 asks for a check of the browser or a token's scope, or comes from
+  // the network in front of the server, such as a firewall's page, and says nothing about the sign-in.
+  if (auth && !recentSignIn && response.status === 401) {
     // A transient refresh failure must not discard a recoverable session.
     const accessToken = await token(true);
     if (accessToken) {
@@ -94,8 +96,7 @@ async function performAuthenticatedFetch(
   signal.throwIfAborted();
   // Not a lost session: the caller asks for a sign-in in place.
   if (recentSignIn) throw new ApiRecentSignInError();
-  if (response.type === 'opaqueredirect' || response.redirected
-    || response.status === 401 || response.status === 403) {
+  if (response.type === 'opaqueredirect' || response.redirected || response.status === 401) {
     // Local sign-out starts synchronously; notification cleanup cannot hold up this request.
     void auth?.onAuthenticationFailure?.().catch(() => undefined);
     throw new ApiAuthenticationError();

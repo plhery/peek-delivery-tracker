@@ -569,13 +569,15 @@ class DeliveryApiClient(
         var token = session.accessToken()
         session.checkGeneration(generation)
         var result = perform(token)
-        if (result.statusCode == 401 || result.statusCode == 403) {
+        // Only the service's 401 is about the session: its own 403s ask for the device's check, handled above, and a
+        // 403 from the network in front of it, such as a firewall's page, says nothing about the sign-in.
+        if (result.statusCode == 401) {
             token = session.accessToken(forceRefresh = true)
             session.checkGeneration(generation)
             if (token != null) result = perform(token)
         }
         session.checkGeneration(generation)
-        if (result.statusCode == 401 || result.statusCode == 403) {
+        if (result.statusCode == 401) {
             session.forceSignOut()
             throw DeliveryApiError.AuthenticationExpired()
         }

@@ -109,12 +109,18 @@ export function savable(request, url) {
   if (request.method !== 'GET' || url.search || !site.savedPages.test(url.pathname)) return false;
   if (site.jsonHosts.includes(url.hostname)) return false;
   const cookie = request.headers.get('cookie') ?? '';
-  return !site.sessionCookie.test(cookie) && !request.headers.has('authorization');
+  if (site.sessionCookie.test(cookie) || request.headers.has('authorization')) return false;
+  // A site whose pages differ for some readers says which requests get the page everyone gets.
+  return site.savableRequest?.(request, url) ?? true;
 }
 
-const savedKey = (url) => `https://saved.edge-guard.invalid/${url.hostname}${url.pathname}`;
+/** Where a page's copy is kept: one per address, or one per variant (a country's prices, say) when the site has them. */
+function savedKey(request, url) {
+  const variant = site.savedVariant?.(request);
+  return `https://saved.edge-guard.invalid/${url.hostname}${url.pathname}${variant ? `?variant=${encodeURIComponent(variant)}` : ''}`;
+}
 
-async function savePage(url, response) {
+async function savePage(request, url, response) {
   const type = response.headers.get('content-type') ?? '';
   if (response.status !== 200 || !type.includes('text/html')) return;
   // A page that sets a cookie is someone's, unless it is only the site's language cookie.
@@ -125,21 +131,22 @@ async function savePage(url, response) {
   const policy = response.headers.get('content-security-policy');
   if (policy) headers.set('Content-Security-Policy', policy);
   const cache = await caches.open(SAVED_COPY_CACHE);
-  await cache.put(savedKey(url), new Response(response.body, { headers }));
+  await cache.put(savedKey(request, url), new Response(response.body, { headers }));
 }
 
-/** The saved copy of a page, with a note at the top of its body, or null. */
-export async function savedPage(url, reader, found) {
+/** The saved copy of a page, with a note on its body, or null. */
+export async function savedPage(request, url, found) {
   if (!site.savedPages.test(url.pathname)) return null;
+  const { lang, timeZone } = reader(request, url);
   let saved;
   try {
-    saved = await (await caches.open(SAVED_COPY_CACHE)).match(savedKey(url));
+    saved = await (await caches.open(SAVED_COPY_CACHE)).match(savedKey(request, url));
   } catch {
     return null;
   }
   if (!saved) return null;
   const html = await saved.text();
-  const note = site.savedNote(reader.lang, { planned: Boolean(found), backAround: found?.backAround ?? null, timeZone: reader.timeZone });
+  const note = site.savedNote(lang, { planned: Boolean(found), backAround: found?.backAround ?? null, timeZone });
   // Drawn by a style rule, not an element: the page's own scripts redraw its body as they start, and would drop
   // one. The rule first undoes whatever the site's own style gives body::before.
   const nonce = /'nonce-([^']+)'/.exec(saved.headers.get('Content-Security-Policy') ?? '')?.[1];
@@ -212,7 +219,7 @@ function cors(request) {
 
 /** The site's answer while its server can't give one. */
 export async function fallback(request, url, found) {
-  if (isPageRequest(request)) return (await savedPage(url, reader(request, url), found)) ?? maintenancePage(request, url, found);
+  if (isPageRequest(request)) return (await savedPage(request, url, found)) ?? maintenancePage(request, url, found);
   if (isJsonRequest(request, url) || request.method !== 'GET') return maintenanceJson(request, url, found);
   return new Response(null, { status: 503, headers: { 'Cache-Control': 'no-store', 'Retry-After': retryAfter(found) } });
 }
@@ -245,11 +252,11 @@ const worker = {
     }
     if (unreachable(response) || appMissing(request, url, response) || (response.status === 500 && isPageRequest(request) && site.savedPages.test(url.pathname))) {
       if (site.healthPath.test(url.pathname)) return response;
-      const saved = isPageRequest(request) ? await savedPage(url, reader(request, url), found) : null;
+      const saved = isPageRequest(request) ? await savedPage(request, url, found) : null;
       if (saved) return saved;
       return response.status === 500 ? response : fallback(request, url, found);
     }
-    if (savable(request, url) && response.status === 200) ctx.waitUntil(savePage(url, response.clone()).catch(() => {}));
+    if (savable(request, url) && response.status === 200) ctx.waitUntil(savePage(request, url, response.clone()).catch(() => {}));
     return response;
   },
 };

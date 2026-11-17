@@ -1,5 +1,5 @@
 import { defaultCache } from '@serwist/next/worker';
-import type { PrecacheEntry, SerwistGlobalConfig } from 'serwist';
+import type { PrecacheEntry, SerwistGlobalConfig, SerwistPlugin } from 'serwist';
 import { ExpirationPlugin, NetworkFirst, NetworkOnly, Serwist } from 'serwist';
 import { isShareDraftId, SHARE_DRAFTS, shareDraftAddress, shareTargetAddress, type ShareFailure } from '../src/lib/shareTarget';
 
@@ -113,6 +113,39 @@ async function consumeShareTarget(url: URL): Promise<Response> {
   });
 }
 
+/** Statuses a proxy or Cloudflare answers with for a server that does not answer itself. */
+const SERVER_DOWN = new Set([502, 503, 504, 520, 521, 522, 523, 524, 525, 526, 527, 530]);
+
+/**
+ * A page the server could not give: a proxy's or Cloudflare's error, the proxy's own "404 page not found" while the
+ * app starts, or what the edge in front answers in the server's place (`X-Maintenance`: its saved copy of a page,
+ * or its maintenance page).
+ */
+function serverDown(response: Response): boolean {
+  return SERVER_DOWN.has(response.status) || response.headers.has('X-Maintenance')
+    || (response.status === 404 && (response.headers.get('Content-Type') ?? '').startsWith('text/plain'));
+}
+
+/**
+ * While the server is down for maintenance, a page opens from the copy this browser kept of it. Without one, the
+ * edge's own maintenance page says so; anything else, such as Cloudflare's error page, gives way to the offline page.
+ */
+const whileServerDown: SerwistPlugin = {
+  // Throwing here makes the strategy look in its cache, as it does without a network.
+  fetchDidSucceed: async ({ response, state }) => {
+    if (!serverDown(response)) return response;
+    if (state) state.down = response;
+    throw new Error(`The server is down (${response.status})`);
+  },
+  // Next's router needs the fallback's real URL when it hydrates.
+  // The target itself is precached and works without a network.
+  handlerDidError: async ({ state }) => {
+    const down = state?.down;
+    if (down instanceof Response && down.headers.has('X-Maintenance')) return down;
+    return Response.redirect(new URL('/~offline', self.location.origin).href, 302);
+  },
+};
+
 const pageNavigation = new NetworkFirst({
   cacheName: 'pages',
   plugins: [
@@ -120,14 +153,11 @@ const pageNavigation = new NetworkFirst({
     {
       // Only a page itself is kept for offline use. A redirect is the server's
       // answer of the moment, such as a host whose pages moved: the browser
-      // follows it, and it is asked again next time.
-      cacheWillUpdate: async ({ response }) => (response.status === 200 && !response.redirected ? response : null),
+      // follows it, and it is asked again next time. Nor is what the edge
+      // answered in the server's place.
+      cacheWillUpdate: async ({ response }) => (response.status === 200 && !response.redirected && !serverDown(response) ? response : null),
     },
-    {
-      // Next's router needs the fallback's real URL when it hydrates.
-      // The target itself is precached and works without a network.
-      handlerDidError: async () => Response.redirect(new URL('/~offline', self.location.origin).href, 302),
-    },
+    whileServerDown,
   ],
 });
 
@@ -153,8 +183,10 @@ const serwist: Serwist = new Serwist({
       // parcel link, or an assistant's request to connect. Keep this route ahead
       // of Serwist's defaults, which cache GET APIs and cross-origin responses
       // for applications with public data.
+      // `/maintenance.json` says what the edge knows now, never what it said before.
       matcher: ({ sameOrigin, url }) => (
         !sameOrigin || url.pathname.startsWith('/api/') || url.pathname === '/health' || url.pathname === '/invite'
+          || url.pathname === '/maintenance.json'
           || url.pathname.startsWith('/i/') || url.pathname.startsWith('/p/') || url.pathname.startsWith('/oauth/')
       ),
       handler: new NetworkOnly(),

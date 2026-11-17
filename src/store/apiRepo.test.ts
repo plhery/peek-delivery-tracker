@@ -201,6 +201,60 @@ describe('createApiRepo', () => {
     }
   });
 
+  it('reads the server down for maintenance, keeps the saved list and when it was read, and leaves an offline device offline', async () => {
+    window.localStorage.clear();
+    vi.setSystemTime(new Date('2026-11-17T09:00:00Z'));
+    const fetch = vi.fn().mockResolvedValue(response({ packages: [packageRow] }));
+    vi.stubGlobal('fetch', fetch);
+    const repo = createApiRepo();
+    const saved = await repo.list();
+    expect(repo.cachedAt?.()).toBe('2026-11-17T09:00:00.000Z');
+    // A poll that finds nothing new still says the list is up to date.
+    vi.setSystemTime(new Date('2026-11-17T09:05:00Z'));
+    await repo.list();
+    expect(repo.cachedAt?.()).toBe('2026-11-17T09:05:00.000Z');
+
+    // Cloudflare's page while the host reboots, the proxy's 404 while the app starts, the edge's own answer, then none.
+    fetch.mockResolvedValueOnce({ ok: false, status: 530, headers: new Headers({ 'Content-Type': 'text/html' }), json: vi.fn().mockRejectedValue(new SyntaxError('Not JSON')) });
+    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError', maintenance: null });
+    fetch.mockResolvedValueOnce({ ok: false, status: 404, headers: new Headers({ 'Content-Type': 'text/plain' }), json: vi.fn().mockRejectedValue(new SyntaxError('Not JSON')) });
+    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError' });
+    fetch.mockResolvedValueOnce(response({ error: 'The delivery database is temporarily unavailable' }, false, 502));
+    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError', maintenance: null });
+    fetch.mockResolvedValueOnce(response({
+      error: 'Peek is down for maintenance', maintenance: { planned: true, mode: 'soft', since: null, backAround: '2026-11-17T09:30:00Z' },
+    }, false, 503, new Headers({ 'Retry-After': '120' })));
+    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError', retryAfterMs: 120_000, maintenance: { planned: true, backAround: '2026-11-17T09:30:00Z' } });
+    fetch.mockRejectedValueOnce(new TypeError('Failed to fetch'));
+    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError' });
+
+    const online = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
+    fetch.mockRejectedValueOnce(new TypeError('Failed to fetch'));
+    await expect(repo.list()).rejects.toBeInstanceOf(TypeError);
+    online.mockRestore();
+
+    const reopened = createApiRepo();
+    expect(reopened.cachedList?.()).toEqual(saved);
+    expect(reopened.cachedAt?.()).toBe('2026-11-17T09:05:00.000Z');
+    clearApiCache(window.localStorage, 'user-1');
+    expect(createApiRepo().cachedAt?.()).toBeNull();
+  });
+
+  it('keeps the sign-in when the sign-in server is down too: no new token is the server down, not a lapsed session', async () => {
+    const fetch = vi.fn().mockResolvedValue(response({ error: 'Authentication is required' }, false, 401));
+    vi.stubGlobal('fetch', fetch);
+    const onAuthenticationFailure = vi.fn().mockResolvedValue(undefined);
+    const getAccessToken = vi.fn(async (refresh?: boolean) => {
+      if (refresh) throw Object.assign(new Error('Bad gateway'), { name: 'AuthRetryableFetchError', status: 530 });
+      return 'synthetic-token';
+    });
+    const repo = createApiRepo(30_000, 1_000, window.localStorage, { userId: 'user-1', getAccessToken, onAuthenticationFailure });
+
+    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError' });
+    expect(getAccessToken).toHaveBeenCalledWith(true);
+    expect(onAuthenticationFailure).not.toHaveBeenCalled();
+  });
+
   it('ignores a corrupted offline snapshot', () => {
     window.localStorage.setItem(API_CACHE_KEY, '[{"id":"incomplete"}]');
     expect(createApiRepo().cachedList?.()).toBeNull();
@@ -502,14 +556,14 @@ describe('createApiRepo', () => {
   it('surfaces API errors and malformed success responses', async () => {
     const fetch = vi
       .fn()
-      .mockResolvedValueOnce(response({ error: 'Database offline' }, false, 502))
-      .mockResolvedValueOnce({ ok: false, status: 503, json: vi.fn().mockRejectedValue(new Error()) })
+      .mockResolvedValueOnce(response({ error: 'The request could not be completed' }, false, 500))
+      .mockResolvedValueOnce({ ok: false, status: 400, json: vi.fn().mockRejectedValue(new Error()) })
       .mockResolvedValueOnce(response(null));
     vi.stubGlobal('fetch', fetch);
     const repo = createApiRepo();
 
-    await expect(repo.list()).rejects.toThrow('Database offline');
-    await expect(repo.list()).rejects.toThrow('Delivery service failed (503)');
+    await expect(repo.list()).rejects.toThrow('The request could not be completed');
+    await expect(repo.list()).rejects.toThrow('Delivery service failed (400)');
     await expect(repo.list()).rejects.toThrow('empty response');
   });
 

@@ -11,6 +11,7 @@ import type {
   ApiPublicParcelResponse,
 } from '../generated/apiContract';
 import type { Locale, MessageKey } from '../i18n';
+import type { MaintenanceNotice } from '../lib/maintenance';
 import { currentEvent, sortEventsDesc } from '../lib/stages';
 import { userErrorKey } from '../lib/userMessages';
 import { toParcel } from '../store/apiRepo';
@@ -141,23 +142,26 @@ export interface ParcelLinkReadOptions {
  * - `daily`: no lookups are left today; signing in is the way on.
  * - `refused`: the carrier does not have the parcel for the postcode the owner added.
  * - `validation`: the server refused the input; `guidance` names the advice when the app has some.
- * - `offline`: the request never got an answer.
- * - `server`: the service is in trouble, or answered something unreadable.
+ * - `offline`: the request never got an answer, and the device says it is offline.
+ * - `server`: the service is in trouble, or answered something unreadable. `down` is set when the server is down for
+ *   maintenance rather than failing: no answer while the device is online, or a proxy's or Cloudflare's in its place.
  */
 export type ParcelLinkErrorKind = 'unavailable' | 'stopped' | 'full' | 'unconfigured' | 'burst' | 'daily' | 'refused' | 'validation' | 'offline' | 'server';
 
 export class ParcelLinkError extends Error {
   readonly retryAfterSeconds: number | null;
   readonly guidance: MessageKey | null;
+  readonly down: MaintenanceNotice | null;
 
   constructor(
     readonly kind: ParcelLinkErrorKind,
-    details: { message?: string; retryAfterSeconds?: number | null; guidance?: MessageKey | null; cause?: unknown } = {},
+    details: { message?: string; retryAfterSeconds?: number | null; guidance?: MessageKey | null; down?: MaintenanceNotice | null; cause?: unknown } = {},
   ) {
     super(details.message || `Parcel link: ${kind}`, { cause: details.cause });
     this.name = 'ParcelLinkError';
     this.retryAfterSeconds = details.retryAfterSeconds ?? null;
     this.guidance = details.guidance ?? null;
+    this.down = details.down ?? null;
   }
 }
 
@@ -176,7 +180,7 @@ const FALLBACK_MESSAGES: Record<ParcelLinkErrorKind, MessageKey> = {
 
 /** The message to show for a failed link request: the server's guidance when it has one, else the kind's own. */
 export function parcelLinkErrorKey(error: unknown): MessageKey {
-  if (error instanceof ParcelLinkError) return error.guidance ?? FALLBACK_MESSAGES[error.kind];
+  if (error instanceof ParcelLinkError) return error.down ? 'maintenance.short' : error.guidance ?? FALLBACK_MESSAGES[error.kind];
   return userErrorKey(error) ?? 'error.generic';
 }
 

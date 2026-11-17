@@ -1,3 +1,4 @@
+import { readMaintenance, type MaintenanceNotice } from '../../lib/maintenance';
 import { isActiveParcel, nextPriorityParcel } from '../../lib/parcelPriority';
 import { isFinal } from '../../lib/stages';
 import { forgetParcelLink, ParcelLinkError, readParcelLink } from '../links';
@@ -20,6 +21,43 @@ const PASS_MS = 60_000;
 /** When the list last asked about each parcel, so coming back to the door does not ask again. */
 const checkedAt = new Map<string, number>();
 
+/**
+ * The server down for maintenance, as the last round found it, until a round reads a parcel again; and when a round
+ * last read one. The list then says so above what the device has, and the next round, within a minute, asks again.
+ */
+let down: MaintenanceNotice | null = null;
+let answeredAt = 0;
+let askedEdge = false;
+const downListeners = new Set<() => void>();
+
+function setDown(notice: MaintenanceNotice | null) {
+  if (notice === down) return;
+  down = notice;
+  if (!notice) askedEdge = false;
+  for (const listener of downListeners) listener();
+}
+
+/** Keeps an announcement already known; asks the edge once whether this one was announced. */
+function noteDown(notice: MaintenanceNotice) {
+  setDown(notice.planned || !down ? notice : down);
+  if (notice.planned || askedEdge) return;
+  askedEdge = true;
+  void readMaintenance().then((announced) => { if (announced && down) setDown(announced); });
+}
+
+/** The server down for maintenance, as the list last found it, or null. */
+export const deviceListDown = (): MaintenanceNotice | null => down;
+export function onDeviceListDown(listener: () => void): () => void {
+  downListeners.add(listener);
+  return () => { downListeners.delete(listener); };
+}
+
+/** When the list last heard from the server: its last read, else the newest answer the device kept. */
+export function deviceListReadAt(recents: readonly RecentParcel[]): string | null {
+  const latest = Math.max(answeredAt, ...recents.map((recent) => Date.parse(recent.lastSeenAt) || 0));
+  return latest > 0 ? new Date(latest).toISOString() : null;
+}
+
 /** Whether the parcel is still waiting for its first check with the carrier. */
 const waiting = (recent: Pick<RecentParcel, 'syncStatus'>) => recent.syncStatus === 'pending' || recent.syncStatus === 'syncing';
 
@@ -40,7 +78,8 @@ export function leadParcel(recents: readonly RecentParcel[], now = Date.now()): 
  * Brings the device's parcels up to date, quietly: each stale one is read
  * through its link, one after the other. A parcel the server no longer has
  * leaves the list; any trouble ends the round, and the list shows what the
- * device has. An answer keeps its parcel's place in the list.
+ * device has, under a note when the server is down for maintenance. An answer
+ * keeps its parcel's place in the list.
  *
  * Returns whether a parcel is still waiting for its first check, which is
  * worth another round soon.
@@ -60,12 +99,15 @@ export async function refreshDeviceParcels(recents: readonly RecentParcel[], sig
       const read = await readParcelLink(recent.id, { key: recent.key, signal });
       if (signal.aborted) return false;
       checkedAt.set(recent.id, now());
+      answeredAt = now();
+      setDown(null);
       if (read === 'unavailable') forgetRecent(recent.id);
       else {
         rememberParcel({ id: recent.id, view: read, now: seen || now() });
         unanswered ||= waiting(read.parcel);
       }
-    } catch {
+    } catch (error) {
+      if (!signal.aborted && error instanceof ParcelLinkError && error.down) noteDown(error.down);
       return false;
     }
   }
@@ -167,4 +209,6 @@ export async function forgetDeviceParcels(
 /** Drops what the list remembers about its own checks: a device with nothing on it starts over. */
 export function forgetDeviceChecks(): void {
   checkedAt.clear();
+  answeredAt = 0;
+  setDown(null);
 }

@@ -20,6 +20,7 @@
 .peekp-offline { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 36px; margin: 0; padding: max(6px, env(safe-area-inset-top)) 16px 6px; background: var(--control); color: var(--ink-soft); font-size: 12px; text-align: center; }
 .peekp-offline svg { width: 15px; height: 15px; flex: 0 0 auto; }
 .peekp-offline + .peekp-header { padding-top: 10px; }
+.peekp-maintenance { background: var(--yellow-soft); color: var(--ink); }
 .peekp-main { padding: 2px 16px 0; }
 .peekp-columns { display: grid; gap: 12px; width: min(100%, 520px); margin: 0 auto; }
 .peekp-column { display: grid; gap: 12px; align-content: start; min-width: 0; }

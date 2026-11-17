@@ -219,4 +219,6 @@ export interface ParcelRepo {
   subscribe?(onChange: () => void | Promise<void>): () => void;
   /** Last successfully loaded API snapshot for read-only offline fallback. */
   cachedList?(): ParcelWithEvents[] | null;
+  /** When that snapshot was last read from the server, as an ISO time, or null. */
+  cachedAt?(): string | null;
 }

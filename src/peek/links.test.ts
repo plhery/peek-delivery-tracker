@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import fixtures from '../../contracts/fixtures/delivery-api.json';
 import { ApiAuthenticationError } from '../lib/apiClient';
 import {
@@ -360,7 +360,9 @@ describe('the API backend', () => {
     expect(parcelLinkErrorKey(error)).toBe(guidance ?? 'error.trackingNumber');
   });
 
-  it('reports no answer as offline and a broken service as server trouble, never the response', async () => {
+  it('reports no answer on a device offline as offline and a broken service as server trouble, never the response', async () => {
+    const offline = vi.spyOn(navigator, 'onLine', 'get').mockReturnValue(false);
+    onTestFinished(() => offline.mockRestore());
     const { links } = api(
       new TypeError('Failed to fetch'),
       new DOMException('The operation timed out.', 'TimeoutError'),
@@ -376,6 +378,31 @@ describe('the API backend', () => {
     expect(await failure(links.lookupParcel({ trackingNumber: 'TESTPARCEL983456' }))).toMatchObject({ kind: 'server', guidance: null });
     expect((await failure(links.readParcelLink(ID))).kind).toBe('server');
     expect((await failure(links.readParcelLink(ID))).kind).toBe('server');
+  });
+
+  it('reads the server down for maintenance, with what the edge announced, apart from the app’s own trouble', async () => {
+    const unannounced = { planned: false, backAround: null };
+    const { links } = api(
+      new TypeError('Failed to fetch'),
+      new DOMException('The operation timed out.', 'TimeoutError'),
+      new Response('error code: 1033', { status: 530, headers: { 'Content-Type': 'text/plain' } }),
+      new Response('404 page not found\n', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }),
+      json({ error: 'The delivery database is temporarily unavailable' }, 502),
+      json({ error: 'Peek is down for maintenance', maintenance: { planned: true, mode: 'hard', since: null, backAround: '2026-11-17T09:30:00Z' } }, 503, { 'Retry-After': '300' }),
+      json({ error: 'Push notifications are not configured' }, 503),
+      new Response('not json', { status: 500 }),
+    );
+    // No answer while the device is online: the server is down, not the device.
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
+    const announced = await failure(links.readParcelLink(ID));
+    expect(announced).toMatchObject({ kind: 'server', retryAfterSeconds: 300, down: { planned: true, backAround: '2026-11-17T09:30:00Z' } });
+    expect(parcelLinkErrorKey(announced)).toBe('maintenance.short');
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'unconfigured', down: null });
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: null });
   });
 
   it('lets the caller’s own cancellation through', async () => {
@@ -474,7 +501,7 @@ describe('keeping links in an account', () => {
     expect(await failure(claimParcelLinks([{ id: ID }], auth))).toMatchObject({ kind: 'validation', guidance: 'error.nameTooLong' });
     expect(await failure(claimParcelLinks([{ id: ID }], auth))).toMatchObject({ kind: 'burst', retryAfterSeconds: 7 });
     expect((await failure(claimParcelLinks([{ id: ID }], auth))).kind).toBe('server');
-    expect((await failure(claimParcelLinks([{ id: ID }], auth))).kind).toBe('offline');
+    expect(await failure(claimParcelLinks([{ id: ID }], auth))).toMatchObject({ kind: 'server', down: { planned: false, backAround: null } });
     await expect(claimParcelLinks([{ id: ID }], auth)).rejects.toBeInstanceOf(ApiAuthenticationError);
   });
 });
@@ -527,7 +554,7 @@ describe('sharing a parcel of an account', () => {
     expect((await failure(client.current(parcel.id))).kind).toBe('unavailable');
     expect((await failure(client.current(parcel.id))).kind).toBe('server');
     expect((await failure(client.share(parcel))).kind).toBe('server');
-    expect((await failure(client.share(parcel))).kind).toBe('offline');
+    expect(await failure(client.share(parcel))).toMatchObject({ kind: 'server', down: { planned: false, backAround: null } });
     expect((await failure(client.stop(parcel.id))).kind).toBe('server');
     await expect(client.current(parcel.id)).rejects.toBeInstanceOf(ApiAuthenticationError);
   });
@@ -552,7 +579,7 @@ describe('saying something of an account’s parcel', () => {
     expect(new Headers(fetch.mock.calls[0][1]!.headers).get('Authorization')).toBe('Bearer token');
     expect(JSON.parse(String(fetch.mock.calls[0][1]!.body))).toEqual(answer);
     expect((await failure(send('package-1', answer))).kind).toBe('unavailable');
-    expect((await failure(send('package-1', answer))).kind).toBe('offline');
+    expect(await failure(send('package-1', answer))).toMatchObject({ kind: 'server', down: { planned: false, backAround: null } });
     expect((await failure(send('package-1', answer))).kind).toBe('server');
     await expect(send('package-1', answer)).rejects.toBeInstanceOf(ApiAuthenticationError);
   });

@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from 'react';
 import { CarrierMark } from '../../components/CarrierMark';
+import { MaintenanceStrip } from '../../components/MaintenanceStrip';
 import { pipMood } from '../../components/map/Pip';
 import { defaultMode } from '../../components/map/route';
 import { WorldMap } from '../../components/map/WorldMap';
@@ -20,7 +21,7 @@ import { parcelDetail, parcelFreshness, parcelHeadline, parcelStage } from '../p
 import { hasUnopenedNews, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { openParcelLink, parcelLinkPath } from '../route';
 import { usePeekSession } from '../session';
-import { forgetDeviceParcels, leadParcel, watchDeviceParcels } from './deviceList';
+import { deviceListDown, deviceListReadAt, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 /** A long number as a card writes it: its two ends. A short one stays whole. */
 export function shortNumber(number: string, carrier: RecentParcel['carrier']): string {
@@ -155,6 +156,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   // Which parcel Forget all has reached, of how many: the server takes a few a minute, and the rest wait their turn.
   const [forgetting, setForgetting] = useState<{ done: number; count: number } | null>(null);
   const [failed, setFailed] = useState(false);
+  const down = useSyncExternalStore(onDeviceListDown, deviceListDown, () => null);
   const question = useRef<HTMLDivElement>(null);
   const list = useRef(recents);
   useEffect(() => { list.current = recents; });
@@ -197,6 +199,7 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
       </div>
     </div>}
     {failed && <p className="door-message" role="alert">{t('door.recents.forget.failed')}</p>}
+    {down && listed && <MaintenanceStrip notice={down} at={deviceListReadAt(recents)} />}
     <ul ref={cards} className="door-device__list">
       {lead && <li key={lead.id} className="door-device__lead"><LeadParcel recent={lead} arrived={arrived(lead)} /></li>}
       {recents.filter((recent) => recent !== lead).map((recent) => <li key={recent.id}><DeviceParcel recent={recent} arrived={arrived(recent)} /></li>)}

@@ -2,6 +2,7 @@ import { act, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { ApiAuthenticationError } from '../lib/apiClient';
+import { ServerDownError } from '../lib/maintenance';
 import { ParcelsProvider, useParcels } from './ParcelsContext';
 import type { ParcelRepo, ParcelWithEvents } from '../types';
 
@@ -95,5 +96,60 @@ describe('a parcel marked as seen', () => {
     await userEvent.setup().click(screen.getByRole('button', { name: 'Open' }));
     expect(screen.getByText('tea 2026-11-15T09:00:00.000Z')).toBeVisible();
     expect(screen.getByText('no error')).toBeVisible();
+  });
+});
+
+describe('the server down for maintenance', () => {
+  const shoes: ParcelWithEvents = {
+    id: 'shoes', label: 'Running shoes', trackingNumber: 'JJD000390007351234', carrier: 'dhl', syncStatus: 'ok', createdAt: '2026-11-10T08:00:00.000Z', events: [],
+  };
+  function List() {
+    const { parcels, error, down, readAt, loading } = useParcels();
+    const state = down ? (down.planned ? `planned until ${down.backAround}` : 'down') : 'up';
+    return <p>{loading ? 'loading' : `${parcels.map((parcel) => parcel.label).join() || 'none'} · ${error ?? 'no error'} · ${state} · ${readAt}`}</p>;
+  }
+
+  it('keeps the list, says so in place of an error, and asks again by itself until the server answers', async () => {
+    vi.useFakeTimers({ shouldAdvanceTime: true });
+    const fetch = vi.fn().mockResolvedValue(Response.json({ planned: true, mode: 'soft', since: null, backAround: '2026-11-17T09:30:00.000Z' }));
+    vi.stubGlobal('fetch', fetch);
+    try {
+      let reload: () => void = () => undefined;
+      const repo: ParcelRepo = {
+        mode: 'api', add: vi.fn(), rename: vi.fn(), remove: vi.fn(), refresh: vi.fn(),
+        list: vi.fn().mockResolvedValueOnce([shoes]).mockRejectedValueOnce(new ServerDownError(0)).mockResolvedValueOnce([shoes]),
+        cachedAt: vi.fn(() => '2026-11-17T08:55:00.000Z'),
+        subscribe: (listener) => { reload = listener; return () => undefined; },
+      };
+      render(<ParcelsProvider repo={repo}><List /></ParcelsProvider>);
+      expect(await screen.findByText('Running shoes · no error · up · 2026-11-17T08:55:00.000Z')).toBeVisible();
+
+      act(() => { reload(); });
+      // The edge's /maintenance.json, asked once something failed, says it was announced.
+      expect(await screen.findByText('Running shoes · no error · planned until 2026-11-17T09:30:00.000Z · 2026-11-17T08:55:00.000Z')).toBeVisible();
+      expect(fetch).toHaveBeenCalledTimes(1);
+      expect(fetch).toHaveBeenCalledWith('/maintenance.json', expect.anything());
+
+      await act(async () => { await vi.advanceTimersByTimeAsync(5_000); });
+      expect(await screen.findByText('Running shoes · no error · up · 2026-11-17T08:55:00.000Z')).toBeVisible();
+      expect(repo.list).toHaveBeenCalledTimes(3);
+    } finally {
+      vi.useRealTimers();
+      vi.unstubAllGlobals();
+    }
+  });
+
+  it('shows no empty list when it has nothing saved to show', async () => {
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response('<!doctype html>', { status: 404, headers: { 'Content-Type': 'text/html' } })));
+    try {
+      const repo: ParcelRepo = {
+        mode: 'api', add: vi.fn(), rename: vi.fn(), remove: vi.fn(), refresh: vi.fn(),
+        list: vi.fn().mockRejectedValue(new ServerDownError(30_000)), cachedList: () => null,
+      };
+      render(<ParcelsProvider repo={repo}><List /></ParcelsProvider>);
+      expect(await screen.findByText('none · no error · down · null')).toBeVisible();
+    } finally {
+      vi.unstubAllGlobals();
+    }
   });
 });

@@ -3,11 +3,13 @@ import { headers } from 'next/headers';
 import { notFound } from 'next/navigation';
 import { connection } from 'next/server';
 import { AssistantConsentScreen } from '../../../src/components/AssistantConsentScreen';
+import { FeedbackScreen } from '../../../src/components/FeedbackScreen';
 import { translateMessage } from '../../../src/lib/messages';
 import { clientIp, clientNetwork, clientSite } from '../../../src/server/api';
 import { readAuthorizationRequest } from '../../../src/server/assistants/authorize';
 import { consentDetails } from '../../../src/server/assistants/consent';
 import { reviewAccountDigest } from '../../../src/server/assistants/review';
+import { databaseUnavailable } from '../../../src/server/observability';
 import { assistantsConfigured } from '../../../src/server/assistants/settings';
 import { RateLimiter } from '../../../src/server/rateLimit';
 import { messagesFor, requestLanguage, requestLocale } from '../../../src/server/requestLocale';
@@ -61,7 +63,12 @@ export default async function AuthorizePage({ searchParams }: Props) {
   for (const [name, value] of Object.entries(await searchParams)) {
     for (const one of [value ?? []].flat()) parameters.append(name, one);
   }
-  const read = await readAuthorizationRequest(settings, service, parameters);
+  const read = await readAuthorizationRequest(settings, service, parameters).catch((error: unknown) => {
+    if (databaseUnavailable(error)) return null;
+    throw error;
+  });
+  // The database down for maintenance: said calmly, and the same request can be opened again in a few minutes.
+  if (read === null) return <FeedbackScreen title="maintenance.title" description="maintenance.description" {...language} />;
   if (!('request' in read)) return <AssistantConsentScreen {...language} request={null} query="" />;
   // The answer goes where the page says, even if the client's document names another address by then.
   parameters.set('redirect_uri', read.request.redirectUri);

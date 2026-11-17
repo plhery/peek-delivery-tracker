@@ -60,6 +60,7 @@ import {
 import { currentStage, isDelivered } from './lib/stages';
 import { loadNotificationPreferences, saveShownUnits, useNotificationPreferences } from './store/notificationPreferences';
 import { useParcels } from './store/ParcelsContext';
+import { MaintenanceStrip } from './components/MaintenanceStrip';
 import { onKeepOutcome, type KeepOutcome } from './peek/pending';
 import type { CarrierId, ParcelWithEvents } from './types';
 
@@ -129,6 +130,8 @@ export default function App({
     error,
     authenticationRequired,
     usingCachedData,
+    down,
+    readAt,
     mode,
     addParcel,
     renameParcel,
@@ -545,6 +548,8 @@ export default function App({
       </header>
       {mode === 'demo' && <div className="demo-banner"><span>{t('app.demo')}</span>{onExitDemo && <button type="button" onClick={onExitDemo}>{t('native.exitDemo')}<Icon name="close" /></button>}</div>}
       <main className="app__content" id="main-content">
+        {/* The server is down for maintenance: the list stays, and comes back up to date by itself. */}
+        {down && <MaintenanceStrip notice={down} at={parcels.length > 0 ? readAt : null} />}
         {error && (
           <div className="error-banner" role="alert">
             <strong>
@@ -645,7 +650,7 @@ export default function App({
           </div>
         )}
 
-        {!loading && !error && parcels.length === 0 && (
+        {!loading && !error && !down && parcels.length === 0 && (
           <div className="empty-state">
             <ParcelIllustration className="empty-state__parcel" />
             <p className="empty-state__eyebrow">{t('app.emptyEyebrow')}</p>

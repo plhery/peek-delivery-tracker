@@ -1,6 +1,7 @@
 import { detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
+import { announcedMaintenance, deviceOnline, ServerDownError, serverDown, unanswered } from '../lib/maintenance';
 import type {
   ApiCreatePackageResponse,
   ApiCreatePackageRequest,
@@ -30,6 +31,8 @@ import {
 } from '../types';
 
 export const API_CACHE_KEY = 'parcel-post.api-cache.v1';
+/** Beside a cache, when its list was last read from the server. */
+const READ_AT_SUFFIX = '.at';
 /** Posted by the service worker when a push notification reports new server state. */
 export const SERVER_UPDATE_MESSAGE = 'sdt:server-update';
 
@@ -45,8 +48,10 @@ export function browserStorage(): Storage | null {
 export function clearApiCache(storage: Storage | null, userId: string): void {
   if (!storage) return;
   try {
-    storage.removeItem(API_CACHE_KEY);
-    storage.removeItem(`${API_CACHE_KEY}.${userId}`);
+    for (const key of [API_CACHE_KEY, `${API_CACHE_KEY}.${userId}`]) {
+      storage.removeItem(key);
+      storage.removeItem(key + READ_AT_SUFFIX);
+    }
   } catch {
     // Storage can be unavailable in private browsing.
   }
@@ -83,6 +88,15 @@ function parseCachedParcels(serialized: string | null): ParcelWithEvents[] | nul
     return valid ? value as ParcelWithEvents[] : null;
   } catch {
     return null;
+  }
+}
+
+/** Notes that the list was just read from the server, for a notice to say how old the saved one is. */
+function saveReadAt(storage: Storage | null, cacheKey: string) {
+  try {
+    storage?.setItem(cacheKey + READ_AT_SUFFIX, new Date().toISOString());
+  } catch {
+    // Storage can be unavailable in private browsing or on a full device.
   }
 }
 
@@ -212,11 +226,21 @@ function retryAfterMilliseconds(value: string | null): number {
 }
 
 async function apiRequest<T>(path: string, auth: ApiAuth | undefined, init?: RequestInit): Promise<T> {
-  const response = await authenticatedFetch(path, auth, init);
+  let response: Response;
+  try {
+    response = await authenticatedFetch(path, auth, init);
+  } catch (error) {
+    // No answer while the device is online, or no new token from a sign-in server that is down: the server is down.
+    if (unanswered(error) && deviceOnline() && !init?.signal?.aborted) throw new ServerDownError(0, null, { cause: error });
+    throw error;
+  }
   const payload = (await response.json().catch(() => null)) as (
     T & { error?: string; packageId?: string; scope?: string }
   ) | null;
   if (!response.ok) {
+    if (serverDown(response.status, payload)) {
+      throw new ServerDownError(retryAfterMilliseconds(response.headers?.get('Retry-After') ?? null), announcedMaintenance(payload));
+    }
     if (response.status === 409 && typeof payload?.packageId === 'string') {
       throw new ParcelAlreadyExistsError(
         payload.error ?? 'This tracking number is already in your delivery box',
@@ -310,7 +334,7 @@ export function createApiRepo(
         if (pending.size === 0) return;
       } catch (error) {
         if (signal.aborted) throw error;
-        if (error instanceof ApiResponseError && [429, 502, 503, 504].includes(error.status)) {
+        if (error instanceof ServerDownError || (error instanceof ApiResponseError && error.status === 429)) {
           retryAfter = error.retryAfterMs;
         } else if (!(error instanceof TypeError) && !(error instanceof DOMException && error.name === 'TimeoutError')) {
           throw error;
@@ -362,6 +386,7 @@ export function createApiRepo(
     }
     const parcels = payload.packages.map(toParcel);
     const serialized = JSON.stringify(parcels);
+    saveReadAt(storage, cacheKey);
     if (latest?.serialized === serialized) return latest.parcels;
     latest = { serialized, parcels };
     saveCachedParcels(storage, cacheKey, serialized);
@@ -398,6 +423,10 @@ export function createApiRepo(
       const parcels = parseCachedParcels(serialized);
       if (parcels && serialized !== null && revision === 0) latest = { serialized, parcels };
       return parcels;
+    },
+    cachedAt() {
+      const value = readCache(storage, cacheKey + READ_AT_SUFFIX);
+      return value && Number.isFinite(Date.parse(value)) ? value : null;
     },
 
     async add(input: NewParcelInput): Promise<ParcelWithEvents> {

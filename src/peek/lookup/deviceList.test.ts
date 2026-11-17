@@ -1,10 +1,10 @@
 import { renderHook } from '@testing-library/react';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../../test/parcelLinks';
 import type { EventPlace, ParcelWithEvents, Stage } from '../../types';
 import { ParcelLinkError } from '../links';
 import { forgetAllRecents, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
-import { forgetDeviceChecks, forgetDeviceParcels, leadParcel, watchDeviceParcels } from './deviceList';
+import { deviceListDown, deviceListReadAt, forgetDeviceChecks, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn() }));
 vi.mock('../links', async (original) => ({ ...await original<typeof import('../links')>(), readParcelLink: mocks.read, forgetParcelLink: mocks.forget }));
@@ -136,6 +136,31 @@ describe('watchDeviceParcels', () => {
     expect(mocks.read).toHaveBeenCalledTimes(2);
     expect(recentFor(LINK_ID)?.stage).toBe('out_for_delivery');
     stop();
+  });
+
+  it('keeps the parcel through the server down for maintenance, says so, and stops saying so once a round reads again', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() - 60 * MINUTE });
+    const fetch = vi.fn().mockResolvedValue(Response.json({ planned: true, mode: 'soft', since: null, backAround: '2026-10-01T15:00:00.000Z' }));
+    vi.stubGlobal('fetch', fetch);
+    onTestFinished(() => { vi.unstubAllGlobals(); });
+    const heard = vi.fn();
+    const unsubscribe = onDeviceListDown(heard);
+    // The proxy's 404 while the app starts, which no longer forgets the parcel.
+    mocks.read.mockRejectedValueOnce(new ParcelLinkError('server', { down: { planned: false, backAround: null } }));
+    const stop = watch();
+    onTestFinished(stop);
+    await pass(0);
+    expect(recentFor(LINK_ID)?.stage).toBe('in_transit');
+    // The edge says the maintenance was announced, and until when.
+    await vi.waitFor(() => expect(deviceListDown()).toEqual({ planned: true, backAround: '2026-10-01T15:00:00.000Z' }));
+    expect(fetch).toHaveBeenCalledOnce();
+    expect(deviceListReadAt([recentFor(LINK_ID)!])).toBe(recentFor(LINK_ID)!.lastSeenAt);
+    await pass(MINUTE);
+    expect(mocks.read).toHaveBeenCalledTimes(2);
+    expect(deviceListDown()).toBeNull();
+    expect(recentFor(LINK_ID)?.stage).toBe('out_for_delivery');
+    expect(heard).toHaveBeenCalled();
+    unsubscribe();
   });
 
   it('keeps asking, every 10 s at most, about a lookup its carrier has not answered yet', async () => {

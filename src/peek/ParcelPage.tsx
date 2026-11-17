@@ -39,6 +39,7 @@ import { linkFeedbackNotes } from './parcel/feedbackNotes';
 import { ForgetDialog, ForgetFooter, forgetParcel } from './parcel/Forget';
 import { GiftNote, GiftSurprise } from './parcel/Gift';
 import { Glyph } from './parcel/glyphs';
+import { MaintenanceStrip, maintenanceText } from '../components/MaintenanceStrip';
 import { useNow, useOffline, useWideLayout } from './parcel/hooks';
 import { AccountRow, AddToDeliveries, AlreadyFollowed, KeepSheet, PassportTeaser, SharedWithYou } from './parcel/Keep';
 import { OtherParcels } from './parcel/OtherParcels';
@@ -128,7 +129,7 @@ function Page({ linkId, entrance = 'direct', initial }: {
   entrance?: 'reveal' | 'direct';
   initial?: ParcelLinkView;
 }) {
-  const { t } = useI18n();
+  const { t, languageTag, use24HourTime } = useI18n();
   const session = usePeekSession();
   const state = useParcelLink(linkId, initial);
   const signedIn = session.account === 'signed-in';
@@ -146,10 +147,12 @@ function Page({ linkId, entrance = 'direct', initial }: {
     return <Shell onHome={home} title={`${t('status.syncing')} · ${t('app.title')}`} entrance={entrance}>
       <div className="peekp-waiting">
         <div className="peekp-pip peekp-pip--hero" style={{ viewTransitionName: PIP_TRANSITION_NAME }}><ParcelIllustration /></div>
-        {state.trouble ? <>
-          <p role="alert">{t(parcelLinkErrorKey(state.trouble))}</p>
-          <button type="button" className="button button--secondary" disabled={state.refreshing} onClick={() => void state.refresh()}>{t('app.tryAgain')}</button>
-        </> : <p role="status">{t('status.syncing')}</p>}
+        {/* The server down for maintenance: the page asks again by itself. */}
+        {state.trouble?.down ? <p role="status">{maintenanceText(state.trouble.down, null, 'parcel', { t, languageTag, use24HourTime })}</p>
+          : state.trouble ? <>
+            <p role="alert">{t(parcelLinkErrorKey(state.trouble))}</p>
+            <button type="button" className="button button--secondary" disabled={state.refreshing} onClick={() => void state.refresh()}>{t('app.tryAgain')}</button>
+          </> : <p role="status">{t('status.syncing')}</p>}
       </div>
     </Shell>;
   }
@@ -244,7 +247,9 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // The page gives a window of days whole, where cards and previews give the day it ends.
   const detail = wrapped ? giftArrival(parcel, wording) : (opened ? giftDelivered(parcel, wording) : null) ?? parcelDetail(parcel, wording, true, true);
   const offline = useOffline() || trouble?.kind === 'offline';
-  const failing = trouble && !offline ? trouble : null;
+  // The server down for maintenance is not the parcel's trouble: the page keeps it as it was, and says so.
+  const down = !offline ? trouble?.down ?? null : null;
+  const failing = trouble && !offline && !down ? trouble : null;
   // A number no carrier knows yet says so in its headline already.
   const flag = (carrierKnown && !placeholder ? parcelFlag(parcel, now) : null) ?? (failing ? 'sync_error' : null);
   const freshness = parcelFreshness({ parcel, checking, offline, trouble: !!failing, seenAt }, wording);
@@ -495,7 +500,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     entrance={entrance}
     live={live}
     news={!!news}
-    banner={offline && <p className="peekp-offline" role="status"><Glyph name="offline" />{t('link.offline', { time: momentLabel(scan ?? seenAt ?? '', wording) })}</p>}
+    banner={offline ? <p className="peekp-offline" role="status"><Glyph name="offline" />{t('link.offline', { time: momentLabel(scan ?? seenAt ?? '', wording) })}</p>
+      : down && <MaintenanceStrip notice={down} at={scan ?? seenAt ?? null} kind="parcel" className="peekp-offline peekp-maintenance" />}
     controls={present ? undefined : <>
       <button type="button" className="icon-button" aria-label={t('app.trackAnother')} onClick={onHome}><Icon name="search" /></button>
       <button type="button" className="icon-button peekp-header__share" aria-label={t('link.shareAria')} onClick={() => void share()}><Icon name="share" /><span>{t('link.share')}</span></button>

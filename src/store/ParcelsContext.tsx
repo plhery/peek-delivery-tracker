@@ -16,6 +16,7 @@ import {
   type ParcelWithEvents,
 } from '../types';
 import { ApiAuthenticationError } from '../lib/apiClient';
+import { quietRetryDelay, readMaintenance, ServerDownError, type MaintenanceNotice } from '../lib/maintenance';
 import { useI18n } from '../i18n';
 
 /** What a refresh can change for the reader: the timeline, the status line and the delivery date. */
@@ -41,6 +42,13 @@ interface ParcelsState {
   error: string | null;
   authenticationRequired: boolean;
   usingCachedData: boolean;
+  /**
+   * The server is down for maintenance: the list keeps what it shows, says so calmly instead of an error, and asks
+   * again by itself until the server answers.
+   */
+  down: MaintenanceNotice | null;
+  /** When the list shown was last read from the server, or null. */
+  readAt: string | null;
   mode: ParcelRepo['mode'];
   addParcel: (input: NewParcelInput) => Promise<ParcelWithEvents>;
   renameParcel: (id: string, label: string) => Promise<ParcelWithEvents>;
@@ -101,6 +109,15 @@ export function ParcelsProvider({
   const [error, setError] = useState<string | null>(null);
   const [authenticationRequired, setAuthenticationRequired] = useState(false);
   const [usingCachedData, setUsingCachedData] = useState(false);
+  const [down, setDown] = useState<MaintenanceNotice | null>(null);
+  const [readAt, setReadAt] = useState(() => repo.cachedAt?.() ?? null);
+  // While the server is down: how many quiet retries ran, the next one, and whether /maintenance.json was asked in
+  // this outage, which `outages` counts.
+  const downRetries = useRef(0);
+  const downTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const askedEdge = useRef(false);
+  const outages = useRef(0);
+  const reloadRef = useRef<() => Promise<void>>(async () => undefined);
   const mounted = useRef(true);
   const parcelsRef = useRef<ParcelWithEvents[]>(savedParcels ?? []);
   const revision = useRef(0);
@@ -119,14 +136,46 @@ export function ParcelsProvider({
     mounted.current = true;
     return () => {
       mounted.current = false;
+      clearTimeout(downTimer.current);
     };
   }, []);
 
+  /** The server is down: no error, and a quiet retry, as soon as it asked for and at least once a minute. */
+  const noteDown = useCallback((reason: ServerDownError) => {
+    setError(null);
+    setAuthenticationRequired(false);
+    setDown((current) => reason.maintenance ?? current ?? { planned: false, backAround: null });
+    // The edge's own answer says whether the maintenance was announced; a database's or a proxy's does not.
+    if (!reason.maintenance && !askedEdge.current) {
+      askedEdge.current = true;
+      const outage = outages.current;
+      void readMaintenance().then((notice) => {
+        if (notice && mounted.current && outages.current === outage) setDown(notice);
+      });
+    }
+    clearTimeout(downTimer.current);
+    downTimer.current = setTimeout(() => void reloadRef.current(), quietRetryDelay(downRetries.current++, reason.retryAfterMs));
+  }, []);
+
+  /** The server answered: the notice goes, and with it the retries. */
+  const noteUp = useCallback(() => {
+    clearTimeout(downTimer.current);
+    downRetries.current = 0;
+    askedEdge.current = false;
+    outages.current += 1;
+    setDown(null);
+    setReadAt(repo.cachedAt?.() ?? new Date().toISOString());
+  }, [repo]);
+
   const rememberError = useCallback((reason: unknown) => {
     if (!mounted.current || (reason instanceof DOMException && reason.name === 'AbortError')) return;
+    if (reason instanceof ServerDownError) {
+      noteDown(reason);
+      return;
+    }
     setError(reason instanceof Error ? reason.message : String(reason));
     setAuthenticationRequired(reason instanceof ApiAuthenticationError);
-  }, []);
+  }, [noteDown]);
 
   const reload = useCallback(async () => {
     const sequence = ++loadSequence.current;
@@ -139,6 +188,7 @@ export function ParcelsProvider({
         setError(null);
         setAuthenticationRequired(false);
         setUsingCachedData(false);
+        noteUp();
       }
     } catch (e) {
       if (e instanceof DOMException && e.name === 'AbortError') return;
@@ -152,7 +202,8 @@ export function ParcelsProvider({
     } finally {
       if (mounted.current && sequence === loadSequence.current) setLoading(false);
     }
-  }, [repo, rememberError]);
+  }, [repo, rememberError, noteUp]);
+  useEffect(() => { reloadRef.current = reload; }, [reload]);
 
   const retryLoad = useCallback(async () => {
     if (parcelsRef.current.length === 0) setLoading(true);
@@ -418,6 +469,8 @@ export function ParcelsProvider({
       error,
       authenticationRequired,
       usingCachedData,
+      down,
+      readAt,
       mode: repo.mode,
       addParcel,
       renameParcel,
@@ -440,6 +493,8 @@ export function ParcelsProvider({
       error,
       authenticationRequired,
       usingCachedData,
+      down,
+      readAt,
       repo.mode,
       addParcel,
       renameParcel,

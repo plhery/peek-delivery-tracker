@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState, useSyncExternalStore } from 'react';
 import { useI18n } from '../i18n';
+import { quietRetryDelay } from '../lib/maintenance';
 import { useSeenWhileOpen } from '../lib/newUpdate';
 import { parcelHasCarrierUpdate } from '../lib/parcelStatus';
 import { currentEvent, currentStage } from '../lib/stages';
@@ -144,6 +145,8 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     // The story this page was last told, and how many answers in a row told it again.
     let heard: string | null = null;
     let quiet = 0;
+    // Reads in a row that found the server down for maintenance: asked again within a minute, whatever the cadence.
+    let downs = 0;
     // When the last read began, whether one is on its way, and whether the next is set.
     let askedAt = 0;
     let reading = false;
@@ -200,6 +203,7 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
         // A gift on its way keeps its name to itself: the device does not learn it before the delivery.
         rememberParcel({ id: linkId, view: result, suggestedName: isWrappedGift(result) ? null : (result.link.giftWords ?? linkWordsFromHash(window.location.hash)).name });
         setAnswer({ view: result, gone: false, trouble: null });
+        downs = 0;
         if (scan || moved) {
           const inBackground = document.hidden;
           setTold((previous) => ({
@@ -221,7 +225,8 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
         }
         const trouble = error instanceof ParcelLinkError ? error : new ParcelLinkError('server', { cause: error });
         setAnswer((previous) => ({ ...previous, trouble }));
-        schedule(Math.max(cadence(), (trouble.retryAfterSeconds ?? 0) * 1_000));
+        const asked = (trouble.retryAfterSeconds ?? 0) * 1_000;
+        schedule(trouble.down ? quietRetryDelay(downs++, asked) : Math.max(cadence(), asked));
         return false;
       } finally {
         if (controller === current) reading = false;

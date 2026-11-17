@@ -17,6 +17,7 @@ import type {
 import type { Locale } from '../i18n';
 import { authenticatedFetch, type ApiAuth } from '../lib/apiClient';
 import { isDemoBuild } from '../lib/buildMode';
+import { announcedMaintenance, deviceOnline, serverDown, unanswered, type MaintenanceNotice } from '../lib/maintenance';
 import { typedNumber } from '../lib/carrierDetection';
 import { CARRIERS, detectCarrier, normalizeTrackingNumber } from '../lib/carriers';
 import { pageLocale } from '../lib/locale';
@@ -52,6 +53,13 @@ const OWNER_KEY = /^[A-Za-z0-9_-]{43}$/;
 const REQUEST_TIMEOUT_MS = 30_000;
 /** When a refusal names no delay. */
 const DEFAULT_RETRY_SECONDS = 60;
+/** The server is down, and nothing says whether that was announced. */
+const UNANNOUNCED: MaintenanceNotice = { planned: false, backAround: null };
+
+/** A request that got no answer: the device is offline, or, while it is online, the server is down. */
+function noAnswer(cause: unknown): ParcelLinkError {
+  return deviceOnline() ? new ParcelLinkError('server', { down: UNANNOUNCED, cause }) : new ParcelLinkError('offline', { cause });
+}
 
 function retryAfterSeconds(response: Response): number | null {
   const value = response.headers.get('Retry-After')?.trim();
@@ -70,6 +78,9 @@ async function failure(response: Response): Promise<ParcelLinkError> {
   const message = typeof payload?.error === 'string' ? payload.error : undefined;
   const retry = retryAfterSeconds(response);
   if (response.status === 404 && message !== undefined) return new ParcelLinkError('unavailable');
+  if (serverDown(response.status, payload)) {
+    return new ParcelLinkError('server', { message, retryAfterSeconds: retry, down: announcedMaintenance(payload) ?? UNANNOUNCED });
+  }
   if (response.status === 410) return new ParcelLinkError('stopped');
   if (response.status === 409) return new ParcelLinkError('full', { message });
   if (response.status === 429) {
@@ -109,7 +120,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     } catch (error) {
       // The caller's own cancellation is not a failure to report.
       if (signal?.aborted) throw error;
-      throw new ParcelLinkError('offline', { cause: error });
+      throw noAnswer(error);
     }
   }
   const keyHeader = (key: string | null | undefined): Record<string, string> | undefined =>
@@ -284,9 +295,7 @@ export function createAccountShare(auth: ApiAuth): ParcelShareClient {
     try {
       response = await authenticatedFetch(`/api/packages/${encodeURIComponent(packageId)}/share`, auth, init);
     } catch (error) {
-      if (error instanceof TypeError || (error instanceof DOMException && error.name === 'TimeoutError')) {
-        throw new ParcelLinkError('offline', { cause: error });
-      }
+      if (unanswered(error)) throw noAnswer(error);
       throw error;
     }
     if (!response.ok) throw await failure(response);
@@ -391,9 +400,7 @@ export function createAccountFeedback(auth: ApiAuth): (packageId: string, feedba
         method: 'POST', body: JSON.stringify(feedback),
       });
     } catch (error) {
-      if (error instanceof TypeError || (error instanceof DOMException && error.name === 'TimeoutError')) {
-        throw new ParcelLinkError('offline', { cause: error });
-      }
+      if (unanswered(error)) throw noAnswer(error);
       throw error;
     }
     if (!response.ok) throw await failure(response);
@@ -417,9 +424,7 @@ export async function claimParcelLinks(links: ParcelClaim[], auth: ApiAuth, sign
   try {
     response = await authenticatedFetch('/api/packages/claim', auth, { method: 'POST', body: JSON.stringify(body), signal });
   } catch (error) {
-    if (error instanceof TypeError || (error instanceof DOMException && error.name === 'TimeoutError')) {
-      throw new ParcelLinkError('offline', { cause: error });
-    }
+    if (unanswered(error)) throw noAnswer(error);
     throw error;
   }
   if (!response.ok) throw await failure(response);

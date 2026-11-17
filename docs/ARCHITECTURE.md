@@ -491,7 +491,8 @@ Key server modules:
   ([`publicAddress.ts`](../src/server/publicAddress.ts)). An inbox is read with its
   installation token, limited per token and per address.
 - **Service worker**: caches only the public app shell and static assets. APIs, health,
-  Auth, invitation pages, parcel link pages and the OAuth pages are network-only.
+  Auth, invitation pages, parcel link pages, the OAuth pages and `/maintenance.json` are
+  network-only.
 - **Other sites**: without sign-in a request counts against its sender's address, so a
   write is refused when a browser says a page of another site sent it (`Sec-Fetch-Site`,
   or `Origin` in a browser without it), and its body must be declared as JSON. Apps and
@@ -743,6 +744,33 @@ and nothing typed is sent.
   worker cannot know the reader's language, so it names the reason in the address and the
   app says it. Signed in, the add sheet takes the text; a visitor's front door looks it up
   as if pasted, and says why none came where a failed paste does.
+
+## While the server is down
+
+When the host restarts or Peek's database is upgraded, the server is down for a few minutes,
+and the edge guard answers in its place once it is deployed ([DEPLOYMENT.md](DEPLOYMENT.md)).
+The clients read that as maintenance, not as an error ([`maintenance.ts`](../src/lib/maintenance.ts)):
+
+- **What counts**: a request that gets no answer while the device is online; a 502, 503,
+  504, 520 to 527 or 530; a 404 that isn't the service's JSON, such as the proxy's text
+  while the app starts. The app's own 503 about a part it was never set up for, or about
+  Amazon's, a carrier's or the browser check, is that part failing, as is any other status.
+- **What stays**: the deliveries, the device's parcels and an open parcel page keep what
+  they last read, under a soft yellow strip that says Peek is down for a few minutes of
+  maintenance and how old what is shown is; the browser keeps when the list was last read
+  beside its copy. Nothing signs out, forgets a parcel or empties a list: a sign-in whose
+  refresh gets no answer or a 5xx keeps its session. A list with nothing saved says Peek is
+  down rather than that there are no parcels, and an action that fails says so in place of
+  its error.
+- **Planned**: `/maintenance.json` is read once a request has failed, and never cached. When
+  it, or the edge's 503, announces a planned maintenance with an end, the strip says when
+  Peek should be back. Before the edge is in front it is the app's 404 page and says nothing.
+- **Asking again**: quietly, after the longer of `Retry-After` and a backoff from 5 s, at
+  most a minute apart. The first answer takes the strip away.
+- **Pages**: a page that comes back down opens from the service worker's copy, else from
+  the edge's maintenance page, else from the offline page, which says Peek is down when
+  the device is online. The assistants' sign-in (`/oauth/authorize`) says so when its
+  database does not answer.
 
 ## Notifications and Live Activities
 

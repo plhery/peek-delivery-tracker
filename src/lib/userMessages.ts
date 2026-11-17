@@ -26,6 +26,8 @@ export function userErrorKey(error: unknown): MessageKey | null {
   const message = error instanceof Error ? error.message.toLowerCase() : '';
   const code = String(value.code ?? '').toLowerCase();
   const status = Number(value.status ?? value.statusCode);
+  // The server down for maintenance is said calmly, wherever an action failed for it.
+  if (value.name === 'ServerDownError') return 'maintenance.short';
   if (value.name === 'ApiAuthenticationError' || status === 401 || status === 403) return 'error.signIn';
   // The day's allowance lasts until tomorrow, not a moment.
   if ((status === 429 && value.scope === 'daily') || /allowance is used up/.test(message)) return 'error.allowanceUsed';

@@ -1048,8 +1048,9 @@ private fun SharedParcelCard(
                             if (deliveryLine != null) Text(deliveryLine, color = secondary, style = caption, textAlign = textAlign)
                         }
                     }
-                    // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until then.
-                    if (!gift && parcel.awaitingHandover(now())) {
+                    // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until then;
+                    // unless the carrier wrote the rest of its timeline ahead, whose note says where to look instead.
+                    if (!gift && parcel.awaitingHandover(now()) && parcel.writtenAheadBy == null) {
                         Text(
                             localizer.text("parcel.awaitingHandover", mapOf("carrier" to identities.displayName(parcel.displayedCarrier, language))),
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,

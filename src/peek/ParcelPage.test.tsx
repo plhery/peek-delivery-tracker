@@ -289,6 +289,12 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.queryByText(/go quiet on long flights/)).toBeNull();
   });
 
+  it('says only where to look for a label whose carrier wrote the rest of its timeline ahead', async () => {
+    await shown(view([scan('registered', 140)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
+    expect(within(card()).getByText(/steps written in advance, even a delivery/)).toBeVisible();
+    expect(screen.queryByText(/hasn’t handed it|hasn’t scanned the parcel yet|go quiet on long flights/)).toBeNull();
+  });
+
   it('says the carrier writes its timeline ahead', async () => {
     await shown(view([scan('in_transit', 30)], { carrier: 'gzyl', writtenAheadBy: 'gzyl' }));
     expect(within(card()).getByText(/^.+’s site shows steps written in advance, even a delivery\. Peek can’t confirm them, so it leaves them out\. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller\.$/)).toBeVisible();

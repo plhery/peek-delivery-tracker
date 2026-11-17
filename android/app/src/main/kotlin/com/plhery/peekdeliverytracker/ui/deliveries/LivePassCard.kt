@@ -401,8 +401,9 @@ internal fun LivePassCard(
                 if (date != null) Text(date, color = ink, style = type.caption.sfLines())
             }
             val displayed = identities.displayName(parcel.displayedCarrier, language)
-            // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until then.
-            if (!parcel.isArchived && parcel.awaitingHandover(now)) {
+            // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until then; unless
+            // the carrier wrote the rest of its timeline ahead, whose note says where to look instead.
+            if (!parcel.isArchived && parcel.awaitingHandover(now) && parcel.writtenAheadBy == null) {
                 Text(
                     localizer.text("parcel.awaitingHandover", mapOf("carrier" to displayed)),
                     color = secondary,

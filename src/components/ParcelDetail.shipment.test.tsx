@@ -220,8 +220,16 @@ describe('shipment details', () => {
   });
 
   it('leaves the quiet note off a label the sender has kept for days', () => {
-    show({ carrier: 'dhl', events: [{ id: 'label', parcelId: 'parcel', stage: 'registered', description: 'Label', occurredAt: new Date(Date.now() - 5 * 86_400_000).toISOString() }] });
+    const label = [{ id: 'label', parcelId: 'parcel', stage: 'registered', description: 'Label', occurredAt: new Date(Date.now() - 5 * 86_400_000).toISOString() }] as const;
+    const view = show({ carrier: 'dhl', events: [...label] });
     expect(screen.getByText('The sender hasn’t handed it to DHL yet. Tracking starts when they do.')).toBeVisible();
+    expect(document.querySelector('.detail__quiet')).toBeNull();
+    view.unmount();
+
+    // A carrier that wrote the rest of its timeline ahead: its note says where to look instead.
+    show({ carrier: 'gzyl', writtenAheadBy: 'gzyl', events: [...label] });
+    expect(screen.getByText(/steps written in advance, even a delivery/)).toBeVisible();
+    expect(screen.queryByText(/hasn’t handed it/)).toBeNull();
     expect(document.querySelector('.detail__quiet')).toBeNull();
   });
 

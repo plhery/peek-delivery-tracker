@@ -600,6 +600,22 @@ class LivePassTest {
     }
 
     @Test
+    fun aLabelWhoseCarrierWroteTheRestAheadSaysOnlyWhereToLook() {
+        val parcels = quietParcels().map { parcel ->
+            if (!parcel.label.startsWith("Cat tree")) {
+                parcel
+            } else {
+                parcel.copy(trackingEvents = parcel.trackingEvents.map { it.copy(stage = TrackingStage.Registered) }, writtenAheadBy = CarrierId.Gzyl)
+            }
+        }
+        show(parcels = parcels)
+        open("Cat tree")
+        assertTrue(textExists("written in advance"))
+        assertFalse(textExists("hasn’t handed it"))
+        assertFalse(exists(PAGE_QUIET))
+    }
+
+    @Test
     fun aMovingParcelHasNoQuietNote() {
         show()
         open("Birthday gift")

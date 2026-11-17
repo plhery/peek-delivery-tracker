@@ -170,8 +170,9 @@ Key server modules:
   - A parcel with no new scan for four days links the help page of the carrier that has it,
     else of the one it is filed under (the catalog's `helpUrl`; no link when neither has
     one), and says so when that carrier's tracking leaves out the destination country
-    (`hidesDestinationLeg`). A label alone gets no such note: the card already says the sender
-    still has the parcel. An account's parcel and the iPhone app show the same note.
+    (`hidesDestinationLeg`). A label alone gets no such note: the card says the sender still has
+    the parcel, or where to look instead when its carrier wrote the rest of its timeline ahead.
+    An account's parcel and the iPhone app show the same note.
   - Opening a lookup's link queues a check once its cadence has come round, and the answer
     says so (`checkQueued`): the page reads again after 2 s, then more slowly up to 10 s, for a
     minute at most, so the check's result shows as it lands rather than 30 s later. The iPhone

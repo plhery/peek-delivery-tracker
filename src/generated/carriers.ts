@@ -2084,6 +2084,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "poste-italiane-sendungsverfolgung",
+      "title": "Poste Italiane Sendungsverfolgung: 1UW, 3UW, Status",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
+    },
+    {
       "id": "packeta",
       "catalog": "packeta",
       "slug": "packeta-sendungsverfolgung",
@@ -2492,6 +2500,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Relais Colis suivi\u00a0: statuts, retrait en relais et contact",
       "name": "Relais Colis",
       "color": "#7bb928"
+    },
+    {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "suivi-poste-italiane",
+      "title": "Suivi Poste Italiane\u00a0: codes 1UW et 3UW, statuts et délais",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
     },
     {
       "id": "4px",
@@ -3266,6 +3282,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0056a7"
     },
     {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "seguimiento-poste-italiane",
+      "title": "Seguimiento Poste Italiane: códigos 1UW y 3UW y estados",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
+    },
+    {
       "id": "seur",
       "catalog": "seur",
       "slug": "seur-seguimiento",
@@ -3660,6 +3684,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "dpd-ch",
+      "catalog": "dpd",
+      "slug": "rastreio-dpd-suica",
+      "title": "DPD Suíça rastreio: seguir encomenda, Pickup e contacto",
+      "name": "DPD Switzerland",
+      "color": "#dc0032"
+    },
+    {
       "id": "inpost",
       "catalog": "inpost",
       "slug": "inpost-rastreio",
@@ -3682,6 +3714,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Chronopost rastreio: estados e entrega em Portugal",
       "name": "Chronopost",
       "color": "#0056a7"
+    },
+    {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "poste-italiane-rastreio",
+      "title": "Poste Italiane rastreio: códigos 1UW e 3UW e estados",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
     },
     {
       "id": "seur",
@@ -3974,6 +4014,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "InPost śledzenie przesyłki: numer, statusy i Paczkomat",
       "name": "InPost",
       "color": "#ffcc05"
+    },
+    {
+      "id": "chronopost",
+      "catalog": "chronopost",
+      "slug": "chronopost-sledzenie-paczki",
+      "title": "Chronopost śledzenie paczki: z Francji do Polski i statusy",
+      "name": "Chronopost",
+      "color": "#0056a7"
+    },
+    {
+      "id": "poste-italiane",
+      "catalog": "poste-italiane",
+      "slug": "poste-italiane-sledzenie",
+      "title": "Poste Italiane śledzenie: kody 1UW i 3UW oraz statusy",
+      "name": "Poste Italiane",
+      "color": "#eedc00"
     },
     {
       "id": "packeta",

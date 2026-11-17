@@ -2982,6 +2982,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da202a"
     },
     {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "suivi-usps",
+      "title": "Suivi USPS\u00a0: numéro, statuts et colis depuis les États-Unis",
+      "name": "USPS",
+      "color": "#004b87"
+    },
+    {
       "id": "canada-post",
       "catalog": "canada-post",
       "slug": "canada-post-suivi",
@@ -3084,6 +3092,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT suivi colis\u00a0: bon de transport, statuts et livraison",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "suivi-sf-express",
+      "title": "Suivi SF Express\u00a0: numéro, statuts, douane et livraison",
+      "name": "SF Express",
+      "color": "#dc1e32"
     },
     {
       "id": "speedaf",
@@ -3472,6 +3488,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da202a"
     },
     {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "tracciamento-usps",
+      "title": "Tracciamento USPS: numero, stati e pacchi dagli Stati Uniti",
+      "name": "USPS",
+      "color": "#004b87"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-tracciamento",
@@ -3534,6 +3558,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT tracking: lettera di vettura, stati e giacenza",
       "name": "TNT Italy",
       "color": "#ff6600"
+    },
+    {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "tracciamento-sf-express",
+      "title": "Tracciamento SF Express: numero, stati, dogana e consegna",
+      "name": "SF Express",
+      "color": "#dc1e32"
     },
     {
       "id": "topyou",
@@ -4026,6 +4058,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff6600"
     },
     {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "seguimiento-sf-express",
+      "title": "Seguimiento SF Express: número de guía, estados y entrega",
+      "name": "SF Express",
+      "color": "#dc1e32"
+    },
+    {
       "id": "correios-br",
       "catalog": "correios-br",
       "slug": "correios-brasil-seguimiento",
@@ -4412,6 +4452,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#da202a"
     },
     {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "seguimento-usps",
+      "title": "Seguimento USPS: número, estados e encomendas dos EUA",
+      "name": "USPS",
+      "color": "#004b87"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-seguimento",
@@ -4474,6 +4522,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT rastreio: carta de porte, estados e entrega",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "seguimento-sf-express",
+      "title": "Seguimento SF Express: número de carta, estados e entrega",
+      "name": "SF Express",
+      "color": "#dc1e32"
     },
     {
       "id": "mtscn",
@@ -4862,6 +4918,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Royal Mail: numer GB, statusy, cło i doręczenie",
       "name": "Royal Mail",
       "color": "#da202a"
+    },
+    {
+      "id": "usps",
+      "catalog": "usps",
+      "slug": "sledzenie-usps",
+      "title": "Śledzenie przesyłek USPS: numer, statusy i paczki z USA",
+      "name": "USPS",
+      "color": "#004b87"
     },
     {
       "id": "j-and-t-de",

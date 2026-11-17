@@ -132,7 +132,7 @@ describe('native verification', () => {
     await expect(verifyNativeRequest(other, service, signedBody)).rejects.toMatchObject({ status: 403, reason: 'challenge_mismatch' });
     const unconfigured = await signedRequest();
     vi.stubEnv('APP_ATTEST_APP_ID', '');
-    vi.stubEnv('ANDROID_KEY_ATTESTATION', 'off');
+    vi.stubEnv('ANDROID_ATTESTATION_MODE', 'off');
     await expect(verifyNativeRequest(unconfigured, service, signedBody)).rejects.toMatchObject({ status: 403, reason: 'unconfigured' });
   });
   it('rejects replayed counters, unknown or incorrectly scoped keys and malformed assertions', async () => {
@@ -221,7 +221,10 @@ describe('native verification', () => {
   it('exposes the free fallback without enabling App Attest and returns no-store challenges', async () => {
     vi.stubEnv('APP_ATTEST_APP_ID', '');
     const config = await configuration(new NextRequest('https://peek.example/api/public/native/verification'), { params: Promise.resolve({}) });
-    expect(await config.json()).toEqual({ appAttestAppId: null, androidAttestAppId: 'android:com.plhery.peekdeliverytracker', turnstile: true });
+    expect(await config.json()).toEqual({
+      appAttestAppId: null, androidAttestAppId: null, turnstile: true,
+      androidAttestation: { mode: 'log', appId: 'android:com.plhery.peekdeliverytracker', playIntegrityCloudProjectNumber: null },
+    });
     const unavailable = await register(request('/api/public/native/verification', '{}'), { params: Promise.resolve({}) });
     expect(unavailable.status).toBe(503);
     vi.stubEnv('APP_ATTEST_APP_ID', appID);

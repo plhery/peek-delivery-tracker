@@ -450,15 +450,16 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
 }
 
 /**
- * Reads the body once, at most 16 KiB of it: the bytes as sent, which App
- * Attest signs, and the JSON object they hold. A refused body is cancelled
- * without waiting, so a branch of a teed body cannot hold the answer back.
+ * Reads the body once, at most `limit` bytes (16 KiB) of it: the bytes as
+ * sent, which App Attest signs, and the JSON object they hold. A refused body
+ * is cancelled without waiting, so a branch of a teed body cannot hold the
+ * answer back.
  */
-export async function readJsonBody(request: Request): Promise<{ raw: Uint8Array; value: JsonObject }> {
+export async function readJsonBody(request: Request, limit = MAX_JSON_BODY): Promise<{ raw: Uint8Array; value: JsonObject }> {
   const declaredLength = request.headers.get('content-length');
   if (declaredLength !== null) {
     const length = Number(declaredLength);
-    if (!/^\d+$/.test(declaredLength) || length <= 0 || length > MAX_JSON_BODY) {
+    if (!/^\d+$/.test(declaredLength) || length <= 0 || length > limit) {
       void request.body?.cancel().catch(() => undefined);
       throw new HttpError(400, 'Invalid request size');
     }
@@ -474,7 +475,7 @@ export async function readJsonBody(request: Request): Promise<{ raw: Uint8Array;
       const { done, value } = await reader.read();
       if (done) break;
       receivedBytes += value.byteLength;
-      if (receivedBytes > MAX_JSON_BODY) {
+      if (receivedBytes > limit) {
         void reader.cancel().catch(() => undefined);
         throw new HttpError(400, 'Invalid request size');
       }
@@ -503,8 +504,8 @@ export async function readJsonBody(request: Request): Promise<{ raw: Uint8Array;
   return { raw: Buffer.concat(chunks, receivedBytes), value: payload };
 }
 
-export async function readJsonObject(request: Request): Promise<JsonObject> {
-  return (await readJsonBody(request)).value;
+export async function readJsonObject(request: Request, limit = MAX_JSON_BODY): Promise<JsonObject> {
+  return (await readJsonBody(request, limit)).value;
 }
 
 /** Reads a body of any type, at most `limit` bytes of it; a longer one is refused with 413 and cancelled. */

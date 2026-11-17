@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { timingSafeEqual, X509Certificate } from 'node:crypto';
+import { timingSafeEqual, X509Certificate, type KeyObject } from 'node:crypto';
 import { ANDROID_ATTESTATION_ROOTS, SELF_SIGNED_BOOT_KEYS } from './androidAttestationRoots';
 
 /**
@@ -32,14 +32,21 @@ export const ANDROID_SIGNERS: readonly string[] = [
  * is not signed by the next), `root` (not one of Google's hardware roots: an emulator's or software attestation),
  * `certificate_time` (an intermediate certificate out of its validity period), `revoked` (on Google's revocation list),
  * `revocation_unavailable` (the list could not be read),
- * `security_level` (software, not the phone's secure hardware), `nonce` (another challenge), `unlocked` (an unlocked
- * bootloader), `boot_state` (an unverified operating system, or a self-signed one not known here), `origin` (an
- * imported key, whose holder may have a copy), `key` (not a P-256 key), `app_id` (another app) and `signer` (another
- * signing certificate).
+ * `security_level` (software, not the phone's secure hardware), `nonce` (another challenge), `boot_state` (a failed
+ * boot, or no root of trust), `origin` (an imported key, whose holder may have a copy), `key` (not a P-256 key),
+ * `app_id` (another app) and `signer` (another signing certificate).
  */
 export type AndroidFailure =
   | 'malformed' | 'chain' | 'root' | 'certificate_time' | 'revoked' | 'revocation_unavailable' | 'security_level'
-  | 'nonce' | 'unlocked' | 'boot_state' | 'origin' | 'key' | 'app_id' | 'signer';
+  | 'nonce' | 'boot_state' | 'origin' | 'key' | 'app_id' | 'signer';
+
+/**
+ * How far a verified attestation vouches for the app: `strong`, a locked bootloader and a verified operating system
+ * (or a self-signed one known here, such as GrapheneOS); `basic`, a key in secure hardware under a system it can't
+ * vouch for (an unlocked bootloader, an unverified or unknown system), which could have written the app's package and
+ * signer itself.
+ */
+export type AndroidVerdict = 'strong' | 'basic';
 
 export class AndroidAttestationError extends Error {
   constructor(readonly reason: AndroidFailure) {
@@ -162,7 +169,7 @@ function authorizations(element: Der | undefined): Map<number, Der> {
 
 const TAG = { algorithm: 2, ecCurve: 10, origin: 702, rootOfTrust: 704, attestationApplicationId: 709 } as const;
 const SECURITY_LEVEL = { software: 0, trustedEnvironment: 1, strongBox: 2 } as const;
-const VERIFIED_BOOT = { verified: 0, selfSigned: 1 } as const;
+const VERIFIED_BOOT = { verified: 0, selfSigned: 1, unverified: 2 } as const;
 const ALGORITHM_EC = 3;
 const CURVE_P256 = 1;
 const ORIGIN_GENERATED = 0;
@@ -240,6 +247,9 @@ export interface AndroidPolicy {
 export interface AndroidAttestation {
   /** The attested key, SPKI PEM. */
   publicKey: string;
+  verdict: AndroidVerdict;
+  /** Why it is `basic`: `unlocked` (an unlocked bootloader) or `boot_state` (an unverified or unknown system). */
+  basic?: 'unlocked' | 'boot_state';
 }
 
 /**
@@ -247,9 +257,9 @@ export interface AndroidAttestation {
  * challenge, following Google's steps: every certificate signed by the next, the last one's key one of Google's
  * roots, the intermediates in their validity period (the phone sets the leaf's dates, and a chain keyed in the
  * factory stays trusted after it expires) and none on the revocation list; then, in the leaf's key description, secure
- * hardware, the challenge, a locked bootloader with a verified operating system (or a self-signed one known here,
- * such as GrapheneOS), a generated P-256 key, and Peek's package signed with one of its certificates. Throws an
- * AndroidAttestationError naming the first failure.
+ * hardware, the challenge, a boot that did not fail, a generated P-256 key, and Peek's package signed with one of its
+ * certificates. How the phone booted gives the verdict (AndroidVerdict). Throws an AndroidAttestationError naming
+ * the first failure.
  */
 export async function verifyAndroidKeyAttestation(
   x5c: unknown,
@@ -305,10 +315,12 @@ export async function verifyAndroidKeyAttestation(
   const trust = description.hardware.get(TAG.rootOfTrust);
   if (!trust) fail('boot_state');
   const boot = rootOfTrust(trust!);
-  if (!boot.deviceLocked) fail('unlocked');
+  // Failed (3), or a state no version defines.
+  if (boot.verifiedBootState > VERIFIED_BOOT.unverified) fail('boot_state');
   const knownSelfSigned = boot.verifiedBootState === VERIFIED_BOOT.selfSigned
     && SELF_SIGNED_BOOT_KEYS.has(boot.verifiedBootKey.toString('hex'));
-  if (boot.verifiedBootState !== VERIFIED_BOOT.verified && !knownSelfSigned) fail('boot_state');
+  const basic = !boot.deviceLocked ? 'unlocked' as const
+    : boot.verifiedBootState !== VERIFIED_BOOT.verified && !knownSelfSigned ? 'boot_state' as const : undefined;
 
   const origin = description.hardware.get(TAG.origin);
   if (!origin || small(origin) !== ORIGIN_GENERATED) fail('origin');
@@ -318,14 +330,31 @@ export async function verifyAndroidKeyAttestation(
   if (!algorithm || small(algorithm) !== ALGORITHM_EC || !curve || small(curve) !== CURVE_P256
     || key.asymmetricKeyType !== 'ec' || key.asymmetricKeyDetails?.namedCurve !== 'prime256v1') fail('key');
 
-  // The operating system fills it in, which a verified boot vouches for.
+  // The operating system fills it in, which only a verified boot vouches for.
   const app = description.software.get(TAG.attestationApplicationId) ?? description.hardware.get(TAG.attestationApplicationId);
   if (!app) fail('app_id');
   const { packages, signers } = applicationId(app!);
   if (packages.length !== 1 || packages[0] !== policy.packageName) fail('app_id');
   if (!signers.some((digest) => policy.signers.has(digest))) fail('signer');
 
-  return { publicKey: key.export({ type: 'spki', format: 'pem' }).toString() };
+  return { publicKey: key.export({ type: 'spki', format: 'pem' }).toString(), verdict: basic ? 'basic' : 'strong', ...basic ? { basic } : {} };
+}
+
+/**
+ * The leaf's key, P-256, read without checking the chain: where the chain fails, a Play Integrity token whose request
+ * hash names this key vouches for it instead (playIntegrity.ts).
+ */
+export function leafKey(x5c: unknown): KeyObject {
+  const der = Array.isArray(x5c) ? x5c[0] : undefined;
+  if (!Buffer.isBuffer(der) || der.length > 8_192) fail('malformed');
+  let key: KeyObject;
+  try {
+    key = new X509Certificate(der as Buffer).publicKey;
+  } catch {
+    return fail('chain');
+  }
+  if (key.asymmetricKeyType !== 'ec' || key.asymmetricKeyDetails?.namedCurve !== 'prime256v1') fail('key');
+  return key;
 }
 
 // Google's revocation list (https://developer.android.com/privacy-and-security/security-key-attestation): the

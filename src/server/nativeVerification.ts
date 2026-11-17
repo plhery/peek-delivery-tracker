@@ -4,10 +4,15 @@ import { createHash, createHmac, randomBytes, timingSafeEqual, verify, X509Certi
 import cbor from 'cbor';
 import { verifyAssertion, verifyAttestation } from 'node-app-attest';
 import {
-  ANDROID_PACKAGE, ANDROID_SIGNERS, AndroidAttestationError, revokedSerials, verifyAndroidKeyAttestation, type AndroidFailure,
+  ANDROID_PACKAGE, ANDROID_SIGNERS, AndroidAttestationError, leafKey, revokedSerials, verifyAndroidKeyAttestation,
+  type AndroidFailure, type AndroidVerdict,
 } from './androidKeyAttestation';
 import { clientIp, clientNetwork, HttpError } from './api';
-import { recordNativeVerification, type NativeVerificationKind } from './metrics';
+import { recordAndroidAttestation, recordNativeVerification, type NativeVerificationKind } from './metrics';
+import {
+  decodePlayIntegrityToken, PlayIntegrityError, playIntegritySettings, playIntegrityVerdict, playRequestHash,
+  type PlayIntegrityFailure, type PlayIntegrityVerdict,
+} from './playIntegrity';
 import { logOperationalEvent } from './observability';
 import { requestHostname } from './siteHosts';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
@@ -42,14 +47,15 @@ export const hasNativeAssertion = (request: Request) => ASSERTION_HEADERS.some((
  * moved past), `unknown_key` (never registered, or unused for 90 days), Apple's
  * steps (`chain`, `certificate_time`, `nonce`, `key_id`, `app_id`, `counter`,
  * `aaguid`, `environment` for a development key, `signature`), the signed
- * launch `category` and `bundle_version`, Android's steps (AndroidFailure),
- * `missing` (none sent where one is required), `unavailable` (the database did
- * not answer) and `unknown`.
+ * launch `category` and `bundle_version`, Android's steps (AndroidFailure,
+ * PlayIntegrityFailure), `missing` (none sent where one is required),
+ * `unavailable` (the database did not answer) and `unknown`.
  */
 export type NativeFailure =
   | 'malformed' | 'unconfigured' | 'challenge_expired' | 'challenge_mismatch' | 'replayed' | 'unknown_key'
   | 'chain' | 'certificate_time' | 'nonce' | 'key_id' | 'app_id' | 'counter' | 'aaguid' | 'environment'
-  | 'signature' | 'category' | 'bundle_version' | 'missing' | 'unavailable' | 'unknown' | AndroidFailure;
+  | 'signature' | 'category' | 'bundle_version' | 'missing' | 'unavailable' | 'unknown' | AndroidFailure
+  | PlayIntegrityFailure;
 
 /** The refusal the app answers by verifying again. Its reason stays on the server. */
 class NativeRefusal extends HttpError {
@@ -82,27 +88,38 @@ const LIBRARY_FAILURES = new Map<string, NativeFailure>([
 
 function failure(error: unknown): NativeFailure {
   if (error instanceof NativeRefusal) return error.reason;
-  if (error instanceof AndroidAttestationError) return error.reason;
+  if (error instanceof AndroidAttestationError || error instanceof PlayIntegrityError) return error.reason;
   if (error instanceof SupabaseError) return 'unavailable';
   return (error instanceof Error && LIBRARY_FAILURES.get(error.message)) || 'unknown';
 }
 
-/** Logs and counts one check. The line never has a key, challenge, assertion or address. */
+/**
+ * Logs and counts one check, with `details` in the line alone (an Android
+ * registration's checks). The line never has a key, challenge, assertion or
+ * address.
+ */
 function record(
   kind: NativeVerificationKind,
   outcome: Parameters<typeof recordNativeVerification>[1],
   platform: SeenPlatform,
   reason = 'none',
-  mode?: AccountAttestMode,
+  mode?: AccountAttestMode | AndroidAttestMode,
+  details: Record<string, string | boolean | undefined> = {},
 ) {
   recordNativeVerification(kind, outcome, reason, platform);
-  logOperationalEvent('native_verification', { kind, platform, outcome, reason: reason === 'none' ? undefined : reason, mode });
+  logOperationalEvent('native_verification', { kind, platform, outcome, reason: reason === 'none' ? undefined : reason, mode, ...details });
 }
 
 /** Records a failed check and gives the refusal to throw. */
-function refusal(kind: NativeVerificationKind, error: unknown, platform: SeenPlatform): NativeRefusal {
+function refusal(
+  kind: NativeVerificationKind,
+  error: unknown,
+  platform: SeenPlatform,
+  mode?: AndroidAttestMode,
+  details?: Record<string, string | boolean | undefined>,
+): NativeRefusal {
   const reason = failure(error);
-  record(kind, 'rejected', platform, reason);
+  record(kind, 'rejected', platform, reason, mode, details);
   return error instanceof NativeRefusal ? error : rejected(reason);
 }
 
@@ -118,21 +135,68 @@ export function nativeAttestSettings(env: Record<string, string | undefined> = p
 }
 type NativeAttestSettings = NonNullable<ReturnType<typeof nativeAttestSettings>>;
 
+/** A daily allowance from the environment, up to six digits; `fallback` otherwise. */
+function dailyLimit(env: Record<string, string | undefined>, name: string, fallback: number): number {
+  const value = env[name]?.trim();
+  return value && /^\d{1,6}$/.test(value) ? Number(value) : fallback;
+}
+
+export type AndroidAttestMode = 'off' | 'log' | 'enforce';
+
+/** `ANDROID_ATTESTATION_MODE`; anything but `off` or `enforce` reads as `log`. */
+export function androidAttestMode(env: Record<string, string | undefined> = process.env): AndroidAttestMode {
+  const mode = env.ANDROID_ATTESTATION_MODE?.trim().toLowerCase();
+  return mode === 'off' || mode === 'enforce' ? mode : 'log';
+}
+
 /**
- * Android key attestation, on wherever `TURNSTILE_SECRET_KEY` signs challenges
- * unless `ANDROID_KEY_ATTESTATION=off`. Keys register under `android:` and the
- * package. `ANDROID_KEY_ATTESTATION_SIGNERS` adds signing certificates' SHA-256
- * digests (separated by commas) to the app's own, such as a debug key on a
- * development server.
+ * Android attestation, wherever `TURNSTILE_SECRET_KEY` signs challenges, in
+ * the mode `ANDROID_ATTESTATION_MODE` sets: `log`, the default, registers keys
+ * and counts their verdicts while every lookup keeps the browser check;
+ * `enforce` lets a registered key's signed lookups skip it, within its
+ * verdict's daily allowance; `off` registers none. A key is attested by the
+ * phone's hardware (androidKeyAttestation.ts) and, in the Play build where
+ * `PLAY_INTEGRITY_CLOUD_PROJECT_NUMBER` is set, by a Play Integrity token
+ * (playIntegrity.ts); the better verdict counts. A `strong` key has the
+ * iPhone's allowances (`NATIVE_LOOKUPS_PER_DAY`, `NATIVE_DETECTIONS_PER_DAY`),
+ * a `basic` one `ANDROID_BASIC_LOOKUPS_PER_DAY` (5) and
+ * `ANDROID_BASIC_DETECTIONS_PER_DAY` (20); 0 leaves it the browser check.
+ * `ANDROID_ATTESTATION_SIGNERS` adds signing certificates' SHA-256 digests
+ * (separated by commas) to the app's own, such as a debug key on a development
+ * server.
  */
 export function androidAttestSettings(env: Record<string, string | undefined> = process.env) {
   const secret = env.TURNSTILE_SECRET_KEY?.trim();
-  if (env.ANDROID_KEY_ATTESTATION?.trim().toLowerCase() === 'off' || !secret) return null;
-  const added = (env.ANDROID_KEY_ATTESTATION_SIGNERS ?? '').split(',').map((digest) => digest.trim().toLowerCase().replaceAll(':', '')).filter(Boolean);
-  if (added.some((digest) => !/^[0-9a-f]{64}$/.test(digest))) throw new Error('ANDROID_KEY_ATTESTATION_SIGNERS takes SHA-256 certificate digests');
-  return { appId: `android:${ANDROID_PACKAGE}`, packageName: ANDROID_PACKAGE, signers: new Set([...ANDROID_SIGNERS, ...added]), secret };
+  const mode = androidAttestMode(env);
+  if (mode === 'off' || !secret) return null;
+  const added = (env.ANDROID_ATTESTATION_SIGNERS ?? '').split(',').map((digest) => digest.trim().toLowerCase().replaceAll(':', '')).filter(Boolean);
+  if (added.some((digest) => !/^[0-9a-f]{64}$/.test(digest))) throw new Error('ANDROID_ATTESTATION_SIGNERS takes SHA-256 certificate digests');
+  return {
+    mode,
+    appId: `android:${ANDROID_PACKAGE}`,
+    packageName: ANDROID_PACKAGE,
+    signers: new Set([...ANDROID_SIGNERS, ...added]),
+    secret,
+    playIntegrity: playIntegritySettings(env),
+    allowances: {
+      strong: { lookup: dailyLimit(env, 'NATIVE_LOOKUPS_PER_DAY', 15), detection: dailyLimit(env, 'NATIVE_DETECTIONS_PER_DAY', 60) },
+      basic: { lookup: dailyLimit(env, 'ANDROID_BASIC_LOOKUPS_PER_DAY', 5), detection: dailyLimit(env, 'ANDROID_BASIC_DETECTIONS_PER_DAY', 20) },
+    },
+  };
 }
 type AndroidAttestSettings = NonNullable<ReturnType<typeof androidAttestSettings>>;
+
+/** Which check gave an Android key its verdict: the hardware's attestation or Play Integrity. */
+type AndroidEvidence = 'key' | 'play';
+interface AndroidGrade { evidence: AndroidEvidence; verdict: AndroidVerdict }
+
+/** An Android key registers under the app's ID, its evidence and its verdict: `android:<package>:key-strong`. */
+const androidKeyAppId = (settings: AndroidAttestSettings, grade: AndroidGrade) => `${settings.appId}:${grade.evidence}-${grade.verdict}`;
+
+function androidGrade(appId: string, settings: AndroidAttestSettings): AndroidGrade | null {
+  const match = appId.startsWith(`${settings.appId}:`) ? /^(key|play)-(strong|basic)$/.exec(appId.slice(settings.appId.length + 1)) : null;
+  return match ? { evidence: match[1] as AndroidEvidence, verdict: match[2] as AndroidVerdict } : null;
+}
 
 /**
  * A challenge is for either platform's key. It names Apple's app ID where App
@@ -228,23 +292,27 @@ function checkExtensions(data: unknown, attestation: boolean, development: boole
 /**
  * Android's attestation: a CBOR map whose `fmt` is `android-key` and whose
  * `attStmt.x5c` is the key's certificate chain, leaf first, as WebAuthn's
- * android-key statement carries it. Null for anything else, which is Apple's.
+ * android-key statement carries it; the Play build's Play Integrity token
+ * comes beside it, in the body's `playIntegrity`. Null for anything else,
+ * which is Apple's.
  */
-function androidAttestation(value: unknown): unknown[] | null {
+interface AndroidStatement { x5c: unknown[]; playIntegrity?: unknown }
+
+function androidAttestation(body: Record<string, unknown>): AndroidStatement | null {
   let object: unknown;
   try {
-    [object] = decoded(binary(value, 14_000));
+    [object] = decoded(binary(body.attestation, 14_000));
   } catch {
     return null;
   }
   const statement = object as { fmt?: unknown; attStmt?: { x5c?: unknown } } | null;
   if (statement?.fmt !== 'android-key') return null;
-  return Array.isArray(statement.attStmt?.x5c) ? statement.attStmt.x5c : [];
+  return { x5c: Array.isArray(statement.attStmt?.x5c) ? statement.attStmt.x5c : [], playIntegrity: body.playIntegrity };
 }
 
 export async function registerNativeKey(request: Request, service: SupabaseServiceClient, body: Record<string, unknown>) {
-  const chain = androidAttestation(body.attestation);
-  if (chain) return registerAndroidKey(request, service, body, chain);
+  const statement = androidAttestation(body);
+  if (statement) return registerAndroidKey(request, service, body, statement);
   const settings = nativeAttestSettings();
   if (!settings) throw new HttpError(503, 'App verification is not configured');
   const { keyId, challenge } = body;
@@ -268,36 +336,75 @@ export async function registerNativeKey(request: Request, service: SupabaseServi
 }
 
 /**
- * Registers an Android key (androidKeyAttestation.ts). The app makes the key
- * with the SHA-256 of the challenge as its attestation challenge; the key ID is
- * the app's own random one, which the challenge is issued for.
+ * A Play Integrity token's verdict for the chain's key, or null where the app
+ * sent none or the server reads none. Throws a PlayIntegrityError, or the
+ * AndroidAttestationError of a leaf without a P-256 key.
  */
-async function registerAndroidKey(request: Request, service: SupabaseServiceClient, body: Record<string, unknown>, chain: unknown[]) {
+async function playIntegrity(statement: AndroidStatement, clientDataHash: Buffer, settings: AndroidAttestSettings, issuedAt: number): Promise<PlayIntegrityVerdict | null> {
+  if (statement.playIntegrity === undefined || !settings.playIntegrity) return null;
+  const requestHash = playRequestHash(clientDataHash, leafKey(statement.x5c));
+  const payload = await decodePlayIntegrityToken(statement.playIntegrity, settings.packageName, settings.playIntegrity);
+  return playIntegrityVerdict(payload, { packageName: settings.packageName, signers: settings.signers, requestHash, issuedAt });
+}
+
+/**
+ * Registers an Android key in `log` and `enforce` modes. The app makes the key
+ * with the SHA-256 of the challenge as its attestation challenge; the key ID is
+ * the app's own random one, which the challenge is issued for. The hardware's
+ * attestation (androidKeyAttestation.ts) and a Play Integrity token naming the
+ * key (playIntegrity.ts) are checked together, and the better verdict
+ * registers it, the hardware's on a tie; where both fail it is refused for the
+ * hardware's reason. `android_attestation_total` counts what each gave.
+ */
+async function registerAndroidKey(request: Request, service: SupabaseServiceClient, body: Record<string, unknown>, statement: AndroidStatement) {
   const settings = androidAttestSettings();
   if (!settings) throw new HttpError(503, 'App verification is not configured');
   const { keyId, challenge } = body;
   let checked: CheckedChallenge;
+  let grade: AndroidGrade;
   let publicKey: string;
+  const details: Record<string, string | boolean | undefined> = {};
   try {
     if (typeof keyId !== 'string' || !KEY_ID.test(keyId)) throw rejected('malformed');
     checked = checkChallenge(request, challenge, keyId, 'attestation');
-    ({ publicKey } = await verifyAndroidKeyAttestation(chain, createHash('sha256').update(challenge as string).digest(), settings, revokedSerials));
+    const clientDataHash = createHash('sha256').update(challenge as string).digest();
+    const issuedAt = Date.parse(checked.expires) - CHALLENGE_SECONDS * 1_000;
+    const [key, play] = await Promise.allSettled([
+      verifyAndroidKeyAttestation(statement.x5c, clientDataHash, settings, revokedSerials),
+      playIntegrity(statement, clientDataHash, settings, issuedAt),
+    ]);
+    details.key = key.status === 'fulfilled' ? key.value.verdict : failure(key.reason);
+    details.basic = key.status === 'fulfilled' ? key.value.basic : undefined;
+    details.play = play.status === 'rejected' ? failure(play.reason)
+      : play.value?.verdict ?? (statement.playIntegrity === undefined ? 'absent' : 'unconfigured');
+    if (play.status === 'fulfilled' && play.value) Object.assign(details, { licensing: play.value.licensing, testing: play.value.testing || undefined });
+    recordAndroidAttestation(details.key, details.play, settings.mode);
+    const playVerdict = play.status === 'fulfilled' ? play.value?.verdict : undefined;
+    if (key.status === 'fulfilled' && (key.value.verdict === 'strong' || playVerdict !== 'strong')) {
+      grade = { evidence: 'key', verdict: key.value.verdict };
+      publicKey = key.value.publicKey;
+    } else if (playVerdict) {
+      grade = { evidence: 'play', verdict: playVerdict };
+      publicKey = leafKey(statement.x5c).export({ type: 'spki', format: 'pem' }).toString();
+    } else {
+      throw (key as PromiseRejectedResult).reason;
+    }
     if (publicKey.length > 1_024) throw rejected('malformed');
   } catch (error) {
-    throw refusal('attestation', error, 'android');
+    throw refusal('attestation', error, 'android', settings.mode, details);
   }
   const accepted = await service.request('/rest/v1/rpc/register_native_attest_key', { method: 'POST', body: {
-    p_key_id: keyId, p_public_key: publicKey, p_app_id: settings.appId, p_challenge: checked.hash, p_expires: checked.expires,
+    p_key_id: keyId, p_public_key: publicKey, p_app_id: androidKeyAppId(settings, grade), p_challenge: checked.hash, p_expires: checked.expires,
   } });
-  if (accepted !== true) throw refusal('attestation', rejected('replayed'), 'android');
-  record('attestation', 'verified', 'android');
+  if (accepted !== true) throw refusal('attestation', rejected('replayed'), 'android', settings.mode, details);
+  record('attestation', 'verified', 'android', grade.verdict, settings.mode, { ...details, evidence: grade.evidence });
 }
 
 export function nativeRequestPayload(request: Request, challenge: string, rawBody: Uint8Array): string {
   return `native-request-v1\n${challenge}\n${request.method}\n${new URL(request.url).pathname}\n${createHash('sha256').update(rawBody).digest('hex')}`;
 }
 
-interface CheckedAssertion { keyId: string; counter: number; challenge: CheckedChallenge }
+interface CheckedAssertion { keyId: string; counter: number; challenge: CheckedChallenge; grade?: AndroidGrade }
 
 /** Each platform's settings, null where it is off. */
 interface NativeSettings { apple: NativeAttestSettings | null; android: AndroidAttestSettings | null }
@@ -325,7 +432,7 @@ async function checkAssertion(
   if (!stored) throw rejected('unknown_key');
   if (stored.app_id.startsWith('android:')) {
     seen.platform = 'android';
-    return { keyId, counter: checkAndroidAssertion(request, challenge, body, stored, settings.android), challenge: checked };
+    return { keyId, ...checkAndroidAssertion(request, challenge, body, stored, settings.android), challenge: checked };
   }
   seen.platform = 'apple';
   if (!settings.apple) throw rejected('unconfigured');
@@ -345,6 +452,7 @@ async function checkAssertion(
  * An Android assertion is the key's ECDSA signature (DER, SHA-256) of the
  * SHA-256 of the payload. The hardware keeps no counter, so the server counts
  * one up from the stored one: the single-use challenge already stops a replay.
+ * Gives the key's grade, which its app ID names.
  */
 function checkAndroidAssertion(
   request: Request,
@@ -352,9 +460,10 @@ function checkAndroidAssertion(
   body: Uint8Array,
   stored: { public_key: string; app_id: string; sign_count: number },
   settings: AndroidAttestSettings | null,
-): number {
+): { counter: number; grade: AndroidGrade } {
   if (!settings) throw rejected('unconfigured');
-  if (stored.app_id !== settings.appId) throw rejected('app_id');
+  const grade = androidGrade(stored.app_id, settings);
+  if (!grade) throw rejected('app_id');
   const signature = binary(request.headers.get('x-app-attest-assertion'), 4_096);
   const signed = createHash('sha256').update(nativeRequestPayload(request, challenge, body)).digest();
   let valid = false;
@@ -366,41 +475,74 @@ function checkAndroidAssertion(
   if (!valid) throw rejected('signature');
   const counter = stored.sign_count + 1;
   if (!Number.isSafeInteger(counter) || counter <= 0) throw rejected('counter');
-  return counter;
+  return { counter, grade };
 }
 
 /**
- * The assertion signs `body`, the bytes the route read from the request. Gives
- * the platform whose key signed it.
+ * What a signed request's assertion did: the proof that let it through, or,
+ * for an Android key, why the browser proof decides instead, as for a request
+ * without one: `mode` (Android attestation only logs), `limited` (its
+ * verdict's allowance is used until `retryAfter` seconds from now) or
+ * `refused` (the assertion failed, which the app answers as any refusal).
  */
-export async function verifyNativeRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array): Promise<NativePlatform> {
+export type NativeOutcome =
+  | { proof: 'app_attest' | 'key_attestation' | 'play_integrity' }
+  | { proof: null; fallback: 'mode' | 'limited' | 'refused'; retryAfter?: number };
+
+const secondsToMidnight = (now = new Date()) =>
+  Math.ceil((Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1) - now.getTime()) / 1_000);
+
+/**
+ * The assertion signs `body`, the bytes the route read from the request. An
+ * iPhone's refused assertion or used allowance refuses the request; an Android
+ * key's never does more than send it to the browser proof (NativeOutcome).
+ */
+export async function verifyNativeRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array): Promise<NativeOutcome> {
   const kind = new URL(request.url).pathname === '/api/public/parcels' ? 'lookup' : 'detection';
   const settings = { apple: nativeAttestSettings(), android: androidAttestSettings() };
   const seen = { platform: userAgentPlatform(request) };
-  if (!settings.apple && !settings.android) throw refusal(kind, rejected('unconfigured'), seen.platform);
+  const mode = settings.android?.mode;
+  if (!settings.apple && !settings.android) {
+    if (seen.platform === 'android') {
+      record(kind, 'rejected', 'android', 'unconfigured');
+      return { proof: null, fallback: 'refused' };
+    }
+    throw refusal(kind, rejected('unconfigured'), seen.platform);
+  }
   let checked: CheckedAssertion;
   try {
     checked = await checkAssertion(request, service, body, settings, seen);
   } catch (error) {
     if (error instanceof SupabaseError) throw error;
-    throw refusal(kind, error, seen.platform);
+    const refused = refusal(kind, error, seen.platform, seen.platform === 'android' ? mode : undefined);
+    if (seen.platform === 'android') return { proof: null, fallback: 'refused' };
+    throw refused;
   }
   const platform = seen.platform as NativePlatform;
-  const configured = process.env[kind === 'lookup' ? 'NATIVE_LOOKUPS_PER_DAY' : 'NATIVE_DETECTIONS_PER_DAY'];
-  const limit = configured && /^\d{1,6}$/.test(configured) ? Number(configured) : kind === 'lookup' ? 15 : 60;
+  const { grade } = checked;
+  // Nothing is spent: the key is checked, and counted with its verdict.
+  if (grade && mode !== 'enforce') {
+    record(kind, 'ignored', 'android', grade.verdict, mode);
+    return { proof: null, fallback: 'mode' };
+  }
+  const limit = grade ? settings.android!.allowances[grade.verdict][kind]
+    : kind === 'lookup' ? dailyLimit(process.env, 'NATIVE_LOOKUPS_PER_DAY', 15) : dailyLimit(process.env, 'NATIVE_DETECTIONS_PER_DAY', 60);
   const outcome = await service.request('/rest/v1/rpc/accept_native_assertion', { method: 'POST', body: {
     p_key_id: checked.keyId, p_counter: checked.counter, p_challenge: checked.challenge.hash, p_expires: checked.challenge.expires,
     p_kind: kind, p_limit: limit,
   } });
   if (outcome === 'limited') {
-    record(kind, 'limited', platform);
-    const now = new Date();
-    const midnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1);
-    throw new HttpError(429, 'Today’s device allowance is used up. Try again tomorrow.', { 'Retry-After': String(Math.ceil((midnight - now.getTime()) / 1_000)) });
+    record(kind, 'limited', platform, grade?.verdict, grade ? mode : undefined);
+    if (grade) return { proof: null, fallback: 'limited', retryAfter: secondsToMidnight() };
+    throw new HttpError(429, 'Today’s device allowance is used up. Try again tomorrow.', { 'Retry-After': String(secondsToMidnight()) });
   }
-  if (outcome !== 'accepted') throw refusal(kind, rejected('replayed'), platform);
-  record(kind, 'verified', platform);
-  return platform;
+  if (outcome !== 'accepted') {
+    const refused = refusal(kind, rejected('replayed'), platform, grade ? mode : undefined);
+    if (grade) return { proof: null, fallback: 'refused' };
+    throw refused;
+  }
+  record(kind, 'verified', platform, grade?.verdict, grade ? mode : undefined);
+  return { proof: !grade ? 'app_attest' : grade.evidence === 'play' ? 'play_integrity' : 'key_attestation' };
 }
 
 export type AccountAttestMode = 'off' | 'log' | 'enforce';

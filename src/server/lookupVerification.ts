@@ -118,22 +118,27 @@ function checkProof(secret: string, request: Request): ProofCheck {
 
 /**
  * A short-lived proof never replaces the IP, network or global lookup budgets.
- * Says what let the request through: no check, or a proof. No user-agent is exempt.
+ * Says what let the request through: no check, or a proof. No user-agent is
+ * exempt. `headers` go with a refusal.
  */
-export function requireLookupProof(request: Request): 'none' | 'turnstile' {
+export function requireLookupProof(request: Request, headers: Record<string, string> = {}): 'none' | 'turnstile' {
   const settings = turnstileSettings();
   if (!settings) return 'none';
   const { outcome, reason, fields } = checkProof(settings.secret, request);
   if (outcome === 'accepted') return 'turnstile';
   logOperationalEvent('lookup_proof', { outcome, reason, ...fields });
-  if (outcome === 'refused') throw new HttpError(403, 'Please verify your browser and try again.', { 'X-Lookup-Verification': 'required' });
+  if (outcome === 'refused') throw new HttpError(403, 'Please verify your browser and try again.', { ...headers, 'X-Lookup-Verification': 'required' });
   return 'turnstile';
 }
 
 /**
  * Native assertions count the installation before the shared IP and global budgets.
- * `body` is the request body as read: the request's own body is already used.
- * `lookup_proof_total` counts what let each request through, or its refusal.
+ * An Android key's assertion that lets nothing through leaves the request to its
+ * browser proof, whose refusal says why in `X-Native-Assertion` (`mode`,
+ * `limited` with `Retry-After`, or `refused`): the key never stops what the
+ * browser check lets through. `body` is the request body as read: the request's
+ * own body is already used. `lookup_proof_total` counts what let each request
+ * through, or its refusal.
  */
 export async function verifyLookupRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array) {
   const kind = new URL(request.url).pathname === '/api/public/parcels' ? 'lookup' : 'detection';
@@ -143,8 +148,14 @@ export async function verifyLookupRequest(request: Request, service: SupabaseSer
   }
   try {
     if (hasNativeAssertion(request)) {
-      const platform = await verifyNativeRequest(request, service, body);
-      recordLookupProof(kind, platform === 'android' ? 'key_attestation' : 'app_attest');
+      const native = await verifyNativeRequest(request, service, body);
+      if (native.proof) {
+        recordLookupProof(kind, native.proof);
+        return;
+      }
+      const headers: Record<string, string> = { 'X-Native-Assertion': native.fallback };
+      if (native.retryAfter) headers['Retry-After'] = String(native.retryAfter);
+      recordLookupProof(kind, requireLookupProof(request, headers));
       return;
     }
     recordLookupProof(kind, requireLookupProof(request));

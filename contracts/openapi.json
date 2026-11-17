@@ -63670,7 +63670,7 @@
             "description": "Too many detections this minute, or no carrier may be asked for this client or for anyone until the next UTC midnight. Retry-After says when to try again; a lookup works without the answer."
           },
           "403": {
-            "description": "Browser or native verification required before spending lookup budget or contacting providers.",
+            "description": "Browser or native verification required before spending lookup budget or contacting providers. X-Native-Assertion says why an Android key's assertion did not let the request through: mode (Android attestation only logs), limited (its allowance is used until Retry-After) or refused.",
             "headers": {
               "X-Lookup-Verification": {
                 "schema": {
@@ -63678,6 +63678,22 @@
                   "enum": [
                     "required"
                   ]
+                }
+              },
+              "X-Native-Assertion": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "mode",
+                    "limited",
+                    "refused"
+                  ]
+                }
+              },
+              "Retry-After": {
+                "description": "With X-Native-Assertion limited: seconds until the key's allowance renews.",
+                "schema": {
+                  "type": "integer"
                 }
               }
             }
@@ -63822,7 +63838,7 @@
             "$ref": "#/components/responses/ApiError"
           },
           "403": {
-            "description": "Browser or native verification required before spending lookup budget or contacting providers.",
+            "description": "Browser or native verification required before spending lookup budget or contacting providers. X-Native-Assertion says why an Android key's assertion did not let the request through: mode (Android attestation only logs), limited (its allowance is used until Retry-After) or refused.",
             "headers": {
               "X-Lookup-Verification": {
                 "schema": {
@@ -63830,6 +63846,22 @@
                   "enum": [
                     "required"
                   ]
+                }
+              },
+              "X-Native-Assertion": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "mode",
+                    "limited",
+                    "refused"
+                  ]
+                }
+              },
+              "Retry-After": {
+                "description": "With X-Native-Assertion limited: seconds until the key's allowance renews.",
+                "schema": {
+                  "type": "integer"
                 }
               }
             }
@@ -64749,7 +64781,7 @@
         "security": [],
         "responses": {
           "200": {
-            "description": "App Attest app ID and the app ID Android keys register under are null when disabled; Turnstile indicates the hosted fallback is available",
+            "description": "App Attest app ID, null when disabled; Android attestation, null when off; Turnstile indicates the hosted fallback is available",
             "content": {
               "application/json": {
                 "schema": {
@@ -64769,7 +64801,40 @@
                       "type": [
                         "string",
                         "null"
-                      ]
+                      ],
+                      "description": "Set, as appAttestAppId is for the iPhone, only where Android attestation is enforced: signed lookups may then skip the browser check."
+                    },
+                    "androidAttestation": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "description": "Android attestation, null when off. In log mode the app registers its key and keeps the browser check; in enforce mode it also signs lookups.",
+                      "required": [
+                        "mode",
+                        "appId",
+                        "playIntegrityCloudProjectNumber"
+                      ],
+                      "properties": {
+                        "mode": {
+                          "type": "string",
+                          "enum": [
+                            "log",
+                            "enforce"
+                          ]
+                        },
+                        "appId": {
+                          "type": "string",
+                          "description": "The app ID Android keys register under."
+                        },
+                        "playIntegrityCloudProjectNumber": {
+                          "type": [
+                            "string",
+                            "null"
+                          ],
+                          "description": "The Google Cloud project number the Play build prepares Play Integrity tokens with, null when the server reads none."
+                        }
+                      }
                     },
                     "turnstile": {
                       "type": "boolean"
@@ -64786,7 +64851,7 @@
       },
       "post": {
         "operationId": "registerNativeAttestation",
-        "summary": "Register an App Attest or Android key attestation key against an attestation challenge",
+        "summary": "Register an App Attest or Android attestation key against an attestation challenge",
         "security": [],
         "responses": {
           "204": {
@@ -64796,7 +64861,7 @@
             "description": "Invalid or replayed attestation"
           },
           "503": {
-            "description": "App Attest or Android key attestation unavailable"
+            "description": "App Attest or Android attestation unavailable"
           },
           "429": {
             "description": "Rate limited"
@@ -64826,6 +64891,11 @@
                     "type": "string",
                     "maxLength": 14000,
                     "description": "Base64 CBOR: Apple's App Attest attestation, or for Android a map whose fmt is android-key and whose attStmt.x5c is the key's certificate chain, leaf first, for a key made with SHA256 of the challenge as its attestation challenge"
+                  },
+                  "playIntegrity": {
+                    "type": "string",
+                    "maxLength": 16384,
+                    "description": "Android's Play build: a Play Integrity standard token whose requestHash is the lowercase hex SHA256 of SHA256 of the challenge followed by the key's SubjectPublicKeyInfo (DER)."
                   }
                 }
               }

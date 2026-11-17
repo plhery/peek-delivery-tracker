@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { attestationChain, attestationRoot, keyDescription, PLAY_SIGNER, type ChainOptions } from '../test/androidAttestation';
 import * as roots from './androidAttestationRoots';
 import {
-  ANDROID_PACKAGE, ANDROID_SIGNERS, forgetRevocationList, parseKeyDescription, revokedSerials, serialKey, verifyAndroidKeyAttestation,
+  ANDROID_PACKAGE, ANDROID_SIGNERS, forgetRevocationList, leafKey, parseKeyDescription, revokedSerials, serialKey, verifyAndroidKeyAttestation,
 } from './androidKeyAttestation';
 
 vi.mock('./androidAttestationRoots', () => ({ ANDROID_ATTESTATION_ROOTS: [] as string[], SELF_SIGNED_BOOT_KEYS: new Set<string>() }));
@@ -24,9 +24,11 @@ beforeEach(() => {
 afterEach(() => { vi.unstubAllGlobals(); vi.useRealTimers(); });
 
 describe('Android key attestation', () => {
-  it('accepts a key made in the TEE or StrongBox of a locked, verified phone, for Peek, and gives its public key', async () => {
+  it('accepts a key made in the TEE or StrongBox of a locked, verified phone, for Peek, as strong, and gives its public key', async () => {
     const { x5c, privateKey } = attestationChain({ root, challenge });
-    const { publicKey } = await verify(x5c);
+    const { publicKey, verdict, basic } = await verify(x5c);
+    expect(verdict).toBe('strong');
+    expect(basic).toBeUndefined();
     expect(publicKey).toBe(new X509Certificate(x5c[0]!).publicKey.export({ type: 'spki', format: 'pem' }));
     expect(publicKey).not.toBe(privateKey.export({ type: 'pkcs8', format: 'pem' }));
     await expect(verify(chain({ securityLevel: 2, keyMintSecurityLevel: 2 }))).resolves.toBeDefined();
@@ -39,22 +41,43 @@ describe('Android key attestation', () => {
     await expect(verify(chain({ signers: ['00'.repeat(32), signer] }))).resolves.toBeDefined();
   });
 
-  it('accepts a self-signed system only with a verified boot key it knows, as GrapheneOS reports', async () => {
+  it('counts a self-signed system as strong only with a verified boot key it knows, as GrapheneOS reports', async () => {
     const bootKey = Buffer.alloc(32, 0x5a);
-    await expect(verify(chain({ bootState: 1, bootKey }))).rejects.toMatchObject({ reason: 'boot_state' });
+    await expect(verify(chain({ bootState: 1, bootKey }))).resolves.toMatchObject({ verdict: 'basic', basic: 'boot_state' });
     (roots.SELF_SIGNED_BOOT_KEYS as Set<string>).add(bootKey.toString('hex'));
-    await expect(verify(chain({ bootState: 1, bootKey }))).resolves.toBeDefined();
+    await expect(verify(chain({ bootState: 1, bootKey }))).resolves.toMatchObject({ verdict: 'strong' });
     // Still locked only.
-    await expect(verify(chain({ bootState: 1, bootKey, locked: false }))).rejects.toMatchObject({ reason: 'unlocked' });
+    await expect(verify(chain({ bootState: 1, bootKey, locked: false }))).resolves.toMatchObject({ verdict: 'basic', basic: 'unlocked' });
+  });
+
+  it.each<[string, Partial<ChainOptions>, string]>([
+    ['an unlocked bootloader', { locked: false, bootState: 2 }, 'unlocked'],
+    ['an unlocked bootloader with a verified system', { locked: false }, 'unlocked'],
+    ['an unverified system', { bootState: 2 }, 'boot_state'],
+  ])('counts a key in secure hardware under %s as basic', async (_name, options, basic) => {
+    await expect(verify(chain(options))).resolves.toMatchObject({ verdict: 'basic', basic });
+  });
+
+  it('still checks the app, the signer and the key of a basic one', async () => {
+    await expect(verify(chain({ locked: false, packages: ['com.example.other'] }))).rejects.toMatchObject({ reason: 'app_id' });
+    await expect(verify(chain({ locked: false, signers: ['ab'.repeat(32)] }))).rejects.toMatchObject({ reason: 'signer' });
+    await expect(verify(chain({ bootState: 2, origin: 2 }))).rejects.toMatchObject({ reason: 'origin' });
+  });
+
+  it('reads the leaf\'s P-256 key without checking the chain, for Play Integrity to vouch for', () => {
+    const x5c = attestationChain({ root, challenge, securityLevel: 0 }).x5c;
+    expect(leafKey(x5c).export({ type: 'spki', format: 'pem' })).toBe(new X509Certificate(x5c[0]!).publicKey.export({ type: 'spki', format: 'pem' }));
+    expect(() => leafKey([])).toThrow(expect.objectContaining({ reason: 'malformed' }));
+    expect(() => leafKey([Buffer.from('not a certificate')])).toThrow(expect.objectContaining({ reason: 'chain' }));
+    expect(() => leafKey(chain({ leafKey: generateKeyPairSync('ec', { namedCurve: 'secp384r1' }) }))).toThrow(expect.objectContaining({ reason: 'key' }));
   });
 
   it.each<[string, Partial<ChainOptions>, string]>([
     ['software attestation', { securityLevel: 0 }, 'security_level'],
     ['a software key', { keyMintSecurityLevel: 0 }, 'security_level'],
     ['another challenge', { challenge: createHash('sha256').update('another').digest() }, 'nonce'],
-    ['an unlocked bootloader', { locked: false, bootState: 2 }, 'unlocked'],
-    ['an unverified system', { bootState: 2 }, 'boot_state'],
     ['a failed boot', { bootState: 3 }, 'boot_state'],
+    ['an unlocked bootloader with a failed boot', { locked: false, bootState: 3 }, 'boot_state'],
     ['no root of trust', { rootOfTrust: false }, 'boot_state'],
     ['an imported key', { origin: 2 }, 'origin'],
     ['no origin', { origin: null }, 'origin'],
@@ -170,8 +193,10 @@ describe('real attestations, from Google\'s verifier\'s test data', () => {
     await expect(check('software-attestation', 'challenge', '2026-11-17T00:00:00Z')).rejects.toMatchObject({ reason: 'root' });
   });
 
-  it('reads a factory chain whose root certificate has expired, and refuses its unlocked bootloader', async () => {
-    await expect(check('pixel-3-unlocked-factory', 'challenge', '2026-11-17T00:00:00Z')).rejects.toMatchObject({ reason: 'unlocked' });
+  it('reads a factory chain whose root certificate has expired, and counts its unlocked bootloader as basic', async () => {
+    // Made by their collector app, which the same certificate signs.
+    const collector = { ...tester, packageName: 'com.google.wireless.android.security.attestationverifier.collector' };
+    await expect(check('pixel-3-unlocked-factory', 'challenge', '2026-11-17T00:00:00Z', collector)).resolves.toMatchObject({ verdict: 'basic', basic: 'unlocked' });
   });
 });
 

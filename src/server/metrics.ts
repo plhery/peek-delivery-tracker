@@ -42,7 +42,7 @@ export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
 export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 21;
+const RUNTIME_VERSION = 22;
 
 interface PrometheusRuntime {
   version: number;
@@ -81,6 +81,7 @@ interface PrometheusRuntime {
   healthIncidentTotal: Counter<'kind' | 'subject' | 'state'>;
   scheduledRunGaveWayTotal: Counter<'to'>;
   nativeVerificationTotal: Counter<'kind' | 'outcome' | 'reason' | 'platform'>;
+  androidAttestationTotal: Counter<'key' | 'play' | 'mode'>;
   lookupProofTotal: Counter<'kind' | 'proof'>;
   publicLookupClients: Gauge;
   publicLookupsPerClient: Gauge<'stat'>;
@@ -312,13 +313,19 @@ function createRuntime(): PrometheusRuntime {
     }),
     nativeVerificationTotal: new Counter({
       name: 'native_verification_total',
-      help: 'App Attest and Android key attestations and assertions by kind (attestation, lookup, detection, account_lookup, account_detection, account_refresh), outcome, reason code and platform (apple, android, unknown).',
+      help: 'App Attest and Android attestations and assertions by kind (attestation, lookup, detection, account_lookup, account_detection, account_refresh), outcome, reason code and platform (apple, android, unknown).',
       labelNames: ['kind', 'outcome', 'reason', 'platform'] as const,
+      registers: [registry],
+    }),
+    androidAttestationTotal: new Counter({
+      name: 'android_attestation_total',
+      help: 'Android key registrations by what the key attestation gave (strong, basic or its failure) and what the Play Integrity token gave (strong, basic, its failure, absent or unconfigured), and the mode (log, enforce).',
+      labelNames: ['key', 'play', 'mode'] as const,
       registers: [registry],
     }),
     lookupProofTotal: new Counter({
       name: 'lookup_proof_total',
-      help: 'Lookups and detections without an account by the proof that let them through (app_attest, key_attestation, turnstile, none) or refused.',
+      help: 'Lookups and detections without an account by the proof that let them through (app_attest, key_attestation, play_integrity, turnstile, none) or refused.',
       labelNames: ['kind', 'proof'] as const,
       registers: [registry],
     }),
@@ -519,24 +526,33 @@ export function recordPublicDetection(outcome: 'asked' | 'limited_burst' | 'limi
 export type NativeVerificationKind = 'attestation' | 'lookup' | 'detection' | 'account_lookup' | 'account_detection' | 'account_refresh';
 
 /**
- * An App Attest or Android key attestation check: an attestation `verified` or
+ * An App Attest or Android attestation check: an attestation `verified` or
  * `rejected`, an assertion of a lookup without an account `verified`,
- * `rejected` or `limited` by the device's allowance, and one of a signed-in
- * request `verified`, `invalid` or `missing`. `reason` is a short code, `none`
- * when there is nothing to explain; `platform` is the key's, or the
+ * `rejected`, `limited` by the device's allowance or `ignored` (an Android key
+ * while Android attestation only logs), and one of a signed-in request
+ * `verified`, `invalid` or `missing`. `reason` is a short code, `none` when
+ * there is nothing to explain, and an Android key's verdict (`strong`, `basic`)
+ * when it is verified, limited or ignored; `platform` is the key's, or the
  * user-agent's before a key is read.
  */
 export function recordNativeVerification(
   kind: NativeVerificationKind,
-  outcome: 'verified' | 'rejected' | 'limited' | 'invalid' | 'missing',
+  outcome: 'verified' | 'rejected' | 'limited' | 'ignored' | 'invalid' | 'missing',
   reason: string,
   platform: 'apple' | 'android' | 'unknown',
 ): void {
   count(runtime.nativeVerificationTotal, 'native_verification_total', { kind, outcome, reason, platform });
 }
 
+/** An Android key's registration: each check's verdict or failure, and the mode it was registered in. */
+export function recordAndroidAttestation(key: string, play: string, mode: 'log' | 'enforce'): void {
+  count(runtime.androidAttestationTotal, 'android_attestation_total', { key, play, mode });
+}
+
+export type LookupProof = 'app_attest' | 'key_attestation' | 'play_integrity' | 'turnstile' | 'none' | 'refused';
+
 /** What let a lookup or detection without an account through, or that it was refused. */
-export function recordLookupProof(kind: 'lookup' | 'detection', proof: 'app_attest' | 'key_attestation' | 'turnstile' | 'none' | 'refused'): void {
+export function recordLookupProof(kind: 'lookup' | 'detection', proof: LookupProof): void {
   count(runtime.lookupProofTotal, 'lookup_proof_total', { kind, proof });
 }
 

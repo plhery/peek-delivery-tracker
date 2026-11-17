@@ -425,24 +425,50 @@ and `NATIVE_DETECTIONS_PER_DAY` for installation budgets; `0` disables that work
 Network and global budgets still apply. Apple outages and unsupported devices
 use Turnstile. Signed-in requests use account budgets.
 
-Android key attestation needs no Google service, so both Android builds use it.
-The app makes a key in the phone's secure hardware with the SHA-256 of a
-challenge as its attestation challenge, and registers the key's certificate
-chain. The server accepts a chain signed up to one of Google's hardware roots,
-its intermediates in their validity period (a chain keyed in the factory stays
+Android attestation runs in the mode `ANDROID_ATTESTATION_MODE` sets, wherever
+`TURNSTILE_SECRET_KEY` is set. `log`, the default, registers keys and counts
+their verdicts while every lookup keeps the Turnstile check; `enforce` lets a
+registered key's signed lookups skip it; `off` registers none. Turning
+enforcement on is a decision to take with the numbers `log` gathers
+([OBSERVABILITY.md](OBSERVABILITY.md)).
+
+Key attestation needs no Google service, so both Android builds use it. The app
+makes a key in the phone's secure hardware with the SHA-256 of a challenge as
+its attestation challenge, and registers the key's certificate chain. The
+server accepts a chain signed up to one of Google's hardware roots, its
+intermediates in their validity period (a chain keyed in the factory stays
 trusted after it expires, as Google says), none of it on Google's revocation
 list (read hourly; past a day without a copy, registration waits for one), for
-a key generated in the TEE or StrongBox of a phone with a locked bootloader and
-a verified system, or a self-signed one whose boot key it knows (GrapheneOS,
-CalyxOS), made for the app's package and one of its signing certificates
-([androidKeyAttestation.ts](../src/server/androidKeyAttestation.ts)). Each
-anonymous lookup is then signed with that key, under the same challenges,
-installation budgets and network and global budgets as App Attest. Anything
-else, emulators, unlocked or custom systems and older hardware included, uses
-Turnstile; the app stops asking on a system the server is sure to refuse until
-the system updates. It is on wherever `TURNSTILE_SECRET_KEY` is set;
-`ANDROID_KEY_ATTESTATION=off` turns it off, and the app then uses Turnstile.
-`ANDROID_KEY_ATTESTATION_SIGNERS` adds signing certificates' SHA-256 digests,
+a key generated in the TEE or StrongBox, made for the app's package and one of
+its signing certificates, on a phone whose boot did not fail
+([androidKeyAttestation.ts](../src/server/androidKeyAttestation.ts)). A locked
+bootloader with a verified system, or a self-signed one whose boot key it knows
+(GrapheneOS, CalyxOS), makes the key `strong`; an unlocked bootloader or an
+unverified or unknown system makes it `basic`, since that system could write
+the package and signer itself. Emulators, software keys and older hardware
+are refused and use Turnstile.
+
+The Play build also sends a Play Integrity token whose request hash names the
+key and the challenge, where `PLAY_INTEGRITY_CLOUD_PROJECT_NUMBER` is set
+([playIntegrity.ts](../src/server/playIntegrity.ts)). The server has Google
+decode it as a service account of that project with the Play Integrity API
+enabled, `PLAY_INTEGRITY_CLIENT_EMAIL` and `PLAY_INTEGRITY_PRIVATE_KEY` (or
+FCM's when neither is set); the project must be linked to the app in Play
+Console. The app Google Play distributes on a device that meets device or
+strong integrity is `strong`, with basic integrity alone `basic`. The better of
+the two verdicts registers the key, so a key the hardware can't vouch for can
+still register on Play Integrity's word, and Google being down leaves the
+hardware's. Without the number the app sends no token.
+
+When enforced, each anonymous lookup is signed with the key, under the same
+challenges and network and global budgets as App Attest: a `strong` key has
+`NATIVE_LOOKUPS_PER_DAY` and `NATIVE_DETECTIONS_PER_DAY`, a `basic` one
+`ANDROID_BASIC_LOOKUPS_PER_DAY` (5) and `ANDROID_BASIC_DETECTIONS_PER_DAY`
+(20); `0` leaves it the Turnstile check. An Android key never refuses what
+Turnstile lets through: in `log` mode, past its allowance, or with a refused
+signature, the request's browser proof decides, and a refusal says why in
+`X-Native-Assertion` (`mode`, `limited` with `Retry-After`, `refused`).
+`ANDROID_ATTESTATION_SIGNERS` adds signing certificates' SHA-256 digests,
 separated by commas, such as a debug key on a development server or the F-Droid
 catalog's key once it signs the app.
 

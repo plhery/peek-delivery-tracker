@@ -3,7 +3,7 @@ title: MHI tracking: Trackmail statuses and who delivers
 description: Got an MHI number from an online shop? Where to track it, what Trackmail's statuses mean, which courier delivers it in your country and who to ask when it stalls.
 slug: mhi-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 MHI (Mail Handling International) is a Bristol company that ships online shops' orders from the UK to buyers abroad. Shops send their parcels to its processing facility in Bristol; MHI exports them and hands each one to a courier or post in your country, which delivers it under its own number. Track the MHI number on MHI's tracking site, [Trackmail](https://www.trackmail.co.uk/), or in the box above. The number comes from the shop: MHI gives its clients a tracking code for each parcel, so look in the shipping email or your order details.
@@ -90,7 +90,7 @@ Peek reads Trackmail and shows the status and the history, with each scan's plac
 
 When Trackmail's link points to a courier Peek knows, the parcel's page says "Delivery with" that courier and shows its number. While that courier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. If Peek reads that courier's tracking itself, it asks it with that number and switches to it once it shows newer progress. A courier Peek doesn't know isn't named: use "View carrier tracking" on Trackmail. For an untracked item with a local poster number, Peek may try that number with a national post, usually the one of the country you add the parcel from, and switch the same way. Not with every post, though: an RR… number ending in AU added from Australia isn't passed to Australia Post, so check it on Australia Post's own tracking.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while MHI's own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact MHI, the courier or the shop for you.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while MHI's own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact MHI, the courier or the shop for you.
 
 ## Questions about MHI tracking
 

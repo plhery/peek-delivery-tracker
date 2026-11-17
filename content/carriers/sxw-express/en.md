@@ -3,7 +3,7 @@ title: SXW Express tracking: SXW numbers, scans and who delivers
 description: Track an SXW Express (Shengxingwang) parcel from Shenzhen: what an SXW number looks like, where SXW's own tracker is, what its steps mean and who to ask.
 slug: sxw-express-tracking
 published: 2026-11-14
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 SXW Express is the name Peek uses for Shenzhen Shengxingwang Supply Chain Management Co., Ltd. (深圳胜兴旺供应链管理有限公司), a logistics company in Shenzhen, China, that ships goods abroad for businesses and online sellers. If a Chinese shop sent your order with SXW, look for a number of SXW and twelve digits, the shape Peek knows as SXW's, and paste it in the box above. You can also check it yourself on SXW's own tracker, which opens from the "Express Tracking" box on sxwexpress.cn. Peek reads that same tracker for you.
@@ -88,7 +88,7 @@ Peek holds back any step dated after the moment it checks, and any step written 
 
 Apart from the GOFO hand-over above, Peek stays with SXW's tracker. If the seller gives you the delivering company's number, add it to Peek as a parcel of its own.
 
-Peek checks every 10 minutes, and hourly once the parcel has gone quiet. It can notify you of every scan, important steps only or the delivery only. "Important steps" covers customs, problems, the delivery round, missed deliveries, pickup, the delivery and returns, so none of the steps in the table above sets one off, `Customs declaration completed` included. "Delivery only" covers the delivery round and the delivery. Peek can't contact SXW Express or the seller for you.
+Peek checks up to every 10 minutes, and hourly once the parcel has gone quiet. It can notify you of every scan, important steps only or the delivery only. "Important steps" covers customs, problems, the delivery round, missed deliveries, pickup, the delivery and returns, so none of the steps in the table above sets one off, `Customs declaration completed` included. "Delivery only" covers the delivery round and the delivery. Peek can't contact SXW Express or the seller for you.
 
 ## Questions about SXW Express tracking
 

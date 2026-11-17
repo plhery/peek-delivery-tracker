@@ -3,7 +3,7 @@ title: CDEK tracking (СДЭК): order numbers and statuses in English
 description: Track a CDEK (СДЭК) parcel: what its order number looks like, what its Russian statuses mean in English, courier and pickup point steps, and how Peek follows it.
 slug: cdek-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 CDEK (СДЭК, also written SDEK) is a courier company. Peek's catalog lists it in Russia, Kazakhstan, Belarus and Serbia. It brings parcels to your door by courier, or to a pickup point or parcel locker where you collect them. The shop or the sender gives you the number: paste it in the box above. CDEK's own tracker is on my.cdek.ru. CDEK writes its steps in Russian, and the table below gives them in English.
@@ -99,7 +99,7 @@ On a parcel you've already added, use "Change carrier". A parcel added without a
 
 **Parcels handed to CDEK.** Qwintry, a parcel forwarder, hands some parcels to CDEK. When Qwintry's tracker names CDEK with CDEK's number, the parcel shows "Delivery with CDEK" (or "Announced to CDEK, not received yet" while CDEK has only the announcement of the parcel, with no scan of its own) and that number. Peek then asks CDEK too, and follows the parcel there once CDEK shows a step at least as recent as Qwintry's newest. DobroPost, which brings orders from China, shows CDEK's steps in its own tracker when CDEK delivers the last part: Peek follows such a parcel there, by its DBRPST number. For a postal number from abroad filed under CDEK and looked up from Belarus, Peek may also ask Belpost, the same way.
 
-**Checks and alerts.** Peek checks CDEK every 10 minutes, or every 2 minutes from 6 a.m. local time on the day CDEK scans the parcel out for delivery, while CDEK's own tracker answers (through tracking services, every 15 minutes). After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact CDEK or the shop for you.
+**Checks and alerts.** Peek checks CDEK up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day CDEK scans the parcel out for delivery, while CDEK's own tracker answers (through tracking services, every 15 minutes). After two days without a new step (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact CDEK or the shop for you.
 
 ## Questions about CDEK tracking
 

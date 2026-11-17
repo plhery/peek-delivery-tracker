@@ -3,7 +3,7 @@ title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
 description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
@@ -102,7 +102,7 @@ From WanbExpress's tracker, Peek shows the status, each scan with its place, and
 
 Peek leaves out the delivering carrier's name and number, the delivery photos and the recipient's address that WanbExpress's tracker can show. So it shows no "Delivery with" line and doesn't move the parcel over to the delivering carrier: for that carrier's own scans, add its number to Peek as well. Peek follows more than 3,500 carriers.
 
-While WanbExpress's tracker answers, Peek checks every 10 minutes, or every few minutes from 6 a.m. local time on the day the parcel goes out for delivery. While tracking services answer instead, it checks every 15 minutes, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) covers the delivery run, a missed attempt and the delivery, but not WanbExpress's customs lines, which Peek counts as "In transit". Peek can't contact WanbExpress or the seller for you.
+While WanbExpress's tracker answers, Peek checks up to every 10 minutes, or every few minutes from 6 a.m. local time on the day the parcel goes out for delivery. While tracking services answer instead, it checks hourly, and up to every 15 minutes on that day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". "Important steps" (delivery, pickup, customs, missed attempts and returns) covers the delivery run, a missed attempt and the delivery, but not WanbExpress's customs lines, which Peek counts as "In transit". Peek can't contact WanbExpress or the seller for you.
 
 ## Questions about WanbExpress tracking
 

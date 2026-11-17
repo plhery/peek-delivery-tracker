@@ -3,7 +3,7 @@ title: NACEX tracking: number, statuses in English and contact
 description: Track a NACEX parcel in Spain, Portugal or Andorra: the 0000/00000000 number, its Spanish statuses in plain English, NACEX.shop points, claims and contacts.
 slug: nacex-tracking
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 NACEX is an express courier of the Logista group that delivers across Spain, Portugal, Andorra and the Netherlands. To track a parcel, type its number (four digits, a slash, eight digits) into the box on [NACEX's site](https://www.nacex.es/), or paste it in the box above. The number belongs to the shipment the sender, usually the shop, booked; NACEX can't search by order number or postcode.
@@ -90,7 +90,7 @@ NACEX's contact pages list no WhatsApp number.
 
 [Peek](/) recognises a NACEX number from its shape: exactly four digits, a slash and eight digits. A nacex.es tracking link (with `intcli=`) or the whole shipping email works too.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day NACEX scans the parcel out for delivery, while NACEX's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status and history, and where the parcel was scanned on a map. NACEX's tracking gives a time only for the delivery; for the other steps you see just the day. It leaves out the recipient's details, proof of delivery, delivery comments, contact details and the shop's reference, and can't speed a parcel up or contact NACEX for you.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day NACEX scans the parcel out for delivery, while NACEX's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows the status and history, and where the parcel was scanned on a map. NACEX's tracking gives a time only for the delivery; for the other steps you see just the day. It leaves out the recipient's details, proof of delivery, delivery comments, contact details and the shop's reference, and can't speed a parcel up or contact NACEX for you.
 
 ## Questions about NACEX tracking
 

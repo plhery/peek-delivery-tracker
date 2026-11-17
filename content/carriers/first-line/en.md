@@ -3,7 +3,7 @@ title: FIRST LINE tracking: 1ST numbers, statuses and delivery
 description: Track a FIRST LINE (壹号专线) parcel from China: what a 1ST number looks like, what each status means, who delivers it in the US and who to ask when it stalls.
 slug: first-line-tracking
 published: 2026-10-21
-updated: 2026-11-08
+updated: 2026-11-17
 ---
 
 FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) is a Shenzhen forwarder that ships parcels from China for online sellers, mostly to the United States, and hands them to a local carrier there for delivery. It belongs to the 1ST group (一代国际集团), whose forwarders print waybills starting with 1ST. Track yours in the tracking box on firstline56.com's home page, which opens FIRST LINE's 追踪单号 (track a number) page, or in the box above. The shop gives the number with your order's shipping details.
@@ -84,7 +84,7 @@ These channels serve the sellers, FIRST LINE's customers; it publishes no help f
 
 Peek reads FIRST LINE's tracker and shows the status, the history (up to 100 scans), the place of each scan without its postcode, and each scan's time, read on that place's clock. Lines show as FIRST LINE writes them, relayed USPS, GOFO or UniUni scans included, except an exact `Delivered`, which appears in Peek's own words. The tracker gives no destination country, delivering company, last-mile number or proof of delivery, so Peek shows none. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan: while that scan is the newest, Peek shows that day's window when the scan gives one; a scan with only a latest time adds no estimate, since "Out for delivery" already means today. It doesn't switch to USPS, GOFO or UniUni: if the seller gives you the last-mile number, add it as a parcel of its own.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (when that day's window is given, from half an hour before it opens), while FIRST LINE's own tracker answers; through tracking services, every 15 minutes. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact FIRST LINE or the seller for you.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (when that day's window is given, from half an hour before it opens), while FIRST LINE's own tracker answers; through tracking services, every 15 minutes. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact FIRST LINE or the seller for you.
 
 ## Questions about FIRST LINE tracking
 

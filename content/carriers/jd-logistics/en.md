@@ -3,7 +3,7 @@ title: JD Logistics tracking: JD numbers, statuses and contact
 description: Track a JD Logistics (京东物流) parcel: what JD and VG numbers look like, what JD's tracking steps mean, who delivers in the US and how to reach JD.
 slug: jd-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) is JD.com's logistics business, itself listed in Hong Kong. Abroad it works under the brands JoyLogistics and JoyExpress: it ships sellers' stock from its warehouses in the US, the UK, Australia and other countries, and carries parcels from China for online sellers. Track a parcel on [JD's international tracker](https://www.jingdonglogistics.com/Tracking), in English, or paste the number in the box above. The number comes from the shop that shipped your order.
@@ -87,7 +87,7 @@ Peek reads JD's international tracking: the status, each step in JD's words with
 
 For the JD numbers of parcels inside China (JD and 13 digits starting with 0; JDJ, JDK, JDV or JDX and 12 digits; JDVA, JDVB, JDVC or JDAZ and 11), Peek opens JD's Chinese tracker on jdl.com instead of the international one. For JDW and 12 digits, or JDAP and 11, it reads only the international tracker; for other JD numbers, the international one first, then the Chinese one when that has nothing. Peek shows the Chinese lines in Chinese, without the courier's name, phone number or the name of whoever signed. JD's Chinese tracker often asks for a check Peek can't pass: Peek then leaves it for that number for 6 hours or more, up to a day, so if a parcel inside China shows nothing in Peek, look it up on jdl.com. An empty answer from JD doesn't prove the number wrong: Peek keeps checking.
 
-Peek checks every 10 minutes, and every 2 minutes (every 5 when it has to open JD's Chinese tracker) from 6 a.m. local time on the day JD scans the parcel out for delivery, while JD's own tracker answers; through tracking services, every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: in the US, GOFO's, every 30 minutes (an hour after a failed check), on delivery day too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open JD's Chinese tracker) from 6 a.m. local time on the day JD scans the parcel out for delivery, while JD's own tracker answers; through tracking services, every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: in the US, GOFO's, up to every 30 minutes (an hour after a failed check), on delivery day too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
 
 ## Questions about JD Logistics tracking
 

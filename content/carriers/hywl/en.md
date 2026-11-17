@@ -3,7 +3,7 @@ title: HYWL tracking: Huiyi Logistics TRK numbers and scans
 description: Track an HYWL (Huiyi Logistics, 汇一物流) parcel from China: what its TRK numbers look like, what its English and Chinese scans mean and who to ask.
 slug: hywl-tracking
 published: 2026-10-31
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) is 深圳市汇一物流有限公司, a logistics company in Shenzhen, China, that ships parcels abroad for online sellers. If a shop sent your order with HYWL, your number is TRK and twelve more characters, or four letters, two digits, D, four digits and four letters: paste it in the box above. HYWL's own tracker is on its website, in Chinese, and its steps come in English, Chinese or both. HYWL doesn't name the company that delivers in your country.
@@ -99,7 +99,7 @@ Peek shows the status, each step with its place, and the destination country whe
 
 When HYWL's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words. Their copies can show steps dated ahead, but a step dated more than an hour after Peek's check never becomes the parcel's status. So check each step's time.
 
-Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks every 10 minutes. With `Dispatching` or `出门投递`, the parcel shows "Out for delivery", and Peek checks every 2 minutes, but only while HYWL's own tracker answers, on that step's day and from 6am local time; while tracking services answer, it's every 15 minutes, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Even out for delivery, it checks hourly or less often when no notification can reach you and you haven't opened Peek for an hour. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
+Peek stays with HYWL's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own. Peek checks up to every 10 minutes. With `Dispatching` or `出门投递`, the parcel shows "Out for delivery", and Peek checks up to every 2 minutes, but only while HYWL's own tracker answers, on that step's day and from 6am local time; while tracking services answer, it's hourly, and up to every 15 minutes on that day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Even out for delivery, it checks hourly or less often when no notification can reach you and you haven't opened Peek for an hour. It can notify you of every scan, important steps only or the delivery only: "Important steps" covers `Dispatching` and `Delivered`, not HYWL's export customs or sorting. Peek can't contact HYWL or the seller for you.
 
 ## Questions about HYWL tracking
 

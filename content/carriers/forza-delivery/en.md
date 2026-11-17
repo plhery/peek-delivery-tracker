@@ -3,7 +3,7 @@ title: Forza Delivery tracking: guía numbers, statuses, contact
 description: Track a Forza Delivery Express parcel in Guatemala, El Salvador or Honduras: what an FD guía looks like, what each Spanish status means and who to call.
 slug: forza-delivery-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Forza Delivery Express is a parcel courier in Guatemala, El Salvador and Honduras. It started in Guatemala in 2020 and is part of Grupo Forza Logistics. It ships for online shops and sellers, delivers to your door or to an Express Center agency, and can collect the price of the order on delivery. Track your parcel on [Forza's tracker](https://rastreo.forzadelivery.com/) with the guía number the shop gave you, or paste the number in the box above.
@@ -92,7 +92,7 @@ Peek asks Forza's tracker with the guía alone: no phone number or postcode. It 
 
 Forza's times name no time zone: Peek reads them on Guatemala's clock and shows them in your device's. Guatemala, El Salvador and Honduras share that clock (UTC−6, with no summer time), so a scan in any of the three shows at the right time.
 
-Peek asks Forza every 10 minutes, or every 2 minutes (every 5 when it has to open Forza's tracker in a browser) from 6 a.m. local time on the day of an `En ruta` scan, while Forza's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only": "Delivery only" covers `En ruta` and `Entregado`. Peek can't contact Forza or the shop for you, and it can't pay a COD amount.
+Peek asks Forza up to every 10 minutes, or every 2 minutes (every 5 when it has to open Forza's tracker in a browser) from 6 a.m. local time on the day of an `En ruta` scan, while Forza's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only": "Delivery only" covers `En ruta` and `Entregado`. Peek can't contact Forza or the shop for you, and it can't pay a COD amount.
 
 ## Questions about Forza Delivery tracking
 

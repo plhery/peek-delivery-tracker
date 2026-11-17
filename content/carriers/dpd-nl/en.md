@@ -3,7 +3,7 @@ title: DPD Netherlands tracking: statuses, delivery and contact
 description: Track a DPD parcel in the Netherlands: the 14-digit number, what DPD's statuses mean, delivery days, Parcel Points, missing parcels and who to call.
 slug: dpd-netherlands-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 DPD Netherlands is DPD (Nederland) B.V., the DPD company that delivers parcels in the Netherlands. Track a parcel with the 14-digit parcel number from DPD's email: on DPD's Track & Trace at dpd.nl, in the myDPD app, or in the box above.
@@ -105,7 +105,7 @@ Peek shows DPD's status, its steps in the words of the table above, the expected
 
 Sometimes DPD Netherlands hands a parcel to DPD's company in another country: [DPD Germany](carrier:dpd-de), [DPD France](carrier:dpd-fr), [DPD UK](carrier:dpd-uk), [DPD Ireland](carrier:dpd-ie), [DPD Poland](carrier:dpd-pl), [DPD Portugal](carrier:dpd-pt), DPD Austria, [DPD Switzerland](carrier:dpd-ch), [SEUR](carrier:seur) in Spain or [BRT](carrier:brt) in Italy. Once DPD says the parcel is at a delivery depot in one of these countries, or further on, Peek asks that company with the same number. It follows that company once it has a scan as recent as DPD Netherlands' latest. Until then, Peek follows DPD Netherlands, and the parcel's card already names the company that delivers.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery (when DPD gives a time window, from half an hour before it opens), while DPD's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". To change the delivery, use myDPD.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery (when DPD gives a time window, from half an hour before it opens), while DPD's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". To change the delivery, use myDPD.
 
 ## Questions about DPD tracking in the Netherlands
 

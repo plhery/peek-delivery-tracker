@@ -3,7 +3,7 @@ title: Ekart tracking: tracking IDs, statuses and RTO explained
 description: Track an Ekart parcel in India: what an Ekart tracking ID looks like, what codes such as InscannedAtDH and RTO mean, and what to do when it stops moving.
 slug: ekart-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Ekart (also eKart Logistics) is an Indian courier. It collects online orders from the seller, moves them through its hubs and delivers them to you. The seller or shop gives you the tracking ID: look in its shipping message, or ask it, then paste the ID in the box above. Ekart's own tracker is on ekartlogistics.in. Peek couldn't check Ekart's website for this page, so what follows comes from Peek's own code, which reads Ekart's tracker for you.
@@ -84,7 +84,7 @@ Pasting Ekart's tracking link (ekartlogistics.com, then shipmenttrack and the ID
 
 Filed under Ekart, a parcel shows "Waiting for Ekart" on peektracker.com until Ekart's first scan. One added without a carrier shows "No tracking history yet". Peek reads Ekart's own tracker, with no account or phone number: each line in Ekart's words, codes included, with its exact time and the city Ekart gives, newest first and without repeats. Times are shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It shows Ekart's expected delivery date while the parcel is on its way to you, and drops it once the parcel is delivered or heads back.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Ekart scans the parcel out for delivery, while Ekart's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Ekart scans the parcel out for delivery, while Ekart's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Ekart or the shop for you.
 
 ## Questions about Ekart tracking
 

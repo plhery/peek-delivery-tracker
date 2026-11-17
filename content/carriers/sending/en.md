@@ -3,7 +3,7 @@ title: Sending tracking in Spain: number, statuses and phone
 description: Track a Sending parcel in Spain: the 12-digit shipment number, its Spanish statuses in plain English, address changes, lost parcels and who to call.
 slug: sending-tracking
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-17
 ---
 
 Sending (Sending Transporte Urgente) is a Spanish express parcel and logistics company that delivers across Spain and Portugal. InPost says it added Sending in 2025, and Sending's site now carries the "Sending by InPost" logo. To track a parcel, enter the shipment code or your reference on Sending's [Localiza tu envío](https://www.sending.es/localiza-tu-envio/) page, or paste the number in the box above. Sending says the recipient gets the code by email, SMS or app.
@@ -73,7 +73,7 @@ Peek takes only Sending's 12-digit shipment number: pick Sending for any other a
 
 Peek shows the status and the history in Sending's Spanish wording, each scan with the town of its Sending branch; a scan dated by its day alone shows just the day. When the progress bar ends at `Entregada`, Peek marks the parcel delivered even if the scans stop earlier, and `FALTA DEFINITIVA` shows as "Needs attention". Peek leaves out the sender's reference, the delivery time window, the sender's and recipient's postcodes and towns, the delivering branch, the delivery options and the name of who signed, and shows no weight or expected delivery date: for the time window, look on sending.es.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Sending scans the parcel out for delivery, while Sending's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or delivery day only. It can't contact Sending or the shop for you, or change the address.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Sending scans the parcel out for delivery, while Sending's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or delivery day only. It can't contact Sending or the shop for you, or change the address.
 
 ## Questions about Sending tracking
 

@@ -3,7 +3,7 @@ title: Geniki Taxydromiki tracking: vouchers, statuses, contacts
 description: Track a Geniki Taxydromiki parcel in Greece or Cyprus: the 10-digit voucher, what each status means, missed deliveries, claims and how to reach Geniki.
 slug: geniki-taxydromiki-tracking
 published: 2026-10-13
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 Geniki Taxydromiki (Γενική Ταχυδρομική, sometimes called General Post) is a Greek courier with its own network in Greece, Cyprus, Bulgaria and Romania. Track a parcel with its 10-digit voucher number on the Track & Trace page at taxydromiki.com, or paste it in the box above. The number comes from whoever booked the delivery, usually the shop you ordered from.
@@ -84,7 +84,7 @@ As listed on taxydromiki.com on 13 October 2026:
 
 Geniki's tracker gives times without a time zone: Peek reads them on Greek time and lists Geniki's own history. Scans appear in Geniki's English wording, as in the table. A scan the table doesn't list keeps Geniki's wording, without a stage of its own. A scan Geniki cancelled is hidden together with its cancellation.
 
-Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While someone is waiting for the parcel (notifications on, or a look in the last hour), it checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day it goes `Out for Delivery`, while Geniki's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier").
+Geniki gives no expected delivery day, no pickup point and no weight, so Peek can't show them. Peek recognises a voucher as Geniki's only if it had a scan in the last 60 days; for an older one, pick Geniki with "Change". Peek can notify you of every scan, important steps only, or on delivery day only. While someone is waiting for the parcel (notifications on, or a look in the last hour), it checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day it goes `Out for Delivery`, while Geniki's own tracker answers (through tracking services, every 15 minutes); otherwise hourly. It also checks hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier").
 
 ## Questions about Geniki Taxydromiki tracking
 

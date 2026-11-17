@@ -3,7 +3,7 @@ title: Russian Post tracking (Почта России): numbers and steps
 description: Track a Russian Post (Почта России) parcel: its RU and 14-digit numbers, what its steps in Russian mean, and how Peek follows it.
 slug: russian-post-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Russian Post (Почта России, Pochta Rossii) is the postal service of Russia. It carries parcels sent from Russia and parcels sent to Russia. The sender or the shop gives you the tracking number: paste it in the box above. Russian Post's own website is pochta.ru, and Peek reads its tracker for you, as explained below.
@@ -90,7 +90,7 @@ Peek has no link to Russian Post's tracker. If a tracking service has filled in,
 
 **The post in your country.** For an RU number filed under Russian Post, Russian Post's tracker names the country the parcel is going to, and Peek asks that country's post too, with the RU number, if it reads that post's own tracking, as it does for [USPS](carrier:usps), [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [Canada Post](carrier:canada-post) and [Australia Post](carrier:australia-post). For a parcel shown as "Unknown postal carrier", a tracking service that names the post that delivers it, with its number, or for an RU number the country it is going to, is enough: Peek asks that post the same way. Once the post shows a scan at least as recent as Russian Post's or the service's latest, Peek follows the parcel there.
 
-While a service has the parcel, Peek checks it every 15 minutes, out for delivery too. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Russian Post or the sender for you.
+While a service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it's out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Russian Post or the sender for you.
 
 ## Questions about Russian Post tracking
 

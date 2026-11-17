@@ -3,7 +3,7 @@ title: FAR International tracking: numbers, statuses and contact
 description: Track a FAR International (泛远国际) parcel from China: what a FAR…YQ number looks like, what each status means, who delivers it and who to ask for help.
 slug: far-international-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 FAR International (泛远国际, FAR International Logistics) is a cross-border logistics company in Hangzhou, China, set up in 2004. Online shops and marketplaces book it to send parcels abroad. FAR collects and checks the parcels in China, and its partners carry them abroad, clear customs and give them to a carrier in your country for delivery. Track the number on [FAR's Track and Trace page](https://www.far800.com/en/logistics), in English, or paste it in the box above. The number comes from the shop, with your order's shipping details.
@@ -94,7 +94,7 @@ Peek reads FAR's own tracking: the status, each line with its place and time, th
 
 When FAR gives a last-mile number, Peek asks the carrier it belongs to: the post of the country you're looking it up from for a postal number (two letters, nine digits, two letters), such as [Correos](carrier:correos-spain) in Spain, or the one carrier the number's shape points to. Once that carrier shows a scan at least as recent as FAR's newest, Peek follows the parcel there and keeps FAR's history, and the parcel shows who delivers it ("Delivery with Correos", for example). Without such a carrier, Peek stays on FAR's tracking.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while FAR's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact FAR or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while FAR's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact FAR or the seller for you.
 
 ## Questions about FAR International tracking
 

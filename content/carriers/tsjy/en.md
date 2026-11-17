@@ -3,7 +3,7 @@ title: TSJY tracking (通世集运): order numbers and statuses
 description: Track a TSJY (通世集运) consolidated parcel from China: what a TSJY…CN number looks like, what each Chinese status means, and when 17FEIA takes over.
 slug: tsjy-tracking
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 TSJY (通世集运) is a consolidation service in China, run by 苏州通世供应链有限公司, a supply chain company in Suzhou. You buy on Chinese shopping sites such as Taobao, Tmall, Pinduoduo, JD or Douyin, and the shops send your goods to TSJY's warehouse in Suzhou. TSJY stores them, packs them together and ships them abroad. Track your TSJY number on [TSJY's site](https://www.tsjy56.com/), under 订单查询 (order search), or paste it in the box above.
@@ -115,7 +115,7 @@ Peek reads TSJY's tracker: every line with its place and time. It leaves out the
 
 When TSJY gives a 17FEIA number, or a line's number whose shape points to one carrier Peek knows, Peek asks that carrier. Until that carrier shows a scan at least as recent as TSJY's newest, Peek stays on TSJY's tracking, and the parcel already shows who delivers it ("Delivery with 17FEIA", or "Announced to 17FEIA, not received yet" while 17FEIA has only the announcement of the parcel, with no scan of its own) and that number. Then Peek follows the parcel there and keeps TSJY's history.
 
-Peek checks every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TSJY, 17FEIA or the shops for you.
+Peek checks up to every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TSJY, 17FEIA or the shops for you.
 
 ## Questions about TSJY tracking
 

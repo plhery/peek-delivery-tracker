@@ -3,7 +3,7 @@ title: nox NachtExpress tracking: statuses, drop-off and contact
 description: Track a nox NachtExpress shipment: what its barcode looks like, what nox's German scans mean, night delivery to your drop-off place, deadlines and contact.
 slug: nox-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 nox (nox NachtExpress) is a German night express company, nox Germany GmbH, based in Langenfeld. It carries spare parts and other urgent goods for businesses. It collects them in the afternoon and delivers them during the night, usually before 8:00, to a place agreed with the recipient: a safe, a garage, a workshop or the boot of a service van. Track a shipment with its barcode on [nox's tracker](https://trackandtrace.app.nox.express/scannungen), or paste the number in the box above. The tracker is in German: the tables below explain it.
@@ -90,7 +90,7 @@ If none does yet, the parcel reads "No tracking history yet" while Peek keeps ch
 
 Peek reads the status, each scan's German wording and time (as German time) and the delivery time. It leaves out the scan place and the remark, and it asks for no postcode, so it doesn't show what the tracker shows after the postcode check. Peek shows no expected delivery day, weight, drop-off place or delivery photo.
 
-Day and night, Peek checks every 10 minutes, or every 2 from 6:00 German time on the day nox scans a shipment out for delivery, while nox's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't set your drop-off place or file a complaint for you.
+Day and night, Peek checks up to every 10 minutes, or every 2 from 6:00 German time on the day nox scans a shipment out for delivery, while nox's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't set your drop-off place or file a complaint for you.
 
 ## Questions about nox tracking
 

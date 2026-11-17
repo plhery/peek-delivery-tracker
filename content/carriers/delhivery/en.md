@@ -3,7 +3,7 @@ title: Delhivery tracking: AWB numbers, statuses and support
 description: Track a Delhivery parcel in India or abroad: what an AWB number looks like, what statuses such as RTO mean, missed deliveries, claims and how to reach support.
 slug: delhivery-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Delhivery is an Indian logistics company that calls itself India's largest fully integrated logistics provider. It delivers online orders for marketplaces and shops to more than 18,850 pin codes, and ships from India to over 220 countries and territories. Track a parcel on [Delhivery's tracking page](https://www.delhivery.com/tracking) with its AWB number, the order ID, an LRN or your mobile number, or paste the AWB in the box above. The AWB comes from the sender: for an online order, look in the shop's shipping SMS or email, or ask the shop.
@@ -86,7 +86,7 @@ Filed under Delhivery, a parcel shows "Waiting for Delhivery" on peektracker.com
 
 It files the lines under its own stages: `Picked Up` shows as "Received by carrier", `In Transit` as "In transit", `Dispatched` as "Out for delivery", `RTO` as "Returned to sender", and `LOST` or a cancellation as "Needs attention". A parcel delivered back to the seller shows as "Returned to sender", not "Delivered".
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Delhivery scans the parcel out for delivery, while Delhivery's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks about once an hour. Alerts: "Every scan", "Important steps" or "Delivery only".
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Delhivery scans the parcel out for delivery, while Delhivery's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks about once an hour. Alerts: "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Delhivery tracking
 

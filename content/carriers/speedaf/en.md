@@ -3,7 +3,7 @@ title: Speedaf Express tracking: numbers, statuses and contacts
 description: Track a Speedaf Express parcel from China to Nigeria, Kenya, Ghana, Pakistan or the UAE: number shapes, what each status means, delivery attempts and contacts.
 slug: speedaf-tracking
 published: 2026-10-28
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Speedaf Express (速达非) is a courier network, founded in 2019, that flies parcels from its warehouses in China to Africa, the Middle East, Pakistan and a few European countries, and delivers them itself. Track a parcel under "Track" on [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in Speedaf's customer app or in the box above. The number is in the shop's shipping details.
@@ -111,7 +111,7 @@ Peek reads Speedaf's own tracking: the status, the history, the destination coun
 
 Speedaf's lines appear as written, in English or else Chinese, minus the courier's, clerk's and signer's names and the courier's phone. Peek also leaves out the proof of delivery, the duty payment link and the box count, and follows only the number you added, not a waybill's other boxes. Speedaf delivers itself, so there's no second carrier.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Speedaf scans the parcel out for delivery, while Speedaf's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". It can't pay duty, rebook a delivery or contact Speedaf or the shop for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Speedaf scans the parcel out for delivery, while Speedaf's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". It can't pay duty, rebook a delivery or contact Speedaf or the shop for you.
 
 ## Questions about Speedaf tracking
 

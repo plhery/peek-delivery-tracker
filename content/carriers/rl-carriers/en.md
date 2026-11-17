@@ -3,7 +3,7 @@ title: R+L Carriers tracking: PRO numbers, statuses and claims
 description: Track an R+L Carriers freight shipment in the US: what a PRO number looks like, what each tracing line means and what to do if freight is late or damaged.
 slug: rl-carriers-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 R+L Carriers is a freight carrier in the United States. In Peek's code, it picks the freight up from the shipper, moves it from terminal to terminal and delivers it from the destination terminal. If a large order or other freight is coming to you with R+L, you track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. R+L's own tracer is the shipment tracing page on rlcarriers.com.
@@ -85,7 +85,7 @@ When R+L's tracer can't be reached or can't read the shipment, Peek asks [tracki
 
 R+L's lines have a date and a time but no time zone. Peek reads each one on the clock of its terminal's town, else of the terminal's state (the main one where a state has more than one), else of the line before or after it, else on Eastern time, and shows every time in your device's time zone.
 
-Peek checks every 10 minutes; a shipment with no new line for two days (12 hours while it still shows "Label created" or "Received by carrier") is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact R+L, the shop or the shipper for you, book a delivery or file a claim.
+Peek checks up to every 10 minutes; a shipment with no new line for two days (12 hours while it still shows "Label created" or "Received by carrier") is checked hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact R+L, the shop or the shipper for you, book a delivery or file a claim.
 
 ## Questions about R+L Carriers tracking
 

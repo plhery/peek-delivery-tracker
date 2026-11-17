@@ -3,7 +3,7 @@ title: InPost tracking: numbers, statuses and locker pickup
 description: Track an InPost parcel in the UK, Poland, Italy or Portugal: what the number looks like, what each update means, how long lockers keep it and who to call.
 slug: inpost-tracking
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-17
 ---
 
 InPost is a parcel locker network that began in Poland and delivers to lockers, shops and homes in the UK, Poland, Italy, Portugal and beyond. Track a parcel on InPost's site for your country, such as [inpost.co.uk/tracking](https://inpost.co.uk/tracking), or paste the number in the box above. The number comes from the shop or seller; the locker code is something else.
@@ -87,7 +87,7 @@ In Spain, Peek follows InPost under its [Mondial Relay](carrier:mondial-relay) e
 
 It reads InPost's service at inposteasy.com, not yet confirmed to answer for UK numbers. You see the status, the newest 20 scans with each town or hub and country on a map, the delivery time and the destination country; InPost gives no expected date. For a 24-digit parcel waiting in a Paczkomat or pickup point, the point's name and address appear once InPost's Polish tracking confirms them, never your code. Peek asks InPost's service for its English wordings, and a parcel waiting at an Italian point may not show "Ready for pickup". Scans without a time zone are left out, and your name, address and phone are never read.
 
-Peek doesn't follow an InPost parcel on to another carrier. It checks every 10 minutes, or every 2 from 6 a.m. local time on the day InPost scans the parcel out for delivery, while InPost's own tracker answers (through tracking services, every 15 minutes), and can notify you of each change. When another carrier takes over the delivery, as InPost does for some parcels from abroad, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek doesn't follow an InPost parcel on to another carrier. It checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day InPost scans the parcel out for delivery, while InPost's own tracker answers (through tracking services, every 15 minutes), and can notify you of each change. When another carrier takes over the delivery, as InPost does for some parcels from abroad, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about InPost tracking
 

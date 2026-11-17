@@ -3,7 +3,7 @@ title: Early Bird tracking: statuses, morning delivery and lockers
 description: Track an Early Bird parcel in Sweden: where the number is, what each status means, night and morning delivery, iBoxen lockers and how to reach Early Bird.
 slug: early-bird-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-17
 ---
 
 Early Bird is a Swedish parcel company. Its couriers bring online orders with the morning newspaper, so your parcel usually comes at night or early in the morning, to your door or your mailbox. Track it on [Early Bird's Track & help page](https://earlybird.se/en/track-and-help) (in Swedish at earlybird.se/spara-och-hjalp), with the link in Early Bird's SMS or email, or paste the number in the box above. The number is in Early Bird's message or in the shop's order information.
@@ -93,7 +93,7 @@ As read on 2 November 2026, Early Bird's [Contact us page](https://earlybird.se/
 
 **When another carrier takes over.** Early Bird's tracking then links to that carrier's. Peek's code knows three: PostNord, DSV and DB Schenker, which Peek files under [DSV](carrier:dsv). The card says "Delivery with PostNord" or "Delivery with DSV", and Peek follows that carrier under the same number once it shows fresh scans. While that carrier has only the announcement of the parcel, with no scan of its own, the card says "Announced to PostNord, not received yet" or "Announced to DSV, not received yet" instead.
 
-Peek checks about every 10 minutes and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek checks up to every 10 minutes and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Early Bird tracking
 

@@ -3,7 +3,7 @@ title: Meiteshun tracking: AMTS numbers, scans and who to ask
 description: Track a Meiteshun Logistics (美特顺) parcel from Shenzhen: what an AMTS number looks like, what its steps mean and why its Delivered step can be written in advance.
 slug: meiteshun-tracking
 published: 2026-10-28
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) is a forwarder in Shenzhen, China. Its numbers start with AMTS and end with FS: if the shop that sent your order gave you one, paste it in the box above. Read Meiteshun's tracking with care: its system writes a parcel's whole journey, delivery included, when the order is created, so a "Delivered" there doesn't prove your parcel arrived.
@@ -83,7 +83,7 @@ Peek holds back a step written more than twelve hours before the time it carries
 
 Peek follows the parcel on Meiteshun's tracker. The one hand-over Peek can take from Meiteshun's record is to [Swiss Post](carrier:swiss-post), when the record names a Swiss Post line and number for a parcel to Switzerland or Liechtenstein. With any other delivering number from the seller, add it as a parcel of its own.
 
-Peek checks every 10 minutes, and up to every 2 minutes on the day a parcel goes out for delivery (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Meiteshun's or Swiss Post's own tracker answers (through tracking services, every 15 minutes), though no Meiteshun step Peek knows gives that status. Once Swiss Post has taken over, Peek follows its pace. After two days with nothing new (or 12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly, which an order whose whole script was written at its creation soon reaches. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes on the day a parcel goes out for delivery (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Meiteshun's or Swiss Post's own tracker answers (through tracking services, every 15 minutes), though no Meiteshun step Peek knows gives that status. Once Swiss Post has taken over, Peek follows its pace. After two days with nothing new (or 12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly, which an order whose whole script was written at its creation soon reaches. It can notify you of every scan, important steps only or "Delivery only", and can't contact Meiteshun or the seller for you.
 
 ## Questions about Meiteshun tracking
 

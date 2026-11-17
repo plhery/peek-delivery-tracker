@@ -3,7 +3,7 @@ title: DPD UK tracking: statuses, Pickup shops and contact
 description: Track a DPD UK parcel: where the 14-digit number is, what each status means, your Predict delivery options, Pickup shops and how to reach DPD.
 slug: dpd-uk-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 DPD UK is a British parcel company that delivers for many online shops. Track a parcel on [DPD's tracking page](https://track.dpd.co.uk/) with the parcel number and your postcode, or paste the number in the box above. The number comes from the shop, from DPD's SMS or email, or from the "sorry we missed you" card.
@@ -84,7 +84,7 @@ DPD UK's scans carry no time zone: Peek reads them on UK time, shows them in you
 
 DPD gives no place for its scans, and Peek doesn't read DPD's expected day or Predict window. It drops your details, references and delivery photos. Peek shows the shop that booked the delivery as "From …", as DPD's page names it, except on a parcel its sender handed in at a Pickup Shop: the account that booked that label didn't send it (on a return label, it's the shop the parcel goes back to). DPD reuses numbers after some months, so an old number can show a newer parcel.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. UK time on the day DPD says the parcel is out for delivery, while DPD UK's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Its alerts can cover every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or delivery day only. It can't change the delivery for you: use DPD's tracking page or app.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. UK time on the day DPD says the parcel is out for delivery, while DPD UK's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Its alerts can cover every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or delivery day only. It can't change the delivery for you: use DPD's tracking page or app.
 
 ## Questions about DPD UK tracking
 

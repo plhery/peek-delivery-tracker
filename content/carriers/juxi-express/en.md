@@ -3,7 +3,7 @@ title: Juxi Express tracking: JXC numbers, delivery and help
 description: Track a Juxi Express (SHJX) parcel from China: what the JXC waybill looks like, why Juxi has no tracker, who delivers it and who to ask when it stalls.
 slug: juxi-express-tracking
 published: 2026-10-21
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Juxi Express (上海驹隙国际物流有限公司, Shanghai Juxi International Freight Forwarding Co., Ltd.) is a Shanghai forwarder that ships parcels abroad for online sellers in China, on its own lines and through the post. It has no tracking page of its own: paste the number in the box above, or look it up on a tracking service such as 17TRACK, which lists Juxi as SHJX. The seller who booked Juxi has the number and gives it with your order's shipping details.
@@ -82,7 +82,7 @@ Juxi has no tracking page left for Peek to read: the tracking button on its home
 
 If a tracking service names the carrier that took the parcel over, with that carrier's own number, Peek shows "Delivery with" and that carrier's name, with its number. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. Where Peek can read that carrier's own tracking, it asks there too, and once a scan there is at least as new as the newest in the history, it follows the parcel there and keeps the earlier scans.
 
-While Peek follows the parcel through tracking services, it checks every 15 minutes, out for delivery too. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without a new scan (12 hours while it shows "Label created" or "Received by carrier"), it checks hourly. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
+While Peek follows the parcel through tracking services, it checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. Peek can notify you of every scan, important steps only or "Delivery only". It can't contact Juxi Express or the seller for you.
 
 ## Questions about Juxi Express tracking
 

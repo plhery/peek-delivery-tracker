@@ -3,7 +3,7 @@ title: CVC tracking (Си Ви Си): follow a parcel in Bulgaria
 description: Track a CVC (Си Ви Си, e-CVC) parcel in Bulgaria with Peek: how to add the number and pick CVC, what each status means and what to do when it stops.
 slug: cvc-tracking
 published: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 CVC is a carrier in Bulgaria. Peek's catalog also knows it as Си Ви Си, Си Ви Си ЕООД and e-CVC. To track a CVC parcel, paste a link to CVC's tracker in the box above, or paste its number and pick CVC as the carrier: Peek can't tell a CVC number from its shape. The number comes from the shop or the person who sent the parcel. CVC's own tracker is at my.e-cvc.bg/track, in Bulgarian: it asks for the waybill number and has a single button, "Провери" (Check).
@@ -76,7 +76,7 @@ If you leave the carrier to Peek, it looks the number up with tracking services.
 
 **Another carrier.** In the parcel's first 30 days, Peek also asks the carriers whose number shapes fit yours. If one of them shows the parcel moving under that number, Peek moves the parcel there and says "Swapped automatically from CVC".
 
-**How often.** While someone waits for the parcel (notifications on, or you looked in the last hour), Peek checks it every 15 minutes, the delivery day included. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** Peek checks the parcel hourly, and every 3 hours once a day passes without a new line. On the day it's out for delivery, while someone waits for it (notifications on, or you looked in the last hour), Peek checks up to every 15 minutes. Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact CVC, the shop or the sender for you, change the delivery or file a claim.
 

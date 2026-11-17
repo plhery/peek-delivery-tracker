@@ -3,7 +3,7 @@ title: Hrvatska pošta tracking: statuses, lockers and contacts
 description: Track a Hrvatska pošta (Croatian Post) parcel: the item number, what the English statuses mean, paketomat lockers, post office pickup, claims and contacts.
 slug: hrvatska-posta-tracking
 published: 2026-10-13
-updated: 2026-11-09
+updated: 2026-11-17
 ---
 
 Hrvatska pošta (Croatian Post) is Croatia's national post, with its Paket24 parcel service. Track an item on its [English tracking page](https://posiljka.posta.hr/en/tracking) (the plain posiljka.posta.hr address opens in Croatian), or paste the number in the box above. The number comes from the sender: the shop's shipping email or order page, or Hrvatska pošta's own SMS and notices.
@@ -94,7 +94,7 @@ You can't call post offices or postmen directly.
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Croatia (or names no destination and you're in Croatia), Peek also asks Hrvatska pošta with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Hrvatska pošta straight away, pick "Hrvatska pošta" with "Change".
 
-Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks every 10 minutes (every 2 once out for delivery, every 5 when it has to open Hrvatska pošta's site in a browser) and can notify you when the status changes. The faster checks run on the day Hrvatska pošta scans the parcel out for delivery, from 6 a.m. Croatian time, and only while Hrvatska pošta's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+Peek lists Hrvatska pošta's own history, in the English wording of its English site. Hrvatska pošta's times carry no time zone, so Peek dates scans at Croatian post offices and parcel lockers on Croatian time, and scans abroad on the local time of the facility's country when its office code shows one. Peek can show the post office or parcel locker where the parcel waits (by name) and the weight. There's no expected delivery day, and postcodes are left out. Peek checks up to every 10 minutes (every 2 once out for delivery, every 5 when it has to open Hrvatska pošta's site in a browser) and can notify you when the status changes. The faster checks run on the day Hrvatska pošta scans the parcel out for delivery, from 6 a.m. Croatian time, and only while Hrvatska pošta's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Questions about Croatian Post tracking
 

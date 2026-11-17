@@ -3,7 +3,7 @@ title: PIN AG tracking: registered letters, parcels and pickup
 description: Track a PIN AG letter or parcel in Germany: which items PIN tracks, what its German statuses mean, depot pickup, missing mail and how to contact PIN.
 slug: pin-ag-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 PIN AG is a postal company in Berlin, separate from Deutsche Post, with about 1,300 staff. It delivers letters, registered letters (Einschreiben), parcels and orders from Amazon, medimops and rebuy. Only some of these items can be tracked. Track one on [PIN AG's tracking page](https://sendungsverfolgung.pin-ag.de/) (Sendungsverfolgung) or paste the number in the box above. The number comes from the sender: a shop puts it in its shipping email, and for a registered letter you ask whoever sent it.
@@ -91,7 +91,7 @@ Paste the number in [Peek](/), with or without brackets: Peek joins a bracketed 
 
 **What Peek shows.** PIN's status and each step with its time, in PIN's German words, on German time. `Sortierzentrum`, `Zustelldepot` and the status with no further updates show as "In transit", `In Zustellung` as "Out for delivery", `Zugestellt` as "Delivered" and `Unzustellbar` as "Needs attention". An item waiting at the depot for you (PIN's tracking page then shows the depot's address and opening hours) shows as "Ready for pickup", whatever step PIN files it under. PIN gives no scan places, delivery estimate or weight. Peek leaves out your address and the depot's address: to see the depot, use "Open the PIN AG website", which opens your number on PIN's tracking page. A standard letter has no tracking at PIN, so Peek can't follow it either.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day PIN scans the item out for delivery, while PIN's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only".
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day PIN scans the item out for delivery, while PIN's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about PIN AG tracking
 

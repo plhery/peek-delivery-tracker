@@ -3,7 +3,7 @@ title: DAI Post tracking: numbers, statuses and delivery help
 description: Track a DAI Post (Parcel Right) parcel in Australia, New Zealand or Singapore: its numbers, what each status means, authority to leave, pickup and contacts.
 slug: dai-post-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-17
 ---
 
 DAI Post is an Australian delivery company for online shops, started in Melbourne in 2000. It brings parcels from the US, the UK, Europe and Asia to buyers in Australia, New Zealand and Singapore. Its own final-mile delivery is called Parcel Right. Track a parcel on DAI Post's [tracking page](https://daipost.com/track), or paste the number in the box above. The number is in the shop's order confirmation. Can't find it? Ask the shop.
@@ -97,7 +97,7 @@ DAI Post's channels, as read on 1 November 2026:
 
 Peek shows the status, each line in DAI Post's words, the town and country of each scan, the expected delivery date when DAI Post gives one, and the delivery time. It shows no pick up point, service name, weight or proof of delivery. "Open the DAI Post website" opens the number on DAI Post's tracker. In Peek's code, some [Asendia](carrier:asendia) parcels, and some [ePost Global](carrier:epost-global) parcels to New Zealand, reach DAI Post: their tracking shows its scans.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DAI Post scans the parcel out for delivery, while DAI Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact DAI Post or the shop for you.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DAI Post scans the parcel out for delivery, while DAI Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact DAI Post or the shop for you.
 
 ## Questions about DAI Post tracking
 

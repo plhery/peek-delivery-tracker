@@ -3,7 +3,7 @@ title: Canada Post tracking: numbers, statuses and notice cards
 description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and customs.
 slug: canada-post-tracking
 published: 2026-10-15
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Canada Post is the Canada Post Corporation, the federal Crown corporation that runs Canada's postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app, or paste the number in the box above. The number comes from the sender, usually in the shop's shipping email: Canada Post can't find a parcel by your name or address. If it ends in `CA` and you follow the parcel from outside Canada, Peek can also ask your country's post with the same number.
@@ -104,7 +104,7 @@ Once a parcel from Canada is with your country's post, ask that post about deliv
 
 Peek asks Canada Post directly, without a browser. You see the status, the history with the place of each scan (town and province in Canada), the expected delivery day, a time window once the parcel is out for delivery in Canada and Canada Post gives one, the delivery time and, when Canada Post shows it in full, the sender's name. Peek leaves out delivery options, addresses, signatures and delivery photos. Times are shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
-Peek checks every 10 minutes, and every 2 minutes once Canada Post itself reports the parcel out for delivery that day, from 6 a.m. local time or, when Canada Post gives a time window, from half an hour before it opens; through tracking services, every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After 12 hours without a new scan at "Label created" or "Received by carrier", or 48 hours at any other step, it checks hourly. For notifications, choose "Every scan", "Important steps" or "Delivery only".
+Peek checks up to every 10 minutes, and up to every 2 minutes once Canada Post itself reports the parcel out for delivery that day, from 6 a.m. local time or, when Canada Post gives a time window, from half an hour before it opens; through tracking services, every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After 12 hours without a new scan at "Label created" or "Received by carrier", or 48 hours at any other step, it checks hourly. For notifications, choose "Every scan", "Important steps" or "Delivery only".
 
 **Into Canada.** For a parcel posted abroad with an international postal number, Peek also asks Canada Post with the same number once the sending post names Canada as the destination or, when it names none, if you follow the parcel from Canada. Once Canada Post shows a scan at least as new as the sending post's newest, Peek follows the parcel there and keeps the earlier history. A number starting with `L` and ending `CH` that Peek follows with Swiss Post is never handed to Canada Post.
 

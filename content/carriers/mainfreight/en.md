@@ -3,7 +3,7 @@ title: Mainfreight tracking: consignment numbers and statuses
 description: Track a Mainfreight consignment in New Zealand, Australia or the US: what its numbers look like, what each status means and what to do when freight is late.
 slug: mainfreight-tracking
 published: 2026-11-03
-updated: 2026-11-10
+updated: 2026-11-17
 ---
 
 Mainfreight moves freight by road, air and sea. Peek's catalog lists it for New Zealand (its home), Australia and the United States; its tracker also covers road freight in Europe and container moves. To track freight or a large item coming to you with Mainfreight, paste the consignment number from whoever booked it in the box above. Mainfreight's own tracker is on www.mainfreight.com.
@@ -116,7 +116,7 @@ Peek shows the status, each step in Mainfreight's wording with its place, and th
 
 Road steps that name a New Zealand, Australian or US time zone (`NZDT`, `AEST`, `PST` and the like) give their exact time. Others, such as air and ocean milestones, have no zone: Peek reads them on the clock of the step's place, the steps around it or the destination, else New Zealand's, so now and then one can be off.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Mainfreight scans the shipment out for delivery, while Mainfreight's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Mainfreight for you, book a delivery or file a claim.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Mainfreight scans the shipment out for delivery, while Mainfreight's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Mainfreight for you, book a delivery or file a claim.
 
 ## Questions about Mainfreight tracking
 

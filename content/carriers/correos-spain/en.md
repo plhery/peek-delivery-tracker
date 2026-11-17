@@ -3,7 +3,7 @@ title: Correos tracking: Spain's post, numbers and statuses
 description: Track a Correos parcel in Spain: what the tracking number looks like, what the Spanish statuses mean, missed deliveries, Citypaq, customs and contacts.
 slug: correos-tracking
 published: 2026-10-13
-updated: 2026-11-10
+updated: 2026-11-17
 ---
 
 Correos is Spain's national post. Track a parcel on its English [delivery tracker](https://www.correos.es/es/en/tools/tracker/items) or paste the number in the box above. The number comes by email, SMS or on the paper notice. This page covers Correos in Spain, not Chile or Mexico; [Correos Express](carrier:correos-express) is a sister company with its own numbers.
@@ -79,7 +79,7 @@ Correos's channels, as read on 13 October 2026, are the same for English speaker
 
 Peek shows Correos's statuses in Correos's words: in Spanish, Portuguese or French if you use Peek in one of those, in English otherwise. It shows the latest 20 scans (without places), weight and dimensions, the delivered time and, while the parcel waits, the post office's name and address. It drops your name, address and signature. It shows no expected delivery date, and it reads times on Madrid's clock, except a Canary Islands delivery office's, on Canary time, and the origin post's scans on an item from abroad, on that country's clock.
 
-A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks every 10 minutes (every 2 from 6 a.m. local time on the day Correos scans the parcel out for delivery, while Correos's own tracker answers; through tracking services, every 15 minutes) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
+A postal number from abroad bound for Spain can be followed to Correos once Correos shows progress. Peek checks up to every 10 minutes (up to every 2 from 6 a.m. local time on the day Correos scans the parcel out for delivery, while Correos's own tracker answers; through tracking services, every 15 minutes) and can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't pay customs or change a delivery.
 
 ## Questions about Correos tracking
 

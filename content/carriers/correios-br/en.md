@@ -3,7 +3,7 @@ title: Correios Brazil tracking: codes, statuses and customs
 description: Track a Correios parcel to or from Brazil: what BR codes look like, what the Portuguese statuses mean, import taxes, Minhas Importações and contacts.
 slug: correios-brazil-tracking
 published: 2026-10-23
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) is Brazil's post. A parcel sent from Brazil keeps its Correios code all the way, and the post of the country it's going to delivers it. A parcel bought abroad keeps the sending post's code, and Correios delivers it in Brazil. Track it on [Correios' tracker](https://rastreamento.correios.com.br/app/index.php), which takes up to 20 codes or a CPF or CNPJ and asks you to type the text from an image, or paste the code in the box above.
@@ -106,7 +106,7 @@ Peek fetches Correios' history and shows the status, each scan with its town and
 
 Correios doesn't tell Peek where a parcel is going, so outside Brazil Peek also asks your national post (USPS, Royal Mail, Canada Post, An Post or Australia Post, for example) with the same code and switches once it shows newer scans, keeping Correios' history. A parcel coming into Brazil under another post's code is followed on that post; Peek also asks Correios once that post names Brazil as the destination (or, if it names none, when you're in Brazil).
 
-Peek checks every 10 minutes, or every 2 (every 5 when it has to open Correios' tracker in a browser) from 6 a.m. local time on the day Correios scans the parcel out for delivery, while Correios' own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Correios, pay taxes or file a claim for you.
+Peek checks up to every 10 minutes, or every 2 (every 5 when it has to open Correios' tracker in a browser) from 6 a.m. local time on the day Correios scans the parcel out for delivery, while Correios' own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Correios, pay taxes or file a claim for you.
 
 ## Questions about Correios Brazil tracking
 

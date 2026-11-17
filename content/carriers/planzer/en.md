@@ -3,7 +3,7 @@ title: Planzer tracking: what each status means and what to do
 description: Track a Planzer parcel in Switzerland: where the number is, why Shipped means delivered, parcel shops, missed deliveries and how to reach Planzer.
 slug: planzer-tracking
 published: 2026-10-10
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Planzer Paket (Planzer Parcel on its English pages) is the Swiss Planzer group's parcel service, delivering senders' parcels of up to 30 kg in Switzerland and Liechtenstein. Your tracking number is in the email or SMS titled "A delivery is on its way to you", from the shop or from Planzer. Its link opens Planzer's recipient portal, or paste the number in the box above.
@@ -86,7 +86,7 @@ As listed on Planzer Paket's and Quickpac's pages on 9 October 2026:
 
 For a 13-digit number starting 99990, it asks for the complete shared link (trackandtrace.planzergroup.com/shared/…, including its accessKey), then reads the steps reached so far with their times and an expected date.
 
-It checks every 10 minutes, and every 2 minutes on the day Planzer scans the parcel out for delivery, from 6 am Swiss time, while Planzer's own tracking answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. Planzer's tracking gives no scan places, so there's little to pin on the map. Peek can't contact Planzer for you.
+It checks up to every 10 minutes, and up to every 2 minutes on the day Planzer scans the parcel out for delivery, from 6 am Swiss time, while Planzer's own tracking answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. Planzer's tracking gives no scan places, so there's little to pin on the map. Peek can't contact Planzer for you.
 
 ## Questions about Planzer tracking
 

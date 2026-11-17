@@ -3,7 +3,7 @@ title: CityMail tracking: numbers, statuses and delivery in Sweden
 description: Track a CityMail parcel in Sweden: what the BCM number looks like, what CityMail's Swedish statuses mean, delivery times, service points and contact.
 slug: citymail-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 CityMail is a Swedish company that delivers parcels and letters. It started in 1991 and has 1,200 employees, 104 local offices and four terminals. Web shops send parcels with it, and companies send letters, advertising and magazines. Track a parcel on [CityMail's tracking page](https://www.citymail.se/spara-paket/) (Spåra paket), with the link in CityMail's SMS, or paste the number in the box above. The tracking number is in the SMS or email CityMail sent you about the parcel.
@@ -83,7 +83,7 @@ Peek can't contact CityMail or the shop for you. As read on 1 November 2026:
 
 Peek also shows the sender's name and, while the parcel is on its way, CityMail's estimated delivery day. It leaves out your postcode and CityMail's proof of delivery: for those, use "Open the CityMail website", which opens your number on CityMail's tracker.
 
-Peek checks about every 10 minutes, and it can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek checks up to every 10 minutes, and it can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about CityMail tracking
 

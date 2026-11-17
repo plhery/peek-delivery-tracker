@@ -3,7 +3,7 @@ title: Transpress tracking (Транспрес): track a parcel in Bulgaria
 description: Track a Transpress (Транспрес) parcel in Bulgaria: how to add the number in Peek and pick Transpress, delivery attempts, returns, claims and contacts.
 slug: transpress-tracking
 published: 2026-11-13
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste a link to Transpress's tracker in the box above, or paste its number and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape.
@@ -101,7 +101,7 @@ If you leave the carrier to Peek, it asks tracking services, and files the parce
 
 **Another carrier.** In the parcel's first 30 days, Peek also asks the carriers whose number shapes fit yours. If one of them shows the parcel moving under that number, Peek moves the parcel there and says "Swapped automatically from Transpress".
 
-**How often.** While someone waits for the parcel (notifications on, or you looked in the last hour), Peek checks it every 15 minutes, the delivery day included. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** Peek checks the parcel hourly, and every 3 hours once a day passes without news. On the day it's out for delivery, Peek checks up to every 15 minutes while someone waits for it (notifications on, or you looked in the last hour). Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact Transpress, the shop or the sender for you, change the delivery or file a claim.
 

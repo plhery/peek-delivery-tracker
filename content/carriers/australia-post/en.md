@@ -3,7 +3,7 @@ title: Australia Post tracking: numbers, statuses and lockers
 description: Track an Australia Post parcel: where the tracking number is, what each status means, Post Office and Parcel Locker pickup, late parcels and contacts.
 slug: australia-post-tracking
 published: 2026-10-15
-updated: 2026-11-09
+updated: 2026-11-17
 ---
 
 Australia Post is Australia's national postal service. Track a parcel on [auspost.com.au/mypost/track](https://auspost.com.au/mypost/track), in the AusPost app or by pasting the number in the box above, no account needed. The number comes from the sender: the shop's order confirmation, an email from Australia Post or your Post Office receipt.
@@ -97,7 +97,7 @@ If Australia Post refuses Peek's plain request, a browser on Peek's server opens
 
 Peek shows the status, each scan with its place on a map, the time of delivery, the destination country and the name of the Post Office or Parcel Locker holding the parcel. Statuses stay in Australia Post's English; delivered ones read "Delivered". Peek drops the recipient, the address and delivery photos. While the parcel is on its way, it shows Australia Post's expected delivery date, or its range of days, until that date has passed, and on the day the delivery time slot when Australia Post gives one; it hides the date after a failed delivery or a problem, and once the parcel is delivered, returned or waiting for collection. When Australia Post gives no date, as for a parcel posted in a street posting box or with a hand-written address, Peek shows none either; Australia Post's own tracking tool can still estimate one from your postcode. It can't redirect a parcel or change a locker.
 
-It checks every 10 minutes, and up to every 2 minutes (every 5 while it needs the browser) once Australia Post scans the parcel out for delivery: on that day, from 6 a.m. local time or, when Australia Post gives a delivery window, from half an hour before it opens, while Australia Post's own tracker answers. Through tracking services it checks every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
+It checks up to every 10 minutes, and up to every 2 minutes (every 5 while it needs the browser) once Australia Post scans the parcel out for delivery: on that day, from 6 a.m. local time or, when Australia Post gives a delivery window, from half an hour before it opens, while Australia Post's own tracker answers. Through tracking services it checks hourly, and up to every 15 minutes on the delivery day. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. A parcel posted abroad with a postal number bound for Australia can be followed on Australia Post once Australia Post shows progress.
 
 ## Questions about Australia Post tracking
 

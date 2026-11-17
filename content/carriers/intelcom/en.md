@@ -3,7 +3,7 @@ title: Intelcom / Dragonfly tracking: numbers, statuses, contact
 description: Track an Intelcom or Dragonfly parcel in Canada: where the tracking number is, what the cheerful statuses mean, missed deliveries, scams and phone numbers.
 slug: intelcom-dragonfly-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Intelcom is a Montreal last-mile courier that delivers online orders across Canada for shops such as Amazon, Walmart and Canadian Tire. Outside Quebec it now trades as Dragonfly (Dragonfly Shipping), so the same parcel may say either name. Track it on dragonflyshipping.ca or intelcom.ca with the number from the shop's shipping email or order page, or paste that number in the box above.
@@ -85,7 +85,7 @@ Agents see the same tracking information you do, so have the number ready and ex
 
 Peek reads Dragonfly's tracking directly and shows the status in its English words, as written, even for Quebec parcels. Each step has its exact time; Dragonfly gives no place for it. Peek shows the expected delivery, a time window once the parcel is with the driver and a day before that, and for big shops such as Amazon, Walmart or Canadian Tire the sender's name. It drops the driver's name, your details and the proof of delivery, and shows no pickup point or weight. It can't change the delivery or show the photo.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Dragonfly scans the parcel out for delivery, evening deliveries included (when Dragonfly gives a time window, from half an hour before it opens), while Dragonfly's own tracker answers; through tracking services, every 15 minutes. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Dragonfly scans the parcel out for delivery, evening deliveries included (when Dragonfly gives a time window, from half an hour before it opens), while Dragonfly's own tracker answers; through tracking services, every 15 minutes. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Intelcom tracking
 

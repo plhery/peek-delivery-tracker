@@ -3,7 +3,7 @@ title: FedEx tracking: numbers, statuses and missed deliveries
 description: Track a FedEx parcel: what the 12-digit tracking number looks like, what Delivery exception and other scans mean, customs charges and your rights if it's lost.
 slug: fedex-tracking
 published: 2026-10-13
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 Paste a FedEx tracking number, or a FedEx tracking link, in the box above to follow the parcel. FedEx's own tracking is on fedex.com.
@@ -70,7 +70,7 @@ Marked `Delivered` but not there? FedEx's delivery scan names who signed, which 
 
 Peek opens fedex.com's tracking page in a browser on its own server. When FedEx refuses, or asks for recipient verification, tracking services fill in.
 
-It shows the status, each scan with its place and the time FedEx gives it (in your device's time zone), the route through those places on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address when FedEx gives them. It checks every 10 minutes, or every 5 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. The faster checks run from 6 a.m. local time on the day FedEx scans the parcel out for delivery, while FedEx's own tracker answers; through tracking services, Peek checks every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English. Three come in Peek's own words, which read the same in English: the delivered scan, shown as "Delivered" because FedEx's line names who signed, and scans reading exactly `Ready for pickup` or `Shipment exception`.
+It shows the status, each scan with its place and the time FedEx gives it (in your device's time zone), the route through those places on a map, the expected delivery day, the delivered time and, while the parcel waits, the FedEx location's name and address when FedEx gives them. It checks up to every 10 minutes, or every 5 minutes once the parcel is out for delivery, and can notify you at every scan, at important steps or on delivery day only. The faster checks run from 6 a.m. local time on the day FedEx scans the parcel out for delivery, while FedEx's own tracker answers; through tracking services, Peek checks every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It drops your name and address, the shipper, the signature, weight and dimensions. Scans show in FedEx's English. Three come in Peek's own words, which read the same in English: the delivered scan, shown as "Delivered" because FedEx's line names who signed, and scans reading exactly `Ready for pickup` or `Shipment exception`.
 
 Most Ground Economy parcels are delivered by FedEx itself. When FedEx says the [US Postal Service](carrier:usps) has one, Peek follows it there ("Delivery with USPS").
 

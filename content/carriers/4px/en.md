@@ -3,7 +3,7 @@ title: 4PX tracking: numbers, statuses and who to contact
 description: Track a 4PX parcel from China: what a 4PX number looks like, what each status means, who delivers the last mile and who to ask when tracking stalls.
 slug: 4px-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 4PX (递四方速递, 4PX Express Co., Ltd.) is a cross-border logistics company based in Shenzhen, China, that ships parcels abroad for online sellers and hands them to a carrier in your country for the last mile. Track the number on 4PX's own site, [track.4px.com](https://track.4px.com/), or in the box above. The number comes from the shop or marketplace you bought from, in its shipping details for your order.
@@ -76,7 +76,7 @@ As read on 11 October 2026, 4PX's tracking site lists one contact for everyone, 
 
 It reads 4PX in English and shows the status, the history with the place of each scan on a map, the delivery time, the destination country and the local carrier with its number. When that carrier is in Peek's list (USPS, for example), the parcel can be followed there once it shows newer progress. `Out for delivery` and `Delivery attempt unsuccessful` appear in Peek's own words; other lines as 4PX writes them. 4PX gives no expected delivery date, pickup point details or weight.
 
-Scan times are read in 4PX's time zones, a scan without one on the clock of its place, and shown in your device's time zone. Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 4PX's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact 4PX or the shop for you.
+Scan times are read in 4PX's time zones, a scan without one on the clock of its place, and shown in your device's time zone. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while 4PX's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact 4PX or the shop for you.
 
 ## Questions about 4PX tracking
 

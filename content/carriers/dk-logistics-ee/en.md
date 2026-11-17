@@ -3,7 +3,7 @@ title: DK Logistics tracking: waybill, delivery and contact
 description: Track a DK Logistics (DKL) shipment: which waybill number to use, what the Tallinn courier and forwarder carries, customs on imports and who to contact.
 slug: dk-logistics-tracking
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 DK Logistics (DKL, the Estonian company DK Logistics OÜ) is an international courier and freight forwarder with its head office in Tallinn. It carries express mail, small parcels and freight to and from Estonia, Latvia and Lithuania, and works with courier and transport companies in Europe and the CIS countries to reach the rest of the world. Track a shipment with its waybill number on dkl.ee, or paste the number in the box above.
@@ -73,7 +73,7 @@ If you leave the carrier open, Peek looks for it through tracking services. When
 
 DK Logistics has no tracker for Peek to read. So for a parcel filed under DK Logistics, Peek asks ParcelsApp, Ship24 and 17TRACK in turn (Ship24 first for a ten-digit number) and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind DKL's own, and for some shipments there's nothing at all. Once a service has the parcel, its tracking link opens that service's page for the number; until then, the parcel has no tracking link. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks every 15 minutes, out for delivery too; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact DK Logistics or the sender for you.
+Peek checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the parcel is out for delivery; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact DK Logistics or the sender for you.
 
 ## Questions about DK Logistics tracking
 

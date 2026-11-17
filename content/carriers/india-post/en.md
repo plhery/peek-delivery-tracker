@@ -3,7 +3,7 @@ title: India Post tracking: Speed Post numbers and statuses
 description: Track an India Post or Speed Post item: what an IN number looks like, what each status means, delivery times, parcels abroad, complaints and who to call.
 slug: india-post-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 India Post is the Department of Posts, India's national postal service, with 164,999 post offices: the largest postal network in the world, it says. Within India it runs Speed Post, registered mail and India Post Parcel; abroad, EMS (International Speed Post), tracked packets and air parcels. Track an item in the box on [indiapost.gov.in](https://www.indiapost.gov.in/), which asks for a CAPTCHA, or paste the number in the box above. India Post calls it the article barcode number; for an online order, ask the seller for it.
@@ -87,7 +87,7 @@ Peek shows each line in India Post's wording, with the office and, in India, its
 
 When India Post names the destination country, or names none and you track from outside India, Peek also asks a carrier it knows there with the same `IN` number, such as USPS, Royal Mail, Canada Post, Australia Post, [DHL](carrier:dhl) in Germany or [La Poste](carrier:la-poste) in France. It switches to that carrier once it has fresh scans, keeping India Post's history. Peek knows one for most of Europe and some other countries, including NZ Post in New Zealand and Qatar Post in Qatar, but none for the UAE, Kuwait, Oman, Singapore, Malaysia or Sri Lanka. It doesn't ask India Post about a number another post issued: picking India Post for one shows "doesn’t issue numbers like this one".
 
-Peek checks every 10 minutes, every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while MySpeedPost or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes); through other tracking services, it's every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". If the parcel stalls while India Post has it, "Get help from India Post" opens India Post's Contact Us page. Peek can't contact India Post, your post or the shop for you.
+Peek checks up to every 10 minutes, up to every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while MySpeedPost or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS up to every 30 minutes); through other tracking services, it's every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". If the parcel stalls while India Post has it, "Get help from India Post" opens India Post's Contact Us page. Peek can't contact India Post, your post or the shop for you.
 
 ## Questions about India Post tracking
 

@@ -3,7 +3,7 @@ title: Chunghwa Post (Taiwan Post) tracking: numbers and statuses
 description: Track a Chunghwa Post parcel between Taiwan and Europe: what a TW number looks like, what the Chinese statuses mean, where to follow it and who to ask.
 slug: chunghwa-post-tracking
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-17
 ---
 
 Chunghwa Post (中華郵政) is Taiwan's national post, a government-owned company that also runs savings accounts and life insurance. Track an item on its [Track & Trace Service](https://postserv.post.gov.tw/pstmail/main_mail.html?targetTxn=EB500201), in English or Chinese, or paste the number in the box above. The number is on the sender's posting receipt, so for a parcel from Taiwan, ask the sender or the shop for it. The tracker asks for a picture code (Captcha) and only covers items posted in the past six months.
@@ -107,7 +107,7 @@ Peek reads Chunghwa Post's international tracker and shows each scan in Chinese,
 
 For a number ending in `TW`, Peek also asks the national post of the country you track it from, with the same number: Poste Italiane from Italy, DHL from Germany, Correos from Spain, Royal Mail from the UK. It switches to that post once it shows fresh scans, and keeps Chunghwa Post's history. The other way round, when your post's tracking names Taiwan as the destination, Peek asks Chunghwa Post with your post's number, unless it starts with U.
 
-Peek checks every 10 minutes, every 2 minutes once the parcel is out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while Chunghwa Post's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes); through tracking services, it's every 15 minutes. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Chunghwa Post, your post or the shop for you.
+Peek checks up to every 10 minutes, up to every 2 minutes once the parcel is out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while Chunghwa Post's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes); through tracking services, it's every 15 minutes. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Chunghwa Post, your post or the shop for you.
 
 ## Questions about Chunghwa Post tracking
 

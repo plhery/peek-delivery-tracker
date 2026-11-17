@@ -3,7 +3,7 @@ title: Evri tracking: statuses, ParcelShops and missed deliveries
 description: Track an Evri parcel in the UK: where to find the 16-character number, what Evri's statuses mean, calling cards, ParcelShops, lockers and how to reach Evri.
 slug: evri-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Evri is the UK parcel carrier known as Hermes UK until March 2022. Track a parcel on [evri.com](https://www.evri.com/track-a-parcel) with its 16-character tracking number or a calling card's 8-digit number, or paste the barcode or Evri's tracking link in the box above. The sender usually emails you the number; Evri's texts and emails carry it too.
@@ -74,7 +74,7 @@ Evri lists these UK channels (read 10 November 2026), and none for Ireland or el
 
 You see the status, the history, the sender's name when it's a business and, while out for delivery, Evri's window in UK time; no earlier date. Evri gives no scan places, so the map stays empty. A courier delivery shows as "Delivered", without where it was left. Any other scan naming the recipient reads "Delivery update", and the rest keep Evri's own sentence, not the headlines above. A parcel waiting at a ParcelShop or Locker shows as "Ready for pickup", and one collected from a ParcelShop as "Delivered". Your name, address, the delivery photo and collection codes are dropped. Scan times show in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
 
-Peek checks every 10 minutes, or every 2 once out for delivery (every 5 when it has to open Evri's tracker in a browser), and can notify you of "Every scan", "Important steps" or "Delivery only". The faster checks run on the day Evri scans the parcel out for delivery, from 6 a.m. UK time (once Evri sends its window, from half an hour before it opens), and only while Evri's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers.
+Peek checks up to every 10 minutes, or every 2 once out for delivery (every 5 when it has to open Evri's tracker in a browser), and can notify you of "Every scan", "Important steps" or "Delivery only". The faster checks run on the day Evri scans the parcel out for delivery, from 6 a.m. UK time (once Evri sends its window, from half an hour before it opens), and only while Evri's own tracker answers; through tracking services, it's every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow parcels to other carriers.
 
 ## Questions about Evri tracking
 

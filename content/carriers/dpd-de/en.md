@@ -3,7 +3,7 @@ title: DPD tracking in Germany: what statuses mean and what to do
 description: Track a DPD parcel in Germany: where the 14-digit number is, what DPD's English statuses mean, delivery windows, Pickup parcelshops and who to contact.
 slug: dpd-tracking-germany
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 DPD in Germany is DPD Deutschland GmbH, a parcel carrier in the Geopost network, with over 10,300 Pickup parcelshops. Track a parcel on DPD's tracking page with its 14-digit parcel number, adding your postcode for the details, or paste the number in the box above. It's in the shop's shipping confirmation and in DPD's email or SMS.
@@ -80,7 +80,7 @@ As listed on DPD Germany's pages on 10 October 2026:
 
 An optional "Delivery postcode" (5 digits) goes to DPD and, when needed, to tracking services. Without it, Peek reads DPD's German app: scans with their town, weight, size, the expected day or window and, while the parcel waits, the Pickup parcelshop or station's name and address. With it, Peek reads DPD's verified tracking instead: the sender's name, but no size or Pickup address. If DPD refuses the postcode, only a short summary is left, with no warning.
 
-Peek checks every 10 minutes (every 2 on the day DPD scans the parcel out for delivery, from 6 a.m. local time or, when DPD gives a window, from half an hour before it opens, while DPD's own tracker answers; through tracking services, every 15 minutes), maps each scan and can notify you. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Statuses stay in DPD's English; a scan naming who received the parcel reads "Delivery update". Your name, address and proof of delivery are dropped. DPD's times carry no time zone: Peek reads them on German time, and scans abroad on their country's time. Once DPD places the parcel in another country, Peek keeps following it under DPD Germany, from DPD's group-wide tracking and, where it can, from that country's DPD.
+Peek checks up to every 10 minutes (up to every 2 on the day DPD scans the parcel out for delivery, from 6 a.m. local time or, when DPD gives a window, from half an hour before it opens, while DPD's own tracker answers; through tracking services, every 15 minutes), maps each scan and can notify you. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. Statuses stay in DPD's English; a scan naming who received the parcel reads "Delivery update". Your name, address and proof of delivery are dropped. DPD's times carry no time zone: Peek reads them on German time, and scans abroad on their country's time. Once DPD places the parcel in another country, Peek keeps following it under DPD Germany, from DPD's group-wide tracking and, where it can, from that country's DPD.
 
 ## Questions about DPD tracking
 

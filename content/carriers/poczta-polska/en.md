@@ -3,7 +3,7 @@ title: Poczta Polska tracking: numbers, statuses and pickups
 description: Track a Poczta Polska or Pocztex parcel in English: the number shapes, what each status means, notices, pickup points, lockers, customs and contacts.
 slug: poczta-polska-tracking
 published: 2026-10-11
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Poczta Polska is Poland's state-owned postal company, and Pocztex is its courier service. Track a parcel or registered letter on Poczta Polska's eMonitoring page, which has an English version, or paste the number in the box above. The number is the one on the sender's posting confirmation, so the shop that sent it has it, and Poczta Polska's own SMS and notices repeat it.
@@ -95,7 +95,7 @@ As read on 11 October 2026 on Poczta Polska's English and Polish pages:
 
 Peek shows the English wordings as written (Poczta Polska's Polish ones if you use Peek in Polish), each post office on a map, the weight, the destination country and the office holding a parcel for pickup. There is no expected delivery date. It drops office addresses, opening hours, payment documents and extra services. Scans relayed from abroad carry no time zone: Peek reads them on the clock of the country they come from. Pallets, grouped consignments and unregistered mail can't be tracked.
 
-Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day Poczta Polska scans the parcel out for delivery, while Poczta Polska's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. A parcel posted abroad to Poland can be followed to Poczta Polska.
+Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Poczta Polska scans the parcel out for delivery, while Poczta Polska's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. A parcel posted abroad to Poland can be followed to Poczta Polska.
 
 ## Questions about Poczta Polska tracking
 

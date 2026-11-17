@@ -3,7 +3,7 @@ title: ZTO Express tracking: 中通快递 numbers, statuses, contact
 description: Track a ZTO Express (中通快递) parcel in China: what its numbers look like, what 已签收 and ZTO's other steps mean, where parcels wait and how to reach ZTO.
 slug: zto-express-tracking
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 ZTO Express (中通快递, Zhongtong) is a Chinese express company founded in Shanghai on 8 May 2002; in 2025 it handled 38.52 billion parcels. A ZTO number usually belongs to a parcel inside China, often an online order (ZTO has carried Taobao's since 2008) on its way to a forwarder's warehouse or to an address in China. Track it on [ZTO's tracker](https://www.zto.com/check), which is in Chinese, or in the box above. Parcels the group sends abroad go with [ZTO International](carrier:zto-international), which has its own 771 numbers and its own tracker.
@@ -84,7 +84,7 @@ Paste the number in [Peek](/): it follows more than 3,500 carriers. A ZTO number
 
 Peek reads ZTO's own tracker, and opens a browser when ZTO asks for a check. For each scan it shows the step (table above), the town of the ZTO site that made it (the site's Chinese name where Peek can't place it) and the exact time, in your device's time zone (on peektracker.com and in the iPhone app, a line under the history names that zone). It leaves out ZTO's full line of each scan and, with it, couriers' contacts, phone numbers and the recipient's name and address, and shows no expected delivery date. ZTO's public tracker can leave out a parcel's earliest scans, and so can Peek. Peek follows the ZTO number only: a forwarder's number is another parcel to add.
 
-It checks every 10 minutes, and every 2 minutes (every 5 when its ZTO lookup opened a browser) from 6 a.m. local time on the day ZTO scans the parcel out for delivery, while ZTO's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZTO, the forwarder or the seller for you.
+It checks up to every 10 minutes, and up to every 2 minutes (every 5 when its ZTO lookup opened a browser) from 6 a.m. local time on the day ZTO scans the parcel out for delivery, while ZTO's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZTO, the forwarder or the seller for you.
 
 ## Questions about ZTO Express tracking
 

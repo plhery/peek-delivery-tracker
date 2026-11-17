@@ -3,7 +3,7 @@ title: Venipak tracking: statuses, lockers and missed deliveries
 description: Track a Venipak parcel in Lithuania, Latvia or Estonia: where the number is, what each status means, lockers, pickup points and how to reach Venipak.
 slug: venipak-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Venipak is a courier that delivers parcels for shops in Lithuania, Latvia and Estonia, to your door, to one of its parcel lockers or to a pickup point. Enter the number on Venipak's tracking page for your country, or paste it in the box above. It comes from the shop, or, in Lithuania, from Venipak by SMS.
@@ -83,7 +83,7 @@ As listed on Venipak's contact pages on 13 October 2026, each country has its ow
 
 A 7 to 10-digit shipment number is never named Venipak: pick Venipak with "Change", or paste a venipak.com or venipak.lt link. A one-parcel shipment is then followed by its parcel number; for several parcels, add each parcel number.
 
-Venipak's scans carry no time zone: Peek reads them on the clock of the scan's place, the same in all three Baltic countries, and lists Venipak's own history. It checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day Venipak scans the parcel out for delivery, while Venipak's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes.
+Venipak's scans carry no time zone: Peek reads them on the clock of the scan's place, the same in all three Baltic countries, and lists Venipak's own history. It checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Venipak scans the parcel out for delivery, while Venipak's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can show the locker or pickup point where the parcel waits, with its town. Statuses keep Venipak's English wording, except `Delivered` and `Out for delivery`, shown in Peek's own words. You can be notified when the status changes.
 
 Venipak gives no expected arrival day and no weight. Peek leaves out map coordinates, the parcel count and the recipient check, and can't contact Venipak for you.
 

@@ -3,7 +3,7 @@ title: Posta Shqiptare tracking: Albanian Post numbers and statuses
 description: Track a Posta Shqiptare (Albanian Post) parcel or EMS: what an AL number looks like, what each Albanian status means, customs in Albania and who to call.
 slug: posta-shqiptare-tracking
 published: 2026-11-02
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Posta Shqiptare (Albanian Post) is Albania's national post, with 533 post offices across the country. It handles mail and parcels within Albania, from abroad and to other countries, EMS included. Track an item in the "Gjurmo objektin" (track an item) box on [postashqiptare.al](https://www.postashqiptare.al/) or in its e-Posta app, or paste the number in the box above. For an online order, ask the seller for the number.
@@ -99,7 +99,7 @@ Peek shows each line in Posta Shqiptare's wording, and a scan abroad with the co
 
 When you track from another country, Peek also asks your country's post with the same `AL` number: USPS, Royal Mail ([Parcelforce](carrier:parcelforce) for a number starting with E), An Post, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) in Germany, [Poste Italiane](carrier:poste-italiane), [ELTA](carrier:elta) in Greece and others. It switches to that post once it has fresh scans, and keeps Posta Shqiptare's history. From Kosovo, Montenegro or Turkey, it asks no other post.
 
-Peek checks every 10 minutes, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Posta Shqiptare, your post or the shop for you.
+Peek checks up to every 10 minutes, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Posta Shqiptare, your post or the shop for you.
 
 ## Questions about Posta Shqiptare tracking
 

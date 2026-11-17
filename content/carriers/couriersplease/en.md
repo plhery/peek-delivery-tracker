@@ -3,7 +3,7 @@ title: CouriersPlease tracking: numbers, statuses and help
 description: Track a CouriersPlease parcel in Australia: what the consignment number looks like, what each status means, collection points, redelivery and contact.
 slug: couriersplease-tracking
 published: 2026-10-15
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 CouriersPlease is an Australian parcel delivery company, part of FMH Group, that delivers through local Franchise Partners across metropolitan and regional Australia. To track a parcel, enter its consignment number on [CouriersPlease's tracking page](https://www.couriersplease.com.au/tools-track), or paste it in the box above. The number comes from the shop or sender that booked CouriersPlease.
@@ -80,7 +80,7 @@ As listed on CouriersPlease's Help Centre on 15 October 2026:
 
 Peek reads CouriersPlease's own tracking and shows its scans in CouriersPlease's wording, each with its state, and the Delivery ETA once CouriersPlease has scanned the parcel. It shows no collection point or proof of delivery for CouriersPlease.
 
-Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day CouriersPlease scans the parcel out for delivery, while CouriersPlease's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you when the status changes. For redelivery, a PIN or a claim, go to CouriersPlease or the shop.
+Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day CouriersPlease scans the parcel out for delivery, while CouriersPlease's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you when the status changes. For redelivery, a PIN or a claim, go to CouriersPlease or the shop.
 
 ## Questions about Couriers Please tracking
 

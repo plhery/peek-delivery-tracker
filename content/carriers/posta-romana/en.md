@@ -3,7 +3,7 @@ title: Poșta Română tracking: numbers, statuses and customs
 description: Track a Poșta Română item: what an RO number looks like, what each Romanian status means, parcels from abroad, customs fees, complaints and who to call.
 slug: posta-romana-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Poșta Română (Compania Națională Poșta Română, CNPR) provides Romania's universal postal service and delivers to every town and village in the country. Track an item on its [Track & Trace page](https://www.posta-romana.ro/en/track-trace.html), or paste the number in the box above. Each post gives information only for its own part of the journey, so Poșta Română's tracker covers Romania only: a parcel from a shop abroad shows on the sending post's tracker first, and on Poșta Română's once it reaches Romania. Can't find your number? See [how to find a tracking number](guide:find-tracking-number).
@@ -80,7 +80,7 @@ Peek reads Poșta Română's own tracking. It shows each step in Poșta Română
 
 When you track an `RO` number from outside Romania, Peek also asks your country's post with the same number: USPS from the US, Royal Mail from the UK ([Parcelforce](carrier:parcelforce) for a number starting with E), An Post from Ireland, Canada Post, Australia Post, [NZ Post](carrier:nz-post), [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France, Israel Post from Israel, and a carrier in every other EU country, Switzerland and Norway. It switches to that post once it shows fresh scans, and keeps Poșta Română's history. From Romania, Peek asks no other post, as Poșta Română's tracking doesn't name the destination, so follow the destination post yourself; from Moldova, Turkey or the UAE, it knows none to ask. The other way round, when another post's tracking names Romania as the destination, or names none and you track from Romania, Peek asks Poșta Română with that post's number.
 
-Peek checks every 10 minutes, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Poșta Română, your post or the shop for you.
+Peek checks up to every 10 minutes, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Poșta Română, your post or the shop for you.
 
 ## Questions about Poșta Română tracking
 

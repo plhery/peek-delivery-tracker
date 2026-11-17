@@ -3,7 +3,7 @@ title: Allegro One tracking: One Box, One Punkt and One Kurier
 description: Track an Allegro One parcel in English: where the number is, what each status means, One Box pickup codes and deadlines, delays, complaints and contacts.
 slug: allegro-one-tracking
 published: 2026-10-11
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Allegro One is the Polish marketplace Allegro's own delivery network: Allegro One Box parcel lockers, Allegro One Punkt pickup points and Allegro One Kurier home delivery, all part of Allegro Delivery. Track a parcel in Allegro under "Moje przesyłki" (My parcels) or on Allegro's tracking page, or paste the number in the box above. The number is in your purchase details, in the app and in the email Allegro sends once the number is added.
@@ -86,7 +86,7 @@ Allegro handles customer service for Allegro Delivery parcels, Allegro One's inc
 
 It reads Allegro's tracking in English, or in Polish if you use Peek in Polish, and shows the wordings as written, with the history and the delivery time. Allegro gives no places, so there's nothing to pin on the map, and no pickup point name, expected delivery, weight or sender.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Allegro One scans the parcel out for delivery, while Allegro One's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps only, or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Allegro One scans the parcel out for delivery, while Allegro One's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps only, or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Allegro One tracking
 

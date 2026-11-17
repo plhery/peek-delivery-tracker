@@ -3,7 +3,7 @@ title: Lingdong International tracking: SZLD numbers and statuses
 description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking often stops before the delivery.
 slug: lingdong-tracking
 published: 2026-10-21
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a freight forwarder in Shenzhen, China, that ships parcels abroad for online sellers. Its numbers start with SZLD: type yours in the 快件查询 (parcel lookup) box on Lingdong's site, lingdong56.com, which opens its tracker, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -87,7 +87,7 @@ Peek reads Lingdong's own tracker and shows the status, each scan with its place
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. The only such carrier Peek recognises in it is [Swiss Post](carrier:swiss-post), when the record names Swiss Post as its line, holds a Swiss Post number and gives no destination outside Switzerland and Liechtenstein: the parcel then shows "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek follows it there once Swiss Post has a scan at least as recent as Lingdong's newest, keeping Lingdong's scans. Lingdong doesn't say it ships with Swiss Post. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes, and up to every 2 minutes on the day the parcel shows "Out for delivery" (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Lingdong's or Swiss Post's own tracker answers (through tracking services, every 15 minutes): of the lines in Lingdong's tracker, only Poste Italiane's `In consegna` gives that status, and Swiss Post's scans can after a hand-over. After 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes on the day the parcel shows "Out for delivery" (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Lingdong's or Swiss Post's own tracker answers (through tracking services, every 15 minutes): of the lines in Lingdong's tracker, only Poste Italiane's `In consegna` gives that status, and Swiss Post's scans can after a hand-over. After 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
 
 ## Questions about Lingdong tracking
 

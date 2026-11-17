@@ -3,7 +3,7 @@ title: Aras Kargo tracking: numbers and statuses in English
 description: Track an Aras Kargo parcel: what its 13-digit number looks like, what Turkish statuses such as TESLİMAT ŞUBESİNDE mean in English, and how Peek follows it.
 slug: aras-kargo-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Aras Kargo (also written Aras Cargo) is a courier in Turkey. Aras's tracker, as Peek reads it, writes every step in Turkish. The shop or the sender gives you the tracking number: paste it in the box above. Aras Kargo's own tracker is at kargotakip.araskargo.com.tr. The tables below explain its Turkish statuses in English.
@@ -104,7 +104,7 @@ Added without a carrier, a parcel shows "No tracking history yet" while Peek kee
 
 When Aras's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their own words.
 
-Peek checks Aras every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Aras Kargo or the shop for you.
+Peek checks Aras up to every 10 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Aras Kargo or the shop for you.
 
 ## Questions about Aras Kargo tracking
 

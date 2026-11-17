@@ -3,7 +3,7 @@ title: Singapore Post (SingPost) tracking: numbers and statuses
 description: Track a Singapore Post (SingPost) parcel: what an SG number looks like, what each status means, who delivers it in Europe, customs, and who to ask.
 slug: singapore-post-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-17
 ---
 
 Singapore Post (SingPost) grew out of Singapore's national postal service, whose history goes back to 1858, and now carries letters and eCommerce parcels to more than 220 destinations. Track an item on SingPost's [Track Your Item](https://www.singpost.com/track-items) page or in the SingPost Mobile App, or paste the number in the box above. The number is on the receipt or consignment note the sender got when posting it, so for an online order, ask the shop.
@@ -95,7 +95,7 @@ Peek shows each scan in SingPost's English wording, with its place, and files th
 
 When SingPost names the destination country, or names none and you track from outside Singapore, Peek also asks that country's post with the same `SG` number: [DHL](carrier:dhl) in Germany, [La Poste](carrier:la-poste) in France, [Poste Italiane](carrier:poste-italiane) in Italy, [Correos](carrier:correos-spain) in Spain, [PostNL](carrier:postnl), [bpost](carrier:bpost), [Austrian Post](carrier:austrian-post), [Swiss Post](carrier:swiss-post), [Poczta Polska](carrier:poczta-polska), [CTT](carrier:ctt) in Portugal, [PostNord](carrier:postnord) in Sweden and Denmark, [Royal Mail](carrier:royal-mail), [An Post](carrier:an-post), [USPS](carrier:usps), [Canada Post](carrier:canada-post) and [Australia Post](carrier:australia-post). It switches to that post once it shows fresh scans, and keeps SingPost's history. The other way round, Singapore as a parcel's destination isn't enough for Peek to ask Singapore Post: it does when the carrier bringing the parcel names SingPost as the one delivering it, as Janio can.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SingPost's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes; through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SingPost, your post or the shop for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SingPost's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS up to every 30 minutes; through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SingPost, your post or the shop for you.
 
 ## Questions about Singapore Post tracking
 

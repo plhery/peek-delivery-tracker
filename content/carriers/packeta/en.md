@@ -3,7 +3,7 @@ title: Packeta tracking: Z numbers, statuses and pickup points
 description: Track a Packeta (Zásilkovna) parcel: what the Z number looks like, what each status means, how long pickup points keep parcels and how to reach Packeta.
 slug: packeta-tracking
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Packeta is the group brand behind Zásilkovna, its Czech name, and ships to 33 countries. Track a parcel on [Packeta's tracking page](https://tracking.packeta.com/en/), in the Packeta app or in the box above. The number is a `Z` and ten digits, found in Packeta's email, its SMS or the app.
@@ -84,7 +84,7 @@ As read on 11 October 2026:
 
 Peek reads Packeta in English and shows its wording as written: the overall status, the newest 20 scans, the shop that sent it, the delivery time and the pickup point or Z-BOX address when the parcel heads there (none for home delivery or returns). It drops your name, address, phone and signature.
 
-Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are read on Prague time and shown in your device's time zone (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks Packeta every 10 minutes and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Scans that name a depot or pickup point show it as the place, and those naming a town go on the map. Packeta gives no expected delivery. Times are read on Prague time and shown in your device's time zone (Romanian depot scans may be an hour off). When a scan links a partner carrier's tracker Peek knows, Peek names that partner as the one delivering and, when Peek can track the partner itself, follows the parcel there once it shows fresh progress. It checks Packeta up to every 10 minutes and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Packeta tracking
 

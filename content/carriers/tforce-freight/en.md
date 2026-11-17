@@ -3,7 +3,7 @@ title: TForce Freight tracking: PRO numbers, statuses and claims
 description: Track a TForce Freight shipment in the US or Canada: what a PRO number looks like, what each tracking line means, home deliveries and freight claims.
 slug: tforce-freight-tracking
 published: 2026-11-03
-updated: 2026-11-10
+updated: 2026-11-17
 ---
 
 TForce Freight is a less-than-truckload (LTL) carrier: it moves pallets and heavy freight between its service centers across the United States and all of Canada, and to more than 600 points in Mexico. If a large order or other freight is coming to you with TForce, track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. TForce's own tracker is the Tracking page on www.tforcefreight.com.
@@ -103,7 +103,7 @@ Peek asks TForce's tracker by the PRO alone. It shows the status, each line with
 
 TForce gives each line its service center's local time, with no time zone. Peek reads it on the clock of the line's town, else of its state or province when Peek can tell which one it is (the main clock where there are several), else of a line next to it or of where the freight is going, else on Eastern time, and shows it in your device's time zone.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day TForce scans the freight out for delivery, while TForce's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day TForce scans the freight out for delivery, while TForce's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact TForce, the shop or the shipper for you, or file a claim.
 
 ## Questions about TForce Freight tracking
 

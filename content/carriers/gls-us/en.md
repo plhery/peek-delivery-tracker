@@ -3,7 +3,7 @@ title: GLS US tracking (GSO): numbers, statuses and delivery
 description: Track a GLS US parcel, also listed as GSO: what its SH number looks like, what each scan means, delivery days, signatures, missed deliveries and contacts.
 slug: gls-us-tracking
 published: 2026-11-13
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 GLS US (General Logistics Systems US, Inc.) is GLS Group's parcel company in the United States, delivering across the Western U.S. Peek's catalog also knows it as GLS USA, GLS United States, General Logistics Systems US, GSO and Golden State Overnight, the company GLS bought in 2016. To track a GLS US parcel, paste its number in the box above or enter it on [GLS's US tracking page](https://gls-group.com/US/en/send-and-receive/track-a-parcel/).
@@ -94,7 +94,7 @@ On a parcel you've already added, use "Change carrier". Peek asks GLS US only ab
 
 **When GLS US doesn't answer.** If GLS US's tracker can't be reached, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 
-**How often.** While someone waits for the parcel (notifications on, or you looked in the last hour) and GLS US's tracker answers, Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GLS US puts the parcel on a delivery route; through tracking services, every 15 minutes. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
+**How often.** While someone waits for the parcel (notifications on, or you looked in the last hour) and GLS US's tracker answers, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day GLS US puts the parcel on a delivery route; through tracking services, hourly, and up to every 15 minutes on that day. After two days without news (12 hours while it still shows "Label created" or "Received by carrier"), it checks hourly. Notifications can cover "Every scan", "Important steps" or "Delivery only".
 
 Peek can't contact GLS US or the shop for you, change the delivery or file a claim.
 

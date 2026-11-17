@@ -3,7 +3,7 @@ title: UniUni tracking: statuses, missed deliveries and contact
 description: Track a UniUni parcel in Canada or the US: what the tracking number looks like, what UniUni's statuses mean, missed deliveries, photos and how to reach support.
 slug: uniuni-tracking
 published: 2026-10-15
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 UniUni (Uni Express Inc., based in Richmond, B.C.) is a last-mile delivery company that brings online orders to the door in Canada and the United States, for shops such as Shein and Temu. Track a parcel on [uniuni.com/tracking](https://www.uniuni.com/tracking/) or paste its number in the box above. The number comes from the shop or marketplace you ordered from, which hands the labelled parcel to UniUni for the final stretch.
@@ -92,7 +92,7 @@ The tracking result also shows a number to call for that parcel.
 
 Peek reads UniUni's tracking and shows the status, each scan with its town and province or state on a map, the expected day or time window, the delivery time and the destination country. It shows times in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It leaves out addresses, driver names and the delivery photos, so look at the photos on UniUni's page. `Delivered` and `Out for delivery` appear in Peek's own words; other lines show as UniUni writes them, without the reason in brackets.
 
-When UniUni hands a parcel to another courier, that courier's scans show up inside UniUni's history, but Peek doesn't follow the other courier's number. Parcels sent with [SpeedPAK](carrier:speedpak) or [DHL eCommerce](carrier:dhl-ecommerce) can name UniUni for the last mile, and Peek can then follow them on UniUni. Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day UniUni scans the parcel out for delivery (when UniUni gives a time window, from half an hour before it opens), while UniUni's own tracker answers; through tracking services, every 15 minutes. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+When UniUni hands a parcel to another courier, that courier's scans show up inside UniUni's history, but Peek doesn't follow the other courier's number. Parcels sent with [SpeedPAK](carrier:speedpak) or [DHL eCommerce](carrier:dhl-ecommerce) can name UniUni for the last mile, and Peek can then follow them on UniUni. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day UniUni scans the parcel out for delivery (when UniUni gives a time window, from half an hour before it opens), while UniUni's own tracker answers; through tracking services, every 15 minutes. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about UniUni tracking
 

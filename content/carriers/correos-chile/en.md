@@ -3,7 +3,7 @@ title: Correos de Chile tracking: numbers and statuses explained
 description: Track a Correos de Chile parcel: what a CL or 13-digit number looks like, what its Spanish statuses mean, IVA and customs in Chile, and who Peek asks abroad.
 slug: correos-chile-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Correos de Chile is Chile's postal service. Chile's customs service says that online orders sent to Chile by post come in through Correos de Chile, while courier companies bring others. Correos de Chile's own tracker is at www.correos.cl/seguimiento-en-linea. Or paste the number in the box above: this page explains each step. Bought online? The number is in the shop's shipping email or on your order page.
@@ -77,7 +77,7 @@ Filed under Correos de Chile, a parcel shows "Waiting for Correos de Chile" on p
 
 When you track a `CL` number from outside Chile, Peek also asks your country's post with the same number: USPS from the US, Royal Mail from the UK (Parcelforce for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France, [Correos](carrier:correos-spain) from Spain, [Correios](carrier:correios-br) from Brazil, and the posts of every other EU country, Argentina and Peru, among others. It switches to that post once it has a step at least as recent as Correos de Chile's newest, and keeps Correos de Chile's history. From Mexico or China it asks no other post. The other way round, Peek can't look up a parcel sent to Chile under another post's number on Correos de Chile's tracker: it follows it under the post that numbered it.
 
-Peek checks every 10 minutes, more often once the parcel is out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Correos de Chile, your post or the shop for you.
+Peek checks up to every 10 minutes, more often once the parcel is out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Correos de Chile, your post or the shop for you.
 
 ## Questions about Correos de Chile tracking
 

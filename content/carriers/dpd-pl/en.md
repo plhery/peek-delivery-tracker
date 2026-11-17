@@ -3,7 +3,7 @@ title: DPD Poland tracking: statuses, pickup points and contact
 description: Track a DPD Poland parcel in English: the 14-character number, what each status means, DPD Pickup points and lockers, claims and who to call.
 slug: dpd-poland-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 DPD Poland (DPD Polska) is a Warsaw-based parcel carrier in the Geopost group, owned by France's [La Poste](carrier:la-poste). Track a parcel on DPD's [Track & Trace page](https://tracktrace.dpd.com.pl/EN/findParcel) with its 14-character parcel number, or paste it in the box above. The shop usually gives the number in its shipping email or on your order page.
@@ -79,7 +79,7 @@ DPD's English contact page lists no phone numbers, and no page says the Contact 
 
 [Peek](/) names DPD Poland at once for 13 digits and a letter. For 14 digits starting 13, Peek asks the likely carriers, DPD Poland first, and shows "DPD Poland has this parcel." when DPD knows the number. For other 14-digit numbers, pick DPD Poland with "Change". A tracktrace.dpd.com.pl or tt.dpd.com.pl link with `p1=` works too; sending codes, reference and order numbers don't.
 
-Peek reads DPD's English tracking and shows the status, the history and the delivery time, in DPD's wording. DPD gives no place for its scans, no expected delivery, sender or weight, and Peek drops your name and the pickup point's address. Peek reads all scans on Warsaw time, the registration and scans abroad included. Peek checks every 10 minutes (every 2 from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers; through tracking services, every 15 minutes) and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow the parcel after `Sent outside Poland` or keep a return's new number.
+Peek reads DPD's English tracking and shows the status, the history and the delivery time, in DPD's wording. DPD gives no place for its scans, no expected delivery, sender or weight, and Peek drops your name and the pickup point's address. Peek reads all scans on Warsaw time, the registration and scans abroad included. Peek checks up to every 10 minutes (up to every 2 from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers; through tracking services, every 15 minutes) and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It doesn't follow the parcel after `Sent outside Poland` or keep a return's new number.
 
 ## Questions about DPD tracking in Poland
 

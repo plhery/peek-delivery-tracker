@@ -3,7 +3,7 @@ title: ACS Courier tracking: numbers, statuses and contacts
 description: Track an ACS Courier parcel in Greece or Cyprus: the 10-digit shipping number, what ACS's English statuses mean, SmartPoint lockers, claims and contacts.
 slug: acs-courier-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 ACS Courier is a Greek courier, part of the Quest Group, with its own company in Cyprus and SmartPoint lockers in both countries. Track a parcel with its 10-digit shipping number on the Track and Trace page of acscourier.net (Greece) or cyp.acscourier.net (Cyprus), switching the page to English, or paste the number in the box above and pick ACS Courier. ACS puts that number in every SMS, Viber message and email it sends you about the parcel.
@@ -83,7 +83,7 @@ There's no separate line for the UK or elsewhere: use these numbers.
 
 [Peek](/) can't tell an ACS number from its 10 digits alone, so it asks the carriers it fits whether they know it: ACS (when the last digit passes ACS's check and the digits are typed without spaces or dashes), DHL Express, Geniki Taxydromiki (on the same terms), [BOX NOW](carrier:box-now), [DHL eCommerce Iberia](carrier:dhl-ecommerce-es) and, if the first digit isn't 0, [Packeta](carrier:packeta), naming ACS when ACS alone knows it; if another carrier knows it too, even DHL Express, you choose. If ACS isn't asked, or Peek names another carrier, pick "ACS Courier" with "Change", or paste an ACS Track and Trace link with `trackingNumber=` from either site, which names ACS at once (myACS links aren't read).
 
-Peek reads ACS's tracker through its Cypriot English site: each scan in ACS's English words, with the branch or hub and its time. While the parcel moves it can show ACS's expected delivery day, and it names the SmartPoint where the parcel waits. A `Not delivered` scan shows ACS's reason in brackets, unless it holds a name, phone number or address. No weight; the recipient, signatory, sender, other comments and branch contacts are dropped. Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day ACS scans the parcel out for delivery, while ACS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek reads ACS's tracker through its Cypriot English site: each scan in ACS's English words, with the branch or hub and its time. While the parcel moves it can show ACS's expected delivery day, and it names the SmartPoint where the parcel waits. A `Not delivered` scan shows ACS's reason in brackets, unless it holds a name, phone number or address. No weight; the recipient, signatory, sender, other comments and branch contacts are dropped. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day ACS scans the parcel out for delivery, while ACS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 When Speedy or DPD Romania names ACS as the carrier delivering in Greece or Cyprus, the parcel can be followed to ACS. Notifications come for every scan, important steps only, or on delivery day only.
 

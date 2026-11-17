@@ -3,7 +3,7 @@ title: Border Express tracking: consignment numbers and statuses
 description: Track a Border Express (BEX) parcel in Australia: what its consignment numbers and label barcodes look like, what each status means and how Peek follows it.
 slug: border-express-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Border Express, or BEX, is a carrier that Peek's catalog lists in Australia only. If an online shop sent your order with Border Express, the number to track is its consignment number: paste it in the box above. The shop gives it in its shipping email or on your order page. Border Express's own tracker is Quick Track on BEX Online, at bexonline.borderexpress.com.au. Peek couldn't check Border Express's website for this page, so what follows is what Peek's code knows about that tracker.
@@ -76,7 +76,7 @@ A tracking link from Border Express works too and names Border Express at once (
 
 **What you see.** Peek shows the status, each step with its suburb and state, the expected delivery day until the parcel is out for delivery, and the time of delivery. It leaves out the progress bar, the despatch date, the number of items and each item's scans, the sender's and your town and postcode, and the name of whoever signed. Peek shows no weight or proof of delivery for Border Express. Each step carries the clock of its state, so steps in states on different time zones fall in the right order.
 
-**How often.** Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Border Express scans the parcel out for delivery, while Border Express's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
+**How often.** Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Border Express scans the parcel out for delivery, while Border Express's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. If Border Express's tracker can't be reached, Peek asks tracking services instead and shows what they hold, in their words. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Border Express or the shop for you.
 
 ## Questions about Border Express tracking
 

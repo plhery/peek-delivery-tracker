@@ -3,7 +3,7 @@ title: J&T Express China tracking: 极兔速递 numbers, statuses, contact
 description: Track a J&T Express China (极兔速递) parcel: what a JT number looks like, what 已签收 and J&T's other statuses mean, where parcels wait and how to reach J&T.
 slug: jt-express-china-tracking
 published: 2026-11-03
-updated: 2026-11-09
+updated: 2026-11-17
 ---
 
 J&T Express China (极兔速递) is J&T Express's network in China, operating since March 2020. A J&T China number usually belongs to a parcel inside China, often an online order on its way to you, a friend or a forwarder's warehouse. Track it on [J&T's tracker](https://www.jtexpress.com.cn/service.html), which is in Chinese, or in the box above. J&T China's own international service flies only to seven countries in Southeast Asia. Elsewhere, such as in the US or the UK, a J&T China number may cover only the parcel's trip inside China, for example to a forwarder.
@@ -95,7 +95,7 @@ Its shape alone doesn't tell Peek that a JT number is J&T China's rather than J&
 
 **Another carrier delivering.** If a tracking service names another carrier for your parcel, with that carrier's number, and Peek reads that carrier's own tracking, Peek asks it too. Once that carrier shows a scan at least as recent as the service's latest, Peek follows the parcel there. A forwarder's number is another parcel to add.
 
-**Checks and alerts.** While a tracking service has the parcel, Peek checks it every 15 minutes, also when it's out for delivery. After two days without a new step, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". For a parcel that may wait at a collection point or locker, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact J&T, the forwarder or the seller for you.
+**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, every 3 hours once a day passes without a new step, and up to every 15 minutes on the day it's out for delivery. It can notify you of "Every scan", "Important steps" or "Delivery only". For a parcel that may wait at a collection point or locker, choose "Important steps": "Delivery only" doesn't tell you when it's ready to collect. Peek can't contact J&T, the forwarder or the seller for you.
 
 ## Questions about J&T Express China tracking
 

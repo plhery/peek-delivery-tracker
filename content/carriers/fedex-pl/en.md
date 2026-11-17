@@ -3,7 +3,7 @@ title: FedEx Poland tracking: 13-digit numbers and statuses
 description: Track a FedEx Poland domestic parcel: the 13-digit number, what Polish statuses like Przesyłka awizowana mean, and how to complain about a lost or damaged parcel.
 slug: fedex-poland-tracking
 published: 2026-10-22
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 FedEx Poland is FedEx's domestic courier network inside Poland. Its parcels have 13-digit numbers and a tracker of their own: track the number on FedEx's domestic tracking page (on fedex.com) or in the box above.
@@ -60,7 +60,7 @@ On delivery day, FedEx may add a planned slot under the out-for-delivery scan: `
 
 A link from FedEx's domestic tracking page, on fds2tracking.emea.fedex.com or fedex.com, or a poland.fedex.com link with `packageId=`, opens as FedEx Poland straight away.
 
-Peek reads FedEx's domestic tracking service directly. It shows the status, each scan in FedEx's Polish words with its branch and exact time, the courier's time slot on delivery day, the delivered time and the weight. It drops the number of pieces, the sending and delivering branches, the dispatch date, the return number and the proof of delivery; FedEx shows no sender, name or address there anyway. Peek checks every 10 minutes, and every 2 minutes from 6 a.m. Polish time on the day FedEx scans the parcel out for delivery, while FedEx's own tracking answers; when FedEx gives a slot, from half an hour before it opens. Through tracking services, it checks every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. Peek can't change a delivery or complain for you: that's done with FedEx or the sender.
+Peek reads FedEx's domestic tracking service directly. It shows the status, each scan in FedEx's Polish words with its branch and exact time, the courier's time slot on delivery day, the delivered time and the weight. It drops the number of pieces, the sending and delivering branches, the dispatch date, the return number and the proof of delivery; FedEx shows no sender, name or address there anyway. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. Polish time on the day FedEx scans the parcel out for delivery, while FedEx's own tracking answers; when FedEx gives a slot, from half an hour before it opens. Through tracking services, it checks hourly, and up to every 15 minutes on delivery day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or delivery day only. Peek can't change a delivery or complain for you: that's done with FedEx or the sender.
 
 ## Questions about FedEx Poland tracking
 

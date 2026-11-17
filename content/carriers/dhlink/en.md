@@ -3,7 +3,7 @@ title: DHLink tracking: numbers, statuses and who delivers
 description: Track a DHLink parcel from a DHgate order: which numbers DHLink's tracker takes, what its English scans mean, who delivers in your country and who to ask.
 slug: dhlink-tracking
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 DHLink (驼飞侠) is the cross-border logistics platform of DHgate (敦煌网). Founded in 2014, it ships orders for DHgate sellers and other customers, from China or from its warehouses abroad, and hands them to a carrier in your country for the last leg. Track the number on DHLink's [tracking page](https://www.dhlink.com/trackQuery?lang=en) or in the box above. Take the number from your DHgate order, or ask the seller for it.
@@ -80,7 +80,7 @@ As read on 4 November 2026, DHLink's contact page lists one customer service add
 
 Peek reads DHLink's tracker. It shows the status, the history with each scan's place and the destination country, and lists each scan once. Scans in China are read on Beijing time, USPS scans on the time of their US state and the rows of Pactic, on a line through Hungary, on Budapest time; others keep the time DHLink gives. DHLink gives no delivery time, weight or service name, and Peek drops postcodes and order references. Its only delivery estimate is a relayed USPS "Out for Delivery, Expected Delivery …" scan read on its US state's time: while that scan is the newest, Peek shows that day's window when the scan gives one; a scan with only a latest time adds no estimate, since "Out for delivery" already means today. When the "Last Leg No." is a GOFO number (GFUS and 14 digits), a SwiftX one (SWX and 18 digits) or a DPD Switzerland one (14 digits starting 060 or 061), Peek shows that carrier and its number, asks it and switches to it once it shows newer progress. Other last-leg numbers stay on DHLink's history.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (when that day's window is given, from half an hour before it opens), while DHLink's own tracker answers; through tracking services, every 15 minutes. Once it follows the parcel on GOFO, it checks every 30 minutes, out for delivery too. It can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact DHLink, DHgate or the seller for you.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery (when that day's window is given, from half an hour before it opens), while DHLink's own tracker answers; through tracking services, every 15 minutes. Once it follows the parcel on GOFO, it checks every 30 minutes, out for delivery too. It can notify you at every scan, at important steps or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact DHLink, DHgate or the seller for you.
 
 ## Questions about DHLink tracking
 

@@ -3,7 +3,7 @@ title: STO Express tracking: 申通快递 numbers, statuses, contact
 description: Track an STO Express (申通快递) parcel in China: what its numbers look like, what 签收 and STO's other scans mean, where parcels wait and how to reach STO.
 slug: sto-express-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-17
 ---
 
 STO Express (申通快递, Shentong) is a Chinese express company that started in 1993 and calls itself China's first private express company. An STO number usually belongs to a parcel inside China, often an online order on its way to you, a friend or a forwarder's warehouse. Track it on [STO's site](https://www.sto.cn/pc), in the `查快递` (track a parcel) box, which is in Chinese, or in the box above.
@@ -89,7 +89,7 @@ To have Peek read STO's own tracking from the start, tap "Change" and pick STO E
 
 Peek reads STO's own tracking, the one behind its online customer service. For each scan it shows the step (table above), the city of the STO site that made it (the site's Chinese name where Peek can't place it), and the time, read on China's clock and shown in your device's time zone. It shows a repeated scan once, and the parcel's weight when STO's scales recorded it. It leaves out STO's full line for each scan and, with it, couriers' and stations' names and phone numbers, pickup addresses and codes, and who signed. STO gives no expected delivery date, so Peek shows none. Peek follows the STO number only: a forwarder's number is another parcel to add.
 
-It checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day STO scans the parcel out for delivery, while STO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact STO, the forwarder or the seller for you.
+It checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day STO scans the parcel out for delivery, while STO's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact STO, the forwarder or the seller for you.
 
 ## Questions about STO Express tracking
 

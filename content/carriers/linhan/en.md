@@ -3,7 +3,7 @@ title: LinHan International tracking: LHGJ numbers and statuses
 description: Track a LinHan International parcel from Shenzhen: what an LHGJ number looks like, what each scan means and why its times are on Beijing time.
 slug: linhan-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 LinHan International (深圳市林瀚国际物流有限公司, roughly Shenzhen LinHan International Logistics Co., Ltd.) is a forwarder in Shenzhen, China, that flies parcels for online sellers out of China and hands them to an agent in the buyer's country for customs and delivery. Its numbers start with LHGJ: type yours on LinHan's tracker, [linhan56.com/index/tracknumber/track](https://www.linhan56.com/index/tracknumber/track), or in the box above.
@@ -99,7 +99,7 @@ Some lines count differently from how they sound. `Order information received` i
 
 LinHan gives no expected delivery date, weight, service name, delivering company or second number, so Peek shows none of these, and it follows the LHGJ number to the end rather than handing the parcel over to another carrier.
 
-Peek checks every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact LinHan or the seller for you.
+Peek checks up to every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact LinHan or the seller for you.
 
 ## Questions about LinHan tracking
 

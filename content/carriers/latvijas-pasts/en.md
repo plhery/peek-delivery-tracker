@@ -3,7 +3,7 @@ title: Latvijas Pasts tracking: numbers, statuses and lockers
 description: Track a Latvijas Pasts (Latvian Post) parcel in English: where the number is, what each status means, parcel lockers, missed deliveries and contacts.
 slug: latvijas-pasts-tracking
 published: 2026-10-13
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Latvijas Pasts (Latvian Post) is Latvia's state-owned national post, with the country's largest network of parcel lockers. Track an item on [mans.pasts.lv/track](https://mans.pasts.lv/track), which opens in Latvian and has an English switch, or paste the number in the box above. The number comes from the shop's or sender's shipping message, or from the courier's SMS before delivery.
@@ -99,7 +99,7 @@ The channels as pasts.lv listed them on 9 November 2026:
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Latvia (or names no destination and you're in Latvia), Peek also asks Latvijas Pasts with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Latvijas Pasts straight away, pick "Latvijas Pasts" with "Change".
 
-Latvijas Pasts's times carry no time zone: Peek reads them on the clock of the scan's place, Latvian time for Latvian post offices, and lists Latvijas Pasts's own history. Statuses keep Latvijas Pasts's English wording, `Item delivered` included. Peek can show the post office where an item waits and can notify you when the status changes. It gives no expected arrival day and no weight. Peek checks every 10 minutes, and up to every 2 minutes on the day Latvijas Pasts hands the parcel over for delivery, from 6 a.m. Latvian time, while Latvijas Pasts's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
+Latvijas Pasts's times carry no time zone: Peek reads them on the clock of the scan's place, Latvian time for Latvian post offices, and lists Latvijas Pasts's own history. Statuses keep Latvijas Pasts's English wording, `Item delivered` included. Peek can show the post office where an item waits and can notify you when the status changes. It gives no expected arrival day and no weight. Peek checks up to every 10 minutes, and up to every 2 minutes on the day Latvijas Pasts hands the parcel over for delivery, from 6 a.m. Latvian time, while Latvijas Pasts's own tracker answers; through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel.
 
 ## Questions about Latvian Post tracking
 

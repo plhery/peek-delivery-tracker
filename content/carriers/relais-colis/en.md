@@ -3,7 +3,7 @@ title: Relais Colis tracking: statuses, pickup and contact
 description: Track a Relais Colis parcel in France: where the CC number is, what the French statuses mean, how long a relay keeps it and who to contact.
 slug: relais-colis-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Relais Colis is a French network delivering parcels to local shops that act as pickup points, now part of [GLS France](carrier:gls-fr). Track a parcel on [Relais Colis's tracking page](https://relaiscolis.com/colis/suivre) with its parcel number, or paste the number in the box above. The number comes from the shop that sent it, or from Relais Colis's confirmation email for a parcel sent between people.
@@ -80,7 +80,7 @@ As listed on relaiscolis.com on 11 October 2026; everything is in French.
 
 [Peek](/) recognises `CC` numbers as Relais Colis's at once. Other shapes are shared, so Peek asks the likely carriers and shows "asking…" first: for 10 digits it asks [DHL eCommerce Spain](carrier:dhl-ecommerce-es), Packeta and BOX NOW, not Relais Colis (and [DHL Express](carrier:dhl-express), ACS Courier and Geniki Taxydromiki first when the number passes DHL Express's check digit), and for `VD` numbers Colis Privé and Relais Colis. With 14 digits, it asks Chronopost, DPD and others, not Relais Colis, even for readers in France. If several carriers know the number, or none does, press "Change" and pick Relais Colis. A relaiscolis.com tracking link works too. No postcode is needed.
 
-Peek shows the status and history only: no place on the map, no expected delivery and no details of the relay holding the parcel; it drops those and your name and address. Wordings stay in French as Relais Colis writes them; only a few exact ones, such as `Livraison effectuée`, are replaced by Peek's own label ("Delivered"). Times are read as Paris time. When Relais Colis's latest status has no exact time, Peek takes the dated history from other tracking services and asks Relais Colis again every 6 hours. Otherwise it checks every 10 minutes, or every 2 from 6 a.m. local time on the day Relais Colis scans the parcel out for delivery, while Relais Colis's own tracker answers (through tracking services, every 15 minutes), and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows the status and history only: no place on the map, no expected delivery and no details of the relay holding the parcel; it drops those and your name and address. Wordings stay in French as Relais Colis writes them; only a few exact ones, such as `Livraison effectuée`, are replaced by Peek's own label ("Delivered"). Times are read as Paris time. When Relais Colis's latest status has no exact time, Peek takes the dated history from other tracking services and asks Relais Colis again every 6 hours. Otherwise it checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day Relais Colis scans the parcel out for delivery, while Relais Colis's own tracker answers (through tracking services, every 15 minutes), and can notify you of changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Relais Colis tracking
 

@@ -3,7 +3,7 @@ title: Jet Express tracking: order number, delivery and contact
 description: Track a Jet Express (kuller.ee) shipment: which order number to use, who runs portal.kuller.ee, delivery times in Estonia and abroad, claims and contact.
 slug: jet-express-tracking
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Jet Express (Jet Express OÜ) is a courier company in Tallinn with its website at kuller.ee. It delivers across Estonia every day, runs same-day couriers in Tallinn and sends parcels and freight abroad by road and air. It is also the official representative of Jetpak in Estonia. Track a shipment with its order number on Jet Express's tracking page at portal.kuller.ee, or paste the number in the box above.
@@ -83,7 +83,7 @@ If you leave the carrier open, Peek looks for it through tracking services. When
 
 Peek doesn't read Jet Express's tracking page itself. For a parcel filed under Jet Express, it asks ParcelsApp, Ship24 and 17TRACK in turn (Ship24 first for a ten-digit number) and keeps the first one that has the parcel. It shows the status and history that service holds, in its wording. That history can lag behind Jet Express's own, and for some shipments there's nothing at all. Until a service has the parcel, its tracking link opens Jet Express's Track & Trace page for the number; after that, it opens the service's page. Peek doesn't pass your IP address or country on to the services.
 
-Peek checks every 15 minutes, out for delivery too; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact Jet Express or the sender for you.
+Peek checks hourly, every 3 hours once a day passes without a new scan, and up to every 15 minutes on the day the shipment is out for delivery; a service that didn't know the number is asked again a day later. It can notify you of every scan, important steps only or "Delivery only". It can't contact Jet Express or the sender for you.
 
 ## Questions about Jet Express tracking
 

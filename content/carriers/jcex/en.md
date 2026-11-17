@@ -3,7 +3,7 @@ title: JCEX tracking: JCZ numbers, statuses and who delivers
 description: Track a JCEX parcel from China: what a JCZ waybill number looks like, what each status means, who delivers it in your country and who to ask when it stalls.
 slug: jcex-tracking
 published: 2026-10-21
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) is a logistics company in Hangzhou, China, that ships parcels abroad for online sellers and hands them to a carrier in your country for the last stretch, such as [USPS](carrier:usps) in the United States or Colissimo in France. Track the number on JCEX's tracker, [track.jcex.com](https://track.jcex.com/), or in the box above. The shop gives it with your order's shipping details.
@@ -84,7 +84,7 @@ Peek reads JCEX's own tracking and shows the status, the history with each scan'
 
 As JCEX names no delivering carrier and Peek doesn't read the second number, Peek follows the JCEX number to the end rather than switching to USPS or Colissimo, whose scans arrive through JCEX's history. It shows no expected delivery date, service or proof of delivery for JCEX.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while JCEX's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact JCEX or the seller for you.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while JCEX's own tracker answers (through tracking services, every 15 minutes). It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact JCEX or the seller for you.
 
 ## Questions about JCEX tracking
 

@@ -3,7 +3,7 @@ title: Pitney Bowes tracking: UPAA, UPBE and PBX numbers explained
 description: Track a Pitney Bowes parcel, such as an eBay order sent abroad: what UPAA, UPBE and PBX numbers look like, what its tracker's lines mean and who delivers it.
 slug: pitney-bowes-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Pitney Bowes ships parcels to other countries: in Peek's code, its numbers belong to eBay parcels from the United States and the United Kingdom, and to its other parcels going abroad. In the histories Peek's code holds, the parcel goes through a Pitney Bowes shipping centre, then on to the buyer's country, where a partner, such as that country's post, delivers it. The number starts with UPAA, UPBE or PBX and comes from the seller or the marketplace: paste it in the box above. Pitney Bowes's own tracker is at trackpb.shipment.co.
@@ -108,7 +108,7 @@ Peek doesn't hand the parcel over to the post: the post's scans reach you throug
 
 The tracker prints each time on the clock of whoever scanned the parcel, with no time zone. Peek reads each line on the clock of its place, or of the leg the parcel was on. Without a place, `In Transit` and `Item processed at Interpost` are on UTC, `Interpost handed item over to postal company` on UTC+2, and `Customs Clearance` on the clock of the country it names. Every time is shown in your device's time zone.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Pitney Bowes's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Pitney Bowes, the seller or the post for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Pitney Bowes's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact Pitney Bowes, the seller or the post for you.
 
 ## Questions about Pitney Bowes tracking
 

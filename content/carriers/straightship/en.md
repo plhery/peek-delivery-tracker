@@ -3,7 +3,7 @@ title: Straightship tracking: STRTD numbers, statuses and delivery
 description: Track a Straightship parcel in Canada: what STRTD, STRCA and STSH numbers look like, what each status means, missed deliveries, customs and who to contact.
 slug: straightship-tracking
 published: 2026-10-23
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Straightship (Straightship Solutions Limited) is a logistics company based in Burnaby, British Columbia, that ships goods from Asia to North America and delivers parcels across Canada with its own drivers. Its site lists SHEIN among its partners. If an online order came with a number starting `STRTD` or `STRCA`, Straightship has it; one starting `STSH` can be Straightship's too. Track it on [straightship.com](https://www.straightship.com/new/), in the "Track Your Shipment" box, or in the box above. The shop gives the number in its shipping email or on the order page.
@@ -97,7 +97,7 @@ For the order itself, a refund or a return, contact the seller.
 
 Peek reads Straightship's own tracker and shows the status, the history with the town and province of each scan, and the delivery time. It reads the tracker's times as UTC, as the tracker states, and shows them in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. `Package will be delivered before 9:00pm` counts as out for delivery, the attempt lines as failed attempts, and `Delivery is in progress` as in transit. Peek shows no expected delivery date, and it leaves out the customer reference and the delivery photo: see those on Straightship's tracker. As Straightship names no other carrier, Peek follows the Straightship number to the end.
 
-Peek checks every 10 minutes, or every 2 from 6 a.m. Pacific time on the day Straightship scans the parcel out for delivery, evening deliveries included, while Straightship's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Straightship or the seller for you.
+Peek checks up to every 10 minutes, or every 2 from 6 a.m. Pacific time on the day Straightship scans the parcel out for delivery, evening deliveries included, while Straightship's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Straightship or the seller for you.
 
 ## Questions about Straightship tracking
 

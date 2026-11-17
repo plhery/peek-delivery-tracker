@@ -3,7 +3,7 @@ title: Stone3PL tracking: numbers, statuses and contact
 description: Track a Stone3PL parcel from China: what its number can look like, what each tracking line means, who delivers it in your country and how to reach Stone3PL.
 slug: stone3pl-tracking
 published: 2026-11-03
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Stone3PL is a logistics company with its headquarters in Shenzhen, China, and part of the Stone Group. It ships goods for online sellers and other businesses from China to the world, together with other logistics companies. If a shop sent your order with Stone3PL, look up the number on [Stone3PL's tracking page](https://stone3pl.com/?route=services/track), in English, or paste it in the box above. The number comes from the seller, with your order's shipping details.
@@ -97,7 +97,7 @@ Peek reads the overall status, each line with its time, the countries the parcel
 
 When Stone3PL names the delivering company and gives its number, Peek asks that company. With a postal number (two letters, nine digits, two letters) and no company named, Peek asks the post of the destination country, such as [USPS](carrier:usps) in the US, [Royal Mail](carrier:royal-mail) in the UK, [An Post](carrier:an-post) in Ireland, [Canada Post](carrier:canada-post) or [Australia Post](carrier:australia-post). With another number, it asks the one carrier that number's shape belongs to, if there is one. Once that carrier shows a scan at least as recent as Stone3PL's newest, Peek follows the parcel there and keeps Stone3PL's history. A company Stone3PL names shows on the parcel even before that ("Delivery with USPS", for example). While that company has only the announcement of the parcel, with no scan of its own, the parcel shows "Announced to …, not received yet" instead. Without such a carrier, Peek stays on Stone3PL's tracking.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Stone3PL's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Stone3PL or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while Stone3PL's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Stone3PL or the seller for you.
 
 ## Questions about Stone3PL tracking
 

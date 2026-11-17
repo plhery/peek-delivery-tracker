@@ -3,7 +3,7 @@ title: BOX NOW tracking: lockers, PIN codes and statuses
 description: Track a BOX NOW parcel in Greece, Cyprus, Bulgaria or Croatia: the 10-digit parcel ID, what the statuses mean, locker PINs, pickup times and contacts.
 slug: box-now-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 BOX NOW is a parcel service that delivers only to its own lockers, open 24/7, in Greece, Cyprus, Bulgaria and Croatia. In Slovenia it runs lockers too, but there the shop can also have the parcel brought to your address, handed over against a signature. Track your parcel with its 10-digit parcel ID on the "Track your parcel" page of BOX NOW's site for your country, in the BOX NOW app, or in the box above. The number is in the email and the SMS or Viber message you get when the shop books your parcel.
@@ -92,7 +92,7 @@ None of the sites says what a call costs.
 
 Peek then shows the status, the history with the place each scan names, the expected delivery day while the parcel is on its way, the destination country, the delivery time, and the locker's name once the parcel waits there or was collected. It leaves out the locker's address and position, the pickup deadline, the compartment size, payment, the sender and postcodes, so check the "Last pick up time" on BOX NOW's own page.
 
-Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel has reached its final destination, waiting for pickup`, delivered `Parcel has been delivered`. `Expired`, `Delivery has expired`, `Lost`, `Parcel search - We will update you shortly` and the sender's cancellations show under "Needs attention". Peek checks every 10 minutes while you follow the parcel, and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't extend the pickup time or resend your PIN.
+Peek's wordings may differ from BOX NOW's site: ready for pickup reads `Parcel has reached its final destination, waiting for pickup`, delivered `Parcel has been delivered`. `Expired`, `Delivery has expired`, `Lost`, `Parcel search - We will update you shortly` and the sender's cancellations show under "Needs attention". Peek checks up to every 10 minutes while you follow the parcel, and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't extend the pickup time or resend your PIN.
 
 ## Questions about BOX NOW tracking
 

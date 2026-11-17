@@ -3,7 +3,7 @@ title: FAN Courier tracking: AWB numbers, statuses and FANbox
 description: Track a FAN Courier parcel in Romania: where the AWB number comes from, what the tracking statuses mean, FANbox lockers, missed deliveries and contacts.
 slug: fan-courier-tracking
 published: 2026-10-13
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 FAN Courier (legally FAN Courier Express S.R.L.) is a Romanian courier founded in 1998, with more than 3,000 FANbox lockers across the country; it calls itself Romania's courier leader since 2006. Track a parcel with its AWB number on [fancourier.ro's AWB Tracking page](https://www.fancourier.ro/en/awb-track/), with the link in FAN's SMS or in the FAN Courier app. The AWB comes from the shop or person who sent the parcel.
@@ -83,7 +83,7 @@ FAN's channels, as listed on its site on 10 November 2026:
 
 [Peek](/) asks FAN Courier itself about a 13-digit number starting with `2`, `3`, `4`, `5` or `7`, along with [Delhivery](carrier:delhivery), whose numbers can look the same, and Econt when your phone's region or your connection is Bulgarian. If only FAN knows it, you'll see "FAN Courier has this parcel."; if another carrier knows it too, you choose. An AWB of any other shape isn't recognised: paste it all the same (Peek follows more than 3,500 carriers), then press "Change" and pick "FAN Courier". A link from FAN's tracking page, Romanian (`/awb-tracking/`) or English (`/en/awb-track/`), with `tracking=` or `awb=` or with a 13-digit AWB after `/awb-tracking/`, goes straight to FAN Courier.
 
-Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time and shows them in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks every 10 minutes, or every 2 from 6 a.m. Romanian time on the day FAN scans the parcel out for delivery, while FAN's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+Peek shows each of FAN's scans with its town and time. FAN's times carry no time zone, so Peek reads them as Romanian time and shows them in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. Scans keep FAN's English wording, except `Shipment picked up`, which shows as "Shipment collected". Peek checks up to every 10 minutes, or every 2 from 6 a.m. Romanian time on the day FAN scans the parcel out for delivery, while FAN's own tracker answers (through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 It shows no expected delivery day and no FANbox name, and leaves out the recipient's name, contents, weight and payment details. A return travels under its own AWB, so this one never shows as returned.
 

@@ -3,7 +3,7 @@ title: Swiss Post Cargo tracking: statuses, delivery and contact
 description: Track a Swiss Post Cargo shipment: which number works, what Data entry POST and Loaded for Delivery mean, how freight is delivered and who to call.
 slug: swiss-post-cargo-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Swiss Post Cargo is Swiss Post's freight brand: pallets and other goods carried by truck, from single items to whole truckloads, not ordinary parcels. Track a shipment on its Track & Trace page (tt.swisspost-cargo.com) with the barcode or the reference the sender gave you, or paste it in the box above. If what you have is a Swiss Post parcel number, it belongs on [Swiss Post's page](carrier:swiss-post) instead.
@@ -71,7 +71,7 @@ A 20-digit barcode starting `00` belongs to whoever shipped it, not to one carri
 
 Peek shows the status and the history with the town of each scan on a map, with the delivery time. Times are read on Zurich time and shown in your device's time zone. Wordings stay in English; `Loaded for Delivery` counts as out for delivery. The signature and photo rows fold into the delivery scan, without the picture. Peek leaves out your name and address and has no expected delivery, weight or pickup point.
 
-A reference shared by several shipments is read only while one of them has scans from the last 60 days; otherwise it reads as not found, so use the barcode. Peek checks every 10 minutes, or every 2 from 6 a.m. Swiss time on the day Swiss Post Cargo scans the shipment out for delivery, while Swiss Post Cargo's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly.
+A reference shared by several shipments is read only while one of them has scans from the last 60 days; otherwise it reads as not found, so use the barcode. Peek checks up to every 10 minutes, or every 2 from 6 a.m. Swiss time on the day Swiss Post Cargo scans the shipment out for delivery, while Swiss Post Cargo's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps or delivery day only. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about Swiss Post Cargo tracking
 

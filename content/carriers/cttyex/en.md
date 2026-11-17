@@ -3,7 +3,7 @@ title: CTTYEX tracking: CTTY numbers, scans and Beijing time
 description: CTTYEX tracking from Shenzhen: the CTTY…CN number shape, the English scans on its Chinese tracker, and why every time on it is Beijing time.
 slug: cttyex-tracking
 published: 2026-10-28
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 CTTYEX is Shenzhen Chengtai Tongyun International Logistics (深圳诚泰通运国际物流, 诚泰通运 for short), a cross-border e-commerce forwarder in China that ships parcels abroad for online sellers. Its site says it was founded in 2011 and ships for sellers on platforms such as Amazon, Wish, Tophatter, VOVA and Shopify, with charter flights to the US, the UK, Canada, Germany and Australia. Its tracking numbers are CTTY, ten digits and CN, CTTY standing for Chengtai Tongyun. Look yours up on CTTYEX's tracker at [cttyvip888.com](https://www.cttyvip888.com/assets/html/search.html), or paste it in the box above.
@@ -96,7 +96,7 @@ Peek's status follows the newest scan it understands, and the summary only when 
 
 CTTYEX's tracker shows no delivery estimate, weight or service name, and names neither the delivering company nor a second number, so Peek has none of them either. It keeps asking CTTYEX's tracker under the CTTY number and never moves the parcel to another carrier.
 
-Peek checks every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact CTTYEX or the seller for you.
+Peek checks up to every 10 minutes and can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact CTTYEX or the seller for you.
 
 ## Questions about CTTYEX tracking
 

@@ -3,7 +3,7 @@ title: DPD Austria tracking: statuses, Pickup shops and contact
 description: Track a DPD parcel in Austria: the 14-digit parcel number and PIN, what myDPD's German and English statuses mean, Pickup deadlines and how to reach DPD.
 slug: dpd-austria-tracking
 published: 2026-11-02
-updated: 2026-11-07
+updated: 2026-11-17
 ---
 
 DPD Austria is a private parcel company based in Leopoldsdorf. Within Austria, it usually delivers within one working day of getting the parcel from the shop. Track a parcel on [myDPD](https://www.mydpd.at/), DPD Austria's tracking site and app, with the 14-digit parcel number from the shop's shipping email, or paste the number in the box above.
@@ -90,7 +90,7 @@ Other 14-digit numbers don't point Peek to DPD Austria: they fit several DPD com
 
 **What you see.** The status, the history in myDPD's words with each depot's town and country, and the delivery time, in Austrian time (a scan in a country on another clock keeps its local time). A parcel at a Pickup point shows as "Ready for pickup". Peek leaves out names, addresses, the time window, the Pickup point, who signed and the delivery options, and shows no expected date; myDPD gives no weight. For the Pickup point, check myDPD or DPD's card; for the code, DPD's email or SMS.
 
-Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers (through tracking services, every 15 minutes). It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. To change the delivery, use myDPD.
+Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DPD scans the parcel out for delivery, while DPD's own tracker answers (through tracking services, every 15 minutes). It notifies you as you choose: "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. To change the delivery, use myDPD.
 
 ## Questions about DPD tracking in Austria
 

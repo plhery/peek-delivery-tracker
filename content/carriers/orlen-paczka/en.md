@@ -3,7 +3,7 @@ title: ORLEN Paczka tracking: numbers, statuses and pickups
 description: Track an ORLEN Paczka parcel in English: the 13-digit number, what the Polish statuses mean, pickup times, Allegro and Vinted parcels, complaints.
 slug: orlen-paczka-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 ORLEN Paczka is a Polish parcel network, formerly Paczka w RUCHu, that delivers to parcel lockers and pickup points. Track a parcel on ORLEN Paczka's own tracking page at orlenpaczka.pl, or paste the number in the box above. The number is the 13-digit parcel number from the shop's or seller's message.
@@ -81,7 +81,7 @@ ORLEN Paczka doesn't send links by SMS and doesn't ask for extra payment for a p
 
 It shows the Polish wordings as written, the sorting-centre town on a map where named, and the delivery time, with times read on Warsaw time and shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. There is no pickup point, expected delivery, weight or sender, and the return parcel's number is dropped. A Vinted parcel handed to another country's carrier isn't followed and stays in transit. Parcels already picked up drop out of ORLEN Paczka's tracking after some months.
 
-It checks every 10 minutes and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
+It checks up to every 10 minutes and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly.
 
 ## Questions about ORLEN Paczka tracking
 

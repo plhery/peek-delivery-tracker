@@ -3,7 +3,7 @@ title: Helthjem tracking: statuses, pickup points and contact
 description: Track a Helthjem parcel in Norway: where the number is, what the Norwegian statuses mean, night drop-offs, pickup points and how to reach Helthjem.
 slug: helthjem-tracking
 published: 2026-10-13
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Helthjem is a Norwegian parcel service for online shops: it leaves parcels on your doormat or in your mailbox, including on night rounds, or sends them to a pickup point. Paste the number in the box above to track yours; Helthjem's own site, helthjem.no, has a tracking page too. Helthjem words its tracking in Norwegian, so the statuses are translated below.
@@ -83,7 +83,7 @@ Helthjem's own site, helthjem.no, has a help and contact page. When four days pa
 
 Peek shows the status, each scan's place (including sorter scans Helthjem's page hides), the time it was delivered, the shop that sent it and the pickup point's name while it waits or once collected. When Helthjem relabels a parcel for a pickup point, Peek also shows the new label's number. Statuses stay in Helthjem's Norwegian, and scan times match Helthjem's. When Helthjem books the night round, Peek shows the date in `Planlagt levering natt til …` as the expected day. It leaves out the expected day Helthjem's page shows, the point's address, the photo and postcodes.
 
-When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. While PostNord has only the announcement of the parcel, with no scan of its own, the card says "Announced to PostNord, not received yet" instead. Peek checks every 10 minutes, or every 2 on delivery day (from 6 a.m. local time, once Helthjem scans the parcel out for delivery, while Helthjem's or PostNord's own tracker answers; through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Helthjem for you.
+When Helthjem marks a parcel as one PostNord delivers, the card says "Delivery with PostNord" and Peek can follow it to PostNord under its shipment number. While PostNord has only the announcement of the parcel, with no scan of its own, the card says "Announced to PostNord, not received yet" instead. Peek checks up to every 10 minutes, or every 2 on delivery day (from 6 a.m. local time, once Helthjem scans the parcel out for delivery, while Helthjem's or PostNord's own tracker answers; through tracking services, every 15 minutes), and can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact Helthjem for you.
 
 ## Questions about Helthjem tracking
 

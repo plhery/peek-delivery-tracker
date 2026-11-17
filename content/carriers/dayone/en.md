@@ -3,7 +3,7 @@ title: DayOne tracking: DOT numbers, statuses and who delivers
 description: Track a DayOne parcel from China: what a DOT number looks like, what the statuses on DayOne's tracker mean, who delivers it and who to ask when it's late.
 slug: dayone-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 DayOne is the warehouse that sends out a shop's online orders from China. It is not a courier: it says it is "the order fulfillment warehouse, not a courier delivery service provider". Other companies carry the parcel, and DayOne's tracker, [DayOneTrack](https://www.dayonetrack.com/), in English and Chinese, shows their scans. Look up your DOT number there, or paste it in the box above. The shop gives you the number with your order's shipping details.
@@ -104,7 +104,7 @@ When DayOne gives a scan the time offset of its place, Peek uses it. For a scan 
 
 DayOne's tracker doesn't show the delivering company's number, but its lookup sometimes has it. Peek then asks that company too: your country's post for a postal number (two letters, nine digits, two letters), such as Royal Mail, USPS, Canada Post, An Post or Australia Post, or the one carrier the number's shape points to, such as YunExpress for a YT number. Once that carrier shows a scan at least as recent as DayOne's newest, Peek follows the parcel there, shows its number next to the DOT number and keeps DayOne's history.
 
-For a DOT0 number, Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DayOne scans the parcel out for delivery, while DayOne's own tracker answers; when tracking services answer, as for a DOT1 number, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact DayOne or the shop for you.
+For a DOT0 number, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day DayOne scans the parcel out for delivery, while DayOne's own tracker answers; when tracking services answer, as for a DOT1 number, hourly, and up to every 15 minutes on the delivery day. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact DayOne or the shop for you.
 
 ## Questions about DayOne tracking
 

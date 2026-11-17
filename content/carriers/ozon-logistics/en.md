@@ -3,7 +3,7 @@ title: Ozon tracking: order numbers and statuses in English
 description: Track an Ozon order: what its numbers look like, what the Russian steps on Ozon's tracker mean in English, and how Peek follows it.
 slug: ozon-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Ozon's delivery service carries the orders that sellers hand over to it, to your door or to a pickup point. Peek's catalog lists it in Russia, Belarus and Kazakhstan, also under the names Ozon Rocket and Ozon Доставка. Paste your number in the box above, with its dashes. Ozon's own tracker is tracking.ozon.ru, and Peek reads it for you, as explained below.
@@ -109,7 +109,7 @@ For an order you bought on Ozon, contact Ozon about it. For an order from anothe
 
 **Another carrier delivering.** If a tracking service names another carrier for your parcel, with that carrier's number, and Peek reads that carrier's own tracking, Peek asks it too. Once it shows a scan at least as recent as the service's latest, Peek follows the parcel there.
 
-**Checks and alerts.** While a tracking service has the parcel, Peek checks it every 15 minutes, also when it is out for delivery. After two days without a new step, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when the order is ready to collect. Peek can't contact Ozon or the seller for you.
+**Checks and alerts.** While a tracking service has the parcel, Peek checks it hourly, and up to every 15 minutes on the day it is out for delivery. Once a day passes without a new step, it checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". For a pickup point, choose "Important steps": "Delivery only" doesn't tell you when the order is ready to collect. Peek can't contact Ozon or the seller for you.
 
 ## Questions about Ozon tracking
 

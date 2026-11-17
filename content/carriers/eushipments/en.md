@@ -3,7 +3,7 @@ title: euShipments tracking: statuses and who delivers your parcel
 description: Track a euShipments order: where the number comes from, what New, Loaded hub or On delivery mean, which local courier delivers it and who to contact.
 slug: eushipments-tracking
 published: 2026-10-28
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 euShipments is an e-commerce logistics company based in Ruse, Bulgaria. It stores, packs and ships online shops' orders to the countries on its "We deliver to" list, the 27 of the EU and the UK, and hands each parcel to a local courier for the last mile. Track your number on its "Track my order" page, [eushipments.com/tracking](https://eushipments.com/tracking), or paste it in the box above. The number is the one the shop sends you.
@@ -82,7 +82,7 @@ Its FAQ, written for shops, says it offers their customers phone, email and live
 
 Peek reads euShipments' tracker. It shows the status, the history, and for warehouse and hub lines the place, with the country for hubs. It keeps euShipments' English status and leaves out the courier's wording from "Tracking Information". When the "Tracking Link:" goes to the tracker of a courier Peek can follow, such as [Econt](carrier:econt), Sameday, FAN Courier, [Packeta](carrier:packeta), Slovenská pošta or Geniki Taxydromiki, with the courier's number in the link, Peek shows "Delivery with" that courier, and the courier's number when it differs from yours. While that courier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. It asks the courier, and follows the parcel there once the courier's tracker shows dated progress at least as recent as euShipments' latest line, keeping euShipments' lines. Otherwise it stays on euShipments' history.
 
-euShipments' result shows no expected delivery date and no proof of delivery, so Peek has neither from euShipments. Peek checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while euShipments' own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact euShipments, the shop or the courier for you.
+euShipments' result shows no expected delivery date and no proof of delivery, so Peek has neither from euShipments. Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while euShipments' own tracker answers (through tracking services, every 15 minutes). It can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact euShipments, the shop or the courier for you.
 
 ## Questions about euShipments tracking
 

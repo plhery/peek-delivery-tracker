@@ -3,7 +3,7 @@ title: Raben tracking: shipment number, statuses and delivery
 description: Track a Raben pallet or groupage shipment: what its number looks like, what each step on Raben's tracker means, unloading, damage claims and who to contact.
 slug: raben-tracking
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-17
 ---
 
 Raben Group is a family-owned European logistics group that started in 1931 in the Netherlands and is now based near Poznań, Poland. Its road network carries pallets and groupage (part loads) through branches in 17 European countries, and it delivers for online shops, so a bulky order can come on a Raben truck. Track it with the shipment number in the "Shipment tracking" box on raben-group.com, or paste the number in the box above.
@@ -88,7 +88,7 @@ A link from myraben.com or oftc.myraben.com files the parcel under Raben straigh
 
 Peek reads Raben's tracker in English: the status, each step in Raben's wording with its town and country, the planned delivery day (a date, without a time) or, once the driver's place on the round sets one, the delivery slot with its times, the weight and the delivery time. Times show in your device's time zone. Steps that only change a date or data leave the status as it was. Peek leaves out the item count, volume, progress bar, remarks and the office's contact. The public tracker gives no sender or recipient name, address, pickup point, service or proof of delivery.
 
-Peek checks every 10 minutes, and every 2 on the day Raben scans the shipment out for delivery, from 6 a.m. local time or, once Raben gives a delivery slot, from half an hour before it opens, while Raben's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Raben or the shop for you, book unloading or file a claim.
+Peek checks up to every 10 minutes, and up to every 2 on the day Raben scans the shipment out for delivery, from 6 a.m. local time or, once Raben gives a delivery slot, from half an hour before it opens, while Raben's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Raben or the shop for you, book unloading or file a claim.
 
 ## Questions about Raben tracking
 

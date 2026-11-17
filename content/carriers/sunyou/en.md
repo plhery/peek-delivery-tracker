@@ -3,7 +3,7 @@ title: SunYou tracking: SY numbers, statuses and who delivers
 description: Track a SunYou (SYPost) parcel from China: what the SY number looks like, what each status means, which carrier delivers it and who to ask when it stalls.
 slug: sunyou-tracking
 published: 2026-10-12
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 SunYou, also written SYPost, is a Shenzhen logistics company that carries small parcels for online sellers in China and hands them to a local carrier in your country for the last stretch. Its numbers start with SY: type yours on SunYou's tracking site, [sypost.net](https://www.sypost.net), or in the box above. The shop gives the number with your order's shipping details.
@@ -90,7 +90,7 @@ SunYou's lines show in English whatever your language, except exact matches such
 
 When SunYou gives the local carrier's number, Peek can ask that carrier (Royal Mail, DHL in Germany, Canada Post, USPS or the national post, for example) and switch to it once it shows newer progress. The parcel keeps its SunYou number, its page says "Delivery with" that carrier and lists the carrier's own number with a link. While that carrier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. This doesn't happen for every parcel: [Meest](carrier:meest) in Greece, for one, isn't followed.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SunYou's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL, USPS and GOFO in the US, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SunYou or the seller for you.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SunYou's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL, USPS and GOFO in the US, out for delivery too. It can notify you of every scan, important steps only or "Delivery only". After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SunYou or the seller for you.
 
 ## Questions about SunYou tracking
 

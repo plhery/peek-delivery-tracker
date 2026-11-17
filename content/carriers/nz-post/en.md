@@ -3,7 +3,7 @@ title: NZ Post tracking: numbers, statuses and missed parcels
 description: Track an NZ Post or CourierPost parcel: where the tracking number is, what each status means, card left, Collect my parcel, delays and how to contact NZ Post.
 slug: nz-post-tracking
 published: 2026-10-15
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 NZ Post is New Zealand's state-owned postal service, and its CourierPost courier services are tracked the same way. You can follow a parcel with NZ Post's [Track a parcel](https://www.nzpost.co.nz/tools/tracking) tool on nzpost.co.nz, in the [NZ Post app](https://www.nzpost.co.nz/personal/app) or by pasting the number in the box above.
@@ -95,7 +95,7 @@ As listed on nzpost.co.nz on 15 October 2026, Monday to Friday, 8am to 5.30pm, e
 
 Peek reads NZ Post's own tracking and shows the status, each scan with its depot on a map and the time of delivery. `Delivered` appears in Peek's own words; the rest as NZ Post writes them. It drops the recipient, signatures and the delivery photo, shows no expected delivery date or collection location, and can't redirect a parcel or set Leave my parcel.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out with the courier, while NZ Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. When Aramex New Zealand passes a rural parcel to NZ Post, Peek follows it there ("Delivery with NZ Post"). A parcel posted abroad with a postal number (two letters, nine digits, two letters) can be switched over too: when the sending post's tracking names New Zealand as the destination, or names no country and you track from New Zealand, Peek also asks NZ Post with the same number. Once NZ Post has a scan at least as recent as the sending post's newest, Peek follows the parcel there and keeps the sending post's history.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day the parcel goes out with the courier, while NZ Post's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you at every scan, at important steps or on delivery day only. When Aramex New Zealand passes a rural parcel to NZ Post, Peek follows it there ("Delivery with NZ Post"). A parcel posted abroad with a postal number (two letters, nine digits, two letters) can be switched over too: when the sending post's tracking names New Zealand as the destination, or names no country and you track from New Zealand, Peek also asks NZ Post with the same number. Once NZ Post has a scan at least as recent as the sending post's newest, Peek follows the parcel there and keeps the sending post's history.
 
 ## Questions about NZ Post tracking
 

@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -100,7 +100,7 @@ It shows the status, the history with the office of each scan (an office written
 
 For a number ending in `CN`, once China Post names your country, Peek also asks your national post with the same number (USPS, Royal Mail, An Post, Canada Post or Australia Post; Parcelforce for EMS numbers going to the UK) and switches to it once it shows fresh scans, keeping China Post's history. If China Post names no country, Peek goes by yours: in the iPhone app, the region set on your phone; on peektracker.com, the country you added the parcel from.
 
-Peek checks every 10 minutes, or hourly once China Post has gone quiet: after 12 hours without a new scan while the parcel is still "Label created" or "Received by carrier", or after two days at any other step. Once the parcel is out for delivery, it checks every 2 minutes, or every 5 when the check has to open a browser, as it does to read China Post's public preview: on that day, from 6 a.m. local time, while China Post's own tracking answers. Through tracking services, it checks every 15 minutes. When your post takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and every 30 minutes for USPS, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
+Peek checks China Post hourly, out for delivery too. When your post takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and every 30 minutes for USPS, out for delivery too. Peek can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact China Post, your post or the shop for you.
 
 ## Questions about China Post tracking
 

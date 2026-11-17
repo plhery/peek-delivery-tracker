@@ -3,7 +3,7 @@ title: Austrian Post tracking: numbers, statuses and pickup
 description: Track an Austrian Post parcel in English: number formats, what each status means in English and German, yellow notices, Poststation lockers and contacts.
 slug: austrian-post-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Austrian Post (Österreichische Post AG, in Vienna) is Austria's postal company. Track a parcel on post.at, which has an English version, in the Post App, or paste the number in the box above. The number comes from the shop that sent the parcel, from Austrian Post's e-notification, or from the yellow notice left after a missed delivery.
@@ -91,7 +91,7 @@ As listed on Austrian Post's pages on 11 October 2026:
 
 Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted or in distribution; once it's out for delivery, only a time window for that day. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
 
-Peek checks every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
+Peek checks up to every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers (through tracking services, every 15 minutes), and can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
 
 ## Questions about Austrian Post tracking
 

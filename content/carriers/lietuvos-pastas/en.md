@@ -3,7 +3,7 @@ title: Lietuvos paštas: Lithuania Post tracking, statuses, lockers
 description: Track a Lietuvos paštas (Lithuania Post, LP Express) parcel in English: the number, what each status means, parcel lockers, claims and contacts.
 slug: lietuvos-pastas-lithuania-post-tracking
 published: 2026-10-13
-updated: 2026-11-06
+updated: 2026-11-17
 ---
 
 Lietuvos paštas (Lithuania Post) is Lithuania's national post, and LP Express is its brand for parcel lockers, couriers and self-service sending. Track a parcel on [lpexpress.lt/track](https://lpexpress.lt/track), which has an English switch, or paste the number in the box above. The number is in the SMS or email Lietuvos paštas sends you, or on the receipt if you posted the item yourself.
@@ -87,7 +87,7 @@ An item from abroad with an international-format number is first followed at the
 
 Peek does the same for an item posted in Lithuania whose number has a valid check digit: it also asks the destination's post once Lietuvos paštas shows a sorting centre in the recipient's or a transit country or, until then, the post of the country you look it up from, if that isn't Lithuania. Russia, Kazakhstan and some other countries have no post Peek can ask.
 
-Peek reads the service behind lpexpress.lt/track in English and can notify you when the status changes. It checks every 10 minutes, and every 2 from 06:00 Lithuanian time on the day Lietuvos paštas sends the parcel out for delivery in Lithuania, while Lietuvos paštas's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows each step on a map with its town, sorting centre or country, customs steps, the time it was delivered and the locker or post office where the parcel waits, with its town (not the street or postcode). Lithuanian steps are read on Vilnius time and shown in your device's time zone. There's no expected arrival day and no weight. Statuses keep Lietuvos paštas's English wording; a return shows "Needs attention", then "Returned to sender" once it's back.
+Peek reads the service behind lpexpress.lt/track in English and can notify you when the status changes. It checks up to every 10 minutes, and up to every 2 from 06:00 Lithuanian time on the day Lietuvos paštas sends the parcel out for delivery in Lithuania, while Lietuvos paštas's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It shows each step on a map with its town, sorting centre or country, customs steps, the time it was delivered and the locker or post office where the parcel waits, with its town (not the street or postcode). Lithuanian steps are read on Vilnius time and shown in your device's time zone. There's no expected arrival day and no weight. Statuses keep Lietuvos paštas's English wording; a return shows "Needs attention", then "Returned to sender" once it's back.
 
 ## Questions about Lithuania Post tracking
 

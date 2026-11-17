@@ -3,7 +3,7 @@ title: YWE (YanwenExpress) tracking: numbers, scans and who to ask
 description: Track a YWE (YanwenExpress) parcel in the United States: what a YWE number looks like, what each scan means from hub to door, and who to ask.
 slug: ywe-tracking
 published: 2026-10-31
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 YWE (YanwenExpress, run by Yanwen Express LLC) is a last-mile delivery company in the United States: it brings parcels from its hubs to your door for online shops, retailers and marketplaces. Its numbers are YWE and 14 digits: paste yours in the box above, or in YWE's own tracker at [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -100,7 +100,7 @@ YWE's tracker can also show a two-hour delivery window while the parcel is in tr
 
 YWE's tracker names no other carrier, so on a parcel added with its YWE number Peek shows no "Delivery with" line and stays with YWE's tracker up to the delivery. If YWE's tracker can't be reached, Peek asks tracking services in the meantime.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while YWE's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact YWE or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while YWE's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact YWE or the seller for you.
 
 ## Questions about YWE tracking
 

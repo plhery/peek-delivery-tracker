@@ -3,7 +3,7 @@ title: ECMS Express tracking: numbers, scans and who delivers
 description: Track an ECMS Express (易客满) parcel: what its 16-character numbers look like, what each scan means, who delivers it and how to reach ECMS.
 slug: ecms-express-tracking
 published: 2026-10-31
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 ECMS Express (易客满, also ECMS Global) is an international express company that ships parcels for online shops. If a shop sent your order with ECMS, your number has 16 characters and starts with EC, ES, AP or AX: paste it in the box above. ECMS carries the parcel abroad and through customs, then a local carrier delivers it.
@@ -100,7 +100,7 @@ Peek shows the status, each scan with its town, region and country, and the dest
 
 When ECMS's record names a local carrier Peek knows, Peek shows "Delivery with" that carrier, with its number when ECMS's scans give one. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. If Peek reads that carrier's own tracker, it asks it too, and once that carrier shows a scan at least as recent as ECMS's latest, Peek follows the parcel there and keeps ECMS's scans. Otherwise, add the "LM Tracking No." as a parcel of its own: Peek follows more than 3,500 carriers.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ECMS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers ECMS's customs step, `Return to origin`, the delivery run, `Available for pickup` and the delivery, not its flights or warehouse scans. Peek can't contact ECMS or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ECMS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers ECMS's customs step, `Return to origin`, the delivery run, `Available for pickup` and the delivery, not its flights or warehouse scans. Peek can't contact ECMS or the seller for you.
 
 ## Questions about ECMS Express tracking
 

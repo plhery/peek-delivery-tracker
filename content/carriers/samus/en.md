@@ -3,7 +3,7 @@ title: SAMUS tracking: numbers, statuses and Vilnius pickup
 description: Track a SAMUS letter or parcel in Lithuania: where the number is, what the Lithuanian statuses mean, where to collect it and how to reach SAMUS.
 slug: samus-tracking
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 SAMUS (UAB „SAMUS“) is a Lithuanian courier service for letters and parcels, working since 2011. It delivers for companies that have a contract with it: registered and express letters, letters handed to the recipient in person against a signature, and express parcels in Lithuania and abroad. You can track an item on [samus.lt, under "Parcel tracking"](https://www.samus.lt/en/parcel-tracking/), or paste the number into the box above.
@@ -101,7 +101,7 @@ You can also paste a link from SAMUS's Lithuanian tracker, which ends in `/siunt
 
 For an item filed under SAMUS, Peek asks ParcelsApp, Ship24 and 17TRACK in turn and keeps the first that has it; for a number with a correct check digit, it asks the Universal Postal Union's tracking (UPU) last. While the item is on its way, in its first 30 days in Peek, Peek asks Lietuvos paštas and Chronopost first; if one shows real progress, Peek moves the item there ("Swapped automatically from SAMUS"). Peek shows the status and history the service holds, in its wording. It can lag behind SAMUS's own, and for some items there's nothing at all. If you left the carrier to Peek and the services name SAMUS, with scans that show the item moving, Peek names SAMUS for you. Until a service has the item, Peek's link opens SAMUS's tracker with your number; after that, the service's page. Peek doesn't pass your IP address or country on to the services.
 
-Until a service knows the number, an item filed under SAMUS shows "Waiting for SAMUS" on peektracker.com. While a service has the item, Peek checks every 15 minutes, out for delivery too. A service that didn't know the number is asked again a day later. After two days without a new scan, Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SAMUS or the sender for you.
+Until a service knows the number, an item filed under SAMUS shows "Waiting for SAMUS" on peektracker.com. While a service has the item, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact SAMUS or the sender for you.
 
 ## Questions about SAMUS tracking
 

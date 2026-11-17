@@ -3,7 +3,7 @@ title: Tianhui Hengyuan (THHY) tracking: AT numbers and scans
 description: Track a Tianhui Hengyuan (天汇恒源, THHY) parcel from China: what its AT…TH number looks like, which of its lines are real scans and who to ask.
 slug: tianhui-hengyuan-tracking
 published: 2026-10-30
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Tianhui Hengyuan (天汇恒源, also written THHY or TH) is a Chinese forwarder. If a shop in China sent your order with it, your number is AT, ten digits and TH: paste it in the box above. Peek knows of no website for the company, and its tracker runs on a bare server address. Read that tracker with care: after Tianhui Hengyuan's own first lines, the ones that follow are written to a script and don't show where your parcel is.
@@ -85,7 +85,7 @@ From Tianhui Hengyuan's tracker, Peek leaves out the scripted lines, any line wr
 
 **Swiss Post.** Peek hands a parcel over only when Tianhui Hengyuan's record names Swiss Post as its channel, holds a Swiss Post number and names no destination outside Switzerland and Liechtenstein. The parcel then shows "Delivery with Swiss Post" and that number (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and once Swiss Post shows a scan at least as recent as Tianhui Hengyuan's latest, Peek follows the parcel there and keeps Tianhui Hengyuan's lines in the history. Otherwise Peek stays with Tianhui Hengyuan's tracker: if the seller gives you the delivering company's number, add it as a parcel of its own.
 
-Peek checks every 10 minutes, and hourly once Tianhui Hengyuan goes quiet: 12 hours with nothing past its first line or first scan, or two days with nothing new later on. Tianhui Hengyuan's own lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps. Peek can't contact Tianhui Hengyuan or the seller for you.
+Peek checks up to every 10 minutes, and hourly once Tianhui Hengyuan goes quiet: 12 hours with nothing past its first line or first scan, or two days with nothing new later on. Tianhui Hengyuan's own lines are all early steps, so only "Every scan" alerts you to them; "Important steps" (delivery, pickup, customs, missed attempts and returns) and "Delivery only" wait for later steps. Peek can't contact Tianhui Hengyuan or the seller for you.
 
 ## Questions about Tianhui Hengyuan tracking
 

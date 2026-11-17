@@ -3,7 +3,7 @@ title: DSV tracking: shipment numbers, statuses and DB Schenker
 description: Track a DSV road, air or sea shipment, or a former DB Schenker one: which number to use, what each status means, delivery, claims and who to contact.
 slug: dsv-tracking
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-17
 ---
 
 DSV is a Danish transport and logistics group that moves freight by road, air and sea, and in 2025 it bought Schenker (DB Schenker) from Deutsche Bahn. On dsv.com, the "Track your shipment" box has two fields: "Track DSV shipment" opens DSV's tracker, myDSV, and "Track Schenker shipment" the former DB Schenker one. You need no account. The number comes from whoever booked the transport, usually the sender or the shop; paste it in the box above.
@@ -102,7 +102,7 @@ Peek shows the status, each step in DSV's wording with its town and country, and
 
 If Early Bird, a Swedish delivery company, hands your parcel over to DSV or DB Schenker, Peek names DSV as the carrier delivering it and follows DSV once DSV shows fresh scans.
 
-Peek checks every 10 minutes, or every 2 from 6 a.m. local time on the day DSV scans the shipment out for delivery, while DSV's own tracker answers (through tracking services, every 15 minutes), and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact DSV or the sender for you, book a delivery or file a claim.
+Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day DSV scans the shipment out for delivery, while DSV's own tracker answers (through tracking services, every 15 minutes), and can notify you of "Every scan", "Important steps" or "Delivery only". After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact DSV or the sender for you, book a delivery or file a claim.
 
 ## Questions about DSV tracking
 

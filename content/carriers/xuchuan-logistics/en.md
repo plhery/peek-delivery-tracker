@@ -3,7 +3,7 @@ title: Xuchuan Logistics tracking: XC numbers, delivery and help
 description: Track a Xuchuan International Logistics (旭川国际物流) parcel from China: what an XC number looks like, where its tracking comes from and who to ask.
 slug: xuchuan-logistics-tracking
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 Xuchuan International Logistics (旭川国际物流) is a freight forwarder in Xiamen, in China's Fujian province. Its website, xcwl.ltd, offers logistics for online sellers who ship abroad, as well as air and sea freight. Xuchuan has no tracker of its own: the tracking box on its site shows results from 17TRACK, a tracking service. Paste your number in the box above, or ask the shop that sent your order.
@@ -72,7 +72,7 @@ Xuchuan has no tracker for Peek to read. So Peek asks ParcelsApp, Ship24 and 17T
 
 Until a service knows the number, the parcel shows "No tracking history yet", or "Waiting for Xuchuan International Logistics" on peektracker.com once you've picked Xuchuan. Once the parcel is filed under Xuchuan, a service may name the carrier that took it over, with that carrier's own number. If Peek can read that carrier's own tracking, it asks there too. Once that carrier has a scan at least as new as the newest in the history, Peek follows the parcel there and keeps the earlier scans. The parcel shows "Delivery with" and that carrier's name; while that carrier has only been told the parcel is coming, it shows "Announced to …, not received yet".
 
-While a service has the parcel, Peek checks every 15 minutes, out for delivery too. A service that didn't know the number is asked again a day later. After two days without a new scan, Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Xuchuan or the shop for you.
+While a service has the parcel, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Xuchuan or the shop for you.
 
 ## Questions about Xuchuan tracking
 

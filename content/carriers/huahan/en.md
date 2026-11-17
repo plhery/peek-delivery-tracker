@@ -3,7 +3,7 @@ title: HuaHan Logistics tracking: HHW…YQ numbers and who delivers
 description: Track a HuaHan Logistics (华翰物流) parcel from China: what an HHW…YQ number looks like, what its scans mean and how to find who delivers it in your country.
 slug: huahan-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 HuaHan Logistics (华翰物流, also HuaHan Express or 华翰速递) is a Chinese carrier that flies parcels out of China and hands them to a local carrier in the destination country, which delivers them. If a shop sent your order with HuaHan, look for a number that starts with HHW and ends with YQ, and paste it in the box above. HuaHan's own tracker is on its website, hh-exp.cn, and can name the carrier that delivers near you, with that carrier's number for your parcel.
@@ -132,7 +132,7 @@ When HuaHan names a local carrier Peek knows, with a number of that carrier's sh
 
 When HuaHan's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words.
 
-Peek checks every 10 minutes, and every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while HuaHan's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not flights or HuaHan's own export-clearance scans: the export clearance on the way to the airport, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, is a routine step before the flight, and Peek shows it as "In transit". Peek can't contact HuaHan or the seller for you.
+Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while HuaHan's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not flights or HuaHan's own export-clearance scans: the export clearance on the way to the airport, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, is a routine step before the flight, and Peek shows it as "In transit". Peek can't contact HuaHan or the seller for you.
 
 ## Questions about HuaHan tracking
 

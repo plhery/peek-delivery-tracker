@@ -3,7 +3,7 @@ title: SpeedPAK tracking: eBay parcels, statuses and who to ask
 description: Track an eBay SpeedPAK parcel: what the 28-character number looks like, what each status means, who delivers it and who to ask when it stalls.
 slug: speedpak-tracking
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 SpeedPAK is eBay's shipping service for cross-border orders, run with the logistics company Orange Connex and built for parcels leaving China. Its number has 28 characters and starts with ES, EE or EX: type it on Orange Connex's tracking page, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), or in the box above. On eBay, the number shows as a link beside the item in your Purchase history.
@@ -87,7 +87,7 @@ eBay prints the same email with the hours in China Standard Time, on a page for 
 
 When SpeedPAK names the delivering carrier, Peek can ask that carrier and switch to it once it shows newer progress. The parcel keeps the number you added, its page says "Delivery with" that carrier, and lists the carrier's own number with a link to its tracking. While that carrier has only the announcement of the parcel, with no scan of its own, the page says "Announced to …, not received yet" instead. This depends on what SpeedPAK publishes, so not every parcel gets it.
 
-Peek checks every 10 minutes (every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SpeedPAK's own tracker answers; through tracking services, every 15 minutes), puts each scan on a map and can notify you of every scan, important steps only or "Delivery only". When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SpeedPAK or the seller, or open a claim for you.
+Peek checks up to every 10 minutes (every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while SpeedPAK's own tracker answers; through tracking services, every 15 minutes), puts each scan on a map and can notify you of every scan, important steps only or "Delivery only". When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SpeedPAK or the seller, or open a claim for you.
 
 ## Questions about SpeedPAK tracking
 

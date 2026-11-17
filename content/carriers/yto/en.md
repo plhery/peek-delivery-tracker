@@ -3,7 +3,7 @@ title: YTO Express tracking: YT numbers, statuses and contact
 description: Track a YTO Express (圆通) parcel: what a YT number looks like, what YTO's Chinese scans mean, where parcels wait in China and how to reach YTO.
 slug: yto-express-tracking
 published: 2026-10-24
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 YTO Express (圆通速递, Yuantong) is a Chinese express company founded in Shanghai in 2000, with more than 5,000 branches across China. A YTO number often belongs to a parcel inside China: an order from Taobao, Pinduoduo or Douyin, platforms YTO serves, on its way to a forwarder's warehouse or a friend's address. Track it on [YTO's tracker](https://www.yto.net.cn/ytoExpress/waybill/search), which is in Chinese only, or in the box above. YTO's service abroad is run by YTO International, which has its own tracker on [ytoglobal.com](https://www.ytoglobal.com/service).
@@ -95,7 +95,7 @@ Peek reads YTO's own tracking in China, not YTO International's. It shows the st
 
 YTO gives no expected delivery date. Peek leaves out couriers' names and phone numbers, the recipient's details and collection addresses: YTO's own tracker has those. YTO answers any number in a valid shape, so no scans yet doesn't prove a mistake: Peek keeps checking. If a parcel filed under YTO still has no record at YTO two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." on peektracker.com and from then on checks it daily, and weekly once a week has passed since you added it.
 
-It checks every 10 minutes, or every 2 minutes from 6 a.m. China time on the day YTO scans the parcel out for delivery, while YTO's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
+It checks up to every 10 minutes, or every 2 minutes from 6 a.m. China time on the day YTO scans the parcel out for delivery, while YTO's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact YTO or the seller for you.
 
 ## Questions about YTO Express tracking
 

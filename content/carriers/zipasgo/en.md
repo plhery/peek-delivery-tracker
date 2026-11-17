@@ -3,7 +3,7 @@ title: ZipasGo tracking: Parcel Stars, partner couriers and help
 description: Track a ZipasGo (formerly Parcel Stars) parcel: which number to use, which courier delivers it, what to do if it's damaged and how to reach ZipasGo.
 slug: zipasgo-tracking
 published: 2026-11-14
-updated: 2026-11-14
+updated: 2026-11-17
 ---
 
 ZipasGo is a Lithuanian parcel service that ships to every country in the world. Senders book on its platform, compare offers from several couriers and pick one; ZipasGo's own courier or a partner collects the parcel. Its earlier name was Parcel Stars, which is how eBay lists it. ZipasGo carries the whole journey, but the last part, delivery to your door, may be done by a partner courier or post, such as UPS, DHL, DPD, Royal Mail or Lietuvos paštas. Track the parcel on [zipasgo.com, under "Where is my shipment?"](https://zipasgo.com/en), or paste the number into the box above.
@@ -73,7 +73,7 @@ ZipasGo has no tracker Peek can read. So Peek asks ParcelsApp, Ship24 and 17TRAC
 
 Until a service knows the number, a parcel filed under ZipasGo shows "Waiting for ZipasGo" on peektracker.com. Once the parcel is filed under ZipasGo, a service may name the carrier that took it over, with that carrier's own number. If Peek can read that carrier's own tracking, it asks there too. Once that carrier has a scan at least as new as the newest in the history, Peek follows the parcel there and keeps the earlier scans. The parcel shows "Delivery with" and that carrier's name; while that carrier has only been told the parcel is coming, it shows "Announced to …, not received yet".
 
-While a service has the parcel, Peek checks every 15 minutes, out for delivery too. A service that didn't know the number is asked again a day later. After two days without a new scan, Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZipasGo or the seller for you.
+While a service has the parcel, Peek checks hourly, and up to every 15 minutes on the day it's out for delivery. A service that didn't know the number is asked again a day later. Once a day passes without a new scan, Peek checks every 3 hours. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact ZipasGo or the seller for you.
 
 ## Questions about ZipasGo tracking
 

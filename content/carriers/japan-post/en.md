@@ -3,7 +3,7 @@ title: Japan Post tracking: EMS numbers and statuses explained
 description: Track a Japan Post parcel or EMS from Japan: what a JP number looks like, what each status means, who delivers it in your country, customs, and who to ask.
 slug: japan-post-tracking
 published: 2026-11-02
-updated: 2026-11-02
+updated: 2026-11-17
 ---
 
 Japan Post (日本郵便, Japan Post Co., Ltd.) is Japan's postal company, owned by Japan Post Holdings, with 24,115 post offices as of 31 March 2026. It sends EMS, International Air Packets and parcels abroad, and Yu-Pack parcels within Japan. Track on Japan Post's [Track & Trace Service](https://trackings.post.japanpost.jp/services/srv/search/input?locale=en), up to ten numbers at once, or paste the number in the box above. Bought from a Japanese shop? Ask the seller for the number.
@@ -92,7 +92,7 @@ Peek shows each scan in Japan Post's English wording, with the office and place,
 
 From many countries, Peek also asks your national post with the same `JP` number: USPS from the US, [Royal Mail](carrier:royal-mail) from the UK (Parcelforce, which Japan Post names for EMS, for a number starting with E), An Post from Ireland, Canada Post, Australia Post, NZ Post, [DHL](carrier:dhl) from Germany, [La Poste](carrier:la-poste) from France and every other EU country's post. It switches to that post once it has fresh scans and keeps Japan Post's history. From Korea, China, Hong Kong or Singapore it asks no other post. The other way round, when another post's tracking names Japan as the destination, or names none and you track from Japan, Peek asks Japan Post with that post's number, unless it starts with U.
 
-Peek checks every 10 minutes, every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery (for a time slot the sender chose, from half an hour before it opens), while Japan Post's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS every 30 minutes); through tracking services, it's every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Japan Post, your post or the shop for you.
+Peek checks up to every 10 minutes, up to every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery (for a time slot the sender chose, from half an hour before it opens), while Japan Post's or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS up to every 30 minutes); through tracking services, it's every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". Peek can't contact Japan Post, your post or the shop for you.
 
 ## Questions about Japan Post tracking
 

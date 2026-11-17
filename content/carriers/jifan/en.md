@@ -3,7 +3,7 @@ title: Jifan tracking: JFGJ numbers, scans and Beijing time
 description: Track a Jifan (吉凡国际物流) parcel from China to the US: what a JFGJ…CN number looks like, what the tracker's lines mean, and why every time on it is Beijing time.
 slug: jifan-tracking
 published: 2026-11-02
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Jifan is Shenzhen Jifan International Logistics (深圳市吉凡国际物流有限公司, or 吉凡国际物流 for short), a logistics company in Shenzhen, China, founded in 2017. It ships parcels from businesses in China to buyers in the United States, by air and by sea. Its tracking numbers are JFGJ, nine digits and CN. Look yours up on [Jifan's tracker](https://www.szjf56.cn/index/tracknumber/track), or paste it in the box above. The seller gives you the number with your order's shipping details.
@@ -101,7 +101,7 @@ Peek's status follows the newest line it understands, and the summary status (`�
 
 Jifan's tracker shows no delivery date, weight, service name, delivering company or second number, so Peek has none either. It keeps following the JFGJ number on Jifan's tracker to the end.
 
-Peek checks every 10 minutes. On the day a line says the parcel is out for delivery, it checks every 2 minutes while Jifan's tracker answers, from 6 a.m. to midnight Beijing time (in the US, that day ends in the morning); through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
+Peek checks up to every 10 minutes. On the day a line says the parcel is out for delivery, it checks up to every 2 minutes while Jifan's tracker answers, from 6 a.m. to midnight Beijing time (in the US, that day ends in the morning); through tracking services, every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Jifan or the seller for you.
 
 ## Questions about Jifan tracking
 

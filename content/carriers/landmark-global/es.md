@@ -3,7 +3,7 @@ title: Landmark Global seguimiento: estados, entrega y contacto
 description: Sigue tu paquete de Landmark Global en España: dónde está el número LTN, qué significa cada estado, quién lo entrega, qué se paga en aduana y a quién reclamar.
 slug: landmark-global-seguimiento
 published: 2026-10-27
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Landmark Global lleva pedidos de tiendas online de un país a otro. Forma parte de Bnode, la empresa matriz de bpost, el operador postal de Bélgica, y para el último tramo suele dejar tu paquete en manos de una empresa de reparto local. Para seguirlo necesitas el número LTN que te da la tienda: escríbelo en [la web de seguimiento de Landmark](https://track.landmarkglobal.com/?lang=es) o pégalo en la casilla de arriba.
@@ -98,7 +98,7 @@ Peek muestra el estado, el lugar de cada paso en un mapa, el país de destino y 
 
 Cuando Landmark nombra una empresa de reparto que Peek conoce, la ficha del paquete dice «Entrega con» esa empresa y muestra su número. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, la ficha dice en su lugar «Anunciado a …, aún no recibido». Si es una que Peek sigue directamente, como [Correos](carrier:correos-spain) o [SEUR](carrier:seur), pasa a seguir el paquete con ella en cuanto esa empresa tenga escaneos recientes, sin perder el historial de Landmark. No ocurre con todos los paquetes.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00 según la hora de sus escaneos, que en los de Landmark es la del lugar que nombra el más reciente, o la del centro de Estados Unidos si Peek no encuentra ese lugar, y mientras responda el propio seguimiento de Landmark o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Landmark ni con la tienda por ti.
+Peek consulta el seguimiento hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00 según la hora de sus escaneos, que en los de Landmark es la del lugar que nombra el más reciente, o la del centro de Estados Unidos si Peek no encuentra ese lugar, y mientras responda el propio seguimiento de Landmark o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Landmark ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Landmark Global
 

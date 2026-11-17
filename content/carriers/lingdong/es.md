@@ -3,7 +3,7 @@ title: Lingdong International seguimiento: número SZLD y estados
 description: Sigue tu paquete de Lingdong International (领东国际) desde Shenzhen: cómo es un número SZLD, qué significa cada paso, dónde acaba el seguimiento y qué pagas en aduana.
 slug: lingdong-seguimiento
 published: 2026-11-03
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Lingdong International (领东国际; razón social, 深圳市领东国际货运代理有限公司) es un transitario de Shenzhen, en China, que envía al extranjero los pedidos de tiendas online chinas. Sus números de seguimiento empiezan por SZLD: pega el tuyo en la casilla de arriba o escríbelo en la casilla 快件查询 (consulta de envíos) de lingdong56.com, que abre la web de seguimiento de Lingdong.
@@ -91,7 +91,7 @@ Peek lee la web de seguimiento de Lingdong y muestra el estado, cada paso con su
 
 A menos que los datos de Lingdong nombren una empresa de reparto a la que Peek pueda pasar el paquete, el historial del paquete en Peek termina donde termina el de Lingdong. Si la tienda te da el número de seguimiento de la empresa que lo entrega en España, añádelo como un paquete aparte.
 
-Peek consulta cada 10 minutos, cada 2 minutos cuando el paquete está «En reparto» (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Lingdong), y cada hora cuando Lingdong deja de dar noticias: tras 12 horas sin un paso nuevo si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», o tras dos días en «En tránsito» o «En aduanas». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Los pasos propios de Lingdong son «Etiqueta creada», «Admitido por el transportista» o «En tránsito», y solo «Cada escaneo» te avisa de ellos; la excepción es `货物在清关【Customs clearance in progress】`, en «En aduanas», del que también te avisa «Pasos importantes». En Italia, de `In consegna` («En reparto») y `Consegnata, la spedizione è stata consegnata` («Entregado»), de Poste Italiane, te avisan además «Pasos importantes» y «Solo la entrega». Peek no puede contactar con Lingdong ni con la tienda por ti.
+Peek consulta hasta una vez cada 10 minutos, hasta una vez cada 2 minutos cuando el paquete está «En reparto» (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Lingdong), y cada hora cuando Lingdong deja de dar noticias: tras 12 horas sin un paso nuevo si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», o tras dos días en «En tránsito» o «En aduanas». Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Los pasos propios de Lingdong son «Etiqueta creada», «Admitido por el transportista» o «En tránsito», y solo «Cada escaneo» te avisa de ellos; la excepción es `货物在清关【Customs clearance in progress】`, en «En aduanas», del que también te avisa «Pasos importantes». En Italia, de `In consegna` («En reparto») y `Consegnata, la spedizione è stata consegnata` («Entregado»), de Poste Italiane, te avisan además «Pasos importantes» y «Solo la entrega». Peek no puede contactar con Lingdong ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Lingdong
 

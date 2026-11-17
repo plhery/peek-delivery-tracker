@@ -3,7 +3,7 @@ title: Hermes seguimiento: paquetes de Alemania a España
 description: Sigue un paquete Hermes enviado desde Alemania: cómo es el número, qué significan los estados, quién lo entrega en España y qué hacer si se retrasa o se pierde.
 slug: hermes-seguimiento
 published: 2026-10-23
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Hermes Germany, con sede en Hamburgo, es la empresa de paquetería del grupo Otto y reparte sobre todo dentro de Alemania. Si una tienda o un vendedor de Alemania te manda un paquete con Hermes, en España te lo entrega una empresa local con la que trabaja Hermes. Puedes seguirlo con el número de Hermes en el [seguimiento de myhermes.de](https://www.myhermes.de/empfangen/sendungsverfolgung/), que está en alemán, o pegándolo en la casilla de arriba. El número te lo tiene que dar quien te envía el paquete.
@@ -97,7 +97,7 @@ Peek muestra el estado, el historial, el día previsto de entrega (con la franja
 
 Los pasos en España aparecen como los demás: «En reparto», «Listo para recoger» o «Entregado». Si el paquete no se recogió y después aparece `Die Sendung wurde erfolgreich zugestellt.`, Peek lo marca como «Devuelto al remitente», no como entregado.
 
-Si Hermes enlaza el seguimiento de la empresa que reparte en España y Peek la conoce, muestra «Entrega con …» con su número y, en cuanto esa empresa tenga escaneos recientes, sigue allí el paquete. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, muestra en su lugar «Anunciado a …, aún no recibido». Consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, o, si Hermes da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de Hermes o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
+Si Hermes enlaza el seguimiento de la empresa que reparte en España y Peek la conoce, muestra «Entrega con …» con su número y, en cuanto esa empresa tenga escaneos recientes, sigue allí el paquete. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, muestra en su lugar «Anunciado a …, aún no recibido». Consulta hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, o, si Hermes da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de Hermes o de la empresa que reparte; a través de servicios de seguimiento, cada 15 minutos), y te avisa según elijas: «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Si añades un número de hace más de 30 días, saldrá como no encontrado: Hermes ya habrá borrado los datos. Peek no puede pedir la búsqueda ni reclamar por ti.
 
 ## Preguntas sobre el seguimiento de Hermes
 

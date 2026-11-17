@@ -3,7 +3,7 @@ title: Chronopost seguimiento: paquete desde Francia y estados
 description: Sigue un paquete de Chronopost desde Francia a España: cómo es el número, qué significan los estados en francés, puntos Pickup, incidencias y contacto.
 slug: chronopost-seguimiento
 published: 2026-11-14
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Chronopost es el servicio francés de paquetería urgente del grupo La Poste y forma parte de Geopost, la división de paquetería a la que también pertenecen DPD y [SEUR](carrier:seur). Esta guía está pensada sobre todo si esperas en España un paquete enviado desde Francia con Chronopost, por ejemplo desde una tienda online, con un apartado para entregas en Francia. Sigue el envío en chronopost.fr o pega el código arriba. El buscador de [La Poste](carrier:la-poste) en laposte.fr también acepta números de Chronopost, pero puede omitir eventos y referencias presentes en Chronopost.
@@ -92,7 +92,7 @@ Con 15 caracteres muestra «Comprobando servicios de seguimiento…» y pregunta
 
 Peek sitúa cada delegación en el mapa y muestra país de destino, hora de entrega, número del socio en Alemania o Portugal y, mientras espera recogida, nombre y dirección del punto (descartando tu domicilio y contactos del local). Solo muestra fecha prevista si hay nueva entrega o franja reservada, o con `Livraison prévue lundi prochain` de viernes a domingo. Los escaneos con huso salen en tu zona horaria («Horas en tu zona horaria: …» en peektracker.com y en la app para iPhone); los que Chronopost da sin zona se leen en la hora local de su lugar.
 
-Consulta cada 10 minutos, y en reparto cada 2 minutos desde las 6:00 (hora francesa y peninsular española) si responde Chronopost —15 minutos tras un fallo o mediante servicios de seguimiento—. Mantiene 10 minutos hasta 30 minutos antes de una franja anunciada o si sigue en reparto de un día previo; tras dos días sin cambios (12 horas en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora. Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Configura avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no gestiona reclamaciones por ti.
+Consulta hasta una vez cada 10 minutos, y en reparto hasta una vez cada 2 minutos desde las 6:00 (hora francesa y peninsular española) si responde Chronopost —15 minutos tras un fallo o mediante servicios de seguimiento—. Mantiene el ritmo habitual hasta 30 minutos antes de una franja anunciada o si sigue en reparto de un día previo; tras dos días sin cambios (12 horas en «Etiqueta creada» o «Admitido por el transportista»), revisa cada hora. Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete. Configura avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no gestiona reclamaciones por ti.
 
 ## Preguntas sobre el seguimiento de Chronopost
 

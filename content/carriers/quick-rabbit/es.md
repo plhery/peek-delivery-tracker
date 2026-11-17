@@ -3,7 +3,7 @@ title: Quick Rabbit seguimiento: código PKG, estados y Citibox
 description: Sigue tu envío de Quick Rabbit: cómo es el código PKG, qué significa cada estado, los casilleros Citibox, cómo cambiar la entrega y cómo reclamar.
 slug: quick-rabbit-seguimiento
 published: 2026-11-01
-updated: 2026-11-01
+updated: 2026-11-17
 ---
 
 Quick Rabbit es una empresa española de reparto para tiendas online y comercios, con sede en San Fernando de Henares, junto a Madrid. Reparte por toda España a domicilio, en puntos de recogida y en casilleros Citibox. Para seguir tu paquete, escribe su código `PKG` en el [seguimiento de Quick Rabbit](https://web.quickrabbit.es/es/tracking) o pégalo en la casilla de arriba. Según Quick Rabbit, el código está «en tu email de confirmación o recibo de envío».
@@ -84,7 +84,7 @@ El formulario de la página de contacto es para empresas que piden presupuesto.
 
 Peek lee el propio seguimiento de Quick Rabbit: el estado, el historial con las líneas en inglés de la tabla y la hora de entrega. Lee las horas con el reloj de Madrid y te las muestra en la zona horaria de tu dispositivo. Quick Rabbit no indica lugares, así que no hay mapa. Peek deja fuera la fecha prevista de entrega, la ciudad de destino, la referencia del remitente y las coordenadas del repartidor, que pueden ser las de tu puerta. No hay prueba de entrega ni código del casillero, y Peek no consulta a Citibox: los pasos del casillero son líneas del propio Quick Rabbit.
 
-Peek consulta el seguimiento cada 10 minutos y cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Quick Rabbit; a través de servicios de seguimiento, cada 15 minutos). Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede cambiar la entrega, abrir una reclamación ni hablar con Quick Rabbit o con la tienda por ti.
+Peek consulta el seguimiento hasta una vez cada 10 minutos y hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Quick Rabbit; a través de servicios de seguimiento, cada 15 minutos). Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede cambiar la entrega, abrir una reclamación ni hablar con Quick Rabbit o con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Quick Rabbit
 

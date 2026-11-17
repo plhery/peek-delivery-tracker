@@ -3,7 +3,7 @@ title: FedEx seguimiento: número, estados del envío y aduanas
 description: Seguimiento de FedEx en España: cómo es el número de 12 cifras, qué significan «Delivery exception» y otros escaneos, aduanas y tus derechos si se pierde.
 slug: fedex-seguimiento
 published: 2026-10-13
-updated: 2026-11-13
+updated: 2026-11-17
 ---
 
 Pega un número de seguimiento de FedEx, o un enlace de seguimiento de FedEx, en la casilla de arriba para seguir el paquete. El seguimiento propio de FedEx está en fedex.com.
@@ -66,7 +66,7 @@ Si compraste en una tienda, es ella quien responde de que el paquete te llegue, 
 
 Para leer los datos, el servidor de Peek abre la página de seguimiento de fedex.com en un navegador. Cuando FedEx la rechaza, o pide verificar al destinatario, los servicios de seguimiento completan el historial.
 
-Ves el estado, cada escaneo con su lugar y la hora que da FedEx (en la zona horaria de tu dispositivo), el recorrido por esos lugares en un mapa, el día de entrega previsto, la hora de entrega y, mientras el paquete espera, el nombre y la dirección del centro de FedEx, si FedEx los da. El paquete se consulta cada 10 minutos, cada 5 minutos cuando está en reparto, y recibes notificaciones de cada escaneo, de los pasos importantes o solo el día de entrega. Estas consultas más seguidas solo se hacen el día del reparto, desde las 6:00, hora local, y mientras responda el propio seguimiento de FedEx; a través de servicios de seguimiento, Peek consulta cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No muestra tu nombre ni tu dirección, el remitente, la firma, el peso ni las medidas. Los escaneos salen en el inglés de FedEx, salvo tres: la entrega, que nombra a quien firmó y Peek muestra como «Entregado», y `Ready for pickup` y `Shipment exception`, que Peek muestra con sus propias palabras.
+Ves el estado, cada escaneo con su lugar y la hora que da FedEx (en la zona horaria de tu dispositivo), el recorrido por esos lugares en un mapa, el día de entrega previsto, la hora de entrega y, mientras el paquete espera, el nombre y la dirección del centro de FedEx, si FedEx los da. El paquete se consulta hasta una vez cada 10 minutos, hasta una vez cada 5 minutos cuando está en reparto, y recibes notificaciones de cada escaneo, de los pasos importantes o solo el día de entrega. Estas consultas más seguidas solo se hacen el día del reparto, desde las 6:00, hora local, y mientras responda el propio seguimiento de FedEx; a través de servicios de seguimiento, Peek consulta cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No muestra tu nombre ni tu dirección, el remitente, la firma, el peso ni las medidas. Los escaneos salen en el inglés de FedEx, salvo tres: la entrega, que nombra a quien firmó y Peek muestra como «Entregado», y `Ready for pickup` y `Shipment exception`, que Peek muestra con sus propias palabras.
 
 ## Preguntas sobre el seguimiento de FedEx
 

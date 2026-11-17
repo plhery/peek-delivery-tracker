@@ -3,7 +3,7 @@ title: Seguimiento J&T Express Alemania: número JTDE y estados
 description: Rastrea un paquete de J&T Express en Alemania: formato del código JTDE, qué significa cada estado en inglés y qué hacer si se retrasa, se pierde o no llega.
 slug: jt-express-alemania-seguimiento
 published: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Fráncfort del Meno) es la red alemana del grupo de paquetería J&T Express y reparte envíos dentro de Alemania. Si una tienda envió tu pedido a una dirección alemana con J&T, el número de seguimiento empieza por `JTDE`: pégalo en el cuadro de arriba o consúltalo en el [localizador de J&T en jtexpress.de](https://www.jtexpress.de/tracking). El código te lo facilita el comercio que expidió el pedido, en el correo de envío o en la página del pedido.
@@ -103,7 +103,7 @@ Peek muestra el estado actual, cada escaneo con su hora exacta y el momento de l
 
 Mientras J&T aún no haya escaneado el envío, Peek sigue consultando y muestra «Esperando a J&T Express Germany» en peektracker.com (o, si tras dos días J&T sigue sin conocer el número, el aviso para revisarlo). Cuando el buscador de J&T no responde o desconoce el código, Peek recurre a servicios de seguimiento y presenta su historial con sus propias palabras. Si más adelante tanto J&T como los servicios de seguimiento responden sin escaneos para un envío que ya tenía eventos guardados, Peek conserva los ya encontrados y, si la situación se prolonga, indica: «El transportista no tiene escaneos nuevos por ahora. Los que ya se encontraron se guardan, y Peek sigue comprobando.»
 
-Peek consulta cada 10 minutos, y cada 2 minutos desde las 6:00 (hora local) el día en que J&T escanea el paquete en reparto mientras responda el propio buscador de J&T —o cada 15 minutos mediante servicios de seguimiento—. Tras dos días sin cambios (12 horas si continúa en «Admitido por el transportista»), pasa a revisar cada hora. Puedes activar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con J&T ni con la tienda por ti, cambiar la dirección ni concertar un nuevo reparto.
+Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos desde las 6:00 (hora local) el día en que J&T escanea el paquete en reparto mientras responda el propio buscador de J&T —o cada 15 minutos mediante servicios de seguimiento—. Tras dos días sin cambios (12 horas si continúa en «Admitido por el transportista»), pasa a revisar cada hora. Puedes activar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega». Peek no puede contactar con J&T ni con la tienda por ti, cambiar la dirección ni concertar un nuevo reparto.
 
 ## Preguntas frecuentes sobre el seguimiento de J&T Express Germany
 

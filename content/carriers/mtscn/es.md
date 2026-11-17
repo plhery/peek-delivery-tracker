@@ -3,7 +3,7 @@ title: Meiteshun seguimiento: número AMTS, estados y a quién acudir
 description: Sigue tu paquete de Meiteshun (美特顺) desde Shenzhen: cómo es un número AMTS, qué significa cada paso y por qué su «Delivered» puede estar escrito de antemano.
 slug: meiteshun-seguimiento
 published: 2026-11-01
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 Meiteshun Logistics (美特顺物流, 深圳市美特顺物流有限公司) es una empresa de logística de Shenzhen, en China. Sus números empiezan por AMTS y acaban en FS: si la tienda que te envió el pedido te ha dado uno, pégalo en la casilla de arriba. Lee con cuidado el seguimiento de Meiteshun: su sistema escribe todo el viaje del paquete, entrega incluida, cuando se crea el pedido, así que un `Delivered` en su web no demuestra que tu paquete haya llegado.
@@ -83,7 +83,7 @@ Peek no muestra los pasos escritos más de doce horas antes de la hora que lleva
 
 Peek sigue el paquete en la web de Meiteshun. Solo lo pasa a otra empresa en un caso: cuando el registro indica una línea y un número de Swiss Post, el correo suizo, para un paquete que va a Suiza o Liechtenstein. Si la tienda te da el número de la empresa que reparte en España, añádelo como otro paquete.
 
-Peek consulta cada 10 minutos, y cada 2 minutos mientras el paquete está «En reparto» (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y siempre que responda el propio seguimiento de Meiteshun o de Swiss Post; a través de servicios de seguimiento, cada 15 minutos), aunque ningún paso de Meiteshun que Peek conozca da ese estado. Puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con Meiteshun ni con la tienda por ti.
+Peek consulta hasta una vez cada 10 minutos, y hasta una vez cada 2 minutos mientras el paquete está «En reparto» (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y siempre que responda el propio seguimiento de Meiteshun o de Swiss Post; a través de servicios de seguimiento, cada 15 minutos), aunque ningún paso de Meiteshun que Peek conozca da ese estado. Puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con Meiteshun ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de Meiteshun
 

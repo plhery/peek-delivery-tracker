@@ -3,7 +3,7 @@ title: NACEX seguimiento: número de envío, estados y teléfono
 description: Pega tu número de NACEX (0000/00000000) y mira dónde está tu paquete: qué significa cada estado, qué hacer si no llega y el teléfono gratuito.
 slug: seguimiento-nacex
 published: 2026-10-10
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 Pega tu número de NACEX en la casilla de arriba para ver dónde está tu paquete, o escríbelo en «Seguimiento de envío», en la [web de NACEX](https://www.nacex.es/). Suele tener la forma `0123/45678901`: la agencia, una barra y el albarán. Búscalo en el correo de envío de la tienda o en la página de tu pedido; si no lo tienes, pídeselo a la tienda, porque NACEX no busca por número de pedido ni por código postal. NACEX es una empresa de mensajería urgente del Grupo Logista que reparte en España, Portugal, Andorra y los Países Bajos con más de 300 franquicias.
@@ -95,7 +95,7 @@ Para Andorra, NACEX no da canales propios: usa los de España. En Portugal, su n
 
 [Peek](/) reconoce un número de NACEX por su forma: exactamente cuatro cifras, una barra y ocho cifras, con o sin espacios alrededor de la barra. También puedes pegar un enlace de seguimiento de nacex.es que lleve `intcli=`, o el correo de envío entero. Con otras longitudes, usa el formulario de NACEX.
 
-Peek consulta el seguimiento de NACEX cada 10 minutos, cada 2 minutos cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de NACEX; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Muestra el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa, el día de cada paso (NACEX solo da la hora de la entrega) y la fecha estimada de entrega si NACEX la da. Arriba, el estado va en palabras de Peek, como «Incidencia» para `Contacta con agencia` o `Solucionado sin OK`. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
+Peek consulta el seguimiento de NACEX hasta una vez cada 10 minutos, hasta una vez cada 2 minutos cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de NACEX; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte una notificación en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Muestra el historial con las palabras de NACEX, los lugares donde se escaneó el paquete en un mapa, el día de cada paso (NACEX solo da la hora de la entrega) y la fecha estimada de entrega si NACEX la da. Arriba, el estado va en palabras de Peek, como «Incidencia» para `Contacta con agencia` o `Solucionado sin OK`. Deja fuera el nombre del destinatario, la prueba de entrega, los comentarios de entrega, los datos de contacto y la referencia de la tienda, y no puede acelerar el paquete ni hablar con NACEX por ti.
 
 ## Preguntas sobre el seguimiento de NACEX
 

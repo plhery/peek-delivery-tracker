@@ -3,7 +3,7 @@ title: MRW seguimiento: número de envío, estados y teléfono
 description: Pega tu número de MRW, de 12 cifras, y mira dónde está tu paquete: qué significa cada estado, cómo recoger en un MRW Point, cómo reclamar y los teléfonos.
 slug: mrw-seguimiento
 published: 2026-10-11
-updated: 2026-11-10
+updated: 2026-11-17
 ---
 
 Pega tu número de MRW en la casilla de arriba para ver dónde está tu paquete, o escríbelo en la casilla «No abonados» del [seguimiento de MRW](https://www.mrw.es/seguimiento/), sin ser cliente. Suele tener 12 cifras, como `135792468024`. Está en el correo de envío de la tienda, en el SMS de MRW o, si enviaste tú el paquete, en el justificante de la oficina. MRW es una red de franquicias de mensajería urgente con más de 550 oficinas en España, Portugal, Andorra y Gibraltar.
@@ -99,7 +99,7 @@ En las páginas de MRW no aparece chat. MRW pide que busques sus números en mrw
 
 Verás el estado, el historial y cada oficina (código postal y población, «(Plataforma)» si es un centro logístico) en un mapa, y puede enviarte notificaciones: «Cada escaneo», «Pasos importantes» o «Solo la entrega». En el historial, los estados salen en español, con las palabras de MRW, y los que Peek aún no conoce (como `Retenido en aduana`) como «Actualización de seguimiento»; arriba, Peek resume el paso con las suyas, como «Etiqueta creada» para `Pendiente de recoger` o «Incidencia» para `Entrega aplazada pendiente de cobro o cita previa`. No muestra la dirección del punto de recogida ni fecha prevista de entrega.
 
-Las horas de MRW no llevan zona horaria: Peek las lee con la hora del lugar de cada oficina y muestra el historial propio de MRW. Si MRW da solo un resumen, el historial viene de servicios universales de seguimiento; si ninguno lo tiene, solo ves el estado actual de MRW. Con el paquete en reparto, Peek consulta a MRW cada 2 minutos ese día, desde las 6:00, hora local, y mientras responda su seguimiento; a través de servicios de seguimiento, cada 15 minutos. Peek no puede acelerar el paquete ni hablar con MRW por ti.
+Las horas de MRW no llevan zona horaria: Peek las lee con la hora del lugar de cada oficina y muestra el historial propio de MRW. Si MRW da solo un resumen, el historial viene de servicios universales de seguimiento; si ninguno lo tiene, solo ves el estado actual de MRW. Con el paquete en reparto, Peek consulta a MRW hasta una vez cada 2 minutos ese día, desde las 6:00, hora local, y mientras responda su seguimiento; a través de servicios de seguimiento, cada 15 minutos. Peek no puede acelerar el paquete ni hablar con MRW por ti.
 
 ## Preguntas sobre el seguimiento de MRW
 

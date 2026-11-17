@@ -3,7 +3,7 @@ title: Sending seguimiento: número, estados y teléfono
 description: Sigue tu envío de Sending: el número de 12 cifras, qué significa cada estado, cómo cambiar la dirección, qué hacer si se pierde y el teléfono de Sending.
 slug: sending-seguimiento
 published: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-17
 ---
 
 Sending (Sending Transporte Urgente) es una empresa española de transporte urgente y logística que reparte en España y Portugal. InPost dice que la sumó en 2025, y la web de Sending lleva ya el logo «Sending by InPost». Para seguir tu envío, escribe el código en [Localiza tu envío](https://www.sending.es/localiza-tu-envio/), en sending.es, o pégalo en la casilla de arriba. Según Sending, si eres el destinatario recibirás el código por correo electrónico, SMS o app.
@@ -73,7 +73,7 @@ Peek solo acepta las 12 cifras del número de envío: si eliges Sending con otro
 
 Verás el estado y el historial con las palabras de Sending, cada escaneo con la población de su delegación; si un escaneo solo tiene fecha, aparece solo el día. Cuando la barra termina en `Entregada`, Peek da el paquete por entregado aunque los escaneos se queden antes, y con `FALTA DEFINITIVA` lo marca como «Incidencia». Peek deja fuera la referencia del remitente, la franja de entrega, los códigos postales y poblaciones de remitente y destinatario, la delegación de reparto, las opciones de entrega y el nombre de quien firmó, y no muestra peso ni fecha prevista de entrega: la franja, mírala en sending.es.
 
-Peek consulta el seguimiento cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Sending; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
+Peek consulta el seguimiento hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de Sending; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones en cada escaneo, solo en los pasos importantes o solo el día de entrega. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Sending ni con la tienda por ti, ni cambiar la dirección.
 
 ## Preguntas sobre el seguimiento de Sending
 

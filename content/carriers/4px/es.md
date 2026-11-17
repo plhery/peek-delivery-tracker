@@ -3,7 +3,7 @@ title: 4PX seguimiento: estados, quién entrega y contacto
 description: Sigue tu paquete de 4PX desde China: cómo es el número, qué significa cada estado, quién lo reparte en España y a quién preguntar si no avanza.
 slug: 4px-seguimiento
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 4PX (递四方速递, 4PX Express Co., Ltd.) es una empresa de logística de Shenzhen, en China, que envía al extranjero los paquetes de vendedores online y, en tu país, se los pasa a una empresa de reparto local para el último tramo. Puedes seguir el número en la web de 4PX, [track.4px.com](https://track.4px.com/), que tiene versión en español, o pegarlo en la casilla de arriba. El número te lo da la tienda o el marketplace donde compraste, en los datos de envío de tu pedido.
@@ -87,7 +87,7 @@ A 11 de octubre de 2026, la web de seguimiento de 4PX da un único contacto para
 
 Peek lee 4PX en inglés y muestra el estado, el historial con el lugar de cada escaneo en un mapa, la hora de entrega, el país de destino y, cuando es una empresa de la lista de Peek (USPS, por ejemplo), la empresa local con su número. Entonces puede seguir el paquete con ella en cuanto muestre novedades, aunque no pasa con todos. `Out for delivery` y `Delivery attempt unsuccessful` aparecen con las palabras de Peek; el resto, como lo escribe 4PX. 4PX no da fecha prevista de entrega, datos del punto de recogida ni peso.
 
-Las horas de los escaneos se leen en la zona horaria que da 4PX o, si no la llevan, en la hora del lugar del escaneo, y se muestran en la zona horaria de tu dispositivo. Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de 4PX; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete: cada hora con Royal Mail y Poste Italiane, y cada 30 minutos con PostNL y USPS, también con el paquete en reparto. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con 4PX ni con la tienda por ti.
+Las horas de los escaneos se leen en la zona horaria que da 4PX o, si no la llevan, en la hora del lugar del escaneo, y se muestran en la zona horaria de tu dispositivo. Peek consulta hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el paquete está en reparto (ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de 4PX; a través de servicios de seguimiento, cada 15 minutos), y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete: cada hora con Royal Mail y Poste Italiane, y cada 30 minutos con PostNL y USPS, también con el paquete en reparto. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con 4PX ni con la tienda por ti.
 
 ## Preguntas sobre el seguimiento de 4PX
 

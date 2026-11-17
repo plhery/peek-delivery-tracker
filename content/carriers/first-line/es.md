@@ -3,7 +3,7 @@ title: FIRST LINE seguimiento: números 1ST, estados y entrega
 description: Sigue tu paquete de FIRST LINE (壹号专线) desde China: cómo es un número 1ST, qué significa cada estado, quién lo entrega y a quién preguntar si se para.
 slug: first-line-seguimiento
 published: 2026-11-02
-updated: 2026-11-08
+updated: 2026-11-17
 ---
 
 FIRST LINE (壹号专线, Shenzhen First Line Supply Chain Co., Ltd.) es una empresa de logística de Shenzhen, fundada en 2018, que envía paquetes de tiendas online desde China, sobre todo a Estados Unidos, y en destino se los da a un transportista local. Forma parte del grupo 1ST (一代国际集团). Para seguir tu paquete, pega el número en la casilla de arriba o búscalo en la web de seguimiento de firstline56.com, que admite hasta 5 números a la vez.
@@ -89,7 +89,7 @@ Peek muestra el estado, el historial (hasta 100 escaneos) y el lugar de cada esc
 
 La web no da país de destino, empresa que reparte, número del último tramo ni prueba de entrega, así que Peek tampoco los muestra. Su única previsión de entrega es un escaneo de USPS reenviado, «Out for Delivery, Expected Delivery …»: mientras sea el más reciente, Peek muestra la franja horaria de ese día si el escaneo la indica; si solo da una hora límite, Peek no añade previsión, porque «En reparto» ya quiere decir hoy. Peek no pasa a USPS, a GOFO ni a UniUni: si el vendedor te da el número del último tramo, añádelo como otro paquete.
 
-Peek consulta la web cada 10 minutos y cada 2 minutos cuando el paquete va en reparto ese día, desde las 6:00, hora local (si el escaneo indica una franja horaria, desde media hora antes de que empiece), y mientras responda la propia web de FIRST LINE; a través de servicios de seguimiento, cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con FIRST LINE ni con el vendedor por ti.
+Peek consulta la web hasta una vez cada 10 minutos y hasta una vez cada 2 minutos cuando el paquete va en reparto ese día, desde las 6:00, hora local (si el escaneo indica una franja horaria, desde media hora antes de que empiece), y mientras responda la propia web de FIRST LINE; a través de servicios de seguimiento, cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. Puede avisarte con «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar con FIRST LINE ni con el vendedor por ti.
 
 ## Preguntas sobre el seguimiento de FIRST LINE
 

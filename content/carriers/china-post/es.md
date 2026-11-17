@@ -3,7 +3,7 @@ title: China Post seguimiento: número, estados y entrega en España
 description: Seguimiento de China Post: cómo es un número acabado en CN, qué significan los estados en chino, cuándo pasa a Correos y por qué se queda parado el seguimiento.
 slug: china-post-seguimiento
 published: 2026-10-22
-updated: 2026-11-16
+updated: 2026-11-17
 ---
 
 China Post, el correo de China, es el operador postal nacional chino, una empresa del Estado, y EMS es su marca urgente. Si tu pedido de AliExpress, Temu, Shein u otra tienda llegó con un número de seguimiento que acaba en `CN`, lo creó China Post, y en España lo entrega [Correos](carrier:correos-spain) con ese mismo número. Puedes seguirlo en la web de China Post, ems.com.cn, en el localizador de Correos cuando ya esté en España o en la casilla de arriba. El número está en los datos de envío de tu pedido, en la web de la tienda.
@@ -101,7 +101,7 @@ Muestra el estado, el historial con la oficina de cada lectura (una oficina escr
 
 Si el número acaba en `CN` y China Post indica España como destino, Peek pregunta también a Correos con el mismo número y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de China Post. Si China Post no da el destino o no responde, Peek elige el correo nacional por la región de tu móvil (iPhone o Android) o, en la web, por el país de tu conexión al añadir el paquete.
 
-Peek consulta cada 10 minutos, o cada hora cuando China Post deja de dar noticias: tras 12 horas sin lecturas nuevas mientras el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», o tras dos días en cualquier otro paso. Cuando el paquete está en reparto, consulta cada 2 minutos, o cada 5 cuando la consulta tiene que abrir un navegador, como para leer la vista previa pública de China Post: ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de China Post. A través de servicios de seguimiento, consulta cada 15 minutos. Si otra empresa toma el relevo para la entrega, como Correos, Peek sigue el ritmo de la que reparte el paquete. Puede mandarte notificaciones: «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar por ti con China Post, con Correos ni con la tienda.
+Peek consulta cada hora, también cuando el paquete está en reparto. Si otra empresa toma el relevo para la entrega, como Correos, Peek sigue el ritmo de la que reparte el paquete. Puede mandarte notificaciones: «Cada escaneo», «Pasos importantes» o «Solo la entrega». No puede contactar por ti con China Post, con Correos ni con la tienda.
 
 ## Preguntas sobre el seguimiento de China Post
 

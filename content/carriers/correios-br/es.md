@@ -3,7 +3,7 @@ title: Correios Brasil seguimiento: código, estados y aduanas
 description: Sigue un paquete de Correios de Brasil: cómo es el código BR, qué significan sus estados en portugués, la aduana en España y en Brasil, y quién lo entrega.
 slug: correios-brasil-seguimiento
 published: 2026-10-24
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Correios (Empresa Brasileira de Correios e Telégrafos) es el correo de Brasil; no lo confundas con Correos, el español. Si te mandan un paquete por correo desde Brasil, lleva un código de Correios acabado en `BR`, y en España lo reparte [Correos](carrier:correos-spain) con ese mismo código. Si eres tú quien envía a Brasil, Correios lo entrega allí con el código que le puso el correo de origen. Puedes seguirlo en el [rastreador de Correios](https://rastreamento.correios.com.br/app/index.php), en portugués (te pide copiar el texto de una imagen); en el localizador de Correos, cuando ya está en España, o en la casilla de arriba.
@@ -113,7 +113,7 @@ Peek trae el historial de Correios y muestra el estado, cada lectura con su ciud
 
 Correios no le dice a Peek adónde va el paquete. Si lo añades desde España (por la región de tu iPhone o, en la web, por el país de tu conexión), Peek pregunta también a Correos con el mismo código y pasa a seguirlo allí en cuanto Correos muestra lecturas nuevas, sin perder el historial de Correios; la tarjeta dice entonces «Entrega con Correos». Un paquete que mandas tú con un código acabado en `ES` se sigue en Correos, que tampoco indica el destino, así que Peek solo pregunta a Correios si quien lo sigue está en Brasil.
 
-Peek consulta cada 10 minutos, cada 2 cuando el paquete está en reparto (cada 5 si tiene que abrir el rastreador de Correios en un navegador), y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Estas consultas más seguidas solo se hacen el día del reparto, desde las 6:00, hora local, y mientras responda el propio seguimiento de Correios o de Correos; a través de servicios de seguimiento, Peek consulta cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Correios ni con Correos por ti, pagar impuestos ni reclamar.
+Peek consulta hasta una vez cada 10 minutos, hasta una vez cada 2 cuando el paquete está en reparto (cada 5 si tiene que abrir el rastreador de Correios en un navegador), y puede enviarte notificaciones con «Cada escaneo», «Pasos importantes» o «Solo la entrega». Estas consultas más seguidas solo se hacen el día del reparto, desde las 6:00, hora local, y mientras responda el propio seguimiento de Correios o de Correos; a través de servicios de seguimiento, Peek consulta cada 15 minutos. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede hablar con Correios ni con Correos por ti, pagar impuestos ni reclamar.
 
 ## Preguntas sobre el seguimiento de Correios Brasil
 

@@ -3,7 +3,7 @@ title: SpeedPAK seguimiento: paquetes de eBay, estados y contacto
 description: Sigue tu paquete SpeedPAK de eBay: cómo es el número de 28 caracteres, qué significa cada estado en inglés, quién lo entrega y a quién preguntar si se para.
 slug: speedpak-seguimiento
 published: 2026-10-11
-updated: 2026-11-12
+updated: 2026-11-17
 ---
 
 SpeedPAK es el servicio de envíos internacionales de eBay, gestionado con la empresa logística Orange Connex y pensado para paquetes que salen de China. Su número tiene 28 caracteres y empieza por ES, EE o EX: escríbelo en la web de seguimiento de Orange Connex, [orangeconnex.com/tracking](https://www.orangeconnex.com/tracking), o pégalo en la casilla de arriba. En eBay, el número aparece como un vínculo junto al artículo, en tu «Historial de compras».
@@ -87,7 +87,7 @@ eBay publica el mismo correo, con el horario en hora de China, en una página pa
 
 Cuando SpeedPAK nombra a la empresa de reparto, Peek puede consultarla y pasar a ella en cuanto muestre avances más recientes. El paquete conserva el número que añadiste, su página dice «Entrega con» y el nombre de esa empresa, y muestra el número propio de esta con un enlace a su seguimiento. Mientras Peek encuentre el paquete solo anunciado a esa empresa, sin ningún escaneo suyo, la página dice en su lugar «Anunciado a …, aún no recibido». Depende de lo que publique SpeedPAK, así que no ocurre con todos los paquetes.
 
-El paquete se consulta cada 10 minutos (cada 2 cuando el paquete está en reparto: ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de SpeedPAK; a través de servicios de seguimiento, cada 15 minutos), cada escaneo aparece en un mapa y puedes recibir notificaciones de cada escaneo, solo de los pasos importantes o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete: cada hora con Royal Mail y Poste Italiane, y cada 30 minutos con PostNL y USPS, también con el paquete en reparto. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con SpeedPAK ni con el vendedor, ni abrir una reclamación por ti.
+El paquete se consulta hasta una vez cada 10 minutos (hasta una vez cada 2 cuando el paquete está en reparto: ese día, desde las 6:00, hora local, y mientras responda el propio seguimiento de SpeedPAK; a través de servicios de seguimiento, cada 15 minutos), cada escaneo aparece en un mapa y puedes recibir notificaciones de cada escaneo, solo de los pasos importantes o «Solo la entrega». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete: cada hora con Royal Mail y Poste Italiane, y cada 30 minutos con PostNL y USPS, también con el paquete en reparto. Tras dos días sin novedades, o tras 12 horas si el paquete sigue en «Etiqueta creada» o «Admitido por el transportista», Peek pasa a consultar una vez por hora. No puede contactar con SpeedPAK ni con el vendedor, ni abrir una reclamación por ti.
 
 ## Preguntas sobre el seguimiento de SpeedPAK
 

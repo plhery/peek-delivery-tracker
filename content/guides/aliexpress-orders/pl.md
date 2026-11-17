@@ -4,7 +4,7 @@ description: Gdzie AliExpress pokazuje numer śledzenia, kto doręcza w Polsce, 
 slug: sledzenie-zamowienia-aliexpress
 picture: Etykieta paczki z zegarem odliczającym czas, samolot na niebie i Pip czekający pod drzwiami z telefonem.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-17
 ---
 
 Na AliExpress numer śledzenia jest przy zamówieniu: otwórz „Moje zamówienia”, znajdź zamówienie i kliknij „Śledź zamówienie”. Możesz go też wpisać na stronie Cainiao, firmy logistycznej grupy Alibaba, do której odsyłają strony pomocy AliExpress; ostatni odcinek w Polsce robi Poczta Polska albo inny przewoźnik. W szczegółach zamówienia biegnie też odliczanie, czyli Ochrona Kupującego: jeśli paczka nie dotrze, otwórz spór, zanim się skończy, i nie potwierdzaj odbioru, dopóki nie masz paczki w ręku.
@@ -23,7 +23,7 @@ Kogo jeszcze możesz zobaczyć zależnie od linii wysyłki: tabela w poradniku [
 - home | Ty | Potwierdź odbiór dopiero, gdy masz paczkę w ręku
 :::
 
-O cle: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdą pozycję. Sklep albo przewoźnik może ją przerzucić na Ciebie. AliExpress przypomina, że nigdy nie pokrywa ceł ani podatków i że zwykle pobiera je przewoźnik przy doręczeniu. Kwoty i terminy: [paczka zatrzymana przez urząd celny](guide:customs).
+O cle: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, bez względu na wartość paczki. Sklep albo przewoźnik może ją przerzucić na Ciebie. AliExpress przypomina, że nigdy nie pokrywa ceł ani podatków i że zwykle pobiera je przewoźnik przy doręczeniu. Kwoty i terminy: [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Gdzie jest numer śledzenia AliExpress?
 
@@ -105,7 +105,7 @@ Zwrot ma własny numer: śledzisz go przez „Śledź przesyłkę zwrotną” w 
 
 ## Czy mogę śledzić paczkę z AliExpress w Peek?
 
-Tak, numerem ze strony „Śledź zamówienie”. Wklej go do [Peek](/), który pokazuje te paczki jako „AliExpress / Cainiao”. Numery DOFR albo CNFR z 13 cyframi i HD, jak `DOFR1234567890123HD`, rozpoznaje od razu. Numery LP, CNG i AP nie są pewne po samym kształcie: Peek pyta Cainiao i każdego innego przewoźnika, do którego pasuje kształt, i pokazuje tego, który zna numer. Jeśli zna go kilku, poprosi Cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz „AliExpress / Cainiao”.
+Tak, numerem ze strony „Śledź zamówienie”. Wklej go do [Peek](/), który pokazuje te paczki jako „AliExpress / Cainiao”. Numery DOFR albo CNFR z 13 cyframi i HD, jak `DOFR1234567890123HD`, rozpoznaje od razu, tak samo AP albo CNG z 14 cyframi. Numery LP nie są pewne po samym kształcie: Peek pyta Cainiao i każdego innego przewoźnika, do którego pasuje kształt, i pokazuje tego, który zna numer. Jeśli zna go kilku, poprosi Cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz „AliExpress / Cainiao”.
 
 - **Kształt numeru, który ma kilku przewoźników.** Z kształtami, które ma kilku przewoźników, jest tak samo: jeśli Peek pokaże złego przewoźnika, naciśnij „Zmień” i wybierz tego, którego podaje śledzenie AliExpress.
 - **Numery pocztowe.** Numer taki jak `RR000000005CN` Peek sprawdza w [China Post](carrier:china-post). Żeby śledzić go przez Cainiao, wklej link śledzenia z global.cainiao.com.

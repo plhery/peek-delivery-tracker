@@ -4,7 +4,7 @@ description: Onde ver o número de seguimento do AliExpress, quem entrega em Por
 slug: rastrear-encomenda-aliexpress
 picture: Uma etiqueta de encomenda com um relógio em contagem decrescente, um avião no céu e o Pip à espera à porta com o telemóvel.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-17
 ---
 
 No AliExpress, o número de seguimento está na encomenda: abre «Meus Pedidos», encontra a encomenda e carrega em «Rastrear Pedido». Também o podes procurar no site da Cainiao, a logística do grupo Alibaba; o último troço em Portugal é feito pelos CTT ou por outra transportadora. Nos detalhes da encomenda corre ainda uma contagem decrescente, a Proteção ao Comprador: se a encomenda não chegar, abre uma disputa antes de ela acabar, e não confirmes a receção enquanto não tiveres a encomenda na mão.
@@ -23,7 +23,7 @@ Quem pode aparecer, dos [CTT](carrier:ctt) para os objetos postais à [Ecoscooti
 - home | Tu | Confirma a receção só quando tiveres a encomenda na mão
 :::
 
-Sobre a alfândega: desde 1 de julho de 2026, as compras até 150 € vindas de fora da UE pagam 3 € de direitos por tipo de produto, e a Comissão Europeia indica que, desde 1 de novembro de 2026, se junta uma taxa de tratamento da União de 2 € por tipo de produto, que quem declara a encomenda te pode cobrar. O AliExpress lembra que nunca cobre direitos nem impostos e que normalmente é a transportadora que os cobra na entrega. Valores e prazos: [encomenda retida na alfândega](guide:customs).
+Sobre a alfândega: desde 1 de julho de 2026, as compras até 150 € vindas de fora da UE pagam 3 € de direitos por tipo de produto, e a Comissão Europeia indica que, desde 1 de novembro de 2026, se junta uma taxa de tratamento da União de 2 € por tipo de produto, seja qual for o valor, que quem declara a encomenda te pode cobrar. O AliExpress lembra que nunca cobre direitos nem impostos e que normalmente é a transportadora que os cobra na entrega. Valores e prazos: [encomenda retida na alfândega](guide:customs).
 
 ## Onde está o número de seguimento do AliExpress?
 
@@ -105,7 +105,7 @@ A devolução tem o seu próprio número: segues com «Rastrear Pacote de Devolu
 
 ## Posso seguir uma encomenda AliExpress no Peek?
 
-Sim, com o número da página «Rastrear Pedido». Cola-o no [Peek](/), que mostra estas encomendas como «AliExpress / Cainiao». Reconhece logo os números DOFR ou CNFR com 13 algarismos e HD, como `DOFR1234567890123HD`. Os LP, CNG e AP não são seguros só pela forma: o Peek pergunta à Cainiao, e a qualquer outra transportadora a que a forma corresponda, e mostra a que conhece o número. Se várias o conhecerem, pede-te que escolhas; se mostrar a errada, toca em «Alterar» e escolhe «AliExpress / Cainiao».
+Sim, com o número da página «Rastrear Pedido». Cola-o no [Peek](/), que mostra estas encomendas como «AliExpress / Cainiao». Reconhece logo os números DOFR ou CNFR com 13 algarismos e HD, como `DOFR1234567890123HD`, e também os AP ou CNG com 14 algarismos. Os LP não são seguros só pela forma: o Peek pergunta à Cainiao, e a qualquer outra transportadora a que a forma corresponda, e mostra a que conhece o número. Se várias o conhecerem, pede-te que escolhas; se mostrar a errada, toca em «Alterar» e escolhe «AliExpress / Cainiao».
 
 - **Uma forma usada por várias transportadoras.** Com as formas partilhadas por várias transportadoras é igual: se o Peek mostrar a transportadora errada, toca em «Alterar» e escolhe a que o seguimento do AliExpress indica.
 - **Números postais e da Ecoscooting.** Um número postal como `RR000000005CN` vai para a [China Post](carrier:china-post), e um da Ecoscooting, `CNPRT` e 20 algarismos, o Peek reconhece pela forma. Para seguir um número postal pela Cainiao, cola a ligação de seguimento do global.cainiao.com.

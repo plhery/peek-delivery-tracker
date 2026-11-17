@@ -4,7 +4,7 @@ description: Où AliExpress affiche ton numéro de suivi, qui livre en France, e
 slug: suivi-colis-aliexpress
 picture: Une étiquette de colis avec un compte à rebours, un avion au-dessus, et Pip qui attend à la porte, téléphone en main.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-17
 ---
 
 Sur AliExpress, ouvre « Mes commandes », trouve la commande et clique sur « Suivre la commande ». Tu peux aussi taper le numéro sur le site de Cainiao, la branche logistique du groupe Alibaba, vers lequel renvoie l'aide d'AliExpress. Un transporteur de ton pays fait la dernière étape. Le détail de la commande affiche aussi un compte à rebours, celui de ta protection acheteur : si le colis n'arrive pas, ouvre un litige avant la fin, et ne confirme la réception qu'une fois le colis entre tes mains.
@@ -101,7 +101,7 @@ Une fois le retour accepté, envoie l'article par un envoi suivi à l'adresse de
 
 ## Peut-on suivre un colis AliExpress dans Peek ?
 
-Oui, avec le numéro de suivi affiché sous « Suivre la commande ». Colle-le dans [Peek](/), qui affiche ces colis sous le nom « AliExpress / Cainiao ». Peek reconnaît tout de suite DOFR ou CNFR suivi de 13 chiffres et de HD, comme `DOFR1234567890123HD`. Pour les numéros LP, AP et CNG, la forme seule ne suffit pas : Peek interroge Cainiao et les autres transporteurs auxquels la forme correspond, comme Colis Privé pour un numéro CNG qui finit par ce qui ressemble à un code postal français, et affiche celui qui connaît le numéro. Si plusieurs le connaissent, il te demande de choisir ; s'il affiche le mauvais, appuie sur « Changer » et choisis « AliExpress / Cainiao ».
+Oui, avec le numéro de suivi affiché sous « Suivre la commande ». Colle-le dans [Peek](/), qui affiche ces colis sous le nom « AliExpress / Cainiao ». Peek reconnaît tout de suite DOFR ou CNFR suivi de 13 chiffres et de HD, comme `DOFR1234567890123HD`, et aussi AP ou CNG suivi de 14 chiffres. Pour les numéros LP, la forme seule ne suffit pas : Peek interroge Cainiao et les autres transporteurs auxquels la forme correspond, et affiche celui qui connaît le numéro. Si plusieurs le connaissent, il te demande de choisir ; s'il affiche le mauvais, appuie sur « Changer » et choisis « AliExpress / Cainiao ».
 
 Un numéro postal comme `RR000000005CN` part vers [China Post](carrier:china-post). Pour le suivre chez Cainiao, colle plutôt le lien de suivi de global.cainiao.com.
 

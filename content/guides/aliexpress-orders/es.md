@@ -4,7 +4,7 @@ description: Dónde ver el número de seguimiento de AliExpress, quién reparte 
 slug: seguimiento-pedido-aliexpress
 picture: Una etiqueta de paquete con un reloj de cuenta atrás, un avión en el cielo y Pip esperando en la puerta con el móvil.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-17
 ---
 
 En AliExpress, el número de seguimiento está en el pedido: abre «Mis pedidos», busca el pedido y pulsa «Seguir pedido». También puedes buscarlo en la web de Cainiao, la logística del grupo Alibaba; el último tramo en España lo hace Correos u otra empresa de reparto. En los detalles del pedido corre además una cuenta atrás, la Protección al Comprador: si el paquete no llega, abre una disputa antes de que termine, y no confirmes la recepción hasta tener el paquete en la mano.
@@ -13,7 +13,7 @@ En AliExpress, el número de seguimiento está en el pedido: abre «Mis pedidos�
 
 Los métodos de envío los ofrecen los vendedores, y tú eliges uno al pedir. Sea cual sea, para ver los últimos escaneos la ayuda de AliExpress te remite a la web de seguimiento de [Cainiao](carrier:cainiao), global.cainiao.com. El último tramo lo hace una empresa de aquí: para España, la ayuda de AliExpress nombra a [Correos](carrier:correos-spain), DHL, [SEUR](carrier:seur), [MRW](carrier:mrw), FedEx y [Nacex](carrier:nacex), y la página de seguimiento muestra el contacto de la que lleva tu paquete. Correos anunció en 2019 que seguiría siendo el principal operador logístico de AliExpress en España.
 
-Quién puede aparecer según la línea de envío, de Correos a [Ecoscooting](carrier:ecoscooting) con sus números `CNESP`, está en la tabla de [seguimiento de paquetes de China](guide:tracking-from-china). Con los envíos económicos, como Cainiao Super Economy, AliExpress avisa de que el seguimiento puede dejar de actualizarse tras la entrega a la aerolínea, la salida del país de origen o la llegada al de destino: lo normal es que el paquete llegue en los 30 días siguientes a ese estado.
+Quién puede aparecer según la línea de envío, de Correos a [Ecoscooting](carrier:ecoscooting) con sus números `CNESP`, está en la tabla de [seguimiento de paquetes de China](guide:tracking-from-china). Con los envíos económicos, como Cainiao Super Economy, AliExpress avisa de que el seguimiento puede dejar de actualizarse tras la entrega a la aerolínea, la salida del país de origen o la llegada al de destino: lo normal es que el paquete llegue en los 30 días siguientes a ese estado. Si la Protección al Comprador está a punto de acabar y aún no lo tienes, AliExpress te recuerda que abras una disputa.
 
 :::journey
 - warehouse | Vendedor | Envía dentro del plazo del pedido, o AliExpress cierra el pedido y te devuelve el dinero
@@ -23,7 +23,7 @@ Quién puede aparecer según la línea de envío, de Correos a [Ecoscooting](car
 - home | Tú | Confirma la recepción solo cuando tengas el paquete en la mano
 :::
 
-Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE suma, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. AliExpress recuerda que nunca cubre aranceles ni impuestos y que normalmente los cobra la empresa de transporte en la entrega. Importes, Canarias, Ceuta y Melilla: [paquete retenido en aduanas](guide:customs).
+Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que llega de fuera de la UE paga un arancel de 3 € por tipo de producto, y desde el 1 de noviembre de 2026 la UE suma, según la Comisión Europea, una tasa de tramitación de 2 € por tipo de producto. AliExpress recuerda que nunca cubre aranceles ni impuestos y que normalmente los cobra la empresa de transporte en la entrega. Correos llama a estos importes «Arancel UE» y «Tasa UE»: los dos se deben aunque ya hayas pagado el IVA al comprar (IOSS), y la tasa, sea cual sea el valor del envío. Si no se pagaron por adelantado al comprar, Correos los cobra antes de entregarte el paquete: en la App de Correos, al cartero o en una oficina. Importes, Canarias, Ceuta y Melilla: [paquete retenido en aduanas](guide:customs).
 
 ## ¿Dónde está el número de seguimiento de AliExpress?
 
@@ -77,7 +77,7 @@ Que el seguimiento se quede quieto varios días, o que el número cambie cuando 
 
 ## Paquete de AliExpress no recibido o marcado como entregado: qué hacer
 
-Tu margen es la Protección al Comprador. AliExpress te deja abrir una disputa desde el día 11 después del envío hasta 15 días después de que acabe el plazo de entrega, o 15 días después de confirmar la recepción. Si el paquete se mueve con normalidad y el plazo no ha terminado, solo puedes abrirla cuando acabe. Si el seguimiento no muestra nada, el paquete volvió al vendedor, está retenido en aduanas o fue a una dirección equivocada, no hace falta esperar.
+Tu margen es la Protección al Comprador. AliExpress te deja abrir una disputa desde el día 11 después del envío hasta 15 días después de que acabe el plazo de entrega, o 15 días después de confirmar la recepción. El final del plazo de entrega está en los detalles del pedido, en hora del Pacífico (PST). Si el paquete se mueve con normalidad y el plazo no ha terminado, solo puedes abrirla cuando acabe. Si el seguimiento no muestra nada, el paquete volvió al vendedor, está retenido en aduanas o fue a una dirección equivocada, no hace falta esperar.
 
 ¿Marcado como entregado y no está? Para AliExpress, la empresa de reparto puede estar repartiéndolo todavía: espera, o pregunta en tu oficina de Correos o a la empresa. Su contacto está en la página de seguimiento del pedido; también lo encuentras buscando el número en global.cainiao.com y siguiendo el enlace a su web.
 
@@ -105,12 +105,12 @@ La devolución tiene su propio número: la sigues con «Seguimiento de Paquete d
 
 ## ¿Puedo seguir un paquete de AliExpress en Peek?
 
-Sí, con el número de la página «Seguir pedido». Pégalo en [Peek](/), que muestra estos paquetes como «AliExpress / Cainiao». Reconoce al momento los números DOFR o CNFR con 13 cifras y HD, como `DOFR1234567890123HD`. Los LP, CNG y AP no son seguros solo por su forma: Peek pregunta a Cainiao, y a cualquier otra empresa a la que corresponda la forma, y te muestra la que conoce el número. Si lo conocen varias, te pide que elijas; si muestra la equivocada, pulsa «Cambiar» y elige «AliExpress / Cainiao».
+Sí, con el número de la página «Seguir pedido». Pégalo en [Peek](/), que muestra estos paquetes como «AliExpress / Cainiao». Reconoce al momento los números DOFR o CNFR con 13 cifras y HD, como `DOFR1234567890123HD`, y también los AP o CNG con 14 cifras. Los LP no son seguros solo por su forma: Peek pregunta a Cainiao, y a cualquier otra empresa a la que corresponda la forma, y te muestra la que conoce el número. Si lo conocen varias, te pide que elijas; si muestra la equivocada, pulsa «Cambiar» y elige «AliExpress / Cainiao». Si en vez del número pegas el enlace de seguimiento de global.cainiao.com, Peek lo sigue directamente en Cainiao.
 
 - **Una forma que comparten varias empresas.** Con las formas que comparten varias empresas pasa lo mismo: si Peek muestra la empresa equivocada, pulsa «Cambiar» y elige la que indica el seguimiento de AliExpress.
 - **Números postales y de Ecoscooting.** Un número postal como `RR000000005CN` va a [China Post](carrier:china-post), y uno de Ecoscooting, `CNESP` y 20 cifras, Peek lo reconoce por su forma. Para seguir un número postal a través de Cainiao, pega el enlace de seguimiento de global.cainiao.com.
 - **Una nueva empresa en España.** Si la primera empresa indica quién toma el relevo en España, Peek guarda el historial anterior, pasa a la nueva en cuanto su seguimiento muestra novedades y en la tarjeta ves su nombre y su número.
-- **Varios paquetes, varios números.** Añade cada número. El número de pedido de AliExpress no es un número de seguimiento, y Peek no puede seguirlo.
+- **Varios paquetes, varios números.** Añade cada número. El número de pedido de AliExpress no es un número de seguimiento, y Peek no puede seguirlo. Si lo pegas (16 cifras que empiezan por 30, 31, 80 u 81) y ninguna empresa lo conoce, Peek te avisa: «Parece un número de pedido de AliExpress. El número de seguimiento está en el correo de envío o en la página del pedido.»
 
 Peek muestra lo que publican las empresas de reparto. La Protección al Comprador, las disputas, los cupones y los reembolsos se quedan en tu cuenta de AliExpress.
 
@@ -137,12 +137,12 @@ Peek muestra lo que publican las empresas de reparto. La Protección al Comprado
 - [AliExpress: How to track my package? (antigua página de ayuda, en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063468&language=en) – global.cainiao.com
 - [AliExpress: What are supported shipping methods on AliExpress? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015205&language=en) – métodos de los vendedores
 - [AliExpress: Why is there no tracking info after shipment? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060063472&language=en) – 11 y 12 días
-- [AliExpress: What if the logistic information does not update anymore? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060070450&language=en) – envíos económicos, estados en los que se para el seguimiento, 30 días
+- [AliExpress: What if the logistic information does not update anymore? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060070450&language=en) – envíos económicos, estados en los que se para el seguimiento, 30 días, disputa si se acaba la protección (leído el 17 de noviembre de 2026)
 - [AliExpress: Garantía de envío](https://www.aliexpress.com/ssr/300000437/cRickSSZ3H?disableNav=YES&pha_manifest=ssr&_immersiveMode=true) – un pedido en varios paquetes
 - [AliExpress: What is Buyer Protection? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015100&language=en) – cuenta atrás, ampliación
 - [AliExpress: How do I extend the Buyer Protection time? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015071&language=en) – ampliación en la web
 - [AliExpress: How do I confirm delivery once I have received my order? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015069&language=en) – 15 días, cierre automático
-- [AliExpress: How to open dispute? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – plazo, PayPal
+- [AliExpress: How to open dispute? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – plazo, fin del plazo de entrega en hora del Pacífico (PST), PayPal (leído el 17 de noviembre de 2026)
 - [AliExpress: I have not received goods. What can I do? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015091&language=en) – cuándo abrir la disputa
 - [AliExpress: I haven't received my parcel but it shows "Delivered". (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – contacto vía global.cainiao.com
 - [AliExpress: What's the dispute process after I have opened a dispute? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015093&language=en) – 10 días para devolver
@@ -151,6 +151,7 @@ Peek muestra lo que publican las empresas de reparto. La Protección al Comprado
 - [AliExpress: How do I cancel a dispute? (en inglés)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015101&language=en) – sin reapertura
 - [Cainiao: About Cainiao (en inglés)](https://www.cainiao.com/en/about-us-brief-introduction.html) – parte del grupo Alibaba
 - [Correos: Nota de prensa con AliExpress y Cainiao (2019)](https://www.correos.com/wp-content/uploads/2019/03/2019_03_19-NP-Correos-AliExpress-Cainiao.pdf) – principal operador logístico en España
+- [Correos: Arancel y tasas para envíos de importación a la UE](https://www.correos.es/es/es/atencion-al-cliente/informacion-aduanera/arancel-para-envios-de-bajo-valor-en-la-ue) – Arancel UE y Tasa UE, los dos también con IOSS y la tasa a cualquier valor, cobro antes de la entrega salvo pago por adelantado, App de Correos, cartero u oficina (leído el 17 de noviembre de 2026)
 - [Comisión Europea: EU Customs Reform (en inglés)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € desde el 1 de noviembre de 2026
 - [Comisión Europea: Customs Guidance on EUR 3 customs duty (en inglés)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € por tipo de producto
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de los números, qué consulta Peek

@@ -4,7 +4,7 @@ description: Cómo cambiar la dirección o el día de entrega de un paquete: qu�
 slug: cambiar-direccion-de-entrega
 picture: Una carretera que se bifurca en un poste indicador, hacia una casa por un lado y hacia un locker por el otro, una furgoneta que toma el nuevo desvío y Pip mirando la carretera hacia allí.
 published: 2026-10-14
-updated: 2026-10-27
+updated: 2026-11-17
 ---
 
 Si el pedido aún no ha salido, cambia la dirección en la tienda: Amazon te deja modificarla hasta que el pedido entra en el proceso de envío, y en eBay le pides al vendedor que cancele para volver a comprar. Si ya va de camino, el transportista suele dejarte elegir un vecino, un punto de recogida o una oficina desde el enlace de su SMS o su web, y a veces otro día. Mandarlo a una dirección lejana casi nunca es posible, porque quien decide qué puedes cambiar es el remitente, y cuando el paquete ya está en reparto suele ser tarde.
@@ -24,7 +24,7 @@ Si Amazon no te deja actualizar la dirección de un pedido que aún no se ha env
 
 ## ¿Se puede cambiar la dirección de un paquete ya enviado?
 
-A veces, y se lo pides al transportista, no a la tienda. Amazon lo dice tal cual: si el pedido ya se ha enviado, «ponte en contacto directamente con el transportista». Pero el cliente del transportista es el remitente, así que es él quien decide qué cambios puedes hacer tú. [Correos](carrier:correos-spain) habla de «los cambios que el ecommerce te permita» y [GLS](carrier:gls-es) ofrece las opciones «disponibles por el servicio contratado por el remitente».
+A veces, y se lo pides al transportista, no a la tienda. Amazon lo dice tal cual: si el pedido ya se ha enviado, «ponte en contacto directamente con el transportista». Pero el cliente del transportista es el remitente, así que es él quien decide qué cambios puedes hacer tú. [Correos](carrier:correos-spain) habla de «los cambios que el ecommerce te permita» y [GLS](carrier:gls-es) ofrece las opciones «disponibles por el servicio contratado por el remitente». En Vinted, si el vendedor ya lo envió, a veces se puede redirigir el paquete en camino: pídelo con «Contacta con nosotros» en su ayuda.
 
 :::journey
 - shop | Pedido hecho | La tienda aún puede cambiar la dirección
@@ -53,6 +53,7 @@ Correos y GLS te dejan acercar el paquete a donde estés, pero no mandarlo lejos
 | Correos (Correos Modify) | Otra dirección de la misma provincia, una oficina o un Citypaq | Envíos nacionales de paquetería con entrega a domicilio. Nada una vez en reparto |
 | GLS | Otra dirección del mismo código postal, un vecino, un Parcel Shop | Gratis. Para otro código postal, lo pide la tienda |
 | InPost | Otro Punto Pack o Locker, solo si su seguimiento lo ofrece | Una vez admitido el paquete, InPost no puede cambiar el punto de entrega |
+| CTT Express (servicio «a la carta») | Otra dirección o un Punto Collectt | Gratis dentro de la misma zona de reparto. Nada una vez «En reparto» |
 
 **Correos.** Te manda un SMS o un correo con la fecha de entrega y un enlace para hacer los cambios; también puedes hacerlos en la App de Correos. En una oficina, el envío te espera 15 días, o lo que haya fijado el remitente. Correos vuelve a etiquetar el paquete con cada cambio y no indica ningún coste.
 
@@ -60,11 +61,13 @@ Correos y GLS te dejan acercar el paquete a donde estés, pero no mandarlo lejos
 
 **InPost.** Una vez admitido el paquete, no cambia el Punto Pack o el Locker de destino ni lo pasa a domicilio. Aun así, mira su seguimiento o la App de InPost Iberia: según el estado del paquete, puede que te salga la opción.
 
+**[CTT Express](carrier:ctt-express).** En su web de cambios entras con el número de envío, que viene en el SMS o el correo de confirmación, el código postal de destino y el teléfono o el correo que dio el remitente. Te recomienda hacerlo en cuanto recibas el aviso «Envío en camino», y avisa de que la entrega puede retrasarse 24 horas porque hay que volver a etiquetar el paquete.
+
 Si la tienda prefiere recuperar el paquete y enviarlo de nuevo, [paquete devuelto al remitente](guide:returned-to-sender) cuenta cómo es el viaje de vuelta.
 
 ## ¿Puedo cambiar la fecha de entrega de un paquete?
 
-Depende del transportista. GLS dice que con FlexDeliveryService eliges o modificas el día de entrega. Correos Modify, en cambio, no incluye otro día entre sus opciones: solo otra dirección, una oficina o un Citypaq.
+Depende del transportista. GLS dice que con FlexDeliveryService eliges o modificas el día de entrega. Correos Modify, en cambio, no incluye otro día entre sus opciones: solo otra dirección, una oficina o un Citypaq. CTT Express, según el envío, también te deja cambiar la fecha, y si ya intentó la entrega puedes pedir desde su localizador un segundo intento. ¿Lo necesitas antes de mediodía o en sábado? En GLS eso lo elige el remitente al enviarlo, con GLS Express.
 
 ¿Te vas unos días? Manda el paquete a un sitio donde te espere: una oficina de Correos lo guarda 15 días, y un Parcel Shop de GLS, 7 días naturales. Si tardas más, mira [qué pasa con un paquete no recogido](guide:uncollected-parcel).
 
@@ -75,7 +78,7 @@ Si el repartidor ya pasó y te dejó aviso, ya no estás cambiando la entrega si
 Si no te salen las opciones o están desactivadas, suele ser por una de estas razones:
 
 - **El remitente no lo permite.** Correos lo explica así: «es posible que algunas opciones no estén disponibles si el comercio electrónico o la persona que envía el paquete no lo permite».
-- **Ya está en reparto.** Correos: «Una vez que el envío esté en reparto no se pueden realizar cambios».
+- **Ya está en reparto.** Correos: «Una vez que el envío esté en reparto no se pueden realizar cambios». CTT Express solo acepta el cambio mientras el envío no esté «En reparto».
 - **La nueva dirección está demasiado lejos.** Correos no sale de la provincia, y GLS no sale del código postal.
 - **Ya va a un punto de recogida.** InPost no cambia el Punto Pack o el Locker una vez admitido el paquete.
 - **No es un envío nacional a domicilio.** Correos Modify es para «todos los envíos de paquetería nacional con entrega domiciliaria».
@@ -100,7 +103,7 @@ Correos no dice que su reenvío cubra los envíos de SEUR, GLS, DHL, InPost o Am
 
 ### ¿Necesito una cuenta para cambiar la entrega?
 
-Con Correos y GLS, no: te basta el enlace del aviso o tu número de envío.
+Con Correos y GLS, no: te basta el enlace del aviso o tu número de envío. Con CTT Express, tampoco: el número de envío, el código postal y el teléfono o el correo del destinatario.
 
 ### ¿Puedo mandar el paquete a un locker o a un punto de recogida?
 
@@ -112,18 +115,20 @@ Revisa la dirección antes de pagar, o elige un punto de recogida o un locker al
 
 ### ¿Peek puede cambiar la dirección de entrega?
 
-No. Peek sigue el paquete y te enseña cada escaneo; solo la tienda o el transportista pueden cambiar la entrega.
+No. Peek sigue el paquete y te enseña cada escaneo; solo la tienda o el transportista pueden cambiar la entrega. Lo que sí puede hacer es avisarte: con las notificaciones en «Cada escaneo», en el navegador o en el iPhone, te enteras de cada paso antes de que el paquete salga a reparto, cuando aún puedes cambiar la entrega.
 
 :::sources
 - [Amazon.es: Modifica tus pedidos en curso](https://www.amazon.es/gp/help/customer/display.html?nodeId=GSWAYSNV7RBSTND9) – cambios hasta el proceso de envío, 30 minutos en el Marketplace, transportista después del envío
 - [eBay: Cambiar la dirección o la forma de envío después de una compra](https://www.ebay.es/help/buying/postage-delivery/changing-delivery-details-purchase?id=4028) – cancelar y volver a comprar
-- [Vinted: La dirección de entrega es incorrecta](https://www.vinted.es/help/660) – cancelar con el vendedor, redirigir en camino
+- [Vinted: La dirección de entrega es incorrecta](https://www.vinted.es/help/660) – cancelar con el vendedor, redirigir en camino con «Contacta con nosotros» (leído el 17 de noviembre de 2026)
 - [Vinted: Cambiar tu dirección de envío](https://www.vinted.es/help/66) – no afecta a los pedidos en curso
 - [Correos: Quiero modificar la entrega](https://www.correos.es/es/es/particulares/recibir/esperando-la-entrega/quiero-modificar-la-entrega) – Correos Modify, misma provincia, 15 días en oficina, nada en reparto
 - [Correos: Descubre Correos Modify](https://www.correos.es/es/es/actualidad/2024/descubre-correos-modify-para-que-tus-envios-siempre-se-adapten-a) – opciones según el remitente
 - [Correos: Reenvío postal](https://www.correos.es/es/es/particulares/recibir/planifica-tus-entregas/reenvio-postal) – paquetes y cartas, exclusiones, urgentes
 - [Correos Market: Reenvío Postal Nacional de Correos](https://www.market.correos.es/product/reenvio-postal-nacional) – 48,24 €, 1, 2 o 6 meses, 72 horas laborables, DNI o NIE
-- [GLS Spain: Redirige los paquetes antes de su recepción](https://gls-group.com/ES/es/recibir-paquetes/redirigir-paquetes/) – gratis, mismo código postal, 7 días en Parcel Shop
+- [GLS Spain: Redirige los paquetes antes de su recepción](https://gls-group.com/ES/es/recibir-paquetes/redirigir-paquetes/) – gratis, mismo código postal, 7 días en Parcel Shop, GLS Express antes de mediodía o en sábado si lo elige el remitente (leído el 17 de noviembre de 2026)
 - [GLS Spain: FlexDeliveryService](https://gls-group.com/ES/es/enviar-paquetes/envios-para-empresas/servicios/flex-delivery-service/) – elegir o modificar el día y la dirección
 - [InPost: Atención al Cliente](https://inpost.es/contacta-con-nosotros) – no se cambia el Punto Pack o Locker una vez admitido
+- [CTT Express: Cambiar dirección de entrega](https://www.cttexpress.com/cambiar-direccion-entrega/) – servicio «a la carta», otra dirección o Punto Collectt, hasta «En reparto», número de envío, código postal y teléfono o correo, gratis en la misma zona, 24 horas más (leído el 17 de noviembre de 2026)
+- [CTT Express: Preguntas frecuentes de incidencias con envíos](https://www.cttexpress.com/preguntas-frecuentes/incidencias) – cambiar la fecha o la dirección según el envío, segundo intento (leído el 17 de noviembre de 2026)
 :::

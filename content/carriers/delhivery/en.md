@@ -17,7 +17,7 @@ Delhivery calls its tracking number the AWB, or airway bill number. Its tracking
 | `1000000000000` | 13 digits: a Delhivery AWB. Several other carriers, from DPD France to Korea Post, use 13 digits too. |
 | `10000000000000` | 14 digits: also a Delhivery AWB. DPD, SEUR, BRT, Xpressbees and others use 14 digits as well. |
 
-The shape alone doesn't say Delhivery, so check the shop's message for the carrier's name. An order ID, an LRN or your mobile number works on Delhivery's site, not in Peek: Peek needs the AWB. No number at all? See [how to find your tracking number](guide:find-tracking-number).
+The shape alone doesn't say Delhivery, so check the shop's message for the carrier's name. An order ID, an LRN or your mobile number works on Delhivery's site, not in Peek: Peek needs the AWB. On Delhivery's tracking page, pick the "AWB" tab for the AWB or "Order Id" for the shop's order number; logged in with your mobile number, you see every shipment Delhivery is delivering to you. No number at all? See [how to find your tracking number](guide:find-tracking-number).
 
 ## Delhivery tracking statuses explained
 
@@ -29,6 +29,7 @@ Delhivery's tracking has a progress bar of steps, and the scans so far with thei
 | `In Transit`, `IN_TRANSIT`, `On the Way` | On its way through Delhivery's network. `IN_TRANSIT` is the same status written as a code. |
 | `Dispatched` | The scan that sends it out for delivery: it should reach you soon. |
 | `Out for Delivery` | Out for delivery, as Delhivery names the step on its progress bar. |
+| `Undelivered` | Not delivered, and going back to the seller. On a freight shipment, Delhivery gives this name to the "On the Way" step and keeps that step's date, so the date isn't that of a delivery attempt. |
 | `Delivered` | Delivered. On a parcel going back, it means delivered back to the seller. |
 | `RTO` | Returned to origin: the parcel went back and has reached the seller. |
 | `DELIVERED_SELLER` | A return has reached the seller. |
@@ -44,7 +45,7 @@ Delhivery's tracking has a progress bar of steps, and the scans so far with thei
 
 **Calls and messages.** Delhivery's terms say it or its delivery partners may call you, text you or message and call you on WhatsApp to arrange delivery, check you're available and sort out problems, and that such calls may be recorded. Shops can also have Delhivery check orders with you by AI call or WhatsApp.
 
-**Missed delivery.** For parcels booked through Delhivery Direct, its personal courier service, Delhivery's terms cancel delivery after 3 failed attempts when the recipient isn't available; the sender can have the parcel returned, at their cost. For a shop's order, the shop's own deal with Delhivery applies: ask the shop. See [missed a delivery](guide:missed-delivery).
+**Missed delivery.** For parcels booked through Delhivery Direct, its personal courier service, Delhivery's terms cancel delivery after 3 failed attempts when the recipient isn't available; the sender can have the parcel returned, at their cost. For a shop's order, the shop's own deal with Delhivery applies: ask the shop. To improve delivery success, Delhivery offers shops "WhatsApp-based NDR management" and what it calls "Smart NDR": AI calls, WhatsApp confirmations and "smart reattempts". So a call or WhatsApp message about a new attempt can be genuine, but Delhivery never asks for an OTP or credentials to confirm your address. See [missed a delivery](guide:missed-delivery).
 
 **Where it goes.** For Direct bookings, the same terms say Delhivery delivers to the address, not necessarily to you in person, and never to PO boxes; a signature or government ID can be required. You can ask for another place, or to collect it where Delhivery approves, if Delhivery agrees; it can refuse a new pin code. Weekends and holidays don't count in Direct's delivery times.
 
@@ -73,6 +74,7 @@ For a refund or a new parcel, the shop is your contact: it booked Delhivery.
 Peek can't contact Delhivery or the shop for you. As read on 31 October 2026:
 
 - **Support:** Delhivery says its customer support is reachable only through its website or app. Log in on its [support page](https://www.delhivery.com/support) with your mobile number and a one-time code (OTP), then raise a query; or raise it in the Delhivery app.
+- **Complaints:** the support page's shipment topics include "Report Issues", "Grievance Officer" and "Report on-field staff issues", next to "Destination and Contact details" and "Returns".
 - **Phone:** Delhivery warns that other customer care channels or contact numbers found online may be fraudulent.
 - **Social media:** Delhivery uses only its official Facebook, X and Instagram accounts to reach and support customers; treat messages from any other account as suspect.
 
@@ -80,13 +82,13 @@ Peek can't contact Delhivery or the shop for you. As read on 31 October 2026:
 
 ## Track a Delhivery parcel with Peek
 
-Paste the AWB in [Peek](/). Several carriers use 13 and 14 digits, so Peek doesn't show "Detected carrier": it shows "Checking tracking services…" while it asks the carriers that use the shape, Delhivery first when you're in India (your iPhone's region, or on the web where you connect from). When Delhivery knows the number, you'll see "Delhivery has this parcel." If no carrier knows it yet, add it all the same, or press "Change" and pick Delhivery: Peek follows more than 3,500 carriers. Peek doesn't ask Delhivery about a number that starts with 0 or ends in 7, 8 or 9: pick Delhivery yourself. For a number that isn't 13 or 14 digits, Delhivery picked by hand shows "doesn’t issue numbers like this one".
+Paste the AWB in [Peek](/). Several carriers use 13 and 14 digits, so Peek doesn't show "Detected carrier": it shows "Checking tracking services…" while it asks the carriers that use the shape, Delhivery first when you're in India (your iPhone's region, or on the web where you connect from). When Delhivery knows the number, you'll see "Delhivery has this parcel." If no carrier knows it yet, add it all the same, or press "Change" and pick Delhivery: Peek follows more than 3,500 carriers. Peek doesn't ask Delhivery about a number that starts with 0 or ends in 7, 8 or 9: pick Delhivery yourself. For a number that isn't 13 or 14 digits, Delhivery picked by hand gets this at the first check: "This carrier doesn’t issue tracking numbers like this one. Check the number, or choose another carrier."
 
-Filed under Delhivery, a parcel shows "Waiting for Delhivery" on peektracker.com until its first scan. Peek reads Delhivery's public tracking, without an account: each scan in Delhivery's words with its city, on India time, without the recipient's details or an expected delivery date. It skips progress-bar steps that haven't happened yet, and dates freight steps, which come without a year, from their weekday.
+Filed under Delhivery, a parcel shows "Waiting for Delhivery" on peektracker.com until its first scan. Peek reads Delhivery's public tracking, without an account: each scan in Delhivery's words with its city, without the recipient's details or an expected delivery date. It reads Delhivery's times as India time and shows them in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It skips progress-bar steps that haven't happened yet, and dates freight steps, which come without a year, from their weekday.
 
-It files the lines under its own stages: `Picked Up` shows as "Received by carrier", `In Transit` as "In transit", `Dispatched` as "Out for delivery", `RTO` as "Returned to sender", and `LOST` or a cancellation as "Needs attention". A parcel delivered back to the seller shows as "Returned to sender", not "Delivered".
+It files the lines under its own stages: `Picked Up` shows as "Received by carrier", `In Transit` as "In transit", `Dispatched` as "Out for delivery", `RTO` as "Returned to sender", and `Undelivered`, `LOST` or a cancellation as "Needs attention". A parcel delivered back to the seller shows as "Returned to sender", not "Delivered".
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Delhivery scans the parcel out for delivery, while Delhivery's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks about once an hour. Alerts: "Every scan", "Important steps" or "Delivery only".
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day Delhivery scans the parcel out for delivery, while Delhivery's own tracker answers (through tracking services, every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. Alerts: "Every scan", "Important steps" or "Delivery only".
 
 ## Questions about Delhivery tracking
 
@@ -108,10 +110,10 @@ Delhivery says its support is reachable only through its website or app: log in 
 
 :::sources
 - [Delhivery: Track your order](https://www.delhivery.com/tracking) – tracking by mobile, AWB, order ID or LRN, fraud warnings, support only by website or app
-- [Delhivery: Support](https://www.delhivery.com/support) – tracking with AWB or LRN, login with mobile number, raising a query
+- [Delhivery: Support](https://www.delhivery.com/support) – tracking with AWB or LRN, login with mobile number, raising a query, shipment topics including the Grievance Officer
 - [Delhivery: About us](https://www.delhivery.com/about-us) – largest fully integrated logistics provider, pin codes, delivery centres, 24/7
 - [Delhivery: Home](https://www.delhivery.com/) – 220+ countries, FedEx and Aramex as strategic partners
-- [Delhivery: Express Parcel](https://www.delhivery.com/services/express-parcel) – 99.5% pin code coverage, marketplaces, WhatsApp and AI-call confirmations
+- [Delhivery: Express Parcel](https://www.delhivery.com/services/express-parcel) – 99.5% pin code coverage, marketplaces, WhatsApp and AI-call confirmations, NDR management, smart reattempts
 - [Delhivery: International](https://www.delhivery.com/services/international) – DLV Saver and DLV Premium lanes and times, duties and taxes
 - [Delhivery: Personal Courier](https://www.delhivery.com/solutions/personal-courier) – Delhivery Direct bookings
 - [Delhivery: Terms and Conditions](https://www.delhivery.com/terms-and-conditions) – calls, SMS and WhatsApp about deliveries

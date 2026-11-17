@@ -4,7 +4,7 @@ description: Dove trovi il codice di tracciamento AliExpress, chi consegna in It
 slug: tracciare-ordine-aliexpress
 picture: Un'etichetta di pacco con un conto alla rovescia, un aereo in cielo e Pip che aspetta alla porta con il telefono.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-17
 ---
 
 Su AliExpress il codice di tracciamento è nell'ordine: apri "I miei ordini", trova l'ordine e clicca "Traccia ordine". Puoi scriverlo anche sul sito di Cainiao, la logistica del gruppo Alibaba, a cui rimandano le pagine di aiuto di AliExpress; l'ultimo tratto in Italia lo fa Poste Italiane o un corriere. Nei dettagli dell'ordine scorre anche un conto alla rovescia, la Protezione acquirenti: se il pacco non arriva, apri una controversia prima che finisca, e non confermare la ricezione finché non hai il pacco in mano.
@@ -105,7 +105,7 @@ Il reso ha un suo codice: lo segui con "Traccia Pacco di Reso" nei dettagli dell
 
 ## Posso tracciare un pacco AliExpress con Peek?
 
-Sì, con il codice della pagina "Traccia ordine". Incollalo in [Peek](/), che mostra questi pacchi come "AliExpress / Cainiao". Riconosce subito i codici DOFR o CNFR con 13 cifre e HD, come `DOFR1234567890123HD`. Dalla sola forma, i codici LP, CNG e AP non sono sicuri: Peek chiede a Cainiao, e agli altri corrieri a cui la forma può corrispondere, e ti mostra quello che conosce il codice. Se lo conoscono più corrieri, ti chiede di scegliere; se mostra quello sbagliato, tocca "Cambia" e scegli "AliExpress / Cainiao".
+Sì, con il codice della pagina "Traccia ordine". Incollalo in [Peek](/), che mostra questi pacchi come "AliExpress / Cainiao". Riconosce subito i codici DOFR o CNFR con 13 cifre e HD, come `DOFR1234567890123HD`, e anche quelli AP o CNG con 14 cifre. Dalla sola forma, i codici LP non sono sicuri: Peek chiede a Cainiao, e agli altri corrieri a cui la forma può corrispondere, e ti mostra quello che conosce il codice. Se lo conoscono più corrieri, ti chiede di scegliere; se mostra quello sbagliato, tocca "Cambia" e scegli "AliExpress / Cainiao".
 
 - **Una forma condivisa da più corrieri.** Le forme condivise da più corrieri funzionano allo stesso modo: un codice di 13 caratteri come `123A12345678B` può essere di Cainiao o di Poste Italiane, e Peek chiede a entrambi. Se mostra il corriere sbagliato, tocca "Cambia" e scegli quello indicato nel tracciamento di AliExpress.
 - **Codici postali.** Un codice come `RR000000005CN` va a [China Post](carrier:china-post). Per seguirlo con Cainiao, incolla il link di tracciamento di global.cainiao.com.

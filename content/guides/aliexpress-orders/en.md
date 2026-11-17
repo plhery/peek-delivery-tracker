@@ -4,7 +4,7 @@ description: Where AliExpress shows your tracking number, what its order statuse
 slug: aliexpress-order-tracking
 picture: A parcel tag with a countdown clock, a plane overhead, and Pip waiting by the door with a phone.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-17
 ---
 
 Go to **My Orders** on AliExpress, find the order and click **Track Order**, or type the number into the site of Cainiao, Alibaba's logistics group, where AliExpress's help points you. A carrier in your country does the last leg. The order details also show a countdown clock, your Buyer Protection time: if the parcel doesn't come, open a dispute before it runs out, and don't confirm receipt until the parcel is in your hands.
@@ -99,7 +99,7 @@ Once a return is agreed, send the item to the address on the request page by a t
 
 ## Can I track an AliExpress parcel in Peek?
 
-Yes, with the tracking number from the order's Track Order page. Paste it into [Peek](/), which shows these parcels as "AliExpress / Cainiao". It recognises DOFR or CNFR, 13 digits and HD, such as `DOFR1234567890123HD`, straight away. LP, AP and CNG numbers aren't certain from their shape alone, so Peek asks Cainiao, and any other carrier the shape fits, and shows the one that knows the number. If several do, it asks you to choose; if it shows the wrong one, press "Change" and pick "AliExpress / Cainiao".
+Yes, with the tracking number from the order's Track Order page. Paste it into [Peek](/), which shows these parcels as "AliExpress / Cainiao". It recognises DOFR or CNFR, 13 digits and HD, such as `DOFR1234567890123HD`, straight away, and AP or CNG followed by 14 digits too. LP numbers aren't certain from their shape alone, so Peek asks Cainiao, and any other carrier the shape fits, and shows the one that knows the number. If several do, it asks you to choose; if it shows the wrong one, press "Change" and pick "AliExpress / Cainiao".
 
 A postal number such as `RR000000005CN` goes to [China Post](carrier:china-post). To follow it through Cainiao instead, paste the global.cainiao.com tracking link.
 

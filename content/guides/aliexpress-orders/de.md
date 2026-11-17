@@ -4,7 +4,7 @@ description: Wo AliExpress deine Sendungsnummer zeigt, wer in Deutschland, Öste
 slug: aliexpress-sendungsverfolgung
 picture: Ein Paketanhänger mit Countdown-Uhr, darüber ein Flugzeug, und Pip, der mit einem Handy an der Tür wartet.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-17
 ---
 
 Öffne bei AliExpress „Meine Bestellungen“, such die Bestellung und klick auf „Bestellung verfolgen“. Oder gib die Nummer bei Cainiao ein, der Logistiksparte der Alibaba Group, auf die die Hilfe von AliExpress verweist. Die letzte Etappe übernimmt ein Paketdienst in deinem Land. In den Bestelldetails läuft außerdem ein Countdown, die Frist deines Käuferschutzes: Kommt das Paket nicht, eröffne vor ihrem Ablauf einen Streitfall, und bestätige den Erhalt erst, wenn du das Paket in den Händen hältst.
@@ -101,7 +101,7 @@ Ist eine Rücksendung vereinbart, schick den Artikel mit Sendungsverfolgung an d
 
 ## Kann ich ein AliExpress-Paket in Peek verfolgen?
 
-Ja, mit der Sendungsnummer, die die Bestellung unter „Bestellung verfolgen“ zeigt. Füge sie in [Peek](/) ein, das solche Pakete als „AliExpress / Cainiao“ zeigt. DOFR oder CNFR mit 13 Ziffern und HD, etwa `DOFR1234567890123HD`, erkennt Peek sofort. Bei LP-, AP- und CNG-Nummern ist die Form allein nicht eindeutig: Peek fragt Cainiao und jeden anderen Paketdienst, zu dem die Form passt, und zeigt den, der die Nummer kennt. Kennen sie mehrere, lässt Peek dich wählen; zeigt es den falschen, tippe auf „Ändern“ und wähle „AliExpress / Cainiao“.
+Ja, mit der Sendungsnummer, die die Bestellung unter „Bestellung verfolgen“ zeigt. Füge sie in [Peek](/) ein, das solche Pakete als „AliExpress / Cainiao“ zeigt. DOFR oder CNFR mit 13 Ziffern und HD, etwa `DOFR1234567890123HD`, erkennt Peek sofort, ebenso AP oder CNG mit 14 Ziffern. Bei LP-Nummern ist die Form allein nicht eindeutig: Peek fragt Cainiao und jeden anderen Paketdienst, zu dem die Form passt, und zeigt den, der die Nummer kennt. Kennen sie mehrere, lässt Peek dich wählen; zeigt es den falschen, tippe auf „Ändern“ und wähle „AliExpress / Cainiao“.
 
 Eine Postnummer wie `RR000000005CN` geht an [China Post](carrier:china-post). Willst du sie über Cainiao verfolgen, füg den Verfolgungslink von global.cainiao.com ein.
 

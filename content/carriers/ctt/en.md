@@ -3,7 +3,7 @@ title: CTT tracking: numbers, statuses and pickup in Portugal
 description: Track a CTT parcel in Portugal: where the tracking number comes from, what CTT's statuses mean, pickup deadlines, customs fees and how to reach CTT.
 slug: ctt-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 CTT (CTT – Correios de Portugal) is Portugal's national postal service, with an express arm, CTT Expresso. Track a parcel with "Seguir objeto" on [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt), which has an English version, in the CTT app, or by pasting the number in the box above. The number reaches you by CTT's SMS or email, on a paper notice, or from the sender.
@@ -130,7 +130,7 @@ They track separately: CTT Express, a Spanish-run courier for Spain and Portugal
 - [CTT: Serviços cobrados](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/taxas-e-servicos-cobrados/servicos-cobrados) – customs fees
 - [CTT: Isenção de direitos](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – €3 duty; €2 handling fee plus VAT, paid on arrival if not at checkout (read 14 November 2026)
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €2 Union handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, owed by the declarant
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product whatever the value, owed by the declarant
 - [CTT: Prazo para desalfandegar](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 days
 - [CTT: Condições Expresso](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – claims
 - [CTT: Refugo Postal](https://www.ctt.pt/ajuda/particulares/receber/levantar-correspondencia-ou-encomendas-/recuperar-o-correio-que-esta-no-refugo-postal) – unclaimed items

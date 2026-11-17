@@ -3,7 +3,7 @@ title: CTT rastreio: números, estados, levantamento e contactos
 description: Rastreio CTT: onde está o código de envio, o que quer dizer cada estado, prazos para levantar, taxas de alfândega, reclamações e contactos dos CTT.
 slug: ctt-rastreio
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 Os CTT – Correios de Portugal são o correio nacional, com um serviço expresso, o CTT Expresso. Para seguir uma encomenda, escreve o código de envio no «Seguir objeto» do [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) ou na app CTT, ou cola-o na caixa no topo desta página. O código chega-te por SMS ou email dos CTT, num aviso em papel na caixa do correio, ou pelo remetente.
@@ -132,7 +132,7 @@ Seguem-se em sítios diferentes: a CTT Express, rede entre Espanha e Portugal, n
 - [CTT: Serviços cobrados](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/taxas-e-servicos-cobrados/servicos-cobrados) – taxas de desalfandegamento
 - [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – direito de 3 €; Taxa de Manuseamento Aduaneiro de 2 € mais IVA, paga à chegada se não for paga na compra (lido a 14 de novembro de 2026)
 - [Comissão Europeia: EU customs reform (em inglês)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – taxa de tratamento da União de 2 € desde 1 de novembro de 2026
-- [Comissão Europeia: Guidance on the €3 customs duty and Union handling fee, PDF (em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por artigo, seja qual for o valor, devidos pelo declarante
+- [Comissão Europeia: Guidance on the €3 customs duty and Union handling fee, PDF (em inglês)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € por tipo de produto, seja qual for o valor, devidos pelo declarante
 - [CTT: Prazo para desalfandegar a minha encomenda](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 dias
 - [CTT: Reclamações](https://www.ctt.pt/ajuda/particulares/apoio-ao-cliente/contactos/reclamacoes) – canais e prazos de reclamação
 - [CTT: Condições gerais de transporte de encomendas Expresso](https://www.ctt.pt/transversais/condicoes-gerais-transporte-encomendas-expresso) – prazos de reclamação Expresso

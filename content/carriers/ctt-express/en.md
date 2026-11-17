@@ -3,7 +3,7 @@ title: CTT Express tracking: statuses in English and contact
 description: Track a CTT Express parcel in Spain or Portugal: the 22-digit number, its Spanish statuses in plain English, Collectt points, missed deliveries and who to call.
 slug: ctt-express-tracking
 published: 2026-10-11
-updated: 2026-11-15
+updated: 2026-11-17
 ---
 
 CTT Express is the Spanish parcel company of Portugal's CTT group, formerly Tourline Express, delivering across Spain and Portugal. Type your number into the [localizador](https://www.cttexpress.com/localizador-de-envios/) on cttexpress.com, or paste it in the box above. The number comes from the sender, usually the shop, and CTT Express sends it to you by SMS or email. CTT Express isn't CTT, Portugal's post: a code with letters ending in `PT` is a [CTT](carrier:ctt) number.
@@ -124,8 +124,8 @@ No. CTT Express's tracker has one box, for the tracking number, and its contact 
 - [CTT Express: Nota de prensa sobre envíos](https://www.cttexpress.com/zona-de-prensa/notas-de-prensa/como-localizo-mi-paquete-con-ctt-express-y-otras-preguntas-frecuentes-sobre-envios) – transit from abroad
 - [CTT Express: Servicio de importación de paquetería para empresas](https://www.cttexpress.com/servicios/importacion/) – imports from outside the EU, customs clearance in 12 hours on average, delivery in 24 or 48 hours
 - [CTT Express: ¿Qué hacer si mi paquete ha quedado retenido en aduanas?](https://www.cttexpress.com/blog/expansion-internacional/que-hacer-si-mi-paquete-ha-quedado-retenido-en-aduanas) – customs holds, notifications, taxes and duties, 900 110 898
-- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 EU handling fee since 1 November 2026
-- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item like the €3, whatever the value
+- [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per kind of product up to €150 since 1 July 2026, €2 EU handling fee since 1 November 2026
+- [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per kind of product like the €3, whatever the value
 - [CTT Express: Cómo contactar con CTT Express](https://www.cttexpress.com/preguntas-frecuentes/como-contactar-con-ctt) – phones, hours, email, 807 warning
 - [CTT Express: Contacto y Atención al Cliente](https://www.cttexpress.com/contacto-atc) – contact form, which asks for the tracking number
 - [CTT Express: Qué es Phishing](https://www.cttexpress.com/blog/actualidad/como-evitar-phishing) – fake SMS and emails

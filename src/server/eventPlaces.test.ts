@@ -367,6 +367,40 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('serves two providers\' rows of one scan, with no carrier\'s scan beside them, as one step', () => {
+    const copy = (id: string, provider: string, stage: string, occurredAt: string, location: string | null, description: string) => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `unknown:${id}`, universal_provider: provider,
+      stored_at: id.endsWith('late') ? '2026-10-28T00:00:00Z' : '2026-10-27T20:00:00Z',
+    });
+    const row = {
+      id: 'parcel', carrier: 'china-post', carrier_data: {}, tracking_events: [
+        // One names the country, the other the town in it: the town's row is the step.
+        copy('posted', 'ParcelsApp', 'accepted', '2026-10-27T12:14:00Z', 'China', 'Posted'),
+        copy('posted-late', 'Ship24', 'accepted', '2026-10-27T12:14:00Z', 'Shenzhen, China', 'Item accepted'),
+        // The same place: the row stored first is the step.
+        copy('sorted', '17TRACK', 'in_transit', '2026-10-27T15:00:00Z', 'Shenzhen', 'Sorted'),
+        copy('sorted-late', 'ParcelsApp', 'in_transit', '2026-10-27T15:00:00Z', 'Shenzhen', 'Sorted'),
+        // Two towns, two stages, a second apart, or a provider's two rows of that instant: each its own step.
+        copy('left', '17TRACK', 'in_transit', '2026-10-27T18:00:00Z', 'Shenzhen', 'Departed'),
+        copy('left-late', 'ParcelsApp', 'in_transit', '2026-10-27T18:00:00Z', 'Guangzhou', 'Departed'),
+        copy('export', '17TRACK', 'customs', '2026-10-27T19:00:00Z', 'Shenzhen', 'Export'),
+        copy('export-late', 'ParcelsApp', 'in_transit', '2026-10-27T19:00:00Z', 'Shenzhen', 'Export'),
+        copy('flown', '17TRACK', 'in_transit', '2026-10-27T20:00:00Z', 'Shenzhen', 'Flown'),
+        copy('flown-late', 'ParcelsApp', 'in_transit', '2026-10-27T20:00:01Z', 'Shenzhen', 'Flown'),
+        copy('landed', '17TRACK', 'in_transit', '2026-10-27T21:00:00Z', 'Shenzhen', 'Landed'),
+        copy('landed-late', 'ParcelsApp', 'in_transit', '2026-10-27T21:00:00Z', 'Shenzhen', 'Landed'),
+        copy('unloaded-late', 'ParcelsApp', 'in_transit', '2026-10-27T21:00:00Z', 'Shenzhen', 'Unloaded'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
+      posted: 'posted-late', 'posted-late': null,
+      sorted: null, 'sorted-late': 'sorted',
+      left: null, 'left-late': null, export: null, 'export-late': null, flown: null, 'flown-late': null,
+      landed: null, 'landed-late': null, 'unloaded-late': null,
+    });
+  });
+
   it('serves a scan that only tells again a step its carrier told before under the copy that has come further', () => {
     const scan = (id: string, source: string, stage: string, occurredAt: string, description: string) => ({
       ...event(id, 'Helsinki', occurredAt), stage, description, provider_event_id: `${source}:${id}`,

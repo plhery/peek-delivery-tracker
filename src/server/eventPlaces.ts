@@ -6,7 +6,7 @@ import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientActio
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
 import { clockDay, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
-import { copyTellsProblem, relayCopies } from './relayCopies';
+import { copyTellsProblem, providerTwins, relayCopies } from './relayCopies';
 import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
@@ -471,7 +471,8 @@ function placedEvents(row: JsonObject): JsonObject {
   row = withoutPlaceholderAnswers(withoutServiceData(row));
   if (!Array.isArray(row.tracking_events) || !row.tracking_events.length) return row;
   const events = shownEvents(stored);
-  const pairs = relayCopies({ ...row, tracking_events: events });
+  const relayed = relayCopies({ ...row, tracking_events: events });
+  const pairs = new Map([...relayed, ...providerTwins(events, new Set([...relayed.keys(), ...relayed.values()]))]);
   const relays = relayLeads(events, pairs);
   const apart = new Set([...relays.keys(), ...relays.values()]);
   const repeats = repeatLeads(events, apart);

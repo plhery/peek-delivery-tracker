@@ -558,7 +558,11 @@ and nothing typed is sent.
   the stage, an alert or an email. An earlier carrier's relay copy of a scan is served
   under that scan, as is another carrier's row of a scan on a parcel that records no handoff
   ([handoffs](ROUTING.md#handoffs-two-carriers)). A universal provider's
-  copy of a confirmed carrier's scan is left out (`src/server/providerCopies.ts`). A scan
+  copy of a confirmed carrier's scan is left out (`src/server/providerCopies.ts`). Two
+  providers' rows of one scan no carrier shows, at the same instant and in the same stage, each
+  its provider's only row there, from places that are not apart or one only the country of the
+  other, are served as one step: the others under the row whose place says most
+  (`providerTwins` in `src/server/relayCopies.ts`). A scan
   in no stage of its own (`stage_source` `none` with no stage, in transit, or the stage of the
   newest scan in a stage dated at or before it, which a notice to the recipient keeps; another
   stage in `none` is the carrier's own judgement, such as an incident it flags as a problem,

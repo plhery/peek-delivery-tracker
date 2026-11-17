@@ -818,30 +818,44 @@ export function placesConflict(left: readonly string[], right: readonly string[]
   return left.length > 0 && right.length > 0 && !left.some((word) => right.includes(word));
 }
 
-/** Each place's town, by the gazetteer's coordinates: one key for every spelling it knows ("Warsaw", "Warszawa"). */
-const towns = new Map<string, string | null>();
+/**
+ * Where the gazetteer finds each place: its country, and its town by the coordinates, one key for every spelling it
+ * knows ("Warsaw", "Warszawa"), or null for a place found only as a country.
+ */
+const located = new Map<string, { country: string; town: string | null } | null>();
 
-function townOf(row: JsonObject): string | null {
+function locatedPlace(row: JsonObject): { country: string; town: string | null } | null {
   const location = String(row.location ?? '').trim();
   if (location === '') return null;
-  let town = towns.get(location);
-  if (town === undefined) {
+  let found = located.get(location);
+  if (found === undefined) {
     let place = null;
     try {
       place = locatePlace(location);
     } catch { /* A place the gazetteer cannot read is in no known town. */ }
-    town = place?.precision === 'city' ? `${place.country} ${place.latitude} ${place.longitude}` : null;
-    if (towns.size >= 10_000) towns.clear();
-    towns.set(location, town);
+    found = place?.country ? { country: place.country,
+      town: place.precision === 'city' ? `${place.country} ${place.latitude} ${place.longitude}` : null } : null;
+    if (located.size >= 10_000) located.clear();
+    located.set(location, found);
   }
-  return town;
+  return found;
+}
+
+function townOf(row: JsonObject): string | null {
+  return locatedPlace(row)?.town ?? null;
+}
+
+/** Whether the gazetteer finds a place only as a country, the one the other place is in. */
+export function placeWithin(row: JsonObject, other: JsonObject): boolean {
+  const place = locatedPlace(row);
+  return place !== null && place.town === null && locatedPlace(other)?.country === place.country;
 }
 
 /**
  * Two scans' places that conflict (`placesConflict`), unless the gazetteer finds both in one
  * town: ParcelsApp's English for Poczta Polska's "Sortownia Warszawa" names no other place.
  */
-function placesApart(row: JsonObject, other: JsonObject): boolean {
+export function placesApart(row: JsonObject, other: JsonObject): boolean {
   if (!placesConflict(placeWords(row), placeWords(other))) return false;
   const town = townOf(row);
   return town === null || town !== townOf(other);

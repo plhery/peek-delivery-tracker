@@ -54,7 +54,7 @@
  */
 import { CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 import { trackingPlace } from 'universal-parcel-scraper/app';
-import { placesConflict, placeWords, sameMinuteScan } from './eventIdentity';
+import { placesApart, placesConflict, placeWithin, placeWords, sameMinuteScan } from './eventIdentity';
 import { isRecord, type JsonObject } from './types';
 
 /** A copy is stamped within this of the scan it repeats, either way. */
@@ -222,6 +222,38 @@ function otherCarrierCopies(
     paired.add(scan.id);
   }
   return pairs;
+}
+
+/**
+ * Two or more universal providers' rows of one scan, which no rule leaves out without a carrier's scan beside them:
+ * the same instant and stage, each its provider's only row there, from places that are not apart or of which one
+ * names only the country the other's town is in (ParcelsApp names the country of a posting Ship24 places in its
+ * town). Each row with the id of the row it is shown under: of those, the one whose place says most, a town before a
+ * country before none, then the first stored. Rows in `paired` are in no such group.
+ */
+export function providerTwins(events: readonly JsonObject[], paired: ReadonlySet<string> = new Set()): Map<string, string> {
+  const provider = (event: JsonObject) => source(event) === UNIVERSAL_SOURCE && typeof event.universal_provider === 'string'
+    ? event.universal_provider : '';
+  const groups = new Map<string, JsonObject[]>();
+  for (const event of events) {
+    const at = Date.parse(String(event.occurred_at));
+    if (!provider(event) || paired.has(String(event.id)) || !Number.isFinite(at)) continue;
+    const key = `${at} ${String(event.stage)}`;
+    groups.set(key, [...groups.get(key) ?? [], event]);
+  }
+  // A place the gazetteer finds only as a country lies within itself, and says less than any other place.
+  const says = (event: JsonObject) => typeof event.location !== 'string' || !event.location.trim() ? 0
+    : placeWithin(event, event) ? 1 : 2;
+  const twins = new Map<string, string>();
+  for (const rows of groups.values()) {
+    const ones = rows.filter((event) => rows.filter((other) => provider(other) === provider(event)).length === 1);
+    if (ones.length < 2) continue;
+    const [lead, ...others] = ones.sort((a, b) => says(b) - says(a)
+      || String(a.created_at ?? a.stored_at).localeCompare(String(b.created_at ?? b.stored_at)) || String(a.id).localeCompare(String(b.id)));
+    if (others.some((other) => placesApart(other, lead!) && !placeWithin(other, lead!) && !placeWithin(lead!, other))) continue;
+    for (const other of others) twins.set(String(other.id), String(lead!.id));
+  }
+  return twins;
 }
 
 /**

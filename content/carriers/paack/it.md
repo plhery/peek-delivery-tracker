@@ -10,7 +10,7 @@ Paack consegna gli ordini dei negozi online nell'ultimo miglio, a domicilio o in
 
 ## Numero di tracciamento Paack: dove trovarlo e che formato ha
 
-La pagina italiana di Paack chiede «Numero d'ordine» e «Codice postale» prima di «Monitora il mio ordine». Di solito Paack usa il numero d'ordine del negozio o il codice a barre dell'etichetta, senza formato fisso: cercalo nelle e-mail del venditore, nel link inviato da Paack all'ingresso in magazzino o sull'etichetta. Non c'è? Chiedi al negozio o leggi [come trovare il numero di tracciamento](guide:find-tracking-number).
+La pagina di tracciamento di Paack chiede il numero d'ordine e il codice postale di consegna. Di solito Paack usa il numero d'ordine del negozio o il codice a barre dell'etichetta, senza formato fisso: cercalo nelle e-mail del venditore, nel link inviato da Paack all'ingresso in magazzino o sull'etichetta. Non c'è? Chiedi al negozio o leggi [come trovare il numero di tracciamento](guide:find-tracking-number).
 
 Alcune etichette seguono uno schema riconoscibile, mentre i numeri d'ordine possono somigliare a quelli di altri corrieri (esempi inventati):
 
@@ -70,7 +70,7 @@ Dal centro assistenza italiano Paack (novembre 2026):
 
 ## Tracciare un pacco Paack con Peek
 
-[Peek](/) riconosce subito come Paack i codici `PK` con 18 cifre ([Evri](carrier:evri) International) e li segue senza CAP. Per le etichette `5340` più 14 cifre, «Cambia» elenca Paack per primo sotto «Compatibili con questo numero» (in Belgio dopo bpost); nella stessa sezione compare anche per i numeri SHEIN (`C` o `E`, data a sei cifre e 8 cifre), mentre Peek interroga prima [Ecoscooting](carrier:ecoscooting). Gli altri numeri Paack non hanno forma fissa e senza CAP Peek non può chiederli a Paack: i codici con lettere restano senza corriere («Peek lo cercherà dopo l’aggiunta.»), quelli di sole cifre vengono proposti ad altri corrieri di pari lunghezza (come [FedEx](carrier:fedex), [Poste Italiane](carrier:poste-italiane) o [BRT](carrier:brt)). Premi «Cambia» e scegli Paack, o incolla un link con `tracking_number=` da `mydeliveries.paack.app` o `paack.co/shipments/tracking`.
+[Peek](/) riconosce subito come Paack i codici `PK` con 18 cifre ([Evri](carrier:evri) International) e li segue senza CAP. Per le etichette `5340` più 14 cifre, «Cambia» elenca Paack per primo sotto «Compatibili con questo numero» (in Belgio dopo bpost); nella stessa sezione compare anche per i numeri SHEIN (`C` o `E`, data a sei cifre e 8 cifre), mentre Peek interroga solo [Ecoscooting](carrier:ecoscooting). Gli altri numeri Paack non hanno forma fissa e senza CAP Peek non può chiederli a Paack: i codici con lettere restano senza corriere («Peek lo cercherà dopo l’aggiunta.»), quelli di sole cifre vengono proposti ad altri corrieri di pari lunghezza (come [FedEx](carrier:fedex), [Poste Italiane](carrier:poste-italiane) o [BRT](carrier:brt)). Premi «Cambia» e scegli Paack, o incolla un link con `tracking_number=` da `mydeliveries.paack.app` o `paack.co/shipments/tracking`.
 
 Inserisci quindi «Codice postale di consegna» (facoltativo solo per i numeri `PK`; un CAP presente nel link non viene usato). I CAP già usati compaiono sotto il campo («Usa …»), anche in «Cambia corriere». Il CAP va a Paack e, se serve, ai servizi di tracciamento; se numero e CAP non combaciano, l'ordine appare sconosciuto. Peek mette il codice in maiuscolo togliendo spazi, punti e trattini: se non esce nulla, prova anche il codice invariato sul sito Paack.
 
@@ -95,7 +95,7 @@ Riprova il giorno seguente o al primo giorno lavorativo utile. Peek mostra `Deli
 Paack offre ai negozi consegne in giornata, il giorno successivo o su fascia programmata, visibili sul tracking appena preso in carico il collo; prima fa fede il termine del venditore (nell'UE entro 30 giorni salvo diverso accordo).
 
 :::sources
-- [Paack: Segui il tuo ordine](https://paack.co/shipments/tracking?lng=it) – campi «Numero d'ordine» e «Codice postale» sulla pagina italiana
+- [Paack: Segui il tuo ordine](https://paack.co/shipments/tracking?lng=it) – numero d'ordine e codice postale di consegna
 - [Paack Support: Home Assistenza](https://paackcustomerservice.freshdesk.com/it/support/home) – due tentativi, vicino, custode del condominio, modifica indirizzo e istruzioni via chat
 - [Paack Support: Stato del mio ordine](https://paackcustomerservice.freshdesk.com/it/support/solutions/folders/44001208238) – cambio indirizzo per reso al mittente, ricevute elettroniche senza bolla cartacea
 - [Paack Support: Altre domande](https://paackcustomerservice.freshdesk.com/it/support/solutions/folders/44001208240) – minimo due tentativi di consegna, avvisi e-mail per problemi di indirizzo

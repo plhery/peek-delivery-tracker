@@ -1,5 +1,7 @@
 node_modules/
 .next/
+# Next.js writes it at dev, build and typegen, in a different form for each (`npm run typecheck` runs typegen).
+next-env.d.ts
 out/
 dist/
 *.tsbuildinfo

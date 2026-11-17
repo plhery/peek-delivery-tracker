@@ -29,7 +29,7 @@ const widgetSample = 'ios/DeliveryWidgetExtension/WidgetSample/';
 // The Android build reads the iPhone build's settings too (android/app/build.gradle.kts).
 const sharedConfiguration = 'ios/Configuration/Shared.xcconfig';
 const webConfiguration = new Set([
-  'Dockerfile', '.dockerignore', '.env.example', 'next.config.ts', 'next-env.d.ts',
+  'Dockerfile', '.dockerignore', '.env.example', 'next.config.ts',
   'tsconfig.json', 'eslint.config.js', 'vitest.config.ts', 'vitest.server.config.ts',
   'playwright.config.ts', 'instrumentation.ts', 'instrumentation-node.ts', 'instrumentation-client.ts', 'proxy.ts',
   'PRIVACY.md', 'TERMS.md', 'SUPPORT.md',

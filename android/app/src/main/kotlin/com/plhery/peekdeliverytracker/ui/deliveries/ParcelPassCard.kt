@@ -56,6 +56,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PeekKeyframes
 import com.plhery.peekdeliverytracker.ui.theme.PeekTheme
 import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.keyframeAnimator
+import com.plhery.peekdeliverytracker.ui.theme.rememberMapInk
 import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
 import kotlin.math.min
@@ -123,6 +124,9 @@ fun ParcelPassCard(
     }
     val status = listOfNotNull(localizer.parcelStatus(parcel), parcel.pickupPlace).joinToString(" · ")
     val ink = colors.resolve(identity.ink)
+    // A long status runs over the start of the route's map, where it takes the ink that reads on its countries.
+    val mapInk = rememberMapInk(identity)
+    val statusInk = if (drawsRoute) mapInk else ink
     val surface = colors.resolve(identity.surface)
     val routeSurface = remember(identity, past) {
         if (past) Brand.paper.mix(identity.surface, 0.35, GradientColorSpace.Device) else identity.surface
@@ -195,12 +199,12 @@ fun ParcelPassCard(
                 if (delivering != null) Text(delivering, color = colors.secondaryText, style = type.caption.sfLines())
                 if (showsStatus) {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        NewUpdateDot(newUpdate, ink)
+                        NewUpdateDot(newUpdate, statusInk)
                         Row(horizontalArrangement = Arrangement.spacedBy(5.dp), verticalAlignment = Alignment.CenterVertically) {
                             if (parcel.isDelivered) {
-                                PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = ink)
+                                PeekSymbol("checkmark", font = type.style(IosTextStyle.Caption2, FontWeight.Light), tint = statusInk)
                             }
-                            Text(status, color = ink, style = type.caption.sfLines())
+                            Text(status, color = statusInk, style = type.caption.sfLines())
                         }
                     }
                 }

@@ -137,6 +137,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.Radii
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.carrierIdentity
+import com.plhery.peekdeliverytracker.ui.theme.rememberMapInk
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomStack
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import com.plhery.peekdeliverytracker.ui.zoom.zoomSource
@@ -667,7 +668,8 @@ private fun SampleRoute(scene: FirstOpenScene, insets: EdgeInsets, ceiling: Doub
  */
 @Composable
 private fun StepStatus(scene: FirstOpenScene, style: TextStyle) {
-    val ink = PeekTheme.colors.resolve(scene.identity.ink)
+    // Over the sample's map: the ink that reads on its countries.
+    val ink = rememberMapInk(scene.identity)
     val reduceMotion = PeekTheme.reduceMotion
     AnimatedContent(scene.step, transitionSpec = { stepStatusTransform(reduceMotion) }, label = "status") { step ->
         Text(scene.status(step), color = ink, style = style)
@@ -721,17 +723,20 @@ private fun stepSize() = SizeTransform(clip = false) { _, _ -> Motion.easeInOut(
 
 /**
  * `FirstOpenPing`: what an alert would say, a bell 9 points tall and the words in caption medium on one line, shrinking
- * to 80 % rather than be cut and ending in an ellipsis past that, both in the carrier's ink on a capsule of it at 10 %,
- * 26 tall. It belongs to the picture: TalkBack doesn't read it.
+ * to 80 % rather than be cut and ending in an ellipsis past that, both in the carrier's ink (moved toward the label where
+ * it wouldn't read on the map under the capsule) on a capsule of it at 10 %, 26 tall. It belongs to the picture: TalkBack
+ * doesn't read it.
  */
 @Composable
 internal fun FirstOpenPing(detail: String, identity: CarrierVisualIdentity, modifier: Modifier = Modifier) {
     val type = PeekTheme.type
-    val ink = PeekTheme.colors.resolve(identity.ink)
+    val capsule = PeekTheme.colors.resolve(identity.ink)
+    // Over the map and the capsule: the ink that reads on both.
+    val ink = rememberMapInk(identity, backing = PING_BACKING)
     Row(
         modifier
             .height(26.dp)
-            .background(ink.copy(alpha = ink.alpha * 0.1f), CapsuleShape)
+            .background(capsule.copy(alpha = capsule.alpha * PING_BACKING), CapsuleShape)
             .padding(horizontal = 10.dp)
             .clearAndSetSemantics {},
         horizontalArrangement = Arrangement.spacedBy(6.dp),
@@ -1249,6 +1254,9 @@ private val APPEAR_FALL = 14.dp
 /** How far the alert comes in from as the next takes the last's place. */
 private val PING_TRAVEL = 6.dp
 private const val PING_MINIMUM_SCALE = 0.8f
+
+/** The alert's capsule: the carrier's ink at 10 %, under the words too where they must read ([rememberMapInk]). */
+internal const val PING_BACKING = 0.1f
 private const val ASK_TITLE_MINIMUM_SCALE = 0.7f
 private const val POSTER_TITLE_MINIMUM_SCALE = 0.6f
 

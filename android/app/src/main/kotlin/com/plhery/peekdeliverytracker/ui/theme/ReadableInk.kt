@@ -1,5 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.theme
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toArgb
@@ -29,14 +31,27 @@ fun readableInk(ink: Color, grounds: List<Color>, label: Color): Color {
 }
 
 /**
- * The grounds a card's top corners stand on: its surface, and over it the map ([MapPalette.tint][com.plhery.peekdeliverytracker.core.MapPalette.tint])
+ * The grounds a card's words stand on: its surface, and over it the map ([MapPalette.tint][com.plhery.peekdeliverytracker.core.MapPalette.tint])
  * where the card draws one: land, the card's ink at 10 %, and a country the parcel passed through, its ink at 17 % on
- * that land.
+ * that land. Each is under the ink at [backing] where the words have a backing of their own, as the first open's alert
+ * on its capsule.
  */
-fun cardGrounds(ink: Color, surface: Color, map: Boolean): List<Color> {
-    if (!map) return listOf(surface)
+fun cardGrounds(ink: Color, surface: Color, map: Boolean, backing: Float = 0f): List<Color> {
     val land = ink.copy(alpha = ink.alpha * 0.10f).compositeOver(surface)
-    return listOf(surface, land, ink.copy(alpha = ink.alpha * 0.17f).compositeOver(land))
+    val grounds = if (map) listOf(surface, land, ink.copy(alpha = ink.alpha * 0.17f).compositeOver(land)) else listOf(surface)
+    return grounds.map { ink.copy(alpha = ink.alpha * backing).compositeOver(it) }
+}
+
+/**
+ * The ink for words over [identity]'s map (the iPhone's `mapInk`): its ink where that reads on every ground the map puts
+ * under them ([cardGrounds]), else moved toward the label until it does ([readableInk]).
+ */
+@Composable
+fun rememberMapInk(identity: CarrierVisualIdentity, backing: Float = 0f): Color {
+    val colors = PeekTheme.colors
+    val ink = colors.resolve(identity.ink)
+    val surface = colors.resolve(identity.surface)
+    return remember(ink, surface, backing, colors.label) { readableInk(ink, cardGrounds(ink, surface, map = true, backing), colors.label) }
 }
 
 /** WCAG's ratio ([CarrierVisualIdentity.contrast]) of two opaque colours as the screen draws them, in 8 bits. */

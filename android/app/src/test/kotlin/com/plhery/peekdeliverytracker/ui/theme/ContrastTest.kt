@@ -4,9 +4,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.graphics.toArgb
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierVisualIdentity
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.GradientColorSpace
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import java.util.Locale
 import org.junit.Assert.assertTrue
@@ -87,22 +89,32 @@ class ContrastTest {
     }
 
     /**
-     * Words a card writes in its ink ([readableInk]), the list's "Next up" and a shared link's "Updated … ago", read at
-     * 4.5:1 or more on every carrier's card and on its map, the ink moved toward the label only where the map needs it,
-     * and the gift's age in its lilac on the lilac card.
+     * Words a card writes in its ink over its map ([readableInk]), the list's "Next up", a compact card's status over its
+     * route, a shared link's "Updated … ago" and the first open's status, read at 4.5:1 or more on every carrier's card
+     * and on its map, on a past delivery's paler card too, the ink moved toward the label only where the map needs it;
+     * the first open's alert on its capsule there; and the gift's age in its lilac on the lilac card.
      */
     @Test
     fun aCardsInkReadsOnTheCardAndItsMap() {
-        val identities = CarrierCatalog(cacheFile = null).definitions.map { (id, definition) ->
-            id.rawValue to CarrierVisualIdentity(id.rawValue, definition)
-        }
+        val catalog = CarrierCatalog(cacheFile = null)
+        val identities = catalog.definitions.map { (id, definition) -> id.rawValue to CarrierVisualIdentity(id.rawValue, definition) }
+        val dhl = CarrierVisualIdentity.of(CarrierId.Dhl, catalog, AppLanguage.En)
         val short = mutableListOf<String>()
         for ((appearance, colors) in appearances) {
             val checks = identities.flatMap { (id, identity) ->
                 val ink = colors.resolve(identity.ink)
                 val surface = colors.resolve(identity.surface)
-                listOf("$id's Next up and age" to readableInk(ink, cardGrounds(ink, surface, map = true), colors.label) to
-                    cardGrounds(ink, surface, map = true))
+                val mapInk = readableInk(ink, cardGrounds(ink, surface, map = true), colors.label)
+                // A past delivery's card in the list is its colour at 35 % on the paper.
+                val past = colors.resolve(Brand.paper.mix(identity.surface, 0.35, GradientColorSpace.Device))
+                listOf(
+                    "the words over $id's map" to mapInk to cardGrounds(ink, surface, map = true),
+                    "the words over $id's map on a past card" to mapInk to cardGrounds(ink, past, map = true),
+                )
+            } + run {
+                val ink = colors.resolve(dhl.ink)
+                val grounds = cardGrounds(ink, colors.resolve(dhl.surface), map = true, backing = 0.1f)
+                listOf("the first open's alert" to readableInk(ink, grounds, colors.label) to grounds)
             } + ("gift's age" to colors.resolve(ExperimentalPalette.lilac) to listOf(colors.resolve(ExperimentalPalette.lilacSurface)))
             for ((named, grounds) in checks) {
                 val (name, drawn) = named

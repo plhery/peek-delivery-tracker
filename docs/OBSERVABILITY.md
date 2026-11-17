@@ -1024,6 +1024,9 @@ without a DSN report nothing.
   React wrote for nodes of its own. From before the app renders, React's later changes
   around those nodes land as near as the page allows (`src/lib/pageTranslation.ts`)
   instead of throwing a `NotFoundError` that would bring up the error screen.
+- **No `performance`**: Firefox with `dom.enable_performance` off gives `performance` as
+  null, and React's scheduler would throw before the page starts. Such a browser gets a
+  stand-in clock from `Date.now()` before React loads (`src/lib/performanceStandIn.ts`).
 - **Through the site**: the SDK posts to `/api/errors` (Sentry's `tunnel`), so the CSP
   names no other host and blockers leave reports alone. The route forwards a report only
   to the project of `SENTRY_DSN`, with the browser's address as the user's

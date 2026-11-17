@@ -295,12 +295,20 @@ function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
  * says where it was: YunExpress and Yanwen tell Ecoscooting's scans with the town Ecoscooting's
  * own leave out, Chronopost tells DPD's with the depot. Nor does a copy that alone tells a problem
  * beside the scan's routine step (relayCopies.ts), nor one in the scan's stage and words that names
- * more of the place. The apps show the lower row's words, not its place.
+ * more of the place, nor one further on than a scan that only tells again, in its stage and words, a step its carrier
+ * told before: La Poste tells Posti's deposit again whenever Posti's data reaches it, at the minute of Posti's sort.
+ * The apps show the lower row's words, not its place.
  */
 function relayLeads(events: readonly JsonObject[], relays: Map<string, string>): Map<string, string> {
   const byId = new Map(events.map((event) => [String(event.id), event]));
+  const source = (event: JsonObject) => scanSource(event.provider_event_id, event.universal_provider);
+  const toldBefore = (scan: JsonObject) => events.some((other) => source(other) === source(scan) && other.stage === scan.stage
+    && sameWords(other, scan) && Date.parse(String(other.occurred_at)) < Date.parse(String(scan.occurred_at)));
+  const further = (copy: JsonObject, scan: JsonObject) =>
+    EVENT_STAGE_ORDER.indexOf(String(copy.stage)) > EVENT_STAGE_ORDER.indexOf(String(scan.stage));
   const leads = (copy: JsonObject, scan: JsonObject) => (placed(copy) && !placed(scan)) || copyTellsProblem(copy, scan)
-    || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan));
+    || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
+    || (further(copy, scan) && toldBefore(scan));
   return new Map([...relays].map(([copy, scan]): [string, string] => (
     leads(byId.get(copy)!, byId.get(scan)!) ? [scan, copy] : [copy, scan])));
 }

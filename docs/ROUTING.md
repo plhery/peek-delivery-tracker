@@ -948,8 +948,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   others, so two steps of one minute that both carriers tell pair stage by stage. When only
   the earlier carrier's row says where the scan was, or only it tells a problem beside the other's
   routine step (Chronopost's parcel held as damaged beside DPD's "on its way"), or, in the other's
-  stage and words, names more of the place (a postcode or number aside), the other row is
-  served with `relay_of` instead. The new carrier may also tell
+  stage and words, names more of the place (a postcode or number aside), or has come further than
+  a row that only tells again, in its stage and words, a step its carrier told before (La Poste
+  repeats Posti's deposit whenever Posti's data reaches it, at the minute of Posti's sort), the other
+  row is served with `relay_of` instead. The new carrier may also tell
   the steps the earlier one sent it over the posts' data exchange, placed only in the earlier carrier's
   country and stamped when the message arrived (Slovenská pošta tells Poczta Polska's posting
   and departure an hour or two late). A row of the new carrier placed in nothing but a country

@@ -367,6 +367,33 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('serves a scan that only tells again a step its carrier told before under the copy that has come further', () => {
+    const scan = (id: string, source: string, stage: string, occurredAt: string, description: string) => ({
+      ...event(id, 'Helsinki', occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const row = {
+      id: 'parcel', carrier: 'posti', carrier_data: { original_carrier: 'posti', active_tracking_carrier: 'la-poste' }, tracking_events: [
+        scan('posted', 'la-poste', 'accepted', '2026-11-11T14:08:00+00:00', 'Votre colis a été déposé'),
+        scan('posted-copy', 'posti', 'accepted', '2026-11-11T14:08:13+00:00', 'Lähetys on vastaanotettu'),
+        // La Poste tells its deposit again when Posti's data reaches it, at the minute of Posti's sort: the sort goes on top.
+        scan('again', 'la-poste', 'accepted', '2026-11-12T02:41:00+00:00', 'Votre colis a été déposé'),
+        scan('sorted', 'posti', 'in_transit', '2026-11-12T02:41:36+00:00', 'Lähetys on lajiteltu'),
+        // A scan in other words, or the copy no further, stays on top.
+        scan('left', 'la-poste', 'accepted', '2026-11-13T02:41:00+00:00', 'Votre colis est pris en charge'),
+        scan('left-copy', 'posti', 'in_transit', '2026-11-13T02:41:36+00:00', 'Lähetys on lähtenyt'),
+        scan('arrived', 'la-poste', 'in_transit', '2026-11-14T02:41:00+00:00', 'Votre colis a été déposé'),
+        scan('arrived-copy', 'posti', 'accepted', '2026-11-14T02:41:36+00:00', 'Lähetys on saapunut'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
+      posted: null, 'posted-copy': 'posted',
+      again: 'sorted', sorted: null,
+      left: null, 'left-copy': 'left',
+      arrived: null, 'arrived-copy': 'arrived',
+    });
+  });
+
   it('serves a relay row in the words of the row it goes under, spelt otherwise, in that row\'s spelling', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
       ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,

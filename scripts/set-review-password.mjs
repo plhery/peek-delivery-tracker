@@ -13,12 +13,12 @@ import { fileURLToPath } from 'node:url';
  * doesn't show them: never in arguments, files or the shell's history.
  */
 
-export const MIN_LENGTH = 20;
+export const MIN_LENGTH = 8;
 
 /** Why a password can't be the review account's, or null when it can. */
 export function passwordProblem(password, repeated) {
   if (password !== repeated) return 'The two passwords differ.';
-  if (password.length < MIN_LENGTH) return `Use at least ${MIN_LENGTH} characters, as a password manager makes them.`;
+  if (password.length < MIN_LENGTH) return `Use at least ${MIN_LENGTH} characters.`;
   if (password.trim() !== password) return 'The password starts or ends with a space.';
   return null;
 }

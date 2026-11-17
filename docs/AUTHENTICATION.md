@@ -275,7 +275,7 @@ checks. A password sign-in counts as a recent sign-in.
 2. Set its password:
    `SUPABASE_URL=https://supabase.example.com npm run review-password -- review@example.com`.
    It asks for the service role key, unless `SUPABASE_SERVICE_ROLE_KEY` is set, then for the
-   password, at least 20 characters, at prompts that don't show them. Auth ends the
+   password, at least 8 characters, at prompts that don't show them. Auth ends the
    account's sessions. Run it again to change the password.
 3. Set `REVIEW_ACCOUNT_EMAIL` on the app, and list the account in `ASSISTANT_ACCOUNTS`
    unless it holds `*`.

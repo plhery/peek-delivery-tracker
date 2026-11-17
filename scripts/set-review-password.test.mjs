@@ -8,7 +8,8 @@ const LONG = 'correct-horse-battery-staple';
 test('takes only a long password typed the same twice', () => {
   assert.equal(passwordProblem(LONG, LONG), null);
   assert.match(passwordProblem(LONG, `${LONG}x`), /differ/);
-  assert.match(passwordProblem('short-password', 'short-password'), /at least 20/);
+  assert.equal(passwordProblem('eight-ch', 'eight-ch'), null);
+  assert.match(passwordProblem('seven-c', 'seven-c'), /at least 8/);
   assert.match(passwordProblem(` ${LONG}`, ` ${LONG}`), /space/);
 });
 

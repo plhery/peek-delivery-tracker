@@ -97799,6 +97799,14 @@
     "candidates": []
   },
   {
+    "input": "NUDE9999999980EX",
+    "carrier": "xyl-ships",
+    "confidence": "high",
+    "candidates": [
+      "xyl-ships"
+    ]
+  },
+  {
     "input": "NVIDARKZO000000884",
     "carrier": "unknown",
     "confidence": "low",
@@ -103575,6 +103583,17 @@
     ]
   },
   {
+    "input": "RR999999987MB",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "RR999999987MI",
     "carrier": "unknown",
     "confidence": "low",
@@ -104788,6 +104807,17 @@
     ],
     "asked": [
       "nova-poshta"
+    ]
+  },
+  {
+    "input": "SK0SCZD9999999980N",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "aliexpress"
+    ],
+    "asked": [
+      "aliexpress"
     ]
   },
   {

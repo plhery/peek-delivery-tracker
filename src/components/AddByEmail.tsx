@@ -248,7 +248,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
         {recent.some(({ result }) => result === 'none') && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
         {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
       </section>
-      <div className="settings-box">
+      <div className="settings-box add-by-email__notify">
         <button className="settings-row notification-email__switch" type="button" role="switch" aria-checked={notify}
           aria-labelledby="add-by-email-notify" aria-describedby="add-by-email-notify-hint" aria-busy={working || undefined} disabled={working}
           onClick={() => void run(() => setAddByEmailNotify(apiAuth, !notify))}>

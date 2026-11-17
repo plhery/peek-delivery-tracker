@@ -126,7 +126,7 @@
 .add-by-email__what { display: grid; gap: 3px; min-width: 0; }
 .add-by-email__what strong { font-weight: 550; overflow-wrap: anywhere; }
 .add-by-email__what small { color: var(--ink-soft); font-size: 11px; line-height: 1.4; }
-.add-by-email__auto { margin-bottom: 24px; }
+.add-by-email__notify, .add-by-email__auto { margin-bottom: 24px; }
 .add-by-email__auto > summary { cursor: pointer; list-style: none; }
 .add-by-email__auto > summary::-webkit-details-marker { display: none; }
 .add-by-email__auto > summary .settings-chevron { transition: transform .15s ease; }

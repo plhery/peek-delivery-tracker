@@ -2284,6 +2284,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#005baa"
     },
     {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-sendungsverfolgung",
+      "title": "GEODIS Sendungsverfolgung: 1G-Nummer, Status & Kontakt",
+      "name": "GEODIS",
+      "color": "#3100e6"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-sendungsverfolgung",
@@ -2516,6 +2524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Colis Privé suivi\u00a0: statuts, relais et service client",
       "name": "Colis Privé",
       "color": "#aa78ff"
+    },
+    {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "brt-suivi",
+      "title": "Suivi colis BRT\u00a0: numéro, statuts et livraison d’Italie",
+      "name": "BRT",
+      "color": "#dc0032"
     },
     {
       "id": "correos-express",
@@ -3280,6 +3296,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-tracciamento",
+      "title": "Tracciamento GEODIS: numero 1G, stati e contatti",
+      "name": "GEODIS",
+      "color": "#3100e6"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-tracking",
@@ -3457,6 +3481,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "es": [
+    {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "brt-seguimiento",
+      "title": "Seguimiento BRT: paquete desde Italia, estados y contacto",
+      "name": "BRT",
+      "color": "#dc0032"
+    },
     {
       "id": "correos-express",
       "catalog": "correos-express",
@@ -3706,6 +3738,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-seguimiento",
+      "title": "Seguimiento GEODIS: número 1G, estados y contacto",
+      "name": "GEODIS",
+      "color": "#3100e6"
+    },
+    {
       "id": "ecoscooting",
       "catalog": "ecoscooting",
       "slug": "ecoscooting-seguimiento",
@@ -3931,6 +3971,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
     }
   ],
   "pt": [
+    {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "brt-rastreio",
+      "title": "Rastreio BRT: encomenda de Itália, estados e contacto",
+      "name": "BRT",
+      "color": "#dc0032"
+    },
     {
       "id": "correos-express",
       "catalog": "correos-express",
@@ -4320,6 +4368,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
   ],
   "pl": [
     {
+      "id": "brt",
+      "catalog": "brt",
+      "slug": "brt-sledzenie",
+      "title": "Śledzenie przesyłek BRT: paczka z Włoch, statusy i kontakt",
+      "name": "BRT",
+      "color": "#dc0032"
+    },
+    {
       "id": "correos-express",
       "catalog": "correos-express",
       "slug": "correos-express-sledzenie",
@@ -4542,6 +4598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Omniva śledzenie paczki: kody, statusy, automaty i kontakt",
       "name": "Omniva",
       "color": "#f86300"
+    },
+    {
+      "id": "geodis",
+      "catalog": "geodis",
+      "slug": "geodis-sledzenie",
+      "title": "Śledzenie przesyłek GEODIS: numer 1G, statusy i kontakt",
+      "name": "GEODIS",
+      "color": "#3100e6"
     },
     {
       "id": "ecoscooting",

@@ -209,7 +209,7 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   deliveries, which the widget bundles in `DeliveryWidgetExtension/WidgetSample`. A test checks them against the
   demo; it redraws them when run with `TEST_RUNNER_PEEK_WIDGET_SAMPLE` set to that folder's full path.
 - **The widgets' days** follow the clock while the app stays closed. The app also words each parcel's day, section
-  and Next up for the next seven midnights where they change, and the widget and Siri's Next delivery read the words
+  and Next up for the coming week and the days around each delivery estimate, and the widget and Siri's Next delivery read the words
   for the moment they show: "tomorrow" reads "today" on the day, last night's delivery "yesterday", and a
   passed estimate gives way to the status. The widget's timeline has an entry at those midnights, and at the
   midnight after each step, whose time then names its weekday. When the time zone changes, the app words the days

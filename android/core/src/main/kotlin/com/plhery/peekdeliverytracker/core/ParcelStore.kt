@@ -2067,16 +2067,27 @@ class ParcelStore(
          * carries the dot its card in the app shows while "Mark new updates" is on ([DeliveryWidgetParcel.newUpdate]).
          */
         fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> {
-            val midnights = DeliveryWidgetDays.midnights(after = now)
+            val zone = ZoneId.systemDefault()
+            val midnights = DeliveryWidgetDays.midnights(after = now, zone = zone).toSortedSet()
+            for (parcel in parcels) {
+                for (value in listOfNotNull(parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom)) {
+                    val day = DateParser.deliveryDate(value)?.atZone(zone)?.toLocalDate() ?: continue
+                    for (offset in -1L..1L) {
+                        val transition = day.plusDays(offset).atStartOfDay(zone).toInstant()
+                        if (transition > now) midnights.add(transition)
+                    }
+                }
+            }
+            val days = midnights.toList()
             val delivered = ParcelOrganizer
                 .visible(parcels, query = "", status = ParcelStatusFilter.Delivered, carrier = null, sort = ParcelSort.Updated, now = now)
                 .mapNotNull { parcel ->
                     val arrived = parcel.currentEvent?.displayDate ?: return@mapNotNull null
-                    widgetParcel(parcel, localizer, now, midnights) { localizer.parcelCompletionDate(parcel, it) }.copy(deliveredAt = arrived)
+                    widgetParcel(parcel, localizer, now, days) { localizer.parcelCompletionDate(parcel, it) }.copy(deliveredAt = arrived)
                 }
             // The iPhone's nextDeliveries estimates with Date() rather than this `now`; passing it on can only make the two agree.
             val ordered = DeliveryWidgetSelection.ordered(
-                onTheWay = nextDeliveries(parcels, localizer, now, midnights), delivered = delivered, now = now,
+                onTheWay = nextDeliveries(parcels, localizer, now, days), delivered = delivered, now = now,
             )
             // What the widget shows besides: where the app's list puts each parcel, which is its Next up, the
             // carrier shown, and the last steps of the first parcels. Whichever ends up alone in the list is among
@@ -2085,15 +2096,15 @@ class ParcelStore(
             fun sections(at: Instant) = ParcelOrganizer.sections(parcels, at).flatMap { section -> section.parcels.map { it.id to section.kind.rawValue } }.toMap()
             val sections = sections(now)
             val next = ParcelOrganizer.nextDelivery(parcels, now)?.id
-            val sectionsLater = midnights.map(::sections)
-            val nextLater = midnights.map { ParcelOrganizer.nextDelivery(parcels, it)?.id }
+            val sectionsLater = days.map(::sections)
+            val nextLater = days.map { ParcelOrganizer.nextDelivery(parcels, it)?.id }
             val byId = parcels.associateBy { it.id }
             return ordered.mapIndexed { index, item ->
                 val parcel = byId[item.id] ?: return@mapIndexed item
                 val section = sections[item.id]
                 val nextUp = item.id == next
-                val later = DeliveryWidgetDays.later(DeliveryWidgetWording(now, item.detail, section, nextUp), midnights) { midnight ->
-                    val at = midnights.indexOf(midnight)
+                val later = DeliveryWidgetDays.later(DeliveryWidgetWording(now, item.detail, section, nextUp), days) { midnight ->
+                    val at = days.indexOf(midnight)
                     DeliveryWidgetWording(midnight, item.worded(midnight).detail, sectionsLater[at][item.id], item.id == nextLater[at])
                 }
                 item.copy(

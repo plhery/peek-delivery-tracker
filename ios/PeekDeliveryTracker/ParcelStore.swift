@@ -1417,7 +1417,19 @@ final class ParcelStore: ObservableObject {
     /// is among them: one on its way comes first, and with none, the one delivered last stays longest and leads. Which
     /// parcels the list marks with the dot for new updates, `marking` as Settings has it.
     static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, marking: Bool = true, now: Date = Date()) -> [DeliveryWidgetParcel] {
-        let midnights = DeliveryWidgetDays.midnights(after: now)
+        let calendar = Calendar.current
+        var transitions = Set(DeliveryWidgetDays.midnights(after: now))
+        for parcel in parcels {
+            for value in [parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom].compactMap({ $0 }) {
+                guard let date = DateParser.deliveryDate(value) else { continue }
+                for offset in -1...1 {
+                    if let day = calendar.date(byAdding: .day, value: offset, to: calendar.startOfDay(for: date)), day > now {
+                        transitions.insert(day)
+                    }
+                }
+            }
+        }
+        let midnights = transitions.sorted()
         let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
             .compactMap { parcel -> DeliveryWidgetParcel? in
                 guard let arrived = parcel.currentEvent?.displayDate else { return nil }

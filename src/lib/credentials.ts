@@ -17,7 +17,7 @@ const CREDENTIAL_WORD = /^(?:auth|authorization|bearer|jwt|token|tokens|secret|s
  * a password, a session, a signature or a cookie (`api_key`, `accessToken`, `set-cookie`).
  */
 export function credentialName(name: string): boolean {
-  if (name.toLowerCase() === 'x-peek-recipient') return true;
+  if (name.toLowerCase() === 'x-peek-recipient' || name.toLowerCase() === 'preview') return true;
   return name.replace(/([a-z\d])([A-Z])/g, '$1 $2').toLowerCase().split(/[^a-z\d]+/)
     .some((word) => CREDENTIAL_WORD.test(word));
 }
@@ -25,7 +25,7 @@ export function credentialName(name: string): boolean {
 /** Peek's paths whose id is a capability: a shared parcel's link, an invite's preview. */
 const CAPABILITY_ID = /^(\/(?:p|i)|\/api\/public\/parcels)\/[^/?#]+/;
 /** Peek's paths whose query is a capability: an unsubscribe token, an invite's preview. */
-const CAPABILITY_QUERY = /^\/(?:api\/email\/unsubscribe|invite)(?:\/|$)/;
+const CAPABILITY_QUERY = /^\/(?:api\/email\/unsubscribe|api\/friends\/invite-image|invite)(?:\/|$)/;
 
 /** Whether every query value on the path is a capability. */
 export function capabilityQuery(path: string): boolean {

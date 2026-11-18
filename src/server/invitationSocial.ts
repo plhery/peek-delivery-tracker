@@ -25,7 +25,7 @@ export async function invitationSocialNickname(preview: string | string[] | unde
     return result.previewNickname;
   } catch (error) {
     if (!(error instanceof HttpError && error.status === 404)) {
-      captureOperationalError(error, { component: 'friends', operation: 'invitation-social-preview' });
+      captureOperationalError(error, { component: 'friends', operation: 'invitation-social-preview', withoutRequest: true });
     }
     return null;
   }

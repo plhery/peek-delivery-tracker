@@ -52,6 +52,12 @@ export interface AssistantCaller {
   scopes: readonly Scope[];
 }
 
+function displayReference(parcel: { carrier: string; trackingNumber: string }): string {
+  return parcel.carrier === 'c-chez-vous'
+    ? parcel.trackingNumber.replace(/^([a-z0-9]{11})(?:--)?\d{5}$/i, '$1•••••')
+    : parcel.trackingNumber;
+}
+
 /** A parcel as a tool describes it: what an assistant needs to answer, without the recipient's name or postcode. */
 function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParcel {
   const latest = currentEvent(parcel.events, parcel.returnHeld);
@@ -177,7 +183,7 @@ function asParcel(row: Parameters<typeof withEventPlaces>[0]): ParcelWithEvents 
   const recipient = privateValues(placed.carrier_data);
   const parcel = toParcel({ ...placed, tracking_events: redactedScans(placed.tracking_events ?? [], stageWords, recipient) });
   const statusText = viewerStatusText(parcel.lastStatusText ?? null, currentStage(parcel.events, parcel.returnHeld), recipient);
-  return { ...parcel, lastStatusText: statusText ?? undefined };
+  return { ...parcel, trackingNumber: displayReference(parcel), lastStatusText: statusText ?? undefined };
 }
 
 /** The account's stored parcel a tool's `parcel` names: its id, or its tracking number. */
@@ -339,7 +345,7 @@ const OUTCOME_TEXT: Record<ParcelAddition['outcome'], string> = {
 
 function additionSummary(addition: ParcelAddition) {
   return {
-    trackingNumber: addition.trackingNumber,
+    trackingNumber: displayReference(addition),
     carrier: carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name,
     outcome: addition.outcome,
     ...('packageId' in addition && addition.packageId ? { id: addition.packageId } : {}),
@@ -395,7 +401,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         + 'An Amazon order\'s tracking number is in the user\'s Amazon account: Your Orders, then Track package.');
     }
     const parcels = additions.map(additionSummary);
-    const lines = additions.map((addition) => `${addition.trackingNumber} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): ${OUTCOME_TEXT[addition.outcome]}`);
+    const lines = additions.map((addition) => `${displayReference(addition)} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): ${OUTCOME_TEXT[addition.outcome]}`);
     return answer({ parcels }, `${lines.join('\n')}\n\n${JSON.stringify({ parcels })}`);
   }));
 

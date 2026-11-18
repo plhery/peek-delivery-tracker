@@ -645,6 +645,17 @@ describe('the MCP endpoint', () => {
     expect((await call(reader, 'delete_parcel', { parcel: UPS })).error).toMatchObject({ code: -32602 });
   });
 
+  it('masks the embedded postcode in a C Chez Vous parcel detail', async () => {
+    const parcel = { ...stored(4, 'in_transit', { trackingNumber: 'ABCDEFGHIJK54321' }), carrier: 'c-chez-vous' };
+    vi.spyOn(service, 'getOwnedPackage').mockResolvedValue(parcel);
+    const read = await call(connect(['parcels:read']), 'get_parcel', { parcel: parcel.id });
+    expect(read.result!.structuredContent).toMatchObject({ id: parcel.id, trackingNumber: 'ABCDEFGHIJK•••••' });
+    expect(JSON.stringify(read)).not.toContain('54321');
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([parcel]);
+    const list = await call(connect(['parcels:read']), 'list_parcels', { search: '54321' });
+    expect(list.result!.structuredContent).toMatchObject({ total: 0 });
+  });
+
   it('reads and archives only the caller\'s own parcels, by id or by tracking number', async () => {
     const parcel = stored(4, 'in_transit', { trackingNumber: UPS });
     const known = vi.spyOn(service, 'accountTrackingNumbers').mockResolvedValue(new Map([[UPS, parcel.id]]));

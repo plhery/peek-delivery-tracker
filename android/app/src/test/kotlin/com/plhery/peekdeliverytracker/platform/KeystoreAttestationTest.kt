@@ -193,6 +193,20 @@ class KeystoreAttestationTest {
     }
 
     @Test
+    fun aTemporaryTokenFailureLeavesNativeVerificationAvailable() = runBlocking {
+        val unavailable = object : StandardIntegrity {
+            override suspend fun prepare(projectNumber: Long) {}
+            override suspend fun request(requestHash: String): String = throw java.io.IOException("offline")
+        }
+        val keys = Keys(chain("software-attestation"))
+        val attempt = attestation(keys, tokens = PlayIntegrityTokens(unavailable))
+        assertTrue(runCatching { attempt.attest(attempt.generateKey(), hash, 123L) }.isFailure)
+        val restored = attestation(keys, tokens = PlayIntegrityTokens(Integrity()))
+        assertTrue(restored.supported())
+        assertEquals("synthetic.integrity-token", restored.attest(restored.generateKey(), hash, 123L).playIntegrity)
+    }
+
+    @Test
     fun threeRefusalsInARowStopAskingUntilTheSystemOrTheAppChanges() {
         val attestation = attestation(Keys(chain("frankel-tee-ecdsa-root")))
         attestation.registered(false)

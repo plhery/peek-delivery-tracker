@@ -40,7 +40,8 @@ class PlayIntegrityTokens(
 ) {
     private val lock = Mutex()
     private var prepared: Long? = null
-    private var gone = false
+    @Volatile private var gone = false
+    val unavailable: Boolean get() = gone
     private val prepares = ArrayDeque<Long>()
 
     /** Readies a provider for [project] ahead of a registration; whether there is one. */

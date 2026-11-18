@@ -72,7 +72,7 @@ class KeystoreAttestation(
         }
         // Play Integrity can vouch for a phone whose keystore can't.
         if (token == null && KeyAttestation.stopsAsking(chain)) {
-            defaults.set(system, STOPPED_SYSTEM)
+            if (tokens == null || playIntegrityProject == null || tokens.unavailable) defaults.set(system, STOPPED_SYSTEM)
             withContext(io) { runCatching { keys.delete(alias) } }
             throw NativeVerificationFailed()
         }
@@ -114,7 +114,7 @@ class KeystoreAttestation(
 
     companion object {
         const val ALIAS_PREFIX = "peek.attestation."
-        const val STOPPED_SYSTEM = "sdt.keyAttestation.stoppedSystem"
+        const val STOPPED_SYSTEM = "sdt.keyAttestation.unsupportedSystem"
         const val REFUSALS = "sdt.keyAttestation.refusals"
         const val MAX_REFUSALS = 3
         const val SIGNATURE = "SHA256withECDSA"

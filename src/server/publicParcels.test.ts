@@ -274,6 +274,10 @@ describe('what a link shows', () => {
         created_at: '2026-10-01T08:00:00Z', carrier_data: {}, tracking_events: events },
     }, alerts).package;
     expect(shown([scan, added]).news_at).toBe('2026-10-02T07:20:00.123456+00:00');
+    const hidden = { ...scan, id: 'private', description: 'Collect with PIN: 4711',
+      occurred_at: '2026-10-03T07:00:00Z', stored_at: '2026-10-03T08:00:00Z' };
+    expect(shown([scan, hidden]).news_at).toBe(scan.stored_at);
+    expect(shown([scan, hidden], { owner: true }).news_at).toBe(hidden.stored_at);
     expect(JSON.stringify(shown([scan, added]).tracking_events)).not.toContain('stored_at');
     // Peek's own row is no news, and a gift on its way tells no scan.
     expect(shown([added])).not.toHaveProperty('news_at');

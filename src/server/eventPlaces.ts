@@ -473,6 +473,11 @@ export function newsAt(shown: readonly JsonObject[], copied: ReadonlyMap<string,
   return news;
 }
 
+/** The news visible on a shared timeline after removing recipient-only rows. */
+export function visibleNewsAt(row: JsonObject, placed: JsonObject, ids: ReadonlySet<string>): string | null {
+  return newsAt(shownEvents(row).filter((event) => ids.has(String(event.id))), storedAsCopies(row), shownUnder(placed));
+}
+
 /** Two rows of one moment tell one scan when they are in one stage, from two sources or in the same words. */
 function sameScan(a: JsonObject, b: JsonObject): boolean {
   return a.stage === b.stage && (scanSource(a.provider_event_id, a.universal_provider) !== scanSource(b.provider_event_id, b.universal_provider)

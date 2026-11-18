@@ -15,6 +15,10 @@ describe('access values', () => {
   it('are filtered out of a page\'s hidden fields and out of a query in any shape', () => {
     expect(withoutCredentials('<input type="hidden" name="__RequestVerificationToken" value="abc"><input name="number" value="TEST1">'))
       .toBe('<input type="hidden" name="__RequestVerificationToken" value="[Filtered]"><input name="number" value="TEST1">');
+    const image = '/api/friends/invite-image';
+    expect(withoutCredentials('https://example.test' + image + '?preview=value')).toContain('?preview=[Filtered]');
+    expect(scrubQueryString('preview=value', '')).toBe('preview=[Filtered]');
+    expect(scrubQueryString({ preview: 'value' }, image)).toEqual({ preview: '[Filtered]' });
     expect(scrubQueryString('?number=TEST1&token=x', '/api/parcels')).toBe('number=TEST1&token=[Filtered]');
     expect(scrubQueryString([['number', 'TEST1'], ['api_key', 'x']], '/api/parcels')).toEqual([['number', 'TEST1'], ['api_key', '[Filtered]']]);
     expect(scrubQueryString({ t: 'x' }, '/api/email/unsubscribe')).toEqual({ t: '[Filtered]' });

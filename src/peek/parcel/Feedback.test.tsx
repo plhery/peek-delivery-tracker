@@ -186,6 +186,14 @@ describe('Pip’s question about a parcel a carrier answers for', () => {
     expect(send).toHaveBeenCalledExactlyOnceWith(expect.objectContaining({ answer: 'wrong', reasons: ['status'], asked: 'page' }));
   });
 
+  it('asks again after a live scan replaces the one just answered yes', async () => {
+    const { subject, rerender } = open();
+    await userEvent.setup().click(within(bubble()).getByRole('button', { name: 'Yes' }));
+    expect(within(bubble()).getByRole('status')).toHaveTextContent('Good to know, thanks!');
+    rerender(<Page {...subject} scan="new-scan" />);
+    expect(within(bubble()).getByRole('button', { name: 'Yes' })).toBeVisible();
+  });
+
   it('asks again once there is a new scan, on a later visit or while the page is open', () => {
     const later = open({ scan: '4:2026-10-09T09:00:00.000Z', notes: memoryNotes({ at: hoursAgo(30), scan: SCAN, right: SCAN }) });
     expect(within(bubble()).getByText('Did I get this one right?')).toBeVisible();

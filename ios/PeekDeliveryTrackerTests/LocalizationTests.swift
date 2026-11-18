@@ -79,6 +79,10 @@ final class LocalizationTests: XCTestCase {
         // Across midnight, or from a day to a time, both ends keep their day.
         XCTAssertEqual(localizer.deliveryWindow(from: try at(10, 22), to: try at(11, 2), now: now), "tomorrow, 22:00 – Fri 11 Sep, 02:00")
         XCTAssertEqual(localizer.deliveryWindow(from: "2026-09-11", to: try at(11, 14), now: now), "Fri 11 Sep – Fri 11 Sep, 14:00")
+        // Once its first day has passed, each end keeps the hour the carrier gave it.
+        let thursday = try XCTUnwrap(DateParser.deliveryDate("2026-09-10"))
+        XCTAssertEqual(localizer.deliveryWindow(from: try at(9, 16), to: try at(11, 10), now: thursday), "Wed 9 Sep, 16:00 – Fri 11 Sep, 10:00")
+        XCTAssertEqual(localizer.deliveryWindow(from: "2026-09-09", to: try at(11, 10), now: thursday), "Wed 9 Sep – Fri 11 Sep, 10:00")
         // Chinese writes a day and its time without a comma, as on the web and Android.
         localizer.language = .zh
         XCTAssertEqual(localizer.expectedDelivery("2026-09-10 14:00-16:00", now: now), "明天 14:00–16:00")

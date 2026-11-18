@@ -584,7 +584,8 @@ final class Localizer: ObservableObject {
     }
 
     /// A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day
-    /// has passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
+    /// has passed, both ends are dated, each with its hour when the carrier gave one: "Wed 4 Nov – Fri 6 Nov",
+    /// "Wed 4 Nov, 16:00 – Fri 6 Nov, 10:00".
     func deliveryWindow(from: String?, to: String, now: Date = Date()) -> String {
         let end = expectedDelivery(to, now: now)
         guard let from, let startDate = DateParser.deliveryDate(from),
@@ -595,8 +596,9 @@ final class Localizer: ObservableObject {
             return dayAndTime(expectedDelivery(day, now: now), "\(clockTime(start))–\(clockTime(finish))")
         }
         if let days = windowDays(from: from, to: to), days.first < Calendar.current.startOfDay(for: now) {
+            let starting = from.contains("T") && DateParser.date(from) != nil ? dateTime(from) : shortDate(days.first)
             let ending = to.contains("T") && DateParser.date(to) != nil ? dateTime(to) : shortDate(days.last)
-            return "\(shortDate(days.first)) – \(ending)"
+            return "\(starting) – \(ending)"
         }
         return "\(expectedDelivery(from, now: now)) – \(end)"
     }

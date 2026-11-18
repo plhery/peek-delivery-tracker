@@ -1649,6 +1649,29 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun viewerFollowKeepsRevocationUntilOwnershipIsRestored() = runTest {
+        val id = UUID.randomUUID()
+        val linkId = "22222222222A"
+        for (restoreOwner in listOf(false, true)) {
+            val storage = Memory()
+            storage.pendingForgets = mapOf(linkId to key)
+            val calls = Calls()
+            val parcels = device(client(calls), storage, this)
+            parcels.follow(PublicParcelResponse(reader(linkId), pkg(id)), key = null, label = "Lamp")
+            assertEquals(mapOf(linkId to key), storage.pendingForgets)
+            val reopened = device(client(calls), storage, this)
+            assertEquals(linkId, reopened.viewerLink(id))
+            if (restoreOwner) {
+                assertFalse(reopened.follow(PublicParcelResponse(link(linkId), pkg(id)), key, null).added)
+                assertEquals(mapOf(linkId to key), storage.keys)
+            }
+            reopened.tellForgotten()
+            assertEquals(if (restoreOwner) emptyList() else listOf("forget $linkId"), calls.all)
+            assertTrue(storage.pendingForgets.isEmpty())
+        }
+    }
+
+    @Test
     fun aLinkFollowedAgainBeforeTheServiceWasToldToForgetItStays() = runTest {
         val id = UUID.randomUUID()
         val storage = Memory()

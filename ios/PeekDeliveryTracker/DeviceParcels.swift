@@ -363,8 +363,8 @@ final class DeviceParcels {
         self.now = now
         let forgetting = storage.loadForgetting()
         let (parcels, keys) = storage.load()
-        // A link being forgotten stays forgotten, even where the list was saved before it was.
-        entries = parcels.filter { $0.forgotten != true && forgetting[$0.linkID] == nil }
+        // A queued revocation supersedes a stale owner row. A later viewer follow can coexist with it.
+        entries = parcels.filter { $0.forgotten != true && ($0.isViewer || forgetting[$0.linkID] == nil) }
         forgotten = parcels.filter { $0.forgotten == true }
         self.keys = keys.filter { forgetting[$0.key] == nil }
         self.forgetting = forgetting
@@ -725,8 +725,6 @@ final class DeviceParcels {
         let linkID = response.link.id
         guard ParcelLinkRoute.validID(linkID) else { throw DeliveryAPIError.invalidResponse }
         let key = key.flatMap { response.link.role == .owner && ParcelLinkRoute.validKey($0) ? $0 : nil }
-        // Followed again before the service was told to forget it: the link stays.
-        if forgetting.removeValue(forKey: linkID) != nil { save() }
         if let index = entries.firstIndex(where: { $0.linkID == linkID || $0.parcel.id == response.package.id }) {
             guard let key, entries[index].isViewer else { return (entries[index].parcel.id, false) }
             upgradeViewer(at: index, with: response, key: key)
@@ -743,6 +741,7 @@ final class DeviceParcels {
             forgotten.removeAll { $0.linkID == linkID }
         }
         if let key {
+            forgetting[linkID] = nil
             keys[linkID] = key
         } else {
             entry.viewer = true
@@ -768,6 +767,7 @@ final class DeviceParcels {
                 Task { try? await client.removeAlert(old.linkID, DeleteParcelAppAlertRequest(token: token)) }
             }
         }
+        forgetting[linkID] = nil
         keys[linkID] = key
     }
 

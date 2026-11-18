@@ -1625,6 +1625,28 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(early.keys, [:])
     }
 
+    func testViewerFollowKeepsRevocationUntilOwnershipIsRestored() async throws {
+        let id = UUID(), linkID = "22222222222A"
+        let shown = PublicParcelResponse(link: reader(linkID), package: package(id))
+        for restoreOwner in [false, true] {
+            let storage = Memory()
+            storage.forgetting = [linkID: key]
+            let calls = Calls()
+            let device = DeviceParcels(client: client(calls), storage: storage)
+            _ = try device.follow(shown, key: nil, label: "Lamp")
+            XCTAssertEqual(storage.forgetting, [linkID: key])
+            let reopened = DeviceParcels(client: client(calls), storage: storage)
+            XCTAssertEqual(reopened.viewerLink(id: id), linkID)
+            if restoreOwner {
+                XCTAssertFalse(try reopened.follow(answer(linkID, id), key: key, label: nil).added)
+                XCTAssertEqual(storage.keys, [linkID: key])
+            }
+            await reopened.tellForgotten()
+            XCTAssertEqual(calls.all, restoreOwner ? [] : ["forget \(linkID)"])
+            XCTAssertTrue(storage.forgetting.isEmpty)
+        }
+    }
+
     func testALinkFollowedAgainBeforeTheServiceForgotItStays() async throws {
         let id = UUID()
         let storage = Memory()

@@ -544,9 +544,9 @@ class DeviceParcels(
     init {
         val loaded = storage.load()
         pendingForgets = loaded.pendingForgets
-        // A link both kept and still to be forgotten was being forgotten when the app last stopped: forgetting wins.
+        // A queued revocation supersedes a stale owner row. A later viewer follow can coexist with it.
         fun pending(linkId: String) = pendingForgets.keyOf(linkId) != null
-        entries = loaded.parcels.filter { it.forgotten != true && !pending(it.linkId) }
+        entries = loaded.parcels.filter { it.forgotten != true && (it.isViewer || !pending(it.linkId)) }
         forgotten = loaded.parcels.filter { it.forgotten == true }
         keys = loaded.keys.filterKeys { !pending(it) }
     }
@@ -984,9 +984,8 @@ class DeviceParcels(
             entry = entry.copy(alertToken = left.alertToken, alertPreset = left.alertPreset)
             forgotten = forgotten.filter { !it.linkId.equalsCanonically(linkId) }
         }
-        // Followed again before the service could be told to forget it: it no longer is.
-        pendingForgets = pendingForgets.setting(linkId, null)
         if (key != null) {
+            pendingForgets = pendingForgets.setting(linkId, null)
             keys = keys.setting(linkId, key)
         } else {
             entry = entry.copy(viewer = true, canKeep = response.link.canKeep)
@@ -1012,6 +1011,7 @@ class DeviceParcels(
             }
         }
         change(index) { owned }
+        pendingForgets = pendingForgets.setting(linkId, null)
         keys = keys.setting(linkId, key)
     }
 

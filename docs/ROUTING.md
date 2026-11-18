@@ -974,8 +974,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   routine step (Chronopost's parcel held as damaged beside DPD's "on its way"), or, in the other's
   stage and words, names more of the place (a postcode or number aside), or has come further than
   a row that only tells again, in its stage and words, a step its carrier told before (La Poste
-  repeats Posti's deposit whenever Posti's data reaches it, at the minute of Posti's sort), the other
-  row is served with `relay_of` instead. The new carrier may also tell
+  repeats Posti's deposit whenever Posti's data reaches it, at the minute of Posti's sort), or, in the
+  other's stage, names in Latin letters a town in the country the other row names alone, that row not
+  the tracking carrier's own (Royal Mail's sorting office beside a universal provider's United
+  Kingdom), the other row is served with `relay_of` instead. The new carrier may also tell
   the steps the earlier one sent it over the posts' data exchange, placed only in the earlier carrier's
   country and stamped when the message arrived (Slovenská pošta tells Poczta Polska's posting
   and departure an hour or two late). A row of the new carrier placed in nothing but a country

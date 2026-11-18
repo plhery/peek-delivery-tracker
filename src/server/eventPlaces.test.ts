@@ -436,6 +436,43 @@ describe('withEventPlaces', () => {
     });
   });
 
+  it('serves a scan that names only a country under the copy that names a town in it, unless the scan is the tracking carrier\'s', () => {
+    const scan = (id: string, source: string, occurredAt: string, location: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, location, occurredAt), stage: 'in_transit', description: `Fixture ${id}`, provider_event_id: `${source}:${id}`, ...extra,
+    });
+    const universal = { universal_provider: 'ParcelsApp' };
+    const served = (row: Record<string, unknown>) => Object.fromEntries((withEventPlaces(row) as { tracking_events: Record<string, unknown>[] })
+      .tracking_events.map(({ id, relay_of }) => [id, relay_of ?? null]));
+    expect(served({
+      id: 'parcel', carrier: 'royal-mail', carrier_data: { original_carrier: 'royal-mail', active_tracking_carrier: 'an-post' }, tracking_events: [
+        // A universal provider names only the country of Royal Mail's sorting office: the office goes on top.
+        scan('sorted', 'unknown', '2026-11-10T08:00:00Z', 'United Kingdom', universal),
+        scan('sorted-copy', 'royal-mail', '2026-11-10T08:00:00Z', 'Leeds'),
+        // In another stage it does not.
+        scan('accepted', 'unknown', '2026-11-09T08:00:07Z', 'United Kingdom', { ...universal, stage: 'accepted' }),
+        scan('accepted-copy', 'royal-mail', '2026-11-09T08:00:07Z', 'Leeds'),
+        // Nor when the copy too names only the country.
+        scan('posted', 'unknown', '2026-11-08T08:00:00Z', 'United Kingdom', universal),
+        scan('posted-copy', 'royal-mail', '2026-11-08T08:00:00Z', 'United Kingdom'),
+        // Nor over the tracking carrier's own scan.
+        scan('arrived', 'an-post', '2026-11-12T08:00:00Z', 'Ireland'),
+        scan('arrived-copy', 'royal-mail', '2026-11-12T08:00:00Z', 'Dublin'),
+      ],
+    })).toEqual({
+      'arrived-copy': 'arrived', arrived: null, sorted: 'sorted-copy', 'sorted-copy': null, accepted: null, 'accepted-copy': 'accepted',
+      posted: null, 'posted-copy': 'posted',
+    });
+    // Nor does a town written in another script, which the apps would show in it.
+    expect(served({
+      id: 'parcel', carrier: 'china-post', carrier_data: { original_carrier: 'china-post', active_tracking_carrier: 'an-post' }, tracking_events: [
+        scan('sorted', 'unknown', '2026-11-10T08:00:00Z', 'China', universal),
+        scan('sorted-copy', 'china-post', '2026-11-10T08:00:00Z', '广州'),
+        scan('left', 'unknown', '2026-11-11T08:00:00Z', 'China', universal),
+        scan('left-copy', 'china-post', '2026-11-11T08:00:00Z', 'Guangzhou'),
+      ],
+    })).toEqual({ 'left-copy': null, left: 'left-copy', sorted: null, 'sorted-copy': 'sorted' });
+  });
+
   it('serves a relay row in the words of the row it goes under, spelt otherwise, in that row\'s spelling', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
       ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,

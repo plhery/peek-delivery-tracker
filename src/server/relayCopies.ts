@@ -74,7 +74,7 @@ const MINUTE_MS = 60_000;
 const HOUR_MS = 60 * MINUTE_MS;
 
 /** The carrier tracking a parcel now: the one it was handed over to, or its own. */
-function currentCarrier(row: JsonObject): string {
+export function currentCarrier(row: JsonObject): string {
   const data = isRecord(row.carrier_data) ? row.carrier_data : {};
   return typeof data.active_tracking_carrier === 'string' ? data.active_tracking_carrier : String(row.carrier ?? '');
 }

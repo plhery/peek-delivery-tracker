@@ -4,9 +4,9 @@ import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
-import { clockDay, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
+import { clockDay, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
-import { copyTellsProblem, providerTwins, relayCopies } from './relayCopies';
+import { copyTellsProblem, currentCarrier, providerTwins, relayCopies } from './relayCopies';
 import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
@@ -291,6 +291,9 @@ function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
   return source !== 'none' && stage !== copy.stage && stage !== scan.stage && !copyTellsProblem(copy, scan);
 }
 
+/** A letter of a script other than Latin. */
+const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
+
 /**
  * Each relay pair as it is served: the row the apps show under the other, and that row's id
  * (`relay_of`). The earlier carrier's copy goes under the scan it repeats, unless the copy alone
@@ -300,10 +303,13 @@ function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
  * Nor does a copy that alone tells a problem beside the scan's routine step (relayCopies.ts), nor one in the scan's stage and words that names
  * more of the place, nor one further on than a scan that only tells again, in its stage and words, a step its carrier
  * told before: La Poste tells Posti's deposit again whenever Posti's data reaches it, at the minute of Posti's sort.
+ * Nor one in the scan's stage that names, in Latin letters, a town in the country the scan names alone, unless that
+ * scan is the tracking carrier's own: Royal Mail's sorting office beside a universal provider's United Kingdom. The
+ * apps show a place written in another script in it, so the country reads better there.
  * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
  * one on top.
  */
-function relayLeads(events: readonly JsonObject[], relays: Map<string, string>): Map<string, string> {
+function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, current: string): Map<string, string> {
   const byId = new Map(events.map((event) => [String(event.id), event]));
   const source = (event: JsonObject) => scanSource(event.provider_event_id, event.universal_provider);
   const toldBefore = (scan: JsonObject) => events.some((other) => source(other) === source(scan) && other.stage === scan.stage
@@ -312,9 +318,12 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>):
     EVENT_STAGE_ORDER.indexOf(String(copy.stage)) > EVENT_STAGE_ORDER.indexOf(String(scan.stage));
   const pastTransit = (scan: JsonObject, copy: JsonObject) => further(scan, copy)
     && EVENT_STAGE_ORDER.indexOf(String(scan.stage)) > EVENT_STAGE_ORDER.indexOf('in_transit');
+  const namesTheTown = (copy: JsonObject, scan: JsonObject) => source(scan) !== current && placeWithin(scan, copy)
+    && !placeWithin(copy, copy) && typeof copy.location === 'string' && !OTHER_SCRIPT.test(copy.location);
   const leads = (copy: JsonObject, scan: JsonObject) => (placed(copy) && !placed(scan) && !pastTransit(scan, copy))
     || copyTellsProblem(copy, scan)
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
+    || (copy.stage === scan.stage && namesTheTown(copy, scan))
     || (further(copy, scan) && toldBefore(scan));
   // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
   // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
@@ -504,7 +513,7 @@ function placedEvents(row: JsonObject): JsonObject {
   const events = shownEvents(stored);
   const relayed = relayCopies({ ...row, tracking_events: events });
   const pairs = new Map([...relayed, ...providerTwins(events, new Set([...relayed.keys(), ...relayed.values()]))]);
-  const relays = relayLeads(events, pairs);
+  const relays = relayLeads(events, pairs, currentCarrier(row));
   const apart = new Set([...relays.keys(), ...relays.values()]);
   const repeats = repeatLeads(events, apart);
   const notices = noticeLeads(events, relays, repeats);

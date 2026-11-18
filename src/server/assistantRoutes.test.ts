@@ -273,9 +273,10 @@ describe('the MCP endpoint', () => {
     expect(initialized.instructions).toContain('add_parcels');
     expect(initialized.instructions).not.toMatch(/gmail|connector|plugin/i);
     // An assistant that browses the user's Amazon site reads each shipment's carrier and tracking ID, and changes nothing.
-    expect(initialized.instructions).toContain('open Your Orders there (/gp/css/order-history');
+    expect(initialized.instructions).toContain('the Amazon site they use, where they are signed in (amazon.fr, .de, .it, .es, .co.uk, .nl, .com and so on: every Amazon site works the same way)');
+    expect(initialized.instructions).toContain('open Your Orders there, at /gp/css/order-history (on amazon.de, for example,');
     expect(initialized.instructions).toContain('Each package on its way or just delivered has its own Track package button');
-    expect(initialized.instructions).toContain('That page names the carrier after "Delivery By" and shows the "Tracking ID"');
+    expect(initialized.instructions).toContain('That page names the carrier after "Delivery By" and shows the "Tracking ID", with labels in the site\'s language');
     expect(initialized.instructions).toMatch(/order number .* is never one: never send it/);
     expect(initialized.instructions).toContain('tell the user Amazon tracks that one only in their Amazon account');
     expect(initialized.instructions).toContain('On Amazon, only read: never buy, cancel, return or change anything, and never sign in for the user');

@@ -3,7 +3,7 @@ title: Swiss Post tracking: Posta Svizzera, stati e ritiro
 description: Segui un pacco della Posta Svizzera in Ticino: com'è fatto il numero, cosa vogliono dire gli stati, cosa fare con l'invito di ritiro e come contattare la Posta.
 slug: swiss-post-tracking-posta-svizzera
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 La Posta Svizzera (Swiss Post, Die Post, La Poste) consegna pacchi e raccomandate in tutta la Svizzera e nel Principato del Liechtenstein. Puoi seguire il pacco gratis su [post.ch](https://www.post.ch/it/ricezione/monitorare-gli-invii) con il numero d'invio, oppure incollare il numero nel box qui sopra. Il numero lo crea il mittente: cercalo prima nell'e-mail di spedizione del negozio.
@@ -109,8 +109,8 @@ Per un pacco danneggiato hai otto giorni dal recapito, online, nella Post-App o 
 :::sources
 - [La Posta: Monitorare gli invii](https://www.post.ch/it/ricezione/monitorare-gli-invii) – campo di ricerca, invii all'estero
 - [La Posta: Eventi Monitorare gli invii](https://www.post.ch/it/ricezione/monitorare-gli-invii/eventi-monitorare-gli-invii) – significato degli stati
-- [La Posta: Testi del tracking (it)](https://service.post.ch/ekp-web/core/rest/translations/it/shipment-text-messages) – diciture italiane
-- [La Posta: Testi del tracking (en)](https://service.post.ch/ekp-web/core/rest/translations/en/shipment-text-messages) – diciture inglesi
+- [La Posta: I miei invii](https://mys.post.ch/my-consignments/) – ogni scansione in italiano, tedesco, francese o inglese
+- [Universal Parcel Scraper: Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – le diciture che legge Peek
 - [La Posta: Invito di ritiro](https://www.post.ch/it/ricezione/invito-di-ritiro) – termini, autorizzazione, prezzi, «I miei invii»
 - [La Posta: Domande e risposte sulla ricezione](https://www.post.ch/it/aiuto-e-contatto/ricezione) – ritiro dal giorno dopo, mezzanotte, WhatsApp
 - [La Posta: Danneggiamento o smarrimento](https://www.post.ch/it/spedire-pacchi/danneggiamento-o-smarrimento) – ricerche, termini, danni

@@ -3,7 +3,7 @@ title: Suivi China Post : numéro, statuts chinois et livraison
 description: Suivre un colis China Post : à quoi ressemble un numéro en CN, ce que veulent dire les statuts en chinois et qui le livre en France, en Belgique ou en Suisse.
 slug: china-post-suivi
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 China Post, c'est la poste nationale chinoise, une entreprise publique, et EMS est sa marque express. Si ta commande AliExpress, Temu, Shein ou d'une autre boutique a un numéro de suivi qui finit par `CN`, c'est China Post qui l'a créé, et chez toi c'est la poste nationale qui livre le colis sous ce même numéro : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique, [La Poste suisse](carrier:swiss-post) en Suisse. Suis-le sur ems.com.cn, le site de China Post, sur celui de ta poste une fois le colis arrivé, ou dans le champ ci-dessus. Le numéro est dans les détails d'expédition de ta commande, sur le site de la boutique.
@@ -141,7 +141,7 @@ Ta poste nationale : La Poste en France, bpost en Belgique, La Poste suisse en S
 - [bpost : Disponibilité du colis au Point d'enlèvement](https://www.bpost.be/fr/faq/combien-de-temps-mon-colis-reste-t-il-disponible-au-point-denlevement) – 14 et 5 jours calendrier
 - [bpost : Comment introduire une plainte concernant un colis](https://www.bpost.be/fr/faq/comment-introduire-une-plainte-en-cas-de-colis-endommage-perdu-ou-non-livre) – plainte, colis abîmé
 - [bpost : Comment contacter le service clientèle de bpost ?](https://www.bpost.be/fr/faq/comment-contacter-le-service-clientele-de-bpost) – téléphone, chat, bureaux
-- [La Poste suisse : Textes du suivi (fr)](https://service.post.ch/ekp-web/core/rest/translations/fr/shipment-text-messages) – libellés du suivi
+- [La Poste suisse : Mes envois](https://mys.post.ch/my-consignments/) – libellés du suivi
 - [La Poste suisse : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – 15 jours, prolongation
 - [La Poste suisse : Détérioration ou perte](https://www.post.ch/fr/expedier-des-colis/dommage-ou-perte) – recherche, six mois
 - [La Poste suisse : Dédouanement à l'importation](https://www.post.ch/fr/reception/dedouanement-a-l-importation) – Post-App, déclaration incomplète

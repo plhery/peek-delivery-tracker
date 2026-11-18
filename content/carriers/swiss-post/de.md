@@ -3,7 +3,7 @@ title: Swiss Post Sendungsverfolgung: Status, Abholung, Kontakt
 description: Post-Paket verfolgen: wie die Sendungsnummer aussieht, was die Status heißen, was nach einer Abholungseinladung zu tun ist und wie du die Post erreichst.
 slug: swiss-post-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 Die Post (Swiss Post, Schweizerische Post) ist der nationale Postdienst der Schweiz und stellt Pakete in der Schweiz und in Liechtenstein zu. Verfolgen kannst du ein Paket kostenlos auf [post.ch](https://www.post.ch/de/empfangen/sendung-verfolgen) mit der Sendungsnummer, oder du fügst die Nummer oben ins Feld ein. Die Nummer vergibt der Absender, schau also zuerst in die Versandbestätigung des Shops.
@@ -116,8 +116,8 @@ Laut Post benachrichtigt sie sehr selten die falsche Person. Die Sendung geht tr
 :::sources
 - [Die Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Suchfeld, „Meine Sendungen“, Zeitfenster, kostenlos
 - [Die Post: Ereignisse Sendungen verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Bedeutung der Ereignisse
-- [Die Post: Statustexte der Sendungsverfolgung (de)](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – deutsche Scan-Texte
-- [Die Post: Statustexte der Sendungsverfolgung (en)](https://service.post.ch/ekp-web/core/rest/translations/en/shipment-text-messages) – englische Scan-Texte
+- [Die Post: Meine Sendungen](https://mys.post.ch/my-consignments/) – jeder Scan auf Deutsch, Französisch, Italienisch oder Englisch
+- [Universal Parcel Scraper: Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – die Scan-Texte, die Peek liest
 - [Die Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – Abholfrist, QR-Code, Einmal-Vollmacht, Preise
 - [Die Post: Fragen und Antworten zum Empfangen](https://www.post.ch/de/hilfe-und-kontakt/empfangen) – Vortag, nächster Tag, Mitternacht, WhatsApp, Nachforschung, falsche Benachrichtigung
 - [Swiss Post: Manage and receive parcels](https://www.post.ch/en/receiving-mail/manage-consignment/manage-one-off) – Umleiten, Ablageort, Nachbarn, Samstag

@@ -4,7 +4,7 @@ description: Von „elektronisch angekündigt“ bis „zugestellt“: was die S
 slug: sendungsstatus-bedeutung-aller-meldungen
 picture: Eine kurvige Route mit abgehakten Stationen (Strichcode-Etikett, Depot, Flugzeug), ein Lieferwagen an der aktuellen Station, weiter vorn ein Haus und Pip, der eilig mitläuft.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 Ein Sendungsstatus fasst den letzten Scan des Paketdienstes in ein paar Worten zusammen, und meistens musst du nichts tun. „Elektronisch angekündigt“ heißt, dass der Paketdienst dein Paket noch gar nicht hat, „in transit“ oder „unterwegs“, dass es irgendwo zwischen zwei Scans steckt, und „in Zustellung“, dass es heute im Zustellfahrzeug liegt. Gefragt bist du nur in wenigen Fällen: nach einem verpassten Zustellversuch, wenn ein Paket zur Abholung bereitliegt, wenn der Zoll etwas verlangt und wenn „zugestellt“ dasteht, aber nichts da ist.
@@ -149,7 +149,7 @@ Rechne nicht damit, sie aufzuhalten. Bei internationalen Sendungen schreibt DHL:
 - [DPD: Paket abholen](https://www.dpd.com/de/de/support/empfaenger/paket-abholen/) – 7 und 3 Kalendertage
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Status, Abholfrist, Poststation, Empfangsbox, Rücksendung
 - [Schweizerische Post: Ereignisse „Sendungen verfolgen“](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Status, Zoll, Fehlleitung, Rücksendegründe
-- [Schweizerische Post: Statustexte der Sendungsverfolgung](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – Verlad in Zustellfahrzeug
+- [Schweizerische Post: Meine Sendungen](https://mys.post.ch/my-consignments/) – Verlad in Zustellfahrzeug
 - [Schweizerische Post: Abholungseinladung](https://www.post.ch/de/empfangen/abholungseinladung) – 7 und 15 Tage, Verlängerung, Preise
 - [Schweizerische Post: Sendung verfolgen](https://www.post.ch/de/empfangen/sendung-verfolgen) – Meine Sendungen, Zeitfenster von 40 bis 120 Minuten
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage bei vollständigen Angaben

@@ -1,0 +1,4 @@
+Adding parcels by email is now open to every account.
+When Peek’s servers are down for maintenance, your list stays on screen and catches up by itself.
+Pip stops asking if a parcel is right once you’ve said yes, until its next update.
+Weights show in pounds where your phone uses US units.

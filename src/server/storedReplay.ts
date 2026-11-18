@@ -95,6 +95,7 @@ export interface StageChange extends Change {
  */
 export interface CopyChange extends Change {
   kind: 'copy';
+  pair: [StoredScan, StoredScan];
   provider: string | null;
   previousProviderEventId: string;
   /** The deleted row's place, which the row that stays takes when it has none; null when it keeps its own. */
@@ -269,7 +270,7 @@ function replayedCopies(parcel: StoredParcel): CopyChange[] {
       const clash = identity !== stays.providerEventId
         && parcel.events.some((other) => other.id !== stays.id && other.id !== copy.id && other.providerEventId === identity);
       return [{
-        kind: 'copy', parcel: parcel.id, row: copy.id, source: UNIVERSAL, open: parcel.open,
+        kind: 'copy', pair: [copy, stays], parcel: parcel.id, row: copy.id, source: UNIVERSAL, open: parcel.open,
         from: new Date(at).toISOString(), to: stays.id, provider, previousProviderEventId: copy.providerEventId,
         location: clash ? null : place, keptProviderEventId: stays.providerEventId,
         providerEventId: clash ? stays.providerEventId : identity, clash,
@@ -501,6 +502,14 @@ end $$;`;
       stage_source: change.stageSource, ...change.reason === 'notice' ? { kept_stage: true } : {} }))}::jsonb
    where id = ${literal(change.row)} and stage = ${literal(change.from)};
   get diagnostics n = row_count; total := total + n;`);
+  // Validate the snapshots before any planned restaging or clock correction changes them.
+  const pairChecks = copies.flatMap((copy) => copy.pair.map((scan) => `  perform 1 from public.tracking_events
+   where id = ${literal(scan.id)} and package_id = ${literal(copy.parcel)}
+     and provider_event_id = ${literal(scan.providerEventId)} and occurred_at = ${literal(scan.occurredAt)}
+     and stage = ${literal(scan.stage)} and description = ${literal(scan.description)}
+     and location is not distinct from ${scan.location === null ? 'null' : literal(scan.location)}
+     and raw_data = ${literal(JSON.stringify(scan.raw))}::jsonb for update;
+  if not found then raise exception 'replay: duplicate pair changed'; end if;`));
   const deletions = copies.map((copy) => `  delete from public.tracking_events
    where id = ${literal(copy.row)} and package_id = ${literal(copy.parcel)} and occurred_at = ${literal(copy.from)}
      and provider_event_id = ${literal(copy.previousProviderEventId)};
@@ -518,6 +527,9 @@ end $$;`;
   const parcels = stepBacks.map((step) => `  update public.packages set current_stage = ${literal(step.to)}${held(step)}
    where id = ${literal(step.parcel)} and current_stage = ${literal(step.from)};
   get diagnostics n = row_count; stepped := stepped + n;`);
+  const writes = [...pairChecks, ...statements, ...deletions, ...places, ...parcels].join('\n');
+  let delimiter = '$replay$';
+  while (writes.includes(delimiter)) delimiter = delimiter.replace('replay', 'replay_');
   return `\\set ON_ERROR_STOP on
 \\set QUIET on
 \\pset tuples_only on
@@ -525,14 +537,14 @@ end $$;`;
 begin;
 set local peek.hand_fix = 'stored-scan replay';
 ${guards.join('\n')}
-${backupSql(changes, placed, stepBacks)}
-do $$
+${backupSql(changes, copies, stepBacks)}
+do ${delimiter}
 declare n int; total int := 0; filled int := 0; stepped int := 0;
 begin
-${[...statements, ...deletions, ...places, ...parcels].join('\n')}
+${writes}
   if total <> ${changes.length} then raise exception 'replay: % of ${changes.length} rows changed', total; end if;
   if filled <> ${placed.length} then raise exception 'replay: % of ${placed.length} rows given a copy''s place', filled; end if;
   if stepped <> ${stepBacks.length} then raise exception 'replay: % of ${stepBacks.length} parcels moved', stepped; end if;
-end $$;
+end ${delimiter};
 `;
 }

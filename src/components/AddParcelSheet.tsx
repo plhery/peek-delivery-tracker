@@ -88,11 +88,11 @@ export function AddParcelSheet({
   const [trackingInputValue, setTrackingInputValue] = useState(initialTrackingInput);
   // The input as it stood when typing last paused, or right after a paste.
   const [settledTrackingInput, setSettledTrackingInput] = useState(initialTrackingInput);
-  const [carrierInputs, setCarrierInputs] = useState<Record<CarrierInputField, string>>({
+  const [carrierInputs, setCarrierInputs] = useState<Record<Exclude<CarrierInputField, 'phoneDigits'>, string>>({
     trackingUrl: '',
     dpdPostcode: '',
-    phoneDigits: '',
   });
+  const [phoneInput, setPhoneInput] = useState<{ number: string; carrier: CarrierId; digits: string }>();
   // Each carrier's postcode is kept apart: one typed for a carrier never goes to another.
   const [carrierPostcodes, setCarrierPostcodes] = useState<Partial<Record<CarrierId, string>>>({});
   // And the country each is from, chosen beside it.
@@ -257,7 +257,8 @@ export function AddParcelSheet({
   const carrierInputValue = (field: CarrierInputField) =>
     field === 'trackingUrl' && parsedCarrierTrackingUrl
       ? parsedCarrierTrackingUrl
-      : field === 'dpdPostcode' ? postcodeValue : carrierInputs[field];
+      : field === 'phoneDigits' ? phoneInput?.number === normalizedNumber && phoneInput.carrier === resolvedCarrier ? phoneInput.digits : ''
+        : field === 'dpdPostcode' ? postcodeValue : carrierInputs[field];
   const requirementsSatisfied = requirements.every((requirement) =>
     requirementSatisfied(requirement, carrierInputValue(requirement.field)));
   const carrierHint = carrier
@@ -548,6 +549,8 @@ export function AddParcelSheet({
                               ...current,
                               [resolvedCarrier]: value,
                             }));
+                          } else if (requirement.field === 'phoneDigits') {
+                            setPhoneInput({ number: normalizedNumber, carrier: resolvedCarrier, digits: value });
                           } else {
                             setCarrierInputs((current) => ({
                               ...current,

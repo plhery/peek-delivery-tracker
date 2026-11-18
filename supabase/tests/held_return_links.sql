@@ -36,6 +36,16 @@ begin
     raise exception 'A return the carrier states is no longer forgotten 30 days after it';
   end if;
 
+  update public.packages set created_at = now() - interval '7 days' where id = held;
+  update public.parcel_links set last_opened_at = now() - interval '7 days' where id = held_link;
+  if exists (select from public.followed_one_off_packages(now() - interval '1 day') where id = held) then
+    raise exception 'The fallback fixture still qualifies through a recent opening or alert';
+  end if;
+  if not exists (select from public.unfiled_one_off_packages(now() - interval '8 days', array['unknown']) where id = held)
+     or exists (select from public.unfiled_one_off_packages(now() - interval '8 days', array['unknown']) where id = ended) then
+    raise exception 'The fallback schedule should include only the held return';
+  end if;
+
   -- An alert can still be turned on for a held return, not for a finished one.
   if public.add_parcel_link_alert(fresh_link, key, 'https://push.example.test/held', 'p256dh', 'auth', 'en', 'all') <> 'added' then
     raise exception 'An alert on a held return was refused';

@@ -14,8 +14,8 @@ Peek's catalog knows one shape for GLS US numbers. With invented digits:
 
 | What you paste (invented) | What Peek does |
 | --- | --- |
-| `SH000000000000000000` | SH and 18 digits, 20 characters in all. Only GLS US uses this shape in Peek's catalog, but the match is weak, so Peek asks GLS US before naming it. |
-| `sh 0000 0000 0000 0000 00` | The same number. Lower case, spaces and dashes don't matter. |
+| `SH605182704936815247` | SH and 18 digits, 20 characters in all. Only GLS US uses this shape in Peek's catalog, but the match is weak, so Peek asks GLS US before naming it. |
+| `sh 6051 8270 4936 8152 47` | The same number. Lower case, spaces and dashes don't matter. |
 | A GLS US number of another shape | Peek doesn't recognize it. Pick GLS US yourself (see "Track a GLS US parcel with Peek" below). |
 | A tracking link from gls-group.com with `/US/` in it, or from gls-us.com or gso.com | Peek takes the number out of the link and names GLS US at once ("Detected carrier"). |
 
@@ -106,7 +106,7 @@ GLS bought Golden State Overnight (GSO) in 2016, and gso.com now leads to GLS US
 
 ### What does a GLS US tracking number look like?
 
-The shape Peek knows is SH followed by 18 digits, such as `SH000000000000000000` (invented). GLS's pages show no format, and GLS US may use other shapes: paste them all the same and pick GLS US with "Change".
+The shape Peek knows is SH followed by 18 digits, such as `SH605182704936815247` (invented). GLS's pages show no format, and GLS US may use other shapes: paste them all the same and pick GLS US with "Change".
 
 ### What does the GLS US arrival scan mean?
 

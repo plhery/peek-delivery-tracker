@@ -1212,8 +1212,9 @@ export class SupabaseServiceClient extends SupabaseClient {
     carrier: string,
     trackingUrl?: string | null,
     dpdPostcode?: string | null,
+    phoneDigits: string | null = null,
   ): Promise<string> {
-    let result = await this.request('/rest/v1/rpc/create_account_package', {
+    let result = await this.request('/rest/v1/rpc/create_account_package_with_digits', {
       method: 'POST',
       body: {
         p_user_id: userId,
@@ -1222,6 +1223,7 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_carrier: carrier,
         p_tracking_url: trackingUrl ?? null,
         p_dpd_postcode: dpdPostcode ?? null,
+        p_phone_digits: phoneDigits,
       },
     });
     if (Array.isArray(result) && result.length === 1) [result] = result;
@@ -1540,10 +1542,11 @@ export class SupabaseServiceClient extends SupabaseClient {
     carrier: string,
     trackingUrl: string | null,
     dpdPostcode: string | null,
+    phoneDigits: string | null = null,
   ): Promise<boolean> {
-    return await this.request('/rest/v1/rpc/change_account_package_carrier', {
+    return await this.request('/rest/v1/rpc/change_account_package_carrier_with_digits', {
       method: 'POST',
-      body: { p_user_id: userId, p_package_id: packageId, p_carrier: carrier, p_tracking_url: trackingUrl, p_dpd_postcode: dpdPostcode },
+      body: { p_user_id: userId, p_package_id: packageId, p_carrier: carrier, p_tracking_url: trackingUrl, p_dpd_postcode: dpdPostcode, p_phone_digits: phoneDigits },
     }) === true;
   }
 
@@ -2283,28 +2286,19 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /**
    * The checks waiting for a worker, by whose, with how long the oldest has waited since it was
-   * queued. The oldest thousand are read.
+   * queued. The database counts every queued job before returning the four groups.
    */
   async syncQueue(now = new Date()): Promise<SyncQueue> {
-    const params = query([
-      ['select', 'kind,user_id,priority,requested_at'],
-      ['state', 'eq.queued'],
-      ['order', 'requested_at.asc'],
-      ['limit', '1000'],
-    ]);
     const queue: SyncQueue = {
       account: { queued: 0, oldestSeconds: 0 },
       lookup: { queued: 0, oldestSeconds: 0 },
       scheduled: { queued: 0, oldestSeconds: 0 },
       release: { queued: 0, oldestSeconds: 0 },
     };
-    for (const job of rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 }))) {
-      const kind = job.kind === 'scheduled' ? 'scheduled'
-        : Number(job.priority) === BACKGROUND_SYNC_PRIORITY ? 'release'
-          : job.user_id ? 'account' : 'lookup';
-      const waited = (now.getTime() - Date.parse(String(job.requested_at ?? ''))) / 1_000;
-      queue[kind].queued += 1;
-      if (waited > queue[kind].oldestSeconds) queue[kind].oldestSeconds = Math.round(waited);
+    for (const group of rows(await this.request('/rest/v1/rpc/sync_queue_counts', { method: 'POST', timeoutMs: 3_000 }))) {
+      const kind = group.kind;
+      if (kind !== 'account' && kind !== 'lookup' && kind !== 'scheduled' && kind !== 'release') continue;
+      queue[kind] = { queued: Number(group.queued), oldestSeconds: Math.max(0, Math.round((now.getTime() - Date.parse(String(group.oldest))) / 1000)) };
     }
     return queue;
   }
@@ -2980,14 +2974,16 @@ export class SupabaseUserClient extends SupabaseClient {
     carrier: string,
     trackingUrl?: string | null,
     dpdPostcode?: string | null,
+    phoneDigits: string | null = null,
   ): Promise<boolean> {
-    return await this.request('/rest/v1/rpc/change_owned_package_carrier', {
+    return await this.request('/rest/v1/rpc/change_owned_package_carrier_with_digits', {
       method: 'POST',
       body: {
         p_package_id: packageId,
         p_carrier: carrier,
         p_tracking_url: trackingUrl ?? null,
         p_dpd_postcode: dpdPostcode ?? null,
+        p_phone_digits: phoneDigits,
       },
     }) === true;
   }

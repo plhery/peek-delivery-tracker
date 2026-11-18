@@ -1,4 +1,5 @@
-import { readFileSync } from 'node:fs';
+import sharp from 'sharp';
+import jsQR from 'jsqr';
 import { describe, expect, it } from 'vitest';
 import { appStoreLink } from './appStore';
 import {
@@ -45,9 +46,10 @@ describe('the code for both phones', () => {
     for (const source of [undefined, '', ['landing-qr'], 'Landing', 'a b', 'x&utm_medium=y', 'a'.repeat(41)]) expect(phoneAppSource(source)).toBeUndefined();
   });
 
-  it('draws the landing’s code and Settings’ code for their addresses', () => {
-    // Each code is drawn once, by a QR encoder; its description names what it was drawn for.
-    expect(readFileSync('public/landing/app-qr.svg', 'utf8')).toContain(`<desc>https://peektracker.com/app?utm_source=${PHONE_APP_QR_SOURCE}</desc>`);
-    expect(readFileSync('public/settings/app-qr.svg', 'utf8')).toContain(`<desc>https://peektracker.com/app?utm_source=${PHONE_APP_SETTINGS_QR_SOURCE}</desc>`);
-  });
+  it.each([['landing', PHONE_APP_QR_SOURCE], ['settings', PHONE_APP_SETTINGS_QR_SOURCE]])(
+    'encodes the download address in the %s graphic', async (folder, source) => {
+      const { data, info } = await sharp(`public/${folder}/app-qr.svg`, { density: 720 }).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+      expect(jsQR(new Uint8ClampedArray(data), info.width, info.height)?.data).toBe(`https://peektracker.com/app?utm_source=${source}`);
+    },
+  );
 });

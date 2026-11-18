@@ -51,6 +51,7 @@ describe('reading the field', () => {
     expect(labelled('Sendungsnummer 1234567899\nVotre colis 01234567890123 sera livré demain\nTracking: 1234567899'))
       .toEqual(['1234567899 low', '01234567890123 low']);
     expect(labelled('Tracking number: 1234567899 | Parcel number: 9987654321')).toEqual(['1234567899 low', '9987654321 low']);
+    expect(labelled('Tracking number: 20261113')).toEqual(['20261113 low']);
     // A number printed in groups is read whole, and the next label is read after it.
     expect(labelled('Parcel 1234 5678 9012, parcel 2345 6789 0123, parcel 3456 7890 1234, parcel 4567 8901 2345').map((number) => number.split(' ')[0]))
       .toEqual(['123456789012', '234567890123', '345678901234', '456789012345']);
@@ -61,6 +62,7 @@ describe('reading the field', () => {
       'Call us on 0441234567', 'Order number: 12345678', 'Numéro de client : 4455667788',
       // An order number, a date, a code too short for a tracking number, and a reference no carrier's shape fits.
       'Parcel PO-000 12345678901234567', 'Sendung 12.10.2026', 'Parcel 123456', 'Numéro de suivi : zzqx-000-000000000',
+      'Date d’envoi : 20261113', 'Fecha de envío: 20261113',
       // A date written year first.
       "Date d'envoi : 2026-11-12", 'Fecha de envío: 2026-11-12', 'Tracking: 2026.11.12', 'Sendung 2026/1/5',
       // A link's number is the link's.

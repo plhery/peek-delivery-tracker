@@ -752,7 +752,7 @@ describe('the MCP endpoint', () => {
 
     const changed = await call(secret, 'change_carrier', { parcel: UPS, carrier: 'dhl' });
     expect(changed.result!.structuredContent).toEqual({ id: parcel.id, carrier: 'DHL', carrierId: 'dhl', checking: true });
-    expect(change).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, 'dhl', null, null);
+    expect(change).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, 'dhl', null, null, null);
     expect(enqueue).toHaveBeenCalledExactlyOnceWith({ userId, packageId: parcel.id, reason: 'changed' });
 
     // The carrier it has already: nothing to change or check.
@@ -780,12 +780,12 @@ describe('the MCP endpoint', () => {
 
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'dpd-de' })).result!.structuredContent)
       .toMatchObject({ carrierId: 'dpd-de', checking: false });
-    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'dpd-de', null, '10115');
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'dpd-de', null, '10115', null);
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'dpd-de', postcode: '' });
-    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'dpd-de', null, null);
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'dpd-de', null, null, null);
     // A carrier that takes no postcode is given none.
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'hermes-de' });
-    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'hermes-de', null, null);
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'hermes-de', null, null, null);
     expect(enqueue).not.toHaveBeenCalled();
   });
 
@@ -804,7 +804,7 @@ describe('the MCP endpoint', () => {
     const after = { ...parcel, carrier: 'spring-gds' };
     vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(parcel).mockResolvedValueOnce(after);
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds' })).result!.structuredContent).toMatchObject({ carrierId: 'spring-gds' });
-    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1000');
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1000', null);
     expect(write).not.toHaveBeenCalled();
     // The same postcode given again keeps its country too: the parcel holds all of it already.
     vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(after);
@@ -814,7 +814,7 @@ describe('the MCP endpoint', () => {
     const moved = { ...after, dpd_postcode: '1050', carrier_data: {} };
     vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(after).mockResolvedValueOnce(moved);
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds', postcode: '1050', postcodeCountry: 'be' });
-    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1050');
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1050', null);
     expect(write).toHaveBeenLastCalledWith(parcel.id, expect.objectContaining({
       carrier_data: expect.objectContaining({ postcode_country: { postcode: '1050', country: 'BE' } }),
     }));
@@ -833,8 +833,8 @@ describe('the MCP endpoint', () => {
     };
     expect(found.carriers.find(({ id }) => id === 'j-and-t-mx')?.inputs).toEqual([expect.objectContaining({ input: 'phoneDigits' })]);
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-mx', phoneDigits: ' 0123 ' });
-    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'j-and-t-mx', null, null);
-    expect(write).toHaveBeenLastCalledWith(parcel.id, { phone_digits: '0123' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'j-and-t-mx', null, null, '0123');
+    expect(write).not.toHaveBeenCalled();
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-mx', phoneDigits: '12a4' })).result).toMatchObject({
       isError: true, content: [{ text: expect.stringContaining('last four digits') }],
     });
@@ -843,10 +843,10 @@ describe('the MCP endpoint', () => {
     Object.assign(parcel, { carrier: 'j-and-t-mx', phone_digits: '0123' });
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-mx' })).result!.structuredContent).toMatchObject({ checking: false });
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-cn' });
-    expect(write).toHaveBeenLastCalledWith(parcel.id, { phone_digits: '0123' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'j-and-t-cn', null, null, null);
     // A carrier that reads none forgets them.
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'ups' });
-    expect(write).toHaveBeenLastCalledWith(parcel.id, { phone_digits: null });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'ups', null, null, null);
     expect(change).toHaveBeenCalledTimes(3);
   });
 

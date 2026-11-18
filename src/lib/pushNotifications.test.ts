@@ -2,6 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { forgetAllLinkNotes, linkNote, noteLink } from '../peek/deviceNotes';
 import { forgetAllRecents, rememberParcel } from '../peek/recents';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
+import { deviceAlert, followAlertLanguage } from '../peek/alerts';
+import { ParcelLinkError } from '../peek/linkModel';
 import { decodePublicKey } from './pushKey';
 import {
   disablePushNotifications,
@@ -364,27 +366,38 @@ describe('the browser subscription that parcel links’ alerts share with the ac
     }, OWNER_KEY);
     expect(links.setParcelAlert).toHaveBeenCalledWith(OTHER_LINK_ID, expect.anything(), null);
     expect(linkNote(LINK_ID).alert).toEqual({ preset: 'important', endpoint: FRESH, locale: 'de' });
-    expect(linkNote(OTHER_LINK_ID).alert).toBeUndefined();
+    expect(linkNote(OTHER_LINK_ID).alert).toMatchObject({ endpoint: FRESH, move: expect.anything() });
     expect(fresh.unsubscribe).not.toHaveBeenCalled();
   });
 
-  it('is not replaced for parcels’ alerts the server takes none of, nor without any', async () => {
+  it('keeps every rate-limited move and retries it after the server interval', async () => {
     const shared = pushSubscription(SHARED);
     const fresh = pushSubscription(FRESH);
     getSubscription.mockResolvedValue(shared);
     subscribe.mockResolvedValue(fresh);
     alertOn(SHARED);
-    links.setParcelAlert.mockRejectedValue(new Error('offline'));
+    const others = Array.from('23456789ABCDEFGHJKLM', (digit) => 'ABCDABCDABC' + digit);
+    for (const id of others) alertOn(SHARED, id);
+    vi.stubGlobal('Notification', { permission: 'granted' });
+    const now = Date.now();
+    const clock = vi.spyOn(Date, 'now').mockReturnValue(now);
+    for (let i = 0; i < 20; i++) links.setParcelAlert.mockResolvedValueOnce(undefined);
+    links.setParcelAlert.mockRejectedValueOnce(new ParcelLinkError('burst', { retryAfterSeconds: 90 }));
     vi.mocked(fetch).mockRejectedValue(new Error('offline'));
 
     await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
     expect(shared.unsubscribe).toHaveBeenCalledOnce();
-    expect(fresh.unsubscribe).toHaveBeenCalledOnce();
-    expect(linkNote(LINK_ID).alert).toBeUndefined();
-
-    subscribe.mockClear();
-    await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
-    expect(subscribe).not.toHaveBeenCalled();
+    expect(fresh.unsubscribe).not.toHaveBeenCalled();
+    getSubscription.mockResolvedValue(fresh);
+    expect(await deviceAlert(LINK_ID)).toMatchObject({ endpoint: FRESH });
+    clock.mockReturnValue(now + 89_999);
+    await followAlertLanguage('de');
+    expect(links.setParcelAlert).toHaveBeenCalledTimes(21);
+    clock.mockReturnValue(now + 90_000);
+    await followAlertLanguage('de');
+    expect(links.setParcelAlert).toHaveBeenCalledTimes(22);
+    expect(linkNote(others[19]!).alert).toEqual({ preset: 'important', endpoint: FRESH, locale: 'de' });
+    clock.mockRestore();
   });
 
   it('stays after the account is deleted while the parcels’ alerts use it', async () => {

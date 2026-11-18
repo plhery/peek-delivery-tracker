@@ -66,6 +66,6 @@ describe('Amazon public tracking eligibility', () => {
     const response = await add(request({ trackingNumber: 'FR9999999980', carrier: 'amazon-shipping' }, '/api/packages'), context);
     expect(response.status).toBe(201);
     expect(fetch).toHaveBeenCalledWith('FR9999999980');
-    expect(create).toHaveBeenCalledWith(userId, 'FR9999999980', '', 'amazon-shipping', null, null);
+    expect(create).toHaveBeenCalledWith(userId, 'FR9999999980', '', 'amazon-shipping', null, null, null);
   });
 });

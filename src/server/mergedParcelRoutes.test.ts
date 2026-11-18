@@ -87,7 +87,7 @@ it('changes the carrier of the parcel a stale id was merged into, and checks tha
   const changed = vi.spyOn(SupabaseUserClient.prototype, 'changePackageCarrier').mockResolvedValue(true);
   const response = await call(changeCarrier, 'PATCH', { carrier: 'unknown' }, staleId, '/carrier');
   expect(response.status).toBe(200);
-  expect(changed).toHaveBeenCalledExactlyOnceWith(keptId, 'unknown', null, null);
+  expect(changed).toHaveBeenCalledExactlyOnceWith(keptId, 'unknown', null, null, null);
   expect(SupabaseServiceClient.prototype.enqueueSyncJob).toHaveBeenCalledExactlyOnceWith({ userId, packageId: keptId, reason: 'changed' });
   const logged = vi.mocked(console.log).mock.calls.map(([line]) => String(line)).find((line) => line.includes('package_carrier_changed'));
   expect(logged).toContain(keptId);

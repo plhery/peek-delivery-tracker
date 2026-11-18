@@ -222,7 +222,7 @@ export function numbersInText(text: string): NumberInText[] {
       const match = parseTrackingInput(link);
       if (match.trackingNumber) keep(match);
     }
-    const prose = line.replace(LINK, ' ');
+    const prose = line.replace(SHIPPING_DATE, ' ').replace(LINK, ' ');
     const candidates: { index: number; end: number; text: string; detection: CarrierDetection }[] = [];
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {
@@ -263,7 +263,7 @@ const NUMBER_WORDS = new RegExp(rules.numberWords, 'i');
 function uncertainNumberInText(text: string): TrackingInputMatch | null {
   const candidates = new Map<string, { match: TrackingInputMatch; introduced: boolean }>();
   for (const line of text.split(/\r?\n/)) {
-    const prose = withoutOrders(line.replace(LINK, ' '));
+    const prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
     for (const pattern of TRACKING_CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(new RegExp(pattern.source, pattern.flags))) {
         const candidate = hit[0].trim();
@@ -290,6 +290,9 @@ const MOST_LABELS_PER_LINE = 4;
 /** A date written year first ("2026-11-12"), which a label such as "Date d'envoi :" may stand before. */
 const YEAR_FIRST_DATE = /^\d{4}([./-])\d{1,2}\1\d{1,2}$/;
 
+// Shipping-date labels contain words that can also introduce a parcel number.
+const SHIPPING_DATE = /\b(?:date\s+d['’]envoi|fecha\s+de\s+env[ií]o|shipping\s+date|ship\s+date)\s*[:：-]?\s*\d{8}\b/giu;
+
 /** Where a number the label reader read ends in the text: it joins a number printed in groups ("1234 5678 9012"). */
 function numberEnd(prose: string, number: string): number {
   const printed = new RegExp([...number].map((char) => char.replace(/[.*+?^${}()|[\]\\-]/g, '\\$&')).join('\\s?'));
@@ -308,7 +311,7 @@ function numberEnd(prose: string, number: string): number {
 export function labelledNumbersInText(text: string): NumberInText[] {
   const found = new Map<string, NumberInText>();
   for (const line of text.split(/\r?\n/)) {
-    let prose = withoutOrders(line.replace(LINK, ' '));
+    let prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
     for (let label = 0; label < MOST_LABELS_PER_LINE && found.size < MOST_CANDIDATES_READ; label += 1) {
       const number = keywordNumberInText(prose);
       if (!number) break;
@@ -339,7 +342,7 @@ export function carrierNumberInText(text: string, carriers: readonly CarrierId[]
   const found = new Map<string, NumberInText>();
   for (const line of text.split(/\r?\n/)) {
     if (PHONE_LINE.test(line)) continue;
-    const prose = withoutOrders(line.replace(LINK, ' '));
+    const prose = withoutOrders(line.replace(SHIPPING_DATE, ' ').replace(LINK, ' '));
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {
         const candidate = hit[0].trim();

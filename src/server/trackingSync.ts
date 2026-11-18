@@ -569,7 +569,9 @@ function instant(value: unknown): number | null {
  */
 function deliveryClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const declared = resultTimezone(deliveringCarrier(parcel), data as CarrierResult);
+  const carrier = deliveringCarrier(parcel);
+  const earlier = typeof data.active_tracking_carrier === 'string' && data.active_tracking_carrier !== carrier;
+  const declared = resultTimezone(carrier, (earlier ? {} : data) as CarrierResult);
   return declared !== 'UTC' ? declared : carrierClock(parcel);
 }
 
@@ -613,7 +615,7 @@ function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const placed = pageClock(carrier) ? newestPlaceZone(parcel, carrier) : null;
   if (placed) return placed;
   if (typeof data.active_tracking_carrier === 'string' && data.active_tracking_carrier !== carrier) {
-    return newestOffsetZone(parcel, carrier) ?? newestPlaceZone(parcel, carrier) ?? resultTimezone(carrier, data as CarrierResult);
+    return newestOffsetZone(parcel, carrier) ?? newestPlaceZone(parcel, carrier) ?? resultTimezone(carrier, {} as CarrierResult);
   }
   const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
     ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;
@@ -1295,9 +1297,12 @@ export function buildEvents(
       raw_data: { ...raw, stage_source: stageSource(declaredStage, description, raw.stage_source), ...provider },
     });
   }
+  const deliveryTime = current === 'delivered' && typeof result.delivered_at === 'string'
+    && /[T ]\d{2}:\d{2}/.test(result.delivered_at) ? eventTimestamp(result.delivered_at, timezone) : null;
+  const explicitDelivery = deliveryTime && (!observedAt || !datedAfterCheck(deliveryTime, 'UTC', observedAt)) ? deliveryTime : null;
   if (rows.length === 0 && current && result.last_status_text) {
     const description = String(result.last_status_text);
-    const occurredAt = eventTimestamp(result.last_update, timezone);
+    const occurredAt = explicitDelivery ?? eventTimestamp(result.last_update, timezone);
     if (occurredAt) {
       rows.push({
         package_id: parcel.id,
@@ -1305,9 +1310,9 @@ export function buildEvents(
         description,
         location: null,
         occurred_at: occurredAt,
-        provider_event_id: providerEventId(carrierId, result.last_update, '', description),
+        provider_event_id: providerEventId(carrierId, explicitDelivery ? result.delivered_at : result.last_update, '', description),
         raw_data: {
-          time: result.last_update,
+          time: explicitDelivery ? result.delivered_at : result.last_update,
           stage_source: stageSource(String(result.current_stage ?? ''), description, result.current_stage_source),
           ...provider,
         },
@@ -1345,7 +1350,7 @@ export function buildEvents(
       matchingEvent?.description ?? result.last_status_text ?? UNWORDED_STEP,
     ).trim() || UNWORDED_STEP;
     const location = String(matchingEvent?.location ?? '').trim();
-    const occurredAt = endWithNewestScan(parcel, previousStage, current, rows, providerCopy) ?? observedAt.toISOString();
+    const occurredAt = explicitDelivery ?? endWithNewestScan(parcel, previousStage, current, rows, providerCopy) ?? observedAt.toISOString();
     const declaredCurrent = String(result.current_stage ?? '');
     rows.push({
       package_id: parcel.id,
@@ -1355,7 +1360,7 @@ export function buildEvents(
       occurred_at: occurredAt,
       provider_event_id: providerEventId(
         carrierId,
-        result.tracking_provider === 'UPU'
+        explicitDelivery ? result.delivered_at : result.tracking_provider === 'UPU'
           ? `UPU:observed:${String(matchingEvent?.local_time ?? '')}:${String(matchingEvent?.provider_code ?? '')}`
           : `observed:${previousStage}->${current}`,
         location,
@@ -1363,7 +1368,7 @@ export function buildEvents(
       ),
       raw_data: {
         ...(result.tracking_provider === 'UPU' || result.direct_local_fallback === true ? matchingEvent : {}),
-        observed_without_provider_timestamp: true,
+        ...(explicitDelivery ? { time: result.delivered_at } : { observed_without_provider_timestamp: true }),
         stage_source: stageSource(
           VALID_STAGES.has(declaredCurrent) ? declaredCurrent : String(matchingEvent?.stage ?? ''),
           description,
@@ -3263,6 +3268,18 @@ export class TrackingSyncService {
           && !deleteDescriptions.includes(String(row.description))), ...persistedEvents];
       };
       if (!preserveSummary) {
+        // A short answer may omit the return. Read the rows that will survive this write,
+        // including any restaging of the return or a later delivery attempt.
+        let heldReturn = normalized.returnHeld;
+        if (returnHeld(parcel) && !fetched.correction && RETURN_HOLDING_SUMMARIES.has(String(selectedStage))) {
+          const current = currentScan(rowsOnceSaved().filter((row) => row.stage !== 'pending'
+            && !datedAfterCheck(row.occurred_at, 'UTC', now)).sort(newestScanFirst));
+          if (current?.stage === 'returned') {
+            heldReturn = true;
+            selectedStage = 'returned';
+            stageText = String(current.description ?? '').trim() || stageText;
+          }
+        }
         values.last_status_text = stageText || result.last_status_text || null;
         // A parcel on its way back to the sender has no delivery to expect.
         values.expected_delivery = result.expected_delivery && selectedStage !== 'returned' ? String(result.expected_delivery) : null;
@@ -3311,7 +3328,7 @@ export class TrackingSyncService {
         if (values.current_stage === 'delivered' && typeof result.tracking_provider === 'string' && typeof followed === 'string'
           && directCarrier(owner) && !result.original_carrier && !showsDelivery(answerOf(owner))) carrierData.unconfirmed_delivery_until = followed;
         // A return the scans after it only carry back keeps the parcel checked (`returnHeld`).
-        if (normalized.returnHeld && (values.current_stage ?? previousStage) === 'returned') carrierData.return_held = true;
+        if (heldReturn && (values.current_stage ?? previousStage) === 'returned') carrierData.return_held = true;
         // A parcel collected from its pickup point keeps the point once the carrier stops naming it.
         const collectedAt = collectedPickupPoint(parcel, carrierData, String(values.current_stage ?? previousStage),
           fetched.correction?.carrier ?? carrierId, [...stored, ...events]);

@@ -1068,6 +1068,11 @@ describe('native notification boundaries', () => {
     )).toBe('demain, 09:00–12:00');
   });
 
+  it('keeps the hours of a same-day slot across the autumn clock change', () => {
+    expect(notificationExpectedDelivery('2026-10-25T03:30:00+01:00', 'en', 'Europe/Zurich',
+      Date.UTC(2026, 9, 24, 12), '2026-10-25T01:30:00+02:00', '', true)).toContain('01:30–03:30');
+  });
+
   it('localizes native estimates and preserves them before a long location', () => {
     const now = Date.UTC(2026, 7, 25, 12);
     const native = new NativePushNotificationService(

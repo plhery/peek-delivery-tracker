@@ -30,6 +30,15 @@ describe('Add parcel feedback while typing', () => {
     expect(screen.queryByText(notFound)).not.toBeInTheDocument();
   });
 
+  it('keeps phone digits with the parcel they were entered for', () => {
+    const tracking = renderSheet();
+    fireEvent.change(tracking, { target: { value: 'JMX674829503162' } });
+    const phone = screen.getByLabelText(/phone/i);
+    fireEvent.change(phone, { target: { value: '0123' } });
+    fireEvent.change(tracking, { target: { value: 'JMX674829503163' } });
+    expect(screen.getByLabelText(/phone/i)).toHaveValue('');
+  });
+
   it('answers a paste at once', () => {
     const tracking = renderSheet();
 

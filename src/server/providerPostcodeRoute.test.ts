@@ -50,7 +50,7 @@ it('keeps the country of a postcode from abroad with the postcode the change sto
   vi.mocked(SupabaseUserClient.prototype.getPackage).mockResolvedValueOnce(postnl).mockResolvedValue(stored);
   const update = vi.spyOn(SupabaseServiceClient.prototype, 'updatePackage').mockResolvedValue(undefined);
   expect((await patch({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' })).status).toBe(200);
-  expect(SupabaseUserClient.prototype.changePackageCarrier).toHaveBeenCalledWith(id, 'spring-gds', null, '1000');
+  expect(SupabaseUserClient.prototype.changePackageCarrier).toHaveBeenCalledWith(id, 'spring-gds', null, '1000', null);
   expect(update).toHaveBeenCalledExactlyOnceWith(id, {
     carrier_data: { routing: { version: 1, failures: { dhl: { count: 1 } } }, postcode_country: { postcode: '1000', country: 'BE' } },
     dpd_postcode: '1000',
@@ -65,6 +65,6 @@ it('keeps the country of a postcode from abroad with the postcode the change sto
   expect((await patch({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' })).status).toBe(200);
   expect(SupabaseUserClient.prototype.changePackageCarrier).not.toHaveBeenCalled();
   expect((await patch({ carrier: 'spring-gds', dpdPostcode: '1000' })).status).toBe(200);
-  expect(SupabaseUserClient.prototype.changePackageCarrier).toHaveBeenCalledWith(id, 'spring-gds', null, '1000');
+  expect(SupabaseUserClient.prototype.changePackageCarrier).toHaveBeenCalledWith(id, 'spring-gds', null, '1000', null);
   expect(update).toHaveBeenCalledExactlyOnceWith(id, { carrier_data: {}, dpd_postcode: '1000' });
 });

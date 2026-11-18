@@ -567,17 +567,17 @@ function expectedDelivery(
   };
   if (stage === 'out_for_delivery') {
     // The end of a window of days that began before today is not today's hours.
-    return sameDay(end.day, today) && time && !(start && start.day < today)
+    return sameDay(end.day, today) && time && !(start && start.day.toISODate()! < today.toISODate()!)
       ? { date: dayAndTime(named(today).text, time, tag), form: 'day' } : null;
   }
-  if (start && start.day < end.day && !sameDay(end.day, today)) {
-    if (start.day > today) return { date: notificationDay(start.day, locale), to: notificationDay(end.day, locale), form: 'window' };
+  if (start && start.day.toISODate()! < end.day.toISODate()! && !sameDay(end.day, today)) {
+    if (start.day.toISODate()! > today.toISODate()!) return { date: notificationDay(start.day, locale), to: notificationDay(end.day, locale), form: 'window' };
     const last = named(end.day);
     return { date: last.text, form: last.relative ? 'by_day' : 'by_date' };
   }
   const day = named(end.day);
   // The last day of a window is its whole day: the time it ends by says nothing of when the parcel comes.
-  const shown = start && start.day < end.day ? '' : time;
+  const shown = start && start.day.toISODate()! < end.day.toISODate()! ? '' : time;
   return { date: shown ? dayAndTime(day.text, shown, tag) : day.text, form: day.relative ? 'day' : 'date' };
 }
 

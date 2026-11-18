@@ -2284,28 +2284,19 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /**
    * The checks waiting for a worker, by whose, with how long the oldest has waited since it was
-   * queued. The oldest thousand are read.
+   * queued. The database counts every queued job before returning the four groups.
    */
   async syncQueue(now = new Date()): Promise<SyncQueue> {
-    const params = query([
-      ['select', 'kind,user_id,priority,requested_at'],
-      ['state', 'eq.queued'],
-      ['order', 'requested_at.asc'],
-      ['limit', '1000'],
-    ]);
     const queue: SyncQueue = {
       account: { queued: 0, oldestSeconds: 0 },
       lookup: { queued: 0, oldestSeconds: 0 },
       scheduled: { queued: 0, oldestSeconds: 0 },
       release: { queued: 0, oldestSeconds: 0 },
     };
-    for (const job of rows(await this.request(`/rest/v1/sync_jobs?${params}`, { timeoutMs: 3_000 }))) {
-      const kind = job.kind === 'scheduled' ? 'scheduled'
-        : Number(job.priority) === BACKGROUND_SYNC_PRIORITY ? 'release'
-          : job.user_id ? 'account' : 'lookup';
-      const waited = (now.getTime() - Date.parse(String(job.requested_at ?? ''))) / 1_000;
-      queue[kind].queued += 1;
-      if (waited > queue[kind].oldestSeconds) queue[kind].oldestSeconds = Math.round(waited);
+    for (const group of rows(await this.request('/rest/v1/rpc/sync_queue_counts', { method: 'POST', timeoutMs: 3_000 }))) {
+      const kind = group.kind;
+      if (kind !== 'account' && kind !== 'lookup' && kind !== 'scheduled' && kind !== 'release') continue;
+      queue[kind] = { queued: Number(group.queued), oldestSeconds: Math.max(0, Math.round((now.getTime() - Date.parse(String(group.oldest))) / 1000)) };
     }
     return queue;
   }

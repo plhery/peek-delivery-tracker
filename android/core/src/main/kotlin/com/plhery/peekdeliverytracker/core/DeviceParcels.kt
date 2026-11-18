@@ -790,10 +790,19 @@ class DeviceParcels(
             }
             recovered += linkId
             // Followed or forgotten meanwhile.
-            if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) == null) continue
-            if (response == null || response.link.role != ParcelLinkRole.Owner || entries.any { it.parcel.id == response.parcel.id }) {
+            if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) != key) continue
+            if (response == null || !response.link.id.equalsCanonically(linkId) || response.link.role != ParcelLinkRole.Owner) {
                 // Only this phone's copy goes: the link stays as it is on the service.
                 keys = keys.setting(linkId, null)
+                continue
+            }
+            val index = entries.indexOfFirst { it.parcel.id == response.parcel.id }
+            if (index >= 0) {
+                if (entries[index].isViewer) {
+                    upgradeViewer(index, response, key)
+                } else {
+                    keys = keys.setting(linkId, null)
+                }
                 continue
             }
             entries = entries + DeviceParcel(
@@ -962,21 +971,7 @@ class DeviceParcels(
         val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) || it.parcel.id == response.parcel.id }
         if (index >= 0) {
             if (key == null || !entries[index].isViewer) return Followed(entries[index].parcel.id, false)
-            val old = entries[index]
-            var owned = old.taking(Parcel(shared = response.parcel)).copy(
-                linkId = linkId, viewer = null, canKeep = null, checkedAt = now().timeIntervalSinceReferenceDate,
-            )
-            if (!old.linkId.equalsCanonically(linkId)) {
-                // Another link's notifications give way to this one's, asked for on the next round.
-                owned = owned.copy(alertToken = null)
-                val client = client
-                val token = old.alertToken
-                if (client != null && token != null) {
-                    scope.launch { attempt { client.removeAlert(old.linkId, removal(token)) } }
-                }
-            }
-            change(index) { owned }
-            keys = keys.setting(linkId, key)
+            upgradeViewer(index, response, key)
             save()
             return Followed(entries[index].parcel.id, false)
         }
@@ -999,6 +994,25 @@ class DeviceParcels(
         entries = entries + entry
         save()
         return Followed(entry.parcel.id, true)
+    }
+
+    private fun upgradeViewer(index: Int, response: PublicParcelResponse, key: String) {
+        val linkId = response.link.id
+        val old = entries[index]
+        var owned = old.taking(Parcel(shared = response.parcel)).copy(
+            linkId = linkId, viewer = null, canKeep = null, checkedAt = now().timeIntervalSinceReferenceDate,
+        )
+        if (!old.linkId.equalsCanonically(linkId)) {
+            // Another link's notifications give way to this one's, asked for on the next round.
+            owned = owned.copy(alertToken = null)
+            val client = client
+            val token = old.alertToken
+            if (client != null && token != null) {
+                scope.launch { attempt { client.removeAlert(old.linkId, removal(token)) } }
+            }
+        }
+        change(index) { owned }
+        keys = keys.setting(linkId, key)
     }
 
     // Notifications

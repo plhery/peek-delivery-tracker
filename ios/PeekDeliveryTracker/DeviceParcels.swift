@@ -499,10 +499,16 @@ final class DeviceParcels {
             contacted = true
             // Forgotten, followed or let go meanwhile.
             guard keys[linkID] == key, !entries.contains(where: { $0.linkID == linkID }) else { continue }
-            // A parcel already here through another link stays as it is.
-            guard let response, response.link.id == linkID, response.link.role == .owner,
-                  !entries.contains(where: { $0.parcel.id == response.package.id }) else {
+            guard let response, response.link.id == linkID, response.link.role == .owner else {
                 keys[linkID] = nil
+                continue
+            }
+            if let index = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
+                if entries[index].isViewer {
+                    upgradeViewer(at: index, with: response, key: key)
+                } else {
+                    keys[linkID] = nil
+                }
                 continue
             }
             var entry = DeviceParcel(linkID: linkID, label: "", archivedAt: nil, parcel: Parcel(shared: response.package), checkedAt: now())
@@ -723,20 +729,7 @@ final class DeviceParcels {
         if forgetting.removeValue(forKey: linkID) != nil { save() }
         if let index = entries.firstIndex(where: { $0.linkID == linkID || $0.parcel.id == response.package.id }) {
             guard let key, entries[index].isViewer else { return (entries[index].parcel.id, false) }
-            let old = entries[index]
-            entries[index].linkID = linkID
-            entries[index].viewer = nil
-            entries[index].canKeep = nil
-            entries[index].take(Parcel(shared: response.package))
-            entries[index].checkedAt = now()
-            if old.linkID != linkID {
-                // Another link's notifications give way to this one's, asked for on the next round.
-                entries[index].alertToken = nil
-                if let client, let token = old.alertToken {
-                    Task { try? await client.removeAlert(old.linkID, DeleteParcelAppAlertRequest(token: token)) }
-                }
-            }
-            keys[linkID] = key
+            upgradeViewer(at: index, with: response, key: key)
             save()
             return (entries[index].parcel.id, false)
         }
@@ -758,6 +751,24 @@ final class DeviceParcels {
         entries.append(entry)
         save()
         return (entry.parcel.id, true)
+    }
+
+    private func upgradeViewer(at index: Int, with response: PublicParcelResponse, key: String) {
+        let linkID = response.link.id
+        let old = entries[index]
+        entries[index].linkID = linkID
+        entries[index].viewer = nil
+        entries[index].canKeep = nil
+        entries[index].take(Parcel(shared: response.package))
+        entries[index].checkedAt = now()
+        if old.linkID != linkID {
+            // Another link's notifications give way to this one's, asked for on the next round.
+            entries[index].alertToken = nil
+            if let client, let token = old.alertToken {
+                Task { try? await client.removeAlert(old.linkID, DeleteParcelAppAlertRequest(token: token)) }
+            }
+        }
+        keys[linkID] = key
     }
 
     // MARK: - Notifications

@@ -1310,6 +1310,26 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun recoveryUpgradesViewerWithOwnerLink() = runTest {
+        val id = UUID.randomUUID()
+        val owner = "22222222222A"
+        val viewer = "22222222222B"
+        val storage = Memory()
+        storage.keys = mapOf(owner to key)
+        val owned = PublicParcelResponse(link(owner), pkg(id))
+        val parcels = device(client(Calls(), read = { owned }), storage, this)
+        parcels.follow(PublicParcelResponse(reader(viewer), pkg(id)), key = null, label = "Lamp")
+
+        parcels.refresh()
+
+        val reopened = device(null, storage, this)
+        assertEquals(listOf("Lamp"), reopened.list().map { it.label })
+        assertNull(reopened.viewerLink(id))
+        assertEquals(listOf(owner), storage.parcels.map { it.linkId })
+        assertEquals(mapOf(owner to key), storage.keys)
+    }
+
+    @Test
     fun aFileThatIsNoListKeepsItsKeysAndTheirParcelsAreReadAgain() = runTest {
         val keys = mapOf("22222222222C" to key, "22222222222D" to key)
         val unreadable = DeviceParcelFiles.opened("""{"linkID":""".toByteArray(), keys = keys)

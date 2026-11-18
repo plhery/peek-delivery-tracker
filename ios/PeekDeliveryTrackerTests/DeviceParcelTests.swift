@@ -1487,6 +1487,23 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.keys, keys)
     }
 
+    func testRecoveryUpgradesViewerWithOwnerLink() async throws {
+        let id = UUID(), owner = "22222222222A", viewer = "22222222222B"
+        let storage = Memory()
+        storage.keys = [owner: key]
+        let owned = answer(owner, id)
+        let device = DeviceParcels(client: client(Calls(), read: { _ in owned }), storage: storage)
+        _ = try device.follow(PublicParcelResponse(link: reader(viewer), package: package(id)), key: nil, label: "Lamp")
+
+        try await device.refresh()
+
+        let reopened = DeviceParcels(client: nil, storage: storage)
+        XCTAssertEqual(reopened.list().map(\.label), ["Lamp"])
+        XCTAssertNil(reopened.viewerLink(id: id))
+        XCTAssertEqual(storage.parcels.map(\.linkID), [owner])
+        XCTAssertEqual(storage.keys, [owner: key])
+    }
+
     func testAFileThatCannotBeReadAtAllIsReadAgainWithItsKeys() async throws {
         let first = UUID(), second = UUID()
         let keys = ["22222222222A": key, "22222222222B": key]

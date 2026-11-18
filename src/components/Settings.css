@@ -165,6 +165,7 @@
 .assistants__setup[open] > summary .settings-chevron { transform: rotate(90deg); }
 .assistants__setup-body { padding: 0 14px 4px; }
 .assistants__who { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
+.assistants__fallback { margin: -4px 0 14px; }
 .assistants__uses { margin: 0; padding: 12px 14px 12px 32px; display: grid; gap: 8px; font-size: 13px; line-height: 1.5; }
 .assistants__uses strong { font-weight: 550; }
 @media (prefers-reduced-motion: reduce) { .assistants__setup > summary .settings-chevron { transition: none; } }

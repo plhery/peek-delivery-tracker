@@ -322,8 +322,10 @@ client to Peek. Without the setting, nothing in the app mentions it. [ARCHITECTU
   the public address, and OpenAI fetches `/.well-known/openai-apps-challenge`. A challenge there
   (Bot Fight Mode, a managed challenge, a WAF rule for non-browsers) breaks the connection,
   so skip them for these paths with a custom rule; keep rate limiting.
-- **Connecting**: give an assistant `<origin>/mcp` as a custom connector, such as Claude's
-  Customize › Connectors; Settings shows the steps for Claude, ChatGPT, Gemini and Home Assistant, and the
+- **Connecting**: Claude's connector directory lists `https://peektracker.com/mcp` as Peek Parcel
+  Tracker (claude.ai/directory/peek-parcel-tracker). Another origin, or another assistant, takes
+  `<origin>/mcp` as a custom connector, such as Claude's Customize › Connectors › Add custom
+  connector; Settings shows the steps for Claude, ChatGPT, Gemini and Home Assistant, and the
   public page `/assistants` (`/de/assistants` and so on) shows them to anyone, with what Peek
   shares and what to do when a connection fails. Without the setting that page is a 404. It opens
   `/oauth/authorize` to sign in and ask. `/mcp` and `GET /api/parcels` take the access

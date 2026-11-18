@@ -65,10 +65,11 @@ export function AssistantsGuide({ t, mcpUrl }: { t: Translate; mcpUrl: string })
         <p>{t('assistants.page.account')}</p>
 
         {heading('setup')}
-        {ASSISTANT_SETUPS.map(({ name, who, steps }) => <Fragment key={name}>
+        {ASSISTANT_SETUPS.map(({ name, who, steps, fallback }) => <Fragment key={name}>
           <h3 translate="no">{name}</h3>
           <p><SetupText text={t(who[0])} labels={who[1]} /></p>
           <ol>{setupSteps(t, steps).map(([key, labels]) => <li key={key}><SetupText text={t(key)} labels={labels} /></li>)}</ol>
+          {fallback && <p><SetupText text={t(fallback[0])} labels={fallback[1]} /></p>}
         </Fragment>)}
         <p>{t('assistants.how')}</p>
 

@@ -11,20 +11,22 @@ import { Icon } from './Icon';
 import { PipPerch } from './PipPerch';
 
 /**
- * Each assistant's steps to add Peek, folded under its name, then a line for any other assistant. Signing in to Peek is
- * the step before the last: the assistant asks for it when the connector is added or first used.
+ * Each assistant's steps to add Peek, folded under its name with what to do where they don't apply, then a line for any
+ * other assistant. Signing in to Peek is the step before the last: the assistant asks for it when the connector is added
+ * or first used.
  */
 function Setups() {
   const { t } = useI18n();
   return <section className="settings-group" aria-labelledby="assistants-setup"><h3 className="settings-group__title" id="assistants-setup">{t('assistants.setup')}</h3>
     <div className="settings-box">
-      {ASSISTANT_SETUPS.map(({ name, who, steps }) => {
+      {ASSISTANT_SETUPS.map(({ name, who, steps, fallback }) => {
         const lines = setupSteps(t, steps);
         return <details key={name} className="assistants__setup">
           <summary className="settings-row"><span translate="no">{name}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
           <div className="assistants__setup-body">
             <p className="assistants__who"><SetupText text={t(who[0])} labels={who[1]} /></p>
             <ol className="add-by-email__steps">{lines.map(([key, labels]) => <li key={key}><SetupText text={t(key)} labels={labels} /></li>)}</ol>
+            {fallback && <p className="assistants__who assistants__fallback"><SetupText text={t(fallback[0])} labels={fallback[1]} /></p>}
           </div>
         </details>;
       })}

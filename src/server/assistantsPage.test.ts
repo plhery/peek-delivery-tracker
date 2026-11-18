@@ -60,6 +60,8 @@ describe('the page on connecting an assistant', () => {
     expect(html).toContain('<code>https://peek.example.test/mcp</code>');
     for (const name of ['Claude', 'ChatGPT', 'Gemini', 'Home Assistant']) expect(html).toContain(`<h3 translate="no">${name}</h3>`);
     expect(words).toContain('Sign in to Peek when it asks, then select Allow.');
+    expect(html).toContain('<a class="add-by-email__ui" href="https://claude.ai/directory/peek-parcel-tracker" target="_blank" rel="noopener noreferrer" translate="no">Peek Parcel Tracker</a>');
+    expect(words).toContain(`If Claude doesn’t list Peek Parcel Tracker, add Peek as a custom connector instead`);
     // At least three things to ask that work.
     for (const key of ['assistants.uses.email', 'assistants.uses.week', 'assistants.uses.where', 'assistants.uses.archive'] as const) expect(words).toContain(en[key]);
     expect(words).toContain(en['assistants.page.sharesBody']);

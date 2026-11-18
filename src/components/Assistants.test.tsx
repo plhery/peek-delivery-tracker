@@ -76,6 +76,21 @@ describe('assistants in Settings', () => {
     const setup = screen.getByRole('region', { name: 'Add Peek to your assistant' });
     const names = Array.from(setup.querySelectorAll('summary')).map((summary) => summary.textContent);
     expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›', 'Home Assistant›']);
+    // Claude finds Peek in its connector directory, with a custom connector where it doesn't list it.
+    const claudeSetup = setup.querySelector('details');
+    expect(Array.from(claudeSetup?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
+      'Open Peek Parcel Tracker in Claude’s connector directory, or in Claude open Customize › Connectors, select + and search for Peek.',
+      'Select Connect.',
+      'Sign in to Peek when it asks, then select Allow.',
+      'In a chat, select + at the bottom left, then Connectors, and turn Peek on.',
+    ]);
+    expect(screen.getByRole('link', { name: 'Peek Parcel Tracker' })).toHaveAttribute('href', 'https://claude.ai/directory/peek-parcel-tracker');
+    expect(claudeSetup?.querySelector('.assistants__fallback')).toHaveTextContent(
+      'If Claude doesn’t list Peek Parcel Tracker, add Peek as a custom connector instead, on claude.ai or in the desktop app '
+      + '(not in the phone apps; the Free plan allows one custom connector): open Customize › Connectors, select + Add, then Add custom '
+      + 'connector. Name it Peek, paste the address above and select Continue. Keep the sign-in settings Claude finds: select '
+      + 'Continue, then Add.',
+    );
     await user.click(screen.getByText('Gemini'));
     const steps = Array.from(setup.querySelectorAll('details[open] li')).map((step) => step.textContent);
     expect(steps).toEqual([

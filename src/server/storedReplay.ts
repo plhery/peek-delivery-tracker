@@ -420,7 +420,7 @@ export function followedScans(parcels: readonly StoredParcel[], changes: readonl
   const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string, changed = false) => currentScan(ordered(scans, stage, changed));
   return parcels.flatMap((parcel): StepBack[] => {
     const from = parcel.stage ?? '';
-    if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
+    if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id) || redated.has(scan.id))) return [];
     const before = current(parcel.events, (scan) => scan.stage);
     const kept = parcel.events.filter((scan) => !deleted.has(scan.id));
     const read = (scan: StoredScan) => restaged.get(scan.id) ?? scan.stage;

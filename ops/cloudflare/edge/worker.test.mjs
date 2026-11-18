@@ -25,7 +25,7 @@ globalThis.caches = {
   },
 };
 
-const { default: worker, pickAnnouncement, savable } = await import('./worker.js');
+const { default: worker, pickAnnouncement, readAnnouncement, savable } = await import('./worker.js');
 
 const page = (path, headers = {}) => new Request(`https://peektracker.com${path}`, { headers: { accept: 'text/html,application/xhtml+xml', ...headers } });
 const api = (path, init = {}) => new Request(`https://peektracker.com${path}`, { headers: { accept: 'application/json' }, ...init });
@@ -172,6 +172,16 @@ describe('edge guard', () => {
 });
 
 describe('announcements', () => {
+  it('enforces an overlapping hard window across cache reads', async () => {
+    const start = Date.parse('2030-01-01T02:00:00Z');
+    const env = { MAINTENANCE: kv({ all: { mode: 'soft', backAround: '2030-01-01T03:00:00Z' },
+      peek: { mode: 'hard', since: new Date(start + 1000).toISOString(), ends: new Date(start + 5000).toISOString() } }) };
+    assert.equal((await readAnnouncement(env, start)).mode, 'soft');
+    assert.equal((await readAnnouncement(env, start + 2000)).mode, 'hard');
+    assert.equal((await readAnnouncement(env, start + 2000)).backAround, '2030-01-01T03:00:00.000Z');
+    assert.equal((await readAnnouncement(env, start + 6000)).mode, 'soft');
+  });
+
   const now = Date.parse('2026-11-18T02:20:00Z');
 
   it('take the one that ends last', () => {

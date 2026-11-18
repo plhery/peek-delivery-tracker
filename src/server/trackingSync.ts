@@ -3250,6 +3250,18 @@ export class TrackingSyncService {
           && !deleteDescriptions.includes(String(row.description))), ...persistedEvents];
       };
       if (!preserveSummary) {
+        // A short answer may omit the return. Read the rows that will survive this write,
+        // including any restaging of the return or a later delivery attempt.
+        let heldReturn = normalized.returnHeld;
+        if (returnHeld(parcel) && !fetched.correction && RETURN_HOLDING_SUMMARIES.has(String(selectedStage))) {
+          const current = currentScan(rowsOnceSaved().filter((row) => row.stage !== 'pending'
+            && !datedAfterCheck(row.occurred_at, 'UTC', now)).sort(newestScanFirst));
+          if (current?.stage === 'returned') {
+            heldReturn = true;
+            selectedStage = 'returned';
+            stageText = String(current.description ?? '').trim() || stageText;
+          }
+        }
         values.last_status_text = stageText || result.last_status_text || null;
         // A parcel on its way back to the sender has no delivery to expect.
         values.expected_delivery = result.expected_delivery && selectedStage !== 'returned' ? String(result.expected_delivery) : null;
@@ -3298,7 +3310,7 @@ export class TrackingSyncService {
         if (values.current_stage === 'delivered' && typeof result.tracking_provider === 'string' && typeof followed === 'string'
           && directCarrier(owner) && !result.original_carrier && !showsDelivery(answerOf(owner))) carrierData.unconfirmed_delivery_until = followed;
         // A return the scans after it only carry back keeps the parcel checked (`returnHeld`).
-        if (normalized.returnHeld && (values.current_stage ?? previousStage) === 'returned') carrierData.return_held = true;
+        if (heldReturn && (values.current_stage ?? previousStage) === 'returned') carrierData.return_held = true;
         // A parcel collected from its pickup point keeps the point once the carrier stops naming it.
         const collectedAt = collectedPickupPoint(parcel, carrierData, String(values.current_stage ?? previousStage),
           fetched.correction?.carrier ?? carrierId, [...stored, ...events]);

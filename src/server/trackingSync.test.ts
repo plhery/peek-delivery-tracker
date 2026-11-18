@@ -2079,8 +2079,8 @@ describe('TrackingSyncService', () => {
       const held = await sync('2026-11-07T18:00:00Z', answer('in_transit', back));
       expect(held.parcel).toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
       expect(isOpenedParcelSyncDue(held.parcel, new Date('2026-11-08T18:00:00Z'))).toBe(true);
-      // The same answer the next day keeps the hold.
-      expect((await sync('2026-11-08T18:00:00Z', answer('in_transit', back))).parcel)
+      // The next response contains only a newer scan on the trip back.
+      expect((await sync('2026-11-08T18:00:00Z', { ...answer('in_transit', back), events: [{ ...back, time: '2026-11-08T12:00:00Z' }] })).parcel)
         .toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
       const round = { time: '2026-11-09T09:00:00+01:00', description: 'In consegna', stage: 'out_for_delivery' };
       const after = await sync('2026-11-09T10:00:00Z', answer('out_for_delivery', round, back));

@@ -19,7 +19,7 @@ USPS numbers are 13 to 34 characters long. The ones you'll usually meet:
 | `9400 1000 0000 0000 0000 06` | 22 digits starting `94`, `95`, `93`, `92` or `91`: the usual parcel label. |
 | `9205 5900 0000 0000 0000 0000 02` | 26 digits starting `92`. |
 | `420 12345 9400 1000 0000 0000 0000 06` | The full barcode as a scanner reads it: `420`, your ZIP Code, then the number. The ZIP part at the start can be left out. |
-| `RR000000005US` | An international postal number: 2 letters, 9 digits, `US`. |
+| `RR482910576US` | An international postal number: 2 letters, 9 digits, `US`. |
 
 The barcode number on a PS Form 3849 missed-delivery notice works in USPS Tracking too.
 
@@ -78,7 +78,7 @@ Read on usps.com on 13 October 2026:
 - **Email Customer Service** form and a chat for USPS.com problems, on the [Contact Us](https://www.usps.com/help/contact-us.htm) page.
 - Relay service by dialling 7-1-1.
 
-> USPS only texts or emails you if you asked for updates with a tracking number, and its messages never contain a link. It doesn't charge for redelivery. Forward fake texts to 7726 and report them to spam@uspis.gov.
+> USPS only texts or emails you if you asked for updates with a tracking number, and its messages never contain a link. It doesn't charge for redelivery. Forward fake texts to 7726 and report them to spam@uspis.gov. These are USPS's rules in the US: for a parcel to another country, the post or courier that delivers it asks for any import charges through its own channels.
 
 ## Tracking USPS parcels with Peek
 
@@ -86,7 +86,7 @@ Read on usps.com on 13 October 2026:
 
 Peek opens USPS's tracking page in a browser on its own server. That is slower, and USPS can refuse it; tracking services then fill in, though they don't always hold USPS's history. Peek shows the status, each scan on a map, its time read in the state where it happened and shown in your device's time zone, and the expected delivery day, and can notify you at every scan, at important steps or on delivery day only. It drops the signatory and delivery instructions.
 
-Statuses stay in USPS's English; delivered scans read "Delivered", except a returned parcel's delivery back to its sender, which reads "Returned to the sender". When [UPS](carrier:ups) or [FedEx](carrier:fedex) hand a parcel to USPS, or a parcel from abroad reaches the US, Peek can follow it on USPS once USPS shows progress. Redelivery and Informed Delivery stay on usps.com.
+Statuses stay in USPS's English; delivered scans read "Delivered". When [UPS](carrier:ups) or [FedEx](carrier:fedex) hand a parcel to USPS, or a parcel from abroad reaches the US, Peek can follow it on USPS once USPS shows progress. Redelivery and Informed Delivery stay on usps.com.
 
 ## Questions about USPS tracking
 
@@ -100,7 +100,7 @@ Only Priority Mail Express and Amazon parcels, says USPS. Everything else comes 
 
 ### Is a USPS text about my package a scam?
 
-Usually, if you didn't ask for it. [Real USPS texts](guide:delivery-scam-texts) come only after you've signed up with a tracking number and never carry a link.
+Usually, if you didn't ask for it. [Real USPS texts](guide:delivery-scam-texts) come only after you've signed up with a tracking number and never carry a link. Outside the US, the post that delivers your parcel may message you about import charges through its own channels.
 
 ### Does USPS tracking show an exact delivery time?
 

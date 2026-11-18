@@ -14,8 +14,8 @@ SF calls it the waybill number. Its tracker asks for a "12-digit waybill No. or 
 
 | Number | What it is |
 | --- | --- |
-| `SF0000000000000` | SF and 13 digits: an SF Express waybill. |
-| `000000000000` | 12 digits: an SF waybill too, but many carriers use 12-digit numbers. |
+| `SF4829105736499` | SF and 13 digits: an SF Express waybill. |
+| `482910573649` | 12 digits: an SF waybill too, but many carriers use 12-digit numbers. |
 
 Lower case and spaces don't matter in Peek.
 
@@ -99,7 +99,7 @@ Have the waybill number ready. For the order itself, ask the seller.
 
 Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's; on peektracker.com and in the iPhone app, a line under the history names that zone. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 
-It checks up to every 10 minutes, or every 5 once the parcel is out for delivery, and can notify you with "Every scan", "Important steps" or "Delivery only". The faster checks run from 6 a.m. to midnight China time on the day SF scans the parcel out for delivery (in the UK and Ireland, until 4 p.m., or 5 p.m. in summer), while SF's own tracker answers; through tracking services, Peek checks every 15 minutes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SF or the seller for you.
+It checks up to every 10 minutes while you have the parcel open, or on its delivery day with notifications on, and hourly otherwise; under the same conditions, up to every 5 once the parcel is out for delivery. It can notify you with "Every scan", "Important steps" or "Delivery only". The faster checks run from 6 a.m. to midnight China time on the day SF scans the parcel out for delivery (in the UK and Ireland, until 4 p.m., or 5 p.m. in summer), while SF's own tracker answers; through tracking services, Peek checks up to every 15 minutes while you have the parcel open or notifications are on. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SF or the seller for you.
 
 ## Questions about SF Express tracking
 

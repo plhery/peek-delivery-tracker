@@ -19,7 +19,7 @@ USPS dice que sus números tienen de 13 a 34 caracteres. Los más habituales (ej
 | `9400 1000 0000 0000 0000 06` | 22 cifras que empiezan por `94`, `95`, `93`, `92` o `91`: la etiqueta normal de un paquete. |
 | `9205 5900 0000 0000 0000 0000 02` | 26 cifras que empiezan por `92`. |
 | `420 12345 9400 1000 0000 0000 0000 06` | El código de barras completo, tal como lo lee un escáner: `420`, tu ZIP Code y luego el número. Puedes quitar la parte del ZIP. |
-| `RR000000005US` | Número postal internacional: dos letras, nueve cifras y `US`. Es el que lleva un paquete que sale de Estados Unidos hacia otro país. |
+| `RR482910576US` | Número postal internacional: dos letras, nueve cifras y `US`. Es el que lleva un paquete que sale de Estados Unidos hacia otro país. |
 
 El número del código de barras del aviso PS Form 3849, el que te dejan cuando no estás, también sirve en USPS Tracking.
 
@@ -92,15 +92,15 @@ Según es.usps.com y correos.es, consultados el 22 de octubre de 2026:
 - **Personas sordas, con pérdida auditiva o con dificultades del habla:** servicio de retransmisión (TRS) de tu estado, marcando el 7-1-1.
 - **Correos (España):** 915 197 197 o 900 400 004, de lunes a viernes no festivos de 8 a 20 h y los sábados de 9 a 13 h.
 
-USPS solo te manda SMS o correos si tú los pediste con un número de seguimiento, y no cobra por el reintento de entrega. Si te llega un SMS con un enlace raro, no lo abras y reenvíalo al 7726. Más en [SMS falsos de paquetes](guide:delivery-scam-texts).
+USPS solo te manda SMS o correos si tú los pediste con un número de seguimiento, y no cobra por el reintento de entrega. Si te llega un SMS con un enlace raro, no lo abras y reenvíalo al 7726. Esto vale para USPS en Estados Unidos: en España, los gastos de importación los cobra Correos o el transportista que entrega, por sus propios canales. Más en [SMS falsos de paquetes](guide:delivery-scam-texts).
 
 ## Seguir un paquete de USPS con Peek
 
-[Peek](/) reconoce USPS al momento con las etiquetas de 22 cifras que pasan el control de USPS, con casi todos los números de 26 cifras que empiezan por `92` y con los códigos `420` escaneados, a los que quita el ZIP. Con formas compartidas (números `9261` y `9361`, 20 cifras, números postales que acaban en `US`), Peek pregunta antes a los otros transportistas probables y a servicios de seguimiento, y abre la página de USPS al final, así que la respuesta puede tardar un poco. También valen los enlaces de usps.com.
+[Peek](/) reconoce USPS al momento con casi todas las etiquetas de 22 cifras que pasan el control de USPS, con casi todos los números de 26 cifras que empiezan por `92` y con los códigos `420` escaneados, a los que quita el ZIP. Con formas compartidas (números `9261` y `9361` y de 20 cifras), Peek pregunta antes a los otros transportistas probables y a servicios de seguimiento, y abre la página de USPS al final, así que la respuesta puede tardar un poco. También valen los enlaces de usps.com.
 
 Peek abre la página de seguimiento de USPS en un navegador en su servidor. Es más lento, y USPS puede rechazarlo; entonces completan los servicios de seguimiento, aunque no siempre tienen todo el historial de USPS. Muestra el estado, cada evento en el mapa y el día previsto de entrega, y te avisa con «Cada escaneo», «Pasos importantes» o «Solo la entrega». La hora de cada evento se lee según el estado donde ocurrió y se muestra en la zona horaria de tu dispositivo. No guarda quién firmó ni las instrucciones de entrega.
 
-Cada evento sale en el inglés de USPS, salvo la entrega, que aparece como «Entregado». Si el paquete se devuelve, su entrega al remitente sale en inglés, como «Returned to the sender» (devuelto al remitente). Si [UPS](carrier:ups) o [FedEx](carrier:fedex) pasan el paquete a USPS, o un paquete del extranjero llega a Estados Unidos, Peek puede seguirlo en USPS en cuanto USPS muestra movimiento. Si sigues desde España un número postal que acaba en `US`, Peek también puede consultarlo en Correos y pasar a Correos cuando Correos da novedades. El reintento de entrega, Informed Delivery y las reclamaciones se hacen en usps.com.
+Cada evento sale en el inglés de USPS, salvo la entrega, que aparece como «Entregado». Si [UPS](carrier:ups) o [FedEx](carrier:fedex) pasan el paquete a USPS, o un paquete del extranjero llega a Estados Unidos, Peek puede seguirlo en USPS en cuanto USPS muestra movimiento. Si sigues desde España un número postal que acaba en `US`, Peek también puede consultarlo en Correos y pasar a Correos cuando Correos da novedades. El reintento de entrega, Informed Delivery y las reclamaciones se hacen en usps.com.
 
 ## Preguntas sobre el seguimiento de USPS
 

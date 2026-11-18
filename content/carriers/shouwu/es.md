@@ -14,9 +14,9 @@ Las guías propias de Shouwu se componen del prefijo `SWECN`, doce dígitos y el
 
 | Número | Qué es |
 | --- | --- |
-| `SWECN123456789012YQ` | `SWECN`, doce dígitos y `YQ`: un número de seguimiento de Shouwu International. |
-| `SWECN12345678901YQ` | Solo once dígitos: no coincide con el formato de Shouwu. Revisa si falta una cifra al copiarlo. |
-| `JSEAA1234567890YQ` | Termina también en `YQ`, pero abre con `JSE` y diez cifras: pertenece a [JS Express](carrier:js-express). |
+| `SWECN482910573649YQ` | `SWECN`, doce dígitos y `YQ`: un número de seguimiento de Shouwu International. |
+| `SWECN48291057364YQ` | Solo once dígitos: no coincide con el formato de Shouwu. Revisa si falta una cifra al copiarlo. |
+| `JSEAA4829105736YQ` | Termina también en `YQ`, pero abre con `JSE` y diez cifras: pertenece a [JS Express](carrier:js-express). |
 
 Otros transitarios chinos cierran igualmente sus códigos con `YQ`, aunque con sus propias letras delante y, en el catálogo de Peek, casi siempre diez dígitos intermedios. La combinación de `SWECN` más doce cifras identifica en exclusiva a Shouwu. En Peek no importan los espacios, los guiones ni que lo pegues en minúsculas.
 
@@ -116,7 +116,7 @@ En su página corporativa en chino, Shouwu afirma colaborar directamente con USP
 
 ## Teléfono y atención al cliente de Shouwu
 
-Consultada el 18 de noviembre de 2026, la web corporativa de Shouwu, `http://www.sedel.com/`, está íntegramente en chino y orientada a vendedores que contratan envíos comerciales. Publica números de teléfono móvil en China para su sede de Shanghái y cinco sucursales, un enlace de chat en QQ y códigos QR de WeChat, pero no ofrece dirección de correo electrónico, formulario web, atención en español ni en inglés, ni ningún canal pensado para destinatarios particulares. El buscador `admin.shshouwu.com` tampoco incluye datos de contacto.
+La web corporativa de Shouwu, `http://www.sedel.com/`, está íntegramente en chino y orientada a vendedores que contratan envíos comerciales. Publica números de teléfono móvil en China para su sede de Shanghái y cinco sucursales, un enlace de chat en QQ y códigos QR de WeChat, pero no ofrece dirección de correo electrónico, formulario web, atención en español ni en inglés, ni ningún canal pensado para destinatarios particulares. El buscador `admin.shshouwu.com` tampoco incluye datos de contacto.
 
 Para cualquier gestión sobre tu compra o una reclamación, dirígete al vendedor que contrató el envío con Shouwu; para concertar o consultar la entrega final en tu domicilio, contacta con la empresa de reparto local si ya conoces su número.
 
@@ -150,7 +150,7 @@ Depende de la línea contratada por la tienda. Shouwu no publica plazo de refere
 
 ### ¿Con quién contacto si mi paquete de Shouwu se pierde o no llega?
 
-Con la tienda o plataforma donde realizaste la compra: el vendedor es el cliente de Shouwu y dispone de 30 días desde la salida del envío para reclamarle. Shouwu no ofrece atención al cliente para destinatarios fuera de China.
+Con la tienda o plataforma donde realizaste la compra: el vendedor es el cliente de Shouwu y dispone de 30 días desde la salida del envío para reclamarle. Shouwu no ofrece ningún canal de atención pensado para destinatarios particulares.
 
 :::sources
 - [Shouwu International: 守务国际包裹追踪 (seguimiento de paquetes)](https://admin.shshouwu.com/track.html) – rastreador en inglés, hasta 40 números, estados y sus descripciones, escaneos sin columna de lugar, botón «Copy Link» y mensaje `Not Found`

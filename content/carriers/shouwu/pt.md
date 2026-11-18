@@ -14,9 +14,9 @@ As cartas de porte próprias da Shouwu juntam o prefixo `SWECN`, doze algarismos
 
 | Número | O que é |
 | --- | --- |
-| `SWECN123456789012YQ` | `SWECN`, doze algarismos e `YQ`: um número de rastreio da Shouwu International. |
-| `SWECN12345678901YQ` | Apenas onze algarismos: não corresponde ao formato da Shouwu. Confirma se ficou um dígito por copiar. |
-| `JSEAA1234567890YQ` | Também termina em `YQ`, mas começa por `JSE` com dez algarismos: pertence à [JS Express](carrier:js-express). |
+| `SWECN482910573649YQ` | `SWECN`, doze algarismos e `YQ`: um número de rastreio da Shouwu International. |
+| `SWECN48291057364YQ` | Apenas onze algarismos: não corresponde ao formato da Shouwu. Confirma se ficou um dígito por copiar. |
+| `JSEAA4829105736YQ` | Também termina em `YQ`, mas começa por `JSE` com dez algarismos: pertence à [JS Express](carrier:js-express). |
 
 Outros transitários chineses terminam igualmente os seus códigos em `YQ`, mas usam as suas próprias letras iniciais e, no catálogo do Peek, quase sempre dez algarismos pelo meio. A combinação `SWECN` seguida de doze dígitos identifica exclusivamente a Shouwu. Espaços, hífenes e letras minúsculas não afetam a leitura no Peek.
 
@@ -116,7 +116,7 @@ Na sua página institucional em chinês, a Shouwu afirma trabalhar diretamente c
 
 ## Contacto e apoio ao cliente da Shouwu
 
-Consultado a 18 de novembro de 2026, o site institucional da Shouwu, `http://www.sedel.com/`, está inteiramente em chinês e destina-se a vendedores que expedem mercadorias. Publica números de telemóvel chineses para a sede em Xangai e cinco filiais, um link de conversação no QQ e códigos QR do WeChat, sem endereço de e-mail, formulário de contacto, atendimento em português ou inglês, nem qualquer canal para destinatários. O portal de rastreio `admin.shshouwu.com` não apresenta contactos.
+O site institucional da Shouwu, `http://www.sedel.com/`, está inteiramente em chinês e destina-se a vendedores que expedem mercadorias. Publica números de telemóvel chineses para a sede em Xangai e cinco filiais, um link de conversação no QQ e códigos QR do WeChat, sem endereço de e-mail, formulário de contacto, atendimento em português ou inglês, nem qualquer canal para destinatários. O portal de rastreio `admin.shshouwu.com` não apresenta contactos.
 
 Para questões sobre a tua encomenda ou um reembolso, fala com o vendedor que contratou o envio; para tratar da entrega final na tua morada, contacta a transportadora local assim que souberes qual é.
 

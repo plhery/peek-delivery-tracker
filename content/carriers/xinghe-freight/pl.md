@@ -14,10 +14,10 @@ Numery, które [Peek](/) rozpoznaje jako przesyłki Xinghe Freight, składają s
 
 | Numer | Co oznacza |
 | --- | --- |
-| `GZXH1234567890YQ` | `GZXH`, dziesięć cyfr i `YQ`: układ Xinghe Freight. Peek od razu rozpoznaje przewoźnika. |
-| `GZXH123456789YQ` | Tylko dziewięć cyfr: to nie jest format Xinghe. Sprawdź, czy przy kopiowaniu nie uciekła jedna cyfra. |
-| `YL1234567890YQ` | `YL`, dziesięć cyfr i `YQ`: format listów przewozowych [GZYL](carrier:gzyl). Ten sam system śledzenia, ale inny spedytor. |
-| `JXCAA1234567890YQ` | Również kończy się na `YQ`, jak wiele numerów chińskich spedytorów, lecz zaczyna od `JXC`: to numer Juxi Express. |
+| `GZXH4829105736YQ` | `GZXH`, dziesięć cyfr i `YQ`: układ Xinghe Freight. Peek od razu rozpoznaje przewoźnika. |
+| `GZXH482910573YQ` | Tylko dziewięć cyfr: to nie jest format Xinghe. Sprawdź, czy przy kopiowaniu nie uciekła jedna cyfra. |
+| `YL4829105736YQ` | `YL`, dziesięć cyfr i `YQ`: format listów przewozowych [GZYL](carrier:gzyl). Ten sam system śledzenia, ale inny spedytor. |
+| `JXCAA4829105736YQ` | Również kończy się na `YQ`, jak wiele numerów chińskich spedytorów, lecz zaczyna od `JXC`: to numer Juxi Express. |
 
 Spacje, myślniki i wielkość liter nie mają znaczenia, gdy wklejasz numer do Peek.
 
@@ -31,7 +31,7 @@ Ponieważ śledzenie Xinghe działa na systemie GZYL, poszczególne kroki wyświ
 | --- | --- | --- |
 | `Order information received` | Sprzedawca przesłał dane zamówienia. Nikt nie ma jeszcze fizycznie paczki. | „Zarejestrowana” |
 | `Arrive at the cross border receiving point` | Spedytor przyjął paczkę: to pierwszy fizyczny skan w jego rękach. | „Przyjęta przez przewoźnika” |
-| `Goods leave the operation center` | Przesyłka opuściła centrum operacyjne w Chinach. | „W transporcie” |
+| `Goods leave the operation center` | Przesyłka opuściła centrum operacyjne. | „W transporcie” |
 | `Arrive at the international airport` | Na lotnisku wylotu, w oczekiwaniu na samolot. | „W transporcie” |
 | `Departing from the airport` | Samolot wystartował. | „W transporcie” |
 | `Item arrives at destination airport` | Lądowanie w kraju docelowym. | „W transporcie” |
@@ -39,7 +39,7 @@ Ponieważ śledzenie Xinghe działa na systemie GZYL, poszczególne kroki wyświ
 | `The import customs keep it for inspection` | Urząd celny kraju docelowego zatrzymał przesyłkę do kontroli. | „W urzędzie celnym” |
 | `Customs clearance completed` | Odprawa celna zakończona; paczka rusza dalej. | „W transporcie” |
 | `Internationaliy Package received at processing center` | Centrum opracowywania w kraju docelowym przyjęło ocloną paczkę (`Internationaliy` to literówka platformy). To nie jest ponowne nadanie. | „W transporcie” |
-| `Leave the email processing center` | Paczka opuściła to centrum opracowywania (`email` to wynik automatycznego tłumaczenia słowa poczta na platformie). | „W transporcie” |
+| `Leave the email processing center` | Paczka opuściła to centrum opracowywania. | „W transporcie” |
 | `Arrival sorting, distribution center` | Przyjęcie w centrum dystrybucyjnym w Twoim kraju, z nazwą miejscowości po komunikacie. | „W transporcie” |
 | `Leaving the sorting center` | Wyjazd z sortowni, wraz z nazwą miejscowości. | „W transporcie” |
 | `Package is on the way` | Przesyłka przemieszcza się w kraju docelowym, z podaną miejscowością. Nie oznacza to jeszcze wydania kurierowi do doręczenia dziś. | „W transporcie” |
@@ -85,7 +85,7 @@ Witryna nie udostępnia obsługi dla odbiorców indywidualnych za granicą, a fo
 
 [Peek](/) natychmiast rozpoznaje Xinghe Freight po numerze w formacie `GZXH…YQ`. Jeśli sprzedawca przekazał Ci numer o innym układzie, również go wklej: Peek obsługuje ponad 3500 przewoźników. Aby przypisać przesyłkę do Xinghe ręcznie, naciśnij zmianę przewoźnika podczas dodawania i wyszukaj Xinghe Freight (możesz też wpisać `星和货运`) albo wybierz „Zmień przewoźnika” na karcie dodanej już paczki.
 
-Peek odpytuje system GZYL dokładnie tak jak pole wyszukiwania na stronie Xinghe, wyświetlając bieżący etap, każdy krok z miejscowością oraz kraj docelowy, o ile rekord go podaje. Godziny są odczytywane według czasu pekińskiego i przeliczane na strefę czasową Twojego urządzenia (z informacją „Godziny w Twojej strefie czasowej: …” na `peektracker.com` oraz w aplikacji na iPhone'a). Ze względów prywatności Peek pomija imiona i nazwiska, adres, kody pocztowe, wagę, szczegóły płatności, podpis i potwierdzenie doręczenia, które mogą znajdować się w rekordzie, a także nie pokazuje przewidywanej daty dostawy, bo system jej nie podaje.
+Peek odpytuje system GZYL dokładnie tak jak pole wyszukiwania na stronie Xinghe, wyświetlając bieżący etap, każdy krok z miejscowością oraz kraj docelowy, o ile rekord go podaje. Godziny są odczytywane według czasu pekińskiego i przeliczane na strefę czasową Twojego urządzenia (z informacją „Godziny w Twojej strefie czasowej: …” na `peektracker.com` oraz w aplikacji na iPhone'a). Peek pomija imiona i nazwiska, adres, kody pocztowe, wagę, szczegóły płatności, podpis i potwierdzenie doręczenia, które mogą znajdować się w rekordzie, a także nie pokazuje przewidywanej daty dostawy, bo system jej nie podaje.
 
 Gdy system GZYL nie zna Twojego numeru, Peek odpytuje zapasowo zewnętrzne serwisy śledzenia przesyłek i pokazuje zapisaną u nich kopię zdarzeń, która dla części numerów Xinghe bywa jedynym dostępnym źródłem. Dopóki ani system bezpośredni, ani serwisy śledzenia nie zwrócą żadnego kroku, paczka ma na `peektracker.com` komunikat „Oczekiwanie na przewoźnika Xinghe Freight”, bez prośby o sprawdzenie numeru.
 

@@ -14,10 +14,10 @@ Os números que o [Peek](/) identifica como envios da Xinghe Freight são compos
 
 | Número | O que é |
 | --- | --- |
-| `GZXH1234567890YQ` | `GZXH`, dez algarismos e `YQ`: a estrutura da Xinghe Freight. O Peek identifica logo a transportadora. |
-| `GZXH123456789YQ` | Apenas nove algarismos: não corresponde à estrutura da Xinghe. Confirma se falta um algarismo. |
-| `YL1234567890YQ` | `YL`, dez algarismos e `YQ`: a estrutura das cartas de porte da [GZYL](carrier:gzyl). Usa o mesmo sistema de seguimento, mas é outro transitário. |
-| `JXCAA1234567890YQ` | Também termina em `YQ`, como muitos códigos de transitários chineses, mas começa por `JXC`: é um número da Juxi Express. |
+| `GZXH4829105736YQ` | `GZXH`, dez algarismos e `YQ`: a estrutura da Xinghe Freight. O Peek identifica logo a transportadora. |
+| `GZXH482910573YQ` | Apenas nove algarismos: não corresponde à estrutura da Xinghe. Confirma se falta um algarismo. |
+| `YL4829105736YQ` | `YL`, dez algarismos e `YQ`: a estrutura das cartas de porte da [GZYL](carrier:gzyl). Usa o mesmo sistema de seguimento, mas é outro transitário. |
+| `JXCAA4829105736YQ` | Também termina em `YQ`, como muitos códigos de transitários chineses, mas começa por `JXC`: é um número da Juxi Express. |
 
 Espaços, hífenes e letras minúsculas não afetam a pesquisa quando colas o número no Peek.
 
@@ -31,7 +31,7 @@ Como o seguimento da Xinghe corre no sistema da GZYL, as etapas aparecem com as 
 | --- | --- | --- |
 | `Order information received` | O vendedor transmitiu os dados da encomenda. Ainda ninguém recebeu o pacote. | «Etiqueta criada» |
 | `Arrive at the cross border receiving point` | O transitário recebeu a encomenda: é o primeiro registo físico nas suas mãos. | «Aceite pela transportadora» |
-| `Goods leave the operation center` | O pacote saiu do centro operacional na China. | «Em trânsito» |
+| `Goods leave the operation center` | O pacote saiu do centro operacional. | «Em trânsito» |
 | `Arrive at the international airport` | No aeroporto de partida, à espera de voo. | «Em trânsito» |
 | `Departing from the airport` | O voo partiu. | «Em trânsito» |
 | `Item arrives at destination airport` | Aterrou no país de destino. | «Em trânsito» |
@@ -39,7 +39,7 @@ Como o seguimento da Xinghe corre no sistema da GZYL, as etapas aparecem com as 
 | `The import customs keep it for inspection` | A alfândega do país de destino reteve a encomenda para inspeção. | «Na alfândega» |
 | `Customs clearance completed` | Desalfandegamento concluído; a encomenda segue caminho. | «Em trânsito» |
 | `Internationaliy Package received at processing center` | Um centro de tratamento no país de destino recebeu o pacote desalfandegado (`Internationaliy` é gralha da plataforma). Não é uma nova recolha no remetente. | «Em trânsito» |
-| `Leave the email processing center` | A encomenda saiu desse centro de tratamento (`email` resulta da tradução automática de correio na plataforma). | «Em trânsito» |
+| `Leave the email processing center` | A encomenda saiu desse centro de tratamento. | «Em trânsito» |
 | `Arrival sorting, distribution center` | Chegada a um centro de distribuição no teu país, com o nome da localidade a seguir. | «Em trânsito» |
 | `Leaving the sorting center` | Saída de um centro de triagem, com a localidade indicada. | «Em trânsito» |
 | `Package is on the way` | Em encaminhamento no país de destino, com indicação de cidade. Não significa que tenha saído hoje para entrega na morada. | «Em trânsito» |
@@ -59,7 +59,7 @@ O Peek não consegue saber quem faz a entrega final em Portugal: nem as etapas d
 
 O site da Xinghe não contém informações para particulares que compram online: não indica prazos de entrega, tentativas de distribuição nem pontos de recolha. Essas regras pertencem à transportadora que assegura o último troço no teu país; pergunta ao vendedor que empresa entrega a tua encomenda e pede-lhe o respetivo código de seguimento local.
 
-**Alfândega, IVA e alertas de burla (UE e Portugal).** Na **União Europeia** (incluindo **Portugal**), desde 1 de julho de 2026 as mercadorias compradas à distância fora da UE em remessas com valor intrínseco até 150 € pagam um direito aduaneiro fixo de 3 € por categoria de artigo, e desde 1 de novembro de 2026 aplica-se também a taxa de manuseamento aduaneiro da União (*Union Handling Fee*) de 2 € por categoria de artigo, qualquer que seja o valor da encomenda. Uma categoria de artigo abrange os bens da mesma remessa que partilham classificação pautal, descrição e, quando exigida, origem, independentemente da quantidade. Em **Portugal**, os [CTT](carrier:ctt) explicam que às compras online extracomunitárias até 150 € acrescem o IVA sobre o valor das compras, os direitos aduaneiros (3 € + IVA por tipo de artigo/conteúdo segundo o Código Harmonizado) e, desde 1 de novembro de 2026, a Taxa de Manuseamento Aduaneiro (2 € + IVA por tipo de artigo/conteúdo), alertando ainda que objetos até 150 € que cheguem a Portugal sem os dados obrigatórios de identificação dos produtos na declaração aduaneira poderão ser devolvidos. Quanto a tentativas de burla em **Portugal**, os CTT alertam para SMS e sites fraudulentos que usam indevidamente a imagem dos CTT ou de transportadoras como a DHL e recomendam confirmar cuidadosamente o endereço do site, desconfiar de domínios semelhantes ao nome CTT, não fornecer dados pessoais ou de pagamento em páginas de autenticidade duvidosa e aceder aos serviços diretamente pelos canais oficiais (`www.ctt.pt`). Mais detalhes em [encomendas retidas na alfândega](guide:customs) e em [SMS falsos de entregas](guide:delivery-scam-texts).
+**Alfândega, IVA e alertas de burla (UE e Portugal).** Na **União Europeia** (incluindo **Portugal**), desde 1 de julho de 2026 as mercadorias compradas à distância fora da UE em remessas com valor intrínseco até 150 € pagam um direito aduaneiro fixo de 3 € por categoria de artigo, e desde 1 de novembro de 2026 aplica-se também a taxa de manuseamento aduaneiro da União (*Union Handling Fee*) de 2 € por categoria de artigo, qualquer que seja o valor da encomenda. Uma categoria de artigo abrange os bens da mesma remessa que partilham classificação pautal, descrição e, quando exigida, origem, independentemente da quantidade. Em **Portugal**, quando o desalfandegamento corre pelos [CTT](carrier:ctt), os CTT explicam que às compras online extracomunitárias até 150 € acrescem o IVA sobre o valor das compras, os direitos aduaneiros (3 € + IVA por tipo de artigo/conteúdo segundo o Código Harmonizado) e, desde 1 de novembro de 2026, a Taxa de Manuseamento Aduaneiro (2 € + IVA por tipo de artigo/conteúdo), alertando ainda que objetos até 150 € que cheguem a Portugal sem os dados obrigatórios de identificação dos produtos na declaração aduaneira poderão ser devolvidos. Quanto a tentativas de burla em **Portugal**, os CTT alertam para SMS e sites fraudulentos que usam indevidamente a imagem dos CTT ou de transportadoras como a DHL e recomendam confirmar cuidadosamente o endereço do site, desconfiar de domínios semelhantes ao nome CTT, não fornecer dados pessoais ou de pagamento em páginas de autenticidade duvidosa e aceder aos serviços diretamente pelos canais oficiais (`www.ctt.pt`). Mais detalhes em [encomendas retidas na alfândega](guide:customs) e em [SMS falsos de entregas](guide:delivery-scam-texts).
 
 ## Encomenda Xinghe Freight atrasada ou seguimento parado
 

@@ -14,9 +14,9 @@ Listy przewozowe wystawiane przez Shouwu składają się z prefiksu `SWECN`, dwu
 
 | Numer | Co oznacza |
 | --- | --- |
-| `SWECN123456789012YQ` | `SWECN`, dwanaście cyfr i `YQ`: prawidłowy numer listu przewozowego Shouwu International. |
-| `SWECN12345678901YQ` | Tylko jedenaście cyfr w środku: to nie jest układ Shouwu. Sprawdź, czy przy kopiowaniu nie uciekła jedna cyfra. |
-| `JSEAA1234567890YQ` | Również kończy się na `YQ`, ale zaczyna od `JSE` i ma dziesięć cyfr: to numer [JS Express](carrier:js-express). |
+| `SWECN482910573649YQ` | `SWECN`, dwanaście cyfr i `YQ`: prawidłowy numer listu przewozowego Shouwu International. |
+| `SWECN48291057364YQ` | Tylko jedenaście cyfr w środku: to nie jest układ Shouwu. Sprawdź, czy przy kopiowaniu nie uciekła jedna cyfra. |
+| `JSEAA4829105736YQ` | Również kończy się na `YQ`, ale zaczyna od `JSE` i ma dziesięć cyfr: to numer [JS Express](carrier:js-express). |
 
 Wielu innych chińskich spedytorów e-commerce także kończy swoje numery literami `YQ`, poprzedzając je własnym skrótem literowym i — w katalogu Peeka — zazwyczaj dziesięcioma cyframi. Połączenie `SWECN` oraz dwunastu cyfr wyróżnia wyłącznie przesyłki Shouwu. Spacje, myślniki ani małe litery nie przeszkadzają przy wklejaniu numeru do Peeka.
 
@@ -116,7 +116,7 @@ Na swojej chińskojęzycznej stronie o firmie Shouwu podaje, że współpracuje 
 
 ## Kontakt z Shouwu i obsługa klienta
 
-Według stanu z 18 listopada 2026 r. firmowa witryna Shouwu pod adresem `http://www.sedel.com/` działa wyłącznie po chińsku i jest przeznaczona dla sprzedawców zlecających wysyłki. Podaje chińskie numery telefonów komórkowych do centrali w Szanghaju i pięciu oddziałów, link do czatu QQ oraz kody QR komunikatora WeChat — nie zawiera natomiast adresu e-mail, formularza kontaktowego, obsługi po polsku ani po angielsku, ani żadnego kanału dla odbiorców paczek. Sama strona śledzenia `admin.shshouwu.com` nie podaje żadnych danych kontaktowych.
+Firmowa witryna Shouwu pod adresem `http://www.sedel.com/` działa wyłącznie po chińsku i jest przeznaczona dla sprzedawców zlecających wysyłki. Podaje chińskie numery telefonów komórkowych do centrali w Szanghaju i pięciu oddziałów, link do czatu QQ oraz kody QR komunikatora WeChat — nie zawiera natomiast adresu e-mail, formularza kontaktowego, obsługi po polsku ani po angielsku, ani żadnego kanału dla odbiorców paczek. Sama strona śledzenia `admin.shshouwu.com` nie podaje żadnych danych kontaktowych.
 
 W sprawie zamówienia lub reklamacji kontaktuj się ze sprzedawcą, który nadał paczkę przez Shouwu; w sprawie samego doręczenia pod Twój adres zwróć się do lokalnego przewoźnika, gdy znasz już jego numer przesyłki.
 

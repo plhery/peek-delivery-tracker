@@ -14,9 +14,9 @@ Listy przewozowe Meiteshun składają się z liter `AMTS`, dziewięciu cyfr oraz
 
 | Numer | Co oznacza |
 | --- | --- |
-| `AMTS123456789FS` | `AMTS`, dziewięć cyfr i `FS`: list przewozowy Meiteshun. |
-| `AMTS12345678FS` | Tylko osiem cyfr: to nie jest układ Meiteshun. Sprawdź, czy nie brakuje jednej cyfry. |
-| `RR123456789CN` | Dwie litery, dziewięć cyfr i `CN`: międzynarodowy numer pocztowy [China Post](carrier:china-post), a nie Meiteshun. |
+| `AMTS482910517FS` | `AMTS`, dziewięć cyfr i `FS`: list przewozowy Meiteshun. |
+| `AMTS48291051FS` | Tylko osiem cyfr: to nie jest układ Meiteshun. Sprawdź, czy nie brakuje jednej cyfry. |
+| `RR482910576CN` | Dwie litery, dziewięć cyfr i `CN`: międzynarodowy numer pocztowy [China Post](carrier:china-post), a nie Meiteshun. |
 
 Wielkość liter oraz spacje nie mają znaczenia przy wklejaniu numeru do [Peek](/).
 
@@ -57,7 +57,7 @@ Kroki Meiteshun w kraju docelowym nie wymieniają nazwy firmy doręczającej na 
 
 Peek nie znalazł u Meiteshun żadnych opublikowanych terminów dostawy ani zasad dotyczących prób doręczenia, punktów odbioru czy czasu bezpłatnego przechowywania paczki. Zapytaj sprzedawcę, który przewoźnik doręcza Twoje zamówienie w Polsce i jaki ma numer przesyłki – o doręczeniu decyduje regulamin tej firmy.
 
-**Cło, opłaty przywozowe i ostrzeżenie przed fałszywymi SMS-ami (UE i Polska).** W **Unii Europejskiej** (w tym w **Polsce**) od 1 lipca 2026 r. towary kupione przez internet spoza UE w przesyłkach o wartości do 150 € podlegają ryczałtowemu cłu w wysokości 3 € za kategorię towaru, a od 1 listopada 2026 r. do każdej przesyłki ze sprzedaży na odległość spoza UE – niezależnie od jej wartości – doliczana jest unijna opłata manipulacyjna (*Union Handling Fee*) w wysokości 2 € za kategorię towaru (liczona od pojedynczej pozycji deklaracji, tak jak cło 3 €). Jeżeli w **Polsce** ostatni odcinek przesyłki spoza UE realizuje [Poczta Polska](carrier:poczta-polska) i do zapłaty pozostają należności celno-podatkowe, Poczta Polska pobiera je przy doręczeniu przesyłki lub przed jej odbiorem – i ostrzega, że Pocztex nie wysyła SMS-ów z linkami do płatności, a fałszywe SMS-y podszywające się pod Pocztex prowadzą do stron wyłudzających dane kart płatniczych. Szczegóły znajdziesz w poradnikach [paczka zatrzymana przez urząd celny](guide:customs) oraz [fałszywe SMS-y o dopłacie do paczki](guide:delivery-scam-texts).
+**Cło, opłaty przywozowe i ostrzeżenie przed fałszywymi SMS-ami (UE i Polska).** W **Unii Europejskiej** (w tym w **Polsce**) od 1 lipca 2026 r. towary kupione przez internet spoza UE w przesyłkach o wartości do 150 € podlegają ryczałtowemu cłu w wysokości 3 € za kategorię towaru, a od 1 listopada 2026 r. do każdej przesyłki ze sprzedaży na odległość spoza UE – niezależnie od jej wartości – doliczana jest unijna opłata manipulacyjna (*Union Handling Fee*) w wysokości 2 € za kategorię towaru (liczona za pozycję towarową, a nie za każdą sztukę). Jeżeli w **Polsce** ostatni odcinek przesyłki spoza UE realizuje [Poczta Polska](carrier:poczta-polska) i do zapłaty pozostają należności celno-podatkowe, Poczta Polska pobiera je przy doręczeniu przesyłki lub przed jej odbiorem – i ostrzega, że Pocztex nie wysyła SMS-ów z linkami do płatności, a fałszywe SMS-y podszywające się pod Pocztex prowadzą do stron wyłudzających dane kart płatniczych. Szczegóły znajdziesz w poradnikach [paczka zatrzymana przez urząd celny](guide:customs) oraz [fałszywe SMS-y o dopłacie do paczki](guide:delivery-scam-texts).
 
 ## Paczka Meiteshun nie dochodzi albo śledzenie utknęło
 

@@ -922,8 +922,14 @@ extension PlannedTrackingEvent {
     /// that day, which starts at `occurredAt` in the carrier's zone. So a carrier's pre-written "Delivered" never shows
     /// as planned for a time gone by.
     func isAhead(of now: Date) -> Bool {
-        guard let at = DateParser.date(occurredAt) else { return false }
-        return (day == nil ? at : at.addingTimeInterval(24 * 60 * 60)) > now
+        guard let aheadUntil else { return false }
+        return aheadUntil > now
+    }
+
+    /// The moment the step stops being ahead, when an open journal drops it.
+    var aheadUntil: Date? {
+        guard let at = DateParser.date(occurredAt) else { return nil }
+        return day == nil ? at : at.addingTimeInterval(24 * 60 * 60)
     }
 }
 

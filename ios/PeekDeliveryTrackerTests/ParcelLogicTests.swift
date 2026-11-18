@@ -5557,6 +5557,23 @@ extension ParcelLogicTests {
         XCTAssertFalse(step("not a date").isAhead(of: now))
     }
 
+    func testAPlannedStepSaysWhenItStopsBeingAheadSoAnOpenJournalCanDropIt() throws {
+        func step(_ occurredAt: String, day: String? = nil) -> PlannedTrackingEvent {
+            PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: occurredAt, day: day)
+        }
+        let timed = step("2026-11-04T10:00:00Z")
+        let until = try XCTUnwrap(timed.aheadUntil)
+        XCTAssertEqual(until, DateParser.date("2026-11-04T10:00:00Z"))
+        XCTAssertTrue(timed.isAhead(of: until.addingTimeInterval(-1)))
+        XCTAssertFalse(timed.isAhead(of: until))
+        let daily = step("2026-11-03T23:00:00Z", day: "2026-11-04")
+        let end = try XCTUnwrap(daily.aheadUntil)
+        XCTAssertEqual(end, DateParser.date("2026-11-04T23:00:00Z"))
+        XCTAssertTrue(daily.isAhead(of: end.addingTimeInterval(-1)))
+        XCTAssertFalse(daily.isAhead(of: end))
+        XCTAssertNil(step("not a date").aheadUntil)
+    }
+
     @MainActor
     func testAPlannedStepReadsItsDayAsTheJournalDoesAndItsTimeWhenItHasOne() throws {
         let localizer = Localizer(systemUses24HourTime: { true })

@@ -1716,6 +1716,8 @@ struct ParcelJournal: View {
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var showingFullJourney = true
+    /// When the journal last woke for a planned step whose time passed while it was open.
+    @State private var plannedClock = Date()
 
     var body: some View {
         let entries = parcel.journalEntries
@@ -1726,7 +1728,8 @@ struct ParcelJournal: View {
             entries.first { $0.id == current.id || $0.relays.contains(current) }?.id
         }
         let syncing = parcel.displayStatus.syncing
-        let planned = parcel.plannedEvents?.filter { $0.isAhead(of: Date()) } ?? []
+        let planned = parcel.plannedEvents?.filter { $0.isAhead(of: max(Date(), plannedClock)) } ?? []
+        let nextPlannedEnd = planned.compactMap(\.aheadUntil).min()
         // The steps the carrier wrote in advance whose time has passed, under its name.
         let writer = parcel.writtenAheadBy.map { CarrierCatalog.shared.info(for: $0, language: localizer.language).displayName }
         let written = writer == nil ? [] : parcel.writtenAheadEvents ?? []
@@ -1784,6 +1787,14 @@ struct ParcelJournal: View {
             }
         }
         .padding(.horizontal, 2)
+        // A planned step whose time passes while the journal is open goes then, not at the next refresh.
+        .task(id: nextPlannedEnd) {
+            guard let nextPlannedEnd else { return }
+            while nextPlannedEnd > Date() {
+                do { try await Task.sleep(for: .seconds(max(nextPlannedEnd.timeIntervalSinceNow, 0.1))) } catch { return }
+            }
+            plannedClock = Date()
+        }
     }
 
     private func journalDays(_ entries: [JournalEntry]) -> [JournalDay] {

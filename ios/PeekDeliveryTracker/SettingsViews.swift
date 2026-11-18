@@ -520,6 +520,8 @@ struct AccountView: View {
                         settingsDivider
                         SettingsDistanceRow()
                         settingsDivider
+                        SettingsWeightRow()
+                        settingsDivider
                         SettingsMarkNewUpdatesRow()
                     }
                     SettingsGroup {
@@ -929,6 +931,28 @@ private struct SettingsDistanceRow: View {
     }
 }
 
+private struct SettingsWeightRow: View {
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        SettingsPickerRow(title: localizer.text("settings.weightUnits"), selection: $localizer.weight) {
+            ForEach(WeightPreference.allCases, id: \.self) { weight in Text(label(weight)).tag(weight) }
+        }
+        .accessibilityIdentifier("settings.weightUnits")
+    }
+
+    /// Automatic names the unit the system weighs in.
+    private func label(_ weight: WeightPreference) -> String {
+        switch weight {
+        case .automatic:
+            let unit = localizer.text(localizer.systemWeightUnit == .pounds ? "settings.poundsShort" : "settings.kilogramsShort")
+            return localizer.text("settings.automatic", ["value": unit])
+        case .kilograms: return localizer.text("settings.kilograms")
+        case .pounds: return localizer.text("settings.pounds")
+        }
+    }
+}
+
 /// The list's mark on parcels with updates since they were last opened: on or off, for the account where there is one.
 private struct SettingsMarkNewUpdatesRow: View {
     @EnvironmentObject private var store: ParcelStore
@@ -1128,6 +1152,8 @@ private struct GeneralSettings: View {
                 SettingsClockRow()
                 settingsDivider
                 SettingsDistanceRow()
+                settingsDivider
+                SettingsWeightRow()
                 settingsDivider
                 SettingsMarkNewUpdatesRow()
             }

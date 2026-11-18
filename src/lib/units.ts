@@ -1,9 +1,10 @@
 import type { DistanceUnit } from '../components/map/route';
 
-/** What Settings keeps for the clock and for distances: a choice, or `auto` to follow the browser. */
+/** What Settings keeps for the clock, distances and weights: a choice, or `auto` to follow the browser. */
 export type ClockPreference = 'auto' | '24' | '12';
 export type DistancePreference = 'auto' | DistanceUnit;
 export type WeightUnit = 'kg' | 'lb';
+export type WeightPreference = 'auto' | WeightUnit;
 
 /** A saved clock choice; anything else, or nothing, follows the browser. */
 export function clockPreference(saved: string | null): ClockPreference {
@@ -13,6 +14,19 @@ export function clockPreference(saved: string | null): ClockPreference {
 /** A saved choice of units; anything else, or nothing, follows the browser. */
 export function distancePreference(saved: string | null): DistancePreference {
   return saved === 'km' || saved === 'mi' ? saved : 'auto';
+}
+
+/** A saved choice of weight unit; anything else, or nothing, follows the browser. */
+export function weightPreference(saved: string | null): WeightPreference {
+  return saved === 'kg' || saved === 'lb' ? saved : 'auto';
+}
+
+/**
+ * The weight unit for a reader who chose none yet: the one their distance units brought before weights had a choice of
+ * their own, kilograms with kilometres and pounds with miles.
+ */
+export function weightFromDistance(distance: DistancePreference): WeightPreference {
+  return distance === 'km' ? 'kg' : distance === 'mi' ? 'lb' : 'auto';
 }
 
 /** Whether a locale's clock runs to 24 hours: the browser's own locale when none is named. */
@@ -66,14 +80,6 @@ export function browserDistanceUnit(locale: string | undefined, timeZone: string
 export function browserWeightUnit(locale: string | undefined, timeZone: string | undefined): WeightUnit {
   if (placeZone(timeZone)) return US_UNIT_TIME_ZONE.test(timeZone) ? 'lb' : 'kg';
   return localeWeightUnit(locale);
-}
-
-/**
- * The unit weights are written in: the one that goes with the distance units chosen in Settings, kilograms with
- * kilometres and pounds with miles, else the browser's.
- */
-export function resolvedWeightUnit(distance: DistancePreference, automatic: WeightUnit): WeightUnit {
-  return distance === 'km' ? 'kg' : distance === 'mi' ? 'lb' : automatic;
 }
 
 const KILOGRAMS_PER_POUND = 0.45359237;

@@ -31,6 +31,11 @@ describe('GuestSettings', () => {
     expect(window.localStorage.getItem('deliveryTrackerClock')).toBe('24');
     await user.selectOptions(within(sheet).getByRole('combobox', { name: 'Distance units' }), 'mi');
     expect(window.localStorage.getItem('deliveryTrackerDistanceUnit')).toBe('mi');
+    const weight = within(sheet).getByRole('combobox', { name: 'Weight units' });
+    // Miles leave weights as they were, which the browser decides here.
+    expect(weight).toHaveValue('auto');
+    await user.selectOptions(weight, 'lb');
+    expect(window.localStorage.getItem('deliveryTrackerWeightUnit')).toBe('lb');
     const mark = within(sheet).getByRole('switch', { name: 'Mark new updates' });
     await user.click(mark);
     expect(mark).not.toBeChecked();

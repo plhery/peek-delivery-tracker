@@ -55,8 +55,8 @@ Also in the box: light and dark themes, ten languages (English, German, French, 
 Spanish, Portuguese, Brazilian Portuguese, Polish, Russian and Simplified Chinese), a web app you can install, and on iPhone a barcode
 scanner, a Share extension and widgets. Times, distances, weights and parcel sizes follow your device's own settings,
 a 12- or 24-hour clock, kilometres or miles, and kilograms and centimetres or (in US units) pounds and inches;
-**Time format** and **Distance units** in **Settings → Preferences** choose them yourself, pounds and inches going
-with miles.
+**Time format**, **Distance units** and **Weight units** in **Settings → Preferences** choose them yourself, sizes
+going in inches with pounds.
 
 Peek shows no ads and sells no data. A parcel followed without an account is forgotten 30
 days after it arrives. The [privacy notice](PRIVACY.md) has the rest.

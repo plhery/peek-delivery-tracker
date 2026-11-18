@@ -6,7 +6,7 @@ import { I18nProvider, useI18n } from '../i18n';
 import { localizedClockTime } from './format';
 import {
   browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, formatDimensions, formatWeight, localeDistanceUnit, localeUses24HourTime,
-  localeWeightUnit, resolvedWeightUnit,
+  localeWeightUnit, weightFromDistance, weightPreference,
 } from './units';
 
 /** A browser set to `locale` in `timeZone`: its clock, which `Intl` gives when no locale is named, its language and its zone. */
@@ -23,7 +23,7 @@ function browser(locale: string, timeZone: string) {
 }
 
 function Probe() {
-  const { languageTag, use24HourTime, distanceUnit, weightUnit, clock, setClock, distance, setDistance } = useI18n();
+  const { languageTag, use24HourTime, distanceUnit, weightUnit, clock, setClock, distance, setDistance, setWeight } = useI18n();
   return <>
     <output aria-label="time">{localizedClockTime(new Date(2026, 10, 14, 16, 51), languageTag, use24HourTime)}</output>
     <output aria-label="distance">{formatKm(447, languageTag, distanceUnit)}</output>
@@ -34,6 +34,10 @@ function Probe() {
     <button type="button" onClick={() => setClock('auto')}>Automatic time</button>
     <button type="button" onClick={() => setDistance('km')}>Kilometres</button>
     <button type="button" onClick={() => setDistance('mi')}>Miles</button>
+    <button type="button" onClick={() => setDistance('auto')}>Automatic distance</button>
+    <button type="button" onClick={() => setWeight('kg')}>Kilograms</button>
+    <button type="button" onClick={() => setWeight('lb')}>Pounds</button>
+    <button type="button" onClick={() => setWeight('auto')}>Automatic weight</button>
   </>;
 }
 
@@ -160,9 +164,9 @@ describe('the units of weight', () => {
       .toEqual(['lb', 'kg', 'kg']);
   });
 
-  it('goes with the distance units chosen, else the browser’s', () => {
-    expect([resolvedWeightUnit('auto', 'lb'), resolvedWeightUnit('auto', 'kg'), resolvedWeightUnit('km', 'lb'), resolvedWeightUnit('mi', 'kg')])
-      .toEqual(['lb', 'kg', 'kg', 'lb']);
+  it('reads a saved choice, and carries over the one distance units brought before weights had their own', () => {
+    expect([null, 'auto', 'pounds', 'kg', 'lb'].map(weightPreference)).toEqual(['auto', 'auto', 'auto', 'kg', 'lb']);
+    expect((['auto', 'km', 'mi'] as const).map(weightFromDistance)).toEqual(['auto', 'kg', 'lb']);
   });
 
   it('writes kilograms to three decimals, pounds to one, or to three under a tenth of a pound', () => {
@@ -200,13 +204,46 @@ describe('the units of weight', () => {
     expect(weight()).toBe('1.2 kg');
   });
 
-  it('follows a choice of kilometres or miles', async () => {
+  it('follows its own choice, whatever the distance units', async () => {
     browser('en-US', 'America/New_York');
     const user = userEvent.setup();
     render(<I18nProvider><Probe /></I18nProvider>);
     await user.click(screen.getByRole('button', { name: 'Kilometres' }));
-    expect(weight()).toBe('1.2 kg');
+    expect(weight()).toBe('2.6 lb');
+    await user.click(screen.getByRole('button', { name: 'Kilograms' }));
+    expect([shown()[1], weight()]).toEqual(['450 km', '1.2 kg']);
     await user.click(screen.getByRole('button', { name: 'Miles' }));
+    expect(weight()).toBe('1.2 kg');
+    expect(window.localStorage.getItem('deliveryTrackerWeightUnit')).toBe('kg');
+    await user.click(screen.getByRole('button', { name: 'Automatic weight' }));
+    expect(weight()).toBe('2.6 lb');
+    expect(window.localStorage.getItem('deliveryTrackerWeightUnit')).toBe('auto');
+  });
+
+  it('keeps pounds for a reader who chose miles before, until they choose a weight', async () => {
+    browser('de-CH', 'Europe/Zurich');
+    window.localStorage.setItem('deliveryTrackerDistanceUnit', 'mi');
+    const user = userEvent.setup();
+    const first = render(<I18nProvider><Probe /></I18nProvider>);
+    expect([shown()[1], weight()]).toEqual(['280 mi', '2.6 lb']);
+    // Carried over once: distance units chosen afterwards leave it.
+    expect(window.localStorage.getItem('deliveryTrackerWeightUnit')).toBe('lb');
+    await user.click(screen.getByRole('button', { name: 'Automatic distance' }));
+    expect([shown()[1], weight()]).toEqual(['450 km', '2.6 lb']);
+    first.unmount();
+    render(<I18nProvider><Probe /></I18nProvider>);
+    expect(weight()).toBe('2.6 lb');
+    await user.click(screen.getByRole('button', { name: 'Automatic weight' }));
+    expect(weight()).toBe('1.2 kg');
+  });
+
+  it('keeps kilograms for a reader who chose kilometres before, and follows another tab’s choice', () => {
+    browser('en-US', 'America/Chicago');
+    window.localStorage.setItem('deliveryTrackerDistanceUnit', 'km');
+    render(<I18nProvider><Probe /></I18nProvider>);
+    expect(weight()).toBe('1.2 kg');
+    window.localStorage.setItem('deliveryTrackerWeightUnit', 'lb');
+    act(() => { window.dispatchEvent(new StorageEvent('storage', { key: 'deliveryTrackerWeightUnit' })); });
     expect(weight()).toBe('2.6 lb');
   });
 });

@@ -682,11 +682,11 @@ class SettingsTest {
     }
 
     /**
-     * Time format and Distance units start on Automatic, which names what the phone uses, and a choice from their menus
-     * takes its place.
+     * Time format, Distance units and Weight units start on Automatic, which names what the phone uses, and a choice from
+     * their menus takes its place.
      */
     @Test
-    fun theTimeFormatAndDistanceUnitsMenusChooseOverThePhone() {
+    fun theTimeFormatDistanceAndWeightUnitsMenusChooseOverThePhone() {
         show()
         open()
         fun state(tag: String) = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription)
@@ -707,6 +707,14 @@ class SettingsTest {
         assertEquals("Miles (mi)", state(SETTINGS_DISTANCE))
         choose(SETTINGS_DISTANCE, SETTINGS_DISTANCE_PICKER, "$SETTINGS_DISTANCE.auto")
         assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
+
+        assertEquals(text("settings.weightUnits"), node(SETTINGS_WEIGHT).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single())
+        assertEquals("Automatic (kg)", state(SETTINGS_WEIGHT))
+        choose(SETTINGS_WEIGHT, SETTINGS_WEIGHT_PICKER, "$SETTINGS_WEIGHT.lb")
+        assertEquals("Pounds (lb)", state(SETTINGS_WEIGHT))
+        assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
+        choose(SETTINGS_WEIGHT, SETTINGS_WEIGHT_PICKER, "$SETTINGS_WEIGHT.auto")
+        assertEquals("Automatic (kg)", state(SETTINGS_WEIGHT))
     }
 
     @Test

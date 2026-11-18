@@ -12,7 +12,10 @@ import {
 } from 'react';
 import { detectLocale, documentLanguage, isLocale, languagePath, LOCALE_COOKIE, manifestPath, pathLanguage, SUPPORTED_LOCALES, type Locale } from './lib/locale';
 import { languageTags, translateMessage, type MessageKey, type Messages, type Translate } from './lib/messages';
-import { browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, localeUses24HourTime, resolvedWeightUnit, type ClockPreference, type DistancePreference, type WeightUnit } from './lib/units';
+import {
+  browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, localeUses24HourTime, weightFromDistance, weightPreference,
+  type ClockPreference, type DistancePreference, type WeightPreference, type WeightUnit,
+} from './lib/units';
 import type { DistanceUnit } from './components/map/route';
 
 export { detectLocale, SUPPORTED_LOCALES, type Locale };
@@ -34,6 +37,19 @@ export type { MessageKey, Messages, Translate };
 const STORAGE_KEY = 'deliveryTrackerLocale';
 const CLOCK_STORAGE_KEY = 'deliveryTrackerClock';
 const DISTANCE_STORAGE_KEY = 'deliveryTrackerDistanceUnit';
+const WEIGHT_STORAGE_KEY = 'deliveryTrackerWeightUnit';
+
+/**
+ * The weight unit saved; where none is, the one the distance units saved brought before weights had their own choice,
+ * saved once so that a later change of distance units leaves weights as they are.
+ */
+function savedWeight(): WeightPreference {
+  const saved = window.localStorage.getItem(WEIGHT_STORAGE_KEY);
+  if (saved !== null) return weightPreference(saved);
+  const carried = weightFromDistance(distancePreference(window.localStorage.getItem(DISTANCE_STORAGE_KEY)));
+  window.localStorage.setItem(WEIGHT_STORAGE_KEY, carried);
+  return carried;
+}
 
 import en from '../shared/locales/en.json';
 
@@ -76,13 +92,15 @@ interface I18nValue {
   use24HourTime: boolean;
   /** The unit distances are written in: the choice in Settings, or the browser's region's. */
   distanceUnit: DistanceUnit;
-  /** The unit weights are written in: the one that goes with the distance units chosen, or the browser's region's. */
+  /** The unit weights, and the sides of parcels, are written in: the choice in Settings, or the browser's region's. */
   weightUnit: WeightUnit;
   /** What Settings keeps for each, `auto` following the browser. */
   clock: ClockPreference;
   setClock: (clock: ClockPreference) => void;
   distance: DistancePreference;
   setDistance: (distance: DistancePreference) => void;
+  weight: WeightPreference;
+  setWeight: (weight: WeightPreference) => void;
   /** What `auto` gives here, for Settings to name. */
   automatic: { use24HourTime: boolean; distanceUnit: DistanceUnit; weightUnit: WeightUnit };
   t: Translate;
@@ -112,6 +130,8 @@ const defaultValue: I18nValue = {
   setClock: () => undefined,
   distance: 'auto',
   setDistance: () => undefined,
+  weight: 'auto',
+  setWeight: () => undefined,
   automatic: SERVER_UNITS,
   t: (key, variables) => translate('en', key, variables),
 };
@@ -168,6 +188,7 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
   // a saved choice, replace them before the first paint after hydration.
   const [clock, setClockChoice] = useState<ClockPreference>('auto');
   const [distance, setDistanceChoice] = useState<DistancePreference>('auto');
+  const [weight, setWeightChoice] = useState<WeightPreference>('auto');
   const [automatic, setAutomatic] = useState(SERVER_UNITS);
 
   useLayoutEffect(() => {
@@ -179,14 +200,20 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
       try { setDistanceChoice(distancePreference(window.localStorage.getItem(DISTANCE_STORAGE_KEY))); }
       catch { /* Keep the current units when storage is unavailable. */ }
     };
+    const readWeight = () => {
+      try { setWeightChoice(savedWeight()); }
+      catch { /* Keep the current unit when storage is unavailable. */ }
+    };
     // Another tab's choice.
     const syncPreferences = (event: StorageEvent) => {
       if (event.key === CLOCK_STORAGE_KEY || event.key === null) readClock();
       if (event.key === DISTANCE_STORAGE_KEY || event.key === null) readDistance();
+      if (event.key === WEIGHT_STORAGE_KEY || event.key === null) readWeight();
     };
     const readBrowser = () => setAutomatic(browserUnits());
     readClock();
     readDistance();
+    readWeight();
     readBrowser();
     window.addEventListener('storage', syncPreferences);
     window.addEventListener('languagechange', readBrowser);
@@ -209,9 +236,15 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     catch { /* Keep the choice for this session. */ }
   }, []);
 
+  const setWeight = useCallback((next: WeightPreference) => {
+    setWeightChoice(next);
+    try { window.localStorage.setItem(WEIGHT_STORAGE_KEY, next); }
+    catch { /* Keep the choice for this session. */ }
+  }, []);
+
   const use24HourTime = clock === 'auto' ? automatic.use24HourTime : clock === '24';
   const distanceUnit = distance === 'auto' ? automatic.distanceUnit : distance;
-  const weightUnit = resolvedWeightUnit(distance, automatic.weightUnit);
+  const weightUnit = weight === 'auto' ? automatic.weightUnit : weight;
 
   const show = useCallback((next: Locale) => {
     requested.current = next;
@@ -278,9 +311,11 @@ export function I18nProvider({ children, initialLocale, initialMessages, address
     setClock,
     distance,
     setDistance,
+    weight,
+    setWeight,
     automatic,
     t,
-  }), [language, chooseLocale, use24HourTime, distanceUnit, weightUnit, clock, setClock, distance, setDistance, automatic, t]);
+  }), [language, chooseLocale, use24HourTime, distanceUnit, weightUnit, clock, setClock, distance, setDistance, weight, setWeight, automatic, t]);
 
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;
 }

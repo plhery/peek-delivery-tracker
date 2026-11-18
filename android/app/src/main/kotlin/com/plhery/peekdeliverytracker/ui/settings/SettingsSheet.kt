@@ -442,6 +442,8 @@ private fun SettingsRootPage(
                         SettingsDivider()
                         SettingsDistanceRow()
                         SettingsDivider()
+                        SettingsWeightRow()
+                        SettingsDivider()
                         // The web's "Mark new updates" (#72): the account's, kept with its notification preferences,
                         // or this phone's for a guest.
                         SettingsToggleRow(

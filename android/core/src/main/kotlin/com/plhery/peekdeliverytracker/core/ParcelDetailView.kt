@@ -37,6 +37,37 @@ val TrackingEvent.quotedWords: String?
 /** A fact of the shipment the parcel's page lists (`shipmentFact`): the key of its label, and its value. */
 data class ShipmentFact(val key: String, val value: String)
 
+/**
+ * The weight unit chosen in Settings, which the sides of parcels follow, saved as its code under [storageKey]:
+ * Automatic, the phone's (`auto`), or one unit (`kg`, `lb`).
+ */
+enum class WeightPreference(val code: String, private val unit: WeightUnit?) {
+    Automatic("auto", null),
+    Kilograms("kg", WeightUnit.Kilograms),
+    Pounds("lb", WeightUnit.Pounds),
+    ;
+
+    /** The unit weights are written in: the one chosen, else the phone's, `system`. */
+    fun resolved(system: WeightUnit): WeightUnit = unit ?: system
+
+    companion object {
+        const val storageKey = "sdt.native.weightUnit"
+
+        /** The choice saved; nothing, or what no choice reads as, is Automatic. */
+        fun from(saved: String?): WeightPreference = entries.firstOrNull { it.code == saved } ?: Automatic
+
+        /**
+         * The weight unit of a reader who chose none yet: the one their distance units brought before weights had a
+         * choice of their own, kilograms with kilometres and pounds with miles.
+         */
+        fun carriedFrom(distance: DistancePreference): WeightPreference = when (distance) {
+            DistancePreference.Automatic -> Automatic
+            DistancePreference.Kilometres -> Kilograms
+            DistancePreference.Miles -> Pounds
+        }
+    }
+}
+
 /** The unit a weight is written in: kilograms, or pounds where the phone measures in US units (`WeightUnit`). */
 enum class WeightUnit(val code: String) {
     Kilograms("kg"),

@@ -1895,7 +1895,7 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(DistanceUnit.system(Locale(identifier: "fr_FR")), .kilometres)
     }
 
-    @MainActor func testWeightsFollowTheUSMeasurementSystemOrTheDistanceChosen() throws {
+    @MainActor func testWeightsFollowTheUSMeasurementSystemOrTheWeightChosen() throws {
         let suite = "system-weights-\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
         defer { defaults.removePersistentDomain(forName: suite) }
@@ -1905,16 +1905,37 @@ final class ParcelLogicTests: XCTestCase {
         defer { localizer.language = originalLanguage }
         localizer.language = .en
 
-        // Automatic weighs in the system's unit, as it changes; a distance chosen brings its own.
+        // Automatic weighs in the system's unit, as it changes; a weight chosen beats it, whatever the distance units.
+        XCTAssertEqual(localizer.weight, .automatic)
         XCTAssertEqual(localizer.weight(kilograms: 1.2), "2.6 lb")
         systemWeight = .kilograms
         localizer.systemChanged()
         XCTAssertEqual(localizer.weight(kilograms: 1.2), "1.2 kg")
         localizer.distance = .miles
-        XCTAssertEqual(localizer.weightUnit, .pounds)
-        localizer.distance = .kilometres
         XCTAssertEqual(localizer.weightUnit, .kilograms)
+        localizer.weight = .pounds
+        XCTAssertEqual(localizer.weightUnit, .pounds)
+        XCTAssertEqual(localizer.dimensions("40 × 30 × 20 cm"), "15.7 × 11.8 × 7.9 in")
+        localizer.distance = .kilometres
+        XCTAssertEqual(localizer.weightUnit, .pounds)
+        XCTAssertEqual(defaults.string(forKey: "sdt.native.weightUnit"), "lb")
+        localizer.weight = .kilograms
+        XCTAssertEqual(localizer.dimensions("40 × 30 × 20 cm"), "40 × 30 × 20 cm")
+        localizer.weight = .automatic
         localizer.distance = .automatic
+        XCTAssertEqual(defaults.string(forKey: "sdt.native.weightUnit"), "auto")
+        XCTAssertEqual(WeightPreference(stored: "stone"), .automatic)
+
+        // A reader who chose distance units before weights had their own keeps the weight they brought, saved once.
+        for (distance, weight) in [("mi", WeightPreference.pounds), ("km", .kilograms), ("auto", .automatic)] {
+            defaults.removeObject(forKey: "sdt.native.weightUnit")
+            defaults.set(distance, forKey: "sdt.native.distanceUnit")
+            let carried = Localizer(defaults: defaults, systemWeightUnit: { .kilograms })
+            XCTAssertEqual(carried.weight, weight)
+            XCTAssertEqual(defaults.string(forKey: "sdt.native.weightUnit"), weight.rawValue)
+            carried.distance = .automatic
+            XCTAssertEqual(Localizer(defaults: defaults, systemWeightUnit: { .kilograms }).weight, weight)
+        }
 
         // Pounds in the United States, Liberia and Myanmar; kilograms in the UK and elsewhere.
         XCTAssertEqual(WeightUnit.system(Locale(identifier: "en_US")), .pounds)

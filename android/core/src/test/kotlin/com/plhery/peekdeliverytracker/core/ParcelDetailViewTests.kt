@@ -96,23 +96,41 @@ class ParcelDetailViewTests {
     }
 
     @Test
-    fun aPhoneThatMeasuresInUSUnitsWeighsInPoundsAndADistanceChosenBringsItsOwn() {
-        val weighed = parcel(TrackingStage.InTransit, CarrierData(weightKg = 1.2))
-        fun weight(localizer: Localizer) = localizer.shipmentFacts(weighed)!!.single().value
+    fun aPhoneThatMeasuresInUSUnitsWeighsInPoundsAndAWeightChosenBeatsIt() {
+        val weighed = parcel(TrackingStage.InTransit, CarrierData(weightKg = 1.2, dimensionsText = "40 × 30 × 20 cm"))
+        fun facts(localizer: Localizer) = localizer.shipmentFacts(weighed)!!.map { it.value }
         val american = Localizer(AppLanguage.En, systemDistanceUnit = DistanceUnit.Miles, systemWeightUnit = WeightUnit.Pounds)
-        assertEquals("2.6 lb", weight(american))
+        assertEquals(listOf("2.6 lb", "15.7 × 11.8 × 7.9 in"), facts(american))
         // The UK writes miles but kilograms.
-        assertEquals("1.2 kg", weight(Localizer(AppLanguage.En, systemDistanceUnit = DistanceUnit.Miles)))
+        assertEquals(listOf("1.2 kg", "40 × 30 × 20 cm"), facts(Localizer(AppLanguage.En, systemDistanceUnit = DistanceUnit.Miles)))
+        // Distance units leave weights alone.
         american.distancePreference = DistancePreference.Kilometres
+        assertEquals("2.6 lb", facts(american).first())
+        american.weightPreference = WeightPreference.Kilograms
         assertEquals(WeightUnit.Kilograms, american.weightUnitFlow.value)
-        assertEquals("1.2 kg", weight(american))
-        american.distancePreference = DistancePreference.Automatic
+        assertEquals(listOf("1.2 kg", "40 × 30 × 20 cm"), facts(american))
+        american.weightPreference = WeightPreference.Automatic
         american.systemWeightUnit = WeightUnit.Kilograms
-        assertEquals("1.2 kg", weight(american))
+        assertEquals("1.2 kg", facts(american).first())
         american.distancePreference = DistancePreference.Miles
-        assertEquals("2.6 lb", weight(american))
+        assertEquals("1.2 kg", facts(american).first())
+        american.weightPreference = WeightPreference.Pounds
+        assertEquals(listOf("2.6 lb", "15.7 × 11.8 × 7.9 in"), facts(american))
         // The page passes the unit it shows.
-        assertEquals("1.2 kg", american.shipmentFacts(weighed, WeightUnit.Kilograms)!!.single().value)
+        assertEquals("1.2 kg", american.shipmentFacts(weighed, WeightUnit.Kilograms)!!.first().value)
+    }
+
+    @Test
+    fun aWeightIsSavedByItsCodeAndCarriedOverFromTheDistanceUnitsChosenBefore() {
+        assertEquals(listOf("auto", "kg", "lb"), WeightPreference.entries.map { it.code })
+        for (preference in WeightPreference.entries) assertEquals(preference, WeightPreference.from(preference.code))
+        assertEquals(WeightPreference.Automatic, WeightPreference.from(null))
+        assertEquals(WeightPreference.Automatic, WeightPreference.from("stone"))
+        assertEquals("sdt.native.weightUnit", WeightPreference.storageKey)
+        assertEquals(
+            listOf(WeightPreference.Automatic, WeightPreference.Kilograms, WeightPreference.Pounds),
+            DistancePreference.entries.map(WeightPreference::carriedFrom),
+        )
     }
 
     @Test

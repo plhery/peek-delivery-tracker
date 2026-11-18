@@ -265,6 +265,7 @@ class TalkBackScreensTest {
                 "Language [dropdownlist, English]",
                 "Time format [dropdownlist, Automatic (24-hour)]",
                 "Distance units [dropdownlist, Automatic (km)]",
+                "Weight units [dropdownlist, Automatic (kg)]",
                 "Mark new updates, A dot on parcels with updates since you last opened them. [switch, on]",
             ),
         )

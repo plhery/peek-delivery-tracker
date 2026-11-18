@@ -57,6 +57,7 @@ import com.plhery.peekdeliverytracker.core.TextMeasurer
 import com.plhery.peekdeliverytracker.core.TrackingLocation
 import com.plhery.peekdeliverytracker.core.UserDefaults
 import com.plhery.peekdeliverytracker.core.WebAuthenticating
+import com.plhery.peekdeliverytracker.core.WeightPreference
 import com.plhery.peekdeliverytracker.core.identifying
 import com.plhery.peekdeliverytracker.platform.AndroidPushNotifications
 import com.plhery.peekdeliverytracker.platform.AppNotifications
@@ -164,8 +165,9 @@ class AppContainer(
     /**
      * `Localizer()`: the language saved here, else the phone's first the app speaks, and the phone's again when they
      * change ([deviceLanguagesChanged]). Where the copy names the iPhone, its `.android` variant names this device and
-     * Android's settings, as an iPad reads `.ipad`. Its clock and distance unit are those saved, Automatic following the
-     * phone's, read again when they may have changed ([deviceFormatsChanged]).
+     * Android's settings, as an iPad reads `.ipad`. Its clock, distance and weight units are those saved, Automatic
+     * following the phone's, read again when they may have changed ([deviceFormatsChanged]); where no weight unit is saved,
+     * the one the distance units saved brought, saved once ([savedWeight]).
      */
     val localizer = Localizer(
         deviceLanguage(), variant = "android",
@@ -173,8 +175,19 @@ class AppContainer(
         systemUses24HourTime = Device.uses24HourTime(context),
         distancePreference = DistancePreference.from(defaults.string(DistancePreference.storageKey)),
         systemDistanceUnit = Device.distanceUnit(),
+        weightPreference = savedWeight(),
         systemWeightUnit = Device.weightUnit(),
     )
+
+    /**
+     * The weight unit saved; where none is, the one the distance units saved brought before weights had their own
+     * choice, saved once so that a later change of distance units leaves weights as they are.
+     */
+    private fun savedWeight(): WeightPreference {
+        defaults.string(WeightPreference.storageKey)?.let { return WeightPreference.from(it) }
+        return WeightPreference.carriedFrom(DistancePreference.from(defaults.string(DistancePreference.storageKey)))
+            .also { defaults.set(it.code, forKey = WeightPreference.storageKey) }
+    }
 
     /** The language the phone's languages gave, taken without being chosen; null once a change has been seen. */
     private var followed: AppLanguage? = null
@@ -475,6 +488,7 @@ class AppContainer(
         scope.launch { localizer.languageFlow.drop(1).collect(::languageChanged) }
         scope.launch { localizer.clockPreferenceFlow.drop(1).collect { defaults.set(it.code, forKey = ClockPreference.storageKey) } }
         scope.launch { localizer.distancePreferenceFlow.drop(1).collect { defaults.set(it.code, forKey = DistancePreference.storageKey) } }
+        scope.launch { localizer.weightPreferenceFlow.drop(1).collect { defaults.set(it.code, forKey = WeightPreference.storageKey) } }
         // The widgets' times and distances are the app's, written again.
         scope.launch { localizer.use24HourTimeFlow.drop(1).collect { parcels.refreshDeliverySurfaces() } }
         scope.launch { localizer.distanceUnitFlow.drop(1).collect { parcels.refreshDeliverySurfaces() } }

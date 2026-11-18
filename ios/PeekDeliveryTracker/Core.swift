@@ -237,13 +237,32 @@ enum DistancePreference: String, CaseIterable {
         case .miles: .miles
         }
     }
+}
 
-    /// The unit weights are written in: kilograms with kilometres chosen, pounds with miles, else the system's.
-    func weightUnit(system: WeightUnit) -> WeightUnit {
+/// The unit the app writes weights in, and the sides of parcels with them: the system's, or one chosen over it. A
+/// missing or unknown value is automatic.
+enum WeightPreference: String, CaseIterable {
+    case automatic = "auto"
+    case kilograms = "kg"
+    case pounds = "lb"
+
+    init(stored: String?) { self = stored.flatMap(Self.init(rawValue:)) ?? .automatic }
+
+    /// The weight unit of a reader who chose none yet: the one their distance units brought before weights had a choice
+    /// of their own, kilograms with kilometres and pounds with miles.
+    init(carriedFrom distance: DistancePreference) {
+        switch distance {
+        case .automatic: self = .automatic
+        case .kilometres: self = .kilograms
+        case .miles: self = .pounds
+        }
+    }
+
+    func unit(system: WeightUnit) -> WeightUnit {
         switch self {
         case .automatic: system
-        case .kilometres: .kilograms
-        case .miles: .pounds
+        case .kilograms: .kilograms
+        case .pounds: .pounds
         }
     }
 }
@@ -322,6 +341,12 @@ final class Localizer: ObservableObject {
     }
     /// The unit distances are written in: the one chosen, else the system's.
     @Published private(set) var distanceUnit: DistanceUnit
+    private static let weightStorageKey = "sdt.native.weightUnit"
+    /// The weight unit chosen in Settings. Where none is saved, the one the distance units saved brought before weights
+    /// had their own choice, saved once so that a later change of distance units leaves weights as they are.
+    @Published var weight: WeightPreference {
+        didSet { defaults.set(weight.rawValue, forKey: Self.weightStorageKey) }
+    }
     /// What the system says, which Automatic follows. They change with the device's settings while the app is open.
     @Published private(set) var systemUses24HourTime: Bool
     @Published private(set) var systemDistanceUnit: DistanceUnit
@@ -367,6 +392,10 @@ final class Localizer: ObservableObject {
         let systemClock = systemUses24HourTime(), systemUnit = systemDistanceUnit()
         self.clock = clock
         self.distance = distance
+        let savedWeight = defaults.string(forKey: Self.weightStorageKey)
+        let weight = savedWeight.map(WeightPreference.init(stored:)) ?? WeightPreference(carriedFrom: distance)
+        if savedWeight == nil { defaults.set(weight.rawValue, forKey: Self.weightStorageKey) }
+        self.weight = weight
         self.systemUses24HourTime = systemClock
         self.systemDistanceUnit = systemUnit
         self.systemWeightUnit = systemWeightUnit()
@@ -407,8 +436,8 @@ final class Localizer: ObservableObject {
         resolveUnits()
     }
 
-    /// The unit weights are written in: the one that goes with the distance units chosen, else the system's.
-    var weightUnit: WeightUnit { distance.weightUnit(system: systemWeightUnit) }
+    /// The unit weights are written in: the one chosen, else the system's.
+    var weightUnit: WeightUnit { weight.unit(system: systemWeightUnit) }
 
     /// A weight Peek read in kilograms, in `weightUnit` and the app language's digits.
     func weight(kilograms: Double) -> String {

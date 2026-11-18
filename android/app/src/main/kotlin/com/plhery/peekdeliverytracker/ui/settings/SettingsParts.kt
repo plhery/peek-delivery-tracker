@@ -54,6 +54,8 @@ import com.plhery.peekdeliverytracker.core.DistancePreference
 import com.plhery.peekdeliverytracker.core.DistanceUnit
 import com.plhery.peekdeliverytracker.core.Brand
 import com.plhery.peekdeliverytracker.core.ExperimentalPalette
+import com.plhery.peekdeliverytracker.core.WeightPreference
+import com.plhery.peekdeliverytracker.core.WeightUnit
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -357,6 +359,39 @@ internal fun SettingsDistanceRow() {
 }
 
 /**
+ * "settings.weightUnits" in a [SettingsPickerRow]: Automatic, which names the phone's unit ("Automatic (kg)"),
+ * kilograms or pounds. A choice sets the localizer's weight unit (`localizer.weightPreference`), which the app saves; the
+ * sides of parcels follow it.
+ */
+@Composable
+internal fun SettingsWeightRow() {
+    val localizer = LocalLocalizer.current
+    val language = LocalLanguage.current
+    val chosen by localizer.weightPreferenceFlow.collectAsState()
+    val system by localizer.systemWeightUnitFlow.collectAsState()
+    val options = remember(localizer, language, system) {
+        WeightPreference.entries.map {
+            val title = when (it) {
+                WeightPreference.Automatic -> localizer.text(
+                    "settings.automatic",
+                    mapOf("value" to localizer.text(if (system == WeightUnit.Pounds) "settings.poundsShort" else "settings.kilogramsShort")),
+                )
+                WeightPreference.Kilograms -> localizer.text("settings.kilograms")
+                WeightPreference.Pounds -> localizer.text("settings.pounds")
+            }
+            MenuOption(title, tag = "$SETTINGS_WEIGHT.${it.code}")
+        }
+    }
+    SettingsPickerRow(
+        label = localized("settings.weightUnits"),
+        options = options,
+        selected = WeightPreference.entries.indexOf(chosen),
+        rowTag = SETTINGS_WEIGHT,
+        pickerTag = SETTINGS_WEIGHT_PICKER,
+    ) { localizer.weightPreference = WeightPreference.entries[it] }
+}
+
+/**
  * A menu `Picker` in a Form row: `label` in subheadline, and the option `selected` with the menu's chevrons in the
  * secondary grey, beside it, 54 tall at least and 15 in, or under it at the accessibility sizes. A tap on the option
  * and its chevrons, the picker's button, opens iOS's menu of `options` over the sheet ([SheetMenu]), the one selected
@@ -612,3 +647,5 @@ internal const val SETTINGS_CLOCK = "$SETTINGS_SHEET.clock"
 internal const val SETTINGS_CLOCK_PICKER = "$SETTINGS_CLOCK.picker"
 internal const val SETTINGS_DISTANCE = "$SETTINGS_SHEET.distance"
 internal const val SETTINGS_DISTANCE_PICKER = "$SETTINGS_DISTANCE.picker"
+internal const val SETTINGS_WEIGHT = "$SETTINGS_SHEET.weight"
+internal const val SETTINGS_WEIGHT_PICKER = "$SETTINGS_WEIGHT.picker"

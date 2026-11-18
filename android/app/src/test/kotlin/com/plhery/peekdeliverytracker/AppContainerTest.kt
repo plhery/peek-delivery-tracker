@@ -28,6 +28,7 @@ import com.plhery.peekdeliverytracker.core.ParcelFeedbackModel
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackQuestion
 import com.plhery.peekdeliverytracker.core.ParcelFeedbackSubject
 import com.plhery.peekdeliverytracker.core.ParcelSharePreview
+import com.plhery.peekdeliverytracker.core.WeightPreference
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
@@ -238,6 +239,14 @@ class AppContainerTest {
             localizer.distancePreference = preference
             settle()
             assertEquals(code, defaults.string("sdt.native.distanceUnit"))
+        }
+        // Miles chosen before weights had their own choice brought pounds, saved once: distance units leave them since.
+        assertEquals(WeightPreference.Pounds, localizer.weightPreference)
+        assertEquals("lb", defaults.string("sdt.native.weightUnit"))
+        for ((preference, code) in listOf(WeightPreference.Kilograms to "kg", WeightPreference.Automatic to "auto")) {
+            localizer.weightPreference = preference
+            settle()
+            assertEquals(code, defaults.string("sdt.native.weightUnit"))
         }
     }
 

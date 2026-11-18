@@ -3,15 +3,15 @@ import { trackAction } from '../lib/analytics';
 import { useAppearance, type Appearance } from '../lib/appearance';
 import type { ApiAuth } from '../lib/apiClient';
 import { useMarkNewUpdatesChoice } from '../lib/newUpdate';
-import { clockPreference, distancePreference } from '../lib/units';
+import { clockPreference, distancePreference, weightPreference } from '../lib/units';
 import './Settings.css';
 
 /**
- * The reader's preferences: appearance, time format, distance units and the new-update mark, kept in this browser.
+ * The reader's preferences: appearance, time format, distance and weight units and the new-update mark, kept in this browser.
  * With `apiAuth`, the mark's choice follows the account to its other devices; with `language`, the language too.
  */
 export function PreferenceSettings({ apiAuth, language = false }: { apiAuth?: ApiAuth; language?: boolean }) {
-  const { t, clock, setClock, distance, setDistance, automatic } = useI18n();
+  const { t, clock, setClock, distance, setDistance, weight, setWeight, automatic } = useI18n();
   const [appearance, setAppearance] = useAppearance();
   const [markNewUpdates, setMarkNewUpdates] = useMarkNewUpdatesChoice(apiAuth);
   return <section className="settings-group" aria-labelledby="settings-preferences"><h3 className="settings-group__title" id="settings-preferences">{t('settings.preferences')}</h3>
@@ -33,6 +33,14 @@ export function PreferenceSettings({ apiAuth, language = false }: { apiAuth?: Ap
           <option value="auto">{t('settings.automatic', { value: t(automatic.distanceUnit === 'mi' ? 'settings.milesShort' : 'settings.kilometersShort') })}</option>
           <option value="km">{t('settings.kilometers')}</option>
           <option value="mi">{t('settings.miles')}</option>
+        </select>
+      </label>
+      <label className="language-control language-control--account">
+        <span>{t('settings.weightUnits')}</span>
+        <select value={weight} onChange={(event) => setWeight(weightPreference(event.target.value))}>
+          <option value="auto">{t('settings.automatic', { value: t(automatic.weightUnit === 'lb' ? 'settings.poundsShort' : 'settings.kilogramsShort') })}</option>
+          <option value="kg">{t('settings.kilograms')}</option>
+          <option value="lb">{t('settings.pounds')}</option>
         </select>
       </label>
       <button className="settings-row settings-mark" type="button" role="switch" aria-checked={markNewUpdates} aria-labelledby="settings-mark-label" aria-describedby="settings-mark-hint"

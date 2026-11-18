@@ -5574,6 +5574,23 @@ extension ParcelLogicTests {
         XCTAssertNil(step("not a date").aheadUntil)
     }
 
+    func testADayOnlyStepEndsAtTheCarriersNextMidnightWhenTheClocksChange() throws {
+        // 28 March 2027 lasts 23 hours in Zurich: it starts at 23:00 UTC the day before and ends at 22:00 UTC.
+        func step(day: String, from start: String, until end: String?) -> PlannedTrackingEvent {
+            PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: start, expiresAt: end, day: day)
+        }
+        let short = step(day: "2027-03-28", from: "2027-03-27T23:00:00Z", until: "2027-03-28T22:00:00Z")
+        XCTAssertTrue(short.isAhead(of: try XCTUnwrap(DateParser.date("2027-03-28T21:30:00Z"))))
+        XCTAssertFalse(short.isAhead(of: try XCTUnwrap(DateParser.date("2027-03-28T22:30:00Z"))))
+        XCTAssertEqual(short.aheadUntil, DateParser.date("2027-03-28T22:00:00Z"))
+        // 31 October 2027 lasts 25 hours there.
+        let long = step(day: "2027-10-31", from: "2027-10-30T22:00:00Z", until: "2027-10-31T23:00:00Z")
+        XCTAssertTrue(long.isAhead(of: try XCTUnwrap(DateParser.date("2027-10-31T22:30:00Z"))))
+        // A step cached before the server said when it ends stands for a day, as before.
+        let cached = step(day: "2027-03-28", from: "2027-03-27T23:00:00Z", until: nil)
+        XCTAssertEqual(cached.aheadUntil, DateParser.date("2027-03-28T23:00:00Z"))
+    }
+
     @MainActor
     func testAPlannedStepReadsItsDayAsTheJournalDoesAndItsTimeWhenItHasOne() throws {
         let localizer = Localizer(systemUses24HourTime: { true })

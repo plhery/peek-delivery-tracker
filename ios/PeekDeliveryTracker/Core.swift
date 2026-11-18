@@ -926,8 +926,10 @@ extension PlannedTrackingEvent {
         return aheadUntil > now
     }
 
-    /// The moment the step stops being ahead, when an open journal drops it.
+    /// The moment the step stops being ahead, when an open journal drops it: for a step dated by its day alone, the
+    /// next midnight in the carrier's zone as the server gives it (`expiresAt`), or a day on from its start.
     var aheadUntil: Date? {
+        if let end = expiresAt.flatMap(DateParser.date) { return end }
         guard let at = DateParser.date(occurredAt) else { return nil }
         return day == nil ? at : at.addingTimeInterval(24 * 60 * 60)
     }

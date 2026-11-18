@@ -14,9 +14,9 @@ YWE's numbers are YWE and 14 digits, 17 characters in all. With invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `YWE00000000000000` | YWE and 14 digits: a YWE number. |
-| `YWE0000000000000` | Only 13 digits: not YWE's layout. Check for a missing digit; if no carrier answers for it, its page on peektracker.com says "This starts like a YWE tracking number but is one character short, so it may be mistyped." |
-| `YWAAA000000000000` | YW, three letters and 12 digits: a [Yanwen](carrier:yanwen) number, not a YWE one. |
+| `YWE48291057364918` | YWE and 14 digits: a YWE number. |
+| `YWE4829105736491` | Only 13 digits: not YWE's layout. Check for a missing digit; if no carrier answers for it, its page on peektracker.com says "This starts like a YWE tracking number but is one character short, so it may be mistyped." |
+| `YWLAX482910573649` | YW, three letters and 12 digits: a [Yanwen](carrier:yanwen) number, not a YWE one. |
 
 Spaces and lower case don't matter when you paste the number into Peek.
 
@@ -100,7 +100,7 @@ YWE's tracker can also show a two-hour delivery window while the parcel is in tr
 
 YWE's tracker names no other carrier, so on a parcel added with its YWE number Peek shows no "Delivery with" line and stays with YWE's tracker up to the delivery. If YWE's tracker can't be reached, Peek asks tracking services in the meantime.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while YWE's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact YWE or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while YWE's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only (delivery, pickup, customs, missed attempts and returns) or "Delivery only". It can't contact YWE or the seller for you.
 
 ## Questions about YWE tracking
 

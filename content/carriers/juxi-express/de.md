@@ -14,9 +14,9 @@ Ein Nummernformat veröffentlicht Juxi nicht. Die bisher bekannten Frachtbriefnu
 
 | Nummer | Was sie ist |
 | --- | --- |
-| `JXCAA0000000000YQ` | JXC, zwei Buchstaben, zehn Ziffern und YQ: eine Frachtbriefnummer von Juxi Express. |
-| `JXCAA000000000YQ` | Nur neun Ziffern: So sehen Juxi-Nummern nicht aus. Prüf, ob eine Ziffer fehlt. |
-| `RR000000005CN` | Zwei Buchstaben, neun Ziffern, CN: eine [Postnummer](guide:tracking-number-formats) von [China Post](carrier:china-post), einem der Dienste, die Juxi weiterverkauft. |
+| `JXCAB4829105736YQ` | JXC, zwei Buchstaben, zehn Ziffern und YQ: eine Frachtbriefnummer von Juxi Express. |
+| `JXCAB482910573YQ` | Nur neun Ziffern: So sehen Juxi-Nummern nicht aus. Prüf, ob eine Ziffer fehlt. |
+| `RR482910576CN` | Zwei Buchstaben, neun Ziffern, CN: eine [Postnummer](guide:tracking-number-formats) von [China Post](carrier:china-post), einem der Dienste, die Juxi weiterverkauft. |
 
 **Wo du sie findest.** Keine Seite von Juxi sagt, wie die Nummer zu dir kommt. Der Shop bucht das Paket bei Juxi und nennt die Nummer in der Versandbestätigung oder bei deiner Bestellung. Findest du sie nicht, hilft [So findest du deine Sendungsnummer](guide:find-tracking-number).
 

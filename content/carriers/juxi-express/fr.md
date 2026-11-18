@@ -14,9 +14,9 @@ Juxi ne publie aucun format de numéro. Ses lettres de transport connues font 17
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `JXCAA0000000000YQ` | JXC, deux lettres, dix chiffres, YQ : une lettre de transport Juxi Express. |
-| `JXCAA000000000YQ` | Neuf chiffres seulement : ce n'est pas une forme Juxi. Vérifie qu'il ne manque pas un chiffre. |
-| `RR000000005CN` | Deux lettres, neuf chiffres, CN : un [numéro postal](guide:tracking-number-formats) de [China Post](carrier:china-post), un des services que Juxi revend. |
+| `JXCAB4829105736YQ` | JXC, deux lettres, dix chiffres, YQ : une lettre de transport Juxi Express. |
+| `JXCAB482910573YQ` | Neuf chiffres seulement : ce n'est pas une forme Juxi. Vérifie qu'il ne manque pas un chiffre. |
+| `RR482910576CN` | Deux lettres, neuf chiffres, CN : un [numéro postal](guide:tracking-number-formats) de [China Post](carrier:china-post), un des services que Juxi revend. |
 
 **Où le trouver.** Dans l'e-mail d'expédition du vendeur ou sur la page de ta commande : aucune page de Juxi n'en dit plus. Sinon, lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
@@ -71,11 +71,11 @@ Si le suivi nomme [bpost](carrier:bpost) ou [La Poste](carrier:la-poste), ou don
 
 ## Douane : colis Juxi Express venu de Chine
 
-**Ce que dit Juxi.** Sur ses lignes dédiées vers le Royaume-Uni et l'Europe, il dédouane en DDP (rendu droits acquittés) : il encaisse la TVA à l'avance auprès du vendeur. Sur le petit paquet suivi mondial, au contraire, droits et TVA ne sont dus qu'à l'arrivée, et seul le destinataire peut les payer. Ces pages citent encore un seuil de 22 € sans TVA, supprimé en 2021 : ne t'y fie pas.
+**Ce que dit Juxi.** Sur ses lignes dédiées vers le Royaume-Uni et l'Europe, il dédouane en DDP (rendu droits acquittés) : il encaisse la TVA à l'avance auprès du vendeur. Sur le petit paquet suivi mondial, au contraire, droits et TVA ne sont dus qu'à l'arrivée, et seul le destinataire peut les payer. Ces pages citent aussi un seuil de 22 € sans TVA : ce qui compte, ce sont les règles du pays de livraison, ci-dessous.
 
 **En Belgique.** Selon le SPF Finances, la TVA est toujours due sur un colis commercial (21 % pour la plupart des articles), plus un droit forfaitaire de 3 € par article (code tarifaire) pour un achat en ligne jusqu'à 150 €. Le service de courrier calcule le tout et te le fait payer, avec ses frais de dédouanement. Un colis « à la douane » est en fait dans ses locaux : c'est lui qu'il faut interroger, pas la douane.
 
-**En France.** Selon la douane, la TVA est due dès le premier euro (20 % au taux normal), sauf si tu l'as payée à l'achat chez un vendeur inscrit à l'IOSS, et un droit forfaitaire de 3 € a remplacé la « taxe petits colis » le 1er juillet 2026. Le transporteur peut te facturer des frais de dossier. Pour un colis « bloqué en douane », c'est lui qu'il faut contacter, pas la douane, qui ne te demandera jamais de payer par SMS ou par e-mail.
+**En France.** En métropole, selon la douane, la TVA est due dès le premier euro (20 % au taux normal), sauf si tu l'as payée à l'achat chez un vendeur inscrit à l'IOSS ; dans un département d'outre-mer, la douane applique ses propres règles (TVA au-delà de 22 €, sauf en Guyane et à Mayotte, et octroi de mer). Un droit forfaitaire de 3 € a remplacé la « taxe petits colis » le 1er juillet 2026. Le transporteur peut te facturer des frais de dossier. Pour un colis « bloqué en douane », c'est lui qu'il faut contacter, pas la douane, qui ne te demandera jamais de payer par SMS ou par e-mail.
 
 **Dans toute l'UE**, des frais de traitement de 2 € par article s'ajoutent depuis le 1er novembre 2026, selon la Commission européenne. Le détail, pays par pays, est dans [colis bloqué en douane](guide:customs).
 
@@ -130,7 +130,8 @@ Un transporteur de ton pays, mais Juxi ne dit pas lequel. Pour ses produits post
 - [SPF Finances : Des frais supplémentaires sont liés à votre colis](https://fin.belgium.be/fr/particuliers/international/achats-etrangers-en-ligne/problemes-colis/frais-supplementaires) – TVA à 21 %, droit forfaitaire de 3 € par article jusqu'à 150 €, frais de dédouanement
 - [SPF Finances : Où se trouve votre colis ?](https://fin.belgium.be/fr/particuliers/international/achats-etrangers-en-ligne/problemes-colis/ou-se-trouve-votre-colis) – colis chez le service de courrier, numéro de suivi belge, dédouanement par le courrier
 - [Douane : Mon colis est bloqué](https://www.douane.gouv.fr/fiche/mon-colis-est-bloque) – contacter le transporteur, pas la douane, faux SMS
-- [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – TVA dès le premier euro, seuil de 22 € supprimé le 1er juillet 2021, taux normal de 20 %, IOSS, frais de dossier du transporteur
+- [Douane : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – dans un département d'outre-mer, TVA si l'envoi dépasse 22 € (sauf en Guyane et à Mayotte) et octroi de mer
+- [Douane : Nos conseils avant d'acheter sur internet](https://www.douane.gouv.fr/fiche/nos-conseils-avant-dacheter-sur-internet) – TVA dès le premier euro, taux normal de 20 %, IOSS, frais de dossier du transporteur
 - [Douane : IMPORT-EXPORT : quels changements sont à attendre dans les prochaines semaines ?](https://www.douane.gouv.fr/actualites/import-export-quels-changements-sont-attendre-dans-les-prochaines-semaines) – taxe « petits colis » remplacée par le droit forfaitaire de 3 € le 1er juillet 2026
 - [Commission européenne : EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – frais de traitement de 2 € par article depuis le 1er novembre 2026
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – forme JXC, SHJX, le nom de Juxi chez 17TRACK, DHLink interrogé en premier pour les numéros JXCYI, JXCZO, JXCUS et JXCZI, plus de suivi Juxi, suivi via des services de suivi, ce que Peek affiche

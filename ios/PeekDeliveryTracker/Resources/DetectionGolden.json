@@ -78178,6 +78178,23 @@
     ]
   },
   {
+    "input": "AR9999999901",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "360lion",
+      "aramex-au",
+      "aramex-nz"
+    ],
+    "asked": [
+      "colis-prive",
+      "360lion",
+      "aramex-au",
+      "aramex-nz"
+    ]
+  },
+  {
     "input": "ARK12543246AU",
     "carrier": "unknown",
     "confidence": "none",
@@ -78540,10 +78557,12 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "asendia",
       "gls-it"
     ],
     "asked": [
-      "gls-it"
+      "gls-it",
+      "asendia"
     ]
   },
   {
@@ -78552,6 +78571,19 @@
     "confidence": "high",
     "candidates": [
       "an-post"
+    ]
+  },
+  {
+    "input": "AW999999901",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "asendia",
+      "gls-it"
+    ],
+    "asked": [
+      "gls-it",
+      "asendia"
     ]
   },
   {
@@ -109704,6 +109736,9 @@
     "confidence": "low",
     "candidates": [
       "360lion"
+    ],
+    "asked": [
+      "360lion"
     ]
   },
   {
@@ -109711,6 +109746,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "360lion"
+    ],
+    "asked": [
       "360lion"
     ]
   },
@@ -112666,6 +112704,9 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "360lion"
+    ],
+    "asked": [
       "360lion"
     ]
   },

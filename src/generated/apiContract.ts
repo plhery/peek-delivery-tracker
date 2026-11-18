@@ -1936,6 +1936,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^EEUS\\d{9}[A-Z]{2}\\d$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^AW\\d{9}$",
+        "confidence": "low"
       }
     ],
     "aliases": [
@@ -40639,7 +40643,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "360lion"
+      "adapter": "360lion",
+      "recognitionRank": 694
     },
     "trackingUrlTemplate": "https://toms.360lion.com/track?trackNumber={trackingNumber}",
     "linkRules": [
@@ -40656,6 +40661,10 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^WSH[A-Z]{2}\\d{10}YQ$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^AR\\d{10}$",
         "confidence": "low"
       }
     ],

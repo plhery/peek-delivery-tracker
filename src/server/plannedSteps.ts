@@ -140,13 +140,18 @@ export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[
   if (!carrier) return [];
   const scans = carrierScans(events);
   const latest = Math.max(...scans.map((event) => Date.parse(String(event.occurred_at))).filter(Number.isFinite));
-  const told = new Set(scans.map((event) => words(event.description)));
   const reached = Math.max(-1, ...[row.current_stage, ...scans.map((event) => event.stage)].map((stage) => PROGRESS.indexOf(String(stage))));
   if (scans.some((event) => FINAL_STAGES.has(String(event.stage)))) return [];
   const zone = carrierTimezone(carrier as Parameters<typeof carrierTimezone>[0]) ?? 'UTC';
   return plannedSteps(listed[carrier] as unknown[]).flatMap((step) => {
     const time = stepTime(step, zone);
-    if (!time || time.until <= Math.max(latest, now) || told.has(words(step.description))) return [];
+    if (!time || time.until <= Math.max(latest, now)) return [];
+    if (scans.some(scan => {
+      const at = Date.parse(String(scan.occurred_at));
+      const sameTime = time.day ? at >= time.instant && at <= time.until : Math.abs(at - time.instant) < MINUTE_MS;
+      return sameTime && words(scan.description) === words(step.description)
+        && (!scan.location || !step.location || words(scan.location) === words(step.location));
+    })) return [];
     const served = servedStep(step, time);
     const progress = PROGRESS.indexOf(String(served.stage));
     return progress >= 0 && progress < reached ? [] : [served];

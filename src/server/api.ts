@@ -4,7 +4,7 @@ import { createHash, randomUUID } from 'node:crypto';
 import { isIP } from 'node:net';
 import type { NextRequest } from 'next/server';
 import { authenticator, SupabaseAuthError, SupabaseAuthUnavailableError, type SupabaseUser } from './auth';
-import { captureOperationalError, logOperationalEvent } from './observability';
+import { captureOperationalError, logOperationalEvent, withRequestPrivacy } from './observability';
 import { RateLimiter } from './rateLimit';
 import { serviceClient } from './runtime';
 import {
@@ -409,7 +409,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
       if (options.serviceRequired && !service) {
         throw new HttpError(503, 'The delivery database is not configured');
       }
-      response = await handler({
+      response = await withRequestPrivacy(options.capability === true, () => handler({
         request,
         route,
         requestId,
@@ -417,7 +417,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
         token,
         userClient,
         service,
-      });
+      }));
     } catch (error) {
       caught = error;
       response = failure(error);

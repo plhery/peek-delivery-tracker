@@ -1305,6 +1305,17 @@ describe('account postcodes', () => {
     // An account holds at most 500 parcels: the one given the same carrier is never cut off.
     expect(params.get('limit')).toBe('500');
   });
+
+  it('writes a parcel only at the tracking generation it was read at', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'parcel' }]).mockResolvedValueOnce([]);
+    await expect(client.updatePackageAtGeneration('parcel', 'generation-1', { dpd_postcode: '1000' })).resolves.toBe(true);
+    const params = new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams;
+    expect(Object.fromEntries(params)).toEqual({ id: 'eq.parcel', tracking_generation: 'eq.generation-1', select: 'id' });
+    expect(request.mock.calls[0]![1]).toMatchObject({ method: 'PATCH', body: { dpd_postcode: '1000' } });
+    // Another change since renewed the generation: nothing was written.
+    await expect(client.updatePackageAtGeneration('parcel', 'generation-1', { dpd_postcode: '1000' })).resolves.toBe(false);
+  });
 });
 
 describe('Friends passports', () => {

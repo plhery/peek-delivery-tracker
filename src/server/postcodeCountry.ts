@@ -1,6 +1,7 @@
 import 'server-only';
 import type { TrackingInput } from 'universal-parcel-scraper/node';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
+import type { SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
 
 /**
@@ -60,4 +61,22 @@ export function postcodeCountryWrite(parcel: JsonObject, country: string | null 
     data.routing = routing;
   }
   return { carrier_data: data, dpd_postcode: parcel.dpd_postcode ?? null };
+}
+
+/**
+ * Gives the postcode a carrier change stored (`postcode`) its country, or none for the carrier's home.
+ * The parcel is read back after the change: when it holds another postcode, another change (another
+ * device's) was saved since and keeps its own country, and one saved after the read refuses the write.
+ */
+export async function savePostcodeCountry(
+  service: Pick<SupabaseServiceClient, 'getPackage' | 'updatePackageAtGeneration'>,
+  packageId: string,
+  postcode: string | null,
+  country: string | null | undefined,
+): Promise<void> {
+  const changed = await service.getPackage(packageId);
+  const stored = changed && typeof changed.dpd_postcode === 'string' && changed.dpd_postcode ? changed.dpd_postcode : null;
+  if (!changed || stored !== postcode || typeof changed.tracking_generation !== 'string') return;
+  const write = postcodeCountryWrite(changed, country);
+  if (write) await service.updatePackageAtGeneration(packageId, changed.tracking_generation, write);
 }

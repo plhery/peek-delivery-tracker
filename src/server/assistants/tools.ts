@@ -23,7 +23,7 @@ import { queueCarrierCheck } from '../carrierCheck';
 import { withEventPlaces } from '../eventPlaces';
 import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
-import { holdsPostcodeCountry, postcodeCountryWrite } from '../postcodeCountry';
+import { holdsPostcodeCountry, savePostcodeCountry } from '../postcodeCountry';
 import { privateValues, redactedScans, viewerStatusText } from '../privateDetails';
 import { SupabaseError, type SupabaseServiceClient } from '../supabase';
 import { isRecord, type JsonObject } from '../types';
@@ -526,10 +526,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       throw error;
     }
     if (values.dpdPostcodeCountry || (isRecord(row.carrier_data) && row.carrier_data.postcode_country)) {
-      // The postcode's country is kept with the postcode the change stored.
-      const changed = await service.getOwnedPackage(id, caller.userId);
-      const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
-      if (write) await service.updatePackage(id, write);
+      // The postcode's country is kept with the postcode the change stored, unless another change was saved since.
+      await savePostcodeCountry(service, id, values.dpdPostcode, values.dpdPostcodeCountry);
     }
     logOperationalEvent('package_carrier_changed', {
       package_id: id,

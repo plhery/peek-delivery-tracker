@@ -1707,6 +1707,13 @@ export class SupabaseServiceClient extends SupabaseClient {
     })}`));
   }
 
+  /** Writes a parcel's values unless its tracking changed since it was read: a carrier or postcode saved since renews it. */
+  async updatePackageAtGeneration(packageId: string, generation: string, values: JsonObject): Promise<boolean> {
+    return rows(await this.request(`/rest/v1/packages?${query({
+      id: `eq.${packageId}`, tracking_generation: `eq.${generation}`, select: 'id',
+    })}`, { method: 'PATCH', body: values, prefer: 'return=representation' })).length > 0;
+  }
+
   /** Gives a parcel its owner's postcode, unless its tracking changed or it got a postcode since it was read. */
   async giveAccountPostcode(packageId: string, generation: string, values: JsonObject): Promise<boolean> {
     return rows(await this.request(`/rest/v1/packages?${query({

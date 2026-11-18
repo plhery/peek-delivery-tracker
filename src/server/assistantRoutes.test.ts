@@ -798,12 +798,14 @@ describe('the MCP endpoint', () => {
     ownParcel(parcel);
     const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
     vi.spyOn(service, 'enqueueSyncJob').mockResolvedValue({ row: { id: '8e000000-0000-4000-a000-000000000002' }, queued: true } as Awaited<ReturnType<typeof service.enqueueSyncJob>>);
-    const write = vi.spyOn(service, 'updatePackage').mockResolvedValue(undefined);
+    const write = vi.spyOn(service, 'updatePackageAtGeneration').mockResolvedValue(true);
+    const readBack = vi.spyOn(service, 'getPackage');
     const secret = connect(['parcels:edit']);
 
     // The row the change stores holds the postcode with the country the change kept: nothing to write after it.
-    const after = { ...parcel, carrier: 'spring-gds' };
-    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(parcel).mockResolvedValueOnce(after);
+    const after = { ...parcel, carrier: 'spring-gds', tracking_generation: 'generation-1' };
+    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(parcel);
+    readBack.mockResolvedValueOnce(after);
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds' })).result!.structuredContent).toMatchObject({ carrierId: 'spring-gds' });
     expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1000', null);
     expect(write).not.toHaveBeenCalled();
@@ -812,13 +814,20 @@ describe('the MCP endpoint', () => {
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds', postcode: '1000' })).result!.structuredContent)
       .toMatchObject({ checking: false });
     // A new postcode takes the country given with it.
-    const moved = { ...after, dpd_postcode: '1050', carrier_data: {} };
-    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(after).mockResolvedValueOnce(moved);
+    const moved = { ...after, dpd_postcode: '1050', carrier_data: {}, tracking_generation: 'generation-2' };
+    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(after);
+    readBack.mockResolvedValueOnce(moved);
     await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds', postcode: '1050', postcodeCountry: 'be' });
     expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1050', null);
-    expect(write).toHaveBeenLastCalledWith(parcel.id, expect.objectContaining({
+    expect(write).toHaveBeenLastCalledWith(parcel.id, 'generation-2', expect.objectContaining({
       carrier_data: expect.objectContaining({ postcode_country: { postcode: '1050', country: 'BE' } }),
     }));
+    // Another postcode saved since this change keeps its own country.
+    write.mockClear();
+    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(moved);
+    readBack.mockResolvedValueOnce({ ...moved, dpd_postcode: '75001', tracking_generation: 'generation-3' });
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds', postcode: '1060', postcodeCountry: 'be' });
+    expect(write).not.toHaveBeenCalled();
   });
 
   it('takes the last digits of the recipient\'s phone for a carrier that reads them, and keeps them unless given others', async () => {

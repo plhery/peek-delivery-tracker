@@ -189,19 +189,27 @@ class ParcelCacheFolder(private val folder: File) : ParcelCacheFiles {
 }
 
 /**
- * The account's export, written whole in `cacheDir/exports/<name>` over any of the same name, for the share sheet,
- * which takes it through the app's FileProvider (`uri`).
+ * The account's export, written whole in a folder of its own, `cacheDir/exports/<random>/<name>`, for the share sheet,
+ * which takes it through the app's FileProvider (`uri`). Each export has its own address: an app still holding an
+ * earlier one, another account's the same day among them, reads that one and never a later one. Those over a day old
+ * go as the next is written.
  */
-class CacheExportFiles(private val folder: File) : ExportFiles {
+class CacheExportFiles(private val folder: File, private val now: () -> Long = System::currentTimeMillis) : ExportFiles {
     override suspend fun write(name: String, data: ByteArray): File = withContext(Dispatchers.IO) {
         if (name.isEmpty() || name != File(name).name || name == "." || name == "..") throw IOException("Not a file name: $name")
-        val file = File(folder, name)
+        val own = File(folder, UUID.randomUUID().toString())
+        val cutoff = now() - KEPT_MILLIS
+        folder.listFiles()?.filter { it.lastModified() < cutoff }?.forEach { it.deleteRecursively() }
+        if (!own.mkdirs()) throw IOException("No folder for $name")
+        val file = File(own, name)
         AtomicBytesFile(file).write(data)
         file
     }
 
     companion object {
         fun of(context: Context): CacheExportFiles = CacheExportFiles(exportsFolder(context))
+
+        private const val KEPT_MILLIS = 24 * 60 * 60 * 1000L
 
         private fun exportsFolder(context: Context) = File(context.cacheDir, "exports")
 

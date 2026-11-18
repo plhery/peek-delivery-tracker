@@ -17,6 +17,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
@@ -232,10 +233,15 @@ class PersistenceTest {
     fun anExportIsWrittenWholeInTheCacheAndHandedOutThroughTheFileProvider() = runBlocking {
         val exports = CacheExportFiles.of(context)
         val file = exports.write("peek-export-2026-10-29.json", """{"packages":[]}""".toByteArray())
-        assertEquals(File(context.cacheDir, "exports/peek-export-2026-10-29.json"), file)
+        assertEquals(File(context.cacheDir, "exports"), file.parentFile?.parentFile)
+        assertEquals("peek-export-2026-10-29.json", file.name)
         assertEquals("""{"packages":[]}""", file.readText())
-        exports.write("peek-export-2026-10-29.json", "{}".toByteArray())
-        assertEquals("{}", file.readText())
+        // Another account's the same day has its own file and address: the first stays as it was handed out.
+        val later = exports.write("peek-export-2026-10-29.json", "{}".toByteArray())
+        assertNotEquals(file, later)
+        assertEquals("{}", later.readText())
+        assertEquals("""{"packages":[]}""", file.readText())
+        assertNotEquals(CacheExportFiles.uri(context, file), CacheExportFiles.uri(context, later))
 
         for (name in listOf("../escape.json", "exports/inner.json", "", "..")) {
             try {
@@ -248,6 +254,22 @@ class PersistenceTest {
         val uri = CacheExportFiles.uri(context, file)
         assertEquals("content", uri.scheme)
         assertEquals("${context.packageName}.exports", uri.authority)
-        assertEquals(listOf("exports", "peek-export-2026-10-29.json"), uri.pathSegments)
+        assertEquals("exports", uri.pathSegments.first())
+        assertEquals("peek-export-2026-10-29.json", uri.lastPathSegment)
+    }
+
+    /** An export over a day old goes as the next is written; a newer one stays for the app still reading it. */
+    @Test
+    fun anExportOverADayOldGoesAsTheNextIsWritten() = runBlocking {
+        var now = System.currentTimeMillis()
+        val exports = CacheExportFiles(File(context.cacheDir, "exports"), now = { now })
+        val old = exports.write("peek-export-2026-10-28.json", "{}".toByteArray())
+        old.parentFile!!.setLastModified(now - 25 * 60 * 60 * 1000L)
+        val recent = exports.write("peek-export-2026-10-29.json", "{}".toByteArray())
+        now += 60_000
+        val next = exports.write("peek-export-2026-10-29.json", "{}".toByteArray())
+        assertFalse(old.exists())
+        assertTrue(recent.exists())
+        assertTrue(next.exists())
     }
 }

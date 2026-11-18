@@ -154,9 +154,11 @@ import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.platform.Device
+import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
+import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CarrierTruck
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -408,6 +410,10 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         if (state.addition?.id != request.id) return@LaunchedEffect
         if (request.scanning && canScan) form.showingScanner = true else focus.request(ParcelAddition.Field.Tracking)
     }
+    // TalkBack starts at the title, as it does on its own over a phone's whole screen: in a form nothing else takes its
+    // focus, and with the keyboard coming up it goes back to the key it was last on.
+    val titleFocus = remember { AccessibilityFocus() }
+    LaunchedEffect(request.id) { titleFocus.request() }
     // A carrier's postcode field shows what was given for it in Add; else a required one starts from the last one given
     // that fits, and an optional one is only offered. The phone digits typed for one carrier don't go to the next.
     val resolved = addition.resolvedCarrier
@@ -513,14 +519,14 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
             .then(if (cover) Modifier.windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)) else Modifier)
             .onSizeChanged { viewHeight = it.height },
     ) {
-        if (!headingScrolls) AddHeading(saving, state::closeAdd, heading)
+        if (!headingScrolls) AddHeading(saving, state::closeAdd, titleFocus, heading)
         KeyboardScrollColumn(
             Modifier.weight(1f).fillMaxWidth(),
             rememberScrollState(),
             dismissesKeyboard = true,
             contentModifier = Modifier.fillMaxWidth(),
         ) {
-            if (headingScrolls) AddHeading(saving, state::closeAdd, heading)
+            if (headingScrolls) AddHeading(saving, state::closeAdd, titleFocus, heading)
             // While it saves, the form's controls are off and dim as they do (`.disabled(saving)`); TalkBack still
             // reads them, as off.
             CompositionLocalProvider(LocalFormEnabled provides !saving) {
@@ -792,11 +798,11 @@ private fun AnimatedVisibilityScope.Going(content: @Composable () -> Unit) {
 }
 
 /**
- * `heading`: "Add a parcel" in title2 semibold, a heading, and the ✕ on a circle of the sheet's control 36 across in a
- * 44 square, read "Close", off while Add saves.
+ * `heading`: "Add a parcel" in title2 semibold, a heading TalkBack starts at ([titleFocus]), and the ✕ on a circle of
+ * the sheet's control 36 across in a 44 square, read "Close", off while Add saves.
  */
 @Composable
-private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = Modifier) {
+private fun AddHeading(saving: Boolean, close: () -> Unit, titleFocus: AccessibilityFocus, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val closeLabel = localized("common.close")
@@ -811,7 +817,7 @@ private fun AddHeading(saving: Boolean, close: () -> Unit, modifier: Modifier = 
         ) {
             Text(
                 localized("add.title"),
-                Modifier.weight(1f).testTag(ADD_TITLE).semantics { heading() },
+                Modifier.weight(1f).testTag(ADD_TITLE).semantics { heading() }.accessibilityFocus(titleFocus),
                 color = colors.ink,
                 style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).copy(letterSpacing = (-0.5).sp).sfLines(),
             )

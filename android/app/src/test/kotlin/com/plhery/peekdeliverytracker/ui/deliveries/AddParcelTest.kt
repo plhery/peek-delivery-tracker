@@ -1584,6 +1584,30 @@ class AddParcelTest {
         return pixel.red + pixel.green + pixel.blue
     }
 
+    /**
+     * TalkBack starts at the title, the keyboard on the field: in a form nothing else takes TalkBack's focus, and with the
+     * keyboard coming up it went back to the key it was last on.
+     */
+    @Test
+    @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
+    fun talkBackStartsAtTheTitleOfTheForm() {
+        show()
+        val view = talkBack()
+        open()
+        assertTrue(deliveries.sheetsAsForms)
+        assertTrue(node(ADD_TITLE).hasTalkBackFocus(view))
+        node(ADD_TRACKING).assertIsFocused()
+    }
+
+    @Test
+    fun talkBackStartsAtTheTitleOverTheWholeScreen() {
+        show()
+        val view = talkBack()
+        open()
+        assertTrue(node(ADD_TITLE).hasTalkBackFocus(view))
+        node(ADD_TRACKING).assertIsFocused()
+    }
+
     @Test
     @Config(qualifiers = "w1032dp-h1376dp-xhdpi")
     fun sideBySideAddIsAFormInTheWindowsMiddle() {

@@ -478,6 +478,32 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertNotNil(DeviceClock.body(unnamed, now: twoDaysLater, timeZone: california)?.range(of: "16:51"))
     }
 
+    func testADeliveryTimeLeavesTheParcelsNameAndPlaceAsTheyWereWritten() throws {
+        let california = try XCTUnwrap(TimeZone(identifier: "America/Los_Angeles"))
+        let push: [AnyHashable: Any] = [
+            "scan_at": "2026-09-06T23:51:00.000Z",
+            "body_same_day": "Clock {{time}} · Mum · delivered at {{time}}\nShop {{date}}",
+            "body_other_day": "Clock {{time}} · Mum · delivered on {{date}} at {{time}}\nShop {{date}}",
+            "date_locale": "en-CH",
+        ]
+        XCTAssertEqual(
+            DeviceClock.body(push, now: try instant("2026-09-07T03:00:00Z"), timeZone: california),
+            "Clock {{time}} · Mum · delivered at 16:51\nShop {{date}}"
+        )
+        XCTAssertEqual(
+            DeviceClock.body(push, now: try instant("2026-09-08T12:00:00Z"), timeZone: california),
+            "Clock {{time}} · Mum · delivered on 6 September at 16:51\nShop {{date}}"
+        )
+        // Without a name, the whole first line is the sentence.
+        let unnamed: [AnyHashable: Any] = push.merging([
+            "body_same_day": "Delivered at {{time}}\nShop {{date}}", "body_other_day": "Delivered on {{date}} at {{time}}",
+        ]) { $1 }
+        XCTAssertEqual(
+            DeviceClock.body(unnamed, now: try instant("2026-09-07T03:00:00Z"), timeZone: california),
+            "Delivered at 16:51\nShop {{date}}"
+        )
+    }
+
     func testTheNotificationServiceWritesOnTheClockChosenInTheApp() throws {
         let suite = "device-clock-\(UUID().uuidString)"
         let shared = try XCTUnwrap(UserDefaults(suiteName: suite))

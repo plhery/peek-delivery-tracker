@@ -56,9 +56,19 @@ enum DeviceClock {
             if day.locale.language.languageCode?.identifier == "en" { (formatter.amSymbol, formatter.pmSymbol) = ("AM", "PM") }
             time = formatter.string(from: scanned)
         }
-        return (calendar.isDate(scanned, inSameDayAs: now) ? sameDay : otherDay)
+        return fill(calendar.isDate(scanned, inSameDayAs: now) ? sameDay : otherDay, time: time, date: day.string(from: scanned))
+    }
+
+    /// Writes the time and the day into the sentence alone: the end of the first line, after the parcel's name and
+    /// its " · " (`notificationBody` in src/server/push.ts), or the whole line without a name. The name and the place
+    /// on the line under it read as they were written, even with `{{time}}` in them.
+    private static func fill(_ body: String, time: String, date: String) -> String {
+        let lineEnd = body.firstIndex(of: "\n") ?? body.endIndex
+        let start = body[..<lineEnd].range(of: " · ", options: .backwards)?.upperBound ?? body.startIndex
+        let sentence = body[start..<lineEnd]
             .replacingOccurrences(of: "{{time}}", with: time)
-            .replacingOccurrences(of: "{{date}}", with: day.string(from: scanned))
+            .replacingOccurrences(of: "{{date}}", with: date)
+        return String(body[..<start]) + sentence + String(body[lineEnd...])
     }
 
     /// `2026-09-06T23:51:00.000Z`, as Luxon's `toISO` writes it, or without its fraction.

@@ -1324,8 +1324,14 @@ export class TrackingRouter {
         }
         // An answer names the rows it holds back as written ahead beside the scans it keeps, as a
         // failure does: a provider asked after it shows its copies of them as scans.
-        holdBack(carrier, value.result.written_ahead ?? [], value.result);
-        keepPlanned(carrier, plannedStepsOf(value.result));
+        const keepAnswer = (source: string, answer: CarrierResult) => {
+          holdBack(source, answer.written_ahead ?? [], answer);
+          keepPlanned(source, plannedStepsOf(answer));
+        };
+        if (value.earlierResult && value.earlierCarrierId && value.earlierCarrierId !== value.sourceCarrierId) {
+          keepAnswer(value.earlierCarrierId, value.earlierResult);
+        }
+        keepAnswer(value.sourceCarrierId, value.result);
         // Estimate fields the adapter does not read yet that this answer fills: the review keeps
         // the number, so a capture of the reply can teach the adapter their shape.
         for (const field of unreadEstimates(value.result)) report('unread_delivery_estimate', `${carrier}: ${field}`);

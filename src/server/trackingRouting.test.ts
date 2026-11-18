@@ -869,6 +869,10 @@ describe('persistent tracking routing', () => {
     const { router, direct, universal } = setup();
     const planned = [{ time: '2026-09-12T10:00:00+08:00', description: 'Departed the origin hub', stage: 'in_transit' },
       { time: '2026-09-15T15:00:00+08:00', description: 'Delivered', stage: 'delivered' }];
+    direct.mockResolvedValue({ ...directValue('posti'), earlierCarrierId: 'la-poste', earlierResult: history(),
+      result: { ...history(), planned_events: planned } as CarrierResult });
+    const handoff = await router.fetch(parcel({ carrier: 'la-poste' }), false);
+    expect((handoff.result.routing as JsonObject).planned).toEqual({ number: 'TEST1234', carriers: { posti: planned } });
     // The carrier answers with its scan and lists, beside it, the steps it wrote ahead.
     direct.mockResolvedValue({ ...directValue(), result: { ...history(), planned_events: planned } as CarrierResult });
     const first = await router.fetch(parcel({ carrier: 'ups' }), false);

@@ -23,7 +23,7 @@ import { providerAllowed } from './providerPolicy';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
-import { plannedStepsOf, type PlannedStep } from './plannedSteps';
+import { atWrittenClock, plannedStepsOf, type PlannedStep } from './plannedSteps';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
@@ -1230,9 +1230,9 @@ export class TrackingRouter {
     const heldBack = () => [...new Set([...writtenAhead, ...Object.values(heldBackBy()).flat()])];
     const holdBack = (carrier: string, named: readonly string[], answer?: CarrierResult) => {
       writtenAhead.push(...named);
-      const shown = new Set((answer?.events ?? []).flatMap((event) => [event.time, event.local_time]));
+      const shown = answer?.events ?? [];
       const carriers = heldBackBy();
-      const clocks = [...new Set([...carriers[carrier] ?? [], ...named])].filter((clock) => !shown.has(clock)).slice(-WRITTEN_AHEAD_KEPT);
+      const clocks = [...new Set([...carriers[carrier] ?? [], ...named])].filter((clock) => !shown.some((event) => atWrittenClock(event, [clock]))).slice(-WRITTEN_AHEAD_KEPT);
       if (clocks.length) carriers[carrier] = clocks;
       else delete carriers[carrier];
       if (Object.keys(carriers).length) state.written_ahead = { number, carriers };

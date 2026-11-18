@@ -344,7 +344,7 @@ test('lists the device’s other parcels at the foot of a page, and opens one on
   await expect(others.getByRole('link')).toContainText('DEMOGLS…0009');
   await expect(others.getByRole('link')).toContainText('In transit');
   await expect(others.getByText('Kept in this browser only.')).toBeVisible();
-  await expect(others.getByRole('button', { name: 'Create an account to keep them, with notifications' })).toBeVisible();
+  await expect(others.getByRole('button', { name: 'Sign in to keep them on all your devices' })).toBeVisible();
   await others.getByRole('link').click();
   await expect(page).toHaveURL(first);
   await expect(status(page)).toHaveText('In transit');

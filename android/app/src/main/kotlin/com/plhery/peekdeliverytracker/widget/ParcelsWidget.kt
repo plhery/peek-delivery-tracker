@@ -70,7 +70,7 @@ class ParcelsWidget : GlanceAppWidget() {
          */
         suspend fun draw(context: Context) {
             val manager = AppWidgetManager.getInstance(context)
-            for (id in manager.getAppWidgetIds(ComponentName(context, NextDeliveryWidgetReceiver::class.java))) {
+            for (id in DeliveryWidgetUpdates.placedIds(context)) {
                 draw(context, id, manager.getAppWidgetOptions(id))
             }
         }
@@ -127,7 +127,9 @@ internal fun ParcelsWidgetBody(source: DeliveryWidgetSource) {
  * that draws at the sizes the launcher reports, which would draw over [ParcelsWidget.draw]'s; the list's taps open the
  * app ([openParcel], [openList]) and need no session.
  */
-class NextDeliveryWidgetReceiver : GlanceAppWidgetReceiver() {
+class ParcelsWidgetReceiver : NextDeliveryWidgetReceiver()
+
+open class NextDeliveryWidgetReceiver : GlanceAppWidgetReceiver() {
     override val glanceAppWidget: GlanceAppWidget = ParcelsWidget()
 
     @SuppressLint("MissingSuperCall")
@@ -168,6 +170,6 @@ class NextDeliveryWidgetReceiver : GlanceAppWidgetReceiver() {
 
     override fun onDisabled(context: Context) {
         super.onDisabled(context)
-        DeliveryWidgetUpdates.cancel(context)
+        if (DeliveryWidgetUpdates.placedIds(context, excluding = javaClass).isEmpty()) DeliveryWidgetUpdates.cancel(context)
     }
 }

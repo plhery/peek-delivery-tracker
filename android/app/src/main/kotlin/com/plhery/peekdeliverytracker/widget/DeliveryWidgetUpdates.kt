@@ -182,9 +182,13 @@ object DeliveryWidgetUpdates {
     }
 
     /** Whether a widget is on a home screen. */
-    fun isPlaced(context: Context): Boolean {
-        val widgets = context.getSystemService(AppWidgetManager::class.java) ?: return false
-        return widgets.getAppWidgetIds(ComponentName(context, NextDeliveryWidgetReceiver::class.java)).isNotEmpty()
+    fun isPlaced(context: Context): Boolean = placedIds(context).isNotEmpty()
+
+    internal fun placedIds(context: Context, excluding: Class<*>? = null): List<Int> {
+        val widgets = context.getSystemService(AppWidgetManager::class.java) ?: return emptyList()
+        return listOf(NextDeliveryWidgetReceiver::class.java, ParcelsWidgetReceiver::class.java)
+            .filter { it != excluding }
+            .flatMap { widgets.getAppWidgetIds(ComponentName(context, it)).asList() }
     }
 
     private fun refresh(context: Context): PendingIntent = PendingIntent.getBroadcast(

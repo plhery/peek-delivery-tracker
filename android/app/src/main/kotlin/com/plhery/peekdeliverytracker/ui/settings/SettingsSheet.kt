@@ -49,6 +49,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.disabled
 import androidx.compose.ui.semantics.heading
@@ -256,9 +257,11 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
     Layout(
         content = {
             Box(
-                Modifier.graphicsLayer {
-                    if (reduceMotion) alpha = 1f - push.value else translationX = -push.value * size.width * PUSH_PARALLAX
-                },
+                Modifier
+                    .graphicsLayer {
+                        if (reduceMotion) alpha = 1f - push.value else translationX = -push.value * size.width * PUSH_PARALLAX
+                    }
+                    .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier),
             ) {
                 SettingsRootPage(state, scrolls.root, working, rowFocus, inboxFocus, inboxOffered) { nav.pushed.value = it }
             }
@@ -281,7 +284,8 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
     ) { measurables, constraints ->
         val placeables = measurables.map { it.measure(constraints) }
         layout(constraints.maxWidth, constraints.maxHeight) {
-            // Under the page pushed once it is in, Settings is kept as it was, out of sight and of TalkBack's reach.
+            // Under the page pushed once it is in, Settings is kept as it was, out of sight, and its semantics are
+            // cleared above: Compose still hands TalkBack an unplaced layout's nodes.
             if (!covered) placeables[0].place(0, 0)
             placeables.getOrNull(1)?.place(0, 0)
         }

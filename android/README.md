@@ -32,7 +32,9 @@ The tests in `app/src/androidTest`, and Google Play's own in `app/src/androidTes
 Accessibility Test Framework's checks, Accessibility Scanner's, on the main screens in both appearances through
 Compose's accessibility checks: an error fails it, and the text contrast it warns of goes to the log under `PeekAccessibility`. Robolectric
 skips these checks. On the same screens `TalkBackScreensTest` holds what TalkBack reads, in order and as it says it,
-so a pass with TalkBack on a phone only has to confirm it.
+so a pass with TalkBack on a phone only has to confirm it. A layer left unplaced under a page pushed over it (Settings
+under its pages, Change carrier's form under the picker) still reaches TalkBack on a device, though not that test, so
+its semantics are cleared while it is covered.
 
 ## CI
 

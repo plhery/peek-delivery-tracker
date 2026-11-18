@@ -7,6 +7,7 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.longClick
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTouchInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -26,6 +27,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.card
 import com.plhery.peekdeliverytracker.ui.deliveries.cardNamed
 import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
+import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ADD_BY_EMAIL
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -50,8 +53,8 @@ class TalkBackScreensTest {
     @get:Rule
     val rules: RuleChain = RuleChain.outerRule(ZurichTime()).around(compose)
 
-    private fun show(state: AuthenticationState, parcels: List<Parcel> = DemoCards.parcels()) {
-        val source = FakeDeliveries(parcels, state)
+    private fun show(state: AuthenticationState, parcels: List<Parcel> = DemoCards.parcels(), prepare: FakeDeliveries.() -> Unit = {}) {
+        val source = FakeDeliveries(parcels, state).apply(prepare)
         compose.waitsForMaps()
         compose.setContent { RootHost(state = state, source = source) }
         settle()
@@ -262,6 +265,33 @@ class TalkBackScreensTest {
                 "Time format [dropdownlist, Automatic (24-hour)]",
                 "Distance units [dropdownlist, Automatic (km)]",
                 "Mark new updates, A dot on parcels with updates since you last opened them. [switch, on]",
+            ),
+        )
+    }
+
+    @Test
+    fun theEmailPage() {
+        show(READER) { addByEmailClient.offer = AddByEmailFixtures.offer() }
+        compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+        settle()
+        compose.onNodeWithTag(SETTINGS_ADD_BY_EMAIL).performScrollTo().performClick()
+        settle()
+        assertSpoken(
+            "the email page",
+            listOf(
+                "Drag handle",
+                "Settings [button]",
+                "Add parcels by email [heading]",
+                "EXPERIMENTAL",
+                "Forward a shipping email to your Peek address and Peek adds the parcel. This feature is experimental: it can miss a parcel, and it may change.",
+                "YOUR ADDRESS [heading]",
+                "add+abcdefghijklmnop@in.example.com",
+                "Copy address [button]",
+                "Share [button]",
+                "Forward automatically [button]",
+                "Get a new address [button]",
+                "Notify me when an email adds a parcel [switch, on]",
+                "Turn off [button]",
             ),
         )
     }

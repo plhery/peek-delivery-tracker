@@ -24,7 +24,6 @@ import androidx.compose.ui.test.assertHasClickAction
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsFocused
-import androidx.compose.ui.test.assertIsNotDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.assertTextEquals
@@ -335,7 +334,9 @@ class ChangeCarrierTest {
         assertMedium()
         pushPicker()
         node(CARRIER_PICKER).assertIsDisplayed()
-        node(CHANGE_CARRIER_ROW).assertIsNotDisplayed()
+        // Under the picker, the form is out of sight and of TalkBack's reach: gone from the merged tree, which keeps an
+        // unplaced layout's nodes.
+        assertTrue(compose.onAllNodesWithTag(CHANGE_CARRIER_ROW).fetchSemanticsNodes().isEmpty())
         // The full list, and room for its letter rail.
         assertLarge()
         // Automatic detection is offered and chosen.

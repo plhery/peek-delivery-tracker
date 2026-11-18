@@ -268,7 +268,11 @@ private fun ChangeCarrierView(
     val covered by remember { derivedStateOf { push.value >= 1f } }
     Layout(
         content = {
-            Box(Modifier.graphicsLayer { translationX = -push.value * size.width * PUSH_PARALLAX }) {
+            Box(
+                Modifier
+                    .graphicsLayer { translationX = -push.value * size.width * PUSH_PARALLAX }
+                    .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier),
+            ) {
                 ChangeCarrierForm(
                     state, request, form, change, saving, carrierRow,
                     onPush = {
@@ -297,7 +301,8 @@ private fun ChangeCarrierView(
     ) { measurables, constraints ->
         val placeables = measurables.map { it.measure(constraints) }
         layout(constraints.maxWidth, constraints.maxHeight) {
-            // Under the picker once it is in, the form is kept as it was, out of sight and of TalkBack's reach.
+            // Under the picker once it is in, the form is kept as it was, out of sight, and its semantics are cleared
+            // above: Compose still hands TalkBack an unplaced layout's nodes.
             if (!covered) placeables[0].place(0, 0)
             placeables.getOrNull(1)?.place(0, 0)
         }

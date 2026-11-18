@@ -1569,6 +1569,32 @@ class ParcelLogicTests {
         assertEquals(0, stats.decemberDeliveryCount)
     }
 
+    /** A border is crossed when a scan's country differs from one scanned at an earlier moment, not the same one. */
+    @Test
+    fun passportCrossesABorderOnlyFromAnEarlierMoment() {
+        fun shipment(vararg scans: Triple<TrackingStage, String, String?>): Parcel {
+            val id = UUID.randomUUID()
+            return makeParcel(id, events = scans.map { (stage, date, location) -> event(id, stage, date).copy(location = location) })
+        }
+        val start = Instant.parse("2026-11-01T00:00:00Z")
+        val long = (0 until 400).map { Triple(TrackingStage.InTransit, start.plusSeconds(60L * it).toString(), "DE") }
+        val domestic = shipment(*(long + Triple(TrackingStage.Delivered, "2026-11-02T00:00:00Z", "DE")).toTypedArray())
+        // Two countries at the first moment, then one of them: the other was seen earlier.
+        val sameMomentThenLater = shipment(
+            Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", "DE"), Triple(TrackingStage.InTransit, "2026-11-01T00:00:00Z", "CH"),
+            Triple(TrackingStage.Delivered, "2026-11-02T00:00:00Z", "CH"),
+        )
+        // The other country comes after a long run in one, at the same moment as the run's last scan.
+        val lateCrossing = shipment(
+            *(long + Triple(TrackingStage.InTransit, long.last().second, "AT") + Triple(TrackingStage.Delivered, "2026-11-02T00:00:00Z", "AT"))
+                .toTypedArray(),
+        )
+        assertEquals(0, PassportStatistics(listOf(domestic), timeZone = ZoneOffset.UTC).crossBorderCount)
+        assertEquals(1, PassportStatistics(listOf(sameMomentThenLater), timeZone = ZoneOffset.UTC).crossBorderCount)
+        assertEquals(1, PassportStatistics(listOf(lateCrossing), timeZone = ZoneOffset.UTC).crossBorderCount)
+        assertEquals(2, PassportStatistics(listOf(domestic, sameMomentThenLater, lateCrossing), timeZone = ZoneOffset.UTC).crossBorderCount)
+    }
+
     @Test
     fun passportCountsAStateCodeOnlyInTheCountryTheScanWasPlacedIn() {
         class Scan(val stage: TrackingStage, val date: String, val location: String?, val placed: String?)

@@ -112,11 +112,7 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
                 val located = physical.filter { it.date <= completion.date }.mapNotNull { scan ->
                     TrackingLocation.countryCode(scan.event.location, scan.event.place?.country)?.let { it to scan.date }
                 }
-                if (located.indices.any { index ->
-                        val scan = located[index]
-                        (0 until index).any { located[it].second < scan.second && !located[it].first.equalsCanonically(scan.first) }
-                    }
-                ) crossBorder += 1
+                if (crossesABorder(located)) crossBorder += 1
             }
             val first = physical.firstOrNull()
             if (!datesAreComplete || first == null ||
@@ -169,6 +165,28 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
             TrackingStage.Exception, TrackingStage.OutForDelivery, TrackingStage.FailedAttempt,
             TrackingStage.ReadyForPickup, TrackingStage.Delivered, TrackingStage.Returned,
         )
+
+        /**
+         * Whether a scan's country differs from one scanned at an earlier moment (the iPhone's pairwise
+         * `located.prefix(index).contains { $0.date < scan.date && $0.country != scan.country }`), in one pass over
+         * the scans in order: the countries seen before each moment, compared canonically, as Swift compares Strings.
+         */
+        private fun crossesABorder(located: List<Pair<String, Instant>>): Boolean {
+            val before = HashSet<String>()
+            val atThisMoment = HashSet<String>()
+            var moment: Instant? = null
+            for ((country, date) in located) {
+                if (moment == null || moment < date) {
+                    before += atThisMoment
+                    atThisMoment.clear()
+                    moment = date
+                }
+                val code = country.nfc()
+                if (before.any { it != code }) return true
+                atThisMoment += code
+            }
+            return false
+        }
 
         private val earlier = Comparator<DatedEvent> { left, right ->
             if (left.date != right.date) return@Comparator left.date.compareTo(right.date)

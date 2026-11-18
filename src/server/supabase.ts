@@ -1610,16 +1610,18 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /** Trades a refresh token for a new access token, and a new refresh token unless the grant keeps its own. */
   async refreshAssistantTokens(input: {
-    refreshDigest: string; clientId: string; accessDigest: string; accessExpires: Date; newRefreshDigest: string; refreshExpires: Date;
-  }): Promise<(AssistantIssue & { rotated: boolean }) | null> {
+    scopes?: string[]; refreshDigest: string; clientId: string; accessDigest: string; accessExpires: Date; newRefreshDigest: string; refreshExpires: Date;
+  }): Promise<(AssistantIssue & { rotated: boolean }) | 'invalid_scope' | null> {
     const result = await this.request('/rest/v1/rpc/refresh_assistant_tokens', {
       method: 'POST',
       body: {
+        ...(input.scopes ? { p_scopes: input.scopes } : {}),
         p_refresh: input.refreshDigest, p_client_id: input.clientId, p_access: input.accessDigest,
         p_access_expires: input.accessExpires.toISOString(), p_new_refresh: input.newRefreshDigest,
         p_refresh_expires: input.refreshExpires.toISOString(),
       },
     });
+    if (isRecord(result) && result.error === 'invalid_scope') return 'invalid_scope';
     const issue = assistantIssue(result);
     return issue && isRecord(result) ? { ...issue, rotated: result.rotated === true } : null;
   }

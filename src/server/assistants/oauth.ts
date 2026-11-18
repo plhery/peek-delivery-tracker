@@ -150,10 +150,15 @@ export async function exchangeToken(
     case 'refresh_token': {
       const presented = form.get('refresh_token');
       if (!presented) return oauthError('invalid_request', 'refresh_token is required');
+      const scope = form.get('scope');
+      const scopes = scope === null ? undefined : [...new Set(scope.trim().split(/\s+/))];
+      if (scopes?.some((s) => !SCOPES.includes(s as Scope))) return oauthError('invalid_scope', 'Unsupported refresh scope');
       const issued = await service.refreshAssistantTokens({
+        ...(scopes ? { scopes } : {}),
         refreshDigest: secretDigest(presented), clientId, accessDigest: secretDigest(access), accessExpires,
         newRefreshDigest: secretDigest(refresh), refreshExpires,
       });
+      if (issued === 'invalid_scope') return oauthError('invalid_scope', 'Scope exceeds the original grant');
       if (!issued) return oauthError('invalid_grant', 'The refresh token is unknown, expired or revoked');
       if (!(await assistantsOpenToAccount(settings, service, issued.userId, now))) return oauthError('invalid_grant', CLOSED_ACCOUNT);
       return tokenAnswer(access, accessExpires, issued.rotated ? refresh : null, issued.scopes);

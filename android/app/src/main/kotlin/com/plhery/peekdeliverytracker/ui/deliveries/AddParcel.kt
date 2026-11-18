@@ -264,6 +264,7 @@ internal class AddForm(
     preparedFor: CarrierId?,
     showingScanner: Boolean,
     phoneDigits: String,
+    digitsNumber: String?,
 ) {
     var label by mutableStateOf(label)
     var trackingInput by mutableStateOf(trackingInput)
@@ -286,6 +287,9 @@ internal class AddForm(
 
     /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
     var phoneDigits by mutableStateOf(phoneDigits)
+
+    /** The number the phone digits go with: another one starts them empty (`ParcelPhoneInput`). */
+    var digitsNumber = digitsNumber
     var lookupAttempt by mutableIntStateOf(lookupAttempt)
     var showingPicker by mutableStateOf(showingPicker)
     var showingScanner by mutableStateOf(showingScanner)
@@ -316,6 +320,7 @@ internal class AddForm(
             verifiedCarrier = null, lookedUp = null, trackingUrl = "", postcodes = CarrierPostcodes(),
             postcodeFills = emptyMap(), lookupAttempt = 0, showingPicker = false,
             didFocus = false, pasteFailed = false, preparedFor = null, showingScanner = false, phoneDigits = "",
+            digitsNumber = null,
         )
 
         val Saver = listSaver<AddForm, Any>(
@@ -328,7 +333,7 @@ internal class AddForm(
                     it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
                     it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
-                    it.phoneDigits,
+                    it.phoneDigits, it.digitsNumber ?: NONE,
                 )
             },
             restore = {
@@ -342,7 +347,7 @@ internal class AddForm(
                     it[6] as String, CarrierPostcodes.from(texts(7), texts(8)),
                     PostcodeFill.from(texts(9)), it[10] as Int,
                     it[11] as Boolean, it[12] as Boolean, it[13] as Boolean, kept(14)?.let(::CarrierId), it[20] as Boolean,
-                    it[21] as String,
+                    it[21] as String, kept(22),
                 )
             },
         )
@@ -417,13 +422,20 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     val titleFocus = remember { AccessibilityFocus() }
     LaunchedEffect(request.id) { titleFocus.request() }
     // A carrier's postcode field shows what was given for it in Add; else a required one starts from the last one given
-    // that fits, and an optional one is only offered. The phone digits typed for one carrier don't go to the next.
+    // that fits, and an optional one is only offered. The phone digits typed for one carrier don't go to the next, nor
+    // those typed for one number.
     val resolved = addition.resolvedCarrier
     LaunchedEffect(resolved) {
         if (form.preparedFor == resolved) return@LaunchedEffect
         form.preparedFor = resolved
         form.phoneDigits = ""
         prepareRequiredDetails(form, current(), source.givenPostcodes)
+    }
+    val number = addition.normalizedNumber
+    LaunchedEffect(number) {
+        if (form.digitsNumber == number) return@LaunchedEffect
+        form.digitsNumber = number
+        form.phoneDigits = ""
     }
     SensoryFeedbackEffect(SensoryFeedback.Selection, resolved) { old, new -> old != new && new != CarrierId.Unknown }
     // Amazon numbers are verified before they can be added, a moment after the number stops changing, given as typed

@@ -590,6 +590,27 @@ class AddParcelTest {
         assertEquals("J&T Express Mexico's phone digits are carried over to J&T Express China", "", fieldText(ADD_PHONE_DIGITS))
     }
 
+    /** Nor to another number with the same carrier, the next recipient's; through the window made again they stay. */
+    @Test
+    fun thePhoneDigitsClearWhenTheNumberChanges() {
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open()
+        type("JMX000000000001")
+        leave()
+        node(ADD_PHONE_DIGITS).performTextInput("0472")
+        compose.waitForIdle()
+
+        recreation.recreate(parceled = true)
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertEquals("0472", fieldText(ADD_PHONE_DIGITS))
+        type("JMX000000000002")
+        leave()
+        assertTrue(exists(ADD_PHONE_DIGITS))
+        assertEquals("The first parcel's phone digits are carried over to the next", "", fieldText(ADD_PHONE_DIGITS))
+    }
+
     /** A parcel followed without an account: the digits go with its lookup alone, which the lock line says. */
     @Test
     fun aGuestIsToldTheDigitsStayPrivate() {

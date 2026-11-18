@@ -2580,6 +2580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "jd-logistics-sendungsverfolgung",
+      "title": "JD Logistics Sendungsverfolgung: Nummern, Status & Kontakt",
+      "name": "JD Logistics",
+      "color": "#e1251b"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "huahan-logistics-sendungsverfolgung",
@@ -3270,6 +3278,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b8f91"
     },
     {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "suivi-colis-jd-logistics",
+      "title": "Suivi colis JD Logistics\u00a0: numéros JD, statuts et contact",
+      "name": "JD Logistics",
+      "color": "#e1251b"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "suivi-colis-huahan-logistics",
@@ -3846,6 +3862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Chunghwa Post (Taiwan): codice, stati e consegna",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "tracciamento-jd-logistics",
+      "title": "Tracciamento JD Logistics: codici JD, stati e contatti",
+      "name": "JD Logistics",
+      "color": "#e1251b"
     },
     {
       "id": "huahan",
@@ -4426,6 +4450,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e52021"
     },
     {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "seguimiento-jd-logistics",
+      "title": "Seguimiento de JD Logistics: números JD, estados y contacto",
+      "name": "JD Logistics",
+      "color": "#e1251b"
+    },
+    {
       "id": "huahan",
       "catalog": "huahan",
       "slug": "seguimiento-huahan-logistics",
@@ -4884,6 +4916,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "seguimento-straightship",
+      "title": "Seguimento Straightship: números STRTD e entregas",
+      "name": "Straightship",
+      "color": "#6aae66"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "seguimento-yto-express",
@@ -4954,6 +4994,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GEODIS Polónia: número PL, estados e entrega",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "seguimento-jd-logistics",
+      "title": "Seguimento JD Logistics: códigos JD, estados e contactos",
+      "name": "JD Logistics",
+      "color": "#e1251b"
     },
     {
       "id": "huahan",
@@ -5472,6 +5520,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "sledzenie-przesylek-straightship",
+      "title": "Śledzenie przesyłek Straightship: numery STRTD i doręczenia",
+      "name": "Straightship",
+      "color": "#6aae66"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "sledzenie-yto-express",
@@ -5542,6 +5598,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Polska (Pekaes): śledzenie przesyłki i statusy",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "jd-logistics",
+      "catalog": "jd-logistics",
+      "slug": "sledzenie-przesylek-jd-logistics",
+      "title": "Śledzenie przesyłek JD Logistics: numery, statusy i kontakt",
+      "name": "JD Logistics",
+      "color": "#e1251b"
     },
     {
       "id": "huahan",

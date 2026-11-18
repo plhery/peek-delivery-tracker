@@ -106,6 +106,18 @@
       "execErrState": "KeepLast",
       "summary": "A check found a scan dated over an hour after it, on a parcel not flagged before: usually a carrier's clock read in the wrong zone.",
       "description": "A check flags future_event_timestamp when one of its scans is dated over an hour after the check started. A parcel counts in the hour its first flagged check started, so the checks that repeat the scan stay quiet and the rule clears an hour later. The \"Future scans\" section of ops/review/signals.sql names the parcel by short id, its carrier and the provider that dated the scan. An adapter or provider that reads a local clock in the wrong zone is fixed in Universal Parcel Scraper (the adapters lane)."
+    },
+    {
+      "uid": "peek-silent-sources",
+      "title": "Peek source finding no parcels",
+      "datasource": "metrics",
+      "sql": "select now() as time, silent_sources_3h as value from metrics.health",
+      "for": "0s",
+      "severity": "warning",
+      "noDataState": "OK",
+      "execErrState": "KeepLast",
+      "summary": "A carrier or provider was asked about 20 parcels or more in the last 3 hours and found none of them: its answers changed, or it stopped answering.",
+      "description": "Each check leaves a provider health sample for every carrier or provider it asked; the rule counts those asked 20 times or more in 3 hours without one ok sample. A \"not found\" or \"no history\" answer counts as healthy, so a provider that says it has no history for every number opens no incident and Sentry stays quiet. tracking_health_samples by subject and details->>'category' over the last 3 hours names it. Adapters and providers are fixed in Universal Parcel Scraper (the adapters lane); a carrier that refuses Peek's requests is also its own Sentry incident."
     }
   ]
 }

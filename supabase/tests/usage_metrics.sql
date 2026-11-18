@@ -217,12 +217,41 @@ begin
 end;
 $$;
 
+-- A carrier or provider asked about 20 parcels or more in the last three hours that found none of
+-- them counts once, whether it said it had no history or failed; one that found one, was asked
+-- less, or was asked earlier does not, nor a direct step.
+do $$
+declare
+  before metrics.health;
+  after metrics.health;
+begin
+  select * into strict before from metrics.health;
+  insert into public.tracking_health_samples (attempt_id, kind, subject, healthy, details, observed_at)
+  select gen_random_uuid(), kind, subject, category <> 'transport', jsonb_build_object('category', category), observed_at
+  from (values
+      ('provider', 'health-silent', 'not_found', 20, now() - interval '1 hour'),
+      ('provider', 'health-down', 'transport', 20, now() - interval '1 hour'),
+      ('provider', 'health-found-one', 'not_found', 20, now() - interval '1 hour'),
+      ('provider', 'health-found-one', 'ok', 1, now() - interval '2 hours'),
+      ('provider', 'health-asked-less', 'not_found', 19, now() - interval '1 hour'),
+      ('provider', 'health-asked-earlier', 'not_found', 20, now() - interval '4 hours'),
+      ('direct', 'health-direct-silent', 'not_found', 20, now() - interval '1 hour'))
+    as sample (kind, subject, category, samples, observed_at),
+    generate_series(1, sample.samples);
+  select * into strict after from metrics.health;
+
+  if after.silent_sources_3h <> before.silent_sources_3h + 2 then
+    raise exception 'Carriers and providers that found nothing in the last three hours were miscounted: % then %', before, after;
+  end if;
+end;
+$$;
+
 -- Grafana's role reads through the views without reading the tables behind them.
 set local role metrics_reader;
 select accounts, active_day, parcels_open_account, link_alerts from metrics.live;
 select stage, account, lookup from metrics.open_parcels;
 select day, carrier, parcels from metrics.carriers where carrier = 'unknown' limit 1;
-select checks_3h, failed_carriers_3h, seconds_since_check, open_health_incidents, failing_health_incidents, failing_incident_carriers, future_scan_parcels_1h from metrics.health;
+select checks_3h, failed_carriers_3h, seconds_since_check, open_health_incidents, failing_health_incidents, failing_incident_carriers, future_scan_parcels_1h, silent_sources_3h from metrics.health;
 do $$
 begin
   perform 1 from public.packages;

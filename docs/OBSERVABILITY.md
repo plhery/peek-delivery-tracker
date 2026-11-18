@@ -1332,6 +1332,10 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
   (`future_event_timestamp`) on a parcel no earlier check flagged, usually a carrier's clock
   read in the wrong zone. It clears an hour later; the checks that repeat the scan stay quiet.
   The review signals name the parcel and the provider that dated the scan.
+- **Peek source finding no parcels**: a carrier or provider was asked about 20 parcels or
+  more in the last 3 hours and found none. A "not found" or "no history" answer counts as
+  healthy, so a provider that says it has no history for every number opens no incident and
+  Sentry stays quiet. Ordinary days never reach it.
 
 Each threshold sits above what ordinary days reach; a future scan alerts every time, as each
 is a fault to fix. The database rules read
@@ -1339,10 +1343,11 @@ is a fault to fix. The database rules read
 failures and the carriers they failed for, the time since a check last finished, the
 longest scheduled sync of the last 2 hours, the open health incidents, those of them that
 failed in the last 3 hours, the carriers of those whose failures left a check without an
-answer, and the parcels first flagged with a scan in the future in the last hour, counted when
-read. A query that fails, as while Prometheus restarts, leaves each
+answer, the parcels first flagged with a scan in the future in the last hour, and the
+carriers and providers asked about 20 parcels or more in the last 3 hours that found none,
+counted when read. A query that fails, as while Prometheus restarts, leaves each
 rule in its last state instead of putting it in Error. A query that returns nothing alerts,
-except for the server errors and future scans, which count it as none: the other database
+except for the server errors, future scans and sources finding no parcels, which count it as none: the other database
 rules already alert when `metrics.health` is empty. **Peek down for 15 minutes** counts it as
 none too, leaving a missing scrape to **Peek unreachable**.
 

@@ -61,7 +61,7 @@ class ForgetAllRaceTest {
      */
     private class Setup(val storage: Memory, val client: DeviceParcelClient, val slowAlert: CompletableDeferred<Unit>, val lost: UUID)
 
-    private fun setup(): Setup {
+    private fun setup(deleted: MutableList<String> = mutableListOf()): Setup {
         val listed = UUID.randomUUID()
         val lost = UUID.randomUUID()
         val storage = Memory().apply {
@@ -77,7 +77,7 @@ class ForgetAllRaceTest {
         val client = DeviceParcelClient(
             lookup = { throw IOException("unused") },
             read = { linkId, _ -> if (linkId == "22222222222C") PublicParcelResponse(link = owner(linkId), parcel = pkg(lost)) else null },
-            forget = { _, _ -> },
+            forget = { link, _ -> deleted += link },
             update = { _, _, _ -> throw IOException("unused") },
             detect = { _, _, _ -> throw IOException("unused") },
             removeAlert = { _, _ -> slowAlert.await() },
@@ -108,6 +108,20 @@ class ForgetAllRaceTest {
             device.list().map { it.id },
         )
         assertEquals("Its owner key stays on the phone after Forget all", emptySet<String>(), setup.storage.keys.keys)
+    }
+
+    @Test
+    fun followingDuringAlertRemovalKeepsTheOwnerLink() = runTest {
+        val deleted = mutableListOf<String>()
+        val setup = setup(deleted)
+        val id = setup.storage.parcels.single().parcel.id
+        val device = device(setup, this)
+        val job = launch { device.forget(id) }
+        runCurrent()
+        device.follow(PublicParcelResponse(link = owner("22222222222A"), parcel = pkg(id)), key, null)
+        setup.slowAlert.complete(Unit)
+        job.join()
+        assertTrue(deleted.isEmpty())
     }
 
     /** The same Forget all with nothing running beside it leaves nothing. */

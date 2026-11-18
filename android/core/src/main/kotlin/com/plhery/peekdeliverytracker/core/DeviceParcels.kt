@@ -612,10 +612,7 @@ class DeviceParcels(
             if (key != null || old.alertToken != null) {
                 scope.launch {
                     old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, removal(token)) } }
-                    if (key != null && succeeds { client.forget(old.linkId, key) }) {
-                        pendingForgets = pendingForgets.setting(old.linkId, null)
-                        save()
-                    }
+                    if (key != null) forgetIfPending(old.linkId, key, client)
                 }
             }
             // The parcel being replaced came back unchanged: only its link is new.
@@ -719,10 +716,14 @@ class DeviceParcels(
             forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(token)) }
             save()
         }
-        if (key != null && succeeds { client.forget(entry.linkId, key) }) {
-            pendingForgets = pendingForgets.setting(entry.linkId, null)
-            save()
-        }
+        if (key != null) forgetIfPending(entry.linkId, key, client)
+    }
+
+    private suspend fun forgetIfPending(linkId: String, key: String, client: DeviceParcelClient) {
+        if (pendingForgets.keyOf(linkId) != key) return
+        if (!succeeds { client.forget(linkId, key) } || pendingForgets.keyOf(linkId) != key) return
+        pendingForgets = pendingForgets.setting(linkId, null)
+        save()
     }
 
     /**
@@ -760,10 +761,7 @@ class DeviceParcels(
      */
     private suspend fun tellPendingForgets(client: DeviceParcelClient) {
         for ((linkId, key) in pendingForgets) {
-            // Followed again while the service was told of another: the link stays.
-            if (pendingForgets.keyOf(linkId) != key) continue
-            if (!succeeds { client.forget(linkId, key) }) continue
-            pendingForgets = pendingForgets.setting(linkId, null)
+            forgetIfPending(linkId, key, client)
         }
     }
 

@@ -524,7 +524,7 @@ final class DeviceParcels {
     /// Whether the service forgot the link, or had already. Until it has, its key stays aside.
     @discardableResult
     private func tellForgotten(_ linkID: String, key: String, _ client: DeviceParcelClient) async -> Bool {
-        guard (try? await client.forget(linkID, key)) != nil else { return false }
+        guard forgetting[linkID] == key, (try? await client.forget(linkID, key)) != nil else { return false }
         if forgetting[linkID] == key {
             forgetting[linkID] = nil
             save()

@@ -71,6 +71,8 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Peek ma teraz jeden widżet: „Przesyłki”. Dodane widżety „Najbliższa dostawa” stają się widżetami „Przesyłki” w tym samym miejscu, a twoje widżety „Przesyłki” nadal się aktualizują.
-• Drobny szary tekst jest teraz ciemniejszy i łatwiejszy do odczytania.
+• Dodawaj przesyłki e-mailem: jeśli masz konto Peek, otrzymasz własny adres Peek w opcji Ustawienia › Dodawaj przesyłki e-mailem. Przekaż na niego e-mail o wysyłce, a Peek doda przesyłkę i da ci znać. To wciąż funkcja eksperymentalna.
+• Wybierz kilogramy lub funty w opcji Ustawienia › Preferencje › Jednostka wagi, niezależnie od jednostki odległości. Jeśli twój iPhone lub iPad używa amerykańskiego systemu miar, waga jest teraz wyświetlana w funtach.
+• Gdy serwer Peek ma przerwę techniczną, twoje przesyłki pozostają na ekranie, a krótka notka informuje, kiedy były ostatnio aktualizowane.
+• Napisy na mapie w karcie przesyłki są teraz ciemniejsze i łatwiejsze do odczytania.
 ```

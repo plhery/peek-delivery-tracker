@@ -71,6 +71,8 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Peek ahora tiene un solo widget, «Paquetes». Los widgets «Próxima entrega» que has añadido se convierten en widgets «Paquetes» sin moverse de su sitio, y tus widgets «Paquetes» se siguen actualizando.
-• El texto gris pequeño ahora es más oscuro y fácil de leer.
+• Añadir paquetes por correo: con una cuenta de Peek, obtienes tu propia dirección de Peek en Ajustes › Añadir paquetes por correo. Reenvía un correo de envío a esa dirección: Peek añade el paquete y te avisa. Esta función aún es experimental.
+• Elige kilogramos o libras en Ajustes › Preferencias › Unidad de peso, independientemente de la unidad de distancia. Si tu iPhone o iPad usa el sistema de medida de EE. UU., los pesos ahora se muestran en libras.
+• Si el servidor de Peek está en mantenimiento, tus paquetes siguen en pantalla con una breve nota que indica cuándo se actualizaron por última vez.
+• El texto sobre el mapa de la tarjeta de un paquete ahora es más oscuro y fácil de leer.
 ```

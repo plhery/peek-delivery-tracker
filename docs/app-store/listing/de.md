@@ -71,6 +71,8 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Peek hat jetzt nur noch ein Widget: „Pakete“. Deine Widgets „Nächste Lieferung“ werden an ihrem Platz zu „Pakete“-Widgets, und deine „Pakete“-Widgets werden weiter aktualisiert.
-• Kleiner grauer Text ist jetzt dunkler und besser lesbar.
+• Pakete per E-Mail hinzufügen: Mit einem Peek-Konto bekommst du deine eigene Peek-Adresse unter Einstellungen › Pakete per E-Mail hinzufügen. Leitest du eine Versand-E-Mail an diese Adresse weiter, fügt Peek das Paket hinzu und gibt dir Bescheid. Die Funktion ist noch experimentell.
+• Wähle Kilogramm oder Pfund unter Einstellungen › Präferenzen › Gewichtseinheit, unabhängig von der Entfernungseinheit. Verwendet dein iPhone oder iPad das US-Maßsystem, werden Gewichte jetzt in Pfund angezeigt.
+• Ist der Server von Peek gerade in Wartung, bleiben deine Pakete sichtbar, mit einem kurzen Hinweis, wie aktuell sie sind.
+• Text auf der Karte eines Pakets ist jetzt dunkler und besser lesbar.
 ```

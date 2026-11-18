@@ -148,6 +148,8 @@ describe('atWrittenClock', () => {
     expect(atWrittenClock({ local_time: '2026-11-06' }, ['2026-11-06T10:00:00'])).toBe(true);
     expect(atWrittenClock({ time: '2026-10-12T09:00:00+08:00' }, ['2026-10-12T09:02:00+08:00', '2026-10-13T09:00:00'])).toBe(false);
     expect(atWrittenClock({ local_time: '2026-11-06' }, ['2026-11-07T10:00:00'])).toBe(false);
+    expect(atWrittenClock({ time: '2026-10-25T02:30:00+02:00', local_time: '2026-10-25T02:30' },
+      ['2026-10-25T02:30:00+01:00'])).toBe(false);
     expect(atWrittenClock({}, held)).toBe(false);
   });
 });

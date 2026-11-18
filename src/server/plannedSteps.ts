@@ -166,18 +166,19 @@ const DAY_MS = 86_400_000;
  */
 export function atWrittenClock(step: Pick<PlannedStep, 'time' | 'local_time'>, clocks: readonly string[]): boolean {
   // Its time, and the wall clock it kept beside it (`local_time`), as the scraper reads both.
-  return [step.time, step.local_time].some((value) => typeof value === 'string' && value.trim() !== '' && atClock(value.trim(), clocks));
+  const times = [step.time, step.local_time].filter((value): value is string => typeof value === 'string').map((value) => value.trim());
+  const absolute = times.filter((value) => OFFSET.test(value));
+  return clocks.some((clock) => (OFFSET.test(clock) && absolute.length ? absolute : times)
+    .some((value) => atClock(value, clock)));
 }
 
-function atClock(value: string, clocks: readonly string[]): boolean {
+function atClock(value: string, clock: string): boolean {
   const instant = OFFSET.test(value) ? Date.parse(value) : NaN;
   const wall = WALL_MINUTE.exec(value);
-  return clocks.some((clock) => {
-    if (Number.isFinite(instant) && OFFSET.test(clock) && Math.abs(Date.parse(clock) - instant) < MINUTE_MS) return true;
-    const other = WALL_MINUTE.exec(clock);
-    if (wall) return other !== null && wall[1] === other[1] && wall[2] === other[2];
-    return BARE_DAY.test(value) && clock.startsWith(value);
-  });
+  if (OFFSET.test(value) && OFFSET.test(clock)) return Math.abs(Date.parse(clock) - instant) < MINUTE_MS;
+  const other = WALL_MINUTE.exec(clock);
+  if (wall) return other !== null && wall[1] === other[1] && wall[2] === other[2];
+  return BARE_DAY.test(value) && clock.startsWith(value);
 }
 
 /**

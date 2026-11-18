@@ -325,11 +325,13 @@ extension Parcel {
 
     /// The words of the card's line on who delivers (`deliveringCarrier`): announced there and not received yet while the
     /// carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web.
-    var deliveryLineKey: String {
-        guard carrierData?.deliveryAnnounced == true, let named = namedDelivery?.carrier, named == deliveringCarrier else {
-            return "parcel.deliveryCarrier"
-        }
-        return "parcel.deliveryAnnounced"
+    var deliveryLineKey: String { deliveryOnlyAnnounced ? "parcel.deliveryAnnounced" : "parcel.deliveryCarrier" }
+
+    /// The carrier its carrier names as delivering lists the parcel without a scan of its own: announced there, and not
+    /// received yet.
+    var deliveryOnlyAnnounced: Bool {
+        guard carrierData?.deliveryAnnounced == true, let named = namedDelivery?.carrier else { return false }
+        return named == deliveringCarrier
     }
 
     var amazonShippingHistoryExpired: Bool {
@@ -461,9 +463,10 @@ extension Parcel {
     private static let scheduledDeliveries: Set<CarrierID> = [.gzyl, .xingheFreight]
 
     /// Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
-    /// nothing came. A carrier it was handed to delivers for real.
+    /// nothing came. A carrier it was handed to delivers for real, but not one that has it only as announced.
     var scheduledDelivery: Bool {
-        currentStage == .delivered && Self.scheduledDeliveries.contains(displayedCarrier) && deliveringCarrier == nil
+        currentStage == .delivered && Self.scheduledDeliveries.contains(displayedCarrier)
+            && (deliveringCarrier == nil || deliveryOnlyAnnounced)
     }
 
     /// The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page

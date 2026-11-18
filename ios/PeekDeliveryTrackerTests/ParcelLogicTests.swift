@@ -1984,6 +1984,11 @@ final class ParcelLogicTests: XCTestCase {
         // A carrier it was handed to delivers for real.
         delivered.carrierData = CarrierData(deliveryCarrier: .dpdDe, deliveryTrackingNumber: "01234567890123")
         XCTAssertFalse(delivered.scheduledDelivery)
+        // One that lists it only as announced, without a scan of its own, has not taken it: the delivered step is still
+        // the schedule's.
+        delivered.carrierData?.deliveryAnnounced = true
+        XCTAssertEqual(delivered.deliveryLineKey, "parcel.deliveryAnnounced")
+        XCTAssertTrue(delivered.scheduledDelivery)
 
         var moving = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-08T12:00:00Z")])
         moving.carrier = .gzyl

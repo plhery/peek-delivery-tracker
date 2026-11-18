@@ -5253,6 +5253,18 @@ describe('TrackingSyncService', () => {
       expect(asked(guest.adapter)).toEqual([null]);
       expect(guest.client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toBeUndefined();
     });
+
+    it('gives none of the account\'s postcodes once the owner cleared the parcel\'s', async () => {
+      const cleared = setup(() => true);
+      const mark = { carrier: 'spring-gds', number, postcode: '1011 AB', country: null, found: true };
+      await cleared.service.syncPackage({ ...parcel, carrier_data: { account_postcode: false, handoff_postcode: mark } });
+      expect(cleared.client.accountPostcodes).not.toHaveBeenCalled();
+      expect(asked(cleared.adapter)).toEqual([null]);
+      // A postcode the owner typed for that leg afterwards is sent.
+      const typed = setup(() => true);
+      await typed.service.syncPackage({ ...parcel, carrier_data: { account_postcode: false, universal_input: { number, postcode: '2511 CV' } } });
+      expect(asked(typed.adapter)).toEqual(['2511 CV']);
+    });
   });
 
   it('asks the post of the country an outbound postal item is looked up from, when its origin names no destination', async () => {

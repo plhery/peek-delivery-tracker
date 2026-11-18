@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { IndeterminateError, TransportError } from 'universal-parcel-scraper';
 import type { StepRecord } from 'universal-parcel-scraper/node';
 import {
-  accountPostcodeFor, accountPostcodeWrite, handoffPostcodeFound, handoffPostcodeMark, typedHandoffPostcode, wantsAccountPostcode,
+  accountPostcodeFor, accountPostcodeWrite, handoffPostcodeFound, handoffPostcodeMark, postcodeCleared, typedHandoffPostcode, wantsAccountPostcode,
   wantsHandoffPostcode,
 } from './accountPostcode';
 import type { JsonObject } from './types';
@@ -26,6 +26,11 @@ describe('account postcode', () => {
     expect(wantsAccountPostcode(parcel({ dpd_postcode: '8000' }), 'dpd')).toBe(false);
     // Once given, a postcode the owner cleared stays cleared.
     expect(wantsAccountPostcode(parcel({ carrier_data: { account_postcode: true } }), 'dpd')).toBe(false);
+    // So does one the owner typed and cleared, which the database marks.
+    expect(wantsAccountPostcode(parcel({ carrier_data: { account_postcode: false } }), 'dpd')).toBe(false);
+    expect(postcodeCleared(parcel({ carrier_data: { account_postcode: false } }))).toBe(true);
+    expect(postcodeCleared(parcel({ carrier_data: { account_postcode: true } }))).toBe(false);
+    expect(postcodeCleared(parcel())).toBe(false);
   });
 
   it('gives the latest postcode given the same carrier, else the latest the carrier takes', () => {

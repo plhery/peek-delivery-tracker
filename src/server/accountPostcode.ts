@@ -13,9 +13,11 @@ import { packageCarrierValues } from './validation';
  * (the catalog's `showsMore`), saved without one, is given the postcode its owner gave their
  * latest parcel: the one given the same carrier first, otherwise the latest this carrier
  * takes. A postcode a carrier refused is left out. It is given once (`account_postcode`): a
- * postcode the owner clears or changes afterwards stays as they left it. The next check asks
- * the carrier with it, as with a postcode the owner typed, and a refused one shows on the
- * parcel page.
+ * postcode the owner clears or changes afterwards stays as they left it. A postcode the owner
+ * typed and cleared marks the parcel too (`account_postcode` false, set by the database when the
+ * postcode is emptied under the same carrier and number), so none is given in its place. The
+ * next check asks the carrier with it, as with a postcode the owner typed, and a refused one
+ * shows on the parcel page.
  */
 
 /** carrier_data's mark of a parcel given its owner's postcode. */
@@ -32,6 +34,11 @@ export function wantsAccountPostcode(parcel: JsonObject, carrier: string): boole
   return typeof parcel.user_id === 'string' && parcel.one_off !== true && parcel.archived_at == null
     && !['delivered', 'returned'].includes(String(parcel.current_stage ?? '')) && !String(parcel.dpd_postcode ?? '').trim()
     && data[ACCOUNT_POSTCODE] == null && showsMorePostcode(carrier, String(parcel.tracking_number ?? ''));
+}
+
+/** Whether the owner cleared the parcel's postcode: none of the account's is given in its place. */
+export function postcodeCleared(parcel: JsonObject): boolean {
+  return isRecord(parcel.carrier_data) && parcel.carrier_data[ACCOUNT_POSTCODE] === false;
 }
 
 /** A postcode as a carrier takes it for a number, and the country it is from. */
@@ -99,7 +106,7 @@ export function accountPostcodeWrite(parcel: JsonObject, given: readonly JsonObj
  * postal item from abroad) shows there, with its delivery slot, only with the delivery postcode; without it,
  * PostNL's international tracker answers, later and without the slot. An account's parcel is looked up
  * there with the postcode its owner typed for it, for that leg (`universal_input`) or for the parcel, and
- * otherwise with the account's, as the Add sheet offers it. The domestic tracker answers a wrong postcode
+ * otherwise with the account's, as the Add sheet offers it, unless the owner cleared the parcel's. The domestic tracker answers a wrong postcode
  * as an unknown barcode, and the international one then answers: that miss is kept (`handoff_postcode`), so
  * the postcode is not sent again for that number, and nobody is told, as nobody gave it for this leg. A
  * guest's parcel is asked as before.

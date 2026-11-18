@@ -763,7 +763,9 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   has filed it there: the one given the same carrier first, otherwise the latest that carrier
   takes, leaving out those a carrier refused ([`accountPostcode.ts`](../src/server/accountPostcode.ts)).
   It is given once (`account_postcode`), so a postcode the owner clears or changes stays as they
-  left it, and the next check asks the carrier with it as with one the owner typed. With none to
+  left it; one the owner typed and cleared marks the parcel too (`account_postcode` false, set by
+  the database when the postcode is emptied under the same carrier and number). The next check
+  asks the carrier with it as with one the owner typed. With none to
   give, the parcel page says the carrier shows more with the postcode and offers to add it.
   J&T Express Mexico and China show their scans only with the last four digits of the
   recipient's or sender's phone (`phone_digits`, the catalog's optional `phoneDigits`). The
@@ -893,7 +895,7 @@ A parcel often changes carrier at the border. The origin history is always kept.
   PostNL is the other: under a number its domestic tracker holds (a 3S barcode, or a postal
   item from abroad), an account's parcel is asked there with the postcode its owner typed for
   that leg (`universal_input`) or for the parcel, else with the account's, as the Add sheet
-  offers it ([`accountPostcode.ts`](../src/server/accountPostcode.ts)). The domestic tracker
+  offers it, unless the owner cleared the parcel's ([`accountPostcode.ts`](../src/server/accountPostcode.ts)). The domestic tracker
   shows the delivery slot; it answers a wrong postcode as an unknown barcode, and the
   international tracker then answers. Its lookup's steps tell which happened, and the parcel
   keeps it (`handoff_postcode`): one that found the parcel is asked with again, one that missed

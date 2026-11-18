@@ -82,7 +82,7 @@ import { carrierLookupKey, recognitionKey, SharedLookups, universalLookupKey, ty
 import { carrierLookupInput, withPostcodeCountry } from './postcodeCountry';
 import {
   accountPostcodeFor, accountPostcodeWrite, ACCOUNT_POSTCODE, HANDOFF_POSTCODE, handoffPostcodeFound, handoffPostcodeMark,
-  typedHandoffPostcode, wantsAccountPostcode, wantsHandoffPostcode, type FittingPostcode, type HandoffPostcodeMark,
+  postcodeCleared, typedHandoffPostcode, wantsAccountPostcode, wantsHandoffPostcode, type FittingPostcode, type HandoffPostcodeMark,
 } from './accountPostcode';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
@@ -3662,9 +3662,11 @@ export class TrackingSyncService {
    */
   private async handoffAccountPostcode(parcel: JsonObject, partner: string, number: string): Promise<FittingPostcode | null> {
     const mark = handoffPostcodeMark(parcel, partner, number);
+    // A postcode the owner cleared leaves the parcel with what they typed alone.
+    const cleared = postcodeCleared(parcel);
     let chosen = typedHandoffPostcode(parcel, partner, number)
-      ?? (mark?.found ? { postcode: mark.postcode, country: mark.country } : null);
-    if (!chosen) {
+      ?? (mark?.found && !cleared ? { postcode: mark.postcode, country: mark.country } : null);
+    if (!chosen && !cleared) {
       try {
         chosen = accountPostcodeFor(partner, number, await this.client.accountPostcodes(String(parcel.user_id)));
       } catch (error) {

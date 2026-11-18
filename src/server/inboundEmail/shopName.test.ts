@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shopNamedIn } from './shopName';
+import { shopNameOf, shopNamedIn } from './shopName';
 
 // Made-up shops only.
 describe('the shop a carrier\'s email names', () => {
@@ -17,6 +17,7 @@ describe('the shop a carrier\'s email names', () => {
     ['Fwd: Paket von Example GmbH & Co. KG ist unterwegs', 'Example'],
     ['Colis de IKEA livré', 'IKEA'],
     ['Paket von ABC STORE ist unterwegs', 'ABC Store'],
+    ['Colis de EXAMPLE® SHOP livré', 'Example Shop'],
   ])('reads "%s"', (subject, shop) => {
     expect(shopNamedIn(subject, subject)).toBe(shop);
   });
@@ -54,5 +55,22 @@ describe('the shop a carrier\'s email names', () => {
   it('never takes the carrier\'s own name for a shop', () => {
     expect(shopNamedIn('Your Example Express shipment is on its way', '', ['Example Express'])).toBe('');
     expect(shopNamedIn('Info', 'Absender: Example Express AG', ['Example Express'])).toBe('');
+  });
+});
+
+describe('a shop\'s own name, as its emails sign them', () => {
+  it.each([
+    ['EXAMPLE® SHOP CH', 'Example Shop CH'],
+    ['Example Shop AG', 'Example Shop'],
+    ['Example™ Store', 'Example Store'],
+    ['EXAMPLESHOP', 'Exampleshop'],
+    ['ABCD', 'ABCD'],
+    ['Example Shop', 'Example Shop'],
+    ['example-shop.co.uk', 'example-shop.co.uk'],
+    ['Shop.example', 'Shop.example'],
+    ['AG', 'AG'],
+    ['®', '®'],
+  ])('reads "%s" as "%s"', (sender, shop) => {
+    expect(shopNameOf(sender)).toBe(shop);
   });
 });

@@ -174,6 +174,13 @@ describe('an email to a forwarding address', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Example Shop');
   });
 
+  it('names the parcels after the shop as it signs, without its trademark signs, capitals or legal form', async () => {
+    const db = account();
+    await posted(mail('"EXAMPLE® SHOP AG" <orders@example-shop.com>', 'Shipped', `Your parcel ${UPS} is on its way.`));
+    expect(db.create.mock.calls.map(([, number, label]) => [number, label])).toEqual([[UPS, 'Example Shop']]);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 1, null, 'Example Shop');
+  });
+
   it('marks the parcels it added unseen and wakes their notifications, and announces none it did not add', async () => {
     const wake = vi.spyOn(background, 'wakeEmailAddedWorker').mockImplementation(() => undefined);
     let db = account({ known: [UPS] });

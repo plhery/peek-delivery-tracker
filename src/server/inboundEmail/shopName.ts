@@ -87,9 +87,9 @@ function saidAloud(name: string): string {
   }).join(' ');
 }
 
-/** The name without its legal form, in the capitals it is said with. */
+/** The name without its trademark signs or legal form, in the capitals it is said with. */
 function tidy(name: string): string {
-  const words = name.replace(/\s+sp\.?\s*z\s*o\.?\s*o\.?$/i, '').split(' ').filter(Boolean);
+  const words = name.replace(/[®™©℠]/g, ' ').replace(/\s+sp\.?\s*z\s*o\.?\s*o\.?$/i, '').split(/\s+/).filter(Boolean);
   while (words.length > 1 && LEGAL_FORMS.has(words.at(-1)!.replace(/\./g, '').toLowerCase())) words.pop();
   return saidAloud(words.join(' ')).replace(/[.\s]+$/, '');
 }
@@ -107,6 +107,14 @@ function named(pattern: RegExp, text: string, whole = false): string {
     return tidy(name);
   }
   return '';
+}
+
+/**
+ * A shop's own name as its emails sign them, tidied as a name a carrier's email gives: "EXAMPLE® SHOP AG" is
+ * "Example Shop". A name that is only signs and legal forms stays as it was.
+ */
+export function shopNameOf(sender: string): string {
+  return tidy(sender) || sender;
 }
 
 /**

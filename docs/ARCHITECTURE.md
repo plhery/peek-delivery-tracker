@@ -354,7 +354,8 @@ Key server modules:
     number holds a digit, so no word is ever one. Invisible padding is dropped before the
     reading. It reads at most 16,000 characters, with patterns that stay linear on any
     input, so no email holds the server up. Each is added as the Add sheet adds it, with the same daily allowance and
-    parcel limit, labelled with the sender's name; one the account follows already costs
+    parcel limit, labelled with the sender's name, without trademark signs or legal form and in
+    the capitals it is said with ("EXAMPLE® SHOP AG" is "Example Shop"); one the account follows already costs
     nothing, and takes that name when it has none. A name it has is never changed.
     `src/server/parcelsFromText.ts` is that step.
   - An email whose subject says its parcel was delivered adds no parcel: it comes too late

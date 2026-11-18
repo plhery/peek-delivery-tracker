@@ -8,7 +8,7 @@ import type { InboundMailResult, SupabaseServiceClient } from '../supabase';
 import { carrierNames, carriersOfAddress } from './carrierSender';
 import { deliveredSubject } from './delivered';
 import { headerFromAddress, readInboundMail, type InboundMail } from './mail';
-import { shopNamedIn } from './shopName';
+import { shopNameOf, shopNamedIn } from './shopName';
 import { inboundEmailOpenTo, tokenFromRecipient, type InboundEmailSettings } from './settings';
 
 /** What an email did; `dropped` when its address names nobody who takes email. */
@@ -130,9 +130,10 @@ export async function receiveInboundMail(
     return finish('confirmation');
   }
   // A carrier's own email: its numbers are that carrier's, and its parcels take the name of the shop it says it
-  // carries for, or none. The carrier's mailbox name ("Info", "noreply") says nothing of the parcel.
+  // carries for, or none. The carrier's mailbox name ("Info", "noreply") says nothing of the parcel. A shop's own
+  // email takes the shop's name, tidied the same way.
   const carriers = carriersOfAddress(mail.origin);
-  const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : mail.sender;
+  const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   // A delivery confirmation comes too late for following its parcel to help: it names one already followed, if any.
   const delivered = deliveredSubject(mail.subject);
   const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered });

@@ -35,9 +35,9 @@ import com.plhery.peekdeliverytracker.core.JsonEncoder
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import java.io.IOException
 import java.security.Security
-import java.util.Collections
 import java.time.Duration
 import java.util.UUID
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -113,7 +113,7 @@ class NotificationsTest {
     }
 
     /** What the account's devices were sent (`/api/push/devices`): each request's method and body. */
-    private val devices: MutableList<String> = Collections.synchronizedList(mutableListOf())
+    private val devices: MutableList<String> = CopyOnWriteArrayList()
 
     private val answers = Interceptor { chain ->
         val request = chain.request()
@@ -515,12 +515,15 @@ class NotificationsTest {
     @Test
     fun aTokenFirebaseRefusesEndsTheWaitThere() {
         // Firebase answers that it can give none, as without a network: the reader is told then, not 8 s later.
-        val app = container(Tokens(failure = java.io.IOException("SERVICE_NOT_AVAILABLE")))
+        val tokens = Tokens(failure = java.io.IOException("SERVICE_NOT_AVAILABLE"))
+        val app = container(tokens)
         signIn(app)
         allow()
 
         var outcome: Result<Boolean>? = null
         app.scope.launch { outcome = runCatching { app.parcels.enableNotifications(AppLanguage.En) } }
+        // Up to Firebase's question in the time it takes, the clock still: the wait measured is the one for its answer.
+        idleUntil("Firebase asked for a token") { tokens.asked.isNotEmpty() }
         var tenths = 0
         while (outcome == null && tenths < 100) {
             shadowOf(Looper.getMainLooper()).idleFor(Duration.ofMillis(100))

@@ -22957,7 +22957,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "mandae"
     },
     "trackingUrlTemplate": "https://rastreae.com.br/resultado/{trackingNumber}",
     "linkRules": [

@@ -1459,10 +1459,10 @@ private struct DeliveryListView: View {
         )
     }
 
-    /// Whether the list is looked at, whole and in its own order, with nothing over it.
+    /// Whether the list is looked at, whole and in its own order, with nothing over it, a parcel link's sheet included.
     private var looking: Bool {
         isSelected && scenePhase == .active && listShown && !showingAdd && !showingAccount && !showingFilters
-            && sitePage == nil && !prompts.covers && !hasCustomView
+            && sitePage == nil && links.route == nil && !prompts.covers && !hasCustomView
     }
 
     /// Whether the list is looked at, and may show a card moving.

@@ -1212,8 +1212,9 @@ export class SupabaseServiceClient extends SupabaseClient {
     carrier: string,
     trackingUrl?: string | null,
     dpdPostcode?: string | null,
+    phoneDigits: string | null = null,
   ): Promise<string> {
-    let result = await this.request('/rest/v1/rpc/create_account_package', {
+    let result = await this.request('/rest/v1/rpc/create_account_package_with_digits', {
       method: 'POST',
       body: {
         p_user_id: userId,
@@ -1222,6 +1223,7 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_carrier: carrier,
         p_tracking_url: trackingUrl ?? null,
         p_dpd_postcode: dpdPostcode ?? null,
+        p_phone_digits: phoneDigits,
       },
     });
     if (Array.isArray(result) && result.length === 1) [result] = result;
@@ -1540,10 +1542,11 @@ export class SupabaseServiceClient extends SupabaseClient {
     carrier: string,
     trackingUrl: string | null,
     dpdPostcode: string | null,
+    phoneDigits: string | null = null,
   ): Promise<boolean> {
-    return await this.request('/rest/v1/rpc/change_account_package_carrier', {
+    return await this.request('/rest/v1/rpc/change_account_package_carrier_with_digits', {
       method: 'POST',
-      body: { p_user_id: userId, p_package_id: packageId, p_carrier: carrier, p_tracking_url: trackingUrl, p_dpd_postcode: dpdPostcode },
+      body: { p_user_id: userId, p_package_id: packageId, p_carrier: carrier, p_tracking_url: trackingUrl, p_dpd_postcode: dpdPostcode, p_phone_digits: phoneDigits },
     }) === true;
   }
 
@@ -2978,14 +2981,16 @@ export class SupabaseUserClient extends SupabaseClient {
     carrier: string,
     trackingUrl?: string | null,
     dpdPostcode?: string | null,
+    phoneDigits: string | null = null,
   ): Promise<boolean> {
-    return await this.request('/rest/v1/rpc/change_owned_package_carrier', {
+    return await this.request('/rest/v1/rpc/change_owned_package_carrier_with_digits', {
       method: 'POST',
       body: {
         p_package_id: packageId,
         p_carrier: carrier,
         p_tracking_url: trackingUrl ?? null,
         p_dpd_postcode: dpdPostcode ?? null,
+        p_phone_digits: phoneDigits,
       },
     }) === true;
   }

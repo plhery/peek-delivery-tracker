@@ -42,8 +42,8 @@ describe('guarded tracking writes', () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue({ id: 'package-1' });
     await expect(client.createAccountPackage('user-1', 'TEST1234', 'Books', 'dpd', null, '8000')).resolves.toBe('package-1');
-    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/create_account_package', { method: 'POST', body: {
-      p_user_id: 'user-1', p_tracking_number: 'TEST1234', p_label: 'Books', p_carrier: 'dpd', p_tracking_url: null, p_dpd_postcode: '8000',
+    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/create_account_package_with_digits', { method: 'POST', body: {
+      p_user_id: 'user-1', p_tracking_number: 'TEST1234', p_label: 'Books', p_carrier: 'dpd', p_tracking_url: null, p_dpd_postcode: '8000', p_phone_digits: null,
     } });
   });
 
@@ -978,13 +978,13 @@ describe('owner package PostgREST client', () => {
       '59650',
     )).resolves.toBe(true);
 
-    expect(request).toHaveBeenCalledWith('/rest/v1/rpc/change_owned_package_carrier', {
+    expect(request).toHaveBeenCalledWith('/rest/v1/rpc/change_owned_package_carrier_with_digits', {
       method: 'POST',
       body: {
         p_package_id: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
         p_carrier: 'mondial-relay',
         p_tracking_url: null,
-        p_dpd_postcode: '59650',
+        p_dpd_postcode: '59650', p_phone_digits: null,
       },
     });
   });

@@ -7,7 +7,7 @@ do $$
 declare
   anon_functions constant text[] := array['missing_migrations'];
   authenticated_functions constant text[] := array[
-    'change_owned_package_carrier', 'claim_parcel_link', 'delete_owned_archived_package',
+    'change_owned_package_carrier', 'change_owned_package_carrier_with_digits', 'claim_parcel_link', 'delete_owned_archived_package',
     'delete_owned_package', 'friends_action', 'friends_activity', 'friends_snapshot',
     'mark_owned_package_seen', 'missing_migrations', 'owned_delivery_emails', 'owned_package_share',
     'record_account_opened', 'rename_owned_package', 'set_owned_notification_preferences',

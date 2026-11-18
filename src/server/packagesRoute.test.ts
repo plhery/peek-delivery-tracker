@@ -112,7 +112,7 @@ it('adds and lists a review demo number in a listed account, with no allowance, 
   const body = await added.json();
   expect(body.jobIds).toEqual([]);
   expect(body.package.tracking_events.at(-1)).toMatchObject({ stage: 'out_for_delivery', description: 'Out for delivery' });
-  expect(create).toHaveBeenCalledExactlyOnceWith(userId, 'TESTOUT01', 'IKEA', 'swiss-post', null, null);
+  expect(create).toHaveBeenCalledExactlyOnceWith(userId, 'TESTOUT01', 'IKEA', 'swiss-post', null, null, null);
   expect(allowance).not.toHaveBeenCalled();
   expect(queue).not.toHaveBeenCalled();
   const [listed] = (await (await list()).json()).packages;

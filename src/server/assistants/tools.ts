@@ -486,7 +486,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         trackingUrl: trackingLink ?? '',
         dpdPostcode: keptPostcode,
         dpdPostcodeCountry: postcodeCountry ?? keptCountry,
-        phoneDigits: phoneDigits ?? (takes.has('phoneDigits') ? nullableText(row.phone_digits) ?? '' : ''),
+        phoneDigits: phoneDigits ?? (carrier === row.carrier && takes.has('phoneDigits') ? nullableText(row.phone_digits) ?? '' : ''),
       }, number);
       const unchanged = row.carrier === values.carrier
         && nullableText(row.tracking_url) === values.trackingUrl
@@ -499,7 +499,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       return refused(error);
     }
     try {
-      if (!await service.changeAccountPackageCarrier(caller.userId, id, values.carrier, values.trackingUrl, values.dpdPostcode)) {
+      if (!await service.changeAccountPackageCarrier(caller.userId, id, values.carrier, values.trackingUrl, values.dpdPostcode, values.phoneDigits)) {
         return refusal(NO_PARCEL);
       }
     } catch (error) {
@@ -512,8 +512,6 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
       if (write) await service.updatePackage(id, write);
     }
-    // A new carrier or number forgets the digits (packages_forget_phone_digits); the ones given are written after it.
-    if (values.phoneDigits || row.phone_digits) await service.updatePackage(id, { phone_digits: values.phoneDigits });
     logOperationalEvent('package_carrier_changed', {
       package_id: id,
       previous_carrier: String(row.carrier ?? 'unknown'),

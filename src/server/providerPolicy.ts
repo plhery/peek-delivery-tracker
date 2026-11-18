@@ -11,5 +11,5 @@ const spelled = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/g, '');
  */
 export function providerAllowed(provider: string, setting: string | undefined): boolean {
   const names = (setting ?? '').split(',').map(spelled).filter(Boolean);
-  return !names.length || names.includes(spelled(provider));
+  return !setting?.trim() || names.includes(spelled(provider));
 }

@@ -20,25 +20,25 @@ export interface PlannedStep {
   stage?: string;
 }
 
-/** The most planned steps kept for each carrier of a parcel. */
+/** Each carrier keeps this many upcoming steps and this many elapsed steps. */
 export const PLANNED_STEPS_KEPT = 30;
 const TEXT_LENGTH = 300;
 
 /** The planned steps a carrier's answer, or its failure, names (`planned_events`, `plannedEvents`, through causes). */
-export function plannedStepsOf(value: unknown): PlannedStep[] {
+export function plannedStepsOf(value: unknown, zone = 'UTC', now = Date.now()): PlannedStep[] {
   const seen = new Set<unknown>();
   let current = value;
   while (isRecord(current) && !seen.has(current)) {
     seen.add(current);
     const listed = current.planned_events ?? current.plannedEvents;
-    if (Array.isArray(listed)) return plannedSteps(listed);
+    if (Array.isArray(listed)) return plannedSteps(listed, zone, now);
     current = current.cause;
   }
   return [];
 }
 
-/** A list of planned steps as stored: worded, dated, each once, at most `PLANNED_STEPS_KEPT`, the earliest kept. */
-export function plannedSteps(listed: readonly unknown[]): PlannedStep[] {
+/** Keep the soonest upcoming steps and the most recent elapsed steps within separate limits. */
+export function plannedSteps(listed: readonly unknown[], zone = 'UTC', now = Date.now()): PlannedStep[] {
   const text = (value: unknown) => typeof value === 'string' ? value.replace(/\s+/g, ' ').trim().slice(0, TEXT_LENGTH) : '';
   const seen = new Set<string>();
   const steps = listed.flatMap((entry): PlannedStep[] => {
@@ -55,10 +55,12 @@ export function plannedSteps(listed: readonly unknown[]): PlannedStep[] {
     return [{ ...(time ? { time } : {}), ...(local ? { local_time: local } : {}), description,
       ...(location ? { location } : {}), ...(stage ? { stage } : {}) }];
   });
-  return steps.length > PLANNED_STEPS_KEPT ? [...steps].sort((a, b) => sortKey(a) - sortKey(b)).slice(0, PLANNED_STEPS_KEPT) : steps;
+  if (steps.length <= PLANNED_STEPS_KEPT) return steps;
+  const dated = steps.map(step => ({ step, until: stepTime(step, zone)?.until ?? NaN }))
+    .filter(entry => Number.isFinite(entry.until)).sort((a, b) => a.until - b.until);
+  return [...dated.filter(entry => entry.until <= now).slice(-PLANNED_STEPS_KEPT),
+    ...dated.filter(entry => entry.until > now).slice(0, PLANNED_STEPS_KEPT)].map(entry => entry.step);
 }
-
-const sortKey = (step: PlannedStep) => { const at = Date.parse(step.time ?? step.local_time ?? ''); return Number.isFinite(at) ? at : Infinity; };
 
 /** Stages a parcel ends its journey in: no plan is left to show. */
 const FINAL_STAGES = new Set(['delivered', 'returned']);
@@ -143,7 +145,7 @@ export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[
   const reached = Math.max(-1, ...[row.current_stage, ...scans.map((event) => event.stage)].map((stage) => PROGRESS.indexOf(String(stage))));
   if (scans.some((event) => FINAL_STAGES.has(String(event.stage)))) return [];
   const zone = carrierTimezone(carrier as Parameters<typeof carrierTimezone>[0]) ?? 'UTC';
-  return plannedSteps(listed[carrier] as unknown[]).flatMap((step) => {
+  return plannedSteps(listed[carrier] as unknown[], zone, now).flatMap((step) => {
     const time = stepTime(step, zone);
     if (!time || time.until <= Math.max(latest, now)) return [];
     if (scans.some(scan => {
@@ -209,7 +211,7 @@ export function servedWrittenSteps(row: JsonObject, events: readonly JsonObject[
   const shown = scans.map((event) => ({ at: Date.parse(String(event.occurred_at)), words: words(event.description) }))
     .filter((scan) => Number.isFinite(scan.at));
   const zone = carrierTimezone(carrier) ?? 'UTC';
-  return plannedSteps(listed).flatMap((step) => {
+  return plannedSteps(listed, zone, now).flatMap((step) => {
     const time = stepTime(step, zone);
     if (!time || time.until > now || !atWrittenClock(step, clocks)) return [];
     const said = words(step.description);

@@ -1326,7 +1326,7 @@ export class TrackingRouter {
         // failure does: a provider asked after it shows its copies of them as scans.
         const keepAnswer = (source: string, answer: CarrierResult) => {
           holdBack(source, answer.written_ahead ?? [], answer);
-          keepPlanned(source, plannedStepsOf(answer));
+          keepPlanned(source, plannedStepsOf(answer, carrierTimezone(source) ?? 'UTC', now().getTime()));
         };
         if (value.earlierResult && value.earlierCarrierId && value.earlierCarrierId !== value.sourceCarrierId) {
           keepAnswer(value.earlierCarrierId, value.earlierResult);
@@ -1466,7 +1466,8 @@ export class TrackingRouter {
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         holdBack(carrier, writtenAheadClocks(error));
         // A carrier finding no history for the number lists what it still plans, or nothing.
-        if (failure.kind === 'not_found' || failure.kind === 'no_history' || plannedStepsOf(error).length) keepPlanned(carrier, plannedStepsOf(error));
+        const plan = plannedStepsOf(error, carrierTimezone(carrier) ?? 'UTC', now().getTime());
+        if (failure.kind === 'not_found' || failure.kind === 'no_history' || plan.length) keepPlanned(carrier, plan);
         // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
         if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
         if (probe && SERVICE_FAILURES.includes(failure.kind)) unsettledDirect.add(carrier);

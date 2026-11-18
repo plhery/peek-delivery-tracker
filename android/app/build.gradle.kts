@@ -461,8 +461,9 @@ dependencies {
     testImplementation(libs.window.testing)
     // The widget's content as Glance composes it, without a launcher (runGlanceAppWidgetUnitTest).
     testImplementation(libs.glance.appwidget.testing)
-    // The inbox's check scheduled without running it (src/testFdroid).
+    // The inbox's check and Google Play's token handover scheduled without running them (src/testFdroid, src/testPlay).
     "testFdroidImplementation"(libs.work.testing)
+    "testPlayImplementation"(libs.work.testing)
 
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.core)

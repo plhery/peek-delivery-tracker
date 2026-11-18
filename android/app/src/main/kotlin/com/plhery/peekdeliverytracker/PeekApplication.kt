@@ -130,8 +130,8 @@ open class PeekApplication : Application() {
     }
 
     /**
-     * A token Firebase made (`FirebaseMessagingService.onNewToken`), for the stores to hand to the service: dropped
-     * before they are made, as they ask for the token themselves once they are. On the main thread.
+     * A token Firebase made (`FirebaseMessagingService.onNewToken`) once the stores are made, for them to hand to the
+     * service; one that comes before them goes to its own background work (`PushTokenHandover`). On the main thread.
      */
     fun pushTokenRefreshed(token: String) {
         container.value?.pushTokenRefreshed(token)

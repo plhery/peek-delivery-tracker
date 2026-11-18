@@ -2,6 +2,14 @@ package com.plhery.peekdeliverytracker.platform
 
 import android.content.Context
 import androidx.core.content.ContextCompat
+import androidx.work.Constraints
+import androidx.work.CoroutineWorker
+import androidx.work.ExistingWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.GoogleApiAvailabilityLight
 import com.google.android.gms.tasks.Task
@@ -12,6 +20,11 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.PeekApplication
+import com.plhery.peekdeliverytracker.core.AuthenticationState
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.withContext
 
 /**
  * The Firebase project's Android app the pushes come through, as its google-services.json gives it: the build's
@@ -129,6 +142,48 @@ class PeekMessagingService : FirebaseMessagingService() {
     @Suppress("OVERRIDE_DEPRECATION")
     override fun onNewToken(token: String) {
         val app = application as PeekApplication
-        ContextCompat.getMainExecutor(this).execute { app.pushTokenRefreshed(token) }
+        ContextCompat.getMainExecutor(this).execute {
+            if (app.container.value != null) app.pushTokenRefreshed(token) else PushTokenHandover.enqueue(app, token)
+        }
+    }
+}
+
+/**
+ * A token Firebase made while no window had made the stores, as it does in a process it starts for that alone: kept
+ * in the work, it goes to the account's devices and to the parcels this phone follows without one once the stores are
+ * made for it, and again on the network's return until the service has taken both. One more token replaces it.
+ */
+class PushTokenHandover(context: Context, parameters: WorkerParameters) : CoroutineWorker(context, parameters) {
+    override suspend fun doWork(): Result = hand(inputData.getString(TOKEN)) { token ->
+        val app = applicationContext as PeekApplication
+        withContext(Dispatchers.Main) {
+            app.makeContainer()
+            val stores = app.container.filterNotNull().first()
+            stores.session.stateFlow.first { it != AuthenticationState.Loading }
+            val language = stores.localizer.language
+            val account = stores.parcels.forwardNativePushToken(token, language)
+            val guests = stores.parcels.registerDeviceAlerts(token, language)
+            account && guests
+        }
+    }
+
+    companion object {
+        internal const val NAME = "push-token"
+        private const val TOKEN = "token"
+
+        /** Done once [register] has handed the token on; tried again later while the service hasn't taken it. */
+        internal suspend fun hand(token: String?, register: suspend (String) -> Boolean): Result = when {
+            token.isNullOrEmpty() -> Result.success()
+            register(token) -> Result.success()
+            else -> Result.retry()
+        }
+
+        fun enqueue(context: Context, token: String) {
+            val request = OneTimeWorkRequestBuilder<PushTokenHandover>()
+                .setInputData(workDataOf(TOKEN to token))
+                .setConstraints(Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED).build())
+                .build()
+            WorkManager.getInstance(context).enqueueUniqueWork(NAME, ExistingWorkPolicy.REPLACE, request)
+        }
     }
 }

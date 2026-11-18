@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 
 /**
  * An email to a forwarding address, posted by the Cloudflare Email Worker with its recipient and a signature over
- * both. Every email it signs is answered 202, whoever it names: the Worker learns nothing about addresses.
+ * both. Accepted and dropped emails receive 202. A temporary processing failure lets the Worker retry.
  */
 export const POST = apiRoute(async (context) => {
   const settings = inboundEmailConfigured();

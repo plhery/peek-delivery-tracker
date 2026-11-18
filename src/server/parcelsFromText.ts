@@ -88,6 +88,8 @@ export interface AddingOptions {
    * those it follows are then reported.
    */
   addNew?: boolean;
+  /** Mail delivery can retry a temporary eligibility lookup without claiming another allowance. */
+  retryEligibility?: boolean;
 }
 
 /**
@@ -100,7 +102,7 @@ export async function addNumbersToAccount(
   userId: string,
   numbers: readonly NumberInText[],
   label: string,
-  { addNew = true }: AddingOptions = {},
+  { addNew = true, retryEligibility = false }: AddingOptions = {},
 ): Promise<ParcelAddition[]> {
   const known = await service.accountTrackingNumbers(userId, numbers.map(({ normalized }) => normalized));
   const additions: ParcelAddition[] = [];
@@ -136,7 +138,13 @@ export async function addNumbersToAccount(
       continue;
     }
     try {
-      if (!demo) await verifyAmazonShippingAddition(values.carrier, trackingNumber);
+      if (!demo) {
+        const verify = () => verifyAmazonShippingAddition(values.carrier, trackingNumber);
+        await verify().catch((error: unknown) => {
+          if (retryEligibility && error instanceof HttpError && error.status === 503) return verify();
+          throw error;
+        });
+      }
     } catch (error) {
       if (!(error instanceof HttpError)) throw error;
       additions.push(error.status === 400

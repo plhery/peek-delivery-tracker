@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { HttpError } from '../api';
 import { wakeEmailAddedWorker } from '../background';
 import { ownSenderAddress } from '../email/config';
 import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
@@ -20,8 +21,9 @@ export type InboundOutcome = InboundMailResult | 'dropped';
  * name, a change the owner sees in the list; then parcels already followed, left as they were; then a delivery it
  * told of, whose parcel nobody follows and it does not add; then nothing.
  */
-export function mailResult(additions: readonly ParcelAddition[], { named = 0, delivered = false } = {}): InboundMailResult {
+export function mailResult(additions: readonly ParcelAddition[], { named = 0, delivered = false } = {}): InboundMailResult | 'unavailable' {
   const outcomes = new Set(additions.map(({ outcome }) => outcome));
+  if (!delivered && outcomes.has('unavailable')) return 'unavailable';
   if (outcomes.has('added')) return 'added';
   if (outcomes.has('full')) return 'full';
   if (outcomes.has('limited')) return 'limited';
@@ -136,10 +138,11 @@ export async function receiveInboundMail(
   const label = carriers.length ? shopNamedIn(mail.subject, mail.text, carrierNames(carriers)) : shopNameOf(mail.sender);
   // A delivery confirmation comes too late for following its parcel to help: it names one already followed, if any.
   const delivered = deliveredSubject(mail.subject);
-  const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered });
+  const additions = await addParcelsFromText(service, userId, mail.text, label, carriers, { addNew: !delivered, retryEligibility: true });
   const named = await nameFollowedParcels(service, userId, additions, label);
   await announce(service, userId, additions);
   const result = mailResult(additions, { named, delivered });
+  if (result === 'unavailable') throw new HttpError(503, 'Parcel eligibility is temporarily unavailable');
   const added = additions.filter(({ outcome }) => outcome === 'added').length;
   await service.recordInboundMail(userId, result, added, null, label || mail.sender);
   if (result !== 'limited' && result !== 'full') await keep(service, userId, raw);

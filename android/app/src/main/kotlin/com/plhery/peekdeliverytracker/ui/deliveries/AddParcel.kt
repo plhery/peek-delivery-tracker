@@ -1579,7 +1579,7 @@ private fun AddTextField(
                         actions.left(field)
                     }
                 }
-                .keptFocus()
+                .keptFocus(tag)
                 .onPreviewKeyEvent { event ->
                     val action = submit ?: return@onPreviewKeyEvent false
                     val enter = event.key == Key.Enter || event.key == Key.NumPadEnter

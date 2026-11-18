@@ -387,6 +387,42 @@ class DeliveriesTabTest {
     }
 
     /**
+     * Add half-typed keeps what was typed and its field's focus, and with it the keyboard, as a foldable shuts: the
+     * inner screen's window stops, then is made again on the narrow outer one, where the tabs move to the bottom.
+     */
+    @Test
+    @Config(qualifiers = "w900dp-h960dp-xhdpi")
+    fun addKeepsItsFocusAsAFoldableShuts() {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        var size by mutableStateOf(DpSize(852.dp, 883.dp))
+        recreation.setContent {
+            Box(Modifier.requiredSize(size)) {
+                CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                    RootHost(state = AuthenticationState.Demo, reduceMotion = false, source = source)
+                }
+            }
+        }
+        compose.waitForIdle()
+        compose.onNodeWithTag(ADD_BUTTON).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(ADD_TRACKING).performTextInput("1Z999AA1012345")
+        compose.waitForIdle()
+        compose.onNodeWithTag(ADD_TRACKING).assertIsFocused()
+
+        val activity = compose.activityRule.scenario
+        activity.moveToState(Lifecycle.State.CREATED)
+        recreation.recreate { size = DpSize(411.dp, 900.dp) }
+        compose.mainClock.advanceTimeByFrame()
+        activity.moveToState(Lifecycle.State.RESUMED)
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        val field = compose.onNodeWithTag(ADD_TRACKING)
+        assertEquals("1Z999AA1012345", field.fetchSemanticsNode().config[SemanticsProperties.EditableText].text)
+        field.assertIsFocused()
+    }
+
+    /**
      * A window made again lays the page out once before the window's insets reach it, taller than it will stand, which
      * takes a place at its foot back by as much; the page takes its place again once it has its room.
      */

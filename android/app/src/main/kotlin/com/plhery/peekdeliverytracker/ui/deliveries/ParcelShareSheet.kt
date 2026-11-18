@@ -637,7 +637,7 @@ private fun WordsField(tag: String, label: String, value: String, name: Boolean,
             Modifier
                 .fillMaxWidth()
                 .testTag(tag)
-                .keptFocus()
+                .keptFocus(tag)
                 .onFocusChanged { if (it.isFocused) writing() }
                 .semantics {
                     contentDescription = label

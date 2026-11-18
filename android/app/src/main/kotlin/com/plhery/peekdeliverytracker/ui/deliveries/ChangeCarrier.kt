@@ -543,7 +543,7 @@ private fun androidx.compose.foundation.layout.RowScope.CarrierField(
             Modifier
                 .weight(1f)
                 .testTag(tag)
-                .keptFocus()
+                .keptFocus(tag)
                 .semantics {
                     contentDescription = placeholder
                     if (postalCode) contentType = ContentType.PostalCode

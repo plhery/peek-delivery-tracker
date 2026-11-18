@@ -1361,7 +1361,7 @@ private fun FeedbackField(label: String, input: @Composable (MutableState<Boolea
 private fun Modifier.feedbackField(tag: String, label: String, focused: MutableState<Boolean>, writing: () -> Unit): Modifier =
     fillMaxWidth()
         .testTag(tag)
-        .keptFocus()
+        .keptFocus(tag)
         .onFocusChanged {
             focused.value = it.isFocused
             if (it.isFocused) writing()

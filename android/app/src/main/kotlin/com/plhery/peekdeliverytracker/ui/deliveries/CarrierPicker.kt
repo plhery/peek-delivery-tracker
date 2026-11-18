@@ -470,7 +470,7 @@ private fun SearchField(query: String, onQuery: (String) -> Unit, prompt: String
                         .weight(1f)
                         .testTag(CARRIER_PICKER_SEARCH)
                         .focusRequester(focus)
-                        .keptFocus()
+                        .keptFocus(CARRIER_PICKER_SEARCH)
                         .onFocusChanged { if (it.isFocused) onFocus() }
                         .semantics { contentDescription = prompt },
                     textStyle = font.copy(color = colors.label),

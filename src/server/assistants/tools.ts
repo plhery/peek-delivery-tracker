@@ -307,19 +307,22 @@ function missingScope(scope: Scope, resourceMetadata: string) {
 
 /**
  * Amazon's shipping emails usually hold no tracking number, and its order number is no tracking number: an assistant
- * that can browse the user's signed-in Amazon site reads the carrier and tracking ID under Your Orders, Track package,
- * as Amazon's help ("Track Your Package", "Carrier Contact Information") tells its customers to. A parcel Amazon delivers
- * itself is mostly tracked in the user's Amazon account alone: adding its tracking ID says so
- * (`verifyAmazonShippingAddition`).
+ * that can browse the user's signed-in Amazon site reads the carrier and tracking ID on each package's Track package
+ * page, as Amazon's help ("Track Your Package", "Carrier Contact Information") tells its customers to. That page names
+ * the carrier after "Delivery By" and shows the "Tracking ID" itself; only a package on its way or just delivered has
+ * the button, and amazon.de's page has no "share tracking" link. A parcel Amazon delivers itself is mostly tracked
+ * in the user's Amazon account alone: adding its tracking ID says so (`verifyAmazonShippingAddition`).
  */
 const AMAZON_INSTRUCTIONS = 'Amazon orders: Amazon\'s emails usually hold no tracking number, and an Amazon order '
   + 'number (three groups of digits joined by dashes) is never one: never send it. When the user asks you to add '
   + 'their Amazon parcels and you can browse their Amazon site where they are signed in, open Your Orders there '
-  + '(/gp/css/order-history, such as https://www.amazon.fr/gp/css/order-history), choose Track package on each '
-  + 'shipment, open all its updates and read the carrier and the tracking ID. Send both to add_parcels, with the item '
-  + 'or "Amazon" as the name. When Amazon delivers a shipment itself and shows no tracking ID, or add_parcels refuses '
-  + 'it, tell the user Amazon tracks that one only in their Amazon account. On Amazon, only read: never buy, cancel, '
-  + 'return or change anything. If you cannot browse it, the user finds the same under Your Orders, then Track package.';
+  + '(/gp/css/order-history, such as https://www.amazon.de/gp/css/order-history). Each package on its way or just '
+  + 'delivered has its own Track package button; older orders have none, so leave them. That page names the carrier '
+  + 'after "Delivery By" and shows the "Tracking ID" (labels follow the site\'s language). Send both to add_parcels, '
+  + 'with the item or "Amazon" as the name. When Amazon delivers a package itself and shows no tracking ID, or '
+  + 'add_parcels refuses it, tell the user Amazon tracks that one only in their Amazon account. On Amazon, only read: '
+  + 'never buy, cancel, return or change anything, and never sign in for the user. If you cannot browse it, the user '
+  + 'finds the same under Your Orders, then Track package.';
 
 /** add_parcels' line on Amazon, for a client that keeps the tools but not the server's instructions. */
 const AMAZON_LINE = 'Never send an Amazon order number: an Amazon order\'s carrier and tracking ID are in the user\'s '

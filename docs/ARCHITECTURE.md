@@ -476,9 +476,10 @@ Key server modules:
     `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. Amazon's shipping emails usually hold no tracking number, so the instructions
     have an assistant that can browse the user's signed-in Amazon site open Your Orders, then
-    Track package on each shipment, and add its carrier and tracking ID, never the order number;
-    it only reads there, and says when Amazon tracks a parcel it delivers itself in the account
-    alone. `add_parcels`' description and its no-number answer point to the same page.
+    Track package on each package on its way or just delivered (older orders have no such
+    button), and add the carrier named after "Delivery By" with the "Tracking ID", never the
+    order number; it only reads there, never signs in, and says when Amazon tracks a parcel it
+    delivers itself in the account alone. `add_parcels`' description and its no-number answer point to the same page.
     The tools' answers leave out the receiver's name and postcode and read the scans as a
     link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan
     that names the recipient, who signed, a code or a door reads its stage's English name,

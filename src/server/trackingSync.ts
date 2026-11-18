@@ -3292,11 +3292,15 @@ export class TrackingSyncService {
         // scan tells of a failed attempt or a hold, and with a carrier the router swapped to, as another shipment's. A
         // handover keeps it: the parcel is the same, and the delivery carrier's day stays while it or a provider
         // relaying it answers without one.
+        if (result.expected_delivery) carrierData.expected_delivery_supplied_at = now.toISOString();
+        const supplied = Date.parse(String(previousData.expected_delivery_supplied_at));
         const held = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))
-          && ['failed_attempt', 'exception'].includes(String(event.stage)));
+          && ['failed_attempt', 'exception'].includes(String(event.stage))
+          && !(Date.parse(String(event.occurred_at)) < supplied));
         if (!result.expected_delivery && !held && !fetched.correction
           && expectedDayAhead(parcel, now) && ON_THE_WAY.has(String(values.current_stage ?? previousStage))) {
           values.expected_delivery = parcel.expected_delivery;
+          if (Number.isFinite(supplied)) carrierData.expected_delivery_supplied_at = previousData.expected_delivery_supplied_at;
           if (typeof previousData.expected_delivery_from === 'string' && carrierData.expected_delivery_from == null) {
             carrierData.expected_delivery_from = previousData.expected_delivery_from;
           }

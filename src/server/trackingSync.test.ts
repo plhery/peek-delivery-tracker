@@ -1898,6 +1898,15 @@ describe('TrackingSyncService', () => {
       expect(after.expected_delivery).toBeNull();
     });
 
+    it('keeps an estimate issued after a backfilled exception', async () => {
+      const check = parcel();
+      await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+      const next = await check('2026-10-27T15:00:00Z', answer('in_transit', {},
+        { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
+        { time: '2026-10-25T11:00:00Z', description: 'Held at customs', stage: 'exception' }, hub));
+      expect(next.expected_delivery).toBe('2026-10-29');
+    });
+
     it('goes when the carrier tells of a failed attempt or a hold, though the parcel is on its way again', async () => {
       for (const [stage, description] of [['failed_attempt', 'Recipient not at home'], ['exception', 'Delivery postponed']] as const) {
         const check = parcel();

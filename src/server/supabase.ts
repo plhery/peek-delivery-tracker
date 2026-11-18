@@ -1400,10 +1400,10 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /** Gives the account a forwarding address with this token, in place of the one it had. */
-  async openInboundMailbox(userId: string, token: string): Promise<InboundMailbox> {
+  async openInboundMailbox(userId: string, token: string, renew: boolean): Promise<InboundMailbox> {
     const mailbox = inboundMailbox(await this.request('/rest/v1/rpc/open_inbound_mailbox', {
       method: 'POST',
-      body: { p_user_id: userId, p_token: token },
+      body: { p_user_id: userId, p_token: token, p_renew: renew },
     }));
     if (!mailbox) throw new SupabaseError('Supabase did not return the forwarding address');
     return mailbox;

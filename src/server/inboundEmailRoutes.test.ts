@@ -87,7 +87,7 @@ describe('the account\'s forwarding address', () => {
     const open = vi.spyOn(SupabaseServiceClient.prototype, 'openInboundMailbox').mockImplementation(async (_, fresh) => ({ ...mailbox, token: fresh }));
     const first = await openInbox(signedIn('POST', {}), none);
     expect(first.status).toBe(201);
-    expect(open).toHaveBeenCalledWith(userId, expect.stringMatching(/^[a-z2-7]{16}$/));
+    expect(open).toHaveBeenCalledWith(userId, expect.stringMatching(/^[a-z2-7]{16}$/), false);
     read.mockResolvedValue(mailbox);
     expect(await (await openInbox(signedIn('POST', {}), none)).json()).toMatchObject({ inbox: { address: recipient } });
     expect(open).toHaveBeenCalledTimes(1);

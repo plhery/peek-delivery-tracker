@@ -78,6 +78,9 @@ begin
   exception when check_violation then null;
   end;
 
+  mailbox := public.open_inbound_mailbox(one, 'cccccccccccccccc', false);
+  if mailbox->>'token' is distinct from 'aaaaaaaaaaaaaaaa' then raise exception 'Setup replaced the address'; end if;
+
   -- A new address drops the old one and keeps the day's count.
   mailbox := public.open_inbound_mailbox(one, 'cccccccccccccccc');
   if (mailbox->>'used_today')::int <> 2 or mailbox->>'last_result' is not null then

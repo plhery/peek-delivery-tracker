@@ -37,7 +37,7 @@ export const POST = apiRoute(async (context) => {
   const userId = requireUser(context).id;
   const current = await service.inboundMailbox(userId);
   if (current && !payload.renew) return json(shown(settings, current));
-  return json(shown(settings, await service.openInboundMailbox(userId, newInboxToken())), current ? 200 : 201);
+  return json(shown(settings, await service.openInboundMailbox(userId, newInboxToken(), payload.renew === true)), current ? 200 : 201);
 }, { serviceRequired: true });
 
 /** Switches the notification of each parcel an email adds on or off (`{"notify": false}`). */

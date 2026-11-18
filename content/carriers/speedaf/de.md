@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-18
 ---
 
-Speedaf Express (速达非) ist ein 2019 gegründetes Zustellnetzwerk, das Pakete aus eigenen Lagern in China per Luftfracht nach Afrika, in den Nahen Osten, nach Pakistan und in einzelne europäische Länder fliegt und dort mit eigenen Fahrern zustellt. Im deutschsprachigen Raum steht nur die Schweiz auf der Länderliste von Speedaf – weder Deutschland noch Österreich oder Liechtenstein werden bedient. Um dein Paket zu verfolgen, gib die Sendungsnummer unter „Track“ auf [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in der Kunden-App von Speedaf oder oben ins Suchfeld ein. Die Nummer steht in den Versanddetails deiner Bestellung.
+Speedaf Express (速达非) ist ein 2019 gegründetes Zustellnetzwerk, das Pakete aus eigenen Lagern in China per Luftfracht nach Afrika, in den Nahen Osten, nach Pakistan und in einzelne europäische Länder fliegt und dort mit eigenen Fahrern zustellt. Im deutschsprachigen Raum steht nur die Schweiz auf der Länderliste von Speedaf – Deutschland, Österreich und Liechtenstein stehen nicht darauf. Um dein Paket zu verfolgen, gib die Sendungsnummer unter „Track“ auf [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), in der Kunden-App von Speedaf oder oben ins Suchfeld ein. Die Nummer steht in den Versanddetails deiner Bestellung.
 
 ## Speedaf-Sendungsnummer: Aufbau und Beispiele
 
@@ -63,7 +63,7 @@ Eine allgemeine Abholfrist für seine Stationen veröffentlicht Speedaf nicht. H
 
 ## Zoll und Abgaben bei Speedaf: pending Tax
 
-Sind Einfuhrabgaben offen, bleibt der Verlauf bei `pending Tax` stehen. Bei Sendungen nach **Südafrika** blendet die Sendungsverfolgung von Speedaf neben der Frachtbriefnummer einen Link „I want to pay taxes“ ein und zeigt nach der Zahlung „Taxes paid“. Für andere Länder zeigt die Tracking-Seite von Speedaf keinen solchen Zahlungslink.
+Sind Einfuhrabgaben offen, bleibt der Verlauf bei `pending Tax` stehen. Bei Sendungen nach **Südafrika** blendet die Sendungsverfolgung von Speedaf neben der Frachtbriefnummer einen Link „I want to pay taxes“ ein und zeigt nach der Zahlung „Taxes paid“.
 
 Fordert dich eine SMS oder E-Mail zur Zahlung auf, gleiche die Meldung zuerst direkt auf speedaf.com ab: Mehr dazu unter [Paket-Phishing per SMS erkennen](guide:delivery-scam-texts) und [Paket hängt beim Zoll](guide:customs).
 

@@ -63,7 +63,7 @@ Speedaf no publica un plazo general de recogida en sus puntos. Si no estabas cua
 
 ## Aduanas e impuestos en Speedaf: pending Tax
 
-Cuando hay aranceles o impuestos pendientes, el seguimiento se detiene en `pending Tax`. En los envíos con destino a **Sudáfrica**, la página de seguimiento de Speedaf muestra junto al número de guía un enlace «I want to pay taxes» y pasa a «Taxes paid» una vez completado el pago. Para otros países, su página de seguimiento no ofrece ese enlace de pago.
+Cuando hay aranceles o impuestos pendientes, el seguimiento se detiene en `pending Tax`. En los envíos con destino a **Sudáfrica**, la página de seguimiento de Speedaf muestra junto al número de guía un enlace «I want to pay taxes» y pasa a «Taxes paid» una vez completado el pago.
 
 Si recibes un SMS o correo pidiéndote pagar tasas, compruébalo antes entrando tú mismo en speedaf.com: lee [mensajes falsos de paquetería](guide:delivery-scam-texts) y [paquetes retenidos en aduanas](guide:customs).
 
@@ -122,7 +122,7 @@ Sí. Speedaf es una empresa logística fundada en 2019, con ZTO entre sus accion
 
 ### ¿En qué países entrega Speedaf?
 
-Además de China, la lista de países de Speedaf incluye Egipto, Sudáfrica, Marruecos, Emiratos Árabes Unidos, Ghana, Nigeria, Kenia, Uganda, Arabia Saudí, Pakistán, Kazajistán, Mauricio, Maldivas, Suiza, Montenegro, Albania, Irlanda, Serbia y Zambia. No opera en España ni en América Latina; Peek también reconoce números con prefijo `RE` (Reunión), `RW` (Ruanda) y `TR` (Turquía).
+Además de China, la lista de países de Speedaf incluye Egipto, Sudáfrica, Marruecos, Emiratos Árabes Unidos, Ghana, Nigeria, Kenia, Uganda, Arabia Saudí, Pakistán, Kazajistán, Mauricio, Maldivas, Suiza, Montenegro, Albania, Irlanda, Serbia y Zambia. España y América Latina no figuran en ella; Peek también reconoce números con prefijo `RE` (Reunión), `RW` (Ruanda) y `TR` (Turquía).
 
 ### ¿Cuánto tarda en llegar un paquete de Speedaf?
 

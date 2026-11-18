@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-18
 ---
 
-Speedaf Express (速达非) è una rete di corrieri fondata nel 2019 che spedisce per via aerea i pacchi dai propri magazzini in Cina verso Africa, Medio Oriente, Pakistan e alcuni Paesi europei, curando direttamente la consegna finale. Nell'area italofona compare nell'elenco Paesi di Speedaf solo la Svizzera: né l'Italia né San Marino sono serviti. Per seguire una spedizione, inserisci il numero sotto «Track» su [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), nell'app clienti di Speedaf oppure nel riquadro qui sopra. Il codice si trova nei dettagli di spedizione dell'ordine.
+Speedaf Express (速达非) è una rete di corrieri fondata nel 2019 che spedisce per via aerea i pacchi dai propri magazzini in Cina verso Africa, Medio Oriente, Pakistan e alcuni Paesi europei, curando direttamente la consegna finale. Nell'area italofona compare nell'elenco Paesi di Speedaf solo la Svizzera: né l'Italia né San Marino vi figurano. Per seguire una spedizione, inserisci il numero sotto «Track» su [speedaf.com](https://www.speedaf.com/cn-en/send-parcel), nell'app clienti di Speedaf oppure nel riquadro qui sopra. Il codice si trova nei dettagli di spedizione dell'ordine.
 
 ## Numero di tracciamento Speedaf: formato ed esempi
 
@@ -63,7 +63,7 @@ Speedaf non pubblica una scadenza generale per il ritiro presso le proprie sedi.
 
 ## Dazi doganali Speedaf: pending Tax
 
-Se sono dovuti dazi o imposte, il tracciamento si ferma su `pending Tax`. Per le spedizioni dirette in **Sudafrica**, la pagina di tracciamento di Speedaf mostra accanto alla lettera di vettura il link «I want to pay taxes», sostituito da «Taxes paid» una volta saldato l'importo. Per gli altri Paesi il tracciamento di Speedaf non mostra questo link di pagamento.
+Se sono dovuti dazi o imposte, il tracciamento si ferma su `pending Tax`. Per le spedizioni dirette in **Sudafrica**, la pagina di tracciamento di Speedaf mostra accanto alla lettera di vettura il link «I want to pay taxes», sostituito da «Taxes paid» una volta saldato l'importo.
 
 Se un SMS o un'e-mail ti chiede di pagare oneri, confronta prima lo stato direttamente su speedaf.com: leggi [SMS truffa sui pacchi](guide:delivery-scam-texts) e [pacco bloccato in dogana](guide:customs).
 

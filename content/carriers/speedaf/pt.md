@@ -63,7 +63,7 @@ A Speedaf não publica um prazo geral de levantamento nas suas estações. Se fa
 
 ## Direitos aduaneiros na Speedaf: pending Tax
 
-Quando há direitos ou impostos a pagar, o seguimento pára em `pending Tax`. Nas encomendas destinadas à **África do Sul**, a página de seguimento da Speedaf apresenta junto ao número da carta de porte uma ligação «I want to pay taxes» e passa a «Taxes paid» depois de concluído o pagamento. Para outros países, a página de seguimento da Speedaf não mostra essa ligação de pagamento.
+Quando há direitos ou impostos a pagar, o seguimento pára em `pending Tax`. Nas encomendas destinadas à **África do Sul**, a página de seguimento da Speedaf apresenta junto ao número da carta de porte uma ligação «I want to pay taxes» e passa a «Taxes paid» depois de concluído o pagamento.
 
 Se uma mensagem SMS ou um e-mail te pedir um pagamento, confirma primeiro diretamente em speedaf.com: lê [burlas de encomendas por SMS](guide:delivery-scam-texts) e [encomenda retida na alfândega](guide:customs).
 
@@ -122,7 +122,7 @@ Sim. A Speedaf é uma empresa de logística fundada em 2019, tendo a ZTO entre o
 
 ### Em que países entrega a Speedaf?
 
-Além da China, a lista de países da Speedaf inclui Egito, África do Sul, Marrocos, Emirados Árabes Unidos, Gana, Nigéria, Quénia, Uganda, Arábia Saudita, Paquistão, Cazaquistão, Maurícia, Maldivas, Suíça, Montenegro, Albânia, Irlanda, Sérvia e Zâmbia. Não opera em Portugal, no Brasil nem nos países lusófonos de África; o Peek reconhece ainda números iniciados por `RE` (Reunião), `RW` (Ruanda) e `TR` (Turquia).
+Além da China, a lista de países da Speedaf inclui Egito, África do Sul, Marrocos, Emirados Árabes Unidos, Gana, Nigéria, Quénia, Uganda, Arábia Saudita, Paquistão, Cazaquistão, Maurícia, Maldivas, Suíça, Montenegro, Albânia, Irlanda, Sérvia e Zâmbia. Portugal, o Brasil e os países lusófonos de África não constam dela; o Peek reconhece ainda números iniciados por `RE` (Reunião), `RW` (Ruanda) e `TR` (Turquia).
 
 ### Quanto tempo demora uma encomenda da Speedaf?
 

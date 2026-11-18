@@ -501,6 +501,35 @@ describe('withEventPlaces', () => {
       .toEqual({ taken: null, left: 'taken' });
   });
 
+  it('serves the next carrier\'s row in transit under the earlier carrier\'s posting at its office when that is the first step', () => {
+    const scan = (id: string, source: string, occurredAt: string, stage: string, location: string | null, description: string) => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const served = (...tracking_events: Record<string, unknown>[]) => Object.fromEntries((withEventPlaces({
+      id: 'parcel', carrier: 'poczta-polska', carrier_data: { original_carrier: 'poczta-polska', active_tracking_carrier: 'dhl' }, tracking_events,
+    }) as { tracking_events: Record<string, unknown>[] }).tracking_events.map(({ id, relay_of }) => [id, relay_of ?? null]));
+    // DHL tells Poczta Polska's posting as an arrival at its origin centre, naming the country: the posting goes on top,
+    // a label printed before it or not.
+    const arrived = scan('arrived', 'dhl', '2026-10-23T08:17:00Z', 'in_transit', 'Example Country', 'Fixture arrived at the origin centre');
+    const posted = (location: string | null = 'Example Office', description = 'Fixture posted at the office', stage = 'accepted') =>
+      scan('posted', 'poczta-polska', '2026-10-23T08:17:29Z', stage, location, description);
+    expect(served(arrived, posted())).toEqual({ arrived: 'posted', posted: null });
+    expect(served(scan('label', 'poczta-polska', '2026-10-22T16:00:00Z', 'registered', 'Example Office', 'Fixture label printed'), arrived, posted()))
+      .toEqual({ label: null, arrived: 'posted', posted: null });
+    // Not after an earlier step on the way: a collection after the posting the day before.
+    expect(served(scan('sorted', 'poczta-polska', '2026-10-22T16:00:00Z', 'in_transit', 'Example Hub', 'Fixture sorted'), arrived, posted()))
+      .toEqual({ sorted: null, arrived: null, posted: 'arrived' });
+    // Nor a posting that says nowhere, nor a row of the earlier carrier's in transit.
+    expect(served(arrived, posted(null))).toEqual({ arrived: null, posted: 'arrived' });
+    expect(served(arrived, posted('Example Office', 'Fixture left the office', 'in_transit'))).toEqual({ arrived: null, posted: 'arrived' });
+    // Nor beside a row past transit.
+    expect(served(scan('arrived', 'dhl', '2026-10-23T08:17:00Z', 'customs', 'Example Country', 'Fixture at customs'), posted()))
+      .toEqual({ arrived: null, posted: 'arrived' });
+    // Nor one row's words holding the other's.
+    expect(served(arrived, posted('Example Office', 'Fixture arrived'))).toEqual({ arrived: null, posted: 'arrived' });
+    expect(served(arrived, posted('Example Office', 'Fixture arrived at the origin centre of the post'))).toEqual({ arrived: null, posted: 'arrived' });
+  });
+
   it('serves a relay row in the words of the row it goes under, spelt otherwise, in that row\'s spelling', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
       ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,

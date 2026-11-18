@@ -979,8 +979,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the tracking carrier's own (Royal Mail's sorting office beside a universal provider's United
   Kingdom), or, saying where it was, has come further than a row that only registers the parcel,
   neither row's words holding the other's (Poczta Polska's posting beside bpost's notice that it has
-  the parcel's data; a consolidator's copy of the next carrier's notice stays under it), the other
-  row is served with `relay_of` instead. The new carrier may also tell
+  the parcel's data; a consolidator's copy of the next carrier's notice stays under it), or is a
+  posting that says where it was, the parcel's first step past registered, beside a row in transit,
+  neither row's words holding the other's (DHL tells Poczta Polska's posting as an arrival at its
+  origin centre), the other row is served with `relay_of` instead. The new carrier may also tell
   the steps the earlier one sent it over the posts' data exchange, placed only in the earlier carrier's
   country and stamped when the message arrived (Slovenská pošta tells Poczta Polska's posting
   and departure an hour or two late). A row of the new carrier placed in nothing but a country

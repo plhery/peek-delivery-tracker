@@ -314,6 +314,9 @@ const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
  * Nor one further on, that says where it was, than a scan that only registers the parcel, unless one row's words hold
  * the other's: bpost's notice that it has the parcel's data goes under Poczta Polska's posting at the office. A
  * consolidator's copy of the next carrier's notice tells that notice and stays under it.
+ * Nor a posting that says where it was, the parcel's first step past registered, beside a scan in transit, unless one
+ * row's words hold the other's: DHL tells Poczta Polska's posting as an arrival at its origin centre, naming the
+ * country. A collection after an earlier posting, or a posting after a scan on the way, stays under it.
  * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
  * one on top.
  */
@@ -324,6 +327,12 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     && sameWords(other, scan) && Date.parse(String(other.occurred_at)) < Date.parse(String(scan.occurred_at)));
   const further = (copy: JsonObject, scan: JsonObject) =>
     EVENT_STAGE_ORDER.indexOf(String(copy.stage)) > EVENT_STAGE_ORDER.indexOf(String(scan.stage));
+  const registeredAt = EVENT_STAGE_ORDER.indexOf('registered');
+  const firstStep = (copy: JsonObject, scan: JsonObject) => {
+    const start = Math.min(Date.parse(String(copy.occurred_at)), Date.parse(String(scan.occurred_at)));
+    return !events.some((other) => other !== copy && other !== scan && EVENT_STAGE_ORDER.indexOf(String(other.stage)) > registeredAt
+      && Date.parse(String(other.occurred_at)) < start);
+  };
   const pastTransit = (scan: JsonObject, copy: JsonObject) => further(scan, copy)
     && EVENT_STAGE_ORDER.indexOf(String(scan.stage)) > EVENT_STAGE_ORDER.indexOf('in_transit');
   const namesTheTown = (copy: JsonObject, scan: JsonObject) => source(scan) !== current && placeWithin(scan, copy)
@@ -333,7 +342,9 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
     || (copy.stage === scan.stage && namesTheTown(copy, scan))
     || (further(copy, scan) && toldBefore(scan))
-    || (scan.stage === 'registered' && further(copy, scan) && placed(copy) && !wordsWithin(copy, scan) && !wordsWithin(scan, copy));
+    || (scan.stage === 'registered' && further(copy, scan) && placed(copy) && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
+    || (copy.stage === 'accepted' && scan.stage === 'in_transit' && firstStep(copy, scan) && placed(copy)
+      && !wordsWithin(copy, scan) && !wordsWithin(scan, copy));
   // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
   // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
   const top = (id: string) => {

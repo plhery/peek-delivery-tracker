@@ -2612,6 +2612,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "india-post-sendungsverfolgung",
+      "title": "India Post Sendungsverfolgung: Speed-Post-Nummer und Status",
+      "name": "India Post",
+      "color": "#b82025"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "rl-carriers-sendungsverfolgung",
@@ -3334,6 +3342,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "suivi-india-post",
+      "title": "Suivi India Post et Speed Post\u00a0: numéros, statuts et douane",
+      "name": "India Post",
+      "color": "#b82025"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "suivi-rl-carriers",
@@ -3960,6 +3976,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "tracciamento-india-post",
+      "title": "Tracciamento India Post e Speed Post: numeri, stati e dogana",
+      "name": "India Post",
+      "color": "#b82025"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "tracciamento-rl-carriers",
@@ -4362,6 +4386,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedx",
+      "catalog": "speedx",
+      "slug": "seguimiento-speedx",
+      "title": "Seguimiento de SpeedX: estados, entregas fallidas y contacto",
+      "name": "SpeedX",
+      "color": "#1aa3ff"
+    },
+    {
       "id": "first-line",
       "catalog": "first-line",
       "slug": "first-line-seguimiento",
@@ -4576,6 +4608,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento de HuaHan Logistics: número HHW…YQ y entrega",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "seguimiento-india-post",
+      "title": "Seguimiento de India Post: números Speed Post y estados",
+      "name": "India Post",
+      "color": "#b82025"
     },
     {
       "id": "forza-delivery",
@@ -5164,6 +5204,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "seguimento-india-post",
+      "title": "Seguimento India Post e Speed Post: números e estados",
+      "name": "India Post",
+      "color": "#b82025"
+    },
+    {
       "id": "rl-carriers",
       "catalog": "rl-carriers",
       "slug": "seguimento-rl-carriers",
@@ -5728,6 +5776,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "sledzenie-speedaf",
+      "title": "Śledzenie przesyłek Speedaf Express: numery i statusy",
+      "name": "Speedaf",
+      "color": "#ff8300"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sledzenie",
@@ -5798,6 +5854,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie HuaHan Logistics: numer HHW…YQ i doręczenie",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "india-post",
+      "catalog": "india-post",
+      "slug": "sledzenie-india-post",
+      "title": "Śledzenie India Post: numery Speed Post, statusy i cło",
+      "name": "India Post",
+      "color": "#b82025"
     },
     {
       "id": "rl-carriers",

@@ -234,6 +234,11 @@ function sameWords(event: JsonObject, other: JsonObject): boolean {
   return words !== '' && words === wordsRead(other);
 }
 
+/** Whether one row's words, as a reader tells them apart, hold the other's: an empty one is held by any. */
+function wordsWithin(event: JsonObject, other: JsonObject): boolean {
+  return wordsRead(event).includes(wordsRead(other));
+}
+
 /** A row's words of three letters or more, as a reader tells them apart. None for a scan its source gave no words for. */
 function longWords(event: JsonObject): string[] {
   if (event.description === UNWORDED_STEP) return [];
@@ -306,6 +311,9 @@ const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
  * Nor one in the scan's stage that names, in Latin letters, a town in the country the scan names alone, unless that
  * scan is the tracking carrier's own: Royal Mail's sorting office beside a universal provider's United Kingdom. The
  * apps show a place written in another script in it, so the country reads better there.
+ * Nor one further on, that says where it was, than a scan that only registers the parcel, unless one row's words hold
+ * the other's: bpost's notice that it has the parcel's data goes under Poczta Polska's posting at the office. A
+ * consolidator's copy of the next carrier's notice tells that notice and stays under it.
  * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
  * one on top.
  */
@@ -324,7 +332,8 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     || copyTellsProblem(copy, scan)
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
     || (copy.stage === scan.stage && namesTheTown(copy, scan))
-    || (further(copy, scan) && toldBefore(scan));
+    || (further(copy, scan) && toldBefore(scan))
+    || (scan.stage === 'registered' && further(copy, scan) && placed(copy) && !wordsWithin(copy, scan) && !wordsWithin(scan, copy));
   // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
   // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
   const top = (id: string) => {

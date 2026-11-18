@@ -473,6 +473,34 @@ describe('withEventPlaces', () => {
     })).toEqual({ 'left-copy': null, left: 'left-copy', sorted: null, 'sorted-copy': 'sorted' });
   });
 
+  it('serves a scan that only registers the parcel under the earlier carrier\'s posting at its office, unless one tells the other\'s words', () => {
+    const scan = (id: string, source: string, occurredAt: string, stage: string, location: string | null, description: string) => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const served = (...tracking_events: Record<string, unknown>[]) => Object.fromEntries((withEventPlaces({
+      id: 'parcel', carrier: 'poczta-polska', carrier_data: { original_carrier: 'poczta-polska', active_tracking_carrier: 'bpost' }, tracking_events,
+    }) as { tracking_events: Record<string, unknown>[] }).tracking_events.map(({ id, relay_of }) => [id, relay_of ?? null]));
+    // bpost's notice that it has the data, at the minute of the posting, names the country: the posting goes on top.
+    const notice = scan('notice', 'bpost', '2026-10-23T08:12:00Z', 'registered', 'Example Country', 'Fixture data received');
+    expect(served(notice, scan('posted', 'poczta-polska', '2026-10-23T08:12:27Z', 'accepted', 'Example Office', 'Fixture posted at the office')))
+      .toEqual({ notice: 'posted', posted: null });
+    // Not a posting that says nowhere.
+    expect(served(notice, scan('posted', 'poczta-polska', '2026-10-23T08:12:27Z', 'accepted', null, 'Fixture posted at the office')))
+      .toEqual({ notice: null, posted: 'notice' });
+    // Nor a consolidator's copy of the notice, its words holding the notice's, or held by them.
+    expect(served(notice, scan('copy', 'poczta-polska', '2026-10-23T08:12:27Z', 'in_transit', 'Example Hub', 'Fixture data received by bpost')))
+      .toEqual({ notice: null, copy: 'notice' });
+    expect(served(notice, scan('copy', 'poczta-polska', '2026-10-23T08:12:27Z', 'accepted', 'Example Hub', 'Fixture data')))
+      .toEqual({ notice: null, copy: 'notice' });
+    // Nor a row no further on.
+    expect(served(notice, scan('label', 'poczta-polska', '2026-10-23T08:12:27Z', 'registered', 'Example Office', 'Fixture label printed')))
+      .toEqual({ notice: null, label: 'notice' });
+    // Nor beside a scan past registered.
+    expect(served(scan('taken', 'bpost', '2026-10-23T08:12:00Z', 'accepted', 'Example Country', 'Fixture taken over'),
+      scan('left', 'poczta-polska', '2026-10-23T08:12:27Z', 'in_transit', 'Example Office', 'Fixture left the office')))
+      .toEqual({ taken: null, left: 'taken' });
+  });
+
   it('serves a relay row in the words of the row it goes under, spelt otherwise, in that row\'s spelling', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
       ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,

@@ -1356,11 +1356,19 @@ export function sharedScans(
    * no provider is a carrier's for a provider's copy (FedEx's scans a universal lookup gave in FedEx's codes). An
    * earlier carrier's relay of a delivery scan (India Post's to the minute, Nova Poshta's) is no such pair.
    */
+  const rowsByMinute = new Map<number, JsonObject[]>();
+  for (const row of rows) {
+    const minute = Math.floor(instantOf(row) / MINUTE_MS);
+    const bucket = rowsByMinute.get(minute);
+    if (bucket) bucket.push(row);
+    else rowsByMinute.set(minute, [row]);
+  }
   const restagedOf = (event: JsonObject): JsonObject[] => {
     const universal = sourceOf(identity(event)) === UNIVERSAL;
     const at = instantOf(event);
     if (stageOf(event) === '' || occupied.has(at) || dayAlone(event)) return [];
-    return rows.filter((row) => {
+    const sameMinute = rowsByMinute.get(Math.floor(at / MINUTE_MS)) ?? [];
+    return sameMinute.filter((row) => {
       if ((universal ? !heldByCarrier(row) : sourceOf(identity(row)) !== UNIVERSAL) || dayAlone(row) || !sameTruncated(at, instantOf(row))
         || shown.has(instantOf(row)) || placesApart(event, row)) return false;
       const [copy, own] = universal ? [event, row] : [row, event];
@@ -1374,13 +1382,21 @@ export function sharedScans(
    * source (and provider) that the same rows could hold are as many, both taken from the oldest, and the stages
    * of each pair agree: ParcelsApp's English copies of two Austrian Post scans of one minute, dated to that minute.
    */
+  const candidatesByEvent = new Map(pending.map(event => [event, restagedOf(event)]));
+  const peersByGroup = new Map<string, JsonObject[]>();
+  const groupByEvent = new Map<JsonObject, string>();
+  for (const [event, candidates] of candidatesByEvent) {
+    if (candidates.length < 2) continue;
+    const key = JSON.stringify([sourceOf(identity(event)), providerOf(event), candidates.map(identity)]);
+    groupByEvent.set(event, key);
+    const peers = peersByGroup.get(key);
+    if (peers) peers.push(event);
+    else peersByGroup.set(key, [event]);
+  }
   const inOrder = (event: JsonObject, candidates: readonly JsonObject[]): JsonObject | undefined => {
-    const peers = pending.filter((scan) => {
-      if (sourceOf(identity(scan)) !== sourceOf(identity(event)) || providerOf(scan) !== providerOf(event)) return false;
-      const theirs = restagedOf(scan);
-      return theirs.length === candidates.length && theirs.every((row) => candidates.includes(row));
-    });
-    if (peers.length !== candidates.length || peers.some((scan) => candidates.some((row) => (
+    const key = groupByEvent.get(event);
+    const peers = key === undefined ? undefined : peersByGroup.get(key);
+    if (!peers || peers.length !== candidates.length || peers.some((scan) => candidates.some((row) => (
       sameWording(wordingOf(scan), wordingOf(row)) || opensAlike(scan, row))))) return undefined;
     const tie = (row: JsonObject) => tieOrder(row.tie_order ?? (isRecord(row.raw_data) ? row.raw_data.tie_order : undefined));
     const oldestFirst = (list: readonly JsonObject[]) => [...list].sort((left, right) => instantOf(left) - instantOf(right)
@@ -1399,7 +1415,7 @@ export function sharedScans(
     const truncated = occupied.has(at) || dayAlone(event) ? []
       : eligible.filter((row) => !dayAlone(row) && sameTruncated(at, instantOf(row)) && !shown.has(instantOf(row)));
     const minuted = truncated.filter((row) => sameWords(row, event));
-    const restaged = restagedOf(event);
+    const restaged = candidatesByEvent.get(event) ?? restagedOf(event);
     // A scan of the provider's own row dated past when the row was first stored is its next scan, not the row on a
     // corrected clock: ParcelsApp lists only FedEx's latest "On the way", 13 h after the one it replaced. So is a
     // carrier's scan past when a provider's copy was stored, unless one shows the other's wall clock under another

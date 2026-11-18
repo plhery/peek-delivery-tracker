@@ -262,7 +262,11 @@ describe('the MCP endpoint', () => {
     const started = await mcp(reader, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });
     expect(started.status).toBe(200);
     const initialized = (await rpc(started)).result!;
-    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek' }, capabilities: { tools: {} } });
+    // The tool list never changes, so a client has no stream to open for it: Peek refuses `subscriptions/listen`.
+    expect(initialized).toMatchObject({ protocolVersion: LATEST_PROTOCOL_VERSION, serverInfo: { name: 'peek' }, capabilities: { tools: { listChanged: false } } });
+    const discovered = await mcp(reader, 'server/discover', {}, 'modern');
+    expect(discovered.status).toBe(200);
+    expect((await rpc(discovered)).result).toMatchObject({ capabilities: { tools: { listChanged: false } } });
     // The instructions send the model to Peek's own tools alone, never to another connector.
     expect(initialized.instructions).toContain('add_parcels');
     expect(initialized.instructions).not.toMatch(/gmail|connector|plugin/i);

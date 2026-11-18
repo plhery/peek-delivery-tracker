@@ -443,7 +443,8 @@ Key server modules:
     longer names gets no token, so its grants lapse. The database keeps
     tokens and codes as their SHA-256, and only the service role reaches those tables.
   - A grant makes at most 120 requests a minute, each `/mcp` request one message: a batch
-    and `subscriptions/listen` get 400. A network may present 600 unknown tokens a minute,
+    and `subscriptions/listen` get 400, and the server says its tool list never changes, so a
+    client has nothing to listen for. A network may present 600 unknown tokens a minute,
     as may an IPv6 /48; while it waits, a token issued or found valid lately still goes
     through, so a stranger can't lock out an assistant's shared addresses. A network may open the consent page 30 times a minute (a /48 120) and register 20
     clients an hour. An

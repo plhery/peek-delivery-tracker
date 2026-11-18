@@ -227,6 +227,9 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   const server = new McpServer(
     { name: 'peek', title: 'Peek', version: '1.0.0' },
     {
+      // Peek's tools never change while it runs, and `/mcp` refuses the stream that would say so (mcp.ts): a client told
+      // the list may change opens `subscriptions/listen` and retries it.
+      capabilities: { tools: { listChanged: false } },
       instructions: 'Peek follows the user\'s parcels. add_parcels reads tracking numbers out of text, such as a shipping '
         + 'email\'s, and follows them; list_parcels and get_parcel tell where each parcel is; archive_parcel puts one away. '
         + 'Give list_parcels the status, sort and search that answer the question rather than listing every parcel. '

@@ -146,6 +146,12 @@ begin
   end if;
   delete from public.notification_preferences where user_id = alex;
 
+  perform public.set_inbound_mailbox_notify(alex, false);
+  if exists (select public.claim_email_added_push(true, true)) then
+    raise exception 'A delayed push outlived its notification switch';
+  end if;
+  perform public.set_inbound_mailbox_notify(alex, true);
+
   -- Opened or archived, a parcel is not announced any more.
   set local role authenticated;
   perform set_config('request.jwt.claim.sub', alex::text, true);

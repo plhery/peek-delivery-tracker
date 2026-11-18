@@ -14,10 +14,10 @@ The numbers Peek knows as Xinghe Freight's are GZXH, ten digits and YQ, 16 chara
 
 | Number | What it is |
 | --- | --- |
-| `GZXH0000000000YQ` | GZXH, ten digits and YQ: Xinghe Freight's layout. Peek names Xinghe Freight straight away. |
-| `GZXH000000000YQ` | Only nine digits: not Xinghe's layout. Check for a missing digit. |
-| `YL0000000000YQ` | YL, ten digits and YQ: the layout of [GZYL](carrier:gzyl)'s waybills. Same tracker, another forwarder. |
-| `JXCAA0000000000YQ` | Also ends in YQ, as many Chinese forwarders' numbers do, but starts with JXC: a [Juxi Express](carrier:juxi-express) number. |
+| `GZXH4829105736YQ` | GZXH, ten digits and YQ: Xinghe Freight's layout. Peek names Xinghe Freight straight away. |
+| `GZXH482910573YQ` | Only nine digits: not Xinghe's layout. Check for a missing digit. |
+| `YL4829105736YQ` | YL, ten digits and YQ: the layout of [GZYL](carrier:gzyl)'s waybills. Same tracker, another forwarder. |
+| `JXCAA4829105736YQ` | Also ends in YQ, as many Chinese forwarders' numbers do, but starts with JXC: a [Juxi Express](carrier:juxi-express) number. |
 
 Spaces, dashes and lower case don't matter when you paste the number into Peek.
 

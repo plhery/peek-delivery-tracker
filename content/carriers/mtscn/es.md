@@ -16,7 +16,7 @@ Los números de envío de Meiteshun llevan AMTS, nueve cifras y FS. Con cifras i
 | --- | --- |
 | `AMTS000000017FS` | AMTS, nueve cifras y FS: un número de envío de Meiteshun. |
 | `AMTS00000001FS` | Solo ocho cifras: no es el formato de Meiteshun. Mira si falta una cifra. |
-| `RR000000005CN` | Dos letras, nueve cifras y CN: un número de [China Post](carrier:china-post), no de Meiteshun. |
+| `RR482910576CN` | Dos letras, nueve cifras y CN: un número de [China Post](carrier:china-post), no de Meiteshun. |
 
 En Peek da igual que lo pegues en minúsculas o con espacios.
 

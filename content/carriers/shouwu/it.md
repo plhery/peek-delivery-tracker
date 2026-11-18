@@ -14,9 +14,9 @@ Le lettere di vettura di Shouwu sono SWECN, dodici cifre e YQ: 19 caratteri in t
 
 | Numero | Cos'è |
 | --- | --- |
-| `SWECN000000000000YQ` | SWECN, dodici cifre e YQ: una lettera di vettura Shouwu. |
-| `SWECN00000000000YQ` | Solo undici cifre: non è un numero Shouwu. Controlla che non ne manchi una. |
-| `JSEAA0000000000YQ` | Anche questo finisce con YQ, ma inizia con JSE: è un numero di JS Express. |
+| `SWECN482910573649YQ` | SWECN, dodici cifre e YQ: una lettera di vettura Shouwu. |
+| `SWECN48291057364YQ` | Solo undici cifre: non è un numero Shouwu. Controlla che non ne manchi una. |
+| `JSEAA4829105736YQ` | Anche questo finisce con YQ, ma inizia con JSE: è un numero di JS Express. |
 
 Anche altri spedizionieri cinesi chiudono i loro numeri con YQ, con davanti lettere proprie e, nel catalogo di Peek, per lo più dieci cifre. SWECN e dodici cifre indicano Shouwu. In Peek spazi, trattini e minuscole non contano.
 

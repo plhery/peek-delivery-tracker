@@ -14,9 +14,9 @@ Shouwus Sendungsnummern bestehen aus SWECN, zwölf Ziffern und YQ, zusammen 19 Z
 
 | Nummer | Was sie ist |
 | --- | --- |
-| `SWECN000000000000YQ` | SWECN, zwölf Ziffern und YQ: eine Shouwu-Nummer. |
-| `SWECN00000000000YQ` | Nur elf Ziffern: So sehen Shouwus Nummern nicht aus. Prüf, ob eine Ziffer fehlt. |
-| `JSEAA0000000000YQ` | Endet auch auf YQ, beginnt aber mit JSE: eine Nummer von JS Express. |
+| `SWECN482910573649YQ` | SWECN, zwölf Ziffern und YQ: eine Shouwu-Nummer. |
+| `SWECN48291057364YQ` | Nur elf Ziffern: So sehen Shouwus Nummern nicht aus. Prüf, ob eine Ziffer fehlt. |
+| `JSEAA4829105736YQ` | Endet auch auf YQ, beginnt aber mit JSE: eine Nummer von JS Express. |
 
 Auch andere chinesische Spediteure lassen ihre Nummern auf YQ enden, mit eigenen Buchstaben davor und, in Peeks Katalog, meist zehn Ziffern. SWECN und zwölf Ziffern stehen für Shouwu. Leerzeichen, Bindestriche und Kleinbuchstaben stören Peek nicht.
 

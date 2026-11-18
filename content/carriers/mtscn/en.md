@@ -16,7 +16,7 @@ Meiteshun's waybills are AMTS, nine digits and FS. With invented digits:
 | --- | --- |
 | `AMTS000000017FS` | AMTS, nine digits and FS: a Meiteshun waybill. |
 | `AMTS00000001FS` | Only eight digits: not Meiteshun's layout. Check for a missing digit. |
-| `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Meiteshun's. |
+| `RR482910576CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not Meiteshun's. |
 
 Lower case and spaces don't matter when you paste it into Peek.
 

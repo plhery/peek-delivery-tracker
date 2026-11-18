@@ -16,7 +16,7 @@ Die Frachtbriefnummern von Meiteshun bestehen aus AMTS, neun Ziffern und FS, zus
 | --- | --- |
 | `AMTS000000017FS` | AMTS, neun Ziffern und FS: eine Frachtbriefnummer von Meiteshun. |
 | `AMTS00000001FS` | Nur acht Ziffern: So sehen die Nummern von Meiteshun nicht aus. Prüf, ob eine Ziffer fehlt. |
-| `RR000000005CN` | Zwei Buchstaben, neun Ziffern und CN: eine Nummer der [China Post](carrier:china-post), keine von Meiteshun. |
+| `RR482910576CN` | Zwei Buchstaben, neun Ziffern und CN: eine Nummer der [China Post](carrier:china-post), keine von Meiteshun. |
 
 Leerzeichen und Kleinbuchstaben stören Peek beim Einfügen nicht.
 

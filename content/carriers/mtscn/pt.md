@@ -16,7 +16,7 @@ As guias da Meiteshun têm AMTS, nove algarismos e FS. Com algarismos inventados
 | --- | --- |
 | `AMTS000000017FS` | AMTS, nove algarismos e FS: uma guia da Meiteshun. |
 | `AMTS00000001FS` | Só oito algarismos: não é o formato da Meiteshun. Vê se falta um algarismo. |
-| `RR000000005CN` | Duas letras, nove algarismos e CN: um número da [China Post](carrier:china-post), não da Meiteshun. |
+| `RR482910576CN` | Duas letras, nove algarismos e CN: um número da [China Post](carrier:china-post), não da Meiteshun. |
 
 No Peek, tanto faz escreveres o número em minúsculas ou com espaços.
 

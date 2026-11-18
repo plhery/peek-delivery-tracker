@@ -14,13 +14,13 @@ The shapes Peek knows as JD Logistics, and one that isn't, with invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `JD0000000000000` | JD and 13 digits: a JD Logistics waybill. |
-| `JDA000000000000` | JD, a letter and 12 digits: JD Logistics too. |
-| `JDAA00000000000` | JD, two letters and 11 digits: JD Logistics too. |
-| `VG00000000000` | VG and 11 digits: JD Logistics too, but La Poste's numbers can take this shape, so Peek doesn't name JD at once (below). |
-| `JD000000000000000000` | JD and 18 digits: not JD Logistics. Peek asks [DHL Paket](carrier:dhl), which uses this shape. |
+| `JD4829105736491` | JD and 13 digits: a JD Logistics waybill. |
+| `JDA482910573649` | JD, a letter and 12 digits: JD Logistics too. |
+| `JDAP48291057364` | JD, two letters and 11 digits: JD Logistics too. |
+| `VG48291057364` | VG and 11 digits: JD Logistics too, but La Poste's numbers can take this shape, so Peek doesn't name JD at once (below). |
+| `JD482910573649182736` | JD and 18 digits: not JD Logistics. Peek asks [DHL Paket](carrier:dhl), which uses this shape. |
 
-Lower case, spaces and dashes don't matter in Peek. JD's international tracker takes up to 10 numbers at once, separated by spaces: press Enter or "Track".
+Lower case, spaces and dashes don't matter in Peek. JD's international tracker takes up to 100 numbers at once, separated by spaces: press Enter or "Track".
 
 **Where to find it.** The shop that booked JD gives it, in its shipping email or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
@@ -87,7 +87,7 @@ Peek reads JD's international tracking: the status, each step in JD's words with
 
 For the JD numbers of parcels inside China (JD and 13 digits starting with 0; JDJ, JDK, JDV or JDX and 12 digits; JDVA, JDVB, JDVC or JDAZ and 11), Peek opens JD's Chinese tracker on jdl.com instead of the international one. For JDW and 12 digits, or JDAP and 11, it reads only the international tracker; for other JD numbers, the international one first, then the Chinese one when that has nothing. Peek shows the Chinese lines in Chinese, without the courier's name, phone number or the name of whoever signed. JD's Chinese tracker often asks for a check Peek can't pass: Peek then leaves it for that number for 6 hours or more, up to a day, so if a parcel inside China shows nothing in Peek, look it up on jdl.com. An empty answer from JD doesn't prove the number wrong: Peek keeps checking.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open JD's Chinese tracker) from 6 a.m. local time on the day JD scans the parcel out for delivery, while JD's own tracker answers; through tracking services, every 15 minutes. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: in the US, GOFO's, up to every 30 minutes (an hour after a failed check), on delivery day too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes (every 5 when it has to open JD's Chinese tracker) from 6 a.m. local time on the day JD scans the parcel out for delivery, while JD's own tracker answers; through tracking services, up to every 15 minutes; otherwise hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: in the US, GOFO's, up to every 30 minutes (an hour after a failed check), on delivery day too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact JD or the shop for you.
 
 ## Questions about JD Logistics tracking
 
@@ -112,7 +112,7 @@ JD has nothing under the number yet, the parcel is on a flight or at customs, or
 Through the Contact Us page on jingdonglogistics.com, which gives customer service and hours for the US, the UK, Australia and other countries, not Canada or Ireland. In China, through jdl.com's Contact Us page. About your order, ask the shop first.
 
 :::sources
-- [JD Logistics: Track your shipment](https://www.jingdonglogistics.com/Tracking) – English tracker, up to 10 numbers separated by spaces, Enter or "Track"
+- [JD Logistics: Track your shipment](https://www.jingdonglogistics.com/Tracking) – English tracker, up to 100 numbers separated by spaces, Enter or "Track"
 - [JD Logistics: About JINGDONG Logistics](https://www.jingdonglogistics.com/about) – JD.com's logistics business, HKEX 2618, JoyLogistics and JoyExpress, warehouses and markets on 30 June 2026
 - [JD Logistics: Contact Us](https://www.jingdonglogistics.com/contact) – customer service mailboxes, Australia's number, hours and closed days by country, 950616
 - [JD Logistics: Cross-Border Parcels](https://www.jingdonglogistics.com/ser/CrossExport) – countries served, shipping options, flights, last-mile partners, 3 to 6 working days

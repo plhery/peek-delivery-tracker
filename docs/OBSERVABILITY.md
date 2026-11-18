@@ -743,7 +743,8 @@ Key JSON events:
   The completed line has the `outcome` and `events_new`, at the error level only for an
   `error` outcome; a check cut off at shutdown ends `interrupted`, with `error_type`
   `WorkerShutdown`. A failed step's line is an error, except a fetch a deferred lookup ended
-  (`RoutingDeferredError`: the parcel keeps what it showed and is asked again), a warning;
+  (`RoutingDeferredError`: the parcel keeps what it showed and is asked again), a warning,
+  and the step a superseded check stopped at, at the info level;
 - `tracking_scrape` and `tracking_routing`, which include `transport_fallback`, carry the
   `attempt_id` of the check whose lookup they belong to. Lookups outside a check, such as
   carrier recognition, have none. A `tracking_scrape` `outcome` is `success`, `error`, `paced`

@@ -8672,6 +8672,23 @@ describe('TrackingSyncService', () => {
     expect(later).not.toContainEqual(expect.stringMatching(/:error$/));
   });
 
+  it('logs the step a superseded check stopped at as info, the check reporting no error', async () => {
+    const client = fakeClient();
+    client.applyTrackingSync.mockResolvedValue(null);
+    const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const errors = vi.spyOn(console, 'error').mockImplementation(() => undefined);
+    const warnings = vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, { fetch: vi.fn() });
+    await expect(service.syncPackage({ id: 'overtaken', carrier: 'ups', tracking_number: 'TEST1234' }))
+      .resolves.toMatchObject({ superseded: 1, errors: 0 });
+    const logged = [...output.mock.calls, ...errors.mock.calls, ...warnings.mock.calls].map(([line]) => JSON.parse(String(line)));
+    output.mockRestore(); errors.mockRestore(); warnings.mockRestore();
+    const failed = logged.filter((line) => line.event === 'tracking_sync_step' && line.step_status === 'failed');
+    expect(failed).toHaveLength(1);
+    expect(failed[0]).toMatchObject({ level: 'info', error_type: 'Error' });
+    expect(logged.filter((line) => line.level === 'error')).toEqual([]);
+  });
+
   it('keeps tracking operational when the private audit store is unavailable', async () => {
     const parcel = {
       id: 'package-audit-outage',

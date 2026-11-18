@@ -72,6 +72,14 @@ export interface SyncRunContext {
 }
 
 /**
+ * A check whose parcel was deleted or whose tracking changed while it ran: it ends `superseded`, and nothing is
+ * reported, so the step it stopped at is no error either (`record`).
+ */
+export class SupersededTrackingSync extends Error {}
+/** Another check wrote the parcel after this one read it: only the scans new to the parcel were stored. */
+export class OvertakenTrackingSync extends SupersededTrackingSync {}
+
+/**
  * Why shutdown stops the sync worker's work. A check it aborts ends as `interrupted`,
  * and the job goes back to the queue without using up a retry.
  */
@@ -394,8 +402,10 @@ export class TrackingSyncAudit {
       error_type: error === undefined ? null : errorType(error),
     };
     this.#steps.push(stored);
-    // A deferred lookup keeps what the parcel showed and is asked again later: a warning. How the check ended is the
-    // completed line's to say, an error when it was one.
+    // A deferred lookup keeps what the parcel showed and is asked again later: a warning. A superseded check's step is
+    // no error. How the check ended is the completed line's to say, an error when it was one.
+    const level = status !== 'failed' || error instanceof SupersededTrackingSync ? 'info'
+      : stored.error_type === 'RoutingDeferredError' ? 'warning' : 'error';
     logOperationalEvent('tracking_sync_step', {
       ...this.logContext(),
       step,
@@ -403,7 +413,7 @@ export class TrackingSyncAudit {
       duration_ms: stored.duration_ms,
       error_type: stored.error_type,
       ...stored.details,
-    }, status !== 'failed' ? 'info' : stored.error_type === 'RoutingDeferredError' ? 'warning' : 'error');
+    }, level);
   }
 
   async step<T>(

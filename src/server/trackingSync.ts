@@ -49,7 +49,9 @@ import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, m
 export { providerEventId } from './eventIdentity';
 import {
   askedForCheck,
+  OvertakenTrackingSync,
   providerFailureSummary,
+  SupersededTrackingSync,
   TrackingSyncAudit,
   WorkerShutdown,
   type SyncAnomalyCode,
@@ -1815,10 +1817,6 @@ function untilShutdown<T>(work: Promise<T>, signal?: AbortSignal): Promise<T> {
 
 /** The one-off parcels a scheduled run reads: the followed ones, the unfiled ones, and the lists that could not be read. */
 type OneOffLists = { followed: JsonObject[]; unfiled: JsonObject[]; failed: Set<string> };
-
-class SupersededTrackingSync extends Error {}
-/** Another check wrote the parcel after this one read it: only the scans new to the parcel were stored. */
-class OvertakenTrackingSync extends SupersededTrackingSync {}
 
 export class TrackingSyncService {
   #tail: Promise<void> = Promise.resolve();

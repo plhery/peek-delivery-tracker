@@ -197,14 +197,15 @@ describe('relayCopies', () => {
       scan('second', 'swiss-post', 'in_transit', '2026-09-09T15:40:53Z'),
       scan('copy', 'dhl', 'in_transit', '2026-09-09T15:40:00Z'),
     ]))).toEqual(new Map([['copy', 'first']]));
-    // Three scans of a minute against two: each takes its closest free partner.
+    // Three scans of a minute against two: each takes its closest free partner, and the one left, at the instant of
+    // the copy of Swiss Post's only scan of its minute, goes under that scan too.
     expect(relayCopies(handedOver([
       scan('a', 'dhl', 'in_transit', '2026-09-09T07:48:00Z'),
       scan('b', 'dhl', 'in_transit', '2026-09-09T07:48:00Z'),
       scan('c', 'dhl', 'in_transit', '2026-09-09T07:48:00Z'),
       scan('arrival', 'swiss-post', 'in_transit', '2026-09-09T07:47:00Z'),
       scan('border', 'swiss-post', 'in_transit', '2026-09-09T07:48:00Z'),
-    ]))).toEqual(new Map([['a', 'border'], ['b', 'arrival']]));
+    ]))).toEqual(new Map([['a', 'border'], ['b', 'arrival'], ['c', 'border']]));
     // Two scans of one second each carrier tells: each copy goes under the scan in its words, then of its stage.
     const told = (id: string, source: string, stage: string, description: string) => ({
       ...scan(id, source, stage, '2026-09-09T18:38:04Z'), description,
@@ -221,6 +222,43 @@ describe('relayCopies', () => {
       told('accepted', 'swiss-post', 'accepted', 'Processed'),
       told('sorted', 'swiss-post', 'in_transit', 'Processed'),
     ]))).toEqual(new Map([['copy-1', 'sorted'], ['copy-2', 'accepted']]));
+  });
+
+  it('puts the earlier carrier\'s other rows at the instant of its copy under the new carrier\'s one scan of that minute', () => {
+    const placed = (id: string, source: string, at: string, location?: string, stage = 'in_transit') => ({ ...scan(id, source, stage, at), location });
+    // DHL tells Swiss Post's platform scan as three steps of one instant.
+    expect(relayCopies(handedOver([
+      placed('platform', 'swiss-post', '2026-09-09T05:12:37Z', 'Example Town'),
+      placed('a-arrived', 'dhl', '2026-09-09T05:12:00Z'),
+      placed('b-centre', 'dhl', '2026-09-09T05:12:00Z', 'Example Town'),
+      placed('c-departed', 'dhl', '2026-09-09T05:12:00Z'),
+      // Another instant is a row of its own, and so is another stage than transit or the scan's.
+      placed('d-later', 'dhl', '2026-09-09T05:13:00Z'),
+      placed('e-customs', 'dhl', '2026-09-09T05:12:00Z', undefined, 'customs'),
+    ]))).toEqual(new Map([['a-arrived', 'platform'], ['b-centre', 'platform'], ['c-departed', 'platform']]));
+    // Not when the new carrier has another row in that minute.
+    expect(relayCopies(handedOver([
+      placed('platform', 'swiss-post', '2026-09-09T05:12:37Z', 'Example Town'),
+      placed('platform-again', 'swiss-post', '2026-09-09T05:12:50Z', 'Example Town'),
+      placed('a-arrived', 'dhl', '2026-09-09T05:12:00Z'),
+      placed('b-centre', 'dhl', '2026-09-09T05:12:00Z'),
+      placed('c-departed', 'dhl', '2026-09-09T05:12:00Z'),
+    ]))).toEqual(new Map([['a-arrived', 'platform'], ['b-centre', 'platform-again']]));
+    // Nor when a row names a place another conflicts with, or another country.
+    for (const location of ['Other City', 'Switzerland']) {
+      expect(relayCopies(handedOver([
+        placed('platform', 'swiss-post', '2026-09-09T05:12:37Z', 'Example Town, Germany'),
+        placed('a-arrived', 'dhl', '2026-09-09T05:12:00Z'),
+        placed('b-centre', 'dhl', '2026-09-09T05:12:00Z', location),
+      ])), location).toEqual(new Map([['a-arrived', 'platform']]));
+    }
+    // Nor when the copy keeps seconds of its own: the rows at that second are its carrier's own scans.
+    expect(relayCopies(handedOver([
+      placed('arrival', 'swiss-post', '2026-09-09T08:40:56Z', 'Example Town'),
+      placed('arrival-copy', 'dhl', '2026-09-09T08:41:12Z'),
+      placed('round', 'dhl', '2026-09-09T08:41:12Z', undefined, 'out_for_delivery'),
+      placed('sorted', 'dhl', '2026-09-09T08:41:12Z'),
+    ]))).toEqual(new Map([['arrival-copy', 'arrival']]));
   });
 
   it('pairs a row cut to the minute with the scan within that minute, not a nearer one of the minute before', () => {

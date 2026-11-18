@@ -988,7 +988,11 @@ A parcel often changes carrier at the border. The origin history is always kept.
   any stage, is that row on another clock (CTT Express tells CTT's scans an hour early), and is
   served with `relay_of` its id after every other pairing. A universal provider's row in a carrier's
   row's instant, stage, words and place (the one China Post's earlier answer took over, beside China
-  Post's own) goes under that row before any pairing, and that row pairs for both. The apps show the words of the row with
+  Post's own) goes under that row before any pairing, and that row pairs for both. The earlier carrier may tell the new
+  carrier's one scan of a minute as several rows at one instant (DHL tells La Poste's platform scan as its arrival in the
+  country, at the parcel centre and its departure): when its copy is on a minute's first second or at the scan's own
+  second, the new carrier has no other row in that minute, and no two of the rows name places that conflict or two
+  countries, its other rows at that instant, in transit or in the scan's stage, go under that scan too. The apps show the words of the row with
   `relay_of` as a line under the other row instead of a step of its own, unless they are the other
   row's words: a row in those words spelt otherwise, case, spacing and punctuation aside (4PX's
   "designated facility" for SpeedX's "Designated Facility"), is served in the other row's spelling.

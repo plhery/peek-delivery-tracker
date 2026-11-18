@@ -80127,6 +80127,14 @@
     ]
   },
   {
+    "input": "BYT73915820461937",
+    "carrier": "byt",
+    "confidence": "high",
+    "candidates": [
+      "byt"
+    ]
+  },
+  {
     "input": "C00HHA0294471274",
     "carrier": "unknown",
     "confidence": "low",

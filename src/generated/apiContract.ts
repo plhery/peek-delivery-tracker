@@ -1591,7 +1591,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?!YW[A-Z]{3}\\d{12}$|YWE\\d{14}$|(?:GF|CI)[A-Z]{2}\\d{13}$|CNG\\d{14}$|DBRPST\\d{11}$)[A-Z0-9]{12}(?:(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}|[BL][1-9]\\d{3})$",
+        "pattern": "^(?!YW[A-Z]{3}\\d{12}$|YWE\\d{14}$|BYT\\d{14}$|(?:GF|CI)[A-Z]{2}\\d{13}$|CNG\\d{14}$|DBRPST\\d{11}$)[A-Z0-9]{12}(?:(?:0[1-9]|[1-8]\\d|9[0-5]|97|98)\\d{3}|[BL][1-9]\\d{3})$",
         "confidence": "low"
       },
       {
@@ -62313,6 +62313,31 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://www.pduni.com/MV/en/customer-services/waybill-inquiry"
+  },
+  "byt": {
+    "displayName": "BYT",
+    "aliases": [
+      "BYT56",
+      "佰邮通",
+      "上海佰邮通"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#51a7e8",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "byt"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^BYT\\d{14}$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -64220,7 +64245,8 @@ export const CARRIER_IDS = [
   "xportel",
   "starintlship",
   "jetspeed",
-  "pdu"
+  "pdu",
+  "byt"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

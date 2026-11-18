@@ -466,8 +466,10 @@ Key server modules:
     account has at most 50 grants, personal tokens included, and 10 personal tokens, counted
     one request at a time; Settings lists the assistants and disconnects any.
   - Settings also shows how to add Peek to Claude, ChatGPT and Gemini, with each one's menu
-    names in English as its help pages give them and the plans and places that can, and what
-    to ask a connected assistant, first to add the tracking numbers in the user's emails.
+    names in English as its help pages give them and the plans and places that can, and to
+    Home Assistant through Peek's integration ([peek-ha](https://github.com/plhery/peek-ha)),
+    and what to ask a connected assistant, first to add the tracking numbers in the user's
+    emails.
   - The tools work on the token's account alone, through the owner-checked functions the
     app uses. A carrier change, an archive and a restore run the owner's own database
     functions for the token's account (`change_account_package_carrier`,

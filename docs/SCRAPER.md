@@ -257,7 +257,8 @@ USPS return leg, reads otherwise than stored with every release, and only `--fro
 The report names
 rows by their ids' first eight characters and shows no number, place or wording. `replay.sql`
 updates those rows, each guarded on its stored values, in one transaction left open to roll back
-or commit. A row a fixed bug wrote is changed as any named-row fix is: a backup first, then a
+or commit. Before moving a parcel, it locks the parcel and its scans and checks their revision against the export.
+If the scans changed, take a fresh export and regenerate the SQL. A row a fixed bug wrote is changed as any named-row fix is: a backup first, then a
 rolled-back run before the commit. The transaction takes its own backup: before any change it
 prints every row it changes and each parcel it moves (id and saved stage) as they stand, one
 JSON line each and nothing else, so the output of the run that commits is kept as the backup.

@@ -53,7 +53,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           COMMIT: ${{ inputs.commit }}
-        run: node scripts/deploy-gate.mjs "--commit=$COMMIT"
+          DEPLOY_URL: ${{ vars.DEPLOY_URL }}
+        run: |
+          export DEPLOYED_SHA
+          DEPLOYED_SHA=$(curl -fsS --max-time 20 -H 'Cache-Control: no-cache' "$DEPLOY_URL/health/live?run=$GITHUB_RUN_ID-$RANDOM" | jq -er '.commit') || DEPLOYED_SHA=''
+          node scripts/deploy-gate.mjs "--commit=$COMMIT"
 
   deploy:
     name: Deploy
@@ -75,23 +79,34 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           ref: ${{ needs.settle.outputs.commit }}
+      # The gate as main has it now: the deployed commit's own copy may predate its checks.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ github.sha }}
+          path: .deploy-policy
+          persist-credentials: false
       # Deploys queue in order, though GitHub does not promise it. One that waited behind another,
       # or a re-run of this job, could put an older commit back: it stops when a newer commit has
-      # passed CI since, and that one's deploy includes it.
+      # passed CI since, and that one's deploy includes it, or when the site serves a newer build.
       - name: Skip a commit that a newer one replaced
         id: current
         env:
           GH_TOKEN: ${{ github.token }}
-        run: node scripts/deploy-gate.mjs "--commit=$COMMIT" --at-once
+          DEPLOY_URL: ${{ vars.DEPLOY_URL }}
+          BY_HAND: ${{ inputs.commit == '' }}
+        run: |
+          export DEPLOYED_SHA
+          DEPLOYED_SHA=$(curl -fsS --max-time 20 -H 'Cache-Control: no-cache' "$DEPLOY_URL/health/live?run=$GITHUB_RUN_ID-$RANDOM" | jq -er '.commit') || DEPLOYED_SHA=''
+          node .deploy-policy/scripts/deploy-gate.mjs "--commit=$COMMIT" --at-once
       - name: Check that production has this commit's migrations
-        if: steps.current.outputs.deploy != 'false'
+        if: steps.current.outputs.deploy == 'true'
         env:
           SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_PUBLISHABLE_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
         run: scripts/check-production-migrations.sh
       - name: Deploy this commit
         id: deploy
-        if: steps.current.outputs.deploy != 'false'
+        if: steps.current.outputs.deploy == 'true'
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           DEPLOY_SSH_KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
@@ -117,7 +132,7 @@ jobs:
       # A commit older than the script has a build that names no commit, so it is not waited for.
       - name: Wait until the public site serves this commit
         id: live
-        if: steps.current.outputs.deploy != 'false'
+        if: steps.current.outputs.deploy == 'true'
         env:
           DEPLOY_URL: ${{ vars.DEPLOY_URL }}
         run: |
@@ -127,7 +142,7 @@ jobs:
           fi
           scripts/wait-for-commit.sh "$DEPLOY_URL" "$COMMIT"
       - name: Check the public site
-        if: steps.current.outputs.deploy != 'false'
+        if: steps.current.outputs.deploy == 'true'
         env:
           DEPLOY_URL: ${{ vars.DEPLOY_URL }}
         run: scripts/smoke-url.sh "$DEPLOY_URL"
@@ -136,7 +151,7 @@ jobs:
       # unless the token is an organization token), that release gets its commits and a
       # production deploy. Without them the step does nothing, and it never fails the deploy.
       - name: Record the release in Sentry
-        if: steps.current.outputs.deploy != 'false'
+        if: steps.current.outputs.deploy == 'true'
         continue-on-error: true
         timeout-minutes: 5
         env:

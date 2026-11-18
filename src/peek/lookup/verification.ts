@@ -36,7 +36,7 @@ const PROOF_KEY = 'sdt.lookup-proof.v1';
 
 /** The tab's proof; undefined until session storage has been read. */
 let proof: Proof | null | undefined;
-let verify: (() => Promise<string | null>) | null = null;
+let verify: ((refresh?: boolean) => Promise<string | null>) | null = null;
 let script: Promise<void> | null = null;
 
 function keep(next: Proof | null): void {
@@ -89,11 +89,11 @@ export function canVerifyLookup(): boolean {
   return verify !== null;
 }
 
-export async function getLookupProof(signal?: AbortSignal): Promise<string | null> {
+export async function getLookupProof(signal?: AbortSignal, refresh = false): Promise<string | null> {
   signal?.throwIfAborted();
   if (lookupProof()) return lookupProof();
   if (!verify) throw new LookupVerificationError('other');
-  const pending = verify();
+  const pending = verify(refresh);
   if (!signal) return pending;
   return new Promise((resolve, reject) => {
     const abort = () => reject(signal.reason);
@@ -195,7 +195,8 @@ export function mountLookupVerification(container: HTMLElement, language: string
     });
   }
 
-  function run() {
+  function run(refresh = false) {
+    if (refresh) unprotected = false;
     if (!pending) pending = start().catch((error: unknown) => {
       throw error instanceof LookupVerificationError ? error : new LookupVerificationError('other');
     }).finally(() => { pending = null; });

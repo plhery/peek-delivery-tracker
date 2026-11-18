@@ -1506,6 +1506,20 @@ describe('scans a carrier and a universal provider both report', () => {
     const german = [row('austrian-post:arrived', '2026-01-24T05:18:09+00:00', 'Sendung im Zielland angekommen', 'in_transit'),
       row('austrian-post:transit', '2026-01-24T05:18:11+00:00', 'Sendung in Zustellung an Partner', 'in_transit')];
 
+    it('pairs a long series of ambiguous minutes without rescanning the history for every peer', () => {
+      let reads = 0;
+      const copies = Array.from({ length: 48 }, (_, minute) => english.map((event) => ({
+        ...event, provider_event_id: event.provider_event_id + minute,
+        occurred_at: new Date(Date.UTC(2026, 0, 24, 5, minute)).toISOString(),
+      }))).flat();
+      const history = Array.from({ length: 48 }, (_, minute) => german.map((event, index) => ({
+        ...event, provider_event_id: event.provider_event_id + minute,
+        get occurred_at() { reads++; return new Date(Date.UTC(2026, 0, 24, 5, minute, 9 + index)).toISOString(); },
+      }))).flat();
+      expect(sharedScans(copies, history).skipped.size).toBe(96);
+      expect(reads).toBeLessThan(200_000);
+    });
+
     it('pair as many scans of one source with them from the oldest when each pair\'s stages agree', () => {
       expect(pairs(sharedScans(english, german).skipped))
         .toEqual([['unknown:arrived', 'austrian-post:transit'], ['unknown:transit', 'austrian-post:arrived']]);

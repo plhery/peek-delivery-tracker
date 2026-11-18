@@ -151,8 +151,8 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     if (response.status !== 403 || response.headers.get('X-Lookup-Verification') !== 'required') return response;
     forgetLookupProof(current);
     // Verification said it verifies no one, yet the server asks for it: the setup disagrees.
-    if (verifiedFirst) throw first.failure ?? new LookupVerificationError(current ? 'proof' : 'setup');
-    const verified = await getLookupProof(signal);
+    if (verifiedFirst && (first.failure || current)) throw first.failure ?? new LookupVerificationError('proof');
+    const verified = await getLookupProof(signal, true);
     if (!verified) throw new LookupVerificationError('setup');
     const retried = await call(verified);
     if (retried.status === 403 && retried.headers.get('X-Lookup-Verification') === 'required') {

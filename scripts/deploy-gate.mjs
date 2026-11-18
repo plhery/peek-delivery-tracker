@@ -4,6 +4,8 @@
 // one passes, since its deploy includes this commit. A newer commit that fails CI, or one pushed
 // later, does not hold this one back. Newer means later in main's git history, from GitHub's
 // compare of two commits: CI's run times are not in that order when GitHub logs a push late.
+// Nor does a commit older than the build the site serves go out: an old CI run re-run would
+// otherwise roll production back.
 import { execFileSync } from 'node:child_process';
 import { appendFileSync } from 'node:fs';
 import path from 'node:path';
@@ -149,6 +151,28 @@ async function main() {
       if (commits.length < 100 || shas.size >= total) return shas;
     }
   };
+  // Where the live build stands to `commit` in main's history: `ahead` (commit is newer), `identical`, `behind` or
+  // `diverged`, or null when GitHub does not know the live build.
+  const ancestry = (live, commit) => {
+    let status;
+    try {
+      ({ status } = github(`repos/${repository}/compare/${live}...${commit}?per_page=1`, '{status: .status}'));
+    } catch (error) {
+      if (/HTTP 404/.test(`${error.stderr ?? ''} ${error.message}`)) return null;
+      throw error;
+    }
+    if (!['ahead', 'behind', 'identical', 'diverged'].includes(status)) throw new Error(`GitHub compared the live build as ${status}`);
+    return status;
+  };
+  // The build the site serves (/health/live, read by deploy.yml): none when the site is down or names none. A deploy
+  // must not wait for the site it may be fixing, so it then goes on CI's runs alone.
+  const live = SHA.test(process.env.DEPLOYED_SHA ?? '') ? process.env.DEPLOYED_SHA : null;
+  if (!live) console.log("The site names no live build: deciding on CI's runs alone.");
+  // A run started by hand, or the Deploy job of one, may put the live build out again (after an environment change)
+  // or replace a live build that is not on main's line; one that CI handed over only goes forward.
+  const byHand = !requested || process.env.BY_HAND === 'true';
+  // How long a failing GitHub API is asked again before the run fails: no deploy goes out without its checks.
+  const patience = wait ? MAX_WAIT_MS : 10 * 60_000;
   const started = Date.now();
   let commit = requested || null;
   let since = null;
@@ -162,16 +186,21 @@ async function main() {
       if (!commit) {
         decision = { action: 'refuse', reason: 'CI on main has passed no recent commit.' };
       } else {
+        // The live build is newer, or the same: a rerun of an old CI run must not put an older commit back.
+        const stands = live && ancestry(live, commit);
+        if (stands === 'behind' || (stands && stands !== 'ahead' && !byHand)) {
+          decision = { action: 'stand-down', reason: `${commit} is not newer than the live build ${live} (${stands}).` };
+          break;
+        }
         if (wait) since ??= await waitingSince(github(`repos/${repository}/actions/workflows/deploy.yml/runs?per_page=30`)
           .workflow_runs, process.env.GITHUB_RUN_ID, async run => deployedBy(jobs(run))) ?? started;
         decision = await decide({ commit, runs, handoff, after: commitsAfterOnce(commit), now: Date.now(), since, wait });
       }
     } catch (error) {
-      // GitHub's API failing must not hold a tested commit back for good. Deploying at once
-      // without it could put an older commit back, so that waits for the job to time out.
-      decision = wait && Date.now() - started >= MAX_WAIT_MS
-        ? { action: 'deploy', reason: 'GitHub could not say whether a newer commit is being tested.' }
-        : { action: 'wait', reason: `GitHub's API failed: ${error instanceof Error ? error.message : error}` };
+      const message = error instanceof Error ? error.message : String(error);
+      decision = Date.now() - started >= patience
+        ? { action: 'refuse', reason: `GitHub's API kept failing for ${Math.round(patience / 60_000)} minutes: ${message}` }
+        : { action: 'wait', reason: `GitHub's API failed: ${message}` };
     }
     console.log(decision.reason);
     if (decision.action !== 'wait') break;

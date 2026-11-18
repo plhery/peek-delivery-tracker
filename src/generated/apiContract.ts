@@ -64325,6 +64325,7 @@ export interface ApiPlannedTrackingEvent {
   "stage": ApiStage;
   "location": string | null;
   "occurred_at": string;
+  "expires_at"?: string;
   "day"?: string;
   "place"?: ApiEventPlace | null;
 }

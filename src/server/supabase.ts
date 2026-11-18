@@ -1335,10 +1335,8 @@ export class SupabaseServiceClient extends SupabaseClient {
     const ids = new Set<string>();
     for (;;) {
       const after = [...ids].at(-1);
-      const params = query([['select', 'id'], ['order', 'id.asc'], ['limit', String(UNWATCHED_PAGE)],
-        ...(after === undefined ? [] : [['id', `gt.${after}`] as const])]);
-      const page = rows(await this.request(`/rest/v1/rpc/unwatched_package_ids?${params}`, {
-        method: 'POST', body: { p_opened_since: openedSince.toISOString() },
+      const page = rows(await this.request('/rest/v1/rpc/unwatched_package_ids', {
+        method: 'POST', body: { p_opened_since: openedSince.toISOString(), p_after: after ?? null, p_limit: UNWATCHED_PAGE },
       })).flatMap((row) => typeof row.id === 'string' && !ids.has(row.id) ? [row.id] : []);
       if (page.length === 0) return [...ids];
       for (const id of page) ids.add(id);

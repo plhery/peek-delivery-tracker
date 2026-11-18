@@ -1,4 +1,4 @@
-import { ProxyAgent } from 'undici';
+import { Dispatcher, getGlobalDispatcher, ProxyAgent } from 'undici';
 
 const HOST = /^[a-z0-9]+(?:[.-][a-z0-9]+)*$/;
 /** undici's error when the proxy answers the tunnel with another status than 200: it sent nothing to the host. */
@@ -56,13 +56,26 @@ export function trackingProxyFetcher(env: Readonly<Record<string, string | undef
   }
   if (!routes.size) return undefined;
   const dispatchers = new Map<string, ProxyAgent>();
+  function destination(origin: URL, direct: Dispatcher) {
+    const route = routes.get(origin.hostname);
+    if (!route) return direct;
+    if (origin.protocol !== 'https:') throw new TypeError('Proxied tracking requests require HTTPS');
+    let agent = dispatchers.get(route.key);
+    if (!agent) {
+      agent = new ProxyAgent({ uri: route.uri, token: route.token });
+      dispatchers.set(route.key, agent);
+    }
+    return agent;
+  }
   return async (input, init) => {
-    const url = new URL(input instanceof Request ? input.url : String(input));
-    const route = routes.get(url.hostname.toLowerCase());
-    if (!route) return fetcher(input, init);
-    if (url.protocol !== 'https:') throw new TypeError('Proxied tracking requests require HTTPS');
-    let dispatcher = dispatchers.get(route.key);
-    if (!dispatcher) { dispatcher = new ProxyAgent({ uri: route.uri, ...(route.token ? { token: route.token } : {}) }); dispatchers.set(route.key, dispatcher); }
+    const direct = (init as (RequestInit & { dispatcher?: Dispatcher }) | undefined)?.dispatcher ?? getGlobalDispatcher();
+    let hops = 0;
+    const dispatcher = {
+      dispatch(options: Dispatcher.DispatchOptions, handler: Dispatcher.DispatchHandler) {
+        hops++;
+        return destination(new URL(String(options.origin)), direct).dispatch(options, handler);
+      },
+    };
     const proxied = () => fetcher(input, { ...init, dispatcher } as RequestInit);
     try {
       return await proxied();
@@ -70,7 +83,7 @@ export function trackingProxyFetcher(env: Readonly<Record<string, string | undef
       // A proxy that answers the tunnel with a gateway error sent nothing to the host: it is asked
       // once more. A body that streams would not be there to send again.
       const replayable = !(input instanceof Request && input.body) && !(init?.body instanceof ReadableStream);
-      if (!replayable || init?.signal?.aborted || !tunnelRefused(error)) throw error;
+      if (hops > 1 || !replayable || init?.signal?.aborted || !tunnelRefused(error)) throw error;
       return proxied();
     }
   };

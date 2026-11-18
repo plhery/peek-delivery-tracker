@@ -462,6 +462,12 @@ if [[ "$step_backs" != "la-poste|delivered|in_transit|1|19000000" ]]; then
   echo "stage step-backs: carrier|from|to|parcels|sample = '$step_backs'" >&2
   exit 1
 fi
+for correction in 'dhl|delivered|returned|' 'dhl|returned|delivered|'; do
+  if ! grep -Fq "$correction" <<< "$step_section"; then
+    echo "Missing terminal stage correction: $correction" >&2
+    exit 1
+  fi
+done
 # A linked parcel's two legs are read apart: neither stepped back.
 if grep -q '39000000' <<< "$step_section"; then
   echo "stage step-backs read across a linked parcel's legs: $(grep '39000000' <<< "$step_section")" >&2

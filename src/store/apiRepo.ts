@@ -203,6 +203,7 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
 /** A step the carrier planned, which only the timeline shows. */
 export function toPlannedEvent(row: ApiPlannedTrackingEvent): PlannedEvent {
   return {
+    ...(row.expires_at ? { expiresAt: row.expires_at } : {}),
     stage: row.stage,
     description: row.description,
     location: row.location ?? undefined,

@@ -68032,6 +68032,11 @@
             "format": "date-time",
             "description": "When the carrier planned the step. With day, the start of that day in the carrier's zone."
           },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Start of the following carrier-local day for a day-only planned step."
+          },
           "day": {
             "type": "string",
             "format": "date",

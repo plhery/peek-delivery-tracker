@@ -472,6 +472,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
     description: told(String(stored.description ?? '')), stage: String(stored.stage ?? 'in_transit') as ApiTrackingEventRow['stage'],
     location: toldText(stored.location), occurred_at: String(stored.occurred_at ?? ''),
     ...(typeof stored.day === 'string' ? { day: stored.day } : {}),
+    ...(typeof stored.expires_at === 'string' ? { expires_at: stored.expires_at } : {}),
     place: (isRecord(stored.place) ? stored.place : null) as ApiPlannedTrackingEvent['place'],
   });
   const recipient = privateValues(carrierData);

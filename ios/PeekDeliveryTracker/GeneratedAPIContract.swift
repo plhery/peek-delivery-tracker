@@ -3876,6 +3876,7 @@ struct PlannedTrackingEvent: Codable, Equatable, Hashable, Sendable {
     var stage: TrackingStage
     var location: String? = nil
     var occurredAt: String
+    var expiresAt: String? = nil
     var day: String? = nil
     var place: EventPlace? = nil
 }

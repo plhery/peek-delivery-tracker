@@ -121,7 +121,8 @@ function useReaderTimeZone(languageTag: string): string | null {
  * alone stands through that day, which starts at `occurredAt` in the carrier's zone. One whose time passes while the
  * page is open goes at the next render, so a carrier's pre-written "Delivered" never shows as planned for a time gone by.
  */
-export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day'>, now: number): boolean {
+export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day' | 'expiresAt'>, now: number): boolean {
+  if (step.expiresAt) return Date.parse(step.expiresAt) > now;
   const at = Date.parse(step.occurredAt);
   return Number.isFinite(at) && (step.day ? at + DAY_MS : at) > now;
 }

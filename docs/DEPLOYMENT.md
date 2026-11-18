@@ -218,6 +218,14 @@ repository's list too. To deploy the newest tested commit at once, run
 of Coolify's Redeploy: it redeploys the live commit with the new values, and the smoke test and
 the Sentry release follow.
 
+Both the wait and the Deploy job also read the build the site serves from `/health/live`, and
+stand down unless the commit is newer than it in `main`'s history, so a re-run of an old CI run
+never rolls production back. A run started by hand may also put the live build out again, or
+replace one that is not on `main`'s line. When the site names no build (it is down, or the build
+is too old to say) or GitHub does not know it, the run decides on CI's runs alone, so a fix still
+reaches a site that is down. A failing GitHub API is asked again, for up to 30 minutes in the
+wait and 10 in the Deploy job, and then the run fails rather than deploy unchecked: run it again.
+
 The deploy asks the database, with the publishable key, which of the commit's migrations
 it lacks, and stops if any are missing: apply them, then re-run the Deploy job. It then
 runs `deploy <commit>` over SSH on the target. The old container may still answer for a

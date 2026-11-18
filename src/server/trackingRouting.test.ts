@@ -861,7 +861,7 @@ describe('persistent tracking routing', () => {
     await expect(router.fetch(parcel({ carrier: 'ups', tracking_number: 'TEST5678', carrier_data: { routing } }), false))
       .resolves.toMatchObject({ result: { current_stage: 'delivered' } });
     // The carrier's own answer showing the row at its clock frees it.
-    direct.mockResolvedValue({ ...directValue(), result: { ...script, events: [{ ...script.events![0]!, time: clock }] } });
+    direct.mockResolvedValue({ ...directValue(), result: script });
     const shown = await router.fetch(parcel({ carrier: 'ups', carrier_data: { routing } }), false);
     expect(shown.result.routing).not.toHaveProperty('written_ahead');
   });
@@ -869,6 +869,10 @@ describe('persistent tracking routing', () => {
     const { router, direct, universal } = setup();
     const planned = [{ time: '2026-09-12T10:00:00+08:00', description: 'Departed the origin hub', stage: 'in_transit' },
       { time: '2026-09-15T15:00:00+08:00', description: 'Delivered', stage: 'delivered' }];
+    direct.mockResolvedValue({ ...directValue('posti'), earlierCarrierId: 'la-poste', earlierResult: history(),
+      result: { ...history(), planned_events: planned } as CarrierResult });
+    const handoff = await router.fetch(parcel({ carrier: 'la-poste' }), false);
+    expect((handoff.result.routing as JsonObject).planned).toEqual({ number: 'TEST1234', carriers: { posti: planned } });
     // The carrier answers with its scan and lists, beside it, the steps it wrote ahead.
     direct.mockResolvedValue({ ...directValue(), result: { ...history(), planned_events: planned } as CarrierResult });
     const first = await router.fetch(parcel({ carrier: 'ups' }), false);

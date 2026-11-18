@@ -3878,6 +3878,7 @@ data class PlannedTrackingEvent(
     val stage: TrackingStage,
     val location: String? = null,
     @SerialName("occurred_at") val occurredAt: String,
+    @SerialName("expires_at") val expiresAt: String? = null,
     val day: String? = null,
     val place: EventPlace? = null,
 )

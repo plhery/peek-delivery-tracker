@@ -71,6 +71,8 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Ora Peek ha un solo widget, «Pacchi». I widget «Prossima consegna» che hai aggiunto diventano widget «Pacchi» restando al loro posto, e i tuoi widget «Pacchi» continuano ad aggiornarsi.
-• I testi grigi piccoli ora sono più scuri e più facili da leggere.
+• Aggiungi pacchi via email: con un account Peek, ottieni il tuo indirizzo Peek personale in Impostazioni › Aggiungi pacchi via email. Inoltra un’email di spedizione a questo indirizzo: Peek aggiunge il pacco e ti avvisa. È ancora una funzione sperimentale.
+• Scegli chilogrammi o libbre in Impostazioni › Preferenze › Unità di peso, indipendentemente dall’unità di distanza. Se il tuo iPhone o iPad usa il sistema di misura statunitense, ora i pesi vengono mostrati in libbre.
+• Se il server di Peek è in manutenzione, i tuoi pacchi restano sullo schermo con una breve nota che indica a quando risale l’ultimo aggiornamento.
+• Le scritte sulla mappa della scheda di un pacco ora sono più scure e più facili da leggere.
 ```

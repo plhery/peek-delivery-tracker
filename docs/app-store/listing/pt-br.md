@@ -71,6 +71,8 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• O Peek agora tem um só widget, “Encomendas”. Os widgets “Próxima entrega” que você adicionou viram widgets “Encomendas” no mesmo lugar, e seus widgets “Encomendas” continuam sendo atualizados.
-• Os textos cinza pequenos agora estão mais escuros e fáceis de ler.
+• Adicionar encomendas por e-mail: com uma conta no Peek, você ganha seu próprio endereço Peek em Configurações › Adicionar encomendas por e-mail. Encaminhe um e-mail de envio para esse endereço: o Peek adiciona a encomenda e avisa você. Esse recurso ainda é experimental.
+• Escolha quilogramas ou libras em Configurações › Preferências › Unidade de peso, independentemente da unidade de distância. Se o seu iPhone ou iPad usa o sistema de medidas dos EUA, os pesos agora aparecem em libras.
+• Se o servidor do Peek estiver em manutenção, suas encomendas continuam na tela, com uma breve nota indicando quando foram atualizadas pela última vez.
+• Os textos sobre o mapa do cartão de uma encomenda agora estão mais escuros e fáceis de ler.
 ```

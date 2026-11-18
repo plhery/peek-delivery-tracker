@@ -107,6 +107,13 @@ begin
     raise exception 'The code was redeemed for another address';
   end if;
 
+  if public.redeem_assistant_code(repeat('5', 64), 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', 'https://assistant.example.test/callback',
+      challenge, repeat('51', 32), later, repeat('52', 32), much_later) is null then
+    raise exception 'A bad redirect consumed the code';
+  end if;
+
+  delete from private.assistant_grants where id = (select grant_id from private.assistant_codes where hash = repeat('5', 64));
+
   -- A read-only grant: refreshing replaces the refresh token, keeps the scopes, and a stale
   -- replaced token used again ends the grant.
   perform public.open_assistant_code(one, 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', 'Example assistant', 'assistant.example.test', true,

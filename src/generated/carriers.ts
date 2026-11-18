@@ -2372,6 +2372,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "la-poste",
+      "catalog": "la-poste",
+      "slug": "colissimo-la-poste-sendungsverfolgung",
+      "title": "Colissimo & La Poste Sendungsverfolgung: Status & Zoll",
+      "name": "La Poste / Colissimo",
+      "color": "#ffcf00"
+    },
+    {
       "id": "correos-spain",
       "catalog": "correos-spain",
       "slug": "correos-spanien-sendungsverfolgung",
@@ -2628,6 +2636,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi DPD Allemagne (DPD Germany)\u00a0: numéro, statuts et aide",
       "name": "DPD Germany",
       "color": "#dc0032"
+    },
+    {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "suivi-hermes",
+      "title": "Suivi Hermes Allemagne\u00a0: statuts expliqués, relais et suivi",
+      "name": "Hermes",
+      "color": "#0091cd"
     },
     {
       "id": "gls-ch",
@@ -3224,6 +3240,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "tracking-hermes",
+      "title": "Tracking Hermes Germania: stati spiegati, consegna e dogana",
+      "name": "Hermes",
+      "color": "#0091cd"
+    },
+    {
       "id": "gls-ch",
       "catalog": "gls-ch",
       "slug": "gls-svizzera-tracking",
@@ -3478,6 +3502,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket tracking: numero, stati e consegna in Italia",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "la-poste",
+      "catalog": "la-poste",
+      "slug": "tracciamento-colissimo-la-poste",
+      "title": "Tracciamento Colissimo e La Poste: stati, consegna e FAQ",
+      "name": "La Poste / Colissimo",
+      "color": "#ffcf00"
     },
     {
       "id": "correos-spain",
@@ -4212,6 +4244,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "rastreamento-hermes",
+      "title": "Rastreamento Hermes Alemanha: estados explicados e entrega",
+      "name": "Hermes",
+      "color": "#0091cd"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "rastreio-dpd-suica",
@@ -4664,6 +4704,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc0032"
     },
     {
+      "id": "hermes-de",
+      "catalog": "hermes-de",
+      "slug": "sledzenie-hermes",
+      "title": "Śledzenie Hermes Niemcy: statusy po polsku i doręczenie",
+      "name": "Hermes",
+      "color": "#0091cd"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "dpd-szwajcaria-sledzenie",
@@ -4840,6 +4888,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fc4c02"
     },
     {
+      "id": "speedpak",
+      "catalog": "speedpak",
+      "slug": "speedpak-sledzenie",
+      "title": "SpeedPAK śledzenie paczki: statusy, eBay i kto doręcza",
+      "name": "SpeedPAK",
+      "color": "#ee7532"
+    },
+    {
       "id": "asendia",
       "catalog": "asendia",
       "slug": "asendia-sledzenie-przesylek",
@@ -4950,6 +5006,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "DHL Paket śledzenie przesyłki: numer, statusy i odbiór",
       "name": "DHL Paket",
       "color": "#ffcc00"
+    },
+    {
+      "id": "la-poste",
+      "catalog": "la-poste",
+      "slug": "sledzenie-colissimo-la-poste",
+      "title": "Śledzenie Colissimo i La Poste: statusy, doręczenie i cło",
+      "name": "La Poste / Colissimo",
+      "color": "#ffcf00"
     },
     {
       "id": "correos-spain",

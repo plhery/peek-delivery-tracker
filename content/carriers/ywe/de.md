@@ -78,7 +78,7 @@ Laut der Über-uns-Seite startete YWE 2024 in Los Angeles und plant, bis Ende 20
 
 **In den USA als zugestellt gemeldet, aber nichts da.** Die runden Klammern im Zustellscan, etwa `(Front door)`, nennen den Ablageort. Bei zugestellten US-Paketen bietet YWEs Tracker den Link `view receipt`: Gib dort den US-ZIP-Code der Lieferadresse im Feld `Recipient's postal code` ein, um vorhandene Zustellfotos anzusehen. Schreib danach YWE und melde den Fall dem Verkäufer. Siehe [Zugestellt, aber nicht erhalten](guide:delivered-not-received).
 
-**Verloren und Reklamation.** Laut Datenschutzerklärung im Kundenportal von YWE können nur Geschäftskunden (`corporate/business clients`) ein Konto eröffnen: Auftraggeber von YWE ist daher der Händler oder Marktplatz, der den US-Versand gebucht hat, nicht der Empfänger. Einen Erstattungsprozess für Privatempfänger oder Zahlungsaufforderungen an der Haustür in den USA nennt YWE auf seiner Website nicht. Wende dich für Rückzahlung oder Ersatz an den Shop oder Marktplatz. Siehe [Paket verloren](guide:lost-parcel) sowie [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
+**Verloren und Reklamation.** Laut Datenschutzerklärung im Kundenportal von YWE können nur Geschäftskunden (`corporate/business clients`) ein Konto eröffnen: Auftraggeber von YWE ist daher der Händler oder Marktplatz, der den US-Versand gebucht hat, nicht der Empfänger. Einen Erstattungsprozess für Privatempfänger nennt YWE auf seiner Website nicht. Wende dich für Rückzahlung oder Ersatz an den Shop oder Marktplatz. Siehe [Paket verloren](guide:lost-parcel) sowie [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating).
 
 ## YWE Kontakt und Kundenservice
 

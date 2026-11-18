@@ -281,6 +281,8 @@ describe('Gmail\'s request to confirm forwarding', () => {
 describe('the HTML helpers', () => {
   it('decode entities and keep only web links', () => {
     expect(htmlText('<p>A&amp;B&#33;&#x21;</p><div>next</div>')).toBe('A&B!!\nnext');
+    expect(htmlLinks('<a data-href="https://wrong.example" href=https://carrier.example/parcel>Track</a>'))
+      .toEqual(['https://carrier.example/parcel']);
     expect(htmlLinks('<a href="mailto:a@example.com">m</a><a href=\'https://x.example/?a=1&amp;b=2\'>x</a>')).toEqual(['https://x.example/?a=1&b=2']);
   });
 });

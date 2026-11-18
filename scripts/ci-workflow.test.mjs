@@ -145,7 +145,7 @@ it('waits in a job a newer commit queues behind, and deploys in one that is neve
   // The waiting run stands down by itself once the newer commit passed, and runs queued behind it
   // each get their turn, rather than being cancelled.
   assert.match(settle, /concurrency:\n {6}group: production-deploy-wait\n {6}cancel-in-progress: false\n {6}queue: max\n/);
-  assert.match(settle, /run: node scripts\/deploy-gate\.mjs "--commit=\$COMMIT"/);
+  assert.match(settle, /\n +node scripts\/deploy-gate\.mjs "--commit=\$COMMIT"/);
   const minutes = Number(settle.match(/timeout-minutes: (\d+)/)[1]);
   assert.ok(minutes * 60_000 > MAX_WAIT_MS + 5 * 60_000, 'the wait ends before the job times out');
   const deploy = job(workflow, 'deploy');
@@ -160,9 +160,12 @@ it('waits in a job a newer commit queues behind, and deploys in one that is neve
   // newer one replaced.
   const guard = step(deploy, 'Skip a commit that a newer one replaced');
   assert.doesNotMatch(guard, /\n {8}if:/);
-  assert.match(guard, /run: node scripts\/deploy-gate\.mjs "--commit=\$COMMIT" --at-once/);
+  assert.match(guard, /\n +node \.deploy-policy\/scripts\/deploy-gate\.mjs "--commit=\$COMMIT" --at-once/);
+  for (const gated of [settle, guard]) {
+    assert.match(gated, /DEPLOYED_SHA=\$\(curl .*\/health\/live/);
+  }
   for (const name of ["Check that production has this commit's migrations", DEPLOY_STEP, 'Wait until the public site serves this commit', 'Check the public site', 'Record the release in Sentry']) {
-    assert.match(step(deploy, name), /\n {8}if: steps\.current\.outputs\.deploy != 'false'\n/, name);
+    assert.match(step(deploy, name), /\n {8}if: steps\.current\.outputs\.deploy == 'true'\n/, name);
   }
 });
 

@@ -186,11 +186,16 @@ goes on; the release notes and the repository's entry say so. The app's entry in
 [`fdroid/antiFeatures.yml`](fdroid/antiFeatures.yml) names its anti-features in the index, without which F-Droid shows
 none of them.
 
-F-Droid's own catalog builds the `fdroid` flavor from source and signs it with its own key. Its recipe, in
+F-Droid's own catalog builds the `fdroid` flavor from source. Its recipe, in
 [fdroiddata](https://gitlab.com/fdroid/fdroiddata), finds each release's commit by the tag
 `android-source-<versionName>-<versionCode>`, which the script pushes over SSH, and builds it with
 `-Ppeek.releaseXcconfig=fdroid/release.xcconfig`: the release's public settings, the ones https://peektracker.com's
-own scripts carry. The catalog's listing is in the repository's `fastlane/metadata/android/en-US`, where each release
+own scripts carry. The build is reproducible: the catalog ships the APK on GitHub Releases, signed with the upload key
+(the recipe's `Binaries` and `AllowedAPKSigningKeys`), once its own build matches it byte for byte with the signature
+copied over. So an installation from the catalog and one from this repository update from each other, and the APK the
+script publishes has to be that build: a clean checkout of the commit, built with JDK 21 by the command above, which
+adds only the upload key's properties, or the catalog skips the release. The script puts it on GitHub before it pushes the source tag the
+catalog follows. The catalog's listing is in the repository's `fastlane/metadata/android/en-US`, where each release
 adds what is new in `changelogs/<versionCode>.txt`. The same build here:
 
 ```sh

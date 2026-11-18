@@ -101,7 +101,8 @@ else
 fi
 
 # F-Droid's own catalog (https://gitlab.com/fdroid/fdroiddata) builds the release's commit from source and finds it by
-# this tag. It goes over SSH: a token without the workflow scope may not create a ref on that commit.
+# this tag, then ships the APK released above once its build matches it, so the tag comes last. It goes over SSH: a token
+# without the workflow scope may not create a ref on that commit.
 source="android-source-$name-$code"
 if ! git ls-remote --exit-code "https://github.com/$github.git" "refs/tags/$source" >/dev/null; then
   git -C "$android" push -q "git@github.com:$github.git" "$target:refs/tags/$source" ||

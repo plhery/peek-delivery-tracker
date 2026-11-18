@@ -32,6 +32,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -372,6 +373,11 @@ private fun SheetLayer(
 ) {
     val density = LocalDensity.current
     val colors = PeekTheme.colors
+    // What the sheet holds, composed in one place as a form and in another as a phone's sheet, goes from one to the other
+    // as it is, and what it saved is found again in a window made anew: movable content saves under its own root rather
+    // than where it is, as when a foldable shuts on a half-filled sheet.
+    val holding by rememberUpdatedState(content)
+    val held = remember { movableContentOf { holding() } }
     val scope = rememberCoroutineScope()
     val view = LocalView.current
     val menus = remember { SheetMenus() }
@@ -668,7 +674,7 @@ private fun SheetLayer(
                         LocalSheetInsets provides SheetInsets.sheet(if (page) with(density) { formWidth.toDp() } else FORM_WIDTH, reachesBottom = false),
                         LocalSheetGround provides ground, LocalInSheet provides lit, LocalSheetFoot provides null,
                     ) {
-                        if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { content() } else content()
+                        if (SheetDetent.Fitted in detents) Box(Modifier.fillMaxSize().measureFitted { fitted = it }) { held() } else held()
                         // Over what it holds, whose ground would hide them.
                         if (standsUp) LitEdge(shape, Modifier.matchParentSize())
                         if (showsGrabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
@@ -729,7 +735,7 @@ private fun SheetLayer(
                                     .scaledFrom(scale)
                                     .then(if (SheetDetent.Fitted in detents) Modifier.measureFitted { fitted = it } else Modifier)
                                     .sheetFootRoom(foot, bar),
-                            ) { CompositionLocalProvider(LocalViewConfiguration provides touch, content) }
+                            ) { CompositionLocalProvider(LocalViewConfiguration provides touch) { held() } }
                             if (standsUp) LitEdge(shape, Modifier.matchParentSize())
                             if (showsGrabber) Grabber(toggle, Modifier.align(Alignment.TopCenter))
                         }

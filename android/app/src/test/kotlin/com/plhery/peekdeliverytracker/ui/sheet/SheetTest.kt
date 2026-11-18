@@ -7,12 +7,14 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
@@ -21,6 +23,7 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotFocused
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.click
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
@@ -29,15 +32,19 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.onRoot
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performTextInput
+import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
 import androidx.compose.ui.test.swipeUp
+import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.ui.PHONE
+import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.TabOverlay
 import com.plhery.peekdeliverytracker.ui.tabs.WindowLayers
@@ -291,6 +298,44 @@ class SheetTest {
     /** The tops of the grabbers showing, in points from the window's. */
     private fun grabbers(): List<Float> =
         compose.onAllNodesWithTag(SHEET_GRABBER, useUnmergedTree = true).fetchSemanticsNodes().map { it.boundsInRoot.top / compose.density.density }
+
+    /**
+     * What it holds keeps what it saved through the window made again as a foldable shuts on a half-filled sheet and
+     * opens again: composed in one place as the form and in another as the phone's sheet, it saves under its own root.
+     */
+    @Test
+    @Config(qualifiers = "w900dp-h960dp-xhdpi")
+    fun whatItHoldsKeepsWhatItSavedAsAFoldableShutsAndOpens() {
+        val recreation = Recreation(compose)
+        var size by mutableStateOf(DpSize(852.dp, 883.dp))
+        recreation.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
+                Box(Modifier.requiredSize(size)) {
+                    Sheet(visible = true, onDismiss = {}, paneTitle = "Sheet") {
+                        var typed by rememberSaveable { mutableStateOf("") }
+                        BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
+                    }
+                }
+            }
+        }
+        compose.waitForIdle()
+        fun panelWidth() = compose.onNodeWithTag(SHEET_PANEL).getUnclippedBoundsInRoot().let { it.right - it.left }.value
+        assertEquals(580f, panelWidth(), 0.5f)
+        compose.onNodeWithTag(FIELD).performTextInput("Half")
+
+        recreation.recreate { size = DpSize(411.dp, 900.dp) }
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertTrue("${panelWidth()}", panelWidth() <= 411.5f)
+        compose.onNodeWithTag(FIELD).assertTextEquals("Half")
+        compose.onNodeWithTag(FIELD).performTextReplacement("Half typed")
+
+        recreation.recreate { size = DpSize(852.dp, 883.dp) }
+        compose.mainClock.autoAdvance = true
+        compose.waitForIdle()
+        assertEquals(580f, panelWidth(), 0.5f)
+        compose.onNodeWithTag(FIELD).assertTextEquals("Half typed")
+    }
 
     @Test
     fun aDragMovesItWithoutComposingWhatItHoldsAgain() {

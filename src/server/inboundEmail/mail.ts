@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { Parser } from 'htmlparser2';
 import PostalMime, { type Address, type Email } from 'postal-mime';
 import { carrierLink } from './carrierSender';
 
@@ -131,11 +132,14 @@ function withoutAddresses(text: string): { text: string; links: string[] } {
 /** The addresses the HTML links to, decoded, each on its own line: a carrier's link names its number. */
 export function htmlLinks(html: string): string[] {
   const links = new Set<string>();
-  for (const [, quoted, bare] of html.slice(0, MOST_HTML_LENGTH).matchAll(/<a\b[^<>]*?\bhref\s*=\s*(?:"([^"<>]*)"|'([^'<>]*)')/gi)) {
-    const link = decodeEntities((quoted ?? bare ?? '').trim());
-    if (/^https?:\/\//i.test(link) && link.length <= MOST_LINK_LENGTH) links.add(link);
-    if (links.size >= MOST_LINKS) break;
-  }
+  const parser = new Parser({
+    onopentag(name, attributes) {
+      const link = attributes.href?.trim();
+      if (name === 'a' && link && /^https?:\/\//i.test(link) && link.length <= MOST_LINK_LENGTH) links.add(link);
+      if (links.size >= MOST_LINKS) parser.pause();
+    },
+  });
+  parser.end(html.slice(0, MOST_HTML_LENGTH));
   return [...links];
 }
 

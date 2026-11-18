@@ -14,6 +14,7 @@ import { usePeekSession } from '../session';
 import { DoorNote } from './DoorNote';
 import { FoundNumber } from './FoundNumber';
 import type { Lookup } from './useLookup';
+import type { UnlockReason } from '../Unlock';
 
 /** The four shapes most visitors hold in their hands, shown when the text has no number. */
 const SHAPES: readonly (readonly [CarrierId, MessageKey])[] = [
@@ -32,11 +33,12 @@ function around(sentence: (value: string) => string): [string, string] {
  * The carrier's line keeps its place and height from the moment a number is
  * read, whatever the carriers answer.
  */
-export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSuggestion }: {
+export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSuggestion }: {
   lookup: Lookup;
   /** How this visitor points, which decides how pasting by hand is explained. */
   pointer: 'touch' | 'keys';
-  onSignIn: () => void;
+  /** A visitor asked for what signing in unlocks: following several numbers together, or more lookups today. */
+  onUnlock: (reason: UnlockReason) => void;
   onPickCarrier: () => void;
   /** Takes the suggested number instead of the typed one. */
   onSuggestion: (number: string) => void;
@@ -122,7 +124,7 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
           <span className="door-number__text"><strong>{info.name}</strong><span>{formatTrackingNumber(number.trackingNumber, number.carrier)}</span></span>
         </label>;
       })}
-      {!mine && <p className="door-aside">{t('door.several.question')} <button type="button" className="door-link" onClick={onSignIn}>{t('door.several.signIn')}</button></p>}
+      {!mine && <p className="door-aside">{t('door.several.question')} <button type="button" className="door-link" onClick={() => onUnlock('several')}>{t('door.several.signIn')}</button></p>}
     </fieldset>}
 
     {check.status === 'several' && line && <fieldset className="door-carriers">
@@ -227,7 +229,7 @@ export function LookupFeedback({ lookup, pointer, onSignIn, onPickCarrier, onSug
     {trouble === 'burst' && <DoorNote icon="hourglass" tone="warm" title={t('door.burst.title')} urgent><p>{t('door.burst.body')}</p></DoorNote>}
     {trouble === 'daily' && <DoorNote icon="hourglass" tone="warm" title={t('door.daily.title')} urgent>
       <p>{t(mine ? 'door.daily.account' : 'door.daily.body')}</p>
-      <button type="button" className="door-note__action" onClick={mine ? () => mine() : onSignIn}>{t(mine ? 'landing.mine' : 'arrival.signInTitle')}</button>
+      <button type="button" className="door-note__action" onClick={mine ? () => mine() : () => onUnlock('daily')}>{t(mine ? 'landing.mine' : 'arrival.signInTitle')}</button>
     </DoorNote>}
     {trouble === 'offline' && <DoorNote icon="offline" title={t('offline.title')} urgent><p>{t('door.offline.body')}</p></DoorNote>}
     {trouble === 'server' && <DoorNote icon="refresh" tone="warm" title={t('door.trouble.title')} urgent><p>{t('door.trouble.body')}</p></DoorNote>}

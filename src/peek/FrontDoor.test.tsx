@@ -13,7 +13,9 @@ import { FIRST_SAMPLE_MS, SAMPLE_PERIOD_MS } from './landing/useSampleLoop';
 import { ParcelLinkError, type ParcelLookup } from './links';
 import { forgetDeviceChecks } from './lookup/deviceList';
 import { LookupVerificationError } from './lookup/verification';
+import { takePendingAdd } from './pendingAdd';
 import { forgetAllRecents, markRecentSeen, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
+import { PeekSessionProvider, type PeekSession } from './session';
 import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
@@ -255,6 +257,7 @@ describe('FrontDoor', () => {
     expect(mocks.lookup).not.toHaveBeenCalled();
     await user.click(within(list).getByRole('button', { name: 'Sign in and Peek keeps them together' }));
     expect(onSignIn).toHaveBeenCalledOnce();
+    expect(takePendingAdd()).toContain('1ZDEMO202600000029');
     await user.click(numbers[2]);
     await user.click(screen.getByRole('button', { name: 'Track this one' }));
     await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
@@ -589,6 +592,33 @@ describe('FrontDoor', () => {
     await user.click(within(note).getByRole('button', { name: 'Sign in' }));
     expect(onSignIn).toHaveBeenCalledOnce();
     expect(field.value).toBe(UPS);
+    // Signed in, the deliveries' add sheet opens with it.
+    expect(takePendingAdd()).toBe(UPS);
+  });
+
+  it('asks a visitor to sign in over the door when it can, and keeps what they typed for their deliveries', async () => {
+    mocks.lookup.mockRejectedValue(new ParcelLinkError('daily', { retryAfterSeconds: 3_600 }));
+    const signInWith = {
+      configured: true, googleEnabled: true, emailOtpEnabled: true,
+      signInWithGoogle: vi.fn(async () => { expect(takePendingAdd()).toBe(UPS); }),
+      sendCode: vi.fn(async () => undefined), verifyCode: vi.fn(async () => undefined),
+    };
+    const session: PeekSession = { account: 'visitor', signIn: () => undefined, signInWith };
+    const user = userEvent.setup();
+    render(<PeekSessionProvider value={session}><FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} /></PeekSessionProvider>);
+    await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), `${UPS}{Enter}`);
+    await user.click(within(await screen.findByRole('alert')).getByRole('button', { name: 'Sign in' }));
+    const sheet = screen.getByRole('dialog', { name: 'Sign in to unlock this' });
+    expect(sheet.querySelector('.peek-unlock__what')).toHaveTextContent('Signed in, you keep going, starting with the parcel you just typed. Your parcels on this device can come with you, with their names.');
+    // Not now leaves the door as it was, and notes nothing.
+    await user.click(within(sheet).getByRole('button', { name: 'Not now' }));
+    await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());
+    expect(takePendingAdd()).toBeNull();
+
+    await user.click(within(screen.getByRole('alert')).getByRole('button', { name: 'Sign in' }));
+    await user.click(within(screen.getByRole('dialog')).getByRole('button', { name: 'Continue with Google' }));
+    expect(signInWith.signInWithGoogle).toHaveBeenCalledOnce();
+    expect(onSignIn).not.toHaveBeenCalled();
   });
 
   it('keeps the field and the device’s parcels when offline, and offers to try again', async () => {

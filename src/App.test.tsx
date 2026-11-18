@@ -10,6 +10,7 @@ import { ParcelsProvider } from './store/ParcelsContext';
 import { carrierPicker, everyCarrierListed, pickCarrier } from './test/carrierPicker';
 import { shutOff } from './test/modalBackground';
 import { RefreshTimeoutError, type ParcelRepo, type ParcelWithEvents } from './types';
+import { rememberPendingAdd } from './peek/pendingAdd';
 
 function renderApp(repo: ParcelRepo = createDemoRepo(window.localStorage)) {
   return render(
@@ -346,6 +347,13 @@ describe('App', () => {
       'Track 993412345699999980',
     );
     expect(window.location.search).toBe('');
+  });
+
+  it('opens the add sheet with what a visitor typed at the door before signing in to follow it', async () => {
+    rememberPendingAdd('1ZDEMO202600000001\n1ZDEMO202600000029');
+    renderApp();
+    const sheet = await screen.findByRole('dialog', { name: 'Add a parcel' });
+    expect(within(sheet).getByLabelText(/tracking number or link/i)).toHaveValue('1ZDEMO202600000001\n1ZDEMO202600000029');
   });
 
   it('says in the add sheet, once, why content shared to the installed PWA did not come through', async () => {

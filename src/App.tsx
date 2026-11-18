@@ -57,6 +57,7 @@ import {
   type ShareFailure,
   type SharedParcel,
 } from './lib/shareTarget';
+import { takePendingAdd } from './peek/pendingAdd';
 import { currentStage, isDelivered } from './lib/stages';
 import { loadNotificationPreferences, saveShownUnits, useNotificationPreferences } from './store/notificationPreferences';
 import { useParcels } from './store/ParcelsContext';
@@ -224,13 +225,17 @@ export default function App({
   // made here that the account has not taken goes to it then.
   useMarkNewUpdatesChoice(mode === 'api' ? apiAuth : undefined);
 
-  // A share opens the add sheet: filled in with what came, or saying why nothing did.
+  // A share opens the add sheet: filled in with what came, or saying why nothing did. So does what a visitor typed at
+  // the door before signing in to follow it.
   useEffect(() => {
     let active = true;
     void readSharedParcel().then((received) => {
-      if (active && received) {
-        if ('input' in received) trackAction('parcel-share-received');
-        setShared(received);
+      if (!active) return;
+      if (received && 'input' in received) trackAction('parcel-share-received');
+      const typed = received ? null : takePendingAdd();
+      const opened = received ?? (typed ? { input: { label: '', trackingInput: typed } } : null);
+      if (opened) {
+        setShared(opened);
         setAdding(true);
       }
     }).finally(() => clearSharedParcelInput());

@@ -1,0 +1,10 @@
+/* "Sign in to unlock this": the reason, then the sign-in card, as the keep sheet shows it. */
+.peek-unlock .sheet__heading { margin-bottom: 4px; }
+.peek-unlock__what { margin: 0 2px 18px; color: var(--ink-soft); font-size: 13px; line-height: 1.5; }
+.peek-unlock .auth-flow__heading { display: none; }
+.peek-unlock .auth-flow__privacy { margin-top: 14px; }
+.peek-unlock__later {
+  display: block; margin: 14px auto 0; padding: 8px 12px; border: 0; background: none;
+  color: var(--ink-soft); font: inherit; font-size: 13px; cursor: pointer;
+}
+.peek-unlock__later:hover { color: var(--ink); }

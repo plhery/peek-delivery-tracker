@@ -32,8 +32,10 @@ import { DOOR_STOPS, doorStops } from './lookup/stops';
 import { useLookup } from './lookup/useLookup';
 import { LookupVerification } from './lookup/LookupVerification';
 import { parcelCode } from './parcelCode';
+import { clearPendingAdd, rememberPendingAdd } from './pendingAdd';
 import { useRecents } from './recents';
 import { usePeekSession } from './session';
+import { UnlockSheet, type UnlockReason } from './Unlock';
 import './FrontDoor.css';
 
 const subscribeToHydration = () => () => undefined;
@@ -64,7 +66,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   covered?: boolean;
 }) {
   const { t, locale } = useI18n();
-  const { account, email, openDeliveries } = usePeekSession();
+  const { account, email, openDeliveries, signInWith } = usePeekSession();
   // Someone signed in reads the landing at its own address: the way back to their deliveries stands where signing in does.
   const mine = account === 'signed-in' && openDeliveries;
   const initial = email?.trim().charAt(0).toUpperCase();
@@ -78,6 +80,13 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   const lookup = useLookup(useCallback(({ id, key, view }: ParcelLookup) =>
     onTracked({ id, key, carrier: view.parcel.carrier, response: view }), [onTracked]));
   const { state, found, retryIn, send } = lookup;
+  // What signing in unlocks is asked here, over the door, and what was typed waits for the deliveries' add sheet.
+  const [unlock, setUnlock] = useState<UnlockReason | null>(null);
+  const unlockFor = useCallback((reason: UnlockReason) => {
+    if (signInWith) return setUnlock(reason);
+    rememberPendingAdd(state.text);
+    onSignIn();
+  }, [signInWith, onSignIn, state.text]);
   const form = useRef<HTMLFormElement>(null);
   const field = useRef<HTMLTextAreaElement>(null);
   const pasting = useRef(false);
@@ -332,7 +341,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
             {/* The carrier's line has its place from the start, so neither a sample nor an answer moves what is below. */}
             <div className="door-says">
               {firstVisit && !written && <SampleLine beat={beat} />}
-              <LookupFeedback lookup={lookup} pointer={pointer} onSignIn={onSignIn} onPickCarrier={() => setPicking(true)} onSuggestion={put} />
+              <LookupFeedback lookup={lookup} pointer={pointer} onUnlock={unlockFor} onPickCarrier={() => setPicking(true)} onSuggestion={put} />
               <LookupVerification active={touched} />
             </div>
           </form>
@@ -348,6 +357,8 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
       <Landing onSignIn={onSignIn} />
     </main>
     <LandingFooter />
+    {unlock && signInWith && <UnlockSheet reason={unlock} methods={signInWith} before={() => rememberPendingAdd(state.text)}
+      onClose={() => { clearPendingAdd(); setUnlock(null); }} />}
     {picking && found.match && <CarrierPickerSheet
       selected={state.carrier}
       auto={{

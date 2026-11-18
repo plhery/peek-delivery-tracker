@@ -42,7 +42,7 @@ export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
 export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 22;
+const RUNTIME_VERSION = 23;
 
 interface PrometheusRuntime {
   version: number;
@@ -77,6 +77,7 @@ interface PrometheusRuntime {
   typoCandidateTotal: Counter<'checksum' | 'carrier' | 'origin' | 'first_check'>;
   dpdAppSessionTotal: Counter<'outcome' | 'trigger'>;
   routingSignalTotal: Counter<'signal' | 'carrier' | 'subject'>;
+  providerBudgetSpentTotal: Counter<'provider'>;
   syncAnomalyTotal: Counter<'carrier' | 'anomaly'>;
   healthIncidentTotal: Counter<'kind' | 'subject' | 'state'>;
   scheduledRunGaveWayTotal: Counter<'to'>;
@@ -291,6 +292,12 @@ function createRuntime(): PrometheusRuntime {
       name: 'tracking_routing_signal_total',
       help: 'Routing signals for the review queues, by signal, the parcel\'s carrier and the carrier the signal is about (uncatalogued for a name a provider gave).',
       labelNames: ['signal', 'carrier', 'subject'] as const,
+      registers: [registry],
+    }),
+    providerBudgetSpentTotal: new Counter({
+      name: 'tracking_provider_budget_spent_total',
+      help: 'Universal providers that spent their budget of answers without history, at most once in 30 minutes each, by provider.',
+      labelNames: ['provider'] as const,
       registers: [registry],
     }),
     syncAnomalyTotal: new Counter({
@@ -702,6 +709,14 @@ export function recordRoutingSignal(signal: string, carrier: string, subject: st
   count(runtime.routingSignalTotal, 'tracking_routing_signal_total', {
     signal, carrier, subject: signal === 'carrier_coverage_discovered' ? 'uncatalogued' : subject,
   });
+}
+
+/**
+ * A universal provider spent its budget of answers without history (providerMisses.ts): the budget at work, no error.
+ * A count, not a Sentry event; a provider that finds nothing for hours is the source alert's.
+ */
+export function recordProviderBudgetSpent(provider: string): void {
+  count(runtime.providerBudgetSpentTotal, 'tracking_provider_budget_spent_total', { provider });
 }
 
 export function recordSyncAnomaly(carrier: string, anomaly: string): void {

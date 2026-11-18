@@ -9,6 +9,7 @@ import type { ApiCarrierId } from '../generated/apiContract';
 import { providerCarrier } from './providerCarrier';
 import { refusesNumber } from './numberRefusal';
 import { reportRoutingEvent } from './observability';
+import { recordProviderBudgetSpent } from './metrics';
 import { providerMisses } from './providerMisses';
 import { providerAllowed } from './providerPolicy';
 
@@ -91,7 +92,9 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
     const started = performance.now();
     // An answer without history counts against the provider's budget, as on a sync (providerMisses.ts), which an Add never waits for.
     const missed = () => {
-      if (providerMisses.missed(provider, Date.now())) reportRoutingEvent('provider_budget_spent', { carrier: 'unknown', provider, category: 'no_history' });
+      if (!providerMisses.missed(provider, Date.now())) return;
+      reportRoutingEvent('provider_budget_spent', { carrier: 'unknown', provider, category: 'no_history' });
+      recordProviderBudgetSpent(provider);
     };
     let retryAfterMs = 0;
     let kind: Parameters<ProviderHealth['finishTrackingProvider']>[2] = null;

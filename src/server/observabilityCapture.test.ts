@@ -192,12 +192,10 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
   expect(blocked.level).toBe('warning');
   expect(blocked.tags).toMatchObject({ component: 'tracking-routing', operation: 'provider_blocked', provider: 'ParcelsApp', failure_category: 'rate_limited' });
   expect(blocked.fingerprint).toEqual(['delivery-tracker', 'tracking-routing', 'provider_blocked', 'ParcelsApp', 'rate_limited']);
-  // And a provider's spent budget of answers without history, the step before it refuses.
+  // A provider's spent budget of answers without history is the budget at work: a log line and a count, no issue.
   reportRoutingEvent('provider_budget_spent', { carrier: 'unknown', provider: 'ParcelsApp', category: 'no_history' });
   await flushObservability();
-  const spent = captured.events.find((event) => event.message === 'Tracking routing: provider_budget_spent')!;
-  expect(spent.level).toBe('warning');
-  expect(spent.tags).toMatchObject({ provider: 'ParcelsApp', failure_category: 'no_history' });
+  expect(captured.events.some((event) => event.message === 'Tracking routing: provider_budget_spent')).toBe(false);
   const refusedBody = '<h1>Access Denied</h1><p>Reference #18.test.123; parcel 8U00000000000</p>';
   const fetcher = vi.spyOn(globalThis, 'fetch').mockImplementation(async () => new Response(refusedBody, {
     status: 403, headers: { 'content-type': 'text/html', 'x-request-id': 'example-request-id',

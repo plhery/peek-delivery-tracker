@@ -1199,7 +1199,7 @@ away data already retrieved.
 
 Each routing decision is a `tracking_routing` log line with its `decision`, `carrier`,
 `provider`, `category` and the check's `attempt_id`, and a breadcrumb on any later Sentry
-report. Only `health_store_unavailable`, `provider_budget_spent` and a lasting `provider_blocked` open a
+report. Only `health_store_unavailable` and a lasting `provider_blocked` open a
 Sentry issue (`component:tracking-routing`, grouped by decision, provider and category). The signals
 are what the catalog, detection or the adapters could act on: each check saves them for the
 hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
@@ -1209,7 +1209,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `transport_fallback` | A direct path needed browser/TRAWL recovery, even if it then succeeded; not after a step that answered |
 | `provider_failed` | A provider failed for a parcel: `category` `rate_limited` needs less traffic, `schema` parser work, `invalid_input` a number the source refuses |
 | `provider_blocked` | A provider refuses this server whatever it is asked, and rests 30 minutes (Shared provider protection). A Sentry event when the block is found still in place after its pause: a first block only finds numbers the provider tracked, whose parcels keep that answer |
-| `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection). A Sentry event at most once in 30 minutes |
+| `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection), at most once in 30 minutes: the budget at work, counted in `tracking_provider_budget_spent_total`, no Sentry event |
 | `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `paced_fallback` | Our own pacing refused the carrier of an account's parcel nothing has answered for an hour, and the check asks the providers meanwhile |

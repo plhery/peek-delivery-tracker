@@ -220,12 +220,14 @@ describe('prometheus carrier metrics', () => {
     metrics.recordRoutingSignal('direct_support_opportunity', 'unknown', 'example-post');
     metrics.recordSyncAnomaly('dpd', 'progress_disappeared');
     metrics.recordHealthIncident('provider', '17TRACK', 'recovered');
+    metrics.recordProviderBudgetSpent('ParcelsApp');
     const text = await scraped();
     expect(text).toContain('tracking_routing_signal_total{signal="carrier_coverage_discovered",carrier="unknown",subject="uncatalogued"} 1');
     expect(text).toContain('tracking_routing_signal_total{signal="direct_support_opportunity",carrier="unknown",subject="example-post"} 1');
     expect(text).not.toContain('Example Parcel Co');
     expect(text).toContain('tracking_sync_anomaly_total{carrier="dpd",anomaly="progress_disappeared"} 1');
     expect(text).toContain('tracking_health_incident_total{kind="provider",subject="17TRACK",state="recovered"} 1');
+    expect(text).toContain('tracking_provider_budget_spent_total{provider="ParcelsApp"} 1');
   });
 
   it('counts scheduled runs that gave way by whose check went ahead, both from 0', async () => {

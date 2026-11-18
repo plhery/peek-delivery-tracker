@@ -4418,8 +4418,13 @@ describe('a provider’s budget of answers without history', () => {
 
   it('leaves the provider to the numbers it tracked on checks nobody asked for once spent', async () => {
     const { router, universal, health } = missing();
-    for (const number of ['TEST1234', 'TEST5678']) await router.fetch(parcel({ id: number, tracking_number: number }), true);
+    const counted = vi.spyOn(metrics, 'recordProviderBudgetSpent').mockImplementation(() => undefined);
+    await router.fetch(parcel({ id: 'TEST1234', tracking_number: 'TEST1234' }), true);
+    expect(counted).not.toHaveBeenCalled();
+    await router.fetch(parcel({ id: 'TEST5678', tracking_number: 'TEST5678' }), true);
     expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_budget_spent', expect.objectContaining({ provider: 'ParcelsApp', category: 'no_history' }));
+    expect(counted).toHaveBeenCalledExactlyOnceWith('ParcelsApp');
+    counted.mockRestore();
     universal.mockClear(); health.acquireTrackingProvider.mockClear();
     const held = await router.fetch(parcel({ id: 'held', tracking_number: 'TEST9012' }), true);
     expect(asked(universal)).toEqual(['Ship24']);

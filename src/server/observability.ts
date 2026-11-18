@@ -558,7 +558,7 @@ function applyRoutingScope(scope: Sentry.Scope, code: string, context: RoutingEv
 
 /**
  * Every routing decision is a log line and a breadcrumb. A routing signal also goes
- * to the check that reported it; only a failed coordination store, or a provider near a block, opens an issue.
+ * to the check that reported it; only a failed coordination store opens an issue.
  * A block is raised apart (raiseProviderBlock).
  */
 export function reportRoutingEvent(code: string, context: RoutingEventContext): void {
@@ -583,11 +583,10 @@ export function reportRoutingEvent(code: string, context: RoutingEventContext): 
     if (!initObservability()) return;
     Sentry.withScope((scope) => {
       applyRoutingScope(scope, code, context, metadata);
-      // Failures for one parcel, recoveries and routing signals stay in logs and
-      // breadcrumbs; signals also go to the review queues. A provider near refusing
-      // every number is no one parcel's failure: each budget it spends is an event.
-      if (code === 'provider_budget_spent') Sentry.captureMessage(`Tracking routing: ${code}`);
-      else if (code === 'health_store_unavailable') {
+      // Failures for one parcel, recoveries, routing signals and a provider's spent budget of
+      // answers without history (the budget at work, counted in metrics) stay in logs and
+      // breadcrumbs; signals also go to the review queues.
+      if (code === 'health_store_unavailable') {
         const message = `Tracking routing: ${code}`;
         if (context.error !== undefined) {
           // Keep stack, causes and custom error fields even if recovery succeeds.

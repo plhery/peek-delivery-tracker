@@ -15,7 +15,7 @@ import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universa
 import { brandCarrierIds, carrierBrand, carrierIdFromName, universalCarrierHints } from 'universal-parcel-scraper/app';
 import { errorType, raiseProviderBlock, reportRoutingEvent, reportTrackingRecognition } from './observability';
 import { markLookup, unmarkLookups } from './stepRecorder';
-import { recordChecksumRejection, recordProviderInput } from './metrics';
+import { recordChecksumRejection, recordProviderBudgetSpent, recordProviderInput } from './metrics';
 import { CarrierError, carrierErrorKind, CARRIER_DEFINITIONS, deliveryHandoff, IndeterminateError, NoHistoryError, RateLimitedError, retryAfterMsOf, withoutWrittenAhead, writtenAheadClocks } from 'universal-parcel-scraper';
 import { BLOCK_PAUSE_MS, type ProviderRefusals } from './providerRefusals';
 import type { ProviderMisses } from './providerMisses';
@@ -1986,6 +1986,7 @@ export class TrackingRouter {
         // The provider's own answer without history counts against its budget; a reused one counted for the check that asked.
         if (token && !answered && (kind === 'not_found' || kind === 'no_history') && this.options.misses?.missed(source, now().getTime())) {
           report('provider_budget_spent', source, kind);
+          recordProviderBudgetSpent(source);
         }
         retryAfterMs = millis(failure.retry_at) - now().getTime();
         if (kind === 'rate_limited' && recent() && !localDirectFallback && !partialDirect) {

@@ -60,7 +60,8 @@ The site hands a parcel it looked up over to the app with its owner key after th
 keychain, as if it had looked the parcel up itself; signed in, it keeps it in the account
 with the key. The key goes into no link, share, log or analytics event. When the file of
 the iPhone's parcels can't be read, their keys stay in the keychain until the service has
-forgotten their links.
+forgotten their links. If Keychain cannot save a pending revocation, the app keeps the
+active key and records the link ID in a protected file so it can retry after a restart.
 
 ## The deliveries
 

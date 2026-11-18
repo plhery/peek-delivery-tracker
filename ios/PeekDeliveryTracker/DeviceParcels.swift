@@ -225,12 +225,17 @@ protocol DeviceParcelStorage {
     func save(_ parcels: [DeviceParcel], keys: [String: String])
     /// The links of this iPhone's own forgotten here before the service could be told, with their keys.
     func loadForgetting() -> [String: String]
-    func saveForgetting(_ links: [String: String])
+    func saveForgetting(_ links: [String: String]) throws
+    /// Link IDs only. Their keys remain in the active Keychain item until the queue accepts them.
+    func loadUnqueuedForgetIDs() -> Set<String>
+    func saveUnqueuedForgetIDs(_ ids: Set<String>) throws
 }
 
 extension DeviceParcelStorage {
     func loadForgetting() -> [String: String] { [:] }
-    func saveForgetting(_ links: [String: String]) {}
+    func saveForgetting(_ links: [String: String]) throws {}
+    func loadUnqueuedForgetIDs() -> Set<String> { [] }
+    func saveUnqueuedForgetIDs(_ ids: Set<String>) throws {}
 }
 
 struct DeviceParcelFiles: DeviceParcelStorage {
@@ -291,16 +296,26 @@ struct DeviceParcelFiles: DeviceParcelStorage {
 
     func loadForgetting() -> [String: String] { forgettingKeychain.load() ?? [:] }
 
-    func saveForgetting(_ links: [String: String]) {
-        if links.isEmpty { forgettingKeychain.delete() } else { try? forgettingKeychain.save(links) }
+    func saveForgetting(_ links: [String: String]) throws {
+        try forgettingKeychain.save(links)
     }
 
-    private static func fileURL() throws -> URL {
+    func loadUnqueuedForgetIDs() -> Set<String> {
+        guard let data = try? Data(contentsOf: Self.fileURL("unqueued-forgets.json")) else { return [] }
+        return (try? JSONDecoder().decode(Set<String>.self, from: data)) ?? []
+    }
+
+    func saveUnqueuedForgetIDs(_ ids: Set<String>) throws {
+        let url = try Self.fileURL("unqueued-forgets.json")
+        try JSONEncoder().encode(ids).write(to: url, options: [.atomic, .completeFileProtectionUntilFirstUserAuthentication])
+    }
+
+    private static func fileURL(_ name: String = "parcels.json") throws -> URL {
         let manager = FileManager.default
         let directory = try manager.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             .appending(path: "DeviceParcels", directoryHint: .isDirectory)
         try manager.createDirectory(at: directory, withIntermediateDirectories: true)
-        return directory.appending(path: "parcels.json")
+        return directory.appending(path: name)
     }
 }
 
@@ -336,6 +351,7 @@ final class DeviceParcels {
     /// Links of this iPhone's own forgotten here that the service is still to forget, with their keys.
     private var forgetting: [String: String]
     private var savedForgetting: [String: String]
+    private var unqueuedForgetIDs: Set<String>
     /// The tokens and languages rounds of notification requests are under way for.
     private var desiredAlert: String?
     private var alertGeneration = 0
@@ -361,14 +377,16 @@ final class DeviceParcels {
         self.storage = storage
         self.postcodes = postcodes
         self.now = now
-        let forgetting = storage.loadForgetting()
         let (parcels, keys) = storage.load()
+        savedForgetting = storage.loadForgetting()
+        unqueuedForgetIDs = storage.loadUnqueuedForgetIDs()
+        var forgetting = savedForgetting
+        for id in unqueuedForgetIDs where forgetting[id] == nil { forgetting[id] = keys[id] }
         // A queued revocation supersedes a stale owner row. A later viewer follow can coexist with it.
         entries = parcels.filter { $0.forgotten != true && ($0.isViewer || forgetting[$0.linkID] == nil) }
         forgotten = parcels.filter { $0.forgotten == true }
         self.keys = keys.filter { forgetting[$0.key] == nil }
         self.forgetting = forgetting
-        savedForgetting = forgetting
     }
 
     var isEmpty: Bool { entries.isEmpty }
@@ -889,8 +907,21 @@ final class DeviceParcels {
     private func save() {
         // The links being forgotten go first: their keys are never read again as parcels to bring back.
         if forgetting != savedForgetting {
-            storage.saveForgetting(forgetting)
-            savedForgetting = forgetting
+            do {
+                try storage.saveForgetting(forgetting)
+                savedForgetting = forgetting
+            } catch {
+                // Keep the active keys intact and remember which to revoke if the app stops before retrying.
+                let ids = Set(forgetting.keys).subtracting(savedForgetting.keys)
+                if ids != unqueuedForgetIDs, (try? storage.saveUnqueuedForgetIDs(ids)) != nil {
+                    unqueuedForgetIDs = ids
+                }
+                return
+            }
+        }
+        if !unqueuedForgetIDs.isEmpty {
+            guard (try? storage.saveUnqueuedForgetIDs([])) != nil else { return }
+            unqueuedForgetIDs = []
         }
         storage.save(entries + forgotten, keys: keys)
     }

@@ -202,6 +202,13 @@ describe('stored scan replay', () => {
     expect(sql).toContain('if total <> 1 then raise exception');
     expect(sql).toContain('if filled <> 1 then raise exception');
 
+    const guarded = replaySql(replayParcel(parcel({ ...second, location: 'Example Town' }, minute)));
+    for (const id of ['minute', 'second']) {
+      expect(guarded).toContain(`where id = '${id}' and package_id = 'parcel-1'`);
+    }
+    expect(guarded).toContain('for update');
+    expect(guarded.indexOf('for update')).toBeLessThan(guarded.indexOf('delete from'));
+
     // A row to the second with its own place keeps it, and a row whose identity does not hash its strings keeps that.
     expect(replayParcel(parcel({ ...second, location: 'Example Town' }, minute)))
       .toEqual([expect.objectContaining({ kind: 'copy', row: 'minute', location: null, providerEventId: second.providerEventId })]);

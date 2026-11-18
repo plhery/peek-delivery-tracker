@@ -67,6 +67,21 @@ describe('the account\'s forwarding address', () => {
     expect(contract.components.schemas.AddByEmail.required).not.toContain('notify');
   });
 
+  it('names the shop whose account alone shows the number of an email that held none', async () => {
+    const at = '2026-11-03T11:00:00.000Z';
+    const recent = [
+      ...['Amazon.it', 'amazon.co.uk', 'Amazon', 'Amazon.com.be'].map((sender) => ({ at, sender, result: 'none' as const, added: 0 })),
+      { at, sender: 'Amazon.de', result: 'added' as const, added: 1 },
+      { at, sender: 'Amazon Shipping', result: 'none' as const, added: 0 },
+      { at, sender: 'Example Shop', result: 'none' as const, added: 0 },
+    ];
+    vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue({ ...mailbox, recent });
+    const answer = await (await readInbox(signedIn('GET'), none)).json();
+    expect(answer.inbox.recent.map((entry: { account?: string }) => entry.account ?? null)).toEqual(['Amazon', 'Amazon', 'Amazon', 'Amazon', null, null, null]);
+    expect(Object.keys(answer.inbox.recent[0]).sort()).toEqual(Object.keys(contract.components.schemas.AddByEmailEntry.properties).sort());
+    expect(answer.inbox.recent[4]).toEqual(recent[4]);
+  });
+
   it('is made once, and renewed only when asked', async () => {
     const read = vi.spyOn(SupabaseServiceClient.prototype, 'inboundMailbox').mockResolvedValue(null);
     const open = vi.spyOn(SupabaseServiceClient.prototype, 'openInboundMailbox').mockImplementation(async (_, fresh) => ({ ...mailbox, token: fresh }));

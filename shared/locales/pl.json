@@ -1341,6 +1341,7 @@
   "inbox.result.named": "Już w twoich dostawach: dodano nazwę sklepu",
   "inbox.result.delivered": "Już doręczona: nie dodano",
   "inbox.result.none": "Brak numeru śledzenia",
+  "inbox.result.account": "Numer śledzenia widać tylko na Twoim koncie {{shop}}",
   "inbox.result.limited": "Nie przeczytano: dzisiejszy limit wyczerpany",
   "inbox.result.full": "Nie dodano: twoje dostawy są pełne",
   "inbox.result.confirmation": "Kod potwierdzający z Gmaila",

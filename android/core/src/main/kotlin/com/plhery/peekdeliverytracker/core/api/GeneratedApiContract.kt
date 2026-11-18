@@ -4644,6 +4644,7 @@ data class AddByEmailEntry(
     val sender: String,
     val result: AddByEmailResult,
     val added: Int,
+    val account: String? = null,
 )
 
 @Serializable

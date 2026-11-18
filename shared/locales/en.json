@@ -1341,6 +1341,7 @@
   "inbox.result.named": "Already in your deliveries: shop name added",
   "inbox.result.delivered": "Already delivered: not added",
   "inbox.result.none": "No tracking number in it",
+  "inbox.result.account": "The tracking number shows only in your {{shop}} account",
   "inbox.result.limited": "Not read: today’s limit is reached",
   "inbox.result.full": "Not added: your deliveries are full",
   "inbox.result.confirmation": "Gmail’s confirmation code",

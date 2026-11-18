@@ -1,4 +1,5 @@
 import { apiRoute, HttpError, json, noContent, readJsonObject, requireService, requireUser, type ApiContext } from '../../../../src/server/api';
+import { withAccountShops } from '../../../../src/server/inboundEmail/accountShop';
 import { inboundEmailConfigured, inboundEmailOpenTo, inboxAddress, newInboxToken, type InboundEmailSettings } from '../../../../src/server/inboundEmail/settings';
 import type { InboundMailbox } from '../../../../src/server/supabase';
 
@@ -14,8 +15,11 @@ function openSettings(context: ApiContext): InboundEmailSettings {
 
 function shown(settings: InboundEmailSettings, mailbox: InboundMailbox | null) {
   if (!mailbox) return { inbox: null, dailyLimit: settings.perAccountPerDay };
-  const { token, ...rest } = mailbox;
-  return { inbox: { address: inboxAddress(settings, token), ...rest }, dailyLimit: settings.perAccountPerDay };
+  const { token, recent, ...rest } = mailbox;
+  return {
+    inbox: { address: inboxAddress(settings, token), ...rest, recent: withAccountShops(recent) },
+    dailyLimit: settings.perAccountPerDay,
+  };
 }
 
 /** The account's forwarding address for adding parcels by email, and what its last email did. */

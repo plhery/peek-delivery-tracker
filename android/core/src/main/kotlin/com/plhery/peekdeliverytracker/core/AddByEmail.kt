@@ -96,17 +96,24 @@ fun AddByEmail.recentEmails(): List<AddByEmailEntry> {
     return if (at != null && result != null) listOf(AddByEmailEntry(at = at, sender = "", result = result, added = lastAdded ?: 0)) else emptyList()
 }
 
-/** What an email did, in a few words. */
+/**
+ * What an email did, in a few words. One that held no number from a shop that shows it only in the reader's account
+ * with it ([AddByEmailEntry.account]) says where it is.
+ */
 fun AddByEmailEntry.resultText(localizer: Localizer): String = when (result) {
     AddByEmailResult.Added -> localizer.text("inbox.result.added.many", mapOf("count" to added))
     AddByEmailResult.Known -> localizer.text("inbox.result.known")
     AddByEmailResult.Named -> localizer.text("inbox.result.named")
     AddByEmailResult.Delivered -> localizer.text("inbox.result.delivered")
-    AddByEmailResult.None -> localizer.text("inbox.result.none")
+    AddByEmailResult.None -> account?.let { localizer.text("inbox.result.account", mapOf("shop" to it)) } ?: localizer.text("inbox.result.none")
     AddByEmailResult.Limited -> localizer.text("inbox.result.limited")
     AddByEmailResult.Full -> localizer.text("inbox.result.full")
     AddByEmailResult.Confirmation -> localizer.text("inbox.result.confirmation")
 }
+
+/** Whether the email held no number and its row doesn't say where it is, which Settings' note then explains. */
+val AddByEmailEntry.heldNoNumberUnexplained: Boolean
+    get() = result == AddByEmailResult.None && account == null
 
 /** Whether each parcel an email adds is notified: on unless switched off, as an address from before the switch is. */
 val AddByEmail.notifies: Boolean

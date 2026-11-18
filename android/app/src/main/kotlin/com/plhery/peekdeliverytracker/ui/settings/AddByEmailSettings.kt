@@ -80,8 +80,8 @@ import com.plhery.peekdeliverytracker.core.StepText
 import com.plhery.peekdeliverytracker.core.api.AddByEmail
 import com.plhery.peekdeliverytracker.core.api.AddByEmailEntry
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
-import com.plhery.peekdeliverytracker.core.api.AddByEmailResult
 import com.plhery.peekdeliverytracker.core.api.ForwardingConfirmation
+import com.plhery.peekdeliverytracker.core.heldNoNumberUnexplained
 import com.plhery.peekdeliverytracker.core.notifies
 import com.plhery.peekdeliverytracker.core.recentEmails
 import com.plhery.peekdeliverytracker.core.resultText
@@ -254,7 +254,7 @@ private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse) {
                 EmailRow(entry)
             }
         }
-        if (emails.any { it.result == AddByEmailResult.None }) Note(localized("inbox.noNumber"))
+        if (emails.any { it.heldNoNumberUnexplained }) Note(localized("inbox.noNumber"))
         if (offer.showsUsage) Note(localizer.text("inbox.usage", mapOf("used" to inbox.usedToday, "limit" to offer.dailyLimit)))
     }
 }

@@ -1341,6 +1341,7 @@
   "inbox.result.named": "Já nas suas entregas: nome da loja adicionado",
   "inbox.result.delivered": "Já entregue: não adicionada",
   "inbox.result.none": "Sem código de rastreamento",
+  "inbox.result.account": "O código de rastreamento só aparece na sua conta {{shop}}",
   "inbox.result.limited": "Não lido: limite de hoje atingido",
   "inbox.result.full": "Não adicionado: suas entregas estão cheias",
   "inbox.result.confirmation": "Código de confirmação do Gmail",

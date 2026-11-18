@@ -64946,6 +64946,7 @@ export interface ApiAddByEmailEntry {
   "sender": string;
   "result": ApiAddByEmailResult;
   "added": number;
+  "account"?: string;
 }
 
 export interface ApiForwardingConfirmation {

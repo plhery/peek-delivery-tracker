@@ -1341,6 +1341,7 @@
   "inbox.result.named": "已在你的列表里：已添加店铺名称",
   "inbox.result.delivered": "已送达：未添加",
   "inbox.result.none": "没有运单号",
+  "inbox.result.account": "运单号只显示在你的 {{shop}} 账号里",
   "inbox.result.limited": "未读取：今天的额度已用完",
   "inbox.result.full": "未添加：你的包裹列表已满",
   "inbox.result.confirmation": "Gmail 的验证码",

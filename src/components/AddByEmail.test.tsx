@@ -234,4 +234,24 @@ describe('adding parcels by email in Settings', () => {
     expect(closeAddByEmail).toHaveBeenCalledWith(apiAuth);
     expect(onChange).toHaveBeenLastCalledWith(offer(null));
   });
+
+  it('says where a shop that keeps tracking numbers behind its sign-in shows them', () => {
+    const onChange = vi.fn();
+    const now = Date.now();
+    const shown: ApiAddByEmail = {
+      ...inbox, lastMailAt: new Date(now).toISOString(), lastResult: 'none', lastAdded: 0,
+      recent: [{ at: new Date(now).toISOString(), sender: 'Amazon.it', result: 'none', added: 0, account: 'Amazon' }],
+    };
+    const { rerender } = render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(shown)} onChange={onChange} />);
+    const recent = () => within(screen.getByRole('region', { name: 'Recent emails' }));
+    expect(recent().getByRole('listitem').querySelector('.add-by-email__what')?.textContent)
+      .toBe('Amazon.itThe tracking number shows only in your Amazon account');
+    // The general note is for an email whose row doesn't say why it held no number.
+    expect(screen.queryByText('Some shops, like Amazon, put no tracking number in their emails.')).not.toBeInTheDocument();
+
+    const withOther = { ...shown, recent: [{ at: new Date(now - 60_000).toISOString(), sender: 'Other Shop', result: 'none' as const, added: 0 }, ...shown.recent] };
+    rerender(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(withOther)} onChange={onChange} />);
+    expect(recent().getAllByRole('listitem')[0]!.querySelector('.add-by-email__what')?.textContent).toBe('Other ShopNo tracking number in it');
+    expect(screen.getByText('Some shops, like Amazon, put no tracking number in their emails.')).toBeInTheDocument();
+  });
 });

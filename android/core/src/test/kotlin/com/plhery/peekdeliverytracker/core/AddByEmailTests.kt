@@ -4,6 +4,7 @@ import com.plhery.peekdeliverytracker.core.api.AddByEmail
 import com.plhery.peekdeliverytracker.core.api.AddByEmailEntry
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResult
+import com.plhery.peekdeliverytracker.core.api.ApiJson
 import java.io.IOException
 import java.time.Instant
 import java.util.Locale
@@ -205,6 +206,27 @@ class AddByEmailTests {
         assertEquals("Already delivered: not added", text(AddByEmailResult.Delivered))
         for (result in AddByEmailResult.entries) assertFalse(text(result, 2).startsWith("inbox."))
         assertEquals("Dodano 2 przesyłki", AddByEmailEntry("2026-10-28T09:00:00.000Z", "", AddByEmailResult.Added, 2).resultText(Localizer(AppLanguage.Pl)))
+    }
+
+    @Test
+    fun anEmailWithoutANumberNamesTheAccountThatShowsIt() {
+        val amazon = AddByEmailEntry(at = "2026-10-28T09:00:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
+        val other = amazon.copy(sender = "Example Shop", account = null)
+        assertEquals("The tracking number shows only in your Amazon account", amazon.resultText(Localizer(AppLanguage.En)))
+        assertEquals("No tracking number in it", other.resultText(Localizer(AppLanguage.En)))
+        for (language in AppLanguage.entries) {
+            val text = amazon.resultText(Localizer(language))
+            assertTrue(language.name, text.contains("Amazon") && !text.contains("{{"))
+        }
+        assertFalse(amazon.heldNoNumberUnexplained)
+        assertTrue(other.heldNoNumberUnexplained)
+        assertFalse(amazon.copy(result = AddByEmailResult.Added, added = 1, account = null).heldNoNumberUnexplained)
+        // The server's field reads, and an older server's entry without it reads as before.
+        val read = ApiJson.decodeFromString(
+            AddByEmailEntry.serializer(),
+            """{"at":"2026-10-28T09:00:00.000Z","sender":"Amazon.it","result":"none","added":0,"account":"Amazon"}""",
+        )
+        assertEquals(amazon, read)
     }
 
     @Test

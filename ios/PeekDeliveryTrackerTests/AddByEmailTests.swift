@@ -228,6 +228,19 @@ final class AddByEmailDecodingTests: XCTestCase {
         XCTAssertEqual(entry(.added, 3).resultText(localizer), "3 parcels added")
         XCTAssertEqual(entry(.named).resultText(localizer), "Already in your deliveries: shop name added")
         XCTAssertEqual(entry(.delivered).resultText(localizer), "Already delivered: not added")
+        // A shop that shows its numbers only in the reader's account with it is named where the number is.
+        let amazon = AddByEmailEntry(at: "2026-11-17T08:00:00Z", sender: "Amazon.it", result: .none, added: 0, account: "Amazon")
+        XCTAssertEqual(amazon.resultText(localizer), "The tracking number shows only in your Amazon account")
+        XCTAssertEqual(entry(.none).resultText(localizer), "No tracking number in it")
+        XCTAssertFalse(amazon.heldNoNumberUnexplained)
+        XCTAssertTrue(entry(.none).heldNoNumberUnexplained)
+        XCTAssertFalse(entry(.added, 1).heldNoNumberUnexplained)
+        for language in AppLanguage.allCases {
+            localizer.language = language
+            let text = amazon.resultText(localizer)
+            XCTAssertTrue(text.contains("Amazon"), "\(language)")
+            XCTAssertFalse(text.contains("{{"), "\(language)")
+        }
         for language in AppLanguage.allCases {
             localizer.language = language
             for result in AddByEmailResult.allCases {

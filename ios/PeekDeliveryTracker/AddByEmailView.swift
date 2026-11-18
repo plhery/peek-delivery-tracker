@@ -109,7 +109,7 @@ struct AddByEmailPage: View {
                         AddByEmailRow(entry: entry)
                     }
                 }
-                if emails.contains(where: { $0.result == AddByEmailResult.none }) { note(localizer.text("inbox.noNumber")) }
+                if emails.contains(where: \.heldNoNumberUnexplained) { note(localizer.text("inbox.noNumber")) }
                 if offer.showsUsage {
                     note(localizer.text("inbox.usage", ["used": inbox.usedToday, "limit": offer.dailyLimit]))
                 }

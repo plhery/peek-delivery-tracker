@@ -67,12 +67,17 @@ extension AddByEmail {
 }
 
 extension AddByEmailEntry {
-    /// What the email did, in a few words.
+    /// What the email did, in a few words. One that held no number from a shop that shows it only in the reader's
+    /// account with it (`account`) says where it is.
     @MainActor func resultText(_ localizer: Localizer) -> String {
-        result == .added
+        if result == AddByEmailResult.none, let account { return localizer.text("inbox.result.account", ["shop": account]) }
+        return result == .added
             ? localizer.text("inbox.result.added.many", ["count": added])
             : localizer.text("inbox.result.\(result.rawValue)")
     }
+
+    /// Whether the email held no number and its row doesn't say where it is, which Settings' note then explains.
+    var heldNoNumberUnexplained: Bool { result == AddByEmailResult.none && account == nil }
 }
 
 extension AddByEmailResponse {

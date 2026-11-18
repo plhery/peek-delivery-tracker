@@ -1341,6 +1341,7 @@
   "inbox.result.named": "Già tra le tue consegne: aggiunto il nome del negozio",
   "inbox.result.delivered": "Già consegnato: non aggiunto",
   "inbox.result.none": "Nessun numero di tracciamento",
+  "inbox.result.account": "Il numero di tracciamento compare solo nel tuo account {{shop}}",
   "inbox.result.limited": "Non letta: limite di oggi raggiunto",
   "inbox.result.full": "Non aggiunto: le tue consegne sono al completo",
   "inbox.result.confirmation": "Codice di conferma di Gmail",

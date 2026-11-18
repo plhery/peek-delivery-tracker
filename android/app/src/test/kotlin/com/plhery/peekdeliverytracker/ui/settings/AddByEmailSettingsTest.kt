@@ -26,6 +26,8 @@ import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.api.AddByEmailEntry
+import com.plhery.peekdeliverytracker.core.api.AddByEmailResult
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ANNOUNCEMENT
@@ -236,6 +238,16 @@ class AddByEmailSettingsTest {
         tap(SETTINGS_ADD_BY_EMAIL)
         assertTrue(shows("Example Books"))
         assertTrue(shows(text("inbox.noNumber")))
+    }
+
+    @Test
+    fun anEmailWithoutANumberNamesTheAccountThatShowsIt() {
+        val amazon = AddByEmailEntry(at = "2026-10-29T04:58:00.000Z", sender = "Amazon.it", result = AddByEmailResult.None, added = 0, account = "Amazon")
+        show { addByEmailClient.offer = offer(mailbox(recent = listOf(amazon))) }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        assertTrue(shows("Amazon.it"))
+        assertTrue(shows(localizer.text("inbox.result.account", mapOf("shop" to "Amazon"))))
+        assertFalse(shows(text("inbox.noNumber")))
     }
 
     /**

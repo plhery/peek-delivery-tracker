@@ -1341,6 +1341,7 @@
   "inbox.result.named": "Schon in deinen Sendungen: Shopname ergänzt",
   "inbox.result.delivered": "Schon zugestellt: nicht hinzugefügt",
   "inbox.result.none": "Keine Sendungsnummer darin",
+  "inbox.result.account": "Die Sendungsnummer steht nur in deinem {{shop}}-Konto",
   "inbox.result.limited": "Nicht gelesen: Tageslimit erreicht",
   "inbox.result.full": "Nicht hinzugefügt: Deine Sendungen sind voll",
   "inbox.result.confirmation": "Bestätigungscode von Gmail",

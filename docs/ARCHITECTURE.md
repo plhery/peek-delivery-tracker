@@ -378,7 +378,11 @@ Key server modules:
     its outcome and how many parcels it added. Settings lists the newest, and the account's
     export holds them all. An email's outcome is its most telling one: a parcel added; then
     the parcel limit, then an allowance, which the owner can act on; a followed parcel named;
-    parcels followed already; a delivery told of; nothing.
+    parcels followed already; a delivery told of; nothing. An email that held no number from
+    a shop that shows its numbers only in the reader's account with it (Amazon, on every
+    store's domain, by its sender's name: `inboundEmail/accountShop.ts`) names that shop
+    (`account`), and Settings says the number is in that account. A shop is added there once
+    the email log shows its emails ending without a number while they link to its order page.
   - Each parcel an email adds starts unseen, so the list marks it new once it has a scan
     (`parcels_added_by_email`: its `seen_at` is the epoch, which its first answer keeps and
     its opening replaces). It is also notified once, "Added from your email" with its name

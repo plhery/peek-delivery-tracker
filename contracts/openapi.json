@@ -70674,6 +70674,11 @@
             "type": "integer",
             "minimum": 0,
             "description": "Parcels the email added."
+          },
+          "account": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "When the email held no tracking number and its shop shows the number only in the reader's account with it (Amazon): the shop's name. Missing otherwise."
           }
         }
       },

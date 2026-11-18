@@ -1341,6 +1341,7 @@
   "inbox.result.named": "Уже в ваших доставках: добавлено название магазина",
   "inbox.result.delivered": "Уже доставлена: не добавлена",
   "inbox.result.none": "Трек-номера нет",
+  "inbox.result.account": "Трек-номер виден только в вашем аккаунте {{shop}}",
   "inbox.result.limited": "Не прочитано: дневной лимит исчерпан",
   "inbox.result.full": "Не добавлено: список доставок заполнен",
   "inbox.result.confirmation": "Код подтверждения Gmail",

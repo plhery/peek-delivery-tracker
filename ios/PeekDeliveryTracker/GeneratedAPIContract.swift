@@ -4718,6 +4718,7 @@ struct AddByEmailEntry: Codable, Equatable, Hashable, Sendable {
     var sender: String
     var result: AddByEmailResult
     var added: Int
+    var account: String? = nil
 }
 
 struct ForwardingConfirmation: Codable, Equatable, Hashable, Sendable {

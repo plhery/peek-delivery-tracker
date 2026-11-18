@@ -568,7 +568,9 @@ function instant(value: unknown): number | null {
  */
 function deliveryClock(parcel: JsonObject): DateTime['zone'] | string {
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
-  const declared = resultTimezone(deliveringCarrier(parcel), data as CarrierResult);
+  const carrier = deliveringCarrier(parcel);
+  const earlier = typeof data.active_tracking_carrier === 'string' && data.active_tracking_carrier !== carrier;
+  const declared = resultTimezone(carrier, (earlier ? {} : data) as CarrierResult);
   return declared !== 'UTC' ? declared : carrierClock(parcel);
 }
 
@@ -612,7 +614,7 @@ function carrierClock(parcel: JsonObject): DateTime['zone'] | string {
   const placed = pageClock(carrier) ? newestPlaceZone(parcel, carrier) : null;
   if (placed) return placed;
   if (typeof data.active_tracking_carrier === 'string' && data.active_tracking_carrier !== carrier) {
-    return newestOffsetZone(parcel, carrier) ?? newestPlaceZone(parcel, carrier) ?? resultTimezone(carrier, data as CarrierResult);
+    return newestOffsetZone(parcel, carrier) ?? newestPlaceZone(parcel, carrier) ?? resultTimezone(carrier, {} as CarrierResult);
   }
   const stated = /T[\d:.]+(?:\+\d{2}:?\d{2}|-(?!00:?00$)\d{2}:?\d{2})$/.test(String(data.last_update ?? ''))
     ? DateTime.fromISO(String(data.last_update), { setZone: true }) : null;

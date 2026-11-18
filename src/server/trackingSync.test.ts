@@ -1950,7 +1950,7 @@ describe('TrackingSyncService', () => {
       // AliExpress's leg before DHL's names no clock in the catalog; its newest scan is at +08:00.
       const relayed = answer('in_transit', {}, { time: '2026-11-09T19:30:00+08:00', description: 'Departed facility', stage: 'in_transit' });
       const leg = parcel({ created_at: '2026-11-09T09:00:00Z', expected_delivery: '2026-11-10',
-        carrier_data: { active_tracking_carrier: 'aliexpress', last_update: '2026-11-09T19:30:00+08:00' } });
+        carrier_data: { active_tracking_carrier: 'aliexpress', timezone: 'Asia/Shanghai', last_update: '2026-11-09T19:30:00+08:00' } });
       // 18:00 on the 10th in Germany, already the 11th at +08:00.
       expect((await leg('2026-11-10T17:00:00Z', new Error('down'), relayed)).expected_delivery).toBe('2026-11-10');
     });

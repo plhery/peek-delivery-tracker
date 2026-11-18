@@ -285,6 +285,24 @@ begin
 end;
 $$;
 
+do $$
+declare
+  owner constant uuid := 'ea000000-0000-4000-8000-000000000002';
+begin
+  for i in 1..50 loop
+    perform public.open_assistant_code(owner, 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', 'Example', 'example.test', true,
+      array['parcels:read'], lpad(to_hex(i), 64, 'a'), 'https://example.test/callback', repeat('c',43));
+  end loop;
+  begin
+    perform public.create_personal_token(owner, 'Extra', array['parcels:read'], repeat('0',64));
+    raise exception 'Aggregate grant limit bypassed';
+  exception when raise_exception then
+    if sqlerrm <> 'Too many connections' then raise; end if;
+  end;
+  delete from private.assistant_grants where user_id = owner;
+end;
+$$;
+
 -- Registration is never refused for being busy: past 2,000 clients no grant uses, a new
 -- one pushes out the oldest of them, never a client a grant uses.
 do $$

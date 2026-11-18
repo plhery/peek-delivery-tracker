@@ -29,7 +29,7 @@ export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 /** One answer for every link that cannot be shown, whatever the reason. */
-const unavailable = () => json({ error: PARCEL_UNAVAILABLE }, 404);
+const unavailable = () => json(PARCEL_UNAVAILABLE, 404);
 
 /**
  * Reads a parcel through its link. With the lookup's owner key the caller is

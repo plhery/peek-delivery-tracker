@@ -38,7 +38,7 @@ export { numberHint } from './hiddenNumbers';
  */
 
 /** The one answer for an unknown, forgotten, expired or malformed link, and for a wrong key. */
-export const PARCEL_UNAVAILABLE = 'Parcel unavailable';
+export const PARCEL_UNAVAILABLE = { error: 'Parcel unavailable', code: 'parcel_unavailable' } as const;
 /** The answer for a link whose sharing was stopped, to anyone but its owner. */
 export const PARCEL_NOT_SHARED = 'Parcel not shared';
 /**

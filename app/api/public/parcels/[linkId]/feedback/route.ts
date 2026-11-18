@@ -36,9 +36,9 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
   const found = isParcelLinkId(linkId)
     ? await service.publicParcel(linkId, ownerKeyHash(context.request.headers.get('x-parcel-key')), false)
     : null;
-  if (found === null) return json({ error: PARCEL_UNAVAILABLE }, 404);
+  if (found === null) return json(PARCEL_UNAVAILABLE, 404);
   if (found === 'stopped') return json({ error: PARCEL_NOT_SHARED }, 410);
-  if (found.link.gift === true && found.link.owner !== true) return json({ error: PARCEL_UNAVAILABLE }, 404);
+  if (found.link.gift === true && found.link.owner !== true) return json(PARCEL_UNAVAILABLE, 404);
   await keepParcelFeedback(service, found.package, values, 'link');
   return noContent();
 }, { authenticated: false, serviceRequired: true, capability: true, publicRateLimit: limits });

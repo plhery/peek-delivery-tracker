@@ -75,7 +75,7 @@
     "serwist": "^9.5.15",
     "sharp": "0.35.5",
     "undici": "^8.12.3",
-    "universal-parcel-scraper": "0.1173.4-main.6689",
+    "universal-parcel-scraper": "0.1174.0-main.6690",
     "web-push": "^3.6.7"
   },
   "devDependencies": {

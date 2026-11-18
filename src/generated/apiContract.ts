@@ -49083,7 +49083,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jumppoint-international"
     },
     "trackingUrlTemplate": "https://int-tracking.jumppoint.io/?q={trackingNumber}",
     "linkRules": [

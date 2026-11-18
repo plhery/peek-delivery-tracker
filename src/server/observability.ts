@@ -38,6 +38,15 @@ interface TrackingAttempt {
   browser?: () => void;
 }
 
+/** Leave the request out of every report captured inside a capability-bearing handler. */
+export function withRequestPrivacy<T>(suppress: boolean, handler: () => T): T {
+  if (!suppress) return handler();
+  return Sentry.withScope((scope) => {
+    scope.addEventProcessor((event) => ({ ...event, request: undefined, transaction: undefined }));
+    return handler();
+  });
+}
+
 /** The tracking check whose lookups are running, so their scrape and routing lines name its attempt. */
 const trackingAttempts = new AsyncLocalStorage<TrackingAttempt>();
 

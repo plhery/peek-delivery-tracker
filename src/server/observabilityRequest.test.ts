@@ -49,9 +49,9 @@ it('leaves the request out of a report for a route whose address or body carries
         data: '{"number":"TEST1234","key":"OWNER-KEY"}',
       } });
       isolation.setTransactionName('GET /api/public/parcels/k7Qm2xHd9RtW');
-      id = captureOperationalError(new Error('database down'), {
-        component: 'api', operation: 'request', route: '/api/public/parcels/:link', withoutRequest,
-      });
+      id = observability.withRequestPrivacy(withoutRequest, () => captureOperationalError(new Error('database down'), {
+        component: 'api', operation: 'request', route: '/api/public/parcels/:link',
+      }));
     });
     return id;
   };

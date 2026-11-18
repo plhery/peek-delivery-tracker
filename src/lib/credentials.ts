@@ -17,6 +17,7 @@ const CREDENTIAL_WORD = /^(?:auth|authorization|bearer|jwt|token|tokens|secret|s
  * a password, a session, a signature or a cookie (`api_key`, `accessToken`, `set-cookie`).
  */
 export function credentialName(name: string): boolean {
+  if (name.toLowerCase() === 'x-peek-recipient') return true;
   return name.replace(/([a-z\d])([A-Z])/g, '$1 $2').toLowerCase().split(/[^a-z\d]+/)
     .some((word) => CREDENTIAL_WORD.test(word));
 }

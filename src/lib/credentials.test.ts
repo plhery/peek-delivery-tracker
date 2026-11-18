@@ -4,7 +4,7 @@ import { credentialName, scrubQueryString, withoutCredentials } from './credenti
 describe('access values', () => {
   it('are named after a key, a token, a password, a session, a signature or a cookie', () => {
     for (const name of ['api_key', 'accessToken', 'set-cookie', 'Authorization', 'x-api-key', 'sessionId', 'client_secret',
-      'code_verifier', 'p256dh', 'svix-signature']) {
+      'code_verifier', 'p256dh', 'svix-signature', 'x-peek-recipient']) {
       expect(credentialName(name), name).toBe(true);
     }
     for (const name of ['tracking_number', 'postcode', 'phone', 'keyword', 'monkey', 'state', 'code', 'number_pattern']) {

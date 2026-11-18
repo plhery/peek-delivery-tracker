@@ -570,10 +570,10 @@ export function deleteLiveActivityUpdateToken(payload: JsonObject): {
 }
 
 export interface NotificationPreferencesValues {
-  enabledStages: string[];
-  quietHoursStart: string | null;
-  quietHoursEnd: string | null;
-  timezone: string;
+  enabledStages: string[] | undefined;
+  quietHoursStart: string | null | undefined;
+  quietHoursEnd: string | null | undefined;
+  timezone: string | undefined;
   /** The delivery email, switched on or off. Null keeps the stored choice: the request left it out. */
   emailOnDelivery: boolean | null;
   /** The list's mark on a parcel with news, switched on or off. Null keeps the stored choice. */
@@ -585,20 +585,23 @@ export interface NotificationPreferencesValues {
 
 export function notificationPreferences(payload: JsonObject): NotificationPreferencesValues {
   const rawStages = payload.enabledStages;
-  if (
-    !Array.isArray(rawStages)
-    || rawStages.length === 0
-    || rawStages.length > NOTIFICATION_STAGES.size
-    || rawStages.some((stage) => typeof stage !== 'string')
-  ) throw new HttpError(400, 'Choose at least one notification event');
-  const enabledStages = rawStages as string[];
-  if (
-    new Set(enabledStages).size !== enabledStages.length
-    || enabledStages.some((stage) => !NOTIFICATION_STAGES.has(stage))
-  ) throw new HttpError(400, 'Choose valid notification events');
+  let enabledStages: string[] | undefined;
+  if (rawStages !== undefined) {
+    if (
+      !Array.isArray(rawStages)
+      || rawStages.length === 0
+      || rawStages.length > NOTIFICATION_STAGES.size
+      || rawStages.some((stage) => typeof stage !== 'string')
+    ) throw new HttpError(400, 'Choose at least one notification event');
+    enabledStages = rawStages as string[];
+    if (
+      new Set(enabledStages).size !== enabledStages.length
+      || enabledStages.some((stage) => !NOTIFICATION_STAGES.has(stage))
+    ) throw new HttpError(400, 'Choose valid notification events');
+  }
   const quietHoursStart = payload.quietHoursStart;
   const quietHoursEnd = payload.quietHoursEnd;
-  if ((quietHoursStart == null) !== (quietHoursEnd == null)) {
+  if ((quietHoursStart === undefined) !== (quietHoursEnd === undefined) || (quietHoursStart == null) !== (quietHoursEnd == null)) {
     throw new HttpError(400, 'Set both quiet-hour times or turn quiet hours off');
   }
   for (const value of [quietHoursStart, quietHoursEnd]) {
@@ -609,13 +612,15 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
   if (quietHoursStart != null && quietHoursStart === quietHoursEnd) {
     throw new HttpError(400, 'Quiet hours must have different start and end times');
   }
-  if (typeof payload.timezone !== 'string' || payload.timezone.length < 1 || payload.timezone.length > 64) {
-    throw new HttpError(400, 'Use a valid timezone');
-  }
-  try {
-    new Intl.DateTimeFormat('en', { timeZone: payload.timezone }).format();
-  } catch (error) {
-    throw new HttpError(400, 'Use a valid timezone', undefined, { cause: error });
+  if (payload.timezone !== undefined) {
+    if (typeof payload.timezone !== 'string' || payload.timezone.length < 1 || payload.timezone.length > 64) {
+      throw new HttpError(400, 'Use a valid timezone');
+    }
+    try {
+      new Intl.DateTimeFormat('en', { timeZone: payload.timezone }).format();
+    } catch (error) {
+      throw new HttpError(400, 'Use a valid timezone', undefined, { cause: error });
+    }
   }
   // Apps from before the delivery email send neither field; `emailAvailable` is the server's to say.
   const emailOnDelivery = payload.emailOnDelivery ?? null;

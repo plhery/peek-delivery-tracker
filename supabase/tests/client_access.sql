@@ -10,7 +10,7 @@ declare
     'change_owned_package_carrier', 'claim_parcel_link', 'delete_owned_archived_package',
     'delete_owned_package', 'friends_action', 'friends_activity', 'friends_snapshot',
     'mark_owned_package_seen', 'missing_migrations', 'owned_delivery_emails', 'owned_package_share',
-    'record_account_opened', 'rename_owned_package', 'set_owned_notification_preferences',
+    'record_account_opened', 'rename_owned_package', 'set_owned_notification_preferences', 'patch_owned_notification_preferences',
     'set_owned_package_archived', 'set_owned_package_email_muted',
     'set_owned_package_notifications_muted', 'set_owned_package_provider_postcode',
     'share_owned_package', 'stop_owned_package_share'

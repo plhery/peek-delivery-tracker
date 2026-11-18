@@ -776,6 +776,13 @@ begin
     raise exception 'owner notification preferences were not stored';
   end if;
 
+  perform public.patch_owned_notification_preferences(false, p_clock => '12');
+  if not exists (
+    select 1 from public.notification_preferences where user_id = auth.uid() and clock = '12'
+      and enabled_stages = array['customs', 'out_for_delivery', 'delivered']
+      and quiet_hours_start = '22:00' and quiet_hours_end = '08:00'
+  ) then raise exception 'A clock patch overwrote unrelated notification settings'; end if;
+
   -- The delivery email is not chosen until asked for. A server from before it
   -- sends four arguments by name, as PostgREST calls them: they keep the choice.
   if exists (

@@ -57,6 +57,15 @@ describe('the account\'s choice about the delivery email', () => {
   const read = () => readPreferences(authenticated(preferences), none);
   const save = (body: unknown) => savePreferences(authenticated(preferences, 'PATCH', body), none);
 
+  it('accepts a clock-only patch without supplying stages or quiet hours', async () => {
+    signedIn();
+    const set = vi.spyOn(SupabaseUserClient.prototype, 'setNotificationPreferences').mockResolvedValue({ ...stored, clock: '12' });
+    const response = await save({ clock: '12' });
+    expect(response.status).toBe(200);
+    expect(set).toHaveBeenCalledWith(undefined, undefined, undefined, undefined, null, null, '12', null);
+    expect(await response.json()).toMatchObject({ ...shown, clock: '12' });
+  });
+
   it('reads the choice with whether this server can email the account at all', async () => {
     signedIn();
     mailConfigured();

@@ -80,7 +80,7 @@ describe('the choice to mark new updates', () => {
     expect(choice.result.current[0]).toBe(false);
     await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(1));
     expect(vi.mocked(saveNotificationPreferences).mock.calls[0][0]).toEqual({
-      enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: expect.any(String), markNewUpdates: false,
+      markNewUpdates: false,
     });
 
     vi.mocked(saveNotificationPreferences).mockRejectedValueOnce(new Error('offline'));

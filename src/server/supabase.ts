@@ -3026,18 +3026,21 @@ export class SupabaseUserClient extends SupabaseClient {
    * or null, the stored choice stays.
    */
   async setNotificationPreferences(
-    enabledStages: string[],
-    quietHoursStart: string | null,
-    quietHoursEnd: string | null,
-    timezone: string,
+    enabledStages: string[] | undefined,
+    quietHoursStart: string | null | undefined,
+    quietHoursEnd: string | null | undefined,
+    timezone: string | undefined,
     emailOnDelivery: boolean | null = null,
     markNewUpdates: boolean | null = null,
     clock: '24' | '12' | null = null,
     distance: 'km' | 'mi' | null = null,
   ): Promise<JsonObject> {
-    let result = await this.request('/rest/v1/rpc/set_owned_notification_preferences', {
+    const partial = enabledStages === undefined || quietHoursStart === undefined || timezone === undefined;
+    const rpc = partial ? 'patch_owned_notification_preferences' : 'set_owned_notification_preferences';
+    let result = await this.request('/rest/v1/rpc/' + rpc, {
       method: 'POST',
       body: {
+        ...(partial ? { p_set_quiet: quietHoursStart !== undefined } : {}),
         p_enabled_stages: enabledStages,
         p_quiet_hours_start: quietHoursStart,
         p_quiet_hours_end: quietHoursEnd,

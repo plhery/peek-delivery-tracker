@@ -82,9 +82,9 @@ struct PostcodeMemory {
     }
 
     /// The pair goes first; given before, it moves there rather than coming twice.
-    func remember(_ postcode: String, for carrier: CarrierID) {
+    func remember(_ postcode: String, for carrier: CarrierID, country: String? = nil) {
         guard let postcode = postcode.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty else { return }
-        write([GivenPostcode(carrier: carrier, postcode: postcode)]
+        write([GivenPostcode(carrier: carrier, postcode: postcode, country: country)]
             + entries.filter { $0.carrier != carrier || Self.bare($0.postcode) != Self.bare(postcode) })
     }
 
@@ -440,7 +440,7 @@ final class DeviceParcels {
         entries.append(entry)
         keys[entry.linkID] = response.key
         save()
-        if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier) }
+        if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier, country: request.dpdPostcodeCountry) }
         // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return Self.shown(entry)
     }

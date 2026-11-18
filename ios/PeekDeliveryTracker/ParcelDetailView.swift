@@ -1420,8 +1420,22 @@ struct ChangeCarrierView: View {
             trackingURL = carrier == parcel.carrier ? parcel.trackingURL ?? "" : ""
             phoneDigits = carrier == parcel.carrier ? parcel.phoneDigits ?? "" : ""
             postcodes = CarrierPostcodes(parcel: parcel)
-            postcodes.prepare(carrier, requirement: postcodeRequirement, among: store.givenPostcodes)
             errorMessage = nil
+            let given = store.givenPostcodes
+            if let base = carrierPostcodeRequirement, offeredPostcodeCountry != nil {
+                guard deliveryPostcode.isEmpty, postcodeRequirement?.isOptional == false else { return }
+                let countries = catalog.postcodeCountries(for: carrier, requirement: base)
+                for entry in given.filter({ $0.carrier == carrier }) + given.filter({ $0.carrier != carrier }) {
+                    guard let country = entry.country, countries.contains(country) else { continue }
+                    let field = catalog.postcodeRequirement(base, for: carrier, country: country)
+                    guard let value = field.suggestedPostcode(for: carrier, among: [entry]) else { continue }
+                    postcodes.choose(country, for: carrier)
+                    postcodes.use(value, for: carrier)
+                    break
+                }
+            } else {
+                postcodes.prepare(carrier, requirement: postcodeRequirement, among: given)
+            }
         }
         .task(id: refusalQuestion) {
             guard let question = refusalQuestion else { return }

@@ -140,10 +140,10 @@ class PostcodeMemory(private val defaults: UserDefaults) {
         } ?: emptyList()
 
     /** The pair goes first; given before, it moves there rather than coming twice. */
-    fun remember(postcode: String, carrier: CarrierId) {
+    fun remember(postcode: String, carrier: CarrierId, country: String? = null) {
         val postcode = postcode.trimmingWhitespacesAndNewlines().nonEmpty ?: return
         write(
-            listOf(GivenPostcode(carrier = carrier, postcode = postcode)) +
+            listOf(GivenPostcode(carrier = carrier, postcode = postcode, country = country)) +
                 entries.filter { !it.carrier.rawValue.equalsCanonically(carrier.rawValue) || !bare(it.postcode).equalsCanonically(bare(postcode)) },
         )
     }
@@ -624,7 +624,7 @@ class DeviceParcels(
         keys = keys.setting(entry.linkId, response.key)
         pendingForgets = pendingForgets.setting(entry.linkId, null)
         save()
-        request.dpdPostcode?.let { postcodes.remember(it, request.carrier ?: response.parcel.carrier) }
+        request.dpdPostcode?.let { postcodes.remember(it, request.carrier ?: response.parcel.carrier, request.dpdPostcodeCountry) }
         // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return shown(entry)
     }

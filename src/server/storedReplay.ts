@@ -114,8 +114,14 @@ export type ReplayedChange = ClockChange | StageChange | CopyChange;
  */
 export interface StepBack { parcel: string; from: string; to: string; hold?: 'return' | 'delivery' }
 
+/**
+ * What a parcel's stage is derived from: each scan's id, stage and instant. A check rewrites the scans it
+ * reads again (a new row version, the same values), which leaves this as it was; a scan added, removed,
+ * restaged or redated changes it.
+ */
+const eventRevision = "md5(string_agg(e.id::text || ':' || coalesce(e.stage, '') || ':' || coalesce(extract(epoch from e.occurred_at)::text, ''), ',' order by e.id))";
+
 /** The read-only export the replay reads, one parcel a line. */
-const eventRevision = "md5(string_agg(e.id::text || ':' || e.xmin::text, ',' order by e.id))";
 
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
 select json_build_object('id', p.id, 'destination', p.carrier_data->>'destination_country',

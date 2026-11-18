@@ -10667,6 +10667,9 @@
 <url>
 <loc>https://peektracker.com/carriers/yto-express-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
@@ -10674,8 +10677,47 @@
 <lastmod>2026-11-17</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/de/carriers/yto-express-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/yto-express-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/suivi-yto-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/yto-express-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/es/carriers/seguimiento-yto-express</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
+<xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
+<xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
+<xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/yto-express-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/pt-br/carriers/rastreio-yto-express</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
@@ -10685,6 +10727,9 @@
 <url>
 <loc>https://peektracker.com/ru/carriers/yto-express-otslezhivanie</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
@@ -10694,6 +10739,9 @@
 <url>
 <loc>https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/yto-express-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/yto-express-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-yto-express" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/seguimiento-yto-express" />
 <xhtml:link rel="alternate" hreflang="pt-BR" href="https://peektracker.com/pt-br/carriers/rastreio-yto-express" />
 <xhtml:link rel="alternate" hreflang="ru" href="https://peektracker.com/ru/carriers/yto-express-otslezhivanie" />
 <xhtml:link rel="alternate" hreflang="zh" href="https://peektracker.com/zh/carriers/yto-yuantong-wuliu-chaxun" />
@@ -10729,14 +10777,84 @@
 <url>
 <loc>https://peektracker.com/carriers/pengyou-tracking</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
 <lastmod>2026-11-17</lastmod>
 </url>
 <url>
+<loc>https://peektracker.com/de/carriers/pengyou-sendungsverfolgung</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/fr/carriers/suivi-pengyou</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/it/carriers/tracciamento-pengyou</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
 <loc>https://peektracker.com/es/carriers/pengyou-seguimiento</loc>
 <xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
 <xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pt/carriers/seguimento-pengyou</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
+<xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
+<lastmod>2026-11-18</lastmod>
+</url>
+<url>
+<loc>https://peektracker.com/pl/carriers/sledzenie-pengyou</loc>
+<xhtml:link rel="alternate" hreflang="en" href="https://peektracker.com/carriers/pengyou-tracking" />
+<xhtml:link rel="alternate" hreflang="de" href="https://peektracker.com/de/carriers/pengyou-sendungsverfolgung" />
+<xhtml:link rel="alternate" hreflang="fr" href="https://peektracker.com/fr/carriers/suivi-pengyou" />
+<xhtml:link rel="alternate" hreflang="it" href="https://peektracker.com/it/carriers/tracciamento-pengyou" />
+<xhtml:link rel="alternate" hreflang="es" href="https://peektracker.com/es/carriers/pengyou-seguimiento" />
+<xhtml:link rel="alternate" hreflang="pt" href="https://peektracker.com/pt/carriers/seguimento-pengyou" />
+<xhtml:link rel="alternate" hreflang="pl" href="https://peektracker.com/pl/carriers/sledzenie-pengyou" />
 <xhtml:link rel="alternate" hreflang="x-default" href="https://peektracker.com/carriers/pengyou-tracking" />
 <lastmod>2026-11-18</lastmod>
 </url>

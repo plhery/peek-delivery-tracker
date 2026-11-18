@@ -454,6 +454,11 @@ final class DeviceParcelTests: XCTestCase {
             XCTAssertEqual(down, ServerDown())
         }
 
+        answer = (404, Data(#"{"error":"route unavailable"}"#.utf8))
+        try? await device.refresh()
+        XCTAssertEqual(storage.keys.count, 2)
+        XCTAssertEqual(storage.forgetting.count, 1)
+
         answer = (404, Data(#"{"error":"Parcel unavailable"}"#.utf8))
         try await device.refresh()
         XCTAssertEqual(device.list().map(\.label), [])

@@ -57,7 +57,7 @@ extension HTTPURLResponse {
     /// the proxy's text while the server is up and the app isn't yet, is the server failing, and forgets nothing.
     func isServiceNotFound(_ data: Data) -> Bool {
         guard statusCode == 404, let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return false }
-        return payload["error"] is String
+        return payload["error"] as? String == "Parcel unavailable"
     }
 }
 

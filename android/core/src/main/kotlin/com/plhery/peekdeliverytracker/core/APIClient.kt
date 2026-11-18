@@ -129,7 +129,7 @@ class HttpResponse(val statusCode: Int, headers: Map<String, String> = emptyMap(
      * the proxy's text while the server is up and the app isn't yet, is the server failing, and forgets nothing.
      */
     val isServiceNotFound: Boolean
-        get() = statusCode == 404 && JsonSerialization.stringsOfObject(body)?.get("error") != null
+        get() = statusCode == 404 && JsonSerialization.stringsOfObject(body)?.get("error") == "Parcel unavailable"
 }
 
 /**

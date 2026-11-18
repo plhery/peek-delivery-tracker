@@ -1404,6 +1404,11 @@ class DeviceParcelTests {
             assertEquals(ServerDown(), error)
         }
 
+        answer = jsonResponse(404, """{"error":"route unavailable"}""")
+        runCatching { device.refresh() }
+        assertEquals(2, storage.keys.size)
+        assertEquals(1, storage.pendingForgets.size)
+
         answer = jsonResponse(404, """{"error":"Parcel unavailable"}""")
         device.refresh()
         assertTrue(device.isEmpty)

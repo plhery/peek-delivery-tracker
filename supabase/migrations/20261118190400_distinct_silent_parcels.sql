@@ -1,3 +1,5 @@
+-- A provider counts as silent once it was asked about 20 parcels, not 20 times: a provider sample keeps
+-- no parcel of its own (record_tracking_health stores one on refresh samples only), its check attempt does.
 create or replace view metrics.health as
 select
   (select count(*) from public.tracking_sync_attempts as attempt
@@ -42,9 +44,10 @@ select
           and 'future_event_timestamp' = any(earlier.anomaly_codes))) as future_scan_parcels_1h,
   (select count(*) from (
     select sample.subject from public.tracking_health_samples as sample
+    join public.tracking_sync_attempts as attempt on attempt.id = sample.attempt_id
     where sample.kind = 'provider' and sample.observed_at > now() - interval '3 hours'
     group by sample.subject
-    having count(distinct sample.package_id) >= 20 and count(*) filter (where sample.details ->> 'category' = 'ok') = 0) as silent)
+    having count(distinct attempt.package_id) >= 20 and count(*) filter (where sample.details ->> 'category' = 'ok') = 0) as silent)
     as silent_sources_3h;
 
 insert into public.applied_migrations (name) values ('20261118190400_distinct_silent_parcels') on conflict do nothing;

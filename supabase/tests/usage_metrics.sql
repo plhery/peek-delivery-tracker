@@ -226,8 +226,29 @@ declare
   after metrics.health;
 begin
   select * into strict before from metrics.health;
-  insert into public.tracking_health_samples (attempt_id, package_id, kind, subject, healthy, details, observed_at)
-  select gen_random_uuid(), md5((case when subject = 'health-repeated' then n % 5 else n end)::text)::uuid, kind, subject, category <> 'transport', jsonb_build_object('category', category), observed_at
+  -- As checks record them: a provider sample names its check attempt, and the attempt its parcel.
+  -- health-repeated asks five parcels four times each, every other subject twenty parcels once.
+  insert into public.packages (id, user_id, one_off, tracking_number, carrier)
+  select md5('health-parcel-' || n)::uuid, null, true, 'HEALTHS' || lpad(n::text, 4, '0'), 'unknown'
+  from generate_series(1, 20) n;
+  insert into public.tracking_sync_attempts (id, package_id, trigger, configured_carrier, outcome, started_at, completed_at)
+  select md5('health-attempt-' || subject || '-' || n)::uuid,
+    md5('health-parcel-' || case when subject = 'health-repeated' then n % 5 + 1 else n end)::uuid,
+    'scheduled', 'health-s', 'unchanged', observed_at, observed_at
+  from (values
+      ('health-silent', 20, now() - interval '1 hour'),
+      ('health-repeated', 20, now() - interval '1 hour'),
+      ('health-down', 20, now() - interval '1 hour'),
+      ('health-found-one', 20, now() - interval '1 hour'),
+      ('health-found-one-ok', 1, now() - interval '2 hours'),
+      ('health-asked-less', 19, now() - interval '1 hour'),
+      ('health-asked-earlier', 20, now() - interval '4 hours'),
+      ('health-direct-silent', 20, now() - interval '1 hour'))
+    as attempt (subject, attempts, observed_at),
+    generate_series(1, attempt.attempts) n;
+  insert into public.tracking_health_samples (attempt_id, kind, subject, healthy, details, observed_at)
+  select md5('health-attempt-' || subject || case when category = 'ok' then '-ok' else '' end || '-' || n)::uuid,
+    kind, subject, category <> 'transport', jsonb_build_object('category', category), observed_at
   from (values
       ('provider', 'health-silent', 'not_found', 20, now() - interval '1 hour'),
       ('provider', 'health-repeated', 'not_found', 20, now() - interval '1 hour'),

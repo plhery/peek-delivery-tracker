@@ -117,7 +117,7 @@
       "noDataState": "OK",
       "execErrState": "KeepLast",
       "summary": "A carrier or provider was asked about 20 parcels or more in the last 3 hours and found none of them: its answers changed, or it stopped answering.",
-      "description": "Each check leaves a provider health sample for every carrier or provider it asked; the rule counts those asked 20 times or more in 3 hours without one ok sample. A \"not found\" or \"no history\" answer counts as healthy, so a provider that says it has no history for every number opens no incident and Sentry stays quiet. tracking_health_samples by subject and details->>'category' over the last 3 hours names it. Adapters and providers are fixed in Universal Parcel Scraper (the adapters lane); a carrier that refuses Peek's requests is also its own Sentry incident."
+      "description": "Each check leaves a provider health sample for every carrier or provider it asked; the rule counts those asked about 20 parcels or more in 3 hours (each sample's parcel is its check attempt's) without one ok sample. A \"not found\" or \"no history\" answer counts as healthy, so a provider that says it has no history for every number opens no incident and Sentry stays quiet. tracking_health_samples by subject and details->>'category' over the last 3 hours names it. Adapters and providers are fixed in Universal Parcel Scraper (the adapters lane); a carrier that refuses Peek's requests is also its own Sentry incident."
     }
   ]
 }

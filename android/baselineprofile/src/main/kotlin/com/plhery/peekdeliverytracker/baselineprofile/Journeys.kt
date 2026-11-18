@@ -93,12 +93,10 @@ internal fun MacrobenchmarkScope.backToTheList() {
 
 /** Opens the first parcel's page and goes back to the list. */
 internal fun MacrobenchmarkScope.openFirstParcel() {
-    val card = device.findObject(By.res(PARCEL_LIST))?.findObject(By.clickable(true).descContains(", ")) ?: return
-    card.click()
-    if (device.wait(Until.hasObject(By.res(PAGE_CONTENT)), 5_000)) {
-        device.findObject(By.res(PAGE_CONTENT))?.fling(Direction.DOWN)
-        device.waitForIdle()
-        device.pressBack()
-        device.wait(Until.hasObject(By.res(PARCEL_LIST)), 5_000)
-    }
+    openFirstParcelAndWait()
+    checkNotNull(device.findObject(By.res(PAGE_CONTENT))).fling(Direction.DOWN)
+    device.waitForIdle()
+    device.pressBack()
+    check(device.wait(Until.gone(By.res(PAGE_CONTENT)), 5_000)) { "The parcel page stayed open" }
+    check(device.wait(Until.hasObject(By.res(PARCEL_LIST)), 5_000)) { "The list didn't reopen" }
 }

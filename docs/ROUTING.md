@@ -121,6 +121,10 @@ helps, and `proxy_refused` for any other.
      the preferred source and never used for shadow checks.
    - Postal Ninja is off by default. `TRACKING_ENABLE_POSTAL_NINJA=true` adds it after the
      other aggregators, whatever its tier, before UPU, when the list above allows it.
+   - Track123's anonymous public page is asked only for a lookup filed under FedEx, before
+     the other providers once FedEx's own lookup has failed. The Add preflight and discovery for
+     a number with no carrier don't ask it. When it fails, refuses or answers behind the
+     parcel's stored progress, the other providers are asked in the same check.
    - Exception: checksum-valid China Post `C…CN` and `L…CN` numbers try 17TRACK first,
      because it returns much richer history for them (see
      [COMPARISON.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COMPARISON.md)), and ten-digit
@@ -1245,9 +1249,3 @@ catalog name/alias nor a known network of DHL, DPD, GLS or Hermes. The postal un
 which an aggregator lists as "UPU" beside a parcel's carriers, is not reported either, nor is a
 shipping platform a shop books carriers through (Sendcloud, Packlink, Easyship, Shiprocket).
 Timings and metrics are in [OBSERVABILITY.md](OBSERVABILITY.md).
-
-Track123's anonymous public page is enabled only as recovery for a named FedEx parcel.
-It precedes the existing universal providers after direct tracking fails. Public
-recognition and unnamed discovery do not use it, and an unavailable or rejected
-Track123 lookup leaves the remaining providers eligible. A reply behind the parcel’s
-stored progress also leaves them eligible.

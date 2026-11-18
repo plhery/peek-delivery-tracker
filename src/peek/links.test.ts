@@ -214,10 +214,15 @@ describe('the API backend', () => {
   });
 
   it('reads a link that leads nowhere as unavailable, and a malformed id without asking', async () => {
-    const { links, request } = api(json({ error: 'Parcel unavailable' }, 404));
+    const { links, request } = api(json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404));
     expect(await links.readParcelLink(ID)).toBe('unavailable');
     expect(await links.readParcelLink('../../packages')).toBe('unavailable');
     expect(request).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps a guest parcel when a gateway returns a JSON 404', async () => {
+    const { links } = api(json({ error: 'Route not found' }, 404));
+    expect((await failure(links.readParcelLink(ID))).kind).toBe('server');
   });
 
   it('reads a proxy’s 404, while the server is up and the app is not yet, as the server failing: nothing leads nowhere', async () => {
@@ -239,7 +244,7 @@ describe('the API backend', () => {
 
   it('changes what the link shows with the owner key, sending the switches and nothing else', async () => {
     const changed = { ...owner, link: { ...owner.link, gift: true, shared: true } };
-    const { links, request } = api(json(changed), json({ error: 'Parcel unavailable' }, 404), json({ error: 'Invalid request' }, 400));
+    const { links, request } = api(json(changed), json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404), json({ error: 'Invalid request' }, 400));
     const view = await links.updateParcelLink(ID, KEY, { showNumber: true, gift: true, name: 'For Mum', note: 'Happy birthday' } as never);
     expect(view.link).toMatchObject({ role: 'owner', gift: true, shared: true });
     const [path, init] = request.mock.calls[0];
@@ -267,7 +272,7 @@ describe('the API backend', () => {
       json({ error: 'The carrier does not have the parcel for this postcode' }, 422),
       json({ error: 'Too many postcodes' }, 429, { 'Retry-After': '3600' }),
       json({ error: 'Nothing is asked for this parcel' }, 409), json(owner),
-      json({ error: 'Parcel unavailable' }, 404),
+      json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404),
       json({ error: 'The carrier could not be asked' }, 503),
     );
     const view = await links.addParcelPostcode(ID, KEY, 'dhl', '99999');
@@ -298,7 +303,7 @@ describe('the API backend', () => {
       json({ error: 'This parcel has all the alerts it can take' }, 409),
       json({ error: 'Push notifications are not configured' }, 503),
       json({ error: 'Parcel not shared' }, 410),
-      json({ error: 'Parcel unavailable' }, 404),
+      json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404),
       json({ error: 'Invalid push subscription' }, 400),
       json({ error: 'Too many requests. Try again shortly.' }, 429, { 'Retry-After': '9' }),
       new Response(null, { status: 204 }),
@@ -416,7 +421,7 @@ describe('the API backend', () => {
   });
 
   it('forgets with the key, and treats a refusal as an unavailable link', async () => {
-    const { links, request } = api(new Response(null, { status: 204 }), json({ error: 'Parcel unavailable' }, 404));
+    const { links, request } = api(new Response(null, { status: 204 }), json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404));
     await expect(links.forgetParcelLink(ID, KEY)).resolves.toBeUndefined();
     expect(request.mock.calls[0][0]).toBe(`/api/public/parcels/${ID}`);
     expect(request.mock.calls[0][1]).toMatchObject({ method: 'DELETE', credentials: 'omit' });
@@ -429,7 +434,7 @@ describe('the API backend', () => {
 
   it('sends what a reader says of a parcel, with the owner key only when the device holds one', async () => {
     const answer: ApiParcelFeedbackRequest = { id: '6f0e1d2c-3b4a-4c5d-8e9f-0a1b2c3d4e5f', answer: 'wrong', reasons: ['steps'], asked: 'page', app: 'web', locale: 'en' };
-    const { links, request } = api(new Response(null, { status: 204 }), new Response(null, { status: 204 }), json({ error: 'Parcel unavailable' }, 404), json({ error: 'Too many requests' }, 429));
+    const { links, request } = api(new Response(null, { status: 204 }), new Response(null, { status: 204 }), json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404), json({ error: 'Too many requests' }, 429));
     await expect(links.sendFeedback(ID, answer, KEY)).resolves.toBeUndefined();
     expect(request.mock.calls[0][0]).toBe(`/api/public/parcels/${ID}/feedback`);
     expect(request.mock.calls[0][1]).toMatchObject({ method: 'POST', credentials: 'omit' });

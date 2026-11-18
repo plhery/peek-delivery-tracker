@@ -73,11 +73,11 @@ function retryAfterSeconds(response: Response): number | null {
  * service's own not-found, a 404 with its JSON error, means the link leads nowhere: a proxy's 404 (its text
  * "404 page not found" while the server is up and the app isn't yet) is the server failing, and forgets nothing.
  */
-async function failure(response: Response): Promise<ParcelLinkError> {
-  const payload = await response.json().catch(() => null) as { error?: unknown; scope?: unknown } | null;
+async function failure(response: Response, accountParcel = false): Promise<ParcelLinkError> {
+  const payload = await response.json().catch(() => null) as { error?: unknown; scope?: unknown; code?: unknown } | null;
   const message = typeof payload?.error === 'string' ? payload.error : undefined;
   const retry = retryAfterSeconds(response);
-  if (response.status === 404 && message !== undefined) return new ParcelLinkError('unavailable');
+  if (response.status === 404 && (payload?.code === 'parcel_unavailable' || (accountParcel && message === 'Package not found'))) return new ParcelLinkError('unavailable');
   if (serverDown(response.status, payload)) {
     return new ParcelLinkError('server', { message, retryAfterSeconds: retry, down: announcedMaintenance(payload) ?? UNANNOUNCED });
   }
@@ -298,7 +298,7 @@ export function createAccountShare(auth: ApiAuth): ParcelShareClient {
       if (unanswered(error)) throw noAnswer(error);
       throw error;
     }
-    if (!response.ok) throw await failure(response);
+    if (!response.ok) throw await failure(response, true);
     return response;
   }
   return {
@@ -403,7 +403,7 @@ export function createAccountFeedback(auth: ApiAuth): (packageId: string, feedba
       if (unanswered(error)) throw noAnswer(error);
       throw error;
     }
-    if (!response.ok) throw await failure(response);
+    if (!response.ok) throw await failure(response, true);
   };
 }
 
@@ -427,7 +427,7 @@ export async function claimParcelLinks(links: ParcelClaim[], auth: ApiAuth, sign
     if (unanswered(error)) throw noAnswer(error);
     throw error;
   }
-  if (!response.ok) throw await failure(response);
+  if (!response.ok) throw await failure(response, true);
   const { results } = await answer<ApiClaimParcelsResponse>(response);
   if (!Array.isArray(results)) throw new ParcelLinkError('server', { message: 'Unreadable claim answer' });
   return results;

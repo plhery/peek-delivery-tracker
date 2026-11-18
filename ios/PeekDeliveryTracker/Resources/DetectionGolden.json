@@ -87693,6 +87693,14 @@
     ]
   },
   {
+    "input": "FC074260572BR",
+    "carrier": "correios-br",
+    "confidence": "high",
+    "candidates": [
+      "correios-br"
+    ]
+  },
+  {
     "input": "FC2404051641097",
     "carrier": "unknown",
     "confidence": "low",

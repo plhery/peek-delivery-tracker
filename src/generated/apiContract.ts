@@ -57946,7 +57946,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flash-courier"
     },
     "trackingUrlTemplate": "https://www.flashcourier.com.br/rastreio/{trackingNumber}",
     "linkRules": [

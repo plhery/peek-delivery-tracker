@@ -14,10 +14,10 @@ YTO calls it the waybill number (`运单号`). With invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `YT0000000000000` | YT and 13 digits: a YTO Express waybill. |
-| `D00000000000` | D and 11 digits: a YTO shape, but [Colis Privé](carrier:colis-prive) numbers can look the same. |
-| `G00000000000` | G and 11 digits: another YTO shape, which Colis Privé numbers can share too. |
-| `YT0000000000000000` | YT and 16 digits: not YTO but [YunExpress](carrier:yunexpress). |
+| `YT2468135790246` | YT and 13 digits: a YTO Express waybill. |
+| `D24681357902` | D and 11 digits: a YTO shape, but [Colis Privé](carrier:colis-prive) numbers can look the same. |
+| `G24681357902` | G and 11 digits: another YTO shape, which Colis Privé numbers can share too. |
+| `YT2612468135790246` | YT and 16 digits: not YTO but [YunExpress](carrier:yunexpress). |
 
 Lower case and spaces don't matter in Peek. YTO's own tracker takes up to 10 numbers at once, separated by commas, slashes or spaces.
 

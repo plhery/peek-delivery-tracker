@@ -14,10 +14,10 @@ A YTO chama o código de rastreio de `运单号` (número da guia). Com dígitos
 
 | Código | O que é |
 | --- | --- |
-| `YT0000000000000` | `YT` e 13 dígitos: um envio da YTO Express. |
-| `D00000000000` | `D` e 11 dígitos: um formato da YTO, mas códigos da Colis Privé também podem ser assim. |
-| `G00000000000` | `G` e 11 dígitos: outro formato da YTO, que códigos da Colis Privé também podem ter. |
-| `YT0000000000000000` | `YT` e 16 dígitos: não é da YTO, e sim da YunExpress. |
+| `YT2468135790246` | `YT` e 13 dígitos: um envio da YTO Express. |
+| `D24681357902` | `D` e 11 dígitos: um formato da YTO, mas códigos da Colis Privé também podem ser assim. |
+| `G24681357902` | `G` e 11 dígitos: outro formato da YTO, que códigos da Colis Privé também podem ter. |
+| `YT2612468135790246` | `YT` e 16 dígitos: não é da YTO, e sim da YunExpress. |
 
 No Peek, tanto faz digitar em maiúsculas ou minúsculas, com ou sem espaços. O rastreador da YTO aceita até 10 códigos de uma vez, separados por vírgula, barra ou espaço.
 

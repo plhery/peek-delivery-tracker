@@ -57,7 +57,7 @@ If you're asked for import charges on a parcel sent duties included, ask the sel
 
 ## Pengyou contact number and customer service
 
-As listed on szpy56.com on 28 October 2026, in Chinese only:
+As listed on szpy56.com, in Chinese only:
 
 - **Phone**: 181 2470 1707 and 188 7908 6605, two Chinese mobile numbers (+86 from abroad), given as a 24-hour hotline (全天24小时咨询热线). No languages are given.
 - **QQ**: 2853292077, its official service QQ (官方服务QQ), which the 在线客服咨询 (online customer service) link opens.

@@ -4244,9 +4244,8 @@ extension SessionIsolationTests {
         XCTAssertEqual(log.requests.map(\.method), ["PATCH"])
         XCTAssertEqual(log.requests.first?.path, "/api/push/preferences")
         let sent = try XCTUnwrap(log.requests.first?.body)
-        XCTAssertEqual(Set(sent.keys), ["enabledStages", "quietHoursStart", "quietHoursEnd", "timezone", "markNewUpdates"])
+        XCTAssertEqual(Set(sent.keys), ["markNewUpdates"])
         XCTAssertEqual(sent["markNewUpdates"] as? Bool, false)
-        XCTAssertEqual(sent["enabledStages"] as? [String], saved.enabledStages.map(\.rawValue))
         // The next launch starts from it, before the account's preferences are read.
         XCTAssertFalse(self.store(session, transport).markNewUpdates)
 
@@ -4385,7 +4384,7 @@ extension SessionIsolationTests {
         for _ in 0..<300 where store.notificationPreferences?.clock != .twentyFour { try await Task.sleep(for: .milliseconds(10)) }
         XCTAssertEqual(log.requests.map(\.method), ["GET", "PATCH"])
         let sent = try XCTUnwrap(log.requests.last?.body)
-        XCTAssertEqual(Set(sent.keys), ["enabledStages", "quietHoursStart", "quietHoursEnd", "timezone", "clock", "distance"])
+        XCTAssertEqual(Set(sent.keys), ["clock", "distance"])
         XCTAssertEqual(sent["clock"] as? String, "24")
         XCTAssertEqual(sent["distance"] as? String, "km")
 

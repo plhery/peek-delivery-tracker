@@ -327,10 +327,8 @@ final class ParcelStore: ObservableObject {
         let generation = session.generation
         Task {
             defer { if generation == session.generation { markNewUpdatesSaving -= 1 } }
-            guard let stored = try? await storedNotificationPreferences(), generation == session.generation else { return }
-            var value = stored
-            value.timezone = TimeZone.current.identifier
-            guard var saved = try? await api.saveNotificationPreferences(value, markNewUpdates: enabled),
+            guard generation == session.generation else { return }
+            guard var saved = try? await api.saveDisplayPreferences(markNewUpdates: enabled),
                   generation == session.generation else { return }
             if choice == markNewUpdatesChoices { UserDefaults.standard.removeObject(forKey: Self.markNewUpdatesUnsavedKey) }
             // Switched again meanwhile: that choice stands, and its own save is on its way.
@@ -370,11 +368,9 @@ final class ParcelStore: ObservableObject {
         unitsSent = sent
         let generation = session.generation
         Task {
-            var value = stored
-            value.timezone = TimeZone.current.identifier
-            value.emailOnDelivery = nil
             do {
-                let saved = try await api.saveNotificationPreferences(value, clock: clock, distance: distance)
+                let saved = try await api.saveDisplayPreferences(clock: stored.clock == clock ? nil : clock,
+                                                                 distance: stored.distance == distance ? nil : distance)
                 guard generation == session.generation else { return }
                 // Kept: should another device change them, the next difference read here is sent again.
                 if unitsSent == sent, saved.clock == clock, saved.distance == distance { unitsSent = nil }
@@ -384,12 +380,6 @@ final class ParcelStore: ObservableObject {
                 if generation == session.generation, unitsSent == sent { unitsSent = nil }
             }
         }
-    }
-
-    /// The account's preferences as last read or saved, read now where they were not.
-    private func storedNotificationPreferences() async throws -> NotificationPreferences {
-        if let notificationPreferences { return notificationPreferences }
-        return try await api.notificationPreferences()
     }
 
     /// The parcel's page is in front of the reader: what it tells now is seen, as of the news the page shows, so a scan

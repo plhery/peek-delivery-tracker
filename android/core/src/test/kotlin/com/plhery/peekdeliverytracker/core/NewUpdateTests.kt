@@ -527,7 +527,7 @@ class NewUpdateTests {
         store.loadNotificationPreferences()
         runCurrent()
         assertEquals(listOf("GET", "PATCH"), methods())
-        assertEquals(setOf("enabledStages", "timezone", "clock", "distance"), server.preferenceCalls.last().second?.keys)
+        assertEquals(setOf("clock", "distance"), server.preferenceCalls.last().second?.keys)
         assertEquals("24", lastSent("clock"))
         assertEquals("km", lastSent("distance"))
         assertEquals(NotificationPreferencesClock.TwentyFour, store.notificationPreferences?.clock)
@@ -554,6 +554,8 @@ class NewUpdateTests {
         runCurrent()
         assertEquals(listOf("GET", "PATCH"), methods().takeLast(2))
         assertEquals("12", lastSent("clock"))
+
+        assertNull("Only the clock changed", lastSent("distance"))
 
         // A server that does not keep them is not asked again and again.
         server.keepsUnits = false

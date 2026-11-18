@@ -1534,9 +1534,8 @@ class ParcelStore(
         val generation = session.generation
         return scope.launch {
             try {
-                val stored = notificationPreferences ?: api.notificationPreferences()
                 if (generation != session.generation) return@launch
-                var saved = api.saveNotificationPreferences(stored.copy(timezone = ZoneId.systemDefault().id), markNewUpdates = enabled)
+                var saved = api.saveDisplayPreferences(markNewUpdates = enabled)
                 if (generation != session.generation) return@launch
                 if (choice == markNewUpdatesChoices) {
                     markNewUpdatesChoice.unsaved = false
@@ -1580,8 +1579,7 @@ class ParcelStore(
         val generation = session.generation
         scope.launch {
             try {
-                val value = stored.copy(timezone = ZoneId.systemDefault().id, emailOnDelivery = null)
-                val saved = api.saveNotificationPreferences(value, clock = clock, distance = distance)
+                val saved = api.saveDisplayPreferences(clock = clock.takeIf { it != stored.clock }, distance = distance.takeIf { it != stored.distance })
                 if (generation != session.generation) return@launch
                 // Kept: should another device change them, the next difference read here is sent again.
                 if (unitsSent == sent && saved.clock == clock && saved.distance == distance) unitsSent = null

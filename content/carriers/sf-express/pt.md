@@ -60,7 +60,7 @@ As condições de transporte da SF para envios expedidos da China continental pa
 
 Os direitos e impostos dependem do país onde recebes a encomenda: vê o detalhe em [encomenda retida na alfândega](guide:customs). Em Portugal, tal como em toda a União Europeia, as compras à distância vindas de fora da UE com valor intrínseco até 150 € pagam desde 1 de julho de 2026 um direito aduaneiro fixo de 3 € por categoria de artigos. Desde 1 de novembro de 2026 acresce uma taxa de manuseamento da UE (*Union handling fee*) de 2 € por categoria de artigos, independentemente do valor da encomenda. O Brasil não pertence à União Europeia e aplica as suas próprias regras federais de tributação e despacho aduaneiro.
 
-Se recusares a encomenda ou não pagares os direitos e encargos devidos, as condições da SF permitem devolvê-la ao remetente a expensas deste. Se a alfândega retiver o envio e o remetente não resolver a situação no prazo de 30 dias seguidos após aviso escrito da SF, a encomenda é dada como abandonada e a SF pode dispor dela como entender, incluindo destruí-la.
+Se recusares a encomenda ou não pagares os direitos e encargos devidos, as condições da SF permitem devolvê-la ao remetente, a pedido e a expensas deste. Se a alfândega retiver o envio e o remetente não resolver a situação no prazo de 30 dias seguidos após aviso escrito da SF, a encomenda é dada como abandonada e a SF pode dispor dela como entender, incluindo destruí-la.
 
 ## Encomenda SF Express atrasada, perdida ou devolvida
 

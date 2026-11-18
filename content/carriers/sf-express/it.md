@@ -62,7 +62,7 @@ Dazi e imposte dipendono dal paese di destinazione: trovi il quadro completo nel
 
 La Svizzera non fa parte dell’UE e applica regole proprie. Secondo l’Ufficio federale della dogana e della sicurezza dei confini (UDSC) e la Posta Svizzera, gli invii di merci dall’estero sono in linea di principio dichiarati in dogana, con IVA calcolata sul valore della merce (comprese spese di spedizione e servizi) e dazi sul peso lordo; i regali tra privati dall’estero sono esenti fino a 100 CHF (esclusi alcol e tabacco), e per lo stato dello sdoganamento l’unico interlocutore è il trasportatore.
 
-Se rifiuti la consegna o non paghi gli oneri dovuti, in base alle proprie condizioni SF può rispedire il pacco al mittente a spese di quest’ultimo. Se la dogana trattiene il pacco e il mittente non risolve la pratica entro 30 giorni di calendario dalla comunicazione scritta di SF, la spedizione è considerata abbandonata e SF può disporne a propria discrezione, anche distruggendola.
+Se rifiuti la consegna o non paghi gli oneri dovuti, in base alle proprie condizioni SF può rispedire il pacco al mittente, su sua richiesta e a sue spese. Se la dogana trattiene il pacco e il mittente non risolve la pratica entro 30 giorni di calendario dalla comunicazione scritta di SF, la spedizione è considerata abbandonata e SF può disporne a propria discrezione, anche distruggendola.
 
 ## Pacco SF Express in ritardo, smarrito o rispedito al mittente
 

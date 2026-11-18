@@ -62,7 +62,7 @@ Les droits et taxes dépendent de ton pays : tous les détails figurent dans [co
 
 La Suisse et le Canada n’appartiennent pas à l’Union européenne et appliquent leurs propres règles. En Suisse, selon l’Office fédéral de la douane et de la sécurité des frontières (OFDF) et La Poste suisse, tout envoi de marchandises venant de l’étranger est en principe déclaré en douane, avec la TVA sur la valeur de la marchandise (frais d’expédition et prestations compris) et des droits calculés au poids brut ; les cadeaux envoyés entre particuliers sont exonérés jusqu’à 100 CHF (hors alcool et tabac), et c’est le transporteur chargé du dédouanement qui sert d’interlocuteur.
 
-Si tu refuses le colis ou ne règles pas les droits et frais dus, les conditions de SF l’autorisent à retourner l’envoi à l’expéditeur, aux frais de ce dernier. Si la douane retient l’envoi et que l’expéditeur ne régularise pas la situation dans les 30 jours calendaires suivant la notification écrite de SF, le colis est réputé abandonné et SF peut en disposer comme elle l’entend, y compris le détruire.
+Si tu refuses le colis ou ne règles pas les droits et frais dus, les conditions de SF lui permettent de retourner l’envoi à l’expéditeur, à la demande et aux frais de ce dernier. Si la douane retient l’envoi et que l’expéditeur ne régularise pas la situation dans les 30 jours calendaires suivant la notification écrite de SF, le colis est réputé abandonné et SF peut en disposer comme elle l’entend, y compris le détruire.
 
 ## Colis SF Express en retard, perdu ou retourné
 

@@ -427,11 +427,12 @@ Key server modules:
     than fetching the document back.
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
-    and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`) and
-    `parcels:write` (`add_parcels`, `archive_parcel`). It sends the browser nowhere before
+    and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`,
+    `find_carriers`) and `parcels:write` (`add_parcels`, `rename_parcel`, `change_carrier`,
+    `set_parcel_notifications`, `archive_parcel`, `restore_parcel`). It sends the browser nowhere before
     the owner answers: a request it can't take is shown as one. The answer is a code valid
     once for ten minutes; one used twice ends its grant.
-  - Every grant lists the four tools, each naming the scope it needs in
+  - Every grant lists every tool, each naming the scope it needs in
     `_meta.securitySchemes`, as ChatGPT reads it. A call outside the grant's scopes answers
     an error result whose `_meta["mcp/www_authenticate"]` holds an `insufficient_scope`
     challenge, which ChatGPT turns into a new sign-in.
@@ -455,7 +456,17 @@ Key server modules:
     names in English as its help pages give them and the plans and places that can, and what
     to ask a connected assistant, first to add the tracking numbers in the user's emails.
   - The tools work on the token's account alone, through the owner-checked functions the
-    app uses. They archive a parcel at most: none deletes one, and `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
+    app uses. A carrier change, an archive and a restore run the owner's own database
+    functions for the token's account (`change_account_package_carrier`,
+    `set_account_package_archived`), so the carrier list, each carrier's inputs and the
+    active-parcel limit hold as in the app, and a carrier change queues the check the edit
+    sheet's change does (`src/server/carrierCheck.ts`). `change_carrier` keeps the parcel's
+    postcode for a carrier that takes one unless given another; a call that changes nothing
+    queues no check. `find_carriers` searches the catalog as the carrier pickers do and lists
+    the carriers a number's shape fits, with the inputs each asks for; it asks no carrier.
+  - No tool deletes a parcel: deleting for good is too easy for an assistant to get wrong,
+    and archive and restore cover what it needs. The owner deletes one in Peek.
+    `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. Their answers leave out the receiver's name and postcode and read the
     scans as a link's viewer does (`viewerScans`): a delivery reads "Delivered", and a scan,
     status line or place that names the recipient, who signed, a code or a door is left out.

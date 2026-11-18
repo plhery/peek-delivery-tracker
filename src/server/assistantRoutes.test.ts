@@ -276,22 +276,39 @@ describe('the MCP endpoint', () => {
       const tools = (await rpc(response)).result!.tools! as Array<{ name: string; _meta?: { securitySchemes?: unknown } }>;
       return Object.fromEntries(tools.map(({ name, _meta }) => [name, _meta?.securitySchemes]));
     };
+    const write = [{ type: 'oauth2', scopes: ['parcels:write'] }];
+    const read = [{ type: 'oauth2', scopes: ['parcels:read'] }];
     const schemes = {
-      add_parcels: [{ type: 'oauth2', scopes: ['parcels:write'] }],
-      archive_parcel: [{ type: 'oauth2', scopes: ['parcels:write'] }],
-      get_parcel: [{ type: 'oauth2', scopes: ['parcels:read'] }],
-      list_parcels: [{ type: 'oauth2', scopes: ['parcels:read'] }],
+      add_parcels: write,
+      rename_parcel: write,
+      change_carrier: write,
+      set_parcel_notifications: write,
+      archive_parcel: write,
+      restore_parcel: write,
+      get_parcel: read,
+      list_parcels: read,
+      find_carriers: read,
     };
     expect(await listed(reader)).toEqual(schemes);
     expect(await listed(writer)).toEqual(schemes);
     expect(await listed(reader, 'modern')).toEqual(schemes);
   });
 
-  it('can archive a parcel but never delete one: these four tools, none destructive, and a token API that only reads', async () => {
+  it('can archive a parcel but never delete one: these tools, the ones that overwrite a value marked so, and a token API that only reads', async () => {
     const response = await mcp(connect(['parcels:read', 'parcels:write']), 'tools/list');
-    const tools = (await rpc(response)).result!.tools! as Array<{ name: string; annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean } }>;
-    expect(tools.map(({ name }) => name).sort()).toEqual(['add_parcels', 'archive_parcel', 'get_parcel', 'list_parcels']);
-    for (const { annotations } of tools) expect(annotations?.readOnlyHint === true || annotations?.destructiveHint === false).toBe(true);
+    const tools = (await rpc(response)).result!.tools! as Array<{
+      name: string; annotations?: { readOnlyHint?: boolean; destructiveHint?: boolean; idempotentHint?: boolean };
+    }>;
+    expect(tools.map(({ name }) => name).sort()).toEqual([
+      'add_parcels', 'archive_parcel', 'change_carrier', 'find_carriers', 'get_parcel', 'list_parcels', 'rename_parcel',
+      'restore_parcel', 'set_parcel_notifications',
+    ]);
+    // A new name or carrier replaces the old one; nothing else is lost, and every call may be repeated.
+    expect(tools.filter(({ annotations }) => annotations?.destructiveHint !== false).map(({ name }) => name).sort())
+      .toEqual(['change_carrier', 'rename_parcel']);
+    expect(tools.filter(({ annotations }) => annotations?.readOnlyHint).map(({ name }) => name).sort())
+      .toEqual(['find_carriers', 'get_parcel', 'list_parcels']);
+    for (const { annotations } of tools) expect(annotations?.idempotentHint).toBe(true);
     expect(Object.keys(tokenApi).filter((name) => /^[A-Z]+$/.test(name))).toEqual(['GET']);
   });
 
@@ -497,22 +514,32 @@ describe('the MCP endpoint', () => {
 
   it('answers a call outside the token\'s scopes with the challenge that asks for a new sign-in', async () => {
     const list = vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
-    const archive = vi.spyOn(service, 'archivePackage').mockResolvedValue(undefined);
+    const owned = vi.spyOn(service, 'getOwnedPackage').mockResolvedValue(null);
+    const archive = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
+    const update = vi.spyOn(service, 'updateAccountPackage').mockResolvedValue(true);
+    const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
     const challenge = (description: string) => 'Bearer resource_metadata="https://peek.example/.well-known/oauth-protected-resource/mcp", '
       + `scope="parcels:read parcels:write", error="insufficient_scope", error_description="${description}"`;
     const reader = connect(['parcels:read']);
     for (const era of ['legacy', 'modern'] as const) {
-      for (const [name, args] of [['add_parcels', { text: UPS }], ['archive_parcel', { parcel: UPS }]] as const) {
+      for (const [name, args] of [
+        ['add_parcels', { text: UPS }], ['archive_parcel', { parcel: UPS }], ['restore_parcel', { parcel: UPS }],
+        ['rename_parcel', { parcel: UPS, name: 'Sofa' }], ['change_carrier', { parcel: UPS, carrier: 'dhl' }],
+        ['set_parcel_notifications', { parcel: UPS, notifications: false }],
+      ] as const) {
         const refused = await call(reader, name, args, era);
         expect(refused.result).toMatchObject({
           isError: true,
-          content: [{ type: 'text', text: expect.stringContaining('allow it to add and archive parcels') }],
-          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add or archive parcels')] },
+          content: [{ type: 'text', text: expect.stringContaining('allow it to add, edit and archive parcels') }],
+          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add, edit or archive parcels')] },
         });
       }
     }
+    expect(owned).not.toHaveBeenCalled();
+    expect(update).not.toHaveBeenCalled();
+    expect(change).not.toHaveBeenCalled();
     const writer = connect(['parcels:write']);
-    for (const [name, args] of [['list_parcels', {}], ['get_parcel', { parcel: UPS }]] as const) {
+    for (const [name, args] of [['list_parcels', {}], ['get_parcel', { parcel: UPS }], ['find_carriers', { search: 'UPS' }]] as const) {
       expect((await call(writer, name, args)).result).toMatchObject({
         isError: true,
         _meta: { 'mcp/www_authenticate': [challenge('This connection may not see parcels')] },
@@ -529,7 +556,7 @@ describe('the MCP endpoint', () => {
     const parcel = stored(4, 'in_transit', { trackingNumber: UPS });
     const known = vi.spyOn(service, 'accountTrackingNumbers').mockResolvedValue(new Map([[UPS, parcel.id]]));
     const owned = vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id, owner) => (id === parcel.id && owner === userId ? parcel : null));
-    const archive = vi.spyOn(service, 'archivePackage').mockResolvedValue(undefined);
+    const archive = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
     const secret = connect(['parcels:read', 'parcels:write']);
 
     const read = await call(secret, 'get_parcel', { parcel: parcel.id.toUpperCase() });
@@ -540,7 +567,7 @@ describe('the MCP endpoint', () => {
     expect((await call(secret, 'archive_parcel', { parcel: ` ${UPS.toLowerCase()} ` })).result!.structuredContent).toEqual({ id: parcel.id, archived: true });
     expect(known).toHaveBeenCalledWith(userId, [UPS]);
     expect(owned).toHaveBeenCalledWith(parcel.id, userId);
-    expect(archive).toHaveBeenCalledExactlyOnceWith(parcel.id);
+    expect(archive).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, true);
 
     const elsewhere = await call(secret, 'get_parcel', { parcel: '7d000000-0000-4000-a000-0000000000ff' });
     expect(elsewhere.result).toMatchObject({ isError: true, content: [{ text: 'No such parcel in this Peek account.' }] });
@@ -548,6 +575,147 @@ describe('the MCP endpoint', () => {
     const other = await call(connect(['parcels:read', 'parcels:write'], otherUser), 'archive_parcel', { parcel: parcel.id });
     expect(other.result).toMatchObject({ isError: true });
     expect(archive).toHaveBeenCalledTimes(1);
+  });
+
+  /** One parcel of the caller's, found by its id or tracking number; any other account's call finds nothing. */
+  function ownParcel(parcel: Omit<ReturnType<typeof stored>, 'dpd_postcode'> & { dpd_postcode: string | null }) {
+    vi.spyOn(service, 'accountTrackingNumbers').mockImplementation(async (owner, numbers) => (
+      new Map(owner === userId && numbers.includes(parcel.tracking_number) ? [[parcel.tracking_number, parcel.id]] : [])
+    ));
+    return vi.spyOn(service, 'getOwnedPackage').mockImplementation(async (id, owner) => (id === parcel.id && owner === userId ? parcel : null));
+  }
+
+  function otherAccount(): string {
+    vi.stubEnv('ASSISTANT_ACCOUNTS', `${userId},${otherUser}`);
+    return connect(['parcels:read', 'parcels:write'], otherUser);
+  }
+
+  it('restores an archived parcel within the account\'s limit', async () => {
+    const parcel = stored(5, 'delivered', { trackingNumber: UPS, archived: true });
+    ownParcel(parcel);
+    const restore = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
+    const secret = connect(['parcels:read', 'parcels:write']);
+
+    expect((await call(secret, 'restore_parcel', { parcel: UPS })).result!.structuredContent).toEqual({ id: parcel.id, archived: false });
+    expect(restore).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, false);
+
+    restore.mockRejectedValueOnce(new SupabaseError('Parcel limit reached', 400, 'P0001'));
+    expect((await call(secret, 'restore_parcel', { parcel: parcel.id })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('as many parcels as it may') }],
+    });
+    expect((await call(otherAccount(), 'restore_parcel', { parcel: parcel.id })).result).toMatchObject({ isError: true });
+    expect(restore).toHaveBeenCalledTimes(2);
+  });
+
+  it('leaves a parcel on the list as it is when asked to restore it', async () => {
+    const parcel = stored(6, 'in_transit');
+    ownParcel(parcel);
+    const restore = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
+    const answered = await call(connect(['parcels:write']), 'restore_parcel', { parcel: parcel.id });
+    expect(answered.result!.structuredContent).toEqual({ id: parcel.id, archived: false });
+    expect(restore).not.toHaveBeenCalled();
+  });
+
+  it('renames the caller\'s own parcel, or clears its name', async () => {
+    const parcel = stored(7, 'in_transit', { trackingNumber: UPS });
+    ownParcel(parcel);
+    const update = vi.spyOn(service, 'updateAccountPackage').mockResolvedValue(true);
+    const secret = connect(['parcels:write']);
+
+    expect((await call(secret, 'rename_parcel', { parcel: UPS, name: '  Sofa  ' })).result!.structuredContent).toEqual({ id: parcel.id, name: 'Sofa' });
+    expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { label: 'Sofa' });
+    expect((await call(secret, 'rename_parcel', { parcel: parcel.id, name: '' })).result!.structuredContent).toEqual({ id: parcel.id, name: null });
+    expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { label: '' });
+    // Characters as the app counts them: 80 emoji are a name, 81 are not.
+    expect((await call(secret, 'rename_parcel', { parcel: parcel.id, name: '📦'.repeat(80) })).result!.structuredContent).toMatchObject({ id: parcel.id });
+    expect((await call(secret, 'rename_parcel', { parcel: parcel.id, name: '📦'.repeat(81) })).result).toMatchObject({
+      isError: true, content: [{ text: 'Parcel names can be at most 80 characters' }],
+    });
+    expect(update).toHaveBeenCalledTimes(3);
+
+    expect((await call(otherAccount(), 'rename_parcel', { parcel: parcel.id, name: 'Mine' })).result).toMatchObject({
+      isError: true, content: [{ text: 'No such parcel in this Peek account.' }],
+    });
+    expect(update).toHaveBeenCalledTimes(3);
+  });
+
+  it('changes the carrier of the caller\'s own parcel and checks it again, as the edit sheet does', async () => {
+    const parcel = { ...stored(8, 'in_transit', { trackingNumber: UPS }), dpd_postcode: null };
+    ownParcel(parcel);
+    const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
+    const enqueue = vi.spyOn(service, 'enqueueSyncJob').mockResolvedValue({ row: { id: '8e000000-0000-4000-a000-000000000001' }, queued: true } as Awaited<ReturnType<typeof service.enqueueSyncJob>>);
+    const secret = connect(['parcels:read', 'parcels:write']);
+
+    const changed = await call(secret, 'change_carrier', { parcel: UPS, carrier: 'dhl' });
+    expect(changed.result!.structuredContent).toEqual({ id: parcel.id, carrier: 'DHL', carrierId: 'dhl', checking: true });
+    expect(change).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, 'dhl', null, null);
+    expect(enqueue).toHaveBeenCalledExactlyOnceWith({ userId, packageId: parcel.id, reason: 'changed' });
+
+    // The carrier it has already: nothing to change or check.
+    expect((await call(secret, 'change_carrier', { parcel: UPS, carrier: 'ups' })).result!.structuredContent).toMatchObject({ carrierId: 'ups', checking: false });
+    for (const carrier of ['no-such-carrier', 'unknown']) {
+      expect((await call(secret, 'change_carrier', { parcel: UPS, carrier })).result).toMatchObject({
+        isError: true, content: [{ text: expect.stringContaining('find_carriers') }],
+      });
+    }
+    change.mockRejectedValueOnce(new SupabaseError('Invalid delivery postcode', 400, '22023'));
+    expect((await call(secret, 'change_carrier', { parcel: UPS, carrier: 'dhl' })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('Invalid delivery postcode') }],
+    });
+    expect((await call(otherAccount(), 'change_carrier', { parcel: parcel.id, carrier: 'dhl' })).result).toMatchObject({ isError: true });
+    expect(change).toHaveBeenCalledTimes(2);
+    expect(enqueue).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the parcel\'s postcode for a carrier that takes one, and checks no archived parcel', async () => {
+    const parcel = { ...stored(9, 'in_transit', { trackingNumber: 'SYNTHETIC0009', archived: true }), carrier: 'dpd-fr', dpd_postcode: '10115' };
+    ownParcel(parcel);
+    const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
+    const enqueue = vi.spyOn(service, 'enqueueSyncJob');
+    const secret = connect(['parcels:write']);
+
+    expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'dpd-de' })).result!.structuredContent)
+      .toMatchObject({ carrierId: 'dpd-de', checking: false });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'dpd-de', null, '10115');
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'dpd-de', postcode: '' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'dpd-de', null, null);
+    // A carrier that takes no postcode is given none.
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'hermes-de' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'hermes-de', null, null);
+    expect(enqueue).not.toHaveBeenCalled();
+  });
+
+  it('turns a parcel\'s notifications and emails off or on, for the caller\'s own parcel only', async () => {
+    const parcel = stored(10, 'in_transit', { trackingNumber: UPS });
+    ownParcel(parcel);
+    const update = vi.spyOn(service, 'updateAccountPackage').mockResolvedValue(true);
+    const secret = connect(['parcels:write']);
+
+    expect((await call(secret, 'set_parcel_notifications', { parcel: UPS, notifications: false })).result!.structuredContent)
+      .toEqual({ id: parcel.id, notifications: false, emails: true });
+    expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { notifications_muted: true });
+    await call(secret, 'set_parcel_notifications', { parcel: UPS, notifications: true, emails: false });
+    expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { notifications_muted: false, email_muted: true });
+    expect((await call(secret, 'set_parcel_notifications', { parcel: UPS })).result).toMatchObject({ isError: true });
+    expect((await call(otherAccount(), 'set_parcel_notifications', { parcel: parcel.id, emails: false })).result).toMatchObject({ isError: true });
+    expect(update).toHaveBeenCalledTimes(2);
+  });
+
+  it('finds carriers by name, country or number from the catalog, asking none', async () => {
+    const fetched = vi.spyOn(globalThis, 'fetch');
+    const secret = connect(['parcels:read']);
+    const found = async (args: Record<string, unknown>) => (await call(secret, 'find_carriers', args)).result!.structuredContent as {
+      total: number; carriers: Array<{ id: string; name: string; inputs?: Array<{ input: string; optional: boolean }>; fitsNumber?: boolean }>;
+    };
+
+    expect((await found({ search: 'Colissimo' })).carriers[0]).toMatchObject({ id: 'la-poste' });
+    expect((await found({ trackingNumber: UPS })).carriers).toEqual([expect.objectContaining({ id: 'ups', fitsNumber: true })]);
+    const german = await found({ search: 'Germany' });
+    expect(german.carriers.length).toBeLessThanOrEqual(10);
+    expect(german.total).toBeGreaterThanOrEqual(german.carriers.length);
+    expect(german.carriers.find(({ id }) => id === 'gls-de')?.inputs).toEqual([{ input: 'postcode', optional: false }]);
+    expect((await call(secret, 'find_carriers', {})).result).toMatchObject({ isError: true });
+    expect(fetched).not.toHaveBeenCalled();
   });
 
   it('opens no stream and ends no session, and is not there when no account may connect', async () => {

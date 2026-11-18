@@ -53,7 +53,7 @@ describe('assistants in Settings', () => {
     expect(screen.getByText('https://peek.example/mcp')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Copy address' }));
     expect(copy).toHaveBeenCalledWith('https://peek.example/mcp');
-    expect(screen.getByText('claude.example · Sees, adds and archives parcels · not used yet')).toBeInTheDocument();
+    expect(screen.getByText('claude.example · Sees, adds, edits and archives parcels · not used yet')).toBeInTheDocument();
     // Personal tokens have no screen: none is listed, and none can be made.
     expect(screen.queryByText('Home script')).not.toBeInTheDocument();
     expect(screen.queryByText(/token|Home Assistant|\/api\/parcels/i)).not.toBeInTheDocument();

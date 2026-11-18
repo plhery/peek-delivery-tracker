@@ -11,12 +11,11 @@ import {
   requireUserClient,
   type RouteParameters,
 } from '../../../../../src/server/api';
-import { wakeSyncWorker } from '../../../../../src/server/background';
+import { queueCarrierCheck } from '../../../../../src/server/carrierCheck';
 import { withEventPlaces } from '../../../../../src/server/eventPlaces';
 import { recordProviderInput } from '../../../../../src/server/metrics';
 import { logOperationalEvent } from '../../../../../src/server/observability';
 import { holdsPostcodeCountry, postcodeCountryWrite } from '../../../../../src/server/postcodeCountry';
-import { SupabaseError } from '../../../../../src/server/supabase';
 import { isRecord } from '../../../../../src/server/types';
 import { packageCarrierValues } from '../../../../../src/server/validation';
 
@@ -91,24 +90,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     archived: original.archived_at != null,
   });
 
-  const jobIds: string[] = [];
-  if (original.archived_at == null) {
-    try {
-      const job = await service.enqueueSyncJob({
-        userId: requireUser(context).id,
-        packageId,
-        reason: 'changed',
-      });
-      wakeSyncWorker();
-      if (typeof job.row.id === 'string') jobIds.push(job.row.id);
-    } catch (error) {
-      if (!(error instanceof SupabaseError)) throw error;
-      await service.updatePackage(packageId, {
-        sync_status: 'error',
-        sync_error: 'The tracking check for the new carrier could not be queued. Try again shortly.',
-      });
-    }
-  }
+  const jobIds = original.archived_at == null ? await queueCarrierCheck(service, requireUser(context).id, packageId) : [];
 
   const parcel = await client.getPackage(packageId);
   if (!parcel) throw new HttpError(404, 'Package not found');

@@ -70754,7 +70754,7 @@
           "parcels:read",
           "parcels:write"
         ],
-        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds and archives parcels."
+        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds, edits and archives parcels."
       },
       "AssistantConnection": {
         "type": "object",

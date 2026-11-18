@@ -1517,6 +1517,47 @@ export class SupabaseServiceClient extends SupabaseClient {
     })).length > 0;
   }
 
+  /** Renames or mutes the account's parcel: false when it is not the account's. */
+  async updateAccountPackage(
+    userId: string,
+    packageId: string,
+    values: { label?: string; notifications_muted?: boolean; email_muted?: boolean },
+  ): Promise<boolean> {
+    return rows(await this.request(`/rest/v1/packages?${query({ id: `eq.${packageId}`, user_id: `eq.${userId}`, select: 'id' })}`, {
+      method: 'PATCH',
+      body: values,
+      prefer: 'return=representation',
+    })).length > 0;
+  }
+
+  /**
+   * Changes the account's parcel's carrier with the owner's own function (change_owned_package_carrier): false when it
+   * is not the account's; an input the carrier refuses throws 22023.
+   */
+  async changeAccountPackageCarrier(
+    userId: string,
+    packageId: string,
+    carrier: string,
+    trackingUrl: string | null,
+    dpdPostcode: string | null,
+  ): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/change_account_package_carrier', {
+      method: 'POST',
+      body: { p_user_id: userId, p_package_id: packageId, p_carrier: carrier, p_tracking_url: trackingUrl, p_dpd_postcode: dpdPostcode },
+    }) === true;
+  }
+
+  /**
+   * Archives or restores the account's parcel with the owner's own function (set_owned_package_archived): false when it
+   * is not the account's; a restore past the account's parcel limit throws P0001.
+   */
+  async setAccountPackageArchived(userId: string, packageId: string, archived: boolean): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/set_account_package_archived', {
+      method: 'POST',
+      body: { p_user_id: userId, p_package_id: packageId, p_archived: archived },
+    }) === true;
+  }
+
   /** Stores a client that registered itself. */
   async registerAssistantClient(client: AssistantClient): Promise<void> {
     await this.request('/rest/v1/rpc/register_assistant_client', {

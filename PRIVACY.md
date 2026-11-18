@@ -46,7 +46,7 @@ using Peek involves.
   forwarding confirmation are not kept.
 - When you connect an assistant or make a personal token: its name, the site
   or app it answers to, what you allowed it (to see your parcels, or also to
-  add and archive them), when you connected it and when it last used Peek, and
+  add, edit and archive them), when you connected it and when it last used Peek, and
   its keys, kept only as fingerprints that cannot be turned back into them. Of
   a text the assistant sends to add parcels, the service keeps only the
   tracking numbers it adds and the name given, never the text itself.

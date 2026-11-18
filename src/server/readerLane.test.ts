@@ -91,6 +91,19 @@ describe('a reader\'s check while the scheduled run checks the same number', () 
     expect(summary).toMatchObject({ checked: 1, updated: 1 });
   });
 
+  it('checks the new carrier after the old generation finishes', async () => {
+    const gated = gatedAdapter();
+    const old = parcel('a', 'one', 'la-poste', 'TEST0001');
+    const { sync } = service([old], gated.adapter);
+    const scheduled = sync.sync();
+    await vi.waitFor(() => expect(gated.asked()).toHaveLength(1));
+    const reader = sync.syncPackage({ ...old, carrier: 'ctt', tracking_generation: 'new' }, { trigger: 'refresh' });
+    await gated.pass('la-poste TEST0001');
+    await gated.pass('ctt TEST0001');
+    expect((await reader).checked).toBe(1);
+    await scheduled;
+  });
+
   it('of the same parcel, waits for the run\'s check to end and takes it as its own', async () => {
     const gated = gatedAdapter();
     const run = parcel('a', 'one', 'la-poste', 'TEST0001');

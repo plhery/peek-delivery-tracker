@@ -392,6 +392,27 @@ final class AddByEmailModelTests: XCTestCase {
         XCTAssertEqual(model.offer, on)
     }
 
+    func testReadDuringRenewalCannotRestoreThePreviousOffer() async {
+        var finishRead: CheckedContinuation<Void, Never>?
+        var finishRenew: CheckedContinuation<Void, Never>?
+        let model = AddByEmailModel(client: client(read: { [none] in
+            await withCheckedContinuation { finishRead = $0 }
+            return none
+        }, open: { [on] _ in
+            await withCheckedContinuation { finishRenew = $0 }
+            return on
+        }))
+        let renewal = Task { await model.renew() }
+        while finishRenew == nil { await Task.yield() }
+        let read = Task { await model.load() }
+        while finishRead == nil { await Task.yield() }
+        finishRenew?.resume()
+        _ = await renewal.value
+        finishRead?.resume()
+        await read.value
+        XCTAssertEqual(model.offer, on)
+    }
+
     func testComingBackReadsAgainButNotTwiceForTheSameReturn() async {
         nonisolated(unsafe) var reads = 0
         let model = AddByEmailModel(client: client(read: { [none] in reads += 1; return none }))

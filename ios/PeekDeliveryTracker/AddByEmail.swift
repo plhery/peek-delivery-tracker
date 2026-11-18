@@ -117,6 +117,7 @@ final class AddByEmailModel: ObservableObject {
     private var readAt: Date?
     /// Counts the changes made here: a read that began before one would bring back what it replaced.
     private var changes = 0
+    private var reads = 0
 
     init(client: Client? = nil) { self.client = client }
 
@@ -131,10 +132,12 @@ final class AddByEmailModel: ObservableObject {
     func load(now: Date = .now) async {
         guard let client else { offer = nil; return }
         readAt = now
+        reads += 1
+        let read = reads
         let change = changes
         do {
             let next = try await client.read()
-            guard change == changes, !Task.isCancelled else { return }
+            guard change == changes, read == reads, !Task.isCancelled else { return }
             offer = next
         } catch {
             // The row stays as the last answer left it: a moment offline doesn't take it away.
@@ -176,7 +179,11 @@ final class AddByEmailModel: ObservableObject {
         changes += 1
         defer { working = false }
         do {
-            if let next = try await operation(client) { offer = next }
+            let generation = changes
+            let next = try await operation(client)
+            guard generation == changes else { return false }
+            changes += 1
+            if let next { offer = next }
             return true
         } catch is CancellationError {
             return false

@@ -86,6 +86,18 @@ class TalkBackOrderTest {
     }
 
     @Test
+    @Config(qualifiers = "w700dp-h900dp-xhdpi")
+    fun onAWindowWideEnoughForTheTabsAtTheTopButNotForTwoColumns() {
+        compose.setContent { RootHost(state = AuthenticationState.Demo) }
+        // The tabs at the top before the list's bar under them, whose room starts at the window's top too.
+        assertStartsWith(listOf("Deliveries", "Passport", "Friends", "Add a parcel", "Deliveries", "Account", DEMO, "On the way"), stops())
+        tab("Passport")
+        assertStartsWith(listOf("Deliveries", "Passport", "Friends"), stops())
+        tab("Friends")
+        assertStartsWith(listOf("Deliveries", "Passport", "Friends"), stops())
+    }
+
+    @Test
     @Config(qualifiers = "ar-rEG-$PHONE")
     fun onAPhoneSetToALanguagePeekDoesntSpeakMaterialsWordsAreTheAppsEnglish() {
         compose.setContent { RootHost(state = AuthenticationState.Demo) }

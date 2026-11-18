@@ -3734,6 +3734,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Chunghwa Post (Taiwan): codice, stati e consegna",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-tracking",
+      "title": "Xinghe Freight tracking: numeri GZXH, stati e consegna",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "es": [
@@ -4202,6 +4210,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd500"
     },
     {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "pengyou-seguimiento",
+      "title": "Seguimiento Pengyou: números PY, estados y entrega",
+      "name": "Pengyou",
+      "color": "#043a82"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-seguimiento",
@@ -4248,6 +4264,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreo y seguimiento GZYL: número YL…YQ y estados",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-seguimiento",
+      "title": "Seguimiento Shouwu: número SWECN…YQ, estados y reparto",
+      "name": "Shouwu International",
+      "color": "#be2c33"
     },
     {
       "id": "sending",
@@ -4746,6 +4770,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GZYL: número YL…YQ, estados e a quem perguntar",
       "name": "GZYL",
       "color": "#4e79e1"
+    },
+    {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-rastreio",
+      "title": "Rastreio Shouwu: número SWECN…YQ, estados e entrega",
+      "name": "Shouwu International",
+      "color": "#be2c33"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-rastreio",
+      "title": "Rastreio Xinghe Freight: números GZXH, estados e entrega",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "pt-br": [
@@ -5248,6 +5288,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-sledzenie",
+      "title": "Śledzenie Meiteshun (MTSCN): numery AMTS i statusy",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sledzenie",
@@ -5280,12 +5328,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#4e79e1"
     },
     {
+      "id": "shouwu",
+      "catalog": "shouwu",
+      "slug": "shouwu-sledzenie",
+      "title": "Śledzenie Shouwu: numer SWECN…YQ, statusy i dostawa",
+      "name": "Shouwu International",
+      "color": "#be2c33"
+    },
+    {
       "id": "geodis-pl",
       "catalog": "geodis-pl",
       "slug": "geodis-polska-sledzenie",
       "title": "GEODIS Polska (Pekaes): śledzenie przesyłki i statusy",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-sledzenie",
+      "title": "Śledzenie Xinghe Freight: numery GZXH, statusy i dostawa",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "ru": [

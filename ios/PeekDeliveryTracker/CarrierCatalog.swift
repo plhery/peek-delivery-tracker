@@ -354,6 +354,9 @@ struct CarrierRecognition: Equatable, Sendable {
     var answer: CarrierDetectionResponse?
     /// A check that failed before a server answer; it has no known carrier attempts.
     var failedNumber: String?
+    /// The number as typed that the answer, or the failure, was asked with (`CarrierDetectionRequest.typedNumber`):
+    /// detection reads its dashes and spaces, so the same number typed otherwise is asked about again.
+    var askedSpelling: String?
 
     /// Only a number no direct carrier claims with confidence is worth asking about. The
     /// check keeps running when a carrier is picked by hand meanwhile: its answer
@@ -365,16 +368,17 @@ struct CarrierRecognition: Equatable, Sendable {
     }
 
     /// The number to ask about: the settled one, while it is still the number in
-    /// the field and has no answer yet.
-    func request(for number: String, applies: Bool) -> String? {
+    /// the field and has no answer yet for the way it is typed (`spelling`).
+    func request(for number: String, spelling: String? = nil, applies: Bool) -> String? {
         guard applies, !number.isEmpty, settledNumber == number,
-              answer?.trackingNumber != number, failedNumber != number else { return nil }
+              askedSpelling != spelling || (answer?.trackingNumber != number && failedNumber != number) else { return nil }
         return number
     }
 
-    /// Carrier attempt lists come from the server's answer.
-    func status(for number: String, applies: Bool) -> Status {
+    /// Carrier attempt lists come from the server's answer, for the number as it is typed now (`spelling`).
+    func status(for number: String, spelling: String? = nil, applies: Bool) -> Status {
         guard applies, !number.isEmpty else { return .idle }
+        guard askedSpelling == spelling else { return settledNumber == number ? .asking([]) : .idle }
         if failedNumber == number { return .failed([]) }
         guard let answer, answer.trackingNumber == number else {
             guard settledNumber == number else { return .idle }

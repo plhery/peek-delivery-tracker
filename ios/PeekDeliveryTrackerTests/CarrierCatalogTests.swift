@@ -519,6 +519,36 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(recognition.status(for: nextNumber, applies: true), .asking([]))
     }
 
+    func testTheSameNumberTypedWithOtherPunctuationIsAskedAboutAgain() {
+        // Synthetic: a bare run of digits, then the same digits with a dash before the last, which detection reads.
+        let number = "123456789"
+        let dashed = "12345678-9"
+        var recognition = CarrierRecognition(settledNumber: number)
+        XCTAssertEqual(recognition.request(for: number, applies: true), number)
+        recognition.askedSpelling = nil
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .unknown, asked: [.glsDe])
+        XCTAssertNil(recognition.request(for: number, applies: true))
+        XCTAssertEqual(recognition.status(for: number, applies: true), .notFound([.glsDe]))
+
+        // Pasted again with the dash, the answer for the bare digits says nothing about it: it is asked about.
+        XCTAssertEqual(recognition.request(for: number, spelling: dashed, applies: true), number)
+        XCTAssertEqual(recognition.status(for: number, spelling: dashed, applies: true), .asking([]))
+        recognition.askedSpelling = dashed
+        recognition.answer = CarrierDetectionResponse(trackingNumber: number, carrier: .rlCarriers)
+        XCTAssertNil(recognition.request(for: number, spelling: dashed, applies: true))
+        XCTAssertEqual(recognition.status(for: number, spelling: dashed, applies: true), .recognized(.rlCarriers))
+        // And back to the bare digits, the dashed spelling's answer is not theirs either.
+        XCTAssertEqual(recognition.request(for: number, applies: true), number)
+        XCTAssertEqual(recognition.status(for: number, applies: true), .asking([]))
+
+        // A failure is the spelling's too.
+        recognition.answer = nil
+        recognition.failedNumber = number
+        XCTAssertEqual(recognition.status(for: number, spelling: dashed, applies: true), .failed([]))
+        XCTAssertEqual(recognition.request(for: number, applies: true), number)
+        XCTAssertEqual(recognition.status(for: number, applies: true), .asking([]))
+    }
+
     func testRecognitionReportsOnlyTheCarriersInTheServerAnswer() {
         let number = "12345678901"
         let serverAsked: [CarrierID] = [.glsDe, .postlogistics]

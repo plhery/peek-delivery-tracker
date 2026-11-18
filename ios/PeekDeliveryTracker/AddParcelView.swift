@@ -212,13 +212,15 @@ struct AddParcelView: View {
                     verifiedCarrier = CarrierDetectionResponse(trackingNumber: number, amazonShippingStatus: .unavailable, carrier: .amazonLogistics)
                 }
             }
-            .task(id: recognitionRequest) {
-                guard let number = recognitionRequest else { return }
+            .task(id: recognitionQuestion) {
+                guard let question = recognitionQuestion else { return }
+                let number = question.trackingNumber
                 recognition.failedNumber = nil
                 recognition.answer = nil
+                recognition.askedSpelling = question.typedNumber
                 do {
                     // As typed: its dashes and spaces tell some carriers' numbers apart.
-                    let result = try await store.detectCarrier(trackingNumber: number, typed: parsed.trackingNumber)
+                    let result = try await store.detectCarrier(trackingNumber: number, typed: question.typedNumber)
                     guard !Task.isCancelled else { return }
                     guard result.trackingNumber == number else { throw DeliveryAPIError.invalidResponse }
                     recognition.answer = result
@@ -942,12 +944,20 @@ struct AddParcelView: View {
         CarrierRecognition.applies(to: parsed, amazon: amazonNumber, demo: store.isDemo)
     }
 
-    private var recognitionRequest: String? {
-        recognition.request(for: normalizedNumber, applies: recognizable)
+    /// The number as typed, when its dashes or spaces spell it otherwise: detection reads them.
+    private var typedSpelling: String? {
+        CarrierDetectionRequest.typedNumber(parsed.trackingNumber, for: normalizedNumber)
+    }
+
+    /// The check to run: the number, and its spelling, so that the same number typed otherwise is asked about again
+    /// and an answer for the earlier spelling never lands on it.
+    private var recognitionQuestion: CarrierDetectionRequest? {
+        recognition.request(for: normalizedNumber, spelling: typedSpelling, applies: recognizable)
+            .map { CarrierDetectionRequest(trackingNumber: $0, typedNumber: typedSpelling) }
     }
 
     private var recognitionStatus: CarrierRecognition.Status {
-        recognition.status(for: normalizedNumber, applies: recognizable)
+        recognition.status(for: normalizedNumber, spelling: typedSpelling, applies: recognizable)
     }
 
     private var checking: Bool {
@@ -973,6 +983,7 @@ struct AddParcelView: View {
     /// What tracking services said about the number in the field while no carrier knows it.
     private var preflightDetail: String? {
         guard recognizable, let answer = recognition.answer, answer.trackingNumber == normalizedNumber,
+              recognition.askedSpelling == typedSpelling,
               answer.carrier == .unknown else { return nil }
         if answer.trackingFound == true { return localizer.text("add.historyFound") }
         if answer.providers?.contains(where: { $0.outcome == .inputRequired }) == true { return localizer.text("add.providerInputNeeded") }

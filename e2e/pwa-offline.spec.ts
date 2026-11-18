@@ -71,16 +71,17 @@ test('serves a translated, interactive fallback when the server becomes unreacha
     await page.waitForFunction(() => navigator.serviceWorker.controller !== null);
     await page.goto(`${origin.url}/~offline`);
     await page.getByRole('combobox', { name: 'Language' }).selectOption('fr');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(fr['offline.title']);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(fr['maintenance.title']);
     await page.goto(origin.url);
     // The demo is written in the language just chosen.
     await expect(page.getByText(frDemo['Coffee beans ☕'], { exact: true })).toBeVisible();
     await origin.stop();
+    // The browser is online and the server doesn't answer: the fallback says it is down for a moment, not offline.
     await page.goto(`${origin.url}/uncached-offline-navigation`);
     await expect(page).toHaveURL(`${origin.url}/~offline`);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(fr['offline.title']);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(fr['maintenance.title']);
     await page.getByRole('combobox').selectOption('de');
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(de['offline.title']);
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText(de['maintenance.title']);
     expect(securityErrors).toEqual([]);
   } finally {
     await origin.stop();

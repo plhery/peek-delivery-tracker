@@ -140,7 +140,7 @@ enum Maintenance {
     /// What `/maintenance.json` says, asked only once something failed: nil when it is not there to say (the edge not
     /// in front yet answers the app's own 404 page) or says nothing readable. Never cached.
     static func read(configuration: AppConfiguration = .current, transport: URLSession = .shared) async -> MaintenanceNotice? {
-        var request = URLRequest(url: configuration.apiBaseURL.appending(path: "maintenance.json"),
+        var request = URLRequest(url: configuration.apiBaseURL.appending(path: "maintenance").appendingPathExtension("json"),
                                  cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: 10)
         request.httpShouldHandleCookies = false
         request.setValue("application/json", forHTTPHeaderField: "Accept")

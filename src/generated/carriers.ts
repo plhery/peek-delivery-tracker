@@ -2546,6 +2546,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-sendungsverfolgung",
+      "title": "Xinghe Freight Sendungsverfolgung: GZXH…YQ-Nummer & Status",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "fr": [
@@ -3126,6 +3134,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-suivi-colis",
+      "title": "Suivi colis Meiteshun\u00a0: numéro AMTS…FS, statuts et contact",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
+    },
+    {
       "id": "speedaf",
       "catalog": "speedaf",
       "slug": "speedaf-suivi",
@@ -3140,6 +3156,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TopYou suivi colis\u00a0: numéro TYZR, statuts et livraison",
       "name": "TopYou",
       "color": "#045cd7"
+    },
+    {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-suivi-colis",
+      "title": "Suivi colis JRT\u00a0: numéro JRT…MM, vols, douane et DHL",
+      "name": "JRT",
+      "color": "#023053"
     },
     {
       "id": "js-express",
@@ -3172,6 +3196,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis HYWL (Huiyi Logistics)\u00a0: numéro TRK et statuts",
       "name": "Huiyi Logistics",
       "color": "#0b8f91"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-suivi-colis",
+      "title": "Suivi colis Xinghe Freight\u00a0: numéro GZXH…YQ et statuts",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "it": [
@@ -3638,6 +3670,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento SF Express: numero, stati, dogana e consegna",
       "name": "SF Express",
       "color": "#dc1e32"
+    },
+    {
+      "id": "mtscn",
+      "catalog": "mtscn",
+      "slug": "meiteshun-tracking",
+      "title": "Tracking Meiteshun: numero AMTS…FS, stati e chi contattare",
+      "name": "Meiteshun Logistics",
+      "color": "#f89f3b"
     },
     {
       "id": "topyou",
@@ -4224,6 +4264,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Forza Delivery rastreo: número de guía, estados y teléfono",
       "name": "Forza Delivery Express",
       "color": "#ea5c1d"
+    },
+    {
+      "id": "xinghe-freight",
+      "catalog": "xinghe-freight",
+      "slug": "xinghe-freight-seguimiento",
+      "title": "Seguimiento Xinghe Freight: número GZXH…YQ y estados",
+      "name": "Xinghe Freight",
+      "color": "#0e3a6b"
     }
   ],
   "pt": [
@@ -4676,12 +4724,28 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#045cd7"
     },
     {
+      "id": "jrt",
+      "catalog": "jrt",
+      "slug": "jrt-rastreio",
+      "title": "Rastreio JRT: número JRT…MM, voos, alfândega e DHL",
+      "name": "JRT",
+      "color": "#023053"
+    },
+    {
       "id": "js-express",
       "catalog": "js-express",
       "slug": "js-express-rastreio",
       "title": "JS Express rastreio: número JSE…YQ, estados e entrega",
       "name": "JS Express",
       "color": "#fe9b00"
+    },
+    {
+      "id": "gzyl",
+      "catalog": "gzyl",
+      "slug": "gzyl-rastreio",
+      "title": "Rastreio GZYL: número YL…YQ, estados e a quem perguntar",
+      "name": "GZYL",
+      "color": "#4e79e1"
     }
   ],
   "pt-br": [

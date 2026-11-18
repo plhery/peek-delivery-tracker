@@ -15,7 +15,7 @@ export const SIGN_IN_AGAIN_STORAGE_KEY = 'sdt.web.signInAgain.v1'; // gitleaks:a
 // Past this, the sign-in is no longer recent enough for the action anyway.
 const MAX_AGE_MS = 15 * 60_000;
 const MOST_TEXT_LENGTH = 8_000;
-const SCOPES: readonly ApiAssistantScope[] = ['parcels:read', 'parcels:write'];
+const SCOPES: readonly ApiAssistantScope[] = ['parcels:read', 'parcels:write', 'parcels:edit'];
 
 export function noteSignInAgain(note: SignInAgainNote, now = Date.now()): void {
   try {

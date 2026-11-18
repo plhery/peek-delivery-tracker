@@ -77,15 +77,17 @@ describe('the page where an assistant asks to connect', () => {
     signedIn();
     vi.mocked(answerAssistantConsent).mockResolvedValue('https://claude.example/callback?code=c&state=s1');
     const user = userEvent.setup();
-    render(<AssistantConsentScreen request={request} query={QUERY} />);
+    render(<AssistantConsentScreen request={{ ...request, scopes: ['parcels:read', 'parcels:write', 'parcels:edit'] }} query={QUERY} />);
     expect(screen.getByRole('heading', { name: 'Connect Claude to Peek?' })).toBeInTheDocument();
     expect(screen.getByText('Claude asks to use your Peek account, owner@example.test.')).toBeInTheDocument();
     expect(screen.getByText('Its name comes from claude.example.')).toBeInTheDocument();
     expect(screen.getByText('Peek then sends you back to claude.example.')).toBeInTheDocument();
+    expect(screen.getByRole('checkbox', { name: 'Add parcels from the tracking numbers you give it, and archive them' })).toBeChecked();
+    expect(screen.getByRole('checkbox', { name: 'Change your parcels’ name, carrier or notifications, and restore archived ones' })).toBeChecked();
     await user.click(screen.getByRole('checkbox', { name: /Add parcels/ }));
     await user.click(screen.getByRole('button', { name: 'Allow' }));
     expect(answerAssistantConsent).toHaveBeenCalledWith(expect.objectContaining({ userId: 'user-a' }),
-      { query: QUERY, approve: true, scopes: ['parcels:read'] });
+      { query: QUERY, approve: true, scopes: ['parcels:read', 'parcels:edit'] });
     expect(assign).toHaveBeenCalledWith('https://claude.example/callback?code=c&state=s1');
     expect(await screen.findByRole('heading', { name: 'Claude is connected' })).toBeInTheDocument();
   });

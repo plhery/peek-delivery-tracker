@@ -1678,6 +1678,13 @@ export class SupabaseServiceClient extends SupabaseClient {
     return parcel ? withReviewDemo(parcel, userId) : null;
   }
 
+  /** The timezone the account chose for its notifications, or null when it chose none. */
+  async accountTimeZone(userId: string): Promise<string | null> {
+    const params = query({ select: 'timezone', user_id: `eq.${userId}`, limit: '1' });
+    const timezone = rows(await this.request(`/rest/v1/notification_preferences?${params}`))[0]?.timezone;
+    return typeof timezone === 'string' && timezone ? timezone : null;
+  }
+
   /** An account's parcels as its apps read them, archived ones included. */
   async listAccountPackages(userId: string): Promise<JsonObject[]> {
     const params = query({ select: PACKAGE_SELECT, user_id: `eq.${userId}`, order: 'created_at.desc' });

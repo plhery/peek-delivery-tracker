@@ -55,6 +55,7 @@ export function AssistantsGuide({ t, mcpUrl }: { t: Translate; mcpUrl: string })
         <ul>
           <li>{t('assistants.consent.read')}</li>
           <li>{t('assistants.consent.write')}</li>
+          <li>{t('assistants.consent.edit')}</li>
         </ul>
         <p>{t('assistants.page.choose')}</p>
         <p>{t('assistants.page.limits')}</p>

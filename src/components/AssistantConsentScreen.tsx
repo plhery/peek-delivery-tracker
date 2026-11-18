@@ -34,6 +34,7 @@ export interface ConsentRequest {
 const SCOPE_WORDS: Record<ApiAssistantScope, MessageKey> = {
   'parcels:read': 'assistants.consent.read',
   'parcels:write': 'assistants.consent.write',
+  'parcels:edit': 'assistants.consent.edit',
 };
 
 /**

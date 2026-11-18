@@ -17,7 +17,11 @@ export interface AssistantSettings {
   accounts: AccountList;
 }
 
-export const SCOPES = ['parcels:read', 'parcels:write'] as const;
+/**
+ * What a grant may do: see parcels, add and archive them, or edit them (rename, change the carrier, mute, restore).
+ * Editing came after the first two, so a grant made before it never holds it: the owner allows it in a new consent.
+ */
+export const SCOPES = ['parcels:read', 'parcels:write', 'parcels:edit'] as const;
 export type Scope = (typeof SCOPES)[number];
 
 /** Where a client learns how to sign in to `/mcp`: its protected resource metadata (RFC 9728). */

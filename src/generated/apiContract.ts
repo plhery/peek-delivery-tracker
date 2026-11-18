@@ -64962,7 +64962,7 @@ export interface ApiAddByEmailResponse {
 
 export type ApiAddByEmailResult = "added" | "known" | "named" | "delivered" | "none" | "limited" | "full" | "confirmation";
 
-export type ApiAssistantScope = "parcels:read" | "parcels:write";
+export type ApiAssistantScope = "parcels:read" | "parcels:write" | "parcels:edit";
 
 export interface ApiAssistantConnection {
   "id": string;

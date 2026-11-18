@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { privateValues, VIEWER_DELIVERY_DESCRIPTION, viewerScan, viewerStatusText } from './privateDetails';
+import { privateValues, redactedScans, VIEWER_DELIVERY_DESCRIPTION, viewerScan, viewerStatusText } from './privateDetails';
 
 describe('a scan as a viewer reads it', () => {
   const scan = (stage: string, description: string, location: string | null = 'Example Town') => ({ stage, description, location, place: { name: 'x' } });
@@ -27,6 +27,16 @@ describe('a scan as a viewer reads it', () => {
     expect(viewerScan(scan('delivered', 'Delivered', '12 Example Street, Example Town'), values))
       .toEqual({ stage: 'delivered', description: 'Delivered', location: null, place: null });
     expect(viewerScan({ stage: 'in_transit', description: 'Sorted', location: 'Door no 3' })).toEqual({ stage: 'in_transit', description: 'Sorted', location: null });
+  });
+
+  it('keeps a scan it would leave out in words of its stage, without its place, for an assistant', () => {
+    const words = (stage: string) => `Stage ${stage}`;
+    const scans = [scan('in_transit', 'Sorted'), scan('ready_for_pickup', 'Ready, Abholcode 123456'), scan('delivered', 'Delivered to Ann Example')];
+    expect(redactedScans(scans, words, values)).toEqual([
+      scans[0],
+      { stage: 'ready_for_pickup', description: 'Stage ready_for_pickup', location: null, place: null },
+      scan('delivered', VIEWER_DELIVERY_DESCRIPTION),
+    ]);
   });
 
   it('reads no status line for a delivered parcel, nor one that names the recipient', () => {

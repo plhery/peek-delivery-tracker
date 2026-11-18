@@ -43,7 +43,7 @@ export const POST = apiRoute(async (context) => {
   if (!name) throw new HttpError(400, 'Give the token a name');
   const scopes = Array.isArray(payload.scopes) ? SCOPES.filter((scope) => (payload.scopes as unknown[]).includes(scope)) : [];
   if (!scopes.length || (payload.scopes as unknown[]).length !== scopes.length) {
-    throw new HttpError(400, `scopes must list ${SCOPES.join(' or ')}`);
+    throw new HttpError(400, `scopes must list one or more of ${SCOPES.join(', ')}`);
   }
   const owner = await requireRecentSignIn(context, 'Sign in again before making a personal token');
   const token = newSecret('personal');

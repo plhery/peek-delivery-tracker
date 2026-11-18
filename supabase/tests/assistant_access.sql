@@ -153,8 +153,26 @@ begin
     raise exception 'A kept refresh token was replaced or not extended: %', issued;
   end if;
 
+  -- Editing is a scope of its own: a grant allowed all three keeps them through its code and tokens.
+  perform public.open_assistant_code(one, 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', 'Example assistant', 'assistant.example.test', true,
+    array['parcels:read', 'parcels:write', 'parcels:edit'], repeat('c1', 32), 'https://assistant.example.test/callback', challenge);
+  issued := public.redeem_assistant_code(repeat('c1', 32), 'peek_c_aaaaaaaaaaaaaaaaaaaaaa',
+    'https://assistant.example.test/callback', challenge, repeat('c2', 32), later, repeat('c3', 32), much_later);
+  seen := public.assistant_token(repeat('c2', 32));
+  if issued->'scopes' <> '["parcels:read", "parcels:write", "parcels:edit"]'::jsonb
+      or seen->'scopes' <> '["parcels:read", "parcels:write", "parcels:edit"]'::jsonb then
+    raise exception 'The edit scope was not kept: % %', issued, seen;
+  end if;
+  begin
+    perform public.open_assistant_code(one, 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', 'Example assistant', 'assistant.example.test', true,
+      array['parcels:edit', 'parcels:delete'], repeat('c4', 32), 'https://assistant.example.test/callback', challenge);
+    raise exception 'A code took an unknown scope';
+  exception when check_violation then null;
+  end;
+
   -- An expired access token is unknown; an expired refresh token issues nothing.
-  update private.assistant_tokens set expires_at = now() - interval '1 second' where hash in (repeat('bb', 32), repeat('bd', 32), repeat('bc', 32));
+  update private.assistant_tokens set expires_at = now() - interval '1 second'
+    where hash in (repeat('bb', 32), repeat('bd', 32), repeat('bc', 32), repeat('c2', 32), repeat('c3', 32));
   if public.assistant_token(repeat('bd', 32)) is not null then raise exception 'An expired access token was taken'; end if;
   if public.refresh_assistant_tokens(repeat('bc', 32), 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', repeat('bf', 32), later,
       repeat('c0', 32), much_later) is not null then

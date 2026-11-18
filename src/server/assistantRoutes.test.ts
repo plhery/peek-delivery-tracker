@@ -1,6 +1,6 @@
 import { CLIENT_CAPABILITIES_META_KEY, LATEST_PROTOCOL_VERSION, PROTOCOL_VERSION_META_KEY } from '@modelcontextprotocol/server';
 import { NextRequest } from 'next/server';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { GET as authorizationServer } from '../../app/.well-known/oauth-authorization-server/route';
 import { GET as mcpResource } from '../../app/.well-known/oauth-protected-resource/mcp/route';
 import { GET as protectedResource } from '../../app/.well-known/oauth-protected-resource/route';
@@ -72,6 +72,8 @@ beforeEach(() => {
     id: userId, email: 'alex@example.com', authenticatedAt: new Date(), sessionId: '7d000000-0000-4000-a000-000000000001',
   });
   vi.spyOn(service, 'assistantToken').mockImplementation(async (digest) => owners.get(digest) ?? null);
+  // The account's days are this machine's, as `dayFromToday` counts them.
+  vi.spyOn(service, 'accountTimeZone').mockResolvedValue(Intl.DateTimeFormat().resolvedOptions().timeZone);
   vi.mocked(addParcelsFromText).mockReset();
   forgetAssistantEmails();
   owners.clear();
@@ -149,7 +151,7 @@ function stored(index: number, stage: string, options: {
   };
 }
 
-/** A day from today on the server's clock, as the `today` and `week` lists read it. */
+/** A day from today on this machine's clock, as the `today` and `week` lists read it for the account. */
 function dayFromToday(days: number): string {
   const date = new Date(Date.now() + days * 86_400_000);
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
@@ -157,7 +159,7 @@ function dayFromToday(days: number): string {
 
 describe('the MCP endpoint', () => {
   it('asks for a token, and says when the one given is unknown', async () => {
-    const challenge = 'Bearer resource_metadata="https://peek.example/.well-known/oauth-protected-resource/mcp", scope="parcels:read parcels:write"';
+    const challenge = 'Bearer resource_metadata="https://peek.example/.well-known/oauth-protected-resource/mcp", scope="parcels:read parcels:write parcels:edit"';
     const anonymous = await mcp(null, 'tools/list');
     expect(anonymous.status).toBe(401);
     expect(anonymous.headers.get('www-authenticate')).toBe(challenge);
@@ -277,14 +279,15 @@ describe('the MCP endpoint', () => {
       return Object.fromEntries(tools.map(({ name, _meta }) => [name, _meta?.securitySchemes]));
     };
     const write = [{ type: 'oauth2', scopes: ['parcels:write'] }];
+    const edit = [{ type: 'oauth2', scopes: ['parcels:edit'] }];
     const read = [{ type: 'oauth2', scopes: ['parcels:read'] }];
     const schemes = {
       add_parcels: write,
-      rename_parcel: write,
-      change_carrier: write,
-      set_parcel_notifications: write,
+      rename_parcel: edit,
+      change_carrier: edit,
+      set_parcel_notifications: edit,
       archive_parcel: write,
-      restore_parcel: write,
+      restore_parcel: edit,
       get_parcel: read,
       list_parcels: read,
       find_carriers: read,
@@ -428,6 +431,35 @@ describe('the MCP endpoint', () => {
     expect((await call(secret, 'list_parcels', { sort: 'cheapest' })).result).toMatchObject({ isError: true });
   });
 
+  it('reads today and the week in the user\'s timezone: the one given, else the account\'s', async () => {
+    // 20:30 in Zurich on 18 November is already the 19th in Auckland, and the 25th is the last day of Auckland's week.
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-11-18T19:30:00Z'));
+    onTestFinished(() => { vi.useRealTimers(); });
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([
+      stored(21, 'in_transit', { expected: '2026-11-18' }),
+      stored(22, 'in_transit', { expected: '2026-11-19' }),
+      stored(23, 'in_transit', { expected: '2026-11-25' }),
+    ]);
+    const zone = vi.spyOn(service, 'accountTimeZone').mockResolvedValue(null);
+    const secret = connect(['parcels:read']);
+    const ids = async (args: Record<string, unknown>) => ((await call(secret, 'list_parcels', args)).result!.structuredContent!.parcels as Array<{ id: string }>)
+      .map(({ id }) => Number(id.slice(-2)));
+
+    expect(await ids({ status: 'today' })).toEqual([21]);
+    expect(await ids({ status: 'week' })).toEqual([21, 22]);
+    expect(zone).toHaveBeenCalledWith(userId);
+    zone.mockResolvedValue('Pacific/Auckland');
+    expect(await ids({ status: 'today' })).toEqual([22]);
+    expect(await ids({ status: 'week' })).toEqual([22, 23]);
+    zone.mockClear();
+    expect(await ids({ status: 'today', timeZone: 'Europe/Zurich' })).toEqual([21]);
+    expect(zone).not.toHaveBeenCalled();
+    expect((await call(secret, 'list_parcels', { status: 'today', timeZone: 'Mars/Olympus' })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('timezone') }],
+    });
+  });
+
   it('reads the scans as a link\'s viewer does: no recipient, signatory, code or door in any text', async () => {
     // Synthetic wording: a delivery that names who took it, a scan and a place that name the receiver, a status line
     // that names the signatory, and a scan with a collection code.
@@ -450,9 +482,12 @@ describe('the MCP endpoint', () => {
     expect(parcels.find((parcel) => parcel.id === delivered.id)).toMatchObject({ statusText: 'Delivered', lastUpdate: { description: 'Delivered' } });
     expect(parcels.find((parcel) => parcel.id === named.id)).toMatchObject({ statusText: 'Latest scan' });
     const read = await call(secret, 'get_parcel', { parcel: named.id });
+    // A scan that names them reads its stage's name instead, without its place.
     expect(read.result!.structuredContent!.history).toEqual([
       { time: LATEST, status: 'in_transit', description: 'Latest scan', location: 'Example Hub' },
+      { time: expect.any(String), status: 'in_transit', description: 'In transit', location: null },
       { time: expect.any(String), status: 'in_transit', description: 'Sorted', location: null },
+      { time: expect.any(String), status: 'in_transit', description: 'In transit', location: null },
       { time: ACCEPTED, status: 'accepted', description: 'Parcel received', location: 'Example Depot' },
     ]);
     for (const text of [JSON.stringify(list), JSON.stringify(read)]) {
@@ -460,6 +495,31 @@ describe('the MCP endpoint', () => {
       expect(text).not.toContain('Signatory');
       expect(text).not.toContain('4815');
     }
+  });
+
+  it('keeps a scan that names a code in the status and what the parcel needs, in words of its stage', async () => {
+    // Synthetic wording: the newest scan says the parcel waits at a pickup point, with the code that collects it.
+    const base = stored(17, 'in_transit', { trackingNumber: UPS });
+    const waiting = { ...base, current_stage: 'ready_for_pickup', last_status_text: 'Ready, collection code 4815',
+      tracking_events: [
+        ...base.tracking_events,
+        { ...base.tracking_events[1]!, id: `${base.id}-2`, stage: 'ready_for_pickup', description: 'Ready, collection code 4815',
+          location: 'Example Locker', occurred_at: ago(0.5), provider_event_id: 'carrier:17:2' },
+      ] };
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([waiting]);
+    ownParcel(waiting);
+    const secret = connect(['parcels:read']);
+
+    const attention = await call(secret, 'list_parcels', { status: 'attention' });
+    expect(attention.result!.structuredContent).toMatchObject({ total: 1, parcels: [{ id: waiting.id, status: 'ready_for_pickup', needsAttention: expect.anything() }] });
+    const read = await call(secret, 'get_parcel', { parcel: UPS });
+    expect(read.result!.structuredContent).toMatchObject({
+      status: 'ready_for_pickup', statusText: 'Ready for pickup',
+      lastUpdate: { description: 'Ready for pickup', location: null },
+    });
+    expect((read.result!.structuredContent!.history as Array<{ status: string; description: string }>)[0])
+      .toMatchObject({ status: 'ready_for_pickup', description: 'Ready for pickup', location: null });
+    for (const text of [JSON.stringify(attention), JSON.stringify(read)]) expect(text).not.toContain('4815');
   });
 
   it('reads a scan the earlier carrier also told once, its other words as also', async () => {
@@ -519,21 +579,35 @@ describe('the MCP endpoint', () => {
     const update = vi.spyOn(service, 'updateAccountPackage').mockResolvedValue(true);
     const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
     const challenge = (description: string) => 'Bearer resource_metadata="https://peek.example/.well-known/oauth-protected-resource/mcp", '
-      + `scope="parcels:read parcels:write", error="insufficient_scope", error_description="${description}"`;
+      + `scope="parcels:read parcels:write parcels:edit", error="insufficient_scope", error_description="${description}"`;
     const reader = connect(['parcels:read']);
+    const writes = [['add_parcels', { text: UPS }], ['archive_parcel', { parcel: UPS }]] as const;
+    const edits = [
+      ['restore_parcel', { parcel: UPS }], ['rename_parcel', { parcel: UPS, name: 'Sofa' }], ['change_carrier', { parcel: UPS, carrier: 'dhl' }],
+      ['set_parcel_notifications', { parcel: UPS, notifications: false }],
+    ] as const;
     for (const era of ['legacy', 'modern'] as const) {
-      for (const [name, args] of [
-        ['add_parcels', { text: UPS }], ['archive_parcel', { parcel: UPS }], ['restore_parcel', { parcel: UPS }],
-        ['rename_parcel', { parcel: UPS, name: 'Sofa' }], ['change_carrier', { parcel: UPS, carrier: 'dhl' }],
-        ['set_parcel_notifications', { parcel: UPS, notifications: false }],
-      ] as const) {
-        const refused = await call(reader, name, args, era);
-        expect(refused.result).toMatchObject({
+      for (const [name, args] of writes) {
+        expect((await call(reader, name, args, era)).result).toMatchObject({
           isError: true,
-          content: [{ type: 'text', text: expect.stringContaining('allow it to add, edit and archive parcels') }],
-          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add, edit or archive parcels')] },
+          content: [{ type: 'text', text: expect.stringContaining('allow it to add and archive parcels') }],
+          _meta: { 'mcp/www_authenticate': [challenge('This connection may not add or archive parcels')] },
         });
       }
+      for (const [name, args] of edits) {
+        expect((await call(reader, name, args, era)).result).toMatchObject({
+          isError: true,
+          content: [{ type: 'text', text: expect.stringContaining('allow it to change their name, carrier or notifications') }],
+          _meta: { 'mcp/www_authenticate': [challenge('This connection may not edit parcels')] },
+        });
+      }
+    }
+    // A grant made before editing had a scope of its own keeps what its owner allowed: adding and archiving, not editing.
+    const earlier = connect(['parcels:read', 'parcels:write']);
+    for (const [name, args] of edits) {
+      expect((await call(earlier, name, args)).result).toMatchObject({
+        isError: true, _meta: { 'mcp/www_authenticate': [challenge('This connection may not edit parcels')] },
+      });
     }
     expect(owned).not.toHaveBeenCalled();
     expect(update).not.toHaveBeenCalled();
@@ -587,14 +661,14 @@ describe('the MCP endpoint', () => {
 
   function otherAccount(): string {
     vi.stubEnv('ASSISTANT_ACCOUNTS', `${userId},${otherUser}`);
-    return connect(['parcels:read', 'parcels:write'], otherUser);
+    return connect(['parcels:read', 'parcels:write', 'parcels:edit'], otherUser);
   }
 
   it('restores an archived parcel within the account\'s limit', async () => {
     const parcel = stored(5, 'delivered', { trackingNumber: UPS, archived: true });
     ownParcel(parcel);
     const restore = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
-    const secret = connect(['parcels:read', 'parcels:write']);
+    const secret = connect(['parcels:read', 'parcels:edit']);
 
     expect((await call(secret, 'restore_parcel', { parcel: UPS })).result!.structuredContent).toEqual({ id: parcel.id, archived: false });
     expect(restore).toHaveBeenCalledExactlyOnceWith(userId, parcel.id, false);
@@ -611,7 +685,7 @@ describe('the MCP endpoint', () => {
     const parcel = stored(6, 'in_transit');
     ownParcel(parcel);
     const restore = vi.spyOn(service, 'setAccountPackageArchived').mockResolvedValue(true);
-    const answered = await call(connect(['parcels:write']), 'restore_parcel', { parcel: parcel.id });
+    const answered = await call(connect(['parcels:edit']), 'restore_parcel', { parcel: parcel.id });
     expect(answered.result!.structuredContent).toEqual({ id: parcel.id, archived: false });
     expect(restore).not.toHaveBeenCalled();
   });
@@ -620,7 +694,7 @@ describe('the MCP endpoint', () => {
     const parcel = stored(7, 'in_transit', { trackingNumber: UPS });
     ownParcel(parcel);
     const update = vi.spyOn(service, 'updateAccountPackage').mockResolvedValue(true);
-    const secret = connect(['parcels:write']);
+    const secret = connect(['parcels:edit']);
 
     expect((await call(secret, 'rename_parcel', { parcel: UPS, name: '  Sofa  ' })).result!.structuredContent).toEqual({ id: parcel.id, name: 'Sofa' });
     expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { label: 'Sofa' });
@@ -644,7 +718,7 @@ describe('the MCP endpoint', () => {
     ownParcel(parcel);
     const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
     const enqueue = vi.spyOn(service, 'enqueueSyncJob').mockResolvedValue({ row: { id: '8e000000-0000-4000-a000-000000000001' }, queued: true } as Awaited<ReturnType<typeof service.enqueueSyncJob>>);
-    const secret = connect(['parcels:read', 'parcels:write']);
+    const secret = connect(['parcels:read', 'parcels:edit']);
 
     const changed = await call(secret, 'change_carrier', { parcel: UPS, carrier: 'dhl' });
     expect(changed.result!.structuredContent).toEqual({ id: parcel.id, carrier: 'DHL', carrierId: 'dhl', checking: true });
@@ -672,7 +746,7 @@ describe('the MCP endpoint', () => {
     ownParcel(parcel);
     const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
     const enqueue = vi.spyOn(service, 'enqueueSyncJob');
-    const secret = connect(['parcels:write']);
+    const secret = connect(['parcels:edit']);
 
     expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'dpd-de' })).result!.structuredContent)
       .toMatchObject({ carrierId: 'dpd-de', checking: false });
@@ -685,20 +759,85 @@ describe('the MCP endpoint', () => {
     expect(enqueue).not.toHaveBeenCalled();
   });
 
+  it('keeps the country a kept postcode was given with, or takes another', async () => {
+    // Synthetic Belgian postcode for a Spring GDS parcel, as its carrier takes postcodes from abroad.
+    const base = stored(18, 'in_transit', { trackingNumber: '3SABCD826405193' });
+    const parcel = { ...base, carrier: 'ups', dpd_postcode: '1000',
+      carrier_data: { ...base.carrier_data, postcode_country: { postcode: '1000', country: 'BE' } } };
+    ownParcel(parcel);
+    const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
+    vi.spyOn(service, 'enqueueSyncJob').mockResolvedValue({ row: { id: '8e000000-0000-4000-a000-000000000002' }, queued: true } as Awaited<ReturnType<typeof service.enqueueSyncJob>>);
+    const write = vi.spyOn(service, 'updatePackage').mockResolvedValue(undefined);
+    const secret = connect(['parcels:edit']);
+
+    // The row the change stores holds the postcode with the country the change kept: nothing to write after it.
+    const after = { ...parcel, carrier: 'spring-gds' };
+    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(parcel).mockResolvedValueOnce(after);
+    expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds' })).result!.structuredContent).toMatchObject({ carrierId: 'spring-gds' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1000');
+    expect(write).not.toHaveBeenCalled();
+    // The same postcode given again keeps its country too: the parcel holds all of it already.
+    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(after);
+    expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds', postcode: '1000' })).result!.structuredContent)
+      .toMatchObject({ checking: false });
+    // A new postcode takes the country given with it.
+    const moved = { ...after, dpd_postcode: '1050', carrier_data: {} };
+    vi.mocked(service.getOwnedPackage).mockResolvedValueOnce(after).mockResolvedValueOnce(moved);
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'spring-gds', postcode: '1050', postcodeCountry: 'be' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'spring-gds', null, '1050');
+    expect(write).toHaveBeenLastCalledWith(parcel.id, expect.objectContaining({
+      carrier_data: expect.objectContaining({ postcode_country: { postcode: '1050', country: 'BE' } }),
+    }));
+  });
+
+  it('takes the last digits of the recipient\'s phone for a carrier that reads them, and keeps them unless given others', async () => {
+    const parcel = { ...stored(19, 'in_transit', { trackingNumber: 'JMX000000000001' }), carrier: 'ups', dpd_postcode: null, phone_digits: null as string | null };
+    ownParcel(parcel);
+    const change = vi.spyOn(service, 'changeAccountPackageCarrier').mockResolvedValue(true);
+    vi.spyOn(service, 'enqueueSyncJob').mockResolvedValue({ row: { id: '8e000000-0000-4000-a000-000000000003' }, queued: true } as Awaited<ReturnType<typeof service.enqueueSyncJob>>);
+    const write = vi.spyOn(service, 'updatePackage').mockResolvedValue(undefined);
+    const secret = connect(['parcels:edit']);
+
+    const found = (await call(connect(['parcels:read']), 'find_carriers', { search: 'J&T Express Mexico' })).result!.structuredContent as {
+      carriers: Array<{ id: string; inputs?: Array<{ input: string }> }>;
+    };
+    expect(found.carriers.find(({ id }) => id === 'j-and-t-mx')?.inputs).toEqual([expect.objectContaining({ input: 'phoneDigits' })]);
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-mx', phoneDigits: ' 0123 ' });
+    expect(change).toHaveBeenLastCalledWith(userId, parcel.id, 'j-and-t-mx', null, null);
+    expect(write).toHaveBeenLastCalledWith(parcel.id, { phone_digits: '0123' });
+    expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-mx', phoneDigits: '12a4' })).result).toMatchObject({
+      isError: true, content: [{ text: expect.stringContaining('last four digits') }],
+    });
+
+    // Stored digits stay for a carrier that reads them, and a call that changes nothing changes nothing.
+    Object.assign(parcel, { carrier: 'j-and-t-mx', phone_digits: '0123' });
+    expect((await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-mx' })).result!.structuredContent).toMatchObject({ checking: false });
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'j-and-t-cn' });
+    expect(write).toHaveBeenLastCalledWith(parcel.id, { phone_digits: '0123' });
+    // A carrier that reads none forgets them.
+    await call(secret, 'change_carrier', { parcel: parcel.id, carrier: 'ups' });
+    expect(write).toHaveBeenLastCalledWith(parcel.id, { phone_digits: null });
+    expect(change).toHaveBeenCalledTimes(3);
+  });
+
   it('turns a parcel\'s notifications and emails off or on, for the caller\'s own parcel only', async () => {
     const parcel = stored(10, 'in_transit', { trackingNumber: UPS });
     ownParcel(parcel);
     const update = vi.spyOn(service, 'updateAccountPackage').mockResolvedValue(true);
-    const secret = connect(['parcels:write']);
+    const secret = connect(['parcels:edit']);
 
+    // A grant that may not read hears back what it set, not the parcel's other setting; one that may read hears both.
     expect((await call(secret, 'set_parcel_notifications', { parcel: UPS, notifications: false })).result!.structuredContent)
-      .toEqual({ id: parcel.id, notifications: false, emails: true });
+      .toEqual({ id: parcel.id, notifications: false });
+    expect((await call(connect(['parcels:read', 'parcels:edit']), 'set_parcel_notifications', { parcel: UPS, notifications: false }))
+      .result!.structuredContent).toEqual({ id: parcel.id, notifications: false, emails: true });
     expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { notifications_muted: true });
-    await call(secret, 'set_parcel_notifications', { parcel: UPS, notifications: true, emails: false });
+    expect((await call(secret, 'set_parcel_notifications', { parcel: UPS, notifications: true, emails: false })).result!.structuredContent)
+      .toEqual({ id: parcel.id, notifications: true, emails: false });
     expect(update).toHaveBeenLastCalledWith(userId, parcel.id, { notifications_muted: false, email_muted: true });
     expect((await call(secret, 'set_parcel_notifications', { parcel: UPS })).result).toMatchObject({ isError: true });
     expect((await call(otherAccount(), 'set_parcel_notifications', { parcel: parcel.id, emails: false })).result).toMatchObject({ isError: true });
-    expect(update).toHaveBeenCalledTimes(2);
+    expect(update).toHaveBeenCalledTimes(3);
   });
 
   it('finds carriers by name, country or number from the catalog, asking none', async () => {
@@ -774,7 +913,7 @@ describe('the OAuth endpoints', () => {
       grant_types: ['authorization_code', 'refresh_token'],
       response_types: ['code'],
       token_endpoint_auth_method: 'none',
-      scope: 'parcels:read parcels:write',
+      scope: 'parcels:read parcels:write parcels:edit',
     });
   });
 
@@ -896,7 +1035,7 @@ describe('the parcels a token reads as JSON', () => {
   it('refuses a bad query, a missing or unknown token, and a token that may only write', async () => {
     vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
     const reader = connect(['parcels:read']);
-    for (const query of ['?status=lost', '?sort=cheapest', `?search=${'x'.repeat(101)}`, '?limit=0', '?limit=51', '?limit=2.5']) {
+    for (const query of ['?status=lost', '?sort=cheapest', `?search=${'x'.repeat(101)}`, '?limit=0', '?limit=51', '?limit=2.5', '?timeZone=Mars/Olympus']) {
       expect((await read(reader, query)).status, query.slice(0, 20)).toBe(400);
     }
     const anonymous = await read(null);

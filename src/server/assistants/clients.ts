@@ -203,6 +203,9 @@ function remember<Value>(cache: Map<string, Value>, key: string, value: Value): 
   cache.set(key, value);
 }
 
+/** A document its site says is gone (404, 410): the client withdrew it, which no older copy outlives. */
+class WithdrawnDocument extends Error {}
+
 /**
  * The document at an address. It settles only once the connection has closed, so a fetch counts among those at once
  * until its socket is gone; any answer refused closes the connection there and then, without reading on.
@@ -224,6 +227,7 @@ function readDocument(url: string): Promise<unknown> {
       timeout: DOCUMENT_TIMEOUT_MS,
     }, (response) => {
       answer = response;
+      if (response.statusCode === 404 || response.statusCode === 410) return fail(new WithdrawnDocument(`The metadata document answered ${response.statusCode}`));
       if (response.statusCode !== 200 || !/^application\/(?:[\w.+-]+\+)?json\b/i.test(response.headers['content-type'] ?? '')) {
         return fail(new Error(`The metadata document answered ${response.statusCode}`));
       }
@@ -277,7 +281,8 @@ export function clientFromDocument(id: string, document: unknown): AssistantClie
  * The client a metadata document describes, read at most once an hour, and once at a time. A document that can't be
  * read is tried again a minute later. While many are being read (until their connections have closed), 16 in all or 2
  * of one site, a new one counts as unknown. A connected client's document, once due again, stands in for a day while a
- * fresh one can't be read.
+ * fresh one can't be read: while its site is down or slow, not once the site says it is gone (404, 410) or serves one
+ * Peek can't serve, which ends the old one.
  */
 async function documentClient(id: string, now = Date.now()): Promise<AssistantClient | null> {
   const cached = documents.get(id);
@@ -285,21 +290,30 @@ async function documentClient(id: string, now = Date.now()): Promise<AssistantCl
     remember(documents, id, cached);
     return cached.client;
   }
-  const standIn = cached && connected.has(id) && cached.until + STAND_IN_MS > now ? cached.client : null;
-  if ((failures.get(id) ?? 0) > now) return standIn;
+  const standIn = () => {
+    const kept = documents.get(id);
+    return kept && connected.has(id) && kept.until + STAND_IN_MS > now ? kept.client : null;
+  };
+  if ((failures.get(id) ?? 0) > now) return standIn();
   const pending = fetching.get(id);
-  if (pending) return (await pending) ?? standIn;
+  if (pending) return (await pending) ?? standIn();
   const site = siteOf(id);
   if (fetching.size >= MOST_FETCHES_AT_ONCE || [...fetching.keys()].filter((other) => siteOf(other) === site).length >= MOST_FETCHES_PER_SITE) {
-    return standIn;
+    return standIn();
   }
-  const read = readDocument(id).then((document) => clientFromDocument(id, document), () => null).then((client) => {
+  const read = readDocument(id).then(
+    (document) => ({ client: clientFromDocument(id, document), withdrawn: true }),
+    (error: unknown) => ({ client: null, withdrawn: error instanceof WithdrawnDocument }),
+  ).then(({ client, withdrawn }) => {
     if (client) remember(documents, id, { client, until: Date.now() + DOCUMENT_LIFETIME_MS });
-    else remember(failures, id, Date.now() + FAILURE_LIFETIME_MS);
+    else {
+      if (withdrawn) documents.delete(id);
+      remember(failures, id, Date.now() + FAILURE_LIFETIME_MS);
+    }
     return client;
   }).finally(() => fetching.delete(id));
   fetching.set(id, read);
-  return (await read) ?? standIn;
+  return (await read) ?? standIn();
 }
 
 /** The client an id names: one that registered with Peek, or one that publishes its metadata document. */

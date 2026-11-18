@@ -398,6 +398,35 @@ describe('finding a client', () => {
     await expect(findClient(client, id)).resolves.toBeNull();
   });
 
+  it('lets no older document stand in once the client withdrew it or no longer qualifies', async () => {
+    const { client } = service();
+    vi.useFakeTimers({ toFake: ['Date'] });
+    for (const answer of [
+      { status: 410, type: 'application/json', body: '{}' },
+      { status: 404, type: 'text/html', body: 'Not found' },
+      { status: 200, type: 'application/json', body: JSON.stringify({ ...document, client_id: id, token_endpoint_auth_method: 'client_secret_basic' }) },
+    ]) {
+      forgetClientDocuments();
+      serve(id);
+      await expect(findClient(client, id)).resolves.not.toBeNull();
+      noteConnectedClient(id);
+      vi.setSystemTime(Date.now() + 3_600_001);
+      network.documents.set(id, answer);
+      await expect(findClient(client, id)).resolves.toBeNull();
+      // Nor a minute later, while the site still says so.
+      vi.setSystemTime(Date.now() + 60_001);
+      await expect(findClient(client, id)).resolves.toBeNull();
+    }
+    // A site that is only down still has the old one stand in.
+    forgetClientDocuments();
+    serve(id);
+    await findClient(client, id);
+    noteConnectedClient(id);
+    vi.setSystemTime(Date.now() + 3_600_001);
+    network.documents.set(id, { status: 503, type: 'text/html', body: 'Unavailable' });
+    await expect(findClient(client, id)).resolves.toMatchObject({ id });
+  });
+
   it('gives up on a document whose whole answer takes too long', async () => {
     const { client } = service();
     vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });

@@ -44,7 +44,7 @@ describe('the metadata', () => {
     expect(protectedResourceMetadata(settings)).toEqual({
       resource: 'https://peek.example/mcp',
       authorization_servers: ['https://peek.example'],
-      scopes_supported: ['parcels:read', 'parcels:write'],
+      scopes_supported: ['parcels:read', 'parcels:write', 'parcels:edit'],
       bearer_methods_supported: ['header'],
       resource_name: 'Peek',
     });
@@ -57,7 +57,7 @@ describe('the metadata', () => {
       token_endpoint: 'https://peek.example/oauth/token',
       registration_endpoint: 'https://peek.example/oauth/register',
       revocation_endpoint: 'https://peek.example/oauth/revoke',
-      scopes_supported: ['parcels:read', 'parcels:write'],
+      scopes_supported: ['parcels:read', 'parcels:write', 'parcels:edit'],
       response_types_supported: ['code'],
       response_modes_supported: ['query'],
       grant_types_supported: ['authorization_code', 'refresh_token'],

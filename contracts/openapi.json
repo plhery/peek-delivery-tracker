@@ -62643,6 +62643,16 @@
               "maximum": 50,
               "default": 20
             }
+          },
+          {
+            "name": "timeZone",
+            "in": "query",
+            "required": false,
+            "description": "The IANA timezone whose days today and week cover, such as Europe/Paris. Without it, the timezone the account chose for its notifications.",
+            "schema": {
+              "type": "string",
+              "maxLength": 64
+            }
           }
         ],
         "responses": {
@@ -70757,9 +70767,10 @@
         "type": "string",
         "enum": [
           "parcels:read",
-          "parcels:write"
+          "parcels:write",
+          "parcels:edit"
         ],
-        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds, edits and archives parcels."
+        "description": "parcels:read lists parcels and reads their tracking; parcels:write adds and archives parcels; parcels:edit renames them, changes their carrier or notifications and restores archived ones."
       },
       "AssistantConnection": {
         "type": "object",

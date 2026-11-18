@@ -1,7 +1,9 @@
 import 'server-only';
 
 import { McpServer } from '@modelcontextprotocol/server';
+import { DateTime, IANAZone } from 'luxon';
 import { z } from 'zod';
+import en from '../../../shared/locales/en.json';
 import type {
   ApiPackageRow, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse,
 } from '../../generated/apiContract';
@@ -11,6 +13,7 @@ import {
 } from '../../lib/carriers';
 import { expectedDeliveryDay, isActiveParcel, parcelAttention } from '../../lib/parcelPriority';
 import { parcelComparator, parcelMatchesSearch, parcelMatchesStatus } from '../../lib/parcelView';
+import { storedPostcodeCountry } from '../../lib/postcodeCountry';
 import { currentEvent, currentStage, sortEventsDesc, withRelays } from '../../lib/stages';
 import { toParcel } from '../../store/apiRepo';
 import type { CarrierId, ParcelWithEvents } from '../../types';
@@ -21,7 +24,7 @@ import { withEventPlaces } from '../eventPlaces';
 import { logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
 import { holdsPostcodeCountry, postcodeCountryWrite } from '../postcodeCountry';
-import { privateValues, viewerScans, viewerStatusText } from '../privateDetails';
+import { privateValues, redactedScans, viewerStatusText } from '../privateDetails';
 import { SupabaseError, type SupabaseServiceClient } from '../supabase';
 import { isRecord, type JsonObject } from '../types';
 import { packageCarrierValues, packageLabel } from '../validation';
@@ -42,7 +45,6 @@ export const MOST_LISTED = 50;
 export const MOST_SEARCH_LENGTH = 100;
 const MOST_CARRIERS = 10;
 const NO_PARCEL = 'No such parcel in this Peek account.';
-const DAY_MS = 86_400_000;
 
 /** Who a call is for: the account behind the token, and what the token may do. */
 export interface AssistantCaller {
@@ -80,20 +82,33 @@ export interface ParcelQuery {
   sort?: ParcelSort;
   search?: string;
   limit?: number;
+  /** The IANA timezone "today" and "week" are days of; the account's own unless given. */
+  timeZone?: string;
 }
 
-/** The day a time falls on, on the server's clock, as the app's "today" reads it. */
-function dayOf(time: number): string {
-  const date = new Date(time);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+/** Where an account's days fall when it chose no timezone, as for its notifications (push.ts). */
+const DEFAULT_TIME_ZONE = 'Europe/Zurich';
+
+/** Whether Peek knows a timezone by this IANA name, such as "Europe/Paris". */
+export function knownTimeZone(value: string): boolean {
+  return IANAZone.isValidZone(value);
 }
 
-/** Whether a parcel has a status. Unlike the app's Delivered list, `delivered` holds archived parcels too. */
-function hasStatus(parcel: ParcelWithEvents, status: ParcelStatus, now: number): boolean {
+/** The days "today" and "week" cover, as YYYY-MM-DD: today and the six days after it, in a timezone. */
+function daysAhead(now: number, timeZone: string): { today: string; last: string } {
+  const today = DateTime.fromMillis(now, { zone: timeZone });
+  return { today: today.toISODate()!, last: today.plus({ days: 6 }).toISODate()! };
+}
+
+/**
+ * Whether a parcel has a status. Unlike the app's Delivered list, `delivered` holds archived parcels too; `today` and
+ * `week` read the expected day against `days`, the user's own.
+ */
+function hasStatus(parcel: ParcelWithEvents, status: ParcelStatus, now: number, days: { today: string; last: string }): boolean {
   if (status === 'delivered') return currentStage(parcel.events, parcel.returnHeld) === 'delivered';
-  if (status !== 'week') return parcelMatchesStatus(parcel, status, now);
+  if (status !== 'today' && status !== 'week') return parcelMatchesStatus(parcel, status, now);
   const day = expectedDeliveryDay(parcel.expectedDelivery);
-  return isActiveParcel(parcel) && day !== null && day >= dayOf(now) && day <= dayOf(now + 6 * DAY_MS);
+  return isActiveParcel(parcel) && day !== null && day >= days.today && day <= (status === 'today' ? days.today : days.last);
 }
 
 /** When a parcel was delivered, for the `delivered` order; null for one not delivered. */
@@ -134,22 +149,33 @@ export async function listParcels(
   const status = query.status ?? (search ? 'all' : 'active');
   const sort = query.sort ?? (search ? 'updated' : defaultSort(status));
   const words = search.toLocaleLowerCase();
+  // "Today" is the user's: the timezone given, else the one the account chose for its notifications.
+  const timeZone = status === 'today' || status === 'week' ? query.timeZone ?? await service.accountTimeZone(userId) : null;
+  const days = daysAhead(now, timeZone && knownTimeZone(timeZone) ? timeZone : DEFAULT_TIME_ZONE);
   const parcels = (await service.listAccountPackages(userId)).map(asParcel)
-    .filter((parcel) => hasStatus(parcel, status, now))
+    .filter((parcel) => hasStatus(parcel, status, now, days))
     .filter((parcel) => !words || parcelMatchesSearch(parcel, words) || (parcel.senderName ?? '').toLocaleLowerCase().includes(words))
     .sort(ORDERS[sort]);
   return { total: parcels.length, status, sort, parcels: parcels.slice(0, query.limit ?? 20).map((parcel) => parcelSummary(parcel, now)) };
 }
 
+const ENGLISH: Record<string, string> = en;
+
+/** A stage as the English app names it, such as "Ready for pickup". */
+function stageWords(stage: string): string {
+  return ENGLISH[`stage.${stage}`] ?? stage;
+}
+
 /**
- * A parcel as a tool reads it: its scans and status line as a link's viewer reads them (`viewerScans`). A delivery
- * reads "Delivered", and a scan or status line that names the recipient, who signed, a code or a door is left out,
- * as is a place that does: an assistant gets none of them (PRIVACY.md).
+ * A parcel as a tool reads it: its scans and status line as a link's viewer reads them (`redactedScans`). A delivery
+ * reads "Delivered", a scan that names the recipient, who signed, a code or a door reads its stage's name, and a status
+ * line or place that does is left out: an assistant gets none of them (PRIVACY.md), while the parcel's status and what
+ * it needs still follow every scan.
  */
 function asParcel(row: Parameters<typeof withEventPlaces>[0]): ParcelWithEvents {
   const placed = withEventPlaces(row) as unknown as ApiPackageRow;
   const recipient = privateValues(placed.carrier_data);
-  const parcel = toParcel({ ...placed, tracking_events: viewerScans(placed.tracking_events ?? [], recipient) });
+  const parcel = toParcel({ ...placed, tracking_events: redactedScans(placed.tracking_events ?? [], stageWords, recipient) });
   const statusText = viewerStatusText(parcel.lastStatusText ?? null, currentStage(parcel.events, parcel.returnHeld), recipient);
   return { ...parcel, lastStatusText: statusText ?? undefined };
 }
@@ -230,14 +256,17 @@ function refusal(text: string) {
   return { content: [{ type: 'text' as const, text }], isError: true };
 }
 
-/** The scope each tool needs. Every grant sees every tool; a call outside the grant's scopes asks for a new sign-in. */
+/**
+ * The scope each tool needs. Every grant sees every tool; a call outside the grant's scopes asks for a new sign-in.
+ * Adding and archiving are what `parcels:write` was allowed for; editing came later, under its own scope.
+ */
 export const TOOL_SCOPES = {
   add_parcels: 'parcels:write',
-  rename_parcel: 'parcels:write',
-  change_carrier: 'parcels:write',
-  set_parcel_notifications: 'parcels:write',
   archive_parcel: 'parcels:write',
-  restore_parcel: 'parcels:write',
+  rename_parcel: 'parcels:edit',
+  change_carrier: 'parcels:edit',
+  set_parcel_notifications: 'parcels:edit',
+  restore_parcel: 'parcels:edit',
   list_parcels: 'parcels:read',
   get_parcel: 'parcels:read',
   find_carriers: 'parcels:read',
@@ -251,12 +280,17 @@ function security(tool: ToolName) {
 
 const MISSING_SCOPE: Record<Scope, { text: string; description: string }> = {
   'parcels:read': {
-    text: 'This connection to Peek may add, edit and archive parcels but not see them. Connect Peek again and allow it to see your parcels.',
+    text: 'This connection to Peek may not see parcels. Connect Peek again and allow it to see your parcels.',
     description: 'This connection may not see parcels',
   },
   'parcels:write': {
-    text: 'This connection to Peek may see parcels but not add, edit or archive them. Connect Peek again and allow it to add, edit and archive parcels.',
-    description: 'This connection may not add, edit or archive parcels',
+    text: 'This connection to Peek may not add or archive parcels. Connect Peek again and allow it to add and archive parcels.',
+    description: 'This connection may not add or archive parcels',
+  },
+  'parcels:edit': {
+    text: 'This connection to Peek may not edit parcels. Connect Peek again and allow it to change their name, carrier or '
+      + 'notifications and restore archived ones.',
+    description: 'This connection may not edit parcels',
   },
 };
 
@@ -403,35 +437,48 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     title: 'Change a parcel\'s carrier',
     description: 'Sets the carrier that delivers one of the user\'s parcels, when Peek has the wrong one, and checks the '
       + 'parcel with it at once. Take the carrier\'s id from find_carriers. A carrier that asks for the delivery '
-      + 'postcode or its tracking link takes it here; the parcel keeps its postcode unless another is given.',
+      + 'postcode, its tracking link or the last digits of the recipient\'s phone takes it here; the parcel keeps its '
+      + 'postcode and phone digits unless others are given.',
     inputSchema: z.object({
       parcel: z.string().min(1).max(100).describe('The parcel\'s id from list_parcels, or its tracking number'),
       carrier: z.string().min(1).max(60).describe('The carrier\'s id from find_carriers, such as "dhl"'),
       postcode: z.string().max(20).optional().describe('The delivery postcode, for a carrier whose inputs list one; "" removes it'),
+      postcodeCountry: z.string().max(2).optional().describe('The postcode\'s country as two letters, such as "DE", when '
+        + 'it is not the carrier\'s own; "" for the carrier\'s own. A postcode the parcel keeps keeps its country unless given'),
       trackingLink: z.string().max(4096).optional().describe('The carrier\'s tracking link, for a carrier whose inputs list one'),
+      phoneDigits: z.string().max(20).optional().describe('The last digits of the recipient\'s phone, for a carrier whose inputs list phoneDigits; "" removes them'),
     }),
     annotations: { readOnlyHint: false, destructiveHint: true, idempotentHint: true, openWorldHint: false },
     _meta: security('change_carrier'),
-  }, allowed('change_carrier', async ({ parcel: named, carrier, postcode, trackingLink }: {
-    parcel: string; carrier: string; postcode?: string; trackingLink?: string;
+  }, allowed('change_carrier', async ({ parcel: named, carrier, postcode, postcodeCountry, trackingLink, phoneDigits }: {
+    parcel: string; carrier: string; postcode?: string; postcodeCountry?: string; trackingLink?: string; phoneDigits?: string;
   }) => {
     if (!VALID_CARRIER_IDS.has(carrier)) return refusal('Peek has no carrier with this id: find_carriers gives the ids.');
     const row = await ownedRow(service, caller.userId, named);
     if (!row || typeof row.tracking_number !== 'string') return refusal(NO_PARCEL);
     const id = String(row.id);
     const number = row.tracking_number;
-    // A carrier that takes a postcode keeps the one the parcel has, as the edit sheet shows it filled in.
-    const takesPostcode = carrierRequirements(carrier as CarrierId, number).some((requirement) => requirement.field === 'dpdPostcode');
+    // A carrier that takes a postcode or phone digits keeps the ones the parcel has, as the edit sheet shows them filled
+    // in, and a postcode kept, or given again, keeps the country it was given with.
+    const takes = new Set(carrierRequirements(carrier as CarrierId, number).map((requirement) => requirement.field));
+    const storedPostcode = nullableText(row.dpd_postcode);
+    const keptPostcode = postcode ?? (takes.has('dpdPostcode') ? storedPostcode ?? '' : '');
+    const keptCountry = keptPostcode.trim() && keptPostcode.trim() === storedPostcode
+      ? storedPostcodeCountry(row.carrier_data, storedPostcode) ?? ''
+      : '';
     let values: ReturnType<typeof packageCarrierValues>;
     try {
       values = packageCarrierValues({
         carrier,
         trackingUrl: trackingLink ?? '',
-        dpdPostcode: postcode ?? (takesPostcode ? nullableText(row.dpd_postcode) ?? '' : ''),
+        dpdPostcode: keptPostcode,
+        dpdPostcodeCountry: postcodeCountry ?? keptCountry,
+        phoneDigits: phoneDigits ?? (takes.has('phoneDigits') ? nullableText(row.phone_digits) ?? '' : ''),
       }, number);
       const unchanged = row.carrier === values.carrier
         && nullableText(row.tracking_url) === values.trackingUrl
-        && nullableText(row.dpd_postcode) === values.dpdPostcode
+        && storedPostcode === values.dpdPostcode
+        && nullableText(row.phone_digits) === values.phoneDigits
         && holdsPostcodeCountry(row, values.dpdPostcodeCountry);
       if (unchanged) return answer({ id, carrier: carrierInfo(values.carrier as CarrierId).name, carrierId: values.carrier, checking: false });
       await verifyAmazonShippingAddition(values.carrier, number);
@@ -452,6 +499,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
       if (write) await service.updatePackage(id, write);
     }
+    // A new carrier or number forgets the digits (packages_forget_phone_digits); the ones given are written after it.
+    if (values.phoneDigits || row.phone_digits) await service.updatePackage(id, { phone_digits: values.phoneDigits });
     logOperationalEvent('package_carrier_changed', {
       package_id: id,
       previous_carrier: String(row.carrier ?? 'unknown'),
@@ -485,10 +534,12 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       ...emails === undefined ? {} : { email_muted: !emails },
     };
     if (!await service.updateAccountPackage(caller.userId, parcel.id, values)) return refusal(NO_PARCEL);
+    // What was left out is the parcel's to tell, so only a grant that may see parcels reads it.
+    const reads = caller.scopes.includes('parcels:read');
     return answer({
       id: parcel.id,
-      notifications: notifications ?? !parcel.notificationsMuted,
-      emails: emails ?? !parcel.emailMuted,
+      ...notifications !== undefined || reads ? { notifications: notifications ?? !parcel.notificationsMuted } : {},
+      ...emails !== undefined || reads ? { emails: emails ?? !parcel.emailMuted } : {},
     });
   }));
 
@@ -508,10 +559,15 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         + 'first (the default for "archived", "all" and a search); "added" latest added first.'),
       search: z.string().max(MOST_SEARCH_LENGTH).optional().describe('Words the parcel\'s name, shop, carrier, tracking number or scans hold, such as a shop\'s name'),
       limit: z.number().int().min(1).max(MOST_LISTED).optional().describe('How many at most; 20 unless given'),
+      timeZone: z.string().max(64).optional().describe('The user\'s timezone, such as "Europe/Paris", when you know it: '
+        + '"today" and "week" are its days. Without it they are the days of the timezone the user chose in Peek'),
     }),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _meta: security('list_parcels'),
-  }, allowed('list_parcels', async (query: ParcelQuery) => answer(await listParcels(service, caller.userId, query))));
+  }, allowed('list_parcels', async (query: ParcelQuery) => {
+    if (query.timeZone !== undefined && !knownTimeZone(query.timeZone)) return refusal('Peek knows no timezone by this name: give an IANA name such as "Europe/Paris".');
+    return answer(await listParcels(service, caller.userId, query));
+  }));
 
   server.registerTool('get_parcel', {
     title: 'Get a parcel',

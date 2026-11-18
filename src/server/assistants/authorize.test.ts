@@ -114,15 +114,16 @@ describe('an authorization request', () => {
     }
   });
 
-  it('drops the scopes it does not know, and asks for both when none is known', async () => {
+  it('drops the scopes it does not know, and asks for every one when none is known', async () => {
     const scopes = async (scope: string | null) => {
       const read = await readAuthorizationRequest(settings, service, query({ scope }));
       return 'request' in read ? read.request.scopes : null;
     };
     expect(await scopes('openid parcels:write offline_access')).toEqual(['parcels:write']);
     expect(await scopes('parcels:write parcels:read')).toEqual(['parcels:read', 'parcels:write']);
-    expect(await scopes('openid profile')).toEqual(['parcels:read', 'parcels:write']);
-    expect(await scopes(null)).toEqual(['parcels:read', 'parcels:write']);
+    expect(await scopes('parcels:edit parcels:read')).toEqual(['parcels:read', 'parcels:edit']);
+    expect(await scopes('openid profile')).toEqual(['parcels:read', 'parcels:write', 'parcels:edit']);
+    expect(await scopes(null)).toEqual(['parcels:read', 'parcels:write', 'parcels:edit']);
   });
 });
 

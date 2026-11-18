@@ -5,7 +5,7 @@ import type { ApiAssistantConnection, ApiAssistantScope, ApiAssistantsResponse }
 import { useI18n } from '../i18n';
 import type { ApiAuth } from '../lib/apiClient';
 import { readAssistants, revokeAssistant } from '../lib/assistants';
-import { localizedRelativeTime, type Translate } from '../lib/messages';
+import { localizedRelativeTime, type MessageKey, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
 import { PipPerch } from './PipPerch';
@@ -63,10 +63,20 @@ export function useAssistants(apiAuth: ApiAuth | undefined, open: boolean) {
   return [value, update] as const;
 }
 
+/** What a connection may do, by whether it sees, adds and archives, and edits parcels. */
+const SCOPE_TEXT: Record<string, MessageKey> = {
+  read: 'assistants.scope.read',
+  write: 'assistants.scope.write',
+  edit: 'assistants.scope.edit',
+  'read write': 'assistants.scope.both',
+  'read edit': 'assistants.scope.readEdit',
+  'write edit': 'assistants.scope.writeEdit',
+  'read write edit': 'assistants.scope.all',
+};
+
 function scopeText(t: Translate, scopes: readonly ApiAssistantScope[]): string {
-  const reads = scopes.includes('parcels:read');
-  const writes = scopes.includes('parcels:write');
-  return t(reads && writes ? 'assistants.scope.both' : writes ? 'assistants.scope.write' : 'assistants.scope.read');
+  const kinds = (['read', 'write', 'edit'] as const).filter((kind) => scopes.includes(`parcels:${kind}`));
+  return t(SCOPE_TEXT[kinds.join(' ')] ?? 'assistants.scope.read');
 }
 
 function Connection({ connection, working, onRevoke }: {

@@ -57,6 +57,16 @@ export function viewerScans<T extends Scan>(scans: readonly T[], values: readonl
   return scans.flatMap((scan) => viewerScan(scan, values) ?? []);
 }
 
+/**
+ * The scans in their order as `viewerScans` reads them, except that a scan it leaves out stays, in words of its stage
+ * (`stageWords`) and without its place. An assistant reads the owner's parcel this way: the parcel's status and what
+ * it needs follow every scan, while the recipient's details stay out.
+ */
+export function redactedScans<T extends Scan>(scans: readonly T[], stageWords: (stage: string) => string, values: readonly string[] = []): T[] {
+  return scans.map((scan) => viewerScan(scan, values)
+    ?? { ...scan, description: stageWords(scan.stage), location: null, ...('place' in scan ? { place: null } : {}) });
+}
+
 /** A carrier's status line as a viewer reads it: none for a delivered parcel, or one that names the recipient. */
 export function viewerStatusText(text: string | null, stage: unknown, values: readonly string[] = []): string | null {
   return text === null || stage === 'delivered' || namesRecipient(text, values) ? null : text;

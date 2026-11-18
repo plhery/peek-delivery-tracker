@@ -37,7 +37,10 @@ describe('assistants in Settings', () => {
 
   it('lists the assistants connected, with the address to give one, marked experimental, and disconnects one', async () => {
     vi.mocked(readAddByEmail).mockResolvedValue(null);
-    vi.mocked(readAssistants).mockResolvedValue(offer([claude, script]));
+    // A connection from before editing had a scope of its own, and one allowed everything.
+    const chatgpt: ApiAssistantConnection = { ...claude, id: '6c000000-0000-4000-a000-0000000000a2', name: 'ChatGPT', redirectHost: 'chatgpt.example',
+      scopes: ['parcels:read', 'parcels:write', 'parcels:edit'] };
+    vi.mocked(readAssistants).mockResolvedValue(offer([claude, chatgpt, script]));
     vi.mocked(revokeAssistant).mockResolvedValue();
     const copy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     const user = userEvent.setup();
@@ -53,12 +56,15 @@ describe('assistants in Settings', () => {
     expect(screen.getByText('https://peek.example/mcp')).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Copy address' }));
     expect(copy).toHaveBeenCalledWith('https://peek.example/mcp');
-    expect(screen.getByText('claude.example · Sees, adds, edits and archives parcels · not used yet')).toBeInTheDocument();
+    expect(screen.getByText('claude.example · Sees, adds and archives parcels · not used yet')).toBeInTheDocument();
+    expect(screen.getByText('chatgpt.example · Sees, adds, edits and archives parcels · not used yet')).toBeInTheDocument();
     // Personal tokens have no screen: none is listed, and none can be made.
     expect(screen.queryByText('Home script')).not.toBeInTheDocument();
     expect(screen.queryByText(/token|Home Assistant|\/api\/parcels/i)).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Remove Claude' }));
     expect(revokeAssistant).toHaveBeenCalledWith(apiAuth, claude.id);
+    await user.click(await screen.findByRole('button', { name: 'Remove ChatGPT' }));
+    expect(revokeAssistant).toHaveBeenCalledWith(apiAuth, chatgpt.id);
     // The empty list says so in a plain line: Pip stays over the address only.
     expect((await screen.findByText('No assistant is connected yet.')).closest('.pip-empty')).toBeNull();
     expect(document.querySelectorAll('.small-pip')).toHaveLength(1);

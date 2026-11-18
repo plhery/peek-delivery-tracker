@@ -432,8 +432,10 @@ Key server modules:
   - The consent page, `/oauth/authorize`, names the client, the host its metadata document
     comes from (or warns that a registered name can't be checked) and where the answer goes,
     and grants only what the owner allows: `parcels:read` (`list_parcels`, `get_parcel`,
-    `find_carriers`) and `parcels:write` (`add_parcels`, `rename_parcel`, `change_carrier`,
-    `set_parcel_notifications`, `archive_parcel`, `restore_parcel`). It sends the browser nowhere before
+    `find_carriers`), `parcels:write` (`add_parcels`, `archive_parcel`) and `parcels:edit`
+    (`rename_parcel`, `change_carrier`, `set_parcel_notifications`, `restore_parcel`). Editing
+    has its own scope because it came after grants had allowed writing: those keep adding and
+    archiving, and a call to edit asks the owner for a new consent. It sends the browser nowhere before
     the owner answers: a request it can't take is shown as one. The answer is a code valid
     once for ten minutes; one used twice ends its grant.
   - Every grant lists every tool, each naming the scope it needs in
@@ -465,22 +467,26 @@ Key server modules:
     `set_account_package_archived`), so the carrier list, each carrier's inputs and the
     active-parcel limit hold as in the app, and a carrier change queues the check the edit
     sheet's change does (`src/server/carrierCheck.ts`). `change_carrier` keeps the parcel's
-    postcode for a carrier that takes one unless given another; a call that changes nothing
-    queues no check. `find_carriers` searches the catalog as the carrier pickers do and lists
+    postcode, with its country, and its phone digits for a carrier that takes them unless
+    given others; a call that changes nothing queues no check. A grant that may not read
+    hears back only what it set. `find_carriers` searches the catalog as the carrier pickers do and lists
     the carriers a number's shape fits, with the inputs each asks for; it asks no carrier.
   - No tool deletes a parcel: deleting for good is too easy for an assistant to get wrong,
     and archive and restore cover what it needs. The owner deletes one in Peek.
     `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. Their answers leave out the receiver's name and postcode and read the
-    scans as a link's viewer does (`viewerScans`): a delivery reads "Delivered", and a scan,
-    status line or place that names the recipient, who signed, a code or a door is left out.
+    scans as a link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan
+    that names the recipient, who signed, a code or a door reads its stage's English name,
+    and a status line or place that does is left out. The status and what the parcel needs
+    still follow every scan.
     `get_parcel` lists each scan once, as the journal does: a row served under another
     (`relay_of`) gives its other words as `also`.
   - `list_parcels` takes a status (on the way, needing the user, expected today or in the
     next seven days, delivered whether archived or not, archived, all), an order (expected
     day, delivery, latest scan, added) and a search over the name, shop, carrier, number and
     scans, so one call answers "my latest delivered parcel"; each parcel gives its expected
-    day and delivery time. Parcel details go out as JSON fields, and the server's
+    day and delivery time. Today and the week are days of the timezone the call gives, else
+    of the one the account chose for its notifications, else Europe/Zurich's. Parcel details go out as JSON fields, and the server's
     instructions tell the assistant to read them as data, never as instructions.
   - `GET /api/parcels` gives a token with `parcels:read` what `list_parcels` gives, as JSON,
     for a client that reads parcels without MCP, and counts against the grant's allowance.

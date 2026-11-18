@@ -2,6 +2,7 @@ import { apiRoute, HttpError, requireService } from '../../../src/server/api';
 import { tokenOwner } from '../../../src/server/assistants/mcp';
 import { assistantsConfigured } from '../../../src/server/assistants/settings';
 import {
+  knownTimeZone,
   listParcels,
   MOST_LISTED,
   MOST_SEARCH_LENGTH,
@@ -16,8 +17,8 @@ export const runtime = 'nodejs';
 
 /**
  * The account's parcels as JSON, for a token that may read them: an assistant's access token, or a personal token in a
- * script while those are on. It takes `list_parcels`'s status, sort, search and limit, and counts against the grant's
- * allowance, as `/mcp` does. It is not there when no assistant can connect.
+ * script while those are on. It takes `list_parcels`'s status, sort, search, limit and timeZone, and counts against the
+ * grant's allowance, as `/mcp` does. It is not there when no assistant can connect.
  */
 export const GET = apiRoute(async (context) => {
   const settings = assistantsConfigured();
@@ -35,6 +36,8 @@ export const GET = apiRoute(async (context) => {
   if (search !== undefined && search.length > MOST_SEARCH_LENGTH) throw new HttpError(400, `search is at most ${MOST_SEARCH_LENGTH} characters`);
   const limit = Number(query.get('limit') ?? 20);
   if (!Number.isInteger(limit) || limit < 1 || limit > MOST_LISTED) throw new HttpError(400, `limit is a whole number from 1 to ${MOST_LISTED}`);
+  const timeZone = query.get('timeZone') ?? undefined;
+  if (timeZone !== undefined && (timeZone.length > 64 || !knownTimeZone(timeZone))) throw new HttpError(400, 'timeZone is an IANA timezone, such as Europe/Paris');
 
   const service = requireService(context);
   const owner = await tokenOwner(settings, service, context.request, context.token);
@@ -45,6 +48,8 @@ export const GET = apiRoute(async (context) => {
       headers: { 'WWW-Authenticate': 'Bearer error="insufficient_scope", scope="parcels:read"' },
     });
   }
-  const parcels = await listParcels(service, owner.userId, { status: status as ParcelStatus | undefined, sort: sort as ParcelSort | undefined, search, limit });
+  const parcels = await listParcels(service, owner.userId, {
+    status: status as ParcelStatus | undefined, sort: sort as ParcelSort | undefined, search, limit, timeZone,
+  });
   return Response.json(parcels, { headers: { 'Cache-Control': 'no-store' } });
 }, { authenticated: false, serviceRequired: true, capability: true });

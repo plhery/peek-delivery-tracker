@@ -5,7 +5,7 @@ import { formatKm } from '../components/map/route';
 import { I18nProvider, useI18n } from '../i18n';
 import { localizedClockTime } from './format';
 import {
-  browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, formatWeight, localeDistanceUnit, localeUses24HourTime,
+  browserDistanceUnit, browserWeightUnit, clockPreference, distancePreference, formatDimensions, formatWeight, localeDistanceUnit, localeUses24HourTime,
   localeWeightUnit, resolvedWeightUnit,
 } from './units';
 
@@ -171,6 +171,15 @@ describe('the units of weight', () => {
       .toEqual(['2.6 lb', '0.8 lb', '0.044 lb', '1 lb', '19 lb', '55.1 lb']);
     expect(formatWeight(1.2, 'lb', 'es-US')).toBe('2.6 lb');
     expect(formatWeight(1.2, 'lb', 'de-DE')).toBe('2,6 lb');
+  });
+
+  it('measures a carrier’s sides in centimetres in inches where weights are in pounds, and leaves any other text as written', () => {
+    expect(formatDimensions('40 × 30 × 20 cm', 'lb', 'en-US')).toBe('15.7 × 11.8 × 7.9 in');
+    expect(formatDimensions(' 40 x 30.5 cm ', 'lb', 'en-US')).toBe('15.7 × 12 in');
+    expect(formatDimensions('25.4 X 2.54 X 0.5 CM', 'lb', 'de-DE')).toBe('10 × 1 × 0,2 in');
+    expect(formatDimensions(' 40 × 30 × 20 cm ', 'kg', 'en-US')).toBe('40 × 30 × 20 cm');
+    expect(['12 × 9 × 4 in', '40 × 30 cm × 20', '40 cm', 'Large box', '40 × 30 × 20 × 10 cm'].map((text) => formatDimensions(text, 'lb', 'en-US')))
+      .toEqual(['12 × 9 × 4 in', '40 × 30 cm × 20', '40 cm', 'Large box', '40 × 30 × 20 × 10 cm']);
   });
 
   it('weighs in pounds in a browser in the United States, and in kilograms in the UK and in Switzerland', () => {

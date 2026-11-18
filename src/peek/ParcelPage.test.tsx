@@ -572,13 +572,16 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.getByText('Pickup point').nextElementSibling).toHaveTextContent('Example Kiosk');
   });
 
-  it('weighs the parcel in pounds for a browser in the United States, never rewriting the carrier’s scans', async () => {
+  it('weighs and measures the parcel in pounds and inches for a browser in the United States, never rewriting the carrier’s scans', async () => {
     const zone = vi.spyOn(Intl.DateTimeFormat.prototype, 'resolvedOptions')
       .mockReturnValue({ ...new Intl.DateTimeFormat().resolvedOptions(), timeZone: 'America/Chicago' });
-    mocks.read.mockResolvedValue(view([...journey.slice(0, 2), scan('in_transit', 6, 'Weighed 1.2 kg at the depot')], { weightKg: 1.2 }));
+    mocks.read.mockResolvedValue(view([...journey.slice(0, 2), scan('in_transit', 6, 'Weighed 1.2 kg at the depot')], {
+      weightKg: 1.2, dimensionsText: '30 × 20 × 10 cm',
+    }));
     render(<I18nProvider><ParcelPage linkId={LINK_ID} /></I18nProvider>);
     await screen.findByRole('heading', { level: 1 });
     expect(screen.getByText('Weight').nextElementSibling).toHaveTextContent('2.6 lb');
+    expect(screen.getByText('Dimensions').nextElementSibling).toHaveTextContent('11.8 × 7.9 × 3.9 in');
     expect(screen.getByText('Weighed 1.2 kg at the depot')).toBeVisible();
     zone.mockRestore();
   });

@@ -6,7 +6,7 @@ import type { Locale } from '../../lib/locale';
 import { numberToCheck, type Translate } from '../../lib/messages';
 import { trackAction } from '../../lib/analytics';
 import { importChargesLine } from '../../lib/importCharges';
-import { formatWeight } from '../../lib/units';
+import { formatDimensions, formatWeight } from '../../lib/units';
 import {
   activeTrackingCarrierId,
   carrierInfo,
@@ -217,7 +217,7 @@ export function ShipmentFacts({ parcel, stage }: { parcel: ParcelWithEvents; sta
       {charges && <div><dt>{t('detail.importCharges')}</dt><dd>{charges.text}</dd></div>}
       {pickup && <div><dt>{t(stage === 'delivered' ? 'detail.collectedAt' : 'detail.pickupPoint')}</dt><dd>{pickup}</dd></div>}
       {weight && <div><dt>{t('detail.weight')}</dt><dd>{weight}</dd></div>}
-      {parcel.dimensionsText && <div><dt>{t('detail.dimensions')}</dt><dd>{parcel.dimensionsText}</dd></div>}
+      {parcel.dimensionsText && <div><dt>{t('detail.dimensions')}</dt><dd>{formatDimensions(parcel.dimensionsText, weightUnit, languageTag)}</dd></div>}
     </dl>}
     {charges?.payableOnline && !parcel.trackingNumber && <p>{t('detail.importChargesAskNumber')}</p>}
   </div>;

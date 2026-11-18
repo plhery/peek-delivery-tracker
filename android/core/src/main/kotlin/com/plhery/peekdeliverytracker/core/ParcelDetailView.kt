@@ -52,16 +52,33 @@ enum class WeightUnit(val code: String) {
         Pounds -> (kilograms / KILOGRAMS_PER_POUND).let { pounds -> foundationDecimal(pounds, if (pounds < 0.1) 3 else 1, language) + " lb" }
     }
 
+    /**
+     * A parcel's dimensions as its carrier wrote them, in inches where weights are written in pounds: two or three sides
+     * in centimetres, each to one decimal in the language's digits. Any other text is shown as written, as the iPhone
+     * and web apps show it.
+     */
+    fun dimensions(text: String, language: AppLanguage): String {
+        val written = text.trimmingWhitespacesAndNewlines()
+        val sides = if (this == Pounds) SIDES_IN_CENTIMETRES.matchEntire(written) else null
+        return sides?.groupValues?.drop(1)?.filter { it.isNotEmpty() }
+            ?.joinToString(" × ", postfix = " in") { foundationDecimal(it.toDouble() / CENTIMETRES_PER_INCH, 1, language) }
+            ?: written
+    }
+
     private companion object {
         const val KILOGRAMS_PER_POUND = 0.45359237
+        const val CENTIMETRES_PER_INCH = 2.54
+
+        /** Two or three sides in centimetres, as the carriers' adapters write them: "40 × 30 × 20 cm", "40 x 30.5 cm". */
+        val SIDES_IN_CENTIMETRES = Regex("""(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)(?:\s*[x×]\s*(\d+(?:\.\d+)?))?\s*cm""", RegexOption.IGNORE_CASE)
     }
 }
 
 /**
  * The facts of the shipment the parcel's page lists under its numbers, in `liveParcelPass`'s order: what importing it
  * costs (`importCharges`); its pickup point, or where it was picked up once delivered, unless a card shows it
- * ([waitingAt]); who receives it; its weight in [weightUnit] ([WeightUnit.format]); and its dimensions, each trimmed
- * and left out when empty. Null without carrier data, where the page lists nothing.
+ * ([waitingAt]); who receives it; its weight in [weightUnit] ([WeightUnit.format]); and its dimensions, in inches with
+ * pounds ([WeightUnit.dimensions]), each trimmed and left out when empty. Null without carrier data, where the page lists nothing.
  */
 fun Localizer.shipmentFacts(parcel: Parcel, weightUnit: WeightUnit = this.weightUnit): List<ShipmentFact>? {
     val details = parcel.carrierData ?: return null
@@ -77,7 +94,7 @@ fun Localizer.shipmentFacts(parcel: Parcel, weightUnit: WeightUnit = this.weight
     if (weight != null && weight.isFinite() && weight > 0) {
         facts += ShipmentFact("detail.weight", weightUnit.format(weight, language))
     }
-    trimmed(details.dimensionsText)?.let { facts += ShipmentFact("detail.dimensions", it) }
+    trimmed(details.dimensionsText)?.let { facts += ShipmentFact("detail.dimensions", weightUnit.dimensions(it, language)) }
     return facts
 }
 

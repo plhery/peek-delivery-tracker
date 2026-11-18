@@ -124,6 +124,21 @@ class ParcelDetailViewTests {
     }
 
     @Test
+    fun aCarriersSidesInCentimetresGoToInchesWithPoundsAndAnyOtherTextStaysAsWritten() {
+        assertEquals("15.7 × 11.8 × 7.9 in", WeightUnit.Pounds.dimensions("40 × 30 × 20 cm", AppLanguage.En))
+        assertEquals("15.7 × 12 in", WeightUnit.Pounds.dimensions(" 40 x 30.5 cm ", AppLanguage.En))
+        assertEquals("10 × 1 × 0,2 in", WeightUnit.Pounds.dimensions("25.4 X 2.54 X 0.5 CM", AppLanguage.De))
+        assertEquals("40 × 30 × 20 cm", WeightUnit.Kilograms.dimensions(" 40 × 30 × 20 cm ", AppLanguage.En))
+        for (text in listOf("12 × 9 × 4 in", "40 × 30 cm × 20", "40 cm", "Large box", "40 × 30 × 20 × 10 cm")) {
+            assertEquals(text, WeightUnit.Pounds.dimensions(text, AppLanguage.En))
+        }
+        val measured = parcel(TrackingStage.InTransit, CarrierData(dimensionsText = "30 × 20 × 10 cm"))
+        val american = Localizer(AppLanguage.En, systemDistanceUnit = DistanceUnit.Miles, systemWeightUnit = WeightUnit.Pounds)
+        assertEquals("11.8 × 7.9 × 3.9 in", american.shipmentFacts(measured)!!.single().value)
+        assertEquals("30 × 20 × 10 cm", american.shipmentFacts(measured, WeightUnit.Kilograms)!!.single().value)
+    }
+
+    @Test
     fun aWeightThatIsNoneAndBlankValuesAreLeftOutAndNoCarrierDataListsNothing() {
         val localizer = Localizer(AppLanguage.De)
         for (weight in listOf(0.0, -1.0, Double.NaN, Double.POSITIVE_INFINITY)) {

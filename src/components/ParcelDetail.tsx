@@ -32,7 +32,7 @@ import {
 } from '../i18n';
 import { dayAndTime, localizedClockTime } from '../lib/format';
 import { NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
-import { formatWeight } from '../lib/units';
+import { formatDimensions, formatWeight } from '../lib/units';
 import {
   awaitedCarrier,
   localizedParcelCompletionDate,
@@ -709,7 +709,7 @@ export function ParcelDetail({
             {pickupFact && <div><dt>{t(current?.stage === 'delivered' ? 'detail.collectedAt' : 'detail.pickupPoint')}</dt><dd>{pickupFact}</dd></div>}
             {parcel.receiverName && <div><dt>{t('detail.recipient')}</dt><dd>{parcel.receiverName}</dd></div>}
             {Number.isFinite(parcel.weightKg) && parcel.weightKg! > 0 && <div><dt>{t('detail.weight')}</dt><dd>{formatWeight(parcel.weightKg!, weightUnit, languageTag)}</dd></div>}
-            {parcel.dimensionsText && <div><dt>{t('detail.dimensions')}</dt><dd>{parcel.dimensionsText}</dd></div>}
+            {parcel.dimensionsText && <div><dt>{t('detail.dimensions')}</dt><dd>{formatDimensions(parcel.dimensionsText, weightUnit, languageTag)}</dd></div>}
           </dl>
         )}
         <div className="detail__shipment">

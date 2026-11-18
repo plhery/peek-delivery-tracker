@@ -270,6 +270,24 @@ enum WeightUnit: String, CaseIterable {
             return pounds.formatted(.number.locale(locale).precision(.fractionLength(0...(pounds < 0.1 ? 3 : 1)))) + " lb"
         }
     }
+
+    private static let centimetresPerInch = 2.54
+    /// Two or three sides in centimetres, as the carriers' adapters write them: "40 × 30 × 20 cm", "40 x 30.5 cm".
+    private static let sidesInCentimetres = try? NSRegularExpression(
+        pattern: #"^(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)(?:\s*[x×]\s*(\d+(?:\.\d+)?))?\s*cm$"#, options: [.caseInsensitive]
+    )
+
+    /// A parcel's dimensions as its carrier wrote them, in inches where weights are written in pounds: two or three sides
+    /// in centimetres, each to one decimal in `locale`'s digits. Any other text is shown as written, as the web and
+    /// Android apps show it.
+    func dimensions(_ text: String, locale: Locale) -> String {
+        let written = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let range = NSRange(written.startIndex..., in: written)
+        guard self == .pounds, let match = Self.sidesInCentimetres?.firstMatch(in: written, range: range) else { return written }
+        let sides = (1..<match.numberOfRanges).compactMap { Range(match.range(at: $0), in: written).flatMap { Double(written[$0]) } }
+        return sides.map { ($0 / Self.centimetresPerInch).formatted(.number.locale(locale).precision(.fractionLength(0...1))) }
+            .joined(separator: " × ") + " in"
+    }
 }
 
 private struct DistanceUnitKey: EnvironmentKey {
@@ -395,6 +413,11 @@ final class Localizer: ObservableObject {
     /// A weight Peek read in kilograms, in `weightUnit` and the app language's digits.
     func weight(kilograms: Double) -> String {
         weightUnit.format(kilograms: kilograms, locale: language.locale)
+    }
+
+    /// A parcel's dimensions as its carrier wrote them, in inches where `weightUnit` is pounds.
+    func dimensions(_ text: String) -> String {
+        weightUnit.dimensions(text, locale: language.locale)
     }
 
     private func resolveUnits() {

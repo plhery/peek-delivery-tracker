@@ -87,3 +87,20 @@ export function formatWeight(kilograms: number, unit: WeightUnit, languageTag: s
   const pounds = kilograms / KILOGRAMS_PER_POUND;
   return new Intl.NumberFormat(languageTag, { style: 'unit', unit: 'pound', maximumFractionDigits: pounds < 0.1 ? 3 : 1 }).format(pounds);
 }
+
+const CENTIMETRES_PER_INCH = 2.54;
+/** Two or three sides in centimetres, as the carriers' adapters write them: "40 × 30 × 20 cm", "40 x 30.5 cm". */
+const SIDES_IN_CENTIMETRES = /^(\d+(?:\.\d+)?)\s*[x×]\s*(\d+(?:\.\d+)?)(?:\s*[x×]\s*(\d+(?:\.\d+)?))?\s*cm$/i;
+
+/**
+ * A parcel's dimensions as its carrier wrote them, in inches where weights are written in pounds: two or three sides
+ * in centimetres, each to one decimal in the language's digits. Any other text is shown as written. The iPhone and
+ * Android apps write it the same way.
+ */
+export function formatDimensions(text: string, unit: WeightUnit, languageTag: string): string {
+  const written = text.trim();
+  const sides = unit === 'lb' ? SIDES_IN_CENTIMETRES.exec(written) : null;
+  if (!sides) return written;
+  const inches = new Intl.NumberFormat(languageTag, { maximumFractionDigits: 1 });
+  return `${sides.slice(1).filter(Boolean).map((side) => inches.format(Number(side) / CENTIMETRES_PER_INCH)).join(' × ')} in`;
+}

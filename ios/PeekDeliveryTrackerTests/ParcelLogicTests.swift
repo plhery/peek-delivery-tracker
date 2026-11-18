@@ -1930,6 +1930,18 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual([1.2, 0.35, 0.02, 0.4536, 8.6, 25].map { WeightUnit.pounds.format(kilograms: $0, locale: english) },
                        ["2.6 lb", "0.8 lb", "0.044 lb", "1 lb", "19 lb", "55.1 lb"])
         XCTAssertEqual(WeightUnit.pounds.format(kilograms: 1.2, locale: german), "2,6 lb")
+
+        // A carrier's sides in centimetres go to inches with pounds, to one decimal; any other text stays as written.
+        XCTAssertEqual(WeightUnit.pounds.dimensions("40 × 30 × 20 cm", locale: english), "15.7 × 11.8 × 7.9 in")
+        XCTAssertEqual(WeightUnit.pounds.dimensions(" 40 x 30.5 cm ", locale: english), "15.7 × 12 in")
+        XCTAssertEqual(WeightUnit.pounds.dimensions("25.4 X 2.54 X 0.5 CM", locale: german), "10 × 1 × 0,2 in")
+        XCTAssertEqual(WeightUnit.kilograms.dimensions(" 40 × 30 × 20 cm ", locale: english), "40 × 30 × 20 cm")
+        for text in ["12 × 9 × 4 in", "40 × 30 cm × 20", "40 cm", "Large box", "40 × 30 × 20 × 10 cm"] {
+            XCTAssertEqual(WeightUnit.pounds.dimensions(text, locale: english), text)
+        }
+        systemWeight = .pounds
+        localizer.systemChanged()
+        XCTAssertEqual(localizer.dimensions("30 × 20 × 10 cm"), "11.8 × 7.9 × 3.9 in")
     }
 
     func testScheduledDeliveryMatchesWebApp() {

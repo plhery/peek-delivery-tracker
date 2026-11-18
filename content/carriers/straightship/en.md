@@ -14,10 +14,10 @@ Straightship publishes no number format. The numbers Peek knows look like this, 
 
 | Number | What it is |
 | --- | --- |
-| `STRTD000000000` | STRTD and 9 digits. |
-| `STRTD0000000000000000` | STRTD and 16 digits (17 also occur). |
-| `STRCA0000000000000` | STRCA and 13 digits. |
-| `STSHYW00000000000` | STSH, two letters and 11 digits. |
+| `STRTD482910573` | STRTD and 9 digits. |
+| `STRTD4829105736491827` | STRTD and 16 digits (17 also occur). |
+| `STRCA4829105736491` | STRCA and 13 digits. |
+| `STSHYW48291057364` | STSH, two letters and 11 digits. |
 
 Lower case and spaces don't matter in Peek. Straightship's tracker answers a number it doesn't hold with `No results found!`: check the number against the shop's email. Can't find the number at all? See [how to find your tracking number](guide:find-tracking-number) and, for a SHEIN order, [tracking SHEIN orders](guide:shein-orders).
 
@@ -63,7 +63,7 @@ Straightship publishes no rules for how many attempts it makes, whether it leave
 
 ## Customs on a Straightship parcel from Asia
 
-Straightship clears customs for the businesses it ships for, and its pages don't say whether it ever bills recipients. If you're asked to pay for a Straightship parcel, check with the seller first. SHEIN says all its orders to Canada are delivered duty paid, with no customs fees for you to pay. Other trackers can show `Customs Released` before the first scan in Canada; Straightship's own tracker doesn't. Before that first scan, the history can also show `Customs Held For Examination`, while customs examine the parcel, or `Customs Rejected`, which isn't always the end: on a parcel Peek followed, customs examined it and released it two days later. Peek shows both lines as "At customs"; if one stays for days, ask the seller.
+Straightship clears customs for the businesses it ships for, and its Chinese services page says it can collect the taxes in Canada (`DDU`). If you're asked to pay for a Straightship parcel, check with the seller first. SHEIN says all its orders to Canada are delivered duty paid, with no customs fees for you to pay. Other trackers can show `Customs Released` before the first scan in Canada; Straightship's own tracker doesn't. Before that first scan, the history can also show `Customs Held For Examination`, while customs examine the parcel, or `Customs Rejected`, which isn't always the end: on a parcel Peek followed, customs examined it and released it two days later. Peek shows both lines as "At customs"; if one stays for days, ask the seller.
 
 What's owed depends on the value and where the goods come from. By courier, nothing is due up to CAD 20 from China or any country other than the US and Mexico, and duty and taxes above that. From the US or Mexico, nothing is due up to CAD 40, taxes only up to CAD 150, and duty and taxes above.
 
@@ -97,7 +97,7 @@ For the order itself, a refund or a return, contact the seller.
 
 Peek reads Straightship's own tracker and shows the status, the history with the town and province of each scan, and the delivery time. It reads the tracker's times as UTC, as the tracker states, and shows them in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. `Package will be delivered before 9:00pm` counts as out for delivery, the attempt lines as failed attempts, and `Delivery is in progress` as in transit. Peek shows no expected delivery date, and it leaves out the customer reference and the delivery photo: see those on Straightship's tracker. As Straightship names no other carrier, Peek follows the Straightship number to the end.
 
-Peek checks up to every 10 minutes, or every 2 from 6 a.m. Pacific time on the day Straightship scans the parcel out for delivery, evening deliveries included, while Straightship's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Straightship or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 from 6 a.m. Pacific time on the day Straightship scans the parcel out for delivery, evening deliveries included, while Straightship's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact Straightship or the seller for you.
 
 ## Questions about Straightship tracking
 

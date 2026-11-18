@@ -14,10 +14,10 @@ Straightship 没有公布单号格式。Peek 认得的单号有以下几种（�
 
 | 单号 | 说明 |
 | --- | --- |
-| `STRTD000000000` | STRTD 加 9 位数字。 |
-| `STRTD0000000000000000` | STRTD 加 16 位数字（也有 17 位的）。 |
-| `STRCA0000000000000` | STRCA 加 13 位数字。 |
-| `STSHYW00000000000` | STSH 加两个字母和 11 位数字。 |
+| `STRTD482910573` | STRTD 加 9 位数字。 |
+| `STRTD4829105736491827` | STRTD 加 16 位数字（也有 17 位的）。 |
+| `STRCA4829105736491` | STRCA 加 13 位数字。 |
+| `STSHYW48291057364` | STSH 加两个字母和 11 位数字。 |
 
 在 Peek 里，大小写和空格都不影响查询。Straightship 的查询页面查不到某个单号时，会显示 `No results found!`：请对照商家的邮件核对单号。SHEIN 订单的单号在哪里、包裹怎么跟踪，见 [SHEIN 订单跟踪指南](guide:shein-orders)（英文）。
 
@@ -63,7 +63,7 @@ Straightship 没有公布会上门几次、会不会留取件通知单、没送�
 
 ## 从亚洲寄来的 Straightship 包裹要交关税吗
 
-Straightship 为用它发货的企业办理清关，它的页面没有说会不会向收件人收费。如果有人要你为 Straightship 的包裹付钱，先问卖家。
+Straightship 为用它发货的企业办理清关，它的中文服务页写明“加拿大可代收税金（DDU）”。如果有人要你为 Straightship 的包裹付钱，先问卖家。
 
 在加拿大的第一次扫描之前，物流记录里还可能出现 `Customs Held For Examination`（海关正在查验包裹）或 `Customs Rejected`。`Customs Rejected` 字面上是“海关拒绝”，但不一定就此结束：Peek 跟踪过的一个包裹，随后经海关查验，两天后就放行了。Peek 把这两条都显示为“清关中”；如果好几天都没有变化，请联系卖家。
 
@@ -97,7 +97,7 @@ Straightship 为用它发货的企业办理清关，它的页面没有说会不�
 
 Peek 读取的是 Straightship 自己的查询页面，显示状态、物流记录（含每次扫描的城市和省份）和送达时间。页面注明时间是 UTC，Peek 就按 UTC 读取，再换算成你设备所在的时区显示；在 peektracker.com 网页和 iPhone App 上，物流记录末尾会写明“时间按你所在的时区显示：”和时区名称。`Package will be delivered before 9:00pm` 算作“派送中”，`Attempted Delivery` 和上面两条派送失败记录算作“派送未成功”，`Delivery is in progress` 算作“运输中”；`Delivered` 这一行在 Peek 里显示为“已签收”。Straightship 不提供预计送达日期，Peek 也就不显示；客户参考号和送达照片 Peek 不显示，请到 Straightship 的查询页面看。Straightship 不写其他快递公司，所以 Peek 一直用 Straightship 的单号跟踪到底。
 
-Straightship 还查不到这个单号时，Peek 在 peektracker.com 上显示“等待 Straightship 更新”；有了面单信息，就显示“已生成面单”。Peek 全天候查询，最快每 10 分钟一次，包裹派送中时最快每 2 分钟一次（只在派送当天太平洋时间早上 6 点以后，且结果来自 Straightship 官方查询时；结果来自第三方查询服务时每 15 分钟一次）。两天没有新记录（状态还是“已生成面单”或“已揽收”时为 12 小时），Peek 就改为每小时查询一次。“通知范围”可以选“每次扫描”“重要环节”或“仅派送当天”。Peek 不能替你联系 Straightship 或卖家。
+Straightship 还查不到这个单号时，Peek 在 peektracker.com 上显示“等待 Straightship 更新”；有了面单信息，就显示“已生成面单”。你打开着这个包裹，或在派送当天开着通知时，Peek 最快每 10 分钟查询一次，包裹派送中时最快每 2 分钟一次（只在派送当天太平洋时间早上 6 点以后，且结果来自 Straightship 官方查询时；结果来自第三方查询服务时最快每 15 分钟一次）；其他时候每小时一次。两天没有新记录（状态还是“已生成面单”或“已揽收”时为 12 小时），Peek 就改为每小时查询一次。“通知范围”可以选“每次扫描”“重要环节”或“仅派送当天”。Peek 不能替你联系 Straightship 或卖家。
 
 ## 关于 Straightship 物流查询的常见问题
 

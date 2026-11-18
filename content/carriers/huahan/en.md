@@ -14,10 +14,10 @@ Peek knows HuaHan's waybills as HHW, two letters, ten digits and YQ, 17 characte
 
 | Number | What it is |
 | --- | --- |
-| `HHWAA0000000000YQ` | HHW, two letters, ten digits and YQ: a HuaHan waybill. |
-| `HHWAA000000000YQ` | Only nine digits: not HuaHan's layout. Check for a missing digit. |
-| `WNBAA0000000000YQ` | Also ends in YQ, but opens with WNB: a [WanbExpress](carrier:wanbexpress) number. |
-| `JXCAA0000000000YQ` | JXC in front: a [Juxi Express](carrier:juxi-express) number. |
+| `HHWCN4829105736YQ` | HHW, two letters, ten digits and YQ: a HuaHan waybill. |
+| `HHWCN482910573YQ` | Only nine digits: not HuaHan's layout. Check for a missing digit. |
+| `WNBAA4829105736YQ` | Also ends in YQ, but opens with WNB: a [WanbExpress](carrier:wanbexpress) number. |
+| `JXCAA4829105736YQ` | JXC in front: a [Juxi Express](carrier:juxi-express) number. |
 
 Many Chinese forwarders end their waybills in YQ, each with its own letters in front: HHW is what marks HuaHan, and no other carrier in Peek's catalog uses it. Spaces, dashes and lower case don't matter when you paste the number into Peek.
 
@@ -94,7 +94,7 @@ HuaHan files `Outgoing scan at facility` under its out-for-delivery code, but th
 
 ## Who delivers HuaHan parcels
 
-After `Has been given to local carrier`, a carrier in the destination country delivers the parcel, and HuaHan's tracker can name it and give its number. Peek couldn't check HuaHan's website, so this page has no list of HuaHan's partners.
+After `Has been given to local carrier`, a carrier in the destination country delivers the parcel, and HuaHan's tracker can name it and give its number.
 
 **What Peek's code shows.** One HuaHan history shows Sameday delivering: its out-for-delivery line points to the SAMEDAY app. Peek's code also expects [USPS](carrier:usps) numbers from HuaHan: when HuaHan gives USPS's long label barcode, Peek keeps USPS's own tracking number from it. [DHL](carrier:dhl) is booked for the last leg of some parcels: the data line quoted above is its record of the sender's data. DPD delivers some: its depot scans, such as `In Transit, Scanned By DPD At parcel delivery centre.`, are in the table above. [CTT Express](carrier:ctt-express) is announced for the last leg of others: HuaHan's tracker passes on its notice `Pendiente de recepción en CTT Express` ("awaiting receipt at CTT Express") hours before HuaHan has the parcel in China, and Peek shows "Label created". Others go through [Landmark Global](carrier:landmark-global): HuaHan's tracker relays its lines from its record of the sender's data to the delivery round, and after Landmark Global's hand-off, bpost's network delivers (see "Through Landmark Global" above). Beyond these, the code ties no carrier to any country: Peek goes by the one HuaHan names for your parcel.
 
@@ -120,7 +120,7 @@ After `Has been given to local carrier`, a carrier in the destination country de
 
 ## HuaHan contact number and customer service
 
-As of 31 October 2026, Peek couldn't check HuaHan's website, so this page lists no contact details for HuaHan. The seller booked the parcel with HuaHan and is the one to ask about your order, and the marketplace if the seller doesn't answer. For the delivery itself, ask the local carrier.
+On its website ([hh-exp.com/lxwm](https://www.hh-exp.com/lxwm)), HuaHan gives a hotline in **China**, `400-015-6080`, with no published hours, and its head office in Shenzhen; it gives no support e-mail for recipients. The seller booked the parcel with HuaHan and is the one to ask about your order, and the marketplace if the seller doesn't answer. For the delivery itself, ask the local carrier.
 
 ## Track a HuaHan parcel with Peek
 
@@ -132,7 +132,7 @@ When HuaHan names a local carrier Peek knows, with a number of that carrier's sh
 
 When HuaHan's tracker can't be reached, Peek asks tracking services instead and shows the history they hold, in their words.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while HuaHan's own tracker answers (through tracking services, every 15 minutes). When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not flights or HuaHan's own export-clearance scans: the export clearance on the way to the airport, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, is a routine step before the flight, and Peek shows it as "In transit". Peek can't contact HuaHan or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while HuaHan's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel: at most hourly for Royal Mail and Poste Italiane, up to every 30 minutes for PostNL and USPS, out for delivery too. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers `Import Customs clearance started`, the customs scans of China Post that HuaHan passes on in Chinese for a parcel it sends by post (such as `送交出口海关` and `送交境外进口海关`), the delivery run, a pickup point and the delivery, not flights or HuaHan's own export-clearance scans: the export clearance on the way to the airport, `快件从转运仓发出至机场，出口报关中（ The package is shipped from the transfer warehouse to the airport Export customs clearance in progress ）`, is a routine step before the flight, and Peek shows it as "In transit". Peek can't contact HuaHan or the seller for you.
 
 ## Questions about HuaHan tracking
 
@@ -154,10 +154,11 @@ A local carrier, which HuaHan's tracker can name, with its number for the parcel
 
 ### Who do I contact about a missing HuaHan parcel?
 
-The seller you ordered from: it booked the parcel with HuaHan. Peek couldn't check HuaHan's website for contact details.
+The seller you ordered from: it booked the parcel with HuaHan. HuaHan's own hotline is in China (`400-015-6080`).
 
 :::sources
 - [European Commission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – €3 customs duty per item up to €150 since 1 July 2026, €2 Union handling fee since 1 November 2026
 - [European Commission: Guidance on the €3 customs duty and Union handling fee (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – €2 per item whatever the value, what an item is
+- [HuaHan Express: 联系我们 (contact, in Chinese)](https://www.hh-exp.com/lxwm) – Shenzhen head office and the official hotline 400-015-6080.
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – names, HHW number shape, the tracker and its sum check, scan wordings, codes and their stages, the local carrier's relayed scans and duplicate lines, Sameday's wording, DPD's depot scans, attempts and pickup point, CTT Express's notice, China Post's and the destination post's scans in Chinese on the postal line and their stages, Landmark Global's relayed lines, the hand-off to bpost's network and their stages, the local carrier's name and number with the underscore suffix and USPS barcodes, clocks, destination country, no delivery date or weight, the hand-off
 :::

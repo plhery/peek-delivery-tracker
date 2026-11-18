@@ -480,7 +480,7 @@ final class DeviceParcelTests: XCTestCase {
         for (status, body, expected) in answers {
             PostcodeTestURLProtocol.handler = { _ in (status, Data(body.utf8)) }
             do {
-                _ = try await client.read("22222222222A", key)
+                _ = try await client.read("22222222222A", key, false)
                 XCTFail("Expected a failure for \(status)")
             } catch let down as ServerDown {
                 XCTAssertEqual(down, expected, "\(status) \(body)")

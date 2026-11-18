@@ -50,6 +50,20 @@ fi
 target=$(git -C "$android" rev-parse --verify "$commit^{commit}")
 tag="android-$name-$code"
 
+release=$(mktemp -d)
+printf 'Peek for Android %s (%s), the beta, is built from https://github.com/%s/tree/%s\n' "$name" "$code" "$github" "$target" > "$release/README.md"
+git -C "$release" init -q -b release
+remote="https://github.com/$github.git"
+ref="refs/tags/$tag"
+existing=$(git ls-remote "$remote" "$ref")
+if [ -n "$existing" ]; then
+  git -C "$release" fetch -q --no-tags "$remote" "$ref"
+  if ! git -C "$release" show FETCH_HEAD:README.md | cmp -s - "$release/README.md"; then
+    echo "$tag does not name the expected source commit $target" >&2
+    exit 1
+  fi
+fi
+
 # The index, signed with the repository's key. Peek's icon is the repository's and the app's.
 mkdir -p "$dir/metadata/$app/en-US" "$dir/older" "$dir/config"
 cp "$android/../public/icons/icon-512.png" "$dir/icon.png"
@@ -76,19 +90,19 @@ git -C "$site" -c credential.helper= -c 'credential.helper=!gh auth git-credenti
 # The same APK on GitHub Releases. The tag sits on a commit of its own that names the release's commit: a new ref on the
 # release's commit carries .github/workflows, which a token without the workflow scope may not create. A release made
 # already stays as it is.
-if gh release view "$tag" --repo "$github" >/dev/null 2>&1; then
-  echo "$tag is on GitHub Releases already" >&2
-else
-  release=$(mktemp -d)
-  printf 'Peek for Android %s (%s), the beta, is built from https://github.com/%s/tree/%s\n' "$name" "$code" "$github" "$target" \
-    > "$release/README.md"
-  git -C "$release" init -q -b release
+if [ -z "$existing" ]; then
   git -C "$release" add README.md
   git -C "$release" commit -q -m "Peek for Android $name ($code)"
-  git -C "$release" tag "$tag"
   git -C "$release" -c credential.helper= -c 'credential.helper=!gh auth git-credential' \
-    push -q "https://github.com/$github.git" "refs/tags/$tag"
-  cp "$apk" "$site/peek-$name-$code.apk"
+    push -q "$remote" "HEAD:$ref"
+fi
+asset="peek-$name-$code.apk"
+cp "$apk" "$site/$asset"
+if assets=$(gh release view "$tag" --repo "$github" --json assets --jq '.assets[] | select(.state == "uploaded") | .name'); then
+  if ! grep -Fxq "$asset" <<<"$assets"; then
+    gh release upload "$tag" "$site/$asset" --repo "$github" --clobber
+  fi
+else
   {
     printf 'Peek for Android %s (%s), the beta, built from %s without Google'"'"'s libraries and signed with Peek'"'"'s own key.\n\n' \
       "$name" "$code" "$target"

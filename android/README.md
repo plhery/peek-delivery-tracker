@@ -156,6 +156,10 @@ key, which Google can replace if it is lost.
 The bundle has no language splits, so each install from Google Play carries every language rather than the phone's
 alone: the words the app takes from Material are read in the app's language, which needn't be one of the phone's.
 
+Google Play warns that the bundle has native code without debug symbols. The app builds no native code of its own: its
+native libraries come stripped from its dependencies (ML Kit's barcode scanner, CameraX, AndroidX's graphics path and
+DataStore), so `ndk.debugSymbolLevel` has nothing to extract and there is no symbols file to upload.
+
 Before a bundle goes to Google Play, open the APK built with it on an emulator or phone (`assemblePlayRelease`
 copies it to `outputs/apk/release` too):
 

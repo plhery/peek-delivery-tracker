@@ -2524,6 +2524,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "speedaf-sendungsverfolgung",
+      "title": "Speedaf Express Sendungsverfolgung: Nummer und Status",
+      "name": "Speedaf",
+      "color": "#ff8300"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",
@@ -3150,6 +3158,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e2393c"
     },
     {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "suivi-lingdong",
+      "title": "Suivi Lingdong International\u00a0: numéro SZLD et statuts",
+      "name": "Lingdong International",
+      "color": "#0171bb"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-suivi",
@@ -3744,6 +3760,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e2393c"
     },
     {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "tracciamento-lingdong",
+      "title": "Tracciamento Lingdong International: numero SZLD e stati",
+      "name": "Lingdong International",
+      "color": "#0171bb"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-tracking",
@@ -3838,6 +3862,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Meiteshun: numero AMTS…FS, stati e chi contattare",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "tracciamento-speedaf",
+      "title": "Tracciamento Speedaf Express: numero, stati e contatti",
+      "name": "Speedaf",
+      "color": "#ff8300"
     },
     {
       "id": "topyou",
@@ -4450,6 +4482,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "seguimiento-speedaf",
+      "title": "Seguimiento Speedaf Express: número, estados y ayuda",
+      "name": "Speedaf",
+      "color": "#ff8300"
+    },
+    {
       "id": "quick-rabbit",
       "catalog": "quick-rabbit",
       "slug": "quick-rabbit-seguimiento",
@@ -4948,6 +4988,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e2393c"
     },
     {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "seguimento-lingdong",
+      "title": "Seguimento Lingdong International: número SZLD e estados",
+      "name": "Lingdong International",
+      "color": "#0171bb"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-rastreio",
@@ -5034,6 +5082,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Meiteshun: número AMTS, estados e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "speedaf",
+      "catalog": "speedaf",
+      "slug": "seguimento-speedaf",
+      "title": "Seguimento Speedaf Express: número, estados e apoio",
+      "name": "Speedaf",
+      "color": "#ff8300"
     },
     {
       "id": "topyou",
@@ -5574,6 +5630,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JCEX śledzenie przesyłki: numer JCZ, statusy, kto doręcza",
       "name": "JCEX",
       "color": "#0080cc"
+    },
+    {
+      "id": "lingdong",
+      "catalog": "lingdong",
+      "slug": "sledzenie-lingdong",
+      "title": "Śledzenie Lingdong International: numer SZLD i statusy",
+      "name": "Lingdong International",
+      "color": "#0171bb"
     },
     {
       "id": "china-post",

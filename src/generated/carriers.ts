@@ -2734,6 +2734,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#df0024"
     },
     {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-suivi-colis",
+      "title": "Suivi Packeta\u00a0: numéro Z, statuts, relais et contact",
+      "name": "Packeta",
+      "color": "#ba1b02"
+    },
+    {
       "id": "4px",
       "catalog": "four-px",
       "slug": "4px-suivi",
@@ -3232,6 +3240,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "tracciamento-gls-germania",
+      "title": "Tracciamento GLS Germania: Track-ID, stati e contatti",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-de",
       "catalog": "dpd-de",
       "slug": "tracciamento-dpd-germania",
@@ -3326,6 +3342,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking CTT Portugal: codici, stati, ritiro e dogana",
       "name": "CTT",
       "color": "#df0024"
+    },
+    {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-tracking",
+      "title": "Packeta tracking: codice Z, stati, ritiro e contatti",
+      "name": "Packeta",
+      "color": "#ba1b02"
     },
     {
       "id": "4px",
@@ -3722,6 +3746,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "seguimiento-gls-alemania",
+      "title": "Seguimiento GLS Alemania: Track-ID, estados y contacto",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-de",
       "catalog": "dpd-de",
       "slug": "seguimiento-dpd-alemania",
@@ -3808,6 +3840,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento CTT Portugal: números, estados y recogida",
       "name": "CTT",
       "color": "#df0024"
+    },
+    {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-seguimiento",
+      "title": "Seguimiento Packeta: código Z, estados y puntos de recogida",
+      "name": "Packeta",
+      "color": "#ba1b02"
     },
     {
       "id": "4px",
@@ -4236,6 +4276,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "seguimento-gls-alemanha",
+      "title": "Seguimento GLS Alemanha: Track-ID, estados e contactos",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
+    },
+    {
       "id": "dpd-de",
       "catalog": "dpd-de",
       "slug": "seguimento-dpd-alemanha",
@@ -4322,6 +4370,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "CTT rastreio: números, estados, levantamento e contactos",
       "name": "CTT",
       "color": "#df0024"
+    },
+    {
+      "id": "packeta",
+      "catalog": "packeta",
+      "slug": "packeta-seguimento",
+      "title": "Seguimento Packeta: código Z, estados e levantamento",
+      "name": "Packeta",
+      "color": "#ba1b02"
     },
     {
       "id": "4px",
@@ -4694,6 +4750,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Mondial Relay: statusy, InPost, Vinted i odbiór",
       "name": "Mondial Relay",
       "color": "#ef3026"
+    },
+    {
+      "id": "gls-de",
+      "catalog": "gls-de",
+      "slug": "sledzenie-gls-niemcy",
+      "title": "Śledzenie GLS Niemcy: numer, Track-ID, statusy i kontakt",
+      "name": "GLS Germany",
+      "color": "#ffdd00"
     },
     {
       "id": "dpd-de",

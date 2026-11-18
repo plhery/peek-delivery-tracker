@@ -14,7 +14,7 @@ begin
       'public.register_assistant_client(text,text,text,text[])', 'public.assistant_client(text)',
       'public.open_assistant_code(uuid,text,text,text,boolean,text[],text,text,text)',
       'public.redeem_assistant_code(text,text,text,text,text,timestamptz,text,timestamptz)',
-      'public.refresh_assistant_tokens(text,text,text,timestamptz,text,timestamptz)',
+      'public.refresh_assistant_tokens(text,text,text,timestamptz,text,timestamptz,text[])',
       'public.assistant_token(text)', 'public.assistant_grants(uuid)', 'public.revoke_assistant_grant(uuid,uuid)',
       'public.create_personal_token(uuid,text,text[],text)', 'public.revoke_assistant_token(text,text)'
     ] loop
@@ -79,6 +79,17 @@ begin
     raise exception 'The access token did not name its account: %', seen;
   end if;
   if public.assistant_token(repeat('b', 64)) is not null then raise exception 'A refresh token was taken as an access token'; end if;
+
+  if public.refresh_assistant_tokens(repeat('b',64), 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', repeat('61',32), later,
+      repeat('62',32), much_later, array['parcels:edit'])->>'error' is distinct from 'invalid_scope' then
+    raise exception 'A refresh requested a scope beyond the grant';
+  end if;
+  issued := public.refresh_assistant_tokens(repeat('b',64), 'peek_c_aaaaaaaaaaaaaaaaaaaaaa', repeat('61',32), later,
+    repeat('62',32), much_later, array['parcels:read']);
+  if public.assistant_token(repeat('61',32))->'scopes' is distinct from '["parcels:read"]'::jsonb
+    or (select scopes from private.assistant_tokens where hash = repeat('62',32)) is distinct from array['parcels:read','parcels:write'] then
+    raise exception 'Refresh failed to narrow access while retaining the grant scope';
+  end if;
 
   -- Redeemed again, the code was copied: its grant ends with every token.
   if public.redeem_assistant_code(repeat('1', 64), 'peek_c_aaaaaaaaaaaaaaaaaaaaaa',

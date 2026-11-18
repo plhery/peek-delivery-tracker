@@ -149,6 +149,18 @@ describe('the token endpoint', () => {
     expect(db.redeemAssistantCode).not.toHaveBeenCalled();
   });
 
+  it('passes a requested refresh scope to issuance and reports a refused subset', async () => {
+    const db = service();
+    const values = { grant_type: 'refresh_token', refresh_token: newSecret('refresh'), client_id: clientId, scope: 'parcels:read' };
+    db.refreshAssistantTokens.mockResolvedValueOnce({ userId, grantId, scopes: ['parcels:read'], rotated: true });
+    const refreshed = await exchangeToken(settings, db.client, form(values), now);
+    expect(await refreshed.json()).toMatchObject({ scope: 'parcels:read' });
+    expect(db.refreshAssistantTokens).toHaveBeenCalledWith(expect.objectContaining({ scopes: ['parcels:read'] }));
+    db.refreshAssistantTokens.mockResolvedValueOnce('invalid_scope');
+    const refused = await exchangeToken(settings, db.client, form({ ...values, scope: 'parcels:edit' }), now);
+    expect(await refused.json()).toMatchObject({ error: 'invalid_scope' });
+  });
+
   it('gives a new refresh token only when the grant rotates them', async () => {
     const db = service();
     const presented = newSecret('refresh');

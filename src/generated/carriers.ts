@@ -2580,6 +2580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#3100e6"
     },
     {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "ywe-sendungsverfolgung",
+      "title": "YWE (YanwenExpress) Sendungsverfolgung: Nummer & Status",
+      "name": "YWE",
+      "color": "#055aa1"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "jd-logistics-sendungsverfolgung",
@@ -3278,6 +3286,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0b8f91"
     },
     {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "suivi-ywe",
+      "title": "Suivi YWE (YanwenExpress)\u00a0: numéro, scans et aide",
+      "name": "YWE",
+      "color": "#055aa1"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "suivi-colis-jd-logistics",
@@ -3704,6 +3720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "tracciamento-juxi-express",
+      "title": "Tracciamento Juxi Express: numero JXC, consegna, dogana",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-tracking",
@@ -3854,6 +3878,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "HYWL tracking: numero TRK e stati di Huiyi Logistics",
       "name": "Huiyi Logistics",
       "color": "#0b8f91"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "tracciamento-ywe",
+      "title": "Tracciamento YWE (YanwenExpress): numero, stati e aiuto",
+      "name": "YWE",
+      "color": "#055aa1"
     },
     {
       "id": "chunghwa-post",
@@ -4290,6 +4322,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "seguimiento-juxi-express",
+      "title": "Seguimiento Juxi Express: número JXC, reparto y aduanas",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "lingdong",
       "catalog": "lingdong",
       "slug": "lingdong-seguimiento",
@@ -4448,6 +4488,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Sending seguimiento: número, estados y teléfono",
       "name": "Sending",
       "color": "#e52021"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "seguimiento-ywe",
+      "title": "Seguimiento YWE (YanwenExpress): número, estados y ayuda",
+      "name": "YWE",
+      "color": "#055aa1"
     },
     {
       "id": "jd-logistics",
@@ -4994,6 +5042,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GEODIS Polónia: número PL, estados e entrega",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "seguimento-ywe",
+      "title": "Seguimento YWE (YanwenExpress): número, estados e ajuda",
+      "name": "YWE",
+      "color": "#055aa1"
     },
     {
       "id": "jd-logistics",
@@ -5598,6 +5654,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Polska (Pekaes): śledzenie przesyłki i statusy",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "ywe",
+      "catalog": "ywe",
+      "slug": "sledzenie-ywe",
+      "title": "Śledzenie YWE (YanwenExpress): numer, statusy i pomoc",
+      "name": "YWE",
+      "color": "#055aa1"
     },
     {
       "id": "jd-logistics",

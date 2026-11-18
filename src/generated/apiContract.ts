@@ -31819,7 +31819,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^JCZ\\d{10}DH$",
+        "pattern": "^JCZ\\d{10}(?:DH|IN)$",
         "confidence": "high"
       }
     ],

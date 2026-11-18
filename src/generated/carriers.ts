@@ -2564,6 +2564,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#be2c33"
     },
     {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-polen-sendungsverfolgung",
+      "title": "GEODIS Polen Sendungsverfolgung: PL-Nummer & Zustellung",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -3222,6 +3230,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#be2c33"
     },
     {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-pologne-suivi",
+      "title": "GEODIS Pologne suivi\u00a0: numéro PL, statuts et livraison",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
+    },
+    {
       "id": "hywl",
       "catalog": "hywl",
       "slug": "hywl-suivi-colis",
@@ -3704,6 +3720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "tracciamento-yto-express",
+      "title": "Tracciamento YTO Express: numero YT, stati e consegna",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "tracciamento-pengyou",
@@ -3758,6 +3782,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Shouwu tracking: numero SWECN…YQ, stati e chi consegna",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-polonia-tracciamento",
+      "title": "Tracciamento GEODIS Polonia: numero PL, stati e consegna",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
     },
     {
       "id": "hywl",
@@ -4322,6 +4354,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#be2c33"
     },
     {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-polonia-seguimiento",
+      "title": "Seguimiento GEODIS Polonia: número PL, estados y entrega",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
+    },
+    {
       "id": "sending",
       "catalog": "sending",
       "slug": "sending-seguimiento",
@@ -4780,6 +4820,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "seguimento-yto-express",
+      "title": "Seguimento YTO Express: número YT, estados e entrega",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "seguimento-pengyou",
@@ -4834,6 +4882,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Shouwu: número SWECN…YQ, estados e entrega",
       "name": "Shouwu International",
       "color": "#be2c33"
+    },
+    {
+      "id": "geodis-pl",
+      "catalog": "geodis-pl",
+      "slug": "geodis-polonia-rastreio",
+      "title": "Rastreio GEODIS Polónia: número PL, estados e entrega",
+      "name": "GEODIS Poland",
+      "color": "#3100e6"
     },
     {
       "id": "xinghe-freight",
@@ -5342,6 +5398,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SF Express: numer listu, statusy, cło i dostawa",
       "name": "SF Express",
       "color": "#dc1e32"
+    },
+    {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "sledzenie-yto-express",
+      "title": "Śledzenie YTO Express: numer YT, statusy i dostawa",
+      "name": "YTO Express",
+      "color": "#4d148c"
     },
     {
       "id": "pengyou",

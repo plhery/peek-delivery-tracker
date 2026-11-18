@@ -611,7 +611,8 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertTrue(device.list()[0].hasNewUpdate)
         XCTAssertTrue(DeviceParcels(client: nil, storage: storage).list()[0].hasNewUpdate, "The mark waits for the next launch")
 
-        XCTAssertFalse(try device.markSeen(id: id).hasNewUpdate)
+        XCTAssertTrue(try device.markSeen(id: id, newsAt: "2026-11-15T09:59:59Z").hasNewUpdate)
+        XCTAssertFalse(try device.markSeen(id: id, newsAt: XCTUnwrap(device.list()[0].newsAt)).hasNewUpdate)
         XCTAssertFalse(device.list()[0].hasNewUpdate)
         XCTAssertEqual(calls.all, ["read 22222222222A k"], "What was seen without an account stays on the device")
         XCTAssertFalse(DeviceParcels(client: nil, storage: storage).list()[0].hasNewUpdate)
@@ -701,7 +702,7 @@ final class DeviceParcelTests: XCTestCase {
         now += DeviceParcels.fresh
         try await device.refresh()
         XCTAssertTrue(device.list()[0].hasNewUpdate)
-        XCTAssertFalse(try device.markSeen(id: id).hasNewUpdate)
+        XCTAssertFalse(try device.markSeen(id: id, newsAt: XCTUnwrap(device.list()[0].newsAt)).hasNewUpdate)
     }
 
     func testTroubleKeepsWhatTheDeviceHas() async {

@@ -257,7 +257,9 @@ class NewUpdateTests {
         val storage = keptBefore(publicPackage(newsAt = scanned, scans = 2), seenNewsAt = opened)
         val device = guestDevice(storage, backgroundScope)
         assertTrue(device.list().single().hasNewUpdate)
-        device.markSeen(parcelId)
+        device.markSeen(parcelId, opened)
+        assertTrue(device.list().single().hasNewUpdate)
+        device.markSeen(parcelId, scanned)
         assertFalse(device.list().single().hasNewUpdate)
         assertFalse(guestDevice(storage, backgroundScope).list().single().hasNewUpdate)
     }

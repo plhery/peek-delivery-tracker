@@ -387,33 +387,33 @@ final class ParcelStore: ObservableObject {
     /// read. A read of the list in flight lands all the same, so the page shows the scans it brings, seen as late as
     /// this device marked the parcel. A parcel with no news is left alone, and a mark the server could not take comes
     /// back with the next read of the list.
-    func markSeen(_ id: UUID) async {
-        guard let parcel = parcels.first(where: { $0.id == id }), parcel.hasNewUpdate else { return }
+    func markSeen(_ id: UUID, newsAt: String?) async {
+        guard let news = newsAt, let parcel = parcels.first(where: { $0.id == id }), parcel.hasNewUpdate else { return }
         if isGuest {
-            if let seen = try? device.markSeen(id: id) { upsert(seen) }
+            if let seen = try? device.markSeen(id: id, newsAt: news) { upsert(seen) }
             return
         }
         if isDemo {
-            if let seen = try? demo.markSeen(id: id) { upsert(seen) }
+            if let seen = try? demo.markSeen(id: id, newsAt: news) { upsert(seen) }
             return
         }
         let generation = session.generation
         // Seen as of its news, whatever this device's clock says, and so the server stores it.
-        let news = parcel.newsAt
-        if let news { seeHere(id, news) }
+        seeHere(id, news)
         do {
             let seenAt = try await api.markSeen(id: id, newsAt: news)
             if generation == session.generation { seeHere(id, seenAt) }
         } catch {
-            if generation == session.generation { seenHere[id] = nil }
+            if generation == session.generation, seenHere[id] == news { seenHere[id] = nil }
         }
     }
 
     /// The account's parcel is seen at `seenAt` on this device. Unlike the list's other changes this one lets a read
     /// of the list in flight land, which then keeps it (`seenAsHere`): its newer scans show on the open page.
     private func seeHere(_ id: UUID, _ seenAt: String) {
+        guard let index = parcels.firstIndex(where: { $0.id == id }), let mark = DateParser.date(seenAt),
+              parcels[index].seenAt.flatMap(DateParser.date).map({ $0 <= mark }) ?? true else { return }
         seenHere[id] = seenAt
-        guard let index = parcels.firstIndex(where: { $0.id == id }) else { return }
         parcels[index].seenAt = seenAt
         persistCache()
     }
@@ -2405,8 +2405,12 @@ final class DemoRepository {
     }
 
     /// The parcel was opened: its made-up scan is news no more.
-    func markSeen(id: UUID) throws -> Parcel {
-        try update(id: id) { $0.seenAt = $0.newsAt }
+    func markSeen(id: UUID, newsAt: String? = nil) throws -> Parcel {
+        try update(id: id) { parcel in
+            guard let news = newsAt ?? parcel.newsAt, let mark = DateParser.date(news),
+                  parcel.seenAt.flatMap(DateParser.date).map({ $0 < mark }) ?? true else { return }
+            parcel.seenAt = news
+        }
     }
 
     func reset() {

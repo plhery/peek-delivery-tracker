@@ -4079,10 +4079,10 @@ extension SessionIsolationTests {
         // Opening a parcel with no news tells the server nothing.
         let log = RequestLog()
         respond(Data("{\"seen_at\":\"2026-11-15T10:05:00.5+00:00\"}".utf8), recording: log)
-        await store.markSeen(quiet.id)
+        await store.markSeen(quiet.id, newsAt: quiet.newsAt)
         XCTAssertTrue(log.requests.isEmpty)
 
-        await store.markSeen(scanned.id)
+        await store.markSeen(scanned.id, newsAt: scanned.newsAt)
         XCTAssertEqual(log.requests.map(\.method), ["POST"])
         XCTAssertEqual(log.requests.first?.path, "/api/packages/\(scanned.id.uuidString)/seen")
         XCTAssertEqual(log.requests.first?.body["news_at"] as? String, "2026-11-15T10:00:00.25+00:00",
@@ -4139,7 +4139,7 @@ extension SessionIsolationTests {
 
         // Opening the parcel clears it in the widget too.
         respond(Data("{\"seen_at\":\"2026-11-15T10:05:00.5+00:00\"}".utf8))
-        await store.markSeen(scanned.id)
+        await store.markSeen(scanned.id, newsAt: scanned.newsAt)
         XCTAssertEqual(marked(), [])
         XCTAssertEqual(shared.snapshot?.parcels.count, 2)
     }
@@ -4157,7 +4157,7 @@ extension SessionIsolationTests {
         await store.load()
 
         offline()
-        await store.markSeen(scanned.id)
+        await store.markSeen(scanned.id, newsAt: scanned.newsAt)
         XCTAssertEqual(store.parcels.first?.hasNewUpdate, false, "The reader has seen it, whatever the network says")
         XCTAssertNil(store.errorMessage, "Opening a parcel is nothing to report on")
 
@@ -4192,7 +4192,7 @@ extension SessionIsolationTests {
         }
         let reading = Task { await store.load() }
         await fulfillment(of: [started], timeout: 2)
-        await store.markSeen(scanned.id)
+        await store.markSeen(scanned.id, newsAt: scanned.newsAt)
         completeRead?(.success((200, answer)))
         await reading.value
 

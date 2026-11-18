@@ -539,8 +539,11 @@ final class DeviceParcels {
     }
 
     /// The parcel was opened on this iPhone: what it tells now is seen. Nothing leaves the device.
-    func markSeen(id: UUID) throws -> Parcel {
-        try update(id) { $0.startSeen() }
+    func markSeen(id: UUID, newsAt: String) throws -> Parcel {
+        try update(id) { entry in
+            guard let mark = DateParser.date(newsAt), entry.openedNews.flatMap(DateParser.date).map({ $0 < mark }) ?? true else { return }
+            entry.openedNews = newsAt
+        }
     }
 
     func setArchived(id: UUID, _ archived: Bool) throws -> Parcel {

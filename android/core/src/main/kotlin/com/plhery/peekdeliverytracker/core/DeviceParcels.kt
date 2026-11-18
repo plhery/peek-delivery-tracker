@@ -1133,10 +1133,13 @@ class DeviceParcels(
     }
 
     /** The parcel was opened on this phone (#72): what it tells now is seen, and its dot goes. Nothing leaves the device. */
-    fun markSeen(id: UUID) {
+    fun markSeen(id: UUID, newsAt: String) {
         val index = entries.indexOfFirst { it.parcel.id == id }
         if (index < 0) return
-        val seen = entries[index].startingSeen()
+        val marked = DateParser.date(newsAt) ?: return
+        val previous = entries[index].seenNewsAt?.let(DateParser::date)
+        if (previous != null && previous >= marked) return
+        val seen = entries[index].copy(seenNewsAt = newsAt)
         if (seen == entries[index]) return
         change(index) { seen }
         save()

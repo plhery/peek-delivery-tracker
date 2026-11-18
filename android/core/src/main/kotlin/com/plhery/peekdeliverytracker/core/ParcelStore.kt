@@ -1612,9 +1612,9 @@ class ParcelStore(
     suspend fun markSeen(parcel: Parcel) {
         val shown = parcels.firstOrNull { it.id == parcel.id } ?: return
         if (!shown.hasNewUpdate) return
-        val news = parcel.newsAt ?: shown.newsAt ?: return
+        val news = parcel.newsAt ?: return
         if (isGuest) {
-            device.markSeen(parcel.id)
+            device.markSeen(parcel.id, news)
             mutationRevision += 1
             parcels = device.list()
             return
@@ -1642,12 +1642,12 @@ class ParcelStore(
      * on the open page.
      */
     private fun seeHere(id: UUID, seenAt: String) {
-        seenHere[id] = seenAt
         val index = parcels.indexOfFirst { it.id == id }
         if (index < 0) return
         val marked = DateParser.date(seenAt) ?: return
         val already = parcels[index].seenAt?.let(DateParser::date)
         if (already != null && already > marked) return
+        seenHere[id] = seenAt
         parcels = parcels.toMutableList().also { it[index] = it[index].copy(seenAt = seenAt) }
         persistCache()
     }

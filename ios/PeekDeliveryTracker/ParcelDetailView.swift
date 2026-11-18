@@ -169,8 +169,8 @@ struct ParcelDetailView: View {
         // The page in front of the reader shows the parcel's news: it is seen, as it opens and whenever more arrives.
         // The store sees it through, also once the page has closed.
         .onChange(of: unseenNews, initial: true) { _, news in
-            guard news != nil, let id = parcel?.id else { return }
-            Task { await store.markSeen(id) }
+            guard let news, let id = parcel?.id else { return }
+            Task { await store.markSeen(id, newsAt: news) }
         }
         .fullScreenCover(isPresented: $showingMap) {
             if let parcel, let atlas {

@@ -1600,8 +1600,8 @@ export class NativePushNotificationService extends AppPushNotificationService {
 
 /**
  * The Android app's notifications, through Firebase Cloud Messaging. Each is a data message
- * the app writes itself (`fcmData`), sent at high priority, kept a day, and collapsed by the
- * key APNs gets as `apns-collapse-id`. Live Activities stay the iPhone's.
+ * the app writes itself (`fcmData`), sent at high priority and kept a day. Parcel and link alerts
+ * queue independently while the device is offline. Live Activities stay the iPhone's.
  */
 export class FcmPushNotificationService extends AppPushNotificationService {
   readonly transport = 'fcm';
@@ -1620,7 +1620,9 @@ export class FcmPushNotificationService extends AppPushNotificationService {
   }
 
   async send(row: JsonObject, payload?: JsonObject, collapseId?: string): Promise<void> {
-    await this.fcm.send(stringField(row, 'token'), fcmData(payload ?? this.eventPayload(row)), collapseKey(row, collapseId));
+    const data = fcmData(payload ?? this.eventPayload(row));
+    const key = data.parcel_id || data.link_id ? '' : collapseKey(row, collapseId);
+    await this.fcm.send(stringField(row, 'token'), data, key);
   }
 
   isExpired(error: unknown): boolean {
@@ -1674,7 +1676,7 @@ export class UnifiedPushError extends Error {
  * The Android app's notifications without Google's services, through UnifiedPush: the same data as FCM's
  * (`fcmData`), as JSON in a Web Push message (aes128gcm, signed with the server's VAPID key) to the endpoint of
  * the distributor the phone chose. It is sent at high urgency, kept a day, and replaced by a later one with the
- * same Topic, a hash of the collapse key APNs and FCM get. The endpoint names any host: each send resolves it
+ * same Topic, a hash of the native collapse key. The endpoint names any host: each send resolves it
  * and connects only to public addresses (`postToPublicEndpoint`), and follows no redirect.
  */
 export class UnifiedPushNotificationService extends AppPushNotificationService {

@@ -83,5 +83,6 @@ export async function readAuthorizationRequest(
   const resource = parameters.get('resource');
   if (resource !== null && !sameResource(settings, resource)) return back('invalid_target', `Tokens are only issued for ${settings.resource}`);
   const named = knownScopes(parameters.get('scope'));
+  if (parameters.has('scope') && !named.length) return back('invalid_scope', 'No requested parcel scope is supported');
   return { request: { client, redirectUri, state, challenge, scopes: named.length ? named : [...SCOPES] } };
 }

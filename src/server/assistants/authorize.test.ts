@@ -114,7 +114,7 @@ describe('an authorization request', () => {
     }
   });
 
-  it('drops the scopes it does not know, and asks for every one when none is known', async () => {
+  it('drops the scopes it does not know, and asks for every one only when scope is omitted', async () => {
     const scopes = async (scope: string | null) => {
       const read = await readAuthorizationRequest(settings, service, query({ scope }));
       return 'request' in read ? read.request.scopes : null;
@@ -122,7 +122,8 @@ describe('an authorization request', () => {
     expect(await scopes('openid parcels:write offline_access')).toEqual(['parcels:write']);
     expect(await scopes('parcels:write parcels:read')).toEqual(['parcels:read', 'parcels:write']);
     expect(await scopes('parcels:edit parcels:read')).toEqual(['parcels:read', 'parcels:edit']);
-    expect(await scopes('openid profile')).toEqual(['parcels:read', 'parcels:write', 'parcels:edit']);
+    expect((await returned({ scope: 'openid profile' })).error).toBe('invalid_scope');
+    expect((await returned({ scope: '' })).error).toBe('invalid_scope');
     expect(await scopes(null)).toEqual(['parcels:read', 'parcels:write', 'parcels:edit']);
   });
 });

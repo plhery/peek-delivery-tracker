@@ -14,9 +14,9 @@ Lingdong publishes no number format. The waybills its tracker answers are SZLD f
 
 | Number | What it is |
 | --- | --- |
-| `SZLD1234567890` | SZLD and ten digits: a Lingdong International waybill. |
-| `SZLD123456789` | Only nine digits: not a Lingdong shape. Check for a missing digit. |
-| `LX000000005CN` | Two letters, nine digits and CN: a China Post number, not Lingdong's. |
+| `SZLD4829105736` | SZLD and ten digits: a Lingdong International waybill. |
+| `SZLD482910573` | Only nine digits: not a Lingdong shape. Check for a missing digit. |
+| `LX482910576CN` | Two letters, nine digits and CN: a China Post number, not Lingdong's. |
 
 Lower case and spaces don't matter when you paste the number into Peek.
 
@@ -71,7 +71,7 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 
 ## Lingdong contact number and customer service
 
-As listed on lingdong56.com on 27 October 2026, in Chinese only:
+As listed on lingdong56.com, in Chinese only:
 
 - **Phone**: two Chinese mobile numbers, in the site's header and on its contact page (联系我们). No hours or languages are given.
 - **QQ**: the site's chat buttons for quotes, bulk business and problem parcels, claims and complaints all open a chat on QQ, a Chinese messaging app.
@@ -83,11 +83,11 @@ Lingdong lists no email and no office outside China. For anything about your ord
 
 [Peek](/) names Lingdong International at once for an SZLD number, a shape no other carrier in its catalog uses. A link to Lingdong's tracker with `documentCode=` and the number in it can be pasted too.
 
-Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Every wording shows as Lingdong writes it, Chinese included, since none matches Peek's own words. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek never shows a line written more than 12 hours before the time it gives, or more than 6 hours before it in the same second as such a line, or one from the tracking system's custom-track feature (轨迹定制), which can place a parcel abroad before it reaches the airport: these are forecasts, not scans. When it holds back lines written ahead, Peek says so under the parcel's status until the parcel is delivered or returned: "Lingdong International’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Such a line never counts as a scan: it changes no status and sends no alert. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
+Peek reads Lingdong's own tracker and shows the status, each scan with its place, and the destination country when Lingdong's record gives it. Of a line in Chinese followed by English, Peek shows the English half; the Chinese-only line `货物电子信息已经收到` and Poste Italiane's Italian scans show as written. Scan times are read on China's clock, as the tracker gives no time zone; a line dated later than the moment Peek reads it waits until then. Peek also holds back a line written more than 12 hours before the time it gives, or more than 6 hours before it in the same second as such a line, or one from the tracking system's custom-track feature (轨迹定制), which can place a parcel abroad before it reaches the airport: these are forecasts, not scans. Once their time has passed, Peek shows such lines greyed under "Written in advance by Lingdong International", and says so under the parcel's status until the parcel is delivered or returned: "Lingdong International’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it shows them greyed. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." (Until one is shown, it says "so it leaves them out".) Such a line never counts as a scan: it changes no status and sends no alert. Peek leaves out the recipient's name the tracker shows, and shows no expected delivery date: Lingdong gives none.
 
 Unless Lingdong's record names a delivery carrier Peek can hand the parcel over to, the parcel's history in Peek stops where Lingdong's does. The only such carrier Peek recognises in it is [Swiss Post](carrier:swiss-post), when the record names Swiss Post as its line, holds a Swiss Post number and gives no destination outside Switzerland and Liechtenstein: the parcel then shows "Delivery with Swiss Post" (or "Announced to Swiss Post, not received yet" while Swiss Post has only the announcement of the parcel, with no scan of its own), and Peek follows it there once Swiss Post has a scan at least as recent as Lingdong's newest, keeping Lingdong's scans. Lingdong doesn't say it ships with Swiss Post. If the seller gives you the local carrier's number, add it as a parcel of its own.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes on the day the parcel shows "Out for delivery" (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Lingdong's or Swiss Post's own tracker answers (through tracking services, every 15 minutes): of the lines in Lingdong's tracker, only Poste Italiane's `In consegna` gives that status, and Swiss Post's scans can after a hand-over. After 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes on the day the parcel shows "Out for delivery" (from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens), while Lingdong's or Swiss Post's own tracker answers (through tracking services, up to every 15 minutes): of the lines in Lingdong's tracker, only Poste Italiane's `In consegna` gives that status, and Swiss Post's scans can after a hand-over. Otherwise, and after 12 hours without a new scan while the parcel shows "Label created" or "Received by carrier", or two days otherwise, it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't contact Lingdong or the seller for you.
 
 ## Questions about Lingdong tracking
 

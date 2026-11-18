@@ -14,10 +14,10 @@ Un numéro Speedaf commence par le code du pays de destination : MA pour le Maro
 
 | Numéro | Ce que c'est |
 | --- | --- |
-| `MA000000000R` | Code pays, 9 chiffres et une lettre, le plus souvent R, parfois E. |
-| `MA000000000000` | Code pays et 12 chiffres. |
-| `PK000000000000T` | Pareil, avec un T à la fin. |
-| `LP00000000000000` | Pas Speedaf : la référence [Cainiao](carrier:cainiao) d'une commande AliExpress. |
+| `MA482910573R` | Code pays, 9 chiffres et une lettre, le plus souvent R, parfois E. |
+| `MA482910573649` | Code pays et 12 chiffres. |
+| `PK482910573649T` | Pareil, avec un T à la fin. |
+| `LP48291057364918` | Pas Speedaf : la référence [Cainiao](carrier:cainiao) d'une commande AliExpress. |
 
 Le suivi de speedaf.com accepte jusqu'à 20 numéros, un par ligne. Tape-les en majuscules : il ne reconnaît pas les minuscules. Pas de numéro ? Lis [où trouver son numéro de suivi](guide:find-tracking-number) ou [les commandes AliExpress](guide:aliexpress-orders).
 
@@ -109,9 +109,9 @@ Le centre d'aide de Speedaf donne aussi une ligne pour les autres pays de sa lis
 
 Peek lit directement le suivi de Speedaf : statut, historique, pays de destination et heure de livraison. Chaque scan est à l'heure de son site (UTC+8 dans les entrepôts chinois, puis celle de ton pays), affichée dans le fuseau horaire de ton appareil ; sur peektracker.com et dans l'application iPhone, une ligne sous l'historique nomme ce fuseau (« Heures dans ton fuseau horaire : … »). Les sites ne sont nommés que dans les lignes, donc pas de carte, et Speedaf ne donne pas de date de livraison prévue. Si Speedaf connaît le numéro sans montrer de scan, comme pour certains colis anciens, Peek continue de vérifier et affiche « En attente de Speedaf » sur peektracker.com, ou « En attente du premier scan de Speedaf » pour un numéro à 12 chiffres si tu n'as pas choisi Speedaf. Pour un colis attribué à Speedaf, si deux jours plus tard Speedaf ne montre toujours aucun scan et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
 
-Les lignes s'affichent telles qu'écrites, en anglais sinon en chinois, sans les noms du livreur, de l'agent et du signataire ni le téléphone du livreur. Peek écarte aussi la preuve de livraison, le lien de paiement des droits et le nombre de colis, et ne suit que ton numéro, pas les autres colis de la même lettre de transport.
+Les lignes s'affichent telles qu'écrites, en anglais sinon en chinois, sans les noms du livreur et de l'agent ni le téléphone du livreur. Le nom de la personne qui a signé reste dans le scan de livraison pour toi ; un lien partagé le masque et affiche ce scan comme `Delivered`. Peek écarte aussi la preuve de livraison, le lien de paiement des droits et le nombre de colis, et ne suit que ton numéro, pas les autres colis de la même lettre de transport.
 
-Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Speedaf qui répond ; via des services de suivi, toutes les 15 minutes). Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Ses notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni payer les droits, ni reprogrammer une livraison, ni contacter Speedaf ou la boutique à ta place.
+Tant que tu gardes le colis ouvert, ou le jour de sa livraison avec les notifications activées, Peek vérifie jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes une fois le colis en livraison (le jour même, dès 6 h, heure locale, et tant que c'est le suivi de Speedaf qui répond ; via des services de suivi, jusqu'à toutes les 15 minutes) ; sinon, toutes les heures. Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Ses notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Il ne peut ni payer les droits, ni reprogrammer une livraison, ni contacter Speedaf ou la boutique à ta place.
 
 ## Questions sur le suivi Speedaf
 

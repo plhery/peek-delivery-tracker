@@ -14,10 +14,10 @@ A Speedaf number starts with the destination's country code: NG for Nigeria, KE 
 
 | Number | What it is |
 | --- | --- |
-| `NG000000000R` | Country code, 9 digits and a letter, usually R, sometimes E. |
-| `KE000000000000` | Country code and 12 digits. |
-| `PK000000000000T` | The same with a T at the end. |
-| `LP00000000000000` | Not Speedaf: a [Cainiao](carrier:cainiao) reference from AliExpress. |
+| `NG482910573R` | Country code, 9 digits and a letter, usually R, sometimes E. |
+| `KE482910573649` | Country code and 12 digits. |
+| `PK482910573649T` | The same with a T at the end. |
+| `LP48291057364918` | Not Speedaf: a [Cainiao](carrier:cainiao) reference from AliExpress. |
 
 Speedaf's tracker takes up to 20 numbers at once, one per line. Type them in capitals: it reads lower case as unknown. No number at all? See [how to find a tracking number](guide:find-tracking-number) or [AliExpress orders](guide:aliexpress-orders).
 
@@ -109,9 +109,9 @@ Speedaf's Help Center adds a hotline for the other countries on its list: Kazakh
 
 Peek reads Speedaf's own tracking: the status, the history, the destination country and the delivery time. Each scan carries its site's clock, China's in the warehouses, then your country's, and Peek shows it in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. Speedaf names its sites only inside the lines, so there's no map, and it gives no expected delivery date. If Speedaf knows the number but shows no scans, as with some older parcels, Peek shows "Waiting for Speedaf" on peektracker.com, or "Waiting for Speedaf’s first scan" for a 12-digit number that isn't filed under Speedaf, and keeps checking. If a parcel filed under Speedaf still has no scan from Speedaf two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
 
-Speedaf's lines appear as written, in English or else Chinese, minus the courier's, clerk's and signer's names and the courier's phone. Peek also leaves out the proof of delivery, the duty payment link and the box count, and follows only the number you added, not a waybill's other boxes. Speedaf delivers itself, so there's no second carrier.
+Speedaf's lines appear as written, in English or else Chinese, minus the courier's and clerk's names and the courier's phone. The name of whoever signed for the parcel stays in the delivery scan for you; a shared link hides it and shows that scan as `Delivered`. Peek also leaves out the proof of delivery, the duty payment link and the box count, and follows only the number you added, not a waybill's other boxes. Speedaf delivers itself, so there's no second carrier.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Speedaf scans the parcel out for delivery, while Speedaf's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". It can't pay duty, rebook a delivery or contact Speedaf or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Speedaf scans the parcel out for delivery, while Speedaf's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps only or "Delivery only". It can't pay duty, rebook a delivery or contact Speedaf or the shop for you.
 
 ## Questions about Speedaf tracking
 

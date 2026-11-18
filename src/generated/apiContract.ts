@@ -26426,7 +26426,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "paxel"
     },
     "trackingUrlTemplate": "https://paxel.co/id/lacak-pengiriman?awb_req={trackingNumber}",
     "linkRules": [

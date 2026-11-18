@@ -148,7 +148,33 @@ function told(text: string): string {
 }
 
 /** What the pairing reads of a row. */
-type Scan = { id: string; stage: unknown; source: string; at: number; text: string; country: string | null; words: string[]; placed: boolean };
+type Scan = {
+  id: string; stage: unknown; source: string; at: number; text: string; country: string | null; words: string[]; placed: boolean;
+  place: string;
+};
+
+/**
+ * A handed-over parcel's universal rows that tell a carrier's row over again, each with that row's id: the same
+ * instant, stage, words and place (China Post's acceptance, and the universal row China Post's earlier answer took
+ * over). The row they go under is the earlier carrier's, else the first carrier's by id, and it pairs for them all:
+ * one scan stored twice must not use up the pair of the new carrier's row of it.
+ */
+function sameRows(scans: readonly Scan[], earlier: string): Map<string, string> {
+  const groups = new Map<string, Scan[]>();
+  for (const scan of scans) {
+    if (told(scan.text) === '') continue;
+    const key = JSON.stringify([scan.at, scan.stage, told(scan.text), scan.place]);
+    groups.set(key, [...groups.get(key) ?? [], scan]);
+  }
+  const rank = (scan: Scan) => scan.source === earlier ? 0 : scan.source !== UNIVERSAL_SOURCE ? 1 : 2;
+  const same = new Map<string, string>();
+  for (const rows of groups.values()) {
+    const [lead, ...others] = [...rows].sort((a, b) => rank(a) - rank(b) || a.id.localeCompare(b.id));
+    if (rank(lead!) === 2) continue;
+    for (const other of others) if (other.source === UNIVERSAL_SOURCE) same.set(other.id, lead!.id);
+  }
+  return same;
+}
 
 /**
  * Whether two scans at one second are one: places that do not conflict and, when the second is a minute's first,
@@ -173,22 +199,26 @@ function sameSecond(copy: Scan, scan: Scan): boolean {
  * stage, when it follows every such scan by up to three hours but not by whole hours. Last, a row of the earlier
  * carrier that names no place and is dated to the second repeats the new carrier's row one to three whole hours away,
  * to the second, in any stage.
- * A scan is in one pair at most, so two scans of one minute that the earlier carrier tells once stay two rows. After
- * these, a third carrier's row no pair holds repeats the new carrier's at its second and stage (`otherCarrierCopies`),
- * which may have the earlier carrier's copy under it too.
+ * A scan is in one pair at most, so two scans of one minute that the earlier carrier tells once stay two rows. A
+ * universal row that tells a carrier's row again (`sameRows`) goes under it first, and that row pairs for both. After
+ * these, a third carrier's row no pair holds repeats the new carrier's at its second and stage (`otherCarrierCopies`).
+ * A scan may so have several rows under it, and a row under it rows of its own: eventPlaces.ts shows them as one step.
  */
 export function relayCopies(row: JsonObject): Map<string, string> {
   const earlier = earlierCarrier(row);
   const pairs = new Map<string, string>();
   if (!Array.isArray(row.tracking_events)) return pairs;
-  const scans = row.tracking_events.filter(isRecord)
+  const rows = row.tracking_events.filter(isRecord)
     .map((event): Scan => ({
       id: String(event.id), stage: event.stage, source: source(event), at: Date.parse(String(event.occurred_at)),
       text: String(event.description ?? '').trim(), country: countryOnly(event.location), words: placeWords(event),
       placed: typeof event.location === 'string' && event.location.trim() !== '',
+      place: typeof event.location === 'string' ? event.location.trim().toLowerCase() : '',
     }))
     .filter((scan) => Number.isFinite(scan.at) && scan.source !== '' && scan.source !== 'app');
-  if (!earlier) return otherCarrierCopies(scans, currentCarrier(row));
+  if (!earlier) return otherCarrierCopies(rows, currentCarrier(row));
+  const same = sameRows(rows, earlier);
+  const scans = rows.filter((scan) => !same.has(scan.id));
   const candidates = scans.filter((copy) => copy.source === earlier).flatMap((copy) => scans
     .filter((scan) => scan.source !== earlier
       && ((scan.stage === copy.stage && Math.abs(scan.at - copy.at) <= RELAY_WINDOW_MS) || sameSecond(copy, scan)))
@@ -224,6 +254,7 @@ export function relayCopies(row: JsonObject): Map<string, string> {
   // A third carrier's rows that no pair holds tell the current carrier's scans as a carrier asked beside it does.
   const third = scans.filter((scan) => scan.source === current || (scan.source !== earlier && !paired.has(scan.id)));
   for (const [copy, scan] of otherCarrierCopies(third, current)) pairs.set(copy, scan);
+  for (const [row, lead] of same) pairs.set(row, lead);
   return pairs;
 }
 

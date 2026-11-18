@@ -300,7 +300,8 @@ function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
  * Nor does a copy that alone tells a problem beside the scan's routine step (relayCopies.ts), nor one in the scan's stage and words that names
  * more of the place, nor one further on than a scan that only tells again, in its stage and words, a step its carrier
  * told before: La Poste tells Posti's deposit again whenever Posti's data reaches it, at the minute of Posti's sort.
- * The apps show the lower row's words, not its place.
+ * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
+ * one on top.
  */
 function relayLeads(events: readonly JsonObject[], relays: Map<string, string>): Map<string, string> {
   const byId = new Map(events.map((event) => [String(event.id), event]));
@@ -315,8 +316,28 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>):
     || copyTellsProblem(copy, scan)
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
     || (further(copy, scan) && toldBefore(scan));
-  return new Map([...relays].map(([copy, scan]): [string, string] => (
-    leads(byId.get(copy)!, byId.get(scan)!) ? [scan, copy] : [copy, scan])));
+  // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
+  // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
+  const top = (id: string) => {
+    const seen = new Set<string>();
+    let at = id;
+    while (relays.has(at) && !seen.has(at)) {
+      seen.add(at);
+      at = relays.get(at)!;
+    }
+    return at;
+  };
+  const steps = new Map<string, string[]>();
+  for (const copy of relays.keys()) {
+    const scan = top(copy);
+    if (scan !== copy) steps.set(scan, [...steps.get(scan) ?? [], copy]);
+  }
+  const shown = new Map<string, string>();
+  for (const [scan, copies] of steps) {
+    const head = copies.find((copy) => leads(byId.get(copy)!, byId.get(scan)!)) ?? scan;
+    for (const id of [scan, ...copies]) if (id !== head) shown.set(id, head);
+  }
+  return shown;
 }
 
 /**

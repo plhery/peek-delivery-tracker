@@ -132,6 +132,31 @@ describe('relayCopies', () => {
     ]))).toEqual(new Map([['accepted-copy', 'accepted'], ['accepted-post', 'accepted']]));
   });
 
+  it('puts a scan two sources stored the same under one row first, and pairs that row', () => {
+    const told = (id: string, source: string, stage: string, at: string, location = 'Example Town') => ({
+      ...scan(id, source, stage, at), description: `Fixture ${stage}`, location,
+    });
+    // The earlier carrier's acceptance, stored again from a universal provider, and the new carrier's own record of it.
+    expect(relayCopies(handedOver([
+      told('accepted', 'swiss-post', 'accepted', '2026-09-08T10:00:41Z'),
+      told('accepted-copy', 'dhl', 'accepted', '2026-09-08T10:00:00Z'),
+      told('accepted-provider', 'unknown', 'accepted', '2026-09-08T10:00:00Z'),
+    ]))).toEqual(new Map([['accepted-copy', 'accepted'], ['accepted-provider', 'accepted-copy']]));
+    // Another place or other words are another row; so are two carriers' rows, and two universal providers' rows.
+    for (const other of [
+      told('sorted-elsewhere', 'unknown', 'in_transit', '2026-09-09T10:00:00Z', 'Other City'),
+      { ...told('sorted-reworded', 'unknown', 'in_transit', '2026-09-09T10:00:00Z'), description: 'Fixture sorting' },
+      told('sorted', 'swiss-post', 'in_transit', '2026-09-09T10:00:00Z'),
+    ]) {
+      expect(relayCopies(handedOver([told('sorted-copy', 'dhl', 'in_transit', '2026-09-09T10:00:00Z'), other])))
+        .toEqual(new Map([['sorted-copy', other.id]]));
+    }
+    expect(relayCopies(handedOver([
+      told('round', 'unknown', 'out_for_delivery', '2026-09-10T07:00:00Z'),
+      told('round-again', 'unknown', 'out_for_delivery', '2026-09-10T07:00:00Z'),
+    ]))).toEqual(new Map());
+  });
+
   it('pairs a row of a carrier keeping minutes with the other carrier\'s row of that minute, in any stage', () => {
     const placed = (id: string, source: string, stage: string, at: string, location?: string) => ({ ...scan(id, source, stage, at), location });
     const parcel = (tracking_events: object[]) => ({

@@ -986,10 +986,14 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the earlier carrier that names no place, dated to the second (off a minute's first second, or
   with milliseconds), one to three whole hours to the second from a row of the new carrier, in
   any stage, is that row on another clock (CTT Express tells CTT's scans an hour early), and is
-  served with `relay_of` its id after every other pairing. The apps show the words of the row with
+  served with `relay_of` its id after every other pairing. A universal provider's row in a carrier's
+  row's instant, stage, words and place (the one China Post's earlier answer took over, beside China
+  Post's own) goes under that row before any pairing, and that row pairs for both. The apps show the words of the row with
   `relay_of` as a line under the other row instead of a step of its own, unless they are the other
   row's words: a row in those words spelt otherwise, case, spacing and punctuation aside (4PX's
   "designated facility" for SpeedX's "Designated Facility"), is served in the other row's spelling.
+  A scan several rows tell is one step: the first of its copies that would go on top does, else the
+  scan, and every other row of it is served with `relay_of` that one, never a row with `relay_of` itself.
   An earlier carrier's copy whose words read as a stage neither row is in, or that tells the scan's
   second (not a minute's first) and stage in words sharing none of three letters or more, or adding
   none to the scan's words and place, or that tells the scan's stage within a minute of it, a minute's

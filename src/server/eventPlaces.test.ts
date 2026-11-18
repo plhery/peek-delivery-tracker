@@ -701,6 +701,28 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('serves every row of a scan told several times under the one row on top, and no row under a row that is under another', () => {
+    // Synthetic rows: EMS carries on a Parcelforce parcel and Australia Post tells EMS's scan too. Parcelforce's copy
+    // alone names the place, and a universal provider stored that copy again.
+    const scan = (id: string, source: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, null, '2026-11-13T13:13:00Z'), stage: 'accepted', description: `Fixture ${id}`, provider_event_id: `${source}:${id}`, ...extra,
+    });
+    const row = {
+      id: 'parcel', carrier: 'parcelforce', carrier_data: { original_carrier: 'parcelforce', active_tracking_carrier: 'ems' }, tracking_events: [
+        scan('accepted', 'ems'),
+        scan('accepted-post', 'australia-post'),
+        scan('accepted-copy', 'parcelforce', { occurred_at: '2026-11-13T13:13:33Z', location: 'Example Town' }),
+        scan('accepted-provider', 'unknown', {
+          occurred_at: '2026-11-13T13:13:33Z', location: 'Example Town', description: 'Fixture accepted-copy', universal_provider: 'ParcelsApp',
+        }),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
+      'accepted-copy': null, accepted: 'accepted-copy', 'accepted-post': 'accepted-copy', 'accepted-provider': 'accepted-copy',
+    });
+  });
+
   it('leaves out a provider\'s copy of a confirmed carrier\'s scan, and pairs relay copies without it', () => {
     const scan = (id: string, source: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), provider_event_id: `${source}:${id}`, ...extra,

@@ -9,10 +9,17 @@ final class DeviceParcelTests: XCTestCase {
         var parcels: [DeviceParcel] = []
         var keys: [String: String] = [:]
         var forgetting: [String: String] = [:]
+        var unqueued: Set<String> = []
+        func loadUnqueuedForgetIDs() -> Set<String> { unqueued }
+        func saveUnqueuedForgetIDs(_ ids: Set<String>) throws { unqueued = ids }
+        var failQueueWrite = false
         func load() -> (parcels: [DeviceParcel], keys: [String: String]) { (parcels, keys) }
         func save(_ parcels: [DeviceParcel], keys: [String: String]) { self.parcels = parcels; self.keys = keys }
         func loadForgetting() -> [String: String] { forgetting }
-        func saveForgetting(_ links: [String: String]) { forgetting = links }
+        func saveForgetting(_ links: [String: String]) throws {
+            if failQueueWrite { throw AuthenticationError.sessionSaveFailed }
+            forgetting = links
+        }
     }
 
     /// What the service was asked, in order.
@@ -1487,6 +1494,23 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(storage.keys, keys)
     }
 
+    func testRecoveryUpgradesViewerWithOwnerLink() async throws {
+        let id = UUID(), owner = "22222222222A", viewer = "22222222222B"
+        let storage = Memory()
+        storage.keys = [owner: key]
+        let owned = answer(owner, id)
+        let device = DeviceParcels(client: client(Calls(), read: { _ in owned }), storage: storage)
+        _ = try device.follow(PublicParcelResponse(link: reader(viewer), package: package(id)), key: nil, label: "Lamp")
+
+        try await device.refresh()
+
+        let reopened = DeviceParcels(client: nil, storage: storage)
+        XCTAssertEqual(reopened.list().map(\.label), ["Lamp"])
+        XCTAssertNil(reopened.viewerLink(id: id))
+        XCTAssertEqual(storage.parcels.map(\.linkID), [owner])
+        XCTAssertEqual(storage.keys, [owner: key])
+    }
+
     func testAFileThatCannotBeReadAtAllIsReadAgainWithItsKeys() async throws {
         let first = UUID(), second = UUID()
         let keys = ["22222222222A": key, "22222222222B": key]
@@ -1606,6 +1630,78 @@ final class DeviceParcelTests: XCTestCase {
         try await reopened.refresh(all: true)
         XCTAssertEqual(earlyCalls.all, ["forget 22222222222A"])
         XCTAssertEqual(early.keys, [:])
+    }
+
+    func testFailedForgetQueueWriteKeepsActiveKeyUntilRetry() async throws {
+        let storage = Memory()
+        let id = UUID(), linkID = "22222222222A"
+        var offline = client(Calls())
+        offline.forget = { _, _ in throw URLError(.notConnectedToInternet) }
+        let device = DeviceParcels(client: offline, storage: storage)
+        _ = try device.follow(answer(linkID, id), key: key, label: nil)
+        storage.failQueueWrite = true
+
+        await device.forget(id: id)
+
+        XCTAssertTrue(storage.forgetting.isEmpty)
+        XCTAssertEqual(storage.keys, [linkID: key])
+        XCTAssertEqual(storage.unqueued, [linkID])
+        let restarted = DeviceParcels(client: offline, storage: storage)
+        XCTAssertTrue(restarted.isEmpty)
+        storage.failQueueWrite = false
+        try await restarted.refresh()
+        XCTAssertTrue(storage.unqueued.isEmpty)
+        XCTAssertEqual(storage.forgetting, [linkID: key])
+        XCTAssertTrue(storage.keys.isEmpty)
+
+        let calls = Calls()
+        let reopened = DeviceParcels(client: client(calls), storage: storage)
+        await reopened.tellForgotten()
+        XCTAssertEqual(calls.all, ["forget \(linkID)"])
+        XCTAssertTrue(storage.forgetting.isEmpty)
+    }
+
+    func testAuthenticatedFollowCancelsUnqueuedForgetAfterRestart() async throws {
+        let storage = Memory()
+        let id = UUID(), linkID = "22222222222A"
+        let owner = answer(linkID, id)
+        let device = DeviceParcels(client: nil, storage: storage)
+        _ = try device.follow(owner, key: key, label: nil)
+        storage.failQueueWrite = true
+        await device.forget(id: id)
+
+        let reopened = DeviceParcels(client: nil, storage: storage)
+        _ = try reopened.follow(owner, key: key, label: nil)
+        let calls = Calls()
+        let restored = DeviceParcels(client: client(calls), storage: storage)
+        await restored.tellForgotten()
+
+        XCTAssertTrue(calls.all.isEmpty)
+        XCTAssertEqual(restored.list().map(\.id), [id])
+        XCTAssertEqual(storage.keys, [linkID: key])
+        XCTAssertTrue(storage.unqueued.isEmpty)
+    }
+
+    func testViewerFollowKeepsRevocationUntilOwnershipIsRestored() async throws {
+        let id = UUID(), linkID = "22222222222A"
+        let shown = PublicParcelResponse(link: reader(linkID), package: package(id))
+        for restoreOwner in [false, true] {
+            let storage = Memory()
+            storage.forgetting = [linkID: key]
+            let calls = Calls()
+            let device = DeviceParcels(client: client(calls), storage: storage)
+            _ = try device.follow(shown, key: nil, label: "Lamp")
+            XCTAssertEqual(storage.forgetting, [linkID: key])
+            let reopened = DeviceParcels(client: client(calls), storage: storage)
+            XCTAssertEqual(reopened.viewerLink(id: id), linkID)
+            if restoreOwner {
+                XCTAssertFalse(try reopened.follow(answer(linkID, id), key: key, label: nil).added)
+                XCTAssertEqual(storage.keys, [linkID: key])
+            }
+            await reopened.tellForgotten()
+            XCTAssertEqual(calls.all, restoreOwner ? [] : ["forget \(linkID)"])
+            XCTAssertTrue(storage.forgetting.isEmpty)
+        }
     }
 
     func testALinkFollowedAgainBeforeTheServiceForgotItStays() async throws {

@@ -544,9 +544,9 @@ class DeviceParcels(
     init {
         val loaded = storage.load()
         pendingForgets = loaded.pendingForgets
-        // A link both kept and still to be forgotten was being forgotten when the app last stopped: forgetting wins.
+        // A queued revocation supersedes a stale owner row. A later viewer follow can coexist with it.
         fun pending(linkId: String) = pendingForgets.keyOf(linkId) != null
-        entries = loaded.parcels.filter { it.forgotten != true && !pending(it.linkId) }
+        entries = loaded.parcels.filter { it.forgotten != true && (it.isViewer || !pending(it.linkId)) }
         forgotten = loaded.parcels.filter { it.forgotten == true }
         keys = loaded.keys.filterKeys { !pending(it) }
     }
@@ -790,10 +790,19 @@ class DeviceParcels(
             }
             recovered += linkId
             // Followed or forgotten meanwhile.
-            if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) == null) continue
-            if (response == null || response.link.role != ParcelLinkRole.Owner || entries.any { it.parcel.id == response.parcel.id }) {
+            if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) != key) continue
+            if (response == null || !response.link.id.equalsCanonically(linkId) || response.link.role != ParcelLinkRole.Owner) {
                 // Only this phone's copy goes: the link stays as it is on the service.
                 keys = keys.setting(linkId, null)
+                continue
+            }
+            val index = entries.indexOfFirst { it.parcel.id == response.parcel.id }
+            if (index >= 0) {
+                if (entries[index].isViewer) {
+                    upgradeViewer(index, response, key)
+                } else {
+                    keys = keys.setting(linkId, null)
+                }
                 continue
             }
             entries = entries + DeviceParcel(
@@ -962,21 +971,7 @@ class DeviceParcels(
         val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) || it.parcel.id == response.parcel.id }
         if (index >= 0) {
             if (key == null || !entries[index].isViewer) return Followed(entries[index].parcel.id, false)
-            val old = entries[index]
-            var owned = old.taking(Parcel(shared = response.parcel)).copy(
-                linkId = linkId, viewer = null, canKeep = null, checkedAt = now().timeIntervalSinceReferenceDate,
-            )
-            if (!old.linkId.equalsCanonically(linkId)) {
-                // Another link's notifications give way to this one's, asked for on the next round.
-                owned = owned.copy(alertToken = null)
-                val client = client
-                val token = old.alertToken
-                if (client != null && token != null) {
-                    scope.launch { attempt { client.removeAlert(old.linkId, removal(token)) } }
-                }
-            }
-            change(index) { owned }
-            keys = keys.setting(linkId, key)
+            upgradeViewer(index, response, key)
             save()
             return Followed(entries[index].parcel.id, false)
         }
@@ -989,9 +984,8 @@ class DeviceParcels(
             entry = entry.copy(alertToken = left.alertToken, alertPreset = left.alertPreset)
             forgotten = forgotten.filter { !it.linkId.equalsCanonically(linkId) }
         }
-        // Followed again before the service could be told to forget it: it no longer is.
-        pendingForgets = pendingForgets.setting(linkId, null)
         if (key != null) {
+            pendingForgets = pendingForgets.setting(linkId, null)
             keys = keys.setting(linkId, key)
         } else {
             entry = entry.copy(viewer = true, canKeep = response.link.canKeep)
@@ -999,6 +993,26 @@ class DeviceParcels(
         entries = entries + entry
         save()
         return Followed(entry.parcel.id, true)
+    }
+
+    private fun upgradeViewer(index: Int, response: PublicParcelResponse, key: String) {
+        val linkId = response.link.id
+        val old = entries[index]
+        var owned = old.taking(Parcel(shared = response.parcel)).copy(
+            linkId = linkId, viewer = null, canKeep = null, checkedAt = now().timeIntervalSinceReferenceDate,
+        )
+        if (!old.linkId.equalsCanonically(linkId)) {
+            // Another link's notifications give way to this one's, asked for on the next round.
+            owned = owned.copy(alertToken = null)
+            val client = client
+            val token = old.alertToken
+            if (client != null && token != null) {
+                scope.launch { attempt { client.removeAlert(old.linkId, removal(token)) } }
+            }
+        }
+        change(index) { owned }
+        pendingForgets = pendingForgets.setting(linkId, null)
+        keys = keys.setting(linkId, key)
     }
 
     // Notifications

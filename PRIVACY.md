@@ -39,8 +39,10 @@ using Peek involves.
 - When you turn on adding parcels by email: your forwarding address, whether
   you want a notification for each parcel an email adds, how many emails
   reached it today, of its last twenty emails when each came, the sender's
-  name and what it did, and the code and link of a Gmail forwarding
-  confirmation until the next email. Each email the service reads is kept as it
+  name and what it did. You can see the code and link of a Gmail forwarding
+  confirmation for three days. They stay stored until a newer confirmation
+  replaces them, another email is recorded after those three days, or you
+  renew or delete the forwarding address or delete your account. Each email the service reads is kept as it
   came, with your account's id and when it came, for 30 days. It is used to
   learn to read such emails better. An email a limit held back and Gmail's
   forwarding confirmation are not kept.

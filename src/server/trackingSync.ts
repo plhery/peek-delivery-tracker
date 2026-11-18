@@ -44,6 +44,7 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { LOOKUP_SYNC_PRIORITY, READER_SYNC_REASONS, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient, type Waiting } from './supabase';
+import { providerAllowed } from './providerPolicy';
 import { CheckHolds, type CheckHold } from './checkHolds';
 import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
@@ -710,6 +711,13 @@ function checkKeys(parcel: JsonObject): string[] {
   // provider's lease would turn the second away as if it rested.
   const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '')
     ?? (directCarrier(carrier) ? undefined : universalPlan({ carriers: [carrier], trackingNumber: number }).sources[0]);
+  // With an explicit allowlist the router can rotate among eligible sources. Hold them
+  // across the whole provider-only check, including any fallback it may need.
+  const setting = process.env.TRACKING_UNIVERSAL_PROVIDERS;
+  const reserved = setting?.trim() && !directCarrier(carrier)
+    ? universalPlan({ carriers: [carrier], trackingNumber: number, enableTrack123: true,
+      enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true' }).sources.filter((source) => providerAllowed(source, setting))
+    : typeof provider === 'string' && providerAllowed(provider, setting) ? [provider] : [];
   // A parcel handed over to another carrier, or whose earlier leg answered last, asks that carrier too.
   const active = typeof data.active_tracking_carrier === 'string' && directCarrier(data.active_tracking_carrier)
     ? data.active_tracking_carrier : undefined;
@@ -718,7 +726,7 @@ function checkKeys(parcel: JsonObject): string[] {
   return [...carriers,
     numberKey(parcel),
     ...(typeof parcel.user_id === 'string' ? [`account:${parcel.user_id}`] : []),
-    ...(typeof provider === 'string' ? [`provider:${provider}`] : [])];
+    ...reserved.map((source) => `provider:${source}`)];
 }
 
 /** The parcels the longest due first (`late`, by id), the others in their order. */

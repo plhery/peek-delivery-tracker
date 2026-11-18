@@ -91,6 +91,17 @@ describe('two checks of one run and a universal provider', () => {
     for (const id of ['a', 'b']) expect(routing(id)?.failures ?? {}).not.toHaveProperty('ParcelsApp');
   });
 
+  it('answers both parcels after their preferred providers are disabled', async () => {
+    vi.stubEnv('TRACKING_UNIVERSAL_PROVIDERS', 'Ship24');
+    try {
+      const { asked } = await run([
+        { ...parcel('a', 'one', '247express', 'TESTA0000001'), carrier_data: { tracking_provider: '17TRACK' } },
+        { ...parcel('b', 'two', '139express', 'TESTB0000002'), carrier_data: { tracking_provider: 'ParcelsApp' } },
+      ], ['ParcelsApp', 'Ship24']);
+      expect(asked.sort()).toEqual(['Ship24 TESTA0000001', 'Ship24 TESTB0000002']);
+    } finally { vi.unstubAllEnvs(); }
+  });
+
   it('answers both parcels when the plan holds one provider', async () => {
     const { asked, summary } = await run([parcel('a', 'one', '247express', 'TESTA0000001'), parcel('b', 'two', '139express', 'TESTB0000002')], ['ParcelsApp']);
     expect([...asked].sort()).toEqual(['ParcelsApp TESTA0000001', 'ParcelsApp TESTB0000002']);

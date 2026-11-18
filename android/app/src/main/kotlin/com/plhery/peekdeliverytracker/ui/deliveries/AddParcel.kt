@@ -358,6 +358,8 @@ private class AddFocus {
     val requesters = ParcelAddition.Field.entries.associateWith { FocusRequester() }
     var focused by mutableStateOf<ParcelAddition.Field?>(null)
 
+    var composing: ParcelAddition.Field? = null
+
     fun request(field: ParcelAddition.Field) {
         runCatching { requesters.getValue(field).requestFocus() }
     }
@@ -475,7 +477,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     }
     // Escape closes Add, or the picker or the scanner over it (their Cancel, `.cancellationAction`), which then leaves
     // Add up.
-    val escape = rememberAddEscape(enabled = !saving) {
+    val escape = rememberAddEscape(enabled = !saving, composing = { focus.focused != null && focus.focused == focus.composing }) {
         when {
             form.showingScanner -> form.showingScanner = false
             form.showingPicker -> form.showingPicker = false
@@ -1556,6 +1558,8 @@ private fun AddTextField(
         BasicTextField(
             shown,
             { edit ->
+                if (edit.composition != null) focus.composing = field
+                else if (focus.composing == field) focus.composing = null
                 edited = edit
                 if (edit.text != value) onValueChange(edit.text)
             },
@@ -1575,6 +1579,7 @@ private fun AddTextField(
                     if (state.isFocused) {
                         focus.focused = field
                     } else if (focus.focused == field) {
+                        if (focus.composing == field) focus.composing = null
                         focus.focused = null
                         actions.left(field)
                     }
@@ -1799,12 +1804,13 @@ private fun AddPicker(state: DeliveriesState, addition: ParcelAddition, form: Ad
  * fields to give before an on-screen keyboard takes the key ([escapeBeforeKeyboard]).
  */
 @Composable
-private fun rememberAddEscape(enabled: Boolean, close: () -> Unit): (KeyEvent) -> Boolean {
+private fun rememberAddEscape(enabled: Boolean, composing: () -> Boolean, close: () -> Unit): (KeyEvent) -> Boolean {
     val act by rememberUpdatedState(close)
     val on by rememberUpdatedState(enabled)
+    val inComposition by rememberUpdatedState(composing)
     val answer = remember {
         { event: KeyEvent ->
-            if (on && event.keyCode == KeyEvent.KEYCODE_ESCAPE && event.hasNoModifiers()) {
+            if (on && !inComposition() && event.keyCode == KeyEvent.KEYCODE_ESCAPE && event.hasNoModifiers()) {
                 if (event.action == KeyEvent.ACTION_DOWN && event.repeatCount == 0) act()
                 true
             } else {

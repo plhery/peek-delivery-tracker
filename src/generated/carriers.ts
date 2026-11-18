@@ -3288,6 +3288,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063b3"
     },
     {
+      "id": "mrw",
+      "catalog": "mrw",
+      "slug": "tracciamento-mrw",
+      "title": "Tracciamento MRW: numero a 12 cifre, stati, Point e contatti",
+      "name": "MRW",
+      "color": "#19133b"
+    },
+    {
       "id": "ctt",
       "catalog": "ctt",
       "slug": "ctt-portugal-tracking",
@@ -3557,6 +3565,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "slug": "tnt-italy-tracking",
       "title": "TNT tracking: lettera di vettura, stati e giacenza",
       "name": "TNT Italy",
+      "color": "#ff6600"
+    },
+    {
+      "id": "tnt",
+      "catalog": "tnt",
+      "slug": "tracciamento-tnt",
+      "title": "Tracciamento TNT: Connote a 9 cifre, stati e consegna",
+      "name": "TNT",
       "color": "#ff6600"
     },
     {
@@ -4188,6 +4204,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ef3026"
     },
     {
+      "id": "dpd-de",
+      "catalog": "dpd-de",
+      "slug": "seguimento-dpd-alemanha",
+      "title": "Seguimento DPD Alemanha: número, estados, Predict e ajuda",
+      "name": "DPD Germany",
+      "color": "#dc0032"
+    },
+    {
       "id": "dpd-ch",
       "catalog": "dpd",
       "slug": "rastreio-dpd-suica",
@@ -4370,6 +4394,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "SunYou rastreamento: número SY, estados e quem entrega",
       "name": "SunYou",
       "color": "#02a232"
+    },
+    {
+      "id": "amazon-shipping",
+      "catalog": "amazon-shipping",
+      "slug": "amazon-shipping-seguimento",
+      "title": "Amazon Shipping seguimento: número PT ou ES e o que fazer",
+      "name": "Amazon Shipping",
+      "color": "#ff9900"
     },
     {
       "id": "geodis",
@@ -4688,6 +4720,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0063b3"
     },
     {
+      "id": "mrw",
+      "catalog": "mrw",
+      "slug": "sledzenie-mrw",
+      "title": "Śledzenie MRW: 12-cyfrowy numer, statusy, Point i kontakt",
+      "name": "MRW",
+      "color": "#19133b"
+    },
+    {
       "id": "ctt",
       "catalog": "ctt",
       "slug": "sledzenie-ctt-portugal",
@@ -4832,6 +4872,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#02a232"
     },
     {
+      "id": "amazon-shipping",
+      "catalog": "amazon-shipping",
+      "slug": "amazon-shipping-sledzenie",
+      "title": "Amazon Shipping śledzenie: numer przesyłki, statusy i pomoc",
+      "name": "Amazon Shipping",
+      "color": "#ff9900"
+    },
+    {
       "id": "omniva",
       "catalog": "omniva",
       "slug": "omniva-sledzenie",
@@ -4928,6 +4976,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "gofo",
+      "catalog": "gofo",
+      "slug": "gofo-express-sledzenie",
+      "title": "GOFO Express śledzenie: numer GFUS, statusy i dostawa w USA",
+      "name": "GOFO Express",
+      "color": "#fc4c02"
+    },
+    {
       "id": "j-and-t-de",
       "catalog": "j-and-t-de",
       "slug": "jt-express-niemcy-sledzenie",
@@ -4990,6 +5046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "TNT śledzenie przesyłki: numer, statusy i doręczenie",
       "name": "TNT",
       "color": "#ff6600"
+    },
+    {
+      "id": "sf-express",
+      "catalog": "sf-express",
+      "slug": "sledzenie-sf-express",
+      "title": "Śledzenie SF Express: numer listu, statusy, cło i dostawa",
+      "name": "SF Express",
+      "color": "#dc1e32"
     },
     {
       "id": "topyou",

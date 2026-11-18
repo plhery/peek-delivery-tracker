@@ -82492,6 +82492,18 @@
     ]
   },
   {
+    "input": "CO00000001PD",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "colis-prive",
+      "pdu"
+    ],
+    "asked": [
+      "colis-prive"
+    ]
+  },
+  {
     "input": "CO00310395",
     "carrier": "unknown",
     "confidence": "low",
@@ -92412,6 +92424,14 @@
     "confidence": "high",
     "candidates": [
       "jrt"
+    ]
+  },
+  {
+    "input": "JSD000000000199",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "jetspeed"
     ]
   },
   {

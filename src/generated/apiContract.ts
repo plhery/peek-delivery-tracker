@@ -3919,7 +3919,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingSearchUrl": "https://rastreamento.correios.com.br/app/index.php",
     "aliases": [
-      "Brazil Post"
+      "Brazil Post",
+      "Brazil Correios"
     ],
     "helpUrl": "https://www.correios.com.br/falecomoscorreios/central-de-atendimento"
   },
@@ -62250,6 +62251,68 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "trackingSearchUrl": "https://starintlship.top/waybill-tracking/"
+  },
+  "jetspeed": {
+    "displayName": "JETSPEED",
+    "aliases": [
+      "Jetspeed Express",
+      "捷速达",
+      "捷速達",
+      "捷速达国际快运"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ff6600",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "trackingUrlTemplate": "https://www.jetspeed-express.com/search_kuai_di/search/orderid/{trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "jetspeed-express.com"
+        ],
+        "path": "/search_kuai_di/search/orderid/([^/?#]+)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^JSD\\d{12}$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.jetspeed-express.com/"
+  },
+  "pdu": {
+    "displayName": "PDU",
+    "aliases": [
+      "Parcel Delivery Union",
+      "友递联",
+      "友遞聯"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#005cfe",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "pdu"
+    },
+    "trackingUrlTemplate": "https://www.pduni.com/",
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{2}\\d{8}PD$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://www.pduni.com/MV/en/customer-services/waybill-inquiry"
   }
 } as const;
 
@@ -64155,7 +64218,9 @@ export const CARRIER_IDS = [
   "wyngs",
   "xindus",
   "xportel",
-  "starintlship"
+  "starintlship",
+  "jetspeed",
+  "pdu"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

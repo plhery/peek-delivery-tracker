@@ -197,7 +197,10 @@ function Consent({ request, query, busy, reviewAccount }: {
           // Another account signed in: the request shows for it, and waits for its answer.
           if (!apiAuth.signal?.aborted) void answer(true);
         }}
-        onCancel={() => setSigningInAgain(null)} />
+        onCancel={() => {
+          dropSignInAgain(['assistant-consent']);
+          setSigningInAgain(null);
+        }} />
     </main>;
   }
 

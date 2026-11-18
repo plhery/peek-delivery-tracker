@@ -1520,6 +1520,7 @@ class ParcelStore(
     }
 
     /** The choices made about "Mark new updates", counted: the answer to an earlier one does not undo a later one. */
+    private var markNewUpdatesWrite: Job? = null
     private var markNewUpdatesChoices = 0
 
     /**
@@ -1535,8 +1536,10 @@ class ParcelStore(
         markNewUpdatesSaving += 1
         val choice = markNewUpdatesChoices
         val generation = session.generation
+        val previous = markNewUpdatesWrite
         return scope.launch {
             try {
+                previous?.join()
                 if (generation != session.generation) return@launch
                 var saved = api.saveDisplayPreferences(markNewUpdates = enabled)
                 if (generation != session.generation) return@launch
@@ -1553,7 +1556,7 @@ class ParcelStore(
             } finally {
                 if (generation == session.generation) markNewUpdatesSaving -= 1
             }
-        }
+        }.also { markNewUpdatesWrite = it }
     }
 
     /**

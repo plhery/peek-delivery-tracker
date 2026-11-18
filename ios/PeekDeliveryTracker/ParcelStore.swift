@@ -147,6 +147,7 @@ final class ParcelStore: ObservableObject {
     /// Counts saved preferences: the answer to a read that began before a save is older than it.
     private var notificationPreferenceSaves = 0
     /// Counts the choices made about the list's mark: the answer to an earlier one does not undo a later one.
+    private var markNewUpdatesWrite: Task<Void, Never>?
     private var markNewUpdatesChoices = 0
     /// The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken.
     private(set) var markNewUpdatesSaving = 0
@@ -325,8 +326,10 @@ final class ParcelStore: ObservableObject {
         markNewUpdatesSaving += 1
         let choice = markNewUpdatesChoices
         let generation = session.generation
-        Task {
+        let previous = markNewUpdatesWrite
+        markNewUpdatesWrite = Task {
             defer { if generation == session.generation { markNewUpdatesSaving -= 1 } }
+            await previous?.value
             guard generation == session.generation else { return }
             guard var saved = try? await api.saveDisplayPreferences(markNewUpdates: enabled),
                   generation == session.generation else { return }

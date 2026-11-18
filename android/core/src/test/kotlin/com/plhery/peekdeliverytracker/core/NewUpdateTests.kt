@@ -199,6 +199,26 @@ class NewUpdateTests {
     }
 
     @Test
+    fun theLastSwitchChoiceReachesTheAccountLast() = runTest {
+        val server = Server()
+        val store = signedIn(server)
+        store.loadNotificationPreferences()
+        val first = CompletableDeferred<Unit>()
+        server.beforePreferences = { request ->
+            if (request.body?.decodeToString()?.contains("\"markNewUpdates\":false") == true) first.await()
+        }
+        val off = launch { store.setMarkNewUpdates(false) }
+        runCurrent()
+        val on = launch { store.setMarkNewUpdates(true) }
+        runCurrent()
+        first.complete(Unit)
+        off.join()
+        on.join()
+        assertEquals(listOf(false, true), server.preferenceSaves)
+        assertTrue(server.markNewUpdates)
+    }
+
+    @Test
     fun aScanAfterTheLastOpenShowsTheDot() = runTest {
         val server = Server()
         server.newsAt = null

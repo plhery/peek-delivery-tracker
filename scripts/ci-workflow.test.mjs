@@ -161,9 +161,12 @@ it('waits in a job a newer commit queues behind, and deploys in one that is neve
   const guard = step(deploy, 'Skip a commit that a newer one replaced');
   assert.doesNotMatch(guard, /\n {8}if:/);
   assert.match(guard, /\n +node \.deploy-policy\/scripts\/deploy-gate\.mjs "--commit=\$COMMIT" --at-once/);
+  // A site that names no build, being down, leaves the gate to decide on CI alone rather than fail the step.
   for (const gated of [settle, guard]) {
-    assert.match(gated, /DEPLOYED_SHA=\$\(curl .*\/health\/live/);
+    assert.match(gated, /DEPLOYED_SHA=\$\(curl .*\/health\/live.*\) \|\| DEPLOYED_SHA=''\n/);
   }
+  // The Deploy job of a run started by hand may put the live build out again.
+  assert.match(guard, /\n {10}BY_HAND: \$\{\{ inputs\.commit == '' \}\}\n/);
   for (const name of ["Check that production has this commit's migrations", DEPLOY_STEP, 'Wait until the public site serves this commit', 'Check the public site', 'Record the release in Sentry']) {
     assert.match(step(deploy, name), /\n {8}if: steps\.current\.outputs\.deploy == 'true'\n/, name);
   }

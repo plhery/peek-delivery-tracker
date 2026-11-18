@@ -4,6 +4,7 @@ import { useI18n, type MessageKey } from '../../i18n';
 import { trackAction } from '../../lib/analytics';
 import { LandingIcon } from '../landing/glyphs';
 import { SOURCE_URL } from '../landing/links';
+import { turnOffAlert } from '../alerts';
 import { forgetParcelLink, ParcelLinkError, parcelLinkErrorKey } from '../links';
 import { forgetRecent } from '../recents';
 
@@ -22,6 +23,24 @@ export async function forgetParcel(linkId: string, key: string): Promise<void> {
   }
   forgetRecent(linkId);
   trackAction('parcel-link-forget', 'success');
+}
+
+/**
+ * Takes a parcel someone shared off this device: this browser's alerts for it
+ * go first, and the link keeps working for everyone else. A link that is
+ * already gone has no alert left to turn off.
+ */
+export async function removeSharedParcel(linkId: string): Promise<void> {
+  try {
+    await turnOffAlert(linkId);
+  } catch (error) {
+    if (!(error instanceof ParcelLinkError && error.kind === 'unavailable')) {
+      trackAction('parcel-link-remove', 'error');
+      throw error;
+    }
+  }
+  forgetRecent(linkId);
+  trackAction('parcel-link-remove', 'success');
 }
 
 /**
@@ -77,18 +96,24 @@ export function ForgetDialog({ onForget, onCancel, arrived }: {
   </dialog>;
 }
 
-/** The privacy promise at the foot of the page, with the way to forget the parcel at once for its owner. */
-export function ForgetFooter({ promise, onForget }: {
+/**
+ * The privacy promise at the foot of the page, with the way to forget the parcel at once for its owner, or to take it
+ * off this device for someone it was shared with.
+ */
+export function ForgetFooter({ promise, onForget, onRemove }: {
   /** When Peek forgets the parcel by itself; absent for a parcel shared from an account. */
   promise: string | null;
   /** Offered to the owner only. */
   onForget?: () => void;
+  /** Offered to someone the parcel was shared with, whose device lists it. */
+  onRemove?: () => void;
 }) {
   const { t } = useI18n();
   return <footer className="peekp-footer">
     {promise && <p><Icon name="lock" />{promise}</p>}
     <p>
       {onForget && <><button type="button" className="peekp-footer__forget" onClick={onForget}>{t('link.forget.now')}</button> · </>}
+      {onRemove && <><button type="button" className="peekp-footer__forget" onClick={onRemove}>{t('link.remove.now')}</button> · </>}
       <a href="/privacy.html" onClick={() => trackAction('privacy-open')}>{t('auth.privacyLink')}</a> · <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>
     </p>
   </footer>;

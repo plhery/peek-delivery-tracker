@@ -1,6 +1,7 @@
 import { readMaintenance, type MaintenanceNotice } from '../../lib/maintenance';
 import { isActiveParcel, nextPriorityParcel } from '../../lib/parcelPriority';
 import { isFinal } from '../../lib/stages';
+import { turnOffAlert } from '../alerts';
 import { forgetParcelLink, ParcelLinkError, readParcelLink } from '../links';
 import { journeyEndedBefore } from '../parcel/summary';
 import { forgetRecent, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
@@ -170,7 +171,8 @@ const pause: ForgetPause = (milliseconds) => new Promise((resolve) => setTimeout
 
 /**
  * Forgets the device's parcels: on the server where this device made the
- * lookup and holds its key, then on the device. The parcels the device holds
+ * lookup and holds its key, then on the device. A parcel someone shared keeps
+ * its link, and loses this browser's alerts first. The parcels the device holds
  * the key of but cannot list go too. The server takes a few forgets a minute
  * from one network: past those, each waits until it takes them again.
  * `progress` hears which parcel is being forgotten, from 1, of how many.
@@ -188,7 +190,9 @@ export async function forgetDeviceParcels(
     progress(index + 1, parcels.length);
     for (let waits = 0; ; waits += 1) {
       try {
+        // A lookup is forgotten with its alerts; a parcel someone shared keeps its link, so this browser's alerts go.
         if (recent.key) await forgetParcelLink(recent.id, recent.key);
+        else await turnOffAlert(recent.id);
         forgetRecent(recent.id);
       } catch (error) {
         if (error instanceof ParcelLinkError && error.kind === 'burst' && waits < MOST_FORGET_WAITS) {

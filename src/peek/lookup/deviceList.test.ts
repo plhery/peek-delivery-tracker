@@ -2,12 +2,15 @@ import { renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../../test/parcelLinks';
 import type { EventPlace, ParcelWithEvents, Stage } from '../../types';
+import { linkNote, noteLink } from '../deviceNotes';
 import { ParcelLinkError } from '../links';
 import { forgetAllRecents, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { deviceListDown, deviceListReadAt, forgetDeviceChecks, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
-const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn() }));
-vi.mock('../links', async (original) => ({ ...await original<typeof import('../links')>(), readParcelLink: mocks.read, forgetParcelLink: mocks.forget }));
+const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn(), removeAlert: vi.fn() }));
+vi.mock('../links', async (original) => ({
+  ...await original<typeof import('../links')>(), readParcelLink: mocks.read, forgetParcelLink: mocks.forget, removeParcelAlert: mocks.removeAlert,
+}));
 
 const THIRD_LINK_ID = 'p5Rt9wJq2LbX';
 const zurich: EventPlace = { latitude: 47.38, longitude: 8.54, precision: 'city', country: 'CH', name: 'Zürich' };
@@ -251,6 +254,21 @@ describe('forgetDeviceParcels', () => {
     expect(progress.mock.calls).toEqual([[1, 2], [2, 2]]);
     expect(mocks.forget.mock.calls).toEqual([[LINK_ID, OWNER_KEY], [LINK_ID, OWNER_KEY], [THIRD_LINK_ID, OWNER_KEY]]);
     expect(localStorage.getItem(RECENTS_STORAGE_KEY)).toBeNull();
+  });
+
+  it('turns off this browser\'s alerts for a parcel someone shared, whose link keeps working, and keeps it while it cannot', async () => {
+    rememberParcel({ id: OTHER_LINK_ID, view: testView({ id: OTHER_LINK_ID, owner: false }), now });
+    noteLink(OTHER_LINK_ID, { alert: { preset: 'important', endpoint: 'https://push.example/1' } });
+    mocks.removeAlert.mockReset();
+    mocks.removeAlert.mockRejectedValueOnce(new ParcelLinkError('offline')).mockResolvedValue(undefined);
+    await expect(forgetDeviceParcels([recentFor(OTHER_LINK_ID)!])).resolves.toBe(1);
+    expect(recentFor(OTHER_LINK_ID)).not.toBeNull();
+
+    await expect(forgetDeviceParcels([recentFor(OTHER_LINK_ID)!])).resolves.toBe(0);
+    expect(mocks.removeAlert.mock.calls).toEqual([[OTHER_LINK_ID, 'https://push.example/1'], [OTHER_LINK_ID, 'https://push.example/1']]);
+    expect(mocks.forget).not.toHaveBeenCalled();
+    expect(linkNote(OTHER_LINK_ID).alert).toBeUndefined();
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
   });
 
   it('keeps a parcel the server still refuses after a few waits', async () => {

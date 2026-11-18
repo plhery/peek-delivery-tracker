@@ -332,6 +332,25 @@ describe('the parcel page of a link’s owner', () => {
     expect(await screen.findByText('Parcel forgotten')).toBeVisible();
   });
 
+  it('lets someone the parcel was shared with take it off this device, alerts first, while the link keeps working', async () => {
+    stubAlertBrowser({ permission: 'granted' });
+    noteLink(LINK_ID, { alert: { preset: 'all', endpoint: 'demo:1' } });
+    const user = userEvent.setup();
+    open(view({ owner: false }));
+    await waitFor(() => expect(recentFor(LINK_ID)).not.toBeNull());
+    expect(screen.queryByRole('button', { name: 'Forget it now' })).toBeNull();
+    mocks.remove.mockRejectedValueOnce(new ParcelLinkError('offline'));
+    await user.click(await screen.findByRole('button', { name: 'Remove from this device' }));
+    expect(await screen.findByText('Couldn’t remove this parcel. Try again.')).toBeVisible();
+    expect(recentFor(LINK_ID)).not.toBeNull();
+
+    await user.click(screen.getByRole('button', { name: 'Remove from this device' }));
+    await waitFor(() => expect(recentFor(LINK_ID)).toBeNull());
+    expect(mocks.remove).toHaveBeenLastCalledWith(LINK_ID, 'demo:1');
+    expect(mocks.forget).not.toHaveBeenCalled();
+    expect(await screen.findByText('Parcel removed from this device')).toBeVisible();
+  });
+
   it('does not offer “I have it” to a recipient, or for a parcel shared from an account', async () => {
     const recipient = open(view({ owner: false, events: arrived }));
     expect(await screen.findByRole('heading', { level: 1, name: 'Delivered' })).toBeVisible();

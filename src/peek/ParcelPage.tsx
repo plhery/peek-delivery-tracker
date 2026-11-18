@@ -36,7 +36,7 @@ import { carrierLinks, FreshnessLine, Notes, NumberSection, ShipmentFacts } from
 import { FeedbackOverlays, FeedbackQuestion, useParcelFeedback } from './parcel/Feedback';
 import { scanIdentity } from './parcel/feedbackModel';
 import { linkFeedbackNotes } from './parcel/feedbackNotes';
-import { ForgetDialog, ForgetFooter, forgetParcel } from './parcel/Forget';
+import { ForgetDialog, ForgetFooter, forgetParcel, removeSharedParcel } from './parcel/Forget';
 import { GiftNote, GiftSurprise } from './parcel/Gift';
 import { Glyph } from './parcel/glyphs';
 import { MaintenanceStrip, maintenanceText } from '../components/MaintenanceStrip';
@@ -204,7 +204,7 @@ function Gone({ stopped = false, onHome }: { stopped?: boolean; onHome: () => vo
   </Shell>;
 }
 
-type Word = { kind: 'own-link' | 'copied' | 'copy-failed' | 'calendar' | 'calendar-failed' };
+type Word = { kind: 'own-link' | 'copied' | 'copy-failed' | 'calendar' | 'calendar-failed' | 'remove-failed' };
 
 function Parcel({ linkId, entrance, state, view, onHome }: {
   linkId: string;
@@ -403,6 +403,21 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     leave();
   }
   const askToForget = key ? () => setForgetting('asked') : undefined;
+  // Someone the parcel was shared with takes it off this device's list; the link keeps working, so nothing is asked.
+  const [removing, setRemoving] = useState(false);
+  async function remove() {
+    setRemoving(true);
+    try {
+      await removeSharedParcel(linkId);
+    } catch {
+      setRemoving(false);
+      setWord({ kind: 'remove-failed' });
+      return;
+    }
+    announceNotice('link.remove.done');
+    leave();
+  }
+  const offerRemove = !owner && !sample && !removing && !!recentFor(linkId) ? () => void remove() : undefined;
 
   // The postcode another carrier holding the parcel asks for, or its own: the owner's to add, with the key.
   const asked = key ? link.inputNeeded ?? null : null;
@@ -561,7 +576,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {invitation}
       </div>}
     </div>
-    <ForgetFooter promise={promise} onForget={askToForget} />
+    <ForgetFooter promise={promise} onForget={askToForget} onRemove={offerRemove} />
 
     {news && <Toast place="top" tone mark={<Icon name="truck" />}>
       <strong>{t('link.updateToast')}</strong> · {localizedEventDescription(news.description, t) || stageLabel(t, news.stage)}
@@ -571,6 +586,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     </Toast>}
     {word?.kind === 'copied' && <Toast>{t('link.copied')}</Toast>}
     {word?.kind === 'copy-failed' && <Toast mark={<Glyph name="info" />}>{t('link.shareFailed')}</Toast>}
+    {word?.kind === 'remove-failed' && <Toast mark={<Glyph name="info" />}>{t('link.remove.failed')}</Toast>}
     {word?.kind === 'calendar' && <Toast>{t('alerts.calendar.done')}</Toast>}
     {word?.kind === 'calendar-failed' && <Toast mark={<Glyph name="info" />}>{t('alerts.calendar.failed')}</Toast>}
     {keepSheet && session.signInWith && <KeepSheet linkId={linkId} carrier={displayed} title={name ?? number ?? t('common.parcel')} summary={summary}

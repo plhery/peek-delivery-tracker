@@ -88,7 +88,9 @@ function envelopeDsn(envelope: Buffer): unknown {
 
 /**
  * The envelope with the browser's address as the user's of each event that names none: Sentry sees
- * the site's address only. An item that does not parse goes on as it came.
+ * the site's address only. An envelope with an item that does not parse goes on as it came, as does
+ * one whose item claims a length that is no whole number of bytes it holds: each item read moves
+ * past its header, so a length that points back cannot hold the server in this loop.
  */
 export function withClientAddress(envelope: Buffer, ip: string): Buffer {
   if (!isIP(ip)) return envelope;
@@ -103,6 +105,8 @@ export function withClientAddress(envelope: Buffer, ip: string): Buffer {
     let header: { type?: unknown; length?: unknown };
     try { header = JSON.parse(envelope.subarray(offset, headerEnd).toString('utf8')) as typeof header; } catch { return envelope; }
     const start = headerEnd + 1;
+    if (header.length !== undefined && !(Number.isSafeInteger(header.length) && (header.length as number) >= 0
+      && start + (header.length as number) <= envelope.length)) return envelope;
     const end = typeof header.length === 'number' ? start + header.length : (() => {
       const newline = envelope.indexOf(10, start);
       return newline < 0 ? envelope.length : newline;

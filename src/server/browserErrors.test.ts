@@ -92,6 +92,38 @@ describe('the error report tunnel', () => {
     expect(withClientAddress(input, 'unknown')).toBe(input);
   });
 
+  it('sends an item whose length is no whole number of the bytes it holds on as it came, at once', () => {
+    const event = JSON.stringify({ event_id: 'e' });
+    const head = `${JSON.stringify({ dsn })}\n`;
+    // Each points the next item back at its own header, or past the end, or between bytes.
+    const lengths = [-(JSON.stringify({ type: 'event', length: -99 }).length + 2), -1, 0.5, Buffer.byteLength(event) + 2, '12', null];
+    for (const length of lengths) {
+      const input = Buffer.from(`${head}${JSON.stringify({ type: 'event', length })}\n${event}\n`);
+      const started = performance.now();
+      expect(withClientAddress(input, '203.0.113.9')).toBe(input);
+      expect(performance.now() - started).toBeLessThan(100);
+    }
+    const looping = `${JSON.stringify({ type: 'attachment', length: -(JSON.stringify({ type: 'attachment', length: -40 }).length + 2) })}`;
+    const twice = Buffer.from(`${head}${JSON.stringify({ type: 'event' })}\n${event}\n${looping}\n`);
+    expect(withClientAddress(twice, '203.0.113.9')).toBe(twice);
+  });
+
+  it('answers a report whose item points back at its own header at once', async () => {
+    const send = vi.fn(async () => new Response(null, { status: 400 }));
+    vi.stubGlobal('fetch', send);
+    const header = (length: number) => JSON.stringify({ type: 'event', length });
+    // The length that sends the reader back to the start of this item's header: what stalled the server.
+    let length = -1;
+    while (-length !== header(length).length + 2) length = -(header(length).length + 2);
+    const body = `${envelope().split('\n')[0]}\n${header(length)}\n{}\n`;
+    const started = performance.now();
+    const response = await POST(report(body), none);
+    expect(performance.now() - started).toBeLessThan(1_000);
+    expect(response.status).toBe(400);
+    expect(send).toHaveBeenCalledTimes(1);
+    expect(Buffer.from((send.mock.calls[0] as unknown as [string, RequestInit])[1].body as Uint8Array).toString('utf8')).toBe(body);
+  });
+
   it('forwards nothing for another project, or for what is no envelope', async () => {
     const send = vi.fn(async () => new Response(null, { status: 200 }));
     vi.stubGlobal('fetch', send);

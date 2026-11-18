@@ -1,6 +1,6 @@
 import { authenticatedFetch, type ApiAuth } from './apiClient';
 import type { Locale } from '../i18n';
-import { linkAlertsUse, moveLinkAlerts } from '../peek/alerts';
+import { linkAlertsUse, moveLinkAlerts, prepareLinkAlertMove } from '../peek/alerts';
 import { decodePublicKey } from './pushKey';
 import type {
   ApiOkResponse,
@@ -167,6 +167,7 @@ export async function enablePushNotifications(
     method: 'DELETE',
     body: JSON.stringify({ endpoint: existing.endpoint }),
   }).catch(() => undefined);
+  prepareLinkAlertMove(existing.endpoint, decodePublicKey(publicKey));
   await existing.unsubscribe().catch(() => false);
   const replacement = await subscribe();
   await moveLinkAlerts(existing.endpoint, replacement);
@@ -200,6 +201,7 @@ export async function followPushNotificationLocale(locale: Locale, auth: ApiAuth
  */
 async function replaceSubscription(registration: ServiceWorkerRegistration, old: PushSubscription): Promise<void> {
   const key = old.options?.applicationServerKey;
+  prepareLinkAlertMove(old.endpoint, key);
   await old.unsubscribe();
   if (!key || !linkAlertsUse(old.endpoint)) return;
   const replacement = await registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });

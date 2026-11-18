@@ -31,6 +31,8 @@ export interface DeviceAlert {
   endpoint: string;
   /** The language the server was last given for it, which it writes the alert in. Unknown for an alert noted without it. */
   locale?: Locale;
+  /** A rotation that still needs the server. The public key lets a new page finish subscribing. */
+  move?: { publicKey: string; retryAt: number };
 }
 
 export interface LinkNote {
@@ -67,6 +69,9 @@ function note(value: unknown): LinkNote | null {
   if (alert && typeof alert === 'object' && typeof alert.endpoint === 'string' && alert.endpoint
     && PARCEL_ALERT_PRESETS.includes(alert.preset as ParcelAlertPreset)) {
     kept.alert = { preset: alert.preset as ParcelAlertPreset, endpoint: alert.endpoint, ...(isLocale(alert.locale) ? { locale: alert.locale } : {}) };
+  }
+  if (kept.alert && alert?.move && typeof alert.move.publicKey === 'string' && Number.isFinite(alert.move.retryAt)) {
+    kept.alert.move = { publicKey: alert.move.publicKey, retryAt: alert.move.retryAt };
   }
   const answered = feedbackMemory(feedback);
   if (answered) kept.feedback = answered;

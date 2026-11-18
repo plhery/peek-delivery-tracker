@@ -2492,6 +2492,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "yto-express-sendungsverfolgung",
+      "title": "YTO Express Sendungsverfolgung: YT-Nummer & Status",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    },
+    {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "pengyou-sendungsverfolgung",
+      "title": "Pengyou Sendungsverfolgung: PY-Nummer, Status & Hilfe",
+      "name": "Pengyou",
+      "color": "#043a82"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-sendungsverfolgung",
@@ -3134,6 +3150,22 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "suivi-yto-express",
+      "title": "Suivi YTO Express\u00a0: numéro YT, statuts et contacts",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    },
+    {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "suivi-pengyou",
+      "title": "Suivi Pengyou\u00a0: numéros PY, étapes et qui contacter",
+      "name": "Pengyou",
+      "color": "#043a82"
+    },
+    {
       "id": "mtscn",
       "catalog": "mtscn",
       "slug": "meiteshun-suivi-colis",
@@ -3670,6 +3702,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento SF Express: numero, stati, dogana e consegna",
       "name": "SF Express",
       "color": "#dc1e32"
+    },
+    {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "tracciamento-pengyou",
+      "title": "Tracciamento Pengyou: numeri PY, stati e chi sentire",
+      "name": "Pengyou",
+      "color": "#043a82"
     },
     {
       "id": "mtscn",
@@ -4210,6 +4250,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffd500"
     },
     {
+      "id": "yto",
+      "catalog": "yto",
+      "slug": "seguimiento-yto-express",
+      "title": "Seguimiento YTO Express: números YT, estados y ayuda",
+      "name": "YTO Express",
+      "color": "#4d148c"
+    },
+    {
       "id": "pengyou",
       "catalog": "pengyou",
       "slug": "pengyou-seguimiento",
@@ -4730,6 +4778,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento SF Express: número de carta, estados e entrega",
       "name": "SF Express",
       "color": "#dc1e32"
+    },
+    {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "seguimento-pengyou",
+      "title": "Seguimento Pengyou: números PY, estados e contactos",
+      "name": "Pengyou",
+      "color": "#043a82"
     },
     {
       "id": "mtscn",
@@ -5286,6 +5342,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie SF Express: numer listu, statusy, cło i dostawa",
       "name": "SF Express",
       "color": "#dc1e32"
+    },
+    {
+      "id": "pengyou",
+      "catalog": "pengyou",
+      "slug": "sledzenie-pengyou",
+      "title": "Śledzenie Pengyou: numery PY, statusy i kontakt",
+      "name": "Pengyou",
+      "color": "#043a82"
     },
     {
       "id": "mtscn",

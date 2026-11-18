@@ -2604,6 +2604,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "rl-carriers-sendungsverfolgung",
+      "title": "R+L Carriers Sendungsverfolgung: PRO-Nummer und Status",
+      "name": "R+L Carriers",
+      "color": "#006647"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-sendungsverfolgung",
@@ -3310,6 +3318,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "suivi-rl-carriers",
+      "title": "Suivi R+L Carriers\u00a0: numéro PRO, statuts et réclamations",
+      "name": "R+L Carriers",
+      "color": "#006647"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-suivi-colis",
@@ -3910,6 +3926,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento HuaHan Logistics: codice HHW…YQ e consegna",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "tracciamento-rl-carriers",
+      "title": "Tracciamento R+L Carriers: numero PRO, stati e reclami",
+      "name": "R+L Carriers",
+      "color": "#006647"
     },
     {
       "id": "xinghe-freight",
@@ -4522,6 +4546,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ea5c1d"
     },
     {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "seguimiento-rl-carriers",
+      "title": "Seguimiento R+L Carriers: número PRO, estados y reclamos",
+      "name": "R+L Carriers",
+      "color": "#006647"
+    },
+    {
       "id": "xinghe-freight",
       "catalog": "xinghe-freight",
       "slug": "xinghe-freight-seguimiento",
@@ -4908,6 +4940,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "seguimento-juxi-express",
+      "title": "Seguimento Juxi Express: código JXC, entrega e alfândega",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "china-post",
       "catalog": "china-post",
       "slug": "china-post-rastreio",
@@ -5066,6 +5106,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento HuaHan Logistics: código HHW…YQ e entrega",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "seguimento-rl-carriers",
+      "title": "Seguimento R+L Carriers: número PRO, estados e reclamações",
+      "name": "R+L Carriers",
+      "color": "#006647"
     },
     {
       "id": "xinghe-freight",
@@ -5512,6 +5560,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e60000"
     },
     {
+      "id": "juxi-express",
+      "catalog": "juxi-express",
+      "slug": "sledzenie-przesylek-juxi-express",
+      "title": "Śledzenie przesyłek Juxi Express: numer JXC, dostawa i cło",
+      "name": "Juxi Express",
+      "color": "#e2393c"
+    },
+    {
       "id": "jcex",
       "catalog": "jcex",
       "slug": "jcex-sledzenie",
@@ -5678,6 +5734,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie HuaHan Logistics: numer HHW…YQ i doręczenie",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "rl-carriers",
+      "catalog": "rl-carriers",
+      "slug": "sledzenie-rl-carriers",
+      "title": "Śledzenie R+L Carriers: numer PRO, statusy i reklamacje",
+      "name": "R+L Carriers",
+      "color": "#006647"
     },
     {
       "id": "xinghe-freight",

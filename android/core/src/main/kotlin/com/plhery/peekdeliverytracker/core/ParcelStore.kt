@@ -944,10 +944,12 @@ class ParcelStore(
      * parcels the account could not take over; the account's own registration stays as it is, and so does its choice
      * to have no notifications on this phone.
      */
-    suspend fun registerDeviceAlerts(token: String, language: AppLanguage) {
-        if (!tracksWithoutAccount || isDemo) return
-        if (session.user != null && defaults.bool(forKey = notificationOptOutKey)) return
-        device.registerAlerts(token, NativePushLocale(language))
+    suspend fun registerDeviceAlerts(token: String, language: AppLanguage): Boolean {
+        if (!tracksWithoutAccount || isDemo) return true
+        if (session.user != null && defaults.bool(forKey = notificationOptOutKey)) return true
+        val locale = NativePushLocale(language)
+        device.registerAlerts(token, locale)
+        return device.alertsSettled(token, locale)
     }
 
     /** Signs the device's parcels up again after a round cut short by an outage or a pause, on the conditions of the first. */
@@ -1680,26 +1682,28 @@ class ParcelStore(
         notificationPreferences = loaded
     }
 
-    suspend fun forwardNativePushToken(token: String, language: AppLanguage) {
-        if (isDemo || !session.isAuthenticated || notificationEnableInProgress || defaults.bool(forKey = notificationOptOutKey)) return
-        val user = session.user?.id ?: return
-        if (!NotificationDevicePolicy.belongs(user, notificationOwner)) return
+    suspend fun forwardNativePushToken(token: String, language: AppLanguage): Boolean {
+        if (notificationEnableInProgress) return false
+        if (isDemo || !session.isAuthenticated || defaults.bool(forKey = notificationOptOutKey)) return true
+        val user = session.user?.id ?: return false
+        if (!NotificationDevicePolicy.belongs(user, notificationOwner)) return true
         val generation = nativePushGeneration
         val sessionGeneration = session.generation
         try {
             api.registerNativePushToken(token, installationId, language, sendTest = false)
             if (generation != nativePushGeneration || !session.isAuthenticated || defaults.bool(forKey = notificationOptOutKey)) {
                 tryQuietly { api.unregisterNativePushToken(token) }
-                return
+                return false
             }
             defaults.set(true, forKey = nativePushRegisteredKey)
             defaults.set(user.uuidString, forKey = notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = null
+            return true
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
-            if (sessionGeneration != session.generation || error is CancellationException) return
-            notificationError = localizer.errorMessage(error)
+            if (sessionGeneration == session.generation && error !is CancellationException) notificationError = localizer.errorMessage(error)
+            return false
         }
     }
 

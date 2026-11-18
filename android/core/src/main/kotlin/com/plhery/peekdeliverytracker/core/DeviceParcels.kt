@@ -1083,6 +1083,10 @@ class DeviceParcels(
      * Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
      * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
      */
+    fun alertsSettled(token: String, locale: NativePushLocale): Boolean = entries.all {
+        it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
+    }
+
     suspend fun retryAlerts() {
         val retry = alertRetry ?: return
         if (now().isBefore(retry.at)) return

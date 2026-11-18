@@ -159,6 +159,12 @@ enum NotificationDevicePolicy {
         return owner == nil || owner == user
     }
 
+    /// Whether the device's token is on its way to the account signed in, which leaves the invitation nothing to ask:
+    /// the system lets it register, its notifications are this account's, and the last try to register it did not fail.
+    static func isRegistering(status: UNAuthorizationStatus, user: UUID?, owner: UUID?, failed: Bool) -> Bool {
+        isAuthorized(status) && belongs(to: user, owner: owner) && !failed
+    }
+
     /// An owner no account has, so whoever signs in next is asked.
     static let nobody = UUID(uuid: (0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0))
 

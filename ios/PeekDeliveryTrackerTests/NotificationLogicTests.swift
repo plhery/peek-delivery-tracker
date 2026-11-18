@@ -154,6 +154,20 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertFalse(invitation(status: .authorized, registering: true))
     }
 
+    func testInvitationAsksAgainOnceTheTokenFailsToRegister() {
+        let user = UUID()
+        func registering(owner: UUID?, failed: Bool) -> Bool {
+            NotificationDevicePolicy.isRegistering(status: .authorized, user: user, owner: owner, failed: failed)
+        }
+        XCTAssertTrue(registering(owner: nil, failed: false))
+        XCTAssertTrue(registering(owner: user, failed: false))
+        XCTAssertFalse(registering(owner: UUID(), failed: false))
+        XCTAssertFalse(NotificationDevicePolicy.isRegistering(status: .notDetermined, user: user, owner: user, failed: false))
+        // Permission and the account alone do not make a token arrive: once its registration fails, the reader can try.
+        XCTAssertFalse(registering(owner: user, failed: true))
+        XCTAssertTrue(invitation(status: .authorized, registering: registering(owner: user, failed: true)))
+    }
+
     func testInvitationDismissalPersistsPerAccount() {
         let suite = "NotificationInvitationTests.\(UUID())"
         let defaults = UserDefaults(suiteName: suite)!

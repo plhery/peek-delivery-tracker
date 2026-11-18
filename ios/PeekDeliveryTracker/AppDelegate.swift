@@ -11,6 +11,7 @@ import UserNotifications
 
 extension Notification.Name {
     static let didReceiveAPNSToken = Notification.Name("SDTDidReceiveAPNSToken")
+    static let didFailToReceiveAPNSToken = Notification.Name("SDTDidFailToReceiveAPNSToken")
     static let didOpenParcelNotification = Notification.Name("SDTDidOpenParcelNotification")
     static let didOpenLinkNotification = Notification.Name("SDTDidOpenLinkNotification")
     static let didOpenFriendNotification = Notification.Name("SDTDidOpenFriendNotification")
@@ -124,6 +125,7 @@ final class AppDelegate: NSObject, PlatformApplicationDelegate, UNUserNotificati
 
     func application(_ application: PlatformApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         Self.deviceTokenFailures += 1
+        NotificationCenter.default.post(name: .didFailToReceiveAPNSToken, object: nil)
     }
 
     func userNotificationCenter(

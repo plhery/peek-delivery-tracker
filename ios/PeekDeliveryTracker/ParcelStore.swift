@@ -85,6 +85,8 @@ final class ParcelStore: ObservableObject {
     /// saved to the account: it stands over the account's until it is.
     static let markNewUpdatesUnsavedKey = "sdt.markNewUpdatesUnsaved.v1"
     @Published private(set) var notificationError: String?
+    /// The last try to register this device's token, with Apple or with the server, failed: the invitation offers it again.
+    @Published private var nativePushRegistrationFailed = false
     @Published private(set) var deliveryWidgetEnabled = true
     @Published private(set) var deliveryLiveActivitiesEnabled = true
     @Published private(set) var deliveryLiveActivityError: String?
@@ -137,6 +139,7 @@ final class ParcelStore: ObservableObject {
     private var isActive = true
     private var identityObservation: AnyCancellable?
     private var timeZoneObservation: AnyCancellable?
+    private var deviceTokenFailureObservation: AnyCancellable?
     private var cacheOwnerID: UUID?
     private var mutationRevision = 0
     private var loadSequence = 0
@@ -195,6 +198,9 @@ final class ParcelStore: ObservableObject {
         timeZoneObservation = NotificationCenter.default.publisher(for: .NSSystemTimeZoneDidChange)
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in MainActor.assumeIsolated { self?.timeZoneChanged() } }
+        deviceTokenFailureObservation = NotificationCenter.default.publisher(for: .didFailToReceiveAPNSToken)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in MainActor.assumeIsolated { self?.nativePushRegistrationFailed = true } }
         unitsObservation = localizer.$use24HourTime.map { _ in () }.merge(with: localizer.$distanceUnit.map { _ in () })
             .dropFirst(2)
             .receive(on: DispatchQueue.main)
@@ -260,6 +266,7 @@ final class ParcelStore: ObservableObject {
         notificationError = nil
         notificationEnableInProgress = false
         notificationsEnabledOnDevice = false
+        nativePushRegistrationFailed = false
         notificationStateLoaded = false
         notificationStatus = .notDetermined
         deliveryLiveActivityError = nil
@@ -1245,6 +1252,7 @@ final class ParcelStore: ObservableObject {
         UserDefaults.standard.set(true, forKey: nativePushRegisteredKey)
         if let user = session.user?.id { UserDefaults.standard.set(user.uuidString, forKey: notificationOwnerKey) }
         notificationsEnabledOnDevice = true
+        nativePushRegistrationFailed = false
         dismissNotificationInvitation()
         succeeded = true
         return sent
@@ -1276,8 +1284,12 @@ final class ParcelStore: ObservableObject {
                 enabled: notificationsEnabledOnDevice,
                 optedOut: UserDefaults.standard.bool(forKey: notificationOptOutKey),
                 dismissed: notificationInvitationDismissed,
-                registering: NotificationDevicePolicy.isAuthorized(notificationStatus)
-                    && NotificationDevicePolicy.belongs(to: session.user?.id, owner: notificationOwner)
+                registering: NotificationDevicePolicy.isRegistering(
+                    status: notificationStatus,
+                    user: session.user?.id,
+                    owner: notificationOwner,
+                    failed: nativePushRegistrationFailed
+                )
             )
     }
 
@@ -1365,9 +1377,11 @@ final class ParcelStore: ObservableObject {
             UserDefaults.standard.set(true, forKey: nativePushRegisteredKey)
             UserDefaults.standard.set(user.uuidString, forKey: notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
+            nativePushRegistrationFailed = false
             notificationError = nil
         } catch {
             guard sessionGeneration == session.generation, !error.isCancellation else { return }
+            nativePushRegistrationFailed = true
             notificationError = localizer.errorMessage(error)
         }
     }

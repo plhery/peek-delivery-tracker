@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import * as observability from './observability';
 import * as places from 'universal-parcel-scraper/places';
 vi.mock('universal-parcel-scraper/places', { spy: true });
-import { currentEvent } from '../lib/stages';
+import { currentEvent, withRelays } from '../lib/stages';
 import type { Stage, TrackingEvent } from '../types';
 import { withEventPlaces, withoutEventSources } from './eventPlaces';
 
@@ -770,6 +770,26 @@ describe('withEventPlaces', () => {
     }));
     expect(currentEvent(parcelEvents)?.id).toBe('point');
     expect((withoutEventSources(row).tracking_events as Record<string, unknown>[]).some((event) => 'stage_source' in event)).toBe(false);
+  });
+
+  it('serves a notice its carrier sent twice as one step, headed by the newer row', () => {
+    // Synthetic DPD Germany rows: the first step, a stage-less notice, sent again in the same words 19 minutes later.
+    const scan = (id: string, stage: string, occurredAt: string, stageSource: string) => ({
+      ...event(id, null, occurredAt), stage, description: 'Fixture data exchanged', provider_event_id: `dpd-de:${id}`, stage_source: stageSource,
+    });
+    const row = {
+      id: 'parcel', carrier: 'dpd-de', tracking_events: [
+        scan('first', 'registered', '2026-11-16T15:03:56Z', 'none'),
+        scan('again', 'registered', '2026-11-16T15:23:02Z', 'none'),
+        scan('collected', 'accepted', '2026-11-17T18:47:46Z', 'carrier_map'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of }) => [id, relay_of])).toEqual([['first', 'again'], ['again', undefined], ['collected', undefined]]);
+    const listed = withRelays(served.map((event) => ({
+      id: String(event.id), ...(typeof event.relay_of === 'string' ? { relayOf: event.relay_of } : {}),
+    }))).listed.map(({ id }) => id);
+    expect(listed).toEqual(['again', 'collected']);
   });
 
   it('serves a notice after a relay copy under the step that copy is part of, not an older scan of its carrier', () => {

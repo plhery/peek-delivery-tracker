@@ -58,7 +58,7 @@ describe('the page on connecting an assistant', () => {
     expect(words).toContain(en['assistants.experimental']);
     // The address assistants connect to, on the canonical origin, whatever host the page was asked on.
     expect(html).toContain('<code>https://peek.example.test/mcp</code>');
-    for (const name of ['Claude', 'ChatGPT', 'Gemini']) expect(html).toContain(`<h3 translate="no">${name}</h3>`);
+    for (const name of ['Claude', 'ChatGPT', 'Gemini', 'Home Assistant']) expect(html).toContain(`<h3 translate="no">${name}</h3>`);
     expect(words).toContain('Sign in to Peek when it asks, then select Allow.');
     // At least three things to ask that work.
     for (const key of ['assistants.uses.email', 'assistants.uses.week', 'assistants.uses.where', 'assistants.uses.archive'] as const) expect(words).toContain(en[key]);

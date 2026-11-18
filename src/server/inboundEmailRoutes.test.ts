@@ -5,6 +5,9 @@ import { DELETE as closeInbox, GET as readInbox, PATCH as notifyInbox, POST as o
 import { POST as receive } from '../../app/api/inbound/email/route';
 import contract from '../../contracts/openapi.json';
 import { sign } from '../../ops/cloudflare/inbound-email-worker.js';
+import * as eligibility from './amazonShippingEligibility';
+import { HttpError } from './api';
+import * as parcels from './parcelsFromText';
 import { SupabaseAuthenticator } from './auth';
 import * as background from './background';
 import { mailResult } from './inboundEmail/receive';
@@ -189,6 +192,30 @@ describe('an email to a forwarding address', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Example Shop');
   });
 
+  it('retries an unavailable eligibility lookup within the same mailbox addition', async () => {
+    const db = account();
+    const verify = vi.spyOn(eligibility, 'verifyAmazonShippingAddition')
+      .mockRejectedValueOnce(new HttpError(503, 'Try again')).mockResolvedValueOnce(undefined);
+    const number = 'FR9999999980';
+    const match = { ...trackingNumbersInText(UPS)[0]!.match, carrier: 'amazon-shipping' as const, trackingNumber: number };
+    const added = await parcels.addNumbersToAccount(SupabaseServiceClient.prototype, userId, [{ normalized: number, match }],
+      'Example Shop', { retryEligibility: true });
+    expect(added[0]?.outcome).toBe('added');
+    expect(verify).toHaveBeenCalledTimes(2);
+    expect(db.create).toHaveBeenCalledOnce();
+  });
+
+  it('returns a retryable response when eligibility is temporarily unavailable', async () => {
+    const db = account();
+    const number = 'FR9999999980';
+    vi.spyOn(parcels, 'addParcelsFromText').mockResolvedValueOnce([
+      { trackingNumber: number, carrier: 'amazon-shipping', outcome: 'unavailable' },
+    ]);
+    const response = await posted(mail('Example Shop <shop@example.test>', 'Shipped', 'Tracking number: ' + number));
+    expect(response.status).toBe(503);
+    expect(db.record).not.toHaveBeenCalled();
+  });
+
   it('names the parcels after the shop as it signs, without its trademark signs, capitals or legal form', async () => {
     const db = account();
     await posted(mail('"EXAMPLE® SHOP AG" <orders@example-shop.com>', 'Shipped', `Your parcel ${UPS} is on its way.`));
@@ -353,7 +380,7 @@ describe('an email to a forwarding address', () => {
     expect(mailResult([parcel('known')], { delivered: true })).toBe('known');
     expect(mailResult([parcel('unavailable')], { delivered: true })).toBe('delivered');
     expect(mailResult([], { delivered: true })).toBe('delivered');
-    expect(mailResult([parcel('unavailable')])).toBe('none');
+    expect(mailResult([parcel('unavailable')])).toBe('unavailable');
     expect(mailResult([])).toBe('none');
   });
 

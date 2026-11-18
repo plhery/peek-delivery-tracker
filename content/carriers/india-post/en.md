@@ -14,8 +14,8 @@ An India Post number has 13 characters in the [international postal format](guid
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `EE000000005IN` | An item India Post numbered, within India or going abroad. The two letters in front vary; `IN` at the end is what counts. |
-| `EE000000005US` | Ends in other letters, here `US`: another country's post numbered it. A parcel coming to India from abroad usually has such a number. |
+| `EE482910576IN` | An item India Post numbered, within India or going abroad. The two letters in front vary; `IN` at the end is what counts. |
+| `EE482910576US` | Ends in other letters, here `US`: another country's post numbered it. A parcel coming to India from abroad usually has such a number. |
 
 India Post's tracker follows Speed Post, registered and insured items, Business and Express Parcels, electronic money orders and International EMS. Can't find yours? See [how to find a tracking number](guide:find-tracking-number).
 
@@ -35,7 +35,7 @@ India Post's FAQ sums up the steps as booked, received, bagged, dispatched, out 
 | `Send item to domestic location (Inb)` | The destination's office of exchange has sent it on into that country's network. |
 | `Item Delivered` | Delivered. |
 
-`(Otb)` marks a scan by the sending post, `(Inb)` one by the destination's post, which India Post relays. In the copy Peek reads, India Post now often gives codes such as `BAG_DISPATCH` instead; Peek spells out those it knows, such as "Bag Dispatched" or "Item Presented to Customs", and shows other codes as words. More in [what tracking statuses mean](guide:tracking-statuses).
+`(Otb)` marks a scan by the sending post, `(Inb)` one by the destination's post, which India Post relays. In the copy Peek reads, India Post now often gives codes such as `BAG_DISPATCH` instead; Peek spells out those it knows, such as "Bag Dispatched" or "Item Presented To Customs", and shows other codes as words. More in [what tracking statuses mean](guide:tracking-statuses).
 
 ## Receiving an India Post item in India
 
@@ -87,7 +87,7 @@ Peek shows each line in India Post's wording, with the office and, in India, its
 
 When India Post names the destination country, or names none and you track from outside India, Peek also asks a carrier it knows there with the same `IN` number, such as USPS, Royal Mail, Canada Post, Australia Post, [DHL](carrier:dhl) in Germany or [La Poste](carrier:la-poste) in France. It switches to that carrier once it has fresh scans, keeping India Post's history. Peek knows one for most of Europe and some other countries, including NZ Post in New Zealand and Qatar Post in Qatar, but none for the UAE, Kuwait, Oman, Singapore, Malaysia or Sri Lanka. It doesn't ask India Post about a number another post issued: picking India Post for one shows "doesn’t issue numbers like this one".
 
-Peek checks up to every 10 minutes, up to every 2 minutes once out for delivery, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while MySpeedPost or your post's own tracker answers (Royal Mail and Poste Italiane are checked hourly, PostNL and USPS up to every 30 minutes); through other tracking services, it's every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". If the parcel stalls while India Post has it, "Get help from India Post" opens India Post's Contact Us page. Peek can't contact India Post, your post or the shop for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes once out for delivery; otherwise hourly, and hourly after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"). The 2-minute checks run from 6 a.m. local time on the day the parcel goes out for delivery, while MySpeedPost or your post's own tracker answers; after a handover, Peek follows your post's pace. Through other tracking services, it's up to every 15 minutes. Alerts: "Every scan", "Important steps" or "Delivery only". If the parcel stalls while India Post has it, "Get help from India Post" opens India Post's Contact Us page. Peek can't contact India Post, your post or the shop for you.
 
 ## Questions about India Post tracking
 

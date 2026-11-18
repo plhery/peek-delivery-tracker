@@ -14,8 +14,8 @@ SpeedX says all its numbers start with `SPX`. In practice that's SPX, three lett
 
 | Shape (invented) | What it is |
 | --- | --- |
-| `SPXABC123456789012` | SPX, 3 letters and 12 digits (18 characters) |
-| `SPXABC123456789012345678` | SPX, 3 letters and 18 digits (24 characters) |
+| `SPXLGA482910573649` | SPX, 3 letters and 12 digits (18 characters) |
+| `SPXLGA482910573649182736` | SPX, 3 letters and 18 digits (24 characters) |
 
 Peek ignores lowercase and spaces.
 
@@ -88,9 +88,9 @@ SpeedX's channels for recipients in the US, as listed on its [support page](http
 
 [Peek](/) names SpeedX at once from an SPX number of either shape, or from a tracking.speedx.io link with the number in it.
 
-It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time and the destination country. It leaves out your address, the note on where the parcel was left and the delivery photo, so look at SpeedX's page for those. Peek shows the estimated delivery day from SpeedX's page. `Delivered` appears in Peek's own words; other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
+It reads SpeedX's own tracking page and shows the status and each scan with its town on a map, at the time SpeedX recorded it, plus the delivery time. It leaves out your address, the note on where the parcel was left and the delivery photo, so look at SpeedX's page for those. Peek shows the estimated delivery day from SpeedX's page. `Delivered` appears in Peek's own words; other lines show as SpeedX writes them, `Out for Delivery` included. There's no handoff to another carrier to follow.
 
-Peek checks up to every 10 minutes, or every 2 minutes from 6 a.m. local time on the day SpeedX scans the parcel out for delivery, while SpeedX's own tracker answers (through tracking services, every 15 minutes). It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After four days with no new scan while the parcel shows "Label created", "Received by carrier" or "In transit", Peek says it has gone quiet and links to SpeedX's support page ("Get help from SpeedX"). If SpeedX's page doesn't answer, other tracking sources rarely hold SpeedX parcels, so there may be nothing new until it does.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or up to every 2 minutes from 6 a.m. local time on the day SpeedX scans the parcel out for delivery, while SpeedX's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. It can notify you when the status changes. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. After four days with no new scan while the parcel shows "Label created", "Received by carrier" or "In transit", Peek says it has gone quiet and links to SpeedX's support page ("Get help from SpeedX"). If SpeedX's page doesn't answer, other tracking sources rarely hold SpeedX parcels, so there may be nothing new until it does.
 
 ## Questions about SpeedX tracking
 

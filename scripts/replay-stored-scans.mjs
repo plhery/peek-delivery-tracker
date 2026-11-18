@@ -108,7 +108,7 @@ for (const step of followed) console.log(`        ${short(step.parcel)} ${step.f
 
 const sqlFile = option('--sql');
 if (sqlFile) {
-  writeFileSync(sqlFile, replaySql(changes, moved), { mode: 0o600 });
+  writeFileSync(sqlFile, replaySql(changes, moved, parcels), { mode: 0o600 });
   console.log(`\nWrote the guarded transaction for ${changes.length} rows and ${moved.length} parcels to ${sqlFile}; it ends open, to roll back or commit.`
     + ' Before any change it prints the rows it changes, one JSON line each: keep the output of the run that commits as the backup.');
 }

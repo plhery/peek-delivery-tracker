@@ -55,6 +55,8 @@ $$;
 revoke all on function public.refresh_assistant_tokens(text, text, text, timestamptz, text, timestamptz, text[]) from public, anon, authenticated;
 grant execute on function public.refresh_assistant_tokens(text, text, text, timestamptz, text, timestamptz, text[]) to service_role;
 
+notify pgrst, 'reload schema';
+
 insert into public.applied_migrations (name) values ('20261118220200_assistant_refresh_scope') on conflict do nothing;
 
 commit;

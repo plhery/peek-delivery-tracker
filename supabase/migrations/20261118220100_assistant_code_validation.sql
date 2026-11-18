@@ -43,6 +43,8 @@ $$;
 revoke all on function public.redeem_assistant_code(text, text, text, text, text, timestamptz, text, timestamptz) from public, anon, authenticated;
 grant execute on function public.redeem_assistant_code(text, text, text, text, text, timestamptz, text, timestamptz) to service_role;
 
+notify pgrst, 'reload schema';
+
 insert into public.applied_migrations (name) values ('20261118220100_assistant_code_validation') on conflict do nothing;
 
 commit;

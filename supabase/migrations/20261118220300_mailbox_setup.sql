@@ -35,6 +35,8 @@ $$;
 revoke all on function public.open_inbound_mailbox(uuid, text, boolean) from public, anon, authenticated;
 grant execute on function public.open_inbound_mailbox(uuid, text, boolean) to service_role;
 
+notify pgrst, 'reload schema';
+
 insert into public.applied_migrations (name) values ('20261118220300_mailbox_setup') on conflict do nothing;
 
 commit;

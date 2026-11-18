@@ -320,6 +320,7 @@ Key server modules:
 - **Adding parcels by email**: an account the server opens it to (`INBOUND_EMAIL_ACCOUNTS`)
   gets a forwarding address whose random token (16 base32 characters, 80 bits) names it.
   Every other account gets 404 from `/api/account/inbox`, so Settings shows no row.
+  Setting it up twice at once gives both the same address; only renewing replaces it.
   - Settings shows the address to forward one email to, and what the last emails did. The
     steps for having the mail service forward by itself are folded away under it
     (`src/lib/emailFilter.ts`). The reader names their service, which starts on the one the
@@ -343,7 +344,9 @@ Key server modules:
     the time, the recipient and the raw mail, valid for five minutes. An unsigned or stale
     post gets 401. An unknown token, a closed account and a used-up allowance all get the
     same 202. An account the setting isn't open to has its emails dropped before they are
-    counted.
+    counted. When Amazon Shipping's check can't answer twice in a row for a number in the
+    email, the server answers 503 and records nothing: the Worker fails, so the sender tries
+    again later.
   - The server reads the subject, the text part (else the HTML's text) and the links of
     both, a carrier's site first, never an attachment. The text part's addresses are read as
     links, not as text: a hand-forwarded email inlines every one, and they would fill the
@@ -436,14 +439,18 @@ Key server modules:
     (`rename_parcel`, `change_carrier`, `set_parcel_notifications`, `restore_parcel`). Editing
     has its own scope because it came after grants had allowed writing: those keep adding and
     archiving, and a call to edit asks the owner for a new consent. It sends the browser nowhere before
-    the owner answers: a request it can't take is shown as one. The answer is a code valid
-    once for ten minutes; one used twice ends its grant.
+    the owner answers: a request it can't take is shown as one. A request without `scope`
+    asks for every scope; one whose `scope` names none of them gets `invalid_scope`. The
+    answer is a code valid once for ten minutes; one used twice ends its grant. An exchange
+    with the wrong client, redirect or PKCE verifier leaves the code as it was.
   - Every grant lists every tool, each naming the scope it needs in
     `_meta.securitySchemes`, as ChatGPT reads it. A call outside the grant's scopes answers
     an error result whose `_meta["mcp/www_authenticate"]` holds an `insufficient_scope`
     challenge, which ChatGPT turns into a new sign-in.
   - Access tokens last an hour. A refresh token lasts 60 days and is replaced at each use;
-    a replaced one used again after two minutes ends the grant. Google's assistants keep
+    a replaced one used again after two minutes ends the grant. A refresh may ask for fewer
+    scopes: the access token gets those, and the refresh token keeps the grant's; one that asks
+    for more gets `invalid_scope`. Google's assistants keep
     theirs, as they require. A personal token lasts until it is deleted. Allowing an
     assistant, or making a personal token, needs a sign-in from the last ten minutes, which the server
     checks with Auth afresh; the consent page then asks to sign in again in place and
@@ -456,8 +463,8 @@ Key server modules:
     as may an IPv6 /48; while it waits, a token issued or found valid lately still goes
     through, so a stranger can't lock out an assistant's shared addresses. A network may open the consent page 30 times a minute (a /48 120) and register 20
     clients an hour. An
-    account has at most 50 grants and 10 personal tokens; Settings lists the assistants and
-    disconnects any.
+    account has at most 50 grants, personal tokens included, and 10 personal tokens, counted
+    one request at a time; Settings lists the assistants and disconnects any.
   - Settings also shows how to add Peek to Claude, ChatGPT and Gemini, with each one's menu
     names in English as its help pages give them and the plans and places that can, and what
     to ask a connected assistant, first to add the tracking numbers in the user's emails.
@@ -480,7 +487,8 @@ Key server modules:
     button), and add the carrier named after "Delivery By" with the "Tracking ID", never the
     order number; it only reads there, never signs in, and says when Amazon tracks a parcel it
     delivers itself in the account alone. `add_parcels`' description and its no-number answer point to the same page.
-    The tools' answers leave out the receiver's name and postcode and read the scans as a
+    The tools' answers leave out the receiver's name and postcode, mask the postcode a
+    C Chez Vous reference ends with, and read the scans as a
     link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan
     that names the recipient, who signed, a code or a door reads its stage's English name,
     and a status line or place that does is left out. The status and what the parcel needs

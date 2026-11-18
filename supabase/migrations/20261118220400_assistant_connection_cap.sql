@@ -62,6 +62,8 @@ $$;
 revoke all on function public.create_personal_token(uuid, text, text[], text) from public, anon, authenticated;
 grant execute on function public.create_personal_token(uuid, text, text[], text) to service_role;
 
+notify pgrst, 'reload schema';
+
 insert into public.applied_migrations (name) values ('20261118220400_assistant_connection_cap') on conflict do nothing;
 
 commit;

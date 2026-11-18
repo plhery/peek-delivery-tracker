@@ -1192,13 +1192,23 @@ struct AddParcelView: View {
         recognition.settledNumber = Self.trackingNumber(in: value)
     }
 
+    /// A number shared, linked or asked for while Add is open is another parcel: nothing typed for the one
+    /// before, its name, link, postcode, phone digits or carrier, goes with it.
     private func fill(_ draft: SharedParcelDraft) {
         withAnimation(reduceMotion ? nil : .snappy(duration: 0.34)) {
             errorMessage = nil
+            duplicateParcelID = nil
             trackingInput = draft.trackingInput
-            if !draft.label.isEmpty { label = draft.label }
+            label = draft.label
+            trackingURL = ""
+            carrierOverride = nil
+            asTyped = nil
+            pick = nil
+            postcodes = CarrierPostcodes()
+            phoneInput = ParcelPhoneInput()
         }
         recognition.settledNumber = Self.trackingNumber(in: draft.trackingInput)
+        prepareRequiredDetails(for: resolvedCarrier)
     }
 
     private func selectCarrier(_ carrier: CarrierID?) {

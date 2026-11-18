@@ -49,6 +49,13 @@ describe('account postcode', () => {
     }])).toMatchObject({ dpd_postcode: '10115', carrier_data: { account_postcode: true } });
   });
 
+  it('finds the same carrier\'s postcode behind many other parcels', () => {
+    // Thirty newer parcels at another carrier, all at one French address, then the one given DPD.
+    const given = [...Array.from({ length: 30 }, () => ({ carrier: 'colis-prive', dpd_postcode: '75001' })),
+      { carrier: 'dpd', dpd_postcode: '8000' }];
+    expect(accountPostcodeFor('dpd', '06080000000001', given)).toEqual({ postcode: '8000', country: null });
+  });
+
   it('leaves out a postcode a carrier refused', () => {
     expect(accountPostcodeWrite(parcel(), [
       { carrier: 'dpd', dpd_postcode: '8000', dpd_postcode_verified: false },

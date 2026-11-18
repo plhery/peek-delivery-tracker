@@ -55,6 +55,7 @@ function fitting(carrier: string, number: string, postcode: string, country: str
  * checked as from the country it was given with.
  */
 export function accountPostcodeFor(carrier: string, number: string, given: readonly JsonObject[]): FittingPostcode | null {
+  const seen = new Set<string>();
   const fits = given.flatMap((row) => {
     const from = String(row.carrier);
     const postcode = typeof row.dpd_postcode === 'string' ? row.dpd_postcode.trim() : '';
@@ -62,6 +63,10 @@ export function accountPostcodeFor(carrier: string, number: string, given: reado
     const country = Object.hasOwn(CARRIERS, from)
       ? storedPostcodeCountry({ postcode_country: row.postcode_country }, postcode) ?? homePostcodeCountry(from as CarrierId) : null;
     if (!postcode || refused || !country) return [];
+    // An account's parcels often repeat one address: each is checked once, at its newest.
+    const key = JSON.stringify([from, postcode, country]);
+    if (seen.has(key)) return [];
+    seen.add(key);
     const fit = fitting(carrier, number, postcode, country);
     return fit ? [{ from, ...fit }] : [];
   });

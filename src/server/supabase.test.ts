@@ -1294,6 +1294,19 @@ describe('notification reads', () => {
   });
 });
 
+describe('account postcodes', () => {
+  it('reads every postcode the account gave, newest parcel first, in a stable order', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValue([{ carrier: 'dpd', dpd_postcode: '8000' }]);
+    await expect(client.accountPostcodes('5c000000-0000-4000-a000-000000000001')).resolves.toEqual([{ carrier: 'dpd', dpd_postcode: '8000' }]);
+    const params = new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams;
+    expect(params.get('user_id')).toBe('eq.5c000000-0000-4000-a000-000000000001');
+    expect(params.get('order')).toBe('created_at.desc,id.desc');
+    // An account holds at most 500 parcels: the one given the same carrier is never cut off.
+    expect(params.get('limit')).toBe('500');
+  });
+});
+
 describe('Friends passports', () => {
   // Synthetic identifiers only.
   const owner = '5c000000-0000-4000-a000-000000000001';

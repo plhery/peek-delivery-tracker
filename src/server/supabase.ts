@@ -1696,13 +1696,14 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /**
    * The postcodes an account gave its parcels' carriers, newest parcel first, with what the carrier
-   * made of each (accountPostcode.ts).
+   * made of each (accountPostcode.ts). All of them, as the Add sheet reads them: an account holds at
+   * most 500 parcels, and the one given the same carrier can be the oldest.
    */
   async accountPostcodes(userId: string): Promise<JsonObject[]> {
     return rows(await this.request(`/rest/v1/packages?${query({
       select: 'carrier,dpd_postcode,postcode_country:carrier_data->postcode_country,'
         + 'dpd_postcode_verified:carrier_data->dpd_postcode_verified,postcode_refused:carrier_data->routing->postcode_refused',
-      user_id: `eq.${userId}`, dpd_postcode: 'not.is.null', order: 'created_at.desc', limit: '20',
+      user_id: `eq.${userId}`, dpd_postcode: 'not.is.null', order: 'created_at.desc,id.desc', limit: '500',
     })}`));
   }
 

@@ -129,6 +129,7 @@ export interface TrackingEvent {
  * made: no scan. The timeline shows it greyed as planned and not confirmed; nothing else reads it.
  */
 export interface PlannedEvent {
+  expiresAt?: string;
   stage: Stage;
   description: string;
   location?: string;

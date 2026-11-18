@@ -59,7 +59,7 @@ describe('servedPlannedSteps', () => {
 
   it('dates a step on its day alone by that day, and keeps it through it', () => {
     const steps = servedPlannedSteps(row({}, [{ local_time: '2026-10-18', description: 'Customs cleared', stage: 'customs' }]), [pickedUp]);
-    expect(steps).toEqual([{ description: 'Customs cleared', stage: 'customs', location: null, occurred_at: '2026-10-17T16:00:00.000Z', day: '2026-10-18' }]);
+    expect(steps).toEqual([{ description: 'Customs cleared', stage: 'customs', location: null, occurred_at: '2026-10-17T16:00:00.000Z', day: '2026-10-18', expires_at: '2026-10-18T16:00:00.000Z' }]);
   });
 
   it('leaves out a step a scan tells, has passed or has come further than', () => {

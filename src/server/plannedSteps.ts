@@ -110,7 +110,7 @@ function stepTime(step: PlannedStep, zone: string): { instant: number; until: nu
   const at = day ? DateTime.fromISO(day, { zone }).toUTC().toISO() : eventTimestamp(step.time ?? step.local_time, zone);
   const instant = Date.parse(at ?? '');
   if (!Number.isFinite(instant)) return null;
-  return { instant, until: day ? DateTime.fromISO(day, { zone }).endOf('day').toMillis() : instant, day };
+  return { instant, until: day ? DateTime.fromISO(day, { zone }).plus({ days: 1 }).startOf('day').toMillis() : instant, day };
 }
 
 /** A step as the API serves it (`PlannedTrackingEvent`): one the carrier gave no stage is in transit. */
@@ -155,6 +155,7 @@ export function servedPlannedSteps(row: JsonObject, events: readonly JsonObject[
         && (!scan.location || !step.location || words(scan.location) === words(step.location));
     })) return [];
     const served = servedStep(step, time);
+    if (time.day) served.expires_at = new Date(time.until).toISOString();
     const progress = PROGRESS.indexOf(String(served.stage));
     return progress >= 0 && progress < reached ? [] : [served];
   }).sort(oldestFirst);

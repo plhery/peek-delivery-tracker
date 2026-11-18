@@ -14,8 +14,8 @@ CTTYEX's site says nothing about its number format, but the numbers its tracker 
 
 | Number | What it is |
 | --- | --- |
-| `CTTY1234567890CN` | CTTY, ten digits and CN: a CTTYEX number. |
-| `CTTY123456789CN` | Nine digits only: not a CTTYEX shape. A digit is missing; if no carrier answers for it, its page on peektracker.com says "This starts like a CTTYEX tracking number but is one character short, so it may be mistyped." |
+| `CTTY6051827049CN` | CTTY, ten digits and CN: a CTTYEX number. |
+| `CTTY605182704CN` | Nine digits only: not a CTTYEX shape. A digit is missing; if no carrier answers for it, its page on peektracker.com says "This starts like a CTTYEX tracking number but is one character short, so it may be mistyped." |
 | `LX000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number, not CTTYEX's, despite the same CN ending. |
 
 Peek takes the number in lower case or with spaces. CTTYEX's site doesn't: its search box accepts only letters and digits, and its tracker only matches the number in capitals, so type it as CTTY…CN, without spaces.

@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import {
   countdown,
@@ -11,6 +12,7 @@ import {
   type LookupEvent,
   type LookupState,
 } from './machine';
+import { mistypedNumber } from './reading';
 import type { GivenPostcode } from '../../lib/postcodeMemory';
 
 // Every number here is fictional.
@@ -36,6 +38,18 @@ const track: LookupEvent = { type: 'submit' };
 const rested = (text: string): LookupEvent => ({ type: 'pause', text });
 
 describe('going on', () => {
+  it('accepts the printed examples in the GLS US and CTTYEX guides', () => {
+    const examples = (carrier: string) => Array.from(readFileSync(`content/carriers/${carrier}/en.md`, 'utf8')
+      .matchAll(/^\| `([^`]+)` \|/gm), (match) => match[1]!);
+    for (const printed of examples('gls-us').slice(0, 2)) {
+      const state = run([pasted(printed)]);
+      expect(survey(state)).toMatchObject({ placeholder: false, ask: printed.toUpperCase().replaceAll(' ', '') });
+    }
+    const short = examples('cttyex')[1]!;
+    expect(survey(run([pasted(short)]))).toMatchObject({ placeholder: false });
+    expect(mistypedNumber(short)).toEqual({ kind: 'mistyped', carrier: 'cttyex', change: 'missing' });
+  });
+
   it('waits for Track when the number was typed, however certain the carrier', () => {
     const state = run([typed(UPS), rested(UPS)]);
     expect(state.job).toBeNull();

@@ -14,12 +14,12 @@ Nel Regno Unito l'ex Hermes UK è diventato [Evri](carrier:evri) nel marzo 2022,
 
 Il codice di spedizione (*Sendungsnummer*) si trova nell'e-mail di invio del negozio o nel riepilogo dell'ordine (ad esempio in *Mein Konto* su OTTO). Se non lo trovi, chiedilo al mittente o leggi [come trovare il numero di tracciamento](guide:find-tracking-number).
 
-Il servizio pubblico Hermes Germany accetta codici alfanumerici da 8 a 20 caratteri con almeno una cifra:
+Il servizio pubblico Hermes Germany chiede un numero di 14-20 lettere o cifre:
 
 | Formato (inventato) | Che cos'è | Riconoscimento in Peek |
 | --- | --- | --- |
 | `H1048291057364928` | `H` seguita da 16–19 cifre: esclusivo di Hermes Germany. | Riconosciuto subito come Hermes Germany. |
-| `74829105736493` | 14 cifre con controllo Hermes: condiviso con [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) e altri. Con prefisso `022` (`02248291057367`), Hermes viene interrogato per primo. | Proposto come "Probabilmente Hermes Germany"; un codice a 15 cifre con zero iniziale extra (`002248291057367`) viene verificato allo stesso modo. |
+| `74829105736493` | 14 cifre con controllo Hermes: condiviso con [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) e altri. Con prefisso `022` (`02248291057367`), Hermes viene interrogato per primo. | Hermes viene interrogato tra i corrieri probabili; un codice a 15 cifre con zero iniziale extra (`002248291057367`) viene verificato allo stesso modo. |
 | `H482910573649283` | `H` seguita da 15 cifre: Hermes Germany oppure [Evri](carrier:evri) dal Regno Unito. | Peek interroga Hermes Germany (ed Evri se la cifra finale supera il controllo Evri). |
 
 Il servizio bagagli *Hermes Gepäckversand* (Deutsche Bahn) e i riferimenti a 14 cifre fuori controllo codice a barre si cercano tramite numero d'ordine: premi "Cambia" (o "Cambia corriere" nella scheda) e scegli **Hermes Germany**.
@@ -65,9 +65,9 @@ Le righe `Für die Sendung wurde ein WunschPaketShop gebucht.` e `Ein WunschTag 
 
 ## Tracciare un pacco Hermes Germany con Peek
 
-[Peek](/) interroga il servizio destinatari di Hermes senza CAP e accetta i link `myhermes.de`. Sui 14 cifre condivisi mostra "In attesa della prima scansione di Hermes Germany" fino al primo evento. Estrae dai testi la località del deposito, della regione, del paese o del *PaketShop* per la mappa, converte le date ("Orari nel tuo fuso orario: …") e legge solo l'indirizzo del *PaketShop* attivo o usato, mai quello domestico.
+[Peek](/) interroga il servizio destinatari di Hermes senza CAP e accetta i link `myhermes.de`. Estrae dai testi la località del deposito, della regione, del paese o del *PaketShop* per la mappa, converte le date ("Orari nel tuo fuso orario: …") e legge solo l'indirizzo del *PaketShop* attivo o usato, mai quello domestico.
 
-Mentre tieni aperta la spedizione, o nel giorno di consegna con notifiche attive, Peek controlla fino a ogni 10 minuti — e ogni 2 minuti nel giorno di uscita in consegna dalle 6:00 tedesche (o mezz'ora prima della fascia Hermes) — finché Hermes risponde direttamente (tramite servizi di tracciamento: fino a ogni 15 minuti in quel giorno, altrimenti ogni ora); negli altri casi controlla ogni ora, anche dopo due giorni senza novità (o 12 ore su "Etichetta creata" o "Preso in carico"). Con un partner locale segue la cadenza di quest'ultimo. Avvisi per "Ogni scansione", "Passaggi importanti" o "Solo la consegna"; i vecchi codici cancellati restituiscono 404.
+Mentre tieni aperta la spedizione, o nel giorno di consegna con notifiche attive, Peek controlla fino a ogni 10 minuti — e ogni 2 minuti nel giorno di uscita in consegna dalle 6:00 tedesche (o mezz'ora prima della fascia Hermes) — finché Hermes risponde direttamente (tramite servizi di tracciamento: ogni ora, ogni 3 ore dopo un giorno senza scansioni, fino a ogni 15 minuti in quel giorno); negli altri casi controlla ogni ora, anche dopo due giorni senza novità (o 12 ore su "Etichetta creata" o "Preso in carico"). Con un partner locale segue la cadenza di quest'ultimo. Avvisi per "Ogni scansione", "Passaggi importanti" o "Solo la consegna"; i vecchi codici cancellati restituiscono 404.
 
 ## Domande frequenti (FAQ)
 
@@ -77,7 +77,7 @@ Solo nel Regno Unito, dove Hermes UK è diventato [Evri](carrier:evri) nel marzo
 
 ### Perché le scansioni di Hermes sono in inglese o in tedesco?
 
-Il servizio Hermes Germany fornisce i testi degli eventi solo in tedesco e in inglese. Per chi legge in italiano Peek richiede l'inglese (alcune righe partner restano in tedesco) e traduce la fase principale in italiano.
+Per chi legge in italiano Peek chiede a Hermes Germany i testi degli eventi in inglese (alcune righe restano in tedesco) e traduce la fase principale in italiano.
 
 ### Come seguo mobili spediti con Hermes in Germania?
 

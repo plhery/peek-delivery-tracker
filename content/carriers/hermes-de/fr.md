@@ -14,12 +14,12 @@ Au Royaume-Uni, l'ancienne filiale Hermes UK est devenue [Evri](carrier:evri) en
 
 Le numéro de suivi (*Sendungsnummer*) figure dans l'e-mail d'expédition du marchand ou dans le détail de ta commande (par exemple sous *Mein Konto* sur OTTO). Sans numéro, demande-le au vendeur ou consulte [comment trouver un numéro de suivi](guide:find-tracking-number).
 
-Le suivi public Hermes Germany accepte des codes alphanumériques de 8 à 20 caractères contenant au moins un chiffre :
+Le suivi public Hermes Germany demande un numéro de 14 à 20 lettres ou chiffres :
 
 | Format (inventé) | Signification | Reconnaissance dans Peek |
 | --- | --- | --- |
 | `H1048291057364928` | `H` et 16 à 19 chiffres : code propre à Hermes Germany. | Reconnu aussitôt comme Hermes Germany. |
-| `74829105736493` | 14 chiffres avec clé Hermes : partagé avec [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) et d'autres. Avec le préfixe `022` (`02248291057367`), Hermes est testé en premier. | Proposé comme « Probablement Hermes Germany » ; un code de 15 chiffres avec zéro en tête (`002248291057367`) est vérifié pareillement. |
+| `74829105736493` | 14 chiffres avec clé Hermes : partagé avec [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) et d'autres. Avec le préfixe `022` (`02248291057367`), Hermes est testé en premier. | Hermes est interrogé parmi les transporteurs probables ; un code de 15 chiffres avec zéro en tête (`002248291057367`) est vérifié pareillement. |
 | `H482910573649283` | `H` et 15 chiffres : Hermes Germany ou [Evri](carrier:evri) (Royaume-Uni). | Peek interroge Hermes Germany (et Evri si la clé Evri correspond). |
 
 Les bagages *Hermes Gepäckversand* (Deutsche Bahn) et les références à 14 chiffres hors clé de code-barres se suivent par numéro de commande : clique sur « Changer » (ou « Changer de transporteur ») et choisis **Hermes Germany**.
@@ -54,7 +54,7 @@ Les lignes `Für die Sendung wurde ein WunschPaketShop gebucht.` et `Ein WunschT
 - **France, Belgique, Luxembourg :** un envoi venant d'Allemagne circule dans l'Union européenne sans douane ni frais de dossier. Pour un colis venant de hors UE en vente à distance, l'exonération sous 150 € prend fin : droit fixe de **3 €** par catégorie d'articles jusqu'à 150 € dès le **1er juillet 2026**, plus **2 €** de frais européens de traitement par catégorie d'articles quelle que soit la valeur dès le **1er novembre 2026**.
 - **Suisse :** les colis d'Allemagne passent la douane suisse. Selon l'OFDF, TVA et droits ne sont pas perçus en dessous de **5 CHF** chacun (cadeaux privés francs jusqu'à **100 CHF**, hors alcool et tabac) ; au-delà, le transporteur ajoute ses frais de dédouanement, publiés notamment par [La Poste suisse](carrier:swiss-post).
 
-> **Faux SMS et e-mails :** en France, Cybermalveillance.gouv.fr rappelle de ne jamais payer via un lien reçu par SMS ou courriel réclamant quelques euros pour un colis et de signaler le SMS au **33700**. En Belgique, [bpost](carrier:bpost) ne demande un paiement (uniquement dans *My bpost* ou le *Track & Trace* officiel) que pour les frais d'importation d'un envoi hors UE — jamais pour un colis parti d'Allemagne.
+> **Faux SMS et e-mails :** en France, Cybermalveillance.gouv.fr rappelle de ne jamais payer via un lien reçu par SMS ou courriel réclamant quelques euros pour un colis et de signaler le SMS au **33700**. En Belgique, [bpost](carrier:bpost) ne demande un paiement (uniquement dans *My bpost*, le *Track & Trace* officiel ou un bureau de poste) que pour les frais d'importation d'un envoi hors UE — jamais pour un colis parti d'Allemagne.
 
 ## Colis Hermes en retard, absent ou endommagé
 
@@ -65,9 +65,9 @@ Les lignes `Für die Sendung wurde ein WunschPaketShop gebucht.` et `Ein WunschT
 
 ## Suivre un colis Hermes Germany avec Peek
 
-[Peek](/) interroge le suivi destinataire d'Hermes sans code postal et accepte les liens `myhermes.de`. Pour un numéro partagé à 14 chiffres, il affiche « En attente du premier scan de Hermes Germany » jusqu'au premier événement. Il place sur la carte le dépôt, la région, le pays ou la ville du *PaketShop* cités dans le scan, convertit les dates (« Heures dans ton fuseau horaire : … ») et ne lit que l'adresse d'un *PaketShop* actif ou utilisé, jamais ton domicile.
+[Peek](/) interroge le suivi destinataire d'Hermes sans code postal et accepte les liens `myhermes.de`. Il place sur la carte le dépôt, la région, le pays ou la ville du *PaketShop* cités dans le scan, convertit les dates (« Heures dans ton fuseau horaire : … ») et ne lit que l'adresse d'un *PaketShop* actif ou utilisé, jamais ton domicile.
 
-Lorsque le suivi est ouvert à l'écran, ou le jour de livraison avec notifications activées, Peek vérifie jusqu'à toutes les 10 minutes — et toutes les 2 minutes le jour du départ en tournée dès 6 h heure allemande (ou 30 minutes avant le créneau Hermes) — tant qu'Hermes répond directement (via services de suivi : jusqu'à 15 minutes ce jour-là, sinon toutes les heures) ; autrement, le contrôle est horaire, y compris après deux jours sans scan (ou 12 heures sur « Étiquette créée » ou « Pris en charge »). Avec un partenaire local, Peek suit la cadence de ce dernier. Alertes au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement » ; les anciens numéros purgés renvoient 404.
+Lorsque le suivi est ouvert à l'écran, ou le jour de livraison avec notifications activées, Peek vérifie jusqu'à toutes les 10 minutes — et toutes les 2 minutes le jour du départ en tournée dès 6 h heure allemande (ou 30 minutes avant le créneau Hermes) — tant qu'Hermes répond directement (via services de suivi : toutes les heures, toutes les 3 heures après une journée sans scan, jusqu'à toutes les 15 minutes ce jour-là) ; autrement, le contrôle est horaire, y compris après deux jours sans scan (ou 12 heures sur « Étiquette créée » ou « Pris en charge »). Avec un partenaire local, Peek suit la cadence de ce dernier. Alertes au choix : « Chaque scan », « Étapes importantes » ou « Livraison seulement » ; les anciens numéros purgés renvoient 404.
 
 ## Questions fréquentes (FAQ)
 
@@ -77,7 +77,7 @@ Uniquement au Royaume-Uni, où Hermes UK est devenu [Evri](carrier:evri) en mars
 
 ### Pourquoi les scans Hermes sont-ils en anglais ou en allemand ?
 
-Le service Hermes Germany ne fournit ses textes d'événements qu'en allemand et en anglais. Peek demande l'anglais pour un lecteur francophone (quelques lignes partenaires restant en allemand) et traduit l'étape principale en français.
+Peek demande à Hermes Germany ses textes d'événements en anglais pour un lecteur francophone (quelques lignes restent en allemand) et traduit l'étape principale en français.
 
 ### Comment suivre des meubles expédiés avec Hermes en Allemagne ?
 

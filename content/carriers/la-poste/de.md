@@ -49,7 +49,7 @@ Meldet sich bei dir vor Ort [DHL](carrier:dhl), [DPD](carrier:dpd-de), die [Öst
 
 ## Zoll: EU-Binnenmarkt vs. Schweiz
 
-- **Deutschland und Österreich:** Zwischen Frankreich, Deutschland und Österreich fallen innerhalb des Zollgebiets der Europäischen Union keine Zollformalitäten an. Kommt eine Bestellung jedoch ursprünglich aus einem Nicht-EU-Land in die EU, gilt laut Europäischer Kommission und deutschem Zoll seit dem 1. Juli 2026 auf Sendungen bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie und seit dem 1. November 2026 zusätzlich eine EU-Abfertigungsgebühr von 2 € je Warenkategorie unabhängig vom Warenwert.
+- **Deutschland und Österreich:** Zwischen dem europäischen Frankreich, Deutschland und Österreich fallen keine Zollformalitäten an. Die französischen Überseedepartements (Guadeloupe, Französisch-Guayana, Martinique, Réunion, Mayotte) liegen dagegen außerhalb des EU-Mehrwertsteuergebiets: Für ein Paket von dort kann Einfuhrumsatzsteuer anfallen. Kommt eine Bestellung jedoch ursprünglich aus einem Nicht-EU-Land in die EU, gilt laut Europäischer Kommission und deutschem Zoll seit dem 1. Juli 2026 auf Sendungen bis 150 € ein pauschaler Zoll von 3 € je Warenkategorie und seit dem 1. November 2026 zusätzlich eine EU-Abfertigungsgebühr von 2 € je Warenkategorie unabhängig vom Warenwert.
 - **Schweiz:** Da die Schweiz nicht zur EU gehört, durchläuft jedes Paket aus Frankreich die Schweizer Einfuhrverzollung. Laut Bundesamt für Zoll und Grenzsicherheit (BAZG) und [Schweizerischer Post](carrier:swiss-post) zieht der befördernde Zusteller anfallende Mehrwertsteuer, Zölle und Verzollungsgebühren ein; Abgaben bis 5 CHF werden nicht erhoben (das entspricht einem Warenwert inklusive Versandkosten von rund 62 CHF zum Normalsatz von 8,1 % bzw. 193 CHF zum reduzierten Satz von 2,6 %), und private Geschenksendungen sind bis 100 CHF (ohne Alkohol und Tabak) abgabenfrei. Details findest du unter [Paket beim Zoll](guide:customs).
 
 ## Paket hängt fest, ist verloren oder beschädigt
@@ -86,7 +86,7 @@ In Frankreich stellt La Poste Groupe Briefe und Pakete an sechs Tagen pro Woche 
 
 ### Muss ich für ein Paket aus Frankreich Zoll bezahlen?
 
-Nach Deutschland und Österreich nicht, da Frankreich zur EU-Zollunion gehört. In die Schweiz fällt dagegen die reguläre Einfuhrverzollung an, sofern der Abgabenbetrag über 5 CHF liegt (bzw. bei privaten Geschenken der Wert von 100 CHF überschritten wird).
+Aus dem europäischen Frankreich nach Deutschland und Österreich nicht. Ein Paket aus den französischen Überseedepartements kann Einfuhrumsatzsteuer kosten, denn sie liegen außerhalb des EU-Mehrwertsteuergebiets. In die Schweiz fällt dagegen die reguläre Einfuhrverzollung an, sofern der Abgabenbetrag über 5 CHF liegt (bzw. bei privaten Geschenken der Wert von 100 CHF überschritten wird).
 
 ### Warum funktioniert meine Sendungsnummer auf laposte.fr nicht?
 

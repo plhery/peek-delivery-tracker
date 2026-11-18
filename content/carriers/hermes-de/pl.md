@@ -14,12 +14,12 @@ W Wielkiej Brytanii dawny oddział Hermes UK zmienił w marcu 2022 roku nazwę n
 
 Numer przesyłki (*Sendungsnummer*) otrzymasz w wiadomości e-mail z potwierdzeniem wysyłki od sprzedawcy lub znajdziesz go w szczegółach zamówienia w sklepie (na przykład w zakładce *Mein Konto* na platformie OTTO). Jeśli nie masz jeszcze numeru, poproś o niego nadawcę albo zajrzyj do poradnika, [jak znaleźć numer śledzenia](guide:find-tracking-number).
 
-Publiczny system śledzenia Hermes Germany przyjmuje alfanumeryczne numery od 8 do 20 znaków zawierające co najmniej jedną cyfrę. Najczęściej spotkasz trzy wzorce:
+Publiczny system śledzenia Hermes Germany prosi o numer z 14–20 liter lub cyfr. Najczęściej spotkasz trzy wzorce:
 
 | Format (przykład zmyślony) | Co oznacza | Jak rozpoznaje go Peek |
 | --- | --- | --- |
 | `H1048291057364928` | Litera `H` oraz od 16 do 19 cyfr: kod kreskowy używany wyłącznie przez Hermes Germany. | Rozpoznawany od razu jako Hermes Germany. |
-| `74829105736493` | 14 cyfr spełniających sumę kontrolną Hermes: format współdzielony z [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) i innymi sieciami. Gdy zaczyna się od `022` (np. `02248291057367`), Hermes Germany jest sprawdzany w pierwszej kolejności. | Proponowany wśród prawdopodobnych przewoźników ("Prawdopodobnie Hermes Germany"); 15-cyfrowy numer z dodatkowym zerem na początku, np. `002248291057367`, jest weryfikowany tak samo. |
+| `74829105736493` | 14 cyfr spełniających sumę kontrolną Hermes: format współdzielony z [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) i innymi sieciami. Gdy zaczyna się od `022` (np. `02248291057367`), Hermes Germany jest sprawdzany w pierwszej kolejności. | Hermes Germany jest sprawdzany wśród prawdopodobnych przewoźników; 15-cyfrowy numer z dodatkowym zerem na początku, np. `002248291057367`, jest weryfikowany tak samo. |
 | `H482910573649283` | Litera `H` i 15 cyfr: format stosowany przez Hermes Germany lub brytyjskie [Evri](carrier:evri). | Peek odpytuje Hermes Germany (oraz Evri, gdy ostatnia cyfra zgadza się również z sumą kontrolną Evri). |
 
 Wybrane przesyłki — takie jak usługa przewozu bagażu *Hermes Gepäckversand* oferowana podróżnym Deutsche Bahn czy 14-cyfrowe numery referencyjne niebędące kodem kreskowym — wyszukuje się po numerze zamówienia. Jeżeli Peek nie wybierze przewoźnika automatycznie, kliknij "Zmień" przy dodawaniu paczki (lub "Zmień przewoźnika" w widoku przesyłki) i wskaż **Hermes Germany**.
@@ -57,7 +57,7 @@ Dwie istotne uwagi przy czytaniu osi czasu:
 - **Z Niemiec do Polski (wewnątrz UE):** przesyłki nadawane z Niemiec do Polski przemieszczają się swobodnie na wspólnym rynku Unii Europejskiej i nie podlegają odprawie celnej ani dopłatom celno-skarbowym.
 - **Przesyłki spoza UE:** jeżeli paczka w sprzedaży na odległość idzie z państwa trzeciego spoza UE, unijna reforma celna znosi zwolnienie z cła dla przesyłek o wartości do 150 EUR: od **1 lipca 2026 r.** obowiązuje ryczałtowe cło **3 EUR** za każdą kategorię taryfową towaru (do 150 EUR), a od **1 listopada 2026 r.** dochodzi unijna opłata manipulacyjna **2 EUR** za każdą kategorię towaru niezależnie od wartości przesyłki.
 
-> **Uwaga na fałszywe SMS-y o dopłacie:** paczka wysłana z Niemiec do Polski nie wymaga żadnych opłat celnych. W Polsce [Poczta Polska](carrier:poczta-polska) ostrzega przed kampaniami phishingowymi podszywającymi się pod powiadomienia kurierskie (np. Pocztex) z linkami do rzekomej dopłaty za przekierowanie lub cło — należności celno-podatkowe od przesyłek spoza UE obsługiwane przez Pocztę Polską reguluje się przy odbiorze u listonosza, kuriera albo w placówce pocztowej, a nie przez podejrzane linki z wiadomości SMS.
+> **Uwaga na fałszywe SMS-y o dopłacie:** paczka wysłana z Niemiec do Polski nie wymaga żadnych opłat celnych. W Polsce [Poczta Polska](carrier:poczta-polska) ostrzega przed kampaniami phishingowymi podszywającymi się pod powiadomienia kurierskie (np. Pocztex) z linkami do „opłacenia” drobnej dopłaty lub ustalenia terminu dostawy — należności celno-podatkowe od przesyłek spoza UE obsługiwanych przez Pocztę Polską pobiera się przy doręczeniu przesyłki lub przed jej odbiorem, a nie przez podejrzane linki z wiadomości SMS.
 
 ## Opóźniona, zagubiona lub uszkodzona paczka Hermes
 
@@ -68,9 +68,9 @@ Dwie istotne uwagi przy czytaniu osi czasu:
 
 ## Śledzenie przesyłek Hermes Germany w Peek
 
-[Peek](/) odpytuje bezpośrednio publiczną usługę odbiorczą Hermes Germany bez podawania kodu pocztowego i obsługuje wklejanie linków z `myhermes.de`. Gdy 14-cyfrowy numer pasuje do kilku sieci, karta pokazuje "Oczekiwanie na pierwszy skan przewoźnika Hermes Germany" do momentu potwierdzenia pierwszego zdarzenia. Peek odczytuje z treści komunikatów miejscowość niemieckiego oddziału, regionu, kraju docelowego albo punktu *PaketShop*, aby zaznaczyć ją na mapie, przelicza znaczniki czasu z dopiskiem "Godziny w Twojej strefie czasowej: …" i nigdy nie pobiera prywatnego adresu domowego ani danych sąsiada (wyświetla wyłącznie nazwę i adres punktu *PaketShop*, w którym paczka czeka lub została odebrana).
+[Peek](/) odpytuje bezpośrednio publiczną usługę odbiorczą Hermes Germany bez podawania kodu pocztowego i obsługuje wklejanie linków z `myhermes.de`. Peek odczytuje z treści komunikatów miejscowość niemieckiego oddziału, regionu, kraju docelowego albo punktu *PaketShop*, aby zaznaczyć ją na mapie, przelicza znaczniki czasu z dopiskiem "Godziny w Twojej strefie czasowej: …" i nigdy nie pobiera prywatnego adresu domowego ani danych sąsiada (wyświetla wyłącznie nazwę i adres punktu *PaketShop*, w którym paczka czeka lub została odebrana).
 
-Dopóki masz otwartą kartę przesyłki na ekranie — albo w dniu doręczenia przy włączonych powiadomieniach — Peek sprawdza status nawet co 10 minut, a w dniu wydania paczki do doręczenia co 2 minuty od 6:00 czasu niemieckiego (lub pół godziny przed początkiem okna czasowego podanego przez Hermes), o ile system Hermes odpowiada bezpośrednio (przez zewnętrzne serwisy śledzenia: do co 15 minut w dniu doręczenia i co godzinę w pozostałym czasie); poza tym sprawdza paczkę co godzinę i utrzymuje rytm godzinny po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie "Zarejestrowana" bądź "Przyjęta przez przewoźnika"). Gdy doręczenie w Polsce przejmie lokalny partner, Peek dostosowuje częstotliwość do tego przewoźnika. Możesz włączyć powiadomienia o opcji "Każdy skan", "Ważne etapy" lub "Tylko doręczenie"; po usunięciu archiwalnych doręczonych numerów przez Hermes zapytanie zwraca brak przesyłki (404).
+Dopóki masz otwartą kartę przesyłki na ekranie — albo w dniu doręczenia przy włączonych powiadomieniach — Peek sprawdza status nawet co 10 minut, a w dniu wydania paczki do doręczenia co 2 minuty od 6:00 czasu niemieckiego (lub pół godziny przed początkiem okna czasowego podanego przez Hermes), o ile system Hermes odpowiada bezpośrednio (przez zewnętrzne serwisy śledzenia: co godzinę, co 3 godziny po dniu bez skanu i do co 15 minut w dniu doręczenia); poza tym sprawdza paczkę co godzinę i utrzymuje rytm godzinny po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie "Zarejestrowana" bądź "Przyjęta przez przewoźnika"). Gdy doręczenie w Polsce przejmie lokalny partner, Peek dostosowuje częstotliwość do tego przewoźnika. Możesz włączyć powiadomienia o opcji "Każdy skan", "Ważne etapy" lub "Tylko doręczenie"; po usunięciu archiwalnych doręczonych numerów przez Hermes zapytanie zwraca brak przesyłki (404).
 
 ## Najczęstsze pytania (FAQ)
 
@@ -80,7 +80,7 @@ Tylko w Wielkiej Brytanii, gdzie dawny Hermes UK działa od marca 2022 roku pod 
 
 ### Dlaczego opisy skanów Hermes są po angielsku lub po niemiecku?
 
-Serwis `myhermes.de` jest dostępny tylko po niemiecku, a interfejs Hermes Germany udostępnia opisy zdarzeń wyłącznie po niemiecku i po angielsku. Dla polskojęzycznego odbiorcy Peek pobiera angielską wersję komunikatów (część wpisów partnerskich pozostaje po niemiecku) i tłumaczy główny etap na język polski ("Przyjęta przez przewoźnika", "W transporcie", "W doręczeniu", "Do odbioru", "Dostarczona").
+Dla polskojęzycznego odbiorcy Peek pobiera od Hermes Germany angielską wersję komunikatów (część wpisów pozostaje po niemiecku) i tłumaczy główny etap na język polski ("Przyjęta przez przewoźnika", "W transporcie", "W doręczeniu", "Do odbioru", "Dostarczona").
 
 ### Jak śledzić meble wysłane przez Hermes w Niemczech?
 

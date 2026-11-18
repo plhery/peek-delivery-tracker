@@ -14,12 +14,12 @@ No Reino Unido, a antiga Hermes UK mudou para [Evri](carrier:evri) em março de 
 
 O número de envio (*Sendungsnummer*) vem no e-mail de expedição da loja ou nos detalhes da encomenda (por exemplo em *Mein Konto* na OTTO). Se não o tens, pede-o ao vendedor ou vê [como encontrar o número de seguimento](guide:find-tracking-number).
 
-O seguimento público da Hermes Germany aceita códigos alfanuméricos de 8 a 20 caracteres com pelo menos um algarismo:
+O seguimento público da Hermes Germany pede um código de 14 a 20 letras ou algarismos:
 
 | Formato (inventado) | O que identifica | Reconhecimento no Peek |
 | --- | --- | --- |
 | `H1048291057364928` | `H` seguido de 16 a 19 algarismos: exclusivo da Hermes Germany. | Reconhecido de imediato como Hermes Germany. |
-| `74829105736493` | 14 algarismos com controlo Hermes: partilhado com [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) e outras redes. Começando por `022` (`02248291057367`), a Hermes é testada primeiro. | Sugerido como "Provavelmente Hermes Germany"; um código de 15 algarismos com zero extra à esquerda (`002248291057367`) é validado da mesma forma. |
+| `74829105736493` | 14 algarismos com controlo Hermes: partilhado com [DPD](carrier:dpd-de), [BRT](carrier:brt), [Chronopost](carrier:chronopost) e outras redes. Começando por `022` (`02248291057367`), a Hermes é testada primeiro. | A Hermes é consultada entre as transportadoras prováveis; um código de 15 algarismos com zero extra à esquerda (`002248291057367`) é validado da mesma forma. |
 | `H482910573649283` | `H` seguido de 15 algarismos: Hermes Germany ou [Evri](carrier:evri) (Reino Unido). | O Peek consulta a Hermes Germany (e a Evri se o último algarismo validar o controlo Evri). |
 
 O serviço de bagagem *Hermes Gepäckversand* (Deutsche Bahn) e referências de 14 algarismos fora do controlo do código de barras pesquisam-se pelo número de encomenda: carrega em "Alterar" (ou "Alterar transportadora") e escolhe **Hermes Germany**.
@@ -51,10 +51,10 @@ As linhas `Für die Sendung wurde ein WunschPaketShop gebucht.` e `Ein WunschTag
 
 ## Alfândega, IVA e burlas por SMS
 
-- **Alemanha para Portugal (UE):** segundo a Autoridade Tributária e Aduaneira, encomendas expedidas de outro Estado-Membro da União Europeia não têm formalidades de desalfandegamento.
+- **Alemanha para Portugal (UE):** segundo a Autoridade Tributária e Aduaneira, só as remessas postais vindas de fora do território aduaneiro da União são apresentadas à alfândega; uma encomenda vinda da Alemanha não passa por desalfandegamento.
 - **Fora da UE:** nas vendas à distância extra-UE, a reforma aduaneira europeia acaba com a isenção até 150 €: a partir de **1 de julho de 2026** aplica-se um direito fixo de **3 €** por categoria pautal de artigos (até 150 €), acrescido desde **1 de novembro de 2026** de uma taxa europeia de tratamento de **2 €** por categoria de artigos independentemente do valor.
 
-> **Atenção ao phishing:** uma encomenda vinda da Alemanha para Portugal não paga alfândega. Em Portugal, os [CTT](carrier:ctt) lembram que só envios extra-UE recebem aviso de desalfandegamento (prazo de 20 dias no Portal de Desalfandegamento) e que as hiperligações genuínas começam por `www.ctt.pt`.
+> **Atenção ao phishing:** uma encomenda vinda da Alemanha para Portugal não paga alfândega. Em Portugal, os [CTT](carrier:ctt) alertam para SMS falsos sobre taxas alfandegárias e pedem que não uses o link recebido e acedas diretamente a `www.ctt.pt` (um envio extra-UE tem 20 dias para ser desalfandegado depois de chegar a Portugal).
 
 ## Encomenda Hermes atrasada, extraviada ou danificada
 
@@ -65,9 +65,9 @@ As linhas `Für die Sendung wurde ein WunschPaketShop gebucht.` e `Ein WunschTag
 
 ## Seguir uma encomenda Hermes Germany com o Peek
 
-O [Peek](/) consulta o serviço de destinatários da Hermes sem código postal e aceita hiperligações `myhermes.de`. Em códigos partilhados de 14 algarismos mostra "À espera do primeiro registo de Hermes Germany" até à primeira leitura. Extrai do texto o centro alemão, região, país ou localidade do *PaketShop* para o mapa, converte cada hora ("Horas no teu fuso horário: …") e lê apenas a morada do *PaketShop* ativo ou utilizado, nunca a morada privada.
+O [Peek](/) consulta o serviço de destinatários da Hermes sem código postal e aceita hiperligações `myhermes.de`. Extrai do texto o centro alemão, região, país ou localidade do *PaketShop* para o mapa, converte cada hora ("Horas no teu fuso horário: …") e lê apenas a morada do *PaketShop* ativo ou utilizado, nunca a morada privada.
 
-Com a encomenda aberta no ecrã, ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos — e a cada 2 minutos no dia de saída para distribuição desde as 6h00 alemãs (ou meia hora antes da janela Hermes) — enquanto a Hermes responder diretamente (por serviços de seguimento: até 15 minutos nesse dia, de hora a hora no resto); caso contrário, verifica de hora a hora, mesmo após dois dias sem leituras (ou 12 horas em "Etiqueta criada" ou "Aceite pela transportadora"). Com parceiro local em Portugal, segue o ritmo desse operador. Alertas: "Todas as leituras", "Passos importantes" ou "Só a entrega"; números antigos apagados devolvem 404.
+Com a encomenda aberta no ecrã, ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos — e a cada 2 minutos no dia de saída para distribuição desde as 6h00 alemãs (ou meia hora antes da janela Hermes) — enquanto a Hermes responder diretamente (por serviços de seguimento: de hora a hora, a cada 3 horas após um dia sem leituras e até a cada 15 minutos nesse dia); caso contrário, verifica de hora a hora, mesmo após dois dias sem leituras (ou 12 horas em "Etiqueta criada" ou "Aceite pela transportadora"). Com parceiro local em Portugal, segue o ritmo desse operador. Alertas: "Todas as leituras", "Passos importantes" ou "Só a entrega"; números antigos apagados devolvem 404.
 
 ## Perguntas frequentes (FAQ)
 
@@ -77,7 +77,7 @@ Apenas no Reino Unido, onde a Hermes UK passou a [Evri](carrier:evri) em março 
 
 ### Porque é que as leituras aparecem em inglês ou em alemão?
 
-O serviço da Hermes Germany só disponibiliza os textos dos eventos em alemão e em inglês. Para português, o Peek pede o inglês (algumas linhas de parceiros ficam em alemão) e traduz a etapa principal para português.
+Para português, o Peek pede à Hermes Germany os textos dos eventos em inglês (algumas linhas ficam em alemão) e traduz a etapa principal para português.
 
 ### Como seguir móveis enviados pela Hermes na Alemanha?
 

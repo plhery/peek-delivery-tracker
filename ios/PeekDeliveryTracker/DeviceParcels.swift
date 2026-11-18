@@ -449,8 +449,10 @@ final class DeviceParcels {
     /// the ones whose last answer was lost. A parcel the service no longer has leaves the list.
     /// The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
     /// window on screen.
-    func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws {
-        guard let client else { return }
+    @discardableResult
+    func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws -> Bool {
+        guard let client else { return false }
+        var contacted = false
         await stopForgottenAlerts(client)
         await tellForgotten(client)
         var trouble: Error?
@@ -463,6 +465,7 @@ final class DeviceParcels {
             guard all || id != nil || age < 0 || age >= fresh else { continue }
             do {
                 let response = try await client.read(entry.linkID, key, hidden)
+                contacted = true
                 guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { continue }
                 if let response {
                     entries[index].take(Parcel(shared: response.package))
@@ -477,19 +480,23 @@ final class DeviceParcels {
                 break
             }
         }
-        if id == nil, let error = await recover(client, hidden: hidden) { trouble = trouble ?? error }
+        if id == nil {
+            do { if try await recover(client, hidden: hidden) { contacted = true } } catch { trouble = trouble ?? error }
+        }
         save()
         if let trouble { throw trouble }
+        return contacted
     }
 
     /// Reads again, with its key, each parcel of this iPhone's own whose entry was lost or couldn't
     /// be read, and puts it back on the list, without the name it had here. Only a link the service
     /// no longer has, or no longer owns with the key, lets its key go: losing the list never forgets
     /// anything on the service. The first trouble ends the round and is returned; the rest wait.
-    private func recover(_ client: DeviceParcelClient, hidden: Bool) async -> Error? {
+    private func recover(_ client: DeviceParcelClient, hidden: Bool) async throws -> Bool {
+        var contacted = false
         for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
-            let response: PublicParcelResponse?
-            do { response = try await client.read(linkID, key, hidden) } catch { return error }
+            let response = try await client.read(linkID, key, hidden)
+            contacted = true
             // Forgotten, followed or let go meanwhile.
             guard keys[linkID] == key, !entries.contains(where: { $0.linkID == linkID }) else { continue }
             // A parcel already here through another link stays as it is.
@@ -502,7 +509,7 @@ final class DeviceParcels {
             entry.startSeen()
             entries.append(entry)
         }
-        return nil
+        return contacted
     }
 
     /// Tells the service what was forgotten here before it could be, without reading a parcel: signed in, the

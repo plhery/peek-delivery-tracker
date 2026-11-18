@@ -504,7 +504,7 @@ final class DeviceParcelTests: XCTestCase {
         // /maintenance.json is the app's own 404 page before the edge is in front.
         PostcodeTestURLProtocol.handler = { _ in (404, Data("<!doctype html><title>Not found</title>".utf8)) }
         let id = UUID()
-        let checkedAt = Date().addingTimeInterval(-60 * 60)
+        let checkedAt = Date().addingTimeInterval(-5)
         let storage = Memory()
         storage.keys = ["22222222222A": key]
         storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "Running shoes", archivedAt: nil,
@@ -523,6 +523,7 @@ final class DeviceParcelTests: XCTestCase {
         store.setDeliveryLiveActivitiesEnabled(false)
         session.showWelcome()
 
+        try await store.refreshAll()
         await store.load()
         XCTAssertEqual(store.parcels.map(\.label), ["Running shoes"])
         XCTAssertEqual(store.serverDown, .unannounced)

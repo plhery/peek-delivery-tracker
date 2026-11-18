@@ -1462,7 +1462,7 @@ class DeviceParcelTests {
         // /maintenance.json is the app's own 404 page before the edge is in front.
         val transport = RecordingTransport { jsonResponse(404, "<!doctype html><title>Not found</title>") }
         val id = UUID.randomUUID()
-        val checkedAt = Instant.now().minusSeconds(60 * 60).truncatedTo(ChronoUnit.SECONDS)
+        val checkedAt = Instant.now().minusSeconds(5).truncatedTo(ChronoUnit.SECONDS)
         val storage = Memory()
         storage.keys = mapOf("22222222222A" to key)
         storage.parcels = listOf(parcel("22222222222A", "Running shoes", id, at = date(checkedAt)))
@@ -1475,6 +1475,7 @@ class DeviceParcelTests {
         store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
+        store.refreshAll()
         store.load()
         assertEquals(listOf("Running shoes"), store.parcels.map { it.label })
         assertEquals(MaintenanceNotice.Unannounced, store.serverDown)

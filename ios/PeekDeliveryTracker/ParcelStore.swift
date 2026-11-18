@@ -984,12 +984,13 @@ final class ParcelStore: ObservableObject {
         }
         if isGuest {
             var trouble: Error?
-            do { try await device.refresh(all: true) } catch { trouble = error }
+            var contacted = false
+            do { contacted = try await device.refresh(all: true) } catch { trouble = error }
             guard generation == session.generation else { throw CancellationError() }
             parcels = device.list()
             listReadAt = device.lastCheckedAt
             refreshing = false
-            if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil { noteUp() }
+            if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }
             if let trouble {
                 // A check given up on says nothing went wrong.
                 if trouble.isCancellation { throw CancellationError() }
@@ -1999,10 +2000,11 @@ final class ParcelStore: ObservableObject {
     private func loadDeviceParcels(hidden: Bool = false) async {
         let generation = session.generation
         var trouble: Error?
-        do { try await device.refresh(hidden: hidden) } catch { trouble = error }
+        var contacted = false
+        do { contacted = try await device.refresh(all: serverDown != nil, hidden: hidden) } catch { trouble = error }
         guard generation == session.generation, isGuest else { return }
         // A round that read nothing new says nothing of the server; one that failed for it says it is down.
-        if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil { noteUp() }
+        if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }
         listReadAt = device.lastCheckedAt
         if pendingMutations.isEmpty {
             let next = device.list()

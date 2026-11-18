@@ -638,8 +638,8 @@ class DeviceParcels(
      * their parcels again. A key that could not be read is trouble too, thrown once the round is done: with only such
      * keys left, a phone offline or out of lookups hears so, not that nothing changed.
      */
-    suspend fun refresh(all: Boolean = false, only: UUID? = null) {
-        val client = client ?: return
+    suspend fun refresh(all: Boolean = false, only: UUID? = null): Boolean {
+        val client = client ?: return false
         stopForgottenAlerts(client)
         val recovery = try {
             tellPendingForgets(client)
@@ -650,6 +650,7 @@ class DeviceParcels(
             throw cancellation
         }
         val recovered = recovery.read
+        var contacted = recovered.isNotEmpty()
         var trouble: Exception? = null
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
@@ -662,6 +663,7 @@ class DeviceParcels(
             if (!(all || only != null || age < 0 || age >= fresh)) continue
             try {
                 val response = client.read(entry.linkId, key)
+                contacted = true
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
                 if (index < 0) continue
                 if (response != null) {
@@ -682,6 +684,7 @@ class DeviceParcels(
         }
         save()
         (trouble ?: recovery.trouble)?.let { throw it }
+        return contacted
     }
 
     /** The links `recoverParcels` read again, and the trouble that ended its round. */
@@ -785,6 +788,7 @@ class DeviceParcels(
             } catch (error: Exception) {
                 return Recovery(recovered, error)
             }
+            recovered += linkId
             // Followed or forgotten meanwhile.
             if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) == null) continue
             if (response == null || response.link.role != ParcelLinkRole.Owner || entries.any { it.parcel.id == response.parcel.id }) {
@@ -796,7 +800,6 @@ class DeviceParcels(
                 linkId = linkId, label = "", archivedAt = null, parcel = Parcel(shared = response.parcel),
                 checkedAt = now().timeIntervalSinceReferenceDate,
             ).startingSeen()
-            recovered += linkId
         }
         return Recovery(recovered, null)
     }

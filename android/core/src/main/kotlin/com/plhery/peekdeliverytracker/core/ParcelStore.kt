@@ -1171,15 +1171,16 @@ class ParcelStore(
         }
         if (isGuest) {
             var trouble: Exception? = null
+            var contacted = false
             try {
-                device.refresh(all = true)
+                contacted = device.refresh(all = true)
             } catch (error: Exception) {
                 trouble = error
             }
             if (generation != session.generation) throw CancellationException("The signed-in account changed.")
             parcels = device.list()
             listReadAt = device.lastCheckedAt
-            if (trouble is ServerDown) noteDown(trouble) else if (trouble == null) noteUp()
+            if (trouble is ServerDown) noteDown(trouble) else if (trouble == null && contacted) noteUp()
             // The caller's own cancellation goes on, once the list is shown as it is.
             val givenUp = trouble is CancellationException && !currentCoroutineContext().isActive
             val result = when {
@@ -1866,15 +1867,16 @@ class ParcelStore(
     private suspend fun loadDeviceParcels() {
         val generation = session.generation
         var trouble: Exception? = null
+        var contacted = false
         try {
-            device.refresh()
+            contacted = device.refresh(all = serverDown != null)
         } catch (error: Exception) {
             if (error is CancellationException) currentCoroutineContext().ensureActive()
             trouble = error
         }
         if (generation != session.generation || !isGuest) return
         // A round that read nothing new says nothing of the server; one that failed for it says it is down.
-        if (trouble is ServerDown) noteDown(trouble) else if (trouble == null) noteUp()
+        if (trouble is ServerDown) noteDown(trouble) else if (trouble == null && contacted) noteUp()
         listReadAt = device.lastCheckedAt
         if (pendingMutations.isEmpty()) {
             val next = device.list()

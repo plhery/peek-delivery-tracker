@@ -108,18 +108,42 @@ interface FileCalls {
     }
 }
 
-/** The device's parcels, in `filesDir/DeviceParcels/parcels.json` (DeviceParcelFile). */
-class DeviceParcelsFile(file: File) : DeviceParcelFile {
-    private val atomic = AtomicBytesFile(file)
+/** Full local parcel records and the copy that can follow a reader to another phone. */
+class DeviceParcelsFile private constructor(context: Context) : DeviceParcelFile {
+    private val local = AtomicBytesFile(File(context.noBackupFilesDir, "DeviceParcels/parcels.json"))
+    private val backup = AtomicBytesFile(File(context.filesDir, "FollowedParcels/parcels.json"))
+    private val legacy = AtomicBytesFile(File(context.filesDir, "DeviceParcels/parcels.json"))
 
-    override fun read(): ByteArray? = atomic.read()
+    override fun read(): ByteArray? {
+        local.read()?.let { return it }
+        val restored = backup.read() ?: legacy.read() ?: return null
+        // Older backups also carried the previous phone's push address.
+        return try { withoutAddresses(restored) } catch (_: org.json.JSONException) { byteArrayOf() }
+    }
 
-    override fun write(data: ByteArray) = atomic.write(data)
+    override fun write(data: ByteArray) {
+        local.write(data)
+        backup.write(withoutAddresses(data))
+        legacy.delete()
+    }
 
-    override fun delete() = atomic.delete()
+    private fun withoutAddresses(data: ByteArray): ByteArray {
+        val rows = org.json.JSONArray(data.decodeToString())
+        for (index in rows.length() - 1 downTo 0) {
+            val row = rows.optJSONObject(index) ?: continue
+            if (row.optBoolean("forgotten")) rows.remove(index) else row.remove("alertToken")
+        }
+        return rows.toString().encodeToByteArray()
+    }
+
+    override fun delete() {
+        backup.delete()
+        legacy.delete()
+        local.delete()
+    }
 
     companion object {
-        fun of(context: Context): DeviceParcelsFile = DeviceParcelsFile(File(File(context.filesDir, "DeviceParcels"), "parcels.json"))
+        fun of(context: Context) = DeviceParcelsFile(context)
     }
 }
 

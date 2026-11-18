@@ -43,7 +43,7 @@ import java.security.SecureRandom
  * inbox the same way.
  */
 internal object PushRoute {
-    private const val PREFERENCES = "unifiedpush"
+    private const val PREFERENCES = "push-route"
     private const val INSTALLATION = "installation"
     private const val ENDPOINT = "endpoint"
     private const val P256DH = "p256dh"
@@ -62,6 +62,7 @@ internal object PushRoute {
     val distributor: StateFlow<String?> = distributorState.asStateFlow()
 
     /** The phone's address now, its installation token made the first time. */
+    @Synchronized
     fun address(context: Context): PushAddress {
         val preferences = preferences(context)
         val token = preferences.getString(INSTALLATION, null) ?: newToken().also { preferences.edit { putString(INSTALLATION, it) } }

@@ -175,8 +175,13 @@ class PersistenceTest {
     fun theParcelsGoIntoBackupsAndTheCachesStayBehind() {
         val device = DeviceParcelsFile.of(context)
         device.write("[]".toByteArray())
-        assertEquals("[]", File(context.filesDir, "DeviceParcels/parcels.json").readText())
+        assertEquals("[]", File(context.filesDir, "FollowedParcels/parcels.json").readText())
         assertEquals("[]", device.read()!!.decodeToString())
+        val withAddress = """[{"label":"Lamp","alertToken":"old"}]""".encodeToByteArray()
+        device.write(withAddress)
+        assertEquals(withAddress.decodeToString(), device.read()!!.decodeToString())
+        File(context.noBackupFilesDir, "DeviceParcels/parcels.json").delete()
+        assertEquals("""[{"label":"Lamp"}]""", device.read()!!.decodeToString())
         device.delete()
         assertNull(device.read())
 
@@ -198,7 +203,7 @@ class PersistenceTest {
         }
         // In the cloud backup and in a transfer to a new phone. The device's parcels go, as the iPhone's
         // Application Support does: those followed through someone else's link need no key.
-        val folders = listOf("file:Keychain/", "file:ParcelCache/")
+        val folders = listOf("file:Keychain/", "file:ParcelCache/", "file:DeviceParcels/", "sharedpref:unifiedpush.xml", "sharedpref:push-route.xml")
         assertEquals(folders + folders, excluded)
     }
 

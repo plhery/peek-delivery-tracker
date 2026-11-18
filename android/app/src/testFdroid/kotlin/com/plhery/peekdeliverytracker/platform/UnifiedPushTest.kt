@@ -61,6 +61,14 @@ class UnifiedPushTest {
         WorkManager.getInstance(context).getWorkInfosForUniqueWork("push-inbox").get().singleOrNull()?.state
 
     @Test
+    fun restoredPreferencesDoNotOpenThePreviousInbox() {
+        context.getSharedPreferences("unifiedpush", Context.MODE_PRIVATE).edit()
+            .putString("installation", "previous").commit()
+        assertNull(PushRoute.inboxToken(context))
+        assertNotEquals("previous", PushRoute.address(context).token)
+    }
+
+    @Test
     fun withoutADistributorThePhoneIsReachedThroughItsInboxWhichItChecks() {
         // The tests' build has no service (Shared.xcconfig), where Store offers no pushes: its tokens are made here.
         val tokens = UnifiedPushTokens(context)

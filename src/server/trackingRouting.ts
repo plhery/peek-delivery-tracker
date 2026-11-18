@@ -23,7 +23,7 @@ import { providerAllowed } from './providerPolicy';
 import { captureDirectLocalHistory, directHistoryNumber, directLocalHistory, hasUnresolvedDirectCurrent, hasUnresolvedDirectHistory } from './directLocalHistory';
 import { withoutDisputedDelivery } from './disputedDelivery';
 import { plannedClocks } from './futureScans';
-import { plannedStepsOf, type PlannedStep } from './plannedSteps';
+import { atWrittenClock, plannedStepsOf, type PlannedStep } from './plannedSteps';
 import { eventTimestamp, latestResultTime, resultTimezone } from 'universal-parcel-scraper/app';
 import type { Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
@@ -1230,9 +1230,9 @@ export class TrackingRouter {
     const heldBack = () => [...new Set([...writtenAhead, ...Object.values(heldBackBy()).flat()])];
     const holdBack = (carrier: string, named: readonly string[], answer?: CarrierResult) => {
       writtenAhead.push(...named);
-      const shown = new Set((answer?.events ?? []).flatMap((event) => [event.time, event.local_time]));
+      const shown = answer?.events ?? [];
       const carriers = heldBackBy();
-      const clocks = [...new Set([...carriers[carrier] ?? [], ...named])].filter((clock) => !shown.has(clock)).slice(-WRITTEN_AHEAD_KEPT);
+      const clocks = [...new Set([...carriers[carrier] ?? [], ...named])].filter((clock) => !shown.some((event) => atWrittenClock(event, [clock]))).slice(-WRITTEN_AHEAD_KEPT);
       if (clocks.length) carriers[carrier] = clocks;
       else delete carriers[carrier];
       if (Object.keys(carriers).length) state.written_ahead = { number, carriers };
@@ -1324,8 +1324,14 @@ export class TrackingRouter {
         }
         // An answer names the rows it holds back as written ahead beside the scans it keeps, as a
         // failure does: a provider asked after it shows its copies of them as scans.
-        holdBack(carrier, value.result.written_ahead ?? [], value.result);
-        keepPlanned(carrier, plannedStepsOf(value.result));
+        const keepAnswer = (source: string, answer: CarrierResult) => {
+          holdBack(source, answer.written_ahead ?? [], answer);
+          keepPlanned(source, plannedStepsOf(answer, carrierTimezone(source) ?? 'UTC', now().getTime()));
+        };
+        if (value.earlierResult && value.earlierCarrierId && value.earlierCarrierId !== value.sourceCarrierId) {
+          keepAnswer(value.earlierCarrierId, value.earlierResult);
+        }
+        keepAnswer(value.sourceCarrierId, value.result);
         // Estimate fields the adapter does not read yet that this answer fills: the review keeps
         // the number, so a capture of the reply can teach the adapter their shape.
         for (const field of unreadEstimates(value.result)) report('unread_delivery_estimate', `${carrier}: ${field}`);
@@ -1460,7 +1466,8 @@ export class TrackingRouter {
         if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
         holdBack(carrier, writtenAheadClocks(error));
         // A carrier finding no history for the number lists what it still plans, or nothing.
-        if (failure.kind === 'not_found' || failure.kind === 'no_history' || plannedStepsOf(error).length) keepPlanned(carrier, plannedStepsOf(error));
+        const plan = plannedStepsOf(error, carrierTimezone(carrier) ?? 'UTC', now().getTime());
+        if (failure.kind === 'not_found' || failure.kind === 'no_history' || plan.length) keepPlanned(carrier, plan);
         // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
         if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
         if (probe && SERVICE_FAILURES.includes(failure.kind)) unsettledDirect.add(carrier);

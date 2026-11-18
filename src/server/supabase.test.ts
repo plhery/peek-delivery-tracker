@@ -385,11 +385,8 @@ describe('one-off parcels and their links', () => {
     expect(request).toHaveBeenCalledTimes(3);
     for (const [index, after] of [undefined, 'quiet-2', 'quiet-3'].entries()) {
       const [path, options] = request.mock.calls[index]!;
-      expect(path).toMatch(/^\/rest\/v1\/rpc\/unwatched_package_ids\?/);
-      expect(Object.fromEntries(params(path))).toEqual({
-        select: 'id', order: 'id.asc', limit: '1000', ...(after === undefined ? {} : { id: `gt.${after}` }),
-      });
-      expect(options).toEqual({ method: 'POST', body: { p_opened_since: '2026-10-01T10:00:00.000Z' } });
+      expect(path).toBe('/rest/v1/rpc/unwatched_package_ids');
+      expect(options).toEqual({ method: 'POST', body: { p_opened_since: '2026-10-01T10:00:00.000Z', p_after: after ?? null, p_limit: 1000 } });
     }
     // A page that adds no id ends the list, as an empty one does.
     request.mockReset().mockResolvedValue([{ id: 'quiet-1' }]);

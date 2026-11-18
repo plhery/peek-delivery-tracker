@@ -52,10 +52,11 @@ export function afterSameDayScans(
       continue;
     }
     const start = DateTime.fromISO(day, { zone: dayZone });
-    const ofDay = (row: { at: number }) => row.at >= start.toMillis() && row.at < start.plus({ days: 1 }).toMillis();
+    const nextDay = start.plus({ days: 1 }).toMillis();
+    const ofDay = (row: { at: number }) => row.at >= start.toMillis() && row.at < nextDay;
     const own = rank(stages[index]);
     const lead = Math.max(...clocked.filter((row) => ofDay(row) && row.rank <= own && (!now || row.at <= now.getTime())).map((row) => row.at));
-    const to = Math.max(given, ofDay({ at: older }) ? older + SECOND_MS : given, lead + SECOND_MS);
+    const to = Math.min(nextDay - 1, Math.max(given, ofDay({ at: older }) ? older + SECOND_MS : given, lead + SECOND_MS));
     const bound = Math.min(nextClocked[index]!, ...clocked.filter((row) => ofDay(row) && row.rank > own).map((row) => row.at),
       ...seen.filter((row) => ofDay(row) && row.rank >= own).map((row) => row.at));
     if (to > given && to >= bound) return [...instants];

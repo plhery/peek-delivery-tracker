@@ -5,8 +5,13 @@ import { hydrateRoot } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { timeZoneName } from '../lib/format';
-import { TrackingJournal } from './TrackingJournal';
+import { TrackingJournal, plannedAhead } from './TrackingJournal';
 import type { TrackingEvent } from '../types';
+
+it('keeps a day-only plan until the end of a 25-hour carrier day', () => {
+  expect(plannedAhead({ day: '2026-10-25', occurredAt: '2026-10-24T22:00:00Z', expiresAt: '2026-10-25T23:00:00Z' },
+    Date.parse('2026-10-25T22:30:00Z'))).toBe(true);
+});
 
 function event(id: string, occurredAt: string, description: string, location?: string): TrackingEvent {
   return { id, parcelId: 'parcel', stage: 'in_transit', occurredAt, description, location };

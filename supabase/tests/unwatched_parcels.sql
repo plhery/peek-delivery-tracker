@@ -57,7 +57,7 @@ returns text[]
 language sql
 as $$
   select coalesce(array_agg(package.tracking_number order by package.tracking_number), '{}')
-  from public.unwatched_package_ids(now() - interval '1 hour') as quiet
+  from public.unwatched_package_ids(now() - interval '1 hour', null, 1000) as quiet
   join public.packages as package on package.id = quiet.id
   where package.tracking_number like 'UNWATCHED%';
 $$;
@@ -280,4 +280,19 @@ begin
 end;
 $$;
 
+do $$
+declare
+  expected uuid[];
+  first_page uuid[];
+  second_page uuid[];
+  cutoff constant timestamptz := now() - interval '1 hour';
+begin
+  select array_agg(id order by id) into expected from public.unwatched_package_ids(cutoff);
+  select array_agg(id order by id) into first_page from public.unwatched_package_ids(cutoff, null, 2);
+  select array_agg(id order by id) into second_page from public.unwatched_package_ids(cutoff, first_page[2], 2);
+  if cardinality(expected) < 4 or first_page is distinct from expected[1:2] or second_page is distinct from expected[3:4] then
+    raise exception 'Unwatched pages must follow the cursor in parcel ID order';
+  end if;
+end;
+$$;
 rollback;

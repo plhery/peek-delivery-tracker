@@ -409,6 +409,7 @@ describe('tracking event normalization', () => {
     // The day starts at 05:00 UTC in Chicago, and stays the scan's identity.
     expect(dated([])).toEqual(['2026-10-30T05:00:00Z']);
     expect(dated([label])).toEqual(['2026-10-30T19:12:01Z']);
+    expect(dated([{ ...label, occurred_at: '2026-10-30T23:59:59-05:00' }])).toEqual(['2026-10-31T04:59:59.999Z']);
     expect(buildEvents({ id: 'package-1', carrier: 'fedex', [STORED_EVENT_IDENTITIES]: [label] }, { status: 'in_transit',
       current_stage: 'accepted', last_status_text: 'Picked up', last_update: null, timezone: 'America/Chicago', events: [pickup] } as CarrierResult,
     'fedex', new Date('2026-10-31T08:00:00Z'))[0]!.provider_event_id).toBe(providerEventId('fedex', '2026-10-30', '', 'Picked up'));
@@ -1900,6 +1901,15 @@ describe('TrackingSyncService', () => {
       expect(again.expected_delivery).toBe('2026-10-30');
       const after = await check('2026-10-31T08:00:00Z', (id) => id === 'la-poste' ? new Error('not asked') : posti({}, sorted, inFinland));
       expect(after.expected_delivery).toBeNull();
+    });
+
+    it('keeps an estimate issued after a backfilled exception', async () => {
+      const check = parcel();
+      await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+      const next = await check('2026-10-27T15:00:00Z', answer('in_transit', {},
+        { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
+        { time: '2026-10-25T11:00:00Z', description: 'Held at customs', stage: 'exception' }, hub));
+      expect(next.expected_delivery).toBe('2026-10-29');
     });
 
     it('goes when the carrier tells of a failed attempt or a hold, though the parcel is on its way again', async () => {

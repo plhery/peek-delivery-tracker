@@ -49,6 +49,8 @@ values ('49000000-0000-0000-0000-000000000204', '19000000-0000-0000-0000-0000000
 insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, started_at, previous_stage, outcome, completed_at)
 select '49000000-0000-0000-0000-000000000204', 'scheduled', 'dhl', started_at::timestamptz, previous_stage, 'updated',
   started_at::timestamptz + interval '1 minute'
-from (values ('2025-12-31T10:00:00Z', 'accepted'), ('2025-12-31T11:00:00Z', 'in_transit')) as checks (started_at, previous_stage);
+from (values ('2025-12-31T10:00:00Z', 'accepted'), ('2025-12-31T11:00:00Z', 'in_transit'),
+  ('2025-12-31T12:00:00Z', 'delivered'), ('2025-12-31T13:00:00Z', 'returned'),
+  ('2025-12-31T14:00:00Z', 'delivered')) as checks (started_at, previous_stage);
 
 commit;

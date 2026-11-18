@@ -3003,8 +3003,8 @@
         {
           "type": "stat",
           "id": 62,
-          "title": "FedEx histories recovered",
-          "description": "FedEx only, independent of the carrier filter. Completed browser retries after a challenge; first attempts and optional API fallback excluded. Counters start at instrumentation deployment. A recovered history does not measure completeness.",
+          "title": "FedEx successful challenge retries",
+          "description": "FedEx only, independent of the carrier filter. Successful browser retries after a challenge; first attempts and optional API fallback excluded. Counters start at instrumentation deployment. Includes status-only replies.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
           "gridPos": {"x": 8, "y": 187, "w": 8, "h": 4},
           "targets": [

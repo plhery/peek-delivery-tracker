@@ -690,10 +690,10 @@ export function allowanceForecast(used: number, limit: number, length: number, n
   used_up_at: string | null;
 } {
   const elapsed = Math.max(1, now.getTime() % length);
-  const forecast = Math.round(used * length / elapsed);
+  const projected = used * length / elapsed;
   return {
-    forecast,
-    used_up_at: used > 0 && forecast >= limit
+    forecast: Math.round(projected),
+    used_up_at: used > 0 && projected > limit
       ? new Date(now.getTime() - elapsed + Math.ceil(elapsed * limit / used)).toISOString()
       : null,
   };

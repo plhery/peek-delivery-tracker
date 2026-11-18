@@ -231,7 +231,8 @@ describe('an Android phone\'s notifications', () => {
     expect(Object.keys(message.data).sort()).toEqual(['body', 'body_12_hour', 'body_other_day', 'body_same_day', 'date_locale', 'parcel_id', 'scan_at', 'title']);
     expect(Object.values(message.data).every((value) => typeof value === 'string')).toBe(true);
     expect(message.notification).toBeUndefined();
-    expect(message).toMatchObject({ token: deviceToken, android: { collapse_key: 'package-1' } });
+    expect(message.token).toBe(deviceToken);
+    expect(message.android).not.toHaveProperty('collapse_key');
 
     expect(client.recordNativePushDeliveries).toHaveBeenCalledExactlyOnceWith('device-1', ['event-1', 'event-0']);
     expect(client.updateNativePushDevice).toHaveBeenCalledExactlyOnceWith('device-1', { last_success_at: expect.any(String), last_error: null });
@@ -273,7 +274,7 @@ describe('an Android phone\'s notifications', () => {
     expect(message.android).toEqual({ priority: 'HIGH', ttl: '86400s' });
   });
 
-  it('get a friend\'s news and a parcel link\'s alert with the keys the iPhone collapses them by', async () => {
+  it('get a friend\'s news and a parcel link\'s alert with only the friend update collapsed', async () => {
     const { fetcher, sends } = google();
     const service = android(devices([]), fetcher);
     const friend = { device_id: 'device-1', token: deviceToken, transport: 'fcm', friend_id: 'friend-7', nickname: 'Sam', locale: 'en' };
@@ -285,7 +286,7 @@ describe('an Android phone\'s notifications', () => {
     expect(friendMessage!.data).toEqual({ title: expect.any(String), body: expect.any(String), kind: 'friend_accepted', friend_id: 'friend-7' });
     expect(friendMessage!.android.collapse_key).toBe('friend-friend-7');
     expect(linkMessage!.data).toEqual({ title: expect.any(String), body: expect.any(String), link_id: 'k7Qm2xHd9RtW' });
-    expect(linkMessage!.android.collapse_key).toBe('link-k7Qm2xHd9RtW');
+    expect(linkMessage!.android.collapse_key).toBeUndefined();
   });
 });
 

@@ -154,7 +154,8 @@ ranked as (
 ),
 -- The stage a check saved is read from the next one, which may be after the window.
 back as (
-  select * from ranked where to_stage is not null and to_rank < from_rank and started_at < :upto
+  select * from ranked where to_stage is not null and started_at < :upto
+    and (to_rank < from_rank or (from_rank = 5 and to_rank = 5 and from_stage <> to_stage))
 )
 select carrier, from_stage, to_stage, carrier is distinct from next_carrier as carrier_changed,
        hand.fix is not null as by_hand,

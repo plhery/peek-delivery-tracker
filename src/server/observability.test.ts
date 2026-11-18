@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
+  allowanceForecast,
   databaseUnavailable,
   errorDetails,
   errorType,
@@ -18,6 +19,11 @@ import { UpstreamHttpError } from 'universal-parcel-scraper/node';
 import { IndeterminateError, InputRequiredError } from 'universal-parcel-scraper';
 import { SupabaseError } from './supabase';
 import { TrackingCaptureError, SeventeenTrackLookupError, SeventeenTrackNoHistoryError } from 'universal-parcel-scraper/node';
+
+it('does not predict exhaustion after the daily allowance resets', () => {
+  expect(allowanceForecast(80, 100, 86_400_000, new Date('2026-11-18T19:15:00Z')))
+    .toEqual({ forecast: 100, used_up_at: null });
+});
 
 afterEach(() => vi.restoreAllMocks());
 

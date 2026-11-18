@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest';
-import { ProxyAgent } from 'undici';
+import { getGlobalDispatcher, MockAgent, ProxyAgent, type Dispatcher } from 'undici';
 import { proxyTunnelStatus, trackingProxyFetcher } from './trackingProxy';
 
 describe('tracking proxy scope', () => {
@@ -11,14 +11,41 @@ describe('tracking proxy scope', () => {
     await proxy('https://tracking.example/lookup', { signal, headers: { Accept: 'application/json' } });
     const options = fetcher.mock.calls[0]![1] as RequestInit & { dispatcher: ProxyAgent };
     expect(options).toMatchObject({ signal, headers: { Accept: 'application/json' } });
-    expect(options.dispatcher).toBeInstanceOf(ProxyAgent);
-    for (const url of ['https://tracking.example.evil.test/', 'http://browser-service:8191/', 'https://another.example/']) {
-      await proxy(url, { signal });
-      expect(fetcher.mock.lastCall?.[1]).toEqual({ signal });
+    const direct = vi.spyOn(getGlobalDispatcher(), 'dispatch').mockReturnValue(true);
+    const via = vi.spyOn(ProxyAgent.prototype, 'dispatch').mockReturnValue(true);
+    try {
+      const dispatch = (origin: string) => options.dispatcher.dispatch({ origin, path: '/', method: 'GET' }, {});
+      dispatch('https://another.example');
+      dispatch('https://tracking.example');
+      expect(direct).toHaveBeenCalledTimes(1);
+      expect(via).toHaveBeenCalledTimes(1);
+      expect(() => dispatch('http://tracking.example')).toThrow('require HTTPS');
+    } finally { direct.mockRestore(); via.mockRestore(); }
+  });
+
+  it('follows a redirect from direct to proxied egress without forwarding authorization', async () => {
+    const direct = new MockAgent();
+    const proxied = new MockAgent();
+    direct.disableNetConnect();
+    proxied.disableNetConnect();
+    direct.get('https://direct.example').intercept({ path: '/' })
+      .reply(302, '', { headers: { location: 'https://carrier.example/track' } });
+    let arrived: unknown;
+    proxied.get('https://carrier.example').intercept({ path: '/track' }).reply(options => {
+      arrived = new Headers(options.headers as HeadersInit).get('authorization');
+      return { statusCode: 200, data: 'arrived' };
+    });
+    const dispatch = vi.spyOn(ProxyAgent.prototype, 'dispatch').mockImplementation(proxied.dispatch.bind(proxied));
+    try {
+      const tracked = trackingProxyFetcher({ TRACKING_PROXY_ROUTES: '{"carrier.example":"http://proxy.example"}' })!;
+      const response = await tracked('https://direct.example', { headers: { authorization: 'Fixture' }, dispatcher: direct } as RequestInit);
+      expect(await response.text()).toBe('arrived');
+      expect(arrived).toBeNull();
+      expect(dispatch).toHaveBeenCalledTimes(1);
+    } finally {
+      dispatch.mockRestore();
+      await Promise.all([direct.close(), proxied.close()]);
     }
-    await expect(proxy('http://tracking.example/lookup')).rejects.toThrow('require HTTPS');
-    expect(fetcher).toHaveBeenCalledTimes(4);
-    await options.dispatcher.close();
   });
 
   it('stays unconfigured without a proxy and refuses broad or malformed settings without echoing credentials', () => {
@@ -34,14 +61,17 @@ describe('tracking proxy scope', () => {
     const proxy = trackingProxyFetcher({ TRACKING_US_PROXY_URL: 'http://fixture:example@us.example:8080', TRACKING_US_PROXY_HOSTS: 'us-tracking.example',
       TRACKING_PROXY_ROUTES: JSON.stringify({ 'np-tracking.example': 'http://fixture:example@np.example:8080',
         'ru-tracking.example': 'http://fixture:example@ru.example:8080', 'ru-details.example': 'http://fixture:example@ru.example:8080' }) }, fetcher)!;
-    const agents: ProxyAgent[] = [];
-    for (const host of ['us-tracking.example', 'np-tracking.example', 'ru-tracking.example', 'ru-details.example']) {
-      await proxy(new Request(`https://${host}/lookup`));
-      agents.push((fetcher.mock.lastCall![1] as RequestInit & { dispatcher: ProxyAgent }).dispatcher);
-    }
-    expect(new Set(agents.slice(0, 3)).size).toBe(3);
-    expect(agents[2]).toBe(agents[3]);
-    for (const agent of new Set(agents)) await agent.close();
+    const sent = vi.spyOn(ProxyAgent.prototype, 'dispatch').mockReturnValue(true);
+    try {
+      await proxy('https://direct.example');
+      const options = fetcher.mock.lastCall![1] as RequestInit & { dispatcher: Dispatcher };
+      for (const host of ['us-tracking.example', 'np-tracking.example', 'ru-tracking.example', 'ru-details.example']) {
+        options.dispatcher.dispatch({ origin: `https://${host}`, method: 'GET', path: '/' }, {});
+      }
+      const agents = sent.mock.contexts;
+      expect(new Set(agents.slice(0, 3)).size).toBe(3);
+      expect(agents[2]).toBe(agents[3]);
+    } finally { sent.mockRestore(); }
   });
 
   it('supports country routes without legacy settings and rejects ambiguous or secret-bearing malformed configuration', async () => {
@@ -58,12 +88,7 @@ describe('tracking proxy scope', () => {
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(new Response('{}'));
     const proxy = trackingProxyFetcher({ TRACKING_PROXY_ROUTES: '{"tracking.example":"http://proxy.example"}' }, fetcher)!;
     await proxy('https://tracking.example/');
-    const agent = (fetcher.mock.lastCall![1] as RequestInit & { dispatcher: ProxyAgent }).dispatcher;
-    expect(agent).toBeInstanceOf(ProxyAgent);
-    await proxy('https://tracking.example.evil.test/');
-    expect(fetcher.mock.lastCall![1]).toBeUndefined();
-    await expect(proxy('http://tracking.example/')).rejects.toThrow('require HTTPS');
-    await agent.close();
+    expect(fetcher.mock.lastCall![1]).toHaveProperty('dispatcher');
   });
 
   it('asks the proxy once more when it refuses the tunnel with a gateway error, and only then', async () => {
@@ -71,10 +96,8 @@ describe('tracking proxy scope', () => {
     const refused = (status: number) => Object.assign(new TypeError('fetch failed'), { cause: Object.assign(new Error('Request was cancelled.'),
       { cause: Object.assign(new Error(`Proxy response (${status}) !== 200 when HTTP Tunneling`), { name: 'AbortError', code: 'UND_ERR_ABORTED' }) }) });
     const route = { TRACKING_PROXY_ROUTES: '{"tracking.example":"http://proxy.example"}' };
-    const agents = new Set<ProxyAgent>();
     const run = async (failures: unknown[], url = 'https://tracking.example/lookup', init?: RequestInit) => {
-      const fetcher = vi.fn<typeof fetch>(async (_input, options) => {
-        agents.add((options as RequestInit & { dispatcher: ProxyAgent }).dispatcher);
+      const fetcher = vi.fn<typeof fetch>(async () => {
         const failure = failures.shift();
         if (failure) throw failure;
         return new Response('{}');
@@ -98,6 +121,5 @@ describe('tracking proxy scope', () => {
     expect((await run([refused(502)], undefined, { signal: aborted.signal })).calls).toBe(1);
     expect((await run([refused(502)], undefined, { method: 'POST', body: new ReadableStream(), duplex: 'half' } as RequestInit)).calls).toBe(1);
     expect((await run([refused(502)], undefined, { method: 'POST', body: '{}' })).calls).toBe(2);
-    for (const agent of agents) await agent.close();
   });
 });

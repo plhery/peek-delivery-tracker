@@ -39,6 +39,8 @@ describe('plannedStepsOf', () => {
       .toEqual([script[0], { local_time: '2026-11-01', description: 'Customs cleared' }]);
     const many = Array.from({ length: PLANNED_STEPS_KEPT + 5 }, (_, hour) => ({
       time: new Date(Date.UTC(2026, 11, 3) - hour * 3_600_000).toISOString(), description: `Step ${hour}` }));
+    const elapsed = Array.from({ length: 30 }, (_, i) => ({ time: new Date(2020, 1, i + 1).toISOString(), description: 'Past' }));
+    expect(servedPlannedSteps(row({}, [...elapsed, many[0]]), [])).toHaveLength(1);
     const kept = plannedSteps(many);
     expect(kept).toHaveLength(PLANNED_STEPS_KEPT);
     expect(kept.map((step) => step.description)).toEqual(many.slice(5).reverse().map((step) => step.description));
@@ -57,13 +59,15 @@ describe('servedPlannedSteps', () => {
 
   it('dates a step on its day alone by that day, and keeps it through it', () => {
     const steps = servedPlannedSteps(row({}, [{ local_time: '2026-10-18', description: 'Customs cleared', stage: 'customs' }]), [pickedUp]);
-    expect(steps).toEqual([{ description: 'Customs cleared', stage: 'customs', location: null, occurred_at: '2026-10-17T16:00:00.000Z', day: '2026-10-18' }]);
+    expect(steps).toEqual([{ description: 'Customs cleared', stage: 'customs', location: null, occurred_at: '2026-10-17T16:00:00.000Z', day: '2026-10-18', expires_at: '2026-10-18T16:00:00.000Z' }]);
   });
 
   it('leaves out a step a scan tells, has passed or has come further than', () => {
-    const departed = { ...pickedUp, id: 'departed', description: 'Departed  the origin FACILITY', stage: 'in_transit', occurred_at: '2026-10-19T00:00:00.000Z' };
+    const departed = { ...pickedUp, id: 'departed', description: 'Departed  the origin FACILITY', stage: 'in_transit', location: 'Shenzhen', occurred_at: '2026-10-20T00:59:45.000Z' };
     expect(servedPlannedSteps(row(), [pickedUp, departed]).map((step) => step.description))
       .toEqual(['Arrived in the destination country', 'Out for delivery', 'Delivered']);
+    expect(servedPlannedSteps(row(), [{ ...departed, location: 'Lyon' }])).toHaveLength(4);
+    expect(servedPlannedSteps(row(), [{ ...departed, occurred_at: pickedUp.occurred_at }])).toHaveLength(4);
     const arrived = { ...pickedUp, id: 'arrived', description: 'Arrived at hub', stage: 'in_transit', occurred_at: '2026-10-25T00:00:00.000Z' };
     expect(servedPlannedSteps(row(), [pickedUp, arrived]).map((step) => step.description)).toEqual(['Out for delivery', 'Delivered']);
     // Out for delivery for real: a later step of an earlier stage is stale.

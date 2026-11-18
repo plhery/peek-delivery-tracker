@@ -1378,6 +1378,20 @@ class AddParcelTest {
     }
 
     @Test
+    fun theFocusStaysThroughAWindowMadeAgainOnceStopped() {
+        // A foldable closed shuts its inner screen, which stops the window, before making it again on the outer one.
+        val recreation = Recreation(compose)
+        show(recreation = recreation)
+        open()
+        type("1Z999AA1012345")
+        settle()
+        recreation.recreate(inTheBackground = true)
+        settle()
+        node(ADD_TRACKING).assertIsFocused()
+        assertEquals("1Z999AA1012345", fieldText(ADD_TRACKING))
+    }
+
+    @Test
     fun whatWasTypedTheFocusAndThePickerStayThroughTheWindowMadeAgain() {
         val recreation = Recreation(compose)
         show(recreation = recreation)

@@ -17,7 +17,7 @@ Peek rozpoznaje te formaty (wszystkie przykłady są wymyślone):
 | Format | Co oznacza |
 | --- | --- |
 | `PL4829105736` | Europejski dwuliterowy kod kraju i 10 cyfr, np. `PL`, `DE`, `FR`, `IT`, `ES` lub `UK`. |
-| `TBA482910573649` | `TBA`, `TBC` lub `TBM` i 12 cyfr (także `TBR` i 9 cyfr albo `TBAU` i 10 cyfr). |
+| `TBA482910573649` | `TBA`, `TBC` lub `TBM` i 12 cyfr (także `TBR` i 9 cyfr albo `TBAU` i 9 cyfr). |
 
 Haczyk polega na tym, że [Amazon Logistics](carrier:amazon-logistics), który rozwozi własne zamówienia sklepu Amazon, korzysta z identycznych formatów numerów. Odróżnia je wyłącznie publiczny tracker Amazon Shipping: zna on tylko przesyłki nadane w usłudze Amazon Shipping, a dla zwykłych zamówień własnych Amazona zwraca brak wyników. Jeśli numer nie pojawia się w publicznym trackerze, a zakup pochodzi z `Amazon.pl`, zobacz [śledzenie Amazon Logistics](carrier:amazon-logistics). Numer zamówienia w układzie trzech, siedmiu i siedmiu cyfr z myślnikami nie jest numerem przesyłki, a dwóch innych liter z 10 cyframi (jak `US` i 10 cyfr) Peek nie uznaje za numer Amazona. Brakuje Ci numeru? Poproś o niego sklep: [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
@@ -39,7 +39,7 @@ W sprawach opóźnionej, niedoręczonej lub uszkodzonej przesyłki skontaktuj si
 
 ## Śledzenie przesyłki Amazon Shipping w Peek
 
-Wklej numer albo link z `track.amazon` zawierający `/tracking/` i numer w [Peek](/). Peek sprawdza w publicznym trackerze Amazona, czy numer jest tam dostępny. Gdy Amazon potwierdzi przesyłkę, zobaczysz komunikat: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli tracker nie zna numeru, Peek traktuje go jako prywatną dostawę [Amazon Logistics](carrier:amazon-logistics) widoczną po zalogowaniu w zamówieniach. Gdy zapytanie chwilowo się nie powiedzie, użyj przycisku „Spróbuj ponownie”. Na liście pod „Zmień przewoźnika” nie ma osobnej pozycji Amazon Shipping — jedyną drogą jest ten automatyczny test, bez podawania kodu pocztowego.
+Wklej numer albo link z `track.amazon` zawierający `/tracking/` i numer w [Peek](/). Peek sprawdza w publicznym trackerze Amazona, czy numer jest tam dostępny. Gdy Amazon potwierdzi przesyłkę, zobaczysz komunikat: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli tracker nie zna numeru, Peek traktuje go jako prywatną dostawę [Amazon Logistics](carrier:amazon-logistics) widoczną po zalogowaniu w zamówieniach. Gdy zapytanie chwilowo się nie powiedzie, użyj przycisku „Sprawdź ponownie”. Na liście pod „Zmień przewoźnika” nie ma osobnej pozycji Amazon Shipping — jedyną drogą jest ten automatyczny test, bez podawania kodu pocztowego.
 
 Peek pokazuje aktualny status, oś czasu z miejscowością, regionem i krajem każdego skanu na mapie, przewidywany dzień dostawy (z wyjątkiem numerów `TBA`, `TBC` i `TBM`) oraz godzinę doręczenia w strefie Twojego urządzenia („Godziny w Twojej strefie czasowej: …”). Zamiast długich komunikatów Amazona wyświetla zwięzłe polskie etapy — takie jak „W doręczeniu” czy „Dostarczona” — pozostawiając po angielsku jedynie wpisy pośrednie `Arrived at sorting center`, `Arrived at delivery center` i `Departed facility`. Nazwa sklepu, Twoje imię i adres, podpis oraz zdjęcie z doręczenia nie są wyświetlane. Ponieważ publiczny tracker Amazona przechowuje historię przez 45 dni i jest jedynym źródłem danych, po wygaśnięciu udostępniania Peek informuje o tym i kończy odpytywanie (nie przełącza też paczki na innego kuriera).
 

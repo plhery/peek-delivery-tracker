@@ -17,7 +17,7 @@ Formatos reconhecidos pelo Peek (algarismos inventados):
 | Formato | O que é |
 | --- | --- |
 | `PT4829105736`, `ES4829105736` | Código de país europeu (`PT`, `ES`, `FR`, `IT`, `DE`, `UK`, etc.) e 10 algarismos. |
-| `TBA482910573649` | `TBA`, `TBC` ou `TBM` e 12 algarismos (também `TBR` com 9 ou `TBAU` com 10). |
+| `TBA482910573649` | `TBA`, `TBC` ou `TBM` e 12 algarismos (também `TBR` com 9 ou `TBAU` com 9). |
 
 A armadilha: a [Amazon Logistics](carrier:amazon-logistics), que entrega as compras da própria Amazon, usa exatamente os mesmos formatos. Só o rastreador público da Amazon Shipping os separa, pois apenas conhece pacotes Amazon Shipping e dá «não encontrado» para os restantes. Se nada surgir e compraste na Amazon, vê [Amazon Logistics](carrier:amazon-logistics). Números de pedido com hífenes (três, sete e sete dígitos) não são códigos de rastreio, e códigos `BR` ou `US` com 10 dígitos não são aceites pelo Peek como Amazon. Sem código? Pede-o à loja: [onde encontrar o número de seguimento](guide:find-tracking-number).
 
@@ -35,7 +35,7 @@ Fala sempre com a loja onde compraste. Na UE, segundo o [Your Europe](https://eu
 
 Para atrasos, extravios ou danos, contacta diretamente o vendedor.
 
-> Segundo a [About Amazon España](https://www.aboutamazon.es/noticias/politicas-publicas/6-consejos-para-comprar-online-de-forma-segura), a Amazon nunca pede por telefone dados de pagamento, cartões-presente nem instalação de software para apoio ao cliente. Desconfia de urgências, revê erros nos links e confirma mensagens no centro de mensagens da tua conta Amazon antes de agir; denuncia contactos suspeitos à Amazon. Mais em [burlas por SMS](guide:delivery-scam-texts).
+> Segundo a [About Amazon España](https://www.aboutamazon.es/noticias/politicas-publicas/6-consejos-para-comprar-online-de-forma-segura), a Amazon nunca pede por telefone informações sobre o teu meio de pagamento. Desconfia de urgências, revê erros nos links e confirma mensagens no centro de mensagens da tua conta Amazon antes de agir; denuncia contactos suspeitos à Amazon. Mais em [burlas por SMS](guide:delivery-scam-texts).
 
 ## Seguimento da Amazon Shipping no Peek
 
@@ -62,7 +62,7 @@ Se o rastreador indicar dia previsto, o Peek mostra-o (exceto `TBA`, `TBC` e `TB
 :::sources
 - [About Amazon España: Carta anual 2023](https://www.aboutamazon.es/noticias/noticias-de-la-compania/carta-anual-a-los-accionistas-2023-de-nuestro-ceo-andy-jassy) – rede de última milha para envios de outras empresas
 - [About Amazon EU: Prime in Portugal](https://www.aboutamazon.eu/news/press-lounge/amazon-prime-now-available-to-customers-in-portugal) – clientes em Portugal via Amazon.es
-- [About Amazon España: 6 consejos de compra segura](https://www.aboutamazon.es/noticias/politicas-publicas/6-consejos-para-comprar-online-de-forma-segura) – pagamentos, cartões-presente, software e denúncias
+- [About Amazon España: 6 consejos de compra segura](https://www.aboutamazon.es/noticias/politicas-publicas/6-consejos-para-comprar-online-de-forma-segura) – pagamentos, links, mensagens e denúncias
 - [Your Europe: Expedição e entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pt.htm) – responsabilidade do vendedor e prazo de 30 dias
 - [Your Europe: FAQ entrega](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_pt.htm) – prova de entrega e reembolso
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – formatos PT, ES e TBA, rastreadores consultados, 45 dias e intervalos

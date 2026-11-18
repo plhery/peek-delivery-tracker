@@ -1289,9 +1289,12 @@ export function buildEvents(
       raw_data: { ...raw, stage_source: stageSource(declaredStage, description, raw.stage_source), ...provider },
     });
   }
+  const deliveryTime = current === 'delivered' && typeof result.delivered_at === 'string'
+    && /[T ]\d{2}:\d{2}/.test(result.delivered_at) ? eventTimestamp(result.delivered_at, timezone) : null;
+  const explicitDelivery = deliveryTime && (!observedAt || !datedAfterCheck(deliveryTime, 'UTC', observedAt)) ? deliveryTime : null;
   if (rows.length === 0 && current && result.last_status_text) {
     const description = String(result.last_status_text);
-    const occurredAt = eventTimestamp(result.last_update, timezone);
+    const occurredAt = explicitDelivery ?? eventTimestamp(result.last_update, timezone);
     if (occurredAt) {
       rows.push({
         package_id: parcel.id,
@@ -1299,9 +1302,9 @@ export function buildEvents(
         description,
         location: null,
         occurred_at: occurredAt,
-        provider_event_id: providerEventId(carrierId, result.last_update, '', description),
+        provider_event_id: providerEventId(carrierId, explicitDelivery ? result.delivered_at : result.last_update, '', description),
         raw_data: {
-          time: result.last_update,
+          time: explicitDelivery ? result.delivered_at : result.last_update,
           stage_source: stageSource(String(result.current_stage ?? ''), description, result.current_stage_source),
           ...provider,
         },
@@ -1339,7 +1342,7 @@ export function buildEvents(
       matchingEvent?.description ?? result.last_status_text ?? UNWORDED_STEP,
     ).trim() || UNWORDED_STEP;
     const location = String(matchingEvent?.location ?? '').trim();
-    const occurredAt = endWithNewestScan(parcel, previousStage, current, rows, providerCopy) ?? observedAt.toISOString();
+    const occurredAt = explicitDelivery ?? endWithNewestScan(parcel, previousStage, current, rows, providerCopy) ?? observedAt.toISOString();
     const declaredCurrent = String(result.current_stage ?? '');
     rows.push({
       package_id: parcel.id,
@@ -1349,7 +1352,7 @@ export function buildEvents(
       occurred_at: occurredAt,
       provider_event_id: providerEventId(
         carrierId,
-        result.tracking_provider === 'UPU'
+        explicitDelivery ? result.delivered_at : result.tracking_provider === 'UPU'
           ? `UPU:observed:${String(matchingEvent?.local_time ?? '')}:${String(matchingEvent?.provider_code ?? '')}`
           : `observed:${previousStage}->${current}`,
         location,
@@ -1357,7 +1360,7 @@ export function buildEvents(
       ),
       raw_data: {
         ...(result.tracking_provider === 'UPU' || result.direct_local_fallback === true ? matchingEvent : {}),
-        observed_without_provider_timestamp: true,
+        ...(explicitDelivery ? { time: result.delivered_at } : { observed_without_provider_timestamp: true }),
         stage_source: stageSource(
           VALID_STAGES.has(declaredCurrent) ? declaredCurrent : String(matchingEvent?.stage ?? ''),
           description,

@@ -647,6 +647,10 @@ describe('tracking event normalization', () => {
     const observed = (rows: JsonObject[]) => rows.find((row) => (row.raw_data as JsonObject | undefined)?.observed_without_provider_timestamp === true);
     expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z'), answer('delivered'), undefined, observedAt)))
       .toMatchObject({ stage: 'returned', occurred_at: '2026-10-30T08:39:06.000Z' });
+    const delivered = buildEvents(parcel('2026-11-09T12:09:13Z'), { ...answer('out_for_delivery'),
+      current_stage: 'delivered', last_status_text: 'Delivered', delivered_at: '2026-10-30T15:23:00Z' }, undefined, observedAt)
+      .find((row) => row.stage === 'delivered');
+    expect(delivered).toMatchObject({ occurred_at: '2026-10-30T15:23:00Z', raw_data: { time: '2026-10-30T15:23:00Z' } });
     // Added before that scan, after a scan short of the last mile, or after an earlier answer: the end is dated when seen.
     expect(observed(buildEvents(parcel('2026-10-29T10:00:00Z'), answer('delivered'), undefined, observedAt)))
       .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });

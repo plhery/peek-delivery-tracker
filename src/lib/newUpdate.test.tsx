@@ -186,6 +186,16 @@ describe('useSeenWhileOpen', () => {
     expect(markSeen).toHaveBeenCalledTimes(2);
   });
 
+  it('marks an email-added parcel without scans when it becomes visible', () => {
+    const markSeen = vi.fn().mockResolvedValue(undefined);
+    visibility('hidden');
+    const parcel = { ...news(''), seenAt: '1970-01-01T00:00:00+00:00' };
+    renderHook(() => useSeenWhileOpen(parcel, markSeen));
+    expect(markSeen).not.toHaveBeenCalled();
+    visibility('visible');
+    expect(markSeen).toHaveBeenCalledExactlyOnceWith('tea');
+  });
+
   it('waits for the page to be in front', () => {
     const markSeen = vi.fn().mockResolvedValue(undefined);
     visibility('hidden');

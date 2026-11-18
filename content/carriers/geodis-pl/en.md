@@ -18,7 +18,7 @@ GEODIS works for businesses only, so the number is with whoever sent you somethi
 
 | Number (invented) | What it is |
 | --- | --- |
-| `PL0000000000000000` | PL and 16 digits: a GEODIS Poland shipment number, the one its tracker calls "Shipment No.". |
+| `PL4829105736491827` | PL and 16 digits: a GEODIS Poland shipment number, the one its tracker calls "Shipment No.". |
 | `1G0000000000` | 1G and 10 capital letters or digits: a number from [GEODIS](carrier:geodis) in France, tracked on GEODIS's French recipient space, not on Strefa Klienta. |
 
 On Strefa Klienta, type the number in the "Enter Shipment No." field and press "Search". If the tracker answers `Shipment with such number does not exist`, it doesn't know the number: contact the shop or sender, as GEODIS advises when a number doesn't work. A reply in Polish, `Proszę wprowadzić właściwy numer przesyłki.`, asks for a valid shipment number: look for a typo.
@@ -82,7 +82,7 @@ PL and 16 digits isn't a shape GEODIS owns (PL stands for Poland), so Peek can't
 
 Peek reads Strefa Klienta in English and shows the status, each scan in GEODIS's English wording with the terminal's place, the delivery time and the destination country. Scans at Polish terminals are read on Warsaw time; a terminal abroad keeps its own clock. Peek shows each in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. When a `Pseudoscan` row cancels earlier scans, Peek drops them too, and `Claim Received` leaves the status as it was. GEODIS's tracker gives no expected delivery date, weight, service name, recipient name or proof of delivery. Peek leaves out the delivery postcode and address, the item count, the terminals' codes and the remarks, which can name who signed.
 
-Peek checks up to every 10 minutes, and up to every 2 from 6 a.m. local time on the day GEODIS scans the shipment out for delivery, while GEODIS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or the delivery day only. It can't set a delivery date, arrange a pickup or file a claim: call GEODIS or ask the shop.
+While you have the shipment open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 from 6 a.m. local time on the day GEODIS scans the shipment out for delivery, while GEODIS's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. After two days without news (12 hours while the shipment still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of every scan, important steps or the delivery day only. It can't set a delivery date, arrange a pickup or file a claim: call GEODIS or ask the shop.
 
 ## Questions about GEODIS Poland tracking
 

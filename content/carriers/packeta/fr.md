@@ -134,7 +134,7 @@ Non : le code `Z` à dix chiffres suffit sur `tracking.packeta.com` comme dans P
 - [Packeta.sk: Reklamačný poriadok (PDF)](https://files.packeta.com/web/files/SK_Reklamacny_poriadok_20_10_2026.pdf) – réclamation destinataire et avarie cachée en Slovaquie
 - [Cybermalveillance.gouv.fr : escroqueries à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – La Poste ne demande jamais de paiement par SMS ni e-mail
 - [bpost : achats hors de l'Union européenne](https://www.bpost.be/fr/shopping-hors-ue) – demande par e-mail, SMS ou courrier et paiement My bpost, Track & Trace ou Bureau de Poste
-- [OFDF : réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – TVA suisse (8,1 % / 2,6 %) et franchise jusqu'à 5 CHF d'impôt
+- [OFDF : réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – TVA suisse (8,1 % / 2,6 %), non perçue en dessous de 5 CHF d'impôt
 - [OFDF : frais de dédouanement et suivi des colis](https://www.bazg.admin.ch/fr/frais-dedouanement-et-suivi-des-colis) – frais de dédouanement facturés par le transporteur en Suisse
 - [Commission européenne : champ d'application territorial de la TVA et des douanes](https://taxation-customs.ec.europa.eu/taxation/vat/vat-directive/how-does-vat-work/territorial-scope_en) – départements d'outre-mer français
 - [Commission européenne : réforme douanière de l'UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droit de 3 € dès juillet 2026 et frais de 2 € dès novembre 2026

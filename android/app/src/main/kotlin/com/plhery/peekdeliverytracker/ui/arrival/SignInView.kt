@@ -145,15 +145,25 @@ import kotlinx.coroutines.launch
 internal enum class SignInStep { Methods, Code }
 
 /**
- * SignInView's state: the step, what is typed, whether the email form is open among other ways in, the run under way
- * (`working`, with the provider it opened, [SignInRun]) and the error the last one ended on. What is typed, the step and
- * the error live on through the window being made again and after the process ended; the run lives on through the
+ * SignInView's state: the step, what is typed, the address the code went to ([sentTo], which the code step names and
+ * checks the code against, whatever is typed in the field while it goes), whether the email form is open among other
+ * ways in, the run under way (`working`, with the provider it opened, [SignInRun]) and the error the last one ended on.
+ * What is typed, the step and the error live on through the window being made again and after the process ended; the run lives on through the
  * window being made again, as the iPhone's view lives on through a rotation.
  */
 @Stable
-private class SignInForm(private val run: SignInRun, step: SignInStep, email: String, code: String, expanded: Boolean, error: String?) {
+private class SignInForm(
+    private val run: SignInRun,
+    step: SignInStep,
+    email: String,
+    sentTo: String,
+    code: String,
+    expanded: Boolean,
+    error: String?,
+) {
     var step by mutableStateOf(step)
     var email by mutableStateOf(email)
+    var sentTo by mutableStateOf(sentTo)
     var code by mutableStateOf(code)
     var emailExpanded by mutableStateOf(expanded)
     var errorMessage by mutableStateOf(error)
@@ -163,8 +173,10 @@ private class SignInForm(private val run: SignInRun, step: SignInStep, email: St
     companion object {
         /** The form saved without its run, and made again around `run`, the window's. */
         fun saver(run: SignInRun) = listSaver<SignInForm, Any?>(
-            save = { listOf(it.step.name, it.email, it.code, it.emailExpanded, it.errorMessage) },
-            restore = { SignInForm(run, SignInStep.valueOf(it[0] as String), it[1] as String, it[2] as String, it[3] as Boolean, it[4] as String?) },
+            save = { listOf(it.step.name, it.email, it.sentTo, it.code, it.emailExpanded, it.errorMessage) },
+            restore = {
+                SignInForm(run, SignInStep.valueOf(it[0] as String), it[1] as String, it[2] as String, it[3] as String, it[4] as Boolean, it[5] as String?)
+            },
         )
     }
 }
@@ -271,7 +283,7 @@ internal fun SignInView(
     val configuration = session.configuration
     val underWay = retain { SignInRun() }
     val form = rememberSaveable(saver = remember(underWay) { SignInForm.saver(underWay) }) {
-        SignInForm(underWay, SignInStep.Methods, "", "", false, null)
+        SignInForm(underWay, SignInStep.Methods, "", "", "", false, null)
     }
     DisposableEffect(underWay, form) {
         underWay.show(form)
@@ -401,7 +413,7 @@ internal fun SignInView(
                                 Text(localized("auth.configTitle"), color = colors.secondaryText, style = type.subheadline.sfLines())
                             }
                             form.step == SignInStep.Code -> CodeForm(form, invitation != null, codeFocus, onVerify = {
-                                val email = form.email.cleanedEmail
+                                val email = form.sentTo
                                 val code = form.code
                                 run { session.verifyCode(email = email, code = code) }
                             })
@@ -587,9 +599,9 @@ private fun Methods(
                 AnimatedVisibility(formVisible, enter = expanding, exit = ExitTransition.None) {
                     val localizer = LocalLocalizer.current
                     EmailForm(form, invited, onSend = {
-                        val email = form.email.cleanedEmail
+                        val address = form.email.cleanedEmail
                         val language = localizer.language
-                        run(null, { step = SignInStep.Code }) { session.sendCode(to = email, language = language) }
+                        run(null, { sentTo = address; step = SignInStep.Code }) { session.sendCode(to = address, language = language) }
                     })
                 }
             }
@@ -644,7 +656,7 @@ private fun CodeForm(form: SignInForm, invited: Boolean, focus: AccessibilityFoc
     val type = PeekTheme.type
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
-    val email = form.email.cleanedEmail
+    val email = form.sentTo
     val intro = remember(email, language) { localizer.text("auth.codeIntro", mapOf("email" to email)) }
     Column(Modifier.fillMaxWidth().formSurface(invited, 20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text(intro, color = colors.secondaryText, style = type.footnote.sfLines())

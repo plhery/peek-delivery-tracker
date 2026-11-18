@@ -257,6 +257,25 @@ class SignInTest {
         assertEquals(listOf("sign-in-code-send" to Outcome.Started, "sign-in-code-send" to Outcome.Success), events)
     }
 
+    /** The address changed while its code was on its way: the code step names, and checks, the one it went to. */
+    @Test
+    fun theCodeGoesWithTheAddressItWasSentToNotOneTypedMeanwhile() {
+        val held = CompletableDeferred<Unit>()
+        service.held = held
+        show()
+        typeEmail()
+        compose.onNodeWithTag(EMAIL_SEND).performClick()
+        compose.waitForIdle()
+        compose.onNodeWithTag(EMAIL_FIELD).performTextReplacement("other@example.com")
+        held.complete(Unit)
+        compose.waitForIdle()
+        compose.onNodeWithText(text("auth.codeIntro", mapOf("email" to READER_EMAIL))).assertExists()
+        compose.onNodeWithTag(CODE_FIELD).performTextInput(READER_CODE)
+        compose.onNodeWithTag(CODE_VERIFY).performClick()
+        compose.waitForIdle()
+        assertEquals("""{"email":"reader@example.com","token":"123456","type":"email"}""", service.body("verify"))
+    }
+
     /** C-G12: the code's numbers alone, six at most, as typed or pasted from the email. */
     @Test
     fun theCodeKeepsItsFirstSixNumbers() {

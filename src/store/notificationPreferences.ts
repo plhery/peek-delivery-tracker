@@ -64,26 +64,12 @@ export function loadNotificationPreferences(auth: ApiAuth, { once = false } = {}
   return reading;
 }
 
-async function save(preferences: NotificationPreferences, auth: ApiAuth): Promise<NotificationPreferences> {
+async function save(preferences: Partial<NotificationPreferences>, auth: ApiAuth): Promise<NotificationPreferences> {
   return take(sessionOf(auth), await saveNotificationPreferences(preferences, auth));
 }
 
-/** The browser's time zone, which every save sends; the stored one where the browser names none. */
-function timeZone(saved: NotificationPreferences | null): string {
-  return Intl.DateTimeFormat().resolvedOptions().timeZone || saved?.timezone || 'Europe/Zurich';
-}
-
-/**
- * Saves which events are announced. The retired quiet hours are cleared, and
- * the email choice is left out, so the server keeps it as it is.
- */
 export function saveNotificationStages(stages: NotificationStage[], auth: ApiAuth): Promise<NotificationPreferences> {
-  return save({
-    enabledStages: stages,
-    quietHoursStart: null,
-    quietHoursEnd: null,
-    timezone: timeZone(sessionOf(auth).preferences),
-  }, auth);
+  return save({ enabledStages: stages }, auth);
 }
 
 /**
@@ -93,13 +79,7 @@ export function saveNotificationStages(stages: NotificationStage[], auth: ApiAut
 export function saveEmailOnDelivery(enabled: boolean, auth: ApiAuth): Promise<NotificationPreferences> {
   const saved = sessionOf(auth).preferences;
   if (!saved) return Promise.reject(new Error('Notification preferences are not loaded'));
-  return save({
-    enabledStages: saved.enabledStages,
-    quietHoursStart: saved.quietHoursStart,
-    quietHoursEnd: saved.quietHoursEnd,
-    timezone: timeZone(saved),
-    emailOnDelivery: enabled,
-  }, auth);
+  return save({ emailOnDelivery: enabled }, auth);
 }
 
 /**
@@ -107,14 +87,8 @@ export function saveEmailOnDelivery(enabled: boolean, auth: ApiAuth): Promise<No
  * events and the email choice go as they were last saved.
  */
 export async function saveMarkNewUpdates(enabled: boolean, auth: ApiAuth): Promise<NotificationPreferences> {
-  const saved = sessionOf(auth).preferences ?? await loadNotificationPreferences(auth, { once: true });
-  return save({
-    enabledStages: saved.enabledStages,
-    quietHoursStart: saved.quietHoursStart,
-    quietHoursEnd: saved.quietHoursEnd,
-    timezone: timeZone(saved),
-    markNewUpdates: enabled,
-  }, auth);
+  await loadNotificationPreferences(auth, { once: true });
+  return save({ markNewUpdates: enabled }, auth);
 }
 
 /** How the app writes a time and a distance here. */
@@ -138,12 +112,8 @@ export async function saveShownUnits(shown: ShownUnits, auth: ApiAuth): Promise<
   let answer: NotificationPreferences;
   try {
     answer = await save({
-      enabledStages: saved.enabledStages,
-      quietHoursStart: saved.quietHoursStart,
-      quietHoursEnd: saved.quietHoursEnd,
-      timezone: timeZone(saved),
-      clock: shown.clock,
-      distance: shown.distance,
+      ...(saved.clock !== shown.clock ? { clock: shown.clock } : {}),
+      ...(saved.distance !== shown.distance ? { distance: shown.distance } : {}),
     }, auth);
   } catch (error) {
     if (session.unitsSent === sent) session.unitsSent = null;

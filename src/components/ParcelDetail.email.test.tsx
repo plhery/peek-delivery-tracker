@@ -69,6 +69,7 @@ beforeEach(() => {
   saves.email.mockReset().mockResolvedValue(undefined);
   vi.mocked(getNotificationPreferences).mockReset();
   vi.mocked(saveNotificationPreferences).mockReset().mockImplementation(async (preferences) => ({
+    enabledStages: IMPORTANT, quietHoursStart: null, quietHoursEnd: null, timezone: 'Europe/Zurich',
     ...preferences, emailOnDelivery: preferences.emailOnDelivery ?? null, emailAvailable: true,
   }));
 });
@@ -212,8 +213,7 @@ describe('the email offer on a delivered parcel', () => {
     const { user, auth } = await open(never);
     await user.click(within(offer()!).getByRole('button', { name: 'Turn on' }));
     expect(saveNotificationPreferences).toHaveBeenCalledExactlyOnceWith({
-      enabledStages: IMPORTANT, quietHoursStart: null, quietHoursEnd: null,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone, emailOnDelivery: true,
+      emailOnDelivery: true,
     }, auth);
     expect(await screen.findByRole('status')).toHaveTextContent('Email is on. You can change it in Settings › Notifications.');
     expect(offer()).toBeNull();

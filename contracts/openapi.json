@@ -63125,7 +63125,68 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NotificationPreferences"
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "enabledStages": {
+                    "type": "array",
+                    "minItems": 1,
+                    "uniqueItems": true,
+                    "items": {
+                      "$ref": "#/components/schemas/NotificationStage"
+                    }
+                  },
+                  "quietHoursStart": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+                  },
+                  "quietHoursEnd": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "pattern": "^(?:[01][0-9]|2[0-3]):[0-5][0-9]$"
+                  },
+                  "timezone": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 64
+                  },
+                  "emailOnDelivery": {
+                    "type": [
+                      "boolean",
+                      "null"
+                    ],
+                    "description": "Whether the account gets an email when a parcel is ready to collect, and when it is delivered. null: never chosen, so the one-time offer may show. A request that leaves it out, or sends null, keeps the stored choice."
+                  },
+                  "emailAvailable": {
+                    "type": "boolean",
+                    "description": "Read-only: whether this server can email this account. Mail is configured and the account has a confirmed address it can write to. Ignored in a request."
+                  },
+                  "markNewUpdates": {
+                    "type": "boolean",
+                    "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Mark new updates\", on until switched off). A request that leaves it out keeps the stored choice."
+                  },
+                  "clock": {
+                    "type": "string",
+                    "enum": [
+                      "24",
+                      "12"
+                    ],
+                    "description": "How the account's emails write a time: on the 24-hour or the 12-hour clock, as its app shows times. An app sends what it shows when the account's differs, after reading them and when the reader changes it. Left out of a response until an app has sent it: the email's language decides. A request that leaves it out keeps the stored one."
+                  },
+                  "distance": {
+                    "type": "string",
+                    "enum": [
+                      "km",
+                      "mi"
+                    ],
+                    "description": "How the account's emails write a distance: in kilometres or miles, as its app shows distances. Sent and kept as clock is."
+                  }
+                }
               }
             }
           }

@@ -96,10 +96,6 @@ describe('the delivery email in Settings', () => {
     await user.click(screen.getByRole('radio', { name: /every scan/i }));
     await user.click(emailSwitch());
     expect(saveNotificationPreferences).toHaveBeenCalledExactlyOnceWith({
-      enabledStages: ['out_for_delivery', 'delivered'],
-      quietHoursStart: null,
-      quietHoursEnd: null,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       emailOnDelivery: true,
     }, apiAuth);
     await waitFor(() => expect(emailSwitch()).toHaveAttribute('aria-checked', 'true'));
@@ -154,7 +150,7 @@ describe('the delivery email in Settings', () => {
     const [sent, auth] = vi.mocked(saveNotificationPreferences).mock.calls[1];
     expect(auth).toBe(apiAuth);
     // The request leaves the email out, and the server keeps what it has.
-    expect(Object.keys(sent).sort()).toEqual(['enabledStages', 'quietHoursEnd', 'quietHoursStart', 'timezone']);
+    expect(Object.keys(sent).sort()).toEqual(['enabledStages']);
     expect(emailSwitch()).toHaveAttribute('aria-checked', 'true');
     expect(screen.getByRole('radio', { name: /every scan/i })).toBeChecked();
   });

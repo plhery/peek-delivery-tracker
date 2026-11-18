@@ -93,7 +93,7 @@ describe('the delivery email in the deliveries', () => {
     await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledOnce());
     // The events go as the account has them, and its email choice stays as it is.
     expect(saveNotificationPreferences).toHaveBeenCalledWith({
-      enabledStages: EMAIL_ON.enabledStages, quietHoursStart: null, quietHoursEnd: null, timezone: expect.any(String), clock: '12', distance: 'mi',
+      clock: '12', distance: 'mi',
     }, apiAuth);
     expect(await screen.findByText('Belgian chocolate 🍫')).toBeVisible();
     expect(saveNotificationPreferences).toHaveBeenCalledOnce();

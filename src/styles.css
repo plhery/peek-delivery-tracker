@@ -428,7 +428,10 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 /* The package stays in the scene as it opens and moves into sign-in. */
 .arrival { min-height: 100dvh; padding: 0 32px 40px; overflow: clip; }
 .arrival__header { display: flex; align-items: center; justify-content: space-between; width: min(100%, 1044px); min-height: 104px; margin: 0 auto; gap: 18px; }
-.arrival__actions { display: flex; align-items: center; gap: 16px; flex-shrink: 0; }
+.arrival__actions { display: flex; align-items: center; gap: 16px; min-width: 0; }
+/* Short of room, the language narrows: the name keeps its size and place from the front door to sign-in. */
+.arrival__header > .peek-lockup, .arrival__back { flex-shrink: 0; }
+.arrival__actions .language-control, .arrival__actions .language-control select { min-width: 0; }
 .arrival__back { font-size: 13px; }
 .arrival__back svg { width: 17px; height: 17px; }
 .arrival__scene { position: relative; width: min(100%, 820px); min-height: min(680px, calc(100dvh - 144px)); margin: 12px auto 0; }

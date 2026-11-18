@@ -1404,6 +1404,11 @@ class DeviceParcelTests {
             assertEquals(ServerDown(), error)
         }
 
+        answer = jsonResponse(404, """{"error":"route unavailable"}""")
+        runCatching { device.refresh() }
+        assertEquals(2, storage.keys.size)
+        assertEquals(1, storage.pendingForgets.size)
+
         answer = jsonResponse(404, """{"error":"Parcel unavailable"}""")
         device.refresh()
         assertTrue(device.isEmpty)
@@ -1457,7 +1462,7 @@ class DeviceParcelTests {
         // /maintenance.json is the app's own 404 page before the edge is in front.
         val transport = RecordingTransport { jsonResponse(404, "<!doctype html><title>Not found</title>") }
         val id = UUID.randomUUID()
-        val checkedAt = Instant.now().minusSeconds(60 * 60).truncatedTo(ChronoUnit.SECONDS)
+        val checkedAt = Instant.now().minusSeconds(5).truncatedTo(ChronoUnit.SECONDS)
         val storage = Memory()
         storage.keys = mapOf("22222222222A" to key)
         storage.parcels = listOf(parcel("22222222222A", "Running shoes", id, at = date(checkedAt)))
@@ -1470,6 +1475,7 @@ class DeviceParcelTests {
         store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
+        store.refreshAll()
         store.load()
         assertEquals(listOf("Running shoes"), store.parcels.map { it.label })
         assertEquals(MaintenanceNotice.Unannounced, store.serverDown)
@@ -1721,6 +1727,33 @@ class DeviceParcelTests {
         gate.release("new-token")
         second.join()
         assertEquals(listOf("alert 22222222222A old-token", "alert 22222222222A new-token"), calls.all.filter { it.startsWith("alert") })
+    }
+
+    @Test
+    fun anEarlierAlertTimeoutDoesNotRetryTheOldToken() = runTest {
+        val calls = Calls()
+        val gate = AlertGate()
+        val storage = Memory()
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()))
+        var attempts = 0
+        val held = client(calls).replacing(setAlert = { _, _, request ->
+            if (request.token == "old") {
+                attempts++
+                if (attempts == 1) gate.pass("old")
+                throw java.io.IOException()
+            }
+            DeviceAlertAnswer.On
+        })
+        val device = device(held, storage, this, now = { Instant.EPOCH.plusMillis(testScheduler.currentTime) })
+        val first = launch { device.registerAlerts("old", NativePushLocale.En) }
+        gate.arrived("old")
+        device.registerAlerts("new", NativePushLocale.En)
+        gate.release("old")
+        first.join()
+        advanceTimeBy(61_000)
+        device.retryAlerts()
+        assertEquals(1, attempts)
+        assertEquals("new", storage.parcels.single().alertToken)
     }
 
     @Test

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    What leaves the phone in a backup or a transfer to a new one. The iPhone's carry its UserDefaults and Application
-    Support, and leave behind the keychain items it keeps on this device alone. Here the preferences and the parcels
-    this phone follows (DeviceParcels/) go; the secrets never do (Keychain/: the session, owner keys, attestation
-    records, sealed with a key of this phone's Keystore, which stays behind). On the new phone the parcels followed
-    through someone else's link come back, and this phone's own, whose keys stayed, are dropped
-    (DeviceParcelFiles.matched). Each account's cache (ParcelCache/) stays too, where the iPhone's goes with
-    Application Support: it holds what an account showed. The cache folder never goes.
+    FollowedParcels holds backup copies with the push addresses removed. Complete copies live in noBackupFilesDir.
+    DeviceParcels and unifiedpush.xml are the older locations that may still hold an installation's credentials.
+    Account caches, owner keys, sessions and transport credentials stay on the original phone.
 -->
 <data-extraction-rules>
     <cloud-backup>
         <exclude domain="file" path="Keychain/" />
         <exclude domain="file" path="ParcelCache/" />
+        <exclude domain="file" path="DeviceParcels/" />
+        <exclude domain="sharedpref" path="unifiedpush.xml" />
+        <exclude domain="sharedpref" path="push-route.xml" />
     </cloud-backup>
     <device-transfer>
         <exclude domain="file" path="Keychain/" />
         <exclude domain="file" path="ParcelCache/" />
+        <exclude domain="file" path="DeviceParcels/" />
+        <exclude domain="sharedpref" path="unifiedpush.xml" />
+        <exclude domain="sharedpref" path="push-route.xml" />
     </device-transfer>
 </data-extraction-rules>

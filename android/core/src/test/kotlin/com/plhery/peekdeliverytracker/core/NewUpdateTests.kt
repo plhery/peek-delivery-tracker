@@ -199,6 +199,26 @@ class NewUpdateTests {
     }
 
     @Test
+    fun theLastSwitchChoiceReachesTheAccountLast() = runTest {
+        val server = Server()
+        val store = signedIn(server)
+        store.loadNotificationPreferences()
+        val first = CompletableDeferred<Unit>()
+        server.beforePreferences = { request ->
+            if (request.body?.decodeToString()?.contains("\"markNewUpdates\":false") == true) first.await()
+        }
+        val off = launch { store.setMarkNewUpdates(false) }
+        runCurrent()
+        val on = launch { store.setMarkNewUpdates(true) }
+        runCurrent()
+        first.complete(Unit)
+        off.join()
+        on.join()
+        assertEquals(listOf(false, true), server.preferenceSaves)
+        assertTrue(server.markNewUpdates)
+    }
+
+    @Test
     fun aScanAfterTheLastOpenShowsTheDot() = runTest {
         val server = Server()
         server.newsAt = null
@@ -257,7 +277,9 @@ class NewUpdateTests {
         val storage = keptBefore(publicPackage(newsAt = scanned, scans = 2), seenNewsAt = opened)
         val device = guestDevice(storage, backgroundScope)
         assertTrue(device.list().single().hasNewUpdate)
-        device.markSeen(parcelId)
+        device.markSeen(parcelId, opened)
+        assertTrue(device.list().single().hasNewUpdate)
+        device.markSeen(parcelId, scanned)
         assertFalse(device.list().single().hasNewUpdate)
         assertFalse(guestDevice(storage, backgroundScope).list().single().hasNewUpdate)
     }
@@ -527,7 +549,7 @@ class NewUpdateTests {
         store.loadNotificationPreferences()
         runCurrent()
         assertEquals(listOf("GET", "PATCH"), methods())
-        assertEquals(setOf("enabledStages", "timezone", "clock", "distance"), server.preferenceCalls.last().second?.keys)
+        assertEquals(setOf("clock", "distance"), server.preferenceCalls.last().second?.keys)
         assertEquals("24", lastSent("clock"))
         assertEquals("km", lastSent("distance"))
         assertEquals(NotificationPreferencesClock.TwentyFour, store.notificationPreferences?.clock)
@@ -554,6 +576,8 @@ class NewUpdateTests {
         runCurrent()
         assertEquals(listOf("GET", "PATCH"), methods().takeLast(2))
         assertEquals("12", lastSent("clock"))
+
+        assertNull("Only the clock changed", lastSent("distance"))
 
         // A server that does not keep them is not asked again and again.
         server.keepsUnits = false

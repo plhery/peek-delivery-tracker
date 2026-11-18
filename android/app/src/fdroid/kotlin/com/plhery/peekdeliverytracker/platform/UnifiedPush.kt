@@ -43,7 +43,7 @@ import java.security.SecureRandom
  * inbox the same way.
  */
 internal object PushRoute {
-    private const val PREFERENCES = "unifiedpush"
+    private const val PREFERENCES = "push-route"
     private const val INSTALLATION = "installation"
     private const val ENDPOINT = "endpoint"
     private const val P256DH = "p256dh"
@@ -62,6 +62,7 @@ internal object PushRoute {
     val distributor: StateFlow<String?> = distributorState.asStateFlow()
 
     /** The phone's address now, its installation token made the first time. */
+    @Synchronized
     fun address(context: Context): PushAddress {
         val preferences = preferences(context)
         val token = preferences.getString(INSTALLATION, null) ?: newToken().also { preferences.edit { putString(INSTALLATION, it) } }
@@ -84,20 +85,22 @@ internal object PushRoute {
      */
     fun asked(context: Context, registers: Boolean = true): String {
         val address = address(context)
+        InboxCheck.schedule(context)
         if (address.transport == NativePushTransport.Inbox) {
-            InboxCheck.schedule(context)
             if (registers) register(context.applicationContext)
-        } else {
-            InboxCheck.cancel(context)
         }
         return address.text
     }
 
-    /** The token the inbox is read with, while the phone has no endpoint; null otherwise, or before any address was asked. */
-    fun inboxToken(context: Context): String? {
-        if (preferences(context).getString(INSTALLATION, null) == null) return null
-        return address(context).takeIf { it.transport == NativePushTransport.Inbox }?.token
+    fun acknowledged(context: Context, address: PushAddress) =
+        preferences(context).getString("acknowledged", null) == address.text
+
+    fun acknowledge(context: Context, route: PushAddress) {
+        if (existingAddress(context) == route) preferences(context).edit { putString("acknowledged", route.text) }
     }
+
+    fun existingAddress(context: Context): PushAddress? =
+        preferences(context).getString(INSTALLATION, null)?.let { address(context) }
 
     /** The distributor's new endpoint, which the stores register in place of the inbox or the endpoint before. */
     fun endpointChanged(context: Context, endpoint: PushEndpoint) {
@@ -141,6 +144,7 @@ internal object PushRoute {
     private fun refreshed(context: Context) {
         val app = context.applicationContext as PeekApplication
         val address = asked(app, registers = false)
+        InboxCheck.handover(app)
         ContextCompat.getMainExecutor(app).execute { app.pushTokenRefreshed(address) }
     }
 

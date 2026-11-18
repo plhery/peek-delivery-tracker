@@ -57,7 +57,7 @@ extension HTTPURLResponse {
     /// the proxy's text while the server is up and the app isn't yet, is the server failing, and forgets nothing.
     func isServiceNotFound(_ data: Data) -> Bool {
         guard statusCode == 404, let payload = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else { return false }
-        return payload["error"] is String
+        return payload["error"] as? String == "Parcel unavailable"
     }
 }
 
@@ -404,19 +404,24 @@ final class DeliveryAPIClient {
         try await request("/api/push/preferences")
     }
 
-    /// `markNewUpdates` is the list's mark on parcels with new updates when its switch is what is being saved, and
-    /// `clock` and `distance` how this device writes a time and a distance when they are. Any other save leaves them
-    /// out, and the server keeps the account's, sent from this device or another.
-    func saveNotificationPreferences(
-        _ value: NotificationPreferences, markNewUpdates: Bool? = nil,
-        clock: NotificationPreferencesClock? = nil, distance: NotificationPreferencesDistance? = nil
+    func saveDisplayPreferences(
+        markNewUpdates: Bool? = nil, clock: NotificationPreferencesClock? = nil, distance: NotificationPreferencesDistance? = nil
     ) async throws -> NotificationPreferences {
+        struct Patch: Encodable {
+            let markNewUpdates: Bool?
+            let clock: NotificationPreferencesClock?
+            let distance: NotificationPreferencesDistance?
+        }
+        return try await request("/api/push/preferences", method: "PATCH",
+                                 body: Patch(markNewUpdates: markNewUpdates, clock: clock, distance: distance))
+    }
+
+    func saveNotificationPreferences(_ value: NotificationPreferences) async throws -> NotificationPreferences {
         var sent = value
-        // Whether the server can email the account is the server's to say.
         sent.emailAvailable = nil
-        sent.markNewUpdates = markNewUpdates
-        sent.clock = clock
-        sent.distance = distance
+        sent.markNewUpdates = nil
+        sent.clock = nil
+        sent.distance = nil
         return try await request("/api/push/preferences", method: "PATCH", body: sent)
     }
 

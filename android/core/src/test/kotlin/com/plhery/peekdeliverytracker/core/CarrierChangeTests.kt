@@ -190,6 +190,14 @@ class CarrierChangeTests {
     @Test
     fun thePostcodesCountryIsOfferedWhereTheFieldTakesSeveralAndShapesIt() {
         val change = start(parcel(CarrierId.Unknown, number = "76434219"), CarrierId.MondialRelay, region = "FR")
+        val source = parcel(CarrierId.Unknown, number = "76434219")
+        val known = CarrierChange.start(source, CarrierId.MondialRelay, catalog, "FR",
+            listOf(GivenPostcode(CarrierId.MondialRelay, "1000", "BE")))
+        assertEquals("1000", known.sentPostcode)
+        assertEquals("BE", known.sentPostcodeCountry)
+        val unknown = CarrierChange.start(source, CarrierId.MondialRelay, catalog, "FR",
+            listOf(GivenPostcode(CarrierId.MondialRelay, "1000")))
+        assertNull(unknown.sentPostcode)
         assertNotNull(change.carrierPostcodeRequirement)
         assertEquals("FR", change.initialPostcodeCountry)
         assertEquals("FR", change.offeredPostcodeCountry)

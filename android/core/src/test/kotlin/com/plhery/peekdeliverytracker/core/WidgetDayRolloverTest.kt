@@ -65,6 +65,24 @@ class WidgetDayRolloverTest {
     }
 
     @Test
+    fun aWidgetRedrawUsesMidnightWhereTheReaderIsNow() {
+        val snapshot = storedAt23h30()
+        TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"))
+        val evening = Instant.parse("2026-11-13T00:00:00Z")
+        val row = DeliveryWidgetList.make(evening, true, "en", snapshot).parcels.single()
+        assertEquals("tomorrow", row.listDay)
+        assertEquals(Instant.parse("2026-11-13T05:00:00Z"), DeliveryWidgetDays.changes(snapshot.parcels, evening).first())
+    }
+
+    @Test
+    fun anEstimateBeyondTheFirstWeekReachesTodayAndExpires() {
+        val distant = parcel.copy(expectedDelivery = "2026-11-24")
+        val row = ParcelStore.widgetOrder(listOf(distant), localizer, published).single()
+        assertEquals("today", row.worded(Instant.parse("2026-11-24T12:00:00Z")).listDay)
+        assertEquals("In transit", row.worded(Instant.parse("2026-11-25T12:00:00Z")).listLine)
+    }
+
+    @Test
     fun theParcelsWidgetStillSaysTomorrowOnTheDeliveryDay() {
         val list = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = storedAt23h30())
         val row = list.parcels.single()

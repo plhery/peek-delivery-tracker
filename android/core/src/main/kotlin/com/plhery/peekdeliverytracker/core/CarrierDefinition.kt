@@ -135,6 +135,7 @@ data class CarrierRequirement(
 data class GivenPostcode(
     val carrier: CarrierId,
     val postcode: String,
+    val country: String? = null,
 ) {
     companion object {
         /**
@@ -143,7 +144,10 @@ data class GivenPostcode(
          */
         fun candidates(parcels: List<Parcel>, remembered: List<GivenPostcode>): List<GivenPostcode> =
             parcels.sortedWith { left, right -> right.createdAt.compareTo(left.createdAt) }
-                .mapNotNull { parcel -> parcel.dpdPostcode?.let { GivenPostcode(parcel.carrier, it) } } + remembered
+                .mapNotNull { parcel -> parcel.dpdPostcode?.let { postcode ->
+                    val country = parcel.carrierData?.postcodeCountry?.takeIf { it.postcode == postcode }?.country
+                    GivenPostcode(parcel.carrier, postcode, country)
+                } } + remembered
     }
 }
 

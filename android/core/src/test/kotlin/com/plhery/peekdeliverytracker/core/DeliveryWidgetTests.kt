@@ -334,7 +334,7 @@ class DeliveryWidgetTests {
             fun widget() = DeliveryWidgetList.make(evening, enabled = true, languageCode = "en", snapshot = shared.snapshot).parcels
                 .map { it.id to it.listDay }
             assertTrue("A parcel of the demo is due on Friday", app().any { it.second == "tomorrow" })
-            assertNotEquals("Worded in Paris, the widget follows Paris's midnights", app(), widget())
+            assertEquals("Even before the app returns, the widget follows New York's midnights", app(), widget())
 
             store.timeZoneChanged()
             runCurrent()

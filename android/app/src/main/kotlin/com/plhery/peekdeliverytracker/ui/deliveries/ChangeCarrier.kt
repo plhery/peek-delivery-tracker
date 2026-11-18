@@ -217,7 +217,7 @@ internal class CarrierEditorForm(
             if (request == null || parcel == null) return CarrierEditorForm(null, "", "", null, "", pushed = false, large = false)
             val change = CarrierChange.start(parcel, request.initialCarrier, catalog, region, given)
             return CarrierEditorForm(
-                change.chosenCarrier, change.trackingUrl, change.deliveryPostcode, null, "",
+                change.chosenCarrier, change.trackingUrl, change.deliveryPostcode, change.chosenPostcodeCountry, "",
                 pushed = false, large = change.requirements.isNotEmpty(), phoneDigits = change.phoneDigits,
             )
         }

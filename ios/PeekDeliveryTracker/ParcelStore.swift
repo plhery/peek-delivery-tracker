@@ -147,6 +147,7 @@ final class ParcelStore: ObservableObject {
     /// Counts saved preferences: the answer to a read that began before a save is older than it.
     private var notificationPreferenceSaves = 0
     /// Counts the choices made about the list's mark: the answer to an earlier one does not undo a later one.
+    private var markNewUpdatesWrite: Task<Void, Never>?
     private var markNewUpdatesChoices = 0
     /// The saves of the list's mark on their way: an answer meanwhile does not say whether the latest choice was taken.
     private(set) var markNewUpdatesSaving = 0
@@ -325,12 +326,12 @@ final class ParcelStore: ObservableObject {
         markNewUpdatesSaving += 1
         let choice = markNewUpdatesChoices
         let generation = session.generation
-        Task {
+        let previous = markNewUpdatesWrite
+        markNewUpdatesWrite = Task {
             defer { if generation == session.generation { markNewUpdatesSaving -= 1 } }
-            guard let stored = try? await storedNotificationPreferences(), generation == session.generation else { return }
-            var value = stored
-            value.timezone = TimeZone.current.identifier
-            guard var saved = try? await api.saveNotificationPreferences(value, markNewUpdates: enabled),
+            await previous?.value
+            guard generation == session.generation else { return }
+            guard var saved = try? await api.saveDisplayPreferences(markNewUpdates: enabled),
                   generation == session.generation else { return }
             if choice == markNewUpdatesChoices { UserDefaults.standard.removeObject(forKey: Self.markNewUpdatesUnsavedKey) }
             // Switched again meanwhile: that choice stands, and its own save is on its way.
@@ -370,11 +371,9 @@ final class ParcelStore: ObservableObject {
         unitsSent = sent
         let generation = session.generation
         Task {
-            var value = stored
-            value.timezone = TimeZone.current.identifier
-            value.emailOnDelivery = nil
             do {
-                let saved = try await api.saveNotificationPreferences(value, clock: clock, distance: distance)
+                let saved = try await api.saveDisplayPreferences(clock: stored.clock == clock ? nil : clock,
+                                                                 distance: stored.distance == distance ? nil : distance)
                 guard generation == session.generation else { return }
                 // Kept: should another device change them, the next difference read here is sent again.
                 if unitsSent == sent, saved.clock == clock, saved.distance == distance { unitsSent = nil }
@@ -386,44 +385,38 @@ final class ParcelStore: ObservableObject {
         }
     }
 
-    /// The account's preferences as last read or saved, read now where they were not.
-    private func storedNotificationPreferences() async throws -> NotificationPreferences {
-        if let notificationPreferences { return notificationPreferences }
-        return try await api.notificationPreferences()
-    }
-
     /// The parcel's page is in front of the reader: what it tells now is seen, as of the news the page shows, so a scan
     /// stored meanwhile stays new. Its mark leaves the list at once, and the account's other devices at their next
     /// read. A read of the list in flight lands all the same, so the page shows the scans it brings, seen as late as
     /// this device marked the parcel. A parcel with no news is left alone, and a mark the server could not take comes
     /// back with the next read of the list.
-    func markSeen(_ id: UUID) async {
-        guard let parcel = parcels.first(where: { $0.id == id }), parcel.hasNewUpdate else { return }
+    func markSeen(_ id: UUID, newsAt: String?) async {
+        guard let news = newsAt, let parcel = parcels.first(where: { $0.id == id }), parcel.hasNewUpdate else { return }
         if isGuest {
-            if let seen = try? device.markSeen(id: id) { upsert(seen) }
+            if let seen = try? device.markSeen(id: id, newsAt: news) { upsert(seen) }
             return
         }
         if isDemo {
-            if let seen = try? demo.markSeen(id: id) { upsert(seen) }
+            if let seen = try? demo.markSeen(id: id, newsAt: news) { upsert(seen) }
             return
         }
         let generation = session.generation
         // Seen as of its news, whatever this device's clock says, and so the server stores it.
-        let news = parcel.newsAt
-        if let news { seeHere(id, news) }
+        seeHere(id, news)
         do {
             let seenAt = try await api.markSeen(id: id, newsAt: news)
             if generation == session.generation { seeHere(id, seenAt) }
         } catch {
-            if generation == session.generation { seenHere[id] = nil }
+            if generation == session.generation, seenHere[id] == news { seenHere[id] = nil }
         }
     }
 
     /// The account's parcel is seen at `seenAt` on this device. Unlike the list's other changes this one lets a read
     /// of the list in flight land, which then keeps it (`seenAsHere`): its newer scans show on the open page.
     private func seeHere(_ id: UUID, _ seenAt: String) {
+        guard let index = parcels.firstIndex(where: { $0.id == id }), let mark = DateParser.date(seenAt),
+              parcels[index].seenAt.flatMap(DateParser.date).map({ $0 <= mark }) ?? true else { return }
         seenHere[id] = seenAt
-        guard let index = parcels.firstIndex(where: { $0.id == id }) else { return }
         parcels[index].seenAt = seenAt
         persistCache()
     }
@@ -994,12 +987,13 @@ final class ParcelStore: ObservableObject {
         }
         if isGuest {
             var trouble: Error?
-            do { try await device.refresh(all: true) } catch { trouble = error }
+            var contacted = false
+            do { contacted = try await device.refresh(all: true) } catch { trouble = error }
             guard generation == session.generation else { throw CancellationError() }
             parcels = device.list()
             listReadAt = device.lastCheckedAt
             refreshing = false
-            if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil { noteUp() }
+            if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }
             if let trouble {
                 // A check given up on says nothing went wrong.
                 if trouble.isCancellation { throw CancellationError() }
@@ -1426,7 +1420,19 @@ final class ParcelStore: ObservableObject {
     /// is among them: one on its way comes first, and with none, the one delivered last stays longest and leads. Which
     /// parcels the list marks with the dot for new updates, `marking` as Settings has it.
     static func widgetDeliveries(of parcels: [Parcel], localizer: Localizer, marking: Bool = true, now: Date = Date()) -> [DeliveryWidgetParcel] {
-        let midnights = DeliveryWidgetDays.midnights(after: now)
+        let calendar = Calendar.current
+        var transitions = Set(DeliveryWidgetDays.midnights(after: now))
+        for parcel in parcels {
+            for value in [parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom].compactMap({ $0 }) {
+                guard let date = DateParser.deliveryDate(value) else { continue }
+                for offset in -1...1 {
+                    if let day = calendar.date(byAdding: .day, value: offset, to: calendar.startOfDay(for: date)), day > now {
+                        transitions.insert(day)
+                    }
+                }
+            }
+        }
+        let midnights = transitions.sorted()
         let delivered = ParcelOrganizer.visible(parcels, query: "", status: .delivered, carrier: nil, sort: .updated, now: now)
             .compactMap { parcel -> DeliveryWidgetParcel? in
                 guard let arrived = parcel.currentEvent?.displayDate else { return nil }
@@ -2009,10 +2015,11 @@ final class ParcelStore: ObservableObject {
     private func loadDeviceParcels(hidden: Bool = false) async {
         let generation = session.generation
         var trouble: Error?
-        do { try await device.refresh(hidden: hidden) } catch { trouble = error }
+        var contacted = false
+        do { contacted = try await device.refresh(all: serverDown != nil, hidden: hidden) } catch { trouble = error }
         guard generation == session.generation, isGuest else { return }
         // A round that read nothing new says nothing of the server; one that failed for it says it is down.
-        if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil { noteUp() }
+        if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }
         listReadAt = device.lastCheckedAt
         if pendingMutations.isEmpty {
             let next = device.list()
@@ -2415,8 +2422,12 @@ final class DemoRepository {
     }
 
     /// The parcel was opened: its made-up scan is news no more.
-    func markSeen(id: UUID) throws -> Parcel {
-        try update(id: id) { $0.seenAt = $0.newsAt }
+    func markSeen(id: UUID, newsAt: String? = nil) throws -> Parcel {
+        try update(id: id) { parcel in
+            guard let news = newsAt ?? parcel.newsAt, let mark = DateParser.date(news),
+                  parcel.seenAt.flatMap(DateParser.date).map({ $0 < mark }) ?? true else { return }
+            parcel.seenAt = news
+        }
     }
 
     func reset() {

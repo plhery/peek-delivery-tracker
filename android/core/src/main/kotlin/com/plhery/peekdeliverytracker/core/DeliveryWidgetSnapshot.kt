@@ -62,7 +62,7 @@ data class DeliveryWidgetParcel(
 
     /** The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it. */
     fun worded(at: Instant): DeliveryWidgetParcel {
-        val wording = later?.lastOrNull { it.from <= at } ?: return this
+        val wording = later?.lastOrNull { it.midnight() <= at } ?: return this
         return copy(detail = wording.detail, section = wording.section ?: section, nextUp = wording.nextUp ?: nextUp)
     }
 }
@@ -74,7 +74,13 @@ data class DeliveryWidgetWording(
     val detail: String,
     val section: String? = null,
     val nextUp: Boolean? = null,
-)
+    val sourceZone: String? = null,
+) {
+    fun midnight(zone: ZoneId = ZoneId.systemDefault()): Instant {
+        val source = sourceZone?.let { runCatching { ZoneId.of(it) }.getOrNull() } ?: return from
+        return from.atZone(source).toLocalDate().atStartOfDay(zone).toInstant()
+    }
+}
 
 /** A step of a parcel's tracking: when, the carrier's words, and where. */
 @Serializable
@@ -115,7 +121,7 @@ object DeliveryWidgetDays {
             val next = wording(midnight)
             if (next.copy(from = last.from) == last) return@mapNotNull null
             last = next
-            next
+            next.copy(sourceZone = ZoneId.systemDefault().id)
         }
         return changes.ifEmpty { null }
     }
@@ -125,7 +131,7 @@ object DeliveryWidgetDays {
      * names its weekday: a widget is drawn again at each.
      */
     fun changes(`in`: List<DeliveryWidgetParcel>, after: Instant, zone: ZoneId = ZoneId.systemDefault()): List<Instant> {
-        val worded = `in`.flatMap { it.later.orEmpty() }.map { it.from }
+        val worded = `in`.flatMap { it.later.orEmpty() }.map { it.midnight(zone) }
         val stepped = `in`.flatMap { it.steps.orEmpty() }.map { midnights(after = it.at, count = 1, zone = zone).first() }
         return (worded + stepped).filter { it > after }.toSortedSet().toList()
     }

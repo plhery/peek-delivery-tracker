@@ -129,7 +129,7 @@ class HttpResponse(val statusCode: Int, headers: Map<String, String> = emptyMap(
      * the proxy's text while the server is up and the app isn't yet, is the server failing, and forgets nothing.
      */
     val isServiceNotFound: Boolean
-        get() = statusCode == 404 && JsonSerialization.stringsOfObject(body)?.get("error") != null
+        get() = statusCode == 404 && JsonSerialization.stringsOfObject(body)?.get("error") == "Parcel unavailable"
 }
 
 /**
@@ -523,17 +523,19 @@ class DeliveryApiClient(
     suspend fun notificationPreferences(): NotificationPreferences =
         request("/api/push/preferences", NotificationPreferences.serializer())
 
-    /**
-     * `markNewUpdates` is the list's mark on parcels with new updates when its switch is what is being saved, and
-     * `clock` and `distance` how this phone writes a time and a distance when they are. Any other save leaves them out,
-     * and the server keeps the account's, sent from this phone or another device.
-     */
-    suspend fun saveNotificationPreferences(
-        value: NotificationPreferences, markNewUpdates: Boolean? = null,
-        clock: NotificationPreferencesClock? = null, distance: NotificationPreferencesDistance? = null,
+    suspend fun saveDisplayPreferences(
+        markNewUpdates: Boolean? = null, clock: NotificationPreferencesClock? = null, distance: NotificationPreferencesDistance? = null,
     ): NotificationPreferences {
-        // Whether the server can email the account is the server's to say.
-        val sent = value.copy(emailAvailable = null, markNewUpdates = markNewUpdates, clock = clock, distance = distance)
+        val patch = kotlinx.serialization.json.buildJsonObject {
+            markNewUpdates?.let { put("markNewUpdates", JsonPrimitive(it)) }
+            clock?.let { put("clock", JsonPrimitive(it.rawValue)) }
+            distance?.let { put("distance", JsonPrimitive(it.rawValue)) }
+        }
+        return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", patch.toString().encodeToByteArray())
+    }
+
+    suspend fun saveNotificationPreferences(value: NotificationPreferences): NotificationPreferences {
+        val sent = value.copy(emailAvailable = null, markNewUpdates = null, clock = null, distance = null)
         return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", encode(NotificationPreferences.serializer(), sent))
     }
 

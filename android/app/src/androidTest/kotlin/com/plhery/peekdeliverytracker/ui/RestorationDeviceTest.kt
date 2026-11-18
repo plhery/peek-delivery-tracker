@@ -83,7 +83,7 @@ class RestorationDeviceTest {
         compose.waitForIdle()
     }
 
-    /** A new process: its session read again behind the launch screen before the tabs come back, counted to [views]. */
+    /** Recreates Compose state and its fake stores. ProcessRestorationTest exercises a real process exit. */
     private fun newProcess() {
         session = mutableStateOf(AuthenticationState.Loading)
         process = process.newProcess()
@@ -114,7 +114,7 @@ class RestorationDeviceTest {
     private fun tab(label: String) = compose.onNode(hasContentDescription(label) and SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Tab))
 
     @Test
-    fun theParcelChosenAndTheTabComeBackInANewProcess() {
+    fun theParcelChosenAndTheTabComeBackWithRestoredComposeState() {
         show()
         val beside = besideTheList()
         choose("Birthday gift")

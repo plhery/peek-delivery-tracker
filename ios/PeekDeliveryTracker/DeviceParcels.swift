@@ -82,9 +82,9 @@ struct PostcodeMemory {
     }
 
     /// The pair goes first; given before, it moves there rather than coming twice.
-    func remember(_ postcode: String, for carrier: CarrierID) {
+    func remember(_ postcode: String, for carrier: CarrierID, country: String? = nil) {
         guard let postcode = postcode.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty else { return }
-        write([GivenPostcode(carrier: carrier, postcode: postcode)]
+        write([GivenPostcode(carrier: carrier, postcode: postcode, country: country)]
             + entries.filter { $0.carrier != carrier || Self.bare($0.postcode) != Self.bare(postcode) })
     }
 
@@ -337,7 +337,9 @@ final class DeviceParcels {
     private var forgetting: [String: String]
     private var savedForgetting: [String: String]
     /// The tokens and languages rounds of notification requests are under way for.
-    private var alertRounds: Set<String> = []
+    private var desiredAlert: String?
+    private var alertGeneration = 0
+    private var alertRounds: Set<Int> = []
     /// The token and language each parcel's notifications were asked for since launch. Each
     /// launch asks again, in case the service lost them.
     private var alertsAsked: [String: String] = [:]
@@ -438,7 +440,7 @@ final class DeviceParcels {
         entries.append(entry)
         keys[entry.linkID] = response.key
         save()
-        if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier) }
+        if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier, country: request.dpdPostcodeCountry) }
         // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return Self.shown(entry)
     }
@@ -447,8 +449,10 @@ final class DeviceParcels {
     /// the ones whose last answer was lost. A parcel the service no longer has leaves the list.
     /// The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
     /// window on screen.
-    func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws {
-        guard let client else { return }
+    @discardableResult
+    func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws -> Bool {
+        guard let client else { return false }
+        var contacted = false
         await stopForgottenAlerts(client)
         await tellForgotten(client)
         var trouble: Error?
@@ -461,6 +465,7 @@ final class DeviceParcels {
             guard all || id != nil || age < 0 || age >= fresh else { continue }
             do {
                 let response = try await client.read(entry.linkID, key, hidden)
+                contacted = true
                 guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { continue }
                 if let response {
                     entries[index].take(Parcel(shared: response.package))
@@ -475,19 +480,23 @@ final class DeviceParcels {
                 break
             }
         }
-        if id == nil, let error = await recover(client, hidden: hidden) { trouble = trouble ?? error }
+        if id == nil {
+            do { if try await recover(client, hidden: hidden) { contacted = true } } catch { trouble = trouble ?? error }
+        }
         save()
         if let trouble { throw trouble }
+        return contacted
     }
 
     /// Reads again, with its key, each parcel of this iPhone's own whose entry was lost or couldn't
     /// be read, and puts it back on the list, without the name it had here. Only a link the service
     /// no longer has, or no longer owns with the key, lets its key go: losing the list never forgets
     /// anything on the service. The first trouble ends the round and is returned; the rest wait.
-    private func recover(_ client: DeviceParcelClient, hidden: Bool) async -> Error? {
+    private func recover(_ client: DeviceParcelClient, hidden: Bool) async throws -> Bool {
+        var contacted = false
         for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
-            let response: PublicParcelResponse?
-            do { response = try await client.read(linkID, key, hidden) } catch { return error }
+            let response = try await client.read(linkID, key, hidden)
+            contacted = true
             // Forgotten, followed or let go meanwhile.
             guard keys[linkID] == key, !entries.contains(where: { $0.linkID == linkID }) else { continue }
             // A parcel already here through another link stays as it is.
@@ -500,7 +509,7 @@ final class DeviceParcels {
             entry.startSeen()
             entries.append(entry)
         }
-        return nil
+        return contacted
     }
 
     /// Tells the service what was forgotten here before it could be, without reading a parcel: signed in, the
@@ -524,7 +533,7 @@ final class DeviceParcels {
     /// Whether the service forgot the link, or had already. Until it has, its key stays aside.
     @discardableResult
     private func tellForgotten(_ linkID: String, key: String, _ client: DeviceParcelClient) async -> Bool {
-        guard (try? await client.forget(linkID, key)) != nil else { return false }
+        guard forgetting[linkID] == key, (try? await client.forget(linkID, key)) != nil else { return false }
         if forgetting[linkID] == key {
             forgetting[linkID] = nil
             save()
@@ -537,8 +546,11 @@ final class DeviceParcels {
     }
 
     /// The parcel was opened on this iPhone: what it tells now is seen. Nothing leaves the device.
-    func markSeen(id: UUID) throws -> Parcel {
-        try update(id) { $0.startSeen() }
+    func markSeen(id: UUID, newsAt: String) throws -> Parcel {
+        try update(id) { entry in
+            guard let mark = DateParser.date(newsAt), entry.openedNews.flatMap(DateParser.date).map({ $0 < mark }) ?? true else { return }
+            entry.openedNews = newsAt
+        }
     }
 
     func setArchived(id: UUID, _ archived: Bool) throws -> Parcel {
@@ -769,14 +781,21 @@ final class DeviceParcels {
     /// first sign that the service wants a pause, sends no notifications or can't be reached; `retryAlerts` tries it
     /// again later. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
     func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current) async {
-        let asked = "\(token) \(locale.rawValue)"
-        guard let client, alertRounds.insert(asked).inserted else { return }
-        defer { alertRounds.remove(asked) }
+        let asked = "\(token) \(locale.rawValue) \(environment.rawValue)"
+        if desiredAlert != asked {
+            desiredAlert = asked
+            alertGeneration += 1
+            alertRetry = nil
+        }
+        let round = alertGeneration
+        guard let client, alertRounds.insert(round).inserted else { return }
+        defer { alertRounds.remove(round) }
         // How long the service asked to be left alone, when the round is cut short.
         var pause: TimeInterval?
-        defer { holdAlerts(pause, token: token, locale: locale, environment: environment) }
+        defer { if round == alertGeneration { holdAlerts(pause, token: token, locale: locale, environment: environment) } }
         let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) }.prefix(Self.alertsPerRound)
         for entry in due {
+            guard round == alertGeneration else { return }
             // Forgotten, or followed through another link, since the round began.
             guard entries.contains(where: { $0.linkID == entry.linkID }) else { continue }
             let preset = entry.alertPreset ?? Self.alertPreset(for: entry.parcel)
@@ -788,6 +807,7 @@ final class DeviceParcels {
                 if case DeliveryAPIError.rateLimited(let after) = error { pause = after } else { pause = 0 }
                 break
             }
+            guard round == alertGeneration else { return }
             if answer == .unavailable {
                 pause = 0
                 break

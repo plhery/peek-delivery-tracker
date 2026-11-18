@@ -105,12 +105,16 @@ struct CarrierRequirement: Codable, Hashable, Sendable {
 struct GivenPostcode: Codable, Hashable, Sendable {
     var carrier: CarrierID
     var postcode: String
+    var country: String? = nil
 
     /// What the add sheet suggests from: the postcodes of the account's parcels, newest parcel
     /// first, then the ones this iPhone remembers, in their order.
     static func candidates(parcels: [Parcel], remembered: [GivenPostcode]) -> [GivenPostcode] {
         parcels.sorted { $0.createdAt > $1.createdAt }
-            .compactMap { parcel in parcel.dpdPostcode.map { GivenPostcode(carrier: parcel.carrier, postcode: $0) } }
+            .compactMap { parcel in parcel.dpdPostcode.map { postcode in
+                let stored = parcel.carrierData?.postcodeCountry
+                return GivenPostcode(carrier: parcel.carrier, postcode: postcode, country: stored?.postcode == postcode ? stored?.country : nil)
+            } }
             + remembered
     }
 }

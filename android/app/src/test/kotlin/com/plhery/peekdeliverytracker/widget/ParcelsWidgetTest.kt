@@ -306,6 +306,15 @@ class ParcelsWidgetTest {
 
     /** Drawn by the app itself, a placed list is the launcher's to show, from its sizes. */
     @Test
+    fun anEarlierParcelsPlacementStillCountsAsPlaced() {
+        val manager = AppWidgetManager.getInstance(app)
+        val component = ComponentName(app, "com.plhery.peekdeliverytracker.widget.ParcelsWidgetReceiver")
+        app.packageManager.getReceiverInfo(component, 0)
+        shadowOf(manager).bindAppWidgetId(7, component)
+        assertTrue(DeliveryWidgetUpdates.isPlaced(app))
+    }
+
+    @Test
     fun aPlacedListIsDrawnByTheApp() {
         val manager = AppWidgetManager.getInstance(app)
         val widgets = shadowOf(manager)

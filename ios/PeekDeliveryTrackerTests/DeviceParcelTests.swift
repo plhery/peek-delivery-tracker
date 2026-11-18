@@ -454,6 +454,11 @@ final class DeviceParcelTests: XCTestCase {
             XCTAssertEqual(down, ServerDown())
         }
 
+        answer = (404, Data(#"{"error":"route unavailable"}"#.utf8))
+        try? await device.refresh()
+        XCTAssertEqual(storage.keys.count, 2)
+        XCTAssertEqual(storage.forgetting.count, 1)
+
         answer = (404, Data(#"{"error":"Parcel unavailable"}"#.utf8))
         try await device.refresh()
         XCTAssertEqual(device.list().map(\.label), [])
@@ -499,7 +504,7 @@ final class DeviceParcelTests: XCTestCase {
         // /maintenance.json is the app's own 404 page before the edge is in front.
         PostcodeTestURLProtocol.handler = { _ in (404, Data("<!doctype html><title>Not found</title>".utf8)) }
         let id = UUID()
-        let checkedAt = Date().addingTimeInterval(-60 * 60)
+        let checkedAt = Date().addingTimeInterval(-5)
         let storage = Memory()
         storage.keys = ["22222222222A": key]
         storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "Running shoes", archivedAt: nil,
@@ -518,6 +523,7 @@ final class DeviceParcelTests: XCTestCase {
         store.setDeliveryLiveActivitiesEnabled(false)
         session.showWelcome()
 
+        try await store.refreshAll()
         await store.load()
         XCTAssertEqual(store.parcels.map(\.label), ["Running shoes"])
         XCTAssertEqual(store.serverDown, .unannounced)
@@ -606,7 +612,8 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertTrue(device.list()[0].hasNewUpdate)
         XCTAssertTrue(DeviceParcels(client: nil, storage: storage).list()[0].hasNewUpdate, "The mark waits for the next launch")
 
-        XCTAssertFalse(try device.markSeen(id: id).hasNewUpdate)
+        XCTAssertTrue(try device.markSeen(id: id, newsAt: "2026-11-15T09:59:59Z").hasNewUpdate)
+        XCTAssertFalse(try device.markSeen(id: id, newsAt: XCTUnwrap(device.list()[0].newsAt)).hasNewUpdate)
         XCTAssertFalse(device.list()[0].hasNewUpdate)
         XCTAssertEqual(calls.all, ["read 22222222222A k"], "What was seen without an account stays on the device")
         XCTAssertFalse(DeviceParcels(client: nil, storage: storage).list()[0].hasNewUpdate)
@@ -696,7 +703,7 @@ final class DeviceParcelTests: XCTestCase {
         now += DeviceParcels.fresh
         try await device.refresh()
         XCTAssertTrue(device.list()[0].hasNewUpdate)
-        XCTAssertFalse(try device.markSeen(id: id).hasNewUpdate)
+        XCTAssertFalse(try device.markSeen(id: id, newsAt: XCTUnwrap(device.list()[0].newsAt)).hasNewUpdate)
     }
 
     func testTroubleKeepsWhatTheDeviceHas() async {

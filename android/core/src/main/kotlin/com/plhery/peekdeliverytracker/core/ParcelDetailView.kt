@@ -502,6 +502,17 @@ data class CarrierChange(
     /** An empty required postcode field starting, as in Add, from the last postcode given that fits. */
     private fun prefilled(given: List<GivenPostcode>): CarrierChange {
         if (deliveryPostcode.isNotEmpty()) return this
+        if (offeredPostcodeCountry != null) {
+            val requirement = carrierPostcodeRequirement ?: return this
+            val countries = catalog.postcodeCountries(selectedCarrier, requirement)
+            for (candidate in given.sortedBy { it.carrier != selectedCarrier }) {
+                val country = candidate.country?.takeIf { it in countries } ?: continue
+                val change = copy(chosenPostcodeCountry = country)
+                val value = change.postcodeRequirement?.startingPostcode(selectedCarrier, listOf(candidate)) ?: continue
+                return change.copy(deliveryPostcode = value)
+            }
+            return this
+        }
         return postcodeRequirement?.startingPostcode(selectedCarrier, given)?.let { copy(deliveryPostcode = it) } ?: this
     }
 

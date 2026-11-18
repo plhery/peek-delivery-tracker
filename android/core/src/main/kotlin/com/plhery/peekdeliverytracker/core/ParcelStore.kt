@@ -944,10 +944,12 @@ class ParcelStore(
      * parcels the account could not take over; the account's own registration stays as it is, and so does its choice
      * to have no notifications on this phone.
      */
-    suspend fun registerDeviceAlerts(token: String, language: AppLanguage) {
-        if (!tracksWithoutAccount || isDemo) return
-        if (session.user != null && defaults.bool(forKey = notificationOptOutKey)) return
-        device.registerAlerts(token, NativePushLocale(language))
+    suspend fun registerDeviceAlerts(token: String, language: AppLanguage): Boolean {
+        if (!tracksWithoutAccount || isDemo) return true
+        if (session.user != null && defaults.bool(forKey = notificationOptOutKey)) return true
+        val locale = NativePushLocale(language)
+        device.registerAlerts(token, locale)
+        return device.alertsSettled(token, locale)
     }
 
     /** Signs the device's parcels up again after a round cut short by an outage or a pause, on the conditions of the first. */
@@ -1169,15 +1171,16 @@ class ParcelStore(
         }
         if (isGuest) {
             var trouble: Exception? = null
+            var contacted = false
             try {
-                device.refresh(all = true)
+                contacted = device.refresh(all = true)
             } catch (error: Exception) {
                 trouble = error
             }
             if (generation != session.generation) throw CancellationException("The signed-in account changed.")
             parcels = device.list()
             listReadAt = device.lastCheckedAt
-            if (trouble is ServerDown) noteDown(trouble) else if (trouble == null) noteUp()
+            if (trouble is ServerDown) noteDown(trouble) else if (trouble == null && contacted) noteUp()
             // The caller's own cancellation goes on, once the list is shown as it is.
             val givenUp = trouble is CancellationException && !currentCoroutineContext().isActive
             val result = when {
@@ -1517,6 +1520,7 @@ class ParcelStore(
     }
 
     /** The choices made about "Mark new updates", counted: the answer to an earlier one does not undo a later one. */
+    private var markNewUpdatesWrite: Job? = null
     private var markNewUpdatesChoices = 0
 
     /**
@@ -1532,11 +1536,12 @@ class ParcelStore(
         markNewUpdatesSaving += 1
         val choice = markNewUpdatesChoices
         val generation = session.generation
+        val previous = markNewUpdatesWrite
         return scope.launch {
             try {
-                val stored = notificationPreferences ?: api.notificationPreferences()
+                previous?.join()
                 if (generation != session.generation) return@launch
-                var saved = api.saveNotificationPreferences(stored.copy(timezone = ZoneId.systemDefault().id), markNewUpdates = enabled)
+                var saved = api.saveDisplayPreferences(markNewUpdates = enabled)
                 if (generation != session.generation) return@launch
                 if (choice == markNewUpdatesChoices) {
                     markNewUpdatesChoice.unsaved = false
@@ -1551,7 +1556,7 @@ class ParcelStore(
             } finally {
                 if (generation == session.generation) markNewUpdatesSaving -= 1
             }
-        }
+        }.also { markNewUpdatesWrite = it }
     }
 
     /**
@@ -1580,8 +1585,7 @@ class ParcelStore(
         val generation = session.generation
         scope.launch {
             try {
-                val value = stored.copy(timezone = ZoneId.systemDefault().id, emailOnDelivery = null)
-                val saved = api.saveNotificationPreferences(value, clock = clock, distance = distance)
+                val saved = api.saveDisplayPreferences(clock = clock.takeIf { it != stored.clock }, distance = distance.takeIf { it != stored.distance })
                 if (generation != session.generation) return@launch
                 // Kept: should another device change them, the next difference read here is sent again.
                 if (unitsSent == sent && saved.clock == clock && saved.distance == distance) unitsSent = null
@@ -1612,9 +1616,9 @@ class ParcelStore(
     suspend fun markSeen(parcel: Parcel) {
         val shown = parcels.firstOrNull { it.id == parcel.id } ?: return
         if (!shown.hasNewUpdate) return
-        val news = parcel.newsAt ?: shown.newsAt ?: return
+        val news = parcel.newsAt ?: return
         if (isGuest) {
-            device.markSeen(parcel.id)
+            device.markSeen(parcel.id, news)
             mutationRevision += 1
             parcels = device.list()
             return
@@ -1642,12 +1646,12 @@ class ParcelStore(
      * on the open page.
      */
     private fun seeHere(id: UUID, seenAt: String) {
-        seenHere[id] = seenAt
         val index = parcels.indexOfFirst { it.id == id }
         if (index < 0) return
         val marked = DateParser.date(seenAt) ?: return
         val already = parcels[index].seenAt?.let(DateParser::date)
         if (already != null && already > marked) return
+        seenHere[id] = seenAt
         parcels = parcels.toMutableList().also { it[index] = it[index].copy(seenAt = seenAt) }
         persistCache()
     }
@@ -1682,26 +1686,28 @@ class ParcelStore(
         notificationPreferences = loaded
     }
 
-    suspend fun forwardNativePushToken(token: String, language: AppLanguage) {
-        if (isDemo || !session.isAuthenticated || notificationEnableInProgress || defaults.bool(forKey = notificationOptOutKey)) return
-        val user = session.user?.id ?: return
-        if (!NotificationDevicePolicy.belongs(user, notificationOwner)) return
+    suspend fun forwardNativePushToken(token: String, language: AppLanguage): Boolean {
+        if (notificationEnableInProgress) return false
+        if (isDemo || !session.isAuthenticated || defaults.bool(forKey = notificationOptOutKey)) return true
+        val user = session.user?.id ?: return false
+        if (!NotificationDevicePolicy.belongs(user, notificationOwner)) return true
         val generation = nativePushGeneration
         val sessionGeneration = session.generation
         try {
             api.registerNativePushToken(token, installationId, language, sendTest = false)
             if (generation != nativePushGeneration || !session.isAuthenticated || defaults.bool(forKey = notificationOptOutKey)) {
                 tryQuietly { api.unregisterNativePushToken(token) }
-                return
+                return false
             }
             defaults.set(true, forKey = nativePushRegisteredKey)
             defaults.set(user.uuidString, forKey = notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
             notificationError = null
+            return true
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
-            if (sessionGeneration != session.generation || error is CancellationException) return
-            notificationError = localizer.errorMessage(error)
+            if (sessionGeneration == session.generation && error !is CancellationException) notificationError = localizer.errorMessage(error)
+            return false
         }
     }
 
@@ -1864,15 +1870,16 @@ class ParcelStore(
     private suspend fun loadDeviceParcels() {
         val generation = session.generation
         var trouble: Exception? = null
+        var contacted = false
         try {
-            device.refresh()
+            contacted = device.refresh(all = serverDown != null)
         } catch (error: Exception) {
             if (error is CancellationException) currentCoroutineContext().ensureActive()
             trouble = error
         }
         if (generation != session.generation || !isGuest) return
         // A round that read nothing new says nothing of the server; one that failed for it says it is down.
-        if (trouble is ServerDown) noteDown(trouble) else if (trouble == null) noteUp()
+        if (trouble is ServerDown) noteDown(trouble) else if (trouble == null && contacted) noteUp()
         listReadAt = device.lastCheckedAt
         if (pendingMutations.isEmpty()) {
             val next = device.list()
@@ -2063,16 +2070,27 @@ class ParcelStore(
          * carries the dot its card in the app shows while "Mark new updates" is on ([DeliveryWidgetParcel.newUpdate]).
          */
         fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> {
-            val midnights = DeliveryWidgetDays.midnights(after = now)
+            val zone = ZoneId.systemDefault()
+            val midnights = DeliveryWidgetDays.midnights(after = now, zone = zone).toSortedSet()
+            for (parcel in parcels) {
+                for (value in listOfNotNull(parcel.expectedDelivery, parcel.carrierData?.expectedDeliveryFrom)) {
+                    val day = DateParser.deliveryDate(value)?.atZone(zone)?.toLocalDate() ?: continue
+                    for (offset in -1L..1L) {
+                        val transition = day.plusDays(offset).atStartOfDay(zone).toInstant()
+                        if (transition > now) midnights.add(transition)
+                    }
+                }
+            }
+            val days = midnights.toList()
             val delivered = ParcelOrganizer
                 .visible(parcels, query = "", status = ParcelStatusFilter.Delivered, carrier = null, sort = ParcelSort.Updated, now = now)
                 .mapNotNull { parcel ->
                     val arrived = parcel.currentEvent?.displayDate ?: return@mapNotNull null
-                    widgetParcel(parcel, localizer, now, midnights) { localizer.parcelCompletionDate(parcel, it) }.copy(deliveredAt = arrived)
+                    widgetParcel(parcel, localizer, now, days) { localizer.parcelCompletionDate(parcel, it) }.copy(deliveredAt = arrived)
                 }
             // The iPhone's nextDeliveries estimates with Date() rather than this `now`; passing it on can only make the two agree.
             val ordered = DeliveryWidgetSelection.ordered(
-                onTheWay = nextDeliveries(parcels, localizer, now, midnights), delivered = delivered, now = now,
+                onTheWay = nextDeliveries(parcels, localizer, now, days), delivered = delivered, now = now,
             )
             // What the widget shows besides: where the app's list puts each parcel, which is its Next up, the
             // carrier shown, and the last steps of the first parcels. Whichever ends up alone in the list is among
@@ -2081,15 +2099,15 @@ class ParcelStore(
             fun sections(at: Instant) = ParcelOrganizer.sections(parcels, at).flatMap { section -> section.parcels.map { it.id to section.kind.rawValue } }.toMap()
             val sections = sections(now)
             val next = ParcelOrganizer.nextDelivery(parcels, now)?.id
-            val sectionsLater = midnights.map(::sections)
-            val nextLater = midnights.map { ParcelOrganizer.nextDelivery(parcels, it)?.id }
+            val sectionsLater = days.map(::sections)
+            val nextLater = days.map { ParcelOrganizer.nextDelivery(parcels, it)?.id }
             val byId = parcels.associateBy { it.id }
             return ordered.mapIndexed { index, item ->
                 val parcel = byId[item.id] ?: return@mapIndexed item
                 val section = sections[item.id]
                 val nextUp = item.id == next
-                val later = DeliveryWidgetDays.later(DeliveryWidgetWording(now, item.detail, section, nextUp), midnights) { midnight ->
-                    val at = midnights.indexOf(midnight)
+                val later = DeliveryWidgetDays.later(DeliveryWidgetWording(now, item.detail, section, nextUp), days) { midnight ->
+                    val at = days.indexOf(midnight)
                     DeliveryWidgetWording(midnight, item.worded(midnight).detail, sectionsLater[at][item.id], item.id == nextLater[at])
                 }
                 item.copy(

@@ -140,10 +140,10 @@ class PostcodeMemory(private val defaults: UserDefaults) {
         } ?: emptyList()
 
     /** The pair goes first; given before, it moves there rather than coming twice. */
-    fun remember(postcode: String, carrier: CarrierId) {
+    fun remember(postcode: String, carrier: CarrierId, country: String? = null) {
         val postcode = postcode.trimmingWhitespacesAndNewlines().nonEmpty ?: return
         write(
-            listOf(GivenPostcode(carrier = carrier, postcode = postcode)) +
+            listOf(GivenPostcode(carrier = carrier, postcode = postcode, country = country)) +
                 entries.filter { !it.carrier.rawValue.equalsCanonically(carrier.rawValue) || !bare(it.postcode).equalsCanonically(bare(postcode)) },
         )
     }
@@ -526,7 +526,9 @@ class DeviceParcels(
      * The tokens and languages rounds of notification requests are under way for, kept in NFC so that canonically
      * equivalent spellings are one round, as Swift's `Set<String>` compares them.
      */
-    private val alertRounds = mutableSetOf<String>()
+    private var desiredAlert: String? = null
+    private var alertGeneration = 0L
+    private val alertRounds = mutableSetOf<Long>()
 
     /**
      * The token and language each parcel's notifications were asked for since launch. Each launch asks again, in case
@@ -612,10 +614,7 @@ class DeviceParcels(
             if (key != null || old.alertToken != null) {
                 scope.launch {
                     old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, removal(token)) } }
-                    if (key != null && succeeds { client.forget(old.linkId, key) }) {
-                        pendingForgets = pendingForgets.setting(old.linkId, null)
-                        save()
-                    }
+                    if (key != null) forgetIfPending(old.linkId, key, client)
                 }
             }
             // The parcel being replaced came back unchanged: only its link is new.
@@ -625,7 +624,7 @@ class DeviceParcels(
         keys = keys.setting(entry.linkId, response.key)
         pendingForgets = pendingForgets.setting(entry.linkId, null)
         save()
-        request.dpdPostcode?.let { postcodes.remember(it, request.carrier ?: response.parcel.carrier) }
+        request.dpdPostcode?.let { postcodes.remember(it, request.carrier ?: response.parcel.carrier, request.dpdPostcodeCountry) }
         // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return shown(entry)
     }
@@ -639,8 +638,8 @@ class DeviceParcels(
      * their parcels again. A key that could not be read is trouble too, thrown once the round is done: with only such
      * keys left, a phone offline or out of lookups hears so, not that nothing changed.
      */
-    suspend fun refresh(all: Boolean = false, only: UUID? = null) {
-        val client = client ?: return
+    suspend fun refresh(all: Boolean = false, only: UUID? = null): Boolean {
+        val client = client ?: return false
         stopForgottenAlerts(client)
         val recovery = try {
             tellPendingForgets(client)
@@ -651,6 +650,7 @@ class DeviceParcels(
             throw cancellation
         }
         val recovered = recovery.read
+        var contacted = recovered.isNotEmpty()
         var trouble: Exception? = null
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
@@ -663,6 +663,7 @@ class DeviceParcels(
             if (!(all || only != null || age < 0 || age >= fresh)) continue
             try {
                 val response = client.read(entry.linkId, key)
+                contacted = true
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
                 if (index < 0) continue
                 if (response != null) {
@@ -683,6 +684,7 @@ class DeviceParcels(
         }
         save()
         (trouble ?: recovery.trouble)?.let { throw it }
+        return contacted
     }
 
     /** The links `recoverParcels` read again, and the trouble that ended its round. */
@@ -719,10 +721,14 @@ class DeviceParcels(
             forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(token)) }
             save()
         }
-        if (key != null && succeeds { client.forget(entry.linkId, key) }) {
-            pendingForgets = pendingForgets.setting(entry.linkId, null)
-            save()
-        }
+        if (key != null) forgetIfPending(entry.linkId, key, client)
+    }
+
+    private suspend fun forgetIfPending(linkId: String, key: String, client: DeviceParcelClient) {
+        if (pendingForgets.keyOf(linkId) != key) return
+        if (!succeeds { client.forget(linkId, key) } || pendingForgets.keyOf(linkId) != key) return
+        pendingForgets = pendingForgets.setting(linkId, null)
+        save()
     }
 
     /**
@@ -760,10 +766,7 @@ class DeviceParcels(
      */
     private suspend fun tellPendingForgets(client: DeviceParcelClient) {
         for ((linkId, key) in pendingForgets) {
-            // Followed again while the service was told of another: the link stays.
-            if (pendingForgets.keyOf(linkId) != key) continue
-            if (!succeeds { client.forget(linkId, key) }) continue
-            pendingForgets = pendingForgets.setting(linkId, null)
+            forgetIfPending(linkId, key, client)
         }
     }
 
@@ -785,6 +788,7 @@ class DeviceParcels(
             } catch (error: Exception) {
                 return Recovery(recovered, error)
             }
+            recovered += linkId
             // Followed or forgotten meanwhile.
             if (entries.any { it.linkId.equalsCanonically(linkId) } || keys.keyOf(linkId) == null) continue
             if (response == null || response.link.role != ParcelLinkRole.Owner || entries.any { it.parcel.id == response.parcel.id }) {
@@ -796,7 +800,6 @@ class DeviceParcels(
                 linkId = linkId, label = "", archivedAt = null, parcel = Parcel(shared = response.parcel),
                 checkedAt = now().timeIntervalSinceReferenceDate,
             ).startingSeen()
-            recovered += linkId
         }
         return Recovery(recovered, null)
     }
@@ -1019,7 +1022,12 @@ class DeviceParcels(
     suspend fun registerAlerts(token: String, locale: NativePushLocale) {
         val asked = "$token ${locale.rawValue}"
         val client = client ?: return
-        val round = asked.nfc()
+        if (desiredAlert != asked) {
+            desiredAlert = asked
+            alertGeneration++
+            alertRetry = null
+        }
+        val round = alertGeneration
         if (!alertRounds.add(round)) return
         val address = PushAddress.of(token)
         // How long the service asked to be left alone, in seconds, when the round is cut short.
@@ -1027,6 +1035,7 @@ class DeviceParcels(
         try {
             val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }.take(alertsPerRound)
             for (entry in due) {
+                if (round != alertGeneration) return
                 // Forgotten, or followed through another link, since the round began.
                 if (entries.none { it.linkId.equalsCanonically(entry.linkId) }) continue
                 val preset = entry.alertPreset ?: alertPreset(entry.parcel)
@@ -1044,6 +1053,7 @@ class DeviceParcels(
                     pause = (error as? DeliveryApiError.RateLimited)?.retryAfter ?: 0.0
                     break
                 }
+                if (round != alertGeneration) return
                 if (answer == DeviceAlertAnswer.Unavailable) {
                     pause = 0.0
                     break
@@ -1066,7 +1076,7 @@ class DeviceParcels(
                     attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }
-            holdAlerts(pause, token, locale)
+            if (round == alertGeneration) holdAlerts(pause, token, locale)
         } finally {
             alertRounds.remove(round)
         }
@@ -1076,6 +1086,10 @@ class DeviceParcels(
      * Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
      * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
      */
+    fun alertsSettled(token: String, locale: NativePushLocale): Boolean = entries.all {
+        it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
+    }
+
     suspend fun retryAlerts() {
         val retry = alertRetry ?: return
         if (now().isBefore(retry.at)) return
@@ -1122,10 +1136,13 @@ class DeviceParcels(
     }
 
     /** The parcel was opened on this phone (#72): what it tells now is seen, and its dot goes. Nothing leaves the device. */
-    fun markSeen(id: UUID) {
+    fun markSeen(id: UUID, newsAt: String) {
         val index = entries.indexOfFirst { it.parcel.id == id }
         if (index < 0) return
-        val seen = entries[index].startingSeen()
+        val marked = DateParser.date(newsAt) ?: return
+        val previous = entries[index].seenNewsAt?.let(DateParser::date)
+        if (previous != null && previous >= marked) return
+        val seen = entries[index].copy(seenNewsAt = newsAt)
         if (seen == entries[index]) return
         change(index) { seen }
         save()

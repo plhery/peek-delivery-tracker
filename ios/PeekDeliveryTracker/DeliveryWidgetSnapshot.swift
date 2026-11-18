@@ -48,6 +48,17 @@ struct DeliveryWidgetWording: Codable, Equatable, Hashable, Sendable {
     var section: String? = nil
     var nextUp: Bool? = nil
 
+    var sourceZone: String? = nil
+
+    func midnight(in zone: TimeZone = .current) -> Date {
+        guard let sourceZone, let source = TimeZone(identifier: sourceZone) else { return from }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = source
+        let day = calendar.dateComponents([.year, .month, .day], from: from)
+        calendar.timeZone = zone
+        return calendar.date(from: day) ?? from
+    }
+
     /// Whether it words the parcel as `other` does, from whichever moment.
     func says(as other: DeliveryWidgetWording) -> Bool {
         detail == other.detail && section == other.section && nextUp == other.nextUp
@@ -104,7 +115,8 @@ enum DeliveryWidgetDays {
     ) -> [DeliveryWidgetWording]? {
         var last = first
         let changes = midnights.compactMap { midnight -> DeliveryWidgetWording? in
-            let next = wording(midnight)
+            var next = wording(midnight)
+            next.sourceZone = TimeZone.current.identifier
             guard !next.says(as: last) else { return nil }
             last = next
             return next
@@ -115,7 +127,7 @@ enum DeliveryWidgetDays {
     /// When the parcels' words change after `now`, and the midnight after each of their steps, from which a step's time
     /// names its weekday: a widget's timeline has an entry at each.
     static func changes(in parcels: [DeliveryWidgetParcel], after now: Date, calendar: Calendar = .current) -> [Date] {
-        let worded = parcels.flatMap { $0.later ?? [] }.map(\.from)
+        let worded = parcels.flatMap { $0.later ?? [] }.map { $0.midnight(in: calendar.timeZone) }
         let stepped = parcels.flatMap { $0.steps ?? [] }.compactMap { midnights(after: $0.at, count: 1, calendar: calendar).first }
         return Set((worded + stepped).filter { $0 > now }).sorted()
     }
@@ -434,7 +446,7 @@ extension String {
 extension DeliveryWidgetParcel {
     /// The parcel as the widgets word it at `date`: as the app wrote it for the last midnight before it.
     func worded(at date: Date) -> DeliveryWidgetParcel {
-        guard let wording = later?.last(where: { $0.from <= date }) else { return self }
+        guard let wording = later?.last(where: { $0.midnight() <= date }) else { return self }
         var parcel = self
         parcel.detail = wording.detail
         parcel.section = wording.section ?? section

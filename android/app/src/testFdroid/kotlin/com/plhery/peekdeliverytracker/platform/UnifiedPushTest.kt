@@ -61,6 +61,14 @@ class UnifiedPushTest {
         WorkManager.getInstance(context).getWorkInfosForUniqueWork("push-inbox").get().singleOrNull()?.state
 
     @Test
+    fun restoredPreferencesDoNotOpenThePreviousInbox() {
+        context.getSharedPreferences("unifiedpush", Context.MODE_PRIVATE).edit()
+            .putString("installation", "previous").commit()
+        assertNull(PushRoute.existingAddress(context))
+        assertNotEquals("previous", PushRoute.address(context).token)
+    }
+
+    @Test
     fun withoutADistributorThePhoneIsReachedThroughItsInboxWhichItChecks() {
         // The tests' build has no service (Shared.xcconfig), where Store offers no pushes: its tokens are made here.
         val tokens = UnifiedPushTokens(context)
@@ -73,6 +81,22 @@ class UnifiedPushTest {
         tokens.delete()
         assertEquals(WorkInfo.State.CANCELLED, inboxCheck())
         assertNotEquals("A deleted address is followed by a new one", first, address(tokens))
+    }
+
+    @Test
+    fun pollingWaitsForRegistrationAndRetriesAnInterruptedDrain() = runBlocking {
+        val route = PushRoute.address(context)
+        var checked = 0
+        val waiting = InboxCheck.reconcile(context, route, register = { false }, drain = { checked++ })
+        assertEquals(ListenableWorker.Result.retry(), waiting)
+        assertEquals(0, checked)
+        val interrupted = InboxCheck.reconcile(context, route, register = { true }, drain = { throw java.io.IOException() })
+        assertEquals(ListenableWorker.Result.retry(), interrupted)
+        assertTrue(!PushRoute.acknowledged(context, route))
+        val resumed = InboxCheck.reconcile(context, route, register = { true }, drain = { checked++ })
+        assertEquals(ListenableWorker.Result.success(), resumed)
+        assertEquals(1, checked)
+        assertTrue(PushRoute.acknowledged(context, route))
     }
 
     /**

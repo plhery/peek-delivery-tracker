@@ -305,6 +305,17 @@ function missingScope(scope: Scope, resourceMetadata: string) {
   return { content: [{ type: 'text' as const, text }], isError: true, _meta: { 'mcp/www_authenticate': [challenge] } };
 }
 
+/**
+ * Where an Amazon order's tracking number is: its shipping emails usually hold none, and its order number is no
+ * tracking number. A parcel Amazon delivers itself is mostly tracked in the user's Amazon account alone, and adding its
+ * tracking ID says so (`verifyAmazonShippingAddition`).
+ */
+const AMAZON_RECIPE = 'An Amazon shipping email usually holds no tracking number, and an Amazon order number (three '
+  + 'groups of digits joined by dashes) is never one: never send it. The user\'s Amazon account shows the number: Your '
+  + 'Orders, then Track package on that order, gives the carrier and the tracking ID; send those. When that page says '
+  + 'Amazon delivers the parcel itself, tell the user so: such a parcel is usually tracked in their Amazon account '
+  + 'alone, and add_parcels refuses its tracking ID when Peek cannot follow it.';
+
 const OUTCOME_TEXT: Record<ParcelAddition['outcome'], string> = {
   added: 'added',
   known: 'already followed',
@@ -357,7 +368,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     description: 'Finds the tracking numbers in a text, such as the shipping part of an order email, and adds each to '
       + 'the user\'s Peek, which then follows it. Send only the shipping part: the tracking numbers, the carrier names '
       + 'next to them and tracking links; never addresses, names or payment details. Peek keeps the numbers and the '
-      + 'name, nothing else. A number the user already follows is left as it is. At most 10 numbers a call.',
+      + 'name, nothing else. A number the user already follows is left as it is. At most 10 numbers a call. '
+      + AMAZON_RECIPE,
     inputSchema: z.object({
       text: z.string().min(1).max(MOST_TEXT_LENGTH).describe('Text holding one or more tracking numbers'),
       name: z.string().max(80).optional().describe('What to call the parcel, usually the shop it comes from, such as "IKEA"'),
@@ -367,7 +379,8 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
   }, allowed('add_parcels', async ({ text, name }: { text: string; name?: string }) => {
     const additions = await addParcelsFromText(service, caller.userId, text, name?.trim() ?? '');
     if (!additions.length) {
-      return answer({ parcels: [] }, 'No tracking number found. Peek adds numbers whose carrier it recognises and numbers the text labels as a tracking number; an order number is never one.');
+      return answer({ parcels: [] }, 'No tracking number found. Peek adds numbers whose carrier it recognises and numbers the text labels as a tracking number; an order number is never one. '
+        + 'An Amazon order\'s tracking number is in the user\'s Amazon account: Your Orders, then Track package.');
     }
     const parcels = additions.map(additionSummary);
     const lines = additions.map((addition) => `${addition.trackingNumber} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): ${OUTCOME_TEXT[addition.outcome]}`);

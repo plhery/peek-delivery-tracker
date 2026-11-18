@@ -572,6 +572,19 @@ describe('the MCP endpoint', () => {
     expect(addParcelsFromText).toHaveBeenCalledTimes(1);
   });
 
+  it('tells the assistant where an Amazon order\'s tracking number is, and never to send its order number', async () => {
+    const writer = connect(['parcels:write']);
+    const tools = (await rpc(await mcp(writer, 'tools/list'))).result!.tools! as Array<{ name: string; description: string }>;
+    const description = tools.find(({ name }) => name === 'add_parcels')!.description;
+    expect(description).toContain('Your Orders, then Track package');
+    expect(description).toMatch(/order number .* is never one: never send it/);
+    expect(description).toContain('Amazon delivers the parcel itself, tell the user so');
+    vi.mocked(addParcelsFromText).mockResolvedValue([]);
+    const none = await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' });
+    expect(none.result!.structuredContent).toEqual({ parcels: [] });
+    expect(none.result!.content![0]!.text).toContain('Amazon account: Your Orders, then Track package');
+  });
+
   it('answers a call outside the token\'s scopes with the challenge that asks for a new sign-in', async () => {
     const list = vi.spyOn(service, 'listAccountPackages').mockResolvedValue([]);
     const owned = vi.spyOn(service, 'getOwnedPackage').mockResolvedValue(null);

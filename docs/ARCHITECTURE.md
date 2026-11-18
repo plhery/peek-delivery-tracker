@@ -474,8 +474,11 @@ Key server modules:
   - No tool deletes a parcel: deleting for good is too easy for an assistant to get wrong,
     and archive and restore cover what it needs. The owner deletes one in Peek.
     `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
-    its allowances. Their answers leave out the receiver's name and postcode and read the
-    scans as a link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan
+    its allowances. Amazon's shipping emails usually hold no tracking number, so its description
+    sends the assistant to Your Orders, then Track package, for the carrier and tracking ID, never
+    the order number, and has it tell the user when Amazon delivers the parcel itself.
+    The tools' answers leave out the receiver's name and postcode and read the scans as a
+    link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan
     that names the recipient, who signed, a code or a door reads its stage's English name,
     and a status line or place that does is left out. The status and what the parcel needs
     still follow every scan.

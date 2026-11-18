@@ -226,10 +226,11 @@ declare
   after metrics.health;
 begin
   select * into strict before from metrics.health;
-  insert into public.tracking_health_samples (attempt_id, kind, subject, healthy, details, observed_at)
-  select gen_random_uuid(), kind, subject, category <> 'transport', jsonb_build_object('category', category), observed_at
+  insert into public.tracking_health_samples (attempt_id, package_id, kind, subject, healthy, details, observed_at)
+  select gen_random_uuid(), md5((case when subject = 'health-repeated' then n % 5 else n end)::text)::uuid, kind, subject, category <> 'transport', jsonb_build_object('category', category), observed_at
   from (values
       ('provider', 'health-silent', 'not_found', 20, now() - interval '1 hour'),
+      ('provider', 'health-repeated', 'not_found', 20, now() - interval '1 hour'),
       ('provider', 'health-down', 'transport', 20, now() - interval '1 hour'),
       ('provider', 'health-found-one', 'not_found', 20, now() - interval '1 hour'),
       ('provider', 'health-found-one', 'ok', 1, now() - interval '2 hours'),
@@ -237,7 +238,7 @@ begin
       ('provider', 'health-asked-earlier', 'not_found', 20, now() - interval '4 hours'),
       ('direct', 'health-direct-silent', 'not_found', 20, now() - interval '1 hour'))
     as sample (kind, subject, category, samples, observed_at),
-    generate_series(1, sample.samples);
+    generate_series(1, sample.samples) n;
   select * into strict after from metrics.health;
 
   if after.silent_sources_3h <> before.silent_sources_3h + 2 then

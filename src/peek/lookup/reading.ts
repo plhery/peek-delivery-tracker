@@ -32,7 +32,7 @@ export interface Reading {
 }
 
 /** A shop whose order numbers the door tells from tracking numbers. */
-export type OrderShop = 'amazon' | 'shein' | 'shopee' | 'temu';
+export type OrderShop = 'amazon' | 'mercadolibre' | 'shein' | 'shopee' | 'temu';
 
 const LINK = /https?:\/\/[^\s<>"']+/gi;
 /** Each shop's order number, tried in turn and read without regard to case. The iPhone reads the same file. */
@@ -167,6 +167,7 @@ export function nonTrackingShape(normalized: string): NonTrackingShape | null {
 
 /** What a parcel says about its number's shape, where it would say that no carrier knows the number yet. */
 export function nonTrackingNote(shape: NonTrackingShape, t: Translate, locale?: string): string {
+  if (shape.kind === 'order' && shape.shop === 'mercadolibre') return t('link.notTracking.mercadolibre');
   if (shape.kind === 'order') return t('link.notTracking.order', { shop: shopName(shape.shop, locale) });
   if (shape.kind === 'mistyped') {
     return t(shape.change === 'missing' ? 'link.notTracking.missing' : 'link.notTracking.extra', { carrier: carrierInfo(shape.carrier, locale).name });

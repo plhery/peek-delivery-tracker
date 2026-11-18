@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { carrierNumberInText, checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText } from './reading';
+import { carrierNumberInText, checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText, shopName } from './reading';
 import type { Translate } from '../../lib/messages';
 import { isPickupCode, normalizeTrackingNumber } from '../../lib/carriers';
 import rules from '../../../shared/reading.json';
@@ -136,9 +136,10 @@ describe('a looked-up number no carrier answered for', () => {
   it('says where the tracking number is for each shape', () => {
     const t = ((key: string, values?: Record<string, string>) => `${key}${values?.shop ? `:${values.shop}` : ''}`) as Translate;
     expect(nonTrackingNote({ kind: 'order', shop: 'aliexpress' }, t)).toBe('link.notTracking.order:AliExpress');
-    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'es')).toBe('link.notTracking.order:Mercado Libre');
-    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'pt-br')).toBe('link.notTracking.order:Mercado Livre');
-    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'pt')).toBe('link.notTracking.order:Mercado Libre');
+    // Mercado Libre's says where its buyers find the number, in the shop's name for the language.
+    expect(nonTrackingNote({ kind: 'order', shop: 'mercadolibre' }, t, 'pt-br')).toBe('link.notTracking.mercadolibre');
+    expect(shopName('mercadolibre', 'pt-br')).toBe('Mercado Livre');
+    expect(shopName('mercadolibre', 'pt')).toBe('Mercado Libre');
     expect(nonTrackingNote({ kind: 'order', shop: 'amazon' }, t, 'pt-br')).toBe('link.notTracking.order:Amazon');
     expect(nonTrackingNote({ kind: 'container' }, t)).toBe('link.notTracking.container');
     expect(nonTrackingNote({ kind: 'short' }, t)).toBe('link.notTracking.short');

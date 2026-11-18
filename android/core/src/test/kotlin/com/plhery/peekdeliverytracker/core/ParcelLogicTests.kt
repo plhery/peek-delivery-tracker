@@ -771,6 +771,13 @@ class ParcelLogicTests {
         assertEquals("Mercado Libre", NonTrackingShape.shopName("mercadolibre", AppLanguage.Es))
         assertEquals("Mercado Livre", NonTrackingShape.shopName("mercadolibre", AppLanguage.PtBr))
         assertEquals("Amazon", NonTrackingShape.shopName("amazon", AppLanguage.PtBr))
+        // The parcel page tells Mercado Libre's buyers where the number is; other shops' notes name the shop.
+        val localizer = Localizer(AppLanguage.En)
+        assertEquals(localizer.text("link.notTracking.mercadolibre"), NonTrackingShape.orderNote("mercadolibre", localizer, AppLanguage.En))
+        assertTrue(NonTrackingShape.orderNote("mercadolibre", localizer, AppLanguage.En).contains("My purchases"))
+        assertEquals(
+            localizer.text("link.notTracking.order", mapOf("shop" to "AliExpress")), NonTrackingShape.orderNote("aliexpress", localizer, AppLanguage.En),
+        )
         assertEquals(NonTrackingShape.Order(shop = "temu"), CarrierCatalog.nonTrackingShape("PO00012345678901234567"))
         assertEquals(NonTrackingShape.Short, CarrierCatalog.nonTrackingShape("10293"))
         assertNull(CarrierCatalog.nonTrackingShape("99945719832294617"))

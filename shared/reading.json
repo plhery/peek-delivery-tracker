@@ -19,6 +19,11 @@
       "shop": "temu",
       "shape": "PO, 3 digits and 17: PO-000-00000000000000000, often typed without the hyphens.",
       "pattern": "(?:^|[^A-Za-z0-9_-])PO[- ]?[0-9]{3}[- ]?[0-9]{17}(?![A-Za-z0-9_-])"
+    },
+    {
+      "shop": "mercadolibre",
+      "shape": "16 digits that start 20000: Mercado Libre's (Mercado Livre in Brazil) order and pack ids, narrower than storedOrders' 2000 so that Add holds back only what no carrier's number looks like.",
+      "pattern": "(?:^|[^A-Za-z0-9_-])20000[0-9]{11}(?![A-Za-z0-9_-])"
     }
   ],
   "storedOrders": [
@@ -103,6 +108,11 @@
     { "text": "XPO-000-00000000000000000", "shop": null },
     { "text": "PO0000000000000000000", "shop": null, "carrier": "australia-post", "why": "A carrier's number that starts with PO stays a tracking number: here Australia Post's, a digit short of Temu's." },
     { "text": "Order PO-000-00000000000000000, tracking 1ZDEMO202600000001", "shop": null, "carrier": "ups" },
+    { "text": "2000012345678901", "shop": "mercadolibre" },
+    { "text": "Compra #2000012345678901", "shop": "mercadolibre" },
+    { "text": "2000123456789012", "shop": null, "why": "Add holds back only 16 digits that start 20000; once no carrier answered, the parcel page reads the wider 2000." },
+    { "text": "200001234567890", "shop": null, "why": "A digit too many or too few is no Mercado Libre order number." },
+    { "text": "20000123456789012", "shop": null },
     { "text": "Parcel PO-000 12345678901234567", "shop": "temu", "why": "No part of an order number is read as a tracking number, however a label introduces it." },
     { "text": "Parcel 1234567899, order PO-000 12345678901234567", "shop": null, "number": "1234567899" },
     { "text": "Hi Alex, good news: your order has shipped!\nTrack it with DHL: 1234567899\nExpected delivery: Wednesday", "shop": null, "number": "1234567899", "why": "A message's one number is read though its shape proves no carrier; the carriers are asked." },

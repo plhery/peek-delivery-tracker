@@ -356,7 +356,7 @@ struct AddParcelView: View {
             if let order, recognition.settledNumber == normalizedNumber {
                 heldBackNote(title: localizer.text("door.order.\(order.rawValue).title"),
                              body: localizer.text("door.order.\(order.rawValue).body"))
-                // Only Amazon has an orders page to link to: for Shein, Shopee and Temu the note says where to tap instead.
+                // Only Amazon has an orders page to link to: for Mercado Libre, Shein, Shopee and Temu the note says where to look instead.
                 if order == .amazon {
                     Link(localizer.text("add.openAmazonOrders"), destination: CarrierCatalog.amazonOrdersURL(""))
                         .font(.subheadline)

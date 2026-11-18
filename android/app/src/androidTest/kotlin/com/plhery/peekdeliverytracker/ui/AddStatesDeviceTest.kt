@@ -226,7 +226,7 @@ class AddStatesDeviceTest {
     }
 
     /**
-     * B-ST17: each shop's order number (Amazon's, Shein's, Shopee's and Temu's samples in Reading.json) says
+     * B-ST17: each shop's order number (Amazon's, Shein's, Shopee's, Temu's and Mercado Libre's samples in Reading.json) says
      * "door.order.<shop>.title" and its words once the field is left, not "add.notFound"; only Amazon's offers
      * "add.openAmazonOrders"; Add stays off (`trackingField`'s order note).
      */
@@ -599,6 +599,7 @@ class AddStatesDeviceTest {
             "shein" to "GSH0A1B2C3D4E5F",
             "shopee" to "261025ABCD1234",
             "temu" to "PO-000-00000000000000000",
+            "mercadolibre" to "2000012345678901",
         )
 
         /**

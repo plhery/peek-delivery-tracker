@@ -255,7 +255,7 @@ struct TrackingInputMatch: Equatable, Sendable {
 
 /// A shop whose order numbers Add tells from tracking numbers, as the front door does (`shared/reading.json`).
 enum OrderShop: String, Decodable, Sendable {
-    case amazon, shein, shopee, temu
+    case amazon, mercadolibre, shein, shopee, temu
 }
 
 /// What a looked-up number no carrier answered for looks like instead of a tracking number: a shop's
@@ -286,6 +286,13 @@ enum NonTrackingShape: Equatable, Sendable {
     /// A shop by the name the app writes in this language (`shopName` in src/peek/lookup/reading.ts).
     static func shopName(_ shop: String, language: AppLanguage) -> String {
         localShopNames[language]?[shop] ?? shopNames[shop] ?? shop
+    }
+
+    /// Where the tracking number of a shop's order is: Mercado Libre's buyers find it in the purchase's shipping
+    /// section (`nonTrackingNote` in src/peek/lookup/reading.ts).
+    @MainActor static func orderNote(_ shop: String, localizer: Localizer) -> String {
+        shop == OrderShop.mercadolibre.rawValue ? localizer.text("link.notTracking.mercadolibre")
+            : localizer.text("link.notTracking.order", ["shop": shopName(shop, language: localizer.language)])
     }
 }
 

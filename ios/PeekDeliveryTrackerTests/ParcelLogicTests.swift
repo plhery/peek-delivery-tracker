@@ -804,7 +804,7 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(CarrierVisualIdentity.shown(for: filed, localizer: localizer).name, "SEUR")
     }
 
-    func testTellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() throws {
+    @MainActor func testTellsAnOrderNumberOrAShortNumberNoCarrierAnsweredFor() throws {
         // Synthetic numbers: Amazon's without hyphens, AliExpress's, Temu's as a lookup stores it, a short one.
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("30245719832294617"), .order(shop: "amazon"))
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("3041234567890123"), .order(shop: "aliexpress"))
@@ -815,6 +815,15 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(NonTrackingShape.shopName("mercadolibre", language: .es), "Mercado Libre")
         XCTAssertEqual(NonTrackingShape.shopName("mercadolibre", language: .ptBR), "Mercado Livre")
         XCTAssertEqual(NonTrackingShape.shopName("amazon", language: .ptBR), "Amazon")
+        // The parcel page tells Mercado Libre's buyers where the number is; other shops' notes name the shop.
+        let localizer = Localizer()
+        let originalLanguage = localizer.language
+        defer { localizer.language = originalLanguage }
+        localizer.language = .en
+        XCTAssertEqual(NonTrackingShape.orderNote("mercadolibre", localizer: localizer), localizer.text("link.notTracking.mercadolibre"))
+        XCTAssertTrue(NonTrackingShape.orderNote("mercadolibre", localizer: localizer).contains("My purchases"))
+        XCTAssertEqual(NonTrackingShape.orderNote("aliexpress", localizer: localizer),
+                       localizer.text("link.notTracking.order", ["shop": "AliExpress"]))
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("PO00012345678901234567"), .order(shop: "temu"))
         XCTAssertEqual(CarrierCatalog.nonTrackingShape("10293"), .short)
         XCTAssertNil(CarrierCatalog.nonTrackingShape("99945719832294617"))

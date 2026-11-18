@@ -249,6 +249,7 @@ data class TrackingInputMatch(
 @Serializable
 enum class OrderShop(val rawValue: String) {
     @SerialName("amazon") Amazon("amazon"),
+    @SerialName("mercadolibre") MercadoLibre("mercadolibre"),
     @SerialName("shein") Shein("shein"),
     @SerialName("shopee") Shopee("shopee"),
     @SerialName("temu") Temu("temu");
@@ -289,6 +290,14 @@ sealed interface NonTrackingShape {
 
         /** A shop by the name the app writes in this language (`shopName` in src/peek/lookup/reading.ts). */
         fun shopName(shop: String, language: AppLanguage): String = localShopNames[language]?.get(shop) ?: shopNames[shop] ?: shop
+
+        /**
+         * Where the tracking number of a shop's order is: Mercado Libre's buyers find it in the purchase's shipping
+         * section (`nonTrackingNote` in src/peek/lookup/reading.ts).
+         */
+        fun orderNote(shop: String, localizer: Localizer, language: AppLanguage): String =
+            if (shop == OrderShop.MercadoLibre.rawValue) localizer.text("link.notTracking.mercadolibre")
+            else localizer.text("link.notTracking.order", mapOf("shop" to shopName(shop, language)))
     }
 }
 

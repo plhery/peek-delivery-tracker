@@ -2281,7 +2281,7 @@ extension CarrierCatalogTests {
         }
         let url = try XCTUnwrap(Bundle.main.url(forResource: "Reading", withExtension: "json"))
         let file = try JSONDecoder().decode(File.self, from: Data(contentsOf: url))
-        XCTAssertEqual(CarrierCatalog.orderNumbers.map { $0.shop }, [.amazon, .shein, .shopee, .temu])
+        XCTAssertEqual(CarrierCatalog.orderNumbers.map { $0.shop }, [.amazon, .shein, .shopee, .temu, .mercadolibre])
         XCTAssertFalse(CarrierCatalog.candidatePatterns.isEmpty)
         XCTAssertGreaterThan(file.examples.count, 40)
         var mismatches: [String] = []

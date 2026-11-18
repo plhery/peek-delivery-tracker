@@ -266,6 +266,12 @@ describe('input edge cases', () => {
     expect(state.job).toBeNull();
   });
 
+  it('holds a Mercado Libre order number back, and says it is Mercado Libre’s', () => {
+    const state = run([pasted('2000012345678901'), track]);
+    expect(survey(state)).toMatchObject({ order: 'mercadolibre', match: null, need: 'order', nothing: false });
+    expect(state.job).toBeNull();
+  });
+
   it('holds a pickup code back, unless a carrier is picked by hand', () => {
     const typing = run([typed(PICKUP)]);
     // Six digits may be the start of a longer number: the notice waits for the text to rest.

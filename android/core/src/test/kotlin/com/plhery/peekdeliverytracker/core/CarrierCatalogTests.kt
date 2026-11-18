@@ -2169,7 +2169,10 @@ class CarrierCatalogTests {
     @Test
     fun textReadsAsTheFrontDoorReadsIt() {
         val file = ApiJson.decodeFromString(ReadingExamples.serializer(), SharedResources.text("Reading.json"))
-        assertEquals(listOf(OrderShop.Amazon, OrderShop.Shein, OrderShop.Shopee, OrderShop.Temu), CarrierCatalog.orderNumbers.map { it.shop })
+        assertEquals(
+            listOf(OrderShop.Amazon, OrderShop.Shein, OrderShop.Shopee, OrderShop.Temu, OrderShop.MercadoLibre),
+            CarrierCatalog.orderNumbers.map { it.shop },
+        )
         assertFalse(CarrierCatalog.candidatePatterns.isEmpty())
         assertTrue(file.examples.size > 40)
         val mismatches = mutableListOf<String>()

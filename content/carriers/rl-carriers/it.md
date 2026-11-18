@@ -45,7 +45,7 @@ Il codice di Peek non prevede diciture specifiche di R+L per «In consegna», ma
 
 ## Come consegna R+L Carriers negli Stati Uniti
 
-Mentre la merce viaggia negli **Stati Uniti**, il sistema di R+L fornisce un giorno previsto di consegna che Peek mostra fino all'avvenuto recapito. R+L non indica alcun corriere terzo per la consegna finale e il codice di Peek non passa la spedizione a nessun altro operatore. R+L Carriers non gestisce consegne nazionali in Italia o in Svizzera: tutte le informazioni di questa guida riguardano trasporti merci negli Stati Uniti.
+Mentre la merce viaggia negli **Stati Uniti**, il sistema di R+L fornisce un giorno previsto di consegna che Peek mostra fino all'avvenuto recapito. Il sistema di R+L non indica alcun corriere terzo per la consegna finale e il codice di Peek non passa la spedizione a nessun altro operatore. Tutte le informazioni di questa guida riguardano trasporti merci negli Stati Uniti.
 
 Questa pagina non riporta fasce orarie, appuntamenti di scarico, numero di tentativi né regole per il fermo deposito presso un terminal USA. Chiedi al negozio o all'azienda che ha prenotato il trasporto come e quando avverrà la consegna: sono loro i titolari della spedizione presso R+L.
 
@@ -71,7 +71,7 @@ Se il tracciamento riporta `Delivered` ma non è arrivato nulla, leggi [consegna
 
 Sul sito statunitense di R+L Carriers sono pubblicati questi riferimenti:
 
-- **Telefono:** `800-543-5589`, numero verde statunitense riportato in alto nelle pagine di R+L.
+- **Telefono:** `800-543-5589`, numero riportato in alto nelle pagine di R+L.
 - **R+L Cares:** modulo sul sito di R+L per problemi irrisolti, domande o segnalazioni; R+L dichiara che l'invio recapita direttamente il messaggio alla propria direzione esecutiva (*R+L Executive Leadership*).
 - **Reclami merci:** il menu del sito rimanda a *Cargo Claims*, con le istruzioni di R+L per l'apertura di una pratica danni.
 

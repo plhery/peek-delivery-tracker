@@ -45,7 +45,7 @@ Kod Peek nie zawiera osobnych sformułowań R+L dla wydania do doręczenia, nieu
 
 ## Jak R+L Carriers doręcza w Stanach Zjednoczonych
 
-Gdy ładunek przemieszcza się po **Stanach Zjednoczonych**, wyszukiwarka R+L podaje przewidywany dzień dostawy, który Peek wyświetla aż do chwili doręczenia. System R+L nie wskazuje żadnego innego przewoźnika na ostatniej mili, a kod Peek nie przekazuje przesyłki żadnemu partnerowi. R+L Carriers nie prowadzi krajowej sieci doręczeń w Polsce: informacje na tej stronie dotyczą wyłącznie przewozów towarowych na terenie USA.
+Gdy ładunek przemieszcza się po **Stanach Zjednoczonych**, wyszukiwarka R+L podaje przewidywany dzień dostawy, który Peek wyświetla aż do chwili doręczenia. System R+L nie wskazuje żadnego innego przewoźnika na ostatniej mili, a kod Peek nie przekazuje przesyłki żadnemu partnerowi. Informacje na tej stronie dotyczą wyłącznie przewozów towarowych na terenie USA.
 
 Na tej stronie nie podajemy przedziałów godzinowych dostaw, zasad umawiania awizacji, liczby prób doręczenia ani warunków odbioru własnego w amerykańskim terminalu. O sposób i termin dostarczenia ładunku zapytaj sklep lub firmę, która zamówiła przewóz — to ona jest stroną zlecenia w R+L.
 
@@ -71,7 +71,7 @@ Gdy śledzenie pokazuje `Delivered`, a towar nie dotarł, zajrzyj do poradnika [
 
 Na amerykańskiej stronie internetowej R+L Carriers podane są następujące kanały kontaktu:
 
-- **Telefon:** `800-543-5589`, bezpłatna infolinia w USA widoczna w nagłówku stron R+L.
+- **Telefon:** `800-543-5589`, numer widoczny w nagłówku stron R+L.
 - **R+L Cares:** formularz na stronie R+L dotyczący nierozwiązanych spraw, pytań i opinii; R+L informuje, że zgłoszenie trafia bezpośrednio do kierownictwa wyższego szczebla (*R+L Executive Leadership*).
 - **Reklamacje ładunków:** odnośnik *Cargo Claims* w menu witryny prowadzi do instrukcji R+L dotyczących zgłaszania szkód w transporcie.
 

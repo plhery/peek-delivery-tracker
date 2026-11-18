@@ -45,7 +45,7 @@ Im Code von Peek gibt es keinen eigenen R+L-Wortlaut für „In Zustellung“, e
 
 ## Wie R+L Carriers in den USA zustellt
 
-Solange die Fracht in den **USA** unterwegs ist, nennt der R+L-Tracer einen voraussichtlichen Zustelltag, den Peek bis zur Auslieferung anzeigt. R+L nennt keinen Drittanbieter für die letzte Meile, und der Code von Peek übergibt die Sendung an keinen anderen Paketdienst. In Deutschland, Österreich oder der Schweiz betreibt R+L Carriers kein eigenes Zustellnetz: Alle Angaben auf dieser Seite betreffen Fracht innerhalb der Vereinigten Staaten.
+Solange die Fracht in den **USA** unterwegs ist, nennt der R+L-Tracer einen voraussichtlichen Zustelltag, den Peek bis zur Auslieferung anzeigt. Der R+L-Tracer nennt keinen Drittanbieter für die letzte Meile, und der Code von Peek übergibt die Sendung an keinen anderen Paketdienst. Alle Angaben auf dieser Seite betreffen Fracht innerhalb der Vereinigten Staaten.
 
 Diese Seite enthält keine Angaben zu Zustellzeitfenstern, Avisierungen, Zustellversuchen oder zur Selbstabholung am Terminal in den USA. Erkundige dich beim Shop oder dem Unternehmen, das den Transport gebucht hat, wie und wann die Ware angeliefert wird — dort liegt der Frachtauftrag bei R+L.
 
@@ -71,7 +71,7 @@ Steht die Sendung auf `Delivered`, ohne dass etwas angekommen ist, lies [zugeste
 
 Auf der US-Website von R+L Carriers stehen folgende Kontaktwege:
 
-- **Telefon:** `800-543-5589`, die oben auf den Seiten von R+L genannte gebührenfreie US-Rufnummer.
+- **Telefon:** `800-543-5589`, die oben auf den Seiten von R+L genannte Rufnummer.
 - **R+L Cares:** ein Kontaktformular auf der Website von R+L für offene Anliegen, Fragen oder Rückmeldungen; laut R+L geht die Nachricht direkt an die Unternehmensleitung (*R+L Executive Leadership*).
 - **Frachtschäden:** Im Menü der Website verweist *Cargo Claims* auf die Anleitung von R+L zur Anmeldung eines Transportschadens.
 

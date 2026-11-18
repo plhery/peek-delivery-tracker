@@ -45,7 +45,7 @@ El código de Peek no contempla textos específicos de R+L para salida a reparto
 
 ## Cómo entrega R+L Carriers en Estados Unidos
 
-Mientras la carga viaja por **Estados Unidos**, el localizador de R+L ofrece un día estimado de entrega, que Peek muestra hasta que se completa el reparto. El rastreador de R+L no menciona a ningún otro transportista para la última milla y el código de Peek no traspasa el envío a ningún tercero. R+L Carriers no presta reparto doméstico en España ni el seguimiento aquí descrito cubre envíos internos fuera de Estados Unidos.
+Mientras la carga viaja por **Estados Unidos**, el localizador de R+L ofrece un día estimado de entrega, que Peek muestra hasta que se completa el reparto. El rastreador de R+L no menciona a ningún otro transportista para la última milla y el código de Peek no traspasa el envío a ningún tercero. El seguimiento aquí descrito no cubre envíos internos fuera de Estados Unidos.
 
 Esta página no detalla franjas horarias, citas de entrega, número de intentos ni normas para recoger mercancía en una terminal estadounidense. Pregunta a la tienda o a la empresa que contrató el transporte cómo y cuándo llegará a tu puerta: ellas son titulares de la reserva con R+L.
 
@@ -71,7 +71,7 @@ Si el rastreo marca `Delivered` pero no has recibido nada, revisa [entregado per
 
 En el sitio web estadounidense de R+L Carriers constan estos canales:
 
-- **Teléfono:** `800-543-5589`, número gratuito en EE. UU. visible en la cabecera de las páginas de R+L.
+- **Teléfono:** `800-543-5589`, número visible en la cabecera de las páginas de R+L.
 - **R+L Cares:** formulario en la web de R+L para incidencias pendientes, dudas o comentarios; R+L indica que el mensaje llega directamente a su dirección ejecutiva (*R+L Executive Leadership*).
 - **Reclamaciones de carga:** el menú del sitio enlaza con *Cargo Claims*, donde R+L publica sus instrucciones para tramitar una reclamación de mercancía.
 

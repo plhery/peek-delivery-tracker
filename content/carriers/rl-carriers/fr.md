@@ -45,7 +45,7 @@ Le code de Peek ne connaît aucun libellé propre à R+L pour une tournée de li
 
 ## Comment R+L Carriers livre aux États-Unis
 
-Pendant l'acheminement aux **États-Unis**, le traceur de R+L indique un jour de livraison prévu, que Peek affiche jusqu'à la livraison. Le traceur de R+L ne mentionne aucun transporteur partenaire pour le dernier kilomètre et le code de Peek ne transfère l'envoi à aucun autre opérateur. R+L Carriers n'opère pas de réseau de livraison domestique en France, en Belgique ou en Suisse : cette page concerne uniquement des expéditions de fret aux États-Unis.
+Pendant l'acheminement aux **États-Unis**, le traceur de R+L indique un jour de livraison prévu, que Peek affiche jusqu'à la livraison. Le traceur de R+L ne mentionne aucun transporteur partenaire pour le dernier kilomètre et le code de Peek ne transfère l'envoi à aucun autre opérateur. Cette page concerne uniquement des expéditions de fret aux États-Unis.
 
 Cette page ne précise ni créneaux horaires, ni prise de rendez-vous, ni nombre de présentations, ni modalités de retrait en terminal aux États-Unis. Demande à la boutique ou à l'entreprise qui a réservé le transport comment et quand la marchandise sera remise : c'est elle qui détient le contrat auprès de R+L.
 
@@ -71,7 +71,7 @@ Si le suivi indique `Delivered` alors que rien n'est arrivé, consulte [livré m
 
 Sur le site américain de R+L Carriers figurent ces coordonnées :
 
-- **Téléphone :** `800-543-5589`, numéro affiché en haut des pages de R+L (numéro gratuit américain).
+- **Téléphone :** `800-543-5589`, numéro affiché en haut des pages de R+L.
 - **R+L Cares :** formulaire en ligne sur le site de R+L pour un litige en suspens, une question ou une remarque ; R+L précise que la demande est transmise directement à sa direction générale (*R+L Executive Leadership*).
 - **Réclamations fret :** le menu du site renvoie vers *Cargo Claims*, où R+L présente ses instructions de dépôt d'une réclamation marchandise.
 

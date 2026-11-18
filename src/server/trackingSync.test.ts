@@ -409,6 +409,7 @@ describe('tracking event normalization', () => {
     // The day starts at 05:00 UTC in Chicago, and stays the scan's identity.
     expect(dated([])).toEqual(['2026-10-30T05:00:00Z']);
     expect(dated([label])).toEqual(['2026-10-30T19:12:01Z']);
+    expect(dated([{ ...label, occurred_at: '2026-10-30T23:59:59-05:00' }])).toEqual(['2026-10-31T04:59:59.999Z']);
     expect(buildEvents({ id: 'package-1', carrier: 'fedex', [STORED_EVENT_IDENTITIES]: [label] }, { status: 'in_transit',
       current_stage: 'accepted', last_status_text: 'Picked up', last_update: null, timezone: 'America/Chicago', events: [pickup] } as CarrierResult,
     'fedex', new Date('2026-10-31T08:00:00Z'))[0]!.provider_event_id).toBe(providerEventId('fedex', '2026-10-30', '', 'Picked up'));

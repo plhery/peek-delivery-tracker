@@ -213,7 +213,7 @@ describe('the email offer on a delivered parcel', () => {
     const { user, auth } = await open(never);
     await user.click(within(offer()!).getByRole('button', { name: 'Turn on' }));
     expect(saveNotificationPreferences).toHaveBeenCalledExactlyOnceWith({
-      emailOnDelivery: true,
+      emailOnDelivery: true, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, auth);
     expect(await screen.findByRole('status')).toHaveTextContent('Email is on. You can change it in Settings › Notifications.');
     expect(offer()).toBeNull();

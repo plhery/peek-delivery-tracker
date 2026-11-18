@@ -64,12 +64,18 @@ export function loadNotificationPreferences(auth: ApiAuth, { once = false } = {}
   return reading;
 }
 
+/**
+ * Sends what changed, and the browser's time zone, which the delivery email writes its times in:
+ * the server keeps every other setting as it has it, whatever another device saved since.
+ */
 async function save(preferences: Partial<NotificationPreferences>, auth: ApiAuth): Promise<NotificationPreferences> {
-  return take(sessionOf(auth), await saveNotificationPreferences(preferences, auth));
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  return take(sessionOf(auth), await saveNotificationPreferences({ ...preferences, ...(timezone ? { timezone } : {}) }, auth));
 }
 
+/** Saves which events are announced, and clears the retired quiet hours, which no app shows any more. */
 export function saveNotificationStages(stages: NotificationStage[], auth: ApiAuth): Promise<NotificationPreferences> {
-  return save({ enabledStages: stages }, auth);
+  return save({ enabledStages: stages, quietHoursStart: null, quietHoursEnd: null }, auth);
 }
 
 /**

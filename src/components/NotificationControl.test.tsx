@@ -213,6 +213,9 @@ describe('NotificationControl', () => {
         'customs', 'out_for_delivery', 'failed_attempt', 'ready_for_pickup',
         'delivered', 'returned',
       ],
+      quietHoursStart: null,
+      quietHoursEnd: null,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, apiAuth);
     expect(await screen.findByText('Preferences saved')).toBeInTheDocument();
   });

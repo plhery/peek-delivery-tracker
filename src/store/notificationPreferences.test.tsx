@@ -83,7 +83,7 @@ describe('the account’s shared notification preferences', () => {
     const { result } = renderHook(() => useNotificationPreferences(auth));
     await act(async () => { await saveEmailOnDelivery(true, auth); });
     expect(saveNotificationPreferences).toHaveBeenCalledExactlyOnceWith({
-      emailOnDelivery: true,
+      emailOnDelivery: true, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, auth);
     expect(result.current).toMatchObject({ emailOnDelivery: true, emailAvailable: true });
 
@@ -143,7 +143,7 @@ describe('the account’s shared notification preferences', () => {
     vi.mocked(saveNotificationPreferences).mockResolvedValueOnce({ ...SAVED, enabledStages: ['delivered'], emailOnDelivery: true });
     await saveNotificationStages(['delivered'], auth);
     const [sent] = vi.mocked(saveNotificationPreferences).mock.calls[0];
-    expect(sent).toEqual({ enabledStages: ['delivered'] });
+    expect(sent).toEqual({ enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
     expect(sent).not.toHaveProperty('emailOnDelivery');
     expect(sent).not.toHaveProperty('emailAvailable');
     expect(renderHook(() => useNotificationPreferences(auth)).result.current).toMatchObject({ enabledStages: ['delivered'], emailOnDelivery: true });
@@ -153,9 +153,9 @@ describe('the account’s shared notification preferences', () => {
     const auth = session();
     await act(async () => { await saveMarkNewUpdates(false, auth); });
     expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
-    // The events go as stored, and the email choice is left out, so the server keeps it.
+    // The mark goes alone, with the browser's time zone: the server keeps everything else as it has it.
     expect(saveNotificationPreferences).toHaveBeenCalledWith({
-      markNewUpdates: false,
+      markNewUpdates: false, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, auth);
     expect(renderHook(() => useNotificationPreferences(auth)).result.current?.markNewUpdates).toBe(false);
     await act(async () => { await saveMarkNewUpdates(true, auth); });
@@ -167,16 +167,16 @@ describe('the account’s shared notification preferences', () => {
     const auth = session();
     await act(async () => { await expect(saveShownUnits({ clock: '12', distance: 'mi' }, auth)).resolves.toBe(true); });
     expect(getNotificationPreferences).toHaveBeenCalledTimes(1);
-    // The events go as stored; the email choice and the mark are left out, so the server keeps them.
+    // What differs goes, with the browser's time zone: the server keeps everything else as it has it.
     expect(saveNotificationPreferences).toHaveBeenCalledWith({
-      clock: '12', distance: 'mi',
+      clock: '12', distance: 'mi', timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, auth);
     expect(renderHook(() => useNotificationPreferences(auth)).result.current).toMatchObject({ clock: '12', distance: 'mi' });
     // What the account has already is not sent again.
     await expect(saveShownUnits({ clock: '12', distance: 'mi' }, auth)).resolves.toBe(false);
     expect(saveNotificationPreferences).toHaveBeenCalledTimes(1);
     await expect(saveShownUnits({ clock: '24', distance: 'mi' }, auth)).resolves.toBe(true);
-    expect(saveNotificationPreferences).toHaveBeenLastCalledWith({ clock: '24' }, auth);
+    expect(saveNotificationPreferences).toHaveBeenLastCalledWith({ clock: '24', timezone: Intl.DateTimeFormat().resolvedOptions().timeZone }, auth);
     // Changed since on another device: the next read brings it, and the app here sends its own again.
     vi.mocked(getNotificationPreferences).mockResolvedValue({ ...SAVED, clock: '12', distance: 'km' });
     await loadNotificationPreferences(auth);

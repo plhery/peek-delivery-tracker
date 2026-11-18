@@ -82,7 +82,7 @@ describe('AccountMenu', () => {
     await user.click(mark);
     const saved = () => fetch.mock.calls.filter(([url, init]) => url === '/api/push/preferences' && init?.method === 'PATCH');
     await vi.waitFor(() => expect(saved()).toHaveLength(1));
-    expect(JSON.parse(String(saved()[0][1]!.body))).toEqual({ markNewUpdates: false });
+    expect(JSON.parse(String(saved()[0][1]!.body))).toEqual({ markNewUpdates: false, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone });
     expect(JSON.parse(String(saved()[0][1]!.body))).not.toHaveProperty('emailOnDelivery');
     await vi.waitFor(() => expect(mark).not.toBeChecked());
     await user.click(mark);

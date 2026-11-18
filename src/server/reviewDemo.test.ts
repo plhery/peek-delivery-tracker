@@ -19,10 +19,9 @@ const reader = '5d000000-0000-4000-a000-0000000000b2';
 const HOUR = 3_600_000;
 const DAY = 24 * HOUR;
 
-/** The day a time falls on, on the server's clock, as the assistants' lists read it. */
+/** The day a time falls on in Zürich, where the scenarios happen and an account without a timezone reads its days. */
 function dayOf(time: number): string {
-  const date = new Date(time);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit' }).format(time);
 }
 
 let rows = 0;
@@ -119,7 +118,8 @@ describe('review demo parcels', () => {
 
   it('keep "arriving today" true at every hour of the day, and the scans the same within an hour', () => {
     const stored = row('TESTOUT01', 'swiss-post', 'IKEA');
-    const midnight = new Date(2026, 10, 17).getTime();
+    // Midnight in Zürich, whatever the clock of the machine running the test.
+    const midnight = Date.parse('2026-11-16T23:00:00.000Z');
     for (const minutes of [5, 59, 61, 12 * 60 + 30, 23 * 60 + 55]) {
       const now = midnight + minutes * 60_000;
       const parcel = served(stored, reviewer, now);

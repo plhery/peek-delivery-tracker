@@ -192,10 +192,14 @@ export function reviewDemoNumbersInText(userId: string, text: string): NumberInT
   }));
 }
 
-/** The day a time falls on, on the server's clock, as the assistants' lists read "today". */
+/**
+ * The day a time falls on in Zürich, where the scenarios happen and where an account that chose no timezone reads
+ * "today": on the server's clock, the parcel arriving today was yesterday's there for an hour each night.
+ */
+const DEMO_DAY = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Zurich', year: 'numeric', month: '2-digit', day: '2-digit' });
+
 function dayOf(time: number): string {
-  const date = new Date(time);
-  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+  return DEMO_DAY.format(time);
 }
 
 /** A stable id shaped as the database's, so the apps read the scan as any other. */

@@ -94,6 +94,16 @@ it('sends without a proof when the server verifies no one, asking it once', asyn
   expect(window.turnstile?.render).not.toHaveBeenCalled();
 });
 
+it('refreshes a cached null site key when the lookup requires verification', async () => {
+  vi.mocked(fetch).mockResolvedValueOnce(Response.json({ siteKey: null }));
+  await expect(getLookupProof()).resolves.toBeNull();
+  const request = vi.fn().mockResolvedValueOnce(required()).mockResolvedValueOnce(Response.json({ trackingNumber: 'TEST123456', carrier: 'unknown' }));
+  const result = createApiLinks(request).detectCarrierPublic('TEST123456');
+  await complete();
+  await result;
+  expect(request).toHaveBeenCalledTimes(2);
+});
+
 it('sends without a proof after verification fails, and does not verify a refusal again', async () => {
   const request = vi.fn().mockImplementation(async () => required());
   const answer = createApiLinks(request).detectCarrierPublic('TEST123456');

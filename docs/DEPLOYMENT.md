@@ -214,9 +214,9 @@ from GitHub's compare of the commit with `main`, not from when CI's runs started
 sometimes logs a push minutes late, so a commit's run can start after its child's. GitHub's
 list of CI's runs sometimes leaves a run out, so the commit's own runs are read from the
 repository's list too. To deploy the newest tested commit at once, run
-`gh workflow run deploy.yml`. Run it too after changing the app's environment in Coolify, instead
-of Coolify's Redeploy: it redeploys the live commit with the new values, and the smoke test and
-the Sentry release follow.
+`gh workflow run deploy.yml`. Both the initial gate and the serialized Deploy job read the
+serving SHA from `/health/live` and require the candidate to be a strict descendant in Git.
+An unchanged build stands down. Missing build or ancestry evidence stops the deployment.
 
 The deploy asks the database, with the publishable key, which of the commit's migrations
 it lacks, and stops if any are missing: apply them, then re-run the Deploy job. It then

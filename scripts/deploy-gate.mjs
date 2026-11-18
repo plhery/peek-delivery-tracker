@@ -155,6 +155,8 @@ async function main() {
   let decision;
   for (;;) {
     try {
+      const deployed = process.env.DEPLOYED_SHA;
+      if (!SHA.test(deployed ?? '')) throw new Error('No deployed SHA available');
       const runs = ciRuns(commit);
       const after = new Map();
       const commitsAfterOnce = sha => after.get(sha) ?? after.set(sha, commitsAfter(sha)).get(sha);
@@ -162,16 +164,19 @@ async function main() {
       if (!commit) {
         decision = { action: 'refuse', reason: 'CI on main has passed no recent commit.' };
       } else {
+        const comparison = github(`repos/${repository}/compare/${deployed}...${commit}?per_page=1`,
+          '{status: .status}');
+        if (!['ahead', 'behind', 'identical', 'diverged'].includes(comparison.status)) throw new Error('Unknown ancestry');
+        if (comparison.status !== 'ahead') {
+          decision = { action: 'stand-down', reason: `${commit} is not forward of deployed commit ${deployed}.` };
+          break;
+        }
         if (wait) since ??= await waitingSince(github(`repos/${repository}/actions/workflows/deploy.yml/runs?per_page=30`)
           .workflow_runs, process.env.GITHUB_RUN_ID, async run => deployedBy(jobs(run))) ?? started;
         decision = await decide({ commit, runs, handoff, after: commitsAfterOnce(commit), now: Date.now(), since, wait });
       }
     } catch (error) {
-      // GitHub's API failing must not hold a tested commit back for good. Deploying at once
-      // without it could put an older commit back, so that waits for the job to time out.
-      decision = wait && Date.now() - started >= MAX_WAIT_MS
-        ? { action: 'deploy', reason: 'GitHub could not say whether a newer commit is being tested.' }
-        : { action: 'wait', reason: `GitHub's API failed: ${error instanceof Error ? error.message : error}` };
+      decision = { action: 'refuse', reason: `Deployment evidence unavailable: ${error.message}` };
     }
     console.log(decision.reason);
     if (decision.action !== 'wait') break;

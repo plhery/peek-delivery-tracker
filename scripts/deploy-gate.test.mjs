@@ -184,11 +184,13 @@ process.stdout.write(JSON.stringify(fixture[key]));
   // GitHub's compare, as the gate's jq filter leaves it: the commits on main after one.
   const compare = (after) => Object.fromEntries(Object.entries(after).map(([commit, shas]) =>
     [`repos/owner/app/compare/${commit}...main?per_page=100&page=1`, { total: shas.size, commits: [...shas] }]));
-  const gate = (args, { runs, jobs, commitRuns = [], after = Object.fromEntries(DIGITS.map(sha).map(commit => [commit, laterThan(commit)])), extra = {} }) => {
+  const gate = (args, { runs, jobs, commitRuns = [], live = sha('0'), after = Object.fromEntries(DIGITS.map(sha).map(commit => [commit, laterThan(commit)])), extra = {} }) => {
     const output = path.join(directory, `output-${Math.random()}`);
     writeFileSync(output, '');
     const fixture = {
       ...compare(after),
+      ...Object.fromEntries([...runs, ...commitRuns].map(run =>
+        [`repos/owner/app/compare/${live}...${run.head_sha}?`, { status: live === sha('0') ? 'ahead' : 'behind' }])),
       ...extra,
       'repos/owner/app/actions/workflows/ci.yml/runs': { workflow_runs: runs },
       'repos/owner/app/actions/runs?head_sha=': { workflow_runs: commitRuns },
@@ -198,7 +200,7 @@ process.stdout.write(JSON.stringify(fixture[key]));
     const result = spawnSync(process.execPath, [fileURLToPath(new URL('./deploy-gate.mjs', import.meta.url)), ...args], {
       encoding: 'utf8',
       env: { PATH: `${directory}${path.delimiter}${process.env.PATH}`, GH_FIXTURE: JSON.stringify(fixture),
-        GITHUB_REPOSITORY: 'owner/app', GITHUB_RUN_ID: '50', GITHUB_OUTPUT: output },
+        DEPLOYED_SHA: live, GITHUB_REPOSITORY: 'owner/app', GITHUB_RUN_ID: '50', GITHUB_OUTPUT: output },
     });
     return { status: result.status, output: readFileSync(output, 'utf8'), log: result.stdout + result.stderr };
   };
@@ -252,6 +254,24 @@ process.stdout.write(JSON.stringify(fixture[key]));
     assert.match(parent.log, new RegExp(`${CHILD} is newer and passed CI`));
     assert.equal(gate([`--commit=${PARENT}`, '--at-once'], options).output, `deploy=false\ncommit=${PARENT}\n`);
     assert.equal(gate(['--commit='], options).output, `deploy=true\ncommit=${CHILD}\n`);
+  });
+
+  it('stands down an old rerun with the deployed descendant outside the 50 listed pushes', () => {
+    const runs = Array.from({ length: 50 }, (_, i) => ({ ...ciRun('3', 7), id: 100 + i,
+      head_sha: (100 + i).toString(16).padStart(40, '0') }));
+    const own = { ...ciRun('1', 0), path: '.github/workflows/ci.yml', run_attempt: 2 };
+    for (const args of [[], ['--at-once']]) {
+      const result = gate([`--commit=${own.head_sha}`, ...args], { runs, commitRuns: [own], live: sha('2'),
+        after: { [own.head_sha]: new Set([sha('2'), ...runs.map(run => run.head_sha)]) },
+        jobs: { 1: passed, ...Object.fromEntries(runs.map(run => [run.id, failed])) } });
+      assert.equal(result.output, `deploy=false\ncommit=${own.head_sha}\n`, result.log);
+    }
+  });
+
+  it('refuses a deployment without evidence of the serving build', () => {
+    const result = gate([`--commit=${sha('1')}`, '--at-once'], { live: '', runs: [ciRun('1', 0)], jobs: { 1: passed } });
+    assert.equal(result.status, 1);
+    assert.equal(result.output, '');
   });
 
   it('pages through a long comparison', () => {

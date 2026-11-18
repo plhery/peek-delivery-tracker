@@ -63,7 +63,7 @@ Speedaf nie publikuje jednolitego terminu odbioru paczek ze swoich punktów na c
 
 ## Cło i podatki w Speedaf: co oznacza pending Tax
 
-Jeżeli przed wydaniem przesyłki trzeba uregulować należności importowe, historia śledzenia zatrzymuje się na statusie `pending Tax`. Dla paczek adresowanych do **Republiki Południowej Afryki** strona śledzenia Speedaf wyświetla obok numeru listu przewozowego przycisk „I want to pay taxes”, a po zaksięgowaniu wpłaty pokazuje „Taxes paid”. Dla pozostałych krajów wyszukiwarka Speedaf nie wyświetla takiego linku do płatności.
+Jeżeli przed wydaniem przesyłki trzeba uregulować należności importowe, historia śledzenia zatrzymuje się na statusie `pending Tax`. Dla paczek adresowanych do **Republiki Południowej Afryki** strona śledzenia Speedaf wyświetla obok numeru listu przewozowego przycisk „I want to pay taxes”, a po zaksięgowaniu wpłaty pokazuje „Taxes paid”.
 
 Gdy dostaniesz SMS lub e-mail z prośbą o dopłatę, najpierw sprawdź status paczki bezpośrednio na speedaf.com: więcej wskazówek znajdziesz w poradnikach [fałszywe SMS-y o dopłacie do paczki](guide:delivery-scam-texts) oraz [paczka zatrzymana w urzędzie celnym](guide:customs).
 

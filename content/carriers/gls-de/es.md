@@ -17,7 +17,7 @@ Estos son los formatos que reconoce Peek, con ejemplos inventados:
 | Número (inventado) | Qué es |
 | --- | --- |
 | `48291057364` | 11 cifras. Comparte formato con GLS Suiza, GLS Francia, GLS Austria, GLS Polonia, PostLogistics y otros. |
-| `482910573604` | 12 cifras, donde la última es un dígito de control. Comparte formato con [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), Colis Privé, DPD Francia, [MRW](carrier:mrw) y otros. |
+| `482910573604` | 12 cifras, donde la última es un dígito de control. Comparte formato con [BRT](carrier:brt), [Mondial Relay](carrier:mondial-relay), Colis Privé, [MRW](carrier:mrw) y otros. |
 | `AB482910` | 8 letras y cifras: un Track-ID también puede adoptar esta forma. Común a GLS Suiza, GLS Francia, GLS Países Bajos y Loggi. |
 | `KGLSDE` | Track-ID de seis letras del aviso de paso en Alemania (formato compartido con GLS Suiza). Si no aparece el envío, prueba con el número completo del paquete. |
 
@@ -77,7 +77,7 @@ Para pedidos comprados en una tienda online, tu primer contacto es el vendedor. 
 
 [Peek](/) consulta a los transportistas compatibles con los formatos anteriores. El servicio del grupo GLS responde tanto para envíos alemanes como suizos, y desde España Peek selecciona GLS Germany («GLS Germany tiene este paquete.»), o GLS Francia cuando el envío consta sin código postal en la red francesa. Pegar un enlace de `gls-pakete.de` o un enlace de `gls-group` con `/DE/`, `/EU/` o `/GROUP/` selecciona directamente GLS Germany (mientras que un enlace de `gls-group` con `/ES/` o `/PT/` selecciona [GLS Spain](carrier:gls-es)).
 
-Como GLS exige el código postal del destinatario para devolver el historial detallado, el campo «Código postal de entrega» es obligatorio: sin él Peek solo comprueba si GLS conoce el número, y si GLS rechaza el código introducido («GLS Germany no ha encontrado este paquete con el código postal …»), puedes corregirlo desde «Cambiar código postal». Funciona el formato postal de cualquier país; se envía a GLS y, cuando hace falta, a servicios de seguimiento.
+Como GLS exige el código postal del destinatario para devolver el historial detallado, el campo «Código postal de entrega» es obligatorio, y si GLS rechaza el código introducido («GLS Germany no ha encontrado este paquete con el código postal …»), puedes corregirlo desde «Cambiar código postal». Funciona el formato postal de cualquier país; se envía a GLS y, cuando hace falta, a servicios de seguimiento.
 
 Verás entonces el estado actual, las lecturas en inglés tal como las escribe GLS, la localidad y el país de cada escaneo sobre un mapa, el día previsto, el peso, la hora de entrega y, cuando espera en un ParcelShop, su nombre y dirección bajo «Listo para recoger». Tu nombre, dirección, datos de contacto, firma y referencia del remitente se descartan. Las horas se leen en horario alemán y se muestran en la zona horaria de tu dispositivo; en `peektracker.com` y en la aplicación para iPhone lo indica una línea bajo el historial («Horas en tu zona horaria: …»). Peek consulta GLS aproximadamente una vez por hora, incluido el día de reparto (cada 4 horas tras un fallo), y actualizar manualmente no adelanta esa espera. Solo los envíos que GLS transfiere a [Swiss Post](carrier:swiss-post) pasan automáticamente a un segundo transportista; cuando otro transportista asume la entrega, Peek sigue el ritmo del que reparte el paquete. Avisos a elegir: «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 

@@ -526,7 +526,9 @@ class DeviceParcels(
      * The tokens and languages rounds of notification requests are under way for, kept in NFC so that canonically
      * equivalent spellings are one round, as Swift's `Set<String>` compares them.
      */
-    private val alertRounds = mutableSetOf<String>()
+    private var desiredAlert: String? = null
+    private var alertGeneration = 0L
+    private val alertRounds = mutableSetOf<Long>()
 
     /**
      * The token and language each parcel's notifications were asked for since launch. Each launch asks again, in case
@@ -1017,7 +1019,12 @@ class DeviceParcels(
     suspend fun registerAlerts(token: String, locale: NativePushLocale) {
         val asked = "$token ${locale.rawValue}"
         val client = client ?: return
-        val round = asked.nfc()
+        if (desiredAlert != asked) {
+            desiredAlert = asked
+            alertGeneration++
+            alertRetry = null
+        }
+        val round = alertGeneration
         if (!alertRounds.add(round)) return
         val address = PushAddress.of(token)
         // How long the service asked to be left alone, in seconds, when the round is cut short.
@@ -1025,6 +1032,7 @@ class DeviceParcels(
         try {
             val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }.take(alertsPerRound)
             for (entry in due) {
+                if (round != alertGeneration) return
                 // Forgotten, or followed through another link, since the round began.
                 if (entries.none { it.linkId.equalsCanonically(entry.linkId) }) continue
                 val preset = entry.alertPreset ?: alertPreset(entry.parcel)
@@ -1042,6 +1050,7 @@ class DeviceParcels(
                     pause = (error as? DeliveryApiError.RateLimited)?.retryAfter ?: 0.0
                     break
                 }
+                if (round != alertGeneration) return
                 if (answer == DeviceAlertAnswer.Unavailable) {
                     pause = 0.0
                     break
@@ -1064,7 +1073,7 @@ class DeviceParcels(
                     attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }
-            holdAlerts(pause, token, locale)
+            if (round == alertGeneration) holdAlerts(pause, token, locale)
         } finally {
             alertRounds.remove(round)
         }

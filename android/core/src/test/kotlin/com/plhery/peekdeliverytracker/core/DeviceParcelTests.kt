@@ -1729,6 +1729,33 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun anEarlierAlertTimeoutDoesNotRetryTheOldToken() = runTest {
+        val calls = Calls()
+        val gate = AlertGate()
+        val storage = Memory()
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()))
+        var attempts = 0
+        val held = client(calls).replacing(setAlert = { _, _, request ->
+            if (request.token == "old") {
+                attempts++
+                if (attempts == 1) gate.pass("old")
+                throw java.io.IOException()
+            }
+            DeviceAlertAnswer.On
+        })
+        val device = device(held, storage, this, now = { Instant.EPOCH.plusMillis(testScheduler.currentTime) })
+        val first = launch { device.registerAlerts("old", NativePushLocale.En) }
+        gate.arrived("old")
+        device.registerAlerts("new", NativePushLocale.En)
+        gate.release("old")
+        first.join()
+        advanceTimeBy(61_000)
+        device.retryAlerts()
+        assertEquals(1, attempts)
+        assertEquals("new", storage.parcels.single().alertToken)
+    }
+
+    @Test
     fun aHandedOverKeyMakesTheParcelThisIPhonesOwn() = runTest {
         val id = UUID.randomUUID()
         val storage = Memory()

@@ -337,7 +337,9 @@ final class DeviceParcels {
     private var forgetting: [String: String]
     private var savedForgetting: [String: String]
     /// The tokens and languages rounds of notification requests are under way for.
-    private var alertRounds: Set<String> = []
+    private var desiredAlert: String?
+    private var alertGeneration = 0
+    private var alertRounds: Set<Int> = []
     /// The token and language each parcel's notifications were asked for since launch. Each
     /// launch asks again, in case the service lost them.
     private var alertsAsked: [String: String] = [:]
@@ -769,14 +771,21 @@ final class DeviceParcels {
     /// first sign that the service wants a pause, sends no notifications or can't be reached; `retryAlerts` tries it
     /// again later. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
     func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current) async {
-        let asked = "\(token) \(locale.rawValue)"
-        guard let client, alertRounds.insert(asked).inserted else { return }
-        defer { alertRounds.remove(asked) }
+        let asked = "\(token) \(locale.rawValue) \(environment.rawValue)"
+        if desiredAlert != asked {
+            desiredAlert = asked
+            alertGeneration += 1
+            alertRetry = nil
+        }
+        let round = alertGeneration
+        guard let client, alertRounds.insert(round).inserted else { return }
+        defer { alertRounds.remove(round) }
         // How long the service asked to be left alone, when the round is cut short.
         var pause: TimeInterval?
-        defer { holdAlerts(pause, token: token, locale: locale, environment: environment) }
+        defer { if round == alertGeneration { holdAlerts(pause, token: token, locale: locale, environment: environment) } }
         let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) }.prefix(Self.alertsPerRound)
         for entry in due {
+            guard round == alertGeneration else { return }
             // Forgotten, or followed through another link, since the round began.
             guard entries.contains(where: { $0.linkID == entry.linkID }) else { continue }
             let preset = entry.alertPreset ?? Self.alertPreset(for: entry.parcel)
@@ -788,6 +797,7 @@ final class DeviceParcels {
                 if case DeliveryAPIError.rateLimited(let after) = error { pause = after } else { pause = 0 }
                 break
             }
+            guard round == alertGeneration else { return }
             if answer == .unavailable {
                 pause = 0
                 break

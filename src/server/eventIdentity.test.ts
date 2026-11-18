@@ -2447,6 +2447,10 @@ describe('an earlier carrier relaying the delivery carrier\'s scans', () => {
     const minute = [at('gofo:sort', '2026-01-12T08:20:00Z', 'Processed at GOFO Sort Center', 'Miami, FL', 'accepted')];
     expect([...relayedScans([at('nova-poshta:sort', '2026-01-12T08:20:00Z', 'Sorted', 'Miami Gardens, FL')], minute)])
       .toEqual(['nova-poshta:sort']);
+    // So does one that names no place, as relayCopies.ts pairs them (AliExpress's hand-over beside Spring GDS's
+    // acceptance).
+    expect([...relayedScans([at('nova-poshta:minute', '2026-01-12T08:20:00Z', 'Sorted', '')], minute)])
+      .toEqual(['nova-poshta:minute']);
     // One of the two keeps minutes only, the other seconds: in that minute, in any stage, from places whose names do
     // not conflict, as relayCopies.ts pairs them. A postcode or an office number names no other place.
     const minutes = [
@@ -2457,16 +2461,13 @@ describe('an earlier carrier relaying the delivery carrier\'s scans', () => {
       .toEqual(['nova-poshta:to-the-minute', 'nova-poshta:to-the-second']);
   });
 
-  it('leaves its own scans: another second, another place, another stage on a minute\'s first second, or an observation', () => {
+  it('leaves its own scans: another second, another place, or an observation', () => {
     const own = [
       at('nova-poshta:handover', '2026-01-11T21:01:29Z', 'Transferred to delivery partner GoFo Express', 'Jamaica, NY'),
       at('nova-poshta:hub', '2026-01-11T21:11:26Z', 'Arrived at the depot', 'Springfield Gardens, NY'),
       at('nova-poshta:lviv', '2026-01-11T21:11:25Z', 'Left the sorting center', 'Lviv'),
       at('nova-poshta:lviv-customs', '2026-01-11T21:11:25Z', 'Customs clearance in progress', 'Lviv', 'customs'),
       { ...at('nova-poshta:seen', '2026-01-11T21:11:25Z', 'In transit', 'Springfield Gardens, NY'), observed_without_provider_timestamp: true },
-      // A carrier keeping minutes gives every scan a minute's first second: in another stage, with no place in
-      // common, the two are scans of their own.
-      at('nova-poshta:minute', '2026-01-12T08:20:00Z', 'Sorted', ''),
       // Nor is a minute's first second and a scan with seconds one when their places' names conflict, or in the
       // next minute.
       at('nova-poshta:lviv-minute', '2026-01-14T09:31:00Z', 'Left the sorting center', 'Lviv'),

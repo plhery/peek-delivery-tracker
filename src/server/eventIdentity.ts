@@ -1976,7 +1976,8 @@ export function sameMinuteScan(at: number, words: readonly string[], other: numb
  * may differ. The stages may differ too, as relayCopies.ts pairs the two (JS
  * Express calls La Poste's return notice an exception), except on a minute's
  * first second, which a carrier keeping minutes gives every scan: there the
- * stages agree or the places share a word. A relay also falls in the minute
+ * stages agree, the places share a word or one of the two names no place
+ * (AliExpress's hand-over beside Spring GDS's acceptance). A relay also falls in the minute
  * of a delivery scan, in any stage, when one of the two keeps minutes only and
  * the other seconds (`sameMinuteScan`, Hrvatska pošta's minute of Royal Mail's
  * customs scan). Left out of `sharedScans`, a relay stays a row of the earlier
@@ -1991,8 +1992,9 @@ export function relayedScans(earlier: readonly JsonObject[], delivery: readonly 
   const relays = (row: JsonObject, scan: JsonObject) => {
     const [words, scanWords] = [placeWords(row), placeWords(scan)];
     if (sameMinuteScan(instantOf(row), words, instantOf(scan), scanWords)) return true;
+    const unplaced = (event: JsonObject) => String(event.location ?? '').trim() === '';
     return second(scan) === second(row) && !placesConflict(scanWords, words) && (stagesAgree(stageOf(scan), stageOf(row))
-      || second(row) % 60 !== 0 || words.some((word) => scanWords.includes(word)));
+      || second(row) % 60 !== 0 || words.some((word) => scanWords.includes(word)) || unplaced(row) || unplaced(scan));
   };
   return new Set(earlier.filter((row) => !observedOnly(row) && Number.isFinite(instantOf(row))
     && scans.some((scan) => relays(row, scan))).map(identity));

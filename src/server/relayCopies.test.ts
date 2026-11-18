@@ -53,9 +53,10 @@ describe('relayCopies', () => {
       placed('office', 'four-px', 'in_transit', '2026-10-22T09:56:00Z', 'Covington, KY, US'),
       placed('office-scan', 'dpd', 'ready_for_pickup', '2026-10-22T09:56:00Z', 'COVINGTON, KY 41011'),
     ]))).toEqual(new Map([['handed', 'accepted'], ['received', 'posted'], ['office', 'office-scan']]));
-    // Seconds apart, at places that share no word, or on a minute's first second with no word in common (a carrier
-    // keeping minutes gives every scan that second), the two are scans of their own: an arrival measured a minute
-    // before the next post registers the data, an order created three seconds after a sort elsewhere.
+    // Seconds apart, at places that share no word, or on a minute's first second beside a universal provider's row
+    // with no word in common (a carrier keeping minutes gives every scan that second), the two are scans of their own:
+    // an arrival measured a minute before the next post registers the data, an order created three seconds after a
+    // sort elsewhere.
     expect(relayCopies(parcel([
       placed('measured', 'four-px', 'in_transit', '2026-10-19T12:20:14Z', 'Nancheng'),
       placed('registered', 'dpd', 'registered', '2026-10-19T12:19:15Z'),
@@ -64,7 +65,7 @@ describe('relayCopies', () => {
       placed('depot', 'four-px', 'in_transit', '2026-10-17T02:59:28Z', 'Krostitz'),
       placed('elsewhere', 'dpd', 'exception', '2026-10-17T02:59:28Z', 'Leipzig'),
       placed('minute', 'four-px', 'in_transit', '2026-10-18T08:20:00Z'),
-      placed('minute-scan', 'dpd', 'accepted', '2026-10-18T08:20:00Z', 'Lublin'),
+      placed('minute-scan', 'unknown', 'accepted', '2026-10-18T08:20:00Z', 'Lublin'),
     ]))).toEqual(new Map());
   });
 
@@ -79,11 +80,56 @@ describe('relayCopies', () => {
       told('posted', 'la-poste', 'accepted', 'Parcel handed over.'),
       told('announced', 'chronopost', 'registered', 'parcel handed  over', 'Example Town'),
     ]))).toEqual(new Map([['posted', 'announced']]));
-    // In other words, they stay two.
+    // In other words, a universal provider's row stays its own.
     expect(relayCopies(parcel([
       told('posted', 'la-poste', 'accepted', 'Parcel handed over'),
-      told('announced', 'chronopost', 'registered', 'Shipment announced', 'Example Town'),
+      told('announced', 'unknown', 'registered', 'Shipment announced', 'Example Town'),
     ]))).toEqual(new Map());
+  });
+
+  it('pairs two carriers\' rows on a minute\'s first second in any stage when one names no place', () => {
+    const placed = (id: string, source: string, stage: string, location?: string) =>
+      ({ ...scan(id, source, stage, '2026-11-16T17:05:00Z'), location });
+    const parcel = (tracking_events: object[]) => ({
+      carrier: 'aliexpress', carrier_data: { original_carrier: 'aliexpress', active_tracking_carrier: 'spring-gds' }, tracking_events,
+    });
+    // AliExpress tells its hand-over with no place, in transit, at the minute of Spring GDS's acceptance; the other
+    // way round, a notice of the new carrier's with no place beside the earlier carrier's scan.
+    expect(relayCopies(parcel([
+      placed('handed', 'aliexpress', 'in_transit'),
+      placed('accepted', 'spring-gds', 'accepted', 'Example Town'),
+    ]))).toEqual(new Map([['handed', 'accepted']]));
+    expect(relayCopies(parcel([
+      placed('sorted', 'aliexpress', 'in_transit', 'Example Town'),
+      placed('notice', 'spring-gds', 'registered'),
+    ]))).toEqual(new Map([['sorted', 'notice']]));
+    // A universal provider's row stays its own, and so do places whose names conflict.
+    expect(relayCopies(parcel([
+      placed('handed', 'aliexpress', 'in_transit'),
+      placed('provider', 'unknown', 'accepted', 'Example Town'),
+    ]))).toEqual(new Map());
+    expect(relayCopies(parcel([
+      placed('here', 'aliexpress', 'in_transit', 'Example Town'),
+      placed('there', 'spring-gds', 'accepted', 'Other City'),
+    ]))).toEqual(new Map());
+  });
+
+  it('pairs a third carrier\'s row with the new carrier\'s at the same second and stage, beside the earlier carrier\'s copy', () => {
+    const placed = (id: string, source: string, stage: string, at: string, location?: string) => ({ ...scan(id, source, stage, at), location });
+    // EMS carries on a Parcelforce parcel, and Australia Post tells EMS's scans too.
+    const parcel = (tracking_events: object[]) => ({
+      carrier: 'parcelforce', carrier_data: { original_carrier: 'parcelforce', active_tracking_carrier: 'ems' }, tracking_events,
+    });
+    expect(relayCopies(parcel([
+      placed('accepted', 'ems', 'accepted', '2026-11-13T13:13:00Z', 'Example Town'),
+      placed('accepted-post', 'australia-post', 'accepted', '2026-11-13T13:13:00Z', 'EXAMPLE TOWN'),
+      placed('accepted-copy', 'parcelforce', 'accepted', '2026-11-13T13:13:33Z', 'Example Town'),
+      // Another second, another stage or a place that conflicts stays its own.
+      placed('departed', 'ems', 'in_transit', '2026-11-17T02:09:00Z', 'Example Town'),
+      placed('departed-later', 'australia-post', 'in_transit', '2026-11-17T02:09:01Z', 'Example Town'),
+      placed('departed-other', 'australia-post', 'exception', '2026-11-17T02:09:00Z', 'Example Town'),
+      placed('departed-elsewhere', 'australia-post', 'in_transit', '2026-11-17T02:09:00Z', 'Other City'),
+    ]))).toEqual(new Map([['accepted-copy', 'accepted'], ['accepted-post', 'accepted']]));
   });
 
   it('pairs a row of a carrier keeping minutes with the other carrier\'s row of that minute, in any stage', () => {
@@ -101,11 +147,11 @@ describe('relayCopies', () => {
       placed('missed', 'poczta-polska', 'failed_attempt', '2026-10-25T11:28:00Z'),
       placed('not-possible', 'dhl', 'in_transit', '2026-10-25T11:28:40Z', 'Germany'),
     ]))).toEqual(new Map([['posted', 'origin'], ['posted-again', 'announced'], ['missed', 'not-possible']]));
-    // Two rows on a minute's first second (two carriers keeping minutes), the next minute's row, and places whose names
+    // Two rows on a minute's first second, one a universal provider's, the next minute's row, and places whose names
     // conflict stay two.
     expect(relayCopies(parcel([
       placed('minutes', 'poczta-polska', 'accepted', '2026-10-23T08:20:00Z'),
-      placed('minutes-too', 'dhl', 'in_transit', '2026-10-23T08:20:00Z'),
+      placed('minutes-too', 'unknown', 'in_transit', '2026-10-23T08:20:00Z'),
       placed('before', 'poczta-polska', 'accepted', '2026-10-23T09:49:59Z'),
       placed('next-minute', 'dhl', 'registered', '2026-10-23T09:50:00Z'),
       placed('here', 'poczta-polska', 'accepted', '2026-10-23T10:20:59Z', 'Post office Lodz'),

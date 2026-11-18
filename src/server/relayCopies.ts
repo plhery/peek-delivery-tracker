@@ -19,7 +19,10 @@
  * conflict, is one scan. On a minute's first second, which a carrier keeping
  * minutes gives every scan, the places must also share a word, or the two rows
  * tell the same words (La Poste's posting and Chronopost's, which alone names
- * the place). A carrier that
+ * the place), or one of them names no place and neither is a universal
+ * provider's (AliExpress's hand-over to Spring GDS beside Spring GDS's
+ * acceptance, DPD's notice of the sender's hand-over beside YunExpress's
+ * scan). A carrier that
  * keeps minutes tells the other's scan on that minute's first second: such a
  * row and the other carrier's row within that minute, with seconds, are one
  * scan in any stage too (Poczta Polska's posting and DHL's or bpost's first
@@ -50,7 +53,10 @@
  * the same scans (BRT Chronopost's, SwiftX DHLink's). Such a row at the same
  * second and in the same stage as a row of the carrier tracking the parcel now,
  * from places that do not conflict once their words are read ("UTRECHT NL" and
- * "Utrecht, UT, NL"), goes under that row.
+ * "Utrecht, UT, NL"), goes under that row. So does a third carrier's row in a
+ * handed-over parcel that no relay pair holds (Australia Post's rows of a
+ * Parcelforce parcel EMS carries on), even under a scan that has the earlier
+ * carrier's copy under it already.
  */
 import { CARRIER_DEFINITIONS, type CarrierId } from 'universal-parcel-scraper';
 import { trackingPlace } from 'universal-parcel-scraper/app';
@@ -141,15 +147,19 @@ function told(text: string): string {
   return text.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim();
 }
 
+/** What the pairing reads of a row. */
+type Scan = { id: string; stage: unknown; source: string; at: number; text: string; country: string | null; words: string[]; placed: boolean };
+
 /**
  * Whether two scans at one second are one: places that do not conflict and, when the second is a minute's first,
- * sharing a word or telling the same words.
+ * sharing a word, telling the same words, or one naming no place when neither is a universal provider's.
  */
-function sameSecond(copy: { at: number; words: string[]; text: string }, scan: { at: number; words: string[]; text: string }): boolean {
+function sameSecond(copy: Scan, scan: Scan): boolean {
   const second = (at: number) => Math.floor(at / SECOND_MS);
   if (second(copy.at) !== second(scan.at) || placesConflict(copy.words, scan.words)) return false;
   return second(copy.at) % 60 !== 0 || copy.words.some((word) => scan.words.includes(word))
-    || (told(copy.text) !== '' && told(copy.text) === told(scan.text));
+    || (told(copy.text) !== '' && told(copy.text) === told(scan.text))
+    || ((!copy.placed || !scan.placed) && ![copy.source, scan.source].includes(UNIVERSAL_SOURCE));
 }
 
 /**
@@ -163,14 +173,16 @@ function sameSecond(copy: { at: number; words: string[]; text: string }, scan: {
  * stage, when it follows every such scan by up to three hours but not by whole hours. Last, a row of the earlier
  * carrier that names no place and is dated to the second repeats the new carrier's row one to three whole hours away,
  * to the second, in any stage.
- * A scan is in one pair at most, so two scans of one minute that the earlier carrier tells once stay two rows.
+ * A scan is in one pair at most, so two scans of one minute that the earlier carrier tells once stay two rows. After
+ * these, a third carrier's row no pair holds repeats the new carrier's at its second and stage (`otherCarrierCopies`),
+ * which may have the earlier carrier's copy under it too.
  */
 export function relayCopies(row: JsonObject): Map<string, string> {
   const earlier = earlierCarrier(row);
   const pairs = new Map<string, string>();
   if (!Array.isArray(row.tracking_events)) return pairs;
   const scans = row.tracking_events.filter(isRecord)
-    .map((event) => ({
+    .map((event): Scan => ({
       id: String(event.id), stage: event.stage, source: source(event), at: Date.parse(String(event.occurred_at)),
       text: String(event.description ?? '').trim(), country: countryOnly(event.location), words: placeWords(event),
       placed: typeof event.location === 'string' && event.location.trim() !== '',
@@ -209,6 +221,9 @@ export function relayCopies(row: JsonObject): Map<string, string> {
       paired.add(scan.id);
     }
   }
+  // A third carrier's rows that no pair holds tell the current carrier's scans as a carrier asked beside it does.
+  const third = scans.filter((scan) => scan.source === current || (scan.source !== earlier && !paired.has(scan.id)));
+  for (const [copy, scan] of otherCarrierCopies(third, current)) pairs.set(copy, scan);
   return pairs;
 }
 
@@ -218,7 +233,7 @@ export function relayCopies(row: JsonObject): Map<string, string> {
  * at most; a universal provider's row is in none.
  */
 function otherCarrierCopies(
-  scans: readonly { id: string; stage: unknown; source: string; at: number; words: string[] }[], current: string,
+  scans: readonly Pick<Scan, 'id' | 'stage' | 'source' | 'at' | 'words'>[], current: string,
 ): Map<string, string> {
   const second = (at: number) => Math.floor(at / SECOND_MS);
   const own = scans.filter((scan) => scan.source === current);

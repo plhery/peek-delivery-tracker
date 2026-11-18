@@ -2492,6 +2492,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "straightship-sendungsverfolgung",
+      "title": "Straightship Sendungsverfolgung: STRTD-Nummern & Zustellung",
+      "name": "Straightship",
+      "color": "#6aae66"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "yto-express-sendungsverfolgung",
@@ -2570,6 +2578,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Polen Sendungsverfolgung: PL-Nummer & Zustellung",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "huahan-logistics-sendungsverfolgung",
+      "title": "HuaHan Logistics Sendungsverfolgung: HHW…YQ & Zusteller",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "xinghe-freight",
@@ -3158,6 +3174,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "suivi-colis-straightship",
+      "title": "Suivi Straightship\u00a0: numéros STRTD, statuts et livraison",
+      "name": "Straightship",
+      "color": "#6aae66"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "suivi-yto-express",
@@ -3244,6 +3268,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis HYWL (Huiyi Logistics)\u00a0: numéro TRK et statuts",
       "name": "Huiyi Logistics",
       "color": "#0b8f91"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "suivi-colis-huahan-logistics",
+      "title": "Suivi HuaHan Logistics\u00a0: numéro HHW…YQ et livraison",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "xinghe-freight",
@@ -3720,6 +3752,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "tracciamento-straightship",
+      "title": "Tracciamento Straightship: codici STRTD, stati e consegna",
+      "name": "Straightship",
+      "color": "#6aae66"
+    },
+    {
       "id": "yto",
       "catalog": "yto",
       "slug": "tracciamento-yto-express",
@@ -3806,6 +3846,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Chunghwa Post (Taiwan): codice, stati e consegna",
       "name": "Chunghwa Post",
       "color": "#e8171f"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "tracciamento-huahan-logistics",
+      "title": "Tracciamento HuaHan Logistics: codice HHW…YQ e consegna",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "xinghe-freight",
@@ -4274,6 +4322,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#dc1e32"
     },
     {
+      "id": "straightship",
+      "catalog": "straightship",
+      "slug": "seguimiento-straightship",
+      "title": "Seguimiento de Straightship: números STRTD y entregas",
+      "name": "Straightship",
+      "color": "#6aae66"
+    },
+    {
       "id": "correios-br",
       "catalog": "correios-br",
       "slug": "correios-brasil-seguimiento",
@@ -4368,6 +4424,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Sending seguimiento: número, estados y teléfono",
       "name": "Sending",
       "color": "#e52021"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "seguimiento-huahan-logistics",
+      "title": "Seguimiento de HuaHan Logistics: número HHW…YQ y entrega",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "forza-delivery",
@@ -4890,6 +4954,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio GEODIS Polónia: número PL, estados e entrega",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "seguimento-huahan-logistics",
+      "title": "Seguimento HuaHan Logistics: código HHW…YQ e entrega",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "xinghe-freight",
@@ -5470,6 +5542,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "GEODIS Polska (Pekaes): śledzenie przesyłki i statusy",
       "name": "GEODIS Poland",
       "color": "#3100e6"
+    },
+    {
+      "id": "huahan",
+      "catalog": "huahan",
+      "slug": "sledzenie-przesylek-huahan-logistics",
+      "title": "Śledzenie HuaHan Logistics: numer HHW…YQ i doręczenie",
+      "name": "HuaHan Logistics",
+      "color": "#0069e8"
     },
     {
       "id": "xinghe-freight",

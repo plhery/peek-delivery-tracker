@@ -62216,6 +62216,40 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://tracking.xportel.com/"
+  },
+  "starintlship": {
+    "displayName": "StarinTlship",
+    "aliases": [
+      "StarinTiship"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#011245",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [
+      {
+        "domains": [
+          "starintlship.top"
+        ],
+        "pathPattern": "^/waybill-tracking/?$",
+        "params": [
+          "tracknumbers"
+        ]
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^DHHL\\d{8}CN$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://starintlship.top/waybill-tracking/"
   }
 } as const;
 
@@ -64120,7 +64154,8 @@ export const CARRIER_IDS = [
   "usea-express",
   "wyngs",
   "xindus",
-  "xportel"
+  "xportel",
+  "starintlship"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

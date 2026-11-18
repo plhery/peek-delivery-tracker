@@ -1351,6 +1351,18 @@ class AddParcelTest {
     }
 
     @Test
+    fun escapeLeavesAnActiveCompositionToTheKeyboard() {
+        show()
+        open()
+        node(ADD_NAME).performClick()
+        val view = (node(ADD_NAME).fetchSemanticsNode().root as ViewRootForTest).view
+        compose.runOnIdle { checkNotNull(view.onCreateInputConnection(EditorInfo())).setComposingText("かな", 1) }
+        settle()
+        press(KeyEvent.KEYCODE_ESCAPE)
+        assertNotNull(deliveries.addition)
+    }
+
+    @Test
     fun ctrlNOpensAddAndEscapeClosesIt() {
         show()
         press(KeyEvent.KEYCODE_N, KeyEvent.META_CTRL_ON or KeyEvent.META_CTRL_LEFT_ON)

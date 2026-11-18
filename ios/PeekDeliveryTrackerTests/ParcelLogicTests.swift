@@ -5,6 +5,14 @@ import UIKit
 @testable import PeekDeliveryTracker
 
 final class ParcelLogicTests: XCTestCase {
+    func testAddPhoneDigitsBelongToOneParcelAndCarrier() {
+        var input = ParcelPhoneInput()
+        input["TEST-A", .jAndTMx] = "0123"
+        XCTAssertEqual(input["TEST-A", .jAndTMx], "0123")
+        XCTAssertEqual(input["TEST-B", .jAndTMx], "")
+        XCTAssertEqual(input["TEST-A", .jAndTCn], "")
+    }
+
     func testPickupPointSplitsNameFromAddressAndOpensAppleMaps() {
         let shop = PickupPoint(" Corner shop & café \n12 Main Street\n\n1000 Town ")
         XCTAssertEqual(shop?.name, "Corner shop & café")

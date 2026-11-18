@@ -14,10 +14,10 @@ R+L's tracer looks freight up by its PRO number. Peek knows these shapes for it.
 
 | Number (invented) | What it is |
 | --- | --- |
-| `00000000-0` | Nine digits, the last one a check digit, here written after a dash. |
-| `000000000` | The same PRO without the dash. |
-| `AA000000-0` | Two letters and seven digits, the last one a check digit. It can be written without the dash too. |
-| `I000000000` | A PRO as R+L's tracer writes it, with an `I` in front. The `I` isn't part of the number: Peek takes the PRO with or without it. |
+| `48291057-3` | Nine digits, the last one a check digit, here written after a dash. |
+| `482910573` | The same PRO without the dash. |
+| `RL482910-5` | Two letters and seven digits, the last one a check digit. It can be written without the dash too. |
+| `I482910573` | A PRO as R+L's tracer writes it, with an `I` in front. The `I` isn't part of the number: Peek takes the PRO with or without it. |
 
 R+L's tracer checks the last digit, so a mistyped digit can be caught (see below). Peek drops spaces and dashes before it asks R+L. Its catalog also knows R+L Carriers as R&L Carriers, R and L Carriers and RL Carriers.
 
@@ -31,7 +31,7 @@ R+L's tracer sums the shipment up above its history, then lists each line with a
 
 | R+L says | What it means for you | Peek shows |
 | --- | --- | --- |
-| `Picked Up in …` | R+L has collected the freight from the shipper, in the shipper's town. Peek writes it `Picked Up`, without the town. | "Received by carrier" |
+| `Picked Up in …` | R+L has collected the freight from the shipper, in the shipper's town. Peek shows the whole wording, but doesn't take the town as the line's place. | "Received by carrier" |
 | `Arrived at origin terminal` | It has reached the R+L terminal on the shipper's side. | "In transit" |
 | `Departed … in route to …` | It has left one terminal for the next one, or for the destination terminal. | "In transit" |
 | `Arrived at …` | It has reached a terminal on the way, named by its town. | "In transit" |
@@ -79,11 +79,11 @@ R+L carries the freight for whoever booked it, so ask them first: the shop for a
 
 ## Track an R+L Carriers shipment with Peek
 
-A nine-digit PRO's shape doesn't tell Peek it's R+L's: nine digits fit other carriers too. Paste it all the same: Peek follows more than 3,500 carriers. Peek drops the dash as you add the number, so a PRO reads the same with or without it. For two letters and seven digits, Peek asks R+L at once and shows "R+L Carriers has this parcel." when R+L knows the PRO. For nine digits, it asks TNT, TForce Freight and XPO when the number passes their check, but not R+L: press "Change" and search for R+L Carriers by name. On a shipment you've already added, use "Change carrier". If a tracking service then shows the freight moving and names R+L Carriers, Peek files the shipment under R+L and asks R+L's tracer on later checks.
+A nine-digit PRO's shape doesn't tell Peek it's R+L's: nine digits fit other carriers too. Paste it all the same: Peek follows more than 3,500 carriers. For two letters and seven digits, Peek asks R+L at once and shows "R+L Carriers has this parcel." when R+L knows the PRO. For nine digits typed with the dash before the check digit, Peek lists R+L among the carriers that fit and asks it along with TNT, TForce Freight and XPO. Peek drops the dash as you add the number, and for nine digits without the dash it asks TNT, TForce Freight and XPO when the number passes their check, but not R+L: press "Change" and search for R+L Carriers by name. On a shipment you've already added, use "Change carrier". If a tracking service then shows the freight moving and names R+L Carriers, Peek files the shipment under R+L and asks R+L's tracer on later checks.
 
 With the `I` in front, the number fits R+L Carriers and Australia Post: Peek asks both and files the shipment under the one that knows it. A link to R+L's shipment tracing page with the PRO in it (`pro=`) works too: Peek names R+L at once ("Detected carrier").
 
-Peek asks R+L's tracer by the PRO alone: no account or postcode. It shows the status, each line (with the terminal's town and state when the line names them), the expected delivery day and the weight in your own units (R+L gives pounds). It leaves out the piece count, references, the shipper and consignee, the bill of lading number and documents. R+L's tracer gives Peek no proof of delivery. "Open the R+L Carriers website", on the shipment's page, opens the PRO on R+L's tracer.
+Peek asks R+L's tracer by the PRO alone: no account or postcode. It shows the status, each line (with the terminal's town and state when the line names them), the expected delivery day and the weight in your own units (R+L gives pounds). It shows you the recipient's name (a shared link leaves it out). It leaves out the piece count, references, the shipper, the consignee's address, the bill of lading number and documents. R+L's tracer gives Peek no proof of delivery. "Open the R+L Carriers website", on the shipment's page, opens the PRO on R+L's tracer.
 
 When R+L's tracer can't be reached or can't read the shipment, Peek asks [tracking services](guide:universal-tracker) and shows their history, in their own words.
 

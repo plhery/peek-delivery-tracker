@@ -34,6 +34,22 @@ $$;
 
 insert into auth.users (id, email) values ('f3000000-0000-4000-8000-000000000001', 'opener@example.com');
 
+do $$
+declare
+  owner constant uuid := 'f3000000-0000-4000-8000-000000000001';
+  parcel uuid;
+begin
+  insert into public.packages (user_id, tracking_number, carrier, label) values (owner, 'QUEUEFIXTURE', 'unknown', '') returning id into parcel;
+  insert into public.sync_jobs (user_id, package_id, kind, priority, requested_at)
+    select owner, parcel, 'package', -30, now() - interval '1 hour' from generate_series(1, 1000);
+  insert into public.sync_jobs (user_id, package_id, kind, priority, requested_at)
+    select owner, parcel, 'package', 10, now() - interval '1 minute' from generate_series(1, 10);
+  if not exists (select from public.sync_queue_counts() where kind = 'account' and queued = 10 and oldest = now() - interval '1 minute') then
+    raise exception 'Account backlog missing from queue counts';
+  end if;
+end;
+$$;
+
 create function pg_temp.active(p_period text)
 returns integer
 language sql

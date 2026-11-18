@@ -647,6 +647,10 @@ describe('tracking event normalization', () => {
     const observed = (rows: JsonObject[]) => rows.find((row) => (row.raw_data as JsonObject | undefined)?.observed_without_provider_timestamp === true);
     expect(observed(buildEvents(parcel('2026-11-09T12:09:13Z'), answer('delivered'), undefined, observedAt)))
       .toMatchObject({ stage: 'returned', occurred_at: '2026-10-30T08:39:06.000Z' });
+    const delivered = buildEvents(parcel('2026-11-09T12:09:13Z'), { ...answer('out_for_delivery'),
+      current_stage: 'delivered', last_status_text: 'Delivered', delivered_at: '2026-10-30T15:23:00Z' }, undefined, observedAt)
+      .find((row) => row.stage === 'delivered');
+    expect(delivered).toMatchObject({ occurred_at: '2026-10-30T15:23:00Z', raw_data: { time: '2026-10-30T15:23:00Z' } });
     // Added before that scan, after a scan short of the last mile, or after an earlier answer: the end is dated when seen.
     expect(observed(buildEvents(parcel('2026-10-29T10:00:00Z'), answer('delivered'), undefined, observedAt)))
       .toMatchObject({ occurred_at: '2026-11-09T12:12:26.000Z' });
@@ -1950,7 +1954,7 @@ describe('TrackingSyncService', () => {
       // AliExpress's leg before DHL's names no clock in the catalog; its newest scan is at +08:00.
       const relayed = answer('in_transit', {}, { time: '2026-11-09T19:30:00+08:00', description: 'Departed facility', stage: 'in_transit' });
       const leg = parcel({ created_at: '2026-11-09T09:00:00Z', expected_delivery: '2026-11-10',
-        carrier_data: { active_tracking_carrier: 'aliexpress', last_update: '2026-11-09T19:30:00+08:00' } });
+        carrier_data: { active_tracking_carrier: 'aliexpress', timezone: 'Asia/Shanghai', last_update: '2026-11-09T19:30:00+08:00' } });
       // 18:00 on the 10th in Germany, already the 11th at +08:00.
       expect((await leg('2026-11-10T17:00:00Z', new Error('down'), relayed)).expected_delivery).toBe('2026-11-10');
     });
@@ -2075,8 +2079,8 @@ describe('TrackingSyncService', () => {
       const held = await sync('2026-11-07T18:00:00Z', answer('in_transit', back));
       expect(held.parcel).toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
       expect(isOpenedParcelSyncDue(held.parcel, new Date('2026-11-08T18:00:00Z'))).toBe(true);
-      // The same answer the next day keeps the hold.
-      expect((await sync('2026-11-08T18:00:00Z', answer('in_transit', back))).parcel)
+      // The next response contains only a newer scan on the trip back.
+      expect((await sync('2026-11-08T18:00:00Z', { ...answer('in_transit', back), events: [{ ...back, time: '2026-11-08T12:00:00Z' }] })).parcel)
         .toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
       const round = { time: '2026-11-09T09:00:00+01:00', description: 'In consegna', stage: 'out_for_delivery' };
       const after = await sync('2026-11-09T10:00:00Z', answer('out_for_delivery', round, back));

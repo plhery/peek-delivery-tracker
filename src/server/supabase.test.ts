@@ -42,8 +42,8 @@ describe('guarded tracking writes', () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');
     const request = vi.spyOn(client, 'request').mockResolvedValue({ id: 'package-1' });
     await expect(client.createAccountPackage('user-1', 'TEST1234', 'Books', 'dpd', null, '8000')).resolves.toBe('package-1');
-    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/create_account_package', { method: 'POST', body: {
-      p_user_id: 'user-1', p_tracking_number: 'TEST1234', p_label: 'Books', p_carrier: 'dpd', p_tracking_url: null, p_dpd_postcode: '8000',
+    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/create_account_package_with_digits', { method: 'POST', body: {
+      p_user_id: 'user-1', p_tracking_number: 'TEST1234', p_label: 'Books', p_carrier: 'dpd', p_tracking_url: null, p_dpd_postcode: '8000', p_phone_digits: null,
     } });
   });
 
@@ -218,20 +218,16 @@ describe('one-off parcels and their links', () => {
   it('reads the queued checks by whose, with how long the oldest of each has waited', async () => {
     const client = service();
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce([
-      { kind: 'package', user_id: null, priority: -5, requested_at: '2026-09-16T09:50:00Z' },
-      { kind: 'package', user_id: null, priority: -5, requested_at: '2026-09-16T09:59:30Z' },
-      { kind: 'package', user_id: 'synthetic-user', priority: -30, requested_at: '2026-09-16T09:00:00Z' },
-      { kind: 'package', user_id: 'synthetic-user', priority: 10, requested_at: '2026-09-16T09:59:58Z' },
-      { kind: 'scheduled', user_id: null, priority: -10, requested_at: '2026-09-16T09:58:00Z' },
+      { kind: 'release', queued: 1000, oldest: '2026-09-16T09:00:00Z' },
+      { kind: 'account', queued: 10, oldest: '2026-09-16T09:59:58Z' },
     ]);
     await expect(client.syncQueue(new Date('2026-09-16T10:00:00Z'))).resolves.toEqual({
-      account: { queued: 1, oldestSeconds: 2 },
-      lookup: { queued: 2, oldestSeconds: 600 },
-      scheduled: { queued: 1, oldestSeconds: 120 },
-      release: { queued: 1, oldestSeconds: 3600 },
+      account: { queued: 10, oldestSeconds: 2 },
+      lookup: { queued: 0, oldestSeconds: 0 },
+      scheduled: { queued: 0, oldestSeconds: 0 },
+      release: { queued: 1000, oldestSeconds: 3600 },
     });
-    expect(Object.fromEntries(params(request.mock.calls[0][0]))).toEqual({ select: 'kind,user_id,priority,requested_at',
-      state: 'eq.queued', order: 'requested_at.asc', limit: '1000' });
+    expect(request).toHaveBeenCalledWith('/rest/v1/rpc/sync_queue_counts', { method: 'POST', timeoutMs: 3_000 });
   });
 
   it('answers the highest priority of the jobs that go ahead of a priority and wait to be claimed', async () => {
@@ -978,13 +974,13 @@ describe('owner package PostgREST client', () => {
       '59650',
     )).resolves.toBe(true);
 
-    expect(request).toHaveBeenCalledWith('/rest/v1/rpc/change_owned_package_carrier', {
+    expect(request).toHaveBeenCalledWith('/rest/v1/rpc/change_owned_package_carrier_with_digits', {
       method: 'POST',
       body: {
         p_package_id: 'aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaaa',
         p_carrier: 'mondial-relay',
         p_tracking_url: null,
-        p_dpd_postcode: '59650',
+        p_dpd_postcode: '59650', p_phone_digits: null,
       },
     });
   });

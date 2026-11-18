@@ -1,3 +1,4 @@
+import { useLayoutEffect, useRef } from 'react';
 import { useI18n } from '../i18n';
 import type { SignInMethods } from '../peek/session';
 import { SignInScreen } from './SignInScreen';
@@ -22,20 +23,23 @@ export function SignInAgain({ methods, email, title, subtitle, onLeave, onVerify
   onCancel: () => void;
 }) {
   const { t } = useI18n();
+  const attempt = useRef(0);
+  useLayoutEffect(() => () => { attempt.current++; }, []);
   const leaving = (signIn: (() => Promise<void>) | undefined) => signIn && (async () => {
     onLeave?.();
     try { await signIn(); } catch (error) { onFailed?.(); throw error; }
   });
   const signingIn = <Args extends unknown[]>(signIn: (...args: Args) => Promise<void>) => async (...args: Args) => {
+    const current = ++attempt.current;
     onVerify?.();
     try { await signIn(...args); } catch (error) { onFailed?.(); throw error; }
-    onSignedIn();
+    if (current === attempt.current) onSignedIn();
   };
   return <div className="sign-in-again">
     <SignInScreen {...methods} card title={title} subtitle={subtitle} initialEmail={email} codeAction={t('app.signInAgain')}
       signInWithGoogle={leaving(methods.signInWithGoogle)} signInWithApple={leaving(methods.signInWithApple)}
       signInWithOidc={leaving(methods.signInWithOidc)} verifyCode={signingIn(methods.verifyCode)}
       signInWithPassword={methods.signInWithPassword && signingIn(methods.signInWithPassword)} />
-    <button type="button" className="auth-flow__text-button sign-in-again__cancel" onClick={onCancel}>{t('common.cancel')}</button>
+    <button type="button" className="auth-flow__text-button sign-in-again__cancel" onClick={() => { attempt.current++; onCancel(); }}>{t('common.cancel')}</button>
   </div>;
 }

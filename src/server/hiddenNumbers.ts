@@ -79,7 +79,7 @@ export function numberMask(numbers: readonly unknown[], texts: readonly unknown[
     .filter((number) => number.length >= SHORTEST && number.length <= LONGEST && /\d/.test(number))
     .sort((a, b) => b.length - a.length);
   if (!known.length) return (text) => text;
-  const pattern = new RegExp(known.map((number) => [...number].join('[\\s-]*')).join('|'), 'gi');
+  const pattern = new RegExp(known.map((number) => [...number].join('[\\s.-]*')).join('|'), 'gi');
   return (text) => text.replace(pattern, (number) => maskedNumber(numberHint(bare(number))));
 }
 

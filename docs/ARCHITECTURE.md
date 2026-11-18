@@ -466,8 +466,10 @@ Key server modules:
     account has at most 50 grants, personal tokens included, and 10 personal tokens, counted
     one request at a time; Settings lists the assistants and disconnects any.
   - Settings also shows how to add Peek to Claude, ChatGPT and Gemini, with each one's menu
-    names in English as its help pages give them and the plans and places that can, and what
-    to ask a connected assistant, first to add the tracking numbers in the user's emails.
+    names in English as its help pages give them and the plans and places that can, and to
+    Home Assistant through Peek's integration ([peek-ha](https://github.com/plhery/peek-ha)),
+    and what to ask a connected assistant, first to add the tracking numbers in the user's
+    emails.
   - The tools work on the token's account alone, through the owner-checked functions the
     app uses. A carrier change, an archive and a restore run the owner's own database
     functions for the token's account (`change_account_package_carrier`,
@@ -482,7 +484,8 @@ Key server modules:
     and archive and restore cover what it needs. The owner deletes one in Peek.
     `/api/parcels` only reads. `add_parcels` is the step email uses (`src/server/parcelsFromText.ts`), with
     its allowances. Amazon's shipping emails usually hold no tracking number, so the instructions
-    have an assistant that can browse the user's signed-in Amazon site open Your Orders, then
+    have an assistant that can browse the user's signed-in Amazon site (any: they all work the
+    same way, amazon.de serving as the example) open Your Orders, then
     Track package on each package on its way or just delivered (older orders have no such
     button), and add the carrier named after "Delivery By" with the "Tracking ID", never the
     order number; it only reads there, never signs in, and says when Amazon tracks a parcel it

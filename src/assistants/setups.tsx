@@ -7,8 +7,10 @@ export type SetupLine = readonly [MessageKey, Readonly<Record<string, string>>?]
 /**
  * How to add Peek to each assistant, from its own help pages: Anthropic's "Get started with custom connectors using
  * remote MCP", OpenAI's "Add custom MCP server" and "Connect and test your plugin", and Google's "Connect & manage
- * custom apps for Gemini Apps". Their menus and buttons are named in English, as those pages give them; `who` says
- * which plans and places can. Settings shows them, and so does the page on connecting an assistant.
+ * custom apps for Gemini Apps". Home Assistant connects through Peek's integration (github.com/plhery/peek-ha), whose
+ * README gives its steps, named as Home Assistant 2026.11 does. Their menus and buttons are named in English, as those
+ * pages give them; `who` says which plans and places can. Settings shows them, and so does the page on connecting an
+ * assistant.
  */
 export const ASSISTANT_SETUPS: ReadonlyArray<{ name: string; who: SetupLine; steps: readonly SetupLine[] }> = [
   {
@@ -36,6 +38,17 @@ export const ASSISTANT_SETUPS: ReadonlyArray<{ name: string; who: SetupLine; ste
       ['assistants.setup.gemini.open', { settings: 'Settings', apps: 'Connected Apps' }],
       ['assistants.setup.gemini.add', { custom: 'Custom apps', next: 'Next' }],
       ['assistants.setup.gemini.use'],
+    ],
+  },
+  {
+    name: 'Home Assistant',
+    who: ['assistants.setup.homeAssistant.who'],
+    steps: [
+      ['assistants.setup.homeAssistant.open', {
+        marketplace: 'Settings › Marketplace', link: 'Add from link', repository: 'https://github.com/plhery/peek-ha', add: 'Add',
+        setUp: 'Set up',
+      }],
+      ['assistants.setup.homeAssistant.use', { addCard: 'Add card', byCard: 'By card', card: 'Peek parcels' }],
     ],
   },
 ];

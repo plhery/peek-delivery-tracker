@@ -159,6 +159,24 @@ describe('the page where an assistant asks to connect', () => {
     expect(await screen.findByRole('heading', { name: 'Claude is connected' })).toBeInTheDocument();
   });
 
+  it('leaves approval cancelled when a pending verification finishes', async () => {
+    signedIn();
+    let finish!: () => void;
+    const verification = new Promise<void>((resolve) => { finish = resolve; });
+    vi.mocked(mocks.auth.verifyCode as () => Promise<void>).mockReturnValueOnce(verification);
+    vi.mocked(answerAssistantConsent).mockRejectedValueOnce(new ApiRecentSignInError());
+    const user = userEvent.setup();
+    render(<AssistantConsentScreen request={request} query={QUERY} />);
+    await user.click(screen.getByRole('button', { name: 'Allow' }));
+    await user.click(await screen.findByRole('button', { name: 'Email me a code' }));
+    await user.type(await screen.findByLabelText('Sign-in code'), '123456');
+    await user.click(screen.getByRole('button', { name: 'Sign in again' }));
+    await user.click(screen.getByRole('button', { name: 'Cancel' }));
+    finish();
+    await verification;
+    expect(answerAssistantConsent).toHaveBeenCalledOnce();
+  });
+
   it('notes the request before a provider takes the page away, and allows it when the same account is back', async () => {
     signedIn({ googleEnabled: true });
     vi.mocked(answerAssistantConsent).mockRejectedValueOnce(new ApiRecentSignInError());

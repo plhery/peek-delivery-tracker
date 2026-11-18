@@ -66,6 +66,7 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     values.carrier,
     values.trackingUrl,
     values.dpdPostcode,
+    values.phoneDigits,
   )) throw new HttpError(404, 'Package not found');
   if (!providerPostcode && (values.dpdPostcodeCountry || (isRecord(original.carrier_data) && original.carrier_data.postcode_country))) {
     // The postcode's country is kept with the postcode the change stored.
@@ -73,11 +74,6 @@ export const PATCH = apiRoute<PackageParameters>(async (context) => {
     const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
     if (write) await service.updatePackage(packageId, write);
   }
-  // A new carrier or number forgets the digits (packages_forget_phone_digits); the ones sent are written after it.
-  if (!providerPostcode && (values.phoneDigits || original.phone_digits)) {
-    await service.updatePackage(packageId, { phone_digits: values.phoneDigits });
-  }
-
   if (providerPostcode) {
     const routing = isRecord(original.carrier_data) && isRecord(original.carrier_data.routing) ? original.carrier_data.routing : {};
     const asked = isRecord(routing.provider_input_needed) ? routing.provider_input_needed.provider : undefined;

@@ -60,7 +60,7 @@ describe('assistants in Settings', () => {
     expect(screen.getByText('chatgpt.example · Sees, adds, edits and archives parcels · not used yet')).toBeInTheDocument();
     // Personal tokens have no screen: none is listed, and none can be made.
     expect(screen.queryByText('Home script')).not.toBeInTheDocument();
-    expect(screen.queryByText(/token|Home Assistant|\/api\/parcels/i)).not.toBeInTheDocument();
+    expect(screen.queryByText(/token|\/api\/parcels/i)).not.toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Remove Claude' }));
     expect(revokeAssistant).toHaveBeenCalledWith(apiAuth, claude.id);
     await user.click(await screen.findByRole('button', { name: 'Remove ChatGPT' }));
@@ -70,12 +70,12 @@ describe('assistants in Settings', () => {
     expect(document.querySelectorAll('.small-pip')).toHaveLength(1);
   });
 
-  it('shows how to add Peek to Claude, ChatGPT and Gemini, in their own words, and what to ask', async () => {
+  it('shows how to add Peek to Claude, ChatGPT, Gemini and Home Assistant, in their own words, and what to ask', async () => {
     const user = userEvent.setup();
     render(<AssistantsPage apiAuth={apiAuth} offer={offer([])} onChange={vi.fn()} />);
     const setup = screen.getByRole('region', { name: 'Add Peek to your assistant' });
     const names = Array.from(setup.querySelectorAll('summary')).map((summary) => summary.textContent);
-    expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›']);
+    expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›', 'Home Assistant›']);
     await user.click(screen.getByText('Gemini'));
     const steps = Array.from(setup.querySelectorAll('details[open] li')).map((step) => step.textContent);
     expect(steps).toEqual([
@@ -83,6 +83,14 @@ describe('assistants in Settings', () => {
       'Under Custom apps, paste the address above and select Next.',
       'Sign in to Peek when it asks, then select Allow.',
       'In a chat, type @ and pick Peek.',
+    ]);
+    // Home Assistant connects through Peek's integration, and its card shows once the page is reloaded.
+    await user.click(screen.getByText('Home Assistant'));
+    const homeAssistant = Array.from(setup.querySelectorAll('details')).at(-1);
+    expect(Array.from(homeAssistant?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
+      'Open Settings › Marketplace, select Add from link, paste https://github.com/plhery/peek-ha and select Add. Then install Peek and select Set up.',
+      'Sign in to Peek when it asks, then select Allow.',
+      'Reload the page. Then edit a dashboard, select Add card, then By card, and pick Peek parcels.',
     ]);
     // The assistant's own names stay as its help pages give them, out of a page translator's reach.
     expect(screen.getByText('Connected Apps')).toHaveAttribute('translate', 'no');

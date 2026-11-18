@@ -321,10 +321,11 @@ function missingScope(scope: Scope, resourceMetadata: string) {
  */
 const AMAZON_INSTRUCTIONS = 'Amazon orders: Amazon\'s emails usually hold no tracking number, and an Amazon order '
   + 'number (three groups of digits joined by dashes) is never one: never send it. When the user asks you to add '
-  + 'their Amazon parcels and you can browse their Amazon site where they are signed in, open Your Orders there '
-  + '(/gp/css/order-history, such as https://www.amazon.de/gp/css/order-history). Each package on its way or just '
-  + 'delivered has its own Track package button; older orders have none, so leave them. That page names the carrier '
-  + 'after "Delivery By" and shows the "Tracking ID" (labels follow the site\'s language). Send both to add_parcels, '
+  + 'their Amazon parcels and you can browse the Amazon site they use, where they are signed in (amazon.fr, .de, .it, '
+  + '.es, .co.uk, .nl, .com and so on: every Amazon site works the same way), open Your Orders there, at '
+  + '/gp/css/order-history (on amazon.de, for example, https://www.amazon.de/gp/css/order-history). Each package on its '
+  + 'way or just delivered has its own Track package button; older orders have none, so leave them. That page names '
+  + 'the carrier after "Delivery By" and shows the "Tracking ID", with labels in the site\'s language. Send both to add_parcels, '
   + 'with the item or "Amazon" as the name. When Amazon delivers a package itself and shows no tracking ID, or '
   + 'add_parcels refuses it, tell the user Amazon tracks that one only in their Amazon account. On Amazon, only read: '
   + 'never buy, cancel, return or change anything, and never sign in for the user. If you cannot browse it, the user '
@@ -504,7 +505,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
         trackingUrl: trackingLink ?? '',
         dpdPostcode: keptPostcode,
         dpdPostcodeCountry: postcodeCountry ?? keptCountry,
-        phoneDigits: phoneDigits ?? (takes.has('phoneDigits') ? nullableText(row.phone_digits) ?? '' : ''),
+        phoneDigits: phoneDigits ?? (carrier === row.carrier && takes.has('phoneDigits') ? nullableText(row.phone_digits) ?? '' : ''),
       }, number);
       const unchanged = row.carrier === values.carrier
         && nullableText(row.tracking_url) === values.trackingUrl
@@ -517,7 +518,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       return refused(error);
     }
     try {
-      if (!await service.changeAccountPackageCarrier(caller.userId, id, values.carrier, values.trackingUrl, values.dpdPostcode)) {
+      if (!await service.changeAccountPackageCarrier(caller.userId, id, values.carrier, values.trackingUrl, values.dpdPostcode, values.phoneDigits)) {
         return refusal(NO_PARCEL);
       }
     } catch (error) {
@@ -530,8 +531,6 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       const write = changed && postcodeCountryWrite(changed, values.dpdPostcodeCountry);
       if (write) await service.updatePackage(id, write);
     }
-    // A new carrier or number forgets the digits (packages_forget_phone_digits); the ones given are written after it.
-    if (values.phoneDigits || row.phone_digits) await service.updatePackage(id, { phone_digits: values.phoneDigits });
     logOperationalEvent('package_carrier_changed', {
       package_id: id,
       previous_carrier: String(row.carrier ?? 'unknown'),

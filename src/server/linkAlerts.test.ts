@@ -379,9 +379,9 @@ describe('what an alert says', () => {
 
   it('masks the parcel\'s numbers in the scan\'s place for a link that hides its number, as its page does', async () => {
     // Synthetic numbers: the parcel's own, and its delivery partner's, written with a dash.
-    const parcel = { tracking_number: 'TESTSFC0123456789', carrier_data: { delivery_tracking_number: 'TESTPOST987654321' } };
+    const parcel = { tracking_number: '119243210987656789', carrier_data: { delivery_tracking_number: 'TESTPOST987654321' } };
     hiding.mockResolvedValue(new Map([[linkId, parcel]]));
-    pending([row({ location: 'Locker TESTPOST-987654321, by TESTSFC0123456789' })]);
+    pending([row({ location: 'Locker TESTPOST-987654321, by 11.92.432109.87656789' })]);
     await alerts.dispatch();
     expect(hiding).toHaveBeenCalledExactlyOnceWith([linkId]);
     const [told, payload] = send.mock.calls[0]!;

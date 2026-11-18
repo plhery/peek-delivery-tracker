@@ -29,7 +29,7 @@ const WORDINGS: Record<string, Wording> = {
     done: String.raw`delivered`,
     before: String.raw`will|would|shall|should|could|can|cannot|may|might|must|to|be|being|not|never|yet|soon|almost|\p{L}+n['’]t|expected|estimated|scheduled|get|gets|getting|want|wants|choose|how`,
     after: String.raw`in\s+\d+\p{L}*|within|between|before|by\s+\d+\p{L}*|tomorrow|next|free|fast|quickly|(?:on\s+)?(?:mon|tues|wednes|thurs|fri|satur|sun)day`,
-    pickup: String.raw`pick-?up|collection|lockers?|parcel\s?shop|access\s+point|service\s+point|post\s+office|depot|hub\s+counter|amazon\s+hub|relay`,
+    pickup: String.raw`pick[ -]?up|ready\s+to\s+collect|collection|lockers?|parcel\s?shop|access\s+point|service\s+point|post\s+office|depot|hub\s+counter|amazon\s+hub|relay`,
     transit: String.raw`shipped|dispatched|on\s+(?:its|the)\s+way|in\s+transit|out\s+for\s+delivery|order\s+confirm\p{L}*`,
   },
   de: {

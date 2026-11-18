@@ -405,6 +405,8 @@ describe('stored scan replay', () => {
       providerEventId: 'dpd-pl:attempt', previousProviderEventId: 'dpd-pl:attempt', clash: false } as const;
     const reread = { kind: 'stage', parcel: 'parcel-1', row: 'noon', source: 'dpd-pl', open: true, from: 'exception', to: 'in_transit',
       code: 'X1', reason: 'mapped', declared: 'in_transit', stageSource: 'carrier_map' } as const;
+    expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock]))
+      .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
     expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock, reread]))
       .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
   });

@@ -405,13 +405,13 @@ describe('what a link shows', () => {
       package: {
         id: 'parcel', tracking_number: own, carrier: 'sfc', sync_status: 'ok', created_at: '2026-10-02T08:00:00Z',
         current_stage: stage, last_status_text: handover,
-        carrier_data: { delivery_tracking_number: partner, pickup_point: `Example Locker\nfor ${own.toLowerCase()}`, sender_name: 'Example Shop' },
+        carrier_data: { delivery_tracking_number: partner, swiss_number: '119243210987654321', pickup_point: `Example Locker\nfor ${own.toLowerCase()}`, sender_name: 'Example Shop' },
         planned_events: [{ description: `Delivery by Example Post, ${partner.slice(0, 8)}-${partner.slice(8)}`, stage: 'out_for_delivery',
           location: null, occurred_at: '2026-10-05T08:00:00Z' }],
         tracking_events: [
           scan('label', `Waybill generated for ${label}`, null, '2026-10-02T08:00:00Z', 'accepted'),
           // The parcel's own number with spaces and dashes, and the label's in small letters.
-          scan('hub', `Parcel TEST SFC 0193-847562 left the hub, label ${label.toLowerCase()}`, `Hub ${own}`, '2026-10-02T09:00:00Z'),
+          scan('hub', `Parcel TEST SFC 0193-847562 left the hub, label ${label.toLowerCase()}`, 'Hub 11.92.432109.87654321', '2026-10-02T09:00:00Z'),
           scan('relay', `Handed over, see https://agg.example/en#nums=${relayed}&lang=en`, 'Exampletown', '2026-10-02T10:00:00Z'),
           scan('handover', handover, 'Exampletown', '2026-10-02T11:00:00Z'),
         ],
@@ -430,7 +430,7 @@ describe('what a link shows', () => {
       expect(parcel.last_status_text).toBe(masked);
       expect(parcel.tracking_events.map(({ description, location }) => [description, location])).toEqual([
         ['Waybill generated for ••• 135', null],
-        ['Parcel ••• 7562 left the hub, label ••• 135', 'Hub ••• 7562'],
+        ['Parcel ••• 7562 left the hub, label ••• 135', 'Hub ••• 4321'],
         ['Handed over, see https://agg.example/en#nums=••• 344&lang=en', 'Exampletown'],
         [masked, 'Exampletown'],
       ]);

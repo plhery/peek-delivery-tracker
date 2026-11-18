@@ -549,7 +549,8 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, change: ListChange
         Row(Modifier.weight(1f), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalAlignment = Alignment.CenterVertically) {
             if (active > 0) {
                 // At the accessibility sizes the heading gets a little smaller rather than break in two. A heading to
-                // TalkBack, as the iPhone's is to VoiceOver (`listOverview`), without its count.
+                // TalkBack, as the iPhone's is to VoiceOver (`listOverview`), without its count, which TalkBack reads
+                // next as one figure.
                 val style = PeekTheme.type.headline
                 val probe = LocalOnTheWayHeading.current
                 Text(
@@ -562,7 +563,7 @@ internal fun OverviewRow(state: DeliveriesState, active: Int, change: ListChange
                     autoSize = if (largeText) MinimumScale(style.fontSize, HEADING_MINIMUM_SCALE) else null,
                     onTextLayout = { probe?.invoke(it) },
                 )
-                CountPill(active, horizontalPadding = 6.dp, change, Modifier.testTag(ACTIVE_COUNT))
+                CountPill(active, horizontalPadding = 6.dp, change, Modifier.testTag(ACTIVE_COUNT).semantics(mergeDescendants = true) {})
             }
         }
         FiltersButton(state)

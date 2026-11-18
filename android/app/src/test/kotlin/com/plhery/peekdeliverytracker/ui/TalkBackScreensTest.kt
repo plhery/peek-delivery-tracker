@@ -139,6 +139,7 @@ class TalkBackScreensTest {
                 "Deliveries [heading]",
                 "Account [button]",
                 "On the way [heading]",
+                "7",
                 "Sort & filter [button]",
                 "Search parcels [button]",
                 "DHL, Next up, New trainers 👟, Ready for pickup · Kiosk im Hauptbahnhof [button]",

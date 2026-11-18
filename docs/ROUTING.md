@@ -886,6 +886,15 @@ A parcel often changes carrier at the border. The origin history is always kept.
   never the origin's postal number. A partner of the origin's own brand is the exception: it
   receives the parcel's postcode, when the parcel holds one, at the confirmation and at every
   later check (DPD Belgium and the Netherlands hand Swiss deliveries to DPD Switzerland).
+  PostNL is the other: under a number its domestic tracker holds (a 3S barcode, or a postal
+  item from abroad), an account's parcel is asked there with the postcode its owner typed for
+  that leg (`universal_input`) or for the parcel, else with the account's, as the Add sheet
+  offers it ([`accountPostcode.ts`](../src/server/accountPostcode.ts)). The domestic tracker
+  shows the delivery slot; it answers a wrong postcode as an unknown barcode, and the
+  international tracker then answers. Its lookup's steps tell which happened, and the parcel
+  keeps it (`handoff_postcode`): one that found the parcel is asked with again, one that missed
+  is not sent again for that number, and nobody is asked to fix it. A guest's parcel is asked
+  without one.
   Failed confirmations wait 55 min, doubling with each miss up to 6 h, unless the origin
   history or the partner changes; the wait stays 55 min while the origin is down, from an
   ask the failed check saves too, and a check a provider answers in the meantime keeps the
@@ -896,7 +905,7 @@ A parcel often changes carrier at the border. The origin history is always kept.
   wait. A partner with a minimum interval of its own (Refresh cadence) is not asked sooner,
   the origin's news included: the news it waited through asks once the interval has passed.
   A probe our own pacing refuses counts no miss, and the next check asks again. A partner
-  asking for an input the probe cannot give it (anything but its brand's postcode, as SwiftX's
+  asking for an input the probe cannot give it (anything but those postcodes, as SwiftX's
   recipient phone digits, which a parcel keeps for its own carrier alone) is asked again after
   6 h, then 12 h, then daily, whatever the origin's news, and 5 min after a refresh by hand.
   A partner that does not know the item yet, or answers inconclusively, is not

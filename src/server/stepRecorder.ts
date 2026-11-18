@@ -135,6 +135,18 @@ export function addStepRecorder(recorder: StepRecorder): void {
   extraRecorders.push(recorder);
 }
 
+/** The steps the lookups of a call record, for a caller that reads how one ended (watchingSteps). */
+const watchedSteps = new AsyncLocalStorage<StepRecord[]>();
+
+/**
+ * Runs `operation`, adding to `steps` every step its lookups record: the handoff's postcode reads whether PostNL's
+ * domestic tracker found the parcel with it (accountPostcode.ts). A lookup another call of the check already made
+ * records nothing again.
+ */
+export function watchingSteps<T>(steps: StepRecord[], operation: () => Promise<T>): Promise<T> {
+  return watchedSteps.run(steps, operation);
+}
+
 /** The successful lookups of the carrier a tracking call asks, held back until its result is known. */
 const heldLookups = new AsyncLocalStorage<{ carrier: string; records: { record: LookupRecord; sinks: StepRecorder }[] }>();
 
@@ -171,6 +183,7 @@ export function hostStepRecorder(): StepRecorder {
   const sinks = combineRecorders(healthStepRecorder, sentryStepRecorder, prometheusStepRecorder, attemptStepRecorder, ...extraRecorders);
   return {
     step: (record) => {
+      watchedSteps.getStore()?.push(record);
       const check = checkLookups.getStore();
       if (check) release(check, record.carrier);
       sinks.step(record);

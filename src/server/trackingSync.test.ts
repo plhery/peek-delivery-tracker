@@ -5177,6 +5177,84 @@ describe('TrackingSyncService', () => {
     expect(posti.fetch.mock.calls[1]).toEqual(['posti', parcel.tracking_number, null, null, null]);
   });
 
+  describe('PostNL asked with a postcode nobody gave it', () => {
+    const number = '3SABCD000000001';
+    const parcel = { id: 'postnl-handoff', user_id: 'owner', carrier: 'aliexpress', tracking_number: 'LP00012345678901',
+      current_stage: 'in_transit', dpd_postcode: null, archived_at: null, carrier_data: {} };
+    const origin: CarrierResult = { status: 'in_transit', destination_country: 'NL', delivery_carrier: 'spring-gds',
+      delivery_tracking_number: number, last_update: '2026-11-17T10:00:00Z',
+      events: [{ time: '2026-11-17T10:00:00Z', description: 'Departed', stage: 'in_transit' }] };
+    const delivery: CarrierResult = { status: 'out_for_delivery', current_stage: 'out_for_delivery', last_update: '2026-11-18T08:00:00Z',
+      events: [{ time: '2026-11-18T08:00:00Z', description: 'Out for delivery', stage: 'out_for_delivery' }] };
+    const missed = new IndeterminateError('PostNL', 'PostNL found no parcel for that barcode and postcode', { reason: 'portal_not_found' });
+    // PostNL's lookup records its domestic step when it is given a postcode, as the scraper's does.
+    const postnl = (found: (postcode: string) => boolean) => ({ fetch: vi.fn(async (carrier: string, _number: string, _url: unknown,
+      postcode: string | null) => {
+      if (carrier !== 'spring-gds') return origin;
+      if (postcode) hostStepRecorder().step({ carrier, step: 'domestic', attempt: 1, durationMs: 1, fallbackFrom: null, fallbackReason: null,
+        fallbackErrorType: null, ...(found(postcode) ? { outcome: 'ok', errorType: null } : { outcome: 'indeterminate', errorType: 'IndeterminateError', error: missed }) });
+      return delivery;
+    }) });
+    const asked = (adapter: ReturnType<typeof postnl>) => adapter.fetch.mock.calls.filter((call) => call[0] === 'spring-gds').map((call) => call[3]);
+    const setup = (found: (postcode: string) => boolean, given: JsonObject[] = [{ carrier: 'gls-nl', dpd_postcode: '1011 AB' }]) => {
+      const client = { ...fakeClient(), accountPostcodes: vi.fn().mockResolvedValue(given) };
+      const adapter = postnl(found);
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-18T09:00:00Z'));
+      return { client, adapter, service };
+    };
+
+    it('gives an account\'s parcel the postcode it gave last, and keeps asking with the one that found it', async () => {
+      const { client, adapter, service } = setup(() => true);
+      await service.syncPackage(parcel);
+      expect(client.accountPostcodes).toHaveBeenCalledExactlyOnceWith('owner');
+      expect(asked(adapter)).toEqual(['1011 AB']);
+      const values = client.updatePackage.mock.calls.at(-1)![1];
+      expect(values.carrier_data).toMatchObject({ active_tracking_carrier: 'spring-gds', active_tracking_number: number,
+        handoff_postcode: { carrier: 'spring-gds', number, postcode: '1011 AB', country: null, found: true } });
+      client.accountPostcodes.mockClear();
+      adapter.fetch.mockClear();
+      await service.syncPackage({ ...parcel, ...values });
+      expect(client.accountPostcodes).not.toHaveBeenCalled();
+      expect(asked(adapter)).toEqual(['1011 AB']);
+      expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '1011 AB', found: true });
+    });
+
+    it('does not send a postcode that missed again, nor tell the owner, and tries the account\'s next one', async () => {
+      const { client, adapter, service } = setup((postcode) => postcode === '2511 CV');
+      await service.syncPackage(parcel);
+      expect(asked(adapter)).toEqual(['1011 AB']);
+      const values = client.updatePackage.mock.calls.at(-1)![1];
+      // The international tracker answered: the parcel is followed as without the postcode, and nobody is asked for one.
+      expect(values).toMatchObject({ current_stage: 'out_for_delivery', carrier_data: { active_tracking_carrier: 'spring-gds',
+        handoff_postcode: { postcode: '1011 AB', found: false } } });
+      expect(values.carrier_data.routing?.postcode_refused).toBeUndefined();
+      expect(values.carrier_data.routing?.input_needed).toBeUndefined();
+      adapter.fetch.mockClear();
+      const later = { ...parcel, ...values };
+      await service.syncPackage(later);
+      expect(asked(adapter)).toEqual([null]);
+      expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '1011 AB', found: false });
+      // The owner gave another postcode since: that one is tried.
+      client.accountPostcodes.mockResolvedValue([{ carrier: 'spring-gds', dpd_postcode: '2511 CV' }, { carrier: 'gls-nl', dpd_postcode: '1011 AB' }]);
+      adapter.fetch.mockClear();
+      await service.syncPackage(later);
+      expect(asked(adapter)).toEqual(['2511 CV']);
+      expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '2511 CV', found: true });
+    });
+
+    it('asks with the postcode its owner typed for that leg first, and asks a guest\'s parcel as before', async () => {
+      const typed = setup(() => true);
+      await typed.service.syncPackage({ ...parcel, carrier_data: { universal_input: { number, postcode: '2511 CV' } } });
+      expect(typed.client.accountPostcodes).not.toHaveBeenCalled();
+      expect(asked(typed.adapter)).toEqual(['2511 CV']);
+      const guest = setup(() => true);
+      await guest.service.syncPackage({ ...parcel, user_id: null });
+      expect(guest.client.accountPostcodes).not.toHaveBeenCalled();
+      expect(asked(guest.adapter)).toEqual([null]);
+      expect(guest.client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toBeUndefined();
+    });
+  });
+
   it('asks the post of the country an outbound postal item is looked up from, when its origin names no destination', async () => {
     const parcel = { id: 'looked-up-handoff', carrier: 'an-post', tracking_number: 'LX123456785IE', current_stage: 'in_transit',
       carrier_data: { lookup_country_hint: 'FI', routing: { version: 1, configured_carrier: 'an-post', last_event_at: '2026-01-12T09:23:00.000Z' } } };

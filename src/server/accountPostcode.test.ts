@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { accountPostcodeWrite, wantsAccountPostcode } from './accountPostcode';
+import { IndeterminateError, TransportError } from 'universal-parcel-scraper';
+import type { StepRecord } from 'universal-parcel-scraper/node';
+import {
+  accountPostcodeFor, accountPostcodeWrite, handoffPostcodeFound, handoffPostcodeMark, typedHandoffPostcode, wantsAccountPostcode,
+  wantsHandoffPostcode,
+} from './accountPostcode';
 import type { JsonObject } from './types';
 
 const parcel = (values: JsonObject = {}): JsonObject => ({
@@ -50,5 +55,65 @@ describe('account postcode', () => {
       { carrier: 'spring-gds', dpd_postcode: '1011 AB', postcode_refused: { carrier: 'spring-gds' } },
     ])).toBeNull();
     expect(accountPostcodeWrite(parcel({ current_stage: 'delivered' }), [{ carrier: 'dpd', dpd_postcode: '8000' }])).toBeNull();
+  });
+
+  it('offers PostNL the postcode given it last, else the latest Dutch one', () => {
+    // A Dutch postcode is from PostNL's home: it keeps no country.
+    const number = '3SABCD000000001';
+    expect(accountPostcodeFor('spring-gds', number, [
+      { carrier: 'dpd', dpd_postcode: '8000' },
+      { carrier: 'gls-nl', dpd_postcode: '1011 AB', postcode_country: { postcode: '1011 AB', country: 'NL' } },
+      { carrier: 'spring-gds', dpd_postcode: '2511 CV' },
+    ])).toEqual({ postcode: '2511 CV', country: null });
+    expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'gls-nl', dpd_postcode: '1011 AB' }]))
+      .toEqual({ postcode: '1011 AB', country: null });
+    expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'spring-gds', dpd_postcode: '1011 AB', postcode_refused: { carrier: 'spring-gds' } }]))
+      .toBeNull();
+    expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'dpd', dpd_postcode: '10115', postcode_country: { postcode: '10115', country: 'DE' } }]))
+      .toEqual({ postcode: '10115', country: 'DE' });
+  });
+});
+
+describe('handoff postcode', () => {
+  const number = '3SABCD000000001';
+  const step = (values: Partial<StepRecord>): StepRecord => ({ carrier: 'spring-gds', step: 'domestic', attempt: 1, outcome: 'ok',
+    errorType: null, durationMs: 1, fallbackFrom: null, fallbackReason: null, fallbackErrorType: null, ...values });
+
+  it('is wanted for an account\'s parcel at PostNL under a number its domestic tracker holds', () => {
+    expect(wantsHandoffPostcode(parcel({ carrier: 'aliexpress' }), 'spring-gds', number)).toBe(true);
+    // A guest's parcel, a one-off lookup, a number PostNL takes no postcode for, a carrier that says nothing of one.
+    expect(wantsHandoffPostcode(parcel({ carrier: 'aliexpress', user_id: null }), 'spring-gds', number)).toBe(false);
+    expect(wantsHandoffPostcode(parcel({ carrier: 'aliexpress', one_off: true }), 'spring-gds', number)).toBe(false);
+    expect(wantsHandoffPostcode(parcel({ carrier: 'aliexpress' }), 'spring-gds', '3SABCD0000000001')).toBe(false);
+    expect(wantsHandoffPostcode(parcel({ carrier: 'dpd-be' }), 'dpd', '05200000000001')).toBe(false);
+  });
+
+  it('takes the postcode typed for that leg, else the parcel\'s own, when PostNL takes it', () => {
+    const leg = { universal_input: { number: number.toLowerCase(), postcode: '2511 cv' } };
+    expect(typedHandoffPostcode(parcel({ dpd_postcode: '1011 AB', carrier_data: leg }), 'spring-gds', number))
+      .toEqual({ postcode: '2511 CV', country: null });
+    expect(typedHandoffPostcode(parcel({ dpd_postcode: '1011 AB', carrier_data: { universal_input: { number: 'other', postcode: '2511 CV' } } }),
+      'spring-gds', number)).toEqual({ postcode: '1011 AB', country: null });
+    expect(typedHandoffPostcode(parcel({ dpd_postcode: '12/34' }), 'spring-gds', number)).toBeNull();
+    expect(typedHandoffPostcode(parcel(), 'spring-gds', number)).toBeNull();
+  });
+
+  it('reads the mark for its carrier and number alone', () => {
+    const mark = { carrier: 'spring-gds', number, postcode: '1011 AB', country: 'NL', found: false };
+    expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: mark } }), 'spring-gds', number.toLowerCase())).toEqual(mark);
+    expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: mark } }), 'spring-gds', '3SABCD000000002')).toBeNull();
+    expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: { ...mark, found: 'no' } } }), 'spring-gds', number)).toBeNull();
+  });
+
+  it('says the postcode found the parcel, missed it while PostNL still answered, or neither', () => {
+    const missed = new IndeterminateError('PostNL', 'PostNL found no parcel for that barcode and postcode', { reason: 'portal_not_found' });
+    expect(handoffPostcodeFound('spring-gds', [step({})], true)).toBe(true);
+    expect(handoffPostcodeFound('spring-gds', [step({ outcome: 'indeterminate', error: missed }), step({ step: 'direct' })], true)).toBe(false);
+    // Nobody knew the number: the international tracker failed too, so the postcode is not to blame.
+    expect(handoffPostcodeFound('spring-gds', [step({ outcome: 'indeterminate', error: missed })], false)).toBeNull();
+    // The domestic tracker failed to answer, or was not asked.
+    expect(handoffPostcodeFound('spring-gds', [step({ outcome: 'transport', error: new TransportError('PostNL', 'Down') })], true)).toBeNull();
+    expect(handoffPostcodeFound('spring-gds', [step({ step: 'direct' })], true)).toBeNull();
+    expect(handoffPostcodeFound('dpd', [step({ carrier: 'dpd' })], true)).toBeNull();
   });
 });

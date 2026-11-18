@@ -23,7 +23,7 @@ import {
 import type { AdapterRegistry, Recognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { trackCarrier } from 'universal-parcel-scraper/node';
 import { airportTimeZone, carrierHomeZone, dateLocalClocks, locatePlace, placeTimeZone } from 'universal-parcel-scraper/places';
-import type { StepRecorder } from 'universal-parcel-scraper/node';
+import type { StepRecord, StepRecorder } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry, hostAdapterEnvironment } from './adapterRegistry';
 import { normalizedLookupCountry } from './lookupCountry';
 import { preflightInputNeeded, takePreflightHistory } from './trackingPreflight';
@@ -32,7 +32,7 @@ import { providerRefusals } from './providerRefusals';
 import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
 import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
-import { hostStepRecorder, withHeldLookups } from './stepRecorder';
+import { hostStepRecorder, watchingSteps, withHeldLookups } from './stepRecorder';
 import { recordScheduledBacklog, recordScheduledRunGaveWay, recordStatusMapping } from './metrics';
 import {
   captureOperationalError,
@@ -79,8 +79,11 @@ import { confirmationLookup } from './trackingHealth';
 import { carrierMapAgrees, deployedVersion, statusMapClosings, universalMapAgrees } from './reviewQueues';
 import { isReviewDemoParcel } from './reviewDemo';
 import { carrierLookupKey, recognitionKey, SharedLookups, universalLookupKey, type ParcelLookups } from './sharedLookups';
-import { carrierLookupInput } from './postcodeCountry';
-import { accountPostcodeWrite, ACCOUNT_POSTCODE, wantsAccountPostcode } from './accountPostcode';
+import { carrierLookupInput, withPostcodeCountry } from './postcodeCountry';
+import {
+  accountPostcodeFor, accountPostcodeWrite, ACCOUNT_POSTCODE, HANDOFF_POSTCODE, handoffPostcodeFound, handoffPostcodeMark,
+  typedHandoffPostcode, wantsAccountPostcode, wantsHandoffPostcode, type FittingPostcode, type HandoffPostcodeMark,
+} from './accountPostcode';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
 const MAX_PACKAGES_PER_OWNER_PER_SYNC = 5;
@@ -310,6 +313,14 @@ interface EarlierInOutage {
   answer: CarrierResult | null;
   carrier: string;
   at: string;
+}
+
+/** What a carrier lookup hands its check beside its answer (fetchResult). */
+interface HandoffKeep {
+  probe?: (probe: JsonObject) => void;
+  earlier?: (earlier: EarlierInOutage) => void;
+  handoffPostcode?: (mark: HandoffPostcodeMark) => void;
+  askedAt?: (carrier: string, number: string) => number;
 }
 
 /** Further than any clock read a zone away (UTC−12 to UTC+14) can put one scan from another. */
@@ -2588,6 +2599,8 @@ export class TrackingSyncService {
     // The delivery probe the check's lookups last made or kept: whatever the check saves carries it, though the
     // origin failed or routing set its answer aside, so its gap counts it.
     let lookupProbe: JsonObject | null = null;
+    // What a handoff's carrier made of the postcode the check's lookups asked it with (accountPostcode.ts).
+    let lookupHandoffPostcode: HandoffPostcodeMark | null = null;
     // The earlier carrier's follow-up the check made while the delivery carrier failed: its new scans, and when it
     // was asked, are saved whether the check fails or another source answers.
     const outage: { earlier?: EarlierInOutage } = {};
@@ -2602,6 +2615,10 @@ export class TrackingSyncService {
       if (lookupProbe) {
         values.carrier_data = { ...(isRecord(values.carrier_data) ? values.carrier_data : isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
           delivery_probe: lookupProbe };
+      }
+      if (lookupHandoffPostcode) {
+        values.carrier_data = { ...(isRecord(values.carrier_data) ? values.carrier_data : isRecord(parcel.carrier_data) ? parcel.carrier_data : {}),
+          [HANDOFF_POSTCODE]: { ...lookupHandoffPostcode } };
       }
       if (consumeAddition) {
         const data = { ...(isRecord(values.carrier_data) ? values.carrier_data : isRecord(parcel.carrier_data) ? parcel.carrier_data : {}) };
@@ -2709,8 +2726,9 @@ export class TrackingSyncService {
         return isRecord(probe) && probe.carrier === carrier && typeof probe.number === 'string'
           && normalizeTrackingNumber(probe.number) === normalizeTrackingNumber(asked) ? Date.parse(String(probe.at)) || 0 : 0;
       };
-      const keep = { probe: (probe: JsonObject) => { lookupProbe = probe; },
+      const keep: HandoffKeep = { probe: (probe: JsonObject) => { lookupProbe = probe; },
         earlier: (earlier: EarlierInOutage) => { outage.earlier = earlier; },
+        handoffPostcode: (mark: HandoffPostcodeMark) => { lookupHandoffPostcode = mark; },
         askedAt: (carrier: string, asked: string) => Math.max(routerAsked(carrier, asked), probeAsked(carrier, asked)) };
       // A check nobody asked for of a number nobody has answered, an account's for a day or a lookup's
       // that left the schedule, contacts one provider at most.
@@ -3175,7 +3193,7 @@ export class TrackingSyncService {
       // Linked journey identity, the postcode the owner gave a provider, and the delivery partner's probe belong to the
       // parcel, not an individual carrier response: a provider answering while the origin is down keeps the probe's gap.
       if (isRecord(parcel.carrier_data)) {
-        for (const key of ['lookup_country_hint', 'lookup_language', 'postcode_country', ACCOUNT_POSTCODE, 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
+        for (const key of ['lookup_country_hint', 'lookup_language', 'postcode_country', ACCOUNT_POSTCODE, HANDOFF_POSTCODE, 'universal_input', 'original_carrier', 'original_tracking_number', 'original_tracking_url', 'original_package_id', 'active_tracking_carrier', 'active_tracking_number', 'original_canonical_tracking_number', 'auto_changed_from', 'auto_changed_to', 'auto_changed_at', 'handed_over_at', 'earlier_checked_at', 'delivery_probe', 'scans_withdrawn', 'scans_withdrawn_at', 'clock_offsets', DIRECT_HISTORY]) {
           if (parcel.carrier_data[key] != null && carrierData[key] == null) carrierData[key] = parcel.carrier_data[key];
         }
       }
@@ -3605,16 +3623,69 @@ export class TrackingSyncService {
     });
   }
 
+  /**
+   * The lookup of the carrier a parcel is handed to: with the parcel's postcode when that carrier is a unit
+   * of the filed carrier's brand (handoffPostcode), else, for an account's parcel at PostNL, with the one its
+   * owner typed for it or the account's (accountPostcode.ts). Whether that postcode found the parcel goes to
+   * `keep`, and a refused one is not the owner's to fix: nothing asks them.
+   */
+  private fetchHandoff(checks: ParcelLookups | undefined, parcel: JsonObject, carrierId: string, partner: string,
+    number: string, language: string | null, metadata: JsonObject, keep: HandoffKeep): Promise<CarrierResult> {
+    const brand = handoffPostcode(parcel, carrierId, partner, number);
+    // Asked at once, as before, when no postcode of the account's is wanted: the earlier carrier's follow-up goes after it.
+    return brand || !wantsHandoffPostcode(parcel, partner, number)
+      ? this.fetchCarrier(checks, partner, number, null, brand, language, metadata)
+      : this.fetchWithHandoffPostcode(checks, parcel, partner, number, language, metadata, keep);
+  }
+
+  private async fetchWithHandoffPostcode(checks: ParcelLookups | undefined, parcel: JsonObject, partner: string,
+    number: string, language: string | null, metadata: JsonObject, keep: HandoffKeep): Promise<CarrierResult> {
+    const given = await this.handoffAccountPostcode(parcel, partner, number);
+    if (!given) return this.fetchCarrier(checks, partner, number, null, null, language, metadata);
+    const steps: StepRecord[] = [];
+    let answered = false;
+    try {
+      const answer = await watchingSteps(steps, () => this.fetchCarrier(checks, partner, number, null, given.postcode, language,
+        withPostcodeCountry(metadata, given.postcode, given.country)));
+      answered = true;
+      return answer;
+    } finally {
+      const found = handoffPostcodeFound(partner, steps, answered);
+      if (found !== null) keep.handoffPostcode?.({ carrier: partner, number, postcode: given.postcode, country: given.country, found });
+    }
+  }
+
+  /**
+   * The postcode an account's parcel is asked with at the carrier it is handed to (accountPostcode.ts): the one
+   * its owner typed for it, else the one that found it there, else the account's. One that missed it is not
+   * sent again for that number.
+   */
+  private async handoffAccountPostcode(parcel: JsonObject, partner: string, number: string): Promise<FittingPostcode | null> {
+    const mark = handoffPostcodeMark(parcel, partner, number);
+    let chosen = typedHandoffPostcode(parcel, partner, number)
+      ?? (mark?.found ? { postcode: mark.postcode, country: mark.country } : null);
+    if (!chosen) {
+      try {
+        chosen = accountPostcodeFor(partner, number, await this.client.accountPostcodes(String(parcel.user_id)));
+      } catch (error) {
+        captureOperationalError(error, { component: 'tracking', operation: 'handoff_postcode', carrier: partner });
+        return null;
+      }
+    }
+    return chosen && !(mark && !mark.found && mark.postcode === chosen.postcode) ? chosen : null;
+  }
+
   private async fetchResult(
     parcel: JsonObject,
     carrierId: string,
     checks?: ParcelLookups,
     byHand = false,
     lookupCountry: string | null = null,
-    // What the lookup hands the check beside its answer: the delivery probe it made, and the earlier
-    // carrier's follow-up made while the delivery carrier failed. askedAt: when the router or a probe
-    // last asked a carrier about a number, as epoch milliseconds, zero when neither did.
-    keep: { probe?: (probe: JsonObject) => void; earlier?: (earlier: EarlierInOutage) => void; askedAt?: (carrier: string, number: string) => number } = {},
+    // What the lookup hands the check beside its answer: the delivery probe it made, the earlier carrier's
+    // follow-up made while the delivery carrier failed, and what the delivery carrier made of the postcode it
+    // was asked with (accountPostcode.ts). askedAt: when the router or a probe last asked a carrier about a
+    // number, as epoch milliseconds, zero when neither did.
+    keep: HandoffKeep = {},
     // A provider's answer for a parcel filed under a carrier with no adapter of its own, which
     // stands in for the origin's: only the delivery carrier it names is asked.
     providerOrigin?: CarrierResult,
@@ -3654,8 +3725,7 @@ export class TrackingSyncService {
         return null;
       });
       const alongside = followUp === 'alongside' && await royalBrowserAllowed(carrierId, 'handoff');
-      const delivery = this.fetchCarrier(checks, activeCarrier, activeNumber, null,
-        handoffPostcode(parcel, carrierId, activeCarrier, activeNumber), language, metadata);
+      const delivery = this.fetchHandoff(checks, parcel, carrierId, activeCarrier, activeNumber, language, metadata, keep);
       const alongsideAnswer = alongside ? askEarlier() : null;
       let answer: CarrierResult;
       try {
@@ -3734,8 +3804,8 @@ export class TrackingSyncService {
           misses: previousProbe && (withheld || originUpdate === previousProbe.origin_update) ? misses + 1 : 1 };
         origin.delivery_probe = probe;
         try {
-          const delivery = normalizeCarrierResult(await confirmationLookup(() => this.fetchCarrier(checks, candidate.carrier, candidate.number,
-            null, handoffPostcode(parcel, carrierId, candidate.carrier, candidate.number), language, metadata)));
+          const delivery = normalizeCarrierResult(await confirmationLookup(() => this.fetchHandoff(checks, parcel, carrierId,
+            candidate.carrier, candidate.number, language, metadata, keep)));
           const originTime = latestResultTime(origin, carrierId);
           const watermark = Math.max(originTime, latestResultTime(metadata, carrierId),
             Date.parse(routingState(parcel).last_event_at || '') || 0);
@@ -3786,7 +3856,7 @@ export class TrackingSyncService {
           if (deliveryTime > 0 && originFirst > 0 && deliveryTime >= originFirst) probe.held = true;
         } catch (error) {
           fallbackError = errorType(error);
-          // The probe gives a partner no input but its brand's postcode (handoffPostcode): a partner asking for
+          // The probe gives a partner no input but a postcode (fetchHandoff): a partner asking for
           // another (no field its catalog lists, or SwiftX's recipient phone digits, which a parcel keeps for its
           // own carrier alone) answers the same until it scans the parcel.
           if (carrierErrorKind(error) === 'input_required'

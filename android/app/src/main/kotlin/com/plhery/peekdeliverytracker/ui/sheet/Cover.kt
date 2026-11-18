@@ -57,17 +57,20 @@ fun FullScreenCover(
     val memory = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
     if (!present) memory.forget()
     val host = LocalTabOverlay.current ?: LocalWindowOverlay.current
+    // What it holds is saved with its opening, as a sheet's is.
+    val opening = rememberOpening(present, { host?.windowRestoring }) { memory.forget() }
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
+            val held = rememberHeld(opening)
             CoverLayer(
                 visible, { dismiss() }, paneTitle, modifier, memory,
                 onGone = {
                     present = false
                     closed()
                 },
-                dismissible, content,
+                dismissible, { held.Holding(content) },
             )
         }
     }

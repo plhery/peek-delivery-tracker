@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Rect as ComposeRect
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.assertIsFocused
@@ -335,6 +337,60 @@ class SheetTest {
         compose.waitForIdle()
         assertEquals(580f, panelWidth(), 0.5f)
         compose.onNodeWithTag(FIELD).assertTextEquals("Half typed")
+    }
+
+    /**
+     * What a sheet, a popover or a cover holds comes back with the window made again while it shows, and starts afresh
+     * as it opens in a window made again while it had gone, rather than with what the earlier one saved.
+     */
+    @Test
+    fun aSheetOpensAfreshAfterAWindowMadeAgainWithoutIt() = opensAfresh { shown, content ->
+        Sheet(visible = shown, onDismiss = {}, paneTitle = "Sheet", content = content)
+    }
+
+    @Test
+    fun aPopoverOpensAfreshAfterAWindowMadeAgainWithoutIt() = opensAfresh { shown, content ->
+        Popover(shown, ComposeRect(100f, 100f, 140f, 140f), onDismiss = {}, paneTitle = "Popover", size = PopoverSize(300.dp, 300.dp, 200.dp, 200.dp), content = content)
+    }
+
+    @Test
+    fun aCoverOpensAfreshAfterAWindowMadeAgainWithoutIt() = opensAfresh { shown, content ->
+        FullScreenCover(visible = shown, onDismiss = {}, paneTitle = "Cover", content = content)
+    }
+
+    private fun opensAfresh(present: @Composable (Boolean, @Composable () -> Unit) -> Unit) {
+        val recreation = Recreation(compose)
+        var shown by mutableStateOf(true)
+        recreation.setContent {
+            PeekTheme(dark = false, highContrast = false, reduceMotion = false, reduceTransparency = false, carrierIdentities = null) {
+                val front = rememberSaveable(saver = WindowLayers.Saver) { WindowLayers() }
+                val overlay = remember(front) { TabOverlay(window = front, name = "window") }
+                Box(Modifier.fillMaxSize()) {
+                    CompositionLocalProvider(LocalTabOverlay provides overlay) {
+                        present(shown) {
+                            var typed by rememberSaveable { mutableStateOf("") }
+                            BasicTextField(typed, { typed = it }, Modifier.testTag(FIELD))
+                        }
+                    }
+                    overlay.Content()
+                    front.Content()
+                }
+            }
+        }
+        compose.waitForIdle()
+        compose.onNodeWithTag(FIELD).performTextReplacement("Half")
+        fun remade(showing: Boolean) {
+            recreation.recreate { shown = showing }
+            compose.mainClock.autoAdvance = true
+            compose.waitForIdle()
+        }
+        remade(showing = true)
+        compose.onNodeWithTag(FIELD).assertTextEquals("Half")
+        remade(showing = false)
+        compose.onNodeWithTag(FIELD).assertDoesNotExist()
+        shown = true
+        compose.waitForIdle()
+        compose.onNodeWithTag(FIELD).assertTextEquals("")
     }
 
     @Test

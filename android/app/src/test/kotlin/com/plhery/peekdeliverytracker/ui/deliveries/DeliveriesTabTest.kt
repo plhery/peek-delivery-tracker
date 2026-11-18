@@ -45,6 +45,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.ParcelMenuItem
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
@@ -420,6 +421,55 @@ class DeliveriesTabTest {
         val field = compose.onNodeWithTag(ADD_TRACKING)
         assertEquals("1Z999AA1012345", field.fetchSemanticsNode().config[SemanticsProperties.EditableText].text)
         field.assertIsFocused()
+    }
+
+    /**
+     * A sheet the window made anew didn't show leaves nothing for the next one opened: the carrier picker searched
+     * over the parcel shown beside the list, the foldable shut (that parcel, picked for the room, closes and its editor
+     * with it) and opened again, another parcel's picker searches nothing.
+     */
+    @Test
+    @Config(qualifiers = "w900dp-h960dp-xhdpi")
+    fun aSheetLeftBehindByAFoldLeavesNothingToTheNextOne() {
+        val source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Demo)
+        val recreation = Recreation(compose)
+        var size by mutableStateOf(DpSize(852.dp, 883.dp))
+        recreation.setContent {
+            Box(Modifier.requiredSize(size)) {
+                CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+                    RootHost(state = AuthenticationState.Demo, reduceMotion = false, source = source)
+                }
+            }
+        }
+        fun settle() {
+            compose.mainClock.advanceTimeBy(1_000)
+            compose.waitForIdle()
+        }
+        fun searchCarriers() {
+            compose.onNodeWithTag(PAGE_MENU_BUTTON).performClick()
+            settle()
+            compose.onNodeWithTag(menuItemTag(ParcelMenuItem.ChangeCarrier)).performClick()
+            settle()
+            compose.onNodeWithTag(CHANGE_CARRIER_ROW).performClick()
+            settle()
+        }
+        fun remade(to: DpSize) {
+            recreation.recreate { size = to }
+            compose.mainClock.autoAdvance = true
+            settle()
+        }
+        settle()
+        searchCarriers()
+        compose.onNodeWithTag(CARRIER_PICKER_SEARCH).performTextInput("posti")
+        settle()
+
+        remade(DpSize(411.dp, 900.dp))
+        compose.onNodeWithTag(CARRIER_PICKER_SEARCH).assertDoesNotExist()
+        remade(DpSize(852.dp, 883.dp))
+        compose.openCard("Birthday gift")
+        settle()
+        searchCarriers()
+        assertEquals("", compose.onNodeWithTag(CARRIER_PICKER_SEARCH).fetchSemanticsNode().config[SemanticsProperties.EditableText].text)
     }
 
     /**

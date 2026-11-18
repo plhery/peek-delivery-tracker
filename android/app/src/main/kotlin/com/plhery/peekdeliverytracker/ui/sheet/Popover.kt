@@ -103,14 +103,17 @@ fun Popover(
     val memory = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
     if (!present) memory.forget()
     val host = LocalTabOverlay.current
+    // What it holds is saved with its opening, as a sheet's is.
+    val opening = rememberOpening(present, { host?.windowRestoring }) { memory.forget() }
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
+            val held = rememberHeld(opening)
             PopoverLayer(visible, anchor, { dismiss() }, paneTitle, size, PopoverLook(above, radius, ground), host?.backdrop, memory, {
                 present = false
                 closed()
-            }, content)
+            }, { held.Holding(content) })
         }
     }
     if (host == null) layer?.invoke() else OverlayLayer(host, PopoverKey(paneTitle), layer)

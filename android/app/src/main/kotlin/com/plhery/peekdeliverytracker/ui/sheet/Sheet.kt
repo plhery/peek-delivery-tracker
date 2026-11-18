@@ -30,17 +30,22 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.Stable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.movableContentOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.rememberUpdatedState
+import androidx.compose.runtime.saveable.LocalSaveableStateRegistry
+import androidx.compose.runtime.saveable.SaveableStateRegistry
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.listSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
@@ -107,6 +112,7 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
+import kotlin.random.Random
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
@@ -213,21 +219,25 @@ fun Sheet(
     var present by remember { mutableStateOf(visible) }
     if (visible) present = true
     val memory = rememberSaveable(saver = SheetMemory.Saver) { SheetMemory() }
-    if (!present) memory.forget()
     val host = LocalTabOverlay.current
+    // What it holds is saved with its opening, where it is drawn: the window made anew while it showed finds it again,
+    // and the sheet opens afresh, not with what an earlier one left in a window made anew without it.
+    val opening = rememberOpening(present, { host?.windowRestoring }) { memory.forget() }
+    if (!present) memory.forget()
     val dismiss by rememberUpdatedState(onDismiss)
     val closed by rememberUpdatedState(onClosed)
     val detentChanged by rememberUpdatedState(onDetentChange)
     val shown by rememberUpdatedState(onShown)
     val layer: (@Composable () -> Unit)? = if (!present) null else {
         {
+            val held = rememberHeld(opening)
             SheetLayer(
                 visible, { dismiss() }, paneTitle, detents, host?.backdrop, modifier, memory,
                 onGone = {
                     present = false
                     closed()
                 },
-                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, page, lit, content,
+                detent, { detentChanged(it) }, dismissible, { shown() }, grabber, page, lit, { held.Holding(content) },
             )
         }
     }
@@ -235,6 +245,69 @@ fun Sheet(
 }
 
 private data class SheetKey(val title: String)
+
+/**
+ * Which opening of what shows while [shown] this is, kept with the window. The window made anew while it showed finds
+ * the one it was in as it shows again, while it is [restoring]; it is a new one each time it shows afterwards, and
+ * where it is first composed showing then, as what it finds saved was left by an earlier one that the window made anew
+ * didn't show. Without a window ([restoring] null), what it is first composed with is its own. Each opening is a number
+ * of its own, so that no other's is taken for it.
+ */
+@Composable
+internal fun rememberOpening(shown: Boolean, restoring: () -> Boolean?, onNew: () -> Unit = {}): Long {
+    val opening = rememberSaveable { mutableLongStateOf(Random.nextLong()) }
+    val before = remember { ShownBefore(shown && restoring() != false) }
+    if (shown && !before.shown && restoring() != true) {
+        opening.longValue = Random.nextLong()
+        onNew()
+    }
+    before.shown = shown
+    return Snapshot.withoutReadObservation { opening.longValue }
+}
+
+private class ShownBefore(var shown: Boolean)
+
+/**
+ * What a sheet, a popover or a cover holds saves, in a registry of its own for [opening], kept where it is drawn: in
+ * the window's layers, out of a `SaveableStateHolder` around its place, which saves what it holds again as it goes,
+ * after the window's save, so that a field giving its focus up then would be saved so. What an earlier opening saved
+ * is dropped.
+ */
+@Composable
+internal fun rememberHeld(opening: Long): HeldState {
+    val parent = LocalSaveableStateRegistry.current
+    val canBeSaved = remember(parent) { { value: Any -> parent?.canBeSaved(value) ?: true } }
+    val saver = remember(canBeSaved) { HeldState.saver(canBeSaved) }
+    val held = rememberSaveable(saver = saver) { HeldState(opening, null, canBeSaved) }
+    held.open(opening)
+    return held
+}
+
+internal class HeldState(opening: Long, restored: Map<String, List<Any?>>?, private val canBeSaved: (Any) -> Boolean) {
+    var opening = opening
+        private set
+    var registry by mutableStateOf(SaveableStateRegistry(restored, canBeSaved))
+        private set
+
+    fun open(opening: Long) {
+        if (opening == this.opening) return
+        this.opening = opening
+        registry = SaveableStateRegistry(null, canBeSaved)
+    }
+
+    /** [content], saving what it holds with this opening. */
+    @Composable
+    fun Holding(content: @Composable () -> Unit) =
+        key(opening) { CompositionLocalProvider(LocalSaveableStateRegistry provides registry, content = content) }
+
+    companion object {
+        @Suppress("UNCHECKED_CAST")
+        fun saver(canBeSaved: (Any) -> Boolean): Saver<HeldState, Any> = listSaver(
+            save = { listOf(it.opening, HashMap(it.registry.performSave())) },
+            restore = { HeldState(it[0] as Long, it[1] as Map<String, List<Any?>>, canBeSaved) },
+        )
+    }
+}
 
 /**
  * What a sheet or a popover keeps with the window, so that the window made again finds it as it was: the detent it

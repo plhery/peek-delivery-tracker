@@ -79,8 +79,10 @@ import com.plhery.peekdeliverytracker.ui.sheet.Sheet
 import com.plhery.peekdeliverytracker.ui.sheet.SheetDetent
 import com.plhery.peekdeliverytracker.ui.sheet.SheetMenu
 import com.plhery.peekdeliverytracker.ui.sheet.SheetPage
+import com.plhery.peekdeliverytracker.ui.sheet.rememberOpening
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
 import com.plhery.peekdeliverytracker.ui.symbols.SymbolScale
+import com.plhery.peekdeliverytracker.ui.tabs.LocalTabOverlay
 import com.plhery.peekdeliverytracker.ui.theme.ControlHighlight
 import com.plhery.peekdeliverytracker.ui.theme.FontDesign
 import com.plhery.peekdeliverytracker.ui.theme.GlassSurface
@@ -123,7 +125,10 @@ internal fun CarrierEditorHost(state: DeliveriesState) {
     val catalog = LocalCarrierIdentities.current?.catalog ?: CarrierCatalog.shared
     val region = remember { CarrierCatalog.deviceCountry() }
     val parcel = editing?.let { state.carrierEditorParcel(it, state.parcels) }
-    val form = rememberSaveable(editing?.id, saver = CarrierEditorForm.Saver) {
+    // Saved with its opening, so that one opened afresh, for this parcel or another, doesn't take an earlier one's.
+    val overlay = LocalTabOverlay.current
+    val opening = rememberOpening(visible, { overlay?.windowRestoring })
+    val form = rememberSaveable(editing?.id, opening, saver = CarrierEditorForm.Saver, key = "carrierEditor.$opening") {
         CarrierEditorForm.start(editing, parcel, catalog, region, state.source.givenPostcodes)
     }
     val change = parcel?.let { form.change(it, catalog, region) }

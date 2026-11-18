@@ -46,6 +46,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -163,6 +164,9 @@ val LocalTabReselection = staticCompositionLocalOf { TabReselection() }
 class TabOverlay(val backdrop: MaterialBackdrop? = null, private val window: WindowLayers? = null, internal val name: String = "") {
     private val layers = mutableStateListOf<Pair<Any, @Composable () -> Unit>>()
 
+    /** Whether its window is being made anew ([WindowLayers.restoring]); null without one. */
+    internal val windowRestoring: Boolean? get() = window?.restoring
+
     /** Draws `content` as the layer `key`, in its place if it shows already, or takes the layer away with null. */
     fun show(key: Any, content: (@Composable () -> Unit)?) {
         val index = layers.indexOfFirst { it.first == key }
@@ -230,6 +234,14 @@ class WindowLayers private constructor(restored: List<String>) {
 
     constructor() : this(emptyList())
 
+    /**
+     * Whether the window is being made anew from what it saved, layers among it, for its first [RESTORING_NANOS] of
+     * frames, as what it shows comes back over a few of them (a page once the navigation has settled, then its sheet):
+     * what shows then finds what it saved itself ([rememberOpening][com.plhery.peekdeliverytracker.ui.sheet.rememberOpening]).
+     */
+    internal var restoring = remade
+        private set
+
     /** Whether anything stands over the window: a sheet, a popover or a menu, which TalkBack keeps to. */
     val covered: Boolean get() = layers.isNotEmpty()
 
@@ -268,6 +280,12 @@ class WindowLayers private constructor(restored: List<String>) {
     @Composable
     fun Content() {
         if (remade) HoldFirstFrame()
+        LaunchedEffect(this) {
+            if (!restoring) return@LaunchedEffect
+            val start = withFrameNanos { it }
+            while (withFrameNanos { it } - start < RESTORING_NANOS) Unit
+            restoring = false
+        }
         layers.forEachIndexed { index, layer ->
             val place = places[layer.host] ?: return@forEachIndexed
             val under = (index + 1 until layers.size).any { layers[it].host !== layer.host }
@@ -312,6 +330,9 @@ class WindowLayers private constructor(restored: List<String>) {
     }
 
     companion object {
+        /** How long the window made anew takes to show again what it saved. */
+        internal const val RESTORING_NANOS = 300_000_000L
+
         /** The layers' order, which the window made again puts them back in. */
         val Saver: Saver<WindowLayers, ArrayList<String>> = Saver(
             save = { window -> ArrayList(window.layers.map { window.id(it.host, it.key) }) },

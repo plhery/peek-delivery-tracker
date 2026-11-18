@@ -4,6 +4,21 @@ import UIKit
 #endif
 import VisionKit
 
+struct ParcelPhoneInput {
+    private var number = ""
+    private var carrier: CarrierID?
+    private var digits = ""
+
+    subscript(number: String, carrier: CarrierID) -> String {
+        get { self.number == number && self.carrier == carrier ? digits : "" }
+        set {
+            self.number = number
+            self.carrier = carrier
+            digits = newValue
+        }
+    }
+}
+
 struct AddParcelView: View {
     let onOpenParcel: (UUID) -> Void
     let onAdded: (UUID) -> Void
@@ -25,7 +40,11 @@ struct AddParcelView: View {
     /// The delivery postcode typed, accepted or filled for each carrier in this sheet, and the country chosen beside it.
     @State private var postcodes = CarrierPostcodes()
     /// The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows.
-    @State private var phoneDigits = ""
+    @State private var phoneInput = ParcelPhoneInput()
+    private var phoneDigits: String {
+        get { phoneInput[normalizedNumber, resolvedCarrier] }
+        nonmutating set { phoneInput[normalizedNumber, resolvedCarrier] = newValue }
+    }
     @State private var showingScanner = false
     @State private var showingCarrierPicker = false
     @State private var didFocusTracking = false
@@ -736,7 +755,7 @@ struct AddParcelView: View {
                         optional: requirement.isOptional
                     ) {
                         // Number keys, and no content type: nothing on the iPhone fills in these digits.
-                        TextField(placeholder: requirement.placeholder ?? "", text: $phoneDigits)
+                        TextField(placeholder: requirement.placeholder ?? "", text: Binding(get: { phoneDigits }, set: { phoneDigits = $0 }))
                             .drawnField()
                             .font(.body.monospacedDigit())
                             .keyboardType(requirement.inputMode == "numeric" ? .numberPad : .asciiCapable)

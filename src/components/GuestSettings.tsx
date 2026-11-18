@@ -8,9 +8,9 @@ import './Settings.css';
 
 /**
  * Settings for a visitor without an account: appearance, time format, distance units and the new-update mark,
- * kept in this browser.
+ * kept in this browser. With `language`, the language too, for a page whose footer has none.
  */
-export function GuestSettings({ className = '' }: { className?: string }) {
+export function GuestSettings({ className = '', language = false }: { className?: string; language?: boolean }) {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
   const closeButton = useRef<HTMLButtonElement>(null);
@@ -24,7 +24,7 @@ export function GuestSettings({ className = '' }: { className?: string }) {
         <div className="sheet__grabber" aria-hidden="true" />
         <div className="sheet__heading"><h2 className="sheet__title" id="guest-settings-title">{t('settings.title')}</h2>
           <button ref={closeButton} className="sheet__close" type="button" onClick={close} aria-label={t('common.close')}><Icon name="close" /></button></div>
-        <PreferenceSettings />
+        <PreferenceSettings language={language} />
         <p className="settings-description guest-settings__kept">{t('door.recents.kept')}</p>
       </div>
     </div>, document.body)}

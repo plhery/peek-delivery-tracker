@@ -80,6 +80,6 @@ export function OtherParcels({ linkId, visitor, over, onTrackAnother, onSignIn }
     </div>
     <ul>{listed.map((recent) => <li key={recent.id}><OtherParcel recent={recent} /></li>)}</ul>
     {another}
-    <p>{t('door.recents.kept')} <button type="button" className="peekp-another__account" onClick={onSignIn}>{t('link.device.account')}</button></p>
+    <p>{t('door.recents.kept')} <button type="button" className="peekp-another__account" onClick={onSignIn}>{t('door.recents.signIn')}</button></p>
   </section>;
 }

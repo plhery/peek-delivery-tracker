@@ -858,7 +858,7 @@ describe('FrontDoor: on this device', () => {
     // No scan has a place: no card leads, and none draws a route.
     expect(list.querySelector('.door-nextup, .card-route')).toBeNull();
     expect(within(list).getByText('Kept in this browser only.')).toBeVisible();
-    await user.click(within(list).getByRole('button', { name: 'Sign in to keep them, with notifications' }));
+    await user.click(within(list).getByRole('button', { name: 'Sign in to keep them on all your devices' }));
     expect(onSignIn).toHaveBeenCalledOnce();
     // A modified click is the browser's: a new tab opens the address itself.
     let takenByPage = true;

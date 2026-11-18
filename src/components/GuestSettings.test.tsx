@@ -45,4 +45,12 @@ describe('GuestSettings', () => {
     await user.click(within(sheet).getByRole('button', { name: 'Close' }));
     await vi.waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument());
   });
+
+  it('offers the language on a page whose footer has none, a parcel\'s', async () => {
+    const user = userEvent.setup();
+    render(<I18nProvider initialLocale="en"><GuestSettings language /></I18nProvider>);
+    await user.click(screen.getByRole('button', { name: 'Settings' }));
+    await user.selectOptions(within(screen.getByRole('dialog')).getByRole('combobox', { name: 'Language' }), 'fr');
+    expect(await screen.findByRole('dialog', { name: 'Réglages' })).toBeVisible();
+  });
 });

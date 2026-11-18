@@ -687,7 +687,7 @@ describe('ParcelPage stages and troubles', () => {
     expect(others.getByRole('button', { name: 'Track another parcel' })).toBeVisible();
     expect(others.queryByRole('button', { name: /^See all/ })).toBeNull();
     expect(others.getByText('Kept in this browser only.')).toBeVisible();
-    await user.click(others.getByRole('button', { name: 'Create an account to keep them, with notifications' }));
+    await user.click(others.getByRole('button', { name: 'Sign in to keep them on all your devices' }));
     expect(signIn).toHaveBeenCalledExactlyOnceWith(LINK_ID, false);
     // The other parcel's page opens on its card.
     await user.click(links[0]);

@@ -3,7 +3,7 @@ title: Swiss Post tracking: statuses, collection notes and contact
 description: Track a Swiss Post parcel: what its numbers look like, what each English status means, what to do after a collection note, and how to reach Swiss Post.
 slug: swiss-post-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 Swiss Post (Die Post, La Poste, La Posta) is Switzerland's national postal service and delivers parcels across Switzerland and Liechtenstein. Track one free on [post.ch](https://www.post.ch/en/receiving-mail/track-consignments) with the consignment number, or paste it in the box above. The number comes from the sender, so look in the shop's shipping email first.
@@ -107,7 +107,8 @@ Swiss Post's lockers are My Post 24 terminals, over 320 of them, open around the
 :::sources
 - [Swiss Post: Track consignments](https://www.post.ch/en/receiving-mail/track-consignments) – search field, notifications, time slot, abroad not guaranteed
 - [Swiss Post: Track consignments events](https://www.post.ch/en/receiving-mail/track-consignments/track-consignments-events) – status meanings, delivery date unknown
-- [Swiss Post: Tracking wordings (en)](https://service.post.ch/ekp-web/core/rest/translations/en/shipment-text-messages) – exact scan texts
+- [Swiss Post: My consignments](https://mys.post.ch/my-consignments/) – each scan in English, German, French or Italian
+- [Universal Parcel Scraper: Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – the scan texts Peek reads
 - [Swiss Post: Collection note](https://www.post.ch/en/receiving-mail/collection-note) – deadlines, authorisation, second delivery prices
 - [Swiss Post: Manage and receive parcels](https://www.post.ch/en/receiving-mail/manage-consignment/manage-one-off) – redirection, safe place, Saturday, midnight cut-off
 - [Swiss Post: Questions and answers on receiving](https://www.post.ch/en/help-and-contact/receiving-mail) – day-before notice, next-day pickup, WhatsApp, enquiry forms

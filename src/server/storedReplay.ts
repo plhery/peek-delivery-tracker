@@ -114,11 +114,20 @@ export type ReplayedChange = ClockChange | StageChange | CopyChange;
  */
 export interface StepBack { parcel: string; from: string; to: string; hold?: 'return' | 'delivery' }
 
+/**
+ * What a parcel's stage is derived from: each scan's id, stage and instant. A check rewrites the scans it
+ * reads again (a new row version, the same values), which leaves this as it was; a scan added, removed,
+ * restaged or redated changes it.
+ */
+const eventRevision = "md5(string_agg(e.id::text || ':' || coalesce(e.stage, '') || ':' || coalesce(extract(epoch from e.occurred_at)::text, ''), ',' order by e.id))";
+
 /** The read-only export the replay reads, one parcel a line. */
+
 export const STORED_SCANS_QUERY = `set default_transaction_read_only = on;
 select json_build_object('id', p.id, 'destination', p.carrier_data->>'destination_country',
   'open', p.archived_at is null and (coalesce(p.current_stage, '') not in ('delivered', 'returned')
     or p.carrier_data->>'return_held' = 'true'), 'stage', p.current_stage,
+  'eventRevision', (select ${eventRevision} from tracking_events e where e.package_id = p.id),
   'archived', p.archived_at is not null,
   'carriers', (select coalesce(json_agg(distinct c), '[]') from unnest(array[p.carrier, p.carrier_data->>'original_carrier', p.carrier_data->>'active_tracking_carrier']) c
     where c is not null and c <> 'unknown'),
@@ -417,7 +426,7 @@ export function followedScans(parcels: readonly StoredParcel[], changes: readonl
   const current = (scans: readonly StoredScan[], stage: (scan: StoredScan) => string, changed = false) => currentScan(ordered(scans, stage, changed));
   return parcels.flatMap((parcel): StepBack[] => {
     const from = parcel.stage ?? '';
-    if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id))) return [];
+    if (stepped.has(parcel.id) || ['delivered', 'returned'].includes(from) || !parcel.events.some((scan) => restaged.has(scan.id) || redated.has(scan.id))) return [];
     const before = current(parcel.events, (scan) => scan.stage);
     const kept = parcel.events.filter((scan) => !deleted.has(scan.id));
     const read = (scan: StoredScan) => restaged.get(scan.id) ?? scan.stage;
@@ -464,7 +473,21 @@ function backupSql(changes: readonly ReplayedChange[], placed: readonly CopyChan
  * Before any change it prints the rows it changes (`backupSql`), so its run keeps its own backup.
  * It ends open: the operator rolls it back for a dry run or commits it.
  */
-export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): string {
+export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = [],
+  snapshots: readonly { id: string; eventRevision?: string }[] = []): string {
+  const revisions = new Map(snapshots.map((snapshot) => [snapshot.id, snapshot.eventRevision]));
+  const guards = stepBacks.map(({ parcel }) => {
+    const revision = revisions.get(parcel);
+    if (!revision) throw new Error('Export a fresh event snapshot before moving parcel stages');
+    // The parent lock excludes inserts through the foreign key. Row locks also exclude
+    // edits and deletions until the transaction commits.
+    return `do $$ begin
+  perform 1 from public.packages where id = ${literal(parcel)} for update;
+  perform 1 from public.tracking_events where package_id = ${literal(parcel)} order by id for update;
+  if (select ${eventRevision} from public.tracking_events e where e.package_id = ${literal(parcel)}) is distinct from ${literal(revision)}
+    then raise exception 'Event snapshot changed since export'; end if;
+end $$;`;
+  });
   const copies = changes.filter((change): change is CopyChange => change.kind === 'copy');
   const placed = copies.filter((copy) => copy.location !== null);
   const statements = changes.filter((change) => change.kind !== 'copy').map((change) => change.kind === 'clock'
@@ -501,6 +524,7 @@ export function replaySql(changes: readonly ReplayedChange[], stepBacks: readonl
 \\pset format unaligned
 begin;
 set local peek.hand_fix = 'stored-scan replay';
+${guards.join('\n')}
 ${backupSql(changes, placed, stepBacks)}
 do $$
 declare n int; total int := 0; filled int := 0; stepped int := 0;

@@ -3,7 +3,7 @@ title: Swiss Post : suivi colis La Poste suisse et statuts
 description: Suivre un colis de La Poste suisse : à quoi ressemble le numéro, ce que veut dire chaque statut, que faire après une invitation à retirer, et qui contacter.
 slug: swiss-post-suivi-colis
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 La Poste suisse (Swiss Post, Die Post, La Posta) est le service postal national : elle livre les colis en Suisse et au Liechtenstein. Tu suis ton colis gratuitement sur [post.ch](https://www.post.ch/fr/reception/suivi-des-envois) avec son numéro d'envoi, ou en le collant dans le champ ci-dessus. Ce numéro vient de l'expéditeur : cherche d'abord dans l'e-mail d'expédition de la boutique.
@@ -85,7 +85,7 @@ Relevé sur post.ch le 11 octobre 2026 :
 
 Peek lit le suivi de La Poste en français si tu l'utilises en français (en allemand ou en italien dans ces langues, en anglais sinon) : tu y verras les textes ci-dessus, `Distribué dans le compartiment annexe/Boîte aux lettres` tel quel. Avec `Avisé pour retrait (invitation à retirer un envoi)` ou `Déposé dans l'automate MyPost24`, le colis passe à l'étape « Prêt à être retiré ».
 
-Il affiche le statut, l'office de chaque scan sur une carte, la livraison prévue (le jour, avec un créneau quand La Poste en donne un, ou une fourchette de jours), le poids, les dimensions, l'heure de livraison et le pays de destination. Pendant que le colis t'attend, il montre le nom et l'adresse de l'office ou de l'automate My Post 24, qui disparaissent une fois le colis retiré. Il laisse de côté ton nom, ton adresse, la signature et les instructions de livraison, et ne lit pas le délai de retrait.
+Il affiche le statut, l'office de chaque scan sur une carte, la livraison prévue (le jour, avec un créneau quand La Poste en donne un, ou une fourchette de jours), le poids, les dimensions, l'heure de livraison et le pays de destination. Il ne montre ni l'office ou l'automate My Post 24 où le colis t'attend, ni le délai de retrait, et laisse de côté ton nom, ton adresse, la signature et les instructions de livraison.
 
 Il vérifie le suivi jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h (heure suisse) une fois le colis en livraison (le jour même, et à partir d'une demi-heure avant le début du créneau quand La Poste en donne un, tant que c'est le suivi de La Poste qui répond ; via des services de suivi, toutes les 15 minutes), et peut t'envoyer des notifications : « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Après deux jours sans nouvelles, ou après 12 heures si le colis en est encore à « Étiquette créée » ou à « Pris en charge », Peek ne vérifie plus que toutes les heures. Un colis [GLS Suisse](carrier:gls-ch) ou un numéro postal étranger à destination de la Suisse peut être suivi jusque chez La Poste ; un numéro `CH` qui part à l'étranger, jusqu'à la poste nationale du pays de destination quand Peek la connaît (l'Allemagne, la France ou l'Italie, par exemple), une fois qu'elle montre du nouveau.
 
@@ -110,7 +110,8 @@ Pour un dommage, signale-le en ligne ou dans la Post-App dans les huit jours sui
 :::sources
 - [La Poste : Suivre un envoi](https://www.post.ch/fr/reception/suivi-des-envois) – champ de recherche, notifications
 - [La Poste : Evénements Suivi des envois](https://www.post.ch/fr/reception/suivi-des-envois/evenements-suivi-des-envois) – sens des étapes
-- [La Poste : Textes du suivi (fr)](https://service.post.ch/ekp-web/core/rest/translations/fr/shipment-text-messages) – libellés exacts des étapes en français
+- [La Poste : Mes envois](https://mys.post.ch/my-consignments/) – chaque étape en français, en allemand, en italien ou en anglais
+- [Universal Parcel Scraper : Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – les libellés que Peek lit
 - [La Poste : Invitation à retirer un envoi](https://www.post.ch/fr/reception/invitation-a-retirer) – délais de garde, procuration, deuxième distribution, réexpédition
 - [La Poste : Questions et réponses concernant la réception](https://www.post.ch/fr/aide-et-contact/reception) – retrait le lendemain, minuit, WhatsApp, recherches
 - [La Poste : Détérioration ou perte](https://www.post.ch/fr/expedier-des-colis/dommage-ou-perte) – recherche, délais, dommage en huit jours

@@ -84,6 +84,8 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Shipped! Delivered in 2-3 days',
     'Your package is being delivered by DPD',
     'Your parcel has been delivered to a pickup point',
+    'Your parcel has been delivered to a pick up point',
+    'Ready to collect: Your parcel was delivered to the store',
     'Your order is expected to be delivered tomorrow',
     'Undelivered parcel: action required',
     'Your order has shipped – delivered by DPD',

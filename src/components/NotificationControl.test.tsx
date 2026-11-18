@@ -57,7 +57,7 @@ beforeEach(() => {
     timezone: 'Europe/Zurich',
   });
   vi.mocked(saveNotificationPreferences).mockReset().mockImplementation(
-    async (preferences) => preferences,
+    async (preferences) => ({ enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: 'Europe/Zurich', ...preferences }),
   );
 });
 
@@ -215,7 +215,7 @@ describe('NotificationControl', () => {
       ],
       quietHoursStart: null,
       quietHoursEnd: null,
-      timezone: expect.any(String),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, apiAuth);
     expect(await screen.findByText('Preferences saved')).toBeInTheDocument();
   });

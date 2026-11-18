@@ -4,7 +4,9 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest';
 
 const revoke = vi.hoisted(() => vi.fn().mockResolvedValue(undefined));
 vi.mock('./runtime', () => ({ serviceClient: () => ({ revokeLiveActivityDevice: revoke }) }));
-vi.mock('./observability', () => ({ captureOperationalError: vi.fn(), logOperationalEvent: vi.fn() }));
+vi.mock('./observability', async (original) => ({
+  ...await original<typeof import('./observability')>(), captureOperationalError: vi.fn(), logOperationalEvent: vi.fn(),
+}));
 import { POST } from '../../app/api/live-activities/revoke/route';
 
 beforeEach(() => revoke.mockClear());

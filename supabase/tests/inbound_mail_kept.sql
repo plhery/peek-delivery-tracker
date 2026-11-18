@@ -138,6 +138,16 @@ begin
 end;
 $$;
 reset role;
+savepoint mailbox_cascade;
+do $$
+begin
+  delete from private.inbound_mailboxes where user_id = 'e9100000-0000-4000-8000-000000000002';
+  if exists (select 1 from private.inbound_mail_kept) then
+    raise exception 'An email outlived its mailbox';
+  end if;
+end;
+$$;
+rollback to mailbox_cascade;
 do $$
 begin
   if exists (select 1 from private.inbound_mail_kept where user_id = 'e9100000-0000-4000-8000-000000000001') then

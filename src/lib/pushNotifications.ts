@@ -120,7 +120,7 @@ export async function getNotificationPreferences(
 }
 
 export async function saveNotificationPreferences(
-  preferences: NotificationPreferences,
+  preferences: Partial<NotificationPreferences>,
   auth: ApiAuth,
 ): Promise<NotificationPreferences> {
   return request<ApiNotificationPreferences>('/api/push/preferences', auth, {

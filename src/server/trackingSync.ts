@@ -44,7 +44,8 @@ import {
 import type { DeliveryEmailService } from './email/deliveryEmails';
 import { PushDispatchError, type CompositePushNotificationService, type PushChannel, type PushSummary } from './push';
 import { LOOKUP_SYNC_PRIORITY, READER_SYNC_REASONS, REDETECTION_PAGE, SCHEDULED_SYNC_PRIORITY, STORED_EVENT_IDENTITIES, SyncJobLeaseLost, type SupabaseServiceClient, type Waiting } from './supabase';
-import { CheckHolds } from './checkHolds';
+import { providerAllowed } from './providerPolicy';
+import { CheckHolds, type CheckHold } from './checkHolds';
 import { clockDay, datedObservations, filledPlaceholders, heldPastFirstStored, misdatedCopies, providerEventId, requalifiedPlaces, restatedIdentities, restatedMinutes, retimedScans, rewordedScans, rezonedScans, sameInstantIdentities, scanDay, sharedScans, strippedMarkup, relayedScans, UNIVERSAL_PROVIDER, unnamedRowCarrier, UNWORDED_STEP, withHeldClocks, withIdentities, withoutCopyDrift, withStatedClocks } from './eventIdentity';
 export { providerEventId } from './eventIdentity';
 import {
@@ -710,6 +711,13 @@ function checkKeys(parcel: JsonObject): string[] {
   // provider's lease would turn the second away as if it rested.
   const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '')
     ?? (directCarrier(carrier) ? undefined : universalPlan({ carriers: [carrier], trackingNumber: number }).sources[0]);
+  // With an explicit allowlist the router can rotate among eligible sources. Hold them
+  // across the whole provider-only check, including any fallback it may need.
+  const setting = process.env.TRACKING_UNIVERSAL_PROVIDERS;
+  const reserved = setting?.trim() && !directCarrier(carrier)
+    ? universalPlan({ carriers: [carrier], trackingNumber: number, enableTrack123: true,
+      enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true' }).sources.filter((source) => providerAllowed(source, setting))
+    : typeof provider === 'string' && providerAllowed(provider, setting) ? [provider] : [];
   // A parcel handed over to another carrier, or whose earlier leg answered last, asks that carrier too.
   const active = typeof data.active_tracking_carrier === 'string' && directCarrier(data.active_tracking_carrier)
     ? data.active_tracking_carrier : undefined;
@@ -718,7 +726,7 @@ function checkKeys(parcel: JsonObject): string[] {
   return [...carriers,
     numberKey(parcel),
     ...(typeof parcel.user_id === 'string' ? [`account:${parcel.user_id}`] : []),
-    ...(typeof provider === 'string' ? [`provider:${provider}`] : [])];
+    ...reserved.map((source) => `provider:${source}`)];
 }
 
 /** The parcels the longest due first (`late`, by id), the others in their order. */
@@ -1938,7 +1946,7 @@ export class TrackingSyncService {
         after = steps.catch(() => undefined);
         await steps;
       };
-      const check = async (parcel: JsonObject, touched: boolean): Promise<void> => {
+      const check = async (parcel: JsonObject, touched: boolean, hold: CheckHold): Promise<void> => {
         // A check since the run listed it, such as a release's re-check on another server, stands in for a recheck,
         // and a reader's check of the parcel during the run, in the readers' lane, for the run's.
         if ((rechecks.has(parcel) || touched) && !await this.uncheckedSinceListed(parcel, context.signal)) return;
@@ -1951,6 +1959,9 @@ export class TrackingSyncService {
             () => { if (typeof parcel.user_id === 'string') unmerged.add(parcel); });
         } finally {
           if (outcome !== 'updated') unmerged.delete(parcel);
+        }
+        if (outcome === 'updated' || outcome === 'unchanged') {
+          hold.completed = { generation: parcel.tracking_generation, carrier: parcel.carrier, postcode: parcel.dpd_postcode };
         }
         summary[outcome] += 1;
         if (outcome !== 'updated') {
@@ -1972,8 +1983,9 @@ export class TrackingSyncService {
       const start = (parcel: JsonObject) => {
         // Whether a check of the parcel outside the run was under way when the run listed it, or ran since.
         const touched = this.#holds.touchedSince(String(parcel.id), started);
-        const release = this.#holds.take({ parcelId: String(parcel.id), keys: keys.get(parcel)!, browser: browser.get(parcel)!, lookups });
-        const task: Promise<void> = check(parcel, touched)
+        const hold: CheckHold = { parcelId: String(parcel.id), keys: keys.get(parcel)!, browser: browser.get(parcel)!, lookups };
+        const release = this.#holds.take(hold);
+        const task: Promise<void> = check(parcel, touched, hold)
           .catch((error: unknown) => { failed ??= { error }; stopped = true; })
           .finally(() => { release(); running.delete(task); });
         running.add(task);
@@ -2083,14 +2095,20 @@ export class TrackingSyncService {
     // With the readers' lane on, a check of a parcel's lets another of the number wait for its answers in turn.
     const lookups = joined && !same && joined.lookups ? joined.lookups : this.readerLane ? new SharedLookups([parcel]) : undefined;
     // Without a check, the merge below still holds the account.
-    const release = await this.#holds.acquire({
-      parcelId: id, keys: due ? checkKeys(parcel) : userId ? [`account:${userId}`] : [], browser: due && !same && this.opensBrowser(parcel), lookups,
-    }, context.signal);
+    const hold: CheckHold = {
+      parcelId: id, keys: due ? checkKeys(parcel) : userId ? [`account:${userId}`] : [], browser: due && this.opensBrowser(parcel), lookups,
+    };
+    const release = await this.#holds.acquire(hold, context.signal);
     const checked = parcel;
     try {
-      if (due && !same) {
+      const prior = same ? joined?.completed : undefined;
+      if (due && !(prior && prior.generation === parcel.tracking_generation && prior.carrier === parcel.carrier && prior.postcode === parcel.dpd_postcode)) {
         summary.checked = 1;
-        summary[await this.syncOne(checked, context, lookups, () => { if (userId) this.#unmerged.add(checked); })] += 1;
+        const outcome = await this.syncOne(checked, context, lookups, () => { if (userId) this.#unmerged.add(checked); });
+        if (outcome === 'updated' || outcome === 'unchanged') {
+          hold.completed = { generation: parcel.tracking_generation, carrier: parcel.carrier, postcode: parcel.dpd_postcode };
+        }
+        summary[outcome] += 1;
       }
       if (userId) await this.linkConfirmedParcels(userId);
     } finally {

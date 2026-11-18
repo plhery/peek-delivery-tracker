@@ -69,7 +69,7 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
     : null;
   if (claim === null) {
     recordPostcode('unknown', undefined, context.requestId);
-    return json({ error: PARCEL_UNAVAILABLE }, 404);
+    return json(PARCEL_UNAVAILABLE, 404);
   }
   if (claim === 'not_asked') {
     recordPostcode('not_asked', undefined, context.requestId);
@@ -104,7 +104,7 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
     if (filed === null || filed === 'not_asked') {
       recordPostcode(filed === null ? 'unknown' : 'not_asked', carrier, context.requestId,
         { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
-      return filed === null ? json({ error: PARCEL_UNAVAILABLE }, 404) : json({ error: 'No postcode is asked for this parcel' }, 409);
+      return filed === null ? json(PARCEL_UNAVAILABLE, 404) : json({ error: 'No postcode is asked for this parcel' }, 409);
     }
     settled = true;
     recordPostcode('accepted', carrier, context.requestId, { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });

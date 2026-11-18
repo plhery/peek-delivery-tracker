@@ -373,13 +373,15 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
  * Each notice in the stage of its scan before it, with the row it is shown under (stageNotices.ts): that scan, or the
  * row the scan itself is shown under as a copy (`relays`) or a carrier's repeat. A row of a relay pair is no notice,
  * but its source's notices after it go under its step: a notice the evening after a failed delivery whose row is
- * shown under the delivery partner's own goes under that step, not under the attempt of the day before.
+ * shown under the delivery partner's own goes under that step, not under the attempt of the day before. A notice its
+ * carrier sent twice is the newest of a run whose earlier row is shown under it (`repeats`): it heads that step itself.
  */
 function noticeLeads(events: readonly JsonObject[], relays: ReadonlyMap<string, string>,
   repeats: ReadonlyMap<string, string>): Map<string, string> {
   const paired = new Set([...relays.keys(), ...relays.values()]);
   const notices = stageNotices(events.map(noticeScan), paired);
-  return new Map([...notices].map(([notice, scan]) => [notice, relays.get(scan) ?? repeats.get(scan) ?? scan]));
+  return new Map([...notices].map(([notice, scan]) => [notice, relays.get(scan) ?? repeats.get(scan) ?? scan] as const)
+    .filter(([notice, lead]) => notice !== lead));
 }
 
 /**
@@ -471,6 +473,11 @@ export function newsAt(shown: readonly JsonObject[], copied: ReadonlyMap<string,
     told.push(step.scan);
   }
   return news;
+}
+
+/** The news visible on a shared timeline after removing recipient-only rows. */
+export function visibleNewsAt(row: JsonObject, placed: JsonObject, ids: ReadonlySet<string>): string | null {
+  return newsAt(shownEvents(row).filter((event) => ids.has(String(event.id))), storedAsCopies(row), shownUnder(placed));
 }
 
 /** Two rows of one moment tell one scan when they are in one stage, from two sources or in the same words. */

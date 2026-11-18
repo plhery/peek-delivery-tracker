@@ -217,7 +217,7 @@ describe('an answer through a link', () => {
     found({ gift: true });
     const refused = await viaLink(answer());
     expect(refused.status).toBe(404);
-    expect(await refused.json()).toEqual({ error: 'Parcel unavailable' });
+    expect(await refused.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
     expect(record).not.toHaveBeenCalled();
     found({ gift: true, owner: true });
     expect((await viaLink(answer(), linkId, 'A'.repeat(43))).status).toBe(204);

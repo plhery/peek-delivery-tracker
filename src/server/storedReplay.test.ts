@@ -3,6 +3,8 @@ import { providerEventId } from './eventIdentity';
 import { followedScans, replayParcel, replaySql, steppedBack, type StoredParcel, type StoredScan } from './storedReplay';
 import type { JsonObject } from './types';
 
+const snapshot = { id: 'parcel-1', eventRevision: 'saved-revision' };
+
 const scan = (id: string, source: string, occurredAt: string, stage: string, description: string, raw: JsonObject): StoredScan => ({
   id, providerEventId: `${source}:${id}`, stage, occurredAt, description, location: null, raw: { stage_source: 'carrier_map', ...raw },
 });
@@ -225,12 +227,15 @@ describe('stored scan replay', () => {
     const stepBacks = steppedBack([open, copies], changes);
     expect(stepBacks).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'registered' }]);
 
-    const sql = replaySql(changes, stepBacks);
+    const sql = replaySql(changes, stepBacks, [snapshot]);
     // The deleted copy, the re-staged row and the row that takes the copy's place, then the parcel's saved stage.
     const events = "select json_build_object('table', 'tracking_events', 'row', to_jsonb(e)) from public.tracking_events e\n"
       + " where e.id = any(array['label', 'minute', 'second']::uuid[]) order by e.id;";
     const packages = "select json_build_object('table', 'packages', 'row', jsonb_build_object('id', p.id, 'current_stage', p.current_stage))\n"
       + "  from public.packages p where p.id = any(array['parcel-1']::uuid[]) order by p.id;";
+    expect(() => replaySql(changes, stepBacks)).toThrow(/snapshot/);
+    expect(sql).toContain("is distinct from 'saved-revision'");
+    expect(sql.indexOf('for update')).toBeLessThan(sql.indexOf(events));
     expect(sql).toContain(events);
     expect(sql).toContain(packages);
     // Inside the transaction, ahead of every change, and printed alone (no header, count or command tag).
@@ -283,7 +288,7 @@ describe('stored scan replay', () => {
     const changes = replayParcel(open);
     expect(changes).toEqual([expect.objectContaining({ row: 'label', from: 'in_transit', to: 'registered' })]);
     expect(steppedBack([open], changes)).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'registered' }]);
-    const sql = replaySql(changes, steppedBack([open], changes));
+    const sql = replaySql(changes, steppedBack([open], changes), [snapshot]);
     expect(sql).toContain("update public.packages set current_stage = 'registered'\n   where id = 'parcel-1' and current_stage = 'in_transit';");
     expect(sql).toContain('if stepped <> 1 then raise exception');
     // The review reads the step back as the replay's, not a check's.
@@ -336,7 +341,7 @@ describe('stored scan replay', () => {
     expect(steppedBack([open], [restage])).toEqual([]);
     const followed = followedScans([open], [restage]);
     expect(followed).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'returned' }]);
-    const sql = replaySql([restage], followed);
+    const sql = replaySql([restage], followed, [snapshot]);
     expect(sql).toContain("update public.packages set current_stage = 'returned'\n   where id = 'parcel-1' and current_stage = 'exception';");
     expect(sql).toContain('if stepped <> 1 then raise exception');
 
@@ -365,7 +370,7 @@ describe('stored scan replay', () => {
       code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map' } as const;
     const moved = followedScans([{ ...parcel(attempt, back, trip), stage: 'in_transit' }], [restage]);
     expect(moved).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'returned', hold: 'return' }]);
-    const sql = replaySql([restage], moved);
+    const sql = replaySql([restage], moved, [snapshot]);
     expect(sql).toContain(`update public.packages set current_stage = 'returned', carrier_data = coalesce(carrier_data, '{}'::jsonb) || '{"return_held": true}'::jsonb
    where id = 'parcel-1' and current_stage = 'in_transit';`);
     expect(sql).toContain("'return_held', p.carrier_data->'return_held'");
@@ -383,7 +388,7 @@ describe('stored scan replay', () => {
       code: 'D1', reason: 'mapped', declared: 'delivered', stageSource: 'carrier_map' } as const;
     const moved = followedScans([{ ...parcel(own, relayed), stage: 'in_transit' }], [reread]);
     expect(moved).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'delivered', hold: 'delivery' }]);
-    expect(replaySql([reread], moved)).toContain("jsonb_build_object('unconfirmed_delivery_until',\n    to_char((now() + interval '259200 seconds')");
+    expect(replaySql([reread], moved, [snapshot])).toContain("jsonb_build_object('unconfirmed_delivery_until',\n    to_char((now() + interval '259200 seconds')");
     // The carrier's own row read as delivered needs no window.
     const ownDelivery = { ...reread, row: 'sorted', source: 'dpd-pl' } as const;
     expect(followedScans([{ ...parcel({ ...own, occurredAt: '2026-09-10T09:00:00Z' }, relayed), stage: 'in_transit' }], [ownDelivery]))
@@ -400,6 +405,8 @@ describe('stored scan replay', () => {
       providerEventId: 'dpd-pl:attempt', previousProviderEventId: 'dpd-pl:attempt', clash: false } as const;
     const reread = { kind: 'stage', parcel: 'parcel-1', row: 'noon', source: 'dpd-pl', open: true, from: 'exception', to: 'in_transit',
       code: 'X1', reason: 'mapped', declared: 'in_transit', stageSource: 'carrier_map' } as const;
+    expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock]))
+      .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
     expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock, reread]))
       .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
   });

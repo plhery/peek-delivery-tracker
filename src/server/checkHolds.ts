@@ -4,6 +4,7 @@ import type { SharedLookups } from './sharedLookups';
 /** A check under way: its parcel, what it holds, and the lookups a check of the same number waiting for it answers from. */
 export interface CheckHold {
   readonly parcelId: string;
+  completed?: { generation: unknown; carrier: unknown; postcode: unknown };
   readonly keys: readonly string[];
   /** Whether its lookups are expected to open a browser: it takes one of the browser slots. */
   readonly browser: boolean;

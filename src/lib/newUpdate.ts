@@ -119,8 +119,9 @@ export function useMarkNewUpdatesChoice(auth: ApiAuth | undefined): [boolean, (e
 export function useSeenWhileOpen(parcel: Parcel | null, markSeen: (id: string) => Promise<void>): void {
   const id = parcel?.id;
   const news = parcel && hasNewUpdate(parcel) ? parcel.newsAt : undefined;
+  const unopened = !!parcel?.seenAt && Date.parse(parcel.seenAt) === 0;
   useEffect(() => {
-    if (!id || !news) return;
+    if (!id || (!news && !unopened)) return;
     if (document.visibilityState !== 'hidden') {
       void markSeen(id);
       return;
@@ -132,5 +133,5 @@ export function useSeenWhileOpen(parcel: Parcel | null, markSeen: (id: string) =
     };
     document.addEventListener('visibilitychange', onVisible);
     return () => document.removeEventListener('visibilitychange', onVisible);
-  }, [id, news, markSeen]);
+  }, [id, news, unopened, markSeen]);
 }

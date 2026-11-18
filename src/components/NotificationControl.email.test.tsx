@@ -96,11 +96,7 @@ describe('the delivery email in Settings', () => {
     await user.click(screen.getByRole('radio', { name: /every scan/i }));
     await user.click(emailSwitch());
     expect(saveNotificationPreferences).toHaveBeenCalledExactlyOnceWith({
-      enabledStages: ['out_for_delivery', 'delivered'],
-      quietHoursStart: null,
-      quietHoursEnd: null,
-      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      emailOnDelivery: true,
+      emailOnDelivery: true, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     }, apiAuth);
     await waitFor(() => expect(emailSwitch()).toHaveAttribute('aria-checked', 'true'));
     expect(mocks.track).toHaveBeenCalledWith('email-delivery-change', 'success');

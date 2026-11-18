@@ -404,7 +404,8 @@ export function ParcelsProvider({
     };
     const opened = parcelsRef.current.find((parcel) => parcel.id === id);
     // What the reader is looking at is seen as of its news, whatever this device's clock says, and so the server stores it.
-    const news = opened?.newsAt;
+    // An empty email-added parcel has only its creation to acknowledge. A scan that races this opening stays new.
+    const news = opened?.newsAt ?? (opened?.seenAt && Date.parse(opened.seenAt) === 0 ? opened.createdAt : undefined);
     if (news) seen(news);
     try {
       seen(await repo.markSeen(id, news));

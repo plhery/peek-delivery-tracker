@@ -36,27 +36,26 @@ const ANNOUNCEMENT_GRACE_MS = 3 * 60 * 60_000;
 const SAVED_COPY_SECONDS = 7 * 24 * 60 * 60;
 const SAVED_COPY_CACHE = 'edge-guard-saved-pages';
 
-let announcement = { value: null, readAt: 0 };
+let announcement = { values: [], readAt: -Infinity };
 
-/** The announcement in force, or null. Never throws: a KV failure means nothing is announced. */
+/** Cache the original windows so their start and end still take effect between KV reads. */
 export async function readAnnouncement(env, now = Date.now()) {
   if (!env.MAINTENANCE) return null;
-  if (now - announcement.readAt < ANNOUNCEMENT_TTL_MS) return current(announcement.value, now);
-  let value = null;
-  try {
-    const [all, own] = await Promise.all([env.MAINTENANCE.get('all', 'json'), env.MAINTENANCE.get(site.key, 'json')]);
-    value = pickAnnouncement([all, own], now);
-  } catch {
-    value = null;
+  if (now - announcement.readAt >= ANNOUNCEMENT_TTL_MS || now < announcement.readAt) {
+    let values = [];
+    try {
+      values = await Promise.all([env.MAINTENANCE.get('all', 'json'), env.MAINTENANCE.get(site.key, 'json')]);
+    } catch { /* KV unavailable. */ }
+    announcement = { values, readAt: now };
   }
-  announcement = { value, readAt: now };
-  return current(value, now);
+  return pickAnnouncement(announcement.values, now);
 }
 
-/** Of the announcements given, the one in force that ends last. */
 export function pickAnnouncement(values, now = Date.now()) {
-  return values.map((value) => current(normalize(value), now)).filter(Boolean)
-    .sort((a, b) => (Date.parse(b.backAround ?? '') || 0) - (Date.parse(a.backAround ?? '') || 0))[0] ?? null;
+  const active = values.map((value) => current(normalize(value), now)).filter(Boolean)
+    .sort((a, b) => (Date.parse(b.backAround ?? '') || 0) - (Date.parse(a.backAround ?? '') || 0));
+  if (!active.length) return null;
+  return { ...active[0], mode: active.some((window) => window.mode === 'hard') ? 'hard' : 'soft' };
 }
 
 function normalize(value) {

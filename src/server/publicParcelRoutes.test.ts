@@ -618,7 +618,7 @@ describe('reading a parcel link', () => {
     for (const response of [unknown, malformed, lookalike]) {
       expect(response.status).toBe(404);
       expect(response.headers.get('cache-control')).toBe('no-store');
-      expect(await response.json()).toEqual({ error: 'Parcel unavailable' });
+      expect(await response.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
     }
     // A malformed id never reaches the database.
     expect(found).toHaveBeenCalledExactlyOnceWith('unknownLink2', keyHash, true);
@@ -941,7 +941,7 @@ describe('the postcode another carrier asks for', () => {
     for (const [id, key] of [[linkId, ownerKey], ['unknownLink2', ownerKey], [linkId, 'not-a-key'], [linkId, null], ['bad', ownerKey]] as const) {
       const response = await add({ carrier: 'dhl', postcode: heldPostcode }, id, key);
       expect(response.status).toBe(404);
-      expect(await response.json()).toEqual({ error: 'Parcel unavailable' });
+      expect(await response.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
     }
     expect(claimed).toHaveBeenCalledTimes(2);
     claim('not_asked');
@@ -1002,7 +1002,7 @@ describe('forgetting a lookup', () => {
     ];
     for (const response of answers) {
       expect(response.status).toBe(404);
-      expect(await response.json()).toEqual({ error: 'Parcel unavailable' });
+      expect(await response.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
     }
     // Only a well-formed link and key are checked against the database.
     expect(forgotten).toHaveBeenCalledTimes(2);
@@ -1064,7 +1064,7 @@ describe('changing what a lookup shows', () => {
     for (const response of answers) {
       expect(response.status).toBe(404);
       expect(response.headers.get('cache-control')).toBe('no-store');
-      expect(await response.json()).toEqual({ error: 'Parcel unavailable' });
+      expect(await response.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
     }
     // Only a well-formed link and key are checked against the database.
     expect(stored).toHaveBeenCalledTimes(2);
@@ -1163,7 +1163,7 @@ describe('alerts for a parcel link', () => {
     const counted = vi.spyOn(metrics, 'recordParcelAlertSet');
     for (const response of [await turnOn(body(), 'unknownLink2', ownerKey), await turnOn(body(), 'not-a-link-id!')]) {
       expect(response.status).toBe(404);
-      expect(await response.json()).toEqual({ error: 'Parcel unavailable' });
+      expect(await response.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
     }
     // A malformed id never reaches the database.
     expect(stored).toHaveBeenCalledOnce();

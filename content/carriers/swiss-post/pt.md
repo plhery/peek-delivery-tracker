@@ -3,7 +3,7 @@ title: Swiss Post rastreio: correios suíços e entrega em Portugal
 description: Rastreio Swiss Post, os correios suíços: como é o número, o que querem dizer os estados, quem entrega em Portugal e como pagar o IVA na alfândega.
 slug: correios-suicos-rastreio
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-18
 ---
 
 A Swiss Post é o correio da Suíça: Die Post em alemão, La Poste em francês, La Posta em italiano. Segues a encomenda no Track & Trace do post.ch (www.post.ch/swisspost-tracking), em alemão, francês, italiano ou inglês, ou colando o número na caixa acima. O número dá-to quem envia.
@@ -28,7 +28,7 @@ Numa encomenda para Portugal, estes são os estados que mais aparecem, em inglê
 | A Swiss Post diz | O que quer dizer para ti |
 | --- | --- |
 | `Your shipment will shortly be handed over to the Swiss Post` / `Votre envoi sera bientôt transmis à la poste` / `Ihre Sendung wird demnächst der Post übergeben` | O remetente preparou o envio. A Swiss Post ainda não o tem. |
-| `Export customs clearance` / `Dédouanement à l’exportation` / `Exportverzollung` | Na alfândega suíça, à saída. |
+| `Customs clearance process underway` / `Processus de dédouanement` / `Verzollungsprozess` | Na alfândega suíça, à saída (o mesmo texto aparece depois na alfândega portuguesa). |
 | `The consignment has left the border point` / `Départ poste frontalier pays de dépôt` / `Abgang Grenzstelle Aufgabeland` | Saiu da Suíça a caminho de Portugal. |
 | `Arrival in destination country` / `Arrivée pays de destination` / `Ankunft Bestimmungsland` | Chegou a Portugal. Pode ter de passar pela alfândega. |
 | `Customs clearance process underway` / `Processus de dédouanement` / `Verzollungsprozess` | Está na alfândega portuguesa. Vê se os CTT te mandaram um aviso. |
@@ -112,9 +112,8 @@ Com a PostPac International, sim, mas a Swiss Post avisa que o rastreio fora da 
 :::sources
 - [Swiss Post: Track consignments](https://www.post.ch/en/receiving-mail/track-consignments) – serviços com rastreio, rastreio no estrangeiro sem garantia
 - [Swiss Post: Track consignments events](https://www.post.ch/en/receiving-mail/track-consignments/track-consignments-events) – chegada, alfândega, saída da Suíça, data desconhecida
-- [Swiss Post: Tracking wordings (en)](https://service.post.ch/ekp-web/core/rest/translations/en/shipment-text-messages) – estados em inglês
-- [Swiss Post: Tracking wordings (fr)](https://service.post.ch/ekp-web/core/rest/translations/fr/shipment-text-messages) – estados em francês
-- [Swiss Post: Tracking wordings (de)](https://service.post.ch/ekp-web/core/rest/translations/de/shipment-text-messages) – estados em alemão
+- [Swiss Post: My consignments](https://mys.post.ch/my-consignments/) – estados em inglês, francês, alemão ou italiano
+- [Universal Parcel Scraper: Swiss Post](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/swiss-post) – os estados que o Peek lê
 - [Swiss Post: PostPac International](https://www.post.ch/en/sending-parcels/international-consignments/postpac-international) – entrega e desalfandegamento pelo correio do destino, assinatura
 - [Swiss Post: Länderinformationen PostPac International](https://www.post.ch/-/media/portal-opp/pl/dokumente/laenderinformationen-preiszonen-befoerderungszeit-pakete.pdf) – Portugal em média 4 dias úteis
 - [Swiss Post: Postal Delivered Duty Paid (PDDP) Europe](https://www.post.ch/en/business-solutions/exports-imports-and-customs-clearance/exports/postal-delivered-duty-paid/pddp-europe) – a loja paga direitos e IVA, Portugal até 1.000 €

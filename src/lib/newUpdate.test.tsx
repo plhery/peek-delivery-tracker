@@ -80,7 +80,7 @@ describe('the choice to mark new updates', () => {
     expect(choice.result.current[0]).toBe(false);
     await waitFor(() => expect(saveNotificationPreferences).toHaveBeenCalledTimes(1));
     expect(vi.mocked(saveNotificationPreferences).mock.calls[0][0]).toEqual({
-      enabledStages: ['delivered'], quietHoursStart: null, quietHoursEnd: null, timezone: expect.any(String), markNewUpdates: false,
+      markNewUpdates: false, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
     });
 
     vi.mocked(saveNotificationPreferences).mockRejectedValueOnce(new Error('offline'));
@@ -184,6 +184,16 @@ describe('useSeenWhileOpen', () => {
     // A scan arrives under the reader's eyes.
     open.rerender({ parcel: { ...news('2026-11-15T11:00:00.000Z'), seenAt: '2026-11-15T10:00:00.000Z' } });
     expect(markSeen).toHaveBeenCalledTimes(2);
+  });
+
+  it('marks an email-added parcel without scans when it becomes visible', () => {
+    const markSeen = vi.fn().mockResolvedValue(undefined);
+    visibility('hidden');
+    const parcel = { ...news(''), seenAt: '1970-01-01T00:00:00+00:00' };
+    renderHook(() => useSeenWhileOpen(parcel, markSeen));
+    expect(markSeen).not.toHaveBeenCalled();
+    visibility('visible');
+    expect(markSeen).toHaveBeenCalledExactlyOnceWith('tea');
   });
 
   it('waits for the page to be in front', () => {

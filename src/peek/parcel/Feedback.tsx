@@ -97,10 +97,10 @@ export function useParcelFeedback({ kind, scan, carrier, scanned = true, busy = 
   // Said right about the scan the page ends on: the question keeps quiet until the next one.
   const quiet = useMemo(() => kind === 'found' && notes.read().right === scan, [kind, notes, scan]);
   const start: Moment = quiet ? 'quiet' : 'ask';
-  const [flow, setFlow] = useState<{ notes: FeedbackNotes; kind: FeedbackSubject['kind']; moment: Moment }>({ notes, kind, moment: start });
+  const [flow, setFlow] = useState<{ notes: FeedbackNotes; scan: string; kind: FeedbackSubject['kind']; moment: Moment }>({ notes, kind, scan, moment: start });
   // Another parcel, or a carrier found while the page was open, starts over; a new scan brings the question back.
-  const moment = flow.notes === notes && flow.kind === kind && !(flow.moment === 'quiet' && !quiet) ? flow.moment : start;
-  const go = (next: Moment) => setFlow({ notes, kind, moment: next });
+  const moment = flow.notes === notes && flow.kind === kind && flow.scan === scan && !(flow.moment === 'quiet' && !quiet) ? flow.moment : start;
+  const go = (next: Moment) => setFlow({ notes, kind, scan, moment: next });
   const [open, setOpen] = useState<Open | null>(null);
   const [word, setWord] = useState<Word | null>(null);
   // The answer whose reason was given in place, for the note that may follow it.

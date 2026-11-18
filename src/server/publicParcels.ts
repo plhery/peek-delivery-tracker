@@ -19,7 +19,7 @@ import { clientNetwork, clientSite } from './api';
 import { appleAppIds } from './appleAppLinks';
 import { appFollowsLinks } from './appStoreRelease';
 import { emailConfigured } from './email/config';
-import { withEventPlaces } from './eventPlaces';
+import { visibleNewsAt, withEventPlaces } from './eventPlaces';
 import { numberHint, parcelNumberMask, WORDED_CARRIER_DATA } from './hiddenNumbers';
 import { type AllowanceHolder, allowanceForecast, captureOverallAllowance, logOperationalEvent } from './observability';
 import { privateValues, viewerScans, viewerStatusText } from './privateDetails';
@@ -38,7 +38,7 @@ export { numberHint } from './hiddenNumbers';
  */
 
 /** The one answer for an unknown, forgotten, expired or malformed link, and for a wrong key. */
-export const PARCEL_UNAVAILABLE = 'Parcel unavailable';
+export const PARCEL_UNAVAILABLE = { error: 'Parcel unavailable', code: 'parcel_unavailable' } as const;
 /** The answer for a link whose sharing was stopped, to anyone but its owner. */
 export const PARCEL_NOT_SHARED = 'Parcel not shared';
 /**
@@ -479,6 +479,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
   const planned = shown(storedPlanned.map(step));
   const written = shown(storedWritten.map(step));
   const viewed = shown(events);
+  const news = wrapped ? null : viewed.length === events.length ? row.news_at
+    : visibleNewsAt(found.package, row, new Set(viewed.map((event) => event.id)));
   const destination = typeof carrierData.destination_country === 'string' && /^[A-Za-z]{2}$/.test(carrierData.destination_country)
     ? carrierData.destination_country.toUpperCase() : null;
   const shownLink: ApiParcelLink = {
@@ -528,7 +530,7 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       notifications_muted: false,
       tracking_events: wrapped ? giftEvents(viewed, destination) : viewed,
       // When its latest scan arrived, for a device to tell what is new since it last opened the link. A wrapped gift tells no scan.
-      ...(!wrapped && typeof row.news_at === 'string' ? { news_at: row.news_at } : {}),
+      ...(typeof news === 'string' ? { news_at: news } : {}),
       // A wrapped gift tells nothing of where its parcel is going before it gets there.
       ...(!wrapped && planned.length ? { planned_events: planned } : {}),
       ...(!wrapped && typeof row.written_ahead_by === 'string' ? { written_ahead_by: row.written_ahead_by as ApiCarrierId } : {}),

@@ -211,6 +211,24 @@ describe('what an alert announces', () => {
     expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['earlier', 'event-1']);
   });
 
+  it('handles La Poste\'s other wording of a scan it had sent, at the same instant, silently', async () => {
+    const scan = (id: string, description: string, occurredAt = '2026-11-16T06:33:25Z') => ({ id, stage: 'in_transit' as const,
+      location: 'Wissous', occurredAt, description, source: 'la-poste' });
+    const colis = 'Votre colis est en transit sur nos plateformes logistiques.';
+    const colissimo = 'Votre Colissimo est en transit sur nos plateformes logistiques.';
+    pending([row({ occurred_at: '2026-11-16T06:33:25Z' })]);
+    const recent = vi.mocked(client.recentScans).mockResolvedValue(new Map([['package-1', [scan('event-1', colis), scan('earlier', colissimo)]]]));
+    expect(await alerts.dispatch()).toMatchObject({ attempted: 0, sent: 0 });
+    expect(send).not.toHaveBeenCalled();
+    expect(handled).toHaveBeenCalledExactlyOnceWith('alert-1', ['event-1']);
+    // Other words, or the same a second apart, are news.
+    recent.mockResolvedValueOnce(new Map([['package-1', [scan('event-1', colis), scan('earlier', 'Votre Colissimo est arrivé.')]]]))
+      .mockResolvedValueOnce(new Map([['package-1', [scan('event-1', colis), scan('earlier', colissimo, '2026-11-16T06:33:24Z')]]]));
+    await alerts.dispatch();
+    await alerts.dispatch();
+    expect(send).toHaveBeenCalledTimes(2);
+  });
+
   it('handles what the parcel already showed when it was added silently, as for accounts', async () => {
     pending([row({ stage: 'customs', occurred_at: '2026-10-04T18:00:00Z', event_created_at: '2026-10-05T10:00:01Z' })]);
     vi.mocked(client.packageJoinTimes).mockResolvedValue(new Map([['package-1', '2026-10-05T10:00:00Z']]));

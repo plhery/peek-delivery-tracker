@@ -679,7 +679,9 @@ and nothing typed is sent.
   providers' rows of one scan no carrier shows, at the same instant and in the same stage, each
   its provider's only row there, from places that are not apart or one only the country of the
   other, are served as one step: the others under the row whose place says most
-  (`providerTwins` in `src/server/relayCopies.ts`). A scan
+  (`providerTwins` in `src/server/relayCopies.ts`). A scan La Poste lists twice at one
+  instant, as "votre colis" and as "votre Colissimo", is shown once, and so are a copying
+  carrier's two copies of it (`wordingTwins` in `src/server/scanRepeats.ts`). A scan
   in no stage of its own (`stage_source` `none` with no stage, in transit, or the stage of the
   newest scan in a stage dated at or before it, which a notice to the recipient keeps; another
   stage in `none` is the carrier's own judgement, such as an incident it flags as a problem,

@@ -8,7 +8,7 @@ import { clockDay, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eve
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, currentCarrier, providerTwins, relayCopies } from './relayCopies';
 import { otherLanguages } from './scanLanguage';
-import { repeatLeads, scanSource } from './scanRepeats';
+import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
@@ -167,17 +167,19 @@ function restatedSightings(events: readonly JsonObject[]): Set<string> {
 }
 
 /**
- * The scans of a stored package row its timeline shows: without a provider's copies of its carrier's scans or a
- * sighting a scan already tells (`restatedSightings`), then as `timeline` keeps them. A placeholder number's scans are
- * other people's shipments merged under it: only Peek's own rows are shown.
+ * The scans of a stored package row its timeline shows: without a provider's copies of its carrier's scans, a
+ * sighting a scan already tells (`restatedSightings`) or a twin of a scan in La Poste's other wording (`wordingTwins`),
+ * then as `timeline` keeps them. A placeholder number's scans are other people's shipments merged under it: only
+ * Peek's own rows are shown.
  */
 export function shownEvents(row: JsonObject): JsonObject[] {
   const copied = providerCopies(row);
   const placeholder = placeholderNumber(row);
   const events = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [];
   const restated = restatedSightings(events);
-  return timeline(events
-    .filter((event) => !copied.has(String(event.id)) && !restated.has(String(event.id)) && (!placeholder || isOwnRow(event))));
+  const kept = events.filter((event) => !copied.has(String(event.id)) && !restated.has(String(event.id)));
+  const twins = wordingTwins(kept);
+  return timeline(kept.filter((event) => !twins.has(String(event.id)) && (!placeholder || isOwnRow(event))));
 }
 
 /**

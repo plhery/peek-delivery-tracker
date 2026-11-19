@@ -436,6 +436,36 @@ describe('withEventPlaces', () => {
     });
   });
 
+  it('shows once a scan La Poste lists twice at one instant, for "votre colis" and "votre Colissimo", and its copies', () => {
+    const scan = (id: string, source: string, occurredAt: string, description: string, location: string | null, tie?: number) => ({
+      ...event(id, location, occurredAt), description, provider_event_id: `${source}:${id}`, ...(tie === undefined ? {} : { tie_order: tie }),
+    });
+    const colis = 'Votre colis est en transit sur nos plateformes logistiques.';
+    const colissimo = 'Votre Colissimo est en transit sur nos plateformes logistiques.';
+    const row = {
+      id: 'parcel', carrier: 'yunexpress', carrier_data: { active_tracking_carrier: 'la-poste', delivery_carrier: 'la-poste' }, tracking_events: [
+        scan('next', 'la-poste', '2026-11-19T05:21:04+00:00', 'Votre Colissimo est arrivé sur son site de distribution.', 'Wissous'),
+        // The later answer lists both wordings, the Colissimo one last; YunExpress copies both, one without a place.
+        scan('lp-colissimo', 'la-poste', '2026-11-18T06:31:00+00:00', colissimo, 'Wissous', 1),
+        scan('lp-colis', 'la-poste', '2026-11-18T06:31:00+00:00', colis, 'Wissous', 0),
+        scan('first-colissimo', 'la-poste', '2026-11-16T06:33:25+00:00', colissimo, 'Wissous', 1),
+        scan('first-colis', 'la-poste', '2026-11-16T06:33:25+00:00', colis, 'Wissous', 0),
+        scan('copy-colissimo', 'yunexpress', '2026-11-16T06:33:25+00:00', colissimo, 'Wissous', 0),
+        scan('copy-colis', 'yunexpress', '2026-11-16T06:33:25+00:00', colis, null, 1),
+        // Other words at that instant, or the same pair a second apart, are scans of their own.
+        scan('other', 'la-poste', '2026-11-14T08:00:00+00:00', 'Votre colis a quitté son pays d\'expédition.', 'Wissous'),
+        scan('other-colissimo', 'la-poste', '2026-11-14T08:00:00+00:00', colissimo, 'Wissous'),
+        scan('apart-colis', 'la-poste', '2026-11-13T08:00:01+00:00', colis, 'Wissous'),
+        scan('apart-colissimo', 'la-poste', '2026-11-13T08:00:00+00:00', colissimo, 'Wissous'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
+      next: null, 'lp-colissimo': null, 'first-colissimo': null, 'copy-colissimo': 'first-colissimo',
+      other: null, 'other-colissimo': null, 'apart-colis': null, 'apart-colissimo': null,
+    });
+  });
+
   it('serves a scan that names only a country under the copy that names a town in it, unless the scan is the tracking carrier\'s', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, location, occurredAt), stage: 'in_transit', description: `Fixture ${id}`, provider_event_id: `${source}:${id}`, ...extra,

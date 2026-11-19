@@ -563,6 +563,17 @@ private struct SharedParcelCard: View {
                                             ["carrier": catalog.info(for: ahead, language: localizer.language).displayName]))
                             .font(.caption).foregroundStyle(Brand.secondaryText)
                     }
+                    // The carrier's own site is down for every parcel; its page for the number, when the link shows it.
+                    if !gift, let outage = parcel.shownCarrierOutage {
+                        let name = catalog.info(for: outage.carrier, language: localizer.language).displayName
+                        Text(localizer.text("parcel.carrierOutage", ["carrier": name]))
+                            .font(.caption).foregroundStyle(Brand.secondaryText)
+                        if let url = outage.trackingURL.flatMap(URL.init(string:)), ["https", "http"].contains(url.scheme) {
+                            Link(localizer.text("parcel.carrierOutageLink", ["carrier": name]), destination: url)
+                                .font(.caption.weight(.medium)).foregroundStyle(identity.ink)
+                                .simultaneousGesture(TapGesture().onEnded { DeliveryAnalytics.shared.action("parcel-carrier-link") })
+                        }
+                    }
                 }
                 .multilineTextAlignment(arrived ? .center : .leading)
                 .fixedSize(horizontal: false, vertical: true)

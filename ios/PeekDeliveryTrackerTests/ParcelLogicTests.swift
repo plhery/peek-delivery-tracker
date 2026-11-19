@@ -2014,6 +2014,30 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
     }
 
+    // As src/components/CarrierOutage.test.tsx: the carrier's site down, as the API serves it, until the parcel ends.
+    func testACarrierOutageIsShownUntilTheParcelIsDeliveredOrReturned() throws {
+        let id = UUID()
+        let row = """
+        {"id":"\(id.uuidString)","tracking_number":"TESTCP00001","label":"","carrier":"colis-prive","created_at":"2026-11-17T12:00:00Z","notifications_muted":false,
+         "sync_status":"error","sync_error":"carrier:transport","carrier_outage":{"carrier":"colis-prive","since":"2026-11-19T12:20:41Z",
+         "tracking_url":"https://colisprive.com/moncolis/pages/DetailColis.aspx?numColis=TESTCP00001&lang=fr"}}
+        """
+        var parcel = try JSONDecoder.deliveryTracker.decode(Parcel.self, from: Data(row.utf8))
+        XCTAssertEqual(parcel.shownCarrierOutage, CarrierOutage(carrier: .colisPrive, since: "2026-11-19T12:20:41Z",
+            trackingURL: "https://colisprive.com/moncolis/pages/DetailColis.aspx?numColis=TESTCP00001&lang=fr"))
+        parcel.trackingEvents = [event(id, .inTransit, "2026-11-18T08:00:00Z")]
+        XCTAssertNotNil(parcel.shownCarrierOutage)
+        for stage in [TrackingStage.delivered, .returned] {
+            var ended = parcel
+            ended.trackingEvents.append(event(id, stage, "2026-11-19T10:00:00Z"))
+            XCTAssertNil(ended.shownCarrierOutage)
+        }
+        // None served: none shown, the failed update stays.
+        parcel.carrierOutage = nil
+        XCTAssertNil(parcel.shownCarrierOutage)
+        XCTAssertTrue(parcel.updateFailed)
+    }
+
     // As src/components/TrackingJournal.test.tsx: the line under a written delivery nothing confirms.
     func testAWrittenDeliveryWhoseTimeHasPassedIsUnconfirmedWhileTheScansTellNothingPastTheLabel() {
         let id = UUID()

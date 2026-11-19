@@ -1844,7 +1844,12 @@ private struct ExperimentalNextDeliveryPass: View {
                 .font(.caption)
                 .foregroundStyle(identity.ink)
                 .fixedSize(horizontal: false, vertical: true)
-            if parcel.updateFailed {
+            if let outage = parcel.shownCarrierOutage {
+                ParcelFlag(text: localizer.text("attention.carrier_outage",
+                                                ["carrier": catalog.info(for: outage.carrier, language: localizer.language).displayName]),
+                           symbol: "arrow.clockwise", calm: true)
+                    .padding(.top, 8)
+            } else if parcel.updateFailed {
                 ParcelFlag(text: localizer.text("attention.sync_error"), symbol: "arrow.clockwise")
                     .padding(.top, 8)
             }
@@ -1921,14 +1926,21 @@ private struct ExperimentalParcelPassCard: View {
     private var actionNeeded: Bool {
         parcel.currentEvent?.recipientAction != nil || parcel.currentStage == .failedAttempt || parcel.currentStage == .exception
     }
+    /// The carrier's site down tells why no update comes, unless the carrier waits on the reader.
+    private var outage: String? {
+        guard !actionNeeded, let outage = parcel.shownCarrierOutage else { return nil }
+        return localizer.text("attention.carrier_outage",
+                              ["carrier": catalog.info(for: outage.carrier, language: localizer.language).displayName])
+    }
     private var flag: String? {
         let carrierIssue = !actionNeeded && [TrackingStage.customs, .readyForPickup].contains { $0 == parcel.currentStage }
-        if let notice, !carrierIssue { return notice }
+        if let notice, !carrierIssue, outage == nil { return notice }
+        if let outage { return outage }
         return parcel.updateFailed ? localizer.text("attention.sync_error") : nil
     }
     private var flagSymbol: String {
         if notice != nil, actionNeeded { return "exclamationmark.triangle" }
-        return parcel.updateFailed ? "arrow.clockwise" : "clock"
+        return parcel.updateFailed || outage != nil ? "arrow.clockwise" : "clock"
     }
 
     var body: some View {
@@ -1992,7 +2004,7 @@ private struct ExperimentalParcelPassCard: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 if let flag {
-                    ParcelFlag(text: flag, symbol: flagSymbol)
+                    ParcelFlag(text: flag, symbol: flagSymbol, calm: flag == outage)
                         .padding(.top, 4)
                 }
             }
@@ -2081,10 +2093,12 @@ private struct SelectedCardRing<Ring: InsettableShape>: View {
     }
 }
 
-/// A problem stays on the parcel's own card instead of replacing it.
+/// A problem stays on the parcel's own card instead of replacing it. A calm one is no fault of the parcel's: its carrier's
+/// site is down.
 struct ParcelFlag: View {
     let text: String
     let symbol: String
+    var calm = false
 
     var body: some View {
         HStack(spacing: 6) {
@@ -2092,7 +2106,7 @@ struct ParcelFlag: View {
             Text(text).fixedSize(horizontal: false, vertical: true)
         }
         .font(.caption.weight(.medium))
-        .foregroundStyle(Brand.warning)
+        .foregroundStyle(calm ? Brand.secondaryText : Brand.warning)
         .padding(.vertical, 4)
         .padding(.leading, 8)
         .padding(.trailing, 10)

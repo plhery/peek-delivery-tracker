@@ -48,6 +48,7 @@ extension Parcel {
             plannedEvents: package.plannedEvents,
             writtenAheadBy: package.writtenAheadBy,
             writtenAheadEvents: package.writtenAheadEvents,
+            carrierOutage: package.carrierOutage,
             newsAt: package.newsAt
         )
     }

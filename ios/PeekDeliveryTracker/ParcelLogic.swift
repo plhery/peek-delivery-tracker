@@ -494,6 +494,13 @@ extension Parcel {
         currentStage == .returned && carrierData?.returnHeld == true
     }
 
+    /// The site of the carrier tracking the parcel is down for every parcel (`carrierOutage`, served while it lasts): its
+    /// views say so calmly, in place of a failed update, with the carrier's page for the number. None once the parcel is
+    /// delivered or returned.
+    var shownCarrierOutage: CarrierOutage? {
+        currentStage == .delivered || currentStage == .returned ? nil : carrierOutage
+    }
+
     private static let expectedDayPattern = try? NSRegularExpression(pattern: "^(\\d{4}-\\d{2}-\\d{2})(?:$|[ T])")
 
     var expectedDayKey: String? {

@@ -595,6 +595,27 @@ struct ParcelDetailView: View {
                             .font(.footnote).foregroundStyle(branding.ink)
                     }
                 }
+            } else if let outage = parcel.shownCarrierOutage {
+                // The carrier's own site is down for every parcel, not this one's fault: its page shows the reader so.
+                let name = catalog.info(for: outage.carrier, language: localizer.language).displayName
+                Text(localizer.text("parcel.carrierOutage", ["carrier": name]))
+                    .font(.footnote).foregroundStyle(Brand.secondaryText)
+                if let url = outage.trackingURL.flatMap(URL.init(string:)), ["https", "http"].contains(url.scheme) {
+                    Link(destination: url) {
+                        HStack(spacing: 6) {
+                            Text(localizer.text("parcel.carrierOutageLink", ["carrier": name]))
+                            Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular))
+                        }
+                        .font(.footnote)
+                        .frame(minHeight: 44, alignment: .leading)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(branding.ink)
+                    .simultaneousGesture(TapGesture().onEnded {
+                        DeliveryAnalytics.shared.action("parcel-carrier-link")
+                        feedback.visited(name)
+                    })
+                }
             } else if let error = parcel.syncError {
                 // A number the parcel's carrier refuses, whose shape and check digit name one other carrier: the warning names it.
                 let claiming = error == "carrier:refused_number"

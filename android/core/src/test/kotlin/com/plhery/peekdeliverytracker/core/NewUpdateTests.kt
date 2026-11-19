@@ -129,7 +129,7 @@ class NewUpdateTests {
 
     /** A device signed in to the account the server holds, with its own session, settings and cache. */
     private suspend fun TestScope.signedIn(
-        server: Server, defaults: UserDefaults = MemoryDefaults(), localizer: Localizer = Localizer(AppLanguage.En), widgetCenter: WidgetCenter? = null,
+        server: Server, defaults: UserDefaults = MemoryDefaults(), localizer: Localizer = Localizer(AppLanguage.En), widgetCenter: WidgetCenter = WidgetCenter {},
     ): ParcelStore {
         val transport = RecordingTransport()
         val session = testSessionStore(configuration, backgroundScope, transport = transport, now = { now })
@@ -142,9 +142,8 @@ class NewUpdateTests {
         session.verifyCode(email = "reader@example.com", code = "123456")
         transport.handler = { server.answer(it) }
         val store = testParcelStore(
-            configuration, session, transport, backgroundScope, defaults, localizer = localizer, widgetCenter = widgetCenter ?: WidgetCenter {}, now = { now },
+            configuration, session, transport, backgroundScope, defaults, localizer = localizer, widgetCenter = widgetCenter, now = { now },
         )
-        store.setDeliveryWidgetEnabled(widgetCenter != null)
         store.setDeliveryLiveActivitiesEnabled(false)
         return store
     }

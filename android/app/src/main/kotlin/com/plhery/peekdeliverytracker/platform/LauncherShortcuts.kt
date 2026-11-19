@@ -13,7 +13,6 @@ import com.plhery.peekdeliverytracker.R
 import com.plhery.peekdeliverytracker.core.DeliveryWidgetSharedStore
 import com.plhery.peekdeliverytracker.core.ExtensionLocalizer
 import com.plhery.peekdeliverytracker.core.WidgetCenter
-import com.plhery.peekdeliverytracker.widget.onAndroid
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,8 +26,8 @@ import kotlinx.coroutines.sync.withLock
  * parcel" ([ADD], res/xml/shortcuts.xml), there from install on, and the next delivery ([NEXT_DELIVERY]), which the
  * app publishes from what the widget shows. That one is named after the widget's first parcel on its way, as Siri's
  * answer picks it, and opens its page, as the widget's card does; it follows the widget's parcels each time they
- * change, a copy pinned to the home screen with it. With nothing on the way, the widget turned off or nobody signed in,
- * it goes, and a pinned copy stays greyed under the shortcut's own name, saying why it opens nothing. A change the
+ * change, a copy pinned to the home screen with it. With nothing on the way or nobody signed in, it goes, and a pinned
+ * copy stays greyed under the shortcut's own name, saying why it opens nothing. A change the
  * system turned down while the app was in the background is made as the app comes back to the front.
  *
  * Each shortcut's intent names it ([ShortcutManagerCompat.EXTRA_SHORTCUT_ID]), and the window reports it used as it
@@ -69,7 +68,7 @@ object LauncherShortcuts {
      * so many changes to its shortcuts: one that shows the same parcel the same way is left as it is.
      */
     fun update(context: Context, store: DeliveryWidgetSharedStore) = quietly {
-        val snapshot = store.snapshot?.takeIf { store.isEnabled }
+        val snapshot = store.snapshot
         val next = snapshot?.parcels?.firstOrNull { it.deliveredAt == null }
         val published = ShortcutManagerCompat.getShortcuts(context, ShortcutManagerCompat.FLAG_MATCH_DYNAMIC or ShortcutManagerCompat.FLAG_MATCH_PINNED)
             .firstOrNull { it.id == NEXT_DELIVERY }
@@ -90,20 +89,16 @@ object LauncherShortcuts {
             if (published != null && published.isEnabled) {
                 ShortcutManagerCompat.removeDynamicShortcuts(context, listOf(NEXT_DELIVERY))
             }
-            ShortcutManagerCompat.disableShortcuts(context, listOf(NEXT_DELIVERY), greyed(store.isEnabled, snapshot != null, copy))
+            ShortcutManagerCompat.disableShortcuts(context, listOf(NEXT_DELIVERY), greyed(snapshot != null, copy))
         }
     }
 
     /**
-     * What a greyed copy says as it is tapped, as Siri answers without a next delivery: the widget's own words where its
-     * switch is off ([enabled]), Siri's where the widget has no parcels from the app (nobody signed in, [parcels]), else
-     * that nothing is on the way.
+     * What a greyed copy says as it is tapped, as Siri answers without a next delivery: Siri's where the widget has no
+     * parcels from the app (nobody signed in, [parcels]), else that nothing is on the way.
      */
-    internal fun greyed(enabled: Boolean, parcels: Boolean, copy: ExtensionLocalizer): String = when {
-        !enabled -> copy.onAndroid("widget.disabledDescription")
-        !parcels -> copy.text("siri.openPeek")
-        else -> copy.text("app.noneOnWay")
-    }
+    internal fun greyed(parcels: Boolean, copy: ExtensionLocalizer): String =
+        if (parcels) copy.text("app.noneOnWay") else copy.text("siri.openPeek")
 
     /** The shortcut that `intent` came from, by the id its intent names: one of the app's, or null. */
     fun shortcut(intent: Intent): String? {

@@ -241,7 +241,7 @@ class TalkBackScreensTest {
     }
 
     @Test
-    fun settingsPastTheWidgetsSwitch() {
+    fun settingsDownToAccountAndData() {
         show(READER)
         compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
         settle()
@@ -256,7 +256,6 @@ class TalkBackScreensTest {
                 "Signed in as",
                 "DELIVERIES [heading]",
                 "Notifications, Off [button]",
-                "Home screen widgets, Show your next deliveries in the home screen widgets you add. [switch, on]",
                 "PREFERENCES [heading]",
                 "Appearance",
                 "System [button]",
@@ -264,9 +263,10 @@ class TalkBackScreensTest {
                 "Dark [button]",
                 "Language [dropdownlist, English]",
                 "Time format [dropdownlist, Automatic (24-hour)]",
-                "Distance units [dropdownlist, Automatic (km)]",
-                "Weight units [dropdownlist, Automatic (kg)]",
-                "Mark new updates, A dot on parcels with updates since you last opened them. [switch, on]",
+                "Distance [dropdownlist, Automatic (km)]",
+                "Weight [dropdownlist, Automatic (kg)]",
+                "Dot on updated parcels, A dot appears on a parcel with a new update since you last opened it. [switch, on]",
+                "Account & data [button]",
             ),
         )
     }

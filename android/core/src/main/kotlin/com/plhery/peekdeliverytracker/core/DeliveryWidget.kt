@@ -16,7 +16,6 @@ import java.util.Locale
  */
 data class DeliveryWidgetList(
     val date: Instant,
-    val enabled: Boolean,
     val languageCode: String,
     val parcels: List<DeliveryWidgetParcel>,
     /** The sample's parcels, which the gallery shows. */
@@ -166,9 +165,9 @@ data class DeliveryWidgetList(
             return if (split == 0) listOf(lines) else listOf(lines.take(split), lines.drop(split))
         }
 
-        fun make(date: Instant, enabled: Boolean, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
+        fun make(date: Instant, languageCode: String, snapshot: DeliveryWidgetSnapshot?, isSample: Boolean = false): DeliveryWidgetList {
             val shown = snapshot?.parcels.orEmpty().filter { DeliveryWidgetSelection.isShown(it, date) }.map { it.worded(date) }
-            return DeliveryWidgetList(date, enabled, languageCode, shown, isSample = isSample)
+            return DeliveryWidgetList(date, languageCode, shown, isSample = isSample)
         }
     }
 }

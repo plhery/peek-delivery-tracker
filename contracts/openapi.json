@@ -63274,7 +63274,7 @@
                   },
                   "markNewUpdates": {
                     "type": "boolean",
-                    "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Mark new updates\", on until switched off). A request that leaves it out keeps the stored choice."
+                    "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Dot on updated parcels\" in Settings, on until switched off). A request that leaves it out keeps the stored choice."
                   },
                   "clock": {
                     "type": "string",
@@ -69137,7 +69137,7 @@
           },
           "markNewUpdates": {
             "type": "boolean",
-            "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Mark new updates\", on until switched off). A request that leaves it out keeps the stored choice."
+            "description": "Whether the list marks a parcel whose news_at is later than its seen_at (\"Dot on updated parcels\" in Settings, on until switched off). A request that leaves it out keeps the stored choice."
           },
           "clock": {
             "type": "string",

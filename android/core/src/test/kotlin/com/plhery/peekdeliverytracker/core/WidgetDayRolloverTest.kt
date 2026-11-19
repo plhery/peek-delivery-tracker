@@ -69,7 +69,7 @@ class WidgetDayRolloverTest {
         val snapshot = storedAt23h30()
         TimeZone.setDefault(TimeZone.getTimeZone("America/New_York"))
         val evening = Instant.parse("2026-11-13T00:00:00Z")
-        val row = DeliveryWidgetList.make(evening, true, "en", snapshot).parcels.single()
+        val row = DeliveryWidgetList.make(evening, "en", snapshot).parcels.single()
         assertEquals("tomorrow", row.listDay)
         assertEquals(Instant.parse("2026-11-13T05:00:00Z"), DeliveryWidgetDays.changes(snapshot.parcels, evening).first())
     }
@@ -84,7 +84,7 @@ class WidgetDayRolloverTest {
 
     @Test
     fun theParcelsWidgetStillSaysTomorrowOnTheDeliveryDay() {
-        val list = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = storedAt23h30())
+        val list = DeliveryWidgetList.make(morning, languageCode = "en", snapshot = storedAt23h30())
         val row = list.parcels.single()
         assertEquals(
             "At 08:00 on Fri 13 Nov (Zurich) the Parcels widget's row for a parcel expected that day should read " +
@@ -96,7 +96,7 @@ class WidgetDayRolloverTest {
 
     @Test
     fun theParcelsWidgetsCardStillSaysTomorrowOnTheDeliveryDay() {
-        val list = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = storedAt23h30())
+        val list = DeliveryWidgetList.make(morning, languageCode = "en", snapshot = storedAt23h30())
         assertEquals(
             "At 08:00 on Fri 13 Nov (Zurich) the Parcels widget's card should say \"Today\" for a parcel expected that " +
                 "day; it says what the app wrote at 23:30 the evening before",
@@ -118,7 +118,7 @@ class WidgetDayRolloverTest {
         val late = Instant.parse("2026-11-12T22:50:00Z")
         assertEquals(friday, DeliveryWidgetTimeline.next(late, parcels = parcels))
         // On Saturday the passed estimate gives way to the status.
-        val list = DeliveryWidgetList.make(saturday.plusSeconds(8 * 3600), enabled = true, languageCode = "en", snapshot = storedAt23h30())
+        val list = DeliveryWidgetList.make(saturday.plusSeconds(8 * 3600), languageCode = "en", snapshot = storedAt23h30())
         assertEquals("In transit", list.parcels.single().listLine)
         // Mid-afternoon on Friday, the refresh comes first.
         val afternoon = Instant.parse("2026-11-13T14:00:00Z")
@@ -142,16 +142,16 @@ class WidgetDayRolloverTest {
         store.save(DeliveryWidgetSnapshot(published, "en", ParcelStore.widgetOrder(parcels, localizer, published)))
         fun sections(list: DeliveryWidgetList) = list.sections.map { section -> section.kind to section.parcels.map { it.id } }
 
-        val evening = DeliveryWidgetList.make(published, enabled = true, languageCode = "en", snapshot = store.snapshot)
+        val evening = DeliveryWidgetList.make(published, languageCode = "en", snapshot = store.snapshot)
         assertEquals(listOf(ParcelSectionKind.Today to listOf(thursdayId), ParcelSectionKind.Active to listOf(id)), sections(evening))
         assertEquals(thursdayId, evening.cardOrder.first().id)
 
         // Control: the app's own list on Friday morning.
-        val fresh = DeliveryWidgetList(morning, true, "en", ParcelStore.widgetOrder(parcels, localizer, morning))
+        val fresh = DeliveryWidgetList(morning, "en", ParcelStore.widgetOrder(parcels, localizer, morning))
         val friday = listOf(ParcelSectionKind.Today to listOf(id), ParcelSectionKind.Active to listOf(thursdayId))
         assertEquals(friday, sections(fresh))
 
-        val list = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = store.snapshot)
+        val list = DeliveryWidgetList.make(morning, languageCode = "en", snapshot = store.snapshot)
         assertEquals(
             "At 08:00 on Fri 13 Nov the Parcels widget should show Friday's parcel under Arriving today and Thursday's " +
                 "under On the way, as the app's list does; it keeps the sections the app published at 23:30 on Thursday",
@@ -189,7 +189,7 @@ class WidgetDayRolloverTest {
         )
         val store = DeliveryWidgetSharedStore(MemoryDefaults())
         store.save(DeliveryWidgetSnapshot(evening, "en", ParcelStore.widgetOrder(listOf(delivered), localizer, evening)))
-        val row = DeliveryWidgetList.make(morning, enabled = true, languageCode = "en", snapshot = store.snapshot).parcels.single()
+        val row = DeliveryWidgetList.make(morning, languageCode = "en", snapshot = store.snapshot).parcels.single()
         // Control: the app at 08:00 would write "yesterday".
         assertEquals("yesterday", ParcelStore.widgetOrder(listOf(delivered), localizer, morning).single().listDay)
         assertEquals(

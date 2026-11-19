@@ -870,7 +870,6 @@ class DeviceParcelTests {
         val store = testParcelStore(
             postcodeConfiguration, session, transport, backgroundScope, defaults, device = device, deviceNotifications = quietNotifications(),
         )
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         store.add(trackingNumber = "TESTPARCEL123789", label = "", carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = " 75001 ")
@@ -923,7 +922,6 @@ class DeviceParcelTests {
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         session.showWelcome()
         val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         assertTrue(store.isGuest)
 
@@ -1075,7 +1073,6 @@ class DeviceParcelTests {
     private fun SigningIn.store(session: SessionStore, scope: CoroutineScope) = testParcelStore(
         postcodeConfiguration, session, transport, scope, defaults, device = device, deviceNotifications = quietNotifications(),
     ).apply {
-        setDeliveryWidgetEnabled(false)
         setDeliveryLiveActivitiesEnabled(false)
     }
 
@@ -1492,7 +1489,6 @@ class DeviceParcelTests {
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         session.showWelcome()
         val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         store.refreshAll()
@@ -2066,7 +2062,6 @@ class DeviceParcelTests {
             postcodeConfiguration, session, transport, backgroundScope, localizer = Localizer(AppLanguage.En), device = device,
             deviceNotifications = notifications,
         )
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         store.follow(ParcelLinkRoute(id = "33333333333A", name = "Books"), shown)
@@ -2109,7 +2104,6 @@ class DeviceParcelTests {
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         session.showWelcome()
         val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         assertTrue(store.isGuest)
 
@@ -2141,7 +2135,6 @@ class DeviceParcelTests {
         val store = testParcelStore(
             postcodeConfiguration, session, transport, backgroundScope, localizer = localizer, device = device, deviceNotifications = quietNotifications(),
         )
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         assertTrue(store.isGuest)
         assertTrue(store.parcels.isEmpty())
@@ -2168,7 +2161,6 @@ class DeviceParcelTests {
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         session.showWelcome()
         val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         // Opening the app loads the list, its copies unreadable offline.
         store.load()
@@ -2202,7 +2194,6 @@ class DeviceParcelTests {
         val store = testParcelStore(
             postcodeConfiguration, session, transport, backgroundScope, localizer = localizer, device = device, deviceNotifications = notifications,
         )
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         assertNull(store.followedHere(shown))
 
@@ -2280,7 +2271,6 @@ class DeviceParcelTests {
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         session.showWelcome()
         val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, notifications = notifications)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         store.start()
@@ -2473,7 +2463,6 @@ class DeviceParcelTests {
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         session.showWelcome()
         val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         assertTrue(store.isGuest)
         store.start()

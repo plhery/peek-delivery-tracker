@@ -1019,7 +1019,7 @@ class ParcelLogicTests {
         val parcels = DeliveryWidgetSelection.parcels(onTheWay = listOf(nextUp), delivered = listOf(arrived, older), now = now)
 
         assertEquals(listOf(nextUp, arrived), parcels)
-        fun listed(at: Instant) = DeliveryWidgetList.make(at, true, "en", DeliveryWidgetSnapshot(now, "en", parcels)).parcels
+        fun listed(at: Instant) = DeliveryWidgetList.make(at, "en", DeliveryWidgetSnapshot(now, "en", parcels)).parcels
         assertEquals(listOf(nextUp, arrived), listed(now))
         assertEquals(listOf(nextUp), listed(now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())))
         val many = (0 until 12).map { widgetParcel(label = "Parcel $it", outForDelivery = false) }
@@ -1086,7 +1086,7 @@ class ParcelLogicTests {
     }
 
     @Test
-    fun disablingWidgetRemovesSharedParcelSnapshot() {
+    fun clearingTheWidgetRemovesSharedParcelSnapshot() {
         val store = DeliveryWidgetSharedStore(MemoryDefaults())
         val snapshot = DeliveryWidgetSnapshot(
             generatedAt = java.time.Instant.ofEpochSecond(1_700_000_000),
@@ -1094,18 +1094,29 @@ class ParcelLogicTests {
             parcels = listOf(widgetParcel(label = "Private parcel", outForDelivery = true)),
         )
 
-        assertTrue(store.isEnabled)
         store.setLanguageCode("fr")
-        store.setLiveActivitiesEnabled(true)
         assertTrue(store.save(snapshot))
         assertEquals(snapshot, store.snapshot)
 
-        store.setEnabled(false)
+        store.clearSnapshot()
 
-        assertFalse(store.isEnabled)
-        assertTrue(store.liveActivitiesEnabled)
         assertNull(store.snapshot)
         assertEquals("fr", store.languageCode)
+    }
+
+    /** Live Activities followed the widgets' switch, now gone, until they had their own: its choice stands until then. */
+    @Test
+    fun theWidgetsRetiredSwitchStandsForLiveActivitiesUntilTheyHaveTheirOwn() {
+        val defaults = MemoryDefaults()
+        val store = DeliveryWidgetSharedStore(defaults)
+        assertTrue(store.liveActivitiesEnabled)
+
+        defaults.set(false, forKey = "sdt.deliveryWidget.enabled.v1")
+        assertFalse(store.liveActivitiesEnabled)
+
+        store.setLiveActivitiesEnabled(true)
+        assertTrue(store.liveActivitiesEnabled)
+        assertFalse(defaults.hasObject(forKey = "sdt.deliveryWidget.enabled.v1"))
     }
 
     @Test

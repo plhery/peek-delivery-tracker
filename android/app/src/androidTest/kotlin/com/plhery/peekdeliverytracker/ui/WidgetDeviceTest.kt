@@ -162,18 +162,12 @@ class WidgetDeviceTest {
         }
     }
 
-    private val parcels = listOf(
-        widgetParcel(1, "Belgian chocolate 🍫", carrier = "FedEx", outForDelivery = true),
-        widgetParcel(2, "Trail weekend kit 🏕️", carrier = "DPD Switzerland", detail = "tomorrow"),
-        widgetParcel(3, "Desk lamp", detail = "Friday"),
-    )
-
     /** The list of its first `count` parcels. */
     private fun DeliveryWidgetList.firstParcels(count: Int): DeliveryWidgetList = copy(parcels = parcels.take(count))
 
     /**
      * Each state as a launcher draws it: the demo's cards with this device's pictures, a card whose parcel has no
-     * places (Pip alone), nothing on its way, and switched off.
+     * places (Pip alone), and nothing on its way.
      */
     @Test
     fun widgetsAsALauncherDrawsThem() {
@@ -189,10 +183,8 @@ class WidgetDeviceTest {
         val unplaced = widgetSource(context, File(folder, "unplaced"), unplacedStore)
         val alone = unplaced.list(CAPTURED).firstParcels(1)
         shoot("pip", alone, alone, unplaced::read)
-        val none = DeliveryWidgetList.make(CAPTURED, true, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
+        val none = DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
         shoot("empty", none, none)
-        val off = DeliveryWidgetList.make(CAPTURED, false, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
-        shoot("disabled", off, off)
     }
 
     /**
@@ -234,7 +226,6 @@ class WidgetDeviceTest {
         try {
             assumeTrue("The device lets the test bind the widget", manager.bindAppWidgetIdIfAllowed(id, provider))
             val store = DeliveryWidgetSharedStore(PreferencesDefaults(preferences))
-            store.setEnabled(true)
             val published = listOf(widgetParcel(11, "First parcel", outForDelivery = true), widgetParcel(12, "Second parcel"), widgetParcel(13, "Third parcel"))
             store.save(DeliveryWidgetSnapshot(Instant.now(), "en", published))
             lateinit var view: AppWidgetHostView

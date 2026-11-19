@@ -641,7 +641,6 @@ class ParcelLinkTests {
         }
         val session = testSessionStore(linkConfiguration, backgroundScope, transport = transport)
         val store = testParcelStore(linkConfiguration, session, transport, backgroundScope)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         try {

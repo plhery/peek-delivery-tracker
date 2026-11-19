@@ -78,7 +78,6 @@ Google warns that "Some of these steps only work on Android 14 and up."
 
 | The widget shows | What it means |
 | --- | --- |
-| "Widget turned off" | Turn on "Settings" › "Deliveries" › "Home screen widgets" |
 | "Nothing on the way right now" | No parcel is on its way: "Add a tracking number or shipping link to get started." |
 
 "Parcels" lives on the home screen only: there's no lock screen widget, and nothing like Live Activities.
@@ -113,7 +112,7 @@ Only the Google Play build can. Tap the barcode icon at the end of the tracking 
 - [Peek: English copy](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – every Peek label quoted here
 - [Peek: Android manifest](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Add to Peek, parcel links, camera, backups
 - [Peek: the Parcels widget](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – home screen only, its sizes
-- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Home screen widgets, Forget all, Language, no Live Activities
+- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Forget all, Language, no Live Activities
 - [Peek: the Play build's scanner](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – barcodes, camera permission
 - [Peek: Support](https://peektracker.com/support.html) – no account needed, Forget all
 - [Android Help: Add apps, shortcuts and widgets to your Home screens](https://support.google.com/android/answer/9450271?hl=en) – adding a widget, pinning a shortcut, Android 14

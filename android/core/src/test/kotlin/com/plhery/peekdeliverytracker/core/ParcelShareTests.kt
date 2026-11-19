@@ -845,7 +845,6 @@ class ParcelShareTests {
         val defaults = MemoryDefaults()
         val session = testSessionStore(configuration, backgroundScope, transport = transport)
         val store = testParcelStore(configuration, session, transport, backgroundScope, defaults)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         val client = store.shareClient(parcel)
 

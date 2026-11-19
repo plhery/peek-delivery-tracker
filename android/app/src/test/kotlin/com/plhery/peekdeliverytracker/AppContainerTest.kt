@@ -254,33 +254,24 @@ class AppContainerTest {
     }
 
     /**
-     * C-SE04: Settings' widget switch, through the deliveries' source, turns the widget off for this phone, which then
-     * has no parcels to show and says so, and on again, when the demo's parcels come back.
+     * Settings' widget switch is gone: a phone that had turned it off, which then left the widget no parcels, gives it
+     * the demo's again as the app next starts.
      */
     @Test
-    fun theWidgetsSwitchEmptiesTheWidgetAndFillsItAgain() {
+    fun aPhoneThatTurnedTheWidgetOffFillsItAgainAtTheNextStart() {
         PreferencesDefaults.standard(context).set("demo", forKey = "sdt.native.experience.v1")
+        val shared = PreferencesDefaults.appGroup(context, "group.test.peek")
+        shared.set(false, forKey = "sdt.deliveryWidget.enabled.v1")
+        val widget = DeliveryWidgetSharedStore(shared)
+        assertNull(widget.snapshot)
         val app = container()
-        val widget = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context, "group.test.peek"))
-        val source = ContainerDeliveries(app)
         app.start(process.lifecycle)
         idleUntil("the demo's widget") { widget.snapshot?.parcels?.isNotEmpty() == true }
-        assertTrue(source.deliveryWidgetEnabled.value)
-
-        source.setDeliveryWidgetEnabled(false)
-        idleUntil("the widget turned off") { !widget.isEnabled }
-        assertNull(widget.snapshot)
-        assertFalse(source.deliveryWidgetEnabled.value)
-
-        source.setDeliveryWidgetEnabled(true)
-        idleUntil("the demo's widget again") { widget.snapshot?.parcels?.isNotEmpty() == true }
-        assertTrue(widget.isEnabled)
-        assertTrue(source.deliveryWidgetEnabled.value)
     }
 
     /**
      * The next delivery's shortcut on the app's icon follows what the store publishes for the widget: the demo's first
-     * parcel on its way, by its name, and none once the widget is turned off.
+     * parcel on its way, by its name.
      */
     @Test
     fun theNextDeliverysShortcutFollowsTheWidget() {
@@ -294,9 +285,6 @@ class AppContainerTest {
         assertEquals(LauncherShortcuts.NEXT_DELIVERY, shortcut.id)
         assertEquals(next.label, shortcut.shortLabel.toString())
         assertEquals(next.deepLink, shortcut.intent.dataString)
-
-        ContainerDeliveries(app).setDeliveryWidgetEnabled(false)
-        idleUntil("the shortcut gone") { ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty() }
     }
 
     /** Firebase giving no token tells the store, as AppDelegate's failure does the iPhone's: the invitation offers it again. */

@@ -338,10 +338,10 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
 /**
  * AccountView's `page`: "settings.title" as a large title under the bar, which goes under it as the page scrolls and
  * comes back as the bar's inline title, Close at the bar's leading end, off while the data page waits; then the
- * profile (the account, or the way to one), the deliveries' updates for an account, Add parcels by email where the
- * server offers it the account ([inboxOffered], with its "Experimental" badge) and the widget's switch, the appearance,
- * the language, the time format and the distance units, and the data's row over the site's, 24 apart and 24 in, 520
- * wide at most, on the app's ground. It loads the notifications' state as it opens (`.task`).
+ * profile (the account, or the way to one), the deliveries' updates for an account and Add parcels by email where the
+ * server offers it the account ([inboxOffered], with its "Experimental" badge), a group shown only with one of them, the
+ * appearance, the language, the time format, the distance and weight units and the new-update dot, and the data's row
+ * over the site's, 24 apart and 24 in, 520 wide at most, on the app's ground. It loads the notifications' state as it opens (`.task`).
  */
 @Composable
 private fun SettingsRootPage(
@@ -365,7 +365,6 @@ private fun SettingsRootPage(
     val enabledOnDevice by source.notificationsEnabledOnDevice.collectAsState()
     val preferences by source.notificationPreferences.collectAsState()
     val deliveryEmail by source.deliveryEmail.collectAsState()
-    val widgetEnabled by source.deliveryWidgetEnabled.collectAsState()
     val markNewUpdates by source.markNewUpdates.collectAsState()
     val appearance = appearanceSetting()
     val demo = source.isDemo
@@ -401,31 +400,29 @@ private fun SettingsRootPage(
                             state.closeAccount()
                         }
                     }
-                    SettingsGroup(localized("native.deliveries")) {
-                        // Alerts are kept up to date by pushes, which need an account; the widget's switch is for every
-                        // mode. Android has no Live Activities, the iPhone's row after it. A phone without pushes keeps
-                        // the row for the delivery email alone, where the account has one.
-                        if (!guest && (source.pushAvailable || deliveryEmail != null)) {
-                            SettingsButtonRow(
-                                localized("settings.deliveryUpdates"), SETTINGS_DELIVERY_UPDATES, { onPush(PAGE_UPDATES) },
-                                symbol = "bell", value = summary, chevron = true,
-                            )
-                            SettingsDivider()
-                        }
-                        // Only once the server offers the account a forwarding address.
-                        if (inboxOffered) {
-                            Box(Modifier.accessibilityFocus(inboxFocus)) {
+                    // Alerts are kept up to date by pushes, which need an account; a phone without pushes keeps the row
+                    // for the delivery email alone, where the account has one. Android has no Live Activities, the
+                    // iPhone's row after them. The group shows only with a row in it.
+                    val updates = !guest && (source.pushAvailable || deliveryEmail != null)
+                    if (updates || inboxOffered) {
+                        SettingsGroup(localized("native.deliveries")) {
+                            if (updates) {
                                 SettingsButtonRow(
-                                    localized("inbox.row"), SETTINGS_ADD_BY_EMAIL, { onPush(PAGE_INBOX) },
-                                    symbol = "envelope", chevron = true, badge = localized("inbox.experimental"),
+                                    localized("settings.deliveryUpdates"), SETTINGS_DELIVERY_UPDATES, { onPush(PAGE_UPDATES) },
+                                    symbol = "bell", value = summary, chevron = true,
                                 )
                             }
-                            SettingsDivider()
+                            // Only once the server offers the account a forwarding address.
+                            if (inboxOffered) {
+                                if (updates) SettingsDivider()
+                                Box(Modifier.accessibilityFocus(inboxFocus)) {
+                                    SettingsButtonRow(
+                                        localized("inbox.row"), SETTINGS_ADD_BY_EMAIL, { onPush(PAGE_INBOX) },
+                                        symbol = "envelope", chevron = true, badge = localized("inbox.experimental"),
+                                    )
+                                }
+                            }
                         }
-                        SettingsToggleRow(
-                            widgetEnabled, source::setDeliveryWidgetEnabled, localized("widget.settingTitle"), SETTINGS_WIDGETS,
-                            symbol = "rectangle.3.group", detail = localized("widget.settingDescription"),
-                        )
                     }
                     SettingsGroup(localized("settings.preferences")) {
                         SettingsAppearancePicker(appearance) { option ->
@@ -444,7 +441,7 @@ private fun SettingsRootPage(
                         SettingsDivider()
                         SettingsWeightRow()
                         SettingsDivider()
-                        // The web's "Mark new updates" (#72): the account's, kept with its notification preferences,
+                        // The web's "Dot on updated parcels" (#72): the account's, kept with its notification preferences,
                         // or this phone's for a guest.
                         SettingsToggleRow(
                             markNewUpdates, source::setMarkNewUpdates, localized("settings.markNewUpdates"), SETTINGS_MARK_NEW_UPDATES,
@@ -821,7 +818,6 @@ internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
 internal const val SETTINGS_ADD_BY_EMAIL = "$SETTINGS_SHEET.addByEmail"
-internal const val SETTINGS_WIDGETS = "$SETTINGS_SHEET.widgets"
 internal const val SETTINGS_MARK_NEW_UPDATES = "$SETTINGS_SHEET.markNewUpdates"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"

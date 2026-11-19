@@ -25,7 +25,7 @@ val Parcel.hasNewUpdate: Boolean
 fun Parcel.marksNewUpdate(markNewUpdates: Boolean): Boolean = markNewUpdates && hasNewUpdate
 
 /**
- * Whether cards mark their parcel's new updates ("Mark new updates" in Settings), on until switched off. This phone
+ * Whether cards mark their parcel's new updates ("Dot on updated parcels" in Settings), on until switched off. This phone
  * keeps the choice; an account's, whenever its notification preferences are read or saved, takes its place, so a choice
  * made on another device arrives. One made here that the account has not taken ([unsaved]) stands over the account's
  * until it is saved. What was seen is kept either way.

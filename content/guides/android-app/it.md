@@ -78,7 +78,6 @@ Google avverte che «alcuni di questi passaggi funzionano soltanto su Android 14
 
 | Il widget mostra | Cosa significa |
 | --- | --- |
-| «Widget disattivato» | Attiva «Impostazioni» › «Consegne» › «Widget della schermata Home» |
 | «Nessun pacco in arrivo al momento» | Nessun pacco è in arrivo: «Aggiungi un numero o un link di tracciamento per iniziare.» |
 
 «Pacchi» sta solo nella schermata Home: non c'è un widget per la schermata di blocco, né niente di simile alle Attività Live.
@@ -113,7 +112,7 @@ Solo la versione Google Play. Tocca l'icona del codice a barre alla fine del cam
 - [Peek: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – tutte le etichette di Peek citate qui
 - [Peek: manifest Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – «Aggiungi a Peek», link ai pacchi, fotocamera, backup
 - [Peek: il widget «Pacchi»](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – solo schermata Home, le sue dimensioni
-- [Peek: Impostazioni](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – «Widget della schermata Home», «Dimentica tutti», «Lingua», niente Attività Live
+- [Peek: Impostazioni](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – «Dimentica tutti», «Lingua», niente Attività Live
 - [Peek: lo scanner della versione Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – codici a barre, permesso della fotocamera
 - [Peek: assistenza (in inglese)](https://peektracker.com/support.html) – nessun account necessario, «Dimentica tutti»
 - [Guida di Android: Aggiungere app, scorciatoie e widget alle schermate Home](https://support.google.com/android/answer/9450271?hl=it) – aggiungere un widget, fissare una scorciatoia, Android 14

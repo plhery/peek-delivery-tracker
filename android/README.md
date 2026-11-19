@@ -80,9 +80,9 @@ Long-pressing the icon offers the iPhone's two App Shortcuts (`ShortcutIntents.s
   it was, or leaves Add already open as it is. Android starts a manifest shortcut in a new task, so it goes through
   `AddShortcutActivity`, which hands Add's link to the app's window in its own task.
 - **Next delivery** (`LauncherShortcuts.kt`) follows what the app publishes for the widget. It is named after the
-  first parcel on its way in the widget's order and opens its page. It goes when nothing is on the way, the widget's
-  switch is off or nobody is signed in; a copy pinned to the home screen stays, greyed, as "Next delivery" in the
-  app's language, renamed when it changes.
+  first parcel on its way in the widget's order and opens its page. It goes when nothing is on the way or nobody is
+  signed in; a copy pinned to the home screen stays, greyed, as "Next delivery" in the app's language, renamed when it
+  changes.
 
 ## Home screen widget
 
@@ -130,7 +130,7 @@ the widget shows rows. Each card, pass or row opens its parcel; the rest of the 
 (`peekdeliverytracker://parcels`).
 
 A parcel whose card in the app's list shows the new-update dot shows it in the widget too, before its stage, and loses
-it when the card does: once it is opened on any of the account's devices, or when "Mark new updates" is off
+it when the card does: once it is opened on any of the account's devices, or when "Dot on updated parcels" is off
 (`DeliveryWidgetParcel.newUpdate`). The line keeps to the room the dot leaves, so every size keeps its rows. TalkBack
 reads "New update." first.
 

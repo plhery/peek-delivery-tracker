@@ -1179,7 +1179,6 @@ class ParcelFeedbackTests {
         }
         val session = testSessionStore(configuration, backgroundScope, transport = transport)
         val store = testParcelStore(configuration, session, transport, backgroundScope)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         session.verifyCode(email = "test@example.com", code = "123456")
         val answer = ParcelFeedbackRequest.right(asked = ParcelFeedbackRequestAsked.Page, language = AppLanguage.En, app = android)
@@ -1213,7 +1212,6 @@ class ParcelFeedbackTests {
         )
         val demoSession = testSessionStore(demo, backgroundScope, transport = transport, defaults = preferences)
         val demoStore = testParcelStore(demo, demoSession, transport, backgroundScope, preferences)
-        demoStore.setDeliveryWidgetEnabled(false)
         demoStore.setDeliveryLiveActivitiesEnabled(false)
         demoSession.enterDemo()
         assertTrue(demoStore.isDemo)
@@ -1244,7 +1242,6 @@ class ParcelFeedbackTests {
             mapOf(linkId to key),
         )
         val store = testParcelStore(serviceConfiguration, session, transport, backgroundScope, device = device)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         session.bootstrap()
         assertTrue(store.isGuest)

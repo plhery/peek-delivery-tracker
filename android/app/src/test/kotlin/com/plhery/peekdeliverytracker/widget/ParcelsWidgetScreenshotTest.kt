@@ -78,7 +78,7 @@ class ParcelsWidgetScreenshotTest {
         return widget(size, list.copy(parcels = list.parcels.take(count).mapIndexed { index, parcel -> if (marked(index)) parcel.copy(newUpdate = true) else parcel }), demoSource::read)
     }
 
-    private fun none(enabled: Boolean = true) = DeliveryWidgetList.make(CAPTURED, enabled, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
+    private fun none() = DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", emptyList()))
 
     /** Columns of widgets in rows, on a wallpaper of the phone's mode. */
     private fun shoot(name: String, dark: Boolean, rows: List<List<List<Shown>>>) {
@@ -99,12 +99,12 @@ class ParcelsWidgetScreenshotTest {
         compose.screenshot("widget_list_$name")
     }
 
-    /** Small and medium, then large beside nothing on its way and the widget switched off. */
+    /** Small and medium, then large beside nothing on its way. */
     private fun sizes(name: String, dark: Boolean) = shoot(
         name, dark,
         listOf(
             listOf(listOf(widget(LIST_SMALL)), listOf(widget(LIST_MEDIUM))),
-            listOf(listOf(widget(LIST_LARGE)), listOf(widget(LIST_SMALL, none()), widget(LIST_SMALL, none(enabled = false)))),
+            listOf(listOf(widget(LIST_LARGE)), listOf(widget(LIST_SMALL, none()))),
         ),
     )
 

@@ -236,19 +236,10 @@ interface DeliveriesSource {
      */
     suspend fun setEmailOnDelivery(enabled: Boolean): Boolean
 
-    /** `store.deliveryWidgetEnabled`: whether the Home Screen widget shows the parcels, on until turned off. */
-    val deliveryWidgetEnabled: StateFlow<Boolean>
-
-    /**
-     * `store.setDeliveryWidgetEnabled(_:)`: counts `widget-change`, then turns the widget on or off for this phone; off,
-     * it forgets the parcels it showed and says it is turned off.
-     */
-    fun setDeliveryWidgetEnabled(enabled: Boolean)
-
-    /** Whether cards mark their parcel's new updates (#72), "Mark new updates" in Settings, on until turned off. */
+    /** Whether cards mark their parcel's new updates (#72), "Dot on updated parcels" in Settings, on until turned off. */
     val markNewUpdates: StateFlow<Boolean>
 
-    /** Switches "Mark new updates" at once, then saves it with the account's preferences, if there is an account. */
+    /** Switches "Dot on updated parcels" at once, then saves it with the account's preferences, if there is an account. */
     fun setMarkNewUpdates(enabled: Boolean)
 
     /** The parcel's page is in front (#72): a parcel with news is seen now, here and on the account's other devices. */
@@ -558,10 +549,6 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override suspend fun setEmailOnDelivery(enabled: Boolean): Boolean =
         saveEmailOnDelivery(container.deliveryEmail, { container.parcels.deliveryEmail }) { container.parcels.setEmailOnDelivery(enabled) }
-
-    override val deliveryWidgetEnabled get() = container.parcels.deliveryWidgetEnabledFlow
-
-    override fun setDeliveryWidgetEnabled(enabled: Boolean) = container.parcels.setDeliveryWidgetEnabled(enabled)
 
     override val markNewUpdates get() = container.parcels.markNewUpdatesFlow
 

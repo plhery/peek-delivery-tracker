@@ -271,10 +271,6 @@ class LocalizationTests {
             "settings.version",
             "widget.galleryName",
             "widget.galleryDescription",
-            "widget.settingTitle",
-            "widget.settingDescription",
-            "widget.disabledTitle",
-            "widget.disabledDescription",
         )
 
         for ((language, values) in dictionaries) {

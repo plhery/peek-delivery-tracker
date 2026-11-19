@@ -19,6 +19,7 @@ import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.state.ToggleableState
+import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.SemanticsNodeInteraction
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -424,40 +425,33 @@ class SettingsTest {
     private fun toggled(tag: String): ToggleableState? =
         node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ToggleableState)
 
+    /**
+     * The deliveries' group holds the account's updates and no switch for the widget, which a reader removes from the
+     * home screen instead: the new-update dot's is Settings' only switch.
+     */
     @Test
-    fun theWidgetsSwitchTurnsTheWidgetOffAndOnAgainCountedEachTime() {
+    fun theDeliveriesHaveNoWidgetSwitch() {
         show(AuthenticationState.Demo)
         open()
         assertTrue(shows(text("native.deliveries").uppercase()))
         assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
-        node(SETTINGS_WIDGETS).assert(hasText(text("widget.settingTitle"))).assert(hasText(text("widget.settingDescription")))
-        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
-        assertEquals(Role.Switch, node(SETTINGS_WIDGETS).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Role))
-        flip(SETTINGS_WIDGETS)
-        assertFalse(source.deliveryWidgetEnabled.value)
-        assertEquals("widget-change", source.actions.last())
-        assertEquals(ToggleableState.Off, toggled(SETTINGS_WIDGETS))
-        // TalkBack's double tap reaches the row as one switch.
-        node(SETTINGS_WIDGETS).performSemanticsAction(SemanticsActions.OnClick)
-        settle()
-        assertTrue(source.deliveryWidgetEnabled.value)
-        assertEquals(listOf("widget-change", "widget-change"), source.actions.filter { it == "widget-change" })
-        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
+        assertFalse(exists("$SETTINGS_SHEET.widgets"))
+        val switches = compose.onAllNodes(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch)).fetchSemanticsNodes()
+        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
+    /** A guest has no updates, which need an account, nor a forwarding address: no deliveries' group at all. */
     @Test
-    fun aGuestsDeliveriesHaveTheWidgetsSwitchAlone() {
+    fun aGuestHasNoDeliveriesGroup() {
         show(AuthenticationState.Welcome) { isGuest = true }
         open()
-        assertTrue(shows(text("native.deliveries").uppercase()))
+        assertFalse(shows(text("native.deliveries").uppercase()))
         assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
-        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
-        flip(SETTINGS_WIDGETS)
-        assertFalse(source.deliveryWidgetEnabled.value)
+        assertTrue(shows(text("settings.preferences").uppercase()))
     }
 
     /**
-     * Signed out, a guest has "Mark new updates" (#72) too, on at first: turned off, a parcel with news loses its dot in
+     * Signed out, a guest has "Dot on updated parcels" (#72) too, on at first: turned off, a parcel with news loses its dot in
      * the list; turned on again from TalkBack, it has it back.
      */
     @Test
@@ -492,16 +486,6 @@ class SettingsTest {
         assertEquals(ToggleableState.On, toggled(SETTINGS_MARK_NEW_UPDATES))
         press(SETTINGS_CLOSE)
         assertTrue(marked())
-    }
-
-    @Test
-    fun anAccountsWidgetsSwitchStandsUnderTheUpdates() {
-        show()
-        open()
-        val updates = node(SETTINGS_DELIVERY_UPDATES).getUnclippedBoundsInRoot()
-        val widgets = node(SETTINGS_WIDGETS).getUnclippedBoundsInRoot()
-        assertTrue(widgets.top >= updates.bottom)
-        assertEquals(ToggleableState.On, toggled(SETTINGS_WIDGETS))
     }
 
     @Test
@@ -682,14 +666,16 @@ class SettingsTest {
     }
 
     /**
-     * Time format, Distance units and Weight units start on Automatic, which names what the phone uses, and a choice from
-     * their menus takes its place.
+     * Time format, Distance and Weight start on Automatic, which names what the phone uses, and a choice from their menus
+     * takes its place. Closed, each shows its choice in short ("Auto (km)", "mi"); TalkBack and the menu name it in full.
      */
     @Test
     fun theTimeFormatDistanceAndWeightUnitsMenusChooseOverThePhone() {
         show()
         open()
         fun state(tag: String) = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.StateDescription)
+        fun shown(picker: String) = compose.onAllNodes(hasAnyAncestor(hasTestTag(picker)), useUnmergedTree = true).fetchSemanticsNodes()
+            .flatMap { it.config.getOrNull(SemanticsProperties.Text).orEmpty() }.joinToString { it.text }
         fun choose(row: String, picker: String, option: String) {
             node(row).performScrollTo()
             compose.onNodeWithTag(picker, useUnmergedTree = true).performClick()
@@ -698,20 +684,26 @@ class SettingsTest {
         }
         assertEquals(text("settings.timeFormat"), node(SETTINGS_CLOCK).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single())
         assertEquals("Automatic (24-hour)", state(SETTINGS_CLOCK))
+        assertEquals("Auto (24h)", shown(SETTINGS_CLOCK_PICKER))
         choose(SETTINGS_CLOCK, SETTINGS_CLOCK_PICKER, "$SETTINGS_CLOCK.12")
         assertEquals("12-hour", state(SETTINGS_CLOCK))
+        assertEquals("12h", shown(SETTINGS_CLOCK_PICKER))
 
         assertEquals(text("settings.distanceUnits"), node(SETTINGS_DISTANCE).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single())
         assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
+        assertEquals("Auto (km)", shown(SETTINGS_DISTANCE_PICKER))
         choose(SETTINGS_DISTANCE, SETTINGS_DISTANCE_PICKER, "$SETTINGS_DISTANCE.mi")
         assertEquals("Miles (mi)", state(SETTINGS_DISTANCE))
+        assertEquals("mi", shown(SETTINGS_DISTANCE_PICKER))
         choose(SETTINGS_DISTANCE, SETTINGS_DISTANCE_PICKER, "$SETTINGS_DISTANCE.auto")
         assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
 
         assertEquals(text("settings.weightUnits"), node(SETTINGS_WEIGHT).fetchSemanticsNode().config[SemanticsProperties.ContentDescription].single())
         assertEquals("Automatic (kg)", state(SETTINGS_WEIGHT))
+        assertEquals("Auto (kg)", shown(SETTINGS_WEIGHT_PICKER))
         choose(SETTINGS_WEIGHT, SETTINGS_WEIGHT_PICKER, "$SETTINGS_WEIGHT.lb")
         assertEquals("Pounds (lb)", state(SETTINGS_WEIGHT))
+        assertEquals("lb", shown(SETTINGS_WEIGHT_PICKER))
         assertEquals("Automatic (km)", state(SETTINGS_DISTANCE))
         choose(SETTINGS_WEIGHT, SETTINGS_WEIGHT_PICKER, "$SETTINGS_WEIGHT.auto")
         assertEquals("Automatic (kg)", state(SETTINGS_WEIGHT))
@@ -937,13 +929,16 @@ class SettingsTest {
         assertEquals(listOf(true), source.emailChoices)
     }
 
-    /** Without pushes or a delivery email, as in the demo, Delivery updates would hold nothing to set: no row. */
+    /**
+     * Without pushes or a delivery email, as in the demo, Delivery updates would hold nothing to set: no row, and
+     * without a forwarding address either, no deliveries' group.
+     */
     @Test
     fun aPhoneWithoutPushOrADeliveryEmailHasNoDeliveryUpdatesRow() {
         show(AuthenticationState.Demo) { pushAvailable = false }
         open()
         assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
-        assertTrue(exists(SETTINGS_WIDGETS))
+        assertFalse(shows(text("native.deliveries").uppercase()))
     }
 
     @Test

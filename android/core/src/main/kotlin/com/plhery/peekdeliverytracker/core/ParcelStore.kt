@@ -269,7 +269,6 @@ class ParcelStore(
     private val notificationPreferencesState = MutableStateFlow<NotificationPreferences?>(null)
     private val notificationErrorState = MutableStateFlow<String?>(null)
     private val nativePushRegistrationFailedState = MutableStateFlow(false)
-    private val deliveryWidgetEnabledState = MutableStateFlow(deliveryWidgetStore.isEnabled)
     private val deliveryLiveActivitiesEnabledState = MutableStateFlow(offersLiveActivities && deliveryWidgetStore.liveActivitiesEnabled)
     private val deliveryLiveActivityErrorState = MutableStateFlow<String?>(null)
     private val undoParcelState = MutableStateFlow<Parcel?>(null)
@@ -293,13 +292,12 @@ class ParcelStore(
     val notificationPreferencesFlow: StateFlow<NotificationPreferences?> = notificationPreferencesState.asStateFlow()
     private val markNewUpdatesChoice = MarkNewUpdatesChoice(defaults)
 
-    /** Whether cards mark their parcel's new updates (#72), "Mark new updates" in Settings. */
+    /** Whether cards mark their parcel's new updates (#72), "Dot on updated parcels" in Settings. */
     val markNewUpdatesFlow: StateFlow<Boolean> = markNewUpdatesChoice.enabled
     val notificationErrorFlow: StateFlow<String?> = notificationErrorState.asStateFlow()
 
     /** The last try to register this phone's token, with Firebase or with the server, failed: the invitation offers it again. */
     val nativePushRegistrationFailedFlow: StateFlow<Boolean> = nativePushRegistrationFailedState.asStateFlow()
-    val deliveryWidgetEnabledFlow: StateFlow<Boolean> = deliveryWidgetEnabledState.asStateFlow()
     val deliveryLiveActivitiesEnabledFlow: StateFlow<Boolean> = deliveryLiveActivitiesEnabledState.asStateFlow()
     val deliveryLiveActivityErrorFlow: StateFlow<String?> = deliveryLiveActivityErrorState.asStateFlow()
     val undoParcelFlow: StateFlow<Parcel?> = undoParcelState.asStateFlow()
@@ -437,10 +435,6 @@ class ParcelStore(
         set(value) {
             nativePushRegistrationFailedState.value = value
         }
-
-    // Set through its state alone: `setDeliveryWidgetEnabled` is the switch's own function.
-    val deliveryWidgetEnabled: Boolean
-        get() = deliveryWidgetEnabledState.value
 
     // Set through its state alone: `setDeliveryLiveActivitiesEnabled` is the switch's own function.
     val deliveryLiveActivitiesEnabled: Boolean
@@ -636,14 +630,6 @@ class ParcelStore(
 
     val isSynchronizing: Boolean
         get() = parcels.any { it.syncStatus == SyncStatus.Pending || it.syncStatus == SyncStatus.Syncing }
-
-    fun setDeliveryWidgetEnabled(enabled: Boolean) {
-        analytics("widget-change", null)
-        if (deliveryWidgetEnabled == enabled) return
-        deliveryWidgetEnabledState.value = enabled
-        deliveryWidgetStore.setEnabled(enabled)
-        publishDeliveryWidget()
-    }
 
     fun setDeliveryLiveActivitiesEnabled(enabled: Boolean) {
         analytics("live-activities-change", null)
@@ -1520,7 +1506,7 @@ class ParcelStore(
     }
 
     /**
-     * Switches "Mark new updates" (#72) at once on this phone; what was seen is kept either way. An account's choice is
+     * Switches "Dot on updated parcels" (#72) at once on this phone; what was seen is kept either way. An account's choice is
      * saved with its preferences. A choice the account has not taken, made without one or while the server could not
      * take it, stands on this phone until it is saved, and goes to the account when its preferences are next read.
      */
@@ -1532,12 +1518,12 @@ class ParcelStore(
         saveMarkNewUpdates(enabled)?.join()
     }
 
-    /** The choices made about "Mark new updates", counted: the answer to an earlier one does not undo a later one. */
+    /** The choices made about "Dot on updated parcels", counted: the answer to an earlier one does not undo a later one. */
     private var markNewUpdatesWrite: Job? = null
     private var markNewUpdatesChoices = 0
 
     /**
-     * Saves "Mark new updates" with the account's preferences as stored and this phone's time zone. Taken, the choice
+     * Saves "Dot on updated parcels" with the account's preferences as stored and this phone's time zone. Taken, the choice
      * follows the account again.
      */
     private fun saveMarkNewUpdates(enabled: Boolean): Job? {
@@ -1611,7 +1597,7 @@ class ParcelStore(
         }
     }
 
-    /** "Mark new updates" as this phone or the account chose it: the widgets show their dots as the cards do. */
+    /** "Dot on updated parcels" as this phone or the account chose it: the widgets show their dots as the cards do. */
     private fun keepMarkNewUpdates(enabled: Boolean) {
         if (markNewUpdatesFlow.value == enabled) return
         markNewUpdatesChoice.keep(enabled)
@@ -1760,7 +1746,7 @@ class ParcelStore(
         get() = nextDeliveries(parcels, localizer, now())
 
     private fun publishDeliveryWidget() {
-        val snapshot = if (deliveryWidgetEnabled && (session.isAuthenticated || isGuest)) {
+        val snapshot = if (session.isAuthenticated || isGuest) {
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
@@ -1773,11 +1759,10 @@ class ParcelStore(
         if (snapshot != null && widgetPicturesTask != null) return
 
         // Reloads spend the widget's system budget; skip them when nothing it shows changed.
-        val state = DeliveryWidgetState(enabled = deliveryWidgetEnabled, languageCode = localizer.language.rawValue, parcels = snapshot?.parcels)
+        val state = DeliveryWidgetState(languageCode = localizer.language.rawValue, parcels = snapshot?.parcels)
         if (state == publishedWidgetState) return
         publishedWidgetState = state
         deliveryWidgetStore.setLanguageCode(localizer.language.rawValue)
-        deliveryWidgetStore.setEnabled(deliveryWidgetEnabled)
         if (snapshot != null) {
             deliveryWidgetStore.save(snapshot)
         } else {
@@ -2089,7 +2074,7 @@ class ParcelStore(
         /**
          * The widget's parcels, in its order ([DeliveryWidgetSelection.ordered]): those on their way, then those
          * delivered within the last day, the latest first. Their details are also worded for the next midnights. Each
-         * carries the dot its card in the app shows while "Mark new updates" is on ([DeliveryWidgetParcel.newUpdate]).
+         * carries the dot its card in the app shows while "Dot on updated parcels" is on ([DeliveryWidgetParcel.newUpdate]).
          */
         fun widgetOrder(parcels: List<Parcel>, localizer: Localizer, now: Instant = AppClock.now(), markNewUpdates: Boolean = true): List<DeliveryWidgetParcel> {
             val zone = ZoneId.systemDefault()
@@ -2221,7 +2206,7 @@ object LeftOnDeviceMemory {
 }
 
 /** What the widget displays; the snapshot's timestamp alone never needs a reload. */
-private data class DeliveryWidgetState(val enabled: Boolean, val languageCode: String, val parcels: List<DeliveryWidgetParcel>?)
+private data class DeliveryWidgetState(val languageCode: String, val parcels: List<DeliveryWidgetParcel>?)
 
 @Serializable
 private class DemoExport(val exportedAt: String, val mode: String, val packages: List<Parcel>)

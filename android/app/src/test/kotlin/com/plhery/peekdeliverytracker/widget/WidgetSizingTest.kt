@@ -111,7 +111,7 @@ class WidgetSizingTest {
 
     /** The first `count` of [three] as the list shows them, and their pictures: every mark `mark`, and no route. */
     private fun drawnWith(mark: Bitmap, count: Int): Pair<DeliveryWidgetList, (DeliveryWidgetCard, DeliveryWidgetPicture) -> WidgetCardArt?> =
-        DeliveryWidgetList.make(CAPTURED, true, "en", DeliveryWidgetSnapshot(CAPTURED, "en", three.take(count))) to
+        DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", three.take(count))) to
             { _: DeliveryWidgetCard, _: DeliveryWidgetPicture -> WidgetCardArt(mark to mark, null) }
 
     /**

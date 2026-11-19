@@ -78,7 +78,6 @@ Widżet „Przesyłki” ma na start rozmiar cztery na dwie komórki i można go
 
 | Widżet pokazuje | Co to znaczy |
 | --- | --- |
-| „Widżet wyłączony” | Włącz „Ustawienia” › „Dostawy” › „Widżety ekranu głównego” |
 | „Brak przesyłek w drodze” | Żadna przesyłka nie jest w drodze: „Dodaj numer lub link śledzenia, aby zacząć.” |
 
 Widżet „Przesyłki” działa tylko na ekranie głównym: nie ma widżetu na ekran blokady ani niczego w rodzaju Aktywności na żywo.
@@ -113,7 +112,7 @@ Tylko w wersji z Google Play. Stuknij ikonę kodu kreskowego na końcu pola śle
 - [Peek: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – każda cytowana tu etykieta Peeka
 - [Peek: manifest Androida](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Dodaj do Peeka, linki do przesyłek, aparat, kopie zapasowe
 - [Peek: widżet Przesyłki](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – tylko ekran główny, jego rozmiary
-- [Peek: Ustawienia](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Widżety ekranu głównego, Zapomnij o wszystkich, Język, brak Aktywności na żywo
+- [Peek: Ustawienia](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Zapomnij o wszystkich, Język, brak Aktywności na żywo
 - [Peek: skaner w wersji z Google Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – kody kreskowe, dostęp do aparatu
 - [Peek: Support](https://peektracker.com/support.html) – bez konta, Forget all
 - [Android – Pomoc: Dodawanie aplikacji, skrótów i widżetów do ekranów głównych](https://support.google.com/android/answer/9450271?hl=pl) – dodawanie widżetu (Widżety), przypinanie skrótu, Android 14

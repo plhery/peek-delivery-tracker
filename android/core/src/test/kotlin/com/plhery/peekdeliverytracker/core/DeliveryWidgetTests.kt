@@ -242,8 +242,8 @@ class DeliveryWidgetTests {
             runCurrent()
             assertEquals(attempts, artist.attempts)
 
-            // Switched off, the widget keeps no pictures.
-            store.setDeliveryWidgetEnabled(false)
+            // Cleared, as when the account changes, the widget keeps no pictures.
+            store.clearDeliverySurfaces()
             assertNull(shared.snapshot)
             assertEquals(0, folder.listFiles().orEmpty().size)
         } finally {
@@ -331,7 +331,7 @@ class DeliveryWidgetTests {
             clock = Instant.parse("2026-11-12T22:00:00Z") // Thu 17:00 New York, as the phone lands
             val evening = Instant.parse("2026-11-13T01:00:00Z") // Thu 20:00 New York
             fun app() = ParcelStore.widgetOrder(store.parcels, localizer, evening).map { it.id to it.listDay }
-            fun widget() = DeliveryWidgetList.make(evening, enabled = true, languageCode = "en", snapshot = shared.snapshot).parcels
+            fun widget() = DeliveryWidgetList.make(evening, languageCode = "en", snapshot = shared.snapshot).parcels
                 .map { it.id to it.listDay }
             assertTrue("A parcel of the demo is due on Friday", app().any { it.second == "tomorrow" })
             assertEquals("Even before the app returns, the widget follows New York's midnights", app(), widget())
@@ -392,7 +392,7 @@ class DeliveryWidgetTests {
      */
     @Test
     fun theListKeepsADeliveredParcelForADay() {
-        fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, true, "en", snapshot)
+        fun list(snapshot: DeliveryWidgetSnapshot?, at: Instant = now) = DeliveryWidgetList.make(at, "en", snapshot)
 
         assertEquals(emptyList<DeliveryWidgetParcel>(), list(null).parcels)
 
@@ -457,7 +457,7 @@ class DeliveryWidgetTests {
     @Test
     fun theListPicksItsDesignByHowManyParcelsItShows() {
         fun designs(size: DeliveryWidgetList.Size) = (1..8).map { count ->
-            DeliveryWidgetList.make(now, true, "en", listed(count)).design(size).name.first()
+            DeliveryWidgetList.make(now, "en", listed(count)).design(size).name.first()
         }.joinToString("")
         assertEquals("CPSSSSSS", designs(DeliveryWidgetList.Size.Small))
         assertEquals("CCPPSSSS", designs(DeliveryWidgetList.Size.Medium))
@@ -465,9 +465,9 @@ class DeliveryWidgetTests {
         // A parcel delivered within the day counts; a day after it arrived, it no longer does.
         val arrived = widgetParcel(label = "Arrived", outForDelivery = false).copy(deliveredAt = now.minusSeconds(3_600))
         val withArrived = listed(1, delivered = listOf(arrived))
-        assertEquals(DeliveryWidgetList.Design.Passes, DeliveryWidgetList.make(now, true, "en", withArrived).design(DeliveryWidgetList.Size.Small))
+        assertEquals(DeliveryWidgetList.Design.Passes, DeliveryWidgetList.make(now, "en", withArrived).design(DeliveryWidgetList.Size.Small))
         val later = now.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())
-        assertEquals(DeliveryWidgetList.Design.Cards, DeliveryWidgetList.make(later, true, "en", withArrived).design(DeliveryWidgetList.Size.Small))
+        assertEquals(DeliveryWidgetList.Design.Cards, DeliveryWidgetList.make(later, "en", withArrived).design(DeliveryWidgetList.Size.Small))
     }
 
     /**
@@ -485,7 +485,7 @@ class DeliveryWidgetTests {
             parcel("Pickup", ParcelSectionKind.Attention, nextUp = true),
             parcel("Arrived", ParcelSectionKind.Delivered),
         )
-        val list = DeliveryWidgetList(now, true, "en", parcels)
+        val list = DeliveryWidgetList(now, "en", parcels)
         assertEquals(
             listOf(
                 ParcelSectionKind.Attention to listOf("Pickup", "Customs"),
@@ -514,8 +514,8 @@ class DeliveryWidgetTests {
         val held = parcel("Held", ParcelSectionKind.Attention)
         val today = parcel("Today", ParcelSectionKind.Today)
         val coming = (1..4).map { parcel("Coming $it", ParcelSectionKind.Active) }
-        val quiet = DeliveryWidgetList(now, true, "en", listOf(stuck, today) + coming).sections
-        val busy = DeliveryWidgetList(now, true, "en", listOf(stuck, held, today) + coming).sections
+        val quiet = DeliveryWidgetList(now, "en", listOf(stuck, today) + coming).sections
+        val busy = DeliveryWidgetList(now, "en", listOf(stuck, held, today) + coming).sections
         fun heading(kind: ParcelSectionKind, count: Int) = DeliveryWidgetList.Line.Heading(kind, count)
         fun row(parcel: DeliveryWidgetParcel) = DeliveryWidgetList.Line.Row(parcel)
         fun more(count: Int) = DeliveryWidgetList.Line.More(count)
@@ -716,7 +716,7 @@ class DeliveryWidgetTests {
         assertEquals(listOf("passes", "6", "5", "4", "3", "2", "1"), fits(passes, 6, DeliveryWidgetList.Size.Large))
         for (size in DeliveryWidgetList.Size.entries) {
             for (count in 1..8) {
-                val design = DeliveryWidgetList.make(now, true, "en", listed(count)).design(size)
+                val design = DeliveryWidgetList.make(now, "en", listed(count)).design(size)
                 val tried = DeliveryWidgetList.fits(design, count, size)
                 assertEquals("$size $count", design == passes, tried.first() == DeliveryWidgetList.Fit.Passes)
                 assertEquals("$size $count", if (design == passes) 1 else 0, tried.count { it == DeliveryWidgetList.Fit.Passes })

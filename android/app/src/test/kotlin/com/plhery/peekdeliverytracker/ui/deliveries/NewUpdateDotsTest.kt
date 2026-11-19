@@ -29,7 +29,7 @@ import org.robolectric.annotation.GraphicsMode
 /**
  * The list's new-update dots (#72), with every parcel given a scan later than it was last opened: Next up, the cards on
  * their way and the past deliveries read "New update." first; an archived parcel's row doesn't, in the shelf or among a
- * search's results. "Mark new updates" turned off takes every dot away, and turned on brings them back.
+ * search's results. "Dot on updated parcels" turned off takes every dot away, and turned on brings them back.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)

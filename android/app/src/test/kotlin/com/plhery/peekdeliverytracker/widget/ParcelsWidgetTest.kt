@@ -113,8 +113,8 @@ class ParcelsWidgetTest {
     private fun narrowLine(parcel: DeliveryWidgetParcel, list: DeliveryWidgetList) =
         sections(list, LIST_SMALL).layout.let { fittingLine(parcel, it, it.words) }
 
-    private fun list(parcels: List<DeliveryWidgetParcel>, enabled: Boolean = true) =
-        DeliveryWidgetList.make(CAPTURED, enabled, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
+    private fun list(parcels: List<DeliveryWidgetParcel>) =
+        DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
 
     /**
      * The rows each size has room for, as many as fit, in the sections' order: four two cells by two, seven four by two,
@@ -781,19 +781,13 @@ class ParcelsWidgetTest {
         onNode(opensList).assertExists()
     }
 
-    /** Nothing on its way, and the widget switched off in the app, in the existing widget's words; the list opens. */
+    /** Nothing on its way, in the existing widget's words; the list opens. */
     @Test
-    fun emptyAndSwitchedOffListsSayWhy() {
+    fun anEmptyListSaysWhy() {
         show(list(emptyList()), LIST_SMALL) {
             onNode(hasTextEqualTo(english.text("app.noneOnWay"))).assertExists()
             onNode(hasTextEqualTo(english.text("app.emptyDescription"))).assertExists()
             onNode(opensList).assertExists()
-        }
-        show(list(sample.parcels, enabled = false), LIST_MEDIUM) {
-            onNode(opensList).assertExists()
-            onNode(hasTextEqualTo(english.text("widget.disabledTitle"))).assertExists()
-            onNode(hasTextEqualTo(english.text("widget.disabledDescription.android"))).assertExists()
-            onNode(hasTextEqualTo(sample.parcels[0].label)).assertDoesNotExist()
         }
     }
 
@@ -818,8 +812,8 @@ class ParcelsWidgetTest {
     }
 
     /**
-     * The list reads what the app published, those delivered over a day ago gone, and whether it is switched on; its
-     * gallery picture is the sample in the reader's language, whatever the reader tracks.
+     * The list reads what the app published, those delivered over a day ago gone; its gallery picture is the sample in
+     * the reader's language, whatever the reader tracks.
      */
     @Test
     fun listReadsWhatTheAppPublished() {
@@ -833,9 +827,6 @@ class ParcelsWidgetTest {
         store.save(DeliveryWidgetSnapshot(CAPTURED, "en", published))
         assertEquals(published, source.list(CAPTURED).parcels)
         assertEquals(published.take(3), source.list(CAPTURED.plusSeconds(DeliveryWidgetSelection.deliveredFor.toLong())).parcels)
-
-        store.setEnabled(false)
-        assertFalse(source.list(CAPTURED).enabled)
 
         val gallery = source.listSample(CAPTURED)
         assertTrue(gallery.isSample)

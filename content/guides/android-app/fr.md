@@ -78,7 +78,6 @@ Google prévient : « Certaines de ces étapes ne s'appliquent qu'à Android 14 
 
 | Le widget affiche | Ce que ça veut dire |
 | --- | --- |
-| « Widget désactivé » | Active « Réglages » › « Livraisons » › « Widgets d’écran d’accueil » |
 | « Aucun colis en route pour le moment » | Aucun colis n'est en route : « Ajoute un numéro ou un lien de suivi pour commencer. » |
 
 « Colis » ne s'ajoute qu'à l'écran d'accueil : il n'y a pas de widget pour l'écran verrouillé, ni rien qui ressemble aux activités en direct.
@@ -113,7 +112,7 @@ Seule la version Google Play le peut. Touche l'icône de code-barres au bout du 
 - [Peek : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – chaque libellé de Peek cité ici
 - [Peek : manifeste Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – « Ajouter à Peek », liens de colis, appareil photo, sauvegardes
 - [Peek : le widget « Colis »](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – écran d'accueil seulement, ses tailles
-- [Peek : Réglages](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – « Widgets d’écran d’accueil », « Tout oublier », « Langue », pas d'activités en direct
+- [Peek : Réglages](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – « Tout oublier », « Langue », pas d'activités en direct
 - [Peek : le scanner de la version Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – codes-barres, autorisation de l'appareil photo
 - [Peek : aide (en anglais)](https://peektracker.com/support.html) – pas besoin de compte, « Tout oublier »
 - [Aide Android : Ajouter des applications, des raccourcis et des widgets aux écrans d'accueil](https://support.google.com/android/answer/9450271?hl=fr) – ajouter un widget, épingler un raccourci, Android 14

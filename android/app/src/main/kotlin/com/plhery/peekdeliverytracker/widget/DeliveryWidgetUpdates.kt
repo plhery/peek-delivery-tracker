@@ -57,14 +57,14 @@ class DeliveryWidgetSource(
     fun list(at: Instant): DeliveryWidgetList {
         val snapshot = store.snapshot
         val languageCode = snapshot?.languageCode ?: ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
-        return DeliveryWidgetList.make(at, store.isEnabled, languageCode, snapshot)
+        return DeliveryWidgetList.make(at, languageCode, snapshot)
     }
 
     /** The list widget's sample (DeliveryWidgetListSample), in the reader's language, which its gallery picture shows. */
     fun listSample(at: Instant): DeliveryWidgetList {
         val languageCode = ExtensionLocalizer(store.languageCode, preferredLanguages()).languageCode
         val localizer = Localizer(AppLanguage.fromRawValue(languageCode) ?: AppLanguage.En)
-        return DeliveryWidgetList.make(at, true, languageCode, DeliveryWidgetListSample.snapshot(localizer, at), isSample = true)
+        return DeliveryWidgetList.make(at, languageCode, DeliveryWidgetListSample.snapshot(localizer, at), isSample = true)
     }
 
     /** `DeliveryWidgetCardArt`: the mark, and the route as `shape` shows it; null while the mark isn't there. */

@@ -78,7 +78,6 @@ Google warnt: „Einige dieser Schritte funktionieren nur unter Android 14 oder 
 
 | Das Widget zeigt | Was es bedeutet |
 | --- | --- |
-| „Widget ausgeschaltet“ | Schalte „Einstellungen“ › „Sendungen“ › „Startbildschirm-Widgets“ ein |
 | „Gerade ist nichts unterwegs“ | Kein Paket ist unterwegs: „Füge eine Sendungsnummer oder einen Tracking-Link hinzu.“ |
 
 „Pakete“ gibt es nur auf dem Startbildschirm: Es gibt kein Widget für den Sperrbildschirm und nichts Vergleichbares zu Live-Aktivitäten.
@@ -113,7 +112,7 @@ Nur die Google-Play-Version kann das. Tippe auf das Barcode-Symbol am Ende des S
 - [Peek: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – jede hier zitierte Peek-Beschriftung
 - [Peek: Android-Manifest](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – „Zu Peek hinzufügen“, Paketlinks, Kamera, Backups
 - [Peek: das Widget „Pakete“](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – nur auf dem Startbildschirm, seine Größen
-- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – „Startbildschirm-Widgets“, „Alle vergessen“, „Sprache“, keine Live-Aktivitäten
+- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – „Alle vergessen“, „Sprache“, keine Live-Aktivitäten
 - [Peek: der Scanner der Play-Version](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – Barcodes, Kameraberechtigung
 - [Peek: Hilfe (auf Englisch)](https://peektracker.com/support.html) – kein Konto nötig, „Alle vergessen“
 - [Android-Hilfe: Apps, Verknüpfungen und Widgets auf Startbildschirmen hinzufügen](https://support.google.com/android/answer/9450271?hl=de) – ein Widget hinzufügen, eine Verknüpfung anheften, Android 14

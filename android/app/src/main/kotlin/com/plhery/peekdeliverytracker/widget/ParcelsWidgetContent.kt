@@ -164,7 +164,7 @@ fun ParcelsWidgetContent(
     val context = LocalContext.current
     val copy = remember(list.languageCode) { Localizer(AppLanguage.fromRawValue(list.languageCode) ?: AppLanguage.En, variant = "android") }
     val type = WidgetText(context)
-    val design = if (list.enabled && list.parcels.isNotEmpty()) list.design(listSize(size)) else DeliveryWidgetList.Design.Sections
+    val design = if (list.parcels.isNotEmpty()) list.design(listSize(size)) else DeliveryWidgetList.Design.Sections
     val shown = if (design == DeliveryWidgetList.Design.Cards) list.cardOrder else list.parcels
     val shape = if (design == DeliveryWidgetList.Design.Cards) cardShape(listSize(size), shown.size, size) else DeliveryWidgetPicture.Half
     val drawn = if (design == DeliveryWidgetList.Design.Sections) emptyList() else shown.map { parcel -> parcel.card?.let { art(it, shape) } }
@@ -177,7 +177,6 @@ fun ParcelsWidgetContent(
             PageTap(listIntent(context))
             Box(GlanceModifier.fillMaxSize().padding(MARGIN)) {
                 when {
-                    !list.enabled -> ListState("rectangle.slash", copy.text("widget.disabledTitle"), copy.text("widget.disabledDescription"), size, type)
                     list.parcels.isEmpty() -> ListState("shippingbox", copy.text("app.noneOnWay"), copy.text("app.emptyDescription"), size, type)
                     else -> Sections(list, size, type, copy, if (passes) DeliveryWidgetList.Design.Passes else DeliveryWidgetList.Design.Sections)
                 }

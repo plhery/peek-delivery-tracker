@@ -41,8 +41,8 @@ import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_EMAIL
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_EMAIL_ERROR
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_UPDATES
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_HOME_PAGE
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_MARK_NEW_UPDATES
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
-import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_WIDGETS
 import com.plhery.peekdeliverytracker.ui.settings.appearanceTag
 import com.plhery.peekdeliverytracker.ui.settings.presetTag
 import com.plhery.peekdeliverytracker.ui.tabs.PeekTab
@@ -167,7 +167,7 @@ class AccountAccessDeviceTest {
             }
             assertTrue("The group's title isn't read as one", tree.oneElement(heading))
         }
-        for (id in listOf(SETTINGS_DELIVERY_UPDATES, SETTINGS_WIDGETS, SETTINGS_ACCOUNT_DATA, SETTINGS_HOME_PAGE)) {
+        for (id in listOf(SETTINGS_DELIVERY_UPDATES, SETTINGS_MARK_NEW_UPDATES, SETTINGS_ACCOUNT_DATA, SETTINGS_HOME_PAGE)) {
             val row = shown(id)
             assertTrue("$id is neither a button nor a switch", row.isButton || row.isSwitch)
             assertTrue("$id isn't read as one", tree.oneElement(row))

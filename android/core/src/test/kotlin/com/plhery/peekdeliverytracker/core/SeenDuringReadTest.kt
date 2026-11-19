@@ -104,7 +104,6 @@ class SeenDuringReadTest {
         session.verifyCode(email = "reader@example.com", code = "123456")
         transport.handler = { server.answer(it) }
         val store = testParcelStore(configuration, session, transport, backgroundScope, MemoryDefaults(), now = { now })
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         return store
     }

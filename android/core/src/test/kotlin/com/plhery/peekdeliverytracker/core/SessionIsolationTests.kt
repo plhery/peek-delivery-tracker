@@ -132,7 +132,6 @@ class SessionIsolationTests {
 
     private fun TestScope.store(session: SessionStore, transport: HttpTransport): ParcelStore {
         val store = testParcelStore(configuration, session, transport, backgroundScope, defaults, cacheFiles, now = { now })
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         return store
     }
@@ -274,7 +273,6 @@ class SessionIsolationTests {
                 configuration, session, transport, backgroundScope, MemoryDefaults(), now = { now },
                 notifications = StubPushNotifications(available = available),
             )
-            store.setDeliveryWidgetEnabled(false)
             store.setDeliveryLiveActivitiesEnabled(false)
             transport.respond(packageList(parcel()))
             store.load()
@@ -297,7 +295,6 @@ class SessionIsolationTests {
                 configuration, session, transport, backgroundScope, MemoryDefaults(), now = { now },
                 notifications = StubPushNotifications(status = NotificationAuthorizationStatus.Authorized),
             )
-            store.setDeliveryWidgetEnabled(false)
             store.setDeliveryLiveActivitiesEnabled(false)
             transport.respond(packageList(parcel()))
             store.load()

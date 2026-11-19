@@ -193,7 +193,7 @@ class LauncherShortcutsTest {
     }
 
     @Test
-    fun itIsRenamedAsTheNextDeliveryChangesAndGoesWithNothingOnTheWayOrTheWidgetOff() {
+    fun itIsRenamedAsTheNextDeliveryChangesAndGoesWithNothingOnTheWay() {
         publish(lamp)
         assertEquals("Desk lamp", dynamic().single().shortLabel.toString())
         publish(lamp.copy(label = "Reading lamp"))
@@ -208,11 +208,6 @@ class LauncherShortcutsTest {
         publish(lamp)
         assertEquals("Desk lamp", dynamic().single().shortLabel.toString())
         store.clearSnapshot()
-        LauncherShortcuts.update(app, store)
-        assertEquals(emptyList<ShortcutInfoCompat>(), dynamic())
-
-        publish(lamp)
-        store.setEnabled(false)
         LauncherShortcuts.update(app, store)
         assertEquals(emptyList<ShortcutInfoCompat>(), dynamic())
     }
@@ -247,13 +242,9 @@ class LauncherShortcutsTest {
     @Test
     fun aGreyedCopySaysWhyItOpensNothing() {
         val copy = ExtensionLocalizer("en")
-        assertEquals("Nothing on the way right now", LauncherShortcuts.greyed(enabled = true, parcels = true, copy))
-        assertEquals("Open Peek to see your next delivery.", LauncherShortcuts.greyed(enabled = true, parcels = false, copy))
-        assertEquals(
-            "Turn on home screen widgets in Settings to see your next delivery.",
-            LauncherShortcuts.greyed(enabled = false, parcels = false, copy),
-        )
-        assertEquals("Aucun colis en route pour le moment", LauncherShortcuts.greyed(enabled = true, parcels = true, ExtensionLocalizer("fr")))
+        assertEquals("Nothing on the way right now", LauncherShortcuts.greyed(parcels = true, copy))
+        assertEquals("Open Peek to see your next delivery.", LauncherShortcuts.greyed(parcels = false, copy))
+        assertEquals("Aucun colis en route pour le moment", LauncherShortcuts.greyed(parcels = true, ExtensionLocalizer("fr")))
     }
 
     @Test

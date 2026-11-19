@@ -96,7 +96,7 @@ class DeliveryWidgetTest {
 
     /** The list of `parcels`, as the app publishes them. */
     private fun cards(parcels: List<DeliveryWidgetParcel>): DeliveryWidgetList =
-        DeliveryWidgetList.make(CAPTURED, true, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
+        DeliveryWidgetList.make(CAPTURED, "en", DeliveryWidgetSnapshot(CAPTURED, "en", parcels))
 
     private val three = listOf(
         widgetParcel(1, "Belgian chocolate", carrier = "FedEx", outForDelivery = true),

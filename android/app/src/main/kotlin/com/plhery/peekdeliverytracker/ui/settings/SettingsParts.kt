@@ -289,6 +289,7 @@ internal fun SettingsLanguageRow() {
     val language = LocalLanguage.current
     SettingsPickerRow(
         label = localized("language.label"),
+        shown = language.nativeName,
         options = AppLanguage.entries.map { MenuOption(it.nativeName, tag = settingsLanguageTag(it)) },
         selected = AppLanguage.entries.indexOf(language),
         rowTag = SETTINGS_LANGUAGE,
@@ -298,7 +299,8 @@ internal fun SettingsLanguageRow() {
 
 /**
  * "settings.timeFormat" in a [SettingsPickerRow]: Automatic, which names the phone's clock ("Automatic (24-hour)"),
- * 24-hour or 12-hour. A choice sets the localizer's clock (`localizer.clockPreference`), which the app saves.
+ * 24-hour or 12-hour, shown closed as "Auto (24h)", "24h" or "12h". A choice sets the localizer's clock
+ * (`localizer.clockPreference`), which the app saves.
  */
 @Composable
 internal fun SettingsClockRow() {
@@ -317,8 +319,15 @@ internal fun SettingsClockRow() {
             MenuOption(title, tag = "$SETTINGS_CLOCK.${it.code}")
         }
     }
+    val shown = when (chosen) {
+        ClockPreference.Automatic ->
+            localizer.text("settings.automaticShort", mapOf("value" to localizer.text(if (system) "settings.clock24Short" else "settings.clock12Short")))
+        ClockPreference.TwentyFourHour -> localizer.text("settings.clock24Short")
+        ClockPreference.TwelveHour -> localizer.text("settings.clock12Short")
+    }
     SettingsPickerRow(
         label = localized("settings.timeFormat"),
+        shown = shown,
         options = options,
         selected = ClockPreference.entries.indexOf(chosen),
         rowTag = SETTINGS_CLOCK,
@@ -328,7 +337,8 @@ internal fun SettingsClockRow() {
 
 /**
  * "settings.distanceUnits" in a [SettingsPickerRow]: Automatic, which names the phone's unit ("Automatic (km)"),
- * kilometres or miles. A choice sets the localizer's units (`localizer.distancePreference`), which the app saves.
+ * kilometres or miles, shown closed by the unit's symbol, after "Auto" for Automatic ("Auto (km)", "km", "mi"). A choice
+ * sets the localizer's units (`localizer.distancePreference`), which the app saves.
  */
 @Composable
 internal fun SettingsDistanceRow() {
@@ -336,21 +346,25 @@ internal fun SettingsDistanceRow() {
     val language = LocalLanguage.current
     val chosen by localizer.distancePreferenceFlow.collectAsState()
     val system by localizer.systemDistanceUnitFlow.collectAsState()
+    val systemUnit = localizer.text(if (system == DistanceUnit.Miles) "settings.milesShort" else "settings.kilometersShort")
     val options = remember(localizer, language, system) {
         DistancePreference.entries.map {
             val title = when (it) {
-                DistancePreference.Automatic -> localizer.text(
-                    "settings.automatic",
-                    mapOf("value" to localizer.text(if (system == DistanceUnit.Miles) "settings.milesShort" else "settings.kilometersShort")),
-                )
+                DistancePreference.Automatic -> localizer.text("settings.automatic", mapOf("value" to systemUnit))
                 DistancePreference.Kilometres -> localizer.text("settings.kilometers")
                 DistancePreference.Miles -> localizer.text("settings.miles")
             }
             MenuOption(title, tag = "$SETTINGS_DISTANCE.${it.code}")
         }
     }
+    val shown = when (chosen) {
+        DistancePreference.Automatic -> localizer.text("settings.automaticShort", mapOf("value" to systemUnit))
+        DistancePreference.Kilometres -> localizer.text("settings.kilometersShort")
+        DistancePreference.Miles -> localizer.text("settings.milesShort")
+    }
     SettingsPickerRow(
         label = localized("settings.distanceUnits"),
+        shown = shown,
         options = options,
         selected = DistancePreference.entries.indexOf(chosen),
         rowTag = SETTINGS_DISTANCE,
@@ -360,8 +374,8 @@ internal fun SettingsDistanceRow() {
 
 /**
  * "settings.weightUnits" in a [SettingsPickerRow]: Automatic, which names the phone's unit ("Automatic (kg)"),
- * kilograms or pounds. A choice sets the localizer's weight unit (`localizer.weightPreference`), which the app saves; the
- * sides of parcels follow it.
+ * kilograms or pounds, shown closed by the unit's symbol, after "Auto" for Automatic ("Auto (kg)", "kg", "lb"). A choice
+ * sets the localizer's weight unit (`localizer.weightPreference`), which the app saves; the sides of parcels follow it.
  */
 @Composable
 internal fun SettingsWeightRow() {
@@ -369,21 +383,25 @@ internal fun SettingsWeightRow() {
     val language = LocalLanguage.current
     val chosen by localizer.weightPreferenceFlow.collectAsState()
     val system by localizer.systemWeightUnitFlow.collectAsState()
+    val systemUnit = localizer.text(if (system == WeightUnit.Pounds) "settings.poundsShort" else "settings.kilogramsShort")
     val options = remember(localizer, language, system) {
         WeightPreference.entries.map {
             val title = when (it) {
-                WeightPreference.Automatic -> localizer.text(
-                    "settings.automatic",
-                    mapOf("value" to localizer.text(if (system == WeightUnit.Pounds) "settings.poundsShort" else "settings.kilogramsShort")),
-                )
+                WeightPreference.Automatic -> localizer.text("settings.automatic", mapOf("value" to systemUnit))
                 WeightPreference.Kilograms -> localizer.text("settings.kilograms")
                 WeightPreference.Pounds -> localizer.text("settings.pounds")
             }
             MenuOption(title, tag = "$SETTINGS_WEIGHT.${it.code}")
         }
     }
+    val shown = when (chosen) {
+        WeightPreference.Automatic -> localizer.text("settings.automaticShort", mapOf("value" to systemUnit))
+        WeightPreference.Kilograms -> localizer.text("settings.kilogramsShort")
+        WeightPreference.Pounds -> localizer.text("settings.poundsShort")
+    }
     SettingsPickerRow(
         label = localized("settings.weightUnits"),
+        shown = shown,
         options = options,
         selected = WeightPreference.entries.indexOf(chosen),
         rowTag = SETTINGS_WEIGHT,
@@ -392,16 +410,18 @@ internal fun SettingsWeightRow() {
 }
 
 /**
- * A menu `Picker` in a Form row: `label` in subheadline, and the option `selected` with the menu's chevrons in the
- * secondary grey, beside it, 54 tall at least and 15 in, or under it at the accessibility sizes. A tap on the option
- * and its chevrons, the picker's button, opens iOS's menu of `options` over the sheet ([SheetMenu]), the one selected
- * checked, and fades them alone while pressed; the rest of the row takes no finger. A choice goes to `onSelect`.
- * TalkBack still stops on the row as one, read as its label with the option as its state, and opens the menu from
- * there: the row keeps the semantics, which clear the picker's own.
+ * `SettingsPickerRow`: `label` in subheadline, and the choice in a word or two ([shown]) on one line in caption, with the
+ * menu's chevrons in caption 2, 4 after it, both in the secondary grey, as other rows show their value, beside it, 54
+ * tall at least and 15 in, or under it at the accessibility sizes. A tap on the choice and its chevrons, the `Menu`'s
+ * label, opens iOS's menu of `options` over the sheet ([SheetMenu]), each named in full, the one selected checked, and
+ * fades them alone while pressed; the rest of the row takes no finger. A choice goes to `onSelect`. TalkBack still
+ * stops on the row as one, read as its label with the option's full name as its state, and opens the menu from there:
+ * the row keeps the semantics, which clear the picker's own.
  */
 @Composable
 private fun SettingsPickerRow(
     label: String,
+    shown: String,
     options: List<MenuOption>,
     selected: Int,
     rowTag: String,
@@ -434,21 +454,20 @@ private fun SettingsPickerRow(
         }
     }
     val picker = @Composable {
-        // A menu Picker's button in a Form row: its up-down chevron at the subheadline size, semibold, 11 in from the
-        // button's trailing end, which the menu lines up with.
+        // The Menu's label, whose trailing end the menu lines up with.
         Row(
             Modifier
                 .onGloballyPositioned { value = it.boundsInWindow() }
                 .testTag(pickerTag)
-                .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open)
-                .padding(end = PICKER_TRAILING),
+                .button(interactionSource = null, indication = PlainPress, role = Role.DropdownList, onClick = open),
+            horizontalArrangement = Arrangement.spacedBy(PICKER_GAP),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Text(selectedName, color = colors.secondaryText, style = type.body.sfLines(), maxLines = 1, overflow = TextOverflow.Ellipsis)
-            PeekSymbol(
-                "chevron.up.chevron.down", Modifier.padding(start = PICKER_GAP),
-                font = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold), tint = colors.secondaryText,
+            Text(
+                shown, color = colors.secondaryText, style = type.caption.sfLines(),
+                maxLines = 1, softWrap = false, overflow = TextOverflow.Ellipsis,
             )
+            PeekSymbol("chevron.up.chevron.down", font = type.caption2, tint = colors.secondaryText)
         }
     }
     val frame = Modifier
@@ -625,9 +644,8 @@ internal fun settingsLanguageTag(language: AppLanguage) = "$SETTINGS_LANGUAGE.${
 
 internal val ROW_PADDING = 15.dp
 internal val ROW_HEIGHT = 54.dp
-/** The menu picker's room between its value and its chevron, and after the chevron. */
-private val PICKER_GAP = 5.dp
-private val PICKER_TRAILING = 11.dp
+/** The picker's room between its value and its chevrons. */
+private val PICKER_GAP = 4.dp
 private val TILE = Brand.color(light = "#F7EFC9", dark = "#49452A")
 private val TILE_LETTER = Brand.color(light = "#695824", dark = "#E2D08D")
 /** The pictures' paper and bars, light and kraft, and their hairlines. */

@@ -127,11 +127,10 @@ class AddByEmailSettingsTest {
         assertTrue(exists(SETTINGS_ADD_BY_EMAIL))
         assertTrue(shows(text("inbox.experimental").uppercase()))
         assertEquals(listOf("read"), source.addByEmailClient.requests)
-        // Under Delivery updates, over the widget's switch.
+        // Under Delivery updates.
         val updates = node(SETTINGS_DELIVERY_UPDATES).fetchSemanticsNode().boundsInRoot
         val row = node(SETTINGS_ADD_BY_EMAIL).fetchSemanticsNode().boundsInRoot
-        val widgets = node(SETTINGS_WIDGETS).fetchSemanticsNode().boundsInRoot
-        assertTrue(row.top >= updates.bottom && widgets.top >= row.bottom)
+        assertTrue(row.top >= updates.bottom)
     }
 
     /** The server answers 404 until the feature is set up and open to the account. */
@@ -140,7 +139,7 @@ class AddByEmailSettingsTest {
         show()
         assertEquals(listOf("read"), source.addByEmailClient.requests)
         assertFalse(exists(SETTINGS_ADD_BY_EMAIL))
-        assertTrue(exists(SETTINGS_WIDGETS))
+        assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
     }
 
     @Test

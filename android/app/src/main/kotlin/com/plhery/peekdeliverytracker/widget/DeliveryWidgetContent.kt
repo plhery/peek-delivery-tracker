@@ -344,9 +344,6 @@ internal fun openParcel(context: Context, parcel: DeliveryWidgetParcel): Action 
 internal fun root(): GlanceModifier =
     GlanceModifier.fillMaxSize().appWidgetBackground().cornerRadius(android.R.dimen.system_app_widget_background_radius)
 
-/** The copy as Android words it where it names the iPhone's things (its `android` variant: "home screen"), else as it is. */
-internal fun ExtensionLocalizer.onAndroid(key: String): String = text("$key.android").takeIf { it != "$key.android" } ?: text(key)
-
 internal fun markHeight(shape: DeliveryWidgetPicture): Dp = if (shape == DeliveryWidgetPicture.Half) 13.dp else 15.dp
 
 private fun DpSize.inside(padding: Dp) = DpSize(width - padding * 2, height - padding * 2)

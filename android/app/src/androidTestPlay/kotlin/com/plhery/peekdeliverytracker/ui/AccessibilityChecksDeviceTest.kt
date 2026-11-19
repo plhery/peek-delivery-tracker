@@ -32,8 +32,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.PAGE_MENU_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.cardId
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_MARK_NEW_UPDATES
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
-import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_WIDGETS
 import java.util.Locale
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -154,14 +154,14 @@ class AccessibilityChecksDeviceTest(private val appearance: String) {
     }
 
     @Test
-    fun settingsDownToTheWidgetsSwitch() {
+    fun settingsDownToTheNewUpdateDotsSwitch() {
         show()
         walk.tap(ACCOUNT_BUTTON)
         compose.waitUntil(LONG_MILLIS) { walk.exists(SETTINGS_SHEET) }
         walk.awaitStill()
         check("settings")
-        compose.reveal(SETTINGS_WIDGETS)
-        check("settings, widgets")
+        compose.reveal(SETTINGS_MARK_NEW_UPDATES)
+        check("settings, new-update dot")
     }
 
     private fun describe(result: AccessibilityViewCheckResult): String {

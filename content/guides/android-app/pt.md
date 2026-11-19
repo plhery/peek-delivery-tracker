@@ -78,7 +78,6 @@ A Google avisa que alguns destes passos só funcionam no Android 14 e em versõe
 
 | O widget mostra | O que significa |
 | --- | --- |
-| «Widget desativado» | Ativa «Definições» › «Entregas» › «Widgets do ecrã principal» |
 | «Não há encomendas a caminho» | Nenhuma encomenda está a caminho: «Adiciona um número ou ligação de seguimento para começar.» |
 
 «Encomendas» é só para o ecrã principal: não há widget para o ecrã bloqueado, nem nada parecido com as Atividades em direto.
@@ -113,7 +112,7 @@ Só a versão do Google Play. Toca no ícone de código de barras no fim do camp
 - [Peek: textos em português](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pt.json) – cada etiqueta do Peek citada aqui
 - [Peek: manifesto Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Adicionar ao Peek, ligações de encomendas, câmara, cópias de segurança
 - [Peek: o widget Encomendas](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – só no ecrã principal, os tamanhos
-- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Widgets do ecrã principal, Esquecer todas, Idioma, sem Atividades em direto
+- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Esquecer todas, Idioma, sem Atividades em direto
 - [Peek: o leitor da versão do Google Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – códigos de barras, autorização da câmara
 - [Peek: Support (em inglês)](https://peektracker.com/support.html) – sem conta, Forget all
 - [Android Help: Add apps, shortcuts and widgets to your Home screens (em inglês)](https://support.google.com/android/answer/9450271?hl=en) – adicionar um widget, fixar um atalho, Android 14

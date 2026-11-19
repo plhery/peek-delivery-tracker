@@ -271,19 +271,20 @@ data class DeliveryWidgetSnapshot(
 )
 
 /**
- * What the app shares with its widget: whether it shows, the language it speaks and the parcels, under the iPhone
- * app's keys. On the iPhone `defaults` is the App Group's UserDefaults, which the widget extension reads too, or the
- * standard one where the build has no App Group. On Android the preferences the app's widget reads.
+ * What the app shares with its widget: the language it speaks and the parcels, under the iPhone app's keys. On the
+ * iPhone `defaults` is the App Group's UserDefaults, which the widget extension reads too, or the standard one where the
+ * build has no App Group. On Android the preferences the app's widget reads.
  */
 class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
-    val isEnabled: Boolean
-        get() = !defaults.hasObject(forKey = enabledKey) || defaults.bool(forKey = enabledKey)
-
     val languageCode: String?
         get() = defaults.string(forKey = languageKey)
 
     val liveActivitiesEnabled: Boolean
-        get() = if (!defaults.hasObject(forKey = liveActivitiesEnabledKey)) isEnabled else defaults.bool(forKey = liveActivitiesEnabledKey)
+        get() = when {
+            defaults.hasObject(forKey = liveActivitiesEnabledKey) -> defaults.bool(forKey = liveActivitiesEnabledKey)
+            defaults.hasObject(forKey = retiredWidgetSwitchKey) -> defaults.bool(forKey = retiredWidgetSwitchKey)
+            else -> true
+        }
 
     val snapshot: DeliveryWidgetSnapshot?
         get() {
@@ -295,13 +296,10 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
             }
         }
 
-    fun setEnabled(enabled: Boolean) {
-        defaults.set(enabled, forKey = enabledKey)
-        if (!enabled) clearSnapshot()
-    }
-
+    /** Keeps the Live Activities' choice, which no longer needs the widgets' old switch. */
     fun setLiveActivitiesEnabled(enabled: Boolean) {
         defaults.set(enabled, forKey = liveActivitiesEnabledKey)
+        defaults.removeObject(forKey = retiredWidgetSwitchKey)
     }
 
     fun setLanguageCode(languageCode: String) {
@@ -330,7 +328,8 @@ class DeliveryWidgetSharedStore(private val defaults: UserDefaults) {
          */
         const val kind = "NextDeliveryWidget"
 
-        private const val enabledKey = "sdt.deliveryWidget.enabled.v1"
+        /** Where the widgets' switch, now gone, kept its choice. Live Activities followed it until they had their own. */
+        private const val retiredWidgetSwitchKey = "sdt.deliveryWidget.enabled.v1"
         private const val liveActivitiesEnabledKey = "sdt.deliveryLiveActivities.enabled.v1"
         private const val languageKey = "sdt.deliveryWidget.language.v1"
         private const val snapshotKey = "sdt.deliveryWidget.snapshot.v1"

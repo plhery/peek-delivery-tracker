@@ -65,7 +65,7 @@ val LIST_TWO_BY_FOUR = DpSize(179.dp, 429.dp)
 
 /** The list's sample (DeliveryWidgetListSample) at [CAPTURED] in `language`, as its gallery picture shows it. */
 fun sampleList(language: AppLanguage = AppLanguage.En): DeliveryWidgetList =
-    DeliveryWidgetList.make(CAPTURED, true, language.rawValue, DeliveryWidgetListSample.snapshot(Localizer(language), CAPTURED), isSample = true)
+    DeliveryWidgetList.make(CAPTURED, language.rawValue, DeliveryWidgetListSample.snapshot(Localizer(language), CAPTURED), isSample = true)
 
 /** A parcel as the widget shows it, `number` its id. */
 fun widgetParcel(

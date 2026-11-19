@@ -78,7 +78,6 @@ Google avisa de que «Algunos de estos pasos solo funcionan en Android 14 y vers
 
 | El widget muestra | Qué significa |
 | --- | --- |
-| «Widget desactivado» | Activa «Ajustes» › «Entregas» › «Widgets de inicio» |
 | «No hay paquetes en camino» | Ningún paquete está en camino: «Añade un número o enlace de seguimiento para empezar.» |
 
 «Paquetes» es solo para la pantalla de inicio: no hay widget para la pantalla de bloqueo ni nada parecido a las Actividades en directo.
@@ -113,7 +112,7 @@ Solo la versión de Google Play. Toca el icono de código de barras al final del
 - [Peek: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – cada etiqueta de Peek citada aquí
 - [Peek: manifiesto de Android](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/AndroidManifest.xml) – Añadir a Peek, enlaces de paquetes, cámara, copias de seguridad
 - [Peek: el widget Paquetes](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/res/xml/parcels_widget.xml) – solo pantalla de inicio, sus tamaños
-- [Peek: Ajustes](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Widgets de inicio, Olvidar todos, Idioma, sin Actividades en directo
+- [Peek: Ajustes](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/main/kotlin/com/plhery/peekdeliverytracker/ui/settings/SettingsSheet.kt) – Olvidar todos, Idioma, sin Actividades en directo
 - [Peek: el lector de la versión de Google Play](https://github.com/plhery/peek-delivery-tracker/blob/main/android/app/src/play/kotlin/com/plhery/peekdeliverytracker/platform/CameraLabelScanner.kt) – códigos de barras, permiso de cámara
 - [Peek: ayuda (en inglés)](https://peektracker.com/support.html) – sin cuenta, Forget all
 - [Ayuda de Android: Añadir aplicaciones, accesos directos y widgets a las pantallas de inicio](https://support.google.com/android/answer/9450271?hl=es) – añadir un widget (Widgets), fijar un acceso directo, Android 14

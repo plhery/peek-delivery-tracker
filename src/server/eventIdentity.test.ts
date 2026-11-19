@@ -532,6 +532,14 @@ describe('a scan its source restates with or without its milliseconds', () => {
     expect([...sameInstantIdentities([precise], [whole], 'royal-mail')]).toEqual([['royal-mail:again', 'royal-mail:stored']]);
   });
 
+  it("takes over the other brand's row: one tracker answers for Royal Mail and Parcelforce", () => {
+    const again = { ...row, package_id: 'package-1' };
+    expect([...sameInstantIdentities([{ ...again, provider_event_id: 'parcelforce:again' }], [row], 'parcelforce')])
+      .toEqual([['parcelforce:again', 'royal-mail:precise']]);
+    expect([...sameInstantIdentities([{ ...again, provider_event_id: 'royal-mail:again' }], [{ ...row, provider_event_id: 'parcelforce:stored' }], 'royal-mail')])
+      .toEqual([['royal-mail:again', 'parcelforce:stored']]);
+  });
+
   it('needs one time to be that whole second, the same place and wording, the code the policy requires, and one match', () => {
     for (const different of [
       { ...row, occurred_at: '2026-10-23T15:31:19.092+00:00' },

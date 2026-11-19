@@ -143,6 +143,87 @@ describe('the account\'s forwarding address', () => {
   });
 });
 
+// The shapes of the emails Peek has been forwarded so far (who sends them, where the shop and the number stand), written
+// afresh: made-up shops, wording and numbers in valid shapes.
+describe('emails in the shapes readers forward', () => {
+  /** An 18-digit Swiss Post parcel number. */
+  const POST = '990012345612345678';
+  const OTHER_POST = '990012345698765432';
+  /** A Colissimo S10 number with its check digit (a plain run of digits reads as made up, and is refused). */
+  const COLISSIMO = 'CB704219382FR';
+  /** A DPD parcel number. */
+  const DPD = '05212678904731';
+  const created = (db: ReturnType<typeof account>) => db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier]);
+
+  it('reads a post\'s notice: the shop after "parcel from" in its subject, the number on its own line and again in its links', async () => {
+    for (const [from, subject, words] of [
+      ['"Post CH AG – Sendungsinfo" <notifications@post.ch>', 'Unterwegs: Paket von Beispiel Versand AG', ['Ihre Sendung ist unterwegs.', 'Paket von', 'Beispiel Versand AG', 'Sendungsnummer']],
+      ['"Poste CH SA – Statut de l\'envoi" <notifications@post.ch>', 'En route : colis de Beispiel Versand AG', ['Votre envoi arrive bientôt.', 'Colis de', 'Beispiel Versand AG', 'Numéro d’envoi']],
+    ] as const) {
+      const db = account();
+      await posted(mail(from, subject, [...words, POST, `https://service.post.ch/track?parcel=${POST}`, `https://www.post.ch/manage?id=${POST}&lang=de`].join('\n')));
+      expect(created(db)).toEqual([[POST, 'Beispiel Versand', 'swiss-post']]);
+      vi.restoreAllMocks();
+      vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    }
+  });
+
+  it('leaves a followed parcel of a post\'s notice as it is, with the reader\'s own name, and says it was known', async () => {
+    const db = account({ known: [POST] });
+    await posted(mail('"Post CH AG – Sendungsinfo" <notifications@post.ch>', 'Unterwegs: Paket von Beispiel Versand AG', ['Paket von', 'Beispiel Versand AG', 'Sendungsnummer', POST].join('\n')));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.name).toHaveBeenCalledExactlyOnceWith(userId, `known-${POST}`, 'Beispiel Versand');
+    expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Beispiel Versand');
+  });
+
+  it('adds the post\'s number a shop names in brackets, and leaves the order number and the date alone', async () => {
+    const db = account();
+    await posted(mail('"Beispiel Möbel" <shop@beispiel-moebel.ch>', 'Ihre Bestellung ist versandt', [
+      'Bestellung 4005123 vom 18.11.2026', `Versand (Post): ${POST}`, 'Lieferung in 1 bis 2 Werktagen.',
+    ].join('\n')));
+    expect(created(db)).toEqual([[POST, 'Beispiel Möbel', 'swiss-post']]);
+  });
+
+  it('adds each number of an email that gives several, once, though its links give them again', async () => {
+    const db = account();
+    await posted(mail('"Beispiel Möbel" <shop@beispiel-moebel.ch>', 'Ihre Bestellung kommt in zwei Paketen', [
+      `Paket 1: ${POST}`, `Paket 2: ${OTHER_POST}`, `https://service.post.ch/track?parcel=${POST}`, `https://service.post.ch/track?parcel=${OTHER_POST}`,
+    ].join('\n')));
+    expect(created(db)).toEqual([[POST, 'Beispiel Möbel', 'swiss-post'], [OTHER_POST, 'Beispiel Möbel', 'swiss-post']]);
+    expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Beispiel Möbel');
+  });
+
+  it('adds nothing from a marketplace\'s dispatch that gives only its order, its own shipment id and an arrival day', async () => {
+    const db = account();
+    await posted(mail('Example Market <dispatch@example-market.com>', 'Your order has shipped', [
+      'Order 302-1234567-1234567 has shipped and arrives Friday.',
+      'Track it: https://www.example-market.com/progress?orderId=302-1234567-1234567&shipmentId=Dx7kQ2mZp',
+    ].join('\n')));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
+  });
+
+  it('adds a Colissimo number after its label, named after the shop without its trademark sign or capitals', async () => {
+    const db = account();
+    await posted(mail('"EXEMPLE BOUTIQUE®" <contact@exemple-boutique.fr>', 'Votre commande est en route', [
+      'Transporteur : Colissimo', `Numéro de suivi : ${COLISSIMO}`, `Suivre : https://www.example-carrier.com/track?n=${COLISSIMO}`,
+    ].join('\n')));
+    expect(created(db)).toEqual([[COLISSIMO, 'Exemple Boutique', 'la-poste']]);
+  });
+
+  it('takes a DPD notice\'s number as DPD\'s, named after the shop in its subject, and its delivered notice as about a followed parcel', async () => {
+    let db = account();
+    await posted(mail('"DPD Schweiz" <noreply@dpd.ch>', 'Ihr Paket von Beispiel Versand kommt heute', `Paketnummer ${DPD} wird heute zwischen 10 und 13 Uhr zugestellt.`));
+    expect(created(db)).toEqual([[DPD, 'Beispiel Versand', 'dpd']]);
+    vi.restoreAllMocks();
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    db = account({ known: [DPD] });
+    await posted(mail('"DPD Schweiz" <noreply@dpd.ch>', 'Ihr Paket von Beispiel Versand wurde zugestellt', `Paketnummer ${DPD} wurde zugestellt.`));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Beispiel Versand');
+  });
+});
+
 function mail(from: string, subject: string, body: string): Uint8Array<ArrayBuffer> {
   return new TextEncoder().encode(`From: ${from}\r\nTo: ${recipient}\r\nSubject: ${subject}\r\nContent-Type: text/plain; charset=utf-8\r\n\r\n${body}`);
 }

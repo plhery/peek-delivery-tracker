@@ -50,7 +50,7 @@ assert.match(worker, /~offline/, 'offline navigations must use the dedicated Nex
 assert.match(worker, /["']?revision["']?:["'][a-f0-9]{64}["'],["']?url["']?:["']\/~offline["']/, 'the offline document must be explicitly precached with a build revision');
 assert.match(worker, /["']?revision["']?:["'][a-f0-9]{64}["'],["']?url["']?:["']\/["']/, 'the app shell must be precached with the build it loads');
 assert.match(workerSource, /matchPrecache\('\/'\)/, 'app launches must open the precached shell');
-assert.match(workerSource, /request\.mode === 'navigate' && url\.pathname === '\/',/, 'only `/` opens from the precached shell: a language address is the page the server wrote');
+assert.match(workerSource, /request\.mode === 'navigate' && \(url\.pathname === '\/' \|\| url\.pathname === '\/move'\),/, 'only `/` and a move, the same page, open from the precached shell: a language address is the page the server wrote');
 assert.doesNotMatch(worker, /["']\/(?:fonts\/|auth-emails\/|og\.(?:png|svg))/, 'server-only public files must not be downloaded by browsers');
 const { polyfillFiles, rootMainFiles } = JSON.parse(buildManifest);
 for (const file of polyfillFiles) assert.ok(!worker.includes(`/_next/${file}`), 'the nomodule polyfills modern browsers skip must not be precached');

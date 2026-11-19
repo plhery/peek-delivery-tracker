@@ -17395,7 +17395,9 @@ export const CARRIER_CAPABILITIES = {
       "极兔速递",
       "极兔速运",
       "极兔快递",
-      "J&T 极兔速递"
+      "J&T 极兔速递",
+      "J&T Express (CN)",
+      "J&T Express CN"
     ],
     "countries": [
       "CN"

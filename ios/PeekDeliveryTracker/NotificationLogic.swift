@@ -123,6 +123,8 @@ enum NotificationDeviceKeys {
     static let optOut = "sdt.notificationsDeviceOptOut"
     /// The account that last turned them on (`NotificationDevicePolicy.belongs`).
     static let owner = "sdt.notificationsOwner.v1"
+    /// A token the account that signed out could not take off the service (`ParcelStore.settleNativePushRevocation`).
+    static let revocation = "sdt.notificationsRevocationPending.v1"
     static let demo = "sdt.demoNotificationsEnabled"
     static let optOutRepaired = "sdt.notificationsOptOutRepaired.v1"
 }

@@ -4762,6 +4762,64 @@ extension SessionIsolationTests {
         XCTAssertTrue(store.notificationsEnabledOnDevice)
     }
 
+    @MainActor func testATokenTheAccountSigningOutCouldNotRemoveIsTakenOffByTheNextAccount() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let keys = ["sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1", "sdt.notificationsRevocationPending.v1"]
+        for key in keys { UserDefaults.standard.removeObject(forKey: key) }
+        defer { for key in keys { UserDefaults.standard.removeObject(forKey: key) } }
+        let owner = UUID()
+        nonisolated(unsafe) var calls: [String] = []
+        nonisolated(unsafe) var reachable = true
+        let answer: (URLRequest, @escaping (Result<(Int, Data), Error>) -> Void) -> Void = { request, complete in
+            guard request.url?.path == "/api/push/devices" else { return complete(.success((200, Data("{}".utf8)))) }
+            let bearer = request.value(forHTTPHeaderField: "Authorization") ?? ""
+            calls.append("\(request.httpMethod ?? "") \(bearer.hasSuffix(owner.uuidString) ? "owner" : "other")")
+            if reachable { complete(.success((200, Data(#"{"ok":true,"testSent":false}"#.utf8)))) }
+            else { complete(.failure(URLError(.notConnectedToInternet))) }
+        }
+        try await authorize(session, id: owner)
+        let store = store(session, transport)
+        SessionTestURLProtocol.handler = answer
+        await store.forwardNativePushToken("synthetic-token", language: .en)
+        // The owner signs out offline: its token stays on the service, so the device keeps it to take off.
+        reachable = false
+        await store.revokeNativePushToken("synthetic-token")
+        session.forceSignOut()
+        reachable = true
+        let waiting = await store.settleNativePushRevocation()
+        XCTAssertFalse(waiting, "Without an account, it waits")
+
+        // Another account takes it over, which moves it there, then takes it off; only then may the device register again.
+        try await authorize(session)
+        SessionTestURLProtocol.handler = answer
+        calls = []
+        let settled = await store.settleNativePushRevocation()
+        XCTAssertTrue(settled)
+        XCTAssertEqual(calls, ["POST other", "DELETE other"])
+        calls = []
+        let again = await store.settleNativePushRevocation()
+        XCTAssertTrue(again)
+        XCTAssertEqual(calls, [], "Once off, nothing is left to do")
+
+        // The owner signing out offline and in again has its notifications back as its own: nothing to take off.
+        session.forceSignOut()
+        try await authorize(session, id: owner)
+        SessionTestURLProtocol.handler = answer
+        reachable = false
+        await store.revokeNativePushToken("synthetic-token")
+        session.forceSignOut()
+        try await authorize(session, id: owner)
+        SessionTestURLProtocol.handler = answer
+        reachable = true
+        calls = []
+        let own = await store.settleNativePushRevocation()
+        XCTAssertTrue(own)
+        XCTAssertEqual(calls, [])
+    }
+
     @MainActor func testFailedAccountDeletionKeepsWatchingTheNextChecks() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

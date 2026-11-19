@@ -165,6 +165,7 @@ final class ParcelStore: ObservableObject {
     private let notificationOptOutKey = NotificationDeviceKeys.optOut
     private let nativePushRegisteredKey = "sdt.notificationsNativePushRegistered.v1"
     private let notificationOwnerKey = NotificationDeviceKeys.owner
+    private let nativePushRevocationKey = NotificationDeviceKeys.revocation
     private let demoNotificationsKey = NotificationDeviceKeys.demo
     private static let installationIDKey = "sdt.installationID.v1"
 
@@ -1153,9 +1154,7 @@ final class ParcelStore: ObservableObject {
         jobMonitoringTask?.cancel()
         jobMonitoringTask = nil
         pendingJobIDs.removeAll()
-        if let token = AppDelegate.currentDeviceToken, !isDemo {
-            try? await api.unregisterNativePushToken(token)
-        }
+        if let token = AppDelegate.currentDeviceToken, !isDemo { await revokeNativePushToken(token) }
         try session.checkGeneration(generation)
         if !isDemo { await liveActivityRevocations.drain() }
         stopDeliveryLiveActivityObservers()
@@ -1203,12 +1202,49 @@ final class ParcelStore: ObservableObject {
         )
         if notificationsEnabledOnDevice != enabled { notificationsEnabledOnDevice = enabled }
         if !notificationStateLoaded { notificationStateLoaded = true }
-        if NotificationDevicePolicy.shouldRegisterForRemoteNotifications(
+        guard NotificationDevicePolicy.shouldRegisterForRemoteNotifications(
             status: notificationStatus,
             optedOut: optedOut
-        ) {
-            PlatformApplication.shared.registerForRemoteNotifications()
+        ) else { return }
+        // Another account signed in brings the device back to Apple's service only once the token of the account
+        // before is off the service, so that account's notifications can't come in under this one.
+        let settled = await settleNativePushRevocation()
+        guard (try? session.checkGeneration(generation)) != nil, settled || !session.isAuthenticated else { return }
+        PlatformApplication.shared.registerForRemoteNotifications()
+    }
+
+    /// Takes the device's token off the account signing out. When the service can't be reached, the token is kept
+    /// until it is off (`settleNativePushRevocation`): it would otherwise still bring that account's notifications.
+    func revokeNativePushToken(_ token: String) async {
+        let defaults = UserDefaults.standard
+        do {
+            try await api.unregisterNativePushToken(token)
+            if defaults.string(forKey: nativePushRevocationKey) == token { defaults.removeObject(forKey: nativePushRevocationKey) }
+        } catch {
+            defaults.set(token, forKey: nativePushRevocationKey)
         }
+    }
+
+    /// Settles a token the account that signed out could not take off the service, and says whether none is left.
+    /// That account signing in again has its notifications back as its own. Another account takes the token over,
+    /// which moves it to that account on the service, then takes it off; the service lets an account remove only
+    /// its own tokens. Without an account signed in, the token waits.
+    func settleNativePushRevocation() async -> Bool {
+        let defaults = UserDefaults.standard
+        guard let token = defaults.string(forKey: nativePushRevocationKey) else { return true }
+        guard !isDemo, session.isAuthenticated, let user = session.user?.id else { return false }
+        if notificationOwner == user {
+            defaults.removeObject(forKey: nativePushRevocationKey)
+            return true
+        }
+        do {
+            _ = try await api.registerNativePushToken(token, installationID: installationID, language: localizer.language, sendTest: false)
+            try await api.unregisterNativePushToken(token)
+        } catch {
+            return false
+        }
+        if defaults.string(forKey: nativePushRevocationKey) == token { defaults.removeObject(forKey: nativePushRevocationKey) }
+        return true
     }
 
     func enableNotifications(language: AppLanguage) async throws -> Bool {

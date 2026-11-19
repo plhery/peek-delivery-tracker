@@ -564,6 +564,18 @@ final class DeliveryAPIClient {
         _ = try await rawRequest("/api/account/inbox", method: "DELETE")
     }
 
+    /// Peek's address for assistants and the ones connected to the account. Nil when assistants may connect to no
+    /// account or not to this one: the server answers 404.
+    func assistants() async throws -> AssistantsResponse? {
+        let (data, response) = try await rawRequest("/api/account/assistants", accepting: 404)
+        return response.statusCode == 404 ? nil : try AssistantsOffer.decode(data)
+    }
+
+    /// Disconnects an assistant: its tokens stop working at once. One already gone counts as done.
+    func revokeAssistant(_ id: UUID) async throws {
+        _ = try await rawRequest("/api/account/assistants/\(id.uuidString.lowercased())", method: "DELETE", accepting: 404)
+    }
+
     func deleteAccount(confirmation: String, appleAuthorizationCode: String? = nil) async throws {
         let _: OKResponse = try await request(
             "/api/account",

@@ -574,3 +574,100 @@ private final class InboxTestURLProtocol: URLProtocol {
     }
     override func stopLoading() {}
 }
+
+/// Settings › Assistants: the setups the app bundles from shared/assistant-setups.json, the lenient answer and the
+/// model behind the row.
+@MainActor
+final class AssistantsTests: XCTestCase {
+    private let address = "https://peek.example.test/mcp"
+
+    func testEverySetupReadsInEveryLanguageWithItsNamesFilledIn() {
+        let setups = AssistantSetup.bundled
+        XCTAssertEqual(setups.map(\.name), ["Claude", "ChatGPT", "Gemini", "OpenClaw", "Home Assistant"])
+        let localizer = Localizer()
+        let original = localizer.language
+        defer { localizer.language = original }
+        for language in AppLanguage.allCases {
+            localizer.language = language
+            for setup in setups {
+                let lines = [setup.who] + setup.stepsWithSignIn(localizer) + (setup.fallback.map { [$0] } ?? [])
+                for line in lines {
+                    let text = String(line.text(localizer, address: address).characters)
+                    XCTAssertFalse(text.contains("{{"), "\(language.rawValue): \(line.key)")
+                    XCTAssertNotEqual(text, line.key, "\(language.rawValue): \(line.key)")
+                }
+            }
+        }
+    }
+
+    func testSigningInIsTheStepBeforeTheLast() {
+        let claude = try! XCTUnwrap(AssistantSetup.bundled.first { $0.name == "Claude" })
+        let steps = claude.stepsWithSignIn(Localizer())
+        XCTAssertEqual(steps.map(\.key), ["assistants.setup.claude.open", "assistants.setup.claude.add", "assistants.setup.signIn", "assistants.setup.claude.use"])
+    }
+
+    func testACommandHoldsPeeksAddressAsCodeAndAMenuIsBold() throws {
+        let localizer = Localizer()
+        let original = localizer.language
+        defer { localizer.language = original }
+        localizer.language = .en
+        let openClaw = try XCTUnwrap(AssistantSetup.bundled.first { $0.name == "OpenClaw" })
+        let text = openClaw.steps[0].text(localizer, address: address)
+        let code = text.runs.filter { $0.inlinePresentationIntent == .code }.map { String(text[$0.range].characters) }
+        XCTAssertEqual(code, [
+            "openclaw gateway stop",
+            "openclaw mcp set peek '{\"url\":\"\(address)\",\"transport\":\"streamable-http\",\"auth\":\"oauth\"}'",
+        ])
+        let claude = try XCTUnwrap(AssistantSetup.bundled.first { $0.name == "Claude" })
+        let line = claude.steps[0].text(localizer, address: address)
+        XCTAssertTrue(line.runs.contains { $0.link == URL(string: "https://claude.ai/directory/peek-parcel-tracker") })
+        XCTAssertTrue(line.runs.contains { $0.inlinePresentationIntent == .stronglyEmphasized && String(line[$0.range].characters) == "Customize › Connectors" })
+    }
+
+    func testAConnectionThisAppCantReadDropsOut() throws {
+        let data = Data("""
+        {"mcpUrl":"\(address)","connections":[
+          {"id":"0f6c1d2e-3a4b-4c5d-8e9f-0a1b2c3d4e5f","kind":"oauth","name":"Claude","redirectHost":"claude.ai",
+           "scopes":["parcels:read","parcels:write"],"createdAt":"2026-11-01T09:00:00Z","lastUsedAt":"2026-11-18T09:00:00Z"},
+          {"id":"1f6c1d2e-3a4b-4c5d-8e9f-0a1b2c3d4e5f","kind":"robot","name":"Future","scopes":[],"createdAt":"2026-11-01T09:00:00Z"}
+        ]}
+        """.utf8)
+        let offer = try AssistantsOffer.decode(data)
+        XCTAssertEqual(offer.mcpURL, address)
+        XCTAssertEqual(offer.connections.map(\.name), ["Claude"])
+        XCTAssertEqual(offer.connections[0].scopeKey, "assistants.scope.both")
+    }
+
+    func testTheRowShowsOnceOfferedAndDisconnectTakesTheAssistantAway() async {
+        let connection = AssistantConnection(id: UUID(), kind: .oauth, name: "Claude", scopes: [.parcelsRead], createdAt: "2026-11-01T09:00:00Z")
+        let token = AssistantConnection(id: UUID(), kind: .personal, name: "Script", scopes: [.parcelsRead], createdAt: "2026-11-01T09:00:00Z")
+        let offer = AssistantsResponse(connections: [connection, token], mcpURL: address)
+        nonisolated(unsafe) var revoked: [UUID] = []
+        let model = AssistantsModel()
+        await model.load()
+        XCTAssertNil(model.offer)
+
+        model.configure(AssistantsModel.Client(read: { nil }, revoke: { _ in }))
+        await model.load()
+        XCTAssertNil(model.offer)
+
+        model.configure(AssistantsModel.Client(read: { offer }, revoke: { revoked.append($0) }))
+        await model.load()
+        XCTAssertEqual(model.assistants, [connection])
+
+        let disconnected = await model.revoke(connection.id)
+        XCTAssertTrue(disconnected)
+        XCTAssertEqual(revoked, [connection.id])
+        XCTAssertEqual(model.assistants, [])
+
+        model.configure(AssistantsModel.Client(read: { offer }, revoke: { _ in throw DeliveryAPIError.serviceFailed(502) }))
+        await model.load()
+        let failed = await model.revoke(connection.id)
+        XCTAssertFalse(failed)
+        XCTAssertNotNil(model.failure)
+        XCTAssertEqual(model.assistants, [connection])
+
+        model.configure(nil)
+        XCTAssertNil(model.offer)
+    }
+}

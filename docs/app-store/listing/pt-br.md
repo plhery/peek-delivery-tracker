@@ -71,8 +71,8 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Com uma conta no Peek, em Configurações › Assistentes agora você vê como conectar Claude, ChatGPT, Gemini, OpenClaw ou Home Assistant ao Peek: o endereço do Peek para assistentes para você copiar, as etapas de cada um, o que pedir e os assistentes que você conectou, com “Desconectar”. Está em beta, como “Adicionar encomendas por e-mail”.
-• As Configurações estão mais fáceis de ler: cada item mostra um valor curto em uma só linha, as unidades se chamam “Distância” e “Peso”, e “Ponto nas encomendas atualizadas” diz o que essa opção faz. A opção do widget não existe mais: o widget da Tela de Início sempre mostra suas encomendas, então remova o widget se você não quiser.
-• Algumas transportadoras registram uma entrega com antecedência. Quando o horário dela já passou e nenhuma movimentação a comprova, o histórico de rastreamento agora diz que nada a confirma e, se nada chegou, para você perguntar ao vendedor qual transportadora faz a entrega e o código de rastreamento dela.
-• Correções: um status para o qual a transportadora não deu horário aparece no dia dele, e não no horário em que o Peek consultou; uma entrega que nenhuma movimentação localiza não aparece mais em um centro de distribuição; um código postal que você já informou vem com o país dele; uma encomenda entregue na sua porta depois de esperar em um ponto de retirada não dá mais o selo “Retirada” no seu Passaporte; janelas de entrega, etapas previstas, notificações e códigos de rastreamento compartilhados enquanto “Adicionar encomenda” está aberto funcionam como deveriam.
+• Novidade em Configurações › Preferências: “Estatísticas de uso”. Elas contam quantas vezes o Peek é aberto e quais recursos são usados, nunca suas encomendas nem sua conta. Para contar os aparelhos, o Peek guarda um ID aleatório neste aparelho e o envia separadamente, uma vez por dia; se você desativar a opção, nada é enviado e o ID é apagado.
+• Quando o site de rastreamento de uma transportadora está fora do ar, sua encomenda avisa isso com calma em vez de mostrar uma falha na atualização, e a página dela tem um link para o site da própria transportadora, para você procurar o código lá.
+• Em Configurações › Assistentes, as etapas do Home Assistant agora dizem para você encontrar o Peek pesquisando por ele no Marketplace.
+• As encomendas da GLS Hungary mostram o caminhão da GLS.
 ```

@@ -73,8 +73,8 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Avec un compte Peek, tu vois désormais dans Réglages › Assistants comment connecter Claude, ChatGPT, Gemini, OpenClaw ou Home Assistant à Peek : l’adresse de Peek pour les assistants, à copier ; les étapes pour chacun ; quoi lui demander ; et les assistants que tu as connectés, avec « Déconnecter ». C’est en bêta, comme « Ajouter des colis par e-mail ».
-• Les Réglages sont plus lisibles : chaque option affiche une valeur courte sur une seule ligne, les unités s’appellent « Distance » et « Poids », et « Point sur les colis mis à jour » dit ce que fait ce bouton. Le bouton du widget a disparu : le widget de l’écran d’accueil affiche toujours tes colis, alors supprime le widget si tu n’en veux pas.
-• Certains transporteurs inscrivent une livraison à l’avance. Quand son heure est passée sans qu’aucun scan ne vienne l’appuyer, l’historique du suivi dit désormais que rien ne la confirme et, si rien n’est arrivé, de demander au vendeur le transporteur qui la livre et son numéro de suivi.
-• Corrections : un statut auquel le transporteur n’a donné aucune heure s’affiche sous sa date, et non à l’heure où Peek a vérifié ; une livraison qu’aucun scan ne situe ne s’affiche plus dans un centre de tri ; un code postal que tu as déjà donné revient avec son pays ; un colis apporté à ta porte après avoir attendu en point de retrait ne te vaut plus le timbre « Retiré en personne » dans ton Passeport ; les créneaux de livraison, les étapes prévues, les notifications et les numéros de suivi partagés pendant que « Ajouter un colis » est ouvert fonctionnent comme il faut.
+• Nouveau dans Réglages › Préférences : « Statistiques d’utilisation ». Elles comptent combien de fois Peek est ouvert et quelles fonctions servent, jamais tes colis ni ton compte. Pour compter les appareils, Peek garde un identifiant aléatoire sur cet appareil et l’envoie à part, une fois par jour ; si tu désactives le bouton, rien n’est envoyé et l’identifiant est supprimé.
+• Quand le site de suivi d’un transporteur est en panne, ton colis le dit calmement au lieu d’afficher un échec de mise à jour, et sa page renvoie vers le site même du transporteur pour y chercher le numéro.
+• Dans Réglages › Assistants, les étapes pour Home Assistant disent désormais de trouver Peek en le cherchant dans Marketplace.
+• Les colis GLS Hungary affichent le camion de GLS.
 ```

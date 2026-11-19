@@ -71,8 +71,8 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Com uma conta Peek, em Definições › Assistentes vês agora como ligar Claude, ChatGPT, Gemini, OpenClaw ou Home Assistant ao Peek: o endereço do Peek para assistentes para copiares, os passos de cada um, o que lhe pedir e os assistentes que ligaste, com «Desligar». Está em beta, tal como «Adicionar encomendas por e-mail».
-• As Definições estão mais fáceis de ler: cada opção mostra um valor curto numa só linha, as unidades chamam-se «Distância» e «Peso», e «Ponto nas encomendas atualizadas» diz o que faz esse interruptor. O interruptor do widget desapareceu: o widget do ecrã principal mostra sempre as tuas encomendas, por isso remove o widget se não o quiseres.
-• Algumas transportadoras registam uma entrega com antecedência. Quando a sua hora já passou e nenhum registo a comprova, o histórico de seguimento diz agora que nada a confirma e, se nada chegou, que perguntes ao vendedor qual é a transportadora que a entrega e o respetivo número de seguimento.
-• Correções: um estado a que a transportadora não deu hora aparece no respetivo dia, e não à hora em que o Peek verificou; uma entrega que nenhum registo localiza já não aparece num centro de triagem; um código postal que já indicaste vem com o seu país; uma encomenda entregue à tua porta depois de esperar num ponto de levantamento já não te dá o selo «Levantada» no teu Passaporte; os intervalos de entrega, os passos previstos, as notificações e os números de seguimento partilhados enquanto «Adicionar uma encomenda» está aberto funcionam como devem.
+• Novidade em Definições › Preferências: «Estatísticas de utilização». Contam quantas vezes o Peek é aberto e que funções são usadas, nunca as tuas encomendas nem a tua conta. Para contar os dispositivos, o Peek guarda um identificador aleatório neste dispositivo e envia-o em separado, uma vez por dia; se desligares o interruptor, nada é enviado e o identificador é apagado.
+• Quando o site de seguimento de uma transportadora está em baixo, a tua encomenda indica-o com calma em vez de mostrar uma falha de atualização, e a sua página tem uma ligação para o site da própria transportadora, para procurares lá o número.
+• Em Definições › Assistentes, os passos do Home Assistant dizem agora para encontrares o Peek ao pesquisá-lo no Marketplace.
+• As encomendas da GLS Hungary mostram a carrinha da GLS.
 ```

@@ -166,6 +166,8 @@
 .assistants__setup-body { padding: 0 14px 4px; }
 .assistants__who { margin: 0; color: var(--ink-soft); font-size: 12px; line-height: 1.5; }
 .assistants__fallback { margin: -4px 0 14px; }
+/* A command to type, whole: one click selects it to copy. */
+.assistants__command { padding: 1px 5px; border-radius: 6px; background: var(--control); color: var(--ink); font: 500 11px/1.6 ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; user-select: all; }
 .assistants__uses { margin: 0; padding: 12px 14px 12px 32px; display: grid; gap: 8px; font-size: 13px; line-height: 1.5; }
 .assistants__uses strong { font-weight: 550; }
 @media (prefers-reduced-motion: reduce) { .assistants__setup > summary .settings-chevron { transition: none; } }

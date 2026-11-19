@@ -13,9 +13,9 @@ import { PipPerch } from './PipPerch';
 /**
  * Each assistant's steps to add Peek, folded under its name with what to do where they don't apply, then a line for any
  * other assistant. Signing in to Peek is the step before the last: the assistant asks for it when the connector is added
- * or first used.
+ * or first used. A command to type holds `address`, Peek's address for assistants.
  */
-function Setups() {
+function Setups({ address }: { address: string }) {
   const { t } = useI18n();
   return <section className="settings-group" aria-labelledby="assistants-setup"><h3 className="settings-group__title" id="assistants-setup">{t('assistants.setup')}</h3>
     <div className="settings-box">
@@ -24,9 +24,9 @@ function Setups() {
         return <details key={name} className="assistants__setup">
           <summary className="settings-row"><span translate="no">{name}</span><span className="settings-chevron" aria-hidden="true">›</span></summary>
           <div className="assistants__setup-body">
-            <p className="assistants__who"><SetupText text={t(who[0])} labels={who[1]} /></p>
-            <ol className="add-by-email__steps">{lines.map(([key, labels]) => <li key={key}><SetupText text={t(key)} labels={labels} /></li>)}</ol>
-            {fallback && <p className="assistants__who assistants__fallback"><SetupText text={t(fallback[0])} labels={fallback[1]} /></p>}
+            <p className="assistants__who"><SetupText text={t(who[0])} labels={who[1]} address={address} /></p>
+            <ol className="add-by-email__steps">{lines.map(([key, labels]) => <li key={key}><SetupText text={t(key)} labels={labels} address={address} /></li>)}</ol>
+            {fallback && <p className="assistants__who assistants__fallback"><SetupText text={t(fallback[0])} labels={fallback[1]} address={address} /></p>}
           </div>
         </details>;
       })}
@@ -99,9 +99,9 @@ function Connection({ connection, working, onRevoke }: {
 }
 
 /**
- * The assistants' page in Settings: the address to give an assistant, how to add it to Claude, ChatGPT and Gemini, what
- * to ask one, and the ones connected. Its first lines lead to the public page on connecting an assistant, in a tab of
- * its own, which says the same and more. Personal tokens have no screen: the server makes none while they are off.
+ * The assistants' page in Settings: the address to give an assistant, how to add Peek to each one, what to ask one, and
+ * the ones connected. Its first lines lead to the public page on connecting an assistant, in a tab of its own, which
+ * says the same and more. Personal tokens have no screen: the server makes none while they are off.
  */
 export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
   apiAuth: ApiAuth;
@@ -142,7 +142,7 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
         <button className="settings-row" type="button" onClick={() => void copy()}><Icon name={copied ? 'check' : 'copy'} />{t(copied ? 'inbox.copied' : 'inbox.copy')}</button>
       </div></PipPerch>
     </section>
-    <Setups />
+    <Setups address={offer.mcpUrl} />
     <Uses />
     <section className="settings-group" aria-labelledby="assistants-connected"><h3 className="settings-group__title" id="assistants-connected">{t('assistants.connected')}</h3>
       <div className="settings-box">

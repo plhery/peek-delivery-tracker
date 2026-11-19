@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Swoje przesyłki możesz śledzić w Claude, ChatGPT lub Gemini, jeśli połączysz je z [Peek](/), darmowym trackerem przesyłek: asystent może Ci wtedy powiedzieć, gdzie są Twoje przesyłki, i dodać numery śledzenia, które mu podasz. Potrzebujesz konta Peek, a o tym, kto może z tego korzystać, decyduje każdy asystent: Claude w każdym planie, ChatGPT w planie Business, Enterprise lub Edu, a w przypadku Gemini dorośli w USA z osobistym kontem Google. Peek oznacza tę funkcję jako „Beta”, więc może się ona jeszcze zmienić.
+Swoje przesyłki możesz śledzić w Claude, ChatGPT lub Gemini, jeśli połączysz je z [Peek](/), darmowym trackerem przesyłek: asystent może Ci wtedy powiedzieć, gdzie są Twoje przesyłki, i dodać numery śledzenia, które mu podasz. Potrzebujesz konta Peek, a o tym, kto może z tego korzystać, decyduje każdy asystent: Claude w każdym planie, ChatGPT w planie Business, Enterprise lub Edu, w przypadku Gemini dorośli w USA z osobistym kontem Google, a w przypadku OpenClaw ten, kto go uruchamia. Peek oznacza tę funkcję jako „Beta”, więc może się ona jeszcze zmienić.
 
 ## Czy ChatGPT, Claude albo Gemini mogą śledzić moje przesyłki?
 
@@ -18,6 +18,7 @@ Tak, gdy połączysz je z Peek. Każdy asystent stawia własne warunki:
 | Claude | claude.ai oraz aplikacje Claude na komputer, iPhone’a i Androida | Każdy plan. W planie Team lub Enterprise najpierw właściciel dodaje Peek |
 | ChatGPT | chatgpt.com | Plan Business, Enterprise lub Edu. W obszarze roboczym być może najpierw administrator musi dodać Peek lub na niego zezwolić |
 | Gemini | Łączysz na gemini.google.com, potem działa też w aplikacji Gemini | Osoby od 18 lat, w USA, z osobistym kontem Google i włączoną historią, po angielsku |
+| OpenClaw | Komputer lub serwer, na którym go uruchamiasz, w czatach jego agentów | Ten, kto go uruchamia, z terminala na tym urządzeniu |
 | Inny asystent | Każdy, w którym można dodać własny konektor lub serwer MCP | Ten, kto może go tam dodać |
 
 Po stronie Peek połączyć asystenta może każde konto (gość nie może), a Peek jest darmowy.
@@ -59,6 +60,19 @@ Jeśli Claude nie pokazuje „Peek Parcel Tracker”, dodaj Peek jako własny ko
 ### Gemini
 
 Strona pomocy Google podaje, że aby połączyć własną aplikację, taką jak Peek, musisz mieć ukończone 18 lat i być w USA, używać osobistego konta Google, a nie służbowego ani szkolnego, i mieć włączoną historię („History”). Łączysz ją na gemini.google.com, a potem działa też w aplikacji mobilnej Gemini, tylko po angielsku. Google nie wymienia żadnego płatnego planu. Strona Google i strona Peek podają, że adres Peek dodaje się w „Settings” Gemini, potem w „Connected Apps”, w sekcji „Custom apps”.
+
+### OpenClaw
+
+OpenClaw to asystent, którego uruchamiasz na własnym komputerze lub serwerze. Peek dodajesz z terminala na tym urządzeniu, a jego agenci korzystają potem z Twojego konta Peek w każdym czacie, niezależnie od tego, z kim rozmawiają. Polecenia `openclaw mcp set` i `openclaw mcp login` nie działają, gdy działa jego Gateway, więc najpierw zatrzymujesz Gateway:
+
+:::steps
+- Zatrzymaj Gateway | Uruchom `openclaw gateway stop`.
+- Dodaj Peek | Uruchom `openclaw mcp set peek '{"url":"https://peektracker.com/mcp","transport":"streamable-http","auth":"oauth"}'`.
+- Zaloguj się do Peek | Uruchom `openclaw mcp login peek` i otwórz link, który wyświetli to polecenie. Peek nazywa je „OpenClaw MCP”: zdecyduj, co może robić, i wybierz „Zezwól”.
+- Uruchom ponownie Gateway | Uruchom `openclaw gateway start`, a potem zapytaj swojego agenta o przesyłki.
+:::
+
+Jeśli przeglądarka jest na innym urządzeniu, strona, którą otworzy po zalogowaniu, się nie wczyta: dokończ z kodem z jej adresu, tak jak wyjaśnia OpenClaw w terminalu.
 
 ## O co mogę go poprosić?
 
@@ -127,4 +141,7 @@ Więcej przypadków znajdziesz w części „Gdy coś nie działa” na [stronie
 - [Peek: Help](https://peektracker.com/support.html) – logowanie sześciocyfrowym kodem
 - [Claude Help Center: Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) – kroki dodawania własnego konektora, jeden w planie Free
 - [Gemini Apps Help: Connect & manage custom apps for Gemini Apps](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – kto może połączyć własną aplikację, włączona historia, angielski, łączenie w przeglądarce
+- [OpenClaw: Transports and OAuth](https://docs.openclaw.ai/cli/mcp/transports) – zapisanie serwera z OAuth, `openclaw mcp login`, dokończenie z kodem, jedno wspólne logowanie
+- [OpenClaw: Connect MCP servers](https://docs.openclaw.ai/tools/mcp) – agenci korzystają z narzędzi zapisanego serwera
+- [OpenClaw na GitHubie: polecenia MCP i Gateway](https://github.com/openclaw/openclaw/blob/v2026.11.5/src/cli/mcp-cli-state-owner.ts) – `mcp set` i `mcp login` odrzucane, gdy działa Gateway
 :::

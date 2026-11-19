@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Puedes seguir tus paquetes en Claude, ChatGPT o Gemini si los conectas a [Peek](/), un localizador de paquetes gratuito: el asistente podrá decirte dónde están tus paquetes y añadir los números de seguimiento que le des. Necesitas una cuenta de Peek, y cada asistente decide quién puede: Claude con cualquier plan, ChatGPT con un plan Business, Enterprise o Edu, y Gemini para adultos en EE. UU. con una cuenta de Google personal. Peek marca la función como «Beta», así que aún puede cambiar.
+Puedes seguir tus paquetes en Claude, ChatGPT o Gemini si los conectas a [Peek](/), un localizador de paquetes gratuito: el asistente podrá decirte dónde están tus paquetes y añadir los números de seguimiento que le des. Necesitas una cuenta de Peek, y cada asistente decide quién puede: Claude con cualquier plan, ChatGPT con un plan Business, Enterprise o Edu, Gemini para adultos en EE. UU. con una cuenta de Google personal, y OpenClaw para quien lo ejecuta. Peek marca la función como «Beta», así que aún puede cambiar.
 
 ## ¿Puede ChatGPT, Claude o Gemini seguir mis paquetes?
 
@@ -18,6 +18,7 @@ Sí, una vez que los conectas a Peek. Cada asistente pone sus propias condicione
 | Claude | claude.ai y las apps de Claude para escritorio, iPhone y Android | Cualquier plan. Con un plan Team o Enterprise, primero un propietario añade Peek |
 | ChatGPT | chatgpt.com | Un plan Business, Enterprise o Edu. En un espacio de trabajo, puede que un administrador tenga que añadir o permitir Peek primero |
 | Gemini | Se conecta en gemini.google.com y luego funciona también en la app de Gemini | 18 años o más, en EE. UU., con una cuenta de Google personal y el historial activado, en inglés |
+| OpenClaw | El ordenador o servidor donde lo ejecutas, en los chats de sus agentes | Quien lo ejecuta, desde un terminal en ese equipo |
 | Otro asistente | Cualquiera que permita añadir un conector personalizado o un servidor MCP | Quien pueda añadir uno ahí |
 
 Por parte de Peek, cualquier cuenta puede conectar uno (un invitado no), y Peek es gratis.
@@ -59,6 +60,19 @@ Si Claude no muestra «Peek Parcel Tracker», añade Peek como conector personal
 ### Gemini
 
 La página de ayuda de Google dice que, para conectar una app personalizada como Peek, debes tener 18 años o más y estar en EE. UU., usar una cuenta de Google personal, no una del trabajo ni del centro educativo, y tener activado el historial («History»). La conectas en gemini.google.com, y después funciona también en la app de Gemini para móvil, solo en inglés. Google no menciona ningún plan de pago. La página de Google y la de Peek dicen las dos que añadas la dirección de Peek en «Settings» de Gemini, luego en «Connected Apps», en «Custom apps».
+
+### OpenClaw
+
+OpenClaw es un asistente que ejecutas tú mismo, en tu propio ordenador o servidor. Añades Peek desde un terminal en ese equipo, y luego sus agentes usan tu cuenta de Peek en todos los chats, hablen con quien hablen. Sus comandos `openclaw mcp set` y `openclaw mcp login` no se ejecutan mientras su Gateway está en marcha, así que primero detienes el Gateway:
+
+:::steps
+- Detén el Gateway | Ejecuta `openclaw gateway stop`.
+- Añade Peek | Ejecuta `openclaw mcp set peek '{"url":"https://peektracker.com/mcp","transport":"streamable-http","auth":"oauth"}'`.
+- Inicia sesión en Peek | Ejecuta `openclaw mcp login peek` y abre el enlace que muestra. Peek lo llama «OpenClaw MCP»: elige qué puede hacer y selecciona «Permitir».
+- Vuelve a iniciar el Gateway | Ejecuta `openclaw gateway start` y luego pregunta a tu agente por tus paquetes.
+:::
+
+Si tu navegador está en otro dispositivo, la página que abre después de iniciar sesión no carga: termina con el código que aparece en su dirección, como explica OpenClaw en el terminal.
 
 ## ¿Qué le puedo pedir?
 
@@ -127,4 +141,7 @@ Hay más casos en «Si algo falla», en la [página de asistentes de Peek](https
 - [Peek: ayuda (en inglés)](https://peektracker.com/support.html) – iniciar sesión con un código de seis cifras
 - [Centro de ayuda de Anthropic: Comienza con conectores personalizados usando MCP remoto](https://support.claude.com/es/articles/11175166-comienza-con-conectores-personalizados-usando-mcp-remoto) – pasos del conector personalizado, uno en el plan Free
 - [Ayuda de Aplicaciones de Gemini: Connect & manage custom apps for Gemini Apps (en inglés)](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – quién puede conectar una app personalizada, historial activado, inglés, conexión en la web
+- [OpenClaw: Transports and OAuth (en inglés)](https://docs.openclaw.ai/cli/mcp/transports) – guardar un servidor con OAuth, `openclaw mcp login`, terminar con el código, un inicio de sesión compartido
+- [OpenClaw: Connect MCP servers (en inglés)](https://docs.openclaw.ai/tools/mcp) – los agentes usan las herramientas de un servidor guardado
+- [OpenClaw en GitHub: los comandos MCP y el Gateway (en inglés)](https://github.com/openclaw/openclaw/blob/v2026.11.5/src/cli/mcp-cli-state-owner.ts) – `mcp set` y `mcp login` rechazados mientras el Gateway está en marcha
 :::

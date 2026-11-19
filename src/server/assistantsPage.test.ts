@@ -58,8 +58,13 @@ describe('the page on connecting an assistant', () => {
     expect(words).toContain(en['assistants.experimental']);
     // The address assistants connect to, on the canonical origin, whatever host the page was asked on.
     expect(html).toContain('<code>https://peek.example.test/mcp</code>');
-    for (const name of ['Claude', 'ChatGPT', 'Gemini', 'Home Assistant']) expect(html).toContain(`<h3 translate="no">${name}</h3>`);
+    for (const name of ['Claude', 'ChatGPT', 'Gemini', 'OpenClaw', 'Home Assistant']) expect(html).toContain(`<h3 translate="no">${name}</h3>`);
     expect(words).toContain('Sign in to Peek when it asks, then select Allow.');
+    // OpenClaw's commands are code, and the one that saves Peek holds the address on the canonical origin.
+    expect(html).toContain('<code class="assistants__command" translate="no">openclaw gateway stop</code>');
+    expect(words).toContain(
+      'add Peek with openclaw mcp set peek \'{"url":"https://peek.example.test/mcp","transport":"streamable-http","auth":"oauth"}\'.',
+    );
     expect(html).toContain('<a class="add-by-email__ui" href="https://claude.ai/directory/peek-parcel-tracker" target="_blank" rel="noopener noreferrer" translate="no">Peek Parcel Tracker</a>');
     expect(words).toContain(`If Claude doesn’t list Peek Parcel Tracker, add Peek as a custom connector instead`);
     // At least three things to ask that work.

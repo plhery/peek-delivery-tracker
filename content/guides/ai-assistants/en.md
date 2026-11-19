@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-You can track your parcels in Claude, ChatGPT or Gemini by connecting them to [Peek](/), a free parcel tracker: the assistant can then tell you where your parcels are and add the tracking numbers you give it. You need a Peek account, and each assistant decides who can: Claude on any plan, ChatGPT on a Business, Enterprise or Edu plan, and Gemini for adults in the US with a personal Google Account. Peek labels the feature "Beta", so it may still change.
+You can track your parcels in Claude, ChatGPT or Gemini by connecting them to [Peek](/), a free parcel tracker: the assistant can then tell you where your parcels are and add the tracking numbers you give it. You need a Peek account, and each assistant decides who can: Claude on any plan, ChatGPT on a Business, Enterprise or Edu plan, Gemini for adults in the US with a personal Google Account, and OpenClaw for whoever runs it. Peek labels the feature "Beta", so it may still change.
 
 ## Can ChatGPT, Claude or Gemini track my parcels?
 
@@ -18,6 +18,7 @@ Yes, once you connect them to Peek. Each assistant sets its own conditions:
 | Claude | claude.ai, and Claude's desktop, iPhone and Android apps | Any plan. On a Team or Enterprise plan, an owner adds Peek first |
 | ChatGPT | chatgpt.com | A Business, Enterprise or Edu plan. In a workspace, an admin may have to add or allow Peek first |
 | Gemini | Connected at gemini.google.com, then in the Gemini app too | 18 or over, in the US, with a personal Google Account and History on, in English |
+| OpenClaw | The computer or server you run it on, in the chats its agents answer | Whoever runs it, from a terminal there |
 | Another assistant | Any that lets you add a custom connector or MCP server | Whoever can add one there |
 
 On Peek's side, any account can connect one (a guest can't), and Peek is free.
@@ -59,6 +60,19 @@ If Claude doesn't list "Peek Parcel Tracker", add Peek as a custom connector on 
 ### Gemini
 
 Google's help page says that to connect a custom app such as Peek, you must "Be 18 or over and in the US", use a personal Google Account, not a work or school one, and "Have History on". You connect it at gemini.google.com, and it then works in the Gemini mobile app too, in English only. Google names no paid plan. Google's page and Peek's both say to add Peek's address in Gemini's "Settings", then "Connected Apps", under "Custom apps".
+
+### OpenClaw
+
+OpenClaw is an assistant you run yourself, on your own computer or server. You add Peek from a terminal there, and its agents then use your Peek account in every chat, whoever they're talking to. Its `openclaw mcp set` and `openclaw mcp login` commands won't run while its Gateway does, so you stop the Gateway first:
+
+:::steps
+- Stop the Gateway | Run `openclaw gateway stop`.
+- Add Peek | Run `openclaw mcp set peek '{"url":"https://peektracker.com/mcp","transport":"streamable-http","auth":"oauth"}'`.
+- Sign in to Peek | Run `openclaw mcp login peek` and open the link it prints. Peek calls it "OpenClaw MCP": choose what it may do, then select "Allow".
+- Start the Gateway again | Run `openclaw gateway start`, then ask your agent about your parcels.
+:::
+
+If your browser is on another device, the page it opens after you sign in won't load: finish with the code in that page's address, as OpenClaw explains in the terminal.
 
 ## What can I ask it?
 
@@ -127,4 +141,7 @@ More cases are under "If something goes wrong" on [Peek's assistants page](https
 - [Peek: Help](https://peektracker.com/support.html) – signing in with a six-digit code
 - [Claude Help Center: Get started with custom connectors using remote MCP](https://support.claude.com/en/articles/11175166-get-started-with-custom-connectors-using-remote-mcp) – custom connector steps, one on the Free plan
 - [Gemini Apps Help: Connect & manage custom apps for Gemini Apps](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – who can connect a custom app, History on, English, connecting on the web
+- [OpenClaw: Transports and OAuth](https://docs.openclaw.ai/cli/mcp/transports) – saving a server with OAuth, `openclaw mcp login`, finishing with the code, one shared sign-in
+- [OpenClaw: Connect MCP servers](https://docs.openclaw.ai/tools/mcp) – agents use a saved server's tools
+- [OpenClaw on GitHub: MCP commands and the Gateway](https://github.com/openclaw/openclaw/blob/v2026.11.5/src/cli/mcp-cli-state-owner.ts) – `mcp set` and `mcp login` refused while the Gateway runs
 :::

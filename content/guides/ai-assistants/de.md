@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Du kannst deine Pakete in Claude, ChatGPT oder Gemini verfolgen, wenn du sie mit [Peek](/) verbindest, einem kostenlosen Paket-Tracker: Der Assistent kann dir dann sagen, wo deine Pakete sind, und die Sendungsnummern hinzufügen, die du ihm gibst. Du brauchst ein Peek-Konto, und wer es nutzen kann, legt jeder Assistent selbst fest: Claude mit jedem Tarif, ChatGPT mit einem Business-, Enterprise- oder Edu-Tarif und Gemini für Erwachsene in den USA mit einem privaten Google-Konto. Peek kennzeichnet die Funktion mit „Beta“, sie kann sich also noch ändern.
+Du kannst deine Pakete in Claude, ChatGPT oder Gemini verfolgen, wenn du sie mit [Peek](/) verbindest, einem kostenlosen Paket-Tracker: Der Assistent kann dir dann sagen, wo deine Pakete sind, und die Sendungsnummern hinzufügen, die du ihm gibst. Du brauchst ein Peek-Konto, und wer es nutzen kann, legt jeder Assistent selbst fest: Claude mit jedem Tarif, ChatGPT mit einem Business-, Enterprise- oder Edu-Tarif Gemini für Erwachsene in den USA mit einem privaten Google-Konto und OpenClaw für alle, die es selbst betreiben. Peek kennzeichnet die Funktion mit „Beta“, sie kann sich also noch ändern.
 
 ## Können ChatGPT, Claude oder Gemini meine Pakete verfolgen?
 
@@ -18,6 +18,7 @@ Ja, sobald du sie mit Peek verbindest. Jeder Assistent legt eigene Bedingungen f
 | Claude | claude.ai und die Claude-Apps für Desktop, iPhone und Android | Jeder Tarif. Mit einem Team- oder Enterprise-Tarif fügt zuerst ein Inhaber Peek hinzu |
 | ChatGPT | chatgpt.com | Ein Business-, Enterprise- oder Edu-Tarif. In einem Workspace muss ein Admin Peek eventuell zuerst hinzufügen oder erlauben |
 | Gemini | Verbunden auf gemini.google.com, danach auch in der Gemini-App | Ab 18, in den USA, mit privatem Google-Konto und eingeschalteter Einstellung „History“, auf Englisch |
+| OpenClaw | Auf dem Computer oder Server, auf dem du es betreibst, in den Chats seiner Agenten | Wer es betreibt, über ein Terminal dort |
 | Ein anderer Assistent | Jeder, bei dem du einen benutzerdefinierten Konnektor oder MCP-Server hinzufügen kannst | Wer dort einen hinzufügen darf |
 
 Auf Peeks Seite kann jedes Konto einen Assistenten verbinden (ein Gast nicht), und Peek ist kostenlos.
@@ -59,6 +60,19 @@ Zeigt Claude „Peek Parcel Tracker“ nicht an, füge Peek als benutzerdefinier
 ### Gemini
 
 Laut Googles Hilfeseite musst du, um eine benutzerdefinierte App wie Peek zu verbinden, mindestens 18 Jahre alt sein und dich in den USA befinden, ein privates Google-Konto nutzen, kein Arbeits- oder Schulkonto, und die Einstellung „History“ eingeschaltet haben. Du verbindest sie auf gemini.google.com, danach funktioniert sie auch in der Gemini-App fürs Handy, nur auf Englisch. Einen kostenpflichtigen Tarif nennt Google nicht. Googles Seite und die von Peek sagen beide: Die Adresse von Peek kommt in Gemini unter „Settings“, dann „Connected Apps“, in den Bereich „Custom apps“.
+
+### OpenClaw
+
+OpenClaw ist ein Assistent, den du selbst betreibst, auf deinem eigenen Computer oder Server. Du fügst Peek über ein Terminal dort hinzu, und seine Agenten nutzen dann dein Peek-Konto in jedem Chat, egal mit wem sie schreiben. Die Befehle `openclaw mcp set` und `openclaw mcp login` laufen nicht, solange sein Gateway läuft, also stoppst du das Gateway zuerst:
+
+:::steps
+- Stoppe das Gateway | Führe `openclaw gateway stop` aus.
+- Füge Peek hinzu | Führe `openclaw mcp set peek '{"url":"https://peektracker.com/mcp","transport":"streamable-http","auth":"oauth"}'` aus.
+- Melde dich bei Peek an | Führe `openclaw mcp login peek` aus und öffne den Link, den der Befehl ausgibt. Peek nennt es „OpenClaw MCP“: Wähle aus, was es tun darf, und dann „Erlauben“.
+- Starte das Gateway wieder | Führe `openclaw gateway start` aus und frag dann deinen Agenten nach deinen Paketen.
+:::
+
+Läuft dein Browser auf einem anderen Gerät, lädt die Seite nicht, die er nach der Anmeldung öffnet: Schließ mit dem Code aus ihrer Adresse ab, wie OpenClaw es im Terminal erklärt.
 
 ## Was kann ich den Assistenten fragen?
 
@@ -127,4 +141,7 @@ Weitere Fälle stehen unter „Wenn etwas nicht klappt“ auf [Peeks Seite zu As
 - [Peek: Hilfe (auf Englisch)](https://peektracker.com/support.html) – Anmeldung mit einem sechsstelligen Code
 - [Claude-Hilfe: Erste Schritte mit benutzerdefinierten Connectoren mit Remote MCP](https://support.claude.com/de/articles/11175166-erste-schritte-mit-benutzerdefinierten-connectoren-mit-remote-mcp) – Schritte für einen benutzerdefinierten Konnektor, einer im Free-Tarif
 - [Gemini-Apps-Hilfe: Connect & manage custom apps for Gemini Apps (auf Englisch)](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – wer eine benutzerdefinierte App verbinden kann, History eingeschaltet, Englisch, Verbinden im Web
+- [OpenClaw: Transports and OAuth (auf Englisch)](https://docs.openclaw.ai/cli/mcp/transports) – einen Server mit OAuth speichern, `openclaw mcp login`, Abschluss mit dem Code, eine gemeinsame Anmeldung
+- [OpenClaw: Connect MCP servers (auf Englisch)](https://docs.openclaw.ai/tools/mcp) – Agenten nutzen die Tools eines gespeicherten Servers
+- [OpenClaw auf GitHub: MCP-Befehle und das Gateway (auf Englisch)](https://github.com/openclaw/openclaw/blob/v2026.11.5/src/cli/mcp-cli-state-owner.ts) – `mcp set` und `mcp login` verweigert, solange das Gateway läuft
 :::

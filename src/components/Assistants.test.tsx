@@ -70,12 +70,12 @@ describe('assistants in Settings', () => {
     expect(document.querySelectorAll('.small-pip')).toHaveLength(1);
   });
 
-  it('shows how to add Peek to Claude, ChatGPT, Gemini and Home Assistant, in their own words, and what to ask', async () => {
+  it('shows how to add Peek to Claude, ChatGPT, Gemini, OpenClaw and Home Assistant, in their own words, and what to ask', async () => {
     const user = userEvent.setup();
     render(<AssistantsPage apiAuth={apiAuth} offer={offer([])} onChange={vi.fn()} />);
     const setup = screen.getByRole('region', { name: 'Add Peek to your assistant' });
     const names = Array.from(setup.querySelectorAll('summary')).map((summary) => summary.textContent);
-    expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›', 'Home Assistant›']);
+    expect(names).toEqual(['Claude›', 'ChatGPT›', 'Gemini›', 'OpenClaw›', 'Home Assistant›']);
     // Claude finds Peek in its connector directory, with a custom connector where it doesn't list it.
     const claudeSetup = setup.querySelector('details');
     expect(Array.from(claudeSetup?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
@@ -99,6 +99,23 @@ describe('assistants in Settings', () => {
       'Sign in to Peek when it asks, then select Allow.',
       'In a chat, type @ and pick Peek.',
     ]);
+    // OpenClaw saves Peek from a terminal while its Gateway is stopped, with the address in the command to type.
+    await user.click(screen.getByText('OpenClaw'));
+    const openClaw = Array.from(setup.querySelectorAll('details')).find((details) => details.querySelector('summary')?.textContent === 'OpenClaw›');
+    expect(Array.from(openClaw?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
+      'Stop OpenClaw’s Gateway with openclaw gateway stop, then add Peek with openclaw mcp set peek '
+      + '\'{"url":"https://peek.example/mcp","transport":"streamable-http","auth":"oauth"}\'.',
+      'Run openclaw mcp login peek and open the link it prints.',
+      'Sign in to Peek when it asks, then select Allow.',
+      'Start the Gateway again with openclaw gateway start, then ask your agent about your parcels.',
+    ]);
+    expect(openClaw?.querySelector('.assistants__fallback')).toHaveTextContent(
+      'If your browser is on another device, the page it opens after you sign in won’t load: finish with the code in that '
+      + 'page’s address, as OpenClaw explains in the terminal.',
+    );
+    const login = screen.getByText('openclaw mcp login peek');
+    expect(login.tagName).toBe('CODE');
+    expect(login).toHaveAttribute('translate', 'no');
     // Home Assistant connects through Peek's integration, and its card shows once the page is reloaded.
     await user.click(screen.getByText('Home Assistant'));
     const homeAssistant = Array.from(setup.querySelectorAll('details')).at(-1);

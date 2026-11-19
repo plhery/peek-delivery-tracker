@@ -421,7 +421,7 @@ class Localizer(
 
     /**
      * A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day
-     * has passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
+     * has passed, both ends are dated, each with the time the carrier gave it: "Wed 4 Nov – Fri 6 Nov".
      */
     fun deliveryWindow(from: String?, to: String, now: Instant = AppClock.now()): String {
         val end = expectedDelivery(to, now)
@@ -438,8 +438,8 @@ class Localizer(
         }
         val days = windowDays(from, to)
         if (days != null && days.first < today(now)) {
-            val ending = if (to.contains("T") && DateParser.date(to) != null) dateTime(to) else shortDate(dayStart(days.second))
-            return "${shortDate(dayStart(days.first))} – $ending"
+            fun dated(value: String, day: LocalDate) = if (value.contains("T") && DateParser.date(value) != null) dateTime(value) else shortDate(dayStart(day))
+            return "${dated(from, days.first)} – ${dated(to, days.second)}"
         }
         return "${expectedDelivery(from, now)} – $end"
     }

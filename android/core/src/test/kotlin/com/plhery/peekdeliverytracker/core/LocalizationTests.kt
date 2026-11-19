@@ -100,6 +100,10 @@ class LocalizationTests {
         // Across midnight, or from a day to a time, both ends keep their day.
         assertEquals("tomorrow, 22:00 – Fri 11 Sep, 02:00", localizer.deliveryWindow(at("2026-09-10", 22), at("2026-09-11", 2), now = now))
         assertEquals("Fri 11 Sep – Fri 11 Sep, 14:00", localizer.deliveryWindow("2026-09-11", at("2026-09-11", 14), now = now))
+        // Once its first day has passed, each end keeps the time the carrier gave it.
+        val thursday = assertNotNull(DateParser.deliveryDate("2026-09-10"))
+        assertEquals("Wed 9 Sep, 16:00 – Fri 11 Sep, 10:00", localizer.deliveryWindow(at("2026-09-09", 16), at("2026-09-11", 10), now = thursday))
+        assertEquals("Wed 9 Sep – Fri 11 Sep, 10:00", localizer.deliveryWindow("2026-09-09", at("2026-09-11", 10), now = thursday))
     }
 
     /** The iPad's variant, as `Localizer(onPad: true)` reads it. */

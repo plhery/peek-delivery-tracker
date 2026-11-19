@@ -218,10 +218,19 @@ fun plannedNewestFirst(steps: List<PlannedTrackingEvent>): List<PlannedTrackingE
  * that day, which starts at `occurredAt` in the carrier's zone. So a carrier's pre-written "Delivered" never shows as
  * planned for a time gone by.
  */
-fun PlannedTrackingEvent.isAhead(now: Instant): Boolean {
-    val at = DateParser.date(occurredAt) ?: return false
-    return (if (day == null) at else at.plusSeconds(24 * 60 * 60)) > now
-}
+fun PlannedTrackingEvent.isAhead(now: Instant): Boolean = aheadUntil?.let { it > now } ?: false
+
+/**
+ * The moment the step stops being ahead, when an open journal drops it: for a step dated by its day alone, the next
+ * midnight in the carrier's zone as the server gives it (`expiresAt`, 23 or 25 hours on as the clocks change), or a day
+ * on from its start.
+ */
+val PlannedTrackingEvent.aheadUntil: Instant?
+    get() {
+        expiresAt?.let(DateParser::date)?.let { return it }
+        val at = DateParser.date(occurredAt) ?: return null
+        return if (day == null) at else at.plusSeconds(24 * 60 * 60)
+    }
 
 /** A planned step's words, as a scan's ([journalWording]): the carrier's, else its stage's, in the app language. */
 fun Localizer.plannedWording(step: PlannedTrackingEvent): String =

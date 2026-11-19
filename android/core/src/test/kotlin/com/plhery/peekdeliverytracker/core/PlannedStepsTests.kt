@@ -146,8 +146,9 @@ class PlannedStepsTests {
 
     @Test
     fun aPlannedStepShowsOnlyWhileItsTimeIsAhead() {
-        fun step(occurredAt: String, day: String? = null) =
-            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = occurredAt, day = day)
+        fun step(occurredAt: String, day: String? = null, expiresAt: String? = null) = PlannedTrackingEvent(
+            description = "Delivered", stage = TrackingStage.Delivered, occurredAt = occurredAt, expiresAt = expiresAt, day = day,
+        )
         val now = Instant.parse("2026-11-04T10:00:00Z")
         assertTrue(step("2026-11-04T10:01:00Z").isAhead(now))
         // The carrier's pre-written "Delivered" whose time has come is no longer planned.
@@ -157,6 +158,10 @@ class PlannedStepsTests {
         assertTrue(step("2026-11-03T16:00:00Z", day = "2026-11-04").isAhead(now))
         assertFalse(step("2026-11-02T16:00:00Z", day = "2026-11-03").isAhead(now))
         assertFalse(step("not a date").isAhead(now))
+        // Until the carrier's next midnight as the service gives it: 23 hours on in Zurich as the clocks go forward, 25
+        // as they go back.
+        assertFalse(step("2027-03-27T23:00:00Z", day = "2027-03-28", expiresAt = "2027-03-28T22:00:00Z").isAhead(Instant.parse("2027-03-28T22:30:00Z")))
+        assertTrue(step("2026-10-24T22:00:00Z", day = "2026-10-25", expiresAt = "2026-10-25T23:00:00Z").isAhead(Instant.parse("2026-10-25T22:30:00Z")))
     }
 
     @Test

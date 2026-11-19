@@ -234,6 +234,18 @@ describe('providerCopies', () => {
     expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c2'])]]));
   });
 
+  it('keeps a provider\'s scan beside a scan the carrier dated by its day alone, which the sync timed after it', () => {
+    // 17TRACK times the label; FedEx dates its pickup by the day, which the sync puts a second after the label.
+    const events = [
+      scan('c1', 'fedex', '2026-11-10T21:09:01Z', { stage: 'accepted', description: 'Picked up', local_time: '2026-11-10' }),
+      scan('u1', 'unknown', '2026-11-10T21:09:00Z', { universal_provider: '17TRACK', stage: 'registered', description: 'Shipping label created' }),
+      scan('u2', 'unknown', '2026-11-10T22:09:01Z', { universal_provider: '17TRACK', stage: 'accepted', description: 'Picked up at origin' }),
+      scan('u3', 'unknown', '2026-11-10T21:20:00Z', { universal_provider: '17TRACK', stage: 'accepted', description: 'Picked up' }),
+    ];
+    const row = { carrier_data: { routing: { confirmed_carrier: 'fedex' } }, tracking_events: events };
+    expect(providerCopyScans(row)).toEqual(new Map());
+  });
+
   it('leaves out a provider\'s copy whole hours from a carrier\'s scan to its second, in any stage and words', () => {
     // ParcelsApp reads a Japanese scan an hour off, as another stage, with a Chinese line added.
     const events = [

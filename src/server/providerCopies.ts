@@ -205,7 +205,7 @@ function movedOn(copy: JsonObject, scan: JsonObject): boolean {
  * provider reads the carrier's seconds on another clock, in its own words and stage). A scan dated
  * by its day is repeated at its wall clock in some zone: in its stage and words, or at that second
  * when it is not a minute's first, or at the wall clock itself, read as UTC, to the second, in its stage. A scan
- * dated by its day alone is repeated in its words and stage at the start of that day on the copy's wall clock.
+ * dated by its day alone is repeated only in its words and stage at the start of that day on the copy's wall clock.
  */
 function copies(copy: JsonObject, scan: JsonObject): boolean {
   const clock = wallClock(scan);
@@ -217,7 +217,8 @@ function copies(copy: JsonObject, scan: JsonObject): boolean {
       || (clock % MINUTE_MS !== 0 && seconds % QUARTER_HOUR_MS === 0 && Math.abs(seconds) <= MAX_SHIFT_MS)
       || (seconds === 0 && copy.stage === scan.stage);
   }
-  if (startsScanDay(copy, scan)) return true;
+  // A scan dated by its day alone has no clock: the time the sync gave it to keep the day's order proves nothing.
+  if (dayAlone(scan) !== null) return startsScanDay(copy, scan);
   const minutes = Math.abs(Math.floor(instant(copy) / MINUTE_MS) - Math.floor(instant(scan) / MINUTE_MS)) * MINUTE_MS;
   if (minutes === 0) return true;
   if (second(instant(scan)) % MINUTE_MS !== 0 && wholeHours(second(instant(copy)) - second(instant(scan)))) return true;
@@ -281,7 +282,8 @@ export function providerCopyScans(row: JsonObject): Map<string, Set<string>> {
     if (!providerOnly(event) || copied.has(String(event.id))) continue;
     // The provider's twin of a copy, in its words, place and stage whole hours away, is the same scan on another clock.
     const twins = repeats.filter((copy) => twin(event, copy));
-    const shifted = own.filter((scan) => !Number.isFinite(wallClock(scan)) && shifts.has(clock(event, minutesApart(event, scan))));
+    const shifted = own.filter((scan) => !Number.isFinite(wallClock(scan)) && dayAlone(scan) === null
+      && shifts.has(clock(event, minutesApart(event, scan))));
     if (twins.length || shifted.length) {
       copied.set(String(event.id), new Set([...twins.flatMap((copy) => [...copied.get(String(copy.id))!]), ...ids(shifted)]));
       zoned.push(event);

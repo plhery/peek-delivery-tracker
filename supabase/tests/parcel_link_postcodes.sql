@@ -17,7 +17,7 @@ begin
     foreach service_function in array array[
       'public.claim_parcel_link_postcode(text,text,text,integer)',
       'public.release_parcel_link_postcode(uuid)',
-      'public.file_parcel_link_postcode(text,text,text,text)',
+      'public.file_parcel_link_postcode(text,text,text,text,text)',
       'private.waits_for_link_postcode(public.packages,text)'
     ] loop
       if has_function_privilege(role_name, service_function, 'EXECUTE') then

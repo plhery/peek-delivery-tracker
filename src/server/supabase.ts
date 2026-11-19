@@ -2451,7 +2451,8 @@ export class SupabaseServiceClient extends SupabaseClient {
    * Answers like publicParcel, plus whether the parcel is new.
    */
   async createOneOffParcel(
-    values: { trackingNumber: string; carrier: string; trackingUrl: string | null; dpdPostcode: string | null; phoneDigits?: string | null },
+    values: { trackingNumber: string; carrier: string; trackingUrl: string | null; dpdPostcode: string | null; phoneDigits?: string | null;
+      dpdPostcodeCountry?: string | null },
     ownerKeyHash: string,
   ): Promise<{ link: JsonObject; package: JsonObject; created: boolean }> {
     const result = await this.request('/rest/v1/rpc/create_one_off_parcel', {
@@ -2463,6 +2464,8 @@ export class SupabaseServiceClient extends SupabaseClient {
         p_dpd_postcode: values.dpdPostcode,
         p_owner_key_hash: ownerKeyHash,
         ...(values.phoneDigits ? { p_phone_digits: values.phoneDigits } : {}),
+        // A parcel is shared only with lookups whose postcode is from the same country, and stored with it.
+        ...(values.dpdPostcode && values.dpdPostcodeCountry ? { p_postcode_country: values.dpdPostcodeCountry } : {}),
       },
     });
     if (!isRecord(result) || !isRecord(result.link) || !isRecord(result.package)) {
@@ -2563,10 +2566,12 @@ export class SupabaseServiceClient extends SupabaseClient {
     ownerKeyHash: string,
     carrier: string,
     dpdPostcode: string,
+    postcodeCountry?: string | null,
   ): Promise<StoredParcelLink & { created: boolean } | 'not_asked' | null> {
     const result = await this.request('/rest/v1/rpc/file_parcel_link_postcode', {
       method: 'POST',
-      body: { p_link_id: linkId, p_owner_key_hash: ownerKeyHash, p_carrier: carrier, p_dpd_postcode: dpdPostcode },
+      body: { p_link_id: linkId, p_owner_key_hash: ownerKeyHash, p_carrier: carrier, p_dpd_postcode: dpdPostcode,
+        ...(postcodeCountry ? { p_postcode_country: postcodeCountry } : {}) },
     });
     if (result === null) return null;
     if (isRecord(result) && result.asked === false) return 'not_asked';

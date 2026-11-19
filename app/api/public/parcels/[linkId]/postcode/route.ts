@@ -9,7 +9,6 @@ import {
 import { wakeSyncWorker } from '../../../../../../src/server/background';
 import { checkLinkPostcode, LINK_POSTCODE_TRIES, type PostcodeCheck } from '../../../../../../src/server/linkPostcodes';
 import { logOperationalEvent } from '../../../../../../src/server/observability';
-import { postcodeCountryWrite } from '../../../../../../src/server/postcodeCountry';
 import {
   isParcelLinkId,
   ownerKeyHash,
@@ -100,7 +99,7 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
       return json({ error: 'The carrier could not be asked. Try again later.' }, 503);
     }
 
-    const filed = await service.fileParcelLinkPostcode(linkId, keyHash!, values.carrier, values.dpdPostcode);
+    const filed = await service.fileParcelLinkPostcode(linkId, keyHash!, values.carrier, values.dpdPostcode, values.dpdPostcodeCountry);
     if (filed === null || filed === 'not_asked') {
       recordPostcode(filed === null ? 'unknown' : 'not_asked', carrier, context.requestId,
         { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
@@ -109,9 +108,7 @@ export const POST = apiRoute<LinkParameters>(async (context) => {
     settled = true;
     recordPostcode('accepted', carrier, context.requestId, { trackingNumber: claim.trackingNumber, postcode: values.dpdPostcode });
     try {
-      // A parcel this postcode files for the first time keeps its country; one filed before keeps its own.
-      const write = filed.created ? postcodeCountryWrite(filed.package, values.dpdPostcodeCountry) : null;
-      if (write) await service.updatePackage(String(filed.package.id), write);
+      // The filing stored the postcode's country with it, and shares a parcel only with one from the same country.
       await service.enqueueSyncJob({ packageId: String(filed.package.id), reason: filed.created ? 'added' : 'changed' });
       wakeSyncWorker();
     } catch (error) {

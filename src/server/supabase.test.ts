@@ -1294,6 +1294,24 @@ describe('notification reads', () => {
   });
 });
 
+describe('guest postcode country', () => {
+  it('sends the country of a postcode from abroad with both filings, and none for the carrier\'s home', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const hash = 'a'.repeat(64);
+    const answer = { link: { id: 'k7Qm2xHd9RtW' }, package: { id: 'parcel' }, created: true };
+    const request = vi.spyOn(client, 'request').mockResolvedValue(answer);
+    const values = { trackingNumber: '3SABCD826405193', carrier: 'spring-gds', trackingUrl: null, dpdPostcode: '1000' };
+    await client.createOneOffParcel({ ...values, dpdPostcodeCountry: 'BE' }, hash);
+    expect(request.mock.calls[0]![1]).toMatchObject({ body: { p_dpd_postcode: '1000', p_postcode_country: 'BE' } });
+    await client.createOneOffParcel({ ...values, dpdPostcodeCountry: null }, hash);
+    expect(request.mock.calls[1]![1]!.body).not.toHaveProperty('p_postcode_country');
+    await client.fileParcelLinkPostcode('k7Qm2xHd9RtW', hash, 'spring-gds', '1000', 'BE');
+    expect(request.mock.calls[2]![1]).toMatchObject({ body: { p_dpd_postcode: '1000', p_postcode_country: 'BE' } });
+    await client.fileParcelLinkPostcode('k7Qm2xHd9RtW', hash, 'spring-gds', '1000', null);
+    expect(request.mock.calls[3]![1]!.body).not.toHaveProperty('p_postcode_country');
+  });
+});
+
 describe('account postcodes', () => {
   it('reads every postcode the account gave, newest parcel first, in a stable order', async () => {
     const client = new SupabaseServiceClient('https://database.example', 'service-key');

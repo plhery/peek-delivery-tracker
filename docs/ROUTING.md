@@ -741,8 +741,10 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   ([`postcode/route.ts`](../app/api/public/parcels/[linkId]/postcode/route.ts)). The server
   asks that carrier's own tracking with the postcode, and its country when the owner names
   another than the carrier's own ([SCRAPER.md](SCRAPER.md)), before anything is saved or shown. A
-  postcode it accepts moves the link to the one-off parcel with that number, carrier and
-  postcode (a new one, or one another link already follows), queues its check at once and
+  postcode it accepts moves the link to the one-off parcel with that number, carrier,
+  postcode and postcode country (a new one, stored with the country, or one another link already
+  follows: a lookup without an account shares a parcel only with lookups that gave the same
+  postcode from the same country), queues its check at once and
   forgets the previous parcel once no link points to it. One it refuses, or finds no parcel
   with, shows nothing of the parcel and counts against the link: five a day, in `parcel_link_postcode_attempts`.
   A check that could not ask the carrier is not counted, and a carrier that blocks after

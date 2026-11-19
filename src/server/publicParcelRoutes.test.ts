@@ -840,7 +840,7 @@ describe('the postcode another carrier asks for', () => {
     expect(response.status).toBe(200);
     expect(claimed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'dhl', linkPostcodes.LINK_POSTCODE_TRIES);
     expect(checked).toHaveBeenCalledExactlyOnceWith('dhl', heldNumber, heldPostcode, null, expect.any(AbortSignal));
-    expect(filed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'dhl', heldPostcode);
+    expect(filed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'dhl', heldPostcode, null);
     expect(checked.mock.invocationCallOrder[0]).toBeLessThan(filed.mock.invocationCallOrder[0]!);
     const answer = await response.json();
     expect(answer.link).toMatchObject({ id: linkId, role: 'owner' });
@@ -869,11 +869,9 @@ describe('the postcode another carrier asks for', () => {
     const response = await add({ carrier: 'spring-gds', postcode: '1000', postcodeCountry: 'BE' });
     expect(response.status).toBe(200);
     expect(checked).toHaveBeenCalledExactlyOnceWith('spring-gds', postnl, '1000', 'BE', expect.any(AbortSignal));
-    expect(filed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'spring-gds', '1000');
-    expect(update).toHaveBeenCalledExactlyOnceWith(filedId, {
-      carrier_data: { postcode_country: { postcode: '1000', country: 'BE' } }, dpd_postcode: '1000',
-    });
-    expect(update.mock.invocationCallOrder[0]).toBeLessThan(enqueue.mock.invocationCallOrder[0]!);
+    // The filing shares a parcel only with one whose postcode is from Belgium too, and stores the country with the one it creates.
+    expect(filed).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, 'spring-gds', '1000', 'BE');
+    expect(update).not.toHaveBeenCalled();
     expect(await response.text()).not.toContain('postcode_country');
   });
 

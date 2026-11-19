@@ -3212,6 +3212,33 @@ describe('TrackingSyncService', () => {
     await service.syncPackage(parcel);
     expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'exception' });
   });
+  it('keeps the stage while a provider\'s newest scan is no newer than the scans the parcel\'s carriers showed', async () => {
+    // China Post handed the parcel to USPS, whose newest scan sets the watermark: China Post's later scans, stored from
+    // its follow-ups, don't. With both down, a provider's copy of China Post's customs scan (synthetic wording) is
+    // newer than the watermark but older than China Post's departures after it, and brings nothing they had not shown.
+    vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-11-18T16:29:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const row = (source: string, time: string, description: string, stage: string) => ({ stage, description,
+      occurred_at: new Date(time).toISOString(), provider_event_id: providerEventId(source, time, '', description) });
+    const adapter = { fetch: vi.fn().mockRejectedValue(new Error('tracking endpoint is unavailable')),
+      fetchUniversal: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'customs', last_status_text: 'Export customs',
+        last_update: '2026-11-17T16:20:00Z', events: [{ time: '2026-11-17T16:20:00Z', description: 'Export customs', stage: 'customs' },
+          { time: '2026-11-17T10:35:00Z', description: 'In transit to the next facility', stage: 'in_transit' }] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-18T16:28:00Z'));
+    const parcel = { id: 'follow-ups-ahead', carrier: 'china-post', tracking_number: 'TEST1234', current_stage: 'in_transit',
+      carrier_data: { last_status_text: 'In transit to the next facility', active_tracking_carrier: 'usps', handed_over_at: '2026-11-17T13:14:43Z',
+        routing: { version: 1, configured_carrier: 'china-post', last_event_at: '2026-11-17T10:35:00Z' } },
+      [STORED_EVENT_IDENTITIES]: [row('usps', '2026-11-17T10:35:00Z', 'In transit to the next facility', 'in_transit'),
+        row('china-post', '2026-11-17T16:20:40Z', 'Export customs', 'customs'),
+        row('china-post', '2026-11-17T17:41:24Z', 'Departed', 'in_transit'), row('china-post', '2026-11-18T04:56:01Z', 'Departed', 'in_transit')] };
+    await service.syncPackage(parcel);
+    const held = client.updatePackage.mock.calls.at(-1)![1];
+    expect(held.current_stage).toBeUndefined();
+    expect(held.carrier_data).toMatchObject({ last_status_text: 'In transit to the next facility', routing: { last_event_at: '2026-11-17T10:35:00Z' } });
+  });
   it('moves an announced parcel on to the scans a set-aside answer stores before the carrier\'s notices', async () => {
     // Spring GDS pre-advised the parcel to its delivery partner and readied it for shipment after a provider's export and
     // departure scans (synthetic wording). The provider's answer is older than those notices, so its summary is set

@@ -3156,9 +3156,16 @@ export class TrackingSyncService {
       );
       // A provider answering while the parcel's own carrier is down (UPS's 500s) copies the carrier's
       // scans, often in another stage. Over the carrier's summary, only a scan the carrier has not shown counts.
+      // Nor one the parcel's carriers have shown later scans than: an earlier carrier's scans, stored from its
+      // follow-ups after the handover, leave the watermark at the delivery partner's own newest, and a provider's
+      // copy of China Post's customs scan before its departures would hold the parcel at customs.
+      const carriersNewest = Math.max(Number.NEGATIVE_INFINITY, ...stored
+        .filter((row) => !['unknown', 'app'].includes(String(row.provider_event_id).split(':')[0]!)
+          && row.observed_without_provider_timestamp !== true)
+        .map((row) => Date.parse(String(row.occurred_at))).filter((at) => at <= now.getTime()));
       const unprovenProviderSummary = typeof result.tracking_provider === 'string' && !fetched.correction
         && directCarrier(String(parcel.carrier)) && answeredByCarrier(parcel) && previousStage !== 'pending'
-        && Number.isFinite(previousEventTime) && !(returnedEventTime > previousEventTime);
+        && Number.isFinite(previousEventTime) && !(returnedEventTime > Math.max(previousEventTime, carriersNewest));
       // A delivered or returned parcel keeps its summary, unless the answer disputes a provider's
       // delivery, reads the delivery's or return's own scans again, or brings the return that came after the delivery.
       const preserveSummary = keepSaved || olderSnapshot || unprovenUpuSummary || unprovenLocalSummary || unprovenProviderSummary

@@ -514,4 +514,42 @@ begin
   assert result->0->>'state'='open', 'A direct-step fault is not a final JD matcher abstention';
 end;
 $$;
+-- A provider asked about once an hour that refuses every lookup opens on its run of failures, which the rate misses.
+do $$
+declare result jsonb;
+begin
+  insert into public.packages(id, user_id, tracking_number, carrier, one_off) values
+    ('50000000-0000-4000-8000-000000000001', '30000000-0000-4000-8000-000000000009', 'STREAKTEST1', 'unknown', false),
+    ('50000000-0000-4000-8000-000000000002', null, 'STREAKTEST1', 'unknown', true);
+  insert into public.tracking_sync_attempts(id, package_id, trigger, configured_carrier, started_at)
+    select ('51000000-0000-4000-8000-00000000000' || n)::uuid,
+      ('50000000-0000-4000-8000-00000000000' || (1 + n % 2))::uuid, 'scheduled', 'unknown', now()
+    from generate_series(1, 4) n;
+  -- A day of answers, then failures an hour apart, a quarter of an hour apart, or for copies of one number.
+  insert into public.tracking_health_samples(attempt_id, kind, subject, healthy, details, observed_at)
+    select gen_random_uuid(), 'provider', subject, true, '{"category":"ok"}'::jsonb, now() - interval '10 hours'
+    from unnest(array['streak-hourly','streak-quarterly','streak-one-number']) subject, generate_series(1, 20);
+  insert into public.tracking_health_samples(attempt_id, kind, subject, healthy, details, observed_at)
+    select gen_random_uuid(), 'provider', 'streak-hourly', false, '{"error_type":"TransportError"}'::jsonb, now() - make_interval(hours => h)
+    from generate_series(1, 3) h
+    union all
+    select gen_random_uuid(), 'provider', 'streak-quarterly', false, '{"error_type":"TransportError"}'::jsonb, now() - make_interval(mins => 15 * m)
+    from generate_series(1, 3) m
+    union all
+    select ('51000000-0000-4000-8000-00000000000' || h)::uuid, 'provider', 'streak-one-number', false, '{"error_type":"TransportError"}'::jsonb,
+      now() - make_interval(hours => h)
+    from generate_series(1, 3) h;
+  assert pg_temp.health_sample('streak-quarterly',false)='[]', 'Four failures inside two hours are left to the rate';
+  assert pg_temp.health_sample('streak-one-number',false,'provider',null,'51000000-0000-4000-8000-000000000004')='[]',
+    'Copies of one number refused for hours are that number''s, not an outage';
+  result := pg_temp.health_sample('streak-hourly',false);
+  assert result->0->>'state'='open' and (result->0->>'consecutive_failures')::boolean
+    and (result->0->>'failures')::int=4 and (result->0->>'attempts')::int=24,
+    'Four failed lookups over three hours for different parcels must open an incident under the rate';
+  perform public.ack_tracking_health(array[(result->0->>'id')::uuid]);
+  for i in 1..2 loop assert pg_temp.health_sample('streak-hourly',true)='[]'; end loop;
+  result := pg_temp.health_sample('streak-hourly',true);
+  assert result->0->>'state'='recovered', 'Three answers end the run and recover';
+end;
+$$;
 rollback;

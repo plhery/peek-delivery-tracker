@@ -175,10 +175,13 @@ export function healthMessage(incident: JsonObject): { title: string; nextSteps:
       impact: refresh ? 'No scheduled refresh of this carrier was recorded for 24 hours.'
         : 'This describes one provider or direct transport that was not used for 24 hours.' };
   }
-  // A streak counts when two parcels are on one, or one while no other parcel answered
-  // (record_tracking_health); the incident does not say which.
+  // A refresh streak counts when two parcels are on one, or one while no other parcel answered; a provider's
+  // when its last 4 lookups failed over 2 hours or more for two parcels or more (record_tracking_health).
+  const run = !incident.consecutive_failures ? ''
+    : refresh ? '; 3 checks in a row failed for two parcels, or for one while no other answered'
+    : '; its last 4 lookups failed, over 2 hours or more, for two parcels or more';
   const title = recovered ? `${scope} recovered: ${subject}`
-    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${incident.consecutive_failures ? '; 3 checks in a row failed for two parcels, or for one while no other answered' : ''})`;
+    : `${scope} repeatedly failing: ${subject} (${incident.failures}/${incident.attempts} in ${incident.window_hours}h${run})`;
   let nextSteps = 'Inspect the carrier scraper dashboard and the latest error type. Check the provider response and adapter parsing; retain the working fallback and scheduled backoff.';
   if (evidence?.reason === 'proxy_payment_required') nextSteps = 'The tracking proxy refused the tunnel with 402 Payment Required: its account is out of credit or traffic. Top it up or move the route to another proxy; retries will not help.';
   else if (evidence?.reason === 'proxy_refused') nextSteps = `The tracking proxy refused the tunnel with ${String(evidence.proxy_status)}: a gateway error means its exit could not reach the carrier. Check the proxy provider's status before the carrier's.`;

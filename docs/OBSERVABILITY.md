@@ -956,7 +956,9 @@ provider failure in an `AggregateError` so every cause is visible.
 - **Alerts**: notify on new issues and regressions in `production`, and keep the Cron
   alerts. Avoid "more than 0 times in 5 minutes" rules: they fire on every failed check.
 - **Incidents**: carrier and provider outages open once, from thresholds computed in
-  Postgres, and remind every six hours while they last. A lookup counts by its final outcome,
+  Postgres, and remind every six hours while they last. A provider's lookups open one when more
+  than half of at least 10 in 24 hours failed, or when its last 4 failed over 2 hours or more for
+  two parcels or more (a breaker that lets about one probe an hour through keeps the rate low). A lookup counts by its final outcome,
   its browser or proxy step included. A recovery is only logged and counted, and so is a
   direct step's incident: its failures say little while the lookup's next step answers. See
   [ops/sentry](../ops/sentry/README.md).

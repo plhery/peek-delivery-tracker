@@ -31,7 +31,6 @@ Télécharge-la sur l'[App Store](https://apps.apple.com/app/id6823615370) ; sur
 | --- | --- |
 | Notifications | « Réglages » › « Livraisons » › « Notifications », avec un compte ; voir [les notifications de livraison](guide:parcel-notifications) |
 | Ajouter des colis par e-mail | « Réglages » › « Livraisons » › « Ajouter des colis par e-mail », marqué « Bêta », avec un compte ; voir [suivre ses colis depuis ses e-mails](guide:add-parcels-by-email) |
-| L'interrupteur du widget | « Réglages » › « Livraisons » › « Widgets d’écran d’accueil » |
 | Mode sombre | « Réglages » › « Préférences » › « Apparence », puis « Sombre » |
 | Assistants IA | Pas dans l'app : voir [le guide des assistants](guide:ai-assistants) |
 
@@ -60,7 +59,6 @@ Le widget liste les colis en route, puis ceux livrés dans la dernière journée
 
 | Le widget affiche | Ce que ça veut dire |
 | --- | --- |
-| « Widget désactivé » | Active « Réglages » › « Livraisons » › « Widgets d’écran d’accueil » |
 | « Aucun colis en route pour le moment » | Aucun colis n'est en route : « Ajoute un numéro ou un lien de suivi pour commencer. » |
 
 « Colis » ne s'ajoute qu'à l'écran d'accueil : il n'y a pas de widget pour l'écran verrouillé, et Peek n'affiche pas d'activités en direct.
@@ -89,7 +87,7 @@ Pas d'icône de code-barres ? Elle n'apparaît que si l'appareil photo prend en 
 
 Oui. Demande « Quand arrive mon prochain colis dans Peek », et Siri t'indique ton prochain colis, son transporteur, quand il est attendu (ou sinon son statut) et combien d'autres sont en route, sans ouvrir Peek. Dis « Ajouter un colis dans Peek », et Siri demande « Quel est le numéro de suivi ? », puis ouvre « Ajouter un colis » avec le numéro déjà rempli.
 
-Les deux actions, « Prochaine livraison » et « Ajouter un colis », sont aussi dans Spotlight et dans l'app Raccourcis, sur iPhone, iPad et Mac, et leurs phrases suivent la langue de ton appareil, pas celle de Peek. « Prochaine livraison » lit les données du widget : avec « Widgets d’écran d’accueil » désactivé, Siri répond donc « Ouvre Peek pour voir ta prochaine livraison. »
+Les deux actions, « Prochaine livraison » et « Ajouter un colis », sont aussi dans Spotlight et dans l'app Raccourcis, sur iPhone, iPad et Mac, et leurs phrases suivent la langue de ton appareil, pas celle de Peek. « Prochaine livraison » lit les données du widget : tant que tu n'as pas ouvert Peek une première fois, Siri répond donc « Ouvre Peek pour voir ta prochaine livraison. »
 
 ## Peek fonctionne-t-il sur Mac ?
 
@@ -109,7 +107,7 @@ Dans la fenêtre « Réglages » de Peek, « Général » propose « Afficher da
 - [Peek : l'extension de partage](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – « Ajouter à Peek » et ses messages
 - [Peek : ajouter un colis](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – le scanner de codes-barres et quand il apparaît
 - [Peek : Siri et Raccourcis](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – « Prochaine livraison », « Ajouter un colis », leurs phrases
-- [Peek : réglages](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – « Widgets d’écran d’accueil », « Apparence », « Tout oublier », la fenêtre Réglages du Mac
+- [Peek : réglages](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – « Apparence », « Tout oublier », la fenêtre Réglages du Mac
 - [Peek : barre des menus du Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – « En route », son menu, « Suivre avec Peek »
 - [Peek : Télécharge l'app](https://peektracker.com/app) – l'App Store pour iPhone et iPad, un code sur ordinateur
 - [Peek : aide (en anglais)](https://peektracker.com/support.html) – « Tout oublier », dans les apps iPhone et Android

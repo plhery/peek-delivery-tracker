@@ -31,7 +31,6 @@ As «Definições» abrem-se a partir do botão Conta, no canto superior direito
 | --- | --- |
 | Notificações | «Definições» › «Entregas» › «Notificações», com uma conta; vê [as notificações de entrega de encomendas](guide:parcel-notifications) |
 | Adicionar encomendas por e-mail | «Definições» › «Entregas» › «Adicionar encomendas por e-mail», com a etiqueta «Beta», com uma conta; vê [como adicionar encomendas por e-mail](guide:add-parcels-by-email) |
-| O interruptor do widget | «Definições» › «Entregas» › «Widgets do ecrã principal» |
 | Modo escuro | «Definições» › «Preferências» › «Aspeto» e depois «Escuro» |
 | Assistentes de IA | Não estão na app: vê [o guia dos assistentes](guide:ai-assistants) |
 
@@ -60,7 +59,6 @@ O widget lista as encomendas a caminho e depois as entregues no último dia, pel
 
 | O widget mostra | O que significa |
 | --- | --- |
-| «Widget desativado» | Ativa «Definições» › «Entregas» › «Widgets do ecrã principal» |
 | «Não há encomendas a caminho» | Nenhuma encomenda está a caminho: «Adiciona um número ou ligação de seguimento para começar.» |
 
 «Encomendas» é só para o ecrã principal: não há widget para o ecrã bloqueado, e o Peek não mostra Atividades em direto.
@@ -89,7 +87,7 @@ Não vês o ícone de código de barras? Só aparece se a câmara for compatíve
 
 Podes. Pergunta «Quando chega a minha próxima encomenda no Peek» e a Siri diz-te qual é a próxima encomenda, a transportadora, quando é esperada (ou então o estado) e quantas mais estão a caminho, sem abrir o Peek. Diz «Adicionar uma encomenda ao Peek» e a Siri pergunta «Qual é o número de seguimento?»; depois abre o ecrã de adicionar com o número já preenchido.
 
-As duas ações, «Próxima entrega» e «Adicionar uma encomenda», também estão no Spotlight e na app Atalhos, no iPhone, no iPad e no Mac, e as frases seguem o idioma do teu dispositivo, não o do Peek. «Próxima entrega» lê os dados do widget, por isso, com a opção «Widgets do ecrã principal» desativada, a Siri responde «Abre o Peek para veres a próxima entrega.»
+As duas ações, «Próxima entrega» e «Adicionar uma encomenda», também estão no Spotlight e na app Atalhos, no iPhone, no iPad e no Mac, e as frases seguem o idioma do teu dispositivo, não o do Peek. «Próxima entrega» lê os dados do widget, por isso, até abrires o Peek pela primeira vez, a Siri responde «Abre o Peek para veres a próxima entrega.»
 
 ## O Peek funciona num Mac?
 
@@ -109,7 +107,7 @@ Na janela de definições do Peek, «Geral» tem «Mostrar na barra de menus», 
 - [Peek: a extensão de partilha](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – «Adicionar ao Peek» e as mensagens dela
 - [Peek: adicionar uma encomenda](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – o leitor de códigos de barras e quando aparece
 - [Peek: Siri e Atalhos](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – Próxima entrega, Adicionar uma encomenda, as frases
-- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Widgets do ecrã principal, Aspeto, Esquecer todas, a janela de definições do Mac
+- [Peek: Definições](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Aspeto, Esquecer todas, a janela de definições do Mac
 - [Peek: barra de menus do Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – A caminho, o menu, Seguir com o Peek
 - [Peek: Obtém a app](https://peektracker.com/app) – App Store para iPhone e iPad, código num computador
 - [Peek: Support (em inglês)](https://peektracker.com/support.html) – Forget all, nas apps para iPhone e Android

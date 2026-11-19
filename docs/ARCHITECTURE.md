@@ -797,7 +797,7 @@ and nothing typed is sent.
   new; this clears the dot on the account's other devices at their next read. The device lays its
   mark over each read of the list until one brings it, so a read already on its way still lands. A parcel
   starts as seen: when it is added, when its first answer arrives and when it joins an account
-  (the `packages_start_seen` trigger). "Mark new updates" in Settings hides the dot and keeps
+  (the `packages_start_seen` trigger). "Dot on updated parcels" in Settings hides the dot and keeps
   the seen state; an account's choice is stored with its notification preferences, and a
   browser keeps its copy (`src/lib/newUpdate.ts`). A choice made on a device without an account,
   or that the server could not take, stands there over the account's until it is saved, and goes

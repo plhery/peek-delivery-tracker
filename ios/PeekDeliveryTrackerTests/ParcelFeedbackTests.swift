@@ -815,7 +815,6 @@ final class ParcelFeedbackTests: XCTestCase {
         defer { session.forceSignOut() }
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport,
                                 device: DeviceParcels(client: .api(configuration: configuration, transport: transport), storage: FeedbackTestStorage()))
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         try await session.verifyCode(email: "test@example.com", code: "123456")
         let answer = ParcelFeedbackRequest.right(asked: .page, language: .en)
@@ -843,7 +842,6 @@ final class ParcelFeedbackTests: XCTestCase {
         let demoSession = SessionStore(configuration: demo, defaults: preferences, persistence: FeedbackTestSessionPersistence(), transport: transport)
         let demoStore = ParcelStore(configuration: demo, session: demoSession, localizer: Localizer(), transport: transport,
                                     device: DeviceParcels(client: nil, storage: FeedbackTestStorage()))
-        demoStore.setDeliveryWidgetEnabled(false)
         demoStore.setDeliveryLiveActivitiesEnabled(false)
         demoSession.enterDemo()
         XCTAssertTrue(demoStore.isDemo)

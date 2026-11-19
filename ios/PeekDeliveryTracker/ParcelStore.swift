@@ -87,7 +87,6 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var notificationError: String?
     /// The last try to register this device's token, with Apple or with the server, failed: the invitation offers it again.
     @Published private var nativePushRegistrationFailed = false
-    @Published private(set) var deliveryWidgetEnabled = true
     @Published private(set) var deliveryLiveActivitiesEnabled = true
     @Published private(set) var deliveryLiveActivityError: String?
     @Published var undoParcel: Parcel?
@@ -188,7 +187,6 @@ final class ParcelStore: ObservableObject {
         api = DeliveryAPIClient(configuration: configuration, session: session, transport: transport)
         demo = DemoRepository()
         self.device = device ?? DeviceParcels(client: configuration.mode == .api ? .api(configuration: configuration, transport: transport) : nil)
-        deliveryWidgetEnabled = deliveryWidgetStore?.isEnabled ?? true
         deliveryLiveActivitiesEnabled = Self.offersLiveActivities && (deliveryWidgetStore?.liveActivitiesEnabled ?? true)
         deliveryLiveActivityRegistrationRemovalPending = !deliveryLiveActivitiesEnabled
         deliveryWidgetStore?.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
@@ -301,14 +299,6 @@ final class ParcelStore: ObservableObject {
     var activeCount: Int { parcels.filter(\.isActive).count }
     var isSynchronizing: Bool {
         parcels.contains { $0.syncStatus == .pending || $0.syncStatus == .syncing }
-    }
-
-    func setDeliveryWidgetEnabled(_ enabled: Bool) {
-        DeliveryAnalytics.shared.action("widget-change")
-        guard deliveryWidgetEnabled != enabled else { return }
-        deliveryWidgetEnabled = enabled
-        deliveryWidgetStore?.setEnabled(enabled)
-        publishDeliveryWidget()
     }
 
     /// Switches the list's mark on parcels with new updates. What was seen is kept either way. An account's choice
@@ -1571,7 +1561,7 @@ final class ParcelStore: ObservableObject {
 
     private func publishDeliveryWidget() {
         let snapshot: DeliveryWidgetSnapshot?
-        if deliveryWidgetEnabled && (session.isAuthenticated || isGuest) {
+        if session.isAuthenticated || isGuest {
             snapshot = DeliveryWidgetSnapshot(
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
@@ -1589,14 +1579,12 @@ final class ParcelStore: ObservableObject {
 
         // Reloads spend the widget's system budget; skip them when nothing it shows changed.
         let state = DeliveryWidgetState(
-            enabled: deliveryWidgetEnabled,
             languageCode: localizer.language.rawValue,
             parcels: snapshot?.parcels
         )
         guard state != publishedWidgetState else { return }
         publishedWidgetState = state
         deliveryWidgetStore?.setLanguageCode(localizer.language.rawValue)
-        deliveryWidgetStore?.setEnabled(deliveryWidgetEnabled)
         if let snapshot {
             _ = deliveryWidgetStore?.save(snapshot)
         } else {
@@ -2245,7 +2233,6 @@ struct DeviceNotificationAccess {
 
 /// What the widget displays; the snapshot's timestamp alone never needs a reload.
 private struct DeliveryWidgetState: Equatable {
-    let enabled: Bool
     let languageCode: String
     let parcels: [DeliveryWidgetParcel]?
 }

@@ -476,7 +476,8 @@ struct DeliveryWidgetSharedStore {
     static let kinds = [kind, earlierKind]
     static let defaultAppGroupIdentifier = "group.com.plhery.PeekDeliveryTracker"
 
-    private static let enabledKey = "sdt.deliveryWidget.enabled.v1"
+    /// Where the widgets' switch, now gone, kept its choice. Live Activities followed it until they had their own.
+    private static let retiredWidgetSwitchKey = "sdt.deliveryWidget.enabled.v1"
     private static let liveActivitiesEnabledKey = "sdt.deliveryLiveActivities.enabled.v1"
     private static let languageKey = "sdt.deliveryWidget.language.v1"
     private static let snapshotKey = "sdt.deliveryWidget.snapshot.v1"
@@ -501,18 +502,13 @@ struct DeliveryWidgetSharedStore {
         self.defaults = defaults
     }
 
-    var isEnabled: Bool {
-        defaults.object(forKey: Self.enabledKey) == nil
-            || defaults.bool(forKey: Self.enabledKey)
-    }
-
     var languageCode: String? {
         defaults.string(forKey: Self.languageKey)
     }
 
     var liveActivitiesEnabled: Bool {
         defaults.object(forKey: Self.liveActivitiesEnabledKey) == nil
-            ? isEnabled
+            ? defaults.object(forKey: Self.retiredWidgetSwitchKey) as? Bool ?? true
             : defaults.bool(forKey: Self.liveActivitiesEnabledKey)
     }
 
@@ -521,13 +517,10 @@ struct DeliveryWidgetSharedStore {
         return try? JSONDecoder().decode(DeliveryWidgetSnapshot.self, from: data)
     }
 
-    func setEnabled(_ enabled: Bool) {
-        defaults.set(enabled, forKey: Self.enabledKey)
-        if !enabled { clearSnapshot() }
-    }
-
+    /// Keeps the Live Activities' choice, which no longer needs the widgets' old switch.
     func setLiveActivitiesEnabled(_ enabled: Bool) {
         defaults.set(enabled, forKey: Self.liveActivitiesEnabledKey)
+        defaults.removeObject(forKey: Self.retiredWidgetSwitchKey)
     }
 
     func setLanguageCode(_ languageCode: String) {

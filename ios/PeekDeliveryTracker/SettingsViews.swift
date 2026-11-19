@@ -468,46 +468,42 @@ struct AccountView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     profile
-                    SettingsGroup(title: localizer.text("native.deliveries")) {
-                        // Alerts and Live Activities are kept up to date by pushes, which need an account.
-                        if !store.isGuest {
-                            NavigationLink {
-                                NotificationSettingsView(embedded: true)
-                            } label: {
-                                SettingsRow(title: localizer.text("settings.deliveryUpdates"), symbol: "bell", value: notificationSummary, chevron: true)
+                    // Alerts and Live Activities are kept up to date by pushes, which need an account. Without one, the
+                    // group shows only when the server offers a forwarding address.
+                    if !store.isGuest || addByEmail.offer != nil {
+                        SettingsGroup(title: localizer.text("native.deliveries")) {
+                            if !store.isGuest {
+                                NavigationLink {
+                                    NotificationSettingsView(embedded: true)
+                                } label: {
+                                    SettingsRow(title: localizer.text("settings.deliveryUpdates"), symbol: "bell", value: notificationSummary, chevron: true)
+                                }
+                                .buttonStyle(.plain)
                             }
-                            .buttonStyle(.plain)
-                            settingsDivider
-                        }
-                        // Only once the server offers the account a forwarding address.
-                        if addByEmail.offer != nil {
-                            NavigationLink {
-                                AddByEmailPage(model: addByEmail, email: session.user?.email)
-                            } label: {
-                                SettingsRow(title: localizer.text("inbox.row"), symbol: "envelope",
-                                            badge: localizer.text("inbox.experimental"), chevron: true)
+                            // Only once the server offers the account a forwarding address.
+                            if addByEmail.offer != nil {
+                                if !store.isGuest { settingsDivider }
+                                NavigationLink {
+                                    AddByEmailPage(model: addByEmail, email: session.user?.email)
+                                } label: {
+                                    SettingsRow(title: localizer.text("inbox.row"), symbol: "envelope",
+                                                badge: localizer.text("inbox.experimental"), chevron: true)
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("settings.addByEmail")
                             }
-                            .buttonStyle(.plain)
-                            .accessibilityIdentifier("settings.addByEmail")
-                            settingsDivider
-                        }
-                        Toggle(isOn: Binding(get: { store.deliveryWidgetEnabled }, set: { store.setDeliveryWidgetEnabled($0) })) {
-                            SettingsRow(title: localizer.text("widget.settingTitle"), symbol: "rectangle.3.group", detail: localizer.text("widget.settingDescription"), padded: false)
-                        }
-                        .rowToggle()
-                        .padding(15)
-                        .accessibilityIdentifier("settings.widgets")
-                        if !store.isGuest && ParcelStore.offersLiveActivities {
-                            settingsDivider
-                            Toggle(isOn: Binding(get: { store.deliveryLiveActivitiesEnabled }, set: { store.setDeliveryLiveActivitiesEnabled($0) })) {
-                                SettingsRow(title: localizer.text("liveActivity.settingTitle"), symbol: "wave.3.right", detail: localizer.text("liveActivity.settingDescription"), padded: false)
+                            if !store.isGuest && ParcelStore.offersLiveActivities {
+                                settingsDivider
+                                Toggle(isOn: Binding(get: { store.deliveryLiveActivitiesEnabled }, set: { store.setDeliveryLiveActivitiesEnabled($0) })) {
+                                    SettingsRow(title: localizer.text("liveActivity.settingTitle"), symbol: "wave.3.right", detail: localizer.text("liveActivity.settingDescription"), padded: false)
+                                }
+                                .rowToggle()
+                                .padding(15)
+                                .accessibilityIdentifier("settings.liveActivities")
                             }
-                            .rowToggle()
-                            .padding(15)
-                            .accessibilityIdentifier("settings.liveActivities")
                         }
+                        .tint(settingsGreen)
                     }
-                    .tint(settingsGreen)
                     if ParcelStore.offersLiveActivities, let error = store.deliveryLiveActivityError {
                         Text(error).font(.caption).foregroundStyle(.red)
                     }
@@ -903,7 +899,8 @@ private struct SettingsLanguageRow: View {
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
-        SettingsPickerRow(title: localizer.text("language.label"), selection: $localizer.language) {
+        let name = localizer.language.nativeName
+        SettingsPickerRow(title: localizer.text("language.label"), shown: name, spoken: name, selection: $localizer.language) {
             ForEach(AppLanguage.allCases) { language in Text(language.nativeName).tag(language) }
         }
     }
@@ -913,7 +910,8 @@ private struct SettingsDistanceRow: View {
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
-        SettingsPickerRow(title: localizer.text("settings.distanceUnits"), selection: $localizer.distance) {
+        SettingsPickerRow(title: localizer.text("settings.distanceUnits"), shown: shown(localizer.distance),
+                          spoken: label(localizer.distance), selection: $localizer.distance) {
             ForEach(DistancePreference.allCases, id: \.self) { distance in Text(label(distance)).tag(distance) }
         }
         .accessibilityIdentifier("settings.distanceUnits")
@@ -922,12 +920,23 @@ private struct SettingsDistanceRow: View {
     /// Automatic names the unit the system measures in.
     private func label(_ distance: DistancePreference) -> String {
         switch distance {
-        case .automatic:
-            let unit = localizer.text(localizer.systemDistanceUnit == .miles ? "settings.milesShort" : "settings.kilometersShort")
-            return localizer.text("settings.automatic", ["value": unit])
+        case .automatic: return localizer.text("settings.automatic", ["value": systemUnit])
         case .kilometres: return localizer.text("settings.kilometers")
         case .miles: return localizer.text("settings.miles")
         }
+    }
+
+    /// The closed picker's words: the unit's symbol, after "Auto" for Automatic.
+    private func shown(_ distance: DistancePreference) -> String {
+        switch distance {
+        case .automatic: return localizer.text("settings.automaticShort", ["value": systemUnit])
+        case .kilometres: return localizer.text("settings.kilometersShort")
+        case .miles: return localizer.text("settings.milesShort")
+        }
+    }
+
+    private var systemUnit: String {
+        localizer.text(localizer.systemDistanceUnit == .miles ? "settings.milesShort" : "settings.kilometersShort")
     }
 }
 
@@ -935,7 +944,8 @@ private struct SettingsWeightRow: View {
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
-        SettingsPickerRow(title: localizer.text("settings.weightUnits"), selection: $localizer.weight) {
+        SettingsPickerRow(title: localizer.text("settings.weightUnits"), shown: shown(localizer.weight),
+                          spoken: label(localizer.weight), selection: $localizer.weight) {
             ForEach(WeightPreference.allCases, id: \.self) { weight in Text(label(weight)).tag(weight) }
         }
         .accessibilityIdentifier("settings.weightUnits")
@@ -944,12 +954,23 @@ private struct SettingsWeightRow: View {
     /// Automatic names the unit the system weighs in.
     private func label(_ weight: WeightPreference) -> String {
         switch weight {
-        case .automatic:
-            let unit = localizer.text(localizer.systemWeightUnit == .pounds ? "settings.poundsShort" : "settings.kilogramsShort")
-            return localizer.text("settings.automatic", ["value": unit])
+        case .automatic: return localizer.text("settings.automatic", ["value": systemUnit])
         case .kilograms: return localizer.text("settings.kilograms")
         case .pounds: return localizer.text("settings.pounds")
         }
+    }
+
+    /// The closed picker's words: the unit's symbol, after "Auto" for Automatic.
+    private func shown(_ weight: WeightPreference) -> String {
+        switch weight {
+        case .automatic: return localizer.text("settings.automaticShort", ["value": systemUnit])
+        case .kilograms: return localizer.text("settings.kilogramsShort")
+        case .pounds: return localizer.text("settings.poundsShort")
+        }
+    }
+
+    private var systemUnit: String {
+        localizer.text(localizer.systemWeightUnit == .pounds ? "settings.poundsShort" : "settings.kilogramsShort")
     }
 }
 
@@ -969,9 +990,13 @@ private struct SettingsMarkNewUpdatesRow: View {
     }
 }
 
-/// The picker sits under its label at the largest text sizes.
+/// The picker sits under its label at the largest text sizes. Closed, it shows the choice in a word or two (`shown`) in
+/// the rows' small grey, on one line, as other rows show their value; its menu names each choice in full, and VoiceOver
+/// reads the full name (`spoken`). A Mac's pop-up button shows the full name.
 private struct SettingsPickerRow<Value: Hashable, Options: View>: View {
     let title: String
+    let shown: String
+    let spoken: String
     @Binding var selection: Value
     @ViewBuilder let options: () -> Options
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
@@ -995,9 +1020,25 @@ private struct SettingsPickerRow<Value: Hashable, Options: View>: View {
         }
     }
 
-    private var picker: some View {
+    @ViewBuilder private var picker: some View {
+        #if os(macOS)
         Picker(title, selection: $selection, content: options)
             .labelsHidden().pickerStyle(.menu).tint(Brand.secondaryText)
+        #else
+        Menu {
+            Picker(title, selection: $selection, content: options)
+        } label: {
+            HStack(spacing: 4) {
+                Text(shown).font(.caption).lineLimit(1)
+                Image(systemName: "chevron.up.chevron.down").font(.caption2)
+            }
+            .foregroundStyle(Brand.secondaryText)
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .accessibilityLabel(title)
+        .accessibilityValue(spoken)
+        #endif
     }
 }
 
@@ -1005,7 +1046,8 @@ private struct SettingsClockRow: View {
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
-        SettingsPickerRow(title: localizer.text("settings.timeFormat"), selection: $localizer.clock) {
+        SettingsPickerRow(title: localizer.text("settings.timeFormat"), shown: shown(localizer.clock),
+                          spoken: label(localizer.clock), selection: $localizer.clock) {
             ForEach(ClockPreference.allCases, id: \.self) { clock in Text(label(clock)).tag(clock) }
         }
         .accessibilityIdentifier("settings.clock")
@@ -1019,6 +1061,17 @@ private struct SettingsClockRow: View {
             return localizer.text("settings.automatic", ["value": system])
         case .twentyFourHour: return localizer.text("settings.clock24")
         case .twelveHour: return localizer.text("settings.clock12")
+        }
+    }
+
+    /// The closed picker's words: "24 h" or "12 h", after "Auto" for Automatic.
+    private func shown(_ clock: ClockPreference) -> String {
+        switch clock {
+        case .automatic:
+            let system = localizer.text(localizer.systemUses24HourTime ? "settings.clock24Short" : "settings.clock12Short")
+            return localizer.text("settings.automaticShort", ["value": system])
+        case .twentyFourHour: return localizer.text("settings.clock24Short")
+        case .twelveHour: return localizer.text("settings.clock12Short")
         }
     }
 }

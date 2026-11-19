@@ -486,7 +486,6 @@ final class ParcelLinkTests: XCTestCase {
         let session = SessionStore(configuration: configuration, persistence: LinkTestSessionPersistence(), transport: transport)
         defer { session.forceSignOut() }
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         do {

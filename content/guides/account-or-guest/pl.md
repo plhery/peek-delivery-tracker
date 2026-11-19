@@ -20,7 +20,7 @@ Oto wszystko, co zmienia się po zalogowaniu:
 | [Powiadomienia](guide:parcel-notifications) | Na stronie internetowej „Powiadom mnie” na stronie przesyłki, a potem, jeśli chcesz, wszystkie przesyłki w tej przeglądarce. Aplikacje same zapisują do powiadomień każdą przesyłkę | Ustawienia › „Powiadomienia” obejmują wszystkie przesyłki i mogą wysłać Ci e-maila, gdy któraś dotrze |
 | [Dodawanie przesyłek e-mailem](guide:add-parcels-by-email), [asystenci AI](guide:ai-assistants) | Niedostępne | Ustawienia › „Dodawaj przesyłki e-mailem” (Beta); „Asystenci” (Beta), tylko na stronie internetowej |
 | Paszport i Znajomi | Strona internetowa: bez tych zakładek, ale doręczona przesyłka z zagranicy proponuje „Załóż paszport”. Aplikacje: obie zakładki; Paszport liczy przesyłki na tym urządzeniu, a Znajomi proszą o zalogowanie | Obie zakładki, na stronie internetowej i we wszystkich aplikacjach |
-| Ustawienia | Strona internetowa: przycisk z kołem zębatym „Ustawienia” zawiera „Preferencje”, z pozycją „Język” na stronie przesyłki; na stronie głównej język wybiera się w menu na dole strony. Aplikacje: „Preferencje” i „Na tym urządzeniu” | „Dostawy”, „Preferencje” (z pozycją „Język”) i „Konto i dane”. Na stronie internetowej tylko „Oznaczaj nowe aktualizacje” przechodzi na Twoje inne urządzenia |
+| Ustawienia | Strona internetowa: przycisk z kołem zębatym „Ustawienia” zawiera „Preferencje”, z pozycją „Język” na stronie przesyłki; na stronie głównej język wybiera się w menu na dole strony. Aplikacje: „Preferencje” i „Na tym urządzeniu” | „Dostawy”, „Preferencje” (z pozycją „Język”) i „Konto i dane”. Na stronie internetowej tylko „Kropka przy zaktualizowanych przesyłkach” przechodzi na Twoje inne urządzenia |
 | Twoje dane | „Zapomnij teraz” na stronie przesyłki albo „Zapomnij o wszystkich”; aplikacje mają też „Pobierz moje dane” | „Pobierz moje dane”, „Wyloguj się”, „Usuń konto” |
 
 Logowanie zajmuje minutę i wymaga kodu, który Peek wyśle Ci e-mailem:
@@ -93,8 +93,8 @@ Każdy ma „Preferencje”, z kontem lub bez, na stronie internetowej i w aplik
 - **„Wygląd”**: „Systemowy” (według ustawień urządzenia), „Jasny” albo „Ciemny”.
 - **„Język”**: angielski, niemiecki, francuski, włoski, hiszpański, portugalski, portugalski brazylijski, polski, rosyjski albo chiński uproszczony.
 - **„Format czasu”**: „24-godzinny”, „12-godzinny” albo Automatycznie.
-- **„Jednostka odległości”** i **„Jednostka wagi”**: kilometry albo mile, kilogramy albo funty. Ustawione na Automatycznie, dopasowują się do urządzenia; przy funtach wymiary przesyłek są też podawane w calach.
-- **„Oznaczaj nowe aktualizacje”**: „Kropka przy przesyłkach, w których coś się zmieniło od ostatniego otwarcia.”
+- **„Odległość”** i **„Waga”**: kilometry albo mile, kilogramy albo funty. Ustawione na Automatycznie, dopasowują się do urządzenia; przy funtach wymiary przesyłek są też podawane w calach.
+- **„Kropka przy zaktualizowanych przesyłkach”**: „Kropka pojawia się przy przesyłce, w której coś się zmieniło od ostatniego otwarcia.”
 
 Żeby dodać Peeka do ekranu początkowego iPhone’a i dostawać powiadomienia, zobacz [powiadomienia o dostawie przesyłek](guide:parcel-notifications).
 

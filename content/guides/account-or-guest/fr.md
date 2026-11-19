@@ -20,7 +20,7 @@ Voici tout ce qui change quand tu te connectes :
 | [Notifications](guide:parcel-notifications) | Sur le site, « Préviens-moi » sur la page d'un colis, puis, si tu veux, chaque colis de ce navigateur. Les apps inscrivent chaque colis elles-mêmes | Réglages › « Notifications » couvre tous les colis, et peut t'envoyer un e-mail quand l'un d'eux arrive |
 | [Ajouter des colis par e-mail](guide:add-parcels-by-email), [assistants IA](guide:ai-assistants) | Pas proposé | Réglages › « Ajouter des colis par e-mail » (Bêta) ; « Assistants » (Bêta), sur le site seulement |
 | Passeport et Amis | Site : pas d'onglets, mais un colis livré venu de l'étranger propose « Commencer un passeport ». Apps : les deux onglets ; Passeport compte les colis de cet appareil, Amis te demande de te connecter | Les deux onglets, sur le site et dans chaque app |
-| Réglages | Site : le bouton engrenage « Réglages » contient « Préférences », avec « Langue » sur la page d'un colis ; sur la page d'accueil, la langue est dans le menu en bas de page. Apps : « Préférences » et « Sur cet appareil » | « Livraisons », « Préférences » (avec « Langue ») et « Compte et données ». Sur le site, seul « Signaler les nouveautés » te suit sur tes autres appareils |
+| Réglages | Site : le bouton engrenage « Réglages » contient « Préférences », avec « Langue » sur la page d'un colis ; sur la page d'accueil, la langue est dans le menu en bas de page. Apps : « Préférences » et « Sur cet appareil » | « Livraisons », « Préférences » (avec « Langue ») et « Compte et données ». Sur le site, seul « Point sur les colis mis à jour » te suit sur tes autres appareils |
 | Tes données | « L’oublier maintenant » sur la page d'un colis ou « Tout oublier » ; les apps ont aussi « Télécharger mes données » | « Télécharger mes données », « Se déconnecter », « Supprimer le compte » |
 
 Se connecter prend une minute, avec un code que Peek t'envoie par e-mail :
@@ -93,8 +93,8 @@ Tout le monde a « Préférences », avec ou sans compte, sur le site et dans le
 - **« Apparence »** : « Système » (suit ton appareil), « Clair » ou « Sombre ».
 - **« Langue »** : anglais, allemand, français, italien, espagnol, portugais, portugais du Brésil, polonais, russe ou chinois simplifié.
 - **« Format de l’heure »** : « 24 heures », « 12 heures » ou Automatique.
-- **« Unité de distance »** et **« Unité de poids »** : kilomètres ou miles, kilogrammes ou livres. Laissées sur Automatique, elles suivent ton appareil ; les livres donnent aussi les dimensions des colis en pouces.
-- **« Signaler les nouveautés »** : « Un point sur les colis qui ont du nouveau depuis que tu les as ouverts. »
+- **« Distance »** et **« Poids »** : kilomètres ou miles, kilogrammes ou livres. Laissés sur Automatique, ils suivent ton appareil ; les livres donnent aussi les dimensions des colis en pouces.
+- **« Point sur les colis mis à jour »** : « Un point apparaît sur un colis qui a bougé depuis la dernière fois que tu l’as ouvert. »
 
 Pour ajouter Peek à l'écran d'accueil d'un iPhone et recevoir ses notifications, voir [Notifications de livraison](guide:parcel-notifications).
 

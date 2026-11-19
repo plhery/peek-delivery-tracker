@@ -20,7 +20,7 @@ Isto é tudo o que muda quando inicias sessão:
 | [Notificações](guide:parcel-notifications) | No site, «Notificar-me» na página de uma encomenda e depois, se quiseres, todas as encomendas desse navegador. As apps inscrevem cada encomenda sozinhas | Definições › «Notificações» cobre todas as encomendas e pode enviar-te um e-mail quando uma chega |
 | [Adicionar encomendas por e-mail](guide:add-parcels-by-email), [assistentes de IA](guide:ai-assistants) | Não disponíveis | Definições › «Adicionar encomendas por e-mail» (Beta); «Assistentes» (Beta), só no site |
 | Passaporte e Amigos | Site: sem separadores, mas uma encomenda entregue vinda do estrangeiro oferece «Começar um passaporte». Apps: os dois separadores; o Passaporte conta as encomendas desse dispositivo e o separador Amigos pede-te que inicies sessão | Os dois separadores, no site e em todas as apps |
-| Definições | Site: o botão da roda dentada «Definições» tem «Preferências», com «Idioma» na página de uma encomenda; na página inicial, o idioma está no menu do rodapé. Apps: «Preferências» e «Neste dispositivo» | «Entregas», «Preferências» (com «Idioma») e «Conta e dados». No site, só «Assinalar novas atualizações» te acompanha nos outros dispositivos |
+| Definições | Site: o botão da roda dentada «Definições» tem «Preferências», com «Idioma» na página de uma encomenda; na página inicial, o idioma está no menu do rodapé. Apps: «Preferências» e «Neste dispositivo» | «Entregas», «Preferências» (com «Idioma») e «Conta e dados». No site, só «Ponto nas encomendas atualizadas» te acompanha nos outros dispositivos |
 | Os teus dados | «Esquecer agora» na página de uma encomenda ou «Esquecer todas»; as apps também têm «Transferir os meus dados» | «Transferir os meus dados», «Terminar sessão», «Eliminar conta» |
 
 Iniciar sessão demora um minuto, com um código que o Peek te envia por e-mail:
@@ -93,8 +93,8 @@ Toda a gente tem «Preferências», com ou sem conta, no site e nas apps; a tabe
 - **«Aspeto»**: «Sistema» (segue o teu dispositivo), «Claro» ou «Escuro».
 - **«Idioma»**: inglês, alemão, francês, italiano, espanhol, português, português do Brasil, polaco, russo ou chinês simplificado.
 - **«Formato da hora»**: «24 horas», «12 horas» ou Automático.
-- **«Unidade de distância»** e **«Unidade de peso»**: quilómetros ou milhas, quilogramas ou libras. Em Automático, seguem o teu dispositivo; com libras, os tamanhos das encomendas também aparecem em polegadas.
-- **«Assinalar novas atualizações»**: «Um ponto nas encomendas com novidades desde a última vez que as abriste.»
+- **«Distância»** e **«Peso»**: quilómetros ou milhas, quilogramas ou libras. Em Automático, seguem o teu dispositivo; com libras, os tamanhos das encomendas também aparecem em polegadas.
+- **«Ponto nas encomendas atualizadas»**: «Aparece um ponto numa encomenda com novidades desde a última vez que a abriste.»
 
 Para adicionares o Peek ao ecrã principal de um iPhone e receberes notificações, vê [as notificações de entrega de encomendas](guide:parcel-notifications).
 

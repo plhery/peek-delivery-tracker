@@ -35,7 +35,7 @@ struct NextDeliveryIntent: AppIntent {
         // The snapshot's language, which its parcels' details are written in, as the widget picks it; else the app's,
         // which the app's own defaults keep without an App Group too.
         let copy = ExtensionLocalizer(languageCode: snapshot?.languageCode ?? AppLanguage.current.rawValue)
-        let answer = NextDeliveryAnswer.text(snapshot: snapshot, enabled: store?.isEnabled ?? true, copy: copy)
+        let answer = NextDeliveryAnswer.text(snapshot: snapshot, copy: copy)
         return .result(dialog: "\(answer)")
     }
 }
@@ -44,8 +44,8 @@ struct NextDeliveryIntent: AppIntent {
 /// and how many more are on the way. Without the widget's parcels, it asks for Peek.
 @MainActor
 enum NextDeliveryAnswer {
-    static func text(snapshot: DeliveryWidgetSnapshot?, enabled: Bool, copy: ExtensionLocalizer, now: Date = Date()) -> String {
-        guard enabled, let snapshot else { return copy.text("siri.openPeek") }
+    static func text(snapshot: DeliveryWidgetSnapshot?, copy: ExtensionLocalizer, now: Date = Date()) -> String {
+        guard let snapshot else { return copy.text("siri.openPeek") }
         // The widget also keeps the parcels delivered in the last day, after those on their way.
         let onTheWay = snapshot.parcels.filter { $0.deliveredAt == nil }
         guard let next = onTheWay.first?.worded(at: now) else { return copy.text("app.noneOnWay") }

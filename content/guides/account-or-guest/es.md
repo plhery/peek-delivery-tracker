@@ -20,7 +20,7 @@ Esto es todo lo que cambia al iniciar sesión:
 | [Notificaciones](guide:parcel-notifications) | En la web, «Notificarme» en la página de un paquete y luego, si quieres, todos los paquetes de ese navegador. Las apps dan de alta cada paquete por su cuenta | Ajustes › «Notificaciones» cubre todos los paquetes y puede avisarte por correo cuando llega uno |
 | [Añadir paquetes por correo](guide:add-parcels-by-email), [asistentes de IA](guide:ai-assistants) | No se ofrecen | Ajustes › «Añadir paquetes por correo» (Beta); «Asistentes» (Beta), solo en la web |
 | Pasaporte y Amigos | Web: sin pestañas, pero un paquete entregado que viene del extranjero ofrece «Empezar un pasaporte». Apps: las dos pestañas; Pasaporte cuenta los paquetes de ese dispositivo y Amigos te pide iniciar sesión | Las dos pestañas, en la web y en todas las apps |
-| Ajustes | Web: el botón del engranaje «Ajustes» contiene «Preferencias», con «Idioma» en la página de un paquete; en la página principal, el idioma está en el menú al pie de la página. Apps: «Preferencias» y «En este dispositivo» | «Entregas», «Preferencias» (con «Idioma») y «Cuenta y datos». En la web, solo «Marcar las novedades» te sigue a tus otros dispositivos |
+| Ajustes | Web: el botón del engranaje «Ajustes» contiene «Preferencias», con «Idioma» en la página de un paquete; en la página principal, el idioma está en el menú al pie de la página. Apps: «Preferencias» y «En este dispositivo» | «Entregas», «Preferencias» (con «Idioma») y «Cuenta y datos». En la web, solo «Punto en los paquetes actualizados» te sigue a tus otros dispositivos |
 | Tus datos | «Olvidarlo ahora» en la página de un paquete u «Olvidar todos»; las apps también tienen «Descargar mis datos» | «Descargar mis datos», «Cerrar sesión», «Eliminar cuenta» |
 
 Iniciar sesión lleva un minuto, con un código que Peek te envía por correo:
@@ -93,8 +93,8 @@ Todo el mundo tiene «Preferencias», con cuenta o sin ella, en la web y en las 
 - **«Apariencia»**: «Sistema» (sigue a tu dispositivo), «Claro» u «Oscuro».
 - **«Idioma»**: inglés, alemán, francés, italiano, español, portugués, portugués de Brasil, polaco, ruso o chino simplificado.
 - **«Formato de hora»**: «24 horas», «12 horas» o Automático.
-- **«Unidad de distancia»** y **«Unidad de peso»**: kilómetros o millas, kilogramos o libras. Si las dejas en Automático, siguen a tu dispositivo; con libras, los tamaños de los paquetes también salen en pulgadas.
-- **«Marcar las novedades»**: «Un punto en los paquetes con novedades desde la última vez que los abriste.»
+- **«Distancia»** y **«Peso»**: kilómetros o millas, kilogramos o libras. Si los dejas en Automático, siguen a tu dispositivo; con libras, los tamaños de los paquetes también salen en pulgadas.
+- **«Punto en los paquetes actualizados»**: «Aparece un punto en un paquete con novedades desde la última vez que lo abriste.»
 
 Para añadir Peek a la pantalla de inicio de un iPhone y recibir notificaciones, mira [las notificaciones de entrega de paquetes](guide:parcel-notifications).
 

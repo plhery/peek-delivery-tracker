@@ -20,7 +20,7 @@ Ecco tutto ciò che cambia quando accedi:
 | [Notifiche](guide:parcel-notifications) | Sul sito, «Avvisami» sulla pagina di un pacco, poi, se vuoi, ogni pacco di quel browser. Le app iscrivono da sole ogni pacco | Impostazioni › «Notifiche» vale per tutti i pacchi, e può mandarti un'e-mail quando ne arriva uno |
 | [Aggiungere pacchi via email](guide:add-parcels-by-email), [assistenti IA](guide:ai-assistants) | Non disponibile | Impostazioni › «Aggiungi pacchi via email» (Beta); «Assistenti» (Beta), solo sul sito |
 | Passaporto e Amici | Sito: nessuna scheda, ma un pacco consegnato dall'estero propone «Inizia un passaporto». App: entrambe le schede; il Passaporto conta i pacchi su quel dispositivo, Amici ti chiede di accedere | Entrambe le schede, sul sito e in ogni app |
-| Impostazioni | Sito: il pulsante a ingranaggio «Impostazioni» contiene «Preferenze», con «Lingua» sulla pagina di un pacco; nella pagina iniziale, la lingua è nel menu in fondo alla pagina. App: «Preferenze» e «Su questo dispositivo» | «Consegne», «Preferenze» (con «Lingua») e «Account e dati». Sul sito, solo «Segnala i nuovi aggiornamenti» ti segue sugli altri dispositivi |
+| Impostazioni | Sito: il pulsante a ingranaggio «Impostazioni» contiene «Preferenze», con «Lingua» sulla pagina di un pacco; nella pagina iniziale, la lingua è nel menu in fondo alla pagina. App: «Preferenze» e «Su questo dispositivo» | «Consegne», «Preferenze» (con «Lingua») e «Account e dati». Sul sito, solo «Puntino sui pacchi aggiornati» ti segue sugli altri dispositivi |
 | I tuoi dati | «Dimenticalo ora» sulla pagina di un pacco o «Dimentica tutti»; le app hanno anche «Scarica i miei dati» | «Scarica i miei dati», «Esci», «Elimina account» |
 
 Accedere richiede un minuto, con un codice che Peek ti manda via e-mail:
@@ -93,8 +93,8 @@ Tutti hanno «Preferenze», con o senza account, sul sito e nelle app; la tabell
 - **«Aspetto»**: «Sistema» (segue il tuo dispositivo), «Chiaro» o «Scuro».
 - **«Lingua»**: inglese, tedesco, francese, italiano, spagnolo, portoghese, portoghese brasiliano, polacco, russo o cinese semplificato.
 - **«Formato dell’ora»**: «24 ore», «12 ore» o Automatico.
-- **«Unità di distanza»** e **«Unità di peso»**: chilometri o miglia, chilogrammi o libbre. Lasciate su Automatico, seguono il tuo dispositivo; con le libbre anche le dimensioni dei pacchi sono in pollici.
-- **«Segnala i nuovi aggiornamenti»**: «Un puntino sui pacchi con novità dall’ultima volta che li hai aperti.»
+- **«Distanza»** e **«Peso»**: chilometri o miglia, chilogrammi o libbre. Lasciati su Automatico, seguono il tuo dispositivo; con le libbre anche le dimensioni dei pacchi sono in pollici.
+- **«Puntino sui pacchi aggiornati»**: «Un puntino compare su un pacco con novità dall’ultima volta che l’hai aperto.»
 
 Per aggiungere Peek alla schermata Home di un iPhone e ricevere le notifiche, vedi [Notifiche di consegna dei pacchi](guide:parcel-notifications).
 

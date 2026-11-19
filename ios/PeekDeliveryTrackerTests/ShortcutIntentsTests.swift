@@ -17,24 +17,21 @@ final class ShortcutIntentsTests: XCTestCase {
     }
 
     func testWithoutTheWidgetsParcelsItAsksForPeek() {
-        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: nil, enabled: true, copy: english), "Open Peek to see your next delivery.")
-        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([parcel("Coffee beans")]), enabled: false, copy: english),
-                       "Open Peek to see your next delivery.")
+        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: nil, copy: english), "Open Peek to see your next delivery.")
     }
 
     func testSaysWhenNothingIsOnTheWay() {
-        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([]), enabled: true, copy: english), "Nothing on the way right now")
+        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([]), copy: english), "Nothing on the way right now")
         // A parcel delivered in the last day stays in the widget, but isn't on its way.
         let delivered = parcel("New shoes", detail: "Today", deliveredAt: Date())
-        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([delivered]), enabled: true, copy: english),
+        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([delivered]), copy: english),
                        "Nothing on the way right now")
     }
 
     func testNamesTheOneParcelOnItsWay() {
         let delivered = parcel("New shoes", detail: "Today", deliveredAt: Date())
         XCTAssertEqual(
-            NextDeliveryAnswer.text(snapshot: snapshot([parcel("Coffee beans", carrier: "La Poste"), delivered]), enabled: true,
-                                    copy: english),
+            NextDeliveryAnswer.text(snapshot: snapshot([parcel("Coffee beans", carrier: "La Poste"), delivered]), copy: english),
             "Your next delivery is “Coffee beans” with La Poste: Tomorrow."
         )
     }
@@ -44,11 +41,11 @@ final class ShortcutIntentsTests: XCTestCase {
         let later = [parcel("Lamp", carrier: "UPS"), parcel("Book", carrier: "GLS")]
         let delivered = parcel("New shoes", detail: "Today", deliveredAt: Date())
         XCTAssertEqual(
-            NextDeliveryAnswer.text(snapshot: snapshot([first, later[0], delivered]), enabled: true, copy: english),
+            NextDeliveryAnswer.text(snapshot: snapshot([first, later[0], delivered]), copy: english),
             "Your next delivery is “Coffee beans” with DHL: Out for delivery. 1 more parcel is on the way."
         )
         XCTAssertEqual(
-            NextDeliveryAnswer.text(snapshot: snapshot([first] + later + [delivered]), enabled: true, copy: english),
+            NextDeliveryAnswer.text(snapshot: snapshot([first] + later + [delivered]), copy: english),
             "Your next delivery is “Coffee beans” with DHL: Out for delivery. 2 more parcels are on the way."
         )
     }
@@ -56,14 +53,14 @@ final class ShortcutIntentsTests: XCTestCase {
     func testCountsInTheLanguagesForms() {
         let polish = ExtensionLocalizer(languageCode: "pl")
         let parcels = { (count: Int) in self.snapshot((0..<count).map { self.parcel("Paczka \($0)", detail: "Jutro") }, language: "pl") }
-        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: parcels(4), enabled: true, copy: polish)
+        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: parcels(4), copy: polish)
             .hasSuffix("W drodze są jeszcze 3 przesyłki."))
-        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: parcels(6), enabled: true, copy: polish)
+        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: parcels(6), copy: polish)
             .hasSuffix("W drodze jest jeszcze 5 przesyłek."))
     }
 
     func testKeepsANamesOwnBraces() {
-        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([parcel("Gift {{carrier}}")]), enabled: true, copy: english),
+        XCTAssertEqual(NextDeliveryAnswer.text(snapshot: snapshot([parcel("Gift {{carrier}}")]), copy: english),
                        "Your next delivery is “Gift {{carrier}}” with DHL: Tomorrow.")
     }
 

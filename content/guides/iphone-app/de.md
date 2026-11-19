@@ -31,7 +31,6 @@ Du bekommst sie im [App Store](https://apps.apple.com/app/id6823615370); am Comp
 | --- | --- |
 | Mitteilungen | „Einstellungen“ › „Sendungen“ › „Mitteilungen“, mit Konto; siehe [Paketbenachrichtigungen](guide:parcel-notifications) |
 | Pakete per E-Mail hinzufügen | „Einstellungen“ › „Sendungen“ › „Pakete per E-Mail hinzufügen“, mit „Beta“ gekennzeichnet, mit Konto; siehe [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email) |
-| Der Schalter des Widgets | „Einstellungen“ › „Sendungen“ › „Home-Bildschirm-Widgets“ |
 | Dunkelmodus | „Einstellungen“ › „Präferenzen“ › „Darstellung“, dann „Dunkel“ |
 | KI-Assistenten | Nicht in der App: siehe [den Ratgeber zu Assistenten](guide:ai-assistants) |
 
@@ -60,7 +59,6 @@ Das Widget listet die Pakete, die unterwegs sind, dann die am letzten Tag zugest
 
 | Das Widget zeigt | Was es bedeutet |
 | --- | --- |
-| „Widget ausgeschaltet“ | Schalte „Einstellungen“ › „Sendungen“ › „Home-Bildschirm-Widgets“ ein |
 | „Gerade ist nichts unterwegs“ | Kein Paket ist unterwegs: „Füge eine Sendungsnummer oder einen Tracking-Link hinzu.“ |
 
 „Pakete“ gibt es nur auf dem Home-Bildschirm: Es gibt kein Widget für den Sperrbildschirm, und Peek zeigt keine Live-Aktivitäten.
@@ -89,7 +87,7 @@ Kein Barcode-Symbol? Es erscheint nur, wenn die Kamera Apples Live-Scanner unter
 
 Ja. Frag „Wann kommt meine nächste Lieferung in Peek“, und Siri nennt dein nächstes Paket, seinen Paketdienst, wann es erwartet wird (sonst seinen Status) und wie viele weitere unterwegs sind, ohne Peek zu öffnen. Sag „Paket zu Peek hinzufügen“, und Siri fragt „Wie lautet die Sendungsnummer?“ und öffnet dann „Paket hinzufügen“ mit der Nummer darin.
 
-Beide Aktionen, „Nächste Lieferung“ und „Paket hinzufügen“, gibt es auch in Spotlight und in der App „Kurzbefehle“, auf iPhone, iPad und Mac, und ihre Formulierungen folgen der Sprache deines Geräts, nicht der von Peek. „Nächste Lieferung“ liest die Daten des Widgets; ist „Home-Bildschirm-Widgets“ aus, sagt Siri deshalb „Öffne Peek, um deine nächste Lieferung zu sehen.“
+Beide Aktionen, „Nächste Lieferung“ und „Paket hinzufügen“, gibt es auch in Spotlight und in der App „Kurzbefehle“, auf iPhone, iPad und Mac, und ihre Formulierungen folgen der Sprache deines Geräts, nicht der von Peek. „Nächste Lieferung“ liest die Daten des Widgets; bis du Peek einmal geöffnet hast, sagt Siri deshalb „Öffne Peek, um deine nächste Lieferung zu sehen.“
 
 ## Funktioniert Peek auf dem Mac?
 
@@ -109,7 +107,7 @@ Im Fenster „Einstellungen“ von Peek hat „Allgemein“ den Schalter „In d
 - [Peek: die Teilen-Erweiterung](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – „Zu Peek hinzufügen“ und seine Meldungen
 - [Peek: ein Paket hinzufügen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – der Barcode-Scanner und wann er erscheint
 - [Peek: Siri und Kurzbefehle](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – „Nächste Lieferung“, „Paket hinzufügen“, ihre Sätze
-- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – „Home-Bildschirm-Widgets“, „Darstellung“, „Alle vergessen“, das Einstellungsfenster des Mac
+- [Peek: Einstellungen](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – „Darstellung“, „Alle vergessen“, das Einstellungsfenster des Mac
 - [Peek: Menüleiste des Mac](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – „Unterwegs“, sein Menü, „Mit Peek verfolgen“
 - [Peek: Hol dir die App](https://peektracker.com/app) – App Store für iPhone und iPad, Code am Computer
 - [Peek: Hilfe (auf Englisch)](https://peektracker.com/support.html) – „Alle vergessen“, in den Apps für iPhone und Android

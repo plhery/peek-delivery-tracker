@@ -526,7 +526,6 @@ final class DeviceParcelTests: XCTestCase {
         let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
         defer { session.forceSignOut() }
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         session.showWelcome()
 
@@ -863,7 +862,6 @@ final class DeviceParcelTests: XCTestCase {
         session.showWelcome()
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device,
                                 deviceNotifications: quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         try await store.add(trackingNumber: "TESTPARCEL123789", label: "", carrier: .dpd, trackingURL: nil, dpdPostcode: " 75001 ")
@@ -1315,7 +1313,6 @@ final class DeviceParcelTests: XCTestCase {
         session.showWelcome()
         let store = ParcelStore(configuration: PostcodeTestURLProtocol.configuration, session: session, localizer: Localizer(),
                                 transport: PostcodeTestURLProtocol.shared, device: device, deviceNotifications: quietNotifications())
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         return (store, session, device, persistence)
     }
@@ -1425,7 +1422,6 @@ final class DeviceParcelTests: XCTestCase {
                                     transport: PostcodeTestURLProtocol.shared)
         let relaunched = ParcelStore(configuration: PostcodeTestURLProtocol.configuration, session: reopened, localizer: Localizer(),
                                      transport: PostcodeTestURLProtocol.shared, device: device, deviceNotifications: quietNotifications())
-        relaunched.setDeliveryWidgetEnabled(false)
         relaunched.setDeliveryLiveActivitiesEnabled(false)
         await reopened.bootstrap()
         XCTAssertEqual(reopened.user?.id, session.user?.id)
@@ -1872,7 +1868,6 @@ final class DeviceParcelTests: XCTestCase {
         let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
         defer { session.forceSignOut() }
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         session.showWelcome()
 
@@ -2190,7 +2185,6 @@ final class DeviceParcelTests: XCTestCase {
         defer { session.forceSignOut() }
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device,
                                 deviceNotifications: notifications)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         func alerts() -> Int { calls.all.count { $0.hasPrefix("alert") } }
 
@@ -2239,7 +2233,6 @@ final class DeviceParcelTests: XCTestCase {
         let localizer = Localizer()
         let store = ParcelStore(configuration: configuration, session: session, localizer: localizer, transport: transport, device: device,
                                 deviceNotifications: notifications)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         XCTAssertNil(store.followedHere(shown))
 

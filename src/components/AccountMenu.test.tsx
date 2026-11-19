@@ -57,9 +57,9 @@ describe('AccountMenu', () => {
     const user = userEvent.setup();
     render(<AccountMenu onResetDemo={vi.fn()} onExitDemo={vi.fn()} />);
     await user.click(screen.getByRole('button', { name: 'Account' }));
-    const mark = screen.getByRole('switch', { name: 'Mark new updates' });
+    const mark = screen.getByRole('switch', { name: 'Dot on updated parcels' });
     expect(mark).toBeChecked();
-    expect(mark).toHaveAccessibleDescription('A dot on parcels with updates since you last opened them.');
+    expect(mark).toHaveAccessibleDescription('A dot appears on a parcel with a new update since you last opened it.');
     await user.click(mark);
     expect(mark).not.toBeChecked();
     expect(window.localStorage.getItem(MARK_NEW_UPDATES_STORAGE_KEY)).toBe('off');
@@ -78,7 +78,7 @@ describe('AccountMenu', () => {
     const user = userEvent.setup();
     render(<AccountMenu email="owner@example.test" apiAuth={{ userId: 'user-mark', getAccessToken: async () => 'session' }} />);
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
-    const mark = screen.getByRole('switch', { name: 'Mark new updates' });
+    const mark = screen.getByRole('switch', { name: 'Dot on updated parcels' });
     await user.click(mark);
     const saved = () => fetch.mock.calls.filter(([url, init]) => url === '/api/push/preferences' && init?.method === 'PATCH');
     await vi.waitFor(() => expect(saved()).toHaveLength(1));

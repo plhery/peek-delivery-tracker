@@ -672,7 +672,6 @@ final class ParcelShareTests: XCTestCase {
         let session = SessionStore(configuration: configuration, persistence: ShareTestSessionPersistence(), transport: transport)
         defer { session.forceSignOut() }
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         let client = store.shareClient(for: parcel)
 

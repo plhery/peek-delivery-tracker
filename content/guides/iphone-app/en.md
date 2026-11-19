@@ -31,7 +31,6 @@ Get it from the [App Store](https://apps.apple.com/app/id6823615370); on a compu
 | --- | --- |
 | Notifications | "Settings" › "Deliveries" › "Notifications", with an account; see [parcel delivery notifications](guide:parcel-notifications) |
 | Add parcels by email | "Settings" › "Deliveries" › "Add parcels by email", marked "Beta", with an account; see [adding parcels by email](guide:add-parcels-by-email) |
-| The widget's switch | "Settings" › "Deliveries" › "Home Screen widgets" |
 | Dark mode | "Settings" › "Preferences" › "Appearance", then "Dark" |
 | AI assistants | Not in the app: see [the assistants guide](guide:ai-assistants) |
 
@@ -60,7 +59,6 @@ The widget lists the parcels on their way, then those delivered in the last day,
 
 | The widget shows | What it means |
 | --- | --- |
-| "Widget turned off" | Turn on "Settings" › "Deliveries" › "Home Screen widgets" |
 | "Nothing on the way right now" | No parcel is on its way: "Add a tracking number or shipping link to get started." |
 
 "Parcels" lives on the Home Screen only: there's no Lock Screen widget, and Peek shows no Live Activities.
@@ -89,7 +87,7 @@ No barcode icon? It shows only where the camera supports Apple's live scanner an
 
 Yes. Ask "When is my next delivery in Peek", and Siri names your next parcel, its carrier, when it's expected (or else its status) and how many more are on the way, without opening Peek. Say "Add a parcel to Peek", and Siri asks "What’s the tracking number?", then opens Add with it filled in.
 
-Both actions, "Next delivery" and "Add a parcel", are in Spotlight and the Shortcuts app too, on iPhone, iPad and Mac, and their phrases follow your device's language, not Peek's. "Next delivery" reads the widget's data, so with "Home Screen widgets" off, Siri says "Open Peek to see your next delivery."
+Both actions, "Next delivery" and "Add a parcel", are in Spotlight and the Shortcuts app too, on iPhone, iPad and Mac, and their phrases follow your device's language, not Peek's. "Next delivery" reads the widget's data, so until you've opened Peek once, Siri says "Open Peek to see your next delivery."
 
 ## Does Peek work on a Mac?
 
@@ -109,7 +107,7 @@ In Peek's Settings window, "General" has "Show in menu bar", which keeps Peek ru
 - [Peek: the share extension](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – Add to Peek and its messages
 - [Peek: adding a parcel](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – the barcode scanner and when it shows
 - [Peek: Siri and Shortcuts](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – Next delivery, Add a parcel, their phrases
-- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Home Screen widgets, Appearance, Forget all, the Mac's Settings window
+- [Peek: Settings](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Appearance, Forget all, the Mac's Settings window
 - [Peek: Mac menu bar](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – On the way, its menu, Track with Peek
 - [Peek: Get the app](https://peektracker.com/app) – App Store for iPhone and iPad, code on a computer
 - [Peek: Support](https://peektracker.com/support.html) – Forget all, in the iPhone and Android apps

@@ -20,7 +20,7 @@ Here is everything that changes when you sign in:
 | [Notifications](guide:parcel-notifications) | On the website, "Notify me" on a parcel's page, then every parcel in that browser if you like. The apps sign up each parcel themselves | Settings › "Notifications" covers every parcel, and can email you when one arrives |
 | [Add parcels by email](guide:add-parcels-by-email), [AI assistants](guide:ai-assistants) | Not offered | Settings › "Add parcels by email" (Beta); "Assistants" (Beta), on the website only |
 | Passport and Friends | Website: no tabs, but a delivered parcel from abroad offers "Start a passport". Apps: both tabs; Passport counts the parcels on that device, Friends asks you to sign in | Both tabs, on the website and in every app |
-| Settings | Website: the gear button "Settings" holds "Preferences", with "Language" on a parcel's page; on the front page, the language is in the menu at its foot. Apps: "Preferences" and "On this device" | "Deliveries", "Preferences" (with "Language") and "Account & data". On the website, only "Mark new updates" follows you to your other devices |
+| Settings | Website: the gear button "Settings" holds "Preferences", with "Language" on a parcel's page; on the front page, the language is in the menu at its foot. Apps: "Preferences" and "On this device" | "Deliveries", "Preferences" (with "Language") and "Account & data". On the website, only "Dot on updated parcels" follows you to your other devices |
 | Your data | "Forget it now" on a parcel's page or "Forget all"; the apps also have "Download my data" | "Download my data", "Sign out", "Delete account" |
 
 Signing in takes a minute, with a code Peek emails you:
@@ -93,8 +93,8 @@ Everyone has "Preferences", with or without an account, on the website and in th
 - **"Appearance"**: "System" (follows your device), "Light" or "Dark".
 - **"Language"**: English, German, French, Italian, Spanish, Portuguese, Brazilian Portuguese, Polish, Russian or Simplified Chinese.
 - **"Time format"**: "24-hour", "12-hour" or Automatic.
-- **"Distance units"** and **"Weight units"**: kilometres or miles, kilograms or pounds. Left on Automatic, they follow your device; pounds also give parcel sizes in inches.
-- **"Mark new updates"**: "A dot on parcels with updates since you last opened them."
+- **"Distance"** and **"Weight"**: kilometres or miles, kilograms or pounds. Left on Automatic, they follow your device; pounds also give parcel sizes in inches.
+- **"Dot on updated parcels"**: "A dot appears on a parcel with a new update since you last opened it."
 
 To add Peek to an iPhone's Home Screen for notifications, see [parcel delivery notifications](guide:parcel-notifications).
 

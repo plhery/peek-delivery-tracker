@@ -20,7 +20,7 @@ Das alles ändert sich, wenn du dich anmeldest:
 | [Benachrichtigungen](guide:parcel-notifications) | Auf der Website „Sag mir Bescheid“ auf der Seite eines Pakets, danach auf Wunsch für jedes Paket in diesem Browser. Die Apps melden jedes Paket selbst an | Einstellungen › „Mitteilungen“ gilt für jedes Paket und kann dir eine E-Mail schicken, wenn eines ankommt |
 | [Pakete per E-Mail hinzufügen](guide:add-parcels-by-email), [KI-Assistenten](guide:ai-assistants) | Nicht verfügbar | Einstellungen › „Pakete per E-Mail hinzufügen“ (Beta); „Assistenten“ (Beta), nur auf der Website |
 | Reisepass und Freunde | Website: keine Tabs, aber ein zugestelltes Paket aus dem Ausland bietet „Reisepass starten“ an. Apps: beide Tabs; der Reisepass zählt die Pakete auf diesem Gerät, Freunde bittet dich, dich anzumelden | Beide Tabs, auf der Website und in jeder App |
-| Einstellungen | Website: Der Zahnrad-Knopf „Einstellungen“ enthält „Präferenzen“, mit „Sprache“ auf der Seite eines Pakets; auf der Startseite steht die Sprache im Menü ganz unten. Apps: „Präferenzen“ und „Auf diesem Gerät“ | „Sendungen“, „Präferenzen“ (mit „Sprache“) und „Konto & Daten“. Auf der Website folgt dir nur „Neue Updates markieren“ auf deine anderen Geräte |
+| Einstellungen | Website: Der Zahnrad-Knopf „Einstellungen“ enthält „Präferenzen“, mit „Sprache“ auf der Seite eines Pakets; auf der Startseite steht die Sprache im Menü ganz unten. Apps: „Präferenzen“ und „Auf diesem Gerät“ | „Sendungen“, „Präferenzen“ (mit „Sprache“) und „Konto & Daten“. Auf der Website folgt dir nur „Punkt bei aktualisierten Paketen“ auf deine anderen Geräte |
 | Deine Daten | „Jetzt vergessen“ auf der Seite eines Pakets oder „Alle vergessen“; die Apps haben auch „Meine Daten herunterladen“ | „Meine Daten herunterladen“, „Abmelden“, „Konto löschen“ |
 
 Die Anmeldung dauert eine Minute, mit einem Code, den Peek dir per E-Mail schickt:
@@ -93,8 +93,8 @@ Alle haben „Präferenzen“, mit oder ohne Konto, auf der Website und in den A
 - **„Darstellung“**: „System“ (folgt deinem Gerät), „Hell“ oder „Dunkel“.
 - **„Sprache“**: Englisch, Deutsch, Französisch, Italienisch, Spanisch, Portugiesisch, brasilianisches Portugiesisch, Polnisch, Russisch oder vereinfachtes Chinesisch.
 - **„Zeitformat“**: „24 Stunden“, „12 Stunden“ oder Automatisch.
-- **„Entfernungseinheit“** und **„Gewichtseinheit“**: Kilometer oder Meilen, Kilogramm oder Pfund. Stehen sie auf Automatisch, folgen sie deinem Gerät; mit Pfund werden Paketgrößen auch in Zoll angegeben.
-- **„Neue Updates markieren“**: „Ein Punkt bei Paketen, bei denen sich seit dem letzten Öffnen etwas getan hat.“
+- **„Entfernung“** und **„Gewicht“**: Kilometer oder Meilen, Kilogramm oder Pfund. Stehen sie auf Automatisch, folgen sie deinem Gerät; mit Pfund werden Paketgrößen auch in Zoll angegeben.
+- **„Punkt bei aktualisierten Paketen“**: „Ein Punkt erscheint bei einem Paket, bei dem sich seit dem letzten Öffnen etwas getan hat.“
 
 Wie du Peek für Benachrichtigungen auf den Home-Bildschirm eines iPhones legst, steht in [Paketbenachrichtigungen](guide:parcel-notifications).
 

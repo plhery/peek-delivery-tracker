@@ -99,8 +99,7 @@ The app gives Siri, Spotlight and Shortcuts two App Intents, each with its phras
 
 - **Next delivery** answers from the widget's snapshot in the App Group, in the app's language. It names the first
   parcel on its way in the widget's order, its carrier, when it is expected or else its status, and how many more
-  are on the way. It opens nothing and asks no server. Without a snapshot, or with the widget's switch off, it asks
-  to open Peek.
+  are on the way. It opens nothing and asks no server. Without a snapshot it asks to open Peek.
 - **Add a parcel** takes a tracking number and an optional name and leaves them for Add as the Share extension
   does. Peek comes forward with Add filled in, and nothing is added until it is confirmed there.
 
@@ -196,7 +195,7 @@ former. Server settings are in [DEPLOYMENT.md](../docs/DEPLOYMENT.md).
   in a shorter widget, the parcels are rows, in a medium widget down one column without headings before one is left
   out (`DeliveryWidgetList.fits`). The small widget and that line open the list (`peekdeliverytracker://parcels`);
   in the medium and large ones, a card, pass or row opens its parcel. A card, pass or row carries the list's dot for
-  new updates, which VoiceOver reads first; "Mark new updates" hides it, and opening the parcel clears it. Its kind
+  new updates, which VoiceOver reads first; "Dot on updated parcels" hides it, and opening the parcel clears it. Its kind
   is `NextDeliveryWidget`, the name of the widget it replaced, which the widgets readers placed carry. On the iPhone
   and iPad it also answers to `ParcelListWidget`, the kind it had while it stood beside Next delivery, so the widgets
   placed then keep updating; that one is disfavored everywhere a widget is chosen, which keeps it out of the gallery

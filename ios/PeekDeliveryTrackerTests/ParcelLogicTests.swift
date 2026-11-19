@@ -1455,7 +1455,9 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(text("it", 4), "+4 more")
     }
 
-    func testDisablingWidgetRemovesSharedParcelSnapshot() throws {
+    /// The widgets' switch is gone: a snapshot kept under it stays, and Live Activities, which followed it until they had
+    /// their own choice, take it as theirs once, after which the old key goes.
+    func testTheRetiredWidgetSwitchOnlyLeavesLiveActivitiesItsChoice() throws {
         let suiteName = "DeliveryWidgetSharedStoreTests.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suiteName))
         defer { defaults.removePersistentDomain(forName: suiteName) }
@@ -1465,19 +1467,19 @@ final class ParcelLogicTests: XCTestCase {
             languageCode: "fr",
             parcels: [widgetParcel(label: "Private parcel", outForDelivery: true)]
         )
+        XCTAssertTrue(store.liveActivitiesEnabled)
 
-        XCTAssertTrue(store.isEnabled)
-        store.setLanguageCode("fr")
-        store.setLiveActivitiesEnabled(true)
+        defaults.set(false, forKey: "sdt.deliveryWidget.enabled.v1")
         XCTAssertTrue(store.save(snapshot))
         XCTAssertEqual(store.snapshot, snapshot)
+        XCTAssertFalse(store.liveActivitiesEnabled)
 
-        store.setEnabled(false)
-
-        XCTAssertFalse(store.isEnabled)
+        store.setLiveActivitiesEnabled(store.liveActivitiesEnabled)
+        XCTAssertNil(defaults.object(forKey: "sdt.deliveryWidget.enabled.v1"))
+        XCTAssertFalse(store.liveActivitiesEnabled)
+        store.setLiveActivitiesEnabled(true)
         XCTAssertTrue(store.liveActivitiesEnabled)
-        XCTAssertNil(store.snapshot)
-        XCTAssertEqual(store.languageCode, "fr")
+        XCTAssertEqual(store.snapshot, snapshot)
     }
 
     func testDeliveryLiveActivityOnlyStartsForDeliveryDay() {
@@ -2239,7 +2241,7 @@ final class ParcelLogicTests: XCTestCase {
         let fridayMorning = friday.addingTimeInterval(8 * 3_600)
         XCTAssertEqual(DeliveryWidgetSelection.listed(published, now: fridayMorning).map(\.detail), ["today", "yesterday"])
         let snapshot = DeliveryWidgetSnapshot(generatedAt: lateThursday, languageCode: "en", parcels: published)
-        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: snapshot, enabled: true, copy: ExtensionLocalizer(languageCode: "en"), now: fridayMorning)
+        XCTAssertTrue(NextDeliveryAnswer.text(snapshot: snapshot, copy: ExtensionLocalizer(languageCode: "en"), now: fridayMorning)
             .hasSuffix(": today."))
 
         // A day later the estimate has passed, and the delivery has left the widgets.
@@ -3149,7 +3151,6 @@ final class SessionIsolationTests: XCTestCase {
     }
     @MainActor private func store(_ session: SessionStore, _ transport: URLSession) -> ParcelStore {
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         return store
     }
@@ -3653,8 +3654,6 @@ extension SessionIsolationTests {
         defer { session.forceSignOut() }
         try await authorize(session)
         let store = store(session, transport)
-        store.setDeliveryWidgetEnabled(true)
-        defer { store.setDeliveryWidgetEnabled(false) }
         let shared = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: configuration.appGroupIdentifier, fallbackToStandard: true))
         let home = TimeZone.current
         // Half an hour off every whole-hour zone, so no midnight of one is a midnight of the other.
@@ -4149,8 +4148,6 @@ extension SessionIsolationTests {
         defer { session.forceSignOut() }
         try await authorize(session)
         let store = store(session, transport)
-        store.setDeliveryWidgetEnabled(true)
-        defer { store.setDeliveryWidgetEnabled(false) }
         let shared = try XCTUnwrap(DeliveryWidgetSharedStore(appGroupIdentifier: configuration.appGroupIdentifier, fallbackToStandard: true))
         let scanned = scannedParcel()
         var quiet = parcel()
@@ -4397,7 +4394,6 @@ extension SessionIsolationTests {
         defer { defaults.removePersistentDomain(forName: suite) }
         let localizer = Localizer(defaults: defaults, systemUses24HourTime: { true }, systemDistanceUnit: { .kilometres })
         let store = ParcelStore(configuration: configuration, session: session, localizer: localizer, transport: transport)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
 
         // Read without any: this device's go to the account, the rest as stored and the email choice left out.

@@ -461,7 +461,6 @@ final class AddByEmailModelTests: XCTestCase {
         let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport,
                                 device: DeviceParcels(client: .api(configuration: configuration, transport: transport), storage: InboxTestStorage()),
                                 deviceNotifications: Self.quietNotifications)
-        store.setDeliveryWidgetEnabled(false)
         store.setDeliveryLiveActivitiesEnabled(false)
         XCTAssertNil(store.addByEmailClient(), "Signed out, there is no address to ask for")
         let asked = requests.count
@@ -509,7 +508,6 @@ final class AddByEmailModelTests: XCTestCase {
         let demoSession = SessionStore(configuration: demo, defaults: preferences, persistence: InboxTestSessionPersistence(), transport: transport)
         let demoStore = ParcelStore(configuration: demo, session: demoSession, localizer: Localizer(), transport: transport,
                                     device: DeviceParcels(client: nil, storage: InboxTestStorage()), deviceNotifications: Self.quietNotifications)
-        demoStore.setDeliveryWidgetEnabled(false)
         demoStore.setDeliveryLiveActivitiesEnabled(false)
         demoSession.enterDemo()
         XCTAssertNil(demoStore.addByEmailClient())

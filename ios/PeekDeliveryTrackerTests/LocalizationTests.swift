@@ -209,10 +209,6 @@ final class LocalizationTests: XCTestCase {
             "settings.version",
             "widget.listGalleryName",
             "widget.listGalleryDescription",
-            "widget.settingTitle",
-            "widget.settingDescription",
-            "widget.disabledTitle",
-            "widget.disabledDescription",
         ]
 
         for (language, values) in dictionaries {

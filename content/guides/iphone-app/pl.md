@@ -31,7 +31,6 @@ Pobierz ją z [App Store](https://apps.apple.com/app/id6823615370); na komputerz
 | --- | --- |
 | Powiadomienia | „Ustawienia” › „Dostawy” › „Powiadomienia”, z kontem; zobacz [powiadomienia o dostawie przesyłek](guide:parcel-notifications) |
 | Dodawanie przesyłek e-mailem | „Ustawienia” › „Dostawy” › „Dodawaj przesyłki e-mailem”, z oznaczeniem „Beta”, z kontem; zobacz [dodawanie przesyłek e-mailem](guide:add-parcels-by-email) |
-| Przełącznik widżetu | „Ustawienia” › „Dostawy” › „Widżety ekranu początkowego” |
 | Tryb ciemny | „Ustawienia” › „Preferencje” › „Wygląd”, a potem „Ciemny” |
 | Asystenci AI | Nie ma ich w aplikacji: zobacz [poradnik o asystentach](guide:ai-assistants) |
 
@@ -60,7 +59,6 @@ Widżet pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej d
 
 | Widżet pokazuje | Co to znaczy |
 | --- | --- |
-| „Widżet wyłączony” | Włącz „Ustawienia” › „Dostawy” › „Widżety ekranu początkowego” |
 | „Brak przesyłek w drodze” | Żadna przesyłka nie jest w drodze: „Dodaj numer lub link śledzenia, aby zacząć.” |
 
 Widżet „Przesyłki” działa tylko na ekranie głównym: nie ma widżetu na ekran blokady, a Peek nie pokazuje Aktywności na żywo.
@@ -89,7 +87,7 @@ Nie widzisz ikony? Pojawia się tylko wtedy, gdy aparat obsługuje skaner na ży
 
 Tak. Zapytaj „Kiedy dotrze moja następna przesyłka w aplikacji Peek”, a Siri poda Twoją najbliższą przesyłkę, jej przewoźnika, przewidywany termin (albo, jeśli go nie ma, status) i liczbę pozostałych przesyłek w drodze, bez otwierania Peeka. Powiedz „Dodaj przesyłkę w aplikacji Peek”, a Siri zapyta „Jaki jest numer śledzenia?”, po czym otworzy ekran dodawania z wpisanym numerem.
 
-Obie czynności, „Najbliższa dostawa” i „Dodaj przesyłkę”, są też w Spotlight i w aplikacji Skróty, na iPhonie, iPadzie i Macu, a ich frazy zależą od języka urządzenia, nie języka ustawionego w Peeku. „Najbliższa dostawa” korzysta z danych widżetu, więc gdy „Widżety ekranu początkowego” są wyłączone, Siri mówi „Otwórz aplikację Peek, aby zobaczyć najbliższą dostawę.”
+Obie czynności, „Najbliższa dostawa” i „Dodaj przesyłkę”, są też w Spotlight i w aplikacji Skróty, na iPhonie, iPadzie i Macu, a ich frazy zależą od języka urządzenia, nie języka ustawionego w Peeku. „Najbliższa dostawa” korzysta z danych widżetu, więc dopóki nie otworzysz Peeka choć raz, Siri mówi „Otwórz aplikację Peek, aby zobaczyć najbliższą dostawę.”
 
 ## Czy Peek działa na Macu?
 
@@ -109,7 +107,7 @@ W oknie ustawień Peeka karta „Ogólne” ma „Pokazuj na pasku menu”, dzi�
 - [Peek: rozszerzenie udostępniania](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/ShareExtension/ShareViewController.swift) – „Dodaj do Peeka” i jego komunikaty
 - [Peek: dodawanie przesyłki](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/AddParcelView.swift) – skaner kodów kreskowych i kiedy się pojawia
 - [Peek: Siri i Skróty](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/ShortcutIntents.swift) – Najbliższa dostawa, Dodaj przesyłkę, ich frazy
-- [Peek: Ustawienia](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Widżety ekranu początkowego, Wygląd, Zapomnij o wszystkich, okno ustawień na Macu
+- [Peek: Ustawienia](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/SettingsViews.swift) – Wygląd, Zapomnij o wszystkich, okno ustawień na Macu
 - [Peek: pasek menu na Macu](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker/MacMenuBar.swift) – W drodze, jego menu, Śledź w Peeku
 - [Peek: Pobierz aplikację](https://peektracker.com/app) – App Store na iPhone’a i iPada, kod na komputerze
 - [Peek: Support](https://peektracker.com/support.html) – Forget all, w aplikacjach na iPhone’a i Androida

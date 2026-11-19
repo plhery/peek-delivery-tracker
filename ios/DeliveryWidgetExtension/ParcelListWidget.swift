@@ -3,7 +3,6 @@ import WidgetKit
 
 private struct ParcelListEntry: TimelineEntry {
     let date: Date
-    let enabled: Bool
     let languageCode: String
     /// The widgets' parcels in their order, without those delivered more than a day ago.
     let parcels: [DeliveryWidgetParcel]
@@ -24,7 +23,7 @@ private struct ParcelListProvider: TimelineProvider {
         let languageCode = ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
         let folder = Bundle.main.url(forResource: DeliveryWidgetSample.folderName, withExtension: nil)
         let snapshot = folder.flatMap { DeliveryWidgetSample.snapshot(languageCode: languageCode, in: $0) }
-        var entry = makeEntry(at: Date(), enabled: true, languageCode: languageCode, parcels: snapshot?.parcels ?? [],
+        var entry = makeEntry(at: Date(), languageCode: languageCode, parcels: snapshot?.parcels ?? [],
                               pictures: folder, trucks: nil, size: context.family.listSize)
         entry.isSample = true
         return entry
@@ -33,7 +32,7 @@ private struct ParcelListProvider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (ParcelListEntry) -> Void) {
         // The gallery shows the reader's parcels, and the demo's until there are some.
         let entry = currentEntry(context.family, at: Date())
-        completion(context.isPreview && (!entry.enabled || entry.parcels.isEmpty) ? placeholder(in: context) : entry)
+        completion(context.isPreview && entry.parcels.isEmpty ? placeholder(in: context) : entry)
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<ParcelListEntry>) -> Void) {
@@ -52,7 +51,7 @@ private struct ParcelListProvider: TimelineProvider {
         let languageCode = snapshot?.languageCode
             ?? ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
         return makeEntry(
-            at: date, enabled: store?.isEnabled ?? true, languageCode: languageCode,
+            at: date, languageCode: languageCode,
             parcels: DeliveryWidgetSelection.listed(snapshot?.parcels ?? [], now: date),
             pictures: DeliveryWidgetPicture.folder(appGroupIdentifier: identifier),
             trucks: DeliveryWidgetTruck.folder(appGroupIdentifier: identifier), size: family.listSize
@@ -62,11 +61,11 @@ private struct ParcelListProvider: TimelineProvider {
     /// Reads only the pictures the design shows: a route weighs a few hundred kilobytes, and a widget has little memory.
     /// Cards and passes need every parcel's; until the app has drawn them, the parcels are rows.
     private func makeEntry(
-        at date: Date, enabled: Bool, languageCode: String, parcels: [DeliveryWidgetParcel], pictures: URL?, trucks: URL?,
+        at date: Date, languageCode: String, parcels: [DeliveryWidgetParcel], pictures: URL?, trucks: URL?,
         size: DeliveryWidgetList.Size
     ) -> ParcelListEntry {
-        var entry = ParcelListEntry(date: date, enabled: enabled, languageCode: languageCode, parcels: parcels)
-        guard enabled, !parcels.isEmpty else { return entry }
+        var entry = ParcelListEntry(date: date, languageCode: languageCode, parcels: parcels)
+        guard !parcels.isEmpty else { return entry }
         let design = DeliveryWidgetList.design(of: parcels.count, size: size)
         if design != .sections, let pictures {
             let route = design == .cards ? ParcelCards.route(count: parcels.count, size: size) : nil
@@ -133,9 +132,7 @@ private struct ParcelListWidgetView: View {
 
     @ViewBuilder
     private var design: some View {
-        if !entry.enabled {
-            state(symbol: "rectangle.slash", title: copy.text("widget.disabledTitle"), description: copy.text("widget.disabledDescription"))
-        } else if entry.parcels.isEmpty {
+        if entry.parcels.isEmpty {
             state(symbol: "shippingbox", title: copy.text("app.noneOnWay"), description: copy.text("app.emptyDescription"))
         } else {
             switch entry.design {

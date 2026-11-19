@@ -4948,14 +4948,19 @@ describe('TrackingSyncService', () => {
     // Delivered on the provider's word, it need not wait for the follow-up's next daily check.
     { checkedAt: '10:00:15', time: '10:02:00', delivered: true, checked: 1 },
     { checkedAt: '10:12:00', time: '10:16:00', delivered: true, checked: 0 },
-  ])('asks at the next run the carrier a provider named, last checked at $checkedAt, at $time (overnight: $overnight, delivered: $delivered): $checked checks', async ({ checkedAt, time, overnight, delivered, checked }) => {
+    // A carrier spacing its parcels' checks 30 minutes apart has not been asked yet: its interval waits for none.
+    { carrier: 'usps', checkedAt: '10:00:15', time: '10:02:00', checked: 1 },
+    { carrier: 'usps', checkedAt: '10:00:15', time: '10:02:00', delivered: true, checked: 1 },
+    // A failed check keeps the carrier's wait after a failure.
+    { carrier: 'usps', checkedAt: '10:00:15', time: '10:02:00', failed: true, checked: 0 },
+  ])('asks at the next run the carrier ($carrier) a provider named, last checked at $checkedAt, at $time (overnight: $overnight, delivered: $delivered, failed: $failed): $checked checks', async ({ carrier = 'dhl-express', checkedAt, time, overnight, delivered, failed, checked }) => {
     const day = overnight ? '2026-09-09T22' : '2026-09-09T10';
     const at = (clock: string) => `${day}${clock.slice(2)}Z`;
     const parcel = {
-      id: 'named', carrier: 'dhl-express', current_stage: delivered ? 'delivered' : 'in_transit', tracking_number: 'TEST1234',
-      last_synced_at: at(checkedAt), sync_status: 'ok', carrier_data: { tracking_provider: 'Ship24',
+      id: 'named', carrier, current_stage: delivered ? 'delivered' : 'in_transit', tracking_number: 'TEST1234',
+      last_synced_at: at(checkedAt), sync_status: failed ? 'error' : 'ok', carrier_data: { tracking_provider: 'Ship24',
         ...(delivered ? { unconfirmed_delivery_until: '2026-09-12T10:00:00Z' } : {}),
-        routing: { version: 1, configured_carrier: 'dhl-express', carrier_named_at: at('10:00:10') } },
+        routing: { version: 1, configured_carrier: carrier, carrier_named_at: at('10:00:10') } },
     };
     const client = fakeClient([parcel]);
     const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) };

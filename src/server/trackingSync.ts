@@ -504,6 +504,10 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
   if (!refresh?.afterFailureMinutes) return after;
   const lastChecked = Date.parse(String(parcel.last_synced_at ?? ''));
   if (!Number.isFinite(lastChecked)) return after;
+  // A provider just filed the parcel under its carrier and the check did not ask that carrier (`carrier_named_at`,
+  // which the next routed check clears): the interval spaces the carrier's own asks, and it has had none yet.
+  if (parcel.sync_status !== 'error' && routingState(parcel).carrier_named_at !== undefined
+    && pacedBy(parcel) === String(parcel.carrier)) return after;
   // Counted from the run that made the last check, which lands a little into it, as a scheduled
   // check counts a limit alone (scheduledSyncDue).
   const interval = parcel.sync_status === 'error'

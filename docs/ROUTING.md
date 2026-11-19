@@ -443,7 +443,8 @@ next run, is a parcel a provider just filed under a carrier with an adapter of i
 the check did not ask (an Add preflight's history skips confirming it), or one filed under no
 carrier whose provider relays only a label naming such a carrier, when that carrier needs no
 input the parcel lacks: that carrier is asked
-without waiting the provider's 15 minutes, archived or delivered too (`carrier_named_at` in its
+without waiting the provider's 15 minutes or the carrier's own interval between checks, which it has not
+used yet, archived or delivered too (`carrier_named_at` in its
 routing, which that check clears and which lapses after 15 minutes). A scheduled run handles at most five due parcels
 per account, each account's longest due, every 2 minutes. It lists every open parcel and lookup in pages by id,
 as the database's API ends each answer at its row limit, and checks the parcels it takes the longest due

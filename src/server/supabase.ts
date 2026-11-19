@@ -41,10 +41,11 @@ const PACKAGE_COLUMNS = [
  * The package shape the API returns once eventPlaces.ts has served it. A
  * scan's `point`, the carrier's own coordinates, gives its place, and its
  * provider_event_id tells Peek's own rows from the carrier's: the response
- * carries neither, nor when a scan was stored (`stored_at`), which dates the parcel's news (`news_at`).
+ * carries neither, nor when a scan was stored (`stored_at`), which dates the parcel's news (`news_at`), nor the time a
+ * carrier re-dated it from (`retimed_from`), which tells its own re-dating from a row stored ahead (`shownEvents`).
  * The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
-const PACKAGE_EVENTS = 'tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage)';
+const PACKAGE_EVENTS = 'tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage,retimed_from:raw_data->>retimed_from)';
 const PACKAGE_SELECT = `${PACKAGE_COLUMNS},${PACKAGE_EVENTS}`;
 /**
  * What a shared Passport is worked out from (`withSharedPassports` in friends.ts): the parcel's account, its scans

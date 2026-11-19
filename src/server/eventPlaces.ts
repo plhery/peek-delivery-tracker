@@ -10,6 +10,7 @@ import { copyTellsProblem, currentCarrier, providerTwins, relayCopies } from './
 import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
+import { datedAfterCheck } from './futureScans';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
 import { isRecord, type JsonObject } from './types';
@@ -34,6 +35,7 @@ function served(event: JsonObject, relayOf?: string): JsonObject {
   delete rest.point;
   delete rest.provider_event_id;
   delete rest.stored_at;
+  delete rest.retimed_from;
   delete rest.universal_provider;
   delete rest.stage_source;
   delete rest.kept_stage;
@@ -167,15 +169,27 @@ function restatedSightings(events: readonly JsonObject[]): Set<string> {
 }
 
 /**
+ * A delivery or return stored over an hour before its own time, which no carrier re-dated (`retimed_from`): a step
+ * written ahead, or a clock read in the wrong zone. It never set the parcel's stage, then or once its time passed
+ * (futureScans.ts), so it is served without a stage, in its own words: no app takes it for the parcel's current step,
+ * its delivery or its postmark.
+ */
+function withoutEndingAhead(event: JsonObject): JsonObject {
+  return ['delivered', 'returned'].includes(String(event.stage)) && !event.retimed_from && typeof event.stored_at === 'string'
+    && datedAfterCheck(event.occurred_at, 'UTC', new Date(event.stored_at)) ? { ...event, stage: 'pending' } : event;
+}
+
+/**
  * The scans of a stored package row its timeline shows: without a provider's copies of its carrier's scans, a
  * sighting a scan already tells (`restatedSightings`) or a twin of a scan in La Poste's other wording (`wordingTwins`),
- * then as `timeline` keeps them. A placeholder number's scans are other people's shipments merged under it: only
- * Peek's own rows are shown.
+ * then as `timeline` keeps them, and a delivery or return stored ahead of its time without its stage
+ * (`withoutEndingAhead`). A placeholder number's scans are other people's shipments merged under it: only Peek's own
+ * rows are shown.
  */
 export function shownEvents(row: JsonObject): JsonObject[] {
   const copied = providerCopies(row);
   const placeholder = placeholderNumber(row);
-  const events = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord) : [];
+  const events = Array.isArray(row.tracking_events) ? row.tracking_events.filter(isRecord).map(withoutEndingAhead) : [];
   const restated = restatedSightings(events);
   const kept = events.filter((event) => !copied.has(String(event.id)) && !restated.has(String(event.id)));
   const twins = wordingTwins(kept);
@@ -204,6 +218,7 @@ export function withoutEventSources(row: JsonObject): JsonObject {
       const rest = dated(event);
       delete rest.provider_event_id;
       delete rest.stored_at;
+      delete rest.retimed_from;
       delete rest.universal_provider;
       delete rest.stage_source;
       delete rest.kept_stage;

@@ -149,12 +149,14 @@ describe('guarded tracking writes', () => {
     expect(select(serviceRequest, 1).endsWith(`,owner_locale,${identities}`)).toBe(true);
     // The API's package shape reads provider_event_id only to tell Peek's own rows, the stage source and its mark only to
     // tell a notice, and the stored times only to name a scan's day, which eventPlaces.ts serves without them, and never when
-    // the parcel joined its account. When a scan was stored only dates the parcel's news.
+    // the parcel joined its account. When a scan was stored only dates the parcel's news, and with the time a carrier
+    // re-dated it from, tells a delivery stored ahead of its time.
     const apiShape = 'id,tracking_number,label,carrier,created_at,expected_delivery,last_status_text,'
       + 'last_synced_at,sync_status,sync_error,tracking_url,dpd_postcode,phone_digits,carrier_data,archived_at,'
       + 'notifications_muted,email_muted,seen_at,tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,'
       + 'time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,'
-      + 'recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage)';
+      + 'recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage,'
+      + 'retimed_from:raw_data->>retimed_from)';
     expect(select(userRequest, 0)).toBe(apiShape);
     expect(select(userRequest, 1)).toBe(apiShape);
     expect(select(userRequest, 2)).toBe(apiShape);

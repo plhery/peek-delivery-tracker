@@ -253,6 +253,27 @@ describe('withEventPlaces', () => {
     expect(served.news_at).toBe('2026-11-15T10:05:00+00:00');
   });
 
+  it('serves a delivery stored over an hour before its own time in no stage, unless its carrier re-dated it', () => {
+    const stored = (id: string, stage: string, occurredAt: string, extra: object = {}) => ({ ...event(id, null, occurredAt), stage,
+      description: stage === 'in_transit' ? 'Scan' : 'Delivered', provider_event_id: `quick-fort:${id}`, stored_at: '2026-11-19T12:38:00+00:00', ...extra });
+    const serve = (events: object[]) => (withEventPlaces({ id: 'parcel', carrier: 'quick-fort', current_stage: 'in_transit', tracking_events: events }) as
+      { tracking_events: { id: string; stage: string; description: string }[] }).tracking_events;
+    const stages = (events: object[]) => Object.fromEntries(serve(events).map(({ id, stage }) => [id, stage]));
+    const moving = stored('1', 'in_transit', '2026-11-19T08:00:00+00:00');
+    // A carrier's script of the journey, its "Delivered" two days ahead: in its words, in no stage, once its time
+    // has passed too, as the parcel's stage never took it.
+    const scripted = stored('2', 'delivered', '2026-11-21T14:00:00+00:00');
+    expect(stages([moving, scripted])).toEqual({ 1: 'in_transit', 2: 'pending' });
+    expect(serve([moving, scripted]).find(({ id }) => id === '2')?.description).toBe('Delivered');
+    expect(stages([moving, stored('3', 'returned', '2026-11-21T14:00:00+00:00')])).toEqual({ 1: 'in_transit', 3: 'pending' });
+    // A delivery 22 minutes ahead is a clock running fast, and one its carrier re-dated keeps its stage.
+    expect(stages([moving, stored('4', 'delivered', '2026-11-19T13:00:00+00:00')])).toEqual({ 1: 'in_transit', 4: 'delivered' });
+    const retimed = stored('5', 'delivered', '2026-11-21T14:00:00+00:00', { retimed_from: '2026-11-19 10:00' });
+    expect(stages([moving, retimed])).toEqual({ 1: 'in_transit', 5: 'delivered' });
+    expect(JSON.stringify(serve([moving, retimed]))).not.toContain('retimed_from');
+    expect(JSON.stringify(withoutEventSources({ id: 'parcel', tracking_events: [retimed] }))).not.toContain('retimed_from');
+  });
+
   it('leaves packages without scans untouched', () => {
     const row = { id: 'parcel', carrier: 'swiss-post', tracking_events: [] };
     expect(withEventPlaces(row)).toBe(row);

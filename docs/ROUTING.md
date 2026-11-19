@@ -1123,7 +1123,9 @@ answer moves its rows. Nor does a scan dated over an hour after its check set th
 status line or stage, then or once its time has passed: the sync stores and flags it
 (`future_event_timestamp`) and takes both from the answer's newest other scan
 ([futureScans.ts](../src/server/futureScans.ts)). With no other scan, the answer gives neither: a new parcel
-waits for its first scan, and one on its way keeps its own. A stored row the carrier re-dated later
+waits for its first scan, and one on its way keeps its own. Such a row in a delivery or return
+(a step written ahead) is served in its words but in no stage, so no app takes it for the parcel's
+current step or its delivery ([eventPlaces.ts](../src/server/eventPlaces.ts)). A stored row the carrier re-dated later
 (`retimed_from`) is not such a scan. Nor does it hold the watermark: one it set,
 capped at the check, or at its own time once that has passed, comes back to the newest other scan.
 An answer set aside as older (a delivery partner's own newest scan before the earlier carrier's) keeps

@@ -3,7 +3,7 @@ title: Tracciamento YWE (YanwenExpress): numero, stati e aiuto
 description: Traccia un pacco YWE (YanwenExpress) negli Stati Uniti: formato del numero YWE a 17 caratteri, significato delle scansioni fino a casa e chi contattare.
 slug: tracciamento-ywe
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 YWE (YanwenExpress, gestito da Yanwen Express LLC) è un corriere di consegna dell’ultimo miglio negli Stati Uniti: porta i pacchi dai propri hub statunitensi fino alla porta del destinatario per negozi online, rivenditori e marketplace. I suoi codici sono formati dalle lettere YWE seguite da 14 cifre: incolla il tuo nel riquadro qui sopra, oppure cercalo sul portale di tracciamento di YWE su [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ Nella pagina istituzionale YWE dichiara di essere partita a Los Angeles nel 2024
 
 ## Pacco YWE non consegnato o tracciamento fermo
 
-**`NOT_FOUND`.** Il portale di YWE mostra questo codice quando non ha scansioni associate al numero cercato ed elenca le possibili ragioni: il pacco non è ancora stato accettato o scansionato, il codice è errato oppure la spedizione risale a così tanto tempo fa che i dati non sono più disponibili. Su peektracker.com Peek mostra «In attesa di YWE» e continua a verificare. Ricontrolla il codice nel messaggio del venditore: YWE seguito da 14 cifre. Se dopo alcuni giorni non compare nulla, chiedi al negozio se l’ordine è stato effettivamente spedito.
+**`NOT_FOUND`.** Il portale di YWE mostra questo codice quando non ha scansioni associate al numero cercato ed elenca le possibili ragioni: il pacco non è ancora stato accettato o scansionato, il codice è errato oppure la spedizione risale a così tanto tempo fa che i dati non sono più disponibili. Peek mostra «In attesa di YWE» e continua a verificare. Ricontrolla il codice nel messaggio del venditore: YWE seguito da 14 cifre. Se dopo alcuni giorni non compare nulla, chiedi al negozio se l’ordine è stato effettivamente spedito.
 
 **Fermo su `Shipping Order Created.`** YWE ha ricevuto i dati elettronici dell’ordine ma non ha ancora il pacco. Poiché YWE registra la prima scansione nel proprio hub negli Stati Uniti, chiedi al venditore dove si trovi adesso la merce e quando sia partita. Se proviene dalla Cina verso gli Stati Uniti, leggi [tracciare un pacco dalla Cina](guide:tracking-from-china).
 

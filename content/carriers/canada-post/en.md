@@ -3,7 +3,7 @@ title: Canada Post tracking: numbers, statuses and notice cards
 description: Track a Canada Post parcel: where the tracking number is, what Canada Post's statuses mean, notice cards and pickup deadlines, missing parcels and customs.
 slug: canada-post-tracking
 published: 2026-10-15
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Canada Post is the Canada Post Corporation, the federal Crown corporation that runs Canada's postal service. Track a parcel on Canada Post's [Track page](https://www.canadapost-postescanada.ca/track-reperage/en) or in its free app, or paste the number in the box above. The number comes from the sender, usually in the shop's shipping email: Canada Post can't find a parcel by your name or address. If it ends in `CA` and you follow the parcel from outside Canada, Peek can also ask your country's post with the same number.
@@ -116,7 +116,7 @@ Long flights, customs and weekends often leave a gap between scans. Peek keeps a
 
 ### Why can't Peek find my Canada Post tracking number?
 
-Canada Post gives the same answer whether a number is unknown, not scanned yet or expired, so on a Canada Post parcel Peek shows "Waiting for Canada Post" on peektracker.com while it waits for the first scan. If Canada Post still gives that answer two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Track's usual reasons: the parcel isn't with Canada Post yet or is still abroad, it was shipped more than a year ago, or the service has no tracking. Check every digit: in a 16-digit number the last one is a check digit, and in a postal number the last digit before `CA` is.
+Canada Post gives the same answer whether a number is unknown, not scanned yet or expired, so on a Canada Post parcel Peek shows "Waiting for Canada Post" while it waits for the first scan. If Canada Post still gives that answer two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Track's usual reasons: the parcel isn't with Canada Post yet or is still abroad, it was shipped more than a year ago, or the service has no tracking. Check every digit: in a 16-digit number the last one is a check digit, and in a postal number the last digit before `CA` is.
 
 ### Can I track a Canada Post parcel with the notice card number?
 

@@ -3,7 +3,7 @@ title: R+L Carriers tracking: PRO numbers, statuses and claims
 description: Track an R+L Carriers freight shipment in the US: what a PRO number looks like, what each tracing line means and what to do if freight is late or damaged.
 slug: rl-carriers-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 R+L Carriers is a freight carrier in the United States. In Peek's code, it picks the freight up from the shipper, moves it from terminal to terminal and delivers it from the destination terminal. If a large order or other freight is coming to you with R+L, you track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. R+L's own tracer is the shipment tracing page on rlcarriers.com: it takes a PRO number or a pickup request ID, up to 25 numbers at a time, and with a MyRLC account, other reference numbers too.
@@ -51,7 +51,7 @@ This page gives no delivery times, delivery appointments, attempts or rules for 
 
 ## R+L Carriers shipment not found, late, damaged or lost
 
-**Not found.** For a PRO it doesn't know, R+L's tracer answers `No records found for Number:` followed by the PRO with an `I` in front. Peek then shows "Waiting for R+L Carriers" on peektracker.com for a PRO filed under R+L Carriers, and asks again later. Check each digit against the shop's email. If the number is right, ask the shipper whether R+L has picked the freight up.
+**Not found.** For a PRO it doesn't know, R+L's tracer answers `No records found for Number:` followed by the PRO with an `I` in front. Peek then shows "Waiting for R+L Carriers" for a PRO filed under R+L Carriers, and asks again later. Check each digit against the shop's email. If the number is right, ask the shipper whether R+L has picked the freight up.
 
 **A digit is wrong.** For a PRO whose check digit doesn't add up, R+L's tracer answers with the PRO followed by `Pro number failed check digit validation.` Peek then shows "Check the tracking number". Compare the number, digit by digit, with the shop's email or the shipping papers.
 

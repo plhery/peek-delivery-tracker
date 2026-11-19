@@ -3,7 +3,7 @@ title: Seguimento Lingdong International: número SZLD e estados
 description: Segue a tua encomenda Lingdong International (领东国际) desde Shenzhen: formato do número SZLD, significado de cada etapa, entrega local e alfândega.
 slug: seguimento-lingdong
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A Lingdong International (领东国际, firma completa 深圳市领东国际货运代理有限公司, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) é um transitário de Shenzhen, na China, que envia para o estrangeiro encomendas de vendedores online chineses. Os seus números de seguimento começam por SZLD: cola o teu na caixa acima ou escreve-o no campo 快件查询 (consulta de envios) em lingdong56.com, que abre a página de seguimento da Lingdong. É a loja onde compraste que contrata o envio e te indica o número nos dados de expedição da encomenda.
@@ -65,7 +65,7 @@ Para encomendas extra-UE apresentadas à alfândega em **Portugal** pelos CTT, o
 
 **Apenas `货物电子信息已经收到`.** A loja registou o envio, mas o pacote ainda não deu entrada no armazém da Lingdong. Se passarem vários dias sem novidades, pergunta ao vendedor se já o entregou de facto.
 
-**Nada encontrado.** Para um número que desconhece, a página de seguimento da Lingdong apresenta uma linha com esse número como referência e todas as outras colunas vazias. O Peek interpreta essa resposta como uma encomenda registada ainda sem leituras: continua a verificar e mostra em peektracker.com «À espera de Lingdong International», sem te pedir para reveres o número. Por isso, confere tu mesmo o código carácter a carácter com a mensagem da loja.
+**Nada encontrado.** Para um número que desconhece, a página de seguimento da Lingdong apresenta uma linha com esse número como referência e todas as outras colunas vazias. O Peek interpreta essa resposta como uma encomenda registada ainda sem leituras: continua a verificar e mostra «À espera de Lingdong International», sem te pedir para reveres o número. Por isso, confere tu mesmo o código carácter a carácter com a mensagem da loja.
 
 **Perdida, danificada ou devolvida.** A Lingdong não publica qualquer processo de reclamação para destinatários: a sua página de condições de transporte (运输条款) está em branco. O site tem um botão de chat para encomendas com problemas, indemnizações e queixas, mas quem tem contrato com a Lingdong é o vendedor: pede à loja ou ao marketplace o reembolso ou um novo envio. Vê [encomenda perdida](guide:lost-parcel) e [encomenda devolvida ao remetente](guide:returned-to-sender).
 

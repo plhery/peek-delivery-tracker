@@ -3,7 +3,7 @@ title: Kun Express tracking: KUN numbers, statuses and USPS
 description: Track a Kun Express parcel from China: what the KUN number looks like, what each status means, when USPS takes over and who to ask when it stalls.
 slug: kun-express-tracking
 published: 2026-10-21
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Kun Express (鲲辰, Hangzhou Kunchen Cross-border Supply Chain Management Co., Ltd.) is a forwarder in Hangzhou, China, that flies parcels for online sellers to the United States, Canada and Europe. On its US line, USPS delivers them. Its numbers start with KUN: type yours in the search box on [kun-express.com](https://www.kun-express.com/en), which opens Kun Express's tracking page, or in the box above. The shop that sold you the item gives the number with its shipping details.
@@ -61,7 +61,7 @@ Kun Express publishes no rules for recipients on delivery attempts, notice cards
 
 **How long it takes.** Kun Express gives no delivery time for its USPS line. It tells sellers that over 98% of parcels on its Canada line arrive within 12 calendar days, and that on its "DHL/UPS US virtual warehouse" service 70% arrive within 7 calendar days and over 98% within 10. These are sales figures, not a date for your order.
 
-**Nothing found.** Peek takes the answer Kun Express's tracker gives for a number it doesn't know as Kun Express listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Kun Express" on peektracker.com, with no request to check the number. So compare the number with the seller's message yourself: KUN and 10 digits.
+**Nothing found.** Peek takes the answer Kun Express's tracker gives for a number it doesn't know as Kun Express listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Kun Express", with no request to check the number. So compare the number with the seller's message yourself: KUN and 10 digits.
 
 **No update.** Kun Express's record shows USPS's scans only once it has copied them, so the latest USPS step can be missing. If the shop gave you a USPS number, check USPS's tracking too. More in [why tracking stops updating](guide:tracking-not-updating).
 

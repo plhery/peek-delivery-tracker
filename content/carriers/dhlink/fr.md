@@ -3,7 +3,7 @@ title: Suivi colis DHLink : numéro DHgate, statuts et livraison
 description: Suis ton colis DHLink d'une commande DHgate : quels numéros le suivi accepte, ce que veulent dire les statuts en anglais, qui livre chez toi et qui contacter.
 slug: dhlink-suivi
 published: 2026-11-14
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DHLink (驼飞侠) est la plateforme logistique transfrontalière de DHgate (敦煌网). Fondée en 2014, elle expédie les commandes des vendeurs DHgate et d'autres clients depuis la Chine ou depuis ses entrepôts à l'étranger, puis les confie à un transporteur dans ton pays pour le dernier kilomètre. Colle ton numéro dans le champ ci-dessus ou saisis-le sur la [page de suivi de DHLink](https://www.dhlink.com/trackQuery?lang=en). Tu trouveras ce numéro dans le détail de ta commande DHgate ; sinon, demande-le au vendeur.
@@ -64,7 +64,7 @@ Une fois le transporteur local et son numéro identifiés, son propre suivi donn
 
 ## Colis DHLink bloqué, introuvable ou marqué livré sans rien recevoir
 
-**Numéro introuvable.** Vérifie le numéro dans ta commande DHgate et essaie le numéro de suivi (*Tracking No.*) plutôt que le numéro `FC` de DHLink. Un numéro du transporteur final ne donne rien sur le site de DHLink : cherche-le directement chez ce transporteur. Si tu as choisi DHLink avec « Changer » pour un numéro que DHLink ne connaît pas, Peek affiche sur peektracker.com « En attente de DHLink » et continue de demander. Si deux jours plus tard DHLink ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
+**Numéro introuvable.** Vérifie le numéro dans ta commande DHgate et essaie le numéro de suivi (*Tracking No.*) plutôt que le numéro `FC` de DHLink. Un numéro du transporteur final ne donne rien sur le site de DHLink : cherche-le directement chez ce transporteur. Si tu as choisi DHLink avec « Changer » pour un numéro que DHLink ne connaît pas, Peek affiche « En attente de DHLink » et continue de demander. Si deux jours plus tard DHLink ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
 
 **Suivi figé après le vol ou la douane.** Regarde si un « Last Leg No. » est apparu et interroge le suivi du transporteur local, souvent plus à jour que celui de DHLink. Voir aussi [pourquoi un suivi ne bouge plus](guide:tracking-not-updating) et [suivre un colis venu de Chine](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: Border Express tracking: consignment numbers and statuses
 description: Track a Border Express (BEX) parcel in Australia: what its consignment numbers and label barcodes look like, what each status means and how Peek follows it.
 slug: border-express-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Border Express, or BEX, is a carrier that Peek's catalog lists in Australia only. If an online shop sent your order with Border Express, the number to track is its consignment number: paste it in the box above. The shop gives it in its shipping email or on your order page. Border Express's own tracker is Quick Track on BEX Online, at bexonline.borderexpress.com.au. Peek couldn't check Border Express's website for this page, so what follows is what Peek's code knows about that tracker.
@@ -46,7 +46,7 @@ This page gives no rules for delivery attempts, cards, safe drop, collecting fro
 
 ## Border Express parcel not updating, lost or delivered but not received
 
-**Number not found.** Until Border Express's tracker lists the number, a parcel filed under Border Express shows "Waiting for Border Express" on peektracker.com, and Peek keeps checking. If Border Express still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shop's email: 8 digits, or 4 letters and 5 to 8 digits. If nothing comes after a few days, ask the shop whether the parcel was really sent.
+**Number not found.** Until Border Express's tracker lists the number, a parcel filed under Border Express shows "Waiting for Border Express", and Peek keeps checking. If Border Express still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shop's email: 8 digits, or 4 letters and 5 to 8 digits. If nothing comes after a few days, ask the shop whether the parcel was really sent.
 
 **Stuck on "Label created".** Border Express has the parcel's details but no dated scan yet. Its tracker may show `Picked Up` without a time, which Peek leaves out, so look there first. If it still says only `Shipment Data Received`, ask the shop when it handed the parcel over.
 

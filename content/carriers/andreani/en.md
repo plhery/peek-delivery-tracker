@@ -3,7 +3,7 @@ title: Andreani tracking: Argentina parcel numbers and statuses
 description: Track an Andreani parcel in Argentina: what its 15-digit numbers look like, what its Spanish tracking lines mean in English, and what to do when it stops moving.
 slug: andreani-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Andreani is a parcel carrier in Argentina. Peek's catalog lists it in Argentina and Brazil, also as Correo Andreani and Grupo Logístico Andreani. If you bought something online, the shop may send it with Andreani: the tracking number is in the shop's shipping email or on your order page. Paste the number, or an andreani.com tracking link, in the box above. Andreani's own tracker is on andreani.com. Peek reads that tracker, and this page explains each step in English.
@@ -61,7 +61,7 @@ Peek couldn't read Andreani's website, so this page gives no delivery times, no 
 
 **Only `Pendiente de ingreso`.** The sender has created the shipment but hasn't handed the parcel to Andreani yet. Peek shows "Label created". Ask the shop if it has sent your order.
 
-**No result at all.** Andreani's tracker may not know the number yet. Filed under Andreani, the parcel shows "Waiting for Andreani" on peektracker.com, and Peek keeps asking. If nothing comes after a few days, check the number with the shop. See [why tracking stops updating](guide:tracking-not-updating).
+**No result at all.** Andreani's tracker may not know the number yet. Filed under Andreani, the parcel shows "Waiting for Andreani", and Peek keeps asking. If nothing comes after a few days, check the number with the shop. See [why tracking stops updating](guide:tracking-not-updating).
 
 **Quiet for days.** When the newest line is four days old or more and the parcel is still at "Label created", "Received by carrier" or "In transit", Peek flags it: "No tracking update for four days". Parcels often go quiet over a weekend. If nothing changes, ask the shop.
 

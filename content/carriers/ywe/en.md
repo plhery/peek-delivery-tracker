@@ -3,7 +3,7 @@ title: YWE (YanwenExpress) tracking: numbers, scans and who to ask
 description: Track a YWE (YanwenExpress) parcel in the United States: what a YWE number looks like, what each scan means from hub to door, and who to ask.
 slug: ywe-tracking
 published: 2026-10-31
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 YWE (YanwenExpress, run by Yanwen Express LLC) is a last-mile delivery company in the United States: it brings parcels from its hubs to your door for online shops, retailers and marketplaces. Its numbers are YWE and 14 digits: paste yours in the box above, or in YWE's own tracker at [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ YWE says it started in Los Angeles in 2024 and plans to cover most of the United
 
 ## YWE parcel not arriving or tracking stuck
 
-**`NOT_FOUND`.** YWE's tracker shows this for a number it has no scans for, and lists possible causes: the parcel hasn't been accepted or scanned yet, the number is wrong, or it was posted so long ago that its tracking is gone. Peek shows "Waiting for YWE" on peektracker.com and keeps checking. Check the number against the seller's message: YWE and 14 digits. If nothing comes after a few days, ask the seller whether the parcel was sent.
+**`NOT_FOUND`.** YWE's tracker shows this for a number it has no scans for, and lists possible causes: the parcel hasn't been accepted or scanned yet, the number is wrong, or it was posted so long ago that its tracking is gone. Peek shows "Waiting for YWE" and keeps checking. Check the number against the seller's message: YWE and 14 digits. If nothing comes after a few days, ask the seller whether the parcel was sent.
 
 **Stuck on `Shipping Order Created.`** YWE has the delivery's details, not the parcel. YWE first scans a parcel at its US hub, so ask the seller where the parcel is now and when it was sent. If it was shipped from China, see [tracking a parcel from China](guide:tracking-from-china).
 

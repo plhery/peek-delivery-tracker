@@ -3,7 +3,7 @@ title: Seguimento JD Logistics: códigos JD, estados e contactos
 description: Segue uma encomenda da JD Logistics (京东物流): formatos JD e VG, significado dos estados em inglês e chinês, armazéns na Europa, alfândega e apoio ao cliente.
 slug: seguimento-jd-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A JD Logistics (京东物流, Jingdong Logistics) é o ramo de logística do grupo JD.com, cotado na Bolsa de Hong Kong (`HKEX: 2618`). Fora da China opera sob as marcas JoyLogistics e JoyExpress: expede mercadorias guardadas por vendedores nos seus armazéns em **França**, na **Alemanha**, nos **Países Baixos**, na **Polónia**, no **Reino Unido**, nos **Estados Unidos** ou na **Austrália**, e transporta encomendas de comércio eletrónico a partir da **China**. Podes seguir o envio em inglês no [rastreador internacional da JD Logistics](https://www.jingdonglogistics.com/Tracking) ou colar o código na caixa acima. O código é fornecido pela loja que expediu a encomenda.
@@ -64,7 +64,7 @@ As regras do serviço expresso internacional da JD Logistics a partir da **China
 
 ## Encomenda da JD Logistics sem atualização, atrasada ou devolvida
 
-**Ainda sem resultados.** Se o rastreador da JD ainda não encontrar nada sob o número, confirma-o com o vendedor. Em peektracker.com, o Peek mostra «À espera de JD Logistics» e continua a verificar; se ao fim de dois dias continuar desconhecido, surge «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.».
+**Ainda sem resultados.** Se o rastreador da JD ainda não encontrar nada sob o número, confirma-o com o vendedor. O Peek mostra «À espera de JD Logistics» e continua a verificar; se ao fim de dois dias continuar desconhecido, surge «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.».
 
 **Sem atualizações durante vários dias.** Quando uma encomenda em viagem passa quatro dias sem novas leituras, o Peek assinala «Sem atualizações há quatro dias», lembra que é habitual ficar sem novidades em voos longos, na alfândega ou ao fim de semana e mostra uma ligação «Pede ajuda a JD Logistics» para a página de contactos da JD (ou para a transportadora local quando uma parceira como a GOFO já assumiu a entrega). Mais informações em [porque é que o seguimento não atualiza](guide:tracking-not-updating) e [seguir encomendas vindas da China](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: JD Logistics tracking: JD numbers, statuses and contact
 description: Track a JD Logistics (京东物流) parcel: what JD and VG numbers look like, what JD's tracking steps mean, who delivers in the US and how to reach JD.
 slug: jd-logistics-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) is JD.com's logistics business, itself listed in Hong Kong. Abroad it works under the brands JoyLogistics and JoyExpress: it ships sellers' stock from its warehouses in the US, the UK, Australia and other countries, and carries parcels from China for online sellers. Track a parcel on [JD's international tracker](https://www.jingdonglogistics.com/Tracking), in English, or paste the number in the box above. The number comes from the shop that shipped your order.
@@ -59,7 +59,7 @@ JD's pages don't say how many delivery attempts the local carrier makes, or wher
 
 ## JD Logistics parcel not updating, lost or returned
 
-**Nothing yet.** If JD's tracker finds nothing under the number, check it with the seller. Peek shows "Waiting for JD Logistics" on peektracker.com and keeps checking.
+**Nothing yet.** If JD's tracker finds nothing under the number, check it with the seller. Peek shows "Waiting for JD Logistics" and keeps checking.
 
 **No update for days.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet on long flights, at customs or over a weekend, and adds a "Get help from JD Logistics" link to JD's contact page (once GOFO has taken over, "Get help from GOFO Express" and GOFO's customer service page). More in [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

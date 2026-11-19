@@ -3,7 +3,7 @@ title: Suivi China Post : numéro, statuts chinois et livraison
 description: Suivre un colis China Post : à quoi ressemble un numéro en CN, ce que veulent dire les statuts en chinois et qui le livre en France, en Belgique ou en Suisse.
 slug: china-post-suivi
 published: 2026-10-22
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 China Post, c'est la poste nationale chinoise, une entreprise publique, et EMS est sa marque express. Si ta commande AliExpress, Temu, Shein ou d'une autre boutique a un numéro de suivi qui finit par `CN`, c'est China Post qui l'a créé, et chez toi c'est la poste nationale qui livre le colis sous ce même numéro : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique, [La Poste suisse](carrier:swiss-post) en Suisse. Suis-le sur ems.com.cn, le site de China Post, sur celui de ta poste une fois le colis arrivé, ou dans le champ ci-dessus. Le numéro est dans les détails d'expédition de ta commande, sur le site de la boutique.
@@ -70,7 +70,7 @@ Pour un passage manqué, lis aussi [colis non livré, avis de passage](guide:mis
 
 ## Suivi China Post qui ne bouge plus, colis perdu ou renvoyé
 
-**Pas encore de scan.** China Post n'affiche rien tant qu'elle n'a pas scanné le colis ; avant, la boutique a seulement créé l'étiquette. Demande-lui quand elle l'a remis. En attendant, Peek affiche sur peektracker.com « En attente de China Post ». Si deux jours plus tard China Post n'affiche toujours rien pour ce numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
+**Pas encore de scan.** China Post n'affiche rien tant qu'elle n'a pas scanné le colis ; avant, la boutique a seulement créé l'étiquette. Demande-lui quand elle l'a remis. En attendant, Peek affiche « En attente de China Post ». Si deux jours plus tard China Post n'affiche toujours rien pour ce numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout.
 
 **Plus rien depuis le départ de Chine.** Entre l'avion et le premier scan de ta poste, plusieurs jours peuvent passer sans nouvelles. Cherche le même numéro sur le site de ta poste. Un numéro qui commence par U peut n'avoir aucun scan chez toi. Voir aussi [pourquoi un suivi ne bouge plus](guide:tracking-not-updating) et [suivre un colis venu de Chine](guide:tracking-from-china).
 

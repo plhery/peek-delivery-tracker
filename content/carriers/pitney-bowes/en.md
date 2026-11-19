@@ -3,7 +3,7 @@ title: Pitney Bowes tracking: UPAA, UPBE and PBX numbers explained
 description: Track a Pitney Bowes parcel, such as an eBay order sent abroad: what UPAA, UPBE and PBX numbers look like, what its tracker's lines mean and who delivers it.
 slug: pitney-bowes-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Pitney Bowes ships parcels to other countries: in Peek's code, its numbers belong to eBay parcels from the United States and the United Kingdom, and to its other parcels going abroad. In the histories Peek's code holds, the parcel goes through a Pitney Bowes shipping centre, then on to the buyer's country, where a partner, such as that country's post, delivers it. The number starts with UPAA, UPBE or PBX and comes from the seller or the marketplace: paste it in the box above. Pitney Bowes's own tracker is at trackpb.shipment.co.
@@ -78,7 +78,7 @@ Peek couldn't read Pitney Bowes's website, so this page has no list of its partn
 
 ## Pitney Bowes parcel not updating, lost or returned
 
-**Nothing yet.** For a number it doesn't know, or a parcel whose history has expired, Pitney Bowes's tracker gives the answer it gives when it can't read a parcel. Peek can't tell that from an outage: it asks tracking services, and if none has the parcel, it shows "Waiting for Pitney Bowes" on peektracker.com, and from the second check on, the parcel's page says "Pitney Bowes couldn’t be reached yet. Peek keeps trying." It keeps checking. Check the number against the table above. If nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Nothing yet.** For a number it doesn't know, or a parcel whose history has expired, Pitney Bowes's tracker gives the answer it gives when it can't read a parcel. Peek can't tell that from an outage: it asks tracking services, and if none has the parcel, it shows "Waiting for Pitney Bowes", and from the second check on, the parcel's page says "Pitney Bowes couldn’t be reached yet. Peek keeps trying." It keeps checking. Check the number against the table above. If nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Package not received by Hub or First Mile Carrier yet`.** The seller has made the label, but neither Pitney Bowes's shipping centre nor the carrier bringing the parcel there has scanned it. Ask the seller when they sent it.
 

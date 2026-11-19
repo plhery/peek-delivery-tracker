@@ -3,7 +3,7 @@ title: Shouwu tracking: numero SWECN…YQ, stati e chi consegna
 description: Tracking Shouwu International (守务国际) per i pacchi dalla Cina: com'è fatto il numero SWECN…YQ, cosa vogliono dire gli stati e chi consegna in Italia.
 slug: shouwu-tracking
 published: 2026-10-31
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Shouwu International (守务国际, anche SWE) è un'azienda di logistica di Shanghai che spedisce in Europa e negli Stati Uniti i pacchi dei venditori online cinesi: a destinazione li consegna una posta o un corriere locale. In Italia, secondo Shouwu, l'ultimo tratto lo fanno UniUni o Poste Italiane, e il tempo di riferimento è di 10-12 giorni lavorativi; nelle cronologie lette da Peek compare anche iMile. Il venditore sceglie quale numero darti: quello di Shouwu, che inizia con SWECN e finisce con YQ, o quello del corriere. Incolla l'uno o l'altro nel box qui sopra, o il numero Shouwu nel suo tracking, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Il numero te lo dà il negozio, nei dettagli di spedizione dell'ordine.
@@ -32,7 +32,7 @@ Il tracking di Shouwu è in inglese, sotto un titolo in cinese. Per ogni pacco d
 
 | Stato di Shouwu | Cosa vuol dire per te | Peek mostra |
 | --- | --- | --- |
-| `Not Found` | Shouwu non ha ancora niente con quel numero: «We seem can't identify the number.» | «In attesa di Shouwu International» (su peektracker.com) |
+| `Not Found` | Shouwu non ha ancora niente con quel numero: «We seem can't identify the number.» | «In attesa di Shouwu International» |
 | `Preparing` | Secondo Shouwu il pacco è stato consegnato al suo magazzino in Cina, o lì viene pesato e sigillato. Può comparire prima ancora delle scansioni. | «Etichetta creata», poi «Preso in carico» dopo il ritiro da parte del partner o una scansione del magazzino |
 | `In Transit` | Tutto il viaggio, dal passaggio a un vettore fino alla dogana e al trasporto nel Paese di arrivo. | «In transito», oppure la fase dell'ultima scansione, come «In dogana»; «Etichetta creata» finché ci sono solo i dati dell'ordine e `Carrier received the shipment` |
 | `Undelivered` | Un tentativo di consegna non è riuscito. | «Tentativo di consegna», oppure «Pronto per il ritiro» o «Restituito al mittente» se lo dice l'ultima scansione |
@@ -103,7 +103,7 @@ Il tracking di Shouwu non indica né il nome né il numero del corriere, oltre a
 
 ## Pacco Shouwu fermo o che non arriva
 
-**`Not Found`.** Shouwu dà quattro motivi: non ha ancora accettato il pacco, non l'ha ancora scansionato, il numero è sbagliato, oppure il pacco è partito così tanto tempo fa che il tracking non c'è più. Aggiunge che di solito la lavorazione richiede qualche giorno. Peek mostra su peektracker.com «In attesa di Shouwu International» e continua a controllare. Se dopo due giorni Shouwu non riconosce ancora il numero e nessun'altra fonte risponde per quel numero, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Controlla il numero carattere per carattere; se dopo qualche giorno non compare niente, chiedi al venditore.
+**`Not Found`.** Shouwu dà quattro motivi: non ha ancora accettato il pacco, non l'ha ancora scansionato, il numero è sbagliato, oppure il pacco è partito così tanto tempo fa che il tracking non c'è più. Aggiunge che di solito la lavorazione richiede qualche giorno. Peek mostra «In attesa di Shouwu International» e continua a controllare. Se dopo due giorni Shouwu non riconosce ancora il numero e nessun'altra fonte risponde per quel numero, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Controlla il numero carattere per carattere; se dopo qualche giorno non compare niente, chiedi al venditore.
 
 **Fermo su `Preparing`, `Shipment information received` o `Carrier received the shipment`.** Shouwu non ha ancora il pacco, oppure non l'ha ancora fatto partire dal magazzino. Chiedi al venditore quando l'ha affidato a Shouwu.
 

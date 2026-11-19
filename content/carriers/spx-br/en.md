@@ -3,7 +3,7 @@ title: SPX Express Brazil tracking: Shopee orders and statuses
 description: Track an SPX Express parcel from a Shopee order in Brazil: where to follow it, what BR numbers and SPX's Portuguese statuses mean, Agência Shopee pickup and refunds.
 slug: spx-express-brazil-tracking
 published: 2026-10-26
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 *Leia em português:* [rastreio da SPX Express, status, prazos e reembolso](https://peektracker.com/pt-br/carriers/rastreio-spx-express). SPX Express (Shopee Xpress) is Shopee's own logistics network in Brazil. It collects orders from sellers and brings them to your door or to an Agência Shopee, a partner shop where you pick parcels up. Shopee calls the service Entrega Padrão (standard delivery), and says you track it in the Shopee app, where the order, its delivery date and any refund live. spx.com.br has a tracking box too, or you can paste the number in the box above.
@@ -101,7 +101,7 @@ Shopee says you can't contact the carrier directly about tracking or delivery: S
 
 Peek reads the same tracking spx.com.br does and shows the status, SPX's own lines (in Portuguese, a few in English), the place SPX gives for scans at its centres, hubs and ports, and the delivery time. It also shows some lines SPX's page hides, such as `Seu pedido chegou ao último centro logístico` (it reached the last logistics centre) or a failed pickup at the seller's ("Label created"). When the failed pickup comes after `Pedido postado …`, it was at the drop-off point: the parcel stays there and Peek shows "Received by carrier". There's no expected delivery date, weight, pickup point or delivering partner, and Peek drops the name of whoever took the parcel. The order, its keyword, the Agência PIN and refunds stay in the Shopee app.
 
-While SPX doesn't know the number yet, Peek shows "Waiting for SPX Express Brazil" on peektracker.com and keeps checking. If SPX still doesn't know it two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If the parcel is still on its way and 4 days pass without a new scan, Peek shows "Get help from SPX Express Brazil", which opens Shopee's Customer Service hours page.
+While SPX doesn't know the number yet, Peek shows "Waiting for SPX Express Brazil" and keeps checking. If SPX still doesn't know it two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. If the parcel is still on its way and 4 days pass without a new scan, Peek shows "Get help from SPX Express Brazil", which opens Shopee's Customer Service hours page.
 
 Peek checks up to every 10 minutes, or every 2 from 6 a.m. local time on the day SPX scans the parcel out for delivery, while SPX's own tracker answers (through tracking services, every 15 minutes). It can notify you with "Every scan", "Important steps" or "Delivery only". It can't contact SPX or Shopee for you.
 

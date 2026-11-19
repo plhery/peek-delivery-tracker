@@ -3,7 +3,7 @@ title: Rastreio JRT: número JRT…MM, voos, alfândega e DHL
 description: Seguir uma encomenda JRT (今日通, Jinritong) desde Xiamen: como é o número JRT…MM, o que significam os passos em chinês e inglês e quem entrega na Europa e nos EUA.
 slug: jrt-rastreio
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A JRT (今日通, Jinritong) é a 厦门今日通商贸有限公司, um transitário sediado em Xiamen, na China. Se uma loja chinesa enviou a tua encomenda pela JRT, deu-te um número de seguimento que começa por JRT e termina em MM: cola-o na caixa acima. O site de seguimento da JRT acompanha a encomenda desde a China, passando pelo voo e pela alfândega, até à transportadora responsável pela entrega final, cujas leituras copia: nos envios para a Europa, o histórico termina na DHL, e nos envios para os Estados Unidos, na UPS. Na linha da JRT para a Irlanda cujo nome de serviço inclui a FedEx, a entrega passa antes para a FedEx; na linha para Espanha, para a CTT Express; na linha para a Polónia, para a InPost; e na linha para o México, para a J&T Express México.
@@ -102,7 +102,7 @@ Nos envios para a Europa, as linhas próprias da JRT estão na hora de Pequim (U
 
 **Nada depois de `已交服务商`, `Delivery to final service provider` ou `已交仓`.** A parte da JRT terminou. Se o seguimento não copiar as leituras da DHL, da UPS, da FedEx ou da J&T Express México nem o Peek mostrar o número da DHL ou da FedEx, os passos seguintes estão no seguimento da transportadora final: pede esse número ao vendedor. Vê também [porque é que o tracking não atualiza](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 
-**Nada encontrado.** Para um número que desconhece, o site da JRT devolve um único resultado com o número como referência e todas as restantes colunas vazias. O Peek interpreta essa resposta como um envio registado pela JRT ainda sem leitura: mostra «À espera de JRT» em peektracker.com e continua a verificar, sem pedir que confirmes o número (ou «À espera do primeiro registo de JRT» numa referência UP deixada à deteção automática). Compara tu próprio o número com a mensagem da loja, carácter a carácter.
+**Nada encontrado.** Para um número que desconhece, o site da JRT devolve um único resultado com o número como referência e todas as restantes colunas vazias. O Peek interpreta essa resposta como um envio registado pela JRT ainda sem leitura: mostra «À espera de JRT» e continua a verificar, sem pedir que confirmes o número (ou «À espera do primeiro registo de JRT» numa referência UP deixada à deteção automática). Compara tu próprio o número com a mensagem da loja, carácter a carácter.
 
 **Morada não encontrada.** Se surgir `not delivered-bad address`, revê a morada da encomenda e avisa imediatamente o vendedor. Se vier a seguir `shipment will be returned to origin-bad address`, a encomenda está a voltar para trás: pede o reembolso ou novo envio ao vendedor.
 

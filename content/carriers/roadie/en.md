@@ -3,7 +3,7 @@ title: Roadie tracking: 1R numbers, statuses and delivery photos
 description: Track a Roadie same-day or next-day delivery: what a 1R tracking number looks like, what each tracker step means, the delivery photo and who to contact.
 slug: roadie-tracking
 published: 2026-10-31
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Roadie, a UPS company, runs same-day and local deliveries across the United States with a network of independent drivers. Roadie emails you when the delivery is booked, then sends an email, a text or both with a tracking link once a driver has picked it up. Paste the number or that link in the box above, or open it on Roadie's tracker at track.roadie.com.
@@ -87,7 +87,7 @@ Have the tracking number ready. For a refund, a replacement or a new delivery da
 
 [Peek](/) names Roadie at once from a number of either shape: `1R` and 14 digits or letters a to f, or `1R` and 26 letters or digits. Links from track.roadie.com work too: `/id/…`, `/track/…` and `/track?tracking_number=…`, also with a partner's name in front.
 
-Peek reads Roadie's own tracker and shows its steps in Roadie's words, as in the table above. It can also show the driver's progress, such as `Driver at pickup` or `Driver approaching delivery`; once the driver is approaching or at your address, the delivery shows as "Out for delivery". Roadie gives no place for a step, so there's no map, and Peek doesn't show the estimated delivery time. Until Roadie knows the number, Peek shows "Waiting for Roadie" on peektracker.com. When Roadie's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the delivery, in that service's words.
+Peek reads Roadie's own tracker and shows its steps in Roadie's words, as in the table above. It can also show the driver's progress, such as `Driver at pickup` or `Driver approaching delivery`; once the driver is approaching or at your address, the delivery shows as "Out for delivery". Roadie gives no place for a step, so there's no map, and Peek doesn't show the estimated delivery time. Until Roadie knows the number, Peek shows "Waiting for Roadie". When Roadie's tracker doesn't answer Peek, Peek asks tracking services instead, ParcelsApp, Ship24 and 17TRACK in turn, and shows the history of the first one that has the delivery, in that service's words.
 
 Peek doesn't show the delivery photo, the driver or anything else behind Roadie's ZIP code lock: "Open the Roadie website" on the parcel's page opens Roadie's tracker for your number. If a tracking service filled in, that link goes to the service's page instead, such as "Open the ParcelsApp website": for the photo, open track.roadie.com yourself.
 

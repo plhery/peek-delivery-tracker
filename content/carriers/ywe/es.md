@@ -3,7 +3,7 @@ title: Seguimiento YWE (YanwenExpress): número, estados y ayuda
 description: Sigue un paquete de YWE (YanwenExpress) en Estados Unidos: formato del número YWE, qué significa cada escaneo del centro a tu puerta y a quién acudir.
 slug: seguimiento-ywe
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 YWE (YanwenExpress, operado por Yanwen Express LLC) es una empresa de reparto de última milla en Estados Unidos: lleva paquetes desde sus centros logísticos estadounidenses hasta la puerta del destinatario para tiendas online, comercios y mercados electrónicos. Sus números están formados por las letras YWE y 14 dígitos: pega el tuyo en el cuadro de arriba o consúltalo en el localizador propio de YWE en [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ En su página corporativa, YWE señala que comenzó en Los Ángeles en 2024 y qu
 
 ## El paquete de YWE no llega o el seguimiento no avanza
 
-**`NOT_FOUND`.** El localizador de YWE enseña este aviso cuando no tiene registros para el número consultado y detalla las causas posibles: el paquete aún no ha sido admitido ni escaneado, el número está mal escrito o el envío es tan antiguo que el seguimiento ya no se conserva. En peektracker.com, Peek muestra «Esperando a YWE» y sigue consultando. Revisa el código frente al mensaje del vendedor: YWE y 14 dígitos. Si pasan varios días sin novedades, pregunta a la tienda si llegó a enviarlo.
+**`NOT_FOUND`.** El localizador de YWE enseña este aviso cuando no tiene registros para el número consultado y detalla las causas posibles: el paquete aún no ha sido admitido ni escaneado, el número está mal escrito o el envío es tan antiguo que el seguimiento ya no se conserva. Peek muestra «Esperando a YWE» y sigue consultando. Revisa el código frente al mensaje del vendedor: YWE y 14 dígitos. Si pasan varios días sin novedades, pregunta a la tienda si llegó a enviarlo.
 
 **Detenido en `Shipping Order Created.`** YWE tiene los datos electrónicos de la orden, pero no el paquete físico. Como YWE hace su primer escaneo al recibir la mercancía en su centro de Estados Unidos, pregunta al vendedor dónde está ahora el envío y cuándo salió. Si partió desde China hacia Estados Unidos, revisa [seguimiento de un paquete desde China](guide:tracking-from-china).
 

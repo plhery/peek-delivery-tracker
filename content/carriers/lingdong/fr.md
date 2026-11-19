@@ -3,7 +3,7 @@ title: Suivi Lingdong International : numéro SZLD et statuts
 description: Suis ton colis Lingdong International (领东国际) depuis Shenzhen : format du numéro SZLD, sens de chaque étape, relais final et frais de douane à l'arrivée.
 slug: suivi-lingdong
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 Lingdong International (领东国际, de son nom complet 深圳市领东国际货运代理有限公司, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) est un transitaire installé à Shenzhen, en Chine, qui expédie à l'étranger les commandes de vendeurs en ligne chinois. Ses propres numéros commencent par SZLD : colle le tien dans le champ ci-dessus ou saisis-le dans la case 快件查询 (recherche d'envoi) sur lingdong56.com, qui ouvre le site de suivi de Lingdong. C'est la boutique où tu as commandé qui réserve l'envoi et te transmet ce numéro avec les détails d'expédition.
@@ -69,7 +69,7 @@ Lingdong n'indique pas quelle société assure le dernier kilomètre sur chaque 
 
 **Uniquement `货物电子信息已经收到`.** La boutique a créé l'ordre d'expédition, mais le colis n'est pas encore entré à l'entrepôt de Lingdong. Si rien ne bouge après plusieurs jours, demande au vendeur s'il l'a bien remis.
 
-**Aucun résultat réel.** Pour un numéro qu'il ne connaît pas, le site de suivi de Lingdong affiche une ligne portant ce numéro comme référence et laisse toutes les autres colonnes vides. Peek interprète cette réponse comme un envoi enregistré sans scan pour l'instant : il continue de vérifier et affiche « En attente de Lingdong International » sur peektracker.com, sans te demander de corriger le numéro. Compare donc toi-même le numéro caractère par caractère avec le message du vendeur.
+**Aucun résultat réel.** Pour un numéro qu'il ne connaît pas, le site de suivi de Lingdong affiche une ligne portant ce numéro comme référence et laisse toutes les autres colonnes vides. Peek interprète cette réponse comme un envoi enregistré sans scan pour l'instant : il continue de vérifier et affiche « En attente de Lingdong International », sans te demander de corriger le numéro. Compare donc toi-même le numéro caractère par caractère avec le message du vendeur.
 
 **Perdu, endommagé ou retourné.** Lingdong ne publie aucune procédure de réclamation pour les destinataires : sa page de conditions de transport (运输条款) est vide. Son site comporte un bouton de discussion pour les colis à problème, demandes d'indemnisation et plaintes, mais c'est le vendeur qui détient le contrat de transport avec Lingdong : adresse-toi à la boutique ou à la marketplace pour un remboursement ou un nouvel envoi. Voir [colis perdu](guide:lost-parcel) et [colis retourné à l'expéditeur](guide:returned-to-sender).
 

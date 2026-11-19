@@ -3,7 +3,7 @@ title: ZTO Express tracking: 中通快递 numbers, statuses, contact
 description: Track a ZTO Express (中通快递) parcel in China: what its numbers look like, what 已签收 and ZTO's other steps mean, where parcels wait and how to reach ZTO.
 slug: zto-express-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 ZTO Express (中通快递, Zhongtong) is a Chinese express company founded in Shanghai on 8 May 2002; in 2025 it handled 38.52 billion parcels. A ZTO number usually belongs to a parcel inside China, often an online order (ZTO has carried Taobao's since 2008) on its way to a forwarder's warehouse or to an address in China. Track it on [ZTO's tracker](https://www.zto.com/check), which is in Chinese, or in the box above. Parcels the group sends abroad go with [ZTO International](carrier:zto-international), which has its own 771 numbers and its own tracker.
@@ -58,7 +58,7 @@ From ZTO's FAQ:
 
 ## ZTO parcel not updating, lost or returned
 
-**Nothing yet.** If ZTO's tracker finds nothing under the number, check it with the seller. Meanwhile, a parcel filed under ZTO Express shows "Waiting for ZTO Express" on peektracker.com; one filed under no carrier, "No tracking history yet".
+**Nothing yet.** If ZTO's tracker finds nothing under the number, check it with the seller. Meanwhile, a parcel filed under ZTO Express shows "Waiting for ZTO Express"; one filed under no carrier, "No tracking history yet".
 
 **No update.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet and adds a "Get help from ZTO Express" link to ZTO's contact page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

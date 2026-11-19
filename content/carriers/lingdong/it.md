@@ -3,7 +3,7 @@ title: Tracciamento Lingdong International: numero SZLD e stati
 description: Traccia un pacco Lingdong International (领东国际) da Shenzhen: com'è fatto il numero SZLD, cosa significa ogni stato, Poste Italiane e costi doganali.
 slug: tracciamento-lingdong
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 Lingdong International (领东国际, ragione sociale completa 深圳市领东国际货运代理有限公司, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) è uno spedizioniere di Shenzhen, in Cina, che invia all'estero gli ordini dei venditori online cinesi. I suoi numeri di tracciamento iniziano con SZLD: incolla il tuo nel riquadro qui sopra oppure inseriscilo nella casella 快件查询 (ricerca spedizioni) su lingdong56.com, che apre la pagina di tracciamento di Lingdong. È il negozio da cui hai acquistato a prenotare la spedizione e a comunicarti il numero nei dettagli dell'ordine.
@@ -67,7 +67,7 @@ Per le spedizioni extra-UE sdoganate da **Poste Italiane** in Italia su cui rest
 
 **Solo `货物电子信息已经收到`.** Il negozio ha creato la spedizione, ma il pacco non è ancora entrato nel magazzino di Lingdong. Se dopo diversi giorni non compare altro, chiedi al venditore se lo ha effettivamente spedito.
 
-**Nessun risultato reale.** Per un codice sconosciuto, la pagina di tracciamento di Lingdong mostra una riga con quel codice come riferimento e tutte le altre colonne vuote. Peek interpreta questa risposta come un ordine registrato ma ancora senza scansioni: continua a controllare e su peektracker.com mostra «In attesa di Lingdong International», senza chiederti di verificare il numero. Confrontalo quindi tu stesso carattere per carattere con il messaggio del negozio.
+**Nessun risultato reale.** Per un codice sconosciuto, la pagina di tracciamento di Lingdong mostra una riga con quel codice come riferimento e tutte le altre colonne vuote. Peek interpreta questa risposta come un ordine registrato ma ancora senza scansioni: continua a controllare e mostra «In attesa di Lingdong International», senza chiederti di verificare il numero. Confrontalo quindi tu stesso carattere per carattere con il messaggio del negozio.
 
 **Smarrimento, danni o reso.** Lingdong non pubblica alcuna procedura di reclamo per i destinatari: la sua pagina delle condizioni di trasporto (运输条款) è vuota. Sul sito c'è un pulsante di chat per spedizioni problematiche, richieste di risarcimento e reclami, ma il contratto di trasporto con Lingdong fa capo al venditore: chiedi al negozio o al marketplace il rimborso o una nuova spedizione. Consulta [pacco perso](guide:lost-parcel) e [pacco restituito al mittente](guide:returned-to-sender).
 

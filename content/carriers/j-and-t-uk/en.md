@@ -3,7 +3,7 @@ title: J&T Express UK tracking: JTUK numbers and statuses
 description: Track a J&T Express UK parcel: what a JTUK number looks like, what each tracking line means, and what to do when your parcel is late, lost or not delivered.
 slug: jt-express-uk-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 J&T Express UK delivers parcels in the United Kingdom. If a shop sent your order with J&T, the tracking number starts with `JTUK`: paste it in the box above, or look it up on J&T's own tracker at www.jtexpress.uk/tracking. The shop that sent your order has the number, in its shipping email or on your order page. Peek couldn't read J&T Express UK's website, so this page rests on what Peek's code knows about J&T's tracker and on official UK sources.
@@ -60,7 +60,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 **Not moving.** A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek ("No tracking update for four days"). If nothing moves after that, ask the shop. See [why tracking stops updating](guide:tracking-not-updating).
 
-**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express UK" on peektracker.com. Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
+**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express UK". Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 
 **Delivered, but nothing came.** Check around your door, with your household and with neighbours. Then tell the shop: under that law the parcel stays at its risk until you, or someone you named, have it, so ask it for a refund or a new parcel. More in [delivered but not received](guide:delivered-not-received).
 
@@ -80,7 +80,7 @@ Start with the shop: it booked the delivery with J&T. For a marketplace order, u
 
 Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows them in your device's time zone, in summer as in winter; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. Scans come in J&T's English. J&T gives no place, expected delivery day or weight, so Peek shows no map. J&T's tracker can show proof of delivery; Peek leaves it out. On a very long history it keeps the newest 100 scans. "Open the J&T Express UK website", on the parcel's page, opens your number on J&T's tracker.
 
-Until J&T scans the parcel, Peek keeps asking and shows "Waiting for J&T Express UK" on peektracker.com (or, if J&T still doesn't know the number two days later, a request to check it). When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
+Until J&T scans the parcel, Peek keeps asking and shows "Waiting for J&T Express UK" (or, if J&T still doesn't know the number two days later, a request to check it). When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words.
 
 Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 
@@ -100,7 +100,7 @@ The courier couldn't deliver because the address was missing something or didn't
 
 ### Why is my J&T tracking number not found?
 
-Check that it starts with `JTUK` and has 12 digits after it: numbers from J&T's other networks, such as `JTDE` in Germany, aren't the UK's. If the number is right, J&T may not have the parcel yet, and peektracker.com shows "Waiting for J&T Express UK". If J&T still doesn't know the number two days later and nothing else has answered for it, the site asks you to check it, choose another carrier or delete the parcel. If J&T still has no record after several days, ask the shop.
+Check that it starts with `JTUK` and has 12 digits after it: numbers from J&T's other networks, such as `JTDE` in Germany, aren't the UK's. If the number is right, J&T may not have the parcel yet, and Peek shows "Waiting for J&T Express UK". If J&T still doesn't know the number two days later and nothing else has answered for it, Peek asks you to check it, choose another carrier or delete the parcel. If J&T still has no record after several days, ask the shop.
 
 ### How do I contact J&T Express UK?
 

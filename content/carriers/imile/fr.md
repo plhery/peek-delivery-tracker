@@ -3,7 +3,7 @@ title: Suivi colis iMile : numéro, statuts et livraison
 description: Suis un colis iMile en France, en Belgique ou en Suisse : format du numéro, sens des statuts en anglais, déroulement de la livraison et comment joindre iMile.
 slug: imile-suivi
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 iMile est une société de livraison pour le commerce en ligne fondée à Dubaï en 2017. Elle achemine des colis transfrontaliers, notamment depuis la Chine, assure le dédouanement et gère le dernier kilomètre avec ses propres livreurs dans certains pays. Suis ton numéro sur la [page de suivi d'iMile](https://www.imile.com/en/track) ou colle-le dans le champ ci-dessus. Le numéro vient de la boutique, dans le détail d'expédition de ta commande.
@@ -66,7 +66,7 @@ La page de suivi d'iMile comporte une vue de preuve de livraison qui demande de 
 
 ## Colis iMile qui ne bouge plus, perdu ou renvoyé
 
-**Aucun suivi pour l'instant.** Tant que seule la ligne `Order submitted, pending to receive.` apparaît, le vendeur a créé l'ordre d'expédition mais n'a peut-être pas encore remis le colis à iMile. Demande à la boutique quand il est parti. Si tu as choisi iMile avec « Changer » pour un numéro qu'iMile ne connaît pas encore, Peek affiche sur peektracker.com « En attente de iMile » ; si deux jours plus tard iMile ne connaît toujours pas ce numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine après sept jours.
+**Aucun suivi pour l'instant.** Tant que seule la ligne `Order submitted, pending to receive.` apparaît, le vendeur a créé l'ordre d'expédition mais n'a peut-être pas encore remis le colis à iMile. Demande à la boutique quand il est parti. Si tu as choisi iMile avec « Changer » pour un numéro qu'iMile ne connaît pas encore, Peek affiche « En attente de iMile » ; si deux jours plus tard iMile ne connaît toujours pas ce numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine après sept jours.
 
 **Suivi figé plusieurs jours.** Un colis venu de Chine reste souvent silencieux entre le décollage, la douane et le premier centre dans le pays d'arrivée. Voir [suivre un colis venu de Chine](guide:tracking-from-china) et [pourquoi un suivi ne bouge plus](guide:tracking-not-updating).
 

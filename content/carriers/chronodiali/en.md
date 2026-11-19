@@ -3,7 +3,7 @@ title: Chronodiali tracking: CHPU numbers, statuses and contact
 description: Track a Chronodiali parcel in Morocco: the CHPU number, its French statuses in plain English, cash on delivery, three delivery attempts and contacts.
 slug: chronodiali-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Chronodiali (also written Chrono Diali) is a Moroccan delivery company for online shops, a joint venture of Barid Al-Maghrib (Poste Maroc) and Geopost. It delivers e-commerce parcels across Morocco, to your door or to one of its agencies. If the shop chose cash on delivery, you pay the courier when the parcel arrives, in cash or by bank card. Track it under "Suivre mon colis" on [chronodiali.ma](https://chronodiali.ma/suivi_colis.html) or in the box above. The number comes from the shop that sent the parcel; Chronodiali's own example starts with `CHPU`.
@@ -95,7 +95,7 @@ A `CD` number of 10 digits doesn't tell Peek the carrier. Paste it all the same:
 
 Peek reads Chronodiali's own tracking: the status, each line as Chronodiali writes it (in French, sometimes in English, as the two lines above), the hub's name as the place where there is one, the destination country and the delivery time. Peek shows the times in your device's time zone. It leaves out the sender's name and yours, the towns, the amount to pay, the proof of delivery and the courier's calls. Chronodiali's tracking gives no expected delivery date and no weight. The lines about a partner company don't name the partner, and Peek doesn't follow the partner's own tracking.
 
-If Chronodiali doesn't know the number yet, Peek shows "Waiting for Chronodiali" on peektracker.com and keeps checking. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Chronodiali scans the parcel out for delivery, while Chronodiali's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't pay, rebook a delivery or contact Chronodiali or the shop for you.
+If Chronodiali doesn't know the number yet, Peek shows "Waiting for Chronodiali" and keeps checking. Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day Chronodiali scans the parcel out for delivery, while Chronodiali's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". It can't pay, rebook a delivery or contact Chronodiali or the shop for you.
 
 ## Questions about Chronodiali tracking
 

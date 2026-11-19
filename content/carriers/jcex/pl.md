@@ -3,7 +3,7 @@ title: JCEX śledzenie przesyłki: numer JCZ, statusy, kto doręcza
 description: Paczka JCEX z Chin: jak wygląda numer JCZ, co znaczą statusy po angielsku i chińsku, kto doręcza ją w Polsce i do kogo pisać, gdy utknie.
 slug: jcex-sledzenie
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JCEX (佳成国际, Jiacheng International Logistics) to chińska firma logistyczna z Hangzhou, która wysyła za granicę paczki sprzedawców internetowych, a w kraju odbiorcy przekazuje je przewoźnikowi na ostatni odcinek. Paczkę śledzisz na stronie JCEX, [track.jcex.com](https://track.jcex.com/), albo wklejasz numer w pole powyżej. Numer dostajesz od sklepu, razem z danymi wysyłki zamówienia.
@@ -69,7 +69,7 @@ Czy cło i VAT są już w cenie, czy zapłacisz je przy odbiorze, zależy od skl
 
 **Do kogo się zwrócić.** Klientami JCEX są firmy, które u niego nadają paczki, a nie odbiorcy. JCEX nie publikuje dla odbiorców ani regulaminu, ani drogi reklamacji. Przy spóźnionej, zgubionej, uszkodzonej albo zwróconej paczce pisz więc do sklepu albo platformy, na której kupowałeś: to z nimi masz umowę i to oni mogą oddać pieniądze albo wysłać towar jeszcze raz.
 
-**Brak śledzenia.** Dopóki JCEX nie zeskanuje paczki, a także przy numerze, którego nie zna, jego strona pokazuje kategorię `查询不到` i napis `暂无轨迹详情` (brak szczegółów śledzenia). Peek pokazuje wtedy na peektracker.com „Oczekiwanie na przewoźnika JCEX”. Jeśli z odpowiedzi JCEX wynika, że ma już ten list przewozowy w systemie, tak zostaje do pierwszego skanu, bez prośby o sprawdzenie numeru. Jeśli po dwóch dniach JCEX nadal nie zna numeru, a żadne inne źródło na niego nie odpowiada, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i od tej pory sprawdza paczkę raz dziennie, a gdy minie tydzień od dodania – raz w tygodniu. Jeśli nic się nie zmienia, sprawdź numer u sprzedawcy.
+**Brak śledzenia.** Dopóki JCEX nie zeskanuje paczki, a także przy numerze, którego nie zna, jego strona pokazuje kategorię `查询不到` i napis `暂无轨迹详情` (brak szczegółów śledzenia). Peek pokazuje wtedy „Oczekiwanie na przewoźnika JCEX”. Jeśli z odpowiedzi JCEX wynika, że ma już ten list przewozowy w systemie, tak zostaje do pierwszego skanu, bez prośby o sprawdzenie numeru. Jeśli po dwóch dniach JCEX nadal nie zna numeru, a żadne inne źródło na niego nie odpowiada, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i od tej pory sprawdza paczkę raz dziennie, a gdy minie tydzień od dodania – raz w tygodniu. Jeśli nic się nie zmienia, sprawdź numer u sprzedawcy.
 
 **Bez zmian od dawna.** JCEX nie podaje, po ilu dniach paczka trafia do `运输过久`. Gdy nic się nie dzieje, napisz do sprzedawcy, który może zapytać JCEX. Więcej w poradniku [status przesyłki się nie zmienia](guide:tracking-not-updating).
 

@@ -3,7 +3,7 @@ title: Suivi India Post et Speed Post : numéros, statuts et douane
 description: Suivez un envoi India Post ou Speed Post : format du numéro en IN, sens des statuts, délais, relais postal en France, Belgique, Suisse ou Canada et douane.
 slug: suivi-india-post
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 India Post est le Department of Posts, l'opérateur postal public de l'**Inde**, qui indique compter 164 999 bureaux de poste — le plus vaste réseau postal au monde selon sa présentation officielle. En Inde, il achemine Speed Post, le courrier recommandé et India Post Parcel ; vers l'étranger, l'EMS (International Speed Post), les petits paquets suivis (International Tracked Packet) et les colis aériens. Vous pouvez suivre un envoi sur [indiapost.gov.in](https://www.indiapost.gov.in/), qui demande un CAPTCHA, ou coller son numéro dans le champ ci-dessus. India Post l'appelle *article barcode number* (numéro de code-barres de l'envoi) : pour une commande en ligne, demandez-le au vendeur.
@@ -83,7 +83,7 @@ Sur sa page d'accueil, India Post met en garde contre les faux liens usurpant so
 
 ## Suivre un colis India Post avec Peek
 
-[Peek](/) reconnaît deux lettres, neuf chiffres et `IN` comme un numéro India Post lorsque le chiffre de contrôle est exact, et affiche « Transporteur détecté » ; le bouton « Changer » permet d'en choisir un autre. Si le chiffre de contrôle ne tombe pas juste (par exemple `EE482910577IN`), Peek signale « Le chiffre de contrôle de ce numéro ne correspond pas. » : vérifiez le numéro reçu ou choisissez « Suivre tel quel ». Enregistré sous India Post, un envoi affiche « En attente de India Post » sur peektracker.com jusqu'au premier scan.
+[Peek](/) reconnaît deux lettres, neuf chiffres et `IN` comme un numéro India Post lorsque le chiffre de contrôle est exact, et affiche « Transporteur détecté » ; le bouton « Changer » permet d'en choisir un autre. Si le chiffre de contrôle ne tombe pas juste (par exemple `EE482910577IN`), Peek signale « Le chiffre de contrôle de ce numéro ne correspond pas. » : vérifiez le numéro reçu ou choisissez « Suivre tel quel ». Enregistré sous India Post, un envoi affiche « En attente de India Post » jusqu'au premier scan.
 
 Peek n'interroge pas directement le portail d'India Post : il lit les scans d'India Post via MySpeedPost, un site de suivi externe au domaine d'India Post qui les récupère auprès d'India Post (ou via track91).
 

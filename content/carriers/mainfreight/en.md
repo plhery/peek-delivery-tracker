@@ -3,7 +3,7 @@ title: Mainfreight tracking: consignment numbers and statuses
 description: Track a Mainfreight consignment in New Zealand, Australia or the US: what its numbers look like, what each status means and what to do when freight is late.
 slug: mainfreight-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Mainfreight moves freight by road, air and sea. Peek's catalog lists it for New Zealand (its home), Australia and the United States; its tracker also covers road freight in Europe and container moves. To track freight or a large item coming to you with Mainfreight, paste the consignment number from whoever booked it in the box above. Mainfreight's own tracker is on www.mainfreight.com.
@@ -86,7 +86,7 @@ Elsewhere, see [parcels held at customs](guide:customs), and ask whoever booked 
 
 ## Mainfreight freight late, stuck, damaged or lost
 
-**Nothing yet.** A shipment you've filed under Mainfreight that its tracker doesn't list yet shows "Waiting for Mainfreight" on peektracker.com while Peek keeps asking. Pasted 11 digits that no carrier has answered for show "No tracking history yet". Check the digits, and ask the sender whether Mainfreight has picked the freight up.
+**Nothing yet.** A shipment you've filed under Mainfreight that its tracker doesn't list yet shows "Waiting for Mainfreight" while Peek keeps asking. Pasted 11 digits that no carrier has answered for show "No tracking history yet". Check the digits, and ask the sender whether Mainfreight has picked the freight up.
 
 **Not moving.** After four days without a new step, a shipment showing "Label created", "Received by carrier" or "In transit" gets a flag ("No tracking update for four days"). Ask the shop or the sender why. See [tracking that isn't updating](guide:tracking-not-updating).
 

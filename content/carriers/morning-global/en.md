@@ -3,7 +3,7 @@ title: Morning Global tracking: BR…MG numbers, statuses, contact
 description: Track a Morning Global parcel from Hong Kong or China: what its numbers look like, what each status means, who delivers it near you and who to contact.
 slug: morning-global-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Morning Global (MG), founded in 1987, is the international arm of Morning Express Group, a Hong Kong courier group. It ships parcels abroad for online shops and marketplaces, has offices in Hong Kong and across mainland China, and usually hands your parcel to a partner in your country for the delivery. Track the number the shop gives you on Morning Global's [Trace & Track page](https://www.morninglobal.com/trace-track/), in English, or paste it in the box above.
@@ -67,7 +67,7 @@ With `Handed Over for Delivery`, Morning Global hands the parcel to the partner 
 
 Morning Global's customers are the shops that book it. For a late, lost, damaged or returned parcel, contact the shop or the marketplace first.
 
-**Not found yet.** If Peek doesn't know the carrier yet but the number is in Morning Global's BR…MG shape, Peek says "Probably Morning Global" and shows "Waiting for Morning Global’s first scan" while it keeps asking. A BR…MG number that also passes the check digit postal numbers carry gets neither: Peek asks Morning Global and Chronopost, and names the one that knows the number. For a parcel already filed under Morning Global, it shows "Waiting for Morning Global" on peektracker.com. If nothing comes after a week, check the number with the shop.
+**Not found yet.** If Peek doesn't know the carrier yet but the number is in Morning Global's BR…MG shape, Peek says "Probably Morning Global" and shows "Waiting for Morning Global’s first scan" while it keeps asking. A BR…MG number that also passes the check digit postal numbers carry gets neither: Peek asks Morning Global and Chronopost, and names the one that knows the number. For a parcel already filed under Morning Global, it shows "Waiting for Morning Global". If nothing comes after a week, check the number with the shop.
 
 **Stuck at `Order Created`.** The shop has booked the shipment but hasn't handed the parcel over yet. Ask the shop when it will.
 

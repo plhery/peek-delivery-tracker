@@ -3,7 +3,7 @@ title: JS Express tracking: JSE…YQ numbers, scans and who delivers
 description: Track a JS Express (急速国际) parcel from China: what a JSE…YQ number looks like, what its scans mean and who delivers it in the US, Canada and beyond.
 slug: js-express-tracking
 published: 2026-10-30
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JS Express (急速国际, also JS EXP) is a Chinese logistics company for cross-border online shops, run by 急创速供应链管理（苏州）有限公司 in Suzhou. If a shop sent your order with JS Express, its number starts with JSE and ends with YQ: paste it in the box above. JS Express gets the parcel out of China and a courier in your country delivers it: its history shows USPS, GOFO or SpeedX in the United States, Straightship in Canada, Yodel in the UK, DHL, iMile or J&T Express in Germany, Colissimo in France and CTT Express in Spain, and FedEx on some lines.
@@ -81,7 +81,7 @@ Delivery attempts, notice cards and pickup points follow the local courier's rul
 
 ## JS Express parcel not arriving or tracking stuck
 
-**"未获取到任何数据,请提供有效单号!"** JS Express's English page answers this, in Chinese, for a number it doesn't know: "no data found, please give a valid waybill number". `No track data for now!` means no scans yet. Peek shows "Waiting for JS Express" on peektracker.com for both and keeps checking. If JS Express still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number character by character; if nothing comes after a few days, ask the seller whether the parcel was sent.
+**"未获取到任何数据,请提供有效单号!"** JS Express's English page answers this, in Chinese, for a number it doesn't know: "no data found, please give a valid waybill number". `No track data for now!` means no scans yet. Peek shows "Waiting for JS Express" for both and keeps checking. If JS Express still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number character by character; if nothing comes after a few days, ask the seller whether the parcel was sent.
 
 **Stuck on `Electronic notification of order creation received.`** JS Express hasn't collected the parcel yet. Ask the shop when it was handed over.
 

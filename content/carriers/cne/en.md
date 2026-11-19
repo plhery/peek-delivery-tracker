@@ -3,7 +3,7 @@ title: CNE Express tracking: 3A5V numbers, statuses and contact
 description: Track a CNE Express (递一物流) parcel from China: what a 3A5V number looks like, what CNE's statuses mean, who delivers it near you and who to ask.
 slug: cne-express-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 CNE Express (递一物流, CNE EXPRESS CO LTD) is a cross-border logistics company in Shanghai, China, founded in 2003. It ships parcels abroad for online sellers, including sellers on eBay, Walmart, TikTok, Temu and SHEIN, flies them out of China and hands them to a partner in your country for the last stretch. Track the number on [CNE's tracker](https://www.cne.com/en/track), in English, or paste it in the box above. The seller booked CNE and gives you the number with your order's shipping details.
@@ -78,7 +78,7 @@ CNE publishes no rules for delivery attempts, notice cards or pickup points: tho
 
 CNE's customers are the sellers who book it: for a late, lost, damaged or returned parcel, contact the seller or the marketplace first.
 
-**Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for CNE Express" on peektracker.com and keeps checking. `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
+**Nothing yet.** If CNE's tracker finds nothing, CNE has no record of the number yet: Peek shows "Waiting for CNE Express" and keeps checking. `Not delivered` means the parcel hasn't been sent yet (未发送 on CNE's Chinese page); Peek then shows the newest line's status, such as "Label created" for `Parcel Infomation Received`. If nothing changes after a few days, check the number with the seller.
 
 **No update for days.** When a parcel still on its way has had no new line for four days, Peek flags it ("No tracking update for four days") and notes that parcels often go quiet on long flights, at customs or over a weekend. While Peek follows the parcel on CNE's tracker, the note adds a "Get help from CNE Express" link to CNE's Contact us page. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: JS Express śledzenie przesyłki: numer JSE, statusy
 description: Śledź przesyłkę JS Express (急速国际) z Chin: jak wygląda numer JSE…YQ, co oznaczają angielskie statusy, kto doręcza paczkę w Polsce i jak działa odprawa celna.
 slug: js-express-sledzenie
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JS Express (急速国际, także JS EXP) to chińska firma logistyczna obsługująca zagraniczne sklepy internetowe, prowadzona w Suzhou przez spółkę 急创速供应链管理（苏州）有限公司. Jeśli sprzedawca wysłał Twoje zamówienie przez JS Express, numer śledzenia zaczyna się od JSE i kończy na YQ: wklej go w pole powyżej. JS Express wyprowadza paczkę z Chin do kraju docelowego, a doręczenie pod drzwi przejmuje lokalny przewoźnik.
@@ -79,7 +79,7 @@ Próby doręczenia, awiza oraz terminy odbioru w punkcie lub placówce zależą 
 
 ## Przesyłka JS Express stoi w miejscu, utknęła na cle albo nie dotarła
 
-**`未获取到任何数据,请提供有效单号!`** Angielska strona JS Express odpowiada tym zdaniem po chińsku, gdy nie zna numeru („nie pobrano żadnych danych, podaj prawidłowy numer listu przewozowego”). `No track data for now!` oznacza brak skanów. W obu sytuacjach Peek pokazuje „Oczekiwanie na przewoźnika JS Express” na peektracker.com i sprawdza dalej. Jeśli po dwóch dniach JS Express nadal nie rozpoznaje numeru i żaden inny serwis go nie potwierdzi, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a Peek przechodzi na sprawdzanie raz dziennie i – po tygodniu od dodania – raz w tygodniu. Porównaj numer znak po znaku z wiadomością ze sklepu; jeśli po kilku dniach nic się nie pojawi, zapytaj sprzedawcę, czy na pewno nadał paczkę.
+**`未获取到任何数据,请提供有效单号!`** Angielska strona JS Express odpowiada tym zdaniem po chińsku, gdy nie zna numeru („nie pobrano żadnych danych, podaj prawidłowy numer listu przewozowego”). `No track data for now!` oznacza brak skanów. W obu sytuacjach Peek pokazuje „Oczekiwanie na przewoźnika JS Express” i sprawdza dalej. Jeśli po dwóch dniach JS Express nadal nie rozpoznaje numeru i żaden inny serwis go nie potwierdzi, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a Peek przechodzi na sprawdzanie raz dziennie i – po tygodniu od dodania – raz w tygodniu. Porównaj numer znak po znaku z wiadomością ze sklepu; jeśli po kilku dniach nic się nie pojawi, zapytaj sprzedawcę, czy na pewno nadał paczkę.
 
 **Zatrzymana na `Electronic notification of order creation received.`** JS Express nie odebrał jeszcze paczki od nadawcy. Zapytaj sklep, kiedy przekazał ją do magazynu.
 

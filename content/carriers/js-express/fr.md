@@ -3,7 +3,7 @@ title: Suivi colis JS Express : numéro JSE, statuts et livraison
 description: Suivre un colis JS Express (急速国际) venu de Chine : le numéro JSE…YQ, ce que veulent dire ses scans et qui livre en France, en Belgique et en Suisse.
 slug: js-express-suivi
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JS Express (急速国际, aussi JS EXP) est une société logistique chinoise destinée aux boutiques en ligne transfrontalières, exploitée à Suzhou par 急创速供应链管理（苏州）有限公司. Si un vendeur a expédié ta commande avec JS Express, ton numéro commence par JSE et finit par YQ : colle-le dans le champ ci-dessus. JS Express achemine le colis hors de Chine jusqu'à ton pays, puis un transporteur local prend le relais ; en France, son suivi reprend parfois en français les scans de [Colissimo](carrier:la-poste).
@@ -91,7 +91,7 @@ Les passages, avis de passage et délais de garde suivent les règles du transpo
 
 ## Colis JS Express bloqué, en retard ou pas arrivé
 
-**`未获取到任何数据,请提供有效单号!`** La page anglaise de JS Express répond cette phrase en chinois lorsqu'elle ne connaît pas le numéro (« aucune donnée trouvée, veuillez fournir un numéro de bordereau valide »). `No track data for now!` signifie qu'il n'y a pas encore de scan. Dans les deux cas, Peek affiche « En attente de JS Express » sur peektracker.com et continue de vérifier. Si JS Express ne reconnaît toujours pas ce numéro deux jours plus tard et qu'aucun autre service n'a répondu pour lui, le site affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. », puis Peek vérifie une fois par jour, et une fois par semaine sept jours après l'ajout. Compare le numéro caractère par caractère avec celui de la boutique ; si rien ne bouge après quelques jours, demande au vendeur s'il a bien remis l'envoi.
+**`未获取到任何数据,请提供有效单号!`** La page anglaise de JS Express répond cette phrase en chinois lorsqu'elle ne connaît pas le numéro (« aucune donnée trouvée, veuillez fournir un numéro de bordereau valide »). `No track data for now!` signifie qu'il n'y a pas encore de scan. Dans les deux cas, Peek affiche « En attente de JS Express » et continue de vérifier. Si JS Express ne reconnaît toujours pas ce numéro deux jours plus tard et qu'aucun autre service n'a répondu pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. », puis Peek vérifie une fois par jour, et une fois par semaine sept jours après l'ajout. Compare le numéro caractère par caractère avec celui de la boutique ; si rien ne bouge après quelques jours, demande au vendeur s'il a bien remis l'envoi.
 
 **Bloqué sur `Electronic notification of order creation received.`** JS Express n'a pas encore réceptionné le colis. Demande à la boutique quand elle l'a confié au transitaire.
 

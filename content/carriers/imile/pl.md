@@ -3,7 +3,7 @@ title: Śledzenie iMile: numery, statusy i dostawa w Polsce
 description: Śledź przesyłkę iMile w Polsce: jak wygląda numer, co oznaczają angielskie statusy, kto doręcza paczki i jak skontaktować się z iMile, gdy paczka utknie.
 slug: imile-sledzenie
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 iMile to firma kurierska obsługująca handel internetowy, założona w Dubaju w 2017 roku. Przewozi paczki między krajami, między innymi z Chin, zajmuje się odprawą celną, a w Polsce ma własną spółkę z siedzibą w Bielanach Wrocławskich. Wpisz swój numer na [stronie śledzenia iMile](https://www.imile.com/en/track) albo wklej go w polu powyżej. Numer dostaniesz od sklepu w szczegółach wysyłki zamówienia.
@@ -62,7 +62,7 @@ Inne powody nieudanej próby wpisywane przez kurierów obok `User not at home`: 
 
 ## Paczka iMile nie aktualizuje się, zaginęła lub wraca
 
-**Jeszcze bez historii.** Dopóki widnieje tylko `Order submitted, pending to receive.`, sprzedawca wygenerował zlecenie, ale mógł jeszcze nie przekazać paczki. Zapytaj sklep, kiedy ją nadał. Jeśli dla numeru nieznanego jeszcze w iMile wybierzesz iMile przyciskiem „Zmień”, Peek pokaże na peektracker.com „Oczekiwanie na przewoźnika iMile”; gdy po dwóch dniach iMile nadal nie zna numeru i żadne inne źródło dla niego nie odpowiada, Peek wyświetli „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i będzie sprawdzał paczkę raz dziennie, a po tygodniu od dodania – raz w tygodniu.
+**Jeszcze bez historii.** Dopóki widnieje tylko `Order submitted, pending to receive.`, sprzedawca wygenerował zlecenie, ale mógł jeszcze nie przekazać paczki. Zapytaj sklep, kiedy ją nadał. Jeśli dla numeru nieznanego jeszcze w iMile wybierzesz iMile przyciskiem „Zmień”, Peek pokaże „Oczekiwanie na przewoźnika iMile”; gdy po dwóch dniach iMile nadal nie zna numeru i żadne inne źródło dla niego nie odpowiada, Peek wyświetli „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i będzie sprawdzał paczkę raz dziennie, a po tygodniu od dodania – raz w tygodniu.
 
 **Brak zmian przez kilka dni.** Przesyłki z Chin często milkną między wylotem, odprawą celną a pierwszym centrum w Polsce. Wyjaśniamy to w poradnikach [śledzenie paczki z Chin](guide:tracking-from-china) oraz [śledzenie się nie aktualizuje](guide:tracking-not-updating).
 

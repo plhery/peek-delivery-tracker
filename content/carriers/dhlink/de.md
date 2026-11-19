@@ -3,7 +3,7 @@ title: DHLink Sendungsverfolgung: Nummer, Status und Zustellung
 description: Verfolge dein DHLink-Paket von DHgate: welche Nummern das Tracking annimmt, was die englischen Status heißen, wer zustellt und wen du bei Problemen fragst.
 slug: dhlink-sendungsverfolgung
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DHLink (驼飞侠) ist die grenzüberschreitende Logistikplattform von DHgate (敦煌网). Sie wurde 2014 gegründet, verschickt Bestellungen von DHgate-Händlern und anderen Kunden direkt aus China oder aus ihren Auslands-Lagern und übergibt sie im Zielland für die letzte Meile an einen Paketdienst vor Ort. Gib deine Nummer oben ins Feld ein oder prüfe sie auf der [Tracking-Seite von DHLink](https://www.dhlink.com/trackQuery?lang=en). Die Nummer findest du in deiner DHgate-Bestellung; steht dort noch keine, frag den Verkäufer.
@@ -64,7 +64,7 @@ Sobald der lokale Paketdienst und seine Nummer feststehen, liefert dessen eigene
 
 ## DHLink Paket hängt fest, nicht gefunden oder als zugestellt gemeldet
 
-**Nicht gefunden.** Prüfe die Nummer in deiner DHgate-Bestellung und versuche die Sendungsnummer (*Tracking No.*) statt der `FC`-Nummer von DHLink. Eine Nummer des lokalen Zustellers liefert auf DHLinks Seite kein Ergebnis: Such sie direkt bei diesem Paketdienst. Hast du für eine Nummer, die DHLink nicht kennt, über „Ändern“ DHLink gewählt, zeigt Peek auf peektracker.com „Warten auf DHLink“ und prüft weiter. Kennt DHLink die Nummer auch zwei Tage später noch nicht und antwortet auch kein anderer Dienst dafür, zeigt Peek „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und prüft sie ab dann täglich, und wöchentlich, sobald seit dem Hinzufügen eine Woche vergangen ist.
+**Nicht gefunden.** Prüfe die Nummer in deiner DHgate-Bestellung und versuche die Sendungsnummer (*Tracking No.*) statt der `FC`-Nummer von DHLink. Eine Nummer des lokalen Zustellers liefert auf DHLinks Seite kein Ergebnis: Such sie direkt bei diesem Paketdienst. Hast du für eine Nummer, die DHLink nicht kennt, über „Ändern“ DHLink gewählt, zeigt Peek „Warten auf DHLink“ und prüft weiter. Kennt DHLink die Nummer auch zwei Tage später noch nicht und antwortet auch kein anderer Dienst dafür, zeigt Peek „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und prüft sie ab dann täglich, und wöchentlich, sobald seit dem Hinzufügen eine Woche vergangen ist.
 
 **Keine Updates nach Flug oder Zoll.** Schau im Ergebnis nach einer „Last Leg No.“ und prüfe sie beim lokalen Zusteller – dessen Scans sind oft aktueller als die von DHLink. Mehr in [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 

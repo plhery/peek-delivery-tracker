@@ -3,7 +3,7 @@ title: Emirates Post tracking: AE numbers and statuses explained
 description: Track an Emirates Post item sent from or within the UAE: what an AE number looks like, what each status means and how Peek follows it to your country's post.
 slug: emirates-post-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Emirates Post (بريد الإمارات) is the post of the United Arab Emirates; Peek's catalog also knows it as Emirates Post Group. Its postal numbers end in `AE`, and its tracker names the place of most steps: in the UAE and, for an item sent abroad, in the destination country too. Paste the number in the box above, or look it up on Emirates Post's own tracker at emiratespost.ae. Peek couldn't check Emirates Post's website for this page, so what follows is what Peek's code knows about its tracker.
@@ -73,7 +73,7 @@ For an order from a shop, ask the shop first: it booked the delivery. Once your 
 
 ## Track an Emirates Post parcel with Peek
 
-[Peek](/) names Emirates Post at once for two letters, nine digits and `AE` starting with C, E, L or R, when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number, or choose "Track it as typed". A link to Emirates Post's tracker works too: Peek takes the number from it. Filed under Emirates Post, a parcel shows "Waiting for Emirates Post" on peektracker.com until Emirates Post lists it.
+[Peek](/) names Emirates Post at once for two letters, nine digits and `AE` starting with C, E, L or R, when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number, or choose "Track it as typed". A link to Emirates Post's tracker works too: Peek takes the number from it. Filed under Emirates Post, a parcel shows "Waiting for Emirates Post" until Emirates Post lists it.
 
 An `AE` number starting with another letter, or a 13-digit number, isn't Emirates Post's by shape alone. Paste it all the same: Peek follows more than 3,500 carriers. For the `AE` number, Peek shows "Unknown postal carrier" and "Checking tracking services…" and, when no service has the parcel, asks Emirates Post, then shows "Emirates Post has this parcel." if it does. If a service has it, Peek follows it there; in the parcel's first 30 days, later checks can still ask Emirates Post, and Peek moves the parcel there once Emirates Post shows it moving. For 13 digits, or to go straight to Emirates Post's tracker, pick Emirates Post with "Change".
 

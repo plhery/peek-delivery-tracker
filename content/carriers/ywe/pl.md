@@ -3,7 +3,7 @@ title: Śledzenie YWE (YanwenExpress): numer, statusy i pomoc
 description: Śledź przesyłkę YWE (YanwenExpress) w USA: jak wygląda 17-znakowy numer YWE, co oznacza każdy skan od sortowni aż pod drzwi i z kim się skontaktować.
 slug: sledzenie-ywe
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 YWE (YanwenExpress, prowadzony przez spółkę Yanwen Express LLC) to firma kurierska ostatniej mili działająca w Stanach Zjednoczonych: doręcza paczki ze swoich amerykańskich sortowni pod drzwi odbiorców dla sklepów internetowych, sieci handlowych i platform zakupowych. Jej numery składają się z liter YWE oraz 14 cyfr: wklej swój w polu powyżej albo sprawdź go bezpośrednio w wyszukiwarce YWE na stronie [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ Na podstronie o firmie YWE podaje, że wystartowało w Los Angeles w 2024 roku i
 
 ## Paczka YWE nie dociera lub śledzenie utknęło
 
-**`NOT_FOUND`.** Wyszukiwarka YWE pokazuje ten komunikat, gdy nie ma żadnych skanów dla wpisanego numeru, i wylicza możliwe powody: przesyłka nie została jeszcze przyjęta lub zeskanowana, numer zawiera błąd albo nadanie odbyło się tak dawno, że dane wygasły. Na peektracker.com Peek wyświetla „Oczekiwanie na przewoźnika YWE” i sprawdza dalej. Porównaj numer z wiadomością od sprzedawcy: YWE i 14 cyfr. Jeśli po kilku dniach nic się nie pojawi, zapytaj sklep, czy paczka w ogóle wyjechała.
+**`NOT_FOUND`.** Wyszukiwarka YWE pokazuje ten komunikat, gdy nie ma żadnych skanów dla wpisanego numeru, i wylicza możliwe powody: przesyłka nie została jeszcze przyjęta lub zeskanowana, numer zawiera błąd albo nadanie odbyło się tak dawno, że dane wygasły. Peek wyświetla „Oczekiwanie na przewoźnika YWE” i sprawdza dalej. Porównaj numer z wiadomością od sprzedawcy: YWE i 14 cyfr. Jeśli po kilku dniach nic się nie pojawi, zapytaj sklep, czy paczka w ogóle wyjechała.
 
 **Zatrzymana na `Shipping Order Created.`** YWE ma wyłącznie dane elektroniczne zlecenia, a nie samą paczkę. Ponieważ pierwszy fizyczny skan YWE wykonuje dopiero w swoim hubie w USA, dopytaj sprzedawcę, gdzie przesyłka znajduje się obecnie i kiedy została wysłana. Jeśli jedzie z Chin do Stanów Zjednoczonych, sprawdź poradnik [śledzenie paczki z Chin](guide:tracking-from-china).
 

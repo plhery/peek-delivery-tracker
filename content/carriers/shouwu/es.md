@@ -3,7 +3,7 @@ title: Seguimiento Shouwu: número SWECN…YQ, estados y reparto
 description: Rastrea un paquete de Shouwu International (守务国际) desde China: cómo es el número SWECN…YQ, qué significan sus estados y quién lo reparte en España.
 slug: shouwu-seguimiento
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 Shouwu International (守务国际, también abreviado SWE) es un operador logístico de Shanghái que transporta paquetes de tiendas online chinas hacia Europa y Estados Unidos, donde un servicio postal o una mensajería local realiza la entrega final. Si una tienda envió tu pedido con Shouwu, el número empieza por `SWECN` y termina en `YQ`: pégalo en el cuadro de arriba o en el buscador en inglés de Shouwu en [admin.shshouwu.com](https://admin.shshouwu.com/track.html). El número te lo facilita el vendedor junto con los datos de envío de tu pedido; Shouwu no publica ningún canal de atención para destinatarios.
@@ -32,7 +32,7 @@ El portal de seguimiento de Shouwu está en inglés bajo el encabezado en chino 
 
 | Estado de Shouwu | Qué significa para ti | Peek muestra |
 | --- | --- | --- |
-| `Not Found` | Shouwu aún no tiene registros con ese código: «We seem can't identify the number.» | «Esperando a Shouwu International» en peektracker.com |
+| `Not Found` | Shouwu aún no tiene registros con ese código: «We seem can't identify the number.» | «Esperando a Shouwu International» |
 | `Preparing` | Según explica Shouwu en su web, el paquete se ha entregado en su almacén en China o se está pesando y precintando allí. Puede aparecer antes del primer escaneo. | «Etiqueta creada», y después «Admitido por el transportista» tras la recogida del socio o la entrada en almacén |
 | `In Transit` | Abarca todo el trayecto desde la entrega a un transportista hasta el despacho aduanero y el transporte dentro del país de destino. | «En tránsito», o la etapa concreta del último escaneo, como «En aduanas»; se mantiene en «Etiqueta creada» mientras solo consten los datos del pedido y `Carrier received the shipment` |
 | `Undelivered` | Ha fallado un intento de entrega. | «Intento de entrega», o bien «Listo para recoger» o «Devuelto al remitente» si así lo indica el último escaneo |
@@ -102,7 +102,7 @@ En su página corporativa en chino, Shouwu afirma colaborar directamente con USP
 
 ## Paquete de Shouwu que no llega o seguimiento parado
 
-**`Not Found`.** Shouwu enumera cuatro motivos posibles en su buscador: aún no ha aceptado el paquete, todavía no lo ha escaneado, el número introducido es erróneo o el envío se cursó hace tanto tiempo que el registro ya expiró, añadiendo que el procesado inicial suele tardar unos días. En peektracker.com verás «Esperando a Shouwu International» mientras Peek sigue consultando. Si pasados dos días Shouwu sigue sin reconocer el código y ninguna otra fuente responde por él, aparece el aviso «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y las comprobaciones pasan a ser diarias, y semanales cuando se cumple una semana desde que lo añadiste. Revisa el código carácter por carácter y, si no cambia tras varios días, escribe al vendedor.
+**`Not Found`.** Shouwu enumera cuatro motivos posibles en su buscador: aún no ha aceptado el paquete, todavía no lo ha escaneado, el número introducido es erróneo o el envío se cursó hace tanto tiempo que el registro ya expiró, añadiendo que el procesado inicial suele tardar unos días. Verás «Esperando a Shouwu International» mientras Peek sigue consultando. Si pasados dos días Shouwu sigue sin reconocer el código y ninguna otra fuente responde por él, aparece el aviso «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y las comprobaciones pasan a ser diarias, y semanales cuando se cumple una semana desde que lo añadiste. Revisa el código carácter por carácter y, si no cambia tras varios días, escribe al vendedor.
 
 **Parado en `Preparing`, `Shipment information received` o `Carrier received the shipment`.** Shouwu todavía no ha recibido físicamente la mercancía o aún no le ha dado salida desde su almacén en China. Pregunta a la tienda en qué fecha entregó el bulto al operador.
 

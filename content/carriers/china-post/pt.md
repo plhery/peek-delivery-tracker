@@ -3,7 +3,7 @@ title: China Post rastreio: número, estados e entrega em Portugal
 description: Rastreio China Post: como é o número que acaba em CN, o que querem dizer os estados em chinês, quando a encomenda passa para os CTT e porque é que o seguimento para.
 slug: china-post-rastreio
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 A China Post, os Correios da China, é o correio nacional chinês, uma empresa do Estado, e a EMS é a sua marca de correio expresso. Se a tua encomenda do AliExpress, da Temu, da Shein ou de outra loja veio com um número de rastreio que acaba em `CN`, foi a China Post que o criou, e em Portugal quem a entrega são os [CTT](carrier:ctt), com esse mesmo número. Podes segui-la no site da China Post, o ems.com.cn, no Seguir objeto dos CTT depois de chegar a Portugal, ou na caixa acima. O número está nos detalhes de envio da encomenda, na loja onde compraste.
@@ -75,7 +75,7 @@ Numa Encomenda Postal, podes prolongar o prazo em até 30 dias. Se o prazo passa
 
 ## Rastreio China Post parado, perdido ou devolvido
 
-**Ainda sem leituras.** A China Post não mostra nada enquanto não lê a encomenda; antes disso, a loja só criou a etiqueta. Pergunta à loja quando a entregou. Entretanto, o Peek mostra no peektracker.com «À espera de China Post». Se ao fim de dois dias a China Post continuar sem mostrar nada para o número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana quando já tiver passado uma semana desde que a adicionaste.
+**Ainda sem leituras.** A China Post não mostra nada enquanto não lê a encomenda; antes disso, a loja só criou a etiqueta. Pergunta à loja quando a entregou. Entretanto, o Peek mostra «À espera de China Post». Se ao fim de dois dias a China Post continuar sem mostrar nada para o número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana quando já tiver passado uma semana desde que a adicionaste.
 
 **Parado depois de sair da China.** Entre o voo e a primeira leitura dos CTT podem passar dias sem novidades. Procura o mesmo número no Seguir objeto dos CTT. Os próprios CTT avisam que há países que não disponibilizam a tempo a informação sobre o percurso dos envios internacionais, ou que não a disponibilizam de todo, e que alguns códigos não devolvem resultados. Um número começado por U pode nunca ter leituras em Portugal. Mais em [porque é que o tracking não atualiza](guide:tracking-not-updating) e [rastrear encomendas da China](guide:tracking-from-china).
 

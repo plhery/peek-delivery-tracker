@@ -3,7 +3,7 @@ title: Lingdong Sendungsverfolgung: SZLD-Nummer, Status und Zoll
 description: Lingdong-International-Paket (领东国际) aus Shenzhen verfolgen: wie die SZLD-Nummer aussieht, was die Status bedeuten, wo das Tracking endet und was beim Zoll anfällt.
 slug: lingdong-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Lingdong International (领东国际, mit vollem Namen 深圳市领东国际货运代理有限公司) ist ein Spediteur aus Shenzhen in China, der Bestellungen von Onlinehändlern ins Ausland verschickt. Seine Sendungsnummern beginnen mit SZLD: Füg deine oben ins Feld ein oder gib sie auf Lingdongs Website lingdong56.com bei 快件查询 (Sendungsabfrage) ein; das öffnet Lingdongs Tracking-Seite. Die Nummer bekommst du vom Shop, der Lingdong gebucht hat.
@@ -69,7 +69,7 @@ Mehr dazu in [Paket beim Zoll](guide:customs).
 
 **Nur `货物电子信息已经收到`.** Der Shop hat das Paket gebucht, aber in Lingdongs Lager ist es noch nicht angekommen. Kommt mehrere Tage nichts nach, frag den Shop, ob er es wirklich verschickt hat.
 
-**Nichts gefunden.** Kennt Lingdongs Tracking-Seite eine Nummer nicht, zeigt sie nur die Nummer und lässt alle anderen Felder leer. Für Peek heißt diese Antwort, dass Lingdong die Sendung schon erfasst, aber noch nicht gescannt hat: Peek fragt deshalb weiter nach und zeigt auf peektracker.com „Warten auf Lingdong International“, ohne dich zu bitten, die Nummer zu prüfen. Vergleich sie also selbst Zeichen für Zeichen mit der Nachricht des Shops.
+**Nichts gefunden.** Kennt Lingdongs Tracking-Seite eine Nummer nicht, zeigt sie nur die Nummer und lässt alle anderen Felder leer. Für Peek heißt diese Antwort, dass Lingdong die Sendung schon erfasst, aber noch nicht gescannt hat: Peek fragt deshalb weiter nach und zeigt „Warten auf Lingdong International“, ohne dich zu bitten, die Nummer zu prüfen. Vergleich sie also selbst Zeichen für Zeichen mit der Nachricht des Shops.
 
 **Verloren, beschädigt oder zurück.** Ein Verfahren für Reklamationen von Empfängern veröffentlicht Lingdong nicht: Seine Seite mit Beförderungsbedingungen (运输条款) ist leer. Auf der Website gibt es zwar einen Chat-Button für Problempakete, Entschädigungsforderungen und Beschwerden, aber den Vertrag mit Lingdong hat der Shop. Bitte also ihn oder den Marktplatz um Erstattung oder ein neues Paket. Siehe [Paket verloren](guide:lost-parcel) und [Paket zurück an den Absender](guide:returned-to-sender).
 

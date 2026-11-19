@@ -3,7 +3,7 @@ title: Aras Kargo tracking: numbers and statuses in English
 description: Track an Aras Kargo parcel: what its 13-digit number looks like, what Turkish statuses such as TESLİMAT ŞUBESİNDE mean in English, and how Peek follows it.
 slug: aras-kargo-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Aras Kargo (also written Aras Cargo) is a courier in Turkey. Aras's tracker, as Peek reads it, writes every step in Turkish. The shop or the sender gives you the tracking number: paste it in the box above. Aras Kargo's own tracker is at kargotakip.araskargo.com.tr. The tables below explain its Turkish statuses in English.
@@ -74,7 +74,7 @@ A parcel goes from the Aras branch that takes it in, through transfer centres (t
 
 ## Aras Kargo tracking not updating, lost or returned
 
-**No result.** When Aras doesn't know the number, its tracker answers `Girdiğiniz bilgiler için bir sonuç bulunamamıştır.`: no result was found for what you entered. The shop may not have handed the parcel over yet. Peek keeps asking: a parcel filed under Aras Kargo shows "Waiting for Aras Kargo" on peektracker.com. Check the number with the shop: 13 digits. If nothing comes after a few days, ask the shop whether it really gave the parcel to Aras.
+**No result.** When Aras doesn't know the number, its tracker answers `Girdiğiniz bilgiler için bir sonuç bulunamamıştır.`: no result was found for what you entered. The shop may not have handed the parcel over yet. Peek keeps asking: a parcel filed under Aras Kargo shows "Waiting for Aras Kargo". Check the number with the shop: 13 digits. If nothing comes after a few days, ask the shop whether it really gave the parcel to Aras.
 
 **Stuck at `TESLİMAT ŞUBESİNDE`.** The delivery branch has the parcel, and the status stays the same after a failed delivery. If a reason is listed for a day (the table above), the parcel wasn't delivered that day, and the reason says why. Otherwise, it is waiting there for delivery. Peek knows no out-for-delivery step from Aras, so the parcel shows "In transit" until it is delivered or a delivery fails.
 

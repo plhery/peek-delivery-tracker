@@ -3,7 +3,7 @@ title: India Post tracking: Speed Post numbers and statuses
 description: Track an India Post or Speed Post item: what an IN number looks like, what each status means, delivery times, parcels abroad, complaints and who to call.
 slug: india-post-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 India Post is the Department of Posts, India's national postal service, with 164,999 post offices: the largest postal network in the world, it says. Within India it runs Speed Post, registered mail and India Post Parcel; abroad, EMS (International Speed Post), tracked packets and air parcels. Track an item in the box on [indiapost.gov.in](https://www.indiapost.gov.in/), which asks for a CAPTCHA, or paste the number in the box above. India Post calls it the article barcode number; for an online order, ask the seller for it.
@@ -79,7 +79,7 @@ India Post warns of fake links impersonating it: use only www.indiapost.gov.in, 
 
 ## Track an India Post parcel with Peek
 
-[Peek](/) recognises two letters, nine digits and `IN` as India Post when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number you were given, or choose "Track it as typed". Filed under India Post, a parcel shows "Waiting for India Post" on peektracker.com until its first scan.
+[Peek](/) recognises two letters, nine digits and `IN` as India Post when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check the number you were given, or choose "Track it as typed". Filed under India Post, a parcel shows "Waiting for India Post" until its first scan.
 
 Peek doesn't read India Post's own site: it reads India Post's scans through MySpeedPost, a tracking site outside India Post's domain that fetches them from India Post (or through track91, the tracker of MySpeedPost's operator, when MySpeedPost passes the lookup there). When that copy is over 30 minutes old, Peek asks MySpeedPost to refresh it, and keeps the older copy if it can't, so a scan can reach Peek late.
 

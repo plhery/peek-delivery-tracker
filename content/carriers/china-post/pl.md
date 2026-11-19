@@ -3,7 +3,7 @@ title: China Post śledzenie przesyłki: numer, statusy, doręczenie
 description: Śledzenie przesyłki China Post: jak wygląda numer z CN, co znaczą chińskie statusy, kiedy przejmuje ją Poczta Polska i co zrobić, gdy utknie po drodze.
 slug: china-post-sledzenie
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 China Post to państwowa poczta Chin, a EMS to jej marka ekspresowa. Jeśli Twoje zamówienie z AliExpress, Temu, Shein lub innego sklepu ma numer kończący się na `CN`, nadała go China Post. W Polsce paczkę przejmuje zwykle [Poczta Polska](carrier:poczta-polska) i doręcza ją pod tym samym numerem. Śledzić ją możesz na stronie China Post, ems.com.cn, albo w polu powyżej. Numer znajdziesz w szczegółach wysyłki zamówienia w sklepie.
@@ -83,7 +83,7 @@ China Post wysyła paczkę samolotem. W Polsce przejmuje ją Poczta Polska, od c
 
 ## Śledzenie China Post nie działa, paczka zaginęła lub wraca
 
-**Jeszcze bez skanów.** China Post nic nie pokazuje, dopóki nie zeskanuje paczki. Wcześniej sklep tylko utworzył etykietę. Zapytaj sklep, kiedy oddał paczkę. Do tego czasu Peek pokazuje na peektracker.com „Oczekiwanie na przewoźnika China Post”. Jeśli po dwóch dniach China Post nadal nic nie pokazuje dla tego numeru, a żadne inne źródło na niego nie odpowiada, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i od tej pory sprawdza paczkę raz dziennie, a gdy minie tydzień od dodania – raz w tygodniu.
+**Jeszcze bez skanów.** China Post nic nie pokazuje, dopóki nie zeskanuje paczki. Wcześniej sklep tylko utworzył etykietę. Zapytaj sklep, kiedy oddał paczkę. Do tego czasu Peek pokazuje „Oczekiwanie na przewoźnika China Post”. Jeśli po dwóch dniach China Post nadal nic nie pokazuje dla tego numeru, a żadne inne źródło na niego nie odpowiada, Peek pokazuje „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i od tej pory sprawdza paczkę raz dziennie, a gdy minie tydzień od dodania – raz w tygodniu.
 
 **Cisza po wylocie z Chin.** Między lotem a pierwszym skanem Poczty Polskiej mogą minąć dni bez wieści. Sprawdź ten sam numer w Poczcie Polskiej. Numer zaczynający się na U może nigdy nie dostać skanów w Polsce. Więcej w poradnikach [śledzenie się nie aktualizuje](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
 

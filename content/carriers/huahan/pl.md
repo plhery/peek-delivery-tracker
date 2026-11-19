@@ -3,7 +3,7 @@ title: Śledzenie HuaHan Logistics: numer HHW…YQ i doręczenie
 description: Śledź paczkę HuaHan Logistics (华翰物流) z Chin: format numeru HHW…YQ, znaczenie statusów, lokalny przewoźnik doręczający, odprawa celna i śledzenie w Peek.
 slug: sledzenie-przesylek-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 HuaHan Logistics (华翰物流, działająca również pod nazwą HuaHan Express lub 华翰速递) to chiński operator logistyczny obsługujący transgraniczny handel internetowy, który wysyła paczki z Chin drogą lotniczą lub pocztową, a w kraju docelowym przekazuje je lokalnemu przewoźnikowi do doręczenia na ostatnim odcinku. Jeśli sklep internetowy nadał Twoje zamówienie przez HuaHan, poszukaj numeru zaczynającego się od `HHW` i zakończonego literami `YQ`, a następnie wklej go w polu powyżej. Publiczna wyszukiwarka HuaHan pod adresem [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) potrafi też wskazać lokalnego przewoźnika w Twoim kraju oraz nadany przez niego numer lokalny przesyłki.
@@ -105,7 +105,7 @@ HuaHan świadczy usługi dla sprzedawców internetowych, a jego strony nie rozst
 
 ## Paczka HuaHan nie dociera albo śledzenie utknęło
 
-**Nie znaleziono numeru (`没有找到记录`).** Gdy HuaHan nie ma jeszcze numeru w bazie, jego strona zwraca komunikat `没有找到记录` („nie znaleziono wpisu”); na peektracker.com Peek wyświetla „Oczekiwanie na przewoźnika HuaHan Logistics” i ponawia zapytania. Jeśli po dwóch dniach ani HuaHan, ani inne źródło nadal nie rozpoznaje numeru, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a kolejne sprawdzenia odbywają się raz dziennie i – po upływie tygodnia – raz w tygodniu. Porównaj dokładnie każdy znak (`HHW`, dwie litery, dziesięć cyfr, `YQ`) z wiadomością od sprzedawcy.
+**Nie znaleziono numeru (`没有找到记录`).** Gdy HuaHan nie ma jeszcze numeru w bazie, jego strona zwraca komunikat `没有找到记录` („nie znaleziono wpisu”); Peek wyświetla „Oczekiwanie na przewoźnika HuaHan Logistics” i ponawia zapytania. Jeśli po dwóch dniach ani HuaHan, ani inne źródło nadal nie rozpoznaje numeru, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a kolejne sprawdzenia odbywają się raz dziennie i – po upływie tygodnia – raz w tygodniu. Porównaj dokładnie każdy znak (`HHW`, dwie litery, dziesięć cyfr, `YQ`) z wiadomością od sprzedawcy.
 
 **Zatrzymana na `Shipment information received`.** Sklep utworzył zlecenie wysyłki, lecz HuaHan nie zeskanował jeszcze paczki w swoim magazynie. Zapytaj sprzedawcę, kiedy fizycznie przekazał przesyłkę.
 

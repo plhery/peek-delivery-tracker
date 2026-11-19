@@ -3,7 +3,7 @@ title: Shouwu Sendungsverfolgung: SWECN…YQ, Status und Zustellung
 description: Shouwu-International-Paket (守务国际) aus China verfolgen: wie die SWECN…YQ-Nummer aussieht, was die Status bedeuten und wer in Deutschland zustellt.
 slug: shouwu-sendungsverfolgung
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Shouwu International (守务国际, auch SWE) ist ein Logistikunternehmen aus Shanghai. Es bringt Pakete chinesischer Onlinehändler nach Europa und in die USA, wo eine Post oder ein Paketdienst sie zustellt. Hat ein Shop deine Bestellung mit Shouwu verschickt, beginnt deine Sendungsnummer mit SWECN und endet auf YQ: Füg sie oben ins Feld ein oder gib sie in Shouwus Sendungsverfolgung auf [admin.shshouwu.com](https://admin.shshouwu.com/track.html) ein.
@@ -32,7 +32,7 @@ Shouwus Sendungsverfolgung ist auf Englisch, unter einer chinesischen Überschri
 
 | Shouwus Status | Was es für dich heißt | Peek zeigt |
 | --- | --- | --- |
-| `Not Found` | Shouwu hat unter dieser Nummer noch nichts: „We seem can't identify the number.“ | „Warten auf Shouwu International“ (auf peektracker.com) |
+| `Not Found` | Shouwu hat unter dieser Nummer noch nichts: „We seem can't identify the number.“ | „Warten auf Shouwu International“ |
 | `Preparing` | Laut Shouwu wurde das Paket seinem Lager in China übergeben oder wird dort gewogen und verschlossen. Der Status kann schon vor dem ersten Scan stehen. | „Etikett erstellt“, nach der Abholung durch den Versandpartner oder einem Lagerscan „Beim Paketdienst eingegangen“ |
 | `In Transit` | Alles von der Übergabe an einen Transporteur über den Zoll bis zur Fahrt in deinem Land. | „Unterwegs“ oder die Phase des neuesten Scans, etwa „Beim Zoll“; „Etikett erstellt“, solange es nur die Bestelldaten und `Carrier received the shipment` gibt |
 | `Undelivered` | Ein Zustellversuch ist gescheitert. | „Zustellversuch“ oder, wenn der neueste Scan das sagt, „Abholbereit“ bzw. „Zurück an Absender“ |
@@ -118,7 +118,7 @@ Shouwus Sendungsverfolgung nennt weder Namen noch Nummer des Paketdiensts, auße
 
 ## Shouwu Paket kommt nicht an oder Tracking hängt
 
-**`Not Found`.** Shouwu nennt vier Gründe: Es hat das Paket noch nicht angenommen oder noch nicht gescannt, die Nummer ist falsch, oder das Paket wurde vor so langer Zeit verschickt, dass seine Daten weg sind. Die Bearbeitung dauere meist ein paar Tage. Peek zeigt auf peektracker.com „Warten auf Shouwu International“ und fragt weiter nach. Kennt Shouwu die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Prüf die Nummer Zeichen für Zeichen; tut sich nach ein paar Tagen nichts, frag den Shop.
+**`Not Found`.** Shouwu nennt vier Gründe: Es hat das Paket noch nicht angenommen oder noch nicht gescannt, die Nummer ist falsch, oder das Paket wurde vor so langer Zeit verschickt, dass seine Daten weg sind. Die Bearbeitung dauere meist ein paar Tage. Peek zeigt „Warten auf Shouwu International“ und fragt weiter nach. Kennt Shouwu die Nummer auch zwei Tage später nicht und antwortet sonst niemand für sie, steht dort „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich. Prüf die Nummer Zeichen für Zeichen; tut sich nach ein paar Tagen nichts, frag den Shop.
 
 **Hängt bei `Preparing`, `Shipment information received` oder `Carrier received the shipment`.** Shouwu hat das Paket noch nicht oder hat es noch nicht aus seinem Lager losgeschickt. Frag den Shop, wann er es übergeben hat.
 

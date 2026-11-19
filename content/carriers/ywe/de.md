@@ -3,7 +3,7 @@ title: YWE (YanwenExpress) Sendungsverfolgung: Nummer & Status
 description: YWE-Paket (YanwenExpress) in den USA verfolgen: wie die 17-stellige YWE-Nummer aussieht, was jeder Scan vom Hub bis zur Haustür bedeutet und wen du fragst.
 slug: ywe-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 YWE (YanwenExpress, betrieben von der Yanwen Express LLC) ist ein Zustelldienst für die letzte Meile in den Vereinigten Staaten: Er bringt Pakete für Onlineshops, Einzelhändler und Marktplätze von seinen US-Sortierzentren bis an die Haustür. Seine Sendungsnummern bestehen aus den Buchstaben YWE und 14 Ziffern: Füg deine Nummer oben ins Suchfeld ein oder prüf sie direkt in YWEs eigener Sendungsverfolgung auf [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ Laut der Über-uns-Seite startete YWE 2024 in Los Angeles und plant, bis Ende 20
 
 ## YWE-Paket kommt nicht an oder Sendungsverfolgung hängt
 
-**`NOT_FOUND`.** Diesen Hinweis zeigt YWEs Tracker, wenn zu einer Nummer noch keine Scans vorliegen, und nennt mögliche Ursachen: Das Paket wurde noch nicht übernommen oder gescannt, die Nummer ist falsch geschrieben, oder der Versand liegt so lange zurück, dass die Daten nicht mehr abrufbar sind. Auf peektracker.com zeigt Peek „Warten auf YWE“ und prüft weiter. Vergleiche die Nummer mit der Nachricht des Händlers: YWE und 14 Ziffern. Tut sich nach einigen Tagen nichts, frag beim Verkäufer nach, ob das Paket bereits verschickt wurde.
+**`NOT_FOUND`.** Diesen Hinweis zeigt YWEs Tracker, wenn zu einer Nummer noch keine Scans vorliegen, und nennt mögliche Ursachen: Das Paket wurde noch nicht übernommen oder gescannt, die Nummer ist falsch geschrieben, oder der Versand liegt so lange zurück, dass die Daten nicht mehr abrufbar sind. Peek zeigt „Warten auf YWE“ und prüft weiter. Vergleiche die Nummer mit der Nachricht des Händlers: YWE und 14 Ziffern. Tut sich nach einigen Tagen nichts, frag beim Verkäufer nach, ob das Paket bereits verschickt wurde.
 
 **Steht auf `Shipping Order Created.`** YWE kennt bisher nur die Auftragsdaten, hat das Paket aber noch nicht. Da YWE Sendungen erstmals in seinem US-Hub scannt, frag den Verkäufer, wo sich das Paket gerade befindet und wann es abgeschickt wurde. Kommt die Bestellung aus China in die USA, hilft [Paket aus China verfolgen](guide:tracking-from-china).
 

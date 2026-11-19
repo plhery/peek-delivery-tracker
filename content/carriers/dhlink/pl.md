@@ -3,7 +3,7 @@ title: Śledzenie DHLink: numer z DHgate, statusy i doręczenie
 description: Śledź paczkę DHLink z zamówienia na DHgate: jakie numery przyjmuje wyszukiwarka, co znaczą angielskie statusy, kto doręcza przesyłkę i do kogo pisać.
 slug: dhlink-sledzenie
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DHLink (驼飞侠) to transgraniczna platforma logistyczna serwisu DHgate (敦煌网). Założona w 2014 roku, wysyła zamówienia sprzedawców z DHgate i innych klientów z Chin lub ze swoich magazynów zagranicznych, a na ostatnim odcinku przekazuje je lokalnemu przewoźnikowi w kraju docelowym. Wpisz swój numer na [stronie śledzenia DHLink](https://www.dhlink.com/trackQuery?lang=en) albo wklej go w polu powyżej. Numer znajdziesz w szczegółach zamówienia na DHgate; jeśli go tam nie ma, poproś o niego sprzedawcę.
@@ -64,7 +64,7 @@ Gdy znasz już lokalnego przewoźnika i jego numer, w jego własnym śledzeniu z
 
 ## Śledzenie DHLink nie działa, paczka stoi albo ma status doręczonej
 
-**Nie znaleziono numeru.** Sprawdź numer w zamówieniu na DHgate i wypróbuj numer śledzenia (*Tracking No.*) zamiast numeru `FC`. Numer lokalnego kuriera nie da wyniku na stronie DHLink – wpisz go bezpośrednio u tego przewoźnika. Jeśli dla numeru nieznanego w DHLink wybierzesz DHLink przyciskiem „Zmień”, Peek pokaże na peektracker.com „Oczekiwanie na przewoźnika DHLink” i będzie dalej sprawdzał. Jeżeli po dwóch dniach DHLink nadal nie rozpozna numeru i żadne inne źródło dla niego nie odpowie, Peek wyświetli komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i od tej pory będzie sprawdzał paczkę raz dziennie, a po tygodniu od dodania – raz w tygodniu.
+**Nie znaleziono numeru.** Sprawdź numer w zamówieniu na DHgate i wypróbuj numer śledzenia (*Tracking No.*) zamiast numeru `FC`. Numer lokalnego kuriera nie da wyniku na stronie DHLink – wpisz go bezpośrednio u tego przewoźnika. Jeśli dla numeru nieznanego w DHLink wybierzesz DHLink przyciskiem „Zmień”, Peek pokaże „Oczekiwanie na przewoźnika DHLink” i będzie dalej sprawdzał. Jeżeli po dwóch dniach DHLink nadal nie rozpozna numeru i żadne inne źródło dla niego nie odpowie, Peek wyświetli komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i od tej pory będzie sprawdzał paczkę raz dziennie, a po tygodniu od dodania – raz w tygodniu.
 
 **Brak nowych skanów po locie lub odprawie.** Sprawdź, czy w wyniku pojawiło się pole „Last Leg No.”, i wyszukaj ten numer u przewoźnika końcowego – jego skany bywają świeższe niż w DHLink. Więcej w poradnikach [śledzenie się nie aktualizuje](guide:tracking-not-updating) oraz [śledzenie paczki z Chin](guide:tracking-from-china).
 

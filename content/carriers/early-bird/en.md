@@ -3,7 +3,7 @@ title: Early Bird tracking: statuses, morning delivery and lockers
 description: Track an Early Bird parcel in Sweden: where the number is, what each status means, night and morning delivery, iBoxen lockers and how to reach Early Bird.
 slug: early-bird-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Early Bird is a Swedish parcel company. Its couriers bring online orders with the morning newspaper, so your parcel usually comes at night or early in the morning, to your door or your mailbox. Track it on [Early Bird's Track & help page](https://earlybird.se/en/track-and-help) (in Swedish at earlybird.se/spara-och-hjalp), with the link in Early Bird's SMS or email, or paste the number in the box above. The number is in Early Bird's message or in the shop's order information.
@@ -87,7 +87,7 @@ As read on 2 November 2026, Early Bird's [Contact us page](https://earlybird.se/
 - **A 20-digit Early Bird number.** Paste it in [Peek](/). Because PostNord numbers look alike, Peek shows "Checking tracking services…" and asks Early Bird first, with PostNord and other carriers the number fits. When Early Bird knows it, Peek says "Early Bird has this parcel." If no carrier knows it yet, Peek names Early Bird as the likely carrier: the parcel shows "Probably Early Bird" and "Waiting for Early Bird’s first scan", and Peek keeps asking. To file it under Early Bird, press "Change" before tracking and pick Early Bird under "Fits this number", or use "Change carrier" later.
 - **A link to Early Bird's tracking.** An earlybird.se link to `spara-och-hjalp`, `en/track-and-help` or `tracking` with `id=`, or a track.earlybird.se link with `a=`, names Early Bird at once, whatever the number.
 - **Another reference.** Paste it all the same: Peek follows more than 3,500 carriers. To track it at Early Bird, press "Change" and search for Early Bird, or use "Change carrier" later. For Early Bird, Peek takes 8 to 30 letters and digits, and a 20-digit number starting `00` needs a valid check digit. Otherwise it says Early Bird "doesn’t issue numbers like this one".
-- **Not listed yet.** A parcel filed under Early Bird shows "Waiting for Early Bird" on peektracker.com until Early Bird lists it, and Peek keeps asking. If Early Bird says the number is wrong, Peek shows "Check the tracking number".
+- **Not listed yet.** A parcel filed under Early Bird shows "Waiting for Early Bird" until Early Bird lists it, and Peek keeps asking. If Early Bird says the number is wrong, Peek shows "Check the tracking number".
 
 **What Peek shows.** Each step in Early Bird's English wording (older lines stay Swedish), with its time, the place each terminal scan names and the delivery time. The booking shows as "Label created", the receipt as "Received by carrier", terminals and the way to a locker as "In transit", failed deliveries as "Delivery attempted", the locker as "Ready for pickup", and delivery or collection as "Delivered". A new attempt keeps the step before it. Peek shows no planned delivery day and doesn't name the locker. The planned day is in the link in Early Bird's SMS or email; the locker is in its message and the iBoxen app.
 

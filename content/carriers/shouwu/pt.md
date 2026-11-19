@@ -3,7 +3,7 @@ title: Rastreio Shouwu: número SWECN…YQ, estados e entrega
 description: Segue uma encomenda da Shouwu International (守务国际) vinda da China: formato do número SWECN…YQ, significado dos estados e quem entrega na Europa.
 slug: shouwu-rastreio
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A Shouwu International (守务国际, também identificada pela sigla SWE) é uma empresa de logística de Xangai que expede encomendas de vendedores online na China para a Europa e os Estados Unidos, onde um operador postal ou uma transportadora local faz a entrega final. Se uma loja enviou a tua compra pela Shouwu, o número começa por `SWECN` e termina em `YQ`: cola-o na caixa acima ou no portal de rastreio em inglês da Shouwu em [admin.shshouwu.com](https://admin.shshouwu.com/track.html). O código é fornecido pelo vendedor nos dados de envio da encomenda; a Shouwu não disponibiliza qualquer contacto para destinatários.
@@ -32,7 +32,7 @@ A página de rastreio da Shouwu apresenta-se em inglês sob o título em chinês
 
 | Estado da Shouwu | O que significa para ti | O Peek mostra |
 | --- | --- | --- |
-| `Not Found` | A Shouwu ainda não tem dados para esse código: «We seem can't identify the number.» | «À espera de Shouwu International» em peektracker.com |
+| `Not Found` | A Shouwu ainda não tem dados para esse código: «We seem can't identify the number.» | «À espera de Shouwu International» |
 | `Preparing` | Segundo a explicação da Shouwu, a encomenda foi entregue ao seu armazém na China ou está aí a ser pesada e selada. Pode surgir antes do primeiro registo. | «Etiqueta criada», passando a «Aceite pela transportadora» após a recolha pelo parceiro ou a entrada no armazém |
 | `In Transit` | Abrange todo o percurso desde a entrega a uma transportadora até à alfândega e ao encaminhamento dentro do país de destino. | «Em trânsito», ou a etapa concreta do registo mais recente, como «Na alfândega»; mantém «Etiqueta criada» enquanto só existirem os dados do pedido e `Carrier received the shipment` |
 | `Undelivered` | Uma tentativa de entrega falhou. | «Tentativa de entrega», ou então «Pronta para levantamento» ou «Devolvida ao remetente» se o último registo o disser |
@@ -102,7 +102,7 @@ Na sua página institucional em chinês, a Shouwu afirma trabalhar diretamente c
 
 ## Encomenda da Shouwu atrasada ou rastreio parado
 
-**`Not Found`.** A Shouwu aponta quatro razões possíveis: ainda não aceitou a encomenda, ainda não a digitalizou, o número está incorreto ou o envio é tão antigo que os dados já saíram do sistema, acrescentando que o processamento inicial costuma demorar alguns dias. Em peektracker.com aparece «À espera de Shouwu International» enquanto o Peek continua a verificar. Se ao fim de dois dias a Shouwu continuar sem reconhecer o número e nenhuma outra fonte responder por ele, o site mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a consultar uma vez por dia, e semanalmente passado uma semana desde que a adicionaste. Confere o código carácter a carácter e, se nada surgir após alguns dias, contacta o vendedor.
+**`Not Found`.** A Shouwu aponta quatro razões possíveis: ainda não aceitou a encomenda, ainda não a digitalizou, o número está incorreto ou o envio é tão antigo que os dados já saíram do sistema, acrescentando que o processamento inicial costuma demorar alguns dias. Aparece «À espera de Shouwu International» enquanto o Peek continua a verificar. Se ao fim de dois dias a Shouwu continuar sem reconhecer o número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a consultar uma vez por dia, e semanalmente passado uma semana desde que a adicionaste. Confere o código carácter a carácter e, se nada surgir após alguns dias, contacta o vendedor.
 
 **Parada em `Preparing`, `Shipment information received` ou `Carrier received the shipment`.** A Shouwu ainda não recebeu fisicamente o pacote ou ainda não o expediu do seu armazém na China. Pergunta à loja quando entregou a remessa ao operador.
 

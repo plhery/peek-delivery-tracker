@@ -3,7 +3,7 @@ title: BYHD tracking: BYHD numbers, scans and who delivers
 description: Track a BYHD (博益弘达) parcel from Shenzhen: what a BYHD number looks like, what its few scans mean and why its tracker shows another company's number.
 slug: byhd-tracking
 published: 2026-10-28
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 BYHD (博益弘达, Bo Yi Hong Da in pinyin) is the short name of 深圳市博益弘达物流有限公司, a logistics company in Shenzhen, China, that ships parcels abroad for online sellers. Its waybill numbers are BYHD and nine digits: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on BYHD's site, byhd56.com, which opens BYHD's tracker. Expect a short history from BYHD, and a second number: the one the company that delivers your parcel uses.
@@ -50,7 +50,7 @@ BYHD's tracker gives the number of the company that delivers in your country, bu
 
 **Stuck on `Goods leaving the operation center`.** That's as far as BYHD's known lines go, so silence after it doesn't mean the parcel has stopped. Track it under the delivering company's number from BYHD's tracker, or ask the seller for it. More in [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
 
-**Nothing found.** For a number it doesn't know, BYHD's tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as BYHD listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for BYHD" on peektracker.com, with no request to check the number. So compare the number with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, BYHD's tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as BYHD listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for BYHD", with no request to check the number. So compare the number with the seller's message yourself, character by character.
 
 **Lost, damaged or returned.** BYHD publishes no claim process, and its legal notice page is empty. The seller booked the parcel with BYHD, so ask the seller or the marketplace for a refund or a new parcel. See [lost parcels](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [delivered but not received](guide:delivered-not-received).
 

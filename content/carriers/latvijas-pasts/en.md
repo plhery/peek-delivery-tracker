@@ -3,7 +3,7 @@ title: Latvijas Pasts tracking: numbers, statuses and lockers
 description: Track a Latvijas Pasts (Latvian Post) parcel in English: where the number is, what each status means, parcel lockers, missed deliveries and contacts.
 slug: latvijas-pasts-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Latvijas Pasts (Latvian Post) is Latvia's state-owned national post, with the country's largest network of parcel lockers. Track an item on [mans.pasts.lv/track](https://mans.pasts.lv/track), which opens in Latvian and has an English switch, or paste the number in the box above. The number comes from the shop's or sender's shipping message, or from the courier's SMS before delivery.
@@ -95,7 +95,7 @@ The channels as pasts.lv listed them on 9 November 2026:
 
 ## Tracking Latvijas Pasts with Peek
 
-[Peek](/) names a postal number starting C, E, L or R and ending `LV` as Latvijas Pasts's straight away when its check digit is valid. For other valid numbers ending `LV`, such as `VV…LV`, it asks Latvijas Pasts and [Chronopost](carrier:chronopost) at once and shows "Latvijas Pasts has this parcel." when it knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Latvijas Pasts isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A mans.pasts.lv/track link with the number in it always names Latvijas Pasts. Searching the picker for "Latvian Post" finds it too. If Latvijas Pasts doesn't know the number yet, a parcel filed under it shows "Waiting for Latvijas Pasts" on peektracker.com and Peek keeps checking. If Latvijas Pasts still doesn't know it two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and from then on checks it daily, and weekly once a week has passed since you added it.
+[Peek](/) names a postal number starting C, E, L or R and ending `LV` as Latvijas Pasts's straight away when its check digit is valid. For other valid numbers ending `LV`, such as `VV…LV`, it asks Latvijas Pasts and [Chronopost](carrier:chronopost) at once and shows "Latvijas Pasts has this parcel." when it knows the number, or "Not found at … yet. Peek will keep checking after you add it." With a wrong check digit Latvijas Pasts isn't asked, and picking it by hand doesn't help (Peek says it "doesn’t issue numbers like this one"): check the number with the sender. A mans.pasts.lv/track link with the number in it always names Latvijas Pasts. Searching the picker for "Latvian Post" finds it too. If Latvijas Pasts doesn't know the number yet, a parcel filed under it shows "Waiting for Latvijas Pasts" and Peek keeps checking. If Latvijas Pasts still doesn't know it two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and from then on checks it daily, and weekly once a week has passed since you added it.
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Latvia (or names no destination and you're in Latvia), Peek also asks Latvijas Pasts with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at Latvijas Pasts straight away, pick "Latvijas Pasts" with "Change".
 

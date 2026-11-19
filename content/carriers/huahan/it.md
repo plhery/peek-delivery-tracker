@@ -3,7 +3,7 @@ title: Tracciamento HuaHan Logistics: codice HHW…YQ e consegna
 description: Traccia un pacco HuaHan Logistics (华翰物流) dalla Cina: formato del numero HHW…YQ, significato degli stati, corriere locale, dogana e verifica su Peek.
 slug: tracciamento-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 HuaHan Logistics (华翰物流, nota anche come HuaHan Express o 华翰速递) è un operatore logistico cinese per l’e-commerce transfrontaliero che spedisce i pacchi fuori dalla Cina per via aerea o postale e li affida a un corriere locale nel paese di destinazione per la consegna finale. Se un negozio online ha spedito il tuo ordine con HuaHan, cerca un codice che inizia con `HHW` e termina con `YQ` e incollalo nel riquadro in alto. Il sistema di tracciamento pubblico di HuaHan su [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) può indicare anche il corriere incaricato dell’ultimo miglio e il relativo numero di tracciamento locale.
@@ -106,7 +106,7 @@ HuaHan opera per i venditori e-commerce e le sue pagine non specificano se gli o
 
 ## Pacco HuaHan in ritardo, fermo o non trovato
 
-**Codice non trovato (`没有找到记录`).** Se HuaHan non ha ancora registrato il numero, il suo tracker risponde `没有找到记录` («nessun record trovato»); su peektracker.com Peek mostra «In attesa di HuaHan Logistics» e continua a verificare. Se dopo due giorni né HuaHan né altre fonti riconoscono il codice, compare «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e i controlli passano a cadenza giornaliera e, dopo una settimana, settimanale. Confronta ogni carattere (`HHW`, due lettere, dieci cifre, `YQ`) con il messaggio del venditore.
+**Codice non trovato (`没有找到记录`).** Se HuaHan non ha ancora registrato il numero, il suo tracker risponde `没有找到记录` («nessun record trovato»); Peek mostra «In attesa di HuaHan Logistics» e continua a verificare. Se dopo due giorni né HuaHan né altre fonti riconoscono il codice, compare «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e i controlli passano a cadenza giornaliera e, dopo una settimana, settimanale. Confronta ogni carattere (`HHW`, due lettere, dieci cifre, `YQ`) con il messaggio del venditore.
 
 **Fermo su `Shipment information received`.** Il negozio ha prenotato la spedizione, ma HuaHan non ha ancora scansionato il pacco in magazzino. Chiedi al venditore quando lo ha consegnato al corriere.
 

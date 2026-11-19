@@ -3,7 +3,7 @@ title: Tracking J&T Express in Germania: numero JTDE e stati
 description: Tracking J&T in Germania: com'è fatto un numero JTDE, cosa vuol dire ogni riga del tracking e cosa fare se il pacco è in ritardo, smarrito o non arriva.
 slug: jt-express-germania-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Francoforte sul Meno) è la rete tedesca di J&T Express: consegna pacchi in Germania. Se un negozio ti ha spedito l'ordine con J&T, il numero di tracking inizia con `JTDE`: incollalo nel box qui sopra, oppure cercalo sul [tracking di J&T su jtexpress.de](https://www.jtexpress.de/tracking). Il numero ce l'ha il negozio che ha spedito l'ordine: lo trovi nell'e-mail di spedizione o nella pagina dell'ordine.
@@ -21,7 +21,7 @@ Secondo le FAQ di J&T, il numero di spedizione inizia con JTDE. Peek ne conosce 
 
 Il tracking di J&T accetta fino a 10 numeri per ricerca, separati da spazi o virgole.
 
-**Numeri che si somigliano.** Le reti J&T degli altri Paesi hanno tracking e numeri propri: `JTUK` e 12 cifre è J&T Express UK, `JTAU` e 12 cifre J&T Express Australia, `JTE` e 12 cifre J&T Express Middle East, mentre `JT` con 13 cifre lo usa J&T nel Sud-est asiatico e in Cina (J&T Express China). Solo `JTDE` è della rete tedesca. Se il tracking di J&T risponde `Keine Abfrageergebnisse` (`No tracking records yet` in inglese) o Peek continua a mostrare su peektracker.com «In attesa di J&T Express Germany», confronta il numero con l'e-mail del negozio, o chiedine conferma al negozio.
+**Numeri che si somigliano.** Le reti J&T degli altri Paesi hanno tracking e numeri propri: `JTUK` e 12 cifre è J&T Express UK, `JTAU` e 12 cifre J&T Express Australia, `JTE` e 12 cifre J&T Express Middle East, mentre `JT` con 13 cifre lo usa J&T nel Sud-est asiatico e in Cina (J&T Express China). Solo `JTDE` è della rete tedesca. Se il tracking di J&T risponde `Keine Abfrageergebnisse` (`No tracking records yet` in inglese) o Peek continua a mostrare «In attesa di J&T Express Germany», confronta il numero con l'e-mail del negozio, o chiedine conferma al negozio.
 
 ## Stati della spedizione J&T Express Germany: cosa vogliono dire
 
@@ -75,7 +75,7 @@ Il corriere l'ha scelto il negozio, quindi per un ordine online il primo a cui r
 
 **Pacco fermo.** J&T non pubblica tempi di consegna per i destinatari. Se un pacco resta su «Preso in carico» o «In transito» per quattro giorni senza righe nuove, Peek lo segnala («Nessun aggiornamento da quattro giorni») e ti mostra il link «Chiedi aiuto a J&T Express Germany». Se poi non si muove ancora niente, chiedi al negozio, o chiama l'assistenza telefonica di J&T con il numero di tracking. Vedi anche [tracking che non si aggiorna](guide:tracking-not-updating).
 
-**Ancora nessun tracking.** Un numero che il tracking di J&T non conosce ancora appare su peektracker.com come «In attesa di J&T Express Germany». Spesso i negozi creano il numero prima di affidare il pacco al corriere. Se dopo due giorni J&T non riconosce ancora il numero e nessun'altra fonte risponde per quel numero, su peektracker.com compare «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento Peek controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Se resta così per qualche giorno, verifica il numero con il negozio e chiedi se il pacco è partito davvero.
+**Ancora nessun tracking.** Un numero che il tracking di J&T non conosce ancora appare come «In attesa di J&T Express Germany». Spesso i negozi creano il numero prima di affidare il pacco al corriere. Se dopo due giorni J&T non riconosce ancora il numero e nessun'altra fonte risponde per quel numero, compare «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento Peek controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto. Se resta così per qualche giorno, verifica il numero con il negozio e chiedi se il pacco è partito davvero.
 
 **Consegnato ma non ricevuto.** Leggi in Peek la riga di avvenuta consegna: se nomina un posto, come `Mailbox` o `Garage`, guarda lì; se dice `Left with neighbor`, chiedi ai vicini, o cerca il vicino sul tracking di J&T (vedi sopra). Le FAQ di J&T chiedono anche di verificare se il pacco l'hanno preso familiari, vicini o il personale dello stabile. Ancora niente? Segnalalo all'assistenza telefonica di J&T, e chiedi al negozio un rimborso o un nuovo invio, con il numero di tracking. Vedi anche [pacco consegnato ma non ricevuto](guide:delivered-not-received).
 
@@ -99,7 +99,7 @@ J&T non dice in quali lingue risponde il servizio clienti; il sito è in tedesco
 
 Peek mostra lo stato, ogni scansione con l'ora esatta e il momento della consegna. J&T indica il momento preciso di ogni scansione, quindi Peek lo mostra nel fuso orario del tuo dispositivo; su peektracker.com e nell'app per iPhone l'ultima riga sotto la cronologia lo indica («Orari nel tuo fuso orario: …»). Le scansioni restano nell'inglese di J&T, anche se su jtexpress.de le leggi in tedesco. J&T non indica né il luogo né il giorno di consegna previsto né il peso, quindi Peek non mostra la mappa. Su una cronologia molto lunga tiene le 100 scansioni più recenti. «Apri il sito J&T Express Germany», nella pagina del pacco, apre il tuo numero sul tracking di J&T.
 
-Finché J&T non scansiona il pacco, Peek continua a chiedere e mostra su peektracker.com «In attesa di J&T Express Germany» (o, se dopo due giorni J&T non conosce ancora il numero, la richiesta di controllarlo). Se il tracking di J&T non risponde o non conosce il numero, Peek chiede ai servizi di tracking e mostra la loro cronologia, con le loro parole. Se poi il tracking di J&T e i servizi di tracking rispondono tutti senza nessuna scansione per un pacco che ne ha già, Peek tiene le scansioni trovate e, se la cosa dura, scrive «Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.»
+Finché J&T non scansiona il pacco, Peek continua a chiedere e mostra «In attesa di J&T Express Germany» (o, se dopo due giorni J&T non conosce ancora il numero, la richiesta di controllarlo). Se il tracking di J&T non risponde o non conosce il numero, Peek chiede ai servizi di tracking e mostra la loro cronologia, con le loro parole. Se poi il tracking di J&T e i servizi di tracking rispondono tutti senza nessuna scansione per un pacco che ne ha già, Peek tiene le scansioni trovate e, se la cosa dura, scrive «Per ora il corriere non ha nuove scansioni. Quelle già trovate restano, e Peek continua a controllare.»
 
 Peek controlla fino a ogni 10 minuti, e fino a ogni 2 minuti quando il pacco è in consegna (il giorno stesso, dalle 6.00 ora locale e finché risponde il tracking di J&T; quando rispondono i servizi di tracciamento, ogni 15 minuti). Se per due giorni non arriva nessuna scansione nuova (12 ore se resta su «Preso in carico»), controlla una volta all'ora. Puoi ricevere notifiche per «Ogni scansione», «Passaggi importanti» o «Solo la consegna». Peek non può contattare J&T o il negozio al posto tuo, cambiare l'indirizzo o prenotare una nuova consegna.
 
@@ -119,7 +119,7 @@ Il sito tedesco di J&T non ne elenca, ma una riga di J&T Express Germany che Pee
 
 ### Perché il tracking J&T non trova il mio numero?
 
-Controlla che inizi con `JTDE` e che dopo ci siano 12 cifre: i numeri delle altre reti J&T, come `JTUK` nel Regno Unito, non sono tedeschi. Se il numero è giusto, forse J&T non ha ancora il pacco: il suo tracking risponde `Keine Abfrageergebnisse` (`No tracking records yet`), e Peek mostra su peektracker.com «In attesa di J&T Express Germany». Se dopo due giorni J&T non riconosce ancora il numero e nessun'altra fonte risponde per quel numero, peektracker.com ti chiede di controllarlo, scegliere un altro corriere o eliminare il pacco. Se J&T non ha ancora nessun dato dopo qualche giorno, chiedi al negozio.
+Controlla che inizi con `JTDE` e che dopo ci siano 12 cifre: i numeri delle altre reti J&T, come `JTUK` nel Regno Unito, non sono tedeschi. Se il numero è giusto, forse J&T non ha ancora il pacco: il suo tracking risponde `Keine Abfrageergebnisse` (`No tracking records yet`), e Peek mostra «In attesa di J&T Express Germany». Se dopo due giorni J&T non riconosce ancora il numero e nessun'altra fonte risponde per quel numero, Peek ti chiede di controllarlo, scegliere un altro corriere o eliminare il pacco. Se J&T non ha ancora nessun dato dopo qualche giorno, chiedi al negozio.
 
 ### Come contatto J&T Express in Germania?
 

@@ -3,7 +3,7 @@ title: China Post tracking: number, statuses and who delivers
 description: Track a China Post parcel: what a CN number looks like, what the Chinese statuses mean, which post delivers it in your country and why tracking goes quiet.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 China Post is China's state-owned national post, and EMS is its express brand. If your order from AliExpress, Temu, Shein or another shop came with a tracking number ending in `CN`, China Post issued it, and your own country's post delivers the parcel under that same number. Track it on China Post's site, ems.com.cn, or in the box above. The number is in the shop's shipping details for your order.
@@ -71,7 +71,7 @@ Delivery attempts, notice cards and how long a parcel waits at the post office f
 
 ## China Post tracking not updating, lost or returned
 
-**No scans yet.** China Post shows nothing until it has scanned the parcel; before that, the shop has only made a label. Ask the shop when it handed the parcel over. Peek shows "Waiting for China Post" on peektracker.com meanwhile. If China Post still shows nothing for the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
+**No scans yet.** China Post shows nothing until it has scanned the parcel; before that, the shop has only made a label. Ask the shop when it handed the parcel over. Peek shows "Waiting for China Post" meanwhile. If China Post still shows nothing for the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it.
 
 **Quiet after it left China.** Between the flight and your post's first scan, days can pass without news. Check your own post's tracking with the same number. A number starting with U may never get scans in your country. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: Shouwu tracking: SWECN…YQ numbers, scans and who delivers
 description: Track a Shouwu International (守务国际) parcel from China: what a SWECN…YQ number looks like, what its statuses mean and who delivers it in the UK and US.
 slug: shouwu-tracking
 published: 2026-10-30
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Shouwu International (守务国际, also SWE) is a Shanghai logistics company that ships parcels for online sellers in China to Europe and the United States, where a post or courier delivers them. If a shop sent your order with Shouwu, its number starts with SWECN and ends with YQ: paste it in the box above or in Shouwu's tracker at [admin.shshouwu.com](https://admin.shshouwu.com/track.html). The shop gives you the number with your order's shipping details.
@@ -32,7 +32,7 @@ Shouwu's tracker is in English under a Chinese heading. It gives each parcel a s
 
 | Shouwu's status | What it means for you | Peek shows |
 | --- | --- | --- |
-| `Not Found` | Shouwu has nothing under that number yet: "We seem can't identify the number." | "Waiting for Shouwu International" on peektracker.com |
+| `Not Found` | Shouwu has nothing under that number yet: "We seem can't identify the number." | "Waiting for Shouwu International" |
 | `Preparing` | Shouwu explains it as a parcel handed to its warehouse in China, or being weighed and sealed there. It can show before the first scan. | "Label created", then "Received by carrier" after the partner's pickup or a warehouse scan |
 | `In Transit` | Anything from the handover to a carrier to customs and the trip inside your country. | "In transit", or the newest scan's stage, such as "At customs"; "Label created" while there is only the order data and `Carrier received the shipment` |
 | `Undelivered` | A delivery attempt failed. | "Delivery attempted", or "Ready for pickup" or "Returned to sender" if the newest scan says so |
@@ -104,7 +104,7 @@ Shouwu's tracker gives no courier's name or number, beyond what a scan's wording
 
 ## Shouwu parcel not arriving or tracking stuck
 
-**`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for Shouwu International" on peektracker.com and keeps checking. If Shouwu still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number character by character; if nothing comes after a few days, ask the seller.
+**`Not Found`.** Shouwu gives four reasons: it hasn't accepted the parcel yet, hasn't scanned it yet, the number is wrong, or the parcel was posted so long ago that its tracking is gone. It says processing usually takes a few days. Peek shows "Waiting for Shouwu International" and keeps checking. If Shouwu still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number character by character; if nothing comes after a few days, ask the seller.
 
 **Stuck on `Preparing`, `Shipment information received` or `Carrier received the shipment`.** Shouwu doesn't have the parcel yet, or hasn't sent it off from its warehouse. Ask the seller when it was handed over.
 

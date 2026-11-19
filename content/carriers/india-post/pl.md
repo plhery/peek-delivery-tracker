@@ -3,7 +3,7 @@ title: Śledzenie India Post: numery Speed Post, statusy i cło
 description: Śledź przesyłkę India Post lub Speed Post: format numeru zakończonego na IN, znaczenie statusów, doręczenie przez Pocztę Polską, odprawa celna i reklamacje.
 slug: sledzenie-india-post
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 India Post to Department of Posts, państwowy operator pocztowy **Indii**, który na swojej stronie podaje liczbę 164 999 placówek pocztowych — według własnej deklaracji największą sieć pocztową na świecie. W Indiach obsługuje przesyłki Speed Post, listy polecone oraz India Post Parcel, a w ruchu zagranicznym EMS (International Speed Post), rejestrowane pakiety dla e-commerce (International Tracked Packet) i paczki lotnicze. Przesyłkę sprawdzisz w wyszukiwarce na [indiapost.gov.in](https://www.indiapost.gov.in/), która wymaga przepisania kodu CAPTCHA, albo wklejając numer w polu powyżej. India Post nazywa ten kod *article barcode number* (numerem kodu kreskowego przesyłki); przy zakupie w sklepie internetowym poproś o niego sprzedawcę.
@@ -81,7 +81,7 @@ Na stronie głównej India Post ostrzega przed fałszywymi linkami podszywający
 
 ## Śledzenie przesyłek India Post w Peek
 
-[Peek](/) rozpoznaje układ dwóch liter, dziewięciu cyfr i końcówki `IN` jako India Post, gdy cyfra kontrolna się zgadza, i wyświetla „Wykryty przewoźnik”; przycisk „Zmień” pozwala wskazać innego operatora. Przy błędnej cyfrze kontrolnej (np. `EE482910577IN`) pojawia się ostrzeżenie „Cyfra kontrolna tego numeru się nie zgadza.”: porównaj numer z wiadomością od nadawcy albo wybierz „Śledź tak, jak wpisano”. Po zapisaniu pod India Post przesyłka ma na peektracker.com status „Oczekiwanie na przewoźnika India Post” aż do pierwszego skanu.
+[Peek](/) rozpoznaje układ dwóch liter, dziewięciu cyfr i końcówki `IN` jako India Post, gdy cyfra kontrolna się zgadza, i wyświetla „Wykryty przewoźnik”; przycisk „Zmień” pozwala wskazać innego operatora. Przy błędnej cyfrze kontrolnej (np. `EE482910577IN`) pojawia się ostrzeżenie „Cyfra kontrolna tego numeru się nie zgadza.”: porównaj numer z wiadomością od nadawcy albo wybierz „Śledź tak, jak wpisano”. Po zapisaniu pod India Post przesyłka ma status „Oczekiwanie na przewoźnika India Post” aż do pierwszego skanu.
 
 Peek nie odpytuje bezpośrednio portalu India Post: pobiera skany przez MySpeedPost, zewnętrzny serwis śledzenia spoza domeny India Post czerpiący dane z India Post (albo przez track91).
 

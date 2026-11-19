@@ -3,7 +3,7 @@ title: Techlink tracking: numero ZHPHD…ML, stati e chi consegna
 description: Tracking Techlink (智禾) per i pacchi dalla Cina: com'è fatto il numero ZHPHD…ML, cosa vogliono dire le scansioni e cosa fare se il tracciamento si ferma.
 slug: techlink-tracking
 published: 2026-11-01
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Techlink (智禾国际物流, Zhihe International Logistics) è un'azienda di logistica di Shenzhen che spedisce pacchi dalla Cina verso l'Europa e l'America per conto dei venditori online. Un numero Techlink inizia con ZHPHD e finisce con ML: inseriscilo nella pagina di tracking di Techlink, www.techlinksz.cn/trajectory, o incollalo nel box qui sopra. Il numero te lo dà il negozio che ha spedito l'ordine, nei dettagli di spedizione.
@@ -65,7 +65,7 @@ Il servizio espresso porta a porta di Techlink è DDP (dazi pagati) o DDU (dazi 
 
 **Fermo a metà strada.** Dopo l'imballaggio vengono l'uscita dal magazzino, l'esportazione e il volo, e tra un passo e l'altro possono passare giorni senza scansioni. Dopo `Arrive at the destination airport` restano la dogana d'importazione e il corriere locale. Le righe viste finora dopo questa sul tracking di Techlink riguardano solo il Paese di destinazione: un hub, un centro di smistamento e il tragitto da lì, le cinque righe della tabella a partire da `Shipment Received at Facility`, e per alcuni pacchi le scansioni del corriere che consegna, scritte con le sue parole, fino a `Parcel is out for delivery.` o a una consegna non riuscita. Se non si muove più niente, chiedi al venditore quale corriere consegna in Italia e con che numero. Vedi anche [perché il tracking non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-**Nessun risultato.** Controlla il numero con il venditore: un numero ZHPHD ha esattamente 19 caratteri. Anche un pacco appena prenotato potrebbe non mostrare ancora niente. Peek mostra su peektracker.com «In attesa di Techlink» e continua a controllare.
+**Nessun risultato.** Controlla il numero con il venditore: un numero ZHPHD ha esattamente 19 caratteri. Anche un pacco appena prenotato potrebbe non mostrare ancora niente. Peek mostra «In attesa di Techlink» e continua a controllare.
 
 **Perso, danneggiato o consegnato ma non ricevuto.** Techlink non pubblica una procedura di reclamo per chi riceve. Il contratto con Techlink ce l'ha il venditore, quindi chiedi a lui, o al marketplace, un rimborso o un nuovo invio. Vedi [pacco smarrito](guide:lost-parcel) e [pacco consegnato ma non ricevuto](guide:delivered-not-received); per un ordine Amazon, [tracciare un ordine Amazon](guide:amazon-orders).
 

@@ -3,7 +3,7 @@ title: BRT Sendungsverfolgung: Paket aus Italien, Status
 description: BRT-Paket verfolgen: wo die Sendungsnummer steht, was BRTs Statusmeldungen bedeuten, wer in Deutschland, Österreich und der Schweiz zustellt, Kontakt.
 slug: brt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 BRT ist ein italienischer Expresskurier und gehört wie DPD zur Geopost-Gruppe. Ein Paket verfolgst du mit dem Link in BRTs SMS oder E-Mail, im Suchfeld auf brt.it oder hier: Füg die Nummer oben ins Feld ein. Diese Nummer, den BRTcode, schickt dir BRT, sobald es das Paket hat und der Absender deine Kontaktdaten weitergegeben hat.
@@ -107,7 +107,7 @@ Peek schaut bis zu alle 10 Minuten nach, bis zu alle 2 Minuten, sobald das Paket
 
 ### Wo ist mein BRT-Paket gerade?
 
-Das sagt BRTs neueste Zeile: Bei `ARRIVED AT DEPOT` liegt es in der Filiale aus der Spalte Filiale, bei `FOR DELIVERY` bringt es der Zusteller. Noch keine Zeile? Dann hat BRT das Paket wohl noch nicht, und Peek zeigt auf peektracker.com „Warten auf BRT“; ist noch kein Paketdienst gewählt, bei einer `EOB`-Nummer „Warten auf den ersten Scan von BRT“.
+Das sagt BRTs neueste Zeile: Bei `ARRIVED AT DEPOT` liegt es in der Filiale aus der Spalte Filiale, bei `FOR DELIVERY` bringt es der Zusteller. Noch keine Zeile? Dann hat BRT das Paket wohl noch nicht, und Peek zeigt „Warten auf BRT“; ist noch kein Paketdienst gewählt, bei einer `EOB`-Nummer „Warten auf den ersten Scan von BRT“.
 
 ### Ist BRT dasselbe wie DPD?
 

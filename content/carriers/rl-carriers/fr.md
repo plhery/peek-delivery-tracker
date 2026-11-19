@@ -3,7 +3,7 @@ title: Suivi R+L Carriers : numéro PRO, statuts et réclamations
 description: Suis un envoi de fret R+L Carriers aux États-Unis : format du numéro PRO, sens de chaque ligne de suivi et règles en cas de retard, d'avarie ou de perte.
 slug: suivi-rl-carriers
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 R+L Carriers est un transporteur de fret routier aux **États-Unis**. Dans le code de Peek, il enlève la marchandise chez l'expéditeur, l'achemine de terminal en terminal et la livre depuis le terminal de destination aux États-Unis. Si une commande volumineuse ou un autre envoi de fret t'est adressé aux États-Unis via R+L, tu le suis grâce à son numéro PRO, communiqué par la boutique ou l'entreprise qui a réservé le transport : colle-le dans le champ ci-dessus. Le propre outil de R+L est la page *Shipment Tracing* sur rlcarriers.com : elle accepte un numéro PRO ou un identifiant de demande d'enlèvement (*Pickup Request ID*), jusqu'à 25 numéros à la fois, ainsi que d'autres références si tu te connectes à un compte MyRLC.
@@ -51,7 +51,7 @@ Cette page ne précise ni créneaux horaires, ni prise de rendez-vous, ni nombre
 
 ## Envoi R+L Carriers introuvable, en retard, endommagé ou perdu
 
-**Introuvable.** Pour un numéro PRO inconnu de son système, le traceur de R+L répond `No records found for Number:` suivi du PRO précédé d'un `I`. Sur peektracker.com, Peek affiche alors « En attente de R+L Carriers » pour un PRO enregistré sous R+L Carriers et réinterroge le traceur plus tard. Vérifie chaque chiffre par rapport à l'e-mail du vendeur ; si le numéro est exact, demande à l'expéditeur si R+L a déjà enlevé la marchandise.
+**Introuvable.** Pour un numéro PRO inconnu de son système, le traceur de R+L répond `No records found for Number:` suivi du PRO précédé d'un `I`. Peek affiche alors « En attente de R+L Carriers » pour un PRO enregistré sous R+L Carriers et réinterroge le traceur plus tard. Vérifie chaque chiffre par rapport à l'e-mail du vendeur ; si le numéro est exact, demande à l'expéditeur si R+L a déjà enlevé la marchandise.
 
 **Chiffre erroné.** Lorsqu'un numéro PRO échoue au contrôle de son dernier chiffre, le traceur de R+L renvoie le PRO suivi de `Pro number failed check digit validation.` Peek affiche alors « Numéro de suivi à vérifier ». Compare le numéro chiffre par chiffre avec le courriel de la boutique ou le bordereau d'expédition.
 

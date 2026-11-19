@@ -3,7 +3,7 @@ title: China Post seguimiento: número, estados y entrega en España
 description: Seguimiento de China Post: cómo es un número acabado en CN, qué significan los estados en chino, cuándo pasa a Correos y por qué se queda parado el seguimiento.
 slug: china-post-seguimiento
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 China Post, el correo de China, es el operador postal nacional chino, una empresa del Estado, y EMS es su marca urgente. Si tu pedido de AliExpress, Temu, Shein u otra tienda llegó con un número de seguimiento que acaba en `CN`, lo creó China Post, y en España lo entrega [Correos](carrier:correos-spain) con ese mismo número. Puedes seguirlo en la web de China Post, ems.com.cn, en el localizador de Correos cuando ya esté en España o en la casilla de arriba. El número está en los datos de envío de tu pedido, en la web de la tienda.
@@ -70,7 +70,7 @@ Correos. China Post lleva el paquete hasta España y, desde ahí, Correos se enc
 
 ## Seguimiento de China Post parado, perdido o devuelto
 
-**Todavía sin lecturas.** China Post no muestra nada hasta que lee el paquete; antes, la tienda solo ha creado la etiqueta. Pregúntale cuándo lo entregó. Mientras tanto, Peek muestra en peektracker.com «Esperando a China Post». Si dos días después China Post sigue sin mostrar nada para el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste.
+**Todavía sin lecturas.** China Post no muestra nada hasta que lee el paquete; antes, la tienda solo ha creado la etiqueta. Pregúntale cuándo lo entregó. Mientras tanto, Peek muestra «Esperando a China Post». Si dos días después China Post sigue sin mostrar nada para el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y desde entonces lo comprueba una vez al día, y una vez a la semana cuando ha pasado una semana desde que lo añadiste.
 
 **Parado desde que salió de China.** Entre el vuelo y la primera lectura de Correos pueden pasar días sin novedades. Busca el mismo número en el localizador de Correos. Un número que empieza por U puede no tener nunca lecturas en España. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguir un paquete de China](guide:tracking-from-china).
 

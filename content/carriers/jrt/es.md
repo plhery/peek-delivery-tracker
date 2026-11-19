@@ -3,7 +3,7 @@ title: JRT seguimiento: número JRT…MM, vuelos, DHL y UPS
 description: Sigue tu paquete de JRT (今日通) desde Xiamen: cómo es un número JRT…MM, qué significan sus pasos en chino y en inglés y quién lo entrega en Europa y en EE. UU.
 slug: jrt-seguimiento
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JRT (今日通, Jinritong) es 厦门今日通商贸有限公司, una empresa de logística de Xiamen, en China. Si una tienda china te ha enviado el pedido con JRT, te habrá dado un número de seguimiento que empieza por JRT y acaba en MM: pégalo en la casilla de arriba para rastrear el paquete. La web de seguimiento de JRT lo sigue desde China: el vuelo, la aduana y el paso a DHL, en los envíos a Europa, o a UPS, en los envíos a Estados Unidos. JRT copia en su web los escaneos de DHL y de UPS. En su línea a Irlanda con FedEx en el nombre del producto, el paquete pasa en cambio a FedEx; en su línea a España, a CTT Express; en la de Polonia, a InPost, y en la de México, a J&T Express México.
@@ -152,7 +152,7 @@ En los envíos a Europa, las horas de los pasos de JRT van en hora de Pekín (UT
 
 **Nada después de `已交服务商`, `Delivery to final service provider` o `已交仓`.** JRT ya ha hecho su parte. Si su web no copia los escaneos de DHL, de UPS, de FedEx o de J&T Express México y Peek no muestra el número de DHL o de FedEx, los siguientes pasos están en el seguimiento de la empresa que reparte: pide ese número a la tienda. Más en [el seguimiento de mi paquete no se actualiza](guide:tracking-not-updating) y [seguimiento de paquetes de China](guide:tracking-from-china).
 
-**No sale nada.** Con un número que no conoce, la web de JRT muestra un solo resultado, con el número como referencia y todas las demás columnas vacías. Peek toma esa respuesta como señal de que JRT ya tiene registrado el envío, aunque aún sin escanear, así que muestra en peektracker.com «Esperando a JRT» y sigue comprobando, sin pedirte que revises el número (si pegaste una referencia UP sin elegir transportista, «Esperando el primer escaneo de JRT»). Por eso, compara tú el número con el mensaje de la tienda, carácter por carácter.
+**No sale nada.** Con un número que no conoce, la web de JRT muestra un solo resultado, con el número como referencia y todas las demás columnas vacías. Peek toma esa respuesta como señal de que JRT ya tiene registrado el envío, aunque aún sin escanear, así que muestra «Esperando a JRT» y sigue comprobando, sin pedirte que revises el número (si pegaste una referencia UP sin elegir transportista, «Esperando el primer escaneo de JRT»). Por eso, compara tú el número con el mensaje de la tienda, carácter por carácter.
 
 **Dirección no encontrada.** Después de `not delivered-bad address`, revisa la dirección de tu pedido y avisa enseguida a la tienda. Si luego aparece `shipment will be returned to origin-bad address`, el paquete vuelve al origen: pide a la tienda el reembolso o un nuevo envío.
 

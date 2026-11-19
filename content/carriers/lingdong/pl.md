@@ -3,7 +3,7 @@ title: Śledzenie Lingdong International: numer SZLD i statusy
 description: Śledź paczkę Lingdong International (领东国际) z Shenzhen: jak wygląda numer SZLD, co oznacza każdy etap śledzenia, kto doręcza przesyłkę i opłaty celne.
 slug: sledzenie-lingdong
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 Lingdong International (领东国际, pełna nazwa 深圳市领东国际货运代理有限公司, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) to spedytor z Shenzhen w Chinach, który wysyła za granicę zamówienia z chińskich sklepów internetowych. Jego własne numery śledzenia zaczynają się od SZLD: wklej swój numer w polu powyżej albo wpisz go w oknie 快件查询 (wyszukiwanie przesyłek) na stronie lingdong56.com, które otwiera stronę śledzenia Lingdong. Numer przekazuje sklep, który nadał Twoje zamówienie.
@@ -65,7 +65,7 @@ W przypadku przesyłek spoza UE odprawianych w **Polsce** przez Pocztę Polską,
 
 **Tylko `货物电子信息已经收到`.** Sklep zarejestrował wysyłkę, ale paczka nie trafiła jeszcze do magazynu Lingdong. Gdy przez kilka dni nic się nie zmienia, zapytaj sprzedawcę, czy faktycznie ją nadał.
 
-**Brak wyników.** Dla nieznanego numeru strona śledzenia Lingdong wyświetla jeden wiersz z tym numerem jako referencją i pustymi pozostałymi kolumnami. Peek traktuje taką odpowiedź jak zarejestrowane zlecenie bez skanów: nadal sprawdza przesyłkę i na peektracker.com pokazuje „Oczekiwanie na przewoźnika Lingdong International”, nie prosząc o sprawdzenie numeru. Porównaj więc sam numer znak po znaku z wiadomością od sprzedawcy.
+**Brak wyników.** Dla nieznanego numeru strona śledzenia Lingdong wyświetla jeden wiersz z tym numerem jako referencją i pustymi pozostałymi kolumnami. Peek traktuje taką odpowiedź jak zarejestrowane zlecenie bez skanów: nadal sprawdza przesyłkę i pokazuje „Oczekiwanie na przewoźnika Lingdong International”, nie prosząc o sprawdzenie numeru. Porównaj więc sam numer znak po znaku z wiadomością od sprzedawcy.
 
 **Zagubiona, uszkodzona lub zwrócona.** Lingdong nie publikuje procedury reklamacyjnej dla odbiorców: jego strona warunków przewozu (运输条款) jest pusta. Na stronie widnieje przycisk czatu dotyczący problematycznych paczek, odszkodowań i skarg, ale umowę z Lingdong ma sprzedawca: o zwrot pieniędzy lub ponowną wysyłkę zwróć się do sklepu albo platformy zakupowej. Zobacz [zagubiona paczka](guide:lost-parcel) i [paczka zwrócona do nadawcy](guide:returned-to-sender).
 

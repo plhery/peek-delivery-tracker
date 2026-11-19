@@ -3,7 +3,7 @@ title: R+L Carriers Sendungsverfolgung: PRO-Nummer und Status
 description: Verfolge eine Frachtsendung von R+L Carriers in den USA: Aufbau der PRO-Nummer, Bedeutung jeder Statuszeile und Fristen bei Verspätung, Schaden oder Verlust.
 slug: rl-carriers-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 R+L Carriers ist eine Frachtspedition in den **Vereinigten Staaten**. Im Code von Peek holt R+L die Fracht beim Versender ab, befördert sie von Terminal zu Terminal und stellt sie vom Zielterminal in den USA aus zu. Wenn eine größere Bestellung oder sonstige Fracht in den USA mit R+L zu dir unterwegs ist, verfolgst du sie über ihre PRO-Nummer, die dir der Onlineshop oder das beauftragende Unternehmen mitteilt: Füge sie oben in das Eingabefeld ein. Die eigene Sendungsverfolgung von R+L ist die Seite *Shipment Tracing* auf rlcarriers.com: Sie nimmt eine PRO-Nummer oder eine Abholauftragsnummer (*Pickup Request ID*) entgegen — bis zu 25 Nummern gleichzeitig — und mit einem MyRLC-Konto auch weitere Referenznummern.
@@ -51,7 +51,7 @@ Diese Seite enthält keine Angaben zu Zustellzeitfenstern, Avisierungen, Zustell
 
 ## R+L Carriers Sendung nicht gefunden, verspätet, beschädigt oder verloren
 
-**Nicht gefunden.** Kennt der Tracer von R+L eine PRO-Nummer nicht, antwortet er mit `No records found for Number:` gefolgt von der PRO mit vorangestelltem `I`. Auf peektracker.com zeigt Peek für eine unter R+L Carriers gespeicherte Nummer dann „Warten auf R+L Carriers“ und fragt später erneut nach. Vergleiche jede Ziffer mit der Versandmail des Händlers; stimmt die Nummer, frage beim Versender nach, ob R+L die Fracht bereits abgeholt hat.
+**Nicht gefunden.** Kennt der Tracer von R+L eine PRO-Nummer nicht, antwortet er mit `No records found for Number:` gefolgt von der PRO mit vorangestelltem `I`. Peek zeigt für eine unter R+L Carriers gespeicherte Nummer dann „Warten auf R+L Carriers“ und fragt später erneut nach. Vergleiche jede Ziffer mit der Versandmail des Händlers; stimmt die Nummer, frage beim Versender nach, ob R+L die Fracht bereits abgeholt hat.
 
 **Prüfziffer stimmt nicht.** Geht die Prüfziffer einer PRO-Nummer nicht auf, antwortet R+L mit der PRO-Nummer gefolgt von `Pro number failed check digit validation.` Peek meldet daraufhin „Sendungsnummer prüfen“. Gleiche die Nummer Ziffer für Ziffer mit der E-Mail des Shops oder den Frachtpapieren ab.
 

@@ -3,7 +3,7 @@ title: Seguimento R+L Carriers: número PRO, estados e reclamações
 description: Segue uma remessa de carga da R+L Carriers nos EUA: formato do número PRO, significado de cada linha de rastreio e prazos em caso de atraso, dano ou perda.
 slug: seguimento-rl-carriers
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A R+L Carriers é uma transportadora rodoviária de mercadorias nos **Estados Unidos**. No código do Peek, recolhe a carga nas instalações do expedidor, transporta-a de terminal em terminal e entrega-a a partir do terminal de destino nos EUA. Se uma encomenda de grande porte ou outra carga te está a ser enviada nos Estados Unidos pela R+L, segues o envio pelo número PRO, indicado pela loja ou pela empresa que reservou o transporte: cola-o na caixa acima. O rastreador próprio da R+L é a página *Shipment Tracing* em rlcarriers.com: aceita um número PRO ou um identificador de pedido de recolha (*Pickup Request ID*), até 25 números de uma só vez, e, com uma conta MyRLC, também outras referências.
@@ -51,7 +51,7 @@ Esta página não indica janelas horárias, marcações de entrega, número de t
 
 ## Remessa da R+L Carriers não encontrada, atrasada, danificada ou perdida
 
-**Não encontrada.** Para um número PRO que não conste no sistema, o rastreador da R+L responde `No records found for Number:` seguido do PRO com um `I` à frente. Em peektracker.com, o Peek mostra então «À espera de R+L Carriers» para um PRO associado à R+L Carriers e volta a verificar mais tarde. Confere cada algarismo com o e-mail da loja; se o número estiver certo, pergunta ao expedidor se a R+L já recolheu a carga.
+**Não encontrada.** Para um número PRO que não conste no sistema, o rastreador da R+L responde `No records found for Number:` seguido do PRO com um `I` à frente. O Peek mostra então «À espera de R+L Carriers» para um PRO associado à R+L Carriers e volta a verificar mais tarde. Confere cada algarismo com o e-mail da loja; se o número estiver certo, pergunta ao expedidor se a R+L já recolheu a carga.
 
 **Algarismo errado.** Se o dígito de controlo de um PRO falhar a validação, o rastreador da R+L devolve o PRO seguido de `Pro number failed check digit validation.` O Peek apresenta nesse caso «Verifica o número de seguimento». Compara o código algarismo a algarismo com o e-mail da loja ou com os documentos de transporte.
 

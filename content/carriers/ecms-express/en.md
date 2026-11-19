@@ -3,7 +3,7 @@ title: ECMS Express tracking: numbers, scans and who delivers
 description: Track an ECMS Express (易客满) parcel: what its 16-character numbers look like, what each scan means, who delivers it and how to reach ECMS.
 slug: ecms-express-tracking
 published: 2026-10-31
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 ECMS Express (易客满, also ECMS Global) is an international express company that ships parcels for online shops. If a shop sent your order with ECMS, your number has 16 characters and starts with EC, ES, AP or AX: paste it in the box above. ECMS carries the parcel abroad and through customs, then a local carrier delivers it.
@@ -65,7 +65,7 @@ For the last leg, ECMS says it partners "with trusted local carriers". Its track
 
 ## ECMS Express parcel not arriving or tracking stuck
 
-**"We could not find a shipment for this tracking number."** ECMS's tracker doesn't know the number: a typo, or the shop hasn't sent ECMS the details yet. Peek shows "Waiting for ECMS Express" on peektracker.com and keeps checking. Check the number; if nothing comes after a few days, ask the seller whether the parcel was really sent.
+**"We could not find a shipment for this tracking number."** ECMS's tracker doesn't know the number: a typo, or the shop hasn't sent ECMS the details yet. Peek shows "Waiting for ECMS Express" and keeps checking. Check the number; if nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Virtual Manifest has been received`.** ECMS has the details, not the parcel. Ask the shop when it handed the parcel over.
 

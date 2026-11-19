@@ -3,7 +3,7 @@ title: nox NachtExpress tracking: statuses, drop-off and contact
 description: Track a nox NachtExpress shipment: what its barcode looks like, what nox's German scans mean, night delivery to your drop-off place, deadlines and contact.
 slug: nox-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 nox (nox NachtExpress) is a German night express company, nox Germany GmbH, based in Langenfeld. It carries spare parts and other urgent goods for businesses. It collects them in the afternoon and delivers them during the night, usually before 8:00, to a place agreed with the recipient: a safe, a garage, a workshop or the boot of a service van. Track a shipment with its barcode on [nox's tracker](https://trackandtrace.app.nox.express/scannungen), or paste the number in the box above. The tracker is in German: the tables below explain it.
@@ -86,7 +86,7 @@ To follow all its shipments, a business needs an account on nox's customer porta
 
 Peek can't tell nox by the number alone: its 22000 barcodes share their length with Ciblex, InPost, bpost and Austrian Post, and Peek doesn't match its other barcodes to nox by shape. Paste it all the same: Peek follows more than 3,500 carriers. While you add a 22000 barcode, Peek asks the carriers that use the shape, those of your country first ("Checking tracking services…"), and shows "nox has this parcel." when nox's tracker knows it. If several know it, you choose.
 
-If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for nox" on peektracker.com once you've picked nox. To pick it yourself, press "Change" and choose nox: it is under "Fits this number" for a 22000 barcode; for an SWR, RA or C barcode, search for it (NOX Nachtexpress, Innight Express and TNT Innight find it too). On a parcel you've already added, use "Change carrier". If you pick nox for a number of another shape, Peek says it "doesn’t issue numbers like this one" and doesn't ask nox: once added, unless a tracking service has the parcel, it shows "Check the tracking number". A link from nox's tracker, at trackandtrace.app.nox.express or tcs.app.nox.express, files the shipment under nox straight away.
+If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for nox" once you've picked nox. To pick it yourself, press "Change" and choose nox: it is under "Fits this number" for a 22000 barcode; for an SWR, RA or C barcode, search for it (NOX Nachtexpress, Innight Express and TNT Innight find it too). On a parcel you've already added, use "Change carrier". If you pick nox for a number of another shape, Peek says it "doesn’t issue numbers like this one" and doesn't ask nox: once added, unless a tracking service has the parcel, it shows "Check the tracking number". A link from nox's tracker, at trackandtrace.app.nox.express or tcs.app.nox.express, files the shipment under nox straight away.
 
 Peek reads the status, each scan's German wording and time (as German time) and the delivery time. It leaves out the scan place and the remark, and it asks for no postcode, so it doesn't show what the tracker shows after the postcode check. Peek shows no expected delivery day, weight, drop-off place or delivery photo.
 

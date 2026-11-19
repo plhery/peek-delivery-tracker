@@ -3,7 +3,7 @@ title: Suivi HuaHan Logistics : numéro HHW…YQ et livraison
 description: Suivez un colis HuaHan Logistics (华翰物流) depuis la Chine : format du numéro HHW…YQ, sens des statuts, transporteur final, douane et suivi dans Peek.
 slug: suivi-colis-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 HuaHan Logistics (华翰物流, également appelé HuaHan Express ou 华翰速递) est un transporteur chinois spécialisé dans la logistique e-commerce transfrontalière qui expédie les colis hors de Chine par avion ou par voie postale avant de les confier à un transporteur local dans le pays de destination pour la livraison finale. Si une boutique en ligne a expédié votre commande avec HuaHan, repérez un numéro commençant par `HHW` et se terminant par `YQ`, puis collez-le dans le champ ci-dessus. Le suivi public de HuaHan sur [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) permet aussi de voir le nom du transporteur local chargé du dernier kilomètre ainsi que son propre numéro de suivi.
@@ -106,7 +106,7 @@ HuaHan s’adresse aux vendeurs e-commerce et ses pages publiques ne précisent 
 
 ## Colis HuaHan en retard, bloqué ou introuvable
 
-**Numéro introuvable (`没有找到记录`).** Tant que HuaHan ne connaît pas le numéro, son suivi répond `没有找到记录` (« aucun enregistrement trouvé ») ; sur peektracker.com, Peek affiche « En attente de HuaHan Logistics » et continue de vérifier. Si HuaHan ne reconnaît toujours pas le numéro après deux jours et qu’aucune autre source n’a répondu, le site affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et espace ensuite les vérifications à une fois par jour, puis une fois par semaine après sept jours. Vérifiez chaque caractère (`HHW`, deux lettres, dix chiffres, `YQ`) auprès du vendeur.
+**Numéro introuvable (`没有找到记录`).** Tant que HuaHan ne connaît pas le numéro, son suivi répond `没有找到记录` (« aucun enregistrement trouvé ») ; Peek affiche « En attente de HuaHan Logistics » et continue de vérifier. Si HuaHan ne reconnaît toujours pas le numéro après deux jours et qu’aucune autre source n’a répondu, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et espace ensuite les vérifications à une fois par jour, puis une fois par semaine après sept jours. Vérifiez chaque caractère (`HHW`, deux lettres, dix chiffres, `YQ`) auprès du vendeur.
 
 **Bloqué sur `Shipment information received`.** Le vendeur a créé l’expédition, mais HuaHan n’a pas encore scanné le colis en entrepôt. Demandez au vendeur quand il a remis la marchandise.
 

@@ -3,7 +3,7 @@ title: Mayi Yinfu tracking: MY numbers, flight lines and DHL
 description: Track a Mayi Yinfu (蚂蚁银服) parcel from China: what its MY…US numbers look like, what its flight lines mean and how DHL takes over in Europe.
 slug: mayi-yinfu-tracking
 published: 2026-10-28
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, China, that ships express and small parcels abroad. Its tracking numbers are MY, ten digits and US, and its tracker also knows numbers made of MYYF, eight digits and CN: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on mayiyinfu.com.cn, which opens Mayi Yinfu's tracker. Mayi Yinfu flies parcels to your region and hands them to a company that delivers there: into Europe, Deutsche Post DHL.
@@ -63,7 +63,7 @@ Mayi Yinfu's site doesn't say who delivers where. Its tracker shows the hand-ove
 
 **Stuck after `已转运transferred`.** Mayi Yinfu's part is done: follow the delivering company's number from its tracker. More in [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
 
-**Nothing found.** For a number it doesn't know, the tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as Mayi Yinfu listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Mayi Yinfu" on peektracker.com, with no request to check the number. So compare it with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, the tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as Mayi Yinfu listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Mayi Yinfu", with no request to check the number. So compare it with the seller's message yourself, character by character.
 
 **Lost, damaged or returned.** Mayi Yinfu publishes no claim process, so ask the seller or the marketplace for a refund or a new parcel. See [lost parcels](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [delivered but not received](guide:delivered-not-received).
 

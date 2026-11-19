@@ -3,7 +3,7 @@ title: Suivi colis Shouwu : numéro SWECN…YQ, statuts et livraison
 description: Suivre un colis Shouwu International (守务国际) venu de Chine : à quoi ressemble le numéro SWECN…YQ, ce que veulent dire les statuts et qui livre en France.
 slug: shouwu-suivi
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Shouwu International (守务国际, aussi SWE) est une société de logistique de Shanghai qui expédie les colis de vendeurs en ligne chinois vers l'Europe et les États-Unis, où une poste ou un transporteur les livre. En France, c'est surtout Colissimo, et Shouwu annonce 4 à 7 jours ouvrés. Le vendeur choisit le numéro qu'il te transmet : celui de Shouwu, qui commence par SWECN et finit par YQ, ou celui de Colissimo. Colle l'un ou l'autre dans le champ ci-dessus, ou le numéro Shouwu sur son site de suivi, [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Pas de numéro ? Demande-le au vendeur : Shouwu n'a aucun contact pour les destinataires.
@@ -32,7 +32,7 @@ Le suivi de Shouwu est en anglais, sous un titre en chinois. Pour chaque colis, 
 
 | Statut Shouwu | Ce que ça veut dire pour toi | Peek affiche |
 | --- | --- | --- |
-| `Not Found` | Shouwu n'a encore rien sous ce numéro : « We seem can't identify the number. » | « En attente de Shouwu International » (sur peektracker.com) |
+| `Not Found` | Shouwu n'a encore rien sous ce numéro : « We seem can't identify the number. » | « En attente de Shouwu International » |
 | `Preparing` | Selon Shouwu, le colis a été remis à son entrepôt en Chine, ou y est pesé et scellé. Ce statut peut apparaître avant tout scan. | « Étiquette créée », puis « Pris en charge » après l'enlèvement par le partenaire ou un scan de l'entrepôt |
 | `In Transit` | Tout le trajet, de la remise à un transporteur jusqu'à la douane et à l'acheminement dans ton pays. | « En transit », ou l'étape du dernier scan, comme « À la douane » ; « Étiquette créée » tant qu'il n'y a que les données de commande et `Carrier received the shipment` |
 | `Undelivered` | Une tentative de livraison a échoué. | « Tentative de livraison », ou « Prêt à être retiré » ou « Retourné à l’expéditeur » si le dernier scan le dit |
@@ -106,7 +106,7 @@ Shouwu dit travailler directement avec USPS, Royal Mail, La Poste, DHL, DPD et H
 
 ## Colis Shouwu bloqué ou qui n'arrive pas
 
-**`Not Found`.** Shouwu donne quatre raisons : il n'a pas encore accepté le colis, ne l'a pas encore scanné, le numéro est faux, ou le colis a été posté il y a si longtemps que son suivi a disparu. Il ajoute que le traitement prend en général quelques jours. Peek affiche sur peektracker.com « En attente de Shouwu International » et continue de vérifier. Si deux jours plus tard Shouwu ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout. Vérifie le numéro caractère par caractère ; si rien ne vient après quelques jours, demande au vendeur.
+**`Not Found`.** Shouwu donne quatre raisons : il n'a pas encore accepté le colis, ne l'a pas encore scanné, le numéro est faux, ou le colis a été posté il y a si longtemps que son suivi a disparu. Il ajoute que le traitement prend en général quelques jours. Peek affiche « En attente de Shouwu International » et continue de vérifier. Si deux jours plus tard Shouwu ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek affiche « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » et le vérifie ensuite une fois par jour, puis une fois par semaine quand une semaine s'est écoulée depuis son ajout. Vérifie le numéro caractère par caractère ; si rien ne vient après quelques jours, demande au vendeur.
 
 **Bloqué sur `Preparing`, `Shipment information received` ou `Carrier received the shipment`.** Shouwu n'a pas encore le colis, ou ne l'a pas encore expédié de son entrepôt. Demande au vendeur quand il le lui a remis.
 

@@ -3,7 +3,7 @@ title: China Post Sendungsverfolgung: Nummer, Status, Zustellung
 description: China-Post-Paket verfolgen: wie die CN-Nummer aussieht, was die chinesischen Status bedeuten und wer in Deutschland, Österreich und der Schweiz zustellt.
 slug: china-post-sendungsverfolgung
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 China Post ist die staatliche Post Chinas, EMS ihre Expressmarke. Kam deine Bestellung bei AliExpress, Temu, Shein oder einem anderen Shop mit einer Nummer, die auf `CN` endet, hat China Post sie vergeben. In Deutschland, Österreich und der Schweiz übernimmt meist die Post vor Ort das Paket und stellt es unter derselben Nummer zu. Verfolgen kannst du es auf China Posts Seite ems.com.cn oder oben im Feld. Die Nummer steht in den Versanddetails deiner Bestellung.
@@ -71,7 +71,7 @@ Zustellversuche und Benachrichtigungskarten folgen den Regeln deiner Post, siehe
 
 ## China Post Sendungsverfolgung ohne Update, Paket verloren oder zurück
 
-**Noch keine Scans.** China Post zeigt nichts, bis sie das Paket gescannt hat. Vorher hat der Shop nur ein Etikett erstellt. Frag den Shop, wann er das Paket übergeben hat. Peek zeigt so lange auf peektracker.com „Warten auf China Post“. Zeigt China Post auch zwei Tage später nichts zu der Nummer und antwortet sonst niemand für sie, zeigt peektracker.com stattdessen „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich.
+**Noch keine Scans.** China Post zeigt nichts, bis sie das Paket gescannt hat. Vorher hat der Shop nur ein Etikett erstellt. Frag den Shop, wann er das Paket übergeben hat. Peek zeigt so lange „Warten auf China Post“. Zeigt China Post auch zwei Tage später nichts zu der Nummer und antwortet sonst niemand für sie, zeigt Peek stattdessen „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“, und Peek fragt nur noch täglich nach, eine Woche nach dem Hinzufügen nur noch wöchentlich.
 
 **Funkstille nach dem Abflug.** Zwischen Flug und erstem Scan deiner Post können Tage ohne Neuigkeit vergehen. Schau mit derselben Nummer bei deiner Post nach. Bei der Deutschen Post sind nicht alle Schritte sichtbar, und die Österreichische Post zeigt das Paket erst, wenn ein Logistikzentrum es erfasst hat. Eine Nummer mit U bekommt in deinem Land vielleicht nie Scans. Mehr in [Sendungsverfolgung aktualisiert nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 

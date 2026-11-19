@@ -3,7 +3,7 @@ title: iMile rastreio: números, estados e entrega em Portugal
 description: Segue uma encomenda da iMile em Portugal: como é o número, o que significam os estados em inglês, como funciona a entrega e como contactar a iMile.
 slug: imile-rastreio
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 A iMile é uma empresa de entregas para comércio eletrónico fundada no Dubai em 2017. Faz transporte internacional de encomendas, nomeadamente a partir da China, trata do desalfandegamento e assegura a última milha com estafetas próprios em alguns mercados. Consulta o teu código na [página de rastreio da iMile](https://www.imile.com/en/track) ou cola-o na caixa acima. O número vem da loja, nos dados de envio da encomenda.
@@ -66,7 +66,7 @@ A página de rastreio da iMile tem uma vista de comprovativo de entrega que pede
 
 ## Encomenda iMile parada, perdida ou devolvida
 
-**Ainda sem seguimento.** Enquanto só aparecer `Order submitted, pending to receive.`, o vendedor registou o envio mas pode ainda não ter entregue a encomenda à iMile. Pergunta à loja quando foi expedida. Se escolheste a iMile em «Alterar» para um código que a iMile ainda não reconhece, o Peek mostra no peektracker.com «À espera de iMile»; se ao fim de dois dias a iMile continuar sem reconhecer esse número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana após sete dias.
+**Ainda sem seguimento.** Enquanto só aparecer `Order submitted, pending to receive.`, o vendedor registou o envio mas pode ainda não ter entregue a encomenda à iMile. Pergunta à loja quando foi expedida. Se escolheste a iMile em «Alterar» para um código que a iMile ainda não reconhece, o Peek mostra «À espera de iMile»; se ao fim de dois dias a iMile continuar sem reconhecer esse número e nenhuma outra fonte responder por ele, o Peek mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e passa a verificá-la uma vez por dia, e uma vez por semana após sete dias.
 
 **Sem novidades durante vários dias.** As encomendas vindas da China ficam muitas vezes sem atualizações entre o voo, a alfândega e o primeiro centro no país de chegada. Lê mais em [rastrear uma encomenda vinda da China](guide:tracking-from-china) e [porque é que o rastreio não atualiza](guide:tracking-not-updating).
 

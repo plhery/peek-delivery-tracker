@@ -3,7 +3,7 @@ title: J&T Express Germany tracking: JTDE numbers and statuses
 description: Track a J&T Express parcel in Germany: what a JTDE number looks like, what each tracking line means, and what to do when your parcel is late, lost or missing.
 slug: jt-express-germany-tracking
 published: 2026-10-21
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 J&T Express Germany (J&T Express Germany GmbH, Frankfurt am Main) is the German network of the J&T Express parcel group: it delivers parcels in Germany. If a shop sent your order with J&T, the tracking number starts with `JTDE`: paste it in the box above, or look it up on [J&T's own tracker at jtexpress.de](https://www.jtexpress.de/tracking). The shop that sent your order has the number, in its shipping email or on your order page.
@@ -23,7 +23,7 @@ If a number has one digit too few or too many after `JTDE` and no carrier answer
 
 J&T's tracker takes up to 10 numbers in one search, separated by spaces or commas.
 
-**Numbers that look alike.** J&T's networks in other countries have their own trackers and numbers: `JTUK` and 12 digits is [J&T Express UK](carrier:j-and-t-uk), `JTAU` and 12 digits [J&T Express Australia](carrier:j-and-t-au), `JTE` and 12 digits [J&T Express Middle East](carrier:j-and-t-middle-east), and `JT` with 13 digits is used by J&T in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). Only `JTDE` belongs to the German network. If J&T's tracker answers `Keine Abfrageergebnisse` (`No tracking records yet` in English), or peektracker.com keeps showing "Waiting for J&T Express Germany", compare the number with the shop's email, or ask the shop.
+**Numbers that look alike.** J&T's networks in other countries have their own trackers and numbers: `JTUK` and 12 digits is [J&T Express UK](carrier:j-and-t-uk), `JTAU` and 12 digits [J&T Express Australia](carrier:j-and-t-au), `JTE` and 12 digits [J&T Express Middle East](carrier:j-and-t-middle-east), and `JT` with 13 digits is used by J&T in South-East Asia and in China ([J&T Express China](carrier:j-and-t-cn)). Only `JTDE` belongs to the German network. If J&T's tracker answers `Keine Abfrageergebnisse` (`No tracking records yet` in English), or Peek keeps showing "Waiting for J&T Express Germany", compare the number with the shop's email, or ask the shop.
 
 ## J&T Express Germany tracking statuses explained
 
@@ -77,7 +77,7 @@ The shop chose J&T, so for an online order the shop is your first contact. Under
 
 **Not moving.** J&T publishes no delivery times for recipients. A parcel showing "Received by carrier" or "In transit" with no new line for four days gets a flag in Peek ("No tracking update for four days") and a "Get help from J&T Express Germany" link. If nothing moves after that, ask the shop, or call J&T's hotline with your number. More on [tracking that isn't updating](guide:tracking-not-updating).
 
-**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express Germany" on peektracker.com. Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
+**No tracking yet.** A number J&T's tracker doesn't know yet shows as "Waiting for J&T Express Germany". Shops often create the number before they hand the parcel over. If J&T still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number with the shop and ask whether the parcel has really been sent.
 
 **Delivered but not received.** Read the delivered line in Peek: if it names a place, such as `Mailbox` or `Garage`, look there; if it says `Left with neighbor`, ask your neighbours, or look the neighbour up on J&T's tracker (see above). J&T's FAQ also asks you to check whether family, a neighbour or building staff took the parcel in. Still missing? Report it to J&T's hotline, and ask the shop for a refund or a new parcel, with your tracking number. See also [delivered but not received](guide:delivered-not-received).
 
@@ -101,7 +101,7 @@ For an online order, start with the shop all the same: it booked the delivery wi
 
 Peek shows the status, each scan at its exact time and the delivery time. J&T gives every scan as an exact moment, so Peek shows it in your device's time zone; on peektracker.com and in the iPhone app, the last line under the history names it ("Times are in your time zone: …"). Scans come in J&T's English, even if you read them in German on jtexpress.de. J&T gives no place, expected delivery day or weight, so Peek shows no map. On a very long history it keeps the newest 100 scans. "Open the J&T Express Germany website", on the parcel's page, opens your number on J&T's tracker.
 
-Until J&T scans the parcel, Peek keeps asking and shows "Waiting for J&T Express Germany" on peektracker.com (or, if J&T still doesn't know the number two days later, a request to check it). When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words. If J&T's tracker and the tracking services later all answer without a scan for a parcel that already has some, Peek keeps the scans it found and, if that lasts, says "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking."
+Until J&T scans the parcel, Peek keeps asking and shows "Waiting for J&T Express Germany" (or, if J&T still doesn't know the number two days later, a request to check it). When J&T's tracker can't be reached or doesn't know the number, Peek asks tracking services and shows their history, in their own words. If J&T's tracker and the tracking services later all answer without a scan for a parcel that already has some, Peek keeps the scans it found and, if that lasts, says "The carrier has no new scans for now. The ones already found are kept, and Peek keeps checking."
 
 Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day J&T scans the parcel out for delivery, while J&T's own tracker answers (through tracking services, every 15 minutes). After two days without a new scan (12 hours while it shows "Received by carrier"), it checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". Peek can't contact J&T or the shop for you, change the address or book a new delivery.
 
@@ -121,7 +121,7 @@ J&T's German website lists none, but one J&T Express Germany line Peek knows say
 
 ### Why is my J&T tracking number not found?
 
-Check that it starts with `JTDE` and has 12 digits after it: numbers from J&T's other networks, such as `JTUK` in the UK, aren't German. If the number is right, J&T may not have the parcel yet: its tracker answers `Keine Abfrageergebnisse` (`No tracking records yet`), and peektracker.com shows "Waiting for J&T Express Germany". If J&T still doesn't know the number two days later and nothing else has answered for it, the site asks you to check it, choose another carrier or delete the parcel. If J&T still has no record after several days, ask the shop.
+Check that it starts with `JTDE` and has 12 digits after it: numbers from J&T's other networks, such as `JTUK` in the UK, aren't German. If the number is right, J&T may not have the parcel yet: its tracker answers `Keine Abfrageergebnisse` (`No tracking records yet`), and Peek shows "Waiting for J&T Express Germany". If J&T still doesn't know the number two days later and nothing else has answered for it, Peek asks you to check it, choose another carrier or delete the parcel. If J&T still has no record after several days, ask the shop.
 
 ### How do I contact J&T Express in Germany?
 

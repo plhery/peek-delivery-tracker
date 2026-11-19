@@ -3,7 +3,7 @@ title: Seguimento HuaHan Logistics: código HHW…YQ e entrega
 description: Siga uma encomenda HuaHan Logistics (华翰物流) vinda da China: formato do código HHW…YQ, significado dos estados, transportadora local, alfândega e Peek.
 slug: seguimento-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A HuaHan Logistics (华翰物流, também conhecida como HuaHan Express ou 华翰速递) é uma empresa chinesa de logística para comércio eletrónico transfronteiriço que expede encomendas a partir da China por via aérea ou postal e as entrega a uma transportadora local no país de destino para a distribuição final. Se uma loja online enviou a sua encomenda pela HuaHan, procure um número começado por `HHW` e terminado em `YQ` e cole-o na caixa acima. O localizador público da HuaHan em [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) também pode indicar a transportadora responsável pela entrega na sua área e o respetivo código local.
@@ -105,7 +105,7 @@ A HuaHan presta serviços aos vendedores online e as suas páginas não indicam 
 
 ## Encomenda HuaHan atrasada, parada ou não encontrada
 
-**Número não encontrado (`没有找到记录`).** Enquanto a HuaHan não tiver registo do código, o seu rastreador responde `没有找到记录` («nenhum registo encontrado»); em peektracker.com, o Peek mostra «À espera de HuaHan Logistics» e continua a verificar. Se ao fim de dois dias nem a HuaHan nem outra fonte reconhecerem o número, surge «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e as consultas passam a diárias e, após uma semana, semanais. Confirme cada carácter (`HHW`, duas letras, dez algarismos, `YQ`) na mensagem do vendedor.
+**Número não encontrado (`没有找到记录`).** Enquanto a HuaHan não tiver registo do código, o seu rastreador responde `没有找到记录` («nenhum registo encontrado»); o Peek mostra «À espera de HuaHan Logistics» e continua a verificar. Se ao fim de dois dias nem a HuaHan nem outra fonte reconhecerem o número, surge «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» e as consultas passam a diárias e, após uma semana, semanais. Confirme cada carácter (`HHW`, duas letras, dez algarismos, `YQ`) na mensagem do vendedor.
 
 **Parada em `Shipment information received`.** A loja registou o envio, mas a HuaHan ainda não leu fisicamente a encomenda no armazém. Pergunte ao vendedor quando entregou o pacote.
 

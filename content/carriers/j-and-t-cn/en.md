@@ -3,7 +3,7 @@ title: J&T Express China tracking: 极兔速递 numbers, statuses, contact
 description: Track a J&T Express China (极兔速递) parcel: what a JT number looks like, what 已签收 and J&T's other statuses mean, where parcels wait and how to reach J&T.
 slug: jt-express-china-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 J&T Express China (极兔速递) is J&T Express's network in China, operating since March 2020. A J&T China number usually belongs to a parcel inside China, often an online order on its way to you, a friend or a forwarder's warehouse. Track it on [J&T's tracker](https://www.jtexpress.com.cn/service.html), which is in Chinese, or in the box above. J&T China's own international service flies only to seven countries in Southeast Asia. Elsewhere, such as in the US or the UK, a J&T China number may cover only the parcel's trip inside China, for example to a forwarder.
@@ -60,7 +60,7 @@ China's Express Market Administration Measures, in force since 1 March 2024, add
 
 ## J&T parcel not updating, lost or returned
 
-**Nothing yet.** If J&T's tracker says it can't find the waybill (`抱歉！未查到此运单`), check the number with the seller. Meanwhile, Peek shows "No tracking history yet" for a parcel filed under no carrier, and, on peektracker.com, "Waiting for J&T Express China" for one filed under J&T Express China. Without the last four phone digits, if no tracking service has the parcel either, Peek shows "Update unavailable" from the second check on, with "Update tracking details" to add them.
+**Nothing yet.** If J&T's tracker says it can't find the waybill (`抱歉！未查到此运单`), check the number with the seller. Meanwhile, Peek shows "No tracking history yet" for a parcel filed under no carrier, and "Waiting for J&T Express China" for one filed under J&T Express China. Without the last four phone digits, if no tracking service has the parcel either, Peek shows "Update unavailable" from the second check on, with "Update tracking details" to add them.
 
 **No update.** When a parcel still on its way has had no new step for 4 days, Peek flags it: "No tracking update for four days". It notes that parcels often go quiet and keeps asking. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

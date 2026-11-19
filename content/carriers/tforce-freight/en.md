@@ -3,7 +3,7 @@ title: TForce Freight tracking: PRO numbers, statuses and claims
 description: Track a TForce Freight shipment in the US or Canada: what a PRO number looks like, what each tracking line means, home deliveries and freight claims.
 slug: tforce-freight-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 TForce Freight is a less-than-truckload (LTL) carrier: it moves pallets and heavy freight between its service centers across the United States and all of Canada, and to more than 600 points in Mexico. If a large order or other freight is coming to you with TForce, track it by its PRO number, which comes from the shop or the business that booked the freight: paste it in the box above. TForce's own tracker is the Tracking page on www.tforcefreight.com.
@@ -57,7 +57,7 @@ TForce's rules tariff (LTL Rules Tariff UPGF 102-T, effective 17 August 2026) se
 
 ## TForce Freight shipment not found, late, damaged or lost
 
-**Not found.** For a PRO it doesn't know, TForce's tracker shows `Not Available` and `Please check ProNumber` with the number. Peek then shows "Waiting for TForce Freight" on peektracker.com if you filed the shipment under TForce Freight, "No tracking history yet" if not, and asks again later. Check each digit, and ask the shipper whether TForce has the freight yet.
+**Not found.** For a PRO it doesn't know, TForce's tracker shows `Not Available` and `Please check ProNumber` with the number. Peek then shows "Waiting for TForce Freight" if you filed the shipment under TForce Freight, "No tracking history yet" if not, and asks again later. Check each digit, and ask the shipper whether TForce has the freight yet.
 
 **A digit is wrong.** A PRO whose last digit fails the check isn't TForce's, and Peek never asks TForce about it. If you pick TForce Freight anyway, Peek says it "doesn’t issue numbers like this one", and the shipment shows "Check the tracking number".
 

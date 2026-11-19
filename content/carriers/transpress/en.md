@@ -3,7 +3,7 @@ title: Transpress tracking (Транспрес): track a parcel in Bulgaria
 description: Track a Transpress (Транспрес) parcel in Bulgaria: how to add the number in Peek and pick Transpress, delivery attempts, returns, claims and contacts.
 slug: transpress-tracking
 published: 2026-11-13
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Transpress (Транспрес) is a Bulgarian courier and logistics company with its central office in the Sofia-Bozhurishte industrial park. Its courier services run through two registered postal operators with the same general terms: Транспрес ООД and Транспрес Деливъри ЕООД. To track one, paste a link to Transpress's tracker in the box above, or paste its number and pick Transpress as the carrier: Peek can't tell a Transpress number from its shape.
@@ -37,7 +37,7 @@ Peek doesn't ask Transpress's tracker, so its code holds no Transpress wordings.
 | "Returned to sender" | It went back to the sender. |
 | "Needs attention" | The service reports a problem. Read the line under it. |
 
-Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for Transpress" on peektracker.com. If two checks in a row fail, the parcel still shows "Waiting for Transpress", and its page says "Transpress couldn’t be reached yet. Peek keeps trying." If you leave the carrier to Peek, the same wait usually reads "No tracking history yet", and "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
+Before any service has a line, Peek shows "Checking for updates" while it asks, then "Waiting for Transpress". If two checks in a row fail, the parcel still shows "Waiting for Transpress", and its page says "Transpress couldn’t be reached yet. Peek keeps trying." If you leave the carrier to Peek, the same wait usually reads "No tracking history yet", and "Update unavailable" means two checks in a row failed; Peek keeps trying. More in [tracking statuses explained](guide:tracking-statuses).
 
 ## Transpress delivery in Bulgaria
 

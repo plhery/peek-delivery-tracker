@@ -3,7 +3,7 @@ title: Tracking DHLink: codice DHgate, stati e chi consegna
 description: Traccia un pacco DHLink da un ordine DHgate: quali codici accetta la ricerca, cosa significano gli stati in inglese, chi consegna nel tuo Paese e chi sentire.
 slug: dhlink-tracking
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DHLink (驼飞侠) è la piattaforma di logistica transfrontaliera di DHgate (敦煌网). Nata nel 2014, spedisce gli ordini dei venditori DHgate e di altri clienti dalla Cina o dai suoi magazzini all'estero e li affida a un corriere del Paese di destinazione per l'ultimo miglio. Cerca il tuo codice sulla [pagina di tracciamento di DHLink](https://www.dhlink.com/trackQuery?lang=en) o incollalo nel riquadro qui sopra. Trovi il numero nei dettagli dell'ordine su DHgate; se manca, chiedilo al venditore.
@@ -64,7 +64,7 @@ Una volta individuati il corriere locale e il suo numero, il suo tracking mostra
 
 ## Pacco DHLink fermo, non trovato o segnato come consegnato
 
-**Codice non trovato.** Controlla il numero nel tuo ordine DHgate e prova con il codice di tracciamento (*Tracking No.*) invece che con il numero `FC` di DHLink. Un codice del corriere finale non dà risultati sul sito di DHLink: cercalo direttamente presso quel corriere. Se hai scelto DHLink con «Cambia» per un codice che DHLink non conosce, Peek mostra su peektracker.com «In attesa di DHLink» e continua a controllare. Se dopo due giorni DHLink non conosce ancora il numero e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento lo controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto.
+**Codice non trovato.** Controlla il numero nel tuo ordine DHgate e prova con il codice di tracciamento (*Tracking No.*) invece che con il numero `FC` di DHLink. Un codice del corriere finale non dà risultati sul sito di DHLink: cercalo direttamente presso quel corriere. Se hai scelto DHLink con «Cambia» per un codice che DHLink non conosce, Peek mostra «In attesa di DHLink» e continua a controllare. Se dopo due giorni DHLink non conosce ancora il numero e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento lo controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto.
 
 **Fermo dopo il volo o la dogana.** Guarda se nel risultato è comparso un «Last Leg No.» e cercalo sul sito del corriere locale, che spesso ha scansioni più aggiornate di quelle di DHLink. Approfondisci in [tracking che non si aggiorna](guide:tracking-not-updating) e [tracking di un pacco dalla Cina](guide:tracking-from-china).
 

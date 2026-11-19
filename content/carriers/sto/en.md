@@ -3,7 +3,7 @@ title: STO Express tracking: 申通快递 numbers, statuses, contact
 description: Track an STO Express (申通快递) parcel in China: what its numbers look like, what 签收 and STO's other scans mean, where parcels wait and how to reach STO.
 slug: sto-express-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 STO Express (申通快递, Shentong) is a Chinese express company that started in 1993 and calls itself China's first private express company. An STO number usually belongs to a parcel inside China, often an online order on its way to you, a friend or a forwarder's warehouse. Track it on [STO's site](https://www.sto.cn/pc), in the `查快递` (track a parcel) box, which is in Chinese, or in the box above.
@@ -58,7 +58,7 @@ To change the recipient's details, STO's online customer service has a topic for
 
 ## STO parcel not updating, lost or returned
 
-**Nothing yet.** STO's tracking answers nothing for a number it doesn't know yet, and nothing for one past its one-year limit. If it stays empty, check the number with the seller. Meanwhile, a parcel filed under STO Express shows "Waiting for STO Express" on peektracker.com.
+**Nothing yet.** STO's tracking answers nothing for a number it doesn't know yet, and nothing for one past its one-year limit. If it stays empty, check the number with the seller. Meanwhile, a parcel filed under STO Express shows "Waiting for STO Express".
 
 **No update.** When a parcel still on its way has had no new scan for 4 days, Peek notes that parcels often go quiet, and keeps asking STO. No tracking update (`快递单号没有记录更新`) is one of the topics in STO's online customer service. See [why tracking stops updating](guide:tracking-not-updating) and [tracking parcels from China](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: Tracking China Post: codice, stati in cinese e consegna
 description: Tracking China Post: com'è fatto un codice che finisce con CN, cosa vogliono dire gli stati in cinese, quando passa a Poste Italiane e cosa fare se si blocca.
 slug: china-post-tracking
 published: 2026-10-22
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 China Post è la posta statale cinese, ed EMS è il suo marchio espresso. Se il tuo ordine su AliExpress, Temu, Shein o un altro negozio ha un codice che finisce con `CN`, l'ha assegnato China Post. In Italia di solito il pacco passa a [Poste Italiane](carrier:poste-italiane), che lo consegna con lo stesso codice. Puoi seguirlo sul sito di China Post, ems.com.cn, o nel box qui sopra. Il codice è nei dettagli di spedizione del tuo ordine.
@@ -77,7 +77,7 @@ China Post porta il pacco in aereo. In Italia lo prende Poste Italiane, dalla do
 
 ## Tracking China Post fermo, pacco perso o rispedito
 
-**Ancora nessuna scansione.** China Post non mostra niente finché non ha scansionato il pacco: prima, il negozio ha solo creato un'etichetta. Chiedi al negozio quando l'ha consegnato. Nel frattempo Peek mostra su peektracker.com «In attesa di China Post». Se dopo due giorni China Post non mostra ancora niente e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento lo controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto.
+**Ancora nessuna scansione.** China Post non mostra niente finché non ha scansionato il pacco: prima, il negozio ha solo creato un'etichetta. Chiedi al negozio quando l'ha consegnato. Nel frattempo Peek mostra «In attesa di China Post». Se dopo due giorni China Post non mostra ancora niente e nessun'altra fonte risponde per quel codice, Peek mostra «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.» e da quel momento lo controlla una volta al giorno, e una volta alla settimana quando è passata una settimana da quando l'hai aggiunto.
 
 **Silenzio dopo la partenza dalla Cina.** Tra il volo e la prima scansione di Poste possono passare giorni senza notizie. Controlla lo stesso codice su poste.it, ricordando che un pacco compare solo dalla presa in carico in Italia. Un codice che inizia con U potrebbe non avere mai scansioni in Italia. Approfondisci in [tracking che non si aggiorna](guide:tracking-not-updating) e [tracking di un pacco dalla Cina](guide:tracking-from-china).
 

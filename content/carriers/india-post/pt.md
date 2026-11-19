@@ -3,7 +3,7 @@ title: Seguimento India Post e Speed Post: números e estados
 description: Segue um envio da India Post ou Speed Post: formato do código terminado em IN, significado dos estados, entrega pelos CTT ou Correios, alfândega e contactos.
 slug: seguimento-india-post
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A India Post é o Department of Posts, o serviço postal público da **Índia**, com 164 999 estações de correio — a maior rede postal do mundo, segundo a própria página oficial. Dentro da Índia opera o Speed Post, o correio registado e o India Post Parcel; para o estrangeiro envia EMS (International Speed Post), pequenos pacotes com seguimento (International Tracked Packet) e encomendas aéreas. Podes seguir um objeto em [indiapost.gov.in](https://www.indiapost.gov.in/), que pede um CAPTCHA, ou colar o número na caixa acima. A India Post chama-lhe *article barcode number* (número de código de barras do objeto); numa compra online, pede-o ao vendedor.
@@ -81,7 +81,7 @@ Na página inicial, a India Post alerta para ligações falsas que se fazem pass
 
 ## Seguir uma encomenda da India Post com o Peek
 
-O [Peek](/) reconhece duas letras, nove algarismos e `IN` como India Post quando o dígito de controlo está correto e mostra «Transportadora detetada»; «Alterar» permite escolher outra. Com um dígito de controlo errado (por exemplo `EE482910577IN`), avisa «O dígito de controlo deste número não bate certo.»: confirma o código que te deram ou escolhe «Seguir tal como está». Guardada sob a India Post, uma encomenda mostra «À espera de India Post» em peektracker.com até à primeira leitura.
+O [Peek](/) reconhece duas letras, nove algarismos e `IN` como India Post quando o dígito de controlo está correto e mostra «Transportadora detetada»; «Alterar» permite escolher outra. Com um dígito de controlo errado (por exemplo `EE482910577IN`), avisa «O dígito de controlo deste número não bate certo.»: confirma o código que te deram ou escolhe «Seguir tal como está». Guardada sob a India Post, uma encomenda mostra «À espera de India Post» até à primeira leitura.
 
 O Peek não lê diretamente o portal da India Post: obtém as leituras através do MySpeedPost, um site de seguimento fora do domínio da India Post que as recolhe junto da India Post (ou através do track91).
 

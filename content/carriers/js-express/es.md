@@ -3,7 +3,7 @@ title: JS Express seguimiento: número JSE…YQ, estados y reparto
 description: Sigue tu paquete de JS Express (急速国际) desde China: cómo es el número JSE…YQ, qué significan sus estados en inglés y quién lo entrega en España.
 slug: js-express-seguimiento
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JS Express (急速国际, también JS EXP) es una empresa logística china para tiendas online transfronterizas, gestionada en Suzhou por 急创速供应链管理（苏州）有限公司. Si una tienda te ha enviado el pedido con JS Express, el número empieza por JSE y termina en YQ: pégalo en la casilla de arriba. JS Express lleva el paquete desde China hasta España y una empresa de reparto local se encarga de la entrega; en su historial en España aparece a veces [CTT Express](carrier:ctt-express).
@@ -81,7 +81,7 @@ Los intentos de entrega, avisos y puntos de recogida siguen las normas del trans
 
 ## Paquete de JS Express parado, en aduanas o que no llega
 
-**`未获取到任何数据,请提供有效单号!`** La página inglesa de JS Express responde esta frase en chino cuando no reconoce el código («no se han obtenido datos, facilite un número válido»). `No track data for now!` indica que aún no hay escaneos. En ambos casos, Peek muestra «Esperando a JS Express» en peektracker.com y sigue comprobando. Si pasados dos días JS Express sigue sin conocer el número y ningún otro servicio responde por él, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.», y desde entonces Peek comprueba una vez al día y, pasada una semana desde que lo añadiste, una vez por semana. Revisa el código carácter por carácter con el de la tienda; si en unos días no cambia nada, pregunta al vendedor si llegó a entregarlo.
+**`未获取到任何数据,请提供有效单号!`** La página inglesa de JS Express responde esta frase en chino cuando no reconoce el código («no se han obtenido datos, facilite un número válido»). `No track data for now!` indica que aún no hay escaneos. En ambos casos, Peek muestra «Esperando a JS Express» y sigue comprobando. Si pasados dos días JS Express sigue sin conocer el número y ningún otro servicio responde por él, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.», y desde entonces Peek comprueba una vez al día y, pasada una semana desde que lo añadiste, una vez por semana. Revisa el código carácter por carácter con el de la tienda; si en unos días no cambia nada, pregunta al vendedor si llegó a entregarlo.
 
 **Parado en `Electronic notification of order creation received.`** JS Express aún no ha recogido el paquete en su almacén. Pregunta a la tienda cuándo lo entregó.
 

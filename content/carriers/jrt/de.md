@@ -3,7 +3,7 @@ title: JRT Sendungsverfolgung: JRT…MM-Nummer, Flüge und DHL
 description: JRT-Paket (今日通) aus Xiamen verfolgen: wie die JRT…MM-Nummer aussieht, was die chinesischen und englischen Schritte heißen und wer zustellt.
 slug: jrt-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JRT (今日通, Jinritong) ist 厦门今日通商贸有限公司, ein Spediteur aus Xiamen in China. Hat ein Shop in China deine Bestellung mit JRT verschickt, bekommst du eine Nummer, die mit JRT beginnt und auf MM endet: Füg sie oben ins Feld ein. JRTs Tracking-Seite zeigt den Weg des Pakets von China über den Flug und den Zoll bis zur Firma, die zustellt, und übernimmt deren Scans: bei Sendungen nach Europa die von DHL, bei Sendungen in die USA die von UPS. Auf JRTs FedEx-Linie nach Irland übernimmt FedEx die letzte Strecke, auf seiner Linie nach Spanien CTT Express, auf der nach Polen InPost und auf der nach Mexiko J&T Express Mexiko.
@@ -126,7 +126,7 @@ In den drei Zeilen oben, die „land“ enthalten, sind die Daten als Monat.Tag 
 
 **Nichts mehr nach `已交服务商`, `Delivery to final service provider` oder `已交仓`.** JRTs Teil ist erledigt. Solange die Tracking-Seite keine Scans von DHL, UPS, FedEx oder J&T Express Mexiko übernimmt und Peek keine Nummer von DHL oder FedEx zeigt, stehen die nächsten Schritte in der Sendungsverfolgung der Firma, die zustellt: Frag den Shop nach deren Nummer. Mehr unter [Sendungsverfolgung aktualisiert sich nicht](guide:tracking-not-updating) und [Paket aus China verfolgen](guide:tracking-from-china).
 
-**Nichts gefunden.** Kennt JRTs Tracking-Seite eine Nummer nicht, zeigt sie ein einziges Ergebnis mit deiner Nummer unter 参考号 (Referenz) und alle anderen Felder leer. Für Peek heißt diese Antwort, dass JRT die Sendung schon erfasst, aber noch nicht gescannt hat: Peek zeigt deshalb auf peektracker.com „Warten auf JRT“ und fragt weiter nach, ohne dich zu bitten, die Nummer zu prüfen (bei einer UP-Referenz, die Peek selbst zuordnen sollte: „Warten auf den ersten Scan von JRT“). Vergleich die Nummer also selbst Zeichen für Zeichen mit der Nachricht des Shops.
+**Nichts gefunden.** Kennt JRTs Tracking-Seite eine Nummer nicht, zeigt sie ein einziges Ergebnis mit deiner Nummer unter 参考号 (Referenz) und alle anderen Felder leer. Für Peek heißt diese Antwort, dass JRT die Sendung schon erfasst, aber noch nicht gescannt hat: Peek zeigt deshalb „Warten auf JRT“ und fragt weiter nach, ohne dich zu bitten, die Nummer zu prüfen (bei einer UP-Referenz, die Peek selbst zuordnen sollte: „Warten auf den ersten Scan von JRT“). Vergleich die Nummer also selbst Zeichen für Zeichen mit der Nachricht des Shops.
 
 **Zugestellt, aber nichts angekommen.** Den Zustellscan schreibt die Firma, die zustellt, nicht JRT: Frag dort nach und sag dann dem Shop Bescheid. Siehe [Paket zugestellt, aber nicht erhalten](guide:delivered-not-received).
 

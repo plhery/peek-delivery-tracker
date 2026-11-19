@@ -3,7 +3,7 @@ title: HuaHan Logistics Sendungsverfolgung: HHW…YQ & Zusteller
 description: HuaHan Logistics (华翰物流) Paket aus China verfolgen: Aufbau der HHW…YQ-Nummer, Bedeutung aller Scans, lokaler Zusteller, Zoll und Tracking in Peek.
 slug: huahan-logistics-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 HuaHan Logistics (华翰物流, auch HuaHan Express oder 华翰速递) ist ein chinesischer Logistikdienstleister für den grenzüberschreitenden Onlinehandel, der Pakete per Luftfracht oder über den Postweg aus China ausfliegt und sie im Zielland an einen lokalen Paketdienst für die letzte Meile übergibt. Wenn ein Online-Shop deine Bestellung mit HuaHan verschickt hat, erkennst du die Sendung an einer Nummer, die mit `HHW` beginnt und mit `YQ` endet – füge sie einfach oben in das Suchfeld ein. HuaHans öffentlicher Tracker unter [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) zeigt bei vielen Sendungen auch den lokalen Zustelldienst sowie dessen eigene Sendungsnummer an.
@@ -106,7 +106,7 @@ HuaHan richtet sich an Online-Händler und gibt auf seinen Seiten nicht an, ob d
 
 ## HuaHan-Paket kommt nicht an oder Tracking hängt
 
-**Nummer nicht gefunden (`没有找到记录`).** Kennt HuaHan eine Sendungsnummer noch nicht, antwortet der Tracker mit `没有找到记录` („kein Eintrag gefunden“); auf peektracker.com zeigt Peek „Warten auf HuaHan Logistics“ und fragt weiter nach. Ist die Nummer auch nach zwei Tagen weder bei HuaHan noch bei einem anderen Dienst bekannt, erscheint auf der Website „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und Peek prüft danach täglich sowie nach einer Woche wöchentlich. Vergleiche die Nummer Zeichen für Zeichen (`HHW`, zwei Buchstaben, zehn Ziffern, `YQ`) mit der Nachricht des Verkäufers.
+**Nummer nicht gefunden (`没有找到记录`).** Kennt HuaHan eine Sendungsnummer noch nicht, antwortet der Tracker mit `没有找到记录` („kein Eintrag gefunden“); Peek zeigt „Warten auf HuaHan Logistics“ und fragt weiter nach. Ist die Nummer auch nach zwei Tagen weder bei HuaHan noch bei einem anderen Dienst bekannt, erscheint auf der Website „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“ und Peek prüft danach täglich sowie nach einer Woche wöchentlich. Vergleiche die Nummer Zeichen für Zeichen (`HHW`, zwei Buchstaben, zehn Ziffern, `YQ`) mit der Nachricht des Verkäufers.
 
 **Hängt auf `Shipment information received`.** Der Shop hat den Versand angemeldet, das Paket aber noch nicht bei HuaHan eingeliefert. Frag beim Verkäufer nach dem Übergabedatum.
 

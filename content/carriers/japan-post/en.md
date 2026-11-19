@@ -3,7 +3,7 @@ title: Japan Post tracking: EMS numbers and statuses explained
 description: Track a Japan Post parcel or EMS from Japan: what a JP number looks like, what each status means, who delivers it in your country, customs, and who to ask.
 slug: japan-post-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Japan Post (日本郵便, Japan Post Co., Ltd.) is Japan's postal company, owned by Japan Post Holdings, with 24,115 post offices as of 31 March 2026. It sends EMS, International Air Packets and parcels abroad, and Yu-Pack parcels within Japan. Track on Japan Post's [Track & Trace Service](https://trackings.post.japanpost.jp/services/srv/search/input?locale=en), up to ten numbers at once, or paste the number in the box above. Bought from a Japanese shop? Ask the seller for the number.
@@ -86,7 +86,7 @@ From outside Japan, ask the sender or the shop, who can file a search at the pos
 
 [Peek](/) recognises two letters, nine digits and `JP` as Japan Post when the check digit is right, and shows "Detected carrier"; "Change" picks another. With a wrong check digit, it says "This number’s check digit doesn’t add up.": check your shipping message, or choose "Track it as typed". Links to Japan Post's tracker work too. A number starting with U isn't recognised as Japan Post's, and Peek doesn't look it up there: Japan Post doesn't track U numbers.
 
-A 12-digit domestic number isn't Japan Post's by shape alone. Paste it all the same: Peek follows more than 3,500 carriers. It asks those that use the shape, Japan Post first when you're in Japan, and shows "Japan Post has this parcel." when Japan Post knows it. When you paste an 11-digit number, Peek doesn't ask Japan Post: pick it with "Change". Filed under Japan Post, a parcel shows "Waiting for Japan Post" on peektracker.com until its first scan.
+A 12-digit domestic number isn't Japan Post's by shape alone. Paste it all the same: Peek follows more than 3,500 carriers. It asks those that use the shape, Japan Post first when you're in Japan, and shows "Japan Post has this parcel." when Japan Post knows it. When you paste an 11-digit number, Peek doesn't ask Japan Post: pick it with "Change". Filed under Japan Post, a parcel shows "Waiting for Japan Post" until its first scan.
 
 Peek shows each scan in Japan Post's English wording, with the office and place, and files the wordings in the table above under its own stages, such as "In transit" or "At customs". It leaves out Japan Post's Details column, which can give a reason such as an unknown address. Peek reads each scan on the local clock of the place it names, or of the scans around it. For a domestic item with a delivery day the sender chose, Peek shows that day and time slot as the expected delivery until it's delivered or the day has passed.
 

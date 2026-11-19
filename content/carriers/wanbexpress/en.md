@@ -3,7 +3,7 @@ title: WanbExpress tracking: WNB…YQ numbers, scans and who delivers
 description: Track a WanbExpress (Wanb Express) parcel from China: what a WNB…YQ number looks like, what its scans mean and who to ask when it stalls.
 slug: wanbexpress-tracking
 published: 2026-10-30
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 WanbExpress (also Wanb Express, WanBang Express or WANB) is a Chinese carrier that sends parcels abroad, where a local carrier delivers them. If a shop sent your order with WanbExpress, its number starts with WNB and ends with YQ: paste it in the box above. WanbExpress's own tracker, tracking.wanbexpress.com, can also name the carrier that delivers in your country, with that carrier's number for the parcel.
@@ -74,7 +74,7 @@ WanbExpress's scans follow the parcel out of China, through customs and on to a 
 
 ## WanbExpress parcel not arriving or tracking stuck
 
-**Number not found.** If WanbExpress's tracker doesn't know the number, Peek shows "Waiting for WanbExpress" on peektracker.com and keeps checking. If WanbExpress still doesn't know the number two days later and nothing else has answered for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the seller's message, character by character: WNB, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
+**Number not found.** If WanbExpress's tracker doesn't know the number, Peek shows "Waiting for WanbExpress" and keeps checking. If WanbExpress still doesn't know the number two days later and nothing else has answered for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the seller's message, character by character: WNB, two letters, ten digits, YQ. If nothing comes after a few days, ask the seller whether the parcel was really sent.
 
 **Stuck on `Shipping Order Created.` or `Parcel Data Received`.** The shop has booked the shipment, but WanbExpress hasn't scanned the parcel yet. Ask the shop when it handed the parcel over.
 

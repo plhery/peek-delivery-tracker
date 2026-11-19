@@ -3,7 +3,7 @@ title: Lingdong International tracking: SZLD numbers and statuses
 description: Track a Lingdong International parcel from Shenzhen: what an SZLD number looks like, what its scans mean and why its tracking often stops before the delivery.
 slug: lingdong-tracking
 published: 2026-10-21
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Lingdong International (领东国际, Shenzhen Lingdong International Freight Forwarding Co., Ltd.) is a freight forwarder in Shenzhen, China, that ships parcels abroad for online sellers. Its numbers start with SZLD: type yours in the 快件查询 (parcel lookup) box on Lingdong's site, lingdong56.com, which opens its tracker, or in the box above. The shop that sent your order gives the number with its shipping details.
@@ -65,7 +65,7 @@ Lingdong publishes no delivery times and no rules for delivery attempts, notice 
 
 **Only the Chinese line.** `货物电子信息已经收到` on its own means the seller has booked the parcel but it hasn't reached Lingdong's warehouse. If nothing follows for several days, ask the seller whether it has been sent.
 
-**Nothing found.** For a number it doesn't know, Lingdong's tracker shows the number with every other field empty. Peek takes that answer as Lingdong listing the shipment without a scan yet: it keeps checking and shows "Waiting for Lingdong International" on peektracker.com, with no request to check the number. So check it with the seller yourself.
+**Nothing found.** For a number it doesn't know, Lingdong's tracker shows the number with every other field empty. Peek takes that answer as Lingdong listing the shipment without a scan yet: it keeps checking and shows "Waiting for Lingdong International", with no request to check the number. So check it with the seller yourself.
 
 **Lost, damaged or returned.** Lingdong publishes no claim process for recipients: its terms of carriage page is empty. Its site has a chat button for problem parcels, claims and complaints, but the seller holds the contract with Lingdong, so ask the seller or the marketplace for a refund or a new parcel.
 

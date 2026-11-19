@@ -3,7 +3,7 @@ title: Huaya Express tracking: HYYT numbers and where they stop
 description: Huaya Express (华亚运通) ships online orders from Guangzhou. How to read an HYYT…GZ number and its English scans, and who to ask after the hand-over.
 slug: huaya-express-tracking
 published: 2026-10-28
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Huaya Express (华亚运通) is the brand on the logo of 华亚运通国际货运代理有限公司 (Huaya Yuntong International Freight Forwarding), a forwarder in Guangzhou, China, that carries parcels abroad for online shops. A Huaya waybill opens with HYYT and closes with GZ. Put it in the box above, or follow the 物流跟踪 (logistics tracking) link in the top menu of hyytgz.com to Huaya's own tracker. Huaya's history ends when it hands the parcel to a carrier in your country, or after some of that carrier's scans (in the US, at times up to the delivery), and it never says which carrier that is, except on a line through DHL in Germany: there it copies DHL's scans too.
@@ -55,7 +55,7 @@ Huaya's tracking record names no delivering company and no second number, apart 
 
 **Waiting after the import customs line.** Customs are done and the parcel is waiting for the local carrier to collect it. If several days pass without the hand-over line, tell the seller. See [why tracking stops updating](guide:tracking-not-updating).
 
-**No result.** Peek takes Huaya's answer for a number it doesn't know (above) as Huaya listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Huaya Express" on peektracker.com, with no request to check the number. So check what you typed against the seller's message yourself: HYYT, twelve digits, GZ. If it's right and Huaya still has nothing, ask the seller to confirm it booked the parcel with Huaya.
+**No result.** Peek takes Huaya's answer for a number it doesn't know (above) as Huaya listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Huaya Express", with no request to check the number. So check what you typed against the seller's message yourself: HYYT, twelve digits, GZ. If it's right and Huaya still has nothing, ask the seller to confirm it booked the parcel with Huaya.
 
 **Late, lost or returned.** Huaya's claim terms are written for the shops that book with it, not for you. Ask the seller for a new parcel or a refund, and if the seller stops answering, open a dispute on the marketplace you bought from. See [lost parcels](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [delivered but not received](guide:delivered-not-received).
 

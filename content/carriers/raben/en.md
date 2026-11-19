@@ -3,7 +3,7 @@ title: Raben tracking: shipment number, statuses and delivery
 description: Track a Raben pallet or groupage shipment: what its number looks like, what each step on Raben's tracker means, unloading, damage claims and who to contact.
 slug: raben-tracking
 published: 2026-11-01
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Raben Group is a family-owned European logistics group that started in 1931 in the Netherlands and is now based near Poznań, Poland. Its road network carries pallets and groupage (part loads) through branches in 17 European countries, and it delivers for online shops, so a bulky order can come on a Raben truck. Track it with the shipment number in the "Shipment tracking" box on raben-group.com, or paste the number in the box above.
@@ -82,7 +82,7 @@ As read on Raben's sites on 30 October 2026:
 
 ## Track a Raben shipment with Peek
 
-Raben's shape is shared with BRT and Yunda, so Peek can't tell Raben by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks the carriers that use the shape ("Checking tracking services…") and shows "Raben has this parcel." when Raben's tracker knows the number; if several know it, you choose. If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for Raben" on peektracker.com once you've picked Raben. To set the carrier yourself, press "Change" and pick "Raben" under "Fits this number", or search for it (Raben Group finds it too). On a parcel you've already added, use "Change carrier".
+Raben's shape is shared with BRT and Yunda, so Peek can't tell Raben by the number alone. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks the carriers that use the shape ("Checking tracking services…") and shows "Raben has this parcel." when Raben's tracker knows the number; if several know it, you choose. If none does yet, the parcel reads "No tracking history yet" while Peek keeps checking, or "Waiting for Raben" once you've picked Raben. To set the carrier yourself, press "Change" and pick "Raben" under "Fits this number", or search for it (Raben Group finds it too). On a parcel you've already added, use "Change carrier".
 
 A link from myraben.com or oftc.myraben.com files the parcel under Raben straight away. If your Raben number has another shape, pick Raben by hand: Peek asks Raben's tracker for any 4 to 40 letters and digits, with at least one digit.
 

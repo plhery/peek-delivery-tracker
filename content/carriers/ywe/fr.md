@@ -3,7 +3,7 @@ title: Suivi YWE (YanwenExpress) : numéro, scans et aide
 description: Suis un colis YWE (YanwenExpress) aux États-Unis : format du numéro YWE à 17 caractères, sens de chaque scan du hub jusqu’à la porte et qui contacter.
 slug: suivi-ywe
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 YWE (YanwenExpress, exploité par Yanwen Express LLC) est un transporteur du dernier kilomètre aux États-Unis : il achemine les colis depuis ses plateformes américaines jusqu’à la porte du destinataire pour des boutiques en ligne, des enseignes et des places de marché. Ses numéros se composent des lettres YWE suivies de 14 chiffres : colle le tien dans le champ ci-dessus, ou sur le suivi propre de YWE sur [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ Sur sa page de présentation, YWE indique avoir démarré à Los Angeles en 2024
 
 ## Colis YWE non reçu ou suivi bloqué
 
-**`NOT_FOUND`.** Le suivi de YWE affiche ce code lorsqu’il n’a aucun scan pour le numéro saisi, et énumère les causes possibles : le colis n’a pas encore été pris en charge ou scanné, le numéro comporte une erreur, ou l’envoi est si ancien que son historique n’est plus disponible. Sur peektracker.com, Peek affiche « En attente de YWE » et continue de vérifier. Compare le numéro avec le message du vendeur : YWE suivi de 14 chiffres. Si rien n’apparaît après quelques jours, demande au vendeur si le colis a bien été expédié.
+**`NOT_FOUND`.** Le suivi de YWE affiche ce code lorsqu’il n’a aucun scan pour le numéro saisi, et énumère les causes possibles : le colis n’a pas encore été pris en charge ou scanné, le numéro comporte une erreur, ou l’envoi est si ancien que son historique n’est plus disponible. Peek affiche « En attente de YWE » et continue de vérifier. Compare le numéro avec le message du vendeur : YWE suivi de 14 chiffres. Si rien n’apparaît après quelques jours, demande au vendeur si le colis a bien été expédié.
 
 **Bloqué sur `Shipping Order Created.`** YWE a reçu les données électroniques de l’envoi, mais pas encore le colis. Comme YWE effectue son premier scan dans sa plateforme aux États-Unis, demande au vendeur où se trouve actuellement le colis et quand il est parti. S’il a été expédié depuis la Chine vers les États-Unis, consulte [suivre un colis venu de Chine](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: Seguimiento de HuaHan Logistics: número HHW…YQ y entrega
 description: Rastrea tu paquete de HuaHan Logistics (华翰物流) desde China: formato HHW…YQ, significado de cada estado, empresa de reparto local, aduanas y Peek.
 slug: seguimiento-huahan-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 HuaHan Logistics (华翰物流, también conocida como HuaHan Express o 华翰速递) es una empresa china de logística transfronteriza para comercio electrónico que envía paquetes desde China por vía aérea o postal y los entrega a un transportista local en el país de destino para el reparto final. Si una tienda online envió tu pedido con HuaHan, busca un número que empiece por `HHW` y termine en `YQ` y pégalo en el cuadro superior. El buscador público de HuaHan en [hh-exp.cn/WebTrack/CargoTrack.html](https://www.hh-exp.cn/WebTrack/CargoTrack.html) también puede indicar qué empresa reparte en tu zona y el número de seguimiento local asignado a tu paquete.
@@ -105,7 +105,7 @@ HuaHan trabaja para vendedores online y sus páginas no detallan si los tributos
 
 ## Paquete de HuaHan que no llega o seguimiento parado
 
-**Número no encontrado (`没有找到记录`).** Si HuaHan no tiene registro del código, su web responde `没有找到记录` («no se encontraron registros»); en peektracker.com, Peek muestra «Esperando a HuaHan Logistics» y sigue consultando. Si pasados dos días ni HuaHan ni otra fuente reconocen el número, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y las comprobaciones pasan a ser diarias y, tras una semana, semanales. Revisa carácter por carácter (`HHW`, dos letras, diez dígitos, `YQ`) frente al mensaje del vendedor.
+**Número no encontrado (`没有找到记录`).** Si HuaHan no tiene registro del código, su web responde `没有找到记录` («no se encontraron registros»); Peek muestra «Esperando a HuaHan Logistics» y sigue consultando. Si pasados dos días ni HuaHan ni otra fuente reconocen el número, aparece «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y las comprobaciones pasan a ser diarias y, tras una semana, semanales. Revisa carácter por carácter (`HHW`, dos letras, diez dígitos, `YQ`) frente al mensaje del vendedor.
 
 **Parado en `Shipment information received`.** El comercio generó el envío, pero HuaHan aún no ha escaneado la mercancía en su almacén. Pregunta al vendedor cuándo la entregó.
 

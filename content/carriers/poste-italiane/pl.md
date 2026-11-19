@@ -3,7 +3,7 @@ title: Poste Italiane śledzenie: kody 1UW i 3UW oraz statusy
 description: Śledzenie przesyłki Poste Italiane z Włoch do Polski: jak wygląda numer (1UW, 3UW, 8UW, 5P), co znaczą włoskie statusy, odbiór w Punto Poste i kontakt.
 slug: poste-italiane-sledzenie
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Poste Italiane to włoski operator pocztowy, który przez sieci Crono i SDA doręcza też zamówienia z włoskich sklepów internetowych, z Vinted czy eBaya. Przesyłkę sprawdzisz w „Cerca Spedizioni” na poste.it (dawniej Dove Quando), w aplikacji Poste Italiane albo wklejając kod powyżej. W drodze z Włoch do Polski poste.it pokazuje etapy do międzynarodowego centrum wymiany; przy numerach pocztowych z końcówką `IT` dalszą obsługę przejmuje operator w Polsce.
@@ -86,7 +86,7 @@ Sprawdzone na poste.it 16 listopada 2026 r.:
 
 Z Polski Peek sprawdza też poprawne numery pocztowe na `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) w [Poczcie Polskiej](carrier:poczta-polska) i przełącza na nią przy nowszych skanach; w drugą stronę 16-znakowe etykiety [Vinted Go](carrier:vinted-go) lub [Cainiao](carrier:cainiao) z kodem `1UW`, `3UW`, `8UW` albo `5P` przechodzą automatycznie na Poste Italiane.
 
-Odpytywanie co godzinę i powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje do 20 skanów na mapie, planowany dzień, usługę, „Opłaty importowe” i godziny lokalne („Godziny w Twojej strefie czasowej: …” na peektracker.com i iPhonie). Nadawcy, wagi, wymiarów ani adresu placówki Peek nie pokazuje. Po dwóch dniach bez rozpoznania: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
+Odpytywanie co godzinę i powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje do 20 skanów na mapie, planowany dzień, usługę, „Opłaty importowe” i godziny lokalne („Godziny w Twojej strefie czasowej: …” i iPhonie). Nadawcy, wagi, wymiarów ani adresu placówki Peek nie pokazuje. Po dwóch dniach bez rozpoznania: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
 
 ## Najczęstsze pytania o śledzenie Poste Italiane
 

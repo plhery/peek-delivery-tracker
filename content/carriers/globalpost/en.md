@@ -3,7 +3,7 @@ title: GlobalPost tracking: GP numbers and who delivers
 description: Track a GlobalPost parcel: what a GP number looks like, what GlobalPost's tracking lines mean and who delivers it in your country.
 slug: globalpost-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 GlobalPost, part of Auctane, is an international shipping service that online sellers buy through platforms such as ShipStation and Stamps.com. The parcel first goes to one of GlobalPost's shipping centres, where GlobalPost puts on the international label and customs form. GlobalPost's partners, postal and commercial carriers, take it on from there, and a post or courier in your country delivers it. The seller gives you the number, which usually starts with GP: paste it in the box above. GlobalPost's own tracker is at goglobalpost.com/tracking.
@@ -73,7 +73,7 @@ From the United States, Plus reaches more than 30 countries, among them the UK, 
 
 ## GlobalPost parcel not updating, lost or returned
 
-**Nothing yet.** Until GlobalPost's tracker has a line for the number, Peek shows "Waiting for GlobalPost" on peektracker.com and keeps checking. With `Label Created` alone, the parcel may not have reached GlobalPost. If nothing comes after a few days, ask the seller whether it was sent.
+**Nothing yet.** Until GlobalPost's tracker has a line for the number, Peek shows "Waiting for GlobalPost" and keeps checking. With `Label Created` alone, the parcel may not have reached GlobalPost. If nothing comes after a few days, ask the seller whether it was sent.
 
 **No update for days.** GlobalPost says updates may take time on international shipments, and that weather, holidays, strikes and customs can delay them. On Economy, tracking ends after customs in your country. When a parcel still on its way has had no new scan for four days, Peek flags it ("No tracking update for four days") with a note that parcels often go quiet on long flights, at customs or over a weekend. The note links no GlobalPost help page; once Peek follows the parcel at the delivery company, it links that company's, if Peek knows one. See [why tracking stops updating](guide:tracking-not-updating).
 

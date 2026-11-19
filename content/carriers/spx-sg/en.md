@@ -3,7 +3,7 @@ title: SPX Express Singapore tracking: Shopee parcels and statuses
 description: Track an SPX Express (Shopee Xpress) parcel in Singapore: what SPXSG and SG numbers look like, what each status means, GST on imports, and what to do if it stops.
 slug: spx-express-singapore-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 SPX Express Singapore, also called Shopee Xpress or Shopee Express, delivers parcels in Singapore. It carries Shopee orders, including parcels from sellers in China that pass through Shopee's sorting centre in Hong Kong. SPX's own tracker is at spx.sg. To follow a parcel here, paste its number in the box above. For a Shopee order, open the order in Shopee and copy the tracking number from its shipping information.
@@ -64,7 +64,7 @@ Singapore Customs' rules for goods bought from overseas that come in by air or b
 
 ## SPX parcel not updating, lost or returned
 
-**Number not found yet.** When SPX doesn't know an SPXSG number yet, Peek shows "Waiting for SPX Express Singapore" on peektracker.com and keeps checking. The seller may not have handed the parcel over. Check the number too.
+**Number not found yet.** When SPX doesn't know an SPXSG number yet, Peek shows "Waiting for SPX Express Singapore" and keeps checking. The seller may not have handed the parcel over. Check the number too.
 
 **Stuck on `[China]Sender is preparing to ship your parcel`.** The seller hasn't shipped it yet. Ask the seller when it will.
 

@@ -3,7 +3,7 @@ title: GLS US tracking (GSO): numbers, statuses and delivery
 description: Track a GLS US parcel, also listed as GSO: what its SH number looks like, what each scan means, delivery days, signatures, missed deliveries and contacts.
 slug: gls-us-tracking
 published: 2026-11-13
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 GLS US (General Logistics Systems US, Inc.) is GLS Group's parcel company in the United States, delivering across the Western U.S. Peek's catalog also knows it as GLS USA, GLS United States, General Logistics Systems US, GSO and Golden State Overnight, the company GLS bought in 2016. To track a GLS US parcel, paste its number in the box above or enter it on [GLS's US tracking page](https://gls-group.com/US/en/send-and-receive/track-a-parcel/).
@@ -57,7 +57,7 @@ If nothing follows `LABEL CREATED` for a day or more, Peek says "The sender hasn
 
 ## GLS US parcel not found, not updating, lost or returned
 
-**Not found.** GLS US's tracker says when it doesn't know a number. Peek then shows "Waiting for GLS US’s first scan" for an SH number you left to it, or, on peektracker.com, "Waiting for GLS US" when you picked GLS US yourself, and keeps asking. A new label often takes a while to show up. If there's still nothing two days after you added an SH number you left to Peek, Peek flags it: "Still waiting for the carrier’s first update". If you picked GLS US and it still doesn't know the number two days later, with nothing else answering for it, the site shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shop's email, then ask the shop whether the parcel has really been sent.
+**Not found.** GLS US's tracker says when it doesn't know a number. Peek then shows "Waiting for GLS US’s first scan" for an SH number you left to it, or "Waiting for GLS US" when you picked GLS US yourself, and keeps asking. A new label often takes a while to show up. If there's still nothing two days after you added an SH number you left to Peek, Peek flags it: "Still waiting for the carrier’s first update". If you picked GLS US and it still doesn't know the number two days later, with nothing else answering for it, Peek shows "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." and Peek from then on checks it daily, and weekly once a week has passed since you added it. Check the number against the shop's email, then ask the shop whether the parcel has really been sent.
 
 **No news for days.** After four days without a new scan, a parcel still showing "Label created", "Received by carrier" or "In transit" gets a flag: "No tracking update for four days". Peek adds that parcels often go quiet over a weekend, and keeps asking GLS US. See [why tracking stops updating](guide:tracking-not-updating).
 

@@ -3,7 +3,7 @@ title: JRT śledzenie przesyłki: numer JRT…MM, statusy i DHL
 description: Paczka JRT (今日通) z Xiamen w Chinach: jak wygląda numer JRT…MM, co znaczą chińskie i angielskie statusy lotu i odprawy celnej oraz kto ją doręcza.
 slug: jrt-sledzenie
 published: 2026-10-31
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JRT (今日通, Jinritong) to 厦门今日通商贸有限公司, firma spedycyjna z Xiamen w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez JRT, dostajesz numer, który zaczyna się od JRT i kończy na MM: wklej go w pole powyżej. Śledzenie JRT pokazuje drogę paczki z Chin: lot, odprawę celną i przekazanie firmie, która ją doręcza. Przy wysyłkach do Europy w historii JRT pojawia się dalej DHL, a przy wysyłkach do USA UPS: JRT przepisuje ich skany. Wyjątki to linia JRT do Irlandii z FedEx w nazwie produktu, na której ostatni odcinek ma FedEx, linia do Polski, na której ma go InPost, linia do Hiszpanii, na której ma go CTT Express, i linia do Meksyku, na której ma go J&T Express Mexico.
@@ -99,7 +99,7 @@ Przy przesyłkach do Europy godziny linii JRT są podane w czasie pekińskim: 17
 
 **Nic po `已交服务商`, `Delivery to final service provider` albo `已交仓`.** JRT skończył swoją część. Jeśli jego śledzenie nie przepisuje skanów DHL, UPS, FedEx ani J&T Express Mexico, a Peek nie pokazuje numeru DHL ani FedEx, dalsze kroki są w śledzeniu firmy, która doręcza: poproś sprzedawcę o jej numer. Więcej w poradnikach [status przesyłki się nie zmienia](guide:tracking-not-updating) i [śledzenie paczki z Chin](guide:tracking-from-china).
 
-**Nic nie znaleziono.** Gdy JRT nie zna numeru, jego strona pokazuje jeden wynik z tym numerem jako numerem referencyjnym i wszystkimi innymi kolumnami pustymi. Peek traktuje taką odpowiedź tak, jakby JRT miał już przesyłkę w systemie, choć jeszcze bez skanu: pokazuje wtedy na peektracker.com „Oczekiwanie na przewoźnika JRT” (a gdy sam dobiera przewoźnika do numeru z UP: „Oczekiwanie na pierwszy skan przewoźnika JRT”) i sprawdza dalej, bez prośby o sprawdzenie numeru. Dlatego porównaj numer z wiadomością od sprzedawcy, znak po znaku.
+**Nic nie znaleziono.** Gdy JRT nie zna numeru, jego strona pokazuje jeden wynik z tym numerem jako numerem referencyjnym i wszystkimi innymi kolumnami pustymi. Peek traktuje taką odpowiedź tak, jakby JRT miał już przesyłkę w systemie, choć jeszcze bez skanu: pokazuje wtedy „Oczekiwanie na przewoźnika JRT” (a gdy sam dobiera przewoźnika do numeru z UP: „Oczekiwanie na pierwszy skan przewoźnika JRT”) i sprawdza dalej, bez prośby o sprawdzenie numeru. Dlatego porównaj numer z wiadomością od sprzedawcy, znak po znaku.
 
 **Doręczona, a nic nie przyszło.** Skan doręczenia pochodzi od firmy, która doręcza, nie od JRT, nawet gdy JRT go przepisuje: zapytaj tę firmę, potem napisz do sprzedawcy. Więcej w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 

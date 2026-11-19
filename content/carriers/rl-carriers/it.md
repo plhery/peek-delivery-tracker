@@ -3,7 +3,7 @@ title: Tracciamento R+L Carriers: numero PRO, stati e reclami
 description: Traccia una spedizione merci R+L Carriers negli USA: formato del numero PRO, significato di ogni stato e regole federali per ritardi, danni o smarrimento.
 slug: tracciamento-rl-carriers
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 R+L Carriers è uno spedizioniere merci su strada negli **Stati Uniti**. Nel codice di Peek ritira la merce presso il mittente, la trasferisce da un terminal all'altro e la consegna a partire dal terminal di destinazione negli USA. Se un ordine ingombrante o un'altra spedizione merci ti sta arrivando negli Stati Uniti con R+L, la segui tramite il numero PRO comunicato dal negozio o dall'azienda che ha prenotato il trasporto: incollalo nel riquadro in alto. Il sistema di ricerca diretto di R+L è la pagina *Shipment Tracing* su rlcarriers.com: accetta un numero PRO o un identificativo di ritiro (*Pickup Request ID*), fino a 25 numeri contemporaneamente, e con un account MyRLC anche altri codici di riferimento.
@@ -51,7 +51,7 @@ Questa pagina non riporta fasce orarie, appuntamenti di scarico, numero di tenta
 
 ## Spedizione R+L Carriers non trovata, in ritardo, danneggiata o smarrita
 
-**Non trovata.** Per un numero PRO sconosciuto al sistema, R+L risponde `No records found for Number:` seguito dal PRO preceduto da `I`. Su peektracker.com Peek mostra «In attesa di R+L Carriers» per un PRO salvato sotto R+L Carriers e riprova più tardi. Controlla ogni cifra confrontandola con l'email del venditore; se il codice è esatto, chiedi al mittente se R+L ha già ritirato il carico.
+**Non trovata.** Per un numero PRO sconosciuto al sistema, R+L risponde `No records found for Number:` seguito dal PRO preceduto da `I`. Peek mostra «In attesa di R+L Carriers» per un PRO salvato sotto R+L Carriers e riprova più tardi. Controlla ogni cifra confrontandola con l'email del venditore; se il codice è esatto, chiedi al mittente se R+L ha già ritirato il carico.
 
 **Cifra errata.** Se la cifra di controllo di un PRO non torna, il sistema di R+L restituisce il PRO seguito da `Pro number failed check digit validation.` Peek mostra quindi «Controlla il numero di tracciamento». Verifica il codice cifra per cifra con la conferma del negozio o i documenti di trasporto.
 

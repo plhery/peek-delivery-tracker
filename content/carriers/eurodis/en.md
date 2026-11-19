@@ -3,7 +3,7 @@ title: EURODIS tracking: shipment numbers and delivery partners
 description: Track a EURODIS pallet or parcel in Germany or Austria: what its numbers look like, which partner delivers it, and who to contact when tracking fails.
 slug: eurodis-tracking
 published: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-20
 ---
 
 EURODIS is a European network for parcels and pallets. In each country a partner company collects and delivers the goods: trans-o-flex in Germany, Österreichische Post (Austrian Post) in Austria. EURODIS's website is being updated, and for now it asks you to contact the partner in your country to track your shipment. Its tracking page didn't load when we checked on 1 November 2026, so Peek can't get anything from EURODIS either (more below). If the partner gave you its own tracking number, paste that in the box above.
@@ -88,7 +88,7 @@ As read on 1 November 2026:
 
 ## Track a EURODIS shipment with Peek
 
-**EURODIS's tracker.** Peek gets a EURODIS shipment's steps from EURODIS's tracking page on eurodis.com. On 1 November 2026 that page didn't load, so for now Peek gets nothing from EURODIS. For a parcel filed under EURODIS, it asks tracking services for the number instead. If none has it, the parcel reads "Waiting for EURODIS" on peektracker.com, and from Peek's second check on, its page says "EURODIS couldn’t be reached yet. Peek keeps trying." Peek keeps asking EURODIS and the tracking services on its own, but it can't contact EURODIS, its partners or the sender for you.
+**EURODIS's tracker.** Peek gets a EURODIS shipment's steps from EURODIS's tracking page on eurodis.com. On 1 November 2026 that page didn't load, so for now Peek gets nothing from EURODIS. For a parcel filed under EURODIS, it asks tracking services for the number instead. If none has it, the parcel reads "Waiting for EURODIS", and from Peek's second check on, its page says "EURODIS couldn’t be reached yet. Peek keeps trying." Peek keeps asking EURODIS and the tracking services on its own, but it can't contact EURODIS, its partners or the sender for you.
 
 **The partner's number.** If the partner in your country gave you its own tracking number, add that to Peek as a parcel of its own: Peek follows more than 3,500 carriers, Austrian Post and Express One (Hungary) among them. If Peek doesn't name the partner, press "Change" and pick it. A trans-o-flex tracking link (trans-o-flex.com/sendungsverfolgung/tracking with `ref=` and the number) files the parcel under trans-o-flex, and Peek asks tracking services about it.
 

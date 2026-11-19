@@ -3,7 +3,7 @@ title: India Post Sendungsverfolgung: Speed-Post-Nummer und Status
 description: Sendung von India Post oder Speed Post verfolgen: Aufbau der IN-Nummer, Bedeutung der Statusmeldungen, Zustellung in Deutschland, Österreich und der Schweiz.
 slug: india-post-sendungsverfolgung
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 India Post ist das Department of Posts, der staatliche Postdienst **Indiens**, der nach eigenen Angaben 164.999 Postämter betreibt – das größte Postnetz der Welt. Innerhalb Indiens befördert India Post unter anderem Speed Post, Einschreiben und India Post Parcel; ins Ausland gehen EMS (International Speed Post), verfolgbare Kleinpakete (International Tracked Packet) und Luftpostpakete. Eine Sendung lässt sich auf [indiapost.gov.in](https://www.indiapost.gov.in/) verfolgen, wo ein CAPTCHA abgefragt wird, oder direkt oben im Suchfeld. India Post nennt den Code *article barcode number* – bei einer Online-Bestellung bekommst du ihn vom Verkäufer.
@@ -83,7 +83,7 @@ Auf der Startseite warnt India Post vor gefälschten Links im Namen der Post: Nu
 
 ## India-Post-Sendung mit Peek verfolgen
 
-[Peek](/) erkennt zwei Buchstaben, neun Ziffern und `IN` bei gültiger Prüfziffer sofort als India Post und zeigt „Erkannter Paketdienst“; über „Ändern“ lässt sich ein anderer Dienst wählen. Stimmt die Prüfziffer nicht (etwa bei `EE482910577IN`), meldet Peek „Die Prüfziffer dieser Nummer geht nicht auf.“: Vergleiche die Nummer mit der Versandbestätigung oder wähle „Wie eingegeben verfolgen“. Ist die Sendung unter India Post angelegt, steht auf peektracker.com bis zum ersten Scan „Warten auf India Post“.
+[Peek](/) erkennt zwei Buchstaben, neun Ziffern und `IN` bei gültiger Prüfziffer sofort als India Post und zeigt „Erkannter Paketdienst“; über „Ändern“ lässt sich ein anderer Dienst wählen. Stimmt die Prüfziffer nicht (etwa bei `EE482910577IN`), meldet Peek „Die Prüfziffer dieser Nummer geht nicht auf.“: Vergleiche die Nummer mit der Versandbestätigung oder wähle „Wie eingegeben verfolgen“. Ist die Sendung unter India Post angelegt, steht bis zum ersten Scan „Warten auf India Post“.
 
 Peek fragt nicht das eigene Portal von India Post ab, sondern liest die Scans über MySpeedPost aus, einen externen Tracking-Dienst außerhalb der Domain von India Post, der sie bei India Post abruft (oder über track91).
 

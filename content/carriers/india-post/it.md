@@ -3,7 +3,7 @@ title: Tracciamento India Post e Speed Post: numeri, stati e dogana
 description: Traccia una spedizione India Post o Speed Post: formato del codice in IN, significato degli stati, consegna con Poste Italiane o Posta Svizzera e dogana.
 slug: tracciamento-india-post
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 India Post è il Department of Posts, il servizio postale pubblico dell'**India**, che dichiara sul proprio sito 164.999 uffici postali: la rete postale più estesa al mondo, afferma. All'interno dell'India gestisce Speed Post, posta raccomandata e India Post Parcel; verso l'estero spedisce EMS (International Speed Post), piccoli pacchi tracciati (International Tracked Packet) e pacchi aerei. Puoi seguire una spedizione sul portale [indiapost.gov.in](https://www.indiapost.gov.in/), che richiede un CAPTCHA, oppure incollare il codice nel riquadro qui sopra. India Post lo chiama *article barcode number* (numero del codice a barre dell'invio); per un acquisto online, chiedilo al venditore.
@@ -83,7 +83,7 @@ Sulla home page India Post mette in guardia dai link falsi che ne imitano il nom
 
 ## Tracciare un pacco India Post con Peek
 
-[Peek](/) riconosce due lettere, nove cifre e `IN` come India Post quando la cifra di controllo è valida, mostrando «Corriere rilevato»; «Cambia» permette di sceglierne un altro. Con una cifra di controllo errata (ad esempio `EE482910577IN`), avvisa «La cifra di controllo di questo numero non torna.»: controlla il numero fornito dal mittente oppure scegli «Traccia così com’è». Salvato sotto India Post, un invio mostra «In attesa di India Post» su peektracker.com fino alla prima scansione.
+[Peek](/) riconosce due lettere, nove cifre e `IN` come India Post quando la cifra di controllo è valida, mostrando «Corriere rilevato»; «Cambia» permette di sceglierne un altro. Con una cifra di controllo errata (ad esempio `EE482910577IN`), avvisa «La cifra di controllo di questo numero non torna.»: controlla il numero fornito dal mittente oppure scegli «Traccia così com’è». Salvato sotto India Post, un invio mostra «In attesa di India Post» fino alla prima scansione.
 
 Peek non interroga il sito di India Post direttamente: legge le scansioni tramite MySpeedPost, un servizio esterno al dominio di India Post che le recupera da India Post (oppure tramite track91).
 

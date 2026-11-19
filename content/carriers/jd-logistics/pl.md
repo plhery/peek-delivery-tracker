@@ -3,7 +3,7 @@ title: Śledzenie przesyłek JD Logistics: numery, statusy i kontakt
 description: Śledź paczkę JD Logistics (京东物流): formaty numerów JD i VG, znaczenie statusów po angielsku i chińsku, magazyny pod Warszawą, odprawa celna i kontakt.
 slug: sledzenie-przesylek-jd-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) to ramię logistyczne grupy JD.com, notowane na giełdzie w Hongkongu (`HKEX: 2618`). Za granicą działa pod markami JoyLogistics oraz JoyExpress: wysyła towary sprzedawców ze swoich magazynów w **Polsce**, **Niemczech**, **Francji**, **Holandii**, **Wielkiej Brytanii**, **Stanach Zjednoczonych** czy **Australii**, a także przewozi paczki e-commerce z **Chin**. Przesyłkę możesz sprawdzić po angielsku w [międzynarodowej wyszukiwarce JD Logistics](https://www.jingdonglogistics.com/Tracking) albo wkleić numer w polu powyżej. Kod otrzymujesz od sklepu, który nadał zamówienie.
@@ -64,7 +64,7 @@ Zgodnie z regulaminem międzynarodowych przesyłek ekspresowych JD Logistics nad
 
 ## Paczka JD Logistics nie aktualizuje się, spóźnia się lub wraca
 
-**Brak wpisów pod numerem.** Jeśli wyszukiwarka JD nie znajduje jeszcze przesyłki, potwierdź numer u sprzedawcy. Na peektracker.com Peek wyświetla „Oczekiwanie na przewoźnika JD Logistics” i sprawdza dalej; jeśli po dwóch dniach numer nadal nie jest znany, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”.
+**Brak wpisów pod numerem.** Jeśli wyszukiwarka JD nie znajduje jeszcze przesyłki, potwierdź numer u sprzedawcy. Peek wyświetla „Oczekiwanie na przewoźnika JD Logistics” i sprawdza dalej; jeśli po dwóch dniach numer nadal nie jest znany, pojawia się komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”.
 
 **Brak aktualizacji od kilku dni.** Gdy przesyłka w drodze nie ma nowego skanu od czterech dni, Peek pokazuje „Brak aktualizacji od czterech dni”, przypomina, że paczki często milkną podczas długich lotów, w urzędzie celnym lub w weekend, i udostępnia link „Poproś przewoźnika JD Logistics o pomoc” do strony kontaktowej JD (albo do lokalnego przewoźnika, gdy doręczenie przejął np. GOFO). Zobacz [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: Seguimento YWE (YanwenExpress): número, estados e ajuda
 description: Segue uma encomenda YWE (YanwenExpress) nos Estados Unidos: formato do número YWE, significado de cada leitura do centro até à porta e quem contactar.
 slug: seguimento-ywe
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 A YWE (YanwenExpress, operada pela Yanwen Express LLC) é uma transportadora de entrega de última milha nos Estados Unidos: leva encomendas desde os seus centros operacionais norte-americanos até à porta do destinatário para lojas online, retalhistas e marketplaces. Os seus números são compostos pelas letras YWE seguidas de 14 dígitos: cola o teu na caixa acima ou consulta-o diretamente no localizador da YWE em [yanwenexpress.com](https://www.yanwenexpress.com/tracking.html).
@@ -66,7 +66,7 @@ Na página institucional, a YWE refere ter começado em Los Angeles em 2024 e pl
 
 ## Encomenda YWE atrasada ou seguimento parado
 
-**`NOT_FOUND`.** O portal da YWE mostra este aviso quando não encontra leituras para o código pesquisado e aponta causas possíveis: a encomenda ainda não foi aceite ou lida, o número está incorreto ou o envio já tem tanto tempo que o histórico deixou de estar disponível. Em peektracker.com, o Peek mostra «À espera de YWE» e continua a tentar. Confere o código na mensagem do vendedor: YWE e 14 dígitos. Se nada surgir ao fim de alguns dias, pergunta à loja se a encomenda chegou a seguir viagem.
+**`NOT_FOUND`.** O portal da YWE mostra este aviso quando não encontra leituras para o código pesquisado e aponta causas possíveis: a encomenda ainda não foi aceite ou lida, o número está incorreto ou o envio já tem tanto tempo que o histórico deixou de estar disponível. O Peek mostra «À espera de YWE» e continua a tentar. Confere o código na mensagem do vendedor: YWE e 14 dígitos. Se nada surgir ao fim de alguns dias, pergunta à loja se a encomenda chegou a seguir viagem.
 
 **Parada em `Shipping Order Created.`** A YWE recebeu os dados eletrónicos do pedido, mas ainda não tem o volume consigo. Como a primeira leitura física da YWE acontece no seu centro nos Estados Unidos, pergunta ao vendedor onde se encontra a encomenda e quando foi expedida. Se saiu da China rumo aos Estados Unidos, consulta [seguir uma encomenda vinda da China](guide:tracking-from-china).
 

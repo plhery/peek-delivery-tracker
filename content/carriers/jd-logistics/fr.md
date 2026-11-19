@@ -3,7 +3,7 @@ title: Suivi colis JD Logistics : numéros JD, statuts et contact
 description: Suivez un colis JD Logistics (京东物流) : formats JD et VG, sens des statuts en anglais et chinois, entrepôts en France et en Europe, douane et service client.
 slug: suivi-colis-jd-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) est la branche logistique du groupe JD.com, cotée à la Bourse de Hong Kong (`HKEX : 2618`). À l’international, elle opère sous les marques JoyLogistics et JoyExpress : elle expédie les commandes des marchands depuis ses entrepôts en **France**, en **Allemagne**, aux **Pays-Bas**, en **Pologne**, au **Royaume-Uni**, aux **États-Unis** ou en **Australie**, et achemine les colis e-commerce depuis la **Chine**. Vous pouvez suivre un envoi en anglais sur le [suivi international de JD Logistics](https://www.jingdonglogistics.com/Tracking) ou coller votre numéro dans le champ ci-dessus. Ce numéro vous est transmis par la boutique qui a expédié votre commande.
@@ -65,7 +65,7 @@ Selon les règles de service de l’express international de JD Logistics depuis
 
 ## Colis JD Logistics bloqué, en retard ou retourné
 
-**Aucun résultat pour le moment.** Si le suivi de JD ne trouve encore rien sous ce numéro, vérifiez-le auprès du vendeur. Sur peektracker.com, Peek affiche « En attente de JD Logistics » et continue d’interroger le transporteur ; si le numéro reste inconnu après deux jours, le message « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » s’affiche.
+**Aucun résultat pour le moment.** Si le suivi de JD ne trouve encore rien sous ce numéro, vérifiez-le auprès du vendeur. Peek affiche « En attente de JD Logistics » et continue d’interroger le transporteur ; si le numéro reste inconnu après deux jours, le message « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. » s’affiche.
 
 **Aucune mise à jour depuis plusieurs jours.** Lorsqu’un colis en route n’a reçu aucun nouveau scan depuis quatre jours, Peek affiche « Aucune mise à jour depuis quatre jours », rappelle que les colis restent souvent silencieux sur les vols long-courriers, en douane ou le week-end, et propose un lien « Demande de l’aide à JD Logistics » vers la page de contact de JD (ou vers le transporteur local lorsqu’un relais comme GOFO a pris la suite). Voir [pourquoi le suivi ne bouge plus](guide:tracking-not-updating) et [suivre un colis depuis la Chine](guide:tracking-from-china).
 

@@ -3,7 +3,7 @@ title: Śledzenie R+L Carriers: numer PRO, statusy i reklamacje
 description: Śledź przesyłkę towarową R+L Carriers w USA: jak wygląda numer PRO, co oznacza każdy status śledzenia i jakie zasady obowiązują przy opóźnieniu lub szkodzie.
 slug: sledzenie-rl-carriers
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 R+L Carriers to drogowy przewoźnik ładunków towarowych w **Stanach Zjednoczonych**. W kodzie Peek odbiera towar od nadawcy, przewozi go między terminalami przeładunkowymi i doręcza z terminalu docelowego na terenie USA. Jeśli duże zamówienie albo inna przesyłka towarowa jedzie do Ciebie w Stanach Zjednoczonych za pośrednictwem R+L, sprawdzasz ją po numerze PRO otrzymanym ze sklepu lub od firmy zlecającej fracht: wklej go w polu powyżej. Własna wyszukiwarka R+L to strona *Shipment Tracing* w serwisie rlcarriers.com: przyjmuje numer PRO albo identyfikator zlecenia odbioru (*Pickup Request ID*), do 25 numerów naraz, a po zalogowaniu na konto MyRLC również inne numery referencyjne.
@@ -51,7 +51,7 @@ Na tej stronie nie podajemy przedziałów godzinowych dostaw, zasad umawiania aw
 
 ## Przesyłka R+L Carriers nieznaleziona, opóźniona, uszkodzona lub zagubiona
 
-**Brak wyników.** Dla nieznanego numeru PRO wyszukiwarka R+L zwraca komunikat `No records found for Number:` oraz numer PRO poprzedzony literą `I`. Na peektracker.com Peek wyświetla wówczas „Oczekiwanie na przewoźnika R+L Carriers” dla numeru przypisanego do R+L Carriers i ponawia zapytanie później. Porównaj każdą cyfrę z wiadomością ze sklepu; jeśli numer się zgadza, zapytaj nadawcę, czy R+L odebrało już towar.
+**Brak wyników.** Dla nieznanego numeru PRO wyszukiwarka R+L zwraca komunikat `No records found for Number:` oraz numer PRO poprzedzony literą `I`. Peek wyświetla wówczas „Oczekiwanie na przewoźnika R+L Carriers” dla numeru przypisanego do R+L Carriers i ponawia zapytanie później. Porównaj każdą cyfrę z wiadomością ze sklepu; jeśli numer się zgadza, zapytaj nadawcę, czy R+L odebrało już towar.
 
 **Błędna cyfra.** Jeżeli cyfra kontrolna numeru PRO się nie zgadza, wyszukiwarka R+L odpowiada numerem PRO z dopiskiem `Pro number failed check digit validation.` Peek pokazuje wtedy „Sprawdź numer śledzenia”. Zweryfikuj numer znak po znaku z potwierdzeniem wysyłki lub dokumentami przewozowymi.
 

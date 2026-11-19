@@ -3,7 +3,7 @@ title: Seguimiento DHLink: número de DHgate, estados y reparto
 description: Sigue tu paquete de DHLink de un pedido en DHgate: qué números acepta su buscador, qué significan los estados en inglés, quién entrega y a quién reclamar.
 slug: dhlink-seguimiento
 published: 2026-11-16
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DHLink (驼飞侠) es la plataforma logística transfronteriza de DHgate (敦煌网). Fundada en 2014, envía pedidos de vendedores de DHgate y de otros clientes desde China o desde sus almacenes en el extranjero y los entrega a un transportista del país de destino para el último tramo. Consulta tu código en la [página de seguimiento de DHLink](https://www.dhlink.com/trackQuery?lang=en) o pégalo en el recuadro de arriba. Encontrarás el número en los detalles de tu pedido de DHgate; si no aparece, pídeselo al vendedor.
@@ -64,7 +64,7 @@ En cuanto sepas qué transportista local lleva el paquete y cuál es su número,
 
 ## Paquete de DHLink sin actualizar, no encontrado o entregado pero no recibido
 
-**No encontrado.** Revisa el código en tu pedido de DHgate y prueba con el número de seguimiento (*Tracking No.*) en lugar del número `FC` de DHLink. Un código del transportista final no devuelve nada en la web de DHLink: búscalo directamente en ese transportista. Si has elegido DHLink con «Cambiar» para un número que DHLink no conoce, Peek muestra en peektracker.com «Esperando a DHLink» y sigue comprobándolo. Si dos días después DHLink sigue sin conocer el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y pasa a consultarlo una vez al día, y una vez por semana cuando ha pasado una semana desde que lo añadiste.
+**No encontrado.** Revisa el código en tu pedido de DHgate y prueba con el número de seguimiento (*Tracking No.*) en lugar del número `FC` de DHLink. Un código del transportista final no devuelve nada en la web de DHLink: búscalo directamente en ese transportista. Si has elegido DHLink con «Cambiar» para un número que DHLink no conoce, Peek muestra «Esperando a DHLink» y sigue comprobándolo. Si dos días después DHLink sigue sin conocer el número y ninguna otra fuente responde por él, Peek muestra «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.» y pasa a consultarlo una vez al día, y una vez por semana cuando ha pasado una semana desde que lo añadiste.
 
 **Parado tras el vuelo o la aduana.** Comprueba si ha aparecido un «Last Leg No.» y consúltalo en el transportista local, cuyas lecturas suelen ir por delante de las de DHLink. Más información en [por qué el seguimiento no se actualiza](guide:tracking-not-updating) y [seguir un paquete desde China](guide:tracking-from-china).
 

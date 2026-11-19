@@ -3,7 +3,7 @@ title: Tracciamento JD Logistics: codici JD, stati e contatti
 description: Traccia un pacco JD Logistics (京东物流): formati dei codici JD e VG, significato degli stati in inglese e cinese, magazzini in Europa, dogana e assistenza.
 slug: tracciamento-jd-logistics
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 JD Logistics (京东物流, Jingdong Logistics) è la società logistica del gruppo JD.com, quotata alla Borsa di Hong Kong (`HKEX: 2618`). All’estero opera con i marchi JoyLogistics e JoyExpress: spedisce la merce stoccata dai venditori nei suoi magazzini in **Francia**, **Germania**, **Paesi Bassi**, **Polonia**, **Regno Unito**, **Stati Uniti** o **Australia** e trasporta pacchi e-commerce dalla **Cina**. Puoi seguire una spedizione in inglese sul [tracker internazionale di JD Logistics](https://www.jingdonglogistics.com/Tracking) oppure incollare il codice nel riquadro qui sopra. Il codice ti viene fornito dal negozio che ha spedito l’ordine.
@@ -65,7 +65,7 @@ Le condizioni di servizio dell’espresso internazionale di JD Logistics dalla *
 
 ## Pacco JD Logistics fermo, in ritardo o restituito
 
-**Ancora nessun risultato.** Se il tracker di JD non trova ancora nulla sotto il codice, verificalo con il venditore. Su peektracker.com Peek mostra «In attesa di JD Logistics» e continua a controllare; se dopo due giorni il numero resta sconosciuto, compare «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.».
+**Ancora nessun risultato.** Se il tracker di JD non trova ancora nulla sotto il codice, verificalo con il venditore. Peek mostra «In attesa di JD Logistics» e continua a controllare; se dopo due giorni il numero resta sconosciuto, compare «Dopo due giorni il corriere non riconosce ancora questo numero. Controllalo, scegli un altro corriere o elimina il pacco.».
 
 **Nessuna novità da giorni.** Quando una spedizione in viaggio non riceve scansioni da quattro giorni, Peek segnala «Nessun aggiornamento da quattro giorni», ricorda che le pause sono frequenti sui voli intercontinentali, in dogana o nel fine settimana e aggiunge il link «Chiedi aiuto a JD Logistics» verso la pagina contatti di JD (oppure verso il corriere locale quando un partner come GOFO è già subentrato). Vedi [perché il tracciamento non si aggiorna](guide:tracking-not-updating) e [tracciare un pacco dalla Cina](guide:tracking-from-china).
 

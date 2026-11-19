@@ -3,7 +3,7 @@ title: JRT tracking: JRT…MM numbers, flight scans and DHL
 description: Track a JRT (今日通, Jinritong) parcel from Xiamen, China: what a JRT…MM number looks like, what its Chinese and English scans mean and who delivers it.
 slug: jrt-tracking
 published: 2026-10-30
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 JRT (今日通, Jinritong) is 厦门今日通商贸有限公司, a forwarder in Xiamen, China. If a Chinese shop sent your order with JRT, it gives you a number that starts with JRT and ends with MM: paste it in the box above. Its tracker follows the parcel from China through the flight and customs to the company that delivers: into Europe, DHL, and into the United States, UPS, whose scans it copies. JRT's FedEx line to Ireland ends with FedEx instead, its line into Spain with CTT Express, its line into Poland with InPost and its line into Mexico with J&T Express Mexico.
@@ -102,7 +102,7 @@ On the line into Europe, JRT's own lines are on Beijing time: 17:00 there is 09:
 
 **Nothing after `已交服务商`, `Delivery to final service provider` or `已交仓`.** JRT's part is done. Unless its tracker copies DHL's, UPS's, FedEx's or J&T Express Mexico's scans, or Peek shows DHL's or FedEx's number, the next steps are in the delivering company's tracking: ask the seller for that number. More in [why tracking stops updating](guide:tracking-not-updating) and [tracking a parcel from China](guide:tracking-from-china).
 
-**Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek takes that answer as JRT listing the shipment without a scan yet: it shows "Waiting for JRT" on peektracker.com and keeps checking, with no request to check the number (for a UP reference you left Peek to match to a carrier, "Waiting for JRT’s first scan"). So compare the number with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, JRT's tracker shows one result with the number as the reference and every other column empty. Peek takes that answer as JRT listing the shipment without a scan yet: it shows "Waiting for JRT" and keeps checking, with no request to check the number (for a UP reference you left Peek to match to a carrier, "Waiting for JRT’s first scan"). So compare the number with the seller's message yourself, character by character.
 
 **Address not found.** After `not delivered-bad address`, check the address on your order and tell the seller at once. If `shipment will be returned to origin-bad address` follows, the parcel is going back: ask the seller for a refund or a new parcel.
 

@@ -904,6 +904,9 @@ Key JSON events:
   `detection`) is `running_out` at 80% or `used_up`, with `used` and `limit`, and for
   `running_out` the `forecast` by the day's end at its pace so far.
   `account_allowance` says the same of the hourly allowance every account shares, at 50%.
+  `public_allowance` also warns of `app_refused` (an app's lookup refused by the client or
+  network allowance it shares, with `scope` and `platform`) and `network_half` (an IPv6 /48
+  at half its daily allowance, with `used`), once a day per server.
   A `running_out` whose forecast stays under the limit is an info line from each server;
   once the forecast reaches it, and for `used_up`, the state is a warning or error line and
   goes to Sentry once per day or hour, from the first server to claim it in
@@ -990,6 +993,9 @@ provider failure in an `AggregateError` so every cause is visible.
   refused until midnight UTC. One issue per allowance and state. The warning's `forecast`
   is the use by midnight at the day's pace so far, and `used_up_at` when it runs out;
   `impact` says the same. A day that lasts at its pace stays in the logs.
+  `allowance_state:app_refused` and `network_half` are the signs to give app installs their
+  own allowance (`PUBLIC_LOOKUPS_BY_INSTALL`, [DEPLOYMENT.md](DEPLOYMENT.md)): a warning
+  once a day per server, one issue each.
 - **Allowances for accounts**: `component:account-allowance` warns once an hour when the
   allowance every account shares is half used and the hour's pace uses it up before the
   hour is over, and reports an error when it is used up: every account is then refused

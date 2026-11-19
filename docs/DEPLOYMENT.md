@@ -484,6 +484,19 @@ and `NATIVE_DETECTIONS_PER_DAY` for installation budgets; `0` disables that work
 Network and global budgets still apply. Apple outages and unsupported devices
 use Turnstile. Signed-in requests use account budgets.
 
+`PUBLIC_LOOKUPS_BY_INSTALL=on` gives each installation that proves itself (App
+Attest, or an Android key in `enforce` mode) its own allowance, which other
+visitors on its address or network no longer use up: its proven lookups and
+detections count on its installation budget, then on its address's and IPv6
+/48's app counters, `PUBLIC_APP_LOOKUPS_PER_DAY` (150),
+`PUBLIC_APP_LOOKUPS_NETWORK_PER_DAY` (300) and `PUBLIC_APP_DETECTIONS_PER_DAY`
+(600) a UTC day, and on the global ones. The app counters bound a phone that
+makes key after key. Off, the default, they count on the client and network
+budgets they share with everyone else. Turn it on when Sentry reports
+`allowance_state:app_refused` or `network_half` and the use is ordinary
+([OBSERVABILITY.md](OBSERVABILITY.md)), or to lower the shared budgets under
+attack without holding back the apps.
+
 Android attestation runs in the mode `ANDROID_ATTESTATION_MODE` sets, wherever
 `TURNSTILE_SECRET_KEY` is set. `log`, the default, registers keys and counts
 their verdicts while every lookup keeps the Turnstile check; `enforce` lets a

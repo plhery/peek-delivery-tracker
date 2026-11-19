@@ -21,7 +21,10 @@ import { appFollowsLinks } from './appStoreRelease';
 import { emailConfigured } from './email/config';
 import { visibleNewsAt, withEventPlaces } from './eventPlaces';
 import { numberHint, parcelNumberMask, WORDED_CARRIER_DATA } from './hiddenNumbers';
-import { type AllowanceHolder, allowanceForecast, captureOverallAllowance, logOperationalEvent } from './observability';
+import type { LookupVerification } from './lookupVerification';
+import {
+  type AllowanceHolder, allowanceForecast, captureOverallAllowance, captureSharedAllowance, logOperationalEvent, type SharedAllowanceSign,
+} from './observability';
 import { privateValues, viewerScans, viewerStatusText } from './privateDetails';
 import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
@@ -57,6 +60,14 @@ const DEFAULT_LOOKUPS_GLOBAL_PER_DAY = 300;
 const DEFAULT_LOOKUPS_NETWORK_PER_DAY = 50;
 const DEFAULT_DETECTIONS_PER_DAY = 60;
 const DEFAULT_DETECTIONS_GLOBAL_PER_DAY = 600;
+/**
+ * With `PUBLIC_LOOKUPS_BY_INSTALL`, what the app installs that prove themselves may use together
+ * from one address (ten installs' allowance) and one IPv6 /48 (twenty): a ceiling for a phone
+ * that makes key after key, which a shared network's installs don't reach.
+ */
+const DEFAULT_APP_LOOKUPS_PER_DAY = 150;
+const DEFAULT_APP_LOOKUPS_NETWORK_PER_DAY = 300;
+const DEFAULT_APP_DETECTIONS_PER_DAY = 600;
 /** The share of an overall allowance past which the server says it is running out. */
 const RUNNING_OUT = 0.8;
 
@@ -89,21 +100,51 @@ function dayHash(counted: string, now: Date): string {
 
 /**
  * The daily lookup counter of a client. Without trusted proxy headers every
- * client is `untrusted` and shares one counter, which fails closed.
+ * client is `untrusted` and shares one counter, which fails closed. `app`: the
+ * counter of the app installs that proved themselves there, apart from it.
  */
-export function lookupBucket(ip: string, now: Date): string {
-  return dayHash(clientNetwork(ip), now);
+export function lookupBucket(ip: string, now: Date, app = false): string {
+  return app ? `app:${dayHash(`app:${clientNetwork(ip)}`, now)}` : dayHash(clientNetwork(ip), now);
 }
 
-/** The daily lookup counter of an IPv6 client's /48, or null for any other address. */
-export function lookupNetworkBucket(ip: string, now: Date): string | null {
+/** The daily lookup counter of an IPv6 client's /48, or null for any other address; `app` as for `lookupBucket`. */
+export function lookupNetworkBucket(ip: string, now: Date, app = false): string | null {
   const site = clientSite(ip);
-  return site === null ? null : `network:${dayHash(site, now)}`;
+  if (site === null) return null;
+  return app ? `network:app:${dayHash(`network:app:${site}`, now)}` : `network:${dayHash(site, now)}`;
 }
 
-/** The daily counter of the numbers a client had carriers asked about. Its hash is not the lookup counter's. */
-export function detectionBucket(ip: string, now: Date): string {
-  return `detection:${dayHash(`detection:${clientNetwork(ip)}`, now)}`;
+/**
+ * The daily counter of the numbers a client had carriers asked about. Its hash
+ * is not the lookup counter's. `app` as for `lookupBucket`.
+ */
+export function detectionBucket(ip: string, now: Date, app = false): string {
+  return app ? `detection:app:${dayHash(`detection:app:${clientNetwork(ip)}`, now)}`
+    : `detection:${dayHash(`detection:${clientNetwork(ip)}`, now)}`;
+}
+
+/**
+ * Whether a request counts on its address's app counters: with
+ * `PUBLIC_LOOKUPS_BY_INSTALL=on`, one an install proved with its key (App
+ * Attest, or an Android key in `enforce` mode). Its key's own daily allowance
+ * was spent as it was checked (`verifyNativeRequest`), so other visitors on
+ * its network no longer use up its lookups. Off, the default, every request
+ * counts on the counters it shares with them.
+ */
+export function countsByInstall(verified: LookupVerification | undefined, env: Environment = process.env): boolean {
+  if (env.PUBLIC_LOOKUPS_BY_INSTALL?.trim().toLowerCase() !== 'on') return false;
+  return verified?.proof === 'app_attest' || verified?.proof === 'key_attestation' || verified?.proof === 'play_integrity';
+}
+
+/** What app installs that count apart may use together from one address and one IPv6 /48 a UTC day. */
+export function appLimits(env: Environment = process.env) {
+  return {
+    lookup: {
+      perClient: allowance(env.PUBLIC_APP_LOOKUPS_PER_DAY, DEFAULT_APP_LOOKUPS_PER_DAY),
+      perNetwork: allowance(env.PUBLIC_APP_LOOKUPS_NETWORK_PER_DAY, DEFAULT_APP_LOOKUPS_NETWORK_PER_DAY),
+    },
+    detection: { perClient: allowance(env.PUBLIC_APP_DETECTIONS_PER_DAY, DEFAULT_APP_DETECTIONS_PER_DAY) },
+  };
 }
 
 function allowance(value: string | undefined, fallback: number): number {
@@ -183,27 +224,72 @@ export async function reportOverallAllowance(
   if (!lasts) captureOverallAllowance(holder, kind, state, { used, limit }, now);
 }
 
-/** Counts one lookup against today's allowances: the client's, its IPv6 /48's and everyone's. */
-export async function claimLookup(service: SupabaseServiceClient, ip: string, now: Date): Promise<PublicAllowance> {
+/**
+ * Counts one lookup against today's allowances: the client's, its IPv6 /48's
+ * and everyone's, or for an install that counts apart (`countsByInstall`) its
+ * address's and network's app counters and everyone's.
+ */
+export async function claimLookup(
+  service: SupabaseServiceClient, ip: string, now: Date, verified?: LookupVerification,
+): Promise<PublicAllowance> {
   const limits = lookupLimits();
-  const network = lookupNetworkBucket(ip, now);
+  const app = countsByInstall(verified);
+  const counted = app ? appLimits().lookup : limits;
+  const network = lookupNetworkBucket(ip, now, app);
   const claimed = await service.claimPublicAllowance({
-    bucket: lookupBucket(ip, now),
-    limit: limits.perClient,
+    bucket: lookupBucket(ip, now, app),
+    limit: counted.perClient,
     overall: { bucket: 'global', limit: limits.overall },
-    network: network === null ? null : { bucket: network, limit: limits.perNetwork },
+    network: network === null ? null : { bucket: network, limit: counted.perNetwork },
   });
   await reportOverallAllowance(service, { holder: 'public', kind: 'lookup', period: 'day', limit: limits.overall, runningOut: RUNNING_OUT },
     claimed.overallUsed, !claimed.allowed && claimed.scope === 'global', now);
+  if (!app) reportSharedAllowance(verified, claimed, limits, now);
   return claimed;
 }
 
-/** Counts one number that carriers are about to be asked about, for its client and for everyone. */
-export async function claimDetection(service: SupabaseServiceClient, ip: string, now: Date): Promise<PublicAllowance> {
+/** The signs of a shared allowance this process said today, and the day it said each. */
+const sharedSigns = new Map<SharedAllowanceSign, string>();
+
+/**
+ * Says when the lookups an app shares with its network's other visitors held it
+ * back, or when an IPv6 /48 has used half of its own: the signs to turn on
+ * `PUBLIC_LOOKUPS_BY_INSTALL`. A warning line, and Sentry once a UTC day per
+ * server; the app is the one its user-agent names.
+ */
+function reportSharedAllowance(
+  verified: LookupVerification | undefined, claimed: PublicAllowance, limits: ReturnType<typeof lookupLimits>, now: Date,
+): void {
+  const signs: { sign: SharedAllowanceSign; details: Record<string, string | number> }[] = [];
+  if (verified?.app && !claimed.allowed && (claimed.scope === 'bucket' || claimed.scope === 'network')) {
+    signs.push({ sign: 'app_refused', details: {
+      scope: claimed.scope, platform: verified.app, limit: claimed.scope === 'bucket' ? limits.perClient : limits.perNetwork,
+    } });
+  }
+  if (claimed.networkUsed !== undefined && limits.perNetwork > 0 && claimed.networkUsed * 2 >= limits.perNetwork) {
+    signs.push({ sign: 'network_half', details: { used: claimed.networkUsed, limit: limits.perNetwork } });
+  }
+  const day = now.toISOString().slice(0, 10);
+  for (const { sign, details } of signs) {
+    if (sharedSigns.get(sign) === day) continue;
+    sharedSigns.set(sign, day);
+    logOperationalEvent('public_allowance', { kind: 'lookup', state: sign, ...details }, 'warning');
+    captureSharedAllowance(sign, details);
+  }
+}
+
+/**
+ * Counts one number that carriers are about to be asked about, for its client
+ * (or its address's app counter, as for `claimLookup`) and for everyone.
+ */
+export async function claimDetection(
+  service: SupabaseServiceClient, ip: string, now: Date, verified?: LookupVerification,
+): Promise<PublicAllowance> {
   const limits = detectionLimits();
+  const app = countsByInstall(verified);
   const claimed = await service.claimPublicAllowance({
-    bucket: detectionBucket(ip, now),
-    limit: limits.perClient,
+    bucket: detectionBucket(ip, now, app),
+    limit: app ? appLimits().detection.perClient : limits.perClient,
     overall: { bucket: 'detection', limit: limits.overall },
   });
   await reportOverallAllowance(service, { holder: 'public', kind: 'detection', period: 'day', limit: limits.overall, runningOut: RUNNING_OUT },

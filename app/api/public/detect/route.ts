@@ -17,9 +17,9 @@ export const runtime = 'nodejs';
 export const POST = apiRoute(async (context) => {
   const { raw, value: body } = await readJsonBody(context.request);
   return json(await detectCarrier(body, async () => {
-    await verifyLookupRequest(context.request, requireService(context), raw);
+    const verified = await verifyLookupRequest(context.request, requireService(context), raw);
     const now = new Date();
-    const allowance = await claimDetection(requireService(context), clientIp(context.request), now);
+    const allowance = await claimDetection(requireService(context), clientIp(context.request), now, verified);
     if (!allowance.allowed) {
       recordPublicDetection(allowance.scope === 'global' ? 'limited_global' : 'limited_daily');
       throw new HttpError(429, 'No carrier checks are left for today.', { 'Retry-After': String(secondsUntilUtcMidnight(now)) });

@@ -206,6 +206,8 @@ export interface PublicAllowance {
   allowed: boolean;
   scope: 'bucket' | 'network' | 'global' | null;
   overallUsed: number;
+  /** The lookups the claim's IPv6 /48 made today, this one included if it counted, where it has one. */
+  networkUsed?: number;
 }
 
 /** A claim by an account: `overall` is every account's this hour, `account` the account's today. */
@@ -2473,6 +2475,7 @@ export class SupabaseServiceClient extends SupabaseClient {
       allowed: result.allowed,
       scope: result.scope === 'bucket' || result.scope === 'network' || result.scope === 'global' ? result.scope : null,
       overallUsed: Number(result.overall ?? 0),
+      ...(typeof result.network === 'number' ? { networkUsed: result.network } : {}),
     };
   }
 

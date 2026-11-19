@@ -3,8 +3,13 @@ import contractFixture from '../../contracts/fixtures/delivery-api.json';
 import contract from '../../contracts/openapi.json';
 import trackingMessages from '../../shared/tracking-messages.json';
 import type { ApiTrackingEventRow } from '../generated/apiContract';
+import * as observability from './observability';
 import {
   GIFT_ORIGIN_DESCRIPTION,
+  appLimits,
+  claimDetection,
+  claimLookup,
+  countsByInstall,
   giftEvents,
   isParcelLinkId,
   isWrappedGift,
@@ -110,6 +115,90 @@ describe('daily lookup allowances', () => {
       .toEqual({ perClient: 0, overall: 500 });
     expect(detectionLimits({ PUBLIC_DETECTIONS_PER_DAY: '1.5', PUBLIC_DETECTIONS_GLOBAL_PER_DAY: '' }))
       .toEqual({ perClient: 60, overall: 600 });
+  });
+
+  it('counts app installs that count apart on counters of their own, for the address and its /48', () => {
+    vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
+    const day = new Date('2026-10-02T08:00:00Z');
+    const address = '2001:db8:1:2::1';
+    expect(lookupBucket(address, day, true)).toMatch(/^app:[0-9a-f]{64}$/);
+    expect(lookupNetworkBucket(address, day, true)).toMatch(/^network:app:[0-9a-f]{64}$/);
+    expect(detectionBucket(address, day, true)).toMatch(/^detection:app:[0-9a-f]{64}$/);
+    expect(lookupBucket(address, day, true).slice(4)).not.toBe(lookupBucket(address, day));
+    expect(lookupNetworkBucket(address, day, true)!.slice(12)).not.toBe(lookupNetworkBucket(address, day)!.slice(8));
+    expect(detectionBucket(address, day, true).slice(14)).not.toBe(detectionBucket(address, day).slice(10));
+    expect(lookupBucket('2001:db8:1:2::ffff', day, true)).toBe(lookupBucket(address, day, true));
+    expect(lookupNetworkBucket('198.51.100.7', day, true)).toBeNull();
+  });
+
+  it('counts apart only lookups an install proved, once PUBLIC_LOOKUPS_BY_INSTALL is on', () => {
+    const on = { PUBLIC_LOOKUPS_BY_INSTALL: ' On ' };
+    for (const proof of ['app_attest', 'key_attestation', 'play_integrity'] as const) {
+      expect(countsByInstall({ proof, app: 'apple' }, on)).toBe(true);
+      expect(countsByInstall({ proof, app: 'apple' }, {})).toBe(false);
+      expect(countsByInstall({ proof, app: null }, { PUBLIC_LOOKUPS_BY_INSTALL: 'true' })).toBe(false);
+    }
+    for (const proof of ['turnstile', 'none'] as const) expect(countsByInstall({ proof, app: 'android' }, on)).toBe(false);
+    expect(countsByInstall(undefined, on)).toBe(false);
+    expect(appLimits({})).toEqual({ lookup: { perClient: 150, perNetwork: 300 }, detection: { perClient: 600 } });
+    expect(appLimits({ PUBLIC_APP_LOOKUPS_PER_DAY: '60', PUBLIC_APP_LOOKUPS_NETWORK_PER_DAY: '90', PUBLIC_APP_DETECTIONS_PER_DAY: 'x' }))
+      .toEqual({ lookup: { perClient: 60, perNetwork: 90 }, detection: { perClient: 600 } });
+  });
+
+  it('claims a proven install\'s lookups and detections on the app counters, and others on the shared ones', async () => {
+    vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
+    vi.spyOn(observability, 'captureSharedAllowance').mockReturnValue(null);
+    const claim = vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance').mockResolvedValue({ allowed: true, scope: null, overallUsed: 1 });
+    const service = new SupabaseServiceClient('https://database.example', 'test-service-key');
+    const day = new Date('2026-10-02T08:00:00Z');
+    const address = '2001:db8:1:2::1';
+    const proven = { proof: 'app_attest', app: 'apple' } as const;
+    await claimLookup(service, address, day, proven);
+    vi.stubEnv('PUBLIC_LOOKUPS_BY_INSTALL', 'on');
+    await claimLookup(service, address, day, proven);
+    await claimLookup(service, address, day, { proof: 'turnstile', app: 'android' });
+    await claimDetection(service, address, day, proven);
+    const claims = claim.mock.calls.map(([claimed]) => claimed);
+    expect(claims[0]).toEqual({ bucket: lookupBucket(address, day), limit: 15, overall: { bucket: 'global', limit: 300 },
+      network: { bucket: lookupNetworkBucket(address, day), limit: 50 } });
+    expect(claims[1]).toEqual({ bucket: lookupBucket(address, day, true), limit: 150, overall: { bucket: 'global', limit: 300 },
+      network: { bucket: lookupNetworkBucket(address, day, true), limit: 300 } });
+    expect(claims[2]).toEqual(claims[0]);
+    expect(claims[3]).toEqual({ bucket: detectionBucket(address, day, true), limit: 600, overall: { bucket: 'detection', limit: 600 } });
+  });
+
+  it('warns once a day when an app is refused by a shared allowance, or a network is half used', async () => {
+    vi.stubEnv('SUPABASE_SERVICE_ROLE_KEY', 'test-service-key');
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+    const sign = vi.spyOn(observability, 'captureSharedAllowance').mockReturnValue(null);
+    const claim = vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance');
+    const service = new SupabaseServiceClient('https://database.example', 'test-service-key');
+    const address = '2001:db8:1:2::1';
+    const app = { proof: 'app_attest', app: 'apple' } as const;
+    const day = new Date('2027-01-05T08:00:00Z');
+
+    claim.mockResolvedValue({ allowed: false, scope: 'bucket', overallUsed: 3, networkUsed: 4 });
+    await claimLookup(service, address, day, { proof: 'turnstile', app: null });
+    claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 3, networkUsed: 24 });
+    await claimLookup(service, address, day, app);
+    expect(sign).not.toHaveBeenCalled();
+
+    claim.mockResolvedValue({ allowed: false, scope: 'network', overallUsed: 3, networkUsed: 25 });
+    await claimLookup(service, address, day, app);
+    await claimLookup(service, address, new Date('2027-01-05T23:00:00Z'), app);
+    expect(sign.mock.calls).toEqual([
+      ['app_refused', { scope: 'network', platform: 'apple', limit: 50 }],
+      ['network_half', { used: 25, limit: 50 }],
+    ]);
+    await claimLookup(service, address, new Date('2027-01-06T00:10:00Z'), { proof: 'turnstile', app: 'android' });
+    expect(sign).toHaveBeenCalledTimes(4);
+    expect(sign).toHaveBeenNthCalledWith(3, 'app_refused', { scope: 'network', platform: 'android', limit: 50 });
+
+    // An install that counts apart is held back by its own counters, not a shared one.
+    vi.stubEnv('PUBLIC_LOOKUPS_BY_INSTALL', 'on');
+    claim.mockResolvedValue({ allowed: false, scope: 'bucket', overallUsed: 3, networkUsed: 300 });
+    await claimLookup(service, address, new Date('2027-01-07T08:00:00Z'), app);
+    expect(sign).toHaveBeenCalledTimes(4);
   });
 
   it('retries a daily refusal at the next UTC midnight', () => {

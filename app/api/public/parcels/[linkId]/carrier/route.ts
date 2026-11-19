@@ -85,10 +85,10 @@ async function changeCarrier(context: ApiContext<LinkParameters>, progress: { st
   }
 
   progress.stage = 'verification';
-  await verifyLookupRequest(context.request, service, raw);
+  const verified = await verifyLookupRequest(context.request, service, raw);
   progress.stage = 'allowance';
   const now = new Date();
-  const allowance = await claimLookup(service, clientIp(context.request), now);
+  const allowance = await claimLookup(service, clientIp(context.request), now, verified);
   if (!allowance.allowed) {
     recordChange('limited', context.requestId, progress.change);
     return lookupsUsedUp(now);

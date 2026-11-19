@@ -103,6 +103,20 @@ describe('native verification', () => {
     expect((await send(Buffer.from('{"trackingNumber":"TESTPARCEL674321"}'))).status).toBe(403);
     expect(claim).toHaveBeenCalledOnce();
   });
+  it('counts a lookup the app proved on its address\'s app counter once PUBLIC_LOOKUPS_BY_INSTALL is on', async () => {
+    vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    const claim = vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance').mockResolvedValue({ allowed: false, scope: 'bucket', overallUsed: 0 });
+    const send = async () => {
+      const signed = await signedRequest();
+      return lookUp(new NextRequest(signed.url, { method: 'POST', headers: signed.headers, body: signedBody }), { params: Promise.resolve({}) });
+    };
+    expect((await send()).status).toBe(429);
+    vi.stubEnv('PUBLIC_LOOKUPS_BY_INSTALL', 'on');
+    expect((await send()).status).toBe(429);
+    const [shared, apart] = claim.mock.calls.map(([claimed]) => claimed);
+    expect(shared).toMatchObject({ bucket: expect.stringMatching(/^[0-9a-f]{64}$/), limit: 15 });
+    expect(apart).toMatchObject({ bucket: expect.stringMatching(/^app:[0-9a-f]{64}$/), limit: 150 });
+  });
   it.each([
     ['body', 'signature'], ['path', 'signature'], ['method', 'signature'], ['network', 'challenge_mismatch'],
     ['hostname', 'challenge_mismatch'], ['key', 'challenge_mismatch'], ['challenge', 'malformed'], ['signature', 'signature'],

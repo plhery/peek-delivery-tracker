@@ -3,10 +3,10 @@ import 'server-only';
 import { createHmac, randomBytes, timingSafeEqual } from 'node:crypto';
 import { isIP } from 'node:net';
 import { clientIp, clientNetwork, HttpError } from './api';
-import { recordLookupProof } from './metrics';
+import { recordLookupProof, type LookupProof } from './metrics';
 import { logOperationalEvent } from './observability';
 import { requestHostname } from './siteHosts';
-import { hasNativeAssertion, verifyNativeRequest } from './nativeVerification';
+import { appPlatform, hasNativeAssertion, verifyNativeRequest, type NativePlatform } from './nativeVerification';
 import type { SupabaseServiceClient } from './supabase';
 
 const PROOF_SECONDS = 15 * 60;
@@ -137,34 +137,37 @@ export function requireLookupProof(request: Request, headers: Record<string, str
   return 'turnstile';
 }
 
+/** What let a lookup through, and the app its user-agent names, which the allowances read. */
+export interface LookupVerification {
+  proof: Exclude<LookupProof, 'refused'>;
+  app: NativePlatform | null;
+}
+
 /**
- * Native assertions count the installation before the shared IP and global budgets.
- * An Android key's assertion that lets nothing through leaves the request to its
+ * Native assertions count the installation before the IP and global budgets, which
+ * an installation's proof can make its own (`claimLookup`). An Android key's assertion that lets nothing through leaves the request to its
  * browser proof, whose refusal says why in `X-Native-Assertion` (`mode`,
  * `limited` with `Retry-After`, or `refused`): the key never stops what the
  * browser check lets through. `body` is the request body as read: the request's
  * own body is already used. `lookup_proof_total` counts what let each request
  * through, or its refusal.
  */
-export async function verifyLookupRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array) {
+export async function verifyLookupRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array): Promise<LookupVerification> {
   const kind = proofKind(request);
-  if (!turnstileSettings()) {
-    recordLookupProof(kind, 'none');
-    return;
-  }
+  const passed = (proof: LookupVerification['proof']): LookupVerification => {
+    recordLookupProof(kind, proof);
+    return { proof, app: appPlatform(request) };
+  };
+  if (!turnstileSettings()) return passed('none');
   try {
     if (hasNativeAssertion(request)) {
       const native = await verifyNativeRequest(request, service, body);
-      if (native.proof) {
-        recordLookupProof(kind, native.proof);
-        return;
-      }
+      if (native.proof) return passed(native.proof);
       const headers: Record<string, string> = { 'X-Native-Assertion': native.fallback };
       if (native.retryAfter) headers['Retry-After'] = String(native.retryAfter);
-      recordLookupProof(kind, requireLookupProof(request, headers));
-      return;
+      return passed(requireLookupProof(request, headers));
     }
-    recordLookupProof(kind, requireLookupProof(request));
+    return passed(requireLookupProof(request));
   } catch (error) {
     if (error instanceof HttpError && (error.status === 403 || error.status === 429)) recordLookupProof(kind, 'refused');
     throw error;

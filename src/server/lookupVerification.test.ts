@@ -196,14 +196,17 @@ describe('lookup verification', () => {
     const before: number[] = [];
     for (const name of names) before.push(await series(name));
     const { proof } = await verifyLookupBrowser(request(), 'one-use-token');
-    await verifyLookupRequest(request(proof), service, new Uint8Array());
+    const browser = request(proof);
+    browser.headers.set('User-Agent', 'PeekDeliveryTracker/1 okhttp/5.1.0 Android/16');
+    // What let it through, and the app its user-agent names, go on to the allowances.
+    expect(await verifyLookupRequest(browser, service, new Uint8Array())).toEqual({ proof: 'turnstile', app: 'android' });
     const native = request();
     native.headers.set('User-Agent', 'PeekDeliveryTracker/1 CFNetwork/3860 Darwin/25.5.0');
     await expect(verifyLookupRequest(native, service, new Uint8Array())).rejects.toMatchObject({ status: 403 });
     await expect(verifyLookupRequest(new NextRequest('https://peek.example/api/public/detect', { headers: { host: 'peek.example' } }), service, new Uint8Array()))
       .rejects.toMatchObject({ status: 403 });
     vi.stubEnv('TURNSTILE_SITE_KEY', ''); vi.stubEnv('TURNSTILE_SECRET_KEY', ''); vi.stubEnv('TURNSTILE_HOSTNAMES', '');
-    await verifyLookupRequest(request(), service, new Uint8Array());
+    expect(await verifyLookupRequest(request(), service, new Uint8Array())).toEqual({ proof: 'none', app: null });
     const after: number[] = [];
     for (const name of names) after.push(await series(name));
     expect(after.map((value, index) => value - before[index]!)).toEqual([1, 1, 1, 1]);

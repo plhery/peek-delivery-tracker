@@ -733,6 +733,42 @@ export function captureOverallAllowance(
   return id;
 }
 
+/**
+ * A sign that app installs should count their lookups apart (`PUBLIC_LOOKUPS_BY_INSTALL`): an
+ * app's lookup refused by an allowance it shares with its address or network (`app_refused`), or
+ * an IPv6 /48 at half its daily allowance (`network_half`).
+ */
+export type SharedAllowanceSign = 'app_refused' | 'network_half';
+
+const SHARED_ALLOWANCE_SIGNS = {
+  app_refused: {
+    message: 'Lookups without an account: an app was refused by an allowance it shares',
+    impact: 'An app user without an account saw the daily-limit screen: other visitors on the same address or IPv6 network used its lookups.',
+  },
+  network_half: {
+    message: 'Lookups without an account: an IPv6 network used half its daily allowance',
+    impact: 'Visitors on one IPv6 /48 made half the lookups it may make today; at the limit each of them is refused until midnight UTC.',
+  },
+} as const;
+
+/** Reports a sign that app installs should count apart, as a warning: one issue per sign. */
+export function captureSharedAllowance(sign: SharedAllowanceSign, details: Record<string, string | number>): string | null {
+  if (!initObservability()) return null;
+  const { message, impact } = SHARED_ALLOWANCE_SIGNS[sign];
+  let id: string | null = null;
+  Sentry.withScope(scope => {
+    scope.setTag('component', 'public-allowance');
+    scope.setTag('allowance', 'lookup');
+    scope.setTag('allowance_state', sign);
+    scope.setContext('public_allowance', { ...details, impact,
+      next_steps: "Compare yesterday's per-client gauges and today's counters (docs/OBSERVABILITY.md): one client at its limit is one heavy user, many on one network a shared network. If the use is ordinary, set PUBLIC_LOOKUPS_BY_INSTALL=on so that app installs that prove themselves count apart, or raise PUBLIC_LOOKUPS_NETWORK_PER_DAY." });
+    scope.setFingerprint(['delivery-tracker', 'public-allowance', 'lookup', sign]);
+    scope.setLevel('warning');
+    id = Sentry.captureMessage(message);
+  });
+  return id;
+}
+
 function boundedLogValue(value: unknown): string | number | boolean | null | undefined {
   if (value === null || typeof value === 'boolean') return value;
   if (typeof value === 'number') return Number.isFinite(value) ? value : undefined;

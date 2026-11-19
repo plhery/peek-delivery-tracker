@@ -43,11 +43,11 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage; parce
   const values = newPackageValues({ ...body, label: '' }, lookupCountry(context.request, body.lookupCountryHint));
   progress.parcel = { tracking_number: values.trackingNumber, carrier: values.carrier };
   progress.stage = 'verification';
-  await verifyLookupRequest(context.request, service, raw);
+  const verified = await verifyLookupRequest(context.request, service, raw);
 
   progress.stage = 'allowance';
   const now = new Date();
-  const allowance = await claimLookup(service, clientIp(context.request), now);
+  const allowance = await claimLookup(service, clientIp(context.request), now, verified);
   if (!allowance.allowed) {
     recordLookup(allowance.scope === 'global' ? 'limited_global'
       : allowance.scope === 'network' ? 'limited_network' : 'limited_daily', context.requestId, progress.parcel);

@@ -33,6 +33,12 @@ function userAgentPlatform(request: Request): SeenPlatform {
   const agent = request.headers.get('user-agent') ?? '';
   return NATIVE_USER_AGENT.test(agent) ? 'apple' : ANDROID_USER_AGENT.test(agent) ? 'android' : 'unknown';
 }
+
+/** The app a request's user-agent names, or null: what it says, not what a key proves. */
+export function appPlatform(request: Request): NativePlatform | null {
+  const platform = userAgentPlatform(request);
+  return platform === 'unknown' ? null : platform;
+}
 const ASSERTION_HEADERS = ['x-app-attest-key-id', 'x-app-attest-challenge', 'x-app-attest-assertion'];
 
 /** Whether the request carries any of an assertion's headers. */

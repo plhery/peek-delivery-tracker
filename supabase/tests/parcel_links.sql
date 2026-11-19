@@ -373,8 +373,8 @@ begin
     ('global', today - 8, 5), (first, today - 8, 5),
     ('global', today - 1, 16), (repeat('5', 64), today - 1, 1), (repeat('6', 64), today - 1, 2),
     (repeat('7', 64), today - 1, 3), (repeat('8', 64), today - 1, 10), (repeat('9', 64), today - 1, 0),
-    -- Networks and detections are not clients' lookups.
-    ('network:' || repeat('5', 64), today - 1, 90),
+    -- Networks, app counters and detections are not clients' lookups.
+    ('network:' || repeat('5', 64), today - 1, 90), ('app:' || repeat('5', 64), today - 1, 50),
     ('detection', today - 1, 12), ('detection:' || repeat('5', 64), today - 1, 4),
     ('detection:' || repeat('6', 64), today - 1, 8);
   if public.public_lookup_usage_summary()
@@ -408,12 +408,13 @@ begin
   end if;
 
   -- Clients of one network share its allowance, and a refusal counts nowhere.
-  if public.claim_public_lookup(repeat('b', 64), 5, 100, 'global', network, 2) -> 'allowed' <> 'true'
-      or public.claim_public_lookup(repeat('c', 64), 5, 100, 'global', network, 2) -> 'allowed' <> 'true' then
-    raise exception 'A lookup within the network allowance was refused';
+  if public.claim_public_lookup(repeat('b', 64), 5, 100, 'global', network, 2) -> 'network' <> '1'
+      or public.claim_public_lookup(repeat('c', 64), 5, 100, 'global', network, 2)
+        <> '{"allowed":true,"scope":null,"remaining":4,"overall":5,"network":2}' then
+    raise exception 'A lookup within the network allowance was refused, or its network not counted';
   end if;
   answer := public.claim_public_lookup(repeat('d', 64), 5, 100, 'global', network, 2);
-  if answer <> '{"allowed":false,"scope":"network","remaining":5,"overall":5}' then
+  if answer <> '{"allowed":false,"scope":"network","remaining":5,"overall":5,"network":2}' then
     raise exception 'The network allowance was not enforced: %', answer;
   end if;
   if (select count from public.public_lookup_usage where bucket = network and day = today) <> 2
@@ -421,6 +422,21 @@ begin
       or (select count from public.public_lookup_usage where bucket = 'global' and day = today) <> 5 then
     raise exception 'Network counters are wrong';
   end if;
+
+  -- An app install's proven lookups count on the app counters of its address and network.
+  if public.claim_public_lookup('app:' || repeat('b', 64), 1, 100, 'global', 'network:app:' || repeat('b', 64), 1)
+      <> '{"allowed":true,"scope":null,"remaining":0,"overall":6,"network":1}'
+      or public.claim_public_lookup('detection:app:' || repeat('b', 64), 1, 100, 'detection') -> 'allowed' <> 'true' then
+    raise exception 'An app counter was refused';
+  end if;
+  if public.claim_public_lookup('app:' || repeat('b', 64), 1, 100) -> 'scope' <> '"bucket"'
+      or (select count from public.public_lookup_usage where bucket = repeat('b', 64) and day = today) <> 1
+      or (select count from public.public_lookup_usage where bucket = network and day = today) <> 2 then
+    raise exception 'App counters were not counted apart';
+  end if;
+  -- The overall counters as the next checks expect them.
+  update public.public_lookup_usage set count = case bucket when 'global' then 5 else 0 end
+  where day = today and bucket in ('global', 'detection');
 
   -- Detections have their own counters, per client and overall.
   if public.claim_public_lookup(detecting, 1, 2, 'detection')

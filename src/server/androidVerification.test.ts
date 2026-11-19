@@ -233,7 +233,7 @@ describe('Android attestation', () => {
     expect(Number(headers.get('Retry-After'))).toBeGreaterThan(0);
     const proven = signed(request(), privateKey);
     proven.headers.set('X-Lookup-Proof', await browserProof());
-    await expect(verifyLookupRequest(proven, service, signedBody)).resolves.toBeUndefined();
+    await expect(verifyLookupRequest(proven, service, signedBody)).resolves.toEqual({ proof: 'turnstile', app: 'android' });
     expect(await series('native_verification_total{kind="lookup",outcome="limited",reason="basic",platform="android"}')).toBeGreaterThanOrEqual(2);
   });
 

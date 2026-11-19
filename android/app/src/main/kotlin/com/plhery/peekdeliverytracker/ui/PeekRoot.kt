@@ -99,6 +99,7 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
     val state by container.session.stateFlow.collectAsState()
     val source = remember(container) { ContainerDeliveries(container) }
     val links = remember(container) { ContainerParcelLinks(container) }
+    LaunchedEffect(source) { container.parcels.frozenFlow.collect { source.frozen = it } }
     CompositionLocalProvider(LocalArrivalMotion provides container.motion) {
         PeekRoot(
             state, container.localizer, container.session, onView = { container.analytics.view(it) }, inbox = inbox, browserCheck = container.turnstile,

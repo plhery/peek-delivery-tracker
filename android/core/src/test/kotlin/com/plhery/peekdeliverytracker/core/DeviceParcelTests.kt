@@ -1836,6 +1836,31 @@ class DeviceParcelTests {
         assertEquals(listOf(moving), requireNotNull(DeliveryWidgetSharedStore(defaults).snapshot).parcels.map { it.id })
     }
 
+    /** A copy freezes without changing its parcel: the list stays equal, and the store says which copies froze. */
+    @Test
+    fun theScreenIsToldWhenTheServiceForgetsAGuestsCopyThoughItsParcelStaysTheSame() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Shoes", id))
+        val calls = Calls()
+        val device = device(client(calls), storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.load()
+        val before = store.parcels
+        assertEquals(listOf(id), before.map { it.id })
+        assertEquals(emptySet<UUID>(), store.frozenFlow.value)
+
+        store.refreshAll()
+        assertTrue(calls.all.toString(), "read 22222222222A k" in calls.all)
+        assertEquals("The copy's parcel is the same", before, store.parcels)
+        assertEquals(setOf(id), store.frozenFlow.value)
+    }
+
     @Test
     fun aRefreshWithOnlyAnUnreadableCopyLeftFailsWhenItsParcelCannotBeReadAgain() = runTest {
         // A copy this build could not read: its key is kept, its parcel isn't listed.

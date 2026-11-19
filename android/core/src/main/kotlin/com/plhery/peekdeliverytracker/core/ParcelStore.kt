@@ -274,6 +274,7 @@ class ParcelStore(
     private val undoParcelState = MutableStateFlow<Parcel?>(null)
     private val leftOnDeviceState = MutableStateFlow<LeftOnDevice?>(null)
     private val unlistedDeviceParcelsState = MutableStateFlow(0)
+    private val frozenState = MutableStateFlow<Set<UUID>>(emptySet())
     private val serverDownState = MutableStateFlow<MaintenanceNotice?>(null)
     private val listReadAtState = MutableStateFlow<Instant?>(null)
 
@@ -322,12 +323,19 @@ class ParcelStore(
      */
     val unlistedDeviceParcelsFlow: StateFlow<Int> = unlistedDeviceParcelsState.asStateFlow()
 
+    /**
+     * Signed out, the parcels whose copy the service forgot ([isFrozen]). A copy freezes without changing its parcel, so
+     * the list stays equal and only this tells the screen. Taken each time the list is set, before the list itself.
+     */
+    val frozenFlow: StateFlow<Set<UUID>> = frozenState.asStateFlow()
+
     /** `objectWillChange`, for what no flow publishes: the postcodes this phone suggests. */
     val objectWillChange = PassthroughSignal()
 
     var parcels: List<Parcel>
         get() = parcelsState.value
         private set(value) {
+            frozenState.value = if (isGuest) value.filter { device.isFrozen(it.id) }.mapTo(HashSet()) { it.id } else emptySet()
             parcelsState.value = value
             takeUnlistedDeviceParcels()
             if (!holdingDeliverySurfaces) publishDeliverySurfaces()

@@ -584,7 +584,13 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
 
-    override fun isFrozen(parcel: Parcel): Boolean = container.parcels.isFrozen(parcel)
+    /** The store's [ParcelStore.frozenFlow] as PeekRoot follows it: what reads [isFrozen] is drawn again once a copy freezes. */
+    var frozen: Set<UUID> by mutableStateOf(container.parcels.frozenFlow.value)
+
+    override fun isFrozen(parcel: Parcel): Boolean {
+        frozen // Read for Compose; the store answers, as the copy above may be a moment behind it.
+        return container.parcels.isFrozen(parcel)
+    }
 
     override fun postcodeGiven(parcel: Parcel): Boolean = container.parcels.postcodeGiven(parcel)
 

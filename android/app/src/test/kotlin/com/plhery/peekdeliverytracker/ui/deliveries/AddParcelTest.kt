@@ -2038,6 +2038,21 @@ class AddParcelTest {
     }
 
     @Test
+    fun aWindowMadeAgainBeforeTheScannerComesUpStillBringsIt() {
+        val recreation = Recreation(compose)
+        show(list = emptyList(), scanner = FakeLabelScanner(), recreation = recreation)
+        compose.mainClock.autoAdvance = false
+        node(EMPTY_SCAN).performClick()
+        compose.mainClock.advanceTimeBy(250)
+        assertNotNull(deliveries.addition)
+        assertFalse(exists(SCANNER))
+        recreation.recreate()
+        compose.mainClock.autoAdvance = true
+        settle()
+        assertTrue(exists(SCANNER))
+    }
+
+    @Test
     fun whereTheDeviceCannotScanTheScanButtonsAreHiddenAndAScanOpensAddOnTheKeyboardUntilItCan() {
         val scanner = FakeLabelScanner(usable = false)
         show(list = emptyList(), scanner = scanner)

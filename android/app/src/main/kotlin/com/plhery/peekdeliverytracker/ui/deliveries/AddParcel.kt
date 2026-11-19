@@ -409,12 +409,13 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         state.closeAdd()
     }
     // Once Add has come up, the camera for a scan where the device has one, else the keyboard on the field; neither once
-    // Add is going down, as the iPhone presents nothing from a view on its way out.
+    // Add is going down, as the iPhone presents nothing from a view on its way out. It counts as opened once it opens: a
+    // window made again in the wait waits again.
     LaunchedEffect(request.id) {
         if (form.didFocus) return@LaunchedEffect
-        form.didFocus = true
         delay(FOCUS_DELAY)
         if (state.addition?.id != request.id) return@LaunchedEffect
+        form.didFocus = true
         if (request.scanning && canScan) form.showingScanner = true else focus.request(ParcelAddition.Field.Tracking)
     }
     // TalkBack starts at the title, as it does on its own over a phone's whole screen: in a form nothing else takes its

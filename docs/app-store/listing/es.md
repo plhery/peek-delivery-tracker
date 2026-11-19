@@ -71,8 +71,8 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Con una cuenta de Peek, en Ajustes › Asistentes ahora ves cómo conectar Claude, ChatGPT, Gemini, OpenClaw o Home Assistant a Peek: la dirección de Peek para asistentes, que puedes copiar, los pasos de cada uno, qué pedirle y los asistentes que has conectado, con «Desconectar». Está en beta, como «Añadir paquetes por correo».
-• Ajustes es más fácil de leer: cada opción muestra un valor corto en una sola línea, las unidades se llaman «Distancia» y «Peso», y «Punto en los paquetes actualizados» dice qué hace ese interruptor. El interruptor del widget ha desaparecido: el widget de la pantalla de inicio siempre muestra tus paquetes, así que quita el widget si no lo quieres.
-• Algunos transportistas registran una entrega por adelantado. Cuando ya ha pasado su hora y ningún escaneo la respalda, el historial de seguimiento ahora indica que nada la confirma y, si no ha llegado nada, que preguntes al vendedor qué empresa la reparte y su número de seguimiento.
-• Correcciones: un estado al que el transportista no dio hora aparece bajo su día, no a la hora en que Peek hizo la consulta; una entrega que ningún escaneo sitúa ya no aparece en un centro de clasificación; un código postal que ya habías indicado viene con su país; un paquete entregado en tu puerta tras esperar en un punto de recogida ya no te da el sello «Recogido» en tu Pasaporte; las franjas de entrega, los pasos previstos, las notificaciones y los números de seguimiento compartidos mientras «Añadir un paquete» está abierto funcionan como deben.
+• Nuevo en Ajustes › Preferencias: «Estadísticas de uso». Cuentan cuántas veces se abre Peek y qué funciones se usan, nunca tus paquetes ni tu cuenta. Para contar dispositivos, Peek guarda un ID aleatorio en este dispositivo y lo envía por separado una vez al día; si desactivas el interruptor, no se envía nada y se borra el ID.
+• Cuando la web de seguimiento de un transportista no funciona, tu paquete lo indica con calma en lugar de mostrar una actualización fallida, y su página enlaza a la web del propio transportista para consultar allí el número.
+• En Ajustes › Asistentes, los pasos de Home Assistant ahora indican que busques Peek en el Marketplace para encontrarlo.
+• Los paquetes de GLS Hungary muestran la furgoneta de GLS.
 ```

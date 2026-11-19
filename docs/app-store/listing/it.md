@@ -71,8 +71,8 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Con un account Peek, in Impostazioni › Assistenti ora vedi come collegare Claude, ChatGPT, Gemini, OpenClaw o Home Assistant a Peek: l’indirizzo di Peek per gli assistenti da copiare, i passaggi per ciascuno, cosa chiedergli e gli assistenti che hai collegato, con «Scollega». È in beta, come «Aggiungi pacchi via email».
-• Le Impostazioni sono più facili da leggere: ogni opzione mostra un valore breve su una sola riga, le unità si chiamano «Distanza» e «Peso», e «Puntino sui pacchi aggiornati» dice cosa fa quell’interruttore. L’interruttore del widget non c’è più: il widget nella schermata Home mostra sempre i tuoi pacchi, quindi rimuovi il widget se non lo vuoi.
-• Alcuni corrieri registrano una consegna in anticipo. Quando il suo orario è passato e nessuna scansione la sostiene, la cronologia del tracciamento ora dice che niente la conferma e, se non è arrivato nulla, di chiedere al venditore quale corriere la recapita e il suo numero di tracciamento.
-• Correzioni: uno stato a cui il corriere non ha dato un orario compare sotto il suo giorno, non all’ora in cui Peek ha controllato; una consegna che nessuna scansione localizza non viene più mostrata in un centro di smistamento; un codice postale che hai già indicato arriva insieme al suo Paese; un pacco portato alla tua porta dopo aver atteso in un punto di ritiro non ti fa più ottenere il francobollo «Ritirato» nel tuo Passaporto; fasce di consegna, passaggi previsti, notifiche e numeri di tracciamento condivisi mentre «Aggiungi un pacco» è aperto funzionano come dovrebbero.
+• Novità in Impostazioni › Preferenze: «Statistiche d’uso». Contano quante volte si apre Peek e quali funzioni si usano, mai i tuoi pacchi o il tuo account. Per contare i dispositivi, Peek conserva un ID casuale su questo dispositivo e lo invia separatamente, una volta al giorno; se disattivi l’interruttore, non viene inviato nulla e l’ID viene eliminato.
+• Quando il sito di tracciamento di un corriere non funziona, il tuo pacco lo dice con calma invece di mostrare un aggiornamento non riuscito, e la sua pagina rimanda al sito del corriere stesso per cercare lì il numero.
+• In Impostazioni › Assistenti, i passaggi per Home Assistant ora dicono di trovare Peek cercandolo nel Marketplace.
+• I pacchi di GLS Hungary mostrano il furgone di GLS.
 ```

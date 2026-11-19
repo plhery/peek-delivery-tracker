@@ -87,14 +87,29 @@ class DeliveredCatchUpTest {
     /** New trainers and Belgian chocolate. */
     private val arrived: Set<UUID> get() = after.filter { it.isDelivered }.map { it.id }.toSet() - before.filter { it.isDelivered }.map { it.id }.toSet()
 
-    private fun show(parcels: List<Parcel> = before, session: AuthenticationState = READER, reduceMotion: Boolean = false) {
+    /** Whether a parcel link's sheet stands over the window, where a test draws the deliveries under one. */
+    private var linkOpen by mutableStateOf(false)
+
+    private fun show(
+        parcels: List<Parcel> = before,
+        session: AuthenticationState = READER,
+        reduceMotion: Boolean = false,
+        underLinks: Boolean = false,
+    ) {
         source = FakeDeliveries(parcels, session)
         compose.setContent {
             view = LocalView.current
             CompositionLocalProvider(LocalPaperSeeds provides { bursts++; SEED }, LocalDeliveriesState provides { deliveries = it }) {
                 val shown = stores
                 // A start of the app again: nothing of the window before is kept.
-                key(shown) { RootHost(state = session, reduceMotion = reduceMotion, source = shown, now = { clock }) }
+                key(shown) {
+                    RootHost(
+                        state = session, reduceMotion = reduceMotion, source = shown, now = { clock },
+                        deliveries = if (!underLinks) null else {
+                            { CompositionLocalProvider(LocalParcelLinkOpen provides linkOpen) { DeliveriesTab(shown) } }
+                        },
+                    )
+                }
             }
         }
         compose.waitForIdle()
@@ -225,6 +240,23 @@ class DeliveredCatchUpTest {
         advance(1500)
         assertEquals(1, bursts)
         assertTrue(deliveries.hold.isEmpty)
+    }
+
+    /** A parcel link's sheet covers the list: a delivery while it is read arrives on the list once the sheet has gone. */
+    @Test
+    fun aDeliveryWhileAParcelLinkCoversTheListArrivesOnceItHasGone() {
+        show(underLinks = true)
+        compose.runOnUiThread { linkOpen = true }
+        frame()
+        deliver()
+        advance(1500)
+        assertFalse(tapped())
+        assertEquals(0, bursts)
+        assertTrue(recorded.containsAll(arrived))
+
+        compose.runOnUiThread { linkOpen = false }
+        frame()
+        assertArrivesLate()
     }
 
     @Test

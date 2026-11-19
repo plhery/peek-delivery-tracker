@@ -211,10 +211,10 @@ fun DeliveriesTab(
         val refreshing by source.refreshing.collectAsState()
         // The phone's question pauses the window: the invitation stays while it asks.
         state.invitationShown = state.inviting(resumed || enabling, refreshing, invited)
-        // `looking`: the list is looked at, whole and in its own order, with nothing over it. Another tab chosen leaves
-        // the composition, and the list is drawn anew as it is chosen again.
+        // `looking`: the list is looked at, whole and in its own order, with nothing over it, a parcel link's sheet
+        // included. Another tab chosen leaves the composition, and the list is drawn anew as it is chosen again.
         val looking = resumed && state.listShown && state.addition == null && !state.showingAccount && !state.showingFilters &&
-            !state.promptsCover && !state.hasCustomView
+            !state.linkShown && !state.promptsCover && !state.hasCustomView
         // `watching`: the list is looked at, and may show a card moving.
         val watching = looking && !reduceMotion
         HoldingDelivered(state, resumed, looking, watching)

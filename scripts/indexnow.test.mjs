@@ -6,7 +6,7 @@ import path from 'node:path';
 import { after, describe, it } from 'node:test';
 import { fileURLToPath } from 'node:url';
 import {
-  DEFAULT_ENDPOINT, INDEXNOW_KEY, MAX_URLS_PER_REQUEST, decodeXml, frontMatter, pagesToSubmit, parseSitemap, readHeads, readSubmitted,
+  DEFAULT_ENDPOINT, INDEXNOW_KEY, MAX_URLS_PER_REQUEST, decodeXml, frontMatter, pagesToSubmit, parseSitemap, readHeads, readSubmitted, recordSubmitted,
   requestBodies, retitledPaths, run, submit,
 } from './indexnow.mjs';
 
@@ -290,6 +290,17 @@ describe('the command', () => {
     assert.ok(lines.includes('Nothing to submit.'));
     assert.deepEqual(readSubmitted(ref, clone), { commit: atOrigin(), xml: live, heads: { '/guides/a': 'A\nWhat it says.' } });
     assert.equal(git('rev-parse', `${atOrigin()}^`), start);
+  });
+
+  it('reads back a sitemap larger than a mebibyte', () => {
+    const { clone } = repository();
+    const large = sitemap(Array.from({ length: 20_000 }, (_, index) => page(`${origin}/guides/page-${index}`, '2026-10-17')));
+    assert.ok(large.length > 2 * 1024 * 1024);
+    const heads = Object.fromEntries(Array.from({ length: 20_000 }, (_, index) => [`/guides/page-${index}`, `Page ${index}\nWhat it says, at some length.`]));
+    recordSubmitted(ref, { xml: large, heads, parent: null, message: 'Large sitemap' }, clone);
+    const read = readSubmitted(ref, clone);
+    assert.equal(read?.xml, large);
+    assert.deepEqual(read?.heads, heads);
   });
 
   it('lists the pages without sending them or moving the ref on a dry run', async () => {

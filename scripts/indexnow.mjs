@@ -173,7 +173,10 @@ async function readSitemap(origin, fetchImpl) {
   return response.text();
 }
 
-const git = (cwd, args, input = '') => execFileSync('git', args, { cwd, input, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'] });
+// The sitemap and the pages' heads read back whole: well past the 1 MiB a child's output is held to by default.
+const git = (cwd, args, input = '') => execFileSync('git', args, {
+  cwd, input, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'], maxBuffer: 256 * 1024 * 1024,
+});
 
 /**
  * The sitemap IndexNow last took, as `ref` of origin keeps it: the ref's commit, the sitemap's text

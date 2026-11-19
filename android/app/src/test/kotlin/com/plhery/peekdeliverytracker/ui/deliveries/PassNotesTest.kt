@@ -812,6 +812,14 @@ class PassNotesTest {
     }
 
     @Test
+    fun aCarrierWaitingOnTheReaderIsToldOnTheCardThoughItsSiteIsDown() {
+        val outage = CarrierOutage(carrier = CarrierId.Ups, since = "2026-11-19T12:20:41Z", trackingUrl = "https://example.com/track?n=1")
+        show(demo("Birthday gift") { it.scanned(TrackingStage.FailedAttempt, "Nobody was home.").failing("carrier:transport").copy(carrierOutage = outage) })
+        assertTrue(textExists("Check the carrier’s next steps"))
+        assertFalse(textExists("UPS’s tracking is having problems"))
+    }
+
+    @Test
     fun aCarriersSiteDownWithoutAWebPageIsToldWithoutALink() {
         val outage = CarrierOutage(carrier = CarrierId.Ups, since = "2026-11-19T12:20:41Z", trackingUrl = "javascript:alert(1)")
         show(demo("Kind of Blue") { it.failing("carrier:transport").copy(carrierOutage = outage) })

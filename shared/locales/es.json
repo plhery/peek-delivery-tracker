@@ -261,6 +261,7 @@
   "move.received.few": "{{count}} paquetes añadidos desde tu otro dispositivo",
   "move.received.many": "{{count}} paquetes añadidos desde tu otro dispositivo",
   "move.missed": "Peek ha olvidado estos paquetes.",
+  "move.failed": "No se han podido añadir los paquetes. Comprueba tu conexión y vuelve a abrir el enlace.",
   "door.several.question": "¿Los sigues todos?",
   "door.several.signIn": "Inicia sesión y Peek los mantiene juntos",
   "unlock.title": "Inicia sesión para desbloquearlo",

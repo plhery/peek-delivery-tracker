@@ -210,7 +210,8 @@ Key server modules:
     `/move#p=<id>.<key>.<a>.<name>&…`; frozen copies stay behind. The page at `/move` is the one
     at `/`: it takes the parcels from the `#`, replaces the address with `/` at once, and reads
     each link with its key (a hidden read). A key stays only when the link answers as its owner;
-    a parcel already on the device keeps its name and fold, and gains a key it lacked. Signed in,
+    a parcel already on the device keeps its name and fold, and gains a key it lacked. When no read
+    gets through, the page says to open the link again once connected. Signed in,
     the bring-along offer then asks to keep them in the account. The apps don't claim `/move`
     yet, so a phone opens it in the browser.
   - The list holds a hundred parcels: copies no longer updated make way first, then links

@@ -1,8 +1,13 @@
+import { renderHook, waitFor } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../test/parcelLinks';
 import type { ParcelLinkRead, ParcelLinkReadOptions } from './links';
 import { archiveRecent, forgetAllRecents, freezeRecent, recentFor, rememberParcel, renameParcel, type RecentParcel } from './recents';
-import { moveURL, parcelsInMove, receiveMove, takeMove, type MovedParcel } from './transfer';
+import { moveURL, parcelsInMove, receiveMove, takeMove, useMoveArrival, type MovedParcel } from './transfer';
+
+const mocks = vi.hoisted(() => ({ read: vi.fn(), announce: vi.fn() }));
+vi.mock('./links', async (original) => ({ ...await original<typeof import('./links')>(), readParcelLink: mocks.read }));
+vi.mock('./parcel/Toast', () => ({ announceNotice: mocks.announce }));
 
 const THIRD_ID = 'p4Rt6yUw8ZaB';
 const OTHER_KEY = 'B'.repeat(43);
@@ -62,7 +67,7 @@ describe('receiving a move', () => {
       { id: OTHER_LINK_ID, key: OTHER_KEY, name: null, archived: false },
       { id: THIRD_ID, key: null, name: null, archived: false },
     ], read);
-    expect(outcome).toEqual({ added: 3, missed: 0 });
+    expect(outcome).toEqual({ added: 3, missed: 0, failed: 0 });
     expect(read).toHaveBeenCalledWith(LINK_ID, { key: OWNER_KEY, hidden: true });
     expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, name: 'Lamp', archivedAt: expect.any(String) });
     expect(recentFor(OTHER_LINK_ID)).toMatchObject({ key: null });
@@ -77,7 +82,7 @@ describe('receiving a move', () => {
     expect(await receiveMove([
       { id: LINK_ID, key: OWNER_KEY, name: null, archived: false },
       { id: OTHER_LINK_ID, key: null, name: null, archived: false },
-    ], read)).toEqual({ added: 0, missed: 2 });
+    ], read)).toEqual({ added: 0, missed: 1, failed: 1 });
     expect(recentFor(LINK_ID)).toBeNull();
   });
 
@@ -90,12 +95,35 @@ describe('receiving a move', () => {
     expect(await receiveMove([
       { id: LINK_ID, key: OTHER_KEY, name: 'Theirs', archived: true },
       { id: OTHER_LINK_ID, key: OTHER_KEY, name: 'New name', archived: true },
-    ], read)).toEqual({ added: 1, missed: 0 });
+    ], read)).toEqual({ added: 1, missed: 0, failed: 0 });
     expect(read).toHaveBeenCalledOnce();
     expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, name: 'Mine' });
     expect(recentFor(LINK_ID)?.archivedAt).toBeUndefined();
     expect(recentFor(OTHER_LINK_ID)).toMatchObject({ key: OTHER_KEY, name: 'Kept name' });
     expect(recentFor(OTHER_LINK_ID)?.archivedAt).toBeUndefined();
+  });
+});
+
+describe('a page opened with a move', () => {
+  it('says how many parcels it added, that it could not reach them, or that Peek forgot them', async () => {
+    window.history.replaceState(null, '', `/move#p=${LINK_ID}.${OWNER_KEY}..&p=${OTHER_LINK_ID}...`);
+    mocks.read.mockImplementation(async (id: string) => id === LINK_ID ? testView() : 'unavailable');
+    renderHook(() => useMoveArrival());
+    await waitFor(() => expect(mocks.announce).toHaveBeenCalledWith('move.received.many', { count: 1 }, 'success'));
+    expect(window.location.hash).toBe('');
+
+    forgetAllRecents();
+    mocks.announce.mockClear();
+    window.history.replaceState(null, '', `/move#p=${LINK_ID}...`);
+    mocks.read.mockRejectedValue(new Error('offline'));
+    renderHook(() => useMoveArrival());
+    await waitFor(() => expect(mocks.announce).toHaveBeenCalledWith('move.failed'));
+
+    mocks.announce.mockClear();
+    window.history.replaceState(null, '', `/move#p=${LINK_ID}...`);
+    mocks.read.mockResolvedValue('unavailable');
+    renderHook(() => useMoveArrival());
+    await waitFor(() => expect(mocks.announce).toHaveBeenCalledWith('move.missed'));
   });
 });
 

@@ -261,6 +261,7 @@
   "move.received.few": "Dodano {{count}} przesyłki z Twojego drugiego urządzenia",
   "move.received.many": "Dodano {{count}} przesyłek z Twojego drugiego urządzenia",
   "move.missed": "Peek zapomniał o tych przesyłkach.",
+  "move.failed": "Nie udało się dodać przesyłek. Sprawdź połączenie i otwórz link ponownie.",
   "door.several.question": "Śledzisz wszystkie?",
   "door.several.signIn": "Zaloguj się, a Peek zachowa je razem",
   "unlock.title": "Zaloguj się, aby to odblokować",

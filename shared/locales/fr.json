@@ -261,6 +261,7 @@
   "move.received.few": "{{count}} colis ajoutés depuis ton autre appareil",
   "move.received.many": "{{count}} colis ajoutés depuis ton autre appareil",
   "move.missed": "Peek a oublié ces colis.",
+  "move.failed": "Impossible d’ajouter les colis. Vérifie ta connexion et rouvre le lien.",
   "door.several.question": "Tu les suis tous ?",
   "door.several.signIn": "Connecte-toi et Peek les garde ensemble",
   "unlock.title": "Connecte-toi pour débloquer ça",

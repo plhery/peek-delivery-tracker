@@ -261,6 +261,7 @@
   "move.received.few": "{{count}} encomendas adicionadas a partir do teu outro dispositivo",
   "move.received.many": "{{count}} encomendas adicionadas a partir do teu outro dispositivo",
   "move.missed": "O Peek esqueceu estas encomendas.",
+  "move.failed": "Não foi possível adicionar as encomendas. Verifica a tua ligação e volta a abrir a ligação.",
   "door.several.question": "Segues todas?",
   "door.several.signIn": "Inicia sessão e o Peek mantém-nas juntas",
   "unlock.title": "Inicia sessão para desbloquear",

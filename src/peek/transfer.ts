@@ -59,15 +59,16 @@ export function takeMove(): MovedParcel[] {
 
 /**
  * Puts a move's parcels on this device, each read through its link first. A key the link does not take as its
- * owner's is dropped, and a parcel the service no longer keeps is passed over. A parcel already here keeps what it
- * has, and gains the key it lacked.
+ * owner's is dropped, and a parcel the service no longer keeps (`missed`) or a read could not reach (`failed`) is
+ * passed over. A parcel already here keeps what it has, and gains the key it lacked.
  */
 export async function receiveMove(
   moved: readonly MovedParcel[],
   read: (id: string, options: ParcelLinkReadOptions) => Promise<ParcelLinkRead> = readParcelLink,
-): Promise<{ added: number; missed: number }> {
+): Promise<{ added: number; missed: number; failed: number }> {
   let added = 0;
   let missed = 0;
+  let failed = 0;
   const queue = moved.filter((parcel) => {
     const here = recentFor(parcel.id);
     return !here || (!here.key && !!parcel.key && !here.frozen);
@@ -76,7 +77,9 @@ export async function receiveMove(
     const parcel = queue.shift();
     if (!parcel) return;
     const view = await read(parcel.id, { key: parcel.key, hidden: true }).catch(() => null);
-    if (view && view !== 'unavailable') {
+    if (!view) {
+      failed += 1;
+    } else if (view !== 'unavailable') {
       const here = recentFor(parcel.id);
       rememberParcel({ id: parcel.id, view, key: view.link.role === 'owner' ? parcel.key : null, ...(here?.name || !parcel.name ? {} : { name: parcel.name }) });
       if (parcel.archived && !here) archiveRecent(parcel.id, true);
@@ -87,7 +90,7 @@ export async function receiveMove(
     return next();
   }
   await Promise.all(Array.from({ length: Math.min(READS_AT_ONCE, queue.length) }, next));
-  return { added, missed };
+  return { added, missed, failed };
 }
 
 /**
@@ -98,9 +101,11 @@ export function useMoveArrival(): void {
   useEffect(() => {
     const moved = takeMove();
     if (!moved.length) return;
-    void receiveMove(moved).then(({ added, missed }) => {
+    void receiveMove(moved).then(({ added, missed, failed }) => {
       trackAction('parcels-move-receive', added ? 'success' : 'error');
       if (added) announceNotice('move.received.many', { count: added }, 'success');
+      // The link still holds them: opened again once the connection is back, it brings them.
+      else if (failed) announceNotice('move.failed');
       else if (missed) announceNotice('move.missed');
     });
   }, []);

@@ -408,6 +408,8 @@
   "link.live": "En direct",
   "link.offlineLabel": "Hors ligne",
   "link.offline": "Tu es hors ligne. Dernière mise à jour : {{time}}.",
+  "link.frozen.banner": "Peek a oublié ce colis et ne le met plus à jour. Dernière mise à jour : {{time}}.",
+  "link.frozen.label": "Plus mis à jour",
   "link.asOf": "État : {{time}}",
   "link.was": "Initialement : {{date}}",
   "link.noDate": "Pas encore de date de livraison",

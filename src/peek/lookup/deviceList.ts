@@ -4,7 +4,7 @@ import { isFinal } from '../../lib/stages';
 import { turnOffAlert } from '../alerts';
 import { forgetParcelLink, ParcelLinkError, readParcelLink } from '../links';
 import { journeyEndedBefore } from '../parcel/summary';
-import { forgetRecent, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
+import { forgetRecent, freezeRecent, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
 
 /**
  * How long an answer is fresh enough for the list: a parcel on its way moves, one that arrived rests. A held
@@ -66,10 +66,11 @@ const waiting = (recent: Pick<RecentParcel, 'syncStatus'>) => recent.syncStatus 
  * The parcel the list leads with, on a card that draws its route: the one the
  * deliveries would call Next up, else the newest one still on its way, else
  * one that arrived within the last day. Only a parcel with a located scan can
- * lead; a day after its journey ended it rests among the others.
+ * lead; a day after its journey ended it rests among the others, as does one
+ * no longer updated.
  */
 export function leadParcel(recents: readonly RecentParcel[], now = Date.now()): RecentParcel | null {
-  const candidates = recents.filter(({ snapshot: { parcel } }) => parcel.events.some((event) => event.place) && !journeyEndedBefore(parcel, now));
+  const candidates = recents.filter(({ snapshot: { parcel }, frozen }) => !frozen && parcel.events.some((event) => event.place) && !journeyEndedBefore(parcel, now));
   const next = nextPriorityParcel(candidates.map((recent) => recent.snapshot.parcel), now);
   return candidates.find((recent) => recent.snapshot.parcel === next)
     ?? candidates.find((recent) => isActiveParcel(recent.snapshot.parcel)) ?? candidates[0] ?? null;
@@ -77,10 +78,12 @@ export function leadParcel(recents: readonly RecentParcel[], now = Date.now()): 
 
 /**
  * Brings the device's parcels up to date, quietly: each stale one is read
- * through its link, one after the other. A parcel the server no longer has
- * leaves the list; any trouble ends the round, and the list shows what the
- * device has, under a note when the server is down for maintenance. An answer
- * keeps its parcel's place in the list.
+ * through its link, one after the other. A lookup of this device's own that
+ * the server no longer has stays, no longer updated and never read again;
+ * any other parcel it no longer has leaves the list. Any trouble ends the
+ * round, and the list shows what the device has, under a note when the
+ * server is down for maintenance. An answer keeps its parcel's place in the
+ * list.
  *
  * Returns whether a parcel is still waiting for its first check, which is
  * worth another round soon.
@@ -89,6 +92,7 @@ export async function refreshDeviceParcels(recents: readonly RecentParcel[], sig
   let unanswered = false;
   for (const recent of recents) {
     if (signal.aborted || (typeof navigator !== 'undefined' && navigator.onLine === false)) return false;
+    if (recent.frozen) continue;
     const seen = Date.parse(recent.lastSeenAt) || 0;
     const settled = recent.stage && isFinal(recent.stage) && !recent.snapshot.parcel.returnHeld;
     const fresh = waiting(recent) ? WAITING_FRESH_MS : settled ? SETTLED_FRESH_MS : FRESH_MS;
@@ -102,7 +106,7 @@ export async function refreshDeviceParcels(recents: readonly RecentParcel[], sig
       checkedAt.set(recent.id, now());
       answeredAt = now();
       setDown(null);
-      if (read === 'unavailable') forgetRecent(recent.id);
+      if (read === 'unavailable') freezeRecent(recent.id);
       else {
         rememberParcel({ id: recent.id, view: read, now: seen || now() });
         unanswered ||= waiting(read.parcel);
@@ -172,7 +176,8 @@ const pause: ForgetPause = (milliseconds) => new Promise((resolve) => setTimeout
 /**
  * Forgets the device's parcels: on the server where this device made the
  * lookup and holds its key, then on the device. A parcel someone shared keeps
- * its link, and loses this browser's alerts first. The parcels the device holds
+ * its link, and loses this browser's alerts first; a copy no longer updated
+ * has nothing left on the server. The parcels the device holds
  * the key of but cannot list go too. The server takes a few forgets a minute
  * from one network: past those, each waits until it takes them again.
  * `progress` hears which parcel is being forgotten, from 1, of how many.
@@ -192,7 +197,7 @@ export async function forgetDeviceParcels(
       try {
         // A lookup is forgotten with its alerts; a parcel someone shared keeps its link, so this browser's alerts go.
         if (recent.key) await forgetParcelLink(recent.id, recent.key);
-        else await turnOffAlert(recent.id);
+        else if (!('frozen' in recent && recent.frozen)) await turnOffAlert(recent.id);
         forgetRecent(recent.id);
       } catch (error) {
         if (error instanceof ParcelLinkError && error.kind === 'burst' && waits < MOST_FORGET_WAITS) {

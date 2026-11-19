@@ -65,7 +65,7 @@ import {
 } from './parcel/summary';
 import { announceNotice, Toast } from './parcel/Toast';
 import { announceKeepOutcome, onKeepOutcome, usePendingKeep, type KeepOutcome } from './pending';
-import { recentFor, renameParcel } from './recents';
+import { forgetRecent, recentFor, renameParcel } from './recents';
 import { nonTrackingNote, nonTrackingShape } from './lookup/reading';
 import { closeParcelLink, forgetParcelLinkOpener, leaveParcelLink, openLanding, parcelLinkOpener, parcelLinkURL, PIP_TRANSITION_NAME } from './route';
 import { SAMPLE_LINK_ID } from './sample';
@@ -216,8 +216,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const { t, locale, languageTag, use24HourTime } = useI18n();
   const session = usePeekSession();
   const leave = useContext(Leave);
-  const { trouble, checking, live, refreshing, seenAt, news, unseen, previousEstimate, refresh, dismissNews, adopt } = state;
+  const { trouble, checking, live, refreshing, seenAt, news, unseen, previousEstimate, refresh, dismissNews, adopt, frozen } = state;
   const { parcel, numberHint, link } = view;
+  // A lookup the service forgot is this device's copy alone: nothing on it can be shared, alerted or kept any more.
+  const canKeep = link.canKeep && !frozen;
   const now = useNow();
   const wide = useWideLayout();
   const wording = { t, languageTag, now, use24HourTime };
@@ -279,7 +281,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // are: its owner, who looked it up, is told where the tracking number is, and may choose the carrier.
   const shape = !carrierKnown && !placeholder && !present && !likely && parcel.trackingNumber
     ? nonTrackingShape(normalizeTrackingNumber(parcel.trackingNumber)) : null;
-  const choosing = (!!likely?.waited || !!shape) && owner && !sample && !!parcel.trackingNumber;
+  const choosing = (!!likely?.waited || !!shape) && owner && !sample && !frozen && !!parcel.trackingNumber;
   const unknownNote = likelyName ? t(!likely?.waited ? 'link.likely.body' : choosing ? 'link.likely.week' : 'link.likely.weekNoChoice', { carrier: likelyName.name })
     : shape ? nonTrackingNote(shape, t, locale)
       : number ? t('link.unknown.body', { number }) : t('link.unknown.bodyNoNumber');
@@ -357,8 +359,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     trackAction('parcel-link-sign-in');
     // The email row of "Notify me" is counted apart from every other way to sign in.
     if (email) trackAction('parcel-link-email');
-    if (link.canKeep && session.signInWith?.configured) setKeepSheet(email ? 'email' : 'keep');
-    else session.signIn(link.canKeep ? linkId : undefined, email);
+    if (canKeep && session.signInWith?.configured) setKeepSheet(email ? 'email' : 'keep');
+    else session.signIn(canKeep ? linkId : undefined, email);
   }
   const signInToKeep = () => signInFor(false);
 
@@ -418,6 +420,13 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     leave();
   }
   const offerRemove = !owner && !sample && !removing && !!recentFor(linkId) ? () => void remove() : undefined;
+  // A copy no longer updated has nothing left on the server: it leaves the device at once.
+  function removeFrozen() {
+    leave();
+    forgetRecent(linkId);
+    trackAction('parcel-link-remove', 'success');
+    announceNotice('link.remove.done');
+  }
 
   // The postcode another carrier holding the parcel asks for, or its own: the owner's to add, with the key.
   const asked = key ? link.inputNeeded ?? null : null;
@@ -434,9 +443,9 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const openAlerts = () => { trackAction('parcel-link-alerts-open'); setAlerting(true); };
   useEffect(() => {
     // A browser that withdrew its permission has no alert, whatever it noted; a parcel that arrived has none left.
-    if (!over) void deviceAlert(linkId);
+    if (!over && !frozen) void deviceAlert(linkId);
     else if (linkNote(linkId).alert) noteLink(linkId, { alert: null });
-  }, [linkId, over]);
+  }, [linkId, over, frozen]);
   const estimate = parcelDeliveryEstimate(parcel, now);
   const slot = deliverySlot(parcel, now);
   const calendarWindow = slot && estimate ? capitalized(localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate, t, languageTag, now, use24HourTime), languageTag) : null;
@@ -452,7 +461,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   }
   // Nothing scanned yet: being told is the one next step, and every scan is worth telling.
   const early = !moving || stage === 'registered';
-  const canPing = !over && !checking && !placeholder;
+  const canPing = !over && !checking && !placeholder && !frozen;
   // A wrapped gift says little, and keeps its one button in its card; any other parcel has it among its actions.
   const ping: PingAction | undefined = canPing && !wrapped ? {
     label: t(alert ? 'alerts.action.on' : !carrierKnown ? 'alerts.action.found' : early ? 'alerts.action.moves' : 'alerts.action.ping'),
@@ -469,7 +478,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const promise = sample || worksUntil ? null : final ? forgetLine : link.kind === 'lookup' ? t('link.forget.promise') : null;
 
   const visitor = session.account === 'visitor';
-  const visitorCanKeep = visitor && link.canKeep;
+  const visitorCanKeep = visitor && canKeep;
   const placedScans = sortEventsDesc(parcel.events).filter((event) => event.place);
   const origin = stampOrigin(parcel);
   // The journey ended in another country than the one it was first scanned in.
@@ -484,7 +493,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // gift is for, who is shown little of it; not about the sample; and not before a first answer is on the page.
   const feedbackNotes = useMemo(() => linkFeedbackNotes(linkId), [linkId]);
   const feedback = useParcelFeedback({
-    kind: sample || present || checking || offline || afterwards || placeholder ? null
+    kind: sample || present || checking || offline || afterwards || placeholder || frozen ? null
       : !carrierKnown ? 'unknown' : automatic || moving ? 'found' : null,
     scan: scanIdentity(parcel),
     scanned: moving,
@@ -515,11 +524,12 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     entrance={entrance}
     live={live}
     news={!!news}
-    banner={offline ? <p className="peekp-offline" role="status"><Glyph name="offline" />{t('link.offline', { time: momentLabel(scan ?? seenAt ?? '', wording) })}</p>
+    banner={frozen ? <p className="peekp-offline" role="status"><Glyph name="info" />{t('link.frozen.banner', { time: momentLabel(parcel.lastSyncedAt ?? seenAt ?? '', wording) })}</p>
+      : offline ? <p className="peekp-offline" role="status"><Glyph name="offline" />{t('link.offline', { time: momentLabel(scan ?? seenAt ?? '', wording) })}</p>
       : down && <MaintenanceStrip notice={down} at={scan ?? seenAt ?? null} kind="parcel" className="peekp-offline peekp-maintenance" />}
     controls={present ? undefined : <>
       <button type="button" className="icon-button" aria-label={t('app.trackAnother')} onClick={onHome}><Icon name="search" /></button>
-      <button type="button" className="icon-button peekp-header__share" aria-label={t('link.shareAria')} onClick={() => void share()}><Icon name="share" /><span>{t('link.share')}</span></button>
+      {!frozen && <button type="button" className="icon-button peekp-header__share" aria-label={t('link.shareAria')} onClick={() => void share()}><Icon name="share" /><span>{t('link.share')}</span></button>}
       {/* The sample has its own invitation, at its foot. */}
       {visitor && <GuestSettings language />}
       {visitor && !sample && <button type="button" className="peekp-header__signin" onClick={signInToKeep}>{t('arrival.signInTitle')}</button>}
@@ -543,11 +553,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {!carrierKnown && !placeholder && !likely && !shape && <p className="peekp-keeppage">{t('link.unknown.keep')}</p>}
         {choosing && <button type="button" className="button button--secondary peekp-choose" onClick={chooseCarrier}>
           {t(likely ? 'link.likely.choose' : 'link.chooseCarrier')}</button>}
-        {signedIn && !followed && link.canKeep && <AddToDeliveries busy={adding || pendingId === linkId} error={addError && t(addError)} onAdd={() => void add()} />}
+        {signedIn && !followed && canKeep && <AddToDeliveries busy={adding || pendingId === linkId} error={addError && t(addError)} onAdd={() => void add()} />}
         {!afterwards && <Actions name={name} ping={ping}
           onHave={key && delivered && link.kind === 'lookup' ? () => setForgetting('arrived') : undefined}
           onCalendar={!owner && slot ? addToCalendar : undefined}
-          onShare={owner ? () => void share() : undefined}
+          onShare={owner && !frozen ? () => void share() : undefined}
           onRename={present ? undefined : sample ? (next) => setRenamed({ name: next }) : state.onDevice ? (next) => renameParcel(linkId, next) : undefined}
           compactName={!owner} />}
         <AndroidTestRow />
@@ -564,7 +574,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
               ? { by: carrierInfo(parcel.writtenAheadBy, locale).name, steps: parcel.writtenAheadEvents } : undefined}
             syncing={checking} fold />
         </section>}
-        {!final && freshness.kind !== 'live' && <FreshnessLine freshness={freshness} busy={refreshing} onCheck={() => void check()} />}
+        {!final && !frozen && freshness.kind !== 'live' && <FreshnessLine freshness={freshness} busy={refreshing} onCheck={() => void check()} />}
         <FeedbackQuestion feedback={feedback} />
         {/* The sample ends on the way to a parcel of one's own; any other page on the device's other parcels. */}
         {sample ? !beside && invitation
@@ -576,7 +586,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {invitation}
       </div>}
     </div>
-    <ForgetFooter promise={promise} onForget={askToForget} onRemove={offerRemove} />
+    <ForgetFooter promise={frozen ? null : promise} onForget={askToForget} onRemove={frozen ? removeFrozen : offerRemove} />
 
     {news && <Toast place="top" tone mark={<Icon name="truck" />}>
       <strong>{t('link.updateToast')}</strong> · {localizedEventDescription(news.description, t) || stageLabel(t, news.stage)}

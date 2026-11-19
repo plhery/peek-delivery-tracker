@@ -289,7 +289,10 @@ parcel is still there offline. For each parcel they looked up, the iPhone and
 Android apps also note whether you gave a postcode with the lookup, so they
 don't ask for one again. The note is a yes or no and never holds the postcode.
 The list stays on the device until the parcel is forgotten or kept in an
-account.
+account. In the browser, a parcel it looked up stays in the list after the
+service forgets the lookup, marked as no longer updated, with its last
+tracking history and without its key, until you remove it or clear the site's
+data.
 
 Apart from that list, it keeps the last five postcodes you entered for these
 lookups, each with the carrier it was for, so the next parcel's postcode field

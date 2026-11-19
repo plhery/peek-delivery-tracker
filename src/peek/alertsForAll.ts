@@ -61,8 +61,8 @@ let running: Promise<void> = Promise.resolve();
 function wanting(recent: RecentParcel): boolean {
   const note = linkNote(recent.id);
   const stage = parcelStage(recent.snapshot.parcel);
-  // A journey that has ended has nothing more to announce.
-  return !tried.has(recent.id) && !note.alert && !note.muted && !(stage && isFinal(stage))
+  // A journey that has ended, or a copy no longer updated, has nothing more to announce.
+  return !tried.has(recent.id) && !recent.frozen && !note.alert && !note.muted && !(stage && isFinal(stage))
     && alertSupport(recent.snapshot.link.alerts) === 'ready' && Notification.permission === 'granted';
 }
 

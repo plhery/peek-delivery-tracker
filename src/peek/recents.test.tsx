@@ -4,6 +4,8 @@ import {
   cleanParcelName,
   forgetAllRecents,
   forgetRecent,
+  freezeRecent,
+  frozenOnTheWay,
   hasUnopenedNews,
   markRecentSeen,
   MAX_RECENTS,
@@ -17,6 +19,7 @@ import {
   useRecents,
 } from './recents';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../test/parcelLinks';
+import { linkNote, noteLink } from './deviceNotes';
 
 const NOW = Date.parse('2026-10-02T08:00:00Z');
 const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
@@ -181,6 +184,49 @@ function validRecent() {
     expectedDelivery: null, updatedAt: null, lastSeenAt: '2026-10-02T08:00:00.000Z', snapshot: testView({ id: OTHER_LINK_ID }),
   };
 }
+
+describe('a lookup the service has forgotten', () => {
+  it('keeps the copy of its own lookup, without its key or notes, and drops a copy of someone else’s link', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), name: 'Boots', now: NOW });
+    rememberParcel({ id: OTHER_LINK_ID, view: testView({ id: OTHER_LINK_ID, owner: false }), now: NOW });
+    noteLink(LINK_ID, { muted: true });
+    expect(freezeRecent(LINK_ID, NOW + 1_000)).toBe(true);
+    expect(recentFor(LINK_ID)).toMatchObject({ key: null, name: 'Boots', frozen: '2026-10-02T08:00:01.000Z', snapshot: testView() });
+    expect(ownerKeyFor(LINK_ID)).toBeNull();
+    expect(linkNote(LINK_ID)).toEqual({});
+    // Found gone again, the copy stays as it was.
+    expect(freezeRecent(LINK_ID, NOW + 2_000)).toBe(true);
+    expect(recentFor(LINK_ID)?.frozen).toBe('2026-10-02T08:00:01.000Z');
+    expect(freezeRecent(OTHER_LINK_ID)).toBe(false);
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
+  });
+
+  it('marks the copy of a parcel still on its way, not one whose journey ended', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: NOW });
+    rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: testView({ id: OTHER_LINK_ID, stages: ['in_transit', 'delivered'] }), now: NOW });
+    expect(frozenOnTheWay(recentFor(LINK_ID)!)).toBe(false);
+    freezeRecent(LINK_ID);
+    freezeRecent(OTHER_LINK_ID);
+    expect(frozenOnTheWay(recentFor(LINK_ID)!)).toBe(true);
+    expect(frozenOnTheWay(recentFor(OTHER_LINK_ID)!)).toBe(false);
+  });
+
+  it('gives way to a new lookup of the same number, and to any parcel when the list is full', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: NOW });
+    freezeRecent(LINK_ID);
+    rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: testView({ id: OTHER_LINK_ID }), now: NOW + 1 });
+    expect(recentFor(LINK_ID)).toBeNull();
+
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView({ parcel: { trackingNumber: '1234567898' } }), now: NOW - 1 });
+    freezeRecent(LINK_ID);
+    for (let index = 0; index < MAX_RECENTS - 1; index += 1) {
+      rememberParcel({ id: id(index), view: testView({ id: id(index), owner: false }), now: NOW - 10_000 - index });
+    }
+    // A link opened from someone else, older than the copy, still keeps its place before it.
+    expect(recentFor(LINK_ID)).toBeNull();
+    expect(recentFor(id(MAX_RECENTS - 2))).not.toBeNull();
+  });
+});
 
 describe('news since this device last opened a parcel', () => {
   /** An answer once the parcel's first check has landed, with the time Peek stored its latest scan. */

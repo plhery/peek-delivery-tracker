@@ -18,7 +18,7 @@ import { isFinal } from '../../lib/stages';
 import { maskedNumber } from '../links';
 import { useMedia, useNow } from '../parcel/hooks';
 import { parcelDetail, parcelFreshness, parcelHeadline, parcelStage } from '../parcel/summary';
-import { hasUnopenedNews, strandedParcels, useRecents, type RecentParcel } from '../recents';
+import { frozenOnTheWay, hasUnopenedNews, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { openParcelLink, parcelLinkPath } from '../route';
 import { usePeekSession } from '../session';
 import { deviceListDown, deviceListReadAt, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
@@ -68,7 +68,8 @@ function DeviceParcel({ recent, arrived = false }: { recent: RecentParcel; arriv
   const { t, locale, languageTag, use24HourTime } = useI18n();
   const { parcel } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
-  const estimate = parcelDeliveryEstimate(parcel);
+  const stale = frozenOnTheWay(recent);
+  const estimate = stale ? null : parcelDeliveryEstimate(parcel);
   const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
   const title = useParcelTitle(recent);
   const { placed, route } = useParcelRoute(parcel, languageTag);
@@ -77,7 +78,7 @@ function DeviceParcel({ recent, arrived = false }: { recent: RecentParcel; arriv
     {placed && <CardRoute route={route} />}
     <span className="door-parcel__top">{news.said}<CarrierMark carrier={carrier} />{when && <span className="door-parcel__when">{when}</span>}</span>
     <strong>{title}</strong>
-    <span className="door-parcel__state">{news.dot}{parcelStatusLabel(parcel, t, locale)}</span>
+    <span className="door-parcel__state">{news.dot}{parcelStatusLabel(parcel, t, locale)}{stale && ` · ${t('link.frozen.label')}`}</span>
   </a>;
 }
 

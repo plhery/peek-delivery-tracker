@@ -190,9 +190,13 @@ Key server modules:
     key, the name given on the device and the last answer. The name is never sent to the
     public routes; it becomes the parcel's label only when the parcel is kept in an account.
     "Forget it now" deletes the link on the server and the device's copy; keeping a parcel
-    in an account drops the device's copy too.
-  - The list holds a hundred parcels: links opened from someone else make way first for the
-    browser's own lookups. A saved parcel the browser can't read, such as one
+    in an account drops the device's copy too. Once the service forgets a lookup the browser
+    made (30 days after delivery, or 90 days without news), its copy stays, marked no longer
+    updated, without its key or link notes, and is never read again; a new lookup of the
+    same number replaces it. A copy of a link someone shared goes, since the 404 doesn't say
+    why it ended.
+  - The list holds a hundred parcels: copies no longer updated make way first, then links
+    opened from someone else, for the browser's own lookups. A saved parcel the browser can't read, such as one
     another version wrote, stays with its id and owner key: it isn't listed, its link gets
     the key back when it is read again, and forgetting all the device's parcels forgets it on
     the server too. The server takes 30 forgets a minute from one network: Forget all waits

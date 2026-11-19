@@ -6,7 +6,7 @@ import { parcelHasCarrierUpdate } from '../lib/parcelStatus';
 import { currentEvent, currentStage } from '../lib/stages';
 import type { TrackingEvent } from '../types';
 import { isWrappedGift, ParcelLinkError, readParcelLink, type ParcelLinkView } from './links';
-import { forgetRecent, markRecentSeen, ownerKeyFor, recentFor, rememberParcel, useRecents } from './recents';
+import { forgetRecent, freezeRecent, markRecentSeen, ownerKeyFor, recentFor, rememberParcel, useRecents } from './recents';
 import { hashWithoutOwnerKey, linkWordsFromHash, type LinkWords } from './route';
 import { SAMPLE_LINK_ID } from './sample';
 
@@ -67,6 +67,8 @@ export interface ParcelLinkState {
   words: LinkWords;
   /** Why the newest read failed; the view then is the last one that worked. */
   trouble: ParcelLinkError | null;
+  /** The service forgot this device's lookup: the view is the device's last copy, no longer updated and never read again. */
+  frozen: boolean;
   /** The carrier has not been asked yet: the first check is still to land. */
   checking: boolean;
   /** The page is reading on its own, in a tab someone is looking at. */
@@ -132,6 +134,11 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
   const ended = useRef(false);
 
   useEffect(() => {
+    // A copy of a lookup the service forgot has nothing left to read.
+    if (recentFor(linkId)?.frozen) {
+      ended.current = true;
+      return;
+    }
     let disposed = false;
     let gone = false;
     let landed = first.current ? firstCheckLanded(first.current) : false;
@@ -181,10 +188,9 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
         });
         if (disposed || current.signal.aborted) return false;
         if (result === 'unavailable') {
-          // Nothing is left to follow, on the server or here.
+          // Nothing is left to follow on the server. The device's own lookup stays as it was last shown; another copy goes.
           gone = ended.current = true;
-          forgetRecent(linkId);
-          setAnswer({ view: null, gone: 'unavailable', trouble: null });
+          if (!freezeRecent(linkId)) setAnswer({ view: null, gone: 'unavailable', trouble: null });
           return false;
         }
         // A check queued once the first has landed starts the quick reads over.
@@ -275,7 +281,8 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     setAnswer({ view: next, gone: false, trouble: null });
   }, [linkId]);
 
-  const view = answer.view ?? (answer.gone ? null : recent?.snapshot ?? null);
+  const frozen = !!recent?.frozen;
+  const view = frozen ? recent.snapshot : answer.view ?? (answer.gone ? null : recent?.snapshot ?? null);
   const newsAt = view?.parcel.newsAt;
   const opened = useMemo(() => view && recent ? { ...view.parcel, id: linkId, seenAt: recent.openedNews } : null, [view, recent, linkId]);
   const markSeen = useCallback(async (id: string) => { if (newsAt) markRecentSeen(id, newsAt); }, [newsAt]);
@@ -283,14 +290,15 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
   // Until the first answer says what the link is, nothing it carries is shown: it may be a gift.
   const words = view && !isWrappedGift(view) ? view.link.giftWords ?? carried : NO_WORDS;
   return {
-    status: answer.gone || (view ? 'ready' : 'loading'),
+    status: frozen ? 'ready' : answer.gone || (view ? 'ready' : 'loading'),
     view,
     name: recent?.name ?? words.name,
     onDevice: !!recent,
     words,
-    trouble: answer.trouble,
-    checking: !!view && !firstCheckLanded(view),
-    live: visible && !answer.gone,
+    trouble: frozen ? null : answer.trouble,
+    frozen,
+    checking: !frozen && !!view && !firstCheckLanded(view),
+    live: visible && !answer.gone && !frozen,
     refreshing,
     seenAt: recent?.lastSeenAt ?? null,
     news: told.news,

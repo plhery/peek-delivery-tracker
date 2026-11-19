@@ -311,8 +311,8 @@ describe('useParcelLink', () => {
     expect(hook.result.current).toMatchObject({ status: 'loading', view: null, trouble: { kind: 'offline' } });
   });
 
-  it('ends at a link that leads nowhere: no more reads, and the device’s copy goes', async () => {
-    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+  it('ends at a link that leads nowhere: no more reads, and the device’s copy of someone else’s link goes', async () => {
+    rememberParcel({ id: LINK_ID, view: testView({ owner: false }) });
     answers('unavailable');
     const hook = renderHook(() => useParcelLink(LINK_ID));
     await pass(0);
@@ -323,6 +323,26 @@ describe('useParcelLink', () => {
     act(() => setHidden(false));
     await act(async () => { window.dispatchEvent(new Event('online')); });
     await pass(0);
+    expect(mocks.read).toHaveBeenCalledTimes(1);
+  });
+
+  it('keeps the device’s own lookup the service forgot as it was last shown, and never reads it again', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), name: 'Boots', now: Date.parse('2026-11-01T10:00:00Z') });
+    answers('unavailable');
+    const hook = renderHook(() => useParcelLink(LINK_ID));
+    await pass(0);
+    expect(hook.result.current).toMatchObject({
+      status: 'ready', frozen: true, view: testView(), name: 'Boots', live: false, checking: false, trouble: null, seenAt: '2026-11-01T10:00:00.000Z',
+    });
+    expect(recentFor(LINK_ID)).toMatchObject({ key: null, frozen: expect.any(String) });
+    await pass(600_000);
+    await act(async () => { window.dispatchEvent(new Event('online')); });
+    expect(mocks.read).toHaveBeenCalledTimes(1);
+    // Opened again, the copy is shown without a read.
+    hook.unmount();
+    const again = renderHook(() => useParcelLink(LINK_ID));
+    await pass(60_000);
+    expect(again.result.current).toMatchObject({ status: 'ready', frozen: true, view: testView() });
     expect(mocks.read).toHaveBeenCalledTimes(1);
   });
 
@@ -442,11 +462,11 @@ describe('useParcelLink', () => {
     act(() => hook.result.current.adopt(changed));
     expect(hook.result.current.view).toEqual(changed);
     expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, name: 'New sneakers', snapshot: changed });
-    // Once the link is gone, a late answer brings nothing back.
+    // Once the link is gone, a late answer changes nothing: the device keeps its last copy of its own lookup.
     answers('unavailable');
     await pass(30_000);
-    act(() => hook.result.current.adopt(changed));
-    expect(hook.result.current).toMatchObject({ status: 'unavailable', view: null });
+    act(() => hook.result.current.adopt(testView()));
+    expect(hook.result.current).toMatchObject({ status: 'ready', frozen: true, view: changed });
   });
 
   it('stops reading when the page closes, and ignores an answer that arrives afterwards', async () => {

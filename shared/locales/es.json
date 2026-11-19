@@ -408,6 +408,8 @@
   "link.live": "En directo",
   "link.offlineLabel": "Sin conexión",
   "link.offline": "Estás sin conexión. Última novedad: {{time}}.",
+  "link.frozen.banner": "Peek ha olvidado este paquete y ya no lo actualiza. Última novedad: {{time}}.",
+  "link.frozen.label": "Ya no se actualiza",
   "link.asOf": "Datos: {{time}}",
   "link.was": "Antes: {{date}}",
   "link.noDate": "Aún sin fecha de entrega",

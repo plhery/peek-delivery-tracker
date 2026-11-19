@@ -408,6 +408,8 @@
   "link.live": "实时",
   "link.offlineLabel": "离线",
   "link.offline": "你已离线。正在显示 {{time}} 的动态。",
+  "link.frozen.banner": "Peek 已清除这个包裹，不再更新。正在显示 {{time}} 的动态。",
+  "link.frozen.label": "不再更新",
   "link.asOf": "截至 {{time}}",
   "link.was": "原为：{{date}}",
   "link.noDate": "暂无送达日期",

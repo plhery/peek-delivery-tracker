@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react';
-import { currentEvent } from '../lib/stages';
+import { currentEvent, isFinal } from '../lib/stages';
 import type { CarrierId, Stage, SyncStatus } from '../types';
 import { forgetAllLinkNotes, forgetLinkNote } from './deviceNotes';
 import { isParcelLinkId, type ParcelLinkView } from './linkModel';
@@ -10,8 +10,9 @@ import { isParcelLinkId, type ParcelLinkView } from './linkModel';
  */
 export const RECENTS_STORAGE_KEY = 'sdt.peek.parcels.v1'; // gitleaks:allow -- public localStorage name
 /**
- * The list keeps a hundred parcels. Links opened from someone else make way first: the owner
- * key of a lookup of this device's own is the only way to forget the parcel or keep it in an account.
+ * The list keeps a hundred parcels. A lookup's copy the service has forgotten makes way first, then
+ * links opened from someone else: the owner key of a lookup of this device's own is the only way
+ * to forget the parcel or keep it in an account.
  */
 export const MAX_RECENTS = 100;
 /** The longest name a parcel can carry into an account. */
@@ -42,6 +43,11 @@ export interface RecentParcel {
    * A parcel saved before the mark has none, and starts as seen with its next answer.
    */
   openedNews?: string;
+  /**
+   * When this device found that the service had forgotten its lookup. The parcel then stays as it was last
+   * shown, no longer updated and without its key, until it is removed from the device.
+   */
+  frozen?: string;
 }
 
 /**
@@ -68,6 +74,7 @@ function isRecent(value: unknown): value is RecentParcel {
   const recent = value as Partial<RecentParcel>;
   return isParcelLinkId(recent.id) && typeof recent.carrier === 'string' && typeof recent.lastSeenAt === 'string'
     && (recent.key === null || typeof recent.key === 'string') && (recent.name === null || typeof recent.name === 'string')
+    && (recent.frozen === undefined || typeof recent.frozen === 'string')
     && !!recent.snapshot && typeof recent.snapshot === 'object'
     && !!recent.snapshot.link && !!recent.snapshot.parcel && Array.isArray(recent.snapshot.parcel.events);
 }
@@ -116,8 +123,9 @@ function read(): RecentParcel[] {
 function write(list: RecentParcel[], stranded: readonly Stored[] = load().stranded) {
   const ordered = [...list].sort((a, b) => b.lastSeenAt.localeCompare(a.lastSeenAt));
   const owned = ordered.filter((recent) => recent.key).slice(0, MAX_RECENTS);
-  const viewed = ordered.filter((recent) => !recent.key).slice(0, Math.max(0, MAX_RECENTS - owned.length));
-  const kept = new Set([...owned, ...viewed]);
+  const viewed = ordered.filter((recent) => !recent.key && !recent.frozen).slice(0, Math.max(0, MAX_RECENTS - owned.length));
+  const frozen = ordered.filter((recent) => recent.frozen).slice(0, Math.max(0, MAX_RECENTS - owned.length - viewed.length));
+  const kept = new Set([...owned, ...viewed, ...frozen]);
   const listed = new Set([...kept].map((recent) => recent.id));
   const saved: object[] = [
     ...ordered.filter((recent) => kept.has(recent)),
@@ -181,7 +189,8 @@ export function ownerKeyFor(id: string): string | null {
  * has stays; `suggestedName` (the name a shared link carries) is taken only
  * when the device has none. What the device opened stays too: a parcel starts
  * as seen as it is first listed, and again with its first answer, as the
- * server starts an account's parcel.
+ * server starts an account's parcel. A copy of a forgotten lookup of the same
+ * number makes way: the new answer follows the parcel again.
  */
 export function rememberParcel({ id, view, key, name, suggestedName, now = Date.now() }: {
   id: string;
@@ -211,7 +220,32 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
     snapshot: view,
     openedNews: kept ?? view.parcel.newsAt ?? SEEN_BEFORE_ANY_NEWS,
   };
-  write([recent, ...list.filter((candidate) => candidate.id !== id)], stranded.filter((entry) => entry.id !== id));
+  const number = view.parcel.trackingNumber;
+  const superseded = (candidate: RecentParcel) => !!number && !!candidate.frozen && candidate.snapshot.parcel.trackingNumber === number;
+  write([recent, ...list.filter((candidate) => candidate.id !== id && !superseded(candidate))], stranded.filter((entry) => entry.id !== id));
+}
+
+/**
+ * The service no longer has the link. A lookup this device made keeps its last answer, marked as no longer
+ * updated, without its key and what the device noted about the link; a link opened from someone else goes, as the
+ * answer doesn't say why it ended. Returns whether the parcel stays.
+ */
+export function freezeRecent(id: string, now = Date.now()): boolean {
+  const { list } = load();
+  const own = list.find((recent) => recent.id === id);
+  if (own?.frozen) return true;
+  if (!own?.key) {
+    forgetRecent(id);
+    return false;
+  }
+  forgetLinkNote(id);
+  write(list.map((recent) => recent === own ? { ...recent, key: null, frozen: new Date(now).toISOString() } : recent));
+  return true;
+}
+
+/** A copy no longer updated of a parcel that was still on its way: what its card says is old news, and it has no estimate. */
+export function frozenOnTheWay(recent: RecentParcel): boolean {
+  return !!recent.frozen && !(recent.stage && isFinal(recent.stage));
 }
 
 /**

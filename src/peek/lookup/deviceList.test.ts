@@ -4,7 +4,7 @@ import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../../
 import type { EventPlace, ParcelWithEvents, Stage } from '../../types';
 import { linkNote, noteLink } from '../deviceNotes';
 import { ParcelLinkError } from '../links';
-import { forgetAllRecents, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
+import { forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { deviceListDown, deviceListReadAt, forgetDeviceChecks, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn(), removeAlert: vi.fn() }));
@@ -59,6 +59,11 @@ describe('leadParcel', () => {
     const moving = recent(OTHER_LINK_ID, ['accepted', 'in_transit']);
     expect(leadParcel([arrived, moving], now)).toBe(moving);
   });
+
+  it('never leads with a parcel no longer updated', () => {
+    const moving = recent(LINK_ID, ['registered', 'in_transit']);
+    expect(leadParcel([{ ...moving, frozen: new Date(now).toISOString() }], now)).toBeNull();
+  });
 });
 
 describe('watchDeviceParcels', () => {
@@ -90,6 +95,19 @@ describe('watchDeviceParcels', () => {
     expect(mocks.read).toHaveBeenCalledOnce();
     expect(mocks.read).toHaveBeenCalledWith(LINK_ID, { key: OWNER_KEY, signal: expect.any(AbortSignal) });
     expect(recentFor(LINK_ID)?.stage).toBe('out_for_delivery');
+    stop();
+  });
+
+  it('keeps its own lookup the server forgot, no longer updated and never read again, and drops a shared link’s copy', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() - 10 * MINUTE });
+    rememberParcel({ id: OTHER_LINK_ID, view: testView({ id: OTHER_LINK_ID, owner: false }), now: Date.now() - 10 * MINUTE });
+    mocks.read.mockResolvedValue('unavailable');
+    const stop = watchDeviceParcels(() => [recentFor(LINK_ID), recentFor(OTHER_LINK_ID)].filter((recent) => recent !== null));
+    await pass(0);
+    expect(recentFor(LINK_ID)).toMatchObject({ key: null, frozen: expect.any(String), snapshot: testView() });
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
+    await pass(20 * MINUTE);
+    expect(mocks.read).toHaveBeenCalledTimes(2);
     stop();
   });
 
@@ -269,6 +287,16 @@ describe('forgetDeviceParcels', () => {
     expect(mocks.forget).not.toHaveBeenCalled();
     expect(linkNote(OTHER_LINK_ID).alert).toBeUndefined();
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
+  });
+
+  it('takes a copy no longer updated off the device without asking the server', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now });
+    freezeRecent(LINK_ID);
+    mocks.removeAlert.mockReset();
+    await expect(forgetDeviceParcels([recentFor(LINK_ID)!])).resolves.toBe(0);
+    expect(mocks.forget).not.toHaveBeenCalled();
+    expect(mocks.removeAlert).not.toHaveBeenCalled();
+    expect(recentFor(LINK_ID)).toBeNull();
   });
 
   it('keeps a parcel the server still refuses after a few waits', async () => {

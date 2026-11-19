@@ -11,7 +11,7 @@ import { ParcelLinkError, type ParcelLinkView } from './links';
 import { ParcelPage } from './ParcelPage';
 import { NoticeToast } from './parcel/Toast';
 import { clearPendingKeep, onKeepOutcome, PENDING_KEEP_STORAGE_KEY, pendingKeep, rememberPendingKeep, announceKeepOutcome, type KeepOutcome } from './pending';
-import { forgetAllRecents, MAX_RECENTS, recentFor, rememberParcel } from './recents';
+import { forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, rememberParcel } from './recents';
 import { SAMPLE_LINK_ID } from './sample';
 import { PeekSessionProvider, type PeekSession } from './session';
 
@@ -179,6 +179,26 @@ describe('ParcelPage', () => {
     expect(screen.queryByRole('button', { name: 'Share this parcel' })).toBeNull();
     await userEvent.setup().click(screen.getByRole('button', { name: 'Where’s my parcel?' }));
     expect(location.pathname).toBe('/');
+  });
+
+  it('keeps this device’s own lookup the service forgot as it was last shown, with nothing left to share or alert, and removes it from the device alone', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: view(journey), name: 'Boots' });
+    mocks.read.mockResolvedValue('unavailable');
+    open();
+    expect(await screen.findByText(/^Peek has forgotten this parcel and no longer updates it\. Showing the update from /)).toBeVisible();
+    expect(screen.getByRole('heading', { level: 1, name: 'In transit' })).toBeVisible();
+    expect(document.querySelector('main')).not.toHaveAttribute('data-live');
+    expect(screen.queryByRole('button', { name: 'Share this parcel' })).toBeNull();
+    expect(screen.queryByRole('button', { name: /^Notify me/ })).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Forget it now' })).toBeNull();
+    expect(screen.queryByText(/Peek forgets this parcel/)).toBeNull();
+    expect(freshness()).toBeNull();
+    await userEvent.setup().click(screen.getByRole('button', { name: 'Remove from this device' }));
+    expect(recentFor(LINK_ID)).toBeNull();
+    expect(mocks.forget).not.toHaveBeenCalled();
+    expect(location.pathname).toBe('/');
+    expect(await screen.findByText('Parcel removed from this device')).toBeVisible();
+    expect(mocks.read).toHaveBeenCalledOnce();
   });
 
   it('shows the device’s last answer while offline, and says from when', async () => {
@@ -693,6 +713,18 @@ describe('ParcelPage stages and troubles', () => {
     await user.click(links[0]);
     expect(location.pathname).toBe(`/p/${OTHER_LINK_ID}`);
     expect(scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'instant' });
+  });
+
+  it('lists a copy no longer updated of a parcel that was on its way as such, without its estimate, and never reads it', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+    rememberParcel({ id: OTHER_LINK_ID, key: OWNER_KEY, view: testView({ id: OTHER_LINK_ID, parcel: { expectedDelivery: '2099-01-05' } }), name: 'Boots', now: Date.now() - HOUR });
+    freezeRecent(OTHER_LINK_ID);
+    mocks.read.mockResolvedValue(testView());
+    open({ account: 'visitor', signIn: vi.fn() });
+    const others = within(await screen.findByRole('region', { name: 'Also on this device' }));
+    expect(others.getByRole('link')).toHaveTextContent(/^BootsIn transit · No longer updated$/);
+    await waitFor(() => expect(mocks.read).toHaveBeenCalled());
+    expect(mocks.read).not.toHaveBeenCalledWith(OTHER_LINK_ID, expect.anything());
   });
 
   it('lists three of the device’s other parcels and leads to the front door for the rest; someone signed in has their deliveries instead', async () => {

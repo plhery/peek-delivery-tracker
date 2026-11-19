@@ -408,6 +408,8 @@
   "link.live": "Онлайн",
   "link.offlineLabel": "Офлайн",
   "link.offline": "Нет подключения. Показаны данные на {{time}}.",
+  "link.frozen.banner": "Peek забыл эту посылку и больше её не обновляет. Показаны данные на {{time}}.",
+  "link.frozen.label": "Больше не обновляется",
   "link.asOf": "Данные на {{time}}",
   "link.was": "Было: {{date}}",
   "link.noDate": "Дата доставки пока неизвестна",

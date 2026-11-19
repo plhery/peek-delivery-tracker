@@ -408,6 +408,8 @@
   "link.live": "Na żywo",
   "link.offlineLabel": "Offline",
   "link.offline": "Nie masz połączenia. Ostatnia aktualizacja: {{time}}.",
+  "link.frozen.banner": "Peek zapomniał o tej przesyłce i już jej nie aktualizuje. Ostatnia aktualizacja: {{time}}.",
+  "link.frozen.label": "Nie jest już aktualizowana",
   "link.asOf": "Stan: {{time}}",
   "link.was": "Wcześniej: {{date}}",
   "link.noDate": "Nie ma jeszcze terminu dostawy",

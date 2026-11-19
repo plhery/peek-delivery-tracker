@@ -8,7 +8,7 @@ import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabe
 import { maskedNumber } from '../links';
 import { shortNumber } from '../lookup/DeviceParcels';
 import { watchDeviceParcels } from '../lookup/deviceList';
-import { useRecents, type RecentParcel } from '../recents';
+import { frozenOnTheWay, useRecents, type RecentParcel } from '../recents';
 import { openParcelLink, parcelLinkPath } from '../route';
 
 /** How many of the device's other parcels a page lists; the front door has them all. */
@@ -18,7 +18,8 @@ function OtherParcel({ recent }: { recent: RecentParcel }) {
   const { t, locale, languageTag, use24HourTime } = useI18n();
   const { parcel, numberHint } = recent.snapshot;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale);
-  const estimate = parcelDeliveryEstimate(parcel);
+  const stale = frozenOnTheWay(recent);
+  const estimate = stale ? null : parcelDeliveryEstimate(parcel);
   const when = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : localizedParcelCompletionDate(parcel, languageTag, t);
   const number = parcel.trackingNumber ? shortNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : t('common.parcel');
@@ -34,7 +35,7 @@ function OtherParcel({ recent }: { recent: RecentParcel }) {
     <CarrierTruck carrier={carrier} />
     <span>
       <strong>{recent.name ?? number}</strong>
-      <small>{[parcelStatusLabel(parcel, t, locale), when].filter(Boolean).join(' · ')}</small>
+      <small>{[parcelStatusLabel(parcel, t, locale), stale ? t('link.frozen.label') : when].filter(Boolean).join(' · ')}</small>
     </span>
     <Icon name="chevron" />
   </a>;

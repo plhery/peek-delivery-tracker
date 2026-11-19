@@ -2569,11 +2569,11 @@ export const CARRIER_CAPABILITIES = {
         "checksum": "s10"
       }
     ],
-    "trackingUrlTemplate": "https://www.post.at/en/s/track-and-trace-search",
+    "trackingUrlTemplate": "https://www.post.at/v2/tnt/en/track-and-trace",
     "countries": [
       "AT"
     ],
-    "trackingSearchUrl": "https://www.post.at/en/s/track-and-trace-search",
+    "trackingSearchUrl": "https://www.post.at/v2/tnt/en/track-and-trace",
     "helpUrl": "https://www.post.at/k/c/kontakt",
     "aliases": [
       "Österreichische Post"
@@ -9850,6 +9850,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^703\\d{11}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^SK[A-HJ-NP-Z0-9]{5}\\d{2}[A-HJ-NP-Z0-9]{9}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.sps-sro.sk/moja-zasielka/"
@@ -16818,7 +16822,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://domex.lk/Order-Details.php"
+    "trackingSearchUrl": "https://www.domex.lk/"
   },
   "dropp": {
     "displayName": "Dropp",
@@ -25332,7 +25336,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://eurodis.com/",
+    "trackingSearchUrl": "https://eurodis.com/track-trace",
     "helpUrl": "https://eurodis.com/"
   },
   "fedex-pl": {
@@ -33554,14 +33558,14 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "viadireta",
       "recognitionRank": 72
     },
-    "trackingUrlTemplate": "https://www.viadireta.pt/tracking?codigo={trackingNumber}",
+    "trackingUrlTemplate": "https://www.viadireta.pt/pt/tracking?codigo={trackingNumber}",
     "linkRules": [
       {
         "domains": [
           "www.viadireta.pt",
           "viadireta.pt"
         ],
-        "pathPattern": "^/tracking/?$",
+        "pathPattern": "^/(?:(?:pt|en|es)/)?tracking/?$",
         "params": [
           "codigo"
         ]
@@ -33577,7 +33581,7 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ],
-    "trackingSearchUrl": "https://www.viadireta.pt/tracking"
+    "trackingSearchUrl": "https://www.viadireta.pt/pt/tracking"
   },
   "meso-global": {
     "displayName": "Meso-global",
@@ -62338,6 +62342,33 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "jch": {
+    "displayName": "JCH",
+    "aliases": [
+      "JCH Express",
+      "JCH Exp",
+      "金岂",
+      "浙江金岂供应链管理有限公司",
+      "Zhejiang JCH Supply Chain Management Co., Ltd."
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#ED5049",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "jch"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^JCHSG\\d{13}$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -64246,7 +64277,8 @@ export const CARRIER_IDS = [
   "starintlship",
   "jetspeed",
   "pdu",
-  "byt"
+  "byt",
+  "jch"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

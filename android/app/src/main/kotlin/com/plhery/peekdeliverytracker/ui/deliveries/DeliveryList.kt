@@ -599,7 +599,9 @@ private fun listEntries(
             first("empty", "empty", ListItem.Empty)
         } else if (layout.visible.isEmpty()) {
             first("noResults", "noResults", ListItem.NoResults)
-        } else if (!guest && !custom && notice == null && parcels.all { it.isDelivered }) {
+        } else if ((!guest || !state.source.accountInvitation.stands) && !custom && notice == null && parcels.all { it.isDelivered }) {
+            // Someone without an account is not told to track another parcel while the row under the cards speaks to
+            // them; once they closed it, they are.
             first("allArrived", "allArrived", ListItem.AllArrived)
         }
     }

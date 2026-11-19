@@ -25,6 +25,8 @@ import com.plhery.peekdeliverytracker.core.AccountInvitationMemory
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.ui.RootHost
 import java.time.Duration
 import java.time.Instant
@@ -53,9 +55,13 @@ class AccountInvitationTest {
     private lateinit var deliveries: DeliveriesState
     private val localizer = Localizer(AppLanguage.En, variant = "android")
 
-    /** The demo's parcels for a guest, their invitation's record as `record` leaves it, at `fontScale`. */
-    private fun show(fontScale: Float = 1f, record: (AccountInvitationMemory, Instant) -> Unit = { _, _ -> }) {
-        source = FakeDeliveries(DemoCards.parcels(), AuthenticationState.Welcome)
+    /** The demo's parcels for a guest, or `parcels`, their invitation's record as `record` leaves it, at `fontScale`. */
+    private fun show(
+        fontScale: Float = 1f,
+        parcels: List<Parcel> = DemoCards.parcels(),
+        record: (AccountInvitationMemory, Instant) -> Unit = { _, _ -> },
+    ) {
+        source = FakeDeliveries(parcels, AuthenticationState.Welcome)
         record(AccountInvitationMemory(source.accountInvitationDefaults) { source.now }, source.now)
         compose.setContent {
             val density = LocalDensity.current
@@ -147,6 +153,26 @@ class AccountInvitationTest {
 
         away(Duration.ofDays(29))
         assertFalse("Away for 30 days", offered())
+    }
+
+    /** Every parcel arrived: the row under them speaks to the guest, not "All arrived". */
+    @Test
+    fun everyParcelArrivedTheRowSpeaksToTheGuest() {
+        show(parcels = DemoCards.parcels().filter { it.isDelivered })
+        assertTrue(offered())
+        assertFalse(exists(ALL_ARRIVED))
+    }
+
+    /** Once they closed the row, "All arrived" tells them. */
+    @Test
+    fun aGuestWhoClosedTheRowIsToldEverythingArrived() {
+        show(parcels = DemoCards.parcels().filter { it.isDelivered }) { memory, now ->
+            visits(6, now)
+            AccountInvitationMemory(source.accountInvitationDefaults) { now }.close()
+            check(!memory.shows)
+        }
+        assertFalse(offered())
+        assertTrue(exists(ALL_ARRIVED))
     }
 
     @Test

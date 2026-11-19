@@ -1,0 +1,6 @@
+Settings has a Weight units row: kilograms or pounds, apart from distances.
+Parcels you follow without an account are no longer lost when a link can’t be read.
+A planned delivery day now ends at midnight in the carrier’s time zone.
+Notifications keep reaching your phone after its push address changes in the background.
+Widgets keep their place on your home screen after an update.
+TalkBack reads the list, Add and Settings in a clearer order.

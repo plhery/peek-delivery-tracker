@@ -86,6 +86,8 @@ export interface RoutedResult {
 interface Failure {
   count: number; retry_at: string; kind: RoutingFailureKind; user_error?: string; abstained?: true; wrong_number?: true; holder?: string;
   listed?: true;
+  /** A carrier's own "not found" right after it answered for the number: a passing miss, not an answer (`fail`). */
+  passing?: true;
 }
 /**
  * Older than the parcel's newest scan; no movement; dated only by a local clock; not dated at
@@ -1024,13 +1026,19 @@ export class TrackingRouter {
       // day too: it lists the parcel only once the parcel reaches it, and the provider's next progress
       // asks it again at once.
       const daily = kind === 'not_found' && (universalSource || providerNamed(provider));
+      // A carrier's own "not found" within the hour after it answered for the number (confirmed, with no failure
+      // since, and an answer in the last hour) is a passing miss, as a lost connection is: a load balancer's empty
+      // reply between full ones (DHL eCommerce Iberia's). It waits 15 minutes rather than an hour and says nothing
+      // about the number, its postcode or what the carrier plans. A second in a row is a "not found" as usual.
+      const passing = !universalSource && kind === 'not_found' && !previous && recent()
+        && state.confirmed_carrier === provider && state.confirmed_number === number;
       // A carrier asking for what no reader can give for the number (no field its catalog lists)
       // answers the same until it scans the parcel: 6 h, then daily.
       const unanswerable = !universalSource && kind === 'input_required' && AUTOMATIC_CARRIER_IDS.has(provider)
         && activeRequirements(provider, number).length === 0;
       // A carrier's bot check comes and goes, as a lost connection does: its own adapter is asked again
       // as soon, and the wait still doubles while every read meets one. A provider's refusal holds an hour.
-      const hourly = ['verification', 'schema', 'invalid_input', 'not_found'].includes(kind)
+      const hourly = ['verification', 'schema', 'invalid_input', 'not_found'].includes(kind) && !passing
         && !(kind === 'verification' && !universalSource && carrierErrorKind(error) === 'challenge');
       const base = daily ? DAY : unanswerable ? 6 * HOUR : hourly ? HOUR : 15 * 60_000;
       const userError = trackingFailureCode(error);
@@ -1044,7 +1052,7 @@ export class TrackingRouter {
       const listed = !universalSource && kind === 'no_history' && KNOWN_REASONS.has(carrierErrorReason(error) ?? '');
       const failure: Failure = { count, kind, ...(userError ? { user_error: userError } : {}), ...(abstained ? { abstained: true as const } : {}),
         ...(wrongNumber ? { wrong_number: true as const } : {}), ...(holder && holder !== provider ? { holder } : {}),
-        ...(listed ? { listed: true as const } : {}),
+        ...(listed ? { listed: true as const } : {}), ...(passing ? { passing: true as const } : {}),
         retry_at: iso(unseen ? Math.max(now().getTime() + retryAfterMs, beforeHourlyEnd(retryAt)) : retryAt) };
       state.failures[provider] = failure;
       // A provider sent the parcel's own postcode that asks for one all the same asks its owner to check it, in the
@@ -1067,7 +1075,7 @@ export class TrackingRouter {
       // (DPD) has lost the number, not refused the postcode. The owner is told, as DPD's own flag tells them.
       const postcodeAsked = !universalSource && provider === declared && postcode
         ? activeRequirements(provider, number).filter(({ field }) => field === 'postcode') : [];
-      if (postcodeAsked.length > 0
+      if (postcodeAsked.length > 0 && !passing
         && (kind === 'input_required' || kind === 'invalid_input'
           || ((kind === 'not_found' || kind === 'no_history') && !postcodeAsked.some((rule) => 'showsMore' in rule && rule.showsMore === true)
             && !['pending', 'registered'].includes(String(parcel.current_stage ?? 'pending'))))) {
@@ -1464,11 +1472,12 @@ export class TrackingRouter {
         }
         noteAsk(carrier);
         const failure = fail(carrier, error);
-        if (failure.kind === 'not_found' || failure.kind === 'no_history') emptyDirect.add(carrier);
+        const empty = (failure.kind === 'not_found' && !failure.passing) || failure.kind === 'no_history';
+        if (empty) emptyDirect.add(carrier);
         holdBack(carrier, writtenAheadClocks(error));
         // A carrier finding no history for the number lists what it still plans, or nothing.
         const plan = plannedStepsOf(error, carrierTimezone(carrier) ?? 'UTC', now().getTime());
-        if (failure.kind === 'not_found' || failure.kind === 'no_history' || plan.length) keepPlanned(carrier, plan);
+        if (empty || plan.length) keepPlanned(carrier, plan);
         // A probe asks only a carrier that knows the number: wanting an input, it holds the parcel behind it.
         if (probe && failure.kind === 'input_required') heldDirect.add(carrier);
         if (probe && SERVICE_FAILURES.includes(failure.kind)) unsettledDirect.add(carrier);

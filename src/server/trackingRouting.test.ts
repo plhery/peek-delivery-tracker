@@ -625,6 +625,37 @@ describe('persistent tracking routing', () => {
     expect((own.result.routing as JsonObject & { failures: JsonObject }).failures.ups)
       .toMatchObject({ kind: 'not_found', retry_at: '2026-09-10T13:00:00.000Z' });
   });
+  it('takes the filed carrier\'s not found within the hour after it answered for the number as a passing miss, once', async () => {
+    // Its gateway answered with the parcel seven seconds before, then with an empty reply (DHL eCommerce Iberia's).
+    const moving = (routing: JsonObject) => parcel({ carrier: 'spring-gds', tracking_number: '3SABCD826405193', dpd_postcode: '1234 AB',
+      current_stage: 'out_for_delivery', carrier_data: { routing: state({ configured_carrier: 'spring-gds', confirmed_carrier: 'spring-gds',
+        confirmed_number: '3SABCD826405193', last_success_at: '2026-09-10T11:59:53Z', ...routing }) } });
+    const planned = { number: '3SABCD826405193', carriers: { 'spring-gds': [{ stage: 'out_for_delivery', time: '2026-09-10T15:00:00Z' }] } };
+    const check = async (at: Date, routing: JsonObject) => {
+      const run = setup(at);
+      run.direct.mockRejectedValue(new NotFoundError('Spring GDS'));
+      run.universal.mockRejectedValue(new NotFoundError('ParcelsApp'));
+      const outcome = await run.router.fetch(moving(routing), false).catch((error: unknown) => error);
+      expect(outcome).toBeInstanceOf(RoutingDeferred);
+      return (outcome as RoutingDeferred).routing;
+    };
+    const first = await check(time, { planned });
+    // Asked again in 15 minutes, as after a lost connection; the postcode is not refused, and what the carrier planned stays.
+    expect(first.failures['spring-gds']).toMatchObject({ count: 1, kind: 'not_found', passing: true, retry_at: '2026-09-10T12:15:00.000Z' });
+    expect(first.direct_retry_at).toBe('2026-09-10T12:15:00.000Z');
+    expect(first).not.toHaveProperty('postcode_refused');
+    expect(first.planned).toEqual(planned);
+    // A second in a row is a not found as usual.
+    const second = await check(new Date('2026-09-10T12:20:00Z'), first);
+    expect(second.failures['spring-gds']).toMatchObject({ count: 2, kind: 'not_found', retry_at: '2026-09-10T14:20:00.000Z' });
+    expect(second.failures['spring-gds']).not.toHaveProperty('passing');
+    expect(second).toMatchObject({ postcode_refused: { carrier: 'spring-gds' } });
+    expect(second).not.toHaveProperty('planned');
+    // So is a first one over an hour after the last answer.
+    const later = await check(time, { last_success_at: '2026-09-10T10:30:00Z' });
+    expect(later.failures['spring-gds']).toMatchObject({ count: 1, kind: 'not_found', retry_at: '2026-09-10T13:00:00.000Z' });
+    expect(later.failures['spring-gds']).not.toHaveProperty('passing');
+  });
   it.each([
     ['no field for the number', 'fedex', '999999999999', ['2026-09-10T18:00:00.000Z', '2026-09-11T00:00:00.000Z', '2026-09-11T12:00:00.000Z', '2026-09-11T12:00:00.000Z']],
     ['a field the owner can fill', 'heppner', 'TEST1234', ['2026-09-10T12:15:00.000Z', '2026-09-10T12:30:00.000Z', '2026-09-10T13:00:00.000Z', '2026-09-10T14:00:00.000Z']],

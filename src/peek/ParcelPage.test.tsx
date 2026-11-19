@@ -361,8 +361,21 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'In transit' })).toBeVisible();
     expect(within(card()).getByText(/^.+’s site shows steps written in advance, even a delivery\. Peek can’t confirm them, so it shows them greyed\./)).toBeVisible();
     const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
+    // A scan past the label: no line under the delivery.
     expect([...written.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Written in advance, not confirmed: Delivered']);
     expect(screen.getByText('1 update')).toBeVisible();
+  });
+
+  it('says under a delivery the carrier wrote in advance that nothing confirms it while its only scan is the label', async () => {
+    const name = carrierInfo('gzyl', 'en').name;
+    await shown(view([scan('registered', 200, 'Label created')], { carrier: 'gzyl', writtenAheadBy: 'gzyl', writtenAheadEvents: [
+      { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: ago(100) },
+      { stage: 'delivered', description: 'Delivered', occurredAt: ago(5) },
+    ] }));
+    const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
+    const [delivery] = written.querySelectorAll('li');
+    expect(within(delivery).getByText('Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.')).toBeVisible();
+    expect(written.querySelectorAll('.tracking-journal__unconfirmed')).toHaveLength(1);
   });
 
   it('keeps a number no carrier knows on a neutral card, and says to keep the page', async () => {

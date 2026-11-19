@@ -249,6 +249,32 @@ class PlannedStepsTests {
         assertEquals("parcel.writtenAheadShown", planned.writtenAheadNoteKey)
     }
 
+    // As src/components/TrackingJournal.test.tsx: the line under a written delivery nothing confirms.
+    @Test
+    fun aWrittenDeliveryWhoseTimeHasPassedIsUnconfirmedWhileTheScansTellNothingPastTheLabel() {
+        val id = UUID.randomUUID()
+        val now = DateParser.date("2026-08-20T00:00:00Z")!!
+        val departed = PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-08-08T01:00:00Z")
+        val delivered = PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-08-15T07:00:00Z")
+        val labelled = makeParcel(id = id, events = listOf(event(id, TrackingStage.Pending, "2026-08-01T10:00:00Z"), event(id, TrackingStage.Registered, "2026-08-02T10:00:00Z")))
+            .copy(carrier = CarrierId.Gzyl, writtenAheadEvents = listOf(departed, delivered))
+        // Not without the carrier named as writing ahead.
+        assertNull(labelled.unconfirmedWrittenDelivery(now))
+        val parcel = labelled.copy(writtenAheadBy = CarrierId.Gzyl)
+        assertEquals(delivered, parcel.unconfirmedWrittenDelivery(now))
+        // The newest of two written deliveries.
+        val later = delivered.copy(occurredAt = "2026-08-16T07:00:00Z")
+        assertEquals(later, parcel.copy(writtenAheadEvents = listOf(later, delivered)).unconfirmedWrittenDelivery(now))
+
+        // A scan past the label.
+        assertNull(parcel.copy(trackingEvents = parcel.trackingEvents + event(id, TrackingStage.InTransit, "2026-08-03T10:00:00Z")).unconfirmedWrittenDelivery(now))
+        // A delivery whose time is still ahead, a day-only one through its day.
+        assertNull(parcel.copy(writtenAheadEvents = listOf(delivered.copy(occurredAt = "2026-08-21T07:00:00Z"))).unconfirmedWrittenDelivery(now))
+        assertNull(parcel.copy(writtenAheadEvents = listOf(delivered.copy(occurredAt = "2026-08-19T16:00:00Z", day = "2026-08-20"))).unconfirmedWrittenDelivery(now))
+        // No written delivery.
+        assertNull(parcel.copy(writtenAheadEvents = listOf(departed)).unconfirmedWrittenDelivery(now))
+    }
+
     @Test
     fun aStepWrittenInAdvanceIsReadAsSuch() {
         val zone = ZoneId.systemDefault()

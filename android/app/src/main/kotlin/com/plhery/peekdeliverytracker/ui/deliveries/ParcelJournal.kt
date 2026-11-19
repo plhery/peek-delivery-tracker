@@ -72,6 +72,7 @@ import com.plhery.peekdeliverytracker.core.plannedStepLabel
 import com.plhery.peekdeliverytracker.core.plannedWording
 import com.plhery.peekdeliverytracker.core.relayedWordings
 import com.plhery.peekdeliverytracker.core.showsTime
+import com.plhery.peekdeliverytracker.core.unconfirmedWrittenDelivery
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
@@ -167,6 +168,7 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                         written, moment, localizer.text("timeline.writtenAhead.title", mapOf("carrier" to writer)),
                         localizer.text("timeline.writtenAhead.note"),
                         stepKey = "timeline.writtenAhead.step", tag = JOURNAL_WRITTEN, rowTag = JOURNAL_WRITTEN_ROW,
+                        unconfirmed = parcel.unconfirmedWrittenDelivery(moment),
                     )
                 }
                 if (days.isEmpty()) {
@@ -233,7 +235,8 @@ private fun JournalHeading(label: String, bottom: Dp, modifier: Modifier = Modif
  * newest first ([plannedNewestFirst]), under the heading `title` ("Planned by the carrier", or "Written in advance by"
  * the carrier; [JournalHeading], 4 over the note) and the `note` in caption2 in the opaque secondary grey that they are
  * not confirmed, 15 over the steps. The steps stand 18 apart ([PlannedStepRow], read with `stepKey`), and a dashed line
- * in the separator's colour, 1 high, closes them 18 under the last. They are no scans and count as no update.
+ * in the separator's colour, 1 high, closes them 18 under the last. They are no scans and count as no update. Under the
+ * `unconfirmed` delivery, a line in Peek's own words says nothing confirms it and whom to ask if nothing came.
  */
 @Composable
 private fun PlannedSteps(
@@ -244,7 +247,9 @@ private fun PlannedSteps(
     stepKey: String,
     tag: String,
     rowTag: String,
+    unconfirmed: PlannedTrackingEvent? = null,
 ) {
+    val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val ordered = remember(steps) { plannedNewestFirst(steps) }
@@ -258,7 +263,10 @@ private fun PlannedSteps(
         )
         Column(verticalArrangement = Arrangement.spacedBy(18.dp)) {
             ordered.forEachIndexed { index, step ->
-                PlannedStepRow(step, joinsNext = index < ordered.lastIndex, now = now, stepKey = stepKey, rowTag = rowTag)
+                PlannedStepRow(
+                    step, joinsNext = index < ordered.lastIndex, now = now, stepKey = stepKey, rowTag = rowTag,
+                    advice = if (step == unconfirmed) localizer.text("timeline.writtenAhead.delivery") else null,
+                )
             }
         }
         val separator = colors.separator
@@ -283,10 +291,18 @@ private fun PlannedSteps(
  * step's circle; then the words in footnote, the day it is planned for ([plannedDate]) 3 under them and where
  * ([EventLocation]) 4 under that, all in the opaque secondary grey. The circle and the rail grow with the footnote
  * words; at the accessibility sizes the circle keeps a column of its own width beside the words, its rail beside them
- * too. TalkBack reads the row as one ([plannedStepLabel]).
+ * too. TalkBack reads the row as one ([plannedStepLabel]). An `advice` closes the words in caption, 6 under them, in
+ * the primary colour: Peek's own, apart from the carrier's greyed ones, and TalkBack reads it after the step.
  */
 @Composable
-private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: Instant, stepKey: String, rowTag: String) {
+private fun PlannedStepRow(
+    step: PlannedTrackingEvent,
+    joinsNext: Boolean,
+    now: Instant,
+    stepKey: String,
+    rowTag: String,
+    advice: String? = null,
+) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -317,9 +333,10 @@ private fun PlannedStepRow(step: PlannedTrackingEvent, joinsNext: Boolean, now: 
                 Text(date, Modifier.padding(top = 3.dp), color = secondary, style = type.caption2.monospacedDigit().sfLines())
             }
             step.journalLocation?.let { location -> Box(Modifier.padding(top = 4.dp)) { EventLocation(location, step.place) } }
+            advice?.let { Text(it, Modifier.padding(top = 6.dp), color = colors.label, style = type.caption.sfLines()) }
         }
     }
-    val label = localizer.plannedStepLabel(step, now, stepKey)
+    val label = listOfNotNull(localizer.plannedStepLabel(step, now, stepKey), advice).joinToString(". ")
     val row = Modifier
         .fillMaxWidth()
         .testTag(rowTag)

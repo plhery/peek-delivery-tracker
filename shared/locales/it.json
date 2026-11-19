@@ -859,6 +859,7 @@
   "timeline.planned.note": "Non confermati finché non avvengono.",
   "timeline.planned.step": "Previsto, non confermato: {{step}}",
   "timeline.planned.title": "Previsto dal corriere",
+  "timeline.writtenAhead.delivery": "Niente conferma questa consegna: è stata scritta in anticipo. Se non è arrivato nulla, chiedi al venditore il corriere che la consegna e il suo numero di tracciamento.",
   "timeline.writtenAhead.note": "Nessuna scansione le conferma.",
   "timeline.writtenAhead.step": "Scritto in anticipo, non confermato: {{step}}",
   "timeline.writtenAhead.title": "Scritto in anticipo da {{carrier}}",

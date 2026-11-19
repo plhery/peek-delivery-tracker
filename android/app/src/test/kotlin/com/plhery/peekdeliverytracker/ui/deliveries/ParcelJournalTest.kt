@@ -292,6 +292,27 @@ class ParcelJournalTest {
         assertTrue(textExists(zoneLine))
     }
 
+    @Test
+    fun aDeliveryTheCarrierWroteInAdvanceSaysNothingConfirmsItWhileTheOnlyScanIsTheLabel() {
+        val advice = "Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number."
+        val written = listOf(
+            PlannedTrackingEvent(description = "Departed the origin facility", stage = TrackingStage.InTransit, occurredAt = "2026-10-27T01:00:00Z"),
+            PlannedTrackingEvent(description = "Delivered", stage = TrackingStage.Delivered, occurredAt = "2026-10-28T07:00:00Z"),
+        )
+        val label = scan(1, "2026-10-20T12:30:00Z", "The sender created a shipping label", TrackingStage.Registered)
+        show(parcel(listOf(label)).copy(carrier = CarrierId.Gzyl, writtenAheadBy = CarrierId.Gzyl, writtenAheadEvents = written))
+        assertTrue(textExists(advice))
+        // Under the delivery alone, and TalkBack reads it after the step.
+        val labels = compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN_ROW)).fetchSemanticsNodes()
+            .map { it.config.getOrNull(SemanticsProperties.ContentDescription).orEmpty().joinToString() }
+        assertTrue(labels[0], labels[0].startsWith("Written in advance, not confirmed: Delivered") && labels[0].endsWith(". $advice"))
+        assertFalse(labels[1], labels[1].contains(advice))
+        // A scan past the label: the steps stay, the line goes.
+        show(shown.copy(trackingEvents = listOf(label, scan(2, "2026-10-21T08:00:00Z", "Departed the origin facility"))))
+        assertEquals(2, compose.onAllNodes(hasTestTag(JOURNAL_WRITTEN_ROW)).fetchSemanticsNodes().size)
+        assertFalse(textExists(advice))
+    }
+
     // The rows.
 
     @Test

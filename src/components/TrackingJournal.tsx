@@ -17,7 +17,9 @@ const LISTED_DAYS = 3;
  * open, and keeps the oldest behind a button. The steps the carrier planned
  * and has not confirmed (`planned`) open it, greyed, apart from the scans, then
  * those the carrier named in `written.by` wrote in advance and whose time has
- * passed (`written.steps`), greyed too under "Written in advance by" it.
+ * passed (`written.steps`), greyed too under "Written in advance by" it. Under
+ * such a delivery that no scan past the label backs (`unconfirmedDelivery`), a
+ * line says nothing confirms it, and whom to ask if nothing came.
  */
 export function TrackingJournal({ events: allEvents, planned = [], written, syncing = false, fold = false, returnHeld = false }: {
   events: TrackingEvent[]; planned?: PlannedEvent[]; written?: { by: string; steps: PlannedEvent[] }; syncing?: boolean; fold?: boolean;
@@ -39,6 +41,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written, sync
   const now = new Date();
   const ahead = planned.filter((step) => plannedAhead(step, now.getTime()));
   const writtenSteps = written?.steps ?? [];
+  const unconfirmed = unconfirmedDelivery(writtenSteps, allEvents, now.getTime());
   const yesterday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   const sameDay = (a: Date, b: Date) => a.toDateString() === b.toDateString();
   const dayLabel = (date: Date | null, fallback: string) => !date ? fallback
@@ -84,7 +87,7 @@ export function TrackingJournal({ events: allEvents, planned = [], written, sync
     {ahead.length > 0 && <PlannedSteps steps={ahead} title={t('timeline.planned.title')} note={t('timeline.planned.note')}
       label={t('timeline.planned.step', { step: '' }).trim()} />}
     {written && writtenSteps.length > 0 && <PlannedSteps steps={writtenSteps} written title={t('timeline.writtenAhead.title', { carrier: written.by })}
-      note={t('timeline.writtenAhead.note')} label={t('timeline.writtenAhead.step', { step: '' }).trim()} />}
+      note={t('timeline.writtenAhead.note')} label={t('timeline.writtenAhead.step', { step: '' }).trim()} unconfirmed={unconfirmed} />}
     {!events.length ? <p className="timeline-empty">{t(syncing ? 'timeline.emptySyncing' : 'timeline.empty')}</p>
       : <ol className="tracking-journal__days" aria-label={t('timeline.label')}>
         {listed.map(([key, group], index) => <li key={key}>
@@ -128,12 +131,24 @@ export function plannedAhead(step: Pick<PlannedEvent, 'occurredAt' | 'day' | 'ex
 }
 
 /**
+ * The delivery a carrier wrote in advance (`steps`, served as `written_ahead_events`) whose time has passed while the
+ * carrier's own scans (`events`, Peek's "added" row aside) tell nothing past the label: nothing confirms it, and readers
+ * take it for real. The newest such step, or null once a scan tells more, or when no written delivery's time has passed.
+ */
+export function unconfirmedDelivery(steps: readonly PlannedEvent[], events: readonly Pick<TrackingEvent, 'stage'>[], now: number): PlannedEvent | null {
+  if (events.some((event) => event.stage !== 'pending' && event.stage !== 'registered')) return null;
+  return steps.filter((step) => step.stage === 'delivered' && Number.isFinite(Date.parse(step.occurredAt)) && !plannedAhead(step, now))
+    .reduce<PlannedEvent | null>((newest, step) => !newest || Date.parse(step.occurredAt) > Date.parse(newest.occurredAt) ? step : newest, null);
+}
+
+/**
  * The steps the carrier listed before they happen, or those it wrote in advance whose time has passed (`written`),
  * newest first, under a heading that says so (`title`, `note`, and `label` before each step's words for a screen
  * reader): greyed, each on a dashed mark instead of a time, with its day. They are no scans and count as no update.
+ * Under the `unconfirmed` delivery, a line in Peek's own words says nothing confirms it and whom to ask if nothing came.
  */
-function PlannedSteps({ steps, written = false, title, note, label }: {
-  steps: PlannedEvent[]; written?: boolean; title: string; note: string; label: string;
+function PlannedSteps({ steps, written = false, title, note, label, unconfirmed = null }: {
+  steps: PlannedEvent[]; written?: boolean; title: string; note: string; label: string; unconfirmed?: PlannedEvent | null;
 }) {
   const { languageTag, t, use24HourTime } = useI18n();
   const heading = useId();
@@ -160,6 +175,7 @@ function PlannedSteps({ steps, written = false, title, note, label }: {
             <p><span className="sr-only">{label} </span>{wording}</p>
             <time className="tracking-journal__planned-when" dateTime={step.day ?? step.occurredAt}>{when(step)}</time>
             {step.location?.trim() && <EventPlace location={step.location} placed={step.place} />}
+            {step === unconfirmed && <p className="tracking-journal__unconfirmed">{t('timeline.writtenAhead.delivery')}</p>}
           </div>
         </li>;
       })}

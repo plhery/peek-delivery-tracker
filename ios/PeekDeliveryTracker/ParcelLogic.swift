@@ -478,6 +478,16 @@ extension Parcel {
         return shown ? "parcel.writtenAheadShown" : "parcel.writtenAhead"
     }
 
+    /// The delivery the carrier writing the timeline in advance wrote (`writtenAheadEvents`) whose time has passed while
+    /// its own scans tell nothing past the label, Peek's "added" row aside: nothing confirms it, and readers take it for
+    /// real. The journal says so under it, and whom to ask if nothing came. The newest such step, or nil.
+    func unconfirmedWrittenDelivery(now: Date = Date()) -> PlannedTrackingEvent? {
+        guard writtenAheadBy != nil, trackingEvents.allSatisfy({ $0.stage == .pending || $0.stage == .registered }) else { return nil }
+        return (writtenAheadEvents ?? [])
+            .filter { step in step.stage == .delivered && step.aheadUntil.map { $0 <= now } == true }
+            .max { (DateParser.date($0.occurredAt) ?? .distantPast) < (DateParser.date($1.occurredAt) ?? .distantPast) }
+    }
+
     /// Whether the parcel, shown as returned, is a held return (`return_held`): the carrier is still scanning it on its way
     /// back, and the server keeps checking it. Its views say so under the return.
     var heldReturn: Bool {

@@ -859,6 +859,7 @@
   "timeline.planned.note": "Niepotwierdzone, dopóki nie nastąpią.",
   "timeline.planned.step": "Zaplanowany, niepotwierdzony: {{step}}",
   "timeline.planned.title": "Zaplanowane przez przewoźnika",
+  "timeline.writtenAhead.delivery": "Nic nie potwierdza tego doręczenia: zapisano je z wyprzedzeniem. Jeśli nic nie dotarło, zapytaj sprzedawcę o firmę, która je doręcza, i jej numer śledzenia.",
   "timeline.writtenAhead.note": "Żaden skan ich nie potwierdza.",
   "timeline.writtenAhead.step": "Zapisany z wyprzedzeniem, niepotwierdzony: {{step}}",
   "timeline.writtenAhead.title": "Zapisane z wyprzedzeniem przez przewoźnika {{carrier}}",

@@ -6,6 +6,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.RecipientAction
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingEvent
@@ -560,6 +561,18 @@ val Parcel.writtenAheadNoteKey: String?
         val shown = !writtenAheadEvents.isNullOrEmpty() || !plannedEvents.isNullOrEmpty()
         return if (shown) "parcel.writtenAheadShown" else "parcel.writtenAhead"
     }
+
+/**
+ * The delivery the carrier writing the timeline in advance wrote (`writtenAheadEvents`) whose time has passed while its
+ * own scans tell nothing past the label, Peek's "added" row aside: nothing confirms it, and readers take it for real. The
+ * journal says so under it, and whom to ask if nothing came. The newest such step, or null.
+ */
+fun Parcel.unconfirmedWrittenDelivery(now: Instant = AppClock.now()): PlannedTrackingEvent? {
+    if (writtenAheadBy == null || trackingEvents.any { it.stage != TrackingStage.Pending && it.stage != TrackingStage.Registered }) return null
+    return writtenAheadEvents.orEmpty()
+        .filter { step -> step.stage == TrackingStage.Delivered && step.aheadUntil?.let { it <= now } == true }
+        .maxByOrNull { DateParser.date(it.occurredAt) ?: Instant.MIN }
+}
 
 /**
  * Whether the parcel, shown as returned, is a held return (`return_held`): the carrier is still scanning it on its way

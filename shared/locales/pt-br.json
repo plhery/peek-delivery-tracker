@@ -859,6 +859,7 @@
   "timeline.planned.note": "Não confirmadas até acontecerem.",
   "timeline.planned.step": "Prevista, não confirmada: {{step}}",
   "timeline.planned.title": "Previsto pela transportadora",
+  "timeline.writtenAhead.delivery": "Nada confirma esta entrega: ela foi escrita com antecedência. Se nada chegou, pergunte ao vendedor qual transportadora faz a entrega e o código de rastreamento dela.",
   "timeline.writtenAhead.note": "Nenhuma movimentação as confirma.",
   "timeline.writtenAhead.step": "Escrita com antecedência, não confirmada: {{step}}",
   "timeline.writtenAhead.title": "Escrito com antecedência por {{carrier}}",

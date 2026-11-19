@@ -859,6 +859,7 @@
   "timeline.planned.note": "实际发生前均未确认。",
   "timeline.planned.step": "计划中，未确认：{{step}}",
   "timeline.planned.title": "快递公司计划的步骤",
+  "timeline.writtenAhead.delivery": "没有任何记录确认这次签收：这是提前写好的。如果没有收到，请向卖家询问负责派送的快递公司及其运单号。",
   "timeline.writtenAhead.note": "没有任何扫描记录确认这些节点。",
   "timeline.writtenAhead.step": "提前写好，未确认：{{step}}",
   "timeline.writtenAhead.title": "{{carrier}} 提前写好的物流节点",

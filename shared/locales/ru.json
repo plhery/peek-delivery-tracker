@@ -859,6 +859,7 @@
   "timeline.planned.note": "Не подтверждены, пока не произойдут.",
   "timeline.planned.step": "Запланировано, не подтверждено: {{step}}",
   "timeline.planned.title": "Запланировано службой доставки",
+  "timeline.writtenAhead.delivery": "Ничто не подтверждает это вручение: оно внесено заранее. Если посылка не пришла, спросите у продавца, какая служба её доставляет, и трек-номер этой службы.",
   "timeline.writtenAhead.note": "Ни одна отметка их не подтверждает.",
   "timeline.writtenAhead.step": "Внесено заранее, не подтверждено: {{step}}",
   "timeline.writtenAhead.title": "Внесено заранее службой доставки {{carrier}}",

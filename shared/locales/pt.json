@@ -859,6 +859,7 @@
   "timeline.planned.note": "Por confirmar até acontecerem.",
   "timeline.planned.step": "Prevista, por confirmar: {{step}}",
   "timeline.planned.title": "Previsto pela transportadora",
+  "timeline.writtenAhead.delivery": "Nada confirma esta entrega: foi escrita com antecedência. Se nada chegou, pergunta ao vendedor qual é a transportadora que a entrega e o respetivo número de seguimento.",
   "timeline.writtenAhead.note": "Nenhum registo as confirma.",
   "timeline.writtenAhead.step": "Escrita com antecedência, por confirmar: {{step}}",
   "timeline.writtenAhead.title": "Escrito com antecedência por {{carrier}}",

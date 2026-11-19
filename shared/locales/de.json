@@ -859,6 +859,7 @@
   "timeline.planned.note": "Erst bestätigt, wenn sie passieren.",
   "timeline.planned.step": "Geplant, nicht bestätigt: {{step}}",
   "timeline.planned.title": "Vom Paketdienst geplant",
+  "timeline.writtenAhead.delivery": "Nichts bestätigt diese Zustellung: Sie wurde vorab eingetragen. Ist nichts angekommen, frag den Verkäufer nach dem Paketdienst, der sie zustellt, und seiner Sendungsnummer.",
   "timeline.writtenAhead.note": "Kein Scan bestätigt sie.",
   "timeline.writtenAhead.step": "Vorab eingetragen, nicht bestätigt: {{step}}",
   "timeline.writtenAhead.title": "Vorab eingetragen von {{carrier}}",

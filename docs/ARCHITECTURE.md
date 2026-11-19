@@ -735,7 +735,10 @@ and nothing typed is sent.
   ones, under "Written in advance by" the carrier, and say in one line under the status that
   its site shows steps written in advance, greyed here, or left out while it names none in
   words. They are never scans either: a written "Delivered" sets no stage, status, estimate,
-  alert, email, count, map or drawing. A wrapped gift's link shows neither the line nor the steps.
+  alert, email, count, map or drawing. While the carrier's scans tell nothing past the label,
+  the apps say under such a delivery that nothing confirms it and, if nothing came, to ask the
+  seller for the company delivering it and its tracking number; each app works this out from
+  `written_ahead_events` and the scans. A wrapped gift's link shows neither the line nor the steps.
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the
   scraper flagged it when the scan was stored, or, for a row stored before the flag, as its

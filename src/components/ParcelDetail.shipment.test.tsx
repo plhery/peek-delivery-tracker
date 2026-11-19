@@ -102,8 +102,9 @@ describe('shipment details', () => {
     expect(screen.getByText(`${name}’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it shows them greyed. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller.`))
       .toHaveClass('detail__handover');
     const written = screen.getByRole('region', { name: `Written in advance by ${name}` });
-    expect([...written.querySelectorAll('li p')].map(line => line.textContent))
-      .toEqual(['Written in advance, not confirmed: Delivered', 'Written in advance, not confirmed: Departed the origin facility']);
+    expect([...written.querySelectorAll('li p')].map(line => line.textContent)).toEqual(['Written in advance, not confirmed: Delivered',
+      'Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.',
+      'Written in advance, not confirmed: Departed the origin facility']);
     // The status, the date beside it and the count read the scans alone: there are none.
     expect(document.querySelector('.detail__state')).toHaveTextContent(`Waiting for ${name}`);
     expect(document.querySelector('.detail__state')).not.toHaveTextContent(/Delivered/);

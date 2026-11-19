@@ -160,6 +160,8 @@
 .tracking-journal__planned p { color: var(--ink-soft); }
 .tracking-journal__planned-mark { width: 12px; height: 12px; margin-top: 3px; fill: none; stroke: var(--ink-soft); stroke-width: 1.2; stroke-dasharray: 2.4 1.9; }
 .tracking-journal .tracking-journal__planned-when { display: block; margin-top: 2px; padding: 0; }
+/* Under a written delivery nothing confirms: Peek's own words, in ink, apart from the carrier's greyed ones. */
+.tracking-journal .tracking-journal__planned .tracking-journal__unconfirmed { margin-top: 6px; color: var(--ink); font-size: 12px; line-height: 1.45; }
 /* A long journey folds its older days into one line each. */
 .tracking-journal__day > summary { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 48px; border-top: 1px solid var(--line); list-style: none; cursor: pointer; }
 .tracking-journal__day > summary::-webkit-details-marker { display: none; }

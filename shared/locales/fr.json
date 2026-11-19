@@ -859,6 +859,7 @@
   "timeline.planned.note": "Non confirmées tant qu’elles n’ont pas eu lieu.",
   "timeline.planned.step": "Prévu, non confirmé : {{step}}",
   "timeline.planned.title": "Prévu par le transporteur",
+  "timeline.writtenAhead.delivery": "Rien ne confirme cette livraison : elle a été écrite à l’avance. Si rien n’est arrivé, demande au vendeur le transporteur qui la livre et son numéro de suivi.",
   "timeline.writtenAhead.note": "Aucun scan ne les confirme.",
   "timeline.writtenAhead.step": "Écrit à l’avance, non confirmé : {{step}}",
   "timeline.writtenAhead.title": "Écrit à l’avance par {{carrier}}",

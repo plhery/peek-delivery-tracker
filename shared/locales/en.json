@@ -859,6 +859,7 @@
   "timeline.planned.note": "Not confirmed until they happen.",
   "timeline.planned.step": "Planned, not confirmed: {{step}}",
   "timeline.planned.title": "Planned by the carrier",
+  "timeline.writtenAhead.delivery": "Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.",
   "timeline.writtenAhead.note": "No scan confirms them.",
   "timeline.writtenAhead.step": "Written in advance, not confirmed: {{step}}",
   "timeline.writtenAhead.title": "Written in advance by {{carrier}}",

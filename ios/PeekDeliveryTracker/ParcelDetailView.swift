@@ -1720,6 +1720,7 @@ struct ParcelJournal: View {
         // The steps the carrier wrote in advance whose time has passed, under its name.
         let writer = parcel.writtenAheadBy.map { CarrierCatalog.shared.info(for: $0, language: localizer.language).displayName }
         let written = writer == nil ? [] : parcel.writtenAheadEvents ?? []
+        let unconfirmed = parcel.unconfirmedWrittenDelivery(now: max(Date(), plannedClock))
         // The times are the device's, wherever the carrier scanned: one quiet line under the history says so.
         let timed = entries.contains { $0.event.showsTime } || (planned + written).contains { $0.showsTime }
         return VStack(alignment: .leading, spacing: 0) {
@@ -1746,7 +1747,8 @@ struct ParcelJournal: View {
                 }
                 if let writer, !written.isEmpty {
                     PlannedSteps(steps: written, title: localizer.text("timeline.writtenAhead.title", ["carrier": writer]),
-                                 note: localizer.text("timeline.writtenAhead.note"), stepKey: "timeline.writtenAhead.step")
+                                 note: localizer.text("timeline.writtenAhead.note"), stepKey: "timeline.writtenAhead.step",
+                                 unconfirmed: unconfirmed)
                 }
                 if groups.isEmpty {
                     Text(localizer.text(syncing ? "timeline.emptySyncing" : "timeline.empty"))
@@ -1921,12 +1923,14 @@ private struct JournalEventRow: View {
 /// The steps the carrier listed before they happen, or those it wrote in advance whose time has passed, newest first,
 /// under a heading that says so (`title`, `note`, and `stepKey` to speak each step): greyed, each on a dashed mark
 /// instead of a time and joined by a dashed rail, with its day, and a dashed line under them. They are no scans and
-/// count as no update.
+/// count as no update. Under the `unconfirmed` delivery, a line in Peek's own words says nothing confirms it and whom to
+/// ask if nothing came.
 private struct PlannedSteps: View {
     let steps: [PlannedTrackingEvent]
     let title: String
     let note: String
     let stepKey: String
+    var unconfirmed: PlannedTrackingEvent? = nil
     @EnvironmentObject private var localizer: Localizer
 
     var body: some View {
@@ -1945,7 +1949,8 @@ private struct PlannedSteps: View {
                 .padding(.bottom, 15)
             VStack(alignment: .leading, spacing: 18) {
                 ForEach(Array(newestFirst.enumerated()), id: \.offset) { index, step in
-                    PlannedStepRow(step: step, stepKey: stepKey, joinsNext: index < newestFirst.count - 1)
+                    PlannedStepRow(step: step, stepKey: stepKey, joinsNext: index < newestFirst.count - 1,
+                                   advice: step == unconfirmed ? localizer.text("timeline.writtenAhead.delivery") : nil)
                 }
             }
             DashedRule(axis: .horizontal)
@@ -1959,11 +1964,13 @@ private struct PlannedSteps: View {
 
 /// A planned step laid out as a scan's row, greyed: a dashed circle where the time goes, a dashed rail down to the next
 /// step's, then the words, the day it is planned for and where. The circle and the rail grow with the words; at the
-/// largest sizes the circle keeps a column of its own width beside the words, its rail beside them too.
+/// largest sizes the circle keeps a column of its own width beside the words, its rail beside them too. An `advice`
+/// closes the words in caption, in the primary colour: Peek's own, apart from the carrier's greyed ones.
 private struct PlannedStepRow: View {
     let step: PlannedTrackingEvent
     let stepKey: String
     let joinsNext: Bool
+    var advice: String? = nil
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var typeSize
     /// The time column of a scan's row, which the circle stands in.
@@ -2001,6 +2008,12 @@ private struct PlannedStepRow: View {
                         .font(.caption2).foregroundStyle(Brand.secondaryText)
                         .padding(.top, 4)
                 }
+                if let advice {
+                    Text(advice)
+                        .font(.caption).foregroundStyle(.primary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.top, 6)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
         }
@@ -2016,10 +2029,10 @@ private struct PlannedStepRow: View {
             }
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(localizer.text(stepKey, [
+        .accessibilityLabel([localizer.text(stepKey, [
             "step": [wording, when, location.map { EventLocation.spoken($0, placed: step.place, language: localizer.language) }]
                 .compactMap { $0?.nonEmpty }.joined(separator: ", "),
-        ]))
+        ]), advice].compactMap { $0 }.joined(separator: ". "))
     }
 }
 

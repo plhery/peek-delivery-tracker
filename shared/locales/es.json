@@ -859,6 +859,7 @@
   "timeline.planned.note": "Sin confirmar hasta que ocurran.",
   "timeline.planned.step": "Previsto, sin confirmar: {{step}}",
   "timeline.planned.title": "Previsto por el transportista",
+  "timeline.writtenAhead.delivery": "Nada confirma esta entrega: se escribió de antemano. Si no ha llegado nada, pregunta al vendedor qué empresa la reparte y su número de seguimiento.",
   "timeline.writtenAhead.note": "Ningún escaneo las confirma.",
   "timeline.writtenAhead.step": "Escrito de antemano, sin confirmar: {{step}}",
   "timeline.writtenAhead.title": "Escrito de antemano por {{carrier}}",

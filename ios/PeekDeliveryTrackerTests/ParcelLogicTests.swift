@@ -2014,6 +2014,38 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(parcel.writtenAheadNoteKey, "parcel.writtenAheadShown")
     }
 
+    // As src/components/TrackingJournal.test.tsx: the line under a written delivery nothing confirms.
+    func testAWrittenDeliveryWhoseTimeHasPassedIsUnconfirmedWhileTheScansTellNothingPastTheLabel() {
+        let id = UUID()
+        let now = DateParser.date("2026-08-20T00:00:00Z")!
+        let departed = PlannedTrackingEvent(description: "Departed the origin facility", stage: .inTransit, occurredAt: "2026-08-08T01:00:00Z")
+        let delivered = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-15T07:00:00Z")
+        var parcel = makeParcel(id: id, events: [event(id, .pending, "2026-08-01T10:00:00Z"), event(id, .registered, "2026-08-02T10:00:00Z")])
+        parcel.carrier = .gzyl
+        parcel.writtenAheadEvents = [departed, delivered]
+        // Not without the carrier named as writing ahead.
+        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
+        parcel.writtenAheadBy = .gzyl
+        XCTAssertEqual(parcel.unconfirmedWrittenDelivery(now: now), delivered)
+        // The newest of two written deliveries.
+        let later = PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-16T07:00:00Z")
+        parcel.writtenAheadEvents = [later, delivered]
+        XCTAssertEqual(parcel.unconfirmedWrittenDelivery(now: now), later)
+
+        // A scan past the label.
+        var moving = parcel
+        moving.trackingEvents.append(event(id, .inTransit, "2026-08-03T10:00:00Z"))
+        XCTAssertNil(moving.unconfirmedWrittenDelivery(now: now))
+        // A delivery whose time is still ahead, a day-only one through its day.
+        parcel.writtenAheadEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-21T07:00:00Z")]
+        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
+        parcel.writtenAheadEvents = [PlannedTrackingEvent(description: "Delivered", stage: .delivered, occurredAt: "2026-08-19T16:00:00Z", day: "2026-08-20")]
+        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
+        // No written delivery.
+        parcel.writtenAheadEvents = [departed]
+        XCTAssertNil(parcel.unconfirmedWrittenDelivery(now: now))
+    }
+
     // As src/lib/stages.test.ts: a problem row an earlier check dated after the return scan.
     func testAReturnTheServerHoldsStaysOverAProblemRowAndTheTripAfterIt() {
         let id = UUID()

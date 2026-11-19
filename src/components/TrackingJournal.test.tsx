@@ -5,12 +5,47 @@ import { hydrateRoot } from 'react-dom/client';
 import { renderToString } from 'react-dom/server';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { timeZoneName } from '../lib/format';
-import { TrackingJournal, plannedAhead } from './TrackingJournal';
-import type { TrackingEvent } from '../types';
+import { TrackingJournal, plannedAhead, unconfirmedDelivery } from './TrackingJournal';
+import type { PlannedEvent, TrackingEvent } from '../types';
 
 it('keeps a day-only plan until the end of a 25-hour carrier day', () => {
   expect(plannedAhead({ day: '2026-10-25', occurredAt: '2026-10-24T22:00:00Z', expiresAt: '2026-10-25T23:00:00Z' },
     Date.parse('2026-10-25T22:30:00Z'))).toBe(true);
+});
+
+const UNCONFIRMED = 'Nothing confirms this delivery: it was written in advance. If nothing came, ask the seller for the company that delivers it and its tracking number.';
+
+describe('unconfirmedDelivery', () => {
+  const now = Date.parse('2024-09-20T00:00:00Z');
+  const delivered: PlannedEvent = { stage: 'delivered', description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' };
+  const departed: PlannedEvent = { stage: 'in_transit', description: 'Departed the origin facility', occurredAt: '2024-09-08T01:00:00Z' };
+  const added = { stage: 'pending' as const };
+  const label = { stage: 'registered' as const };
+
+  it('names a written delivery whose time has passed while the scans tell nothing past the label, Peek’s own row aside', () => {
+    expect(unconfirmedDelivery([departed, delivered], [], now)).toBe(delivered);
+    expect(unconfirmedDelivery([departed, delivered], [added, label, label], now)).toBe(delivered);
+    // The newest of two written deliveries.
+    const later = { ...delivered, occurredAt: '2024-09-16T07:00:00Z' };
+    expect(unconfirmedDelivery([later, delivered], [label], now)).toBe(later);
+  });
+
+  it('names none once a scan tells more than the label', () => {
+    for (const stage of ['accepted', 'in_transit', 'customs', 'exception'] as const) {
+      expect(unconfirmedDelivery([delivered], [label, { stage }], now)).toBeNull();
+    }
+  });
+
+  it('names none while the delivery’s time is ahead, a day-only one through its day', () => {
+    expect(unconfirmedDelivery([{ ...delivered, occurredAt: '2024-09-21T07:00:00Z' }], [], now)).toBeNull();
+    expect(unconfirmedDelivery([{ ...delivered, occurredAt: '2024-09-19T16:00:00Z', day: '2024-09-20' }], [], now)).toBeNull();
+    expect(unconfirmedDelivery([{ ...delivered, occurredAt: '2024-09-18T16:00:00Z', day: '2024-09-19' }], [], now)).not.toBeNull();
+  });
+
+  it('names none without a written delivery', () => {
+    expect(unconfirmedDelivery([departed], [label], now)).toBeNull();
+    expect(unconfirmedDelivery([], [], now)).toBeNull();
+  });
 });
 
 function event(id: string, occurredAt: string, description: string, location?: string): TrackingEvent {
@@ -96,8 +131,9 @@ describe('TrackingJournal', () => {
     const written = screen.getByRole('region', { name: 'Written in advance by GZYL' });
     expect(written).toHaveClass('tracking-journal__planned--written');
     expect(within(written).getByText('No scan confirms them.')).toBeInTheDocument();
+    // Under the delivery, with no scan behind it, Peek says nothing confirms it.
     expect([...written.querySelectorAll('li p')].map(line => line.textContent))
-      .toEqual(['Written in advance, not confirmed: Delivered', 'Written in advance, not confirmed: Departed the origin facility']);
+      .toEqual(['Written in advance, not confirmed: Delivered', UNCONFIRMED, 'Written in advance, not confirmed: Departed the origin facility']);
     expect(written.querySelector('.tracking-journal__location')).toHaveTextContent(/^🇨🇳Guangzhou, China$/u);
     // The steps still ahead come first, under their own heading.
     const planned = screen.getByRole('region', { name: 'Planned by the carrier' });
@@ -105,6 +141,19 @@ describe('TrackingJournal', () => {
     expect(planned.compareDocumentPosition(written) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(container.querySelectorAll('.tracking-journal__planned-mark')).toHaveLength(3);
     expect(screen.queryByRole('list', { name: 'Tracking history' })).not.toBeInTheDocument();
+  });
+
+  it('says under a written delivery that nothing confirms it while the only scan is the label, and nothing once a scan tells more', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2024-09-20T00:00:00Z'));
+    const written = { by: 'GZYL', steps: [{ stage: 'delivered' as const, description: 'Delivered', occurredAt: '2024-09-15T07:00:00Z' }] };
+    const label = { ...event('label', '2024-09-07T10:00:00Z', 'Label created'), stage: 'registered' as const };
+    const { rerender } = render(<TrackingJournal events={[label]} written={written} />);
+    const row = screen.getByRole('region', { name: 'Written in advance by GZYL' }).querySelector('li')!;
+    expect(within(row).getByText(UNCONFIRMED)).toHaveClass('tracking-journal__unconfirmed');
+    rerender(<TrackingJournal events={[label, event('scan', '2024-09-08T10:00:00Z', 'Departed the origin facility')]} written={written} />);
+    expect(screen.getByRole('region', { name: 'Written in advance by GZYL' })).toBeInTheDocument();
+    expect(screen.queryByText(UNCONFIRMED)).not.toBeInTheDocument();
   });
 
   it('says under the history that its times are the reader’s, and names the reader’s zone', () => {

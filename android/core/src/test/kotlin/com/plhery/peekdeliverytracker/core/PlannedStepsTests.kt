@@ -165,6 +165,18 @@ class PlannedStepsTests {
     }
 
     @Test
+    fun aDayOnlyStepGoesAtTheExpiryTheServiceSends() {
+        // As the service writes a day-only step in Zurich the day the clocks go forward (plannedSteps.ts): the day is
+        // 23 hours long, so it ends at expires_at, an hour before a day on from occurred_at.
+        val wire = """{"description":"Delivered","stage":"delivered","occurred_at":"2027-03-27T23:00:00.000Z",""" +
+            """"expires_at":"2027-03-28T22:00:00.000Z","day":"2027-03-28"}"""
+        val step = decodeJson(PlannedTrackingEvent.serializer(), wire.toByteArray())
+        assertEquals(Instant.parse("2027-03-28T22:00:00Z"), step.aheadUntil)
+        assertTrue(step.isAhead(Instant.parse("2027-03-28T21:59:59Z")))
+        assertFalse(step.isAhead(Instant.parse("2027-03-28T22:30:00Z")))
+    }
+
+    @Test
     fun aPlannedStepIsListedNewestFirstAndReadAsOne() {
         val zone = ZoneId.systemDefault()
         val now = ZonedDateTime.of(2026, 11, 4, 12, 0, 0, 0, zone).toInstant()

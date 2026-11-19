@@ -1467,6 +1467,100 @@ function Doorway() {
   </>;
 }
 
+function Pasted() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* Three vans, waiting behind a big question mark. */}
+    {([['orange', 34], ['green', 104], ['lilac', 174]] as const).map(([tone, x]) => <Truck key={tone} x={x} y={210} tone={tone} scale={2} />)}
+    <path d="M100 86C100 56 122 40 148 40C176 40 196 58 196 82C196 106 178 114 164 124C152 133 150 142 150 160" stroke="var(--blue)" strokeWidth="18" strokeLinecap="round" fill="none" />
+    <circle cx="150" cy="190" r="11" fill="var(--blue)" />
+    {/* A whole shipping email pasted into the search field, its number marked. */}
+    <Sheet x={278} y={40} width={210} height={208} rx={18}>
+      <rect x="14" y="14" width="182" height="36" rx="18" fill="var(--blue-soft)" />
+      <circle cx="35" cy="30" r="7" stroke="var(--blue)" strokeWidth="3" fill="none" />
+      <path d="M40 35l6 6" stroke="var(--blue)" strokeWidth="3" strokeLinecap="round" />
+      <rect x="56" y="28" width="118" height="8" rx="4" fill="var(--blue)" opacity=".5" />
+      {[[70, 168], [86, 136], [102, 152]].map(([y, width]) => <rect key={y} x="22" y={y} width={width} height="8" rx="4" fill="var(--control)" />)}
+      <rect x="16" y="122" width="178" height="30" rx="10" fill="var(--yellow)" />
+      <rect x="32" y="133" width="146" height="8" rx="4" fill="var(--on-yellow)" opacity=".7" />
+      {[[166, 160], [182, 104]].map(([y, width]) => <rect key={y} x="22" y={y} width={width} height="8" rx="4" fill="var(--control)" />)}
+    </Sheet>
+    <Pip x={556} ground={248} width={120} mood="look" side={-1} />
+  </>;
+}
+
+/** A stamp in a passport: a perforated postage stamp, a round postmark, or a dashed place still to earn. */
+function Stamp({ x, y, tone, kind }: { x: number; y: number; tone: string; kind: 'stamp' | 'mark' | 'empty' }) {
+  if (kind === 'empty') return <rect x={x - 17} y={y - 17} width="34" height="34" rx="8" fill="none" stroke={line} strokeWidth="3" strokeDasharray="5 5" />;
+  if (kind === 'mark') return <g>
+    <circle cx={x} cy={y} r="18" fill="none" stroke={`var(--${tone})`} strokeWidth="3.5" />
+    <circle cx={x} cy={y} r="10" fill={`var(--${tone})`} opacity=".5" />
+  </g>;
+  return <g>
+    <rect x={x - 17} y={y - 17} width="34" height="34" rx="3" fill={`var(--${tone}-soft)`} stroke={`var(--${tone})`} strokeWidth="3" strokeDasharray="4 3" />
+    <rect x={x - 9} y={y - 9} width="18" height="18" rx="3" fill={`var(--${tone})`} />
+  </g>;
+}
+
+function Passport() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    <Pip x={140} ground={248} width={140} mood="joy" side={1} />
+    {/* An open passport, its pages full of stamps. */}
+    <g transform="translate(-18 10) rotate(-4 360 146)">
+      <rect x="232" y="58" width="256" height="176" rx="16" fill="var(--orange)" />
+      <rect x="242" y="66" width="117" height="160" rx="10" fill={paper} />
+      <rect x="361" y="66" width="117" height="160" rx="10" fill={paper} />
+      <path d="M360 70V222" stroke="var(--orange)" strokeWidth="3" opacity=".5" />
+      <Stamp x={276} y={104} tone="blue" kind="stamp" />
+      <Stamp x={326} y={104} tone="green" kind="mark" />
+      <Stamp x={276} y={156} tone="rose" kind="mark" />
+      <Stamp x={326} y={156} tone="lilac" kind="stamp" />
+      <Stamp x={276} y={204} tone="ochre" kind="stamp" />
+      <Stamp x={326} y={204} tone="orange" kind="mark" />
+      <Stamp x={396} y={104} tone="green" kind="stamp" />
+      <Stamp x={446} y={104} tone="blue" kind="mark" />
+      <Stamp x={396} y={156} tone="orange" kind="stamp" />
+      <Stamp x={446} y={156} tone="rose" kind="empty" />
+      <Stamp x={396} y={204} tone="lilac" kind="empty" />
+      <Stamp x={446} y={204} tone="ochre" kind="empty" />
+    </g>
+    {/* Two friends' passports, peeking in from the side. */}
+    <g transform="rotate(10 537 168)">
+      <rect x="500" y="116" width="74" height="104" rx="10" fill="var(--blue)" />
+      <circle cx="537" cy="160" r="16" fill="none" stroke={paper} strokeWidth="3" opacity=".7" />
+    </g>
+    <g transform="rotate(20 581 190)">
+      <rect x="548" y="142" width="66" height="96" rx="10" fill="var(--green)" />
+      <circle cx="581" cy="182" r="14" fill="none" stroke={paper} strokeWidth="3" opacity=".7" />
+    </g>
+  </>;
+}
+
+function Terminal() {
+  // The scans, oldest first: how far each line runs, and its dot's tone.
+  const scans = [[150, 'green'], [118, 'green'], [170, 'green'], [96, 'orange']] as const;
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* An open laptop whose terminal prints a parcel's scans, line by line. */}
+    <rect x="170" y="110" width="300" height="126" rx="12" fill={ink} />
+    <rect x="180" y="120" width="280" height="108" rx="6" fill={paper} />
+    {['rose', 'yellow', 'green'].map((tone, index) => <circle key={tone} cx={194 + index * 14} cy="132" r="4" fill={`var(--${tone})`} />)}
+    <path d="M194 148l7 5-7 5" stroke="var(--green)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+    <rect x="208" y="149" width="132" height="8" rx="4" fill="var(--green)" opacity=".7" />
+    {scans.map(([width, tone], index) => <g key={index} transform={`translate(198 ${168 + index * 13})`}>
+      <circle cx="0" cy="4" r="3.5" fill={`var(--${tone})`} />
+      <rect x="10" y="1" width={width} height="6" rx="3" fill={ink} opacity=".25" />
+    </g>)}
+    <rect x="208" y="218" width="9" height="4" fill="var(--green)" />
+    <path d="M150 236H490L476 248H164Z" fill={ink} />
+    {/* Pip, perched on top of the lid. */}
+    <Pip x={420} ground={110} width={92} mood="joy" side={-1} />
+    {/* Code brackets, beside the laptop. */}
+    <path d="M534 128l-18 22 18 22M566 128l18 22-18 22" stroke="var(--green)" strokeWidth="7" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1514,6 +1608,9 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'android-app': { tone: 'green', draw: Droid },
   'share-parcel': { tone: 'rose', draw: Gift },
   'account-or-guest': { tone: 'ochre', draw: Doorway },
+  'track-without-carrier': { tone: 'blue', draw: Pasted },
+  'delivery-passport': { tone: 'orange', draw: Passport },
+  'developers': { tone: 'green', draw: Terminal },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },
   'uncollected-parcel': { tone: 'ochre', draw: Uncollected },
   'parcel-lockers': { tone: 'rose', draw: Lockers },

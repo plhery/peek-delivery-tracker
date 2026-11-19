@@ -237,6 +237,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Peek without an account: what you get, and when to sign in"
     },
     {
+      "id": "track-without-carrier",
+      "slug": "track-parcel-without-knowing-carrier",
+      "title": "Track a parcel without knowing the carrier"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "delivery-passport-stamps",
+      "title": "Your delivery passport: stamps, stats and friends on Peek"
+    },
+    {
+      "id": "developers",
+      "slug": "open-source-parcel-tracking",
+      "title": "Open-source parcel tracking: Peek's code and engine"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "christmas-posting-dates",
       "title": "Last posting dates for Christmas and shipping deadlines"
@@ -522,6 +537,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "account-or-guest",
       "slug": "sendungsverfolgung-ohne-konto",
       "title": "Peek ohne Konto: was du bekommst und wann du dich anmeldest"
+    },
+    {
+      "id": "track-without-carrier",
+      "slug": "paket-verfolgen-ohne-paketdienst",
+      "title": "Paket verfolgen, ohne den Paketdienst zu kennen"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "lieferungen-reisepass-briefmarken",
+      "title": "Dein Reisepass in Peek: Briefmarken, Statistiken, Freunde"
+    },
+    {
+      "id": "developers",
+      "slug": "open-source-sendungsverfolgung",
+      "title": "Open-Source-Sendungsverfolgung: Peeks Code und Engine"
     },
     {
       "id": "christmas-posting-dates",
@@ -811,6 +841,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Peek sans compte\u00a0: ce que tu obtiens et quand te connecter"
     },
     {
+      "id": "track-without-carrier",
+      "slug": "suivre-colis-sans-connaitre-transporteur",
+      "title": "Suivre un colis sans connaître le transporteur"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "passeport-livraisons-timbres",
+      "title": "Ton passeport de livraisons\u00a0: timbres, statistiques et amis"
+    },
+    {
+      "id": "developers",
+      "slug": "suivi-colis-open-source",
+      "title": "Suivi de colis open source\u00a0: le code et le moteur de Peek"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "date-limite-envoi-colis-noel",
       "title": "Colis de Noël\u00a0: date limite d'envoi par transporteur"
@@ -1096,6 +1141,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "account-or-guest",
       "slug": "tracking-pacchi-senza-account",
       "title": "Peek senza account: cosa ottieni e quando accedere"
+    },
+    {
+      "id": "track-without-carrier",
+      "slug": "tracciare-pacco-senza-sapere-corriere",
+      "title": "Tracciare un pacco senza sapere il corriere"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "passaporto-consegne-francobolli",
+      "title": "Passaporto delle consegne: francobolli, statistiche e amici"
+    },
+    {
+      "id": "developers",
+      "slug": "tracciamento-pacchi-open-source",
+      "title": "Tracciamento pacchi open source: codice e motore di Peek"
     },
     {
       "id": "christmas-posting-dates",
@@ -1385,6 +1445,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Peek sin cuenta: qué tienes y cuándo iniciar sesión"
     },
     {
+      "id": "track-without-carrier",
+      "slug": "seguir-paquete-sin-saber-transportista",
+      "title": "Seguir un paquete sin saber el transportista"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "pasaporte-de-entregas-sellos",
+      "title": "Pasaporte de entregas de Peek: sellos, estadísticas y amigos"
+    },
+    {
+      "id": "developers",
+      "slug": "seguimiento-paquetes-codigo-abierto",
+      "title": "Seguimiento de paquetes de código abierto: Peek y su motor"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "fecha-limite-envio-paquetes-navidad",
       "title": "Fecha límite de envío en Navidad: Correos, GLS, SEUR y MRW"
@@ -1672,6 +1747,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "O Peek sem conta: o que tens e quando iniciar sessão"
     },
     {
+      "id": "track-without-carrier",
+      "slug": "seguir-encomenda-sem-saber-transportadora",
+      "title": "Seguir uma encomenda sem saber a transportadora"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "passaporte-de-entregas-selos",
+      "title": "Passaporte de entregas do Peek: selos, estatísticas e amigos"
+    },
+    {
+      "id": "developers",
+      "slug": "seguimento-encomendas-open-source",
+      "title": "Seguimento de encomendas open source: código e motor do Peek"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "prazos-envio-encomendas-natal",
       "title": "Prazos de envio no Natal: datas limite dos CTT, DPD e GLS"
@@ -1957,6 +2047,21 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "account-or-guest",
       "slug": "sledzenie-przesylek-bez-konta",
       "title": "Peek bez konta: co dostajesz i kiedy się zalogować"
+    },
+    {
+      "id": "track-without-carrier",
+      "slug": "sledzenie-przesylki-bez-znajomosci-przewoznika",
+      "title": "Śledź przesyłkę, nawet gdy nie znasz przewoźnika"
+    },
+    {
+      "id": "delivery-passport",
+      "slug": "paszport-dostaw-znaczki",
+      "title": "Paszport dostaw w Peeku: znaczki, statystyki i znajomi"
+    },
+    {
+      "id": "developers",
+      "slug": "sledzenie-przesylek-open-source",
+      "title": "Śledzenie przesyłek open source: kod i silnik Peeka"
     },
     {
       "id": "christmas-posting-dates",

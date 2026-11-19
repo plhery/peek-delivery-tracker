@@ -40,6 +40,7 @@ export const CARRIER_FAMILIES: Record<string, string> = {
   "gls-de": "gls",
   "gls-es": "gls",
   "gls-fr": "gls",
+  "gls-hu": "gls",
   "gls-it": "gls",
   "gls-pl": "gls",
   "gls-us": "gls",
@@ -329,6 +330,17 @@ export const CARRIER_PALETTES: Record<string, Partial<CarrierPalette>> = {
     "accent": "#ffcf00"
   },
   "gls-fr": {
+    "surface-light": "#dfebfa",
+    "surface-dark": "#152538",
+    "ink-light": "#355e8a",
+    "ink-dark": "#b7d1ee",
+    "brand-light": "#1634a7",
+    "brand-dark": "#abc7ff",
+    "truck": "#1634a7",
+    "edge": "#1634a7",
+    "accent": "#ffcf00"
+  },
+  "gls-hu": {
     "surface-light": "#dfebfa",
     "surface-dark": "#152538",
     "ink-light": "#355e8a",
@@ -1192,6 +1204,7 @@ export const CARRIER_DECALS: Record<string, CarrierDecal> = {
   "gls-de": "gls",
   "gls-es": "gls",
   "gls-fr": "gls",
+  "gls-hu": "gls",
   "gls-it": "gls",
   "gls-pl": "gls",
   "gls-us": "gls",

@@ -2304,6 +2304,7 @@ describe('persistent tracking routing', () => {
     expect(universalCarrierHints(['https://private/token'])).toEqual({ reported_carriers: [] });
     expect(universalCarrierHints(['Chronopost France'])).toMatchObject({ discovered_carrier: 'chronopost' });
     expect(universalCarrierHints(['GLS Czech Republic']).discovered_carrier).toBeUndefined();
+    expect(universalCarrierHints(['GLS Hungary'])).toMatchObject({ discovered_carrier: 'gls-hu' });
   });
   it('reports only carrier names the catalog does not know, once per parcel', async () => {
     const { router, universal } = setup();

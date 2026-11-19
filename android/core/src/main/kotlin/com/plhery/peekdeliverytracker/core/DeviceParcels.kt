@@ -716,6 +716,9 @@ class DeviceParcels(
                 entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted)
             }
         }
+        // A carrier changed by a new lookup keeps the notifications as they were set on the parcel's page, before a
+        // round can ask for them.
+        if (replacing != null && entry.muted == null) entry = entry.copy(muted = entries.firstOrNull { it.parcel.id == replacing }?.muted)
         entries = entries + entry
         keys = keys.setting(entry.linkId, response.key)
         pendingForgets = pendingForgets.setting(entry.linkId, null)
@@ -768,6 +771,8 @@ class DeviceParcels(
                 contacted = true
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
                 if (index < 0) continue
+                // A check asked for by hand is waited for a minute of its own.
+                if (forced != null && key != null) queued = queued.setting(entry.linkId, null)
                 if (response != null) noteCheck(entry.linkId, response) else queued = queued.setting(entry.linkId, null)
                 if (response != null) {
                     change(index) {
@@ -1002,7 +1007,7 @@ class DeviceParcels(
             attempt { forget(id) }
             val index = entries.indexOfFirst { it.parcel.id == added.id }
             if (index >= 0) {
-                change(index) { it.copy(replaced = entry.replaced ?: id, muted = entry.muted) }
+                change(index) { it.copy(replaced = entry.replaced ?: id) }
                 save()
                 return shown(entries[index])
             }
@@ -1163,8 +1168,11 @@ class DeviceParcels(
 
     // Notifications
 
-    /** Whether a parcel is still on its way, with something left to tell: a held return still is. */
-    val hasParcelsOnTheirWay: Boolean get() = entries.any { !it.parcel.isOver }
+    /**
+     * Whether a parcel is still on its way, with something left to tell: a held return still is, a copy the service
+     * forgot never is.
+     */
+    val hasParcelsOnTheirWay: Boolean get() = entries.any { !it.isFrozen && !it.parcel.isOver }
 
     /** What tells the service that this phone's address ([PushAddress], its [token]) hears nothing more of a parcel. */
     private fun removal(token: String) = PushAddress.of(token).let { DeleteParcelAppAlertRequest(token = it.token, transport = it.transport) }
@@ -1245,7 +1253,8 @@ class DeviceParcels(
                     attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }
-            if (round == alertGeneration) holdAlerts(pause, token, locale, more = waiting.size > due.size)
+            // Parcels past this round, and those added or turned back on while it ran, wait for the next one.
+            if (round == alertGeneration) holdAlerts(pause, token, locale, more = !alertsSettled(token, locale))
         } finally {
             alertRounds.remove(round)
         }
@@ -1272,6 +1281,9 @@ class DeviceParcels(
         val token = entry.alertToken
         val client = client
         if (token != null && client != null) client.removeAlert(entry.linkId, removal(token))
+        // A round that signed the link up meanwhile left its own token: that one hears nothing either.
+        val signedUp = entries.firstOrNull { it.parcel.id == id }?.alertToken
+        if (signedUp != null && signedUp != token && client != null) attempt { client.removeAlert(entry.linkId, removal(signedUp)) }
         return update(id) { it.copy(muted = true, alertToken = null) }
     }
 

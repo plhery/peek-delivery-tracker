@@ -11,6 +11,7 @@ import com.plhery.peekdeliverytracker.core.api.ClaimParcelsRequest
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelsResponse
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageResponse
+import com.plhery.peekdeliverytracker.core.api.DeleteParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.NativePushTransport
 import com.plhery.peekdeliverytracker.core.api.PackageListResponse
@@ -209,6 +210,7 @@ class DeviceParcelTests {
         forget: suspend (String, String) -> Unit = this.forget,
         setAlert: suspend (String, String?, ParcelAppAlertRequest) -> DeviceAlertAnswer = this.setAlert,
         read: suspend (String, String?) -> PublicParcelResponse? = this.read,
+        removeAlert: suspend (String, DeleteParcelAppAlertRequest) -> Unit = this.removeAlert,
     ) = DeviceParcelClient(lookup, read, forget, update, detect, feedback, setAlert, removeAlert)
 
     private fun device(
@@ -315,6 +317,28 @@ class DeviceParcelTests {
         assertEquals(listOf("lookup TESTPARCEL123789 dpd", "forget 22222222222A"), calls.all)
         assertEquals(listOf(previousId), storage.parcels.map { it.replaced })
         assertNull(storage.keys["22222222222A"])
+    }
+
+    /** A parcel muted on its page and looked up again with another carrier stays muted, also for a round meanwhile. */
+    @Test
+    fun aMutedParcelLookedUpWithAnotherCarrierStaysMuted() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Moon lamp", previousId).copy(muted = true))
+        val calls = Calls()
+        val base = client(calls, lookup = PublicLookupResponse(link = link("22222222222B"), key = key, parcel = pkg(nextId, carrier = CarrierId.Dpd)))
+        val forgetting = CompletableDeferred<Unit>()
+        val device = device(base.replacing(forget = { linkId, k -> forgetting.await(); base.forget(linkId, k) }), storage, this)
+
+        val change = async { device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null) }
+        runCurrent()
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        forgetting.complete(Unit)
+        assertTrue(change.await().notificationsMuted)
+        assertFalse(calls.all.toString(), calls.all.any { it.startsWith("alert") })
+        assertEquals(listOf(true), storage.parcels.map { it.muted })
     }
 
     @Test
@@ -808,6 +832,9 @@ class DeviceParcelTests {
         assertTrue(device.isWaiting)
         now = now.plusSeconds(DeviceParcels.checkReadFor.toLong())
         assertFalse(device.isWaiting)
+        // Asked again by hand once that minute is over, the new check is waited for a minute of its own.
+        device.refresh(only = mine, check = true)
+        assertTrue(device.isWaiting)
     }
 
     @Test
@@ -1887,6 +1914,35 @@ class DeviceParcelTests {
         assertFalse(empty.signInOverDeviceList)
     }
 
+    /** The list's own read freezes a copy as a refresh does: the list stays equal, and the store says so all the same. */
+    @Test
+    fun aCopyTheServiceForgetsInTheListsOwnReadIsMarkedToo() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        var now = Instant.now()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Shoes", id, at = date(now)))
+        val calls = Calls()
+        val device = device(client(calls), storage, backgroundScope, now = { now })
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.load()
+        val before = store.parcels
+        assertEquals(listOf(id), before.map { it.id })
+        assertFalse(calls.all.toString(), "read 22222222222A k" in calls.all)
+
+        now = now.plusSeconds(3600)
+        store.load()
+        assertTrue(calls.all.toString(), "read 22222222222A k" in calls.all)
+        assertEquals(before, store.parcels)
+        assertEquals(setOf(id), store.frozenFlow.value)
+        // Nothing to be told about is on its way.
+        assertFalse(device.hasParcelsOnTheirWay)
+    }
+
     /** A copy freezes without changing its parcel: the list stays equal, and the store says which copies froze. */
     @Test
     fun theScreenIsToldWhenTheServiceForgetsAGuestsCopyThoughItsParcelStaysTheSame() = runTest {
@@ -2349,6 +2405,60 @@ class DeviceParcelTests {
         assertEquals("alert 22222222222A k important token2 en production fcm", calls.all.last())
         assertEquals(listOf("token2", "token2"), storage.parcels.map { it.alertToken })
         assertEquals(listOf(null, null), storage.parcels.map { it.muted })
+    }
+
+    /**
+     * A round under way while a parcel is turned back on leaves it to the round after; one muted while a round signs
+     * it up with a new token has that token taken off too.
+     */
+    @Test
+    fun aParcelTurnedOnOrOffDuringARoundEndsAsItWasLeft() = runTest {
+        val mine = UUID.randomUUID()
+        val other = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", mine).copy(muted = true), parcel("22222222222B", "", other))
+        val calls = Calls()
+        val base = client(calls)
+        val asking = CompletableDeferred<Unit>()
+        val device = device(
+            base.replacing(setAlert = { linkId, k, request -> if (linkId == "22222222222B") asking.await(); base.setAlert(linkId, k, request) }),
+            storage, this,
+        )
+        val round = async { device.registerAlerts(token = "token1", locale = NativePushLocale.En) }
+        runCurrent()
+        device.setMuted(mine, false)
+        device.alertsAgain()
+        asking.complete(Unit)
+        round.await()
+        assertFalse(calls.all.toString(), calls.all.any { it.startsWith("alert 22222222222A") })
+        assertFalse(device.alertsSettled("token1", NativePushLocale.En))
+        device.retryAlerts()
+        assertEquals("alert 22222222222A k important token1 en production fcm", calls.all.last())
+        assertTrue(device.alertsSettled("token1", NativePushLocale.En))
+
+        // Muted while its first token is taken off, and a round with a new token signs it up meanwhile.
+        val removing = CompletableDeferred<Unit>()
+        var held = true
+        val muting = device(
+            base.replacing(
+                removeAlert = { linkId, request ->
+                    if (held && linkId == "22222222222A" && request.token == "token1") {
+                        held = false
+                        removing.await()
+                    }
+                    base.removeAlert(linkId, request)
+                },
+            ),
+            storage, this,
+        )
+        val mute = async { muting.setMuted(mine, true) }
+        runCurrent()
+        muting.registerAlerts(token = "token2", locale = NativePushLocale.En)
+        removing.complete(Unit)
+        assertTrue(mute.await().notificationsMuted)
+        assertTrue(calls.all.toString(), "unalert 22222222222A token2 fcm" in calls.all)
+        assertNull(storage.parcels.first { it.parcel.id == mine }.alertToken)
     }
 
     /**

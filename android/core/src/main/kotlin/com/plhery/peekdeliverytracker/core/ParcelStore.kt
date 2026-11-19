@@ -335,11 +335,16 @@ class ParcelStore(
     var parcels: List<Parcel>
         get() = parcelsState.value
         private set(value) {
-            frozenState.value = if (isGuest) value.filter { device.isFrozen(it.id) }.mapTo(HashSet()) { it.id } else emptySet()
+            takeFrozen(value)
             parcelsState.value = value
             takeUnlistedDeviceParcels()
             if (!holdingDeliverySurfaces) publishDeliverySurfaces()
         }
+
+    /** [frozenFlow] for [list]: also when the list stays equal, as a copy freezes without changing its parcel. */
+    private fun takeFrozen(list: List<Parcel>) {
+        frozenState.value = if (isGuest) list.filter { device.isFrozen(it.id) }.mapTo(HashSet()) { it.id } else emptySet()
+    }
 
     private fun takeUnlistedDeviceParcels() {
         unlistedDeviceParcelsState.value = if (isGuest) device.unlistedCount else 0
@@ -1969,7 +1974,9 @@ class ParcelStore(
             if (next != parcels) {
                 parcels = next
             } else {
-                // A key let go, or read again into a parcel already listed through another link, leaves the list as it was.
+                // A key let go, a copy the service forgot, or one read again into a parcel already listed through
+                // another link, leaves the list as it was.
+                takeFrozen(next)
                 takeUnlistedDeviceParcels()
                 publishDeliverySurfaces()
             }

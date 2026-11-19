@@ -417,7 +417,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -742,7 +743,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1133,7 +1135,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1150,7 +1153,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1246,7 +1250,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1263,7 +1268,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1372,7 +1378,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -3354,7 +3361,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -5099,7 +5107,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -6112,7 +6121,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -6490,7 +6500,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -7339,7 +7350,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -7613,7 +7625,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -7633,6 +7646,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -7877,7 +7891,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8382,7 +8397,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8459,7 +8475,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8917,7 +8934,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -9626,7 +9644,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -9666,6 +9685,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -10245,6 +10265,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -10268,7 +10289,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -10316,7 +10338,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -11157,7 +11180,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -11252,7 +11276,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -11621,6 +11646,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -12312,6 +12338,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -12399,6 +12426,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -12452,6 +12480,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -12473,6 +12502,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -12896,6 +12926,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -13125,6 +13156,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -13227,6 +13259,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -13248,6 +13281,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -13353,6 +13387,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -13459,6 +13494,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -13936,6 +13972,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14027,6 +14064,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -14220,6 +14258,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14496,6 +14535,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14756,6 +14796,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14868,6 +14909,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14889,6 +14931,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14910,6 +14953,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -14955,6 +14999,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15004,6 +15049,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15025,6 +15071,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15046,6 +15093,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15158,6 +15206,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15331,6 +15380,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15392,6 +15442,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -15561,6 +15612,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -16014,6 +16066,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16146,6 +16199,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16167,6 +16221,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16466,6 +16521,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16489,6 +16545,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -16686,6 +16743,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16707,6 +16765,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16762,6 +16821,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16801,6 +16861,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16913,6 +16974,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -16942,6 +17004,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -17165,6 +17228,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -17225,6 +17289,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -17248,6 +17313,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -17541,6 +17607,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -17694,6 +17761,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -17785,6 +17853,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -17870,6 +17939,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -18061,6 +18131,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18088,6 +18159,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18109,6 +18181,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18188,6 +18261,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18228,6 +18302,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18386,6 +18461,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18407,6 +18483,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18485,6 +18562,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18541,6 +18619,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18693,6 +18772,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18714,6 +18794,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18843,6 +18924,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18887,6 +18969,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -18950,6 +19033,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -19091,6 +19175,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -19146,6 +19231,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -19203,6 +19289,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -19449,6 +19536,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -19520,6 +19608,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -19953,6 +20042,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20061,6 +20151,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20082,6 +20173,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20103,6 +20195,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20124,6 +20217,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20251,6 +20345,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20642,6 +20737,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -20706,6 +20802,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -21494,6 +21591,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -21529,6 +21627,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -21758,6 +21857,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -21798,6 +21898,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -21861,6 +21962,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -21981,6 +22083,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22181,6 +22284,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -22241,6 +22345,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22407,6 +22512,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22428,6 +22534,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22451,6 +22558,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -22478,6 +22586,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22523,6 +22632,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22544,6 +22654,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22565,6 +22676,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22747,6 +22859,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22768,6 +22881,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22789,6 +22903,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22838,6 +22953,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -22923,6 +23039,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "preferred": [
@@ -22947,6 +23064,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -23104,6 +23222,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -23249,6 +23368,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -23450,6 +23570,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -23746,6 +23867,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -23850,6 +23972,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -23889,6 +24012,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24089,6 +24213,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24221,6 +24346,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24244,6 +24370,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -24271,6 +24398,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24292,6 +24420,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24313,6 +24442,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24334,6 +24464,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24355,6 +24486,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24408,6 +24540,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24429,6 +24562,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -24585,6 +24719,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -24908,6 +25043,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -25159,6 +25295,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "gls-es"
     ],
     "asked": [
@@ -25206,6 +25343,7 @@
       "box-now",
       "cargus",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -26530,6 +26668,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -26554,7 +26693,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -26607,7 +26747,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -27154,6 +27295,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -27414,7 +27556,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -27574,7 +27717,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -28186,7 +28330,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -28489,6 +28634,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -28766,7 +28912,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -28792,7 +28939,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -28809,7 +28957,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -29523,7 +29672,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -29854,7 +30004,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -29901,6 +30052,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -30137,6 +30289,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -30237,7 +30390,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -30292,7 +30446,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -30403,6 +30558,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -30662,7 +30818,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -30925,7 +31082,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -30947,6 +31105,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -30971,7 +31130,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31022,7 +31182,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31041,7 +31202,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31060,7 +31222,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31079,7 +31242,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31196,7 +31360,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31215,7 +31380,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31279,6 +31445,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -31505,7 +31672,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31699,7 +31867,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31721,6 +31890,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -31899,7 +32069,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -31969,6 +32140,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -32289,6 +32461,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -32353,7 +32526,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -32375,6 +32549,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33255,6 +33430,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33377,6 +33553,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33539,7 +33716,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -33700,6 +33878,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33743,6 +33922,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33836,6 +34016,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -34966,7 +35147,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -35115,7 +35297,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -35532,7 +35715,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -35791,6 +35975,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -36217,7 +36402,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -36529,7 +36715,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -36551,6 +36738,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -36633,6 +36821,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -36690,6 +36879,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -36931,7 +37121,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -37152,6 +37343,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -37567,6 +37759,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -37702,6 +37895,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -37849,6 +38043,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -37903,6 +38098,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -37927,7 +38123,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -38017,7 +38214,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -38088,7 +38286,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -38180,7 +38379,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -38910,7 +39110,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -38935,7 +39136,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -38980,7 +39182,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -39654,6 +39857,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -39699,7 +39903,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -39795,7 +40000,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -39960,7 +40166,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -40305,7 +40512,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -40468,6 +40676,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -40492,7 +40701,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -40514,6 +40724,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -40894,7 +41105,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -41283,6 +41495,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -42069,7 +42282,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -42972,6 +43186,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -44164,7 +44379,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -44459,6 +44675,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -44576,6 +44793,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -44629,7 +44847,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -44766,7 +44985,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -44823,7 +45043,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -45008,6 +45229,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -45080,7 +45302,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -45126,7 +45349,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -46053,7 +46277,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -46130,6 +46355,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -46621,7 +46847,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -46671,6 +46898,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -47212,7 +47440,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -47738,7 +47967,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -47971,6 +48201,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -47995,7 +48226,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -48289,7 +48521,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "preferred": [
       "dhl-express"
@@ -48586,6 +48819,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -48695,7 +48929,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -48997,7 +49232,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49016,7 +49252,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49129,7 +49366,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49148,7 +49386,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49199,7 +49438,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49246,7 +49486,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49295,6 +49536,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -49319,7 +49561,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49471,7 +49714,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49519,7 +49763,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49544,7 +49789,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49563,7 +49809,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49582,7 +49829,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49756,7 +50004,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49775,7 +50024,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -49975,7 +50225,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -50165,6 +50416,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -50396,7 +50648,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -50534,6 +50787,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -50588,7 +50842,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -50769,7 +51024,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -50836,6 +51092,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -50863,6 +51120,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -50962,6 +51220,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51022,6 +51281,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51049,6 +51309,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51076,6 +51337,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51103,6 +51365,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51127,7 +51390,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -51572,7 +51836,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -52107,7 +52372,8 @@
       "estafeta",
       "box-now",
       "cdl",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "preferred": [
       "dhl-express"
@@ -52454,7 +52720,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -52754,7 +53021,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -52909,7 +53177,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -53205,6 +53474,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53509,6 +53779,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53574,6 +53845,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53679,6 +53951,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -54113,6 +54386,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -56197,6 +56471,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -56699,6 +56974,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -57450,6 +57726,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -57554,6 +57831,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -58002,7 +58280,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -58208,6 +58487,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -58250,7 +58530,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -58269,7 +58550,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -58537,7 +58819,8 @@
       "estafeta",
       "box-now",
       "cdl",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -58581,7 +58864,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -58981,6 +59265,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -59005,7 +59290,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -59027,6 +59313,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -59087,6 +59374,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -59682,6 +59970,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -59898,7 +60187,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60105,6 +60395,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -60148,7 +60439,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60177,7 +60469,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60196,7 +60489,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60218,6 +60512,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -60391,7 +60686,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60443,6 +60739,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -60513,7 +60810,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60532,7 +60830,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60554,6 +60853,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -60578,7 +60878,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60827,7 +61128,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60873,7 +61175,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -60892,7 +61195,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -61397,7 +61701,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -61776,7 +62081,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -61795,7 +62101,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -61960,7 +62267,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -62474,6 +62782,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62501,6 +62810,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62528,6 +62838,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62555,6 +62866,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62582,6 +62894,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62718,7 +63031,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -62774,7 +63088,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -62952,6 +63267,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62976,7 +63292,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -63041,6 +63358,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63238,7 +63556,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -63260,6 +63579,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63491,7 +63811,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -63513,6 +63834,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63651,6 +63973,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63811,7 +64134,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -63936,7 +64260,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -64342,6 +64667,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -64649,7 +64975,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -64828,6 +65155,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -64972,6 +65300,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65112,6 +65441,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65596,6 +65926,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66145,7 +66476,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -66193,7 +66525,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -66619,6 +66952,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66643,7 +66977,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -66700,6 +67035,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66902,7 +67238,8 @@
       "relais-colis",
       "estafeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -66951,7 +67288,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67156,7 +67494,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67203,6 +67542,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -67367,7 +67707,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67386,7 +67727,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67405,7 +67747,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67424,7 +67767,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67443,7 +67787,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67462,7 +67807,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -67950,6 +68296,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68214,7 +68561,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -68301,6 +68649,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68369,7 +68718,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -68413,7 +68763,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -68496,6 +68847,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68547,7 +68899,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -68888,7 +69241,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -68907,7 +69261,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -69017,7 +69372,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -69055,6 +69411,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -69683,7 +70040,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -70302,7 +70660,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -70449,7 +70808,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -70701,7 +71061,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -70720,7 +71081,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -70838,6 +71200,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -70934,6 +71297,7 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "fragilepak"
     ],
     "asked": [
@@ -70980,6 +71344,7 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "fragilepak"
     ],
     "asked": [
@@ -71347,7 +71712,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -71540,6 +71906,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -71564,7 +71931,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -71620,7 +71988,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -71714,7 +72083,8 @@
       "estafeta",
       "box-now",
       "cdl",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -71733,7 +72103,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -71758,7 +72129,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -71777,7 +72149,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -71796,7 +72169,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -72084,6 +72458,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -72379,6 +72754,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -72433,7 +72809,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -72712,7 +73089,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -72731,7 +73109,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -72827,7 +73206,8 @@
       "estafeta",
       "box-now",
       "cdl",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -73234,7 +73614,8 @@
       "estafeta",
       "box-now",
       "cdl",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -74287,6 +74668,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74314,6 +74696,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74407,6 +74790,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74434,6 +74818,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74511,6 +74896,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74821,7 +75207,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -74923,6 +75310,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74981,6 +75369,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -75095,7 +75484,8 @@
       "estafeta",
       "packeta",
       "box-now",
-      "dhl-ecommerce-es"
+      "dhl-ecommerce-es",
+      "dhl-freight"
     ],
     "asked": [
       "packeta",
@@ -75276,6 +75666,26 @@
     "confidence": "high",
     "candidates": [
       "swiss-post"
+    ]
+  },
+  {
+    "input": "9900000017",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
     ]
   },
   {
@@ -75485,6 +75895,7 @@
       "acs-courier",
       "box-now",
       "dhl-ecommerce-es",
+      "dhl-freight",
       "geniki-taxydromiki"
     ],
     "preferred": [

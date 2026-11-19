@@ -11793,7 +11793,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "dhl-freight",
-      "recognitionRank": 437
+      "recognitionRank": 437,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://activetracing.dhl.com/DatPublic/datSelection.do?autoSearch=true&search=consignmentId&l=DE&a={trackingNumber}",
     "linkRules": [
@@ -11810,6 +11811,10 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [
+      {
+        "pattern": "^\\d{10}$",
+        "confidence": "low"
+      },
       {
         "pattern": "^JND\\d{17}$",
         "confidence": "low"

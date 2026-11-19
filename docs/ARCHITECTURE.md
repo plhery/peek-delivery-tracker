@@ -291,8 +291,9 @@ Key server modules:
   - The iPhone app follows a link without an account and holds its alert with its APNs
     device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`),
     the Android app with its FCM token, or its installation token with a UnifiedPush
-    endpoint and keys or for its inbox. Browsers and phones share the same ten, and a phone
-    the parcel's account already notifies is passed over, as the owner's own browser is.
+    endpoint and keys or for its inbox. Browsers and phones share the same ten. A browser or
+    phone that an account's notifications reach is passed over when that account has the
+    parcel too, the owner's or one a viewer kept, so it hears each update once.
   - On an iPhone outside the Home Screen, "Notify me" offers the app first once the App
     Store's version follows links (`APP_FOLLOWS_LINKS_FROM` in `appStoreRelease.ts`, checked
     hourly against the App Store). Its "Open" leads through a legacy host, since Safari opens

@@ -158,6 +158,48 @@ begin
   if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from false then
     raise exception 'Another account''s iPhone marks the alert';
   end if;
+  -- That account keeps its own parcel of the number: its notifications tell the iPhone.
+  insert into public.packages (user_id, tracking_number, carrier, current_stage)
+  values (other, 'APPALERT0101', 'unknown', 'in_transit');
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from true then
+    raise exception 'An alert on the iPhone of an account with its own parcel of the number is not marked';
+  end if;
+end;
+$$;
+
+-- A viewer who kept a shared lookup in their account, with web push on in the browser that follows
+-- the link, hears each update once: from the account, not the link too.
+do $$
+declare
+  viewer constant uuid := 'd3000000-0000-4000-8000-000000000002';
+  browser constant text := 'https://fcm.googleapis.com/fcm/send/app-alert-kept-copy';
+  made jsonb;
+  target_link text;
+  new_event uuid;
+begin
+  made := public.create_one_off_parcel('APPALERT0202', 'unknown', null, null, repeat('c', 64));
+  target_link := made#>>'{link,id}';
+  if public.add_parcel_link_alert(target_link, null, browser, 'k', 'a', 'en', 'all') <> 'added' then
+    raise exception 'A viewer''s browser could not turn an alert on';
+  end if;
+  update public.parcel_link_alerts set created_at = now() - interval '1 hour' where link_id = target_link;
+  insert into public.push_subscriptions (user_id, endpoint, p256dh, auth) values (viewer, browser, 'k', 'a');
+  insert into public.tracking_events (package_id, provider_event_id, stage, description, occurred_at)
+  values ((made#>>'{package,id}')::uuid, 'test:kept-copy', 'in_transit', 'Synthetic scan', now())
+  returning id into new_event;
+  -- The account follows no parcel of the number yet: the link tells the browser.
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from false then
+    raise exception 'A browser was left to an account that does not follow the parcel';
+  end if;
+  insert into public.packages (user_id, tracking_number, carrier, current_stage)
+  values (viewer, 'APPALERT0202', 'unknown', 'in_transit');
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from true then
+    raise exception 'A browser that gets the notifications of an account keeping the parcel is told twice';
+  end if;
+  update public.push_subscriptions set disabled_at = now() where endpoint = browser;
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from false then
+    raise exception 'A browser whose account notifications are off lost the link''s alert';
+  end if;
 end;
 $$;
 rollback;

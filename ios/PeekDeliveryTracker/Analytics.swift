@@ -29,14 +29,88 @@ struct AnalyticsCatalog: Decodable {
     }
 }
 
+/// The counting id (docs/ANALYTICS.md): a random UUID this device keeps to tell installs that
+/// come back from one-time ones. It is sent alone to /api/public/seen, at most once a UTC day and again once the reader
+/// signs in, and a new one replaces it after 13 months.
+struct CountingID: Codable, Equatable {
+    static let storageKey = "sdt.counting.v1"
+    static let lifetimeMonths = 13
+
+    let id: String
+    /// The UTC day the id was made.
+    let made: String
+    /// The UTC day it was last counted, and whether the reader was signed in then.
+    var sent: String?
+    var signedIn: Bool?
+
+    /// The id to send now, or nil when today was already counted signed in, or signed out and the reader still is.
+    /// One 13 months old gives way to a new id.
+    static func due(_ stored: CountingID?, now: Date, signedIn: Bool, newID: () -> String = { UUID().uuidString }) -> CountingID? {
+        let today = day(now)
+        if let stored, stored.sent == today, stored.signedIn == true || !signedIn { return nil }
+        if let stored, !stored.expired(at: now) { return stored }
+        return CountingID(id: newID(), made: today)
+    }
+
+    /// What to keep once the service answered 204.
+    func counted(now: Date, signedIn: Bool) -> CountingID {
+        var counted = self
+        counted.sent = Self.day(now)
+        counted.signedIn = signedIn
+        return counted
+    }
+
+    /// The id kept in `defaults`, unless it is unreadable.
+    static func stored(in defaults: UserDefaults) -> CountingID? {
+        guard let data = defaults.data(forKey: storageKey),
+              let value = try? JSONDecoder().decode(CountingID.self, from: data),
+              UUID(uuidString: value.id) != nil, date(value.made) != nil else { return nil }
+        return value
+    }
+
+    func save(in defaults: UserDefaults) {
+        if let data = try? JSONEncoder().encode(self) { defaults.set(data, forKey: Self.storageKey) }
+    }
+
+    /// The UTC day of `date`, as yyyy-MM-dd.
+    static func day(_ date: Date) -> String {
+        let parts = utc.dateComponents([.year, .month, .day], from: date)
+        return String(format: "%04d-%02d-%02d", parts.year ?? 0, parts.month ?? 0, parts.day ?? 0)
+    }
+
+    private static let utc: Calendar = {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .gmt
+        return calendar
+    }()
+
+    private static func date(_ day: String) -> Date? {
+        let parts = day.split(separator: "-").compactMap { Int($0) }
+        guard parts.count == 3, let date = utc.date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2])),
+              Self.day(date) == day else { return nil }
+        return date
+    }
+
+    private func expired(at now: Date) -> Bool {
+        guard let made = Self.date(made),
+              let end = Self.utc.date(byAdding: .month, value: Self.lifetimeMonths, to: made) else { return true }
+        return now >= end
+    }
+}
+
 @MainActor
 final class DeliveryAnalytics {
     static let shared = DeliveryAnalytics()
     static let preferenceKey = "sdt.analytics.enabled"
-    private var enabled: Bool { UserDefaults.standard.object(forKey: Self.preferenceKey) as? Bool ?? true }
+    private let defaults: UserDefaults
+    private var enabled: Bool { defaults.object(forKey: Self.preferenceKey) as? Bool ?? true }
+
+    init(defaults: UserDefaults = .standard) { self.defaults = defaults }
+
+    /// Turning usage statistics off also deletes the counting id.
     func setEnabled(_ value: Bool) {
-        UserDefaults.standard.set(value, forKey: Self.preferenceKey)
-        if !value { queue.removeAll(); cache = nil }
+        defaults.set(value, forKey: Self.preferenceKey)
+        if !value { queue.removeAll(); cache = nil; defaults.removeObject(forKey: CountingID.storageKey) }
         else { disabled = false; lastView = ""; Task { await start(); view(screen) } }
     }
     struct Configuration: Decodable {
@@ -66,6 +140,10 @@ final class DeliveryAnalytics {
         var device: String {
             switch self { case .iphone: "mobile"; case .ipad: "tablet"; case .mac: "desktop" }
         }
+        /// The platform the counting id is sent with.
+        var sighting: InstallSightingPlatform {
+            switch self { case .iphone: .iphone; case .ipad: .ipad; case .mac: .mac }
+        }
     }
     struct Event {
         let screen: String
@@ -84,6 +162,11 @@ final class DeliveryAnalytics {
     private(set) var screen = "welcome"
     private var mode: Mode = .anonymous
     private var lastView = ""
+    /// The service the configuration came from, which counts the install too.
+    private var origin: URL?
+    private var counting = false
+    /// The parcels this device follows without an account, read when the install is counted.
+    var followedHere: @MainActor () -> Int = { 0 }
 
     func start(configuration app: AppConfiguration = .current) async {
         guard enabled, !starting, !started else { return }
@@ -104,6 +187,7 @@ final class DeliveryAnalytics {
                   let value = try JSONDecoder().decode(Configuration?.self, from: data),
                   value.valid(for: app.apiBaseURL) else { disabled = true; queue.removeAll(); return }
             configuration = value
+            origin = app.apiBaseURL
             disabled = false
             started = true
             action("app-open")
@@ -155,6 +239,8 @@ final class DeliveryAnalytics {
             defer { sending = false }
             while enabled, !queue.isEmpty, let configuration {
                 let event = queue.removeFirst()
+                // A view knows whether the reader is signed in; the app-open queued before it may not.
+                if event.name == nil, event.mode != .demo { count(signedIn: event.mode == .account) }
                 do {
                     var request = URLRequest(url: configuration.endpoint, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5)
                     request.httpMethod = "POST"
@@ -177,6 +263,38 @@ final class DeliveryAnalytics {
                     }
                 } catch { /* Drop failures; never block delivery actions or persist analytics. */ }
             }
+        }
+    }
+}
+
+extension DeliveryAnalytics {
+    /// The request that counts this install: the sighting alone, without cookies or credentials.
+    static func sightingRequest(_ sighting: InstallSighting, origin: URL) throws -> URLRequest {
+        var request = URLRequest(url: origin.appending(path: "api/public/seen"), cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 5)
+        request.httpMethod = "POST"
+        request.httpShouldHandleCookies = false
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONEncoder().encode(sighting)
+        return request
+    }
+
+    /// Counts this install as seen today, unless it already was with the same sign-in state. A failed request leaves
+    /// the day uncounted, for the next launch.
+    private func count(signedIn: Bool, now: Date = Date()) {
+        guard enabled, !counting, let origin,
+              let due = CountingID.due(CountingID.stored(in: defaults), now: now, signedIn: signedIn) else { return }
+        let sighting = InstallSighting(id: due.id, platform: Platform.current.sighting, signedIn: signedIn, parcels: followedHere())
+        guard let request = try? Self.sightingRequest(sighting, origin: origin) else { return }
+        counting = true
+        // Keep the id even if the request fails, so the next attempt counts the same install.
+        due.save(in: defaults)
+        Task {
+            defer { counting = false }
+            guard let (_, response) = try? await transport.data(for: request),
+                  (response as? HTTPURLResponse)?.statusCode == 204,
+                  // Usage statistics were not turned off meanwhile.
+                  CountingID.stored(in: defaults)?.id == due.id else { return }
+            due.counted(now: now, signedIn: signedIn).save(in: defaults)
         }
     }
 }
@@ -209,7 +327,10 @@ struct AnalyticsLifecycleObserver: View {
     }
     var body: some View {
         Color.clear.frame(width: 0, height: 0)
-            .task { await DeliveryAnalytics.shared.start() }
+            .task {
+                DeliveryAnalytics.shared.followedHere = { [parcels] in parcels.followedHere }
+                await DeliveryAnalytics.shared.start()
+            }
             .onChange(of: screen + mode.rawValue, initial: true) { _, _ in
                 if beneathLink == nil {
                     DeliveryAnalytics.shared.view(screen, mode: mode)

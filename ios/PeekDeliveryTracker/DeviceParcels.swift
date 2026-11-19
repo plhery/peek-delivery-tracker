@@ -390,6 +390,7 @@ final class DeviceParcels {
     }
 
     var isEmpty: Bool { entries.isEmpty }
+    var count: Int { entries.count }
 
     /// This iPhone's own parcels kept by their key alone, their saved copy lost or unreadable: listed nowhere until
     /// they are read again, and forgotten with the rest.

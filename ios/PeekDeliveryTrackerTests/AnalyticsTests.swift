@@ -45,4 +45,93 @@ final class AnalyticsTests: XCTestCase {
             XCTAssertFalse(configuration.valid(for: URL(string: "https://delivery.example")!))
         }
     }
+
+    // MARK: - The counting id
+
+    private let firstID = "00000000-0000-4000-8000-000000000001"
+    private let secondID = "00000000-0000-4000-8000-000000000002"
+
+    private func date(_ text: String) -> Date {
+        ISO8601DateFormatter().date(from: text)!
+    }
+
+    /// A store of its own, so that the tests write nothing to the app's.
+    private func defaults() -> (UserDefaults, String) {
+        let suite = "AnalyticsTests.\(UUID().uuidString)"
+        return (UserDefaults(suiteName: suite)!, suite)
+    }
+
+    func testCountsOnceADayAndAgainOnSigningIn() throws {
+        let morning = date("2026-11-19T08:00:00Z")
+        let first = try XCTUnwrap(CountingID.due(nil, now: morning, signedIn: false, newID: { self.firstID }))
+        XCTAssertEqual(first, CountingID(id: firstID, made: "2026-11-19"))
+        let counted = first.counted(now: morning, signedIn: false)
+        XCTAssertEqual(counted.sent, "2026-11-19")
+        XCTAssertEqual(counted.signedIn, false)
+
+        let evening = date("2026-11-19T23:59:59Z")
+        XCTAssertNil(CountingID.due(counted, now: evening, signedIn: false))
+        // Signing in counts the same day again, with the same id; signing out after it does not.
+        let signedIn = try XCTUnwrap(CountingID.due(counted, now: evening, signedIn: true))
+        XCTAssertEqual(signedIn.id, firstID)
+        let countedSignedIn = signedIn.counted(now: evening, signedIn: true)
+        XCTAssertNil(CountingID.due(countedSignedIn, now: evening, signedIn: true))
+        XCTAssertNil(CountingID.due(countedSignedIn, now: evening, signedIn: false))
+
+        // The next UTC day counts again, signed in or not.
+        let nextDay = date("2026-11-20T00:00:00Z")
+        XCTAssertEqual(CountingID.due(countedSignedIn, now: nextDay, signedIn: false)?.id, firstID)
+        XCTAssertEqual(CountingID.due(counted, now: nextDay, signedIn: true)?.id, firstID)
+    }
+
+    func testReplacesTheIDAfterThirteenMonths() throws {
+        let stored = CountingID(id: firstID, made: "2025-10-19", sent: "2026-11-17", signedIn: true)
+        XCTAssertEqual(CountingID.due(stored, now: date("2026-11-18T23:59:59Z"), signedIn: false, newID: { self.secondID })?.id, firstID)
+        let replaced = try XCTUnwrap(CountingID.due(stored, now: date("2026-11-19T00:00:00Z"), signedIn: false, newID: { self.secondID }))
+        XCTAssertEqual(replaced, CountingID(id: secondID, made: "2026-11-19"))
+    }
+
+    func testKeepsTheIDAsJSONAndDropsAnUnreadableOne() throws {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        CountingID(id: firstID, made: "2026-11-19").save(in: store)
+        let saved = try XCTUnwrap(store.data(forKey: CountingID.storageKey))
+        let object = try XCTUnwrap(JSONSerialization.jsonObject(with: saved) as? [String: Any])
+        XCTAssertEqual(Set(object.keys), ["id", "made"])
+        CountingID(id: firstID, made: "2026-11-19").counted(now: date("2026-11-19T12:00:00Z"), signedIn: true).save(in: store)
+        XCTAssertEqual(CountingID.stored(in: store), CountingID(id: firstID, made: "2026-11-19", sent: "2026-11-19", signedIn: true))
+        for broken in [#"{"id":"not-a-uuid","made":"2026-11-19"}"#, #"{"id":"\#(firstID)","made":"2026-13-40"}"#, "[]"] {
+            store.set(Data(broken.utf8), forKey: CountingID.storageKey)
+            XCTAssertNil(CountingID.stored(in: store), broken)
+        }
+    }
+
+    @MainActor func testSightingCarriesOnlyTheFourFieldsWithoutCredentials() throws {
+        for (platform, sent) in [(DeliveryAnalytics.Platform.iphone, InstallSightingPlatform.iphone), (.ipad, .ipad), (.mac, .mac)] {
+            XCTAssertEqual(platform.sighting, sent)
+        }
+        let sighting = InstallSighting(id: firstID, platform: .ipad, signedIn: false, parcels: 3)
+        let request = try DeliveryAnalytics.sightingRequest(sighting, origin: URL(string: "https://delivery.example")!)
+        XCTAssertEqual(request.url?.absoluteString, "https://delivery.example/api/public/seen")
+        XCTAssertEqual(request.httpMethod, "POST")
+        XCTAssertEqual(request.timeoutInterval, 5)
+        XCTAssertFalse(request.httpShouldHandleCookies)
+        XCTAssertEqual(request.allHTTPHeaderFields, ["Content-Type": "application/json"])
+        let body = try XCTUnwrap(JSONSerialization.jsonObject(with: XCTUnwrap(request.httpBody)) as? [String: Any])
+        XCTAssertEqual(Set(body.keys), ["id", "platform", "signedIn", "parcels"])
+        XCTAssertEqual(body["id"] as? String, firstID)
+        XCTAssertEqual(body["platform"] as? String, "ipad")
+        XCTAssertEqual(body["signedIn"] as? Bool, false)
+        XCTAssertEqual(body["parcels"] as? Int, 3)
+    }
+
+    @MainActor func testTurningUsageStatisticsOffDeletesTheCountingID() {
+        let (store, suite) = defaults()
+        defer { store.removePersistentDomain(forName: suite) }
+        CountingID(id: firstID, made: "2026-11-19").save(in: store)
+        let analytics = DeliveryAnalytics(defaults: store)
+        analytics.setEnabled(false)
+        XCTAssertNil(store.object(forKey: CountingID.storageKey))
+        XCTAssertEqual(store.object(forKey: DeliveryAnalytics.preferenceKey) as? Bool, false)
+    }
 }

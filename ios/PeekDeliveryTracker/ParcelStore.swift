@@ -1093,6 +1093,10 @@ final class ParcelStore: ObservableObject {
         parcels = demo.list()
     }
 
+    /// The parcels this device follows without an account: the list for a guest; signed in, those the account could
+    /// not keep.
+    var followedHere: Int { isGuest ? parcels.count : device.count }
+
     /// Signed out, this iPhone's parcels whose saved copy is lost and still to be read again: Forget all forgets them too.
     var unlistedDeviceParcels: Int { isGuest ? device.unlisted : 0 }
 

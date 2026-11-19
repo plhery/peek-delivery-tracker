@@ -167,6 +167,9 @@ android {
             for ((key, setting) in iosSettings + firebaseSettings) {
                 releaseOverrides[setting]?.let { buildConfigField("String", key, javaString(it)) }
             }
+            // Its links' hosts from the same settings as the server and the earlier hosts it opens links from.
+            manifestPlaceholders["linkHost"] = releaseSettings["SDT_ASSOCIATED_DOMAIN"].orEmpty().removePrefix("applinks:")
+            manifestPlaceholders["linkHostLegacy"] = releaseSettings["SDT_ASSOCIATED_DOMAIN_LEGACY"].orEmpty().removePrefix("applinks:")
         }
         // What :baselineprofile's macrobenchmarks measure: the release as it is shrunk, signed with the debug key so
         // an emulator takes it, and profileable (src/benchmark).

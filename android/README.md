@@ -40,7 +40,7 @@ its semantics are cleared while it is covered.
 
 `.github/workflows/android.yml` runs for the changes [docs/DEPLOYMENT.md](../docs/DEPLOYMENT.md) lists. On Linux it
 checks that the generated Kotlin contract is current, runs `:core:test` in UTC and in Europe/Zurich, then lints and
-builds the app and `:coredevice`. The app's tests and `:app:verifyRoborazziDebug` run on a Mac with Apple silicon, where the
+builds the app and `:coredevice` and runs the F-Droid build's own tests (`app/src/testFdroid`). The app's tests and `:app:verifyRoborazziDebug` run on a Mac with Apple silicon, where the
 screenshots are recorded: Robolectric draws text edges and blurs a little differently on Linux x86-64. A failed run
 keeps the reports, and each differing screenshot's `_actual` and `_compare` images, as artifacts.
 

@@ -73,6 +73,11 @@ jobs:
       - name: Lint and build the app and the core's device tests
         working-directory: android
         run: ./gradlew :app:lintDebug :app:assembleDebug :coredevice:lintDebug :coredevice:assembleDebugAndroidTest
+      # The F-Droid build's own unit tests (app/src/testFdroid). The tests it shares with Google
+      # Play's build run with the screenshots.
+      - name: Test the F-Droid build's own code
+        working-directory: android
+        run: ./gradlew :app:testFdroidDebugUnitTest --tests 'com.plhery.peekdeliverytracker.platform.UnifiedPushTest'
       - name: Keep the reports
         if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
@@ -82,6 +87,7 @@ jobs:
             android/core/build/reports/tests/
             android/core/build/test-results/
             android/app/build/reports/lint-results-debug.*
+            android/app/build/reports/tests/testFdroidDebugUnitTest/
             android/coredevice/build/reports/lint-results-debug.*
           retention-days: 7
 

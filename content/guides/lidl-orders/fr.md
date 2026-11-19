@@ -4,7 +4,7 @@ description: Qui livre une commande lidl.fr ou lidl.be, où trouver le suivi, co
 slug: suivi-commande-lidl
 picture: Une chaise de jardin à côté d'une caisse d'outils emballés et d'une camionnette de livraison, et Pip debout sur la caisse.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-18
 ---
 
 Une commande passée sur lidl.fr part avec DPD, GLS, Mondial Relay ou JP Home : l'e-mail de confirmation d'expédition nomme le transporteur et donne le lien de suivi, et « Mes commandes » montre où elle en est. En Belgique, lidl.be livre avec bpost, et avec Dynalogic au-delà de 30 kg ou d'un côté de 150 cm. Lidl Suisse n'a pas de boutique en ligne.
@@ -118,10 +118,9 @@ Pour un retour, tu as 30 jours, gratuitement. Demande l'étiquette dans ton comp
 Oui : colle le numéro de suivi de l'e-mail d'expédition dans [Peek](/). Peek reconnaît ces numéros à leur seule forme :
 
 - DPD France : `250` et 12 chiffres, comme `250000000000000`.
-- GLS France : `00` et 6 lettres et chiffres mêlés, comme `00ABC123`.
 - bpost : `JJBE`, une lettre et 18 chiffres, comme `JJBEA000000000000000000`.
 
-Les numéros Mondial Relay de 8, 10 ou 12 chiffres et les numéros bpost de 24 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur ; en France, l'e-mail d'expédition le nomme. Pour Dynalogic, colle le numéro, appuie sur « Changer » et choisis Dynalogic. Pour JP Home, un transporteur spécialisé ou un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Les numéros de retour fonctionnent de la même façon. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
+Les numéros GLS France (`00` et 6 lettres et chiffres mêlés, comme `00ABC123`), les numéros Mondial Relay de 8, 10 ou 12 chiffres et les numéros bpost de 24 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Il n'interroge pas Mondial Relay sur ces numéros : pour 8 chiffres, il peut afficher « Mondial Relay a peut-être ce colis. Ajoute le code postal de livraison pour le suivre. » ; pour 10 ou 12 chiffres, appuie sur « Changer » et choisis Mondial Relay. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur ; en France, l'e-mail d'expédition le nomme. Pour Dynalogic, colle le numéro, appuie sur « Changer » et choisis Dynalogic. Pour JP Home, un transporteur spécialisé ou un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Les numéros de retour fonctionnent de la même façon. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours se font chez Lidl.
 

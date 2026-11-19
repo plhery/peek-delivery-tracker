@@ -4,7 +4,7 @@ description: Chi consegna i pacchi Shein in Italia, dove trovi il codice di trac
 slug: tracciare-ordine-shein
 picture: Una busta morbida con un'etichetta della taglia, un furgone e Pip che prova una sciarpa.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-18
 ---
 
 Quando il pacco parte, Shein ti manda un'e-mail con il numero di tracciamento, e in "I miei ordini" trovi lo stesso codice, il corriere e lo stato più recente. Se l'articolo parte da un magazzino fuori dall'Europa, il pacco vola fino in Italia, passa la dogana e lo consegna un corriere italiano: a ogni passaggio il tracciamento può restare in silenzio per qualche giorno. Se non arriva, hai 45 giorni dalla data del pagamento per dirlo a Shein.
@@ -63,9 +63,9 @@ La pagina delle spedizioni di Shein Italia dà questi tempi; nella pagina di tra
 
 | Spedizione | Tempo | Costo |
 | --- | --- | --- |
-| Spedizione Standard | 6-12 giorni lavorativi | 4,49 € sotto i 25 €, poi gratis |
-| Locker o punto di ritiro | 6-12 giorni lavorativi | 2,90 € sotto i 19 €, poi gratis |
-| Express | 6-11 giorni lavorativi | 6,90 € |
+| Spedizione Standard | 6-14 giorni lavorativi | 4,49 € sotto i 25 €, poi gratis |
+| Locker o punto di ritiro | 6-14 giorni lavorativi | 2,90 € sotto i 19 €, poi gratis |
+| Express | 6-13 giorni lavorativi | 6,90 € |
 
 Prima della partenza c'è la preparazione: di solito 1-3 giorni, 4-6 in alta stagione. Preordini e articoli personalizzati ci mettono di più, e voli e meteo possono spostare la data: quella più precisa è nel tracciamento. L'etichetta "Magazzino UE" vuol dire che l'articolo può partire da un magazzino in Europa; se non è possibile, parte da fuori Europa e può arrivare in ritardo. Cosa cambia quando un pacco [parte da un magazzino in Europa](guide:tracking-from-china), e perché a volte il tracciamento tace per giorni o cambia codice: [come tracciare un pacco dalla Cina](guide:tracking-from-china).
 
@@ -73,7 +73,7 @@ Superata la prima data stimata, la consegna di solito è ancora regolare fino al
 
 La Garanzia di consegna puntuale ti dà 200 Punti SHEIN se l'ordine non arriva entro la data indicata, salvo ritardi che non dipendono da Shein. È gratuita, e secondo la pagina di aiuto di Shein Italia vale per la Spedizione Express, anche con la spedizione gratuita: la scegli al momento dell'acquisto selezionando "Garanzia di consegna puntuale".
 
-Sulla dogana, Shein dice che di solito non paghi niente, ma che le autorità possono chiedere al destinatario un importo per sdoganare il pacco, e che quello resta a tuo carico. Se non vuoi pagarlo, puoi rifiutare il pacco: Shein ti rimborsa l'ordine quando il pacco le torna indietro. Dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per tipo di prodotto anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per tipo di prodotto. Importi, eccezioni e SMS falsi che chiedono di pagare: [pacco fermo in dogana](guide:customs).
+Sulla dogana, Shein dice che di solito non paghi niente, ma che le autorità possono chiedere al destinatario un importo per sdoganare il pacco, e che quello resta a tuo carico. Se non vuoi pagarlo, puoi rifiutare il pacco: Shein ti rimborsa l'ordine quando il pacco le torna indietro. Dal 1° luglio 2026 un pacco da fuori UE fino a 150 € paga un dazio di 3 € per tipo di prodotto, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per tipo di prodotto qualunque sia il valore, dovuta da chi dichiara il pacco in dogana. Importi, eccezioni e SMS falsi che chiedono di pagare: [pacco fermo in dogana](guide:customs).
 
 ## Pacco Shein non arrivato o segnato come consegnato: cosa fare
 
@@ -95,17 +95,17 @@ Il reso viaggia con un suo codice. Lo avvii dal tuo account con "Avvia reso", sc
 
 ## Posso tracciare un pacco Shein con Peek?
 
-Sì, con il codice del corriere. Copialo dall'e-mail di spedizione o da "Tracciare" e incollalo in [Peek](/): riconosce la maggior parte dei corrieri dalla forma del codice e segue il pacco come qualsiasi altro.
+Sì, con il codice del corriere. Copialo dall'e-mail di spedizione o da "Tracciare" e incollalo in [Peek](/): riconosce la maggior parte dei corrieri dalla forma del codice e segue il pacco come qualsiasi altro. Un codice Poste Italiane come `RA12345678901`, per esempio, lo assegna subito a Poste Italiane.
 
 - **Più pacchi, più codici.** Aggiungi ogni codice: Peek segue ogni pacco per conto suo.
-- **Una forma condivisa da più corrieri.** Alcune forme, come le 24 cifre di InPost, le usano più corrieri. Se Peek non sceglie il corriere o propone quello sbagliato, tocca "Cambia" e scegli quello indicato nella pagina di tracciamento di Shein.
-- **Il numero d'ordine Shein non basta.** Non è un codice di tracciamento, e Peek non lo può seguire.
+- **Una forma condivisa da più corrieri.** Alcune forme, come le 24 cifre di InPost, le usano più corrieri: Peek chiede allora a InPost e agli altri corrieri con la stessa forma e mostra quello che conosce il codice. Un codice Paack può iniziare con `C` o `E`, poi una data di sei cifre (anno, mese, giorno) e altre 8 cifre, come l'inventato `C26111412345678`: Peek chiede a Paack solo con il codice postale di consegna, quindi può dire «Forse Paack ha questo pacco. Aggiungi il codice postale di consegna per seguirlo.» Il codice postale è facoltativo; con quello, Peek assegna il pacco a Paack. Se Peek non sceglie il corriere o propone quello sbagliato, tocca "Cambia" e scegli quello indicato nella pagina di tracciamento di Shein.
+- **Il numero d'ordine Shein non basta.** Non è un codice di tracciamento, e Peek non lo può seguire. Se incolli un numero che inizia con `GSU`, `GSO` o `GSH` seguito da 12 lettere e cifre, Peek ti avvisa: «Sembra un numero d’ordine Shein».
 - **Un nuovo corriere in Italia.** Se il primo corriere indica chi prende in carico il pacco, Peek tiene la cronologia di prima, passa al nuovo corriere appena il suo tracciamento mostra novità e ne mostra nome e codice sulla scheda.
 
 Peek vede quello che pubblicano i corrieri. Le segnalazioni, i punti della garanzia, i resi e i rimborsi restano nel tuo account Shein.
 
 :::sources
-- [Shein Italia: Informazioni sulla spedizione](https://it.shein.com/Shipping-Info-a-280.html) – tempi e costi, preparazione 1-3 giorni, Magazzino UE, e-mail con il numero, I miei ordini, 45 e 30 giorni, 200 punti
+- [Shein Italia: Informazioni sulla spedizione](https://it.shein.com/Shipping-Info-a-280.html) – tempi e costi, preparazione 1-3 giorni, Magazzino UE, e-mail con il numero, I miei ordini, 45 e 30 giorni, 200 punti; tempi 6-14 e 6-13 giorni lavorativi (letti il 18/11/2026)
 - [Shein Italia: Come rintracciare il mio ordine?](https://it.shein.com/How-to-track-my-order-a-496.html) – I miei ordini, Tracciare, Consegna urgente, Ricevuto
 - [Shein Italia: Dov'è il mio pacco?](https://it.shein.com/faq/detail?id=48407) – percorso nell'app, numero di tracking, e-mail di spedizione
 - [Shein Italia: Perché non ho ricevuto un'e-mail sulla spedizione del mio ordine?](https://it.shein.com/faq/detail?id=48837) – numero e link nell'e-mail, spam, ordine in preparazione
@@ -138,6 +138,6 @@ Peek vede quello che pubblicano i corrieri. Le segnalazioni, i punti della garan
 - [Shein Italia: Qual è il metodo di reso? Devo pagare per la spedizione del reso?](https://it.shein.com/faq/detail?id=49017) – BRT, InPost con PIN o QR, Poste Italiane, non all'indirizzo sul pacco
 - [Shein Italia: Politica di reso](https://it.shein.com/Return-Policy-a-281.html) – percorso dell'etichetta di reso
 - [Commissione europea: EU Customs Reform (in inglese)](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – tassa di gestione di 2 € dal 1° novembre 2026
-- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € e 2 € per tipo di prodotto
-- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forma dei codici di Poste Italiane, corrieri che Peek riconosce
+- [Commissione europea: Customs Guidance on EUR 3 customs duty (in inglese)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € e 2 € per tipo di prodotto; dazio fino a 150 €, tassa di gestione qualunque sia il valore, dovuta da chi dichiara
+- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forma dei codici di Poste Italiane e di Paack, corrieri che Peek riconosce
 :::

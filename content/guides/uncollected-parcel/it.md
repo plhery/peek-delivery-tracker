@@ -4,7 +4,7 @@ description: Un pacco in giacenza non ritirato di solito torna al mittente: Post
 slug: pacco-in-giacenza-non-ritirato
 picture: Un locker con uno sportello aperto e Pip che aspetta nel vano, e un calendario con gli ultimi due giorni cerchiati.
 published: 2026-10-14
-updated: 2026-11-07
+updated: 2026-11-18
 ---
 
 Un pacco in giacenza che nessuno ritira, all'ufficio postale, in un punto di ritiro o in un locker, di solito torna al mittente quando scade il termine. Gli uffici postali lo tengono più a lungo (Poste Italiane da 7 a 10 giorni lavorativi a seconda del servizio, la Posta svizzera 7 giorni, 15 per i pacchi dall'estero), i locker InPost e Amazon spesso solo 3 giorni. Conta l'ultimo giorno scritto sull'avviso, nell'SMS o nell'e-mail. Dopo, è il negozio a decidere se rimborsarti o rispedirlo.
@@ -38,7 +38,7 @@ Nei locker i tempi sono brevi, negli uffici postali più lunghi.
 | Italia | Poste Delivery Standard ed Express: 10 giorni lavorativi (per l'Express sabato compreso); Poste Delivery Business: 7 giorni lavorativi; raccomandata: 30 giorni (Raccomandata 1: 15); GLS in sede: 10 giorni lavorativi, 8 per i pacchi dall'estero | Punto Poste: 7 giorni lavorativi; BRT-fermopoint: 10 giorni; GLS Point: 10 giorni; InPost Point: circa 3 giorni | Punto Poste Locker: 3 giorni lavorativi; locker GLS: 8 giorni; InPost: circa 3 giorni; Amazon Locker: 3 giorni |
 | Ticino | La Posta: 7 giorni, 15 per i pacchi dall'estero, prorogabili | – | My Post 24: 10 giorni per i pacchi, di norma 15 dall'estero |
 
-Il giorno da cui si conta cambia da corriere a corriere. Per Poste Delivery Express i 10 giorni partono dal giorno lavorativo dopo la data scritta sull'avviso di mancata consegna; per un pacco Poste Delivery Business indirizzato a un ufficio postale, i 7 giorni partono dal giorno dopo il suo arrivo. GLS conta anche il giorno in cui apre la giacenza. InPost parte da quando ricevi la notifica di consegna nel locker, e ti dice di controllare la scadenza esatta nella sua e-mail. Per un Amazon Locker, i tre giorni partono dall'e-mail con le istruzioni e le credenziali per il ritiro, che arriva quando il corriere ha lasciato il pacco.
+Il giorno da cui si conta cambia da corriere a corriere. Per Poste Delivery Express i 10 giorni partono dal giorno lavorativo dopo la data scritta sull'avviso di mancata consegna; per un pacco Poste Delivery Business indirizzato a un ufficio postale, i 7 giorni partono dal giorno dopo il suo arrivo. GLS conta anche il giorno in cui apre la giacenza. Al punto di ritiro, GLS ti avvisa per e-mail e SMS quando il pacco è disponibile, con gli orari di apertura del punto; BRT manda un'e-mail e/o un SMS quando il pacco arriva al BRT-fermopoint, dove resta in giacenza 10 giorni e, se il punto è aperto, puoi ritirarlo anche nel weekend. InPost parte da quando ricevi la notifica di consegna nel locker, e ti dice di controllare la scadenza esatta nella sua e-mail. Per un Amazon Locker, i tre giorni partono dall'e-mail con le istruzioni e le credenziali per il ritiro, che arriva quando il corriere ha lasciato il pacco.
 
 Lo stesso pacco può avere scadenze diverse a seconda del servizio e del paese. Con [la Posta svizzera](carrier:swiss-post), i pacchi dall'estero hanno di norma 15 giorni: in filiale invece di 7, allo sportello automatico My Post 24 invece di 10. Se sei tu a spedire all'estero con Poste Delivery International Standard, nel paese di destinazione il pacco resta in giacenza da 15 giorni a un mese, e in casi eccezionali fino a due mesi.
 
@@ -119,9 +119,9 @@ Per il corriere, un pacco nel locker è consegnato. Leggi [pacco consegnato ma n
 - [Poste Italiane: FAQ Scegli Tu](https://www.poste.it/assistenza/faq-scegli-tu) – attivato dal mittente, link nella notifica, gratuito, una volta per spedizione, cambio data entro 5 giorni lavorativi, fino al primo tentativo di consegna, ufficio postale, Punto Poste o Locker, 7 giorni per ritirare, giacenza per vacanze
 - [BRT: Ho la spedizione in giacenza, cosa significa?](https://www.brt.it/it/faq/ho-la-spedizione-in-giacenza-cosa-significa/) – motivi della giacenza, «rintraccia giacenza»
 - [BRT: Carta dei Servizi](https://www.brt.it/wp-content/uploads/sites/275/2026/03/Carta-dei-Servizi_marzo_2026.pdf) – avviso di giacenza al mittente, ritorno dopo 10 giorni senza istruzioni
-- [BRT: BRT-fermopoint](https://www.brt.it/it/brt-fermopoint/) – 10 giorni di giacenza
+- [BRT: BRT-fermopoint](https://www.brt.it/it/brt-fermopoint/) – avviso per e-mail e/o SMS, 10 giorni di giacenza, ritiro anche nel weekend
 - [GLS Italia: Carta dei Servizi Postali](https://gls-group.com/IT/media/downloads/CARTA_DEI_SERVIZI_POSTALI_AGGIORNATAallegati_09.06.26_def.pdf) – 10 giorni lavorativi, 8 dall'estero, giorno di apertura compreso, «scaduti termini», nessun costo
-- [GLS: Smart Delivery Service](https://gls-group.com/IT/it/smartdeliveryservice/) – dopo un tentativo fallito al punto di ritiro più comodo, 10 giorni al GLS Point o in sede, 8 nel locker
+- [GLS: Smart Delivery Service](https://gls-group.com/IT/it/smartdeliveryservice/) – dopo un tentativo fallito al punto di ritiro più comodo, 10 giorni al GLS Point o in sede, 8 nel locker, avviso per e-mail e SMS con gli orari del punto
 - [InPost Italia: Giacenza, come funziona con InPost](https://inpost.it/news-giacenza-come-funziona-con-inpost) – circa 3 giorni, nessuna proroga, ritorno gratuito, costi della nuova spedizione
 - [InPost Italia: Come ritirare un pacco da un locker InPost](https://inpost.it/news-come-ritirare-un-pacco-da-un-locker-inpost-tutto-quello-che-devi-sapere) – il tempo dipende dal sito di acquisti, codice QR o PIN a un'altra persona
 - [About Amazon Italia: Il volto gentile dietro gli Amazon Locker](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-volto-gentile-dietro-gli-amazon-locker) – e-mail con le credenziali per il ritiro, tre giorni, ritorno ad Amazon e rimborso totale automatico (articolo del 2018)

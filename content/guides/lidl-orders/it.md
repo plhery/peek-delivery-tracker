@@ -4,7 +4,7 @@ description: Lidl Italia non vende online. Dove lo fa, come su lidl.fr: chi cons
 slug: tracciamento-ordine-lidl
 picture: Una sedia da giardino accanto a una cassa di attrezzi imballati e a un furgone delle consegne, e Pip in piedi sulla cassa.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-18
 ---
 
 Lidl Italia non ha un negozio online: la sua assistenza clienti scrive che «Lidl Italia non ha infatti un servizio di vendita online dei propri prodotti». La spesa a domicilio arriva con il partner Everli, e gli articoli in promozione non si prenotano. Lidl ha invece negozi online in altri paesi, fra cui la Francia: lì lidl.fr spedisce con DPD, GLS, Mondial Relay o JP Home, e l'email di conferma di spedizione nomina il corriere e ti dà il link di tracciamento.
@@ -115,9 +115,8 @@ Come seguire un reso: [tracciare un reso](guide:returns-tracking).
 Sì: incolla in [Peek](/) il numero di tracking dell'email di spedizione. Peek riconosce questi numeri dalla sola forma:
 
 - DPD Francia: `250` e 12 cifre, come `250000000000000`.
-- GLS Francia: `00` e 6 lettere e cifre mescolate, come `00ABC123`.
 
-I numeri Mondial Relay di 8, 10 o 12 cifre hanno la stessa forma di quelli di altri corrieri. Peek chiede allora ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere che nomina l'email di spedizione. Per JP Home, un corriere specializzato o un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 3.500 corrieri. I numeri dei resi funzionano allo stesso modo. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
+I numeri GLS Francia (`00` e 6 lettere e cifre mescolate, come `00ABC123`) e i numeri Mondial Relay di 8, 10 o 12 cifre hanno la stessa forma di quelli di altri corrieri. Peek chiede allora ai corrieri probabili e mostra quello che conosce il numero, ma non chiede a Mondial Relay: per i suoi numeri premi «Cambia» e scegli Mondial Relay. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere che nomina l'email di spedizione. Per JP Home, un corriere specializzato o un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 3.500 corrieri. I numeri dei resi funzionano allo stesso modo. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
 
 Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano a Lidl.
 

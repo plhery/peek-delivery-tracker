@@ -3,14 +3,14 @@ title: ELTA Hellenic Post tracking: statuses, pickup, contacts
 description: Track an ELTA Hellenic Post or ELTA Courier parcel in Greece: the GR number, what the English statuses mean, PostBox lockers, notices, claims and contacts.
 slug: elta-hellenic-post-tracking
 published: 2026-10-13
-updated: 2026-10-22
+updated: 2026-11-18
 ---
 
-ELTA Hellenic Post (ΕΛΤΑ) is Greece's national post, and ELTA Courier is now part of it. Track an item on ELTA's [English tracking page](https://www.elta.gr/en/track), which takes up to five numbers at once, or paste the number in the box above. The number comes from the sender: the receipt of posting, the courier voucher or the shop's message.
+ELTA Hellenic Post (ΕΛΤΑ) is Greece's national post, and ELTA Courier is now part of it. Track an item on ELTA's [English tracking page](https://www.elta.gr/en/track), which takes up to five numbers at once, one per line, or paste the number in the box above. An ELTA Courier parcel can also be looked up on elta-courier.gr's [search](https://www.elta-courier.gr/search), which takes several voucher numbers, one per line. The number comes from the sender: the receipt of posting, the courier voucher or the shop's message.
 
 ## ELTA tracking number
 
-ELTA's tracking numbers have 13 characters: [two Latin letters, nine digits and two Latin letters](guide:tracking-number-formats). Items posted in Greece end in `GR`. ELTA Courier numbers mostly use the same layout, printed at the top right of the courier voucher.
+ELTA's tracking numbers have 13 characters: [two Latin letters, nine digits and two Latin letters](guide:tracking-number-formats). Items posted in Greece end in `GR`; ELTA's own example is `PP123456785GR`. The last of the nine digits is a check digit, so one mistyped digit usually makes the number invalid. ELTA Courier numbers mostly use the same layout, printed at the top right of the courier voucher. Simple tracked letters, whose numbers start with `U`, `L` or `TR` (`LL` within Greece), are left at the address without a signature.
 
 | Shape (invented) | What it is |
 | --- | --- |
@@ -28,8 +28,12 @@ ELTA's tracker shows every scan in Greek or English (a language switch), with a 
 
 | ELTA's status | What it means for you |
 | --- | --- |
+| `Label printed by customer` | The sender printed the label; ELTA doesn't have the item yet. |
+| `Item deposited at ELTA` | The sender handed the item in at the post office the scan names. |
 | `Shipment in transit` | Sent on from the station the scan names. |
 | `Arrival in` | Arrived at the post office or courier agency named after these words. |
+| `Arrival at the airport` | An item leaving Greece reached ELTA's hub at Athens airport. |
+| `For dispatch abroad` | At the Athens airport hub, ready to leave Greece. |
 | `With Courier for delivery` | Out for delivery to your address. |
 | `Notification of attempted delivery` | Nobody could take it: a notice was left, with the reason in the next line. |
 | `ADDRESSEE NOT AVAILABLE AT TIME OF DELIVERY` | Nobody was home. |
@@ -47,9 +51,9 @@ If the tracker answers "No Tracking History", the item has no scans yet or is to
 
 ELTA delivers a domestic parcel to your home, to an ELTA store (you get an SMS or a notice) or to a PostBox locker where your postcode allows it. ELTA's domestic parcel page promises delivery in 3 working days across Greece.
 
-**Missed delivery.** A parcel from abroad that can't be handed over leaves a notice asking you to collect it at the nearest post office. Items with customs charges are delivered only against a signature. The notice or SMS states how long the item is kept.
+**Missed delivery.** A parcel from abroad that can't be handed over leaves a notice asking you to collect it at the nearest post office. Items with customs charges are delivered only against a signature. A domestic parcel that isn't delivered to your home is collected at the post office counter after a phone call, a notice slip or an SMS, and that notice or SMS states how long the parcel stays at the post office. Collect it within that time: an item nobody collects goes back to the sender (at no extra charge within Greece), and one the sender doesn't take back either is kept as unclaimed until at least six months after it was posted.
 
-**ELTA Courier** makes two delivery attempts. After the first notice, call your local courier store to schedule delivery; after two notices, collect it there or book a new delivery, which may cost extra. Courier stores open Monday to Friday 08:00 to 20:00 and Saturday 08:00 to 14:00, which may vary by area. An item that can't be delivered goes back to the sender.
+**ELTA Courier** makes two delivery attempts. After the first notice, call your local courier store to schedule delivery; after two notices, collect it there or book a new delivery, which may cost extra. Courier stores open Monday to Friday 08:00 to 20:00 and Saturday 08:00 to 14:00, which may vary by area. A door-to-door courier item that can't be delivered goes back to the sender, within two weeks of being sent unless the sender's contract says otherwise.
 
 **PostBox lockers.** ELTA's smart lockers are open 24/7 (stations in the Metro and ISAP keep station hours). When your item is placed, a Viber or SMS message gives a 6-digit PIN and the locker's location. Collect within 48 hours; after that it moves to the nearest ELTA store and you get a new message. Items with duties or taxes don't go to a PostBox. You can ask for one with "Θέλω από PostBox" in ELTA's SMS or Viber.
 
@@ -69,11 +73,12 @@ If tracking stops moving for days, see [tracking that isn't updating](guide:trac
 
 ## ELTA contact number and email
 
-ELTA's channels, as elta.gr and elta-courier.gr listed them in October 2026:
+ELTA's channels, as elta.gr and elta-courier.gr listed them in November 2026. ELTA's tracking site gives the call centre for questions about an item; ELTA Courier gives its own line for courier tracking help.
 
 - **Call centre:** 800-11-82000 from a Greek landline, 212-0000-800 from a mobile, +30 212-0000-800 from abroad; Monday to Friday 08:00 to 18:00.
+- **New service points:** 212 00 00 700, a line only for questions about ELTA's new service points, Monday to Friday 08:00 to 18:00, at local call rates.
 - **E-mail:** service@elta-net.gr, or the form on [elta.gr/en/contact](https://www.elta.gr/en/contact).
-- **ELTA Courier:** 210 6073000 (charged as a normal call), tracking help Monday to Friday 08:00 to 16:00; info@elta-courier.gr and customercare@elta-courier.gr.
+- **ELTA Courier:** 210 6073000 (charged as a normal call), tracking help Monday to Friday 08:00 to 16:00; info@elta-courier.gr and customercare@elta-courier.gr. Written complaints can also go by post to 200 Ionias Ave. & 61 Iakovaton St., 111 44 Athens, for the attention of the Customer Service Department.
 - **By post:** Hellenic Post Customer Service, Adrianoupoleos 45, 16070 Kessariani.
 - **In person:** any ELTA store (store finder on elta.gr).
 
@@ -85,7 +90,7 @@ For a number ending `GR` with a valid check digit, [Peek](/) asks ELTA (and [Chr
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Greece (or names no destination and you're in Greece), Peek also asks ELTA with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at ELTA straight away, pick "ELTA Hellenic Post" with "Change".
 
-ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of the scan's place, Greek time for scans in Greece, and lists ELTA's own history with ELTA's English wording. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
+ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of the scan's place, Greek time for scans in Greece, and lists ELTA's own history with ELTA's English wording. Times show in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
 
 ## Questions about ELTA tracking
 
@@ -106,14 +111,14 @@ ELTA's courier service, with its own site, elta-courier.gr, for door-to-door del
 Use the store finder on elta.gr; ELTA Courier stores are on elta-courier.gr's network page.
 
 :::sources
-- [ELTA: Track and Trace](https://www.elta.gr/en/track) – English tracker, 13-character format, 12-digit German barcodes, up to 5 numbers
+- [ELTA: Track and Trace](https://www.elta.gr/en/track) – English tracker, 13-character format, example PP123456785GR, 12-digit German barcodes, up to 5 numbers
 - [ELTA: Track and Trace (Greek)](https://www.elta.gr/track) – Greek tracker, language switch
 - [Hellenic Post: Track an Item](https://itemsearch.elta.gr/en-GB) – six-month history, call centre hours, e-mail, postal address
-- [ELTA: Contact](https://www.elta.gr/en/contact) – call centre numbers, number from abroad, courier phone, form
+- [ELTA: Contact](https://www.elta.gr/en/contact) – call centre numbers, number from abroad, new service point line, courier phone, form
 - [ELTA: Επικοινωνία](https://www.elta.gr/contact) – call centre numbers, store finder, company details
 - [ELTA: Προστατευθείτε από το Phishing](https://www.elta.gr/prosochi-sto-phishing) – fake e-mail and SMS warning, duties paid only at stores
-- [ELTA Courier: FAQ](https://www.elta-courier.gr/faq?lang=en) – two attempts, notices, store hours, voucher number, address change
-- [ELTA Courier: Αναζήτηση Αποστολής](https://www.elta-courier.gr/search) – courier number format
+- [ELTA Courier: FAQ](https://www.elta-courier.gr/faq?lang=en) – two attempts, notices, store hours, voucher number, address change, complaints by post
+- [ELTA Courier: Αναζήτηση Αποστολής](https://www.elta-courier.gr/search) – courier number format, several numbers one per line
 - [ELTA Courier: Επικοινωνία](https://www.elta-courier.gr/contact) – 210 6073000, tracking help hours, e-mail, reservation within one working day
 - [ELTA Courier: Έντυπο Αποζημίωσης](https://www.elta-courier.gr/apozimiwseis) – compensation form, e-mail, documents
 - [ELTA Courier: Τηλεφωνική εξυπηρέτηση](https://www.elta-courier.gr/tilefwniki_eksypiresisi) – phone line charge
@@ -123,7 +128,7 @@ Use the store finder on elta.gr; ELTA Courier stores are on elta-courier.gr's ne
 - [ELTA: Υπηρεσίες Ταχυμεταφορών](https://www.elta.gr/ypiresia-esoterikou-porta-porta) – door-to-door courier service
 - [ELTA: Αίτηση Αναζήτησης](https://www.elta.gr/aitisi-anazitisis) – search request conditions, six months, 8 weeks
 - [ELTA: Αίτηση Τροποποίησης](https://www.elta.gr/aitisi-tropopoiisis) – changing name or address
-- [ELTA: Χάρτης Υποχρεώσεων Καταναλωτή](https://media.elta.gr/uploads/media/2025/kanonismoi/___2025.pdf) – ELTA Courier merger, notices, courier attempts and returns, simple tracked letters, complaints
+- [ELTA: Χάρτης Υποχρεώσεων Καταναλωτή](https://media.elta.gr/uploads/media/2025/kanonismoi/___2025.pdf) – ELTA Courier merger, notices and pickup at the counter, returns and unclaimed items (six months), courier attempts and two-week returns, simple tracked letters (U, LL, L, TR), complaints
 - [ELTA: Γενικοί όροι Courier](https://media.elta.gr/uploads/media/etairia/general_terms_courier_12_2024_compressed%20(1).pdf) – compensation paid to the sender
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – what Peek reads
 :::

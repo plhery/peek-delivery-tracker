@@ -4,7 +4,7 @@ description: Quién entrega un pedido de lidl.es, dónde está el número de seg
 slug: seguimiento-pedido-lidl
 picture: Una silla de jardín junto a una caja de madera con herramientas embaladas y una furgoneta de reparto, y Pip de pie sobre la caja.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-18
 ---
 
 Lidl vende online en España: en lidl.es y en la app Lidl Plus compras artículos de bazar, no alimentación. Entrega en la Península, Baleares y Canarias con SEUR, GLS y Rhenus, y cuando el pedido sale de su centro logístico te manda un email con el transportista y el número de seguimiento. Si falta algo o llega dañado, avisa a Lidl en las 48 horas siguientes a recibirlo.
@@ -102,7 +102,7 @@ Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paque
 
 Tienes 30 días naturales desde la entrega: los 14 de la ley y 16 más que da Lidl. Con la devolución que pides desde tu cuenta, devolver es gratis y no tienes que imprimir nada. Sea quien sea el transportista que te lo trajo, la devolución va con SEUR, GLS o Rhenus, según el peso y el volumen.
 
-1. En tu cuenta, entra en «Pedidos online» y pulsa «Hacer una devolución» en el pedido. Si compraste como invitado, usa el enlace de la factura o del email de confirmación de entrega. Si tu número de pedido empieza por `GO10-` o `SO10-`, escribe solo los 10 dígitos que van después del guion.
+1. En tu cuenta, entra en «Pedidos online» y pulsa «Hacer una devolución» en el pedido. Si compraste como invitado, usa el enlace de la factura o del email de confirmación de entrega. Si tu número de pedido empieza por `GO`, dos caracteres y un guion (el ejemplo de Lidl es `GOXX-1234567891`), escribe solo los números que van después del guion.
 2. Elige los productos, la cantidad y el motivo, y pulsa «Continuar».
 3. Para SEUR y GLS, Lidl te da un código QR en el último paso y por email. Enséñalo en una tienda SEUR o GLS: vale 30 días. Si pierdes el email, vuelve a pedirlo desde tu cuenta.
 
@@ -114,7 +114,7 @@ Cómo seguir una devolución: [seguimiento de devoluciones](guide:returns-tracki
 
 ## ¿Puedo seguir un paquete de Lidl en Peek?
 
-Sí: pega en [Peek](/) el número de seguimiento del email de confirmación de envío. Los números de SEUR y de GLS tienen la misma forma que los de otros transportistas: Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el transportista que nombra tu email de envío. Para Rhenus, o un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
+Sí: pega en [Peek](/) el número de seguimiento del email de confirmación de envío. Los números de SEUR y de GLS tienen la misma forma que los de otros transportistas: Peek pregunta a los probables y muestra el que lo conoce. A GLS solo le pregunta con el código postal de entrega, así que con un número de GLS puede decir: «Puede que GLS Spain tenga este paquete. Añade el código postal de entrega para seguirlo.» Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el transportista que nombra tu email de envío. Para Rhenus, o un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
 
 Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con Lidl.
 
@@ -137,7 +137,7 @@ Si un paquete cambia de transportista por el camino y el primero nombra al que l
 - [Lidl España: Pedido dañado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-puedo-hacer-si-mi-pedido-est%C3%A1-da%C3%B1ado) – fotos, formulario
 - [Lidl España: Garantía de los artículos de bazar](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-hacer-uso-de-la-garant%C3%ADa-del-art%C3%ADculo-de-bazar-que-he-comprado) – LiA, código IAN, cuenta
 - [Lidl España: Contacto](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-ponerme-en-contacto-con-el-Servicio-de-Atenci%C3%B3n-al-Cliente) – formulario, teléfono, horario
-- [Lidl España: Devolver un artículo de la tienda online](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-devolver-un-art%C3%ADculo-comprado-en-tienda-online) y [su coste](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-coste-tiene-realizar-una-devoluci%C3%B3n) – 30 días, gratis, pasos, QR, embalaje original, plazos de reembolso
+- [Lidl España: Devolver un artículo de la tienda online](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-devolver-un-art%C3%ADculo-comprado-en-tienda-online) y [su coste](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-coste-tiene-realizar-una-devoluci%C3%B3n) – 30 días, gratis, pasos, QR, embalaje original, plazos de reembolso; `GOXX-` (leído el 18/11/2026)
 - [Lidl España: Devolución como invitado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-solicitar-una-devoluci%C3%B3n-de-mi-pedido-como-invitado) – número de pedido
 - [Lidl España: Estado de mi devolución](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-saber-el-estado-de-mi-devoluci%C3%B3n) – 14 días laborables, «Pedidos online»
 - [Lidl España: Términos y condiciones de compra](https://www.lidl.es/c/terminos-y-condiciones-de-compra/s10076455) – envío gratis con cuenta, zona de entrega, plazos, locker, punto de recogida, Formentera, 48 horas, garantía, 14 más 16 días

@@ -4,7 +4,7 @@ description: Wer Bestellungen von lidl.de liefert, wo die Sendungsnummer steht, 
 slug: lidl-sendungsverfolgung
 picture: Ein Gartenstuhl neben einer Kiste mit verpackten Werkzeugen und ein Lieferwagen, und Pip steht auf der Kiste.
 published: 2026-10-26
-updated: 2026-10-26
+updated: 2026-11-18
 ---
 
 Bestellungen aus dem Lidl-Onlineshop auf lidl.de liefern DHL, Hermes und DPD; die Sendungsnummer steht in der Versandbestätigung per E-Mail und unter „Meine Bestellungen“. Kommt ein Artikel per Spedition, liefert sie an einem Tag, den sie vorher mit dir abspricht. Nach Österreich und in die Schweiz liefert lidl.de nicht: Lidl Schweiz betreibt keinen Onlineshop, und Lidl Österreich verweist für viele PARKSIDE-Artikel auf Kaufland.at.
@@ -112,7 +112,7 @@ Ja: Füg die Sendungsnummer aus der Versandbestätigung in [Peek](/) ein. Peek e
 - DHL: die meisten 20-stelligen Nummern ab `00340434`, wie `00340434100000000007`.
 - Hermes: `H` und 16 bis 19 Ziffern, wie `H1000000000000000`.
 
-Die 12-stelligen DHL-Nummern und die 14-stelligen Nummern von DPD und Hermes teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den Paketdienst aus der Versandbestätigung. Für eine Spedition oder einen Dienst, den dieser Ratgeber nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Rücksendenummern funktionieren genauso. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
+Die 12-stelligen DHL-Nummern und die 14-stelligen Nummern von DPD und Hermes teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Peek fragt Hermes nicht: Bei einer 14-stelligen Hermes-Nummer tippst du auf „Ändern“ und wählst Hermes. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den Paketdienst aus der Versandbestätigung. Für eine Spedition oder einen Dienst, den dieser Ratgeber nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Rücksendenummern funktionieren genauso. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rücksendungen laufen über Lidl.
 

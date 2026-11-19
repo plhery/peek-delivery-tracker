@@ -4,7 +4,7 @@ description: Quién reparte los pedidos de Shein en España, dónde está el nú
 slug: seguimiento-pedido-shein
 picture: Un sobre acolchado blando con una etiqueta de talla, una furgoneta y Pip probándose una bufanda.
 published: 2026-10-17
-updated: 2026-11-10
+updated: 2026-11-18
 ---
 
 Cuando sale tu pedido, Shein te manda un correo con el número de seguimiento, y en «Mis pedidos» ves el mismo número, la empresa de reparto y el último estado. Si el artículo sale de un almacén de fuera de Europa, el paquete vuela hasta España, pasa la aduana y lo entrega una empresa de aquí: en cada relevo el seguimiento puede quedarse callado unos días. Si no llega, tienes 45 días desde la fecha de pago para avisar a Shein.
@@ -107,7 +107,7 @@ Sí, con el número de la empresa de reparto. Cópialo del correo de envío o de
 - **El número de pedido de Shein no sirve.** No es un número de seguimiento, y Peek no puede seguirlo. Si pegas uno que empieza por `GSH`, `GSO` o `GSU` y sigue con 12 letras o cifras, Peek te avisa con «Parece un número de pedido de Shein» y te indica que en «Mis pedidos» toques «Seguimiento» para ver el número de cada paquete.
 - **Una nueva empresa en España.** Si la primera empresa indica quién toma el relevo, Peek guarda el historial anterior, pasa a la nueva en cuanto su seguimiento muestra novedades, sigue el ritmo de la que reparte el paquete y en la tarjeta ves su nombre y su número.
 
-Cuando el paquete está en reparto, Peek consulta el seguimiento hasta una vez cada 2 minutos con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa). A través de servicios de seguimiento como 17TRACK consulta cada 15 minutos, y algunas empresas fijan un intervalo más largo.
+Cuando el paquete está en reparto, Peek consulta el seguimiento hasta una vez cada 2 minutos con las empresas que lee directamente, o cada 5 minutos cuando la consulta tiene que abrir un navegador (ese día, mientras tienes el paquete abierto o las notificaciones activadas, desde las 6:00, hora local, o, si la empresa da una franja, desde media hora antes de que empiece, y mientras responda el propio seguimiento de la empresa). A través de servicios de seguimiento como 17TRACK, ese día consulta hasta una vez cada 15 minutos mientras lo tienes abierto o con las notificaciones activadas, y algunas empresas fijan un intervalo más largo.
 
 Peek muestra lo que publican las empresas de reparto. Las reclamaciones, los puntos de la garantía, las devoluciones y los reembolsos se quedan en tu cuenta de Shein.
 

@@ -4,7 +4,7 @@ description: Quem entrega as encomendas Shein em Portugal, onde está o número 
 slug: rastrear-encomenda-shein
 picture: Um envelope de plástico mole com uma etiqueta de tamanho, uma carrinha e o Pip a experimentar um cachecol.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-18
 ---
 
 Quando a encomenda sai, a Shein manda-te um e-mail com o número de seguimento, e em «Meus pedidos» → «Rastrear» vês o mesmo número, a transportadora e o último estado. Se o artigo sai de um armazém fora da Europa, a encomenda voa até Portugal, passa a alfândega e é entregue por uma transportadora de cá: em cada passagem, o seguimento pode ficar calado alguns dias. Se não chegar, tens 45 dias a contar da data de pagamento para avisar a Shein.
@@ -69,8 +69,8 @@ A página de envios da Shein Portugal dá estes prazos; em «Rastrear» vês a d
 
 | Envio | Prazo |
 | --- | --- |
-| Envio Padrão | 6-10 dias úteis |
-| Ponto Pickup | 6-11 dias úteis |
+| Envio Padrão | 7-11 dias úteis |
+| Ponto Pickup | 7-11 dias úteis |
 
 Antes de sair, a preparação demora em geral 1 a 3 dias úteis, mais na época alta. Pré-encomendas e artigos personalizados demoram mais, e voos e meteorologia podem mudar a data: a mais precisa está no seguimento. Para os Açores e a Madeira, os portes aparecem na página de pagamento. A etiqueta «Entregue em 5 dias úteis/Envio Rápido» indica que o artigo pode sair de um armazém na Europa; se não puder, sai de fora da Europa e pode atrasar-se. A «Entrega em 3 dias» quer dizer 3 dias úteis a contar do pagamento. O que muda quando uma encomenda [sai de um armazém na Europa](guide:tracking-from-china), e porque é que o seguimento se cala durante dias ou muda de número: [como seguir uma encomenda da China](guide:tracking-from-china).
 
@@ -111,7 +111,7 @@ Sim, com o número da transportadora. Copia-o do e-mail de envio ou de «Rastrea
 O Peek mostra o que as transportadoras publicam. As reclamações, os pontos da garantia, as devoluções e os reembolsos ficam na tua conta Shein.
 
 :::sources
-- [Shein Portugal: Informação de envio](https://pt.shein.com/Shipping-Info-a-280.html) – prazos, 1-3 dias de processamento, Entregue em 5 dias úteis/Envio Rápido, 45 e 30 dias, Açores e Madeira, 500 pontos
+- [Shein Portugal: Informação de envio](https://pt.shein.com/Shipping-Info-a-280.html) – prazos, 1-3 dias de processamento, Entregue em 5 dias úteis/Envio Rápido, 45 e 30 dias, Açores e Madeira, 500 pontos; prazos de 7-11 dias úteis (lido a 18/11/2026)
 - [Shein Portugal: Como rastrear meu pedido](https://pt.shein.com/How-to-track-my-order-a-496.html) – Rastrear, Recebido
 - [Shein Portugal: Onde você entrega minha encomenda?](https://pt.shein.com/faq/detail?id=51282) – Rastrear, nome da transportadora com ligação ao site
 - [Shein Portugal: Como verificar o status do meu pedido?](https://pt.shein.com/faq/detail?id=51567) – Meus Pedidos, 1 a 3 dias úteis, e-mail com número e ligação

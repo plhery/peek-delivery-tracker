@@ -1315,6 +1315,7 @@
   "inbox.row": "通过邮件添加包裹",
   "inbox.experimental": "测试版",
   "inbox.intro": "把发货邮件转发到你的 Peek 地址，Peek 就会添加包裹。这项功能处于测试阶段：它可能会漏掉包裹，也可能还会有变化。",
+  "inbox.guide": "阅读完整指南（英文）",
   "inbox.start": "获取我的地址",
   "inbox.address": "你的地址",
   "inbox.copy": "复制地址",

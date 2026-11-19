@@ -1315,6 +1315,7 @@
   "inbox.row": "Pakete per E-Mail hinzufügen",
   "inbox.experimental": "Beta",
   "inbox.intro": "Leite eine Versand-E-Mail an deine Peek-Adresse weiter, und Peek fügt das Paket hinzu. Diese Funktion ist in der Betaphase: Sie kann ein Paket übersehen und sich noch ändern.",
+  "inbox.guide": "Den ganzen Ratgeber lesen",
   "inbox.start": "Meine Adresse erstellen",
   "inbox.address": "Deine Adresse",
   "inbox.copy": "Adresse kopieren",

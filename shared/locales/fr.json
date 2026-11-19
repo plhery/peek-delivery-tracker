@@ -1315,6 +1315,7 @@
   "inbox.row": "Ajouter des colis par e-mail",
   "inbox.experimental": "Bêta",
   "inbox.intro": "Transfère un e-mail d’expédition à ton adresse Peek et Peek ajoute le colis. Cette fonction est en bêta : elle peut rater un colis et peut encore changer.",
+  "inbox.guide": "Lire le guide complet",
   "inbox.start": "Obtenir mon adresse",
   "inbox.address": "Ton adresse",
   "inbox.copy": "Copier l’adresse",

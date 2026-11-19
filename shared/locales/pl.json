@@ -1315,6 +1315,7 @@
   "inbox.row": "Dodawaj przesyłki e-mailem",
   "inbox.experimental": "Beta",
   "inbox.intro": "Przekaż e-mail o wysyłce na swój adres Peek, a Peek doda przesyłkę. Ta funkcja jest w wersji beta: może pominąć przesyłkę i może się jeszcze zmienić.",
+  "inbox.guide": "Przeczytaj cały poradnik",
   "inbox.start": "Utwórz mój adres",
   "inbox.address": "Twój adres",
   "inbox.copy": "Kopiuj adres",

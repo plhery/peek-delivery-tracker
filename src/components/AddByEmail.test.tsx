@@ -1,7 +1,12 @@
-import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
+import de from '../../shared/locales/de.json';
+import ptBr from '../../shared/locales/pt-br.json';
+import ru from '../../shared/locales/ru.json';
 import type { ApiAddByEmail, ApiAddByEmailResponse } from '../generated/apiContract';
+import { I18nProvider } from '../i18n';
+import type { Messages } from '../lib/messages';
 import { closeAddByEmail, openAddByEmail, readAddByEmail, setAddByEmailNotify } from '../lib/addByEmail';
 import { gmailFilter } from '../lib/emailFilter';
 import { AccountMenu } from './AccountMenu';
@@ -149,7 +154,7 @@ describe('adding parcels by email in Settings', () => {
     expect(steps[6]).toHaveTextContent(/^Select Forward it, choose your Peek address/);
     expect(screen.queryByText(/\*\*|\{\{|\[\[/)).not.toBeInTheDocument();
     // No link fills Gmail's filter: the search is copied and pasted.
-    expect(screen.getAllByRole('link')).toHaveLength(1);
+    expect(steps.flatMap((step) => within(step).queryAllByRole('link'))).toHaveLength(1);
     expect(within(steps[4]!).getByText(gmailFilter(['en', 'fr']))).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'German' }));
     expect(within(steps[4]!).getByText(gmailFilter(['en', 'de', 'fr']))).toBeInTheDocument();
@@ -253,5 +258,30 @@ describe('adding parcels by email in Settings', () => {
     rerender(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(withOther)} onChange={onChange} />);
     expect(recent().getAllByRole('listitem')[0]!.querySelector('.add-by-email__what')?.textContent).toBe('Other ShopNo tracking number in it');
     expect(screen.getByText('Some shops, like Amazon, put no tracking number in their emails.')).toBeInTheDocument();
+  });
+
+  it('links the guide, in the reader\'s language or the nearest one it is written in', () => {
+    const guide = () => screen.getByRole('link', { name: /guide|Ratgeber|guia|статья/ });
+    const { unmount } = render(<AddByEmailPage apiAuth={apiAuth} offer={offer(null)} onChange={vi.fn()} />);
+    expect(guide()).toHaveAttribute('href', '/guides/add-parcels-by-email');
+    expect(guide()).toHaveTextContent('Read the whole guide');
+    expect(guide()).toHaveAttribute('target', '_blank');
+    expect(guide()).not.toHaveAttribute('hreflang');
+    unmount();
+
+    const shown = (locale: 'de' | 'pt-br' | 'ru', messages: Messages) => render(
+      <I18nProvider initialLocale={locale} initialMessages={messages}><AddByEmailPage apiAuth={apiAuth} offer={offer(inbox)} onChange={vi.fn()} /></I18nProvider>);
+    shown('de', de);
+    expect(guide()).toHaveAttribute('href', '/de/guides/versandmail-weiterleiten-paket-verfolgen');
+    expect(guide()).not.toHaveAttribute('hreflang');
+    cleanup();
+    // Brazil's Portuguese reads the European guide, and Russian the English one: the link says which.
+    shown('pt-br', ptBr);
+    expect(guide()).toHaveAttribute('href', '/pt/guides/seguir-encomendas-por-email');
+    expect(guide()).toHaveAttribute('hreflang', 'pt-PT');
+    cleanup();
+    shown('ru', ru);
+    expect(guide()).toHaveAttribute('href', '/guides/add-parcels-by-email');
+    expect(guide()).toHaveAttribute('hreflang', 'en');
   });
 });

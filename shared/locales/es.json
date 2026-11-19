@@ -1315,6 +1315,7 @@
   "inbox.row": "Añadir paquetes por correo",
   "inbox.experimental": "Beta",
   "inbox.intro": "Reenvía un correo de envío a tu dirección de Peek y Peek añade el paquete. Esta función está en beta: se le puede escapar un paquete y aún puede cambiar.",
+  "inbox.guide": "Leer la guía completa",
   "inbox.start": "Obtener mi dirección",
   "inbox.address": "Tu dirección",
   "inbox.copy": "Copiar dirección",

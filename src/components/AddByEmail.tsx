@@ -1,5 +1,7 @@
 import { Fragment, useEffect, useMemo, useState } from 'react';
 import type { ApiAddByEmail, ApiAddByEmailEntry, ApiAddByEmailResponse } from '../generated/apiContract';
+import { GUIDE_LINKS } from '../generated/guides';
+import { guidePath } from '../guides/paths';
 import { useI18n } from '../i18n';
 import { closeAddByEmail, openAddByEmail, readAddByEmail, setAddByEmailNotify } from '../lib/addByEmail';
 import type { ApiAuth } from '../lib/apiClient';
@@ -7,6 +9,7 @@ import {
   FILTER_LANGUAGES, GMAIL_SETTINGS_LINK, ICLOUD_MAIL_LINK, MAIL_SERVICES, OUTLOOK_RULES_LINK, filterLanguagesFor, gmailFilter,
   mailServiceOf, subjectWords, type FilterLanguage, type MailService,
 } from '../lib/emailFilter';
+import { documentLanguage, guideLanguage, type Locale } from '../lib/locale';
 import { localizedRelativeTime, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
@@ -71,6 +74,15 @@ function languageNames(languageTag: string): Record<FilterLanguage, string> {
 
 /** The services' own names, which no language translates. */
 const SERVICE_NAMES: Record<Exclude<MailService, 'other'>, string> = { gmail: 'Gmail', outlook: 'Outlook', icloud: 'iCloud', yahoo: 'Yahoo' };
+
+/** The guide to adding parcels by email, in the reader's language or the nearest one it is written in. */
+function GuideLink({ locale, children }: { locale: Locale; children: string }) {
+  const language = guideLanguage(locale);
+  const guide = GUIDE_LINKS[language].find(({ id }) => id === 'add-parcels-by-email');
+  if (!guide) return null;
+  return <p className="add-by-email__note"><a className="add-by-email__link" href={guidePath(language, guide.slug)} target="_blank" rel="noopener"
+    hrefLang={language === locale ? undefined : documentLanguage(language)}>{children}<span aria-hidden="true"> ›</span></a></p>;
+}
 
 /** A step's link to the page of the mail service it speaks of. */
 function StepLink({ href, children }: { href: string; children: string }) {
@@ -209,7 +221,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
   onChange: (next: ApiAddByEmailResponse) => void;
   onBusy?: (busy: boolean) => void;
 }) {
-  const { t, languageTag } = useI18n();
+  const { t, languageTag, locale } = useI18n();
   const [working, setWorking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -233,6 +245,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
   const notify = inbox?.notify !== false;
   return <>
     <p className="settings-description">{t('inbox.intro')}</p>
+    <GuideLink locale={locale}>{t('inbox.guide')}</GuideLink>
     {error && <p className="sheet__error" role="alert">{error}</p>}
     {!inbox ? <button className="button button--primary add-by-email__start" type="button" disabled={working} aria-busy={working || undefined}
       onClick={() => void run(() => openAddByEmail(apiAuth))}><Icon name="mail" />{t('inbox.start')}</button> : <>

@@ -1315,6 +1315,7 @@
   "inbox.row": "Adicionar encomendas por e-mail",
   "inbox.experimental": "Beta",
   "inbox.intro": "Reencaminha um e-mail de envio para o teu endereço Peek e o Peek adiciona a encomenda. Esta funcionalidade está em beta: pode deixar escapar uma encomenda e ainda pode mudar.",
+  "inbox.guide": "Ler o guia completo",
   "inbox.start": "Obter o meu endereço",
   "inbox.address": "O teu endereço",
   "inbox.copy": "Copiar endereço",

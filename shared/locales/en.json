@@ -1315,6 +1315,7 @@
   "inbox.row": "Add parcels by email",
   "inbox.experimental": "Beta",
   "inbox.intro": "Forward a shipping email to your Peek address and Peek adds the parcel. This feature is in beta: it can miss a parcel, and it may still change.",
+  "inbox.guide": "Read the whole guide",
   "inbox.start": "Get my address",
   "inbox.address": "Your address",
   "inbox.copy": "Copy address",

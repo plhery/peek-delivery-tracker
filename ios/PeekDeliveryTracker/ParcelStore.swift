@@ -781,6 +781,22 @@ final class ParcelStore: ObservableObject {
 
     /// How Settings reaches the account's forwarding address for adding parcels by email. Nil without an account: the
     /// demo and the parcels this iPhone follows itself have none.
+    func assistantsClient() -> AssistantsModel.Client? {
+        guard session.user != nil, !isDemo else { return nil }
+        let generation = session.generation
+        return AssistantsModel.Client(
+            read: { [self] in
+                let offer = try await api.assistants()
+                try session.checkGeneration(generation)
+                return offer
+            },
+            revoke: { [self] id in
+                try await api.revokeAssistant(id)
+                try session.checkGeneration(generation)
+            }
+        )
+    }
+
     func addByEmailClient() -> AddByEmailModel.Client? {
         guard session.user != nil, !isDemo else { return nil }
         let generation = session.generation

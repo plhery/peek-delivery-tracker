@@ -390,6 +390,7 @@ struct AccountView: View {
     @State private var showingHomePage = false
     #if os(iOS)
     @StateObject private var addByEmail = AddByEmailModel()
+    @StateObject private var assistants = AssistantsModel()
     @Environment(\.scenePhase) private var scenePhase
     #endif
 
@@ -470,7 +471,7 @@ struct AccountView: View {
                     profile
                     // Alerts and Live Activities are kept up to date by pushes, which need an account. Without one, the
                     // group shows only when the server offers a forwarding address.
-                    if !store.isGuest || addByEmail.offer != nil {
+                    if !store.isGuest || addByEmail.offer != nil || assistants.offer != nil {
                         SettingsGroup(title: localizer.text("native.deliveries")) {
                             if !store.isGuest {
                                 NavigationLink {
@@ -491,6 +492,18 @@ struct AccountView: View {
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityIdentifier("settings.addByEmail")
+                            }
+                            // Only once the server says assistants may connect to the account.
+                            if assistants.offer != nil {
+                                if !store.isGuest || addByEmail.offer != nil { settingsDivider }
+                                NavigationLink {
+                                    AssistantsPage(model: assistants)
+                                } label: {
+                                    SettingsRow(title: localizer.text("assistants.row"), symbol: "globe",
+                                                badge: localizer.text("assistants.experimental"), chevron: true)
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("settings.assistants")
                             }
                             if !store.isGuest && ParcelStore.offersLiveActivities {
                                 settingsDivider
@@ -551,7 +564,10 @@ struct AccountView: View {
             }
             .task(id: session.user?.id) {
                 addByEmail.configure(store.addByEmailClient())
-                await addByEmail.load()
+                assistants.configure(store.assistantsClient())
+                async let inbox: Void = addByEmail.load()
+                async let connected: Void = assistants.load()
+                _ = await (inbox, connected)
             }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active { Task { await addByEmail.reloadOnReturn() } }
@@ -1151,6 +1167,7 @@ struct SettingsWindow: View {
     @EnvironmentObject private var store: ParcelStore
     @EnvironmentObject private var localizer: Localizer
     @StateObject private var addByEmail = AddByEmailModel()
+    @StateObject private var assistants = AssistantsModel()
 
     var body: some View {
         TabView {
@@ -1169,6 +1186,12 @@ struct SettingsWindow: View {
                     AddByEmailPage(model: addByEmail, email: session.user?.email).frame(height: 540)
                 }
             }
+            // Only once the server says assistants may connect to the account.
+            if assistants.offer != nil {
+                Tab(localizer.text("assistants.row"), systemImage: "globe") {
+                    AssistantsPage(model: assistants).frame(height: 540)
+                }
+            }
             Tab(localizer.text("native.account"), systemImage: "person.crop.circle") {
                 AccountView().frame(height: 540)
             }
@@ -1178,7 +1201,10 @@ struct SettingsWindow: View {
         .environment(\.sheetEdgeLit, false)
         .task(id: session.user?.id) {
             addByEmail.configure(store.addByEmailClient())
-            await addByEmail.load()
+            assistants.configure(store.assistantsClient())
+            async let inbox: Void = addByEmail.load()
+            async let connected: Void = assistants.load()
+            _ = await (inbox, connected)
         }
         // Gmail's confirmation, sent while the reader was in Gmail, shows on coming back.
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.didBecomeActiveNotification)) { _ in

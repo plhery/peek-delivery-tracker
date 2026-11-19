@@ -495,13 +495,16 @@ Key server modules:
     through, so a stranger can't lock out an assistant's shared addresses. A network may open the consent page 30 times a minute (a /48 120) and register 20
     clients an hour. An
     account has at most 50 grants, personal tokens included, and 10 personal tokens, counted
-    one request at a time; Settings lists the assistants and disconnects any.
+    one request at a time; Settings lists the assistants and disconnects any. The website's
+    Settings and the iPhone, iPad and Mac app's show the same page.
   - Settings also shows how to add Peek to Claude (from its connector directory, or as a custom
-    connector where Claude doesn't list it), ChatGPT and Gemini, with each one's menu
+    connector where Claude doesn't list it), ChatGPT, Gemini and OpenClaw, with each one's menu
     names in English as its help pages give them and the plans and places that can, and to
     Home Assistant through Peek's integration ([peek-ha](https://github.com/plhery/peek-ha)),
     and what to ask a connected assistant, first to add the tracking numbers in the user's
-    emails.
+    emails. The steps are copy keys with those names, in `shared/assistant-setups.json`, which
+    the website, `/assistants` and the iPhone, iPad and Mac app read (the app from
+    `AssistantSetups.json` in its generated resources).
   - The tools work on the token's account alone, through the owner-checked functions the
     app uses. A carrier change, an archive and a restore run the owner's own database
     functions for the token's account (`change_account_package_carrier`,

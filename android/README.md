@@ -148,7 +148,8 @@ absolute or from `android/`:
 
 - `peek.releaseXcconfig` names an xcconfig with the release's server settings, the ones `ios/Configuration/Local.xcconfig`
   holds. They replace the release build type's alone: debug builds and tests keep the iPhone build's. The bundle and
-  the APK refuse to build without `SDT_USE_API = YES` and an `SDT_SUPABASE_URL`, as `scripts/upload-ios-app.sh` does.
+  the APK refuse to build without `SDT_USE_API = YES`, an `SDT_SUPABASE_URL` and its `SDT_SUPABASE_PUBLISHABLE_KEY`,
+  without which nobody could sign in.
 - `peek.uploadProperties` names a properties file with `storeFile` (absolute, or from the file's folder),
   `storePassword`, `keyAlias` and `keyPassword`. Without it the release is unsigned, as on CI.
 

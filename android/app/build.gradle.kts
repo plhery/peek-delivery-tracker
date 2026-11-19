@@ -1,3 +1,4 @@
+import java.net.URI
 import java.util.Properties
 
 plugins {
@@ -32,15 +33,21 @@ val releaseRead: Map<String, String>? = releaseXcconfig?.let { xcconfigSettings(
 val releaseOverrides: Map<String, String> = releaseRead.orEmpty()
 val releaseSettings: Map<String, String> = xcconfig + releaseOverrides
 
+/** Whether `value` is an http(s) address with a host, which AppConfiguration takes as the sign-in service's. */
+fun serviceUrl(value: String?): Boolean =
+    runCatching { URI(value.orEmpty()) }.getOrNull()?.let { it.scheme in setOf("https", "http") && !it.host.isNullOrEmpty() } == true
+
 /**
- * Why a release would not reach the server, as scripts/upload-ios-app.sh refuses an iPhone build: its settings need
- * `SDT_USE_API = YES` and a Supabase URL. Empty when they have both.
+ * Why a release would not reach the server or let anyone sign in, as scripts/upload-ios-app.sh refuses an iPhone build:
+ * its settings need `SDT_USE_API = YES`, a Supabase URL and its publishable key, which the app signs in with
+ * (`AppConfiguration.authenticationConfigured`). Empty when they have all three.
  */
 val releaseRefusal: String = when {
     releaseXcconfig != null && releaseRead == null -> "peek.releaseXcconfig names $releaseXcconfig, which can't be read"
-    releaseSettings["SDT_USE_API"] != "YES" || releaseSettings["SDT_SUPABASE_URL"].isNullOrEmpty() ->
-        "A release must connect the app to the server: name an xcconfig with SDT_USE_API = YES and SDT_SUPABASE_URL " +
-            "in -Ppeek.releaseXcconfig=<path> (android/README.md)"
+    releaseSettings["SDT_USE_API"] != "YES" || !serviceUrl(releaseSettings["SDT_SUPABASE_URL"]) ||
+        releaseSettings["SDT_SUPABASE_PUBLISHABLE_KEY"].isNullOrEmpty() ->
+        "A release must connect the app to the server: name an xcconfig with SDT_USE_API = YES, SDT_SUPABASE_URL and " +
+            "SDT_SUPABASE_PUBLISHABLE_KEY in -Ppeek.releaseXcconfig=<path> (android/README.md)"
     else -> ""
 }
 

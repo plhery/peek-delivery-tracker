@@ -134,9 +134,10 @@ Apple's, so the same rule about edge protection applies.
   `X-Real-IP` and `X-Forwarded-For`. Without it, every visitor without an account shares
   one client allowance. With Cloudflare, keep IP geolocation enabled and overwrite
   `CF-IPCountry` too: new parcel lookups use it as a weak country hint for carrier recognition.
-- Optional: `PUBLIC_LOOKUPS_PER_DAY` (default 15) and `PUBLIC_LOOKUPS_GLOBAL_PER_DAY`
-  (default 300) set how many parcels can be looked up without an account per UTC day, per
-  client and overall. `0` turns lookups off. An IPv6 /48 may make ten clients' lookups.
+- Optional: `PUBLIC_LOOKUPS_PER_DAY` (default 15), `PUBLIC_LOOKUPS_NETWORK_PER_DAY`
+  (default 50) and `PUBLIC_LOOKUPS_GLOBAL_PER_DAY` (default 300) set how many parcels can be
+  looked up without an account per UTC day, per client, per IPv6 /48 and overall. `0` turns
+  lookups off.
   Scrapers rotate through residential addresses, so only the overall allowances bound
   them: keep them a small multiple of real use.
 - Optional: `PUBLIC_DETECTIONS_PER_DAY` (default 60) and

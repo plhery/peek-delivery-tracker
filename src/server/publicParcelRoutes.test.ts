@@ -360,11 +360,11 @@ describe('looking up a parcel without an account', () => {
 
   it('takes the daily allowances from the environment', async () => {
     vi.stubEnv('PUBLIC_LOOKUPS_PER_DAY', '3');
+    vi.stubEnv('PUBLIC_LOOKUPS_NETWORK_PER_DAY', '30');
     vi.stubEnv('PUBLIC_LOOKUPS_GLOBAL_PER_DAY', '0');
     const claim = allow();
     store();
     await lookup({ trackingNumber }, '2001:db8:0:9::1');
-    // An IPv6 /48 may make ten clients' lookups.
     expect(claim).toHaveBeenCalledExactlyOnceWith({
       bucket: expect.any(String), limit: 3, overall: { bucket: 'global', limit: 0 },
       network: { bucket: expect.stringMatching(/^network:[0-9a-f]{64}$/), limit: 30 },
@@ -379,7 +379,7 @@ describe('looking up a parcel without an account', () => {
     await lookup({ trackingNumber }, '2001:db8:8:1::1');
     const claims = claim.mock.calls.map(([claimed]) => claimed);
     expect(claims[0]!.bucket).not.toBe(claims[1]!.bucket);
-    expect(claims[0]!.network).toEqual({ bucket: claims[1]!.network!.bucket, limit: 150 });
+    expect(claims[0]!.network).toEqual({ bucket: claims[1]!.network!.bucket, limit: 50 });
     expect(claims[2]!.network!.bucket).not.toBe(claims[0]!.network!.bucket);
     // The network's counter is not a client's.
     expect(claims.map((claimed) => claimed.bucket)).not.toContain(claims[0]!.network!.bucket.slice('network:'.length));

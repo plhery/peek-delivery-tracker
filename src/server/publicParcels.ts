@@ -53,8 +53,8 @@ const OWNER_KEY = /^[A-Za-z0-9_-]{43}$/;
 const SYNC_ERROR_CODE = /^[a-z][a-z_]*(?::[a-z_]+)?$/;
 const DEFAULT_LOOKUPS_PER_DAY = 15;
 const DEFAULT_LOOKUPS_GLOBAL_PER_DAY = 300;
-/** An IPv6 /48 may make this many clients' lookups: it can be one customer's, or a mobile network's phones. */
-const CLIENTS_PER_NETWORK = 10;
+/** An IPv6 /48's lookups: it can be one customer's, or a mobile network's phones. */
+const DEFAULT_LOOKUPS_NETWORK_PER_DAY = 50;
 const DEFAULT_DETECTIONS_PER_DAY = 60;
 const DEFAULT_DETECTIONS_GLOBAL_PER_DAY = 600;
 /** The share of an overall allowance past which the server says it is running out. */
@@ -121,7 +121,7 @@ export function lookupLimits(env: Environment = process.env): { perClient: numbe
   const perClient = allowance(env.PUBLIC_LOOKUPS_PER_DAY, DEFAULT_LOOKUPS_PER_DAY);
   return {
     perClient,
-    perNetwork: perClient * CLIENTS_PER_NETWORK,
+    perNetwork: allowance(env.PUBLIC_LOOKUPS_NETWORK_PER_DAY, DEFAULT_LOOKUPS_NETWORK_PER_DAY),
     overall: allowance(env.PUBLIC_LOOKUPS_GLOBAL_PER_DAY, DEFAULT_LOOKUPS_GLOBAL_PER_DAY),
   };
 }

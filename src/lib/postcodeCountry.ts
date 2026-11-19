@@ -37,6 +37,11 @@ export function takesAnyPostcode(carrierId: CarrierId, trackingNumber: string): 
     .some(({ field, validator }) => field === 'postcode' && validator === 'internationalPostcode');
 }
 
+/** Whether the carrier's lookup reads the country of a postcode given for any of its numbers. */
+export function mayReadPostcodeCountry(carrierId: CarrierId): boolean {
+  return carrierInfo(carrierId).capabilities.tracking.requirements.some(({ readsCountry }) => readsCountry === true);
+}
+
 /** Whether the carrier's lookup reads the country of the postcode given for this number (the catalog's `readsCountry`). */
 export function readsPostcodeCountry(carrierId: CarrierId, trackingNumber: string): boolean {
   return carrierRequirements(carrierId, trackingNumber).some(({ field, readsCountry }) => field === 'dpdPostcode' && readsCountry === true);

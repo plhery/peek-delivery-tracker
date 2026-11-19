@@ -154,7 +154,7 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
       const value = found.input(requirement.field);
       // The postcode this device gave before: an empty optional field offers it, and a field holding it can forget it.
       const remembered = postcode ? found.remembered : null;
-      const holdsRemembered = remembered !== null && value.trim().toUpperCase().replace(/\s+/g, ' ') === remembered;
+      const holdsRemembered = remembered !== null && value.trim().toUpperCase().replace(/\s+/g, ' ') === remembered.postcode;
       return <div key={requirement.field} className="door-input">
         <label htmlFor={id}>
           {locale === 'en' ? requirement.label : t(`add.requirement.${requirement.field}`)}
@@ -176,12 +176,16 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
             })} />
         </PostcodeCountry>
         {remembered && !value && requirement.optional && <button type="button" className="door-suggestion" disabled={Boolean(state.job)}
-          onClick={() => send({ type: 'fill', carrier: found.inputCarrier, field: requirement.field, value: remembered })}>
-          {t('add.usePostcode', { postcode: remembered })}
+          onClick={() => {
+            send({ type: 'fill', carrier: found.inputCarrier, field: requirement.field, value: remembered.postcode });
+            // The postcode goes with the country it was given from.
+            if (remembered.country) send({ type: 'country', carrier: found.inputCarrier, country: remembered.country });
+          }}>
+          {t('add.usePostcode', { postcode: remembered.postcode })}
         </button>}
         {holdsRemembered && <button type="button" className="door-input__forget" disabled={Boolean(state.job)}
           onClick={() => {
-            forgetPostcode(remembered);
+            forgetPostcode(remembered.postcode);
             send({ type: 'fill', carrier: found.inputCarrier, field: requirement.field, value: '' });
             // The button goes with the postcode: the focus stays with the field it emptied.
             document.getElementById(id)?.focus();

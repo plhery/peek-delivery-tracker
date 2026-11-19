@@ -73,8 +73,8 @@ export function ChangeCarrierSheet({
   const startingCountry = (id: CarrierId) => id === parcel.carrier && parcel.dpdPostcode
     ? initialPostcodeCountry(id, parcel.trackingNumber, [parcel.dpdPostcodeCountry])
     : initialPostcodeCountry(id, parcel.trackingNumber, [parcel.destinationCountry, deviceCountry()]);
-  const [postcodeCountry, setPostcodeCountry] = useState(() => startingCountry(
-    selectedCarrier === 'auto' ? automaticCarrier ?? parcel.carrier : selectedCarrier));
+  // The country the reader names; until then the postcode's own.
+  const [chosenCountry, setChosenCountry] = useState<string>();
   const [providerPostcode, setProviderPostcode] = useState('');
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -101,16 +101,19 @@ export function ChangeCarrierSheet({
   const providerAsks = Boolean(parcel.providerInputNeeded && chosenCarrier === parcel.carrier);
   // A provider asking for the delivery postcode is answered in the carrier's own postcode field when it has
   // one (PostNL's for a 3S parcel): every provider receives that postcode. Otherwise it gets a field of its own.
-  const ownPostcode = carrierRequirements(chosenCarrier, parcel.trackingNumber).some(({ field }) => field === 'dpdPostcode');
-  const requirements = carrierRequirements(chosenCarrier, parcel.trackingNumber)
+  const carrierFields = carrierRequirements(chosenCarrier, parcel.trackingNumber);
+  const ownField = carrierFields.find(({ field }) => field === 'dpdPostcode');
+  const ownPostcode = Boolean(ownField);
+  // A required postcode starts from one given before, with its country; an optional one is only offered.
+  const postcodeField = rememberedPostcodeField(chosenCarrier, parcel.trackingNumber,
+    ownField && providerAsks ? { ...ownField, optional: false } : ownField, dpdPostcode, postcodes, chosenCountry);
+  const postcodeCountry = chosenCountry ?? postcodeField.country ?? startingCountry(chosenCarrier);
+  const requirements = carrierFields
     .map((requirement) => postcodeFieldFor(requirement, chosenCarrier, parcel.trackingNumber, postcodeCountry))
     .map((requirement) => providerAsks && requirement.field === 'dpdPostcode' ? { ...requirement, optional: false } : requirement);
   const needsProviderPostcode = providerAsks && !ownPostcode;
   let normalizedProviderPostcode: string | undefined;
   if (needsProviderPostcode) { try { normalizedProviderPostcode = normalizeDeliveryPostcode(providerPostcode); } catch { /* The field stays invalid until complete. */ } }
-  // A required postcode starts from one given before; an optional one is only offered.
-  const postcodeField = rememberedPostcodeField(chosenCarrier,
-    requirements.find(({ field }) => field === 'dpdPostcode'), dpdPostcode, postcodes);
   const valueFor = (field: CarrierInputField) => field === 'trackingUrl' ? trackingUrl
     : field === 'phoneDigits' ? phoneDigits : postcodeField.value;
   const requirementsSatisfied = (!needsProviderPostcode || Boolean(normalizedProviderPostcode)) && requirements.every((requirement) =>
@@ -135,7 +138,7 @@ export function ChangeCarrierSheet({
     setTrackingUrl(id === parcel.carrier ? parcel.trackingUrl ?? '' : '');
     setDpdPostcode(id === parcel.carrier ? parcel.dpdPostcode || undefined : undefined);
     setPhoneDigits(id === parcel.carrier ? parcel.phoneDigits ?? '' : '');
-    setPostcodeCountry(startingCountry(id ?? parcel.carrier));
+    setChosenCountry(undefined);
     setError(null);
   }
 
@@ -226,7 +229,7 @@ export function ChangeCarrierSheet({
                 carrier={chosenCarrier}
                 countries={requirement.field === 'dpdPostcode' ? postcodeCountries(chosenCarrier, parcel.trackingNumber) : []}
                 value={postcodeCountry}
-                onChange={setPostcodeCountry}
+                onChange={setChosenCountry}
               >
                 <input
                   className={`field__input${lettersPostcode(requirement) ? ' field__input--postcode' : ''}`}
@@ -251,8 +254,13 @@ export function ChangeCarrierSheet({
                 />
               </PostcodeCountry>
               {requirement.field === 'dpdPostcode' && postcodeField.offered && (
-                <button type="button" className="field__suggestion" onClick={() => setDpdPostcode(postcodeField.offered)}>
-                  {t('add.usePostcode', { postcode: postcodeField.offered })}
+                <button type="button" className="field__suggestion" onClick={() => {
+                  const offered = postcodeField.offered!;
+                  setDpdPostcode(offered.postcode);
+                  // The postcode goes with the country it was given from.
+                  if (offered.country) setChosenCountry(offered.country);
+                }}>
+                  {t('add.usePostcode', { postcode: postcodeField.offered.postcode })}
                 </button>
               )}
               {providerAsks && requirement.field === 'dpdPostcode' ? <small className="field__help">

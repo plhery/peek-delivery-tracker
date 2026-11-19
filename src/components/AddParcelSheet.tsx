@@ -241,19 +241,21 @@ export function AddParcelSheet({
   const knownElsewhere = selectedCarrier !== 'auto' && check.status === 'found' && check.carrier !== selectedCarrier
     ? carrierInfo(check.carrier, locale) : null;
   const carrier = trackingNumber ? carrierInfo(resolvedCarrier, locale) : null;
-  // A postcode is from the device's country unless the reader names another the carrier takes.
+  const chosenCountry = carrier ? postcodeCountryChoices[carrier.id] : undefined;
+  const carrierFields = carrier ? carrierRequirements(carrier.id, trackingNumber) : [];
+  // A required postcode starts from one given before, with its country; an optional one is only offered.
+  const { value: postcodeValue, offered: offeredPostcode, country: rememberedCountry } = rememberedPostcodeField(resolvedCarrier,
+    trackingNumber, carrierFields.find(({ field }) => field === 'dpdPostcode'), carrierPostcodes[resolvedCarrier], postcodes, chosenCountry);
+  // A postcode is from the country the reader names, the remembered one's, or the device's when the carrier takes it.
   const postcodeCountry = carrier
-    ? postcodeCountryChoices[carrier.id] ?? initialPostcodeCountry(carrier.id, trackingNumber, [region]) : null;
-  const requirements = carrier ? carrierRequirements(carrier.id, trackingNumber)
-    .map((requirement) => postcodeFieldFor(requirement, carrier.id, trackingNumber, postcodeCountry)) : [];
+    ? chosenCountry ?? initialPostcodeCountry(carrier.id, trackingNumber, [rememberedCountry, region]) : null;
+  const requirements = carrierFields
+    .map((requirement) => postcodeFieldFor(requirement, carrier!.id, trackingNumber, postcodeCountry));
   const requiresCarrierConfirmation =
     selectedCarrier === 'auto' && parsedTracking.confidence === 'low'
     && !tracksAutomatically(parsedTracking.carrier);
   const parsedCarrierTrackingUrl =
     parsedTracking.carrier === resolvedCarrier ? parsedTracking.trackingUrl : undefined;
-  // A required postcode starts from one given before; an optional one is only offered.
-  const { value: postcodeValue, offered: offeredPostcode } = rememberedPostcodeField(resolvedCarrier,
-    requirements.find(({ field }) => field === 'dpdPostcode'), carrierPostcodes[resolvedCarrier], postcodes);
   const carrierInputValue = (field: CarrierInputField) =>
     field === 'trackingUrl' && parsedCarrierTrackingUrl
       ? parsedCarrierTrackingUrl
@@ -572,9 +574,14 @@ export function AddParcelSheet({
                       <button
                         type="button"
                         className="field__suggestion"
-                        onClick={() => setCarrierPostcodes((current) => ({ ...current, [resolvedCarrier]: offeredPostcode }))}
+                        onClick={() => {
+                          setCarrierPostcodes((current) => ({ ...current, [resolvedCarrier]: offeredPostcode.postcode }));
+                          // The postcode goes with the country it was given from.
+                          const { country } = offeredPostcode;
+                          if (country) setPostcodeCountryChoices((current) => ({ ...current, [resolvedCarrier]: country }));
+                        }}
                       >
-                        {t('add.usePostcode', { postcode: offeredPostcode })}
+                        {t('add.usePostcode', { postcode: offeredPostcode.postcode })}
                       </button>
                     )}
                     {requirement.help && (

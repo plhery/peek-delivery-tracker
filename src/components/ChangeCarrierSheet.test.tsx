@@ -225,6 +225,32 @@ describe('ChangeCarrierSheet', () => {
       expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'dpd', dpdPostcode: '' }));
     });
 
+    it('gives a postcode given before with the country it was given from', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      const onChange = vi.fn().mockResolvedValue(undefined);
+      const user = userEvent.setup();
+      const postcodes = [{ carrier: 'spring-gds', postcode: '1000', country: 'BE' }] as const;
+      // PostNL's optional field offers it, and using it names its country.
+      const { unmount } = render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
+        postcodes={postcodes} onChange={onChange} onClose={vi.fn()} />);
+      const postnl = screen.getByRole('dialog', { name: 'Change carrier' });
+      await user.click(within(postnl).getByRole('button', { name: 'Use 1000' }));
+      expect(within(postnl).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('BE');
+      await user.click(save(postnl));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' }));
+      unmount();
+
+      // Mondial Relay's required field starts from it, on its country.
+      onChange.mockClear();
+      render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'mondial-relay', trackingNumber: '40283715' }} initialCarrier="mondial-relay"
+        postcodes={postcodes} onChange={onChange} onClose={vi.fn()} />);
+      const mondial = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(mondial)).toHaveValue('1000');
+      expect(within(mondial).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('BE');
+      await user.click(save(mondial));
+      expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'mondial-relay', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' }));
+    });
+
     it('keeps the parcel’s own postcode for its own carrier', async () => {
       vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
       const user = userEvent.setup();

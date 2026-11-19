@@ -993,6 +993,36 @@ describe('App', () => {
     expect(within(sheet).queryByRole('button', { name: 'Forget this postcode' })).not.toBeInTheDocument();
   });
 
+  it('starts a postcode given before on the country it was given from', async () => {
+    const repo = createDemoRepo(window.localStorage);
+    await repo.add({
+      trackingNumber: '40283715',
+      label: 'Previous Mondial Relay parcel',
+      carrier: 'mondial-relay',
+      dpdPostcode: '1000',
+      dpdPostcodeCountry: 'BE',
+    });
+    const add = vi.fn(repo.add);
+    const user = userEvent.setup();
+    renderApp({ ...repo, add });
+    await screen.findByText('Previous Mondial Relay parcel');
+
+    await user.click(screen.getByRole('button', { name: /add a parcel/i }));
+    const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
+    await user.type(within(sheet).getByLabelText(/tracking number/i), '76434219');
+    await pickCarrier(user, within(sheet).getByRole('button', { name: /^Detect automatically/ }), 'Mondial Relay');
+    expect(within(sheet).getByLabelText(/delivery postcode/i)).toHaveValue('1000');
+    expect(within(sheet).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('BE');
+    await user.click(within(sheet).getByRole('button', { name: /add parcel/i }));
+    expect(add).toHaveBeenCalledWith({
+      trackingNumber: '76434219',
+      label: '',
+      carrier: 'mondial-relay',
+      dpdPostcode: '1000',
+      dpdPostcodeCountry: 'BE',
+    });
+  });
+
   it('shows the first sync in progress and reflects its result without manual refresh', async () => {
     const pendingEvent = {
       id: 'event-pending',

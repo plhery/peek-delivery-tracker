@@ -14,7 +14,7 @@ import {
   type TrackingInputMatch,
 } from '../../lib/carriers';
 import { initialPostcodeCountry, postcodeCountries, postcodeFieldFor, sentPostcodeCountry } from '../../lib/postcodeCountry';
-import { rememberedPostcode, type GivenPostcode } from '../../lib/postcodeMemory';
+import { rememberedPostcode, type GivenPostcode, type RememberedPostcode } from '../../lib/postcodeMemory';
 import type { CarrierId } from '../../types';
 import type { CarrierAnswer, ParcelLookupInput } from '../linkModel';
 import { checkDigitTrouble, readText, type CheckDigitTrouble, type NumberInText, type OrderShop, type Reading } from './reading';
@@ -177,7 +177,7 @@ export interface Survey {
    * The postcode this device gave before that the carrier's field takes: a
    * required field starts from it, an optional one offers it.
    */
-  remembered: string | null;
+  remembered: RememberedPostcode | null;
   /** The number whose carriers should be asked now. */
   ask: string | null;
   /** That number as typed: its dashes and spaces tell some carriers' numbers apart. */
@@ -245,18 +245,21 @@ export function survey(state: LookupState, device: readonly DeviceParcel[] = [],
   const suggested = match && source === 'none' && state.carrier === 'auto' && answer?.inputSuggested?.field === 'dpdPostcode'
     && ['none', 'unasked', 'failed'].includes(check.status) ? answer.inputSuggested.carrier : null;
   const inputCarrier = suggested ?? carrier;
-  const postcodeCountry = match ? state.countries[inputCarrier] ?? initialPostcodeCountry(inputCarrier, match.trackingNumber, [state.region]) : null;
-  const requirements = (!match || onDevice ? []
+  const carrierFields = !match || onDevice ? []
     : suggested ? carrierRequirements(suggested, match.trackingNumber)
       .filter((requirement) => requirement.field === 'dpdPostcode').map((requirement) => ({ ...requirement, optional: true }))
-      : carrier !== 'unknown' ? carrierRequirements(carrier, match.trackingNumber) : [])
-    .map((requirement) => postcodeFieldFor(requirement, inputCarrier, match!.trackingNumber, postcodeCountry));
+      : carrier !== 'unknown' ? carrierRequirements(carrier, match.trackingNumber) : [];
+  const chosenCountry = state.countries[inputCarrier];
+  // A required postcode starts from one given before, with its country; an optional one is only offered.
+  const postcodeField = carrierFields.find((requirement) => requirement.field === 'dpdPostcode');
+  const remembered = (match && postcodeField && rememberedPostcode(inputCarrier, match.trackingNumber, postcodeField, postcodes, chosenCountry)) || null;
+  const filled = state.inputs[inputCarrier]?.dpdPostcode === undefined && !postcodeField?.optional ? remembered : null;
+  const postcodeCountry = match
+    ? chosenCountry ?? initialPostcodeCountry(inputCarrier, match.trackingNumber, [filled?.country, state.region]) : null;
+  const requirements = carrierFields.map((requirement) => postcodeFieldFor(requirement, inputCarrier, match!.trackingNumber, postcodeCountry));
   const pastedUrl = match && match.carrier === carrier ? match.trackingUrl : undefined;
-  // A required postcode starts from one given before; an optional one is only offered.
-  const postcodeField = requirements.find((requirement) => requirement.field === 'dpdPostcode');
-  const remembered = (postcodeField && rememberedPostcode(inputCarrier, postcodeField, postcodes)) || null;
   const input = (field: CarrierInputField) => field === 'trackingUrl' && pastedUrl ? pastedUrl
-    : state.inputs[inputCarrier]?.[field] ?? (field === 'dpdPostcode' && !postcodeField?.optional ? remembered : null) ?? '';
+    : state.inputs[inputCarrier]?.[field] ?? (field === 'dpdPostcode' ? filled?.postcode : null) ?? '';
   // A link that came with the paste needs no field of its own.
   const fields = requirements.filter((requirement) =>
     !(requirement.field === 'trackingUrl' && pastedUrl && requirementSatisfied(requirement, pastedUrl)));

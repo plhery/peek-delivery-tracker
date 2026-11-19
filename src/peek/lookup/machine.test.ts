@@ -421,7 +421,7 @@ describe('a postcode this device gave before', () => {
   it('fills a required postcode in, and the visitor can still change or clear it', () => {
     const postcodes = [{ carrier: 'dpd', postcode: '8004' }] as const;
     const chosen = choose(GLS, postcodes);
-    expect(survey(chosen, [], postcodes)).toMatchObject({ need: null, missing: null, remembered: '8004' });
+    expect(survey(chosen, [], postcodes)).toMatchObject({ need: null, missing: null, remembered: { postcode: '8004' } });
     expect(survey(chosen, [], postcodes).input('dpdPostcode')).toBe('8004');
     expect(run([track], [], chosen, postcodes).job)
       .toEqual({ type: 'lookup', carrier: GLS, input: { trackingNumber: SHARED, carrier: GLS, dpdPostcode: '8004' } });
@@ -432,7 +432,7 @@ describe('a postcode this device gave before', () => {
   it('leaves an optional one empty, for the visitor to use', () => {
     const postcodes = [{ carrier: GLS, postcode: '8004' }] as const;
     const chosen = choose('dpd', postcodes);
-    expect(survey(chosen, [], postcodes)).toMatchObject({ remembered: '8004' });
+    expect(survey(chosen, [], postcodes)).toMatchObject({ remembered: { postcode: '8004' } });
     expect(survey(chosen, [], postcodes).input('dpdPostcode')).toBe('');
     expect(run([track], [], chosen, postcodes).job).toEqual({ type: 'lookup', carrier: 'dpd', input: { trackingNumber: SHARED, carrier: 'dpd' } });
   });
@@ -443,6 +443,22 @@ describe('a postcode this device gave before', () => {
     // A French postcode never fills a Swiss carrier's four digits.
     expect(glsField([{ carrier: 'dpd', postcode: '75001' }])).toMatchObject({ remembered: null, missing: { field: 'dpdPostcode' } });
     expect(glsField([{ carrier: 'dpd', postcode: '75001' }, { carrier: 'dpd', postcode: '8004' }]).input('dpdPostcode')).toBe('8004');
+  });
+
+  it('brings the country it was given from, and names it with the postcode', () => {
+    const MONDIAL = '40283715'; // Mondial Relay's eight digits need the postcode, from any country.
+    const postcodes = [{ carrier: 'spring-gds', postcode: '1000', country: 'BE' }] as const;
+    const chosen = run([typed(MONDIAL), { type: 'choose', carrier: 'mondial-relay' }], [], initialLookup('', 'FR'), postcodes);
+    expect(survey(chosen, [], postcodes)).toMatchObject({ postcodeCountry: 'BE', remembered: { postcode: '1000', country: 'BE' }, missing: null });
+    expect(run([track], [], chosen, postcodes).job).toEqual({ type: 'lookup', carrier: 'mondial-relay',
+      input: { trackingNumber: MONDIAL, carrier: 'mondial-relay', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' } });
+    // Another country named beside it leaves it out.
+    const french = run([{ type: 'country', carrier: 'mondial-relay', country: 'FR' }], [], chosen, postcodes);
+    expect(survey(french, [], postcodes)).toMatchObject({ postcodeCountry: 'FR', remembered: null, missing: { field: 'dpdPostcode' } });
+    // An optional field offers it with its country, and starts on the device's until it is used.
+    const postnl = run([typed('3SABCD826405193'), { type: 'choose', carrier: 'spring-gds' }], [], initialLookup('', 'FR'), postcodes);
+    expect(survey(postnl, [], postcodes)).toMatchObject({ postcodeCountry: 'FR', remembered: { postcode: '1000', country: 'BE' } });
+    expect(survey(postnl, [], postcodes).input('dpdPostcode')).toBe('');
   });
 
   it('is never sent with a carrier that asks for no postcode', () => {

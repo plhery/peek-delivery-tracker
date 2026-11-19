@@ -62,7 +62,10 @@ Where the requirement says `readsCountry`, the lookup reads the country too, and
 that can take more than one country names it beside the postcode: any country when the
 validator is `internationalPostcode`, the carrier's catalog countries otherwise. It starts on the
 country stored with the parcel's postcode, then the parcel's destination, the reader's
-country and the carrier's own. For another country than the carrier's first, the field
+country and the carrier's own. A postcode given for an earlier parcel brings the country it
+was given from ([`postcodeMemory.ts`](../src/lib/postcodeMemory.ts)): such a field takes
+only one whose country it knows, and starts on that country when it fills it or the reader
+uses it. For another country than the carrier's first, the field
 takes any country's shape and shows that country's example
 ([`postcodeCountry.ts`](../src/lib/postcodeCountry.ts), `CarrierCatalog.postcodeRequirement`
 on iPhone). Only such a country is sent: `dpdPostcodeCountry` in the API

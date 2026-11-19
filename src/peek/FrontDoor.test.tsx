@@ -399,7 +399,7 @@ describe('FrontDoor', () => {
     await waitFor(() => expect(onTracked).toHaveBeenCalledOnce());
     expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: SHARED, carrier: 'gls-ch', dpdPostcode: '8004' }, expect.any(AbortSignal));
     // The device keeps the postcode apart from the parcel, for the next one.
-    expect(JSON.parse(localStorage.getItem(POSTCODES_STORAGE_KEY) ?? '[]')).toEqual([{ carrier: 'gls-ch', postcode: '8004' }]);
+    expect(JSON.parse(localStorage.getItem(POSTCODES_STORAGE_KEY) ?? '[]')).toEqual([{ carrier: 'gls-ch', postcode: '8004', country: 'CH' }]);
     expect(JSON.stringify(recentFor(LINK_ID))).not.toContain('8004');
   });
 
@@ -459,7 +459,7 @@ describe('FrontDoor', () => {
     expect(postcode).toHaveFocus();
     // The field stays empty for the visitor, rather than taking the next one.
     expect(screen.queryByRole('button', { name: 'Forget this postcode' })).not.toBeInTheDocument();
-    expect(JSON.parse(localStorage.getItem(POSTCODES_STORAGE_KEY) ?? '[]')).toEqual([{ carrier: 'dpd', postcode: '1200' }]);
+    expect(JSON.parse(localStorage.getItem(POSTCODES_STORAGE_KEY) ?? '[]')).toEqual([{ carrier: 'dpd', postcode: '1200', country: 'CH' }]);
     // A postcode typed by hand is not one to forget.
     await user.type(postcode, '3000');
     expect(screen.queryByRole('button', { name: 'Forget this postcode' })).not.toBeInTheDocument();

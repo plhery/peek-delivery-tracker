@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import { CARRIERS, requirementSatisfied, type CarrierInputRequirement } from './carriers';
+import { homePostcodeCountry, mayReadPostcodeCountry, postcodeCountries, postcodeFieldFor, readsPostcodeCountry } from './postcodeCountry';
 import type { CarrierId } from '../types';
 
 /**
@@ -17,46 +18,77 @@ const eventName = 'postcodes-change';
 export interface GivenPostcode {
   carrier: CarrierId;
   postcode?: string | null;
+  /** The country it was given from; none for one this device kept before it kept countries. */
+  country?: string | null;
+}
+
+/** A postcode given before, and the country it is from: the carrier's home where its lookup reads the postcode alone. */
+export interface RememberedPostcode {
+  postcode: string;
+  country: string | null;
 }
 
 /** A postcode as carriers print it: trimmed, in capitals, with single spaces. */
 const printed = (postcode: string) => postcode.trim().toUpperCase().replace(/\s+/g, ' ');
 
 /**
- * The postcode to suggest for a carrier's field, from earlier parcels newest
- * first: the last one given to the same carrier, otherwise the last one given
- * to any carrier that this field accepts. Most parcels go to the same address,
- * but a Swiss postcode never fills a field that wants five digits.
+ * The country a postcode was given from. One kept without it is from the home country of the carrier it was given to,
+ * unless that carrier's lookup can read another country's: then it is not known.
  */
-export function rememberedPostcode(
-  carrier: CarrierId,
-  requirement: CarrierInputRequirement,
-  given: readonly GivenPostcode[],
-): string | undefined {
-  const accepted = given.flatMap(({ carrier: to, postcode }) => {
-    const value = postcode ? printed(postcode) : '';
-    return value && requirementSatisfied(requirement, value) ? [{ to, value }] : [];
-  });
-  return (accepted.find(({ to }) => to === carrier) ?? accepted[0])?.value;
+function givenFrom({ carrier, country }: GivenPostcode): string | null | undefined {
+  if (country) return country;
+  return mayReadPostcodeCountry(carrier) ? undefined : homePostcodeCountry(carrier);
 }
 
 /**
- * A carrier's postcode field and the postcode it offers. What the reader typed
- * stays, even emptied; until then a required field starts from the postcode
- * given before that fits, and an optional one stays empty and only offers it.
+ * The postcode to suggest for a carrier's field, from earlier parcels newest
+ * first: the last one given to the same carrier, otherwise the last one given
+ * to any carrier that this field accepts. Most parcels go to the same address,
+ * but a Swiss postcode never fills a field that wants five digits. A field that
+ * reads the postcode's country takes one only from a country it knows (the
+ * reader's choice once they make one), and the postcode brings its country.
+ */
+export function rememberedPostcode(
+  carrier: CarrierId,
+  trackingNumber: string,
+  requirement: CarrierInputRequirement,
+  given: readonly GivenPostcode[],
+  chosenCountry?: string | null,
+): RememberedPostcode | undefined {
+  const readsCountry = readsPostcodeCountry(carrier, trackingNumber);
+  const countries = postcodeCountries(carrier, trackingNumber);
+  const accepted = given.flatMap((entry) => {
+    const value = entry.postcode ? printed(entry.postcode) : '';
+    const country = readsCountry ? givenFrom(entry) : homePostcodeCountry(carrier);
+    if (!value || (readsCountry && (!country || !countries.includes(country) || (chosenCountry && country !== chosenCountry)))) return [];
+    const field = postcodeFieldFor(requirement, carrier, trackingNumber, country);
+    return requirementSatisfied(field, value) ? [{ to: entry.carrier, postcode: value, country }] : [];
+  });
+  const found = accepted.find(({ to }) => to === carrier) ?? accepted[0];
+  return found && { postcode: found.postcode, country: found.country ?? null };
+}
+
+/**
+ * A carrier's postcode field, the postcode it offers, and the country of the
+ * postcode it starts from. What the reader typed stays, even emptied; until
+ * then a required field starts from the postcode given before that fits, and
+ * an optional one stays empty and only offers it.
  */
 export function rememberedPostcodeField(
   carrier: CarrierId,
+  trackingNumber: string,
   requirement: CarrierInputRequirement | undefined,
   typed: string | undefined,
   given: readonly GivenPostcode[],
-): { value: string; offered?: string } {
-  const remembered = requirement ? rememberedPostcode(carrier, requirement, given) : undefined;
-  const value = typed ?? (requirement?.optional ? undefined : remembered) ?? '';
-  return { value, offered: requirement?.optional && !value ? remembered : undefined };
+  chosenCountry?: string | null,
+): { value: string; offered?: RememberedPostcode; country?: string | null } {
+  const remembered = requirement ? rememberedPostcode(carrier, trackingNumber, requirement, given, chosenCountry) : undefined;
+  const filled = typed === undefined && !requirement?.optional ? remembered : undefined;
+  const value = typed ?? filled?.postcode ?? '';
+  return { value, offered: requirement?.optional && !value ? remembered : undefined, country: filled?.country };
 }
 
-interface Kept { carrier: CarrierId; postcode: string }
+interface Kept { carrier: CarrierId; postcode: string; country?: string }
 const EMPTY: Kept[] = [];
 // Storage that cannot be read or written leaves the memory working for as long as the page lives.
 let memory: string | null = null;
@@ -70,9 +102,10 @@ function stored(): string | null {
 
 function isKept(value: unknown): value is Kept {
   if (!value || typeof value !== 'object') return false;
-  const { carrier, postcode } = value as Partial<Kept>;
+  const { carrier, postcode, country } = value as Partial<Kept>;
   return typeof carrier === 'string' && Object.hasOwn(CARRIERS, carrier)
-    && typeof postcode === 'string' && /^[A-Z0-9][A-Z0-9 -]{1,14}$/.test(postcode);
+    && typeof postcode === 'string' && /^[A-Z0-9][A-Z0-9 -]{1,14}$/.test(postcode)
+    && (country === undefined || (typeof country === 'string' && /^[A-Z]{2}$/.test(country)));
 }
 
 function read(): Kept[] {
@@ -119,9 +152,13 @@ export function usePostcodeMemory(): readonly GivenPostcode[] {
   return useSyncExternalStore(subscribe, read, () => EMPTY);
 }
 
-/** Keeps a postcode a lookup without an account was given; giving it again moves it to the front. */
-export function rememberPostcode(carrier: CarrierId, postcode: string): void {
-  const kept = { carrier, postcode: printed(postcode) };
+/**
+ * Keeps a postcode a lookup without an account was given, with the country sent with it (none for the carrier's
+ * home); giving it again moves it to the front.
+ */
+export function rememberPostcode(carrier: CarrierId, postcode: string, country?: string | null): void {
+  const from = country || homePostcodeCountry(carrier);
+  const kept: Kept = { carrier, postcode: printed(postcode), ...(from ? { country: from } : {}) };
   if (!isKept(kept)) return;
   write([kept, ...read().filter((entry) => entry.carrier !== carrier || entry.postcode !== kept.postcode)]);
 }

@@ -33,6 +33,7 @@ import type { ApiAuth } from './lib/apiClient';
 import type { SignInMethods } from './peek/session';
 import { carrierInfo } from './lib/carriers';
 import { usePostcodeMemory } from './lib/postcodeMemory';
+import { homePostcodeCountry } from './lib/postcodeCountry';
 import { usedCarrierIds } from './lib/carrierPicker';
 import {
   isActiveParcel,
@@ -422,13 +423,16 @@ export default function App({
     [parcels],
   );
   const devicePostcodes = usePostcodeMemory();
-  // The account's own postcodes first, then the ones this device gave without it.
+  // The account's own postcodes first, then the ones this device gave without it. A postcode stored without its country
+  // was given from the carrier's home.
   const givenPostcodes = useMemo(
     () => [
       ...[...parcels]
         .filter((parcel) => parcel.dpdPostcode)
         .sort((first, second) => second.createdAt.localeCompare(first.createdAt))
-        .map(({ carrier, dpdPostcode }) => ({ carrier, postcode: dpdPostcode })),
+        .map(({ carrier, dpdPostcode, dpdPostcodeCountry }) => ({
+          carrier, postcode: dpdPostcode, country: dpdPostcodeCountry ?? homePostcodeCountry(carrier),
+        })),
       ...devicePostcodes,
     ],
     [parcels, devicePostcodes],

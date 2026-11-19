@@ -102,7 +102,8 @@ export interface ParcelLinksClient {
   detectCarrierPublic(trackingNumber: string, signal?: AbortSignal, prefixOfSaved?: boolean): Promise<CarrierAnswer>;
   lookupParcel(input: ParcelLookupInput, signal?: AbortSignal): Promise<ParcelLookup>;
   /**
-   * `advance` is a manual refresh: the device demo moves its story one step, the API reads as usual.
+   * `advance` is a manual refresh: the device demo moves its story one step, and the API asks the owner's lookup to
+   * be checked before it is due.
    * A link whose sharing was stopped reads as unavailable; with `tellStopped` it fails as `stopped` instead.
    */
   readParcelLink(id: string, options?: ParcelLinkReadOptions): Promise<ParcelLinkRead>;

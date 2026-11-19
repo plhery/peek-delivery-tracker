@@ -509,6 +509,8 @@ out for delivery or expected today; any other parcel someone waits for is checke
 ([`waiting_package_ids`](../supabase/migrations/20261117171000_waiting_parcels.sql), read in
 pages as the unwatched ones are; a parcel neither list holds, or every parcel when the list
 cannot be read, keeps the cadence of one on screen). Opening a link counts as on screen.
+A lookup's owner refreshing its page (`refresh=true` with the owner key) checks it before it is
+due, once its last check is 2 minutes old and its carrier's spacing allows.
 
 **Out for delivery**, the news is the delivery. A carrier's own adapter is cheap and as
 fresh as the carrier, so a parcel it answers for is checked every 2 minutes while it is on

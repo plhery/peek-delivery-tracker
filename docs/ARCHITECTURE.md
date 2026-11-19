@@ -177,6 +177,8 @@ Key server modules:
     says so (`checkQueued`): the page reads again after 2 s, then more slowly up to 10 s, for a
     minute at most, so the check's result shows as it lands rather than 30 s later. The iPhone
     and Android apps' link sheets do the same, also until the parcel's first check lands.
+    The owner's refresh (`refresh=true`, with the owner key) queues one before it is due, at
+    most every 2 minutes, as often as the carrier allows and up to 10 times a minute per client.
   - `parcel_links` and the lookup counters are service-role only. An unknown, forgotten,
     expired or malformed link and a wrong key all get the same answer: a 404 with the
     service's JSON error. The web app and the iPhone and Android apps forget a parcel, or

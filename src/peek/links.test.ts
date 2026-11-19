@@ -213,6 +213,16 @@ describe('the API backend', () => {
     expect(new Headers(request.mock.calls[0][1]!.headers).get('X-Parcel-Key')).toBe(KEY);
   });
 
+  it('asks for a check of the owner\u2019s lookup when the owner refreshes, and only then', async () => {
+    const { links, request } = api(json(owner), json(owner), json(owner));
+    await links.readParcelLink(ID, { key: KEY, advance: true });
+    await links.readParcelLink(ID, { advance: true });
+    await links.readParcelLink(ID, { key: KEY, advance: true, hidden: true });
+    expect(request.mock.calls.map(([path]) => path)).toEqual([
+      `/api/public/parcels/${ID}?refresh=true`, `/api/public/parcels/${ID}`, `/api/public/parcels/${ID}?hidden=true`,
+    ]);
+  });
+
   it('reads a link that leads nowhere as unavailable, and a malformed id without asking', async () => {
     const { links, request } = api(json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404));
     expect(await links.readParcelLink(ID)).toBe('unavailable');

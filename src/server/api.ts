@@ -115,6 +115,14 @@ function ratePolicy(method: string, pathname: string): {
   return { bucket: 'write', limit: 60, window: 60 };
 }
 
+/**
+ * Counts one request against a public allowance of its own beside its route's, per client network: the seconds
+ * until it is allowed again, or 0 once counted.
+ */
+export function publicRetryAfter(request: Request, { limit, window, bucket }: { limit: number; window: number; bucket: string }): number {
+  return limiters.public.retryAfter(`${bucket}:${clientNetwork(clientIp(request))}`, { limit, window });
+}
+
 export function clientIp(request: Pick<Request, 'headers'>): string {
   if (process.env.TRUST_PROXY_HEADERS !== 'true') return 'untrusted';
   const candidate = request.headers.get('cf-connecting-ip')?.trim()

@@ -730,6 +730,47 @@ describe('reading a parcel link', () => {
     }
   });
 
+  it('checks the owner\u2019s lookup before it is due when the owner refreshes, as often as allowed', async () => {
+    vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-02T10:35:00Z') });
+    const refresh = (key: string | null = ownerKey, ip = nextIp()) => read(new NextRequest(`https://delivery.example/api/public/parcels/${linkId}?refresh=true`, {
+      headers: { 'x-real-ip': ip, ...(key ? { 'x-parcel-key': key } : {}) },
+    }), route(linkId));
+    // Checked five minutes ago: not due for an opening, but the owner may ask.
+    const recent = { carrier: 'dhl', carrier_data: {}, last_synced_at: '2026-10-02T10:30:00+00:00' };
+    find({ owner: true }, recent);
+    expect((await open(linkId, ownerKey)).status).toBe(200);
+    expect(enqueue).not.toHaveBeenCalled();
+    const asked = await refresh();
+    expect(asked.status).toBe(200);
+    expect(enqueue).toHaveBeenCalledExactlyOnceWith({ packageId, reason: 'refresh' });
+    expect(wake).toHaveBeenCalledOnce();
+    expect((await asked.json()).checkQueued).toBe(true);
+
+    // Not a viewer, nor within two minutes of the last check, nor while the carrier spaces its checks out, nor archived.
+    enqueue.mockClear();
+    find({ owner: false }, recent);
+    expect(await (await refresh(null)).json()).not.toHaveProperty('checkQueued');
+    for (const parcel of [
+      { ...recent, last_synced_at: '2026-10-02T10:34:00+00:00' },
+      { ...recent, carrier_data: { routing: { version: 1, configured_carrier: 'dhl', next_check_at: '2026-10-02T10:50:00.000Z' } } },
+      { ...recent, archived_at: '2026-10-02T08:00:00+00:00' },
+      { ...recent, one_off: false, user_id: '51000000-0000-4000-a000-000000000005' },
+    ]) {
+      find({ owner: true }, parcel);
+      expect(await (await refresh()).json()).not.toHaveProperty('checkQueued');
+    }
+    expect(enqueue).not.toHaveBeenCalled();
+
+    // A client refreshes ten lookups a minute, whichever: the rest read as usual.
+    find({ owner: true }, recent);
+    for (let index = 0; index < 11; index += 1) {
+      const answer = await refresh(ownerKey, '198.51.100.60');
+      expect(answer.status).toBe(200);
+      expect((await answer.json()).checkQueued).toBe(index < 10 ? true : undefined);
+    }
+    expect(enqueue).toHaveBeenCalledTimes(10);
+  });
+
   it('neither records the opening nor queues a check for a page out of sight', async () => {
     vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-10-02T10:35:00Z') });
     const found = find({}, { last_synced_at: '2026-10-02T09:50:00+00:00' });

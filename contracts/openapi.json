@@ -64212,6 +64212,16 @@
               "type": "boolean",
               "default": false
             }
+          },
+          {
+            "name": "refresh",
+            "in": "query",
+            "required": false,
+            "description": "true from the owner's refresh: the owner key's lookup is checked before it is due, at most every 2 minutes, as often as its carrier allows and up to 10 times a minute for a client. Ignored with hidden.",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
           }
         ],
         "responses": {

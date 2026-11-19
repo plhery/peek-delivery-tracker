@@ -41655,7 +41655,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Bogota",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "pasarex"
     },
     "trackingUrlTemplate": "https://tracking.pasarex.com/?awb={trackingNumber}",
     "linkRules": [

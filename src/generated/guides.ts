@@ -197,6 +197,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Universal parcel tracking: all your parcels in one place"
     },
     {
+      "id": "ai-assistants",
+      "slug": "track-parcels-chatgpt-claude-gemini",
+      "title": "Track your parcels in ChatGPT, Claude or Gemini"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "track-parcels-home-assistant",
+      "title": "Track your parcels in Home Assistant"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "christmas-posting-dates",
       "title": "Last posting dates for Christmas and shipping deadlines"
@@ -442,6 +452,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "universal-tracker",
       "slug": "paketverfolgung-aller-anbieter",
       "title": "Paketverfolgung aller Anbieter: alle Pakete an einem Ort"
+    },
+    {
+      "id": "ai-assistants",
+      "slug": "pakete-verfolgen-chatgpt-claude-gemini",
+      "title": "Pakete mit ChatGPT, Claude oder Gemini verfolgen"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "pakete-verfolgen-home-assistant",
+      "title": "Pakete in Home Assistant verfolgen"
     },
     {
       "id": "christmas-posting-dates",
@@ -691,6 +711,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Suivi de colis universel\u00a0: tous tes colis au même endroit"
     },
     {
+      "id": "ai-assistants",
+      "slug": "suivre-colis-chatgpt-claude-gemini",
+      "title": "Suivre ses colis avec ChatGPT, Claude ou Gemini"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "suivre-colis-home-assistant",
+      "title": "Suivre ses colis dans Home Assistant"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "date-limite-envoi-colis-noel",
       "title": "Colis de Noël\u00a0: date limite d'envoi par transporteur"
@@ -936,6 +966,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "universal-tracker",
       "slug": "tracking-universale-pacchi",
       "title": "Tracking universale: tutti i pacchi in un posto solo"
+    },
+    {
+      "id": "ai-assistants",
+      "slug": "tracciare-pacchi-chatgpt-claude-gemini",
+      "title": "Tracciare i pacchi con ChatGPT, Claude o Gemini"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "tracciare-pacchi-home-assistant",
+      "title": "Tracciare i pacchi in Home Assistant"
     },
     {
       "id": "christmas-posting-dates",
@@ -1185,6 +1225,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Seguimiento universal de paquetes: todos en un solo sitio"
     },
     {
+      "id": "ai-assistants",
+      "slug": "seguimiento-paquetes-chatgpt-claude-gemini",
+      "title": "Sigue tus paquetes en ChatGPT, Claude o Gemini"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "seguimiento-paquetes-home-assistant",
+      "title": "Sigue tus paquetes en Home Assistant"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "fecha-limite-envio-paquetes-navidad",
       "title": "Fecha límite de envío en Navidad: Correos, GLS, SEUR y MRW"
@@ -1432,6 +1482,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Como seguir todas as encomendas num só lugar"
     },
     {
+      "id": "ai-assistants",
+      "slug": "seguir-encomendas-chatgpt-claude-gemini",
+      "title": "Segue as tuas encomendas no ChatGPT, no Claude ou no Gemini"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "seguir-encomendas-home-assistant",
+      "title": "Segue as tuas encomendas no Home Assistant"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "prazos-envio-encomendas-natal",
       "title": "Prazos de envio no Natal: datas limite dos CTT, DPD e GLS"
@@ -1677,6 +1737,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "universal-tracker",
       "slug": "sledzenie-przesylek-wszystkich-firm",
       "title": "Śledzenie przesyłek wszystkich firm w jednym miejscu"
+    },
+    {
+      "id": "ai-assistants",
+      "slug": "sledzenie-przesylek-chatgpt-claude-gemini",
+      "title": "Śledź swoje przesyłki w ChatGPT, Claude lub Gemini"
+    },
+    {
+      "id": "home-assistant",
+      "slug": "sledzenie-przesylek-home-assistant",
+      "title": "Śledź swoje przesyłki w Home Assistant"
     },
     {
       "id": "christmas-posting-dates",

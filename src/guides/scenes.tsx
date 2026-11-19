@@ -1275,6 +1275,45 @@ function Market() {
   </>;
 }
 
+function Assistant() {
+  return <>
+    {/* A chat: a question, and an answer holding a parcel's card. */}
+    <Sheet x={60} y={36} width={330} height={228} rx={24}>
+      <rect x="158" y="22" width="150" height="40" rx="20" fill="var(--lilac)" opacity=".3" />
+      <rect x="176" y="38" width="100" height="8" rx="4" fill="var(--lilac)" />
+      <rect x="22" y="78" width="236" height="126" rx="20" fill="var(--lilac-soft)" />
+      <rect x="40" y="96" width="120" height="8" rx="4" fill="var(--lilac)" opacity=".6" />
+      <g transform="translate(40 118)">
+        <rect width="200" height="66" rx="14" fill={paper} />
+        <circle cx="28" cy="33" r="13" fill="var(--orange)" />
+        <rect x="54" y="22" width="96" height="8" rx="4" fill="var(--orange)" opacity=".6" />
+        <rect x="54" y="38" width="62" height="7" rx="3.5" fill="var(--orange)" opacity=".35" />
+      </g>
+    </Sheet>
+    {/* The assistant's spark. */}
+    <path d="M434 56L441 75L460 82L441 89L434 108L427 89L408 82L427 75Z" fill="var(--lilac)" />
+    <Pip x={514} ground={266} width={180} mood="joy" side={-1} />
+  </>;
+}
+
+function Home() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* A house, and on its wall a screen listing the parcels on their way. */}
+    <path d="M78 140L214 56L350 140V248H78Z" fill={paper} />
+    <path d="M70 144L214 52L358 144" stroke="var(--blue)" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round" />
+    <rect x="114" y="150" width="200" height="86" rx="12" fill={ink} />
+    <rect x="120" y="156" width="188" height="74" rx="8" fill="var(--blue-soft)" />
+    {['orange', 'green'].map((tone, index) => <g key={tone} transform={`translate(130 ${164 + index * 30})`}>
+      <rect width="168" height="24" rx="8" fill={paper} />
+      <circle cx="13" cy="12" r="6" fill={`var(--${tone})`} />
+      <rect x="28" y="8" width="72" height="7" rx="3.5" fill={`var(--${tone})`} opacity=".55" />
+    </g>)}
+    <Truck x={378} y={190} tone="blue" scale={3} />
+    <Pip x={540} ground={248} width={110} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1314,6 +1353,8 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'kaufland-orders': { tone: 'ochre', draw: Market },
   'find-tracking-number': { tone: 'ochre', draw: FindNumber },
   'universal-tracker': { tone: 'green', draw: Universal },
+  'ai-assistants': { tone: 'lilac', draw: Assistant },
+  'home-assistant': { tone: 'blue', draw: Home },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },
   'uncollected-parcel': { tone: 'ochre', draw: Uncollected },
   'parcel-lockers': { tone: 'rose', draw: Lockers },

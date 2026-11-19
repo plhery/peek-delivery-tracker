@@ -236,6 +236,35 @@ class SettingsScreenshotTest {
         compose.screenshot("settings_updates_dark")
     }
 
+    /** An account assistants may connect to: Assistants, with its "Beta" badge, in the deliveries' group. */
+    @Test
+    fun anAccountAssistantsMayConnectTo() {
+        show { assistantsClient.offer = AssistantsFixtures.offer() }
+        compose.screenshot("settings_assistants_row_light")
+    }
+
+    /** The Assistants page: the intro and the guide, Peek's address with Copy, and Claude's steps open. */
+    @Test
+    fun assistants() {
+        show { assistantsClient.offer = AssistantsFixtures.offer() }
+        tap(SETTINGS_ASSISTANTS)
+        compose.screenshot("settings_assistants_light")
+        tap("$ASSISTANTS_SETUP.Claude")
+        compose.screenshot("settings_assistants_claude_light")
+    }
+
+    /** The same in dark, then the foot: the uses and the two assistants connected with OAuth, each with Disconnect. */
+    @Test
+    fun assistantsInDark() {
+        show(dark = true) { assistantsClient.offer = AssistantsFixtures.offer() }
+        tap(SETTINGS_ASSISTANTS)
+        tap("$ASSISTANTS_SETUP.OpenClaw")
+        compose.screenshot("settings_assistants_openclaw_dark")
+        compose.onNodeWithTag("$ASSISTANTS_DISCONNECT.${AssistantsFixtures.chatGpt.id}").performScrollTo()
+        settle()
+        compose.screenshot("settings_assistants_connected_dark")
+    }
+
     /** At the largest text the rows stack their values under their titles and the appearances lose their miniatures. */
     @Test
     fun anAccountAtTheLargestText() {

@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import com.plhery.peekdeliverytracker.AppContainer
 import com.plhery.peekdeliverytracker.BuildConfig
 import com.plhery.peekdeliverytracker.core.AddByEmailStore
+import com.plhery.peekdeliverytracker.core.AssistantsStore
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
@@ -405,6 +406,12 @@ interface DeliveriesSource {
      * forwarding address, and the address itself, kept for the process.
      */
     val addByEmail: AddByEmailStore
+
+    /**
+     * Settings' Assistants (`AssistantsModel`): whether assistants may connect to the account signed in, Peek's address
+     * for them and the ones connected, with Disconnect, kept for the process.
+     */
+    val assistants: AssistantsStore
 }
 
 /**
@@ -636,6 +643,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override val invitation: FriendInvitationStore get() = container.invitation
 
     override val addByEmail: AddByEmailStore get() = container.addByEmail
+
+    override val assistants: AssistantsStore get() = container.assistants
 
     override val notificationError get() = container.parcels.notificationErrorFlow
 

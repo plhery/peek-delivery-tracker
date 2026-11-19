@@ -19,6 +19,8 @@ import com.plhery.peekdeliverytracker.core.AnalyticsCatalog
 import com.plhery.peekdeliverytracker.core.AnalyticsLifecycleObserver
 import com.plhery.peekdeliverytracker.core.AppConfiguration
 import com.plhery.peekdeliverytracker.core.AppLanguage
+import com.plhery.peekdeliverytracker.core.AssistantsStore
+import com.plhery.peekdeliverytracker.core.assistantsClient
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierBrandAssets
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
@@ -368,6 +370,9 @@ class AppContainer(
 
     /** Settings' "Add parcels by email": the account's forwarding address, where the server offers one. */
     val addByEmail = AddByEmailStore(api.addByEmailClient())
+
+    /** Settings' Assistants: Peek's address for assistants and the ones connected, where assistants may connect to the account. */
+    val assistants = AssistantsStore(api.assistantsClient())
 
     /** `ParcelLinkStore()`, or in a debug build the preview `sdt.debug.parcelLink` asks for; a test's reads before both. */
     val links: ParcelLinkStore = linkReader?.let { ParcelLinkStore(defaults, read = it) }

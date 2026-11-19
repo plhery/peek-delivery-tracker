@@ -29,6 +29,9 @@ import com.plhery.peekdeliverytracker.ui.deliveries.openCard
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
 import com.plhery.peekdeliverytracker.ui.settings.AddByEmailFixtures
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ADD_BY_EMAIL
+import com.plhery.peekdeliverytracker.ui.settings.ASSISTANTS_SETUP
+import com.plhery.peekdeliverytracker.ui.settings.AssistantsFixtures
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ASSISTANTS
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -295,6 +298,46 @@ class TalkBackScreensTest {
                 "Get a new address [button]",
                 "Notify me when an email adds a parcel [switch, on]",
                 "Turn off [button]",
+            ),
+        )
+    }
+
+    /** Settings › Assistants with Claude's steps open, down to where the screen ends. */
+    @Test
+    fun theAssistantsPage() {
+        show(READER) { assistantsClient.offer = AssistantsFixtures.offer() }
+        compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+        settle()
+        compose.onNodeWithTag(SETTINGS_ASSISTANTS).performScrollTo().performClick()
+        settle()
+        compose.onNodeWithTag("$ASSISTANTS_SETUP.Claude").performClick()
+        settle()
+        assertSpoken(
+            "the assistants page",
+            listOf(
+                "Drag handle",
+                "Settings [button]",
+                "Assistants [heading]",
+                "BETA",
+                "Connect Claude, ChatGPT, Gemini or another assistant to Peek: it can then tell you where your parcels are and add the " +
+                    "tracking numbers you give it. This feature is in beta, and it may still change.",
+                "How it works [button]",
+                "PEEK’S ADDRESS FOR ASSISTANTS [heading]",
+                "https://example.com/mcp",
+                "Copy address [button]",
+                "ADD PEEK TO YOUR ASSISTANT [heading]",
+                "Claude [button, selected]",
+                "On claude.ai, in the Claude desktop app and in the Claude app for iPhone or Android, on any plan. On a Team or " +
+                    "Enterprise plan, an owner adds Peek first: Organization settings › Connectors, Browse connectors, then Add to your team.",
+                "Open Peek Parcel Tracker in Claude’s connector directory, or in Claude open Customize › Connectors, select + and " +
+                    "search for Peek.",
+                "Select Connect.",
+                "Sign in to Peek when it asks, then select Allow.",
+                "In a chat, select + at the bottom left, then Connectors, and turn Peek on.",
+                "If Claude doesn’t list Peek Parcel Tracker, add Peek as a custom connector instead, on claude.ai or in the desktop " +
+                    "app (not in the phone apps; the Free plan allows one custom connector): open Customize › Connectors, select + " +
+                    "Add, then Add custom connector. Name it Peek, paste the address above and select Continue. Keep the sign-in " +
+                    "settings Claude finds: select Continue, then Add.",
             ),
         )
     }

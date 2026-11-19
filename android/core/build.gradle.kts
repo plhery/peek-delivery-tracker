@@ -18,6 +18,7 @@ val syncSharedResources by tasks.registering(Sync::class) {
     from(iosResources) {
         include(
             "Analytics.json",
+            "AssistantSetups.json",
             "Brand.json",
             "CarrierCatalog.json",
             "ContractFixtures.json",

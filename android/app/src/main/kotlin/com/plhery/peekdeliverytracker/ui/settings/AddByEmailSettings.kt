@@ -117,7 +117,7 @@ import kotlin.math.max
 // server offers some accounts only.
 
 /**
- * The forwarding address's page, pushed in Settings for [account]: the "Experimental" badge over the intro in
+ * The forwarding address's page, pushed in Settings for [account]: the "Beta" badge over the intro in
  * subheadline secondary, then "inbox.start" while the account has no address yet. Forwarding one email by hand is all
  * it asks then: the address to copy or share, and what the last emails did, with what a few of them call for; then
  * whether each parcel an email adds is notified, on unless switched off; having the mail service forward by itself,
@@ -298,7 +298,7 @@ private fun EmailRow(entry: AddByEmailEntry) {
 
 /** A note under a group: caption secondary, 2 in. */
 @Composable
-private fun Note(text: String) {
+internal fun Note(text: String) {
     Text(text, Modifier.padding(start = 2.dp), color = PeekTheme.colors.secondaryText, style = PeekTheme.type.caption.sfLines())
 }
 
@@ -760,7 +760,7 @@ private fun SideBySide(gap: Dp, content: @Composable () -> Unit) {
  * `.padding(.vertical, 4).contentShape(Rectangle()).padding(.vertical, -4)`: drawn and touched [vertical] taller at
  * each end than it is laid out, as a chip 44 tall to the touch stands in the room of 36.
  */
-private fun Modifier.overhang(vertical: Dp): Modifier = layout { measurable, constraints ->
+internal fun Modifier.overhang(vertical: Dp): Modifier = layout { measurable, constraints ->
     val extra = vertical.roundToPx()
     val placeable = measurable.measure(
         constraints.copy(maxHeight = if (constraints.hasBoundedHeight) constraints.maxHeight + 2 * extra else constraints.maxHeight),

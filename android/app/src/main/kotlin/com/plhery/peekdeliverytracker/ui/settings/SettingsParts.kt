@@ -124,7 +124,7 @@ internal fun SettingsGroup(
     }
 }
 
-/** `SettingsBadge`: a word that marks a group or a row, such as "New" or "Experimental": caption 2 bold, upper case, tracked 0.4, ochre on its surface. */
+/** `SettingsBadge`: a word that marks a group or a row, such as "New" or "Beta": caption 2 bold, upper case, tracked 0.4, ochre on its surface. */
 @Composable
 internal fun SettingsBadge(text: String, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors

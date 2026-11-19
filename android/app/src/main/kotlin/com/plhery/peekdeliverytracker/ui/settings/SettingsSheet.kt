@@ -143,6 +143,7 @@ internal interface AccountHost {
 internal fun AccountSheetHost(state: AccountHost) {
     val work = state.source.pageWork
     val launch = state.source.launch
+    val assistantsWorking by state.source.assistants.workingFlow.collectAsState()
     val nav = SettingsNav(
         pushed = rememberForLaunch<String?>(launch, null),
         alert = rememberForLaunch<String?>(launch, null),
@@ -155,7 +156,8 @@ internal fun AccountSheetHost(state: AccountHost) {
     val data = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
     val updates = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
     val inbox = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
-    val scrolls = remember(root, data, updates, inbox) { SettingsScrolls(root, data, updates, inbox) }
+    val assistants = rememberSaveable(openings, saver = ScrollState.Saver) { ScrollState(0) }
+    val scrolls = remember(root, data, updates, inbox, assistants) { SettingsScrolls(root, data, updates, inbox, assistants) }
     Sheet(
         visible = state.showingAccount,
         onDismiss = state::closeAccount,
@@ -168,9 +170,10 @@ internal fun AccountSheetHost(state: AccountHost) {
             work.forget(SETTINGS_PAGE)
             work.forget(DELIVERY_UPDATES_PAGE)
             work.forget(ADD_BY_EMAIL_PAGE)
+            state.source.assistants.dismiss()
             openings++
         },
-        dismissible = !work.working(SETTINGS_PAGE) && !work.working(ADD_BY_EMAIL_PAGE),
+        dismissible = !work.working(SETTINGS_PAGE) && !work.working(ADD_BY_EMAIL_PAGE) && !assistantsWorking,
         page = !state.sheetsAsForms,
         lit = true,
     ) {
@@ -183,15 +186,16 @@ internal fun AccountSheetHost(state: AccountHost) {
 /** What AccountView keeps through a window made again: the page pushed, the alert open and the address typed in it. */
 internal class SettingsNav(val pushed: MutableState<String?>, val alert: MutableState<String?>, val confirmation: MutableState<String>)
 
-private class SettingsScrolls(val root: ScrollState, val data: ScrollState, val updates: ScrollState, val inbox: ScrollState)
+private class SettingsScrolls(val root: ScrollState, val data: ScrollState, val updates: ScrollState, val inbox: ScrollState, val assistants: ScrollState)
 
 /**
- * AccountView's `NavigationStack`: Settings, and the data page, Delivery updates or Add parcels by email pushed over it,
+ * AccountView's `NavigationStack`: Settings, and the data page, Delivery updates, Add parcels by email or Assistants pushed over it,
  * coming in from the trailing side as Settings goes a third of the way out to the leading one, and back the same way
  * from the bar's ‹, the system's back (whose gesture it follows) or a drag from the leading edge; under Reduce Motion
  * one fades into the other. What it asked going well closes the sheet (`finish()`), and the export, once written, goes
  * to the share sheet. For an account, it reads whether the server offers it a forwarding address as it opens, and again
- * as the reader comes back to the app (`.onChange(of: scenePhase)`); the page goes back where the offer went.
+ * as the reader comes back to the app (`.onChange(of: scenePhase)`), and whether assistants may connect to it alongside
+ * as it opens; a page goes back where its offer went.
  */
 @Composable
 private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsScrolls) {
@@ -199,7 +203,8 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
     val work = source.pageWork
     val working = work.working(SETTINGS_PAGE)
     val inboxWorking = work.working(ADD_BY_EMAIL_PAGE)
-    val busy = working || inboxWorking
+    val assistantsWorking by source.assistants.workingFlow.collectAsState()
+    val busy = working || inboxWorking || assistantsWorking
     val reduceMotion = PeekTheme.reduceMotion
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -207,8 +212,15 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
     val account = (session as? AuthenticationState.SignedIn)?.user?.id
     val offered by source.addByEmail.offerFlow.collectAsState()
     val inboxOffered = account != null && offered?.account == account
-    // Read first, then the return's read again, which the read just begun makes wait.
-    LaunchedEffect(account) { if (account != null) source.addByEmail.read(account) }
+    val assistantsOffer by source.assistants.offerFlow.collectAsState()
+    val assistantsOffered = account != null && assistantsOffer?.account == account
+    // Read first, then the return's read again, which the read just begun makes wait. The assistants are read
+    // alongside, as Settings opens only.
+    LaunchedEffect(account) {
+        if (account == null) return@LaunchedEffect
+        launch { source.assistants.read(account) }
+        source.addByEmail.read(account)
+    }
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { account?.let { scope.launch { source.addByEmail.readAgain(it) } } }
     val pushed = nav.pushed.value
     var drawn by remember { mutableStateOf(pushed) }
@@ -236,13 +248,19 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
     }
     val rowFocus = remember { AccessibilityFocus() }
     val inboxFocus = remember { AccessibilityFocus() }
+    val assistantsFocus = remember { AccessibilityFocus() }
     val pop = {
         val from = nav.pushed.value
         nav.pushed.value = null
-        if (from == PAGE_INBOX) inboxFocus.request() else rowFocus.request()
+        when (from) {
+            PAGE_INBOX -> inboxFocus.request()
+            PAGE_ASSISTANTS -> assistantsFocus.request()
+            else -> rowFocus.request()
+        }
     }
     // The offer gone, for this account or another, its page goes too.
     LaunchedEffect(pushed, inboxOffered) { if (pushed == PAGE_INBOX && !inboxOffered) nav.pushed.value = null }
+    LaunchedEffect(pushed, assistantsOffered) { if (pushed == PAGE_ASSISTANTS && !assistantsOffered) nav.pushed.value = null }
     PredictiveBackHandler(enabled = pushed != null && !busy) { progress ->
         try {
             progress.collect { if (!reduceMotion) push.snapTo(1f - it.progress) }
@@ -263,7 +281,9 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
                     }
                     .then(if (covered) Modifier.clearAndSetSemantics {} else Modifier),
             ) {
-                SettingsRootPage(state, scrolls.root, working, rowFocus, inboxFocus, inboxOffered) { nav.pushed.value = it }
+                SettingsRootPage(state, scrolls.root, working, rowFocus, inboxFocus, inboxOffered, assistantsFocus, assistantsOffered) {
+                    nav.pushed.value = it
+                }
             }
             val page = drawn
             if (page != null && (pushed != null || shownPage)) {
@@ -275,6 +295,7 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
                     when (page) {
                         PAGE_DATA -> AccountDataPage(state, nav, scrolls.data, working, onBack = pop)
                         PAGE_INBOX -> if (account != null) AddByEmailPage(state, account, scrolls.inbox, onBack = pop)
+                        PAGE_ASSISTANTS -> if (account != null) AssistantsPage(state, account, scrolls.assistants, onBack = pop)
                         else -> DeliveryUpdatesPage(state, scrolls.updates, onBack = pop)
                     }
                 }
@@ -338,8 +359,9 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
 /**
  * AccountView's `page`: "settings.title" as a large title under the bar, which goes under it as the page scrolls and
  * comes back as the bar's inline title, Close at the bar's leading end, off while the data page waits; then the
- * profile (the account, or the way to one), the deliveries' updates for an account and Add parcels by email where the
- * server offers it the account ([inboxOffered], with its "Experimental" badge), a group shown only with one of them, the
+ * profile (the account, or the way to one), the deliveries' updates for an account, Add parcels by email where the
+ * server offers it the account ([inboxOffered]) and Assistants where assistants may
+ * connect to it ([assistantsOffered]), each with its "Beta" badge, a group shown only with one of them, the
  * appearance, the language, the time format, the distance and weight units, the new-update dot and usage statistics,
  * and the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's ground. It loads the
  * notifications' state as it opens (`.task`).
@@ -352,6 +374,8 @@ private fun SettingsRootPage(
     rowFocus: AccessibilityFocus,
     inboxFocus: AccessibilityFocus,
     inboxOffered: Boolean,
+    assistantsFocus: AccessibilityFocus,
+    assistantsOffered: Boolean,
     onPush: (String) -> Unit,
 ) {
     val source = state.source
@@ -406,7 +430,7 @@ private fun SettingsRootPage(
                     // for the delivery email alone, where the account has one. Android has no Live Activities, the
                     // iPhone's row after them. The group shows only with a row in it.
                     val updates = !guest && (source.pushAvailable || deliveryEmail != null)
-                    if (updates || inboxOffered) {
+                    if (updates || inboxOffered || assistantsOffered) {
                         SettingsGroup(localized("native.deliveries")) {
                             if (updates) {
                                 SettingsButtonRow(
@@ -421,6 +445,16 @@ private fun SettingsRootPage(
                                     SettingsButtonRow(
                                         localized("inbox.row"), SETTINGS_ADD_BY_EMAIL, { onPush(PAGE_INBOX) },
                                         symbol = "envelope", chevron = true, badge = localized("inbox.experimental"),
+                                    )
+                                }
+                            }
+                            // Only once the server says assistants may connect to the account.
+                            if (assistantsOffered) {
+                                if (updates || inboxOffered) SettingsDivider()
+                                Box(Modifier.accessibilityFocus(assistantsFocus)) {
+                                    SettingsButtonRow(
+                                        localized("assistants.row"), SETTINGS_ASSISTANTS, { onPush(PAGE_ASSISTANTS) },
+                                        symbol = "globe", chevron = true, badge = localized("assistants.experimental"),
                                     )
                                 }
                             }
@@ -787,6 +821,7 @@ internal val DELIVERY_UPDATES_PAGE: UUID = UUID.fromString("5e771465-0000-4000-8
 internal const val PAGE_DATA = "data"
 internal const val PAGE_UPDATES = "deliveryUpdates"
 internal const val PAGE_INBOX = "addByEmail"
+internal const val PAGE_ASSISTANTS = "assistants"
 private const val ALERT_FORGET = "forget"
 private const val ALERT_RESET = "reset"
 private const val ALERT_DELETE = "delete"
@@ -826,6 +861,7 @@ internal const val SETTINGS_BACK = "$SETTINGS_SHEET.back"
 internal const val SETTINGS_WORKING = "$SETTINGS_SHEET.working"
 internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
 internal const val SETTINGS_ADD_BY_EMAIL = "$SETTINGS_SHEET.addByEmail"
+internal const val SETTINGS_ASSISTANTS = "$SETTINGS_SHEET.assistants"
 internal const val SETTINGS_MARK_NEW_UPDATES = "$SETTINGS_SHEET.markNewUpdates"
 internal const val SETTINGS_USAGE_STATISTICS = "$SETTINGS_SHEET.usageStatistics"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"

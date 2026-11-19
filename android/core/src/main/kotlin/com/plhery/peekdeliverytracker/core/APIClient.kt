@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
+import com.plhery.peekdeliverytracker.core.api.AssistantsResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -647,6 +648,21 @@ class DeliveryApiClient(
     suspend fun setAddByEmailNotify(notify: Boolean): AddByEmailResponse = request(
         ADD_BY_EMAIL, AddByEmailResponseReader, "PATCH", """{"notify":$notify}""".toByteArray(Charsets.UTF_8),
     )
+
+    /**
+     * Peek's address for assistants and the ones connected to the account ([AssistantsResponseReader]), or null when
+     * assistants may connect to no account or not to this one: the server answers 404.
+     */
+    suspend fun readAssistants(): AssistantsResponse? {
+        val response = rawRequest(ASSISTANTS, missing = 404)
+        if (response.statusCode == 404) return null
+        return decodeAnswer(AssistantsResponseReader, response.body)
+    }
+
+    /** Disconnects an assistant: its tokens stop working at once. One already gone (404) counts as done. The answer has no body. */
+    suspend fun revokeAssistant(id: UUID) {
+        rawRequest("$ASSISTANTS/${id.toString().lowercase()}", "DELETE", missing = 404)
+    }
 
     private fun <T> encode(serializer: SerializationStrategy<T>, value: T): ByteArray = JsonEncoder.deliveryTracker.encode(serializer, value)
 

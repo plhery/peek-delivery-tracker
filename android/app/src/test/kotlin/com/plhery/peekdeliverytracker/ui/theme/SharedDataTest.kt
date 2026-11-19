@@ -32,7 +32,7 @@ class SharedDataTest {
         val assets = context.assets.list("peek")!!.toSet()
         // A debug build's: a release build leaves out ContractFixtures.json, which only the debug previews read.
         val expected = setOf(
-            "Analytics.json", "Brand.json", "CarrierCatalog.json", "ContractFixtures.json", "CountryNames.json",
+            "Analytics.json", "AssistantSetups.json", "Brand.json", "CarrierCatalog.json", "ContractFixtures.json", "CountryNames.json",
             "DeliveryDemo.json", "EmailFilter.json", "FriendsDemo.json", "Localization.json", "PostcodeExamples.json",
             "Reading.json", "TrackingMessages.json", "World.json", "WorldDetail.pack",
         )

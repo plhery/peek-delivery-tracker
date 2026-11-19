@@ -176,6 +176,15 @@ describe('emails in the shapes readers forward', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'known', 0, null, 'Beispiel Versand');
   });
 
+  it('adds nothing from a post\'s notice that names the delivery as done, and says the parcel was delivered', async () => {
+    const db = account();
+    await posted(mail('"Poste CH SA – Statut de l\'envoi" <notifications@post.ch>', 'Distribution effectuée: Colis de Beispiel Versand AG', [
+      'Nous avons distribué l’envoi suivant.', 'Colis de', 'Beispiel Versand AG', 'Numéro d’envoi', POST, `https://service.post.ch/track?parcel=${POST}`,
+    ].join('\n')));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'delivered', 0, null, 'Beispiel Versand');
+  });
+
   it('adds the post\'s number a shop names in brackets, and leaves the order number and the date alone', async () => {
     const db = account();
     await posted(mail('"Beispiel Möbel" <shop@beispiel-moebel.ch>', 'Ihre Bestellung ist versandt', [

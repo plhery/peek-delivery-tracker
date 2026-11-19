@@ -8,7 +8,8 @@ import 'server-only';
  * "could not be delivered" and "nicht zugestellt" of one that is not there, and "delivered in 2 days" is a promise. A
  * parcel delivered to a pickup point or a locker waits to be collected, so it counts as on its way too, and so does a
  * subject that also says the parcel shipped or the order was confirmed ("Shipped – delivered by DPD"). A subject that
- * says less than that is read as on its way: adding a delivered parcel costs less than missing one.
+ * says less than that is read as on its way: adding a delivered parcel costs less than missing one. A post's notice
+ * may name the delivery as done rather than the parcel as delivered ("Distribution effectuée: colis de …").
  */
 
 interface Wording {
@@ -26,42 +27,42 @@ interface Wording {
 
 const WORDINGS: Record<string, Wording> = {
   en: {
-    done: String.raw`delivered`,
+    done: String.raw`delivered|delivery\s+(?:completed|successful)`,
     before: String.raw`will|would|shall|should|could|can|cannot|may|might|must|to|be|being|not|never|yet|soon|almost|\p{L}+n['’]t|expected|estimated|scheduled|get|gets|getting|want|wants|choose|how`,
     after: String.raw`in\s+\d+\p{L}*|within|between|before|by\s+\d+\p{L}*|tomorrow|next|free|fast|quickly|(?:on\s+)?(?:mon|tues|wednes|thurs|fri|satur|sun)day`,
     pickup: String.raw`pick[ -]?up|ready\s+to\s+collect|collection|lockers?|parcel\s?shop|access\s+point|service\s+point|post\s+office|depot|hub\s+counter|amazon\s+hub|relay`,
     transit: String.raw`shipped|dispatched|on\s+(?:its|the)\s+way|in\s+transit|out\s+for\s+delivery|order\s+confirm\p{L}*`,
   },
   de: {
-    done: String.raw`zugestellt|geliefert|ausgeliefert`,
+    done: String.raw`zugestellt|geliefert|ausgeliefert|zustellung\s+erfolgt`,
     before: String.raw`wird|werden|wirst|würde|soll|sollte|sollen|kann|konnte|könnte|können|nicht|kein|keine|nie|bald|voraussichtlich|morgen|kostenlos|schnell`,
     after: String.raw`werden|in\s+\d+\p{L}*|innerhalb|zwischen|morgen|bis`,
     pickup: String.raw`packstation|paketshop|filiale|postfiliale|abholstation|paketstation|abholung|abholpunkt|paketbox`,
     transit: String.raw`unterwegs|versandt|verschickt|versendet|in\s+zustellung|auf\s+dem\s+weg|bestellbestätigung|bestellung\s+bestätigt`,
   },
   fr: {
-    done: String.raw`livrée?s?|distribuée?s?|livraison\s+(?:effectu[ée]e|r[ée]ussie)`,
+    done: String.raw`livrée?s?|distribuée?s?|(?:livraison|distribution)\s+(?:effectu[ée]e|r[ée]ussie)`,
     before: String.raw`sera|seront|serait|va|vont|être|pas|jamais|doit|doivent|devrait|peut|pourra|bientôt|prochainement`,
     after: String.raw`en\s+\d+\p{L}*|sous\s+\d+\p{L}*|demain|entre|d['’]ici|gratuitement|offerte?`,
     pickup: String.raw`relais|relay|point\s+(?:de\s+)?retrait|consigne|locker|bureau\s+de\s+poste|casier|pick-?up|point\s+colis`,
     transit: String.raw`expédiée?s?|en\s+cours\s+de\s+livraison|en\s+cours\s+d['’]acheminement|en\s+route|en\s+chemin|commande\s+confirmée|confirmation\s+de\s+(?:votre\s+)?commande`,
   },
   it: {
-    done: String.raw`consegnat[oaie]|recapitat[oaie]`,
+    done: String.raw`consegnat[oaie]|recapitat[oaie]|(?:consegna|distribuzione)\s+effettuata`,
     before: String.raw`sarà|saranno|verrà|verranno|viene|vengono|non|essere|può|potrebbe|deve|dovrebbe|presto|domani`,
     after: String.raw`in\s+\d+\p{L}*|entro|tra|fra|domani|gratis|gratuitamente`,
     pickup: String.raw`punto\s+(?:di\s+)?ritiro|fermopoint|locker|ufficio\s+postale|punto\s+poste|pick-?up|edicola|tabaccheria`,
     transit: String.raw`spedit[oaie]|in\s+consegna|in\s+transito|in\s+viaggio|ordine\s+confermato|conferma\s+(?:dell['’]\s*|d['’]\s*)ordine`,
   },
   es: {
-    done: String.raw`entregad[oa]s?`,
+    done: String.raw`entregad[oa]s?|entrega\s+(?:realizada|efectuada|completada)`,
     before: String.raw`será|serán|sería|va|van|ser|siendo|no|puede|podrá|debe|debería|pronto|mañana`,
     after: String.raw`en\s+\d+\p{L}*|entre|mañana|gratis|antes`,
     pickup: String.raw`punto\s+(?:de\s+)?recogida|punto\s+pack|locker|oficina|taquilla|consigna|citypaq|pick-?up`,
     transit: String.raw`enviad[oa]s?|en\s+reparto|en\s+camino|en\s+tránsito|pedido\s+confirmado|confirmación\s+(?:de(?:l)?\s+)?pedido`,
   },
   pt: {
-    done: String.raw`entregues?`,
+    done: String.raw`entregues?|entrega\s+(?:efetuada|realizada|conclu[íi]da)`,
     before: String.raw`será|serão|seria|vai|vão|ser|sendo|não|pode|poderá|deve|deverá|breve|amanhã`,
     after: String.raw`em\s+\d+\p{L}*|entre|amanhã|grátis|até`,
     pickup: String.raw`ponto\s+(?:de\s+)?(?:recolha|retirada|pickup)|cacifo|locker|loja|ag[eê]ncia|payshop|pick-?up`,

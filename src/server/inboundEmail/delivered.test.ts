@@ -11,6 +11,7 @@ const DELIVERED: Record<string, string[]> = {
     'Order #1234 delivered',
     'Your Example Shop parcel has been successfully delivered to your mailbox',
     'Fwd: Your shipment was delivered today',
+    'Delivery completed: your Example Shop order',
   ],
   de: [
     'Ihre Sendung wurde zugestellt',
@@ -19,6 +20,7 @@ const DELIVERED: Record<string, string[]> = {
     'Ihr Paket ist zugestellt worden',
     'Deine Bestellung wurde geliefert',
     'WG: Ihre DHL Sendung wurde heute zugestellt',
+    'Zustellung erfolgt: Paket von Example Shop AG',
   ],
   fr: [
     'Votre colis a été livré',
@@ -28,24 +30,29 @@ const DELIVERED: Record<string, string[]> = {
     "Votre colis vous a bien été livré aujourd'hui",
     'Votre colis a été distribué',
     'TR: Livraison effectuée - Commande 123456',
+    'Distribution effectuée: Colis de Example Shop SA',
+    'Distribution effectuee : colis de Example Shop SA',
   ],
   it: [
     'Il tuo pacco è stato consegnato',
     'Consegnato: il tuo ordine Example Shop',
     'La tua spedizione è stata consegnata',
     'Ordine 123456 consegnato',
+    'Distribuzione effettuata: pacco di Example Shop SA',
   ],
   es: [
     'Tu pedido ha sido entregado',
     'Entregado: tu paquete de Example Shop',
     'Tu envío fue entregado',
     'Paquete entregado',
+    'Entrega realizada: tu paquete de Example Shop',
   ],
   pt: [
     'A sua encomenda foi entregue',
     'Encomenda entregue',
     'Seu pedido foi entregue!',
     'Entregue: o seu envio Example Shop',
+    'Entrega efetuada: a sua encomenda Example Shop',
   ],
   nl: [
     'Je pakket is bezorgd',
@@ -105,6 +112,8 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Ihr Paket wurde in eine Packstation geliefert',
     'Morgen geliefert: jetzt bestellen',
     'Ihre Bestellung ist unterwegs – zugestellt durch DHL',
+    'Zustellung heute: Paket von Example Shop AG',
+    'Zustellung erfolgt morgen zwischen 10:00 und 12:00',
   ],
   fr: [
     'Votre colis sera livré demain',
@@ -122,6 +131,8 @@ const ON_ITS_WAY: Record<string, string[]> = {
     "Votre colis est en cours de livraison - livré aujourd'hui",
     'Votre commande expédiée, livrée par Colissimo',
     'Votre colis a été livré au point Mondial Relay',
+    'Distribution aujourd’hui: Colis de Example Shop SA',
+    'Suivez l’envoi en temps réel: Colis de Example Shop SA',
   ],
   it: [
     'Il tuo pacco sarà consegnato domani',
@@ -129,6 +140,7 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Il tuo pacco non è stato consegnato',
     'La tua spedizione è in consegna',
     'Il tuo pacco è stato consegnato al punto di ritiro',
+    'Distribuzione oggi: pacco di Example Shop SA',
   ],
   es: [
     'Tu pedido será entregado mañana',

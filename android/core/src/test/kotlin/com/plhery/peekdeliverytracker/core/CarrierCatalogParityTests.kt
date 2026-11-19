@@ -32,17 +32,19 @@ class CarrierCatalogParityTests {
 
     @Test
     fun readsLinksFoundationEncodes() {
+        // An accepted synthetic reference keeps these assertions about URL handling.
+        val ctt = "0000000000020000000000"
         // "|" is percent-encoded, not refused, so GLS's link is read.
         assertLink(
             linkMatch("0.10.2.40193547", CarrierId.GlsDe),
             "https://www.gls-pakete.de/sendungsverfolgung?trackingNumber=0.10.2.40193547|0.10.2.40193547",
         )
         // A host that is not ASCII is a link too, whose number is read from it.
-        assertLink(linkMatch("0000000000000000000000", CarrierId.CttExpress), "https://münchen.de/t/0000000000000000000000")
+        assertLink(linkMatch(ctt, CarrierId.CttExpress), "https://münchen.de/t/$ctt")
         // A query value that is not UTF-8 is nil, so the link's number is found in the rest.
         assertLink(
-            linkMatch("0000000000000000000000", CarrierId.CttExpress),
-            "https://www.ups.com/track?tracknum=0000000000000000000000%FF",
+            linkMatch(ctt, CarrierId.CttExpress),
+            "https://www.ups.com/track?tracknum=${ctt}%FF",
         )
         val numbers = catalog.numbers("https://münchen.de/t/1ZDEMO202600000001 or 1ZDEMO202600000029")
         assertEquals(listOf(TrackingInputMatch.Source.Link, TrackingInputMatch.Source.Text), numbers.map { it.match.source })

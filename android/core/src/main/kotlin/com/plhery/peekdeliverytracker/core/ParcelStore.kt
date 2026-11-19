@@ -1257,9 +1257,11 @@ class ParcelStore(
             session.checkGeneration(generation)
             upsert(demo.refresh(parcel.id))
         } else if (isGuest) {
-            device.refresh(only = parcel.id)
+            device.refresh(only = parcel.id, check = true)
             session.checkGeneration(generation)
             parcels = device.list()
+            // The check it asked for is read as it lands, soon and a few times, as a parcel's first check is.
+            if (device.isWaiting) beginDevicePolling()
         } else {
             api.refresh(parcel.id)
             session.checkGeneration(generation)

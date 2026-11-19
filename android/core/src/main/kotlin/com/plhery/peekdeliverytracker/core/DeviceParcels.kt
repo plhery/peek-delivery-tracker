@@ -229,6 +229,12 @@ class DeviceParcelClient(
      * again instead.
      */
     val changeCarrier: (suspend (linkId: String, key: String, ParcelLinkCarrierRequest) -> PublicParcelResponse?)? = null,
+    /**
+     * The owner's read by hand, as [read] answers: it asks the service to check the parcel before a check is due
+     * (`refresh=true`), which the service does when the last one is old enough and the carrier allows. None for a
+     * client that can't, which reads as usual.
+     */
+    val check: (suspend (linkId: String, key: String) -> PublicParcelResponse?)? = null,
 ) {
     companion object {
         /**
@@ -245,11 +251,19 @@ class DeviceParcelClient(
             verification: NativeVerification,
             region: () -> Locale,
         ): DeviceParcelClient {
-            suspend fun send(path: String, method: String, key: String? = null, body: ByteArray? = null): HttpResponse {
+            suspend fun send(
+                path: String,
+                method: String,
+                key: String? = null,
+                body: ByteArray? = null,
+                query: List<UrlComponents.QueryItem> = emptyList(),
+            ): HttpResponse {
                 val headers = linkedMapOf("Accept" to "application/json")
                 if (key != null) headers["X-Parcel-Key"] = key
                 if (body != null) headers["Content-Type"] = "application/json"
-                val request = HttpRequest(configuration.apiBaseUrl.appendingPath(path), method, headers, body, timeout = 30.0, handlesCookies = false)
+                val url = configuration.apiBaseUrl.appendingPath(path)
+                val address = if (query.isEmpty()) url else url.appendingQueryItems(query)
+                val request = HttpRequest(address, method, headers, body, timeout = 30.0, handlesCookies = false)
                 // A new carrier for a link asks the carrier as a lookup does, and takes the same proof.
                 val moving = method == "PATCH" && path.endsWith("/carrier")
                 if (moving || method == "POST" && (path == "api/public/parcels" || path == "api/public/detect")) {
@@ -290,6 +304,16 @@ class DeviceParcelClient(
                 },
                 read = { linkId, key ->
                     val response = send("api/public/parcels/$linkId", "GET", key)
+                    if (response.statusCode == 410 || response.isServiceNotFound) {
+                        null
+                    } else {
+                        if (response.statusCode != 200) throw failure(response)
+                        decode(PublicParcelResponse.serializer(), response)
+                    }
+                },
+                check = { linkId, key ->
+                    val refresh = listOf(UrlComponents.QueryItem("refresh", "true"))
+                    val response = send("api/public/parcels/$linkId", "GET", key, query = refresh)
                     if (response.statusCode == 410 || response.isServiceNotFound) {
                         null
                     } else {
@@ -573,6 +597,15 @@ class DeviceParcels(
     /** The last round, when it was cut short: tried again on its token and in its language once its time comes. */
     private var alertRetry: AlertRetry? = null
 
+    /**
+     * The links whose answer said a check of the parcel is queued or under way (`checkQueued`): read again soon, as the
+     * website does, until it lands or [checkReadFor] has gone by.
+     */
+    private var queued: Map<String, QueuedCheck> = emptyMap()
+
+    /** When a link's check was first said to be on its way, and when its parcel was last checked then. */
+    private class QueuedCheck(val since: Instant, val synced: String?)
+
     /** The token and language of the last round, which a parcel's notifications turned on again are asked for on. */
     private var alertsWanted: Pair<String, NativePushLocale>? = null
 
@@ -605,7 +638,27 @@ class DeviceParcels(
     val lastCheckedAt: Instant? get() = entries.filter { !it.isFrozen }.maxOfOrNull { it.checkedAt }?.let(::referenceDate)
 
     /** Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon. */
-    val isWaiting: Boolean get() = entries.any { !it.isFrozen && waiting(it.parcel) }
+    val isWaiting: Boolean get() = entries.any { !it.isFrozen && (waiting(it.parcel) || awaitsCheck(it.linkId)) }
+
+    /** A check of the link's parcel was said to be on its way less than [checkReadFor] ago, and hasn't landed yet. */
+    private fun awaitsCheck(linkId: String): Boolean {
+        val check = queued.keyOf(linkId) ?: return false
+        return now().isBefore(check.since.plusSeconds(checkReadFor.toLong()))
+    }
+
+    /**
+     * Notes what an answer says of the parcel's check: one on its way is followed until the parcel's last check
+     * changes, which is the check landing, or until [checkReadFor] has gone by.
+     */
+    private fun noteCheck(linkId: String, response: PublicParcelResponse) {
+        val check = queued.keyOf(linkId)
+        val synced = response.parcel.lastSyncedAt
+        queued = when {
+            response.checkQueued == true -> if (check != null) queued else queued.setting(linkId, QueuedCheck(now(), synced))
+            check != null && (synced != check.synced || !awaitsCheck(linkId)) -> queued.setting(linkId, null)
+            else -> queued
+        }
+    }
 
     /** `typed`: the number as typed, which goes beside it when it differs ([typedTrackingNumber]). */
     suspend fun detect(trackingNumber: String, typed: String? = null): CarrierDetectionResponse {
@@ -674,14 +727,17 @@ class DeviceParcels(
 
     /**
      * Reads every parcel whose answer has gone stale, or every one when `all`. A parcel the service no longer has leaves
-     * the list, unless it is this phone's own lookup: its last answer stays, no longer updated ([DeviceParcel.frozen]). The first trouble ends the round and is thrown; the list keeps what the device has.
+     * the list, unless it is this phone's own lookup: its last answer stays, no longer updated ([DeviceParcel.frozen]).
+     * The first trouble ends the round and is thrown; the list keeps what the device has. A parcel whose check is on
+     * its way is stale after [waitingFresh]. `check`, with `only`, is the reader's refresh by hand: this phone's own
+     * lookup asks for a check before one is due ([DeviceParcelClient.check]).
      *
      * First the service is told again of the links forgotten here that it could not be told about, and, unless `only`
      * one parcel is read, the keys whose parcels were lost on this phone (a file this build could not read, say) read
      * their parcels again. A key that could not be read is trouble too, thrown once the round is done: with only such
      * keys left, a phone offline or out of lookups hears so, not that nothing changed.
      */
-    suspend fun refresh(all: Boolean = false, only: UUID? = null): Boolean {
+    suspend fun refresh(all: Boolean = false, only: UUID? = null, check: Boolean = false): Boolean {
         val client = client ?: return false
         stopForgottenAlerts(client)
         val recovery = try {
@@ -704,13 +760,15 @@ class DeviceParcels(
             if (key == null && !entry.isViewer) continue
             val age = now().timeIntervalSinceReferenceDate - entry.checkedAt
             val settled = entry.parcel.isOver
-            val fresh = if (waiting(entry.parcel)) waitingFresh else if (settled) settledFresh else fresh
+            val fresh = if (waiting(entry.parcel) || awaitsCheck(entry.linkId)) waitingFresh else if (settled) settledFresh else fresh
             if (!(all || only != null || age < 0 || age >= fresh)) continue
             try {
-                val response = client.read(entry.linkId, key)
+                val forced = client.check.takeIf { check && only != null && !entry.isViewer }
+                val response = if (forced != null && key != null) forced(entry.linkId, key) else client.read(entry.linkId, key)
                 contacted = true
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
                 if (index < 0) continue
+                if (response != null) noteCheck(entry.linkId, response) else queued = queued.setting(entry.linkId, null)
                 if (response != null) {
                     change(index) {
                         it.taking(Parcel(shared = response.parcel)).copy(
@@ -1077,6 +1135,8 @@ class DeviceParcels(
             entry = entry.copy(viewer = true, canKeep = response.link.canKeep)
         }
         entries = entries + entry
+        // Opening the link queued a check of the parcel: its answer is read as it lands.
+        noteCheck(linkId, response)
         save()
         return Followed(entry.parcel.id, true)
     }
@@ -1294,6 +1354,9 @@ class DeviceParcels(
         const val settledFresh: Double = 12.0 * 60 * 60
         const val waitingFresh: Double = 1.5
 
+        /** How long a check said to be on its way is waited for, in seconds, as the website does. */
+        const val checkReadFor: Double = 60.0
+
         /** How many parcels one round asks notifications for; the rest wait for the next round, at the list's next refresh. */
         const val alertsPerRound = 25
 
@@ -1362,13 +1425,13 @@ private inline fun succeeds(block: () -> Unit): Boolean =
     }
 
 /** Swift's `keys[linkID]`: a Dictionary finds the key canonically equivalent to the one asked for. */
-private fun Map<String, String>.keyOf(linkId: String): String? = this[linkId] ?: entries.firstOrNull { it.key.equalsCanonically(linkId) }?.value
+private fun <V> Map<String, V>.keyOf(linkId: String): V? = this[linkId] ?: entries.firstOrNull { it.key.equalsCanonically(linkId) }?.value
 
 /**
  * Swift's `keys[linkID] = key` on a copy: a key canonically equivalent already there keeps its spelling and takes the
  * value, and nil removes it.
  */
-private fun Map<String, String>.setting(linkId: String, key: String?): Map<String, String> {
+private fun <V> Map<String, V>.setting(linkId: String, key: V?): Map<String, V> {
     val existing = keys.firstOrNull { it.equalsCanonically(linkId) }
     if (key == null && existing == null) return this
     val result = LinkedHashMap(this)

@@ -140,6 +140,7 @@ class DeviceParcelTests {
         calls: Calls,
         lookup: PublicLookupResponse? = null,
         read: (String) -> PublicParcelResponse? = { null },
+        check: ((String) -> PublicParcelResponse?)? = null,
         alert: (String) -> DeviceAlertAnswer = { DeviceAlertAnswer.On },
         unalert: (String) -> Unit = {},
         move: ((String, ParcelLinkCarrierRequest) -> PublicParcelResponse?)? = null,
@@ -155,6 +156,12 @@ class DeviceParcelTests {
         read = { linkId, key ->
             calls.add("read $linkId ${(key ?: "-").take(1)}")
             read(linkId)
+        },
+        check = check?.let { answer ->
+            { linkId, key ->
+                calls.add("check $linkId ${key.take(1)}")
+                answer(linkId)
+            }
         },
         forget = { linkId, _ -> calls.add("forget $linkId") },
         update = { linkId, _, change ->
@@ -515,6 +522,29 @@ class DeviceParcelTests {
         }
     }
 
+    /** The owner's read by hand is the link's read with `refresh=true` and the key, and the service's 404 as no link. */
+    @Test
+    fun theOwnersReadByHandAsksTheServiceForACheck() = runTest {
+        val read = PublicParcelResponse(link = link("22222222222A"), parcel = pkg(UUID.randomUUID()), checkQueued = true)
+        var answer = jsonResponse(200, JsonEncoder.deliveryTracker.encode(PublicParcelResponse.serializer(), read).decodeToString())
+        val transport = RecordingTransport { answer }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val check = DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.UK }).check!!
+
+        assertEquals(true, check("22222222222A", key)?.checkQueued)
+        val request = transport.requests.single()
+        assertEquals("GET", request.method)
+        assertEquals("/api/public/parcels/22222222222A", request.path)
+        assertEquals("refresh=true", Url.parse(request.url)?.query)
+        assertEquals(key, request.headers["X-Parcel-Key"])
+
+        answer = jsonResponse(404, """{"error":"Parcel unavailable","code":"parcel_unavailable"}""")
+        assertNull(check("22222222222A", key))
+    }
+
     @Test
     fun phoneDigitsGoInARequestOnlyWhenGiven() {
         fun <T> body(serializer: SerializationStrategy<T>, request: T): JsonObject =
@@ -730,6 +760,54 @@ class DeviceParcelTests {
         assertTrue(device.isFrozen(gone))
         assertFalse(device.isFrozen(moving))
         assertEquals(date(now), storage.parcels.first { it.linkId == "22222222222C" }.frozen?.let { date(DateParser.date(it)!!) })
+    }
+
+    @Test
+    fun aRefreshByHandAsksForACheckOfThisPhonesOwnLookupAndReadsItSoonUntilItLands() = runTest {
+        val mine = UUID.randomUUID()
+        val theirs = UUID.randomUUID()
+        var now = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", mine, date(now)),
+            parcel("33333333333B", "", theirs, date(now)).copy(viewer = true),
+        )
+        val calls = Calls()
+        var landed: String? = null
+        fun answer(linkId: String, queued: Boolean? = null) = if (linkId == "22222222222A") {
+            PublicParcelResponse(link = link(linkId), parcel = pkg(mine).copy(lastSyncedAt = landed), checkQueued = queued)
+        } else {
+            PublicParcelResponse(link = reader(linkId), parcel = pkg(theirs), checkQueued = queued)
+        }
+        val device = device(client(calls, read = { answer(it) }, check = { answer(it, queued = true) }), storage, this, now = { now })
+        assertFalse(device.isWaiting)
+
+        device.refresh(only = mine, check = true)
+        assertEquals(listOf("check 22222222222A k"), calls.all)
+        assertTrue(device.isWaiting)
+
+        // An answer before the check lands keeps it waited for; the list's next round reads only that one again.
+        now = now.plusSeconds(2)
+        device.refresh()
+        assertEquals("read 22222222222A k", calls.all.last())
+        assertTrue(device.isWaiting)
+
+        landed = "2026-11-19T20:00:00Z"
+        now = now.plusSeconds(2)
+        device.refresh()
+        assertFalse(device.isWaiting)
+        now = now.plusSeconds(2)
+        device.refresh()
+        assertEquals(3, calls.all.size)
+
+        // Someone else's parcel reads as usual; a check that never lands is waited for a minute.
+        device.refresh(only = theirs, check = true)
+        assertEquals("read 33333333333B -", calls.all.last())
+        device.refresh(only = mine, check = true)
+        assertTrue(device.isWaiting)
+        now = now.plusSeconds(DeviceParcels.checkReadFor.toLong())
+        assertFalse(device.isWaiting)
     }
 
     @Test

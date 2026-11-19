@@ -43,6 +43,15 @@ in a row, which tells how long DPD really accepts a session
 DPD's public app and names no account, parcel or person. Without the table, or when the
 database fails, the scraper opens a session as it did before.
 
+The adapters' pauses and pacing outlive a deploy the same way: the server hands
+`keepAdapterHolds` a store in `scraper_holds` ([`adapterHolds.ts`](../src/server/adapterHolds.ts)),
+service-role only. The scraper saves each hold as it starts (a direct step's rest after a
+check only a browser passes, as MailAmericas' browser check imposes; USPS's outage pause;
+Correios's read window; iMile's day without asking Cainiao about a number) and takes up
+those still running at start; each start deletes the ones that ended. An iMile hold's key is
+a tracking number, so the table stays out of logs. Without it, the holds live in the process
+as before.
+
 The scraper calls a carrier's postcode input `postcode`. The app's API, database and
 clients call it `dpdPostcode`, so the app renames it wherever the scraper hands it over:
 the requirements and checked inputs ([`lib/carriers.ts`](../src/lib/carriers.ts),

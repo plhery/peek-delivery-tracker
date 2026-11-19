@@ -1,6 +1,6 @@
 import 'server-only';
 
-import type { DpdSession } from 'universal-parcel-scraper/node';
+import type { AdapterHold, DpdSession } from 'universal-parcel-scraper/node';
 import type { ApiGiftWords, ApiNativePushTransport } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
 import type { TrackingEvent } from '../types';
@@ -2906,6 +2906,36 @@ export class SupabaseServiceClient extends SupabaseClient {
       method: 'POST',
       body: [{ token: session.token, opened_at: time(session.openedAt), checked_at: time(session.checkedAt), refused_at: time(session.refusedAt) }],
       prefer: 'resolution=merge-duplicates,return=minimal',
+    });
+  }
+
+  /** The scraper adapters' holds still running. */
+  async adapterHolds(): Promise<AdapterHold[]> {
+    return rows(await this.request(`/rest/v1/scraper_holds?${query([
+      ['select', 'key,until,value'],
+      ['until', `gt.${new Date().toISOString()}`],
+      ['limit', '10000'],
+    ])}`)).flatMap((row) => {
+      const until = Date.parse(String(row.until));
+      if (typeof row.key !== 'string' || !Number.isFinite(until)) return [];
+      return [{ key: row.key, until, ...(row.value !== null && row.value !== undefined ? { value: row.value } : {}) }];
+    });
+  }
+
+  /** Saves an adapter's hold, replacing what was saved under its key. */
+  async saveAdapterHold(hold: AdapterHold): Promise<void> {
+    await this.request(`/rest/v1/scraper_holds?${query({ on_conflict: 'key' })}`, {
+      method: 'POST',
+      body: [{ key: hold.key, until: new Date(hold.until).toISOString(), value: hold.value ?? null }],
+      prefer: 'resolution=merge-duplicates,return=minimal',
+    });
+  }
+
+  /** Deletes the adapters' holds that ended. */
+  async dropEndedAdapterHolds(): Promise<void> {
+    await this.request(`/rest/v1/scraper_holds?${query({ until: `lte.${new Date().toISOString()}` })}`, {
+      method: 'DELETE',
+      prefer: 'return=minimal',
     });
   }
 

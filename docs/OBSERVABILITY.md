@@ -796,6 +796,10 @@ Key JSON events:
   when a check last found it accepted. `dpd_app_session_store_failed` (warning, with the
   `operation`, `load` or `save`, and `error_type`) when `dpd_app_sessions` could not be
   read or written; the scraper then carries on without it;
+- `adapter_holds_taken_up`: the adapters' holds still running that the scraper took up from
+  `scraper_holds` at start (`count`). `adapter_hold_store_failed` (warning, with the
+  `operation`, `load`, `save` or `drop` for deleting the ended ones, and `error_type`) when
+  the table could not be read or written; the adapters then keep their holds in the process;
 - `review_queues_replayed`: the review queue replay of a `version`, with
   `cases_replayed`, `cases_fixed` and `cases_ignored` for the support backlog, and
   `observations_replayed`, `observations_mapped`, `observations_ignored` and

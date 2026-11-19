@@ -1,8 +1,9 @@
 import { startBackgroundServices } from './src/server/background';
 import { emailSettings } from './src/server/email/config';
-import { warmDpdSession } from 'universal-parcel-scraper/node';
+import { keepAdapterHolds, warmDpdSession } from 'universal-parcel-scraper/node';
 import { preloadPlaces } from 'universal-parcel-scraper/places';
 import { hostAdapterEnvironment } from './src/server/adapterRegistry';
+import { adapterHoldStore, logAdapterHoldsTakenUp } from './src/server/adapterHolds';
 import { dpdSessionStore, logDpdSession } from './src/server/dpdSessions';
 import { serviceClient } from './src/server/runtime';
 import { installShutdownHandlers } from './src/server/shutdown';
@@ -43,6 +44,9 @@ if (process.env.NODE_ENV === 'production' && canonicalOrigin()) {
     ...(client ? { store: dpdSessionStore(client) } : {}),
     onSession: logDpdSession,
   });
+  // The adapters' pauses and pacing (a direct step's rest, USPS's outage pause, Correios's read
+  // window) outlive the deploy in the database, in the module instance the registries use.
+  if (client) void logAdapterHoldsTakenUp(keepAdapterHolds(adapterHoldStore(client)));
 }
 // Half a second of parsing belongs before the first parcel list, not in it.
 if (process.env.NODE_ENV === 'production') setTimeout(() => {

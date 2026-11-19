@@ -490,17 +490,53 @@ class AddParcelTest {
         assertEquals(listOf<String?>("31415926-5"), source.detectedAsTyped)
     }
 
-    /** B-ST17: as the iPhone's, the carriers are asked once per number: a new spacing while they answer asks nothing again. */
+    /**
+     * B-ST17: as the iPhone's, the carriers are asked once per number and spelling: a new spacing while they answer asks
+     * again, as it is now typed, and its answer is the one shown.
+     */
     @Test
-    fun aNewSpacingWhileTheCarriersAnswerAsksNothingAgain() {
-        show { detecting = CompletableDeferred() }
+    fun aNewSpacingWhileTheCarriersAnswerAsksAgainAsTyped() {
+        val number = "12345478901"
+        show {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.GlsDe, asked = listOf(CarrierId.GlsDe))
+            detectionsAsTyped["1234 5478 901"] = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsDe))
+            detecting = CompletableDeferred()
+        }
         open()
-        type("31415926-5")
+        type("1234547890-1")
         leave()
-        type("3141 5926-5")
+        type("1234 5478 901")
         settle()
-        assertEquals(listOf("314159265"), source.detected)
-        assertEquals(listOf<String?>("31415926-5"), source.detectedAsTyped)
+        assertEquals(listOf(number, number), source.detected)
+        assertEquals(listOf<String?>("1234547890-1", "1234 5478 901"), source.detectedAsTyped)
+        source.detecting?.complete(Unit)
+        settle()
+        assertEquals("${text("add.detect")}, ${text("add.line.none")}, ${text("add.line.change")}", description(ADD_CARRIER))
+    }
+
+    /**
+     * The same digits pasted again with a dash before the check digit, which detection reads (an R+L PRO number's), are
+     * asked about again, and Add shows that answer rather than the bare digits' "unknown". The numbers are synthetic.
+     */
+    @Test
+    fun theSameNumberPastedWithItsDashIsAskedAboutAgain() {
+        val number = "12345478901"
+        show {
+            detections[number] = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsDe))
+            detectionsAsTyped["1234547890-1"] = CarrierDetectionResponse(number, carrier = CarrierId.RlCarriers, asked = listOf(CarrierId.RlCarriers))
+        }
+        open()
+        type(number)
+        leave()
+        assertEquals("${text("add.detect")}, ${text("add.line.none")}, ${text("add.line.change")}", description(ADD_CARRIER))
+        clipboard("1234547890-1")
+        node(ADD_PASTE).performClick()
+        settle()
+        assertEquals("1234547890-1", fieldText(ADD_TRACKING))
+        assertEquals(listOf(number, number), source.detected)
+        assertEquals(listOf(null, "1234547890-1"), source.detectedAsTyped)
+        val name = CarrierCatalog.shared.info(CarrierId.RlCarriers, AppLanguage.En).displayName
+        assertEquals("$name, ${text("add.line.found")}, ${text("add.line.change")}", description(ADD_CARRIER))
     }
 
     @Test

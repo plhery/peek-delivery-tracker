@@ -334,6 +334,7 @@ internal class AddForm(
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
                     it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
                     it.phoneDigits, it.digitsNumber ?: NONE, PostcodeFill.keptCountries(it.postcodeFills),
+                    recognition.askedSpelling ?: NONE,
                 )
             },
             restore = {
@@ -342,7 +343,7 @@ internal class AddForm(
                 fun texts(index: Int) = (it[index] as List<*>).map { value -> value as String }
                 AddForm(
                     it[0] as String, it[1] as String, text(2), text(3)?.let(::CarrierId), text(4),
-                    CarrierRecognition(kept(5), kept(16)?.let(ParcelAddition::answer), kept(15)),
+                    CarrierRecognition(kept(5), kept(16)?.let(ParcelAddition::answer), kept(15), if (it.size > 24) kept(24) else null),
                     kept(18)?.let(ParcelAddition::question), kept(17)?.let(ParcelAddition::answer), kept(19),
                     it[6] as String, CarrierPostcodes.from(texts(7), texts(8)),
                     PostcodeFill.from(texts(9), if (it.size > 23) texts(23) else emptyList()), it[10] as Int,
@@ -463,14 +464,16 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
         }
         form.lookedUp = key
     }
-    // The carriers asked about the settled number, given as typed too, as it reads when asked: its dashes and spaces
-    // tell some carriers' numbers apart. Asked once per number, as the iPhone's `.task(id: recognitionRequest)`.
-    val recognitionRequest = addition.recognitionRequest
-    LaunchedEffect(recognitionRequest) {
-        val number = recognitionRequest ?: return@LaunchedEffect
-        form.recognition = form.recognition.copy(failedNumber = null, answer = null)
+    // The carriers asked about the settled number, given as typed too: its dashes and spaces tell some carriers'
+    // numbers apart. Asked once per number and spelling, as the iPhone's `.task(id: recognitionQuestion)`: the same
+    // number typed otherwise is asked about again, and an answer for the earlier spelling never lands on it.
+    val recognitionQuestion = addition.recognitionQuestion
+    LaunchedEffect(recognitionQuestion) {
+        val question = recognitionQuestion ?: return@LaunchedEffect
+        val number = question.trackingNumber
+        form.recognition = form.recognition.copy(failedNumber = null, answer = null, askedSpelling = question.typedNumber)
         try {
-            val result = source.detectCarrier(number, current().parsed.trackingNumber)
+            val result = source.detectCarrier(number, question.typedNumber)
             ensureActive()
             if (result.trackingNumber != number) throw DeliveryApiError.InvalidResponse()
             form.recognition = form.recognition.copy(answer = result)

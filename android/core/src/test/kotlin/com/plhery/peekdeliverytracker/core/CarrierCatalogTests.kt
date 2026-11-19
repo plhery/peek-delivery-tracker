@@ -502,6 +502,34 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun theSameNumberTypedWithOtherPunctuationIsAskedAboutAgain() {
+        // Synthetic: a bare run of digits, then the same digits with a dash before the last, which detection reads.
+        val number = "123456789"
+        val dashed = "12345678-9"
+        var recognition = CarrierRecognition(settledNumber = number)
+        assertEquals(number, recognition.request(number, applies = true))
+        recognition = recognition.copy(askedSpelling = null, answer = CarrierDetectionResponse(number, carrier = CarrierId.Unknown, asked = listOf(CarrierId.GlsDe)))
+        assertNull(recognition.request(number, applies = true))
+        assertEquals(CarrierRecognition.Status.NotFound(listOf(CarrierId.GlsDe)), recognition.status(number, applies = true))
+
+        // Pasted again with the dash, the answer for the bare digits says nothing about it: it is asked about.
+        assertEquals(number, recognition.request(number, dashed, applies = true))
+        assertEquals(CarrierRecognition.Status.Asking(emptyList()), recognition.status(number, dashed, applies = true))
+        recognition = recognition.copy(askedSpelling = dashed, answer = CarrierDetectionResponse(number, carrier = CarrierId.RlCarriers))
+        assertNull(recognition.request(number, dashed, applies = true))
+        assertEquals(CarrierRecognition.Status.Recognized(CarrierId.RlCarriers), recognition.status(number, dashed, applies = true))
+        // And back to the bare digits, the dashed spelling's answer is not theirs either.
+        assertEquals(number, recognition.request(number, applies = true))
+        assertEquals(CarrierRecognition.Status.Asking(emptyList()), recognition.status(number, applies = true))
+
+        // A failure is the spelling's too.
+        recognition = recognition.copy(answer = null, failedNumber = number)
+        assertEquals(CarrierRecognition.Status.Failed(emptyList()), recognition.status(number, dashed, applies = true))
+        assertEquals(number, recognition.request(number, applies = true))
+        assertEquals(CarrierRecognition.Status.Asking(emptyList()), recognition.status(number, applies = true))
+    }
+
+    @Test
     fun sixDigitsAreAPickupCodeNobodyIsAskedAbout() {
         assertTrue(CarrierCatalog.isPickupCode(CarrierCatalog.normalize("204 617")))
         assertFalse(CarrierCatalog.isPickupCode("20461"))

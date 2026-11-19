@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
+import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponse
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionResponseAmazonShippingStatus
 import com.plhery.peekdeliverytracker.core.api.CarrierId
@@ -246,9 +247,22 @@ data class ParcelAddition(
 
     val recognizable: Boolean get() = CarrierRecognition.applies(parsed, amazonNumber, demo)
 
-    val recognitionRequest: String? get() = recognition.request(normalizedNumber, recognizable)
+    /** The number as typed, when its dashes or spaces spell it otherwise: detection reads them. */
+    val typedSpelling: String? get() = typedTrackingNumber(parsed.trackingNumber, normalizedNumber)
 
-    val recognitionStatus: CarrierRecognition.Status get() = recognition.status(normalizedNumber, recognizable)
+    /**
+     * The check to run: the number, and its spelling, so that the same number typed otherwise is asked about again and
+     * an answer for the earlier spelling never lands on it.
+     */
+    val recognitionQuestion: CarrierDetectionRequest?
+        get() {
+            val spelling = typedSpelling
+            return recognition.request(normalizedNumber, spelling, recognizable)?.let {
+                CarrierDetectionRequest(trackingNumber = it, typedNumber = spelling)
+            }
+        }
+
+    val recognitionStatus: CarrierRecognition.Status get() = recognition.status(normalizedNumber, typedSpelling, recognizable)
 
     val checking: Boolean get() = carrierOverride == null && recognitionStatus is CarrierRecognition.Status.Asking
 
@@ -266,7 +280,9 @@ data class ParcelAddition(
     /** What tracking services said about the number in the field while no carrier knows it. */
     fun preflightDetail(localizer: Localizer): String? {
         val answer = recognition.answer
-        if (!recognizable || answer == null || answer.trackingNumber != normalizedNumber || answer.carrier != CarrierId.Unknown) return null
+        if (!recognizable || answer == null || answer.trackingNumber != normalizedNumber || recognition.askedSpelling != typedSpelling ||
+            answer.carrier != CarrierId.Unknown
+        ) return null
         if (answer.trackingFound == true) return localizer.text("add.historyFound")
         if (answer.providers?.any { it.outcome == TrackingProviderCheckOutcome.InputRequired } == true) {
             return localizer.text("add.providerInputNeeded")

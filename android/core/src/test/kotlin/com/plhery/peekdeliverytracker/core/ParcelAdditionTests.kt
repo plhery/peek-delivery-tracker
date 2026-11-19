@@ -86,13 +86,13 @@ class ParcelAdditionTests {
         var form = addition(number)
         assertTrue(form.recognizable)
         assertEquals(CarrierRecognition.Status.Idle, form.recognitionStatus)
-        assertNull(form.recognitionRequest)
+        assertNull(form.recognitionQuestion?.trackingNumber)
         assertEquals(localizer.text("picker.auto.later"), form.automaticDescription(localizer))
         // The check never holds the button.
         assertTrue(form.canSave)
 
         form = form.settling(number)
-        assertEquals(number, form.recognitionRequest)
+        assertEquals(number, form.recognitionQuestion?.trackingNumber)
         assertTrue(form.checking)
         assertEquals(localizer.text("add.checkingServices"), form.lineDetail(localizer))
 

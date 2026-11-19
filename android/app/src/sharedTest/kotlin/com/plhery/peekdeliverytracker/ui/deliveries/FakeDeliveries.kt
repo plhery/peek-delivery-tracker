@@ -411,6 +411,9 @@ class FakeDeliveries(
 
     /** What `detectCarrier` answers for each number, until `detecting` lets it go; a number without one fails. */
     val detections = mutableMapOf<String, CarrierDetectionResponse>()
+
+    /** What `detectCarrier` answers for a number given as typed, before [detections]. */
+    val detectionsAsTyped = mutableMapOf<String, CarrierDetectionResponse>()
     var detecting: CompletableDeferred<Unit>? = null
     val detected = mutableListOf<String>()
 
@@ -443,7 +446,7 @@ class FakeDeliveries(
         detected += trackingNumber
         detectedAsTyped += typed
         detecting?.await()
-        return detections[trackingNumber] ?: throw DeliveryApiError.InvalidResponse()
+        return typed?.let(detectionsAsTyped::get) ?: detections[trackingNumber] ?: throw DeliveryApiError.InvalidResponse()
     }
 
     override var givenPostcodes: List<GivenPostcode> = emptyList()

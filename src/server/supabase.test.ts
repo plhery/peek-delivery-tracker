@@ -1361,27 +1361,86 @@ describe('Friends passports', () => {
   const service = () => new SupabaseServiceClient('https://database.example', 'service-key');
   const user = () => new SupabaseUserClient('https://database.example', 'public-key', 'token');
 
-  it('reads a sharing friend\'s parcels as the friend\'s apps read them, archived ones included', async () => {
+  const friend = '5c000000-0000-4000-a000-000000000003';
+  const former = '5c000000-0000-4000-a000-000000000004';
+  const params = (path: unknown) => new URL(`https://database.example${String(path)}`);
+
+  it('reads which cards share their Passport and, for a viewer, only its own and its friends\'', async () => {
     const client = service();
-    const profile = '11000000-0000-4000-8000-000000000001';
-    const request = vi.spyOn(client, 'request')
-      .mockResolvedValueOnce([{ id: profile, user_id: owner }, { id: 'malformed' }])
-      .mockResolvedValueOnce([{ id: parcel }]);
-    await expect(client.passportSharers([profile, profile])).resolves.toEqual(new Map([[profile, owner]]));
-    const sharers = new URL(`https://database.example${request.mock.calls[0]![0]}`);
-    expect(sharers.pathname).toBe('/rest/v1/friend_profiles');
-    expect(Object.fromEntries(sharers.searchParams)).toEqual({ select: 'id,user_id', id: `in.(${profile})`, share_stats: 'is.true' });
-    await expect(client.listAccountPackages(owner)).resolves.toEqual([{ id: parcel }]);
-    const parcels = new URL(`https://database.example${request.mock.calls[1]![0]}`).searchParams;
-    expect(parcels.get('user_id')).toBe(`eq.${owner}`);
-    expect(parcels.has('archived_at')).toBe(false);
+    const [own, friendly, left, hidden, broken] = [1, 2, 3, 4, 5].map((index) => `11000000-0000-4000-8000-00000000000${index}`);
+    const request = vi.spyOn(client, 'request').mockImplementation(postgrestTables({
+      friend_profiles: [
+        { id: own, user_id: owner, share_stats: true }, { id: friendly, user_id: friend, share_stats: true },
+        { id: left, user_id: former, share_stats: true }, { id: hidden, user_id: parcel, share_stats: false }, { id: broken, user_id: null, share_stats: true },
+      ],
+      // The viewer's connections, the rows its `or` keeps: the former friend has left.
+      friend_connections: [{ user_low: owner, user_high: friend }],
+    }));
+    await expect(client.passportSharers([own, own, friendly, left, hidden, broken])).resolves
+      .toEqual(new Map([[own, owner], [friendly, friend], [left, former]]));
+    expect(params(request.mock.calls[0]![0]).pathname).toBe('/rest/v1/friend_profiles');
+    expect(Object.fromEntries(params(request.mock.calls[0]![0]).searchParams))
+      .toEqual({ select: 'id,user_id', id: `in.(${[own, friendly, left, hidden, broken].join(',')})`, share_stats: 'is.true' });
+    await expect(client.passportSharers([own, friendly, left], owner)).resolves.toEqual(new Map([[own, owner], [friendly, friend]]));
+    expect(params(request.mock.calls[2]![0]).pathname).toBe('/rest/v1/friend_connections');
+    expect(Object.fromEntries(params(request.mock.calls[2]![0]).searchParams))
+      .toEqual({ select: 'user_low,user_high', or: `(user_low.eq.${owner},user_high.eq.${owner})` });
+    // The viewer's own card needs no connection, and a card that shares nothing needs no read.
+    await expect(client.passportSharers([own], owner)).resolves.toEqual(new Map([[own, owner]]));
+    await expect(client.passportSharers([friendly], former)).resolves.toEqual(new Map());
+    await expect(client.passportSharers([], owner)).resolves.toEqual(new Map());
+    expect(request.mock.calls.map(([path]) => params(path).pathname)).toEqual([
+      '/rest/v1/friend_profiles', '/rest/v1/friend_profiles', '/rest/v1/friend_connections', '/rest/v1/friend_profiles',
+      '/rest/v1/friend_profiles', '/rest/v1/friend_connections',
+    ]);
+  });
+
+  it('reads a whole circle\'s parcels at once, archived ones included, with the scans their owners\' apps read', async () => {
+    vi.stubEnv('REVIEW_DEMO_ACCOUNTS', friend);
+    const client = service();
+    const row = (index: number, user_id: string, extra: JsonObject = {}): JsonObject => ({
+      id: `5d000000-0000-4000-a000-${String(index).padStart(12, '0')}`, user_id, tracking_number: `SYNTHETIC${index}`, label: 'Private purchase',
+      carrier: 'swiss-post', sync_status: 'ok', dpd_postcode: '0000', carrier_data: {}, archived_at: null, tracking_events: [], ...extra,
+    });
+    const packages = [row(1, owner, { archived_at: '2026-09-01T00:00:00Z' }), row(2, friend, { tracking_number: 'TESTDELIVERED01' }), row(3, parcel), row(4, owner)];
+    const request = vi.spyOn(client, 'request').mockImplementation(postgrestTables({ packages }, 1000));
+    const parcels = await client.passportParcels([owner, friend, owner, former]);
+    expect(request).toHaveBeenCalledOnce();
+    const read = params(request.mock.calls[0]![0]).searchParams;
+    expect(read.get('user_id')).toBe(`in.(${owner},${friend},${former})`);
+    expect(read.has('archived_at')).toBe(false);
+    expect([...parcels].map(([account, list]) => [account, list.map(({ id }) => id)]))
+      .toEqual([[owner, [packages[0]!.id, packages[3]!.id]], [friend, [packages[1]!.id]], [former, []]]);
+    // The parcel's account and what serving its scans reads, not its name, status, postcode or archive date.
+    expect(Object.keys(parcels.get(owner)![0]!).sort()).toEqual(['carrier', 'carrier_data', 'id', 'tracking_events', 'tracking_number', 'user_id']);
+    // The scans as the owner's apps read them, a review demo parcel's included.
     const owned = user();
     const ownerRequest = vi.spyOn(owned, 'request').mockResolvedValue([]);
     await owned.listPackages(true);
-    expect(parcels.get('select')).toBe(new URL(`https://database.example${ownerRequest.mock.calls[0]![0]}`).searchParams.get('select'));
-    // No card shares its Passport: nothing to read.
-    await expect(client.passportSharers([])).resolves.toEqual(new Map());
-    expect(request).toHaveBeenCalledTimes(2);
+    const scans = (select: string | null) => select?.slice(select.indexOf('tracking_events('));
+    expect(scans(read.get('select'))).toBe(scans(params(ownerRequest.mock.calls[0]![0]).searchParams.get('select')));
+    expect(parcels.get(friend)![0]!.tracking_events).not.toEqual([]);
+    // No account: nothing to read.
+    await expect(client.passportParcels([])).resolves.toEqual(new Map());
+    expect(request).toHaveBeenCalledOnce();
+    vi.unstubAllEnvs();
+  });
+
+  it('reads a circle past the API\'s row limit in pages by id, an answer short of it being the last', async () => {
+    const client = service();
+    const packages = Array.from({ length: 2345 }, (_, index) => ({
+      id: `5d000000-0000-4000-a000-${String(index).padStart(12, '0')}`, user_id: [owner, friend, former][index % 3]!, tracking_events: [],
+    }));
+    const request = vi.spyOn(client, 'request').mockImplementation(postgrestTables({ packages }, 1000));
+    const parcels = await client.passportParcels([owner, friend, former]);
+    expect([owner, friend, former].map((account) => parcels.get(account)!.length)).toEqual([782, 782, 781]);
+    expect(new Set([...parcels.values()].flat().map(({ id }) => id)).size).toBe(2345);
+    expect(request.mock.calls.map(([path]) => params(path).searchParams.get('id'))).toEqual([null, `gt.${packages[999]!.id}`, `gt.${packages[1999]!.id}`]);
+    // A full last page takes one more read to see that nothing follows.
+    request.mockClear();
+    packages.length = 2000;
+    expect([...(await client.passportParcels([owner, friend, former])).values()].flat()).toHaveLength(2000);
+    expect(request).toHaveBeenCalledTimes(3);
   });
 });
 

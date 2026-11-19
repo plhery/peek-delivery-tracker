@@ -50,9 +50,11 @@ invitations and both sides of every friendship, and account deletion cascades th
 
 - The database's friend functions decide which cards a caller sees and which share stats.
   The server then works out each shared card's counts and stamps from the owner's parcels,
-  read and served as the owner's apps get them, with the app's own Passport code
-  (`sharedPassport` in [`passport.ts`](../src/lib/passport.ts)). Client-sent statistics are
-  never accepted.
+  served as the owner's apps get them, with the app's own Passport code
+  (`sharedPassport` in [`passport.ts`](../src/lib/passport.ts)). It reads the whole circle's
+  parcels at once, then checks again, as it builds the cards, that each owner still shares
+  stats with the viewer: a card whose owner stopped sharing or left the circle meanwhile
+  shows no stats. Client-sent statistics are never accepted.
 - Friend tables deny direct client access. The anonymous preview returns only the
   nickname of an unexpired invitation, and authenticated functions bind `auth.uid()` and
   return mutual friends only. Parcel RLS is unchanged.

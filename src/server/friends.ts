@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { isInvitationCode, isInvitationPreviewId } from '../lib/invitationLinkFormat';
 import { sharedPassport } from '../lib/passport';
 import { toParcel } from '../store/apiRepo';
-import type { ApiFriendCard, ApiFriendProfile, ApiFriendsActionRequest, ApiFriendsActionResponse, ApiFriendsSnapshot, ApiFriendsActivity, ApiPackageRow } from '../generated/apiContract';
+import type { ApiFriendCard, ApiFriendProfile, ApiFriendStats, ApiFriendsActionRequest, ApiFriendsActionResponse, ApiFriendsSnapshot, ApiFriendsActivity, ApiPackageRow } from '../generated/apiContract';
 import { HttpError } from './api';
 import { withEventPlaces } from './eventPlaces';
 import { isRecord, type JsonObject } from './types';
@@ -85,17 +85,24 @@ export function friendsSnapshot(value: unknown): StoredFriendsSnapshot {
 }
 /**
  * A shared card's counts and stamps, worked out with the app's own Passport rules over the parcels its
- * owner's apps read, as served to them. The card still carries only those; a card whose owner stopped
- * sharing in between loses them.
+ * owner's apps read, as served to them. The whole circle's parcels come in one read (`passportParcels`).
+ * The card still carries only those, and only while its owner shares them with the viewer: that is checked
+ * again once the parcels are read, so a card whose owner stopped sharing or left the viewer's circle in
+ * between loses them.
  */
-export async function withSharedPassports(service: SupabaseServiceClient, snapshot: StoredFriendsSnapshot, acceptedFriend?: StoredFriendCard): Promise<{ snapshot: ApiFriendsSnapshot; acceptedFriend?: ApiFriendCard }> {
+export async function withSharedPassports(service: SupabaseServiceClient, viewer: string, snapshot: StoredFriendsSnapshot, acceptedFriend?: StoredFriendCard): Promise<{ snapshot: ApiFriendsSnapshot; acceptedFriend?: ApiFriendCard }> {
   const shared = [snapshot.ownCard, ...snapshot.friends, acceptedFriend].filter((card): card is StoredFriendCard => Boolean(card?.sharesStats));
   const owners = await service.passportSharers(shared.map(({ id }) => id));
-  const passports = new Map(await Promise.all([...new Set(owners.values())].map(async (owner) => [owner,
-    sharedPassport((await service.listAccountPackages(owner)).map((row) => toParcel(withEventPlaces(row) as unknown as ApiPackageRow)))] as const)));
+  const parcels = await service.passportParcels([...owners.values()]);
+  const allowed = owners.size ? await service.passportSharers([...owners.keys()], viewer) : owners;
+  const passports = new Map<string, ApiFriendStats>();
+  const passport = (owner: string) => {
+    if (!passports.has(owner)) passports.set(owner, sharedPassport((parcels.get(owner) ?? []).map((row) => toParcel(withEventPlaces(row) as unknown as ApiPackageRow))));
+    return passports.get(owner)!;
+  };
   const restamp = ({ sharesStats, ...card }: StoredFriendCard): ApiFriendCard => {
     const owner = sharesStats ? owners.get(card.id) : undefined;
-    return { ...card, stats: owner ? passports.get(owner) ?? null : null };
+    return { ...card, stats: owner && allowed.get(card.id) === owner ? passport(owner) : null };
   };
   return {
     snapshot: { ...snapshot, ownCard: snapshot.ownCard && restamp(snapshot.ownCard), friends: snapshot.friends.map(restamp) },

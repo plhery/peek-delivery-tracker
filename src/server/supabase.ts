@@ -44,7 +44,15 @@ const PACKAGE_COLUMNS = [
  * carries neither, nor when a scan was stored (`stored_at`), which dates the parcel's news (`news_at`).
  * The scraper's `recipient_action` and `tie_order` are served as they were stored.
  */
-const PACKAGE_SELECT = `${PACKAGE_COLUMNS},tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage)`;
+const PACKAGE_EVENTS = 'tracking_events(id,package_id,stage,description,location,occurred_at,stored_at:created_at,provider_event_id,point:raw_data->point,time:raw_data->>time,local_time:raw_data->>local_time,observed:raw_data->observed_without_provider_timestamp,universal_provider:raw_data->>universal_provider,recipient_action:raw_data->>recipient_action,tie_order:raw_data->tie_order,stage_source:raw_data->>stage_source,kept_stage:raw_data->kept_stage)';
+const PACKAGE_SELECT = `${PACKAGE_COLUMNS},${PACKAGE_EVENTS}`;
+/**
+ * What a shared Passport is worked out from (`withSharedPassports` in friends.ts): the parcel's account, its scans
+ * as `PACKAGE_SELECT` reads them and the columns serving them reads (eventPlaces.ts: the number, carrier and carrier
+ * data, which tell the scans shown, their places and the rows shown under others). Its name, status, postcode,
+ * archive date and the rest of what only the owner's apps show are left out: a shared Passport counts none of them.
+ */
+const PASSPORT_PACKAGE_SELECT = `id,user_id,tracking_number,carrier,carrier_data,${PACKAGE_EVENTS}`;
 /**
  * The columns the schedule reads, `one_off` among them: a lookup without an account leaves the
  * schedule once nobody has answered for its number (unseenLookup.ts).
@@ -1173,6 +1181,8 @@ export const REDETECTION_PAGE = 500;
 const UNWATCHED_PAGE = 1000;
 /** How many parcels a page of scheduled sync candidates holds: the API's row limit. */
 const CANDIDATE_PAGE = 1000;
+/** How many parcels a page of a Friends circle's Passports holds: the API's row limit. */
+const PASSPORT_PAGE = 1000;
 /** How many parcels listSyncCandidates reads by id at once, which keeps their ids well inside a request line. */
 const SYNC_CANDIDATES_PER_READ = 100;
 
@@ -1727,12 +1737,50 @@ export class SupabaseServiceClient extends SupabaseClient {
     })}`, { method: 'PATCH', body: values, prefer: 'return=representation' })).length > 0;
   }
 
-  /** The accounts behind those Friends profiles that share their Passport, by profile id. */
-  async passportSharers(profileIds: string[]): Promise<Map<string, string>> {
+  /**
+   * The accounts behind those Friends profiles that share their Passport, by profile id. Given the account that
+   * reads them (`viewer`), only its own profile and those of the friends it is still connected with.
+   */
+  async passportSharers(profileIds: string[], viewer?: string): Promise<Map<string, string>> {
     if (!profileIds.length) return new Map();
     const params = query({ select: 'id,user_id', id: `in.(${[...new Set(profileIds)].join(',')})`, share_stats: 'is.true' });
-    return new Map(rows(await this.request(`/rest/v1/friend_profiles?${params}`))
+    const sharers = new Map(rows(await this.request(`/rest/v1/friend_profiles?${params}`))
       .flatMap((row) => typeof row.id === 'string' && typeof row.user_id === 'string' ? [[row.id, row.user_id] as const] : []));
+    if (viewer === undefined) return sharers;
+    // The viewer's own profile needs no connection: its connections are read only when a friend's profile shares.
+    const friends = new Set<unknown>();
+    if ([...sharers.values()].some((owner) => owner !== viewer)) {
+      const params = query({ select: 'user_low,user_high', or: `(user_low.eq.${viewer},user_high.eq.${viewer})` });
+      for (const { user_low: low, user_high: high } of rows(await this.request(`/rest/v1/friend_connections?${params}`))) {
+        if (low === viewer) friends.add(high);
+        else if (high === viewer) friends.add(low);
+      }
+    }
+    return new Map([...sharers].filter(([, owner]) => owner === viewer || friends.has(owner)));
+  }
+
+  /**
+   * The parcels of those accounts, archived ones included, by account: what their shared Passports are worked out
+   * from, as their apps read them (`withReviewDemo`) with only the columns that takes (`PASSPORT_PACKAGE_SELECT`).
+   * One read for a whole Friends circle, in pages by id: the database's API ends every answer at its row limit, and
+   * an answer short of it is the last.
+   */
+  async passportParcels(userIds: string[]): Promise<Map<string, JsonObject[]>> {
+    const owners = [...new Set(userIds)];
+    const parcels = new Map(owners.map((owner) => [owner, [] as JsonObject[]]));
+    if (!owners.length) return parcels;
+    for (let after: string | undefined; ;) {
+      const page = rows(await this.request(`/rest/v1/packages?${query([
+        ['select', PASSPORT_PACKAGE_SELECT], ['user_id', `in.(${owners.join(',')})`], ['order', 'id.asc'], ['limit', String(PASSPORT_PAGE)],
+        ...(after === undefined ? [] : [['id', `gt.${after}`] as const]),
+      ])}`));
+      for (const parcel of page) {
+        const owner = String(parcel.user_id);
+        parcels.get(owner)?.push(withReviewDemo(parcel, owner));
+      }
+      if (page.length < PASSPORT_PAGE) return parcels;
+      after = String(page.at(-1)!.id);
+    }
   }
 
   /**

@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type MouseEvent } from 'react';
 import { CarrierMark } from '../../components/CarrierMark';
+import { Icon } from '../../components/Icon';
 import { MaintenanceStrip } from '../../components/MaintenanceStrip';
 import { pipMood } from '../../components/map/Pip';
 import { defaultMode } from '../../components/map/route';
@@ -135,11 +136,27 @@ function LeadParcel({ recent, arrived = false }: { recent: RecentParcel; arrived
   </a>;
 }
 
+/** The parcels archived on this device, folded away at the end of the list. */
+function ArchivedParcels({ archived }: { archived: RecentParcel[] }) {
+  const { t } = useI18n();
+  return <details className="door-archived">
+    <summary>
+      <Icon name="archive" /><span>{t('app.archived')}</span>
+      <span className="door-archived__count">{archived.length}</span>
+      <Icon name="chevron" className="door-archived__chevron" />
+    </summary>
+    <ul className="door-archived__list">
+      {archived.map((recent) => <li key={recent.id}><DeviceParcel recent={recent} /></li>)}
+    </ul>
+  </details>;
+}
+
 /**
  * "On this device": the parcels this browser looked up or opened, each in its
  * carrier's colours with its route. The one that matters now leads the list
- * on a card of its own. They live in the browser only; forgetting them all
- * also forgets, on the server, the lookups this device made.
+ * on a card of its own, and the archived ones wait folded at its end. They live
+ * in the browser only; forgetting them all also forgets, on the server, the
+ * lookups this device made.
  */
 export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   onSignIn: () => void;
@@ -162,12 +179,14 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   const list = useRef(recents);
   useEffect(() => { list.current = recents; });
   const listed = recents.length > 0;
+  const active = useMemo(() => recents.filter((recent) => !recent.archivedAt), [recents]);
+  const archived = recents.filter((recent) => recent.archivedAt);
   const watching = listed && !covered;
   useEffect(() => watching ? watchDeviceParcels(() => list.current) : undefined, [watching]);
   useEffect(() => { if (asking) question.current?.focus(); }, [asking]);
   // A parcel delivered since the list was last shown says so where its card stands, before the list is led by another.
   const cards = useRef<HTMLUListElement>(null);
-  const parcels = useMemo(() => recents.map((recent) => ({ ...recent.snapshot.parcel, id: recent.id })), [recents]);
+  const parcels = useMemo(() => active.map((recent) => ({ ...recent.snapshot.parcel, id: recent.id })), [active]);
   const delivered = useDeliveredHold(parcels, watching && !asking, cards, DOOR_CARDS, ON_THE_WAY.device);
 
   async function forget() {
@@ -182,8 +201,8 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
 
   if (!listed && !stranded) return null;
   const shown = new Map(delivered.arranged.map((parcel) => [parcel.id, parcel]));
-  const led = leadParcel(recents.map((recent) => ({ ...recent, snapshot: { ...recent.snapshot, parcel: shown.get(recent.id) ?? recent.snapshot.parcel } })));
-  const lead = recents.find((recent) => recent.id === led?.id) ?? null;
+  const led = leadParcel(active.map((recent) => ({ ...recent, snapshot: { ...recent.snapshot, parcel: shown.get(recent.id) ?? recent.snapshot.parcel } })));
+  const lead = active.find((recent) => recent.id === led?.id) ?? null;
   const arrived = (recent: RecentParcel) => delivered.arrived({ ...recent.snapshot.parcel, id: recent.id });
   return <section className="door-device" aria-labelledby="door-device-title">
     <div className="door-device__heading">
@@ -201,10 +220,11 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
     </div>}
     {failed && <p className="door-message" role="alert">{t('door.recents.forget.failed')}</p>}
     {down && listed && <MaintenanceStrip notice={down} at={deviceListReadAt(recents)} />}
-    <ul ref={cards} className="door-device__list">
+    <ul ref={cards} className="door-device__list" hidden={!active.length}>
       {lead && <li key={lead.id} className="door-device__lead"><LeadParcel recent={lead} arrived={arrived(lead)} /></li>}
-      {recents.filter((recent) => recent !== lead).map((recent) => <li key={recent.id}><DeviceParcel recent={recent} arrived={arrived(recent)} /></li>)}
+      {active.filter((recent) => recent !== lead).map((recent) => <li key={recent.id}><DeviceParcel recent={recent} arrived={arrived(recent)} /></li>)}
     </ul>
+    {archived.length > 0 && <ArchivedParcels archived={archived} />}
     <p className="door-aside">{t('door.recents.kept')}{account !== 'signed-in' && listed && <>{' '}<button type="button" className="door-link" onClick={onSignIn}>{t('door.recents.signIn')}</button></>}</p>
   </section>;
 }

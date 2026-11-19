@@ -4,7 +4,7 @@ import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../../
 import type { EventPlace, ParcelWithEvents, Stage } from '../../types';
 import { linkNote, noteLink } from '../deviceNotes';
 import { ParcelLinkError } from '../links';
-import { forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
+import { archiveRecent, forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { deviceListDown, deviceListReadAt, forgetDeviceChecks, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn(), removeAlert: vi.fn() }));
@@ -108,6 +108,18 @@ describe('watchDeviceParcels', () => {
     expect(recentFor(OTHER_LINK_ID)).toBeNull();
     await pass(20 * MINUTE);
     expect(mocks.read).toHaveBeenCalledTimes(2);
+    stop();
+  });
+
+  it('leaves an archived parcel as it was until it is restored', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() - 10 * MINUTE });
+    archiveRecent(LINK_ID, true);
+    const stop = watch();
+    await pass(20 * MINUTE);
+    expect(mocks.read).not.toHaveBeenCalled();
+    archiveRecent(LINK_ID, false);
+    await pass(MINUTE);
+    expect(mocks.read).toHaveBeenCalledOnce();
     stop();
   });
 

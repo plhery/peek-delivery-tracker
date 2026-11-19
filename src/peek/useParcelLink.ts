@@ -61,6 +61,8 @@ export interface ParcelLinkState {
   name: string | null;
   /** The device keeps the parcel, and with it a name given here: a link opened from someone else may find no room. */
   onDevice: boolean;
+  /** The device archived the parcel: its list folds it away. */
+  archived: boolean;
   /**
    * The link's public name and protected gift message. Empty for a gift on its way.
    */
@@ -294,6 +296,7 @@ export function useParcelLink(linkId: string, initial?: ParcelLinkView): ParcelL
     view,
     name: recent?.name ?? words.name,
     onDevice: !!recent,
+    archived: !!recent?.archivedAt,
     words,
     trouble: frozen ? null : answer.trouble,
     frozen,

@@ -6,11 +6,15 @@ import { createDemoRepo } from '../../store/demoRepo';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../../test/parcelLinks';
 import { ParcelLinkError } from '../links';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
-import { forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
+import { archiveRecent, forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
 import { BringAlongInDemo, BringAlongParcels } from './BringAlong';
 import { bringable, BRING_ALONG_STORAGE_KEY, bringAlong, bringAlongInDemo, markOffered, offeredParcels } from './deviceParcels';
 
-const mocks = vi.hoisted(() => ({ claim: vi.fn(), read: vi.fn(), forget: vi.fn(), retryLoad: vi.fn() }));
+const mocks = vi.hoisted(() => ({ claim: vi.fn(), read: vi.fn(), forget: vi.fn(), retryLoad: vi.fn(), fetch: vi.fn() }));
+vi.mock('../../lib/apiClient', async (original) => ({
+  ...await original<typeof import('../../lib/apiClient')>(),
+  authenticatedFetch: mocks.fetch,
+}));
 vi.mock('../links', async (original) => ({
   ...await original<typeof import('../links')>(),
   claimParcelLinks: mocks.claim,
@@ -272,6 +276,26 @@ describe('the device’s parcels to bring along', () => {
     expect(await bringAlong([recentFor(SHARED_LINK_ID)!], auth)).toEqual({ brought: 1, refused: [] });
     expect(mocks.claim).toHaveBeenCalledWith([{ id: SHARED_LINK_ID, key: null, label: 'From a friend' }], auth, undefined);
     expect(recentFor(SHARED_LINK_ID)).toBeNull();
+  });
+
+  it('archive in the account a parcel archived on this device that it took, not one it already had', async () => {
+    archiveRecent(LINK_ID, true);
+    archiveRecent(OTHER_LINK_ID, true);
+    mocks.fetch.mockRejectedValue(new Error('offline'));
+    mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'already', packageId: 'p2' }]);
+    // An archive that fails still brings the parcel: the account lists it.
+    expect(await bringAlong([recentFor(LINK_ID)!, recentFor(OTHER_LINK_ID)!], auth)).toEqual({ brought: 2, refused: [] });
+    expect(mocks.fetch).toHaveBeenCalledExactlyOnceWith('/api/packages/p1', auth, { method: 'DELETE', signal: undefined });
+    expect(recentFor(LINK_ID)).toBeNull();
+  });
+
+  it('in the demo, archive a parcel archived on this device', async () => {
+    const repo = createDemoRepo(window.localStorage);
+    archiveRecent(OTHER_LINK_ID, true);
+    mocks.read.mockResolvedValueOnce(ups(OTHER_LINK_ID));
+    expect(await bringAlongInDemo([recentFor(OTHER_LINK_ID)!], repo)).toEqual({ brought: 1, refused: [] });
+    const kept = (await repo.list()).find((parcel) => parcel.trackingNumber === '1ZDEMO202600000009');
+    expect(kept?.archivedAt).toEqual(expect.any(String));
   });
 
   it('keep more than twenty parcels twenty to a request', async () => {

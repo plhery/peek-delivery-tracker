@@ -1,4 +1,4 @@
-import type { ApiAuth } from '../../lib/apiClient';
+import { authenticatedFetch, type ApiAuth } from '../../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../../types';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from '../links';
 import { forgetRecent, recentFor, type RecentParcel } from '../recents';
@@ -64,9 +64,17 @@ export interface BroughtAlong {
   refused: { id: string; reason: 'quota' | 'unavailable' }[];
 }
 
+/** Archives a parcel the account has just taken: one the device had archived stays archived. A failure leaves it listed. */
+async function archiveKept(packageId: string, auth: ApiAuth): Promise<void> {
+  await authenticatedFetch(`/api/packages/${encodeURIComponent(packageId)}`, auth, { method: 'DELETE', signal: auth.signal })
+    .catch(() => undefined);
+}
+
 /**
  * Keeps several of the device's parcels in the account, twenty to a request. A
- * parcel the account now has leaves the device as soon as its request answers.
+ * parcel the account now has leaves the device as soon as its request answers,
+ * archived in the account when it was archived here and the account did not
+ * have it already.
  */
 export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth): Promise<BroughtAlong> {
   const outcome: BroughtAlong = { brought: 0, refused: [] };
@@ -78,6 +86,8 @@ export async function bringAlong(parcels: readonly RecentParcel[], auth: ApiAuth
         outcome.refused.push({ id: result.id, reason: result.outcome });
         continue;
       }
+      const archived = batch.find((recent) => recent.id === result.id)?.archivedAt;
+      if (result.outcome === 'kept' && archived && result.packageId) await archiveKept(result.packageId, auth);
       forgetRecent(result.id);
       outcome.brought += 1;
     }
@@ -95,8 +105,9 @@ export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: P
       continue;
     }
     try {
-      if (repo.adopt) await repo.adopt(read.parcel, recent.name ?? '');
-      else await repo.add({ trackingNumber: read.parcel.trackingNumber, label: recent.name ?? '', carrier: read.parcel.carrier });
+      const added = repo.adopt ? await repo.adopt(read.parcel, recent.name ?? '')
+        : await repo.add({ trackingNumber: read.parcel.trackingNumber, label: recent.name ?? '', carrier: read.parcel.carrier });
+      if (recent.archivedAt) await repo.remove(added.id);
     } catch (error) {
       if (!(error instanceof ParcelAlreadyExistsError)) throw error;
     }

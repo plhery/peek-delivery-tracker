@@ -11,7 +11,7 @@ import { ParcelLinkError, type ParcelLinkView } from './links';
 import { ParcelPage } from './ParcelPage';
 import { NoticeToast } from './parcel/Toast';
 import { clearPendingKeep, onKeepOutcome, PENDING_KEEP_STORAGE_KEY, pendingKeep, rememberPendingKeep, announceKeepOutcome, type KeepOutcome } from './pending';
-import { forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, rememberParcel } from './recents';
+import { archiveRecent, forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, rememberParcel } from './recents';
 import { SAMPLE_LINK_ID } from './sample';
 import { PeekSessionProvider, type PeekSession } from './session';
 
@@ -199,6 +199,35 @@ describe('ParcelPage', () => {
     expect(location.pathname).toBe('/');
     expect(await screen.findByText('Parcel removed from this device')).toBeVisible();
     expect(mocks.read).toHaveBeenCalledOnce();
+  });
+
+  it('archives a parcel that has arrived from its actions, and the list folds it away', async () => {
+    const delivered = view([...journey, scan('delivered', 0, 'Left in the mailbox')]);
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: delivered, name: 'Boots' });
+    mocks.read.mockResolvedValue(delivered);
+    open();
+    const archive = await screen.findByRole('button', { name: 'Archive' });
+    expect(screen.queryByRole('button', { name: 'Archive parcel' })).toBeNull();
+    await userEvent.setup().click(archive);
+    expect(recentFor(LINK_ID)?.archivedAt).toEqual(expect.any(String));
+    expect(mocks.forget).not.toHaveBeenCalled();
+    expect(location.pathname).toBe('/');
+    expect(await screen.findByText('Boots archived')).toBeVisible();
+  });
+
+  it('archives a parcel on its way from the foot of the page, and restores it from its actions', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: view(journey), name: 'Boots' });
+    archiveRecent(LINK_ID, true);
+    const user = userEvent.setup();
+    open();
+    await user.click(await screen.findByRole('button', { name: 'Restore parcel' }));
+    expect(recentFor(LINK_ID)?.archivedAt).toBeUndefined();
+    expect(await screen.findByText('Boots restored')).toBeVisible();
+    expect(location.pathname).toBe(`/p/${LINK_ID}`);
+    // On its way, the page's actions are its alerts and sharing: archiving waits at its foot.
+    expect(screen.queryByRole('button', { name: 'Archive' })).toBeNull();
+    await user.click(screen.getByRole('button', { name: 'Archive parcel' }));
+    expect(recentFor(LINK_ID)?.archivedAt).toEqual(expect.any(String));
   });
 
   it('shows the device’s last answer while offline, and says from when', async () => {

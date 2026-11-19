@@ -1,6 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
+  archiveRecent,
   cleanParcelName,
   forgetAllRecents,
   forgetRecent,
@@ -184,6 +185,33 @@ function validRecent() {
     expectedDelivery: null, updatedAt: null, lastSeenAt: '2026-10-02T08:00:00.000Z', snapshot: testView({ id: OTHER_LINK_ID }),
   };
 }
+
+describe('an archived parcel', () => {
+  it('stays archived through later answers and once forgotten by the service, until it is restored', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: NOW });
+    archiveRecent(LINK_ID, true, NOW + 1_000);
+    expect(recentFor(LINK_ID)?.archivedAt).toBe('2026-10-02T08:00:01.000Z');
+    // Archiving it again keeps the first date.
+    archiveRecent(LINK_ID, true, NOW + 2_000);
+    rememberParcel({ id: LINK_ID, view: testView({ stages: ['in_transit', 'delivered'] }), now: NOW + 3_000 });
+    expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, stage: 'delivered', archivedAt: '2026-10-02T08:00:01.000Z' });
+    freezeRecent(LINK_ID, NOW + 4_000);
+    expect(recentFor(LINK_ID)).toMatchObject({ frozen: expect.any(String), archivedAt: '2026-10-02T08:00:01.000Z' });
+
+    archiveRecent(LINK_ID, false);
+    expect(recentFor(LINK_ID)?.archivedAt).toBeUndefined();
+    expect(localStorage.getItem(RECENTS_STORAGE_KEY)).not.toContain('archivedAt');
+    archiveRecent(OTHER_LINK_ID, true);
+    expect(recentFor(OTHER_LINK_ID)).toBeNull();
+  });
+
+  it('is not listed when its date is not text', () => {
+    rememberParcel({ id: LINK_ID, view: testView(), now: NOW });
+    const [saved] = JSON.parse(localStorage.getItem(RECENTS_STORAGE_KEY)!) as object[];
+    localStorage.setItem(RECENTS_STORAGE_KEY, JSON.stringify([{ ...saved, archivedAt: 3 }]));
+    expect(recentFor(LINK_ID)).toBeNull();
+  });
+});
 
 describe('a lookup the service has forgotten', () => {
   it('keeps the copy of its own lookup, without its key or notes, and drops a copy of someone else’s link', () => {

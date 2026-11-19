@@ -18,9 +18,10 @@ export interface PingAction {
 /**
  * What can be done with the parcel: be told when it moves, add its delivery
  * to a calendar, share its link, and give it a name that stays on this
- * device. Once it has arrived, "I have it" takes the place of the alerts.
+ * device. Once it has arrived, "I have it" takes the place of the alerts, and
+ * the parcel can be archived on this device, or restored once it is.
  */
-export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, compactName = false }: {
+export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, onArchive, onRestore, compactName = false }: {
   name: string | null;
   /** Absent once the journey is over. */
   ping?: PingAction;
@@ -30,6 +31,8 @@ export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, com
   onCalendar?: () => void;
   onShare?: () => void;
   onRename?: (name: string | null) => void;
+  onArchive?: () => void;
+  onRestore?: () => void;
   /** The name action is its pencil alone, where the row has more to say. */
   compactName?: boolean;
 }) {
@@ -65,7 +68,7 @@ export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, com
     </form>;
   }
   // A gift that has arrived leaves its recipient nothing to do here.
-  if (!ping && !onHave && !onCalendar && !onShare && !onRename) return null;
+  if (!ping && !onHave && !onCalendar && !onShare && !onRename && !onArchive && !onRestore) return null;
   const row = <>
     {ping && !ping.prominent && <button type="button" className="peekp-action" onClick={ping.onOpen}>
       <Icon name="bell" />{ping.long ? <><span className="peekp-action__short">{ping.label}</span><span className="peekp-action__long">{ping.long}</span></> : <span>{ping.label}</span>}
@@ -76,6 +79,8 @@ export function Actions({ name, ping, onHave, onCalendar, onShare, onRename, com
     {onRename && <button ref={nameButton} type="button" className={`peekp-action peekp-action--name${compactName ? ' peekp-action--compact' : ''}`} aria-label={t(name ? 'detail.editTitle' : 'link.name')} onClick={edit}>
       <Glyph name="pencil" /><span>{t(name ? 'detail.editTitle' : 'link.name')}</span>
     </button>}
+    {onArchive && <button type="button" className="peekp-action" onClick={onArchive}><Icon name="archive" /><span>{t('parcel.archive')}</span></button>}
+    {onRestore && <button type="button" className="peekp-action" onClick={onRestore}><Icon name="archive" /><span>{t('detail.restore')}</span></button>}
   </>;
   if (!ping?.prominent) return <div className="peekp-actions">{row}</div>;
   return <div className="peekp-actions peekp-actions--led">

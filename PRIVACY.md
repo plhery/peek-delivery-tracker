@@ -284,8 +284,8 @@ you entered are never shown through a link.
 
 Your browser, or the iPhone or Android app, keeps a list of the parcels you
 followed or opened this way: each link, its key if this device made the
-lookup, the name you gave it and the last tracking history it showed, so the
-parcel is still there offline. For each parcel they looked up, the iPhone and
+lookup, the name you gave it, whether you archived it and the last tracking
+history it showed, so the parcel is still there offline. For each parcel they looked up, the iPhone and
 Android apps also note whether you gave a postcode with the lookup, so they
 don't ask for one again. The note is a yes or no and never holds the postcode.
 The list stays on the device until the parcel is forgotten or kept in an

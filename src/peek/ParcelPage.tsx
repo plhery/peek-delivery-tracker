@@ -65,7 +65,7 @@ import {
 } from './parcel/summary';
 import { announceNotice, Toast } from './parcel/Toast';
 import { announceKeepOutcome, onKeepOutcome, usePendingKeep, type KeepOutcome } from './pending';
-import { forgetRecent, recentFor, renameParcel } from './recents';
+import { archiveRecent, forgetRecent, recentFor, renameParcel } from './recents';
 import { nonTrackingNote, nonTrackingShape } from './lookup/reading';
 import { closeParcelLink, forgetParcelLinkOpener, leaveParcelLink, openLanding, parcelLinkOpener, parcelLinkURL, PIP_TRANSITION_NAME } from './route';
 import { SAMPLE_LINK_ID } from './sample';
@@ -428,12 +428,29 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
     announceNotice('link.remove.done');
   }
 
+  // Archiving puts the device's copy away: the list folds it at its end, and the page offers it back.
+  const archivable = state.onDevice && !sample && !present;
+  const shownName = () => name ?? t('common.parcel');
+  function archive() {
+    archiveRecent(linkId, true);
+    trackAction('parcel-archive', 'success');
+    announceNotice('app.archivedToast', { name: shownName() }, 'archive');
+    leave();
+  }
+  function restore() {
+    archiveRecent(linkId, false);
+    trackAction('parcel-restore', 'success');
+    announceNotice('app.restoredAnnouncement', { name: shownName() });
+  }
+
   // The postcode another carrier holding the parcel asks for, or its own: the owner's to add, with the key.
   const asked = key ? link.inputNeeded ?? null : null;
   const ownAsks = asked?.carrier === parcel.carrier;
   const [addingPostcode, setAddingPostcode] = useState(false);
 
   const final = !!stage && isFinal(stage);
+  // Archive is among the page's actions once the journey is over; before then, and once they are gone, at its foot.
+  const archiveInRow = !afterwards && (final || frozen);
 
   // Alerts and the calendar: for anyone with the link, until the journey is over. A held return's is not: the
   // carrier still scans it on its way back, and the server keeps its alerts on.
@@ -559,6 +576,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           onCalendar={!owner && slot ? addToCalendar : undefined}
           onShare={owner && !frozen ? () => void share() : undefined}
           onRename={present ? undefined : sample ? (next) => setRenamed({ name: next }) : state.onDevice ? (next) => renameParcel(linkId, next) : undefined}
+          onArchive={archivable && !state.archived && archiveInRow ? archive : undefined}
+          onRestore={archivable && state.archived ? restore : undefined}
           compactName={!owner} />}
         <AndroidTestRow />
         {carrierKnown && <Notes view={view} stage={stage} flag={flag} trouble={failing} carrier={displayed} />}
@@ -586,7 +605,9 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {invitation}
       </div>}
     </div>
-    <ForgetFooter promise={frozen ? null : promise} onForget={askToForget} onRemove={frozen ? removeFrozen : offerRemove} />
+    <ForgetFooter promise={frozen ? null : promise} onForget={askToForget} onRemove={frozen ? removeFrozen : offerRemove}
+      onArchive={archivable && !state.archived && !archiveInRow ? archive : undefined}
+      onRestore={archivable && state.archived && afterwards ? restore : undefined} />
 
     {news && <Toast place="top" tone mark={<Icon name="truck" />}>
       <strong>{t('link.updateToast')}</strong> · {localizedEventDescription(news.description, t) || stageLabel(t, news.stage)}

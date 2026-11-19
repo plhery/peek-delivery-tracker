@@ -58,7 +58,8 @@ export function OtherParcels({ linkId, visitor, over, onTrackAnother, onSignIn }
 }) {
   const { t } = useI18n();
   const recents = useRecents();
-  const others = visitor ? recents.filter((recent) => recent.id !== linkId) : [];
+  // Archived parcels wait in the list's own section.
+  const others = visitor ? recents.filter((recent) => recent.id !== linkId && !recent.archivedAt) : [];
   const listed = others.slice(0, LISTED);
   const list = useRef(listed);
   useEffect(() => { list.current = listed; });
@@ -77,7 +78,7 @@ export function OtherParcels({ linkId, visitor, over, onTrackAnother, onSignIn }
   return <section className="peekp-another" aria-labelledby="peekp-another-title">
     <div className="peekp-another__heading">
       <h2 id="peekp-another-title">{t('link.device.title')}</h2>
-      {others.length > listed.length && <button type="button" className="peekp-another__all" onClick={onTrackAnother}>{t('link.device.all', { count: recents.length })}</button>}
+      {others.length > listed.length && <button type="button" className="peekp-another__all" onClick={onTrackAnother}>{t('link.device.all', { count: recents.filter((recent) => !recent.archivedAt).length })}</button>}
     </div>
     <ul>{listed.map((recent) => <li key={recent.id}><OtherParcel recent={recent} /></li>)}</ul>
     {another}

@@ -313,7 +313,7 @@ describe('the parcel page of a link’s owner', () => {
     const user = userEvent.setup();
     open(view({ events: arrived, parcel: { expectedDelivery: undefined } }));
     expect(await screen.findByRole('heading', { level: 1, name: 'Delivered' })).toBeVisible();
-    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['I have it', 'Share', 'Name it']);
+    expect(actions().getAllByRole('button').map((button) => button.textContent)).toEqual(['I have it', 'Share', 'Name it', 'Archive']);
     // The alerts ended with the delivery.
     await waitFor(() => expect(linkNote(LINK_ID).alert).toBeUndefined());
 

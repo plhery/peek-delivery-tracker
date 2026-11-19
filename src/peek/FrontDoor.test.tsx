@@ -14,7 +14,7 @@ import { ParcelLinkError, type ParcelLookup } from './links';
 import { forgetDeviceChecks } from './lookup/deviceList';
 import { LookupVerificationError } from './lookup/verification';
 import { takePendingAdd } from './pendingAdd';
-import { forgetAllRecents, markRecentSeen, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
+import { archiveRecent, forgetAllRecents, markRecentSeen, recentFor, RECENTS_STORAGE_KEY, rememberParcel, renameParcel } from './recents';
 import { PeekSessionProvider, type PeekSession } from './session';
 import { MARK_NEW_UPDATES_STORAGE_KEY } from '../lib/newUpdate';
 import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrierHandoff';
@@ -955,6 +955,33 @@ describe('FrontDoor: on this device', () => {
     expect(links[1].querySelector('.card-route')).toBeNull();
     await user.click(links[0]);
     expect(location.pathname).toBe(`/p/${OTHER_LINK_ID}`);
+  });
+
+  it('folds the archived parcels at the end of the list, where none leads and they stay as they were', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    rememberParcel({ id: OTHER_LINK_ID, view: placedView(OTHER_LINK_ID, ['accepted', 'out_for_delivery'], false), now: Date.now() - 10 * 60_000 });
+    renameParcel(OTHER_LINK_ID, 'New sneakers');
+    archiveRecent(OTHER_LINK_ID, true);
+    const { user } = door();
+    const list = screen.getByRole('region', { name: 'On this device' });
+    const archived = within(list).getByRole('group');
+    expect(within(archived).getByText('Archived')).toBeVisible();
+    expect(within(archived).getByText('1')).toBeVisible();
+    expect(within(archived).getByRole('link', { hidden: true })).not.toBeVisible();
+    // Out for delivery, it would lead; archived, it is a plain card at the end, and is not read again.
+    const links = within(list).getAllByRole('link', { hidden: true });
+    expect(links.map((link) => link.getAttribute('href'))).toEqual([`/p/${LINK_ID}`, `/p/${OTHER_LINK_ID}`]);
+    expect(list.querySelector('.door-nextup')).toBeNull();
+    await user.click(within(archived).getByText('Archived'));
+    expect(within(archived).getByRole('link')).toHaveAccessibleName(/New sneakers.*Out for delivery/);
+    expect(mocks.read).not.toHaveBeenCalledWith(OTHER_LINK_ID, expect.anything());
+
+    // With every parcel archived, the list is the fold, and Forget all still counts them all.
+    archiveRecent(LINK_ID, true);
+    await waitFor(() => expect(within(archived).getByText('2')).toBeVisible());
+    expect(list.querySelector('.door-device__list')).not.toBeVisible();
+    await user.click(within(list).getByRole('button', { name: 'Forget all' }));
+    expect(within(list).getByText(/2 parcels/)).toBeVisible();
   });
 
   it('lets a parcel that has just arrived say so where its card stands, before another leads the list', async () => {

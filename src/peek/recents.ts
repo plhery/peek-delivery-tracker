@@ -48,6 +48,11 @@ export interface RecentParcel {
    * shown, no longer updated and without its key, until it is removed from the device.
    */
   frozen?: string;
+  /**
+   * When this device archived the parcel: the list shows it under Archived, never leads with it nor reads it in the
+   * background, and an account it is kept in archives it too. Its alerts stay as they were.
+   */
+  archivedAt?: string;
 }
 
 /**
@@ -75,6 +80,7 @@ function isRecent(value: unknown): value is RecentParcel {
   return isParcelLinkId(recent.id) && typeof recent.carrier === 'string' && typeof recent.lastSeenAt === 'string'
     && (recent.key === null || typeof recent.key === 'string') && (recent.name === null || typeof recent.name === 'string')
     && (recent.frozen === undefined || typeof recent.frozen === 'string')
+    && (recent.archivedAt === undefined || typeof recent.archivedAt === 'string')
     && !!recent.snapshot && typeof recent.snapshot === 'object'
     && !!recent.snapshot.link && !!recent.snapshot.parcel && Array.isArray(recent.snapshot.parcel.events);
 }
@@ -219,6 +225,7 @@ export function rememberParcel({ id, view, key, name, suggestedName, now = Date.
     lastSeenAt: new Date(now).toISOString(),
     snapshot: view,
     openedNews: kept ?? view.parcel.newsAt ?? SEEN_BEFORE_ANY_NEWS,
+    ...(existing?.archivedAt ? { archivedAt: existing.archivedAt } : {}),
   };
   const number = view.parcel.trackingNumber;
   const superseded = (candidate: RecentParcel) => !!number && !!candidate.frozen && candidate.snapshot.parcel.trackingNumber === number;
@@ -269,6 +276,15 @@ export function renameParcel(id: string, name: string | null): void {
   const list = read();
   if (!list.some((recent) => recent.id === id)) return;
   write(list.map((recent) => recent.id === id ? { ...recent, name: cleanParcelName(name) } : recent));
+}
+
+/** Archives a parcel on this device, or brings it back to the list. */
+export function archiveRecent(id: string, archived: boolean, now = Date.now()): void {
+  const list = read();
+  if (!list.some((recent) => recent.id === id && !!recent.archivedAt !== archived)) return;
+  // Undefined is left out of what is saved.
+  const archivedAt = archived ? new Date(now).toISOString() : undefined;
+  write(list.map((recent) => recent.id === id ? { ...recent, archivedAt } : recent));
 }
 
 /** Drops the device's copy, with what it noted about the link. The server's is forgotten with `forgetParcelLink`. */

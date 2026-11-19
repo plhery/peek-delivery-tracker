@@ -292,6 +292,15 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 .door-nextup .progress-track__dot { background: color-mix(in srgb, var(--tone) 13%, transparent); }
 .door-nextup .progress-track__dot--filled { background: color-mix(in srgb, var(--tone) 55%, var(--tone-surface)); }
 .door-device > .door-aside { margin-top: 14px; }
+.door-archived { margin-top: 10px; }
+.door-archived > summary { list-style: none; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 9px 4px; border-radius: 15px; color: var(--ink-soft); font-size: 14px; cursor: pointer; }
+.door-archived > summary::-webkit-details-marker { display: none; }
+.door-archived > summary svg { width: 18px; height: 18px; flex: 0 0 auto; }
+.door-archived__count { margin-inline-start: auto; padding: 1px 7px; border-radius: 10px; background: var(--control); font-size: 12px; font-variant-numeric: tabular-nums; }
+.door-archived > summary .door-archived__chevron { width: 16px; height: 16px; rotate: 90deg; transition: rotate .2s; }
+.door-archived[open] .door-archived__chevron { rotate: -90deg; }
+.door-archived__list { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 8px; margin: 0; padding: 0; list-style: none; }
+.door-archived .door-parcel { background: color-mix(in srgb, var(--tone-surface) 35%, var(--paper)); }
 
 @keyframes door-in { from { opacity: 0; transform: translateY(7px); } }
 @keyframes door-fade { from { opacity: 0; } }
@@ -345,7 +354,7 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
   .door[data-view=first] .door-pip { width: 186px; margin-top: -37px; }
   .door-wash { inset-inline: -16px; height: min(520px, 70%); }
   .door-skeleton { display: block; }
-  .door-device__list { grid-template-columns: minmax(0, 1fr); }
+  .door-device__list, .door-archived__list { grid-template-columns: minmax(0, 1fr); }
   /* On a phone the route runs across the top of the lead card, and the words stand under it. */
   .door-nextup { min-height: 0; padding: 150px 18px 18px; }
   .door-nextup__map { inset: 0 0 auto; height: 176px; }

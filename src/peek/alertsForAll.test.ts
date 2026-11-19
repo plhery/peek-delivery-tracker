@@ -33,11 +33,12 @@ describe('alerts for every parcel', () => {
     expect(alertsForAll()).toBe('delivery');
   });
 
-  it('turns alerts on for the parcels still on their way, passing over one turned off, one already on and one no longer updated', async () => {
+  it('turns alerts on for the parcels still on their way, passing over one turned off, one already on, one no longer updated and one archived', async () => {
     noteLink('MutedParcAB2', { muted: true });
     noteLink('BeepParcAB23', { alert: { preset: 'all', endpoint: 'https://push.example/1' } });
     const frozen = { ...recent('FrozParcAB23'), frozen: '2026-11-18T10:00:00.000Z' };
-    const parcels = [recent('WayParcAB234'), recent('MutedParcAB2'), recent('BeepParcAB23'), recent('DoneParcAB23', 'delivered'), frozen];
+    const archived = { ...recent('ArchParcAB23'), archivedAt: '2026-11-18T10:00:00.000Z' };
+    const parcels = [recent('WayParcAB234'), recent('MutedParcAB2'), recent('BeepParcAB23'), recent('DoneParcAB23', 'delivered'), frozen, archived];
     await alertParcels(parcels, 'fr');
     expect(turnOnAlert).not.toHaveBeenCalled();
 

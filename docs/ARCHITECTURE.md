@@ -197,6 +197,12 @@ Key server modules:
     updated, without its key or link notes, and is never read again; a new lookup of the
     same number replaces it. A copy of a link someone shared goes, since the 404 doesn't say
     why it ended.
+  - Archiving a parcel is the browser's alone, as in the apps: its page offers Archive among
+    its actions once the journey is over, and at its foot before then. The list folds the
+    archived parcels at its end, never leads with one and doesn't read them in the
+    background; their alerts stay as they were, but turning alerts on for every parcel
+    passes them over. Kept in an account, a parcel archived here is archived there too,
+    unless the account had it already.
   - The list holds a hundred parcels: copies no longer updated make way first, then links
     opened from someone else, for the browser's own lookups. A saved parcel the browser can't read, such as one
     another version wrote, stays with its id and owner key: it isn't listed, its link gets

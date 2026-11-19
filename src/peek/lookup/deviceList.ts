@@ -78,7 +78,8 @@ export function leadParcel(recents: readonly RecentParcel[], now = Date.now()): 
 
 /**
  * Brings the device's parcels up to date, quietly: each stale one is read
- * through its link, one after the other. A lookup of this device's own that
+ * through its link, one after the other; an archived one waits until it is
+ * opened. A lookup of this device's own that
  * the server no longer has stays, no longer updated and never read again;
  * any other parcel it no longer has leaves the list. Any trouble ends the
  * round, and the list shows what the device has, under a note when the
@@ -92,7 +93,7 @@ export async function refreshDeviceParcels(recents: readonly RecentParcel[], sig
   let unanswered = false;
   for (const recent of recents) {
     if (signal.aborted || (typeof navigator !== 'undefined' && navigator.onLine === false)) return false;
-    if (recent.frozen) continue;
+    if (recent.frozen || recent.archivedAt) continue;
     const seen = Date.parse(recent.lastSeenAt) || 0;
     const settled = recent.stage && isFinal(recent.stage) && !recent.snapshot.parcel.returnHeld;
     const fresh = waiting(recent) ? WAITING_FRESH_MS : settled ? SETTLED_FRESH_MS : FRESH_MS;

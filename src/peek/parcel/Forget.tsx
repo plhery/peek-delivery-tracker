@@ -98,20 +98,25 @@ export function ForgetDialog({ onForget, onCancel, arrived }: {
 
 /**
  * The privacy promise at the foot of the page, with the way to forget the parcel at once for its owner, or to take it
- * off this device for someone it was shared with.
+ * off this device for someone it was shared with, and to archive it on this device, or restore it, while the page's
+ * actions don't offer that.
  */
-export function ForgetFooter({ promise, onForget, onRemove }: {
+export function ForgetFooter({ promise, onForget, onRemove, onArchive, onRestore }: {
   /** When Peek forgets the parcel by itself; absent for a parcel shared from an account. */
   promise: string | null;
   /** Offered to the owner only. */
   onForget?: () => void;
   /** Offered to someone the parcel was shared with, whose device lists it. */
   onRemove?: () => void;
+  onArchive?: () => void;
+  onRestore?: () => void;
 }) {
   const { t } = useI18n();
   return <footer className="peekp-footer">
     {promise && <p><Icon name="lock" />{promise}</p>}
     <p>
+      {onArchive && <><button type="button" className="peekp-footer__forget" onClick={onArchive}>{t('detail.archive')}</button> · </>}
+      {onRestore && <><button type="button" className="peekp-footer__forget" onClick={onRestore}>{t('detail.restore')}</button> · </>}
       {onForget && <><button type="button" className="peekp-footer__forget" onClick={onForget}>{t('link.forget.now')}</button> · </>}
       {onRemove && <><button type="button" className="peekp-footer__forget" onClick={onRemove}>{t('link.remove.now')}</button> · </>}
       <a href="/privacy.html" onClick={() => trackAction('privacy-open')}>{t('auth.privacyLink')}</a> · <a href={SOURCE_URL} target="_blank" rel="noopener noreferrer"><LandingIcon name="github" />GitHub</a>

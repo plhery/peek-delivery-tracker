@@ -1,0 +1,5 @@
+Assistants and adding parcels by email are now marked Beta.
+A parcel brought to your door after waiting at a pickup point no longer earns a Picked up stamp.
+A gift sent yesterday and due tomorrow no longer says it arrives today.
+A parcel shared while Add is saving another opens once that one is saved.
+A parcel’s history drops a planned step once its time has passed.

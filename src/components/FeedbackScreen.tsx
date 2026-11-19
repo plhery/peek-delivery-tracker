@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from 'react';
 import { AppearanceProvider } from '../lib/appearance';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
-import { ParcelIllustration } from './Icon';
+import { ParcelArt } from './Pip';
 import { PeekLockup } from './PeekMark';
 
 function onConnectivity(notify: () => void): () => void {
@@ -29,7 +29,7 @@ function FeedbackContent({ title, description, retry }: FeedbackProps) {
   const down = title === 'maintenance.title' || (title === 'offline.title' && online);
   return <main className="auth-screen"><div className="feedback-language"><LanguageControl /></div>
     <section className="auth-card" aria-labelledby="feedback-title">
-      <ParcelIllustration />
+      <ParcelArt />
       <p className="auth-card__eyebrow"><PeekLockup /></p>
       <h1 id="feedback-title">{t(down ? 'maintenance.title' : title)}</h1><p className="auth-card__intro">{t(down ? 'maintenance.description' : description)}</p>
       {retry ? <button type="button" className="button button--primary" onClick={retry}>{t('app.tryAgain')}</button>

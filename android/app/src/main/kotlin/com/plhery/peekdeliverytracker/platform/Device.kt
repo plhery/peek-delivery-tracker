@@ -43,12 +43,24 @@ object Device {
         ClockPreference.from(PreferencesDefaults.standard(context).string(ClockPreference.storageKey)).uses24HourTime(uses24HourTime(context))
 
     /** The unit the phone's [region] measures roads in: kilometres where it is metric, miles elsewhere (the US, the UK). */
-    fun distanceUnit(): DistanceUnit =
-        if (LocaleData.getMeasurementSystem(ULocale.forLocale(region())) == LocaleData.MeasurementSystem.SI) DistanceUnit.Kilometres else DistanceUnit.Miles
+    fun distanceUnit(locale: Locale = region()): DistanceUnit =
+        if (measurementSystem(locale) == LocaleData.MeasurementSystem.SI) DistanceUnit.Kilometres else DistanceUnit.Miles
 
     /** The unit the phone's [region] weighs in: pounds where it measures in US units (the US, Liberia, Myanmar), else kilograms. */
-    fun weightUnit(): WeightUnit =
-        if (LocaleData.getMeasurementSystem(ULocale.forLocale(region())) == LocaleData.MeasurementSystem.US) WeightUnit.Pounds else WeightUnit.Kilograms
+    fun weightUnit(locale: Locale = region()): WeightUnit =
+        if (measurementSystem(locale) == LocaleData.MeasurementSystem.US) WeightUnit.Pounds else WeightUnit.Kilograms
+
+    /**
+     * The measurement system the iPhone's `Locale.measurementSystem` gives: the one the locale's `-u-ms-` keyword names,
+     * as Android 16's Measurement system setting writes it (a UK phone set to metric is `en-GB-u-ms-metric`), else its
+     * region's, which ICU looks up without reading the keyword.
+     */
+    private fun measurementSystem(locale: Locale): LocaleData.MeasurementSystem = when (locale.getUnicodeLocaleType("ms")) {
+        "metric" -> LocaleData.MeasurementSystem.SI
+        "ussystem" -> LocaleData.MeasurementSystem.US
+        "uksystem" -> LocaleData.MeasurementSystem.UK
+        else -> LocaleData.getMeasurementSystem(ULocale.forLocale(locale))
+    }
 
     /**
      * `UIDevice.current.name`, which the iPhone gives apps as its model alone ("iPhone") without the entitlement for

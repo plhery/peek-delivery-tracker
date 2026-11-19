@@ -94,6 +94,12 @@ class ParcelLogicFormattingTests {
         moving = moving.copy(expectedDelivery = today)
         assertNull(localizer.sharedParcelDetail(moving))
         assertEquals("Arrives today", localizer.giftDetail(moving, opened = false))
+        // Sent out yesterday, it comes today only where the estimate says so, not where it moved to tomorrow.
+        val zone = ZoneId.systemDefault()
+        val yesterday = makeParcel(id, events = listOf(event(id, TrackingStage.OutForDelivery, DateParser.isoString(now.atZone(zone).minusDays(1).toInstant()))))
+        assertEquals("Arrives today", localizer.giftDetail(yesterday.copy(expectedDelivery = today), opened = false))
+        val tomorrow = now.atZone(zone).toLocalDate().plusDays(1).toString()
+        assertNull(localizer.giftDetail(yesterday.copy(expectedDelivery = tomorrow), opened = false))
 
         // Arrived: the day on the usual card, the day and the time for a gift that is opened.
         val arrived = makeParcel(id, events = listOf(event(id, TrackingStage.Delivered, DateParser.isoString(now))))

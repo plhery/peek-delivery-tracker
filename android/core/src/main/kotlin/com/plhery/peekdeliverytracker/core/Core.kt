@@ -710,9 +710,17 @@ class Localizer(
         return value
     }
 
-    /** Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named. */
-    fun parcelArrivesToday(parcel: Parcel, now: Instant = AppClock.now()): Boolean =
-        parcel.currentStage == TrackingStage.OutForDelivery && liveEstimate(parcel, now) != null
+    /**
+     * Whether a parcel out for delivery with an estimate comes today: it was sent out today, whichever day the estimate
+     * named, or the estimate names today. Sent out on an earlier day and due on a later one, it doesn't.
+     */
+    fun parcelArrivesToday(parcel: Parcel, now: Instant = AppClock.now()): Boolean {
+        if (parcel.currentStage != TrackingStage.OutForDelivery) return false
+        val (_, date) = liveEstimate(parcel, now) ?: return false
+        val zone = ZoneId.systemDefault()
+        val today = now.atZone(zone).toLocalDate()
+        return date.atZone(zone).toLocalDate() == today || parcel.currentEvent?.displayDate?.atZone(zone)?.toLocalDate() == today
+    }
 
     fun parcelCompletionDate(parcel: Parcel, now: Instant = AppClock.now()): String? {
         val event = parcel.currentEvent ?: return null

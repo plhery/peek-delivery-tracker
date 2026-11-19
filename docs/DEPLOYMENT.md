@@ -144,7 +144,7 @@ Apple's, so the same rule about edge protection applies.
   one client allowance. With Cloudflare, keep IP geolocation enabled and overwrite
   `CF-IPCountry` too: new parcel lookups use it as a weak country hint for carrier recognition.
 - Optional: `PUBLIC_LOOKUPS_PER_DAY` (default 15), `PUBLIC_LOOKUPS_NETWORK_PER_DAY`
-  (default 50) and `PUBLIC_LOOKUPS_GLOBAL_PER_DAY` (default 300) set how many parcels can be
+  (default 50) and `PUBLIC_LOOKUPS_GLOBAL_PER_DAY` (default 900) set how many parcels can be
   looked up without an account per UTC day, per client, per IPv6 /48 and overall. `0` turns
   lookups off.
   Scrapers rotate through residential addresses, so only the overall allowances bound
@@ -152,8 +152,8 @@ Apple's, so the same rule about edge protection applies.
 - Optional: `COUNTING_KEY` keys the hash under which the server keeps each install's
   counting id ([ANALYTICS.md](ANALYTICS.md)). Without it, a key made from the service key does,
   and every install counts as new once that key changes. Setting it does so once too.
-- Optional: `PUBLIC_DETECTIONS_PER_DAY` (default 60) and
-  `PUBLIC_DETECTIONS_GLOBAL_PER_DAY` (default 600) set how many numbers carriers are
+- Optional: `PUBLIC_DETECTIONS_PER_DAY` (default 30) and
+  `PUBLIC_DETECTIONS_GLOBAL_PER_DAY` (default 300) set how many numbers carriers are
   asked about before a lookup, without an account, per UTC day, per client and overall.
   Past them, and with `0`, a carrier is detected from the number's shape only.
 - Set the platform's stop grace period to **30 s** (Coolify: *Stop Grace Period*).
@@ -565,9 +565,9 @@ not sign take the refusal for an ended session and sign the user out, so enforce
 only once they are gone ([OBSERVABILITY.md](OBSERVABILITY.md)).
 
 Accounts have separate persistent daily budgets for parcel additions and
-carrier detections: `ACCOUNT_LOOKUPS_PER_DAY` (default 15) and
+carrier detections: `ACCOUNT_LOOKUPS_PER_DAY` (default 30) and
 `ACCOUNT_DETECTIONS_PER_DAY` (default 60). Accounts cost nothing to make, so every
-account also shares an hourly budget for each: `ACCOUNT_LOOKUPS_PER_HOUR` (default 50)
+account also shares an hourly budget for each: `ACCOUNT_LOOKUPS_PER_HOUR` (default 100)
 and `ACCOUNT_DETECTIONS_PER_HOUR` (default 200). Once it is used up, every account is
 refused until the next hour (UTC). `0` disables that work. Cached and local carrier
 detection does not spend the detection budgets. A refusal of an account's daily budget carries

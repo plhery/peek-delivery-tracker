@@ -55,11 +55,11 @@ const OWNER_KEY = /^[A-Za-z0-9_-]{43}$/;
 /** A failure code clients translate (`carrier:not_found`); anything else is diagnostic text. */
 const SYNC_ERROR_CODE = /^[a-z][a-z_]*(?::[a-z_]+)?$/;
 const DEFAULT_LOOKUPS_PER_DAY = 15;
-const DEFAULT_LOOKUPS_GLOBAL_PER_DAY = 300;
+const DEFAULT_LOOKUPS_GLOBAL_PER_DAY = 900;
 /** An IPv6 /48's lookups: it can be one customer's, or a mobile network's phones. */
 const DEFAULT_LOOKUPS_NETWORK_PER_DAY = 50;
-const DEFAULT_DETECTIONS_PER_DAY = 60;
-const DEFAULT_DETECTIONS_GLOBAL_PER_DAY = 600;
+const DEFAULT_DETECTIONS_PER_DAY = 30;
+const DEFAULT_DETECTIONS_GLOBAL_PER_DAY = 300;
 /**
  * With `PUBLIC_LOOKUPS_BY_INSTALL`, what the app installs that prove themselves may use together
  * from one address (ten installs' allowance) and one IPv6 /48 (twenty): a ceiling for a phone

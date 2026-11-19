@@ -105,16 +105,16 @@ describe('daily lookup allowances', () => {
   });
 
   it('reads the allowances from the environment, falling back to the defaults', () => {
-    expect(lookupLimits({})).toEqual({ perClient: 15, perNetwork: 50, overall: 300 });
+    expect(lookupLimits({})).toEqual({ perClient: 15, perNetwork: 50, overall: 900 });
     expect(lookupLimits({ PUBLIC_LOOKUPS_PER_DAY: ' 40 ', PUBLIC_LOOKUPS_NETWORK_PER_DAY: '120', PUBLIC_LOOKUPS_GLOBAL_PER_DAY: '0' }))
       .toEqual({ perClient: 40, perNetwork: 120, overall: 0 });
     expect(lookupLimits({ PUBLIC_LOOKUPS_PER_DAY: '-1', PUBLIC_LOOKUPS_NETWORK_PER_DAY: '1e3', PUBLIC_LOOKUPS_GLOBAL_PER_DAY: 'many' }))
-      .toEqual({ perClient: 15, perNetwork: 50, overall: 300 });
-    expect(detectionLimits({})).toEqual({ perClient: 60, overall: 600 });
+      .toEqual({ perClient: 15, perNetwork: 50, overall: 900 });
+    expect(detectionLimits({})).toEqual({ perClient: 30, overall: 300 });
     expect(detectionLimits({ PUBLIC_DETECTIONS_PER_DAY: '0', PUBLIC_DETECTIONS_GLOBAL_PER_DAY: ' 500 ' }))
       .toEqual({ perClient: 0, overall: 500 });
     expect(detectionLimits({ PUBLIC_DETECTIONS_PER_DAY: '1.5', PUBLIC_DETECTIONS_GLOBAL_PER_DAY: '' }))
-      .toEqual({ perClient: 60, overall: 600 });
+      .toEqual({ perClient: 30, overall: 300 });
   });
 
   it('counts app installs that count apart on counters of their own, for the address and its /48', () => {
@@ -159,12 +159,12 @@ describe('daily lookup allowances', () => {
     await claimLookup(service, address, day, { proof: 'turnstile', app: 'android' });
     await claimDetection(service, address, day, proven);
     const claims = claim.mock.calls.map(([claimed]) => claimed);
-    expect(claims[0]).toEqual({ bucket: lookupBucket(address, day), limit: 15, overall: { bucket: 'global', limit: 300 },
+    expect(claims[0]).toEqual({ bucket: lookupBucket(address, day), limit: 15, overall: { bucket: 'global', limit: 900 },
       network: { bucket: lookupNetworkBucket(address, day), limit: 50 } });
-    expect(claims[1]).toEqual({ bucket: lookupBucket(address, day, true), limit: 150, overall: { bucket: 'global', limit: 300 },
+    expect(claims[1]).toEqual({ bucket: lookupBucket(address, day, true), limit: 150, overall: { bucket: 'global', limit: 900 },
       network: { bucket: lookupNetworkBucket(address, day, true), limit: 300 } });
     expect(claims[2]).toEqual(claims[0]);
-    expect(claims[3]).toEqual({ bucket: detectionBucket(address, day, true), limit: 600, overall: { bucket: 'detection', limit: 600 } });
+    expect(claims[3]).toEqual({ bucket: detectionBucket(address, day, true), limit: 600, overall: { bucket: 'detection', limit: 300 } });
   });
 
   it('warns once a day when an app is refused by a shared allowance, or a network is half used', async () => {

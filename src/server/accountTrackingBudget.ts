@@ -9,7 +9,7 @@ import type { SupabaseServiceClient } from './supabase';
  * hour: accounts cost nothing to make. 0 turns that work off.
  */
 const DEFAULTS = {
-  lookup: { perAccount: 15, overall: 50 },
+  lookup: { perAccount: 30, overall: 100 },
   detection: { perAccount: 60, overall: 200 },
 } as const;
 /** The share of the hourly allowance past which the server says it is running out. */

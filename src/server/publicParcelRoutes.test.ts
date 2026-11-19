@@ -205,7 +205,7 @@ describe('looking up a parcel without an account', () => {
     expect(text).not.toContain('Surprise');
     // The daily counter is keyed by a hash of the address, with the default allowances.
     expect(claim).toHaveBeenCalledExactlyOnceWith({
-      bucket: expect.stringMatching(/^[0-9a-f]{64}$/), limit: 15, overall: { bucket: 'global', limit: 300 }, network: null,
+      bucket: expect.stringMatching(/^[0-9a-f]{64}$/), limit: 15, overall: { bucket: 'global', limit: 900 }, network: null,
     });
     expect(enqueue).toHaveBeenCalledExactlyOnceWith({ packageId, reason: 'added' });
     expect(wake).toHaveBeenCalledOnce();
@@ -401,17 +401,17 @@ describe('looking up a parcel without an account', () => {
     const report = vi.spyOn(observability, 'captureOverallAllowance').mockReturnValue(null);
     store();
     vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-11-05T10:00:00Z') });
-    const claim = allow(239);
+    const claim = allow(719);
     await lookup({ trackingNumber });
     expect(report).not.toHaveBeenCalled();
-    claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 240 });
+    claim.mockResolvedValue({ allowed: true, scope: null, overallUsed: 720 });
     await lookup({ trackingNumber });
     await lookup({ trackingNumber });
-    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 240, limit: 300 }, new Date('2026-11-05T10:00:00Z')]]);
-    claim.mockResolvedValue({ allowed: false, scope: 'global', overallUsed: 300 });
+    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 720, limit: 900 }, new Date('2026-11-05T10:00:00Z')]]);
+    claim.mockResolvedValue({ allowed: false, scope: 'global', overallUsed: 900 });
     await lookup({ trackingNumber });
     await lookup({ trackingNumber });
-    expect(report.mock.calls.at(-1)).toEqual(['public', 'lookup', 'used_up', { used: 300, limit: 300 }, new Date('2026-11-05T10:00:00Z')]);
+    expect(report.mock.calls.at(-1)).toEqual(['public', 'lookup', 'used_up', { used: 900, limit: 900 }, new Date('2026-11-05T10:00:00Z')]);
     expect(report).toHaveBeenCalledTimes(2);
     expect(SupabaseServiceClient.prototype.claimAllowanceReport).toHaveBeenCalledTimes(2);
     expect(SupabaseServiceClient.prototype.claimAllowanceReport).toHaveBeenLastCalledWith('public:lookup:used_up', '2026-11-05');
@@ -432,7 +432,7 @@ describe('looking up a parcel without an account', () => {
     const claimReport = vi.mocked(SupabaseServiceClient.prototype.claimAllowanceReport).mockResolvedValue(false);
     store();
     vi.useFakeTimers({ toFake: ['Date'], now: new Date('2026-11-08T09:00:00Z') });
-    allow(250);
+    allow(750);
     await lookup({ trackingNumber });
     await lookup({ trackingNumber });
     expect(report).not.toHaveBeenCalled();
@@ -440,7 +440,7 @@ describe('looking up a parcel without an account', () => {
     claimReport.mockRejectedValue(new Error('database unavailable'));
     vi.setSystemTime(new Date('2026-11-09T09:00:00Z'));
     await lookup({ trackingNumber });
-    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 250, limit: 300 }, new Date('2026-11-09T09:00:00Z')]]);
+    expect(report.mock.calls).toEqual([['public', 'lookup', 'running_out', { used: 750, limit: 900 }, new Date('2026-11-09T09:00:00Z')]]);
   });
 
   it.each([

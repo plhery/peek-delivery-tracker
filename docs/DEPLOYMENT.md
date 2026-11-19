@@ -39,6 +39,15 @@ after it, so the run also names those: when they are missing too, check that the
 without it; when production already has them, its warning asks to check that the late one
 does not undo them.
 
+**Locks.** A migration that alters a table, such as a carrier check on `packages`, needs the
+table to itself, and every later query of that table waits behind it while it waits. Users'
+parcel lists then time out after 8 seconds, and the server's calls, which have no timeout,
+fill PostgREST's pool until every request answers 504. So the dry run and the apply both
+start with `set local lock_timeout = '4s';` after `begin`: a migration that cannot have its
+lock at once fails, and runs again a little later. A query left running holds its locks too,
+and killing the local `psql` or `ssh` does not stop it on the server, so a query run by hand
+on production sets `statement_timeout`.
+
 Supabase grants every table, sequence and function a migration creates in `public` to
 `anon`, `authenticated` and `service_role`. A migration revokes what it does not mean to
 give, and [`client_access.sql`](../supabase/tests/client_access.sql) lists what a client

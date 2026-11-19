@@ -64,7 +64,7 @@ Peek has no passwords. It emails a six-digit code to the address you enter.
 
 Signed in, Settings › Assistants connects Peek to Claude, ChatGPT, Gemini or
 another assistant: it can then show your parcels and add the tracking numbers
-you give it. The feature is experimental.
+you give it. The feature is in beta.
 [Connecting an assistant](https://peektracker.com/assistants) has the steps,
 what Peek shares and what to do when one stops working.
 

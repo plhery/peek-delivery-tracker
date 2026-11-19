@@ -35,7 +35,7 @@ describe('assistants in Settings', () => {
     expect(screen.queryByRole('button', { name: /^Assistants/ })).not.toBeInTheDocument();
   });
 
-  it('lists the assistants connected, with the address to give one, marked experimental, and disconnects one', async () => {
+  it('lists the assistants connected, with the address to give one, marked beta, and disconnects one', async () => {
     vi.mocked(readAddByEmail).mockResolvedValue(null);
     // A connection from before editing had a scope of its own, and one allowed everything.
     const chatgpt: ApiAssistantConnection = { ...claude, id: '6c000000-0000-4000-a000-0000000000a2', name: 'ChatGPT', redirectHost: 'chatgpt.example',
@@ -46,9 +46,9 @@ describe('assistants in Settings', () => {
     const user = userEvent.setup();
     render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />);
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
-    await user.click(await screen.findByRole('button', { name: /^Assistants ?Experimental$/ }));
-    expect(screen.getByRole('heading', { name: 'Assistants Experimental' })).toBeInTheDocument();
-    expect(screen.getByText(/This feature is experimental, and it may change\./)).toBeInTheDocument();
+    await user.click(await screen.findByRole('button', { name: /^Assistants ?Beta$/ }));
+    expect(screen.getByRole('heading', { name: 'Assistants Beta' })).toBeInTheDocument();
+    expect(screen.getByText(/This feature is in beta, and it may still change\./)).toBeInTheDocument();
     // The public page on connecting an assistant says the same and more, in a tab of its own.
     const how = screen.getByRole('link', { name: 'How it works' });
     expect(how).toHaveAttribute('href', '/assistants');

@@ -71,7 +71,7 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Pakete per E-Mail hinzufügen: Mit einem Peek-Konto bekommst du deine eigene Peek-Adresse unter Einstellungen › Pakete per E-Mail hinzufügen. Leitest du eine Versand-E-Mail an diese Adresse weiter, fügt Peek das Paket hinzu und gibt dir Bescheid. Die Funktion ist noch experimentell.
+• Pakete per E-Mail hinzufügen: Mit einem Peek-Konto bekommst du deine eigene Peek-Adresse unter Einstellungen › Pakete per E-Mail hinzufügen. Leitest du eine Versand-E-Mail an diese Adresse weiter, fügt Peek das Paket hinzu und gibt dir Bescheid. Die Funktion ist in der Betaphase.
 • Wähle Kilogramm oder Pfund unter Einstellungen › Präferenzen › Gewichtseinheit, unabhängig von der Entfernungseinheit. Verwendet dein iPhone oder iPad das US-Maßsystem, werden Gewichte jetzt in Pfund angezeigt.
 • Ist der Server von Peek gerade in Wartung, bleiben deine Pakete sichtbar, mit einem kurzen Hinweis, wie aktuell sie sind.
 • Text auf der Karte eines Pakets ist jetzt dunkler und besser lesbar.

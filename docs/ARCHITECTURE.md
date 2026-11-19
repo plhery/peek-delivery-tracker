@@ -413,7 +413,7 @@ Key server modules:
     them together `INBOUND_EMAILS_PER_HOUR` an hour. `inbound_mailboxes` and the kept
     emails are service-role only.
 - **Assistants**: an account the server opens it to (`ASSISTANT_ACCOUNTS`) can connect an
-  assistant (Claude, ChatGPT, Gemini, any MCP client); Settings marks it experimental and
+  assistant (Claude, ChatGPT, Gemini, any MCP client); Settings marks it beta and
   leads to the public page at `/assistants`. Every
   other account gets 404 from `/api/account/assistants`, so Settings shows no row; with no
   list, `/mcp`, `/oauth/*` and their `.well-known` documents are not there.

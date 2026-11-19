@@ -73,7 +73,7 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• Add parcels by email: with a Peek account, Settings › Add parcels by email gives you your own Peek address. Forward a shipping email to it and Peek adds the package and lets you know. It’s still experimental.
+• Add parcels by email: with a Peek account, Settings › Add parcels by email gives you your own Peek address. Forward a shipping email to it and Peek adds the package and lets you know. It’s in beta.
 • Choose kilograms or pounds in Settings › Preferences › Weight units, separately from distances. Where your iPhone or iPad uses US units, weights now show in pounds.
 • If Peek’s server is down for maintenance, your packages stay on screen with a short note saying how recent they are.
 • Words written over a package card’s map are darker and easier to read.

@@ -54,7 +54,7 @@ with them.
 ## Availability and changes
 
 Peek comes as it is, without guarantees. It may be unavailable at times, and
-its features may change or end; experimental ones in particular. If the
+its features may change or end; beta ones in particular. If the
 service is going to close, Peek says so beforehand where it can, so you have
 time to download your data.
 

@@ -73,7 +73,7 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Ajouter des colis par e-mail : avec un compte Peek, tu obtiens ta propre adresse Peek dans Réglages › Ajouter des colis par e-mail. Transfère un e-mail d’expédition à cette adresse : Peek ajoute le colis et te prévient. Cette fonction est encore expérimentale.
+• Ajouter des colis par e-mail : avec un compte Peek, tu obtiens ta propre adresse Peek dans Réglages › Ajouter des colis par e-mail. Transfère un e-mail d’expédition à cette adresse : Peek ajoute le colis et te prévient. Cette fonction est en bêta.
 • Choisis entre kilogrammes et livres dans Réglages › Préférences › Unité de poids, indépendamment de l’unité de distance. Si ton iPhone ou ton iPad utilise les unités américaines, les poids s’affichent désormais en livres.
 • Si le serveur de Peek est en maintenance, tes colis restent affichés, avec une courte note indiquant de quand date leur dernière mise à jour.
 • Le texte affiché sur la carte d’un colis est désormais plus foncé et plus facile à lire.

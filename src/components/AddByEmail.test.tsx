@@ -51,8 +51,8 @@ describe('adding parcels by email in Settings', () => {
     const user = userEvent.setup();
     render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />);
     await user.click(screen.getByLabelText('Account options for owner@example.test'));
-    await user.click(await screen.findByRole('button', { name: /^Add parcels by email ?Experimental$/ }));
-    expect(screen.getByRole('heading', { name: 'Add parcels by email Experimental' })).toBeInTheDocument();
+    await user.click(await screen.findByRole('button', { name: /^Add parcels by email ?Beta$/ }));
+    expect(screen.getByRole('heading', { name: 'Add parcels by email Beta' })).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'Get my address' }));
     expect(openAddByEmail).toHaveBeenCalledWith(apiAuth);
     expect(await screen.findByText(inbox.address)).toBeInTheDocument();

@@ -71,7 +71,7 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Adicionar encomendas por e-mail: com uma conta Peek, obténs o teu próprio endereço Peek em Definições › Adicionar encomendas por e-mail. Reencaminha um e-mail de envio para esse endereço: o Peek adiciona a encomenda e avisa-te. Esta funcionalidade ainda é experimental.
+• Adicionar encomendas por e-mail: com uma conta Peek, obténs o teu próprio endereço Peek em Definições › Adicionar encomendas por e-mail. Reencaminha um e-mail de envio para esse endereço: o Peek adiciona a encomenda e avisa-te. Esta funcionalidade está em beta.
 • Escolhe quilogramas ou libras em Definições › Preferências › Unidade de peso, independentemente da unidade de distância. Se o teu iPhone ou iPad usar o sistema de medida dos EUA, os pesos passam a aparecer em libras.
 • Se o servidor do Peek estiver em manutenção, as tuas encomendas continuam no ecrã, com uma breve nota a indicar quando foram atualizadas pela última vez.
 • O texto sobre o mapa do cartão de uma encomenda está agora mais escuro e mais fácil de ler.

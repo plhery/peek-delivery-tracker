@@ -30,8 +30,9 @@ export async function deleteAccount(auth: ApiAuth, confirmation: string): Promis
   );
 }
 
+/** Saves an export, the account's or the device's, as a JSON file named for its day. */
 export function downloadAccountExport(
-  accountExport: ApiAccountExportResponse,
+  accountExport: { exportedAt: string },
   page: Document = document,
   urlApi: Pick<typeof URL, 'createObjectURL' | 'revokeObjectURL'> = URL,
 ): void {

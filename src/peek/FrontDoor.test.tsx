@@ -1026,6 +1026,27 @@ describe('FrontDoor: on this device', () => {
     expect(within(screen.getByRole('region', { name: 'On this device' })).queryByRole('button', { name: 'Search parcels' })).toBeNull();
   });
 
+  it('downloads the parcels on this device as a file, without their owner keys', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    renameParcel(LINK_ID, 'New sneakers');
+    let saved: Blob | undefined;
+    const createObjectURL = vi.fn((blob: Blob) => { saved = blob; return 'blob:device-export'; });
+    vi.stubGlobal('URL', Object.assign(class extends URL {}, { createObjectURL, revokeObjectURL: vi.fn() }));
+    const click = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => undefined);
+    onTestFinished(() => click.mockRestore());
+    {
+      const { user } = door();
+      await user.click(within(screen.getByRole('region', { name: 'On this device' })).getByRole('button', { name: 'Download my data' }));
+      expect(click).toHaveBeenCalledOnce();
+      expect((click.mock.contexts[0] as HTMLAnchorElement).download).toMatch(/^peek-export-\d{4}-\d{2}-\d{2}\.json$/);
+      const text = await saved!.text();
+      expect(text).not.toContain(OWNER_KEY);
+      const file = JSON.parse(text);
+      expect(file).toMatchObject({ mode: 'device', packages: [{ label: 'New sneakers', link: `${window.location.origin}/p/${LINK_ID}` }] });
+      expect(file.packages[0].events.length).toBeGreaterThan(0);
+    }
+  });
+
   it('lets a parcel that has just arrived say so where its card stands, before another leads the list', async () => {
     stillMotion(false);
     Element.prototype.animate = (() => ({ finished: new Promise(() => undefined), addEventListener() {}, cancel() {}, finish() {} })) as unknown as typeof Element.prototype.animate;

@@ -24,6 +24,7 @@ import { parcelDetail, parcelFreshness, parcelHeadline, parcelStage } from '../p
 import { frozenOnTheWay, hasUnopenedNews, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { openParcelLink, parcelLinkPath } from '../route';
 import { usePeekSession } from '../session';
+import { downloadDeviceExport } from './deviceExport';
 import { deviceListDown, deviceListReadAt, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 /** A long number as a card writes it: its two ends. A short one stays whole. */
@@ -169,9 +170,9 @@ function ArchivedParcels({ archived }: { archived: RecentParcel[] }) {
  * "On this device": the parcels this browser looked up or opened, each in its
  * carrier's colours with its route. The one that matters now leads the list
  * on a card of its own, and the archived ones wait folded at its end. A longer
- * list can be searched, archived parcels included. They live in the browser
- * only; forgetting them all also forgets, on the server, the lookups this
- * device made.
+ * list can be searched, archived parcels included, and any downloads as a
+ * file. They live in the browser only; forgetting them all also forgets, on
+ * the server, the lookups this device made.
  */
 export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   onSignIn: () => void;
@@ -231,9 +232,12 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
     <div className="door-device__heading">
       <h2 id="door-device-title">{t('peek.onThisDevice')}</h2>
       {!asking && <div className="door-device__tools">
-        {searchable && <button type="button" className="door-device__search" aria-expanded={searching} aria-controls="door-device-search"
+        {searchable && <button type="button" className="door-device__icon" aria-expanded={searching} aria-controls="door-device-search"
           aria-label={t(searching ? 'view.hideSearch' : 'view.search')} onClick={() => searching ? closeSearch() : setSearching(true)}>
           <Icon name="search" />
+        </button>}
+        {listed && <button type="button" className="door-device__icon" aria-label={t('account.export')} onClick={() => downloadDeviceExport(recents)}>
+          <Icon name="download" />
         </button>}
         <button type="button" className="door-device__forget" onClick={() => { setFailed(false); setAsking(true); }}>{t('door.recents.forgetAll')}</button>
       </div>}

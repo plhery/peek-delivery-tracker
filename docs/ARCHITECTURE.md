@@ -204,6 +204,8 @@ Key server modules:
     passes them over. Kept in an account, a parcel archived here is archived there too,
     unless the account had it already. From five parcels on, the list can be searched as
     the account's is, by name, number, carrier, status and scans, archived parcels included.
+    Its download button saves the list as a JSON file, as the apps do for a guest: each parcel
+    as last shown, with its name, link and archive date, and never its owner key.
   - The list holds a hundred parcels: copies no longer updated make way first, then links
     opened from someone else, for the browser's own lookups. A saved parcel the browser can't read, such as one
     another version wrote, stays with its id and owner key: it isn't listed, its link gets

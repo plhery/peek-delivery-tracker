@@ -230,9 +230,9 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 .door-device__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 44px; margin: 0 2px 10px; }
 .door-device__heading h2 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0; }
 .door-device__tools { display: flex; align-items: center; gap: 4px; }
-.door-device__search { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 12px; background: none; color: var(--ink-soft); }
-.door-device__search[aria-expanded=true] { background: var(--control); color: var(--ink); }
-.door-device__search svg { width: 18px; height: 18px; }
+.door-device__icon { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 12px; background: none; color: var(--ink-soft); }
+.door-device__icon[aria-expanded=true] { background: var(--control); color: var(--ink); }
+.door-device__icon svg { width: 18px; height: 18px; }
 .door-device__find { margin: 0 0 10px; }
 .door-device__find label { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
 .door-device__find label:focus-within { border-color: var(--ochre); box-shadow: 0 0 0 3px color-mix(in srgb, var(--yellow) 20%, transparent); }
@@ -322,7 +322,7 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 @keyframes door-breathe { from { opacity: .45; } }
 @keyframes door-print { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 @media (hover: hover) {
-  .door-line__change:hover, .door-device__forget:hover, .door-device__search:hover, .door-as-typed:hover, .door-input__forget:hover { color: var(--ink); }
+  .door-line__change:hover, .door-device__forget:hover, .door-device__icon:hover, .door-as-typed:hover, .door-input__forget:hover { color: var(--ink); }
 }
 @media (prefers-reduced-motion: reduce) {
   .door-line__detect.is-busy svg { opacity: .6; }

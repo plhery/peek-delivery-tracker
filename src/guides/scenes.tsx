@@ -1314,6 +1314,57 @@ function Home() {
   </>;
 }
 
+function Forwarded() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* An inbox tray, and an envelope leaving it for the list of parcels on a phone. */}
+    <path d="M60 176H240L224 248H76Z" fill={paper} />
+    <path d="M60 176H240L224 248H76Z" fill="var(--orange)" opacity=".2" />
+    <path d="M60 176H106L118 198H182L194 176H240" stroke="var(--orange)" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+    <g transform="translate(118 108) rotate(-12)">
+      <rect width="112" height="72" rx="8" fill={paper} stroke="var(--orange)" strokeWidth="5" />
+      <path d="M8 10L56 44L104 10" stroke="var(--orange)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    </g>
+    <path d="M250 112C282 88 318 90 350 112" stroke="var(--orange)" strokeWidth="4" strokeLinecap="round" strokeDasharray="3 12" />
+    <Phone x={380} y={110} width={150} height={138}>
+      {['orange', 'green'].map((tone, index) => <g key={tone} transform={`translate(18 ${36 + index * 46})`}>
+        <rect width="114" height="38" rx="10" fill={`var(--${tone}-soft)`} />
+        <circle cx="19" cy="19" r="9" fill={`var(--${tone})`} />
+        <rect x="36" y="15" width="58" height="8" rx="4" fill={`var(--${tone})`} opacity=".55" />
+      </g>)}
+    </Phone>
+    {/* Pip, on top of the list. */}
+    <Pip x={455} ground={110} width={76} mood="joy" side={-1} />
+  </>;
+}
+
+function Ring() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* A phone lighting up with a delivery notification. */}
+    <path d="M128 70L108 58M124 124H100M128 178L108 190M302 70L322 58M306 124H330M302 178L322 190" stroke="var(--green)" strokeWidth="5" strokeLinecap="round" />
+    <Phone x={140} y={34} width={150} height={214}>
+      <g transform="translate(14 40)">
+        <rect width="122" height="52" rx="12" fill="var(--green-soft)" />
+        <circle cx="24" cy="26" r="13" fill="var(--green)" />
+        <path d="M18 26l4.5 4.5L30 21" stroke={paper} strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="46" y="17" width="60" height="8" rx="4" fill="var(--green)" />
+        <rect x="46" y="31" width="42" height="7" rx="3.5" fill="var(--green)" opacity=".45" />
+      </g>
+      {[108, 140].map((y) => <rect key={y} x="22" y={y} width="106" height="20" rx="10" fill="var(--control)" />)}
+    </Phone>
+    {/* A small bell, ringing, beside Pip. */}
+    <g transform="translate(412 136) rotate(-14)">
+      <path d="M-40-22C-47-11-47 5-40 16M40-22C47-11 47 5 40 16" stroke="var(--green)" strokeWidth="4" strokeLinecap="round" />
+      <circle cy="-32" r="6" fill="var(--yellow)" />
+      <path d="M-28 20C-21 12-21 4-21-8C-21-21-12-29 0-29C12-29 21-21 21-8C21 4 21 12 28 20Z" fill="var(--yellow)" />
+      <rect x="-32" y="17" width="64" height="9" rx="4.5" fill="var(--yellow)" />
+      <circle cy="33" r="6.5" fill="var(--on-yellow)" />
+    </g>
+    <Pip x={520} ground={248} width={120} mood="joy" side={-1} />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1355,6 +1406,8 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'universal-tracker': { tone: 'green', draw: Universal },
   'ai-assistants': { tone: 'lilac', draw: Assistant },
   'home-assistant': { tone: 'blue', draw: Home },
+  'add-parcels-by-email': { tone: 'orange', draw: Forwarded },
+  'parcel-notifications': { tone: 'green', draw: Ring },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },
   'uncollected-parcel': { tone: 'ochre', draw: Uncollected },
   'parcel-lockers': { tone: 'rose', draw: Lockers },

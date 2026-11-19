@@ -207,6 +207,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Track your parcels in Home Assistant"
     },
     {
+      "id": "add-parcels-by-email",
+      "slug": "add-parcels-by-email",
+      "title": "Track parcels from your email: forward it to Peek"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "parcel-delivery-notifications",
+      "title": "Parcel delivery notifications: choose what Peek tells you"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "christmas-posting-dates",
       "title": "Last posting dates for Christmas and shipping deadlines"
@@ -462,6 +472,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "home-assistant",
       "slug": "pakete-verfolgen-home-assistant",
       "title": "Pakete in Home Assistant verfolgen"
+    },
+    {
+      "id": "add-parcels-by-email",
+      "slug": "versandmail-weiterleiten-paket-verfolgen",
+      "title": "Pakete aus deinen E-Mails verfolgen: an Peek weiterleiten"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "paket-benachrichtigungen",
+      "title": "Paketbenachrichtigungen: Wähle, was Peek dir meldet"
     },
     {
       "id": "christmas-posting-dates",
@@ -721,6 +741,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Suivre ses colis dans Home Assistant"
     },
     {
+      "id": "add-parcels-by-email",
+      "slug": "suivre-colis-depuis-e-mail",
+      "title": "Suivre ses colis depuis ses e-mails\u00a0: les transférer à Peek"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "notifications-livraison-colis",
+      "title": "Notifications de livraison\u00a0: choisis ce que Peek te signale"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "date-limite-envoi-colis-noel",
       "title": "Colis de Noël\u00a0: date limite d'envoi par transporteur"
@@ -976,6 +1006,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "home-assistant",
       "slug": "tracciare-pacchi-home-assistant",
       "title": "Tracciare i pacchi in Home Assistant"
+    },
+    {
+      "id": "add-parcels-by-email",
+      "slug": "tracciare-pacchi-dalle-email",
+      "title": "Tracciare i pacchi dalle tue e-mail: inoltrale a Peek"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "notifiche-consegna-pacchi",
+      "title": "Notifiche di consegna dei pacchi: scegli cosa ti dice Peek"
     },
     {
       "id": "christmas-posting-dates",
@@ -1235,6 +1275,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Sigue tus paquetes en Home Assistant"
     },
     {
+      "id": "add-parcels-by-email",
+      "slug": "seguimiento-paquetes-por-correo",
+      "title": "Sigue tus paquetes desde el correo: reenvíalo a Peek"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "notificaciones-entrega-paquetes",
+      "title": "Notificaciones de entrega de paquetes: elige tus avisos"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "fecha-limite-envio-paquetes-navidad",
       "title": "Fecha límite de envío en Navidad: Correos, GLS, SEUR y MRW"
@@ -1492,6 +1542,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Segue as tuas encomendas no Home Assistant"
     },
     {
+      "id": "add-parcels-by-email",
+      "slug": "seguir-encomendas-por-email",
+      "title": "Segue as tuas encomendas pelo e-mail: reencaminha-o ao Peek"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "notificacoes-entrega-encomendas",
+      "title": "Notificações de entrega de encomendas: escolhe os avisos"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "prazos-envio-encomendas-natal",
       "title": "Prazos de envio no Natal: datas limite dos CTT, DPD e GLS"
@@ -1747,6 +1807,16 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "home-assistant",
       "slug": "sledzenie-przesylek-home-assistant",
       "title": "Śledź swoje przesyłki w Home Assistant"
+    },
+    {
+      "id": "add-parcels-by-email",
+      "slug": "sledzenie-przesylek-z-e-maila",
+      "title": "Śledź przesyłki z e-maila: przekaż go do Peek"
+    },
+    {
+      "id": "parcel-notifications",
+      "slug": "powiadomienia-o-dostawie-przesylek",
+      "title": "Powiadomienia o dostawie przesyłek: wybierz, co mówi Ci Peek"
     },
     {
       "id": "christmas-posting-dates",

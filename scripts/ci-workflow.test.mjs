@@ -111,6 +111,18 @@ it('checks the Android screenshots on a Mac with Apple silicon, and the core in 
   }
 });
 
+// On main no push replaces an Android run in progress, so a job that ends canceled timed out, lost its runner or
+// was stopped, and must not read like a replaced run.
+it('fails an Android run on main when one of its jobs failed or was canceled', () => {
+  const workflow = read('.github/workflows/android.yml');
+  const ids = [...workflow.matchAll(/\n {2}([a-z][a-z-]*):\n {4}name: /g)].map(match => match[1]).filter(id => id !== 'result');
+  assert.deepEqual(ids, ['changes', 'build', 'screenshots', 'release']);
+  const result = job(workflow, 'result');
+  assert.match(result, new RegExp(`\\n {4}needs: \\[${ids.join(', ')}\\]\\n`), 'the result waits for every job');
+  assert.match(result, /\n {4}if: \$\{\{ always\(\) && github\.event_name == 'push' \}\}\n/);
+  assert.match(result, /select\(\.value\.result != "success" and \.value\.result != "skipped"\)/);
+});
+
 // An outage of the audit endpoint skips the audit; a vulnerability still fails the job.
 it('audits the production dependencies through the script that tells the two apart', () => {
   const ci = read('.github/workflows/ci.yml');

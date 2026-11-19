@@ -192,3 +192,23 @@ jobs:
           path: ${{ runner.temp }}/smoke-logcat.txt
           if-no-files-found: ignore
           retention-days: 7
+
+  # A job that times out, loses its runner or is stopped ends canceled, which reads like a run a newer push
+  # replaced. On main no push replaces a run in progress, so this fails the run instead. A run replaced before it
+  # started has no jobs, and the next run tests its changes too (scripts/ci-changes.mjs).
+  result:
+    name: Android result
+    needs: [changes, build, screenshots, release]
+    if: ${{ always() && github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fail when a job failed or was canceled
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: |
+          ended=$(jq -r 'to_entries[] | select(.value.result != "success" and .value.result != "skipped") | "\(.key) ended \(.value.result)"' <<< "$NEEDS")
+          if [ -n "$ended" ]; then
+            while read -r line; do echo "::error::$line"; done <<< "$ended"
+            exit 1
+          fi

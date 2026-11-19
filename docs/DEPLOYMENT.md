@@ -177,7 +177,8 @@ in the repository:
 
 [Suite selection](../scripts/ci-changes.mjs) compares each target with the nearest
 successful `main` ancestor of that workflow, or with the pull request base. This includes
-changes from canceled and replaced runs. Without a trusted baseline, every suite runs.
+changes from canceled and replaced runs. Without a trusted baseline, every suite runs. On
+`main`, the Android workflow's last job fails the run when one of its jobs failed or was canceled.
 Documentation skips application tests. SQL changes run migration tests; iPhone and Android
 changes run their app's tests, and the data files and widget sample the Android app copies
 from the iPhone app run both; web changes run web checks, unit tests, browser journeys and the

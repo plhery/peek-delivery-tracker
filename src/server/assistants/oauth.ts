@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { readBodyBytes } from '../api';
+import { readBodyBytes, withErrorCode } from '../api';
 import type { SupabaseServiceClient } from '../supabase';
 import type { JsonObject } from '../types';
 import { assistantsOpenToAccount } from './access';
@@ -22,9 +22,9 @@ import {
 const NO_STORE = { 'Cache-Control': 'no-store', Pragma: 'no-cache' };
 const MOST_FORM_BYTES = 8_192;
 
-/** An OAuth error answer (RFC 6749 §5.2). */
+/** An OAuth error answer (RFC 6749 §5.2). Its request line names the error, as `error_code`. */
 export function oauthError(error: string, description: string, status = 400): Response {
-  return Response.json({ error, error_description: description }, { status, headers: NO_STORE });
+  return withErrorCode(Response.json({ error, error_description: description }, { status, headers: NO_STORE }), error);
 }
 
 /** What `/.well-known/oauth-protected-resource/mcp` says (RFC 9728). */

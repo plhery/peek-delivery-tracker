@@ -994,6 +994,22 @@ describe('the OAuth endpoints', () => {
     expect(await renewed.json()).toMatchObject({ token_type: 'Bearer', scope: 'parcels:read' });
   });
 
+  it('name each refusal\'s OAuth error in its request line', async () => {
+    const output = vi.spyOn(console, 'log').mockImplementation(() => undefined);
+    vi.spyOn(service, 'refreshAssistantTokens').mockResolvedValue(null);
+    await token(form('/oauth/token', { grant_type: 'refresh_token', refresh_token: newSecret('refresh'), client_id: newClientId() }), none);
+    await token(new NextRequest('https://peek.example/oauth/token', { method: 'POST', headers: { 'content-type': 'application/json' }, body: '{}' }), none);
+    await token(form('/oauth/token', { grant_type: 'password', client_id: newClientId() }), none);
+    const requests = output.mock.calls.map(([line]) => JSON.parse(String(line)))
+      .filter((line) => line.event === 'http_request')
+      .map(({ route, status, error_code }) => ({ route, status, error_code }));
+    expect(requests).toEqual([
+      { route: '/oauth/token', status: 400, error_code: 'invalid_grant' },
+      { route: '/oauth/token', status: 400, error_code: 'invalid_request' },
+      { route: '/oauth/token', status: 400, error_code: 'unsupported_grant_type' },
+    ]);
+  });
+
   it('register a client from JSON only', async () => {
     const stored = vi.spyOn(service, 'registerAssistantClient').mockResolvedValue(undefined);
     const response = await register(new NextRequest('https://peek.example/oauth/register', {

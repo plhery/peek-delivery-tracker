@@ -832,7 +832,8 @@ Key JSON events:
   behind a trusted proxy, and the endpoint as `route`, the path with each id as `/:id` and a
   parcel link as `:link` (there is no `path` field). A failed request
   carries `error_class`; a 502 that wraps an upstream failure also names that failure's
-  class in `error_cause`. Health checks (`/health`, `/health/live`) and metric scrapes
+  class in `error_cause`. An OAuth endpoint's refusal names its OAuth error in
+  `error_code` (`invalid_grant`, `invalid_request`…). Health checks (`/health`, `/health/live`) and metric scrapes
   (`/api/metrics`) are logged only when they fail. A 5xx is logged at `error`, except
   `/health`'s 503 while the server shuts down, which is `info`;
 - `public_lookup` (by `request_id`): how a lookup without an account ended, as

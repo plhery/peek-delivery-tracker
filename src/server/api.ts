@@ -253,6 +253,17 @@ export function expectedFailure(response: Response): Response {
   return response;
 }
 
+const errorCodes = new WeakMap<Response, string>();
+
+/**
+ * Names the error a refusal the route answers itself stands for, such as an OAuth error's `invalid_grant`: its
+ * request line carries it as `error_code`, where a thrown failure carries `error_class`.
+ */
+export function withErrorCode(response: Response, code: string): Response {
+  errorCodes.set(response, code);
+  return response;
+}
+
 function failure(error: unknown): Response {
   if (error instanceof HttpError) {
     return apiResponse(error.status, { error: error.message, ...(error.code ? { code: error.code } : {}),
@@ -291,6 +302,7 @@ function logRequest(
   error?: unknown,
   expected = false,
   userId?: string,
+  code?: string,
 ): void {
   const payload: JsonObject = {
     request_id: requestId,
@@ -302,6 +314,7 @@ function logRequest(
     duration_ms: Math.round((performance.now() - startedAt) * 10) / 10,
   };
   if (error) payload.error_class = error instanceof Error ? error.name : typeof error;
+  if (code) payload.error_code = code;
   // A 502 names the upstream failure behind it: a timeout, an HTTP status, a login.
   if (error instanceof HttpError && error.cause instanceof Error) payload.error_cause = error.cause.name;
   logOperationalEvent('http_request', payload, status >= 500 && !expected ? 'error' : 'info');
@@ -440,7 +453,7 @@ export function apiRoute<Parameters extends RouteParameters = RouteParameters>(
       headers,
     });
     if (!options.quiet || finalized.status >= 400) {
-      logRequest(request, requestId, finalized.status, startedAt, caught, expectedFailures.has(response), userId);
+      logRequest(request, requestId, finalized.status, startedAt, caught, expectedFailures.has(response), userId, errorCodes.get(response));
     }
     if (caught && finalized.status >= 500) {
       captureOperationalError(caught, {

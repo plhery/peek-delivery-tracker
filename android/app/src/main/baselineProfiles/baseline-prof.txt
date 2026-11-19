@@ -22647,7 +22647,6 @@ Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;-><clinit>()V
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;-><init>(Ljava/time/Instant;ZLjava/lang/String;Ljava/util/List;Z)V
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;->design(Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetList$Size;)Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetList$Design;
-SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;->getEnabled()Z
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;->getLanguageCode()Ljava/lang/String;
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;->getParcels()Ljava/util/List;
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetList;->getSections()Ljava/util/List;
@@ -22807,9 +22806,7 @@ SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;-><init>(Lcom/p
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->clearSnapshot()V
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->getLanguageCode()Ljava/lang/String;
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->getSnapshot()Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetSnapshot;
-SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->isEnabled()Z
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->save(Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetSnapshot;)Z
-SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->setEnabled(Z)V
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->setLanguageCode(Ljava/lang/String;)V
 SPLcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;->setLiveActivitiesEnabled(Z)V
 Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore$Companion;
@@ -24555,7 +24552,6 @@ SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getAuthenticationRequiredFl
 SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getDeliveryEmail()Lcom/plhery/peekdeliverytracker/core/DeliveryEmail;
 SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getDeliveryLiveActivitiesEnabled()Z
 SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getDeliveryLiveActivityError()Ljava/lang/String;
-SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getDeliveryWidgetEnabled()Z
 SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getErrorMessage()Ljava/lang/String;
 SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getErrorMessageFlow()Lkotlinx/coroutines/flow/StateFlow;
 SPLcom/plhery/peekdeliverytracker/core/ParcelStore;->getGivenPostcodes()Ljava/util/List;
@@ -26180,7 +26176,7 @@ Lcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;
 SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;-><clinit>()V
 SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;-><init>()V
 SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;->access$getLock$p()Lkotlinx/coroutines/sync/Mutex;
-SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;->greyed$app(ZZLcom/plhery/peekdeliverytracker/core/ExtensionLocalizer;)Ljava/lang/String;
+SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;->greyed$app(ZLcom/plhery/peekdeliverytracker/core/ExtensionLocalizer;)Ljava/lang/String;
 SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;->nextDelivery(Landroid/content/Context;Ljava/lang/String;Landroid/net/Uri;)Landroidx/core/content/pm/ShortcutInfoCompat;
 SPLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;->reload(Landroid/content/Context;Lcom/plhery/peekdeliverytracker/core/DeliveryWidgetSharedStore;Lkotlinx/coroutines/CoroutineScope;)Lkotlinx/coroutines/Job;
 PLcom/plhery/peekdeliverytracker/platform/LauncherShortcuts;->shows(Landroidx/core/content/pm/ShortcutInfoCompat;Landroidx/core/content/pm/ShortcutInfoCompat;)Z

@@ -23,6 +23,7 @@ import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.SHOT
 import com.plhery.peekdeliverytracker.ui.awaitFrame
+import com.plhery.peekdeliverytracker.ui.map.LocalMapsAtOnce
 import com.plhery.peekdeliverytracker.ui.screenshot
 import org.junit.Assert.assertTrue
 import org.junit.Rule
@@ -60,13 +61,18 @@ class DeliveredCelebrationScreenshotTest {
         first to first.map { parcel -> checked.first { it.id == parcel.id } }
     }
 
-    /** The demo's list with the iPhone's bars, the status bar 62 points tall, the gesture bar 24, then the check. */
-    private fun deliver(dark: Boolean) {
+    /**
+     * The demo's list with the iPhone's bars, the status bar 62 points tall, the gesture bar 24, then the check. With
+     * [atOnce], every map's picture is made as its card is composed ([LocalMapsAtOnce]), so no map is still fading in.
+     */
+    private fun deliver(dark: Boolean, atOnce: Boolean = false) {
         source = FakeDeliveries(demo.first, AuthenticationState.Demo)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
-            CompositionLocalProvider(LocalPaperSeeds provides { SEED }, LocalDeliveriesState provides { deliveries = it }) {
+            CompositionLocalProvider(
+                LocalPaperSeeds provides { SEED }, LocalDeliveriesState provides { deliveries = it }, LocalMapsAtOnce provides atOnce,
+            ) {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     RootHost(state = AuthenticationState.Demo, dark = dark, reduceMotion = false, source = source)
                 }
@@ -116,8 +122,12 @@ class DeliveredCelebrationScreenshotTest {
         shot(900, "celebration_held_light")
     }
 
+    /**
+     * The paper 0.45 s after the check, the maps made at once: a card whose map came from another thread after the check
+     * would still be fading it in, a frame further on or not as that thread was quick, which a slow runner showed.
+     */
     private fun paper(dark: Boolean) {
-        deliver(dark)
+        deliver(dark, atOnce = true)
         shot(450, "celebration_paper_${theme(dark)}")
     }
 

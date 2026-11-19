@@ -167,7 +167,7 @@ describe('the account\'s choice about the delivery email', () => {
     for (const markNewUpdates of ['off', 0, {}]) {
       const refused = await save({ ...shown, markNewUpdates });
       expect(refused.status).toBe(400);
-      expect(await refused.json()).toEqual({ error: 'Mark new updates must be true or false' });
+      expect(await refused.json()).toEqual({ error: 'Dot on updated parcels must be true or false' });
     }
     expect(store).not.toHaveBeenCalled();
   });

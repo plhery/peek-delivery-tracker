@@ -32,6 +32,7 @@ bell.fill	notifications	1	FirstOpenView:603 9 regular	close
 bicycle	pedal_bike	0	ParcelLogic:61 15 regular; DeliveryWidget:309 11 heavy small; DeliveryWidget:465 phase	close
 bolt	bolt	0	PassportView:267 22 ultraLight; FriendsStore:219 22 ultraLight	close
 book.closed.fill	book	1	ParcelListView:33 tab	close
+box.truck	-	0	ShortcutIntents:15 none	not drawn: the App Shortcut's icon, which Siri and Shortcuts draw
 box.truck.fill	local_shipping	1	MacMenuBar:205 mac	close
 building.columns	account_balance	0	ParcelLogic:59 15 regular	close
 checkmark	check	0	ParcelListView:1022 36 ultraLight; ParcelListView:1706 11 light; ParcelListView:1841 11 light; ParcelShareSheet:230 13 semibold; ParcelLinkSheet:910 14 regular; CarrierPicker:373 17 semibold; FriendsView:433 13 regular; FriendsView:434 12 regular; ParcelDetailView:651 15 regular; ParcelDetailView:704 14 regular	close
@@ -44,7 +45,7 @@ chevron.forward	keyboard_arrow_right	0	DeliveryWidgetCards:137 8 bold	close: che
 chevron.left	keyboard_arrow_left	0	SignInView:393 inherited; SignInView:915 inherited	close
 chevron.right	keyboard_arrow_right	0	ParcelListView:2876 11 bold; ParcelLinkSheet:279 12 semibold; SettingsViews:827 10 light; DeliveryWidget:335 12 bold	close
 chevron.up	keyboard_arrow_up	0	ParcelDetailView:1485 10 regular	close
-chevron.up.chevron.down	unfold_more	0	AddParcelView:1204 11 semibold	close
+chevron.up.chevron.down	unfold_more	0	AddParcelView:1441 11 semibold; SettingsViews:1033 11 regular	close
 circle	radio_button_unchecked	0	AddParcelView:497 20 regular; SettingsViews:166 16 regular	close
 clock	schedule	0	ParcelListView:1790 11 semibold	close
 doc.on.clipboard	content_paste	0	FirstOpenView:517 20 medium; FirstOpenView:713 17 medium; AddParcelView:376 12 regular	close
@@ -81,10 +82,9 @@ person.badge.key.fill	passkey	1	SignInView:589 inherited	close
 person.crop.circle	account_circle	0	SettingsViews:950 mac	close
 person.fill	person	1	DesignSystem:268 15 semibold	close
 plus	add	0	ParcelListView:901 17 semibold; ParcelLinkSheet:170 17 semibold; FriendsView:146 inherited; FriendsView:157 12 medium	close
+plus.circle	-	0	ShortcutIntents:21 none	not drawn: the App Shortcut's icon, which Siri and Shortcuts draw
 power	power_settings_new	0	SettingsViews:982 mac	close
 receipt	receipt_long	0	ParcelShareSheet:177 16 regular	close
-rectangle.3.group	space_dashboard	0	SettingsViews:478 15 light	close: three panes, one tall
-rectangle.slash	web_asset_off	0	DeliveryWidget:136 20 bold	none close: a struck-out window
 shippingbox	package_2	0	PassportView:104 22 ultraLight; PassportView:261 22 ultraLight; PassportView:381 13 ultraLight; FriendsStore:219 22 ultraLight; ParcelLogic:57 15 regular; ParcelLogic:917 menu; DeliveryWidget:142 20 bold; ParcelDetailView:107 inherited; MacMenuBar:205 mac	close
 shippingbox.fill	package_2	1	ParcelListView:26 tab; ParcelListView:2854 15 regular; ParcelPassDesignSystem:241 11 bold; DeliveryWidget:231 12 bold; DeliveryWidget:471 phase	close
 slider.horizontal.3	tune	0	FriendsView:136 13 regular	close

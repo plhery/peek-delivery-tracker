@@ -26,7 +26,7 @@ guard CommandLine.arguments.count == 2 else {
 let downloads = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: true)
 
 // Literals in ios/ that are SF Symbol names but aren't symbols there.
-let words: Set<String> = ["a", "abc", "app", "k", "note", "right", "phone", "transmission", "number", "link", "scope", "ipad"]
+let words: Set<String> = ["a", "abc", "app", "k", "note", "right", "phone", "transmission", "number", "link", "scope", "ipad", "icloud"]
 
 struct Row {
     let sf: String

@@ -630,7 +630,7 @@ export function notificationPreferences(payload: JsonObject): NotificationPrefer
   // Apps from before the mark leave it out too.
   const markNewUpdates = payload.markNewUpdates ?? null;
   if (markNewUpdates !== null && typeof markNewUpdates !== 'boolean') {
-    throw new HttpError(400, 'Mark new updates must be true or false');
+    throw new HttpError(400, 'Dot on updated parcels must be true or false');
   }
   // And the clock and units.
   const clock = payload.clock ?? null;

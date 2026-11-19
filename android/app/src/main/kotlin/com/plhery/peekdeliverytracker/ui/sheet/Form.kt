@@ -550,7 +550,7 @@ fun FormMenuRow(
             PeekSymbol(
                 "chevron.up.chevron.down",
                 Modifier.padding(start = 5.dp),
-                font = type.style(IosTextStyle.Footnote, FontWeight.Medium),
+                font = type.style(IosTextStyle.Footnote, FontWeight.SemiBold),
                 tint = colors.secondaryText,
             )
         }

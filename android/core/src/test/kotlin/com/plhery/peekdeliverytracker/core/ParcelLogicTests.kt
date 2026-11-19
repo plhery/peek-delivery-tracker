@@ -1416,6 +1416,11 @@ class ParcelLogicTests {
             carrierData = CarrierData(deliveryCarrier = CarrierId.DpdDe, deliveryTrackingNumber = "01234567890123"),
         )
         assertFalse(handed.scheduledDelivery)
+        // One that lists it only as announced, without a scan of its own, has not taken it: the delivered step is still
+        // the schedule's.
+        val announced = handed.copy(carrierData = handed.carrierData?.copy(deliveryAnnounced = true))
+        assertEquals("parcel.deliveryAnnounced", announced.deliveryLineKey)
+        assertTrue(announced.scheduledDelivery)
         val moving = makeParcel(id, events = listOf(event(id, TrackingStage.InTransit, "2026-08-08T12:00:00Z")))
         assertFalse(moving.copy(carrier = CarrierId.Gzyl).scheduledDelivery)
     }

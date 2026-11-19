@@ -398,13 +398,16 @@ val Parcel.deliveringCarrier: CarrierId?
  * carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web.
  */
 val Parcel.deliveryLineKey: String
+    get() = if (deliveryOnlyAnnounced) "parcel.deliveryAnnounced" else "parcel.deliveryCarrier"
+
+/**
+ * The carrier its carrier names as delivering lists the parcel without a scan of its own: announced there, and not
+ * received yet.
+ */
+val Parcel.deliveryOnlyAnnounced: Boolean
     get() {
         val named = namedDelivery?.carrier
-        return if (carrierData?.deliveryAnnounced == true && named != null && named == deliveringCarrier) {
-            "parcel.deliveryAnnounced"
-        } else {
-            "parcel.deliveryCarrier"
-        }
+        return carrierData?.deliveryAnnounced == true && named != null && named == deliveringCarrier
     }
 
 val Parcel.amazonShippingHistoryExpired: Boolean
@@ -540,10 +543,11 @@ private val SCHEDULED_DELIVERIES = setOf(CarrierId.Gzyl, CarrierId.XingheFreight
 
 /**
  * Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
- * nothing came. A carrier it was handed to delivers for real.
+ * nothing came. A carrier it was handed to delivers for real, but not one that has it only as announced.
  */
 val Parcel.scheduledDelivery: Boolean
-    get() = currentStage == TrackingStage.Delivered && displayedCarrier in SCHEDULED_DELIVERIES && deliveringCarrier == null
+    get() = currentStage == TrackingStage.Delivered && displayedCarrier in SCHEDULED_DELIVERIES &&
+        (deliveringCarrier == null || deliveryOnlyAnnounced)
 
 /**
  * The line under the status for a carrier that writes the whole timeline in advance (`writtenAheadBy`): its page lists

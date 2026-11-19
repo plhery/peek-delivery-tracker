@@ -172,9 +172,9 @@ class NotificationPermission(context: Context) {
  * The token is [tokens]': Firebase Cloud Messaging's in Google Play's build with Firebase's settings, the UnifiedPush or
  * inbox address in F-Droid's ([Store]); in a build without either, pushes are not
  * [available] and nothing offers them. [registerForRemoteNotifications] asks for it and keeps the answer as
- * [currentDeviceToken], as AppDelegate keeps APNs', then hands it to [received]; a token Firebase makes anew
- * ([tokenRefreshed], from `FirebaseMessagingService.onNewToken`) goes the same way. An answer to a question asked before
- * [unregisterForRemoteNotifications], which deletes the token, is dropped. On the main thread.
+ * [currentDeviceToken], as AppDelegate keeps APNs', then hands it to [received], or tells [failed] that none came; a
+ * token Firebase makes anew ([tokenRefreshed], from `FirebaseMessagingService.onNewToken`) goes the same way. An answer
+ * to a question asked before [unregisterForRemoteNotifications], which deletes the token, is dropped. On the main thread.
  */
 class AndroidPushNotifications(
     private val context: Context,
@@ -186,6 +186,8 @@ class AndroidPushNotifications(
      * it: `ParcelStore.forwardNativePushToken` and `registerDeviceAlerts`, in the app's language.
      */
     private val received: (String) -> Unit = {},
+    /** Told when no token comes, as AppDelegate posts `.didFailToReceiveAPNSToken`: `ParcelStore.nativePushTokenFailed`. */
+    private val failed: () -> Unit = {},
 ) : PushNotifications {
     private var token: String? = null
 
@@ -219,7 +221,12 @@ class AndroidPushNotifications(
         tokens.token { answer ->
             // A failure is AppDelegate's `didFailToRegisterForRemoteNotificationsWithError`: nothing is kept, and the
             // store's wait for a token ends there without one.
-            if (asked == registrations) answer.onSuccess(::keep).onFailure { deviceTokenFailures++ }
+            if (asked == registrations) {
+                answer.onSuccess(::keep).onFailure {
+                    deviceTokenFailures++
+                    failed()
+                }
+            }
         }
     }
 

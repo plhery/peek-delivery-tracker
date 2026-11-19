@@ -249,7 +249,9 @@ class AppContainer(
     /** `DeliveryLiveActivities`: none on Android. */
     val liveActivities: DeliveryLiveActivities = DeliveryLiveActivities.None
 
-    private val pushes = AndroidPushNotifications(context, notificationPermission, pushTokens, received = { forwardPushToken(it) })
+    private val pushes = AndroidPushNotifications(
+        context, notificationPermission, pushTokens, received = { forwardPushToken(it) }, failed = { parcels.nativePushTokenFailed() },
+    )
 
     val notifications: PushNotifications = pushes
 
@@ -402,7 +404,7 @@ class AppContainer(
         listOf(
             session.stateFlow, parcels.parcelsFlow, parcels.loadingFlow, parcels.errorMessageFlow, parcels.authenticationRequiredFlow,
             parcels.notificationStateLoadedFlow, parcels.notificationStatusFlow, parcels.notificationsEnabledOnDeviceFlow,
-            parcels.notificationInvitationDismissedFlow,
+            parcels.notificationInvitationDismissedFlow, parcels.nativePushRegistrationFailedFlow,
         ),
     ) { parcels.shouldInviteNotifications }.stateIn(scope, SharingStarted.Eagerly, parcels.shouldInviteNotifications)
 

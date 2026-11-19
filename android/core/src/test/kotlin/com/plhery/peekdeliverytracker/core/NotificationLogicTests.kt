@@ -260,6 +260,20 @@ class NotificationLogicTests {
     }
 
     @Test
+    fun invitationAsksAgainOnceTheTokenFailsToRegister() {
+        val user = UUID.randomUUID()
+        val authorized = NotificationAuthorizationStatus.Authorized
+        fun registering(owner: UUID?, failed: Boolean) = NotificationDevicePolicy.isRegistering(authorized, user, owner, failed)
+        assertTrue(registering(owner = null, failed = false))
+        assertTrue(registering(owner = user, failed = false))
+        assertFalse(registering(owner = UUID.randomUUID(), failed = false))
+        assertFalse(NotificationDevicePolicy.isRegistering(NotificationAuthorizationStatus.NotDetermined, user, user, failed = false))
+        // Permission and the account alone do not make a token arrive: once its registration fails, the reader can try.
+        assertFalse(registering(owner = user, failed = true))
+        assertTrue(invitation(status = authorized, registering = registering(owner = user, failed = true)))
+    }
+
+    @Test
     fun invitationDismissalPersistsPerAccount() {
         val defaults = MemoryDefaults()
         val user = UUID.randomUUID()

@@ -216,6 +216,13 @@ object NotificationDevicePolicy {
         return owner == null || owner == user
     }
 
+    /**
+     * Whether the phone's token is on its way to the account signed in, which leaves the invitation nothing to ask:
+     * the system lets it register, its notifications are this account's, and the last try to register it did not fail.
+     */
+    fun isRegistering(status: NotificationAuthorizationStatus, user: UUID?, owner: UUID?, failed: Boolean): Boolean =
+        isAuthorized(status) && belongs(user, owner) && !failed
+
     /** An owner no account has, so whoever signs in next is asked. */
     val nobody: UUID = UUID(0, 0)
 

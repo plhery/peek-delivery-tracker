@@ -284,6 +284,41 @@ class SessionIsolationTests {
     }
 
     /**
+     * Allowed, and the phone's notifications nobody's, the list takes the token for on its way and asks nothing; once
+     * registering it fails, with the server or with Firebase, the invitation comes back until a token registers.
+     */
+    @Test
+    fun aTokenThatFailsToRegisterBringsTheInvitationBackUntilOneRegisters() = runTest {
+        for (firebase in listOf(false, true)) {
+            val transport = RecordingTransport()
+            val session = sessionStore(transport)
+            authorize(session, transport)
+            val store = testParcelStore(
+                configuration, session, transport, backgroundScope, MemoryDefaults(), now = { now },
+                notifications = StubPushNotifications(status = NotificationAuthorizationStatus.Authorized),
+            )
+            store.setDeliveryWidgetEnabled(false)
+            store.setDeliveryLiveActivitiesEnabled(false)
+            transport.respond(packageList(parcel()))
+            store.load()
+            store.refreshNotificationState()
+            assertFalse("A token on its way needs no question", store.shouldInviteNotifications)
+            if (firebase) {
+                store.nativePushTokenFailed()
+            } else {
+                transport.handler = { jsonResponse(400, """{"error":"invalid_request"}""") }
+                store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+            }
+            assertTrue("Firebase failed: $firebase. A token that failed to register is offered again", store.shouldInviteNotifications)
+            transport.handler = { jsonResponse(200, """{"ok":true,"testSent":false}""") }
+            store.forwardNativePushToken("synthetic-token", AppLanguage.En)
+            assertTrue(store.notificationsEnabledOnDevice)
+            assertFalse("Firebase failed: $firebase. Once a token registers, nothing is asked", store.shouldInviteNotifications)
+            assertFalse(store.nativePushRegistrationFailedFlow.value)
+        }
+    }
+
+    /**
      * Android's own (C-D05): a phone without Apple's sign-in (the app's stand-in) deletes an account that uses Apple
      * without asking Apple, and so without the code, whose revocation the server then skips.
      */

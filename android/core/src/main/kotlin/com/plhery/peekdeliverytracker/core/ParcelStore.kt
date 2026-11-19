@@ -268,6 +268,7 @@ class ParcelStore(
     private val notificationsEnabledOnDeviceState = MutableStateFlow(false)
     private val notificationPreferencesState = MutableStateFlow<NotificationPreferences?>(null)
     private val notificationErrorState = MutableStateFlow<String?>(null)
+    private val nativePushRegistrationFailedState = MutableStateFlow(false)
     private val deliveryWidgetEnabledState = MutableStateFlow(deliveryWidgetStore.isEnabled)
     private val deliveryLiveActivitiesEnabledState = MutableStateFlow(offersLiveActivities && deliveryWidgetStore.liveActivitiesEnabled)
     private val deliveryLiveActivityErrorState = MutableStateFlow<String?>(null)
@@ -295,6 +296,9 @@ class ParcelStore(
     /** Whether cards mark their parcel's new updates (#72), "Mark new updates" in Settings. */
     val markNewUpdatesFlow: StateFlow<Boolean> = markNewUpdatesChoice.enabled
     val notificationErrorFlow: StateFlow<String?> = notificationErrorState.asStateFlow()
+
+    /** The last try to register this phone's token, with Firebase or with the server, failed: the invitation offers it again. */
+    val nativePushRegistrationFailedFlow: StateFlow<Boolean> = nativePushRegistrationFailedState.asStateFlow()
     val deliveryWidgetEnabledFlow: StateFlow<Boolean> = deliveryWidgetEnabledState.asStateFlow()
     val deliveryLiveActivitiesEnabledFlow: StateFlow<Boolean> = deliveryLiveActivitiesEnabledState.asStateFlow()
     val deliveryLiveActivityErrorFlow: StateFlow<String?> = deliveryLiveActivityErrorState.asStateFlow()
@@ -426,6 +430,12 @@ class ParcelStore(
         get() = notificationErrorState.value
         private set(value) {
             notificationErrorState.value = value
+        }
+
+    private var nativePushRegistrationFailed: Boolean
+        get() = nativePushRegistrationFailedState.value
+        set(value) {
+            nativePushRegistrationFailedState.value = value
         }
 
     // Set through its state alone: `setDeliveryWidgetEnabled` is the switch's own function.
@@ -584,6 +594,7 @@ class ParcelStore(
         notificationError = null
         notificationEnableInProgress = false
         notificationsEnabledOnDevice = false
+        nativePushRegistrationFailed = false
         notificationStateLoaded = false
         notificationStatus = NotificationAuthorizationStatus.NotDetermined
         deliveryLiveActivityError = null
@@ -1413,6 +1424,7 @@ class ParcelStore(
                 defaults.set(true, forKey = nativePushRegisteredKey)
                 session.user?.id?.let { defaults.set(it.uuidString, forKey = notificationOwnerKey) }
                 notificationsEnabledOnDevice = true
+                nativePushRegistrationFailed = false
                 dismissNotificationInvitation()
                 succeeded = true
                 return sent
@@ -1452,8 +1464,9 @@ class ParcelStore(
                 enabled = notificationsEnabledOnDevice,
                 optedOut = defaults.bool(forKey = notificationOptOutKey),
                 dismissed = notificationInvitationDismissed,
-                registering = NotificationDevicePolicy.isAuthorized(notificationStatus) &&
-                    NotificationDevicePolicy.belongs(session.user?.id, notificationOwner),
+                registering = NotificationDevicePolicy.isRegistering(
+                    notificationStatus, session.user?.id, notificationOwner, failed = nativePushRegistrationFailed,
+                ),
             )
 
     fun dismissNotificationInvitation() {
@@ -1702,13 +1715,22 @@ class ParcelStore(
             defaults.set(true, forKey = nativePushRegisteredKey)
             defaults.set(user.uuidString, forKey = notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
+            nativePushRegistrationFailed = false
             notificationError = null
             return true
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
-            if (sessionGeneration == session.generation && error !is CancellationException) notificationError = localizer.errorMessage(error)
+            if (sessionGeneration == session.generation && error !is CancellationException) {
+                nativePushRegistrationFailed = true
+                notificationError = localizer.errorMessage(error)
+            }
             return false
         }
+    }
+
+    /** AppDelegate's `.didFailToReceiveAPNSToken`: Firebase gave this phone no token, so the invitation offers it again. */
+    fun nativePushTokenFailed() {
+        nativePushRegistrationFailed = true
     }
 
     private suspend fun list(): List<Parcel> {

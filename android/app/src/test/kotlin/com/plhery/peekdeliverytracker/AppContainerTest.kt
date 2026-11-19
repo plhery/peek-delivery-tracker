@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
 import com.plhery.peekdeliverytracker.platform.MemoryCookieJar
 import com.plhery.peekdeliverytracker.platform.PeekHttp
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.platform.PushTokens
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
 import java.security.Security
@@ -296,6 +297,20 @@ class AppContainerTest {
 
         ContainerDeliveries(app).setDeliveryWidgetEnabled(false)
         idleUntil("the shortcut gone") { ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty() }
+    }
+
+    /** Firebase giving no token tells the store, as AppDelegate's failure does the iPhone's: the invitation offers it again. */
+    @Test
+    fun aTokenFirebaseCannotGiveIsToldToTheStore() {
+        val failing = object : PushTokens {
+            override fun token(answer: (Result<String>) -> Unit) = answer(Result.failure(IllegalStateException("SERVICE_NOT_AVAILABLE")))
+
+            override fun delete() = Unit
+        }
+        val app = AppContainer(context, configuration(), scope = MainScope(), pushTokens = failing).also { container = it }
+        assertFalse(app.parcels.nativePushRegistrationFailedFlow.value)
+        app.notifications.registerForRemoteNotifications()
+        assertTrue(app.parcels.nativePushRegistrationFailedFlow.value)
     }
 
     /**

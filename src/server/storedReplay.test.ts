@@ -117,6 +117,20 @@ describe('stored scan replay', () => {
       .toContain(`raw_data = (raw_data - 'kept_stage') || '{"stage":"delivered","stage_source":"carrier_map"}'::jsonb`);
   });
 
+  it('restages a row only while it holds the wording and raw data its stage was read from', () => {
+    // A wall clock dated again and its scan restaged: the clock's fields change first, in the same plan.
+    const changes = replayParcel(parcel(
+      scan('clock', 'gofo', '2026-10-20T10:00:00Z', 'in_transit', 'Arrived at GOFO Regional Origin Hub', {
+        provider_code: '202', stage: 'in_transit', local_time: '2026-10-20T10:00:00', time: '2026-10-20T10:00:00', time_zone: 'UTC', time_zone_basis: 'carrier',
+      }),
+    ));
+    const sql = replaySql(changes);
+
+    expect(changes).toEqual([expect.objectContaining({ kind: 'clock', row: 'clock' }), expect.objectContaining({ kind: 'stage', row: 'clock', to: 'accepted' })]);
+    expect(sql).toContain(`where id = 'clock' and stage = 'in_transit' and description = 'Arrived at GOFO Regional Origin Hub'
+     and raw_data - '{time,time_zone,time_zone_basis}'::text[] = '{"stage_source":"carrier_map","provider_code":"202","stage":"in_transit","local_time":"2026-10-20T10:00:00"}'::jsonb;`);
+  });
+
   it('gives a notice the stage of the scan its source listed before it in the same second, and leaves one whose order is not known', () => {
     const delivered = scan('z-delivered', 'dpd-de', '2026-10-18T10:00:00Z', 'delivered', 'Delivered', { provider_code: 'DELIVERED', stage: 'delivered' });
     const notice = scan('a-notice', 'dpd-de', '2026-10-18T10:00:00Z', 'delivered', 'Delivery notice sent', { provider_code: 'MSDLO', stage: 'delivered' });
@@ -332,7 +346,7 @@ describe('stored scan replay', () => {
     const attempt = scan('attempt', 'ekart', '2026-10-30T09:50:00Z', 'delivered', 'Delivery attempted', { provider_code: 'UA', stage: 'delivered' });
     const notice = scan('notice', 'ekart', '2026-10-30T10:00:00Z', 'pending', 'Message sent', { stage_source: 'none' });
     const reread = { kind: 'stage', parcel: 'parcel-1', row: 'attempt', source: 'ekart', open: false, from: 'delivered', to: 'failed_attempt',
-      code: 'UA', reason: 'mapped', declared: 'failed_attempt', stageSource: 'carrier_map' } as const;
+      code: 'UA', reason: 'mapped', declared: 'failed_attempt', stageSource: 'carrier_map', read: { description: '', raw: {} } } as const;
     const delivered = { ...parcel(round, attempt, notice), open: false, stage: 'delivered', archived: false };
     expect(steppedBack([delivered], [reread])).toEqual([{ parcel: 'parcel-1', from: 'delivered', to: 'failed_attempt' }]);
     // A pickup notice once read as delivered, which the carrier's summary named over a later round: the stage its scan
@@ -359,7 +373,7 @@ describe('stored scan replay', () => {
     const back = scan('back', 'dpd-pl', '2026-09-09T15:00:00Z', 'exception', 'Return to sender', { provider_code: 'R1', stage: 'exception' });
     const added = scan('added', 'app', '2026-10-16T07:00:00Z', 'pending', 'Tracking added', { stage_source: 'none' });
     const restage = { kind: 'stage', parcel: 'parcel-1', row: 'back', source: 'dpd-pl', open: true, from: 'exception', to: 'returned',
-      code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map' } as const;
+      code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map', read: { description: '', raw: {} } } as const;
     const open = { ...parcel(attempt, back, added), stage: 'exception' };
     expect(steppedBack([open], [restage])).toEqual([]);
     const followed = followedScans([open], [restage]);
@@ -390,7 +404,7 @@ describe('stored scan replay', () => {
     const back = scan('back', 'dpd-pl', '2026-09-09T15:00:00Z', 'exception', 'Return to sender', { provider_code: 'R1', stage: 'exception' });
     const trip = scan('trip', 'dpd-pl', '2026-09-10T08:00:00Z', 'in_transit', 'Parcel in transit', { provider_code: 'T1', stage: 'in_transit' });
     const restage = { kind: 'stage', parcel: 'parcel-1', row: 'back', source: 'dpd-pl', open: true, from: 'exception', to: 'returned',
-      code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map' } as const;
+      code: 'R1', reason: 'mapped', declared: 'returned', stageSource: 'carrier_map', read: { description: '', raw: {} } } as const;
     const moved = followedScans([{ ...parcel(attempt, back, trip), stage: 'in_transit' }], [restage]);
     expect(moved).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'returned', hold: 'return' }]);
     const sql = replaySql([restage], moved, [snapshot]);
@@ -408,7 +422,7 @@ describe('stored scan replay', () => {
     const relayed: StoredScan = { ...scan('relay', 'unknown', '2026-09-09T09:00:00Z', 'in_transit', 'Parcel handed over to recipient',
       { universal_provider: 'ParcelsApp', stage: 'in_transit' }) };
     const reread = { kind: 'stage', parcel: 'parcel-1', row: 'relay', source: 'unknown', open: true, from: 'in_transit', to: 'delivered',
-      code: 'D1', reason: 'mapped', declared: 'delivered', stageSource: 'carrier_map' } as const;
+      code: 'D1', reason: 'mapped', declared: 'delivered', stageSource: 'carrier_map', read: { description: '', raw: {} } } as const;
     const moved = followedScans([{ ...parcel(own, relayed), stage: 'in_transit' }], [reread]);
     expect(moved).toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'delivered', hold: 'delivery' }]);
     expect(replaySql([reread], moved, [snapshot])).toContain("jsonb_build_object('unconfirmed_delivery_until',\n    to_char((now() + interval '259200 seconds')");
@@ -427,7 +441,7 @@ describe('stored scan replay', () => {
       to: '2026-09-09T14:00:00Z', time: '2026-09-09T16:00:00+02:00', timeZone: 'Europe/Warsaw', basis: 'carrier',
       providerEventId: 'dpd-pl:attempt', previousProviderEventId: 'dpd-pl:attempt', clash: false } as const;
     const reread = { kind: 'stage', parcel: 'parcel-1', row: 'noon', source: 'dpd-pl', open: true, from: 'exception', to: 'in_transit',
-      code: 'X1', reason: 'mapped', declared: 'in_transit', stageSource: 'carrier_map' } as const;
+      code: 'X1', reason: 'mapped', declared: 'in_transit', stageSource: 'carrier_map', read: { description: '', raw: {} } } as const;
     expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock]))
       .toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
     expect(followedScans([{ ...parcel(late, noon), stage: 'exception' }], [clock, reread]))

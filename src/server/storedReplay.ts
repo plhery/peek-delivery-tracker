@@ -88,6 +88,8 @@ export interface StageChange extends Change {
   /** The stage its adapter would give the scan, which the sync keeps in the row's raw data; null for none. */
   declared: string | null;
   stageSource: string;
+  /** What the stage was read from, as exported: a row the sync wrote again since is not restaged. */
+  read: { description: string; raw: JsonObject };
 }
 /**
  * A universal provider's row to the minute the release leaves out as a copy of its row to the second (`row`, at the
@@ -359,6 +361,7 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
       code: text(scan.raw.provider_code), reason, declared: text(scans[index].stage),
       stageSource: reason === 'mapped' || reason === 'late' ? 'carrier_map'
         : reason === 'wording' ? classifyStage(scan.description).source : 'none',
+      read: { description: scan.description, raw: scan.raw },
     }];
   });
 }
@@ -473,6 +476,12 @@ function backupSql(changes: readonly ReplayedChange[], placed: readonly CopyChan
   ].join('\n');
 }
 
+/** The raw fields a clock change writes. */
+const CLOCK_FIELDS = ['time', 'time_zone', 'time_zone_basis'] as const;
+const CLOCK_FIELDS_SQL = `'{${CLOCK_FIELDS.join(',')}}'::text[]`;
+const withoutClockFields = (raw: JsonObject): JsonObject =>
+  Object.fromEntries(Object.entries(raw).filter(([key]) => !(CLOCK_FIELDS as readonly string[]).includes(key)));
+
 /**
  * One transaction that writes the changes as the release would, each guarded on the row's stored
  * values, and moves the parcels, each guarded on its saved stage, failing unless every one
@@ -503,10 +512,13 @@ end $$;`;
    where id = ${literal(change.row)} and occurred_at = ${literal(change.from)} and provider_event_id = ${literal(change.previousProviderEventId)};
   get diagnostics n = row_count; total := total + n;`
     // A row restaged as a notice is marked one, as the sync marks it (keptNotices); any other restaging unmarks it.
+    // Only while it holds the wording and raw data the stage was read from: a sync that wrote it again since aborts
+    // the plan. A clock change to the row before it writes only the clock's fields.
     : `  update public.tracking_events set stage = ${literal(change.to)},
     raw_data = (raw_data - 'kept_stage') || ${literal(JSON.stringify({ ...change.declared ? { stage: change.declared } : {},
       stage_source: change.stageSource, ...change.reason === 'notice' ? { kept_stage: true } : {} }))}::jsonb
-   where id = ${literal(change.row)} and stage = ${literal(change.from)};
+   where id = ${literal(change.row)} and stage = ${literal(change.from)} and description = ${literal(change.read.description)}
+     and raw_data - ${CLOCK_FIELDS_SQL} = ${literal(JSON.stringify(withoutClockFields(change.read.raw)))}::jsonb;
   get diagnostics n = row_count; total := total + n;`);
   // Validate the snapshots before any planned restaging or clock correction changes them.
   const pairChecks = copies.flatMap((copy) => copy.pair.map((scan) => `  perform 1 from public.tracking_events

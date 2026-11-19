@@ -21344,7 +21344,8 @@ export const CARRIER_CAPABILITIES = {
         "pattern": "^FD\\d{6,8}$",
         "confidence": "low"
       }
-    ]
+    ],
+    "trackingSearchUrl": "https://rastreo.forzadelivery.com/"
   },
   "guatex": {
     "displayName": "Guatex",
@@ -36339,8 +36340,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "ets-express",
-      "recognitionRank": 734
+      "adapter": "universal"
     },
     "linkRules": [],
     "detectionRules": [
@@ -62369,6 +62369,33 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "ywbz": {
+    "displayName": "YWBZ Express",
+    "aliases": [
+      "YWBZ",
+      "Bai Zhou Huo Yun",
+      "义乌百洲",
+      "义乌百洲国际货运代理有限公司",
+      "Yiwu Baizhou"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#2fa4e7",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "ywbz"
+    },
+    "linkRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^YWBZ\\d{10}$",
+        "confidence": "high"
+      }
+    ]
   }
 } as const;
 
@@ -64278,7 +64305,8 @@ export const CARRIER_IDS = [
   "jetspeed",
   "pdu",
   "byt",
-  "jch"
+  "jch",
+  "ywbz"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 17 November 2026
+Effective: 19 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -60,6 +60,8 @@ using Peek involves.
   stored with an answer.
 - When your apps last loaded your parcels, to within five minutes. It decides
   how often the service asks carriers about them.
+- A keyed hash of the random counting identifier your apps and browser send
+  once a day, with what "Usage analytics" below lists.
 - A nickname, sharing choices, invitations and connections when you turn on
   Friends.
 - Technical request data processed by the hosting, reverse-proxy, Auth, and mail
@@ -255,13 +257,29 @@ and campaign the link you followed was tagged with, if any. Umami processes IP
 address and user agent to derive approximate location and rotating
 visitor/session identifiers. We do not send account IDs, email addresses,
 parcel labels, tracking numbers, delivery postcodes, phone digits, invitation codes, search
-text, any other part of an address, or error messages. No analytics cookies or
-persistent analytics device identifiers are created. Events are not linked to
-your Peek account.
+text, any other part of an address, or error messages. Events carry no
+identifier of yours and are not linked to your Peek account.
 
-The website sends nothing when your browser asks not to be tracked (Do Not
-Track or Global Privacy Control) or when Umami's local opt-out is set. The
-iPhone and Android apps have no setting for it. Historical analytics remain
+To tell visits that come back from one-time ones, the apps and the website also
+keep a random counting identifier on your device (on the website, in your
+browser's storage; it is not a cookie). It is made on your device and is
+unrelated to your account, your parcels and the device's own identifiers. Once
+a day when you open Peek, and again when you sign in, it is sent to the service
+on its own, with the platform, whether you are signed in and how many parcels
+the device follows; it never travels with another request. The service keeps
+only a keyed hash of it, with the first and last day it was seen, on how many
+days, the first day it was seen without an account and signed in, and that
+parcel count; never your IP address, an account, a link or a tracking number.
+The counts made from it only measure how Peek is used and are never combined
+with other data. Your device replaces the identifier after 13 months. The
+service deletes a hash not seen for 90 days, and every hash 25 months after it
+was first seen.
+
+Turning off Usage statistics in Settings stops all of this and deletes the
+counting identifier from your device. The website also sends nothing when your
+browser asks not to be tracked (Do Not Track or Global Privacy Control) or when
+Umami's local opt-out is set. App versions without that switch send no
+counting identifier. Historical analytics remain
 until operational cleanup and cannot be selected by account when you export or
 delete it because we do not send an account identifier. Local demo builds,
 simulators, emulators, and unconfigured self-hosted deployments do not collect.

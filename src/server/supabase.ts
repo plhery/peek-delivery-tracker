@@ -2881,6 +2881,14 @@ export class SupabaseServiceClient extends SupabaseClient {
     await this.request('/rest/v1/rpc/record_usage_metrics', { method: 'POST', body: {} });
   }
 
+  /** Counts an install as seen today, by the keyed hash of its counting id. */
+  async recordInstallSeen(install: string, platform: string, signedIn: boolean, parcels: number): Promise<void> {
+    await this.request('/rest/v1/rpc/record_install_seen', {
+      method: 'POST',
+      body: { p_install: install, p_platform: platform, p_signed_in: signedIn, p_parcels: parcels },
+    });
+  }
+
   /**
    * The DPD app sessions DPD has not refused, newest first: the scraper takes up
    * the newest, whatever its age, and checks the others for a week after they opened.

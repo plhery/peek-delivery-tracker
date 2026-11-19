@@ -4,8 +4,9 @@ Optional, self-hosted [Umami](https://umami.is). Web and PWA share one property 
 `platform=web` or `platform=pwa`); the iOS app uses a second one (`platform=iphone`,
 `ipad`, or `mac` for the iPad app on a Mac). The Android app uses a third property
 (`platform=android`, `android-tablet`, or `chromebook`). `mode` separates anonymous, demo and
-account screens. No client sends a persistent identifier or account identity, so visitor
-counts are Umami's own estimates.
+account screens. No event carries a persistent identifier or account identity, so Umami's
+visitor counts are its own estimates. Installs are counted apart, by a counting id
+([Counting installs](#counting-installs)).
 
 ## Configuration
 
@@ -180,9 +181,29 @@ referrer is that assistant's site, so Umami lists it under referrers and its AI 
 
 The web sends nothing under DNT, GPC or `umami.disabled=1`, nor from a browser driven by
 automation (`navigator.webdriver`), such as a headless crawler, which still gets the same
-page. The clients also read a
-stored preference (`sdt.analytics.enabled`) that turns collection off; no screen sets
-it. Retention is described in the public privacy notice.
+page. Settings' "Usage statistics" switch writes `sdt.analytics.enabled`, which turns
+collection off and deletes the counting id. Retention is described in the public privacy
+notice.
+
+## Counting installs
+
+Umami can't tell a visitor who comes back from a one-time one, so each install keeps a
+random counting id: the web 16 bytes in base64url in `localStorage` `sdt.counting.v1`
+([`src/lib/counting.ts`](../src/lib/counting.ts)), the apps a UUID. It is sent alone to
+`POST /api/public/seen` with the platform, whether the reader is signed in and how many
+parcels the device follows, at most once a UTC day and again once the reader signs in,
+never as part of another request. It goes where Umami events go and under the same opt-outs:
+only once the analytics configuration answered, never in demo mode, and on the web only from
+the app's pages, from a screen view that knows whether the reader is signed in (a guide's
+page counts nothing). A client replaces its id after 13 months.
+
+The server keeps an HMAC of the id, keyed with `COUNTING_KEY` ([DEPLOYMENT.md](DEPLOYMENT.md)),
+in `private.installs`, which only the server reads; Grafana reads counts from
+`metrics.installs_daily` (`new`, `returning`, `account`, `converted`), `metrics.active_installs`
+and `metrics.guest_cohorts`. A row goes 90 days after it was last seen, and every row 25 months
+after its first day, so the web stays within CNIL's conditions for audience measurement
+without consent. A reinstall or cleared storage counts as a new install, and the same person
+on two devices counts twice.
 
 To check a deployment, open the app, change a harmless setting, and confirm the page view
 and event in Umami. iPhone changes need a new app build.

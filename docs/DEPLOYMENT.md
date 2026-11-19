@@ -140,6 +140,9 @@ Apple's, so the same rule about edge protection applies.
   lookups off.
   Scrapers rotate through residential addresses, so only the overall allowances bound
   them: keep them a small multiple of real use.
+- Optional: `COUNTING_KEY` keys the hash under which the server keeps each install's
+  counting id ([ANALYTICS.md](ANALYTICS.md)). Without it, a key made from the service key does,
+  and every install counts as new once that key changes. Setting it does so once too.
 - Optional: `PUBLIC_DETECTIONS_PER_DAY` (default 60) and
   `PUBLIC_DETECTIONS_GLOBAL_PER_DAY` (default 600) set how many numbers carriers are
   asked about before a lookup, without an account, per UTC day, per client and overall.

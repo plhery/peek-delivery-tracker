@@ -4810,6 +4810,14 @@ data class ParcelLinkCarrierRequest(
 )
 
 @Serializable
+data class InstallSighting(
+    val id: String,
+    val platform: InstallSightingPlatform,
+    val signedIn: Boolean,
+    val parcels: Int,
+)
+
+@Serializable
 enum class CarrierDetectionResponseAmazonShippingStatus(val rawValue: String) {
     @SerialName("available") Available("available"),
     @SerialName("expired") Expired("expired"),
@@ -5041,6 +5049,21 @@ enum class AssistantConnectionKind(val rawValue: String) {
 
     companion object {
         fun fromRawValue(rawValue: String): AssistantConnectionKind? = entries.firstOrNull { it.rawValue == rawValue }
+    }
+}
+
+@Serializable
+enum class InstallSightingPlatform(val rawValue: String) {
+    @SerialName("web") Web("web"),
+    @SerialName("pwa") Pwa("pwa"),
+    @SerialName("iphone") Iphone("iphone"),
+    @SerialName("ipad") Ipad("ipad"),
+    @SerialName("mac") Mac("mac"),
+    @SerialName("android") Android("android"),
+    ;
+
+    companion object {
+        fun fromRawValue(rawValue: String): InstallSightingPlatform? = entries.firstOrNull { it.rawValue == rawValue }
     }
 }
 

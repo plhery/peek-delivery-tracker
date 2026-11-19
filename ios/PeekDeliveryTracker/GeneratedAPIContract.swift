@@ -4871,6 +4871,13 @@ struct ParcelLinkCarrierRequest: Codable, Equatable, Hashable, Sendable {
     }
 }
 
+struct InstallSighting: Codable, Equatable, Hashable, Sendable, Identifiable {
+    var id: String
+    var platform: InstallSightingPlatform
+    var signedIn: Bool
+    var parcels: Int
+}
+
 enum CarrierDetectionResponseAmazonShippingStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case available
     case expired
@@ -5072,6 +5079,17 @@ enum ParcelFeedbackRequestApp: String, Codable, CaseIterable, Hashable, Sendable
 enum AssistantConnectionKind: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case oauth
     case personal
+
+    var id: String { rawValue }
+}
+
+enum InstallSightingPlatform: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
+    case web
+    case pwa
+    case iphone
+    case ipad
+    case mac
+    case android
 
     var id: String { rawValue }
 }

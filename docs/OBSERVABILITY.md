@@ -1306,7 +1306,10 @@ the Supabase stack's network to reach the database.
 - `metrics.lookup_returns`, `metrics.lookup_accounts` and `metrics.link_alert_devices`, also
   counted when read: lookups of the last 30 days opened again on a later day (by anyone holding
   the link), accounts that kept a lookup made before them, and devices with alerts on links,
-  following one parcel or several. Guests have no id of their own: these stand in for one.
+  following one parcel or several. They stand in for an id on guests who don't send one.
+- `metrics.installs_daily`, `metrics.active_installs` and `metrics.guest_cohorts`: apps and
+  browsers counted by their counting id ([ANALYTICS.md](ANALYTICS.md)), each day by kind, over
+  the last 1, 7 and 30 days by platform, and guests by the week they were first seen.
 
 Days from before the schema existed were rebuilt from the rows stored then, so they miss
 the accounts and parcels deleted earlier, and their activity counts sign-ins and session

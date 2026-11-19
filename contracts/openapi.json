@@ -64097,6 +64097,38 @@
         }
       }
     },
+    "/api/public/seen": {
+      "post": {
+        "operationId": "countInstallSeen",
+        "summary": "Count an app or browser as seen today",
+        "description": "The apps and the website send their counting id alone, at most once a day and again the same day once they sign in, unless their reader turned usage statistics off (the website also when the browser sends Do Not Track or Global Privacy Control). The service keeps only a keyed hash of it. Never sent with an account, a link or a tracking number.",
+        "security": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InstallSighting"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Counted"
+          },
+          "400": {
+            "description": "No valid counting id, platform, sign-in state or parcel count"
+          },
+          "403": {
+            "description": "Sent by a page on another site"
+          },
+          "429": {
+            "description": "Too many from this network this minute. Retry-After says when to try again."
+          }
+        }
+      }
+    },
     "/api/public/parcels": {
       "post": {
         "operationId": "lookUpParcel",
@@ -71611,6 +71643,43 @@
             "type": "string",
             "pattern": "^[a-z]{2}$",
             "description": "Optional app language the lookup was made in. A carrier that words its scans in several languages answers the parcel in it while no account owns it. A language the app does not speak is ignored."
+          }
+        }
+      },
+      "InstallSighting": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "platform",
+          "signedIn",
+          "parcels"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{16,64}$",
+            "description": "The install's random counting id: 16 random bytes in base64url on the website, a UUID in the apps. Replaced after 13 months."
+          },
+          "platform": {
+            "type": "string",
+            "enum": [
+              "web",
+              "pwa",
+              "iphone",
+              "ipad",
+              "mac",
+              "android"
+            ]
+          },
+          "signedIn": {
+            "type": "boolean"
+          },
+          "parcels": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100000,
+            "description": "The parcels it follows without an account."
           }
         }
       }

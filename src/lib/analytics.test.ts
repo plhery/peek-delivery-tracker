@@ -237,3 +237,119 @@ describe('action mapping shared with native', () => {
     expect(apiAnalyticsEvent('/api/push/devices', 'POST', '{"token":"secret"}')).toBeUndefined();
   });
 });
+
+describe('the counting id', () => {
+  let seen: { id: string; platform: string; signedIn: boolean; parcels: number }[];
+  let seenInit: RequestInit[];
+  let answer: number;
+  beforeEach(() => {
+    seen = []; seenInit = []; answer = 204;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init?: RequestInit) => {
+      if (url === '/api/public/seen') {
+        seen.push(JSON.parse(init!.body as string)); seenInit.push(init!);
+        return new Response(null, { status: answer });
+      }
+      return Response.json(url === '/api/analytics/config' ? config : { cache: 'session-cache' });
+    }));
+  });
+  afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
+  const stored = () => JSON.parse(localStorage.getItem('sdt.counting.v1') ?? 'null');
+
+  it('counts the browser once a day, with its id alone', async () => {
+    localStorage.setItem('sdt.peek.parcels.v1', JSON.stringify([{ id: 'a' }, { id: 'b' }]));
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    a.trackScreen('parcel-link', 'anonymous'); await settle();
+    expect(seen).toEqual([{ id: expect.stringMatching(/^[A-Za-z0-9_-]{22}$/), platform: 'web', signedIn: false, parcels: 2 }]);
+    expect(seenInit[0]).toMatchObject({ method: 'POST', credentials: 'omit', referrerPolicy: 'no-referrer' });
+    expect(seenInit[0].headers).toEqual({ 'Content-Type': 'application/json' });
+    expect(stored()).toEqual({ id: seen[0].id, made: new Date().toISOString().slice(0, 10), sent: new Date().toISOString().slice(0, 10), signedIn: false });
+    // Umami never hears of it.
+    expect(JSON.stringify(requests.map((request) => request.init?.body ?? ''))).not.toContain(seen[0].id);
+
+    vi.resetModules();
+    const again = await import('./analytics');
+    await again.startAnalytics();
+    again.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen).toHaveLength(1);
+  });
+
+  it('counts it again the same day once the reader signs in, then not when they sign out', async () => {
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    a.trackScreen('deliveries', 'account'); await settle();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen.map(({ signedIn }) => signedIn)).toEqual([false, true]);
+    expect(seen[1].id).toBe(seen[0].id);
+  });
+
+  it('counts a day whose request failed on the next page load', async () => {
+    answer = 503;
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    expect(stored().sent).toBeUndefined();
+    answer = 204;
+    vi.resetModules();
+    const again = await import('./analytics');
+    await again.startAnalytics();
+    again.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen).toHaveLength(2);
+    expect(seen[1].id).toBe(seen[0].id);
+  });
+
+  it('replaces the id after 13 months', async () => {
+    vi.useFakeTimers({ now: new Date('2027-12-19T10:00:00Z'), toFake: ['Date'] });
+    localStorage.setItem('sdt.counting.v1', JSON.stringify({ id: 'AAAAAAAAAAAAAAAAAAAAAA', made: '2026-11-19', sent: '2027-12-18', signedIn: false }));
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen[0].id).not.toBe('AAAAAAAAAAAAAAAAAAAAAA');
+    expect(stored().made).toBe('2027-12-19');
+  });
+
+  it('keeps an id younger than 13 months', async () => {
+    vi.useFakeTimers({ now: new Date('2027-12-18T10:00:00Z'), toFake: ['Date'] });
+    localStorage.setItem('sdt.counting.v1', JSON.stringify({ id: 'AAAAAAAAAAAAAAAAAAAAAA', made: '2026-11-19' }));
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen[0].id).toBe('AAAAAAAAAAAAAAAAAAAAAA');
+  });
+
+  it('never counts a demo, or a page that is not the app', async () => {
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('deliveries', 'demo'); await settle();
+    expect(seen).toHaveLength(0);
+    vi.resetModules();
+    const guide = await import('./analytics');
+    await guide.startAnalytics({ open: false });
+    guide.trackScreen('guides/fr', 'anonymous'); await settle();
+    expect(seen).toHaveLength(0);
+  });
+
+  it('deletes the id when usage statistics are turned off, or the browser asks not to be tracked', async () => {
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    expect(stored()).not.toBeNull();
+    a.setAnalyticsEnabled(false);
+    expect(stored()).toBeNull();
+    a.trackScreen('deliveries', 'account'); await settle();
+    expect(seen).toHaveLength(1);
+
+    localStorage.clear();
+    localStorage.setItem('sdt.counting.v1', JSON.stringify({ id: 'AAAAAAAAAAAAAAAAAAAAAA', made: '2026-11-19' }));
+    vi.stubGlobal('navigator', Object.assign(Object.create(navigator), { globalPrivacyControl: true }));
+    vi.resetModules();
+    const declined = await import('./analytics');
+    expect(declined.browserDeclinesTracking()).toBe(true);
+    await declined.startAnalytics();
+    declined.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen).toHaveLength(1);
+    expect(stored()).toBeNull();
+  });
+});

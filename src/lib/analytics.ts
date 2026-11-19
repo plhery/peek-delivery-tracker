@@ -1,4 +1,5 @@
 import catalog from '../../shared/analytics.json';
+import { countBrowser, forgetCountingId } from './counting';
 import { pageLocale, SUPPORTED_LOCALES } from './locale';
 
 export type AnalyticsOutcome = 'success' | 'error' | 'started' | 'accepted';
@@ -22,6 +23,8 @@ let cache: string | undefined;
 let queue: Event[] = [];
 let sending = false;
 let disabled = false;
+/** This page load is the app's, whose views count the browser as seen ([counting.ts](./counting.ts)). */
+let counts = false;
 
 /** The campaign keys a landing address may carry to analytics. Any other query can hold a tracking number, and stays. */
 const CAMPAIGN_KEYS = ['utm_source', 'utm_medium', 'utm_campaign'] as const;
@@ -90,8 +93,15 @@ export function analyticsEnabled() {
 }
 export function setAnalyticsEnabled(enabled: boolean) {
   try { localStorage.setItem(analyticsPreferenceKey, String(enabled)); } catch { return; }
-  if (!enabled) { queue = []; cache = undefined; }
+  if (!enabled) { queue = []; cache = undefined; forgetCountingId(); }
   else { startup = undefined; disabled = false; lastView = ''; void startAnalytics().then(() => trackScreen(screen)); }
+}
+/** The browser asks sites not to track it, with Do Not Track or Global Privacy Control. */
+export function browserDeclinesTracking(): boolean {
+  try {
+    return navigator.doNotTrack === '1'
+      || (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true;
+  } catch { return false; }
 }
 /**
  * Nothing is counted for a reader who asked not to be, nor for a browser driven by a program
@@ -100,8 +110,7 @@ export function setAnalyticsEnabled(enabled: boolean) {
  */
 function optedOut() {
   try {
-    return !analyticsEnabled() || navigator.doNotTrack === '1'
-      || (navigator as Navigator & { globalPrivacyControl?: boolean }).globalPrivacyControl === true
+    return !analyticsEnabled() || browserDeclinesTracking()
       || navigator.webdriver === true
       || localStorage.getItem('umami.disabled') === '1';
   } catch { return true; }
@@ -109,7 +118,9 @@ function optedOut() {
 
 /** Starts collection once per page load. `open: false` is a page that is not the app, a guide: its load is no app open. */
 export function startAnalytics({ open = true }: { open?: boolean } = {}): Promise<void> {
-  if (typeof window === 'undefined' || optedOut()) return Promise.resolve();
+  if (typeof window === 'undefined') return Promise.resolve();
+  if (optedOut()) { forgetCountingId(); return Promise.resolve(); }
+  if (open) counts = true;
   return startup ??= (async () => {
     try {
       const response = await fetch('/api/analytics/config', { cache: 'no-store', credentials: 'omit', signal: AbortSignal.timeout(5_000) });
@@ -142,6 +153,8 @@ async function flush() {
       if (optedOut()) { queue = []; break; }
       const source = !event.name ? arrival : null;
       if (source) arrival = null;
+      // A view knows whether the reader is signed in; the app-open queued before it may not.
+      if (counts && !event.name && event.mode !== 'demo') void countBrowser(event.mode === 'account');
       const locale = pageLocale();
       try {
         const response = await fetch(config.endpoint, {

@@ -65151,3 +65151,10 @@ export interface ApiParcelLinkCarrierRequest {
   "lookupCountryHint"?: string;
   "language"?: string;
 }
+
+export interface ApiInstallSighting {
+  "id": string;
+  "platform": "web" | "pwa" | "iphone" | "ipad" | "mac" | "android";
+  "signedIn": boolean;
+  "parcels": number;
+}

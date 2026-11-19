@@ -3104,6 +3104,31 @@ describe('TrackingSyncService', () => {
     expect(client.updatePackage).toHaveBeenLastCalledWith('notice-after-move', expect.objectContaining({ current_stage: 'in_transit' }));
   });
 
+  it('keeps the moving stage its rows showed when the same answer at the label comes again', async () => {
+    // A scan no rule reads is stored in transit, and the label update after it is a notice: the first
+    // check saves the parcel in transit, and the next check of the same answer takes nothing back.
+    const client = fakeClient();
+    const adapter: TrackingAdapter = { fetch: vi.fn().mockResolvedValue({ status: 'pending', current_stage: 'registered',
+      last_status_text: 'Synthetic label update', last_update: '2026-11-18T12:10:00Z', events: [
+        { time: '2026-11-18T12:10:00Z', description: 'Synthetic label update', stage: 'registered' },
+        { time: '2026-11-18T12:04:15Z', description: 'Synthetic scan no rule reads' },
+        { time: '2026-11-18T12:04:00Z', description: 'Synthetic label', stage: 'registered' },
+      ] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-18T12:20:00Z'));
+    await service.syncPackage({ id: 'unread-then-notice', carrier: 'dpd-pl', tracking_number: '00000000000001', current_stage: 'registered',
+      [STORED_EVENT_IDENTITIES]: [] }, { trigger: 'scheduled' });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'in_transit' });
+    const stored = client.insertEvents.mock.calls.at(-1)![0].map((row: JsonObject) => ({ provider_event_id: row.provider_event_id,
+      occurred_at: row.occurred_at, stage: row.stage, description: row.description, location: row.location,
+      time: (row.raw_data as JsonObject).time,
+      stage_source: (row.raw_data as JsonObject).stage_source }));
+    expect(stored.map((row: JsonObject) => row.stage).sort()).toEqual(['in_transit', 'registered', 'registered']);
+    await service.syncPackage({ id: 'unread-then-notice', carrier: 'dpd-pl', tracking_number: '00000000000001', current_stage: 'in_transit',
+      carrier_data: client.updatePackage.mock.calls.at(-1)![1].carrier_data, [STORED_EVENT_IDENTITIES]: stored }, { trigger: 'scheduled' });
+    expect(client.updatePackage.mock.calls.at(-1)![1]).not.toMatchObject({ sync_status: 'error' });
+    expect(client.updatePackage.mock.calls.at(-1)![1].current_stage ?? 'in_transit').toBe('in_transit');
+  });
+
   it('keeps the progress of earlier scans when the newest scan has wording no rule reads', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
@@ -9056,6 +9081,14 @@ describe('tracking anomaly detection', () => {
     // Read at the label it still takes the progress back, and a provider's answer read past it is still a fallback.
     expect(detect(answer, 'registered')).toEqual(['progress_disappeared']);
     expect(detect({ ...answer, tracking_provider: 'Ship24' }, 'in_transit')).toEqual(['fallback_without_progress']);
+    // Nor does it at the label when its rows show that scan in transit before a label update, as the check saved
+    // them (`stageShown`); rows that never moved, the carrier withdrawing its scans, still take the progress back.
+    const rows = (...stages: string[]) => stages.map((stage, index) => ({ stage, occurred_at: `2026-08-31T0${index + 7}:00:00Z` }));
+    const read = (events: JsonObject[]) => detectSyncAnomalies({ carrier: 'jrt', current_stage: 'in_transit' },
+      { ...answer, events: [...answer.events!, { time: '2026-08-31T10:00:00Z', description: 'Synthetic label update', stage: 'registered' }] },
+      events, 'jrt', 'registered', new Date('2026-08-31T12:00:00Z'));
+    expect(read(rows('registered', 'in_transit', 'registered'))).toEqual([]);
+    expect(read(rows('registered', 'registered'))).toEqual(['progress_disappeared']);
   });
 
   it('tells a fallback that knows less from a source that contradicts the saved summary', () => {

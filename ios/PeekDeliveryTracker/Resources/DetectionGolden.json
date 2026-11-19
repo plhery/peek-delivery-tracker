@@ -1645,9 +1645,21 @@
   },
   {
     "input": "0030180030183005437999",
-    "carrier": "ctt-express",
-    "confidence": "high",
+    "carrier": "unknown",
+    "confidence": "low",
     "candidates": [
+      "tipsa",
+      "austrian-post",
+      "ctt-express",
+      "usps",
+      "estafeta"
+    ],
+    "preferred": [
+      "tipsa"
+    ],
+    "asked": [
+      "tipsa",
+      "austrian-post",
       "ctt-express"
     ]
   },
@@ -4101,6 +4113,26 @@
     "asked": [
       "swiss-post-cargo",
       "nz-post"
+    ]
+  },
+  {
+    "input": "0087650087651234567890",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tipsa",
+      "austrian-post",
+      "ctt-express",
+      "usps",
+      "estafeta"
+    ],
+    "preferred": [
+      "tipsa"
+    ],
+    "asked": [
+      "tipsa",
+      "austrian-post",
+      "ctt-express"
     ]
   },
   {
@@ -84333,6 +84365,17 @@
     ]
   },
   {
+    "input": "CV123456789012",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "speedaf"
+    ],
+    "asked": [
+      "speedaf"
+    ]
+  },
+  {
     "input": "CV176951644IN",
     "carrier": "india-post",
     "confidence": "high",
@@ -104108,6 +104151,17 @@
     "confidence": "high",
     "candidates": [
       "postnord"
+    ]
+  },
+  {
+    "input": "RR500142736CR",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
     ]
   },
   {

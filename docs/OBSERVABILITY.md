@@ -1401,6 +1401,11 @@ and `GRAFANA_METRICS_UID`.
 6. After the fix, run the carrier's tests and one controlled refresh, then check the new
    audit row and, for an outage, its `tracking_health_incident` recovery line.
 
+When the database answers slowly or with 504s (PostgREST's `PGRST003`, pool exhausted),
+look in `pg_stat_activity` for sessions waiting on a `Lock` behind one long query or migration.
+`extensions.pg_stat_statements`, which only the database owner reads, holds each normalized
+statement's calls and durations per role.
+
 FedEx network retries are measured by `fedex_network_attempt_total`: selected route,
 observed connection family, outcome and whether dated history was returned. With
 `FEDEX_DATACENTER_TRAWL_URL` set every `attempt="retry"` is `route="datacenter"`, without it

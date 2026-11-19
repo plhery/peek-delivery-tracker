@@ -4,7 +4,7 @@ description: Suis ton colis Temu avec le numéro du transporteur, pas le numéro
 slug: suivi-commande-temu
 picture: Une pile de petits colis qui sort de la soute d'un avion, une camionnette, et Pip qui les compte.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-19
 ---
 
 Pour suivre ta commande Temu, il te faut le numéro de suivi du transporteur, pas le numéro de commande Temu (PO et 20 chiffres). Colle-le dans [Peek](/) : il retrouve le transporteur parmi plus de 3 500, de La Poste (Colissimo) à bpost, puis suit le partenaire local si le premier transporteur en nomme un. Un numéro tout neuf peut ne rien afficher pendant un jour ou deux : l'étiquette existe avant que le transporteur ait le colis.
@@ -41,6 +41,7 @@ Faut-il payer quelque chose à la frontière ? Ça dépend de ton pays ([douane]
 Le numéro existe souvent avant que le transporteur ait le colis. Jusqu'au premier scan, Peek affiche l'un de ces messages :
 
 - **Étiquette créée** : le transporteur a l'étiquette, pas le colis (Colissimo écrit `Votre Colissimo va bientôt nous être confié ! Il est en cours de préparation chez votre expéditeur.`). Au bout d'un jour, Peek précise que l'expéditeur ne lui a pas encore remis le colis ; le suivi commencera à la remise.
+- **En attente de** et le nom du transporteur (« En attente de bpost ») : le colis est classé chez ce transporteur, d'après la forme du numéro ou parce que tu l'as choisi, mais il n'a pas encore enregistré le numéro ou n'a pas pu être joint. Peek continue de l'interroger. Si deux jours plus tard le transporteur ne connaît toujours pas le numéro et qu'aucune autre source ne répond pour lui, Peek te demande de vérifier le numéro, de choisir un autre transporteur ou de supprimer le colis.
 - **Probablement** et le nom d'un transporteur : le numéro a la forme des siens, mais ce transporteur ne le connaît pas encore. Peek continue de l'interroger et affiche le colis dès que le transporteur le connaît. Toujours rien au bout d'une semaine ? Vérifie le numéro auprès de Temu, ou choisis un autre transporteur.
 - **Transporteur pas encore trouvé** : aucun transporteur ne connaît le numéro. C'est normal un jour ou deux après la commande, et Peek continue de vérifier.
 
@@ -72,5 +73,5 @@ Peek affiche ce que publie le transporteur. Une réclamation ou un remboursement
 - [BIC : Container Identification Number (en anglais)](https://www.bic-code.org/identification-number/) – code du propriétaire, U pour les conteneurs de fret, numéro de série à six chiffres et chiffre de contrôle
 - [BIC : Registered BIC Code TEMU (en anglais)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer (en anglais)](https://www.textainer.com/) – location de conteneurs
-- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numéro de conteneur auquel aucun transporteur ne répond : où est le numéro de suivi, choisir le transporteur
+- [Peek : Routing (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – numéro de conteneur auquel aucun transporteur ne répond : où est le numéro de suivi, choisir le transporteur ; « En attente de » un transporteur et la demande de vérifier le numéro au bout de deux jours
 :::

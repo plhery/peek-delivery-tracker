@@ -4,7 +4,7 @@ description: «Aguarda entrada nos CTT», «Em trânsito», «Em entrega», «En
 slug: estados-da-encomenda-significado
 picture: Um percurso sinuoso com paragens marcadas com um visto (etiqueta, armazém, avião), uma carrinha na paragem atual, uma casa mais à frente e o Pip a correr.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-19
 ---
 
 Um estado de seguimento é a última leitura da transportadora resumida em poucas palavras, e a maioria não te pede nada. `Aguarda entrada nos CTT` quer dizer que os [CTT](carrier:ctt) ainda não têm a tua encomenda, `Em trânsito` que está algures entre duas leituras, e `Em entrega` que já vai no percurso de hoje. Só alguns precisam de ti: uma entrega não conseguida, uma encomenda à espera de ser levantada, taxas da alfândega para pagar e um «Entregue» sem nada à porta.
@@ -72,7 +72,7 @@ Normalmente, sim:
 
 Um estado que engana: na InPost, `Chegada ao centro local de distribuição` quer dizer que a encomenda está no centro mais próximo do destino, prestes a sair para distribuição ou a ser colocada num ponto InPost. Ainda não vai na carrinha.
 
-No [Peek](/), esta etapa chama-se «Em distribuição»: no dia da entrega, o seguimento é verificado até de 2 em 2 minutos, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e as notificações podem ficar só para o dia da entrega. Através de serviços de seguimento como o 17TRACK, é verificado de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França, nos Países Baixos e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane, a China Post e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos, a Cainiao, a J&T Express no Brasil e a Onlog Express). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
+No [Peek](/), esta etapa chama-se «Em distribuição»: no dia da entrega, o seguimento é verificado até de 2 em 2 minutos, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (enquanto tens a encomenda aberta ou as notificações ativas, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder), e as notificações podem ficar só para o dia da entrega. Através de serviços de seguimento como o 17TRACK, nesse dia é verificado até de 15 em 15 minutos, enquanto tens a encomenda aberta ou as notificações ativas, e algumas transportadoras fixam um intervalo maior (de hora a hora a GLS na Alemanha, na Áustria, na Suíça, em França, nos Países Baixos e na Polónia, a DHL eCommerce na Polónia, a Royal Mail, a Poste Italiane, a China Post e a Morning Global; de 30 em 30 minutos a PostNL, a USPS, a GOFO nos Estados Unidos, a Cainiao, a J&T Express no Brasil e a Onlog Express). Quando outra transportadora fica com a entrega, o Peek segue o ritmo da que entrega a encomenda.
 
 ## «Entrega não conseguida»: e agora?
 

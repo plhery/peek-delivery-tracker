@@ -4,7 +4,7 @@ description: Por qué el número de pedido de Temu no sirve para seguir el paque
 slug: seguimiento-pedido-temu
 picture: Una pila de paquetes pequeños saliendo de la bodega de un avión, una furgoneta y Pip contándolos.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-19
 ---
 
 Para seguir tu pedido de Temu necesitas el número de seguimiento de la empresa de reparto, no el número de pedido de Temu («PO» y 20 cifras). Pégalo en [Peek](/), que encuentra la empresa entre más de 3500, de CTT Express a Correos; si la primera empresa indica quién toma el relevo en España, Peek pasa a la nueva. Un número recién creado puede no mostrar nada durante uno o dos días: la etiqueta existe antes de que la empresa tenga el paquete.
@@ -41,6 +41,7 @@ Sobre la aduana: desde el 1 de julio de 2026, una compra de hasta 150 € que ll
 El número suele existir antes de que la empresa de reparto tenga el paquete. Hasta el primer escaneo, Peek muestra uno de estos avisos:
 
 - **Etiqueta creada**: la empresa tiene la etiqueta, no el paquete (CTT Express escribe `Pendiente de recepción en CTT Express`; Correos, `Pre-admisión`). Pasado un día, Peek te dice que el remitente aún no se lo ha entregado; el seguimiento empezará cuando lo entregue.
+- **Esperando a** y el nombre de la empresa («Esperando a Correos»): el paquete está guardado con esa empresa, por la forma del número o porque la elegiste tú, pero la empresa aún no ha registrado el número o no se ha podido conectar con ella. Peek sigue preguntándole. Si dos días después sigue sin reconocer el número y ninguna otra fuente responde por él, Peek te pide que revises el número, elijas otra empresa o elimines el paquete.
 - **Probablemente** y el nombre de una empresa: el número tiene la forma de los suyos, pero esa empresa aún no lo tiene. Peek sigue preguntándole y mostrará el paquete en cuanto lo tenga. ¿Sigue sin aparecer después de una semana? Comprueba el número con Temu o elige otra empresa.
 - **Transportista aún no encontrado**: ninguna empresa conoce el número. Es normal uno o dos días después del pedido, y Peek seguirá comprobando.
 
@@ -73,5 +74,5 @@ Peek muestra lo que publican las empresas de reparto. Las reclamaciones y los re
 - [BIC: Container Identification Number, en inglés](https://www.bic-code.org/identification-number/) – código del propietario, U para los contenedores de carga, número de serie de seis cifras y dígito de control
 - [BIC: Registered BIC Code TEMU, en inglés](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer, en inglés](https://www.textainer.com/) – alquiler de contenedores
-- [Peek: Routing, en inglés](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – número de contenedor por el que no responde ningún transportista: dónde está el número de seguimiento, elegir transportista
+- [Peek: Routing, en inglés](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – número de contenedor por el que no responde ningún transportista: dónde está el número de seguimiento, elegir transportista; «Esperando a» una empresa y la petición de revisar el número a los dos días
 :::

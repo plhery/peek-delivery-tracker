@@ -4,7 +4,7 @@ description: Ce que veut dire chaque étape du suivi d'un colis, de « pris en c
 slug: etapes-suivi-colis-signification
 picture: Une route sinueuse aux étapes cochées (étiquette, dépôt, avion), une camionnette à l'étape en cours, une maison plus loin et Pip qui file.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-19
 ---
 
 Un statut de suivi résume en quelques mots le dernier scan du transporteur, et la plupart ne te demandent rien. « En préparation chez l'expéditeur » veut dire que le transporteur n'a pas encore ton colis, « en cours d'acheminement » qu'il est quelque part entre deux scans, et « en cours de livraison » qu'il est dans la camionnette du jour. Seuls quelques-uns demandent une action de ta part : un avis de passage, un colis en instance, des frais de douane, ou un « livré » alors que rien n'est arrivé.
@@ -91,7 +91,7 @@ Deux statuts prêtent à confusion. Chez La Poste, `Votre colis est sur son site
 
 Toujours rien le soir ? Regarde si la date a bougé : chez [Chronopost](carrier:chronopost), `Livraison reportée de 24h` veut dire que l'agence garde le colis un jour sans tenter de le livrer, puis reprend la livraison d'elle-même.
 
-[Peek](/) vérifie un colis jusqu'à toutes les 10 minutes, et jusqu'à toutes les 2 minutes le jour de la livraison, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (une fois le colis remis au livreur, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond). Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan et jusqu'à toutes les 15 minutes le jour de la livraison. Quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France, aux Pays-Bas et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail, pour Poste Italiane, pour China Post et pour Morning Global ; toutes les 30 minutes pour PostNL, USPS, GOFO aux États-Unis, Cainiao, J&T Express au Brésil et Onlog Express). Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Tu peux régler ses notifications sur « Livraison seulement ».
+[Peek](/) vérifie un colis jusqu'à toutes les 10 minutes tant que tu l'as ouvert à l'écran, ou le jour de sa livraison si tes notifications sont activées, et toutes les heures le reste du temps. Le jour de la livraison, dans les mêmes conditions, c'est jusqu'à toutes les 2 minutes, ou toutes les 5 minutes quand la vérification doit ouvrir un navigateur (une fois le colis remis au livreur, dès 6 h, heure locale, ou, si le transporteur donne un créneau, à partir d'une demi-heure avant son début, et tant que c'est le suivi du transporteur qui répond). Quand ce sont des services de suivi comme 17TRACK qui répondent, il vérifie toutes les heures, toutes les 3 heures après une journée sans nouveau scan et jusqu'à toutes les 15 minutes le jour de la livraison, tant que tu as le colis ouvert à l'écran ou que tes notifications sont activées. Quelques transporteurs fixent un intervalle plus long (toutes les heures pour GLS en Allemagne, en Autriche, en Suisse, en France, aux Pays-Bas et en Pologne, pour DHL eCommerce en Pologne, pour Royal Mail, pour Poste Italiane, pour China Post et pour Morning Global ; toutes les 30 minutes pour PostNL, USPS, GOFO aux États-Unis, Cainiao, J&T Express au Brésil et Onlog Express). Quand un autre transporteur prend le relais pour la livraison, Peek suit le rythme de celui qui livre le colis. Tu peux régler ses notifications sur « Livraison seulement ».
 
 ## « Destinataire absent » ou « avis de passage » : que faire ?
 
@@ -169,5 +169,5 @@ Et ensuite ? Contacte l'expéditeur (le site marchand) pour [un nouvel envoi ou 
 - [Universal Parcel Scraper : UPS](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ups) – scans d'UPS que lit Peek : étiquette créée, Access Point, « Left at », « Exception »
 - [Universal Parcel Scraper : FedEx](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/fedex) – scans de FedEx que lit Peek : informations d'envoi transmises à FedEx
 - [La Poste suisse : FAQ Importation](https://www.post.ch/fr/solutions-commerciales/exportation-importation-et-dedouanement/importation/faq-importation-droits-de-douane-et-tva) – trois à quatre jours ouvrés
-- [Peek : page d'accueil](https://peektracker.com/fr) – « Vérifié toutes les 10 min » et « Toutes les 2 min le jour de la livraison »
+- [Peek : page d'accueil](https://peektracker.com/fr) – « Vérifié jusqu’à toutes les 10 min » et « Toutes les 2 min le jour de la livraison »
 :::

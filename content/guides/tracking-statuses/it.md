@@ -4,7 +4,7 @@ description: Cosa vuol dire ogni stato del tracking, da «etichetta creata» a �
 slug: stati-spedizione-cosa-significano
 picture: Un percorso tortuoso con tappe spuntate (etichetta, deposito, aereo), un furgone alla tappa attuale, una casa ancora davanti e Pip che corre.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-19
 ---
 
 Uno stato della spedizione è l'ultima scansione del corriere riassunta in poche parole, e quasi sempre non ti chiede niente. «Etichetta creata» vuol dire che il corriere il pacco non ce l'ha ancora, «in transito» che è da qualche parte tra due scansioni, «in consegna» che è sul furgone di oggi. Solo pochi stati ti chiedono di fare qualcosa: una mancata consegna, un pacco in giacenza da ritirare, qualcosa da pagare in dogana e un «consegnato» quando alla porta non c'è niente.
@@ -83,7 +83,7 @@ Di solito sì. Su Poste, `In consegna` vuol dire che il pacco è stato affidato 
 
 Due diciture ingannano. Su Poste, `In consegna` può restare anche dopo che il pacco è stato consegnato, o quando ti aspetta già in un ufficio postale o in un Punto Poste; se la consegna non riesce, torna `In transito`. E `L'invio è stato spartito per il recapito` della Posta vuol dire che un centro l'ha smistato verso la tua località: non è detto che sia già sul furgone. Quanto a «fuori per la consegna», che si legge su alcuni tracking tradotti dall'inglese, è semplicemente «in consegna».
 
-[Peek](/) ricontrolla un pacco in consegna fino a ogni 2 minuti, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e il resto del percorso fino a ogni 10 minuti. Quando rispondono servizi di tracciamento come 17TRACK, controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni e fino a ogni 15 minuti il giorno della consegna. Alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia, Paesi Bassi e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane, China Post e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti, Cainiao, J&T Express in Brasile e Onlog Express). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Puoi impostare le notifiche su «Solo la consegna».
+[Peek](/) ricontrolla un pacco in consegna fino a ogni 2 minuti, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, solo mentre lo hai aperto sullo schermo o hai le notifiche attive, dalle 6.00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso), e il resto del percorso fino a ogni 10 minuti mentre lo hai aperto sullo schermo o, il giorno in cui è atteso, con le notifiche attive, altrimenti ogni ora. Quando rispondono servizi di tracciamento come 17TRACK, controlla ogni ora, ogni 3 ore dopo un giorno senza nuove scansioni e fino a ogni 15 minuti il giorno della consegna, solo mentre lo hai aperto sullo schermo o hai le notifiche attive. Alcuni corrieri hanno un intervallo più lungo (ogni ora GLS in Germania, Austria, Svizzera, Francia, Paesi Bassi e Polonia, DHL eCommerce in Polonia, Royal Mail, Poste Italiane, China Post e Morning Global; ogni 30 minuti PostNL, USPS, GOFO negli Stati Uniti, Cainiao, J&T Express in Brasile e Onlog Express). Se la consegna passa a un altro corriere, Peek segue il ritmo di quello che consegna il pacco. Puoi impostare le notifiche su «Solo la consegna».
 
 ## Tentativo di consegna fallito o pacco in giacenza: cosa fare?
 
@@ -169,5 +169,5 @@ A quel punto decide il venditore: chiedigli di [rispedirtelo o di rimborsarti](g
 - [Planzer: Tracking](https://tracking.app.planzer.ch/) – `Shipped` nel tracking inglese di Planzer e Quickpac
 - [DHL: What does my shipment status mean?](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – stati fermi per ore o giorni
 - [DHL: International shipment status](https://www.dhl.de/en/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – dogana in alcuni giorni lavorativi, tracking del corriere di destinazione
-- [Peek: home page](https://peektracker.com/it) – «Controllato ogni 10 min» e «Ogni 2 min il giorno di consegna»
+- [Peek: home page](https://peektracker.com/it) – «Controllato fino a ogni 10 min» e «Ogni 2 min il giorno di consegna»
 :::

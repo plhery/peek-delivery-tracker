@@ -4,7 +4,7 @@ description: Track a Temu order with the carrier's tracking number, not the PO n
 slug: temu-order-tracking
 picture: A stack of small parcels leaving a plane's hold, a van, and Pip counting them.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-19
 ---
 
 To track a Temu order, you need the carrier's tracking number, not Temu's order number (PO and 20 digits). Paste it into [Peek](/): it works out the carrier among more than 3,500, from USPS to Royal Mail and Evri, then follows the local partner if the first carrier names one. A new number can show nothing for a day or two: the label exists before the carrier has the parcel.
@@ -35,15 +35,16 @@ The tracking number usually tells: the checker above names the carrier its shape
 | 16 letters and digits starting with `H` or `T` | [Evri](carrier:evri) |
 | 2 letters, 9 digits, `IE` | [An Post](carrier:an-post) |
 
-An order from a UK seller on Temu can come with Evri, which ships for Temu sellers. Who delivers in Canada, Australia and elsewhere: the country table of [tracking a parcel from China](guide:tracking-from-china). Other shapes: [tracking number formats](guide:tracking-number-formats).
+An order from a UK seller on Temu can come with Evri, which ships for Temu sellers; Peek checks an Evri number with both Evri's UK and international services. A `CN` number reads as China Post's in Canada and Australia too. Who delivers in Canada, Australia and elsewhere: the country table of [tracking a parcel from China](guide:tracking-from-china). Other shapes: [tracking number formats](guide:tracking-number-formats).
 
-Whether you owe anything at the border depends on your country ([customs](guide:customs)). In Great Britain, on goods worth £135 or less, the seller includes VAT in the price you pay and no duty is due, says GOV.UK. In Ireland, since 1 July 2026, online orders from outside the EU worth €150 or less pay €3 duty per item, meaning per kind of product, and since 1 November 2026, Revenue says, a €2 EU handling fee per item is added. If the checkout showed VAT and duty, that's the final price; if not, the carrier collects them first.
+Whether you owe anything at the border depends on your country ([customs](guide:customs)). In Great Britain, on goods worth £135 or less, the seller includes VAT in the price you pay and no duty is due, says GOV.UK; above £135, you pay VAT and any duty to the delivery company. In Ireland, since 1 July 2026, online orders from outside the EU worth €150 or less pay €3 duty per item, meaning per kind of product (two identical items count as one), and since 1 November 2026, Revenue says, a €2 EU handling fee per item is added. If the checkout showed VAT and duty, that's the final price; if not, the carrier collects them first. In the US, CBP's e-commerce FAQs (last modified 6 November 2026) say the duty-free exemption for goods worth $800 or less is suspended for every country, by post too, so duty can be due.
 
 ## Why does my Temu tracking number show nothing?
 
 The number often exists before the carrier has the parcel. Until its first scan, Peek shows one of these:
 
 - **Label created**: the carrier has the label, not the parcel (USPS writes `Shipping Label Created`, Royal Mail `Sender preparing item`). After a day, Peek says the sender hasn't handed it over yet; tracking starts when they do.
+- **Waiting for** and the carrier's name: the parcel is filed under that carrier, by the number's shape or your choice, but the carrier hasn't listed the number yet or couldn't be reached. If it still doesn't know the number two days later and nothing else has answered, Peek asks you to check it, choose another carrier or delete the parcel.
 - **Probably** and a carrier's name: the number has that carrier's shape, but the carrier doesn't list it yet. Peek keeps asking and shows the parcel once it does. Still nothing after a week? Check the number with Temu, or choose another carrier.
 - **Carrier not found yet**: no carrier knows the number. That's normal for a day or two after ordering, and Peek keeps checking.
 
@@ -73,12 +74,13 @@ Peek shows what the carrier publishes. A claim or a refund stays in your Temu ac
 - [Temu Ireland: Shipping info](https://www.temu.com/ie/shipping-info.html) – Irish options, no number of days
 - [Temu: What is the delivery time for an item?](https://www.temu.com/support/c3/what-is-the-delivery-time-for-an-item-how-long-will-it-take-to-arrive-f-49-s-203.html) – delivery time on the product page and in your order
 - [Evri: Temu integration](https://www.evri.com/our-services/temu-integration) – Temu sellers import their orders and ship them with Evri
-- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – £135 or less: VAT in the price, no duty
-- [Revenue: Removal of the de minimis relief](https://www.revenue.ie/en/customs/individuals/relief-low-value-consignments/index.aspx) – €3 per item
+- [GOV.UK: Goods sent from abroad, tax and duty](https://www.gov.uk/goods-sent-from-abroad/tax-and-duty) – £135 or less: VAT in the price, no duty; above: VAT and duty to the delivery company (read 19 November 2026)
+- [Revenue: Removal of the de minimis relief](https://www.revenue.ie/en/customs/individuals/relief-low-value-consignments/index.aspx) – €3 per distinct item; identical items count once
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 fee, checkout price
+- [CBP: E-commerce FAQs](https://www.cbp.gov/trade/basic-import-export/e-commerce/faqs) – $800 de minimis suspended, all countries, post included (read 19 November 2026)
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, first statuses, what Peek checks
 - [BIC: Container Identification Number](https://www.bic-code.org/identification-number/) – owner code, U for freight containers, six-digit serial number and check digit
 - [BIC: Registered BIC Code TEMU](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management
 - [Textainer](https://www.textainer.com/) – container leasing
-- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – a shipping container's number no carrier answered for: where the tracking number is, choosing the carrier
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – a shipping container's number no carrier answered for: where the tracking number is, choosing the carrier; "Waiting for" a carrier, the two-day request
 :::

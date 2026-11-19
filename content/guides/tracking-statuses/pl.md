@@ -4,7 +4,7 @@ description: „Przesyłka utworzona” (np. w InPost) znaczy, że przewoźnik n
 slug: statusy-przesylek-co-oznaczaja
 picture: Kręta trasa z odhaczonymi przystankami (etykieta z kodem kreskowym, magazyn, samolot), furgonetka na obecnym przystanku, dom jeszcze przed nią i pędzący Pip.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-19
 ---
 
 Status przesyłki to ostatni skan przewoźnika w kilku słowach i zwykle niczego od Ciebie nie wymaga. „Przesyłka utworzona” albo „przygotowana przez nadawcę” znaczy, że przewoźnik nie ma jeszcze Twojej paczki, „w trasie” albo „w tranzycie”, że jest gdzieś między dwoma skanami, a „wydana do doręczenia”, że jedzie już do Ciebie. Działać musisz tylko w kilku sytuacjach: po nieudanej próbie doręczenia, gdy paczka czeka w automacie albo punkcie, gdy trzeba zapłacić należności celne i gdy status brzmi „doręczona”, a paczki nie ma.
@@ -74,7 +74,7 @@ Zwykle tak, ale przewoźnicy ujmują to różnie:
 
 Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
 
-[Peek](/) sprawdza paczkę nawet co 2 minuty w dniu doręczenia, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+[Peek](/) sprawdza paczkę nawet co 2 minuty w dniu doręczenia, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy jest już wydana do doręczenia, a Ty masz ją otwartą albo włączone powiadomienia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza tego dnia nawet co 15 minut, gdy masz paczkę otwartą albo włączone powiadomienia, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 ## Awizo i nieudana próba doręczenia: co teraz?
 

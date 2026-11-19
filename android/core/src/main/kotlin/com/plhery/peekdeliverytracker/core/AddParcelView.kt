@@ -65,23 +65,23 @@ object AddParcelView {
 }
 
 /**
- * The postcode a field was filled with from those given before. While the field still holds it, it can be forgotten;
- * then no other fills the field until its details are prepared again. A value, as the Swift struct is: each change
- * gives a new one.
+ * The postcode a field was filled with from those given before, and the country it was given from where the field
+ * reads it. While the field still holds it, it can be forgotten; then no other fills the field until its details are
+ * prepared again. A value, as the Swift struct is: each change gives a new one.
  */
-data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = false) {
+data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = false, val country: String? = null) {
     /** What may fill the field: nothing just after a postcode was forgotten in it. */
-    fun offering(suggestion: String?): String? = if (forgotten) null else suggestion
+    fun <Suggestion> offering(suggestion: Suggestion?): Suggestion? = if (forgotten) null else suggestion
 
-    /** Filled with `suggestion`, which the field takes as it is. */
-    fun fill(suggestion: String): PostcodeFill = copy(postcode = suggestion)
+    /** Filled with `suggestion`, which the field takes as it is, given from `country`. */
+    fun fill(suggestion: String, country: String? = null): PostcodeFill = copy(postcode = suggestion, country = country)
 
     fun holds(field: String): Boolean = field.isNotEmpty() && postcode.equalsCanonically(field)
 
     /** The postcode to forget, when the field still holds it, and the fill once it is forgotten. */
     fun forget(field: String): Pair<String, PostcodeFill>? {
         val postcode = postcode?.takeIf { holds(field) } ?: return null
-        return postcode to copy(postcode = null, forgotten = true)
+        return postcode to copy(postcode = null, forgotten = true, country = null)
     }
 
     /** Its carrier's details again: what was given before may fill the field again. */
@@ -92,11 +92,17 @@ data class PostcodeFill(val postcode: String? = null, val forgotten: Boolean = f
         fun kept(fills: Map<CarrierId, PostcodeFill>): List<String> =
             fills.flatMap { (carrier, fill) -> listOf(carrier.rawValue, fill.postcode ?: NONE, if (fill.forgotten) "1" else "") }
 
-        /** The fills [kept] kept. */
-        fun from(kept: List<String>): Map<CarrierId, PostcodeFill> =
-            kept.chunked(3).filter { it.size == 3 }.associate { (carrier, postcode, forgotten) ->
-                CarrierId(carrier) to PostcodeFill(postcode.takeIf { it != NONE }, forgotten.isNotEmpty())
+        /** Each carrier and the country its field was filled from in turn, for the fills that have one. */
+        fun keptCountries(fills: Map<CarrierId, PostcodeFill>): List<String> =
+            fills.mapNotNull { (carrier, fill) -> fill.country?.let { listOf(carrier.rawValue, it) } }.flatten()
+
+        /** The fills [kept] kept, with the countries [keptCountries] kept. */
+        fun from(kept: List<String>, keptCountries: List<String> = emptyList()): Map<CarrierId, PostcodeFill> {
+            val countries = keptCountries.chunked(2).filter { it.size == 2 }.associate { (carrier, country) -> carrier to country }
+            return kept.chunked(3).filter { it.size == 3 }.associate { (carrier, postcode, forgotten) ->
+                CarrierId(carrier) to PostcodeFill(postcode.takeIf { it != NONE }, forgotten.isNotEmpty(), countries[carrier])
             }
+        }
 
         private const val NONE = "\u0000"
     }
@@ -177,6 +183,8 @@ data class ParcelAddition(
     val deliveryPostcode: String = "",
     /** The delivery country chosen beside the postcode for the carrier in play ([CarrierPostcodes] keeps each carrier's). */
     val chosenPostcodeCountry: String? = null,
+    /** The country the postcode in the field was given from, while it holds the one it was filled with ([PostcodeFill]). */
+    val filledPostcodeCountry: String? = null,
     /** The last 4 digits of a phone, for a carrier that shows a parcel only with them; sent only while its field shows. */
     val phoneDigits: String = "",
     val demo: Boolean = false,
@@ -413,13 +421,16 @@ data class ParcelAddition(
     val carrierPostcodeRequirement: CarrierRequirement?
         get() = catalog.requirements(resolvedCarrier, parsed.trackingNumber).firstOrNull { it.field == CarrierRequirement.Field.DpdPostcode }
 
-    /** The country the postcode is from: the one chosen while this field takes it, otherwise where the field starts. */
+    /**
+     * The country the postcode is from: the one chosen while this field takes it, otherwise the one the postcode it was
+     * filled with was given from while it holds it, otherwise where the field starts.
+     */
     val postcodeCountry: String?
         get() {
             val requirement = carrierPostcodeRequirement ?: return null
-            val chosen = chosenPostcodeCountry
-            if (chosen != null && chosen in catalog.postcodeCountries(resolvedCarrier, requirement)) return chosen
-            return catalog.initialPostcodeCountry(resolvedCarrier, requirement, region = region)
+            val takes = catalog.postcodeCountries(resolvedCarrier, requirement)
+            return chosenPostcodeCountry?.takeIf { it in takes } ?: filledPostcodeCountry?.takeIf { it in takes }
+                ?: catalog.initialPostcodeCountry(resolvedCarrier, requirement, region = region)
         }
 
     /** The postcode's country, offered beside the field when it takes more than one. */
@@ -508,23 +519,40 @@ data class ParcelAddition(
     fun previousPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): String? =
         requirement.suggestedPostcode(resolvedCarrier, given)
 
-    /** The postcode offered under the optional field while it is empty, filled in only at a tap. */
-    fun offeredPostcode(given: List<GivenPostcode>): String? =
-        postcodeRequirement?.offeredPostcode(resolvedCarrier, deliveryPostcode, given)
+    /**
+     * The postcode offered under the optional field while it is empty, filled in only at a tap, with the country it was
+     * given from where the field reads it.
+     */
+    fun offeredPostcode(given: List<GivenPostcode>): GivenPostcode? {
+        val requirement = carrierPostcodeRequirement?.takeIf { it.isOptional && deliveryPostcode.isEmpty() } ?: return null
+        return rememberedPostcode(requirement, given)
+    }
+
+    /** The postcode given before that fits the field, from the country chosen beside it once one is. */
+    private fun rememberedPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): GivenPostcode? {
+        val chosen = chosenPostcodeCountry?.takeIf { it in catalog.postcodeCountries(resolvedCarrier, requirement) }
+        return catalog.rememberedPostcode(resolvedCarrier, requirement, given, chosen)
+    }
 
     /**
-     * The postcode field holding what `postcodes` keeps for the carrier in play, beside the country chosen for it, and
-     * nothing given for another.
+     * The postcode field holding what `postcodes` keeps for the carrier in play, beside the country chosen for it, or
+     * the one it was filled from while it holds that fill (`fills`), and nothing given for another.
      */
-    fun withPostcode(postcodes: CarrierPostcodes): ParcelAddition =
-        copy(deliveryPostcode = postcodes[resolvedCarrier], chosenPostcodeCountry = postcodes.country(resolvedCarrier))
+    fun withPostcode(postcodes: CarrierPostcodes, fills: Map<CarrierId, PostcodeFill> = emptyMap()): ParcelAddition {
+        val field = postcodes[resolvedCarrier]
+        return copy(
+            deliveryPostcode = field,
+            chosenPostcodeCountry = postcodes.country(resolvedCarrier),
+            filledPostcodeCountry = fills[resolvedCarrier]?.takeIf { it.holds(field) }?.country,
+        )
+    }
 
     /**
      * `CarrierPostcodes.prepare(_:requirement:among:)`, as the carrier's details come up: its field keeps what was
-     * given for it earlier in Add; otherwise a required one starts from the last postcode given that fits, and an
-     * optional one stays empty, that postcode only offered. `fills` holds what each carrier's field was filled with
-     * (`CarrierPostcodes.fills`): what was given before may fill this one again, and only a field filled from memory,
-     * never one typed by hand, can forget it.
+     * given for it earlier in Add; otherwise a required one starts from the last postcode given that fits, with its
+     * country, and an optional one stays empty, that postcode only offered. `fills` holds what each carrier's field was
+     * filled with (`CarrierPostcodes.fills`): what was given before may fill this one again, and only a field filled
+     * from memory, never one typed by hand, can forget it.
      */
     fun preparePostcode(
         postcodes: CarrierPostcodes,
@@ -534,10 +562,10 @@ data class ParcelAddition(
         val carrier = resolvedCarrier
         val own = fills[carrier]?.prepare()
         val prepared = if (own != null) fills + (carrier to own) else fills
-        val requirement = postcodeRequirement ?: return postcodes to prepared
+        val requirement = carrierPostcodeRequirement?.takeIf { !it.isOptional } ?: return postcodes to prepared
         if (carrier in postcodes) return postcodes to prepared
-        val start = requirement.startingPostcode(carrier, given) ?: return postcodes to prepared
-        return postcodes.with(carrier, start) to prepared + (carrier to (own ?: PostcodeFill()).fill(start))
+        val start = rememberedPostcode(requirement, given) ?: return postcodes to prepared
+        return postcodes.with(carrier, start.postcode) to prepared + (carrier to (own ?: PostcodeFill()).fill(start.postcode, start.country))
     }
 
     /**

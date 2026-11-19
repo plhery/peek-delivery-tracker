@@ -495,25 +495,27 @@ data class CarrierChange(
     /** The country sent with the postcode: none without one, nor for the carrier's home country. */
     val sentPostcodeCountry: String? get() = catalog.sentPostcodeCountry(postcodeCountry, normalizedPostcode, selectedCarrier)
 
-    /** The postcode offered under the optional field while it is empty, as in Add, filled in only at a tap. */
-    fun offeredPostcode(given: List<GivenPostcode>): String? =
-        postcodeRequirement?.offeredPostcode(selectedCarrier, deliveryPostcode, given)
+    /**
+     * The postcode offered under the optional field while it is empty, as in Add, filled in only at a tap, with the
+     * country it was given from where the field reads it.
+     */
+    fun offeredPostcode(given: List<GivenPostcode>): GivenPostcode? {
+        val requirement = carrierPostcodeRequirement?.takeIf { it.isOptional && deliveryPostcode.isEmpty() } ?: return null
+        return rememberedPostcode(requirement, given)
+    }
 
-    /** An empty required postcode field starting, as in Add, from the last postcode given that fits. */
+    /** The postcode given before that fits the field, from the country chosen beside it once one is. */
+    private fun rememberedPostcode(requirement: CarrierRequirement, given: List<GivenPostcode>): GivenPostcode? {
+        val chosen = chosenPostcodeCountry?.takeIf { it in catalog.postcodeCountries(selectedCarrier, requirement) }
+        return catalog.rememberedPostcode(selectedCarrier, requirement, given, chosen)
+    }
+
+    /** An empty required postcode field starting, as in Add, from the last postcode given that fits, with its country. */
     private fun prefilled(given: List<GivenPostcode>): CarrierChange {
+        val requirement = carrierPostcodeRequirement?.takeIf { !it.isOptional } ?: return this
         if (deliveryPostcode.isNotEmpty()) return this
-        if (offeredPostcodeCountry != null) {
-            val requirement = carrierPostcodeRequirement ?: return this
-            val countries = catalog.postcodeCountries(selectedCarrier, requirement)
-            for (candidate in given.sortedBy { it.carrier != selectedCarrier }) {
-                val country = candidate.country?.takeIf { it in countries } ?: continue
-                val change = copy(chosenPostcodeCountry = country)
-                val value = change.postcodeRequirement?.startingPostcode(selectedCarrier, listOf(candidate)) ?: continue
-                return change.copy(deliveryPostcode = value)
-            }
-            return this
-        }
-        return postcodeRequirement?.startingPostcode(selectedCarrier, given)?.let { copy(deliveryPostcode = it) } ?: this
+        val start = rememberedPostcode(requirement, given) ?: return this
+        return copy(deliveryPostcode = start.postcode, chosenPostcodeCountry = start.country ?: chosenPostcodeCountry)
     }
 
     /**

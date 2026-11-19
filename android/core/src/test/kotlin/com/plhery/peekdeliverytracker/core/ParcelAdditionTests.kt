@@ -372,6 +372,36 @@ class ParcelAdditionTests {
         assertNull(typedFills[CarrierId("packs")])
     }
 
+    /**
+     * A postcode given before brings the country it was given from to a field that reads it: a Belgian one fills Mondial
+     * Relay's field as a Belgian one on a French phone, while the field holds it, and once the reader names a country,
+     * only a postcode given from there fills the field.
+     */
+    @Test
+    fun aPostcodeGivenBeforeBringsTheCountryItWasGivenFrom() {
+        val relay = addition("76434219", region = "FR").copy(carrierOverride = CarrierId.MondialRelay)
+        val postnl = addition("3SABCD826405193", region = "FR")
+        val belgian = listOf(GivenPostcode(CarrierId.SpringGDS, "1000", "BE"))
+        val (filled, fills) = relay.preparePostcode(CarrierPostcodes(), emptyMap(), belgian)
+        val shown = relay.withPostcode(filled, fills)
+        assertEquals("1000", shown.deliveryPostcode)
+        assertEquals("BE", shown.postcodeCountry)
+        assertEquals("BE", shown.sentPostcodeCountry)
+        // Typed over, the field starts where it did again.
+        assertEquals("FR", relay.withPostcode(filled.with(CarrierId.MondialRelay, "75001"), fills).postcodeCountry)
+
+        // Offered to an optional field, it brings its country.
+        assertEquals(belgian.single(), postnl.withPostcode(CarrierPostcodes()).offeredPostcode(belgian))
+
+        // Once the reader names a country, only a postcode given from it fills the field.
+        val chosen = CarrierPostcodes().withCountry(CarrierId.MondialRelay, "LU")
+        val (none, _) = relay.withPostcode(chosen).preparePostcode(chosen, emptyMap(), belgian)
+        assertFalse(CarrierId.MondialRelay in none)
+        val luxembourg = belgian + GivenPostcode(CarrierId.MondialRelay, "1009", "LU")
+        val (fromThere, _) = relay.withPostcode(chosen).preparePostcode(chosen, emptyMap(), luxembourg)
+        assertEquals("1009", fromThere[CarrierId.MondialRelay])
+    }
+
     @Test
     fun aForgottenPostcodeLeavesEveryCarriersFieldAndThePostcodesAreKeptAsText() {
         val postcodes = CarrierPostcodes()
@@ -385,8 +415,11 @@ class ParcelAdditionTests {
         assertEquals(emptied, CarrierPostcodes.from(emptied.kept))
         assertEquals(CarrierPostcodes(), CarrierPostcodes.from(emptyList()))
         // What each carrier's field was filled with is kept as text too.
-        val fills = mapOf(CarrierId("packs") to PostcodeFill("1234 AB"), CarrierId.SpringGDS to PostcodeFill(forgotten = true))
-        assertEquals(fills, PostcodeFill.from(PostcodeFill.kept(fills)))
+        val fills = mapOf(
+            CarrierId("packs") to PostcodeFill("1234 AB"), CarrierId.SpringGDS to PostcodeFill(forgotten = true),
+            CarrierId.MondialRelay to PostcodeFill("1000", country = "BE"),
+        )
+        assertEquals(fills, PostcodeFill.from(PostcodeFill.kept(fills), PostcodeFill.keptCountries(fills)))
         assertEquals(emptyMap<CarrierId, PostcodeFill>(), PostcodeFill.from(emptyList()))
     }
 

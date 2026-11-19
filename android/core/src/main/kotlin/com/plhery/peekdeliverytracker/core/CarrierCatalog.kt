@@ -348,6 +348,32 @@ class CarrierCatalog private constructor(
     }
 
     /**
+     * The postcode given before to suggest for `carrier`'s field (`requirement`, before a country shapes it): the
+     * last one given to the same carrier, otherwise the last one given to any carrier that the field takes, as it
+     * takes it. Most parcels go to the same address. A field that reads the postcode's country takes one only from
+     * a country it lists, the one `chosen` beside it once one is, in that country's shape, and the postcode brings
+     * its country. One kept without its country was given from its carrier's home, for which none is sent.
+     */
+    fun rememberedPostcode(
+        carrier: CarrierId,
+        requirement: CarrierRequirement,
+        given: List<GivenPostcode>,
+        chosen: String? = null,
+    ): GivenPostcode? {
+        val readsCountry = requirement.readsCountry == true
+        val countries = postcodeCountries(carrier, requirement)
+        val fitting = given.mapNotNull { entry ->
+            val country = if (readsCountry) entry.country?.uppercase() ?: homeCountry(entry.carrier) else homeCountry(carrier)
+            if (readsCountry && (country == null || country !in countries || (chosen != null && chosen != country))) {
+                return@mapNotNull null
+            }
+            postcodeRequirement(requirement, carrier, country).suggestedPostcode(carrier, listOf(entry))
+                ?.let { GivenPostcode(entry.carrier, it, if (readsCountry) country else null) }
+        }
+        return fitting.firstOrNull { it.carrier == carrier } ?: fitting.firstOrNull()
+    }
+
+    /**
      * The country sent with a postcode: none without one, nor for the carrier's home country, so a postcode
      * from there goes as it always has.
      */

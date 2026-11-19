@@ -422,7 +422,10 @@ private fun ChangeCarrierForm(
                             val offered = change.offeredPostcode(state.source.givenPostcodes)
                             if (offered != null) {
                                 FormRowFrame(Modifier) {
-                                    UsePostcodeButton(offered, CHANGE_CARRIER_USE_POSTCODE) { form.deliveryPostcode = offered }
+                                    UsePostcodeButton(offered.postcode, CHANGE_CARRIER_USE_POSTCODE) {
+                                        form.deliveryPostcode = offered.postcode
+                                        offered.country?.let { form.chosenPostcodeCountry = it }
+                                    }
                                 }
                             }
                         }

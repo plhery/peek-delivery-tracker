@@ -174,7 +174,7 @@ class CarrierChangeTests {
         // DPD for another parcel: optional, so only offered, the last given that fits, and not sent.
         val relay = start(parcel(CarrierId.MondialRelay, number = "76434219")).choosing(CarrierId.Dpd, given)
         assertEquals("", relay.deliveryPostcode)
-        assertEquals("1234 AB", relay.offeredPostcode(given))
+        assertEquals("1234 AB", relay.offeredPostcode(given)?.postcode)
         assertNull(relay.sentPostcode)
         assertNull(relay.copy(deliveryPostcode = "8000").offeredPostcode(given))
 
@@ -195,9 +195,12 @@ class CarrierChangeTests {
             listOf(GivenPostcode(CarrierId.MondialRelay, "1000", "BE")))
         assertEquals("1000", known.sentPostcode)
         assertEquals("BE", known.sentPostcodeCountry)
-        val unknown = CarrierChange.start(source, CarrierId.MondialRelay, catalog, "FR",
+        // One kept without its country was given from its carrier's home, for which none is sent: it goes so again.
+        val home = CarrierChange.start(source, CarrierId.MondialRelay, catalog, "BE",
             listOf(GivenPostcode(CarrierId.MondialRelay, "1000")))
-        assertNull(unknown.sentPostcode)
+        assertEquals("1000", home.sentPostcode)
+        assertEquals("FR", home.postcodeCountry)
+        assertNull(home.sentPostcodeCountry)
         assertNotNull(change.carrierPostcodeRequirement)
         assertEquals("FR", change.initialPostcodeCountry)
         assertEquals("FR", change.offeredPostcodeCountry)

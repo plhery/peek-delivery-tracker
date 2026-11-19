@@ -302,7 +302,7 @@ internal class AddForm(
     fun addition(demo: Boolean, catalog: CarrierCatalog, region: String?) = ParcelAddition(
         trackingInput, pick, carrierOverride, asTyped, recognition, refusedQuestion, verifiedCarrier, trackingUrl,
         phoneDigits = phoneDigits, demo = demo, catalog = catalog, region = region,
-    ).withPostcode(postcodes)
+    ).withPostcode(postcodes, postcodeFills)
 
     /** Takes the text, the number chosen, the carrier chosen and recognition from `addition`. */
     fun take(addition: ParcelAddition) {
@@ -333,7 +333,7 @@ internal class AddForm(
                     it.pasteFailed, it.preparedFor?.rawValue ?: NONE, recognition.failedNumber ?: NONE,
                     recognition.answer?.let(ParcelAddition::keptAnswer) ?: NONE, it.verifiedCarrier?.let(ParcelAddition::keptAnswer) ?: NONE,
                     it.refusedQuestion?.let(ParcelAddition::keptQuestion) ?: NONE, it.lookedUp ?: NONE, it.showingScanner,
-                    it.phoneDigits, it.digitsNumber ?: NONE,
+                    it.phoneDigits, it.digitsNumber ?: NONE, PostcodeFill.keptCountries(it.postcodeFills),
                 )
             },
             restore = {
@@ -345,7 +345,7 @@ internal class AddForm(
                     CarrierRecognition(kept(5), kept(16)?.let(ParcelAddition::answer), kept(15)),
                     kept(18)?.let(ParcelAddition::question), kept(17)?.let(ParcelAddition::answer), kept(19),
                     it[6] as String, CarrierPostcodes.from(texts(7), texts(8)),
-                    PostcodeFill.from(texts(9)), it[10] as Int,
+                    PostcodeFill.from(texts(9), if (it.size > 23) texts(23) else emptyList()), it[10] as Int,
                     it[11] as Boolean, it[12] as Boolean, it[13] as Boolean, kept(14)?.let(::CarrierId), it[20] as Boolean,
                     it[21] as String, kept(22),
                 )
@@ -1385,9 +1385,11 @@ private fun RequiredDetails(state: DeliveriesState, addition: ParcelAddition, fo
                 val fill = form.postcodeFills[carrier] ?: PostcodeFill()
                 val suggestion = fill.offering(addition.offeredPostcode(state.source.givenPostcodes))
                 if (suggestion != null) {
-                    UsePostcodeButton(suggestion, ADD_USE_POSTCODE) {
-                        form.postcodeFills += carrier to fill.fill(suggestion)
-                        form.postcodes = form.postcodes.with(carrier, suggestion)
+                    // It brings the country it was given from, chosen beside it as the reader took it.
+                    UsePostcodeButton(suggestion.postcode, ADD_USE_POSTCODE) {
+                        form.postcodeFills += carrier to fill.fill(suggestion.postcode, suggestion.country)
+                        val postcodes = form.postcodes.with(carrier, suggestion.postcode)
+                        form.postcodes = suggestion.country?.let { postcodes.withCountry(carrier, it) } ?: postcodes
                     }
                 }
                 // Without an account every suggestion is this phone's own, so it can forget one this field was filled

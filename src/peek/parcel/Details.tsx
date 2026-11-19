@@ -118,8 +118,8 @@ export interface Note {
   quoted?: boolean;
   /** A card on paper for what the reader should know; a quiet one for what Peek is doing about it. */
   paper?: boolean;
-  /** A page of the carrier's to go on to, opened in a new tab. */
-  link?: { label: string; href: string };
+  /** A page of the carrier's to go on to, opened in a new tab, and what a click counts as. */
+  link?: { label: string; href: string; action?: string };
 }
 
 /**
@@ -145,7 +145,7 @@ export function NoteCard({ note }: { note: Note }) {
       {note.title && <strong>{note.title}</strong>}
       {note.quoted ? <blockquote>{note.body}</blockquote> : <p>{note.body}</p>}
       {note.link && <a className="peekp-note__link" href={note.link.href} target="_blank" rel="noopener noreferrer"
-        onClick={() => trackAction('parcel-carrier-help')}><span>{note.link.label}</span><Icon name="arrow" /></a>}
+        onClick={() => trackAction(note.link?.action ?? 'parcel-carrier-help')}><span>{note.link.label}</span><Icon name="arrow" /></a>}
     </div>
   </div>;
 }
@@ -153,15 +153,18 @@ export function NoteCard({ note }: { note: Note }) {
 /**
  * What needs saying beside the card: why nothing moves, what the carrier
  * said, why the latest update is missing. Each says what happened and what
- * Peek keeps doing; the carrier's own page is linked once, below the number.
+ * Peek keeps doing; the carrier's own page is linked below the number, and
+ * again in the note of a carrier whose site is down.
  */
-export function Notes({ view, stage, flag, trouble, carrier }: {
+export function Notes({ view, stage, flag, trouble, carrier, outage }: {
   view: ParcelLinkView;
   stage: Stage | null;
   flag: ParcelAttention | null;
   /** Why the page's own read failed, when it did and the device is online. */
   trouble: ParcelLinkError | null;
   carrier: CarrierInfo;
+  /** The site of the carrier tracking the parcel is down, as the page shows it. */
+  outage?: ParcelWithEvents['carrierOutage'];
 }) {
   const { t, locale } = useI18n();
   const { parcel } = view;
@@ -177,6 +180,11 @@ export function Notes({ view, stage, flag, trouble, carrier }: {
       id: 'manual', icon: <Glyph name="info" />,
       body: t((expired ? 'add.amazonHistoryExpired' : carrierTrackingHintKey(active.id)) as MessageKey, { carrier: carrier.name }),
     });
+  } else if (outage) {
+    // Down for every parcel, not this one's fault: the carrier's own page shows the reader so.
+    const name = carrierInfo(outage.carrier, locale).name;
+    notes.push({ id: 'outage', icon: <Icon name="refresh" />, body: t('parcel.carrierOutage', { carrier: name }),
+      ...outage.trackingUrl ? { link: { label: t('parcel.carrierOutageLink', { carrier: name }), href: outage.trackingUrl, action: 'parcel-carrier-link' } } : {} });
   } else if (parcel.syncError && !numberToCheck(parcel.syncError)) {
     // A number to check says so on the card. A carrier that could not be reached yet for a parcel with no scans is asked again.
     const awaited = awaitedCarrier(parcel);

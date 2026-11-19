@@ -212,6 +212,14 @@ not asked, and a universal provider that failed (transport, verification, an unr
 answer) did not answer, so neither changes that; a carrier's own adapter failing does. When a failed direct adapter recovers, it
 takes over from the universal provider again.
 
+A carrier whose own site is down for every parcel says so on the parcels it tracks, in place of the failed update, with
+its page for the number. `carrier_outages` lists it while its lookups or its parcels' checks have an open health
+incident and every lookup that reached its site since it last answered found the site down (no connection, a
+maintenance page, a server error), for two numbers, or for one over three lookups and an hour. A bot check, a page
+Peek could not read or a not-found is no outage. Each server reads the list once a minute and serves it as
+`carrier_outage` on a parcel not yet delivered or returned that the carrier tracks now and no other source answered
+for since; a link's viewer not shown the number gets no page, a wrapped gift nothing. The carrier's first answer ends it.
+
 The carrier that answers for a parcel failing in passing (transport, a bot check) leaves a
 scheduled check without a provider: the check comes back at the carrier's retry time, an hour
 at most, so a longer wait (a maintenance page's `Retry-After`) leaves the next check to the

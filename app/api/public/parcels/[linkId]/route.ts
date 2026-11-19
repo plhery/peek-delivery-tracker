@@ -17,6 +17,7 @@ import {
   parcelAlerts,
   publicParcelResponse,
 } from '../../../../../src/server/publicParcels';
+import { loadCarrierOutages } from '../../../../../src/server/carrierOutages';
 import { SupabaseError } from '../../../../../src/server/supabase';
 import { isOpenedParcelSyncDue, isTrackingSyncDue } from '../../../../../src/server/trackingSync';
 import type { JsonObject } from '../../../../../src/server/types';
@@ -61,9 +62,9 @@ export const GET = apiRoute<LinkParameters>(async (context) => {
   const service = requireService(context);
   const query = new URL(context.request.url).searchParams;
   const hidden = query.get('hidden') === 'true';
-  const found = isParcelLinkId(linkId)
-    ? await service.publicParcel(linkId, ownerKeyHash(context.request.headers.get('x-parcel-key')), !hidden)
-    : null;
+  const [found] = await Promise.all([isParcelLinkId(linkId)
+    ? service.publicParcel(linkId, ownerKeyHash(context.request.headers.get('x-parcel-key')), !hidden)
+    : null, loadCarrierOutages(service)]);
   if (!found) {
     recordPublicParcelRead('not_found');
     return unavailable();

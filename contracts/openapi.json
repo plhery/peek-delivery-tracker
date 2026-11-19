@@ -68419,6 +68419,31 @@
           }
         }
       },
+      "CarrierOutage": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "carrier",
+          "since"
+        ],
+        "description": "The carrier tracking the parcel now, whose own site is down: no connection, a maintenance page or a server error on every lookup since it last answered, for several parcels or for an hour. The apps say so on the card and the parcel page, promise no time, and link to tracking_url. It goes away by itself on the first answer from that carrier.",
+        "properties": {
+          "carrier": {
+            "description": "The carrier whose site is down.",
+            "$ref": "#/components/schemas/CarrierId"
+          },
+          "since": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The first failure on the carrier's site after its last answer."
+          },
+          "tracking_url": {
+            "type": "string",
+            "format": "uri",
+            "description": "The carrier's own page for the parcel's number, where the reader can see the outage. Absent when the carrier has none, and for a link's viewer who is not shown the number."
+          }
+        }
+      },
       "PackageRow": {
         "type": "object",
         "additionalProperties": false,
@@ -68857,6 +68882,10 @@
               "$ref": "#/components/schemas/PlannedTrackingEvent"
             },
             "description": "The steps the carrier named in written_ahead_by wrote in advance whose time has passed, in its own words, oldest first; absent when none, with written_ahead_by, and on a wrapped gift. Apps list them greyed in the timeline under Written in advance by that carrier, as its own page shows them. A step goes once a scan stands at its minute or tells it in the same words within a day. Never scans: see PlannedTrackingEvent."
+          },
+          "carrier_outage": {
+            "description": "Set while the carrier tracking the parcel has an outage on its own site and the parcel waits for it: not once it is delivered or returned, not when another source answered for it since, and not on a wrapped gift.",
+            "$ref": "#/components/schemas/CarrierOutage"
           },
           "email_muted": {
             "type": "boolean",
@@ -70522,6 +70551,10 @@
               "$ref": "#/components/schemas/PlannedTrackingEvent"
             },
             "description": "The steps the carrier named in written_ahead_by wrote in advance whose time has passed, in its own words, oldest first; absent when none, with written_ahead_by, and on a wrapped gift. Apps list them greyed in the timeline under Written in advance by that carrier, as its own page shows them. A step goes once a scan stands at its minute or tells it in the same words within a day. Never scans: see PlannedTrackingEvent."
+          },
+          "carrier_outage": {
+            "description": "Set while the carrier tracking the parcel has an outage on its own site and the parcel waits for it: not once it is delivered or returned, not when another source answered for it since, and not on a wrapped gift.",
+            "$ref": "#/components/schemas/CarrierOutage"
           },
           "news_at": {
             "type": "string",

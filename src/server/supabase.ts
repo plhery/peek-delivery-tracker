@@ -2922,6 +2922,15 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /** The scraper adapters' holds still running. */
+  /** The carriers whose own site is down now, each with the time it went down (carrier_outages, carrierOutages.ts). */
+  async carrierOutages(): Promise<Map<string, string>> {
+    const result = await this.request('/rest/v1/rpc/carrier_outages', { method: 'POST', body: {} });
+    return new Map(rows(result).flatMap((row) => {
+      const since = Date.parse(String(row.since));
+      return typeof row.carrier === 'string' && Number.isFinite(since) ? [[row.carrier, new Date(since).toISOString()]] : [];
+    }));
+  }
+
   async adapterHolds(): Promise<AdapterHold[]> {
     return rows(await this.request(`/rest/v1/scraper_holds?${query([
       ['select', 'key,until,value'],

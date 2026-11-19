@@ -64477,6 +64477,12 @@ export interface ApiPlannedTrackingEvent {
   "place"?: ApiEventPlace | null;
 }
 
+export interface ApiCarrierOutage {
+  "carrier": ApiCarrierId;
+  "since": string;
+  "tracking_url"?: string;
+}
+
 export interface ApiPackageRow {
   "id": string;
   "tracking_number": string;
@@ -64546,6 +64552,7 @@ export interface ApiPackageRow {
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
   "written_ahead_by"?: ApiCarrierId;
   "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
+  "carrier_outage"?: ApiCarrierOutage;
   "email_muted"?: boolean;
   "news_at"?: string;
   "seen_at"?: string;
@@ -64931,6 +64938,7 @@ export interface ApiPublicPackage {
   "planned_events"?: Array<ApiPlannedTrackingEvent>;
   "written_ahead_by"?: ApiCarrierId;
   "written_ahead_events"?: Array<ApiPlannedTrackingEvent>;
+  "carrier_outage"?: ApiCarrierOutage;
   "news_at"?: string;
 }
 

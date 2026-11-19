@@ -967,7 +967,8 @@ provider failure in an `AggregateError` so every cause is visible.
   than half of at least 10 in 24 hours failed, or when its last 4 failed over 2 hours or more for
   two parcels or more (a breaker that lets about one probe an hour through keeps the rate low). A lookup counts by its final outcome,
   its browser or proxy step included. A recovery is only logged and counted, and so is a
-  direct step's incident: its failures say little while the lookup's next step answers. See
+  direct step's incident: its failures say little while the lookup's next step answers. A
+  carrier's site down for every parcel is shown to its readers too ([ROUTING.md](ROUTING.md)). See
   [ops/sentry](../ops/sentry/README.md).
 - **Review signals**: routing signals, sync anomalies, health recoveries and direct-step
   incidents open no issue;

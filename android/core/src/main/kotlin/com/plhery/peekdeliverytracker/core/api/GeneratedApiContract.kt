@@ -3891,6 +3891,13 @@ data class PlannedTrackingEvent(
 )
 
 @Serializable
+data class CarrierOutage(
+    val carrier: CarrierId,
+    val since: String,
+    @SerialName("tracking_url") val trackingUrl: String? = null,
+)
+
+@Serializable
 data class Parcel(
     val id: UUID,
     @SerialName("tracking_number") val trackingNumber: String,
@@ -3912,6 +3919,7 @@ data class Parcel(
     @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("written_ahead_by") val writtenAheadBy: CarrierId? = null,
     @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
+    @SerialName("carrier_outage") val carrierOutage: CarrierOutage? = null,
     @SerialName("email_muted") val emailMuted: Boolean? = null,
     @SerialName("news_at") val newsAt: String? = null,
     @SerialName("seen_at") val seenAt: String? = null,
@@ -4421,6 +4429,7 @@ data class PublicPackage(
     @SerialName("planned_events") val plannedEvents: List<PlannedTrackingEvent>? = null,
     @SerialName("written_ahead_by") val writtenAheadBy: CarrierId? = null,
     @SerialName("written_ahead_events") val writtenAheadEvents: List<PlannedTrackingEvent>? = null,
+    @SerialName("carrier_outage") val carrierOutage: CarrierOutage? = null,
     @SerialName("news_at") val newsAt: String? = null,
 )
 

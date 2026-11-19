@@ -10,6 +10,7 @@ import { copyTellsProblem, currentCarrier, providerTwins, relayCopies } from './
 import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
+import { servedCarrierOutage } from './carrierOutages';
 import { datedAfterCheck } from './futureScans';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
@@ -457,7 +458,8 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * listed before they happen and that are still ahead are served apart from the scans, each with its place
  * (`planned_events`, plannedSteps.ts and `placedSteps`), and so is the carrier that writes the timeline in advance
  * (`written_ahead_by`, `servedWrittenAhead`), with the steps it wrote whose time has passed (`written_ahead_events`,
- * `servedWrittenSteps`). `news_at` dates the parcel's latest scan as Peek stored it (`newsAt`).
+ * `servedWrittenSteps`). `news_at` dates the parcel's latest scan as Peek stored it (`newsAt`). A parcel whose carrier's
+ * site is down says so (`carrier_outage`, carrierOutages.ts).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const shown = shownEvents(row);
@@ -468,9 +470,10 @@ export function withEventPlaces(row: JsonObject): JsonObject {
   const planned = placedSteps(row, servedPlannedSteps(answered, shown));
   const ahead = servedWrittenAhead(answered);
   const written = ahead ? placedSteps(row, servedWrittenSteps(answered, shown)) : [];
-  if (!planned.length && !ahead) return served;
+  const outage = servedCarrierOutage(row, shown);
+  if (!planned.length && !ahead && !outage) return served;
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
-    ...written.length ? { written_ahead_events: written } : {} };
+    ...written.length ? { written_ahead_events: written } : {}, ...outage ? { carrier_outage: outage } : {} };
 }
 
 /**

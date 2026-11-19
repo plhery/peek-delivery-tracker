@@ -10,6 +10,7 @@ import {
   requireUserClient,
 } from '../../../src/server/api';
 import { withEventPlaces } from '../../../src/server/eventPlaces';
+import { loadCarrierOutages } from '../../../src/server/carrierOutages';
 import { captureOperationalError } from '../../../src/server/observability';
 import { SupabaseError } from '../../../src/server/supabase';
 import { lookupCountry, rememberLookupCountry } from '../../../src/server/lookupCountry';
@@ -32,6 +33,7 @@ export const GET = apiRoute(async (context) => {
   const client = requireUserClient(context);
   const [packages] = await Promise.all([
     client.listPackages(includeArchived),
+    loadCarrierOutages(requireService(context)),
     // The parcels are still readable when this fails; the next read records it.
     search.get('hidden') === 'true' ? undefined : client.recordOpened().catch((error: unknown) => {
       if (!(error instanceof SupabaseError)) throw error;

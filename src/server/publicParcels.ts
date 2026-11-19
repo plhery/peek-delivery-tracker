@@ -10,6 +10,7 @@ import type {
   ApiParcelLink,
   ApiPlannedTrackingEvent,
   ApiPublicPackage,
+  ApiCarrierOutage,
   ApiPublicParcelResponse,
   ApiSyncStatus,
   ApiTrackingEventRow,
@@ -30,6 +31,7 @@ import { pushServices } from './push';
 import { legacyHosts } from './siteHosts';
 import type { PublicAllowance, StoredParcelLink, SupabaseServiceClient } from './supabase';
 import { isRecord, type JsonObject } from './types';
+import { loadCarrierOutages } from './carrierOutages';
 
 export { numberHint } from './hiddenNumbers';
 
@@ -631,6 +633,10 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       ...(!wrapped && planned.length ? { planned_events: planned } : {}),
       ...(!wrapped && typeof row.written_ahead_by === 'string' ? { written_ahead_by: row.written_ahead_by as ApiCarrierId } : {}),
       ...(!wrapped && written.length ? { written_ahead_events: written } : {}),
+      // The carrier's own page names the number: a viewer not shown it reads only that the carrier's site is down.
+      ...(!wrapped && isRecord(row.carrier_outage) ? {
+        carrier_outage: (numberShown ? row.carrier_outage : { carrier: row.carrier_outage.carrier, since: row.carrier_outage.since }) as unknown as ApiCarrierOutage,
+      } : {}),
     },
   };
 }
@@ -648,7 +654,7 @@ export type ViewerParcel =
  * gift. Reading it is not an opening of the link.
  */
 export async function viewerParcel(service: SupabaseServiceClient, linkId: string): Promise<ViewerParcel> {
-  const found = isParcelLinkId(linkId) ? await service.publicParcel(linkId, null, false) : null;
+  const [found] = await Promise.all([isParcelLinkId(linkId) ? service.publicParcel(linkId, null, false) : null, loadCarrierOutages(service)]);
   if (found === null) return { status: 'unavailable' };
   if (found === 'stopped') return { status: 'stopped' };
   return { status: 'shown', parcel: publicParcelResponse(found, parcelAlerts(service)), wrappedGift: isWrappedGift(found) };

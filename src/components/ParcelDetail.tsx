@@ -143,6 +143,8 @@ export function ParcelDetail({
   const amazonHistoryExpired = carrier.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automaticTracking = tracksAutomatically(carrier.id) && !amazonHistoryExpired;
   const current = currentEvent(parcel.events, parcel.returnHeld);
+  // The carrier's site is down: the parcel waits for it, whatever its own last check said.
+  const outage = parcel.carrierOutage && !['delivered', 'returned'].includes(current?.stage ?? '') ? parcel.carrierOutage : undefined;
   // While the parcel waits, its pickup point gets a card; afterwards it is a plain fact.
   const waitingAt = current?.stage === 'ready_for_pickup' ? pickupPoint(parcel.pickupPoint) : null;
   // After a missed delivery or a problem, or while customs asks the reader for something, the carrier waits on the reader:
@@ -750,7 +752,18 @@ export function ParcelDetail({
             )}
           </div>
         )}
-        {automaticTracking && parcel.syncError && (
+        {outage ? (
+          <div className="detail__outage" role="status">
+            <p>{t('parcel.carrierOutage', { carrier: carrierInfo(outage.carrier, locale).name })}</p>
+            {outage.trackingUrl && (
+              <a className="detail__outage-link" href={outage.trackingUrl} target="_blank" rel="noopener noreferrer"
+                onClick={() => trackAction('parcel-carrier-link')}>
+                <span>{t('parcel.carrierOutageLink', { carrier: carrierInfo(outage.carrier, locale).name })}</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
+              </a>
+            )}
+          </div>
+        ) : automaticTracking && parcel.syncError && (
           <div className="detail__sync-error" role="status">
             <p>{claimingCarrier ? t('detail.refusedNumberLooksLike', { carrier: carrierInfo(claimingCarrier, locale).name })
               : awaited ? t('detail.waitingForCarrier', { carrier: carrierInfo(awaited, locale).name })

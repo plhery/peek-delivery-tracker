@@ -258,6 +258,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // The carrier's own page would tell a gift's recipient where it comes from.
   const links = wrapped ? [] : carrierLinks(view, locale);
   const scan = currentEvent(parcel.events, parcel.returnHeld);
+  // The carrier's own site down, for every parcel it tracks: the page says so in place of a failed check, unless the
+  // carrier waits on the reader, and links the carrier's page for the number.
+  const outage = carrierKnown && !placeholder && !present && stage !== 'delivered' && stage !== 'returned' ? parcel.carrierOutage : undefined;
+  const outageFlag = outage && !scan?.recipientAction && stage !== 'failed_attempt' && stage !== 'exception'
+    ? t('attention.carrier_outage', { carrier: carrierInfo(outage.carrier, locale).name }) : null;
 
   const afterwards = journeyEndedBefore(parcel, now);
   // Later, a phone's card has no map: the page winds down.
@@ -557,7 +562,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {followed && <AlreadyFollowed name={followed.label || t('common.parcel')} onOpen={() => { trackAction('parcel-link-open-existing'); openDeliveries?.(followed.id); }} />}
         {sample ? <SampleNote landingPath={landingPath} onLanding={toLanding} /> : !owner && !present && <SharedWithYou visitor={!signedIn} until={worksUntil} />}
         <LinkCard parcel={parcel} stage={stage} carrier={carrierKnown ? displayed : null} likely={likelyName} delivery={delivering}
-          headline={headline} name={name} detail={detail} notes={notes} flag={flag} figure={figure} number={number} settled={entrance === 'reveal' && !checking}
+          headline={headline} name={name} detail={detail} notes={notes} flag={outageFlag ? null : flag} outage={outageFlag} figure={figure} number={number} settled={entrance === 'reveal' && !checking}
           gift={wrapped ? 'wrapped' : opened ? 'opened' : link.gift ? 'own' : undefined}
           map={figure === 'map' ? (covered, room) => map('card', covered, room) : undefined}
           bell={bell} />
@@ -580,7 +585,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
           onRestore={archivable && state.archived ? restore : undefined}
           compactName={!owner} />}
         <AndroidTestRow />
-        {carrierKnown && <Notes view={view} stage={stage} flag={flag} trouble={failing} carrier={displayed} />}
+        {carrierKnown && <Notes view={view} stage={stage} flag={flag} trouble={failing} carrier={displayed} outage={outage} />}
         {waitingAt && <PickupPointCard point={waitingAt} />}
         {!beside && teaser}
         {/* One invitation at a time: the passport's, on the day a parcel from abroad arrives, else the account's. */}

@@ -46,11 +46,14 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
   // the reader for something, the carrier waits on the reader.
   const actionNeeded = Boolean(current?.recipientAction) || ['failed_attempt', 'exception'].includes(current?.stage ?? '');
   const carrierIssue = !actionNeeded && ['customs', 'ready_for_pickup'].includes(current?.stage ?? '');
+  // The carrier's site being down tells why no update comes, unless the carrier waits on the reader.
+  const outage = parcel.carrierOutage && !actionNeeded
+    ? t('attention.carrier_outage', { carrier: carrierInfo(parcel.carrierOutage.carrier, locale).name }) : null;
   // A number to check, or a carrier that could not be reached yet, says so in the status line: no update was missed.
-  const flag = (notice && !carrierIssue ? notice : null)
+  const flag = (notice && !carrierIssue && !outage ? notice : null) ?? outage
     ?? (parcel.syncStatus === 'error' && !numberToCheck(parcel.syncError) && !awaitedCarrier(parcel) ? t('attention.sync_error') : null);
-  const flagIcon = notice && actionNeeded ? <Glyph name="warning" /> : <Icon name={parcel.syncStatus === 'error' ? 'refresh' : 'clock'} />;
-  const flagChip = flag && <span className="parcel-card__notice">{flagIcon}{flag}</span>;
+  const flagIcon = notice && actionNeeded ? <Glyph name="warning" /> : <Icon name={parcel.syncStatus === 'error' || outage ? 'refresh' : 'clock'} />;
+  const flagChip = flag && <span className={`parcel-card__notice${flag === outage ? ' parcel-card__notice--calm' : ''}`}>{flagIcon}{flag}</span>;
   const row = useRef<HTMLDivElement>(null);
   const button = useRef<HTMLButtonElement>(null);
   const tray = useRef<HTMLDivElement>(null);

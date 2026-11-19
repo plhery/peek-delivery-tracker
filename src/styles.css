@@ -136,6 +136,7 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .parcel-card__error { font-size: 12px; line-height: 1.45; color: var(--orange-text); }
 .parcel-card__notice { align-self: flex-start; display: inline-flex; align-items: center; gap: 6px; max-width: 100%; margin-top: 4px; padding: 4px 10px 4px 8px; border-radius: 12px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--orange-text); font-size: 12px; font-weight: 500; line-height: 1.4; }
 .parcel-card__notice > svg { width: 13px; height: 13px; flex-shrink: 0; stroke-width: 1.8; }
+.parcel-card__notice--calm { color: var(--ink-soft); }
 .parcel-card__error { background: var(--orange-soft); margin: 6px 0 0; padding: 12px; border-radius: 12px; }
 .parcel-card--hero { padding: 21px; border-radius: 24px; min-height: 200px; gap: 0; }
 .parcel-card__next-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.2px; color: var(--tone); opacity: .75; flex-shrink: 0; }
@@ -414,6 +415,10 @@ button .carrier-mark__truck { width: 27px; height: 18px; flex-shrink: 0; stroke:
 .detail__refresh svg { width: 19px; height: 19px; stroke-width: 1.6; }
 .detail__sync-error, .detail__check-error, .detail__copy-error, .detail__title-error { font-size: 12px; color: var(--orange-text); margin: 12px 0 0; }
 .detail__check-notice { color: var(--tone); font-size: 12px; margin: 12px 0 0; }
+.detail__outage { margin: 12px 0 0; color: var(--ink-soft); font-size: 12px; }
+.detail__outage p { margin: 0; }
+.detail__outage-link { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; color: var(--ink); font-weight: 500; text-decoration: none; }
+.detail__outage-link svg { width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 .detail__timeline { margin: 32px 30px; }
 .detail__section-title { font-size: 20px; margin-bottom: 24px; }
 .timeline-empty { color: var(--ink-soft); font-size: 13px; padding: 16px 0; }

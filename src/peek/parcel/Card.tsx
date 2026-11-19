@@ -91,7 +91,7 @@ const FLAG_ICONS: Record<ParcelAttention, ReactNode> = {
  * the open box in the middle (`hero`), or not at all when the map beside the
  * card has him.
  */
-export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, name, detail, notes, flag, figure, number, map, bell, settled, gift }: {
+export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, name, detail, notes, flag, outage, figure, number, map, bell, settled, gift }: {
   parcel: ParcelWithEvents;
   stage: Stage | null;
   /** Null while no carrier is known. */
@@ -105,6 +105,8 @@ export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, n
   detail: string | null;
   notes: readonly string[];
   flag: ParcelAttention | null;
+  /** The carrier's site down, said calmly in place of the flag. */
+  outage?: string | null;
   figure: 'map' | 'kraft' | 'hero' | 'none';
   /** What the label on Pip's side says: the number, masked for a viewer. */
   number: string | null;
@@ -152,7 +154,8 @@ export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, n
       </div>
       {figure === 'kraft' && <KraftPip carrier={carrier} number={number} open={delivered} hero={false} sparks={settled && !delivered} />}
     </div>
-    {flag && <p className="peekp-card__flag">{FLAG_ICONS[flag]}<span>{t(flagKey(flag))}</span></p>}
+    {outage ? <p className="peekp-card__flag peekp-card__flag--calm"><Icon name="refresh" /><span>{outage}</span></p>
+      : flag && <p className="peekp-card__flag">{FLAG_ICONS[flag]}<span>{t(flagKey(flag))}</span></p>}
     {gift !== 'opened' && <div className="peekp-card__progress"><ProgressTrack stage={stage} /></div>}
   </section>;
 }

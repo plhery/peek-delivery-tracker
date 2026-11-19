@@ -54,6 +54,8 @@ export interface Parcel {
   likelyCarrier?: { carrier: CarrierId; since: string };
   /** The carrier whose tracker writes the parcel's timeline in advance: Peek shows its real scans as they arrive. */
   writtenAheadBy?: CarrierId;
+  /** The carrier tracking the parcel now, whose own site is down since `since`, and its page for the number. */
+  carrierOutage?: { carrier: CarrierId; since: string; trackingUrl?: string };
   originalParcelId?: string;
   originalCarrier?: CarrierId;
   originalTrackingNumber?: string;

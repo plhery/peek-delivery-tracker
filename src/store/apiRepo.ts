@@ -198,6 +198,10 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     events: (row.tracking_events ?? []).map(toEvent),
     ...(row.planned_events?.length ? { plannedEvents: row.planned_events.map(toPlannedEvent) } : {}),
     ...(row.written_ahead_events?.length ? { writtenAheadEvents: row.written_ahead_events.map(toPlannedEvent) } : {}),
+    ...(row.carrier_outage ? { carrierOutage: {
+      carrier: row.carrier_outage.carrier, since: row.carrier_outage.since,
+      ...(row.carrier_outage.tracking_url ? { trackingUrl: row.carrier_outage.tracking_url } : {}),
+    } } : {}),
   };
 }
 

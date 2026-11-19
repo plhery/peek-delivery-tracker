@@ -464,6 +464,19 @@ describe('ParcelPage stages and troubles', () => {
     expect(screen.queryByText('The tracking service couldn’t be reached. Try again later.')).toBeNull();
   });
 
+  it('says calmly that the carrier’s site is down, links its page for the number, and says nothing once the parcel is delivered', async () => {
+    const outage = { carrier: 'dhl' as const, since: ago(3), trackingUrl: 'https://www.dhl.com/en/track?tracking-id=1234567899' };
+    await shown(view(journey, { syncStatus: 'error', syncError: 'carrier:transport', carrierOutage: outage }));
+    expect(within(card()).getByText('DHL’s tracking is having problems').closest('p')).toHaveClass('peekp-card__flag--calm');
+    expect(within(card()).queryByText('Couldn’t get the latest update')).toBeNull();
+    expect(screen.getByText('DHL’s tracking is having problems right now. Your tracking will update as soon as it’s back.')).toBeVisible();
+    expect(screen.getByRole('link', { name: 'Check on DHL’s site' })).toHaveAttribute('href', outage.trackingUrl);
+    expect(screen.queryByText('The tracking service couldn’t be reached. Try again later.')).toBeNull();
+    cleanup();
+    await shown(view([...journey, scan('delivered', 1)], { carrierOutage: outage }));
+    expect(screen.queryByText(/tracking is having problems/)).toBeNull();
+  });
+
   it('asks for the right number instead of waiting for a carrier when the number is a placeholder', async () => {
     await shown(view([scan('pending', 60, 'Tracking added')], { carrier: 'unknown', syncStatus: 'error', syncError: 'carrier:placeholder_number' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Check the tracking number' })).toBeVisible();

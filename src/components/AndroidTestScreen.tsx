@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { holdsSignIn } from '../auth/savedSignIn';
+import type { GuideAddresses } from '../guides/guideAddresses';
+import { GuideTitleLink } from '../guides/GuideTitleLink';
 import { I18nProvider, LanguageControl, type Locale, type MessageKey, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
 import {
@@ -30,16 +32,17 @@ const nothing = () => null;
  * Each opens Google's page in a new tab, so Back returns here, where the next step then leads. Google Play lets in
  * only the group's members, so the last two steps stay locked until the group's link was followed. Anyone who
  * reaches the page sees it, on any device: a computer can join and opt in for the phone's Google account too.
- * Under them, the same app without Google Play: Peek's F-Droid repository, whose address is copied, or GitHub.
+ * Under them, the same app without Google Play: Peek's F-Droid repository, whose address is copied, or GitHub; then
+ * the app's guide, in the reader's language or the nearest one it is written in.
  */
-export function AndroidTestScreen({ initialLocale, initialMessages }: { initialLocale?: Locale; initialMessages?: Messages }) {
+export function AndroidTestScreen({ guide, initialLocale, initialMessages }: { guide?: GuideAddresses; initialLocale?: Locale; initialMessages?: Messages }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
-    <AppearanceProvider><AndroidTest /></AppearanceProvider>
+    <AppearanceProvider><AndroidTest guide={guide} /></AppearanceProvider>
   </I18nProvider>;
 }
 
-function AndroidTest() {
-  const { t } = useI18n();
+function AndroidTest({ guide }: { guide?: GuideAddresses }) {
+  const { t, locale } = useI18n();
   const note = useSyncExternalStore(subscribeAndroidTest, readAndroidTestNote, nothing);
   const [declined, setDeclined] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -110,6 +113,7 @@ function AndroidTest() {
           onClick={() => trackAction('android-test-github')}>{t('androidTest.other.githubAction')}<Icon name="arrow" /></a>
         <p>{t('androidTest.other.note')}</p>
       </section>
+      {guide && <p className="android-steps__guide"><GuideTitleLink guide={guide} locale={locale} /></p>}
       {note?.never
         ? <p ref={said} className="android-steps__never" tabIndex={-1}>{t('androidTest.page.neverDone')}</p>
         : <button type="button" className="android-steps__never" onClick={() => {

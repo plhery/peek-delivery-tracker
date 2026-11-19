@@ -18,6 +18,9 @@
 .phone-app__qr > span > span { color: var(--ink-soft); }
 .phone-app__buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 4px; }
 .phone-app__buttons .button svg { width: 19px; height: 19px; }
+/* The apps' guides, one link a line. */
+.phone-app__guides { display: grid; gap: 6px; margin: 8px 0 0; font-size: 14px; line-height: 1.4; }
+.phone-app__guides a { color: inherit; font-weight: 600; text-underline-offset: 2px; text-wrap: balance; }
 /* The Android robot's credit, small and pale at the page's end. */
 .phone-app__credit { max-width: 46ch; margin: 18px 0 0; color: var(--ink-soft); font-size: 11px; line-height: 1.5; text-wrap: balance; }
 .phone-app__credit a { color: inherit; text-underline-offset: 2px; }

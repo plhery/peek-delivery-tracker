@@ -2,6 +2,7 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import fr from '../../shared/locales/fr.json';
+import { guideAddresses } from '../guides/guideAddresses';
 import { ANDROID_TEST_STORAGE_KEY } from '../lib/androidTest';
 import { AndroidTestScreen } from './AndroidTestScreen';
 
@@ -95,6 +96,14 @@ describe('the steps page', () => {
   it('goes back to the home page from anywhere else', () => {
     render(<AndroidTestScreen />);
     expect(screen.getByRole('link', { name: 'Back' })).toHaveAttribute('href', '/');
+  });
+
+  it('links the app’s guide, in the visitor’s language', () => {
+    const { unmount } = render(<AndroidTestScreen guide={guideAddresses('android-app')} />);
+    expect(screen.getByRole('link', { name: /^Peek for Android/ })).toHaveAttribute('href', '/guides/parcel-tracker-app-android');
+    unmount();
+    render(<AndroidTestScreen guide={guideAddresses('android-app')} initialLocale="fr" initialMessages={fr} />);
+    expect(screen.getByRole('link', { name: /^Peek pour Android/ })).toHaveAttribute('href', '/fr/guides/application-suivi-colis-android');
   });
 
   it('speaks the visitor’s language', () => {

@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
+import de from '../../shared/locales/de.json';
+import ru from '../../shared/locales/ru.json';
+import { guideAddresses } from '../guides/guideAddresses';
 import { PhoneAppScreen } from './PhoneAppScreen';
 
 const mocks = vi.hoisted(() => ({ track: vi.fn(), screen: vi.fn(), start: vi.fn(async () => undefined), iPad: vi.fn(() => false) }));
@@ -30,6 +33,22 @@ describe('the page of the code for both phones', () => {
     android.addEventListener('click', (event) => event.preventDefault());
     await userEvent.setup().click(android);
     expect(mocks.track).toHaveBeenCalledExactlyOnceWith('android-test-open', undefined, 'get-app');
+  });
+
+  it('links both apps’ guides, in the visitor’s language or the nearest one they are written in', () => {
+    const guides = { iphone: guideAddresses('iphone-app'), android: guideAddresses('android-app') };
+    const { unmount } = render(<PhoneAppScreen guides={guides} />);
+    expect(screen.getByRole('link', { name: /^Peek for iPhone, iPad and Mac/ })).toHaveAttribute('href', '/guides/parcel-tracker-app-iphone');
+    expect(screen.getByRole('link', { name: /^Peek for Android/ })).toHaveAttribute('href', '/guides/parcel-tracker-app-android');
+    expect(screen.getByRole('link', { name: /^Peek for Android/ })).not.toHaveAttribute('hreflang');
+    unmount();
+
+    const { unmount: away } = render(<PhoneAppScreen guides={guides} initialLocale="de" initialMessages={de} />);
+    expect(screen.getByRole('link', { name: /^Peek für iPhone/ })).toHaveAttribute('href', '/de/guides/sendungsverfolgung-app-iphone');
+    away();
+    // No guide is written in Russian: the English one, which the link names.
+    render(<PhoneAppScreen guides={guides} initialLocale="ru" initialMessages={ru} />);
+    expect(screen.getByRole('link', { name: /^Peek for Android/ })).toHaveAttribute('hreflang', 'en');
   });
 
   it('counts the App Store as the address itself when it came without the code’s source', () => {

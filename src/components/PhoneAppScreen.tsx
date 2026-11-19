@@ -2,6 +2,8 @@
 
 import { useEffect, useSyncExternalStore } from 'react';
 import { holdsSignIn } from '../auth/savedSignIn';
+import type { GuideAddresses } from '../guides/guideAddresses';
+import { GuideTitleLink } from '../guides/GuideTitleLink';
 import { I18nProvider, LanguageControl, type Locale, type Messages, useI18n } from '../i18n';
 import { startAnalytics, trackAction, trackScreen } from '../lib/analytics';
 import { AppearanceProvider } from '../lib/appearance';
@@ -17,15 +19,18 @@ import './PhoneAppScreen.css';
 /**
  * `/app` for whoever the server could not send on to an app ([phoneApp](../lib/phoneApp.ts)): a computer gets the
  * code to scan with its phone and both apps, and an iPad whose Safari says it is a Mac goes on to the App Store.
+ * Under the apps, their guides, in the reader's language or the nearest one they are written in.
  */
-export function PhoneAppScreen({ source, initialLocale, initialMessages }: {
+export function PhoneAppScreen({ source, guides, initialLocale, initialMessages }: {
   /** The `utm_source` the address came with, passed on to the app's link. */
   source?: string;
+  /** The guides to the iPhone and the Android app. */
+  guides?: { iphone: GuideAddresses; android: GuideAddresses };
   initialLocale?: Locale;
   initialMessages?: Messages;
 }) {
   return <I18nProvider initialLocale={initialLocale} initialMessages={initialMessages}>
-    <AppearanceProvider><PhoneApp source={source} /></AppearanceProvider>
+    <AppearanceProvider><PhoneApp source={source} guides={guides} /></AppearanceProvider>
   </I18nProvider>;
 }
 
@@ -33,8 +38,8 @@ export function PhoneAppScreen({ source, initialLocale, initialMessages }: {
 const stays = () => () => {};
 const notKnown = () => false;
 
-function PhoneApp({ source }: { source?: string }) {
-  const { t } = useI18n();
+function PhoneApp({ source, guides }: { source?: string; guides?: { iphone: GuideAddresses; android: GuideAddresses } }) {
+  const { t, locale } = useI18n();
   const appStore = phoneAppStoreLink(source);
   // The server sends the page a computer gets; an iPad hides it as soon as it runs and goes on to the App Store.
   const iPad = useSyncExternalStore(stays, onIPad, notKnown);
@@ -70,6 +75,10 @@ function PhoneApp({ source }: { source?: string }) {
           <PlatformLogo name="android" />{t('landing.more.android')}
         </a>
       </div>
+      {guides && <p className="phone-app__guides">
+        <GuideTitleLink guide={guides.iphone} locale={locale} />
+        <GuideTitleLink guide={guides.android} locale={locale} />
+      </p>}
       <AndroidRobotCredit className="phone-app__credit" />
     </main>
   </div>;

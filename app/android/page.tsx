@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { connection } from 'next/server';
 import { notFound } from 'next/navigation';
 import { AndroidTestScreen } from '../../src/components/AndroidTestScreen';
+import { guideAddresses } from '../../src/guides/guideAddresses';
 import { ANDROID_TEST_OPEN } from '../../src/lib/androidTest';
 import { translateMessage } from '../../src/lib/messages';
 import { messagesFor, requestLanguage, requestLocale } from '../../src/server/requestLocale';
@@ -20,5 +21,5 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AndroidTestPage() {
   if (!ANDROID_TEST_OPEN) notFound();
   await connection();
-  return <AndroidTestScreen {...await requestLanguage()} />;
+  return <AndroidTestScreen guide={guideAddresses('android-app')} {...await requestLanguage()} />;
 }

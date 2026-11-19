@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import { CARRIERS, requirementSatisfied, type CarrierInputRequirement } from './carriers';
-import { homePostcodeCountry, mayReadPostcodeCountry, postcodeCountries, postcodeFieldFor, readsPostcodeCountry } from './postcodeCountry';
+import { givenPostcodeCountry, homePostcodeCountry, mayReadPostcodeCountry, postcodeCountries, postcodeFieldFor, readsPostcodeCountry } from './postcodeCountry';
 import type { CarrierId } from '../types';
 
 /**
@@ -18,7 +18,10 @@ const eventName = 'postcodes-change';
 export interface GivenPostcode {
   carrier: CarrierId;
   postcode?: string | null;
-  /** The country it was given from; none for one this device kept before it kept countries. */
+  /**
+   * The country it was given from; none where it is not known (`givenPostcodeCountry`), and for one this device kept
+   * before it kept countries.
+   */
   country?: string | null;
 }
 
@@ -30,15 +33,6 @@ export interface RememberedPostcode {
 
 /** A postcode as carriers print it: trimmed, in capitals, with single spaces. */
 const printed = (postcode: string) => postcode.trim().toUpperCase().replace(/\s+/g, ' ');
-
-/**
- * The country a postcode was given from. One kept without it is from the home country of the carrier it was given to,
- * unless that carrier's lookup can read another country's: then it is not known.
- */
-function givenFrom({ carrier, country }: GivenPostcode): string | null | undefined {
-  if (country) return country;
-  return mayReadPostcodeCountry(carrier) ? undefined : homePostcodeCountry(carrier);
-}
 
 /**
  * The postcode to suggest for a carrier's field, from earlier parcels newest
@@ -59,7 +53,8 @@ export function rememberedPostcode(
   const countries = postcodeCountries(carrier, trackingNumber);
   const accepted = given.flatMap((entry) => {
     const value = entry.postcode ? printed(entry.postcode) : '';
-    const country = readsCountry ? givenFrom(entry) : homePostcodeCountry(carrier);
+    // One kept without its country, for a carrier whose lookup reads it, was kept before this browser kept countries.
+    const country = readsCountry ? givenPostcodeCountry(entry.carrier, entry.country, false) : homePostcodeCountry(carrier);
     if (!value || (readsCountry && (!country || !countries.includes(country) || (chosenCountry && country !== chosenCountry)))) return [];
     const field = postcodeFieldFor(requirement, carrier, trackingNumber, country);
     return requirementSatisfied(field, value) ? [{ to: entry.carrier, postcode: value, country }] : [];
@@ -108,13 +103,23 @@ function isKept(value: unknown): value is Kept {
     && (country === undefined || (typeof country === 'string' && /^[A-Z]{2}$/.test(country)));
 }
 
+/**
+ * A carrier whose lookup reads the postcode alone is sent no country, so the one kept with its postcode is only the one
+ * assumed for it. This browser once kept the carrier's home whatever postcode it took: it is worked out again.
+ */
+function withoutAssumedCountry(entry: Kept): Kept {
+  if (!entry.country || mayReadPostcodeCountry(entry.carrier)) return entry;
+  const country = givenPostcodeCountry(entry.carrier, null);
+  return country === entry.country ? entry : { carrier: entry.carrier, postcode: entry.postcode, ...(country ? { country } : {}) };
+}
+
 function read(): Kept[] {
   const raw = stored();
   if (raw === cached.raw) return cached.list;
   let list = EMPTY;
   try {
     const value: unknown = raw ? JSON.parse(raw) : null;
-    if (Array.isArray(value)) list = value.filter(isKept).slice(0, MAX_POSTCODES);
+    if (Array.isArray(value)) list = value.filter(isKept).slice(0, MAX_POSTCODES).map(withoutAssumedCountry);
   } catch { /* A damaged memory is an empty one. */ }
   cached = { raw, list };
   return list;
@@ -154,10 +159,10 @@ export function usePostcodeMemory(): readonly GivenPostcode[] {
 
 /**
  * Keeps a postcode a lookup without an account was given, with the country sent with it (none for the carrier's
- * home); giving it again moves it to the front.
+ * home), or the one `givenPostcodeCountry` knows it from; giving it again moves it to the front.
  */
 export function rememberPostcode(carrier: CarrierId, postcode: string, country?: string | null): void {
-  const from = country || homePostcodeCountry(carrier);
+  const from = givenPostcodeCountry(carrier, country);
   const kept: Kept = { carrier, postcode: printed(postcode), ...(from ? { country: from } : {}) };
   if (!isKept(kept)) return;
   write([kept, ...read().filter((entry) => entry.carrier !== carrier || entry.postcode !== kept.postcode)]);

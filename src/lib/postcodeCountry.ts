@@ -1,4 +1,4 @@
-import { activeRequirements, carrierInfo, normalizeTrackingNumber } from 'universal-parcel-scraper';
+import { activeRequirements, carrierDefinition, carrierInfo, normalizeTrackingNumber } from 'universal-parcel-scraper';
 import postcodes from '../../shared/postcode-examples.json';
 import { carrierRequirements, type CarrierInputRequirement } from './carriers';
 import type { CarrierId } from '../types';
@@ -40,6 +40,20 @@ export function takesAnyPostcode(carrierId: CarrierId, trackingNumber: string): 
 /** Whether the carrier's lookup reads the country of a postcode given for any of its numbers. */
 export function mayReadPostcodeCountry(carrierId: CarrierId): boolean {
   return carrierInfo(carrierId).capabilities.tracking.requirements.some(({ readsCountry }) => readsCountry === true);
+}
+
+/**
+ * The country of a postcode given to the carrier: the one recorded with it. Otherwise, where the carrier's lookup reads
+ * the country, its home, as only another country is recorded (`homeUnrecorded`; false for a postcode this browser kept
+ * before it kept countries, whose country is then not known). Where its lookup reads the postcode alone, its home only
+ * when none of its fields takes any country's postcode: one that does says nothing of the country, so it is not known.
+ */
+export function givenPostcodeCountry(carrierId: CarrierId, country: string | null | undefined, homeUnrecorded = true): string | null {
+  if (country) return country;
+  if (mayReadPostcodeCountry(carrierId)) return homeUnrecorded ? homePostcodeCountry(carrierId) : null;
+  const anyCountry = (carrierDefinition(carrierId).tracking.requirements ?? [])
+    .some(({ field, validator }) => field === 'postcode' && validator === 'internationalPostcode');
+  return anyCountry ? null : homePostcodeCountry(carrierId);
 }
 
 /** Whether the carrier's lookup reads the country of the postcode given for this number (the catalog's `readsCountry`). */

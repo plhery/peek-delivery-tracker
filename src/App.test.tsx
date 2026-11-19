@@ -906,15 +906,15 @@ describe('App', () => {
   it('offers every regional carrier and starts a required postcode from the last one given', async () => {
     const repo = createDemoRepo(window.localStorage);
     await repo.add({
-      trackingNumber: '06080000000002',
-      label: 'Previous DPD parcel',
-      carrier: 'dpd',
-      dpdPostcode: '8000',
+      trackingNumber: '01234567890123',
+      label: 'Previous DPD Germany parcel',
+      carrier: 'dpd-de',
+      dpdPostcode: '10115',
     });
     const add = vi.fn(repo.add);
     const user = userEvent.setup();
     renderApp({ ...repo, add });
-    await screen.findByText('Previous DPD parcel');
+    await screen.findByText('Previous DPD Germany parcel');
 
     await user.click(screen.getByRole('button', { name: /add a parcel/i }));
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
@@ -952,15 +952,16 @@ describe('App', () => {
 
     await user.click(offered[offeredNames.indexOf('Mondial Relay')]);
     const postcode = within(sheet).getByLabelText(/delivery postcode/i);
-    // Mondial Relay delivers across Europe and needs a postcode: it starts from the DPD parcel's.
+    // Mondial Relay delivers across Europe and needs a postcode: it starts from the DPD Germany parcel's, a German one.
     expect(postcode).toBeRequired();
-    expect(postcode).toHaveValue('8000');
+    expect(postcode).toHaveValue('10115');
+    expect(within(sheet).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('DE');
     expect(postcode).toHaveAttribute('maxlength', '12');
-    expect(within(sheet).queryByRole('button', { name: 'Use 8000' })).not.toBeInTheDocument();
+    expect(within(sheet).queryByRole('button', { name: 'Use 10115' })).not.toBeInTheDocument();
     // Leaving the field keeps it.
     await user.click(postcode);
     await user.tab();
-    expect(postcode).toHaveValue('8000');
+    expect(postcode).toHaveValue('10115');
     expect(within(sheet).getByText(/carrier needs the delivery postcode/i))
       .toBeInTheDocument();
 
@@ -980,6 +981,7 @@ describe('App', () => {
 
   it("starts a postcode from one this device gave without the account, when it was the same carrier's", async () => {
     rememberPostcode('mondial-relay', '1000');
+    rememberPostcode('gls-ch', '8004');
     const user = userEvent.setup();
     renderApp(createDemoRepo(window.localStorage));
     await screen.findByText('Trail weekend kit 🏕️');
@@ -988,7 +990,8 @@ describe('App', () => {
     const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
     await user.type(within(sheet).getByLabelText(/tracking number/i), '76434219');
     await pickCarrier(user, within(sheet).getByRole('button', { name: /^Detect automatically/ }), 'Mondial Relay');
-    // The account's newest postcode is DPD's; the device gave Mondial Relay its own.
+    // The newest postcodes are the account's DPD one, from no country known, and this device's Swiss one; it gave
+    // Mondial Relay its own.
     expect(within(sheet).getByLabelText(/delivery postcode/i)).toHaveValue('1000');
     expect(within(sheet).queryByRole('button', { name: 'Forget this postcode' })).not.toBeInTheDocument();
   });
@@ -1021,6 +1024,36 @@ describe('App', () => {
       dpdPostcode: '1000',
       dpdPostcodeCountry: 'BE',
     });
+  });
+
+  it('fills no field that reads the country with a postcode given to a carrier that takes any country\'s', async () => {
+    const repo = createDemoRepo(window.localStorage);
+    // DPD Switzerland reads the postcode alone, from any country: this French one is not Swiss.
+    await repo.add({ trackingNumber: '06080000000002', label: 'Previous DPD parcel', carrier: 'dpd', dpdPostcode: '75001' });
+    const user = userEvent.setup();
+    renderApp(repo);
+    await screen.findByText('Previous DPD parcel');
+
+    await user.click(screen.getByRole('button', { name: /add a parcel/i }));
+    const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
+    await user.type(within(sheet).getByLabelText(/tracking number/i), '76434219');
+    await pickCarrier(user, within(sheet).getByRole('button', { name: /^Detect automatically/ }), 'Mondial Relay');
+    expect(within(sheet).getByLabelText(/delivery postcode/i)).toHaveValue('');
+  });
+
+  it('fills a postcode given to a carrier that takes only its own country\'s, from there', async () => {
+    const repo = createDemoRepo(window.localStorage);
+    await repo.add({ trackingNumber: '01234567890123', label: 'Previous DPD Germany parcel', carrier: 'dpd-de', dpdPostcode: '10115' });
+    const user = userEvent.setup();
+    renderApp(repo);
+    await screen.findByText('Previous DPD Germany parcel');
+
+    await user.click(screen.getByRole('button', { name: /add a parcel/i }));
+    const sheet = screen.getByRole('dialog', { name: /add a parcel/i });
+    await user.type(within(sheet).getByLabelText(/tracking number/i), '76434219');
+    await pickCarrier(user, within(sheet).getByRole('button', { name: /^Detect automatically/ }), 'Mondial Relay');
+    expect(within(sheet).getByLabelText(/delivery postcode/i)).toHaveValue('10115');
+    expect(within(sheet).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('DE');
   });
 
   it('shows the first sync in progress and reflects its result without manual refresh', async () => {

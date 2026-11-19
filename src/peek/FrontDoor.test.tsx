@@ -460,7 +460,7 @@ describe('FrontDoor', () => {
     expect(postcode).toHaveFocus();
     // The field stays empty for the visitor, rather than taking the next one.
     expect(screen.queryByRole('button', { name: 'Forget this postcode' })).not.toBeInTheDocument();
-    expect(JSON.parse(localStorage.getItem(POSTCODES_STORAGE_KEY) ?? '[]')).toEqual([{ carrier: 'dpd', postcode: '1200', country: 'CH' }]);
+    expect(JSON.parse(localStorage.getItem(POSTCODES_STORAGE_KEY) ?? '[]')).toEqual([{ carrier: 'dpd', postcode: '1200' }]);
     // A postcode typed by hand is not one to forget.
     await user.type(postcode, '3000');
     expect(screen.queryByRole('button', { name: 'Forget this postcode' })).not.toBeInTheDocument();

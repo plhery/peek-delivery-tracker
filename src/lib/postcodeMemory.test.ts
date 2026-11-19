@@ -57,11 +57,11 @@ describe('remembered postcodes', () => {
     const belgian = { carrier: 'spring-gds', postcode: '1000', country: 'BE' } as const;
     expect(rememberedPostcode('spring-gds', POSTNL, postnl, [belgian])).toEqual({ postcode: '1000', country: 'BE' });
     expect(rememberedPostcode('mondial-relay', MONDIAL, mondialRelay, [belgian])).toEqual({ postcode: '1000', country: 'BE' });
-    // One given to a carrier that reads the postcode alone is from that carrier's home.
-    expect(rememberedPostcode('mondial-relay', MONDIAL, mondialRelay, [{ carrier: 'gls-de', postcode: '10115' }]))
+    // One given to a carrier that reads the postcode alone, and takes only its own country's, is from there.
+    expect(rememberedPostcode('mondial-relay', MONDIAL, mondialRelay, [{ carrier: 'dpd-de', postcode: '10115' }]))
       .toEqual({ postcode: '10115', country: 'DE' });
     // Once the reader names a country, only that country's.
-    expect(rememberedPostcode('mondial-relay', MONDIAL, mondialRelay, [belgian, { carrier: 'gls-de', postcode: '10115' }], 'DE'))
+    expect(rememberedPostcode('mondial-relay', MONDIAL, mondialRelay, [belgian, { carrier: 'dpd-de', postcode: '10115' }], 'DE'))
       .toEqual({ postcode: '10115', country: 'DE' });
     expect(rememberedPostcode('spring-gds', POSTNL, postnl, [belgian], 'NL')).toBeUndefined();
   });
@@ -73,6 +73,26 @@ describe('remembered postcodes', () => {
     // A field that reads the postcode alone takes it by its shape, from its own country.
     expect(rememberedPostcode('gls-ch', GLS, glsSwitzerland, [{ carrier: 'mondial-relay', postcode: '1000', country: 'BE' }]))
       .toEqual({ postcode: '1000', country: 'CH' });
+  });
+
+  it('never brings the home of a carrier that took any country\'s postcode to a field that reads the country', () => {
+    // DPD Switzerland, DHL Germany and GLS Netherlands read the postcode alone, from any country: a French one given
+    // them is not Swiss, German or Dutch.
+    for (const carrier of ['dpd', 'dhl', 'gls-nl'] as const) {
+      const given = [{ carrier, postcode: '75001' }];
+      expect(rememberedPostcode('spring-gds', POSTNL, postnl, given)).toBeUndefined();
+      expect(rememberedPostcode('mondial-relay', MONDIAL, mondialRelay, given)).toBeUndefined();
+      expect(rememberedPostcodeField('mondial-relay', MONDIAL, mondialRelay, undefined, given)).toEqual({ value: '', offered: undefined, country: undefined });
+      expect(rememberedPostcodeField('spring-gds', POSTNL, postnl, undefined, given)).toEqual({ value: '', offered: undefined, country: undefined });
+    }
+    // DPD Germany takes German postcodes only, so one given to it is German.
+    expect(rememberedPostcodeField('spring-gds', POSTNL, postnl, undefined, [{ carrier: 'dpd-de', postcode: '10115' }]))
+      .toEqual({ value: '', offered: { postcode: '10115', country: 'DE' }, country: undefined });
+    // A country recorded with it still wins.
+    expect(rememberedPostcodeField('mondial-relay', MONDIAL, mondialRelay, undefined, [{ carrier: 'dpd', postcode: '75001', country: 'FR' }]))
+      .toEqual({ value: '75001', offered: undefined, country: 'FR' });
+    // A field that reads the postcode alone takes it as before, from its own home.
+    expect(rememberedPostcode('gls-ch', GLS, glsSwitzerland, [{ carrier: 'dhl', postcode: '8004' }])).toEqual({ postcode: '8004', country: 'CH' });
   });
 
   it('fills a required field and offers it to an optional one, until the reader types', () => {
@@ -104,7 +124,7 @@ describe('the postcodes this device gave', () => {
       rememberPostcode('gls-ch', '8004');
       rememberPostcode('dpd', 'SW1A 1AA');
     });
-    expect(result.current).toEqual([{ carrier: 'dpd', postcode: 'SW1A 1AA', country: 'CH' }, { carrier: 'gls-ch', postcode: '8004', country: 'CH' }]);
+    expect(result.current).toEqual([{ carrier: 'dpd', postcode: 'SW1A 1AA' }, { carrier: 'gls-ch', postcode: '8004', country: 'CH' }]);
     act(() => { for (const postcode of ['1200', '3011', '6900', '7000', '9000']) rememberPostcode('swiss-post', postcode); });
     expect(result.current).toHaveLength(MAX_POSTCODES);
     expect(result.current[0]).toEqual({ carrier: 'swiss-post', postcode: '9000', country: 'CH' });
@@ -126,6 +146,21 @@ describe('the postcodes this device gave', () => {
     expect(renderHook(() => usePostcodeMemory()).result.current).toEqual([{ carrier: 'spring-gds', postcode: '1000' }]);
   });
 
+  it('keeps no country for a carrier that reads the postcode alone and takes any country\'s', () => {
+    rememberPostcode('dpd', '75001');
+    rememberPostcode('dhl', '75002');
+    rememberPostcode('dpd-de', '10115');
+    expect(kept()).toEqual([{ carrier: 'dpd-de', postcode: '10115', country: 'DE' }, { carrier: 'dhl', postcode: '75002' },
+      { carrier: 'dpd', postcode: '75001' }]);
+    // The home this browser once kept with such a postcode is not its country.
+    localStorage.setItem(POSTCODES_STORAGE_KEY, JSON.stringify([{ carrier: 'dpd', postcode: '75001', country: 'CH' },
+      { carrier: 'spring-gds', postcode: '1000', country: 'BE' }, { carrier: 'dpd-de', postcode: '10115', country: 'DE' }]));
+    const given = renderHook(() => usePostcodeMemory()).result.current;
+    expect(given).toEqual([{ carrier: 'dpd', postcode: '75001' }, { carrier: 'spring-gds', postcode: '1000', country: 'BE' },
+      { carrier: 'dpd-de', postcode: '10115', country: 'DE' }]);
+    expect(rememberedPostcode('spring-gds', POSTNL, postnl, given.slice(0, 1))).toBeUndefined();
+  });
+
   it('keeps nothing that is not a postcode', () => {
     rememberPostcode('dpd', '');
     rememberPostcode('dpd', 'https://example.test/?postcode=8004');
@@ -141,7 +176,7 @@ describe('the postcodes this device gave', () => {
     rememberPostcode('gls-ch', '8004');
     rememberPostcode('dpd', '1200');
     forgetPostcode(' 8004 ');
-    expect(kept()).toEqual([{ carrier: 'dpd', postcode: '1200', country: 'CH' }]);
+    expect(kept()).toEqual([{ carrier: 'dpd', postcode: '1200' }]);
     forgetPostcode('1200');
     expect(localStorage.getItem(POSTCODES_STORAGE_KEY)).toBeNull();
   });
@@ -159,6 +194,6 @@ describe('the postcodes this device gave', () => {
     vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => { throw new Error('SecurityError'); });
     const { result } = renderHook(() => usePostcodeMemory());
     act(() => rememberPostcode('dpd', '8004'));
-    expect(result.current).toEqual([{ carrier: 'dpd', postcode: '8004', country: 'CH' }]);
+    expect(result.current).toEqual([{ carrier: 'dpd', postcode: '8004' }]);
   });
 });

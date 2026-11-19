@@ -202,7 +202,7 @@ describe('ChangeCarrierSheet', () => {
       const user = userEvent.setup();
       // The parcel's own carrier, PostNL, without a postcode yet: nothing to save until the postcode is used.
       const { unmount } = render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
-        postcodes={[{ carrier: 'packs', postcode: '1234 AB' }]} onChange={onChange} onClose={vi.fn()} />);
+        postcodes={[{ carrier: 'spring-gds', postcode: '1234 AB', country: 'NL' }]} onChange={onChange} onClose={vi.fn()} />);
       const postnl = screen.getByRole('dialog', { name: 'Change carrier' });
       expect(postcodeField(postnl)).not.toBeRequired();
       expect(postcodeField(postnl)).toHaveValue('');
@@ -251,6 +251,30 @@ describe('ChangeCarrierSheet', () => {
       expect(onChange).toHaveBeenCalledWith(expect.objectContaining({ carrier: 'mondial-relay', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' }));
     });
 
+    it('neither fills nor offers a postcode whose country is not known to a field that reads it', async () => {
+      vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
+      // Given to DPD Switzerland, which takes any country's postcode: this French one is not Swiss.
+      const postcodes = [{ carrier: 'dpd', postcode: '75001' }] as const;
+      const { unmount } = render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
+        postcodes={postcodes} onChange={vi.fn()} onClose={vi.fn()} />);
+      const postnl = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(postnl)).toHaveValue('');
+      expect(within(postnl).queryByRole('button', { name: 'Use 75001' })).not.toBeInTheDocument();
+      unmount();
+
+      const mondial = render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'mondial-relay', trackingNumber: '40283715' }}
+        initialCarrier="mondial-relay" postcodes={postcodes} onChange={vi.fn()} onClose={vi.fn()} />);
+      expect(postcodeField(screen.getByRole('dialog', { name: 'Change carrier' }))).toHaveValue('');
+      mondial.unmount();
+
+      // Given to DPD Germany, which takes German postcodes only, it is German.
+      render(<ChangeCarrierSheet parcel={{ ...parcel, carrier: 'mondial-relay', trackingNumber: '40283715' }} initialCarrier="mondial-relay"
+        postcodes={[{ carrier: 'dpd-de', postcode: '10115' }]} onChange={vi.fn()} onClose={vi.fn()} />);
+      const german = screen.getByRole('dialog', { name: 'Change carrier' });
+      expect(postcodeField(german)).toHaveValue('10115');
+      expect(within(german).getByRole('combobox', { name: 'Delivery country' })).toHaveValue('DE');
+    });
+
     it('keeps the parcel’s own postcode for its own carrier', async () => {
       vi.stubGlobal('fetch', vi.fn(async () => Response.json({ refused: false })));
       const user = userEvent.setup();
@@ -290,7 +314,7 @@ describe('ChangeCarrierSheet', () => {
       const onChange = vi.fn().mockResolvedValue(undefined);
       const user = userEvent.setup();
       const asked = { ...parcel, providerInputNeeded: { provider: 'ParcelsApp', field: 'dpdPostcode' as const } };
-      const postcodes = [{ carrier: 'packs' as const, postcode: '1234 AB' }];
+      const postcodes = [{ carrier: 'spring-gds' as const, postcode: '1234 AB', country: 'NL' }];
       // PostNL's field, required while the provider asks, starts from it.
       const { unmount } = render(<ChangeCarrierSheet parcel={{ ...asked, carrier: 'spring-gds', trackingNumber: '3SABCD826405193' }}
         postcodes={postcodes} onChange={onChange} onClose={vi.fn()} />);

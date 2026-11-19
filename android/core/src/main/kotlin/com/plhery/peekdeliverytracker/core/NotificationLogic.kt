@@ -286,13 +286,14 @@ interface UserDefaults {
 }
 
 object NotificationInvitationPreference {
-    private fun key(userId: UUID): String = "sdt.notificationInvitationDismissed.v1.${userId.uuidString}"
+    /** The account's, or with no account the phone's own (`device`), for the parcels it follows itself. */
+    private fun key(userId: UUID?): String = "sdt.notificationInvitationDismissed.v1.${userId?.uuidString ?: "device"}"
 
-    fun isDismissed(userId: UUID, defaults: UserDefaults): Boolean =
+    fun isDismissed(userId: UUID?, defaults: UserDefaults): Boolean =
         // Preserve choices made in the previous full-screen onboarding.
         defaults.bool(forKey = "sdt.notificationOnboardingCompleted.v1") || defaults.bool(forKey = key(userId))
 
-    fun dismiss(userId: UUID, defaults: UserDefaults) {
+    fun dismiss(userId: UUID?, defaults: UserDefaults) {
         defaults.set(true, forKey = key(userId))
     }
 }

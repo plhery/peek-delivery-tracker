@@ -2572,24 +2572,17 @@ class DeviceParcelTests {
     }
 
     @Test
-    fun followingALinkWithoutAnAccountAsksForNotificationsOnce() = runTest {
+    fun followingALinkWithoutAnAccountInvitesTheListToNotificationsAndTurnsThemOnFromIt() = runTest {
         val transport = RecordingTransport { jsonResponse(404) }
         val id = UUID.randomUUID()
         val shown = PublicParcelResponse(link = reader("33333333333A"), parcel = pkg(id, stage = TrackingStage.Registered))
         val calls = Calls()
         val device = device(client(calls, read = { shown }), Memory(), backgroundScope)
-        var status = NotificationAuthorizationStatus.NotDetermined
-        val asked = mutableListOf<String>()
-        val notifications = DeviceNotificationAccess(
-            status = { asked += "status"; status },
-            request = { asked += "request"; status = NotificationAuthorizationStatus.Authorized },
-            register = { asked += "register" },
-            token = { "token1" },
-        )
+        val push = StubPushNotifications(granted = true, currentDeviceToken = "token1")
         val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
         val localizer = Localizer(AppLanguage.En)
         val store = testParcelStore(
-            postcodeConfiguration, session, transport, backgroundScope, localizer = localizer, device = device, deviceNotifications = notifications,
+            postcodeConfiguration, session, transport, backgroundScope, localizer = localizer, device = device, notifications = push,
         )
         store.setDeliveryLiveActivitiesEnabled(false)
         assertNull(store.followedHere(shown))
@@ -2602,12 +2595,52 @@ class DeviceParcelTests {
         assertEquals(id, store.followedHere(shown))
         assertEquals(id, store.followedHere(linkId = "33333333333A"))
         assertEquals("33333333333A", store.viewerLink(store.parcels.first()))
-        val alert = "alert 33333333333A - all token1 ${NativePushLocale(localizer.language).rawValue} production fcm"
         runCurrent()
+        // The phone isn't asked at once: the list invites it.
+        assertFalse(push.calls.contains("request"))
+        assertEquals(emptyList<String>(), calls.all.filter { it.startsWith("alert") })
+        store.refreshNotificationState()
+        assertTrue(store.shouldInviteNotifications)
+
+        assertFalse("No account, no welcome notification", store.enableNotifications(localizer.language))
+        runCurrent()
+        val alert = "alert 33333333333A - all token1 ${NativePushLocale(localizer.language).rawValue} production fcm"
         assertEquals(listOf(alert), calls.all.filter { it.startsWith("alert") })
-        assertEquals(listOf("status", "request", "status", "register"), asked)
+        assertEquals(1, push.calls.count { it == "request" })
+        assertFalse(store.shouldInviteNotifications)
         val again = store.follow(ParcelLinkRoute(id = "33333333333A"), shown)
         assertEquals(ParcelLinkClaim.Already(id), again)
+    }
+
+    @Test
+    fun aGuestsNotNowStaysAndAPhoneThatAllowsNotificationsIsNotInvited() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        val shown = PublicParcelResponse(link = reader("33333333333A"), parcel = pkg(id, stage = TrackingStage.Registered))
+        val device = device(client(Calls(), read = { shown }), Memory(), backgroundScope)
+        val push = StubPushNotifications()
+        val defaults = MemoryDefaults()
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        fun store() = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, defaults = defaults, device = device, notifications = push)
+        val first = store()
+        first.setDeliveryLiveActivitiesEnabled(false)
+        first.follow(ParcelLinkRoute(id = "33333333333A"), shown)
+        first.refreshNotificationState()
+        assertTrue(first.shouldInviteNotifications)
+
+        first.dismissNotificationInvitation()
+        assertFalse(first.shouldInviteNotifications)
+        val relaunched = store()
+        relaunched.refreshNotificationState()
+        assertFalse("Not now is kept on the phone", relaunched.shouldInviteNotifications)
+
+        push.status = NotificationAuthorizationStatus.Authorized
+        val allowed = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, notifications = push)
+        allowed.refreshNotificationState()
+        assertFalse(allowed.shouldInviteNotifications)
+        push.status = NotificationAuthorizationStatus.Denied
+        allowed.refreshNotificationState()
+        assertFalse(allowed.shouldInviteNotifications)
     }
 
     @Test

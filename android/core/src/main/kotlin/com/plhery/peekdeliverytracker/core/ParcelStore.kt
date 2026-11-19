@@ -532,7 +532,7 @@ class ParcelStore(
         deliveryWidgetStore.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
         cacheOwnerId = session.user?.id
         listReadAt = if (session.isGuest) device.lastCheckedAt else null
-        notificationInvitationDismissed = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) } ?: false
+        notificationInvitationDismissed = invitationDismissed()
         identityObservation = session.identityChanges.sink { resetForSessionChange() }
         // The delivery email writes a time and a distance as the app does: those chosen in Settings go to the account.
         scope.launch { combine(localizer.use24HourTimeFlow, localizer.distanceUnitFlow) { _, _ -> }.drop(1).collect { saveShownUnits() } }
@@ -567,7 +567,7 @@ class ParcelStore(
             releaseDeviceNotifications(from = owner)
         }
         cacheOwnerId = session.user?.id
-        notificationInvitationDismissed = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) } ?: false
+        notificationInvitationDismissed = invitationDismissed()
         mutationRevision += 1
         loadSequence += 1
         holdingDeliverySurfaces = reopening
@@ -702,6 +702,9 @@ class ParcelStore(
             load()
             if (!stillCurrent(generation)) return
             beginDevicePolling()
+            // What the phone allows decides whether the list invites it to notifications; a phone without pushes has none.
+            if (notifications.available) refreshNotificationState()
+            if (!stillCurrent(generation)) return
             resumeDeviceAlerts()
             return
         }
@@ -732,7 +735,10 @@ class ParcelStore(
             // outside the app, from a link in an email.
             if (returning && !isDemo) scope.launch { refreshNotificationPreferences() }
         } else if (active && isGuest) {
-            scope.launch { load() }
+            scope.launch {
+                if (notifications.available) refreshNotificationState()
+                load()
+            }
         }
     }
 
@@ -929,12 +935,8 @@ class ParcelStore(
      */
     suspend fun askForDeviceAlerts(language: AppLanguage) {
         if (!notifications.available || !tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay) return
-        var status = deviceNotifications.status()
-        if (status == NotificationAuthorizationStatus.NotDetermined) {
-            deviceNotifications.request()
-            status = deviceNotifications.status()
-        }
-        if (!NotificationDevicePolicy.isAuthorized(status)) return
+        // Never asked yet, the phone is asked only from the list's invitation (`shouldInviteNotifications`).
+        if (!NotificationDevicePolicy.isAuthorized(deviceNotifications.status())) return
         deviceNotifications.register()
         deviceNotifications.token()?.let { registerDeviceAlerts(it, language) }
     }
@@ -1418,6 +1420,14 @@ class ParcelStore(
                     dismissNotificationInvitation()
                     throw DeliveryApiError.NotificationsDenied()
                 }
+                if (isGuest) {
+                    // No account to register: the phone's token signs each parcel on its way up, as it comes.
+                    dismissNotificationInvitation()
+                    deviceNotifications.register()
+                    deviceNotifications.token()?.let { registerDeviceAlerts(it, language) }
+                    succeeded = true
+                    return false
+                }
                 defaults.set(false, forKey = notificationOptOutKey)
                 val failures = notifications.deviceTokenFailures
                 notifications.registerForRemoteNotifications()
@@ -1463,10 +1473,18 @@ class ParcelStore(
         analytics("notifications-disable", DeliveryAnalytics.Outcome.Success)
     }
 
-    /** Whether the list invites the account to turn notifications on; never on a phone without pushes. */
+    /**
+     * Whether the list invites the account to turn notifications on; never on a phone without pushes. Without an
+     * account, it invites the phone while a parcel is on its way and it was never asked, in place of asking at once.
+     */
     val shouldInviteNotifications: Boolean
-        get() = notifications.available && !loading && errorMessage == null && !authenticationRequired &&
-            NotificationInvitationPolicy.shouldPresent(
+        get() {
+            if (!notifications.available || loading || errorMessage != null || authenticationRequired) return false
+            if (isGuest) {
+                return notificationStateLoaded && notificationStatus == NotificationAuthorizationStatus.NotDetermined &&
+                    !notificationInvitationDismissed && device.hasParcelsOnTheirWay
+            }
+            return NotificationInvitationPolicy.shouldPresent(
                 isAuthenticated = session.isAuthenticated,
                 isDemo = isDemo,
                 hasParcels = parcels.isNotEmpty(),
@@ -1478,13 +1496,19 @@ class ParcelStore(
                     notificationStatus, session.user?.id, notificationOwner, failed = nativePushRegistrationFailed,
                 ),
             )
+        }
 
     fun dismissNotificationInvitation() {
         if (isDemo) return
-        val userId = session.user?.id ?: return
+        val userId = session.user?.id
+        if (userId == null && !isGuest) return
         NotificationInvitationPreference.dismiss(userId, defaults)
         notificationInvitationDismissed = true
     }
+
+    /** The account's, or the phone's own without one. */
+    private fun invitationDismissed(): Boolean = session.user?.let { NotificationInvitationPreference.isDismissed(it.id, defaults) }
+        ?: (session.isGuest && NotificationInvitationPreference.isDismissed(null, defaults))
 
     suspend fun loadNotificationPreferences() {
         // Alerts belong to an account.

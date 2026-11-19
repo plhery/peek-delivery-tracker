@@ -2089,7 +2089,7 @@ describe('persistent tracking routing', () => {
     }
     expect(starts).toEqual(['ParcelsApp', 'Ship24', '17TRACK', 'ParcelsApp']);
   });
-  it('never starts a Juxi check with Track718, which its plan keeps last', async () => {
+  it('never starts a Juxi check with Track718, which the plan asks only on request', async () => {
     let elapsed = 0;
     vi.spyOn(performance, 'now').mockImplementation(() => elapsed);
     const { direct, universal, health } = setup();

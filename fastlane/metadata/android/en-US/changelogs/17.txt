@@ -1,0 +1,5 @@
+Settings › Assistants: Peek’s address, how to set up your assistant, and the ones connected, with Disconnect.
+When a carrier’s tracking is having problems, the parcel says so and links to the carrier’s site.
+Distances and weights follow the measurement system chosen in Android’s settings.
+Without an account, a parcel’s bell turns its notifications off, and a refresh asks the carrier again.
+A new Usage statistics switch in Settings › Preferences.

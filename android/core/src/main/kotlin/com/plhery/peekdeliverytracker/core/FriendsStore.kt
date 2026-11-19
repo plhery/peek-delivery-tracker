@@ -330,15 +330,25 @@ class FriendsActivityStore(
         private set
 
     private val dismissed = mutableSetOf<UUID>()
+
+    /** The acknowledgements the server hasn't answered, offline or away, sent again with each refresh until it does. */
+    private val unanswered = LinkedHashSet<UUID>()
     private var generation = 0
 
-    /** `refresh(session:)`: the notices afresh, but those already acknowledged; a failure keeps those shown. */
+    /**
+     * `refresh(session:)`: the acknowledgements still unanswered sent again, then the notices afresh, but those already
+     * acknowledged; a failure keeps those shown.
+     */
     suspend fun refresh() {
         if (!signedIn()) {
             clear()
             return
         }
         val current = generation
+        for (friendId in unanswered.toList()) {
+            if (current != generation || friendId !in unanswered) break
+            sendAcknowledgement(friendId)
+        }
         try {
             val next = client.activity()
             if (current != generation || !currentCoroutineContext().isActive) return
@@ -358,19 +368,31 @@ class FriendsActivityStore(
 
     /**
      * `acknowledge(_:session:)`: once a friend: their notice goes, then their notifications, and the server hears it,
-     * whatever it answers.
+     * whatever it answers. Where no answer comes, it is sent again with each refresh until one does, so the notice
+     * doesn't come back once the app starts again.
      */
     suspend fun acknowledge(friendId: UUID) {
         if (friendId in dismissed) return
         dismissed += friendId
         updatesState.value = updates.filter { it.friendId != friendId }
         removeNotifications(friendId)
+        unanswered += friendId
+        sendAcknowledgement(friendId)
+    }
+
+    private suspend fun sendAcknowledgement(friendId: UUID) {
         try {
             client.action(FriendsActionRequest(FriendsAction.AcknowledgeFriend, friendId = friendId))
+            unanswered -= friendId
         } catch (error: Exception) {
             currentCoroutineContext().ensureActive()
+            if (answered(error)) unanswered -= friendId
         }
     }
+
+    /** Whether the server answered, refusing: not the network, too many requests at once or its own failure. */
+    private fun answered(error: Exception): Boolean = error is DeliveryApiError && error !is DeliveryApiError.RateLimited &&
+        !(error is DeliveryApiError.ServiceFailed && error.status >= 500)
 
     fun consumeArrival() {
         arrivalSnapshot = null
@@ -391,6 +413,7 @@ class FriendsActivityStore(
     fun clear() {
         hidePrivateContent()
         dismissed.clear()
+        unanswered.clear()
         focusIdState.value = null
         presentationIdState.value = UUID.randomUUID()
     }

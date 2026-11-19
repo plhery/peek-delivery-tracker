@@ -353,6 +353,47 @@ class FriendsStoreTests {
     }
 
     @Test
+    fun anAcknowledgementThatGotNoAnswerIsSentAgainOnTheNextRefreshUntilOneComes() = runTest {
+        val client = FakeClient()
+        var signedIn = true
+        val store = FriendsActivityStore(client, signedIn = { signedIn })
+        val acknowledged = FriendsActionRequest(FriendsAction.AcknowledgeFriend, friendId = mila.id)
+        client.activity = FriendsActivity(listOf(FriendUpdate(mila.id, "Mila")))
+        store.refresh()
+        client.failure = IOException("offline")
+        store.acknowledge(mila.id)
+        assertTrue(store.updates.isEmpty())
+        // Still offline: asked again, and kept.
+        store.refresh()
+        assertEquals(listOf(acknowledged, acknowledged), client.actions)
+        // Back online: once more, then no more.
+        client.failure = null
+        store.refresh()
+        store.refresh()
+        assertEquals(listOf(acknowledged, acknowledged, acknowledged), client.actions)
+        assertTrue(store.updates.isEmpty())
+
+        // An answer that refuses it ends it, and another account never sends it.
+        client.actions.clear()
+        client.activity = FriendsActivity(listOf(FriendUpdate(noe.id, "Noé")))
+        client.failure = DeliveryApiError.Service("Not friends")
+        store.acknowledge(noe.id)
+        client.failure = null
+        store.refresh()
+        assertEquals(1, client.actions.size)
+        client.failure = IOException("offline")
+        store.acknowledge(UUID.fromString("33000000-0000-4000-8000-000000000003"))
+        assertEquals(2, client.actions.size)
+        signedIn = false
+        store.refresh()
+        signedIn = true
+        client.failure = null
+        client.activity = FriendsActivity(emptyList())
+        store.refresh()
+        assertEquals(2, client.actions.size)
+    }
+
+    @Test
     fun aRevealIsANewPresentationOfItsFriend() {
         val store = FriendsActivityStore(FakeClient(), signedIn = { true })
         val before = store.presentationId

@@ -64,7 +64,7 @@ import { UNIVERSAL_SOURCES, universalPlan, type UniversalSource } from 'universa
 import { catalogRules, clearConfirmation, detectionExpects, directCarrier, earlierParcelRows, FRESHNESS_WINDOW_MS, hasRoutingProgress, minimumInterval, quietUntil, rereadStage, RoutingDeferred, routingFailure, routingState, TrackingRouter, usable, withoutEarlierParcel, type RoutedResult } from './trackingRouting';
 import { REDETECTION_WINDOW_MS, rerouteAskable } from './redetection';
 import { upuHistory } from './upuHistory';
-import { ALERTED_UNSEEN_MS, NUMBER_UNKNOWN_AFTER_MS, sparseLookupRecheck, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
+import { ALERTED_UNSEEN_MS, NUMBER_UNKNOWN_AFTER_MS, sparseLookupRecheck, unansweredProbeTurn, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
 import { afterSameDayScans } from './dayScans';
 import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
@@ -833,6 +833,10 @@ function scheduledSyncDue(
   if (!opened && quietUntil(parcel) > now.getTime()) return false;
   const unseen = unseenFor(parcel, now);
   if (oneOff && unseen !== null && (unfollowed || unseen >= UNSEEN_HOURLY_MS)) {
+    // A carrier recognition asked gave no answer (its outage): a lookup someone follows is checked at that
+    // carrier's next turn, which recognition spaces out, so the carrier is asked again soon after its outage ends.
+    const turn = unfollowed ? null : unansweredProbeTurn(parcel, now);
+    if (turn !== null && now.getTime() >= turn && !(Date.parse(String(parcel.last_synced_at ?? '')) >= turn)) return true;
     // Past its hourly checks, a lookup someone keeps an alert on, which is what watches a lookup
     // without an account besides a link opened in the last hour, is checked daily until 30 days
     // after it was added. One only opened gets its check from the opening.

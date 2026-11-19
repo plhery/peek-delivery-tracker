@@ -581,7 +581,9 @@ opened in the last hour and it has no alert on. One whose number nobody
 has seen 6 h after it was added, or whose carrier's last answer is still that it has not found
 the number or has no history for it (the carrier's outage is no answer), leaves the schedule,
 followed or not, unless it has an alert on:
-then it is checked daily until 30 days after it was added. Opening a link still queues a
+then it is checked daily until 30 days after it was added. While it is followed, one a carrier
+recognition asked gave no answer for is also checked at that carrier's next turn, until 30 days
+after it was added (Carrier recognition, below). Opening a link still queues a
 check at its cadence, daily rather than weekly after 7 days, since someone is looking. With
 `TRACKING_ENABLE_SPARSE_LOOKUP_RECHECKS=true` (off by default), a release's re-check of one
 past its hourly checks unseen, alert on or not, or the daily check of one with an alert on,
@@ -829,7 +831,12 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   ranked first among them, before the checks slow down or a lookup leaves the schedule.
   A carrier with a minimum interval of its own is not asked sooner than it allows
   (Refresh cadence); the lookup that follows its read in the same check is the same ask.
-  A read our own pacing refuses asked nothing and counts no miss.
+  A read our own pacing refuses asked nothing and counts no miss. A carrier that gave no
+  answer (an outage, a block or a timeout) is marked `unanswered` until it answers; when its
+  turn comes and a check does not ask it (its interval, its failure or the check's limit), it
+  keeps a turn an hour on. A lookup nobody has answered for is checked at that turn while
+  someone follows it (Refresh cadence), so the carrier is asked again within a day of its
+  outage's end.
 - **After a scraper release.** A parcel keeps a digest of the catalog that last routed it
   (`routing.rules`: the scraper release, each carrier's detection rules, names, whether it
   has an adapter of its own and whether that adapter's clocks are local), so every release

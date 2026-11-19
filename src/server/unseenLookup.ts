@@ -100,15 +100,32 @@ export function unseenRecheckDue(parcel: JsonObject, now: Date): number | null |
 }
 
 /**
+ * The next turn, as epoch milliseconds, of a carrier recognition asked about a one-off lookup nobody has answered
+ * for, when that carrier gave no answer at its last ask (`routing.candidate_probes`, `unanswered`: its outage, a block
+ * or a timeout), while recognition still asks for the lookup (CANDIDATE_PROBE_WINDOW). Null otherwise. Past its hourly
+ * checks, a lookup someone follows stays on the schedule for that turn: a lookup that met an outage is asked once more
+ * soon after it ends, rather than left with the outage's answer.
+ */
+export function unansweredProbeTurn(parcel: JsonObject, now: Date): number | null {
+  const unseen = parcel.one_off === true ? unseenFor(parcel, now) : null;
+  if (unseen === null || unseen >= CANDIDATE_PROBE_WINDOW) return null;
+  const turns = Object.values(routingState(parcel).candidate_probes ?? {})
+    .filter((probe) => probe.unanswered).map((probe) => Date.parse(probe.retry_at)).filter(Number.isFinite);
+  return turns.length ? Math.min(...turns) : null;
+}
+
+/**
  * A one-off lookup that left the schedule before any carrier or provider answered for
  * its number. Only opening its link, or a scraper release that teaches a carrier to recognize
  * its number, checks it again. One someone keeps an alert on (`alerted`, linkAlertOn) stays
- * until ALERTED_UNSEEN_MS. The caller says whether one is: the schedule's and the job queue's
- * rows carry no links.
+ * until ALERTED_UNSEEN_MS, and one a carrier gave no answer for keeps that carrier's next turn
+ * (unansweredProbeTurn). The caller says whether an alert is on: the schedule's and the job
+ * queue's rows carry no links.
  */
 export function leftScheduleUnseen(parcel: JsonObject, now: Date, alerted: boolean): boolean {
   const unseen = parcel.one_off === true ? unseenFor(parcel, now) : null;
-  return unseen !== null && unseen >= UNSEEN_HOURLY_MS && !(unseen < ALERTED_UNSEEN_MS && alerted);
+  return unseen !== null && unseen >= UNSEEN_HOURLY_MS && !(unseen < ALERTED_UNSEEN_MS && alerted)
+    && !((unansweredProbeTurn(parcel, now) ?? 0) > now.getTime());
 }
 
 /**

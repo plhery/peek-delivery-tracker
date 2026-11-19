@@ -49,7 +49,7 @@ import { NOOP_RECORDER } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
 import { hostStepRecorder, markLookup, unmarkLookups } from './stepRecorder';
 import { RoyalBrowserPaused, withRoyalBrowserAdmission } from './royalBrowserAdmission';
-import { unseenFor } from './unseenLookup';
+import { leftScheduleUnseen, unseenFor } from './unseenLookup';
 import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInputError, NoHistoryError, NotFoundError, RateLimitedError, SchemaError } from 'universal-parcel-scraper';
 import * as scraper from 'universal-parcel-scraper';
 import { doubled, s10 } from '../test/trackingNumbers';
@@ -5164,6 +5164,39 @@ describe('TrackingSyncService', () => {
     const eightDays = { ...unseen, created_at: '2026-09-01T05:30:00Z', last_synced_at: '2026-09-08T10:00:15Z' };
     expect(isOpenedParcelSyncDue(eightDays, new Date('2026-09-09T09:00:00Z'))).toBe(false);
     expect(isOpenedParcelSyncDue(eightDays, new Date('2026-09-09T10:00:00Z'))).toBe(true);
+  });
+
+  it('checks a followed lookup nobody has seen at the next turn of a carrier recognition asked that gave no answer', async () => {
+    const lookup = (candidateProbes: JsonObject, extra: JsonObject = {}): JsonObject => ({ id: 'outage', carrier: 'unknown',
+      current_stage: 'pending', tracking_number: 'TEST1234', user_id: null, one_off: true, created_at: '2026-09-09T05:30:00Z',
+      last_synced_at: '2026-09-09T10:00:15Z', sync_status: 'waiting', archived_at: null,
+      carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {}, candidate_probes: candidateProbes } }, ...extra });
+    // Colis Privé was down at the last ask; DHL eCommerce answered that it does not know the number.
+    const answered = { 'dhl-ecommerce': { count: 4, retry_at: '2026-09-09T14:00:00Z' } };
+    const down = { ...answered, 'colis-prive': { count: 4, retry_at: '2026-09-09T16:00:00Z', unanswered: true } };
+    // Listed for a link opened in the last day, or not followed any more; nobody opened it in the last hour or keeps an alert on.
+    const check = async (parcel: JsonObject, at: string, followed = true) => {
+      const client = fakeClient();
+      client.listFollowedOneOffPackages.mockResolvedValue(followed ? [parcel] : []);
+      client.listUnfiledOneOffPackages.mockResolvedValue(followed ? [] : [parcel]);
+      client.listUnwatchedPackageIds.mockResolvedValue([String(parcel.id)]);
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+        { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => new Date(at));
+      return (await service.sync()).checked;
+    };
+    // Past its hourly checks, it waits off the schedule for that carrier's turn, and is checked at it, once.
+    await expect(check(lookup(down), '2026-09-09T15:30:00Z')).resolves.toBe(0);
+    await expect(check(lookup(down), '2026-09-09T16:00:00Z')).resolves.toBe(1);
+    await expect(check(lookup(down), '2026-09-10T09:00:00Z')).resolves.toBe(1);
+    await expect(check(lookup(down, { last_synced_at: '2026-09-09T16:00:15Z' }), '2026-09-09T17:00:00Z')).resolves.toBe(0);
+    // A carrier that answered keeps no turn for it, nor does a lookup nobody follows any more, or one added a month ago.
+    await expect(check(lookup(answered), '2026-09-09T16:00:00Z')).resolves.toBe(0);
+    await expect(check(lookup(down), '2026-09-09T16:00:00Z', false)).resolves.toBe(0);
+    await expect(check(lookup(down, { created_at: '2026-08-10T05:30:00Z' }), '2026-09-09T16:00:00Z')).resolves.toBe(0);
+    // Until that turn, it has not left the schedule.
+    expect(leftScheduleUnseen(lookup(down), new Date('2026-09-09T15:30:00Z'), false)).toBe(false);
+    expect(leftScheduleUnseen(lookup(down), new Date('2026-09-09T16:30:00Z'), false)).toBe(true);
+    expect(leftScheduleUnseen(lookup(answered), new Date('2026-09-09T15:30:00Z'), false)).toBe(true);
   });
 
   it('checks out-for-delivery parcels every 2 minutes in the evening too and allows manual refreshes', async () => {

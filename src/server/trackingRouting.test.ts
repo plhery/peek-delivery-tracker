@@ -1285,6 +1285,32 @@ describe('persistent tracking routing', () => {
       expect((third.result.routing as JsonObject & { candidate_probes: JsonObject }).candidate_probes)
         .toMatchObject({ dpd: { count: 2, retry_at: '2026-09-10T15:05:00.000Z' } });
     });
+    it('marks a carrier that gave no answer until it answers, and keeps its turn when a check leaves it out', async () => {
+      vi.spyOn(scraper, 'recognitionCandidates').mockImplementation((_number, options) =>
+        options?.phase === 'browser' ? [] : twoBatches.filter(({ carrier }) => !options?.skip?.(carrier)));
+      const number = '00000000000001';
+      const down = async (carrier: string) => {
+        if (carrier === 'hermes-de') throw new Error('down');
+        return { known: false };
+      };
+      const candidateProbes = (outcome: { result: JsonObject }) => (outcome.result.routing as JsonObject).candidate_probes as JsonObject;
+      const added = setup();
+      added.recognize.mockImplementation(down);
+      const first = await added.router.fetch(parcel({ tracking_number: number }), false, undefined, true);
+      expect(candidateProbes(first)['hermes-de']).toEqual({ count: 1, retry_at: '2026-09-10T13:00:00.000Z', unanswered: true });
+      expect(candidateProbes(first).dpd).toEqual({ count: 1, retry_at: '2026-09-10T13:00:00.000Z' });
+      // Its turn comes with the others', and a check that asks five carriers at most leaves it out: it keeps a turn an hour on.
+      const refresh = setup(new Date('2026-09-10T13:05:00Z'));
+      refresh.recognize.mockImplementation(down);
+      const second = await refresh.router.fetch(parcel({ tracking_number: number, carrier_data: first.result }), false);
+      expect(asked(refresh.recognize)).toEqual(twoBatches.slice(0, 5).map(({ carrier }) => carrier));
+      expect(candidateProbes(second)['hermes-de']).toEqual({ count: 1, retry_at: '2026-09-10T14:05:00.000Z', unanswered: true });
+      // Asked once it is back, it answers, and the mark goes.
+      const back = setup(new Date('2026-09-10T14:10:00Z'));
+      const third = await back.router.fetch(parcel({ tracking_number: number, carrier_data: second.result }), false);
+      expect(asked(back.recognize)).toEqual(['hermes-de']);
+      expect(candidateProbes(third)['hermes-de']).toEqual({ count: 2, retry_at: '2026-09-10T16:10:00.000Z' });
+    });
     it('names the carrier a number\'s own format belongs to once asked, until it knows the number or a scan comes', async () => {
       // BRT's EOB numbers are no other carrier's; nothing answers for this one.
       const own = 'EOB10293847561029384';

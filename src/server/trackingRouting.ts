@@ -122,9 +122,10 @@ export interface RoutingState extends JsonObject {
   last_probe_at?: string;
   /**
    * Per-candidate schedule of the recognitions that ask carriers the number points to. `known`: the carrier last said
-   * it knows the number, though its lookup was not adopted.
+   * it knows the number, though its lookup was not adopted. `unanswered`: it gave no answer when last asked (an
+   * outage, a block or a timeout), so a lookup nobody has answered for stays on the schedule for its next turn.
    */
-  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true }>;
+  candidate_probes?: Record<string, { count: number; retry_at: string; known?: true; unanswered?: true }>;
   /**
    * When the number last asked each carrier with a minimum interval of its own (`minimumInterval`) that the parcel
    * is not filed under, by recognition or a lookup: until the interval has passed, it is not asked again.
@@ -1781,17 +1782,32 @@ export class TrackingRouter {
       // its first scan. These answers decide neither the parcel's status nor
       // the filed carrier's retry.
       const guessed = guessedCarrier(number);
+      const counted = new Set<string>();
       for (const carrier of new Set(outcomes.map((outcome) => outcome.carrier))) {
         // Our own pacing refused the read before any request: the carrier was not asked, so no miss counts.
         if (refused.has(carrier)) continue;
+        counted.add(carrier);
         const count = Math.min(20, (state.candidate_probes?.[carrier]?.count ?? 0) + 1);
         const longest = count > 6 && carrier !== guessed ? DAY : 6 * HOUR;
         // Known only on a recent answer: an older parcel sharing the number (FAN Courier reuses its AWBs) is not this one.
         const known = outcomes.some((outcome) => outcome.carrier === carrier && settleRecognition([outcome], now()).carrier === carrier);
+        const answered = outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed');
         state.candidate_probes = { ...state.candidate_probes, [carrier]: {
           count, retry_at: iso(beforeHourlyEnd(now().getTime() + Math.min(longest, HOUR * 2 ** (count - 1)))),
           ...(known ? { known: true as const } : {}),
+          ...(answered ? {} : { unanswered: true as const }),
         } };
+      }
+      // A carrier that gave no answer when last asked, whose turn came without this check asking it (its own
+      // interval, its last failure or the check's limit held it back), keeps a turn an hour on, or once it is free:
+      // a lookup nobody has answered for stays on the schedule for it (unseenLookup.ts).
+      const stillAsked = new Set([...(recognize ? recognitionCandidates(number, recognitionOrder(excluded)) : []),
+        ...(this.options.recognizeBrowser ? recognitionCandidates(number, { ...recognitionOrder(excluded), phase: 'browser' }) : [])]
+        .map(({ carrier }) => carrier));
+      for (const [carrier, probe] of Object.entries(state.candidate_probes ?? {})) {
+        if (!probe.unanswered || counted.has(carrier) || !stillAsked.has(carrier) || millis(probe.retry_at) > now().getTime()) continue;
+        state.candidate_probes![carrier] = { ...probe, retry_at: iso(Math.max(now().getTime() + HOUR, askableAt(carrier),
+          millis(state.failures[carrier]?.retry_at))) };
       }
       const likely = likelyCarrier(parcel, state, now());
       if (likely) state.likely_carrier = likely;

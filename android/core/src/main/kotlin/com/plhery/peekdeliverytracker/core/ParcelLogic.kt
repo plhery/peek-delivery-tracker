@@ -5,6 +5,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
+import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.PlannedTrackingEvent
 import com.plhery.peekdeliverytracker.core.api.RecipientAction
@@ -580,6 +581,14 @@ fun Parcel.unconfirmedWrittenDelivery(now: Instant = AppClock.now()): PlannedTra
  */
 val Parcel.heldReturn: Boolean
     get() = currentStage == TrackingStage.Returned && carrierData?.returnHeld == true
+
+/**
+ * The site of the carrier tracking the parcel is down for every parcel (`carrierOutage`, served while it lasts): its
+ * views say so calmly, in place of a failed update, with the carrier's page for the number. None once the parcel is
+ * delivered or returned.
+ */
+val Parcel.shownCarrierOutage: CarrierOutage?
+    get() = if (currentStage == TrackingStage.Delivered || currentStage == TrackingStage.Returned) null else carrierOutage
 
 /**
  * Whether the parcel has nothing more to tell: delivered, or returned with no scans to come. A held return is still on

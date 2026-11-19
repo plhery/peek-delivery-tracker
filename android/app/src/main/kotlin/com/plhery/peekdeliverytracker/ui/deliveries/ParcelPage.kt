@@ -507,7 +507,8 @@ private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUI
  * where no carrier is asked, or why the last check failed ([TrackingNotes]): its carrier changes open the editor, and
  * its switch moves the parcel to the carrier its number names, where the parcel is the reader's to change rather than
  * the sample, followed through someone else's link or a copy the service forgot. Its Delete asks as the ••• menu's
- * does, wherever the page has one: not on the sample's.
+ * does, wherever the page has one: not on the sample's. The carrier's page it opens while the carrier's site is down
+ * is counted, and the page's question hears of the visit, as for the pages under the number.
  */
 @Composable
 private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
@@ -520,6 +521,10 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
         ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId, focus = it) },
         onSwitch = { carrier, focus -> state.switchCarrierOnPage(pageId, parcel, carrier, focus) },
         onDelete = if (sample) null else { focus -> state.deleteOnPage(pageId, focus) },
+        onCarrierPage = { name ->
+            state.source.action("parcel-carrier-link")
+            state.source.feedbacks.of(pageId)?.visited(name)
+        },
     )
 }
 

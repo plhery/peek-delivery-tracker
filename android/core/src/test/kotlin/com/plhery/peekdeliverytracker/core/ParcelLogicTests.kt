@@ -11,6 +11,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggested
 import com.plhery.peekdeliverytracker.core.api.CarrierInputSuggestedField
+import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.CarrierPostcodeRefused
 import com.plhery.peekdeliverytracker.core.api.ChangePackageCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.CreatePackageRequest
@@ -1455,6 +1456,35 @@ class ParcelLogicTests {
         assertEquals(round.id, held(failed, returned, problem, hub, round).currentEvent?.id)
         // A hold with no return among the rows reads them as they are.
         assertEquals(hub.id, held(failed, hub).currentEvent?.id)
+    }
+
+    // As src/components/CarrierOutage.test.tsx: the carrier's site down, as the API serves it, until the parcel ends.
+    @Test
+    fun aCarrierOutageIsShownUntilTheParcelIsDeliveredOrReturned() {
+        val id = UUID.randomUUID()
+        val row = """
+        {"id":"$id","tracking_number":"TESTCP00001","label":"","carrier":"colis-prive","created_at":"2026-11-17T12:00:00Z","notifications_muted":false,
+         "sync_status":"error","sync_error":"carrier:transport","carrier_outage":{"carrier":"colis-prive","since":"2026-11-19T12:20:41Z",
+         "tracking_url":"https://colisprive.com/moncolis/pages/DetailColis.aspx?numColis=TESTCP00001&lang=fr"}}
+        """
+        var parcel = ApiJson.decodeFromString(Parcel.serializer(), row)
+        assertEquals(
+            CarrierOutage(
+                carrier = CarrierId.ColisPrive, since = "2026-11-19T12:20:41Z",
+                trackingUrl = "https://colisprive.com/moncolis/pages/DetailColis.aspx?numColis=TESTCP00001&lang=fr",
+            ),
+            parcel.shownCarrierOutage,
+        )
+        parcel = parcel.copy(trackingEvents = listOf(event(id, TrackingStage.InTransit, "2026-11-18T08:00:00Z")))
+        assertNotNull(parcel.shownCarrierOutage)
+        for (stage in listOf(TrackingStage.Delivered, TrackingStage.Returned)) {
+            val ended = parcel.copy(trackingEvents = parcel.trackingEvents + event(id, stage, "2026-11-19T10:00:00Z"))
+            assertNull(stage.rawValue, ended.shownCarrierOutage)
+        }
+        // None served: none shown, the failed update stays.
+        parcel = parcel.copy(carrierOutage = null)
+        assertNull(parcel.shownCarrierOutage)
+        assertTrue(parcel.updateFailed)
     }
 
     @Test

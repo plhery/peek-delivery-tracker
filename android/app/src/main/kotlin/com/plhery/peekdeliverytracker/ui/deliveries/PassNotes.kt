@@ -45,6 +45,7 @@ import com.plhery.peekdeliverytracker.core.amazonShippingHistoryExpired
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.awaitedCarrier
+import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -310,6 +311,9 @@ internal fun ShipmentFacts(facts: List<ShipmentFact>, modifier: Modifier = Modif
  *   "add.linkSync", "add.amazonAccount", `trackingHintKey`, or "add.amazonHistoryExpired"), and 10 under it, in
  *   `ink`, a way to change the carrier where the parcel is the reader's to change (`editable`), unless Amazon wants
  *   an account or no longer has the history.
+ * - While the site of its carrier is down for every parcel (`shownCarrierOutage`): that, in secondary, and 44 tall at
+ *   least, the carrier's page for the number in `ink` with its arrow, which `onCarrierPage` hears of, by the carrier's
+ *   name. Nothing of the failed check then: it is no fault of the parcel's.
  * - Otherwise why the last check failed (B-ST07), in the warning colour: that the number looks like one of the carrier
  *   it names, where the parcel's carrier refused it and one other claims it, that Peek keeps trying the carrier a
  *   parcel with no scans waits for (`awaitedCarrier`), or else `trackingFailureMessage`. Then, each a part of the
@@ -330,6 +334,7 @@ internal fun TrackingNotes(
     onEditCarrier: (AccessibilityFocus) -> Unit,
     onSwitch: (CarrierId, AccessibilityFocus) -> Unit,
     onDelete: ((AccessibilityFocus) -> Unit)? = null,
+    onCarrierPage: (String) -> Unit = {},
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -352,6 +357,20 @@ internal fun TrackingNotes(
             if (editable && !catalog.requiresAmazonAccount(active) && !expired) {
                 NoteButton(localizer.text("detail.changeCarrier"), ink, action = onEditCarrier)
             }
+        }
+        return
+    }
+    parcel.shownCarrierOutage?.let { outage ->
+        // The carrier's own site is down for every parcel, not this one's fault: its page shows the reader so.
+        val name = identities.displayName(outage.carrier, language)
+        Text(
+            localizer.text("parcel.carrierOutage", mapOf("carrier" to name)),
+            Modifier.testTag(PAGE_CARRIER_OUTAGE),
+            color = colors.secondaryText,
+            style = type.footnote.sfLines(),
+        )
+        outage.trackingUrl?.takeIf(::isWebAddress)?.let { url ->
+            OutageLink(localizer.text("parcel.carrierOutageLink", mapOf("carrier" to name)), url, ink) { onCarrierPage(name) }
         }
         return
     }
@@ -406,6 +425,37 @@ private fun NoteButton(
     )
 }
 
+/**
+ * The carrier's page for the number while its site is down, as the iPhone's `Link`: its words in footnote and a small
+ * arrow, in `tint`, 44 tall at least, a button to TalkBack as the carriers' pages under the number are.
+ */
+@Composable
+private fun OutageLink(text: String, url: String, tint: Color, onOpen: () -> Unit) {
+    val uriHandler = LocalUriHandler.current
+    val type = PeekTheme.type
+    Row(
+        Modifier
+            .heightIn(min = BUTTON_HEIGHT)
+            .testTag(PAGE_CARRIER_OUTAGE_LINK)
+            .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                onOpen()
+                try {
+                    uriHandler.openUri(url)
+                } catch (_: IllegalArgumentException) {
+                    // Where no app opens web pages, as Compose's handler says: nothing, as with the iPhone's link.
+                }
+            },
+        horizontalArrangement = Arrangement.spacedBy(LABEL_SPACING),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Text(text, color = tint, style = type.footnote.sfLines())
+        PeekSymbol("arrow.up.right", font = type.fixed(10f), tint = tint)
+    }
+}
+
+/** A carrier's page the app may open: on the web, as the iPhone checks `url.scheme` before its `Link`. */
+internal fun isWebAddress(url: String): Boolean = url.startsWith("https://") || url.startsWith("http://")
+
 /** The errors whose details the parcel's carrier asked for. */
 private val INPUT_ERRORS = listOf("carrier:input_required", "carrier:invalid_input")
 
@@ -431,3 +481,5 @@ const val PAGE_CARRIER_SAYS = "parcelPage.carrierSays"
 const val PAGE_FACTS = "parcelPage.facts"
 const val PAGE_CARRIER_HINT = "parcelPage.carrierHint"
 const val PAGE_SYNC_ERROR = "parcelPage.syncError"
+const val PAGE_CARRIER_OUTAGE = "parcelPage.carrierOutage"
+const val PAGE_CARRIER_OUTAGE_LINK = "parcelPage.carrierOutageLink"

@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
 import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
+import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.CarrierPostcodeRefused
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.Parcel
@@ -790,6 +791,34 @@ class PassNotesTest {
     // Why the last check failed.
 
     private fun Parcel.failing(code: String): Parcel = copy(syncStatus = SyncStatus.Error, syncError = code)
+
+    @Test
+    fun aCarriersSiteDownIsToldCalmlyOnTheCardAndThePageWithTheCarriersPage() {
+        val vinyl = id("Kind of Blue")
+        val outage = CarrierOutage(carrier = CarrierId.Ups, since = "2026-11-19T12:20:41Z", trackingUrl = "https://example.com/track?n=1")
+        show(demo("Kind of Blue") { it.failing("carrier:transport").copy(carrierOutage = outage) })
+        // The card says why no update comes, in place of the failed one.
+        assertTrue(textExists("UPS’s tracking is having problems"))
+        assertFalse(textExists("Couldn’t get the latest update"))
+
+        open(vinyl)
+        compose.onNodeWithTag(PAGE_CARRIER_OUTAGE).performScrollTo()
+        assertTrue(textExists("UPS’s tracking is having problems right now. Your tracking will update as soon as it’s back."))
+        assertFalse(exists(PAGE_SYNC_ERROR))
+        compose.onNodeWithTag(PAGE_CARRIER_OUTAGE_LINK).performScrollTo().performClick()
+        compose.waitForIdle()
+        assertEquals("https://example.com/track?n=1", opened()?.dataString)
+        assertTrue("parcel-carrier-link" in source.actions)
+    }
+
+    @Test
+    fun aCarriersSiteDownWithoutAWebPageIsToldWithoutALink() {
+        val outage = CarrierOutage(carrier = CarrierId.Ups, since = "2026-11-19T12:20:41Z", trackingUrl = "javascript:alert(1)")
+        show(demo("Kind of Blue") { it.failing("carrier:transport").copy(carrierOutage = outage) })
+        open(id("Kind of Blue"))
+        compose.onNodeWithTag(PAGE_CARRIER_OUTAGE).performScrollTo()
+        assertFalse(exists(PAGE_CARRIER_OUTAGE_LINK))
+    }
 
     @Test
     fun aFailedCheckSaysWhyInTheAppsWordsAndOffersNothingWhereNothingHelps() {

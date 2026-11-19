@@ -245,12 +245,14 @@ fun SelectedCardRing(shown: Boolean, cornerRadius: Dp, modifier: Modifier = Modi
 
 /**
  * `ParcelFlag` (A-S37): a problem kept on the parcel's own card instead of replacing it, its symbol and words in the
- * warning colour on paper at 72 %.
+ * warning colour on paper at 72 %. A `calm` one is no fault of the parcel's, its carrier's site being down: in the
+ * secondary grey.
  */
 @Composable
-fun ParcelFlag(text: String, symbol: String, modifier: Modifier = Modifier) {
+fun ParcelFlag(text: String, symbol: String, modifier: Modifier = Modifier, calm: Boolean = false) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
+    val tint = if (calm) colors.secondaryText else colors.warning
     Row(
         modifier
             .background(colors.paper.copy(alpha = colors.paper.alpha * 0.72f), ContinuousRoundedShape(Radii.parcelFlag))
@@ -258,8 +260,8 @@ fun ParcelFlag(text: String, symbol: String, modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        PeekSymbol(symbol, font = type.style(IosTextStyle.Caption2, FontWeight.SemiBold), tint = colors.warning)
-        Text(text, color = colors.warning, style = type.style(IosTextStyle.Caption, FontWeight.Medium).sfLines())
+        PeekSymbol(symbol, font = type.style(IosTextStyle.Caption2, FontWeight.SemiBold), tint = tint)
+        Text(text, color = tint, style = type.style(IosTextStyle.Caption, FontWeight.Medium).sfLines())
     }
 }
 

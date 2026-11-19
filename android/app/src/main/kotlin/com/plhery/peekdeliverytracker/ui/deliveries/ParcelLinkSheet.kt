@@ -65,6 +65,7 @@ import androidx.compose.ui.layout.onPlaced
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.semantics.ProgressBarRangeInfo
 import androidx.compose.ui.semantics.Role
@@ -130,6 +131,7 @@ import com.plhery.peekdeliverytracker.core.heldReturn
 import com.plhery.peekdeliverytracker.core.masked
 import com.plhery.peekdeliverytracker.core.scheduledDelivery
 import com.plhery.peekdeliverytracker.core.sharedParcelDetail
+import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.writtenAheadNoteKey
 import com.plhery.peekdeliverytracker.platform.Device
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
@@ -943,6 +945,7 @@ private fun SharedParcelCard(
     val identity = remember(identities, parcel, language) { identities.of(parcel.displayedCarrier, language) }
     val ink = colors.resolve(identity.ink)
     val secondary = colors.secondaryText
+    val uriHandler = LocalUriHandler.current
     val placed = parcel.hasMappedPlace
     val arrived = !placed && parcel.currentStage == TrackingStage.Delivered && !large
     val label = if (parcel.carrier != CarrierId.Unknown || parcel.hasCarrierUpdate) {
@@ -1084,6 +1087,32 @@ private fun SharedParcelCard(
                             localizer.text(aheadNote, mapOf("carrier" to identities.displayName(ahead, language))),
                             color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
                         )
+                    }
+                    // The carrier's own site is down for every parcel; its page for the number, when the link shows it.
+                    val outage = parcel.shownCarrierOutage?.takeIf { !gift }
+                    if (outage != null) {
+                        val outageName = identities.displayName(outage.carrier, language)
+                        Text(
+                            localizer.text("parcel.carrierOutage", mapOf("carrier" to outageName)),
+                            Modifier.testTag(LINK_OUTAGE), color = secondary, style = type.caption.sfLines(), textAlign = textAlign,
+                        )
+                        val url = outage.trackingUrl?.takeIf(::isWebAddress)
+                        if (url != null) {
+                            Text(
+                                localizer.text("parcel.carrierOutageLink", mapOf("carrier" to outageName)),
+                                Modifier
+                                    .testTag(LINK_OUTAGE_PAGE)
+                                    .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
+                                        source.action("parcel-carrier-link")
+                                        try {
+                                            uriHandler.openUri(url)
+                                        } catch (_: IllegalArgumentException) {
+                                            // Where no app opens web pages: nothing, as with the iPhone's link.
+                                        }
+                                    },
+                                color = ink, style = type.style(IosTextStyle.Caption, FontWeight.Medium).sfLines(), textAlign = textAlign,
+                            )
+                        }
                     }
                 }
                 // Without a route to draw, the kraft parcel keeps the card company, its carrier's label on its side.
@@ -1522,6 +1551,8 @@ const val LINK_ROUTE = "parcelLink.route"
 const val LINK_MAP = "parcelLink.map"
 const val LINK_BOX = "parcelLink.box"
 const val LINK_PIP = "parcelLink.pip"
+const val LINK_OUTAGE = "parcelLink.outage"
+const val LINK_OUTAGE_PAGE = "parcelLink.outagePage"
 const val LINK_REFRESH = "parcelLink.refresh"
 const val LINK_NOTE = "parcelLink.note"
 const val LINK_ADD = "parcelLink.add"

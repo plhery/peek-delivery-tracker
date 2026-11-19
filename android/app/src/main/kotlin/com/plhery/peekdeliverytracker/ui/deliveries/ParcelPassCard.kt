@@ -36,6 +36,7 @@ import com.plhery.peekdeliverytracker.core.isArchived
 import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.core.isFinal
 import com.plhery.peekdeliverytracker.core.pickupPlace
+import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.updateFailed
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -114,15 +115,20 @@ fun ParcelPassCard(
     // asks the reader for something, the carrier waits on the reader.
     val actionNeeded = parcel.currentEvent?.waitsOnReader() == true
     val carrierIssue = !actionNeeded && (stage == TrackingStage.Customs || stage == TrackingStage.ReadyForPickup)
+    // The carrier's site down tells why no update comes, unless the carrier waits on the reader.
+    val outage = parcel.shownCarrierOutage?.takeIf { !actionNeeded }?.let {
+        localizer.text("attention.carrier_outage", mapOf("carrier" to identities.displayName(it.carrier, language)))
+    }
     val flag = when {
         stale -> null
-        notice != null && !carrierIssue -> notice
+        notice != null && !carrierIssue && outage == null -> notice
+        outage != null -> outage
         parcel.updateFailed -> localizer.text("attention.sync_error")
         else -> null
     }
     val flagSymbol = when {
         notice != null && actionNeeded -> "exclamationmark.triangle"
-        parcel.updateFailed -> "arrow.clockwise"
+        parcel.updateFailed || outage != null -> "arrow.clockwise"
         else -> "clock"
     }
     val showsStatus = flag == null || parcel.hasCarrierUpdate
@@ -220,7 +226,7 @@ fun ParcelPassCard(
                         }
                     }
                 }
-                if (flag != null) ParcelFlag(flag, flagSymbol, Modifier.padding(top = 4.dp))
+                if (flag != null) ParcelFlag(flag, flagSymbol, Modifier.padding(top = 4.dp), calm = flag == outage)
             }
         }
         SelectedCardRing(selected, Radii.card, Modifier.matchParentSize())

@@ -56,6 +56,7 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkRoute
 import com.plhery.peekdeliverytracker.core.ParcelLinkStopped
 import com.plhery.peekdeliverytracker.core.TrackingNumberCopy
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackAnswer
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackReason
@@ -95,6 +96,7 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LINK_NOTE
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_NOTHING
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_NOTHING_CLOSE
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_OPEN_EXISTING
+import com.plhery.peekdeliverytracker.ui.deliveries.LINK_OUTAGE_PAGE
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_REFRESH
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SCROLL
 import com.plhery.peekdeliverytracker.ui.deliveries.LINK_SHEET
@@ -677,6 +679,18 @@ class ParcelLinkSheetTest {
         assertFalse(exists(PAGE_NUMBER))
         assertFalse(exists(PAGE_COPY_NUMBER))
         compose.onNodeWithTag(PAGE_CARRIER_LINK).performScrollTo().performClick()
+        assertEquals(listOf("parcel-carrier-link"), links.actions.filter { it == "parcel-carrier-link" })
+    }
+
+    @Test
+    fun aCarriersSiteDownIsToldOnTheLinksCardWithTheCarriersPage() {
+        val viewer = LinkFixtures.viewer()
+        val outage = CarrierOutage(carrier = CarrierId.Dpd, since = "2026-11-19T12:20:41Z", trackingUrl = "https://example.com/track")
+        show(FakeParcelLinks().apply { read = { _, _ -> viewer.copy(parcel = viewer.parcel.copy(carrierOutage = outage)) } })
+        open()
+        val name = CarrierCatalog.shared.info(CarrierId.Dpd, AppLanguage.En).displayName
+        assertTrue(shows(text("parcel.carrierOutage", mapOf("carrier" to name))))
+        compose.onNodeWithTag(LINK_OUTAGE_PAGE).performScrollTo().performClick()
         assertEquals(listOf("parcel-carrier-link"), links.actions.filter { it == "parcel-carrier-link" })
     }
 

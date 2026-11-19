@@ -41,6 +41,7 @@ import com.plhery.peekdeliverytracker.core.deliveringCarrier
 import com.plhery.peekdeliverytracker.core.deliveryLineKey
 import com.plhery.peekdeliverytracker.core.hasMappedPlace
 import com.plhery.peekdeliverytracker.core.pickupPlace
+import com.plhery.peekdeliverytracker.core.shownCarrierOutage
 import com.plhery.peekdeliverytracker.core.updateFailed
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
@@ -137,7 +138,11 @@ fun NextDeliveryPass(
         parcel.pickupPlace,
         localizer.parcelDeliveryEstimate(parcel, now) ?: if (arrived) localizer.parcelCompletionDate(parcel, now) else null,
     ).joinToString(" · ")
-    val flag = if (parcel.updateFailed) localizer.text("attention.sync_error") else null
+    // The carrier's site down for every parcel says so calmly, in place of the failed update.
+    val outage = parcel.shownCarrierOutage?.let {
+        localizer.text("attention.carrier_outage", mapOf("carrier" to identities.displayName(it.carrier, language)))
+    }
+    val flag = outage ?: if (parcel.updateFailed) localizer.text("attention.sync_error") else null
     val ink = colors.resolve(identity.ink)
     val atlas = rememberWorldAtlas(wanted = placed)
 
@@ -222,7 +227,7 @@ fun NextDeliveryPass(
                     Text(status, color = ink, style = type.caption.sfLines())
                 }
             }
-            if (flag != null) ParcelFlag(flag, "arrow.clockwise", Modifier.padding(top = 8.dp))
+            if (flag != null) ParcelFlag(flag, "arrow.clockwise", Modifier.padding(top = 8.dp), calm = outage != null)
         }
         SelectedCardRing(selected, Radii.nextUp, Modifier.matchParentSize())
     }

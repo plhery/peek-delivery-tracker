@@ -2,6 +2,7 @@ package com.plhery.peekdeliverytracker.core
 
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CarrierOutage
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelsRequest
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelsResponse
@@ -137,6 +138,10 @@ class ParcelLinkTests {
         assertEquals(shared.trackingEvents, parcel.trackingEvents)
         assertEquals(TrackingStage.InTransit, parcel.currentStage)
         assertEquals("stage.in_transit", parcel.displayStatus.key)
+        assertNull(parcel.carrierOutage)
+        // The carrier's site down goes along, with its page for the number.
+        val outage = CarrierOutage(carrier = CarrierId.Dpd, since = "2026-10-02T09:00:00Z", trackingUrl = "https://example.com/track")
+        assertEquals(outage, Parcel(shared = shared.copy(carrierOutage = outage)).shownCarrierOutage)
     }
 
     @Test

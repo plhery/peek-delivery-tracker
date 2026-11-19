@@ -28,7 +28,8 @@ import kotlinx.coroutines.sync.withLock
  * app publishes from what the widget shows. That one is named after the widget's first parcel on its way, as Siri's
  * answer picks it, and opens its page, as the widget's card does; it follows the widget's parcels each time they
  * change, a copy pinned to the home screen with it. With nothing on the way, the widget turned off or nobody signed in,
- * it goes, and a pinned copy stays greyed under the shortcut's own name, saying why it opens nothing.
+ * it goes, and a pinned copy stays greyed under the shortcut's own name, saying why it opens nothing. A change the
+ * system turned down while the app was in the background is made as the app comes back to the front.
  *
  * Each shortcut's intent names it ([ShortcutManagerCompat.EXTRA_SHORTCUT_ID]), and the window reports it used as it
  * opens on it ([used]), for the launcher's suggestions. The next delivery's is published with

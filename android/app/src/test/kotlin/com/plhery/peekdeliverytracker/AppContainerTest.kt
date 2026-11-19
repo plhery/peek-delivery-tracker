@@ -6,7 +6,9 @@ import android.content.Intent
 import android.os.LocaleList
 import android.os.Looper
 import android.provider.Settings
+import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
+import androidx.core.net.toUri
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -294,6 +296,32 @@ class AppContainerTest {
 
         ContainerDeliveries(app).setDeliveryWidgetEnabled(false)
         idleUntil("the shortcut gone") { ShortcutManagerCompat.getDynamicShortcuts(context).isEmpty() }
+    }
+
+    /**
+     * A change of the shortcut that the system turned down while the app was in the background, which allows an app
+     * there only so many, is made as the app comes back to the front, where the system allows it again, though what
+     * the widget shows hasn't changed since.
+     */
+    @Test
+    fun theNextDeliverysShortcutTurnedDownInTheBackgroundIsMadeInFront() {
+        PreferencesDefaults.standard(context).set("demo", forKey = "sdt.native.experience.v1")
+        val app = container()
+        val widget = DeliveryWidgetSharedStore(PreferencesDefaults.appGroup(context, "group.test.peek"))
+        app.start(process.lifecycle)
+        idleUntil("the demo's next delivery") { ShortcutManagerCompat.getDynamicShortcuts(context).isNotEmpty() }
+        val next = checkNotNull(widget.snapshot).parcels.first { it.deliveredAt == null }
+        process.lifecycle.currentState = Lifecycle.State.CREATED
+        settle()
+        // The shortcut as it stands where the system turned down a change to the next one.
+        val earlier = ShortcutInfoCompat.Builder(context, LauncherShortcuts.NEXT_DELIVERY).setShortLabel("Earlier parcel")
+            .setIntent(Intent(Intent.ACTION_VIEW, "peek://parcel/earlier".toUri())).build()
+        ShortcutManagerCompat.setDynamicShortcuts(context, listOf(earlier))
+        process.lifecycle.currentState = Lifecycle.State.RESUMED
+        idleUntil("the next delivery's shortcut") {
+            ShortcutManagerCompat.getDynamicShortcuts(context).singleOrNull()?.shortLabel?.toString() == next.label
+        }
+        assertEquals(next.deepLink, ShortcutManagerCompat.getDynamicShortcuts(context).single().intent.dataString)
     }
 
     /**

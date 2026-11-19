@@ -632,6 +632,9 @@ class AppContainer(
         if (!active) return
         analyticsObserver.foreground()
         scope.launch { refreshCatalog() }
+        // The next delivery's shortcut, which the system may have kept from changing while the app was away: in front it
+        // allows the change again.
+        LauncherShortcuts.reload(context, deliveryWidgetStore, scope)
     }
 
     private fun debugLinkPreview(): ParcelLinkStore? = ParcelLinkStore.debugPreview(

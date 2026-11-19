@@ -484,7 +484,7 @@
   "link.title.checking": "Finding the carrier…",
   "link.title.delivered": "Delivered at {{time}}",
   "link.bring.title": "Bring these parcels too?",
-  "link.bring.body": "You looked them up on this device before signing in.",
+  "link.bring.body": "You followed them on this device before signing in.",
   "link.bring.add.one": "Add 1 parcel",
   "link.bring.add.few": "Add {{count}} parcels",
   "link.bring.add.many": "Add {{count}} parcels",

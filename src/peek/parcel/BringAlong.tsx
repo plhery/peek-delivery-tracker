@@ -96,7 +96,7 @@ const FULL_SAID_MS = 8_000;
 
 /**
  * Stands beside the deliveries of someone who just signed in, and asks once
- * about the other parcels this device looked up. It waits for a parcel that
+ * about the other parcels this device followed. It waits for a parcel that
  * is being kept on its own, so that one is not asked about twice. A parcel the
  * account had no room for is asked about again another time.
  */

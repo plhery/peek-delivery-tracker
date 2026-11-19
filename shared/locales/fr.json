@@ -484,7 +484,7 @@
   "link.title.checking": "Recherche du transporteur…",
   "link.title.delivered": "Livré à {{time}}",
   "link.bring.title": "Emporter aussi ces colis ?",
-  "link.bring.body": "Tu les as recherchés sur cet appareil avant de te connecter.",
+  "link.bring.body": "Tu les as suivis sur cet appareil avant de te connecter.",
   "link.bring.add.one": "Ajouter 1 colis",
   "link.bring.add.few": "Ajouter {{count}} colis",
   "link.bring.add.many": "Ajouter {{count}} colis",

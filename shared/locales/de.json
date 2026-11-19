@@ -484,7 +484,7 @@
   "link.title.checking": "Paketdienst wird gesucht…",
   "link.title.delivered": "Zugestellt um {{time}}",
   "link.bring.title": "Diese Pakete auch mitnehmen?",
-  "link.bring.body": "Du hast sie auf diesem Gerät abgefragt, bevor du dich angemeldet hast.",
+  "link.bring.body": "Du hast sie auf diesem Gerät verfolgt, bevor du dich angemeldet hast.",
   "link.bring.add.one": "1 Paket hinzufügen",
   "link.bring.add.few": "{{count}} Pakete hinzufügen",
   "link.bring.add.many": "{{count}} Pakete hinzufügen",

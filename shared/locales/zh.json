@@ -484,7 +484,7 @@
   "link.title.checking": "正在识别快递公司…",
   "link.title.delivered": "已于 {{time}} 签收",
   "link.bring.title": "把这些包裹也带上？",
-  "link.bring.body": "这些是你登录前在这台设备上查过的包裹。",
+  "link.bring.body": "这些是你登录前在这台设备上跟踪的包裹。",
   "link.bring.add.one": "添加 1 个包裹",
   "link.bring.add.few": "添加 {{count}} 个包裹",
   "link.bring.add.many": "添加 {{count}} 个包裹",

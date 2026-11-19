@@ -484,7 +484,7 @@
   "link.title.checking": "Buscando el transportista…",
   "link.title.delivered": "Entregado a las {{time}}",
   "link.bring.title": "¿Traer también estos paquetes?",
-  "link.bring.body": "Los has buscado en este dispositivo antes de iniciar sesión.",
+  "link.bring.body": "Los has seguido en este dispositivo antes de iniciar sesión.",
   "link.bring.add.one": "Añadir 1 paquete",
   "link.bring.add.few": "Añadir {{count}} paquetes",
   "link.bring.add.many": "Añadir {{count}} paquetes",

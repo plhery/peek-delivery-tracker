@@ -484,7 +484,7 @@
   "link.title.checking": "Procurando a transportadora…",
   "link.title.delivered": "Entregue às {{time}}",
   "link.bring.title": "Trazer estas encomendas também?",
-  "link.bring.body": "Você consultou estas encomendas neste dispositivo antes de entrar.",
+  "link.bring.body": "Você acompanhou estas encomendas neste dispositivo antes de entrar.",
   "link.bring.add.one": "Adicionar 1 encomenda",
   "link.bring.add.few": "Adicionar {{count}} encomendas",
   "link.bring.add.many": "Adicionar {{count}} encomendas",

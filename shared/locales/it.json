@@ -484,7 +484,7 @@
   "link.title.checking": "Ricerca del corriere…",
   "link.title.delivered": "Consegnato alle {{time}}",
   "link.bring.title": "Portare anche questi pacchi?",
-  "link.bring.body": "Li hai cercati su questo dispositivo prima di accedere.",
+  "link.bring.body": "Li hai seguiti su questo dispositivo prima di accedere.",
   "link.bring.add.one": "Aggiungi 1 pacco",
   "link.bring.add.few": "Aggiungi {{count}} pacchi",
   "link.bring.add.many": "Aggiungi {{count}} pacchi",

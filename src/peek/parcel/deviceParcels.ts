@@ -1,12 +1,12 @@
 import type { ApiAuth } from '../../lib/apiClient';
 import { ParcelAlreadyExistsError, type ParcelRepo } from '../../types';
 import { claimParcelLinks, forgetParcelLink, readParcelLink } from '../links';
-import { forgetRecent, ownerKeyFor, type RecentParcel } from '../recents';
+import { forgetRecent, recentFor, type RecentParcel } from '../recents';
 
 /**
- * "Bring these parcels too?": the other parcels this device looked up before
- * someone signed in. Each is offered once; what was declined stays on the
- * device, and is not asked about again.
+ * "Bring these parcels too?": the other parcels this device followed before
+ * someone signed in, looked up here or shared with it. Each is offered once;
+ * what was declined stays on the device, and is not asked about again.
  */
 export const BRING_ALONG_STORAGE_KEY = 'sdt.peek.bringAlong.v1'; // gitleaks:allow -- public localStorage name
 // Without usable storage the answer lasts as long as the page.
@@ -23,8 +23,11 @@ export function offeredParcels(): ReadonlySet<string> {
 }
 
 export function markOffered(ids: readonly string[]): void {
-  // Only a parcel the device still holds the key of can be asked about again, which bounds the list.
-  const offered = [...new Set([...offeredParcels(), ...ids])].filter((id) => ownerKeyFor(id) !== null);
+  // Only a parcel the device could still offer can be asked about again, which bounds the list.
+  const offered = [...new Set([...offeredParcels(), ...ids])].filter((id) => {
+    const recent = recentFor(id);
+    return recent !== null && keepable(recent);
+  });
   try {
     window.localStorage.setItem(BRING_ALONG_STORAGE_KEY, JSON.stringify(offered));
     memory = null;
@@ -33,10 +36,19 @@ export function markOffered(ids: readonly string[]): void {
   }
 }
 
-/** The device's parcels someone signed in can take along: looked up here, so the device holds their key. */
+/**
+ * Whether an account can take the parcel: one looked up here, whose key the device holds, or one shared with
+ * it whose link, as last read, lets its viewers keep it (the number shown, a gift once it has arrived). One the
+ * service forgot is gone from its link.
+ */
+function keepable(recent: RecentParcel): boolean {
+  return !!recent.key || (!recent.frozen && recent.snapshot.link.canKeep);
+}
+
+/** The device's parcels someone signed in can take along. */
 export function bringable(recents: readonly RecentParcel[], pendingId: string | null): RecentParcel[] {
   const offered = offeredParcels();
-  return recents.filter((recent) => !!recent.key && recent.id !== pendingId && !offered.has(recent.id));
+  return recents.filter((recent) => keepable(recent) && recent.id !== pendingId && !offered.has(recent.id));
 }
 
 /** How many parcels one request keeps at most. */
@@ -78,7 +90,7 @@ export async function bringAlongInDemo(parcels: readonly RecentParcel[], repo: P
   const outcome: BroughtAlong = { brought: 0, refused: [] };
   for (const recent of parcels) {
     const read = await readParcelLink(recent.id, { key: recent.key }).catch(() => recent.snapshot);
-    if (read === 'unavailable' || !read.parcel.trackingNumber) {
+    if (read === 'unavailable' || !read.link.canKeep || !read.parcel.trackingNumber) {
       outcome.refused.push({ id: recent.id, reason: 'unavailable' });
       continue;
     }

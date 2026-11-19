@@ -484,7 +484,7 @@
   "link.title.checking": "Szukanie przewoźnika…",
   "link.title.delivered": "Dostarczona o {{time}}",
   "link.bring.title": "Zabrać też te przesyłki?",
-  "link.bring.body": "Zostały wyszukane na tym urządzeniu przed zalogowaniem.",
+  "link.bring.body": "Były śledzone na tym urządzeniu przed zalogowaniem.",
   "link.bring.add.one": "Dodaj 1 przesyłkę",
   "link.bring.add.few": "Dodaj {{count}} przesyłki",
   "link.bring.add.many": "Dodaj {{count}} przesyłek",

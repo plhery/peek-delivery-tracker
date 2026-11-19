@@ -484,7 +484,7 @@
   "link.title.checking": "Ищем службу доставки…",
   "link.title.delivered": "Доставлена в {{time}}",
   "link.bring.title": "Перенести и эти посылки?",
-  "link.bring.body": "Их искали на этом устройстве до входа в аккаунт.",
+  "link.bring.body": "Их отслеживали на этом устройстве до входа в аккаунт.",
   "link.bring.add.one": "Добавить {{count}} посылку",
   "link.bring.add.few": "Добавить {{count}} посылки",
   "link.bring.add.many": "Добавить {{count}} посылок",

@@ -6,7 +6,7 @@ import { createDemoRepo } from '../../store/demoRepo';
 import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, testView } from '../../test/parcelLinks';
 import { ParcelLinkError } from '../links';
 import { clearPendingKeep, rememberPendingKeep } from '../pending';
-import { forgetAllRecents, forgetRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
+import { forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, recentFor, rememberParcel, renameParcel, useRecents } from '../recents';
 import { BringAlongInDemo, BringAlongParcels } from './BringAlong';
 import { bringable, BRING_ALONG_STORAGE_KEY, bringAlong, bringAlongInDemo, markOffered, offeredParcels } from './deviceParcels';
 
@@ -28,6 +28,12 @@ const linkIds = (start: string, count: number) => Array.from({ length: count }, 
 /** Each link given is a lookup of the device's own, the last one newest. */
 const lookUp = (ids: readonly string[], from = 10) => ids.forEach((id, index) => rememberParcel({ id, key: OWNER_KEY, view: testView({ id }), now: from + index }));
 const keptAll = async (links: { id: string }[]) => links.map(({ id }) => ({ id, outcome: 'kept', packageId: 'p1' }));
+const SHARED_LINK_ID = 'q5St3uVw4XyZ';
+/** A parcel someone shared with this device, whose link shows its number and lets its viewers keep it. */
+function shareKeepable(now = 4) {
+  const view = testView({ id: SHARED_LINK_ID });
+  rememberParcel({ id: SHARED_LINK_ID, view: { ...view, link: { ...view.link, role: 'viewer' } }, name: 'From a friend', now });
+}
 
 beforeEach(() => {
   vi.clearAllMocks();
@@ -46,7 +52,7 @@ describe('BringAlong', () => {
     mocks.claim.mockResolvedValue([{ id: LINK_ID, outcome: 'kept', packageId: 'p1' }, { id: OTHER_LINK_ID, outcome: 'already', packageId: 'p2' }]);
     const user = userEvent.setup();
     render(<BringAlongParcels auth={auth} />);
-    expect(sheet()).toHaveAccessibleDescription('You looked them up on this device before signing in.');
+    expect(sheet()).toHaveAccessibleDescription('You followed them on this device before signing in.');
     const rows = within(sheet()).getAllByRole('checkbox');
     expect(rows).toHaveLength(2);
     expect(rows.every((row) => (row as HTMLInputElement).checked)).toBe(true);
@@ -210,6 +216,21 @@ describe('the device’s parcels to bring along', () => {
     expect(JSON.parse(window.localStorage.getItem(BRING_ALONG_STORAGE_KEY)!)).toEqual([OTHER_LINK_ID]);
   });
 
+  it('take a parcel shared with the device whose link lets it be kept, not one that hides it or one the service forgot', () => {
+    shareKeepable();
+    expect(recentFor(SHARED_LINK_ID)?.key).toBeNull();
+    expect(bringable(recents(), null).map((recent) => recent.id)).toEqual([SHARED_LINK_ID, LINK_ID, OTHER_LINK_ID]);
+    expect(freezeRecent(OTHER_LINK_ID)).toBe(true);
+    expect(bringable(recents(), null).map((recent) => recent.id)).toEqual([SHARED_LINK_ID, LINK_ID]);
+    // Declining it is remembered while the device holds it, as for a lookup.
+    markOffered([SHARED_LINK_ID]);
+    expect(bringable(recents(), null).map((recent) => recent.id)).toEqual([LINK_ID]);
+    expect(offeredParcels().has(SHARED_LINK_ID)).toBe(true);
+    forgetRecent(SHARED_LINK_ID);
+    markOffered([]);
+    expect(offeredParcels().has(SHARED_LINK_ID)).toBe(false);
+  });
+
   it('remember what was offered for the page’s life when storage cannot, and read a damaged list as empty', () => {
     window.localStorage.setItem(BRING_ALONG_STORAGE_KEY, '{not json');
     expect(offeredParcels().size).toBe(0);
@@ -245,6 +266,14 @@ describe('the device’s parcels to bring along', () => {
     expect(recentFor(OTHER_LINK_ID)).not.toBeNull();
   });
 
+  it('keep a shared parcel without a key, as its viewer, and let it leave the device once kept', async () => {
+    shareKeepable();
+    mocks.claim.mockImplementation(keptAll);
+    expect(await bringAlong([recentFor(SHARED_LINK_ID)!], auth)).toEqual({ brought: 1, refused: [] });
+    expect(mocks.claim).toHaveBeenCalledWith([{ id: SHARED_LINK_ID, key: null, label: 'From a friend' }], auth, undefined);
+    expect(recentFor(SHARED_LINK_ID)).toBeNull();
+  });
+
   it('keep more than twenty parcels twenty to a request', async () => {
     const ids = linkIds('r7Qm2xHd9R', 25);
     lookUp(ids);
@@ -252,6 +281,16 @@ describe('the device’s parcels to bring along', () => {
     expect(await bringAlong(ids.map((id) => recentFor(id)!), auth)).toEqual({ brought: 25, refused: [] });
     expect(mocks.claim.mock.calls.map(([links]) => links.length)).toEqual([20, 5]);
     expect(ids.every((id) => recentFor(id) === null)).toBe(true);
+  });
+
+  it('in the demo, leave on the device a shared parcel whose link no longer lets it be kept', async () => {
+    shareKeepable();
+    const repo = createDemoRepo(window.localStorage);
+    const before = (await repo.list()).length;
+    mocks.read.mockResolvedValueOnce(testView({ id: SHARED_LINK_ID, owner: false }));
+    expect(await bringAlongInDemo([recentFor(SHARED_LINK_ID)!], repo)).toEqual({ brought: 0, refused: [{ id: SHARED_LINK_ID, reason: 'unavailable' }] });
+    expect((await repo.list()).length).toBe(before);
+    expect(recentFor(SHARED_LINK_ID)).not.toBeNull();
   });
 
   it('in the demo, skip a link that is gone, count a parcel the demo already has, and fall back to the device’s last answer', async () => {

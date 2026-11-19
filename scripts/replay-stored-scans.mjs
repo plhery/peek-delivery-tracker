@@ -87,7 +87,9 @@ for (const kind of ['clock', 'stage', 'copy']) {
       ? `${change.source} ${change.basis ?? '?'} ${Math.round((Date.parse(change.to) - Date.parse(change.from)) / 60_000)} min`
       : kind === 'stage' ? `${change.source} ${change.code ?? '-'} ${change.from} -> ${change.to} (${change.reason})`
         : `${change.provider ?? 'unnamed provider'}`;
-    groups.set(key, [...groups.get(key) ?? [], change]);
+    const group = groups.get(key);
+    if (group) group.push(change);
+    else groups.set(key, [change]);
   }
   for (const [key, group] of [...groups].sort((a, b) => b[1].length - a[1].length)) {
     console.log(`  ${String(group.length).padStart(4)}  ${key}`);

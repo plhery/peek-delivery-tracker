@@ -1481,6 +1481,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^XN\\d{12}$",
         "confidence": "low"
+      },
+      {
+        "pattern": "^XR\\d{13}$",
+        "confidence": "low"
       }
     ],
     "aliases": [
@@ -30927,7 +30931,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^BR\\d{9}MG$",
+        "pattern": "^B[RS]\\d{9}MG$",
         "confidence": "low"
       }
     ],

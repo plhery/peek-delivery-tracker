@@ -80519,6 +80519,17 @@
     ]
   },
   {
+    "input": "BS123456789MG",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "morning-global"
+    ],
+    "asked": [
+      "morning-global"
+    ]
+  },
+  {
     "input": "BSIC1064576117",
     "carrier": "ekart",
     "confidence": "high",
@@ -110937,6 +110948,17 @@
     "carrier": "chronopost",
     "confidence": "high",
     "candidates": [
+      "chronopost"
+    ]
+  },
+  {
+    "input": "XR9999999999980",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
       "chronopost"
     ]
   },

@@ -24,6 +24,7 @@ import { FriendsActivityProvider } from './components/FriendsActivity';
 import type { ApiAuth } from './lib/apiClient';
 import { KeepPendingInDemo, KeepPendingParcel } from './peek/KeepPending';
 import { BringAlongInDemo, BringAlongParcels } from './peek/parcel/BringAlong';
+import { NoticeToast } from './peek/parcel/Toast';
 import { PeekRoot } from './peek/PeekRoot';
 import { keepParcelLink } from './peek/pending';
 import { leaveParcelLink, openLanding } from './peek/route';
@@ -173,7 +174,9 @@ export function ApiAccount({ auth, experience, invitation, demoAddress, linkId, 
         onOpenLanding={openLanding}
         apiAuth={apiAuth}
         signIn={signInWith}
-      /><BringAlongParcels auth={apiAuth!} /></>}
+      /><BringAlongParcels auth={apiAuth!} />
+      {/* What a page left to say, such as how a move from another device went. At the top, clear of the tab bar. */}
+      <NoticeToast place="top" /></>}
     </ParcelsProvider>
     </FriendsActivityProvider>
   );

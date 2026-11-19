@@ -179,6 +179,11 @@ export function recentFor(id: string): RecentParcel | null {
   return read().find((recent) => recent.id === id) ?? null;
 }
 
+/** How many more parcels the device can list before a new one pushes out an old one. */
+export function recentsRoom(): number {
+  return Math.max(0, MAX_RECENTS - read().length);
+}
+
 /** The parcels this device holds the owner key of but cannot list. */
 export function strandedParcels(): StrandedParcel[] {
   return load().stranded.map(({ id, key }) => ({ id, key }));

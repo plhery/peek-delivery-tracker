@@ -4,7 +4,7 @@ import { LINK_ID, OTHER_LINK_ID, OWNER_KEY, pendingView, testView } from '../../
 import type { EventPlace, ParcelWithEvents, Stage } from '../../types';
 import { linkNote, noteLink } from '../deviceNotes';
 import { ParcelLinkError } from '../links';
-import { archiveRecent, forgetAllRecents, freezeRecent, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
+import { archiveRecent, forgetAllRecents, forgetRecent, freezeRecent, MAX_RECENTS, recentFor, RECENTS_STORAGE_KEY, rememberParcel, strandedParcels, useRecents, type RecentParcel } from '../recents';
 import { deviceListDown, deviceListReadAt, forgetDeviceChecks, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 const mocks = vi.hoisted(() => ({ read: vi.fn(), forget: vi.fn(), removeAlert: vi.fn() }));
@@ -109,6 +109,31 @@ describe('watchDeviceParcels', () => {
     await pass(20 * MINUTE);
     expect(mocks.read).toHaveBeenCalledTimes(2);
     stop();
+  });
+
+  it('leaves a parcel that changed while it was read as it now is: forgotten, or given its owner key by a move', async () => {
+    rememberParcel({ id: LINK_ID, view: testView({ owner: false }), now: Date.now() - 10 * MINUTE });
+    mocks.read.mockImplementationOnce(async () => {
+      rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
+      return 'unavailable';
+    });
+    const stop = watch();
+    await pass(0);
+    expect(recentFor(LINK_ID)).toMatchObject({ key: OWNER_KEY, snapshot: testView() });
+    expect(recentFor(LINK_ID)?.frozen).toBeUndefined();
+    stop();
+
+    forgetAllRecents();
+    forgetDeviceChecks();
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() - 10 * MINUTE });
+    mocks.read.mockImplementationOnce(async () => {
+      forgetRecent(LINK_ID);
+      return testView();
+    });
+    const again = watch();
+    await pass(0);
+    expect(recentFor(LINK_ID)).toBeNull();
+    again();
   });
 
   it('leaves an archived parcel as it was until it is restored', async () => {

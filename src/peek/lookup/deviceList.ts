@@ -4,7 +4,7 @@ import { isFinal } from '../../lib/stages';
 import { turnOffAlert } from '../alerts';
 import { forgetParcelLink, ParcelLinkError, readParcelLink } from '../links';
 import { journeyEndedBefore } from '../parcel/summary';
-import { forgetRecent, freezeRecent, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
+import { forgetRecent, freezeRecent, recentFor, rememberParcel, strandedParcels, type RecentParcel } from '../recents';
 
 /**
  * How long an answer is fresh enough for the list: a parcel on its way moves, one that arrived rests. A held
@@ -107,6 +107,10 @@ export async function refreshDeviceParcels(recents: readonly RecentParcel[], sig
       checkedAt.set(recent.id, now());
       answeredAt = now();
       setDown(null);
+      // The answer is for the parcel as it was read: one forgotten meanwhile stays gone, and one a move gave its
+      // owner key is not frozen by a read without it.
+      const current = recentFor(recent.id);
+      if (!current || current.key !== recent.key) continue;
       if (read === 'unavailable') freezeRecent(recent.id);
       else {
         rememberParcel({ id: recent.id, view: read, now: seen || now() });

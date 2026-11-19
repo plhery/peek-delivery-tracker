@@ -208,11 +208,13 @@ Key server modules:
     as last shown, with its name, link and archive date, and never its owner key. "Open them
     on another device" shows a QR code (while the address fits in 1,800 characters) and a link,
     `/move#p=<id>.<key>.<a>.<name>&…`; frozen copies stay behind. The page at `/move` is the one
-    at `/`: it takes the parcels from the `#`, replaces the address with `/` at once, and reads
-    each link with its key (a hidden read). A key stays only when the link answers as its owner;
-    a parcel already on the device keeps its name and fold, and gains a key it lacked. When no read
-    gets through, the page says to open the link again once connected. Signed in,
-    the bring-along offer then asks to keep them in the account. The apps don't claim `/move`
+    at `/`: `instrumentation-client.ts` takes the `#` out of the address before the router reads
+    it, and the page reads each link with its key (a hidden read). A key stays only when the link
+    answers as its owner; a parcel already on the device keeps its name and fold, and gains a key
+    it lacked. The device takes no more parcels than it has room for, so none of its own makes
+    way. When a read doesn't get through or the device is full, the page says so, and opening
+    the link again brings the rest. Signed in, the account shows that notice too, and the
+    bring-along offer asks to keep the parcels in the account. The apps don't claim `/move`
     yet, so a phone opens it in the browser.
   - The list holds a hundred parcels: copies no longer updated make way first, then links
     opened from someone else, for the browser's own lookups. A saved parcel the browser can't read, such as one

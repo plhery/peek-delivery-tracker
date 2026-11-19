@@ -1,4 +1,4 @@
-import { useEffect, useSyncExternalStore, type ReactNode } from 'react';
+import { useSyncExternalStore, type ReactNode } from 'react';
 import { ToastMark } from '../../components/ToastMark';
 import { useI18n, type MessageKey } from '../../i18n';
 import './Toast.css';
@@ -27,9 +27,13 @@ const NOTICE_MS = 4_000;
 const listeners = new Set<() => void>();
 let notice: Notice | null = null;
 let serial = 0;
+let ending: ReturnType<typeof setTimeout> | undefined;
 
 function show(next: Notice | null) {
   notice = next;
+  // A notice lasts its few seconds whether a screen shows it or not: it never turns up later, out of its moment.
+  clearTimeout(ending);
+  if (next) ending = setTimeout(() => show(null), NOTICE_MS);
   for (const listener of [...listeners]) listener();
 }
 
@@ -44,13 +48,8 @@ function subscribe(listener: () => void) {
 }
 
 /** Shows the notice wherever the visitor is now, for a few seconds. */
-export function NoticeToast() {
+export function NoticeToast({ place }: { place?: 'top' | 'bottom' }) {
   const { t } = useI18n();
   const current = useSyncExternalStore(subscribe, () => notice, () => null);
-  useEffect(() => {
-    if (!current) return;
-    const timer = setTimeout(() => { if (notice === current) show(null); }, NOTICE_MS);
-    return () => clearTimeout(timer);
-  }, [current]);
-  return current ? <Toast key={current.id} kind={current.kind}>{t(current.text, current.values)}</Toast> : null;
+  return current ? <Toast key={current.id} kind={current.kind} place={place}>{t(current.text, current.values)}</Toast> : null;
 }

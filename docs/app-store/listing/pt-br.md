@@ -71,8 +71,8 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Adicionar encomendas por e-mail: com uma conta no Peek, você ganha seu próprio endereço Peek em Configurações › Adicionar encomendas por e-mail. Encaminhe um e-mail de envio para esse endereço: o Peek adiciona a encomenda e avisa você. Esse recurso está em beta.
-• Escolha quilogramas ou libras em Configurações › Preferências › Unidade de peso, independentemente da unidade de distância. Se o seu iPhone ou iPad usa o sistema de medidas dos EUA, os pesos agora aparecem em libras.
-• Se o servidor do Peek estiver em manutenção, suas encomendas continuam na tela, com uma breve nota indicando quando foram atualizadas pela última vez.
-• Os textos sobre o mapa do cartão de uma encomenda agora estão mais escuros e fáceis de ler.
+• Com uma conta no Peek, em Configurações › Assistentes agora você vê como conectar Claude, ChatGPT, Gemini, OpenClaw ou Home Assistant ao Peek: o endereço do Peek para assistentes para você copiar, as etapas de cada um, o que pedir e os assistentes que você conectou, com “Desconectar”. Está em beta, como “Adicionar encomendas por e-mail”.
+• As Configurações estão mais fáceis de ler: cada item mostra um valor curto em uma só linha, as unidades se chamam “Distância” e “Peso”, e “Ponto nas encomendas atualizadas” diz o que essa opção faz. A opção do widget não existe mais: o widget da Tela de Início sempre mostra suas encomendas, então remova o widget se você não quiser.
+• Algumas transportadoras registram uma entrega com antecedência. Quando o horário dela já passou e nenhuma movimentação a comprova, o histórico de rastreamento agora diz que nada a confirma e, se nada chegou, para você perguntar ao vendedor qual transportadora faz a entrega e o código de rastreamento dela.
+• Correções: um status para o qual a transportadora não deu horário aparece no dia dele, e não no horário em que o Peek consultou; uma entrega que nenhuma movimentação localiza não aparece mais em um centro de distribuição; um código postal que você já informou vem com o país dele; uma encomenda entregue na sua porta depois de esperar em um ponto de retirada não dá mais o selo “Retirada” no seu Passaporte; janelas de entrega, etapas previstas, notificações e códigos de rastreamento compartilhados enquanto “Adicionar encomenda” está aberto funcionam como deveriam.
 ```

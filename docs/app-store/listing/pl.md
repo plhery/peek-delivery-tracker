@@ -71,8 +71,8 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Dodawaj przesyłki e-mailem: jeśli masz konto Peek, otrzymasz własny adres Peek w opcji Ustawienia › Dodawaj przesyłki e-mailem. Przekaż na niego e-mail o wysyłce, a Peek doda przesyłkę i da ci znać. To funkcja w wersji beta.
-• Wybierz kilogramy lub funty w opcji Ustawienia › Preferencje › Jednostka wagi, niezależnie od jednostki odległości. Jeśli twój iPhone lub iPad używa amerykańskiego systemu miar, waga jest teraz wyświetlana w funtach.
-• Gdy serwer Peek ma przerwę techniczną, twoje przesyłki pozostają na ekranie, a krótka notka informuje, kiedy były ostatnio aktualizowane.
-• Napisy na mapie w karcie przesyłki są teraz ciemniejsze i łatwiejsze do odczytania.
+• Jeśli masz konto Peek, w opcji Ustawienia › Asystenci zobaczysz teraz, jak połączyć Claude, ChatGPT, Gemini, OpenClaw lub Home Assistant z Peek: adres Peek dla asystentów do skopiowania, kroki dla każdego z nich, o co go poprosić i połączonych przez ciebie asystentów z przyciskiem „Odłącz”. To funkcja w wersji beta, tak jak „Dodawaj przesyłki e-mailem”.
+• Ustawienia są czytelniejsze: każda opcja pokazuje krótką wartość w jednym wierszu, jednostki nazywają się „Odległość” i „Waga”, a „Kropka przy zaktualizowanych przesyłkach” mówi, co robi ten przełącznik. Przełącznika widżetu już nie ma: widżet na ekranie początkowym zawsze pokazuje twoje przesyłki, więc usuń widżet, jeśli go nie chcesz.
+• Niektórzy przewoźnicy zapisują doręczenie z wyprzedzeniem. Gdy jego czas minie, a nie stoi za nim żaden skan, historia śledzenia mówi teraz, że nic go nie potwierdza, a jeśli nic nie dotarło, radzi zapytać sprzedawcę o firmę, która je doręcza, i o jej numer śledzenia.
+• Poprawki: status bez godziny podanej przez przewoźnika pojawia się pod swoim dniem, a nie o godzinie, o której Peek sprawdzał; doręczenie, którego miejsca nie wskazuje żaden skan, nie jest już pokazywane w sortowni; kod pocztowy podany przez ciebie wcześniej wraca razem ze swoim krajem; Paszport nie przyznaje już znaczka „Odebrana” przesyłce przyniesionej pod drzwi po tym, jak czekała w punkcie odbioru; przedziały doręczenia, zaplanowane kroki, powiadomienia i numery śledzenia udostępnione, gdy otwarty jest ekran „Dodaj przesyłkę”, działają tak, jak powinny.
 ```

@@ -217,6 +217,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Parcel delivery notifications: choose what Peek tells you"
     },
     {
+      "id": "iphone-app",
+      "slug": "parcel-tracker-app-iphone",
+      "title": "Peek for iPhone, iPad and Mac: widget, share and scan"
+    },
+    {
+      "id": "android-app",
+      "slug": "parcel-tracker-app-android",
+      "title": "Peek for Android: get the beta, add the Parcels widget"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "share-parcel-tracking-link",
+      "title": "Share a parcel's tracking, or wrap it as a gift"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "track-parcels-without-account",
+      "title": "Peek without an account: what you get, and when to sign in"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "christmas-posting-dates",
       "title": "Last posting dates for Christmas and shipping deadlines"
@@ -482,6 +502,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "parcel-notifications",
       "slug": "paket-benachrichtigungen",
       "title": "Paketbenachrichtigungen: Wähle, was Peek dir meldet"
+    },
+    {
+      "id": "iphone-app",
+      "slug": "sendungsverfolgung-app-iphone",
+      "title": "Peek für iPhone, iPad und Mac: Widget, Teilen und Scannen"
+    },
+    {
+      "id": "android-app",
+      "slug": "sendungsverfolgung-app-android",
+      "title": "Peek für Android: Beta holen, Widget „Pakete“ hinzufügen"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "sendungsverfolgung-teilen",
+      "title": "Sendungsverfolgung teilen oder als Geschenk verpacken"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "sendungsverfolgung-ohne-konto",
+      "title": "Peek ohne Konto: was du bekommst und wann du dich anmeldest"
     },
     {
       "id": "christmas-posting-dates",
@@ -751,6 +791,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Notifications de livraison\u00a0: choisis ce que Peek te signale"
     },
     {
+      "id": "iphone-app",
+      "slug": "application-suivi-colis-iphone",
+      "title": "Peek pour iPhone, iPad et Mac\u00a0: widget, partage et scan"
+    },
+    {
+      "id": "android-app",
+      "slug": "application-suivi-colis-android",
+      "title": "Peek pour Android\u00a0: obtenir la bêta et le widget «\u00a0Colis\u00a0»"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "partager-suivi-colis",
+      "title": "Partager le suivi d'un colis, ou l'emballer en cadeau"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "suivi-colis-sans-compte",
+      "title": "Peek sans compte\u00a0: ce que tu obtiens et quand te connecter"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "date-limite-envoi-colis-noel",
       "title": "Colis de Noël\u00a0: date limite d'envoi par transporteur"
@@ -1016,6 +1076,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "parcel-notifications",
       "slug": "notifiche-consegna-pacchi",
       "title": "Notifiche di consegna dei pacchi: scegli cosa ti dice Peek"
+    },
+    {
+      "id": "iphone-app",
+      "slug": "app-tracking-pacchi-iphone",
+      "title": "Peek per iPhone, iPad e Mac: widget, condivisione e scanner"
+    },
+    {
+      "id": "android-app",
+      "slug": "app-tracking-pacchi-android",
+      "title": "Peek per Android: ottieni la beta e il widget «Pacchi»"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "condividere-tracking-pacco",
+      "title": "Condividi il tracciamento del pacco o incartalo come regalo"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "tracking-pacchi-senza-account",
+      "title": "Peek senza account: cosa ottieni e quando accedere"
     },
     {
       "id": "christmas-posting-dates",
@@ -1285,6 +1365,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Notificaciones de entrega de paquetes: elige tus avisos"
     },
     {
+      "id": "iphone-app",
+      "slug": "app-seguimiento-paquetes-iphone",
+      "title": "Peek para iPhone, iPad y Mac: widget, compartir y escanear"
+    },
+    {
+      "id": "android-app",
+      "slug": "app-seguimiento-paquetes-android",
+      "title": "Peek para Android: consigue la beta y el widget Paquetes"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "compartir-seguimiento-de-paquete",
+      "title": "Comparte el seguimiento de un paquete o envuélvelo de regalo"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "seguir-paquetes-sin-cuenta",
+      "title": "Peek sin cuenta: qué tienes y cuándo iniciar sesión"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "fecha-limite-envio-paquetes-navidad",
       "title": "Fecha límite de envío en Navidad: Correos, GLS, SEUR y MRW"
@@ -1552,6 +1652,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "title": "Notificações de entrega de encomendas: escolhe os avisos"
     },
     {
+      "id": "iphone-app",
+      "slug": "app-seguimento-encomendas-iphone",
+      "title": "Peek para iPhone, iPad e Mac: widget, partilha e leitura"
+    },
+    {
+      "id": "android-app",
+      "slug": "app-seguimento-encomendas-android",
+      "title": "Peek para Android: obtém a beta e o widget Encomendas"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "partilhar-seguimento-encomenda",
+      "title": "Partilha o seguimento ou embrulha a encomenda como presente"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "seguir-encomendas-sem-conta",
+      "title": "O Peek sem conta: o que tens e quando iniciar sessão"
+    },
+    {
       "id": "christmas-posting-dates",
       "slug": "prazos-envio-encomendas-natal",
       "title": "Prazos de envio no Natal: datas limite dos CTT, DPD e GLS"
@@ -1817,6 +1937,26 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
       "id": "parcel-notifications",
       "slug": "powiadomienia-o-dostawie-przesylek",
       "title": "Powiadomienia o dostawie przesyłek: wybierz, co mówi Ci Peek"
+    },
+    {
+      "id": "iphone-app",
+      "slug": "aplikacja-sledzenie-przesylek-iphone",
+      "title": "Peek na iPhone’a, iPada i Maca: widżet, linki i skaner"
+    },
+    {
+      "id": "android-app",
+      "slug": "aplikacja-sledzenie-przesylek-android",
+      "title": "Peek na Androida: wersja beta i widżet Przesyłki"
+    },
+    {
+      "id": "share-parcel",
+      "slug": "udostepnianie-sledzenia-przesylki",
+      "title": "Udostępnij śledzenie przesyłki albo zapakuj ją jako prezent"
+    },
+    {
+      "id": "account-or-guest",
+      "slug": "sledzenie-przesylek-bez-konta",
+      "title": "Peek bez konta: co dostajesz i kiedy się zalogować"
     },
     {
       "id": "christmas-posting-dates",

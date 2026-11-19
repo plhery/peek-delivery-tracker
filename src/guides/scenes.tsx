@@ -1365,6 +1365,108 @@ function Ring() {
   </>;
 }
 
+/** A widget of the parcels on their way: two rows, each a dot and a line, in a tone. */
+function ParcelsWidget({ x, y, width, height, tone }: { x: number; y: number; width: number; height: number; tone: string }) {
+  return <g transform={`translate(${x} ${y})`}>
+    <rect width={width} height={height} rx="18" fill={`var(--${tone}-soft)`} />
+    {[0, 1].map((row) => <g key={row} transform={`translate(14 ${height / 2 - 26 + row * 30})`}>
+      <rect width={width - 28} height="22" rx="8" fill={paper} />
+      <circle cx="12" cy="11" r="5.5" fill={row ? 'var(--green)' : 'var(--orange)'} />
+      {/* A small widget has room for the dots only. */}
+      {width > 80 && <rect x="24" y="7.5" width={Math.min(64, width - 72)} height="7" rx="3.5" fill={`var(--${tone})`} opacity=".55" />}
+    </g>)}
+  </g>;
+}
+
+function Devices() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* A Mac at the back, an iPad before it, and in front an iPhone whose Home Screen holds the Parcels widget. */}
+    <rect x="330" y="44" width="236" height="152" rx="12" fill={ink} />
+    <rect x="338" y="52" width="220" height="136" rx="6" fill={paper} />
+    <rect x="356" y="72" width="120" height="9" rx="4.5" fill="var(--lilac)" opacity=".35" />
+    <rect x="356" y="92" width="84" height="9" rx="4.5" fill="var(--lilac)" opacity=".25" />
+    <path d="M432 196H464L470 236H426Z" fill={ink} />
+    <rect x="410" y="234" width="76" height="10" rx="5" fill={ink} />
+    <rect x="214" y="96" width="156" height="152" rx="16" fill={ink} />
+    <rect x="221" y="103" width="142" height="138" rx="10" fill={paper} />
+    <ParcelsWidget x={300} y={116} width={52} height={52} tone="lilac" />
+    {[[234, 116], [264, 116], [234, 146], [264, 146]].map(([x, y]) => <rect key={`${x} ${y}`} x={x} y={y} width="20" height="20" rx="6" fill="var(--control)" />)}
+    <Phone x={104} y={40} width={136} height={208}>
+      {[18, 46, 74, 102].map((x) => <rect key={x} x={x} y="34" width="18" height="18" rx="5" fill="var(--control)" />)}
+      <ParcelsWidget x={12} y={110} width={112} height={84} tone="lilac" />
+    </Phone>
+    {/* Pip, waving from the widget. */}
+    <Pip x={172} ground={150} width={64} mood="joy" side={1} />
+  </>;
+}
+
+function Droid() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* Pip, peeking over the top of an Android phone whose home screen holds the Parcels widget. */}
+    <Pip x={320} ground={112} width={96} mood="look" side={-1} />
+    <Phone x={262} y={100} width={116} height={148}>
+      <ParcelsWidget x={10} y={32} width={96} height={70} tone="green" />
+      {[30, 58, 86].map((x) => <circle key={x} cx={x} cy="122" r="10" fill="var(--control)" />)}
+    </Phone>
+  </>;
+}
+
+function Gift() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* Pip in a red ribbon, holding up a phone with a parcel's link. */}
+    <Pip x={170} ground={248} width={130} mood="joy" side={1} />
+    <g transform="translate(170 118)">
+      <path d="M0 0C-18-16-34-12-30 2C-26 14-10 10 0 0ZM0 0C18-16 34-12 30 2C26 14 10 10 0 0Z" fill="var(--rose)" />
+      <path d="M-4 2L-14 26M4 2L14 26" stroke="var(--rose)" strokeWidth="6" strokeLinecap="round" />
+      <circle r="6" fill="var(--rose)" />
+    </g>
+    <g transform="translate(268 70) rotate(8)">
+      <Phone x={0} y={0} width={112} height={164}>
+        <rect x="14" y="40" width="84" height="26" rx="13" fill="var(--rose-soft)" />
+        <path d="M28 53h10M34 48l5 5-5 5" stroke="var(--rose)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+        <rect x="46" y="49" width="40" height="7" rx="3.5" fill="var(--rose)" opacity=".55" />
+        <rect x="14" y="78" width="84" height="56" rx="12" fill="var(--control)" />
+        <circle cx="32" cy="98" r="8" fill="var(--orange)" />
+        <rect x="46" y="94" width="40" height="7" rx="3.5" fill="var(--orange)" opacity=".5" />
+        <rect x="26" y="114" width="58" height="7" rx="3.5" fill={ink} opacity=".15" />
+      </Phone>
+    </g>
+    {/* The friend, smiling. */}
+    <path d="M440 248C440 204 468 186 504 186C540 186 568 204 568 248Z" fill="var(--rose)" />
+    <circle cx="504" cy="146" r="36" fill="var(--ochre-soft)" />
+    <circle cx="491" cy="140" r="4" fill={ink} />
+    <circle cx="517" cy="140" r="4" fill={ink} />
+    <path d="M489 156Q504 170 519 156" stroke={ink} strokeWidth="4" strokeLinecap="round" />
+  </>;
+}
+
+function Doorway() {
+  return <>
+    <path d="M40 248H600" stroke={line} strokeWidth="4" strokeLinecap="round" />
+    {/* A phone with Pip waving from its screen. */}
+    <Phone x={70} y={52} width={132} height={196} />
+    <Pip x={136} ground={226} width={86} mood="joy" side={1} />
+    {/* An open door between the phone and the other devices. */}
+    <rect x="270" y="96" width="92" height="152" rx="4" fill="var(--ochre)" opacity=".18" />
+    <path d="M270 248V96H362V248" stroke="var(--ochre)" strokeWidth="6" strokeLinejoin="round" />
+    <path d="M270 96L236 110V240L270 248Z" fill="var(--ochre)" />
+    <circle cx="246" cy="176" r="4" fill={paper} />
+    {/* A laptop, and a tablet before it. */}
+    <rect x="418" y="120" width="170" height="108" rx="8" fill={ink} />
+    <rect x="425" y="127" width="156" height="94" rx="4" fill={paper} />
+    <rect x="470" y="144" width="90" height="8" rx="4" fill="var(--ochre)" opacity=".4" />
+    <rect x="470" y="162" width="64" height="8" rx="4" fill="var(--ochre)" opacity=".3" />
+    <path d="M402 228H604L594 244H412Z" fill={ink} />
+    <rect x="384" y="150" width="76" height="98" rx="10" fill={ink} />
+    <rect x="390" y="156" width="64" height="86" rx="6" fill={paper} />
+    <rect x="398" y="170" width="48" height="16" rx="5" fill="var(--ochre-soft)" />
+    <rect x="398" y="192" width="48" height="16" rx="5" fill="var(--ochre-soft)" />
+  </>;
+}
+
 const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'tracking-number-formats': { tone: 'blue', draw: Formats },
   'tracking-statuses': { tone: 'green', draw: Statuses },
@@ -1408,6 +1510,10 @@ const SCENES: Record<string, { tone: string; draw: () => ReactNode }> = {
   'home-assistant': { tone: 'blue', draw: Home },
   'add-parcels-by-email': { tone: 'orange', draw: Forwarded },
   'parcel-notifications': { tone: 'green', draw: Ring },
+  'iphone-app': { tone: 'lilac', draw: Devices },
+  'android-app': { tone: 'green', draw: Droid },
+  'share-parcel': { tone: 'rose', draw: Gift },
+  'account-or-guest': { tone: 'ochre', draw: Doorway },
   'christmas-posting-dates': { tone: 'blue', draw: Christmas },
   'uncollected-parcel': { tone: 'ochre', draw: Uncollected },
   'parcel-lockers': { tone: 'rose', draw: Lockers },

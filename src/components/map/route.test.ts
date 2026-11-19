@@ -49,14 +49,32 @@ describe('buildRoute', () => {
     expect(buildRoute([scan(zurich), scan(bern, 'delivered'), scan(undefined, 'returned')]).latestLocated).toBe(false);
   });
 
-  it('puts a delivery with no place at the last stop when that stop is in the destination country', () => {
-    const delivered = (destination?: Place) => buildRoute([scan(zurich), scan(bern, 'out_for_delivery'), scan(undefined, 'delivered')], destination);
-    expect(delivered(countryPlace('CH', 'Switzerland', [7.46, 46.72])).latestLocated).toBe(true);
-    // Going to another country, or nowhere known: the last stop is only where the parcel was last seen.
-    expect(delivered(countryPlace('SC', 'Seychelles', [55.45, -4.62])).latestLocated).toBe(false);
-    expect(delivered().latestLocated).toBe(false);
-    // Any other scan with no place leaves the last stop the last known one, even in the destination country.
-    expect(buildRoute([scan(zurich), scan(bern), scan()], countryPlace('CH', 'Switzerland', [7.46, 46.72])).latestLocated).toBe(false);
+  it('delivers a parcel in its destination country when no delivery scan places it', () => {
+    const switzerland = countryPlace('CH', 'Switzerland', [7.46, 46.72]);
+    const hub: Place = { ...zurich, site: 'Zürich-Mülligen' };
+    // The delivery has no place: the hub, even in the country the parcel was going to, is only where it was last seen.
+    for (const scans of [[scan(kyoto), scan(hub), scan(undefined, 'delivered')], [scan(hub), scan(bern, 'out_for_delivery'), scan(undefined, 'delivered')]]) {
+      const route = buildRoute(scans, switzerland);
+      expect(route.latestLocated).toBe(false);
+      expect(route.destination).toBe(switzerland);
+    }
+    // A delivery scan for the whole country doesn't put the parcel at the hub either.
+    const countrywide = buildRoute([scan(kyoto), scan(hub), scan(countryPlace('CH', 'Switzerland', [8.23, 46.8]), 'delivered')], switzerland);
+    expect(countrywide.current?.place).toBe(hub);
+    expect(countrywide.latestLocated).toBe(false);
+    expect(countrywide.destination).toBe(switzerland);
+    // Going to another country, or nowhere known.
+    const seychelles = countryPlace('SC', 'Seychelles', [55.45, -4.62]);
+    expect(buildRoute([scan(hub), scan(undefined, 'delivered')], seychelles).destination).toBe(seychelles);
+    expect(buildRoute([scan(hub), scan(undefined, 'delivered')]).latestLocated).toBe(false);
+    // A delivery scan in Bern puts the delivery there, and the journey ends.
+    const placed = buildRoute([scan(hub), scan(bern, 'delivered'), scan(undefined, 'delivered')], switzerland);
+    expect(placed.latestLocated).toBe(true);
+    expect(placed.destination).toBeUndefined();
+    // Any other scan with no place: the parcel is in the country it was going to, last seen at the hub.
+    const travelling = buildRoute([scan(hub), scan()], switzerland);
+    expect(travelling.latestLocated).toBe(false);
+    expect(travelling.destination).toBeUndefined();
   });
 
   it('draws the remaining leg until the parcel reaches its destination', () => {

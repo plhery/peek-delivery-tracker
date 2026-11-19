@@ -113,7 +113,7 @@ export function RouteSummary({ parcel }: { parcel: Snapshot }) {
   const { route, latest } = parcel;
   const origin = route.origin;
   if (!origin) return null;
-  // A delivery the map can't place happened at the last stop only in the destination country (`latestLocated`).
+  // A delivery the map can't place was in the destination country, which the route keeps; with none, the last stop is where the parcel was last seen.
   const delivered = latest.stage === 'delivered' && Boolean(route.latestLocated || route.destination);
   const end = route.destination ?? route.current!.place;
   const endLabel = delivered ? 'Delivered' : route.destination ? 'To' : route.latestLocated ? 'Now' : 'Last seen';

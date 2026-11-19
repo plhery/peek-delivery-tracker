@@ -47,10 +47,11 @@ export interface Route {
   current?: Stop;
   /**
    * False when the newest scan has no place, so the last stop is only the last known one. A delivery is where its
-   * scan was placed: a later delivery scan with no place doesn't make it unknown. A delivery with no place at all
-   * happened at the last stop when that stop is in the destination country.
+   * scan was placed: a later delivery scan with no place doesn't make it unknown, and one for a whole country doesn't
+   * put it at a facility there.
    */
   latestLocated: boolean;
+  /** Where the parcel is headed, until it gets there; where a delivery with no place happened, its country included. */
   destination?: Place;
   remainingKm?: number;
   km: number;
@@ -88,15 +89,13 @@ export function countryPlace(country: string, name: string, coordinate: Coordina
 }
 
 /**
- * Whether the parcel is at the last stop: its newest scan was placed or, when the newest scans are deliveries, any of
- * them was. A delivery with no place happened at the last stop when that stop is in the country the parcel was going to.
+ * Whether the parcel is at the last stop: its newest scan was placed or, when the newest scans are deliveries, one of
+ * them was placed there. A delivery scan for the whole country doesn't put the parcel at the facility it merged into.
  */
-function newestPlaced(scans: readonly Scan[], last?: Stop, destination?: Place): boolean {
+function newestPlaced(scans: readonly Scan[], last?: Stop): boolean {
   let start = scans.length - 1;
   while (start > 0 && scans[start].stage === 'delivered' && scans[start - 1].stage === 'delivered') start -= 1;
-  const newest = scans.slice(Math.max(start, 0));
-  if (newest.some((scan) => scan.place)) return true;
-  return newest[0]?.stage === 'delivered' && Boolean(last && destination && last.place.country === destination.country);
+  return scans.slice(Math.max(start, 0)).some((scan) => scan.place && (scan.stage !== 'delivered' || scan.place.id === last?.place.id));
 }
 
 export function buildRoute(scans: readonly Scan[], destination?: Place): Route {
@@ -125,7 +124,10 @@ export function buildRoute(scans: readonly Scan[], destination?: Place): Route {
     km: distanceKm(stops[index].place.coordinate, stop.place.coordinate),
   }));
   const current = stops.at(-1);
-  const arrived = current && destination && (current.place.id === destination.id
+  const latestLocated = newestPlaced(scans, current);
+  // A delivery no scan places happened in the destination country, not at the last stop seen there.
+  const unplacedDelivery = scans.at(-1)?.stage === 'delivered' && !latestLocated;
+  const arrived = current && destination && !unplacedDelivery && (current.place.id === destination.id
     || (destination.precision === 'country' && current.place.country === destination.country)
     || distanceKm(current.place.coordinate, destination.coordinate) < 15);
   const remaining = current && destination && !arrived ? destination : undefined;
@@ -142,7 +144,7 @@ export function buildRoute(scans: readonly Scan[], destination?: Place): Route {
     legs,
     origin: stops[0],
     current,
-    latestLocated: newestPlaced(scans, current, destination),
+    latestLocated,
     destination: remaining,
     remainingKm: current && remaining ? distanceKm(current.place.coordinate, remaining.coordinate) : undefined,
     km: legs.reduce((sum, leg) => sum + leg.km, 0),

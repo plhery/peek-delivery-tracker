@@ -187,10 +187,16 @@ describe('map summary', () => {
     expect(screen.getByText('Delivered').nextElementSibling).toHaveTextContent('Bern');
     copied.unmount();
     const switzerland = countryPlace('CH', 'Switzerland', [7.46, 46.72]);
-    // A delivery with no place, in the country the parcel was going to: it happened at the last stop there.
-    const home = sheet(buildRoute([scan(tokyo), scan(bern, 'out_for_delivery'), scan(undefined, 'delivered')], switzerland), 'delivered');
-    expect(screen.getByText('Delivered').nextElementSibling).toHaveTextContent('Bern');
+    // A delivery with no place, after a hub in the country the parcel was going to: it was delivered in that country, not at the hub.
+    const hub: Place = { ...city('Zürich', 'CH', 8.4695, 47.3959), site: 'Zürich-Mülligen' };
+    const home = sheet(buildRoute([scan(tokyo), scan(hub), scan(undefined, 'delivered')], switzerland), 'delivered');
+    expect(screen.getByText('Delivered').nextElementSibling).toHaveTextContent('Switzerland');
+    expect(screen.queryByText('Zürich-Mülligen')).not.toBeInTheDocument();
     home.unmount();
+    // Out for delivery from Bern is no delivery in Bern.
+    const round = sheet(buildRoute([scan(tokyo), scan(bern, 'out_for_delivery'), scan(undefined, 'delivered')], switzerland), 'delivered');
+    expect(screen.getByText('Delivered').nextElementSibling).toHaveTextContent('Switzerland');
+    round.unmount();
     // The last stop is in another country: the parcel was delivered in the one it was going to.
     sheet(buildRoute([scan(tokyo), scan(undefined, 'delivered')], switzerland), 'delivered');
     expect(screen.getByText('Delivered').nextElementSibling).toHaveTextContent('Switzerland');

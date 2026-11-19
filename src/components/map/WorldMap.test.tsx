@@ -297,6 +297,15 @@ describe('WorldMap', () => {
     expect(screen.queryByText('Basel')).not.toBeInTheDocument();
   });
 
+  it('marks a hub the last known stop when the delivery after it has no place', async () => {
+    // Even in the country the parcel was going to: the delivery is in that country, not at the hub.
+    const route = buildRoute([scan(kyoto), scan(zurich), { ...scan(), stage: 'delivered' }], countryPlace('CH', 'Switzerland', [7.46, 46.72]));
+    const { container } = render(<WorldMap route={route} mode="journey" time={time} labels="none" context={false} />);
+    await waitFor(() => expect(container.querySelector('g[data-kind="last-known"]')).not.toBeNull());
+    expect(container.querySelector('g[data-kind="current"]')).toBeNull();
+    expect(container.querySelector('[data-kind="destination"]')).not.toBeNull();
+  });
+
   it('frames a town, a single place and nothing at all', async () => {
     const town = buildRoute([scan(mulligen), scan(zurich)]);
     const { container, rerender } = render(<WorldMap route={town} mode="journey" time={time} />);

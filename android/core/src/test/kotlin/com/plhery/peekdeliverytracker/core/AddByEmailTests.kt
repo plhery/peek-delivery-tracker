@@ -400,6 +400,26 @@ class AddByEmailTests {
         assertEquals("parcels-2@inbox.peek.example", store.offer(reader)?.inbox?.address)
     }
 
+    /** A return to the app reads again while Settings' first read still waits: the first's older answer is set aside. */
+    @Test
+    fun aReadThatAnswersAfterANewerOneBeganIsSetAside() = runTest {
+        val client = FakeClient().apply { answer = offered }
+        val store = AddByEmailStore(client)
+        val first = CompletableDeferred<Unit>()
+        client.holding = first
+        val reading = async { store.read(reader) }
+        runCurrent()
+        val confirmed = offered.copy(dailyLimit = 49)
+        client.holding = null
+        client.answer = confirmed
+        store.read(reader)
+        assertEquals(confirmed, store.offer(reader))
+        client.answer = offered
+        first.complete(Unit)
+        reading.await()
+        assertEquals("The first read's older answer stands over the newer one", confirmed, store.offer(reader))
+    }
+
     @Test
     fun aReturnToTheAppReadsAgainOnceTwoSecondsHavePassed() = runTest {
         var now = Instant.parse("2026-10-28T09:00:00Z")

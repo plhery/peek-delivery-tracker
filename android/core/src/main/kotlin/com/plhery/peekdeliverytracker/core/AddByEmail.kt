@@ -148,11 +148,15 @@ class AddByEmailStore(private val client: AddByEmailClient, private val now: () 
 
     /** Bumped as each change begins and ends: a read that saw it move is set aside. */
     private var changes = 0
+
+    /** Bumped as each read begins: a read that answers after a newer one began is set aside. */
+    private var reads = 0
     private var readAt: Instant? = null
 
     /** Reads what the server offers [account]. */
     suspend fun read(account: UUID) {
         val started = changes
+        val read = ++reads
         readAt = now()
         val value = try {
             client.read()
@@ -161,7 +165,7 @@ class AddByEmailStore(private val client: AddByEmailClient, private val now: () 
         } catch (_: Exception) {
             return
         }
-        if (started != changes) return
+        if (started != changes || read != reads) return
         offerState.value = value?.let { AddByEmailOffer(account, it) }
     }
 

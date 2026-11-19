@@ -158,12 +158,12 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
 
     /**
      * False when the newest scan has no place, so the last stop is only the last known one. A delivery is where
-     * its scan was placed: a later delivery scan with no place doesn't make it unknown. A delivery with no place at
-     * all happened at the last stop when that stop is in the destination country.
+     * its scan was placed: a later delivery scan with no place doesn't make it unknown, and one for a whole country
+     * doesn't put it at a facility there.
      */
     val latestLocated: Boolean
 
-    /** Where the parcel is headed, until it gets there. */
+    /** Where the parcel is headed, until it gets there; where a delivery with no place happened, its country included. */
     val destination: RoutePlace?
     val remainingKilometres: Double?
     val kilometres: Double
@@ -200,10 +200,15 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
         }
         var remaining: RoutePlace? = null
         val current = stops.lastOrNull()
+        // A delivery is at the last stop only when one of its scans was placed there: one for the whole country isn't.
+        val newest = places.takeLast(max(deliveries, 1)).filterNotNull()
+        val located = if (deliveries > 0) newest.any { it.id == current?.place?.id } else newest.isNotEmpty()
         if (current != null && destination != null) {
-            val arrived = current.place.id == destination.id ||
+            val reached = current.place.id == destination.id ||
                 (destination.isCountry && current.place.country == destination.country) ||
                 current.place.point.kilometres(destination.point) < 15
+            // A delivery no scan places happened in the destination country, not at the last stop seen there.
+            val arrived = reached && (deliveries == 0 || located)
             remaining = if (arrived) null else destination
         }
         val points = stops.map { it.place.point } + listOfNotNull(remaining?.point)
@@ -217,9 +222,7 @@ class ParcelRoute(places: List<RoutePlace?>, deliveries: Int = 0, destination: R
         }
         this.stops = stops
         this.legs = legs
-        // A delivery with no place happened at the last stop when that stop is in the country the parcel was going to.
-        latestLocated = places.takeLast(max(deliveries, 1)).any { it != null } ||
-            (deliveries > 0 && destination != null && stops.lastOrNull()?.place?.country == destination.country)
+        latestLocated = located
         this.destination = remaining
         remainingKilometres = if (current != null && remaining != null) current.place.point.kilometres(remaining.point) else null
         kilometres = legs.fold(0.0) { sum, leg -> sum + leg.kilometres }

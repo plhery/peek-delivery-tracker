@@ -308,7 +308,7 @@ private fun MapSummary(route: ParcelRoute, stage: TrackingStage?, large: Boolean
     // A finished journey has a length, not a distance "so far".
     val finished = delivered || stage == TrackingStage.Returned
     val end = route.destination ?: current.place
-    // A delivery scan with no place happened at the last stop only when that stop is in the destination country.
+    // A delivery no scan places was in the destination country, which the route keeps; with none, the last stop is only where the parcel was last seen.
     val endLabel = when {
         delivered && (route.latestLocated || route.destination != null) -> "map.delivered"
         route.destination != null -> "map.to"

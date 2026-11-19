@@ -139,16 +139,32 @@ class ParcelRouteTests {
     }
 
     @Test
-    fun aDeliveryWithNoPlaceIsAtTheLastStopInTheDestinationCountry() {
+    fun aDeliveryNoScanPlacesIsInTheDestinationCountry() {
+        val hub = zurich.copy(site = "Zürich-Mülligen")
+        // The delivery has no place: the hub, even in the country the parcel was going to, is only where it was last seen.
+        for (places in listOf(listOf(kyoto, hub, null), listOf(hub, bern, null))) {
+            val route = ParcelRoute(places, deliveries = 1, destination = switzerland)
+            assertFalse(route.latestLocated)
+            assertEquals(switzerland, route.destination)
+        }
+        // A delivery scan for the whole country doesn't put the parcel at the hub either.
+        val wholeCountry = RoutePlace.country("CH", name = "Switzerland", at = GeoPoint(8.23, 46.8))
+        val countrywide = ParcelRoute(listOf(kyoto, hub, wholeCountry), deliveries = 1, destination = switzerland)
+        assertEquals(hub, countrywide.current?.place)
+        assertFalse(countrywide.latestLocated)
+        assertEquals(switzerland, countrywide.destination)
+        // Going to another country, or nowhere known.
         val seychelles = RoutePlace.country("SC", name = "Seychelles", at = GeoPoint(55.45, -4.62))
-        val delivered = { destination: RoutePlace? -> ParcelRoute(listOf(zurich, bern, null), deliveries = 1, destination = destination) }
-        assertTrue(delivered(switzerland).latestLocated)
-        // Going to another country, or nowhere known: the last stop is only where the parcel was last seen.
-        assertFalse(delivered(seychelles).latestLocated)
-        assertEquals(seychelles, delivered(seychelles).destination)
-        assertFalse(delivered(null).latestLocated)
-        // Any other scan with no place leaves the last stop the last known one, even in the destination country.
-        assertFalse(ParcelRoute(listOf(zurich, bern, null), destination = switzerland).latestLocated)
+        assertEquals(seychelles, ParcelRoute(listOf(hub, null), deliveries = 1, destination = seychelles).destination)
+        assertFalse(ParcelRoute(listOf(hub, null), deliveries = 1).latestLocated)
+        // A delivery scan in Bern puts the delivery there, and the journey ends.
+        val placed = ParcelRoute(listOf(hub, bern, null), deliveries = 2, destination = switzerland)
+        assertTrue(placed.latestLocated)
+        assertNull(placed.destination)
+        // Any other scan with no place: the parcel is in the country it was going to, last seen at the hub.
+        val travelling = ParcelRoute(listOf(hub, null), destination = switzerland)
+        assertFalse(travelling.latestLocated)
+        assertNull(travelling.destination)
     }
 
     @Test

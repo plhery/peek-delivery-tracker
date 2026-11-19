@@ -65,6 +65,7 @@ import com.plhery.peekdeliverytracker.core.journalEntries
 import com.plhery.peekdeliverytracker.core.journalLocation
 import com.plhery.peekdeliverytracker.core.journalTime
 import com.plhery.peekdeliverytracker.core.journalWording
+import com.plhery.peekdeliverytracker.core.aheadUntil
 import com.plhery.peekdeliverytracker.core.isAhead
 import com.plhery.peekdeliverytracker.core.plannedNewestFirst
 import com.plhery.peekdeliverytracker.core.plannedStepLabel
@@ -126,6 +127,16 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
     }
     val today = now().atZone(zone).toLocalDate()
     val days = remember(localizer, language, entries, zone, today) { localizer.journalDays(entries, now()) }
+    // The planned steps still ahead, read again when the first of them passes while the history stays open.
+    var plannedClock by remember { mutableStateOf(now()) }
+    val moment = maxOf(now(), plannedClock)
+    val planned = parcel.plannedEvents?.filter { it.isAhead(moment) }.orEmpty()
+    val nextPlannedEnd = planned.mapNotNull { it.aheadUntil }.minOrNull()
+    LaunchedEffect(nextPlannedEnd, now) {
+        val end = nextPlannedEnd ?: return@LaunchedEffect
+        while (now() < end) delay(maxOf(Duration.between(now(), end).toMillis(), 100))
+        plannedClock = now()
+    }
     // A copy the journal shows under its scan is current through that scan.
     val currentId = remember(parcel, entries) {
         parcel.currentEvent?.let { current -> entries.firstOrNull { it.id == current.id || current in it.relays }?.id }
@@ -142,8 +153,6 @@ internal fun ParcelJournal(parcel: Parcel, tint: Color, modifier: Modifier = Mod
                 fadeOut(Motion.easeInOut(TOGGLE)) + shrinkVertically(Motion.easeInOut<IntSize>(TOGGLE), Alignment.Top, clip = false),
         ) {
             Column(Modifier.fillMaxWidth()) {
-                val moment = now()
-                val planned = parcel.plannedEvents?.filter { it.isAhead(moment) }.orEmpty()
                 if (planned.isNotEmpty()) {
                     PlannedSteps(
                         planned, moment, localizer.text("timeline.planned.title"), localizer.text("timeline.planned.note"),

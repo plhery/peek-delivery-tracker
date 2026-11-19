@@ -2128,6 +2128,48 @@ class DeviceParcelTests {
         assertEquals("unalert 22222222222A token2 fcm", calls.all.last())
     }
 
+    @Test
+    fun aParcelMutedOnItsPageHearsNothingUntilItIsTurnedOnAgain() = runTest {
+        val mine = UUID.randomUUID()
+        val other = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", mine), parcel("22222222222B", "", other))
+        val calls = Calls()
+        var offline = true
+        val device = device(client(calls, unalert = { if (offline) throw DeliveryApiError.ServiceFailed(503) }), storage, this)
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(2, calls.all.size)
+
+        // The service can't be told: the notifications stay on, and the page says why.
+        assertThrows { device.setMuted(mine, true) }
+        assertFalse(device.list().first { it.id == mine }.notificationsMuted)
+        assertEquals("token1", storage.parcels.first { it.parcel.id == mine }.alertToken)
+
+        offline = false
+        assertTrue(device.setMuted(mine, true).notificationsMuted)
+        assertEquals("unalert 22222222222A token1 fcm", calls.all.last())
+        assertEquals(listOf(true, null), storage.parcels.map { it.muted })
+        assertEquals(null, storage.parcels.first { it.parcel.id == mine }.alertToken)
+
+        // A new token or a launch passes it over, and it counts as settled.
+        device.registerAlerts(token = "token2", locale = NativePushLocale.En)
+        assertEquals("alert 22222222222B k important token2 en production fcm", calls.all.dropLast(1).last())
+        assertTrue(device.alertsSettled("token2", NativePushLocale.En))
+        val relaunched = device(client(calls), storage, this)
+        assertTrue(relaunched.list().first { it.id == mine }.notificationsMuted)
+        val before = calls.all.size
+        relaunched.registerAlerts(token = "token2", locale = NativePushLocale.En)
+        assertFalse(calls.all.drop(before).any { it.startsWith("alert 22222222222A") })
+
+        // Turned on again, it is asked for on the last round's token, with the preset it had.
+        assertFalse(relaunched.setMuted(mine, false).notificationsMuted)
+        relaunched.alertsAgain()
+        assertEquals("alert 22222222222A k important token2 en production fcm", calls.all.last())
+        assertEquals(listOf("token2", "token2"), storage.parcels.map { it.alertToken })
+        assertEquals(listOf(null, null), storage.parcels.map { it.muted })
+    }
+
     /**
      * The build without Google's services names the phone by its installation token, reached through its inbox or
      * through UnifiedPush: a change of way asks again with the same token, whose alert the service changes in place, so

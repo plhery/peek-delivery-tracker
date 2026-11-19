@@ -258,13 +258,28 @@ class LivePassTest {
     }
 
     @Test
-    fun beforeSigningInThereIsNoBell() {
+    fun beforeSigningInTheBellTurnsTheParcelsNotificationsOnThisPhoneOffAndBackOn() {
         show(AuthenticationState.Welcome)
         open("Birthday gift")
-        assertFalse(exists(PAGE_BELL))
+        val bell = node(PAGE_BELL)
+        bell.assertContentDescriptionEquals("Turn off parcel notifications")
+        bell.performClick()
+        settle()
+        bell.assertContentDescriptionEquals("Turn on parcel notifications")
+        bell.performClick()
+        settle()
+        assertEquals(listOf(gift to true, gift to false), source.mutes)
         assertTrue(exists(PAGE_SHARE))
         assertTrue(exists(PAGE_GLOBE))
         assertTrue(hasClick(PAGE_MARKS))
+    }
+
+    @Test
+    fun beforeSigningInAPhoneWithoutPushesHasNoBell() {
+        show(AuthenticationState.Welcome) { pushAvailable = false }
+        open("Birthday gift")
+        assertFalse(exists(PAGE_BELL))
+        assertTrue(exists(PAGE_SHARE))
     }
 
     @Test

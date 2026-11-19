@@ -397,11 +397,12 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
 }
 
 /**
- * The pass at the page's top ([LivePassCard]): the bell where alerts can be had, which needs an account and a parcel
- * of the deliveries, and opens the parcel's alerts while the account's email is on, the one way it has on a phone
- * without pushes ([DeliveriesSource.pushAvailable]); the share and the carrier where the parcel is the reader's own,
- * rather than followed through someone else's link; and the map once the atlas is read. A copy the service forgot has
- * no bell, share or carrier to change: its notifications and its link went with the lookup.
+ * The pass at the page's top ([LivePassCard]): the bell where alerts can be had, on a parcel of the deliveries. With an
+ * account it opens the parcel's alerts while the account's email is on, the one way it has on a phone without pushes
+ * ([DeliveriesSource.pushAvailable]); without one it needs pushes, and turns the parcel's notifications on this phone
+ * off or back on. The share and the carrier where the parcel is the reader's own, rather than followed through someone
+ * else's link; and the map once the atlas is read. A copy the service forgot has no bell, share or carrier to change:
+ * its notifications and its link went with the lookup.
  */
 @Composable
 private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
@@ -411,9 +412,9 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val frozen = state.source.isFrozen(parcel)
     // A scan has a place, so the card shows the route once the map data has loaded.
     val atlas = rememberWorldAtlas(wanted = parcel.trackingEvents.any { it.place != null })
-    val opensAlerts = email?.bellOpensAlerts(parcel) == true
+    val opensAlerts = session != AuthenticationState.Welcome && email?.bellOpensAlerts(parcel) == true
     val pushes = state.source.pushAvailable
-    val bell = if (session != AuthenticationState.Welcome && !sample && !frozen && (pushes || opensAlerts)) {
+    val bell = if (!sample && !frozen && (pushes || opensAlerts)) {
         // The same bell while nothing it acts on changes, so the card isn't composed again for a new one.
         remember(state, pageId, parcel, opensAlerts, pushes) {
             PassBell(opensAlerts, pushes, open = { state.openAlerts(pageId, it) }) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) }

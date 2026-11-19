@@ -1091,8 +1091,14 @@ class ParcelStore(
 
     suspend fun setMuted(parcel: Parcel, muted: Boolean) {
         val generation = session.generation
-        // A parcel followed without an account has no alerts to mute.
-        if (isGuest) return
+        // A parcel followed without an account hears its notifications on this phone alone, which turns them off itself.
+        if (isGuest) {
+            val updated = device.setMuted(parcel.id, muted)
+            session.checkGeneration(generation)
+            upsert(updated)
+            if (!muted) scope.launch { device.alertsAgain() }
+            return
+        }
         val updated = if (isDemo) demo.setMuted(parcel.id, muted) else api.setMuted(parcel.id, muted)
         session.checkGeneration(generation)
         upsert(updated)

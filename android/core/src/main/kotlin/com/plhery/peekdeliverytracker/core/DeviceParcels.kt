@@ -89,10 +89,17 @@ data class DeviceParcel(
      * read again. A new lookup of the number takes its place.
      */
     val frozen: String? = null,
+    /**
+     * Its notifications turned off on this phone from its page: the service is told so, and rounds pass it over until
+     * they are turned on again.
+     */
+    val muted: Boolean? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
 
     val isFrozen: Boolean get() = frozen != null
+
+    val isMuted: Boolean get() = muted == true
 
     /** The parcel as it stands, seen: what it tells now is no news. */
     fun startingSeen(): DeviceParcel = copy(seenNewsAt = parcel.newsAt ?: SEEN_BEFORE_ANY_NEWS)
@@ -566,6 +573,9 @@ class DeviceParcels(
     /** The last round, when it was cut short: tried again on its token and in its language once its time comes. */
     private var alertRetry: AlertRetry? = null
 
+    /** The token and language of the last round, which a parcel's notifications turned on again are asked for on. */
+    private var alertsWanted: Pair<String, NativePushLocale>? = null
+
     private class AlertRetry(val token: String, val locale: NativePushLocale, val at: Instant, val wait: Double)
 
     init {
@@ -649,7 +659,9 @@ class DeviceParcels(
                 }
             }
             // The parcel being replaced came back unchanged: only its link is new.
-            if (old.parcel.id == replacing) entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced)
+            if (old.parcel.id == replacing) {
+                entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted)
+            }
         }
         entries = entries + entry
         keys = keys.setting(entry.linkId, response.key)
@@ -932,7 +944,7 @@ class DeviceParcels(
             attempt { forget(id) }
             val index = entries.indexOfFirst { it.parcel.id == added.id }
             if (index >= 0) {
-                change(index) { it.copy(replaced = entry.replaced ?: id) }
+                change(index) { it.copy(replaced = entry.replaced ?: id, muted = entry.muted) }
                 save()
                 return shown(entries[index])
             }
@@ -1110,6 +1122,7 @@ class DeviceParcels(
     suspend fun registerAlerts(token: String, locale: NativePushLocale) {
         val asked = "$token ${locale.rawValue}"
         val client = client ?: return
+        alertsWanted = token to locale
         if (desiredAlert != asked) {
             desiredAlert = asked
             alertGeneration++
@@ -1121,7 +1134,9 @@ class DeviceParcels(
         // How long the service asked to be left alone, in seconds, when the round is cut short.
         var pause: Double? = null
         try {
-            val waiting = entries.filter { !it.isFrozen && !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }
+            val waiting = entries.filter {
+                !it.isFrozen && !it.isMuted && !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver
+            }
             val due = waiting.take(alertsPerRound)
             for (entry in due) {
                 if (round != alertGeneration) return
@@ -1156,6 +1171,11 @@ class DeviceParcels(
                 }
                 alertsAsked = alertsAsked.setting(entry.linkId, asked)
                 if (answer != DeviceAlertAnswer.On) continue
+                // Turned off on its page while the service was asked: it hears nothing after all.
+                if (entries[index].isMuted) {
+                    attempt { client.removeAlert(entry.linkId, removal(token)) }
+                    continue
+                }
                 val old = entries[index].alertToken
                 change(index) { it.copy(alertToken = token, alertPreset = preset) }
                 save()
@@ -1176,7 +1196,29 @@ class DeviceParcels(
      * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
      */
     fun alertsSettled(token: String, locale: NativePushLocale): Boolean = entries.all {
-        it.isFrozen || it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
+        it.isFrozen || it.isMuted || it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
+    }
+
+    /**
+     * Turns a parcel's notifications on this phone off, or back on, from its page. Off, the service is told first, and
+     * a failure leaves them on and is thrown; back on, they are asked for on the next round ([alertsAgain]).
+     */
+    suspend fun setMuted(id: UUID, muted: Boolean): Parcel {
+        val entry = entries.firstOrNull { it.parcel.id == id } ?: throw DeliveryApiError.ParcelMissing()
+        if (!muted) {
+            alertsAsked = alertsAsked.setting(entry.linkId, null)
+            return update(id) { it.copy(muted = null) }
+        }
+        val token = entry.alertToken
+        val client = client
+        if (token != null && client != null) client.removeAlert(entry.linkId, removal(token))
+        return update(id) { it.copy(muted = true, alertToken = null) }
+    }
+
+    /** Asks again for the notifications still missing, on the last round's token and language, where one ran. */
+    suspend fun alertsAgain() {
+        val (token, locale) = alertsWanted ?: return
+        registerAlerts(token, locale)
     }
 
     suspend fun retryAlerts() {
@@ -1288,7 +1330,7 @@ class DeviceParcels(
          */
         private fun shown(entry: DeviceParcel): Parcel {
             val seen = entry.seenNewsAt ?: entry.parcel.newsAt
-            val parcel = entry.parcel.copy(label = entry.label, archivedAt = entry.archivedAt, seenAt = seen)
+            val parcel = entry.parcel.copy(label = entry.label, archivedAt = entry.archivedAt, seenAt = seen, notificationsMuted = entry.isMuted)
             val replaced = entry.replaced ?: return parcel
             return parcel.copy(carrierData = (parcel.carrierData ?: CarrierData()).copy(originalPackageId = replaced))
         }

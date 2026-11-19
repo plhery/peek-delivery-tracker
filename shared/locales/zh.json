@@ -739,6 +739,8 @@
   "alerts.preset.delivery": "仅派送当天",
   "alerts.turnOn": "开启",
   "alerts.turnOff": "关闭",
+  "alerts.all.title": "这个浏览器中的每个包裹",
+  "alerts.all.body": "你在这里追踪的包裹也会收到这些通知。关闭了通知的包裹则不会再收到。",
   "alerts.on.title": "这个浏览器已开启通知",
   "alerts.on.body": "包裹送达前，Peek 会一直向这个浏览器发送通知。",
   "alerts.blocked": "这个网站的通知已被阻止。请在浏览器的网站设置中允许通知，然后再次选择“开启”。",

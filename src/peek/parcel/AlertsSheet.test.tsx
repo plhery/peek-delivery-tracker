@@ -5,6 +5,7 @@ import {
   IPHONE_CHROME, IPHONE_FACEBOOK, IPHONE_LINKEDIN, IPHONE_SAFARI, IPHONE_SAFARI_27, IPHONE_X, restoreAlertBrowser, stubAlertBrowser, TEST_PUSH_ENDPOINT, TEST_PUSH_KEY,
 } from '../../test/alertBrowser';
 import { LINK_ID, OWNER_KEY } from '../../test/parcelLinks';
+import { alertsForAll, setAlertsForAll } from '../alertsForAll';
 import { forgetAllLinkNotes, linkNote, noteLink } from '../deviceNotes';
 import { ParcelLinkError, type ParcelAlerts } from '../links';
 import { AlertsSheet } from './AlertsSheet';
@@ -32,6 +33,7 @@ beforeEach(() => {
 afterEach(() => {
   restoreAlertBrowser();
   forgetAllLinkNotes();
+  setAlertsForAll(null);
 });
 
 describe('the Notify me sheet', () => {
@@ -90,6 +92,34 @@ describe('the Notify me sheet', () => {
     expect(await screen.findByRole('button', { name: 'Turn on' })).toBeVisible();
     expect(linkNote(LINK_ID).alert).toBeUndefined();
     expect(mocks.track).toHaveBeenCalledWith('parcel-link-alerts-off', 'success');
+  });
+
+  it('offers a visitor the same alerts for every parcel here, and keeps one turned off quiet', async () => {
+    stubAlertBrowser({ permission: 'granted', existing: true });
+    noteLink(LINK_ID, { alert: { preset: 'important', endpoint: TEST_PUSH_ENDPOINT } });
+    const user = userEvent.setup();
+    const { unmount } = open({ everyParcel: true });
+    const every = screen.getByRole('switch', { name: /^For every parcel in this browser/ });
+    expect(every).toHaveAttribute('aria-checked', 'false');
+    await user.click(every);
+    expect(every).toHaveAttribute('aria-checked', 'true');
+    expect(alertsForAll()).toBe('important');
+    // What this parcel announces is what every parcel does.
+    await user.click(preset('Delivery only'));
+    await waitFor(() => expect(alertsForAll()).toBe('delivery'));
+
+    await user.click(screen.getByRole('button', { name: 'Turn off' }));
+    expect(await screen.findByRole('button', { name: 'Turn on' })).toBeVisible();
+    expect(linkNote(LINK_ID).muted).toBe(true);
+    expect(alertsForAll()).toBe('delivery');
+    await user.click(screen.getByRole('button', { name: 'Turn on' }));
+    await waitFor(() => expect(linkNote(LINK_ID).alert).toBeDefined());
+    expect(linkNote(LINK_ID).muted).toBeUndefined();
+    unmount();
+
+    // Someone signed in, and the sample, have no such switch.
+    open();
+    expect(screen.queryByRole('switch')).not.toBeInTheDocument();
   });
 
   it('keeps the alert on, and says so, when it cannot be turned off', async () => {

@@ -739,6 +739,8 @@
   "alerts.preset.delivery": "Delivery only",
   "alerts.turnOn": "Turn on",
   "alerts.turnOff": "Turn off",
+  "alerts.all.title": "For every parcel in this browser",
+  "alerts.all.body": "The parcels you track here get these notifications too. One whose notifications you turn off stays quiet.",
   "alerts.on.title": "Notifications are on in this browser",
   "alerts.on.body": "Peek notifies this browser until the parcel is delivered.",
   "alerts.blocked": "Notifications are blocked for this site. Allow them in your browser’s site settings, then choose Turn on again.",

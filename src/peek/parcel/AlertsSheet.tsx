@@ -8,8 +8,9 @@ import { trackAction } from '../../lib/analytics';
 import { appStoreLink } from '../../lib/appStore';
 import { homeScreenPath } from '../../lib/homeScreen';
 import { AlertError, alertFailure, alertSupport, deviceAlert, quietRequests, turnOffAlert, turnOnAlert, type AlertSupport } from '../alerts';
+import { alertsForAll, setAlertsForAll, useAlertsForAll } from '../alertsForAll';
 import { appParcelURL, appStoreVisited, noteAppStoreVisit } from '../appLink';
-import { useLinkNote } from '../deviceNotes';
+import { noteLink, useLinkNote } from '../deviceNotes';
 import { PARCEL_ALERT_PRESETS, ParcelLinkError, parcelLinkErrorKey, type ParcelAlertPreset, type ParcelAlerts } from '../links';
 import { Glyph } from './glyphs';
 import { Sheet } from './Sheet';
@@ -58,9 +59,10 @@ function Presets({ value, disabled, onChange }: { value: ParcelAlertPreset; disa
  * Where the iPhone app notifies for a link without an account, it comes
  * first, and the steps fold into a line: "Get" goes to the App Store, then
  * "Open" opens the parcel in the app, with the owner key when this device
- * holds it.
+ * holds it. A visitor whose alerts are on can have them for every parcel on
+ * the device; turning one parcel's off then keeps that one quiet.
  */
-export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPreset, calendar, onCalendar, onSignIn, onClose }: {
+export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPreset, calendar, onCalendar, onSignIn, everyParcel = false, onClose }: {
   linkId: string;
   /** The owner key, when this device holds it. */
   ownerKey: string | null;
@@ -75,10 +77,13 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
   onCalendar: () => boolean;
   /** Offered to a visitor: an account alerts every device they sign in on. `email` when the email was what they asked for. */
   onSignIn?: (email: boolean) => void;
+  /** Offered to a visitor: alerts for every parcel this device holds. */
+  everyParcel?: boolean;
   onClose: () => void;
 }) {
   const { t, locale } = useI18n();
   const noted = useLinkNote(linkId).alert;
+  const forAll = useAlertsForAll();
   const [support, setSupport] = useState<AlertSupport>(() => alertSupport(alerts));
   // What the browser itself says about the noted alert; until it answers, the note is believed.
   const [checked, setChecked] = useState(false);
@@ -104,6 +109,9 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
     setSaid(null);
     try {
       await turnOnAlert({ linkId, key: ownerKey, alerts, preset: next, locale });
+      noteLink(linkId, { muted: false });
+      // The switch for every parcel stands under these alerts: they follow what it shows.
+      if (alertsForAll()) setAlertsForAll(next);
       setPreset(next);
       if (changing) setSaid('notifications.saved');
       else trackAction('parcel-link-alerts', 'success');
@@ -123,6 +131,8 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
     setSaid(null);
     try {
       await turnOffAlert(linkId);
+      // Alerts for every parcel pass over this one from now on.
+      if (alertsForAll()) noteLink(linkId, { muted: true });
       trackAction('parcel-link-alerts-off', 'success');
     } catch {
       trackAction('parcel-link-alerts-off', 'error');
@@ -189,6 +199,11 @@ export function AlertsSheet({ linkId, ownerKey, name = null, alerts, initialPres
         <span><strong>{t('alerts.on.title')}</strong><small>{t(demo ? 'alerts.demo' : 'alerts.on.body')}</small></span>
       </div>
       <Presets value={on.preset} disabled={busy} onChange={(next) => void turnOn(next, true)} />
+      {everyParcel && !demo && <button type="button" className="peeks-all" role="switch" aria-checked={forAll !== null} disabled={busy}
+        onClick={() => setAlertsForAll(forAll ? null : on.preset)}>
+        <span><strong>{t('alerts.all.title')}</strong><small>{t('alerts.all.body')}</small></span>
+        <span className="settings-switch" aria-hidden="true" />
+      </button>}
       {feedback}
       <div className="peeks__actions">
         {calendar && <button type="button" className="button button--secondary" onClick={addToCalendar}><Glyph name="calendar" /><span>{t('alerts.calendar.action')}</span></button>}

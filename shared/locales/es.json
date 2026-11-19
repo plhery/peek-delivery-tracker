@@ -739,6 +739,8 @@
   "alerts.preset.delivery": "Solo la entrega",
   "alerts.turnOn": "Activar",
   "alerts.turnOff": "Desactivar",
+  "alerts.all.title": "Para cada paquete en este navegador",
+  "alerts.all.body": "Los paquetes que sigues aquí también reciben estas notificaciones. El que tenga las notificaciones desactivadas se queda en silencio.",
   "alerts.on.title": "Las notificaciones están activadas en este navegador",
   "alerts.on.body": "Peek envía notificaciones a este navegador hasta que se entregue el paquete.",
   "alerts.blocked": "Las notificaciones están bloqueadas para este sitio. Permítelas en los ajustes del sitio de tu navegador y vuelve a elegir Activar.",

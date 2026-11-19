@@ -38,6 +38,8 @@ export interface DeviceAlert {
 export interface LinkNote {
   share?: ShareWords;
   alert?: DeviceAlert;
+  /** Its alerts were turned off on its page: alerts for every parcel pass over it. */
+  muted?: true;
   feedback?: FeedbackMemory;
 }
 
@@ -57,7 +59,7 @@ function stored(): string | null {
 
 function note(value: unknown): LinkNote | null {
   if (!value || typeof value !== 'object') return null;
-  const { share, alert, feedback } = value as { share?: Partial<ShareWords>; alert?: Partial<DeviceAlert>; feedback?: unknown };
+  const { share, alert, muted, feedback } = value as { share?: Partial<ShareWords>; alert?: Partial<DeviceAlert>; muted?: unknown; feedback?: unknown };
   const kept: LinkNote = {};
   if (share && typeof share === 'object') {
     kept.share = {
@@ -73,9 +75,10 @@ function note(value: unknown): LinkNote | null {
   if (kept.alert && alert?.move && typeof alert.move.publicKey === 'string' && Number.isFinite(alert.move.retryAt)) {
     kept.alert.move = { publicKey: alert.move.publicKey, retryAt: alert.move.retryAt };
   }
+  if (muted === true) kept.muted = true;
   const answered = feedbackMemory(feedback);
   if (answered) kept.feedback = answered;
-  return kept.share || kept.alert || kept.feedback ? kept : null;
+  return kept.share || kept.alert || kept.muted || kept.feedback ? kept : null;
 }
 
 function read(): Notes {
@@ -138,12 +141,18 @@ export function useLinkNote(id: string | null): LinkNote {
 }
 
 /** Changes what this browser keeps about a link. A part set to null is dropped; the newest link is kept longest. */
-export function noteLink(id: string, changes: { share?: ShareWords | null; alert?: DeviceAlert | null; feedback?: FeedbackMemory | null }): void {
+export function noteLink(id: string, changes: {
+  share?: ShareWords | null;
+  alert?: DeviceAlert | null;
+  muted?: boolean;
+  feedback?: FeedbackMemory | null;
+}): void {
   if (!noted(id)) return;
   const { [id]: existing, ...others } = read();
   const next = note({
     share: changes.share === undefined ? existing?.share : changes.share ?? undefined,
     alert: changes.alert === undefined ? existing?.alert : changes.alert ?? undefined,
+    muted: changes.muted === undefined ? existing?.muted : changes.muted || undefined,
     feedback: changes.feedback === undefined ? existing?.feedback : changes.feedback ?? undefined,
   });
   write(next ? { ...others, [id]: next } : others);

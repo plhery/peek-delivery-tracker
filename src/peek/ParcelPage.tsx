@@ -595,7 +595,8 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
       worksUntil={final ? forgetOn : null} onAccount={visitor ? signInToKeep : undefined} onClose={() => setSharing(false)} />}
     {alerting && <AlertsSheet linkId={linkId} ownerKey={key} name={name} alerts={link.alerts} initialPreset={early ? 'all' : 'important'}
       calendar={calendarWindow} onCalendar={calendarFile}
-      onSignIn={session.account === 'visitor' && !sample ? signInFor : undefined} onClose={() => setAlerting(false)} />}
+      onSignIn={session.account === 'visitor' && !sample ? signInFor : undefined} everyParcel={session.account === 'visitor' && !sample}
+      onClose={() => setAlerting(false)} />}
     {addingPostcode && asked && key && <PostcodeSheet linkId={linkId} ownerKey={key} carrier={asked.carrier}
       trackingNumber={parcel.trackingNumber} destination={parcel.destinationCountry} own={ownAsks} onAdded={adopt}
       onClose={() => setAddingPostcode(false)} />}

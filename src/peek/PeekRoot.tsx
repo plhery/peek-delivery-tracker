@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { whenIdle } from '../lib/idle';
+import { AlertEveryParcel } from './alertsForAll';
 import { FrontDoor, type TrackedParcel } from './FrontDoor';
 import type { ParcelLinkView } from './links';
 import { parcelCode } from './parcelCode';
@@ -78,6 +79,7 @@ export function PeekRoot({ session, serverLinkId = null }: {
     {/* An address that became a parcel's before its page's code arrived keeps the door until it does. */}
     {(door || !Page) && <FrontDoor key={visit} onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} covered={Boolean(Page)} />}
     {Page && linkId && <Page key={linkId} linkId={linkId} entrance={answer ? 'reveal' : 'direct'} initial={answer} over={door} />}
+    {session.account === 'visitor' && <AlertEveryParcel />}
     {/* A word that outlives the page it was said on, such as a parcel forgotten. */}
     <NoticeToast />
   </PeekSessionProvider>;

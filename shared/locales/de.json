@@ -739,6 +739,8 @@
   "alerts.preset.delivery": "Nur die Zustellung",
   "alerts.turnOn": "Einschalten",
   "alerts.turnOff": "Ausschalten",
+  "alerts.all.title": "Für jedes Paket in diesem Browser",
+  "alerts.all.body": "Die Pakete, die du hier verfolgst, bekommen diese Mitteilungen auch. Eines, bei dem du sie ausschaltest, bleibt still.",
   "alerts.on.title": "Mitteilungen sind in diesem Browser an",
   "alerts.on.body": "Peek schickt diesem Browser Mitteilungen, bis das Paket zugestellt ist.",
   "alerts.blocked": "Mitteilungen sind für diese Website blockiert. Erlaube sie in den Website-Einstellungen deines Browsers und wähle dann erneut „Einschalten“.",

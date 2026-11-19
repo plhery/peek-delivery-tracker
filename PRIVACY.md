@@ -352,7 +352,11 @@ sharing is stopped. The notifications carry the parcel's status and never its
 number or name; a gift's do not say where it is before it arrives.
 
 Your browser is asked for notifications, and creates its push subscription,
-only when you choose "Turn on". The iPhone app asks when a parcel first comes to
+only when you choose "Turn on". Once they are on for a parcel, you can have them
+for every parcel in that browser: it then turns them on, with the same choice of
+updates, for each parcel it holds or adds that is still on its way, and passes
+over one whose notifications you turned off. The browser keeps that choice, and
+asks for nothing more. The iPhone app asks when a parcel first comes to
 it without an account, and keeps the device token beside the parcels it follows
 that way so that forgetting one turns its notifications off. The Android app
 asks for Android's notification permission only when you choose to turn

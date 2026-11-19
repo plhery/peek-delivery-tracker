@@ -739,6 +739,8 @@
   "alerts.preset.delivery": "Tylko doręczenie",
   "alerts.turnOn": "Włącz",
   "alerts.turnOff": "Wyłącz",
+  "alerts.all.title": "Dla każdej przesyłki w tej przeglądarce",
+  "alerts.all.body": "Przesyłki, które tu śledzisz, też dostają te powiadomienia. Ta, dla której je wyłączysz, pozostaje cicha.",
   "alerts.on.title": "Powiadomienia są włączone w tej przeglądarce",
   "alerts.on.body": "Peek powiadamia tę przeglądarkę, dopóki przesyłka nie zostanie doręczona.",
   "alerts.blocked": "Powiadomienia są zablokowane dla tej witryny. Zezwól na nie w ustawieniach witryny w przeglądarce, a potem ponownie wybierz „Włącz”.",

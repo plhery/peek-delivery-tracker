@@ -267,7 +267,11 @@ Key server modules:
     credentials or settings (FCM's service account, APNs's signing key and topic), the push
     service's outage or limit, or the network. A UnifiedPush send counts as a browser's
     does, but for a distributor's outage or limit, or a message it found too large.
-    The browser is asked for the permission, and subscribes, only on "Turn on". It reuses
+    The browser is asked for the permission, and subscribes, only on "Turn on". Once a
+    visitor's alerts are on, "For every parcel in this browser" keeps that choice in the
+    browser (`alertsForAll.ts`), which turns the same alerts on for each parcel it holds
+    that is still on its way, once a page and only with the permission already given, and
+    passes over a parcel whose alerts were turned off on its page. It reuses
     the subscription an account or another parcel already made, so turning one alert off
     leaves the subscription in place. Turning the account's alerts off, signing out or
     deleting the account keeps it too while link alerts use it, once the server has dropped

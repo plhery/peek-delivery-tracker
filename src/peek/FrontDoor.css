@@ -229,6 +229,16 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 .door-device { margin-top: 26px; text-align: start; }
 .door-device__heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; min-height: 44px; margin: 0 2px 10px; }
 .door-device__heading h2 { margin: 0; font-size: 14px; font-weight: 600; letter-spacing: 0; }
+.door-device__tools { display: flex; align-items: center; gap: 4px; }
+.door-device__search { display: inline-grid; place-items: center; width: 44px; height: 44px; padding: 0; border-radius: 12px; background: none; color: var(--ink-soft); }
+.door-device__search[aria-expanded=true] { background: var(--control); color: var(--ink); }
+.door-device__search svg { width: 18px; height: 18px; }
+.door-device__find { margin: 0 0 10px; }
+.door-device__find label { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
+.door-device__find label:focus-within { border-color: var(--ochre); box-shadow: 0 0 0 3px color-mix(in srgb, var(--yellow) 20%, transparent); }
+.door-device__find svg { width: 17px; height: 17px; flex: 0 0 auto; color: var(--ink-soft); }
+.door-device__find input { flex: 1; min-width: 0; min-height: 46px; padding: 0; border: 0; background: none; color: var(--ink); font-size: 16px; }
+.door-device__find input:focus { outline: none; }
 .door-device__forget { min-height: 44px; padding: 0; background: none; color: var(--ink-soft); font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
 .door-device__question { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 6px 12px; margin-bottom: 10px; padding: 10px 10px 10px 16px; border: 1px solid var(--line); border-radius: 16px; background: var(--paper); }
 .door-device__question:focus { outline: none; }
@@ -312,7 +322,7 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 @keyframes door-breathe { from { opacity: .45; } }
 @keyframes door-print { from { opacity: 0; clip-path: inset(0 0 100% 0); } to { opacity: 1; clip-path: inset(0 0 0 0); } }
 @media (hover: hover) {
-  .door-line__change:hover, .door-device__forget:hover, .door-as-typed:hover, .door-input__forget:hover { color: var(--ink); }
+  .door-line__change:hover, .door-device__forget:hover, .door-device__search:hover, .door-as-typed:hover, .door-input__forget:hover { color: var(--ink); }
 }
 @media (prefers-reduced-motion: reduce) {
   .door-line__detect.is-busy svg { opacity: .6; }

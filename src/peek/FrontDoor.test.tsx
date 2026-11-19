@@ -984,6 +984,48 @@ describe('FrontDoor: on this device', () => {
     expect(within(list).getByText(/2 parcels/)).toBeVisible();
   });
 
+  it('searches a longer list by name, number, carrier and status, archived parcels included', async () => {
+    const ids = ['s2Qm2xHd9RtA', 's2Qm2xHd9RtB', 's2Qm2xHd9RtC', 's2Qm2xHd9RtD'];
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    renameParcel(LINK_ID, 'New sneakers');
+    ids.forEach((id, index) => rememberParcel({
+      id, key: OWNER_KEY, now: Date.now() - (index + 1) * 60_000,
+      view: testView({ id, stages: index === 3 ? ['registered', 'delivered'] : undefined, parcel: { trackingNumber: `JD01460000000${index}` } }),
+    }));
+    renameParcel(ids[3], 'Winter boots');
+    archiveRecent(ids[3], true);
+    const { user } = door();
+    const list = screen.getByRole('region', { name: 'On this device' });
+    await user.click(within(list).getByRole('button', { name: 'Search parcels' }));
+    const field = within(list).getByRole('searchbox', { name: 'Search parcels' });
+    expect(field).toHaveFocus();
+    await user.type(field, 'boots');
+    expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([`/p/${ids[3]}`]);
+    expect(within(list).getByRole('link')).toHaveTextContent('Delivered · Archived');
+    expect(within(list).getByText('1 shown')).toBeInTheDocument();
+    expect(within(list).queryByText('Archived', { selector: 'summary span' })).toBeNull();
+    await user.clear(field);
+    await user.type(field, '0000 0002');
+    expect(within(list).getAllByRole('link').map((link) => link.getAttribute('href'))).toEqual([`/p/${ids[2]}`]);
+    await user.clear(field);
+    await user.type(field, 'sneakers in transit');
+    expect(within(list).getByText('No matching parcels')).toBeVisible();
+    await user.clear(field);
+    await user.type(field, 'In transit');
+    expect(within(list).getAllByRole('link')).toHaveLength(4);
+    // Escape closes the search, and the whole list is back.
+    await user.keyboard('{Escape}');
+    expect(within(list).queryByRole('searchbox')).toBeNull();
+    expect(within(list).getAllByRole('link', { hidden: true })).toHaveLength(5);
+    expect(within(list).getByRole('button', { name: 'Search parcels' })).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('offers no search for a short list', () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    door();
+    expect(within(screen.getByRole('region', { name: 'On this device' })).queryByRole('button', { name: 'Search parcels' })).toBeNull();
+  });
+
   it('lets a parcel that has just arrived say so where its card stands, before another leads the list', async () => {
     stillMotion(false);
     Element.prototype.animate = (() => ({ finished: new Promise(() => undefined), addEventListener() {}, cancel() {}, finish() {} })) as unknown as typeof Element.prototype.animate;

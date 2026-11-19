@@ -3212,6 +3212,33 @@ describe('TrackingSyncService', () => {
     await service.syncPackage(parcel);
     expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ current_stage: 'exception' });
   });
+  it('moves an announced parcel on to the scans a set-aside answer stores before the carrier\'s notices', async () => {
+    // Spring GDS pre-advised the parcel to its delivery partner and readied it for shipment after a provider's export and
+    // departure scans (synthetic wording). The provider's answer is older than those notices, so its summary is set
+    // aside, but its scans are stored, and notices after them are no step back, as the apps read them (`currentScan`).
+    vi.spyOn(observability, 'reportRoutingEvent').mockImplementation(() => undefined);
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-11-19T03:11:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const notice = (time: string, description: string) => ({ stage: 'registered', description, occurred_at: time,
+      provider_event_id: providerEventId('spring-gds', time, '', description) });
+    const departed = { time: '2026-11-14T16:00:00Z', description: 'Departed from the country of origin', stage: 'in_transit' };
+    const adapter = { fetch: vi.fn().mockRejectedValue(new Error('Spring GDS tracking endpoint is unavailable')),
+      fetchUniversal: vi.fn().mockResolvedValue({ status: 'in_transit', current_stage: 'in_transit', last_status_text: departed.description,
+        last_update: departed.time, events: [departed, { time: '2026-11-13T07:24:56Z', description: 'Export customs cleared', stage: 'in_transit' }] }) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-19T03:10:00Z'));
+    const parcel = { id: 'notices-after', carrier: 'spring-gds', tracking_number: 'TEST1234', current_stage: 'registered',
+      carrier_data: { last_status_text: 'Ready for shipment', routing: { version: 1, configured_carrier: 'spring-gds', last_event_at: '2026-11-15T03:25:00Z' } },
+      [STORED_EVENT_IDENTITIES]: [notice('2026-11-15T01:25:00Z', 'Pre-advised to the delivery partner'), notice('2026-11-15T03:25:00Z', 'Ready for shipment')] };
+    await service.syncPackage(parcel);
+    const saved = client.updatePackage.mock.calls.at(-1)![1];
+    expect(saved.current_stage).toBe('in_transit');
+    // The carrier's summary and watermark stay.
+    expect(saved.carrier_data).toMatchObject({ last_status_text: 'Ready for shipment', routing: { last_event_at: '2026-11-15T03:25:00Z' } });
+    expect(client.completeSyncAttempt).toHaveBeenLastCalledWith(expect.any(String),
+      expect.objectContaining({ outcome: 'updated' }), expect.any(Array));
+  });
   it('reads a naive local snapshot in its carrier\'s zone before comparing it with the watermark', async () => {
     // DTDC reports Kolkata wall time without an offset; routing writes the watermark from that reading.
     const client = { ...fakeClient(),

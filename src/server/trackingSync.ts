@@ -3357,14 +3357,21 @@ export class TrackingSyncService {
         const collectedAt = collectedPickupPoint(parcel, carrierData, String(values.current_stage ?? previousStage),
           fetched.correction?.carrier ?? carrierId, [...stored, ...events]);
         if (collectedAt) carrierData.pickup_point = collectedAt;
-      } else if (selectedStage && olderSnapshot && !keepSaved && !unprovenUpuSummary && !unprovenLocalSummary
-        && !unprovenProviderSummary && !['delivered', 'returned'].includes(previousStage)) {
+      } else if (selectedStage && (olderSnapshot || unprovenProviderSummary) && !keepSaved && !unprovenUpuSummary
+        && !unprovenLocalSummary && !['delivered', 'returned'].includes(previousStage)) {
         // An answer set aside only as older, such as one a partner's copy of its scan seconds later
         // makes look so, leaves the saved summary, but the saved stage still needs a row that shows
         // it. Once none does (its row deleted, or a scraper fix re-reading the scan that moved the
-        // parcel), the parcel steps back to the stage its rows show. The answer moves it no further.
-        const kept = heldStage(parcel, previousStage, rowsOnceSaved());
-        if (stageRank(kept) >= 0 && stageRank(kept) < stageRank(previousStage)) values.current_stage = kept;
+        // parcel), the parcel steps back to the stage its rows show. Its summary moves it no further,
+        // but an announced or accepted parcel takes the stage its rows show once its scans are stored,
+        // as the apps read them (`stageShown`): the carrier's notices after them, Spring GDS's
+        // pre-advice to its delivery partner after a provider's departure scans, are no step back.
+        const rows = rowsOnceSaved();
+        const kept = olderSnapshot && !unprovenProviderSummary ? heldStage(parcel, previousStage, rows) : previousStage;
+        const shown = stageShown(kept, rows);
+        if (shown !== previousStage && (stageRank(shown) < stageRank(previousStage) || MOVING_STAGES.has(shown))) {
+          values.current_stage = shown;
+        }
       }
       if (preserveSummary && postalHistory) {
         values.carrier_data = {

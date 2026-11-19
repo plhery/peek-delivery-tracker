@@ -2465,6 +2465,9 @@ final class ParcelLogicTests: XCTestCase {
             shipment([(.accepted, "2026-11-01T00:00:00Z", "DE"), (.readyForPickup, "2026-11-01T00:00:00Z", "CH"), (.delivered, "2026-11-01T00:00:00Z", "CH")]),
             shipment([(.accepted, "2026-11-01T00:00:00Z", "DE"), (.readyForPickup, "2026-12-02T00:00:00Z", "CH")]),
             shipment([(.accepted, "2026-11-01T00:00:00Z", "DE"), (.delivered, "2026-12-02T00:00:00Z", "CH"), (.returned, "2026-12-03T00:00:00Z", nil)]),
+            // It waited at a pickup point, then went out to the door.
+            shipment([(.accepted, "2026-11-01T00:00:00Z", nil), (.readyForPickup, "2026-11-02T00:00:00Z", nil),
+                      (.outForDelivery, "2026-11-04T08:00:00Z", nil), (.delivered, "2026-11-04T12:00:00Z", nil)]),
             shipment([(.accepted, "invalid", "DE"), (.delivered, "2026-12-02T00:00:00Z", "CH")]),
         ], timeZone: try XCTUnwrap(TimeZone(secondsFromGMT: 0)))
         XCTAssertEqual(stats.crossBorderCount, 0)

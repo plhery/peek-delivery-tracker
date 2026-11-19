@@ -108,7 +108,8 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
                     deliveredDays[day.day] = (deliveredDays[day.day] ?: 0) + 1
                     if (day.month == 12) december += 1
                 }
-                if (physical.any { it.event.stage == TrackingStage.ReadyForPickup && it.date < completion.date }) pickup += 1
+                // Collected where it waited: its last movement before the delivery made it ready for pickup, not a trip to the door after.
+                if (physical.lastOrNull { it.date < completion.date && it.event.stage in movements }?.event?.stage == TrackingStage.ReadyForPickup) pickup += 1
                 val located = physical.filter { it.date <= completion.date }.mapNotNull { scan ->
                     TrackingLocation.countryCode(scan.event.location, scan.event.place?.country)?.let { it to scan.date }
                 }
@@ -158,6 +159,12 @@ class PassportStatistics(parcels: List<Parcel>, timeZone: ZoneId = ZoneId.system
     }
 
     private companion object {
+        /** Stages that move a parcel: notices, problem reports and a delivery itself do not. */
+        private val movements = setOf(
+            TrackingStage.InTransit, TrackingStage.Customs, TrackingStage.OutForDelivery, TrackingStage.FailedAttempt,
+            TrackingStage.ReadyForPickup, TrackingStage.Returned,
+        )
+
         // Carrier timestamps sometimes have minute precision. Put later stages
         // after earlier stages at the same instant, with return taking precedence.
         private val stages = listOf(

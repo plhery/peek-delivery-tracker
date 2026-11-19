@@ -76,7 +76,10 @@ struct PassportStatistics {
                 // Count each parcel once, using the device's Gregorian calendar day.
                 deliveredDays[calendar.startOfDay(for: completion.date), default: 0] += 1
                 if calendar.component(.month, from: completion.date) == 12 { december += 1 }
-                if physical.contains(where: { $0.event.stage == .readyForPickup && $0.date < completion.date }) { pickup += 1 }
+                // Collected where it waited: its last movement before the delivery made it ready for pickup, not a trip to the door after.
+                if physical.last(where: { $0.date < completion.date && Self.movements.contains($0.event.stage) })?.event.stage == .readyForPickup {
+                    pickup += 1
+                }
                 let located = physical.filter { $0.date <= completion.date }.compactMap { scan -> (country: String, date: Date)? in
                     guard let country = TrackingLocation.countryCode(in: scan.event.location, placedIn: scan.event.place?.country) else { return nil }
                     return (country, scan.date)
@@ -130,6 +133,9 @@ struct PassportStatistics {
             }
         knownOriginCount = countries.values.reduce(0, +)
     }
+
+    /// Stages that move a parcel: notices, problem reports and a delivery itself do not.
+    private static let movements: Set<TrackingStage> = [.inTransit, .customs, .outForDelivery, .failedAttempt, .readyForPickup, .returned]
 
     private struct DatedEvent {
         let event: TrackingEvent

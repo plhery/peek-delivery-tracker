@@ -1558,6 +1558,11 @@ class ParcelLogicTests {
                     Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", "DE"), Triple(TrackingStage.Delivered, "2026-12-02T00:00:00Z", "CH"),
                     Triple(TrackingStage.Returned, "2026-12-03T00:00:00Z", null),
                 ),
+                // It waited at a pickup point, then went out to the door.
+                shipment(
+                    Triple(TrackingStage.Accepted, "2026-11-01T00:00:00Z", null), Triple(TrackingStage.ReadyForPickup, "2026-11-02T00:00:00Z", null),
+                    Triple(TrackingStage.OutForDelivery, "2026-11-04T08:00:00Z", null), Triple(TrackingStage.Delivered, "2026-11-04T12:00:00Z", null),
+                ),
                 shipment(Triple(TrackingStage.Accepted, "invalid", "DE"), Triple(TrackingStage.Delivered, "2026-12-02T00:00:00Z", "CH")),
             ),
             timeZone = ZoneOffset.UTC,

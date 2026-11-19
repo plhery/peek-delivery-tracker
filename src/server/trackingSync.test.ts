@@ -2210,6 +2210,53 @@ describe('TrackingSyncService', () => {
     });
   });
 
+  describe('a return read again in another stage', () => {
+    // A return to the seller an earlier release read as the return, which the carrier only announced; the number,
+    // wording and clocks are invented.
+    const notice = { time: '2026-11-17T06:03:22-03:00', description: 'Return to the seller announced' };
+    const before = { time: '2026-11-16T10:00:00-03:00', description: 'In transit', stage: 'in_transit' };
+    const trip = [
+      { time: '2026-11-18T15:57:52-03:00', description: 'Left the sorting centre', stage: 'in_transit' },
+      { time: '2026-11-17T14:06:58-03:00', description: 'Arrived at the sorting centre', stage: 'in_transit' }];
+    type Scan = { time: string; description: string; stage: string };
+    const answer = (read: string, ...later: Scan[]): CarrierResult => {
+      const events = [...later, { ...notice, stage: read }, before];
+      return { status: events[0]!.stage === 'returned' ? 'exception' : 'in_transit', current_stage: events[0]!.stage,
+        last_status_text: events[0]!.description, last_update: events[0]!.time, events };
+    };
+    const parcel = () => {
+      const store = eventStore();
+      let saved: JsonObject = { id: 'return-read-again', carrier: 'spx-br', tracking_number: 'TEST20481358', current_stage: 'pending',
+        created_at: '2026-11-16T09:00:00Z' };
+      return async (at: string, carrier: CarrierResult) => {
+        const adapter = { fetch: vi.fn().mockResolvedValue(carrier), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+        await new TrackingSyncService(store.client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+          .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+        saved = { ...saved, ...store.client.applyTrackingSync.mock.calls.at(-1)![1] };
+        return { ...saved, stages: [...store.rows.values()].map((row) => row.stage) } as JsonObject;
+      };
+    };
+
+    it('takes the stage of the scans after it once the scan that set it reads otherwise, and nothing else moves it back', async () => {
+      const check = parcel();
+      expect(await check('2026-11-17T12:00:00Z', answer('returned'))).toMatchObject({ current_stage: 'returned' });
+      const reread = await check('2026-11-19T03:00:00Z', answer('exception', ...trip));
+      expect(reread).toMatchObject({ current_stage: 'in_transit', last_status_text: trip[0]!.description });
+      expect(reread.stages).not.toContain('returned');
+
+      // A return its scan still reads is held while the scans after it carry the parcel back.
+      const held = parcel();
+      await held('2026-11-17T12:00:00Z', answer('returned'));
+      expect(await held('2026-11-19T03:00:00Z', answer('returned', ...trip)))
+        .toMatchObject({ current_stage: 'returned', carrier_data: { return_held: true } });
+      // An answer that leaves the return out takes nothing back.
+      const leftOut = parcel();
+      await leftOut('2026-11-17T12:00:00Z', answer('returned'));
+      const thinner: CarrierResult = { ...answer('exception', ...trip), events: [...trip, before] };
+      expect(await leftOut('2026-11-19T03:00:00Z', thinner)).toMatchObject({ current_stage: 'returned' });
+    });
+  });
+
   describe('rows the carrier lists past the scan it puts first', () => {
     // JCEX read its copies of a partner's scans hours late, past the delivery it lists first; wording and clocks are invented.
     const transit = { time: '2026-10-27T06:00:00Z', description: 'Departed', stage: 'in_transit' };

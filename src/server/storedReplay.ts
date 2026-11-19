@@ -387,11 +387,12 @@ function readSinceLateRegistrations(parcel: StoredParcel, source: string, scan: 
  * The parcels the changes step back. A parcel past the label whose rows showed progress keeps its stage while a
  * row still shows it; once the changes read every such row as the label or earlier, the carrier's next answer shows
  * none, and the sync keeps the saved stage with a `stages_reread` signal. The parcel steps back with its rows: to the
- * label when a row shows one, else to pending, as `rereadStage` reads a universal provider's rows. Returned and
- * exception parcels keep their stage. So does a delivered one, unless the changes read every row that showed the
- * delivery in another stage, one of them past pending: the sync keeps a delivery no row shows, so a parcel still checked takes
- * the stage the newest of those rows reads then (an undelivered attempt an earlier release read as delivered), and
- * its next check takes the carrier's answer from there.
+ * label when a row shows one, else to pending, as `rereadStage` reads a universal provider's rows. Exception
+ * parcels keep their stage. So does a delivered or returned one, unless the changes read every row that showed the
+ * delivery or return in another stage, one of them past pending: the sync keeps a delivery or return no row shows, so a
+ * parcel still checked takes the stage the newest of those rows reads then (an undelivered attempt an earlier release
+ * read as delivered, a return only announced that one read as the return), and its next check takes the carrier's
+ * answer from there.
  */
 export function steppedBack(parcels: readonly StoredParcel[], changes: readonly ReplayedChange[]): StepBack[] {
   const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
@@ -400,10 +401,10 @@ export function steppedBack(parcels: readonly StoredParcel[], changes: readonly 
     if (!parcel.events.some((scan) => restaged.has(scan.id))) return [];
     const before = parcel.events.map((scan) => scan.stage);
     const after = parcel.events.map((scan) => restaged.get(scan.id) ?? scan.stage);
-    if (from === 'delivered') {
-      if (parcel.archived !== false || after.includes('delivered')) return [];
-      // The rows that showed the delivery, newest first, as the changes read them.
-      const [to] = parcel.events.filter((scan) => scan.stage === 'delivered')
+    if (from === 'delivered' || from === 'returned') {
+      if (parcel.archived !== false || after.includes(from)) return [];
+      // The rows that showed the delivery or return, newest first, as the changes read them.
+      const [to] = parcel.events.filter((scan) => scan.stage === from)
         .sort((a, b) => Date.parse(b.occurredAt) - Date.parse(a.occurredAt))
         .map((scan) => restaged.get(scan.id)!).filter((stage) => stage !== 'pending');
       return to ? [{ parcel: parcel.id, from, to }] : [];
@@ -419,7 +420,7 @@ export function steppedBack(parcels: readonly StoredParcel[], changes: readonly 
  * change that stage: the parcel moves with it, as the carrier's next answer would move it (a DPD Poland return an
  * earlier release read as a problem, or a newest scan now read as a notice, so the one before it is current), and one
  * no longer checked would otherwise keep the old stage over its newest scan. A delivered or returned parcel keeps its
- * stage (a delivery steps back above), as do one stepped back, one whose saved stage no current scan gave, one the
+ * stage (one whose delivery or return no row shows steps back above), as do one stepped back, one whose saved stage no current scan gave, one the
  * changes would leave at its label, which `steppedBack` reads, and one on its way that would take an acceptance, which
  * the sync keeps the moving stage over (`stageToSave`, trackingSync.ts).
  */

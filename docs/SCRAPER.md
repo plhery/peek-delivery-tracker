@@ -273,9 +273,9 @@ JSON line each and nothing else, so the output of the run that commits is kept a
 An open parcel whose rows showed progress, none of them once the changes apply, steps back with
 them: to the label when a row shows one, else to pending, guarded on its saved stage. Until then
 the carrier's answers, read by the new release, show no progress, and each check keeps the saved
-stage with a `stages_reread` signal ([ROUTING.md](ROUTING.md)). A delivered parcel that is not
-archived, whose every row that showed the delivery the changes read in another stage, takes the
-stage the newest of those rows reads then: the sync keeps a delivery no row shows. A parcel neither delivered
+stage with a `stages_reread` signal ([ROUTING.md](ROUTING.md)). A delivered or returned parcel that is not
+archived, whose every row that showed the delivery or return the changes read in another stage, takes the
+stage the newest of those rows reads then: the sync keeps a delivery or return no row shows. A parcel neither delivered
 nor returned whose saved stage is its current scan's, as the apps read it, takes the stage its current scan reads
 once the changes apply (a row they re-date at its new time), as the carrier's next answer would (a return an earlier release read as a problem), except an
 acceptance after the parcel moved: a parcel no longer checked would otherwise keep the old stage over its newest scan.

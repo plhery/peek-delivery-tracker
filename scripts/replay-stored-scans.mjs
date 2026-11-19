@@ -8,7 +8,7 @@
 // fails on that import. The report names rows by their ids'
 // first eight characters and shows no number, place or wording. `--sql <file>` writes the guarded
 // transaction that would apply the changes, step back the open parcels no row then shows past the
-// label and the delivered ones still checked that no row then shows delivered, and move a parcel to the
+// label and the delivered or returned ones still checked that no row then shows so, and move a parcel to the
 // stage its current scan reads once the changes apply (followedScans in storedReplay.ts), printing each row
 // and parcel it changes first (its backup), and needs `--from`. `--source <a,b>` keeps the rows of those sources only.
 import { execFileSync } from 'node:child_process';

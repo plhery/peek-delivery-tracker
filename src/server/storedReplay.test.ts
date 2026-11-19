@@ -367,6 +367,21 @@ describe('stored scan replay', () => {
     }
   });
 
+  it('steps a returned parcel back once no row shows the return, to its newest row', () => {
+    // A return to the seller the carrier only announced, which an earlier release read as the return.
+    const transit = scan('transit', 'spx-br', '2026-11-16T13:00:00Z', 'in_transit', 'In transit', { provider_code: 'F510', stage: 'in_transit' });
+    const announced = scan('announced', 'spx-br', '2026-11-17T09:03:22Z', 'returned', 'Return announced', { provider_code: 'F988', stage: 'returned' });
+    const reread = { kind: 'stage', parcel: 'parcel-1', row: 'announced', source: 'spx-br', open: false, from: 'returned', to: 'exception',
+      code: 'F988', reason: 'mapped', declared: 'exception', stageSource: 'carrier_map', read: { description: '', raw: {} } } as const;
+    const returned = { ...parcel(transit, announced), open: false, stage: 'returned', archived: false };
+    expect(steppedBack([returned], [reread])).toEqual([{ parcel: 'parcel-1', from: 'returned', to: 'exception' }]);
+    // A row still showing a return, or an archived parcel: no step back.
+    const back = scan('back', 'spx-br', '2026-11-18T10:00:00Z', 'returned', 'Returned to the seller', { provider_code: 'F999', stage: 'returned' });
+    for (const other of [{ ...returned, events: [transit, announced, back] }, { ...returned, archived: true }]) {
+      expect(steppedBack([other], [reread])).toEqual([]);
+    }
+  });
+
   it('moves a parcel with its current scan when the changes restage it, guarded on its saved stage', () => {
     // A return an earlier release read as a problem, the parcel's newest carrier scan, under Peek's own row added later.
     const attempt = scan('attempt', 'dpd-pl', '2026-09-08T14:00:00Z', 'failed_attempt', 'Delivery attempt', { provider_code: 'A1', stage: 'failed_attempt' });

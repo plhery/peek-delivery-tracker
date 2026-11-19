@@ -924,7 +924,7 @@ final class DeviceParcelTests: XCTestCase {
         // is only offered: the field, sent as it is, stays empty.
         postcodes.prepare(.springGDS, requirement: postNL, among: earlier)
         XCTAssertEqual(postcodes[.springGDS], "")
-        XCTAssertEqual(postcodes.offering(.springGDS, requirement: postNL, among: earlier), "1234 AB")
+        XCTAssertEqual(postcodes.offering(.springGDS, requirement: postNL, among: earlier)?.postcode, "1234 AB")
         XCTAssertTrue(postNL.isSatisfied(by: postcodes[.springGDS]))
         postcodes.use("1234 AB", for: .springGDS)
         XCTAssertEqual(postcodes[.springGDS], "1234 AB")
@@ -967,7 +967,7 @@ final class DeviceParcelTests: XCTestCase {
         postcodes[.glsEs] = "1234ab"
         postcodes[.dpd] = "75002"
         postcodes.prepare(.springGDS, requirement: postNL, among: earlier)
-        postcodes.use(try XCTUnwrap(postcodes.offering(.springGDS, requirement: postNL, among: earlier)), for: .springGDS)
+        postcodes.use(try XCTUnwrap(postcodes.offering(.springGDS, requirement: postNL, among: earlier)).postcode, for: .springGDS)
         XCTAssertEqual(postcodes[.springGDS], "1234 AB")
 
         XCTAssertEqual(postcodes.forget(.springGDS), "1234 AB")
@@ -1028,6 +1028,32 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(picked.country(.springGDS, requirement: postNL, parcel: parcel, region: "FR"), "BE")
     }
 
+    func testAPostcodeGivenBeforeBringsTheCountryItWasGivenFrom() throws {
+        let mondialRelay = try postcodeField(.mondialRelay, "12345678")
+        let postNL = try postcodeField(.springGDS, "3SABCD826405193")
+        // A Belgian postcode given to PostNL fills Mondial Relay's field as a Belgian one on a French iPhone.
+        let belgian = [GivenPostcode(carrier: .springGDS, postcode: "1000", country: "BE")]
+        var postcodes = CarrierPostcodes()
+        postcodes.prepare(.mondialRelay, requirement: mondialRelay, among: belgian)
+        XCTAssertEqual(postcodes[.mondialRelay], "1000")
+        XCTAssertEqual(postcodes.country(.mondialRelay, requirement: mondialRelay, region: "FR"), "BE")
+
+        // Offered to an optional field, it goes there with its country once used.
+        let offered = try XCTUnwrap(postcodes.offering(.springGDS, requirement: postNL, among: belgian))
+        XCTAssertEqual(offered, GivenPostcode(carrier: .springGDS, postcode: "1000", country: "BE"))
+        postcodes.use(offered.postcode, for: .springGDS, country: offered.country)
+        XCTAssertEqual(postcodes.country(.springGDS, requirement: postNL, region: "FR"), "BE")
+
+        // Once the reader names a country, only a postcode given from it fills the field.
+        var chosen = CarrierPostcodes()
+        chosen.choose("LU", for: .mondialRelay)
+        chosen.prepare(.mondialRelay, requirement: mondialRelay, among: belgian)
+        XCTAssertEqual(chosen[.mondialRelay], "")
+        chosen.prepare(.mondialRelay, requirement: mondialRelay,
+                       among: belgian + [GivenPostcode(carrier: .mondialRelay, postcode: "1009", country: "LU")])
+        XCTAssertEqual(chosen[.mondialRelay], "1009")
+    }
+
     func testTheChangeCarrierSheetFillsOrOffersAPostcodeGivenBeforeAndKeepsTheParcelsOwn() throws {
         let mondialRelay = try postcodeField(.mondialRelay, "12345678")
         let postNL = try postcodeField(.springGDS, "3SABCD826405193")
@@ -1064,7 +1090,7 @@ final class DeviceParcelTests: XCTestCase {
         unsetOptional.prepare(.springGDS, requirement: postNL, among: earlier)
         XCTAssertEqual(unsetOptional[.springGDS], "")
         XCTAssertTrue(postNL.isSatisfied(by: unsetOptional[.springGDS]))
-        XCTAssertEqual(unsetOptional.offering(.springGDS, requirement: postNL, among: earlier), "1234 AB")
+        XCTAssertEqual(unsetOptional.offering(.springGDS, requirement: postNL, among: earlier)?.postcode, "1234 AB")
         unsetOptional.use("1234 AB", for: .springGDS)
         XCTAssertEqual(unsetOptional[.springGDS], "1234 AB")
         XCTAssertNil(unsetOptional.offering(.springGDS, requirement: postNL, among: earlier))

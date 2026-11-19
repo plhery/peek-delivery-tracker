@@ -890,6 +890,27 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return field
     }
 
+    /// The postcode given before to suggest for `carrier`'s field (`requirement`, before a country shapes it): the last
+    /// one given to the same carrier, otherwise the last one given to any carrier that the field takes, as it takes it.
+    /// Most parcels go to the same address. A field that reads the postcode's country takes one only from a country it
+    /// lists, the one chosen beside it once one is, in that country's shape, and the postcode brings its country. One
+    /// kept without its country was given from its carrier's home, for which none is sent.
+    func rememberedPostcode(for carrier: CarrierID, requirement: CarrierRequirement, among given: [GivenPostcode],
+                            chosen: String? = nil) -> GivenPostcode? {
+        let readsCountry = requirement.readsCountry == true
+        let countries = postcodeCountries(for: carrier, requirement: requirement)
+        let fitting = given.compactMap { entry -> GivenPostcode? in
+            let country = readsCountry ? entry.country?.uppercased() ?? homeCountry(of: entry.carrier) : homeCountry(of: carrier)
+            if readsCountry {
+                guard let country, countries.contains(country), chosen == nil || chosen == country else { return nil }
+            }
+            let field = postcodeRequirement(requirement, for: carrier, country: country)
+            return field.suggestedPostcode(for: carrier, among: [entry])
+                .map { GivenPostcode(carrier: entry.carrier, postcode: $0, country: readsCountry ? country : nil) }
+        }
+        return fitting.first { $0.carrier == carrier } ?? fitting.first
+    }
+
     /// The country sent with a postcode: none without one, nor for the carrier's home country, so a
     /// postcode from there goes as it always has.
     func sentPostcodeCountry(_ country: String?, postcode: String?, for carrier: CarrierID) -> String? {

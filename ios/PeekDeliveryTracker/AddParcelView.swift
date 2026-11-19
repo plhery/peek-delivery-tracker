@@ -730,9 +730,10 @@ struct AddParcelView: View {
                         }
                     }
                     // An optional postcode is offered, never filled in for the user.
-                    if let suggestion = postcodes.offering(resolvedCarrier, requirement: requirement, among: store.givenPostcodes) {
-                        Button(localizer.text("add.usePostcode", ["postcode": suggestion])) {
-                            postcodes.use(suggestion, for: resolvedCarrier)
+                    if let base = carrierPostcodeRequirement,
+                       let suggestion = postcodes.offering(resolvedCarrier, requirement: base, among: store.givenPostcodes, catalog: catalog) {
+                        Button(localizer.text("add.usePostcode", ["postcode": suggestion.postcode])) {
+                            postcodes.use(suggestion.postcode, for: resolvedCarrier, country: suggestion.country)
                         }
                         .font(.subheadline)
                     }
@@ -1173,7 +1174,7 @@ struct AddParcelView: View {
     /// A required postcode starts from the last one that fits; an optional one is
     /// only offered (see `requiredDetails`).
     private func prepareRequiredDetails(for carrier: CarrierID) {
-        postcodes.prepare(carrier, requirement: postcodeRequirement, among: store.givenPostcodes)
+        postcodes.prepare(carrier, requirement: carrierPostcodeRequirement, among: store.givenPostcodes, catalog: catalog)
     }
 
     private func paste() {
@@ -1299,7 +1300,7 @@ struct PostcodeFill: Equatable {
     private(set) var forgotten = false
 
     /// What may fill the field: nothing just after a postcode was forgotten in it.
-    func offering(_ suggestion: String?) -> String? { forgotten ? nil : suggestion }
+    func offering<Suggestion>(_ suggestion: Suggestion?) -> Suggestion? { forgotten ? nil : suggestion }
 
     mutating func fill(_ suggestion: String) -> String {
         postcode = suggestion
@@ -1330,6 +1331,8 @@ struct CarrierPostcodes {
     private var fills: [CarrierID: PostcodeFill] = [:]
     /// The country chosen beside each carrier's field.
     private var countries: [CarrierID: String] = [:]
+    /// The country of the postcode each carrier's field was filled with, where the field reads it.
+    private var filledCountries: [CarrierID: String] = [:]
 
     init() {}
 
@@ -1345,24 +1348,38 @@ struct CarrierPostcodes {
         set { if newValue != self[carrier] { values[carrier] = newValue } }
     }
 
-    /// The carrier's field as it is shown: a required postcode starts from the last one given that fits,
-    /// unless the field already holds one from earlier in the sheet; an optional one is only offered.
-    mutating func prepare(_ carrier: CarrierID, requirement: CarrierRequirement?, among given: [GivenPostcode]) {
+    /// The carrier's field as it is shown: a required postcode starts from the last one given that fits, with its
+    /// country, unless the field already holds one from earlier in the sheet; an optional one is only offered.
+    /// `requirement` is the field before a country shapes it.
+    mutating func prepare(_ carrier: CarrierID, requirement: CarrierRequirement?, among given: [GivenPostcode],
+                          catalog: CarrierCatalog = .shared) {
         fills[carrier]?.prepare()
         guard let requirement, !requirement.isOptional, values[carrier] == nil,
-              let suggestion = requirement.suggestedPostcode(for: carrier, among: given) else { return }
-        use(suggestion, for: carrier)
+              let suggestion = suggestion(carrier, requirement: requirement, among: given, catalog: catalog) else { return }
+        use(suggestion.postcode, for: carrier)
+        filledCountries[carrier] = suggestion.country
     }
 
-    /// The postcode offered for an optional field while it is empty.
-    func offering(_ carrier: CarrierID, requirement: CarrierRequirement, among given: [GivenPostcode]) -> String? {
+    /// The postcode offered for an optional field while it is empty, with the country it was given from when the field
+    /// reads it: nothing just after a postcode was forgotten in it.
+    func offering(_ carrier: CarrierID, requirement: CarrierRequirement, among given: [GivenPostcode],
+                  catalog: CarrierCatalog = .shared) -> GivenPostcode? {
         guard requirement.isOptional, self[carrier].isEmpty else { return nil }
-        return (fills[carrier] ?? PostcodeFill()).offering(requirement.suggestedPostcode(for: carrier, among: given))
+        return (fills[carrier] ?? PostcodeFill()).offering(suggestion(carrier, requirement: requirement, among: given, catalog: catalog))
     }
 
-    /// Fills the carrier's field with a postcode given before.
-    mutating func use(_ postcode: String, for carrier: CarrierID) {
+    /// The postcode given before that fits the field, from the country chosen beside it once one is.
+    private func suggestion(_ carrier: CarrierID, requirement: CarrierRequirement, among given: [GivenPostcode],
+                            catalog: CarrierCatalog) -> GivenPostcode? {
+        let chosen = countries[carrier].flatMap { catalog.postcodeCountries(for: carrier, requirement: requirement).contains($0) ? $0 : nil }
+        return catalog.rememberedPostcode(for: carrier, requirement: requirement, among: given, chosen: chosen)
+    }
+
+    /// Fills the carrier's field with a postcode given before; the country it was given from, when the field reads
+    /// it, is chosen beside it, as the reader took it.
+    mutating func use(_ postcode: String, for carrier: CarrierID, country: String? = nil) {
         values[carrier] = fills[carrier, default: PostcodeFill()].fill(postcode)
+        if let country { countries[carrier] = country }
     }
 
     /// The carrier's field still holds the postcode it was filled with.
@@ -1383,13 +1400,14 @@ struct CarrierPostcodes {
         return postcode
     }
 
-    /// The country beside the carrier's field: the one chosen for it while the field takes it, otherwise where
-    /// the field starts (see `CarrierCatalog.initialPostcodeCountry`).
+    /// The country beside the carrier's field: the one chosen for it while the field takes it, otherwise the one the
+    /// postcode it was filled with was given from while it holds it, otherwise where the field starts (see
+    /// `CarrierCatalog.initialPostcodeCountry`).
     func country(_ carrier: CarrierID, requirement: CarrierRequirement, parcel: Parcel? = nil,
                  region: String? = CarrierCatalog.deviceCountry(), catalog: CarrierCatalog = .shared) -> String? {
-        if let chosen = countries[carrier], catalog.postcodeCountries(for: carrier, requirement: requirement).contains(chosen) {
-            return chosen
-        }
+        let takes = catalog.postcodeCountries(for: carrier, requirement: requirement)
+        if let chosen = countries[carrier], takes.contains(chosen) { return chosen }
+        if holdsFill(carrier), let filled = filledCountries[carrier], takes.contains(filled) { return filled }
         return catalog.initialPostcodeCountry(for: carrier, requirement: requirement, parcel: parcel, region: region)
     }
 

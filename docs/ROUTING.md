@@ -1044,7 +1044,11 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the centre's name and "arrived"; DHL tells La Poste's scans in English to the minute), unless the
   copy alone tells a problem: those words keep it on top. A copy that shares a word and adds one keeps
   its line: it may say more. So does one a second or more away whose words do not plainly show another
-  language: it may be a scan of its own. The rows stay as stored.
+  language: it may be a scan of its own. An earlier carrier's copy in transit of the new carrier's
+  acceptance at its second (not a minute's first) and place, both rows naming a place, is served in
+  the acceptance's words and on top, so the step reads as the parcel moving on rather than a step back
+  to accepted (YunExpress tells GOFO France's acceptance at its sorting centre as an arrival there).
+  The rows stay as stored.
   A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row
   stored second announces no push or link alert, nor the copy of a pair stored together, unless

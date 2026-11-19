@@ -4,7 +4,7 @@ import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
-import { clockDay, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
+import { clockDay, placesApart, placeWithin, placeWords, scanDay, UNWORDED_STEP } from './eventIdentity';
 import { DIRECT_HISTORY, providerCopies, providerCopyScans } from './providerCopies';
 import { copyTellsProblem, currentCarrier, providerTwins, relayCopies } from './relayCopies';
 import { otherLanguages } from './scanLanguage';
@@ -300,6 +300,20 @@ function copyMisleads(copy: JsonObject, scan: JsonObject): boolean {
   return source !== 'none' && stage !== copy.stage && stage !== scan.stage && !copyTellsProblem(copy, scan);
 }
 
+/**
+ * Whether an earlier carrier's copy in transit and the new carrier's acceptance are one hand-over scan: the same second,
+ * off a minute's first, neither row dated by its day, both naming a place and the places not apart. YunExpress tells
+ * GOFO France's acceptance at its sorting centre as an arrival there. The apps show the step once, in the new carrier's
+ * words, and on the copy's row in transit (`relayLeads`): the acceptance on top would read as a step back from the
+ * earlier carrier's scans on the way.
+ */
+function handOver(copy: JsonObject, scan: JsonObject, current: string): boolean {
+  const second = (row: JsonObject) => row.observed === true || scanDay(row) || clockDay(row) ? NaN
+    : Math.floor(Date.parse(String(row.occurred_at)) / 1000);
+  return copy.stage === 'in_transit' && scan.stage === 'accepted' && scanSource(scan.provider_event_id, scan.universal_provider) === current
+    && second(copy) === second(scan) && second(copy) % 60 !== 0 && placed(copy) && placed(scan) && !placesApart(copy, scan);
+}
+
 /** A letter of a script other than Latin. */
 const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
 
@@ -321,6 +335,7 @@ const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
  * Nor a posting that says where it was, the parcel's first step past registered, beside a scan in transit, unless one
  * row's words hold the other's: DHL tells Poczta Polska's posting as an arrival at its origin centre, naming the
  * country. A collection after an earlier posting, or a posting after a scan on the way, stays under it.
+ * An earlier carrier's copy in transit of the new carrier's acceptance at its second and place (`handOver`) is on top.
  * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
  * one on top.
  */
@@ -348,7 +363,8 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     || (further(copy, scan) && toldBefore(scan))
     || (scan.stage === 'registered' && further(copy, scan) && placed(copy) && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
     || (copy.stage === 'accepted' && scan.stage === 'in_transit' && firstStep(copy, scan) && placed(copy)
-      && !wordsWithin(copy, scan) && !wordsWithin(scan, copy));
+      && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
+    || handOver(copy, scan, current);
   // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
   // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
   const top = (id: string) => {
@@ -544,17 +560,20 @@ function placedEvents(row: JsonObject): JsonObject {
   const events = shownEvents(stored);
   const relayed = relayCopies({ ...row, tracking_events: events });
   const pairs = new Map([...relayed, ...providerTwins(events, new Set([...relayed.keys(), ...relayed.values()]))]);
-  const relays = relayLeads(events, pairs, currentCarrier(row));
+  const current = currentCarrier(row);
+  const relays = relayLeads(events, pairs, current);
   const apart = new Set([...relays.keys(), ...relays.values()]);
   const repeats = repeatLeads(events, apart);
   const notices = noticeLeads(events, relays, repeats);
   const byId = new Map(events.map((event) => [String(event.id), event]));
   // The apps show a relay row's words under the other row unless they are that row's: in the same words spelt
   // otherwise, it is served in the other row's spelling, so they are shown once. So is an earlier carrier's copy whose
-  // words read as a stage neither row is in, or that tells the scan's stage and nothing more (`toldAgain`),
-  // in the words of the carrier whose scan it tells, whichever row is on top.
+  // words read as a stage neither row is in, that tells the scan's stage and nothing more (`toldAgain`), or that tells
+  // the new carrier's acceptance at its second and place (`handOver`), in the words of the carrier whose scan it tells,
+  // whichever row is on top.
   const retold = new Map([...pairs].map(([copy, scan]) => [byId.get(copy)!, byId.get(scan)!] as const)
-    .filter(([copy, scan]) => copyMisleads(copy, scan) || (toldAgain(copy, scan) && !copyTellsProblem(copy, scan)))
+    .filter(([copy, scan]) => copyMisleads(copy, scan) || (toldAgain(copy, scan) && !copyTellsProblem(copy, scan))
+      || handOver(copy, scan, current))
     .map(([copy, scan]) => [String(copy.id), scan.description]));
   const told = (event: JsonObject) => retold.has(String(event.id)) ? { ...event, description: retold.get(String(event.id)) } : event;
   const spelt = (event: JsonObject, under: JsonObject | undefined) => {

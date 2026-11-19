@@ -703,6 +703,47 @@ describe('withEventPlaces', () => {
       .toBe('The package left sorting center');
   });
 
+  it('serves an earlier carrier\'s copy in transit of the new carrier\'s acceptance at its second and place on top, in the new carrier\'s words', () => {
+    const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const row = {
+      id: 'parcel', carrier: 'yunexpress', carrier_data: { original_carrier: 'yunexpress', active_tracking_carrier: 'gofo-fr' },
+      tracking_events: [
+        scan('flown', 'yunexpress', '2026-11-10T13:55:05+00:00', null, 'Arrived at destination airport'),
+        scan('handed', 'yunexpress', '2026-11-10T14:24:05+00:00', null, 'Handed over to the last-mile carrier'),
+        // YunExpress tells GOFO France's acceptance at its sorting centre as an arrival there, at its second and place.
+        scan('accepted', 'gofo-fr', '2026-11-19T09:53:45+00:00', 'Lyon', 'Colis pris en charge au centre de tri', 'accepted'),
+        scan('accepted-copy', 'yunexpress', '2026-11-19T09:53:45+00:00', 'Lyon', 'Arrived at the sorting centre'),
+        // Naming no place, or on a minute's first second, the copy keeps its line under the acceptance.
+        scan('taken', 'gofo-fr', '2026-11-20T08:10:12+00:00', 'Lyon', 'Colis pris en charge', 'accepted'),
+        scan('taken-copy', 'yunexpress', '2026-11-20T08:10:12+00:00', null, 'Arrived at the sorting centre'),
+        scan('kept', 'gofo-fr', '2026-11-21T08:10:00+00:00', 'Lyon', 'Colis reçu au dépôt', 'accepted'),
+        scan('kept-copy', 'yunexpress', '2026-11-21T08:10:00+00:00', 'Lyon', 'Arrived at the sorting centre'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(served.map(({ id, relay_of, description }) => [id, relay_of, description])).toEqual([
+      ['flown', undefined, 'Arrived at destination airport'],
+      ['handed', undefined, 'Handed over to the last-mile carrier'],
+      ['accepted', 'accepted-copy', 'Colis pris en charge au centre de tri'],
+      ['accepted-copy', undefined, 'Colis pris en charge au centre de tri'],
+      ['taken', undefined, 'Colis pris en charge'],
+      ['taken-copy', 'taken', 'Arrived at the sorting centre'],
+      ['kept', undefined, 'Colis reçu au dépôt'],
+      ['kept-copy', 'kept', 'Arrived at the sorting centre'],
+    ]);
+    // The apps' headline: the hand-over, in transit, not the scan before it.
+    const parcelEvents: TrackingEvent[] = served.filter((event) => ['flown', 'handed', 'accepted', 'accepted-copy'].includes(String(event.id)))
+      .map((event) => ({
+        id: String(event.id), parcelId: 'parcel', stage: event.stage as Stage, description: String(event.description),
+        occurredAt: String(event.occurred_at), ...(typeof event.relay_of === 'string' ? { relayOf: event.relay_of } : {}),
+      }));
+    expect(currentEvent(parcelEvents)).toMatchObject({ id: 'accepted-copy', stage: 'in_transit' });
+    // The rows stay as stored.
+    expect(row.tracking_events[3].description).toBe('Arrived at the sorting centre');
+  });
+
   it('serves an earlier carrier\'s copy telling a scan\'s second and stage in no word beyond the scan\'s words and place in the scan\'s words', () => {
     const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
       ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,

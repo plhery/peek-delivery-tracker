@@ -71,8 +71,8 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Añadir paquetes por correo: con una cuenta de Peek, obtienes tu propia dirección de Peek en Ajustes › Añadir paquetes por correo. Reenvía un correo de envío a esa dirección: Peek añade el paquete y te avisa. Esta función está en beta.
-• Elige kilogramos o libras en Ajustes › Preferencias › Unidad de peso, independientemente de la unidad de distancia. Si tu iPhone o iPad usa el sistema de medida de EE. UU., los pesos ahora se muestran en libras.
-• Si el servidor de Peek está en mantenimiento, tus paquetes siguen en pantalla con una breve nota que indica cuándo se actualizaron por última vez.
-• El texto sobre el mapa de la tarjeta de un paquete ahora es más oscuro y fácil de leer.
+• Con una cuenta de Peek, en Ajustes › Asistentes ahora ves cómo conectar Claude, ChatGPT, Gemini, OpenClaw o Home Assistant a Peek: la dirección de Peek para asistentes, que puedes copiar, los pasos de cada uno, qué pedirle y los asistentes que has conectado, con «Desconectar». Está en beta, como «Añadir paquetes por correo».
+• Ajustes es más fácil de leer: cada opción muestra un valor corto en una sola línea, las unidades se llaman «Distancia» y «Peso», y «Punto en los paquetes actualizados» dice qué hace ese interruptor. El interruptor del widget ha desaparecido: el widget de la pantalla de inicio siempre muestra tus paquetes, así que quita el widget si no lo quieres.
+• Algunos transportistas registran una entrega por adelantado. Cuando ya ha pasado su hora y ningún escaneo la respalda, el historial de seguimiento ahora indica que nada la confirma y, si no ha llegado nada, que preguntes al vendedor qué empresa la reparte y su número de seguimiento.
+• Correcciones: un estado al que el transportista no dio hora aparece bajo su día, no a la hora en que Peek hizo la consulta; una entrega que ningún escaneo sitúa ya no aparece en un centro de clasificación; un código postal que ya habías indicado viene con su país; un paquete entregado en tu puerta tras esperar en un punto de recogida ya no te da el sello «Recogido» en tu Pasaporte; las franjas de entrega, los pasos previstos, las notificaciones y los números de seguimiento compartidos mientras «Añadir un paquete» está abierto funcionan como deben.
 ```

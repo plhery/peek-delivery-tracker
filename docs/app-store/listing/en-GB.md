@@ -73,8 +73,8 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• Add parcels by email: with a Peek account, Settings › Add parcels by email gives you your own Peek address. Forward a shipping email to it and Peek adds the parcel and lets you know. It’s in beta.
-• Choose kilograms or pounds in Settings › Preferences › Weight units, separately from distances. Where your iPhone or iPad uses US units, weights now show in pounds.
-• If Peek’s server is down for maintenance, your parcels stay on screen with a short note saying how recent they are.
-• Words written over a parcel card’s map are darker and easier to read.
+• With a Peek account, Settings › Assistants now shows how to connect Claude, ChatGPT, Gemini, OpenClaw or Home Assistant to Peek: Peek’s address for assistants to copy, each one’s steps, what to ask it, and the assistants you’ve connected, with Disconnect. It’s in beta, like Add parcels by email.
+• Settings is easier to read: each choice shows a short value on one line, the units are labelled “Distance” and “Weight”, and “Dot on updated parcels” says what that switch does. The widget switch is gone: the Home Screen widget always shows your parcels, so remove the widget if you don’t want it.
+• Some carriers write a delivery in advance. When its time has passed and no scan backs it up, the tracking history now says nothing confirms it and, if nothing came, to ask the seller which company delivers it and for its tracking number.
+• Fixes: a status the carrier gave no time shows under its day, not at the time Peek checked; a delivery no scan places is no longer shown at a sorting hub; a postcode you gave before comes with its country; a parcel brought to your door after waiting at a pickup point no longer earns the Picked up stamp in your Passport; delivery windows, planned steps, notifications and tracking numbers shared while “Add a parcel” is open behave as they should.
 ```

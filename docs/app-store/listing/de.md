@@ -71,8 +71,8 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Pakete per E-Mail hinzufügen: Mit einem Peek-Konto bekommst du deine eigene Peek-Adresse unter Einstellungen › Pakete per E-Mail hinzufügen. Leitest du eine Versand-E-Mail an diese Adresse weiter, fügt Peek das Paket hinzu und gibt dir Bescheid. Die Funktion ist in der Betaphase.
-• Wähle Kilogramm oder Pfund unter Einstellungen › Präferenzen › Gewichtseinheit, unabhängig von der Entfernungseinheit. Verwendet dein iPhone oder iPad das US-Maßsystem, werden Gewichte jetzt in Pfund angezeigt.
-• Ist der Server von Peek gerade in Wartung, bleiben deine Pakete sichtbar, mit einem kurzen Hinweis, wie aktuell sie sind.
-• Text auf der Karte eines Pakets ist jetzt dunkler und besser lesbar.
+• Mit einem Peek-Konto siehst du jetzt unter Einstellungen › Assistenten, wie du Claude, ChatGPT, Gemini, OpenClaw oder Home Assistant mit Peek verbindest: die Peek-Adresse für Assistenten zum Kopieren, die Schritte für jeden davon, was du ihn fragen kannst, und die Assistenten, die du verbunden hast, mit „Trennen“. Wie „Pakete per E-Mail hinzufügen“ ist das in der Betaphase.
+• Die Einstellungen sind leichter zu lesen: Jede Option zeigt einen kurzen Wert in einer Zeile, die Einheiten heißen „Entfernung“ und „Gewicht“, und „Punkt bei aktualisierten Paketen“ sagt, was dieser Schalter tut. Der Widget-Schalter ist weg: Das Widget auf dem Home-Bildschirm zeigt immer deine Pakete, entferne das Widget also, wenn du es nicht willst.
+• Manche Paketdienste tragen eine Zustellung im Voraus ein. Ist ihre Zeit vorbei und stützt sie kein Scan, steht im Sendungsverlauf jetzt, dass nichts sie bestätigt und dass du, falls nichts angekommen ist, den Verkäufer fragen sollst, welcher Paketdienst sie zustellt und wie die Sendungsnummer lautet.
+• Fehlerbehebungen: Ein Status, zu dem der Paketdienst keine Uhrzeit angibt, steht unter seinem Tag statt bei der Uhrzeit, zu der Peek nachgesehen hat; eine Zustellung, die kein Scan verortet, wird nicht mehr in einem Sortierzentrum angezeigt; eine Postleitzahl, die du schon einmal angegeben hast, bringt ihr Land mit; ein Paket, das an deine Tür gebracht wurde, nachdem es an einer Abholstelle gewartet hatte, gibt dir im Reisepass nicht mehr die Briefmarke „Abgeholt“; Zustellfenster, geplante Schritte, Mitteilungen und Sendungsnummern, die bei geöffnetem „Paket hinzufügen“ geteilt werden, funktionieren wie vorgesehen.
 ```

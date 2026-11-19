@@ -71,8 +71,8 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Adicionar encomendas por e-mail: com uma conta Peek, obténs o teu próprio endereço Peek em Definições › Adicionar encomendas por e-mail. Reencaminha um e-mail de envio para esse endereço: o Peek adiciona a encomenda e avisa-te. Esta funcionalidade está em beta.
-• Escolhe quilogramas ou libras em Definições › Preferências › Unidade de peso, independentemente da unidade de distância. Se o teu iPhone ou iPad usar o sistema de medida dos EUA, os pesos passam a aparecer em libras.
-• Se o servidor do Peek estiver em manutenção, as tuas encomendas continuam no ecrã, com uma breve nota a indicar quando foram atualizadas pela última vez.
-• O texto sobre o mapa do cartão de uma encomenda está agora mais escuro e mais fácil de ler.
+• Com uma conta Peek, em Definições › Assistentes vês agora como ligar Claude, ChatGPT, Gemini, OpenClaw ou Home Assistant ao Peek: o endereço do Peek para assistentes para copiares, os passos de cada um, o que lhe pedir e os assistentes que ligaste, com «Desligar». Está em beta, tal como «Adicionar encomendas por e-mail».
+• As Definições estão mais fáceis de ler: cada opção mostra um valor curto numa só linha, as unidades chamam-se «Distância» e «Peso», e «Ponto nas encomendas atualizadas» diz o que faz esse interruptor. O interruptor do widget desapareceu: o widget do ecrã principal mostra sempre as tuas encomendas, por isso remove o widget se não o quiseres.
+• Algumas transportadoras registam uma entrega com antecedência. Quando a sua hora já passou e nenhum registo a comprova, o histórico de seguimento diz agora que nada a confirma e, se nada chegou, que perguntes ao vendedor qual é a transportadora que a entrega e o respetivo número de seguimento.
+• Correções: um estado a que a transportadora não deu hora aparece no respetivo dia, e não à hora em que o Peek verificou; uma entrega que nenhum registo localiza já não aparece num centro de triagem; um código postal que já indicaste vem com o seu país; uma encomenda entregue à tua porta depois de esperar num ponto de levantamento já não te dá o selo «Levantada» no teu Passaporte; os intervalos de entrega, os passos previstos, as notificações e os números de seguimento partilhados enquanto «Adicionar uma encomenda» está aberto funcionam como devem.
 ```

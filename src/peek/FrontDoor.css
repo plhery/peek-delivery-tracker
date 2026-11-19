@@ -302,6 +302,15 @@ html[data-entry=device] .door > :not(.door-header), html[data-entry=device] .doo
 .door-nextup .progress-track__dot { background: color-mix(in srgb, var(--tone) 13%, transparent); }
 .door-nextup .progress-track__dot--filled { background: color-mix(in srgb, var(--tone) 55%, var(--tone-surface)); }
 .door-device > .door-aside { margin-top: 14px; }
+/* The sheet that opens the list on another device: the code on white, as a camera reads it best, then the link. */
+.door-move .sheet__intro { margin-bottom: 16px; }
+.door-move__frame { display: grid; place-items: center; width: min(100%, 248px); aspect-ratio: 1; margin: 0 auto 14px; padding: 8px; border-radius: 16px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); }
+.door-move__code { display: block; width: 100%; height: 100%; }
+.door-move__private { display: flex; gap: 8px; align-items: flex-start; margin: 0 0 16px; color: var(--ink-soft); font-size: 13px; line-height: 1.45; }
+.door-move__private svg { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 1px; }
+.door-move__actions { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+.door-move__actions .button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.door-move__actions svg { width: 17px; height: 17px; }
 .door-archived { margin-top: 10px; }
 .door-archived > summary { list-style: none; display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 9px 4px; border-radius: 15px; color: var(--ink-soft); font-size: 14px; cursor: pointer; }
 .door-archived > summary::-webkit-details-marker { display: none; }

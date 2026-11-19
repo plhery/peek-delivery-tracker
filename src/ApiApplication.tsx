@@ -8,6 +8,7 @@ import { useI18n } from './i18n';
 import { usePendingInvitation } from './lib/friendInvites';
 import { PeekRoot } from './peek/PeekRoot';
 import { useLandingRoute, useParcelLinkRoute } from './peek/route';
+import { useMoveArrival } from './peek/transfer';
 import type { PeekSession } from './peek/session';
 import { useVisitorSession } from './peek/visitor';
 
@@ -24,6 +25,7 @@ export function ApiApplication({ invitationRoute = false, parcelLinkId = null, d
 }) {
   const { t } = useI18n();
   const auth = useAuth();
+  useMoveArrival();
   const experience = useEntryExperience(demoRoute);
   const demoAddress = useDemoAddress(demoRoute);
   const invitation = usePendingInvitation(invitationRoute);

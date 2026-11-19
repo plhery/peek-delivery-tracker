@@ -21,7 +21,7 @@ export function Toast({ mark, kind = 'success', children, action, place = 'botto
   </div>;
 }
 
-interface Notice { id: number; text: MessageKey; values?: Record<string, string>; kind?: 'success' | 'archive' }
+interface Notice { id: number; text: MessageKey; values?: Record<string, string | number>; kind?: 'success' | 'archive' }
 
 const NOTICE_MS = 4_000;
 const listeners = new Set<() => void>();
@@ -34,7 +34,7 @@ function show(next: Notice | null) {
 }
 
 /** Says something that outlives the screen it happened on: a parcel forgotten, then the front door. */
-export function announceNotice(text: MessageKey, values?: Record<string, string>, kind?: Notice['kind']): void {
+export function announceNotice(text: MessageKey, values?: Notice['values'], kind?: Notice['kind']): void {
   show({ id: ++serial, text, values, kind });
 }
 

@@ -292,7 +292,11 @@ The list stays on the device until the parcel is forgotten or kept in an
 account. In the browser, a parcel it looked up stays in the list after the
 service forgets the lookup, marked as no longer updated, with its last
 tracking history and without its key, until you remove it or clear the site's
-data.
+data. To open the list on another phone or computer, the browser makes a link,
+or a code to scan, that carries each parcel's link, key and name after its `#`.
+Browsers don't send that part to Peek: the other device reads it and removes it
+from its address bar. Anyone given the link can follow those parcels and forget
+them.
 
 Apart from that list, it keeps the last five postcodes you entered for these
 lookups, each with the carrier it was for, so the next parcel's postcode field

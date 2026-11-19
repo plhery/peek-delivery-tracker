@@ -195,8 +195,9 @@ const serwist: Serwist = new Serwist({
       // Opening the app never waits for the network: every address of the
       // single-page app starts from the shell this worker precached together
       // with its scripts, so the two always come from the same build. The
-      // client then reads its own query and saved data.
-      matcher: ({ sameOrigin, request, url }) => sameOrigin && request.mode === 'navigate' && url.pathname === '/',
+      // client then reads its own query and saved data. A move from another device is that page too: its parcels
+      // are in the address's `#`.
+      matcher: ({ sameOrigin, request, url }) => sameOrigin && request.mode === 'navigate' && (url.pathname === '/' || url.pathname === '/move'),
       handler: async ({ request, event }): Promise<Response> => (await serwist.matchPrecache('/')) ?? pageNavigation.handle({ request, event }),
     },
     {

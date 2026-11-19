@@ -1047,6 +1047,22 @@ describe('FrontDoor: on this device', () => {
     }
   });
 
+  it('opens the list on another device with a code to scan or a link that carries the owner keys', async () => {
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView(), now: Date.now() });
+    renameParcel(LINK_ID, 'New sneakers');
+    const { user } = door();
+    await user.click(within(screen.getByRole('region', { name: 'On this device' })).getByRole('button', { name: 'Open them on another device' }));
+    const sheet = screen.getByRole('dialog', { name: 'Open on another device' });
+    expect(sheet).toHaveAccessibleDescription('Scan this code with your other phone or computer, or send yourself the link.');
+    await waitFor(() => expect(sheet.querySelector('.door-move__code path')).not.toBeNull());
+    await user.click(within(sheet).getByRole('button', { name: 'Copy link' }));
+    const copied = await navigator.clipboard.readText();
+    expect(copied).toBe(`${window.location.origin}/move#p=${LINK_ID}.${OWNER_KEY}..New+sneakers`);
+    expect(within(sheet).getByRole('button', { name: 'Link copied' })).toBeInTheDocument();
+    await user.click(within(sheet).getByRole('button', { name: 'Close' }));
+    expect(screen.queryByRole('dialog')).toBeNull();
+  });
+
   it('lets a parcel that has just arrived say so where its card stands, before another leads the list', async () => {
     stillMotion(false);
     Element.prototype.animate = (() => ({ finished: new Promise(() => undefined), addEventListener() {}, cancel() {}, finish() {} })) as unknown as typeof Element.prototype.animate;

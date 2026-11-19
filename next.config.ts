@@ -63,6 +63,14 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // Another device's parcels arrive here, their keys after the `#`.
+        source: '/move',
+        headers: [
+          { key: 'Referrer-Policy', value: 'no-referrer' },
+          { key: 'X-Robots-Tag', value: 'noindex, nofollow' },
+        ],
+      },
+      {
         source: '/i/:path*',
         headers: [
           { key: 'Referrer-Policy', value: 'no-referrer' },

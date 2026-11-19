@@ -14,6 +14,7 @@ import type { CardList } from '../../lib/deliveredMove';
 import { carrierInfo, displayedCarrierId, formatTrackingNumber, normalizeTrackingNumber } from '../../lib/carriers';
 import { useMarkNewUpdates } from '../../lib/newUpdate';
 import { localizedParcelCompletionDate, parcelDeliveryEstimate, parcelStatusLabel } from '../../lib/parcelStatus';
+import { trackAction } from '../../lib/analytics';
 import { parcelMatchesSearch } from '../../lib/parcelView';
 import type { Translate } from '../../lib/messages';
 import { pickupPoint } from '../../lib/pickupPoint';
@@ -25,6 +26,7 @@ import { frozenOnTheWay, hasUnopenedNews, strandedParcels, useRecents, type Rece
 import { openParcelLink, parcelLinkPath } from '../route';
 import { usePeekSession } from '../session';
 import { downloadDeviceExport } from './deviceExport';
+import { MoveSheet } from './MoveSheet';
 import { deviceListDown, deviceListReadAt, forgetDeviceParcels, leadParcel, onDeviceListDown, watchDeviceParcels } from './deviceList';
 
 /** A long number as a card writes it: its two ends. A short one stays whole. */
@@ -192,6 +194,9 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
   // Which parcel Forget all has reached, of how many: the server takes a few a minute, and the rest wait their turn.
   const [forgetting, setForgetting] = useState<{ done: number; count: number } | null>(null);
   const [failed, setFailed] = useState(false);
+  const [moving, setMoving] = useState(false);
+  // A frozen copy cannot go: its link is gone.
+  const movable = recents.some((recent) => !recent.frozen);
   const down = useSyncExternalStore(onDeviceListDown, deviceListDown, () => null);
   const question = useRef<HTMLDivElement>(null);
   const list = useRef(recents);
@@ -273,6 +278,11 @@ export function DeviceParcels({ onSignIn, onForgotten, covered = false }: {
       {active.filter((recent) => recent !== lead).map((recent) => <li key={recent.id}><DeviceParcel recent={recent} arrived={arrived(recent)} /></li>)}
     </ul>
     {archived.length > 0 && !matches && <ArchivedParcels archived={archived} />}
-    <p className="door-aside">{t('door.recents.kept')}{account !== 'signed-in' && listed && <>{' '}<button type="button" className="door-link" onClick={onSignIn}>{t('door.recents.signIn')}</button></>}</p>
+    <p className="door-aside">
+      {t('door.recents.kept')}
+      {account !== 'signed-in' && listed && <>{' '}<button type="button" className="door-link" onClick={onSignIn}>{t('door.recents.signIn')}</button></>}
+      {movable && <>{account !== 'signed-in' ? <span aria-hidden="true"> · </span> : ' '}<button type="button" className="door-link" onClick={() => { trackAction('parcels-move', 'started'); setMoving(true); }}>{t('door.recents.move')}</button></>}
+    </p>
+    {moving && <MoveSheet recents={recents} onClose={() => setMoving(false)} />}
   </section>;
 }

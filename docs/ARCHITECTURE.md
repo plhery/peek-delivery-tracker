@@ -205,7 +205,14 @@ Key server modules:
     unless the account had it already. From five parcels on, the list can be searched as
     the account's is, by name, number, carrier, status and scans, archived parcels included.
     Its download button saves the list as a JSON file, as the apps do for a guest: each parcel
-    as last shown, with its name, link and archive date, and never its owner key.
+    as last shown, with its name, link and archive date, and never its owner key. "Open them
+    on another device" shows a QR code (while the address fits in 1,800 characters) and a link,
+    `/move#p=<id>.<key>.<a>.<name>&…`; frozen copies stay behind. The page at `/move` is the one
+    at `/`: it takes the parcels from the `#`, replaces the address with `/` at once, and reads
+    each link with its key (a hidden read). A key stays only when the link answers as its owner;
+    a parcel already on the device keeps its name and fold, and gains a key it lacked. Signed in,
+    the bring-along offer then asks to keep them in the account. The apps don't claim `/move`
+    yet, so a phone opens it in the browser.
   - The list holds a hundred parcels: copies no longer updated make way first, then links
     opened from someone else, for the browser's own lookups. A saved parcel the browser can't read, such as one
     another version wrote, stays with its id and owner key: it isn't listed, its link gets

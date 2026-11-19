@@ -427,7 +427,7 @@ class SettingsTest {
 
     /**
      * The deliveries' group holds the account's updates and no switch for the widget, which a reader removes from the
-     * home screen instead: the new-update dot's is Settings' only switch.
+     * home screen instead: the new-update dot's and usage statistics' are Settings' only switches.
      */
     @Test
     fun theDeliveriesHaveNoWidgetSwitch() {
@@ -437,7 +437,7 @@ class SettingsTest {
         assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
         assertFalse(exists("$SETTINGS_SHEET.widgets"))
         val switches = compose.onAllNodes(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch)).fetchSemanticsNodes()
-        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES), switches.map { it.config[SemanticsProperties.TestTag] })
+        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES, SETTINGS_USAGE_STATISTICS), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
     /** A guest has no updates, which need an account, nor a forwarding address: no deliveries' group at all. */
@@ -486,6 +486,41 @@ class SettingsTest {
         assertEquals(ToggleableState.On, toggled(SETTINGS_MARK_NEW_UPDATES))
         press(SETTINGS_CLOSE)
         assertTrue(marked())
+    }
+
+    /**
+     * "Usage statistics", under the new-update dot for an account and a guest alike, on at first: turned off, the
+     * analytics stop; turned on again from TalkBack, they start again.
+     */
+    @Test
+    fun anAccountsUsageStatisticsSwitchTurnsAnalyticsOffAndOn() {
+        show()
+        usageStatisticsSwitchTurnsOffAndOn()
+    }
+
+    @Test
+    fun aGuestsUsageStatisticsSwitchTurnsAnalyticsOffAndOn() {
+        show(AuthenticationState.Welcome) { isGuest = true }
+        usageStatisticsSwitchTurnsOffAndOn()
+    }
+
+    private fun usageStatisticsSwitchTurnsOffAndOn() {
+        open()
+        node(SETTINGS_USAGE_STATISTICS).assert(hasText(text("settings.usageStatistics"))).assert(hasText(text("settings.usageStatisticsHint")))
+        assertTrue(
+            node(SETTINGS_USAGE_STATISTICS).fetchSemanticsNode().boundsInRoot.top >
+                node(SETTINGS_MARK_NEW_UPDATES).fetchSemanticsNode().boundsInRoot.top,
+        )
+        assertEquals(ToggleableState.On, toggled(SETTINGS_USAGE_STATISTICS))
+        flip(SETTINGS_USAGE_STATISTICS)
+        assertFalse(source.usageStatistics.value)
+        assertEquals(ToggleableState.Off, toggled(SETTINGS_USAGE_STATISTICS))
+        // The dot's switch is its own.
+        assertTrue(source.markNewUpdates.value)
+        node(SETTINGS_USAGE_STATISTICS).performScrollTo().performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertTrue(source.usageStatistics.value)
+        assertEquals(ToggleableState.On, toggled(SETTINGS_USAGE_STATISTICS))
     }
 
     @Test

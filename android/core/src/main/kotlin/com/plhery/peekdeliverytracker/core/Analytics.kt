@@ -1,9 +1,14 @@
 package com.plhery.peekdeliverytracker.core
 
+import com.plhery.peekdeliverytracker.core.api.InstallSighting
+import java.time.Instant
 import java.util.IllformedLocaleException
 import java.util.Locale
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -52,7 +57,8 @@ data class AnalyticsCatalog(
  * What the app gives it:
  * - `transport`: its own, as URLSession's `.ephemeral` is: no cache, cookies in memory only, none shared with the API
  *   client's. A request times out after 5 s (`HttpRequest.timeout`).
- * - `defaults`: the app's preferences, where the switch is saved under `PREFERENCE_KEY`. Only this class writes it.
+ * - `defaults`: the app's preferences, where the switch is saved under `PREFERENCE_KEY` and the counting id under
+ *   `InstallCounting.STORAGE_KEY`. Only this class writes them.
  * - `platform`: the device it runs on (see `Platform`), read as each event goes, as the iPhone reads `Platform.current`
  *   for each payload: a foldable opened into a tablet or a Chromebook taken out of tablet mode counts as what it is
  *   then. `version`: the app's version name, as `AppConfiguration.version`.
@@ -60,6 +66,8 @@ data class AnalyticsCatalog(
  *   (`Resources.getSystem().configuration.locales`), as `Locale.preferredLanguages`; not the app's own language. The
  *   first is sent as the iPhone's would be (`languageTag`).
  * - `collects`: false on an emulator, which stays out of the counts as the iPhone's simulator and the Mac's Debug build do.
+ * - `deviceParcels`: how many parcels this device follows without an account, which the counting id's sighting carries
+ *   ([InstallCounting]), read as it goes.
  */
 class DeliveryAnalytics(
     private val app: AppConfiguration,
@@ -71,16 +79,25 @@ class DeliveryAnalytics(
     private val preferredLanguages: () -> List<String>,
     private val collects: Boolean = true,
     private val catalog: AnalyticsCatalog? = AnalyticsCatalog.bundled,
+    private val deviceParcels: () -> Int = { 0 },
+    private val now: () -> Instant = AppClock::now,
 ) {
     // `object(forKey:) as? Bool ?? true`: on until switched off.
     private val enabled: Boolean
         get() = defaults.bool(forKey = PREFERENCE_KEY) || !defaults.hasObject(forKey = PREFERENCE_KEY)
 
+    private val enabledState = MutableStateFlow(enabled)
+
+    /** "Usage statistics" in Settings: on until switched off. */
+    val enabledFlow: StateFlow<Boolean> = enabledState.asStateFlow()
+
     fun setEnabled(value: Boolean) {
         defaults.set(value, forKey = PREFERENCE_KEY)
+        enabledState.value = value
         if (!value) {
             queue.clear()
             cache = null
+            InstallCounting.forget(defaults)
         } else {
             disabled = false
             lastView = ""
@@ -166,6 +183,10 @@ class DeliveryAnalytics(
     private var disabled = false
     private var started = false
     private var sending = false
+    private var counting = false
+
+    /** Where the counting id goes: the server the configuration came from. */
+    private var seenUrl: String? = null
     private var cache: String? = null
     private val queue = ArrayDeque<Event>()
     var screen: String = "welcome"
@@ -196,6 +217,7 @@ class DeliveryAnalytics(
                 return
             }
             this.configuration = value
+            seenUrl = configuration.apiBaseUrl.appendingPath("api/public/seen")
             disabled = false
             started = true
             action("app-open")
@@ -237,6 +259,8 @@ class DeliveryAnalytics(
                 while (enabled && queue.isNotEmpty()) {
                     val configuration = configuration ?: break
                     val event = queue.removeFirst()
+                    // A view knows whether the reader is signed in; the app open queued before it may not.
+                    if (event.name == null && event.mode != Mode.Demo) count(signedIn = event.mode == Mode.Account)
                     try {
                         val platform = platform()
                         val body = JsonObject(mapOf("type" to JsonPrimitive("event"), "payload" to payload(event, configuration, platform)))
@@ -258,6 +282,38 @@ class DeliveryAnalytics(
                 }
             } finally {
                 sending = false
+            }
+        }
+    }
+
+    /**
+     * Counts this install as seen today ([InstallCounting]), on its own request beside the events: once a day, and again
+     * once the reader signs in. A request that fails leaves the day uncounted, for the next view.
+     */
+    private fun count(signedIn: Boolean) {
+        val url = seenUrl ?: return
+        if (counting) return
+        val plan = InstallCounting.plan(InstallCounting.read(defaults), now(), signedIn) ?: return
+        counting = true
+        // Kept before it goes, so that the next try counts the same install.
+        InstallCounting.keep(plan.id, defaults)
+        val sighting = InstallCounting.sighting(plan.id, signedIn, deviceParcels())
+        scope.launch {
+            try {
+                val request = HttpRequest(
+                    url = url,
+                    method = "POST",
+                    headers = mapOf("Content-Type" to "application/json"),
+                    body = JsonEncoder().encode(InstallSighting.serializer(), sighting),
+                    timeout = 5.0,
+                    handlesCookies = false,
+                )
+                if (transport.data(request).statusCode == 204 && enabled) InstallCounting.keep(plan.counted, defaults)
+            } catch (error: Exception) {
+                // Counting never affects the app.
+                if (error is CancellationException) throw error
+            } finally {
+                counting = false
             }
         }
     }

@@ -124,7 +124,7 @@ class AnalyticsTests {
         analytics.view("deliveries", DeliveryAnalytics.Mode.Account)
         analytics.start()
         runCurrent()
-        val (configuration, view, open) = transport.requests
+        val (configuration, view, open) = transport.events
         assertEquals("https://delivery.example/api/analytics/config", configuration.url)
         assertEquals("GET", configuration.method)
         assertEquals(5.0, configuration.timeout, 0.0)
@@ -144,7 +144,7 @@ class AnalyticsTests {
         )
         assertEquals("app-open", open.payload.string("name"))
         assertEquals("/deliveries", open.payload.string("url"))
-        assertEquals(3, transport.requests.size)
+        assertEquals(3, transport.events.size)
     }
 
     /**
@@ -169,11 +169,11 @@ class AnalyticsTests {
         val analytics = analytics(transport, languages = listOf("en-GB-u-fw-mon-mu-celsius", "fr-CH"))
         analytics.start()
         runCurrent()
-        assertEquals("en-GB", transport.requests.last().payload.string("language"))
+        assertEquals("en-GB", transport.events.last().payload.string("language"))
         val none = collector()
         analytics(none, languages = emptyList()).start()
         runCurrent()
-        assertEquals("en", none.requests.last().payload.string("language"))
+        assertEquals("en", none.events.last().payload.string("language"))
     }
 
     /** The iPhone reads `Platform.current` for each payload: a foldable opened into a tablet counts as one from then on. */
@@ -190,7 +190,7 @@ class AnalyticsTests {
         platform = DeliveryAnalytics.Platform.Chromebook
         analytics.action("search")
         runCurrent()
-        val (open, tablet, desktop) = transport.requests.drop(1)
+        val (open, tablet, desktop) = transport.events.drop(1)
         for ((request, form) in listOf(
             open to DeliveryAnalytics.Platform.Android,
             tablet to DeliveryAnalytics.Platform.AndroidTablet,
@@ -212,7 +212,7 @@ class AnalyticsTests {
         analytics.start()
         runCurrent()
         // The app open finds the queue full.
-        val sent = transport.requests.drop(1).map { it.payload.string("name") }
+        val sent = transport.events.drop(1).map { it.payload.string("name") }
         assertEquals(List(30) { "search" }, sent)
     }
 
@@ -236,7 +236,7 @@ class AnalyticsTests {
             runCurrent()
         }
         // The open, then each action: the cache an answer of 200 gave, until one gives none.
-        assertEquals(listOf(null, "first", "first", "first", null, "second"), transport.requests.drop(1).map { it.header("x-umami-cache") })
+        assertEquals(listOf(null, "first", "first", "first", null, "second"), transport.events.drop(1).map { it.header("x-umami-cache") })
     }
 
     @Test
@@ -260,7 +260,7 @@ class AnalyticsTests {
             refused = false
             analytics.start()
             runCurrent()
-            assertEquals(listOf("app-open"), transport.requests.filter { it.method == "POST" }.map { it.payload.string("name") })
+            assertEquals(listOf("app-open"), transport.events.filter { it.method == "POST" }.map { it.payload.string("name") })
         }
     }
 
@@ -284,7 +284,7 @@ class AnalyticsTests {
             failing = false
             analytics.start()
             runCurrent()
-            assertEquals(listOf("search", "app-open"), transport.requests.filter { it.method == "POST" }.map { it.payload.string("name") })
+            assertEquals(listOf("search", "app-open"), transport.events.filter { it.method == "POST" }.map { it.payload.string("name") })
         }
     }
 
@@ -318,11 +318,11 @@ class AnalyticsTests {
         analytics.view("friends")
         runCurrent()
         assertEquals(false, defaults.values[DeliveryAnalytics.PREFERENCE_KEY])
-        assertEquals(3, transport.requests.size)
+        assertEquals(3, transport.events.size)
         // Started already: the screen is counted again, and the cache went with the switch.
         analytics.setEnabled(true)
         runCurrent()
-        val again = transport.requests.drop(3)
+        val again = transport.events.drop(3)
         assertEquals(listOf("/friends"), again.map { it.payload.string("url") })
         assertNull(again.single().header("x-umami-cache"))
         assertEquals(null, again.single().payload["name"])
@@ -342,7 +342,7 @@ class AnalyticsTests {
         analytics.action("not-an-action")
         analytics.action("parcel-add", DeliveryAnalytics.Outcome.Accepted)
         runCurrent()
-        val sent = transport.requests.drop(2).map { it.payload }
+        val sent = transport.events.drop(2).map { it.payload }
         assertEquals(listOf("anonymous", "account", "account"), sent.map { it["data"]!!.jsonObject.string("mode") })
         assertEquals(listOf(null, null, "parcel-add"), sent.map { it["name"]?.jsonPrimitive?.content })
         assertEquals("accepted", sent.last()["data"]!!.jsonObject.string("outcome"))
@@ -367,7 +367,7 @@ class AnalyticsTests {
         observer.urlOpened()
         observer.friendNotificationOpened()
         runCurrent()
-        val sent = transport.requests.drop(1).map { request -> request.payload.let { it["name"]?.jsonPrimitive?.content ?: it.string("url") } }
+        val sent = transport.events.drop(1).map { request -> request.payload.let { it["name"]?.jsonPrimitive?.content ?: it.string("url") } }
         assertEquals(
             listOf(
                 "/front-door", "app-open", "/parcel-link", "/parcel-link", "/deliveries",
@@ -415,6 +415,10 @@ class AnalyticsTests {
     private fun collector(events: (HttpRequest) -> HttpResponse = { HttpResponse(200) }) = RecordingTransport { request ->
         if (request.method == "GET") jsonResponse(200, configurationAnswer) else events(request)
     }
+
+    /** What was sent but the counting id's sightings, which CountingTests follows. */
+    private val RecordingTransport.events: List<HttpRequest>
+        get() = requests.filter { it.path != "/api/public/seen" }
 
     private val HttpRequest.json: JsonObject
         get() = Json.parseToJsonElement(body!!.decodeToString()).jsonObject

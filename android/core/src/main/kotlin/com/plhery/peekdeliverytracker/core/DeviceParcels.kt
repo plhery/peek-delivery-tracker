@@ -553,6 +553,8 @@ class DeviceParcels(
 
     val isEmpty: Boolean get() = entries.isEmpty()
 
+    val count: Int get() = entries.size
+
     /**
      * How many of this phone's own parcels are kept by their key alone, their saved copy lost and still to be read
      * again: not listed, yet Forget all forgets them too.

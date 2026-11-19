@@ -602,6 +602,13 @@ class ParcelStore(
     val isGuest: Boolean
         get() = session.isGuest
 
+    /**
+     * The parcels this phone follows without an account, which the counting id's sighting carries: the list for a
+     * guest; signed in, those the account could not keep.
+     */
+    val followedHere: Int
+        get() = if (isGuest) parcels.size else device.count
+
     /** Whether tracking without an account works at all: a build without a server only has its demo. */
     val tracksWithoutAccount: Boolean
         get() = configuration.mode == AppConfiguration.Mode.Api

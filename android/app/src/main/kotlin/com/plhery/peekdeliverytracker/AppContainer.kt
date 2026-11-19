@@ -203,6 +203,8 @@ class AppContainer(
         preferredLanguages = Device::systemLanguages,
         collects = !Device.isEmulator,
         catalog = AnalyticsCatalog.bundled,
+        // Read once a sighting goes, after start: the parcels are made by then.
+        deviceParcels = { parcels.followedHere },
     )
 
     private val analyticsObserver = AnalyticsLifecycleObserver(analytics, scope)

@@ -202,8 +202,8 @@ in `private.installs`, which only the server reads; Grafana reads counts from
 `metrics.installs_daily` (`new`, `returning`, `account`, `converted`), `metrics.active_installs`
 and `metrics.guest_cohorts`. A row goes 90 days after it was last seen, and every row 25 months
 after its first day, so the web stays within CNIL's conditions for audience measurement
-without consent. A reinstall or cleared storage counts as a new install, and the same person
-on two devices counts twice.
+without consent. A reinstall or cleared storage counts as a new install (a restored backup
+keeps the id), and the same person on two devices counts twice.
 
 To check a deployment, open the app, change a harmless setting, and confirm the page view
 and event in Umami. iPhone changes need a new app build.

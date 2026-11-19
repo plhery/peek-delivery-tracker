@@ -4940,26 +4940,29 @@ describe('TrackingSyncService', () => {
 
   it.each([
     // The check that filed it at 10:00 under a carrier a provider named did not ask that carrier: the next run does.
-    { checkedAt: '10:00:15', time: '10:02:00', checked: 1 },
-    { checkedAt: '10:00:15', time: '10:02:00', overnight: true, checked: 1 },
+    { carrier: 'dhl-express', checkedAt: '10:00:15', time: '10:02:00', checked: 1 },
+    { carrier: 'dhl-express', checkedAt: '10:00:15', time: '10:02:00', overnight: true, checked: 1 },
     // A check that left the mark in place keeps the parcel due for 15 minutes at most.
-    { checkedAt: '10:12:00', time: '10:14:00', checked: 1 },
-    { checkedAt: '10:12:00', time: '10:16:00', checked: 0 },
+    { carrier: 'dhl-express', checkedAt: '10:12:00', time: '10:14:00', checked: 1 },
+    { carrier: 'dhl-express', checkedAt: '10:12:00', time: '10:16:00', checked: 0 },
     // Delivered on the provider's word, it need not wait for the follow-up's next daily check.
-    { checkedAt: '10:00:15', time: '10:02:00', delivered: true, checked: 1 },
-    { checkedAt: '10:12:00', time: '10:16:00', delivered: true, checked: 0 },
+    { carrier: 'dhl-express', checkedAt: '10:00:15', time: '10:02:00', delivered: true, checked: 1 },
+    { carrier: 'dhl-express', checkedAt: '10:12:00', time: '10:16:00', delivered: true, checked: 0 },
     // A carrier spacing its parcels' checks 30 minutes apart has not been asked yet: its interval waits for none.
     { carrier: 'usps', checkedAt: '10:00:15', time: '10:02:00', checked: 1 },
     { carrier: 'usps', checkedAt: '10:00:15', time: '10:02:00', delivered: true, checked: 1 },
     // A failed check keeps the carrier's wait after a failure.
     { carrier: 'usps', checkedAt: '10:00:15', time: '10:02:00', failed: true, checked: 0 },
-  ])('asks at the next run the carrier ($carrier) a provider named, last checked at $checkedAt, at $time (overnight: $overnight, delivered: $delivered, failed: $failed): $checked checks', async ({ carrier = 'dhl-express', checkedAt, time, overnight, delivered, failed, checked }) => {
+    // An earlier leg that answered last spaces its own asks: its interval holds.
+    { carrier: 'dhl-express', earlierLeg: 'gls-de', checkedAt: '10:00:15', time: '10:02:00', checked: 0 },
+  ])('asks at the next run the carrier ($carrier) a provider named, last checked at $checkedAt, at $time (overnight: $overnight, delivered: $delivered, failed: $failed, earlier leg: $earlierLeg): $checked checks', async ({ carrier, earlierLeg, checkedAt, time, overnight, delivered, failed, checked }) => {
     const day = overnight ? '2026-09-09T22' : '2026-09-09T10';
     const at = (clock: string) => `${day}${clock.slice(2)}Z`;
     const parcel = {
       id: 'named', carrier, current_stage: delivered ? 'delivered' : 'in_transit', tracking_number: 'TEST1234',
       last_synced_at: at(checkedAt), sync_status: failed ? 'error' : 'ok', carrier_data: { tracking_provider: 'Ship24',
         ...(delivered ? { unconfirmed_delivery_until: '2026-09-12T10:00:00Z' } : {}),
+        ...(earlierLeg ? { active_tracking_carrier: earlierLeg } : {}),
         routing: { version: 1, configured_carrier: carrier, carrier_named_at: at('10:00:10') } },
     };
     const client = fakeClient([parcel]);

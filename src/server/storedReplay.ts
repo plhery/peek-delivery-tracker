@@ -217,8 +217,10 @@ export function replayParcel(parcel: StoredParcel): ReplayedChange[] {
   }
   const changes: ReplayedChange[] = [];
   for (const { source, scans } of groups.values()) {
-    // Oldest first, as notices take the stage of the scan before them.
-    const ordered = [...scans].sort((a, b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt) || a.id.localeCompare(b.id));
+    // Oldest first, as notices take the stage of the scan before them; scans of one instant in the order their source
+    // listed them (`tie_order`).
+    const ordered = [...scans].sort((a, b) => Date.parse(a.occurredAt) - Date.parse(b.occurredAt)
+      || tieOrder(a.raw.tie_order) - tieOrder(b.raw.tie_order) || a.id.localeCompare(b.id));
     changes.push(...replayedClocks(parcel, source, ordered), ...replayedStages(parcel, source, ordered));
   }
   // A row the release leaves out as a copy goes; nothing else is written to it.
@@ -315,6 +317,9 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
   const reasons: (StageChange['reason'] | null)[] = [];
   // The stage the adapter gives the scan before, the one a notice keeps.
   let previous: string | null = null;
+  // A scan dated like another of its source, where either has no `tie_order`: which came before is not known.
+  const unordered = (scan: StoredScan) => ordered.some((other) => other !== scan
+    && Date.parse(other.occurredAt) === Date.parse(scan.occurredAt) && Math.min(tieOrder(scan.raw.tie_order), tieOrder(other.raw.tie_order)) < 0);
   for (const scan of ordered) {
     const answer = relayedAnswer(scan)
       ?? statusMapAnswer({ carrier: source, providerCode: text(scan.raw.provider_code), description: scan.description });
@@ -326,11 +331,12 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
       // A scan its adapter staged from the scans around it keeps the stage of the scan before it with no source of
       // its own, as Chronopost's RB keeps a delivery round's or a pickup point's: the map's stage is not its. Pending
       // is no stage kept: a scan an earlier release could not read, which the map now reads.
-      const kept = scan.raw.stage_source === 'none' && declared !== null && declared !== 'pending' && declared === previous;
+      const kept = scan.raw.stage_source === 'none' && declared !== null && declared !== 'pending' && (declared === previous || unordered(scan));
       if (answer.stage !== declared && !kept) [given, reason] = [{ stage: answer.stage, stage_source: 'carrier_map' }, 'mapped'];
     } else if (answer.kind === 'intentional_gap' && KEEPS_STAGE.test(answer.note)) {
-      // A notice stored as one kept the stage its adapter saw before it, which the stored rows may not show.
-      if (!(declared && scan.raw.stage_source === 'none')) [given, reason] = [{ stage: previous ?? 'registered', stage_source: 'none' }, 'notice'];
+      // A notice stored as one kept the stage its adapter saw before it, which the stored rows may not show. One whose
+      // order among the scans of its instant is not known keeps the stage it has.
+      if (!(declared && scan.raw.stage_source === 'none') && !unordered(scan)) [given, reason] = [{ stage: previous ?? 'registered', stage_source: 'none' }, 'notice'];
     } else if (answer.kind === 'unknown' && !declared && wording.source !== 'none') {
       reason = 'wording';
     }

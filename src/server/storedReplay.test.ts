@@ -117,6 +117,22 @@ describe('stored scan replay', () => {
       .toContain(`raw_data = (raw_data - 'kept_stage') || '{"stage":"delivered","stage_source":"carrier_map"}'::jsonb`);
   });
 
+  it('gives a notice the stage of the scan its source listed before it in the same second, and leaves one whose order is not known', () => {
+    const delivered = scan('z-delivered', 'dpd-de', '2026-10-18T10:00:00Z', 'delivered', 'Delivered', { provider_code: 'DELIVERED', stage: 'delivered' });
+    const notice = scan('a-notice', 'dpd-de', '2026-10-18T10:00:00Z', 'delivered', 'Delivery notice sent', { provider_code: 'MSDLO', stage: 'delivered' });
+    const listed = replayParcel(parcel({ ...delivered, raw: { ...delivered.raw, tie_order: 0 } }, { ...notice, raw: { ...notice.raw, tie_order: 1 } }));
+    const unknown = replayParcel(parcel(delivered, notice));
+
+    expect(listed).toEqual([expect.objectContaining({ row: 'a-notice', from: 'delivered', to: 'pending', reason: 'notice', declared: 'delivered' })]);
+    expect(unknown).toEqual([]);
+    // A scan its adapter gave the stage of the scan before it, dated like that scan.
+    expect(replayParcel(parcel(
+      scan('z-round', 'chronopost', '2026-10-19T08:00:00Z', 'out_for_delivery', 'Colis en cours de livraison', { provider_code: 'TA', stage: 'out_for_delivery' }),
+      scan('a-drop-off', 'chronopost', '2026-10-19T08:00:00Z', 'out_for_delivery', 'Colis en cours de livraison au point de retrait',
+        { provider_code: 'RB', stage: 'out_for_delivery', stage_source: 'none' }),
+    ))).toEqual([]);
+  });
+
   it('dates a wall clock again on the zone the release deduces, with the identity the sync would give it', () => {
     const [change] = replayParcel(parcel(
       scan('clock', 'poczta-polska', '2026-10-20T10:00:00Z', 'in_transit', 'Posted abroad', { local_time: '2026-10-20T10:00:00', time_zone: 'UTC', time_zone_basis: 'carrier', stage: 'in_transit' }),

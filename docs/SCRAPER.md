@@ -238,7 +238,9 @@ adapter can state itself, and a scan's stage is read again from its source's sta
 wording rules, a notice stored as the sync stores it. A wording Postal Ninja relays for the carrier it
 names (`reporting_carrier`) is read with that carrier's map first, when the map reads relayed wordings
 whole (PostNL's), as the adapter reads it. A scan its adapter gave the stage of the scan
-before it, with no source of its own (Chronopost's RB), keeps it. A registration dated over a minute after the
+before it, with no source of its own (Chronopost's RB), keeps it. The scan before is the one its source listed
+before it (`tie_order`) among scans of one instant; where the stored rows cannot tell, such a scan or notice keeps
+its stage. A registration dated over a minute after the
 answer's first movement (a partner's label) is in transit, as the scraper reads each answer; one the sync
 stored, or whose source answered, since Peek ran a release that reads it so keeps that answer's reading by
 design, as the carrier may no longer list the movement before it and the next check would undo the change. A universal provider's row to the

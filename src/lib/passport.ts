@@ -1,6 +1,6 @@
 import type { ApiFriendStamp, ApiFriendStats } from '../generated/apiContract';
 import { scanCountry } from './scanPlace';
-import { currentStage } from './stages';
+import { collectedFromPickupPoint, currentStage } from './stages';
 import type { ParcelWithEvents, Stage, TrackingEvent } from '../types';
 
 export { trackingLocationCountry as firstScanCountry } from 'universal-parcel-scraper/app';
@@ -39,7 +39,8 @@ export function passportStatistics(parcels: readonly ParcelWithEvents[], timeZon
       const day = parts.filter(({ type }) => ['year', 'month', 'day'].includes(type)).map(({ value }) => value).join('-');
       deliveredDays.set(day, (deliveredDays.get(day) ?? 0) + 1);
       if (parts.some(({ type, value }) => type === 'month' && value === '12')) decemberDeliveryCount += 1;
-      if (physical.some(({ event, date }) => event.stage === 'ready_for_pickup' && date < completion.date)) pickupDeliveryCount += 1;
+      // Collected where it waited: its last movement before the delivery made it ready for pickup, not a trip to the door after.
+      if (collectedFromPickupPoint(physical.filter(({ date }) => date < completion.date).map(({ event }) => event))) pickupDeliveryCount += 1;
       const located = physical.filter(({ date }) => date <= completion.date).map(({ event, date }) => ({ country: countryOf(event), date })).filter(({ country }) => country);
       // Different countries must be observed at different instants; tied scans do not prove travel.
       if (located.some((scan, index) => located.slice(0, index).some((prior) => prior.date < scan.date && prior.country !== scan.country))) crossBorderCount += 1;

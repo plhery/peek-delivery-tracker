@@ -107,6 +107,9 @@ describe('new passport stamps', () => {
       parcel('tied', [['accepted', '2026-11-01T00:00:00Z', 'DE'], ['ready_for_pickup', '2026-11-01T00:00:00Z', 'CH'], ['delivered', '2026-11-01T00:00:00Z', 'CH']]),
       parcel('waiting', [['accepted', '2026-11-01T00:00:00Z', 'DE'], ['ready_for_pickup', '2026-12-02T00:00:00Z', 'CH']]),
       parcel('returned', [['accepted', '2026-11-01T00:00:00Z', 'DE'], ['delivered', '2026-12-02T00:00:00Z', 'CH'], ['returned', '2026-12-03T00:00:00Z']]),
+      // It waited at a pickup point, then went out to the door.
+      parcel('door', [['accepted', '2026-11-01T00:00:00Z'], ['ready_for_pickup', '2026-11-02T00:00:00Z'],
+        ['out_for_delivery', '2026-11-04T08:00:00Z'], ['delivered', '2026-11-04T12:00:00Z']]),
       parcel('invalid', [['accepted', 'invalid', 'DE'], ['delivered', '2026-12-02T00:00:00Z', 'CH']]),
     ], 'UTC');
     expect(stats).toMatchObject({ crossBorderCount: 0, domesticDeliveryCount: 0, longWaitDeliveryCount: 0, pickupDeliveryCount: 0, decemberDeliveryCount: 0 });

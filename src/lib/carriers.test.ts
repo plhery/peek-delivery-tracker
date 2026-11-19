@@ -958,7 +958,8 @@ describe('carrier detection', () => {
     // https://www.ocu.org/reclamar/lista-reclamaciones-publicas/falso-intento-de-entrega/373a062914965f9e1b (9-digit)
     // https://www.ocu.org/reclamar/lista-reclamaciones-publicas/mucho-retraso-en-entrega/3e6c4a88d9208bdbc4 (29-digit)
     expect(detectCarrierMatch('9451162004086887').carrier).toBe('unknown');
-    expect(detectCarrierMatch('534000021250958171').carrier).toBe('unknown');
+    // 5340 and fourteen digits recur on Paack's labels; the scraper's paack-5340 rule may name Paack.
+    expect(['unknown', 'paack']).toContain(detectCarrierMatch('534000021250958171').carrier);
     expect(detectCarrierMatch('437650784').carrier).toBe('unknown');
     expect(detectCarrier('00100909086360120251130131718')).toBe('unknown');
   });

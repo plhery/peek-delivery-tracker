@@ -1078,7 +1078,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
 
 UPU times have no reliable zone. Its scans are archived separately (up to 1,000 per
 number). Only newly observed milestones enter the visible timeline, stamped at observation
-time and flagged as lacking a provider time. UPU can update its own summary but never
+time and flagged as lacking a provider time. The API serves that flag (`observed`), and the
+apps list such a row, like any stage change seen without a carrier time, under the check's
+day with no time. UPU can update its own summary but never
 proves freshness against another source, and forecasts are ignored. See the
 [UPU README](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/upu/README.md).
 

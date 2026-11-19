@@ -6,7 +6,7 @@ import { Icon } from './Icon';
 
 type Wording = Parameters<typeof momentLabel>[1];
 /** A moment: an ISO time, or a scan, which may give its day alone. */
-type Moment = string | Pick<TrackingEvent, 'occurredAt' | 'day'>;
+type Moment = string | Pick<TrackingEvent, 'occurredAt' | 'day' | 'observed'>;
 
 const KEYS = {
   list: ['maintenance.list', 'maintenance.listPlanned'],

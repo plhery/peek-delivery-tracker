@@ -3855,6 +3855,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
     var location: String? = nil
     var occurredAt: String
     var day: String? = nil
+    var observed: Bool? = nil
     var place: EventPlace? = nil
     var relayOf: UUID? = nil
     var recipientAction: RecipientAction? = nil
@@ -3868,6 +3869,7 @@ struct TrackingEvent: Codable, Equatable, Hashable, Sendable, Identifiable {
         case location
         case occurredAt
         case day
+        case observed
         case place
         case relayOf
         case recipientAction

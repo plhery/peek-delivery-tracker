@@ -42,7 +42,7 @@ function sameDay(a: Date, b: Date): boolean {
  * A moment inside a sentence: the time when it is today, else the day and the
  * time ("yesterday, 08:12"). A scan dated by its day alone gives the day.
  */
-export function momentLabel(at: string | Pick<TrackingEvent, 'occurredAt' | 'day'>, { t, languageTag, now = Date.now(), use24HourTime }: Wording): string {
+export function momentLabel(at: string | Pick<TrackingEvent, 'occurredAt' | 'day' | 'observed'>, { t, languageTag, now = Date.now(), use24HourTime }: Wording): string {
   const when = scanDate(typeof at === 'string' ? { occurredAt: at } : at);
   if (!when) return '';
   const { date, timed } = when;

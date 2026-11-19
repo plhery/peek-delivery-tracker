@@ -2418,6 +2418,23 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(localizer.relativeTime(of: timed, now: now), "2 h ago")
     }
 
+    @MainActor
+    func testAStatusSeenAtACheckShowsTheCheckDayAndNoClockTime() throws {
+        let localizer = Localizer()
+        localizer.language = .en
+        let id = UUID()
+        let today = try XCTUnwrap(DateParser.deliveryDate("2026-09-21"))
+        let now = today.addingTimeInterval(15 * 3_600)
+        // The carrier gave no time for the status: the row's time is the check's, two hours ago.
+        var seen = event(id, .inTransit, DateParser.isoString(now.addingTimeInterval(-2 * 3_600)))
+        seen.observed = true
+        XCTAssertEqual(seen.calendarDay, today)
+        XCTAssertFalse(seen.showsTime)
+        XCTAssertEqual(localizer.relativeTime(of: seen, now: now), "today")
+        let earlier = makeParcel(id: id, events: [seen])
+        XCTAssertEqual(earlier.trackingEvents.first?.displayDate, today)
+    }
+
     func testPassportNewStampsUseExplicitScansAndLocalCompletionDates() throws {
         func shipment(_ scans: [(TrackingStage, String, String?)]) -> Parcel {
             let id = UUID()

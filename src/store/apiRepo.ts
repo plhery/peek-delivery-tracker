@@ -124,6 +124,7 @@ export function toEvent(row: ApiTrackingEventRow): TrackingEvent {
     place: row.place ?? undefined,
     occurredAt: row.occurred_at,
     day: row.day ?? undefined,
+    ...(row.observed ? { observed: true } : {}),
     relayOf: row.relay_of ?? undefined,
     recipientAction: row.recipient_action ?? undefined,
     tieOrder: row.tie_order ?? undefined,

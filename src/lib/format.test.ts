@@ -111,6 +111,11 @@ describe('scanDate', () => {
     expect(scanDate({ occurredAt: new Date(2026, 9, 2, 9, 12).toISOString(), day: '2026-02-30' })).toEqual({ date: new Date(2026, 9, 2, 9, 12), timed: true });
     expect(scanDate({ occurredAt: 'not a date' })).toBeNull();
   });
+
+  it('reads a status seen at a check as the check\'s day, untimed: the check\'s time is not the carrier\'s', () => {
+    expect(scanDate({ occurredAt: new Date(2026, 9, 2, 14, 5).toISOString(), observed: true })).toEqual({ date: new Date(2026, 9, 2), timed: false });
+    expect(scanDate({ occurredAt: 'not a date', observed: true })).toBeNull();
+  });
 });
 
 describe('timeZoneName', () => {

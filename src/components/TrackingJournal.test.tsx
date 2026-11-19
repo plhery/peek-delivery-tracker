@@ -219,6 +219,18 @@ describe('TrackingJournal', () => {
     expect(times.map(time => [time.getAttribute('datetime'), time.textContent])).toEqual([['2024-09-08', ''], ['2024-09-07T22:30:00', '22:30']]);
   });
 
+  it('shows no time for a status Peek saw at a check, listed under the check\'s day', () => {
+    const { container } = render(<TrackingJournal events={[
+      // The carrier gave no time: the row's time is the check's.
+      { ...event('seen', '2024-09-08T14:05:00', 'Inbound into customs'), observed: true },
+      event('sorted', '2024-09-07T22:30:00', 'Sorted'),
+    ]} />);
+    const groups = within(screen.getByRole('list', { name: 'Tracking history' })).getAllByRole('heading');
+    expect(groups.map(group => group.textContent)).toEqual(['Sun 8 Sep 2024', 'Sat 7 Sep 2024']);
+    const times = [...container.querySelectorAll('.tracking-journal__events time')];
+    expect(times.map(time => time.textContent)).toEqual(['', '22:30']);
+  });
+
   it('handles missing descriptions, invalid scan times and empty syncing history', () => {
     const { rerender } = render(<TrackingJournal events={[event('invalid', 'Unknown date', '')]} />);
     expect(screen.getByText('Unknown date')).toBeInTheDocument();

@@ -64392,6 +64392,7 @@ export interface ApiTrackingEventRow {
   "location": string | null;
   "occurred_at": string;
   "day"?: string;
+  "observed"?: boolean;
   "place"?: ApiEventPlace | null;
   "relay_of"?: string;
   "recipient_action"?: ApiRecipientAction;

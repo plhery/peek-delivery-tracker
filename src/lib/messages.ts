@@ -67,9 +67,9 @@ export function localizedRelativeTime(
   return localizedCalendarDate(new Date(iso), languageTag);
 }
 
-/** How long ago a scan was ("3 h ago"); a scan dated by its day alone gives that day ("yesterday"). */
+/** How long ago a scan was ("3 h ago"); a scan dated by its day alone, or seen at a check, gives that day ("yesterday"). */
 export function localizedScanAge(
-  event: Pick<TrackingEvent, 'occurredAt' | 'day'>,
+  event: Pick<TrackingEvent, 'occurredAt' | 'day' | 'observed'>,
   t: Translate,
   languageTag: string,
   now: number = Date.now(),

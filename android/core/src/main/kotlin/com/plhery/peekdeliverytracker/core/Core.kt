@@ -869,9 +869,16 @@ val Parcel.swissPostReady: Boolean get() = carrierData?.swissPostReady == true
 
 /**
  * The day of a scan the carrier dated by its day alone, as a local calendar day. Its `occurredAt` then only places
- * it in order, from the start of that day in the carrier's zone.
+ * it in order, from the start of that day in the carrier's zone. A status Peek saw at a check with no time from the
+ * carrier (`observed`) is the check's day: its `occurredAt` is the check's time, not the carrier's.
  */
-val TrackingEvent.calendarDay: Instant? get() = day?.let(DateParser::deliveryDate)
+val TrackingEvent.calendarDay: Instant?
+    get() = day?.let(DateParser::deliveryDate) ?: if (observed == true) {
+        DateParser.date(occurredAt)?.let { seen ->
+            val zone = ZoneId.systemDefault()
+            seen.atZone(zone).toLocalDate().atStartOfDay(zone).toInstant()
+        }
+    } else null
 
 /** The date to show for the scan: its day when it has no clock time, else its moment. */
 val TrackingEvent.displayDate: Instant? get() = calendarDay ?: DateParser.date(occurredAt)

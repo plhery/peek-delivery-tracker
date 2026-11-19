@@ -932,7 +932,7 @@ describe('withEventPlaces', () => {
   });
 });
 
-it('names the day of a scan the carrier dated without a clock time, and serves none of its stored times', () => {
+it('names the day of a scan the carrier dated without a clock time, flags a status seen at a check, and serves none of its stored times', () => {
   const stored = (id: string, times: Record<string, unknown>) => ({ ...event(id, null, '2026-10-19T00:00:00+00:00'), ...times });
   const row = { id: 'parcel', carrier: 'nacex', tracking_events: [
     stored('local-day', { local_time: '2026-10-19' }),
@@ -951,7 +951,10 @@ it('names the day of a scan the carrier dated without a clock time, and serves n
   const served = withEventPlaces(row) as { tracking_events: Array<Record<string, unknown>> };
   expect(days(served)).toEqual(expected);
   expect(days(withoutEventSources(row) as typeof served)).toEqual(expected);
-  expect(served.tracking_events.some((scan) => 'local_time' in scan || 'observed' in scan || 'time' in scan)).toBe(false);
+  expect(served.tracking_events.some((scan) => 'local_time' in scan || 'time' in scan)).toBe(false);
+  // Its time is the check's, not the carrier's: the apps show the day alone.
+  expect(served.tracking_events.filter((scan) => 'observed' in scan).map((scan) => [scan.id, scan.observed]))
+    .toEqual([['local-clock', true], ['observed', true]]);
 });
 
 it('serves a scan or stage change seen without the carrier\'s words without Peek\'s stand-in, so the apps name the stage', () => {

@@ -901,7 +901,13 @@ extension Parcel {
 extension TrackingEvent {
     /// The day of a scan the carrier dated by its day alone, as a local calendar day. Its
     /// `occurredAt` then only places it in order, from the start of that day in the carrier's zone.
-    var calendarDay: Date? { day.flatMap(DateParser.deliveryDate) }
+    /// A status Peek saw at a check with no time from the carrier (`observed`) is the check's day:
+    /// its `occurredAt` is the check's time, not the carrier's.
+    var calendarDay: Date? {
+        if let day = day.flatMap(DateParser.deliveryDate) { return day }
+        guard observed == true, let seen = DateParser.date(occurredAt) else { return nil }
+        return Calendar.current.startOfDay(for: seen)
+    }
 
     /// The date to show for the scan: its day when it has no clock time, else its moment.
     var displayDate: Date? { calendarDay ?? DateParser.date(occurredAt) }

@@ -29,13 +29,15 @@ function parseDeliveryDate(value: string): Date | null {
 /**
  * When a scan happened, on the reader's calendar. A scan the carrier dated by
  * its day alone is that day, with no time (`timed` false): its `occurredAt`
- * only puts it in order.
+ * only puts it in order. So is a status Peek saw at a check with no time from
+ * the carrier (`observed`), on the check's day: the check's time is not the scan's.
  */
-export function scanDate(event: Pick<TrackingEvent, 'occurredAt' | 'day'>): { date: Date; timed: boolean } | null {
+export function scanDate(event: Pick<TrackingEvent, 'occurredAt' | 'day' | 'observed'>): { date: Date; timed: boolean } | null {
   const day = event.day ? calendarDay(event.day) : null;
   if (day) return { date: day, timed: false };
   const date = new Date(event.occurredAt);
-  return Number.isNaN(date.getTime()) ? null : { date, timed: true };
+  if (Number.isNaN(date.getTime())) return null;
+  return event.observed ? { date: new Date(date.getFullYear(), date.getMonth(), date.getDate()), timed: false } : { date, timed: true };
 }
 
 const zoneNames = new Map<string, string>();

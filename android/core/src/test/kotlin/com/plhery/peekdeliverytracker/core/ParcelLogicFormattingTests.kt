@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 import java.util.UUID
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Test
 
@@ -161,6 +162,20 @@ class ParcelLogicFormattingTests {
         val timed = event(id, TrackingStage.InTransit, DateParser.isoString(now.minusSeconds(2 * 3_600L)))
         assertNull(timed.calendarDay)
         assertEquals("2 h ago", localizer.relativeTime(of = timed, now = now))
+    }
+
+    @Test
+    fun aStatusSeenAtACheckShowsTheCheckDayAndNoClockTime() {
+        val localizer = Localizer(AppLanguage.En)
+        val id = UUID.randomUUID()
+        val today = DateParser.deliveryDate("2026-09-21")!!
+        val now = today.plusSeconds(15 * 3_600L)
+        // The carrier gave no time for the status: the row's time is the check's, two hours ago.
+        val seen = event(id, TrackingStage.InTransit, DateParser.isoString(now.minusSeconds(2 * 3_600L))).copy(observed = true)
+        assertEquals(today, seen.calendarDay)
+        assertEquals(today, seen.displayDate)
+        assertFalse(seen.showsTime)
+        assertEquals("today", localizer.relativeTime(of = seen, now = now))
     }
 
     @Test

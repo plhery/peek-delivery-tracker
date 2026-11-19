@@ -3870,6 +3870,7 @@ data class TrackingEvent(
     val location: String? = null,
     @SerialName("occurred_at") val occurredAt: String,
     val day: String? = null,
+    val observed: Boolean? = null,
     val place: EventPlace? = null,
     @SerialName("relay_of") val relayOf: UUID? = null,
     @SerialName("recipient_action") val recipientAction: RecipientAction? = null,

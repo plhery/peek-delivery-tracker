@@ -116,6 +116,8 @@ export interface TrackingEvent {
   occurredAt: string; // ISO timestamp
   /** The day (YYYY-MM-DD) of a scan the carrier dated by its day alone; `occurredAt` then only puts it in order. */
   day?: string;
+  /** A status Peek saw at a check with no time from the carrier: `occurredAt` is the check's, so only its day shows. */
+  observed?: boolean;
   /** The scan of the new carrier this scan of the earlier one repeats; the timeline shows it under that scan. */
   relayOf?: string;
   /** What the carrier asks the recipient to do in this scan; the parcel needs action while it is the newest. */

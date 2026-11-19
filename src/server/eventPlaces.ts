@@ -53,13 +53,15 @@ function scanAction(event: JsonObject): string | undefined {
 
 /**
  * A scan with the times it was stored with read: the day it names, if any, and nothing else of
- * them. A wall clock in no zone dates its scan by its day too.
+ * them. A wall clock in no zone dates its scan by its day too. A status the sync saw with no time
+ * from the carrier is dated by the check that saw it, which the apps show as a day (`observed`).
  */
 function dated(event: JsonObject): JsonObject {
-  const day = event.observed === true ? null : scanDay(event) ?? clockDay(event);
+  const observed = event.observed === true;
+  const day = observed ? null : scanDay(event) ?? clockDay(event);
   const rest: JsonObject = { ...event, ...(day ? { day } : {}) };
   for (const key of ['time', 'local_time', 'observed']) delete rest[key];
-  return rest;
+  return observed ? { ...rest, observed: true } : rest;
 }
 
 /** A row Peek writes itself (`app:` source), such as "Tracking added". */

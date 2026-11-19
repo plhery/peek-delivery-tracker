@@ -68236,6 +68236,10 @@
             "format": "date",
             "description": "Set when the carrier dated the scan by its day alone, with no clock time: that day, as the carrier gave it. occurred_at then only places the scan in order, from the start of that day in the carrier's zone. Apps list the scan under this day and show no time for it."
           },
+          "observed": {
+            "type": "boolean",
+            "description": "True on a status Peek saw at a check when the carrier gave no time for it: occurred_at is the time of that check, not of a scan, and only places it in order. Apps list it under that check's day, on the reader's calendar, and show no time for it."
+          },
           "place": {
             "anyOf": [
               {

@@ -803,4 +803,10 @@ describe('toEvent', () => {
     expect(toEvent({ ...row, day: '2026-10-02' } as Parameters<typeof toEvent>[0]).day).toBe('2026-10-02');
     expect(toEvent(row as Parameters<typeof toEvent>[0]).day).toBeUndefined();
   });
+
+  it('keeps the flag of a status Peek saw at a check, whose time is the check\'s', () => {
+    const row = packageRow.tracking_events[0] as Parameters<typeof toEvent>[0];
+    expect(toEvent({ ...row, observed: true }).observed).toBe(true);
+    expect('observed' in toEvent(row)).toBe(false);
+  });
 });

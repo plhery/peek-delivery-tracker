@@ -10207,7 +10207,8 @@
       "timezone": "Europe/Moscow",
       "tracking": {
         "mode": "automatic",
-        "adapter": "5post"
+        "adapter": "5post",
+        "recognitionRank": 691
       },
       "trackingUrlTemplate": "https://fivepost.ru/tracking?id={trackingNumber}",
       "linkRules": [
@@ -10222,7 +10223,12 @@
           ]
         }
       ],
-      "detectionRules": [],
+      "detectionRules": [
+        {
+          "pattern": "^P\\d{11}$",
+          "confidence": "low"
+        }
+      ],
       "trackingSearchUrl": "https://fivepost.ru/"
     },
     "a-duie-pyle": {
@@ -23516,6 +23522,10 @@
         {
           "pattern": "^JSE[A-Z]{2}\\d{10}YQ$",
           "confidence": "high"
+        },
+        {
+          "pattern": "^JCHSG\\d{13}$",
+          "confidence": "low"
         }
       ],
       "trackingSearchUrl": "https://www.js-exp.com/index.php?catid=19",
@@ -36431,7 +36441,7 @@
       "timezone": "Europe/London",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "apg-ecommerce"
       },
       "trackingUrlTemplate": "https://apgecommerce.com/track-result/?track_sequenceNo={trackingNumber}",
       "linkRules": [
@@ -62372,13 +62382,14 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "jch"
+        "adapter": "jch",
+        "recognitionRank": 19
       },
       "linkRules": [],
       "detectionRules": [
         {
           "pattern": "^JCHSG\\d{13}$",
-          "confidence": "high"
+          "confidence": "low"
         }
       ]
     },

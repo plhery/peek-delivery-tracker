@@ -10202,7 +10202,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "5post"
+      "adapter": "5post",
+      "recognitionRank": 691
     },
     "trackingUrlTemplate": "https://fivepost.ru/tracking?id={trackingNumber}",
     "linkRules": [
@@ -10217,7 +10218,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^P\\d{11}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://fivepost.ru/"
   },
   "a-duie-pyle": {
@@ -23511,6 +23517,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^JSE[A-Z]{2}\\d{10}YQ$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^JCHSG\\d{13}$",
+        "confidence": "low"
       }
     ],
     "trackingSearchUrl": "https://www.js-exp.com/index.php?catid=19",
@@ -36426,7 +36436,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "apg-ecommerce"
     },
     "trackingUrlTemplate": "https://apgecommerce.com/track-result/?track_sequenceNo={trackingNumber}",
     "linkRules": [
@@ -62367,13 +62377,14 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "jch"
+      "adapter": "jch",
+      "recognitionRank": 19
     },
     "linkRules": [],
     "detectionRules": [
       {
         "pattern": "^JCHSG\\d{13}$",
-        "confidence": "high"
+        "confidence": "low"
       }
     ]
   },

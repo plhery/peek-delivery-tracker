@@ -3453,6 +3453,14 @@ export class TrackingSyncService {
         values.carrier = fetched.correction.carrier;
         values.tracking_url = fetched.correction.trackingUrl;
         values.dpd_postcode = fetched.correction.postcode;
+        // The carrier it leaves keeps no failure: it is no source of the parcel any more, and its
+        // wait or refusal would still count among the parcel's sources (the reader's first pick).
+        const data = isRecord(values.carrier_data) ? values.carrier_data : null;
+        const saved = data && isRecord(data.routing) ? data.routing : null;
+        if (data && saved && isRecord(saved.failures) && carrierId in saved.failures && carrierId !== fetched.correction.carrier) {
+          const failures = Object.fromEntries(Object.entries(saved.failures).filter(([source]) => source !== carrierId));
+          values.carrier_data = { ...data, routing: { ...saved, failures } };
+        }
         if (identifiedOnOlderCopy && isRecord(values.carrier_data)) {
           values.carrier_data = { ...values.carrier_data,
             discovered_carrier: result.discovered_carrier, reported_carriers: result.reported_carriers };

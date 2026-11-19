@@ -2448,6 +2448,8 @@ describe('TrackingSyncService', () => {
     expect(saved).toMatchObject({ carrier: 'ups', tracking_url: null, dpd_postcode: null, carrier_data: {
       auto_changed_from: 'dhl', auto_changed_to: 'ups', auto_changed_at: now.toISOString(),
     } });
+    // The carrier it left keeps no failure among the parcel's sources.
+    expect(saved.carrier_data.routing.failures).not.toHaveProperty('dhl');
     expect(client.applyTrackingSync.mock.calls.at(-1)?.[2]).toHaveLength(1);
     expect(report).toHaveBeenCalledWith('carrier_auto_swapped', expect.objectContaining({ carrier: 'dhl', provider: 'ups' }));
     now = new Date('2026-09-10T13:00:00Z');

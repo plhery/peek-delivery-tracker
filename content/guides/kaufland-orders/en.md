@@ -4,7 +4,7 @@ description: Kaufland lists no online marketplace in the UK. Where it sells, as 
 slug: kaufland-order-tracking
 picture: A shopping basket full of parcels beside a delivery van, and Pip standing on the parcels.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-19
 ---
 
 Kaufland lists nine online marketplaces, and none of them is in the UK, Ireland, the US, Canada or Australia: they're in Germany, the Czech Republic, Slovakia, Poland, Austria, France, Italy, Spain and the Netherlands. On kaufland.de, most items come from other sellers. The seller ships its own parcel with a carrier it chooses, and when it adds the carrier and a tracking link, Kaufland emails them to you.
@@ -126,7 +126,7 @@ Yes: paste the tracking number from Kaufland's shipping email into [Peek](/). Pe
 - Hermes: `H` and 16 to 19 digits, like `H1000000000000000`.
 - UPS: `1Z` and 16 letters or digits.
 
-DHL's 12-digit numbers, the 14-digit numbers of Hermes and DPD, and GLS's 11 or 12 digits share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier, the one named in Kaufland's shipping email if the seller gave it. For Schenker, paste its number, and if Peek shows another carrier, press "Change" and pick Schenker, which Peek lists under DSV. For another freight forwarder, a seller abroad or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
+DHL's 12-digit numbers, the 14-digit numbers of Hermes and DPD, and GLS's 11 or 12 digits share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. If several know it, Peek lists each of them, marked "Knows this number"; if it shows the wrong one, press "Change". Either way, pick the carrier named in Kaufland's shipping email, if the seller gave it. For Schenker, paste its number, and if Peek shows another carrier, press "Change" and pick Schenker, which Peek lists under DSV. For another freight forwarder, a seller abroad or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Tickets, cancellations, refunds and returns stay with Kaufland and the seller.
 

@@ -4,7 +4,7 @@ description: Qui livre ta commande Decathlon en France, en Belgique et en Suisse
 slug: suivi-commande-decathlon
 picture: Un long carton de vélo et un ballon de foot à côté d'une camionnette de livraison, et Pip en équilibre sur le ballon.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-19
 ---
 
 Decathlon t'envoie une confirmation d'expédition avec le lien de suivi dès que ton colis part chez le transporteur, et tu suis aussi la commande dans ton compte, sur le site ou dans l'appli. En France, Decathlon nomme Mondial Relay, Colissimo et Chronopost pour les points relais, en Belgique bpost et PostNL, en Suisse La Poste et DPD. Un article « Vendu et expédié par » un partenaire arrive à part, avec son propre suivi, mais c'est le service client Decathlon qui te répond en cas de problème.
@@ -132,7 +132,7 @@ Où trouver le numéro de suivi du retour : [suivre un retour](guide:returns-tra
 
 Oui, avec le numéro du transporteur : colle-le dans [Peek](/). Peek reconnaît à leur seule forme les numéros Colissimo et Chronopost du tableau, les numéros bpost commençant par `JJBE`, les numéros PostNL commençant par `3S`, les numéros de 18 chiffres de La Poste suisse et les numéros Planzer commençant par `99990`.
 
-Les numéros DPD de 14 chiffres, les numéros bpost de 24 chiffres et les numéros Mondial Relay de 8, 10 ou 12 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un partenaire qui expédie avec un autre transporteur, colle le numéro quand même : Peek suit plus de 3 500 transporteurs. Si la commande arrive en plusieurs colis, ajoute chaque numéro.
+Les numéros DPD de 14 chiffres, les numéros bpost de 24 chiffres et les numéros Mondial Relay de 8, 10 ou 12 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, Peek les affiche chacun avec « Connaît ce numéro » : choisis celui que nomme ton e-mail d'expédition. S'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un partenaire qui expédie avec un autre transporteur, colle le numéro quand même : Peek suit plus de 3 500 transporteurs. Si la commande arrive en plusieurs colis, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours passent par Decathlon.
 

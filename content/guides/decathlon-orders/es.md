@@ -4,7 +4,7 @@ description: Quién entrega tu pedido de Decathlon en España, dónde está el s
 slug: seguimiento-pedido-decathlon
 picture: Una caja larga de bicicleta y un balón de fútbol junto a una furgoneta de reparto, y Pip haciendo equilibrio sobre el balón.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-19
 ---
 
 Decathlon te manda un correo con el seguimiento cuando el pedido sale del almacén, y también lo sigues en tu espacio personal. Para los puntos de recogida nombra a SEUR, InPost, Paack y GLS. No dice quién lleva la entrega a domicilio: el correo de envío trae el número de seguimiento de la empresa que lo entrega. Los productos de Marketplace los envía otro vendedor, con su propio número de seguimiento, y se devuelven online, nunca en tienda.
@@ -127,7 +127,7 @@ Haz un paquete por pedido, y uno por vendedor si el pedido tiene varios. El dine
 
 ## ¿Puedo seguir un pedido de Decathlon en Peek?
 
-Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce solo por la forma los números de Paack que empiezan por `PK`. Los de SEUR, de 14 cifras, y los de GLS, de 10, comparten forma con otros transportistas. Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Con un número de InPost, pégalo, pulsa «Cambiar» y elige Mondial Relay, que aparece si buscas InPost.
+Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce solo por la forma los números de Paack que empiezan por `PK`. Los de SEUR, de 14 cifras, y los de GLS, de 10, comparten forma con otros transportistas. Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, Peek los muestra todos con «Conoce este número»: elige el que nombra tu email de envío. Si muestra el que no es, pulsa «Cambiar» y elige el correcto. Con un número de InPost, pégalo, pulsa «Cambiar» y elige Mondial Relay, que aparece si buscas InPost.
 
 Si te lo entrega otra empresa, o un vendedor de Marketplace con su propio transportista, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
 

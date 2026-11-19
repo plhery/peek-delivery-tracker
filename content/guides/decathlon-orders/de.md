@@ -4,7 +4,7 @@ description: Wer deine Decathlon-Bestellung in Deutschland, Österreich und der 
 slug: decathlon-sendungsverfolgung
 picture: Ein langer Fahrradkarton und ein Fußball neben einem Lieferwagen, und Pip balanciert auf dem Ball.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-19
 ---
 
 Sobald deine Decathlon-Bestellung verschickt ist, bekommst du eine Versandbestätigung per E-Mail mit der Sendungsnummer. In Deutschland findest du sie auch im Konto unter „Meine Einkäufe“ > „Details ansehen“. In Deutschland liefern DHL und Hermes, in Österreich die Österreichische Post, in der Schweiz die Schweizerische Post oder DPD. Ein Artikel mit „Verkauf und Versand durch“ und dem Namen eines Partners kommt separat, aber der Decathlon-Kundenservice bleibt dein Ansprechpartner.
@@ -131,7 +131,7 @@ Die Rücksendung verfolgen: [Retoure verfolgen](guide:returns-tracking).
 
 Ja, mit der Sendungsnummer: Füg sie in [Peek](/) ein. Die DHL- und Hermes-Nummern aus der Tabelle, die Nummern der Österreichischen Post auf `AT`, die 18-stelligen Nummern der Schweizerischen Post und die Planzer-Nummern ab `99990` erkennt Peek allein an ihrer Form.
 
-Die 14-stelligen DPD-Nummern und die 22- oder 24-stelligen Nummern der Österreichischen Post teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für Sperrgut in Österreich, das Hermes 2manhandling mit Gebrüder Weiss bringt, fügst du die Nummer ein, tippst auf „Ändern“ und wählst Hermes Österreich oder Gebrüder Weiss. Verschickt ein Partner mit einem anderen Dienst, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
+Die 14-stelligen DPD-Nummern und die 22- oder 24-stelligen Nummern der Österreichischen Post teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, listet Peek jeden mit „Kennt diese Nummer“ auf: Wähl den, den deine Versand-E-Mail nennt. Zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für Sperrgut in Österreich, das Hermes 2manhandling mit Gebrüder Weiss bringt, fügst du die Nummer ein, tippst auf „Ändern“ und wählst Hermes Österreich oder Gebrüder Weiss. Verschickt ein Partner mit einem anderen Dienst, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Meldungen, Erstattungen und Rückgaben laufen über Decathlon.
 

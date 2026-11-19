@@ -4,7 +4,7 @@ description: Na Kaufland.pl paczki wysyłają sprzedawcy. Kto dostarcza zamówie
 slug: sledzenie-zamowienia-kaufland
 picture: Koszyk na zakupy pełen paczek obok furgonetki kurierskiej, a na paczkach stoi Pip.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-19
 ---
 
 Kaufland.pl to polska platforma handlowa Kauflandu, jedna z dziewięciu, które Kaufland ma w Europie. Towary sprzedają tam sprzedawcy z Polski i całej Europy. Każdy sprzedawca sam wysyła swoją paczkę wybranym przez siebie przewoźnikiem, a gdy poda przewoźnika i link do śledzenia, Kaufland przesyła ci je e-mailem. Jeśli coś pójdzie nie tak, piszesz z poziomu zamówienia: wiadomość trafia do sprzedawcy, a Dział Obsługi Klienta Kauflandu może się włączyć.
@@ -127,7 +127,7 @@ Tak: wklej do [Peek](/) numer przesyłki z e-maila o wysyłce od Kauflandu. Te n
 - DHL: większość 20-cyfrowych numerów zaczynających się od `00340434`, jak `00340434100000000007`, oraz większość numerów międzynarodowych kończących się na `DE`, jak `RR000000005DE`.
 - UPS: `1Z` i 16 liter lub cyfr.
 
-24-cyfrowe numery InPost, 14-cyfrowe numery DPD, 11-cyfrowe numery GLS i numery ORLEN Paczki mają ten sam kształt co numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego, tego z e-maila o wysyłce od Kauflandu, jeśli sprzedawca go podał. Przy FedEx, Raben Group albo Schenkerze wklej numer, a jeśli Peek pokaże innego przewoźnika, naciśnij „Zmień” i wybierz właściwego; Schenkera Peek ma pod nazwą DSV. Dla innej firmy spedycyjnej, sprzedawcy z zagranicy albo przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamówienie przychodzi w kilku paczkach, dodaj każdy numer.
+24-cyfrowe numery InPost, 14-cyfrowe numery DPD, 11-cyfrowe numery GLS i numery ORLEN Paczki mają ten sam kształt co numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, Peek pokazuje każdego z dopiskiem „Zna ten numer”; jeśli pokaże złego, naciśnij „Zmień”. W obu przypadkach wybierz przewoźnika z e-maila o wysyłce od Kauflandu, jeśli sprzedawca go podał. Przy FedEx, Raben Group albo Schenkerze wklej numer, a jeśli Peek pokaże innego przewoźnika, naciśnij „Zmień” i wybierz właściwego; Schenkera Peek ma pod nazwą DSV. Dla innej firmy spedycyjnej, sprzedawcy z zagranicy albo przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamówienie przychodzi w kilku paczkach, dodaj każdy numer.
 
 Jeśli paczka zmieni przewoźnika po drodze, a pierwszy poda, kto ją przejmuje, Peek zachowa historię od początku i będzie śledzić nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik. Zgłoszenia, anulowania, zwroty pieniędzy i zwroty towaru pozostają sprawą Kauflandu i sprzedawcy.
 

@@ -4,7 +4,7 @@ description: Quem entrega a tua encomenda Decathlon em Portugal, onde está o c�
 slug: seguimento-encomenda-decathlon
 picture: Uma caixa comprida de bicicleta e uma bola de futebol ao lado de uma carrinha de entregas, e o Pip em equilíbrio em cima da bola.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-19
 ---
 
 A Decathlon manda-te um e-mail com o código de seguimento quando a encomenda sai do armazém, e o mesmo código fica na tua área pessoal. Quem entrega depende do método: a Decathlon nas lojas, os CTT e a DPD nos pontos de recolha, e ao domicílio uma das transportadoras com que trabalha. Os volumosos com a Logic não têm seguimento: recebes um SMS na véspera. Os artigos Marketplace envia-os o vendedor, com o seu número, e só se devolvem no site.
@@ -135,7 +135,7 @@ O reembolso vai para o mesmo meio de pagamento; se pagaste por referência Multi
 
 ## Posso seguir uma encomenda Decathlon no Peek?
 
-Sim, com o número da transportadora: cola-o no [Peek](/). O Peek reconhece pela forma, sem mais nada, os números CTT, NACEX e Paack da tabela. Os da DPD, de 14 algarismos, têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa.
+Sim, com o número da transportadora: cola-o no [Peek](/). O Peek reconhece pela forma, sem mais nada, os números CTT, NACEX e Paack da tabela. Os da DPD, de 14 algarismos, têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, o Peek mostra-as todas com «Conhece este número»: escolhe a que o teu email de envio indica. Se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa.
 
 Com a VASP, cola o número, carrega em «Alterar» e escolhe a Vasp Expresso. Com a TTMB, a ExigentExpress ou um vendedor Marketplace, que escolhe a sua transportadora, cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se a encomenda vier em vários envios, adiciona cada número.
 

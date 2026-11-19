@@ -3,7 +3,7 @@ title: DHL eCommerce Sendungsverfolgung: GM-Nummer, Status, Kontakt
 description: DHL-eCommerce-Paket verfolgen (früher DHL Global Mail): die GM-Nummer, was die englischen Status heißen, wer zustellt und wen du fragst, wenn es hängt.
 slug: dhl-ecommerce-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-19
 ---
 
 DHL eCommerce, früher DHL Global Mail, ist der Paketbereich von DHL für Online-Shops. Es sortiert dein Paket in seinen eigenen Verteilzentren und übergibt es dann einem Zusteller im Zielland: der Post vor Ort oder einem anderen Paketdienst. Verfolgen kannst du es mit der Nummer aus der Versandmail des Shops auf Webtrack, der Tracking-Seite von DHL eCommerce, oder im Feld oben.
@@ -15,6 +15,7 @@ Nummern von DHL eCommerce haben mindestens zehn Zeichen und beginnen meist mit G
 | Nummer (erfunden) | Was sie ist |
 | --- | --- |
 | `GM0000000000000000` | GM und 16 bis 18 Ziffern: die GM-Nummer, die übliche Form bei DHL eCommerce. |
+| `GM0000000000` | GM und 8 bis 15 Ziffern: eine kürzere GM-Nummer. |
 | `0000000000000000` | 16 oder 17 Ziffern: eine weitere Form von DHL eCommerce. |
 | `0031000000000000000000000000000` | 0031 und 27 Ziffern: ebenfalls DHL eCommerce. |
 | `9261000000000000000000` | 22 Ziffern mit 9261 oder 9361 vorne: die USPS-Nummer, die ein Paket in den USA nach der Übergabe an USPS trägt. |
@@ -93,7 +94,7 @@ Verdächtige Nachricht? Gefälschte SMS erkennst du laut dhl.de oft an einem gek
 
 ## DHL eCommerce mit Peek verfolgen
 
-[Peek](/) erkennt eine GM-Nummer sofort als DHL eCommerce. Bei Formen, die sich mehrere Paketdienste teilen, fragt Peek DHL eCommerce und die anderen wahrscheinlichen gleichzeitig: TNT bei 16 Ziffern, bei passender Prüfziffer auch Evri UK, Canada Post und Correos Express; Colis Privé bei 17; die [Österreichische Post](carrier:austrian-post) bei einer 9261- oder 9361-Nummer, und kennen beide sie nicht, öffnet Peek zuletzt die Seite von USPS. Kennt nur DHL eCommerce die Nummer, steht da „DHL eCommerce hat dieses Paket.“ Kennen mehrere Marken die Nummer, wählst du mit „Ändern“, das für DHL eCommerce jede Folge aus 5 bis 40 Buchstaben und Ziffern annimmt. Links von webtrack.dhlglobalmail.com und ecommerceportal.dhl.com funktionieren auch, Tracking-Links von dhl.com nur, wenn die Nummer darin eine Form von DHL eCommerce hat.
+[Peek](/) erkennt GM mit 16 bis 18 Ziffern sofort als DHL eCommerce. Eine kürzere GM-Nummer mit 8 bis 15 Ziffern prüft Peek bei DHL eCommerce und den anderen Paketdiensten mit dieser Form. Bei Formen, die sich mehrere Paketdienste teilen, fragt Peek DHL eCommerce und die anderen wahrscheinlichen gleichzeitig: TNT bei 16 Ziffern, bei passender Prüfziffer auch Evri UK, Canada Post und Correos Express; Colis Privé bei 17; die [Österreichische Post](carrier:austrian-post) bei einer 9261- oder 9361-Nummer, und kennen beide sie nicht, öffnet Peek zuletzt die Seite von USPS. Kennt nur DHL eCommerce die Nummer, steht da „DHL eCommerce hat dieses Paket.“ Kennen mehrere Marken die Nummer, listet Peek jede mit „Kennt diese Nummer“ auf, und du wählst deine; „Ändern“ nimmt für DHL eCommerce jede Folge aus 5 bis 40 Buchstaben und Ziffern an. Links von webtrack.dhlglobalmail.com und ecommerceportal.dhl.com funktionieren auch, Tracking-Links von dhl.com nur, wenn die Nummer darin eine Form von DHL eCommerce hat.
 
 Gefragt wird zuerst Webtrack. Kennt Webtrack das Paket nicht, wird DHLs globale Tracking-Seite auf dhl.com geöffnet. Das dauert länger und kann scheitern, wenn DHL automatische Besuche blockiert.
 

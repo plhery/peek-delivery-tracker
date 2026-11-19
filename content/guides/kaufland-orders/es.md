@@ -4,7 +4,7 @@ description: Kaufland vende online en España en kaufland.es. Quién envía cada
 slug: seguimiento-pedido-kaufland
 picture: Una cesta de la compra llena de paquetes junto a una furgoneta de reparto, y Pip de pie sobre los paquetes.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-19
 ---
 
 Kaufland tiene nueve marketplaces online, y uno de ellos es el de España: kaufland.es, abierto a vendedores locales e internacionales. Cada vendedor envía su propio paquete con el transportista que elige y, cuando indica el transportista y un enlace de seguimiento, Kaufland te los manda por email. Si algo falla, escribes en el pedido: tu mensaje llega al vendedor, y el servicio de atención al cliente de Kaufland puede intervenir.
@@ -127,7 +127,7 @@ Sí: pega en [Peek](/) el número de seguimiento del email de envío de Kaufland
 - DHL: la mayoría de los números de 20 cifras que empiezan por `00340434`, como `00340434100000000007`, y la mayoría de los números internacionales que terminan en `DE`, como `RR000000005DE`.
 - UPS: `1Z` y 16 letras o cifras.
 
-Los números de 14 cifras de SEUR y DPD y los de GLS tienen la misma forma que los de otros transportistas. Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto, el que nombra el email de envío de Kaufland si el vendedor lo indicó. Con Mondial Relay, Redur, Dachser o Schenker, pega el número y, si Peek muestra otro transportista, pulsa «Cambiar» y elígelo; Mondial Relay también aparece como InPost Spain, y Schenker está en Peek bajo DSV. Para otra empresa de transporte, un vendedor de fuera o un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
+Los números de 14 cifras de SEUR y DPD y los de GLS tienen la misma forma que los de otros transportistas. Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, Peek los muestra todos con «Conoce este número»; si muestra el que no es, pulsa «Cambiar». En los dos casos, elige el que nombra el email de envío de Kaufland, si el vendedor lo indicó. Con Mondial Relay, Redur, Dachser o Schenker, pega el número y, si Peek muestra otro transportista, pulsa «Cambiar» y elígelo; Mondial Relay también aparece como InPost Spain, y Schenker está en Peek bajo DSV. Para otra empresa de transporte, un vendedor de fuera o un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
 
 Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Los tickets, las cancelaciones, los reembolsos y las devoluciones siguen en manos de Kaufland y del vendedor.
 

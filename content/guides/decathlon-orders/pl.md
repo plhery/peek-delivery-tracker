@@ -4,7 +4,7 @@ description: Kto doręcza zamówienie z Decathlonu w Polsce, gdzie znaleźć num
 slug: sledzenie-zamowienia-decathlon
 picture: Długi karton z rowerem i piłka nożna obok furgonetki dostawczej, a Pip balansuje na piłce.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-19
 ---
 
 Gdy paczka wyjeżdża z magazynu, Decathlon wysyła ci osobny e-mail z linkiem do śledzenia u przewoźnika. Status zamówienia widzisz też w „Historii zakupów” na stronie i w aplikacji. Paczkomaty obsługuje InPost, kurierem jeździ FedEx albo DPD, gabaryty wozi Zadbano, a dostawę ekspresową w 2 godziny kurier Uber. Produkty od sprzedawców Marketplace przychodzą osobno, od sprzedawcy, i odsyłasz je do niego.
@@ -124,7 +124,7 @@ Pieniądze wracają tą samą metodą płatności, najpóźniej 14 dni po przyj�
 
 ## Czy mogę śledzić paczkę z Decathlonu w Peek?
 
-Tak, z numerem przewoźnika: wklej go do [Peek](/). Numery DPD z tabeli Peek rozpoznaje po samym kształcie. 24 cyfry InPostu i 13 cyfr FedExu mają też inni przewoźnicy, więc Peek pyta prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika.
+Tak, z numerem przewoźnika: wklej go do [Peek](/). Numery DPD z tabeli Peek rozpoznaje po samym kształcie. 24 cyfry InPostu i 13 cyfr FedExu mają też inni przewoźnicy, więc Peek pyta prawdopodobnych i pokazuje tego, który zna numer. Jeśli zna go kilku, Peek pokazuje każdego z dopiskiem „Zna ten numer”: wybierz tego, którego podaje e-mail o wysyłce. Jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika.
 
 Numer od Zadbano, kuriera Uber albo przewoźnika wybranego przez sprzedawcę Marketplace wklej mimo to: Peek śledzi ponad 3500 przewoźników. Gdy zamówienie przyjdzie w kilku paczkach, dodaj każdy numer.
 

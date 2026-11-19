@@ -4,7 +4,7 @@ description: Su Kaufland.it spediscono i venditori. Chi consegna l'ordine, dove 
 slug: tracciamento-ordine-kaufland
 picture: Un cestino della spesa pieno di pacchi accanto a un furgone delle consegne, e Pip in piedi sui pacchi.
 published: 2026-10-27
-updated: 2026-10-27
+updated: 2026-11-19
 ---
 
 Kaufland.it è il marketplace italiano di Kaufland, uno dei nove che Kaufland ha in Europa. È aperto a rivenditori locali e internazionali. Ogni venditore spedisce il proprio pacco con il corriere che sceglie e, quando inserisce il corriere e un link di tracciamento, Kaufland te li manda per email. Se qualcosa va storto, scrivi dall'ordine: il messaggio arriva al venditore, e l'Assistenza clienti di Kaufland può intervenire.
@@ -128,7 +128,7 @@ Sì: incolla su [Peek](/) il numero di tracking dell'email di spedizione di Kauf
 - DHL: la maggior parte dei numeri di 20 cifre che iniziano con `00340434`, come `00340434100000000007`, e la maggior parte dei numeri internazionali che finiscono con `DE`, come `RR000000005DE`.
 - UPS: `1Z` e 16 lettere o cifre.
 
-Per i numeri BRT, GLS Italy, TNT Italy e DPD la forma da sola non basta. Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto, quello nominato nell'email di spedizione di Kaufland se il venditore l'ha indicato. Con SDA, Amazon Shipping o Schenker, incolla il numero e, se Peek mostra un altro corriere, premi «Cambia» e sceglilo; SDA si trova insieme a Poste Italiane, Schenker sotto DSV. Per un altro spedizioniere, un venditore dall'estero o un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 3.500 corrieri. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
+Per i numeri BRT, GLS Italy, TNT Italy e DPD la forma da sola non basta. Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, Peek li mostra tutti con «Conosce questo numero»; se mostra quello sbagliato, premi «Cambia». In entrambi i casi scegli il corriere nominato nell'email di spedizione di Kaufland, se il venditore l'ha indicato. Con SDA, Amazon Shipping o Schenker, incolla il numero e, se Peek mostra un altro corriere, premi «Cambia» e sceglilo; SDA si trova insieme a Poste Italiane, Schenker sotto DSV. Per un altro spedizioniere, un venditore dall'estero o un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 3.500 corrieri. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
 
 Se un pacco cambia corriere durante il viaggio e il primo nomina quello che lo prende in carico, Peek tiene lo storico dall'inizio e segue il nuovo corriere. Peek mostra ciò che pubblica il corriere. Ticket, annullamenti, rimborsi e resi restano affare di Kaufland e del venditore.
 

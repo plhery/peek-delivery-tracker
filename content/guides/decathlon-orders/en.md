@@ -4,7 +4,7 @@ description: Who delivers a Decathlon order in the UK, Ireland, Canada, Australi
 slug: decathlon-order-tracking
 picture: A long bike box and a football beside a delivery van, and Pip balancing on the ball.
 published: 2026-10-25
-updated: 2026-10-25
+updated: 2026-11-19
 ---
 
 Decathlon UK e-mails you once your order ships, and shortly after you can track it on the carrier's website or in your Decathlon account, under Purchases. Decathlon UK doesn't name its home-delivery carriers: it names ASDA stores as pick-up points and Royal Mail for returns. Decathlon Ireland, Canada and Australia do name theirs. An item "sold and shipped by a third party seller" comes separately, but you still contact Decathlon if something goes wrong.
@@ -136,7 +136,7 @@ To track the return parcel: [tracking a return](guide:returns-tracking).
 
 Yes, with the carrier's tracking number: paste it into [Peek](/). Peek recognises the Royal Mail, An Post and Canada Post numbers ending in `GB`, `IE` and `CA` and the UPS numbers starting with `1Z` by their shape alone.
 
-Numbers made only of digits, such as Canada Post's 16-digit ones, share their shape with other carriers. Peek then asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. Decathlon UK and the US don't name their home carriers, so paste the number all the same: Peek follows more than 3,500 carriers. Do the same with an Xpect number. For a TNT Australia number, or a Nationex number in Canada, paste it, press "Change" and pick TNT Australia or Nationex. If the order comes in several parcels, add each number.
+Numbers made only of digits, such as Canada Post's 16-digit ones, share their shape with other carriers. Peek then asks the likely carriers and shows the one that knows the number. If several know it, Peek lists each of them, marked "Knows this number": pick the one your shipping email names. If it shows the wrong one, press "Change" and pick the right carrier. Decathlon UK and the US don't name their home carriers, so paste the number all the same: Peek follows more than 3,500 carriers. Do the same with an Xpect number. For a TNT Australia number, or a Nationex number in Canada, paste it, press "Change" and pick TNT Australia or Nationex. If the order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Reports, refunds and returns go through Decathlon.
 

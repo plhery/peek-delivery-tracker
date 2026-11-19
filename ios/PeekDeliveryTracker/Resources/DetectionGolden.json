@@ -49257,6 +49257,14 @@
     "candidates": []
   },
   {
+    "input": "4XP3001521662170CN",
+    "carrier": "four-px",
+    "confidence": "high",
+    "candidates": [
+      "four-px"
+    ]
+  },
+  {
     "input": "500000000532150GLS",
     "carrier": "unknown",
     "confidence": "none",
@@ -52153,43 +52161,25 @@
   },
   {
     "input": "534000021250958171",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "paack",
+    "confidence": "high",
     "candidates": [
-      "paack",
-      "bpost",
-      "ecoscooting",
-      "gls-es"
-    ],
-    "preferred": [
       "paack"
     ]
   },
   {
     "input": "534000021263149358",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "paack",
+    "confidence": "high",
     "candidates": [
-      "paack",
-      "bpost",
-      "ecoscooting",
-      "gls-es"
-    ],
-    "preferred": [
       "paack"
     ]
   },
   {
     "input": "534000021265325582",
-    "carrier": "unknown",
-    "confidence": "low",
+    "carrier": "paack",
+    "confidence": "high",
     "candidates": [
-      "paack",
-      "bpost",
-      "ecoscooting",
-      "gls-es"
-    ],
-    "preferred": [
       "paack"
     ]
   },
@@ -93972,6 +93962,14 @@
     "candidates": []
   },
   {
+    "input": "L1234566SW1A1AA",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dx"
+    ]
+  },
+  {
     "input": "L20001711000223891",
     "carrier": "unknown",
     "confidence": "low",
@@ -104240,6 +104238,17 @@
     ]
   },
   {
+    "input": "RR999999987DY",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "RR999999987EN",
     "carrier": "unknown",
     "confidence": "low",
@@ -104286,6 +104295,17 @@
     ]
   },
   {
+    "input": "RR999999987OI",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "RR999999987TS",
     "carrier": "chronopost",
     "confidence": "high",
@@ -104306,6 +104326,17 @@
     ],
     "asked": [
       "aliexpress",
+      "chronopost"
+    ]
+  },
+  {
+    "input": "RR999999987XB",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
       "chronopost"
     ]
   },

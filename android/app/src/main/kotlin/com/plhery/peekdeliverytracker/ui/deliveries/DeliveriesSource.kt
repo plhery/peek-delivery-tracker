@@ -302,7 +302,7 @@ interface DeliveriesSource {
     /** Leaves the demo for the first screen. */
     fun showWelcome()
 
-    /** `session.showSignIn()`: the sign-in screen, from a guest's Add or the first open's masthead. */
+    /** `store.showSignIn()`: the sign-in screen over a guest's list, from Add, Settings, Friends or the first open's masthead. */
     fun showSignIn()
 
     /** `session.enterDemo()`: the demo, from the first open of a build without a server. */
@@ -619,7 +619,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun showWelcome() = container.session.showWelcome()
 
-    override fun showSignIn() = container.session.showSignIn()
+    override fun showSignIn() = container.parcels.showSignIn()
 
     override fun enterDemo() = container.session.enterDemo()
 

@@ -483,7 +483,8 @@ class AppContainer(
             parcelsIdentity.distinctUntilChanged().collectLatest {
                 if (session.isAuthenticated || session.isGuest) {
                     parcels.start()
-                } else if (session.state != AuthenticationState.Loading) {
+                } else if (session.state != AuthenticationState.Loading && !session.signInOverDeviceList) {
+                    // Over a guest's list, the sign-in leaves the widget and its shortcut to it until someone signs in.
                     parcels.clearDeliverySurfaces()
                 }
             }

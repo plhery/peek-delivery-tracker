@@ -311,6 +311,7 @@ class SessionStore(
         get() = stateValue.value
         private set(value) {
             val oldValue = stateValue.value
+            if (value != AuthenticationState.SignedOut && value != AuthenticationState.Unconfigured) signInOverDeviceList = false
             stateValue.value = value
             if (oldValue.identity != value.identity) {
                 generation = UUID.randomUUID()
@@ -330,6 +331,13 @@ class SessionStore(
      * opposed to a sign-in or an account switch.
      */
     var reopeningSavedAccount = false
+        private set
+
+    /**
+     * The sign-in shown over the parcels this phone follows on its own ([showSignIn]): until someone signs in they stay
+     * the list, the widget's and its shortcut's, and a relaunch comes back to them rather than to the sign-in.
+     */
+    var signInOverDeviceList = false
         private set
 
     private val experienceKey = "sdt.native.experience.v1"
@@ -393,8 +401,11 @@ class SessionStore(
         state = AuthenticationState.Demo
     }
 
-    fun showSignIn() {
-        rememberExperience("account")
+    /** The sign-in; [overDeviceList] from a guest's list, which it leaves in place ([signInOverDeviceList]). */
+    fun showSignIn(overDeviceList: Boolean = false) {
+        val over = overDeviceList && state == AuthenticationState.Welcome
+        if (!over) rememberExperience("account")
+        signInOverDeviceList = over
         state = if (configuration.authenticationConfigured) AuthenticationState.SignedOut else AuthenticationState.Unconfigured
     }
 

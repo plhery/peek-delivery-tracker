@@ -546,8 +546,14 @@ class ParcelStore(
         scope.launch { combine(localizer.use24HourTimeFlow, localizer.distanceUnitFlow) { _, _ -> }.drop(1).collect { saveShownUnits() } }
     }
 
+    /** Whether the list was this phone's own before the session changed ([showsDeviceList]). */
+    private var deviceListShown = showsDeviceList
+
     private fun resetForSessionChange() {
         val reopening = session.reopeningSavedAccount
+        // Between a guest's list and the sign-in over it the list, the widget's and its shortcut's, stay as they were.
+        val sameList = deviceListShown && showsDeviceList
+        deviceListShown = showsDeviceList
         pollingTask?.cancel()
         pollingTask = null
         jobMonitoringTask?.cancel()
@@ -583,7 +589,7 @@ class ParcelStore(
         val saved = if (reopening) session.user?.let { cache.load(it.id) } else null
         showingSavedParcels = saved != null
         // Open on content: the saved list, or the demo box, instead of an empty frame.
-        parcels = saved ?: if (session.isDemo) demo.list() else if (session.isGuest) device.list() else emptyList()
+        parcels = saved ?: if (session.isDemo) demo.list() else if (showsDeviceList) device.list() else emptyList()
         listReadAt = if (saved != null) session.user?.let { cache.readAt(it.id) } else if (session.isGuest) device.lastCheckedAt else null
         undoParcel = null
         leftOnDevice = null
@@ -600,7 +606,7 @@ class ParcelStore(
         notificationStateLoaded = false
         notificationStatus = NotificationAuthorizationStatus.NotDetermined
         deliveryLiveActivityError = null
-        if (!reopening) clearDeliverySurfaces()
+        if (!reopening && !sameList) clearDeliverySurfaces()
     }
 
     val isDemo: Boolean
@@ -910,6 +916,12 @@ class ParcelStore(
 
     /** The parcel this phone follows through a link, for a notification about it. */
     fun followedHere(linkId: String): UUID? = device.parcelId(linkId)
+
+    /**
+     * The sign-in from the tabs: over the parcels this phone follows on its own, if it follows any, which stay the
+     * list, the widget's and its shortcut's until someone signs in ([SessionStore.signInOverDeviceList]).
+     */
+    fun showSignIn() = session.showSignIn(overDeviceList = isGuest && (parcels.isNotEmpty() || device.unlistedCount > 0))
 
     /** Shows the parcels this phone follows itself, leaving the demo or the sign-in screen. */
     fun showDeviceParcels() {
@@ -1803,10 +1815,14 @@ class ParcelStore(
 
     /** The parcels still followed: a guest's copy the service forgot is history, which the widget and its shortcut pass over. */
     private val followed: List<Parcel>
-        get() = if (isGuest) parcels.filter { !device.isFrozen(it.id) } else parcels
+        get() = if (showsDeviceList) parcels.filter { !device.isFrozen(it.id) } else parcels
+
+    /** The list is this phone's own: a guest's, or the one a sign-in shows over until someone signs in. */
+    private val showsDeviceList: Boolean
+        get() = isGuest || session.signInOverDeviceList
 
     private fun publishDeliveryWidget() {
-        val snapshot = if (session.isAuthenticated || isGuest) {
+        val snapshot = if (session.isAuthenticated || showsDeviceList) {
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,

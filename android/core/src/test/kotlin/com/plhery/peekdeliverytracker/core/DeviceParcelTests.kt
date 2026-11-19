@@ -1836,6 +1836,57 @@ class DeviceParcelTests {
         assertEquals(listOf(moving), requireNotNull(DeliveryWidgetSharedStore(defaults).snapshot).parcels.map { it.id })
     }
 
+    /**
+     * The sign-in opened over a guest's list leaves that list the widget's until someone signs in, and a relaunch
+     * meanwhile comes back to the list; from an empty list it is remembered, as before.
+     */
+    @Test
+    fun theSignInOverAGuestsListLeavesItTheWidgetsAndARelaunchComesBackToIt() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Shoes", id))
+        val device = device(client(Calls()), storage, backgroundScope)
+        val defaults = MemoryDefaults()
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport, defaults = defaults)
+        session.showWelcome()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, defaults = defaults, device = device, deviceNotifications = quietNotifications(),
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.load()
+        fun widget() = DeliveryWidgetSharedStore(defaults).snapshot?.parcels?.map { it.id }
+        assertEquals(listOf(id), widget())
+
+        store.showSignIn()
+        assertEquals(AuthenticationState.SignedOut, session.state)
+        assertTrue(session.signInOverDeviceList)
+        assertEquals(listOf(id), store.parcels.map { it.id })
+        assertEquals("The widget keeps the guest's list", listOf(id), widget())
+        assertEquals(listOf(id), store.nextDeliveries.map { it.id })
+        val relaunched = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport, defaults = defaults)
+        relaunched.bootstrap()
+        assertEquals("A relaunch comes back to the list", AuthenticationState.Welcome, relaunched.state)
+
+        // Back: the guest's list, as it was.
+        session.showWelcome()
+        assertFalse(session.signInOverDeviceList)
+        assertEquals(listOf(id), widget())
+
+        // A phone that follows nothing on its own opens the sign-in as before, and comes back to it.
+        storage.parcels = emptyList()
+        storage.keys = emptyMap()
+        val empty = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport, defaults = MemoryDefaults())
+        empty.showWelcome()
+        val emptyStore = testParcelStore(
+            postcodeConfiguration, empty, transport, backgroundScope, device = device(client(Calls()), Memory(), backgroundScope),
+            deviceNotifications = quietNotifications(),
+        )
+        emptyStore.showSignIn()
+        assertFalse(empty.signInOverDeviceList)
+    }
+
     /** A copy freezes without changing its parcel: the list stays equal, and the store says which copies froze. */
     @Test
     fun theScreenIsToldWhenTheServiceForgetsAGuestsCopyThoughItsParcelStaysTheSame() = runTest {

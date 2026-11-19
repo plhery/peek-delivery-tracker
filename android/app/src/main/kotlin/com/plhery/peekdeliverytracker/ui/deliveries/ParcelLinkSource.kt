@@ -65,7 +65,7 @@ interface ParcelLinkSource {
     /** `parcels.showDeviceParcels()`: the parcels this phone follows itself come forward. */
     fun showDeviceParcels()
 
-    /** `session.showSignIn()`. */
+    /** `store.showSignIn()`: over a guest's list, which stays until someone signs in. */
     fun showSignIn()
 
     /** `localizer.errorMessage(_:)`. */
@@ -105,7 +105,7 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
 
     override fun showDeviceParcels() = container.parcels.showDeviceParcels()
 
-    override fun showSignIn() = container.session.showSignIn()
+    override fun showSignIn() = container.parcels.showSignIn()
 
     override fun errorMessage(error: Throwable) = container.localizer.errorMessage(error)
 

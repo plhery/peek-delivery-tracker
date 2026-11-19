@@ -779,6 +779,7 @@ function noticesIn(recent: RecentScans): Set<string> {
  */
 async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObject[][]) {
   const eventIds = batches.flat().map((event) => stringField(event, 'event_id')).filter(Boolean);
+  const fresh = new Set(eventIds);
   const moving = new Set(batchParcels(batches.filter((events) => events.some((event) => stringField(event, 'stage') === 'in_transit'))));
   const [handoffs, copied, recent] = await Promise.all([
     orNone(() => client.handoffScans(batchParcels(batches)), []),
@@ -791,7 +792,7 @@ async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObj
     ...notices,
     ...[...recent].flatMap(([packageId, scans]) => [
       ...moving.has(packageId) ? generatedScans(scans).map((scan) => scan.id) : [],
-      ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })))])]);
+      ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })), fresh)])]);
   return { known, recent, notices };
 }
 

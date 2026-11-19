@@ -8,7 +8,7 @@
  * place, within an hour of the first of them, tells the reader nothing new.
  * The apps show such a run as its newest scan, the others served with
  * `relay_of` its id (eventPlaces.ts), and only the run's first scan announces
- * (push.ts).
+ * (push.ts): a copy stored later announces nothing, even stamped before it.
  */
 import { isRecord, type JsonObject } from './types';
 
@@ -62,7 +62,11 @@ export function repeatLeads(events: readonly JsonObject[], apart: ReadonlySet<st
     .flatMap((run) => run.slice(0, -1).map((id): [string, string] => [id, run.at(-1)!])));
 }
 
-/** The scans that repeat one the parcel had before them: each scan of a run but its first. */
-export function repeatedScans(scans: readonly RepeatScan[]): string[] {
-  return repeatRuns(scans).flatMap((run) => run.slice(1));
+/**
+ * The scans that repeat one the parcel had before them: each scan of a run but its first, and each of `fresh` (the
+ * scans just stored) in a run that holds one stored before, whatever its time. A copy the carrier sends later
+ * stamped earlier repeats the scan already told.
+ */
+export function repeatedScans(scans: readonly RepeatScan[], fresh?: ReadonlySet<string>): string[] {
+  return repeatRuns(scans).flatMap((run) => fresh && run.some((id) => !fresh.has(id)) ? run.filter((id) => fresh.has(id)) : run.slice(1));
 }

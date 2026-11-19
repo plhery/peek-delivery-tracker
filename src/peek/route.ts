@@ -172,9 +172,12 @@ export function forgetParcelLinkOpener(): void {
   opener = null;
 }
 
-/** Leaves the parcel page, or the landing's own address: for the front door, or the deliveries of someone signed in. */
-export function leaveParcelLink(path = '/'): void {
-  window.history.pushState(null, '', path);
+/**
+ * Leaves the parcel page, or the landing's own address: for the front door, or the deliveries of someone signed in.
+ * `state` goes with the new step in the history.
+ */
+export function leaveParcelLink(path = '/', state: unknown = null): void {
+  window.history.pushState(state, '', path);
   window.dispatchEvent(new Event(eventName));
 }
 

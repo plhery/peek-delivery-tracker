@@ -180,4 +180,22 @@ describe('DemoApplication', () => {
     expect(await screen.findByRole('dialog', { name: 'Bring these parcels too?' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Deliveries', hidden: true })).toBeVisible();
   });
+
+  it('brings a visitor who backs out of signing in back to the parcel page they left for it', async () => {
+    const { id, key, view } = await lookupParcel({ trackingNumber: '1ZDEMO202600000092' });
+    rememberParcel({ id, key, view });
+    history.replaceState(null, '', `/p/${id}`);
+    const user = userEvent.setup();
+    const { container } = render(<DemoApplication repo={createDemoRepo(window.localStorage)} parcelLinkId={id} />);
+    expect(await screen.findByLabelText('UPS')).toBeVisible();
+    await user.click(container.querySelector<HTMLButtonElement>('.peekp-header__signin')!);
+    expect(location.pathname).toBe('/');
+    expect(pendingKeep()).toBe(id);
+    await user.click(await screen.findByRole('button', { name: 'Back' }));
+    await waitFor(() => expect(location.pathname).toBe(`/p/${id}`));
+    expect(await screen.findByLabelText('UPS')).toBeVisible();
+    // Backing out takes the wish to keep it back, and the sign-in step is over.
+    expect(pendingKeep()).toBeNull();
+    expect(sessionStorage.getItem('sdt.web.experience.v1')).toBeNull();
+  });
 });

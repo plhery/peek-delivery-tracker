@@ -1,7 +1,7 @@
 import 'server-only';
 import type { StepRecord } from 'universal-parcel-scraper/node';
 import { CARRIERS, carrierRequirements, normalizeTrackingNumber } from '../lib/carriers';
-import { homePostcodeCountry, storedPostcodeCountry } from '../lib/postcodeCountry';
+import { givenPostcodeCountry, readsPostcodeCountry, storedPostcodeCountry } from '../lib/postcodeCountry';
 import type { CarrierId } from '../types';
 import { stepOutcome } from './metrics';
 import { withPostcodeCountry } from './postcodeCountry';
@@ -59,17 +59,19 @@ function fitting(carrier: string, number: string, postcode: string, country: str
  * The postcode its owner gave their parcels that `carrier` takes for `number`, from `given`, newest parcel first
  * (SupabaseServiceClient.accountPostcodes): the one given the same carrier first, otherwise the latest this carrier
  * takes, as the Add sheet offers it (src/lib/postcodeMemory.ts). A postcode a carrier refused is left out. Each is
- * checked as from the country it was given with.
+ * checked as from the country it was given from (`givenPostcodeCountry`); a carrier whose lookup reads the country
+ * takes none whose country is not known.
  */
 export function accountPostcodeFor(carrier: string, number: string, given: readonly JsonObject[]): FittingPostcode | null {
   const seen = new Set<string>();
+  const readsCountry = Object.hasOwn(CARRIERS, carrier) && readsPostcodeCountry(carrier as CarrierId, number);
   const fits = given.flatMap((row) => {
     const from = String(row.carrier);
     const postcode = typeof row.dpd_postcode === 'string' ? row.dpd_postcode.trim() : '';
     const refused = row.dpd_postcode_verified === false || (isRecord(row.postcode_refused) && row.postcode_refused.carrier === from);
-    const country = Object.hasOwn(CARRIERS, from)
-      ? storedPostcodeCountry({ postcode_country: row.postcode_country }, postcode) ?? homePostcodeCountry(from as CarrierId) : null;
-    if (!postcode || refused || !country) return [];
+    if (!postcode || refused || !Object.hasOwn(CARRIERS, from)) return [];
+    const country = givenPostcodeCountry(from as CarrierId, storedPostcodeCountry({ postcode_country: row.postcode_country }, postcode));
+    if (!country && readsCountry) return [];
     // An account's parcels often repeat one address: each is checked once, at its newest.
     const key = JSON.stringify([from, postcode, country]);
     if (seen.has(key)) return [];

@@ -77,12 +77,26 @@ describe('account postcode', () => {
       { carrier: 'gls-nl', dpd_postcode: '1011 AB', postcode_country: { postcode: '1011 AB', country: 'NL' } },
       { carrier: 'spring-gds', dpd_postcode: '2511 CV' },
     ])).toEqual({ postcode: '2511 CV', country: null });
-    expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'gls-nl', dpd_postcode: '1011 AB' }]))
+    expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'spring-gds', dpd_postcode: '1011 AB' }]))
       .toEqual({ postcode: '1011 AB', country: null });
     expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'spring-gds', dpd_postcode: '1011 AB', postcode_refused: { carrier: 'spring-gds' } }]))
       .toBeNull();
     expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'dpd', dpd_postcode: '10115', postcode_country: { postcode: '10115', country: 'DE' } }]))
       .toEqual({ postcode: '10115', country: 'DE' });
+  });
+
+  it('gives a carrier that reads the country only a postcode whose country is known', () => {
+    const number = '3SABCD000000001';
+    // DPD Switzerland, DHL Germany and GLS Netherlands take any country's postcode: a French one given them is not
+    // Swiss, German or Dutch.
+    for (const carrier of ['dpd', 'dhl', 'gls-nl']) {
+      expect(accountPostcodeFor('spring-gds', number, [{ carrier, dpd_postcode: '75001' }])).toBeNull();
+      expect(accountPostcodeFor('mondial-relay', '40283715', [{ carrier, dpd_postcode: '75001' }])).toBeNull();
+    }
+    // DPD Germany takes German postcodes only.
+    expect(accountPostcodeFor('spring-gds', number, [{ carrier: 'dpd-de', dpd_postcode: '10115' }])).toEqual({ postcode: '10115', country: 'DE' });
+    // A carrier that reads the postcode alone still takes it by its shape.
+    expect(accountPostcodeFor('gls-ch', '999999999916', [{ carrier: 'dpd', dpd_postcode: '8000' }])).toEqual({ postcode: '8000', country: null });
   });
 });
 

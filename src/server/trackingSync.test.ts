@@ -5292,7 +5292,7 @@ describe('TrackingSyncService', () => {
       return delivery;
     }) });
     const asked = (adapter: ReturnType<typeof postnl>) => adapter.fetch.mock.calls.filter((call) => call[0] === 'spring-gds').map((call) => call[3]);
-    const setup = (found: (postcode: string) => boolean, given: JsonObject[] = [{ carrier: 'gls-nl', dpd_postcode: '1011 AB' }]) => {
+    const setup = (found: (postcode: string) => boolean, given: JsonObject[] = [{ carrier: 'spring-gds', dpd_postcode: '1011 AB' }]) => {
       const client = { ...fakeClient(), accountPostcodes: vi.fn().mockResolvedValue(given) };
       const adapter = postnl(found);
       const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-18T09:00:00Z'));
@@ -5331,7 +5331,7 @@ describe('TrackingSyncService', () => {
       expect(asked(adapter)).toEqual([null]);
       expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '1011 AB', found: false });
       // The owner gave another postcode since: that one is tried.
-      client.accountPostcodes.mockResolvedValue([{ carrier: 'spring-gds', dpd_postcode: '2511 CV' }, { carrier: 'gls-nl', dpd_postcode: '1011 AB' }]);
+      client.accountPostcodes.mockResolvedValue([{ carrier: 'spring-gds', dpd_postcode: '2511 CV' }, { carrier: 'spring-gds', dpd_postcode: '1011 AB' }]);
       adapter.fetch.mockClear();
       await service.syncPackage(later);
       expect(asked(adapter)).toEqual(['2511 CV']);

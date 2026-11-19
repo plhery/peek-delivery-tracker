@@ -47751,7 +47751,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Mexico_City",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flecha-amarilla"
     },
     "linkRules": [],
     "detectionRules": [
@@ -49195,7 +49195,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Adelaide",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "apd-parcel"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -49299,7 +49299,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Dhaka",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "carrybee"
     },
     "trackingUrlTemplate": "https://carrybee.com/track?consignmentId={trackingNumber}",
     "linkRules": [
@@ -49478,7 +49478,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "huuneh"
     },
     "trackingUrlTemplate": "https://huuneh.com/dashboard/track.php?order_track={trackingNumber}",
     "linkRules": [
@@ -49584,7 +49584,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "laser-logistics"
     },
     "trackingUrlTemplate": "https://www.laserlogistics.co.za/parcel-tracking/?waybillnumber={trackingNumber}",
     "linkRules": [
@@ -49746,7 +49746,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Mexico_City",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "puntopost"
     },
     "trackingUrlTemplate": "https://www.puntopost.mx/tracking-summary/#{trackingNumber}",
     "linkRules": [
@@ -49830,9 +49830,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Argentina/Buenos_Aires",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "south-post"
     },
-    "trackingUrlTemplate": "https://www.southpost.com.ar/t/{trackingNumber}",
+    "trackingUrlTemplate": "https://www.southpost.com.ar/#/t/{trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -49840,6 +49840,13 @@ export const CARRIER_CAPABILITIES = {
           "southpost.com.ar"
         ],
         "path": "^/t/([0-9]+)/?$"
+      },
+      {
+        "domains": [
+          "www.southpost.com.ar",
+          "southpost.com.ar"
+        ],
+        "fragment": "^/t/([0-9]{1,7})/?$"
       }
     ],
     "detectionRules": [],
@@ -49919,7 +49926,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Lisbon",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "transportes-rapex"
     },
     "trackingUrlTemplate": "https://transportes-rapex.pt/pt/tracking?tracking={trackingNumber}",
     "linkRules": [
@@ -54457,7 +54464,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "yandex-delivery"
     },
     "trackingUrlTemplate": "https://dostavka.yandex.ru/ndd/tracking/?order_tracking_id={trackingNumber}",
     "linkRules": [

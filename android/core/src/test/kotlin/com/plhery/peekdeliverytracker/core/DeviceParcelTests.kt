@@ -1809,6 +1809,33 @@ class DeviceParcelTests {
         assertTrue(store.listReadAt!! > checkedAt)
     }
 
+    /** A copy the service forgot no longer moves: the widget and its shortcut pass over it for the parcels still followed. */
+    @Test
+    fun theWidgetPassesOverAGuestsCopyTheServiceForgot() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val gone = UUID.randomUUID()
+        val moving = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222B" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "Shoes", gone).copy(frozen = "2026-11-01T08:00:00Z"),
+            parcel("22222222222B", "Coat", moving, pkg = pkg(moving, number = "TESTPARCEL555000")),
+        )
+        val device = device(client(Calls()), storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val defaults = MemoryDefaults()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, defaults = defaults, device = device, deviceNotifications = quietNotifications(),
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.load()
+
+        assertEquals("The list keeps the copy", listOf(gone, moving).toSet(), store.parcels.map { it.id }.toSet())
+        assertEquals(listOf(moving), store.nextDeliveries.map { it.id })
+        assertEquals(listOf(moving), requireNotNull(DeliveryWidgetSharedStore(defaults).snapshot).parcels.map { it.id })
+    }
+
     @Test
     fun aRefreshWithOnlyAnUnreadableCopyLeftFailsWhenItsParcelCannotBeReadAgain() = runTest {
         // A copy this build could not read: its key is kept, its parcel isn't listed.

@@ -1791,14 +1791,18 @@ class ParcelStore(
 
     /** The parcels on their way, the most pressing first, as the widget picks from them. */
     val nextDeliveries: List<DeliveryWidgetParcel>
-        get() = nextDeliveries(parcels, localizer, now())
+        get() = nextDeliveries(followed, localizer, now())
+
+    /** The parcels still followed: a guest's copy the service forgot is history, which the widget and its shortcut pass over. */
+    private val followed: List<Parcel>
+        get() = if (isGuest) parcels.filter { !device.isFrozen(it.id) } else parcels
 
     private fun publishDeliveryWidget() {
         val snapshot = if (session.isAuthenticated || isGuest) {
             DeliveryWidgetSnapshot(
                 generatedAt = now(),
                 languageCode = localizer.language.rawValue,
-                parcels = carded(widgetOrder(parcels, localizer, now(), markNewUpdatesFlow.value)),
+                parcels = carded(widgetOrder(followed, localizer, now(), markNewUpdatesFlow.value)),
             )
         } else {
             null

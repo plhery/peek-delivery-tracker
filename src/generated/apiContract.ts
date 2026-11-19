@@ -7405,7 +7405,7 @@ export const CARRIER_CAPABILITIES = {
           "validator": "internationalPostcode",
           "label": "Delivery postcode",
           "type": "text",
-          "help": "GLS Spain shows a shipment only with its delivery postcode.",
+          "help": "GLS Spain shows a shipment only with its delivery postcode, all seven digits for Portugal.",
           "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ \\-][A-Za-z0-9]+)*$",
           "maxLength": 12,
           "inputMode": "text",
@@ -9061,7 +9061,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "express-one",
-      "recognitionRank": 190
+      "recognitionRank": 190,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://tracking.expressone.hu/?plc_number={trackingNumber}",
     "linkRules": [
@@ -9075,7 +9076,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{24}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://tracking.expressone.hu/"
   },
   "foxpost": {
@@ -16576,8 +16582,17 @@ export const CARRIER_CAPABILITIES = {
       "mode": "automatic",
       "adapter": "universal"
     },
-    "trackingUrlTemplate": "https://www.akashganga.info/Tracking.aspx?AWB={trackingNumber}",
+    "trackingUrlTemplate": "https://agcgroup.in/track-now/?awb={trackingNumber}",
     "linkRules": [
+      {
+        "domains": [
+          "agcgroup.in"
+        ],
+        "pathPattern": "^/track-now/?$",
+        "params": [
+          "awb"
+        ]
+      },
       {
         "domains": [
           "akashganga.info"
@@ -16590,7 +16605,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.akashganga.info/"
+    "trackingSearchUrl": "https://agcgroup.in/track-now/"
   },
   "alem-tat": {
     "displayName": "Alem TAT",
@@ -32885,7 +32900,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Chicago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tusk-logistics"
     },
     "trackingUrlTemplate": "https://shipmenttracking.tusklogistics.com/?trackingNumber={trackingNumber}",
     "linkRules": [
@@ -46276,7 +46291,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Riyadh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tamex"
     },
     "trackingUrlTemplate": "https://tamex.com.sa/track/{trackingNumber}",
     "linkRules": [
@@ -49236,7 +49251,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "bigfoot-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -49374,7 +49389,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Riyadh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "faster-shipe"
     },
     "trackingUrlTemplate": "https://fastershipe.com/track.html?id={trackingNumber}",
     "linkRules": [
@@ -49436,7 +49451,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "garudavega"
     },
     "trackingUrlTemplate": "https://www.garudavega.com/track/{trackingNumber}",
     "linkRules": [
@@ -49524,7 +49539,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "intertown-transport"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -49543,7 +49558,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Chicago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "king-solutions"
     },
     "trackingUrlTemplate": "https://kingsolutionsglobal.com/track/?pros={trackingNumber}",
     "linkRules": [
@@ -49630,7 +49645,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Chicago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "moran-transportation"
     },
     "trackingUrlTemplate": "https://tracking.carrierlogistics.com/scripts/mor.pol/boldetail.htm?wbtn=PRO&wpro1={trackingNumber}",
     "linkRules": [
@@ -49669,7 +49684,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "mte-xpress"
     },
     "trackingUrlTemplate": "https://portal.mtexpress.co.za/track?ref={trackingNumber}",
     "linkRules": [
@@ -49968,7 +49983,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "velocity-express-in"
     },
     "trackingUrlTemplate": "https://velexp.com/home-tracking/{trackingNumber}?type=awb",
     "linkRules": [
@@ -49996,7 +50011,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Pacific/Auckland",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "walker-logistics"
     },
     "trackingUrlTemplate": "https://walkerlogistics.tempo.delivery/tracker/#/{trackingNumber}",
     "linkRules": [
@@ -62158,7 +62173,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "usea-express"
     },
     "linkRules": [],
     "detectionRules": [],

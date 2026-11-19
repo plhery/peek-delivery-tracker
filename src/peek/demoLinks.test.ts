@@ -66,6 +66,23 @@ describe('the device demo backend', () => {
     expect(currentStage((await read(createDemoLinks(window.localStorage, () => clock.now), id, { key })).parcel.events)).toBe('delivered');
   });
 
+  it('changes a lookup’s carrier on the same link, for its key, keeping what the link shows', async () => {
+    const { links, clock } = demo();
+    const { id, key } = await links.lookupParcel({ trackingNumber: 'DEMO0000000001' });
+    await links.updateParcelLink(id, key, { showNumber: true });
+    clock.now += 60_000;
+    const moved = await links.changeParcelCarrier(id, key, { trackingNumber: 'DEMO0000000001', carrier: 'dhl' });
+    expect(moved).toMatchObject({ id, key, view: { link: { id, showNumber: true, createdAt: '2026-10-02T08:00:00.000Z' } } });
+    expect(moved.view.parcel).toMatchObject({ carrier: 'dhl', trackingNumber: 'DEMO0000000001', syncStatus: 'pending' });
+    clock.now += 1_500;
+    expect((await read(links, id, { key })).parcel).toMatchObject({ carrier: 'dhl', syncStatus: 'ok' });
+    expect(Object.keys(JSON.parse(localStorage.getItem(DEMO_LINKS_STORAGE_KEY)!))).toEqual([id]);
+    // Like the server, a wrong key and an unknown link are told apart by nobody.
+    for (const [link, held] of [[id, 'B'.repeat(43)], ['k7Qm2xHd9RtW', key]]) {
+      await expect(links.changeParcelCarrier(link, held, { trackingNumber: 'DEMO0000000001', carrier: 'ups' })).rejects.toMatchObject({ kind: 'unavailable' });
+    }
+  });
+
   it('masks the number for anyone without the key', async () => {
     const { links } = demo();
     const { id } = await links.lookupParcel({ trackingNumber: '1ZDEMO202600000001' });

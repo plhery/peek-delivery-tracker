@@ -6,7 +6,8 @@ import { languagePath, type Locale } from './locale';
  * tracking number never goes into an address, so the box notes it for this
  * tab and opens the landing, which takes the note once and looks it up. A
  * parcel's page notes its number this way too, to `pick` its carrier: the
- * landing then opens its carrier picker instead of looking the number up.
+ * landing then opens its carrier picker instead of looking the number up, and
+ * the carrier chosen goes to the page's own `link` rather than to a new one.
  */
 export const CARRIER_HANDOFF_STORAGE_KEY = 'sdt.peek.carrierHandoff.v1'; // gitleaks:allow -- sessionStorage name, not a credential
 // A note this old was left by a landing that never opened: it is not looked up on a later visit.
@@ -25,13 +26,15 @@ export function carrierHandoffLanding(locale: Locale): string {
 export interface CarrierHandoff {
   text: string;
   pick: boolean;
+  /** The lookup the carrier is picked for, whose owner key this device holds. */
+  link?: string;
 }
 
 /** Notes the typed text for the landing. Without session storage the landing opens with its field empty. */
-export function writeCarrierHandoff(text: string, now = Date.now(), { pick = false } = {}): void {
+export function writeCarrierHandoff(text: string, now = Date.now(), { pick = false, link }: { pick?: boolean; link?: string } = {}): void {
   try {
     window.sessionStorage.setItem(CARRIER_HANDOFF_STORAGE_KEY,
-      JSON.stringify({ text: text.trim().slice(0, MAX_LENGTH), at: now, ...(pick ? { pick } : {}) }));
+      JSON.stringify({ text: text.trim().slice(0, MAX_LENGTH), at: now, ...(pick ? { pick, ...(link ? { link } : {}) } : {}) }));
   } catch { /* The landing opens anyway, and the number can be typed again. */ }
 }
 
@@ -41,10 +44,11 @@ export function takeCarrierHandoff(now = Date.now()): CarrierHandoff | null {
     const written = window.sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY);
     if (written === null) return null;
     window.sessionStorage.removeItem(CARRIER_HANDOFF_STORAGE_KEY);
-    const note = JSON.parse(written) as { text?: unknown; at?: unknown; pick?: unknown } | null;
+    const note = JSON.parse(written) as { text?: unknown; at?: unknown; pick?: unknown; link?: unknown } | null;
     const age = now - Number(note?.at);
     if (typeof note?.text !== 'string' || !note.text.trim() || !(age >= 0 && age < MAX_AGE_MS)) return null;
-    return { text: note.text.trim().slice(0, MAX_LENGTH), pick: note.pick === true };
+    const pick = note.pick === true;
+    return { text: note.text.trim().slice(0, MAX_LENGTH), pick, ...(pick && typeof note.link === 'string' ? { link: note.link } : {}) };
   } catch {
     return null;
   }

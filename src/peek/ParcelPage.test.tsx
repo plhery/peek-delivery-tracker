@@ -364,8 +364,8 @@ describe('ParcelPage stages and troubles', () => {
     await shown(waiting({ carrier: 'brt', since: ago(8 * 24) }));
     expect(within(card()).getByText('BRT still doesn’t list it after a week. Check the number with the sender, or choose another carrier.')).toBeVisible();
     await userEvent.click(screen.getByRole('button', { name: 'Choose another carrier' }));
-    // The front door takes the number with its picker open.
-    expect(takeCarrierHandoff()).toEqual({ text: '1234567899', pick: true });
+    // The front door takes the number with its picker open, and the link the carrier chosen moves.
+    expect(takeCarrierHandoff()).toEqual({ text: '1234567899', pick: true, link: LINK_ID });
 
     // Someone the parcel is shared with reads the number masked, and cannot choose.
     cleanup();
@@ -383,7 +383,7 @@ describe('ParcelPage stages and troubles', () => {
     expect(within(card()).getByText('This looks like an order number from Amazon. The tracking number is in the shipping email or on the order page.')).toBeVisible();
     expect(screen.queryByText(/^Keep this page/)).toBeNull();
     await userEvent.click(screen.getByRole('button', { name: 'Choose the carrier' }));
-    expect(takeCarrierHandoff()).toEqual({ text: '30245719832294617', pick: true });
+    expect(takeCarrierHandoff()).toEqual({ text: '30245719832294617', pick: true, link: LINK_ID });
 
     cleanup();
     await shown(unknown('10293'));

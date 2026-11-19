@@ -801,7 +801,7 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   livery of no carrier, and the status says "Waiting for <carrier>'s first scan": the carrier
   does not list the number yet, and Peek keeps asking it. After a week, the owner is asked to
   check the number or choose another carrier; a link's owner chooses at the front door, which
-  takes the number back with its picker open.
+  takes the number back with its picker open and moves that same link to the carrier chosen.
   A number no carrier answered for that has a shop's order number shape (`shops` and
   `storedOrders` in `shared/reading.json`), is a shipping container's (three letters, U and
   seven digits whose ISO 6346 check digit adds up) or has fewer than eight characters: the

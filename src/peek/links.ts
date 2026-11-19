@@ -6,6 +6,7 @@ import type {
   ApiDeleteParcelAlertRequest,
   ApiParcelAlertRequest,
   ApiParcelFeedbackRequest,
+  ApiParcelLinkCarrierRequest,
   ApiParcelLinkPostcodeRequest,
   ApiParcelShareResponse,
   ApiPublicLookupRequest,
@@ -101,6 +102,22 @@ async function answer<T>(response: Response): Promise<T> {
   return payload as T;
 }
 
+/** What a lookup tells about its number besides the number itself: named fields only, so a name stays on the device. */
+function lookupDetails(input: ParcelLookupInput): ApiParcelLinkCarrierRequest {
+  const trackingNumber = normalizeTrackingNumber(input.trackingNumber);
+  const language = pageLocale();
+  return {
+    // Like adding to an account: the carrier the number's shape says, unless one was chosen.
+    carrier: input.carrier ?? detectCarrier(trackingNumber),
+    ...(input.trackingUrl?.trim() ? { trackingUrl: input.trackingUrl.trim() } : {}),
+    ...(input.dpdPostcode?.trim() ? { dpdPostcode: input.dpdPostcode.trim() } : {}),
+    ...(input.dpdPostcode?.trim() && input.dpdPostcodeCountry ? { dpdPostcodeCountry: input.dpdPostcodeCountry } : {}),
+    ...(input.phoneDigits?.trim() ? { phoneDigits: input.phoneDigits.trim() } : {}),
+    // A carrier that words its scans in several languages answers the parcel in the page's.
+    ...(language ? { language } : {}),
+  };
+}
+
 /**
  * Parcel links through the public API. The requests carry no cookie, no
  * referrer and no sign-in: the link id is the capability, and the owner key
@@ -134,7 +151,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
    * request goes without one: a server that verifies no one still answers, and a refusal is not
    * verified again. The refusal carries why: the page's check that failed, or the proof refused.
    */
-  async function protectedPost(path: string, body: unknown, signal?: AbortSignal) {
+  async function protectedPost(path: string, body: unknown, signal?: AbortSignal, { method = 'POST', key }: { method?: string; key?: string } = {}) {
     const verifiedFirst = !lookupProof() && canVerifyLookup();
     const first = verifiedFirst
       ? await getLookupProof(signal).then((proof) => ({ proof, failure: null }), (error: unknown) => {
@@ -144,7 +161,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
       : { proof: lookupProof(), failure: null };
     const current = first.proof;
     const call = (proof: string | null) => send(path, {
-      method: 'POST', headers: { 'Content-Type': 'application/json', ...(proof ? { 'X-Lookup-Proof': proof } : {}) },
+      method, headers: { 'Content-Type': 'application/json', ...keyHeader(key), ...(proof ? { 'X-Lookup-Proof': proof } : {}) },
       body: JSON.stringify(body),
     }, signal);
     const response = await call(current);
@@ -179,20 +196,7 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
     },
 
     async lookupParcel(input, signal) {
-      // Named fields only: whatever else the caller holds, a name included, stays on the device.
-      const trackingNumber = normalizeTrackingNumber(input.trackingNumber);
-      const language = pageLocale();
-      const body: ApiPublicLookupRequest = {
-        trackingNumber,
-        // Like adding to an account: the carrier the number's shape says, unless one was chosen.
-        carrier: input.carrier ?? detectCarrier(trackingNumber),
-        ...(input.trackingUrl?.trim() ? { trackingUrl: input.trackingUrl.trim() } : {}),
-        ...(input.dpdPostcode?.trim() ? { dpdPostcode: input.dpdPostcode.trim() } : {}),
-        ...(input.dpdPostcode?.trim() && input.dpdPostcodeCountry ? { dpdPostcodeCountry: input.dpdPostcodeCountry } : {}),
-        ...(input.phoneDigits?.trim() ? { phoneDigits: input.phoneDigits.trim() } : {}),
-        // A carrier that words its scans in several languages answers the parcel in the page's.
-        ...(language ? { language } : {}),
-      };
+      const body: ApiPublicLookupRequest = { trackingNumber: normalizeTrackingNumber(input.trackingNumber), ...lookupDetails(input) };
       const response = await protectedPost('/api/public/parcels', body, signal);
       if (!response.ok) throw await failure(response);
       const result = await answer<ApiPublicLookupResponse>(response);
@@ -249,6 +253,14 @@ export function createApiLinks(request: typeof fetch = (input, init) => fetch(in
       }
       if (!response.ok) throw await failure(response);
       return parcelLinkView(await answer<ApiPublicParcelResponse>(response));
+    },
+
+    async changeParcelCarrier(id, key, input, signal) {
+      if (!isParcelLinkId(id) || !OWNER_KEY.test(key)) throw new ParcelLinkError('unavailable');
+      const body: ApiParcelLinkCarrierRequest = lookupDetails(input);
+      const response = await protectedPost(`/api/public/parcels/${id}/carrier`, body, signal, { method: 'PATCH', key });
+      if (!response.ok) throw await failure(response);
+      return { id, key, view: parcelLinkView(await answer<ApiPublicParcelResponse>(response)) };
     },
 
     async setParcelAlert(id, alert, key) {
@@ -339,6 +351,11 @@ export function detectCarrierPublic(trackingNumber: string, signal?: AbortSignal
 /** Follows one parcel without an account. The owner key in the answer is given this once. */
 export function lookupParcel(input: ParcelLookupInput, signal?: AbortSignal): Promise<ParcelLookup> {
   return client.lookupParcel(input, signal);
+}
+
+/** Changes a lookup's carrier on the same link, with its owner key. It counts as a lookup. */
+export function changeParcelCarrier(id: string, key: string, input: ParcelLookupInput, signal?: AbortSignal): Promise<ParcelLookup> {
+  return client.changeParcelCarrier(id, key, input, signal);
 }
 
 /**

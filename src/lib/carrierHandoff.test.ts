@@ -22,6 +22,15 @@ describe('the text a carrier’s page hands to the tracker', () => {
     expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: false });
   });
 
+  it('names the link whose carrier is chosen, only for a choice', () => {
+    writeCarrierHandoff('JJD000390012345678', 1_000, { pick: true, link: 'k7Qm2xHd9RtW' });
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: true, link: 'k7Qm2xHd9RtW' });
+    writeCarrierHandoff('JJD000390012345678', 1_000, { link: 'k7Qm2xHd9RtW' });
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: false });
+    sessionStorage.setItem(KEY, JSON.stringify({ text: 'JJD000390012345678', at: 1_000, pick: true, link: 42 }));
+    expect(takeCarrierHandoff(2_000)).toEqual({ text: 'JJD000390012345678', pick: true });
+  });
+
   it('is dropped unread when it is ten minutes old, or dated after now', () => {
     writeCarrierHandoff('JJD000390012345678', 0);
     expect(takeCarrierHandoff(10 * 60_000)).toBeNull();

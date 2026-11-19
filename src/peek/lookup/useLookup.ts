@@ -4,8 +4,8 @@ import { normalizeTrackingNumber } from '../../lib/carriers';
 import { deviceCountry, deviceRegion } from '../../lib/postcodeExample';
 import { rememberPostcode, usePostcodeMemory } from '../../lib/postcodeMemory';
 import { useTypingPause } from '../../lib/typingPause';
-import { detectCarrierPublic, lookupParcel, ParcelLinkError, parcelLinkErrorKey, type ParcelLookup } from '../links';
-import { useRecents } from '../recents';
+import { changeParcelCarrier, detectCarrierPublic, lookupParcel, ParcelLinkError, parcelLinkErrorKey, type ParcelLookup } from '../links';
+import { recentFor, useRecents } from '../recents';
 import { openParcelLink } from '../route';
 import { LookupVerificationError } from './verification';
 import {
@@ -44,6 +44,12 @@ function troubleOf(error: unknown, now: number): LookupTrouble {
 const still = () => typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches === true;
 const rest = (milliseconds: number) => new Promise<void>((resolve) => { setTimeout(resolve, milliseconds); });
 
+/** A lookup of this device's whose carrier is being chosen at the door: its number goes to that link, not to a new one. */
+export interface Relinking {
+  id: string;
+  number: string;
+}
+
 export interface Lookup {
   state: LookupState;
   found: Survey;
@@ -58,7 +64,7 @@ export interface Lookup {
  * countdown of a refusal. Each request is started by the event that calls for
  * it and happens once.
  */
-export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
+export function useLookup(onTracked: (lookup: ParcelLookup) => void, relinking?: { readonly current: Relinking | null }): Lookup {
   const recents = useRecents();
   const device = useMemo<DeviceParcel[]>(() => recents.flatMap(({ id, snapshot: { parcel } }) =>
     parcel.trackingNumber ? [{ id, number: normalizeTrackingNumber(parcel.trackingNumber), carrier: parcel.carrier }] : []), [recents]);
@@ -66,8 +72,10 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
   const [state, setState] = useState(() => initialLookup('', deviceCountry(), deviceRegion()));
   const [retryIn, setRetryIn] = useState(0);
   // The requests outlive a render: they read and move the latest state, not the one they started from.
-  const live = useRef({ state, device, postcodes, onTracked });
-  useEffect(() => { live.current.device = device; live.current.postcodes = postcodes; live.current.onTracked = onTracked; });
+  const live = useRef({ state, device, postcodes, onTracked, relinking });
+  useEffect(() => {
+    live.current.device = device; live.current.postcodes = postcodes; live.current.onTracked = onTracked; live.current.relinking = relinking;
+  });
   const asking = useRef<{ number: string; stop: () => void } | null>(null);
   const working = useRef<{ job: LookupJob; stop: () => void } | null>(null);
   const ticking = useRef<ReturnType<typeof setInterval> | null>(null);
@@ -109,10 +117,14 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
         let handOver: ReturnType<typeof setTimeout> | undefined;
         working.current = { job, stop: () => { clearTimeout(handOver); controller.abort(); } };
         const beat = still() ? Promise.resolve() : rest(RECOGNISE_BEAT_MS);
-        lookupParcel(job.input, controller.signal).then(async (lookup) => {
+        // The number of a lookup whose carrier is being chosen moves that link, with the key this device holds for it.
+        const relinked = live.current.relinking?.current;
+        const key = relinked?.number === normalizeTrackingNumber(job.input.trackingNumber) ? recentFor(relinked.id)?.key : null;
+        const action = key ? 'parcel-link-choose-carrier' : 'parcel-lookup';
+        (relinked && key ? changeParcelCarrier(relinked.id, key, job.input, controller.signal) : lookupParcel(job.input, controller.signal)).then(async (lookup) => {
           await beat;
           if (controller.signal.aborted) return;
-          trackAction('parcel-lookup', 'success');
+          trackAction(action, 'success');
           // The postcode it was given is kept apart from the parcel, with its country, for the next one.
           if (job.input.carrier && job.input.dpdPostcode) {
             rememberPostcode(job.input.carrier, job.input.dpdPostcode, job.input.dpdPostcodeCountry);
@@ -122,7 +134,7 @@ export function useLookup(onTracked: (lookup: ParcelLookup) => void): Lookup {
           if (!controller.signal.aborted) handOver = setTimeout(() => dispatch({ type: 'done' }), HAND_OVER_MS);
         }, (error: unknown) => {
           if (controller.signal.aborted) return;
-          trackAction('parcel-lookup', 'error');
+          trackAction(action, 'error');
           dispatch({ type: 'failed', trouble: troubleOf(error, Date.now()) });
         });
       }

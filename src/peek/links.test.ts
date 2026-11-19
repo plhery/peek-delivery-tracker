@@ -296,6 +296,30 @@ describe('the API backend', () => {
     expect(request).toHaveBeenCalledTimes(7);
   });
 
+  it('changes a lookup’s carrier on the same link with the owner key, sending what a lookup sends but the number', async () => {
+    const { links, request } = api(
+      json(owner),
+      json({ error: 'No lookups are left for today. Sign in to keep going.', scope: 'daily' }, 429, { 'Retry-After': '3600' }),
+      json({ error: 'Parcel unavailable', code: 'parcel_unavailable' }, 404),
+    );
+    const changed = await links.changeParcelCarrier(ID, KEY, {
+      trackingNumber: 'TESTPARCEL983456', carrier: 'dpd', dpdPostcode: ' 8000 ', label: 'For Mum',
+    } as never);
+    expect(changed).toMatchObject({ id: ID, key: KEY, view: { link: { role: 'owner' } } });
+    const [path, init] = request.mock.calls[0];
+    expect(path).toBe(`/api/public/parcels/${ID}/carrier`);
+    expect(init).toMatchObject({ method: 'PATCH', credentials: 'omit', referrerPolicy: 'no-referrer', cache: 'no-store' });
+    expect(new Headers(init!.headers).get('X-Parcel-Key')).toBe(KEY);
+    expect(JSON.parse(String(init!.body))).toEqual({ carrier: 'dpd', dpdPostcode: '8000' });
+    // It counts as a lookup: the day's allowance runs out for it alike.
+    expect((await failure(links.changeParcelCarrier(ID, KEY, { trackingNumber: 'TESTPARCEL983456', carrier: 'ups' }))).kind).toBe('daily');
+    expect((await failure(links.changeParcelCarrier(ID, KEY, { trackingNumber: 'TESTPARCEL983456', carrier: 'ups' }))).kind).toBe('unavailable');
+    // Without a usable key or id nothing is asked.
+    expect((await failure(links.changeParcelCarrier(ID, 'no key', { trackingNumber: 'TESTPARCEL983456', carrier: 'ups' }))).kind).toBe('unavailable');
+    expect((await failure(links.changeParcelCarrier('nope', KEY, { trackingNumber: 'TESTPARCEL983456', carrier: 'ups' }))).kind).toBe('unavailable');
+    expect(request).toHaveBeenCalledTimes(3);
+  });
+
   it('turns a browser’s alerts on and off for a link, and types every refusal', async () => {
     const subscription = { endpoint: 'https://push.example.test/send/abc', keys: { p256dh: 'p256dh-key', auth: 'auth-secret' } };
     const { links, request } = api(

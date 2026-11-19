@@ -10,7 +10,7 @@ import { takeCarrierHandoff } from '../lib/carrierHandoff';
 import { clearSharedParcelInput, readSharedParcel } from '../lib/shareTarget';
 import { carrierBrand } from '../lib/carrierBrand';
 import { carrierChoiceSections, carrierChoiceTags, shapeCarrier, usedCarrierIds } from '../lib/carrierPicker';
-import { carrierInfo, formatTrackingNumber } from '../lib/carriers';
+import { carrierInfo, formatTrackingNumber, normalizeTrackingNumber } from '../lib/carriers';
 import { focusClickedButton } from '../lib/modal';
 import { useTabTitle } from '../lib/tabTitle';
 import type { CarrierId } from '../types';
@@ -23,13 +23,13 @@ import { followInPlace, SOURCE_URL } from './landing/links';
 import { SAMPLE_COUNT, SampleLine, SampleText } from './landing/Sample';
 import { useLive, useReducedMotion } from './landing/useLive';
 import { useSampleLoop } from './landing/useSampleLoop';
-import { startSample, type ParcelLinkView, type ParcelLookup } from './links';
+import { isParcelLinkId, startSample, type ParcelLinkView, type ParcelLookup } from './links';
 import { DoorIcon } from './lookup/DoorNote';
 import { LookupFeedback } from './lookup/LookupFeedback';
 import { countdown } from './lookup/machine';
 import { looksLikeNumber } from './lookup/reading';
 import { DOOR_STOPS, doorStops } from './lookup/stops';
-import { useLookup } from './lookup/useLookup';
+import { useLookup, type Relinking } from './lookup/useLookup';
 import { LookupVerification } from './lookup/LookupVerification';
 import { parcelCode } from './parcelCode';
 import { clearPendingAdd, rememberPendingAdd } from './pendingAdd';
@@ -77,8 +77,10 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
   const screens = parcelCode.useCode(!firstVisit);
   // The buttons wait for the page to be live; what was typed into the field before that stays.
   const ready = useSyncExternalStore(subscribeToHydration, () => true, () => false);
+  // A parcel's page that hands its number back for its carrier to be chosen names its link, which the choice moves.
+  const relinking = useRef<Relinking | null>(null);
   const lookup = useLookup(useCallback(({ id, key, view }: ParcelLookup) =>
-    onTracked({ id, key, carrier: view.parcel.carrier, response: view }), [onTracked]));
+    onTracked({ id, key, carrier: view.parcel.carrier, response: view }), [onTracked]), relinking);
   const { state, found, retryIn, send } = lookup;
   // What signing in unlocks is asked here, over the door, and what was typed waits for the deliveries' add sheet.
   const [unlock, setUnlock] = useState<UnlockReason | null>(null);
@@ -160,6 +162,7 @@ export function FrontDoor({ onTracked, onSample, onSignIn, covered = false }: {
     if (!handed) return;
     // eslint-disable-next-line react-hooks/set-state-in-effect -- session storage, which only the live page can read
     if (!handed.pick) return put(handed.text);
+    relinking.current = handed.link && isParcelLinkId(handed.link) ? { id: handed.link, number: normalizeTrackingNumber(handed.text) } : null;
     if (field.current) field.current.value = handed.text;
     touch();
     send({ type: 'edit', text: handed.text, via: 'typing' });

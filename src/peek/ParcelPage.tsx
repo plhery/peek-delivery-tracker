@@ -507,10 +507,10 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // The sample's way back to the landing: at its own address for someone signed in, whose `/` is their deliveries.
   const landingPath = signedIn ? LANDING_PATH : '/';
   const toLanding = () => { if (signedIn) openLanding(); else leave(); };
-  // The front door takes the number with its carrier picker open, and looks it up again with the carrier chosen.
+  // The front door takes the number with its carrier picker open, and moves this link to the carrier chosen.
   const chooseCarrier = () => {
     trackAction('parcel-link-choose-carrier');
-    writeCarrierHandoff(parcel.trackingNumber, Date.now(), { pick: true });
+    writeCarrierHandoff(parcel.trackingNumber, Date.now(), { pick: true, link: linkId });
     toLanding();
   };
   const invitation = sample && <SampleInvitation carrier={displayed} onTrack={onHome} onSignIn={visitor ? signInToKeep : undefined} />;

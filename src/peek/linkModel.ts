@@ -114,6 +114,11 @@ export interface ParcelLinksClient {
    * that carrier, or as it now stands when nothing is asked any more; fails as `refused` when the carrier refuses it.
    */
   addParcelPostcode(id: string, key: string, carrier: CarrierId, postcode: string, country?: string, signal?: AbortSignal): Promise<ParcelLinkView>;
+  /**
+   * Changes the lookup's carrier, or the inputs it takes, on the same link, with its owner key: the number is asked
+   * about again with that carrier, as a lookup is, and counts as one. Answers the link as its owner now sees it.
+   */
+  changeParcelCarrier(id: string, key: string, input: ParcelLookupInput, signal?: AbortSignal): Promise<ParcelLookup>;
   /** Turns a browser's alerts on for this link, or changes what they announce. Anyone with the link can. */
   setParcelAlert(id: string, alert: ParcelAlertInput, key?: string | null): Promise<void>;
   /** Turns a browser's alerts off. Nothing is said about whether there were any. */

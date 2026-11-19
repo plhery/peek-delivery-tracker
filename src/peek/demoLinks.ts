@@ -14,6 +14,7 @@ import {
   type ParcelAlertPreset,
   type ParcelLinksClient,
   type ParcelLinkView,
+  type ParcelLookupInput,
   type ParcelShare,
   type ParcelShareClient,
 } from './linkModel';
@@ -213,6 +214,42 @@ export function createDemoLinks(
     return isParcelLinkId(id) && Object.hasOwn(links, id) ? links[id] : null;
   }
 
+  /**
+   * The story of a number looked up with a carrier, as the server would store it: a parcel waiting for its first
+   * check, and the parcel that check finds.
+   */
+  function firstStory(input: ParcelLookupInput): Pick<DemoLink, 'createdAt' | 'parcel' | 'arriving'> {
+    const trackingNumber = normalizeTrackingNumber(input.trackingNumber);
+    if (!KEPT_NUMBER_SHAPE.test(trackingNumber) || !validTrackingNumber(input.trackingNumber)) {
+      throw new ParcelLinkError('validation', { guidance: 'error.trackingNumber' });
+    }
+    const time = now();
+    const createdAt = new Date(time).toISOString();
+    const detected = input.carrier ?? parseTrackingInput(trackingNumber).carrier;
+    const known = detected === 'unknown' ? undefined : detected;
+    const told = story(trackingNumber, known, time);
+    const parcel: ParcelWithEvents = {
+      ...told,
+      id: uid(),
+      trackingNumber,
+      label: '',
+      carrier: known ?? told.carrier,
+      createdAt,
+      dpdPostcode: undefined,
+      archivedAt: undefined,
+      lastSyncedAt: new Date(time + FIRST_CHECK_MS).toISOString(),
+    };
+    parcel.events = told.events.map((event) => ({ ...event, parcelId: parcel.id }));
+    return {
+      createdAt,
+      parcel: {
+        id: parcel.id, trackingNumber, label: '', carrier: parcel.carrier, createdAt, syncStatus: 'pending',
+        events: [simulated(parcel.id, 'pending', createdAt)],
+      },
+      arriving: { at: time + FIRST_CHECK_MS, parcel },
+    };
+  }
+
   const shared = (links: DemoLinks, packageId: string) =>
     Object.entries(links).find(([, link]) => link.account === packageId && !link.stopped) ?? null;
   const share = (id: string, link: DemoLink): ParcelShare =>
@@ -228,37 +265,8 @@ export function createDemoLinks(
 
     async lookupParcel(input, signal) {
       signal?.throwIfAborted();
-      const trackingNumber = normalizeTrackingNumber(input.trackingNumber);
-      if (!KEPT_NUMBER_SHAPE.test(trackingNumber) || !validTrackingNumber(input.trackingNumber)) {
-        throw new ParcelLinkError('validation', { guidance: 'error.trackingNumber' });
-      }
-      const time = now();
-      const createdAt = new Date(time).toISOString();
-      const detected = input.carrier ?? parseTrackingInput(trackingNumber).carrier;
-      const known = detected === 'unknown' ? undefined : detected;
-      const told = story(trackingNumber, known, time);
-      const parcel: ParcelWithEvents = {
-        ...told,
-        id: uid(),
-        trackingNumber,
-        label: '',
-        carrier: known ?? told.carrier,
-        createdAt,
-        dpdPostcode: undefined,
-        archivedAt: undefined,
-        lastSyncedAt: new Date(time + FIRST_CHECK_MS).toISOString(),
-      };
-      parcel.events = told.events.map((event) => ({ ...event, parcelId: parcel.id }));
-      const link: DemoLink = {
-        key: newOwnerKey(),
-        createdAt,
-        openedAt: createdAt,
-        parcel: {
-          id: parcel.id, trackingNumber, label: '', carrier: parcel.carrier, createdAt, syncStatus: 'pending',
-          events: [simulated(parcel.id, 'pending', createdAt)],
-        },
-        arriving: { at: time + FIRST_CHECK_MS, parcel },
-      };
+      const story = firstStory(input);
+      const link: DemoLink = { key: newOwnerKey(), openedAt: story.createdAt, ...story };
       const id = newLinkId();
       save({ ...load(), [id]: link });
       return { id, key: link.key!, view: view(id, link, true) };
@@ -323,6 +331,18 @@ export function createDemoLinks(
       if (!link || link.key === null || link.key !== key) throw new ParcelLinkError('unavailable');
       // No carrier asks the demo's parcels for a postcode: like the server once nothing is asked, the parcel as it stands.
       return view(id, link, true);
+    },
+
+    async changeParcelCarrier(id, key, input, signal) {
+      signal?.throwIfAborted();
+      const links = load();
+      const link = found(links, id);
+      if (!link || link.key === null || link.key !== key || link.account) throw new ParcelLinkError('unavailable');
+      // Like the server: the link keeps what it shows and its alerts, and its number starts again with that carrier.
+      const { parcel, arriving } = firstStory({ ...input, trackingNumber: link.parcel.trackingNumber });
+      const next: DemoLink = { ...link, parcel, arriving };
+      save({ ...links, [id]: next });
+      return { id, key, view: view(id, next, true) };
     },
 
     async setParcelAlert(id, alert, key) {

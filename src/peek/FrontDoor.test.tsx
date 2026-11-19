@@ -21,10 +21,11 @@ import { CARRIER_HANDOFF_STORAGE_KEY, writeCarrierHandoff } from '../lib/carrier
 import { POSTCODES_STORAGE_KEY, rememberPostcode } from '../lib/postcodeMemory';
 import { pickCandidate, pressEnter } from '../test/inputMethod';
 
-const mocks = vi.hoisted(() => ({ lookup: vi.fn(), detect: vi.fn(), read: vi.fn(), forget: vi.fn(), sample: vi.fn() }));
+const mocks = vi.hoisted(() => ({ lookup: vi.fn(), change: vi.fn(), detect: vi.fn(), read: vi.fn(), forget: vi.fn(), sample: vi.fn() }));
 vi.mock('./links', async (original) => ({
   ...await original<typeof import('./links')>(),
   lookupParcel: mocks.lookup,
+  changeParcelCarrier: mocks.change,
   detectCarrierPublic: mocks.detect,
   readParcelLink: mocks.read,
   forgetParcelLink: mocks.forget,
@@ -787,6 +788,35 @@ describe('FrontDoor', () => {
     await user.click(screen.getByRole('button', { name: 'Track' }));
     await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'DEMO4471205', carrier: 'ups' }, expect.any(AbortSignal)));
     expect(sessionStorage.getItem(CARRIER_HANDOFF_STORAGE_KEY)).toBeNull();
+  });
+
+  it('moves the lookup whose page handed its number back to the carrier chosen, on the same link', async () => {
+    const waiting = (carrier: 'unknown' | 'ups') => testView({ parcel: { trackingNumber: 'DEMO4471205', carrier, syncStatus: 'pending' }, stages: ['pending'] });
+    rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: waiting('unknown') });
+    const moved: ParcelLookup = { id: LINK_ID, key: OWNER_KEY, view: waiting('ups') };
+    mocks.change.mockResolvedValue(moved);
+    writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true, link: LINK_ID });
+    const user = userEvent.setup();
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    const picker = await screen.findByRole('dialog', { name: 'Carrier' });
+    await user.type(within(picker).getByRole('combobox', { name: 'Search carriers' }), 'UPS');
+    await user.click(within(picker).getByRole('option', { name: /^UPS/ }));
+    await user.click(screen.getByRole('button', { name: 'Track' }));
+    await waitFor(() => expect(onTracked).toHaveBeenCalledExactlyOnceWith({ id: LINK_ID, key: OWNER_KEY, carrier: 'ups', response: moved.view }));
+    expect(mocks.change).toHaveBeenCalledExactlyOnceWith(LINK_ID, OWNER_KEY, { trackingNumber: 'DEMO4471205', carrier: 'ups' }, expect.any(AbortSignal));
+    expect(mocks.lookup).not.toHaveBeenCalled();
+  });
+
+  it('looks the number up afresh when this device no longer holds the key of the link that handed it back', async () => {
+    writeCarrierHandoff('DEMO4471205', Date.now(), { pick: true, link: OTHER_LINK_ID });
+    const user = userEvent.setup();
+    render(<FrontDoor onTracked={onTracked} onSample={onSample} onSignIn={onSignIn} />);
+    const picker = await screen.findByRole('dialog', { name: 'Carrier' });
+    await user.type(within(picker).getByRole('combobox', { name: 'Search carriers' }), 'UPS');
+    await user.click(within(picker).getByRole('option', { name: /^UPS/ }));
+    await user.click(screen.getByRole('button', { name: 'Track' }));
+    await waitFor(() => expect(mocks.lookup).toHaveBeenCalledWith({ trackingNumber: 'DEMO4471205', carrier: 'ups' }, expect.any(AbortSignal)));
+    expect(mocks.change).not.toHaveBeenCalled();
   });
 
   it('leaves a number from a carrier’s page for later while it makes sure whose the landing is', async () => {

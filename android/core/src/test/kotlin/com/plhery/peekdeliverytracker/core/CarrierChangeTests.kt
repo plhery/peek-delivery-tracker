@@ -187,6 +187,37 @@ class CarrierChangeTests {
         assertEquals("", CarrierChange.start(boots, catalog = catalog, region = "CH").deliveryPostcode)
     }
 
+    /**
+     * A postcode given to a carrier that reads it alone and takes any country's, such as DPD Switzerland or DHL Germany,
+     * says nothing of its country: Mondial Relay's and PostNL's fields, which read it, neither start from it nor offer it.
+     */
+    @Test
+    fun aPostcodeGivenToACarrierThatTakesAnyCountrysPostcodeBringsNoCountry() {
+        val relay = parcel(CarrierId.Unknown, number = "76434219")
+        val postnl = parcel(CarrierId.Unknown, number = "3SABCD826405193")
+        for (carrier in listOf(CarrierId.Dpd, CarrierId.Dhl)) {
+            val french = listOf(GivenPostcode(carrier, "75001"))
+            val change = CarrierChange.start(relay, CarrierId.MondialRelay, catalog, "FR", french)
+            assertEquals(carrier.rawValue, "", change.deliveryPostcode)
+            assertEquals(carrier.rawValue, "FR", change.postcodeCountry)
+            assertNull(carrier.rawValue, start(postnl, CarrierId.SpringGDS).offeredPostcode(french))
+        }
+        // A DPD parcel's own French postcode, as the store gives it, is left out when its carrier changes to Mondial Relay.
+        val dpdParcel = parcel(CarrierId.Dpd, number = "76434219", postcode = "75001")
+        val moved = start(dpdParcel).choosing(CarrierId.MondialRelay, GivenPostcode.candidates(listOf(dpdParcel), emptyList()))
+        assertEquals("", moved.deliveryPostcode)
+
+        // One given to DPD Germany, which takes German postcodes only, is German.
+        val german = CarrierChange.start(relay, CarrierId.MondialRelay, catalog, "FR", listOf(GivenPostcode(CarrierId("dpd-de"), "10115")))
+        assertEquals("10115", german.deliveryPostcode)
+        assertEquals("DE", german.postcodeCountry)
+        assertEquals("DE", german.sentPostcodeCountry)
+        // A country recorded with it still wins.
+        val recorded = CarrierChange.start(relay, CarrierId.MondialRelay, catalog, "BE", listOf(GivenPostcode(CarrierId.Dpd, "75001", "FR")))
+        assertEquals("75001", recorded.deliveryPostcode)
+        assertEquals("FR", recorded.postcodeCountry)
+    }
+
     @Test
     fun thePostcodesCountryIsOfferedWhereTheFieldTakesSeveralAndShapesIt() {
         val change = start(parcel(CarrierId.Unknown, number = "76434219"), CarrierId.MondialRelay, region = "FR")

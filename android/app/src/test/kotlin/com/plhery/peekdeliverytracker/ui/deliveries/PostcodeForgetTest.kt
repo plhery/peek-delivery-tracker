@@ -117,7 +117,7 @@ class PostcodeForgetTest {
      */
     @Test
     fun aPostcodeTypedByHandAfterAnotherCarriersFieldWasFilledWithItOffersNoForget() {
-        showPostNL(listOf(GivenPostcode(CarrierId.Dpd, "1234 AB")))
+        showPostNL(listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB")))
         pick(PACKS_1114, "Packs")
         assertEquals("1234 AB", fieldText(ADD_POSTCODE))
         assertTrue("Packs' field was filled from memory, so Forget shows there", exists(ADD_FORGET_POSTCODE))
@@ -134,7 +134,7 @@ class PostcodeForgetTest {
     /** The same postcode typed by hand in PostNL's field, with no other field filled before, offers no Forget. */
     @Test
     fun aPostcodeTypedByHandWithNothingFilledBeforeOffersNoForget() {
-        showPostNL(listOf(GivenPostcode(CarrierId.Dpd, "1234 AB")))
+        showPostNL(listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB")))
         assertTrue(exists(ADD_USE_POSTCODE))
         node(ADD_POSTCODE).performTextInput("1234 AB")
         compose.waitForIdle()
@@ -145,7 +145,7 @@ class PostcodeForgetTest {
     /** PostNL's field filled by tapping Use offers Forget, as on the iPhone. */
     @Test
     fun aPostcodeFilledWithUseOffersForget() {
-        showPostNL(listOf(GivenPostcode(CarrierId.Dpd, "1234 AB")))
+        showPostNL(listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB")))
         node(ADD_USE_POSTCODE).performClick()
         settle()
         assertEquals("1234 AB", fieldText(ADD_POSTCODE))

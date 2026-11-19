@@ -72,7 +72,7 @@ class PostcodeForgetReturnTest {
     private fun showPostNL() {
         source = FakeDeliveries(listOf(lamp), reader).apply {
             isGuest = true
-            givenPostcodes = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"))
+            givenPostcodes = listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB"))
         }
         compose.setContent {
             val density = LocalDensity.current

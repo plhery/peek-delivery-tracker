@@ -949,7 +949,7 @@ class AddParcelTest {
     }
 
     /** Add on [POSTNL], PostNL's by its shape, its postcode optional, with `given` the postcodes given before. */
-    private fun showPostNL(guest: Boolean = false, given: List<GivenPostcode> = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"))) {
+    private fun showPostNL(guest: Boolean = false, given: List<GivenPostcode> = listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB"))) {
         show {
             isGuest = guest
             givenPostcodes = given
@@ -985,7 +985,7 @@ class AddParcelTest {
         assertFalse(exists(ADD_USE_POSTCODE))
         node(ADD_SAVE).assertIsEnabled().performClick()
         settle()
-        assertEquals(listOf(FakeDeliveries.AdditionRequest(POSTNL, "", CarrierId.SpringGDS, null, "1234 AB", "CH")), source.additions)
+        assertEquals(listOf(FakeDeliveries.AdditionRequest(POSTNL, "", CarrierId.SpringGDS, null, "1234 AB", null)), source.additions)
     }
 
     @Test
@@ -1023,7 +1023,7 @@ class AddParcelTest {
     /** A guest's postcode forgotten in one carrier's field leaves the others' that held it, which start afresh. */
     @Test
     fun aPostcodeForgottenForOneCarrierLeavesEveryOther() {
-        showPostNL(guest = true, given = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"), GivenPostcode(CarrierId.Dpd, "5678 CD")))
+        showPostNL(guest = true, given = listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB"), GivenPostcode(CarrierId.SpringGDS, "5678 CD")))
         pick(PACKS, "Packs")
         assertEquals("1234 AB", fieldText(ADD_POSTCODE))
         backToPostNL()
@@ -1047,7 +1047,7 @@ class AddParcelTest {
      */
     @Test
     fun aForgottenPostcodeEmptiesEveryFieldHoldingItFilledOrTypedWhichFillAgainFromWhatIsLeft() {
-        showPostNL(guest = true, given = listOf(GivenPostcode(CarrierId.Dpd, "1234 AB"), GivenPostcode(CarrierId.Dpd, "5678 CD")))
+        showPostNL(guest = true, given = listOf(GivenPostcode(CarrierId.SpringGDS, "1234 AB"), GivenPostcode(CarrierId.SpringGDS, "5678 CD")))
         pick(PACKS, "Packs")
         assertEquals("1234 AB", fieldText(ADD_POSTCODE))
         pick(TRANSMISSION, "TransMission")

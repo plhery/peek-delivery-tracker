@@ -1208,6 +1208,35 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun aRememberedPostcodeGivenToACarrierThatTakesAnyCountrysBringsNoCountry() {
+        val mondialRelay = postcodeRequirement(CarrierId.MondialRelay, "76434219")
+        val postnl = postcodeRequirement(CarrierId.SpringGDS, "3SABCD826405193")
+        val dpdGermany = CarrierId("dpd-de")
+        // DPD Switzerland, DHL Germany and GLS Germany read the postcode alone, from any country: a French one given them
+        // is not Swiss or German.
+        for (carrier in listOf(CarrierId.Dpd, CarrierId.Dhl, CarrierId.GlsDe)) {
+            val french = listOf(GivenPostcode(carrier, "75001"))
+            assertNull(carrier.rawValue, catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, french))
+            assertNull(carrier.rawValue, catalog.rememberedPostcode(CarrierId.SpringGDS, postnl, french))
+        }
+        // DPD Germany takes German postcodes only.
+        assertEquals(GivenPostcode(dpdGermany, "10115", "DE"),
+            catalog.rememberedPostcode(CarrierId.SpringGDS, postnl, listOf(GivenPostcode(dpdGermany, "10115"))))
+        // A country recorded with it still wins.
+        assertEquals("FR", catalog.rememberedPostcode(CarrierId.MondialRelay, mondialRelay, listOf(GivenPostcode(CarrierId.Dpd, "75001", "FR")))?.country)
+
+        // The rule itself: recorded, else the home of a carrier that reads the country, else the home of one whose field
+        // takes only its own countries' postcodes.
+        assertEquals("FR", catalog.givenPostcodeCountry(GivenPostcode(CarrierId.Dpd, "75001", "fr")))
+        assertEquals("FR", catalog.givenPostcodeCountry(GivenPostcode(CarrierId.MondialRelay, "75001")))
+        assertEquals("NL", catalog.givenPostcodeCountry(GivenPostcode(CarrierId.SpringGDS, "1012 AB")))
+        assertEquals("DE", catalog.givenPostcodeCountry(GivenPostcode(dpdGermany, "10115")))
+        assertEquals("CH", catalog.givenPostcodeCountry(GivenPostcode(CarrierId.GlsCh, "8004")))
+        assertNull(catalog.givenPostcodeCountry(GivenPostcode(CarrierId.Dpd, "75001")))
+        assertNull(catalog.givenPostcodeCountry(GivenPostcode(CarrierId.Dhl, "75001")))
+    }
+
+    @Test
     fun thePostcodeSuggestedIsTheNewestThatFitsTheCarriersOwnFirst() {
         fun parcel(carrier: CarrierId, postcode: String?, day: Int) =
             this@CarrierCatalogTests.parcel("TESTPARCEL123", "", carrier, "2026-10-0${day}T08:00:00Z", dpdPostcode = postcode)

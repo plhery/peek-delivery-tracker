@@ -348,11 +348,25 @@ class CarrierCatalog private constructor(
     }
 
     /**
+     * The country of a postcode given before: the one recorded with it. Otherwise, where the carrier it was given to
+     * reads the country, that carrier's home, as only another country is recorded. Where it reads the postcode alone,
+     * its home only when none of its requirements takes any country's postcode: one that does says nothing of the
+     * country, so it is not known (null).
+     */
+    fun givenPostcodeCountry(entry: GivenPostcode): String? {
+        entry.country?.nonEmpty?.let { return it.uppercase() }
+        val requirements = info(entry.carrier).tracking.requirements ?: emptyList()
+        if (requirements.any { it.readsCountry == true }) return homeCountry(entry.carrier)
+        return if (requirements.any { it.field == CarrierRequirement.Field.DpdPostcode && it.takesAnyPostcode }) null
+        else homeCountry(entry.carrier)
+    }
+
+    /**
      * The postcode given before to suggest for `carrier`'s field (`requirement`, before a country shapes it): the
      * last one given to the same carrier, otherwise the last one given to any carrier that the field takes, as it
      * takes it. Most parcels go to the same address. A field that reads the postcode's country takes one only from
-     * a country it lists, the one `chosen` beside it once one is, in that country's shape, and the postcode brings
-     * its country. One kept without its country was given from its carrier's home, for which none is sent.
+     * a country it lists ([givenPostcodeCountry]), the one `chosen` beside it once one is, in that country's shape,
+     * and the postcode brings its country.
      */
     fun rememberedPostcode(
         carrier: CarrierId,
@@ -363,7 +377,7 @@ class CarrierCatalog private constructor(
         val readsCountry = requirement.readsCountry == true
         val countries = postcodeCountries(carrier, requirement)
         val fitting = given.mapNotNull { entry ->
-            val country = if (readsCountry) entry.country?.uppercase() ?: homeCountry(entry.carrier) else homeCountry(carrier)
+            val country = if (readsCountry) givenPostcodeCountry(entry) else homeCountry(carrier)
             if (readsCountry && (country == null || country !in countries || (chosen != null && chosen != country))) {
                 return@mapNotNull null
             }

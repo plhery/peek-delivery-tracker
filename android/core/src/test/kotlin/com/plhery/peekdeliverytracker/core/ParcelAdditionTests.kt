@@ -402,6 +402,42 @@ class ParcelAdditionTests {
         assertEquals("1009", fromThere[CarrierId.MondialRelay])
     }
 
+    /**
+     * A postcode given to a carrier that reads it alone and takes any country's, such as DPD Switzerland or DHL Germany,
+     * says nothing of its country: a field that reads the country neither starts from it nor offers it. One given to a
+     * carrier that takes only its own country's, such as DPD Germany, is from there.
+     */
+    @Test
+    fun aPostcodeGivenToACarrierThatTakesAnyCountrysPostcodeBringsNoCountry() {
+        val relay = addition("76434219", region = "FR").copy(carrierOverride = CarrierId.MondialRelay)
+        val postnl = addition("3SABCD826405193", region = "FR")
+        for (carrier in listOf(CarrierId.Dpd, CarrierId.Dhl)) {
+            val french = listOf(GivenPostcode(carrier, "75001"))
+            val (filled, fills) = relay.preparePostcode(CarrierPostcodes(), emptyMap(), french)
+            val shown = relay.withPostcode(filled, fills)
+            assertEquals(carrier.rawValue, "", shown.deliveryPostcode)
+            assertEquals(carrier.rawValue, "FR", shown.postcodeCountry)
+            assertNull(carrier.rawValue, postnl.withPostcode(CarrierPostcodes()).offeredPostcode(french))
+        }
+
+        val german = listOf(GivenPostcode(CarrierId("dpd-de"), "10115"))
+        val (filled, fills) = relay.preparePostcode(CarrierPostcodes(), emptyMap(), german)
+        val shown = relay.withPostcode(filled, fills)
+        assertEquals("10115", shown.deliveryPostcode)
+        assertEquals("DE", shown.postcodeCountry)
+        assertEquals(GivenPostcode(CarrierId("dpd-de"), "10115", "DE"), postnl.withPostcode(CarrierPostcodes()).offeredPostcode(german))
+
+        // A country recorded with it still wins.
+        val recorded = listOf(GivenPostcode(CarrierId.Dpd, "75001", "FR"))
+        val (kept, keptFills) = relay.copy(region = "BE").preparePostcode(CarrierPostcodes(), emptyMap(), recorded)
+        assertEquals("75001", relay.withPostcode(kept, keptFills).deliveryPostcode)
+        assertEquals("FR", relay.copy(region = "BE").withPostcode(kept, keptFills).postcodeCountry)
+        // A field that reads the postcode alone takes it as before.
+        val gls = addition("999999999916").copy(carrierOverride = CarrierId.GlsCh)
+        val (swiss, _) = gls.preparePostcode(CarrierPostcodes(), emptyMap(), listOf(GivenPostcode(CarrierId.Dpd, "8004")))
+        assertEquals("8004", gls.withPostcode(swiss).deliveryPostcode)
+    }
+
     @Test
     fun aForgottenPostcodeLeavesEveryCarriersFieldAndThePostcodesAreKeptAsText() {
         val postcodes = CarrierPostcodes()

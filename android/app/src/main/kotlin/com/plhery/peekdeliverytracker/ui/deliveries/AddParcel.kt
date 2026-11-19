@@ -505,8 +505,10 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
     // A change's spring covers that change only, as `withAnimation` does: what comes later moves on the form's own.
     SideEffect { motion.duration = null }
     // What another app shared while Add was up takes the field's place, as a paste does (`onChange(of: draft)`), once;
-    // then what Add opened or was filled with is kept in its form alone.
-    LaunchedEffect(request.fill) {
+    // then what Add opened or was filled with is kept in its form alone. Shared while Add saves, it waits: it fills the
+    // form where the save fails, and opens an Add of its own once this one has gone ([DeliveriesState.addClosed]).
+    LaunchedEffect(request.fill, saving) {
+        if (request.fill != null && saving) return@LaunchedEffect
         if (request.fill != null) actions.fill(request.label, request.draft.orEmpty())
         state.taken(request)
     }

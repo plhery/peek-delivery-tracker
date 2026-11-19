@@ -23,9 +23,12 @@ import com.plhery.peekdeliverytracker.core.SharedParcelDraft
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import java.io.IOException
 import java.util.UUID
+import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -177,6 +180,53 @@ class SharedDraftTest {
         assertEquals("1Z999AA10123456793", fieldText(ADD_TRACKING))
         assertEquals("A draft without a name leaves the name", "Running shoes", fieldText(ADD_NAME))
         assertEquals(2, received())
+    }
+
+    /** Add from the +, with `number` typed and saving until the test lets the save go. */
+    private fun saveHeld(number: String): CompletableDeferred<Unit> {
+        val held = CompletableDeferred<Unit>()
+        source.adding = held
+        compose.onNodeWithTag(ADD_BUTTON).performClick()
+        settle()
+        compose.onNodeWithTag(ADD_TRACKING).performTextReplacement(number)
+        settle()
+        compose.onNodeWithTag(ADD_SAVE).performClick()
+        settle()
+        return held
+    }
+
+    @Test
+    fun aDraftSharedWhileAddSavesWaitsForItAndOpensAnAddOfItsOwnOnceItHasGone() {
+        show()
+        val held = saveHeld("1Z999AA10123456784")
+        val saving = deliveries.addition?.id
+        share("1Z999AA10123456793", label = "Running shoes")
+        comeBack()
+        assertEquals("The number saving stays", "1Z999AA10123456784", fieldText(ADD_TRACKING))
+
+        held.complete(Unit)
+        settle()
+        assertEquals(listOf("1Z999AA10123456784"), source.additions.map { it.trackingNumber })
+        assertNotNull(deliveries.addition)
+        assertNotEquals(saving, deliveries.addition?.id)
+        assertEquals("1Z999AA10123456793", fieldText(ADD_TRACKING))
+        assertEquals("Running shoes", fieldText(ADD_NAME))
+        assertEquals(1, received())
+    }
+
+    @Test
+    fun aDraftSharedWhileAddSavesFillsItWhereTheSaveFails() {
+        show()
+        val held = saveHeld("1Z999AA10123456784")
+        val saving = deliveries.addition?.id
+        share("1Z999AA10123456793", label = "Running shoes")
+        comeBack()
+        source.failure = IOException("offline")
+        held.complete(Unit)
+        settle()
+        assertEquals(saving, deliveries.addition?.id)
+        assertEquals("1Z999AA10123456793", fieldText(ADD_TRACKING))
+        assertEquals("Running shoes", fieldText(ADD_NAME))
     }
 
     @Test

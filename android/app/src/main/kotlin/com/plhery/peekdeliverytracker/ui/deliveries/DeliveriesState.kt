@@ -889,7 +889,8 @@ internal class DeliveriesState(
     /**
      * What another app shared (`consumeSharedDraft()`'s `sharedDraft = draft; showingAdd = true`): Add opens with its
      * name and its whole text (all a share brings, [ParcelAddition.tracking]), as the iPhone's `init(draft:)`; Add
-     * already open takes them in place of what it holds, as a paste does (`fill(_:)`, [AddRequest.fill]).
+     * already open takes them in place of what it holds, as a paste does (`fill(_:)`, [AddRequest.fill]), once it is
+     * not saving.
      */
     fun addSharedDraft(draft: SharedParcelDraft) {
         val text = ParcelAddition.tracking(draft.trackingInput)
@@ -1060,12 +1061,18 @@ internal class DeliveriesState(
 
     /**
      * `addClosed()`, once Add has gone (`request`'s): the card it added comes to the list's middle, the search and
-     * filters that would hide it cleared, while the window is in front.
+     * filters that would hide it cleared, while the window is in front. A draft shared while it saved opens Add again
+     * instead.
      */
     fun addClosed(request: AddRequest?) {
         if (addition != null) return
         additionClosing = false
         request?.let { source.pageWork.forget(it.id) }
+        // What another app shared while Add saved, which waited for it to go, opens Add again.
+        if (request?.fill != null) {
+            open(AddRequest(UUID.randomUUID(), request.draft, label = request.label), focus = null)
+            return
+        }
         val parcelId = addedParcel ?: return
         addedParcel = null
         if (!inFront) return

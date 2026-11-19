@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "Снова запустите Gateway командой {{start}}, затем спросите своего агента о посылках.",
   "assistants.setup.openclaw.remote": "Если браузер открыт на другом устройстве, страница, которую он откроет после входа, не загрузится: завершите вход с кодом из её адреса, как объясняет OpenClaw в терминале.",
   "assistants.setup.homeAssistant.who": "В Home Assistant 2026.11 или новее, с интеграцией Peek: она показывает ваши посылки в Home Assistant — с датчиками, календарём и карточкой для панелей — и не использует адрес выше.",
-  "assistants.setup.homeAssistant.open": "Откройте {{marketplace}}, выберите {{link}}, вставьте {{repository}} и выберите {{add}}. Затем установите Peek и выберите {{setUp}}.",
+  "assistants.setup.homeAssistant.open": "Откройте {{marketplace}}, найдите Peek, откройте его и выберите {{install}}, затем {{setUp}}. Если Peek нет в списке, выберите {{link}}, вставьте {{repository}} и выберите {{add}}.",
   "assistants.setup.homeAssistant.use": "Перезагрузите страницу. Затем измените панель: выберите {{addCard}}, затем {{byCard}} и, наконец, {{card}}.",
   "assistants.setup.signIn": "Войдите в Peek, когда вас попросят, затем выберите {{allow}}.",
   "assistants.uses": "О чём его попросить",

@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Um deine Pakete in Home Assistant zu verfolgen, installiere Peek für Home Assistant: Die Integration holt deine Paketliste aus [Peek](/) in Home Assistant, in Form von Sensoren, einem Lieferkalender, einer Dashboard-Karte und einem Werkzeug für Assist. Du brauchst ein kostenloses Peek-Konto und Home Assistant 2026.11 oder neuer, wo du sie über ihren Link aus dem Marketplace hinzufügst; für 2026.10 nennt das README der Integration einen Weg über HACS.
+Um deine Pakete in Home Assistant zu verfolgen, installiere Peek für Home Assistant: Die Integration holt deine Paketliste aus [Peek](/) in Home Assistant, in Form von Sensoren, einem Lieferkalender, einer Dashboard-Karte und einem Werkzeug für Assist. Du brauchst ein kostenloses Peek-Konto und Home Assistant 2026.11 oder neuer, wo du im Marketplace nach Peek suchst; unter 2026.10 suchst du in HACS danach.
 
 ## Was zeigt Peek in Home Assistant?
 
@@ -26,7 +26,7 @@ Home Assistant fragt Peek alle 30 Minuten ab, alle 10 Minuten an einem Tag, an d
 
 ## Was brauche ich?
 
-- **Home Assistant 2026.11 oder neuer**, wie Peeks Seite sagt, und eine Anmeldung als Administrator: Der Marketplace von Home Assistant ist nur für Administratoren da. Für 2026.10 nennt das README der Integration einen Weg über HACS.
+- **Home Assistant 2026.11 oder neuer**, wie Peeks Seite sagt, und eine Anmeldung als Administrator: Der Marketplace von Home Assistant ist nur für Administratoren da. Unter 2026.10 installierst du sie über HACS.
 - **Ein Peek-Konto.** Beim Einrichten öffnet sich Peek zur Anmeldung, mit einem sechsstelligen Code, den Peek dir mailt, oder mit Google oder Apple, wo der Bildschirm das anbietet. Bei deiner ersten Anmeldung wird das Konto angelegt; als Gast kannst du Home Assistant nicht verbinden.
 - **Sonst nichts.** Peek ist kostenlos, und du musst weder eine Client-ID noch ein Secret noch Application Credentials eintippen. Mit jedem Home Assistant lässt sich nur ein Peek-Konto verbinden.
 
@@ -34,13 +34,13 @@ Die Integration verbindet sich wie die Assistenten, und Peeks Verbindungen für 
 
 ## Wie installiere ich die Peek-Integration?
 
-Aus dem Marketplace von Home Assistant, über ihren Link, denn Peek steht noch nicht im Katalog des Marketplace. Unter 2026.10 nimm HACS oder installiere sie von Hand.
+Suche im Marketplace von Home Assistant nach Peek. Unter 2026.10 suche in HACS danach oder installiere sie von Hand.
 
 ### Aus dem Marketplace (Home Assistant 2026.11 und neuer)
 
 :::steps
-- Öffne „Settings › Marketplace“ | Wähle „Add from link“, gib `https://github.com/plhery/peek-ha` ein und wähle „Add“. Beim ersten Mal bittet dich der Marketplace, GitHub zu verbinden.
-- Installiere Peek | Öffne Peek in der Liste und wähle „Install“, dann „Set up“.
+- Öffne „Settings › Marketplace“ | Suche nach „Peek“ und öffne den Eintrag.
+- Installiere Peek | Wähle „Install“, dann „Set up“.
 - Melde dich bei Peek an | Dein Browser öffnet Peek. Prüfe, worum Home Assistant bittet (deine Pakete sehen, sie hinzufügen und archivieren), und wähle dann „Erlauben“.
 - Geh zurück zu Home Assistant | Peek schickt dich über My Home Assistant (my.home-assistant.io) zurück. Beim ersten Mal fragt es nach der Adresse deines Home Assistant.
 :::
@@ -48,10 +48,12 @@ Aus dem Marketplace von Home Assistant, über ihren Link, denn Peek steht noch n
 ### Mit HACS (Home Assistant 2026.10)
 
 :::steps
-- Füge ein benutzerdefiniertes Repository hinzu | Füge in HACS `https://github.com/plhery/peek-ha` als benutzerdefiniertes Repository vom Typ „Integration“ hinzu.
+- Suche nach Peek | Suche in HACS nach „Peek“ und öffne den Eintrag.
 - Lade Peek herunter | Starte Home Assistant dann neu.
 - Füge die Integration hinzu | Geh zu „Settings › Devices & services › Add integration“, wähle Peek, melde dich bei Peek an und wähle „Erlauben“.
 :::
+
+Steht Peek nicht in der Liste, füge `https://github.com/plhery/peek-ha` über seinen Link hinzu: im Marketplace mit „Add from link“, der dich beim ersten Mal bittet, GitHub zu verbinden, oder in HACS als benutzerdefiniertes Repository vom Typ „Integration“.
 
 Du kannst sie auch von Hand installieren: Kopiere den Ordner `custom_components/peek` in den Ordner `custom_components` deiner Konfiguration, starte neu und füge die Integration wie oben hinzu.
 
@@ -96,7 +98,9 @@ Zum Entfernen löschst du Peek unter „Settings › Devices & services“: Home
 :::sources
 - [Peek für Home Assistant: README (auf Englisch)](https://github.com/plhery/peek-ha) – was es hinzufügt, Versionen, Installation, Anmeldung, die Karte, Automatisierungen, Assist, Datenschutz, Entfernen
 - [Peek für Home Assistant: hacs.json](https://github.com/plhery/peek-ha/blob/main/hacs.json) – die älteste Version von Home Assistant, auf der es sich installieren lässt, 2026.10
-- [Home Assistant: Marketplace (auf Englisch)](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, Add from link, GitHub verbinden, Install, nur für Administratoren, ersetzt HACS ab 2026.11
+- [Home Assistant: Marketplace (auf Englisch)](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, Suche, Add from link, GitHub verbinden, Install, nur für Administratoren, ersetzt HACS ab 2026.11
+- [HACS: Standardliste der Integrationen](https://github.com/hacs/default/blob/master/integration) – Peeks Eintrag, plhery/peek-ha, im Katalog, den HACS und der Marketplace durchsuchen
+- [Home Assistant auf GitHub: Katalog des Marketplace](https://github.com/home-assistant/core/blob/dev/homeassistant/components/marketplace/const.py) – der Marketplace nutzt die Standardliste von HACS, hacs/default
 - [Peek: Peek mit Claude, ChatGPT oder Gemini verbinden](https://peektracker.com/de/assistants) – die Schritte für Home Assistant auf Peeks Seite, 2026.11 oder neuer
 - [Peek auf GitHub: Einrichtung der einzelnen Assistenten](https://github.com/plhery/peek-delivery-tracker/blob/main/src/assistants/setups.tsx) – die Menünamen von Home Assistant
 - [Peek auf GitHub: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – Version, Schritte, Konto, Beta

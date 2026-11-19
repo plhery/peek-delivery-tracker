@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "Inicie o Gateway de novo com {{start}} e depois pergunte ao seu agente sobre suas encomendas.",
   "assistants.setup.openclaw.remote": "Se o seu navegador estiver em outro dispositivo, a página que ele abre depois do login não carrega: termine com o código que está no endereço dela, como o OpenClaw explica no terminal.",
   "assistants.setup.homeAssistant.who": "No Home Assistant 2026.11 ou mais recente, com a integração Peek: ela traz suas encomendas para o Home Assistant, com sensores, um calendário e um card para os painéis, e não usa o endereço acima.",
-  "assistants.setup.homeAssistant.open": "Abra {{marketplace}}, selecione {{link}}, cole {{repository}} e selecione {{add}}. Depois instale o Peek e selecione {{setUp}}.",
+  "assistants.setup.homeAssistant.open": "Abra {{marketplace}}, pesquise o Peek, abra-o e selecione {{install}}, depois {{setUp}}. Se o Peek não aparecer, selecione {{link}}, cole {{repository}} e selecione {{add}}.",
   "assistants.setup.homeAssistant.use": "Recarregue a página. Depois edite um painel: selecione {{addCard}}, depois {{byCard}} e por fim {{card}}.",
   "assistants.setup.signIn": "Faça login no Peek quando for pedido e depois selecione {{allow}}.",
   "assistants.uses": "O que pedir",

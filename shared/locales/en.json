@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "Start the Gateway again with {{start}}, then ask your agent about your parcels.",
   "assistants.setup.openclaw.remote": "If your browser is on another device, the page it opens after you sign in won’t load: finish with the code in that page’s address, as OpenClaw explains in the terminal.",
   "assistants.setup.homeAssistant.who": "In Home Assistant 2026.11 or later, with the Peek integration: it brings your parcels into Home Assistant, with sensors, a calendar and a dashboard card, and doesn’t use the address above.",
-  "assistants.setup.homeAssistant.open": "Open {{marketplace}}, select {{link}}, paste {{repository}} and select {{add}}. Then install Peek and select {{setUp}}.",
+  "assistants.setup.homeAssistant.open": "Open {{marketplace}}, search for Peek, open it and select {{install}}, then {{setUp}}. If Peek isn’t listed, select {{link}}, paste {{repository}} and select {{add}}.",
   "assistants.setup.homeAssistant.use": "Reload the page. Then edit a dashboard, select {{addCard}}, then {{byCard}}, and pick {{card}}.",
   "assistants.setup.signIn": "Sign in to Peek when it asks, then select {{allow}}.",
   "assistants.uses": "What to ask it",

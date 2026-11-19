@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Per tracciare i tuoi pacchi in Home Assistant, installa Peek per Home Assistant: l'integrazione porta il tuo elenco di pacchi di [Peek](/) in Home Assistant sotto forma di sensori, di un calendario delle consegne, di una scheda per la dashboard e di uno strumento per Assist. Ti servono un account Peek gratuito e Home Assistant 2026.11 o successivo, dove la aggiungi dal Marketplace tramite il suo link; con la versione 2026.10, il README dell'integrazione indica una strada tramite HACS.
+Per tracciare i tuoi pacchi in Home Assistant, installa Peek per Home Assistant: l'integrazione porta il tuo elenco di pacchi di [Peek](/) in Home Assistant sotto forma di sensori, di un calendario delle consegne, di una scheda per la dashboard e di uno strumento per Assist. Ti servono un account Peek gratuito e Home Assistant 2026.11 o successivo, dove cerchi Peek nel Marketplace; con la versione 2026.10, lo cerchi in HACS.
 
 ## Cosa mostra Peek in Home Assistant?
 
@@ -26,7 +26,7 @@ Home Assistant interroga Peek ogni 30 minuti, ogni 10 minuti in un giorno in cui
 
 ## Cosa mi serve?
 
-- **Home Assistant 2026.11 o successivo**, come dice la pagina di Peek, e un accesso da amministratore: il Marketplace di Home Assistant è solo per gli amministratori. Con la versione 2026.10, il README dell'integrazione indica una strada tramite HACS.
+- **Home Assistant 2026.11 o successivo**, come dice la pagina di Peek, e un accesso da amministratore: il Marketplace di Home Assistant è solo per gli amministratori. Con la versione 2026.10, installala da HACS.
 - **Un account Peek.** La configurazione apre Peek per farti accedere, con un codice di sei cifre che Peek ti manda per e-mail, oppure con Google o Apple dove la schermata lo propone. Il tuo primo accesso crea l'account; un ospite non può collegare Home Assistant.
 - **Nient'altro.** Peek è gratuito, e non c'è nessun client id, secret o Application Credentials da digitare. A ogni Home Assistant si può collegare un solo account Peek.
 
@@ -34,13 +34,13 @@ L'integrazione si collega come fanno gli assistenti, e i collegamenti di Peek pe
 
 ## Come installo l'integrazione Peek?
 
-Dal Marketplace di Home Assistant, tramite il suo link, perché Peek non è ancora nel catalogo del Marketplace. Con la versione 2026.10, usa HACS o installala a mano.
+Cerca Peek nel Marketplace di Home Assistant. Con la versione 2026.10, cercalo in HACS o installa l'integrazione a mano.
 
 ### Dal Marketplace (Home Assistant 2026.11 e successivi)
 
 :::steps
-- Apri «Settings › Marketplace» | Seleziona «Add from link», inserisci `https://github.com/plhery/peek-ha` e seleziona «Add». La prima volta, il Marketplace ti chiede di collegare GitHub.
-- Installa Peek | Apri Peek nell'elenco e seleziona «Install», poi «Set up».
+- Apri «Settings › Marketplace» | Cerca «Peek» e aprilo.
+- Installa Peek | Seleziona «Install», poi «Set up».
 - Accedi a Peek | Il browser apre Peek. Controlla cosa chiede Home Assistant (vedere i tuoi pacchi, aggiungerli e archiviarli), poi seleziona «Consenti».
 - Torna a Home Assistant | Peek ti riporta indietro tramite My Home Assistant (my.home-assistant.io). La prima volta, ti chiede l'indirizzo del tuo Home Assistant.
 :::
@@ -48,10 +48,12 @@ Dal Marketplace di Home Assistant, tramite il suo link, perché Peek non è anco
 ### Con HACS (Home Assistant 2026.10)
 
 :::steps
-- Aggiungi un repository personalizzato | In HACS, aggiungi `https://github.com/plhery/peek-ha` come repository personalizzato di tipo «Integration».
+- Cerca Peek | In HACS, cerca «Peek» e aprilo.
 - Scarica Peek | Poi riavvia Home Assistant.
 - Aggiungi l'integrazione | Vai in «Settings › Devices & services › Add integration», scegli Peek, accedi a Peek e seleziona «Consenti».
 :::
+
+Se Peek non compare, aggiungi `https://github.com/plhery/peek-ha` tramite il suo link: con «Add from link» nel Marketplace, che la prima volta ti chiede di collegare GitHub, oppure come repository personalizzato di tipo «Integration» in HACS.
 
 Puoi anche installarla a mano: copia la cartella `custom_components/peek` nella cartella `custom_components` della tua configurazione, riavvia e aggiungi l'integrazione come sopra.
 
@@ -96,7 +98,9 @@ Per rimuoverla, elimina Peek in «Settings › Devices & services»: Home Assist
 :::sources
 - [Peek per Home Assistant: README (in inglese)](https://github.com/plhery/peek-ha) – cosa aggiunge, versioni, installazione, accesso, la scheda, automazioni, Assist, privacy, rimozione
 - [Peek per Home Assistant: hacs.json](https://github.com/plhery/peek-ha/blob/main/hacs.json) – la versione più vecchia di Home Assistant su cui si installa, 2026.10
-- [Home Assistant: Marketplace (in inglese)](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, Add from link, collegare GitHub, Install, solo per gli amministratori, sostituisce HACS dalla 2026.11
+- [Home Assistant: Marketplace (in inglese)](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, ricerca, Add from link, collegare GitHub, Install, solo per gli amministratori, sostituisce HACS dalla 2026.11
+- [HACS: elenco predefinito delle integrazioni](https://github.com/hacs/default/blob/master/integration) – la voce di Peek, plhery/peek-ha, nel catalogo in cui cercano HACS e il Marketplace
+- [Home Assistant su GitHub: il catalogo del Marketplace](https://github.com/home-assistant/core/blob/dev/homeassistant/components/marketplace/const.py) – il Marketplace usa l'elenco predefinito di HACS, hacs/default
 - [Peek: Collegare Peek a Claude, ChatGPT o Gemini](https://peektracker.com/it/assistants) – i passaggi per Home Assistant sulla pagina di Peek, 2026.11 o successivo
 - [Peek su GitHub: la configurazione di ogni assistente](https://github.com/plhery/peek-delivery-tracker/blob/main/src/assistants/setups.tsx) – i nomi dei menu di Home Assistant
 - [Peek su GitHub: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – versione, passaggi, account, Beta

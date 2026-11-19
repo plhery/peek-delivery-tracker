@@ -120,7 +120,7 @@ describe('assistants in Settings', () => {
     await user.click(screen.getByText('Home Assistant'));
     const homeAssistant = Array.from(setup.querySelectorAll('details')).at(-1);
     expect(Array.from(homeAssistant?.querySelectorAll('li') ?? []).map((step) => step.textContent)).toEqual([
-      'Open Settings › Marketplace, select Add from link, paste https://github.com/plhery/peek-ha and select Add. Then install Peek and select Set up.',
+      'Open Settings › Marketplace, search for Peek, open it and select Install, then Set up. If Peek isn’t listed, select Add from link, paste https://github.com/plhery/peek-ha and select Add.',
       'Sign in to Peek when it asks, then select Allow.',
       'Reload the page. Then edit a dashboard, select Add card, then By card, and pick Peek parcels.',
     ]);

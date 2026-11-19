@@ -57,10 +57,11 @@
       "steps": [
         ["assistants.setup.homeAssistant.open", {
           "marketplace": "Settings › Marketplace",
+          "install": "Install",
+          "setUp": "Set up",
           "link": "Add from link",
           "repository": "https://github.com/plhery/peek-ha",
-          "add": "Add",
-          "setUp": "Set up"
+          "add": "Add"
         }],
         ["assistants.setup.homeAssistant.use", { "addCard": "Add card", "byCard": "By card", "card": "Peek parcels" }]
       ]

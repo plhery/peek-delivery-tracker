@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "Uruchom Gateway ponownie poleceniem {{start}}, a potem zapytaj swojego agenta o przesyłki.",
   "assistants.setup.openclaw.remote": "Jeśli przeglądarka jest na innym urządzeniu, strona, którą otworzy po zalogowaniu, się nie wczyta: dokończ z kodem z jej adresu, tak jak wyjaśnia OpenClaw w terminalu.",
   "assistants.setup.homeAssistant.who": "W Home Assistant 2026.11 lub nowszym, z integracją Peek: przenosi Twoje przesyłki do Home Assistant, z czujnikami, kalendarzem i kartą na pulpit, i nie korzysta z adresu powyżej.",
-  "assistants.setup.homeAssistant.open": "Otwórz {{marketplace}}, wybierz {{link}}, wklej {{repository}} i wybierz {{add}}. Potem zainstaluj Peek i wybierz {{setUp}}.",
+  "assistants.setup.homeAssistant.open": "Otwórz {{marketplace}}, wyszukaj Peek, otwórz go i wybierz {{install}}, potem {{setUp}}. Jeśli Peek nie ma na liście, wybierz {{link}}, wklej {{repository}} i wybierz {{add}}.",
   "assistants.setup.homeAssistant.use": "Odśwież stronę. Potem edytuj pulpit: wybierz {{addCard}}, następnie {{byCard}} i na koniec {{card}}.",
   "assistants.setup.signIn": "Zaloguj się do Peek, gdy pojawi się prośba, a potem wybierz {{allow}}.",
   "assistants.uses": "O co go poprosić",

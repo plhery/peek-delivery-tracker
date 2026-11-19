@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "Starte das Gateway mit {{start}} wieder und frag dann deinen Agenten nach deinen Paketen.",
   "assistants.setup.openclaw.remote": "Läuft dein Browser auf einem anderen Gerät, lädt die Seite nicht, die er nach der Anmeldung öffnet: Schließ mit dem Code aus ihrer Adresse ab, wie OpenClaw es im Terminal erklärt.",
   "assistants.setup.homeAssistant.who": "In Home Assistant 2026.11 oder neuer, mit der Peek-Integration: Sie bringt deine Pakete in Home Assistant, mit Sensoren, einem Kalender und einer Dashboard-Karte, und braucht die Adresse oben nicht.",
-  "assistants.setup.homeAssistant.open": "Öffne {{marketplace}}, wähle {{link}}, füge {{repository}} ein und wähle {{add}}. Installiere dann Peek und wähle {{setUp}}.",
+  "assistants.setup.homeAssistant.open": "Öffne {{marketplace}}, suche nach Peek, öffne den Eintrag und wähle {{install}}, dann {{setUp}}. Steht Peek nicht in der Liste, wähle {{link}}, füge {{repository}} ein und wähle {{add}}.",
   "assistants.setup.homeAssistant.use": "Lade die Seite neu. Bearbeite dann ein Dashboard: Wähle {{addCard}}, dann {{byCard}} und schließlich {{card}}.",
   "assistants.setup.signIn": "Melde dich bei Peek an, wenn du danach gefragt wirst, und wähle {{allow}}.",
   "assistants.uses": "Was du fragen kannst",

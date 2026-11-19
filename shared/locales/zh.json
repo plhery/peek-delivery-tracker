@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "用 {{start}} 重新启动 Gateway，然后向你的智能体询问你的包裹。",
   "assistants.setup.openclaw.remote": "如果浏览器在另一台设备上，登录后打开的页面将无法加载：按照 OpenClaw 在终端中的说明，用该页面地址中的代码完成登录。",
   "assistants.setup.homeAssistant.who": "适用于 Home Assistant 2026.11 或更高版本，通过 Peek 集成：它把你的包裹带进 Home Assistant，提供传感器、日历和仪表盘卡片，不需要上面的地址。",
-  "assistants.setup.homeAssistant.open": "打开 {{marketplace}}，选择 {{link}}，粘贴 {{repository}}，然后选择 {{add}}。接着安装 Peek，并选择 {{setUp}}。",
+  "assistants.setup.homeAssistant.open": "打开 {{marketplace}}，搜索 Peek，打开它并选择 {{install}}，然后选择 {{setUp}}。如果列表中没有 Peek，请选择 {{link}}，粘贴 {{repository}}，然后选择 {{add}}。",
   "assistants.setup.homeAssistant.use": "重新加载页面。然后编辑一个仪表盘：选择 {{addCard}}，再选择 {{byCard}}，最后选择 {{card}}。",
   "assistants.setup.signIn": "在提示时登录 Peek，然后选择{{allow}}。",
   "assistants.uses": "可以让它做什么",

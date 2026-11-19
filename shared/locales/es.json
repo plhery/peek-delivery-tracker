@@ -1402,7 +1402,7 @@
   "assistants.setup.openclaw.use": "Vuelve a iniciar el Gateway con {{start}} y luego pregunta a tu agente por tus paquetes.",
   "assistants.setup.openclaw.remote": "Si tu navegador está en otro dispositivo, la página que abre después de iniciar sesión no carga: termina con el código que aparece en su dirección, como explica OpenClaw en el terminal.",
   "assistants.setup.homeAssistant.who": "En Home Assistant 2026.11 o posterior, con la integración de Peek: lleva tus paquetes a Home Assistant, con sensores, un calendario y una tarjeta para tus paneles, y no usa la dirección de arriba.",
-  "assistants.setup.homeAssistant.open": "Abre {{marketplace}}, selecciona {{link}}, pega {{repository}} y selecciona {{add}}. Luego instala Peek y selecciona {{setUp}}.",
+  "assistants.setup.homeAssistant.open": "Abre {{marketplace}}, busca Peek, ábrelo y selecciona {{install}} y luego {{setUp}}. Si Peek no aparece, selecciona {{link}}, pega {{repository}} y selecciona {{add}}.",
   "assistants.setup.homeAssistant.use": "Recarga la página. Luego edita un panel: selecciona {{addCard}}, después {{byCard}} y por último {{card}}.",
   "assistants.setup.signIn": "Inicia sesión en Peek cuando te lo pida y luego selecciona {{allow}}.",
   "assistants.uses": "Qué pedirle",

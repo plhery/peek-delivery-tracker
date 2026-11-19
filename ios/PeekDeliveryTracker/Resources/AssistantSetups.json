@@ -150,10 +150,11 @@
           "assistants.setup.homeAssistant.open",
           {
             "marketplace": "Settings › Marketplace",
+            "install": "Install",
+            "setUp": "Set up",
             "link": "Add from link",
             "repository": "https://github.com/plhery/peek-ha",
-            "add": "Add",
-            "setUp": "Set up"
+            "add": "Add"
           }
         ],
         [

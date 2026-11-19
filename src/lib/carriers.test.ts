@@ -949,17 +949,16 @@ describe('carrier detection', () => {
   });
 
   it('paack — Paack', () => {
-    // No exclusive number detector by design: reported identifiers span 9–29 chars with
-    // letters, and broad guesses would cause false carrier selections. All of these need
-    // explicit selection plus the delivery postcode.
+    // Reported identifiers span 9–29 chars with letters, and broad guesses would cause false
+    // carrier selections: only 5340 and fourteen digits, which recur on Paack's labels, name it
+    // (the scraper's paack-5340 rule). The others need explicit selection plus the delivery postcode.
     // Sources (all https://www.ocu.org OCU public complaints):
     // https://www.ocu.org/reclamar/lista-reclamaciones-publicas/no-me-llega-el-pedido/4032cceef0a358e05d (16-digit)
     // https://www.ocu.org/reclamar/lista-reclamaciones-publicas/incumplimient-reiterado-y-bloq/23dcce3eced56549b3 (18-digit)
     // https://www.ocu.org/reclamar/lista-reclamaciones-publicas/falso-intento-de-entrega/373a062914965f9e1b (9-digit)
     // https://www.ocu.org/reclamar/lista-reclamaciones-publicas/mucho-retraso-en-entrega/3e6c4a88d9208bdbc4 (29-digit)
     expect(detectCarrierMatch('9451162004086887').carrier).toBe('unknown');
-    // 5340 and fourteen digits recur on Paack's labels; the scraper's paack-5340 rule may name Paack.
-    expect(['unknown', 'paack']).toContain(detectCarrierMatch('534000021250958171').carrier);
+    expect(detectCarrierMatch('534000021250958171').carrier).toBe('paack');
     expect(detectCarrierMatch('437650784').carrier).toBe('unknown');
     expect(detectCarrier('00100909086360120251130131718')).toBe('unknown');
   });

@@ -249,7 +249,19 @@ class AppNotifications(
                 timeZone = android.icu.util.TimeZone.getTimeZone(zone.id)
             }.format(Date.from(scanned))
             val today = local.toLocalDate() == now.atZone(zone).toLocalDate()
-            return (if (today) sameDay else otherDay).replace("{{time}}", time).replace("{{date}}", day)
+            return fill(if (today) sameDay else otherDay, time, day)
+        }
+
+        /**
+         * Writes the time and the day into the sentence alone: the end of the first line, after the parcel's name and
+         * its " · " (`notificationBody` in src/server/push.ts), or the whole line without a name. The name and the place
+         * on the line under it read as they were written, even with `{{time}}` in them.
+         */
+        private fun fill(body: String, time: String, date: String): String {
+            val lineEnd = body.indexOf('\n').takeIf { it >= 0 } ?: body.length
+            val start = body.substring(0, lineEnd).lastIndexOf(" · ").takeIf { it >= 0 }?.plus(" · ".length) ?: 0
+            val sentence = body.substring(start, lineEnd).replace("{{time}}", time).replace("{{date}}", date)
+            return body.substring(0, start) + sentence + body.substring(lineEnd)
         }
     }
 }

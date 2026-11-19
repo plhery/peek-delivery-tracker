@@ -142,6 +142,29 @@ class AppNotificationsTest {
         assertEquals(written, posted("$parcel").extras.getCharSequence(Notification.EXTRA_TEXT).toString())
     }
 
+    /** The time and the day go into the sentence alone: a parcel's name and its place read as they were written. */
+    @Test
+    fun aDeliveryTimeLeavesTheParcelsNameAndPlaceAsTheyWereWritten() {
+        val pacific = ZoneId.of("America/Los_Angeles")
+        val push = mapOf(
+            "scan_at" to "2026-09-06T23:51:00.000Z",
+            "body_same_day" to "Clock {{time}} · Mum · delivered at {{time}}\nShop {{date}}",
+            "body_other_day" to "Clock {{time}} · Mum · delivered on {{date}} at {{time}}\nShop {{date}}",
+            "date_locale" to "en-CH",
+        )
+        assertEquals(
+            "Clock {{time}} · Mum · delivered at 16:51\nShop {{date}}",
+            AppNotifications.deviceClockBody(push, Instant.parse("2026-09-07T03:00:00Z"), pacific),
+        )
+        assertEquals(
+            "Clock {{time}} · Mum · delivered on 6 September at 16:51\nShop {{date}}",
+            AppNotifications.deviceClockBody(push, Instant.parse("2026-09-08T12:00:00Z"), pacific),
+        )
+        // Without a name, the whole first line is the sentence.
+        val unnamed = push + mapOf("body_same_day" to "Delivered at {{time}}\nShop {{date}}", "body_other_day" to "Delivered on {{date}} at {{time}}")
+        assertEquals("Delivered at 16:51\nShop {{date}}", AppNotifications.deviceClockBody(unnamed, Instant.parse("2026-09-07T03:00:00Z"), pacific))
+    }
+
     /**
      * A push's times are on the clock chosen in Settings, else on the phone's as the push is posted, the app not running:
      * the service sends a body for each clock (`body_12_hour`), and the time of a delivery for the phone to write.

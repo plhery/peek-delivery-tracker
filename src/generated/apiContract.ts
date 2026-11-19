@@ -2112,7 +2112,7 @@ export const CARRIER_CAPABILITIES = {
           "gls-group.eu",
           "gls-group.com"
         ],
-        "pathPattern": "^/(?:GROUP|BE|BG|CZ|DK|FI|HR|HU|IE|LU|NL|RO|RS|SI|SK)/",
+        "pathPattern": "^/(?:GROUP|BE|BG|CZ|DK|FI|HR|IE|LU|NL|RO|RS|SI|SK)/",
         "params": [
           "match",
           "parcelNumber",
@@ -62443,6 +62443,40 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "high"
       }
     ]
+  },
+  "gls-hu": {
+    "displayName": "GLS Hungary",
+    "aliases": [
+      "GLS Magyarország",
+      "GLS General Logistics Systems Hungary"
+    ],
+    "countries": [
+      "HU"
+    ],
+    "color": "#ffdd00",
+    "selectable": true,
+    "timezone": "Europe/Budapest",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "gls-hu"
+    },
+    "trackingUrlTemplate": "https://gls-group.com/HU/hu/csomagkovetes/?match={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "gls-group.com",
+          "gls-group.eu"
+        ],
+        "pathPattern": "^/HU/",
+        "params": [
+          "match",
+          "parcelNumber",
+          "matchParcelNumber"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://gls-group.com/HU/hu/csomagkovetes/"
   }
 } as const;
 
@@ -64353,7 +64387,8 @@ export const CARRIER_IDS = [
   "pdu",
   "byt",
   "jch",
-  "ywbz"
+  "ywbz",
+  "gls-hu"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

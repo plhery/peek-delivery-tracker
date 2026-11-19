@@ -7939,6 +7939,28 @@
     ]
   },
   {
+    "input": "03036730068",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics"
+    ]
+  },
+  {
     "input": "0304/14852112",
     "carrier": "nacex",
     "confidence": "high",
@@ -40533,6 +40555,34 @@
     ]
   },
   {
+    "input": "3370344902",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl-express",
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "acs-courier",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight",
+      "geniki-taxydromiki"
+    ],
+    "preferred": [
+      "dhl-express"
+    ],
+    "asked": [
+      "dhl-express",
+      "acs-courier",
+      "geniki-taxydromiki",
+      "packeta",
+      "dhl-ecommerce-es"
+    ]
+  },
+  {
     "input": "337122110",
     "carrier": "unknown",
     "confidence": "none",
@@ -40636,6 +40686,26 @@
     ],
     "asked": [
       "dhl-ecommerce"
+    ]
+  },
+  {
+    "input": "3396222637",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
     ]
   },
   {
@@ -40791,6 +40861,46 @@
       "tnt",
       "tforce-freight",
       "xpo-ltl"
+    ]
+  },
+  {
+    "input": "3415154701",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
+    "input": "3423876510",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
     ]
   },
   {
@@ -71656,6 +71766,30 @@
       "gls-ch",
       "poste-italiane",
       "brt"
+    ]
+  },
+  {
+    "input": "90482101783",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
     ]
   },
   {

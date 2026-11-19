@@ -1918,6 +1918,7 @@ value class CarrierId(val rawValue: String) {
         val Byt = CarrierId("byt")
         val Jch = CarrierId("jch")
         val Ywbz = CarrierId("ywbz")
+        val GlsHu = CarrierId("gls-hu")
 
         val entries: List<CarrierId> = listOf(
             SwissPost,
@@ -3777,6 +3778,7 @@ value class CarrierId(val rawValue: String) {
             Byt,
             Jch,
             Ywbz,
+            GlsHu,
         )
     }
 }

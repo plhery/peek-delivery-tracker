@@ -14920,7 +14920,7 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [
       {
-        "pattern": "^(?:TX[A-Z]{2}|AMZB)\\d{9}TX$",
+        "pattern": "^(?:TX[A-Z]{2}|AMZ[BC])\\d{9}TX$",
         "confidence": "high"
       },
       {
@@ -43202,7 +43202,12 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "universal"
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^CMT\\d{12}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.cmtexpress.com.cn/track.aspx"
   },
   "kuayuan-express": {
@@ -62356,7 +62361,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "pdu"
+      "adapter": "pdu",
+      "recognitionRank": 734
     },
     "trackingUrlTemplate": "https://www.pduni.com/",
     "linkRules": [],

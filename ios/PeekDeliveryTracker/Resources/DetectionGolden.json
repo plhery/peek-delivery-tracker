@@ -78649,6 +78649,14 @@
     ]
   },
   {
+    "input": "AMZC123456789TX",
+    "carrier": "total-express",
+    "confidence": "high",
+    "candidates": [
+      "total-express"
+    ]
+  },
+  {
     "input": "AMZPSR020816106",
     "carrier": "unknown",
     "confidence": "low",
@@ -82777,6 +82785,14 @@
     ]
   },
   {
+    "input": "CMT123456789012",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "cmt-express"
+    ]
+  },
+  {
     "input": "CN 022 808 704 JP",
     "carrier": "japan-post",
     "confidence": "high",
@@ -83196,7 +83212,8 @@
       "pdu"
     ],
     "asked": [
-      "colis-prive"
+      "colis-prive",
+      "pdu"
     ]
   },
   {

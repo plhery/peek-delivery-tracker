@@ -1044,6 +1044,35 @@ final class CarrierCatalogTests: XCTestCase {
                        GivenPostcode(carrier: .springGDS, postcode: "1000"))
     }
 
+    func testARememberedPostcodeGivenToACarrierThatTakesAnyCountrysBringsNoCountry() throws {
+        let mondialRelay = try XCTUnwrap(catalog.requirements(for: .mondialRelay, trackingNumber: "76434219").first { $0.field == .dpdPostcode })
+        let postNL = try XCTUnwrap(catalog.requirements(for: .springGDS, trackingNumber: "3SABCD826405193").first { $0.field == .dpdPostcode })
+        let dpdGermany = CarrierID(rawValue: "dpd-de")
+        // DPD Switzerland, DHL Germany and GLS Germany read the postcode alone, from any country: a French one given them
+        // is not Swiss or German.
+        for carrier in [CarrierID.dpd, .dhl, .glsDe] {
+            let french = [GivenPostcode(carrier: carrier, postcode: "75001")]
+            XCTAssertNil(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay, among: french), "\(carrier.rawValue)")
+            XCTAssertNil(catalog.rememberedPostcode(for: .springGDS, requirement: postNL, among: french), "\(carrier.rawValue)")
+        }
+        // DPD Germany takes German postcodes only.
+        XCTAssertEqual(catalog.rememberedPostcode(for: .springGDS, requirement: postNL, among: [GivenPostcode(carrier: dpdGermany, postcode: "10115")]),
+                       GivenPostcode(carrier: dpdGermany, postcode: "10115", country: "DE"))
+        // A country recorded with it still wins.
+        XCTAssertEqual(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay,
+                                                  among: [GivenPostcode(carrier: .dpd, postcode: "75001", country: "FR")])?.country, "FR")
+
+        // The rule itself: recorded, else the home of a carrier that reads the country, else the home of one whose
+        // field takes only its own countries' postcodes.
+        XCTAssertEqual(catalog.givenPostcodeCountry(GivenPostcode(carrier: .dpd, postcode: "75001", country: "fr")), "FR")
+        XCTAssertEqual(catalog.givenPostcodeCountry(GivenPostcode(carrier: .mondialRelay, postcode: "75001")), "FR")
+        XCTAssertEqual(catalog.givenPostcodeCountry(GivenPostcode(carrier: .springGDS, postcode: "1012 AB")), "NL")
+        XCTAssertEqual(catalog.givenPostcodeCountry(GivenPostcode(carrier: dpdGermany, postcode: "10115")), "DE")
+        XCTAssertEqual(catalog.givenPostcodeCountry(GivenPostcode(carrier: .glsCh, postcode: "8004")), "CH")
+        XCTAssertNil(catalog.givenPostcodeCountry(GivenPostcode(carrier: .dpd, postcode: "75001")))
+        XCTAssertNil(catalog.givenPostcodeCountry(GivenPostcode(carrier: .dhl, postcode: "75001")))
+    }
+
     func testThePostcodeSuggestedIsTheNewestThatFitsTheCarriersOwnFirst() throws {
         func requirement(_ carrier: CarrierID, _ number: String) throws -> CarrierRequirement {
             try XCTUnwrap(catalog.requirements(for: carrier, trackingNumber: number).first { $0.field == .dpdPostcode })

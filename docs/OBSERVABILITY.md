@@ -1281,9 +1281,10 @@ as the alert sync does.
 ## Usage dashboard
 
 [ops/grafana/users-and-parcels.json](../ops/grafana/users-and-parcels.json) shows the
-accounts, how many open their deliveries, and the parcels added and being tracked, by UTC
-day. It reads the database's `metrics` schema through a PostgreSQL data source that
-connects as `metrics_reader`. That role can read nothing else, and the schema holds counts
+accounts, how many open their deliveries, the guests, and the parcels added and being tracked,
+by UTC day. It reads the database's `metrics` schema through a PostgreSQL data source that
+connects as `metrics_reader`, and the guests' lookups by proof, kept lookups and networks from
+Prometheus (choose both data sources at the top). That role can read nothing else, and the schema holds counts
 only: no account, parcel or number. To set it up, give the role `LOGIN` and a password,
 add the data source and import the dashboard. In production, the Grafana container joins
 the Supabase stack's network to reach the database.
@@ -1295,6 +1296,10 @@ the Supabase stack's network to reach the database.
   month. `record_account_opened` counts an account the first time it opens them in a period.
 - `metrics.live`, `metrics.open_parcels` and `metrics.carriers`: the latest figures, counted
   when read.
+- `metrics.lookup_returns`, `metrics.lookup_accounts` and `metrics.link_alert_devices`, also
+  counted when read: lookups of the last 30 days opened again on a later day (by anyone holding
+  the link), accounts that kept a lookup made before them, and devices with alerts on links,
+  following one parcel or several. Guests have no id of their own: these stand in for one.
 
 Days from before the schema existed were rebuilt from the rows stored then, so they miss
 the accounts and parcels deleted earlier, and their activity counts sign-ins and session

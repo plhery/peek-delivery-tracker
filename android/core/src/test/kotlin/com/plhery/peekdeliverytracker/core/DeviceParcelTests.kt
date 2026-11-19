@@ -18,6 +18,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.PublicLookupRequest
@@ -141,6 +142,7 @@ class DeviceParcelTests {
         read: (String) -> PublicParcelResponse? = { null },
         alert: (String) -> DeviceAlertAnswer = { DeviceAlertAnswer.On },
         unalert: (String) -> Unit = {},
+        move: ((String, ParcelLinkCarrierRequest) -> PublicParcelResponse?)? = null,
     ) = DeviceParcelClient(
         lookup = { request ->
             calls.add("lookup ${request.trackingNumber} ${request.carrier?.rawValue ?: "-"}")
@@ -182,6 +184,16 @@ class DeviceParcelTests {
         removeAlert = { linkId, request ->
             calls.add("unalert $linkId ${request.token} ${request.transport?.rawValue}")
             unalert(linkId)
+        },
+        changeCarrier = move?.let { answer ->
+            { linkId, key, change ->
+                calls.add("carrier $linkId ${key.take(1)} ${change.carrier.rawValue}")
+                calls.lookupCountry(change.lookupCountryHint)
+                calls.lookupPostcode(change.dpdPostcode)
+                calls.lookupLanguage(change.language)
+                calls.lookupPhoneDigits(change.phoneDigits)
+                answer(linkId, change)
+            }
         },
     )
 
@@ -383,6 +395,124 @@ class DeviceParcelTests {
         }
         assertEquals(emptyList<String>(), calls.all)
         assertEquals(listOf(changing, other), device.list().map { it.id })
+    }
+
+    /**
+     * The website's carrier change (3e35f22cd): the parcel's own link moves to the new carrier and keeps its address, its
+     * key and this phone's notifications, so nothing is looked up afresh, forgotten or signed up again.
+     */
+    @Test
+    fun aNewCarrierMovesTheParcelsOwnLinkWithItsNotifications() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Moon lamp", previousId).copy(alertToken = "token1", alertPreset = ParcelAlertPreset.All))
+        val calls = Calls()
+        val memory = PostcodeMemory(MemoryDefaults())
+        val device = device(
+            client(calls, move = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(nextId, carrier = CarrierId.Dpd)) }),
+            storage, this, postcodes = memory,
+        )
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = "75002")
+        advanceUntilIdle()
+
+        assertEquals(nextId, parcel.id)
+        assertEquals("Moon lamp", parcel.label)
+        assertEquals(CarrierId.Dpd, parcel.carrier)
+        assertEquals(previousId, parcel.carrierData?.originalPackageId)
+        assertEquals(listOf("carrier 22222222222A k dpd"), calls.all)
+        assertEquals(listOf<String?>("CH"), calls.lookupCountries)
+        assertEquals(listOf<String?>("75002"), calls.lookupPostcodes)
+        assertEquals(listOf<String?>(AppLanguage.En.rawValue), calls.lookupLanguages)
+        assertEquals(mapOf("22222222222A" to key), storage.keys)
+        val kept = storage.parcels.single()
+        assertEquals("22222222222A", kept.linkId)
+        assertEquals("token1", kept.alertToken)
+        assertEquals(ParcelAlertPreset.All, kept.alertPreset)
+        assertEquals(listOf("75002"), memory.entries.map { it.postcode })
+    }
+
+    /** A link the service no longer has for this phone's key: the number is looked up afresh, as before. */
+    @Test
+    fun aLinkTheServiceNoLongerHasForItsKeyIsLookedUpAfresh() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Moon lamp", previousId))
+        val calls = Calls()
+        val device = device(
+            client(
+                calls, lookup = PublicLookupResponse(link = link("22222222222B"), key = key, parcel = pkg(nextId, carrier = CarrierId.Dpd)),
+                move = { _, _ -> null },
+            ),
+            storage, this,
+        )
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null)
+
+        assertEquals(nextId, parcel.id)
+        assertEquals("Moon lamp", parcel.label)
+        assertEquals(listOf("carrier 22222222222A k dpd", "lookup TESTPARCEL123789 dpd", "forget 22222222222A"), calls.all)
+        assertEquals(mapOf("22222222222B" to key), storage.keys)
+    }
+
+    @Test
+    fun movingALinkToTheNumberAndCarrierOfAnotherParcelIsRefused() = runTest {
+        val changing = UUID.randomUUID()
+        val other = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", changing, pkg = pkg(changing, carrier = CarrierId.Dhl)),
+            parcel("22222222222B", "", other, pkg = pkg(other, carrier = CarrierId.Dpd)),
+        )
+        val calls = Calls()
+        val device = device(client(calls, move = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(other, carrier = CarrierId.Dpd)) }), storage, this)
+
+        try {
+            device.changeCarrier(id = changing, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null)
+            fail("The link moved onto another parcel's")
+        } catch (error: DeliveryApiError.DuplicateTracking) {
+            assertEquals(other, error.parcelId)
+        }
+        assertEquals(emptyList<String>(), calls.all)
+    }
+
+    /** The move asks the carrier as a lookup does: the same verification, the key, and the service's own 404 as no link. */
+    @Test
+    fun theServiceIsAskedToMoveTheLinkWithItsKeyAndTheLookupsVerification() = runTest {
+        val moved = PublicParcelResponse(link = link("22222222222A"), parcel = pkg(UUID.randomUUID(), carrier = CarrierId.Dpd))
+        var answer = jsonResponse(200, JsonEncoder.deliveryTracker.encode(PublicParcelResponse.serializer(), moved).decodeToString())
+        val transport = RecordingTransport { answer }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val move = DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.UK }).changeCarrier!!
+
+        val response = move("22222222222A", key, ParcelLinkCarrierRequest(carrier = CarrierId.Dpd, lookupCountryHint = "GB"))
+
+        assertEquals(moved.parcel.id, response?.parcel?.id)
+        val request = transport.requests.single()
+        assertEquals("PATCH", request.method)
+        assertEquals("/api/public/parcels/22222222222A/carrier", request.path)
+        assertEquals(key, request.headers["X-Parcel-Key"])
+        assertEquals("1", request.headers["X-Native-Verification"])
+        val body = Json.parseToJsonElement(request.body!!.decodeToString()).jsonObject
+        assertEquals(setOf("carrier", "lookupCountryHint"), body.keys)
+
+        answer = jsonResponse(404, """{"error":"Parcel unavailable","code":"parcel_unavailable"}""")
+        assertNull(move("22222222222A", key, ParcelLinkCarrierRequest(carrier = CarrierId.Dpd)))
+        answer = jsonResponse(429, """{"error":"Daily lookups used up","scope":"daily"}""")
+        try {
+            move("22222222222A", key, ParcelLinkCarrierRequest(carrier = CarrierId.Dpd))
+            fail("Expected the day's lookups spent")
+        } catch (error: DeviceLookupsSpent) {
+            assertEquals(DeviceLookupsSpent(), error)
+        }
     }
 
     @Test
@@ -2042,6 +2172,28 @@ class DeviceParcelTests {
         assertEquals(listOf("token1", "token1"), storage.parcels.mapNotNull { it.alertToken })
     }
 
+    /** Past a round's 25 parcels, the next round asks for the rest at once, without waiting for another token. */
+    @Test
+    fun theParcelsPastARoundsGoInTheNextRound() = runTest {
+        val storage = Memory()
+        val links = (0 until DeviceParcels.alertsPerRound + 2).map { "2222222222%02d".format(it) }
+        storage.keys = links.associateWith { key }
+        storage.parcels = links.map { parcel(it, "", UUID.randomUUID()) }
+        val calls = Calls()
+        val device = device(client(calls), storage, this, now = { Instant.ofEpochSecond(1_800_000_000) })
+        fun alerts() = calls.all.count { it.startsWith("alert") }
+
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(DeviceParcels.alertsPerRound, alerts())
+        assertFalse(device.alertsSettled("token1", NativePushLocale.En))
+        device.retryAlerts()
+        assertEquals(DeviceParcels.alertsPerRound + 2, alerts())
+        assertTrue(device.alertsSettled("token1", NativePushLocale.En))
+        device.retryAlerts()
+        assertEquals("Once every parcel is signed up, nothing is asked again", DeviceParcels.alertsPerRound + 2, alerts())
+        assertEquals(links, storage.parcels.filter { it.alertToken == "token1" }.map { it.linkId })
+    }
+
     /** The guest list's refresh is what tries a round cut short again. */
     @Test
     fun theGuestListsRefreshTriesNotificationsAgainAfterAnOutage() = runTest {
@@ -2074,6 +2226,38 @@ class DeviceParcelTests {
         assertEquals(2, alerts())
         store.load()
         assertEquals("Once it went through, nothing is asked again", 2, alerts())
+    }
+
+    /** A carrier change looked up afresh signs the new lookup's link up for notifications at once, as an added parcel's. */
+    @Test
+    fun aNewLookupForAnotherCarrierIsSignedUpForNotificationsAtOnce() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val previousId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Moon lamp", previousId).copy(alertToken = "token1"))
+        val calls = Calls()
+        val device = device(
+            client(calls, lookup = PublicLookupResponse(link = link("22222222222B"), key = key, parcel = pkg(UUID.randomUUID(), carrier = CarrierId.Dpd))),
+            storage, backgroundScope,
+        )
+        val notifications = DeviceNotificationAccess(
+            status = { NotificationAuthorizationStatus.Authorized }, request = {}, register = {}, token = { "token1" },
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, localizer = Localizer(AppLanguage.En), device = device,
+            deviceNotifications = notifications,
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertTrue(store.isGuest)
+
+        store.changeCarrier(device.list().single(), CarrierId.Dpd, trackingUrl = null, dpdPostcode = null, dpdPostcodeCountry = null)
+        runCurrent()
+
+        assertTrue(calls.all.toString(), calls.all.any { it.startsWith("alert 22222222222B") })
+        assertEquals(listOf("token1"), storage.parcels.map { it.alertToken })
     }
 
     @Test

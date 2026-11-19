@@ -1063,12 +1063,15 @@ class ParcelStore(
         if (isDemo) {
             updated = demo.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, cleanedDigits)
         } else if (isGuest) {
-            // A new lookup takes the old one's place, under a new id.
+            // The parcel's link moves to the new carrier with its notifications, or a new lookup takes its place.
             device.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, cleanedDigits)
             session.checkGeneration(generation)
             mutationRevision += 1
             parcels = device.list()
             beginDevicePolling()
+            // A new lookup's link is signed up for notifications at once, as an added one is; a moved link has them.
+            val language = localizer.language
+            scope.launch { askForDeviceAlerts(language) }
             return
         } else {
             val response = api.changeCarrier(parcel.id, carrier, cleanedUrl, cleanedPostcode, dpdPostcodeCountry, providerPostcode, cleanedDigits)

@@ -774,7 +774,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   details, found or created as a new lookup would, whose check is queued at once. The parcel it
   leaves goes once no link points to it. A change asks a carrier as a lookup does, so it takes
   the same browser or app proof and a lookup from the day's allowance; details the parcel
-  already has change nothing.
+  already has change nothing. The website and the Android app change a lookup's carrier this
+  way; where the link no longer answers to the device's key, they look the number up afresh.
   A parcel filed under no carrier that no carrier or provider has answered for yet is offered
   the first carrier detection lists for its number that serves the country it was looked up
   from and takes only the delivery postcode for numbers of its shape, which recognition

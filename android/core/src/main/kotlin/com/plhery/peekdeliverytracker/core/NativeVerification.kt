@@ -511,11 +511,17 @@ class NativeVerification(
             response.statusCode == 403 && response.header("X-Lookup-Verification") == "required"
 
         /** Which daily allowance a request counts against, as the server tells them apart by path; null for others. */
-        private fun kind(request: HttpRequest): String? = when (Url.parse(request.url)?.path) {
-            "/api/public/parcels" -> "lookup"
-            "/api/public/detect" -> "detection"
-            else -> null
+        private fun kind(request: HttpRequest): String? {
+            val path = Url.parse(request.url)?.path ?: return null
+            return when {
+                // A link's new carrier counts as a lookup.
+                path == "/api/public/parcels" || CARRIER_PATH.matches(path) -> "lookup"
+                path == "/api/public/detect" -> "detection"
+                else -> null
+            }
         }
+
+        private val CARRIER_PATH = Regex("^/api/public/parcels/[^/]+/carrier$")
 
         /** Seconds to the next UTC midnight, when the allowances start again. */
         private fun secondsToMidnight(date: Instant): Long =

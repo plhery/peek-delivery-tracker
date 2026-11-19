@@ -15,6 +15,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.PublicLookupRequest
@@ -206,6 +207,12 @@ class DeviceParcelClient(
     val setAlert: suspend (linkId: String, key: String?, ParcelAppAlertRequest) -> DeviceAlertAnswer = { _, _, _ -> DeviceAlertAnswer.Unavailable },
     /** Turns them off. Anyone with the link and the token may. */
     val removeAlert: suspend (linkId: String, DeleteParcelAppAlertRequest) -> Unit = { _, _ -> },
+    /**
+     * Moves the owner's link to another carrier, link, postcode or phone digits, a lookup that keeps the link: null when
+     * the service has no such link for the key (its 404), and none for a client that can't, which looks the number up
+     * again instead.
+     */
+    val changeCarrier: (suspend (linkId: String, key: String, ParcelLinkCarrierRequest) -> PublicParcelResponse?)? = null,
 ) {
     companion object {
         /**
@@ -227,8 +234,10 @@ class DeviceParcelClient(
                 if (key != null) headers["X-Parcel-Key"] = key
                 if (body != null) headers["Content-Type"] = "application/json"
                 val request = HttpRequest(configuration.apiBaseUrl.appendingPath(path), method, headers, body, timeout = 30.0, handlesCookies = false)
-                if (method == "POST" && (path == "api/public/parcels" || path == "api/public/detect")) {
-                    return verification.send(request, configuration.apiBaseUrl, allowPresentation = path == "api/public/parcels", using = transport)
+                // A new carrier for a link asks the carrier as a lookup does, and takes the same proof.
+                val moving = method == "PATCH" && path.endsWith("/carrier")
+                if (moving || method == "POST" && (path == "api/public/parcels" || path == "api/public/detect")) {
+                    return verification.send(request, configuration.apiBaseUrl, allowPresentation = path != "api/public/detect", using = transport)
                 }
                 return try {
                     transport.data(request)
@@ -311,6 +320,15 @@ class DeviceParcelClient(
                 removeAlert = { linkId, alert ->
                     val response = send("api/public/parcels/$linkId/app-alerts", "DELETE", body = encoder.encode(DeleteParcelAppAlertRequest.serializer(), alert))
                     if (response.statusCode != 204) throw failure(response)
+                },
+                changeCarrier = { linkId, key, change ->
+                    val response = send("api/public/parcels/$linkId/carrier", "PATCH", key, encoder.encode(ParcelLinkCarrierRequest.serializer(), change))
+                    if (response.isServiceNotFound) {
+                        null
+                    } else {
+                        if (response.statusCode != 200) throw failure(response)
+                        decode(PublicParcelResponse.serializer(), response)
+                    }
                 },
             )
         }
@@ -839,8 +857,9 @@ class DeviceParcels(
     }
 
     /**
-     * Follows the same number with another carrier, link, postcode or phone digits: a new lookup, which takes the old
-     * one's place and name.
+     * Follows the same number with another carrier, link, postcode or phone digits. The parcel's own link moves to it
+     * (`PATCH …/carrier`), keeping its address, sharing and notifications, as on the website; where the service no
+     * longer has that link for its key, a new lookup takes the old one's place and name.
      */
     suspend fun changeCarrier(
         id: UUID,
@@ -853,6 +872,35 @@ class DeviceParcels(
         // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change.
         val entry = entries.firstOrNull { it.parcel.id == id }
         if (entry == null || entry.isViewer) throw DeliveryApiError.ParcelMissing()
+        val key = keys.keyOf(entry.linkId)
+        val move = client?.changeCarrier
+        if (key != null && move != null) {
+            entries.firstOrNull {
+                it.parcel.id != id && it.parcel.trackingNumber.equalsCanonically(entry.parcel.trackingNumber) &&
+                    it.parcel.carrier.rawValue.equalsCanonically(carrier.rawValue)
+            }?.let { existing -> throw DeliveryApiError.DuplicateTracking(existing.parcel.id) }
+            val change = ParcelLinkCarrierRequest(
+                carrier = carrier, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode, dpdPostcodeCountry = dpdPostcodeCountry,
+                phoneDigits = phoneDigits, lookupCountryHint = ParcelLookupCountry.hint(region()), language = language().rawValue,
+            )
+            val response = move(entry.linkId, key, change)
+            if (response != null) {
+                // Forgotten here while the service was asked: it stays forgotten.
+                val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
+                if (index < 0) throw DeliveryApiError.ParcelMissing()
+                change(index) {
+                    val moved = it.taking(Parcel(shared = response.parcel)).copy(
+                        checkedAt = now().timeIntervalSinceReferenceDate,
+                        postcodeGiven = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
+                    )
+                    // The link reaches another parcel of the number: the page open on the old one follows it.
+                    if (response.parcel.id != id) moved.copy(replaced = it.replaced ?: id) else moved
+                }
+                save()
+                dpdPostcode?.let { postcodes.remember(it, carrier, dpdPostcodeCountry) }
+                return shown(entries[index])
+            }
+        }
         val added = lookUp(
             CreatePackageRequest(
                 trackingNumber = entry.parcel.trackingNumber, label = entry.label, carrier = carrier,
@@ -1049,7 +1097,8 @@ class DeviceParcels(
         // How long the service asked to be left alone, in seconds, when the round is cut short.
         var pause: Double? = null
         try {
-            val due = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }.take(alertsPerRound)
+            val waiting = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }
+            val due = waiting.take(alertsPerRound)
             for (entry in due) {
                 if (round != alertGeneration) return
                 // Forgotten, or followed through another link, since the round began.
@@ -1092,7 +1141,7 @@ class DeviceParcels(
                     attempt { client.removeAlert(entry.linkId, removal(old)) }
                 }
             }
-            if (round == alertGeneration) holdAlerts(pause, token, locale)
+            if (round == alertGeneration) holdAlerts(pause, token, locale, more = waiting.size > due.size)
         } finally {
             alertRounds.remove(round)
         }
@@ -1114,11 +1163,12 @@ class DeviceParcels(
 
     /**
      * Notes how a round ended: one cut short is tried again after a wait, longer each time it fails again; one that
-     * went through leaves nothing to try again.
+     * went through leaves nothing to try again, unless [more] parcels than a round asks for wait: the next round asks
+     * for them as soon as the list refreshes.
      */
-    private fun holdAlerts(pause: Double?, token: String, locale: NativePushLocale) {
+    private fun holdAlerts(pause: Double?, token: String, locale: NativePushLocale, more: Boolean = false) {
         if (pause == null) {
-            alertRetry = null
+            alertRetry = if (more) AlertRetry(token, locale, now(), alertRetryFirst) else null
             return
         }
         val last = alertRetry
@@ -1178,7 +1228,7 @@ class DeviceParcels(
         const val settledFresh: Double = 12.0 * 60 * 60
         const val waitingFresh: Double = 1.5
 
-        /** How many parcels one round asks notifications for; the rest wait for the next round. */
+        /** How many parcels one round asks notifications for; the rest wait for the next round, at the list's next refresh. */
         const val alertsPerRound = 25
 
         /**

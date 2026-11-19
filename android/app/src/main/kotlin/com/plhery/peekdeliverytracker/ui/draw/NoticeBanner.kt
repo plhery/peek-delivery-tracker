@@ -32,7 +32,7 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
  * `MaintenanceBanner` (DesignSystem.swift): the calm notice shown in place of an error while the server is down for
  * maintenance, [text] in subheadline in the ink after the clock in semibold subheadline, 10 apart, 16 in and 12 down
  * from the edges of Peek's soft yellow with corners of 14. What is shown stays, and the app asks again by itself, so
- * there is nothing to press.
+ * there is nothing to press. A parcel's page shows one over a copy the service forgot.
  */
 @Composable
 fun MaintenanceBanner(text: String, modifier: Modifier = Modifier) {

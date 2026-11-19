@@ -237,7 +237,9 @@ Key server modules:
     once the service no longer has its link, and a refresh that can't read it fails rather
     than saying nothing changed. Only forgetting a parcel, or a new lookup
     taking its place, deletes its link, and the app asks again on each refresh until the
-    service has answered.
+    service has answered. The Android app keeps a lookup the service forgot as the browser
+    does: marked no longer updated, without its key or notifications, never read again,
+    removed from the phone alone, and replaced by a new lookup of the same number.
   - Beside each link the browser notes what its sharer sends along (whether the name
     travels, a gift's note and who it is from, whether viewers read the whole number) and
     the alert it turned on. The notes go when the device forgets the parcel.

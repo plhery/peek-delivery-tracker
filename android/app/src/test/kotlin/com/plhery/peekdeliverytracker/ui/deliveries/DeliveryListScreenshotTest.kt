@@ -37,7 +37,10 @@ import com.plhery.peekdeliverytracker.core.AccountInvitationMemory
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.DeliveryListLayout
 import com.plhery.peekdeliverytracker.core.Localizer
+import com.plhery.peekdeliverytracker.core.ParcelSort
+import com.plhery.peekdeliverytracker.core.ParcelStatusFilter
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.ui.LocalStatusBarHidden
@@ -227,6 +230,26 @@ class DeliveryListScreenshotTest {
     fun aGuestsOfferOfAnAccountWithItsCrossInTwiceTheText() {
         showTheClosableOffer(fontScale = 2f)
         compose.screenshot("list_guest_offer_closable_text2")
+    }
+
+    /**
+     * A guest's parcel that Peek forgot while it was still on its way, the demo's Next up: no longer featured, its card
+     * reads "No longer updated" after its status, with no date, 300 down the window.
+     */
+    @Test
+    fun aGuestsParcelPeekForgotInDark() {
+        val lead = checkNotNull(
+            DeliveryListLayout(
+                DemoCards.parcels(), query = "", status = ParcelStatusFilter.All, carrier = null, sort = ParcelSort.Updated,
+                featuresNext = true, now = CAPTURED,
+            ).next,
+        )
+        show(dark = true, session = AuthenticationState.Welcome) {
+            isGuest = true
+            frozen = setOf(lead.id)
+        }
+        scrollTo(cardKey("remaining", lead.id), { compose.card(lead.label) }, FROZEN_TOP)
+        compose.screenshot("list_frozen_dark")
     }
 
     @Test
@@ -421,3 +444,4 @@ class DeliveryListScreenshotTest {
 private const val PAST_HEADER_TOP = 579.5f
 private const val PAST_HEADER_TOP_DARK = 657.2f
 private const val OFFER_TOP = 400f
+private const val FROZEN_TOP = 300f

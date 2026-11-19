@@ -1347,10 +1347,11 @@ enum class ParcelMenuItem {
          * page's own button does. Every parcel in the list can be changed, in the demo and without an account as
          * well: an archived one is brought back rather than archived. A `reader` follows someone else's parcel
          * through its link: its page shares the link as it is, its carrier is not the reader's to change, and a
-         * number the link hides cannot be copied.
+         * number the link hides cannot be copied. A `frozen` copy, which the service forgot, has no link left to
+         * share and no carrier to change: only what this phone keeps of it changes.
          */
-        fun menu(parcel: Parcel, onCard: Boolean, reader: Boolean = false): List<List<ParcelMenuItem>> {
-            val changes = if (reader) {
+        fun menu(parcel: Parcel, onCard: Boolean, reader: Boolean = false, frozen: Boolean = false): List<List<ParcelMenuItem>> {
+            val changes = if (reader || frozen) {
                 listOf(Rename) + (if (parcel.trackingNumber.isEmpty()) emptyList() else listOf(CopyTrackingNumber))
             } else {
                 listOf(Rename) + (if (onCard) listOf(Share) else emptyList()) + listOf(CopyTrackingNumber, ChangeCarrier)
@@ -1364,7 +1365,11 @@ enum class ParcelMenuItem {
 /** The card a parcel is shown on in the deliveries. */
 enum class DeliveryCardKind { Next, Attention, OnTheWay, Past }
 
-/** Everything the Deliveries list shows, derived in one pass per render. */
+/**
+ * Everything the Deliveries list shows, derived in one pass per render. The `frozen` parcels are copies the service
+ * forgot, whose last answer may no longer hold: they stay among the others, but never lead the list as Next up nor
+ * ask for attention.
+ */
 class DeliveryListLayout(
     parcels: List<Parcel>,
     query: String,
@@ -1374,16 +1379,17 @@ class DeliveryListLayout(
     featuresNext: Boolean,
     now: Instant = AppClock.now(),
     catalog: CarrierCatalog = CarrierCatalog.shared,
+    frozen: Set<UUID> = emptySet(),
 ) {
     val visible: List<Parcel> = ParcelOrganizer.visible(parcels, query, status, carrier, sort, now, catalog)
     val active: List<Parcel> = visible.filter { it.isActive }
-    val next: Parcel? = if (featuresNext) ParcelOrganizer.nextDelivery(active, now) else null
+    val next: Parcel? = if (featuresNext) ParcelOrganizer.nextDelivery(active.filter { it.id !in frozen }, now) else null
     val attention: List<Parcel>
     val remaining: List<Parcel>
     val sections: List<ParcelSection>
 
     init {
-        val others = active.filter { it.id != next?.id }.map { it to it.attention(now) }
+        val others = active.filter { it.id != next?.id }.map { it to if (it.id in frozen) null else it.attention(now) }
         attention = others.filter { it.second != null }.map { it.first }
         remaining = others.filter { it.second == null }.map { it.first }
         sections = ParcelOrganizer.sections(visible, now).filter {

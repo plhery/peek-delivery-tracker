@@ -694,7 +694,7 @@ class DeviceParcelTests {
     }
 
     @Test
-    fun onlyStaleParcelsAreReadAgainAndAForgottenOneLeaves() = runTest {
+    fun onlyStaleParcelsAreReadAgainAndAForgottenOneStaysNoLongerUpdated() = runTest {
         val moving = UUID.randomUUID()
         val arrived = UUID.randomUUID()
         val gone = UUID.randomUUID()
@@ -722,11 +722,102 @@ class DeviceParcelTests {
 
         now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
         device.refresh()
-        // A parcel that arrived rests for hours; the one the service forgot leaves the list.
+        // A parcel that arrived rests for hours; the one the service forgot stays, as it last was, without its key.
         assertEquals(listOf("read 22222222222A k", "read 22222222222C k", "read 22222222222D k"), calls.all)
-        assertEquals(listOf("Moving", "Arrived", "Held"), device.list().map { it.label })
+        assertEquals(listOf("Moving", "Arrived", "Gone", "Held"), device.list().map { it.label })
         assertEquals(TrackingStage.OutForDelivery, device.list().first().currentStage)
         assertNull(storage.keys["22222222222C"])
+        assertTrue(device.isFrozen(gone))
+        assertFalse(device.isFrozen(moving))
+        assertEquals(date(now), storage.parcels.first { it.linkId == "22222222222C" }.frozen?.let { date(DateParser.date(it)!!) })
+    }
+
+    @Test
+    fun aCopyTheServiceForgotIsNeverReadAgainAndOpensAgainWithoutItsKey() = runTest {
+        val id = UUID.randomUUID()
+        var now = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        val first = DeviceParcel(
+            linkId = "22222222222A", label = "Shoes", archivedAt = null, parcel = Parcel(shared = pkg(id)), checkedAt = date(now),
+            alertToken = "token", alertPreset = ParcelAlertPreset.Important,
+        )
+        storage.parcels = listOf(first)
+        val calls = Calls()
+        val device = device(client(calls), storage, this, now = { now })
+
+        now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
+        device.refresh()
+        // Its notifications went with the link: nothing is asked to turn them off, and none is asked for again.
+        val kept = storage.parcels.single()
+        assertNotNull(kept.frozen)
+        assertNull(kept.alertToken)
+        assertNull(kept.alertPreset)
+        assertEquals(emptyMap<String, String>(), storage.keys)
+        assertFalse(device.isWaiting)
+        assertEquals(TrackingStage.InTransit, device.list().single().currentStage)
+
+        now = now.plusSeconds(DeviceParcels.fresh.toLong() * 10)
+        device.refresh(all = true)
+        device.refresh(only = id)
+        device.registerAlerts("token-two", NativePushLocale.En)
+        assertTrue(device.alertsSettled("token-two", NativePushLocale.En))
+        assertEquals(listOf("read 22222222222A k"), calls.all)
+
+        // Opened again, it stays without a key, as it is: no key needs to read it.
+        val again = device(client(calls), storage, this, now = { now })
+        assertEquals(listOf("Shoes"), again.list().map { it.label })
+        assertTrue(again.isFrozen(id))
+        assertEquals(emptyList<ClaimParcelLink>(), again.claims)
+        assertThrows { again.changeCarrier(id, CarrierId.Ups, null, null) }
+        assertThrows { again.share(id) }
+
+        // Removing it asks nothing of the service.
+        again.forget(id)
+        assertTrue(again.isEmpty)
+        assertEquals(emptyMap<String, String>(), storage.pendingForgets)
+        assertEquals(listOf("read 22222222222A k"), calls.all)
+    }
+
+    @Test
+    fun someoneElsesLinkTheServiceNoLongerHasLeaves() = runTest {
+        val id = UUID.randomUUID()
+        var now = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.parcels = listOf(parcel("22222222222A", "", id, date(now)).copy(viewer = true, canKeep = true))
+        val device = device(client(Calls()), storage, this, now = { now })
+
+        now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
+        device.refresh()
+
+        // The 404 doesn't say why the link ended.
+        assertTrue(device.isEmpty)
+    }
+
+    @Test
+    fun aNewLookupOrLinkOfTheNumberTakesTheCopysPlace() = runTest {
+        val old = UUID.randomUUID()
+        val fresh = UUID.randomUUID()
+        val storage = Memory()
+        val frozen = parcel("22222222222A", "Shoes", old, pkg = pkg(old, number = "TESTPARCEL123789")).copy(frozen = "2026-11-01T08:00:00Z")
+        val other = parcel("22222222222B", "Coat", UUID.randomUUID(), pkg = pkg(UUID.randomUUID(), number = "TESTPARCEL555000"))
+            .copy(frozen = "2026-11-01T08:00:00Z")
+        storage.parcels = listOf(frozen, other)
+        val calls = Calls()
+        val lookup = PublicLookupResponse(link = link("22222222222C"), key = key, parcel = pkg(fresh, number = "TESTPARCEL123789"))
+        val device = device(client(calls, lookup = lookup), storage, this)
+
+        // The same number and carrier is no duplicate of a copy no longer updated.
+        val added = device.add(CreatePackageRequest(trackingNumber = "TESTPARCEL123789", carrier = CarrierId.Dhl))
+        assertEquals(fresh, added.id)
+        assertEquals(listOf("Coat", ""), device.list().map { it.label })
+        assertFalse(device.isFrozen(fresh))
+
+        // So does someone else's link to it.
+        val shared = PublicParcelResponse(link = reader("22222222222D"), parcel = pkg(UUID.randomUUID(), number = "TESTPARCEL555000"))
+        assertTrue(device.follow(shared, null, null).added)
+        assertEquals(listOf("", ""), device.list().map { it.label })
+        assertEquals(listOf("22222222222C", "22222222222D"), storage.parcels.map { it.linkId })
     }
 
     @Test
@@ -1558,7 +1649,9 @@ class DeviceParcelTests {
 
         answer = jsonResponse(404, """{"error":"Parcel unavailable"}""")
         device.refresh()
-        assertTrue(device.isEmpty)
+        // The service's own 404: the phone's lookup stays, no longer updated, without its key.
+        assertEquals(listOf("Running shoes"), device.list().map { it.label })
+        assertTrue(device.isFrozen(device.list().single().id))
         assertEquals(emptyMap<String, String>(), storage.keys)
         assertEquals(emptyMap<String, String>(), storage.pendingForgets)
         assertNull(DeliveryApiClient.publicParcel("22222222222A", configuration = postcodeConfiguration, transport = transport))

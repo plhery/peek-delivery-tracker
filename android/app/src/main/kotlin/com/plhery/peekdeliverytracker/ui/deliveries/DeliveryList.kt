@@ -800,7 +800,10 @@ private fun NextCard(state: DeliveriesState, item: ListItem.Next) {
     }
 }
 
-/** A card on its way after Next up; one that needs attention says what. */
+/**
+ * A card on its way after Next up; one that needs attention says what, and a copy the service forgot that it is no
+ * longer updated.
+ */
 @Composable
 private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
     val parcel = item.parcel
@@ -824,6 +827,7 @@ private fun OnTheWayCard(state: DeliveriesState, item: ListItem.OnTheWay) {
             ParcelPassCard(
                 shown, notice = notice, onOpen = open, modifier = moved, arrived = arrived, onName = onName, selected = selected,
                 onLongClick = menu, swipeAction = archive, onTap = tap, newUpdate = shown.marksNewUpdate(markNew),
+                frozen = state.source.isFrozen(shown),
             )
         }
     }
@@ -871,7 +875,7 @@ private fun SectionCard(state: DeliveriesState, item: ListItem.SectionCard) {
                 SwipeableCard(state, parcel, Radii.card, shadow = false, swipes = !parcel.isArchived) { moved, open, tap, menu, archive ->
                     ParcelPassCard(
                         parcel, notice = notice, onOpen = open, modifier = moved, selected = selected, onLongClick = menu, swipeAction = archive,
-                        onTap = tap, newUpdate = newUpdate,
+                        onTap = tap, newUpdate = newUpdate, frozen = state.source.isFrozen(parcel),
                     )
                 }
             }

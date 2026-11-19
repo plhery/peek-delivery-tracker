@@ -256,6 +256,13 @@ interface DeliveriesSource {
     fun viewerLink(parcel: Parcel): String?
 
     /**
+     * `store.isFrozen(parcel)`: whether the service forgot this lookup made without an account, whose last answer the
+     * phone still shows, no longer updated: its card says so, and its page and menus offer nothing that needs the
+     * service.
+     */
+    fun isFrozen(parcel: Parcel): Boolean
+
+    /**
      * `store.postcodeGiven(for:)`: whether the lookup behind a parcel followed without an account had a postcode, which
      * its link never shows, so its page asks for none.
      */
@@ -576,6 +583,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override suspend fun markSeen(parcel: Parcel) = container.parcels.markSeen(parcel)
 
     override fun viewerLink(parcel: Parcel): String? = container.parcels.viewerLink(parcel)
+
+    override fun isFrozen(parcel: Parcel): Boolean = container.parcels.isFrozen(parcel)
 
     override fun postcodeGiven(parcel: Parcel): Boolean = container.parcels.postcodeGiven(parcel)
 

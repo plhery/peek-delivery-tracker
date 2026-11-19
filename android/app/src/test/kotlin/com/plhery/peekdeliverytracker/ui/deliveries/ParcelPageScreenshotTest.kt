@@ -36,7 +36,7 @@ import org.robolectric.annotation.GraphicsMode
  * the demo at the captures' moment: Birthday gift's page at rest over the list, light and dark and in Russian and
  * Chinese, its ••• menu open without and with a keyboard, its rename alert light and dark, at an accessibility text
  * size and under Reduce Transparency light and dark, its delete question light and dark, the list's error alert light and dark, the page of a parcel gone, and the
- * page beside the list on a tablet on its side, the history beside the pass. The page dragged down, under its bar, is
+ * page beside the list on a tablet on its side, the history beside the pass. Then a guest's page of a parcel Peek forgot. The page dragged down, under its bar, is
  * ParcelZoomScreenshotTest's.
  */
 @RunWith(AndroidJUnit4::class)
@@ -53,7 +53,8 @@ class ParcelPageScreenshotTest {
 
     /**
      * The demo's list in `language` with the window's bars in points: the iPhone's status bar 62 tall and gesture bar 24
-     * by default. Transparency is full unless [reduceTransparency].
+     * by default. Transparency is full unless [reduceTransparency]. In the demo unless `session` says otherwise, its
+     * stores as `prepare` leaves them.
      */
     private fun show(
         dark: Boolean = false,
@@ -63,8 +64,10 @@ class ParcelPageScreenshotTest {
         language: AppLanguage = AppLanguage.En,
         keyboard: Boolean = false,
         reduceTransparency: Boolean = false,
+        session: AuthenticationState = AuthenticationState.Demo,
+        prepare: FakeDeliveries.() -> Unit = {},
     ) {
-        val source = FakeDeliveries(DemoCards.parcels(language), AuthenticationState.Demo)
+        val source = FakeDeliveries(DemoCards.parcels(language), session).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
             view = LocalView.current
@@ -73,7 +76,7 @@ class ParcelPageScreenshotTest {
                 Box(Modifier.fillMaxSize().testTag(SHOT)) {
                     WithKeyboard(keyboard) {
                         RootHost(
-                            state = AuthenticationState.Demo, language = language, dark = dark, reduceMotion = false, source = source,
+                            state = session, language = language, dark = dark, reduceMotion = false, source = source,
                             reduceTransparency = reduceTransparency,
                         )
                     }
@@ -256,5 +259,16 @@ class ParcelPageScreenshotTest {
         show(top = 24, bottom = 24)
         open()
         compose.screenshot("page_tablet_light")
+    }
+
+    /** A guest's Birthday gift, which Peek forgot: the note over the paper, and no share or bell on the pass. */
+    @Test
+    fun aGuestsPageOfAParcelPeekForgot() {
+        show(session = AuthenticationState.Welcome) {
+            isGuest = true
+            frozen = setOf(DemoCards.parcel("Birthday gift").id)
+        }
+        open()
+        compose.screenshot("page_frozen_light")
     }
 }

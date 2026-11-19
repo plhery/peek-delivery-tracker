@@ -70,7 +70,9 @@ import kotlin.math.roundToInt
  *
  * `arrived`, `decorative`, `onName`, `selected`, `onLongClick`, `swipeAction` and `onTap` are as on [NextDeliveryPass];
  * an arrived card swells a little as the news lands. `newUpdate`, a scan the reader hasn't seen (#72), puts a
- * [NewUpdateDot] before the status, and TalkBack says so first. Nothing is drawn until the carriers' liveries are read.
+ * [NewUpdateDot] before the status, and TalkBack says so first. `frozen`, a copy the service forgot, still on its way
+ * reads "No longer updated" after its status in place of its date or its problem (`frozenOnTheWay`), as neither may
+ * hold any more; delivered, it needs no mark. Nothing is drawn until the carriers' liveries are read.
  */
 @Composable
 fun ParcelPassCard(
@@ -86,6 +88,7 @@ fun ParcelPassCard(
     swipeAction: CustomAccessibilityAction? = null,
     onTap: () -> Unit = onOpen,
     newUpdate: Boolean = false,
+    frozen: Boolean = false,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -97,8 +100,10 @@ fun ParcelPassCard(
     val type = PeekTheme.type
     val reduceMotion = PeekTheme.reduceMotion
     val stage = parcel.currentStage
+    // A forgotten copy still on its way: its last answer stays, but not its estimate or its problem.
+    val stale = frozen && stage?.isFinal != true
 
-    val date = localizer.parcelDeliveryEstimate(parcel, now) ?: localizer.parcelCompletionDate(parcel, now)
+    val date = if (stale) null else localizer.parcelDeliveryEstimate(parcel, now) ?: localizer.parcelCompletionDate(parcel, now)
     // Scans with places are drawn as a small route at the end of the card; at the largest text sizes the words take
     // the whole card, and the route goes.
     val placed = parcel.hasMappedPlace
@@ -109,7 +114,12 @@ fun ParcelPassCard(
     // asks the reader for something, the carrier waits on the reader.
     val actionNeeded = parcel.currentEvent?.waitsOnReader() == true
     val carrierIssue = !actionNeeded && (stage == TrackingStage.Customs || stage == TrackingStage.ReadyForPickup)
-    val flag = if (notice != null && !carrierIssue) notice else if (parcel.updateFailed) localizer.text("attention.sync_error") else null
+    val flag = when {
+        stale -> null
+        notice != null && !carrierIssue -> notice
+        parcel.updateFailed -> localizer.text("attention.sync_error")
+        else -> null
+    }
     val flagSymbol = when {
         notice != null && actionNeeded -> "exclamationmark.triangle"
         parcel.updateFailed -> "arrow.clockwise"
@@ -122,7 +132,9 @@ fun ParcelPassCard(
     val delivering = parcel.deliveringCarrier?.let {
         localizer.text(parcel.deliveryLineKey, mapOf("carrier" to identities.displayName(it, language)))
     }
-    val status = listOfNotNull(localizer.parcelStatus(parcel), parcel.pickupPlace).joinToString(" · ")
+    val status = listOfNotNull(
+        localizer.parcelStatus(parcel), parcel.pickupPlace, localizer.text("link.frozen.label").takeIf { stale },
+    ).joinToString(" · ")
     val ink = colors.resolve(identity.ink)
     // A long status runs over the start of the route's map, where it takes the ink that reads on its countries.
     val mapInk = rememberMapInk(identity)

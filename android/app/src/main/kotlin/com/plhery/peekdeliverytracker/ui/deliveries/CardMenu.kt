@@ -427,7 +427,10 @@ private fun CardMenuOverlay(state: DeliveriesState, request: CardMenuRequest) {
     val localizer = LocalLocalizer.current
     val density = LocalDensity.current
     val parcel = request.parcel
-    val items = remember(parcel) { ParcelMenuItem.menu(parcel, onCard = true, reader = state.source.viewerLink(parcel) != null) }
+    val frozen = state.source.isFrozen(parcel)
+    val items = remember(parcel, frozen) {
+        ParcelMenuItem.menu(parcel, onCard = true, reader = state.source.viewerLink(parcel) != null, frozen = frozen)
+    }
     // The keys act on the parcel shown beside the list while the deliveries have the keyboard, and the search field
     // doesn't (`parcel.id == selectedCard && keyboardFree && !searchFocused`).
     val shortcuts = parcel.id == state.selectedCard && keyboardConnected() && state.keyboardFreeUnderMenu && !state.searchFocused

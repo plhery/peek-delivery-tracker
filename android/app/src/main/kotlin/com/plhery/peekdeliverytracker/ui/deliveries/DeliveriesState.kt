@@ -34,6 +34,7 @@ import com.plhery.peekdeliverytracker.core.DeliveredConfetti
 import com.plhery.peekdeliverytracker.core.DeliveredHold
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveriesNavigation
+import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryCardKind
 import com.plhery.peekdeliverytracker.core.DeliveryCardPlace
@@ -519,10 +520,13 @@ internal class DeliveriesState(
         if (hold.isEmpty) emptySet() else layout.changing(into = arrange(parcels)).keys
     }
 
-    /** `arrangement(of:)`: Next up is featured only in the list's own view. */
+    /**
+     * `arrangement(of:)`: Next up is featured only in the list's own view, and never with a copy the service forgot,
+     * whose estimate may no longer hold.
+     */
     private fun arrange(parcels: List<Parcel>) = DeliveryListLayout(
         parcels, query = query, status = statusFilter, carrier = carrierFilter, sort = sort, featuresNext = !hasCustomView,
-        now = now(),
+        now = now(), frozen = parcels.filter(source::isFrozen).mapTo(HashSet()) { it.id },
     )
 
     /**
@@ -1879,6 +1883,22 @@ internal class DeliveriesState(
         leaveOnPage(pageId) {
             source.permanentlyDelete(parcel)
             announce("app.deletedToast", parcel)
+        }
+    }
+
+    /**
+     * "Remove from this device" at the foot of the page with `pageId`, for a copy the service forgot (the website's
+     * `removeFrozen`): with nothing of it left on the service, it leaves the phone at once, without the delete
+     * question, in the page's `run`, which leaves the page once done. Counted as the website counts it, and TalkBack
+     * hears that it was removed.
+     */
+    fun removeFrozenOnPage(pageId: UUID) {
+        if (modal) return
+        val parcel = menuParcel(pageId)?.takeIf(source::isFrozen) ?: return
+        leaveOnPage(pageId) {
+            source.permanentlyDelete(parcel)
+            source.action("parcel-link-remove", DeliveryAnalytics.Outcome.Success)
+            announce(text("link.remove.done"))
         }
     }
 

@@ -910,6 +910,12 @@ class ParcelStore(
     fun viewerLink(parcel: Parcel): String? = if (isGuest) device.viewerLink(parcel.id) else null
 
     /**
+     * Whether the service forgot this lookup made without an account: the phone shows its last answer, no longer
+     * updated, with nothing left to share, refresh or be notified about, and removes it without asking the service.
+     */
+    fun isFrozen(parcel: Parcel): Boolean = isGuest && device.isFrozen(parcel.id)
+
+    /**
      * Whether a postcode went with the lookup behind a parcel followed without an account, which its link never shows.
      * An account's parcel holds its own postcode instead.
      */

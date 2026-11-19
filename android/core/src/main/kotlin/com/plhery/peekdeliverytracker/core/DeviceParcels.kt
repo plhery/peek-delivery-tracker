@@ -20,6 +20,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.PublicLookupRequest
 import com.plhery.peekdeliverytracker.core.api.PublicLookupResponse
+import com.plhery.peekdeliverytracker.core.api.PublicPackage
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.core.api.TrackingStage
@@ -82,8 +83,16 @@ data class DeviceParcel(
      * starts as seen with its next answer: what an older version kept has no `news_at` to start from.
      */
     val seenNewsAt: String? = null,
+    /**
+     * When the service forgot this lookup of the phone's own (30 days after delivery, or 90 without news), as the
+     * website notes it: its last answer stays here, no longer updated, without its key or notifications, and is never
+     * read again. A new lookup of the number takes its place.
+     */
+    val frozen: String? = null,
 ) {
     val isViewer: Boolean get() = viewer == true
+
+    val isFrozen: Boolean get() = frozen != null
 
     /** The parcel as it stands, seen: what it tells now is no news. */
     fun startingSeen(): DeviceParcel = copy(seenNewsAt = parcel.newsAt ?: SEEN_BEFORE_ANY_NEWS)
@@ -485,10 +494,10 @@ class DeviceParcelFiles(
         /**
          * A parcel of this phone's own without its key cannot be read or forgotten, and a key beside someone else's
          * parcel opens nothing. A key without its parcel stays: its parcel is read again with it. A parcel followed
-         * through someone else's link needs no key.
+         * through someone else's link needs no key, nor does a copy the service has forgotten.
          */
         fun matched(parcels: List<DeviceParcel>, keys: Map<String, String>): DeviceParcelStorage.Contents {
-            val kept = parcels.filter { it.isViewer || keys.keyOf(it.linkId) != null }
+            val kept = parcels.filter { it.isViewer || it.isFrozen || keys.keyOf(it.linkId) != null }
             fun theirs(linkId: String): Boolean {
                 val beside = kept.filter { it.linkId.equalsCanonically(linkId) }
                 return beside.isNotEmpty() && beside.all { it.isViewer }
@@ -583,10 +592,10 @@ class DeviceParcels(
     fun list(): List<Parcel> = entries.map(::shown)
 
     /** When the service last answered about one of the parcels: how old what the list shows is at most. */
-    val lastCheckedAt: Instant? get() = entries.maxOfOrNull { it.checkedAt }?.let(::referenceDate)
+    val lastCheckedAt: Instant? get() = entries.filter { !it.isFrozen }.maxOfOrNull { it.checkedAt }?.let(::referenceDate)
 
     /** Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon. */
-    val isWaiting: Boolean get() = entries.any { waiting(it.parcel) }
+    val isWaiting: Boolean get() = entries.any { !it.isFrozen && waiting(it.parcel) }
 
     /** `typed`: the number as typed, which goes beside it when it differs ([typedTrackingNumber]). */
     suspend fun detect(trackingNumber: String, typed: String? = null): CarrierDetectionResponse {
@@ -604,7 +613,7 @@ class DeviceParcels(
     private suspend fun lookUp(request: CreatePackageRequest, replacing: UUID?): Parcel {
         val client = client ?: throw DeliveryApiError.ServiceFailed(503)
         entries.firstOrNull {
-            it.parcel.id != replacing && it.parcel.trackingNumber.equalsCanonically(request.trackingNumber) &&
+            it.parcel.id != replacing && !it.isFrozen && it.parcel.trackingNumber.equalsCanonically(request.trackingNumber) &&
                 it.parcel.carrier.rawValue.equalsCanonically(request.carrier?.rawValue)
         }?.let { existing -> throw DeliveryApiError.DuplicateTracking(existing.parcel.id) }
         // A carrier that words its scans in several languages answers the parcel in the app's.
@@ -622,6 +631,8 @@ class DeviceParcels(
             parcel = Parcel(shared = response.parcel), checkedAt = now().timeIntervalSinceReferenceDate,
             postcodeGiven = request.dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
         ).startingSeen()
+        // A copy the service forgot of the same number makes way for the new lookup, as on the website.
+        entries = entries.filter { !superseded(it, response.parcel) }
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         val twin = entries.indexOfFirst { it.parcel.id == response.parcel.id }
         if (twin >= 0) {
@@ -651,7 +662,7 @@ class DeviceParcels(
 
     /**
      * Reads every parcel whose answer has gone stale, or every one when `all`. A parcel the service no longer has leaves
-     * the list. The first trouble ends the round and is thrown; the list keeps what the device has.
+     * the list, unless it is this phone's own lookup: its last answer stays, no longer updated ([DeviceParcel.frozen]). The first trouble ends the round and is thrown; the list keeps what the device has.
      *
      * First the service is told again of the links forgotten here that it could not be told about, and, unless `only`
      * one parcel is read, the keys whose parcels were lost on this phone (a file this build could not read, say) read
@@ -675,6 +686,8 @@ class DeviceParcels(
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
             if (recovered.any { it.equalsCanonically(entry.linkId) }) continue
+            // A copy the service forgot is never read again.
+            if (entry.isFrozen) continue
             val key = keys.keyOf(entry.linkId)
             if (key == null && !entry.isViewer) continue
             val age = now().timeIntervalSinceReferenceDate - entry.checkedAt
@@ -693,9 +706,15 @@ class DeviceParcels(
                             canKeep = if (entry.isViewer) response.link.canKeep else it.canKeep,
                         )
                     }
-                } else {
+                } else if (entry.isViewer) {
+                    // Someone else's link goes: its 404 doesn't say why it ended.
                     entries = entries.filterIndexed { position, _ -> position != index }
                     keys = keys.setting(entry.linkId, null)
+                } else {
+                    // The service forgot this phone's own lookup, and its notifications with it: its last answer stays.
+                    change(index) { it.copy(frozen = DateParser.isoString(now()), alertToken = null, alertPreset = null) }
+                    keys = keys.setting(entry.linkId, null)
+                    alertsAsked = alertsAsked.setting(entry.linkId, null)
                 }
             } catch (error: Exception) {
                 trouble = error
@@ -871,7 +890,7 @@ class DeviceParcels(
     ): Parcel {
         // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change.
         val entry = entries.firstOrNull { it.parcel.id == id }
-        if (entry == null || entry.isViewer) throw DeliveryApiError.ParcelMissing()
+        if (entry == null || entry.isViewer || entry.isFrozen) throw DeliveryApiError.ParcelMissing()
         val key = keys.keyOf(entry.linkId)
         val move = client?.changeCarrier
         if (key != null && move != null) {
@@ -979,6 +998,9 @@ class DeviceParcels(
     /** The link of a parcel followed here through someone else's link, which is all this phone may share of it. */
     fun viewerLink(id: UUID): String? = entries.firstOrNull { it.parcel.id == id && it.isViewer }?.linkId
 
+    /** Whether the service forgot this parcel of the phone's own, whose last answer stays here ([DeviceParcel.frozen]). */
+    fun isFrozen(id: UUID): Boolean = entries.firstOrNull { it.parcel.id == id }?.isFrozen == true
+
     /** Whether a postcode went with the lookup that made the parcel; null when this phone doesn't know. */
     fun postcodeGiven(id: UUID): Boolean? = entries.firstOrNull { it.parcel.id == id }?.postcodeGiven
 
@@ -1018,6 +1040,8 @@ class DeviceParcels(
         val linkId = response.link.id
         if (!ParcelLinkRoute.validId(linkId)) throw DeliveryApiError.InvalidResponse()
         val key = key?.takeIf { response.link.role == ParcelLinkRole.Owner && ParcelLinkRoute.validKey(it) }
+        // A copy the service forgot of the same number makes way for a link that still answers.
+        entries = entries.filter { !superseded(it, response.parcel) }
         val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) || it.parcel.id == response.parcel.id }
         if (index >= 0) {
             if (key == null || !entries[index].isViewer) return Followed(entries[index].parcel.id, false)
@@ -1097,7 +1121,7 @@ class DeviceParcels(
         // How long the service asked to be left alone, in seconds, when the round is cut short.
         var pause: Double? = null
         try {
-            val waiting = entries.filter { !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }
+            val waiting = entries.filter { !it.isFrozen && !asked.equalsCanonically(alertsAsked.keyOf(it.linkId)) && !it.parcel.isOver }
             val due = waiting.take(alertsPerRound)
             for (entry in due) {
                 if (round != alertGeneration) return
@@ -1152,7 +1176,7 @@ class DeviceParcels(
      * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
      */
     fun alertsSettled(token: String, locale: NativePushLocale): Boolean = entries.all {
-        it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
+        it.isFrozen || it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
     }
 
     suspend fun retryAlerts() {
@@ -1244,6 +1268,12 @@ class DeviceParcels(
          */
         fun alertPreset(parcel: Parcel): ParcelAlertPreset =
             if (!parcel.hasCarrierUpdate || parcel.currentStage == TrackingStage.Registered) ParcelAlertPreset.All else ParcelAlertPreset.Important
+
+        /** A copy the service forgot of the number `answer` is for, which a lookup or link that answers replaces. */
+        private fun superseded(entry: DeviceParcel, answer: PublicPackage): Boolean {
+            val number = answer.trackingNumber?.nonEmpty ?: return false
+            return entry.isFrozen && entry.parcel.trackingNumber.equalsCanonically(number)
+        }
 
         private fun waiting(parcel: Parcel): Boolean = parcel.syncStatus == SyncStatus.Pending || parcel.syncStatus == SyncStatus.Syncing
 

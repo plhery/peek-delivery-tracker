@@ -149,9 +149,10 @@ internal class PassBell(
  *   that the sender still has it; what the carrier waits on; that the scans are made up (B-ST11); the journey's steps.
  *
  * `atlas` is null until it is read, `sample` is the made-up parcel nothing on can change or share, `readerLink`
- * someone else's parcel followed through its link, `guest` a parcel followed without an account, whose link never says
- * whether its lookup had phone digits, `postcodeGiven` such a parcel whose lookup had a postcode, which its link never
- * shows, and `working` a change being saved, which the bell waits for.
+ * someone else's parcel followed through its link, `frozen` a copy the service forgot, which has no link left to share
+ * and no carrier left to change, `guest` a parcel followed without an account, whose link never says whether its lookup
+ * had phone digits, `postcodeGiven` such a parcel whose lookup had a postcode, which its link never shows, and
+ * `working` a change being saved, which the bell waits for.
  * `onMap` opens the map, TalkBack going back to the given element once it closes, `onEditCarrier` the carrier
  * editor, on the carrier a prompt names, TalkBack going back to the mark or the button that opened it, `onRename`
  * the rename alert, TalkBack going back to the name, and `onShare` the share sheet, or the reader link's own share,
@@ -163,6 +164,7 @@ internal fun LivePassCard(
     atlas: WorldAtlas?,
     sample: Boolean,
     readerLink: Boolean,
+    frozen: Boolean = false,
     bell: PassBell?,
     working: Boolean,
     guest: Boolean = false,
@@ -194,8 +196,9 @@ internal fun LivePassCard(
     }
     val placed = parcel.hasMappedPlace
     val route = if (placed && atlas != null) rememberParcelRoute(parcel, atlas, language) else null
-    // Someone else's parcel, followed through its link: the carrier is theirs to change.
-    val editable = !sample && !readerLink
+    // Someone else's parcel, followed through its link: the carrier is theirs to change. A copy the service forgot
+    // asks nothing of its carrier, which nobody looks up any more.
+    val editable = !sample && !readerLink && !frozen
     val frames = remember { PassFrames() }
     var headerHeight by remember { mutableFloatStateOf(0f) }
     val metrics = PassRouteMetrics.of(handover = delivery != null, largeText = large, headerHeight = headerHeight.toDouble())
@@ -286,7 +289,7 @@ internal fun LivePassCard(
                             PeekSymbol("globe", font = type.fixed(sizes.globe), tint = tint)
                         }
                     }
-                    if (readerLink || !sample) {
+                    if (!frozen && (readerLink || !sample)) {
                         HeaderButton(localizer.text("link.shareAria"), PAGE_SHARE, enabled = true, Modifier.accessibilityFocus(shareFocus), { onShare(shareFocus) }, sizes.button.dp, HEADER_TAP_ROOM) {
                             PeekSymbol("square.and.arrow.up", font = type.fixed(sizes.share), tint = tint)
                         }

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -71,6 +73,7 @@ import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.currentStateAsState
 import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
+import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.ParcelAttention
@@ -94,12 +97,14 @@ import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
 import com.plhery.peekdeliverytracker.ui.LocalWeightUnit
 import com.plhery.peekdeliverytracker.ui.WindowKey
 import com.plhery.peekdeliverytracker.ui.WindowShortcutsEffect
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
+import com.plhery.peekdeliverytracker.ui.draw.MaintenanceBanner
 import com.plhery.peekdeliverytracker.ui.map.rememberWorldAtlas
 import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.symbols.PeekSymbol
@@ -113,6 +118,7 @@ import com.plhery.peekdeliverytracker.ui.theme.PressStyle
 import com.plhery.peekdeliverytracker.ui.theme.button
 import com.plhery.peekdeliverytracker.ui.theme.materialBackdrop
 import com.plhery.peekdeliverytracker.ui.theme.rememberMaterialBackdrop
+import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import com.plhery.peekdeliverytracker.ui.theme.shownCarrierIdentity
 import com.plhery.peekdeliverytracker.ui.zoom.ZoomTransition
 import com.plhery.peekdeliverytracker.ui.zoom.pageBarItem
@@ -230,11 +236,12 @@ private fun rememberFeedback(state: DeliveriesState, pageId: UUID, parcel: Parce
 /**
  * `feedbackPage(_:)`: what the question at the end of the page is asked about, or null while it asks nothing. The demo's
  * stories and the sample are made up: nothing is asked of them, but under a debug build's `sdt.debug.parcelFeedback`.
+ * Nor is anything asked of a copy the service forgot, which has no lookup left to answer about.
  */
 @Composable
 private fun feedbackPage(state: DeliveriesState, pageId: UUID, parcel: Parcel?): ParcelFeedbackModel.Page? {
     val language = LocalLanguage.current
-    parcel ?: return null
+    if (parcel == null || state.source.isFrozen(parcel)) return null
     return ParcelFeedbackModel.Page(
         parcel, ParcelFeedbackSubject.Parcel(parcel.id), showsHistory(parcel), madeUp = (state.source.isDemo || state.sample(pageId) != null) && state.source.launchPreviews.feedback == null,
         carrier = CarrierCatalog.shared.info(parcel.displayedCarrier, language).displayName, language = language,
@@ -276,11 +283,15 @@ private fun rememberPageScroll(atFoot: Boolean): ScrollState {
     return scroll
 }
 
-/** The page's ScrollView: the paper, in one column or two, and the question under it. */
+/**
+ * The page's ScrollView: the paper, in one column or two, and the question under it. A copy the service forgot has the
+ * note that says so over the paper ([FrozenNote]), and its removal under it ([RemoveFromDevice]).
+ */
 @Composable
 private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, feedback: ParcelFeedbackWork?, margins: PageMargins) {
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize
     val history = showsHistory(parcel)
+    val frozen = state.source.isFrozen(parcel)
     // Where the scroll shows what it holds, which the question comes in as it is seen in.
     val viewport = remember { arrayOfNulls<LayoutCoordinates>(1) }
     BoxWithConstraints(Modifier.fillMaxSize().onPlaced { viewport[0] = it }) {
@@ -301,6 +312,7 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, fee
             verticalArrangement = Arrangement.spacedBy(PAGE_SPACING),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            if (frozen) FrozenNote(parcel)
             val ground = PeekTheme.colors.paper
             fun paper(tag: String) = Modifier
                 .testTag(tag)
@@ -316,7 +328,45 @@ private fun PageScroll(state: DeliveriesState, parcel: Parcel, pageId: UUID, fee
             if (feedback != null) {
                 ParcelFeedbackQuestion(feedback, { viewport[0] }, Modifier.widthIn(max = FEEDBACK_WIDTH).padding(horizontal = FEEDBACK_SIDE))
             }
+            if (frozen) RemoveFromDevice(state, pageId)
         }
+    }
+}
+
+/**
+ * Over the paper of a copy the service forgot, the website's banner for one ("link.frozen.banner"): that Peek no longer
+ * updates the parcel, and when the update shown was read (its last check, else its lookup), as a notice gives a moment
+ * ([com.plhery.peekdeliverytracker.core.Localizer.moment]), in the calm notice the list shows while the server is down
+ * ([MaintenanceBanner]): what is shown stays, and there is nothing to press.
+ */
+@Composable
+private fun FrozenNote(parcel: Parcel) {
+    val localizer = LocalLocalizer.current
+    LocalUse24HourTime.current
+    val now = LocalNow.current()
+    val time = DateParser.date(parcel.lastSyncedAt ?: parcel.createdAt)?.let { localizer.moment(it, now) }.orEmpty()
+    MaintenanceBanner(localizer.text("link.frozen.banner", mapOf("time" to time)), Modifier.testTag(PAGE_FROZEN))
+}
+
+/**
+ * At the foot of the page of a copy the service forgot, the website's footer for one: "Remove from this device" in
+ * footnote in the secondary grey, a plain button 44 tall at least that dims while pressed and while the page saves a
+ * change. It removes the parcel from the phone at once, with no question and no promise of when Peek forgets it: the
+ * service has forgotten it already ([DeliveriesState.removeFrozenOnPage]).
+ */
+@Composable
+private fun RemoveFromDevice(state: DeliveriesState, pageId: UUID) {
+    val working = state.pageWorking(pageId)
+    Box(
+        Modifier
+            .heightIn(min = REMOVE_HEIGHT)
+            .testTag(PAGE_REMOVE)
+            .button(interactionSource = null, indication = PlainPress, enabled = !working, role = Role.Button) { state.removeFrozenOnPage(pageId) }
+            .plainDisabled(!working)
+            .padding(horizontal = REMOVE_SIDE),
+        contentAlignment = Alignment.Center,
+    ) {
+        Text(localized("link.remove.now"), color = PeekTheme.colors.secondaryText, style = PeekTheme.type.footnote.sfLines())
     }
 }
 
@@ -350,18 +400,20 @@ private fun LiveParcelPass(state: DeliveriesState, parcel: Parcel, pageId: UUID,
  * The pass at the page's top ([LivePassCard]): the bell where alerts can be had, which needs an account and a parcel
  * of the deliveries, and opens the parcel's alerts while the account's email is on, the one way it has on a phone
  * without pushes ([DeliveriesSource.pushAvailable]); the share and the carrier where the parcel is the reader's own,
- * rather than followed through someone else's link; and the map once the atlas is read.
+ * rather than followed through someone else's link; and the map once the atlas is read. A copy the service forgot has
+ * no bell, share or carrier to change: its notifications and its link went with the lookup.
  */
 @Composable
 private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
     val session by state.source.session.collectAsState()
     val email by state.source.deliveryEmail.collectAsState()
     val sample = state.sample(pageId) != null
+    val frozen = state.source.isFrozen(parcel)
     // A scan has a place, so the card shows the route once the map data has loaded.
     val atlas = rememberWorldAtlas(wanted = parcel.trackingEvents.any { it.place != null })
     val opensAlerts = email?.bellOpensAlerts(parcel) == true
     val pushes = state.source.pushAvailable
-    val bell = if (session != AuthenticationState.Welcome && !sample && (pushes || opensAlerts)) {
+    val bell = if (session != AuthenticationState.Welcome && !sample && !frozen && (pushes || opensAlerts)) {
         // The same bell while nothing it acts on changes, so the card isn't composed again for a new one.
         remember(state, pageId, parcel, opensAlerts, pushes) {
             PassBell(opensAlerts, pushes, open = { state.openAlerts(pageId, it) }) { muted, saved -> state.muteOnPage(pageId, parcel, muted, saved) }
@@ -370,7 +422,7 @@ private fun PassHeader(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
         null
     }
     LivePassCard(
-        parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, bell = bell,
+        parcel, atlas, sample = sample, readerLink = state.source.viewerLink(parcel) != null, frozen = frozen, bell = bell,
         working = state.pageWorking(pageId), guest = state.source.isGuest, postcodeGiven = state.source.postcodeGiven(parcel),
         onMap = { state.openMap(pageId, it) },
         onEditCarrier = { carrier, focus -> state.editCarrier(pageId, carrier, focus) }, onRename = { state.renameOnPage(pageId, it) },
@@ -454,8 +506,8 @@ private fun ShipmentIdentity(state: DeliveriesState, parcel: Parcel, pageId: UUI
  * After the numbers, the shipment's facts where the parcel has carrier data ([ShipmentFacts]), then what the page says
  * where no carrier is asked, or why the last check failed ([TrackingNotes]): its carrier changes open the editor, and
  * its switch moves the parcel to the carrier its number names, where the parcel is the reader's to change rather than
- * the sample or followed through someone else's link. Its Delete asks as the ••• menu's does, wherever the page has
- * one: not on the sample's.
+ * the sample, followed through someone else's link or a copy the service forgot. Its Delete asks as the ••• menu's
+ * does, wherever the page has one: not on the sample's.
  */
 @Composable
 private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
@@ -464,7 +516,7 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
     val identity = shownCarrierIdentity(parcel, localizer, LocalLanguage.current) ?: return
     val sample = state.sample(pageId) != null
     TrackingNotes(
-        parcel, editable = !sample && state.source.viewerLink(parcel) == null, working = state.pageWorking(pageId),
+        parcel, editable = !sample && state.source.viewerLink(parcel) == null && !state.source.isFrozen(parcel), working = state.pageWorking(pageId),
         ink = PeekTheme.colors.resolve(identity.ink), onEditCarrier = { state.editCarrier(pageId, focus = it) },
         onSwitch = { carrier, focus -> state.switchCarrierOnPage(pageId, parcel, carrier, focus) },
         onDelete = if (sample) null else { focus -> state.deleteOnPage(pageId, focus) },
@@ -522,10 +574,12 @@ private fun Journal(parcel: Parcel) {
 /**
  * The sync line ([SyncLine]) in its carrier's ink, with its refresh where there is a carrier to ask again: not for the
  * sample, an archived parcel, or one whose carrier Peek doesn't ask. A refresh asks the carrier again while the page
- * waits ([DeliveriesState.refreshOnPage]).
+ * waits ([DeliveriesState.refreshOnPage]). None for a copy the service forgot, which is never asked again: the note over
+ * the paper says how old it is ([FrozenNote]).
  */
 @Composable
 private fun SyncStatus(state: DeliveriesState, parcel: Parcel, pageId: UUID) {
+    if (state.source.isFrozen(parcel)) return
     val identity = shownCarrierIdentity(parcel, LocalLocalizer.current, LocalLanguage.current) ?: return
     val refreshes = state.sample(pageId) == null && !parcel.isArchived &&
         CarrierCatalog.shared.tracksAutomatically(parcel.activeTrackingCarrier)
@@ -687,7 +741,7 @@ private fun DeliveriesState.pageKeys(parcel: Parcel?, stack: PageStack?): List<W
     if (stack != null) return listOf(WindowKey.Back)
     if (arrangement == DeliveriesArrangement.Stacked && navigator.navigation.chosen == null) return emptyList()
     val back = if (arrangement == DeliveriesArrangement.Stacked) listOf(WindowKey.Back) else emptyList()
-    val items = parcel?.let { ParcelMenuItem.menu(it, onCard = false, reader = source.viewerLink(it) != null).flatten() }.orEmpty()
+    val items = parcel?.let { ParcelMenuItem.menu(it, onCard = false, reader = source.viewerLink(it) != null, frozen = source.isFrozen(it)).flatten() }.orEmpty()
     return back + items.mapNotNull(WindowKey::of)
 }
 
@@ -703,7 +757,7 @@ private fun DeliveriesState.pageKey(event: KeyEvent, pageId: UUID, parcel: Parce
         return true
     }
     if (parcel == null) return false
-    val items = ParcelMenuItem.menu(parcel, onCard = false, reader = source.viewerLink(parcel) != null).flatten()
+    val items = ParcelMenuItem.menu(parcel, onCard = false, reader = source.viewerLink(parcel) != null, frozen = source.isFrozen(parcel)).flatten()
         .filter { item -> WindowKey.of(item)?.let { it in keys } == true }
     val item = ParcelMenuItem.forShortcut(event, items) ?: return false
     if (act && !(item == ParcelMenuItem.Delete && pageWorking(pageId))) choseOnPage(pageId, item, parcel)
@@ -748,7 +802,9 @@ private fun PageMenuOverlay(state: DeliveriesState, request: PageMenuRequest) {
     val gone = parcel == null || state.navigator.navigation.shown != request.pageId
     LaunchedEffect(gone) { if (gone) state.pageMenu = null }
     if (parcel == null || gone) return
-    val items = remember(parcel) { ParcelMenuItem.menu(parcel, onCard = false, reader = state.source.viewerLink(parcel) != null) }
+    val items = remember(parcel) {
+        ParcelMenuItem.menu(parcel, onCard = false, reader = state.source.viewerLink(parcel) != null, frozen = state.source.isFrozen(parcel))
+    }
     val shortcuts = keyboardConnected()
     val title = parcel.label.ifEmpty { localized("common.parcel") }
     val menu = rememberMenuPresence(request) { state.pageMenu = null }
@@ -816,6 +872,8 @@ private val BAR_ROW = 44.dp
 private val BAR_BUTTON = 44.dp
 private val BAR_MARGIN = 20.dp
 private val MENU_SIDE = 16.dp
+private val REMOVE_HEIGHT = 44.dp
+private val REMOVE_SIDE = 8.dp
 private const val BAR_SYMBOL = 17f
 
 /** The test tags of the page's parts, its bar's buttons and its menu. */
@@ -837,3 +895,7 @@ const val PAGE_ROUTE = "parcelPage.route"
 const val PAGE_PROMPT = "parcelPage.prompt"
 const val PAGE_QUIET = "parcelPage.quiet"
 const val PAGE_JOURNAL = "parcelPage.journal"
+
+/** The note over the page of a copy the service forgot, and its removal at the page's foot. */
+const val PAGE_FROZEN = "parcelPage.frozen"
+const val PAGE_REMOVE = "parcelPage.remove"

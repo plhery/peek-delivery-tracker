@@ -3,6 +3,9 @@ package com.plhery.peekdeliverytracker.ui.deliveries
 import android.app.Activity
 import android.content.Context
 import androidx.compose.runtime.MonotonicFrameClock
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.test.core.app.ApplicationProvider
 import com.plhery.peekdeliverytracker.core.AccountInvitationMemory
 import com.plhery.peekdeliverytracker.core.AuthenticationState
@@ -466,6 +469,14 @@ class FakeDeliveries(
     }
 
     override fun viewerLink(parcel: Parcel): String? = viewerLinks[parcel.id]
+
+    /**
+     * The parcels whose lookup the service forgot, whose last answer the phone keeps (`store.isFrozen`): state that
+     * the list and the page follow as a test changes it.
+     */
+    var frozen: Set<UUID> by mutableStateOf(emptySet())
+
+    override fun isFrozen(parcel: Parcel): Boolean = parcel.id in frozen
 
     /** The parcels followed without an account whose lookup had a postcode. */
     var postcodesGiven: Set<UUID> = emptySet()

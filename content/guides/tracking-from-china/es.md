@@ -4,7 +4,7 @@ description: Qué significan los estados de Cainiao, por qué se para el seguimi
 slug: seguimiento-paquete-de-china
 picture: Un avión traza un arco punteado sobre el globo, de un marcador rojo al marcador verde de casa, y Pip viaja entre dos furgonetas.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Un paquete de AliExpress, Temu o Shein cambia de manos por el camino: una empresa logística china lo saca del país, la Aduana lo revisa al llegar y [Correos](carrier:correos-spain) u otra empresa de reparto te lo entrega, a menudo con otro número. Cada una solo escanea su tramo, así que es normal pasar hasta 11 días sin un primer escaneo, no ver nada durante el vuelo y volver a esperar cuando ya ha llegado al país de destino. Sigue primero el número de la tienda y luego el de la empresa de reparto. Con el envío más barato, el seguimiento puede cortarse ahí para siempre. Lo que sale de un almacén en la UE se ahorra el vuelo desde China y el arancel.
@@ -97,7 +97,7 @@ Depende de la línea de envío:
 
 Si en el seguimiento aparece una empresa de reparto de aquí, como [Ecoscooting](carrier:ecoscooting) con un número `CNESP`, sigue el paquete en su web o en su app, con el número que te dé.
 
-[Peek](/) sigue ese relevo por ti. Con un número de Cainiao, consulta el seguimiento hasta una vez cada 30 minutos, también cuando el paquete sale a reparto (tras una consulta fallida, espera una hora), y una vez por hora tras dos días sin novedades. Si Cainiao publica el número de la empresa que lo reparte y ese número solo puede ser de una empresa (uno de Correos, uno de CTT Express o un `CNESP` de Ecoscooting, por ejemplo), Peek le pregunta por el paquete. Con un número postal, como los de China Post que acaban en `CN`, pregunta a Correos con ese mismo número si el paquete viene a España. En cuanto esa empresa da noticias del paquete, Peek lo sigue allí sin perder los escaneos de China, y verás, por ejemplo, «Entrega con Correos». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete (más en [plazos de entrega](guide:delivery-times)).
+[Peek](/) sigue ese relevo por ti. Con un número de Cainiao, mientras tienes el paquete abierto, o el día de la entrega con las notificaciones activadas, consulta el seguimiento hasta una vez cada 30 minutos, también cuando sale a reparto (tras una consulta fallida, espera una hora); si no, una vez por hora, igual que tras dos días sin novedades. Si Cainiao publica el número de la empresa que lo reparte y ese número solo puede ser de una empresa (uno de Correos, uno de CTT Express o un `CNESP` de Ecoscooting, por ejemplo), Peek le pregunta por el paquete. Con un número postal, como los de China Post que acaban en `CN`, pregunta a Correos con ese mismo número si el paquete viene a España. En cuanto esa empresa da noticias del paquete, Peek lo sigue allí sin perder los escaneos de China, y verás, por ejemplo, «Entrega con Correos». Si otra empresa toma el relevo para la entrega, Peek sigue el ritmo de la que reparte el paquete (más en [plazos de entrega](guide:delivery-times)).
 
 ## Enviado desde un almacén en Europa: ¿qué cambia?
 

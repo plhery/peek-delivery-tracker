@@ -4,7 +4,7 @@ description: Perché il numero d'ordine Temu non serve a tracciare il pacco, qua
 slug: tracciare-ordine-temu
 picture: Una pila di piccoli pacchi che esce dalla stiva di un aereo, un furgone e Pip che li conta.
 published: 2026-10-17
-updated: 2026-11-07
+updated: 2026-11-20
 ---
 
 Il numero d'ordine Temu non serve a tracciare il pacco: ti serve il codice di tracciamento del corriere. Incollalo in [Peek](/), che trova il corriere dalla forma del codice e, se il primo corriere indica chi prende in carico il pacco in Italia, passa al nuovo. Se incolli il numero d'ordine, Peek ti avvisa che sembra un numero d'ordine Temu, non un codice di tracciamento.
@@ -26,7 +26,7 @@ Nemmeno un numero di tre lettere, una `U` e sette cifre, come `TEMU1234565` (inv
 
 Di solito lo dice il codice di tracciamento: il campo qui sopra indica il corriere a cui rimanda la sua forma, o i pochi a cui può appartenere. Chi puoi trovare nell'ultimo tratto, da Poste Italiane per gli invii postali ai corrieri privati, è nella tabella di [come tracciare un pacco dalla Cina](guide:tracking-from-china).
 
-Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per voce doganale anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
+Sulla dogana: dal 1° luglio 2026 anche un pacco da fuori UE fino a 150 € paga un dazio di 3 € per voce doganale, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale, qualunque sia il valore del pacco. Se il sito non l'ha già incassato al checkout, paghi a Poste o al corriere. Un pacco che parte da un magazzino nell'UE non passa dalla dogana. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
 ## Pacco Temu fermo, in ritardo o mai arrivato
 

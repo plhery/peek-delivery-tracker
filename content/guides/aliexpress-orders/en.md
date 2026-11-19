@@ -4,7 +4,7 @@ description: Where AliExpress shows your tracking number, what its order statuse
 slug: aliexpress-order-tracking
 picture: A parcel tag with a countdown clock, a plane overhead, and Pip waiting by the door with a phone.
 published: 2026-10-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Go to **My Orders** on AliExpress, find the order and click **Track Order**, or type the number into the site of Cainiao, Alibaba's logistics group, where AliExpress's help points you. A carrier in your country does the last leg. The order details also show a countdown clock, your Buyer Protection time: if the parcel doesn't come, open a dispute before it runs out, and don't confirm receipt until the parcel is in your hands.
@@ -13,7 +13,7 @@ Go to **My Orders** on AliExpress, find the order and click **Track Order**, or 
 
 AliExpress says the sellers set up the shipping methods, and you pick one when you order. AliExpress's help also points you to [Cainiao](carrier:cainiao)'s tracking site, global.cainiao.com, for the latest scans. In your country, a local carrier does the last leg: when a parcel shows as delivered but hasn't come, AliExpress tells you to ask "local post offices or the carrier in the destination country".
 
-Who that usually is in the US, the UK, Ireland, Canada and Australia, from [USPS](carrier:usps) to [An Post](carrier:an-post), is in the country table of [tracking a parcel from China](guide:tracking-from-china). On economy shipping, Cainiao warns that its tracking stops once the parcel is handed to that carrier. Whether you owe anything at the border depends on your country: see [customs](guide:customs). In Ireland, Revenue says a €2 EU handling fee per kind of product has been added since 1 November 2026.
+Who that usually is in the US, the UK, Ireland, Canada and Australia, from [USPS](carrier:usps) to [An Post](carrier:an-post), is in the country table of [tracking a parcel from China](guide:tracking-from-china): USPS or a courier such as UniUni, SpeedX or GOFO in the US, [Royal Mail](carrier:royal-mail) or [Evri](carrier:evri) in the UK, the national post in Ireland and Australia, and Canada Post or UniUni in Canada. How Peek reads their numbers is in the section on Peek below. On economy shipping, Cainiao warns that its tracking stops once the parcel is handed to that carrier. Whether you owe anything at the border depends on your country: see [customs](guide:customs). In Ireland, Revenue says a €2 EU handling fee per kind of product has been added since 1 November 2026.
 
 :::journey
 - warehouse | Seller | Ships within the time on your order page, or AliExpress closes the order and refunds you
@@ -50,7 +50,7 @@ The order shows AliExpress's own statuses; the lines under **Track Order** are C
 
 What Cainiao's scans mean is on the [Cainiao](carrier:cainiao) page; for the local carrier's wording, see [tracking statuses](guide:tracking-statuses).
 
-**The countdown clock.** Buyer Protection starts when you pay and counts down on the order details: that's how long you can open a dispute. If you never confirm receipt, the order closes by itself when it ends. Parcel late and time running short? Ask for more. One help page says to request it from the order details on the website, another to message the seller with "Contact the seller". Either way, the seller has to agree.
+**The countdown clock.** Buyer Protection starts when you pay and counts down on the order details: that's how long you can open a dispute. If you never confirm receipt, the order closes by itself when it ends. Parcel late and time running short? Ask for more: you can once the seller has confirmed shipment and the order isn't delivered on time. One help page says to request it on the website: in My Orders, open the order with **View Detail**, follow "click here", fill in the extra time and press **Confirm**. Another says to message the seller with "Contact the seller". Either way, the seller has to agree, and the countdown grows by the time agreed.
 
 **Confirming receipt.** The **Confirm Goods Received** button ends the wait: from then on, you have 15 days to open a dispute. Press it only once the parcel is in your hands and the items are right.
 
@@ -75,12 +75,12 @@ Tracking that sits still for days, or a number that changes when the local carri
 
 Your window is Buyer Protection. AliExpress lets you open a dispute from the 11th day after the seller ships until 15 days after the delivery time ends, or 15 days after you confirm receipt. If the parcel is still moving normally and the delivery time hasn't ended, you can open one only once it has. If the tracking shows nothing, the parcel went back to the seller, is held at customs or went to the wrong address, you don't need to wait for the end.
 
-Marked delivered but not there? AliExpress's answer is that "the carrier is distributing your package now": wait, or ask your local post office or the carrier. To find that carrier's contact details, look the number up on global.cainiao.com and follow the link to the carrier's website; Cainiao's **View Contact Information** button shows them when it has them.
+Marked delivered but not there? AliExpress's answer is that "the carrier is distributing your package now": wait, or ask your local post office or the carrier. For the US, the same help page lists the post office's number, +1 800 222 1811. To find that carrier's contact details, look the number up on global.cainiao.com and follow the link to the carrier's website; Cainiao's **View Contact Information** button shows them when it has them.
 
 :::steps
 - Check the tracking | Open Track Order on the order. Still moving and within the delivery time? Wait for the deadline on the order page.
 - Look around and ask | Check the address on the order, the mailbox and your neighbours, and ask the local carrier, which may still have it.
-- Open a dispute | In My Orders, open the order details and tap Return & Refund (Open Dispute on some help pages). Say the parcel hasn't come, give the reason and send it before the countdown ends.
+- Open a dispute | In My Orders, open the order details and tap Return & Refund (Open Dispute on some help pages). Say the parcel hasn't come, answer the questions on why and send it before the countdown ends. You can still talk to the seller while the dispute runs.
 - AliExpress reviews it | The seller has 48 hours to reply. If it doesn't sort it out, AliExpress steps in. Add photos with Edit Proposal.
 - Refund | Agreed with the seller, it reaches your original payment method in 1 to 10 business days, sometimes 20. After a finished dispute, 3 to 20.
 :::
@@ -101,7 +101,9 @@ Once a return is agreed, send the item to the address on the request page by a t
 
 Yes, with the tracking number from the order's Track Order page. Paste it into [Peek](/), which shows these parcels as "AliExpress / Cainiao". It recognises DOFR or CNFR, 13 digits and HD, such as `DOFR1234567890123HD`, straight away, and AP or CNG followed by 14 digits too. LP numbers aren't certain from their shape alone, so Peek asks Cainiao, and any other carrier the shape fits, and shows the one that knows the number. If several do, it asks you to choose; if it shows the wrong one, press "Change" and pick "AliExpress / Cainiao".
 
-A postal number such as `RR000000005CN` goes to [China Post](carrier:china-post). To follow it through Cainiao instead, paste the global.cainiao.com tracking link.
+A postal number such as `RR000000005CN` goes to [China Post](carrier:china-post). To follow it through Cainiao instead, paste the global.cainiao.com tracking link. Once such a parcel heads for your country, Peek can also ask your national post (USPS, Royal Mail, An Post, Canada Post or Australia Post) with the same number, and follows it there once that post shows fresh scans.
+
+If the local carrier gives the parcel a number of its own, add that one. Peek files USPS's 22-digit numbers starting 94, postal numbers such as `RR000000005GB` (Royal Mail) or the same ending IE (An Post) or CA (Canada Post), and UniUni's `UUS`, SpeedX's `SPX` and GOFO's `GFUS` numbers under that carrier at once; for an Evri number, or a postal one such as `RR000000005AU`, it asks each carrier the shape fits and shows the one that knows it.
 
 When the first carrier names the local partner taking over, Peek keeps the first history, follows the partner once its own tracking shows fresh progress, and shows the partner's name and number on the card.
 
@@ -126,14 +128,14 @@ Peek shows what the carriers publish. Buyer Protection, disputes and refunds sta
 - [AliExpress: How can I cancel my order?](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=en_US&m_station=BuyerHelp&questionId=1061036211) – Request Order Cancellation, 7 days, 48 hours
 - [AliExpress: How to cancel my order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015065&language=en) – no cancelling once shipped
 - [AliExpress: What is Buyer Protection?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015100&language=en) – starts at payment, countdown clock, Contact the seller
-- [AliExpress: How do I extend the Buyer Protection time?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015071&language=en) – request on the website, seller's agreement
+- [AliExpress: How do I extend the Buyer Protection time?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015071&language=en) – request on the website, seller's agreement; late order shipped, View Detail, Confirm (read 20 November 2026)
 - [AliExpress: How do I confirm delivery?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015069&language=en) – Confirm Goods Received, 15 days, closes by itself
 - [AliExpress: Commitment](https://www.aliexpress.com/p/service-mindset/index.html) – by delivery country: Choice in the US, Fast Delivery compensation, 60 to 120 days, free returns
 - [AliExpress: Fast Delivery Policy](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=en_US&m_station=BuyerHelp&questionId=k01000000000000000000000000014mi) – by delivery country: refund after 30, 35 or 40 days, customs delays
 - [AliExpress: Force Majeure](https://www.aliexpress.com/ssr/300000437/H7RW3zBTKC?disableNav=YES&pha_manifest=ssr&_immersiveMode=true) – exclusions
-- [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – window, PST deadline, Open Dispute, PayPal 180 days
+- [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – window, PST deadline, Open Dispute, questions on why, talking to the seller meanwhile, PayPal 180 days (read 20 November 2026)
 - [AliExpress: I have not received goods. What can I do?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015091&language=en) – when to dispute, payment held, delivery unaffected, after protection
-- [AliExpress: I haven't received my parcel but it shows "Delivered"](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – local carrier, contact through global.cainiao.com
+- [AliExpress: I haven't received my parcel but it shows "Delivered"](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – local carrier, contact through global.cainiao.com, US post office number (read 20 November 2026)
 - [AliExpress: What's the dispute process after I have opened a dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015093&language=en) – 10 days, Edit Proposal
 - [AliExpress: What if the seller does not respond?](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=en_US&m_station=BuyerHelp&questionId=1061425125) – 48 hours, then AliExpress steps in
 - [AliExpress: How to speed up my issue?](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=en_US&m_station=BuyerHelp&questionId=1061424882) – 48 hours, then AliExpress steps in
@@ -149,5 +151,6 @@ Peek shows what the carriers publish. Buyer Protection, disputes and refunds sta
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – carrier contact information when there is any
 - [Cainiao: tracking page language file](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – economy notice, View Contact Information
 - [Revenue: Union Handling Fee press release](https://www.revenue.ie/en/corporate/press-office/press-releases/2026/pr-092926-handling-fee.aspx) – €2 per kind of product since 1 November 2026
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – what Peek checks
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – what Peek checks, number shapes of the local carriers
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – hand-overs, the national post asked with the same postal number
 :::

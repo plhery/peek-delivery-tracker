@@ -4,7 +4,7 @@ description: Warum die Sendungsverfolgung aus China tagelang stehen bleibt oder 
 slug: paket-aus-china-verfolgen
 picture: Ein Flugzeug zieht einen gepunkteten Bogen über den Globus, von einer roten Stecknadel zu einer grünen am Ziel, und Pip reist zwischen zwei Lieferwagen.
 published: 2026-10-09
-updated: 2026-10-28
+updated: 2026-11-20
 ---
 
 Ein Paket von AliExpress, Temu oder Shein geht durch mehrere Hände: Ein chinesisches Logistikunternehmen schickt es per Flugzeug los, der Zoll prüft es, und bei dir stellt es die Post, [DHL](carrier:dhl) oder ein anderer Paketdienst zu, oft unter einer neuen Nummer. Jeder scannt nur seine eigene Etappe. Rechne also mit bis zu 11 Tagen bis zum ersten Scan, mit Funkstille während des Flugs und mit Wartezeit nach „Arrived at destination country“. Verfolge erst die Nummer aus dem Shop, dann die des Paketdienstes vor Ort. Beim billigsten Versand ist an dieser Übergabe manchmal endgültig Schluss mit der Sendungsverfolgung. Ware aus einem Lager in der EU spart sich den Flug, in Deutschland und Österreich auch den Zoll.
@@ -39,7 +39,7 @@ Ist die Lieferzeit deiner Bestellung schon abgelaufen? Dann lies weiter unten, w
 
 `Arrive at Destination` heißt: Das Paket ist im Zielland gelandet. Zugestellt wird es laut Cainiao aber erst, wenn es verzollt ist. Wie lange das dauert, hängt von deinem Zoll und vom Paketdienst bei dir ab.
 
-Bewegt sich danach nichts, hat laut Cainiao meist dein Land die Daten noch nicht aktualisiert, und Cainiao rät, bei der Post vor Ort nachzufragen. Wie lange der Zoll dauern kann, steht unter [Paket beim Zoll](guide:customs).
+Bewegt sich danach nichts, hat laut Cainiao meist dein Land die Daten noch nicht aktualisiert, und Cainiao rät, bei der Post vor Ort nachzufragen. Fehlen in Österreich Unterlagen für den Zoll, zeigt die Sendungsverfolgung der Post ein Zollhindernis an, und du kannst sie dort mit „Zollhindernis bearbeiten. Dokumente nachreichen“ hochladen. Wie lange der Zoll dauern kann, steht unter [Paket beim Zoll](guide:customs).
 
 Hat dein Paket schon eine Nummer von DHL oder der Post, spricht deren Sendungsverfolgung Deutsch:
 
@@ -76,7 +76,7 @@ Meist aus einem von drei Gründen:
 - **Eine Bestellung, mehrere Pakete.** Laut Shein können Pakete aus verschiedenen Lagern kommen und dann unterschiedlich lange brauchen.
 - **Ein Paketdienst vor Ort hat übernommen**, mit eigenem Etikett und eigener Nummer. Veröffentlicht Cainiao diese Nummer, steht sie auf seiner Tracking-Seite. Ab dann schaust du auf der Seite dieses Paketdienstes nach. Wie Tracker mit zwei Nummern umgehen, steht unter [Paketverfolgung aller Anbieter](guide:universal-tracker).
 
-Nummern der Post sind die Ausnahme. Der Weltpostverein erlaubt nur eine S10-Nummer pro Sendung, deshalb funktioniert eine Nummer von China Post meist auch in der Sendungsverfolgung deiner Post.
+Nummern der Post sind die Ausnahme. Der Weltpostverein erlaubt nur eine S10-Nummer pro Sendung, deshalb funktioniert eine Nummer von China Post meist auch in der Sendungsverfolgung deiner Post. [Peek](/) nutzt das: Mit so einer Nummer fragt es auch bei der Post des Ziellands nach, in Deutschland bei DHL, in Österreich bei der Österreichischen Post und in der Schweiz bei der Schweizerischen Post. Nennt Cainiao den Paketdienst vor Ort und dessen Nummer, fragt Peek dort. Sobald dieser Paketdienst einen aktuellen Scan zeigt, verfolgt Peek das Paket dort weiter, ohne die Scans aus China zu verlieren, und du siehst zum Beispiel „Zustellung durch DHL“. Bis dahin bleibt Peek bei der ersten Nummer.
 
 ### YunExpress, Cainiao, 4PX: Wer steckt hinter meiner Nummer?
 
@@ -105,6 +105,8 @@ Das hängt von der Versandlinie ab, die der Verkäufer bucht. Den Namen des Pake
 | Österreich | Postsendungen aus Nicht-EU-Ländern verzollt die Österreichische Post für dich und stellt sie zu. Im November 2023 gab die Post eine Kooperation mit Temu für die Zustellung in Österreich bekannt. |
 | Schweiz | Die Schweizerische Post verzollt alles, was per Post oder über das Netz von [GLS](carrier:gls-ch) in die Schweiz kommt. Shein-Pakete mit Economy-Versand haben derzeit keine Sendungsverfolgung. |
 
+Bekommst du eine Nummer des Paketdienstes vor Ort, erkennt Peek sie meist sofort: zwei Buchstaben, neun Ziffern und `AT` oder `CH` am Ende als Nummer der Österreichischen oder der Schweizerischen Post, 18 Ziffern ab `99` als Paketnummer der Schweizerischen Post, 20 Ziffern ab `00340434` als DHL-Nummer. Passt eine Nummer, etwa eine reine Ziffernfolge, zu mehreren Paketdiensten, fragt Peek bei ihnen nach.
+
 ## Versand aus einem Lager in der EU: Was ändert sich?
 
 Nicht jedes Paket kommt aus China. Für die Sendungsverfolgung heißt das: Ein Paket aus einem Lager in der EU spart sich den Flug aus China und den Zoll. Die zwei langen Funkstillen von oben fallen weg, die Sendungsverfolgung beginnt in Europa.
@@ -132,7 +134,9 @@ Für Weihnachtsgeschenke heißt das: früh bestellen. Mehr dazu unter [Weihnacht
 Meist nicht: In der Regel zahlst du Steuer und Zoll schon an der Kasse. Was trotzdem dazukommen kann:
 
 - **Deutschland und Österreich:** Seit 1. Juli 2026 kostet jede Warenart in Online-Bestellungen bis 150 € pauschal 3 € Zoll, auch wenn der Shop die Einfuhrumsatzsteuer schon kassiert hat (IOSS). Seit 1. November 2026 kommen laut EU-Kommission 2 € Bearbeitungsgebühr pro Warenart dazu, bei jedem Warenwert; in Deutschland zahlst du sie laut DHL nicht bei der Zustellung, sondern meist schon beim Kauf. Ist an der Kasse sonst nicht alles bezahlt, holt sich der Paketdienst den Rest bei der Zustellung, plus eigene Gebühr: 7,50 € bei der Deutschen Post, ab 6 € bei der Österreichischen Post.
-- **Schweiz:** Die EU-Regeln gelten nicht. Große Versandhändler und Plattformen rechnen die Schweizer MWST selbst ab. Bei anderen Shops erhebt das BAZG Abgaben bis CHF 5.– nicht, sonst verlangt die Post für die Verzollung CHF 16.– plus 3 % des Warenwerts, dazu MWST und Zoll.
+- **Wer in Deutschland kassiert:** Laut Zoll übernimmt meist die Post oder der Kurierdienst die Verzollung und zahlt die Einfuhrabgaben vor. Bei der Deutschen Post zahlst du Einfuhrumsatzsteuer und Zoll dann bei der Zustellung oder in der Filiale; unter 1 € Einfuhrumsatzsteuer verzichtet der Zoll laut DHL auf deren Einzug. Fehlen bei einer Bestellung bis 150 € Produktkennungen wie EAN oder GTIN, kann die Deutsche Post das Paket seit 1. November 2026 nicht verzollen, und es geht an den Absender zurück; du selbst kannst sie in der Regel nicht nachreichen.
+- **Wer in Österreich kassiert:** Die Österreichische Post nennt als Kosten, die beim Import auf dich zukommen können, unter anderem Einfuhrumsatzsteuer, Zoll, die EU-Bearbeitungsgebühr und ihren Importtarif; bei Waren bis 150 € mit IOSS verlangt sie den Importtarif nicht. Bei IOSS-Sendungen fällt laut BMF immer der Zoll von 3 € pro Warenart an (Stand: 20. November 2026).
+- **Schweiz:** Die EU-Regeln gelten nicht. Große Versandhändler und Plattformen rechnen die Schweizer MWST selbst ab. Bei anderen Shops erhebt das BAZG Abgaben bis CHF 5.– nicht, sonst verlangt die Post für die Verzollung CHF 16.– plus 3 % des Warenwerts, dazu MWST und Zoll. Laut Post verstehen sich ihre Preise ohne MWST, die Verzollung kostet höchstens CHF 70.–, und wer die Importkosten online bezahlt, zahlt CHF 1.50 weniger (Stand: 20. November 2026).
 
 Was du genau zahlst, wo du zahlst und woran du eine Fake-Zollnachricht erkennst, steht unter [Paket beim Zoll](guide:customs).
 
@@ -183,19 +187,19 @@ Bildschirme, Status, Gutschriften und Reklamationen der Shops selbst: [AliExpres
 - [Österreichische Post: Kooperation mit Temu für die Zustellung](https://news.post.at/presse/de/post/id/1947158/TEMU%20UND%20%C3%96STERREICHISCHE%20POST%3A%20KOOPERATION%20F%C3%9CR%20NACHHALTIGE%20UND%20QUALIT%C3%84TSVOLLE%20ZUSTELLUNG) – Post als Dienstleisterin für Temu in Österreich, November 2023
 - [DHL: Bedeutung des Sendungsstatus](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Weitertransport zu DHL
 - [DHL: Sendungsstatus international](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zollabfertigung, einige Werktage
-- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € je Warenart, meist schon im Shop; 2 € Bearbeitungsgebühr nicht bei der Zustellung bezahlt
-- [DHL: Fragen zu Kosten](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – postalische Verzollung, 7,50 € Auslagepauschale, IOSS
-- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – 3 € pro Warenkategorie
+- [DHL: Fragen zur Einfuhrverzollung](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-einfuhrverzollung.html) – 3 € je Warenart, meist schon im Shop; 2 € Bearbeitungsgebühr nicht bei der Zustellung bezahlt; Zahlung bei der Zustellung oder in der Filiale; Produktkennungen seit 1. November 2026 (gelesen am 20. November 2026)
+- [DHL: Fragen zu Kosten](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/zoll/fragen-zu-kosten.html) – postalische Verzollung, 7,50 € Auslagepauschale, IOSS, unter 1 € Einfuhrumsatzsteuer kein Einzug (gelesen am 20. November 2026)
+- [Zoll: Internetbestellungen](https://www.zoll.de/DE/Privatpersonen/Postsendungen-Internetbestellungen/Sendungen-aus-einem-Nicht-EU-Staat/Zoll-und-Steuern/Internetbestellungen/internetbestellungen_node.html) – 3 € pro Warenkategorie; Post oder Kurierdienst verzollt und zahlt die Abgaben vor (gelesen am 20. November 2026)
 - [EU-Kommission: Buying goods online coming from a non-EU country](https://taxation-customs.ec.europa.eu/buying-goods-online-coming-non-european-union-country_en) – Waren schon in der EU: keine Zollformalitäten, MwSt. im Preis
 - [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € Bearbeitungsgebühr seit 1. November 2026
 - [EU-Kommission: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € je Warenart (gleiche Zolltarifnummer, Beschreibung und Herkunft), bei jedem Warenwert
 - [Rat der EU: Delegierte Verordnung C(2026) 6694](https://data.consilium.europa.eu/doc/document/ST-13480-2026-INIT/en/pdf) – 2 € pro Ware
-- [BMF: 3-Euro-Zoll](https://www.bmf.gv.at/themen/zoll/internethandel-%28fernverkauf%29/3-euro-zoll.html) – 3 € pro Ware, auch bei IOSS
-- [Österreichische Post: Import](https://www.post.at/p/c/import) – Importtarif, Verzollung durch die Post
+- [BMF: 3-Euro-Zoll](https://www.bmf.gv.at/themen/zoll/internethandel-fernverkauf/3-euro-zoll.html) – 3 € pro Ware, auch bei IOSS (gelesen am 20. November 2026)
+- [Österreichische Post: Import](https://www.post.at/p/c/import) – Importtarif (nicht bei IOSS bis 150 €), Verzollung durch die Post, mögliche Kosten, Zollhindernis in der Sendungsverfolgung (gelesen am 20. November 2026)
 - [Österreichische Post: FAQ Privat](https://www.post.at/p/c/faq-privat) – IOSS ohne Einfuhrumsatzsteuer und Importtarif
 - [Österreichische Post: Sendungsstatus](https://www.post.at/p/c/hilfe-sendungsstatus) – Sendung ins Zielland weitergeleitet, Sendung in Verteilung
-- [Schweizerische Post: Importverzollung](https://www.post.ch/de/empfangen/importverzollung) – Post und GLS, CHF 16.–, 3 %
+- [Schweizerische Post: Importverzollung](https://www.post.ch/de/empfangen/importverzollung) – Post und GLS, CHF 16.–, 3 %, höchstens CHF 70.–, CHF 1.50 Rabatt bei Onlinezahlung, Preise ohne MWST (gelesen am 20. November 2026)
 - [Schweizerische Post: Ereignisse in der Sendungsverfolgung](https://www.post.ch/de/empfangen/sendung-verfolgen/ereignisse-sendungen-verfolgen) – Grenzstelle, Zollfreigabe
-- [BAZG: Empfangen von Briefen und Paketen](https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen) – jede Sendung aus dem Ausland angemeldet, bis CHF 5.– nicht erhoben
+- [BAZG: Empfangen von Briefen und Paketen](https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen) – jede Sendung aus dem Ausland angemeldet, bis CHF 5.– nicht erhoben (gelesen am 20. November 2026)
 - [BAZG: Versandhandel und Plattformbesteuerung](https://www.bazg.admin.ch/de/regelung-mwst-versandhandel-und-plattformbesteuerung) – Versandhändler und Plattformen rechnen die MWST selbst ab
 :::

@@ -4,7 +4,7 @@ description: Dove trovi il codice di tracciamento AliExpress, chi consegna in It
 slug: tracciare-ordine-aliexpress
 picture: Un'etichetta di pacco con un conto alla rovescia, un aereo in cielo e Pip che aspetta alla porta con il telefono.
 published: 2026-10-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Su AliExpress il codice di tracciamento è nell'ordine: apri "I miei ordini", trova l'ordine e clicca "Traccia ordine". Puoi scriverlo anche sul sito di Cainiao, la logistica del gruppo Alibaba, a cui rimandano le pagine di aiuto di AliExpress; l'ultimo tratto in Italia lo fa Poste Italiane o un corriere. Nei dettagli dell'ordine scorre anche un conto alla rovescia, la Protezione acquirenti: se il pacco non arriva, apri una controversia prima che finisca, e non confermare la ricezione finché non hai il pacco in mano.
@@ -23,7 +23,7 @@ Chi trovi linea per linea, dagli invii postali con il codice che finisce in `CN`
 - home | Tu | Conferma la ricezione solo quando hai il pacco in mano
 :::
 
-Sulla dogana: dal 1° luglio 2026 un pacco da fuori UE paga un dazio di 3 € per voce doganale anche sotto i 150 €, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale. AliExpress ricorda che dazi e tasse non li copre mai lei e che di solito li incassa il corriere alla consegna; chi spedisce da un magazzino in Italia non te li fa pagare. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
+Sulla dogana: dal 1° luglio 2026 anche un pacco da fuori UE fino a 150 € paga un dazio di 3 € per voce doganale, e dal 1° novembre 2026, secondo la Commissione europea, si aggiunge la tassa di gestione dell'Unione, 2 € per voce doganale, qualunque sia il valore del pacco. AliExpress ricorda che dazi e tasse non li copre mai lei e che di solito li incassa il corriere alla consegna; chi spedisce da un magazzino in Italia non te li fa pagare. Importi ed eccezioni: [pacco fermo in dogana](guide:customs).
 
 ## Dove trovo il codice di tracciamento AliExpress?
 

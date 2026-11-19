@@ -33,7 +33,7 @@ export function plannedClocks(result: CarrierResult, now: Date): string[] {
 /**
  * A result whose summary a scan dated over an hour after its check gave (a
  * sender's notice on its own clock under the carrier's offset): its status
- * line, time and stage come from its newest scan before then. The scan itself
+ * line, time and stage come from its newest scan before then, or from none when no scan comes before. The scan itself
  * is still stored and flagged, but it can't become the parcel's latest status,
  * then or once its time has passed: a stored row (`stored`, with `time`,
  * `description`, `occurred_at` and `created_at`) dated over an hour after it
@@ -52,7 +52,14 @@ export function withoutFutureSummary(result: CarrierResult, carrierId: string, n
   if (!summaryAhead) return result;
   const newest = events.filter((event) => !ahead.includes(event) && Number.isFinite(Date.parse(eventTimestamp(event.time, timezone) ?? '')))
     .sort((left, right) => Date.parse(eventTimestamp(right.time, timezone)!) - Date.parse(eventTimestamp(left.time, timezone)!))[0];
-  if (!newest) return result;
+  if (!newest) {
+    // No scan before the check tells the parcel: the answer gives no status line, time or stage of its own, and the
+    // parcel keeps its own (a new one waits for its first scan).
+    const rest: CarrierResult = { ...result, ...aheadStage(result, ahead) ? { status: 'pending', current_stage: 'pending' } : {} };
+    delete rest.last_status_text;
+    delete rest.last_update;
+    return rest;
+  }
   const stage = aheadStage(result, ahead) && newest.stage ? newest.stage as Stage : null;
   return {
     ...result,

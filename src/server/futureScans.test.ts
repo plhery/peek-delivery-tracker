@@ -39,9 +39,11 @@ describe('scans dated after the check', () => {
       occurred_at: '2026-10-30T18:16:41Z', created_at: '2026-10-30T13:21:00Z' }])).toMatchObject({
       current_stage: 'in_transit', last_status_text: deposit.description,
     });
-    // With no scan before the check, the result stays as it is.
+    // With no scan before the check, the answer tells no status line or time, nor the stage the scan gave.
     const onlyAhead = { status: 'pending' as const, last_status_text: notice.description, last_update: notice.time, events: [notice] };
-    expect(withoutFutureSummary(onlyAhead, 'swiss-post', now)).toBe(onlyAhead);
+    expect(withoutFutureSummary(onlyAhead, 'swiss-post', now)).toEqual({ status: 'pending', events: [notice] });
+    expect(withoutFutureSummary({ ...onlyAhead, status: 'in_transit', current_stage: 'accepted' }, 'swiss-post', now))
+      .toEqual({ status: 'pending', current_stage: 'pending', events: [notice] });
   });
 
   it('brings a watermark a scan dated ahead set back to the newest other scan', () => {

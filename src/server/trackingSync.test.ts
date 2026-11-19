@@ -1192,6 +1192,28 @@ describe('status observation collection', () => {
     }));
   });
 
+  it('keeps a new parcel waiting when its only scan, and the summary it gives, are dated hours after the check', async () => {
+    const client = fakeClient();
+    const at = (hours: number) => new Date(Date.now() + hours * 3_600_000).toISOString();
+    // A delivery on a clock read in the wrong zone, three hours ahead of the check: the carrier's only scan.
+    const delivery = { time: at(3), description: 'Synthetic delivery', stage: 'delivered', provider_code: 'DL' };
+    const adapter = { fetch: vi.fn().mockResolvedValue({
+      status: 'delivered', current_stage: 'delivered', current_stage_source: 'carrier_map',
+      last_status_text: delivery.description, last_update: delivery.time, events: [delivery],
+    }), fetchUniversal: vi.fn().mockRejectedValue(new Error('not asked')) };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null);
+    await service.syncPackage({ id: 'ahead', carrier: 'ctt', tracking_number: 'TEST1234', current_stage: 'pending' });
+    expect(client.insertEvents.mock.calls.flat(2).map((row: JsonObject) => row.description)).toEqual([delivery.description]);
+    const saved = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+    expect(saved.current_stage ?? 'pending').toBe('pending');
+    expect(saved.last_status_text).not.toBe(delivery.description);
+    // A parcel on its way keeps its stage and status line.
+    await service.syncPackage({ id: 'moving', carrier: 'ctt', tracking_number: 'TEST1234', current_stage: 'in_transit',
+      last_status_text: 'Synthetic departure', carrier_data: { last_status_text: 'Synthetic departure' } });
+    const kept = client.updatePackage.mock.calls.at(-1)![1] as JsonObject;
+    expect([kept.current_stage ?? 'in_transit', kept.last_status_text ?? 'Synthetic departure']).toEqual(['in_transit', 'Synthetic departure']);
+  });
+
   it('keeps the progress it read in a carrier answer no rule stages when the same answer comes again', async () => {
     const store = eventStore();
     const adapter = { fetch: vi.fn().mockResolvedValue({ status: 'pending', current_stage: 'registered', events: [

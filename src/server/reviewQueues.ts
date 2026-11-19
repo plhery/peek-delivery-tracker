@@ -4,7 +4,7 @@ import { statusMapAnswer } from 'universal-parcel-scraper/app';
 import manifest from '../../package.json';
 import { isPickupCode, normalizeTrackingNumber } from '../lib/carriers';
 import { captureOperationalError, databaseUnavailable, errorType, inBackgroundScope, logOperationalEvent } from './observability';
-import type { SupabaseServiceClient } from './supabase';
+import { SUPPORT_CASE_REVISION, type SupabaseServiceClient } from './supabase';
 import { detectionOffers, trackingSupportContext } from './trackingSupport';
 import { isRecord, type JsonObject } from './types';
 import { routingState } from './trackingRouting';
@@ -294,10 +294,12 @@ export async function replayReviewQueues(
   const claim = await client.claimTrackingReviewRun(version, REPLAY_LEASE_SECONDS);
   if (claim !== 'claimed') return claim;
   const cases = await client.listOpenTrackingSupportCases(MAX_REPLAYED_CASES);
+  // A case is closed only as replay read it: a check since may have found a gap the note does not explain.
+  const revision = (supportCase: JsonObject) => Object.fromEntries(SUPPORT_CASE_REVISION.map((field) => [field, supportCase[field] ?? null]));
   // No replay fixes a pickup code: it was never a number to track.
   const pickups = cases.flatMap((supportCase) => {
     const note = pickupCodeNote(supportCase);
-    return note ? [{ id: String(supportCase.id), note }] : [];
+    return note ? [{ id: String(supportCase.id), note, revision: revision(supportCase) }] : [];
   });
   const pickupIds = new Set(pickups.map(({ id }) => id));
   const resolved = cases.filter((supportCase) => !pickupIds.has(String(supportCase.id))).flatMap((supportCase) => {
@@ -317,7 +319,7 @@ export async function replayReviewQueues(
   const stages = waiting.length ? await client.trackingNumberStages(waiting.map((supportCase) => String(supportCase.tracking_number))) : new Map();
   const finished = waiting.flatMap((supportCase) => {
     const note = finishedParcelNote(supportCase, stages.get(String(supportCase.tracking_number)));
-    return note ? [{ id: String(supportCase.id), note }] : [];
+    return note ? [{ id: String(supportCase.id), note, revision: revision(supportCase) }] : [];
   });
   // Nor are lookups nobody answered for once they leave the schedule, or once they are gone, nor
   // parcels filed under the carrier that tracked the number, as typed or as its own barcode.
@@ -328,7 +330,7 @@ export async function replayReviewQueues(
     const found = parcels.get(String(supportCase.tracking_number));
     const unfiled = ['unknown', 'intl-post', null, undefined].includes(supportCase.configured_carrier as string | null | undefined);
     const note = filedParcelNote(supportCase, found) ?? (unfiled ? unseenLookupNote(supportCase, found, now) : null);
-    return note ? [{ id: String(supportCase.id), note }] : [];
+    return note ? [{ id: String(supportCase.id), note, revision: revision(supportCase) }] : [];
   });
   const closings = [...pickups, ...finished, ...unseen];
   const ignored = closings.length ? await client.ignoreReplayedTrackingSupportCases(version, closings) : 0;

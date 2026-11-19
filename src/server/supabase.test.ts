@@ -871,7 +871,7 @@ describe('tracking audit PostgREST client', () => {
 
     expect(request.mock.calls.slice(0, 4)).toEqual([
       ['/rest/v1/rpc/claim_tracking_review_run', { method: 'POST', body: { p_version: 'v1', p_lease_seconds: 600 } }],
-      ['/rest/v1/tracking_support_cases?select=id%2Ctracking_number%2Cconfigured_carrier%2Cdirect_verified_carrier%2Creasons%2Clast_outcome&fix_status=eq.open&order=last_seen.desc&limit=500'],
+      ['/rest/v1/tracking_support_cases?select=id%2Ctracking_number%2Cconfigured_carrier%2Cdirect_verified_carrier%2Creasons%2Clast_outcome%2Clast_seen%2Cseen_count&fix_status=eq.open&order=last_seen.desc&limit=500'],
       ['/rest/v1/rpc/fix_replayed_tracking_support_cases', { method: 'POST', body: { p_version: 'v1', p_cases: cases } }],
       ['/rest/v1/rpc/finish_tracking_review_run', {
         method: 'POST', body: { p_version: 'v1', p_result: { cases_replayed: 1, cases_fixed: 1 } },
@@ -1333,6 +1333,24 @@ describe('account postcodes', () => {
     expect(request.mock.calls[0]![1]).toMatchObject({ method: 'PATCH', body: { dpd_postcode: '1000' } });
     // Another change since renewed the generation: nothing was written.
     await expect(client.updatePackageAtGeneration('parcel', 'generation-1', { dpd_postcode: '1000' })).resolves.toBe(false);
+  });
+});
+
+describe('replayed support cases', () => {
+  it('ignores a case only while it holds what replay read of it', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce([{ id: 'case-1' }]).mockResolvedValueOnce([]);
+    const revision = { configured_carrier: 'fedex', direct_verified_carrier: null, last_outcome: 'waiting', reasons: ['ambiguous_shape', 'no_direct_adapter'],
+      last_seen: '2026-11-18T21:40:00.123456+00:00', seen_count: 3 };
+    await expect(client.ignoreReplayedTrackingSupportCases('v1', [{ id: 'case-1', note: 'No gap left.', revision }])).resolves.toBe(1);
+    const params = new URL(`https://database.example${request.mock.calls[0]![0]}`).searchParams;
+    expect(Object.fromEntries(params)).toEqual({
+      id: 'eq.case-1', fix_status: 'eq.open', configured_carrier: 'eq.fedex', direct_verified_carrier: 'is.null', last_outcome: 'eq.waiting',
+      reasons: 'eq.{"ambiguous_shape","no_direct_adapter"}', last_seen: 'eq.2026-11-18T21:40:00.123456+00:00', seen_count: 'eq.3',
+    });
+    expect(request.mock.calls[0]![1]).toMatchObject({ method: 'PATCH', body: { fix_status: 'ignored', fix_reference: 'v1', notes: 'No gap left.' } });
+    // A check since changed the case: it stays open.
+    await expect(client.ignoreReplayedTrackingSupportCases('v1', [{ id: 'case-1', note: 'No gap left.', revision }])).resolves.toBe(0);
   });
 });
 

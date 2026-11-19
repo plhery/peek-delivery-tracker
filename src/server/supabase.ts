@@ -134,6 +134,12 @@ function query(
   return new URLSearchParams(entries as Record<string, string>).toString();
 }
 
+/**
+ * What replay reads of a support case and closes it on: every check of its number counts and stamps it, and may
+ * change the rest.
+ */
+export const SUPPORT_CASE_REVISION = ['configured_carrier', 'direct_verified_carrier', 'last_outcome', 'reasons', 'last_seen', 'seen_count'] as const;
+
 /** A PostgREST `in` list of text values, each quoted with its quotes and backslashes escaped: a comma stays within it. */
 function quotedList(values: readonly string[]): string {
   return `in.(${values.map((value) => `"${value.replace(/["\\]/g, '\\$&')}"`).join(',')})`;
@@ -2029,7 +2035,7 @@ export class SupabaseServiceClient extends SupabaseClient {
   /** The open support cases, the most recently seen first. */
   async listOpenTrackingSupportCases(limit: number): Promise<JsonObject[]> {
     const params = query({
-      select: 'id,tracking_number,configured_carrier,direct_verified_carrier,reasons,last_outcome',
+      select: 'id,tracking_number,configured_carrier,direct_verified_carrier,reasons,last_outcome,last_seen,seen_count',
       fix_status: 'eq.open',
       order: 'last_seen.desc',
       limit: String(limit),
@@ -2080,11 +2086,22 @@ export class SupabaseServiceClient extends SupabaseClient {
     return parcels;
   }
 
-  /** Marks the replayed cases that need no change ignored, with their notes; answers how many. */
-  async ignoreReplayedTrackingSupportCases(version: string, cases: Array<{ id: string; note: string }>): Promise<number> {
+  /**
+   * Marks the replayed cases that need no change ignored, with their notes, while each still holds what replay read
+   * of it (`revision`): a check that changed it since leaves it open for the next replay. Answers how many.
+   */
+  async ignoreReplayedTrackingSupportCases(
+    version: string,
+    cases: Array<{ id: string; note: string; revision: JsonObject }>,
+  ): Promise<number> {
     let ignored = 0;
-    for (const { id, note } of cases) {
-      const params = query({ id: `eq.${id}`, fix_status: 'eq.open' });
+    for (const { id, note, revision } of cases) {
+      const params = query([['id', `eq.${id}`], ['fix_status', 'eq.open'], ...SUPPORT_CASE_REVISION.map((field) => {
+        const value = revision[field];
+        if (value === null || value === undefined) return [field, 'is.null'] as const;
+        if (Array.isArray(value)) return [field, `eq.{${value.map((item) => `"${String(item).replace(/["\\]/g, '\\$&')}"`).join(',')}}`] as const;
+        return [field, `eq.${String(value)}`] as const;
+      })]);
       ignored += rows(await this.request(`/rest/v1/tracking_support_cases?${params}`, {
         method: 'PATCH', prefer: 'return=representation',
         body: { fix_status: 'ignored', fix_reference: version.slice(0, 500), notes: note.slice(0, 4000) },

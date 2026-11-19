@@ -144,7 +144,16 @@ describe('review queue replay', () => {
     expect(client.fixReplayedTrackingSupportCases).not.toHaveBeenCalled();
     expect(client.trackingNumberParcels).toHaveBeenCalledExactlyOnceWith(['204618']);
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-pickup',
-      note: 'Six digits filed under no carrier: a pickup code, not a tracking number. The apps ask for the parcel’s tracking number instead.' }]);
+      note: 'Six digits filed under no carrier: a pickup code, not a tracking number. The apps ask for the parcel’s tracking number instead.', revision: expect.any(Object) }]);
+  });
+
+  it('closes a case only as replay read it', async () => {
+    const client = fakeClient();
+    const read = { configured_carrier: 'unknown', direct_verified_carrier: null, last_outcome: 'waiting', reasons: ['unknown_shape'],
+      last_seen: '2026-11-18T21:40:00.123456+00:00', seen_count: 3 };
+    client.listOpenTrackingSupportCases.mockResolvedValue([{ id: 'case-pickup', tracking_number: '204617', ...read }]);
+    await replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1');
+    expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [expect.objectContaining({ id: 'case-pickup', revision: read })]);
   });
 
   it('ignores a case only its carrier could confirm once every parcel with the number has finished', async () => {
@@ -167,7 +176,7 @@ describe('review queue replay', () => {
       .resolves.toMatchObject({ cases_replayed: 6, cases_ignored: 1 });
     expect(client.trackingNumberStages).toHaveBeenCalledExactlyOnceWith(['123456789012', '123456789023', '123456789001']);
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-delivered',
-      note: 'Its parcel was delivered before fedex, one of the carriers its shape fits, confirmed the number directly: no check is left to confirm it.' }]);
+      note: 'Its parcel was delivered before fedex, one of the carriers its shape fits, confirmed the number directly: no check is left to confirm it.', revision: expect.any(Object) }]);
   });
 
   it('ignores a case whose parcels are all one-off lookups that left the schedule before anyone answered', async () => {
@@ -197,7 +206,7 @@ describe('review queue replay', () => {
     expect(client.trackingNumberParcels).toHaveBeenCalledExactlyOnceWith(
       ['123456789000', '123456789001', '123456789002', '123456789003', '123456789004', '123456789005']);
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-unseen',
-      note: 'Every parcel with the number is a one-off lookup that left the schedule before any carrier or provider answered for it: no check is left to update the case.' }]);
+      note: 'Every parcel with the number is a one-off lookup that left the schedule before any carrier or provider answered for it: no check is left to update the case.', revision: expect.any(Object) }]);
   });
 
   it('ignores a case a check opened before it filed the parcel under the carrier that tracked the number', async () => {
@@ -219,7 +228,7 @@ describe('review queue replay', () => {
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
       .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 1 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [
-      { id: 'case-314159265355', note: 'Its parcel was filed under fedex, one of the carriers its shape fits, once fedex tracked the number: no gap left.' },
+      { id: 'case-314159265355', note: 'Its parcel was filed under fedex, one of the carriers its shape fits, once fedex tracked the number: no gap left.', revision: expect.any(Object) },
     ]);
   });
 
@@ -243,7 +252,7 @@ describe('review queue replay', () => {
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
       .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 1 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [
-      { id: 'case-314159265355', note: 'Its parcel is filed under fedex, one of the carriers its shape fits, and fedex tracked the number: no gap left.' },
+      { id: 'case-314159265355', note: 'Its parcel is filed under fedex, one of the carriers its shape fits, and fedex tracked the number: no gap left.', revision: expect.any(Object) },
     ]);
   });
 
@@ -266,8 +275,8 @@ describe('review queue replay', () => {
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
       .resolves.toMatchObject({ cases_replayed: 3, cases_ignored: 2 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [
-      { id: 'case-RA123456785LT', note: 'Its parcel is filed under lietuvos-pastas, and lietuvos-pastas tracked this S10 number: no gap left.' },
-      { id: 'case-RA111111115LT', note: 'Its parcel is filed under royal-mail, and royal-mail tracked this S10 number: no gap left.' },
+      { id: 'case-RA123456785LT', note: 'Its parcel is filed under lietuvos-pastas, and lietuvos-pastas tracked this S10 number: no gap left.', revision: expect.any(Object) },
+      { id: 'case-RA111111115LT', note: 'Its parcel is filed under royal-mail, and royal-mail tracked this S10 number: no gap left.', revision: expect.any(Object) },
     ]);
   });
 
@@ -320,7 +329,7 @@ describe('review queue replay', () => {
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
       .resolves.toMatchObject({ cases_replayed: 4, cases_ignored: 1 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-ZZ31415926535897',
-      note: 'hermes-de resolves the number to a barcode of its own, one its shape fits, and tracks that: no gap left.' }]);
+      note: 'hermes-de resolves the number to a barcode of its own, one its shape fits, and tracks that: no gap left.', revision: expect.any(Object) }]);
   });
 
   it('ignores a case whose parcels are gone once a check of one got no answer, not one only detection saw', async () => {
@@ -343,7 +352,7 @@ describe('review queue replay', () => {
     await expect(replayReviewQueues(client as unknown as SupabaseServiceClient, 'v1', new Date('2026-09-10T12:00:00Z')))
       .resolves.toMatchObject({ cases_replayed: 5, cases_ignored: 1 });
     expect(client.ignoreReplayedTrackingSupportCases).toHaveBeenCalledExactlyOnceWith('v1', [{ id: 'case-unanswered',
-      note: 'No parcel with the number is saved any more, and its last check got no answer for it: no check is left to update the case.' }]);
+      note: 'No parcel with the number is saved any more, and its last check got no answer for it: no check is left to update the case.', revision: expect.any(Object) }]);
   });
 
   it('fixes the resolved open cases once and records the outcome for the version', async () => {

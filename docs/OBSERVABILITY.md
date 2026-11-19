@@ -322,7 +322,9 @@ reference's reasons. So is a case whose parcels are all filed under the carrier 
 the number when the shape alone keeps a reason: an S10 number detection leaves to
 international post. So is a case on a pickup code filed under no carrier, which was never a
 tracking number. A case only the
-Add sheet's recognition saw stays open, since detection could still learn its shape.
+Add sheet's recognition saw stays open, since detection could still learn its shape. A case
+is marked `ignored` only while it holds what the replay read of it: a check that changed it
+since leaves it open for the next replay.
 `tracking_review_runs` keeps one row per version, so restarts and other servers do not
 replay it again; another server takes over a replay left unfinished for ten minutes.
 

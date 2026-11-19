@@ -149,7 +149,7 @@ Key server modules:
   through `/p/<id>`. The id (12 symbols, about 70 bits) is the capability to read it.
   - The device that made the lookup also gets an owner key, once; the database keeps its
     SHA-256. With the key (`X-Parcel-Key`) the caller sees the full tracking number, may
-    forget the parcel, and may keep it after signing in.
+    change its carrier on the same link, forget the parcel, and keep it after signing in.
   - Anyone else with the link is a viewer: the number is masked to its last characters, and
     the answer is built from an allow-list. The name, postcode, private tracking link, routing state,
     recipient's name and internal ids never leave the server, for either role. A viewer who
@@ -226,7 +226,7 @@ Key server modules:
   - A build without an API (`NEXT_PUBLIC_USE_API=false`) answers lookups in the browser with
     fictional parcels from the demo stories, so nothing leaves the device.
   - Lookups are limited per client and overall, per minute in memory and per day in the
-    database. The daily counter is keyed by a hash of the client address and the date,
+    database. A lookup's change of carrier counts as a lookup. The daily counter is keyed by a hash of the client address and the date,
     made with a server secret; an IPv6 client counts as its /64, and its /48 has a counter
     too.
   - Detecting the carrier before a lookup asks carriers only when the number's shape fits

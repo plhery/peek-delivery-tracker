@@ -8,11 +8,11 @@ import { settleTypedSupportCases } from '../../../../src/server/reviewQueues';
 import { logOperationalEvent } from '../../../../src/server/observability';
 import {
   claimLookup,
+  lookupsUsedUp,
   newOwnerKey,
   ownerKeyHash,
   parcelAlerts,
   publicParcelResponse,
-  secondsUntilUtcMidnight,
 } from '../../../../src/server/publicParcels';
 import { SupabaseError } from '../../../../src/server/supabase';
 import { newPackageValues } from '../../../../src/server/validation';
@@ -51,12 +51,7 @@ async function lookUp(context: ApiContext, progress: { stage: LookupStage; parce
   if (!allowance.allowed) {
     recordLookup(allowance.scope === 'global' ? 'limited_global'
       : allowance.scope === 'network' ? 'limited_network' : 'limited_daily', context.requestId, progress.parcel);
-    // `scope` lets a client offer signing in instead of a countdown to midnight.
-    return json(
-      { error: 'No lookups are left for today. Sign in to keep going.', scope: 'daily' },
-      429,
-      { 'Retry-After': String(secondsUntilUtcMidnight(now)) },
-    );
+    return lookupsUsedUp(now);
   }
   // Amazon is asked only for a lookup that was counted.
   progress.stage = 'amazon';

@@ -15,7 +15,7 @@ import type {
   ApiTrackingEventRow,
 } from '../generated/apiContract';
 import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
-import { clientNetwork, clientSite } from './api';
+import { clientNetwork, clientSite, json } from './api';
 import { appleAppIds } from './appleAppLinks';
 import { appFollowsLinks } from './appStoreRelease';
 import { emailConfigured } from './email/config';
@@ -214,6 +214,15 @@ export async function claimDetection(service: SupabaseServiceClient, ip: string,
 export function secondsUntilUtcMidnight(now: Date): number {
   const midnight = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1);
   return Math.max(1, Math.ceil((midnight - now.getTime()) / 1_000));
+}
+
+/** The answer once a client's lookups for today are used up. `scope` lets a client offer signing in instead of a countdown to midnight. */
+export function lookupsUsedUp(now: Date): Response {
+  return json(
+    { error: 'No lookups are left for today. Sign in to keep going.', scope: 'daily' },
+    429,
+    { 'Retry-After': String(secondsUntilUtcMidnight(now)) },
+  );
 }
 
 const text = (value: unknown): value is string => typeof value === 'string' && value !== '';

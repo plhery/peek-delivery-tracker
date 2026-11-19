@@ -4849,6 +4849,26 @@ struct TokenParcelsResponse: Codable, Equatable, Hashable, Sendable {
     var parcels: [TokenParcel]
 }
 
+struct ParcelLinkCarrierRequest: Codable, Equatable, Hashable, Sendable {
+    var carrier: CarrierID
+    var trackingURL: String? = nil
+    var dpdPostcode: String? = nil
+    var dpdPostcodeCountry: String? = nil
+    var phoneDigits: String? = nil
+    var lookupCountryHint: String? = nil
+    var language: String? = nil
+
+    private enum CodingKeys: String, CodingKey {
+        case carrier
+        case trackingURL = "trackingUrl"
+        case dpdPostcode
+        case dpdPostcodeCountry
+        case phoneDigits
+        case lookupCountryHint
+        case language
+    }
+}
+
 enum CarrierDetectionResponseAmazonShippingStatus: String, Codable, CaseIterable, Hashable, Sendable, Identifiable {
     case available
     case expired

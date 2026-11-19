@@ -74,6 +74,12 @@ function movesOf(nonce: string, expires: number, now: number): Set<string> {
   return entry.networks;
 }
 
+/** A lookup, or a lookup's new carrier, which asks carriers as a lookup does; anything else is a detection. */
+function proofKind(request: Request): 'lookup' | 'detection' {
+  const { pathname } = new URL(request.url);
+  return pathname === '/api/public/parcels' || /^\/api\/public\/parcels\/[^/]+\/carrier$/.test(pathname) ? 'lookup' : 'detection';
+}
+
 interface ProofCheck {
   /** `moved`: accepted on a network the proof had not worked on before. */
   outcome: 'accepted' | 'moved' | 'refused';
@@ -89,7 +95,7 @@ interface ProofCheck {
 function checkProof(secret: string, request: Request): ProofCheck {
   const used = network(secret, request);
   const fields: Record<string, string | number> = {
-    kind: new URL(request.url).pathname === '/api/public/parcels' ? 'lookup' : 'detection',
+    kind: proofKind(request),
     used_family: family(used),
   };
   const refused = (reason: Refusal): ProofCheck => ({ outcome: 'refused', reason, fields });
@@ -141,7 +147,7 @@ export function requireLookupProof(request: Request, headers: Record<string, str
  * through, or its refusal.
  */
 export async function verifyLookupRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array) {
-  const kind = new URL(request.url).pathname === '/api/public/parcels' ? 'lookup' : 'detection';
+  const kind = proofKind(request);
   if (!turnstileSettings()) {
     recordLookupProof(kind, 'none');
     return;

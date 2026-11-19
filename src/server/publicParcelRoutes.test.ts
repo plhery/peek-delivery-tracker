@@ -7,6 +7,7 @@ import { DELETE as forget, GET as read, PATCH as change } from '../../app/api/pu
 import { DELETE as alertOff, PUT as alertOn } from '../../app/api/public/parcels/[linkId]/alerts/route';
 import { DELETE as appAlertOff, PUT as appAlertOn } from '../../app/api/public/parcels/[linkId]/app-alerts/route';
 import { POST as postcodeAdded } from '../../app/api/public/parcels/[linkId]/postcode/route';
+import { PATCH as carrierChanged } from '../../app/api/public/parcels/[linkId]/carrier/route';
 import { AMAZON_ACCOUNT_MESSAGE } from '../lib/amazon';
 import * as amazon from './amazonShippingEligibility';
 import { HttpError } from './api';
@@ -973,6 +974,151 @@ describe('the postcode another carrier asks for', () => {
     expect(refused.status).toBe(429);
     expect(refused.headers.get('retry-after')).toBeTruthy();
     expect(claimed).toHaveBeenCalledTimes(10);
+  });
+});
+
+describe('changing the carrier of a lookup', () => {
+  const movedId = '51000000-0000-4000-a000-000000000021';
+  const unfiled = { carrier: 'unknown', tracking_url: null, dpd_postcode: null, carrier_data: {} };
+  const find = (link: JsonObject = { owner: true }, parcel: JsonObject = unfiled) => vi
+    .spyOn(SupabaseServiceClient.prototype, 'publicParcel')
+    .mockResolvedValue({ link: storedLink(link), package: storedPackage(parcel) });
+  const allow = (allowed = true) => vi.spyOn(SupabaseServiceClient.prototype, 'claimPublicAllowance')
+    .mockResolvedValue({ allowed, scope: allowed ? null : 'bucket', overallUsed: 1 });
+  const move = (created = true, changed = true) => vi.spyOn(SupabaseServiceClient.prototype, 'changeParcelLinkCarrier')
+    .mockResolvedValue({
+      link: storedLink({ owner: true, show_number: true }),
+      package: storedPackage({ ...unfiled, id: movedId, carrier: 'dhl', sync_status: 'pending', last_synced_at: null, tracking_events: [] }),
+      created,
+      changed,
+    });
+  /** `key` null sends no owner key. */
+  const choose = (body: unknown, id = linkId, key: string | null = ownerKey, ip = nextIp(), headers: Record<string, string> = {}) => carrierChanged(
+    new NextRequest(`https://delivery.example/api/public/parcels/${id}/carrier`, {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json', 'x-real-ip': ip, ...(key === null ? {} : { 'x-parcel-key': key }), ...headers },
+      body: JSON.stringify(body),
+    }), route(id));
+  const lines = () => vi.mocked(console.log).mock.calls.map(([line]) => JSON.parse(String(line)))
+    .filter((line) => line.event === 'parcel_link_carrier');
+
+  it('moves the link to its number with that carrier, once counted, and checks it at once', async () => {
+    const found = find();
+    const claim = allow();
+    const moved = move();
+    const update = vi.mocked(SupabaseServiceClient.prototype.updatePackage);
+    const response = await choose({ carrier: 'dhl', lookupCountryHint: 'DE', language: 'de' });
+    expect(response.status).toBe(200);
+    // The owner's read neither records an opening nor queues a check of the parcel it leaves.
+    expect(found).toHaveBeenCalledExactlyOnceWith(linkId, keyHash, false);
+    expect(claim).toHaveBeenCalledOnce();
+    expect(moved).toHaveBeenCalledExactlyOnceWith(linkId, keyHash,
+      { carrier: 'dhl', trackingUrl: null, dpdPostcode: null, dpdPostcodeCountry: null, phoneDigits: null });
+    expect(claim.mock.invocationCallOrder[0]).toBeLessThan(moved.mock.invocationCallOrder[0]!);
+    const text = await response.text();
+    expectNothingPrivate(text);
+    const answer = JSON.parse(text);
+    expect(answer.link).toMatchObject({ id: linkId, role: 'owner', showNumber: true });
+    expect(answer.package).toMatchObject({ id: movedId, carrier: 'dhl', tracking_number: trackingNumber });
+    // A new parcel is stored with where and in which language the lookup is made, as a new lookup's is.
+    expect(update).toHaveBeenCalledExactlyOnceWith(movedId, {
+      carrier_data: expect.objectContaining({ lookup_country_hint: 'DE', lookup_language: 'de' }),
+    });
+    expect(enqueue).toHaveBeenCalledExactlyOnceWith({ packageId: movedId, reason: 'added' });
+    expect(wake).toHaveBeenCalledOnce();
+    expect(lines()).toMatchObject([{ outcome: 'changed', tracking_number: trackingNumber, previous_carrier: 'unknown', carrier: 'dhl' }]);
+  });
+
+  it('joins the parcel another lookup of the number already follows with that carrier', async () => {
+    find();
+    allow();
+    move(false);
+    expect((await choose({ carrier: 'dhl' })).status).toBe(200);
+    expect(SupabaseServiceClient.prototype.updatePackage).not.toHaveBeenCalled();
+    expect(enqueue).toHaveBeenCalledExactlyOnceWith({ packageId: movedId, reason: 'changed' });
+  });
+
+  it('changes nothing, and counts nothing, for the details the parcel already has', async () => {
+    find({ owner: true }, { carrier: 'dhl', tracking_url: null, dpd_postcode: null, carrier_data: {} });
+    const claim = allow();
+    const moved = move();
+    const response = await choose({ carrier: 'dhl' });
+    expect(response.status).toBe(200);
+    expect((await response.json()).package).toMatchObject({ id: packageId, carrier: 'dhl' });
+    expect(claim).not.toHaveBeenCalled();
+    expect(moved).not.toHaveBeenCalled();
+    expect(enqueue).not.toHaveBeenCalled();
+    // The same postcode from another country is another parcel. Synthetic: a barcode of the shape PostNL's partners deliver.
+    find({ owner: true }, { tracking_number: '3SABCD000000021', carrier: 'spring-gds', tracking_url: null, dpd_postcode: '1000', carrier_data: {} });
+    expect((await choose({ carrier: 'spring-gds', dpdPostcode: '1000', dpdPostcodeCountry: 'BE' })).status).toBe(200);
+    expect(moved).toHaveBeenCalledExactlyOnceWith(linkId, keyHash,
+      { carrier: 'spring-gds', trackingUrl: null, dpdPostcode: '1000', dpdPostcodeCountry: 'BE', phoneDigits: null });
+    expect(lines().map((line) => line.outcome)).toEqual(['unchanged', 'changed']);
+  });
+
+  it('refuses a change once the day\u2019s lookups are used up, as a lookup is refused', async () => {
+    find();
+    allow(false);
+    const moved = move();
+    const response = await choose({ carrier: 'dhl' });
+    expect(response.status).toBe(429);
+    expect(await response.json()).toMatchObject({ scope: 'daily' });
+    expect(Number(response.headers.get('retry-after'))).toBeGreaterThan(0);
+    expect(moved).not.toHaveBeenCalled();
+    expect(lines().map((line) => line.outcome)).toEqual(['limited']);
+  });
+
+  it('answers an unknown link, a wrong or missing key and a viewer alike, before anything is counted', async () => {
+    const claim = allow();
+    const moved = move();
+    find({ owner: true });
+    vi.mocked(SupabaseServiceClient.prototype.publicParcel).mockResolvedValueOnce(null);
+    expect((await choose({ carrier: 'dhl' }, 'unknownLink2')).status).toBe(404);
+    for (const [id, key] of [[linkId, 'not-a-key'], [linkId, null], ['bad', ownerKey]] as const) {
+      const response = await choose({ carrier: 'dhl' }, id, key);
+      expect(response.status).toBe(404);
+      expect(await response.json()).toEqual({ error: 'Parcel unavailable', code: 'parcel_unavailable' });
+    }
+    // A key that opens the link as a viewer, and a link to an account's parcel, change nothing either.
+    find({ owner: false });
+    expect((await choose({ carrier: 'dhl' })).status).toBe(404);
+    find({ owner: true }, { ...unfiled, one_off: false });
+    expect((await choose({ carrier: 'dhl' })).status).toBe(404);
+    expect(claim).not.toHaveBeenCalled();
+    expect(moved).not.toHaveBeenCalled();
+    expect(lines().map((line) => line.outcome)).toEqual(Array(6).fill('unknown'));
+  });
+
+  it('refuses a carrier, its inputs or a device region that cannot be, before anything is counted', async () => {
+    find();
+    const claim = allow();
+    for (const body of [{}, { carrier: 'not-a-carrier' }, { carrier: 'dhl', phoneDigits: 12 }, { carrier: 'dhl', lookupCountryHint: 'Germany' }]) {
+      expect((await choose(body)).status).toBe(400);
+    }
+    expect(claim).not.toHaveBeenCalled();
+    expect(lines().map((line) => [line.outcome, line.reason])).toEqual(Array(4).fill(['failed', 'input']));
+  });
+
+  it('logs the number and the carriers, never the link or the key', async () => {
+    find();
+    allow();
+    move();
+    await choose({ carrier: 'dhl' });
+    for (const line of [...vi.mocked(console.log).mock.calls, ...vi.mocked(console.error).mock.calls].map(([entry]) => String(entry))) {
+      for (const secret of [linkId, ownerKey, keyHash]) expect(line).not.toContain(secret);
+    }
+  });
+
+  it('limits changes per client across every link', async () => {
+    find();
+    const claim = allow(false);
+    for (let index = 0; index < 6; index += 1) {
+      expect((await choose({ carrier: 'dhl' }, index % 2 ? linkId : 'unknownLink2', ownerKey, '198.51.100.41')).status).toBe(429);
+    }
+    const refused = await choose({ carrier: 'dhl' }, 'anotherLink3', ownerKey, '198.51.100.41');
+    expect(refused.status).toBe(429);
+    expect(await refused.json()).not.toHaveProperty('scope');
+    expect(claim).toHaveBeenCalledTimes(6);
   });
 });
 

@@ -64929,6 +64929,178 @@
         }
       }
     },
+    "/api/public/parcels/{linkId}/carrier": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ParcelLinkId"
+        }
+      ],
+      "patch": {
+        "operationId": "changePublicParcelCarrier",
+        "summary": "Change a lookup's carrier, or the inputs it takes, on the same link",
+        "description": "For the holder of the owner key. The link keeps its sharing, gift, alerts and shown number, and moves to the parcel of its number with those details, found or created as a new lookup would, whose check is queued at once. A change asks a carrier as a lookup does: it takes the same browser or native verification and counts against the same daily allowance. Details the parcel already has change nothing and need neither.",
+        "security": [],
+        "parameters": [
+          {
+            "name": "X-Parcel-Key",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z0-9_-]{43}$"
+            }
+          },
+          {
+            "name": "X-Lookup-Proof",
+            "in": "header",
+            "required": false,
+            "description": "Short-lived browser proof returned by /api/public/verification. Required for new anonymous work when Turnstile is enabled, unless the request carries an App Attest assertion.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "X-Native-Verification",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Native clients set 1 to say they verify."
+          },
+          {
+            "in": "header",
+            "name": "X-App-Attest-Key-Id",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Registered Apple App Attest or Android key attestation key identifier. Supply all three App Attest headers together instead of a browser proof."
+          },
+          {
+            "in": "header",
+            "name": "X-App-Attest-Challenge",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Fresh single-use assertion challenge from /api/public/native/challenge."
+          },
+          {
+            "in": "header",
+            "name": "X-App-Attest-Assertion",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Signature over SHA256 of the UTF-8 payload native-request-v1, challenge, HTTP method, URL pathname, and lowercase SHA256 hex of the exact request body, separated by newlines: a Base64 CBOR App Attest assertion, or for an Android key the Base64 DER ECDSA (SHA-256) signature of that hash."
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ParcelLinkCarrierRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The lookup with its carrier, as the owner sees it",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PublicParcelResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "403": {
+            "description": "Browser or native verification required before spending lookup budget or contacting providers. X-Native-Assertion says why an Android key's assertion did not let the request through: mode (Android attestation only logs), limited (its allowance is used until Retry-After) or refused.",
+            "headers": {
+              "X-Lookup-Verification": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "required"
+                  ]
+                }
+              },
+              "X-Native-Assertion": {
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "mode",
+                    "limited",
+                    "refused"
+                  ]
+                }
+              },
+              "Retry-After": {
+                "description": "With X-Native-Assertion limited: seconds until the key's allowance renews.",
+                "schema": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Parcel unavailable: an unknown link and a wrong or missing key are never told apart",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error",
+                    "code"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string",
+                      "enum": [
+                        "parcel_unavailable"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many lookups. Retry-After says when to try again; scope daily means today's allowance is used up.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "integer",
+                  "minimum": 1
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "503": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      }
+    },
     "/api/packages/{packageId}/share": {
       "parameters": [
         {
@@ -71335,6 +71507,49 @@
             "items": {
               "$ref": "#/components/schemas/TokenParcel"
             }
+          }
+        }
+      },
+      "ParcelLinkCarrierRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "description": "PublicLookupRequest without the number, which the link already has: the carrier and the inputs it takes. Inputs left out are dropped.",
+        "required": [
+          "carrier"
+        ],
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/CarrierId"
+          },
+          "trackingUrl": {
+            "type": "string",
+            "format": "uri",
+            "description": "Required for Planzer shared-link and Dachser shipments. These capability URLs are private credentials."
+          },
+          "dpdPostcode": {
+            "type": "string",
+            "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$",
+            "description": "Recipient postcode, for the carriers that take one; see CreatePackageRequest."
+          },
+          "dpdPostcodeCountry": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "ISO country code of dpdPostcode; see CreatePackageRequest."
+          },
+          "phoneDigits": {
+            "type": "string",
+            "pattern": "^[0-9]{4}$",
+            "description": "The last four digits of the recipient’s or sender’s phone, for the carriers that take them; see CreatePackageRequest."
+          },
+          "lookupCountryHint": {
+            "type": "string",
+            "pattern": "^[A-Z]{2}$",
+            "description": "Optional ISO country code from the device region. A weak lookup-order hint, never a delivery destination."
+          },
+          "language": {
+            "type": "string",
+            "pattern": "^[a-z]{2}$",
+            "description": "Optional app language the lookup was made in. A carrier that words its scans in several languages answers the parcel in it while no account owns it. A language the app does not speak is ignored."
           }
         }
       }

@@ -749,6 +749,13 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   with, shows nothing of the parcel and counts against the link: five a day, in `parcel_link_postcode_attempts`.
   A check that could not ask the carrier is not counted, and a carrier that blocks after
   wrong postcodes answers with its wait. The iPhone app does not show the request yet.
+  The owner of a lookup changes its carrier, or the inputs that carrier takes, on the same link
+  ([`carrier/route.ts`](../app/api/public/parcels/[linkId]/carrier/route.ts)): the link keeps its
+  sharing, gift, alerts and shown number and moves to the one-off parcel of its number with those
+  details, found or created as a new lookup would, whose check is queued at once. The parcel it
+  leaves goes once no link points to it. A change asks a carrier as a lookup does, so it takes
+  the same browser or app proof and a lookup from the day's allowance; details the parcel
+  already has change nothing.
   A parcel filed under no carrier that no carrier or provider has answered for yet is offered
   the first carrier detection lists for its number that serves the country it was looked up
   from and takes only the delivery postcode for numbers of its shape, which recognition

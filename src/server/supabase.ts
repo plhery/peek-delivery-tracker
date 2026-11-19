@@ -2599,6 +2599,39 @@ export class SupabaseServiceClient extends SupabaseClient {
   }
 
   /**
+   * Changes a lookup's carrier, or the inputs that carrier takes, on the same
+   * link, for the holder of its owner key: the link moves to the one-off parcel
+   * of its number with those details, found or new, and the parcel it leaves
+   * goes once no link reaches it. Answers like publicParcel, plus whether that
+   * parcel is new and whether the link moved; null for an unknown link and a
+   * wrong key alike.
+   */
+  async changeParcelLinkCarrier(
+    linkId: string,
+    ownerKeyHash: string,
+    values: { carrier: string; trackingUrl: string | null; dpdPostcode: string | null; phoneDigits: string | null;
+      dpdPostcodeCountry: string | null },
+  ): Promise<StoredParcelLink & { created: boolean; changed: boolean } | null> {
+    const result = await this.request('/rest/v1/rpc/change_parcel_link_carrier', {
+      method: 'POST',
+      body: {
+        p_link_id: linkId,
+        p_owner_key_hash: ownerKeyHash,
+        p_carrier: values.carrier,
+        p_tracking_url: values.trackingUrl,
+        p_dpd_postcode: values.dpdPostcode,
+        p_phone_digits: values.phoneDigits,
+        p_postcode_country: values.dpdPostcode ? values.dpdPostcodeCountry : null,
+      },
+    });
+    if (result === null) return null;
+    if (!isRecord(result) || !isRecord(result.link) || !isRecord(result.package)) {
+      throw new SupabaseError('Supabase did not return the changed parcel link');
+    }
+    return { link: result.link, package: result.package, created: result.created === true, changed: result.changed === true };
+  }
+
+  /**
    * Turns on an alert for a link, or updates the one its browser has. `full`
    * when the link has ten already, `finished` when the journey is over and
    * nothing was stored, `stopped` like publicParcel, null for an unknown link.

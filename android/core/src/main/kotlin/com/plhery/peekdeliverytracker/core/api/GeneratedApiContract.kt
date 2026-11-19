@@ -4798,6 +4798,17 @@ data class TokenParcelsResponse(
 )
 
 @Serializable
+data class ParcelLinkCarrierRequest(
+    val carrier: CarrierId,
+    val trackingUrl: String? = null,
+    val dpdPostcode: String? = null,
+    val dpdPostcodeCountry: String? = null,
+    val phoneDigits: String? = null,
+    val lookupCountryHint: String? = null,
+    val language: String? = null,
+)
+
+@Serializable
 enum class CarrierDetectionResponseAmazonShippingStatus(val rawValue: String) {
     @SerialName("available") Available("available"),
     @SerialName("expired") Expired("expired"),

@@ -65093,3 +65093,13 @@ export interface ApiTokenParcelsResponse {
   "sort": ApiTokenParcelSort;
   "parcels": Array<ApiTokenParcel>;
 }
+
+export interface ApiParcelLinkCarrierRequest {
+  "carrier": ApiCarrierId;
+  "trackingUrl"?: string;
+  "dpdPostcode"?: string;
+  "dpdPostcodeCountry"?: string;
+  "phoneDigits"?: string;
+  "lookupCountryHint"?: string;
+  "language"?: string;
+}

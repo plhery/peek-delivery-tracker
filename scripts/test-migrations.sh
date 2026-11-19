@@ -228,6 +228,8 @@ psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/parcel_link_postcodes.sql"
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/guest_postcode_country.sql"
+psql "$database_url" -X -v ON_ERROR_STOP=1 \
+  -f "$repo_root/supabase/tests/parcel_link_carrier.sql"
 
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/parcel_sharing.sql"

@@ -846,6 +846,11 @@ Key JSON events:
   carrier could not be asked), `not_asked` or `unknown` (no such link, or a wrong key). It
   has the `carrier` once the link asked for that one, the `tracking_number` and the
   `postcode` once the carrier was asked, and never the link;
+- `parcel_link_carrier` (by `request_id`): how a lookup's owner changing its carrier ended:
+  `changed`, `unchanged` (the parcel already had those details), `limited` (the day's
+  lookups are used up), `unknown` (no such link, or a wrong key) or `failed` with the
+  `reason`, the stage it stopped at, as for `public_lookup`. It has the `tracking_number`,
+  the `previous_carrier` and the `carrier` once the link was read, and never the link;
 - `carrier_recognition`: the `tracking_number`, how many carriers the Add sheet's recognition asked and which
   (`asked_carriers`, ids in the order asked), whether it asked a `second_batch` because none
   of the first five knew the number, how many knew the number or failed (`unanswered_carriers`

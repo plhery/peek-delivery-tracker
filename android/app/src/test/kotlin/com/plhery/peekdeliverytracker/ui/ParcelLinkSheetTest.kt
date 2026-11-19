@@ -39,6 +39,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeDown
+import androidx.compose.ui.test.swipeUp
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
@@ -527,6 +528,21 @@ class ParcelLinkSheetTest {
         assertFalse(exists(LINK_CARD))
         assertEquals(1, compose.onAllNodesWithTag(LINK_SHEET).fetchSemanticsNodes().size)
     }
+
+    /** A link opened over another starts at the top, not where the reader had scrolled the first one's history. */
+    @Test
+    fun aSecondLinkStartsAtTheTopOfItsPage() {
+        show(FakeParcelLinks().apply { read = { _, _ -> LinkFixtures.viewer() } }, fontScale = 2f)
+        open()
+        compose.onNodeWithTag(LINK_SCROLL).performTouchInput { swipeUp() }
+        settle()
+        assertTrue("The first link scrolled", linkScroll() > 0f)
+        open(giftId)
+        assertEquals(0f, linkScroll())
+    }
+
+    private fun linkScroll(): Float =
+        compose.onNodeWithTag(LINK_SCROLL).fetchSemanticsNode().config[SemanticsProperties.VerticalScrollAxisRange].value()
 
     @Test
     fun aLinkThatComesWhileTheSheetGoesLetsTheListTakeWhatItClosedOnFirst() {

@@ -423,7 +423,8 @@ private fun ParcelLinkSheet(source: ParcelLinkSource, state: ParcelLinkSheetStat
     var announcement by remember { mutableStateOf<Announcement?>(null) }
     val announce = { text: String -> announcement = Announcement(text, (announcement?.count ?: 0) + 1) }
 
-    val scroll = rememberScrollState()
+    // Each link's own: one opened over another starts at the top, and the same one keeps its place through a rotation.
+    val scroll = key(presentation) { rememberScrollState() }
     LinkSheetPage(
         title, closeEnabled = !state.adding, close = { links.close() }, scrolled = { scroll.value.toFloat() }, covered = covered,
         overlays = { backdrop, bottom ->

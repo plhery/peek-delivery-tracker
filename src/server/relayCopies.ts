@@ -44,6 +44,9 @@
  * CTT's scans an hour early). Its row that names no place, dated to the second
  * (off a minute's first second, or with milliseconds), one to three whole hours
  * to the second from the new carrier's row, in any stage, goes under that row.
+ * So does such a row that names a place, when it tells the new carrier's words
+ * in its stage from a place that does not conflict (WanB Express tells J&T
+ * Australia's scans two hours early, placed in the state).
  *
  * The earlier carrier also publishes some of its own scans late, after the
  * new carrier's later ones are stored (trackingSync.ts asks it again for a day
@@ -197,8 +200,8 @@ function sameSecond(copy: Scan, scan: Scan): boolean {
  * `relayedScans` shares). Then a row of the new carrier placed only in a country
  * the earlier carrier delivers in, and the new carrier does not, repeats the earlier carrier's latest scan of its
  * stage, when it follows every such scan by up to three hours but not by whole hours. Last, a row of the earlier
- * carrier that names no place and is dated to the second repeats the new carrier's row one to three whole hours away,
- * to the second, in any stage.
+ * carrier dated to the second repeats the new carrier's row one to three whole hours away, to the second: in any stage
+ * when it names no place, else in the row's stage, with its words, from a place that does not conflict.
  * A scan is in one pair at most, so two scans of one minute that the earlier carrier tells once stay two rows. A
  * universal row that tells a carrier's row again (`sameRows`) goes under it first, and that row pairs for both. The
  * earlier carrier may tell the new carrier's one scan of a minute as several rows at one instant (DHL tells La Poste's
@@ -240,8 +243,10 @@ export function relayCopies(row: JsonObject): Map<string, string> {
     return scan && copy.at > scan.at && copy.at - scan.at <= EXCHANGE_WINDOW_MS && !wholeHours(copy.at, scan.at)
       ? [{ copy, scan, gap: copy.at - scan.at }] : [];
   });
-  const twins = scans.filter((copy) => copy.source === earlier && !copy.placed && copy.at % MINUTE_MS !== 0)
-    .flatMap((copy) => scans.filter((scan) => scan.source === current && twinHours(copy.at, scan.at))
+  const twins = scans.filter((copy) => copy.source === earlier && copy.at % MINUTE_MS !== 0)
+    .flatMap((copy) => scans.filter((scan) => scan.source === current && twinHours(copy.at, scan.at)
+      && (!copy.placed || (copy.stage === scan.stage && told(copy.text) !== '' && told(copy.text) === told(scan.text)
+        && !placesConflict(copy.words, scan.words))))
       .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
   const paired = new Set<string>();
   // Of pairs as close, those telling the same words, then the same stage, so that each copy goes under its own scan.

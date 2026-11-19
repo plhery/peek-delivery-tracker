@@ -345,6 +345,34 @@ describe('relayCopies', () => {
       .toEqual(new Map([['copy', 'announced']]));
   });
 
+  it('pairs the earlier carrier\'s placed row telling the new carrier\'s words in its stage, whole hours away', () => {
+    // WanB Express tells J&T Australia's scans two hours early, to the second, placed in the state.
+    const told = (id: string, source: string, stage: string, at: string, description: string, location?: string) =>
+      ({ ...scan(id, source, stage, at), description, location });
+    const parcel = (tracking_events: object[]) => ({
+      carrier: 'wanbexpress', carrier_data: { original_carrier: 'wanbexpress', active_tracking_carrier: 'j-and-t-au' }, tracking_events,
+    });
+    expect(relayCopies(parcel([
+      told('round-early', 'wanbexpress', 'out_for_delivery', '2026-11-17T18:39:32Z', 'Out for delivery.', 'VIC, AU'),
+      told('round', 'j-and-t-au', 'out_for_delivery', '2026-11-17T20:39:32Z', 'Out for delivery'),
+      told('missed-early', 'wanbexpress', 'failed_attempt', '2026-11-18T18:12:28Z', 'Delivery attempted, address unclear', 'VIC, AU'),
+      told('missed', 'j-and-t-au', 'failed_attempt', '2026-11-18T20:12:28Z', 'Delivery attempted: address unclear'),
+    ]))).toEqual(new Map([['round-early', 'round'], ['missed-early', 'missed']]));
+    // Other words, another stage, a place that conflicts, a second off, or on a minute's first second: two scans.
+    expect(relayCopies(parcel([
+      told('words', 'wanbexpress', 'in_transit', '2026-11-16T10:00:05Z', 'Arrived at the depot', 'VIC, AU'),
+      told('words-scan', 'j-and-t-au', 'in_transit', '2026-11-16T12:00:05Z', 'Departed the depot'),
+      told('stage', 'wanbexpress', 'in_transit', '2026-11-17T10:00:05Z', 'Out for delivery', 'VIC, AU'),
+      told('stage-scan', 'j-and-t-au', 'out_for_delivery', '2026-11-17T12:00:05Z', 'Out for delivery'),
+      told('there', 'wanbexpress', 'in_transit', '2026-11-18T10:00:05Z', 'Arrived', 'Perth, WA, AU'),
+      told('there-scan', 'j-and-t-au', 'in_transit', '2026-11-18T12:00:05Z', 'Arrived', 'Melbourne, VIC, AU'),
+      told('off', 'wanbexpress', 'in_transit', '2026-11-19T10:00:06Z', 'Sorted', 'VIC, AU'),
+      told('off-scan', 'j-and-t-au', 'in_transit', '2026-11-19T12:00:05Z', 'Sorted'),
+      told('minute', 'wanbexpress', 'in_transit', '2026-11-20T10:00:00Z', 'Loaded', 'VIC, AU'),
+      told('minute-scan', 'j-and-t-au', 'in_transit', '2026-11-20T12:00:00Z', 'Loaded'),
+    ]))).toEqual(new Map());
+  });
+
   it('pairs with a universal provider\'s row of the new leg, and only in a parcel that was handed over', () => {
     const rows = [
       scan('in-france', 'unknown', 'in_transit', '2026-10-06T05:18:36Z'),

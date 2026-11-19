@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.platform
 
 import android.net.Uri
+import android.webkit.WebResourceResponse
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.webkit.WebViewFeature
 import com.plhery.peekdeliverytracker.ui.TurnstileEvents
@@ -93,6 +94,16 @@ class TurnstileClientTest {
         assertTrue(client.onRenderProcessGone(null, null))
         assertTrue(client.gone)
         assertEquals(listOf("failed", "failed"), heard)
+    }
+
+    /** The page answered with an HTTP error (a maintenance page, say) holds no check: it fails at once; a frame's doesn't. */
+    @Test
+    fun theMainFramesHttpErrorFailsTheCheckAFramesDoesNot() {
+        val unavailable = WebResourceResponse("text/html", "utf-8", 503, "Service Unavailable", emptyMap(), "".byteInputStream())
+        client.onReceivedHttpError(null, request("https://challenges.cloudflare.com/turnstile/v0/frame", mainFrame = false), unavailable)
+        assertEquals(emptyList<String>(), heard)
+        client.onReceivedHttpError(null, request(page, mainFrame = true), unavailable)
+        assertEquals(listOf("failed"), heard)
     }
 
     @Test

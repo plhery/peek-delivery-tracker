@@ -275,6 +275,14 @@ internal class TurnstileClient(private val page: String, private val events: Tur
         if (request.isForMainFrame) fail()
     }
 
+    /**
+     * The page answered with an HTTP error, a maintenance page say: the WebView shows what came, which holds no check, so
+     * it fails at once rather than at the timeout. A frame's or a script's error is the check's own to report.
+     */
+    override fun onReceivedHttpError(view: WebView?, request: WebResourceRequest, errorResponse: WebResourceResponse?) {
+        if (request.isForMainFrame) fail()
+    }
+
     /** A certificate refused, as WebKit refuses it, fails the check where it is the page's. */
     override fun onReceivedSslError(view: WebView?, handler: SslErrorHandler, error: SslError) {
         handler.cancel()

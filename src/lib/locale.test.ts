@@ -31,6 +31,15 @@ describe('language tags', () => {
     expect(detectLocale(['zh-Hant', 'nl'])).toBe('en');
   });
 
+  it('reads a tag’s language, script and region, never its extensions', () => {
+    const tags: [string, string | null][] = [
+      ['zh-TW-u-nu-latn', null], ['zh-Hant-u-nu-latn', null], ['zh-CN-u-nu-hans', 'zh'], ['zh-x-hant', 'zh'],
+      ['pt-u-ca-buddhist-x-br', 'pt'], ['pt-BR-u-nu-latn', 'pt-br'], ['de-CH-u-nu-latn', 'de'],
+    ];
+    for (const [tag, locale] of tags) expect(tagLocale(tag), tag).toBe(locale);
+    expect(detectLocale(['zh-TW-u-nu-latn', 'en'])).toBe('en');
+  });
+
   it('names Brazil’s Portuguese by its region where a tag is needed, and the others as their addresses do', () => {
     expect(SUPPORTED_LOCALES.map(hrefLanguage)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt', 'pt-BR', 'pl', 'ru', 'zh']);
     expect(SUPPORTED_LOCALES.map(documentLanguage)).toEqual(['en', 'de', 'fr', 'it', 'es', 'pt-PT', 'pt-BR', 'pl', 'ru', 'zh-Hans']);

@@ -25,7 +25,10 @@ export function isLocale(value: unknown): value is Locale {
  * Hong Kong's and Macau's Chinese without a script), which Peek doesn't speak.
  */
 export function tagLocale(tag: string): Locale | null {
-  const [language, ...subtags] = tag.trim().toLowerCase().replaceAll('_', '-').split('-');
+  const [language, ...rest] = tag.trim().toLowerCase().replaceAll('_', '-').split('-');
+  // Its script, region and variants: an extension or a private use (`-u-nu-latn`, `-x-…`) starts at a single letter.
+  const end = rest.findIndex((subtag) => subtag.length === 1);
+  const subtags = end < 0 ? rest : rest.slice(0, end);
   if (language === 'pt') return subtags.includes('br') ? 'pt-br' : 'pt';
   if (language === 'zh') {
     const script = subtags.find((subtag) => /^[a-z]{4}$/.test(subtag));

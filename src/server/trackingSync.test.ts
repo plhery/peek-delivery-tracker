@@ -4362,6 +4362,41 @@ describe('TrackingSyncService', () => {
     expect(report).toHaveBeenCalledExactlyOnceWith(failure, { component: 'tracking', operation: 'list_waiting_packages' });
   });
 
+  // Whoever waits for it: a parcel at its label for a week, or never answered for after 12 failed checks in a row,
+  // every 6 hours; one out for delivery on an earlier day, hourly, until the carrier scans it again.
+  it.each([
+    { name: 'registered a week after it was added', stage: 'registered', time: '15:00:00', checked: 0 },
+    { name: 'registered a week after it was added', stage: 'registered', time: '16:00:00', checked: 1 },
+    { name: 'registered a week after it was added, expected today', stage: 'registered', expected: '2026-09-09', time: '11:00:00', checked: 1 },
+    { name: 'registered a week after it was added, its link opened', stage: 'registered', opened: true, time: '11:00:00', checked: 1 },
+    // Its label weeks old counts from when it was added.
+    { name: 'registered, added 4 days ago', stage: 'registered', created: '2026-09-05T08:00:00Z', time: '11:00:00', checked: 1 },
+    { name: 'in transit a week after it was added', stage: 'in_transit', time: '11:00:00', checked: 1 },
+    { name: 'never answered for after 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, failures: 12, time: '15:00:00', checked: 0 },
+    { name: 'never answered for after 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, failures: 12, time: '16:00:00', checked: 1 },
+    { name: 'never answered for after 11 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, failures: 11, time: '10:10:00', checked: 1 },
+    { name: 'answered once, then 12 failed checks', stage: 'pending', created: '2026-09-08T08:00:00Z', lastEvent: null, answered: true, failures: 12, time: '10:10:00', checked: 1 },
+    { name: 'out for delivery on an earlier day', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', time: '10:10:00', checked: 0 },
+    { name: 'out for delivery on an earlier day', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', time: '11:00:00', checked: 1 },
+    { name: 'out for delivery on an earlier day, expected today', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', expected: '2026-09-09', time: '10:10:00', checked: 1 },
+    { name: 'out for delivery on an earlier day, its link opened', stage: 'out_for_delivery', lastEvent: '2026-09-08T09:00:00Z', opened: true, time: '10:10:00', checked: 1 },
+  ])('checks a parcel on screen $name at $time: $checked checks', async ({ stage, created = '2026-09-01T08:00:00Z', lastEvent = '2026-08-20T08:00:00Z', failures = 0, answered = false, expected, opened = false, time, checked }) => {
+    const parcel = { id: 'owned', user_id: 'a', carrier: 'swiss-post', current_stage: stage, tracking_number: ON_THE_HOUR,
+      created_at: created, expected_delivery: expected, last_synced_at: '2026-09-09T10:00:15Z', sync_status: failures ? 'error' : 'ok',
+      carrier_data: { routing: { version: 1, configured_carrier: 'swiss-post', consecutive_failures: failures,
+        ...(lastEvent ? { last_event_at: lastEvent } : {}), ...(answered ? { last_success_at: '2026-09-08T09:00:00Z' } : {}) } } };
+    const now = new Date(`2026-09-09T${time}Z`);
+    if (opened) {
+      expect(isOpenedParcelSyncDue({ ...parcel, one_off: true }, now)).toBe(true);
+      return;
+    }
+    const client = fakeClient([parcel]);
+    client.listWaitingPackages.mockResolvedValue(new Map([['owned', 'on_screen']]));
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
+      { fetch: vi.fn().mockResolvedValue({ status: 'in_transit' }) }, null, () => now);
+    await expect(service.sync()).resolves.toMatchObject({ checked });
+  });
+
   it.each([
     { time: '10:46:00', checked: [] },
     { time: '10:48:00', checked: ['at :48', 'its copy'] },
@@ -5042,7 +5077,10 @@ describe('TrackingSyncService', () => {
     { name: 'unseen, added eight days ago', created: '2026-09-01T09:00:00Z', last: '2026-09-08T12:00:15Z', at: '2026-09-09T12:00:00Z', checked: 0 },
     { name: 'unseen, added eight days ago', created: '2026-09-01T09:00:00Z', last: '2026-09-02T12:00:15Z', at: '2026-09-09T11:00:00Z', checked: 0 },
     { name: 'unseen, added eight days ago', created: '2026-09-01T09:00:00Z', last: '2026-09-02T12:00:15Z', at: '2026-09-09T12:00:00Z', checked: 1 },
-    { name: 'a provider answered, eight days ago', created: '2026-09-01T09:00:00Z', last: '2026-09-09T10:00:15Z', at: '2026-09-09T11:00:00Z', checked: 1,
+    // Answered once, then nothing for a week: every 6 hours, not weekly.
+    { name: 'a provider answered, eight days ago', created: '2026-09-01T09:00:00Z', last: '2026-09-09T10:00:15Z', at: '2026-09-09T11:00:00Z', checked: 0,
+      routing: { last_success_at: '2026-09-01T10:00:00Z', last_event_at: '2026-09-01T10:00:00Z' } },
+    { name: 'a provider answered, eight days ago', created: '2026-09-01T09:00:00Z', last: '2026-09-09T10:00:15Z', at: '2026-09-09T16:00:00Z', checked: 1,
       routing: { last_success_at: '2026-09-01T10:00:00Z', last_event_at: '2026-09-01T10:00:00Z' } },
     { name: 'a provider answered', created: '2026-09-06T09:00:00Z', last: '2026-09-09T10:00:15Z', at: '2026-09-09T10:10:00Z', checked: 1,
       routing: { last_success_at: '2026-09-09T09:00:00Z', last_event_at: '2026-09-09T09:00:00Z' } },
@@ -10956,7 +10994,7 @@ describe('rechecks of an account\'s parcel whose number nobody has answered', ()
       extra: { archived_at: '2026-09-02T12:00:00Z' } },
     { name: 'two weeks on, archived', at: '2026-09-15T10:00:00Z', last: '2026-09-08T10:00:15Z', on: 0, off: 1,
       extra: { archived_at: '2026-09-02T12:00:00Z' } },
-    { name: 'two weeks on, answered for', at: '2026-09-15T10:00:00Z', last: '2026-09-15T09:00:15Z', on: 1, off: 1,
+    { name: 'two weeks on, answered for', at: '2026-09-15T10:00:00Z', last: '2026-09-15T04:00:15Z', on: 1, off: 1,
       extra: { carrier_data: { routing: { ...routing, last_success_at: '2026-09-01T10:00:00Z', last_event_at: '2026-09-01T10:00:00Z' } } } },
   ])('checks a parcel $name at $at: $on with the rechecks, $off without', async ({ at, last, on, off, extra }) => {
     const parcel = unseen('unseen', { last_synced_at: last, ...extra });

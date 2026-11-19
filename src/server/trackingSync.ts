@@ -207,6 +207,18 @@ const ARCHIVED_FOLLOWED_MS = 30 * 24 * 60 * 60 * 1_000;
  * answered for it for this long: the providers asked hourly can't answer without it either.
  */
 const POSTCODE_UNANSWERED_MS = 24 * 60 * 60 * 1_000;
+/**
+ * A parcel still at its label, pending or registered, is checked every STALE_LABEL_HOURS once this long has passed
+ * since its newest scan, or since it was added: a label a week old rarely moves within the hour, and some forwarders'
+ * never do, their route written in advance their only rows.
+ */
+const STALE_LABEL_AFTER_MS = 7 * 24 * 60 * 60 * 1_000;
+const STALE_LABEL_HOURS = 6;
+/**
+ * So is a pending parcel no source has ever answered for once this many of its checks in a row asked and failed
+ * (`consecutive_failures`): its carrier's inconclusive answer each time, every provider's miss.
+ */
+const UNANSWERED_FAILED_CHECKS = 12;
 
 /**
  * An unsuccessful partner confirmation must not double every refresh's cost.
@@ -872,6 +884,11 @@ function scheduledSyncDue(
     // Hourly, then every 6 h, daily, then weekly, around the clock.
     return lastChecked < hourStart.minus({ hours: unseenIntervalHours(unseen, opened) - 1 }).toMillis();
   }
+  // Still at its label a week after its newest scan or its addition, or never answered for after 12 failed checks in a
+  // row: every 6 hours, whoever waits for it, unless it is expected today. Opening a link checks it hourly.
+  if (!opened && stuckAtLabel(parcel, now) && !expectedToday(parcel, now)) {
+    return lastChecked < hourStart.minus({ hours: STALE_LABEL_HOURS - 1 }).toMillis();
+  }
   // Out for delivery, the news is the delivery. A carrier's own adapter is cheap and as fresh as
   // the carrier, so it is asked every 2 minutes, every 5 while its lookups open a browser, unless
   // the carrier sets a longer interval of its own. A universal provider has quotas and publishes
@@ -899,7 +916,10 @@ function scheduledSyncDue(
   // alert on and the parcel is out for delivery or expected today. Otherwise hourly, as an idle parcel is.
   const hurried = opened || waiting === undefined || waiting === 'on_screen'
     || (waiting === 'alert' && (delivering || expectedToday(parcel, now)));
-  const byTheMinute = hurried && !idle;
+  // A round from an earlier day is over, and the carrier's next scan starts another: until then, hourly, whoever waits
+  // for the parcel, unless the carrier expects it today. Opening a link checks it as one on screen.
+  const roundOver = parcel.current_stage === 'out_for_delivery' && !delivering && !opened && !expectedToday(parcel, now);
+  const byTheMinute = hurried && !idle && !roundOver;
   // After a failed check, the last mile waits LAST_MILE_BACKOFF_MS. Routing already holds a parcel
   // that long when its carrier's lookup fails; the error the check saved holds the others, a lookup
   // outside routing (Amazon Shipping) or the carrier's answer without the parcel's progress. The
@@ -915,6 +935,21 @@ function scheduledSyncDue(
   // late in one window is not followed by another as the next opens.
   if (minimum && now.getTime() < lastChecked + minimum * 60_000 - RUN_SPREAD_MS) return false;
   return byTheMinute && lastMile ? 'last_mile' : true;
+}
+
+/**
+ * Whether the parcel stays at its label as far as the schedule goes: pending or registered with no new scan for
+ * STALE_LABEL_AFTER_MS since its newest one or its addition, or pending with no source ever answering for it after
+ * UNANSWERED_FAILED_CHECKS failed checks in a row.
+ */
+function stuckAtLabel(parcel: JsonObject, now: Date): boolean {
+  const stage = String(parcel.current_stage ?? 'pending');
+  if (stage !== 'pending' && stage !== 'registered') return false;
+  const activity = lastActivity(parcel);
+  if (activity !== null && now.getTime() - activity >= STALE_LABEL_AFTER_MS) return true;
+  const routing = routingState(parcel);
+  return stage === 'pending' && !routing.last_success_at && !routing.last_event_at
+    && routing.consecutive_failures >= UNANSWERED_FAILED_CHECKS;
 }
 
 /**

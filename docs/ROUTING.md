@@ -399,6 +399,7 @@ and providers scan parcels across every time zone.
 | Out for delivery today (direct adapter), on screen or with an alert on, from 06:00 on the carrier's clock | every 2 min; every 5 min while its lookups open a browser; 15 min after a failed check |
 | The same, until 30 min before its delivery window opens | every 10 min |
 | On screen, or with an alert on and out for delivery or expected today (direct adapter) | every 10 min |
+| Out for delivery on an earlier day (the carrier's newest scan, on its clock), not expected today | hourly, whoever waits for it, until the carrier scans it again; opening a link checks it as one on screen |
 | Someone waiting for it otherwise: an alert on, or a read in the last hour (direct adapter) | hourly around the clock; manual refresh still allowed |
 | A universal provider alone answers for it (its carrier's own adapter did not answer beside it) | hourly, whoever waits for it; every 3 h once its newest scan is a day old; out for delivery today, every 15 min |
 | A universal provider answers beside the carrier's own partial answer, label or local clocks | the carrier's cadence; the providers every 15 min at most |
@@ -406,6 +407,7 @@ and providers scan parcels across every time zone.
 | A carrier whose catalog entry sets a refresh limit (`tracking.refresh`): after a handoff, the one it went to; else the stricter of the carrier filed and an earlier leg that answered last, as a check may ask both | no more often than its interval, counted from the run of its last check, out for delivery too; when it also sets a wait after a failure, that wait follows a failed check, counted the same way, and the limit holds for a manual refresh too |
 | Registered or accepted, no new event for 12 h (from when it was added) | hourly around the clock; manual refresh still allowed |
 | No new event for 48 h (from when it was added) | hourly around the clock; manual refresh still allowed |
+| Pending or registered, no new event for 7 days (from when it was added), or pending with no source ever answering after 12 failed checks in a row (`consecutive_failures`), not expected today | every 6 h, whoever waits for it; opening a link checks it hourly; manual refresh still allowed |
 | Nobody waiting for it | hourly around the clock; manual refresh still allowed |
 | Followed without an account, no link opened for an hour and no alert on | every 3 h; opening a link queues a check at once |
 | Without an account, filed under no carrier or one with no adapter of its own, added in the last 30 days, no link opened for a day and no alert on, once a carrier or provider answered for its number | every 6 h |
@@ -524,8 +526,8 @@ answers, even while someone is looking. A parcel counts as served by a universal
 while the summary it shows came from one (`tracking_provider` in `carrier_data`).
 
 **A round from an earlier day** is over: when the carrier's newest scan, timed or dated
-alone (`last_update_local`), is from an earlier day on its clock, the parcel keeps the
-regular cadence until the carrier scans it again. Its clock is the offset the newest scan
+alone (`last_update_local`), is from an earlier day on its clock, the parcel is checked
+hourly, on screen too, until the carrier scans it again, unless the carrier expects it today. Its clock is the offset the newest scan
 states, "+00:00" included (a Canary Islands office in winter), else the zone the delivery
 window below is read in (a "Z" is a UTC instant, not a stated clock); a parcel without a
 dated scan counts as today's. A carrier whose page states every scan on a clock of its own

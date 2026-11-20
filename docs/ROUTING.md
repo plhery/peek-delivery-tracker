@@ -1000,7 +1000,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   lookup does not show yet (JS Express and DHL eCommerce relay USPS's delivery hours before USPS's
   lookup). A partner's delivery or return stands. Such a
   scan stored with a failure, past the watermark, sets them at the next answered check, though
-  the origin is not asked then (its relayed delivery while the partner was down). A scan of the origin's that reaches the parcel
+  the origin is not asked then (its relayed delivery while the partner was down), and a provider
+  answering for the partner with that delivery or return takes it too. A scan of the origin's that reaches the parcel
   after a later one announces no push or link alert
   ([`relayCopies.ts`](../src/server/relayCopies.ts)); one newer than everything stored does.
 - After the handoff the origin often goes on telling the partner's scans in its own

@@ -3219,9 +3219,16 @@ export class TrackingSyncService {
         .filter((row) => !['unknown', 'app'].includes(String(row.provider_event_id).split(':')[0]!)
           && row.observed_without_provider_timestamp !== true)
         .map((row) => Date.parse(String(row.occurred_at))).filter((at) => at <= now.getTime()));
+      // But the earlier carrier's delivery or return, stored past the watermark while the partner was down, proves the
+      // provider's that tells it: it leads as soon as it is newer (`earlierLead`), whoever answers next (DHL eCommerce's
+      // relayed delivery, then a provider's copy of it while USPS's lookup still fails).
+      const earlierId = earlierCarrier(parcel);
+      const earlierEnd = earlierId !== null && ['delivered', 'returned'].includes(selectedStage ?? '')
+        && !EARLY_STAGES.includes(previousStage) && stored.some((row) => row.stage === selectedStage
+          && String(row.provider_event_id).startsWith(`${earlierId}:`) && Date.parse(String(row.occurred_at)) > previousEventTime);
       const unprovenProviderSummary = typeof result.tracking_provider === 'string' && !fetched.correction
         && directCarrier(String(parcel.carrier)) && answeredByCarrier(parcel) && previousStage !== 'pending'
-        && Number.isFinite(previousEventTime) && !(returnedEventTime > Math.max(previousEventTime, carriersNewest));
+        && Number.isFinite(previousEventTime) && !(returnedEventTime > Math.max(previousEventTime, carriersNewest)) && !earlierEnd;
       // A delivered or returned parcel keeps its summary, unless the answer disputes a provider's
       // delivery, reads the delivery's or return's own scans again, or brings the return that came after the delivery.
       const preserveSummary = keepSaved || olderSnapshot || unprovenUpuSummary || unprovenLocalSummary || unprovenProviderSummary

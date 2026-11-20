@@ -5919,6 +5919,27 @@ describe('TrackingSyncService', () => {
       expect(parcel()).toMatchObject({ current_stage: 'delivered', last_status_text: 'Delivered' });
     });
 
+    it('takes the delivery the earlier carrier relayed during the outage when a provider then answers with it', async () => {
+      let provider: CarrierResult | Error = new NoHistoryError('17TRACK', 'No history');
+      const { answers, sync, parcel } = handedOver(async () => {
+        if (provider instanceof Error) throw provider;
+        return provider;
+      });
+      expect(await sync('2026-01-12T10:30:00Z')).toEqual(['la-poste', 'posti']);
+      answers.delivery = Object.assign(new Error('Bad gateway'), { status: 502 });
+      const delivered = { time: '2026-01-15T11:00:00Z', description: 'Delivered', stage: 'delivered' };
+      answers.origin = { ...origin0, status: 'delivered', current_stage: 'delivered', last_update: delivered.time,
+        events: [delivered, ...origin0.events!] };
+      expect(await sync('2026-01-15T12:00:00Z')).toEqual(['posti', 'la-poste']);
+      expect(parcel().current_stage).toBe('in_transit');
+      // The delivery carrier still down, a provider tells the same delivery, no newer than the earlier carrier's row.
+      provider = { status: 'delivered', current_stage: 'delivered', tracking_provider: '17TRACK', last_update: delivered.time,
+        events: [{ ...delivered, description: 'Delivered, in mailbox' },
+          { time: '2026-01-15T07:00:00Z', description: 'Out for delivery', stage: 'out_for_delivery' }, ...announced] };
+      expect(await sync('2026-01-15T13:00:00Z')).toEqual(['posti']);
+      expect(parcel()).toMatchObject({ current_stage: 'delivered' });
+    });
+
     it('counts the refresh against the filed carrier when another carrier answered without a handoff', async () => {
       // Cainiao's leg before GoFo, an earlier leg: the router names the carrier it took the answer from, the parcel stays its own.
       const { answers, client, sync, parcel } = handedOver(() => Promise.reject(new NoHistoryError('17TRACK', 'No history')));

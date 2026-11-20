@@ -1913,6 +1913,9 @@ describe('rows only a universal provider wrote', () => {
     for (const location of ['HANKAMER, TX', 'Hankamer, TX 77560', 'TX, US']) expect(placesConflict(placeWords({ location }), placeWords(next))).toBe(false);
     expect(placesConflict(placeWords({ location: 'SCARBOROUGH - ON - CANADA' }), placeWords({ location: 'Toronto, ON, CA' }))).toBe(true);
     expect(placeWords({ location: 'Sydney, NSW, AU' })).toEqual(['sydney']);
+    // A postcode alone names no town to tell apart.
+    expect(placesConflict(['2664'], placeWords(next))).toBe(false);
+    expect(placesConflict(['2664'], ['2665'])).toBe(false);
   });
 
   it('keeps the earlier row beside the next scan in its words on the check after, though the answer no longer shows it', () => {

@@ -259,6 +259,12 @@ describe('relayCopies', () => {
         placed('b-centre', 'dhl', '2026-09-09T05:12:00Z', location),
       ])), location).toEqual(new Map([['a-arrived', 'platform']]));
     }
+    // A row whose place names a postcode alone conflicts with none (bpost tells CTT's failed delivery twice).
+    expect(relayCopies(handedOver([
+      placed('platform', 'swiss-post', '2026-09-09T05:12:37Z', 'Example Town'),
+      placed('a-arrived', 'dhl', '2026-09-09T05:12:00Z', 'Example Town, 11'),
+      placed('b-centre', 'dhl', '2026-09-09T05:12:00Z', '2664'),
+    ]))).toEqual(new Map([['a-arrived', 'platform'], ['b-centre', 'platform']]));
     // Nor when the copy keeps seconds of its own: the rows at that second are its carrier's own scans.
     expect(relayCopies(handedOver([
       placed('arrival', 'swiss-post', '2026-09-09T08:40:56Z', 'Example Town'),

@@ -813,9 +813,13 @@ export function placeWords(row: JsonObject): string[] {
     .map((word) => word.replace(/([aou])e/g, '$1'));
 }
 
-/** Two places named with no word in common. A place that names no more than a country or a state conflicts with none. */
+/**
+ * Two places named with no word in common. A place that names no more than a country or a state, or numbers alone (a
+ * postcode beside town words read as country codes), conflicts with none.
+ */
 export function placesConflict(left: readonly string[], right: readonly string[]): boolean {
-  return left.length > 0 && right.length > 0 && !left.some((word) => right.includes(word));
+  const named = (place: readonly string[]) => place.some((word) => !/^\d+$/.test(word));
+  return named(left) && named(right) && !left.some((word) => right.includes(word));
 }
 
 /**

@@ -3,7 +3,7 @@ title: GLS Suisse suivi colis : statuts, La Poste et contact
 description: Suivre un colis GLS en Suisse romande : le numéro, le code postal demandé, les statuts en anglais, la livraison par La Poste et qui contacter.
 slug: gls-suisse-suivi-colis
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-20
 ---
 
 GLS est un réseau international de colis basé à Amsterdam, sans société à lui en Suisse : c'est son partenaire, La Poste, qui dédouane et livre les colis GLS qui arrivent ici. Pour suivre le tien, saisis son numéro puis ton code postal sur [la page de suivi de GLS](https://gls-group.com/EU/en/parcel-tracking), ou colle le numéro dans le champ ci-dessus. Ce numéro vient de l'expéditeur : cherche-le d'abord dans l'e-mail d'expédition de la boutique ou sur la page de ta commande.
@@ -79,7 +79,7 @@ Au Liechtenstein, c'est le même partenaire, avec les mêmes contacts.
 
 ## Suivre un colis GLS Suisse avec Peek
 
-[Peek](/) reconnaît les quatre formes et interroge les transporteurs probables. GLS Germany et GLS Switzerland connaissent les mêmes numéros, alors c'est ton pays qui tranche : la région de ton iPhone ou, sur le web, le pays d'où tu te connectes. En Suisse ou au Liechtenstein, tu verras en général « GLS Switzerland a ce colis » ; pour un colis livré en Allemagne, touche « Changer » et choisis GLS Germany. Ailleurs, ce sera GLS Germany, qui suit tout aussi bien les colis pour la Suisse avec le code postal suisse. Tu peux aussi coller un lien de suivi gls-group avec /EU/ ou /GROUP/ : le suivi passe alors par GLS Germany.
+[Peek](/) reconnaît les quatre formes et interroge les transporteurs probables. GLS Germany et GLS Switzerland connaissent les mêmes numéros, alors c'est ton pays qui tranche : la région de ton téléphone ou, sur le web, le pays d'où tu te connectes. En Suisse ou au Liechtenstein, tu verras en général « GLS Switzerland a ce colis » ; pour un colis livré en Allemagne, touche « Changer » et choisis GLS Germany. Ailleurs, ce sera GLS Germany, qui suit tout aussi bien les colis pour la Suisse avec le code postal suisse. Tu peux aussi coller un lien de suivi gls-group avec /EU/ ou /GROUP/ : le suivi passe alors par GLS Germany.
 
 GLS n'affiche son historique qu'avec le code postal : le champ « Code postal de livraison » est donc obligatoire (quatre chiffres, comme 8000), et le suivi attend qu'il soit rempli. Ce code est envoyé à GLS et, si besoin, à des services de suivi ; un code faux fait passer le colis pour un numéro inconnu.
 

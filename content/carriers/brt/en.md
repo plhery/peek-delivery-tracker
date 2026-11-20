@@ -3,7 +3,7 @@ title: BRT tracking: numbers, statuses and missed deliveries
 description: Track a BRT parcel in or from Italy: where to find the BRTcode or shipment number, what BRT's English statuses mean, missed deliveries, lockers and contacts.
 slug: brt-tracking
 published: 2026-10-10
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 BRT is an Italian express courier, part of the Geopost group like DPD. Track a parcel with the link in BRT's SMS or email, with "Where is my shipment?" on [brt.it](https://www.brt.it/en/) or by pasting the number in the box above. BRT sends that number, the BRTcode, when it takes charge of the parcel, if the sender gave it your contact details.
@@ -89,7 +89,7 @@ The Bologna number on BRT's documents is its office, not customer service.
 
 ## Tracking BRT parcels with Peek
 
-[Peek](/) recognises BRT's 12-, 14- and 15-digit numbers and its parcel IDs starting `EOB`. For an `EOB` ID and most 15-digit numbers, BRT is the only carrier it asks, whatever your country; for 12 digits, it asks BRT along with other carriers that use the shape. For 14 digits, it asks BRT straight away, alongside DPD's networks, if your country is Italy (in the iPhone app, the region your iPhone is set to; in a browser, the country you add the parcel from); elsewhere it usually asks DPD's networks and other carriers first, and BRT only if none of them knows the number. Links from vas.brt.it with `brtCode=` work too; 19-digit BRTcodes and mybrt.it links don't.
+[Peek](/) recognises BRT's 12-, 14- and 15-digit numbers and its parcel IDs starting `EOB`. For an `EOB` ID and most 15-digit numbers, BRT is the only carrier it asks, whatever your country; for 12 digits, it asks BRT along with other carriers that use the shape. For 14 digits, it asks BRT straight away, alongside DPD's networks, if your country is Italy (in the iPhone and Android apps, the region your phone is set to; in a browser, the country you add the parcel from); elsewhere it usually asks DPD's networks and other carriers first, and BRT only if none of them knows the number. Links from vas.brt.it with `brtCode=` work too; 19-digit BRTcodes and mybrt.it links don't.
 
 Peek shows BRT's English statuses, except that a locker or fermopoint pickup appears as "Delivered". With Peek set to Italian, you see BRT's Italian wordings instead, and "Consegnata" for a delivery; a parcel with a scan Peek knows only in English, such as a locker's, stays in English. It puts each scan's place on a map, shows the weight and can notify you when the status changes. It drops the sender, recipient, merchant reference, parcel count and volume. It shows no pickup-point details. BRT gives no expected day, but for a 14-digit number Peek can show the delivery estimate from DPD's tracking, which also reads BRT's numbers, or from Chronopost's if Chronopost brought the parcel to Italy. The estimate disappears once its day has passed, or sooner if BRT delivers or returns the parcel, leaves it at a pickup point, makes a failed delivery attempt or reports a problem. BRT's scan times carry no time zone: Peek reads them on Italian time, or on a depot's local time abroad, and lists BRT's own history in BRT's order.
 

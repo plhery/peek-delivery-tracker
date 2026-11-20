@@ -83,7 +83,7 @@ For an online order, ask the shop first: it booked Blue Dart. Peek can't contact
 
 Paste the waybill in [Peek](/). Several carriers use 11 digits, so Peek doesn't show "Detected carrier" for a Blue Dart number on its own:
 
-- **In India** (your iPhone's region, or on the web where you connect from), Peek shows "Checking tracking services…" while it asks the carriers that use the shape, Blue Dart first. When Blue Dart knows the number, you'll see "Blue Dart has this parcel."
+- **In India** (your phone's region, or on the web where you connect from), Peek shows "Checking tracking services…" while it asks the carriers that use the shape, Blue Dart first. When Blue Dart knows the number, you'll see "Blue Dart has this parcel."
 - **Outside India**, Peek doesn't ask Blue Dart by itself. Press "Change" and pick Blue Dart under "Fits this number".
 
 If no carrier knows the number yet, add it all the same, or pick Blue Dart yourself: Peek follows more than 3,500 carriers. Peek lists Blue Dart only when the check digit adds up. If yours doesn't and you're sure of the number, search the carrier list for Blue Dart: Peek asks it all the same. A bluedart.com tracking link with the waybill in it (`trackNo=`) works too: Peek takes the number from it and names Blue Dart at once ("Detected carrier").

@@ -3,7 +3,7 @@ title: DPD Romania tracking: statuses, Smart Control and contact
 description: Track a DPD Romania parcel in English: the 11-digit waybill, what DPD's English and Romanian statuses mean, Smart Control, lockers, offices and who to call.
 slug: dpd-romania-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DPD Romania (Dynamic Parcel Distribution S.A.) is the Geopost group's courier in Romania, active there since 2008, with its head office in Mogoșoaia, Ilfov. Each parcel gets its own waybill number: track it on DPD's tracker, tracking.dpd.ro, which has an English version, through the Smart Control link in DPD's delivery SMS, or in the box above.
@@ -88,7 +88,7 @@ DPD doesn't say whether its staff speak English.
 
 ## Tracking a DPD Romania parcel with Peek
 
-Paste the 11-digit waybill in [Peek](/). Other carriers share that shape, so Peek asks the likely ones, by your country (your iPhone's region, or on the web where you connect from). In Romania it asks DPD Romania first, and you'll see "DPD Romania has this parcel." when DPD knows the number. Elsewhere it asks other carriers: if you see "not found yet · Peek keeps checking", press "Change" and pick DPD Romania, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 3,500 carriers. A tracking.dpd.ro link with `shipmentNumber=` works too.
+Paste the 11-digit waybill in [Peek](/). Other carriers share that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). In Romania it asks DPD Romania first, and you'll see "DPD Romania has this parcel." when DPD knows the number. Elsewhere it asks other carriers: if you see "not found yet · Peek keeps checking", press "Change" and pick DPD Romania, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 3,500 carriers. A tracking.dpd.ro link with `shipmentNumber=` works too.
 
 Peek asks DPD for its English tracking and shows the status, the history in DPD's words with each scan's town (and country), the expected delivery date while the parcel is on its way, and the delivery time. It leaves out who received it, the signature and the return waybill; DPD gives no weight or sender.
 

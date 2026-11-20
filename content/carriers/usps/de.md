@@ -3,7 +3,7 @@ title: USPS Sendungsverfolgung: Nummer, Status, Paket aus den USA
 description: USPS-Paket aus den USA verfolgen: wo die Trackingnummer steht, was die Status bedeuten, Zoll, verlorene Pakete und wie du USPS erreichst.
 slug: usps-sendungsverfolgung
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 USPS, der United States Postal Service, ist die Post der USA. Bei vielen Sendungen ist die Sendungsverfolgung (USPS Tracking) ohne Aufpreis dabei, auch bei vielen, aber nicht allen internationalen Produkten. Gib die Trackingnummer in USPS Tracking auf usps.com ein oder füg sie oben ins Feld ein; in den USA kannst du sie auch per SMS an 28777 schicken. Die Nummer bekommst du vom Absender, meist in der Versand-E-Mail des Shops.
@@ -51,7 +51,7 @@ USPS nennt die Uhrzeit eines Scans in der Ortszeit des Orts, an dem er passiert 
 
 ## Paket aus den USA: Zustellung in Deutschland, Österreich und der Schweiz
 
-**Wer zustellt.** Ist die Nummer deines Pakets eine internationale Postnummer, die auf `US` endet und deren Prüfziffer stimmt, fragt Peek mit derselben Nummer auch die Post deines Landes: [DHL Paket](carrier:dhl) in Deutschland, die [Österreichische Post](carrier:austrian-post) in Österreich und die [Schweizerische Post](carrier:swiss-post) in der Schweiz. Als dein Land gilt in der iPhone-App die eingestellte Region, im Browser das Land, aus dem du das Paket hinzugefügt hast. Zeigt deine Post einen Scan, der mindestens so neu ist wie der neueste von USPS, verfolgt Peek das Paket dort weiter und behält den Verlauf von USPS. Bei Nummern nur aus Ziffern und in Liechtenstein fragt Peek keine andere Post.
+**Wer zustellt.** Ist die Nummer deines Pakets eine internationale Postnummer, die auf `US` endet und deren Prüfziffer stimmt, fragt Peek mit derselben Nummer auch die Post deines Landes: [DHL Paket](carrier:dhl) in Deutschland, die [Österreichische Post](carrier:austrian-post) in Österreich und die [Schweizerische Post](carrier:swiss-post) in der Schweiz. Als dein Land gilt in der iPhone- und der Android-App die eingestellte Region, im Browser das Land, aus dem du das Paket hinzugefügt hast. Zeigt deine Post einen Scan, der mindestens so neu ist wie der neueste von USPS, verfolgt Peek das Paket dort weiter und behält den Verlauf von USPS. Bei Nummern nur aus Ziffern und in Liechtenstein fragt Peek keine andere Post.
 
 **Zoll.** Ein Paket aus den USA muss durch den Zoll. Was du wem zahlst, steht in [Paket beim Zoll](guide:customs). In Deutschland und Österreich gilt, wie in der ganzen EU: Für Online-Bestellungen von außerhalb der EU bis 150 € fällt seit dem 1. Juli 2026 ein pauschaler Zoll von 3 € je Warenkategorie an. Seit dem 1. November 2026 kommt eine Bearbeitungsgebühr der EU (Union handling fee) von 2 € je Warenkategorie dazu, egal wie viel die Ware wert ist. Die Schweiz gehört nicht zur EU, dort gelten eigene Regeln.
 

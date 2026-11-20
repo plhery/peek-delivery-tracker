@@ -3,7 +3,7 @@ title: Suivi USPS : numéro, statuts et colis depuis les États-Unis
 description: Suivre un colis USPS depuis les États-Unis : où trouver le numéro, sens des statuts en anglais, relais postal, douane, colis perdus et contact USPS.
 slug: suivi-usps
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 USPS, l’United States Postal Service, est l’opérateur postal public des États-Unis : il dessert toutes les adresses du pays et inclut le suivi (USPS Tracking) sans supplément sur la plupart de ses services de colis nationaux ainsi que sur de nombreux envois internationaux, mais pas tous. Saisis ton numéro dans USPS Tracking sur usps.com ou colle-le dans le champ ci-dessus ; aux États-Unis, tu peux aussi l’envoyer par SMS au `28777`. C’est l’expéditeur qui te communique ce numéro, le plus souvent dans l’e-mail d’expédition de la boutique.
@@ -51,7 +51,7 @@ Chaque scan est horodaté à l’heure locale du lieu où il a eu lieu.
 
 ## Colis venu des États-Unis : livraison en France, en Belgique, en Suisse et au Canada
 
-**Qui livre.** Pour un code postal international en `US` à clé valide, Peek interroge aussi la poste de ton pays sous le même numéro : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique, [La Poste suisse](carrier:swiss-post) en Suisse, [POST Luxembourg](carrier:post-luxembourg) au Luxembourg et [Postes Canada](carrier:canada-post) au Canada (selon la région de l’iPhone ou le pays de connexion navigateur). Dès que cette poste publie un scan au moins aussi récent que celui d’USPS, Peek y poursuit le suivi en gardant l’historique d’USPS. Pour les numéros uniquement chiffrés ou à Monaco, aucune autre poste n’est interrogée.
+**Qui livre.** Pour un code postal international en `US` à clé valide, Peek interroge aussi la poste de ton pays sous le même numéro : [La Poste](carrier:la-poste) en France, [bpost](carrier:bpost) en Belgique, [La Poste suisse](carrier:swiss-post) en Suisse, [POST Luxembourg](carrier:post-luxembourg) au Luxembourg et [Postes Canada](carrier:canada-post) au Canada (selon la région du téléphone ou le pays de connexion navigateur). Dès que cette poste publie un scan au moins aussi récent que celui d’USPS, Peek y poursuit le suivi en gardant l’historique d’USPS. Pour les numéros uniquement chiffrés ou à Monaco, aucune autre poste n’est interrogée.
 
 **Douane.** Tout envoi venu des États-Unis passe en douane : voir [colis bloqué en douane](guide:customs). En France, en Belgique et au Luxembourg, comme dans toute l’UE, les achats en ligne expédiés depuis l’extérieur de l’UE jusqu’à 150 € supportent depuis le 1er juillet 2026 un droit fixe de 3 € par catégorie d’articles, plus 2 € de frais de traitement de l’UE (*Union handling fee*) par catégorie depuis le 1er novembre 2026, quelle que soit la valeur ; en Belgique, bpost perçoit aussi la TVA non prépayée et des frais administratifs. En Suisse (selon l’OFDF et La Poste suisse), la TVA porte sur la valeur marchandise et port compris et les droits sur le poids brut, avec franchise jusqu’à 100 CHF pour les cadeaux entre particuliers hors alcool et tabac ; le Canada applique ses propres règles.
 

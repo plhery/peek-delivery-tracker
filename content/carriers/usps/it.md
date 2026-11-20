@@ -3,7 +3,7 @@ title: Tracciamento USPS: numero, stati e pacchi dagli Stati Uniti
 description: Traccia un pacco USPS dagli Stati Uniti: dove trovare il numero, cosa significano gli stati in inglese, dogana, pacchi smarriti e contatti USPS.
 slug: tracciamento-usps
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 USPS, lo United States Postal Service, è il servizio postale pubblico degli Stati Uniti: raggiunge ogni indirizzo del paese e include gratuitamente il tracciamento (USPS Tracking) nella maggior parte dei servizi nazionali per i pacchi e in molti prodotti internazionali, anche se non in tutti. Puoi inserire il codice in USPS Tracking su usps.com oppure incollarlo nel riquadro qui sopra; negli Stati Uniti si può inviare anche via SMS al `28777`. Il numero te lo fornisce il mittente, di solito nell’e-mail di spedizione del negozio.
@@ -51,7 +51,7 @@ USPS indica l’orario di ogni scansione nell’ora locale del luogo in cui è a
 
 ## Pacco dagli Stati Uniti: consegna in Italia e in Svizzera
 
-**Chi consegna.** Per un codice postale internazionale che termina in `US` con cifra di controllo valida, Peek interroga con lo stesso numero anche le poste del tuo paese: [Poste Italiane](carrier:poste-italiane) in Italia e la [Posta Svizzera](carrier:swiss-post) in Svizzera (in base alla regione dell’iPhone o al paese di connessione nel browser). Non appena la posta nazionale mostra una scansione almeno recente quanto l’ultima di USPS, Peek prosegue il tracciamento lì conservando la cronologia di USPS. Con codici di sole cifre, o a San Marino e in Vaticano, Peek non interroga altre poste.
+**Chi consegna.** Per un codice postale internazionale che termina in `US` con cifra di controllo valida, Peek interroga con lo stesso numero anche le poste del tuo paese: [Poste Italiane](carrier:poste-italiane) in Italia e la [Posta Svizzera](carrier:swiss-post) in Svizzera (in base alla regione del telefono o al paese di connessione nel browser). Non appena la posta nazionale mostra una scansione almeno recente quanto l’ultima di USPS, Peek prosegue il tracciamento lì conservando la cronologia di USPS. Con codici di sole cifre, o a San Marino e in Vaticano, Peek non interroga altre poste.
 
 **Dogana.** Ogni pacco dagli USA passa dalla dogana: vedi [pacco fermo in dogana](guide:customs). In Italia, come in tutta l’UE, sugli acquisti online da fuori UE fino a 150 € si applica dal 1° luglio 2026 un dazio fisso di 3 € per categoria di articolo, più dal 1° novembre 2026 una commissione UE (*Union handling fee*) di 2 € per categoria, qualunque sia il valore. In Svizzera (fuori dall’UE), secondo l’UDSC e la Posta Svizzera, si pagano l’IVA sul valore della merce (spedizione e servizi inclusi) e dazi sul peso lordo, con franchigia fino a 100 CHF per i regali tra privati esclusi alcol e tabacco.
 

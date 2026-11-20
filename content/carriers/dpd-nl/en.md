@@ -3,7 +3,7 @@ title: DPD Netherlands tracking: statuses, delivery and contact
 description: Track a DPD parcel in the Netherlands: the 14-digit number, what DPD's statuses mean, delivery days, Parcel Points, missing parcels and who to call.
 slug: dpd-netherlands-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DPD Netherlands is DPD (Nederland) B.V., the DPD company that delivers parcels in the Netherlands. Track a parcel with the 14-digit parcel number from DPD's email: on DPD's Track & Trace at dpd.nl, in the myDPD app, or in the box above.
@@ -97,7 +97,7 @@ DPD doesn't say whether its staff speak English.
 
 ## Tracking a DPD Netherlands parcel with Peek
 
-Paste the 14-digit number in [Peek](/). Other carriers use that shape, so Peek asks the likely ones, by your country (your iPhone's region, or on the web where you connect from). In the Netherlands it asks DPD Netherlands early. You see "DPD Netherlands has this parcel." once DPD places the parcel in the Netherlands. While DPD still places it in another country, Peek doesn't take it for DPD Netherlands': a parcel still in Germany, for example, may show as DPD Germany's, and Peek then follows it from there into the Netherlands. If you see "not found yet · Peek keeps checking", press "Change" and pick DPD Netherlands, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 3,500 carriers.
+Paste the 14-digit number in [Peek](/). Other carriers use that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). In the Netherlands it asks DPD Netherlands early. You see "DPD Netherlands has this parcel." once DPD places the parcel in the Netherlands. While DPD still places it in another country, Peek doesn't take it for DPD Netherlands': a parcel still in Germany, for example, may show as DPD Germany's, and Peek then follows it from there into the Netherlands. If you see "not found yet · Peek keeps checking", press "Change" and pick DPD Netherlands, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 3,500 carriers.
 
 Paste the 14 digits alone: with a character added after them, Peek's carrier check leaves DPD Netherlands out. A myDPD link from www.dpdgroup.com/nl/ with `parcelNumber=` works too, and names DPD Netherlands straight away.
 

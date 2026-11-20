@@ -3,7 +3,7 @@ title: Seguimento USPS: número, estados e encomendas dos EUA
 description: Segue uma encomenda USPS vinda dos Estados Unidos: onde está o código, o que significam os estados em inglês, alfândega, extravios e contactos USPS.
 slug: seguimento-usps
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 A USPS, o United States Postal Service, é o serviço postal público dos Estados Unidos: chega a todas as moradas do país e inclui seguimento gratuito (USPS Tracking) na maioria dos seus serviços domésticos de encomendas e em muitos produtos internacionais, embora não em todos. Introduz o código no USPS Tracking em usps.com ou cola-o na caixa acima; nos Estados Unidos também podes enviá-lo por SMS para `28777`. Quem te dá o número é o remetente, normalmente no e-mail de envio da loja.
@@ -51,7 +51,7 @@ A USPS regista a hora de cada leitura na hora local do sítio onde ocorreu.
 
 ## Encomenda vinda dos EUA: entrega em Portugal e no Brasil
 
-**Quem entrega.** Num código postal internacional terminado em `US` com dígito de controlo válido, o Peek consulta também o operador postal do teu país com o mesmo número: os [CTT](carrier:ctt) em Portugal e os Correios no Brasil (conforme a região do iPhone ou o país de ligação no navegador). Mal esse operador mostre uma leitura pelo menos tão recente como a última da USPS, o Peek passa a segui-la aí mantendo o histórico da USPS. Em códigos compostos apenas por algarismos, o Peek não consulta outra posta.
+**Quem entrega.** Num código postal internacional terminado em `US` com dígito de controlo válido, o Peek consulta também o operador postal do teu país com o mesmo número: os [CTT](carrier:ctt) em Portugal e os Correios no Brasil (conforme a região do telemóvel ou o país de ligação no navegador). Mal esse operador mostre uma leitura pelo menos tão recente como a última da USPS, o Peek passa a segui-la aí mantendo o histórico da USPS. Em códigos compostos apenas por algarismos, o Peek não consulta outra posta.
 
 **Alfândega.** Qualquer encomenda vinda dos EUA passa pela alfândega: vê [encomenda retida na alfândega](guide:customs). Em Portugal, como em toda a UE, as compras online vindas de fora da UE até 150 € pagam desde 1 de julho de 2026 um direito fixo de 3 € por categoria de artigo, mais desde 1 de novembro de 2026 uma taxa de manuseamento da UE (*Union handling fee*) de 2 € por categoria, independentemente do valor. O Brasil aplica as suas próprias regras federais de importação e tributação postal.
 

@@ -3,7 +3,7 @@ title: GLS Austria tracking: statuses, Parcel Shops and contact
 description: Track a GLS parcel in Austria: where the parcel number and Track ID are, what GLS's German statuses mean, Parcel Shop deadlines and how to reach GLS Austria.
 slug: gls-austria-tracking
 published: 2026-11-02
-updated: 2026-11-10
+updated: 2026-11-20
 ---
 
 GLS Austria (GLS Österreich) has its head office in Ansfelden and 11 depots. It delivers Monday to Friday, and parcels sent within Austria usually arrive within 24 hours. Track one on [GLS Austria's tracking page](https://gls-group.com/AT/en/parcel-tracking/) with the parcel number or the Track ID from GLS's notification card, or paste the number in the box above. The number comes from the sender, so start with the shop's shipping email. On GLS's German tracking page, the statuses are in German: the table below translates them.
@@ -81,7 +81,7 @@ Peek can't contact GLS or the shop for you. As read on 31 October 2026:
 
 ## Tracking a GLS Austria parcel with Peek
 
-Paste the number in [Peek](/). Several GLS companies use these shapes, so Peek asks the likely ones and goes by your country (your iPhone's region, or on the web where you connect from). In Austria you'll usually see "GLS Austria has this parcel." Elsewhere it usually names another GLS company, such as GLS Germany, which asks the same GLS service but needs the postcode: keep it and give the postcode, or press "Change" and pick GLS Austria. If no GLS company knows the number yet, add it anyway or pick GLS Austria from the carrier list: Peek follows more than 3,500 carriers. A pasted gls-group.com link with /AT/ in its path is tracked as GLS Austria.
+Paste the number in [Peek](/). Several GLS companies use these shapes, so Peek asks the likely ones and goes by your country (your phone's region, or on the web where you connect from). In Austria you'll usually see "GLS Austria has this parcel." Elsewhere it usually names another GLS company, such as GLS Germany, which asks the same GLS service but needs the postcode: keep it and give the postcode, or press "Change" and pick GLS Austria. If no GLS company knows the number yet, add it anyway or pick GLS Austria from the carrier list: Peek follows more than 3,500 carriers. A pasted gls-group.com link with /AT/ in its path is tracked as GLS Austria.
 
 The "Delivery postcode" field is marked "Optional", but GLS shows its scans only with it, as the line under the field says: "GLS Austria shows its scans only with the delivery postcode." Without it, Peek only learns whether GLS knows the number: it asks other tracking services meanwhile, and the parcel page offers "Add postcode". With an account, Peek tries once the postcode you last gave a GLS Austria parcel, or failing that the one on your latest parcel. If GLS doesn't find the parcel with the postcode, Peek says so and offers "Edit postcode". While GLS waits for the postcode, or doesn't find the parcel with yours, and nothing has answered for a day, Peek checks once a day; adding or changing the postcode checks the parcel at once. The postcode goes to GLS and, when needed, to tracking services, and never shows on shared links.
 

@@ -3,7 +3,7 @@ title: PIN AG tracking: registered letters, parcels and pickup
 description: Track a PIN AG letter or parcel in Germany: which items PIN tracks, what its German statuses mean, depot pickup, missing mail and how to contact PIN.
 slug: pin-ag-tracking
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 PIN AG is a postal company in Berlin, separate from Deutsche Post, with about 1,300 staff. It delivers letters, registered letters (Einschreiben), parcels and orders from Amazon, medimops and rebuy. Only some of these items can be tracked. Track one on [PIN AG's tracking page](https://sendungsverfolgung.pin-ag.de/) (Sendungsverfolgung) or paste the number in the box above. The number comes from the sender: a shop puts it in its shipping email, and for a registered letter you ask whoever sent it.
@@ -84,7 +84,7 @@ Peek can't contact PIN AG or the sender for you. As read on 1 November 2026:
 
 Paste the number in [Peek](/), with or without brackets: Peek joins a bracketed last digit to the others.
 
-- **16 digits starting with 0100.** Other carriers use 16 digits too, so Peek asks the likely ones whether they have it, by your country (your iPhone's region, or on the web where you connect from). In Germany it asks PIN AG first. While it asks, you see "Checking tracking services…". If PIN has the item, you see "PIN AG has this parcel." and Peek files it there. Outside Germany, Peek doesn't ask PIN AG: press "Change" and pick PIN AG.
+- **16 digits starting with 0100.** Other carriers use 16 digits too, so Peek asks the likely ones whether they have it, by your country (your phone's region, or on the web where you connect from). In Germany it asks PIN AG first. While it asks, you see "Checking tracking services…". If PIN has the item, you see "PIN AG has this parcel." and Peek files it there. Outside Germany, Peek doesn't ask PIN AG: press "Change" and pick PIN AG.
 - **Not listed yet.** Add it anyway. In Germany, once Peek has asked PIN and PIN doesn't list the number yet, the parcel shows "Waiting for PIN AG’s first scan" and "Probably PIN AG", and Peek keeps asking PIN. After a week, Peek asks you to check the number with the sender or choose another carrier.
 - **13 digits.** Peek can't tell a PIN number by this shape alone. Paste it all the same: Peek follows more than 3,500 carriers. Press "Change" and pick PIN AG (type PIN). On a parcel you've already added, use "Change carrier".
 - **A link to PIN's tracking page** with your number names PIN AG at once ("Detected carrier").

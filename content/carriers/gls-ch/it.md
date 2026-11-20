@@ -3,7 +3,7 @@ title: GLS Svizzera tracking: stati, Posta Svizzera e contatti
 description: Segui un pacco GLS in Ticino e nel resto della Svizzera: com'è fatto il numero, perché serve l'NPA, cosa vogliono dire gli stati in inglese e chi contattare.
 slug: gls-svizzera-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-20
 ---
 
 GLS è una rete internazionale di spedizione pacchi con sede ad Amsterdam, senza una società propria in Svizzera: i pacchi GLS che arrivano qui li sdogana e li consegna il suo partner, la Posta Svizzera. Per seguirne uno inserisci il numero del pacco e il tuo NPA sulla [pagina di tracking di GLS](https://gls-group.com/EU/en/parcel-tracking), oppure incolla il numero nel box qui sopra. Il numero lo ha il mittente: cercalo nell'e-mail di spedizione del negozio o nella pagina dell'ordine.
@@ -78,7 +78,7 @@ GLS non ha un numero proprio per la Svizzera. La sua pagina contatti rimanda al 
 
 ## Seguire un pacco GLS con Peek
 
-[Peek](/) accetta tutte e quattro le forme e chiede ai corrieri probabili. GLS Germany e GLS Switzerland conoscono gli stessi numeri, quindi conta il tuo paese: la regione del tuo iPhone o, sul web, il paese da cui ti colleghi. In Svizzera o nel Liechtenstein di solito vedi «GLS Switzerland ha questo pacco»; se il pacco va in Germania, premi «Cambia» e scegli GLS Germany. Altrove compare GLS Germany, che segue altrettanto bene i pacchi diretti in Svizzera, con l'NPA svizzero. Puoi incollare anche un link di tracking gls-group con /EU/ o /GROUP/: viene seguito con GLS Germany.
+[Peek](/) accetta tutte e quattro le forme e chiede ai corrieri probabili. GLS Germany e GLS Switzerland conoscono gli stessi numeri, quindi conta il tuo paese: la regione del tuo telefono o, sul web, il paese da cui ti colleghi. In Svizzera o nel Liechtenstein di solito vedi «GLS Switzerland ha questo pacco»; se il pacco va in Germania, premi «Cambia» e scegli GLS Germany. Altrove compare GLS Germany, che segue altrettanto bene i pacchi diretti in Svizzera, con l'NPA svizzero. Puoi incollare anche un link di tracking gls-group con /EU/ o /GROUP/: viene seguito con GLS Germany.
 
 GLS mostra la cronologia delle scansioni solo con l'NPA di consegna, quindi il campo «Codice postale di consegna» è obbligatorio: quattro cifre (il campo propone 8000 come esempio), e finché è vuoto Peek non segue il pacco. L'NPA va a GLS e, se serve, a servizi di tracciamento; uno sbagliato fa sembrare il numero sconosciuto. Se l'hai già inserito su questo dispositivo, il campo te lo ripropone.
 

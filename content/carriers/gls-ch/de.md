@@ -3,7 +3,7 @@ title: GLS Schweiz Sendungsverfolgung: Status, Post und Kontakt
 description: GLS-Paket in der Schweiz verfolgen: welche Nummer, warum GLS deine PLZ verlangt, was die englischen Status heißen, wer zustellt und wen du fragst.
 slug: gls-schweiz-sendungsverfolgung
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-20
 ---
 
 GLS ist ein internationaler Paketdienst mit Sitz in Amsterdam und hat in der Schweiz keine eigene Firma: Sein Partner, die Schweizerische Post, verzollt die GLS-Pakete, die in die Schweiz kommen, und stellt sie zu. Du verfolgst ein GLS-Paket in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) mit der Paketnummer und deiner Postleitzahl, oder du fügst die Nummer oben ins Feld ein. Die Nummer kommt vom Absender, schau also zuerst in die Versand-E-Mail des Shops.
@@ -80,7 +80,7 @@ Eine eigene Schweizer Hotline hat GLS nicht. Für Telefonnummern verweist die Ko
 
 ## GLS-Paket mit Peek verfolgen
 
-[Peek](/) nimmt alle vier Formen an und fragt die wahrscheinlichen Paketdienste. GLS Germany und GLS Switzerland kennen dieselben Nummern, deshalb richtet es sich nach deinem Land: nach der Region deines iPhones, im Web nach dem Land, aus dem du dich verbindest. In der Schweiz und in Liechtenstein siehst du meist „GLS Switzerland hat dieses Paket.“ Geht das Paket nach Deutschland, tippst du dann auf „Ändern“ und wählst GLS Germany. Anderswo siehst du GLS Germany, und auch damit verfolgst du Schweizer Pakete genauso gut, mit der Schweizer Postleitzahl. Einen Sendungslink von gls-group.com oder gls-group.eu mit /EU/ oder /GROUP/ im Pfad kannst du ebenfalls einfügen, er wird als GLS Germany verfolgt.
+[Peek](/) nimmt alle vier Formen an und fragt die wahrscheinlichen Paketdienste. GLS Germany und GLS Switzerland kennen dieselben Nummern, deshalb richtet es sich nach deinem Land: nach der Region deines Smartphones, im Web nach dem Land, aus dem du dich verbindest. In der Schweiz und in Liechtenstein siehst du meist „GLS Switzerland hat dieses Paket.“ Geht das Paket nach Deutschland, tippst du dann auf „Ändern“ und wählst GLS Germany. Anderswo siehst du GLS Germany, und auch damit verfolgst du Schweizer Pakete genauso gut, mit der Schweizer Postleitzahl. Einen Sendungslink von gls-group.com oder gls-group.eu mit /EU/ oder /GROUP/ im Pfad kannst du ebenfalls einfügen, er wird als GLS Germany verfolgt.
 
 Ohne Postleitzahl zeigt GLS keinen Sendungsverlauf, deshalb ist das Feld „Postleitzahl der Lieferadresse“ Pflicht: vier Ziffern, etwa 8000. Bis es ausgefüllt ist, wartet die Abfrage. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste, und eine falsche sieht aus wie eine unbekannte Nummer. Eine Schweizer Postleitzahl, die du auf diesem Gerät schon eingegeben hast, wird dir wieder vorgeschlagen.
 

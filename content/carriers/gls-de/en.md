@@ -3,7 +3,7 @@ title: GLS tracking in Germany: statuses, ParcelShops and contact
 description: Track a GLS parcel in Germany: where the parcel number or Track-ID is, why GLS needs your postcode, what its statuses mean, ParcelShops and how to reach GLS.
 slug: gls-tracking-germany
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-20
 ---
 
 GLS Germany delivers on weekdays and, by its group's count, has 9,000 ParcelShops and 200 Parcelstations in Germany. Track a parcel on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking) with its parcel number and the recipient's postcode, or paste the number in the box above. The number is in the shop's email, and GLS's notification card carries a Track-ID.
@@ -77,7 +77,7 @@ For a parcel from a shop, the shop is your first contact. GLS Germany's own cont
 
 ## Tracking a GLS Germany parcel with Peek
 
-[Peek](/) asks the likely carriers about the number shapes above. GLS answers for German and Swiss parcels alike, and Peek names GLS Germany ("GLS Germany has this parcel"), or GLS France if it knows the parcel. In Switzerland or Liechtenstein (by your iPhone's region or web connection) it names GLS Switzerland, with a 4-digit postcode field: for a parcel to Germany, press "Change" and pick GLS Germany. A pasted gls-pakete.de link, or a gls-group one with /DE/, /EU/ or /GROUP/, also names GLS Germany.
+[Peek](/) asks the likely carriers about the number shapes above. GLS answers for German and Swiss parcels alike, and Peek names GLS Germany ("GLS Germany has this parcel"), or GLS France if it knows the parcel. In Switzerland or Liechtenstein (by your phone's region or web connection) it names GLS Switzerland, with a 4-digit postcode field: for a parcel to Germany, press "Change" and pick GLS Germany. A pasted gls-pakete.de link, or a gls-group one with /DE/, /EU/ or /GROUP/, also names GLS Germany.
 
 GLS needs the delivery postcode for the detailed history, so the "Delivery postcode" field is required, and if GLS doesn't find the parcel with the one you gave, Peek says so and lets you change it. Any country's format works. It goes to GLS and, when needed, to tracking services.
 

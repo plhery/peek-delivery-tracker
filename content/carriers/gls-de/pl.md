@@ -3,7 +3,7 @@ title: Śledzenie GLS Niemcy: numer, Track-ID, statusy i kontakt
 description: Śledź paczkę GLS Niemcy (GLS Germany): numer przesyłki lub Track-ID, wymagany kod pocztowy, statusy po angielsku, punkty ParcelShop, cło i reklamacje.
 slug: sledzenie-gls-niemcy
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) doręcza od poniedziałku do piątku i według danych grupy dysponuje w Niemczech 9 000 punktów ParcelShop oraz 200 automatami Parcelstation. Niezależnie od tego, czy czekasz na przesyłkę pod niemieckim adresem, czy na zamówienie wysłane z Niemiec do Polski, sprawdzisz ją na [europejskiej stronie śledzenia GLS](https://gls-group.com/EU/en/parcel-tracking) po wpisaniu numeru paczki i kodu pocztowego odbiorcy albo wklejając numer w polu powyżej. Numer znajdziesz w e-mailu o wysyłce ze sklepu, a awizo zostawione przez GLS w Niemczech zawiera kod Track-ID.
@@ -75,7 +75,7 @@ W sprawie zamówienia ze sklepu internetowego pierwszym kontaktem pozostaje sprz
 
 ## Śledzenie przesyłki GLS Niemcy w Peek
 
-[Peek](/) odpytuje przewoźników pasujących do powyższych formatów numerów. Wspólny serwis grupy GLS odpowiada dla przesyłek niemieckich i szwajcarskich: w Polsce (według regionu iPhone'a lub połączenia sieciowego) przy numerach 11- i 12-cyfrowych Peek wybiera domyślnie GLS Poland (korzystający z tego samego serwisu grupy z opcjonalnym polem kodu pocztowego — aby przełączyć przesyłkę na GLS Germany, naciśnij „Zmień” i wskaż GLS Germany), natomiast przy 8-znakowych lub sześcioliterowych kodach Track-ID wskazuje bezpośrednio GLS Germany („GLS Germany ma tę przesyłkę.”), albo GLS Francja, jeśli numer odpowiada bez kodu pocztowego w sieci francuskiej. Wklejenie linku `gls-pakete.de` albo linku `gls-group` z `/DE/`, `/EU/` lub `/GROUP/` od razu wybiera GLS Germany (natomiast link `gls-group` z `/PL/` wybiera GLS Poland).
+[Peek](/) odpytuje przewoźników pasujących do powyższych formatów numerów. Wspólny serwis grupy GLS odpowiada dla przesyłek niemieckich i szwajcarskich: w Polsce (według regionu telefonu lub połączenia sieciowego) przy numerach 11- i 12-cyfrowych Peek wybiera domyślnie GLS Poland (korzystający z tego samego serwisu grupy z opcjonalnym polem kodu pocztowego — aby przełączyć przesyłkę na GLS Germany, naciśnij „Zmień” i wskaż GLS Germany), natomiast przy 8-znakowych lub sześcioliterowych kodach Track-ID wskazuje bezpośrednio GLS Germany („GLS Germany ma tę przesyłkę.”), albo GLS Francja, jeśli numer odpowiada bez kodu pocztowego w sieci francuskiej. Wklejenie linku `gls-pakete.de` albo linku `gls-group` z `/DE/`, `/EU/` lub `/GROUP/` od razu wybiera GLS Germany (natomiast link `gls-group` z `/PL/` wybiera GLS Poland).
 
 Ponieważ GLS Germany wymaga kodu pocztowego odbiorcy do pobrania szczegółowej historii, pole „Kod pocztowy odbiorcy” jest obowiązkowe, a gdy wpisany kod nie zgadza się z przesyłką („GLS Germany nie znajduje tej przesyłki z kodem pocztowym …”), poprawisz go przyciskiem „Zmień kod pocztowy”. Działa format kodu pocztowego z dowolnego kraju; trafia on do GLS oraz, w razie potrzeby, do serwisów śledzenia przesyłek.
 

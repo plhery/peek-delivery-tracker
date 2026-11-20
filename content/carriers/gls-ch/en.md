@@ -3,7 +3,7 @@ title: GLS Switzerland tracking: statuses, Swiss Post and contact
 description: Track a GLS parcel in Switzerland: the number's shapes, why GLS asks for your postcode, what its English statuses mean, who delivers and who to contact.
 slug: gls-switzerland-tracking
 published: 2026-10-11
-updated: 2026-10-27
+updated: 2026-11-20
 ---
 
 GLS is an international parcel network based in Amsterdam with no company of its own in Switzerland: its partner, Swiss Post, clears and delivers the parcels it brings into Switzerland. Track one on [GLS's tracking page](https://gls-group.com/EU/en/parcel-tracking) with the parcel number and your postcode, or paste the number in the box above. The number comes from the sender, so start with the shop's shipping email.
@@ -75,7 +75,7 @@ GLS has no Swiss hotline of its own. Its contact page points to "the website of 
 
 ## Tracking a GLS Switzerland parcel with Peek
 
-[Peek](/) takes all four shapes and asks the likely carriers. GLS Germany and GLS Switzerland know the same numbers, so it goes by your country (your iPhone's region, or on the web where you connect from). In Switzerland or Liechtenstein you'll usually see "GLS Switzerland has this parcel"; for a parcel going to Germany, press "Change" and pick GLS Germany. Elsewhere you'll see GLS Germany, which tracks Swiss parcels just as well with the Swiss postcode. A pasted gls-group link with /EU/ or /GROUP/ is tracked as GLS Germany.
+[Peek](/) takes all four shapes and asks the likely carriers. GLS Germany and GLS Switzerland know the same numbers, so it goes by your country (your phone's region, or on the web where you connect from). In Switzerland or Liechtenstein you'll usually see "GLS Switzerland has this parcel"; for a parcel going to Germany, press "Change" and pick GLS Germany. Elsewhere you'll see GLS Germany, which tracks Swiss parcels just as well with the Swiss postcode. A pasted gls-group link with /EU/ or /GROUP/ is tracked as GLS Germany.
 
 GLS shows its scan history only with the delivery postcode, so the "Delivery postcode" field is required: four digits, like 8000. It goes to GLS and, when needed, to tracking services; a wrong one looks like an unknown number.
 

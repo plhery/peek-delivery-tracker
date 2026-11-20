@@ -3,7 +3,7 @@ title: DPD Belgium tracking: statuses, delivery and contact
 description: Track a DPD parcel in Belgium: the 14-digit number, what DPD's statuses mean, delivery days, Pickup parcelshops, missing parcels and who to call.
 slug: dpd-belgium-tracking
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 DPD Belgium is DPD (Belgium) N.V., the DPD company that delivers parcels in Belgium. Track a parcel with the 14-digit parcel number: on DPD's Track & Trace at dpd.com/be, in the myDPD app, or in the box above.
@@ -94,7 +94,7 @@ DPD's site is in English, French and Dutch. DPD doesn't say which languages its 
 
 ## Tracking a DPD Belgium parcel with Peek
 
-Paste the 14-digit number in [Peek](/). Other carriers use that shape, so Peek asks the likely ones, by your country (your iPhone's region, or on the web where you connect from). It shows "Checking tracking services…" while it asks. In Belgium it asks DPD Belgium first.
+Paste the 14-digit number in [Peek](/). Other carriers use that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). It shows "Checking tracking services…" while it asks. In Belgium it asks DPD Belgium first.
 
 You see "DPD Belgium has this parcel." when DPD files the parcel under DPD Belgium, as it does for a parcel sent by a DPD customer in Belgium. A parcel sent through DPD in another country isn't taken for DPD Belgium's, even once it is in Belgium. A parcel from a German shop, for example, may show as DPD Germany's while it is still in Germany, and Peek then follows it from there into Belgium.
 

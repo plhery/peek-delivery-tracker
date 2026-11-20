@@ -3,7 +3,7 @@ title: GLS Sendungsverfolgung Deutschland: Status und Paketshop
 description: GLS-Paket in Deutschland verfolgen: wo Paketnummer und Track-ID stehen, warum GLS deine PLZ braucht, was die Status heißen und wie du GLS erreichst.
 slug: gls-sendungsverfolgung-deutschland
 published: 2026-10-11
-updated: 2026-11-09
+updated: 2026-11-20
 ---
 
 GLS Germany (General Logistics Systems Germany aus Neuenstein) stellt montags bis freitags zu und hat laut der GLS-Gruppe 9.000 Paketshops und 200 Paketstationen in Deutschland. Dein Paket verfolgst du in der [Sendungsverfolgung von GLS](https://gls-group.com/EU/en/parcel-tracking) (auf Englisch) mit Paketnummer und Postleitzahl des Empfängers, oder du fügst die Nummer oben ins Feld ein. Die Nummer steht in der Versand-E-Mail des Shops oder, als Track-ID, auf der Benachrichtigungskarte.
@@ -83,7 +83,7 @@ Den Vertrag mit GLS hat der Versender, bei einem Online-Kauf ist also der Shop d
 
 ## GLS-Paket mit Peek verfolgen
 
-[Peek](/) nimmt die Formen aus der Tabelle oben an und fragt bei den wahrscheinlichen Paketdiensten nach. Der Dienst von GLS antwortet für deutsche und Schweizer Pakete gleichermaßen. Kennen GLS Germany und GLS Switzerland beide die Nummer, entscheidet dein Land (die Region deines iPhones oder, im Web, das Land, aus dem deine Verbindung kommt): Von Deutschland aus siehst du meist „GLS Germany hat dieses Paket“ und musst nichts ändern. Nur in der Schweiz und in Liechtenstein erscheint GLS Switzerland, mit einem Feld für eine vierstellige Postleitzahl; geht das Paket nach Deutschland, tipp dort auf „Ändern“ und wähle GLS Germany. Kennt GLS France das Paket, wird stattdessen GLS France genannt. Auch ein eingefügter Link mit deiner Nummer führt zu GLS Germany: von gls-pakete.de oder von gls-group.eu oder gls-group.com mit /DE/, /EU/ oder /GROUP/ im Pfad.
+[Peek](/) nimmt die Formen aus der Tabelle oben an und fragt bei den wahrscheinlichen Paketdiensten nach. Der Dienst von GLS antwortet für deutsche und Schweizer Pakete gleichermaßen. Kennen GLS Germany und GLS Switzerland beide die Nummer, entscheidet dein Land (die Region deines Smartphones oder, im Web, das Land, aus dem deine Verbindung kommt): Von Deutschland aus siehst du meist „GLS Germany hat dieses Paket“ und musst nichts ändern. Nur in der Schweiz und in Liechtenstein erscheint GLS Switzerland, mit einem Feld für eine vierstellige Postleitzahl; geht das Paket nach Deutschland, tipp dort auf „Ändern“ und wähle GLS Germany. Kennt GLS France das Paket, wird stattdessen GLS France genannt. Auch ein eingefügter Link mit deiner Nummer führt zu GLS Germany: von gls-pakete.de oder von gls-group.eu oder gls-group.com mit /DE/, /EU/ oder /GROUP/ im Pfad.
 
 Das Feld „Postleitzahl der Lieferadresse“ ist Pflicht, weil GLS sie für den detaillierten Verlauf braucht. Findet GLS das Paket mit deiner Postleitzahl nicht, sagt Peek dir das, und du kannst sie ändern. Jedes Länderformat geht. Die Postleitzahl geht an GLS und bei Bedarf an Tracking-Dienste.
 

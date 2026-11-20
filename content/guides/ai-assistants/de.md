@@ -4,7 +4,7 @@ description: Verbinde Peek mit ChatGPT, Claude oder Gemini und frag, wo deine Pa
 slug: pakete-verfolgen-chatgpt-claude-gemini
 picture: Pip, das Paket mit Gesicht, lehnt sich aus einem Chatfenster auf einem Laptop, in dem eine Frage zu den Paketen dieser Woche mit einer kurzen Liste beantwortet wird.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Du kannst deine Pakete in Claude, ChatGPT oder Gemini verfolgen, wenn du sie mit [Peek](/) verbindest, einem kostenlosen Paket-Tracker: Der Assistent kann dir dann sagen, wo deine Pakete sind, und die Sendungsnummern hinzufügen, die du ihm gibst. Du brauchst ein Peek-Konto, und wer es nutzen kann, legt jeder Assistent selbst fest: Claude mit jedem Tarif, ChatGPT mit einem Business-, Enterprise- oder Edu-Tarif Gemini für Erwachsene in den USA mit einem privaten Google-Konto und OpenClaw für alle, die es selbst betreiben. Peek kennzeichnet die Funktion mit „Beta“, sie kann sich also noch ändern.
@@ -106,7 +106,7 @@ Nimm den Haken bei allem heraus, was du nicht willst; „Erlauben“ bleibt ausg
 
 ## Was sieht der Assistent, und wie trenne ich ihn?
 
-Er bekommt, was du erlaubt hast: Namen, Absender, Paketdienste, Sendungsnummern, Status, erwartete Tage, Abholstellen und Scans deiner Pakete. Nie den Namen, die Postleitzahl oder Telefonziffern des Empfängers: Ein Scan, der den Empfänger, die unterschreibende Person, einen Code oder eine Tür nennt, erreicht ihn nur als Status, etwa „Zugestellt“. Danach gelten die Datenschutzbestimmungen seines Anbieters. In Peeks [Datenschutzerklärung](https://peektracker.com/privacy.html) steht, was Peek über jeden Assistenten speichert, den du verbindest.
+Er bekommt, was du erlaubt hast: Namen, Absender, Paketdienste, Sendungsnummern, Status, erwartete Tage, Abholstellen und Scans deiner Pakete. Nie den Namen des Empfängers und nie die Postleitzahl oder Telefonziffern, die du angegeben hast: Ein Scan, der den Empfänger, die unterschreibende Person, einen Code oder eine Tür nennt, erreicht ihn nur als Status, etwa „Zugestellt“. Der Ort eines Scans bleibt, wie der Paketdienst ihn geschrieben hat, und kann so den Zustellort mit seiner Postleitzahl nennen. Danach gelten die Datenschutzbestimmungen seines Anbieters. In Peeks [Datenschutzerklärung](https://peektracker.com/privacy.html) steht, was Peek über jeden Assistenten speichert, den du verbindest.
 
 Um einen Assistenten zu trennen, auf Peeks Website:
 

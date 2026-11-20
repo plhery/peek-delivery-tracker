@@ -4,7 +4,7 @@ description: Liga o Peek ao ChatGPT, Claude ou Gemini e pergunta onde estão as 
 slug: seguir-encomendas-chatgpt-claude-gemini
 picture: O Pip, a encomenda com cara, a espreitar de uma janela de conversa num portátil, onde uma pergunta sobre as encomendas desta semana recebe uma lista curta como resposta.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Podes seguir as tuas encomendas no Claude, no ChatGPT ou no Gemini se os ligares ao [Peek](/), um serviço gratuito de seguimento de encomendas: o assistente pode então dizer-te onde estão as tuas encomendas e adicionar os números de seguimento que lhe deres. Precisas de uma conta Peek, e cada assistente decide quem pode: o Claude em qualquer plano, o ChatGPT num plano Business, Enterprise ou Edu, o Gemini para adultos nos EUA com uma conta Google pessoal, e o OpenClaw para quem o executa. O Peek marca a funcionalidade como «Beta», por isso ainda pode mudar.
@@ -106,7 +106,7 @@ Desmarca o que não quiseres; «Permitir» fica a cinzento até haver pelo menos
 
 ## O que vê o assistente e como o desligo?
 
-Recebe o que permitiste: nomes, remetentes, transportadoras, números de seguimento, estados, dias previstos, pontos de levantamento e leituras das tuas encomendas. Nunca o nome do destinatário, o código postal ou dígitos do telefone: uma leitura que nomeia o destinatário, quem assinou, um código ou uma porta só lhe chega como a sua etapa, por exemplo «Entregue». Aplicam-se depois as regras de privacidade do fornecedor do assistente. O [aviso de privacidade](https://peektracker.com/privacy.html) do Peek diz o que o Peek guarda sobre cada assistente que ligas.
+Recebe o que permitiste: nomes, remetentes, transportadoras, números de seguimento, estados, dias previstos, pontos de levantamento e leituras das tuas encomendas. Nunca o nome do destinatário, nem o código postal ou os dígitos do telefone que indicaste: uma leitura que nomeia o destinatário, quem assinou, um código ou uma porta só lhe chega como a sua etapa, por exemplo «Entregue». O local de uma leitura fica como a transportadora o escreveu, por isso pode indicar a localidade de entrega e o seu código postal. Aplicam-se depois as regras de privacidade do fornecedor do assistente. O [aviso de privacidade](https://peektracker.com/privacy.html) do Peek diz o que o Peek guarda sobre cada assistente que ligas.
 
 Para desligar um assistente, no site do Peek:
 

@@ -103,8 +103,9 @@ Resend delivers the service's emails, as described under "Emails".
 Cloudflare Email Routing receives the emails you forward to your Peek address
 and passes them to the service. An assistant you connect, such as Claude or
 ChatGPT, receives what you allowed it: your parcels' names, senders, carriers,
-tracking numbers, statuses, expected days, pickup points and scans, never the
-recipient's name, postcode or phone digits. Its provider's own privacy terms then apply to what it receives.
+tracking numbers, statuses, expected days, pickup points and scans, whose places
+can name the delivery town and its postcode, never the recipient's name or the
+postcode or phone digits you gave. Its provider's own privacy terms then apply to what it receives.
 Home Assistant, connected through Peek's integration, and a tool you give a personal token receive the same.
 
 To check and improve how it reads the emails you forward, Peek may send some of
@@ -345,8 +346,9 @@ number as described above and under "Retention and control".
 
 You can share a parcel through its link, with or without an account. Anyone
 who has the link sees the parcel's status and history. They never see a pickup
-code, a PIN, who signed for the parcel, a door number, a postcode, phone digits or the
-recipient's name or address: a delivery reads "Delivered" for them. They see the name you gave the parcel
+code, a PIN, who signed for the parcel, a door number, the postcode or phone digits
+you gave, or the recipient's name or address: a delivery reads "Delivered" for them,
+though a scan's place, as the carrier wrote it, can name the delivery town and its postcode. They see the name you gave the parcel
 only if you choose to show it, and
 the tracking number stays masked unless you choose to show it. An app that
 previews the link, a chat app for instance, gets the parcel's status, carrier

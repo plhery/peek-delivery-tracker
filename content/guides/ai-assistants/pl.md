@@ -4,7 +4,7 @@ description: Połącz Peek z ChatGPT, Claude lub Gemini i pytaj, gdzie są Twoje
 slug: sledzenie-przesylek-chatgpt-claude-gemini
 picture: Pip, paczka z buzią, wychyla się z okna czatu na laptopie, a na pytanie o przesyłki z tego tygodnia przychodzi tam krótka lista.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Swoje przesyłki możesz śledzić w Claude, ChatGPT lub Gemini, jeśli połączysz je z [Peek](/), darmowym trackerem przesyłek: asystent może Ci wtedy powiedzieć, gdzie są Twoje przesyłki, i dodać numery śledzenia, które mu podasz. Potrzebujesz konta Peek, a o tym, kto może z tego korzystać, decyduje każdy asystent: Claude w każdym planie, ChatGPT w planie Business, Enterprise lub Edu, w przypadku Gemini dorośli w USA z osobistym kontem Google, a w przypadku OpenClaw ten, kto go uruchamia. Peek oznacza tę funkcję jako „Beta”, więc może się ona jeszcze zmienić.
@@ -106,7 +106,7 @@ Odznacz to, czego nie chcesz; przycisk „Zezwól” pozostaje wyszarzony, dopó
 
 ## Co widzi asystent i jak go odłączyć?
 
-Dostaje to, na co mu pozwalasz: nazwy, nadawców, przewoźników, numery śledzenia, statusy, przewidywane dni, punkty odbioru i skany Twoich przesyłek. Nigdy imienia i nazwiska odbiorcy, kodu pocztowego ani cyfr telefonu: skan, który wymienia odbiorcę, osobę podpisującą odbiór, kod albo drzwi, trafia do niego tylko jako etap, na przykład „Dostarczona”. Potem obowiązują zasady prywatności dostawcy asystenta. [Informacja o prywatności](https://peektracker.com/privacy.html) Peek opisuje, co Peek przechowuje o każdym połączonym asystencie.
+Dostaje to, na co mu pozwalasz: nazwy, nadawców, przewoźników, numery śledzenia, statusy, przewidywane dni, punkty odbioru i skany Twoich przesyłek. Nigdy imienia i nazwiska odbiorcy ani podanego przez Ciebie kodu pocztowego czy cyfr telefonu: skan, który wymienia odbiorcę, osobę podpisującą odbiór, kod albo drzwi, trafia do niego tylko jako etap, na przykład „Dostarczona”. Miejsce skanu zostaje takie, jak zapisał je przewoźnik, więc może zawierać miejscowość doręczenia i jej kod pocztowy. Potem obowiązują zasady prywatności dostawcy asystenta. [Informacja o prywatności](https://peektracker.com/privacy.html) Peek opisuje, co Peek przechowuje o każdym połączonym asystencie.
 
 Aby odłączyć asystenta, na stronie Peek:
 

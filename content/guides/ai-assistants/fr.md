@@ -4,7 +4,7 @@ description: Connecte Peek à ChatGPT, Claude ou Gemini pour savoir où sont tes
 slug: suivre-colis-chatgpt-claude-gemini
 picture: Pip, le colis avec un visage, se penche hors d'une fenêtre de discussion sur un ordinateur portable, où une question sur les colis de la semaine reçoit une courte liste en réponse.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Tu peux suivre tes colis dans Claude, ChatGPT ou Gemini en les connectant à [Peek](/), un suivi de colis gratuit : l'assistant peut alors te dire où sont tes colis et ajouter les numéros de suivi que tu lui donnes. Il te faut un compte Peek, et chaque assistant décide qui y a droit : Claude avec n'importe quelle offre, ChatGPT avec une offre Business, Enterprise ou Edu, Gemini pour les adultes aux États-Unis avec un compte Google personnel, et OpenClaw pour qui le fait tourner. Peek marque la fonction « Bêta » : elle peut donc encore changer.
@@ -106,7 +106,7 @@ Décoche ce que tu ne veux pas ; « Autoriser » reste grisé tant qu'aucune cas
 
 ## Que voit l'assistant, et comment le déconnecter ?
 
-Il reçoit ce que tu as autorisé : le nom de tes colis, leurs expéditeurs, transporteurs, numéros de suivi, statuts, jours prévus, points de retrait et scans. Jamais le nom du destinataire, son code postal ni des chiffres de son téléphone : un scan qui nomme le destinataire, la personne qui a signé, un code ou une porte ne lui arrive que sous forme d'étape, comme « Livré ». Les règles de confidentialité de son fournisseur s'appliquent ensuite. La [politique de confidentialité](https://peektracker.com/privacy.html) de Peek indique ce qu'il conserve sur chaque assistant que tu connectes.
+Il reçoit ce que tu as autorisé : le nom de tes colis, leurs expéditeurs, transporteurs, numéros de suivi, statuts, jours prévus, points de retrait et scans. Jamais le nom du destinataire, ni le code postal ou les chiffres de téléphone que tu as donnés : un scan qui nomme le destinataire, la personne qui a signé, un code ou une porte ne lui arrive que sous forme d'étape, comme « Livré ». Le lieu d'un scan reste tel que le transporteur l'a écrit : il peut nommer la ville de livraison et son code postal. Les règles de confidentialité de son fournisseur s'appliquent ensuite. La [politique de confidentialité](https://peektracker.com/privacy.html) de Peek indique ce qu'il conserve sur chaque assistant que tu connectes.
 
 Pour déconnecter un assistant, sur le site de Peek :
 

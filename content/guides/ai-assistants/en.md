@@ -4,7 +4,7 @@ description: Connect Peek to ChatGPT, Claude or Gemini and ask where your parcel
 slug: track-parcels-chatgpt-claude-gemini
 picture: Pip, the parcel with a face, leaning out of a chat window on a laptop, where a question about this week's parcels gets a short list in reply.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 You can track your parcels in Claude, ChatGPT or Gemini by connecting them to [Peek](/), a free parcel tracker: the assistant can then tell you where your parcels are and add the tracking numbers you give it. You need a Peek account, and each assistant decides who can: Claude on any plan, ChatGPT on a Business, Enterprise or Edu plan, Gemini for adults in the US with a personal Google Account, and OpenClaw for whoever runs it. Peek labels the feature "Beta", so it may still change.
@@ -106,7 +106,7 @@ Untick what you don't want; "Allow" stays greyed out until one box is ticked. If
 
 ## What does the assistant see, and how do I disconnect it?
 
-It receives what you allowed: your parcels' names, senders, carriers, tracking numbers, statuses, expected days, pickup points and scans. Never the recipient's name, postcode or phone digits: a scan that names the recipient, who signed, a code or a door reaches it only as its stage, such as "Delivered". Its provider's own privacy terms then apply. Peek's [privacy notice](https://peektracker.com/privacy.html) says what Peek keeps about each assistant you connect.
+It receives what you allowed: your parcels' names, senders, carriers, tracking numbers, statuses, expected days, pickup points and scans. Never the recipient's name, or the postcode or phone digits you gave: a scan that names the recipient, who signed, a code or a door reaches it only as its stage, such as "Delivered". A scan's place stays as the carrier wrote it, so it can name the delivery town and its postcode. Its provider's own privacy terms then apply. Peek's [privacy notice](https://peektracker.com/privacy.html) says what Peek keeps about each assistant you connect.
 
 To disconnect an assistant, on Peek's website:
 

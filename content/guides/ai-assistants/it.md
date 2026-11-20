@@ -4,7 +4,7 @@ description: Collega Peek a ChatGPT, Claude o Gemini e chiedigli dove sono i tuo
 slug: tracciare-pacchi-chatgpt-claude-gemini
 picture: Pip, il pacco con la faccia, si sporge da una finestra di chat su un portatile, dove a una domanda sui pacchi di questa settimana risponde una breve lista.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Puoi tracciare i tuoi pacchi in Claude, ChatGPT o Gemini collegandoli a [Peek](/), un tracker di pacchi gratuito: l'assistente può poi dirti dove sono i tuoi pacchi e aggiungere i codici tracking che gli dai. Ti serve un account Peek, e ogni assistente decide chi può farlo: Claude con qualsiasi piano, ChatGPT con un piano Business, Enterprise o Edu, Gemini per i maggiorenni negli Stati Uniti con un account Google personale, e OpenClaw per chi lo fa girare. Peek indica la funzione come «Beta», quindi potrebbe ancora cambiare.
@@ -106,7 +106,7 @@ Togli la spunta a ciò che non vuoi; «Consenti» resta grigio finché non è sp
 
 ## Cosa vede l'assistente, e come lo scollego?
 
-Riceve ciò che hai permesso: nomi, mittenti, corrieri, codici tracking, stati, giorni previsti, punti di ritiro e scansioni dei tuoi pacchi. Mai il nome del destinatario, il codice postale o le cifre del telefono: una scansione che nomina il destinatario, chi ha firmato, un codice o una porta gli arriva solo come fase, per esempio «Consegnato». Poi si applicano le regole sulla privacy del suo fornitore. L'[informativa sulla privacy](https://peektracker.com/privacy.html) di Peek spiega cosa conserva su ogni assistente che colleghi.
+Riceve ciò che hai permesso: nomi, mittenti, corrieri, codici tracking, stati, giorni previsti, punti di ritiro e scansioni dei tuoi pacchi. Mai il nome del destinatario, né il codice postale o le cifre del telefono che hai indicato: una scansione che nomina il destinatario, chi ha firmato, un codice o una porta gli arriva solo come fase, per esempio «Consegnato». Il luogo di una scansione resta come l'ha scritto il corriere, quindi può indicare la località di consegna e il suo codice postale. Poi si applicano le regole sulla privacy del suo fornitore. L'[informativa sulla privacy](https://peektracker.com/privacy.html) di Peek spiega cosa conserva su ogni assistente che colleghi.
 
 Per scollegare un assistente, sul sito di Peek:
 

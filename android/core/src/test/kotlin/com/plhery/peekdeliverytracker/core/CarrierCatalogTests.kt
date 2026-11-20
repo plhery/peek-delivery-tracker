@@ -921,6 +921,15 @@ class CarrierCatalogTests {
     }
 
     @Test
+    fun amazonGuideOpensInTheLanguageTheGuidesAreReadIn() {
+        val base = "https://peektracker.com"
+        assertEquals("https://peektracker.com/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.En))
+        assertEquals("https://peektracker.com/fr/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.Fr))
+        assertEquals("https://peektracker.com/pt/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.PtBr))
+        assertEquals("https://peektracker.com/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.Ru))
+    }
+
+    @Test
     fun detectsInternationalAmazonAndKeepsConfirmedShippingDistinct() {
         for (prefix in listOf("FR", "DE", "BE", "UK", "GB", "IT", "ES", "NL", "AT", "IE", "PL", "SE", "PT", "CH")) {
             val number = "${prefix}0000000001"

@@ -390,6 +390,7 @@ struct AddParcelView: View {
                 if order == .amazon {
                     Link(localizer.text("add.openAmazonOrders"), destination: CarrierCatalog.amazonOrdersURL(""))
                         .font(.subheadline)
+                    amazonGuideLink
                 }
             }
             // A check digit that doesn't add up is a question, never a refusal: adding the parcel takes it as typed.
@@ -519,9 +520,17 @@ struct AddParcelView: View {
             if accountRequired {
                 Link(localizer.text("add.openAmazonOrders"), destination: CarrierCatalog.amazonOrdersURL(parsed.trackingNumber))
                     .font(.subheadline)
+                amazonGuideLink
             }
         }
         .foregroundStyle(Brand.ink)
+    }
+
+    /// Amazon's parcels can be tracked: the guide shows where an order's carrier and tracking number are, in Safari.
+    private var amazonGuideLink: some View {
+        Link(localizer.text("add.amazonGuide"),
+             destination: CarrierCatalog.amazonGuideURL(base: session.configuration.apiBaseURL, language: localizer.language))
+            .font(.subheadline)
     }
 
     /// Several numbers in one text, in the order written: the first is added unless another is chosen, as on the

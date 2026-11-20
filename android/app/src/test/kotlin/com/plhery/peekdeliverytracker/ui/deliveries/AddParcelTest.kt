@@ -837,6 +837,7 @@ class AddParcelTest {
         leave()
         assertTrue(exists(ADD_ORDER))
         assertTrue(exists(ADD_AMAZON_ORDERS))
+        assertTrue(exists(ADD_AMAZON_GUIDE))
         node(ADD_SAVE).assertIsNotEnabled()
     }
 
@@ -943,6 +944,7 @@ class AddParcelTest {
         type(number)
         settle()
         assertTrue(exists(ADD_AMAZON_ORDERS))
+        assertTrue(exists(ADD_AMAZON_GUIDE))
         node(ADD_SAVE).assertIsNotEnabled()
     }
 

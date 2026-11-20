@@ -569,7 +569,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                     verticalArrangement = Arrangement.spacedBy(20.dp),
                 ) {
                     Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        TrackingSection(addition, form, focus, actions, scannerAvailable)
+                        TrackingSection(addition, form, focus, actions, scannerAvailable, source.linkBaseUrl)
                         val found = addition.parsed.trackingNumber.isNotEmpty()
                         val shownFeedback = remember { Kept(addition) }
                         if (found) shownFeedback.value = addition
@@ -875,11 +875,12 @@ private fun AddHeading(saving: Boolean, close: () -> Unit, titleFocus: Accessibi
 /**
  * `trackingField`: its label with Paste and, where the device scans ([scanner]), the scan button beside it, under it
  * where they don't fit on one line; the field, two to four lines; and, once the number has settled, why it can't be
- * added as it stands: no number found, a pickup code, a placeholder, a shop's order number, or a check digit that
- * doesn't add up, with the number it may be and the way to add it as typed.
+ * added as it stands: no number found, a pickup code, a placeholder, a shop's order number (Amazon's with its orders
+ * and Peek's guide on the site at [linkBaseUrl]), or a check digit that doesn't add up, with the number it may be and
+ * the way to add it as typed.
  */
 @Composable
-private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions, scanner: Boolean) {
+private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddFocus, actions: AddActions, scanner: Boolean, linkBaseUrl: String) {
     val localizer = LocalLocalizer.current
     val colors = PeekTheme.colors
     val type = PeekTheme.type
@@ -919,7 +920,10 @@ private fun TrackingSection(addition: ParcelAddition, form: AddForm, focus: AddF
         val order = addition.order
         if (order != null && settled) {
             HeldBackNote(localizer.text("door.order.${order.rawValue}.title"), localizer.text("door.order.${order.rawValue}.body"), ADD_ORDER)
-            if (order == OrderShop.Amazon) AmazonOrdersLink("")
+            if (order == OrderShop.Amazon) {
+                AmazonOrdersLink("")
+                AmazonGuideLink(linkBaseUrl)
+            }
         }
         val typo = addition.typo
         if (typo != null && settled) {
@@ -1054,6 +1058,17 @@ private fun AmazonOrdersLink(number: String) {
     TintedButton(AnnotatedString(localized("add.openAmazonOrders")), { uriHandler.openUri(CarrierCatalog.amazonOrdersUrl(number)) }, ADD_AMAZON_ORDERS)
 }
 
+/**
+ * "Amazon parcels can be tracked: here's how to find the number", a link to the guide on the site at [linkBaseUrl] that
+ * shows where an Amazon order's carrier and tracking number are, opened as Amazon's orders are.
+ */
+@Composable
+private fun AmazonGuideLink(linkBaseUrl: String) {
+    val uriHandler = LocalUriHandler.current
+    val language = LocalLanguage.current
+    TintedButton(AnnotatedString(localized("add.amazonGuide")), { uriHandler.openUri(CarrierCatalog.amazonGuideUrl(linkBaseUrl, language)) }, ADD_AMAZON_GUIDE)
+}
+
 /** "Use {{postcode}}" under an optional postcode field that is empty, in Add and in Change carrier: a tap fills it in. */
 @Composable
 internal fun UsePostcodeButton(postcode: String, tag: String, onUse: () -> Unit) {
@@ -1083,7 +1098,8 @@ private fun TintedButton(text: AnnotatedString, onClick: () -> Unit, tag: String
 /**
  * `carrierFeedback`: the carrier line, and the number found in a link or a text, or the choice between several numbers;
  * how the carrier tracks, or what Amazon said; a carrier that knows the number better than the one picked by hand;
- * Amazon's check to ask again; and Amazon's orders where only an account follows the parcel.
+ * Amazon's check to ask again; and Amazon's orders, with Peek's guide to finding the number, where only an account
+ * follows the parcel.
  */
 @Composable
 private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, form: AddForm, actions: AddActions) {
@@ -1137,7 +1153,10 @@ private fun CarrierFeedback(state: DeliveriesState, addition: ParcelAddition, fo
                 ADD_AMAZON_RETRY,
             )
         }
-        if (addition.accountRequired) AmazonOrdersLink(addition.parsed.trackingNumber)
+        if (addition.accountRequired) {
+            AmazonOrdersLink(addition.parsed.trackingNumber)
+            AmazonGuideLink(state.source.linkBaseUrl)
+        }
     }
 }
 
@@ -1943,6 +1962,7 @@ internal const val ADD_TYPO = "addParcel.typo"
 internal const val ADD_SUGGESTION = "addParcel.suggestion"
 internal const val ADD_AS_TYPED = "addParcel.asTyped"
 internal const val ADD_AMAZON_ORDERS = "addParcel.amazonOrders"
+internal const val ADD_AMAZON_GUIDE = "addParcel.amazonGuide"
 internal const val ADD_AMAZON_UNAVAILABLE = "addParcel.amazonUnavailable"
 internal const val ADD_AMAZON_RETRY = "addParcel.amazonRetry"
 internal const val ADD_USE_CARRIER = "addParcel.useCarrier"

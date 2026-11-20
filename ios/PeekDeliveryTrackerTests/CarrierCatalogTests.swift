@@ -746,6 +746,14 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(link.url.host, "www.amazon.ca")
     }
 
+    func testAmazonGuideOpensInTheLanguageTheGuidesAreReadIn() {
+        let base = URL(string: "https://peektracker.com")!
+        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .en).absoluteString, "https://peektracker.com/guides/amazon-orders")
+        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .fr).absoluteString, "https://peektracker.com/fr/guides/amazon-orders")
+        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .ptBR).absoluteString, "https://peektracker.com/pt/guides/amazon-orders")
+        XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .ru).absoluteString, "https://peektracker.com/guides/amazon-orders")
+    }
+
     func testDetectsInternationalAmazonAndKeepsConfirmedShippingDistinct() {
         for prefix in ["FR", "DE", "BE", "UK", "GB", "IT", "ES", "NL", "AT", "IE", "PL", "SE", "PT", "CH"] {
             let number = "\(prefix)0000000001"

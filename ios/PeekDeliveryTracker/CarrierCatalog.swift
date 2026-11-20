@@ -761,6 +761,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         URL(string: "https://www.amazon.\(amazonMarketplace(number, country: country))/gp/your-account/order-history")!
     }
 
+    /// Peek's guide to where an Amazon order's carrier and tracking number are, in the language the guides are read in
+    /// (`catalogLanguage`). The site leads the guide's id to its address in that language; English has no prefix.
+    static func amazonGuideURL(base: URL, language: AppLanguage) -> URL {
+        let language = language.catalogLanguage
+        return base.appending(path: language == .en ? "guides/amazon-orders" : "\(language.rawValue)/guides/amazon-orders")
+    }
+
     static func amazonShippingURL(_ number: String) -> URL {
         let normalized = normalize(number)
         let domains = ["IT": "it", "ES": "es", "UK": "co.uk", "GB": "co.uk", "TB": "com"]

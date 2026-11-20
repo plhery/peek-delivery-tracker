@@ -77,9 +77,14 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   const cheap = settleRecognition(outcomes);
   const preflight = !cheap.carrier && !cheap.choices.length && health
     ? await preflightTracking(trackingNumber, health, signal) : undefined;
+  let retried = false;
   if (!cheap.carrier && !cheap.choices.length && !preflight?.trackingFound) {
-    const due = browserCandidates.filter(({ carrier }) => !early.some((asked) => asked.carrier === carrier)
+    // FedEx asked early that did not answer, as when both browsers were busy or its read failed, is asked again while
+    // time is left before the deadline.
+    const timeLeft = performance.now() < deadline;
+    const due = browserCandidates.filter(({ carrier }) => (timeLeft || !early.some((asked) => asked.carrier === carrier))
       && !outcomes.some((outcome) => outcome.carrier === carrier && outcome.status !== 'failed'));
+    retried = due.some(({ carrier }) => early.some((asked) => asked.carrier === carrier));
     outcomes.push(...await recognizeAll(due, askBrowser, browserBudget(), signal));
   }
   const { carrier, choices } = settleRecognition(outcomes);
@@ -101,6 +106,7 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
       asked_carriers: asked.join(','),
       second_batch: Boolean(next?.length),
       ...(early.length ? { fedex_early: true } : {}),
+      ...(retried ? { fedex_retried: true } : {}),
       known: outcomes.filter((outcome) => outcome.status === 'known').length,
       failed: unanswered.length,
       unanswered_carriers: unanswered.join(','),

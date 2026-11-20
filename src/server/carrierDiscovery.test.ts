@@ -47,6 +47,35 @@ it('asks the next five when FedEx does not know the number either, and FedEx onl
   expect(mocks.browser).toHaveBeenCalledOnce();
 });
 
+it('asks FedEx again with the browser confirmations when its early read found the browsers busy, while time is left', async () => {
+  const busy = () => Promise.reject(new Error('Browser recognition is busy'));
+  const http = httpBatches();
+  mocks.browser.mockImplementationOnce(busy);
+  const log = vi.mocked(console.log);
+  expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
+    trackingNumber: FEDEX_NUMBER, carrier: 'fedex', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS)],
+  });
+  expect(mocks.browser).toHaveBeenCalledTimes(2);
+  expect(mocks.browser).toHaveBeenLastCalledWith('fedex', FEDEX_NUMBER, expect.objectContaining({ budgetMs: expect.any(Number) }), undefined);
+  expect(log.mock.calls.map(([line]) => JSON.parse(String(line)) as Record<string, unknown>)
+    .find((line) => line.event === 'carrier_recognition')).toMatchObject({ fedex_early: true, fedex_retried: true, settled: 'fedex' });
+
+  // An early read that used the time up is not asked again past the deadline.
+  let clock = performance.now();
+  mocks.browser.mockReset().mockImplementationOnce(async () => {
+    clock += 26_000;
+    throw new Error('Browser recognition budget exceeded');
+  });
+  const now = vi.spyOn(performance, 'now').mockImplementation(() => clock);
+  try {
+    expect(await (await freshDetection())({ trackingNumber: FEDEX_NUMBER })).toEqual({
+      trackingNumber: FEDEX_NUMBER, carrier: 'unknown', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex', ...http.slice(MAX_RECOGNITIONS)],
+      unanswered: ['fedex', ...http.slice(MAX_RECOGNITIONS)],
+    });
+    expect(mocks.browser).toHaveBeenCalledOnce();
+  } finally { now.mockRestore(); }
+});
+
 it('with FEDEX_EARLY_RECOGNITION off, asks FedEx only after both HTTP batches miss', async () => {
   vi.stubEnv('FEDEX_EARLY_RECOGNITION', 'off');
   const http = httpBatches();

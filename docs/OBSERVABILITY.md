@@ -864,8 +864,10 @@ Key JSON events:
   the `previous_carrier` and the `carrier` once the link was read, and never the link;
 - `carrier_recognition`: the `tracking_number`, how many carriers the Add sheet's recognition asked and which
   (`asked_carriers`, ids in the order asked), whether it asked a `second_batch` because none
-  of the first five knew the number, how many knew the number or failed (`unanswered_carriers`
-  names those), and what it settled on (a carrier, `choice` or `none`).
+  of the first five knew the number, whether it asked FedEx right after them (`fedex_early`) and
+  again with the browser confirmations because that read did not answer (`fedex_retried`), how many
+  knew the number or failed (`unanswered_carriers` names those), and what it settled on (a carrier,
+  `choice` or `none`).
 - `typo_candidate`: the number of a parcel just added or looked up reads as a digit typed
   twice: leaving out one digit of two identical neighbours gives a number that a
   high-confidence detection rule's check digit accepts while the number as typed passes

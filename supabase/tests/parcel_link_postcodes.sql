@@ -121,11 +121,17 @@ begin
     raise exception 'A filed lookup was filed again';
   end if;
 
-  -- The other lookup with the same postcode joins that parcel, and the shared one goes with its last link.
+  -- The other lookup with the same postcode joins that parcel, and the shared one goes with its last link. The scans
+  -- the parcel has are not news to the joining link's alert.
+  perform public.add_parcel_link_alert(link_b, key_b, 'https://push.example/b', repeat('p', 87), repeat('q', 22), 'en', 'important');
+  update public.parcel_link_alerts set created_at = now() - interval '3 hours' where link_id = link_b;
   again := public.file_parcel_link_postcode(link_b, key_b, 'dhl', '99999');
   if again->'created' <> 'false' or (again#>>'{package,id}')::uuid <> dhl_package or again->'previous_forgotten' <> 'true'
       or exists (select 1 from public.packages where id = thin) then
     raise exception 'The same postcode did not reuse the filed parcel: %', again;
+  end if;
+  if (select created_at from public.parcel_link_alerts where link_id = link_b) <> now() then
+    raise exception 'A filed lookup''s alert takes the scans of the parcel it joined as news';
   end if;
 
   -- A parcel that is over asks for nothing.

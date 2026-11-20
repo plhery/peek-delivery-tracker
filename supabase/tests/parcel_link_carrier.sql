@@ -74,6 +74,32 @@ begin
   if not failed then raise exception 'A malformed country was taken'; end if;
 end;
 $$;
+
+-- A lookup moved onto a parcel another lookup follows takes none of that parcel's scans as news to its alert.
+do $$
+declare
+  key_a constant text := repeat('c', 64);
+  key_b constant text := repeat('d', 64);
+  a jsonb;
+  b jsonb;
+  scan uuid;
+begin
+  a := public.create_one_off_parcel('3SALERT000042', 'ups', null, null, key_a);
+  perform public.add_parcel_link_alert(a#>>'{link,id}', key_a, 'https://push.example/a', repeat('p', 87), repeat('q', 22), 'en', 'important');
+  update public.parcel_link_alerts set created_at = now() - interval '3 hours' where link_id = a#>>'{link,id}';
+  b := public.create_one_off_parcel('3SALERT000042', 'dhl', null, null, key_b);
+  update public.packages set created_at = now() - interval '3 days' where id = (b#>>'{package,id}')::uuid;
+  insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, created_at)
+  values ((b#>>'{package,id}')::uuid, 'out_for_delivery', 'Out for delivery', now() - interval '2 hours', 'dhl:alert-1',
+    now() - interval '1 hour')
+  returning id into scan;
+  a := public.change_parcel_link_carrier(a#>>'{link,id}', key_a, 'dhl', null, null);
+  if a#>>'{package,id}' <> b#>>'{package,id}' then raise exception 'The link did not join the followed parcel: %', a; end if;
+  if exists (select 1 from public.pending_parcel_link_alerts where link_id = a#>>'{link,id}' and event_id = scan) then
+    raise exception 'A moved link''s alert takes a scan the parcel had before the move as news';
+  end if;
+end;
+$$;
 reset role;
 
 do $$

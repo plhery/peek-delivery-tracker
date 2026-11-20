@@ -401,7 +401,7 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertTrue(device.isEmpty)
     }
 
-    func testOnlyStaleParcelsAreReadAgainAndAForgottenOneLeaves() async throws {
+    func testOnlyStaleParcelsAreReadAgainAndAForgottenLookupStaysNoLongerUpdated() async throws {
         let moving = UUID(), arrived = UUID(), gone = UUID(), held = UUID()
         var now = Date(timeIntervalSince1970: 1_800_000_000)
         let storage = Memory()
@@ -427,15 +427,137 @@ final class DeviceParcelTests: XCTestCase {
 
         now += DeviceParcels.fresh + 1
         try await device.refresh()
-        // A parcel that arrived rests for hours; the one the service forgot leaves the list.
+        // A parcel that arrived rests for hours; the lookup the service forgot stays as it was, without its key.
         XCTAssertEqual(calls.all, ["read 22222222222A k", "read 22222222222C k", "read 22222222222D k"])
-        XCTAssertEqual(device.list().map(\.label), ["Moving", "Arrived", "Held"])
+        XCTAssertEqual(device.list().map(\.label), ["Moving", "Arrived", "Gone", "Held"])
         XCTAssertEqual(device.list().first?.currentStage, .outForDelivery)
         XCTAssertNil(storage.keys["22222222222C"])
+        XCTAssertTrue(device.isFrozen(id: gone))
+        XCTAssertFalse(device.isFrozen(id: moving))
+
+        // It is never read again.
+        now += DeviceParcels.fresh + 1
+        try await device.refresh(all: true)
+        XCTAssertFalse(calls.all.dropFirst(3).contains { $0.contains("22222222222C") })
+        try await device.refresh(only: gone)
+        XCTAssertFalse(calls.all.dropFirst(3).contains { $0.contains("22222222222C") })
+    }
+
+    // MARK: - A lookup the service forgot
+
+    /// A lookup of this iPhone's own, on file with its key and its notifications on.
+    private func ownLookup(_ linkID: String, _ id: UUID, label: String = "", number: String = "TESTPARCEL123789",
+                           stage: TrackingStage? = .inTransit, checkedAt: Date) -> DeviceParcel {
+        var entry = DeviceParcel(linkID: linkID, label: label, archivedAt: nil,
+                                 parcel: Parcel(shared: package(id, number: number, stage: stage)), checkedAt: checkedAt)
+        entry.alertToken = "token1"
+        entry.alertPreset = .important
+        return entry
+    }
+
+    func testAForgottenLookupKeepsItsLastAnswerAndLosesItsKeyAndNotificationsWhileSomeoneElsesLinkGoes() async throws {
+        let own = UUID(), theirs = UUID()
+        var now = Date(timeIntervalSince1970: 1_800_000_000)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        var shared = DeviceParcel(linkID: "33333333333A", label: "Ana's books", archivedAt: nil,
+                                  parcel: Parcel(shared: package(theirs)), checkedAt: now)
+        shared.viewer = true
+        storage.parcels = [ownLookup("22222222222A", own, label: "Trainers", checkedAt: now), shared]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: storage, now: { now })
+        XCTAssertTrue(device.hasParcelsOnTheirWay)
+
+        now += DeviceParcels.fresh + 1
+        try await device.refresh()
+        // The 404 doesn't say why someone else's link ended: it goes. This iPhone's own lookup stays as last shown.
+        XCTAssertEqual(device.list().map(\.label), ["Trainers"])
+        XCTAssertEqual(device.list().first?.currentStage, .inTransit)
+        XCTAssertTrue(device.isFrozen(id: own))
+        XCTAssertTrue(storage.keys.isEmpty)
+        let kept = try XCTUnwrap(storage.parcels.first)
+        XCTAssertEqual(kept.frozen, DateParser.isoString(now))
+        XCTAssertNil(kept.alertToken, "Its notifications went with the link")
+        XCTAssertNil(kept.alertPreset)
+        // Nothing is left to keep in an account, ask notifications for or wait on.
+        XCTAssertEqual(device.claims, [])
+        XCTAssertFalse(device.hasParcelsOnTheirWay)
+        XCTAssertFalse(device.hasAlertsOn)
+        await device.registerAlerts(token: "token2", locale: .en)
+        XCTAssertFalse(calls.all.contains { $0.hasPrefix("alert") })
+        await XCTAssertThrowsErrorAsync(try await device.changeCarrier(id: own, carrier: .ups, trackingURL: nil, dpdPostcode: nil))
+        await XCTAssertThrowsErrorAsync(try await device.share(id: own))
+
+        // It stays through a relaunch, with no key on file, and a rename or the archive stay on the device.
+        let again = DeviceParcels(client: client(calls), storage: storage, now: { now })
+        XCTAssertTrue(again.isFrozen(id: own))
+        XCTAssertEqual(try again.rename(id: own, label: "Old trainers").label, "Old trainers")
+        XCTAssertNotNil(try again.setArchived(id: own, true).archivedAt)
+
+        // Removed here, it is gone without the service being asked.
+        let before = calls.all
+        let answered = await again.forget(id: own)
+        XCTAssertFalse(answered)
+        XCTAssertEqual(calls.all, before)
+        XCTAssertTrue(again.isEmpty)
+        XCTAssertTrue(storage.parcels.isEmpty)
+    }
+
+    func testANewLookupOfTheSameNumberTakesTheForgottenCopysPlaceAndName() async throws {
+        let old = UUID(), new = UUID()
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let storage = Memory()
+        var copy = ownLookup("22222222222A", old, label: "Trainers", checkedAt: now)
+        copy.frozen = DateParser.isoString(now)
+        copy.alertToken = nil
+        storage.parcels = [copy]
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(link: link("22222222222B"), key: key, package: package(new))),
+                                   storage: storage, now: { now })
+        XCTAssertTrue(device.isFrozen(id: old))
+        XCTAssertFalse(device.isWaiting)
+
+        // Not refused as a parcel already followed: the copy gives way.
+        let added = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL123789", carrier: .dhl))
+        XCTAssertEqual(added.id, new)
+        XCTAssertEqual(added.label, "Trainers")
+        XCTAssertEqual(device.list().map(\.id), [new])
+        XCTAssertFalse(device.isFrozen(id: new))
+        XCTAssertEqual(storage.keys, ["22222222222B": key])
+        XCTAssertFalse(calls.all.contains { $0.hasPrefix("forget") || $0.hasPrefix("unalert") })
+    }
+
+    func testALinkToTheSameParcelTakesTheForgottenCopysPlace() throws {
+        let id = UUID()
+        let now = Date(timeIntervalSince1970: 1_800_000_000)
+        let storage = Memory()
+        var copy = ownLookup("22222222222A", id, label: "Trainers", checkedAt: now)
+        copy.frozen = DateParser.isoString(now)
+        storage.parcels = [copy]
+        let device = DeviceParcels(client: client(Calls()), storage: storage, now: { now })
+
+        let followed = try device.follow(PublicParcelResponse(link: reader("33333333333A"), package: package(id, stage: .delivered)),
+                                         key: nil, label: nil)
+        XCTAssertTrue(followed.added)
+        XCTAssertEqual(device.list().map(\.label), ["Trainers"])
+        XCTAssertEqual(device.list().first?.currentStage, .delivered)
+        XCTAssertFalse(device.isFrozen(id: id))
+        XCTAssertEqual(device.viewerLink(id: id), "33333333333A")
+    }
+
+    func testAForgottenCopyNeedsNoKeyOnFileAndOneBesideItOpensNothing() throws {
+        var copy = DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID())), checkedAt: Date())
+        copy.frozen = "2026-11-20T08:00:00Z"
+        let loaded = DeviceParcelFiles.matched([copy], keys: ["22222222222A": key])
+        XCTAssertEqual(loaded.parcels, [copy])
+        XCTAssertEqual(loaded.keys, [:])
+        let saved = try JSONDecoder.deliveryTracker.decode([DeviceParcel].self, from: JSONEncoder.deliveryTracker.encode([copy]))
+        XCTAssertEqual(saved, [copy])
     }
 
     /// While the server restarts, its proxy answers "404 page not found" as text: the server failing, and nothing on
-    /// this iPhone goes. Only the service's own 404, with its JSON error, forgets a parcel and its key.
+    /// this iPhone goes. Only the service's own 404, with its JSON error, takes a parcel's key, and leaves its copy no
+    /// longer updated.
     func testAProxysNotFoundWhileTheServerRestartsForgetsNothing() async throws {
         let transport = PostcodeTestURLProtocol.transport()
         defer { transport.invalidateAndCancel() }
@@ -472,7 +594,8 @@ final class DeviceParcelTests: XCTestCase {
 
         answer = (404, Data(#"{"error":"Parcel unavailable"}"#.utf8))
         try await device.refresh()
-        XCTAssertEqual(device.list().map(\.label), [])
+        XCTAssertEqual(device.list().map(\.label), ["Running shoes"])
+        XCTAssertEqual(storage.parcels.map(\.isFrozen), [true])
         XCTAssertEqual(storage.keys, [:])
         XCTAssertEqual(storage.forgetting, [:])
         let gone = try await DeliveryAPIClient.publicParcel(linkID: "22222222222A", configuration: configuration, transport: transport)

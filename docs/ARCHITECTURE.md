@@ -196,11 +196,11 @@ Key server modules:
     key, the name given on the device and the last answer. The name is never sent to the
     public routes; it becomes the parcel's label only when the parcel is kept in an account.
     "Forget it now" deletes the link on the server and the device's copy; keeping a parcel
-    in an account drops the device's copy too. Once the service forgets a lookup the browser
-    made (30 days after delivery, or 90 days without news), its copy stays, marked no longer
-    updated, without its key or link notes, and is never read again; a new lookup of the
-    same number replaces it. A copy of a link someone shared goes, since the 404 doesn't say
-    why it ended.
+    in an account drops the device's copy too. Once the service forgets a lookup the browser,
+    or the iPhone or Android app, made (30 days after delivery, or 90 days without news), its
+    copy stays, marked no longer updated, without its key or link notes, and is never read
+    again; a new lookup of the same number replaces it. A copy of a link someone shared goes,
+    since the 404 doesn't say why it ended.
   - Archiving a parcel is the browser's alone, as in the apps: its page offers Archive among
     its actions once the journey is over, and at its foot before then. The list folds the
     archived parcels at its end, never leads with one and doesn't read them in the

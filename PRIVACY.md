@@ -312,8 +312,8 @@ history it showed, so the parcel is still there offline. For each parcel they lo
 Android apps also note whether you gave a postcode with the lookup, so they
 don't ask for one again. The note is a yes or no and never holds the postcode.
 The list stays on the device until the parcel is forgotten or kept in an
-account. In the browser and the Android app, a parcel it looked up stays in
-the list after the service forgets the lookup, marked as no longer updated,
+account. In the browser and the iPhone and Android apps, a parcel it looked up
+stays in the list after the service forgets the lookup, marked as no longer updated,
 with its last tracking history and without its key, until you remove it or
 clear the site's or the app's data. To open the list on another phone or computer, the browser makes a link,
 or a code to scan, that carries each parcel's link, key and name after its `#`.

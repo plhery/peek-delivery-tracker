@@ -35,9 +35,15 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// Its notifications were turned off with the bell on its page: rounds pass over it until they are turned on there
     /// again.
     var muted: Bool? = nil
+    /// When this iPhone found that the service had forgotten its lookup (30 days after delivery, or 90 days without
+    /// news): the parcel then stays as it was last shown, no longer updated, without its key or notifications, and is
+    /// never read again, until it is removed here or a new lookup of its number takes its place. Nil while the service
+    /// has it.
+    var frozen: String? = nil
 
     var isViewer: Bool { viewer == true }
     var isMuted: Bool { muted == true }
+    var isFrozen: Bool { frozen != nil }
 
     /// What `openedNews` holds for a parcel seen before its first scan: earlier than any news.
     static let seenBeforeAnyNews = "1970-01-01T00:00:00Z"
@@ -279,11 +285,11 @@ struct DeviceParcelFiles: DeviceParcelStorage {
 
     /// A parcel of this iPhone's own without its key cannot be read or forgotten. A key without its
     /// parcel is the parcel's to read again. A parcel followed through someone else's link needs no
-    /// key, and a key beside it opens nothing.
+    /// key, nor does a copy the service has forgotten, and a key beside either opens nothing.
     static func matched(_ parcels: [DeviceParcel], keys: [String: String]) -> (parcels: [DeviceParcel], keys: [String: String]) {
-        let kept = parcels.filter { $0.isViewer || keys[$0.linkID] != nil }
-        let viewers = Set(kept.filter(\.isViewer).map(\.linkID))
-        return (kept, keys.filter { !viewers.contains($0.key) })
+        let kept = parcels.filter { $0.isViewer || $0.isFrozen || keys[$0.linkID] != nil }
+        let keyless = Set(kept.filter { $0.isViewer || $0.isFrozen }.map(\.linkID))
+        return (kept, keys.filter { !keyless.contains($0.key) })
     }
 
     func save(_ parcels: [DeviceParcel], keys: [String: String]) {
@@ -415,8 +421,9 @@ final class DeviceParcels {
     /// When the service last answered about one of the parcels: how old what the list shows is at most.
     var lastCheckedAt: Date? { entries.map(\.checkedAt).max() }
 
-    /// Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon.
-    var isWaiting: Bool { entries.contains { Self.waiting($0.parcel) } }
+    /// Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon. A copy no
+    /// longer updated waits for nothing.
+    var isWaiting: Bool { entries.contains { !$0.isFrozen && Self.waiting($0.parcel) } }
 
     func detect(trackingNumber: String, typedNumber: String? = nil) async throws -> CarrierDetectionResponse {
         guard let client else { throw DeliveryAPIError.serviceFailed(503) }
@@ -434,7 +441,7 @@ final class DeviceParcels {
     private func lookUp(_ request: CreatePackageRequest, replacing id: UUID?) async throws -> Parcel {
         guard let client else { throw DeliveryAPIError.serviceFailed(503) }
         if let existing = entries.first(where: {
-            $0.parcel.id != id && $0.parcel.trackingNumber == request.trackingNumber && $0.parcel.carrier == request.carrier
+            $0.parcel.id != id && !$0.isFrozen && $0.parcel.trackingNumber == request.trackingNumber && $0.parcel.carrier == request.carrier
         }) {
             throw DeliveryAPIError.duplicateTracking(existing.parcel.id)
         }
@@ -451,6 +458,12 @@ final class DeviceParcels {
                                  parcel: Parcel(shared: response.package), checkedAt: now(),
                                  postcodeGiven: request.dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil)
         entry.startSeen()
+        // A copy no longer updated of the same parcel or number gives way to the new lookup, and leaves it its name.
+        let superseded = entries.filter { Self.supersedes(entry.parcel, $0, number: request.trackingNumber) }
+        if !superseded.isEmpty {
+            entries.removeAll { Self.supersedes(entry.parcel, $0, number: request.trackingNumber) }
+            if entry.label.isEmpty, let name = superseded.lazy.compactMap(\.label.nonEmpty).first { entry.label = name }
+        }
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
         if let twin = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
             let old = entries.remove(at: twin)
@@ -479,8 +492,9 @@ final class DeviceParcels {
     }
 
     /// Reads every parcel whose answer has gone stale, or every one when `all`, and brings back
-    /// the ones whose last answer was lost. A parcel the service no longer has leaves the list.
-    /// The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
+    /// the ones whose last answer was lost. A lookup of this iPhone's own that the service no longer has stays as it was
+    /// last shown, no longer updated (`freeze`); someone else's parcel it no longer has leaves the list, as the answer
+    /// doesn't say why its link ended. A copy no longer updated is never read again. The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
     /// window on screen. Returns whether the service answered anything, a forget included.
     @discardableResult
     func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws -> Bool {
@@ -491,7 +505,7 @@ final class DeviceParcels {
         var trouble: Error?
         for entry in entries where id == nil || entry.parcel.id == id {
             let key = keys[entry.linkID]
-            guard key != nil || entry.isViewer else { continue }
+            guard !entry.isFrozen, key != nil || entry.isViewer else { continue }
             let age = now().timeIntervalSince(entry.checkedAt)
             let settled = Self.over(entry.parcel)
             let fresh = Self.waiting(entry.parcel) ? Self.waitingFresh : settled ? Self.settledFresh : Self.fresh
@@ -504,9 +518,11 @@ final class DeviceParcels {
                     entries[index].take(Parcel(shared: response.package))
                     entries[index].checkedAt = now()
                     if entry.isViewer { entries[index].canKeep = response.link.canKeep }
-                } else {
+                } else if entries[index].isViewer {
                     entries.remove(at: index)
                     keys[entry.linkID] = nil
+                } else {
+                    freeze(at: index)
                 }
             } catch {
                 trouble = error
@@ -519,6 +535,27 @@ final class DeviceParcels {
         save()
         if let trouble { throw trouble }
         return contacted
+    }
+
+    /// The service no longer has this iPhone's own lookup: the parcel stays as it was last shown, marked as no longer
+    /// updated. Its key goes, and its notifications with it, which went with the link.
+    private func freeze(at index: Int) {
+        let linkID = entries[index].linkID
+        keys[linkID] = nil
+        alertsAsked[linkID] = nil
+        entries[index].frozen = DateParser.isoString(now())
+        entries[index].alertToken = nil
+        entries[index].alertPreset = nil
+        entries[index].muted = nil
+    }
+
+    /// Whether `copy` is a copy no longer updated that `parcel`, newly answered, takes the place of: the same parcel, or
+    /// the same number.
+    private static func supersedes(_ parcel: Parcel, _ copy: DeviceParcel, number: String? = nil) -> Bool {
+        guard copy.isFrozen else { return false }
+        if copy.parcel.id == parcel.id { return true }
+        let numbers = Set([parcel.trackingNumber, number ?? ""].filter { !$0.isEmpty })
+        return numbers.contains(copy.parcel.trackingNumber)
     }
 
     /// Reads again, with its key, each parcel of this iPhone's own whose entry was lost or couldn't
@@ -536,6 +573,10 @@ final class DeviceParcels {
                 keys[linkID] = nil
                 continue
             }
+            // A copy no longer updated of the same parcel gives way to it, and leaves it its name.
+            let parcel = Parcel(shared: response.package)
+            let name = entries.lazy.filter { Self.supersedes(parcel, $0) }.compactMap(\.label.nonEmpty).first
+            entries.removeAll { Self.supersedes(parcel, $0) }
             if let index = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
                 if entries[index].isViewer {
                     upgradeViewer(at: index, with: response, key: key)
@@ -544,7 +585,7 @@ final class DeviceParcels {
                 }
                 continue
             }
-            var entry = DeviceParcel(linkID: linkID, label: "", archivedAt: nil, parcel: Parcel(shared: response.package), checkedAt: now())
+            var entry = DeviceParcel(linkID: linkID, label: name ?? "", archivedAt: nil, parcel: parcel, checkedAt: now())
             entry.startSeen()
             entries.append(entry)
         }
@@ -674,8 +715,9 @@ final class DeviceParcels {
     /// one's place and name.
     func changeCarrier(id: UUID, carrier: CarrierID, trackingURL: String?, dpdPostcode: String?,
                        dpdPostcodeCountry: String? = nil, phoneDigits: String? = nil) async throws -> Parcel {
-        // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change.
-        guard let entry = entries.first(where: { $0.parcel.id == id }), !entry.isViewer else { throw DeliveryAPIError.parcelMissing }
+        // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change. A copy no
+        // longer updated has nothing left to change.
+        guard let entry = entries.first(where: { $0.parcel.id == id }), !entry.isViewer, !entry.isFrozen else { throw DeliveryAPIError.parcelMissing }
         let added = try await lookUp(CreatePackageRequest(
             trackingNumber: entry.parcel.trackingNumber, label: entry.label, carrier: carrier,
             trackingURL: trackingURL, dpdPostcode: dpdPostcode, dpdPostcodeCountry: dpdPostcodeCountry,
@@ -729,7 +771,7 @@ final class DeviceParcels {
 
     /// What an account needs to take the device's parcels over: its own with their keys, those whose
     /// saved copy was lost included, and someone else's that the link lets an account keep. Never a
-    /// link still to be forgotten: those are not among the keys.
+    /// link still to be forgotten, nor a copy no longer updated: neither has a key.
     var claims: [ClaimParcelLink] {
         let listed = entries.compactMap { entry -> ClaimParcelLink? in
             if entry.isViewer { return entry.canKeep == true ? ClaimParcelLink(id: entry.linkID, label: entry.label.nonEmpty) : nil }
@@ -752,6 +794,9 @@ final class DeviceParcels {
 
     /// The parcel this iPhone follows through a link, as the list shows it.
     func parcelID(linkID: String) -> UUID? { entries.first { $0.linkID == linkID }?.parcel.id }
+
+    /// Whether the parcel is a copy the service has forgotten, no longer updated.
+    func isFrozen(id: UUID) -> Bool { entries.first { $0.parcel.id == id }?.isFrozen == true }
 
     /// The account has these parcels now, or their links lead nowhere: the device lets go of them,
     /// and of their notifications here, which the account's own take over.
@@ -779,14 +824,22 @@ final class DeviceParcels {
         let linkID = response.link.id
         guard ParcelLinkRoute.validID(linkID) else { throw DeliveryAPIError.invalidResponse }
         let key = key.flatMap { response.link.role == .owner && ParcelLinkRoute.validKey($0) ? $0 : nil }
+        // A copy no longer updated of the same parcel or number gives way to the link, and leaves it its name.
+        let shared = Parcel(shared: response.package)
+        let superseded = entries.filter { $0.linkID == linkID && $0.isFrozen || Self.supersedes(shared, $0) }
+        entries.removeAll { $0.linkID == linkID && $0.isFrozen || Self.supersedes(shared, $0) }
+        let label = label?.nonEmpty ?? superseded.lazy.compactMap(\.label.nonEmpty).first
         if let index = entries.firstIndex(where: { $0.linkID == linkID || $0.parcel.id == response.package.id }) {
-            guard let key, entries[index].isViewer else { return (entries[index].parcel.id, false) }
+            guard let key, entries[index].isViewer else {
+                if !superseded.isEmpty { save() }
+                return (entries[index].parcel.id, false)
+            }
             upgradeViewer(at: index, with: response, key: key)
             save()
             return (entries[index].parcel.id, false)
         }
-        var entry = DeviceParcel(linkID: linkID, label: label?.nonEmpty ?? "", archivedAt: nil,
-                                 parcel: Parcel(shared: response.package), checkedAt: now())
+        var entry = DeviceParcel(linkID: linkID, label: label ?? "", archivedAt: nil,
+                                 parcel: shared, checkedAt: now())
         entry.startSeen()
         // Followed again before its notifications were turned off: they go on, and are its own again.
         if let left = forgotten.first(where: { $0.linkID == linkID }) {
@@ -837,8 +890,8 @@ final class DeviceParcels {
     /// (`heldReturn`), which the server keeps checking and alerting on.
     static func over(_ parcel: Parcel) -> Bool { parcel.currentStage?.isFinal == true && !parcel.heldReturn }
 
-    /// Whether a parcel is still on its way, with something left to tell.
-    var hasParcelsOnTheirWay: Bool { entries.contains { !Self.over($0.parcel) } }
+    /// Whether a parcel is still on its way, with something left to tell: a copy no longer updated has nothing.
+    var hasParcelsOnTheirWay: Bool { entries.contains { !$0.isFrozen && !Self.over($0.parcel) } }
 
     /// Turns notifications on, on this iPhone's token and in its language, for every parcel still
     /// on its way: once a launch, and again when the token or the language changes. A parcel that
@@ -848,7 +901,8 @@ final class DeviceParcels {
     ///
     /// Each parcel's notifications tell what `preset` says, the one chosen for every parcel in Settings: a new one asks
     /// again for those already on, and the service replaces what they told. Until one is chosen (nil), a parcel keeps
-    /// what it was first asked for, or is given `alertPreset(for:)`'s. A parcel turned off with its bell is passed over.
+    /// what it was first asked for, or is given `alertPreset(for:)`'s. A parcel turned off with its bell is passed over,
+    /// and so is a copy no longer updated.
     func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current,
                         preset chosen: ParcelAlertPreset? = nil) async {
         let wanted = AlertsWanted(token: token, locale: locale, environment: environment, preset: chosen)
@@ -865,11 +919,13 @@ final class DeviceParcels {
         // How long the service asked to be left alone, when the round is cut short.
         var pause: TimeInterval?
         defer { if round == alertGeneration { holdAlerts(pause, wanted) } }
-        let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted }.prefix(Self.alertsPerRound)
+        let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted && !$0.isFrozen }
+            .prefix(Self.alertsPerRound)
         for entry in due {
             guard round == alertGeneration else { return }
-            // Forgotten, followed through another link or turned off with its bell since the round began.
-            guard entries.contains(where: { $0.linkID == entry.linkID && !$0.isMuted }) else { continue }
+            // Forgotten, followed through another link, turned off with its bell or forgotten by the service since the
+            // round began.
+            guard entries.contains(where: { $0.linkID == entry.linkID && !$0.isMuted && !$0.isFrozen }) else { continue }
             let preset = chosen ?? entry.alertPreset ?? Self.alertPreset(for: entry.parcel)
             let answer: DeviceAlertAnswer
             do {
@@ -894,8 +950,8 @@ final class DeviceParcels {
                 if answer == .on { await stopAlert(entry, token: token, client) }
                 continue
             }
-            if entries[index].isMuted {
-                // Turned off with its bell while the service was asked.
+            if entries[index].isMuted || entries[index].isFrozen {
+                // Turned off with its bell, or forgotten by the service, while the service was asked.
                 if answer == .on { try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token)) }
                 continue
             }

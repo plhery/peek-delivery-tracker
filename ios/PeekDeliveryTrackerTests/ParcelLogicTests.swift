@@ -2937,6 +2937,31 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(unseen, DeliveredHold())
     }
 
+    func testACopyNoLongerUpdatedNeverLeadsTheListAsksNothingAndHasNoLinkOrCarrierToChange() {
+        let tea = UUID(), lamp = UUID()
+        let earlier = DateParser.isoString(Date().addingTimeInterval(-7_200))
+        let parcels = [
+            makeParcel(id: tea, events: [event(tea, .outForDelivery, earlier)]),
+            makeParcel(id: lamp, events: [event(lamp, .failedAttempt, earlier)]),
+        ]
+        func layout(frozen: Set<UUID>) -> DeliveryListLayout {
+            DeliveryListLayout(parcels: parcels, query: "", status: .all, carrier: nil, sort: .standard, featuresNext: true, frozen: frozen)
+        }
+        let live = layout(frozen: [])
+        XCTAssertEqual(live.next?.id, tea)
+        XCTAssertEqual(live.kind(of: lamp), .attention)
+        let frozen = layout(frozen: [tea, lamp])
+        XCTAssertNil(frozen.next)
+        XCTAssertEqual(frozen.kind(of: tea), .onTheWay)
+        XCTAssertEqual(frozen.kind(of: lamp), .onTheWay)
+        XCTAssertEqual(frozen.active.count, 2)
+
+        XCTAssertEqual(ParcelMenuItem.menu(for: parcels[0], onCard: true, frozen: true),
+                       [[.open], [.rename, .copyTrackingNumber], [.archive], [.delete]])
+        XCTAssertEqual(ParcelMenu.items(for: parcels[0], reader: false, frozen: true),
+                       [[.rename, .copyTrackingNumber], [.archive], [.delete]])
+    }
+
     func testADeliveryTheListDidNotSeeArrivesOnItTheNextTimeItIsInView() throws {
         let suite = "ParcelLogicTests.onTheWay.\(UUID().uuidString)"
         let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))

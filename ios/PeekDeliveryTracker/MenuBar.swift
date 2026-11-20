@@ -49,8 +49,8 @@ struct ParcelMenu {
     let choose: (ParcelMenuItem) -> Void
 
     /// The card's items without Open, as the page in front is open already. A page shares with its own button.
-    static func items(for parcel: Parcel, reader: Bool) -> [[ParcelMenuItem]] {
-        ParcelMenuItem.menu(for: parcel, onCard: true, reader: reader).filter { $0 != [.open] }
+    static func items(for parcel: Parcel, reader: Bool, frozen: Bool = false) -> [[ParcelMenuItem]] {
+        ParcelMenuItem.menu(for: parcel, onCard: true, reader: reader, frozen: frozen).filter { $0 != [.open] }
     }
 
     /// What the Parcel menu shows, dimmed, while no parcel is in front.

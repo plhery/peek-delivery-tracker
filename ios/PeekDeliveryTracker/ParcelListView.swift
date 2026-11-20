@@ -1409,12 +1409,14 @@ private struct DeliveryListView: View {
                         .modifier(arrivalCelebration(for: parcel.id, stubInset: 49))
                         .id(parcel.id)
                     } else {
+                        let frozen = store.isFrozen(parcel)
                         ExperimentalParcelPassCard(
                             parcel: parcel,
-                            notice: section.kind == .attention
+                            notice: section.kind == .attention && !frozen
                                 ? parcel.notice().map { localizer.text($0.localizationKey) }
                                 : nil,
                             transition: parcelTransition,
+                            frozen: frozen,
                             selected: parcel.id == selectedCard,
                             menu: menu(for: parcel),
                             onOpen: { open(parcel.id) },
@@ -1448,7 +1450,7 @@ private struct DeliveryListView: View {
         let notice = flagged && !arrived ? shown(parcel).notice().map { localizer.text($0.localizationKey) } : nil
         return ExperimentalParcelPassCard(
             parcel: shown(parcel), notice: notice, transition: parcelTransition,
-            arrived: arrived, onName: { places.name(parcel.id, at: $0) },
+            arrived: arrived, frozen: store.isFrozen(parcel), onName: { places.name(parcel.id, at: $0) },
             selected: parcel.id == selectedCard, menu: menu(for: shown(parcel)),
             onOpen: { open(parcel.id) }, onArchive: { await archive(parcel) }
         )
@@ -1460,7 +1462,7 @@ private struct DeliveryListView: View {
     private func arrangement(of parcels: [Parcel]) -> DeliveryListLayout {
         DeliveryListLayout(
             parcels: parcels, query: query, status: statusFilter,
-            carrier: carrierFilter, sort: sort, featuresNext: !hasCustomView
+            carrier: carrierFilter, sort: sort, featuresNext: !hasCustomView, frozen: store.frozenOnTheirWay
         )
     }
 
@@ -1590,7 +1592,8 @@ private struct DeliveryListView: View {
     /// A card's menu: the actions of the parcel's page, with opening and sharing the parcel.
     private func menu(for parcel: Parcel) -> CardMenu {
         CardMenu(
-            items: ParcelMenuItem.menu(for: parcel, onCard: true, reader: store.viewerLink(for: parcel) != nil),
+            items: ParcelMenuItem.menu(for: parcel, onCard: true, reader: store.viewerLink(for: parcel) != nil,
+                                       frozen: store.isFrozen(parcel)),
             // The keys act on the parcel shown beside the list: its card's menu shows them.
             shortcuts: parcel.id == selectedCard && keyboardFree && !searchFocused,
             choose: { chose($0, on: parcel) },
@@ -1895,6 +1898,8 @@ private struct ExperimentalParcelPassCard: View {
     let transition: Namespace.ID
     /// Just delivered, and still shown among the parcels on their way.
     var arrived = false
+    /// A copy the service has forgotten, no longer updated.
+    var frozen = false
     /// Drawn for its look alone, on a card that flies over the list.
     var decorative = false
     /// Where the parcel's name is written, in the list's space.
@@ -1917,7 +1922,11 @@ private struct ExperimentalParcelPassCard: View {
     }
     /// New since the parcel was last opened: a dot before the status line, which VoiceOver says first.
     private var marked: Bool { parcel.showsNewUpdate(marking: marksNewUpdates) }
-    private var date: String? { localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel) }
+    /// A copy no longer updated of a parcel still on its way says so in place of its estimate; one that arrived needs no mark.
+    private var date: String? {
+        if frozen, parcel.currentStage?.isFinal != true { return localizer.text("link.frozen.label") }
+        return localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel)
+    }
     /// Scans with places are drawn as a small route at the end of the card.
     private var placed: Bool { parcel.hasMappedPlace }
     /// At the largest text sizes the words take the whole card, and the route goes.
@@ -1933,7 +1942,7 @@ private struct ExperimentalParcelPassCard: View {
     }
     /// The carrier's site down tells why no update comes, unless the carrier waits on the reader.
     private var outage: String? {
-        guard !actionNeeded, let outage = parcel.shownCarrierOutage else { return nil }
+        guard !actionNeeded, !frozen, let outage = parcel.shownCarrierOutage else { return nil }
         return localizer.text("attention.carrier_outage",
                               ["carrier": catalog.info(for: outage.carrier, language: localizer.language).displayName])
     }
@@ -1941,7 +1950,7 @@ private struct ExperimentalParcelPassCard: View {
         let carrierIssue = !actionNeeded && [TrackingStage.customs, .readyForPickup].contains { $0 == parcel.currentStage }
         if let notice, !carrierIssue, outage == nil { return notice }
         if let outage { return outage }
-        return parcel.updateFailed ? localizer.text("attention.sync_error") : nil
+        return parcel.updateFailed && !frozen ? localizer.text("attention.sync_error") : nil
     }
     private var flagSymbol: String {
         if notice != nil, actionNeeded { return "exclamationmark.triangle" }

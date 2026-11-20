@@ -690,7 +690,9 @@ final class ParcelStore: ObservableObject {
     /// The parcel this iPhone follows itself behind a link, by the link or by the parcel.
     func followedHere(_ response: PublicParcelResponse) -> UUID? {
         guard tracksWithoutAccount, session.user == nil else { return nil }
-        return device.parcelID(linkID: response.link.id) ?? device.list().first { $0.id == response.package.id }?.id
+        // A copy no longer updated of the same parcel gives way to the link, which `follow` takes it over with.
+        return device.parcelID(linkID: response.link.id)
+            ?? device.list().first { $0.id == response.package.id && !device.isFrozen(id: $0.id) }?.id
     }
 
     /// The parcel this iPhone follows through a link, for a notification about it.
@@ -712,6 +714,19 @@ final class ParcelStore: ObservableObject {
     /// of it, and the sign that its carrier and details are not this iPhone's to change.
     func viewerLink(for parcel: Parcel) -> String? {
         isGuest ? device.viewerLink(id: parcel.id) : nil
+    }
+
+    /// Whether the parcel is a lookup of this iPhone's own that the service has forgotten: its last copy, no longer
+    /// updated, with nothing left to share, check, change or be notified about.
+    func isFrozen(_ parcel: Parcel) -> Bool {
+        isGuest && device.isFrozen(id: parcel.id)
+    }
+
+    /// The parcels the list shows as no longer updated that were still on their way: none can lead the list or the
+    /// widget, and none has an estimate left to give.
+    var frozenOnTheirWay: Set<UUID> {
+        guard isGuest else { return [] }
+        return Set(parcels.filter { $0.currentStage?.isFinal != true && device.isFrozen(id: $0.id) }.map(\.id))
     }
 
     // MARK: - Notifications without an account
@@ -1684,10 +1699,13 @@ final class ParcelStore: ObservableObject {
     private func publishDeliveryWidget() {
         let snapshot: DeliveryWidgetSnapshot?
         if session.isAuthenticated || isGuest {
+            // A copy no longer updated of a parcel on its way says nothing true about today.
+            let frozen = frozenOnTheirWay
             snapshot = DeliveryWidgetSnapshot(
                 generatedAt: Date(),
                 languageCode: localizer.language.rawValue,
-                parcels: carded(Self.widgetDeliveries(of: parcels, localizer: localizer, marking: markNewUpdates))
+                parcels: carded(Self.widgetDeliveries(of: parcels.filter { !frozen.contains($0.id) },
+                                                      localizer: localizer, marking: markNewUpdates))
             )
         } else {
             snapshot = nil

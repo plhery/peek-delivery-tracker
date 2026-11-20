@@ -1174,9 +1174,10 @@ enum ParcelMenuItem: Hashable {
     /// page's own button does. Every parcel in the list can be changed, in the demo and without an account as
     /// well: an archived one is brought back rather than archived. A `reader` follows someone else's parcel
     /// through its link: its page shares the link as it is, its carrier is not the reader's to change, and a
-    /// number the link hides cannot be copied.
-    static func menu(for parcel: Parcel, onCard: Bool, reader: Bool = false) -> [[Self]] {
-        let changes: [Self] = reader
+    /// number the link hides cannot be copied. A copy no longer updated (`frozen`) has no link left to share and no
+    /// carrier to change.
+    static func menu(for parcel: Parcel, onCard: Bool, reader: Bool = false, frozen: Bool = false) -> [[Self]] {
+        let changes: [Self] = reader || frozen
             ? [.rename] + (parcel.trackingNumber.isEmpty ? [] : [.copyTrackingNumber])
             : [.rename] + (onCard ? [.share] : []) + [.copyTrackingNumber, .changeCarrier]
         return (onCard ? [[.open]] : []) + [changes, [parcel.isArchived ? .restore : .archive], [.delete]]
@@ -1240,6 +1241,7 @@ struct DeliveryListLayout {
         carrier: CarrierID?,
         sort: ParcelSort,
         featuresNext: Bool,
+        frozen: Set<UUID> = [],
         now: Date = Date(),
         catalog: CarrierCatalog = .shared
     ) {
@@ -1247,9 +1249,11 @@ struct DeliveryListLayout {
             parcels, query: query, status: status, carrier: carrier, sort: sort, now: now, catalog: catalog
         )
         active = visible.filter(\.isActive)
-        let next = featuresNext ? ParcelOrganizer.nextDelivery(from: active, now: now) : nil
+        // A copy no longer updated (`frozen`) never leads the list, and asks nothing of its reader any more.
+        let next = featuresNext ? ParcelOrganizer.nextDelivery(from: active.filter { !frozen.contains($0.id) }, now: now) : nil
         self.next = next
-        let others = active.filter { $0.id != next?.id }.map { (parcel: $0, attention: $0.attention(now: now)) }
+        let others = active.filter { $0.id != next?.id }
+            .map { (parcel: $0, attention: frozen.contains($0.id) ? nil : $0.attention(now: now)) }
         attention = others.filter { $0.attention != nil }.map(\.parcel)
         remaining = others.filter { $0.attention == nil }.map(\.parcel)
         sections = ParcelOrganizer.sections(from: visible, now: now).filter {

@@ -138,7 +138,8 @@ struct ParcelDetailView: View {
                 ToolbarItem(placement: .topBarTrailing) {
                     Menu {
                         ParcelMenuButtons(
-                            items: ParcelMenuItem.menu(for: parcel, onCard: false, reader: store.viewerLink(for: parcel) != nil),
+                            items: ParcelMenuItem.menu(for: parcel, onCard: false, reader: store.viewerLink(for: parcel) != nil,
+                                                       frozen: store.isFrozen(parcel)),
                             busy: working, shortcuts: keyboard
                         ) { chose($0, on: parcel) }
                     } label: {
@@ -228,6 +229,8 @@ struct ParcelDetailView: View {
 
     /// What the question at the end of the page is asked about, or nil while it asks nothing.
     private func feedbackPage(_ parcel: Parcel) -> ParcelFeedbackModel.Page? {
+        // A copy no longer updated is past asking about.
+        if store.isFrozen(parcel) { return nil }
         // The demo's stories and the sample are made up: nothing is asked of them.
         var madeUp = store.isDemo || sample != nil
         #if DEBUG
@@ -286,7 +289,9 @@ struct ParcelDetailView: View {
         let opensAlerts = email?.bellOpensAlerts(for: parcel) == true
         // Someone else's parcel, followed through its link: the link is shared as it is, and the carrier is theirs to change.
         let readerLink = store.viewerLink(for: parcel)
-        let editable = sample == nil && readerLink == nil
+        // A lookup the service forgot is this iPhone's copy alone: nothing on it can be shared, changed or notified any more.
+        let frozen = store.isFrozen(parcel)
+        let editable = sample == nil && readerLink == nil && !frozen
         // A lookup without an account keeps its postcode off the parcel: the iPhone notes only whether it had one.
         let postcodeGiven = store.postcodeGiven(for: parcel)
 
@@ -348,7 +353,7 @@ struct ParcelDetailView: View {
                             .buttonStyle(.plain)
                             .foregroundStyle(branding.ink.opacity(0.75))
                             .accessibilityLabel(localizer.text("link.shareAria"))
-                        } else if sample == nil {
+                        } else if sample == nil, !frozen {
                             Button { showingShare = true } label: {
                                 Image(systemName: "square.and.arrow.up")
                                     .font(.system(size: cardSymbol * 16 / 17))
@@ -360,7 +365,7 @@ struct ParcelDetailView: View {
                             .accessibilityLabel(localizer.text("link.shareAria"))
                         }
                         // Without an account, the bell turns the parcel's notifications on this iPhone off or on.
-                        if sample == nil {
+                        if sample == nil, !frozen {
                             Button {
                                 if opensAlerts {
                                     showingAlerts = true
@@ -474,10 +479,16 @@ struct ParcelDetailView: View {
                             .font(.caption.weight(.semibold))
                     }
                 }
+                if frozen {
+                    ParcelFlag(text: parcel.lastSyncedAt.flatMap(DateParser.date).map {
+                        localizer.text("link.frozen.banner", ["time": localizer.abbreviatedDateTime($0)])
+                    } ?? localizer.text("link.frozen.label"), symbol: "info.circle", calm: true)
+                }
                 VStack(alignment: .leading, spacing: 6) {
                     Text(localizer.parcelStatus(parcel))
                         .font(.subheadline)
-                    if let date = localizer.parcelCompletionDate(parcel) ?? localizer.parcelDeliveryWindow(parcel) {
+                    // A copy no longer updated has no estimate left to give.
+                    if let date = localizer.parcelCompletionDate(parcel) ?? (frozen ? nil : localizer.parcelDeliveryWindow(parcel)) {
                         Text(date).font(.caption)
                     }
                 }
@@ -485,7 +496,7 @@ struct ParcelDetailView: View {
                 .fixedSize(horizontal: false, vertical: true)
                 // A label a day old or more: the sender still has the parcel, and the carrier can tell nothing until they hand it over;
                 // unless the carrier wrote the rest of its timeline ahead, whose note says where to look instead.
-                if !parcel.isArchived, parcel.awaitingHandover(), parcel.writtenAheadBy == nil {
+                if !parcel.isArchived, !frozen, parcel.awaitingHandover(), parcel.writtenAheadBy == nil {
                     Text(localizer.text("parcel.awaitingHandover",
                                         ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
                         .font(.caption).foregroundStyle(Brand.secondaryText)
@@ -499,7 +510,7 @@ struct ParcelDetailView: View {
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 // A return the carrier still scans on its way back stays returned, and Peek keeps following it.
-                if !parcel.isArchived, parcel.heldReturn {
+                if !parcel.isArchived, !frozen, parcel.heldReturn {
                     Text(localizer.text("parcel.returnUnderWay",
                                         ["carrier": catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName]))
                         .font(.caption).foregroundStyle(Brand.secondaryText)
@@ -563,7 +574,7 @@ struct ParcelDetailView: View {
             }
             // A carrier to name: without one the note would say Peek keeps asking an unknown carrier. A label waiting for
             // its handover has not gone quiet on the way: the card says the sender still has it.
-            if !parcel.isArchived, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled, !parcel.awaitingHandover() {
+            if !parcel.isArchived, !frozen, parcel.displayedCarrier != .unknown, parcel.attention() == .stalled, !parcel.awaitingHandover() {
                 ParcelQuietNote(parcel: parcel, tint: branding.ink)
             }
             shipmentIdentity(parcel, links: trackingLinks, tint: branding.ink)
@@ -924,10 +935,12 @@ struct ParcelDetailView: View {
     }
 
     private func syncStatus(_ parcel: Parcel, tint: Color) -> some View {
-        HStack(spacing: 7) {
+        // A copy no longer updated is never checked again.
+        let frozen = store.isFrozen(parcel)
+        return HStack(spacing: 7) {
             // When the carrier was last asked and last said something, as the web says them.
             VStack(alignment: .leading, spacing: 3) {
-                if let next = parcel.carrierData?.routing?.nextCheckAt.flatMap(DateParser.date), !parcel.isArchived {
+                if let next = parcel.carrierData?.routing?.nextCheckAt.flatMap(DateParser.date), !parcel.isArchived, !frozen {
                     Text(localizer.text("detail.nextCheckAfter", ["date": localizer.abbreviatedDateTime(next)]))
                         .font(.caption)
                 }
@@ -939,7 +952,7 @@ struct ParcelDetailView: View {
                 }
             }
 
-            if sample == nil && !parcel.isArchived && catalog.tracksAutomatically(parcel.activeTrackingCarrier) {
+            if sample == nil && !parcel.isArchived && !frozen && catalog.tracksAutomatically(parcel.activeTrackingCarrier) {
                 Button {
                     run { try await store.refresh(parcel) }
                 } label: {
@@ -974,7 +987,8 @@ struct ParcelDetailView: View {
     private var keys: some View {
         KeyboardShortcuts {
             if let parcel, sample == nil {
-                ForEach(ParcelMenuItem.menu(for: parcel, onCard: false, reader: store.viewerLink(for: parcel) != nil)
+                ForEach(ParcelMenuItem.menu(for: parcel, onCard: false, reader: store.viewerLink(for: parcel) != nil,
+                                            frozen: store.isFrozen(parcel))
                     .joined().filter { $0.shortcut != nil }, id: \.self) { item in
                     Button(localizer.text(item.titleKey)) { chose(item, on: parcel) }
                         .keyboardShortcut(item.shortcut)
@@ -1000,7 +1014,8 @@ struct ParcelDetailView: View {
     /// The menu bar's Parcel menu, which the page answers.
     private var parcelMenu: ParcelMenu? {
         guard let parcel, sample == nil else { return nil }
-        return ParcelMenu(items: ParcelMenu.items(for: parcel, reader: store.viewerLink(for: parcel) != nil), busy: working) {
+        return ParcelMenu(items: ParcelMenu.items(for: parcel, reader: store.viewerLink(for: parcel) != nil,
+                                                  frozen: store.isFrozen(parcel)), busy: working) {
             chose($0, on: parcel)
         }
     }

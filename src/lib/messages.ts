@@ -198,7 +198,7 @@ export function deliveryWindowOpen(from: string | undefined, to: string, now = D
 
 /**
  * A window between two days, or within one day, which it names once: "Tue 5 Mar, 10:00–14:00". Once its first day has
- * passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov".
+ * passed, both ends are dated, as the carrier gave them: "Wed 4 Nov – Fri 6 Nov", "Wed 4 Nov, 16:00 – Fri 6 Nov, 10:00".
  */
 export function localizedDeliveryWindow(from: string | undefined, to: string, t: Translate, languageTag: string, now = Date.now(), use24HourTime = true): string {
   const end = localizedExpectedDelivery(to, t, languageTag, now, use24HourTime);
@@ -211,8 +211,9 @@ export function localizedDeliveryWindow(from: string | undefined, to: string, t:
   }
   const days = windowDays(from, to);
   if (days && days.first < startOfToday(now)) {
-    const ending = timed(to) ? localizedCalendarDateTime(last, languageTag, use24HourTime) : localizedCalendarDate(days.last, languageTag);
-    return `${localizedCalendarDate(days.first, languageTag)} – ${ending}`;
+    const dated = (value: string, date: Date, day: Date) => timed(value)
+      ? localizedCalendarDateTime(date, languageTag, use24HourTime) : localizedCalendarDate(day, languageTag);
+    return `${dated(from, first, days.first)} – ${dated(to, last, days.last)}`;
   }
   return `${localizedExpectedDelivery(from, t, languageTag, now, use24HourTime)} – ${end}`;
 }

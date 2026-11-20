@@ -133,6 +133,9 @@ describe('localization', () => {
     const t: Translate = (key, variables) => translate('en', key, variables);
     expect(localizedDeliveryWindow('2026-11-04', '2026-11-06', t, 'en-CH', now)).toBe('Wed 4 Nov – Fri 6 Nov');
     expect(localizedDeliveryWindow('2026-11-05', '2026-11-07', t, 'en-CH', now)).toBe('today – Sat 7 Nov');
+    // A timed start keeps its hour, as the carrier gave it.
+    expect(localizedDeliveryWindow(new Date(2026, 10, 4, 16).toISOString(), new Date(2026, 10, 6, 10).toISOString(), t, 'en-CH', now))
+      .toBe('Wed 4 Nov, 16:00 – Fri 6 Nov, 10:00');
   });
 
   it('names the day of a window within one day once', () => {

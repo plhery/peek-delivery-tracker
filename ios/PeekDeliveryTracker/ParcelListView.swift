@@ -1130,8 +1130,10 @@ private struct DeliveryListView: View {
                 } description: { Text(localizer.text("view.noResultsDescription")) }
                 actions: { Button(localizer.text("view.clear")) { clearFilters() } }
                     .frame(maxWidth: .infinity).padding(.vertical, 32)
-            // Someone without an account is not told to track another parcel: the row under the cards speaks to them.
-            } else if !session.isGuest, !hasCustomView, store.errorMessage == nil, store.parcels.allSatisfy(\.isDelivered) {
+            // Someone without an account is not told to track another parcel while the row under the cards speaks to
+            // them; once they hid it, they are, as with an account.
+            } else if !(session.isGuest && accountInvitation.stands), !hasCustomView, store.errorMessage == nil,
+                      store.parcels.allSatisfy(\.isDelivered) {
                 VStack(spacing: 12) {
                     Image(systemName: "checkmark").font(.system(size: 36, weight: .ultraLight))
                         .foregroundStyle(Brand.secondaryText).padding(.bottom, 6).accessibilityHidden(true)

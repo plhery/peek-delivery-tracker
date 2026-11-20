@@ -4,7 +4,7 @@ description: Où AliExpress affiche ton numéro de suivi, qui livre en France, e
 slug: suivi-colis-aliexpress
 picture: Une étiquette de colis avec un compte à rebours, un avion au-dessus, et Pip qui attend à la porte, téléphone en main.
 published: 2026-10-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Sur AliExpress, ouvre « Mes commandes », trouve la commande et clique sur « Suivre la commande ». Tu peux aussi taper le numéro sur le site de Cainiao, la branche logistique du groupe Alibaba, vers lequel renvoie l'aide d'AliExpress. Un transporteur de ton pays fait la dernière étape. Le détail de la commande affiche aussi un compte à rebours, celui de ta protection acheteur : si le colis n'arrive pas, ouvre un litige avant la fin, et ne confirme la réception qu'une fois le colis entre tes mains.
@@ -60,7 +60,7 @@ Ce que veulent dire les scans de Cainiao : voir la page [Cainiao](carrier:cainia
 
 Chaque commande a son propre délai de livraison. Le détail de la commande en donne la fin à l'heure du Pacifique (PST), et cette date décide du moment où tu peux ouvrir un litige pour un colis qui avance encore.
 
-**Choice.** Pour la France, AliExpress écrit : « Les articles Choice bénéficient d'un délai de livraison de 6 à 8 jours avec un suivi complet. Vous bénéficierez également de la livraison gratuite pour toute commande supérieure à 10 €. » Les versions de la page pour la Belgique et la Suisse ne parlent pas de Choice.
+**Choice.** Pour la France, AliExpress écrit : « Les articles Choice bénéficient d'un délai de livraison de 6 à 8 jours avec un suivi complet. Vous bénéficierez également de la livraison gratuite pour toute commande supérieure à 10 €. » La version de la page pour la Suisse promet seulement, en anglais, « Free shipping over $10 on all Choice items », sans délai de livraison ; celle pour la Belgique ne parle pas de Choice.
 
 **« Livraison rapide ».** Les articles qui portent cette mention « sont assurés d'arriver avant la date de livraison estimée », dit AliExpress, dans les trois pays. Sinon, tu peux demander :
 
@@ -130,7 +130,7 @@ Peek montre ce que publient les transporteurs. La protection acheteur, les litig
 - [AliExpress : What is Buyer Protection? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015100&language=en) – début au paiement, compte à rebours, message au vendeur
 - [AliExpress : How do I extend the Buyer Protection time? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015071&language=en) – demande sur le site, accord du vendeur
 - [AliExpress : How do I confirm delivery? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015069&language=en) – confirmation de réception, 15 jours, fermeture automatique
-- [AliExpress : L'engagement AliExpress](https://fr.aliexpress.com/p/service-mindset/index.html) – selon le pays de livraison : Choice en France, Colissimo, Colis Privé et La Poste, « Livraison rapide », « perdu en transit », 60 à 120 jours, retards de dédouanement, retour gratuit
+- [AliExpress : L'engagement AliExpress](https://fr.aliexpress.com/p/service-mindset/index.html) – selon le pays de livraison : Choice en France et en Suisse (version suisse lue le 20 novembre 2026), Colissimo, Colis Privé et La Poste, « Livraison rapide », « perdu en transit », 60 à 120 jours, retards de dédouanement, retour gratuit
 - [AliExpress : Politique de livraison rapide](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=fr_FR&m_station=BuyerHelp&questionId=k01000000000000000000000000014mi) – selon le pays de livraison : remboursement après 35 ou 30 jours
 - [AliExpress : Force Majeure (en anglais)](https://www.aliexpress.com/ssr/300000437/H7RW3zBTKC?disableNav=YES&pha_manifest=ssr&_immersiveMode=true) – exclusions
 - [AliExpress : How to open dispute? (en anglais)](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – délai, date en PST, ouverture du litige, PayPal 180 jours

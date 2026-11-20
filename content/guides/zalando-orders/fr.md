@@ -4,7 +4,7 @@ description: Qui livre ta commande Zalando en France, en Belgique et en Suisse, 
 slug: suivi-commande-zalando
 picture: Un colis avec une étiquette en forme de cintre, une camionnette de livraison et Pip prêt à essayer ce qu'il contient.
 published: 2026-10-17
-updated: 2026-10-28
+updated: 2026-11-20
 ---
 
 Dès qu'un colis quitte l'entrepôt, Zalando t'envoie un e-mail de confirmation d'expédition avec le numéro de suivi et le lien vers la page du transporteur. Tu retrouves la même chose dans ton compte, rubrique « Mes commandes ». Une commande peut arriver en plusieurs colis, chacun avec son numéro, surtout quand un partenaire Zalando en expédie une partie lui-même.
@@ -121,7 +121,7 @@ Un retour a son propre numéro de suivi, différent de celui de ta commande. Les
 
 ## Peut-on suivre un colis Zalando dans Peek ?
 
-Oui, avec le numéro du transporteur. Copie-le depuis l'e-mail d'expédition ou « Mes commandes » et colle-le dans [Peek](/). Peek reconnaît La Poste, Colissimo, Mondial Relay, bpost et La Poste suisse à leur numéro. Pour une forme partagée par plusieurs transporteurs, comme 8 ou 14 chiffres, appuie sur « Changer » et choisis celui que l'e-mail indique. Un numéro Mondial Relay à 8 chiffres demande en plus le code postal de livraison.
+Oui, avec le numéro du transporteur. Copie-le depuis l'e-mail d'expédition ou « Mes commandes » et colle-le dans [Peek](/). Peek reconnaît La Poste, Colissimo, bpost et La Poste suisse à leur numéro. Pour une forme partagée par plusieurs transporteurs, comme 14 chiffres, appuie sur « Changer » et choisis celui que l'e-mail indique. Pour Mondial Relay, si Peek affiche un autre transporteur ou aucun, appuie sur « Changer » et choisis-le : Peek ne demande pas à Mondial Relay s'il connaît un numéro de 8, 10, 12 ou 26 chiffres, mais pour un numéro à 8 chiffres que personne ne connaît, il te propose lui-même Mondial Relay, avec un champ pour le code postal de livraison.
 
 Chaque colis a son numéro, ajoute-les donc tous : le colis d'un partenaire n'apparaît pas sous celui de Zalando. Le numéro de commande de l'e-mail de confirmation n'est pas un numéro de suivi, et Peek ne peut pas le suivre.
 

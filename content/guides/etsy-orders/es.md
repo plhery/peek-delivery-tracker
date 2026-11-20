@@ -4,7 +4,7 @@ description: Por qué tu pedido de Etsy aún dice «No enviado», qué transport
 slug: seguimiento-pedido-etsy
 picture: Un paquete atado con cordel y con sellos, una furgoneta de correos y Pip corriendo a toda prisa.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
 Etsy no envía nada por sí mismo: cada tienda fabrica o empaqueta sus pedidos, los envía con el transportista que elige y añade un número de seguimiento cuando el servicio lo tiene. Tu página de Compras te dice si el pedido ha salido de la tienda y cuándo debería llegar; el número de seguimiento te dice dónde está ahora. ¿Llega tarde o no aparece? Pregunta primero al vendedor y después a Etsy.
@@ -104,8 +104,9 @@ Etsy dice que, por lo general, quien compra paga los derechos, impuestos y gasto
 | Pedido | Qué se aplica |
 | --- | --- |
 | Desde un país de la UE | El IVA va incluido en el precio, no pagas nada más |
-| Desde fuera de la UE, menos de 150 EUR | Etsy cobra el IVA al pagar. Se suma un derecho de aduana de 3 EUR por artículo, al pagar o en la entrega |
+| Desde fuera de la UE, menos de 150 EUR | Etsy cobra el IVA al pagar. Se suma un derecho de aduana de 3 EUR por tipo de producto, al pagar o en la entrega |
 | Desde fuera de la UE, más de 150 EUR | Puede que pagues el IVA y los derechos de aduana en la entrega, salvo que el vendedor los haya pagado por adelantado |
+| Desde fuera de la UE, cualquier valor | Desde el 1 de noviembre de 2026 se suma una tasa de tramitación de la UE de 2 EUR por tipo de producto, pagada por adelantado o cobrada por el transportista |
 
 Si un paquete llega tarde o no llega porque rechazaste o no pagaste los cargos de la entrega, la protección de compras de Etsy no lo cubre. Más sobre cargos y plazos: [paquete retenido en aduana](guide:customs).
 
@@ -147,7 +148,7 @@ Sí, con el número del transportista. Pégalo en [Peek](/): reconoce los númer
 - [Etsy: Global Postal Shipping Labels on Etsy (en inglés)](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, dos etiquetas, Tracked on Etsy
 - [Etsy: How to Ship First-Class Flats and Letters (en inglés)](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – seguimiento con Pitney Bowes, sobres rígidos
 - [Etsy: Información para la gestión de envíos internacionales](https://help.etsy.com/hc/es/articles/360001987487-Informaci%C3%B3n-para-la-gesti%C3%B3n-de-env%C3%ADos-internacionales) – transportistas habituales por país
-- [Etsy: ¿Tendré que pagar impuestos, aranceles o tarifas de aduana por mi pedido?](https://help.etsy.com/hc/es/articles/115015691007--Tendr%C3%A9-que-pagar-impuestos-aranceles-o-tarifas-de-aduana-por-mi-pedido) – normas de la UE, 150 EUR, 3 EUR por artículo
+- [Etsy: ¿Tendré que pagar impuestos, aranceles o tarifas de aduana por mi pedido?](https://help.etsy.com/hc/es/articles/115015691007--Tendr%C3%A9-que-pagar-impuestos-aranceles-o-tarifas-de-aduana-por-mi-pedido) – normas de la UE, 150 EUR, 3 EUR por tipo de producto, tasa de tramitación de 2 EUR
 - [Etsy: Programa de protección de compras de Etsy](https://help.etsy.com/hc/es/articles/7471925990807-Programa-de-protecci%C3%B3n-de-compras-de-Etsy) – qué cubre, cargos de aduana, huelgas y meteorología, invitados
 - [Etsy: Cómo obtener ayuda con un pedido](https://help.etsy.com/hc/es/articles/4402660818583-C%C3%B3mo-obtener-ayuda-con-un-pedido) – Ayuda con el pedido, qué puede hacer el vendedor
 - [Etsy: Cómo abrir un caso](https://help.etsy.com/hc/es/articles/5745586898199-C%C3%B3mo-abrir-un-caso) – 48 horas, 30 días, 180 días, PayPal, devoluciones de cargo

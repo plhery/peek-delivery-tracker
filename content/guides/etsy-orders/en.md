@@ -4,14 +4,14 @@ description: Why an Etsy order still says Not Shipped, which carrier the seller 
 slug: etsy-order-tracking
 picture: A parcel tied with string and stamped, a post van, and Pip hurrying along.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
-Etsy doesn't ship anything itself: each shop makes or packs its own orders, posts them with the carrier it chooses, and adds a tracking number when the service has one. Your Purchases page tells you whether the order has left the shop and when it should arrive; the tracking number tells you where it is now. Late or missing? Ask the seller first, then Etsy.
+Etsy doesn't ship anything itself: each shop makes or packs its own orders, posts them with the carrier it chooses, and adds a tracking number when the service has one. To see where yours is, open **Purchases and reviews** (app: **You** → **Purchases**): next to each order are its status, its estimated delivery date and, if the seller added one, the tracking number, which tells you where the parcel is now. Late or missing? Ask the seller first, then Etsy.
 
 ## Why does my Etsy order still say Not Shipped?
 
-Because the seller hasn't made, packed or marked it as sent yet. Etsy builds your estimated delivery date from two parts: "Processing time + Carrier transit time = Estimated Delivery Date". Processing is the time the seller needs to get the order ready before handing it to the carrier, and for an item made to order it includes making it. Etsy's own example: 3–5 days of processing and 2–4 days in transit put delivery 5–9 days away. Your receipt also shows the "ship by" date the seller committed to.
+Because the seller hasn't made, packed or marked it as sent yet. Etsy builds your estimated delivery date from two parts: "Processing time + Carrier transit time = Estimated Delivery Date". Processing is the time the seller needs to get the order ready before handing it to the carrier, and for an item made to order it includes making it. Etsy's own example: 3–5 days of processing and 2–4 days in transit put delivery 5–9 days away. Not every order gets an estimated date: it depends on the shipping settings the seller chose. Your receipt also shows the "ship by" date the seller committed to.
 
 In **Purchases and reviews** (app: **You** → **Purchases**), each order shows one of these statuses:
 
@@ -40,7 +40,7 @@ Whichever one the seller chose. Etsy sells shipping labels only to sellers in th
 | Ireland | None | [An Post](carrier:an-post) |
 | China, Hong Kong | None | [Yanwen](carrier:yanwen), [YunExpress](carrier:yunexpress), [4PX](carrier:4px), and SF Express from China |
 
-If the seller used a carrier Etsy supports directly, a **Track Package** button sits next to the order. Otherwise the number appears only under **View Receipt**, and you track it on the carrier's own site.
+If the seller used a carrier Etsy supports directly, a **Track Package** button sits next to the order and in Etsy's shipping emails. Otherwise the number appears only under **View Receipt**, and you track it on the carrier's own site. Checked out as a guest? If the seller added a tracking number, the shipping email has a **Track your package** link at the top, and you reach the seller by replying to your emailed receipt.
 
 Since 1 July 2026, Etsy has temporarily stopped selling USPS and Canada Post labels to Ireland and much of the rest of the EU, "due to a new EU handling fee affecting some carriers", it says. US sellers then use Global Postal Shipping or buy a label elsewhere. Parcels from China follow their own route: see [tracking a parcel from China](guide:tracking-from-china).
 
@@ -108,7 +108,7 @@ Etsy says buyers are "generally responsible" for duties, taxes and clearance fee
 | --- | --- |
 | US | Sellers must ship Delivered Duty Paid. You're "not responsible for unexpected customs fees": ask the seller, then open a case |
 | UK | VAT taken at checkout on parcels up to £135; above that, charged at the border |
-| Ireland | From outside the EU: under €150, VAT at checkout plus a €3 customs duty per kind of product, at checkout or on delivery; above €150, VAT and duty on delivery unless the seller prepaid them |
+| Ireland | From outside the EU: under €150, VAT at checkout plus a €3 customs duty per kind of product, at checkout or on delivery; above €150, VAT and duty on delivery unless the seller prepaid them. Since 1 November 2026, a €2 EU handling fee per kind of product applies at any value, paid upfront or collected by the carrier |
 | Canada | GST/HST, plus PST, RST or QST where due, included at checkout |
 | Australia | GST taken at checkout up to AUD 1,000; above that, at the border |
 
@@ -126,7 +126,7 @@ Go in this order:
 - Mind the deadline | You have until 30 days after the estimated delivery date.
 :::
 
-Under Etsy's Purchase Protection, qualifying orders get a full refund when the item doesn't arrive, arrives damaged, isn't as described, or arrives 7 or more days after the latest estimated delivery date given at checkout. Your **Help with order** request shows the date and time you can open a case, and how long you have. Etsy can only process a refund within 180 days of the purchase.
+Under Etsy's Purchase Protection, qualifying orders get a full refund when the item doesn't arrive, arrives damaged, isn't as described, or arrives 7 or more days after the latest estimated delivery date given at checkout. Your **Help with order** request shows the date and time you can open a case, and how long you have. For an item that arrived damaged or isn't as described, there's no 7-day wait: once the latest estimated date has passed, you can open a case 48 hours after your request. No **Open a case** option? Etsy says it's too early, too late, or you still need to send the seller a **Help with order** request. Etsy can only process a refund within 180 days of the purchase.
 
 Some orders don't qualify: lateness caused by a carrier strike, severe weather, war or civil unrest, charges you refused at the door, and orders you already disputed with your bank. Checked out as a guest? Link the order to an Etsy account first. If your payment went through PayPal outside Etsy Payments, open a dispute with PayPal within 180 days of the purchase instead.
 
@@ -136,11 +136,11 @@ Etsy suggests these checks first: ask the people you live or work with, wait a d
 
 ## Can I track an Etsy order outside Etsy?
 
-Yes, with the carrier's number. Paste it into [Peek](/): it recognises the posts' and couriers' numbers above. For a postal item sent abroad, when the sending post reports the destination country but names no partner, Peek can propose one lookup at your country's post (USPS, Royal Mail, Canada Post or Australia Post) with the same number. It keeps the sending post's history, and follows your post once its tracking shows fresh progress. Etsy's own steps stay on Etsy: Peek can't see a `Not Shipped` order or open a case for you.
+Yes, with the carrier's number. Paste it into [Peek](/): it recognises most of the posts' and couriers' numbers above. It doesn't match Evri numbers or Canada Post's 16-digit ones on its own: press "Change" and pick the carrier the seller used. For a postal item sent abroad, when the sending post reports the destination country but names no partner, Peek can propose one lookup at your country's post (USPS, Royal Mail, Canada Post, An Post or Australia Post) with the same number. It keeps the sending post's history, and follows your post once its tracking shows fresh progress. Etsy's own steps stay on Etsy: Peek can't see a `Not Shipped` order or open a case for you.
 
 :::sources
-- [Etsy: What's the Status of My Order?](https://help.etsy.com/hc/en-us/articles/115015521948-What-s-the-Status-of-My-Order) – statuses, Track Package, View Receipt, quiet abroad, no tracking, delivered checks
-- [Etsy: What is an Estimated Delivery Date?](https://help.etsy.com/hc/en-us/articles/360020601674-What-is-an-Estimated-Delivery-Date) – processing plus transit, example, 7 days for non-delivery
+- [Etsy: What's the Status of My Order?](https://help.etsy.com/hc/en-us/articles/115015521948-What-s-the-Status-of-My-Order) – statuses, Track Package on the order and in emails, View Receipt, guest checkout, quiet abroad, no tracking, delivered checks
+- [Etsy: What is an Estimated Delivery Date?](https://help.etsy.com/hc/en-us/articles/360020601674-What-is-an-Estimated-Delivery-Date) – processing plus transit, example, not every order has one, 7 days for non-delivery, no wait for damaged or not as described
 - [Etsy: How to Set Processing Times and "Ship By" Dates](https://help.etsy.com/hc/en-us/articles/115015588087-How-to-Set-Processing-Times-Processing-Profiles-and-Ship-By-Dates) – processing time, made to order, ship by date on the receipt
 - [Etsy: How to Add Tracking and Complete an Order](https://help.etsy.com/hc/en-us/articles/115015774228-How-to-Add-Tracking-and-Complete-an-Order) – ship date up to 3 days ahead, first-scan emails, US tracking rule, 3 days to edit, extra packages, combined orders
 - [Etsy: How to Purchase Shipping Labels on Etsy](https://help.etsy.com/hc/en-us/articles/360001967188-How-to-Purchase-Shipping-Labels-on-Etsy) – label carriers, sellers in Canada, the UK and the US, paused EU destinations
@@ -152,10 +152,10 @@ Yes, with the carrier's number. Paste it into [Peek](/): it recognises the posts
 - [Etsy: Global Postal Shipping Labels on Etsy](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, two labels, Tracked on Etsy
 - [Etsy: How to Ship First-Class Flats and Letters](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – Pitney Bowes tracking, rigid pieces
 - [Etsy: Information for Managing International Shipments](https://help.etsy.com/hc/en-us/articles/360001987487-Information-for-Managing-International-Shipments) – carriers commonly used from each country
-- [Etsy: Will I Have to Pay for Tax, Customs, or Tariffs on My Order?](https://help.etsy.com/hc/en-us/articles/115015691007-Will-I-Have-to-Pay-for-Tax-Customs-or-Tariffs-on-My-Order) – US, UK, EU, Canada and Australia rules
+- [Etsy: Will I Have to Pay for Tax, Customs, or Tariffs on My Order?](https://help.etsy.com/hc/en-us/articles/115015691007-Will-I-Have-to-Pay-for-Tax-Customs-or-Tariffs-on-My-Order) – US, UK, EU, Canada and Australia rules, €2 Union handling fee
 - [Etsy: Etsy's Purchase Protection Program](https://help.etsy.com/hc/en-us/articles/7471925990807-Etsy-s-Purchase-Protection-Program) – what's covered, customs charges, strikes and weather, guests
 - [Etsy: How to Get Help with An Order](https://help.etsy.com/hc/en-us/articles/4402660818583-How-to-Get-Help-with-An-Order) – Help with order, what sellers can do
-- [Etsy: How to Open a Case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 hours, 30 days, 180 days, PayPal, chargebacks
+- [Etsy: How to Open a Case](https://help.etsy.com/hc/en-us/articles/5745586898199-How-to-Open-a-Case) – 48 hours, 30 days, 180 days, no Open a case option, PayPal, chargebacks
 - [Etsy: What if My Buyer's Package Gets Lost?](https://help.etsy.com/hc/en-us/articles/360050349953-What-if-My-Buyer-s-Package-Gets-Lost) – seller claims on the buyer's behalf
 - [UPU: S10 standard](https://www.upu.int/UPU/media/upu/files/postalSolutions/programmesAndServices/standards/S10-12.pdf) – the 13-character format, one number per item
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – number shapes, what Peek checks

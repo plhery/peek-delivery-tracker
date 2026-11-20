@@ -4,7 +4,7 @@ description: Wer Zalando-Bestellungen in Deutschland, Österreich und der Schwei
 slug: zalando-paket-verfolgen
 picture: Ein Paket mit einem Anhänger in Form eines Kleiderbügels, ein Lieferwagen und Pip, bereit zur Anprobe.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
 Sobald ein Paket das Lager verlässt, schickt dir Zalando eine Versandbestätigung mit der Sendungsverfolgungsnummer und dem Link zum Paketdienst. Dasselbe siehst du in deinem Konto unter „Meine Bestellungen“. Eine Bestellung kann in mehreren Paketen kommen, jedes mit eigener Nummer, vor allem wenn ein Zalando Partner einen Teil selbst verschickt.
@@ -117,7 +117,7 @@ Eine Retoure hat ihre eigene Sendungsnummer, getrennt von der deiner Bestellung.
 
 ## Kann ich ein Zalando-Paket in Peek verfolgen?
 
-Ja, mit der Nummer des Paketdienstes. Kopiere sie aus der Versandmail oder aus „Meine Bestellungen“ und füge sie in [Peek](/) ein. Peek erkennt DHL, Hermes, die Österreichische Post und die Schweizerische Post an ihrer Nummer. Bei einer Form, die sich mehrere Dienste teilen, etwa 14 Ziffern, tippe auf „Ändern“ und wähle den Paketdienst aus der Mail. Für Hermes Österreich hat Peek keinen eigenen Eintrag: Solche Pakete verfolgst du am besten über den Link in der Zalando-Mail.
+Ja, mit der Nummer des Paketdienstes. Kopiere sie aus der Versandmail oder aus „Meine Bestellungen“ und füge sie in [Peek](/) ein. Peek erkennt DHL, Hermes, die Österreichische Post und die Schweizerische Post an ihrer Nummer. Bei einer Form, die sich mehrere Dienste teilen, etwa 14 Ziffern, tippe auf „Ändern“ und wähle den Paketdienst aus der Mail. Hermes Österreich erkennt Peek nicht an der Nummer: Tippe auf „Ändern“ und wähle Hermes Austria.
 
 Jedes Paket hat seine eigene Nummer, füg also jedes hinzu: Das Paket eines Partners taucht nicht unter dem von Zalando auf. Die Bestellnummer aus der Bestellbestätigung ist keine Sendungsnummer, Peek kann sie nicht verfolgen.
 

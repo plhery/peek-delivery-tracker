@@ -4,7 +4,7 @@ description: Dlaczego zamówienie z Etsy wciąż ma status „Niewysłane”, kt
 slug: sledzenie-zamowienia-etsy
 picture: Paczka obwiązana sznurkiem i oklejona znaczkami, pocztowy samochód dostawczy i pędzący Pip.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
 Etsy niczego samo nie wysyła: każdy sklep sam wytwarza lub pakuje swoje zamówienia, nadaje je u wybranego przewoźnika i dodaje numer do śledzenia, jeśli usługa go ma. Strona Zakupy pokazuje, czy zamówienie opuściło sklep i kiedy powinno dotrzeć; numer przesyłki pokazuje, gdzie jest teraz. Spóźnia się albo zaginęło? Zapytaj najpierw sprzedawcę, potem Etsy.
@@ -60,7 +60,7 @@ Formy, które Peek zna dla przewoźników z tabeli, z wymyślonymi cyframi:
 | --- | --- |
 | Dwie litery, dziewięć cyfr, potem `PL`, `US` lub `GB` | Poczta Polska, USPS lub Royal Mail |
 | `PX` + 10 cyfr | Poczta Polska |
-| 20 cyfr zaczynających się od `00` | Poczta Polska |
+| 19 cyfr zaczynających się od `00` albo 20 cyfr od `00` z `5900773` od czwartej cyfry | Poczta Polska |
 | 22 cyfry zaczynające się od `91` do `95`, np. `9400111111111111111114` | USPS |
 | `1Z` + 16 liter i cyfr | UPS |
 | 12 lub 15 cyfr | FedEx |
@@ -105,8 +105,9 @@ Etsy pisze, że cło, podatki i opłaty za odprawę zwykle płaci kupujący, naj
 | Zamówienie | Co obowiązuje |
 | --- | --- |
 | Z kraju UE | VAT jest wliczony w cenę, nie dopłacasz nic |
-| Spoza UE, poniżej 150 EUR | Etsy pobiera VAT przy kasie. Dochodzi opłata celna 3 EUR od produktu, przy kasie albo przy dostawie |
+| Spoza UE, poniżej 150 EUR | Etsy pobiera VAT przy kasie. Dochodzi opłata celna 3 EUR za każdy rodzaj produktu, przy kasie albo przy dostawie |
 | Spoza UE, powyżej 150 EUR | VAT i cło mogą zostać naliczone przy dostawie, jeśli sprzedawca nie opłacił cła z góry |
+| Spoza UE, dowolna wartość | Od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna 2 EUR za każdy rodzaj produktu, zapłacona z góry albo pobrana przez przewoźnika |
 
 Jeśli paczka spóźni się albo nie dotrze, bo odmówiłeś lub nie zapłaciłeś opłat przy dostawie, program ochrony procesu zakupu na Etsy tego nie obejmuje. Więcej o opłatach i czasie oczekiwania: [paczka zatrzymana w urzędzie celnym](guide:customs).
 
@@ -148,7 +149,7 @@ Tak, numerem przewoźnika. Wklej go do [Peek](/): rozpoznaje numery poczt i prze
 - [Etsy: Global Postal Shipping Labels on Etsy](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, dwie etykiety, Tracked on Etsy
 - [Etsy: How to Ship First-Class Flats and Letters](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – śledzenie przez Pitney Bowes, sztywne koperty
 - [Etsy: Informacje dotyczące zarządzania wysyłką międzynarodową](https://help.etsy.com/hc/pl/articles/360001987487-Informacje-dotycz%C4%85ce-zarz%C4%85dzania-wysy%C5%82k%C4%85-mi%C4%99dzynarodow%C4%85) – przewoźnicy często wybierani w każdym kraju
-- [Etsy: Czy muszę zapłacić podatek lub cło od swojego zamówienia?](https://help.etsy.com/hc/pl/articles/115015691007-Czy-musz%C4%99-zap%C5%82aci%C4%87-podatek-lub-c%C5%82o-od-swojego-zam%C3%B3wienia) – zasady UE, 150 EUR, 3 EUR od produktu
+- [Etsy: Czy muszę zapłacić podatek lub cło od swojego zamówienia?](https://help.etsy.com/hc/pl/articles/115015691007-Czy-musz%C4%99-zap%C5%82aci%C4%87-podatek-lub-c%C5%82o-od-swojego-zam%C3%B3wienia) – zasady UE, 150 EUR, 3 EUR za rodzaj produktu, opłata manipulacyjna 2 EUR
 - [Etsy: Program ochrony procesu zakupu na Etsy](https://help.etsy.com/hc/pl/articles/7471925990807-Program-ochrony-procesu-zakupu-na-Etsy) – co jest objęte, opłaty celne, strajki i pogoda, goście
 - [Etsy: Jak można uzyskać pomoc w zakresie zamówienia](https://help.etsy.com/hc/pl/articles/4402660818583-Jak-mo%C5%BCna-uzyska%C4%87-pomoc-w-zakresie-zam%C3%B3wienia) – Pomoc w zakresie zamówienia, co może zrobić sprzedawca
 - [Etsy: Jak złożyć reklamację](https://help.etsy.com/hc/pl/articles/5745586898199-Jak-z%C5%82o%C5%BCy%C4%87-reklamacj%C4%99) – 48 godzin, 30 dni, 180 dni, PayPal, obciążenia zwrotne

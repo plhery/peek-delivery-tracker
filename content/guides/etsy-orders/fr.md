@@ -4,7 +4,7 @@ description: Pourquoi ta commande Etsy affiche encore « Non envoyé », quel tr
 slug: suivi-commande-etsy
 picture: Un colis ficelé et timbré, une camionnette postale et Pip qui file à toute allure.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
 Etsy n'expédie rien lui-même : chaque boutique fabrique ou emballe ses commandes, les confie au transporteur de son choix et ajoute un numéro de suivi quand le service en a un. Ta page Achats te dit si la commande a quitté la boutique et quand elle doit arriver ; le numéro de suivi te dit où elle est maintenant. En retard ou introuvable ? Demande d'abord au vendeur, puis à Etsy.
@@ -111,6 +111,7 @@ Etsy dit que l'acheteur est « en général responsable » des droits de douane,
 | D'un pays de l'UE vers la France ou la Belgique | La TVA est comprise dans le prix, tu ne paies rien de plus |
 | De hors UE, moins de 150 € | Etsy facture la TVA au paiement. S'y ajoutent 3 € de droits de douane par type de produit, au paiement ou à la livraison |
 | De hors UE, plus de 150 € | TVA et droits de douane peuvent être dus à la livraison, sauf si le vendeur a choisi un envoi avec taxes et droits prépayés |
+| De hors UE, toute valeur | Depuis le 1er novembre 2026, s'ajoutent 2 € de frais de traitement de l'UE par type de produit, payés d'avance ou perçus par le transporteur |
 | Vers la Suisse | Etsy ne donne pas de règle. Selon l'OFDF, la poste ou le transporteur se charge en général de la déclaration en douane. La TVA est de 8,1 %, ou 2,6 % pour certains biens ; les montants de taxe ou de droits inférieurs à 5 francs ne sont pas perçus |
 
 Un colis en retard ou jamais reçu parce que tu as refusé ou pas payé les frais dus à la livraison n'est pas couvert par la protection sur les achats d'Etsy. Plus sur les frais et les délais : [colis bloqué en douane](guide:customs).
@@ -153,7 +154,7 @@ Oui, avec le numéro du transporteur. Colle-le dans [Peek](/) : il reconnaît le
 - [Etsy : Global Postal Shipping Labels on Etsy (en anglais)](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, deux étiquettes, Tracked on Etsy
 - [Etsy : How to Ship First-Class Flats and Letters (en anglais)](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – suivi via Pitney Bowes, plis rigides
 - [Etsy : Informations concernant la gestion des envois à l'international](https://help.etsy.com/hc/fr/articles/360001987487-Informations-concernant-la-gestion-des-envois-%C3%A0-l-international) – transporteurs courants par pays
-- [Etsy : Devrai-je payer des taxes ou des droits de douane sur ma commande ?](https://help.etsy.com/hc/fr/articles/115015691007-Devrai-je-payer-des-taxes-ou-des-droits-de-douane-sur-ma-commande) – règles de l'UE, 150 €, 3 € par type de produit
+- [Etsy : Devrai-je payer des taxes ou des droits de douane sur ma commande ?](https://help.etsy.com/hc/fr/articles/115015691007-Devrai-je-payer-des-taxes-ou-des-droits-de-douane-sur-ma-commande) – règles de l'UE, 150 €, 3 € par type de produit, 2 € de frais de traitement
 - [OFDF : Réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – déclaration par la poste ou le transporteur, TVA de 8,1 % et 2,6 %, montants inférieurs à 5 francs
 - [Etsy : Le Programme de protection sur les achats d'Etsy](https://help.etsy.com/hc/fr/articles/7471925990807-Le-Programme-de-protection-sur-les-achats-d-Etsy) – ce qui est couvert, frais de douane, grèves et météo, invités
 - [Etsy : Comment obtenir de l'aide concernant une commande](https://help.etsy.com/hc/fr/articles/4402660818583-Comment-obtenir-de-l-aide-concernant-une-commande) – Aide concernant une commande, ce que le vendeur peut faire

@@ -4,7 +4,7 @@ description: Warum deine Etsy-Bestellung noch „Nicht verschickt“ zeigt, welc
 slug: etsy-sendungsverfolgung
 picture: Ein mit Schnur verschnürtes, frankiertes Paket, ein Postauto und Pip, der eilig vorbeiläuft.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
 Etsy verschickt selbst nichts: Jeder Shop fertigt oder packt seine Bestellungen selbst, gibt sie bei einem Versanddienst seiner Wahl auf und trägt eine Sendungsnummer ein, wenn der Dienst eine hat. Unter deinen Einkäufen siehst du, ob die Bestellung den Shop verlassen hat und wann sie ankommen soll; die Sendungsnummer zeigt, wo sie gerade ist. Zu spät oder verschwunden? Frag zuerst den Shop, dann Etsy.
@@ -108,8 +108,9 @@ Laut Etsy zahlen Käufer Zölle, Steuern und Abfertigungsgebühren in der Regel 
 | Bestellung | Was gilt |
 | --- | --- |
 | Aus der EU nach Deutschland oder Österreich | Die Umsatzsteuer ist im Preis enthalten, mehr zahlst du nicht |
-| Von außerhalb der EU, unter 150 EUR | Etsy berechnet die Umsatzsteuer an der Kasse. Dazu kommt eine Zollgebühr von 3 EUR pro Artikel, an der Kasse oder bei der Lieferung |
+| Von außerhalb der EU, unter 150 EUR | Etsy berechnet die Umsatzsteuer an der Kasse. Dazu kommt eine Zollgebühr von 3 EUR pro Warenart, an der Kasse oder bei der Lieferung |
 | Von außerhalb der EU, über 150 EUR | Umsatzsteuer und Zoll können bei der Lieferung fällig werden, außer der Shop verschickt mit vorab bezahlten Zollgebühren |
+| Von außerhalb der EU, jeder Warenwert | Seit 1. November 2026 kommt eine EU-Bearbeitungsgebühr von 2 EUR pro Warenart dazu, vorab bezahlt oder vom Versanddienst erhoben |
 | In die Schweiz | Etsy nennt keine eigene Regel. Laut BAZG übernehmen Post oder Kuriere meist die Zollanmeldung. Die MWST beträgt 8,1 %, für manche Waren 2,6 %; Steuer- und Zollbeträge bis 5 Franken werden nicht erhoben |
 
 Kommt ein Paket zu spät oder gar nicht, weil du Gebühren bei der Lieferung verweigert oder nicht bezahlt hast, deckt Etsys Einkaufsschutz das nicht ab. Mehr zu Gebühren und Wartezeiten: [Paket beim Zoll](guide:customs).
@@ -152,7 +153,7 @@ Ja, mit der Nummer des Versanddienstes. Füg sie in [Peek](/) ein: Es erkennt di
 - [Etsy: Global Postal Shipping Labels on Etsy](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, zwei Etiketten, Tracked on Etsy
 - [Etsy: How to Ship First-Class Flats and Letters](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – Tracking über Pitney Bowes, zu steife Sendungen
 - [Etsy: Informationen zur Handhabung internationaler Sendungen](https://help.etsy.com/hc/de/articles/360001987487-Informationen-zur-Handhabung-internationaler-Sendungen) – übliche Versanddienste je Land
-- [Etsy: Muss ich für meine Bestellung Steuern, Zollgebühren oder Zölle zahlen?](https://help.etsy.com/hc/de/articles/115015691007-Muss-ich-f%C3%BCr-meine-Bestellung-Steuern-Zollgeb%C3%BChren-oder-Z%C3%B6lle-zahlen) – EU-Regeln, 150 EUR, 3 EUR pro Artikel
+- [Etsy: Muss ich für meine Bestellung Steuern, Zollgebühren oder Zölle zahlen?](https://help.etsy.com/hc/de/articles/115015691007-Muss-ich-f%C3%BCr-meine-Bestellung-Steuern-Zollgeb%C3%BChren-oder-Z%C3%B6lle-zahlen) – EU-Regeln, 150 EUR, 3 EUR pro Warenart, 2 EUR Bearbeitungsgebühr
 - [BAZG: Empfangen von Briefen und Paketen](https://www.bazg.admin.ch/de/empfangen-von-briefen-und-paketen) – Zollanmeldung durch Post oder Kurier, MWST 8,1 % und 2,6 %, Beträge bis 5 Franken
 - [Etsy: Etsys Einkaufsschutz-Programm](https://help.etsy.com/hc/de/articles/7471925990807-Etsys-Einkaufsschutz-Programm) – was geschützt ist, Zollgebühren, Streiks und Unwetter, Gäste
 - [Etsy: Hilfe bei einer Bestellung erhalten](https://help.etsy.com/hc/de/articles/4402660818583-Hilfe-bei-einer-Bestellung-erhalten) – Hilfe bei einer Bestellung, was Shops tun können

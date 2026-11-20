@@ -4,7 +4,7 @@ description: Wo AliExpress deine Sendungsnummer zeigt, wer in Deutschland, Öste
 slug: aliexpress-sendungsverfolgung
 picture: Ein Paketanhänger mit Countdown-Uhr, darüber ein Flugzeug, und Pip, der mit einem Handy an der Tür wartet.
 published: 2026-10-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Öffne bei AliExpress „Meine Bestellungen“, such die Bestellung und klick auf „Bestellung verfolgen“. Oder gib die Nummer bei Cainiao ein, der Logistiksparte der Alibaba Group, auf die die Hilfe von AliExpress verweist. Die letzte Etappe übernimmt ein Paketdienst in deinem Land. In den Bestelldetails läuft außerdem ein Countdown, die Frist deines Käuferschutzes: Kommt das Paket nicht, eröffne vor ihrem Ablauf einen Streitfall, und bestätige den Erhalt erst, wenn du das Paket in den Händen hältst.
@@ -13,7 +13,7 @@ updated: 2026-11-17
 
 Laut AliExpress legen die Verkäufer die Versandarten fest, und du wählst beim Bestellen eine davon aus. Für die aktuellen Scans verweist die Hilfe von AliExpress außerdem auf die Sendungsverfolgung von [Cainiao](carrier:cainiao), global.cainiao.com. In deinem Land übernimmt ein Paketdienst die letzte Etappe: Zeigt die Sendungsverfolgung zugestellt, obwohl nichts da ist, rät AliExpress, bei der Post vor Ort oder beim Paketdienst im Zielland nachzufragen.
 
-Auf seiner deutschen Seite „AliExpress-Verpflichtung“ nennt AliExpress [DHL](carrier:dhl) und [Hermes](carrier:hermes-de) als Logistikpartner. Wer in Österreich und der Schweiz meist zustellt, steht in der Ländertabelle von [Paket aus China verfolgen](guide:tracking-from-china). Beim Economy-Versand warnt Cainiao: Die Sendungsverfolgung „wird nur bis zur Übergabe an den Spediteur des Ziellandes/der Zielregion aktualisiert“.
+Auf seiner deutschen Seite „AliExpress-Verpflichtung“ nennt AliExpress [DHL](carrier:dhl) und [Hermes](carrier:hermes-de) als Logistikpartner. Wer in Österreich und der Schweiz meist zustellt, steht in der Ländertabelle von [Paket aus China verfolgen](guide:tracking-from-china): In Österreich verzollt die [Österreichische Post](carrier:austrian-post) Postsendungen aus Nicht-EU-Ländern für dich und stellt sie zu, in der Schweiz verzollt die [Schweizerische Post](carrier:swiss-post) alles, was per Post oder über das Netz von [GLS](carrier:gls-ch) ins Land kommt. Beim Economy-Versand warnt Cainiao: Die Sendungsverfolgung „wird nur bis zur Übergabe an den Spediteur des Ziellandes/der Zielregion aktualisiert“.
 
 Ob du an der Grenze etwas zahlst, steht unter [Zoll](guide:customs). Seit 1. November 2026 erhebt die EU laut EU-Kommission bei Online-Bestellungen eine Bearbeitungsgebühr von 2 € pro Warenart, in der Schweiz nicht.
 
@@ -52,7 +52,7 @@ Die Bestellung zeigt die Status von AliExpress, die Zeilen unter „Bestellung v
 
 Was die Scans von Cainiao bedeuten, steht auf der Seite zu [Cainiao](carrier:cainiao); für die Worte des Paketdienstes vor Ort siehe [Status der Sendungsverfolgung](guide:tracking-statuses).
 
-**Der Countdown.** Der Käuferschutz beginnt mit der Zahlung und läuft in den Bestelldetails als Countdown herunter: So lange kannst du einen Streitfall eröffnen. Bestätigst du den Erhalt nie, wird die Bestellung am Ende von selbst geschlossen. Das Paket ist spät dran und die Zeit wird knapp? Bitte um mehr Zeit. Eine Hilfeseite sagt, das gehe in den Bestelldetails auf der Website, eine andere, du sollst dem Verkäufer schreiben. So oder so muss der Verkäufer zustimmen.
+**Der Countdown.** Der Käuferschutz beginnt mit der Zahlung und läuft in den Bestelldetails als Countdown herunter: So lange kannst du einen Streitfall eröffnen. Bestätigst du den Erhalt nie, wird die Bestellung am Ende von selbst geschlossen. Das Paket ist spät dran und die Zeit wird knapp? Bitte um mehr Zeit: Das geht, wenn der Verkäufer den Versand bestätigt hat und die Bestellung nicht rechtzeitig ankommt. Eine Hilfeseite sagt, das gehe nur auf der Website: Öffne in „Meine Bestellungen“ die Bestelldetails, folg dem Link zur Verlängerung, trag die zusätzliche Zeit ein und bestätige. Eine andere sagt, du sollst dem Verkäufer schreiben. So oder so muss der Verkäufer zustimmen, und der Countdown verlängert sich dann um die vereinbarte Zeit.
 
 **Den Erhalt bestätigen.** Sobald du den Erhalt bestätigst, bleiben dir 15 Tage für einen Streitfall. Tu es erst, wenn das Paket da ist und die Artikel stimmen.
 
@@ -60,14 +60,14 @@ Was die Scans von Cainiao bedeuten, steht auf der Seite zu [Cainiao](carrier:cai
 
 Jede Bestellung hat ihre eigene Lieferzeit. Die Bestelldetails nennen ihr Ende in pazifischer Zeit (PST), und dieses Datum entscheidet, wann du für ein Paket, das noch unterwegs ist, einen Streitfall eröffnen kannst.
 
-**Choice.** Für Deutschland schreibt AliExpress: „Bei Choice-Artikeln beträgt die Lieferzeit 6 – 8 Tage und der gesamte Versandweg kann verfolgt werden. Darüber hinaus sind Bestellungen über 10 € versandkostenfrei.“ Die Seiten für Österreich und die Schweiz erwähnen Choice nicht.
+**Choice.** Für Deutschland schreibt AliExpress: „Bei Choice-Artikeln beträgt die Lieferzeit 6 – 8 Tage und der gesamte Versandweg kann verfolgt werden. Darüber hinaus sind Bestellungen über 10 € versandkostenfrei.“ Die Seite für die Schweiz verspricht auf Englisch nur „Free shipping over $10 on all Choice items“, ohne Lieferzeit; die Seite für Österreich erwähnt Choice nicht.
 
 **„Schnelle Lieferung“.** Artikel mit diesem Hinweis auf ihrer Produktseite werden laut AliExpress „garantiert bis zu einem bestimmten Lieferdatum geliefert“, in allen drei Ländern. Klappt das nicht, kannst du beantragen:
 
 - einen Gutschein, 48 Stunden nachdem das späteste geschätzte Lieferdatum ohne Zustellung verstrichen ist;
 - eine Erstattung, wenn die Artikel beschädigt ankommen;
 - eine Erstattung, wenn die Sendungsverfolgung „Unterwegs verloren“ zeigt; kommt das Paket später doch, behältst du es;
-- eine Erstattung, wenn das Paket in Deutschland nicht innerhalb von 40 Tagen ab Versand zugestellt ist, in Österreich und der Schweiz nicht innerhalb von 30 Tagen; kommt es später doch, darfst du es behalten.
+- eine Erstattung, wenn das Paket nicht innerhalb von 30 Tagen ab Versand zugestellt ist, in allen drei Ländern; kommt es später doch, darfst du es behalten.
 
 Ohne diesen Hinweis gibt es eine Erstattung, wenn die Bestellung nicht innerhalb von 60, 75, 90 oder 120 Tagen ab Versand ankommt, je nach Lieferbedingungen, und du behältst den Artikel. Verzögerungen durch Zollabfertigung, Kontrollen, Streiks oder behördliche Maßnahmen verschieben diese Termine. Die Bedingungen zu höherer Gewalt schließen die Zusagen aus, wenn Katastrophen, Kriege, Streiks oder Probleme beim Zoll dazwischenkommen.
 
@@ -82,7 +82,7 @@ Als zugestellt markiert, aber nicht da? Laut AliExpress verteilt der Paketdienst
 :::steps
 - Sendungsverfolgung prüfen | Öffne in der Bestellung „Bestellung verfolgen“. Noch unterwegs und in der Lieferzeit? Warte das Datum in der Bestellung ab.
 - Umschauen und nachfragen | Prüf die Adresse in der Bestellung, den Briefkasten und die Nachbarn, und frag beim Paketdienst vor Ort nach, der es vielleicht noch hat.
-- Streitfall eröffnen | Öffne in „Meine Bestellungen“ die Bestelldetails und tipp auf „Rückgabe & Rückerstattung“ (auf manchen Hilfeseiten „Disput eröffnen“). Gib an, dass das Paket nicht angekommen ist, nenn den Grund und schick die Anfrage vor Ablauf des Countdowns ab.
+- Streitfall eröffnen | Öffne in „Meine Bestellungen“ die Bestelldetails und tipp auf „Rückgabe & Rückerstattung“ (auf manchen Hilfeseiten „Disput eröffnen“). Gib an, dass das Paket nicht angekommen ist, nenn den Grund und schick die Anfrage vor Ablauf des Countdowns ab. Solange der Streitfall läuft, kannst du weiter mit dem Verkäufer verhandeln.
 - AliExpress prüft | Der Verkäufer hat 48 Stunden für eine Antwort. Löst er das Problem nicht, greift AliExpress ein. Fotos fügst du hinzu, indem du deinen Vorschlag änderst.
 - Erstattung | Einigst du dich mit dem Verkäufer, kommt das Geld in 1 bis 10 Werktagen, manchmal 20, auf dein ursprüngliches Zahlungsmittel zurück. Nach einem abgeschlossenen Streitfall in 3 bis 20 Werktagen.
 :::
@@ -103,9 +103,9 @@ Ist eine Rücksendung vereinbart, schick den Artikel mit Sendungsverfolgung an d
 
 Ja, mit der Sendungsnummer, die die Bestellung unter „Bestellung verfolgen“ zeigt. Füge sie in [Peek](/) ein, das solche Pakete als „AliExpress / Cainiao“ zeigt. DOFR oder CNFR mit 13 Ziffern und HD, etwa `DOFR1234567890123HD`, erkennt Peek sofort, ebenso AP oder CNG mit 14 Ziffern. Bei LP-Nummern ist die Form allein nicht eindeutig: Peek fragt Cainiao und jeden anderen Paketdienst, zu dem die Form passt, und zeigt den, der die Nummer kennt. Kennen sie mehrere, lässt Peek dich wählen; zeigt es den falschen, tippe auf „Ändern“ und wähle „AliExpress / Cainiao“.
 
-Eine Postnummer wie `RR000000005CN` geht an [China Post](carrier:china-post). Willst du sie über Cainiao verfolgen, füg den Verfolgungslink von global.cainiao.com ein.
+Eine Postnummer wie `RR000000005CN` geht an [China Post](carrier:china-post). Willst du sie über Cainiao verfolgen, füg den Verfolgungslink von global.cainiao.com ein. Ist so ein Paket auf dem Weg in dein Land, kann Peek mit derselben Nummer auch bei deiner Post nachfragen, in Deutschland bei DHL, in Österreich bei der Österreichischen Post und in der Schweiz bei der Schweizerischen Post, und verfolgt es dort weiter, sobald sie neue Scans zeigt.
 
-Nennt der erste Paketdienst den Partner vor Ort, der übernimmt, behält Peek den ersten Verlauf, folgt dem Partner, sobald dessen Tracking neue Schritte zeigt, und zeigt auf der Karte Namen und Nummer des Partners.
+Nennt der erste Paketdienst den Partner vor Ort, der übernimmt, behält Peek den ersten Verlauf, folgt dem Partner, sobald dessen Tracking neue Schritte zeigt, und zeigt auf der Karte Namen und Nummer des Partners. Gibt dir der Paketdienst vor Ort eine eigene Nummer, füg auch diese hinzu: Nummern wie `RR000000005DE` (DHL) oder dieselbe Form mit `AT` (Österreichische Post) oder `CH` (Schweizerische Post) am Ende, 18 Ziffern ab `99` (Schweizerische Post) und 20 Ziffern ab `00340434` (DHL) ordnet Peek sofort dem richtigen Paketdienst zu.
 
 Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu. Die AliExpress-Bestellnummer ist keine Sendungsnummer, Peek kann sie nicht verfolgen.
 
@@ -128,12 +128,12 @@ Peek zeigt, was die Paketdienste veröffentlichen. Käuferschutz, Streitfälle u
 - [AliExpress: Wie kann ich meine Bestellung stornieren?](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=de_DE&m_station=BuyerHelp&questionId=1061036211) – Bestellung stornieren, Zahlungsverarbeitung, 7 Tage, 48 Stunden
 - [AliExpress: How to cancel my order?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015065&language=en) – keine Stornierung nach dem Versand
 - [AliExpress: What is Buyer Protection?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015100&language=en) – Beginn mit der Zahlung, Countdown, Nachricht an den Verkäufer
-- [AliExpress: How do I extend the Buyer Protection time?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015071&language=en) – Antrag auf der Website, Zustimmung des Verkäufers
+- [AliExpress: How do I extend the Buyer Protection time?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015071&language=en) – Bedingungen, Antrag auf der Website, Zustimmung des Verkäufers, Verlängerung
 - [AliExpress: How do I confirm delivery?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015069&language=en) – Erhalt bestätigen, 15 Tage, automatische Schließung
-- [AliExpress: AliExpress-Verpflichtung](https://de.aliexpress.com/p/service-mindset/index.html) – je nach Lieferland: Choice in Deutschland, DHL und Hermes, „Schnelle Lieferung“, „Unterwegs verloren“, 60 bis 120 Tage, Zollverzögerungen, kostenlose Rückgabe
-- [AliExpress: Schnelle Lieferungsrichtlinie](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=de_DE&m_station=BuyerHelp&questionId=k01000000000000000000000000014mi) – je nach Lieferland: Erstattung nach 40 oder 30 Tagen
+- [AliExpress: AliExpress-Verpflichtung](https://de.aliexpress.com/p/service-mindset/index.html) – je nach Lieferland: Choice in Deutschland und der Schweiz, DHL und Hermes, „Schnelle Lieferung“, Erstattung nach 30 Tagen, „Unterwegs verloren“, 60 bis 120 Tage, Zollverzögerungen, kostenlose Rückgabe (gelesen am 20. November 2026)
+- [AliExpress: Schnelle Lieferungsrichtlinie](https://helpcenter.aliexpress.com/s/BuyerHelp/knowledge?language=de_DE&m_station=BuyerHelp&questionId=k01000000000000000000000000014mi) – Entschädigungen bei „Schnelle Lieferung“
 - [AliExpress: Force Majeure](https://www.aliexpress.com/ssr/300000437/H7RW3zBTKC?disableNav=YES&pha_manifest=ssr&_immersiveMode=true) – Ausschlüsse
-- [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – Frist, Datum in PST, Streitfall eröffnen, PayPal 180 Tage
+- [AliExpress: How to open dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015227&language=en) – Frist, Datum in PST, Streitfall eröffnen, Verhandeln während des Streitfalls, PayPal 180 Tage
 - [AliExpress: I have not received goods. What can I do?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015091&language=en) – wann ein Streitfall geht, Zahlung zurückgehalten, Zustellung läuft weiter, nach dem Käuferschutz
 - [AliExpress: I haven't received my parcel but it shows "Delivered"](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – Paketdienst vor Ort, Kontakt über global.cainiao.com
 - [AliExpress: What's the dispute process after I have opened a dispute?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015093&language=en) – 10 Tage, Vorschlag ändern
@@ -152,5 +152,6 @@ Peek zeigt, was die Paketdienste veröffentlichen. Käuferschutz, Streitfälle u
 - [Cainiao: Sprachdatei der Sendungsverfolgung](https://lang.alicdn.com/mcms/global-track/0.0.10/global-track.json) – Hinweis zum Economy-Versand
 - [EU-Kommission: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € seit 1. November 2026
 - [EU-Kommission: The temporary EUR 3 customs duty and the Union handling fee](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 2 € pro Warenart bei Fernabsatz
-- [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – was Peek prüft
+- [Universal Parcel Scraper: Paketdienst-Daten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – was Peek prüft, Nummernformen von DHL, Österreichischer und Schweizerischer Post
+- [Peek: Routing](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – Übergaben, Nachfrage bei der Post des Ziellands mit derselben Postnummer
 :::

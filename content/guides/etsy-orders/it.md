@@ -4,7 +4,7 @@ description: Perché il tuo ordine Etsy risulta ancora «Non spedito», quale co
 slug: tracciamento-ordine-etsy
 picture: Un pacco legato con lo spago e affrancato, un furgone postale e Pip che corre di fretta.
 published: 2026-10-17
-updated: 2026-10-17
+updated: 2026-11-20
 ---
 
 Etsy non spedisce nulla: ogni negozio crea o imballa i propri ordini, li affida al corriere che preferisce e aggiunge un codice di tracciamento quando il servizio ne ha uno. La pagina Acquisti ti dice se l'ordine è partito e quando dovrebbe arrivare; il codice di tracciamento ti dice dov'è adesso. In ritardo o sparito? Chiedi prima al venditore, poi a Etsy.
@@ -106,6 +106,7 @@ Etsy dice che di solito dazi, imposte e spese di sdoganamento sono a carico di c
 | Da un Paese dell'UE | L'IVA è inclusa nel prezzo, non paghi altro |
 | Da fuori UE, sotto i 150 € | Etsy addebita l'IVA al pagamento. Si aggiunge un onere doganale di 3 € per voce doganale, al pagamento o alla consegna |
 | Da fuori UE, sopra i 150 € | IVA e dazi possono esserti addebitati alla consegna, a meno che il venditore non spedisca con dazi già pagati |
+| Da fuori UE, qualsiasi valore | Dal 1° novembre 2026 si aggiunge un onere di gestione dell'UE di 2 € per voce doganale, pagato in anticipo o riscosso dal corriere |
 
 Un pacco in ritardo o mai arrivato perché hai rifiutato o non hai pagato gli oneri dovuti alla consegna non è coperto dalla Protezione degli acquisti di Etsy. Di più su oneri e tempi: [pacco fermo in dogana](guide:customs).
 
@@ -147,7 +148,7 @@ Sì, con il codice del corriere. Incollalo in [Peek](/): riconosce i codici dell
 - [Etsy: Global Postal Shipping Labels on Etsy (in inglese)](https://help.etsy.com/hc/en-us/articles/360037382894-Global-Postal-Shipping-Labels-on-Etsy) – Asendia, due etichette, Tracked on Etsy
 - [Etsy: How to Ship First-Class Flats and Letters (in inglese)](https://help.etsy.com/hc/en-us/articles/360039466434-How-to-Ship-First-Class-Flats-and-Letters-with-Etsy-Shipping-Labels) – tracciamento tramite Pitney Bowes, buste rigide
 - [Etsy: Informazioni per la gestione delle spedizioni internazionali](https://help.etsy.com/hc/it/articles/360001987487-Informazioni-per-la-gestione-delle-spedizioni-internazionali) – corrieri usati di solito in ogni Paese
-- [Etsy: Dovrò pagare imposte, oneri o dazi sul mio ordine?](https://help.etsy.com/hc/it/articles/115015691007-Dovr%C3%B2-pagare-imposte-oneri-o-dazi-sul-mio-ordine) – regole UE, 150 €, 3 € per voce doganale
+- [Etsy: Dovrò pagare imposte, oneri o dazi sul mio ordine?](https://help.etsy.com/hc/it/articles/115015691007-Dovr%C3%B2-pagare-imposte-oneri-o-dazi-sul-mio-ordine) – regole UE, 150 €, 3 € per voce doganale, onere di gestione di 2 €
 - [Etsy: Programma di Protezione degli acquisti di Etsy](https://help.etsy.com/hc/it/articles/7471925990807-Programma-di-Protezione-degli-acquisti-di-Etsy) – cosa è coperto, oneri doganali, scioperi e meteo, ospiti
 - [Etsy: Come ottenere assistenza per un ordine](https://help.etsy.com/hc/it/articles/4402660818583-Come-ottenere-assistenza-per-un-ordine) – Assistenza per l'ordine, cosa può fare il venditore
 - [Etsy: Come aprire una disputa](https://help.etsy.com/hc/it/articles/5745586898199-Come-aprire-una-disputa) – 48 ore, 30 giorni, 180 giorni, PayPal, contestazioni bancarie

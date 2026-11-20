@@ -2212,6 +2212,46 @@ describe('TrackingSyncService', () => {
       await leftOut('2026-10-30T12:00:00Z', answer('delivered', counter));
       expect(await leftOut('2026-10-31T06:00:00Z', answer('failed_attempt'))).toMatchObject({ current_stage: 'delivered' });
     });
+
+    it('leaves a provider\'s delivery that another provider lists in no stage', async () => {
+      // A DHL parcel only providers answer: 17TRACK stores the delivery, and ParcelsApp then lists the same scan in
+      // words no release classifies; the number, wording and clocks are invented.
+      const earlier = [
+        { time: '2026-11-17T03:30:00Z', description: 'Unloaded', location: 'Example Hub', stage: 'in_transit' },
+        { time: '2026-11-13T17:50:00Z', description: 'Loaded', location: 'Example Hub', stage: 'in_transit' }];
+      const provider = (source: '17TRACK' | 'ParcelsApp', scan: { description: string; stage: string; stage_source?: string }, status: CarrierResult['status']): CarrierResult => ({
+        status, current_stage: scan.stage === 'pending' ? 'in_transit' : scan.stage, tracking_provider: source, last_status_text: scan.description,
+        last_update: '2026-11-17T03:31:00Z', events: [{ time: '2026-11-17T03:31:00Z', location: 'Example Town', ...scan }, ...earlier] });
+      const checks = () => {
+        const store = eventStore();
+        const client = Object.assign(store.client, {
+          acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+          finishTrackingProvider: vi.fn().mockResolvedValue(undefined) });
+        let saved: JsonObject = { id: 'provider-delivery', carrier: 'dhl', tracking_number: 'TEST20481359', current_stage: 'pending',
+          created_at: '2026-11-17T09:00:00Z' };
+        return async (at: string, answer: CarrierResult) => {
+          vi.spyOn(scraper, 'universalPlan').mockReturnValue({ sources: [answer.tracking_provider as '17TRACK'], carrier: null, tier: () => 'unknown', rank: () => 0 });
+          const adapter = { fetch: vi.fn().mockRejectedValue(new Error('down')), fetchUniversal: vi.fn().mockResolvedValue(answer) };
+          await new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date(at))
+            .syncPackage({ ...saved, [STORED_EVENT_IDENTITIES]: store.identities() });
+          saved = { ...saved, ...client.applyTrackingSync.mock.calls.at(-1)![1] };
+          return { ...saved, stages: [...store.rows.values()].map((row) => row.stage) } as JsonObject;
+        };
+      };
+      const delivered = provider('17TRACK', { description: 'Delivered', stage: 'delivered' }, 'delivered');
+
+      const check = checks();
+      expect(await check('2026-11-19T09:00:00Z', delivered)).toMatchObject({ current_stage: 'delivered' });
+      const other = await check('2026-11-20T08:45:00Z', provider('ParcelsApp', { description: 'Simplified handover', stage: 'pending', stage_source: 'none' }, 'in_transit'));
+      expect(other).toMatchObject({ current_stage: 'delivered', last_status_text: 'Delivered' });
+      expect(other.stages).toContain('delivered');
+
+      // The provider that stored it reads its own scan again.
+      const own = checks();
+      await own('2026-11-19T09:00:00Z', delivered);
+      expect(await own('2026-11-20T08:45:00Z', provider('17TRACK', { description: 'Delivered', stage: 'failed_attempt' }, 'exception')))
+        .toMatchObject({ current_stage: 'failed_attempt' });
+    });
   });
 
   describe('a return read again in another stage', () => {

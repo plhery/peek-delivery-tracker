@@ -3165,13 +3165,17 @@ export class TrackingSyncService {
       // Nor is a saved delivery or return whose every row this answer lists again in another stage, and no scan in
       // it: a scraper release re-read the scan that set it (Ekart's undelivered attempt, once read as delivered, or
       // SPX Brazil's announced return, once read as the return), and the parcel takes the answer's stage. A later
-      // scan of another stage leaves it.
+      // scan of another stage leaves it. Only the source that wrote a row reads it again: another source's copy of
+      // the scan is no re-read (ParcelsApp's copy of 17TRACK's DHL delivery, in words no rule reads).
+      const wroteRow = (row: JsonObject) => typeof answeredBy === 'string'
+        ? String(row.provider_event_id).startsWith('unknown:') && row.universal_provider === answeredBy
+        : String(row.provider_event_id).startsWith(`${sourceCarrierId}:`);
       const savedEnds = ['delivered', 'returned'].includes(previousStage) ? stored.filter((row) => row.stage === previousStage) : [];
       const endReread = savedEnds.length > 0 && selectedStage !== null && selectedStage !== previousStage
         && !events.some((event) => event.stage === previousStage)
         && savedEnds.every((row) => {
           const stage = answeredAs.get(String(row.provider_event_id));
-          return stage !== undefined && stage !== previousStage;
+          return wroteRow(row) && stage !== undefined && stage !== previousStage;
         });
       // An answer of the parcel's own carrier that disputes the saved delivery is not older either:
       // the watermark came from the provider whose delivery it disputes. Nor is one past which the

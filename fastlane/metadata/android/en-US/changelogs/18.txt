@@ -1,4 +1,3 @@
 Without an account: Settings › Notifications for the parcels on this phone, with the updates you choose.
 Without an account, several numbers at once, the day’s lookup limit and Friends ask you to sign in right there; your parcels come with you, with their names.
 A parcel followed without an account asks on its page for the postcode its carrier needs.
-Settings no longer has a Usage statistics switch.

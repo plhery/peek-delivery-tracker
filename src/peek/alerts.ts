@@ -268,11 +268,13 @@ async function deliverMoves(subscription?: PushSubscription) {
     try {
       await setParcelAlert(id, { subscription: address, preset: alert.preset, locale }, ownerKeyFor(id));
     } catch (error) {
-      // A shared throttle pauses the batch. A refusal for this link leaves the other links free to move.
+      // A shared throttle pauses the batch. A refusal for this link leaves the other links free to move: one that
+      // holds for as long as the link does ends its alert, which the old subscription no longer receives either.
       if (error instanceof ParcelLinkError && error.retryAfterSeconds !== null) throw error;
       const current = linkNote(id).alert;
       if (current?.move && current.endpoint === address.endpoint) {
-        noteLink(id, { alert: { ...current, move: { ...current.move, retryAt: Date.now() + RETRY_MS } } });
+        noteLink(id, { alert: error instanceof ParcelLinkError && SETTLED.includes(error.kind) ? null
+          : { ...current, move: { ...current.move, retryAt: Date.now() + RETRY_MS } } });
       }
       continue;
     }

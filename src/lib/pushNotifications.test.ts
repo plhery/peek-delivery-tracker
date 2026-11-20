@@ -354,8 +354,8 @@ describe('the browser subscription that parcel links’ alerts share with the ac
     rememberParcel({ id: LINK_ID, key: OWNER_KEY, view: testView() });
     alertOn(SHARED);
     alertOn(SHARED, OTHER_LINK_ID);
-    // The server takes one alert and refuses the other.
-    links.setParcelAlert.mockImplementation(async (id: string) => { if (id === OTHER_LINK_ID) throw new Error('full'); });
+    // The server takes one alert and cannot take the other now.
+    links.setParcelAlert.mockImplementation(async (id: string) => { if (id === OTHER_LINK_ID) throw new Error('offline'); });
     vi.mocked(fetch).mockRejectedValueOnce(new Error('offline'));
 
     await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
@@ -368,6 +368,27 @@ describe('the browser subscription that parcel links’ alerts share with the ac
     expect(linkNote(LINK_ID).alert).toEqual({ preset: 'important', endpoint: FRESH, locale: 'de' });
     expect(linkNote(OTHER_LINK_ID).alert).toMatchObject({ endpoint: FRESH, move: expect.anything() });
     expect(fresh.unsubscribe).not.toHaveBeenCalled();
+  });
+
+  it('forgets a link\'s alert the server refuses for as long as the link lasts, and asks no more', async () => {
+    getSubscription.mockResolvedValue(pushSubscription(SHARED));
+    subscribe.mockResolvedValue(pushSubscription(FRESH));
+    alertOn(SHARED);
+    alertOn(SHARED, OTHER_LINK_ID);
+    // The other link's sharing was stopped.
+    links.setParcelAlert.mockImplementation(async (id: string) => { if (id === OTHER_LINK_ID) throw new ParcelLinkError('stopped'); });
+    vi.mocked(fetch).mockRejectedValueOnce(new Error('offline'));
+
+    await expect(disablePushNotifications(auth)).rejects.toThrow('offline');
+    expect(linkNote(LINK_ID).alert).toMatchObject({ endpoint: FRESH });
+    expect(linkNote(OTHER_LINK_ID).alert).toBeUndefined();
+    getSubscription.mockResolvedValue(pushSubscription(FRESH));
+    vi.stubGlobal('Notification', { permission: 'granted' });
+    const asked = links.setParcelAlert.mock.calls.length;
+    const clock = vi.spyOn(Date, 'now').mockReturnValue(Date.now() + 5 * 60_000);
+    await followAlertLanguage('de');
+    expect(links.setParcelAlert).toHaveBeenCalledTimes(asked);
+    clock.mockRestore();
   });
 
   it('keeps every rate-limited move and retries it after the server interval', async () => {

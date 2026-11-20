@@ -498,13 +498,19 @@ export type NativeOutcome =
 const secondsToMidnight = (now = new Date()) =>
   Math.ceil((Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + 1) - now.getTime()) / 1_000);
 
+/** A lookup, or a lookup's new carrier, which asks carriers as a lookup does; anything else is a detection. */
+export function proofKind(request: Request): 'lookup' | 'detection' {
+  const { pathname } = new URL(request.url);
+  return pathname === '/api/public/parcels' || /^\/api\/public\/parcels\/[^/]+\/carrier$/.test(pathname) ? 'lookup' : 'detection';
+}
+
 /**
  * The assertion signs `body`, the bytes the route read from the request. An
  * iPhone's refused assertion or used allowance refuses the request; an Android
  * key's never does more than send it to the browser proof (NativeOutcome).
  */
 export async function verifyNativeRequest(request: Request, service: SupabaseServiceClient, body: Uint8Array): Promise<NativeOutcome> {
-  const kind = new URL(request.url).pathname === '/api/public/parcels' ? 'lookup' : 'detection';
+  const kind = proofKind(request);
   const settings = { apple: nativeAttestSettings(), android: androidAttestSettings() };
   const seen = { platform: userAgentPlatform(request) };
   const mode = settings.android?.mode;

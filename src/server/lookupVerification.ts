@@ -6,7 +6,7 @@ import { clientIp, clientNetwork, HttpError } from './api';
 import { recordLookupProof, type LookupProof } from './metrics';
 import { logOperationalEvent } from './observability';
 import { requestHostname } from './siteHosts';
-import { appPlatform, hasNativeAssertion, verifyNativeRequest, type NativePlatform } from './nativeVerification';
+import { appPlatform, hasNativeAssertion, proofKind, verifyNativeRequest, type NativePlatform } from './nativeVerification';
 import type { SupabaseServiceClient } from './supabase';
 
 const PROOF_SECONDS = 15 * 60;
@@ -72,12 +72,6 @@ function movesOf(nonce: string, expires: number, now: number): Set<string> {
   const entry = { expires, networks: new Set<string>() };
   moves.set(nonce, entry);
   return entry.networks;
-}
-
-/** A lookup, or a lookup's new carrier, which asks carriers as a lookup does; anything else is a detection. */
-function proofKind(request: Request): 'lookup' | 'detection' {
-  const { pathname } = new URL(request.url);
-  return pathname === '/api/public/parcels' || /^\/api\/public\/parcels\/[^/]+\/carrier$/.test(pathname) ? 'lookup' : 'detection';
 }
 
 interface ProofCheck {

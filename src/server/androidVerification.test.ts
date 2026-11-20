@@ -208,6 +208,11 @@ describe('Android attestation', () => {
       p_key_id: keyID, p_counter: 2, p_kind: 'lookup', p_limit: 15,
     }) }));
     expect(await series(verifiedLookups)).toBe(before + 2);
+    // A lookup's new carrier asks carriers as a lookup does, and spends the same allowance.
+    await verifyLookupRequest(signed(request('/api/public/parcels/00000000-0000-4000-8000-000000000001/carrier'), privateKey), service, signedBody);
+    expect(service.request).toHaveBeenLastCalledWith('/rest/v1/rpc/accept_native_assertion', expect.objectContaining({ body: expect.objectContaining({
+      p_key_id: keyID, p_counter: 3, p_kind: 'lookup', p_limit: 15,
+    }) }));
   });
 
   it('registers a key in the secure hardware of an unlocked phone as basic, with the smaller allowance', async () => {

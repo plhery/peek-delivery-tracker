@@ -840,6 +840,33 @@ describe('withEventPlaces', () => {
     ]);
   });
 
+  it('runs a carrier\'s repeats on past its other rows of their instant', () => {
+    const scan = (id: string, occurredAt: string, description: string, extra: Record<string, unknown> = {}) => ({
+      ...event(id, null, occurredAt), stage: 'out_for_delivery', description, provider_event_id: `fan-courier:${id}`, ...extra,
+    });
+    const row = {
+      id: 'parcel', carrier: 'fan-courier', tracking_events: [
+        // Synthetic FAN Courier rows: a delivery round under two codes at one second, the first code told again later.
+        scan('first', '2026-11-13T05:55:05Z', 'Fixture round', { tie_order: 1 }),
+        scan('other', '2026-11-13T05:55:05Z', 'Fixture other code', { tie_order: 0 }),
+        scan('repeat', '2026-11-13T06:49:23Z', 'Fixture round'),
+        // A notice told again two minutes later, a scan in another stage at the first one's instant.
+        scan('notice', '2026-11-17T05:47:00Z', 'Fixture delay', { stage: 'pending' }),
+        scan('depot', '2026-11-17T05:47:00Z', 'Fixture depot', { stage: 'in_transit' }),
+        scan('notice-again', '2026-11-17T05:49:00Z', 'Fixture delay', { stage: 'pending' }),
+        // A scan of a later instant comes between: the round told after it is news.
+        scan('round', '2026-11-18T06:00:00Z', 'Fixture round'),
+        scan('sorted', '2026-11-18T06:10:00Z', 'Fixture sorted', { stage: 'in_transit' }),
+        scan('round-again', '2026-11-18T06:20:00Z', 'Fixture round'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
+      first: 'repeat', other: null, repeat: null, notice: 'notice-again', depot: null, 'notice-again': null,
+      round: null, sorted: null, 'round-again': null,
+    });
+  });
+
   it('serves a carrier\'s notice in the stage of its scan before it under that scan, so the headline stays on the scan', () => {
     // Synthetic DPD Poland rows: a notice its adapter left in the stage of the scan before it (`stage_source` `none`).
     const scan = (id: string, stage: string, occurredAt: string, stageSource: string, extra: Record<string, unknown> = {}) => ({

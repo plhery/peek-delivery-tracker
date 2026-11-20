@@ -6,6 +6,9 @@
  * three minutes. Every row is stored. A scan right after another in the
  * parcel's timeline, from the same source and in the same stage, words and
  * place, within an hour of the first of them, tells the reader nothing new.
+ * Rows of one instant come between none of them: the carrier's other code for
+ * a scan at its second (FAN Courier tells a delivery round under two codes)
+ * splits no run, nor does a scan of another stage at a notice's instant.
  * The apps show such a run as its newest scan, the others served with
  * `relay_of` its id (eventPlaces.ts), and only the run's first scan announces
  * (push.ts): a copy stored later announces nothing, even stamped before it. A scan La Poste lists twice at one
@@ -40,20 +43,34 @@ const repeats = (first: RepeatScan, scan: RepeatScan) => first.source !== '' && 
   && (scan.description === first.description || (scan.at === first.at && productWords(scan.description) === productWords(first.description)))
   && scan.location === first.location && scan.at - first.at <= RUN_MS;
 
-/** The runs of repeated scans, each in time order, two scans or more. Scans in `apart` join none. */
+/**
+ * The runs of repeated scans, each in time order, two scans or more. Each instant's rows go on the runs they repeat
+ * or start their own; a run that none of an instant's rows goes on ends there. Scans in `apart` join none.
+ */
 export function repeatRuns(scans: readonly RepeatScan[], apart: ReadonlySet<string> = new Set()): string[][] {
   const ordered = scans.filter((scan) => Number.isFinite(scan.at)).sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
   const runs: string[][] = [];
-  let run: RepeatScan[] = [];
-  for (const scan of ordered) {
-    if (run.length && !apart.has(scan.id) && !apart.has(run[0]!.id) && repeats(run[0]!, scan)) {
-      run.push(scan);
-      continue;
+  const close = (run: RepeatScan[]) => { if (run.length > 1) runs.push(run.map(({ id }) => id)); };
+  let open: RepeatScan[][] = [];
+  for (let start = 0; start < ordered.length;) {
+    const at = ordered[start]!.at;
+    let end = start;
+    while (end < ordered.length && ordered[end]!.at === at) end += 1;
+    const joined = new Set<RepeatScan[]>();
+    const started: RepeatScan[][] = [];
+    for (const scan of ordered.slice(start, end)) {
+      const run = apart.has(scan.id) ? undefined
+        : [...open, ...started].find((candidate) => !apart.has(candidate[0]!.id) && repeats(candidate[0]!, scan));
+      if (run) {
+        run.push(scan);
+        joined.add(run);
+      } else started.push([scan]);
     }
-    if (run.length > 1) runs.push(run.map(({ id }) => id));
-    run = [scan];
+    for (const run of open) if (!joined.has(run)) close(run);
+    open = [...open.filter((run) => joined.has(run)), ...started];
+    start = end;
   }
-  if (run.length > 1) runs.push(run.map(({ id }) => id));
+  open.forEach(close);
   return runs;
 }
 

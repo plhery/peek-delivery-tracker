@@ -579,6 +579,45 @@ it.each(['web', 'native'] as const)('announces a carrier\'s repeated scan once, 
   expect(await dispatched('earlier', 'again')).toEqual([]);
 });
 
+it.each(['web', 'native'] as const)('announces nothing for a repeat of a scan the carrier gave under two codes at one instant, for %s', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const clock = clocks('2026-11-13T07:30:00Z');
+  const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+  const service = channel === 'web' ? new WebPushNotificationService(client, '', '', '', clock.web) : apns;
+  const send = vi.spyOn(service, 'send').mockResolvedValue();
+  if (channel === 'web') vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue(); else vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+  const pending = channel === 'web' ? vi.spyOn(client, 'listPendingPushNotifications') : vi.spyOn(client, 'listPendingNativePushNotifications');
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  // Synthetic FAN Courier rows: a delivery round under two codes at one second, then the round's code told again
+  // within the hour.
+  const scans = [
+    { id: 'first', occurredAt: '2026-11-13T05:55:05Z', created: '2026-11-13T06:20:00Z', description: 'Fixture round' },
+    { id: 'other', occurredAt: '2026-11-13T05:55:05Z', created: '2026-11-13T06:20:00Z', description: 'Fixture other code' },
+    { id: 'later', occurredAt: '2026-11-13T06:49:23Z', created: '2026-11-13T07:20:00Z', description: 'Fixture round' },
+  ] as const;
+  let stored: readonly string[] = [];
+  const kept = () => scans.filter((scan) => stored.includes(scan.id)).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  vi.mocked(client.recentScans).mockImplementation(async () => new Map([['pkg', kept().map(({ id, occurredAt, description }) => ({
+    id, occurredAt, description, stage: 'out_for_delivery' as const, stageSource: 'carrier_map', location: 'Depot', source: 'fan-courier',
+  }))]]));
+  vi.spyOn(client, 'latestScanTimes').mockImplementation(async () => new Map([['pkg', kept()[0]!.occurredAt]]));
+  const dispatched = async (...ids: string[]) => {
+    stored = [...new Set([...stored, ...ids])];
+    pending.mockResolvedValueOnce(ids.map((id) => {
+      const { occurredAt, created } = scans.find((scan) => scan.id === id)!;
+      return { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_id: id, stage: 'out_for_delivery', occurred_at: occurredAt, event_created_at: created };
+    }));
+    send.mockClear();
+    await service.dispatch();
+    return send.mock.calls.map(([event]) => event.event_id);
+  };
+  expect(await dispatched('first', 'other')).toHaveLength(1);
+  // The round told again is no news, though the other code's row of its instant sorts between them by id.
+  expect(await dispatched('later')).toEqual([]);
+});
+
 it.each(['web', 'native'] as const)('announces two providers\' rows of one scan once, whichever comes first, for %s', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
   const clock = clocks('2026-11-05T12:30:00Z');

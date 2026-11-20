@@ -293,6 +293,7 @@ describe('Amazon Logistics account-only tracking', () => {
       expect(screen.getByText(/Amazon Logistics deliveries are usually tracked in Your Orders on Amazon/)).toBeInTheDocument();
       expect(screen.getByRole('link', { name: 'Open my Amazon orders' }))
         .toHaveAttribute('href', 'https://www.amazon.fr/gp/your-account/order-history');
+      expect(screen.getByRole('link', { name: /Amazon parcels can be tracked/ })).toHaveAttribute('href', '/guides/amazon-order-tracking');
       const button = screen.getByRole('button', { name: /^add parcel$/i });
       expect(button).toBeDisabled();
       await user.click(button);

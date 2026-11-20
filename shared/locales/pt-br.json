@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "A Amazon não disponibiliza mais o histórico de rastreamento desta encomenda. Você pode mantê-la aqui como referência.",
   "add.amazonShippingConfirmed": "A Amazon Shipping oferece rastreamento público. O Peek vai manter esta entrega atualizada.",
   "add.amazonCheckUnavailable": "O Peek não conseguiu consultar a Amazon Shipping agora. Tente novamente ou acompanhe esta entrega na sua conta da Amazon.",
+  "add.amazonGuide": "Dá para rastrear encomendas da Amazon: veja como achar o código",
   "add.amazonRetry": "Verificar de novo",
   "add.openAmazonOrders": "Abrir meus pedidos da Amazon",
   "add.autoSync": "O Peek vai buscar as atualizações de {{carrier}} automaticamente.",

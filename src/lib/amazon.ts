@@ -16,5 +16,8 @@ export {
 
 export const AMAZON_HISTORY_EXPIRED = 'amazon_shipping_history_expired';
 
-export const AMAZON_ACCOUNT_MESSAGE = 'Amazon Logistics deliveries usually need your Amazon account. Public Amazon Shipping tracking must be confirmed before adding this parcel.';
+/** The guide that shows where an Amazon order's carrier and tracking number are, for a client that shows this text as it is. */
+export const AMAZON_GUIDE_URL = 'https://peektracker.com/guides/amazon-order-tracking';
+export const AMAZON_ACCOUNT_MESSAGE = 'Amazon Logistics deliveries usually need your Amazon account. Public Amazon Shipping tracking must be confirmed before adding this parcel. '
+  + `An Amazon parcel another carrier delivers is tracked with that carrier's number, which Amazon shows under Your Orders, then Track package: ${AMAZON_GUIDE_URL}`;
 export const AMAZON_CHECK_UNAVAILABLE_MESSAGE = 'Amazon Shipping could not be checked right now. Please try again shortly or track this delivery in your Amazon account.';

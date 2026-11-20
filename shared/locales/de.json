@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "Amazon stellt den Sendungsverlauf dieses Pakets nicht mehr bereit. Du kannst es hier als Referenz behalten.",
   "add.amazonShippingConfirmed": "Amazon Shipping bietet eine öffentliche Sendungsverfolgung an. Peek hält diese Lieferung für dich aktuell.",
   "add.amazonCheckUnavailable": "Amazon Shipping konnte gerade nicht geprüft werden. Versuche es erneut oder verfolge die Lieferung in deinem Amazon-Konto.",
+  "add.amazonGuide": "Amazon-Pakete lassen sich verfolgen: So findest du die Nummer",
   "add.amazonRetry": "Erneut prüfen",
   "add.openAmazonOrders": "Meine Amazon-Bestellungen öffnen",
   "add.autoSync": "Peek prüft den Sendungsstatus bei {{carrier}} automatisch.",

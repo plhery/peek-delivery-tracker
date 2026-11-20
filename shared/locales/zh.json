@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "Amazon 已不再提供这个包裹的物流记录。你可以把它留在这里备查。",
   "add.amazonShippingConfirmed": "Amazon Shipping 提供公开的物流信息。Peek 会及时更新这个包裹的动态。",
   "add.amazonCheckUnavailable": "Peek 暂时无法查询 Amazon Shipping。请重试，或在你的 Amazon 账号中跟踪这个包裹。",
+  "add.amazonGuide": "Amazon 包裹也能跟踪：教你找到运单号（英文）",
   "add.amazonRetry": "重新查询",
   "add.openAmazonOrders": "打开我的 Amazon 订单",
   "add.autoSync": "Peek 会自动向 {{carrier}} 查询最新动态。",

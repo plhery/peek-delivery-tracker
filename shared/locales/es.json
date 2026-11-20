@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "Amazon ya no ofrece el historial de seguimiento de este paquete. Puedes conservarlo aquí como referencia.",
   "add.amazonShippingConfirmed": "Amazon Shipping ofrece seguimiento público para este paquete. Peek mantendrá esta entrega al día.",
   "add.amazonCheckUnavailable": "Peek no ha podido consultar Amazon Shipping. Inténtalo de nuevo o sigue esta entrega desde tu cuenta de Amazon.",
+  "add.amazonGuide": "Los paquetes de Amazon se pueden seguir: así encuentras el número",
   "add.amazonRetry": "Volver a comprobar",
   "add.openAmazonOrders": "Abrir mis pedidos de Amazon",
   "add.autoSync": "Peek consultará las novedades de {{carrier}} automáticamente.",

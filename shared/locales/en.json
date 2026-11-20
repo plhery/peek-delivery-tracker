@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "Amazon no longer provides this parcel’s tracking history. You can keep it here for reference.",
   "add.amazonShippingConfirmed": "Public tracking is available with Amazon Shipping. Peek will keep this delivery up to date.",
   "add.amazonCheckUnavailable": "Peek couldn’t check Amazon Shipping right now. Try again, or follow this delivery in your Amazon account.",
+  "add.amazonGuide": "Amazon parcels can be tracked: here’s how to find the number",
   "add.amazonRetry": "Check again",
   "add.openAmazonOrders": "Open my Amazon orders",
   "add.autoSync": "Peek will check {{carrier}} for updates automatically.",

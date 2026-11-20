@@ -333,7 +333,9 @@ describe('FrontDoor', () => {
     const note = screen.getByRole('note');
     expect(note).toHaveTextContent('That looks like an Amazon order number');
     expect(within(note).getByRole('link', { name: 'Open my Amazon orders' })).toHaveAttribute('href', expect.stringContaining('amazon.'));
-    expect(within(note).getByRole('link')).toHaveAttribute('rel', 'noopener noreferrer');
+    expect(within(note).getByRole('link', { name: 'Open my Amazon orders' })).toHaveAttribute('rel', 'noopener noreferrer');
+    // The guide shows where an Amazon order's tracking number is.
+    expect(within(note).getByRole('link', { name: /Amazon parcels can be tracked/ })).toHaveAttribute('href', '/guides/amazon-order-tracking');
     await user.type(field, '{Enter}');
     expect(mocks.lookup).not.toHaveBeenCalled();
     expect(mocks.detect).not.toHaveBeenCalled();
@@ -370,6 +372,7 @@ describe('FrontDoor', () => {
     const { user, field } = door();
     await user.type(field, 'TBA123476789012{Enter}');
     expect(await screen.findByText('Amazon Logistics deliveries are usually tracked in Your Orders on Amazon.')).toBeVisible();
+    expect(screen.getByRole('link', { name: /Amazon parcels can be tracked/ })).toHaveAttribute('href', '/guides/amazon-order-tracking');
     expect(mocks.lookup).not.toHaveBeenCalled();
     // Amazon Shipping tracks this one publicly.
     mocks.detect.mockResolvedValueOnce({ trackingNumber: 'TBA123476789013', carrier: 'amazon-shipping', amazonShippingStatus: 'available' });

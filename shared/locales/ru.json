@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "Amazon больше не показывает историю отслеживания этой посылки. Можете оставить её здесь для справки.",
   "add.amazonShippingConfirmed": "У Amazon Shipping есть открытое отслеживание. Peek будет следить за этой доставкой.",
   "add.amazonCheckUnavailable": "Peek сейчас не может проверить Amazon Shipping. Попробуйте ещё раз или следите за доставкой в аккаунте Amazon.",
+  "add.amazonGuide": "Посылки Amazon можно отслеживать: как найти трек-номер (на английском)",
   "add.amazonRetry": "Проверить снова",
   "add.openAmazonOrders": "Открыть мои заказы Amazon",
   "add.autoSync": "Peek будет сам проверять обновления в {{carrier}}.",

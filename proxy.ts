@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createHash } from 'node:crypto';
 import { assistantsPathLanguage } from './src/assistants/paths';
 import { carrierPageLanguage, carrierPathLanguage, namesNoCarrier } from './src/carriers/paths';
-import { guidePathLanguage, namesNoGuide } from './src/guides/paths';
+import { guideIdDestination, guidePathLanguage, namesNoGuide } from './src/guides/paths';
 import { APPEARANCE_BOOTSTRAP } from './src/lib/appearanceConfig';
 import { ENTRY_HINT_BOOTSTRAP } from './src/lib/entryHintConfig';
 import { isPageOnlyLanguage, LOCALE_COOKIE, PAGE_LANGUAGE_HEADER, pathLanguage } from './src/lib/locale';
@@ -31,6 +31,10 @@ export function proxy(request: NextRequest) {
   });
   // Never stored: the answer depends on who asks, and a later change of hosts must take effect at once.
   if (moved) return NextResponse.redirect(moved, { status: 308, headers: { 'Cache-Control': 'private, no-store' } });
+
+  // The apps name a guide by its id, which leads to its slug in the address's language.
+  const guide = guideIdDestination(request.nextUrl.pathname);
+  if (guide) return NextResponse.redirect(new URL(guide, request.url), { status: 308 });
 
   // The landing's code to scan sends a phone on to its own app; the page at `/app` is for anyone else.
   if (request.nextUrl.pathname === PHONE_APP_PATH) {

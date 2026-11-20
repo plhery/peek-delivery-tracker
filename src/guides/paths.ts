@@ -1,5 +1,5 @@
 import { GUIDE_LINKS } from '../generated/guides';
-import { isGuideLanguage, type GuideLanguage } from '../lib/locale';
+import { guideLanguage, isGuideLanguage, type GuideLanguage, type Locale } from '../lib/locale';
 
 /** Where the guides of a language live, or one of them. English has no prefix. */
 export function guidePath(locale: GuideLanguage, slug?: string): string {
@@ -28,4 +28,25 @@ export function namesNoGuide(pathname: string): boolean {
   if (!language) return false;
   const below = pathname.slice(guidePath(language).length);
   return below !== '' && !GUIDE_LINKS[language].some(({ slug }) => below === `/${slug}`);
+}
+
+/** A guide's address in the reader's language, or the nearest one it is written in; null for an id with no guide. */
+export function guideHref(locale: Locale, id: string): string | null {
+  const language = guideLanguage(locale);
+  const guide = GUIDE_LINKS[language].find((link) => link.id === id);
+  return guide ? guidePath(language, guide.slug) : null;
+}
+
+/**
+ * Where an address that names a guide by its id instead of its slug leads, such as `/fr/guides/amazon-orders`: the
+ * apps link a guide that way, as they hold no slugs. Null for any other address, a slug included.
+ */
+export function guideIdDestination(pathname: string): string | null {
+  const language = guidePathLanguage(pathname);
+  if (!language) return null;
+  const below = pathname.slice(guidePath(language).length);
+  const links = GUIDE_LINKS[language];
+  if (!below || links.some(({ slug }) => below === `/${slug}`)) return null;
+  const guide = links.find(({ id }) => below === `/${id}`);
+  return guide ? guidePath(language, guide.slug) : null;
 }

@@ -22,6 +22,7 @@
   "add.amazonHistoryExpired": "Amazon non fornisce più la cronologia di tracciamento di questo pacco. Puoi conservarlo qui come riferimento.",
   "add.amazonShippingConfirmed": "Il tracciamento pubblico è disponibile con Amazon Shipping. Peek terrà aggiornata questa consegna.",
   "add.amazonCheckUnavailable": "Impossibile verificare Amazon Shipping al momento. Riprova oppure segui questa consegna dal tuo account Amazon.",
+  "add.amazonGuide": "I pacchi Amazon si possono tracciare: ecco come trovare il numero",
   "add.amazonRetry": "Riprova",
   "add.openAmazonOrders": "Apri i miei ordini Amazon",
   "add.autoSync": "Peek controllerà automaticamente gli aggiornamenti di {{carrier}}.",

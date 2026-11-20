@@ -3,6 +3,7 @@ import { CarrierMark, CarrierTruck } from '../../components/CarrierMark';
 import { PostcodeCountry } from '../../components/PostcodeCountry';
 import { Icon } from '../../components/Icon';
 import { useI18n, type MessageKey } from '../../i18n';
+import { guideHref } from '../../guides/paths';
 import { amazonOrdersUrl } from '../../lib/amazon';
 import { carrierBrand } from '../../lib/carrierBrand';
 import { carrierInfo, carrierTrackingHintKey, formatTrackingNumber, requirementHelpKey, tracksAutomatically, typedRequirementValue } from '../../lib/carriers';
@@ -205,6 +206,7 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
       <p>{t(found.account === 'required' ? 'add.amazonAccount' : 'add.amazonCheckUnavailable')}</p>
       {found.account === 'unavailable' && <button type="button" className="door-note__action" onClick={() => send({ type: 'recheck' })}>{t('add.amazonRetry')}</button>}
       <a className="door-note__action" href={amazonOrdersUrl(found.normalized)} target="_blank" rel="noopener noreferrer">{t('add.openAmazonOrders')}<Icon name="arrow" /></a>
+      {found.account === 'required' && <AmazonGuideLink />}
     </DoorNote>}
 
     {found.order && <DoorNote icon="receipt" tone="warm" title={t(`door.order.${found.order}.title`)} urgent={state.raised}>
@@ -212,6 +214,7 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
       {/* Only Amazon has an orders page to link to: for Shein, Shopee and Temu the note says where to tap instead. */}
       {found.order === 'amazon'
         && <a className="door-note__action" href={amazonOrdersUrl('')} target="_blank" rel="noopener noreferrer">{t('add.openAmazonOrders')}<Icon name="arrow" /></a>}
+      {found.order === 'amazon' && <AmazonGuideLink />}
     </DoorNote>}
 
     {found.pickup && <DoorNote icon="lock" tone="warm" title={t('add.pickupCode.title')} urgent={state.raised}>
@@ -243,4 +246,14 @@ export function LookupFeedback({ lookup, pointer, onUnlock, onPickCarrier, onSug
         : state.paste === 'share-too-large' ? 'add.shareTooLarge' : pointer === 'touch' ? 'door.paste.blocked.touch' : 'door.paste.blocked.keys')}</p>
     </DoorNote>}
   </div>;
+}
+
+/**
+ * The Amazon guide, under a note that Amazon tracks a parcel itself or that a number is Amazon's order number: an Amazon
+ * order's carrier and its tracking number are in the reader's Amazon account, and the guide shows where.
+ */
+function AmazonGuideLink() {
+  const { t, locale } = useI18n();
+  const href = guideHref(locale, 'amazon-orders');
+  return href && <a className="door-note__action" href={href} target="_blank" rel="noopener">{t('add.amazonGuide')}<Icon name="arrow" /></a>;
 }

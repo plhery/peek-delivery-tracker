@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest';
 import { GUIDE_LINKS } from '../generated/guides';
 import { GUIDE_LANGUAGES } from '../lib/locale';
-import { guidePath, guidePathLanguage, namesNoGuide } from './paths';
+import { guideHref, guideIdDestination, guidePath, guidePathLanguage, namesNoGuide } from './paths';
 
 it('puts English guides at /guides and every other language under its prefix', () => {
   expect(guidePath('en')).toBe('/guides');
@@ -40,4 +40,24 @@ it('knows an address below a language’s guides that names none of them, letter
   }
   // Nor is it anything to say of an address that is not the guides'.
   for (const path of ['/', '/de', '/demo', '/guidesmore', '/en/guides/x', '/GUIDES/x', '/FR/guides/x']) expect(namesNoGuide(path), path).toBe(false);
+});
+
+it('leads an address that names a guide by its id to its slug, in the address’s language', () => {
+  const slug = (language: 'en' | 'fr', id: string) => GUIDE_LINKS[language].find((link) => link.id === id)!.slug;
+  expect(guideIdDestination('/guides/amazon-orders')).toBe(`/guides/${slug('en', 'amazon-orders')}`);
+  expect(guideIdDestination('/fr/guides/amazon-orders')).toBe(`/fr/guides/${slug('fr', 'amazon-orders')}`);
+  // A slug, the index, an unknown id or a language without guides stays where it is.
+  expect(guideIdDestination(`/guides/${slug('en', 'amazon-orders')}`)).toBeNull();
+  expect(guideIdDestination('/guides')).toBeNull();
+  expect(guideIdDestination('/guides/no-such-guide')).toBeNull();
+  expect(guideIdDestination('/ru/guides/amazon-orders')).toBeNull();
+  expect(guideIdDestination('/guides/amazon-orders/more')).toBeNull();
+});
+
+it('links a guide in the reader’s language, or the nearest one it is written in', () => {
+  const slug = (language: 'en' | 'pt' | 'de', id: string) => GUIDE_LINKS[language].find((link) => link.id === id)!.slug;
+  expect(guideHref('de', 'amazon-orders')).toBe(`/de/guides/${slug('de', 'amazon-orders')}`);
+  expect(guideHref('pt-br', 'amazon-orders')).toBe(`/pt/guides/${slug('pt', 'amazon-orders')}`);
+  expect(guideHref('zh', 'amazon-orders')).toBe(`/guides/${slug('en', 'amazon-orders')}`);
+  expect(guideHref('en', 'no-such-guide')).toBeNull();
 });

@@ -1,4 +1,5 @@
 import { amazonOrdersUrl, isAmazonTrackingNumber, requiresAmazonAccount } from '../lib/amazon';
+import { guideHref } from '../guides/paths';
 import { trackAction } from '../lib/analytics';
 import { isDemoBuild } from '../lib/buildMode';
 import { userErrorMessage } from '../lib/userMessages';
@@ -194,6 +195,8 @@ export function AddParcelSheet({
   const shippingConfirmed = amazonNumber && currentVerification?.carrier === 'amazon-shipping'
     && ['available', 'expired'].includes(currentVerification.amazonShippingStatus ?? '');
   const accountRequired = amazonNumber ? !shippingConfirmed : requiresAmazonAccount(selectedCarrier);
+  // Amazon's carriers can be tracked: the guide shows where an Amazon order's tracking number is.
+  const amazonGuide = guideHref(locale, 'amazon-orders');
   const detectedCarrier = shouldLookup && currentVerification ? currentVerification.carrier
     : recognizedCarrier ?? parsedTracking.carrier;
   const resolvedCarrier = amazonNumber ? shippingConfirmed ? 'amazon-shipping' : 'amazon-logistics'
@@ -516,6 +519,9 @@ export function AddParcelSheet({
                     <a className="add-parcel-carrier__account-link" href={amazonOrdersUrl(normalizedNumber)} target="_blank" rel="noopener noreferrer">
                       {t('add.openAmazonOrders')}
                     </a>
+                  )}
+                  {accountRequired && amazonGuide && (
+                    <a className="add-parcel-carrier__account-link" href={amazonGuide} target="_blank" rel="noopener">{t('add.amazonGuide')}</a>
                   )}
                 </div>
               )}

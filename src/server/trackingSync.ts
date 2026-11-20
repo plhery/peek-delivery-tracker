@@ -82,7 +82,8 @@ import { carrierLookupKey, recognitionKey, SharedLookups, universalLookupKey, ty
 import { carrierLookupInput, withPostcodeCountry } from './postcodeCountry';
 import {
   accountPostcodeFor, accountPostcodeWrite, ACCOUNT_POSTCODE, HANDOFF_POSTCODE, handoffPostcodeFound, handoffPostcodeMark,
-  postcodeCleared, typedHandoffPostcode, wantsAccountPostcode, wantsHandoffPostcode, type FittingPostcode, type HandoffPostcodeMark,
+  handoffPostcodeMissed, nextHandoffPostcodeMark, postcodeCleared, typedHandoffPostcode, wantsAccountPostcode, wantsHandoffPostcode,
+  type FittingPostcode, type HandoffPostcodeMark,
 } from './accountPostcode';
 import { storedPostcodeCountry } from '../lib/postcodeCountry';
 
@@ -3743,21 +3744,27 @@ export class TrackingSyncService {
       return answer;
     } finally {
       const found = handoffPostcodeFound(partner, steps, answered);
-      if (found !== null) keep.handoffPostcode?.({ carrier: partner, number, postcode: given.postcode, country: given.country, found });
+      if (found !== null) {
+        keep.handoffPostcode?.(nextHandoffPostcodeMark(handoffPostcodeMark(parcel, partner, number),
+          { carrier: partner, number, postcode: given.postcode, country: given.country, found }, this.now()));
+      }
     }
   }
 
   /**
    * The postcode an account's parcel is asked with at the carrier it is handed to (accountPostcode.ts): the one
-   * its owner typed for it, else the one that found it there, else the account's. One that missed it is not
-   * sent again for that number.
+   * its owner typed for it, whatever it missed, else the one that found it there, else the account's. The account's
+   * one that missed is sent once more some hours later (handoffPostcodeMissed), and not again for that number after
+   * a second miss.
    */
   private async handoffAccountPostcode(parcel: JsonObject, partner: string, number: string): Promise<FittingPostcode | null> {
+    // The owner gave it for this parcel: a miss may only mean PostNL did not know the barcode yet.
+    const typed = typedHandoffPostcode(parcel, partner, number);
+    if (typed) return typed;
     const mark = handoffPostcodeMark(parcel, partner, number);
     // A postcode the owner cleared leaves the parcel with what they typed alone.
     const cleared = postcodeCleared(parcel);
-    let chosen = typedHandoffPostcode(parcel, partner, number)
-      ?? (mark?.found && !cleared ? { postcode: mark.postcode, country: mark.country } : null);
+    let chosen = mark?.found && !cleared ? { postcode: mark.postcode, country: mark.country } : null;
     if (!chosen && !cleared) {
       try {
         chosen = accountPostcodeFor(partner, number, await this.client.accountPostcodes(String(parcel.user_id)));
@@ -3766,7 +3773,7 @@ export class TrackingSyncService {
         return null;
       }
     }
-    return chosen && !(mark && !mark.found && mark.postcode === chosen.postcode) ? chosen : null;
+    return chosen && !handoffPostcodeMissed(mark, chosen.postcode, this.now()) ? chosen : null;
   }
 
   private async fetchResult(

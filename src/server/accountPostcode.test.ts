@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { IndeterminateError, TransportError } from 'universal-parcel-scraper';
 import type { StepRecord } from 'universal-parcel-scraper/node';
 import {
-  accountPostcodeFor, accountPostcodeWrite, handoffPostcodeFound, handoffPostcodeMark, postcodeCleared, typedHandoffPostcode, wantsAccountPostcode,
+  accountPostcodeFor, accountPostcodeWrite, handoffPostcodeFound, handoffPostcodeMark, handoffPostcodeMissed, nextHandoffPostcodeMark,
+  postcodeCleared, typedHandoffPostcode, wantsAccountPostcode,
   wantsHandoffPostcode,
 } from './accountPostcode';
 import type { JsonObject } from './types';
@@ -129,6 +130,27 @@ describe('handoff postcode', () => {
     expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: mark } }), 'spring-gds', number.toLowerCase())).toEqual(mark);
     expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: mark } }), 'spring-gds', '3SABCD000000002')).toBeNull();
     expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: { ...mark, found: 'no' } } }), 'spring-gds', number)).toBeNull();
+  });
+
+  it('counts a postcode\'s misses in a row, and keeps it back until its one more try 6 h later', () => {
+    const asked = { carrier: 'spring-gds', number, postcode: '1011 AB', country: null };
+    const at = new Date('2026-11-18T09:00:00Z');
+    const first = nextHandoffPostcodeMark(null, { ...asked, found: false }, at);
+    expect(first).toEqual({ ...asked, found: false, at: '2026-11-18T09:00:00.000Z', misses: 1 });
+    expect(handoffPostcodeMark(parcel({ carrier_data: { handoff_postcode: first } }), 'spring-gds', number)).toEqual(first);
+    expect(handoffPostcodeMissed(first, '1011 AB', new Date('2026-11-18T14:59:59Z'))).toBe(true);
+    expect(handoffPostcodeMissed(first, '1011 AB', new Date('2026-11-18T15:00:00Z'))).toBe(false);
+    expect(handoffPostcodeMissed(first, '2511 CV', at)).toBe(false);
+    const second = nextHandoffPostcodeMark(first, { ...asked, found: false }, new Date('2026-11-18T15:00:00Z'));
+    expect(second.misses).toBe(2);
+    expect(handoffPostcodeMissed(second, '1011 AB', new Date('2026-11-25T09:00:00Z'))).toBe(true);
+    // Another postcode's miss counts on its own; a find ends the count.
+    expect(nextHandoffPostcodeMark(second, { ...asked, postcode: '2511 CV', found: false }, at).misses).toBe(1);
+    const found = nextHandoffPostcodeMark(second, { ...asked, found: true }, at);
+    expect(found).toEqual({ ...asked, found: true, at: '2026-11-18T09:00:00.000Z' });
+    expect(handoffPostcodeMissed(found, '1011 AB', at)).toBe(false);
+    // A miss kept before misses were counted is tried once more at once.
+    expect(handoffPostcodeMissed({ ...asked, found: false }, '1011 AB', at)).toBe(false);
   });
 
   it('says the postcode found the parcel, missed it while PostNL still answered, or neither', () => {

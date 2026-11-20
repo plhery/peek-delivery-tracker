@@ -940,11 +940,12 @@ A parcel often changes carrier at the border. The origin history is always kept.
   item from abroad), an account's parcel is asked there with the postcode its owner typed for
   that leg (`universal_input`) or for the parcel, else with the account's, as the Add sheet
   offers it, unless the owner cleared the parcel's ([`accountPostcode.ts`](../src/server/accountPostcode.ts)). The domestic tracker
-  shows the delivery slot; it answers a wrong postcode as an unknown barcode, and the
-  international tracker then answers. Its lookup's steps tell which happened, and the parcel
-  keeps it (`handoff_postcode`): one that found the parcel is asked with again, one that missed
-  is not sent again for that number, and nobody is asked to fix it. A guest's parcel is asked
-  without one.
+  shows the delivery slot; it answers a wrong postcode, and a barcode it does not know yet, as
+  an unknown barcode, and the international tracker then answers. Its lookup's steps tell which
+  happened, and the parcel keeps it (`handoff_postcode`): one that found the parcel is asked
+  with again; the account's one that missed is sent once more 6 h after the miss, and not again
+  for that number after a second miss; one the owner typed is sent whatever it missed. Nobody
+  is asked to fix a miss. A guest's parcel is asked without one.
   Failed confirmations wait 55 min, doubling with each miss up to 6 h, unless the origin
   history or the partner changes; the wait stays 55 min while the origin is down, from an
   ask the failed check saves too, and a check a provider answers in the meantime keeps the

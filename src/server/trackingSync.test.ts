@@ -5529,6 +5529,57 @@ describe('TrackingSyncService', () => {
       expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '2511 CV', found: true });
     });
 
+    // PostNL's domestic tracker answers a barcode it does not know yet as it does a wrong postcode, as a just-handed-over
+    // one can be: the account's postcode is sent once more 6 h after it missed.
+    it('sends the account\'s postcode that missed once more 6 h later, and not again after a second miss', async () => {
+      let clock = new Date('2026-11-18T09:00:00Z');
+      let known = false;
+      const client = { ...fakeClient(), accountPostcodes: vi.fn().mockResolvedValue([{ carrier: 'spring-gds', dpd_postcode: '1011 AB' }]) };
+      const adapter = postnl(() => known);
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => clock);
+      let stored: JsonObject = parcel;
+      const check = async (at: string) => {
+        clock = new Date(at);
+        adapter.fetch.mockClear();
+        await service.syncPackage(stored);
+        stored = { ...stored, ...client.updatePackage.mock.calls.at(-1)![1] };
+        return asked(adapter);
+      };
+      expect(await check('2026-11-18T09:00:00Z')).toEqual(['1011 AB']);
+      expect((stored.carrier_data as JsonObject).handoff_postcode)
+        .toMatchObject({ postcode: '1011 AB', found: false, at: '2026-11-18T09:00:00.000Z', misses: 1 });
+      expect(await check('2026-11-18T12:00:00Z')).toEqual([null]);
+      expect(await check('2026-11-18T15:00:00Z')).toEqual(['1011 AB']);
+      expect((stored.carrier_data as JsonObject).handoff_postcode).toMatchObject({ postcode: '1011 AB', found: false, misses: 2 });
+      expect(await check('2026-11-19T15:00:00Z')).toEqual([null]);
+
+      // Found on its one more try, it is asked with from then on.
+      stored = parcel;
+      expect(await check('2026-11-20T09:00:00Z')).toEqual(['1011 AB']);
+      known = true;
+      expect(await check('2026-11-20T15:00:00Z')).toEqual(['1011 AB']);
+      expect((stored.carrier_data as JsonObject).handoff_postcode).toMatchObject({ postcode: '1011 AB', found: true });
+      expect(await check('2026-11-20T16:00:00Z')).toEqual(['1011 AB']);
+    });
+
+    it('tries a postcode it missed before misses were counted once more at once', async () => {
+      const { adapter, service } = setup(() => true);
+      await service.syncPackage({ ...parcel, carrier_data: {
+        handoff_postcode: { carrier: 'spring-gds', number, postcode: '1011 AB', country: null, found: false } } });
+      expect(asked(adapter)).toEqual(['1011 AB']);
+    });
+
+    it('sends a postcode its owner typed whatever it missed', async () => {
+      const mark = { carrier: 'spring-gds', number, postcode: '2511 CV', country: null, found: false, at: '2026-11-18T08:30:00Z', misses: 2 };
+      const leg = setup(() => false);
+      await leg.service.syncPackage({ ...parcel, carrier_data: { universal_input: { number, postcode: '2511 CV' }, handoff_postcode: mark } });
+      expect(asked(leg.adapter)).toEqual(['2511 CV']);
+      expect(leg.client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '2511 CV', misses: 3 });
+      const own = setup(() => false);
+      await own.service.syncPackage({ ...parcel, dpd_postcode: '2511 CV', carrier_data: { handoff_postcode: mark } });
+      expect(asked(own.adapter)).toEqual(['2511 CV']);
+    });
+
     it('asks with the postcode its owner typed for that leg first, and asks a guest\'s parcel as before', async () => {
       const typed = setup(() => true);
       await typed.service.syncPackage({ ...parcel, carrier_data: { universal_input: { number, postcode: '2511 CV' } } });

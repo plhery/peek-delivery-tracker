@@ -109,8 +109,10 @@ export function accountPostcodeWrite(parcel: JsonObject, given: readonly JsonObj
  * PostNL's international tracker answers, later and without the slot. An account's parcel is looked up
  * there with the postcode its owner typed for it, for that leg (`universal_input`) or for the parcel, and
  * otherwise with the account's, as the Add sheet offers it, unless the owner cleared the parcel's. The domestic tracker answers a wrong postcode
- * as an unknown barcode, and the international one then answers: that miss is kept (`handoff_postcode`), so
- * the postcode is not sent again for that number, and nobody is told, as nobody gave it for this leg. A
+ * as an unknown barcode, and the international one then answers: that miss is kept (`handoff_postcode`). It answers
+ * a barcode it does not know yet alike, as one just handed over can be, so the account's postcode that missed is sent
+ * once more HANDOFF_POSTCODE_RETRY_MS later, and not again for that number after a second miss. A postcode the owner
+ * typed is sent whatever it missed. Nobody is told of a miss, as nobody gave the account's postcode for this leg. A
  * guest's parcel is asked as before.
  */
 
@@ -120,7 +122,16 @@ export const HANDOFF_POSTCODE = 'handoff_postcode';
 /** The carriers whose lookup says in a step of its own whether a postcode found the parcel: PostNL's domestic tracker. */
 const POSTCODE_STEPS: Readonly<Record<string, string>> = { 'spring-gds': 'domestic' };
 
-export interface HandoffPostcodeMark { carrier: string; number: string; postcode: string; country: string | null; found: boolean }
+/** How long after a miss the account's postcode is sent once more: PostNL's domestic tracker may not have known the barcode yet. */
+export const HANDOFF_POSTCODE_RETRY_MS = 6 * 60 * 60_000;
+
+/**
+ * `at`: when the lookup was made. `misses`: how many lookups in a row the postcode missed; a mark kept before either was
+ * recorded reads as one miss made long ago.
+ */
+export interface HandoffPostcodeMark {
+  carrier: string; number: string; postcode: string; country: string | null; found: boolean; at?: string; misses?: number;
+}
 
 /** Whether an account's parcel is asked at `carrier`, which it is handed to under `number`, with a postcode. */
 export function wantsHandoffPostcode(parcel: JsonObject, carrier: string, number: string): boolean {
@@ -135,7 +146,27 @@ export function handoffPostcodeMark(parcel: JsonObject, carrier: string, number:
   if (!isRecord(mark) || mark.carrier !== carrier || typeof mark.number !== 'string' || typeof mark.postcode !== 'string'
     || typeof mark.found !== 'boolean' || normalizeTrackingNumber(mark.number) !== normalizeTrackingNumber(number)) return null;
   return { carrier, number: mark.number, postcode: mark.postcode, country: typeof mark.country === 'string' ? mark.country : null,
-    found: mark.found };
+    found: mark.found, ...(typeof mark.at === 'string' ? { at: mark.at } : {}),
+    ...(typeof mark.misses === 'number' && Number.isFinite(mark.misses) ? { misses: mark.misses } : {}) };
+}
+
+/** The mark a lookup with `asked`'s postcode leaves, after `previous`, the parcel's mark for that carrier and number. */
+export function nextHandoffPostcodeMark(previous: HandoffPostcodeMark | null, asked: Omit<HandoffPostcodeMark, 'at' | 'misses'>,
+  at: Date): HandoffPostcodeMark {
+  if (asked.found) return { ...asked, at: at.toISOString() };
+  const before = previous && !previous.found && previous.postcode === asked.postcode ? previous.misses ?? 1 : 0;
+  return { ...asked, at: at.toISOString(), misses: before + 1 };
+}
+
+/**
+ * Whether the parcel's mark keeps `postcode` from being sent now: it missed, and either missed again after the
+ * one more try HANDOFF_POSTCODE_RETRY_MS later, or that try is not due yet.
+ */
+export function handoffPostcodeMissed(mark: HandoffPostcodeMark | null, postcode: string, now: Date): boolean {
+  if (!mark || mark.found || mark.postcode !== postcode) return false;
+  if ((mark.misses ?? 1) > 1) return true;
+  const at = Date.parse(mark.at ?? '');
+  return Number.isFinite(at) && now.getTime() < at + HANDOFF_POSTCODE_RETRY_MS;
 }
 
 /**

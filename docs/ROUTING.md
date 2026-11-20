@@ -974,8 +974,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   to DHL, not received yet" instead of "Delivery with DHL" (`delivery_announced`, served from the
   probe's `listed` marker in [`eventPlaces.ts`](../src/server/eventPlaces.ts)), until the parcel
   is delivered or returned, by its stage or, on the account's rows, by its scans. A carrier that
-  writes the delivered step on a schedule (GZYL) keeps the line: the partner still has the parcel
-  only announced, and the apps tell the reader to ask the seller.
+  writes the delivered step on a schedule (GZYL) keeps `delivery_announced` after delivery: the
+  partner never scanned the parcel, so the clients tell the reader the delivery is a scheduled
+  step and to ask the seller (`scheduledDelivery`), and, by the stage, no longer say "Announced".
 - The reverse holds too. A carrier that confirms the number and would hand the parcel to the
   carrier it is filed under, with the same number, is an earlier leg, such as a customs agent
   before the local courier. Its history is shown while the filed carrier has none, but it

@@ -74,6 +74,14 @@ describe('shipment details', () => {
     expect(screen.getByText('Delivery with Swiss Post')).toHaveClass('detail__delivery');
   });
 
+  it('tells a scheduled delivery whose partner only had it announced to ask the seller, without the announced line', () => {
+    show({ carrier: 'gzyl', trackingNumber: 'YL0000000000YQ', deliveryCarrier: 'dpd-de', deliveryAnnounced: true, events: [
+      { id: 'scan', parcelId: 'parcel', stage: 'delivered', description: 'Delivered', occurredAt: '2026-11-10T10:00:00Z' },
+    ] });
+    expect(screen.getByText('GZYL updates on a fixed schedule, with no signature. If nothing came, ask the seller.')).toBeInTheDocument();
+    expect(screen.queryByText('Announced to DPD Germany, not received yet')).not.toBeInTheDocument();
+  });
+
   it('shows the number the carrier tracks the parcel by under the one typed', () => {
     show({ carrier: 'hermes-de', trackingNumber: '00000000000001', canonicalTrackingNumber: 'H0000000000001' });
     expect([...document.querySelectorAll('.detail__tracking-label')].map(label => label.textContent))

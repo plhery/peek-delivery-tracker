@@ -139,10 +139,10 @@ export function ParcelDetail({
   // Handed from one carrier to another, or about to be, the card carries both marks and says who delivers, as its card in the list does.
   const deliveryId = deliveringCarrierId(parcel);
   const delivery = deliveryId ? carrierInfo(deliveryId, locale) : null;
-  const deliveryLabel = delivery ? t(deliveryLineKey(parcel), { carrier: delivery.name }) : null;
+  const current = currentEvent(parcel.events, parcel.returnHeld);
+  const deliveryLabel = delivery ? t(deliveryLineKey(parcel, current?.stage), { carrier: delivery.name }) : null;
   const amazonHistoryExpired = carrier.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automaticTracking = tracksAutomatically(carrier.id) && !amazonHistoryExpired;
-  const current = currentEvent(parcel.events, parcel.returnHeld);
   // The carrier's site is down: the parcel waits for it, whatever its own last check said.
   const outage = parcel.carrierOutage && !['delivered', 'returned'].includes(current?.stage ?? '') ? parcel.carrierOutage : undefined;
   // While the parcel waits, its pickup point gets a card; afterwards it is a plain fact.

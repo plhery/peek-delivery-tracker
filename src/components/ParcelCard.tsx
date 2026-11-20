@@ -28,9 +28,9 @@ export function ParcelCard({ parcel, onOpen, onArchive, notice, variant = 'regul
 }) {
   const { locale, languageTag, t, use24HourTime } = useI18n();
   const carrier = shownCarrier(parcel, carrierInfo(displayedCarrierId(parcel), locale), t, locale);
-  const deliveryCarrier = deliveringCarrierId(parcel);
-  const deliveryLabel = deliveryCarrier ? t(deliveryLineKey(parcel), { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
   const current = currentEvent(parcel.events, parcel.returnHeld);
+  const deliveryCarrier = deliveringCarrierId(parcel);
+  const deliveryLabel = deliveryCarrier ? t(deliveryLineKey(parcel, current?.stage), { carrier: carrierInfo(deliveryCarrier, locale).name }) : null;
   const estimate = parcelDeliveryEstimate(parcel);
   const expectedDelivery = estimate ? localizedDeliveryEstimate(parcel.expectedDeliveryFrom, estimate, t, languageTag, undefined, use24HourTime) : null;
   const statusLabel = parcelStatusLabel(parcel, t, locale);

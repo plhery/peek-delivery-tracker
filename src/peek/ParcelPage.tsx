@@ -277,7 +277,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   // own card does. So does a gift's: its journey tells the country it comes from anyway, and the one who rings is news.
   const deliveringId = deliveringCarrierId(parcel);
   const delivering = carrierKnown && deliveringId ? carrierInfo(deliveringId, locale) : null;
-  const deliveryNote = delivering ? t(deliveryLineKey(parcel), { carrier: delivering.name }) : null;
+  const deliveryNote = delivering ? t(deliveryLineKey(parcel, stage), { carrier: delivering.name }) : null;
   // The carrier the number's own format points to, while it does not list the number yet. After a week, its owner,
   // who reads the number, may choose another carrier at the front door.
   const likely = !carrierKnown && !placeholder && !present ? likelyCarrier(parcel, now) : null;

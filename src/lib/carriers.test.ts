@@ -20,6 +20,7 @@ import {
   requirementHelpKey,
   requirementSatisfied,
   scheduledDelivery,
+  deliveryLineKey,
   supportsSwissPostHandoff,
   trackingLinksByNumber,
   tracksAutomatically,
@@ -2178,6 +2179,20 @@ describe('scheduledDelivery', () => {
   });
   it('leaves a delivery by a carrier it was handed to alone', () => {
     expect(scheduledDelivery({ ...scheduled, deliveryCarrier: 'dpd-de' }, 'delivered')).toBe(false);
+  });
+  it('marks one whose named partner only has it announced: the partner never scanned it', () => {
+    expect(scheduledDelivery({ ...scheduled, deliveryCarrier: 'dpd-de', deliveryAnnounced: true }, 'delivered')).toBe(true);
+    expect(scheduledDelivery({ ...scheduled, deliveryCarrier: 'dpd-de', deliveryAnnounced: true }, 'in_transit')).toBe(false);
+  });
+});
+
+describe('deliveryLineKey', () => {
+  const announced = { carrier: 'gzyl', trackingNumber: 'YL0000000000YQ', deliveryCarrier: 'dpd-de', deliveryAnnounced: true } as const;
+  it('says a partner that only lists the parcel has it announced, until the parcel is delivered or returned', () => {
+    expect(deliveryLineKey(announced, 'in_transit')).toBe('parcel.deliveryAnnounced');
+    expect(deliveryLineKey(announced, undefined)).toBe('parcel.deliveryAnnounced');
+    for (const stage of ['delivered', 'returned'] as const) expect(deliveryLineKey(announced, stage)).toBe('parcel.deliveryCarrier');
+    expect(deliveryLineKey({ ...announced, deliveryAnnounced: undefined }, 'in_transit')).toBe('parcel.deliveryCarrier');
   });
 });
 

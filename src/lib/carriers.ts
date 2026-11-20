@@ -216,13 +216,21 @@ export function deliveringCarrierId(parcel: Parameters<typeof namedDelivery>[0])
   return active !== displayedCarrierId(parcel) ? active : namedDelivery(parcel)?.carrier ?? null;
 }
 
+/** The carrier its carrier names as delivering lists the parcel without a scan of its own: announced there only. */
+function deliveryOnlyAnnounced(parcel: Parameters<typeof namedDelivery>[0]): boolean {
+  const named = namedDelivery(parcel);
+  return !!parcel.deliveryAnnounced && !!named && named.carrier === deliveringCarrierId(parcel);
+}
+
 /**
  * The words of the card's line on who delivers (`deliveringCarrierId`): announced there and not received yet while the
- * carrier its carrier names lists the parcel without a scan of its own, else who delivers.
+ * carrier its carrier names lists the parcel without a scan of its own, else who delivers. A parcel delivered or
+ * returned waits for no partner: a carrier that writes its delivered step on a schedule (GZYL) keeps the flag after
+ * delivery only to say so (`scheduledDelivery`).
  */
-export function deliveryLineKey(parcel: Parameters<typeof namedDelivery>[0]): 'parcel.deliveryAnnounced' | 'parcel.deliveryCarrier' {
-  const named = namedDelivery(parcel);
-  return parcel.deliveryAnnounced && named && named.carrier === deliveringCarrierId(parcel) ? 'parcel.deliveryAnnounced' : 'parcel.deliveryCarrier';
+export function deliveryLineKey(parcel: Parameters<typeof namedDelivery>[0], stage: Stage | null | undefined):
+  'parcel.deliveryAnnounced' | 'parcel.deliveryCarrier' {
+  return deliveryOnlyAnnounced(parcel) && stage !== 'delivered' && stage !== 'returned' ? 'parcel.deliveryAnnounced' : 'parcel.deliveryCarrier';
 }
 
 /**
@@ -233,10 +241,12 @@ export const SCHEDULED_DELIVERIES: ReadonlySet<CarrierId> = new Set<CarrierId>([
 
 /**
  * Whether the parcel's delivered status is such a scheduled step: the reader is told so, and to ask the seller if
- * nothing came. A carrier it was handed to delivers for real.
+ * nothing came. A carrier it was handed to delivers for real, but not one that has it only as announced: the server
+ * keeps that flag after a scheduled delivery (`delivery_announced`).
  */
 export function scheduledDelivery(parcel: Parameters<typeof deliveringCarrierId>[0], stage: Stage | null | undefined): boolean {
-  return stage === 'delivered' && SCHEDULED_DELIVERIES.has(displayedCarrierId(parcel)) && !deliveringCarrierId(parcel);
+  return stage === 'delivered' && SCHEDULED_DELIVERIES.has(displayedCarrierId(parcel))
+    && (!deliveringCarrierId(parcel) || deliveryOnlyAnnounced(parcel));
 }
 
 /**

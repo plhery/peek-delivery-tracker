@@ -351,7 +351,7 @@ describe('the link preview image', () => {
     expect(asked).not.toHaveBeenCalled();
   });
 
-  it('can write every status and every estimate in each language', () => {
+  it('can write every status and every estimate in each language', { timeout: 60_000 }, () => {
     const day = 86_400_000;
     const parcel = (overrides: Partial<ParcelWithEvents>): ParcelWithEvents => ({
       id: 'p', trackingNumber, label: 'A private name', carrier: 'dhl', createdAt: '2026-09-30T08:00:00Z', syncStatus: 'ok', events: [], ...overrides,

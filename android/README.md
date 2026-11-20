@@ -183,10 +183,11 @@ phone without the Play Store.
 PEEK_FDROID_DIR=<path> scripts/publish-fdroid.sh app/build/outputs/apk/fdroid/release/app-fdroid-release.apk <commit> [notes.md]
 ```
 
-The script refuses an APK that the upload key alone did not sign, or that carries Google's libraries (Firebase, Play
-services, ML Kit, Play Core). It signs the repository's index with the repository's key, which stays outside the
-repository in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the repository alone on the `fdroid` branch, which
-raw.githubusercontent.com serves, and attaches the APK to a pre-release. Copies from Google Play, and the ones this
+The script refuses an APK that the upload key alone did not sign, that carries Google's libraries (Firebase, Play
+services, ML Kit, Play Core), or that is older than the beta the repository holds. It signs the repository's index
+with the repository's key, which stays outside the repository in `PEEK_FDROID_DIR` with fdroid's `config.yml`, puts the
+repository alone on the `fdroid` branch, which raw.githubusercontent.com serves, and attaches the APK to a pre-release.
+Copies from Google Play, and the ones this
 repository and GitHub had up to 1.1.18 (12), are signed by Google Play, so they have to be uninstalled before this one
 goes on; the release notes and the repository's entry say so. The app's entry in the repository is
 [`fdroid/com.plhery.peekdeliverytracker.yml`](fdroid/com.plhery.peekdeliverytracker.yml), and

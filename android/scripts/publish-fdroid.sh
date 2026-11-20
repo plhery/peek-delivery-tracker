@@ -9,7 +9,7 @@
 # -Ppeek.uploadProperties=<upload.properties>` from a clean checkout of <commit>, the commit the release was built from,
 # which its GitHub release, android-<versionName>-<versionCode>, names. PEEK_FDROID_DIR names the repository's folder on
 # this Mac, made by `fdroid init`, whose config.yml and key stay outside every git tree. The repository keeps the newest
-# beta alone; the older ones stay on GitHub Releases.
+# beta alone; the older ones stay on GitHub Releases, and an older beta is refused once a newer one is there.
 set -euo pipefail
 
 apk=$1
@@ -47,6 +47,16 @@ if [ -z "$code" ] || [ -z "$name" ]; then
   echo "$apk is not $app" >&2
   exit 1
 fi
+# Re-running an interrupted older beta would put it in place of the newer one.
+for held in "$dir"/repo/"${app}"_*.apk; do
+  [ -e "$held" ] || continue
+  heldCode=${held##*_}
+  heldCode=${heldCode%.apk}
+  if [[ $heldCode =~ ^[0-9]+$ ]] && [ "$heldCode" -gt "$code" ]; then
+    echo "$dir/repo holds versionCode $heldCode, newer than $code: finish $code's GitHub release by hand" >&2
+    exit 1
+  fi
+done
 target=$(git -C "$android" rev-parse --verify "$commit^{commit}")
 tag="android-$name-$code"
 

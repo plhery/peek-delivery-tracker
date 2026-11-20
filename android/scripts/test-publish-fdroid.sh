@@ -51,3 +51,10 @@ echo 'a different source' > "$record"
 : > "$calls"
 if bash "$scripts/publish-fdroid.sh" "$fixture/demo.apk" fixture-source; then exit 1; fi
 if grep -Eq 'push |gh release' "$calls"; then exit 1; fi
+# An older beta re-run after a newer one leaves the repository alone.
+echo 'Peek for Android fixture (1), the beta, is built from https://github.com/plhery/peek-delivery-tracker/tree/fixture-source' > "$record"
+touch "$PEEK_FDROID_DIR/repo/com.plhery.peekdeliverytracker_2.apk"
+: > "$calls"
+if bash "$scripts/publish-fdroid.sh" "$fixture/demo.apk" fixture-source 2>/dev/null; then exit 1; fi
+if [ -s "$calls" ]; then exit 1; fi
+test -e "$PEEK_FDROID_DIR/repo/com.plhery.peekdeliverytracker_2.apk"

@@ -51,6 +51,10 @@ struct AddParcelView: View {
     @State private var saving = false
     @State private var errorMessage: String?
     @State private var duplicateParcelID: UUID?
+    /// The error shown is the day's lookups without an account running out: signing in carries on.
+    @State private var lookupsSpent = false
+    /// What a guest asked for that signing in unlocks, asked over this sheet so what they typed stays.
+    @State private var unlock: UnlockReason?
     @State private var carrierOverride: CarrierID?
     @State private var lookupAttempt = 0
     @State private var verifiedCarrier: CarrierDetectionResponse?
@@ -193,6 +197,11 @@ struct AddParcelView: View {
             // What went wrong, and the note under the field, are read out as they appear.
             .onChange(of: errorMessage) { _, message in
                 if let message { AccessibilityNotification.Announcement(message).post() }
+            }
+            .unlockSheet($unlock)
+            // Signed in over this sheet, what they typed is still here, and the guest's limit no longer is.
+            .onChange(of: session.user?.id) { _, user in
+                if user != nil, lookupsSpent { errorMessage = nil; lookupsSpent = false }
             }
             .onChange(of: spokenNotice) { _, notice in
                 if let notice { AccessibilityNotification.Announcement(notice).post() }
@@ -529,10 +538,7 @@ struct AddParcelView: View {
             // Someone signed in keeps them together already.
             if store.isGuest {
                 let question = Text(localizer.text("door.several.question")).foregroundStyle(Brand.secondaryText)
-                let signIn = Button(localizer.text("door.several.signIn")) {
-                    dismiss()
-                    session.showSignIn()
-                }
+                let signIn = Button(localizer.text("door.several.signIn")) { unlock = .several }
                 .fontWeight(.medium)
                 .underline()
                 .frame(minHeight: 44)
@@ -831,6 +837,13 @@ struct AddParcelView: View {
                 .buttonStyle(.plain)
                 .foregroundStyle(Brand.ink)
                 .underline()
+            } else if lookupsSpent, store.isGuest {
+                Button(localizer.text("arrival.signInTitle")) { unlock = .daily }
+                    .font(.subheadline.weight(.semibold))
+                    .buttonStyle(.plain)
+                    .foregroundStyle(Brand.ink)
+                    .underline()
+                    .accessibilityIdentifier("add.dailySignIn")
             }
         }
         .padding(16)
@@ -1183,6 +1196,7 @@ struct AddParcelView: View {
             in: .whitespacesAndNewlines
         ), !value.isEmpty else {
             errorMessage = localizer.text("add.pasteFailed")
+            lookupsSpent = false
             return
         }
         withAnimation(reduceMotion ? nil : .snappy(duration: 0.34)) {
@@ -1287,6 +1301,7 @@ struct AddParcelView: View {
                     duplicateParcelID = packageID
                 }
                 errorMessage = localizer.errorMessage(error)
+                lookupsSpent = error is DeviceLookupsSpent
                 saving = false
             }
         }

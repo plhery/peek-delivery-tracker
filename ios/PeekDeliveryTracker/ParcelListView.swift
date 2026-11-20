@@ -508,6 +508,11 @@ private struct DeliveryListView: View {
             #endif
         }
         .onDisappear { addedParcelID = nil; revealParcelID = nil; parcelBurstID = nil; flights = [] }
+        // Signed in over the deliveries (`UnlockSheet`): a page open on this device's parcel would have none to show
+        // once the account takes it along. What Add or Settings show stays open, as signed in.
+        .onChange(of: session.user?.id) { _, user in
+            if user != nil { navigation = DeliveriesNavigation(); addedParcelID = nil; revealParcelID = nil; parcelBurstID = nil }
+        }
         .onChange(of: scenePhase) { _, phase in
             if phase != .active { addedParcelID = nil; revealParcelID = nil; parcelBurstID = nil }
             if phase == .active { accountInvitation.resume() }

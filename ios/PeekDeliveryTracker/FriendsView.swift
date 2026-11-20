@@ -18,6 +18,8 @@ struct FriendsView: View {
     @State private var showingAccount = false
     @State private var visible = false
     @State private var panel: FriendsPanel?
+    /// The demo's invitation asks to sign in over itself; the demo stays underneath.
+    @State private var unlock: UnlockReason?
     /// A friend's page opens out of their card and goes back into it, as a parcel's does.
     @State private var openFriend: UUID?
     @Namespace private var friendTransition
@@ -89,6 +91,13 @@ struct FriendsView: View {
             if let seed = activity.arrivalSnapshot { model.seed(seed) }
         }
         .onDisappear { visible = false; panel = nil; openFriend = nil; noticeKey = nil; arrivingID = nil; model.clear() }
+        // Signed in over the demo (`UnlockSheet`): the account's friends, not the demo's. The activity's new presentation
+        // reads them.
+        .onChange(of: session.user?.id) { _, _ in
+            panel = nil; openFriend = nil; noticeKey = nil; arrivingID = nil
+            model.clear()
+            model.configure(session: session)
+        }
         .task(id: active ? activity.presentationID.uuidString : "hidden") {
             guard active else { panel = nil; openFriend = nil; model.clear(); return }
             while !Task.isCancelled {
@@ -117,6 +126,7 @@ struct FriendsView: View {
             }
             .formOnPad(phoneDetents: dynamicTypeSize.isAccessibilitySize ? [.large] : value.detents)
             .presentationDragIndicator(.visible).interactiveDismissDisabled(model.working)
+            .unlockSheet($unlock)
         }
     }
 
@@ -183,7 +193,7 @@ struct FriendsView: View {
             if session.isDemo {
                 FriendsInvitationParcel(nickname: model.snapshot?.profile?.nickname ?? text("friends.you"))
                 Text(text("friends.demoInvites")).font(.subheadline).foregroundStyle(Brand.secondaryText)
-                Button { panel = nil; model.errorKey = nil; session.showWelcome() } label: { Text(text("welcome.signInInstead")).frame(maxWidth: .infinity, minHeight: 46) }
+                Button { unlock = .friends } label: { Text(text("welcome.signInInstead")).frame(maxWidth: .infinity, minHeight: 46) }
                     .buttonStyle(.borderedProminent).tint(Brand.accent).foregroundStyle(Brand.onAccent).accessibilityIdentifier("friends.demoSignIn")
             } else {
                 FriendsInvitationView(nickname: model.snapshot?.profile?.nickname ?? text("friends.you"), busy: model.working, act: { await model.act($0, parcels: parcels.parcels) }, completed: { panel = nil })

@@ -17,6 +17,7 @@ struct ParcelLinkSheet: View {
     @State private var handedOver: UUID?
     @State private var refreshing = false
     @State private var errorMessage: String?
+    @State private var unlock: UnlockReason?
     @StateObject private var feedback = ParcelFeedbackModel()
 
     var body: some View {
@@ -49,6 +50,7 @@ struct ParcelLinkSheet: View {
         .tint(Brand.ink)
         .environment(\.locale, localizer.language.locale)
         .interactiveDismissDisabled(adding)
+        .unlockSheet($unlock)
         .task(id: links.presentationID) {
             errorMessage = nil
             await links.load()
@@ -413,10 +415,11 @@ struct ParcelLinkSheet: View {
         }
     }
 
+    /// Signing in happens over the sheet, which then shows the parcel as someone signed in sees it.
     private func signIn() {
         DeliveryAnalytics.shared.action("parcel-link-sign-in")
         links.rememberForSignIn()
-        if session.user == nil { session.showSignIn() }
+        unlock = .account
     }
 }
 

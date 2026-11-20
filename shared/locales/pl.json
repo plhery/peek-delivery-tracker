@@ -269,6 +269,7 @@
   "unlock.title": "Zaloguj się, aby to odblokować",
   "unlock.several": "Zaloguj się, a Peek będzie śledzić razem wszystkie numery z tego tekstu.",
   "unlock.daily": "Po zalogowaniu działasz dalej, zaczynając od właśnie wpisanej przesyłki.",
+  "unlock.friends": "Zaloguj się, a udostępnisz znajomym znaczki i ważne momenty dostaw.",
   "unlock.comes": "Twoje przesyłki z tego urządzenia mogą przejść z Tobą, razem z nazwami.",
   "unlock.later": "Nie teraz",
   "door.several.title.few": "{{count}} numery śledzenia w tym tekście",

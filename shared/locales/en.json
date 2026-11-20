@@ -269,6 +269,7 @@
   "unlock.title": "Sign in to unlock this",
   "unlock.several": "Sign in, and Peek follows every number in this text together.",
   "unlock.daily": "Signed in, you keep going, starting with the parcel you just typed.",
+  "unlock.friends": "Sign in, and you share stamps and delivery milestones with your friends.",
   "unlock.comes": "Your parcels on this device can come with you, with their names.",
   "unlock.later": "Not now",
   "door.several.title.few": "{{count}} tracking numbers in this text",

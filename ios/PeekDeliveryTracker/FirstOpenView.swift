@@ -972,14 +972,14 @@ final class AccountInvitationVisit {
 struct DeviceAccountRow: View {
     let invitation: AccountInvitationVisit
 
-    @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var unlock: UnlockReason?
 
     var body: some View {
         let stacked = dynamicTypeSize.isAccessibilitySize
-        Button { session.showSignIn() } label: {
+        Button { unlock = .account } label: {
             // At the largest text sizes the button goes under the words, which keep the row's width.
             let layout = stacked
                 ? AnyLayout(VStackLayout(alignment: .leading, spacing: 10))
@@ -1033,17 +1033,18 @@ struct DeviceAccountRow: View {
         }
         .onAppear { invitation.appeared() }
         .onDisappear { invitation.disappeared() }
+        .unlockSheet($unlock)
     }
 }
 
 /// Friends compare passports between accounts: without one, the tab says what it is for.
 struct FriendsSignedOutView: View {
-    @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     /// The title keeps its size until the largest text sizes, then grows with them.
     @ScaledMetric(relativeTo: .title) private var titleSize: CGFloat = 26
     @State private var showingAccount = false
+    @State private var unlock: UnlockReason?
 
     var body: some View {
         NavigationStack {
@@ -1055,7 +1056,7 @@ struct FriendsSignedOutView: View {
                         .font(.subheadline)
                         .foregroundStyle(Brand.secondaryText)
                         .multilineTextAlignment(.center)
-                    Button { session.showSignIn() } label: {
+                    Button { unlock = .friends } label: {
                         Text(localizer.text("arrival.signInTitle")).frame(maxWidth: .infinity, minHeight: 46)
                     }
                     .buttonStyle(.borderedProminent)
@@ -1074,6 +1075,7 @@ struct FriendsSignedOutView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { AccountToolbarItem { showingAccount = true } }
             .sheet(isPresented: $showingAccount) { AccountView().formOnPad() }
+            .unlockSheet($unlock)
         }
     }
 }

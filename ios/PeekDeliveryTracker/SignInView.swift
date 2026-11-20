@@ -209,6 +209,52 @@ private struct ArrivalParcelFrame: PreferenceKey {
     }
 }
 
+/// What a guest asked for that an account unlocks: the sign-in sheet over what they were doing says it.
+enum UnlockReason: String, Identifiable {
+    /// Signing in itself: the sheet says only that the parcels come along.
+    case account
+    /// Several numbers in one text, which an account follows together.
+    case several
+    /// The day's lookups without an account are spent.
+    case daily
+    /// Friends compare passports between accounts.
+    case friends
+
+    var id: String { rawValue }
+
+    /// The line saying what signing in gives, before the parcels coming along.
+    var key: String? {
+        switch self {
+        case .account: nil
+        case .several: "unlock.several"
+        case .daily: "unlock.daily"
+        case .friends: "unlock.friends"
+        }
+    }
+}
+
+/// "Sign in to unlock this", over what a guest was doing. They stay a guest until a sign-in succeeds, so their parcels,
+/// the widget and the checks carry on, and Not now leaves all as it was. Once signed in, the sheet closes on what they
+/// were doing, and the parcels on this device come along to the account.
+struct UnlockSheet: View {
+    let reason: UnlockReason
+    @EnvironmentObject private var session: SessionStore
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        SignInView(configured: session.configuration.authenticationConfigured, onBack: { dismiss() }, unlock: reason)
+            .onAppear { DeliveryAnalytics.shared.view("sign-in") }
+            .onChange(of: session.user?.id, initial: true) { _, user in if user != nil { dismiss() } }
+    }
+}
+
+extension View {
+    /// Asks a guest to sign in for `reason`, in a sheet over this view that closes once they have.
+    func unlockSheet(_ reason: Binding<UnlockReason?>) -> some View {
+        sheet(item: reason) { UnlockSheet(reason: $0).formOnPad() }
+    }
+}
+
 private struct WelcomeView: View {
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
@@ -369,6 +415,8 @@ struct SignInView: View {
     let configured: Bool
     let onBack: () -> Void
     var invitation: FriendInvitationStore? = nil
+    /// Over what a guest was doing, what signing in unlocks: the sheet closes rather than goes back, and has no demo.
+    var unlock: UnlockReason? = nil
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -393,23 +441,26 @@ struct SignInView: View {
                 VStack(spacing: 0) {
                     HStack {
                         Button(action: onBack) {
-                            Label(localizer.text("welcome.back"), systemImage: "chevron.left")
+                            Label(localizer.text(unlock == nil ? "welcome.back" : "common.close"), systemImage: unlock == nil ? "chevron.left" : "xmark")
                                 .labelStyle(.iconOnly)
                                 .frame(width: 42, height: 42)
                                 .glassSurface(in: Circle())
                         }
                         .drawnButton()
                         .foregroundStyle(Brand.ink)
-                        .accessibilityLabel(localizer.text("welcome.back"))
+                        .accessibilityLabel(localizer.text(unlock == nil ? "welcome.back" : "common.close"))
                         Spacer()
                         AuthenticationLanguageMenu()
                     }
                     .padding(.bottom, 12)
 
-                    Color.clear
-                        .frame(width: invitation == nil ? 160 : 180, height: invitation == nil ? 165 : 186)
-                        .anchorPreference(key: ArrivalParcelFrame.self, value: .bounds) { [.signIn: $0] }
-                        .accessibilityHidden(true)
+                    // The arrival's parcel lands here; a sheet has none.
+                    if unlock == nil {
+                        Color.clear
+                            .frame(width: invitation == nil ? 160 : 180, height: invitation == nil ? 165 : 186)
+                            .anchorPreference(key: ArrivalParcelFrame.self, value: .bounds) { [.signIn: $0] }
+                            .accessibilityHidden(true)
+                    }
 
                     Group {
                         if invitation == nil {
@@ -425,7 +476,18 @@ struct SignInView: View {
                     // At the largest text sizes the card takes the width a word needs not to break.
                     .frame(maxWidth: invitation == nil ? (dynamicTypeSize.isAccessibilitySize ? 520 : 365) : .infinity)
 
-                    if invitation == nil {
+                    if unlock != nil {
+                        Button(action: onBack) {
+                            Text(localizer.text("unlock.later"))
+                                .font(.subheadline.weight(.medium))
+                                .foregroundStyle(Brand.secondaryText)
+                                .frame(minHeight: 44)
+                        }
+                        .buttonStyle(TactileButtonStyle())
+                        .accessibilityIdentifier("unlock.later")
+                        .disabled(working)
+                        .padding(.top, 12)
+                    } else if invitation == nil {
                         Button { session.enterDemo() } label: {
                             HStack(spacing: 7) {
                                 Text(localizer.text("welcome.demo"))
@@ -467,12 +529,12 @@ struct SignInView: View {
             VStack(spacing: 8) {
                 if let invitation { InvitationHeading(nickname: invitation.nickname) }
                 else {
-                    Text(copy.signInTitle)
+                    Text(unlock.map { $0.key == nil ? copy.signInTitle : localizer.text("unlock.title") } ?? copy.signInTitle)
                         .font(.title.weight(.semibold))
                         .tracking(-0.6)
                         .accessibilityAddTraits(.isHeader)
                 }
-                Text(invitation == nil ? copy.signInSubtitle : localizer.text("friends.signInToAccept"))
+                Text(invitation != nil ? localizer.text("friends.signInToAccept") : unlock.map(unlockLine) ?? copy.signInSubtitle)
                     .font(.footnote)
                     .foregroundStyle(Brand.secondaryText)
             }
@@ -499,6 +561,12 @@ struct SignInView: View {
 
             if invitation == nil { compactPrivacyNotice.padding(.top, 18) }
         }
+    }
+
+    /// What signing in gives, then that the parcels on this iPhone come along.
+    private func unlockLine(_ reason: UnlockReason) -> String {
+        let comes = localizer.text("unlock.comes")
+        return reason.key.map { "\(localizer.text($0)) \(comes)" } ?? comes
     }
 
     private var compactPrivacyNotice: some View {

@@ -3222,6 +3222,29 @@ final class SessionIsolationTests: XCTestCase {
         Parcel(id: UUID(), trackingNumber: "12345678", label: "Private account A parcel", carrier: .unknown, createdAt: "2026-09-08T00:00:00Z", syncStatus: .ok, notificationsMuted: false)
     }
 
+    /// "Sign in to unlock this" is asked over the guest's parcels: until a sign-in succeeds they stay a guest, so the
+    /// widget, the checks and a relaunch keep their parcels; then the session goes straight to the account.
+    @MainActor func testAGuestSigningInOverTheirParcelsIsNeverSignedOutOnTheWay() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let suite = "UnlockTests.\(UUID().uuidString)"
+        let defaults = try XCTUnwrap(UserDefaults(suiteName: suite))
+        defer { defaults.removePersistentDomain(forName: suite) }
+        let session = SessionStore(configuration: configuration, defaults: defaults, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        await session.bootstrap()
+        guard case .welcome = session.state else { return XCTFail("Expected the guest's deliveries") }
+
+        var identities: [String?] = []
+        let watching = session.$state.dropFirst().sink { identities.append($0.identity) }
+        defer { watching.cancel() }
+        let id = UUID()
+        try await authorize(session, id: id)
+
+        XCTAssertEqual(identities, [id.uuidString], "From the guest's parcels to the account, nothing between")
+        XCTAssertEqual(defaults.string(forKey: "sdt.native.experience.v1"), "account", "A relaunch opens on the account")
+    }
+
     @MainActor func testAppleExchangesIdentityTokenWithOriginalNonceAndPersistsSession() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

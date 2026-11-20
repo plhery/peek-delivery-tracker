@@ -372,10 +372,11 @@ struct AccountView: View {
     @EnvironmentObject private var session: SessionStore
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.openWindow) private var openWindow
     @Environment(\.openURL) private var openURL
     @AppStorage(AppAppearance.storageKey) private var appearance = AppAppearance.defaultValue
     @State private var working = false
+    /// Signing in happens over Settings, which a guest's parcels stay under.
+    @State private var unlock: UnlockReason?
     @State private var exportURL: URL?
     @State private var showingShareSheet = false
     @State private var confirmingDeletion = false
@@ -394,6 +395,7 @@ struct AccountView: View {
         page
         .interactiveDismissDisabled(working)
         .sensoryFeedback(.selection, trigger: appearance)
+        .unlockSheet($unlock)
         .sheet(isPresented: $showingShareSheet) {
             if let exportURL { ActivityShareSheet(items: [exportURL]) }
         }
@@ -635,16 +637,7 @@ struct AccountView: View {
                 Text(localizer.text("link.keep.body")).font(.subheadline).foregroundStyle(Brand.secondaryText)
             }
             .fixedSize(horizontal: false, vertical: true)
-            Button {
-                session.showSignIn()
-                #if os(macOS)
-                // The window asks to sign in.
-                openWindow(id: MacWindow.id)
-                NSApp.activate()
-                #else
-                dismiss()
-                #endif
-            } label: {
+            Button { unlock = .account } label: {
                 FirstParcelPrimaryLabel(title: localizer.text("arrival.signInTitle"), symbol: nil)
             }
             .buttonStyle(TactileButtonStyle())

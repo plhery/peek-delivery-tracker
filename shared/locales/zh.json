@@ -269,6 +269,7 @@
   "unlock.title": "登录即可解锁",
   "unlock.several": "登录后，Peek 会一起跟踪这段文字里的所有单号。",
   "unlock.daily": "登录后即可继续，从你刚输入的包裹开始。",
+  "unlock.friends": "登录后，就能与好友分享邮票和收件里程碑。",
   "unlock.comes": "这台设备上的包裹可以随你一起带走，名称也会保留。",
   "unlock.later": "以后再说",
   "door.several.title.few": "这段文本中有 {{count}} 个运单号",

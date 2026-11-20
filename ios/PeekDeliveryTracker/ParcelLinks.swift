@@ -287,13 +287,12 @@ final class ParcelLinkStore: ObservableObject {
         response.checkQueued == true || response.package.syncStatus == .pending || response.package.syncStatus == .syncing
     }
 
-    /// Keeps the link across sign-in. The sheet closes; `resume` opens it again.
+    /// Keeps the link across sign-in, which happens over the sheet: should the app be relaunched on the way, `resume`
+    /// opens it again once someone is signed in.
     func rememberForSignIn() {
         guard let route else { return }
         let pending = Pending(id: route.id, name: route.name, note: route.note, from: route.from, receivedAt: now())
         if let data = try? JSONEncoder().encode(pending) { defaults.set(data, forKey: storageKey) }
-        generation += 1
-        self.route = nil
     }
 
     /// Opens the remembered link again, once someone is signed in.

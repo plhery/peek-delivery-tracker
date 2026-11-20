@@ -522,7 +522,8 @@ final class ParcelLinkTests: XCTestCase {
         XCTAssertNil(store.remembered, "Looking at a link does not remember it")
 
         store.rememberForSignIn()
-        XCTAssertNil(store.route, "The sheet makes way for sign-in")
+        XCTAssertEqual(store.route, link, "Sign-in happens over the sheet")
+        XCTAssertEqual(store.remembered, link)
 
         // The app may be relaunched by the sign-in round trip.
         now += 6 * 86_400
@@ -555,6 +556,7 @@ final class ParcelLinkTests: XCTestCase {
         remember()
         now += 7 * 86_400
         XCTAssertNil(store.remembered, "Seven days on, the link is forgotten")
+        store.close()
         store.resume()
         XCTAssertNil(store.route)
         XCTAssertNil(defaults.object(forKey: "sdt.pendingParcelLink.v1"))

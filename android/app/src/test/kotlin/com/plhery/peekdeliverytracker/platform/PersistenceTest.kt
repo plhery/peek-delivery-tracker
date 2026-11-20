@@ -23,6 +23,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Assert.fail
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.Shadows.shadowOf
 
 /** The UserDefaults stand-in and the files the parcels, caches and exports are kept in. */
 @RunWith(AndroidJUnit4::class)
@@ -185,6 +186,22 @@ class PersistenceTest {
         assertEquals("""[{"label":"Lamp"}]""", device.read()!!.decodeToString())
         device.delete()
         assertNull(device.read())
+
+        // What 1.1.20 and earlier kept in filesDir: another phone's after a restore, this phone's own after an update.
+        val older = """[{"label":"Lamp","alertToken":"old"},{"label":"Mug","forgotten":true}]"""
+        File(context.filesDir, "DeviceParcels").mkdirs()
+        File(context.filesDir, "DeviceParcels/parcels.json").writeText(older)
+        assertEquals("""[{"label":"Lamp"}]""", device.read()!!.decodeToString())
+        val info = shadowOf(context.packageManager).getInternalMutablePackageInfo(context.packageName)
+        info.firstInstallTime = 1_000
+        info.lastUpdateTime = 2_000
+        try {
+            assertEquals(older, device.read()!!.decodeToString())
+        } finally {
+            info.firstInstallTime = 0
+            info.lastUpdateTime = 0
+        }
+        device.delete()
 
         val user = UUID.fromString("0a1b2c3d-4e5f-6071-8293-a4b5c6d7e8f9")
         val caches = ParcelCacheFolder.of(context)

@@ -108,14 +108,28 @@ interface FileCalls {
     }
 }
 
+/**
+ * Whether the app was updated on this phone since it was installed. A fresh install, and a backup restored with one,
+ * has its first install as its last update, so what it finds in the older places came from another phone.
+ */
+internal fun updatedInPlace(context: Context): Boolean = try {
+    val info = context.packageManager.getPackageInfo(context.packageName, 0)
+    info.firstInstallTime < info.lastUpdateTime
+} catch (_: android.content.pm.PackageManager.NameNotFoundException) {
+    false
+}
+
 /** Full local parcel records and the copy that can follow a reader to another phone. */
-class DeviceParcelsFile private constructor(context: Context) : DeviceParcelFile {
+class DeviceParcelsFile private constructor(private val context: Context) : DeviceParcelFile {
     private val local = AtomicBytesFile(File(context.noBackupFilesDir, "DeviceParcels/parcels.json"))
     private val backup = AtomicBytesFile(File(context.filesDir, "FollowedParcels/parcels.json"))
     private val legacy = AtomicBytesFile(File(context.filesDir, "DeviceParcels/parcels.json"))
 
     override fun read(): ByteArray? {
         local.read()?.let { return it }
+        // What 1.1.20 and earlier kept in the older place is this phone's own after an update here, push addresses,
+        // forgotten parcels and all: they turn off what the service still sends.
+        if (updatedInPlace(context)) legacy.read()?.let { return it }
         val restored = backup.read() ?: legacy.read() ?: return null
         // Older backups also carried the previous phone's push address.
         return try { withoutAddresses(restored) } catch (_: org.json.JSONException) { byteArrayOf() }

@@ -17,6 +17,7 @@ import androidx.work.testing.WorkManagerTestInitHelper
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -66,6 +67,25 @@ class UnifiedPushTest {
             .putString("installation", "previous").commit()
         assertNull(PushRoute.existingAddress(context))
         assertNotEquals("previous", PushRoute.address(context).token)
+    }
+
+    @Test
+    fun anUpdateOnThisPhoneKeepsTheInstallationOf1120AndEarlier() {
+        val info = shadowOf(context.packageManager).getInternalMutablePackageInfo(context.packageName)
+        info.firstInstallTime = 1_000
+        info.lastUpdateTime = 2_000
+        try {
+            context.getSharedPreferences("unifiedpush", Context.MODE_PRIVATE).edit()
+                .putString("installation", "previous").commit()
+            assertEquals("previous", PushRoute.address(context).token)
+            assertFalse(context.getSharedPreferences("unifiedpush", Context.MODE_PRIVATE).contains("installation"))
+            // Once deleted, the next address is a new one.
+            PushRoute.delete(context)
+            assertNotEquals("previous", PushRoute.address(context).token)
+        } finally {
+            info.firstInstallTime = 0
+            info.lastUpdateTime = 0
+        }
     }
 
     @Test

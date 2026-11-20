@@ -44,6 +44,9 @@ import java.security.SecureRandom
  */
 internal object PushRoute {
     private const val PREFERENCES = "push-route"
+
+    /** Where 1.1.20 and earlier kept the route. */
+    private const val LEGACY_PREFERENCES = "unifiedpush"
     private const val INSTALLATION = "installation"
     private const val ENDPOINT = "endpoint"
     private const val P256DH = "p256dh"
@@ -65,6 +68,7 @@ internal object PushRoute {
     @Synchronized
     fun address(context: Context): PushAddress {
         val preferences = preferences(context)
+        if (!preferences.contains(INSTALLATION)) adoptLegacy(context, preferences)
         val token = preferences.getString(INSTALLATION, null) ?: newToken().also { preferences.edit { putString(INSTALLATION, it) } }
         val endpoint = preferences.getString(ENDPOINT, null)
         val p256dh = preferences.getString(P256DH, null)
@@ -172,6 +176,23 @@ internal object PushRoute {
     /** The service's public requests, without the stores: no cookie, the app's user agent. */
     val transport: HttpTransport by lazy {
         OkHttpTransport(PeekHttp.client(MemoryCookieJar())).identifying(PeekHttp.userAgent(BuildConfig.VERSION_CODE))
+    }
+
+    /**
+     * The route 1.1.20 and earlier kept under another name. An update on this phone carries its installation, endpoint
+     * and keys on, so the service's inbox and registrations for them stay this phone's rather than a second address
+     * starting beside them. A backup restored with a fresh install brought another phone's, which stay behind.
+     */
+    private fun adoptLegacy(context: Context, preferences: SharedPreferences) {
+        val legacy = context.getSharedPreferences(LEGACY_PREFERENCES, Context.MODE_PRIVATE)
+        val token = legacy.getString(INSTALLATION, null) ?: return
+        if (updatedInPlace(context)) {
+            preferences.edit {
+                putString(INSTALLATION, token)
+                for (key in listOf(ENDPOINT, P256DH, AUTH)) legacy.getString(key, null)?.let { putString(key, it) }
+            }
+        }
+        legacy.edit { clear() }
     }
 
     /** 32 random bytes as 43 URL-safe base64 characters, the service's installation token. */

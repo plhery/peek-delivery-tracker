@@ -691,8 +691,9 @@ and nothing typed is sent.
   under that scan, as is another carrier's row of a scan on a parcel that records no handoff
   ([handoffs](ROUTING.md#handoffs-two-carriers)). A universal provider's
   copy of a confirmed carrier's scan is left out (`src/server/providerCopies.ts`). Two
-  providers' rows of one scan no carrier shows, at the same instant and in the same stage, each
-  its provider's only row there, from places that are not apart or one only the country of the
+  providers' rows of one scan no carrier shows, at the same instant and in the same stage, or in
+  the same minute and stage when only one instant of it has seconds and no provider has two rows
+  in it (ParcelsApp's minute of 17TRACK's second), each its provider's only row there, from places that are not apart or one only the country of the
   other, are served as one step: the others under the row whose place says most
   (`providerTwins` in `src/server/relayCopies.ts`). A scan La Poste lists twice at one
   instant, as "votre colis" and as "votre Colissimo", is shown once, and so are a copying

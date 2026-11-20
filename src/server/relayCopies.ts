@@ -317,26 +317,33 @@ function otherCarrierCopies(
 
 /**
  * Two or more universal providers' rows of one scan, which no rule leaves out without a carrier's scan beside them:
- * the same instant and stage, each its provider's only row there, from places that are not apart or of which one
- * names only the country the other's town is in (ParcelsApp names the country of a posting Ship24 places in its
- * town). Each row with the id of the row it is shown under: of those, the one whose place says most, a town before a
- * country before none, then the first stored. Rows in `paired` are in no such group.
+ * the same instant and stage, or the same minute and stage when only one instant of it has seconds and no provider has
+ * two rows in it (ParcelsApp gives to the minute the China Post scan 17TRACK gives to the second), each its provider's
+ * only row there, from places that are not apart or of which one names only the country the other's town is in
+ * (ParcelsApp names the country of a posting Ship24 places in its town). Each row with the id of the row it is shown
+ * under: of those, the one whose place says most, a town before a country before none, then the first stored. Rows in
+ * `paired` are in no such group.
  */
 export function providerTwins(events: readonly JsonObject[], paired: ReadonlySet<string> = new Set()): Map<string, string> {
   const provider = (event: JsonObject) => source(event) === UNIVERSAL_SOURCE && typeof event.universal_provider === 'string'
     ? event.universal_provider : '';
-  const groups = new Map<string, JsonObject[]>();
+  const minutes = new Map<string, JsonObject[]>();
   for (const event of events) {
     const at = Date.parse(String(event.occurred_at));
     if (!provider(event) || paired.has(String(event.id)) || !Number.isFinite(at)) continue;
-    const key = `${at} ${String(event.stage)}`;
-    groups.set(key, [...groups.get(key) ?? [], event]);
+    const key = `${Math.floor(at / MINUTE_MS)} ${String(event.stage)}`;
+    minutes.set(key, [...minutes.get(key) ?? [], event]);
   }
+  // A minute with two instants to the second, or a provider's two rows, holds two scans: each instant is a group of its own.
+  const instant = (event: JsonObject) => Date.parse(String(event.occurred_at));
+  const groups = [...minutes.values()].flatMap((rows) => new Set(rows.map(instant).filter((at) => at % MINUTE_MS !== 0)).size < 2
+    && new Set(rows.map(provider)).size === rows.length ? [rows]
+    : [...new Set(rows.map(instant))].map((at) => rows.filter((event) => instant(event) === at)));
   // A place the gazetteer finds only as a country lies within itself, and says less than any other place.
   const says = (event: JsonObject) => typeof event.location !== 'string' || !event.location.trim() ? 0
     : placeWithin(event, event) ? 1 : 2;
   const twins = new Map<string, string>();
-  for (const rows of groups.values()) {
+  for (const rows of groups) {
     const ones = rows.filter((event) => rows.filter((other) => provider(other) === provider(event)).length === 1);
     if (ones.length < 2) continue;
     const [lead, ...others] = ones.sort((a, b) => says(b) - says(a)

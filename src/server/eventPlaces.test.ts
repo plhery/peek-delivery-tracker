@@ -409,13 +409,24 @@ describe('withEventPlaces', () => {
         // The same place: the row stored first is the step.
         copy('sorted', '17TRACK', 'in_transit', '2026-10-27T15:00:00Z', 'Shenzhen', 'Sorted'),
         copy('sorted-late', 'ParcelsApp', 'in_transit', '2026-10-27T15:00:00Z', 'Shenzhen', 'Sorted'),
-        // Two towns, two stages, a second apart, or a provider's two rows of that instant: each its own step.
+        // A copy to the minute of the one row of that minute to the second: ParcelsApp's minute of 17TRACK's second.
+        copy('cleared', '17TRACK', 'in_transit', '2026-10-27T16:32:56Z', 'Shenzhen', 'Released'),
+        copy('cleared-late', 'ParcelsApp', 'in_transit', '2026-10-27T16:32:00Z', 'Shenzhen', 'Export cleared'),
+        // Two towns, two stages, a minute apart, two seconds of one minute, or a provider's two rows of that instant:
+        // each its own step.
         copy('left', '17TRACK', 'in_transit', '2026-10-27T18:00:00Z', 'Shenzhen', 'Departed'),
         copy('left-late', 'ParcelsApp', 'in_transit', '2026-10-27T18:00:00Z', 'Guangzhou', 'Departed'),
         copy('export', '17TRACK', 'customs', '2026-10-27T19:00:00Z', 'Shenzhen', 'Export'),
         copy('export-late', 'ParcelsApp', 'in_transit', '2026-10-27T19:00:00Z', 'Shenzhen', 'Export'),
         copy('flown', '17TRACK', 'in_transit', '2026-10-27T20:00:00Z', 'Shenzhen', 'Flown'),
-        copy('flown-late', 'ParcelsApp', 'in_transit', '2026-10-27T20:00:01Z', 'Shenzhen', 'Flown'),
+        copy('flown-late', 'ParcelsApp', 'in_transit', '2026-10-27T20:01:00Z', 'Shenzhen', 'Flown'),
+        copy('hub', '17TRACK', 'in_transit', '2026-10-27T20:30:07Z', 'Shenzhen', 'At the hub'),
+        copy('hub-late', 'ParcelsApp', 'in_transit', '2026-10-27T20:30:00Z', 'Shenzhen', 'At the hub'),
+        copy('hub-other', 'Ship24', 'in_transit', '2026-10-27T20:30:45Z', 'Shenzhen', 'Left the hub'),
+        // A provider's two rows of one minute leave each instant its own group: the rows of one instant still pair.
+        copy('bagged', '17TRACK', 'in_transit', '2026-10-27T20:40:00Z', 'Shenzhen', 'Bagged'),
+        copy('bagged-late', 'ParcelsApp', 'in_transit', '2026-10-27T20:40:00Z', 'Shenzhen', 'Bagged'),
+        copy('scanned', '17TRACK', 'in_transit', '2026-10-27T20:40:20Z', 'Shenzhen', 'Scanned'),
         copy('landed', '17TRACK', 'in_transit', '2026-10-27T21:00:00Z', 'Shenzhen', 'Landed'),
         copy('landed-late', 'ParcelsApp', 'in_transit', '2026-10-27T21:00:00Z', 'Shenzhen', 'Landed'),
         copy('unloaded-late', 'ParcelsApp', 'in_transit', '2026-10-27T21:00:00Z', 'Shenzhen', 'Unloaded'),
@@ -425,7 +436,9 @@ describe('withEventPlaces', () => {
     expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
       posted: 'posted-late', 'posted-late': null,
       sorted: null, 'sorted-late': 'sorted',
+      cleared: null, 'cleared-late': 'cleared',
       left: null, 'left-late': null, export: null, 'export-late': null, flown: null, 'flown-late': null,
+      hub: null, 'hub-late': null, 'hub-other': null, bagged: null, 'bagged-late': 'bagged', scanned: null,
       landed: null, 'landed-late': null, 'unloaded-late': null,
     });
   });

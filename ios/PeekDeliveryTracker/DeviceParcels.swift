@@ -467,13 +467,12 @@ final class DeviceParcels {
     /// Reads every parcel whose answer has gone stale, or every one when `all`, and brings back
     /// the ones whose last answer was lost. A parcel the service no longer has leaves the list.
     /// The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
-    /// window on screen.
+    /// window on screen. Returns whether the service answered anything, a forget included.
     @discardableResult
     func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws -> Bool {
         guard let client else { return false }
-        var contacted = false
-        await stopForgottenAlerts(client)
-        await tellForgotten(client)
+        var contacted = await stopForgottenAlerts(client)
+        if await tellForgotten(client) { contacted = true }
         var trouble: Error?
         for entry in entries where id == nil || entry.parcel.id == id {
             let key = keys[entry.linkID]
@@ -545,14 +544,18 @@ final class DeviceParcels {
         await tellForgotten(client)
     }
 
-    /// Tells the service to forget the links forgotten here before it could be. The first trouble
-    /// ends the round; the rest wait for the next.
-    private func tellForgotten(_ client: DeviceParcelClient) async {
+    /// Tells the service to forget the links forgotten here before it could be, and says whether it forgot any. The
+    /// first trouble ends the round; the rest wait for the next.
+    @discardableResult
+    private func tellForgotten(_ client: DeviceParcelClient) async -> Bool {
+        var told = false
         for (linkID, key) in forgetting {
             // Followed again while the service was told of another: the link stays.
             guard forgetting[linkID] == key else { continue }
-            guard await tellForgotten(linkID, key: key, client) else { return }
+            guard await tellForgotten(linkID, key: key, client) else { return told }
+            told = true
         }
+        return told
     }
 
     /// Whether the service forgot the link, or had already. Until it has, its key stays aside.
@@ -586,8 +589,10 @@ final class DeviceParcels {
     /// behind it: when it can't be told yet, the key stays aside and each refresh tells it again.
     /// Someone else's parcel is forgotten here alone: its notifications on this iPhone stop, and its
     /// link goes on working for others.
-    func forget(id: UUID) async {
-        guard let index = entries.firstIndex(where: { $0.parcel.id == id }) else { return }
+    /// Returns whether the service answered.
+    @discardableResult
+    func forget(id: UUID) async -> Bool {
+        guard let index = entries.firstIndex(where: { $0.parcel.id == id }) else { return false }
         var entry = entries.remove(at: index)
         let key = keys.removeValue(forKey: entry.linkID)
         if let key { forgetting[entry.linkID] = key }
@@ -601,39 +606,53 @@ final class DeviceParcels {
             forgotten.append(entry)
         }
         save()
-        guard let client else { return }
-        if let token, (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil, entry.isViewer {
-            forgotten.removeAll { $0.linkID == entry.linkID && $0.alertToken == token }
-            save()
+        guard let client else { return false }
+        var answered = false
+        if let token, (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil {
+            answered = true
+            if entry.isViewer {
+                forgotten.removeAll { $0.linkID == entry.linkID && $0.alertToken == token }
+                save()
+            }
         }
-        if let key { await tellForgotten(entry.linkID, key: key, client) }
+        if let key, await tellForgotten(entry.linkID, key: key, client) { answered = true }
+        return answered
     }
 
     /// Turns off the notifications of parcels forgotten while the service couldn't be told. The
     /// first trouble ends the round; the rest wait for the next.
-    private func stopForgottenAlerts(_ client: DeviceParcelClient) async {
+    /// Returns whether the service answered.
+    @discardableResult
+    private func stopForgottenAlerts(_ client: DeviceParcelClient) async -> Bool {
+        var answered = false
         for entry in forgotten {
             if let token = entry.alertToken {
-                guard (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil else { return }
+                guard (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil else { return answered }
+                answered = true
             }
             forgotten.removeAll { $0.linkID == entry.linkID && $0.alertToken == entry.alertToken }
             save()
         }
+        return answered
     }
 
     /// Forgets every parcel, with those still to be read again. Their keys are set aside before the service is asked
     /// anything: a refresh running meanwhile no longer reads them again, and a read already under way lands for a key
     /// that has gone and is dropped (`recover`). The links the service could not be told about yet are forgotten on a
     /// later refresh.
-    func forgetAll() async {
+    /// Returns whether the service answered.
+    @discardableResult
+    func forgetAll() async -> Bool {
         let unread = keys.filter { linkID, _ in !entries.contains { $0.linkID == linkID } }
         if !unread.isEmpty {
             forgetting.merge(unread) { _, key in key }
             for linkID in unread.keys { keys[linkID] = nil }
             save()
         }
-        for entry in entries { await forget(id: entry.parcel.id) }
-        if !unread.isEmpty, let client { await tellForgotten(client) }
+        var answered = false
+        for entry in entries where await forget(id: entry.parcel.id) { answered = true }
+        if !unread.isEmpty, let client, await tellForgotten(client) { answered = true }
+        return answered
     }
 
     /// Follows the same number with another carrier, link, postcode or phone digits: a new lookup, which takes the old

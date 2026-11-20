@@ -969,15 +969,18 @@ final class ParcelStore: ObservableObject {
 
     func permanentlyDelete(_ parcel: Parcel) async throws {
         let generation = session.generation
+        var answered = false
         if isDemo {
             try demo.permanentlyDelete(id: parcel.id)
             demoShares.stop(parcel.id)
         } else if isGuest {
-            await device.forget(id: parcel.id)
+            answered = await device.forget(id: parcel.id)
         } else {
             try await api.permanentlyDelete(id: parcel.id)
         }
         try session.checkGeneration(generation)
+        // A guest's list may hold nothing more to read: the service forgetting the parcel says it is up.
+        if answered { noteUp() }
         // What its link carried goes with the parcel.
         shareNotes.forget(parcel.id)
         mutationRevision += 1
@@ -1123,8 +1126,9 @@ final class ParcelStore: ObservableObject {
         guard isGuest else { return }
         let generation = session.generation
         defer { if generation == session.generation, isGuest { mutationRevision += 1; parcels = device.list() } }
-        await device.forgetAll()
+        let answered = await device.forgetAll()
         undoParcel = nil
+        if answered, generation == session.generation, isGuest { noteUp() }
     }
 
     func deleteAccount(confirmation: String) async throws {
@@ -2105,7 +2109,7 @@ final class ParcelStore: ObservableObject {
         var contacted = false
         do { contacted = try await device.refresh(all: serverDown != nil, hidden: hidden) } catch { trouble = error }
         guard generation == session.generation, isGuest else { return }
-        // A round that read nothing new says nothing of the server; one that failed for it says it is down.
+        // A round the service answered nothing says nothing of it; one that failed for it says it is down.
         if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }
         listReadAt = device.lastCheckedAt
         if pendingMutations.isEmpty {

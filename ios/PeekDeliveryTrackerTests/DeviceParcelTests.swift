@@ -73,7 +73,8 @@ final class DeviceParcelTests: XCTestCase {
     private func client(_ calls: Calls, lookup: PublicLookupResponse? = nil,
                         read: @escaping @Sendable (String) throws -> PublicParcelResponse? = { _ in nil },
                         alert: @escaping @Sendable (String) throws -> DeviceAlertAnswer = { _ in .on },
-                        unalert: @escaping @Sendable (String) throws -> Void = { _ in }) -> DeviceParcelClient {
+                        unalert: @escaping @Sendable (String) throws -> Void = { _ in },
+                        forget: @escaping @Sendable (String) throws -> Void = { _ in }) -> DeviceParcelClient {
         DeviceParcelClient(
             lookup: { request in
                 calls.add("lookup \(request.trackingNumber) \(request.carrier?.rawValue ?? "-")")
@@ -88,7 +89,10 @@ final class DeviceParcelTests: XCTestCase {
                 calls.add("read \(linkID) \((key ?? "-").prefix(1))\(hidden ? " hidden" : "")")
                 return try read(linkID)
             },
-            forget: { linkID, _ in calls.add("forget \(linkID)") },
+            forget: { linkID, _ in
+                calls.add("forget \(linkID)")
+                try forget(linkID)
+            },
             update: { linkID, _, change in
                 calls.add("update \(linkID) shared=\(change.shared.map(String.init) ?? "-")")
                 return PublicParcelResponse(link: ParcelLink(id: linkID, role: .owner, kind: .lookup, createdAt: "2026-10-01T08:00:00Z",
@@ -542,6 +546,42 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(store.serverDown)
         XCTAssertEqual(store.parcels.map(\.label), ["Running shoes"])
         XCTAssertGreaterThan(try XCTUnwrap(store.listReadAt), checkedAt)
+    }
+
+    /// A guest who removes their last parcel while the server is down has nothing left to read: the service forgetting
+    /// it once it is back takes the notice away, and the list invites them to add one.
+    @MainActor func testAGuestWhoRemovedTheirLastParcelLosesTheNoticeOnceTheServiceForgetsIt() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        PostcodeTestURLProtocol.handler = { _ in (404, Data("<!doctype html><title>Not found</title>".utf8)) }
+        let id = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [DeviceParcel(linkID: "22222222222A", label: "Running shoes", archivedAt: nil,
+                                        parcel: Parcel(shared: package(id)), checkedAt: Date().addingTimeInterval(-5))]
+        nonisolated(unsafe) var down = true
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls, read: { _ in throw ServerDown() }, forget: { _ in
+            if down { throw ServerDown() }
+        }), storage: storage)
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let store = ParcelStore(configuration: configuration, session: session, localizer: Localizer(), transport: transport, device: device)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        session.showWelcome()
+
+        try await store.refreshAll()
+        await store.load()
+        XCTAssertEqual(store.serverDown, .unannounced)
+        try await store.permanentlyDelete(XCTUnwrap(store.parcels.first))
+        XCTAssertTrue(store.parcels.isEmpty)
+        XCTAssertEqual(store.serverDown, .unannounced)
+
+        down = false
+        await store.load()
+        XCTAssertNil(store.serverDown)
+        XCTAssertEqual(calls.all.filter { $0.hasPrefix("forget") }, ["forget 22222222222A", "forget 22222222222A"])
     }
 
     func testAParcelWaitingForItsCarrierIsAskedAboutAtOnce() async throws {

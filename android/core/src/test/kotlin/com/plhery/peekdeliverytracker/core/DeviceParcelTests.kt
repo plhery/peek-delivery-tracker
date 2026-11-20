@@ -981,6 +981,61 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun aListRefreshByHandAsksForChecksOfThisPhonesOwnLookupsAndReadsTheRestAsShown() = runTest {
+        val mine = UUID.randomUUID()
+        val theirs = UUID.randomUUID()
+        val now = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", mine, date(now)),
+            parcel("33333333333B", "", theirs, date(now)).copy(viewer = true),
+        )
+        val calls = Calls()
+        fun answer(linkId: String, queued: Boolean? = null) = if (linkId == "22222222222A") {
+            PublicParcelResponse(link = link(linkId), parcel = pkg(mine), checkQueued = queued)
+        } else {
+            PublicParcelResponse(link = reader(linkId), parcel = pkg(theirs))
+        }
+        val device = device(client(calls, read = { answer(it) }, check = { answer(it, queued = true) }), storage, this, now = { now })
+
+        device.refresh(all = true, check = true)
+        assertEquals(listOf("check 22222222222A k", "read 33333333333B -"), calls.all)
+        assertTrue(device.isChecking)
+    }
+
+    /** A guest's pull to refresh waits for the checks it asked for, as an account's does, and says what they found. */
+    @Test
+    fun aGuestsListRefreshWaitsForTheChecksItAskedForAndReportsThem() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        val start = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Lamp", id, date(start)))
+        var landed = false
+        val calls = Calls()
+        fun answer(queued: Boolean? = null) = PublicParcelResponse(
+            link = link("22222222222A"),
+            parcel = if (landed) pkg(id, stage = TrackingStage.OutForDelivery).copy(lastSyncedAt = "2026-11-20T09:00:00Z") else pkg(id),
+            checkQueued = queued,
+        )
+        val device = device(
+            client(calls, read = { answer() }, check = { answer(queued = true).also { landed = true } }),
+            storage, backgroundScope, now = { start.plusMillis(testScheduler.currentTime) },
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        assertEquals(ParcelStore.RefreshStart.Completed(ParcelStore.RefreshResult.Updated), store.refreshAll())
+        assertEquals(listOf("check 22222222222A k", "read 22222222222A k"), calls.all)
+        assertEquals(TrackingStage.OutForDelivery, store.parcels.single().currentStage)
+        assertFalse(device.isChecking)
+    }
+
+    @Test
     fun aCheckSaidToBeOnItsWayAfterTheLastRanOutOfTimeIsReadSoonToo() = runTest {
         val mine = UUID.randomUUID()
         var now = Instant.ofEpochSecond(1_800_000_000)

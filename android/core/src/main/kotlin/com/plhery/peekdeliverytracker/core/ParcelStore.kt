@@ -1253,7 +1253,8 @@ class ParcelStore(
     /**
      * Asks the service to check every parcel and returns once the check is queued, so pull-to-refresh ends quickly.
      * `refreshing` stays on until the results are loaded, and `refreshOutcome` then reports how the check ended. Signed
-     * out, the phone checks its parcels before this returns, and reports how that ended too, to a pull made meanwhile.
+     * out, the phone reads its parcels, its own lookups asking for a check, waits up to a minute for those checks before
+     * this returns, and reports how that ended too, to a pull made meanwhile.
      */
     suspend fun refreshAll(): RefreshStart {
         val generation = session.generation
@@ -1270,7 +1271,14 @@ class ParcelStore(
             var trouble: Exception? = null
             var contacted = false
             try {
-                contacted = device.refresh(all = true)
+                contacted = device.refresh(all = true, check = true)
+                // The checks this phone's own lookups asked for are read as they land, after 2 s and then more slowly,
+                // for a minute at most, and the refresh reports what they found, as an account's does.
+                for (wait in listOf(2, 3, 5, 8, 13, 20)) {
+                    if (!device.isChecking || generation != session.generation) break
+                    delay(wait.seconds)
+                    if (device.refresh()) contacted = true
+                }
             } catch (error: Exception) {
                 trouble = error
             }

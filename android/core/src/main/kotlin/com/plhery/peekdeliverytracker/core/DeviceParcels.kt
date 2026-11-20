@@ -696,6 +696,9 @@ class DeviceParcels(
     /** Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon. */
     val isWaiting: Boolean get() = entries.any { !it.isFrozen && (waiting(it.parcel) || awaitsCheck(it.linkId)) }
 
+    /** Whether a check the service said it queued, such as one asked for by hand, is still to land. */
+    val isChecking: Boolean get() = entries.any { !it.isFrozen && awaitsCheck(it.linkId) }
+
     /** A check of the link's parcel was said to be on its way less than [checkReadFor] ago, and hasn't landed yet. */
     private fun awaitsCheck(linkId: String): Boolean {
         val check = queued.keyOf(linkId) ?: return false
@@ -779,8 +782,9 @@ class DeviceParcels(
      * Reads every parcel whose answer has gone stale, or every one when `all`. A parcel the service no longer has leaves
      * the list, unless it is this phone's own lookup: its last answer stays, no longer updated ([DeviceParcel.frozen]).
      * The first trouble ends the round and is thrown; the list keeps what the device has. A parcel whose check is on
-     * its way is stale after [waitingFresh]. `check`, with `only`, is the reader's refresh by hand: this phone's own
-     * lookup asks for a check before one is due ([DeviceParcelClient.check]).
+     * its way is stale after [waitingFresh]. `check` is the reader's refresh by hand, of one parcel or the list: this
+     * phone's own lookups ask for a check before one is due ([DeviceParcelClient.check]); someone else's parcel is read
+     * as on screen.
      *
      * First the service is told again of the links forgotten here that it could not be told about, and, unless `only`
      * one parcel is read, the keys whose parcels were lost on this phone (a file this build could not read, say) read
@@ -816,7 +820,7 @@ class DeviceParcels(
             val fresh = if (waiting(entry.parcel) || awaitsCheck(entry.linkId)) waitingFresh else if (settled) settledFresh else fresh
             if (!(all || only != null || age < 0 || age >= fresh)) continue
             try {
-                val forced = client.check.takeIf { check && only != null && !entry.isViewer }
+                val forced = client.check.takeIf { check && !entry.isViewer }
                 val response = if (forced != null && key != null) forced(entry.linkId, key) else client.read(entry.linkId, key)
                 contacted = true
                 val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }

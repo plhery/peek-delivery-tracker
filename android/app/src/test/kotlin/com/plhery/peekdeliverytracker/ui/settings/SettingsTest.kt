@@ -568,7 +568,7 @@ class SettingsTest {
         assertTrue(marked())
     }
 
-    /** No Usage statistics row, for an account or a guest: the new-update dot's is the page's only switch. */
+    /** No Usage statistics row, for an account, a guest or the demo: the new-update dot's is the page's only switch. */
     @Test
     fun anAccountHasNoUsageStatisticsSwitch() {
         show()
@@ -578,6 +578,12 @@ class SettingsTest {
     @Test
     fun aGuestHasNoUsageStatisticsSwitch() {
         show(AuthenticationState.Welcome) { isGuest = true }
+        theDotIsTheOnlySwitch()
+    }
+
+    @Test
+    fun theDemoHasNoUsageStatisticsSwitch() {
+        show(AuthenticationState.Demo)
         theDotIsTheOnlySwitch()
     }
 

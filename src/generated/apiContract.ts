@@ -272,6 +272,10 @@ export const CARRIER_CAPABILITIES = {
         "confidence": "low"
       },
       {
+        "pattern": "^CN\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{6}$",
+        "confidence": "low"
+      },
+      {
         "pattern": "^GFUS\\d{14}$",
         "confidence": "low"
       },
@@ -4149,7 +4153,8 @@ export const CARRIER_CAPABILITIES = {
     ],
     "trackingSearchUrl": "https://www.nzpost.co.nz/tools/tracking",
     "aliases": [
-      "New Zealand Post"
+      "New Zealand Post",
+      "NZ Post (New Zealand Post)"
     ]
   },
   "singapore-post": {
@@ -42063,7 +42068,16 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^CK(?:54\\d{12,13}|512\\d{12}|598\\d{12})$",
+        "confidence": "low"
+      },
+      {
+        "pattern": "^WYB\\d{9}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.bfeexpress.com/tracking"
   },
   "diakinisis": {
@@ -56506,7 +56520,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Seoul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lx-pantos"
     },
     "trackingUrlTemplate": "https://www.epantos.com/ecp/web/pr/dt/popup/dlvChaseInqPopup.do?locale=en&quickNo={trackingNumber}",
     "linkRules": [

@@ -468,7 +468,8 @@ describe('withEventPlaces', () => {
         // La Poste tells its deposit again when Posti's data reaches it, at the minute of Posti's sort: the sort goes on top.
         scan('again', 'la-poste', 'accepted', '2026-11-12T02:41:00+00:00', 'Votre colis a été déposé'),
         scan('sorted', 'posti', 'in_transit', '2026-11-12T02:41:36+00:00', 'Lähetys on lajiteltu'),
-        // A scan in other words, or the copy no further, stays on top.
+        // A scan in other words, or the copy no further, stays on top; but La Poste's acceptance in other words goes
+        // under Posti's row in transit, as at any hand-over: the stage wins.
         scan('left', 'la-poste', 'accepted', '2026-11-13T02:41:00+00:00', 'Votre colis est pris en charge'),
         scan('left-copy', 'posti', 'in_transit', '2026-11-13T02:41:36+00:00', 'Lähetys on lähtenyt'),
         scan('arrived', 'la-poste', 'in_transit', '2026-11-14T02:41:00+00:00', 'Votre colis a été déposé'),
@@ -479,7 +480,7 @@ describe('withEventPlaces', () => {
     expect(Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null]))).toEqual({
       posted: null, 'posted-copy': 'posted',
       again: 'sorted', sorted: null,
-      left: null, 'left-copy': 'left',
+      left: 'left-copy', 'left-copy': null,
       arrived: null, 'arrived-copy': 'arrived',
     });
   });
@@ -573,10 +574,10 @@ describe('withEventPlaces', () => {
     // Nor a row no further on.
     expect(served(notice, scan('label', 'poczta-polska', '2026-10-23T08:12:27Z', 'registered', 'Example Office', 'Fixture label printed')))
       .toEqual({ notice: null, label: 'notice' });
-    // Nor beside a scan past registered.
+    // Beside the next carrier's acceptance, the earlier carrier's row in transit is on top: the stage wins.
     expect(served(scan('taken', 'bpost', '2026-10-23T08:12:00Z', 'accepted', 'Example Country', 'Fixture taken over'),
       scan('left', 'poczta-polska', '2026-10-23T08:12:27Z', 'in_transit', 'Example Office', 'Fixture left the office')))
-      .toEqual({ taken: null, left: 'taken' });
+      .toEqual({ taken: 'left', left: null });
   });
 
   it('serves the next carrier\'s row in transit under the earlier carrier\'s posting at its office when that is the first step', () => {
@@ -659,7 +660,7 @@ describe('withEventPlaces', () => {
         // On top, as it alone names the place, it is served in the carrier's words too.
         scan('left', 'gofo-it', '2026-10-30T16:25:17+00:00', null, 'Il pacco ha lasciato il centro di smistamento'),
         scan('left-copy', 'topyou', '2026-10-30T16:25:17+00:00', 'Milano', 'Shipment is out for delivery'),
-        // Words in the copy's stage, or in the scan's, keep their own.
+        // Words in the copy's stage, or in the scan's, keep their own; the hand-over's row in transit is on top.
         scan('sorted', 'gofo-it', '2026-10-31T06:49:14+00:00', 'Milano', 'Registrato presso il centro di smistamento'),
         scan('sorted-copy', 'topyou', '2026-10-31T06:49:00+00:00', null, 'In transit'),
         scan('handed', 'gofo-it', '2026-11-01T08:00:12+00:00', 'Milano', 'Presa in carico', 'accepted'),
@@ -679,8 +680,8 @@ describe('withEventPlaces', () => {
       ['left-copy', undefined, 'Il pacco ha lasciato il centro di smistamento'],
       ['sorted', undefined, 'Registrato presso il centro di smistamento'],
       ['sorted-copy', 'sorted', 'In transit'],
-      ['handed', undefined, 'Presa in carico'],
-      ['handed-copy', 'handed', 'Parcel handed to GOFO'],
+      ['handed', 'handed-copy', 'Presa in carico'],
+      ['handed-copy', undefined, 'Parcel handed to GOFO'],
       ['cleared', undefined, 'Arrivato al centro'],
       ['cleared-copy', 'cleared', 'Customs clearance'],
       ['missed', 'missed-copy', 'Arrivato al centro'],
@@ -763,7 +764,8 @@ describe('withEventPlaces', () => {
         // YunExpress tells GOFO France's acceptance at its sorting centre as an arrival there, at its second and place.
         scan('accepted', 'gofo-fr', '2026-11-19T09:53:45+00:00', 'Lyon', 'Colis pris en charge au centre de tri', 'accepted'),
         scan('accepted-copy', 'yunexpress', '2026-11-19T09:53:45+00:00', 'Lyon', 'Arrived at the sorting centre'),
-        // Naming no place, or on a minute's first second, the copy keeps its line under the acceptance.
+        // Naming no place, or on a minute's first second, the copy is on top all the same, in its own words: the stage
+        // wins.
         scan('taken', 'gofo-fr', '2026-11-20T08:10:12+00:00', 'Lyon', 'Colis pris en charge', 'accepted'),
         scan('taken-copy', 'yunexpress', '2026-11-20T08:10:12+00:00', null, 'Arrived at the sorting centre'),
         scan('kept', 'gofo-fr', '2026-11-21T08:10:00+00:00', 'Lyon', 'Colis reçu au dépôt', 'accepted'),
@@ -776,10 +778,10 @@ describe('withEventPlaces', () => {
       ['handed', undefined, 'Handed over to the last-mile carrier'],
       ['accepted', 'accepted-copy', 'Colis pris en charge au centre de tri'],
       ['accepted-copy', undefined, 'Colis pris en charge au centre de tri'],
-      ['taken', undefined, 'Colis pris en charge'],
-      ['taken-copy', 'taken', 'Arrived at the sorting centre'],
-      ['kept', undefined, 'Colis reçu au dépôt'],
-      ['kept-copy', 'kept', 'Arrived at the sorting centre'],
+      ['taken', 'taken-copy', 'Colis pris en charge'],
+      ['taken-copy', undefined, 'Arrived at the sorting centre'],
+      ['kept', 'kept-copy', 'Colis reçu au dépôt'],
+      ['kept-copy', undefined, 'Arrived at the sorting centre'],
     ]);
     // The apps' headline: the hand-over, in transit, not the scan before it.
     const parcelEvents: TrackingEvent[] = served.filter((event) => ['flown', 'handed', 'accepted', 'accepted-copy'].includes(String(event.id)))
@@ -790,6 +792,38 @@ describe('withEventPlaces', () => {
     expect(currentEvent(parcelEvents)).toMatchObject({ id: 'accepted-copy', stage: 'in_transit' });
     // The rows stay as stored.
     expect(row.tracking_events[3].description).toBe('Arrived at the sorting centre');
+  });
+
+  it('heads a hand-over with the earlier carrier\'s row in transit, placed or not, so the apps\' headline does not step back', () => {
+    const scan = (id: string, source: string, occurredAt: string, location: string | null, description: string, stage = 'in_transit') => ({
+      ...event(id, location, occurredAt), stage, description, provider_event_id: `${source}:${id}`,
+    });
+    const headline = (accepted: Record<string, unknown>, copy: Record<string, unknown>) => {
+      const served = (withEventPlaces({
+        id: 'parcel', carrier: 'yanwen', carrier_data: { original_carrier: 'yanwen', active_tracking_carrier: 'postnl' },
+        tracking_events: [scan('departed', 'yanwen', '2026-11-10T08:00:00+00:00', 'Example Hub', 'Departed from the sorting centre'), accepted, copy],
+      }) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+      const events: TrackingEvent[] = served.map((event) => ({
+        id: String(event.id), parcelId: 'parcel', stage: event.stage as Stage, description: String(event.description),
+        occurredAt: String(event.occurred_at), ...(typeof event.relay_of === 'string' ? { relayOf: event.relay_of } : {}),
+      }));
+      return { heads: Object.fromEntries(served.map(({ id, relay_of }) => [id, relay_of ?? null])), current: currentEvent(events) };
+    };
+    // Yanwen tells PostNL's acceptance as a scan in transit at its second: whichever row names no place, the row in
+    // transit is on top, and the headline is the hand-over, not Yanwen's departure two days before.
+    for (const [acceptedAt, copyAt] of [['Example Depot', null], [null, 'Example Depot'], [null, null]]) {
+      const { heads, current } = headline(scan('accepted', 'postnl', '2026-11-12T17:05:17+00:00', acceptedAt, 'Zending ontvangen', 'accepted'),
+        scan('accepted-copy', 'yanwen', '2026-11-12T17:05:17+00:00', copyAt, 'Arrived at the delivery partner'));
+      expect(heads).toEqual({ departed: null, accepted: 'accepted-copy', 'accepted-copy': null });
+      expect(current).toMatchObject({ id: 'accepted-copy', stage: 'in_transit', occurredAt: '2026-11-12T17:05:17+00:00' });
+    }
+    // So for the copy cut to the minute, and beside the next carrier's notice that it has the parcel's data.
+    expect(headline(scan('accepted', 'postnl', '2026-11-12T17:05:17+00:00', 'Example Depot', 'Zending ontvangen', 'accepted'),
+      scan('accepted-copy', 'yanwen', '2026-11-12T17:05:00+00:00', 'Example Depot', 'Arrived at the delivery partner')).current)
+      .toMatchObject({ id: 'accepted-copy', stage: 'in_transit' });
+    expect(headline(scan('accepted', 'postnl', '2026-11-12T17:05:17+00:00', null, 'Zending aangemeld', 'registered'),
+      scan('accepted-copy', 'yanwen', '2026-11-12T17:05:17+00:00', null, 'Arrived at the delivery partner')).current)
+      .toMatchObject({ id: 'accepted-copy', stage: 'in_transit' });
   });
 
   it('serves an earlier carrier\'s copy telling a scan\'s second and stage in no word beyond the scan\'s words and place in the scan\'s words', () => {

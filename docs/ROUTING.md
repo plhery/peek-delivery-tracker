@@ -1045,7 +1045,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the parcel's data; a consolidator's copy of the next carrier's notice stays under it), or is a
   posting that says where it was, the parcel's first step past registered, beside a row in transit,
   neither row's words holding the other's (DHL tells Poczta Polska's posting as an arrival at its
-  origin centre), the other row is served with `relay_of` instead. The new carrier may also tell
+  origin centre), or is in transit beside the new carrier's registration or acceptance, placed or
+  not, the places not apart and neither row's words holding the other's (the stage wins: the
+  acceptance on top would read as a step back, and the apps' headline would fall back to an older
+  scan), the other row is served with `relay_of` instead. The new carrier may also tell
   the steps the earlier one sent it over the posts' data exchange, placed only in the earlier carrier's
   country and stamped when the message arrived (Slovenská pošta tells Poczta Polska's posting
   and departure an hour or two late). A row of the new carrier placed in nothing but a country
@@ -1086,8 +1089,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   its line: it may say more. So does one a second or more away whose words do not plainly show another
   language: it may be a scan of its own. An earlier carrier's copy in transit of the new carrier's
   acceptance at its second (not a minute's first) and place, both rows naming a place, is served in
-  the acceptance's words and on top, so the step reads as the parcel moving on rather than a step back
-  to accepted (YunExpress tells GOFO France's acceptance at its sorting centre as an arrival there).
+  the acceptance's words (YunExpress tells GOFO France's acceptance at its sorting centre as an
+  arrival there); other such copies keep their own words.
   The rows stay as stored.
   A parcel's card
   reads the other row as its status, whichever is newer. Of a pair, the row

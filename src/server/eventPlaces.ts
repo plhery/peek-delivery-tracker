@@ -364,7 +364,10 @@ const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
  * Nor a posting that says where it was, the parcel's first step past registered, beside a scan in transit, unless one
  * row's words hold the other's: DHL tells Poczta Polska's posting as an arrival at its origin centre, naming the
  * country. A collection after an earlier posting, or a posting after a scan on the way, stays under it.
- * An earlier carrier's copy in transit of the new carrier's acceptance at its second and place (`handOver`) is on top.
+ * An earlier carrier's copy in transit of the new carrier's registration or acceptance is on top, placed or not, at a
+ * minute's first second or not: the stage wins, as the acceptance on top would read as a step back from the scans on
+ * the way and the apps' headline would fall back to an older scan. Not when the places are apart, nor when one row's
+ * words hold the other's: a consolidator's copy of the next carrier's notice tells that notice and stays under it.
  * A copy an hour or more from its scan, on another clock, never is: the step is dated by the row on top.
  * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
  * one on top.
@@ -390,6 +393,12 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
   // never leads: the step takes the time of the row on top.
   const otherClock = (copy: JsonObject, scan: JsonObject) =>
     Math.abs(Date.parse(String(copy.occurred_at)) - Date.parse(String(scan.occurred_at))) >= 59 * 60_000;
+  // A hand-over: the earlier carrier's row in transit heads the new carrier's registration or acceptance, unless one
+  // row's words hold the other's.
+  const holds = (event: JsonObject, other: JsonObject) => wordsRead(other) !== '' && wordsWithin(event, other);
+  const handedOn = (copy: JsonObject, scan: JsonObject) => copy.stage === 'in_transit'
+    && (scan.stage === 'registered' || scan.stage === 'accepted') && source(scan) === current && !placesApart(copy, scan)
+    && !holds(copy, scan) && !holds(scan, copy);
   const leads = (copy: JsonObject, scan: JsonObject) => !otherClock(copy, scan) && ((placed(copy) && !placed(scan) && !pastTransit(scan, copy))
     || copyTellsProblem(copy, scan)
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
@@ -398,7 +407,7 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     || (scan.stage === 'registered' && further(copy, scan) && placed(copy) && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
     || (copy.stage === 'accepted' && scan.stage === 'in_transit' && firstStep(copy, scan) && placed(copy)
       && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
-    || handOver(copy, scan, current));
+    || handOver(copy, scan, current) || handedOn(copy, scan));
   // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
   // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
   const top = (id: string) => {

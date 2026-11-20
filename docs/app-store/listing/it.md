@@ -71,7 +71,6 @@ pacco,spedizione,spedizioni,tracking,traccia,tracciare,consegna,segui,ordine,pos
 ## What's new
 
 ```text
-• Novità in Impostazioni › Preferenze: «Statistiche d’uso». Contano quante volte si apre Peek e quali funzioni si usano, mai i tuoi pacchi o il tuo account. Per contare i dispositivi, Peek conserva un ID casuale su questo dispositivo e lo invia separatamente, una volta al giorno; se disattivi l’interruttore, non viene inviato nulla e l’ID viene eliminato.
 • Quando il sito di tracciamento di un corriere non funziona, il tuo pacco lo dice con calma invece di mostrare un aggiornamento non riuscito, e la sua pagina rimanda al sito del corriere stesso per cercare lì il numero.
 • In Impostazioni › Assistenti, i passaggi per Home Assistant ora dicono di trovare Peek cercandolo nel Marketplace.
 • I pacchi di GLS Hungary mostrano il furgone di GLS.

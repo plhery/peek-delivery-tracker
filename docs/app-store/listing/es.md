@@ -71,7 +71,6 @@ rastrear,rastreo,rastreador,localizar,seguir,paquete,envíos,pedido,pedidos,entr
 ## What's new
 
 ```text
-• Nuevo en Ajustes › Preferencias: «Estadísticas de uso». Cuentan cuántas veces se abre Peek y qué funciones se usan, nunca tus paquetes ni tu cuenta. Para contar dispositivos, Peek guarda un ID aleatorio en este dispositivo y lo envía por separado una vez al día; si desactivas el interruptor, no se envía nada y se borra el ID.
 • Cuando la web de seguimiento de un transportista no funciona, tu paquete lo indica con calma en lugar de mostrar una actualización fallida, y su página enlaza a la web del propio transportista para consultar allí el número.
 • En Ajustes › Asistentes, los pasos de Home Assistant ahora indican que busques Peek en el Marketplace para encontrarlo.
 • Los paquetes de GLS Hungary muestran la furgoneta de GLS.

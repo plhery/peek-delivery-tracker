@@ -73,7 +73,6 @@ delivery,tracking,shipment,order,courier,post,mail,shipping,track,deliveries,map
 ## What's new
 
 ```text
-• New in Settings › Preferences: “Usage statistics”. It counts how often Peek is opened and which features are used, never your packages or your account. To count devices, Peek keeps a random ID on this one and sends it on its own once a day; turn the switch off and nothing is sent and the ID is deleted.
 • When a carrier’s tracking site is down, your package says so calmly instead of showing a failed update, and its page links to the carrier’s own site to look the number up there.
 • In Settings › Assistants, Home Assistant’s steps now say to find Peek by searching for it in the Marketplace.
 • GLS Hungary packages show GLS’s truck.

@@ -71,7 +71,6 @@ paczka,paczki,paczek,przesyłka,przesyłki,kurier,poczta,tracking,status,dostawa
 ## What's new
 
 ```text
-• Nowość w sekcji Ustawienia › Preferencje: „Statystyki użycia”. Liczą, jak często Peek jest otwierany i których funkcji się używa, nigdy twoich przesyłek ani konta. Aby liczyć urządzenia, Peek przechowuje na tym urządzeniu losowy identyfikator i raz dziennie wysyła go osobno; gdy wyłączysz przełącznik, nic nie zostanie wysłane, a identyfikator zostanie usunięty.
 • Gdy strona śledzenia przesyłek przewoźnika nie działa, twoja przesyłka spokojnie o tym informuje, zamiast pokazywać nieudaną aktualizację, a jej ekran ma link do strony samego przewoźnika, żeby sprawdzić tam numer.
 • W opcji Ustawienia › Asystenci kroki dla Home Assistant mówią teraz, żeby znaleźć Peek, wyszukując go w Marketplace.
 • Przesyłki GLS Hungary pokazują furgonetkę GLS.

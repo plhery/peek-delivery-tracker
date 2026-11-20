@@ -40,15 +40,9 @@ describe('GuestSettings', () => {
     await user.click(mark);
     expect(mark).not.toBeChecked();
     expect(window.localStorage.getItem(MARK_NEW_UPDATES_STORAGE_KEY)).toBe('off');
-    // Turning usage statistics off deletes the counting id.
-    window.localStorage.setItem('sdt.counting.v1', '{"id":"AAAAAAAAAAAAAAAAAAAAAA","made":"2026-11-19"}');
-    const usage = within(sheet).getByRole('switch', { name: 'Usage statistics' });
-    expect(usage).toBeChecked();
-    expect(usage).toHaveAccessibleDescription(/never your parcels or your account/);
-    await user.click(usage);
-    expect(usage).not.toBeChecked();
-    expect(window.localStorage.getItem('sdt.analytics.enabled')).toBe('false');
-    expect(window.localStorage.getItem('sdt.counting.v1')).toBeNull();
+    // Usage statistics have no switch: the dot is the only one.
+    expect(within(sheet).getAllByRole('switch')).toEqual([mark]);
+    expect(within(sheet).queryByText(/usage statistics/i)).not.toBeInTheDocument();
     expect(fetch).not.toHaveBeenCalled();
 
     await user.click(within(sheet).getByRole('button', { name: 'Close' }));

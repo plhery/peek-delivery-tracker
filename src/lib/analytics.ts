@@ -87,14 +87,10 @@ let arrival: { referrer?: string; campaign: string } | null = typeof window === 
   };
 
 
-export const analyticsPreferenceKey = 'sdt.analytics.enabled';
-export function analyticsEnabled() {
+/** A browser whose reader once turned statistics off keeps them off. No screen sets it. */
+const analyticsPreferenceKey = 'sdt.analytics.enabled';
+function analyticsEnabled() {
   try { return localStorage.getItem(analyticsPreferenceKey) !== 'false'; } catch { return false; }
-}
-export function setAnalyticsEnabled(enabled: boolean) {
-  try { localStorage.setItem(analyticsPreferenceKey, String(enabled)); } catch { return; }
-  if (!enabled) { queue = []; cache = undefined; forgetCountingId(); }
-  else { startup = undefined; disabled = false; lastView = ''; void startAnalytics().then(() => trackScreen(screen)); }
 }
 /** The browser asks sites not to track it, with Do Not Track or Global Privacy Control. */
 export function browserDeclinesTracking(): boolean {

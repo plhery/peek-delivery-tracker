@@ -51,14 +51,14 @@ function followed(): number {
   } catch { return 0; }
 }
 
-/** Deletes the counting id from this browser: usage statistics were turned off. */
+/** Deletes the counting id from this browser, which counts nothing ([analytics.ts](./analytics.ts)). */
 export function forgetCountingId(): void {
   try { localStorage.removeItem(COUNTING_STORAGE_KEY); } catch { /* Nothing kept. */ }
 }
 
 /**
  * Counts this browser as seen today, unless it already was with the same sign-in state. The caller has checked that
- * the reader allows usage statistics. A failed request leaves the day uncounted, for the next page load.
+ * this browser is counted. A failed request leaves the day uncounted, for the next page load.
  */
 export async function countBrowser(signedIn: boolean, now = new Date()): Promise<void> {
   if (sending) return;

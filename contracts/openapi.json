@@ -64145,7 +64145,7 @@
       "post": {
         "operationId": "countInstallSeen",
         "summary": "Count an app or browser as seen today",
-        "description": "The apps and the website send their counting id alone, at most once a day and again the same day once they sign in, unless their reader turned usage statistics off (the website also when the browser sends Do Not Track or Global Privacy Control). The service keeps only a keyed hash of it. Never sent with an account, a link or a tracking number.",
+        "description": "The apps and the website send their counting id alone, at most once a day and again the same day once they sign in. The website sends nothing when the browser sends Do Not Track or Global Privacy Control. The service keeps only a keyed hash of it. Never sent with an account, a link or a tracking number.",
         "security": [],
         "requestBody": {
           "required": true,

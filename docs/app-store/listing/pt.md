@@ -71,7 +71,6 @@ seguir,rastrear,rastreio,tracking,localizar,entrega,entregas,envio,envios,correi
 ## What's new
 
 ```text
-• Novidade em Definições › Preferências: «Estatísticas de utilização». Contam quantas vezes o Peek é aberto e que funções são usadas, nunca as tuas encomendas nem a tua conta. Para contar os dispositivos, o Peek guarda um identificador aleatório neste dispositivo e envia-o em separado, uma vez por dia; se desligares o interruptor, nada é enviado e o identificador é apagado.
 • Quando o site de seguimento de uma transportadora está em baixo, a tua encomenda indica-o com calma em vez de mostrar uma falha de atualização, e a sua página tem uma ligação para o site da própria transportadora, para procurares lá o número.
 • Em Definições › Assistentes, os passos do Home Assistant dizem agora para encontrares o Peek ao pesquisá-lo no Marketplace.
 • As encomendas da GLS Hungary mostram a carrinha da GLS.

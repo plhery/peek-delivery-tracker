@@ -120,13 +120,6 @@ describe('safe analytics collection', () => {
     expect(requests).toEqual([]);
   });
 
-  it('stops queued events after opting out and does not send the opt-out itself', async () => {
-    const a = await import('./analytics'); await a.startAnalytics(); await settle();
-    const count = requests.length;
-    a.setAnalyticsEnabled(false); a.trackAction('parcel-delete', 'success'); await settle();
-    expect(requests).toHaveLength(count);
-  });
-
   it.each([null, { ...config, hostname: 'some-other-host.example' }, { ...config, endpoint: 'http://unsafe.example/api/send' }])('fails closed for disabled or mismatched configuration', async (value) => {
     vi.stubGlobal('fetch', vi.fn(async () => Response.json(value)));
     const a = await import('./analytics'); a.trackScreen('welcome'); await a.startAnalytics();
@@ -331,14 +324,17 @@ describe('the counting id', () => {
     expect(seen).toHaveLength(0);
   });
 
-  it('deletes the id when usage statistics are turned off, or the browser asks not to be tracked', async () => {
+  it('deletes the id in a browser whose reader turned statistics off, or that asks not to be tracked', async () => {
     const a = await import('./analytics');
     await a.startAnalytics();
     a.trackScreen('front-door', 'anonymous'); await settle();
     expect(stored()).not.toBeNull();
-    a.setAnalyticsEnabled(false);
+    localStorage.setItem('sdt.analytics.enabled', 'false');
+    vi.resetModules();
+    const off = await import('./analytics');
+    await off.startAnalytics();
     expect(stored()).toBeNull();
-    a.trackScreen('deliveries', 'account'); await settle();
+    off.trackScreen('deliveries', 'account'); await settle();
     expect(seen).toHaveLength(1);
 
     localStorage.clear();

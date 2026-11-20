@@ -1,6 +1,6 @@
 # Peek privacy notice
 
-Effective: 19 November 2026
+Effective: 20 November 2026
 
 Peek follows parcels, on the web and in its iPhone and Android apps. This
 notice says what the official service at peektracker.com processes to do that.
@@ -275,14 +275,19 @@ with other data. Your device replaces the identifier after 13 months. The
 service deletes a hash not seen for 90 days, and every hash 25 months after it
 was first seen.
 
-Turning off Usage statistics in Settings stops all of this and deletes the
-counting identifier from your device. The website also sends nothing when your
-browser asks not to be tracked (Do Not Track or Global Privacy Control) or when
-Umami's local opt-out is set. App versions without that switch send no
-counting identifier. Historical analytics remain
-until operational cleanup and cannot be selected by account when you export or
-delete it because we do not send an account identifier. Local demo builds,
-simulators, emulators, and unconfigured self-hosted deployments do not collect.
+The identifier stays on your device until it is replaced, or until you delete
+the app's or the site's data: removing the app from an iPhone or iPad deletes
+it, as does removing the Android app or clearing its storage (Android may
+restore it from the phone's backup when you install the app again), and on the
+website, clearing this site's data in your browser. On a Mac it stays in the
+app's folder in your Library until you delete that folder. The website sends
+nothing, and deletes the identifier, when your browser asks not to be tracked
+(Do Not Track or Global Privacy Control) or when Umami's local opt-out is set.
+App versions from before the counting identifier send none. Historical
+analytics remain until operational cleanup and cannot be selected by account
+when you export or delete it because we do not send an account identifier.
+Local demo builds, simulators, emulators, and unconfigured self-hosted
+deployments do not collect.
 
 ## Following a parcel without an account
 

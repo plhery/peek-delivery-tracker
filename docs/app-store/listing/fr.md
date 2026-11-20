@@ -73,7 +73,6 @@ livraison,suivre,paquet,commande,poste,courrier,envoi,tracking,tracker,relais,le
 ## What's new
 
 ```text
-• Nouveau dans Réglages › Préférences : « Statistiques d’utilisation ». Elles comptent combien de fois Peek est ouvert et quelles fonctions servent, jamais tes colis ni ton compte. Pour compter les appareils, Peek garde un identifiant aléatoire sur cet appareil et l’envoie à part, une fois par jour ; si tu désactives le bouton, rien n’est envoyé et l’identifiant est supprimé.
 • Quand le site de suivi d’un transporteur est en panne, ton colis le dit calmement au lieu d’afficher un échec de mise à jour, et sa page renvoie vers le site même du transporteur pour y chercher le numéro.
 • Dans Réglages › Assistants, les étapes pour Home Assistant disent désormais de trouver Peek en le cherchant dans Marketplace.
 • Les colis GLS Hungary affichent le camion de GLS.

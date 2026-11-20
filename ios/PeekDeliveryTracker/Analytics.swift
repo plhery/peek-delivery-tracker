@@ -101,18 +101,13 @@ struct CountingID: Codable, Equatable {
 @MainActor
 final class DeliveryAnalytics {
     static let shared = DeliveryAnalytics()
+    /// An install whose reader once turned statistics off keeps them off. No screen sets it.
     static let preferenceKey = "sdt.analytics.enabled"
     private let defaults: UserDefaults
-    private var enabled: Bool { defaults.object(forKey: Self.preferenceKey) as? Bool ?? true }
+    var enabled: Bool { defaults.object(forKey: Self.preferenceKey) as? Bool ?? true }
 
     init(defaults: UserDefaults = .standard) { self.defaults = defaults }
 
-    /// Turning usage statistics off also deletes the counting id.
-    func setEnabled(_ value: Bool) {
-        defaults.set(value, forKey: Self.preferenceKey)
-        if !value { queue.removeAll(); cache = nil; defaults.removeObject(forKey: CountingID.storageKey) }
-        else { disabled = false; lastView = ""; Task { await start(); view(screen) } }
-    }
     struct Configuration: Decodable {
         let endpoint: URL
         let hostname: String
@@ -291,9 +286,7 @@ extension DeliveryAnalytics {
         Task {
             defer { counting = false }
             guard let (_, response) = try? await transport.data(for: request),
-                  (response as? HTTPURLResponse)?.statusCode == 204,
-                  // Usage statistics were not turned off meanwhile.
-                  CountingID.stored(in: defaults)?.id == due.id else { return }
+                  (response as? HTTPURLResponse)?.statusCode == 204 else { return }
             due.counted(now: now, signedIn: signedIn).save(in: defaults)
         }
     }

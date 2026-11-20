@@ -181,9 +181,9 @@ referrer is that assistant's site, so Umami lists it under referrers and its AI 
 
 The web sends nothing under DNT, GPC or `umami.disabled=1`, nor from a browser driven by
 automation (`navigator.webdriver`), such as a headless crawler, which still gets the same
-page. Settings' "Usage statistics" switch writes `sdt.analytics.enabled`, which turns
-collection off and deletes the counting id. Retention is described in the public privacy
-notice.
+page. A stored `sdt.analytics.enabled` of `false` (web `localStorage`, the apps' preferences)
+also turns collection off, and on the web deletes the counting id. Neither the website nor the
+iPhone, iPad and Mac app sets it. Retention is described in the public privacy notice.
 
 ## Counting installs
 

@@ -71,7 +71,6 @@ paket,pakete,paketverfolgung,tracker,tracking,verfolgen,sendung,lieferung,post,v
 ## What's new
 
 ```text
-• Neu unter Einstellungen › Präferenzen: „Nutzungsstatistik“. Sie zählt, wie oft Peek geöffnet wird und welche Funktionen genutzt werden, nie deine Pakete oder dein Konto. Um Geräte zu zählen, speichert Peek auf diesem Gerät eine zufällige ID und sendet sie einmal am Tag separat; deaktivierst du den Schalter, wird nichts gesendet und die ID gelöscht.
 • Ist die Website zur Sendungsverfolgung eines Paketdienstes ausgefallen, sagt dein Paket das gelassen, statt eine fehlgeschlagene Aktualisierung anzuzeigen, und seine Seite verlinkt auf die Website des Paketdienstes selbst, damit du die Nummer dort nachsehen kannst.
 • Unter Einstellungen › Assistenten sagen die Schritte für Home Assistant jetzt, dass du Peek findest, indem du im Marketplace danach suchst.
 • Pakete von GLS Hungary zeigen den Lieferwagen von GLS.

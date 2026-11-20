@@ -532,8 +532,6 @@ struct AccountView: View {
                         SettingsWeightRow()
                         settingsDivider
                         SettingsMarkNewUpdatesRow()
-                        settingsDivider
-                        SettingsUsageStatisticsRow()
                     }
                     SettingsGroup {
                         NavigationLink { accountPage } label: {
@@ -1008,23 +1006,6 @@ private struct SettingsMarkNewUpdatesRow: View {
     }
 }
 
-/// Usage statistics: the screen views, actions and counting id the app sends (docs/ANALYTICS.md).
-/// On until turned off here; off, nothing is sent and the counting id is deleted.
-private struct SettingsUsageStatisticsRow: View {
-    @EnvironmentObject private var localizer: Localizer
-    @AppStorage(DeliveryAnalytics.preferenceKey) private var enabled = true
-
-    var body: some View {
-        Toggle(isOn: Binding(get: { enabled }, set: { DeliveryAnalytics.shared.setEnabled($0) })) {
-            SettingsRow(title: localizer.text("settings.usageStatistics"), detail: localizer.text("settings.usageStatisticsHint"), padded: false)
-        }
-        .rowToggle()
-        .tint(settingsGreen)
-        .padding(15)
-        .accessibilityIdentifier("settings.usageStatistics")
-    }
-}
-
 /// The picker sits under its label at the largest text sizes. Closed, it shows the choice in a word or two (`shown`) in
 /// the rows' small grey, on one line, as other rows show their value; its menu names each choice in full, and VoiceOver
 /// reads the full name (`spoken`). A Mac's pop-up button shows the full name.
@@ -1254,8 +1235,6 @@ private struct GeneralSettings: View {
                 SettingsWeightRow()
                 settingsDivider
                 SettingsMarkNewUpdatesRow()
-                settingsDivider
-                SettingsUsageStatisticsRow()
             }
             SettingsGroup {
                 Toggle(isOn: $menuBarShown) {

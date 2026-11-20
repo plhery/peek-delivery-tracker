@@ -125,13 +125,20 @@ final class AnalyticsTests: XCTestCase {
         XCTAssertEqual(body["parcels"] as? Int, 3)
     }
 
-    @MainActor func testTurningUsageStatisticsOffDeletesTheCountingID() {
+    @MainActor func testAnInstallWhoseReaderTurnedStatisticsOffStaysOff() {
         let (store, suite) = defaults()
         defer { store.removePersistentDomain(forName: suite) }
-        CountingID(id: firstID, made: "2026-11-19").save(in: store)
-        let analytics = DeliveryAnalytics(defaults: store)
-        analytics.setEnabled(false)
-        XCTAssertNil(store.object(forKey: CountingID.storageKey))
-        XCTAssertEqual(store.object(forKey: DeliveryAnalytics.preferenceKey) as? Bool, false)
+        XCTAssertTrue(DeliveryAnalytics(defaults: store).enabled)
+        store.set(false, forKey: DeliveryAnalytics.preferenceKey)
+        XCTAssertFalse(DeliveryAnalytics(defaults: store).enabled)
+    }
+
+    /// Settings has no Usage statistics row: the app's copy holds no words for one.
+    func testSettingsHasNoUsageStatisticsRow() throws {
+        let url = try XCTUnwrap(Bundle.main.url(forResource: "Localization", withExtension: "json"))
+        let dictionaries = try JSONDecoder().decode([String: [String: String]].self, from: Data(contentsOf: url))
+        for (language, values) in dictionaries {
+            XCTAssertEqual(values.keys.filter { $0.hasPrefix("settings.usageStatistics") }, [], language)
+        }
     }
 }

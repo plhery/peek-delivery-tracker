@@ -71,7 +71,6 @@ rastrear,rastreamento,entrega,entregas,objeto,pedido,frete,envio,código,correio
 ## What's new
 
 ```text
-• Novidade em Configurações › Preferências: “Estatísticas de uso”. Elas contam quantas vezes o Peek é aberto e quais recursos são usados, nunca suas encomendas nem sua conta. Para contar os aparelhos, o Peek guarda um ID aleatório neste aparelho e o envia separadamente, uma vez por dia; se você desativar a opção, nada é enviado e o ID é apagado.
 • Quando o site de rastreamento de uma transportadora está fora do ar, sua encomenda avisa isso com calma em vez de mostrar uma falha na atualização, e a página dela tem um link para o site da própria transportadora, para você procurar o código lá.
 • Em Configurações › Assistentes, as etapas do Home Assistant agora dizem para você encontrar o Peek pesquisando por ele no Marketplace.
 • As encomendas da GLS Hungary mostram o caminhão da GLS.

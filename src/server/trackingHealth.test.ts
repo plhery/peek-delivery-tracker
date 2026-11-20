@@ -138,6 +138,33 @@ describe('tracking health evidence', () => {
     ]);
   });
 
+  it("counts Track718's lookup not completed yet and its busy answer as answers, and its other inconclusive ones as failures", async () => {
+    const sample = async (error: Error, carrier = 'Track718') => {
+      const samples = new Map<string, HealthSample>();
+      await observeTrackingHealth(samples, async () => {
+        healthStepRecorder.lookup({ carrier, finalStep: 'trawl', outcome: 'indeterminate', errorType: 'IndeterminateError',
+          durationMs: 900, attempts: 1, error });
+      });
+      return [...samples.values()];
+    };
+    expect(await sample(new IndeterminateError('Track718', 'Track718 has not completed the Juxi lookup'))).toEqual([
+      expect.objectContaining({ kind: 'provider', subject: 'Track718', healthy: true,
+        details: expect.objectContaining({ category: 'not_found', reason: 'lookup_pending' }) }),
+    ]);
+    expect(await sample(new Error('lookup failed', { cause: new IndeterminateError('Track718', 'Track718 is temporarily busy') }))).toEqual([
+      expect.objectContaining({ healthy: true, details: expect.objectContaining({ category: 'not_found', reason: 'provider_busy' }) }),
+    ]);
+    for (const [error, carrier] of [
+      [new IndeterminateError('Track718', 'Track718 returned an unreadable snapshot')],
+      [new IndeterminateError('Ship24', 'Ship24 is temporarily busy'), 'Ship24'],
+      [new IndeterminateError('Track718', 'Track718 is temporarily busy', { reason: 'maintenance_page' })],
+      [new ChallengeError('Track718', 'Track718 returned no bound Juxi response')],
+      [new RateLimitedError('Track718')],
+    ] as const) {
+      expect(await sample(error, carrier), error.message).toEqual([expect.objectContaining({ healthy: false })]);
+    }
+  });
+
   it("counts Ukrposhta's misses and a post's item without scans as answers, and other inconclusive lookups as failures", async () => {
     const samples = new Map<string, HealthSample>();
     const miss = (reason?: string) => new IndeterminateError('ukrposhta', undefined, reason ? { reason } : undefined);

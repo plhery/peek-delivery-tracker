@@ -1,6 +1,6 @@
 import 'server-only';
 import { AsyncLocalStorage } from 'node:async_hooks';
-import { CarrierError, NoHistoryError, UpstreamHttpError } from 'universal-parcel-scraper';
+import { CarrierError, IndeterminateError, NoHistoryError, UpstreamHttpError } from 'universal-parcel-scraper';
 import type { LookupRecord, StepRecord } from 'universal-parcel-scraper/node';
 import { HANDED_OFF_REASONS, UNKNOWN_ITEM_REASONS, carrierErrorReason, selfPacedRefusal, sharedQuotaRefusal } from './trackingFailure';
 import { proxyTunnelStatus } from './trackingProxy';
@@ -26,10 +26,34 @@ const CAPTURE_FAILURES = new Set(['capture_missing', 'capture_unreadable']);
 const answered = new Set(['ok', 'not_found', 'input_required']);
 
 /**
+ * A provider's answer that it has nothing for the number yet, which the scraper raises as inconclusive without a reason
+ * and tells by its wording alone: Track718 still fetching the carrier's history, or turning lookups away while it is
+ * busy. Both are ordinary while a parcel is new; counted as failures, a run of them alone could open a Track718 incident.
+ * The sample keeps which one as its reason.
+ */
+const NOT_READY: ReadonlyArray<{ provider: string; wording: RegExp; reason: string }> = [
+  { provider: 'Track718', wording: /\bhas not completed the\b.*\blookup\b/i, reason: 'lookup_pending' },
+  { provider: 'Track718', wording: /\bis temporarily busy\b/i, reason: 'provider_busy' },
+];
+function notReady(error: unknown): string | undefined {
+  let current = error;
+  for (let depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
+    if (current instanceof CarrierError) {
+      const answer = current;
+      return answer instanceof IndeterminateError && !(answer instanceof NoHistoryError) && !answer.reason
+        ? NOT_READY.find(({ provider, wording }) => answer.provider === provider && wording.test(answer.message))?.reason
+        : undefined;
+    }
+  }
+  return undefined;
+}
+
+/**
  * A provider with no history for a number yet has answered, like not-found
- * (routing treats it the same way). Counted as a failure, every parcel added
- * before its first scan looked like a provider outage, and the hourly hand-off
- * probes of one item bound for Ukraine could open a Ukrposhta incident.
+ * (routing treats it the same way), and so has one not ready to answer yet (NOT_READY).
+ * Counted as a failure, every parcel added before its first scan looked like a provider
+ * outage, and the hourly hand-off probes of one item bound for Ukraine could open a
+ * Ukrposhta incident.
  */
 function category(record: StepRecord | LookupRecord): string {
   // A number the carrier does not issue is an answer too. It is filed with the
@@ -38,7 +62,7 @@ function category(record: StepRecord | LookupRecord): string {
   let current = record.error;
   for (let depth = 0; current instanceof Error && depth < 8; depth++, current = current.cause) {
     if (current instanceof CarrierError) {
-      if (current instanceof NoHistoryError || UNKNOWN_ITEM_REASONS.has(current.reason ?? '')) return 'not_found';
+      if (current instanceof NoHistoryError || UNKNOWN_ITEM_REASONS.has(current.reason ?? '') || notReady(current)) return 'not_found';
       if (HANDED_OFF_REASONS.has(current.reason ?? '')) return 'handed_off';
       // So is a number that names several parcels, such as an Australia Post consignment of
       // two articles: the owner has to give one parcel's number. Counted as a failure, one such
@@ -63,7 +87,8 @@ function details(record: StepRecord | LookupRecord, outcome: string): JsonObject
     if (current instanceof UpstreamHttpError && current.status >= 100 && current.status <= 599) status = current.status;
   }
   const proxy = proxyTunnelStatus(record.error);
-  const reason = carrierErrorReason(record.error) ?? (proxy === null ? null : proxy === 402 ? 'proxy_payment_required' : 'proxy_refused');
+  const reason = carrierErrorReason(record.error) ?? notReady(record.error)
+    ?? (proxy === null ? null : proxy === 402 ? 'proxy_payment_required' : 'proxy_refused');
   return { error_type: record.errorType, category: outcome, reason, http_status: status,
     ...(proxy === null ? {} : { proxy_status: proxy }), step: 'step' in record ? record.step : record.finalStep };
 }

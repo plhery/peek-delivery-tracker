@@ -47,7 +47,10 @@ provider lookup incident, which counts each lookup by its final outcome, is the 
   added before its first scan can't open a provider incident. So is a carrier's tracking
   that does not know the item yet (Ukrposhta, myDSV, Ecoscooting), inconclusive with the
   reason `status_api_not_found` or `portal_not_found`: routing files it as `no_history`,
-  and the hand-off probes of mail bound for Ukraine can't open an incident either.
+  and the hand-off probes of mail bound for Ukraine can't open an incident either. So is
+  Track718 still fetching the carrier's history or turning lookups away while busy, filed as
+  not-found with the reason `lookup_pending` or `provider_busy`: the scraper words these
+  answers without a reason, so health reads its wording, and a run of them opens no incident.
 - A confirmation asks a carrier whether it holds a parcel that is not its own yet: a
   delivery partner before the handover, or a carrier that detection or a provider names
   and that has not confirmed the number. Its other inconclusive answers, such as an item

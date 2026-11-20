@@ -1,0 +1,3 @@
+Without an account, signing in opens over what you were doing and brings you back to it.
+Without an account, pulling the list down has your own parcels checked with their carriers right away.
+Without an account, Settings › Notifications offers the delivery email: sign in to get it.

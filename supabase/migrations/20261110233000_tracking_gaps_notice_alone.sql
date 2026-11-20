@@ -4,7 +4,6 @@
 -- parcel. The view now reads such a parcel as 'provider shows the notice alone', lane none.
 -- Same columns; metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -190,4 +189,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261110233000_tracking_gaps_notice_alone') on conflict do nothing;
 
-commit;

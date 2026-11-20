@@ -15,7 +15,6 @@
 -- Nothing here names a parcel, an account or a number. The server needs no change: it
 -- already calls record_usage_metrics.
 
-begin;
 
 create table metrics.provider_requests_daily (
   day date not null,
@@ -322,4 +321,3 @@ create index tracking_sync_attempts_started_idx on public.tracking_sync_attempts
 
 insert into public.applied_migrations (name) values ('20261114190000_provider_requests') on conflict do nothing;
 
-commit;

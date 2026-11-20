@@ -8,7 +8,6 @@
 --
 -- Apply this before deploying the server that calls these functions.
 
-begin;
 
 create table public.parcel_link_postcode_attempts (
   id uuid primary key default gen_random_uuid(),
@@ -198,4 +197,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261024070000_parcel_link_postcodes') on conflict do nothing;
 
-commit;

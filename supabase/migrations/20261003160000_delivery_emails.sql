@@ -12,7 +12,6 @@
 -- arguments it knows, which keeps the email choice, and it names the package
 -- columns it reads.
 
-begin;
 
 -- The account's choice: true on, false off or declined, NULL never made.
 alter table public.notification_preferences
@@ -587,4 +586,3 @@ grant execute on function public.link_package_tracking(uuid, uuid) to service_ro
 
 notify pgrst, 'reload schema';
 
-commit;

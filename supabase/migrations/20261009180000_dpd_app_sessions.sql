@@ -11,7 +11,6 @@
 -- Apply this before deploying the server that uses it. The server before it
 -- keeps working on this schema: it does not use the table.
 
-begin;
 
 create table public.dpd_app_sessions (
   token text primary key check (char_length(token) between 16 and 512 and token ~ '^[A-Za-z0-9+/=]+$'),
@@ -30,4 +29,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261009180000_dpd_app_sessions') on conflict do nothing;
 
-commit;

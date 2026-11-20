@@ -4,7 +4,6 @@
 -- answer, set-aside answer and the rest are as old. A parcel with no carrier known still goes to
 -- the carriers lane. Same columns; metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -127,4 +126,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261023224600_tracking_gaps_dormant_before_failures') on conflict do nothing;
 
-commit;

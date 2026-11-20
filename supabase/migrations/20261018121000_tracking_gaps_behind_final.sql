@@ -4,7 +4,6 @@
 -- returned', reason 'answer behind a final stage', in the adapters lane. Same columns;
 -- metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -114,4 +113,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261018121000_tracking_gaps_behind_final') on conflict do nothing;
 
-commit;

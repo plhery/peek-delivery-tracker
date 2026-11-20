@@ -20,7 +20,6 @@
 -- metrics.guest_cohorts: installs first seen without an account in each of the
 -- last 12 weeks, and what became of them.
 
-begin;
 
 create table private.installs (
   install text primary key check (install ~ '^[0-9a-f]{64}$'),
@@ -172,4 +171,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261119160000_install_counts') on conflict do nothing;
 
-commit;

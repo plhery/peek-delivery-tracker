@@ -8,7 +8,6 @@
 -- by accounts, they must be one account's. Numbers of one length a digit or two apart are
 -- left apart: a batch of labels numbers its parcels that way.
 
-begin;
 
 alter table public.tracking_support_cases
   add column duplicate_of uuid references public.tracking_support_cases (id) on delete set null;
@@ -72,4 +71,3 @@ where d.fix_status = 'open' and private.support_case_repeated(d.tracking_number,
 
 insert into public.applied_migrations (name) values ('20261110183000_near_duplicate_support_cases') on conflict do nothing;
 
-commit;

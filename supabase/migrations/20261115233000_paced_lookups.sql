@@ -6,7 +6,6 @@
 -- the server that records `paced`: before it, the view would read a paced carrier as not asked. Days already recorded
 -- keep their counts.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -268,4 +267,3 @@ comment on column metrics.provider_requests_daily.purpose is
 
 insert into public.applied_migrations (name) values ('20261115233000_paced_lookups') on conflict do nothing;
 
-commit;

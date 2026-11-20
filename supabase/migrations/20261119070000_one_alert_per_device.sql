@@ -9,7 +9,6 @@
 -- well when its device gets the notifications of an account that has its own
 -- parcel of the number. The columns keep their order and meaning.
 
-begin;
 
 do $$
 declare
@@ -62,4 +61,3 @@ grant select on public.pending_parcel_link_alerts to service_role;
 
 insert into public.applied_migrations (name) values ('20261119070000_one_alert_per_device') on conflict do nothing;
 
-commit;

@@ -3,7 +3,6 @@
 -- asked: why 'answer older than parcel', reason 'answer set aside as older', lane
 -- delivery-tracker. Same columns; metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -101,4 +100,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261018084500_tracking_gaps_set_aside') on conflict do nothing;
 
-commit;

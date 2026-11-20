@@ -4,7 +4,6 @@
 -- adapters lane. Such an answer was set aside as older, its newest scan read as 1970. Same
 -- columns; metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -116,4 +115,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261020080000_tracking_gaps_undated') on conflict do nothing;
 
-commit;

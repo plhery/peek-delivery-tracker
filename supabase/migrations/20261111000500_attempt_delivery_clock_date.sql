@@ -2,7 +2,6 @@
 -- catalog names for its carrier, else the offset its newest scan states), beside the day it found: the review tells a
 -- day that passed from one dropped while it was still ahead without knowing the catalog's zones
 -- (ops/review/signals.sql). Kept only with an expected day; checks before this column have none.
-begin;
 
 alter table public.tracking_sync_attempts
   add column if not exists delivery_clock_date date;
@@ -30,4 +29,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261111000500_attempt_delivery_clock_date') on conflict do nothing;
 
-commit;

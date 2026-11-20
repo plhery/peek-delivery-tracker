@@ -5,7 +5,6 @@
 -- 'answer on local clocks', both in the adapters lane. Same columns; metrics.carrier_gaps
 -- reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -110,4 +109,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261018110000_tracking_gaps_unmoved_and_local_answers') on conflict do nothing;
 
-commit;

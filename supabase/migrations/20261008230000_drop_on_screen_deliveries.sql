@@ -10,7 +10,6 @@
 -- reports list_viewed_deliveries to Sentry on every scheduled sync, and
 -- checks every parcel out for delivery every two minutes.
 
-begin;
 
 drop function public.viewed_delivery_ids(timestamptz);
 
@@ -18,4 +17,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261008230000_drop_on_screen_deliveries') on conflict do nothing;
 
-commit;

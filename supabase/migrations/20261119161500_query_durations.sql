@@ -4,7 +4,6 @@
 -- durations per role since the last restart. The extension adds the view that reads them. Its
 -- text has the values replaced with placeholders, but only the database owner reads it.
 
-begin;
 
 create extension if not exists pg_stat_statements with schema extensions;
 revoke all on extensions.pg_stat_statements, extensions.pg_stat_statements_info from public, anon, authenticated, service_role;
@@ -26,4 +25,3 @@ $$;
 
 insert into public.applied_migrations (name) values ('20261119161500_query_durations') on conflict do nothing;
 
-commit;

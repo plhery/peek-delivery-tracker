@@ -4,7 +4,6 @@
 -- as 'carrier shows its label alone', lane none. Same columns; metrics.carrier_gaps reads it
 -- unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -182,4 +181,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261109180000_tracking_gaps_label_alone_flag') on conflict do nothing;
 
-commit;

@@ -3,7 +3,6 @@
 -- longer counts: private.tracking_gaps and metrics.record_goals read only the parcel's own
 -- follow-up, scheduled or asked for. Same columns.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -238,4 +237,3 @@ comment on column metrics.goals_daily.followed_parcels is
 
 insert into public.applied_migrations (name) values ('20261018111000_followed_without_release_checks') on conflict do nothing;
 
-commit;

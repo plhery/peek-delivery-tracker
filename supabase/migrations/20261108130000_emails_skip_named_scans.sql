@@ -8,7 +8,6 @@
 -- Apply this before deploying the server that claims one email at a time. The
 -- server before it works on either definition.
 
-begin;
 
 -- Apart from leaving out a scan another email names, this is copied from
 -- 20261025013000_emails_past_scans_in_no_stage.sql.
@@ -195,4 +194,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261108130000_emails_skip_named_scans') on conflict do nothing;
 
-commit;

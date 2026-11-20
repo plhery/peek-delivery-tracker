@@ -5,7 +5,6 @@
 --
 -- Apply this before deploying the server that shows the request on links.
 
-begin;
 
 create or replace function private.waits_for_link_postcode(p_package public.packages, p_carrier text)
 returns boolean
@@ -29,4 +28,3 @@ revoke all on function private.waits_for_link_postcode(public.packages, text) fr
 
 insert into public.applied_migrations (name) values ('20261024230000_own_carrier_link_postcodes') on conflict do nothing;
 
-commit;

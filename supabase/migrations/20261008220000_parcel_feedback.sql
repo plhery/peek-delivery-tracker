@@ -9,7 +9,6 @@
 -- Apply this before deploying the server that uses it. The server before it
 -- keeps working on this schema: it does not use the table.
 
-begin;
 
 create table public.parcel_feedback (
   id uuid primary key,
@@ -128,4 +127,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261008220000_parcel_feedback') on conflict do nothing;
 
-commit;

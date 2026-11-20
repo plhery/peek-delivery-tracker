@@ -7,7 +7,6 @@
 -- its own leg: 'carrier shows its label alone', lane none, not a half-answer. Same columns;
 -- metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -157,4 +156,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261026160000_tracking_gaps_last_mile_and_label') on conflict do nothing;
 
-commit;

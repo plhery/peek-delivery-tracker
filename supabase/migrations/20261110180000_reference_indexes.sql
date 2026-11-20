@@ -5,7 +5,6 @@
 -- parcel every Live Activity row and routing signal, and each ended session every Live Activity
 -- device. A parcel's deletion, a merge or a replay deletes scans many at a time.
 
-begin;
 
 create index friendship_push_deliveries_subscription_idx on public.friendship_push_deliveries (subscription_id);
 create index friendship_push_deliveries_device_idx on public.friendship_push_deliveries (device_id);
@@ -22,4 +21,3 @@ create index tracking_status_observations_sample_event_idx on public.tracking_st
 
 insert into public.applied_migrations (name) values ('20261110180000_reference_indexes') on conflict do nothing;
 
-commit;

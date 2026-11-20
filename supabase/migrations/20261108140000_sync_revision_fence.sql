@@ -24,7 +24,6 @@
 --
 -- Apply this before deploying the server that passes the revision.
 
-begin;
 
 alter table public.packages add column sync_revision bigint not null default 0;
 comment on column public.packages.sync_revision is
@@ -238,4 +237,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261108140000_sync_revision_fence') on conflict do nothing;
 
-commit;

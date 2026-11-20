@@ -1,4 +1,3 @@
-begin;
 
 -- Gift messages stay with the link and are withheld from viewers until delivery.
 alter table public.parcel_links add column gift_words jsonb;
@@ -202,4 +201,3 @@ revoke all on function public.share_owned_package(uuid, boolean, boolean, jsonb)
 grant execute on function public.share_owned_package(uuid, boolean, boolean, jsonb) to authenticated;
 
 notify pgrst, 'reload schema';
-commit;

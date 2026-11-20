@@ -2,7 +2,6 @@
 -- the one-off parcel of its number with that carrier and those inputs, shared as create_one_off_parcel shares it
 -- (20261119010000_guest_postcode_country), or a new one. Everything the link holds stays: its sharing, gift and
 -- shown number, its alerts and when it was opened. The parcel it leaves goes once no link reaches it.
-begin;
 
 create function public.change_parcel_link_carrier(
   p_link_id text,
@@ -87,4 +86,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261119040000_change_parcel_link_carrier') on conflict do nothing;
 
-commit;

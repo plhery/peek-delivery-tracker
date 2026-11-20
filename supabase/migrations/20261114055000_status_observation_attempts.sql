@@ -3,7 +3,6 @@
 -- event, and its parcel and provider were lost; the check's attempt row keeps both. Like the
 -- sample event, the attempt is an opaque join key, cleared when the attempt is purged.
 
-begin;
 
 alter table public.tracking_status_observations
   add column sample_attempt_id uuid references public.tracking_sync_attempts (id) on delete set null;
@@ -117,4 +116,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261114055000_status_observation_attempts') on conflict do nothing;
 
-commit;

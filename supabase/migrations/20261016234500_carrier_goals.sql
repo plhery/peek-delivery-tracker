@@ -16,7 +16,6 @@
 -- Nothing here names a parcel, an account or a number outside the private schema. The
 -- server needs no change: it already calls record_usage_metrics.
 
-begin;
 
 create view private.tracking_gaps as
 with direct as (
@@ -380,4 +379,3 @@ where exists (select 1 from public.tracking_sync_attempts);
 
 insert into public.applied_migrations (name) values ('20261016234500_carrier_goals') on conflict do nothing;
 
-commit;

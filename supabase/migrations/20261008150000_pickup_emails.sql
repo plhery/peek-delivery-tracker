@@ -9,7 +9,6 @@
 -- keeps working on this schema: it claims with the three arguments it knows,
 -- which hand out delivered scans only.
 
-begin;
 
 alter table public.delivery_emails
   add column stage text not null default 'delivered'
@@ -212,4 +211,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261008150000_pickup_emails') on conflict do nothing;
 
-commit;

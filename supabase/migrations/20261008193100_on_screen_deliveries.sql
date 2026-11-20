@@ -11,7 +11,6 @@
 -- Apply this before deploying the server that uses it. The server before it
 -- keeps working on this schema: it does not call the function.
 
-begin;
 
 create function public.viewed_delivery_ids(p_viewed_since timestamptz)
 returns table (id uuid)
@@ -49,4 +48,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261008193100_on_screen_deliveries') on conflict do nothing;
 
-commit;

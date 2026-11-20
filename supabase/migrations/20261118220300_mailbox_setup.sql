@@ -1,4 +1,3 @@
-begin;
 
 create or replace function public.open_inbound_mailbox(p_user_id uuid, p_token text, p_renew boolean)
 returns jsonb
@@ -39,4 +38,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261118220300_mailbox_setup') on conflict do nothing;
 
-commit;

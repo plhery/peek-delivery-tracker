@@ -4,7 +4,6 @@
 -- recorded before the column and for those the server running during the
 -- rollout completes; an empty object when a check asked nobody.
 
-begin;
 
 alter table public.tracking_sync_attempts add column lookups jsonb
   constraint tracking_sync_attempts_lookups_check check (jsonb_typeof(lookups) = 'object' and octet_length(lookups::text) <= 8192);
@@ -100,4 +99,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261026180000_tracking_sync_attempt_lookups') on conflict do nothing;
 
-commit;

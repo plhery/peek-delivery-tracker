@@ -17,7 +17,6 @@
 -- and those following two parcels or more. A device is its push endpoint or
 -- token, counted, never shown. Alerts end once the parcel is delivered.
 
-begin;
 
 create view metrics.lookup_returns as
 select (link.created_at at time zone 'UTC')::date as day,
@@ -72,4 +71,3 @@ grant select on metrics.lookup_returns, metrics.lookup_accounts, metrics.link_al
 
 insert into public.applied_migrations (name) values ('20261119060000_guest_metrics') on conflict do nothing;
 
-commit;

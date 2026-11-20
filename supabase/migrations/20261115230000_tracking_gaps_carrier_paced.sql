@@ -5,7 +5,6 @@
 -- (tracking_sync_attempts.lookups ends it `error` with no failure in routing). Same columns;
 -- metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -204,4 +203,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261115230000_tracking_gaps_carrier_paced') on conflict do nothing;
 
-commit;

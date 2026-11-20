@@ -1,4 +1,3 @@
-begin;
 
 drop function public.refresh_assistant_tokens(text,text,text,timestamptz,text,timestamptz);
 create or replace function public.refresh_assistant_tokens(
@@ -59,4 +58,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261118220200_assistant_refresh_scope') on conflict do nothing;
 
-commit;

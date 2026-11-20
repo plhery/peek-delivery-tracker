@@ -1,4 +1,3 @@
-begin;
 
 -- Revoking a Supabase session now removes its push-to-start and update tokens.
 -- Some deployments have not enabled the optional ActivityKit channel yet.
@@ -103,4 +102,3 @@ $definition$;
 end; $upgrade$;
 
 notify pgrst, 'reload schema';
-commit;

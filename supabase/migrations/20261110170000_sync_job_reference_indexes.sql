@@ -7,11 +7,9 @@
 -- failed and the account stayed. claim_sync_job also read every attempt for each finished
 -- job it pruned.
 
-begin;
 
 create index tracking_sync_attempts_job_idx on public.tracking_sync_attempts (job_id);
 create index sync_jobs_package_idx on public.sync_jobs (package_id);
 
 insert into public.applied_migrations (name) values ('20261110170000_sync_job_reference_indexes') on conflict do nothing;
 
-commit;

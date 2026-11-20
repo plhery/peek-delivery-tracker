@@ -4,7 +4,6 @@
 -- millisecond, so the end of that millisecond is stored; never later than now, nor earlier than what the account had
 -- seen already.
 
-begin;
 
 drop function public.mark_owned_package_seen(uuid);
 
@@ -36,4 +35,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261115200000_seen_at_shown_news') on conflict do nothing;
 
-commit;

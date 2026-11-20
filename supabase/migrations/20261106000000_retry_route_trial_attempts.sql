@@ -11,7 +11,6 @@
 -- Apply this before deploying the server that uses it. The server before it
 -- keeps working on this schema: it does not use the table.
 
-begin;
 
 create table public.retry_route_trial_attempts (
   id uuid primary key,
@@ -32,4 +31,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261106000000_retry_route_trial_attempts') on conflict do nothing;
 
-commit;

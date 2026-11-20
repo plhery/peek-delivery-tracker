@@ -20,6 +20,22 @@ if (( shared )); then
   exit 1
 fi
 
+# The dry run and the apply wrap each migration in a transaction of their own (docs/DEPLOYMENT.md), as this script
+# does: a migration's own commit would end the dry run's for real, and its rollback would only warn. Lines inside a
+# dollar-quoted body (plpgsql's `begin` and `end;`) don't count.
+wrapped=0
+for migration in "$repo_root"/supabase/migrations/*.sql; do
+  if awk '!body && tolower($0) ~ /^[[:space:]]*(begin|commit|rollback|end|abort|start[[:space:]]+transaction)([[:space:]]+(work|transaction))?[[:space:]]*;/ { found = 1 }
+    { if (gsub(/\$[A-Za-z_]*\$/, "&") % 2) body = !body }
+    END { exit !found }' "$migration"; then
+    echo "$(basename "$migration") has a transaction of its own: leave begin and commit to the dry run and the apply" >&2
+    wrapped=1
+  fi
+done
+if (( wrapped )); then
+  exit 1
+fi
+
 if [[ -z "$database_url" ]]; then
   echo "TEST_DATABASE_URL is required" >&2
   exit 2
@@ -69,7 +85,7 @@ while IFS= read -r migration; do
     psql "$database_url" -X -v ON_ERROR_STOP=1 \
       -f "$repo_root/supabase/tests/pre_review_queue_replays.sql"
   fi
-  psql "$database_url" -X -v ON_ERROR_STOP=1 -f "$migration"
+  psql "$database_url" -X -v ON_ERROR_STOP=1 --single-transaction -f "$migration"
   if [[ "$(basename "$migration")" == "20261008050000_review_queue_replays.sql" ]]; then
     psql "$database_url" -X -v ON_ERROR_STOP=1 \
       -f "$repo_root/supabase/tests/review_queue_replays.sql"

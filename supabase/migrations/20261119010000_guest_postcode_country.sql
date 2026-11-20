@@ -7,7 +7,6 @@
 -- create (`carrier_data.postcode_country`). create_one_off_parcel builds on
 -- 20261116044500_one_underscore_in_tracking_numbers and file_parcel_link_postcode on
 -- 20261024070000_parcel_link_postcodes, the last that defined them; only the country changes.
-begin;
 
 -- The country a parcel's postcode was given with, as src/lib/postcodeCountry.ts reads it, or null for the carrier's home.
 create function private.postcode_country(p_carrier_data jsonb, p_postcode text)
@@ -197,4 +196,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261119010000_guest_postcode_country') on conflict do nothing;
 
-commit;

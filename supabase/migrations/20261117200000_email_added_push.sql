@@ -14,7 +14,6 @@
 -- server before it keeps working on this schema: it reads the mailbox's fields by name and calls none of the new
 -- functions.
 
-begin;
 
 alter table private.inbound_mailboxes add column notify_added boolean not null default true;
 comment on column private.inbound_mailboxes.notify_added is
@@ -226,4 +225,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261117200000_email_added_push') on conflict do nothing;
 
-commit;

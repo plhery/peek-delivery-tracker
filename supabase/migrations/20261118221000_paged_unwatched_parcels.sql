@@ -1,4 +1,3 @@
-begin;
 
 create or replace function public.unwatched_package_ids(p_opened_since timestamptz, p_after uuid, p_limit integer)
 returns table (id uuid)
@@ -68,4 +67,3 @@ grant execute on function public.unwatched_package_ids(timestamptz,uuid,integer)
 
 insert into public.applied_migrations (name) values ('20261118221000_paged_unwatched_parcels') on conflict do nothing;
 
-commit;

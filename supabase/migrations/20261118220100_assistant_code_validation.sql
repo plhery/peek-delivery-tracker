@@ -1,4 +1,3 @@
-begin;
 
 create or replace function public.redeem_assistant_code(
   p_hash text,
@@ -47,4 +46,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261118220100_assistant_code_validation') on conflict do nothing;
 
-commit;

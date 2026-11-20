@@ -3,7 +3,6 @@
 -- emptied field another parcel's postcode. Clearing the parcel's postcode under the same carrier
 -- and number now marks it too (`account_postcode` false): nothing fills it again, and the
 -- carrier a handoff goes to is not given the account's postcode in its place.
-begin;
 
 create function public.remember_cleared_postcode()
 returns trigger
@@ -28,4 +27,3 @@ revoke all on function public.remember_cleared_postcode() from public, anon, aut
 
 insert into public.applied_migrations (name) values ('20261119003000_remember_cleared_postcode') on conflict do nothing;
 
-commit;

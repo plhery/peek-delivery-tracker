@@ -5,7 +5,6 @@
 --
 -- The server reads the times as soon as the view gives them.
 
-begin;
 
 create or replace function public.parcel_link_view(
   p_link_id text,
@@ -75,4 +74,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261115043000_link_news') on conflict do nothing;
 
-commit;

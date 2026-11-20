@@ -7,7 +7,6 @@
 -- ignores the extra key, and the server after it shows every row of a link
 -- whose view lacks it.
 
-begin;
 
 create or replace function public.parcel_link_view(
   p_link_id text,
@@ -75,4 +74,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261008193000_link_timeline_sources') on conflict do nothing;
 
-commit;

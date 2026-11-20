@@ -22,7 +22,6 @@
 -- Apply this before deploying the server that calls record_usage_metrics. The server
 -- before it keeps working: record_account_opened keeps its signature.
 
-begin;
 
 create schema metrics;
 revoke all on schema metrics from public;
@@ -279,4 +278,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261014120000_usage_metrics') on conflict do nothing;
 
-commit;

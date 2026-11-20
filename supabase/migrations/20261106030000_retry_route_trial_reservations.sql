@@ -19,7 +19,6 @@
 -- keeps working on this schema while its trial is off: FEDEX_RETRY_TRIAL is
 -- empty in production until the new server is deployed.
 
-begin;
 
 create table public.retry_route_trials (
   trial text primary key check (trial ~ '^[A-Za-z0-9_.:-]{1,64}$'),
@@ -206,4 +205,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261106030000_retry_route_trial_reservations') on conflict do nothing;
 
-commit;

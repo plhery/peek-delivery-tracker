@@ -6,7 +6,6 @@
 --
 -- The server reads the fields as soon as the view gives them.
 
-begin;
 
 create or replace function public.parcel_link_view(
   p_link_id text,
@@ -82,4 +81,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261115190000_link_event_sources') on conflict do nothing;
 
-commit;

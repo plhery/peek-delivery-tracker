@@ -12,7 +12,6 @@
 -- Apply this before deploying the server that takes the lease. The server
 -- before it never reads the table.
 
-begin;
 
 create table public.worker_leases (
   name text primary key check (name ~ '^[a-z_]{1,40}$'),
@@ -93,4 +92,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261108120000_push_dispatch_lease') on conflict do nothing;
 
-commit;

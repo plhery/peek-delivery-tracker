@@ -6,7 +6,6 @@
 -- Apply this before deploying the server that reads it. The server before it ignores the extra
 -- key, and the server after it reads a link's flag from the scan's words alone without it.
 
-begin;
 
 create or replace function public.parcel_link_view(
   p_link_id text,
@@ -75,4 +74,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261029193000_link_recipient_action') on conflict do nothing;
 
-commit;

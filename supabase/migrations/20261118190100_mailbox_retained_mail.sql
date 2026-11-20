@@ -1,4 +1,3 @@
-begin;
 lock table private.inbound_mail_kept, private.inbound_mailboxes in share row exclusive mode;
 
 -- Remove mail left behind by a concurrent close before enforcing mailbox ownership.
@@ -10,4 +9,3 @@ alter table private.inbound_mail_kept add constraint inbound_mail_kept_mailbox_f
 
 insert into public.applied_migrations (name) values ('20261118190100_mailbox_retained_mail') on conflict do nothing;
 
-commit;

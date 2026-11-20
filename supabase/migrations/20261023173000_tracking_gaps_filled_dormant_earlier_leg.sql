@@ -5,7 +5,6 @@
 -- newest scan the parcel already shows only knows an earlier leg, which routing cannot change:
 -- why 'answer shows an earlier leg', lane none. Same columns; metrics.carrier_gaps reads it unchanged.
 
-begin;
 
 create or replace view private.tracking_gaps as
 with direct as (
@@ -128,4 +127,3 @@ from classified;
 
 insert into public.applied_migrations (name) values ('20261023173000_tracking_gaps_filled_dormant_earlier_leg') on conflict do nothing;
 
-commit;

@@ -8,7 +8,6 @@
 -- Apply this before deploying the server that uses it. The server before it
 -- keeps working on this schema: it calls neither function.
 
-begin;
 
 create table public.account_activity (
   user_id uuid primary key references auth.users (id) on delete cascade,
@@ -111,4 +110,3 @@ grant execute on function public.unwatched_package_ids(timestamptz) to service_r
 
 notify pgrst, 'reload schema';
 
-commit;

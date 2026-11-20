@@ -16,7 +16,6 @@
 -- Apply this before deploying the server that reads seen_at. The server before it keeps working on
 -- this schema: it names the columns it reads, and saves preferences with the arguments it knows.
 
-begin;
 
 alter table public.packages add column seen_at timestamptz not null default now();
 comment on column public.packages.seen_at is
@@ -172,4 +171,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261115010000_seen_parcels') on conflict do nothing;
 
-commit;

@@ -1,4 +1,3 @@
-begin;
 
 create or replace function public.open_assistant_code(
   p_user_id uuid,
@@ -66,4 +65,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261118220400_assistant_connection_cap') on conflict do nothing;
 
-commit;

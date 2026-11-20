@@ -5,7 +5,6 @@
 --
 -- The server before and after this change works on either definition.
 
-begin;
 
 -- Apart from the newest scan leaving out scans in no stage, this is copied
 -- from 20261008170000_email_each_stage.sql.
@@ -183,4 +182,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261025013000_emails_past_scans_in_no_stage') on conflict do nothing;
 
-commit;

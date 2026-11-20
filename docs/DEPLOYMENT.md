@@ -44,7 +44,10 @@ table to itself, and every later query of that table waits behind it while it wa
 parcel lists then time out after 8 seconds, and the server's calls, which have no timeout,
 fill PostgREST's pool until every request answers 504. So the dry run and the apply both
 start with `set local lock_timeout = '4s';` after `begin`: a migration that cannot have its
-lock at once fails, and runs again a little later. A query left running holds its locks too,
+lock at once fails, and runs again a little later. A migration has no `begin;` or `commit;` of
+its own: its commit would end the dry run's transaction for real, so the rollback after it would
+undo nothing. `scripts/test-migrations.sh` refuses one and applies each file in one transaction,
+as the dry run and the apply do. A query left running holds its locks too,
 and killing the local `psql` or `ssh` does not stop it on the server, so a query run by hand
 on production sets `statement_timeout`.
 

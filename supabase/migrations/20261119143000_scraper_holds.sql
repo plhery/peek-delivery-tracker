@@ -12,7 +12,6 @@
 -- Apply this before deploying the server that uses it. The server before it keeps working
 -- on this schema: it does not use the table.
 
-begin;
 
 create table public.scraper_holds (
   key text primary key check (char_length(key) between 3 and 512 and key ~ '^[a-z][a-z0-9-]*/'),
@@ -28,4 +27,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261119143000_scraper_holds') on conflict do nothing;
 
-commit;

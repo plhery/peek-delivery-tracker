@@ -12,7 +12,6 @@
 -- Apply this before deploying the server that reads them. The server before it keeps working on this schema: it names
 -- the columns it reads, saves preferences with the arguments it knows, and reads the claim's fields by name.
 
-begin;
 
 alter table public.notification_preferences
   add column clock text check (clock in ('24', '12')),
@@ -315,4 +314,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261115220000_email_clock_distance') on conflict do nothing;
 
-commit;

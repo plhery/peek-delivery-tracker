@@ -4,7 +4,6 @@
 -- that did not ask the delivery carrier is read by the filed carrier's lookup, as before. Days already recorded keep
 -- their counts: recording them again would drop the lookups of parcels deleted since.
 
-begin;
 
 create or replace function metrics.record_provider_requests(p_day date)
 returns void
@@ -70,4 +69,3 @@ comment on column metrics.provider_requests_daily.purpose is
 
 insert into public.applied_migrations (name) values ('20261115170000_provider_requests_handoff') on conflict do nothing;
 
-commit;

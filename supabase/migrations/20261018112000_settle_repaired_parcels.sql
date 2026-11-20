@@ -7,7 +7,6 @@
 -- parcel's stage and watermark before and after, so a repair can be dry-run in a transaction
 -- that is rolled back.
 
-begin;
 
 create function private.settle_repaired_parcels(p_package_ids uuid[])
 returns table (package_id uuid, stage_before text, stage_after text, watermark_before text, watermark_after text)
@@ -53,4 +52,3 @@ revoke all on function private.settle_repaired_parcels(uuid[]) from public, anon
 
 insert into public.applied_migrations (name) values ('20261018112000_settle_repaired_parcels') on conflict do nothing;
 
-commit;

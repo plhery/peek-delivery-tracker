@@ -6,7 +6,6 @@
 -- keeps working on this schema: it already claims both stages, and reads the
 -- emails an account was sent without their stage.
 
-begin;
 
 alter table public.delivery_emails
   drop constraint delivery_emails_package_id_key,
@@ -213,4 +212,3 @@ notify pgrst, 'reload schema';
 
 insert into public.applied_migrations (name) values ('20261008170000_email_each_stage') on conflict do nothing;
 
-commit;

@@ -90,7 +90,7 @@ For a number ending `GR` with a valid check digit, [Peek](/) asks ELTA (and [Chr
 
 An item from abroad is followed at its foreign post first. When that post says the item is going to Greece (or names no destination and you're in Greece), Peek also asks ELTA with the same number, and moves to it once it has a fresh scan; the earlier history stays. To follow it at ELTA straight away, pick "ELTA Hellenic Post" with "Change".
 
-ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of the scan's place, Greek time for scans in Greece, and lists ELTA's own history with ELTA's English wording. Times show in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
+ELTA gives each scan a date and time but no time zone: Peek reads them on the clock of the scan's place, Greek time for scans in Greece, and lists ELTA's own history with ELTA's English wording. Times show in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It can show the post office or courier agency where the parcel waits and notify you when the status changes. ELTA gives no expected delivery day and no weight.
 
 ## Questions about ELTA tracking
 

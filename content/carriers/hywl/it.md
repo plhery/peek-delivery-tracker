@@ -3,7 +3,7 @@ title: HYWL tracking: numero TRK e stati di Huiyi Logistics
 description: Tracking HYWL (Huiyi Logistics, 汇一物流) per i pacchi dalla Cina: com'è fatto il numero TRK, cosa vogliono dire i passaggi in inglese e in cinese e a chi rivolgersi.
 slug: hywl-tracking
 published: 2026-11-01
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) è 深圳市汇一物流有限公司, un'azienda di logistica di Shenzhen, in Cina, che spedisce all'estero i pacchi dei venditori online. Se un negozio ha spedito il tuo ordine con HYWL, il numero è TRK seguito da dodici caratteri, oppure quattro lettere, due cifre, una D, quattro cifre e quattro lettere: incollalo nel box qui sopra. Il tracking di HYWL è sul suo sito, in cinese, e i passaggi sono in inglese, in cinese o in entrambe le lingue. HYWL non dice quale corriere consegna il pacco in Italia.
@@ -95,7 +95,7 @@ Dalla sola forma, [Peek](/) non può essere sicuro che un numero sia di HYWL. In
 
 Se aggiungi un numero TRK senza scegliere il corriere e HYWL non lo conosce ancora, Peek mostra «Probabilmente Huiyi Logistics» e «In attesa della prima scansione di Huiyi Logistics», e continua a chiedere. Dopo una settimana ti chiede di verificare il numero con il mittente o di scegliere un altro corriere.
 
-Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL lo indicano, il Paese di destinazione. Legge i passaggi in Cina con l'ora di Pechino, ricava il fuso degli altri dal loro luogo o dalla tratta in cui si trovava il pacco e mostra ogni orario nel fuso del tuo dispositivo, dal più recente; su peektracker.com e nell'app per iPhone una riga sotto la cronologia lo indica («Orari nel tuo fuso orario: …»). Non mostra i CAP né il Paese di partenza. HYWL non indica data di consegna prevista, peso, corriere che consegna e relativo numero, nomi di mittente e destinatario né prova di consegna, quindi Peek non li mostra.
+Peek mostra lo stato, ogni passaggio con il suo luogo e, quando i dati di HYWL lo indicano, il Paese di destinazione. Legge i passaggi in Cina con l'ora di Pechino, ricava il fuso degli altri dal loro luogo o dalla tratta in cui si trovava il pacco e mostra ogni orario nel fuso del tuo dispositivo, dal più recente; su peektracker.com e nelle app per iPhone e Android una riga sotto la cronologia lo indica («Orari nel tuo fuso orario: …»). Non mostra i CAP né il Paese di partenza. HYWL non indica data di consegna prevista, peso, corriere che consegna e relativo numero, nomi di mittente e destinatario né prova di consegna, quindi Peek non li mostra.
 
 Quando il tracking di HYWL non risponde, Peek si rivolge ai servizi di tracciamento e mostra la cronologia che hanno, con le loro parole. Le loro copie possono mostrare passaggi con una data futura, ma un passaggio datato più di un'ora dopo il controllo di Peek non diventa mai lo stato del pacco. Quindi guarda l'ora di ogni passaggio.
 

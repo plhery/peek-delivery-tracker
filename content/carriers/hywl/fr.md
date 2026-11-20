@@ -3,7 +3,7 @@ title: Suivi colis HYWL (Huiyi Logistics) : numéro TRK et statuts
 description: Suivre un colis HYWL (Huiyi Logistics, 汇一物流) venu de Chine : le numéro TRK, ce que veulent dire ses étapes en anglais et en chinois, et qui contacter.
 slug: hywl-suivi-colis
 published: 2026-11-03
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Huiyi Logistics (HYWL, 汇一物流) est 深圳市汇一物流有限公司, une société de logistique de Shenzhen, en Chine, qui expédie à l'étranger les colis de vendeurs en ligne. Si une boutique chinoise a confié ta commande à HYWL, ton numéro de suivi commence par TRK, suivi de douze caractères, ou bien se compose de quatre lettres, deux chiffres, un D, quatre chiffres et quatre lettres : colle-le dans le champ ci-dessus. Sur le suivi de HYWL, le colis passe en général par cinq statuts : `Picked Up` (pris en charge en Chine), `In Transit` (en route), `Customs` (le plus souvent le dédouanement à l'export, en Chine), `Out for Delivery` (en livraison), puis `Delivered` (livré). HYWL a son propre suivi en ligne, en chinois, où ses étapes sont rédigées en anglais, en chinois ou dans les deux langues. HYWL ne dit pas quelle société livre le colis en France, en Belgique ou en Suisse.
@@ -97,7 +97,7 @@ C'est le vendeur qui a réservé l'envoi chez HYWL : c'est à lui qu'il faut s'a
 
 Si tu ajoutes un numéro TRK sans choisir de transporteur et que HYWL ne le connaît pas encore, Peek affiche « Probablement Huiyi Logistics » et « En attente du premier scan de Huiyi Logistics », et continue d'interroger HYWL. Au bout d'une semaine, il te propose de vérifier le numéro auprès de l'expéditeur ou de choisir un autre transporteur.
 
-Peek affiche le statut, chaque étape avec son lieu et, quand la fiche de HYWL l'indique, le pays de destination. Il lit les étapes en Chine à l'heure de Pékin, déduit le fuseau des autres de leur lieu ou du tronçon où se trouvait le colis, et affiche toutes les heures dans le fuseau de ton appareil, de la plus récente à la plus ancienne ; sur peektracker.com et dans l'application iPhone, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »). Il laisse de côté les codes postaux et le pays de départ. HYWL ne donne ni date de livraison prévue, ni poids, ni société qui livre (ni son numéro), ni nom de l'expéditeur ou du destinataire, ni preuve de livraison : Peek n'affiche donc rien de tout cela.
+Peek affiche le statut, chaque étape avec son lieu et, quand la fiche de HYWL l'indique, le pays de destination. Il lit les étapes en Chine à l'heure de Pékin, déduit le fuseau des autres de leur lieu ou du tronçon où se trouvait le colis, et affiche toutes les heures dans le fuseau de ton appareil, de la plus récente à la plus ancienne ; sur peektracker.com et dans les applications iPhone et Android, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »). Il laisse de côté les codes postaux et le pays de départ. HYWL ne donne ni date de livraison prévue, ni poids, ni société qui livre (ni son numéro), ni nom de l'expéditeur ou du destinataire, ni preuve de livraison : Peek n'affiche donc rien de tout cela.
 
 Quand le suivi de HYWL ne répond pas, Peek interroge des services de suivi à sa place et affiche l'historique qu'ils ont, dans leur formulation. Leurs copies peuvent contenir des étapes datées d'avance, mais une étape datée de plus d'une heure après la vérification de Peek ne devient jamais le statut du colis. Regarde donc l'heure de chaque étape.
 

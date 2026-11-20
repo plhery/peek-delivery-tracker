@@ -3,7 +3,7 @@ title: Śledzenie przesyłek Evri: numer, statusy, cło i doręczenie
 description: Śledź paczkę Evri w Polsce: 16-znakowy kod, statusy GlobalEco i w Wielkiej Brytanii, odprawa celna, punkty odbioru oraz oficjalny kontakt.
 slug: sledzenie-evri
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Evri to brytyjska firma kurierska działająca do marca 2022 roku pod nazwą Hermes UK (odrębna od niemieckiego Hermesa). Gdy zamawiasz w brytyjskich sklepach internetowych — takich jak ASOS, Boohoo, Gymshark, Lookfantastic, eBay UK czy Vinted — Evri często odbiera przesyłkę w Wielkiej Brytanii i przekazuje ją partnerowi doręczającemu w Polsce. Przesyłki międzynarodowe sprawdzisz w portalu [GlobalEco dla Evri International](https://globaleco.app/track/), natomiast paczki krajowe na terenie Wielkiej Brytanii na stronie [evri.com](https://www.evri.com/track-a-parcel) po wpisaniu 16-znakowego numeru lub 8 cyfr z awiza (*calling card*). Możesz też wkleić 16-znakowy kod kreskowy albo link śledzenia z `evri.com` bezpośrednio w polu powyżej.
@@ -90,7 +90,7 @@ Evri udostępnia wyłącznie brytyjskie kanały obsługi po angielsku (sprawdzon
 
 W **Evri International** Peek pokazuje historię z GlobalEco (większość komunikatów pozostaje po angielsku, a ogólne etykiety takie jak „W transporcie”, „W doręczeniu” czy „Dostarczona” wyświetlają się po polsku), miejsca skanów, wagę paczki oraz — gdy w komentarzu widnieje `Estimated delivery date is: …` — przewidywaną datę doręczenia aż do wydania lub zwrotu przesyłki; nazwa nadawcy i miejsce docelowe są pomijane. Ponieważ GlobalEco nie podaje strefy czasowej przy znacznikach czasu, Peek zachowuje te lokalne godziny bez przeliczania.
 
-W **Evri UK** widzisz aktualny status i historię. Evri UK nie udostępnia lokalizacji skanów, dlatego mapa pozostaje pusta. Każde doręczenie kurierskie i każdy odbiór z ParcelShopu lub automatu Locker wyświetla się jako „Dostarczona” bez wskazania miejsca pozostawienia; paczka czekająca w ParcelShopie lub Lockerze ma status „Do odbioru”, a pozostałe zachowują angielskie zdanie Evri. Imię i nazwisko, adres, zdjęcie z doręczenia oraz kody odbioru są odrzucane. Na peektracker.com i w aplikacji na iPhone'a historia ze strefą czasową kończy się dopiskiem „Godziny w Twojej strefie czasowej: …”, a powiadomienia ustawisz jako „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+W **Evri UK** widzisz aktualny status i historię. Evri UK nie udostępnia lokalizacji skanów, dlatego mapa pozostaje pusta. Każde doręczenie kurierskie i każdy odbiór z ParcelShopu lub automatu Locker wyświetla się jako „Dostarczona” bez wskazania miejsca pozostawienia; paczka czekająca w ParcelShopie lub Lockerze ma status „Do odbioru”, a pozostałe zachowują angielskie zdanie Evri. Imię i nazwisko, adres, zdjęcie z doręczenia oraz kody odbioru są odrzucane. Na peektracker.com i w aplikacjach na iPhone'a i Androida historia ze strefą czasową kończy się dopiskiem „Godziny w Twojej strefie czasowej: …”, a powiadomienia ustawisz jako „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Najczęstsze pytania o śledzenie Evri
 

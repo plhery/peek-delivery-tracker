@@ -3,7 +3,7 @@ title: Urmărire colet FAN Courier International: AWB și statusuri
 description: Urmărește un colet FAN Courier International: cum arată AWB-ul, ce înseamnă statusurile de pe fancourier.eu, lockere, livrări ratate, reclamații și contact.
 slug: fan-courier-international-urmarire-awb
 published: 2026-11-14
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 FAN Courier International este serviciul FAN Courier pentru livrări transfrontaliere, gândit pentru magazinele online care vând în alte țări din Europa. Coletele circulă pe șosea, printr-o rețea de parteneri internaționali, iar trackingul e separat de cel al FAN Courier din țară: introduci AWB-ul pe [pagina „Află unde este expediția ta” de pe fancourier.eu](https://fancourier.eu/ro/urmareste-comanda). AWB-ul ți-l dă magazinul care a trimis coletul. Îl poți lipi și în căsuța de mai sus.
@@ -88,7 +88,7 @@ Lipește AWB-ul în căsuța de mai sus. Un număr de 16 cifre, `F` și 4 cifre 
 
 Un AWB de 13 cifre e de la FAN Courier: Peek întreabă [FAN Courier](carrier:fan-courier), împreună cu alți curieri ale căror numere pot arăta la fel, niciodată FAN Courier International. Dacă alegi totuși FAN Courier International pentru un astfel de număr, rândul curierului îți spune că „doesn’t issue numbers like this one”, iar Peek nu-l întreabă deloc. Din adresa unei pagini de pe fancourier.eu Peek nu poate citi niciun număr, așa că lipește direct AWB-ul.
 
-Peek îți arată fiecare pas cu formularea englezească a FAN, hubul și ora, în fusul orar al dispozitivului tău; pe peektracker.com și în aplicația pentru iPhone, istoricul se încheie cu un rând care îl numește („Times are in your time zone: …”). Verifică coletul cel mult o dată la 10 minute cât timp răspunde trackingul FAN (dacă trebuie să treacă prin servicii de urmărire, o dată pe oră, iar în ziua în care coletul e în livrare, cel mult o dată la 15 minute) și te poate anunța când se schimbă statusul. După 12 ore în care coletul e doar „Label created” sau „Received by carrier”, ori după două zile fără noutăți, Peek îl verifică o dată pe oră.
+Peek îți arată fiecare pas cu formularea englezească a FAN, hubul și ora, în fusul orar al dispozitivului tău; pe peektracker.com și în aplicațiile pentru iPhone și Android, istoricul se încheie cu un rând care îl numește („Times are in your time zone: …”). Verifică coletul cel mult o dată la 10 minute cât timp răspunde trackingul FAN (dacă trebuie să treacă prin servicii de urmărire, o dată pe oră, iar în ziua în care coletul e în livrare, cel mult o dată la 15 minute) și te poate anunța când se schimbă statusul. După 12 ore în care coletul e doar „Label created” sau „Received by carrier”, ori după două zile fără noutăți, Peek îl verifică o dată pe oră.
 
 Peek nu arată o zi estimată de livrare și nici numele lockerului, și lasă deoparte numele expeditorului și al destinatarului și greutatea coletului. Nu preia singur un AWB de retur din trackingul FAN: dacă coletul se întoarce cu un număr nou, adaugă-l în Peek ca să-l urmărești. Peek nu poate contacta FAN sau magazinul în locul tău.
 

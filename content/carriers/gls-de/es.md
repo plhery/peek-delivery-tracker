@@ -3,7 +3,7 @@ title: Seguimiento GLS Alemania: Track-ID, estados y contacto
 description: Sigue un paquete de GLS Alemania (GLS Germany): número de envío o Track-ID, código postal requerido, estados en inglés, ParcelShops, aduanas y contacto.
 slug: seguimiento-gls-alemania
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) reparte de lunes a viernes y cuenta en Alemania, según las cifras del grupo, con 9.000 ParcelShops y 200 taquillas Parcelstation. Tanto si esperas un envío en una dirección alemana como un pedido expedido desde Alemania hacia España, puedes consultarlo en [la página europea de seguimiento de GLS](https://gls-group.com/EU/en/parcel-tracking) con el número de paquete y el código postal de entrega, o pegar el número en el cuadro de arriba. El código llega en el correo de envío de la tienda, y el aviso de paso de GLS en Alemania incluye un Track-ID.
@@ -79,7 +79,7 @@ Para pedidos comprados en una tienda online, tu primer contacto es el vendedor. 
 
 Como GLS exige el código postal del destinatario para devolver el historial detallado, el campo «Código postal de entrega» es obligatorio, y si GLS rechaza el código introducido («GLS Germany no ha encontrado este paquete con el código postal …»), puedes corregirlo desde «Cambiar código postal». Funciona el formato postal de cualquier país; se envía a GLS y, cuando hace falta, a servicios de seguimiento.
 
-Verás entonces el estado actual, las lecturas en inglés tal como las escribe GLS, la localidad y el país de cada escaneo sobre un mapa, el día previsto, el peso, la hora de entrega y, cuando espera en un ParcelShop, su nombre y dirección bajo «Listo para recoger». Tu nombre, dirección, datos de contacto, firma y referencia del remitente se descartan. Las horas se leen en horario alemán y se muestran en la zona horaria de tu dispositivo; en `peektracker.com` y en la aplicación para iPhone lo indica una línea bajo el historial («Horas en tu zona horaria: …»). Peek consulta GLS aproximadamente una vez por hora, incluido el día de reparto (cada 4 horas tras un fallo), y actualizar manualmente no adelanta esa espera. Solo los envíos que GLS transfiere a [Swiss Post](carrier:swiss-post) pasan automáticamente a un segundo transportista; cuando otro transportista asume la entrega, Peek sigue el ritmo del que reparte el paquete. Avisos a elegir: «Cada escaneo», «Pasos importantes» o «Solo la entrega».
+Verás entonces el estado actual, las lecturas en inglés tal como las escribe GLS, la localidad y el país de cada escaneo sobre un mapa, el día previsto, el peso, la hora de entrega y, cuando espera en un ParcelShop, su nombre y dirección bajo «Listo para recoger». Tu nombre, dirección, datos de contacto, firma y referencia del remitente se descartan. Las horas se leen en horario alemán y se muestran en la zona horaria de tu dispositivo; en `peektracker.com` y en las aplicaciones para iPhone y Android lo indica una línea bajo el historial («Horas en tu zona horaria: …»). Peek consulta GLS aproximadamente una vez por hora, incluido el día de reparto (cada 4 horas tras un fallo), y actualizar manualmente no adelanta esa espera. Solo los envíos que GLS transfiere a [Swiss Post](carrier:swiss-post) pasan automáticamente a un segundo transportista; cuando otro transportista asume la entrega, Peek sigue el ritmo del que reparte el paquete. Avisos a elegir: «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 
 ## Preguntas frecuentes sobre el seguimiento de GLS Alemania
 

@@ -50,7 +50,7 @@ Le suivi de YWE affiche chaque scan avec sa date et son heure, le décalage par 
 
 **Autres formulations.** Un scan qui ne figure pas dans ce tableau apparaît dans Peek tel que YWE l’a écrit, et Peek en déduit l’étape à partir de ses mots quand c’est possible.
 
-**Heures.** Chaque scan est fourni par YWE avec le décalage horaire par rapport à GMT du hub concerné. Peek lit l’instant exact de cette façon et convertit toutes les heures dans le fuseau horaire de ton appareil ; sur peektracker.com et dans l’application iPhone, l’historique se termine par « Heures dans ton fuseau horaire : » suivi du nom de ce fuseau.
+**Heures.** Chaque scan est fourni par YWE avec le décalage horaire par rapport à GMT du hub concerné. Peek lit l’instant exact de cette façon et convertit toutes les heures dans le fuseau horaire de ton appareil ; sur peektracker.com et dans les applications iPhone et Android, l’historique se termine par « Heures dans ton fuseau horaire : » suivi du nom de ce fuseau.
 
 ## Qui livre les colis YWE
 

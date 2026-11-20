@@ -3,7 +3,7 @@ title: Poste Italiane Sendungsverfolgung: 1UW, 3UW, Status
 description: Poste Italiane Paket verfolgen: wie Sendungsnummern (auch 1UW, 3UW, 8UW und 5P) aussehen, was die italienischen Status bedeuten, Abholung und Kontakt.
 slug: poste-italiane-sendungsverfolgung
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Poste Italiane ist die staatliche Post Italiens und stellt über ihre Netze Crono und SDA auch Bestellungen aus italienischen Onlineshops, von Vinted oder eBay zu. Deine Sendung verfolgst du unter „Cerca Spedizioni“ auf poste.it (früher Dove Quando), in der App Poste Italiane oder direkt hier, indem du den Code oben einfügst. Bei Paketen aus Italien nach Deutschland, Österreich oder in die Schweiz zeigt poste.it den Weg bis zum internationalen Austauschzentrum; bei Postnummern auf `IT` übernimmt danach die Landespost.
@@ -86,7 +86,7 @@ Geprüft auf poste.it am 16. November 2026:
 
 Außerhalb Italiens prüft Peek gültige Postnummern auf `IT` (wie `RR…IT`, `CW…IT`, `ZC…IT`) zusätzlich bei [DHL](carrier:dhl), der [Österreichischen Post](carrier:austrian-post) oder der [Schweizerischen Post](carrier:swiss-post) und wechselt bei neueren Scans; 16-stellige Etiketten von [Vinted Go](carrier:vinted-go) oder [Cainiao](carrier:cainiao) mit eingebettetem `1UW`-, `3UW`-, `8UW`- oder `5P`-Code übergibt Peek automatisch an Poste Italiane.
 
-Abfrage stündlich, Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek zeigt bis zu 20 Scans auf der Karte, Liefertag, Dienst, „Einfuhrabgaben“ und Zeiten mit dem Hinweis „Uhrzeiten in deiner Zeitzone: …“ (auf peektracker.com und iPhone). Absender, Gewicht, Maße und Filialadresse zeigt Peek nicht. Nach zwei Tagen ohne Treffer erscheint: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
+Abfrage stündlich, Benachrichtigungen für „Jeden Scan“, „Wichtige Schritte“ oder „Nur die Zustellung“. Peek zeigt bis zu 20 Scans auf der Karte, Liefertag, Dienst, „Einfuhrabgaben“ und Zeiten mit dem Hinweis „Uhrzeiten in deiner Zeitzone: …“ (auf peektracker.com, iPhone und Android). Absender, Gewicht, Maße und Filialadresse zeigt Peek nicht. Nach zwei Tagen ohne Treffer erscheint: „Auch nach zwei Tagen kennt der Paketdienst diese Nummer nicht. Prüfe sie, wähle einen anderen Paketdienst oder lösche das Paket.“
 
 ## Fragen zur Poste Italiane Sendungsverfolgung
 

@@ -3,7 +3,7 @@ title: Suivi colis Evri : numéro, statuts, douane et livraison
 description: Suivre un colis Evri depuis la France, la Belgique ou la Suisse : code à 16 caractères, statuts GlobalEco et Royaume-Uni, douane, relais et contact.
 slug: evri-suivi
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Evri est le transporteur britannique de colis connu sous le nom de Hermes UK jusqu'en mars 2022. Si tu commandes sur une boutique britannique (ASOS, Boohoo, Gymshark, Lookfantastic, eBay UK ou Vinted), ton envoi part souvent avec Evri puis passe à un transporteur partenaire dans ton pays. Les colis internationaux se suivent sur le portail [GlobalEco d'Evri International](https://globaleco.app/track/), tandis que les livraisons internes au Royaume-Uni se suivent sur [evri.com](https://www.evri.com/track-a-parcel) avec un code à 16 caractères ou les 8 chiffres d'un avis de passage (*calling card*). Tu peux aussi coller directement ton code-barres à 16 caractères ou ton lien `evri.com` dans le champ ci-dessus.
@@ -90,7 +90,7 @@ Evri ne liste que des canaux britanniques en anglais (relus le 17 novembre 2026)
 
 Sur **Evri International**, Peek montre l'historique GlobalEco (libellés majoritairement en anglais ; « En transit », « En livraison » ou « Livré » en français), les lieux, le poids et toute date `Estimated delivery date is: …` jusqu'à la livraison ou au retour, sans expéditeur ni destination. Les heures GlobalEco n'ayant pas de fuseau, Peek garde ces heures locales telles quelles.
 
-Sur **Evri UK**, tu vois le statut et l'historique, sans lieux sur la carte. Livraison coursier et retrait ParcelShop/Locker s'affichent « Livré » sans lieu de dépôt ; l'attente au point affiche « Prêt à être retiré », et le reste garde la phrase anglaise d'Evri. Nom, adresse, photo et codes de retrait sont exclus. Sur peektracker.com et iPhone, les scans avec fuseau finissent par « Heures dans ton fuseau horaire : … », avec alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Sur **Evri UK**, tu vois le statut et l'historique, sans lieux sur la carte. Livraison coursier et retrait ParcelShop/Locker s'affichent « Livré » sans lieu de dépôt ; l'attente au point affiche « Prêt à être retiré », et le reste garde la phrase anglaise d'Evri. Nom, adresse, photo et codes de retrait sont exclus. Sur peektracker.com, iPhone et Android, les scans avec fuseau finissent par « Heures dans ton fuseau horaire : … », avec alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions fréquentes sur le suivi Evri
 

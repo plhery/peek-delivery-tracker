@@ -50,7 +50,7 @@ YWEs Sendungsverfolgung führt jeden Scan mit Datum und Uhrzeit, dem Versatz zu 
 
 **Andere Formulierungen.** Steht ein Scan nicht in dieser Tabelle, übernimmt Peek ihn im Wortlaut von YWE und erkennt die passende Etappe nach Möglichkeit anhand der Wörter.
 
-**Uhrzeiten.** Jeder Scan enthält den GMT-Versatz des jeweiligen US-Standorts. Peek liest die Zeitpunkte mit diesem Versatz ein und rechnet sie in die Zeitzone deines Geräts um; auf peektracker.com und in der iPhone-App endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen.
+**Uhrzeiten.** Jeder Scan enthält den GMT-Versatz des jeweiligen US-Standorts. Peek liest die Zeitpunkte mit diesem Versatz ein und rechnet sie in die Zeitzone deines Geräts um; auf peektracker.com und in den Apps für iPhone und Android endet der Verlauf mit „Uhrzeiten in deiner Zeitzone:“ und deren Namen.
 
 ## Wer YWE-Pakete zustellt
 

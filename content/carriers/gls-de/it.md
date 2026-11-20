@@ -3,7 +3,7 @@ title: Tracciamento GLS Germania: Track-ID, stati e contatti
 description: Traccia un pacco GLS Germania (GLS Germany): numero di spedizione o Track-ID, CAP richiesto, stati in inglese, ParcelShop, dogana, reclami e contatti.
 slug: tracciamento-gls-germania
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 GLS Germany (*General Logistics Systems Germany GmbH & Co. OHG*) consegna dal lunedì al venerdì e conta in Germania, secondo i dati del gruppo, 9.000 ParcelShop e 200 locker Parcelstation. Che tu aspetti un pacco a un indirizzo tedesco o un ordine spedito dalla Germania verso l'Italia o la Svizzera, puoi seguirlo sulla [pagina europea di tracciamento GLS](https://gls-group.com/EU/en/parcel-tracking) con il numero di collo e il codice postale di consegna, oppure incollare il numero nel riquadro qui sopra. Il codice si trova nell'e-mail di spedizione del negozio, mentre l'avviso di passaggio lasciato da GLS in Germania riporta un Track-ID.
@@ -79,7 +79,7 @@ Per un ordine online il primo interlocutore resta il negozio. I recapiti naziona
 
 Poiché GLS richiede il codice postale del destinatario per mostrare i dettagli delle scansioni, il campo «Codice postale di consegna» è obbligatorio, e se GLS rifiuta il CAP inserito («GLS Germany non ha trovato questo pacco con il codice postale …») puoi correggerlo con «Modifica codice postale». È accettato il formato postale di qualsiasi paese; viene inviato a GLS e, quando necessario, ai servizi di tracciamento.
 
-Vedrai così lo stato, i passaggi in inglese così come GLS li scrive, città e paese di ogni scansione sulla mappa, il giorno previsto, il peso, l'ora di consegna e, in caso di deposito in ParcelShop, nome e indirizzo sotto «Pronto per il ritiro». Nome, indirizzo, recapiti, firma e riferimento del mittente vengono scartati. Gli orari sono letti sull'ora tedesca e convertiti nel fuso del tuo dispositivo; su `peektracker.com` e nell'app per iPhone una riga sotto la cronologia lo indica («Orari nel tuo fuso orario: …»). Peek controlla GLS circa una volta all'ora, giorno di consegna incluso (ogni 4 ore dopo un controllo fallito), e aggiornare manualmente non anticipa la verifica. Solo i pacchi affidati da GLS alla [Posta Svizzera](carrier:swiss-post) passano automaticamente a un secondo corriere; quando un altro corriere prende in carico la consegna, Peek segue il ritmo di chi consegna il pacco. Notifiche a scelta: «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
+Vedrai così lo stato, i passaggi in inglese così come GLS li scrive, città e paese di ogni scansione sulla mappa, il giorno previsto, il peso, l'ora di consegna e, in caso di deposito in ParcelShop, nome e indirizzo sotto «Pronto per il ritiro». Nome, indirizzo, recapiti, firma e riferimento del mittente vengono scartati. Gli orari sono letti sull'ora tedesca e convertiti nel fuso del tuo dispositivo; su `peektracker.com` e nelle app per iPhone e Android una riga sotto la cronologia lo indica («Orari nel tuo fuso orario: …»). Peek controlla GLS circa una volta all'ora, giorno di consegna incluso (ogni 4 ore dopo un controllo fallito), e aggiornare manualmente non anticipa la verifica. Solo i pacchi affidati da GLS alla [Posta Svizzera](carrier:swiss-post) passano automaticamente a un secondo corriere; quando un altro corriere prende in carico la consegna, Peek segue il ritmo di chi consegna il pacco. Notifiche a scelta: «Ogni scansione», «Passaggi importanti» o «Solo la consegna».
 
 ## Domande frequenti sul tracciamento GLS Germania
 

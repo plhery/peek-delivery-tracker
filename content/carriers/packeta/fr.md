@@ -3,7 +3,7 @@ title: Suivi Packeta : numéro Z, statuts, relais et contact
 description: Suivre un colis Packeta (Zásilkovna) : format du code Z à 10 chiffres, sens des statuts en anglais, retrait en point relais, douane, litiges et contacts.
 slug: packeta-suivi-colis
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 Packeta est la marque internationale du groupe logistique tchèque derrière Zásilkovna et expédie vers 33 pays, dont la France, la Belgique, le Luxembourg, la Suisse et les États-Unis. Tu peux suivre un envoi sur [la page de suivi Packeta](https://tracking.packeta.com/en/), dans l'application mobile Packeta ou directement dans le champ ci-dessus. Le numéro se compose de la lettre `Z` suivie de dix chiffres, indiqué dans l'e-mail ou le SMS de Packeta ainsi que dans l'application.
@@ -81,7 +81,7 @@ Packeta publie des lignes téléphoniques en Europe centrale et en Allemagne, ma
 
 Peek lit Packeta en anglais et montre ses phrases telles quelles (avec les étapes traduites comme « Retourné à l’expéditeur ») : statut global, 20 derniers scans, boutique expéditrice, heure de livraison et adresse du relais ou de la Z-BOX quand le colis s'y rend (absente à domicile ou en retour). Nom, adresse, téléphone et signature sont écartés.
 
-Les scans citant un dépôt ou relais l'indiquent comme lieu, et ceux avec une ville figurent sur la carte. Packeta ne donne pas de date estimée. Les heures, lues sur Prague, sont converties dans ton fuseau (décalage possible d'une heure sur les dépôts roumains) ; sur `peektracker.com` et sur iPhone, une mention sous l'historique le rappelle (« Heures dans ton fuseau horaire : … »). Numéro inconnu et numéro expiré donnent la même réponse. Si un scan renvoie au suivi d'un partenaire connu, Peek le nomme comme livreur et, s'il le suit directement, bascule dessus dès qu'une progression fraîche apparaît, à son propre rythme. Tant que Packeta répond, Peek vérifie jusqu'à toutes les 10 minutes tant que la page est ouverte ou le jour de livraison avec alertes actives, et chaque heure sinon ; après deux jours calmes (ou 12 heures sur « Étiquette créée » ou « Pris en charge »), toutes les heures (toutes les 3 heures sans compte sans consultation récente ni alerte). Alertes : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
+Les scans citant un dépôt ou relais l'indiquent comme lieu, et ceux avec une ville figurent sur la carte. Packeta ne donne pas de date estimée. Les heures, lues sur Prague, sont converties dans ton fuseau (décalage possible d'une heure sur les dépôts roumains) ; sur `peektracker.com`, sur iPhone et sur Android, une mention sous l'historique le rappelle (« Heures dans ton fuseau horaire : … »). Numéro inconnu et numéro expiré donnent la même réponse. Si un scan renvoie au suivi d'un partenaire connu, Peek le nomme comme livreur et, s'il le suit directement, bascule dessus dès qu'une progression fraîche apparaît, à son propre rythme. Tant que Packeta répond, Peek vérifie jusqu'à toutes les 10 minutes tant que la page est ouverte ou le jour de livraison avec alertes actives, et chaque heure sinon ; après deux jours calmes (ou 12 heures sur « Étiquette créée » ou « Pris en charge »), toutes les heures (toutes les 3 heures sans compte sans consultation récente ni alerte). Alertes : « Chaque scan », « Étapes importantes » ou « Livraison seulement ».
 
 ## Questions fréquentes sur le suivi Packeta
 

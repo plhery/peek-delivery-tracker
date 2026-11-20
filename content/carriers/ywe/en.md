@@ -50,7 +50,7 @@ YWE's tracker lists each scan with its date and time, its offset from GMT, and t
 
 **Other wordings.** A scan that isn't in the table shows in Peek as YWE wrote it, and Peek reads its stage from its words where it can.
 
-**Times.** Each scan comes with its hub's offset from GMT. Peek reads the times that way and shows them all in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
+**Times.** Each scan comes with its hub's offset from GMT. Peek reads the times that way and shows them all in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name.
 
 ## Who delivers YWE parcels
 

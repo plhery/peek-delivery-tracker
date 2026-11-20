@@ -95,7 +95,7 @@ For a parcel that hasn't come, GlobalPost sends you to the seller first: the sel
 
 Peek shows the status, each scan with its place, the destination country, and the delivery company with its number when GlobalPost names them. It leaves out the progress bar, the sender's and your towns, and postcodes. GlobalPost gives no expected delivery date, weight or proof of delivery, so Peek shows none. "Open the GlobalPost website" opens the number on GlobalPost's tracker.
 
-GlobalPost's times carry no time zone: Peek reads each scan on the clock of its place, or of the leg the parcel was on, and shows it in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name.
+GlobalPost's times carry no time zone: Peek reads each scan on the clock of its place, or of the leg the parcel was on, and shows it in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name.
 
 When GlobalPost names a delivery company Peek knows by that name, the parcel card says "Delivery with" that company and lists its number after the GP number, and Peek asks that company too. While that company has only the announcement of the parcel, with no scan of its own, the card says "Announced to …, not received yet" instead. With a number but no company Peek knows, Peek asks your country's post for a postal number, or the one carrier the number's shape points to. Once that company has a scan at least as recent as GlobalPost's newest, Peek follows the parcel there and keeps GlobalPost's history.
 

@@ -3,7 +3,7 @@ title: SpeedPAK śledzenie paczki: statusy, eBay i kto doręcza
 description: Śledź przesyłkę eBay SpeedPAK w Polsce: jak wygląda 28-znakowy numer ES/EE/EX, co oznaczają angielskie statusy, kto doręcza paczkę, cło i z kim pisać.
 slug: speedpak-sledzenie
 published: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 SpeedPAK to transgraniczna usługa wysyłkowa dla zamówień z eBay, prowadzona wspólnie z firmą logistyczną Orange Connex głównie dla paczek nadawanych z Chin. Numer przesyłki ma 28 znaków i zaczyna się od `ES`, `EE` lub `EX`: możesz wpisać go na stronie śledzenia Orange Connex ([orangeconnex.com/tracking](https://www.orangeconnex.com/tracking) albo [globalshipping.orangeconnex.de/tracking](https://globalshipping.orangeconnex.de/tracking), gdzie naraz sprawdzisz do 30 numerów) bądź wkleić od razu w pole powyżej. Przy zakupie na eBay numer znajdziesz w historii zakupów obok zamówionego przedmiotu; szczegóły znajdziesz też w naszym poradniku, [jak śledzić zamówienie z eBay](guide:ebay-orders).
@@ -68,7 +68,7 @@ Gdy w śledzeniu pojawi się już krajowy przewoźnik doręczający wraz ze swoi
 
 ## Śledzenie paczki SpeedPAK w Peek
 
-[Peek](/) natychmiast rozpoznaje 28-znakowy numer zaczynający się od `ES`, `EE` lub `EX`, ponieważ żaden inny przewoźnik nie korzysta z tego formatu. Możesz też wkleić link z `orangeconnex.com` lub `orangeconnex.cn` zawierający `trackingNumber=` albo `trackingNumbers=` z prawidłowym numerem SpeedPAK. Peek wyświetla aktualny etap po polsku, historię zdarzeń z miastem i krajem każdego skanu na mapie, kraj docelowy, godzinę doręczenia oraz – gdy SpeedPAK go ujawni – przewoźnika doręczającego wraz z jego numerem (w samym wierszu `LM Carrier: […]` Peek ukrywa powtórzony numer referencyjny, bo pokazuje go osobno w sekcji doręczenia). Ponieważ SpeedPAK nie udostępnia przewidywanej daty dostawy ani adresu punktu odbioru, dane te nie pojawiają się do czasu przejęcia przez partnera. Godziny skanów wyświetlane są w strefie czasowej Twojego urządzenia z informacją „Godziny w Twojej strefie czasowej: …” na `peektracker.com` i w aplikacji na iPhone'a.
+[Peek](/) natychmiast rozpoznaje 28-znakowy numer zaczynający się od `ES`, `EE` lub `EX`, ponieważ żaden inny przewoźnik nie korzysta z tego formatu. Możesz też wkleić link z `orangeconnex.com` lub `orangeconnex.cn` zawierający `trackingNumber=` albo `trackingNumbers=` z prawidłowym numerem SpeedPAK. Peek wyświetla aktualny etap po polsku, historię zdarzeń z miastem i krajem każdego skanu na mapie, kraj docelowy, godzinę doręczenia oraz – gdy SpeedPAK go ujawni – przewoźnika doręczającego wraz z jego numerem (w samym wierszu `LM Carrier: […]` Peek ukrywa powtórzony numer referencyjny, bo pokazuje go osobno w sekcji doręczenia). Ponieważ SpeedPAK nie udostępnia przewidywanej daty dostawy ani adresu punktu odbioru, dane te nie pojawiają się do czasu przejęcia przez partnera. Godziny skanów wyświetlane są w strefie czasowej Twojego urządzenia z informacją „Godziny w Twojej strefie czasowej: …” na `peektracker.com` i w aplikacjach na iPhone'a i Androida.
 
 Gdy SpeedPAK wskaże znanego w katalogu przewoźnika ostatniej mili, którego format numeru się zgadza, na karcie paczki zobaczysz „Doręcza: …” wraz z numerem partnera i Peek przełączy się na jego śledzenie, gdy tylko pojawią się tam nowsze skany. Dopóki u partnera widnieje sama elektroniczna zapowiedź bez własnego skanu, karta pokazuje „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”.
 

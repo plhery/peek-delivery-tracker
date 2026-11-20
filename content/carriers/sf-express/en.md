@@ -3,7 +3,7 @@ title: SF Express tracking: waybill numbers, statuses and delivery
 description: Track an SF Express parcel: the 12-digit or SF waybill number, what SF's status words mean, how SF International delivers abroad and who to call.
 slug: sf-express-tracking
 published: 2026-10-23
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 SF Express (顺丰, SF) is a Chinese logistics company founded in 1993 and based in Shenzhen. Its cross-border arm, SF International, ships abroad for businesses, online sellers and private customers. Each of SF's regional sites has a tracker: [sf-express.com](https://www.sf-express.com/chn/en) for mainland China, [hk.sf-express.com](https://hk.sf-express.com/hk/en/waybill/list) for Hong Kong and [htm.sf-express.com](https://htm.sf-express.com/tw/en/dynamic_function/waybill/) for Taiwan. Or paste the number in the box above.
@@ -97,7 +97,7 @@ Have the waybill number ready. For the order itself, ask the seller.
 
 [Peek](/) names SF Express at once from an `SF` number whose check digit fits. A 12-digit number fits many carriers. Paste it all the same: Peek follows more than 3,500 carriers. Peek can't ask SF whether it knows a number, so if SF Express doesn't come up, tap "Change" and pick it under "Fits this number", or use "Change carrier" on the parcel. An sf-express.com `waybill-detail/` link, the Taiwan site's `#search/bill-number/` link or an SF International tracking link with the number after `No=` names SF Express too.
 
-Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's; on peektracker.com and in the iPhone app, a line under the history names that zone. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
+Peek reads the English tracking of SF's Taiwan site: the status and the history in SF's words, with delivered lines as "Delivered" and SF's labels as "Cancelled", "Forwarded", "Returned to sender", "Held" or "Lost". It reads SF's times on China's clock and shows each scan in your device's time zone, not China's; on peektracker.com and in the iPhone and Android apps, a line under the history names that zone. There's no expected delivery date or proof of delivery, and Peek follows the SF number to the end, not a local partner's.
 
 It checks up to every 10 minutes while you have the parcel open, or on its delivery day with notifications on, and hourly otherwise; under the same conditions, up to every 5 once the parcel is out for delivery. It can notify you with "Every scan", "Important steps" or "Delivery only". The faster checks run from 6 a.m. to midnight China time on the day SF scans the parcel out for delivery (in the UK and Ireland, until 4 p.m., or 5 p.m. in summer), while SF's own tracker answers; through tracking services, Peek checks up to every 15 minutes while you have the parcel open or notifications are on. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can't contact SF or the seller for you.
 

@@ -3,7 +3,7 @@ title: Suivi Poste Italiane : codes 1UW et 3UW, statuts et délais
 description: Suivre un colis Poste Italiane depuis la France, la Belgique ou la Suisse : codes 1UW, 3UW, 8UW et 5P, sens des statuts italiens, retrait et contact.
 slug: suivi-poste-italiane
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Poste Italiane est l'opérateur postal italien et livre aussi, via ses réseaux Crono et SDA, les achats sur des boutiques italiennes, Vinted ou eBay. Suis ton envoi dans « Cerca Spedizioni » sur poste.it (ancien Dove Quando), dans l'app Poste Italiane ou en collant son code ci-dessus. Vers la France, la Belgique ou la Suisse, poste.it montre le trajet jusqu'au centre d'échange international ; sur un code postal finissant par `IT`, la poste de ton pays prend ensuite le relais.
@@ -86,7 +86,7 @@ Relevé sur poste.it le 16 novembre 2026 :
 
 Hors d'Italie, Peek vérifie aussi les numéros postaux valides en `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) chez [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) et bascule dès qu'un scan plus récent paraît ; à l'inverse, les étiquettes de 16 caractères de [Vinted Go](carrier:vinted-go) ou [Cainiao](carrier:cainiao) contenant un code `1UW`, `3UW`, `8UW` ou `5P` basculent vers Poste Italiane.
 
-Vérification horaire et alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek affiche jusqu'à 20 scans sur la carte, date prévue, service, « Frais d’importation » et horaires (« Heures dans ton fuseau horaire : … » sur peektracker.com et iPhone). Expéditeur, poids, dimensions et adresse du bureau ne sont pas affichés. Après deux jours sans résultat : « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. »
+Vérification horaire et alertes « Chaque scan », « Étapes importantes » ou « Livraison seulement ». Peek affiche jusqu'à 20 scans sur la carte, date prévue, service, « Frais d’importation » et horaires (« Heures dans ton fuseau horaire : … » sur peektracker.com, iPhone et Android). Expéditeur, poids, dimensions et adresse du bureau ne sont pas affichés. Après deux jours sans résultat : « Après deux jours, le transporteur ne connaît toujours pas ce numéro. Vérifie-le, choisis un autre transporteur ou supprime le colis. »
 
 ## Questions fréquentes sur le suivi Poste Italiane
 

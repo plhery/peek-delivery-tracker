@@ -3,7 +3,7 @@ title: DPD Suíça rastreio: seguir encomenda, Pickup e contacto
 description: Seguir encomenda DPD Suíça (DPD Switzerland): número de 14 algarismos começado por 060, estados do myDPD, pontos DPD Pickup ao sábado e telefone.
 slug: rastreio-dpd-suica
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 A DPD Suíça é a DPD (Schweiz) AG, em Buchs ZH: integra a rede Geopost e tem mais de 1000 pontos DPD Pickup Location na Suíça. Segue a tua encomenda introduzindo o número de 14 algarismos no portal [myDPD](https://www.dpdgroup.com/ch/mydpd/?lang=de) ou colando-o na caixa acima. Normalmente recebe-lo por email da loja, e também vem no aviso deixado na caixa do correio se não estavas em casa.
@@ -77,7 +77,7 @@ O [Peek](/) aceita os 14 algarismos com ou sem o 15.º carácter de controlo. No
 
 O campo opcional «Código postal de entrega» aceita qualquer país. Sem ele vês uma linha por etapa e o dia previsto; com ele juntam-se as leituras no mapa, avisos da DPD, janela horária à hora suíça, remetente, peso e a morada do ponto Pickup. Se a DPD recusar o código postal, o Peek assinala «Não encontrada com o teu código postal» e propõe «Alterar código postal».
 
-Os estados ficam em inglês (exceto `Delivered` isolado, mostrado como «Entregue») e as horas no fuso do teu dispositivo («Horas no teu fuso horário: …» em peektracker.com e na app para iPhone); nome, morada e comprovativo não são guardados. O Peek verifica até a cada 10 minutos, e em distribuição até a cada 2 minutos desde as 6h00 locais ou meia hora antes da janela horária (a cada 5 minutos num navegador; a cada 15 minutos após falha ou por serviços de seguimento), com alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega». Ao fim de dois dias sem novidades — ou 12 horas em «Etiqueta criada» ou «Aceite pela transportadora» — passa a verificar de hora a hora; se após dois dias ninguém reconhecer o número, mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» Não há transferência para outra transportadora.
+Os estados ficam em inglês (exceto `Delivered` isolado, mostrado como «Entregue») e as horas no fuso do teu dispositivo («Horas no teu fuso horário: …» em peektracker.com e nas apps para iPhone e Android); nome, morada e comprovativo não são guardados. O Peek verifica até a cada 10 minutos, e em distribuição até a cada 2 minutos desde as 6h00 locais ou meia hora antes da janela horária (a cada 5 minutos num navegador; a cada 15 minutos após falha ou por serviços de seguimento), com alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega». Ao fim de dois dias sem novidades — ou 12 horas em «Etiqueta criada» ou «Aceite pela transportadora» — passa a verificar de hora a hora; se após dois dias ninguém reconhecer o número, mostra «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.» Não há transferência para outra transportadora.
 
 ## Perguntas frequentes sobre o rastreio DPD Suíça
 

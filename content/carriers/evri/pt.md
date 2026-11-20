@@ -3,7 +3,7 @@ title: Seguimento Evri: número, estados, alfândega e entrega
 description: Seguir uma encomenda Evri em Portugal: código de 16 caracteres, estados GlobalEco e Reino Unido, alfândega, pontos de recolha e contactos oficiais.
 slug: seguimento-evri
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 A Evri é a transportadora britânica de encomendas conhecida como Hermes UK até março de 2022 (distinta da Hermes na Alemanha). Se encomendares numa loja do Reino Unido — como ASOS, Boohoo, Gymshark, Lookfantastic, eBay UK ou Vinted — é frequente a Evri recolher o envio na origem e entregá-lo em Portugal através de uma transportadora parceira. Os envios internacionais seguem-se no portal [GlobalEco da Evri International](https://globaleco.app/track/), ao passo que as encomendas domésticas no Reino Unido se consultam em [evri.com](https://www.evri.com/track-a-parcel) com o código de 16 caracteres ou os 8 dígitos do aviso de passagem (*calling card*). Também podes colar o código de 16 caracteres ou a ligação de `evri.com` diretamente na caixa acima.
@@ -90,7 +90,7 @@ O [Peek](/) consulta tanto a **Evri International** como a **Evri UK** sempre qu
 
 Na **Evri International**, o Peek mostra o histórico do GlobalEco (a maioria das leituras permanece em inglês, enquanto estados gerais como «Em trânsito», «Em distribuição» ou «Entregue» aparecem em português), os locais de leitura, o peso da encomenda e, quando um comentário inclui `Estimated delivery date is: …`, a data estimada até à entrega ou devolução; o remetente e o destino são omitidos. Como o GlobalEco não indica fuso horário nas horas registadas, o Peek mantém essas horas locais tal como surgem.
 
-Na **Evri UK**, vês o estado e o histórico. A Evri UK não envia locais de leitura, pelo que o mapa fica vazio. Qualquer entrega por estafeta ou levantamento num ParcelShop ou Locker surge como «Entregue» sem indicar onde ficou deixada; uma encomenda a aguardar num ParcelShop ou Locker aparece como «Pronta para levantamento» e os restantes mantêm a frase em inglês da Evri. O teu nome, morada, fotografia de entrega e códigos de recolha são descartados. Em peektracker.com e na aplicação para iPhone, os registos com fuso horário terminam com «Horas no teu fuso horário: …», e podes escolher alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega».
+Na **Evri UK**, vês o estado e o histórico. A Evri UK não envia locais de leitura, pelo que o mapa fica vazio. Qualquer entrega por estafeta ou levantamento num ParcelShop ou Locker surge como «Entregue» sem indicar onde ficou deixada; uma encomenda a aguardar num ParcelShop ou Locker aparece como «Pronta para levantamento» e os restantes mantêm a frase em inglês da Evri. O teu nome, morada, fotografia de entrega e códigos de recolha são descartados. Em peektracker.com e nas aplicações para iPhone e Android, os registos com fuso horário terminam com «Horas no teu fuso horário: …», e podes escolher alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega».
 
 ## Perguntas frequentes sobre o seguimento da Evri
 

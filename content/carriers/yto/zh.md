@@ -3,7 +3,7 @@ title: 圆通速递（YTO）物流查询：YT 单号、物流记录与客服电�
 description: 圆通速递（YTO Express）快递单号查询：YT 单号长什么样，揽收扫描、派件扫描等物流记录是什么意思，查不到或丢件怎么办，圆通和圆通国际的客服电话。
 slug: yto-yuantong-wuliu-chaxun
 published: 2026-11-02
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 圆通速递（YTO Express）2000 年在上海创立，在国内有 5000 多家分公司。很多圆通单号对应的是国内包裹，比如淘宝、拼多多、抖音上的订单，寄往集运仓库或亲友家。可以在圆通官网的 [我要查件](https://www.yto.net.cn/ytoExpress/waybill/search/) 页面查，也可以把单号粘贴到上方的查询框。寄往海外的包裹归圆通国际，它在 [ytoglobal.com](https://www.ytoglobal.com/service/?lang=zh-cn) 有自己的查询页面。
@@ -93,7 +93,7 @@ updated: 2026-11-17
 
 [Peek](/) 看到 `YT` 加 13 位数字，马上就能认出圆通，查询框里会显示 YTO Express 和“识别出的快递公司”。`D` 或 `G` 加 11 位数字的单号也可能属于 Colis Privé，光看格式分不清，照样粘贴进来就行：Peek 跟踪 3,500 多家快递公司。如果没出现 YTO Express，点“更换”，在“符合这个单号”下面选它，或者在包裹页面点“更换快递公司”。其他格式的圆通运单号，Peek 也能查，请在“所有快递公司”下面选 YTO Express。带 `mailNo=` 或 `waybillNo=` 的 yto.net.cn 链接，Peek 也会认作圆通。
 
-Peek 查的是圆通国内的物流数据，不是圆通国际的。它显示状态、圆通返回的每条记录和操作的网点或站点，还有签收时间；时间按北京时间读取，换算成你设备所在的时区显示；在 peektracker.com 和 iPhone App 上，物流记录最后还有一行“时间按你所在的时区显示：”，后面写着时区名称。重复的记录只显示一次。出现 `退回件扫描` 后，状态变为“需要留意”；退回途中的记录显示为 `Out for delivery back to the sender` 或 `In a parcel locker or station on its way back`，寄件人签收后显示 `Returned to the sender`，状态变为“已退回寄件人”。
+Peek 查的是圆通国内的物流数据，不是圆通国际的。它显示状态、圆通返回的每条记录和操作的网点或站点，还有签收时间；时间按北京时间读取，换算成你设备所在的时区显示；在 peektracker.com 和 iPhone、Android App 上，物流记录最后还有一行“时间按你所在的时区显示：”，后面写着时区名称。重复的记录只显示一次。出现 `退回件扫描` 后，状态变为“需要留意”；退回途中的记录显示为 `Out for delivery back to the sender` 或 `In a parcel locker or station on its way back`，寄件人签收后显示 `Returned to the sender`，状态变为“已退回寄件人”。
 
 圆通不提供预计送达日期。快递员的姓名和电话、收件人信息、快递柜或驿站的取件地址，Peek 都不保存，可以到圆通官网上看。圆通对任何格式正确的单号都会应答，所以暂时没有记录不等于单号错了：Peek 会继续查询，并在 peektracker.com 上显示“等待 YTO Express 更新”。如果两天后圆通仍没有这个单号的记录，也没有其他来源给出结果，Peek 会在 peektracker.com 上显示：“两天过去了，快递公司仍查不到这个单号。请检查单号、更换快递公司，或删除这个包裹。”此后每天查询一次，添加满一周后改为每周一次。
 

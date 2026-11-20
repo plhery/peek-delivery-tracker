@@ -3,7 +3,7 @@ title: Evri Sendungsverfolgung: Nummer, Status, Zoll und Zustellung
 description: Evri-Paket in Deutschland, Österreich oder der Schweiz verfolgen: 16-stelliger Code, GlobalEco- und UK-Status, Zoll ab Juli 2026, Paketshops und Kontakt.
 slug: evri-sendungsverfolgung
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Evri ist der britische Paketdienst, der bis März 2022 Hermes UK hieß (mit [Hermes in Deutschland](carrier:hermes-de) ist er nicht identisch). Bestellst du bei einem britischen Onlineshop wie ASOS, Boohoo, Gymshark, Lookfantastic, eBay UK oder Vinted, übernimmt Evri häufig den Versand ab Großbritannien und übergibt das Paket im Zielland an einen lokalen Zustellpartner. Internationale Sendungen verfolgst du im [GlobalEco-Portal von Evri International](https://globaleco.app/track/), innerbritische Pakete dagegen auf [evri.com](https://www.evri.com/track-a-parcel) mit der 16-stelligen Sendungsnummer oder der 8-stelligen Nummer einer Benachrichtigungskarte (*calling card*). Du kannst den 16-stelligen Barcode oder deinen `evri.com`-Trackinglink auch direkt oben eingeben.
@@ -90,7 +90,7 @@ Evri nennt ausschließlich englischsprachige Kanäle für Großbritannien (gepr�
 
 Bei **Evri International** zeigt Peek den GlobalEco-Verlauf (die meisten Ereignisse bleiben auf Englisch, allgemeine Meldungen wie „Unterwegs“, „In Zustellung“ oder „Zugestellt“ erscheinen auf Deutsch), die Scan-Orte, das Paketgewicht und ein in den Kommentaren genanntes Lieferdatum (`Estimated delivery date is: …`) bis zur Zustellung oder Rücksendung; Absendername und Zielort entfallen. Da GlobalEco keine Zeitzone mitliefert, übernimmt Peek die angegebenen Ortszeiten unverändert.
 
-Bei **Evri UK** siehst du Status und Verlauf. Da Evri UK keine Scan-Orte nennt, bleibt die Karte leer. Jede Kurierzustellung und jede Abholung im ParcelShop oder Locker erscheint als „Zugestellt“ ohne Ablageort; ein abholbereites Paket im ParcelShop oder Locker steht auf „Abholbereit“, alle übrigen behalten den englischen Evri-Satz. Name, Adresse, Zustellfoto und Abholcodes werden verworfen. Auf peektracker.com und in der iPhone-App endet ein Verlauf mit Zeitzonenangabe auf „Uhrzeiten in deiner Zeitzone: …“, und für Benachrichtigungen wählst du zwischen „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“.
+Bei **Evri UK** siehst du Status und Verlauf. Da Evri UK keine Scan-Orte nennt, bleibt die Karte leer. Jede Kurierzustellung und jede Abholung im ParcelShop oder Locker erscheint als „Zugestellt“ ohne Ablageort; ein abholbereites Paket im ParcelShop oder Locker steht auf „Abholbereit“, alle übrigen behalten den englischen Evri-Satz. Name, Adresse, Zustellfoto und Abholcodes werden verworfen. Auf peektracker.com und in den Apps für iPhone und Android endet ein Verlauf mit Zeitzonenangabe auf „Uhrzeiten in deiner Zeitzone: …“, und für Benachrichtigungen wählst du zwischen „Jeden Scan“, „Wichtige Schritte“ und „Nur die Zustellung“.
 
 ## Häufige Fragen zur Evri-Sendungsverfolgung
 

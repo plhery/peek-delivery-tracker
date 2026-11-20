@@ -3,7 +3,7 @@ title: Suivi CTT Portugal : numéros, statuts, relais et douane
 description: Suivez un colis CTT Portugal depuis la France, la Belgique, la Suisse ou le Portugal : formats PT, statuts en français, délais de retrait, douane et contact.
 slug: suivi-ctt-portugal
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 CTT (CTT – Correios de Portugal) est l'opérateur postal national du Portugal, doté de sa branche express portugaise CTT Expresso. Suivez un envoi dans « Seguir objeto » sur [ctt.pt](https://www.ctt.pt/feapl_2/app/open/objectSearch/objectSearch.jspx?request_locale=pt) (en portugais et en anglais), dans l'App CTT ou en collant votre code ci-dessus. Ce numéro provient de l'expéditeur, d'un SMS ou e-mail de CTT, ou d'un avis laissé dans la boîte aux lettres.
@@ -89,7 +89,7 @@ Coordonnées vérifiées sur `ctt.pt` le 17 novembre 2026 :
 
 [Peek](/) reconnaît aussitôt les codes postaux et Expresso de CTT (`PT` à clé de contrôle valide) et les liens `ctt.pt` contenant `objects=`. Si un chiffre est faux (p. ex. `RR482910575PT`), la clé échoue et aucun transporteur n'est reconnu : corrigez le code ou touchez « Changer ». Les références CTT hors norme postale passent par des services universels de suivi ; les codes à 22 ou 25 chiffres vont vers [CTT Express](carrier:ctt-express).
 
-Peek affiche le statut, jusqu'aux 20 derniers scans placés approximativement sur la carte et le code d'état numérique CTT (CTT ne fournit pas de date estimée). Les heures portugaises sont lues sur Lisbonne (Açores dès le code postal `9500`), et celles des agences espagnoles CTT Express sur Madrid ou Canaries, puis converties dans le vôtre (« Heures dans ton fuseau horaire : … » sous l'historique sur peektracker.com et iPhone). Pour un envoi `PT` vers la France, la Belgique ou la Suisse, Peek interroge aussi [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) : « Annoncé à La Poste / Colissimo, pas encore reçu » tant que seule l'annonce existe, puis « Livraison par La Poste / Colissimo » dès un scan au moins aussi récent, en gardant l'historique CTT (et vers « CTT Portugal » à l'arrivée au Portugal).
+Peek affiche le statut, jusqu'aux 20 derniers scans placés approximativement sur la carte et le code d'état numérique CTT (CTT ne fournit pas de date estimée). Les heures portugaises sont lues sur Lisbonne (Açores dès le code postal `9500`), et celles des agences espagnoles CTT Express sur Madrid ou Canaries, puis converties dans le vôtre (« Heures dans ton fuseau horaire : … » sous l'historique sur peektracker.com, iPhone et Android). Pour un envoi `PT` vers la France, la Belgique ou la Suisse, Peek interroge aussi [La Poste](carrier:la-poste), [bpost](carrier:bpost) ou [La Poste suisse](carrier:swiss-post) : « Annoncé à La Poste / Colissimo, pas encore reçu » tant que seule l'annonce existe, puis « Livraison par La Poste / Colissimo » dès un scan au moins aussi récent, en gardant l'historique CTT (et vers « CTT Portugal » à l'arrivée au Portugal).
 
 Peek vérifie CTT jusqu'à toutes les 10 minutes, jusqu'à toutes les 2 minutes dès 6 h locales le jour « En livraison » tant que CTT répond directement (15 minutes via services universels), et chaque heure après 48 h sans mouvement ou 12 h sur « Étiquette créée » / « Pris en charge ». Alertes au choix : « Toutes les mises à jour », « Importantes uniquement » ou « Jour de livraison uniquement ».
 

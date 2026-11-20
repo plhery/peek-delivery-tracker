@@ -50,7 +50,7 @@ El localizador de YWE muestra cada escaneo con su fecha y hora, su diferencia re
 
 **Otros textos.** Cualquier escaneo que no esté en la tabla aparece en Peek tal como lo publicó YWE, y Peek deduce su etapa por las palabras cuando es posible.
 
-**Horas.** Cada evento llega acompañado del desfase respecto a GMT del centro de YWE donde se registró. Peek interpreta ese instante exacto y convierte todas las horas a la zona horaria de tu dispositivo; en peektracker.com y en la app para iPhone, el historial termina con «Horas en tu zona horaria:» seguido de su nombre.
+**Horas.** Cada evento llega acompañado del desfase respecto a GMT del centro de YWE donde se registró. Peek interpreta ese instante exacto y convierte todas las horas a la zona horaria de tu dispositivo; en peektracker.com y en las apps para iPhone y Android, el historial termina con «Horas en tu zona horaria:» seguido de su nombre.
 
 ## Quién entrega los paquetes de YWE
 

@@ -50,7 +50,7 @@ Il tracciamento di YWE elenca ogni scansione con data e ora, scostamento da GMT 
 
 **Altre diciture.** Una scansione non presente in tabella compare in Peek esattamente come scritta da YWE, e Peek ne ricava lo stato dalle parole quando possibile.
 
-**Orari.** Ogni scansione include lo scostamento rispetto a GMT dell’hub statunitense che l’ha registrata. Peek legge l’istante con quello scostamento e converte tutti gli orari nel fuso orario del tuo dispositivo; su peektracker.com e nell’app per iPhone la cronologia si chiude con «Orari nel tuo fuso orario:» seguito dal nome del fuso.
+**Orari.** Ogni scansione include lo scostamento rispetto a GMT dell’hub statunitense che l’ha registrata. Peek legge l’istante con quello scostamento e converte tutti gli orari nel fuso orario del tuo dispositivo; su peektracker.com e nelle app per iPhone e Android la cronologia si chiude con «Orari nel tuo fuso orario:» seguito dal nome del fuso.
 
 ## Chi consegna i pacchi YWE
 

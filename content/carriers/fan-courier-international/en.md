@@ -3,7 +3,7 @@ title: FAN Courier International tracking: AWB and statuses
 description: Track a FAN Courier International parcel: what its AWB looks like, what the fancourier.eu statuses mean, lockers, missed deliveries, complaints and contacts.
 slug: fan-courier-international-tracking
 published: 2026-11-14
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 FAN Courier International is the cross-border service of the Romanian courier FAN Courier, built for online shops that sell across Europe. It carries parcels by road through its own partner network, and has its own tracker: enter the AWB number on [fancourier.eu's Track Delivery page](https://fancourier.eu/track-order). The AWB comes from the shop that sent the parcel, usually in its shipping email.
@@ -86,7 +86,7 @@ Paste the AWB in the box above. A number of 16 digits, `F` and 4 digits fits onl
 
 A 13-digit AWB is a FAN Courier number: Peek asks [FAN Courier](carrier:fan-courier) about it, along with other carriers whose numbers can look the same, never FAN Courier International. If you choose FAN Courier International for one anyway, the carrier line says it "doesn’t issue numbers like this one", and Peek doesn't ask it. A link copied from fancourier.eu holds no number Peek can read, so paste the AWB itself.
 
-Peek shows each step with FAN's English wording, the hub it names and its time, in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It checks up to every 10 minutes while FAN's tracker answers (hourly if it has to go through tracking services, and up to every 15 minutes on delivery day), and can notify you when the status changes. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly.
+Peek shows each step with FAN's English wording, the hub it names and its time, in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It checks up to every 10 minutes while FAN's tracker answers (hourly if it has to go through tracking services, and up to every 15 minutes on delivery day), and can notify you when the status changes. After 12 hours with only "Label created" or "Received by carrier", or two days without news, it checks hourly.
 
 Peek shows no expected delivery day and no locker name, and leaves out the sender's and recipient's names and the parcel's weight. It doesn't pick up a return number from FAN's tracker: if the parcel goes back under a new number, add that number to follow it. Peek can't contact FAN or the shop for you.
 

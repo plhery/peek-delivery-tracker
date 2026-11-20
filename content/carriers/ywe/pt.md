@@ -50,7 +50,7 @@ O portal de seguimento da YWE apresenta cada leitura com data e hora, diferença
 
 **Outras formulações.** Qualquer leitura que não conste desta tabela aparece no Peek tal como a YWE a escreveu, e o Peek identifica a etapa pelas palavras sempre que consegue.
 
-**Horas.** Cada registo traz a diferença face a GMT do centro da YWE onde ocorreu. O Peek lê esse instante exato e converte todas as horas para o fuso horário do teu dispositivo; em peektracker.com e na aplicação para iPhone, o histórico termina com «Horas no teu fuso horário:» seguido do nome do fuso.
+**Horas.** Cada registo traz a diferença face a GMT do centro da YWE onde ocorreu. O Peek lê esse instante exato e converte todas as horas para o fuso horário do teu dispositivo; em peektracker.com e nas aplicações para iPhone e Android, o histórico termina com «Horas no teu fuso horário:» seguido do nome do fuso.
 
 ## Quem entrega as encomendas da YWE
 

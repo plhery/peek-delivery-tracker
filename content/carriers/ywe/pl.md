@@ -50,7 +50,7 @@ Wyszukiwarka YWE wyświetla każdy skan z datą i godziną, przesunięciem wzgl�
 
 **Inne brzmienia.** Skan spoza powyższej tabeli wyświetla się w Peek dokładnie tak, jak zapisało go YWE, a Peek w miarę możliwości rozpoznaje etap na podstawie użytych słów.
 
-**Godziny.** Każdy wpis zawiera przesunięcie względem czasu GMT danego centrum YWE w USA. Peek odczytuje w ten sposób dokładny moment zdarzenia i przelicza wszystkie godziny na strefę czasową Twojego urządzenia; na peektracker.com i w aplikacji na iPhone’a oś czasu kończy się informacją „Godziny w Twojej strefie czasowej:” wraz z jej nazwą.
+**Godziny.** Każdy wpis zawiera przesunięcie względem czasu GMT danego centrum YWE w USA. Peek odczytuje w ten sposób dokładny moment zdarzenia i przelicza wszystkie godziny na strefę czasową Twojego urządzenia; na peektracker.com i w aplikacjach na iPhone’a i Androida oś czasu kończy się informacją „Godziny w Twojej strefie czasowej:” wraz z jej nazwą.
 
 ## Kto doręcza przesyłki YWE
 

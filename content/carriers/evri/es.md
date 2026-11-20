@@ -3,7 +3,7 @@ title: Seguimiento Evri: número, estados, aduanas y entrega
 description: Seguir un paquete de Evri desde España: código de 16 caracteres, estados en GlobalEco y Reino Unido, aduanas, puntos de recogida y contacto oficial.
 slug: seguimiento-evri
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Evri es la empresa británica de paquetería conocida como Hermes UK hasta marzo de 2022 (distinta de [Hermes en Alemania](carrier:hermes-de)). Si compras en tiendas del Reino Unido como ASOS, Boohoo, Gymshark, Lookfantastic, eBay UK o Vinted, es habitual que Evri recoja el envío allí y lo entregue en España a través de un transportista colaborador. Los envíos internacionales se consultan en el portal [GlobalEco de Evri International](https://globaleco.app/track/), mientras que los paquetes internos del Reino Unido se siguen en [evri.com](https://www.evri.com/track-a-parcel) con el código de 16 caracteres o los 8 dígitos de una tarjeta de aviso (*calling card*). También puedes pegar el código de 16 caracteres o el enlace de `evri.com` directamente en el buscador de arriba.
@@ -90,7 +90,7 @@ Evri solo publica canales de atención británicos en inglés (revisados el 17 d
 
 En **Evri International**, Peek muestra el historial de GlobalEco (la mayoría de los eventos se mantienen en inglés, mientras que etiquetas generales como «En tránsito», «En reparto» o «Entregado» aparecen en español), las ubicaciones de escaneo, el peso del paquete y, si un comentario incluye `Estimated delivery date is: …`, la fecha prevista hasta la entrega o devolución; se omiten remitente y destino. Como GlobalEco no indica zona horaria en sus marcas de tiempo, Peek conserva esas horas locales tal cual.
 
-En **Evri UK**, ves el estado y el historial. Evri UK no facilita lugares de escaneo, por lo que el mapa queda vacío. Toda entrega por mensajero y toda recogida en ParcelShop o Locker figura como «Entregado» sin detallar dónde se dejó; un paquete esperando en ParcelShop o Locker pasa a «Listo para recoger» y el resto conserva la frase en inglés de Evri. Se descartan tu nombre, dirección, foto de entrega y códigos de recogida. En peektracker.com y en la app para iPhone, los eventos con zona horaria terminan con «Horas en tu zona horaria: …», y puedes configurar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega».
+En **Evri UK**, ves el estado y el historial. Evri UK no facilita lugares de escaneo, por lo que el mapa queda vacío. Toda entrega por mensajero y toda recogida en ParcelShop o Locker figura como «Entregado» sin detallar dónde se dejó; un paquete esperando en ParcelShop o Locker pasa a «Listo para recoger» y el resto conserva la frase en inglés de Evri. Se descartan tu nombre, dirección, foto de entrega y códigos de recogida. En peektracker.com y en las apps para iPhone y Android, los eventos con zona horaria terminan con «Horas en tu zona horaria: …», y puedes configurar avisos para «Cada escaneo», «Pasos importantes» o «Solo la entrega».
 
 ## Preguntas frecuentes sobre el seguimiento de Evri
 

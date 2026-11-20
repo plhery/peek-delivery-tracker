@@ -3,7 +3,7 @@ title: Austrian Post tracking: numbers, statuses and pickup
 description: Track an Austrian Post parcel in English: number formats, what each status means in English and German, yellow notices, Poststation lockers and contacts.
 slug: austrian-post-tracking
 published: 2026-10-11
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Austrian Post (Österreichische Post AG, in Vienna) is Austria's postal company. Track a parcel on post.at, which has an English version, in the Post App, or paste the number in the box above. The number comes from the shop that sent the parcel, from Austrian Post's e-notification, or from the yellow notice left after a missed delivery.
@@ -90,7 +90,7 @@ As listed on Austrian Post's pages on 11 October 2026:
 
 [Peek](/) recognises an international number ending in AT with a valid check digit as Austrian Post at once. For 22 digits, shared with other carriers, Peek asks Austrian Post and [USPS](carrier:usps) at once and names Austrian Post when only it knows the number; if several or none do, pick with "Change". A post.at link works only with an AT number inside.
 
-Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted or in distribution; once it's out for delivery, only a time window for that day. Times show in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
+Peek shows the status, the history with each facility on a map, the weight, the dimensions, the delivery time and an expected delivery (a day, a span of days or a time window) while the parcel is accepted or in distribution; once it's out for delivery, only a time window for that day. Times show in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It shows a parcel as ready for pickup, but not where, and no sender. Austrian Post's wordings appear in German, as its tracking gives them, so a delivered parcel shows `Sendung wurde zugestellt`.
 
 While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, or every 2 on the day Austrian Post scans the parcel out for delivery, from 6 a.m. local time or, when it gives a time window, from half an hour before it opens, while Austrian Post's own tracker answers (through tracking services, every 15 minutes); otherwise, and after two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), it checks hourly. It can notify you of every scan, important steps only (customs scans among them) or on delivery day only. After `Übergabe an Zustellpartner`, Peek does not follow the partner, and it never switches a parcel from another carrier over to Austrian Post.
 

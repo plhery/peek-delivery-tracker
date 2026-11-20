@@ -96,7 +96,7 @@ As read on 10 November 2026, ECMS's Contact Us page lists these numbers for Engl
 
 ECMS's picture check is a small sum. Peek reads it itself and, if that fails, tries once more with a new picture. When ECMS still won't answer, Peek asks tracking services in the meantime and shows the history they hold, in their own words.
 
-Peek shows the status, each scan with its town, region and country, and the destination country, newest first, with all times in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. It leaves out the shop's reference and any payment links on ECMS's record, and shows no weight or expected delivery date.
+Peek shows the status, each scan with its town, region and country, and the destination country, newest first, with all times in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. It leaves out the shop's reference and any payment links on ECMS's record, and shows no weight or expected delivery date.
 
 When ECMS's record names a local carrier Peek knows, Peek shows "Delivery with" that carrier, with its number when ECMS's scans give one. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. If Peek reads that carrier's own tracker, it asks it too, and once that carrier shows a scan at least as recent as ECMS's latest, Peek follows the parcel there and keeps ECMS's scans. Otherwise, add the "LM Tracking No." as a parcel of its own: Peek follows more than 3,500 carriers.
 

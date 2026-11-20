@@ -3,7 +3,7 @@ title: MaltaPost tracking: numbers, statuses and collection
 description: Track a MaltaPost item: what its tracking number looks like, what each status means, picking it up at a post office or Easipik locker and who to call.
 slug: maltapost-tracking
 published: 2026-10-13
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 MaltaPost is Malta's national post, delivering to every address in Malta and Gozo six days a week. Track an item on its [tracking page](https://www.maltapost.com/tracking) or paste the number in the box above. The number comes from whoever posted the item: the sender's receipt, the label under the barcode or your delivery notice.
@@ -81,7 +81,7 @@ For a number ending `MT` with a valid check digit, [Peek](/) asks MaltaPost and 
 
 Peek follows a number from abroad at its own post first. When that post says the item is going to Malta (or names no destination and you're in Malta), Peek also asks MaltaPost with the same number, and moves to it once it has a fresh scan; the earlier history stays. MaltaPost's lookup takes such numbers, SendOn barcodes included: to follow one at MaltaPost straight away, pick "MaltaPost" with "Change", or paste a maltapost.com link.
 
-MaltaPost's times carry no time zone: Peek reads them on the clock of the scan's place, Maltese time for scans in Malta, and lists MaltaPost's own history. Times are shown in your device's time zone; on peektracker.com and in the iPhone app, the history ends with "Times are in your time zone:" and its name. Statuses keep MaltaPost's wording. Peek can show the post office where an item waits or was picked up, and can notify you when the status changes. There's no expected delivery day and no weight. An item MaltaPost withholds from tracking can't be followed.
+MaltaPost's times carry no time zone: Peek reads them on the clock of the scan's place, Maltese time for scans in Malta, and lists MaltaPost's own history. Times are shown in your device's time zone; on peektracker.com and in the iPhone and Android apps, the history ends with "Times are in your time zone:" and its name. Statuses keep MaltaPost's wording. Peek can show the post office where an item waits or was picked up, and can notify you when the status changes. There's no expected delivery day and no weight. An item MaltaPost withholds from tracking can't be followed.
 
 While MaltaPost's tracker answers, Peek checks up to every 10 minutes with the parcel on screen, or with alerts on if delivery is expected today. From 6 a.m. on the carrier's clock, when MaltaPost scans "Item scheduled for physical delivery" that day, checks can run every 2 minutes with the parcel on screen or alerts on. If the carrier gives a delivery window, the faster checks start half an hour before it opens at the earliest. Off screen with alerts off, checks are normally hourly. When only a tracking service answers, Peek checks hourly, every 3 hours once the latest scan is a day old, or every 15 minutes on the day it goes out for delivery. When another carrier takes over the delivery, Peek follows the pace of the carrier delivering the parcel. For checks with the carrier itself, after two days without news (12 hours while the item still shows "Label created" or "Received by carrier"), Peek checks hourly. An item at "Label created", "Received by carrier" or "In transit" that goes four days without a new scan shows "No tracking update for four days" in your list.
 

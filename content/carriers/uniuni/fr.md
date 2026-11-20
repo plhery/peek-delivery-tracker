@@ -3,7 +3,7 @@ title: UniUni suivi colis : statuts, livraison et contact
 description: Suivre un colis UniUni au Québec et au Canada : où trouver le numéro, ce que disent les statuts, la livraison manquée, les photos de preuve et qui appeler.
 slug: uniuni-suivi-colis
 published: 2026-10-27
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 UniUni (Uni Express inc.) est une entreprise de livraison du dernier kilomètre fondée à Vancouver en 2019 et établie à Richmond, en Colombie-Britannique. Elle livre au Canada et aux États-Unis des commandes en ligne, notamment de Shein, de Temu ou de TikTok. Ton numéro de suivi vient du marchand : entre-le sur [uniuni.com/fr/suivi](https://www.uniuni.com/fr/suivi/) ou colle-le dans le champ ci-dessus.
@@ -104,7 +104,7 @@ Les canaux qu'UniUni affiche sur son site en français, lus le 17 novembre 2026 
 
 [Peek](/) reconnaît tout de suite UniUni pour les numéros qui commencent par `UUS`, `UUSC` ou `U9999`, les numéros `4C` terminés par `US`, les numéros `UR` d'UniUni Platform et la forme `CAA0` suivie d'un `U`. Pour les autres numéros `U` à 15 chiffres, la forme `CAA0` suivie d'une autre lettre, la forme `USA0` et la forme `JY`, il pose la question à UniUni et rattache le colis à UniUni si elle connaît le numéro. Un lien de suivi uniuni.com qui contient le numéro fonctionne aussi. Le numéro principal d'un envoi en plusieurs colis ne se suit pas : ajoute le numéro de chaque colis.
 
-Peek lit le suivi d'UniUni et affiche le statut, chaque scan avec sa ville et sa province sur une carte, la date prévue ou la plage horaire quand UniUni en donne une, et l'heure de livraison. Les lignes restent dans l'anglais d'UniUni, même si Peek est en français, sauf deux que Peek remplace par ses propres mots : « Livré » pour `Delivered` et « En livraison » pour `Out for delivery`. Il laisse de côté les adresses, le nom du livreur, le détail des scans et les photos, que tu trouves sur le site d'UniUni. Les heures s'affichent dans le fuseau horaire de ton appareil ; sur peektracker.com et dans l'application iPhone, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »).
+Peek lit le suivi d'UniUni et affiche le statut, chaque scan avec sa ville et sa province sur une carte, la date prévue ou la plage horaire quand UniUni en donne une, et l'heure de livraison. Les lignes restent dans l'anglais d'UniUni, même si Peek est en français, sauf deux que Peek remplace par ses propres mots : « Livré » pour `Delivered` et « En livraison » pour `Out for delivery`. Il laisse de côté les adresses, le nom du livreur, le détail des scans et les photos, que tu trouves sur le site d'UniUni. Les heures s'affichent dans le fuseau horaire de ton appareil ; sur peektracker.com et dans les applications iPhone et Android, une ligne sous l'historique le nomme (« Heures dans ton fuseau horaire : … »).
 
 Quand UniUni passe le colis à un autre transporteur, les scans de celui-ci s'affichent dans l'historique d'UniUni, mais Peek ne suit pas le numéro de l'autre transporteur. À l'inverse, un colis [SpeedPAK](carrier:speedpak) peut nommer UniUni pour la dernière étape : Peek peut alors le suivre chez UniUni.
 

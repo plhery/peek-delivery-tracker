@@ -3,7 +3,7 @@ title: Seguimiento Poste Italiane: códigos 1UW y 3UW y estados
 description: Rastrear un paquete de Poste Italiane en España: cómo es el código de envío (1UW, 3UW, 8UW, 5P), qué significan los estados italianos, plazos y contacto.
 slug: seguimiento-poste-italiane
 published: 2026-11-17
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 Poste Italiane es el operador postal público de Italia y reparte también, mediante sus redes Crono y SDA, compras en tiendas online italianas, Vinted o eBay. Puedes seguir tu envío en «Cerca Spedizioni» dentro de poste.it (antiguo Dove Quando), en la app Poste Italiane o pegando el código arriba. En envíos de Italia a España, poste.it muestra los pasos hasta el centro de cambio internacional; en códigos postales terminados en `IT`, el reparto pasa después al operador español.
@@ -86,7 +86,7 @@ Consultado en poste.it el 16 de noviembre de 2026:
 
 Desde España, Peek comprueba además los números postales válidos acabados en `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) en [Correos](carrier:correos-spain) y cambia en cuanto publica escaneos más recientes; a la inversa, etiquetas de 16 caracteres de [Vinted Go](carrier:vinted-go) o [Cainiao](carrier:cainiao) con un código `1UW`, `3UW`, `8UW` o `5P` pasan automáticamente a Poste Italiane.
 
-Consulta cada hora y avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Muestra hasta 20 escaneos en el mapa, fecha prevista, servicio, «Gastos de importación» y horas locales («Horas en tu zona horaria: …» en peektracker.com y iPhone). Remitente, peso, medidas y oficina de recogida no se muestran. Tras dos días sin datos: «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
+Consulta cada hora y avisos en «Cada escaneo», «Pasos importantes» o «Solo la entrega». Muestra hasta 20 escaneos en el mapa, fecha prevista, servicio, «Gastos de importación» y horas locales («Horas en tu zona horaria: …» en peektracker.com, iPhone y Android). Remitente, peso, medidas y oficina de recogida no se muestran. Tras dos días sin datos: «Tras dos días, el transportista sigue sin reconocer este número. Revísalo, elige otro transportista o elimina el paquete.»
 
 ## Preguntas frecuentes sobre el seguimiento de Poste Italiane
 

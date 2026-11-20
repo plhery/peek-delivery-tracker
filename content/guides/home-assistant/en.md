@@ -4,7 +4,7 @@ description: Peek's Home Assistant integration brings your parcels in as sensors
 slug: track-parcels-home-assistant
 picture: A tablet on a kitchen wall showing a home dashboard, with a list of parcels, a small delivery calendar, and Pip, the parcel with a face, smiling from one of the cards.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 To track your parcels in Home Assistant, install Peek for Home Assistant: it brings your [Peek](/) parcel list in as sensors, a deliveries calendar, a dashboard card and a tool for Assist. You need a free Peek account and Home Assistant 2026.11 or later, where you search for Peek in the Marketplace; on 2026.10, you search for it in HACS.
@@ -18,11 +18,11 @@ Your Peek parcels, in the forms Home Assistant uses:
 | Sensors | Count the parcels on their way, those arriving today, those that need you (waiting at a pickup point, a missed delivery, customs) and today's deliveries, and give the next delivery day |
 | A "Deliveries" calendar | All-day events: each parcel on its way on its expected day, each delivery on the day it came |
 | A "Parcel updates" event | Fires when a parcel is added, changes status, goes out for delivery, needs you, is delivered, or its expected day changes |
-| Three actions | Add parcels from a text, archive a parcel, or read the list |
+| Actions | Add parcels from a text, rename a parcel, change its carrier, turn its notifications off or on, archive or restore it, or read the list |
 | The "Peek parcels" card | Your parcels on a dashboard, as a list or as cards with Pip |
 | A tool for Assist | Answers questions such as "what arrives today?" |
 
-Home Assistant reads Peek every 30 minutes, every 10 minutes on a day a parcel is out for delivery or expected, and right after it adds or archives a parcel. To read now, call `homeassistant.update_entity` on any Peek entity. "Today" is the day in Home Assistant's time zone.
+Home Assistant reads Peek every 30 minutes, every 10 minutes on a day a parcel is out for delivery or expected, and right after one of its actions changes a parcel. To read now, call `homeassistant.update_entity` on any Peek entity. "Today" is the day in Home Assistant's time zone.
 
 ## What do I need?
 
@@ -41,7 +41,7 @@ Search for Peek in Home Assistant's Marketplace. On 2026.10, search for it in HA
 :::steps
 - Open "Settings › Marketplace" | Search for "Peek" and open it.
 - Install Peek | Select "Install", then "Set up".
-- Sign in to Peek | Your browser opens Peek. Check what Home Assistant asks for (to see your parcels, and to add and archive them), then select "Allow".
+- Sign in to Peek | Your browser opens Peek. Check what Home Assistant asks for (to see your parcels, to add and archive them, and to change and restore them), then select "Allow".
 - Go back to Home Assistant | Peek sends you back through My Home Assistant (my.home-assistant.io). The first time, it asks for your Home Assistant's address.
 :::
 
@@ -82,11 +82,11 @@ Yes. The README has four ready-made automations:
 
 When you add parcels from a text, Peek adds each tracking number it finds, at most 10 at a time, and keeps only the numbers and the name you give, so send just the shipping part of an email when you can.
 
-Once one of Peek's entities is exposed to Assist ("Settings › Voice assistants › Expose"), you can ask "what arrives today?" or where your parcel from a shop is. Assist's Peek tool only reads: it never adds or archives parcels. What it returns (names, shops, carriers, stages, expected days and the latest scan's place) goes to the conversation agent you chose, which may be a cloud service.
+Once one of Peek's entities is exposed to Assist ("Settings › Voice assistants › Expose"), you can ask "what arrives today?" or where your parcel from a shop is. Assist's Peek tool only reads: it never adds, changes or archives parcels. What it returns (names, shops, carriers, stages, expected days and the latest scan's place) goes to the conversation agent you chose, which may be a cloud service.
 
 ## What can't it do?
 
-- **Delete or edit parcels.** Home Assistant asks only to see your parcels, and to add and archive them. You can restore an archived parcel in Peek.
+- **Delete parcels.** Home Assistant can see, add, change and archive your parcels, never delete them. If you connected Peek before version 0.2.0 of the integration, the first change asks you to sign in to Peek again, once.
 - **Connect Claude, ChatGPT or Gemini.** They connect to Peek on their own: see the guide [Track your parcels in ChatGPT, Claude or Gemini](guide:ai-assistants).
 
 ## What does Home Assistant keep, and how do I remove it?
@@ -96,14 +96,14 @@ Home Assistant talks to Peek only, at peektracker.com, and keeps the sign-in's t
 To remove it, delete Peek in "Settings › Devices & services": Home Assistant gives its access back to Peek, which forgets the connection, and your parcels stay in Peek. If Peek can't be reached then, or to cut Home Assistant off from Peek's side, select "Disconnect" next to Home Assistant on Peek's website (not its apps), under "Settings" → "Deliveries" → "Assistants". An integration you keep after that says "Authentication expired for Peek"; reconfiguring it starts the same sign-in.
 
 :::sources
-- [Peek for Home Assistant: README](https://github.com/plhery/peek-ha) – what it adds, versions, install, sign-in, the card, automations, Assist, privacy, removal
+- [Peek for Home Assistant: README](https://github.com/plhery/peek-ha) – what it adds, actions, versions, install, sign-in, the card, automations, Assist, privacy, removal
 - [Peek for Home Assistant: hacs.json](https://github.com/plhery/peek-ha/blob/main/hacs.json) – the oldest Home Assistant it installs on, 2026.10
 - [Home Assistant: Marketplace](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, search, Add from link, connecting GitHub, Install, administrators only, replaces HACS from 2026.11
 - [HACS: default integrations list](https://github.com/hacs/default/blob/master/integration) – Peek's entry, plhery/peek-ha, in the catalogue HACS and the Marketplace search
 - [Home Assistant on GitHub: the Marketplace's catalogue](https://github.com/home-assistant/core/blob/dev/homeassistant/components/marketplace/const.py) – the Marketplace uses HACS's default list, hacs/default
 - [Peek: Connect Peek to Claude, ChatGPT or Gemini](https://peektracker.com/assistants) – Home Assistant's steps on Peek's page, 2026.11 or later
 - [Peek on GitHub: each assistant's setup](https://github.com/plhery/peek-delivery-tracker/blob/main/src/assistants/setups.tsx) – Home Assistant's menu names
-- [Peek on GitHub: English wording](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – version, steps, account, beta
+- [Peek on GitHub: English wording](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – version, steps, account, beta, what Home Assistant may do
 - [Peek on GitHub: Settings, Assistants](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Assistants.tsx) – connected assistants, Disconnect
 - [Peek: Help](https://peektracker.com/support.html) – signing in with a six-digit code
 - [Peek on GitHub: Terms](https://github.com/plhery/peek-delivery-tracker/blob/main/TERMS.md) – free, no fees or subscription

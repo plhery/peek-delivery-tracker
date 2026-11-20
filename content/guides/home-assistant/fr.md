@@ -4,7 +4,7 @@ description: Avec l'intégration Peek, Home Assistant affiche tes colis en capte
 slug: suivre-colis-home-assistant
 picture: Une tablette sur un mur de cuisine affiche un tableau de bord de la maison, avec une liste de colis, un petit calendrier des livraisons et Pip, le colis avec un visage, qui sourit depuis l'une des cartes.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Pour suivre tes colis dans Home Assistant, installe Peek pour Home Assistant : l'intégration y apporte ta liste de colis [Peek](/) sous forme de capteurs, d'un calendrier des livraisons, d'une carte de tableau de bord et d'un outil pour Assist. Il te faut un compte Peek gratuit et Home Assistant 2026.11 ou plus récent, où tu cherches Peek dans le Marketplace ; avec la version 2026.10, tu le cherches dans HACS.
@@ -18,11 +18,11 @@ Tes colis Peek, sous les formes qu'utilise Home Assistant :
 | Des capteurs | Comptent les colis en route, ceux qui arrivent aujourd'hui, ceux qui demandent ton attention (en attente dans un point de retrait, une livraison manquée, la douane) et les livraisons du jour, et donnent le prochain jour de livraison |
 | Un calendrier « Livraisons » | Des événements sur la journée entière : chaque colis en route à son jour prévu, chaque livraison le jour où elle est arrivée |
 | Un événement « Mises à jour des colis » | Se déclenche quand un colis est ajouté, change de statut, part en livraison, demande ton attention, est livré, ou que son jour prévu change |
-| Trois actions | Ajouter des colis à partir d'un texte, archiver un colis ou lire la liste |
+| Des actions | Ajouter des colis à partir d'un texte, renommer un colis, changer son transporteur, couper ou remettre ses notifications, l'archiver ou le restaurer, ou lire la liste |
 | La carte « Peek parcels » | Tes colis sur un tableau de bord, en liste ou en cartes avec Pip |
 | Un outil pour Assist | Répond à des questions comme « Qu'est-ce qui arrive aujourd'hui ? » |
 
-Home Assistant interroge Peek toutes les 30 minutes, toutes les 10 minutes un jour où un colis est en cours de livraison ou attendu, et juste après avoir ajouté ou archivé un colis. Pour l'interroger tout de suite, appelle `homeassistant.update_entity` sur n'importe quelle entité Peek. « Aujourd'hui », c'est le jour dans le fuseau horaire de Home Assistant.
+Home Assistant interroge Peek toutes les 30 minutes, toutes les 10 minutes un jour où un colis est en cours de livraison ou attendu, et juste après qu'une de ses actions a modifié un colis. Pour l'interroger tout de suite, appelle `homeassistant.update_entity` sur n'importe quelle entité Peek. « Aujourd'hui », c'est le jour dans le fuseau horaire de Home Assistant.
 
 ## De quoi ai-je besoin ?
 
@@ -41,7 +41,7 @@ Cherche Peek dans le Marketplace de Home Assistant. Avec la version 2026.10, che
 :::steps
 - Ouvre « Settings › Marketplace » | Cherche « Peek » et ouvre-le.
 - Installe Peek | Sélectionne « Install », puis « Set up ».
-- Connecte-toi à Peek | Ton navigateur ouvre Peek. Vérifie ce que Home Assistant demande (voir tes colis, les ajouter et les archiver), puis sélectionne « Autoriser ».
+- Connecte-toi à Peek | Ton navigateur ouvre Peek. Vérifie ce que Home Assistant demande (voir tes colis, les ajouter et les archiver, les modifier et les restaurer), puis sélectionne « Autoriser ».
 - Reviens dans Home Assistant | Peek te renvoie par My Home Assistant (my.home-assistant.io). La première fois, il te demande l'adresse de ton Home Assistant.
 :::
 
@@ -82,11 +82,11 @@ Oui. Le README propose quatre automatisations toutes prêtes :
 
 Quand tu ajoutes des colis à partir d'un texte, Peek ajoute chaque numéro de suivi qu'il trouve, 10 au plus à la fois, et ne garde que les numéros et le nom que tu donnes : envoie donc seulement la partie expédition d'un e-mail quand tu le peux.
 
-Une fois qu'une des entités de Peek est exposée à Assist (« Settings › Voice assistants › Expose »), tu peux demander « Qu'est-ce qui arrive aujourd'hui ? » ou où se trouve ton colis venant de telle boutique. L'outil Peek d'Assist ne fait que lire : il n'ajoute ni n'archive jamais de colis. Ce qu'il renvoie (noms, boutiques, transporteurs, étapes, jours prévus et lieu du dernier scan) part vers l'agent de conversation que tu as choisi, qui peut être un service cloud.
+Une fois qu'une des entités de Peek est exposée à Assist (« Settings › Voice assistants › Expose »), tu peux demander « Qu'est-ce qui arrive aujourd'hui ? » ou où se trouve ton colis venant de telle boutique. L'outil Peek d'Assist ne fait que lire : il n'ajoute, ne modifie ni n'archive jamais de colis. Ce qu'il renvoie (noms, boutiques, transporteurs, étapes, jours prévus et lieu du dernier scan) part vers l'agent de conversation que tu as choisi, qui peut être un service cloud.
 
 ## Qu'est-ce que l'intégration ne fait pas ?
 
-- **Supprimer ou modifier des colis.** Home Assistant demande seulement à voir tes colis, et à les ajouter et les archiver. Tu peux restaurer un colis archivé dans Peek.
+- **Supprimer des colis.** Home Assistant peut voir, ajouter, modifier et archiver tes colis, jamais les supprimer. Si tu as connecté Peek avant la version 0.2.0 de l'intégration, la première modification te demande de te reconnecter à Peek, une seule fois.
 - **Connecter Claude, ChatGPT ou Gemini.** Ils se connectent eux-mêmes à Peek : voir le guide [Suivre ses colis avec ChatGPT, Claude ou Gemini](guide:ai-assistants).
 
 ## Que garde Home Assistant, et comment supprimer l'intégration ?
@@ -96,14 +96,14 @@ Home Assistant ne parle qu'à Peek, sur peektracker.com, et garde les jetons de 
 Pour la supprimer, supprime Peek dans « Settings › Devices & services » : Home Assistant rend son accès à Peek, qui oublie la connexion, et tes colis restent dans Peek. Si Peek est injoignable à ce moment-là, ou pour couper Home Assistant du côté de Peek, sélectionne « Déconnecter » à côté de Home Assistant sur le site de Peek (pas dans ses apps), dans « Réglages » → « Livraisons » → « Assistants ». Une intégration que tu gardes ensuite affiche « Authentication expired for Peek » ; la reconfigurer relance la même connexion.
 
 :::sources
-- [Peek pour Home Assistant : README (en anglais)](https://github.com/plhery/peek-ha) – ce qu'elle ajoute, versions, installation, connexion, la carte, automatisations, Assist, confidentialité, suppression
+- [Peek pour Home Assistant : README (en anglais)](https://github.com/plhery/peek-ha) – ce qu'elle ajoute, actions, versions, installation, connexion, la carte, automatisations, Assist, confidentialité, suppression
 - [Peek pour Home Assistant : hacs.json](https://github.com/plhery/peek-ha/blob/main/hacs.json) – la plus ancienne version de Home Assistant sur laquelle elle s'installe, 2026.10
 - [Home Assistant : Marketplace (en anglais)](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, recherche, Add from link, connexion à GitHub, Install, réservé aux administrateurs, remplace HACS à partir de 2026.11
 - [HACS : liste des intégrations par défaut](https://github.com/hacs/default/blob/master/integration) – l'entrée de Peek, plhery/peek-ha, dans le catalogue où cherchent HACS et le Marketplace
 - [Home Assistant sur GitHub : le catalogue du Marketplace](https://github.com/home-assistant/core/blob/dev/homeassistant/components/marketplace/const.py) – le Marketplace utilise la liste par défaut de HACS, hacs/default
 - [Peek : Connecter Peek à Claude, ChatGPT ou Gemini](https://peektracker.com/fr/assistants) – les étapes pour Home Assistant sur la page de Peek, 2026.11 ou plus récent
 - [Peek sur GitHub : la configuration de chaque assistant](https://github.com/plhery/peek-delivery-tracker/blob/main/src/assistants/setups.tsx) – les noms des menus de Home Assistant
-- [Peek sur GitHub : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – version, étapes, compte, bêta
+- [Peek sur GitHub : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – version, étapes, compte, bêta, ce que Home Assistant peut faire
 - [Peek sur GitHub : Réglages, Assistants](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Assistants.tsx) – assistants connectés, Déconnecter
 - [Peek : aide (en anglais)](https://peektracker.com/support.html) – connexion avec un code à six chiffres
 - [Peek sur GitHub : conditions d'utilisation (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/TERMS.md) – gratuit, sans frais ni abonnement

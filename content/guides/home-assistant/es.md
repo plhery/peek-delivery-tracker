@@ -4,7 +4,7 @@ description: La integración de Peek para Home Assistant trae tus paquetes como 
 slug: seguimiento-paquetes-home-assistant
 picture: Una tableta en la pared de una cocina con el panel de la casa: una lista de paquetes, un pequeño calendario de entregas y Pip, el paquete con cara, sonriendo desde una de las tarjetas.
 published: 2026-11-19
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Para seguir tus paquetes en Home Assistant, instala Peek for Home Assistant: trae tu lista de paquetes de [Peek](/) como sensores, un calendario de entregas, una tarjeta para tus paneles y una herramienta para Assist. Necesitas una cuenta gratuita de Peek y Home Assistant 2026.11 o posterior, donde buscas Peek en el Marketplace; en la versión 2026.10, lo buscas en HACS.
@@ -18,11 +18,11 @@ Tus paquetes de Peek, en las formas que usa Home Assistant:
 | Sensores | Cuentan los paquetes en camino, los que llegan hoy, los que te necesitan (esperando en un punto de recogida, una entrega fallida, aduanas) y las entregas de hoy, y dan el próximo día de entrega |
 | Un calendario «Deliveries» | Eventos de día completo: cada paquete en camino en su día previsto, cada entrega el día en que llegó |
 | Un evento «Parcel updates» | Se dispara cuando se añade un paquete, cambia de estado, sale a reparto, te necesita, se entrega o cambia su día previsto |
-| Tres acciones | Añadir paquetes a partir de un texto, archivar un paquete o leer la lista |
+| Acciones | Añadir paquetes a partir de un texto, cambiar el nombre de un paquete o su transportista, desactivar o activar sus notificaciones, archivarlo o restaurarlo, o leer la lista |
 | La tarjeta «Peek parcels» | Tus paquetes en un panel, como lista o como tarjetas con Pip |
 | Una herramienta para Assist | Responde a preguntas como «¿qué llega hoy?» |
 
-Home Assistant consulta Peek cada 30 minutos, cada 10 minutos los días en que un paquete está en reparto o previsto, y justo después de añadir o archivar un paquete. Para consultarlo en el momento, llama a `homeassistant.update_entity` sobre cualquier entidad de Peek. «Hoy» es el día en la zona horaria de Home Assistant.
+Home Assistant consulta Peek cada 30 minutos, cada 10 minutos los días en que un paquete está en reparto o previsto, y justo después de que una de sus acciones cambie un paquete. Para consultarlo en el momento, llama a `homeassistant.update_entity` sobre cualquier entidad de Peek. «Hoy» es el día en la zona horaria de Home Assistant.
 
 ## ¿Qué necesito?
 
@@ -41,7 +41,7 @@ Busca Peek en el Marketplace de Home Assistant. En la versión 2026.10, búscalo
 :::steps
 - Abre «Settings › Marketplace» | Busca «Peek» y ábrelo.
 - Instala Peek | Selecciona «Install» y luego «Set up».
-- Inicia sesión en Peek | Tu navegador abre Peek. Comprueba lo que pide Home Assistant (ver tus paquetes, y añadirlos y archivarlos) y selecciona «Permitir».
+- Inicia sesión en Peek | Tu navegador abre Peek. Comprueba lo que pide Home Assistant (ver tus paquetes, añadirlos y archivarlos, y cambiarlos y restaurarlos) y selecciona «Permitir».
 - Vuelve a Home Assistant | Peek te devuelve a través de My Home Assistant (my.home-assistant.io). La primera vez, te pide la dirección de tu Home Assistant.
 :::
 
@@ -82,11 +82,11 @@ Sí. El README trae cuatro automatizaciones listas para usar:
 
 Cuando añades paquetes a partir de un texto, Peek añade cada número de seguimiento que encuentra, hasta 10 a la vez, y solo guarda los números y el nombre que le das, así que, cuando puedas, envía solo la parte del correo sobre el envío.
 
-Cuando una de las entidades de Peek está expuesta a Assist («Settings › Voice assistants › Expose»), puedes preguntar «¿qué llega hoy?» o dónde está tu paquete de una tienda. La herramienta de Peek en Assist solo lee: nunca añade ni archiva paquetes. Lo que devuelve (nombres, tiendas, transportistas, etapas, días previstos y el lugar del último escaneo) va al agente de conversación que hayas elegido, que puede ser un servicio en la nube.
+Cuando una de las entidades de Peek está expuesta a Assist («Settings › Voice assistants › Expose»), puedes preguntar «¿qué llega hoy?» o dónde está tu paquete de una tienda. La herramienta de Peek en Assist solo lee: nunca añade, cambia ni archiva paquetes. Lo que devuelve (nombres, tiendas, transportistas, etapas, días previstos y el lugar del último escaneo) va al agente de conversación que hayas elegido, que puede ser un servicio en la nube.
 
 ## ¿Qué no puede hacer?
 
-- **Borrar o editar paquetes.** Home Assistant solo pide ver tus paquetes, y añadirlos y archivarlos. Puedes restaurar un paquete archivado en Peek.
+- **Borrar paquetes.** Home Assistant puede ver, añadir, cambiar y archivar tus paquetes, pero nunca borrarlos. Si conectaste Peek antes de la versión 0.2.0 de la integración, el primer cambio te pide que vuelvas a iniciar sesión en Peek, una sola vez.
 - **Conectar Claude, ChatGPT o Gemini.** Se conectan a Peek por su cuenta: consulta la guía [Sigue tus paquetes en ChatGPT, Claude o Gemini](guide:ai-assistants).
 
 ## ¿Qué guarda Home Assistant y cómo quito la integración?
@@ -96,14 +96,14 @@ Home Assistant solo habla con Peek, en peektracker.com, y guarda los tokens del 
 Para quitarla, borra Peek en «Settings › Devices & services»: Home Assistant le devuelve su acceso a Peek, que olvida la conexión, y tus paquetes siguen en Peek. Si en ese momento no se puede contactar con Peek, o para cortar el acceso de Home Assistant desde el lado de Peek, selecciona «Desconectar» junto a Home Assistant en la web de Peek (no en sus apps), en «Ajustes» → «Entregas» → «Asistentes». Una integración que conserves después muestra «Authentication expired for Peek»; al reconfigurarla empieza el mismo inicio de sesión.
 
 :::sources
-- [Peek for Home Assistant: README (en inglés)](https://github.com/plhery/peek-ha) – qué añade, versiones, instalación, inicio de sesión, la tarjeta, automatizaciones, Assist, privacidad, cómo quitarla
+- [Peek for Home Assistant: README (en inglés)](https://github.com/plhery/peek-ha) – qué añade, acciones, versiones, instalación, inicio de sesión, la tarjeta, automatizaciones, Assist, privacidad, cómo quitarla
 - [Peek for Home Assistant: hacs.json](https://github.com/plhery/peek-ha/blob/main/hacs.json) – la versión más antigua de Home Assistant en la que se instala, 2026.10
 - [Home Assistant: Marketplace (en inglés)](https://www.home-assistant.io/integrations/marketplace/) – Settings › Marketplace, búsqueda, Add from link, conectar GitHub, Install, solo administradores, sustituye a HACS desde la 2026.11
 - [HACS: lista de integraciones por defecto](https://github.com/hacs/default/blob/master/integration) – la entrada de Peek, plhery/peek-ha, en el catálogo donde buscan HACS y el Marketplace
 - [Home Assistant en GitHub: el catálogo del Marketplace](https://github.com/home-assistant/core/blob/dev/homeassistant/components/marketplace/const.py) – el Marketplace usa la lista por defecto de HACS, hacs/default
 - [Peek: Conectar Peek a Claude, ChatGPT o Gemini](https://peektracker.com/es/assistants) – los pasos de Home Assistant en la página de Peek, 2026.11 o posterior
 - [Peek en GitHub: la configuración de cada asistente](https://github.com/plhery/peek-delivery-tracker/blob/main/src/assistants/setups.tsx) – los nombres de los menús de Home Assistant
-- [Peek en GitHub: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – versión, pasos, cuenta, beta
+- [Peek en GitHub: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – versión, pasos, cuenta, beta, lo que puede hacer Home Assistant
 - [Peek en GitHub: Ajustes, Asistentes](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Assistants.tsx) – asistentes conectados, Desconectar
 - [Peek: ayuda (en inglés)](https://peektracker.com/support.html) – iniciar sesión con un código de seis cifras
 - [Peek en GitHub: condiciones (en inglés)](https://github.com/plhery/peek-delivery-tracker/blob/main/TERMS.md) – gratis, sin tarifas ni suscripción

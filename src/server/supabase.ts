@@ -1703,9 +1703,9 @@ export class SupabaseServiceClient extends SupabaseClient {
 
   /** The timezone the account chose for its notifications, or null when it chose none. */
   async accountTimeZone(userId: string): Promise<string | null> {
-    const params = query({ select: 'timezone', user_id: `eq.${userId}`, limit: '1' });
-    const timezone = rows(await this.request(`/rest/v1/notification_preferences?${params}`))[0]?.timezone;
-    return typeof timezone === 'string' && timezone ? timezone : null;
+    const params = query({ select: 'timezone,timezone_chosen', user_id: `eq.${userId}`, limit: '1' });
+    const saved = rows(await this.request(`/rest/v1/notification_preferences?${params}`))[0];
+    return saved?.timezone_chosen !== false && typeof saved?.timezone === 'string' && saved.timezone ? saved.timezone : null;
   }
 
   /** An account's parcels as its apps read them, archived ones included. */
@@ -3194,12 +3194,11 @@ export class SupabaseUserClient extends SupabaseClient {
     clock: '24' | '12' | null = null,
     distance: 'km' | 'mi' | null = null,
   ): Promise<JsonObject> {
-    const partial = enabledStages === undefined || quietHoursStart === undefined || timezone === undefined;
-    const rpc = partial ? 'patch_owned_notification_preferences' : 'set_owned_notification_preferences';
-    let result = await this.request('/rest/v1/rpc/' + rpc, {
+    // Every save patches the row, so it records whether the save sent a time zone (`timezone_chosen`).
+    let result = await this.request('/rest/v1/rpc/patch_owned_notification_preferences', {
       method: 'POST',
       body: {
-        ...(partial ? { p_set_quiet: quietHoursStart !== undefined } : {}),
+        p_set_quiet: quietHoursStart !== undefined,
         p_enabled_stages: enabledStages,
         p_quiet_hours_start: quietHoursStart,
         p_quiet_hours_end: quietHoursEnd,

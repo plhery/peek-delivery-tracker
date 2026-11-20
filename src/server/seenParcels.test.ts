@@ -93,7 +93,7 @@ describe('opening a parcel marks it as seen (#72)', () => {
   it('saves the mark\'s switch only when a request makes the choice', async () => {
     const client = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const request = vi.spyOn(client, 'request').mockResolvedValue({ enabled_stages: ['delivered'], mark_new_updates: false });
-    const base = { p_enabled_stages: ['delivered'], p_quiet_hours_start: null, p_quiet_hours_end: null, p_timezone: 'Europe/Zurich' };
+    const base = { p_set_quiet: true, p_enabled_stages: ['delivered'], p_quiet_hours_start: null, p_quiet_hours_end: null, p_timezone: 'Europe/Zurich' };
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich');
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', null, false);
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', true, true);

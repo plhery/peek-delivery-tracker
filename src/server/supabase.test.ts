@@ -1086,7 +1086,7 @@ describe('delivery emails', () => {
   it('saves the email choice only when a request makes one', async () => {
     const client = user();
     const request = vi.spyOn(client, 'request').mockResolvedValue({ enabled_stages: ['delivered'], email_on_delivery: true });
-    const base = { p_enabled_stages: ['delivered'], p_quiet_hours_start: null, p_quiet_hours_end: null, p_timezone: 'Europe/Zurich' };
+    const base = { p_set_quiet: true, p_enabled_stages: ['delivered'], p_quiet_hours_start: null, p_quiet_hours_end: null, p_timezone: 'Europe/Zurich' };
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich');
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', null);
     await client.setNotificationPreferences(['delivered'], null, null, 'Europe/Zurich', true);
@@ -1098,6 +1098,17 @@ describe('delivery emails', () => {
       // The clock and units only when an app sends them.
       { ...base, p_clock: '12', p_distance: 'mi' },
     ]);
+    // Every save patches the row, which records whether it sent a time zone.
+    expect(new Set(request.mock.calls.map(([path]) => path))).toEqual(new Set(['/rest/v1/rpc/patch_owned_notification_preferences']));
+  });
+
+  it('reads no time zone for an account whose saves sent none', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    vi.spyOn(client, 'request').mockResolvedValueOnce([{ timezone: 'America/New_York', timezone_chosen: true }])
+      .mockResolvedValueOnce([{ timezone: 'Europe/Zurich', timezone_chosen: false }]).mockResolvedValueOnce([]);
+    await expect(client.accountTimeZone('account')).resolves.toBe('America/New_York');
+    await expect(client.accountTimeZone('account')).resolves.toBeNull();
+    await expect(client.accountTimeZone('account')).resolves.toBeNull();
   });
 
   it('reads the email choice with the preferences, and says never chosen without a row', async () => {

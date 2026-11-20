@@ -884,7 +884,8 @@ Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekde
   beside `body`) and the device shows the one for its clock. A Live Activity's alert, and a device without
   that code, show the server's sentence, in the timezone the account saved with its
   notification settings, or else on the scan's own clock when the carrier gave its UTC
-  offset, or else in Zurich's. A link's alert never has a saved timezone.
+  offset, or else in Zurich's. A link's alert never has a saved timezone. A save that sends no timezone, as the apps'
+  clock and units do, saves none (`timezone_chosen`): the row's Zurich is only the column's default.
 - An answer without an estimate, the carrier's or a provider's, keeps the stored one while
   the parcel is on its way and its day has not passed on the delivery carrier's clock (the
   zone its answer or the catalog gives, else its newest scan's offset, or after an earlier leg answered the offset or

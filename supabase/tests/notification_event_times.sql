@@ -96,6 +96,33 @@ end;
 $$;
 delete from public.notification_preferences where user_id = '97000000-0000-0000-0000-000000000001';
 
+-- A save without a zone (the apps' clock and units) chooses none, and a later one keeps the zone a save sent.
+reset role;
+select set_config('request.jwt.claim.sub', '97000000-0000-0000-0000-000000000001', true);
+do $$
+declare
+  chosen integer;
+begin
+  perform public.patch_owned_notification_preferences(false, p_clock => '12');
+  select count(*) filter (where timezone_chosen) into chosen from (
+    select timezone_chosen from public.pending_push_notifications where package_id = '97000000-0000-0000-0000-000000000002'
+    union all select timezone_chosen from public.pending_native_push_notifications where package_id = '97000000-0000-0000-0000-000000000002'
+    union all select timezone_chosen from public.pending_live_activity_events where package_id = '97000000-0000-0000-0000-000000000002'
+  ) as queued;
+  if chosen <> 0 or (select timezone_chosen from public.notification_preferences where user_id = auth.uid()) then
+    raise exception 'A save without a time zone chose Zurich''s';
+  end if;
+  perform public.patch_owned_notification_preferences(false, p_timezone => 'America/New_York');
+  perform public.patch_owned_notification_preferences(false, p_distance => 'mi');
+  if (select count(*) from public.pending_native_push_notifications
+      where package_id = '97000000-0000-0000-0000-000000000002' and timezone_chosen) <> 5 then
+    raise exception 'A save without a time zone undid the one chosen';
+  end if;
+end;
+$$;
+delete from public.notification_preferences where user_id = '97000000-0000-0000-0000-000000000001';
+set local role service_role;
+
 -- Updating the device language must not drop queued events or restart its cursor.
 update public.push_subscriptions set locale = 'fr'
 where user_id = '97000000-0000-0000-0000-000000000001';

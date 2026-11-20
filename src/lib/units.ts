@@ -35,9 +35,12 @@ export function localeUses24HourTime(locale?: string): boolean {
   return cycle === 'h23' || cycle === 'h24';
 }
 
-/** The regions that measure in US units: the United States, Liberia and Myanmar. The UK writes miles but kilograms. */
-const US_UNIT_REGIONS = new Set(['US', 'LR', 'MM']);
-const MILE_REGIONS = new Set([...US_UNIT_REGIONS, 'GB']);
+/**
+ * The regions that measure in US units: the United States and Liberia. The UK and Myanmar write miles but kilograms,
+ * as Apple's and ICU's data say.
+ */
+const US_UNIT_REGIONS = new Set(['US', 'LR']);
+const MILE_REGIONS = new Set([...US_UNIT_REGIONS, 'GB', 'MM']);
 
 function localeRegion(locale: string | undefined): string {
   try {
@@ -57,11 +60,14 @@ export function localeWeightUnit(locale: string | undefined): WeightUnit {
   return US_UNIT_REGIONS.has(localeRegion(locale)) ? 'lb' : 'kg';
 }
 
-/** The time zones of the regions that measure in US units; with the United Kingdom's and its Crown dependencies', those that write miles. */
+/**
+ * The time zones of the regions that measure in US units; with the United Kingdom's, its Crown dependencies' and
+ * Myanmar's, those that write miles.
+ */
 const US_UNIT_ZONES = '(America/(New_York|Detroit|Chicago|Menominee|Denver|Boise|Phoenix|Los_Angeles|Anchorage|Juneau|Sitka|Metlakatla'
   + '|Yakutat|Nome|Adak|Indianapolis|Fort_Wayne|Knox_IN|Louisville|(Indiana|Kentucky|North_Dakota)/.+)'
-  + '|Pacific/Honolulu|US/.+|Africa/Monrovia|Asia/(Yangon|Rangoon))';
-const MILE_TIME_ZONE = new RegExp(`^(${US_UNIT_ZONES}|Europe/(London|Belfast|Guernsey|Isle_of_Man|Jersey))$`);
+  + '|Pacific/Honolulu|US/.+|Africa/Monrovia)';
+const MILE_TIME_ZONE = new RegExp(`^(${US_UNIT_ZONES}|Europe/(London|Belfast|Guernsey|Isle_of_Man|Jersey)|Asia/(Yangon|Rangoon))$`);
 const US_UNIT_TIME_ZONE = new RegExp(`^${US_UNIT_ZONES}$`);
 
 /** Whether a time zone names a place, rather than UTC or an offset. */

@@ -152,13 +152,15 @@ describe('the clock and the units of distance', () => {
 describe('the units of weight', () => {
   const weight = () => screen.getByLabelText('weight').textContent;
 
-  it('weighs in pounds only where the region measures in US units, the UK in kilograms', () => {
-    expect(['en-US', 'es-US', 'en', 'en-LR', 'my-MM', 'en-GB', 'en-CA', 'fr-FR', 'de-CH'].map(localeWeightUnit))
-      .toEqual(['lb', 'lb', 'lb', 'lb', 'lb', 'kg', 'kg', 'kg', 'kg']);
+  it('weighs in pounds only where the region measures in US units, the UK and Myanmar in kilograms', () => {
+    expect(['en-US', 'es-US', 'en', 'en-LR', 'my-MM', 'en-MM', 'en-GB', 'en-CA', 'fr-FR', 'de-CH'].map(localeWeightUnit))
+      .toEqual(['lb', 'lb', 'lb', 'lb', 'kg', 'kg', 'kg', 'kg', 'kg', 'kg']);
     expect([undefined, '', 'not a language'].map(localeWeightUnit)).toEqual(['kg', 'kg', 'kg']);
     const zones = ['America/New_York', 'America/Indiana/Knox', 'Pacific/Honolulu', 'US/Eastern', 'Africa/Monrovia', 'Asia/Yangon',
-      'Europe/London', 'Europe/Jersey', 'Europe/Zurich', 'America/Toronto'];
-    expect(zones.map((zone) => browserWeightUnit('en-US', zone))).toEqual(['lb', 'lb', 'lb', 'lb', 'lb', 'lb', 'kg', 'kg', 'kg', 'kg']);
+      'Asia/Rangoon', 'Europe/London', 'Europe/Jersey', 'Europe/Zurich', 'America/Toronto'];
+    expect(zones.map((zone) => browserWeightUnit('en-US', zone))).toEqual(['lb', 'lb', 'lb', 'lb', 'lb', 'kg', 'kg', 'kg', 'kg', 'kg', 'kg']);
+    // Myanmar still writes miles, as the UK does.
+    expect([browserDistanceUnit('en-US', 'Asia/Yangon'), browserDistanceUnit('my-MM', 'Asia/Rangoon'), localeDistanceUnit('my-MM')]).toEqual(['mi', 'mi', 'mi']);
     // A zone that names no place leaves it to the language.
     expect([['en-US', 'UTC'], ['en-GB', 'Etc/UTC'], ['de-CH', undefined]].map(([locale, zone]) => browserWeightUnit(locale, zone)))
       .toEqual(['lb', 'kg', 'kg']);

@@ -4,7 +4,7 @@ description: O que significa uma encomenda retida na alfândega, quanto tempo de
 slug: encomenda-retida-na-alfandega
 picture: Uma cabine de alfândega com uma cancela às riscas, um documento carimbado com um visto e o Pip à espera, paciente, diante da cancela.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 «Retida na alfândega» quer quase sempre dizer que a tua encomenda está no controlo normal das mercadorias que chegam de fora da União Europeia, e não que foi apreendida. Se continuar retida, a transportadora pode estar à espera de que pagues os encargos ou envies uma fatura: nos [CTT](carrier:ctt), isso trata-se no Portal de Desalfandegamento. Confirma sempre no site ou na app da transportadora, nunca num link recebido por SMS.
@@ -92,8 +92,8 @@ Onde pagas depende da loja:
 
 | Encomenda | Não pagas mais nada se | Senão, pagas |
 | --- | --- | --- |
-| Compra até 150 € | A loja cobrou o IVA, os direitos e a taxa de 2 € da UE na compra; o Serviço CTT fica isento | IVA, 3 € por tipo de produto e o Serviço CTT: 7 € mais IVA, ou 14 € se o produto tiver IVA reduzido |
-| Compra acima de 150 €, até 1000 € | A loja cobrou todos os encargos na compra | IVA, direitos à taxa da pauta e 14 € de Serviço CTT |
+| Compra até 150 € | A loja cobrou o IVA, os direitos e a taxa de 2 € da UE na compra; o Serviço CTT fica isento | IVA, 3 € de direitos e 2 € de taxa da UE por tipo de produto e o Serviço CTT: 7 € mais IVA, ou 14 € se o produto tiver IVA reduzido |
+| Compra acima de 150 €, até 1000 € | A loja cobrou todos os encargos na compra | IVA, direitos à taxa da pauta, 2 € de taxa da UE por tipo de produto e 14 € de Serviço CTT |
 | Oferta de um particular | Vale 45 € ou menos e marcas no portal a caixa «Pretendo solicitar franquia de direitos de importação» | Acima de 45 €: IVA e direitos, mais 14 € de Serviço CTT (até 1000 €) |
 
 Acima de 1000 €, ou com mercadoria sujeita a restrições ou a impostos especiais de consumo, o Serviço CTT soma aos 14 € um complemento de 16 € a 116 €, mais IVA, conforme o valor.
@@ -116,7 +116,7 @@ A Comissão Europeia indica que, desde 1 de novembro de 2026, se junta uma taxa 
 Depende do que a loja cobrou na compra. O resumo da encomenda ou a fatura costumam dizê-lo:
 
 - **IVA, direitos e taxa de 2 € cobrados na compra:** em princípio, não pagas mais nada, e o Serviço CTT fica isento, desde que a loja tenha declarado bem a encomenda na origem.
-- **Só o preço da compra:** pagas no Portal de Desalfandegamento o IVA, os 3 € por tipo de produto e o Serviço CTT.
+- **Só o preço da compra:** pagas no Portal de Desalfandegamento o IVA, os 3 € e os 2 € por tipo de produto e o Serviço CTT.
 - **Só o IVA, sem os direitos:** atenção. Os CTT não te podem cobrar os direitos à parte, não conseguem submeter o processo à AT e a encomenda é devolvida. Esclarece isto com a loja antes de comprar.
 
 Os CTT aconselham ainda a confirmar de onde sai a mercadoria antes de comprar: é isso que conta, não o país da loja. Para saberes como viajam estas encomendas, vê [como seguir uma encomenda da China](guide:tracking-from-china). Se vêm pela [Cainiao](carrier:cainiao) ou pela [YunExpress](carrier:yunexpress), as leituras da alfândega em inglês estão explicadas nas páginas delas. Se o desalfandegamento for feito pelo agente aduaneiro [CACESA](carrier:cacesa), a página dela explica os estados e os avisos.
@@ -159,7 +159,7 @@ Reembolsos e acertos:
 :::sources
 - [CTT: Desalfandegar encomendas](https://www.ctt.pt/particulares/receber/desalfandegar/desalfandegar-encomendas) – portal, documentos, pagamento
 - [CTT: Fim da isenção de IVA, tarifário do Serviço CTT](https://www.ctt.pt/particulares/receber/desalfandegar/fim-isencao-de-iva-desalfandegar) – Serviço CTT, avisos, entidade 12368, IVA pago duas vezes
-- [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – 3 € por tipo de produto, Taxa de Manuseamento Aduaneiro, Serviço CTT isento só com IVA, direitos e taxa pagos na compra, só IVA pago, atrasos, reembolso
+- [CTT: Fim da isenção de direitos aduaneiros em compras até 150 euros](https://www.ctt.pt/particulares/receber/desalfandegar/fim-da-isencao-de-direitos-aduaneiros-em-compras-ate-150-euros-fora-da-uniao-europeia) – 3 € por tipo de produto, Taxa de Manuseamento Aduaneiro, Serviço CTT isento só com IVA, direitos e taxa pagos na compra, só IVA pago, atrasos, reembolso; taxa de 2 € por tipo de artigo a qualquer valor, cobrada à chegada se não foi paga na compra (lida a 20 de novembro de 2026)
 - [CTT: Resultados que podem aparecer na pesquisa do «Seguir objeto»](https://www.ctt.pt/ajuda/particulares/seguir-ou-alterar-entrega/seguir/resultados-que-podem-aparecer-na-pesquisa-do-seguir-objeto) – Em importação
 - [CTT: Estados do desalfandegamento](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/estado-do-processo-de-desalfandegamento/estados-do-desalfandegamento) – estados do portal, 10 dias
 - [CTT: Prazo para desalfandegar a minha encomenda](https://www.ctt.pt/ajuda/particulares/importacoes-e-desalfandegamento/prazo-de-desalfandegamento/prazo-para-desalfandegar-a-minha-encomenda) – 20 dias, Data Limite

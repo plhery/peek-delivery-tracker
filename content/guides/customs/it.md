@@ -4,7 +4,7 @@ description: «In attesa di sdoganamento» o fermo da settimane? Cosa vuol dire,
 slug: pacco-fermo-in-dogana
 picture: Una cabina della dogana con la sbarra a strisce, un documento timbrato con una spunta e Pip che aspetta paziente davanti alla sbarra.
 published: 2026-10-09
-updated: 2026-11-17
+updated: 2026-11-20
 ---
 
 «Fermo in dogana» di solito vuol dire che il tuo pacco sta passando il controllo di routine previsto per la merce che arriva da fuori UE (in Ticino, da qualsiasi Paese estero), non che è stato sequestrato. Se resta fermo a lungo, forse il corriere aspetta che tu paghi dazio e IVA o che gli mandi una fattura. Per saperlo apri tu il sito o l'app del corriere, mai il link di un SMS.
@@ -34,6 +34,8 @@ Spesso niente. Per capirlo:
 - Fai quello che chiede | Paga sul suo sito, nella sua app o alla consegna, oppure manda la fattura o la conferma d'ordine che ti chiede.
 - Chiedi al corriere, poi al venditore | Ancora fermo? Scrivi a chi sdogana il pacco, poi al venditore: il corriere l'ha scelto lui. Anche l'UDSC rimanda alla Posta o al corriere, non alla dogana.
 :::
+
+Con Poste, il conto arriva quando il pacco raggiunge i suoi Centri Internazionali: se il mittente ha dato i tuoi contatti ricevi una notifica con il link per pagare; altrimenti inserisci il codice in Cerca spedizioni, nell'App Poste Italiane o su poste.it, premi «Paga» e accedi con le credenziali di poste.it. Pagare online conviene: per un pacco fino a 150 € i diritti postali sono 1 € invece di 3 o 7 € alla consegna.
 
 ### Pacco bloccato in dogana: chi chiamare?
 
@@ -72,7 +74,7 @@ Per non dover ricaricare la pagina ogni ora, incolla il numero di tracciamento s
 Di solito perché IVA e dazio sulla merce arrivata dall'estero non sono stati pagati al momento dell'acquisto: allora li incassa il corriere, spesso con un compenso suo. Il conto ha fino a tre voci:
 
 1. **IVA**: in Italia di solito il 22%, calcolato su merce, spedizione, dazio e, se dovuta, tassa di gestione dell'Unione; in Svizzera l'8,1%, o il 2,6% per esempio per libri, integratori, piante e medicinali. Va allo Stato.
-2. **Dazio**: nell'UE, dal 1° luglio 2026, 3 € per articolo fino a 150 €, e sopra quella cifra il dazio ordinario; in Svizzera si calcola sul peso lordo. Anche questo è un tributo pubblico: nell'UE si riscuote per conto dell'Unione.
+2. **Dazio**: nell'UE, dal 1° luglio 2026, 3 € per articolo, cioè per voce doganale, fino a 150 €, e sopra quella cifra il dazio ordinario; in Svizzera si calcola sul peso lordo. Anche questo è un tributo pubblico: nell'UE si riscuote per conto dell'Unione.
 3. **Il compenso del corriere** per lo sdoganamento: Poste lo chiama «diritti postali», la Posta svizzera «prezzo base sdoganamento». È un servizio, non una tassa. Poste precisa che il dazio, invece, non è un suo supplemento: lo riscuote per conto delle autorità.
 
 Dove paghi dipende da cosa è successo al checkout:
@@ -99,13 +101,13 @@ Dal 1° luglio 2026 l'UE ha tolto l'esenzione dal dazio per le spedizioni fino a
 - due magliette uguali: una voce, 3 €;
 - un libro e una sciarpa, 40 € in tutto: due voci, 6 €. Nell'esempio di Poste, con la tassa di gestione dell'Unione (4 €), l'IVA al 22% su 50 € (11 €) e i diritti postali, il totale è 22 € pagando online o 28 € alla consegna.
 
-Dal 1° novembre 2026, secondo la Commissione europea, sugli acquisti online da fuori UE si paga anche la «tassa di gestione dell'Unione»: 2 € per articolo, che si sommano ai 3 €, valgono anche sopra i 150 € e non vengono mai rimborsati. Poi c'è il contributo italiano di 2 € a spedizione (legge 199/2025), che Poste elenca tra le spese di importazione: la sua partenza è stata rinviata più volte, l'ultima al 1° dicembre 2026 (decreto-legge 162/2026). In Ticino niente di tutto questo: la Svizzera non è nell'UE.
+Dal 1° novembre 2026, secondo la Commissione europea, sugli acquisti online da fuori UE si paga anche la «tassa di gestione dell'Unione»: 2 € per articolo, che si sommano ai 3 €, valgono anche sopra i 150 € e non vengono mai rimborsati. Gli articoli si contano come per il dazio: per Poste, un articolo sono una o più merci della spedizione con la stessa classificazione tariffaria, la stessa descrizione e, se richiesta, la stessa origine. Conta il giorno in cui la spedizione è presentata in dogana, non quello dell'acquisto, precisa Poste: la tassa vale anche per un ordine fatto prima del 1° novembre. Poi c'è il contributo italiano di 2 € a spedizione (legge 199/2025), che Poste elenca tra le spese di importazione: la sua partenza è stata rinviata più volte, l'ultima al 1° gennaio 2027 (decreto-legge 193/2026). In Ticino niente di tutto questo: la Svizzera non è nell'UE.
 
 ## Su Temu, Shein e AliExpress si paga la dogana?
 
 Dipende da dove vivi e da cosa hai pagato al checkout:
 
-- **Italia:** sì, anche sotto i 150 €. L'IVA si paga su tutte le spedizioni commerciali da fuori UE dal 1° luglio 2021, il dazio di 3 € per articolo dal 1° luglio 2026. Se il sito ti ha fatto pagare l'IVA all'acquisto (il sistema IOSS), alla consegna non la paghi di nuovo; il resto lo paghi a Poste o al corriere, se il venditore non l'ha già saldato.
+- **Italia:** sì, anche sotto i 150 €. L'IVA si paga su tutte le spedizioni commerciali da fuori UE dal 1° luglio 2021, il dazio di 3 € per voce doganale (non per pezzo) dal 1° luglio 2026. Se il sito ti ha fatto pagare l'IVA all'acquisto (il sistema IOSS), alla consegna non la paghi di nuovo; il resto lo paghi a Poste o al corriere, se il venditore non l'ha già saldato. La tassa di gestione dell'Unione non rientra nell'IOSS, avverte Poste: anche con l'IVA già pagata può esserti chiesta online o alla consegna, a meno che il venditore non l'abbia pagata in anticipo.
 - **Ticino:** dal 1° gennaio 2025 le piattaforme con almeno 100 000 franchi di cifra d'affari in piccoli invii devono applicare l'IVA svizzera. Per il resto paghi quando IVA e dazi superano i 5 franchi, più il prezzo della Posta. Se un ordine arriva in più pacchi e la Posta se ne accorge (per esempio da «1 di 5 pacchi»), sdogana sul valore complessivo quando è il totale, e non il singolo pacco, a superare la soglia.
 
 Per capire come viaggiano questi ordini, leggi [seguire un pacco dalla Cina](guide:tracking-from-china). Se il tracking è di [Cainiao](carrier:cainiao), `Import customs clearance started` vuol dire che il pacco è alla dogana del tuo Paese.
@@ -136,18 +138,18 @@ Per segnalare un falso:
 
 ## Cosa succede se non pago la dogana?
 
-- **Italia:** con Poste le spese di importazione si pagano al più tardi alla consegna, a casa o all'ufficio postale. Se non paghi e non ritiri il pacco, può [tornare al mittente](guide:returned-to-sender): le condizioni di Poste lo prevedono, e il tracking lo segue fino al «re-inoltro al mittente». Se avevi pagato online e la consegna non va a buon fine, Poste ti restituisce l'importo entro 80 giorni: fino alla consegna è solo un deposito cauzionale. Se ha calcolato male e hai pagato troppo, ti rimborsa la differenza; se la dogana accerta di più, paghi l'integrazione.
+- **Italia:** con Poste le spese di importazione si pagano al più tardi alla consegna, a casa o all'ufficio postale. Se non paghi e non ritiri il pacco, può [tornare al mittente](guide:returned-to-sender): le condizioni di Poste lo prevedono, e il tracking lo segue fino al «re-inoltro al mittente». Vale anche per la tassa di gestione dell'Unione: senza il pagamento, avverte Poste, le formalità doganali possono restare incomplete e il pacco non può esserti consegnato. Se avevi pagato online e la consegna non va a buon fine, Poste ti restituisce l'importo entro 80 giorni: fino alla consegna è solo un deposito cauzionale. Se ha calcolato male e hai pagato troppo, ti rimborsa la differenza; se la dogana accerta di più, paghi l'integrazione.
 - **Ticino:** hai 20 giorni per pagare online; dopo ricevi una QR-fattura e online non si può più. Non sei d'accordo con i costi? Contatta il Servizio clienti internazionale della Posta, per telefono o con il modulo di contatto. Per un ricorso valgono i termini dell'UDSC: 60 giorni dalla decisione d'imposizione per correggere i tributi doganali, l'indirizzo o il regime, cinque anni dalla fine dell'anno civile per l'IVA calcolata male, per esempio sul valore o sull'aliquota.
 
 :::sources
-- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – Convenzione UPU, 3 € per articolo, tassa di gestione dell'Unione, IVA, diritti postali, PDDP, pagamento, notifiche con link, 21 € per dati mancanti, esempio del libro e della sciarpa, re-inoltro al mittente
-- [Poste Italiane: FAQ invii internazionali, dazi e sdoganamento](https://www.poste.it/assistenza/faq-dogana) – Magazzino di Temporanea Custodia, 90 giorni, IVA dal 2021, fine dell'esenzione, regali fino a 45 €, controlli sanitari, sequestro
+- [Poste Italiane: Ricevere dall'estero](https://www.poste.it/ricevere-spedizioni-da-estero) – Convenzione UPU, 3 € per articolo, tassa di gestione dell'Unione, IVA, diritti postali, PDDP, pagamento, notifiche con link, 21 € per dati mancanti, esempio del libro e della sciarpa, re-inoltro al mittente, notifica all'arrivo nei Centri Internazionali, «Paga» su Cerca spedizioni (letta il 20 novembre 2026)
+- [Poste Italiane: FAQ invii internazionali, dazi e sdoganamento](https://www.poste.it/assistenza/faq-dogana) – Magazzino di Temporanea Custodia, 90 giorni, IVA dal 2021, fine dell'esenzione, regali fino a 45 €, controlli sanitari, sequestro; tassa di gestione dell'Unione: cosa conta come articolo, spedizioni presentate in dogana dal 1° novembre 2026, esclusa dall'IOSS, consegna bloccata senza pagamento (letta il 20 novembre 2026)
 - [Poste Italiane: Condizioni generali, gestione delle spese di importazione](https://www.media.poste.it/208f690c-5f5f-4388-bf4a-1bbb847f8d95/file/gestione-spese-importazione-cgs) – contributo della legge 199/2025, deposito cauzionale restituito entro 80 giorni, rimborsi, ritorno al mittente
 - [Poste Italiane: Aggiornamenti operativi posta e pacchi](https://www.poste.it/aggiornamenti-operativi) – Ritardi sdoganamento
 - [Poste Italiane: Cerca spedizioni, legenda degli stati](https://www.poste.it/cerca/views/risultati-spedizioni.html) – In attesa di sdoganamento
 - [Poste Italiane: Come difendersi dalle truffe](https://www.poste.it/sicurezza-online/guide-per-operare-in-sicurezza/come-difendersi-dalle-truffe/) – cosa Poste non chiede mai, antiphishing@posteitaliane.it
 - [Polizia Postale: Segnala online](https://www.commissariatodips.it/segnalazioni/segnala-online/index.html) – segnalazione di phishing
-- [Gazzetta Ufficiale n. 216 del 17 settembre 2026](https://www.gazzettaufficiale.it/eli/gu/2026/09/17/216/sg/pdf) – decreto-legge 162/2026, contributo rinviato al 1° dicembre 2026
+- [Normattiva: decreto-legge 23 ottobre 2026, n. 193](https://www.normattiva.it/uri-res/N2Ls?urn:nir:stato:decreto.legge:2026;193) – art. 1, commi 3 e 4: contributo rinviato al 1° gennaio 2027, soppresso il rinvio al 1° dicembre del decreto-legge 162/2026 (letto il 20 novembre 2026)
 - [Commissione europea: EU Customs Reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 € dal 1° novembre 2026
 - [Commissione europea: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 € per voce, 2 € per articolo anche sopra i 150 €, tassa di gestione non rimborsabile (art. 20, par. 6, del regolamento (UE) 2026/2108)
 - [La Posta: Sdoganamento all'importazione](https://www.post.ch/it/ricezione/sdoganamento-all-importazione) – prezzi, tetto di CHF 70.–, regali fino a CHF 100.–, merci soggette ad autorizzazione, telefono
@@ -163,5 +165,5 @@ Per segnalare un falso:
 - [UDSC: Attenzione alle truffe via e-mail e sms](https://www.bazg.admin.ch/it/avviso-di-truffe-via-e-mail-e-per-sms) – nessuna richiesta di pagamento per e-mail o SMS, falsi mittenti
 - [YunExpress: 為什麼你的包裹會被海關抽查？](https://hk.yunexpress.com/blog/2179/) – durata dei controlli doganali
 - [Cainiao: Logistics Status Explanation](https://global.cainiao.com/helpDoc.htm?slug=phdx0i) – Import customs clearance started
-- [Peek: home page](https://peektracker.com/it) – «Controllato ogni 10 min»
+- [Peek: home page](https://peektracker.com/it) – «Controllato fino a ogni 10 min»
 :::

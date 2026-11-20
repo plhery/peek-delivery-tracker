@@ -3,10 +3,10 @@ title: ELTA Hellenic Post tracking: statuses, pickup, contacts
 description: Track an ELTA Hellenic Post or ELTA Courier parcel in Greece: the GR number, what the English statuses mean, PostBox lockers, notices, claims and contacts.
 slug: elta-hellenic-post-tracking
 published: 2026-10-13
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
-ELTA Hellenic Post (ΕΛΤΑ) is Greece's national post, and ELTA Courier is now part of it. Track an item on ELTA's [English tracking page](https://www.elta.gr/en/track), which takes up to five numbers at once, one per line, or paste the number in the box above. An ELTA Courier parcel can also be looked up on elta-courier.gr's [search](https://www.elta-courier.gr/search), which takes several voucher numbers, one per line. The number comes from the sender: the receipt of posting, the courier voucher or the shop's message.
+ELTA Hellenic Post (ΕΛΤΑ) is Greece's national post, and ELTA Courier is now part of it. Track an item on ELTA's [English tracking page](https://www.elta.gr/en/track), which takes up to five numbers at once, one per line, or paste the number in the box above. An ELTA Courier parcel can also be looked up on elta-courier.gr's [search](https://www.elta-courier.gr/search), which takes several voucher numbers, one per line. The number comes from the sender: the receipt of posting, the courier voucher or the shop's message. In short: the status table below says what each line means; a parcel ELTA couldn't deliver waits at the post office or courier store the tracking names (a domestic parcel for as long as the notice or SMS says, an item cleared through customs 20 days from the notice); and ELTA's call centre is 800-11-82000 from a Greek landline, 212-0000-800 from a mobile, +30 212-0000-800 from abroad.
 
 ## ELTA tracking number
 

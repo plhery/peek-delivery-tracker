@@ -4,7 +4,7 @@ description: Dein Paket hängt im Zoll? Was der Status bedeutet, wie lange die A
 slug: paket-beim-zoll-dauer-kosten
 picture: Ein Zollhäuschen mit gestreifter Schranke, ein abgestempeltes Dokument mit Häkchen und Pip, der geduldig vor der Schranke wartet.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 „Paket beim Zoll“ heißt meistens: Dein Paket steckt in der ganz normalen Einfuhrkontrolle für Waren aus dem Ausland. Beschlagnahmt ist es deshalb nicht. Bleibt es dort hängen, wartet der Paketdienst oft darauf, dass du Einfuhrabgaben zahlst oder eine Rechnung nachreichst. Schau auf der Website oder in der App des Paketdienstes nach, nie über einen Link aus einer SMS.
@@ -67,7 +67,7 @@ Lass es nicht zu lange liegen:
 | Österreich | Bis zu dem Datum in der Benachrichtigung über das Zollhindernis. Danach geht das Paket zurück, wird vernichtet oder der Zollbehörde übergeben |
 | Schweiz | Antwortest du auf eine Wertabklärung nicht innerhalb von 3 Werktagen, kostet sie CHF 20.–. Online zahlen kannst du 20 Tage lang, danach kommt eine Mahnung mit QR-Rechnung |
 
-Keine Lust, ständig neu zu laden? Füge die Sendungsnummer in [Peek](/) ein: Dort wird sie rund um die Uhr bis zu alle 10 Minuten geprüft, und du bekommst eine Mitteilung, sobald sich der Status ändert. Die Abgaben zahlen oder den Zoll beschleunigen kann Peek allerdings nicht. Tut sich lange nichts und kommt keine Aufforderung, lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
+Keine Lust, ständig neu zu laden? Füge die Sendungsnummer in [Peek](/) ein: Dort wird sie bis zu alle 10 Minuten geprüft, und du bekommst eine Mitteilung, sobald sich der Status ändert. Die Abgaben zahlen oder den Zoll beschleunigen kann Peek allerdings nicht. Tut sich lange nichts und kommt keine Aufforderung, lies, [warum sich die Sendungsverfolgung nicht aktualisiert](guide:tracking-not-updating).
 
 ### Wie lange dauert es nach der Verzollung?
 
@@ -78,7 +78,7 @@ Zeigt DHL `Der Zollabfertigungsprozess für den Import ins Zielland/Zielgebiet w
 Meist, weil Steuer oder Zoll auf Waren aus dem Ausland nicht schon an der Kasse bezahlt wurden. Dann legt der Paketdienst sie beim Zoll aus und holt sie sich von dir zurück, oft mit einer eigenen Gebühr obendrauf. Der deutsche Zoll schreibt dazu: „Bei der Auslieferung des Pakets stellt der Paketdienstleister Ihnen die verauslagten Einfuhrabgaben in Rechnung.“ Die Rechnung hat bis zu drei Teile:
 
 1. **Einfuhrumsatzsteuer** (in der Schweiz MWST): 19 % oder 7 % in Deutschland, in der Regel 20 % in Österreich, 8,1 % oder 2,6 % in der Schweiz. Sie geht an den Staat.
-2. **Zoll** auf die Ware, ebenfalls für den Staat. In der EU sind das bei Online-Bestellungen bis 150 € pauschal 3 € pro Ware. In der Schweiz zählt das Bruttogewicht, oft sind es weniger als CHF 1.– pro Kilo.
+2. **Zoll** auf die Ware, ebenfalls für den Staat. In der EU sind das bei Online-Bestellungen bis 150 € pauschal 3 € pro Warenart. In der Schweiz zählt das Bruttogewicht, oft sind es weniger als CHF 1.– pro Kilo.
 3. **Die Gebühr des Paketdienstes** für die Verzollung: ein Entgelt, keine Steuer. Der deutsche Zoll nennt sie „Servicepauschale“. Das BAZG schreibt über diese Gebühren: „Vielfach werden sie ‚Verzollungskosten‘ genannt, das BAZG hat jedoch keinen Einfluss darauf.“
 
 Wo du zahlst, hängt von der Kasse ab:
@@ -94,7 +94,7 @@ Wo du zahlst, hängt von der Kasse ab:
 | Land | Nichts an der Tür, wenn | Sonst zahlst du |
 | --- | --- | --- |
 | Deutschland | der Shop die Steuer an der Kasse kassiert hat (IOSS) oder ein Geschenk von privat an privat bis 45 € kommt (Käufe über Auktionsplattformen und Tauschgeschäfte zählen nicht) | Einfuhrumsatzsteuer und Zoll. Die Deutsche Post verlangt 7,50 € Auslagepauschale, aber nur, wenn Abgaben fällig sind. Andere Paketdienste berechnen ihre eigene Servicepauschale |
-| Österreich | der Shop die österreichische Umsatzsteuer schon berechnet hat (IOSS): Die Post verlangt dann bis 150 € weder Einfuhrumsatzsteuer noch Importtarif | 20 % Einfuhrumsatzsteuer ab dem ersten Cent und Zoll, plus Importtarif der Post für Pakete bis 10 kg: 6 € bis 150 € Warenwert, 12 € bis 1.000 €, 36 € darüber (über 10 kg: 7,20 €, 14,40 €, 43,20 €). Auch für abgabenfreie Geschenke bis 45 € verlangt die Post 6 €. Muss sie dich wegen Unterlagen kontaktieren, kommen 28,80 € Bearbeitungs- und Lagerentgelt dazu (über 10 kg: 34,56 €). Bestätigen deine Unterlagen den ursprünglich angegebenen Wert, entfällt es |
+| Österreich | der Shop die österreichische Umsatzsteuer (IOSS), den Zoll und die EU-Bearbeitungsgebühr schon berechnet hat: Mit IOSS verlangt die Post bis 150 € weder Einfuhrumsatzsteuer noch Importtarif | 20 % Einfuhrumsatzsteuer ab dem ersten Cent, Zoll und die EU-Bearbeitungsgebühr, plus Importtarif der Post für Pakete bis 10 kg: 6 € bis 150 € Warenwert, 12 € bis 1.000 €, 36 € darüber (über 10 kg: 7,20 €, 14,40 €, 43,20 €). Auch für abgabenfreie Geschenke bis 45 € verlangt die Post 6 €. Muss sie dich wegen Unterlagen kontaktieren, kommen 28,80 € Bearbeitungs- und Lagerentgelt dazu (über 10 kg: 34,56 €). Bestätigen deine Unterlagen den ursprünglich angegebenen Wert, entfällt es |
 | Schweiz | Zoll und MWST je höchstens CHF 5.– betragen (Bemessungsgrundlage bei 8,1 %: CHF 62.–, bei 2,6 %: CHF 193.–) oder ein privates Geschenk bis CHF 100.– kommt (außer Alkohol und Tabak) | MWST und Zoll, plus Verzollungspreis der Post: Grundpreis CHF 13.– (aus der EU) oder CHF 16.– (übrige Länder) plus 3 % des Warenwerts, zusammen höchstens CHF 70.–, ohne MWST. Zahlst du online, sind es CHF 1.50 weniger |
 
 ### Was „3 Euro pro Ware“ heißt
@@ -111,7 +111,7 @@ Seit 1. November 2026 erhebt die EU laut EU-Kommission bei Online-Bestellungen a
 
 Das hängt von deinem Land und von der Kasse ab:
 
-- **Deutschland:** Die 3 € Zoll bei Online-Bestellungen bis 150 € zahlst du laut DHL „in der Regel nicht bei der Zustellung“, sondern meist schon beim Kauf. Die 2 € Bearbeitungsgebühr pro Ware wird laut DHL „nicht bei der Zustellung bezahlt“, sondern ebenfalls meist beim Kauf. Mit IOSS ist auch die Einfuhrumsatzsteuer im Preis.
+- **Deutschland:** Die 3 € Zoll bei Online-Bestellungen bis 150 € zahlst du laut DHL „in der Regel nicht bei der Zustellung“, sondern meist schon beim Kauf. Die 2 € Bearbeitungsgebühr pro Warenart wird laut DHL „nicht bei der Zustellung bezahlt“, sondern ebenfalls meist beim Kauf. Mit IOSS ist auch die Einfuhrumsatzsteuer im Preis.
 - **Österreich:** Hat die Kasse die österreichische Umsatzsteuer berechnet (IOSS), fallen laut Post bis 150 € weder Einfuhrumsatzsteuer noch Importtarif an. Die 3 € Zoll gelten laut BMF aber auch für IOSS-Pakete.
 - **Schweiz:** Versandhändler (seit 2019) und Plattformen (seit 2025) mit mindestens CHF 100'000 Umsatz aus Kleinsendungen sind in der Schweiz selbst mehrwertsteuerpflichtig. Laut BAZG unterliegen dann auch ihre Lieferungen aus dem Ausland der Schweizer MWST, selbst kleine. Bei anderen Shops werden Abgaben bis CHF 5.– nicht erhoben.
 
@@ -160,13 +160,13 @@ Löst du ein Paket nicht aus, geht es in Deutschland nach den Fristen oben an de
 - [DHL: Was bedeutet mein Sendungsstatus?](https://www.dhl.de/de/privatkunden/hilfe-kundenservice/themen/international/sendungsverfolgung/was-bedeutet-mein-sendungsstatus.html) – Zollstatus, einige Werktage, zwei Werktage auf den Brief, Rücksendung
 - [DHL: Sicherheitshinweise](https://www.dhl.de/de/toolbar/footer/sicherheitshinweise.html) – keine Zahlung per SMS, phishing@dhl.com
 - [Verbraucherzentrale: Paketdienst-SMS, Vorsicht, Abzocke](https://www.verbraucherzentrale.de/wissen/digitale-welt/mobilfunk-und-festnetz/paketdienstsms-vorsicht-abzocke-58988) – Fake-Beträge, Bank, Karte sperren
-- [Österreichische Post: Import](https://www.post.at/p/c/import) – Importtarif, Zollhindernis
+- [Österreichische Post: Import](https://www.post.at/p/c/import) – Importtarif, Zollhindernis, EU-Bearbeitungsgebühr unter den Importkosten (gelesen am 20. November 2026)
 - [Österreichische Post: Zollhindernisse](https://www.post.at/p/c/zollhindernisse) – Frist, Unterlagen, Entgelt entfällt bei bestätigtem Wert, Rücksendung
 - [Österreichische Post: FAQ Privat](https://www.post.at/p/c/faq-privat) – einige Tage, IOSS, Geschenke, Beschwerde
 - [Österreichische Post: Gefahren im Internet](https://www.post.at/i/c/gefahren-im-internet-tipps) – post.at, Kundenservice, Watchlist Internet
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – Zollscans der Österreichischen Post und ihre Bedeutung
-- [BMF: 3-Euro-Zoll](https://www.bmf.gv.at/themen/zoll/internethandel-%28fernverkauf%29/3-euro-zoll.html) – Beispiel, IOSS, keine Erstattung bei Rücksendung
-- [BMF: FAQs E-Commerce](https://www.bmf.gv.at/themen/zoll/internethandel-%28fernverkauf%29/FAQs-E-Commerce.html) – 20 % ab dem ersten Cent, 0 bis 17 %
+- [BMF: 3-Euro-Zoll](https://www.bmf.gv.at/themen/zoll/internethandel-fernverkauf/3-euro-zoll.html) – Beispiel, IOSS, keine Erstattung bei Rücksendung
+- [BMF: FAQs E-Commerce](https://www.bmf.gv.at/themen/zoll/internethandel-fernverkauf/FAQs-E-Commerce.html) – 20 % ab dem ersten Cent, 0 bis 17 %
 - [BMF: Aktuelle Warnungen vor Betrug](https://www.bmf.gv.at/public/informationen/aktuelle-warnungen-betrug.html) – falsches Zollamt, Bescheide per Post oder Databox, keine Kartendaten
 - [Schweizerische Post: Importverzollung](https://www.post.ch/de/empfangen/importverzollung) – Verzollungspreis, Geschenke, CHF 20.–
 - [Schweizerische Post: FAQ Import, Zoll und MWST](https://www.post.ch/de/geschaeftsloesungen/export-import-und-verzollung/import/faq-import-zoll-und-mwst) – drei bis vier Arbeitstage, 20 Tage, Fristen für Einsprachen

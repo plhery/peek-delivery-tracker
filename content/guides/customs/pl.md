@@ -4,7 +4,7 @@ description: Co znaczy „paczka zatrzymana przez urząd celny”, ile trwa odpr
 slug: paczka-zatrzymana-przez-urzad-celny
 picture: Budka celna z pasiastym szlabanem, dokument z okrągłą pieczątką i ptaszkiem, a przed szlabanem cierpliwie czeka Pip.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 „Paczka zatrzymana przez urząd celny” zwykle oznacza, że Twoja przesyłka spoza Unii Europejskiej przechodzi rutynową odprawę celną, a nie że ktoś ją skonfiskował. Jeśli utknęła na dłużej, [Poczta Polska](carrier:poczta-polska) albo kurier może czekać na Twoją zapłatę, pełnomocnictwo lub dokumenty. Sprawdź to na stronie albo w aplikacji przewoźnika, nigdy przez link z SMS-a.
@@ -91,9 +91,9 @@ To, gdzie płacisz, zależy od tego, co sklep pobrał przy zamówieniu:
 | Przesyłka pocztowa | Co płacisz przy odbiorze |
 | --- | --- |
 | Prezent od osoby prywatnej do 45 euro, bez alkoholu, perfum czy tytoniu ponad dozwolone ilości | Bez cła i VAT, tylko opłatę Poczty Polskiej za zgłoszenie |
-| Zakup do 150 euro z VAT pobranym w sklepie (IOSS) | Opłatę Poczty Polskiej, a do tego 3 euro cła za rodzaj produktu, jeśli sklep nie doliczył go do ceny |
-| Zakup do 150 euro bez IOSS | VAT, 3 euro cła za rodzaj produktu i opłatę Poczty Polskiej |
-| Zakup od 150 do 1000 euro | Cło według stawek taryfy, VAT i opłatę Poczty Polskiej. Najpierw udzielasz Poczcie pełnomocnictwa |
+| Zakup do 150 euro z VAT pobranym w sklepie (IOSS) | Opłatę Poczty Polskiej, a do tego 3 euro cła i 2 euro opłaty manipulacyjnej za rodzaj produktu, jeśli sklep nie doliczył ich do ceny |
+| Zakup do 150 euro bez IOSS | VAT, 3 euro cła i 2 euro opłaty manipulacyjnej za rodzaj produktu oraz opłatę Poczty Polskiej |
+| Zakup od 150 do 1000 euro | Cło według stawek taryfy, 2 euro opłaty manipulacyjnej za rodzaj produktu, VAT i opłatę Poczty Polskiej. Najpierw udzielasz Poczcie pełnomocnictwa |
 | Ponad 1000 euro, towary akcyzowe lub objęte ograniczeniami | Należności z Twojego zgłoszenia (robisz je samodzielnie albo przez agencję celną), a Poczta Polska dolicza przy doręczeniu 25,00 zł za obsługę takiej przesyłki |
 
 Opłaty z cennika Poczty Polskiej płacisz gotówką albo kartą, ale w placówce agenta pocztowego kartą nie zapłacisz.
@@ -161,7 +161,7 @@ Gdy odmówisz przyjęcia paczki albo zapłaty, Poczta Polska odsyła ją do nada
 - [Your Europe: Przepisy i stawki VAT](https://europa.eu/youreurope/business/finance-and-tax/vat/vat-rules-rates/index_pl.htm) – 23%, 8% i 5%
 - [Komisja Europejska: EU customs reform](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – 2 euro od 1 listopada 2026
 - [Komisja Europejska: Customs Guidance on EUR 3 customs duty](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – 3 euro także przy IOSS, 2 euro za pozycję przy każdej wartości
-- [Poczta Polska: Nowe przepisy Unii Europejskiej. Tak działa nowa opłata za przesyłki spoza UE](https://media.poczta-polska.pl/releases/nowe-przepisy-unii-europejskiej-tak-dziala-nowa-oplata-za-przesylki-spoza-ue) – 2 listopada 2026: opłatę manipulacyjną ponosi adresat, pobierana przed doręczeniem lub przy odbiorze, wpłacana do KAS
+- [Poczta Polska: Nowe przepisy Unii Europejskiej. Tak działa nowa opłata za przesyłki spoza UE](https://media.poczta-polska.pl/releases/nowe-przepisy-unii-europejskiej-tak-dziala-nowa-oplata-za-przesylki-spoza-ue) – 2 listopada 2026: opłatę manipulacyjną ponosi adresat, pobierana przed doręczeniem lub przy odbiorze, wpłacana do KAS (przeczytane 20 listopada 2026 r.)
 - [Poczta Polska: Uwaga na fałszywe wiadomości „Pocztex”](https://www.poczta-polska.pl/news/uwaga-na-falszywe-wiadomosci-pocztex-grozna-kampania-phishingowa/) – brak linków do płatności, oficjalne adresy śledzenia
 - [Poczta Polska: Uwaga! Oszuści podszywają się pod Pocztę Polską](https://www.poczta-polska.pl/news/uwaga-oszusci-podszywaja-sie-pod-poczte-polska-2/) – skrócone linki, 8080
 - [Poczta Polska: Poczta Polska ostrzega przed nowymi próbami oszustw i kampaniami phishingowymi](https://media.poczta-polska.pl/releases/poczta-polska-ostrzega-przed-nowymi-probami-oszustw-i-kampaniami-phishingowymi) – żądania dopłaty w innej walucie

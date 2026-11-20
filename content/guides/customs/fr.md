@@ -4,7 +4,7 @@ description: Colis retenu en douane : ce que ça veut dire, combien de temps ça
 slug: colis-bloque-en-douane
 picture: Un poste de douane avec une barrière rayée, un document tamponné et coché, et Pip qui attend sagement devant la barrière.
 published: 2026-10-09
-updated: 2026-11-04
+updated: 2026-11-20
 ---
 
 « Bloqué en douane » veut le plus souvent dire que ton colis passe les formalités habituelles d'importation, pas qu'il a été saisi. S'il reste bloqué, le transporteur attend peut-être que tu paies des frais ou que tu envoies une facture. Vérifie sur son site ou son app, en tapant toi-même l'adresse, jamais en suivant un lien reçu par SMS.
@@ -68,7 +68,7 @@ Tu en as assez d'actualiser la page ? Colle le numéro dans [Peek](/) : il véri
 Le plus souvent parce que les taxes sur une marchandise venue de l'étranger n'ont pas été payées à la commande : le transporteur les avance à la douane, puis te les facture avec ses propres frais. La note peut comporter jusqu'à trois éléments :
 
 1. **La TVA à l'importation**, pour l'État : au taux normal, 20 % en France et 21 % en Belgique ; en Suisse, 8,1 %, ou 2,6 % pour certains produits comme les livres ou les médicaments.
-2. **Les droits de douane**, perçus eux aussi par la douane : dans l'UE, 3 € par article sur les achats en ligne jusqu'à 150 € ; en Suisse, ils dépendent du type de marchandise et de son poids brut.
+2. **Les droits de douane**, perçus eux aussi par la douane : dans l'UE, 3 € par type de produit sur les achats en ligne jusqu'à 150 € ; en Suisse, ils dépendent du type de marchandise et de son poids brut.
 3. **Les frais du transporteur** pour le dédouanement : un service, pas une taxe. La douane française rappelle que ces honoraires sont « abusivement appelés » frais de douane : le transporteur en fixe librement le montant, et rien ne va à l'administration.
 
 Tout dépend de ce que la boutique encaisse à la commande :
@@ -83,8 +83,8 @@ Tout dépend de ce que la boutique encaisse à la commande :
 
 | Pays | Rien à payer à la livraison si | Sinon, tu paies |
 | --- | --- | --- |
-| France | La boutique a tout encaissé à la commande, ou c'est un cadeau entre particuliers de 45 € maximum ; le transporteur peut quand même facturer ses frais | La TVA, 3 € par article (les droits normaux au-delà de 150 €) et les frais de dossier du transporteur |
-| Belgique | La boutique a tout encaissé à la commande, ou c'est un cadeau de 45 € maximum | La TVA, 3 € par catégorie de produit et les frais de bpost : 21,50 € jusqu'à 150 € (0 € si la TVA a été payée à la boutique), 40 € au-delà |
+| France | La boutique a tout encaissé à la commande, ou c'est un cadeau entre particuliers de 45 € maximum ; le transporteur peut quand même facturer ses frais | La TVA, 3 € par type de produit (les droits normaux au-delà de 150 €), 2 € de frais de traitement par type de produit et les frais de dossier du transporteur |
+| Belgique | La boutique a tout encaissé à la commande, ou c'est un cadeau de 45 € maximum | La TVA, 3 € et 2 € par catégorie de produit et les frais de bpost : 21,50 € jusqu'à 150 € (0 € si la TVA a été payée à la boutique), 40 € au-delà |
 | Suisse | Taxes jusqu'à CHF 5.– compris non perçues (TVA à 8,1 % : base de CHF 62.–, port compris ; 2,6 % : CHF 193.–), ou c'est un cadeau d'un particulier jusqu'à CHF 100.–, sans alcool ni tabac | La TVA et les droits, plus La Poste suisse : CHF 13.– depuis l'UE, CHF 16.– d'ailleurs, plus 3 % de la valeur, plafonné à CHF 70.– pour ces frais seuls, hors TVA (CHF 1.50 de moins en ligne) |
 
 ### Que veut dire « 3 € par article » ?
@@ -153,7 +153,7 @@ Remboursements et contestations :
 - [La Poste : Comment payer les frais de douane pour un colis de l'international](https://www.laposte.fr/conseils-pratiques/comment-payer-frais-de-douane-colis-international) – frais de traitement de 2 €, payés à la commande ou à l'arrivée, en ligne, au facteur ou au bureau de poste
 - [Cybermalveillance.gouv.fr : L'hameçonnage à la livraison de colis](https://www.cybermalveillance.gouv.fr/tous-nos-contenus/actualites/escroqueries-livraison-colis) – opposition, preuves, Signal Spam, 33700, phishing@laposte.fr
 - [bpost : Mon colis à la douane](https://www.bpost.be/fr/recevoir-colis/douane) – frais, cadeaux, 14 jours
-- [bpost : Les 3 € et 2 € par type de produit](https://www.bpost.be/fr/faq/quoi-correspondent-les-3-eu-et-2-eu-pour-chaque-type-de-produit-different-pour-les-colis-hors-ue) – exemples, non remboursables
+- [bpost : Les 3 € et 2 € par type de produit](https://www.bpost.be/fr/faq/quoi-correspondent-les-3-eu-et-2-eu-pour-chaque-type-de-produit-different-pour-les-colis-hors-ue) – exemples, 2 € par type de produit depuis le 1er novembre 2026, non remboursables (lu le 20 novembre 2026)
 - [bpost : Issue d'un contrôle douanier](https://www.bpost.be/fr/faq/quelle-peut-etre-lissue-dun-controle-douanier) – délais, saisie
 - [bpost : Phishing](https://www.bpost.be/fr/phishing) – vrais messages, Card Stop
 - [La Poste suisse : Dédouanement à l'importation](https://www.post.ch/fr/reception/dedouanement-a-l-importation) – prix du dédouanement, cadeaux

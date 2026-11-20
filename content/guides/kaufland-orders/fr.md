@@ -4,7 +4,7 @@ description: Qui expédie les commandes passées sur kaufland.fr, où trouver le
 slug: suivi-commande-kaufland
 picture: Un panier de courses rempli de colis à côté d'une camionnette de livraison, et Pip debout sur les colis.
 published: 2026-10-27
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 kaufland.fr est la place de marché de Kaufland en France : des vendeurs locaux et internationaux y vendent leurs produits. Chaque vendeur expédie son colis lui-même, avec le transporteur qu'il choisit. Quand il indique le transporteur et un lien de suivi, Kaufland te les envoie par e-mail. En cas de problème, tu écris au vendeur dans un ticket lié à la commande, et s'il ne t'aide pas, le service client de Kaufland peut prendre le relais. Kaufland ne cite aucune place de marché en Belgique, en Suisse ou au Luxembourg.
@@ -121,12 +121,12 @@ Les articles exclus du droit de rétractation par la loi, comme les articles d'h
 Oui : colle le numéro de suivi de l'e-mail d'expédition de Kaufland dans [Peek](/). Peek reconnaît ces numéros à leur seule forme :
 
 - Colissimo : la plupart des numéros d'un chiffre, une lettre et 11 chiffres, comme `6A00000000000`, et des numéros internationaux qui finissent par `FR`, comme `RR000000005FR`.
-- Chronopost : `XR`, `XT`, `XU`, `XW`, `XY` ou `PZ`, 9 chiffres et 2 lettres, comme `XR000000005FR`.
+- Chronopost : `XR`, `XT`, `XU`, `XW`, `XY` ou `PZ`, 9 chiffres et `FR`, comme `XR000000005FR`.
 - DPD France : `250` et 12 chiffres, comme `250000000000000`.
 - DHL : la plupart des numéros de 20 chiffres commençant par `00340434`, comme `00340434100000000007`, et des numéros internationaux qui finissent par `DE`, comme `RR000000005DE`.
 - UPS : `1Z` et 16 lettres ou chiffres.
 
-Les numéros GLS de 11 ou 12 chiffres, les numéros DPD de 14 chiffres et les numéros Mondial Relay de 8, 10 ou 12 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, Peek les affiche chacun avec « Connaît ce numéro » ; s'il affiche le mauvais, appuie sur « Changer ». Dans les deux cas, choisis le transporteur que nomme l'e-mail d'expédition de Kaufland, si le vendeur l'a indiqué. Pour Colis Privé ou Schenker, colle le numéro, et si Peek affiche un autre transporteur, appuie sur « Changer » et choisis-le ; Schenker figure sous DSV dans Peek. Pour un autre transporteur de fret, un vendeur à l'étranger ou un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
+Les numéros GLS de 11 ou 12 chiffres et les numéros DPD de 14 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, Peek les affiche chacun avec « Connaît ce numéro » ; s'il affiche le mauvais, appuie sur « Changer ». Dans les deux cas, choisis le transporteur que nomme l'e-mail d'expédition de Kaufland, si le vendeur l'a indiqué. Pour Mondial Relay, Colis Privé ou Schenker, colle le numéro, et si Peek affiche un autre transporteur, appuie sur « Changer » et choisis-le ; Schenker figure sous DSV dans Peek. Peek ne demande pas à Mondial Relay s'il connaît un numéro de 8, 10 ou 12 chiffres, mais pour un numéro à 8 chiffres que personne ne connaît, il te propose lui-même Mondial Relay, avec un champ pour le code postal de livraison. Pour un autre transporteur de fret, un vendeur à l'étranger ou un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les tickets, annulations, remboursements et retours restent l'affaire de Kaufland et du vendeur.
 

@@ -97,7 +97,9 @@ helps, and `proxy_refused` for any other.
      carrier's failed, partial or label-only answer. `TRACKING_UNIVERSAL_PROVIDERS` names the
      ones checks and the Add preflight may ask, separated by commas (`ParcelsApp,Ship24`);
      `none` stops them all, and unset allows every one
-     ([providerPolicy.ts](../src/server/providerPolicy.ts)). A parcel only a stopped provider
+     ([providerPolicy.ts](../src/server/providerPolicy.ts)). A name of no provider allows none:
+     a misspelt one turns that provider off, and every one when it names no other. The server
+     logs such names at start (`provider_setting_unknown`) and reports them to Sentry. A parcel only a stopped provider
      answered waits for a carrier's adapter. What is sent to each provider, and why, is in
      [OBSERVABILITY.md](OBSERVABILITY.md).
    - A carrier with results in [coverage.json](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/coverage.json)

@@ -13,6 +13,7 @@ import { nativeAttestSettings } from './src/server/nativeVerification';
 import { appleSignInConfiguration } from './src/server/appleSignIn';
 import { inboundEmailSettings } from './src/server/inboundEmail/settings';
 import { assistantSettings } from './src/server/assistants/settings';
+import { reportProviderSetting } from './src/server/providerPolicy';
 
 // A malformed host setting must stop the deployment, not send visitors elsewhere.
 siteHosts();
@@ -23,6 +24,8 @@ assistantSettings();
 turnstileSettings();
 nativeAttestSettings();
 appleSignInConfiguration();
+// A provider name the setting misspells turns that provider off, and every one when it names no other: said at start.
+reportProviderSetting();
 // Invalid server-side credentials are a deployment failure. Let initialization
 // fail so an orchestrator cannot mark a process healthy while tracking and
 // notification work is silently disabled.

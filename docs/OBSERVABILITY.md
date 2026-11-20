@@ -787,6 +787,10 @@ Key JSON events:
   answered, or its lookups answer and no check went unanswered for 2 hours (info), with its
   `kind`, `subject`, `title`, `failures` and `attempts` (for a direct step's, the unanswered
   checks among all its checks of the day);
+- `provider_setting_unknown` (error): at start, the names `TRACKING_UNIVERSAL_PROVIDERS` holds that spell
+  no provider (`unknown`), which turn the providers they meant off, and how many providers the setting
+  still allows (`providers_allowed`; 0 when it names no other). Nothing else of the setting is logged.
+  Sentry gets it too, once per start (`component:provider-setting`, one issue);
 - `dpd_app_session`: the scraper took up a saved session at start (`outcome` `taken_up`,
   with `age_ms`, how long ago it opened), or an opening ended, `opened` or `failed`
   (warning, with `error_kind`). `trigger` says what began it: `start`, `retry` a quarter of

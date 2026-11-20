@@ -769,6 +769,28 @@ export function captureSharedAllowance(sign: SharedAllowanceSign, details: Recor
   return id;
 }
 
+/**
+ * `TRACKING_UNIVERSAL_PROVIDERS` names providers that do not exist, as a misspelt name: the providers it meant are off,
+ * and every one when it names no other (`allowed`, how many it still allows). One issue, which names the unknown names
+ * and nothing else of the setting.
+ */
+export function captureProviderSetting(unknown: string[], allowed: number): string | null {
+  if (!initObservability()) return null;
+  const names = unknown.slice(0, 10).map((name) => name.slice(0, 60));
+  let id: string | null = null;
+  Sentry.withScope(scope => {
+    scope.setTag('component', 'provider-setting');
+    scope.setContext('provider_setting', { unknown: names, providers_allowed: allowed,
+      impact: allowed ? 'Checks and the Add preflight ask only the providers the setting spells right.'
+        : 'Checks and the Add preflight ask no universal provider: a parcel only a provider tracks gets no answer.',
+      next_steps: 'Correct the names in TRACKING_UNIVERSAL_PROVIDERS (docs/ROUTING.md), or set it to none to stop every provider, and restart.' });
+    scope.setFingerprint(['delivery-tracker', 'provider-setting', 'unknown']);
+    scope.setLevel('error');
+    id = Sentry.captureMessage(`TRACKING_UNIVERSAL_PROVIDERS names no provider: ${names.join(', ')}`);
+  });
+  return id;
+}
+
 function boundedLogValue(value: unknown): string | number | boolean | null | undefined {
   if (value === null || typeof value === 'boolean') return value;
   if (typeof value === 'number') return Number.isFinite(value) ? value : undefined;

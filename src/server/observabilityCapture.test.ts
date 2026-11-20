@@ -3,7 +3,7 @@ import type { AddressInfo } from 'node:net';
 import { afterEach, expect, it, vi } from 'vitest';
 import * as Sentry from '@sentry/node';
 import type { Event } from '@sentry/node';
-import { captureOperationalError, captureOverallAllowance, captureTrackingHealth, flushObservability, initObservability, raiseProviderBlock, reportRoutingEvent,
+import { captureOperationalError, captureOverallAllowance, captureProviderSetting, captureTrackingHealth, flushObservability, initObservability, raiseProviderBlock, reportRoutingEvent,
   withTrackingAttempt, type RoutingSignal,
 } from './observability';
 import { UniversalTrackingError } from 'universal-parcel-scraper/node';
@@ -297,6 +297,25 @@ it('retains original exceptions, provider causes, and SDK diagnostic context', a
     forecast: 100, used_up_at: '2026-11-05T10:30:00.000Z',
     impact: "At the hour's pace so far it is used up around 10:30 UTC, and every account is refused from then until the next hour (UTC).",
   });
+});
+
+it('reports a provider setting that names no provider by its unknown names alone, as one issue', async () => {
+  vi.stubEnv('SENTRY_DSN', 'https://public@example.test/1');
+  const none = captureProviderSetting(['Parcels App Pro'], 0);
+  const some = captureProviderSetting(['ParcelApp', 'Shipp24'], 2);
+  await flushObservability();
+  const off = captured.events.find((event) => event.event_id === none)!;
+  expect(off.message).toBe('TRACKING_UNIVERSAL_PROVIDERS names no provider: Parcels App Pro');
+  expect(off.level).toBe('error');
+  expect(off.fingerprint).toEqual(['delivery-tracker', 'provider-setting', 'unknown']);
+  expect(off.tags?.component).toBe('provider-setting');
+  expect(off.contexts?.provider_setting).toMatchObject({ unknown: ['Parcels App Pro'], providers_allowed: 0,
+    impact: expect.stringContaining('ask no universal provider') });
+  const fewer = captured.events.find((event) => event.event_id === some)!;
+  expect(fewer.fingerprint).toEqual(off.fingerprint);
+  expect(fewer.message).toBe('TRACKING_UNIVERSAL_PROVIDERS names no provider: ParcelApp, Shipp24');
+  expect(fewer.contexts?.provider_setting).toMatchObject({ unknown: ['ParcelApp', 'Shipp24'], providers_allowed: 2,
+    impact: expect.stringContaining('only the providers the setting spells right') });
 });
 
 it('names a parcel by its number and keeps whole addresses in reports and breadcrumbs, without access values', async () => {

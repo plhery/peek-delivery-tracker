@@ -1069,15 +1069,16 @@ class CarrierCatalog private constructor(
             "https://www.amazon.${amazonMarketplace(number, country)}/gp/your-account/order-history"
 
         /**
-         * Peek's guide to where an Amazon order's carrier and tracking number are, in the language the guides are read
-         * in (`catalogLanguage`). The site leads the guide's id to its address in that language; English has no prefix.
+         * Peek's guide [id] on the site at [apiBaseUrl], in the language the guides are read in (`catalogLanguage`). The
+         * site leads the guide's id to its address in that language; English has no prefix.
          */
-        fun amazonGuideUrl(apiBaseUrl: String, language: AppLanguage): String {
+        fun guideUrl(id: String, apiBaseUrl: String, language: AppLanguage): String {
             val guideLanguage = language.catalogLanguage
-            return apiBaseUrl.appendingPath(
-                if (guideLanguage == AppLanguage.En) "guides/amazon-orders" else "${guideLanguage.rawValue}/guides/amazon-orders",
-            )
+            return apiBaseUrl.appendingPath(if (guideLanguage == AppLanguage.En) "guides/$id" else "${guideLanguage.rawValue}/guides/$id")
         }
+
+        /** Peek's guide to where an Amazon order's carrier and tracking number are. */
+        fun amazonGuideUrl(apiBaseUrl: String, language: AppLanguage): String = guideUrl("amazon-orders", apiBaseUrl, language)
 
         fun amazonShippingUrl(number: String): String {
             val normalized = normalize(number)

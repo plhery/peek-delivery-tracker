@@ -290,6 +290,7 @@ class TalkBackScreensTest {
                 "Add parcels by email [heading]",
                 "BETA",
                 "Forward a shipping email to your Peek address and Peek adds the parcel. This feature is in beta: it can miss a parcel, and it may still change.",
+                "Read the whole guide [button]",
                 "YOUR ADDRESS [heading]",
                 "add+abcdefghijklmnop@in.example.com",
                 "Copy address [button]",

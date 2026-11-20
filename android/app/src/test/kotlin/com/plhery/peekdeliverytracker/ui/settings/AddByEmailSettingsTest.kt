@@ -4,6 +4,8 @@ import android.content.ClipboardManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.UriHandler
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -54,7 +56,7 @@ import org.robolectric.annotation.GraphicsMode
 
 /**
  * Settings' "Add parcels by email": its row only for an account the server offers an address (the server's flag), the
- * address turned on, renewed after asking and turned off, one change at a time with the back off meanwhile and why it
+ * intro's link to the whole guide, the address turned on, renewed after asking and turned off, one change at a time with the back off meanwhile and why it
  * failed, the address copied, the notification of each parcel an email adds switched, and the forwarding steps:
  * Gmail's while its confirmation waits, the filter's languages.
  */
@@ -69,12 +71,18 @@ class AddByEmailSettingsTest {
     private lateinit var deliveries: DeliveriesState
     private val localizer = Localizer(AppLanguage.En, variant = "android")
     private val reader = AuthenticationState.SignedIn(AuthUser(UUID(0, 7), email = "reader@example.com"))
+    private val opened = mutableListOf<String>()
+    private val links = object : UriHandler {
+        override fun openUri(uri: String) {
+            opened += uri
+        }
+    }
 
     private fun show(session: AuthenticationState = reader, prepare: FakeDeliveries.() -> Unit = {}) {
         source = FakeDeliveries(DemoCards.parcels(), session).apply(prepare)
         compose.waitsForMaps()
         compose.setContent {
-            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) {
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }, LocalUriHandler provides links) {
                 RootHost(state = session, dark = false, source = source)
             }
         }
@@ -163,6 +171,16 @@ class AddByEmailSettingsTest {
         show(AuthenticationState.Demo) { addByEmailClient.offer = offer() }
         assertFalse(exists(SETTINGS_ADD_BY_EMAIL))
         assertEquals(emptyList<String>(), source.addByEmailClient.requests)
+    }
+
+    /** Under the intro, the guide on the site in the language the guides are read in. */
+    @Test
+    fun theIntroLinksTheWholeGuide() {
+        show { addByEmailClient.offer = offer(inbox = null) }
+        tap(SETTINGS_ADD_BY_EMAIL)
+        assertTrue(shows(text("inbox.guide")))
+        tap(ADD_BY_EMAIL_GUIDE)
+        assertEquals(listOf("https://example.com/guides/add-parcels-by-email"), opened)
     }
 
     @Test

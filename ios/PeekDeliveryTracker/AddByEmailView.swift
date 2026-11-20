@@ -8,6 +8,8 @@ struct AddByEmailPage: View {
     @ObservedObject var model: AddByEmailModel
     /// The account's address, which tells the mail service the steps start on.
     let email: String?
+    /// The site the guide to adding parcels by email is read on.
+    let linkBase: URL
 
     @EnvironmentObject private var localizer: Localizer
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -25,6 +27,8 @@ struct AddByEmailPage: View {
                     Text(localizer.text("inbox.intro"))
                         .font(.subheadline).foregroundStyle(Brand.secondaryText)
                         .fixedSize(horizontal: false, vertical: true)
+                    OutLink(url: CarrierCatalog.guideURL("add-parcels-by-email", base: linkBase, language: localizer.language), key: "inbox.guide")
+                        .accessibilityIdentifier("addByEmail.guide")
                 }
                 if let failure = model.failure {
                     Text(localizer.errorMessage(failure, fallback: "inbox.failed"))
@@ -448,17 +452,7 @@ private struct ForwardingSteps: View {
 
     /// A step's link to the page of the mail service it speaks of.
     private func stepLink(_ url: URL, _ key: String) -> some View {
-        Link(destination: url) {
-            HStack(spacing: 5) {
-                Text(localizer.text(key))
-                Image(systemName: "arrow.up.right").font(.caption.weight(.semibold)).accessibilityHidden(true)
-            }
-            .font(.subheadline.weight(.semibold)).foregroundStyle(Brand.ink)
-            .underline(color: Brand.sheetLine(0.6))
-            .frame(minHeight: 44)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
+        OutLink(url: url, key: key)
     }
 
     /// What to check when the service doesn't show what the step speaks of.
@@ -494,6 +488,29 @@ private struct ForwardingSteps: View {
         Haptics.success()
         AccessibilityNotification.Announcement(localizer.text("inbox.copied")).post()
         copied = text
+    }
+}
+
+/// A link that leaves the app, to a mail service's page or to the whole guide: subheadline semibold underlined, with ↗,
+/// 44 tall.
+private struct OutLink: View {
+    let url: URL
+    let key: String
+
+    @EnvironmentObject private var localizer: Localizer
+
+    var body: some View {
+        Link(destination: url) {
+            HStack(spacing: 5) {
+                Text(localizer.text(key))
+                Image(systemName: "arrow.up.right").font(.caption.weight(.semibold)).accessibilityHidden(true)
+            }
+            .font(.subheadline.weight(.semibold)).foregroundStyle(Brand.ink)
+            .underline(color: Brand.sheetLine(0.6))
+            .frame(minHeight: 44)
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
     }
 }
 

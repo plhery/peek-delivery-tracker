@@ -73,6 +73,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
 import com.plhery.peekdeliverytracker.core.AuthenticationState
+import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.EmailFilter
 import com.plhery.peekdeliverytracker.core.MailService
 import com.plhery.peekdeliverytracker.core.StepPiece
@@ -118,7 +119,8 @@ import kotlin.math.max
 
 /**
  * The forwarding address's page, pushed in Settings for [account]: the "Beta" badge over the intro in
- * subheadline secondary, then "inbox.start" while the account has no address yet. Forwarding one email by hand is all
+ * subheadline secondary and its link to the whole guide, in the language the guides are read in, then "inbox.start"
+ * while the account has no address yet. Forwarding one email by hand is all
  * it asks then: the address to copy or share, and what the last emails did, with what a few of them call for; then
  * whether each parcel an email adds is notified, on unless switched off; having the mail service forward by itself,
  * with its steps ([ForwardingSteps]), stays folded away until wanted, or until Gmail's confirmation is waiting; last, a
@@ -163,6 +165,10 @@ internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollSta
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             SettingsBadge(localized("inbox.experimental"))
             Text(localized("inbox.intro"), color = colors.secondaryText, style = type.subheadline.sfLines())
+            StepLink(
+                CarrierCatalog.guideUrl("add-parcels-by-email", source.linkBaseUrl, LocalLanguage.current), "inbox.guide",
+                Modifier.testTag(ADD_BY_EMAIL_GUIDE),
+            )
         }
         if (failure != null) {
             Text(
@@ -674,14 +680,14 @@ private fun Missing(key: String) {
     StepWords(localized(key), PeekTheme.type.caption, PeekTheme.colors.secondaryText)
 }
 
-/** A step's link to the mail service's page it speaks of: subheadline semibold underlined, with ↗, 44 tall. */
+/** A step's link to the mail service's page it speaks of, or the intro's to the whole guide: subheadline semibold underlined, with ↗, 44 tall. */
 @Composable
-private fun StepLink(url: String, key: String) {
+private fun StepLink(url: String, key: String, modifier: Modifier = Modifier) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     val uriHandler = LocalUriHandler.current
     Row(
-        Modifier
+        modifier
             .heightIn(min = 44.dp)
             .button(interactionSource = null, indication = PlainPress, role = Role.Button) { runCatching { uriHandler.openUri(url) } }
             .semantics(mergeDescendants = true) {},
@@ -787,6 +793,7 @@ internal const val ADD_BY_EMAIL_RENEW_CANCEL = "$ADD_BY_EMAIL_RENEW.cancel"
 internal const val ADD_BY_EMAIL_RENEW_CONFIRM = "$ADD_BY_EMAIL_RENEW.confirm"
 internal const val ADD_BY_EMAIL_OFF = "$ADD_BY_EMAIL_TAG.off"
 internal const val ADD_BY_EMAIL_ERROR = "$ADD_BY_EMAIL_TAG.error"
+internal const val ADD_BY_EMAIL_GUIDE = "$ADD_BY_EMAIL_TAG.guide"
 internal const val ADD_BY_EMAIL_WORKING = "$ADD_BY_EMAIL_TAG.working"
 internal const val ADD_BY_EMAIL_FILTER = "$ADD_BY_EMAIL_TAG.filter"
 internal const val ADD_BY_EMAIL_FILTER_COPY = "$ADD_BY_EMAIL_FILTER.copy"

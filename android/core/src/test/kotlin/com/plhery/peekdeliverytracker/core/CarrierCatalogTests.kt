@@ -927,6 +927,8 @@ class CarrierCatalogTests {
         assertEquals("https://peektracker.com/fr/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.Fr))
         assertEquals("https://peektracker.com/pt/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.PtBr))
         assertEquals("https://peektracker.com/guides/amazon-orders", CarrierCatalog.amazonGuideUrl(base, AppLanguage.Ru))
+        assertEquals("https://peektracker.com/de/guides/add-parcels-by-email", CarrierCatalog.guideUrl("add-parcels-by-email", base, AppLanguage.De))
+        assertEquals("https://peektracker.com/guides/add-parcels-by-email", CarrierCatalog.guideUrl("add-parcels-by-email", "$base/", AppLanguage.En))
     }
 
     @Test

@@ -752,6 +752,10 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .fr).absoluteString, "https://peektracker.com/fr/guides/amazon-orders")
         XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .ptBR).absoluteString, "https://peektracker.com/pt/guides/amazon-orders")
         XCTAssertEqual(CarrierCatalog.amazonGuideURL(base: base, language: .ru).absoluteString, "https://peektracker.com/guides/amazon-orders")
+        XCTAssertEqual(CarrierCatalog.guideURL("add-parcels-by-email", base: base, language: .de).absoluteString,
+                       "https://peektracker.com/de/guides/add-parcels-by-email")
+        XCTAssertEqual(CarrierCatalog.guideURL("add-parcels-by-email", base: URL(string: "https://peektracker.com/")!, language: .en).absoluteString,
+                       "https://peektracker.com/guides/add-parcels-by-email")
     }
 
     func testDetectsInternationalAmazonAndKeepsConfirmedShippingDistinct() {

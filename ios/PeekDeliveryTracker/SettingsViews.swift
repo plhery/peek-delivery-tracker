@@ -514,7 +514,7 @@ struct AccountView: View {
                             if addByEmail.offer != nil {
                                 if hasNotifications { settingsDivider }
                                 NavigationLink {
-                                    AddByEmailPage(model: addByEmail, email: session.user?.email)
+                                    AddByEmailPage(model: addByEmail, email: session.user?.email, linkBase: session.configuration.apiBaseURL)
                                 } label: {
                                     SettingsRow(title: localizer.text("inbox.row"), symbol: "envelope",
                                                 badge: localizer.text("inbox.experimental"), chevron: true)
@@ -1207,7 +1207,7 @@ struct SettingsWindow: View {
             // Only once the server offers the account a forwarding address.
             if addByEmail.offer != nil {
                 Tab(localizer.text("inbox.row"), systemImage: "envelope") {
-                    AddByEmailPage(model: addByEmail, email: session.user?.email).frame(height: 540)
+                    AddByEmailPage(model: addByEmail, email: session.user?.email, linkBase: session.configuration.apiBaseURL).frame(height: 540)
                 }
             }
             // Only once the server says assistants may connect to the account.

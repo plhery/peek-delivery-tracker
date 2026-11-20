@@ -195,7 +195,8 @@ function sameSecond(copy: Scan, scan: Scan): boolean {
  * The relay pairs of a handed-over parcel, each copy with the id of the scan it repeats. The earlier carrier's scans
  * repeat a scan of another source at the same stage within a minute, or in any stage at the same second, the closest
  * pairs first (`relayGap`: a row on a minute's first second is as close as can be to a scan within that minute) and, of
- * pairs as close, the nearer to the second, then those telling the same words, then the same stage. Then, in any stage, a row on
+ * pairs as close, the nearer to the second, then the new carrier's scan before a third carrier's (that row then goes under
+ * the new carrier's scan of its second), then those telling the same words, then the same stage. Then, in any stage, a row on
  * a minute's first second repeats one with seconds within that minute (`sameMinuteScan`, which the sync's
  * `relayedScans` shares). Then a row of the new carrier placed only in a country
  * the earlier carrier delivers in, and the new carrier does not, repeats the earlier carrier's latest scan of its
@@ -249,11 +250,13 @@ export function relayCopies(row: JsonObject): Map<string, string> {
         && !placesConflict(copy.words, scan.words))))
       .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
   const paired = new Set<string>();
-  // Of pairs as close, those telling the same words, then the same stage, so that each copy goes under its own scan.
+  // Of pairs as close, the new carrier's scan, then those telling the same words, then the same stage, so that each copy
+  // goes under its own scan: a third carrier's row of that scan pairs with it after (otherCarrierCopies).
   const unlike = ({ copy, scan }: (typeof candidates)[number]) => (copy.text === scan.text ? 0 : 2) + (copy.stage === scan.stage ? 0 : 1);
+  const other = ({ scan }: (typeof candidates)[number]) => scan.source === current ? 0 : 1;
   for (const list of [candidates, minutes, exchanged, twins]) {
     const apart = ({ copy, scan }: (typeof candidates)[number]) => Math.abs(scan.at - copy.at);
-    list.sort((a, b) => a.gap - b.gap || apart(a) - apart(b) || unlike(a) - unlike(b) || a.copy.at - b.copy.at
+    list.sort((a, b) => a.gap - b.gap || apart(a) - apart(b) || other(a) - other(b) || unlike(a) - unlike(b) || a.copy.at - b.copy.at
       || a.copy.id.localeCompare(b.copy.id) || a.scan.id.localeCompare(b.scan.id));
     for (const { copy, scan } of list) {
       if (paired.has(copy.id) || paired.has(scan.id)) continue;

@@ -1004,7 +1004,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   words, within a minute of them. Both rows are stored, since the same rule now and then
   pairs two scans of their own. A row of the earlier carrier at the same stage as another
   source's, within 60 s either way, or in any stage at the same second, is served with
-  `relay_of`, that row's id (closest pairs first, then those in the same words, then in the
+  `relay_of`, that row's id (closest pairs first, then the new carrier's row before a third
+  carrier's at the same distance, then those in the same words, then in the
   same stage, one pair per row; a row on a minute's first second is closest to a row with
   seconds within that minute, so La Poste's 12:05 pairs with DHL's 12:05:38, not its
   12:04:38): both carriers tell a

@@ -130,6 +130,13 @@ describe('relayCopies', () => {
       placed('departed-other', 'australia-post', 'exception', '2026-11-17T02:09:00Z', 'Example Town'),
       placed('departed-elsewhere', 'australia-post', 'in_transit', '2026-11-17T02:09:00Z', 'Other City'),
     ]))).toEqual(new Map([['accepted-copy', 'accepted'], ['accepted-post', 'accepted']]));
+    // The earlier carrier's copy pairs with the new carrier's scan before the third carrier's row of it at that second,
+    // whatever the order of their ids and when that row names only the country.
+    expect(relayCopies(parcel([
+      placed('z-accepted', 'ems', 'accepted', '2026-11-13T13:13:00Z', 'Example Town'),
+      placed('a-accepted-post', 'australia-post', 'accepted', '2026-11-13T13:13:00Z', 'United Kingdom'),
+      placed('accepted-copy', 'parcelforce', 'accepted', '2026-11-13T13:13:33Z', 'Example Town'),
+    ]))).toEqual(new Map([['accepted-copy', 'z-accepted'], ['a-accepted-post', 'z-accepted']]));
   });
 
   it('puts a scan two sources stored the same under one row first, and pairs that row', () => {

@@ -232,7 +232,8 @@ private fun AccountView(state: AccountHost, nav: SettingsNav, scrolls: SettingsS
     }
     LaunchedEffect(Unit) {
         source.refreshNotificationState()
-        source.loadNotificationPreferences()
+        // A guest's preset is the phone's own: there are no account preferences to read.
+        if (!source.isGuest) source.loadNotificationPreferences()
     }
     val leaving = work.leaving[SETTINGS_PAGE]
     LaunchedEffect(leaving) {
@@ -359,8 +360,8 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
 /**
  * AccountView's `page`: "settings.title" as a large title under the bar, which goes under it as the page scrolls and
  * comes back as the bar's inline title, Close at the bar's leading end, off while the data page waits; then the
- * profile (the account, or the way to one), the deliveries' updates for an account, Add parcels by email where the
- * server offers it the account ([inboxOffered]) and Assistants where assistants may
+ * profile (the account, or the way to one), the deliveries' updates (without an account, only on a phone with pushes),
+ * Add parcels by email where the server offers it the account ([inboxOffered]) and Assistants where assistants may
  * connect to it ([assistantsOffered]), each with its "Beta" badge, a group shown only with one of them, the
  * appearance, the language, the time format, the distance and weight units, the new-update dot and usage statistics,
  * and the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's ground. It loads the
@@ -390,6 +391,7 @@ private fun SettingsRootPage(
     val enabledOnDevice by source.notificationsEnabledOnDevice.collectAsState()
     val preferences by source.notificationPreferences.collectAsState()
     val deliveryEmail by source.deliveryEmail.collectAsState()
+    val devicePreset by source.deviceAlertPreset.collectAsState()
     val markNewUpdates by source.markNewUpdates.collectAsState()
     val usageStatistics by source.usageStatistics.collectAsState()
     val appearance = appearanceSetting()
@@ -406,6 +408,8 @@ private fun SettingsRootPage(
         // What the summary says is the pushes' preset, which a phone without them has none of.
         !source.pushAvailable -> null
         !enabledOnDevice -> localized("settings.off")
+        // Without an account, the one chosen for every parcel on this phone.
+        guest -> localized(NotificationPreset.withoutAccount(devicePreset).titleKey)
         else -> preferences?.let { localized(NotificationPreset.matching(it.enabledStages).titleKey) } ?: ""
     }
     Box(Modifier.fillMaxSize()) {
@@ -426,10 +430,11 @@ private fun SettingsRootPage(
                             state.closeAccount()
                         }
                     }
-                    // Alerts are kept up to date by pushes, which need an account; a phone without pushes keeps the row
-                    // for the delivery email alone, where the account has one. Android has no Live Activities, the
-                    // iPhone's row after them. The group shows only with a row in it.
-                    val updates = !guest && (source.pushAvailable || deliveryEmail != null)
+                    // Alerts are kept up to date by pushes, the F-Droid build's included; a phone without pushes keeps
+                    // the row for the account's delivery email alone, where it has one, and without an account has no
+                    // row. Android has no Live Activities, the iPhone's row after them. The group shows only with a row
+                    // in it.
+                    val updates = source.pushAvailable || (!guest && deliveryEmail != null)
                     if (updates || inboxOffered || assistantsOffered) {
                         SettingsGroup(localized("native.deliveries")) {
                             if (updates) {

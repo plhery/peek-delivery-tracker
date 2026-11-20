@@ -2462,6 +2462,130 @@ class DeviceParcelTests {
     }
 
     /**
+     * A preset chosen for every parcel on the Delivery updates page asks again for those already on, on the same token,
+     * and the service changes what they tell in place; each later round asks with it, a parcel turned back on and a
+     * relaunch included. Muted parcels and copies the service forgot are passed over.
+     */
+    @Test
+    fun aPresetChosenForEveryParcelSignsTheParcelsUpAgainWithIt() = runTest {
+        val news = UUID.randomUUID()
+        val waiting = UUID.randomUUID()
+        val muted = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key, "22222222222C" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", news),
+            parcel("22222222222B", "", waiting, pkg = pkg(waiting, stage = TrackingStage.Registered)),
+            parcel("22222222222C", "", muted).copy(muted = true),
+            parcel("22222222222D", "", UUID.randomUUID()).copy(frozen = "2026-11-01T08:00:00Z"),
+        )
+        val calls = Calls()
+        val device = device(client(calls), storage, this)
+        // Until a preset is chosen, each parcel is given its own.
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(
+            listOf("alert 22222222222A k important token1 en production fcm", "alert 22222222222B k all token1 en production fcm"),
+            calls.all,
+        )
+
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En, preset = ParcelAlertPreset.Delivery)
+        assertEquals(
+            listOf("alert 22222222222A k delivery token1 en production fcm", "alert 22222222222B k delivery token1 en production fcm"),
+            calls.all.drop(2),
+        )
+        assertFalse("The same phone: nothing is taken off", calls.all.any { it.startsWith("unalert") })
+        assertEquals(listOf(ParcelAlertPreset.Delivery, ParcelAlertPreset.Delivery, null, null), storage.parcels.map { it.alertPreset })
+        assertTrue(device.alertsSettled("token1", NativePushLocale.En, ParcelAlertPreset.Delivery))
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En, preset = ParcelAlertPreset.Delivery)
+        assertEquals("Asked with it already, nothing goes out again", 4, calls.all.size)
+
+        // A parcel turned back on is asked for with it.
+        device.setMuted(muted, false)
+        device.alertsAgain(ParcelAlertPreset.Delivery)
+        assertEquals("alert 22222222222C k delivery token1 en production fcm", calls.all.last())
+
+        // A relaunch's round on a new token asks with the preset chosen since.
+        val relaunched = device(client(calls), storage, this)
+        val launched = calls.all.size
+        relaunched.registerAlerts(token = "token2", locale = NativePushLocale.En, preset = ParcelAlertPreset.All)
+        assertEquals(
+            listOf("A", "B", "C").map { "alert 22222222222$it k all token2 en production fcm" },
+            calls.all.drop(launched).filter { it.startsWith("alert") },
+        )
+        assertFalse(calls.all.toString(), calls.all.any { it.startsWith("alert 22222222222D") })
+    }
+
+    /**
+     * Turned off for every parcel from the Delivery updates page: the service is told about each link signed up here,
+     * and one it can't be told about yet keeps its token for the next call. No retry, and no parcel turned back on, asks
+     * for notifications meanwhile; a round under way has what it signed up taken off. Asked again, every parcel on its
+     * way is signed up.
+     */
+    @Test
+    fun turnedOffForEveryParcelTheLinksHearNothingUntilAskedAgain() = runTest {
+        val muted = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key, "22222222222C" to key, "22222222222D" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", UUID.randomUUID()),
+            parcel("22222222222B", "", UUID.randomUUID()),
+            parcel("22222222222C", "", muted).copy(muted = true),
+            parcel("22222222222D", "", UUID.randomUUID()),
+        )
+        val calls = Calls()
+        var clock = Instant.parse("2026-11-20T08:00:00Z")
+        var failing: String? = "22222222222D"
+        var offline: String? = null
+        val base = client(
+            calls,
+            alert = { if (it == failing) throw IOException("offline") else DeviceAlertAnswer.On },
+            unalert = { if (it == offline) throw DeliveryApiError.ServiceFailed(503) },
+        )
+        val device = device(base, storage, this, now = { clock })
+        // A round cut short: the last parcel waits for a retry.
+        device.registerAlerts(token = "token1", locale = NativePushLocale.En)
+        assertEquals(listOf("token1", "token1", null, null), storage.parcels.map { it.alertToken })
+        val signedUp = calls.all.size
+
+        // The service can't be told: the first failure ends the call, and the tokens stay for the next one.
+        offline = "22222222222A"
+        device.alertsOff()
+        assertEquals(listOf("unalert 22222222222A token1 fcm"), calls.all.drop(signedUp))
+        assertEquals(listOf("token1", "token1", null, null), storage.parcels.map { it.alertToken })
+
+        // Nothing asks for notifications meanwhile: not the retry once its time has come, nor a parcel turned back on.
+        failing = null
+        clock = clock.plus(2, ChronoUnit.HOURS)
+        device.retryAlerts()
+        device.setMuted(muted, false)
+        device.alertsAgain()
+        assertFalse(calls.all.toString(), calls.all.drop(signedUp).any { it.startsWith("alert") })
+
+        offline = null
+        device.alertsOff()
+        assertEquals(listOf("unalert 22222222222A token1 fcm", "unalert 22222222222B token1 fcm"), calls.all.drop(signedUp + 1))
+        assertEquals(listOf<String?>(null, null, null, null), storage.parcels.map { it.alertToken })
+
+        // Turned off while a round asks the service: the link it signed up meanwhile is taken off.
+        val asking = CompletableDeferred<Unit>()
+        val held = device(
+            base.replacing(setAlert = { linkId, k, request -> if (linkId == "22222222222A") asking.await(); base.setAlert(linkId, k, request) }),
+            storage, this, now = { clock },
+        )
+        val round = async { held.registerAlerts(token = "token2", locale = NativePushLocale.En) }
+        runCurrent()
+        held.alertsOff()
+        asking.complete(Unit)
+        round.await()
+        assertEquals(listOf("alert 22222222222A k important token2 en production fcm", "unalert 22222222222A token2 fcm"), calls.all.takeLast(2))
+        assertEquals(listOf<String?>(null, null, null, null), storage.parcels.map { it.alertToken })
+
+        // Asked again, every parcel on its way is signed up, the one turned back on included.
+        held.registerAlerts(token = "token2", locale = NativePushLocale.En)
+        assertEquals(listOf("token2", "token2", "token2", "token2"), storage.parcels.map { it.alertToken })
+    }
+
+    /**
      * The build without Google's services names the phone by its installation token, reached through its inbox or
      * through UnifiedPush: a change of way asks again with the same token, whose alert the service changes in place, so
      * nothing is turned off; a new installation token takes the old one's place as a new FCM token does.
@@ -2854,6 +2978,166 @@ class DeviceParcelTests {
         push.status = NotificationAuthorizationStatus.Denied
         allowed.refreshNotificationState()
         assertFalse(allowed.shouldInviteNotifications)
+    }
+
+    /**
+     * Without an account, the preset saved on the Delivery updates page is kept on the phone: the parcel already on is
+     * asked again with it at once, the one muted on its page stays off, and a relaunch's rounds ask with it. The page
+     * shows Important until one is saved.
+     */
+    @Test
+    fun aGuestsPresetSavedInSettingsIsKeptOnThePhoneAndSignsTheParcelsUpAgain() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()), parcel("22222222222B", "", UUID.randomUUID()).copy(muted = true))
+        val calls = Calls()
+        val push = StubPushNotifications(status = NotificationAuthorizationStatus.Authorized, currentDeviceToken = "token1")
+        val defaults = MemoryDefaults()
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, defaults = defaults,
+            device = device(client(calls), storage, backgroundScope), notifications = push,
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+        assertNull("Until one is saved, each parcel keeps its own", store.deviceAlertPresetFlow.value)
+        assertEquals(NotificationPreset.Important, NotificationPreset.withoutAccount(store.deviceAlertPresetFlow.value))
+        store.registerDeviceAlerts("token1", AppLanguage.En)
+        assertEquals(listOf("alert 22222222222A k important token1 en production fcm"), calls.all)
+
+        store.saveDeviceAlertPreset(NotificationPreset.DeliveryDay.alertPreset)
+
+        assertEquals(ParcelAlertPreset.Delivery, store.deviceAlertPresetFlow.value)
+        assertEquals("delivery", defaults.string(forKey = NotificationDeviceKeys.ALERT_PRESET))
+        assertEquals(listOf("alert 22222222222A k delivery token1 en production fcm"), calls.all.drop(1))
+
+        // Kept on the phone: a relaunch shows it, and its rounds ask with it, on a new token too.
+        val relaunched = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, defaults = defaults,
+            device = device(client(calls), storage, backgroundScope), notifications = push,
+        )
+        assertEquals(NotificationPreset.DeliveryDay, NotificationPreset.withoutAccount(relaunched.deviceAlertPresetFlow.value))
+        assertTrue(relaunched.registerDeviceAlerts("token2", AppLanguage.En))
+        assertEquals(listOf("alert 22222222222A k delivery token2 en production fcm"), calls.all.filter { it.contains("token2") && it.startsWith("alert") })
+        assertFalse(calls.all.toString(), calls.all.any { it.startsWith("alert 22222222222B") })
+
+        // The page's presets are the service's, one for one.
+        assertEquals(listOf(ParcelAlertPreset.All, ParcelAlertPreset.Important, ParcelAlertPreset.Delivery), NotificationPreset.entries.map { it.alertPreset })
+        assertEquals(NotificationPreset.entries.toList(), NotificationPreset.entries.map { NotificationPreset.of(it.alertPreset) })
+    }
+
+    /**
+     * Without an account, the Delivery updates page's switch turned off takes every parcel's notifications off this
+     * phone, the next refresh telling the service about a link it couldn't be told about then, and the choice stays: no
+     * token, launch or invitation signs a parcel up until the switch is on again, which leaves a parcel muted on its page
+     * as it was.
+     */
+    @Test
+    fun aGuestsSwitchTurnedOffTakesTheParcelsOffAndNothingSignsThemUpUntilItIsOn() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()), parcel("22222222222B", "", UUID.randomUUID()).copy(muted = true))
+        val calls = Calls()
+        var offline = true
+        val device = device(client(calls, unalert = { if (offline) throw DeliveryApiError.ServiceFailed(503) }), storage, backgroundScope)
+        val push = StubPushNotifications(status = NotificationAuthorizationStatus.Authorized, granted = true, currentDeviceToken = "token1")
+        val defaults = MemoryDefaults()
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, defaults = defaults, device = device, notifications = push)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.refreshNotificationState()
+        assertTrue("Allowed and never turned off, a guest's notifications are on", store.notificationsEnabledOnDevice)
+        store.registerDeviceAlerts("token1", AppLanguage.En)
+        assertEquals(listOf("alert 22222222222A k important token1 en production fcm"), calls.all)
+
+        // The service can't be told yet: the switch is off all the same, and the next refresh tells it.
+        store.disableNotifications()
+        assertEquals("unalert 22222222222A token1 fcm", calls.all.last())
+        assertFalse(store.notificationsEnabledOnDevice)
+        assertTrue(defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT))
+        assertTrue("The phone lets its token go", push.calls.containsAll(listOf("unregister", "clear")))
+        assertEquals("token1", storage.parcels.first().alertToken)
+        offline = false
+        store.load()
+        assertEquals(List(2) { "unalert 22222222222A token1 fcm" }, calls.all.filter { it.startsWith("unalert") })
+        assertNull(storage.parcels.first().alertToken)
+
+        // Nothing signs a parcel up while it is off: a new token, a parcel's question, a launch, the invitation.
+        push.calls.clear()
+        push.currentDeviceToken = "token2"
+        assertTrue(store.registerDeviceAlerts("token2", AppLanguage.En))
+        store.askForDeviceAlerts(AppLanguage.En)
+        push.status = NotificationAuthorizationStatus.NotDetermined
+        val relaunched = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, defaults = defaults, device = device, notifications = push)
+        relaunched.setDeliveryLiveActivitiesEnabled(false)
+        relaunched.refreshNotificationState()
+        assertFalse(relaunched.shouldInviteNotifications)
+        push.status = NotificationAuthorizationStatus.Authorized
+        relaunched.refreshNotificationState()
+        assertFalse(relaunched.notificationsEnabledOnDevice)
+        assertFalse("Nothing registers the phone", push.calls.contains("register"))
+        assertFalse(calls.all.toString(), calls.all.any { it.contains("token2") })
+
+        // On again, the parcel on its way is signed up; the one muted on its page stays off.
+        assertFalse("No account, no welcome notification", relaunched.enableNotifications(AppLanguage.En))
+        assertTrue(relaunched.notificationsEnabledOnDevice)
+        assertFalse(defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT))
+        assertEquals(listOf("alert 22222222222A k important token2 en production fcm"), calls.all.filter { it.contains("token2") })
+        assertEquals(listOf(null, true), storage.parcels.map { it.muted })
+    }
+
+    /**
+     * Refused for good, a guest's notifications are allowed in Android's settings: back in the app, the refresh of what
+     * the phone allows registers it, and the token it hands over signs the parcels up with nothing to tap. Not once the
+     * switch on the Delivery updates page was turned off.
+     */
+    @Test
+    fun notificationsAllowedInAndroidsSettingsSignTheParcelsUpOnTheWayBackUnlessTurnedOff() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()))
+        val calls = Calls()
+        val push = StubPushNotifications(status = NotificationAuthorizationStatus.Denied, answeredBefore = true)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, device = device(client(calls), storage, backgroundScope), notifications = push,
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+        // The app hands over each token it is given, as AppContainer does.
+        push.registered = {
+            push.currentDeviceToken = "token1"
+            backgroundScope.launch { store.registerDeviceAlerts("token1", AppLanguage.En) }
+        }
+        store.refreshNotificationState()
+        assertEquals(NotificationAuthorizationStatus.Denied, store.notificationStatus)
+        assertFalse(store.notificationsEnabledOnDevice)
+        assertFalse(push.calls.contains("register"))
+
+        // Allowed in Android's settings, and back on the page.
+        push.status = NotificationAuthorizationStatus.Authorized
+        store.refreshNotificationState()
+        runCurrent()
+        assertTrue(store.notificationsEnabledOnDevice)
+        assertEquals(listOf("alert 22222222222A k important token1 en production fcm"), calls.all)
+        assertFalse("Nothing is asked", push.calls.contains("request"))
+
+        // Turned off on the page, then refused and allowed again: the way back leaves it off.
+        store.disableNotifications()
+        push.status = NotificationAuthorizationStatus.Denied
+        store.refreshNotificationState()
+        push.status = NotificationAuthorizationStatus.Authorized
+        push.calls.clear()
+        val before = calls.all.size
+        store.refreshNotificationState()
+        runCurrent()
+        assertFalse(store.notificationsEnabledOnDevice)
+        assertFalse(push.calls.contains("register"))
+        assertEquals(before, calls.all.size)
     }
 
     @Test

@@ -63,7 +63,10 @@ data class DeviceParcel(
     val viewer: Boolean? = null,
     /** Whether an account may keep the parcel behind someone else's link, as the link last said. */
     val canKeep: Boolean? = null,
-    /** What its notifications on this phone tell, chosen when they were first turned on. */
+    /**
+     * What its notifications on this phone tell, as last asked for: the preset chosen for every parcel on the Delivery
+     * updates page, or while none is, the one picked when they were first turned on.
+     */
     val alertPreset: ParcelAlertPreset? = null,
     /** The device token the service last answered about for this parcel's notifications. */
     val alertToken: String? = null,
@@ -589,8 +592,8 @@ class DeviceParcels(
     private val alertRounds = mutableSetOf<Long>()
 
     /**
-     * The token and language each parcel's notifications were asked for since launch. Each launch asks again, in case
-     * the service lost them.
+     * The token and language each parcel's notifications were asked for since launch, and the preset when one is chosen
+     * for every parcel ([alertKey]). Each launch asks again, in case the service lost them.
      */
     private var alertsAsked: Map<String, String> = emptyMap()
 
@@ -606,7 +609,10 @@ class DeviceParcels(
     /** When a link's check was first said to be on its way, and when its parcel was last checked then. */
     private class QueuedCheck(val since: Instant, val synced: String?)
 
-    /** The token and language of the last round, which a parcel's notifications turned on again are asked for on. */
+    /**
+     * The token and language of the last round, which a parcel's notifications turned on again are asked for on. None
+     * once they are turned off for every parcel ([alertsOff]).
+     */
     private var alertsWanted: Pair<String, NativePushLocale>? = null
 
     private class AlertRetry(val token: String, val locale: NativePushLocale, val at: Instant, val wait: Double)
@@ -1178,17 +1184,28 @@ class DeviceParcels(
     private fun removal(token: String) = PushAddress.of(token).let { DeleteParcelAppAlertRequest(token = it.token, transport = it.transport) }
 
     /**
+     * What [alertsAsked] notes for a link asked for on [token] and in [locale], with [preset] when one is chosen for
+     * every parcel: a new choice asks every link again.
+     */
+    private fun alertKey(token: String, locale: NativePushLocale, preset: ParcelAlertPreset?): String =
+        "$token ${locale.rawValue}" + (preset?.let { " ${it.rawValue}" } ?: "")
+
+    /**
      * Turns notifications on, on this phone's token and in its language, for every parcel still on its way: once a
      * launch, and again when the token or the language changes. A parcel that arrived needs none; a held return still
      * does. A round is short and quiet: a few parcels at most, and it ends at the first sign that the service wants a
      * pause, sends no notifications or can't be reached; [retryAlerts] tries it again later. A link that leads nowhere,
      * has no room or is no longer shared is left until the next launch.
      *
+     * Each parcel's notifications tell what [preset] says, the one chosen for every parcel on the Delivery updates
+     * page: a new one asks again for those already on, and the service replaces what they told. Until one is chosen
+     * (null), a parcel keeps what it was first asked for, or is given [alertPreset]'s.
+     *
      * On Android the token is this phone's address ([PushAddress]), which has one environment. Called from the main
      * thread: `FirebaseMessagingService.onNewToken` runs on another, and the app hands its token over to the main one.
      */
-    suspend fun registerAlerts(token: String, locale: NativePushLocale) {
-        val asked = "$token ${locale.rawValue}"
+    suspend fun registerAlerts(token: String, locale: NativePushLocale, preset: ParcelAlertPreset? = null) {
+        val asked = alertKey(token, locale, preset)
         val client = client ?: return
         alertsWanted = token to locale
         if (desiredAlert != asked) {
@@ -1210,12 +1227,12 @@ class DeviceParcels(
                 if (round != alertGeneration) return
                 // Forgotten, or followed through another link, since the round began.
                 if (entries.none { it.linkId.equalsCanonically(entry.linkId) }) continue
-                val preset = entry.alertPreset ?: alertPreset(entry.parcel)
+                val sent = preset ?: entry.alertPreset ?: alertPreset(entry.parcel)
                 val answer = try {
                     client.setAlert(
                         entry.linkId, keys.keyOf(entry.linkId),
                         ParcelAppAlertRequest(
-                            token = address.token, environment = NativePushEnvironment.Production, preset = preset, locale = locale,
+                            token = address.token, environment = NativePushEnvironment.Production, preset = sent, locale = locale,
                             transport = address.transport, endpoint = address.endpoint, keys = address.keys,
                         ),
                     )
@@ -1225,7 +1242,11 @@ class DeviceParcels(
                     pause = (error as? DeliveryApiError.RateLimited)?.retryAfter ?: 0.0
                     break
                 }
-                if (round != alertGeneration) return
+                if (round != alertGeneration) {
+                    // Turned off for every parcel while the service was asked: this one hears nothing after all.
+                    if (desiredAlert == null && answer == DeviceAlertAnswer.On) attempt { client.removeAlert(entry.linkId, removal(token)) }
+                    return
+                }
                 if (answer == DeviceAlertAnswer.Unavailable) {
                     pause = 0.0
                     break
@@ -1245,7 +1266,7 @@ class DeviceParcels(
                     continue
                 }
                 val old = entries[index].alertToken
-                change(index) { it.copy(alertToken = token, alertPreset = preset) }
+                change(index) { it.copy(alertToken = token, alertPreset = sent) }
                 save()
                 // The token changed: the old one hears nothing more of this parcel. A new way to the same phone (from
                 // its inbox to UnifiedPush) has replaced the old one already.
@@ -1254,7 +1275,7 @@ class DeviceParcels(
                 }
             }
             // Parcels past this round, and those added or turned back on while it ran, wait for the next one.
-            if (round == alertGeneration) holdAlerts(pause, token, locale, more = !alertsSettled(token, locale))
+            if (round == alertGeneration) holdAlerts(pause, token, locale, more = !alertsSettled(token, locale, preset))
         } finally {
             alertRounds.remove(round)
         }
@@ -1264,8 +1285,8 @@ class DeviceParcels(
      * Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
      * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
      */
-    fun alertsSettled(token: String, locale: NativePushLocale): Boolean = entries.all {
-        it.isFrozen || it.isMuted || it.parcel.isOver || alertsAsked.keyOf(it.linkId) == "$token ${locale.rawValue}"
+    fun alertsSettled(token: String, locale: NativePushLocale, preset: ParcelAlertPreset? = null): Boolean = entries.all {
+        it.isFrozen || it.isMuted || it.parcel.isOver || alertsAsked.keyOf(it.linkId) == alertKey(token, locale, preset)
     }
 
     /**
@@ -1287,16 +1308,46 @@ class DeviceParcels(
         return update(id) { it.copy(muted = true, alertToken = null) }
     }
 
-    /** Asks again for the notifications still missing, on the last round's token and language, where one ran. */
-    suspend fun alertsAgain() {
+    /**
+     * Asks again for the notifications still missing, on the last round's token and language, where one ran, with the
+     * preset chosen for every parcel ([registerAlerts]).
+     */
+    suspend fun alertsAgain(preset: ParcelAlertPreset? = null) {
         val (token, locale) = alertsWanted ?: return
-        registerAlerts(token, locale)
+        registerAlerts(token, locale, preset)
     }
 
-    suspend fun retryAlerts() {
+    suspend fun retryAlerts(preset: ParcelAlertPreset? = null) {
         val retry = alertRetry ?: return
         if (now().isBefore(retry.at)) return
-        registerAlerts(retry.token, retry.locale)
+        registerAlerts(retry.token, retry.locale, preset)
+    }
+
+    /**
+     * Turns every parcel's notifications on this phone off, from the switch on the Delivery updates page: the service is
+     * told about each link signed up here, and no round asks for any until [registerAlerts] is called again; a round
+     * under way stops, and a link it signed up meanwhile is told too. A parcel turned off on its own page stays so.
+     *
+     * A link the service can't be told about yet keeps its token, and the next call tells it again; the first failure
+     * ends the call, as the service may want a pause. Nothing is thrown.
+     */
+    suspend fun alertsOff() {
+        desiredAlert = null
+        alertGeneration++
+        alertRetry = null
+        alertsWanted = null
+        alertsAsked = emptyMap()
+        val client = client ?: return
+        for (entry in entries.filter { it.alertToken != null }) {
+            val token = entry.alertToken ?: continue
+            if (!succeeds { client.removeAlert(entry.linkId, removal(token)) }) return
+            // Turned on again meanwhile: the new round asks for every link, and replaces the token it finds.
+            if (desiredAlert != null) return
+            val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
+            if (index < 0 || entries[index].alertToken != token) continue
+            change(index) { it.copy(alertToken = null) }
+            save()
+        }
     }
 
     /**

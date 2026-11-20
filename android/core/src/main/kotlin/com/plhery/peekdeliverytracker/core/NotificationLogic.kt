@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import java.util.UUID
 
 // NotificationLogic.swift. What it asks UserNotifications and UserDefaults comes in as plain values: the permission
@@ -44,11 +45,31 @@ enum class NotificationPreset(val rawValue: String) {
             DeliveryDay -> "notifications.preset.deliveryDayDescription"
         }
 
+    /** The same choice for a link the phone follows without an account, which the service names on its own. */
+    val alertPreset: ParcelAlertPreset
+        get() = when (this) {
+            All -> ParcelAlertPreset.All
+            Important -> ParcelAlertPreset.Important
+            DeliveryDay -> ParcelAlertPreset.Delivery
+        }
+
     companion object {
         fun matching(stages: List<NotificationStage>): NotificationPreset {
             val enabled = stages.toSet()
             return entries.firstOrNull { it.stages.toSet() == enabled } ?: All
         }
+
+        fun of(alert: ParcelAlertPreset): NotificationPreset = when (alert) {
+            ParcelAlertPreset.All -> All
+            ParcelAlertPreset.Important -> Important
+            ParcelAlertPreset.Delivery -> DeliveryDay
+        }
+
+        /**
+         * What the Delivery updates page shows chosen without an account: the preset saved there for every parcel on
+         * the phone, or Important while none is, which is what a parcel with news is signed up with until then.
+         */
+        fun withoutAccount(saved: ParcelAlertPreset?): NotificationPreset = saved?.let(::of) ?: Important
     }
 }
 
@@ -178,13 +199,22 @@ enum class NotificationAuthorizationStatus {
 
 /** Where the device keeps its notification state. */
 object NotificationDeviceKeys {
-    /** The person turned this device's notifications off. */
+    /**
+     * The person turned this device's notifications off: an account's, or without one those of the parcels the phone
+     * follows itself.
+     */
     const val OPT_OUT = "sdt.notificationsDeviceOptOut"
 
     /** The account that last turned them on ([NotificationDevicePolicy.belongs]). */
     const val OWNER = "sdt.notificationsOwner.v1"
     const val DEMO = "sdt.demoNotificationsEnabled"
     const val OPT_OUT_REPAIRED = "sdt.notificationsOptOutRepaired.v1"
+
+    /**
+     * The preset chosen on the Delivery updates page without an account, as a [ParcelAlertPreset]'s raw value: every
+     * link the phone follows is signed up with it. Nothing is saved until one is chosen there.
+     */
+    const val ALERT_PRESET = "sdt.deviceAlertPreset.v1"
 }
 
 object NotificationDevicePolicy {
@@ -203,6 +233,13 @@ object NotificationDevicePolicy {
     }
 
     fun shouldRegisterForRemoteNotifications(status: NotificationAuthorizationStatus, optedOut: Boolean): Boolean =
+        isAuthorized(status) && !optedOut
+
+    /**
+     * Without an account, the phone's notifications are on while the system allows them and the person has not turned
+     * them off: its token then reaches every link it follows, and there is no account to register with.
+     */
+    fun isEnabledWithoutAccount(status: NotificationAuthorizationStatus, optedOut: Boolean): Boolean =
         isAuthorized(status) && !optedOut
 
     /**

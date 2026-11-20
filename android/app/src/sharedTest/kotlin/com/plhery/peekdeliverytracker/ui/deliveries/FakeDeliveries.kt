@@ -41,6 +41,7 @@ import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
@@ -670,8 +671,8 @@ class FakeDeliveries(
 
     /**
      * What the account's actions were asked, in their order: `refreshNotificationState`, `loadNotificationPreferences`,
-     * `enableNotifications`, `disableNotifications`, `saveNotificationPreferences`, `exportAccount`, `resetDemoData`,
-     * `forgetDeviceParcels`, `deleteAccount:<confirmation>` and `signOut`.
+     * `enableNotifications`, `disableNotifications`, `saveNotificationPreferences`, `saveDeviceAlertPreset`,
+     * `exportAccount`, `resetDemoData`, `forgetDeviceParcels`, `deleteAccount:<confirmation>` and `signOut`.
      */
     val accountCalls = mutableListOf<String>()
 
@@ -717,6 +718,14 @@ class FakeDeliveries(
         savedPreferences += value
         notificationPreferences.value = value.copy(emailAvailable = notificationPreferences.value?.emailAvailable)
         deliveryEmail.value = storedEmail
+    }
+
+    /** The preset chosen for every parcel on this phone without an account; none until a test or a save chooses one. */
+    override val deviceAlertPreset = MutableStateFlow<ParcelAlertPreset?>(null)
+
+    override suspend fun saveDeviceAlertPreset(preset: ParcelAlertPreset) {
+        accountCall("saveDeviceAlertPreset")
+        deviceAlertPreset.value = preset
     }
 
     /** The export's file, in the folder the app's FileProvider hands out (cacheDir/exports). */

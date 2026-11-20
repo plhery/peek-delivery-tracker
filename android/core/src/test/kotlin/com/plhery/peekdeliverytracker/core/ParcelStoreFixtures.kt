@@ -61,6 +61,12 @@ internal class StubPushNotifications(
 ) : PushNotifications {
     val calls = mutableListOf<String>()
 
+    /**
+     * Run on each registration, after it is noted: where a test hands a token on as the app does once Firebase gives
+     * one (`forwardNativePushToken`, `registerDeviceAlerts`).
+     */
+    var registered: () -> Unit = {}
+
     override suspend fun authorizationStatus(): NotificationAuthorizationStatus {
         calls += "status"
         return status
@@ -73,6 +79,7 @@ internal class StubPushNotifications(
 
     override fun registerForRemoteNotifications() {
         calls += "register"
+        registered()
     }
 
     override fun unregisterForRemoteNotifications() {

@@ -137,7 +137,7 @@ class SettingsScreenshotTest {
         compose.screenshot("settings_phone_dark")
     }
 
-    /** A guest with parcels: the offer of an account in place of the address, and no Delivery updates. */
+    /** A guest with parcels: the offer of an account in place of the address, and the phone's Delivery updates. */
     @Test
     fun aGuest() {
         show(AuthenticationState.Welcome) { isGuest = true }

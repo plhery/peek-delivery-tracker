@@ -318,7 +318,10 @@ Key server modules:
     device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`),
     the Android app with its FCM token, or its installation token with a UnifiedPush
     endpoint and keys or for its inbox. The Android app's bell on a parcel's page turns that
-    link's alert off and passes over the parcel until it is turned on again. Browsers and
+    link's alert off and passes over the parcel until it is turned on again. Without an
+    account, its Delivery updates page keeps one preset on the phone for every link, and asks
+    again with it for those already on; its switch turns every link's alert off and keeps
+    that choice, so nothing signs a link up again until it is turned back on. Browsers and
     phones share the same ten. A browser or
     phone that an account's notifications reach is passed over when that account has the
     parcel too, the owner's or one a viewer kept, so it hears each update once.

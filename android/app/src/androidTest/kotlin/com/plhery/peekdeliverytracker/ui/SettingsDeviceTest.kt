@@ -308,7 +308,8 @@ class SettingsDeviceTest {
 
     /**
      * A guest with parcels on the phone: the list's last row offers an account and opens the sign-in (A-S19); Settings
-     * offers one in place of the account row and has no Delivery updates; the data page asks before it forgets them.
+     * offers one in place of the account row and has the phone's Delivery updates; the data page asks before it forgets
+     * them.
      */
     @Test
     fun aGuestIsOfferedAnAccountAndAskedBeforeForgetting() {
@@ -322,7 +323,7 @@ class SettingsDeviceTest {
         assertEquals(1, source.signIns)
         openSettings()
         compose.onNodeWithTag(SETTINGS_SIGN_IN).assertIsDisplayed()
-        assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
+        assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
         shot()
         tap(SETTINGS_ACCOUNT_DATA)
         tap(SETTINGS_FORGET_ALL)

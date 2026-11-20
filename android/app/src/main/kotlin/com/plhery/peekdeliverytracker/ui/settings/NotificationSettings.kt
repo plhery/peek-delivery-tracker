@@ -68,7 +68,7 @@ import kotlin.coroutines.cancellation.CancellationException
 import kotlinx.coroutines.launch
 
 // SettingsViews.swift's `NotificationSettingsView(embedded: true)` (C-S35) and `DeliveryEmailSettings` (C-S36, C-S37):
-// Delivery updates, pushed in Settings for an account.
+// Delivery updates, pushed in Settings, for an account or for the parcels the phone follows without one.
 
 /**
  * `NotificationSettingsView(embedded: true)`, "settings.deliveryUpdates" inline in the bar: what Android says of the
@@ -78,6 +78,10 @@ import kotlinx.coroutines.launch
  * its answer. It loads the notifications' state as it opens (`.task`), and again as the app comes back from Android's
  * settings. On a phone without pushes (`DeliveriesSource.pushAvailable`) neither the switch nor the presets show,
  * which leaves the delivery email. F-Droid's build says under the status how the pushes reach the phone.
+ *
+ * Without an account it is the phone's own: the switch turns on or off the notifications of every parcel it follows,
+ * and the presets, saved on the phone, say what each of them tells (Important until one is saved), with a word under
+ * them that they reach every parcel. There is no account to load, no welcome notification and no delivery email.
  */
 @Composable
 internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack: () -> Unit) {
@@ -94,9 +98,13 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
     val preferences by source.notificationPreferences.collectAsState()
     val storeError by source.notificationError.collectAsState()
     val email by source.deliveryEmail.collectAsState()
+    val devicePreset by source.deviceAlertPreset.collectAsState()
+    val guest = source.isGuest
     val working = work.working(DELIVERY_UPDATES_PAGE)
     val failure = work.failure(DELIVERY_UPDATES_PAGE)
-    var preset by rememberSaveable { mutableStateOf(NotificationPreferencesDraft(preferences).preset) }
+    var preset by rememberSaveable {
+        mutableStateOf(if (guest) NotificationPreset.withoutAccount(devicePreset) else NotificationPreferencesDraft(preferences).preset)
+    }
     var emailOnDelivery by remember { mutableStateOf(preferences?.emailOnDelivery) }
     var notice by rememberSaveable { mutableStateOf<String?>(null) }
     // Held for the page in the app's scope, as its runs are: a window made again mid-save still waits for the answer.
@@ -105,8 +113,9 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
     var seen by remember { mutableStateOf(preferences) }
     LaunchedEffect(Unit) {
         source.refreshNotificationState()
-        source.loadNotificationPreferences()
+        if (!guest) source.loadNotificationPreferences()
     }
+    // Back from Android's settings with notifications allowed, a guest's parcels are signed up as the token comes back.
     LifecycleEventEffect(Lifecycle.Event.ON_RESUME) { source.scope.launch { source.refreshNotificationState() } }
     // `.onChange(of: store.notificationPreferences)`: the email switch saves on its own, so a preset picked but not
     // saved yet stays picked; the choice changed after all, here or from a link in an email, makes the failure old news.
@@ -161,7 +170,8 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                     DeviceSwitch(enabledOnDevice) { on ->
                         run {
                             notice = if (on) {
-                                if (source.enableNotifications()) null else localizer.text("notifications.error.welcome")
+                                // Without an account no welcome notification goes out, so none failed to.
+                                if (source.enableNotifications() || guest) null else localizer.text("notifications.error.welcome")
                             } else {
                                 source.disableNotifications()
                                 null
@@ -171,21 +181,38 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                 }
             }
         }
-        if (preferences != null && source.pushAvailable) {
-            SettingsGroup(localized("notifications.preferencesTitle")) {
-                NotificationPreset.entries.forEachIndexed { index, option ->
-                    if (index > 0) SettingsDivider()
-                    PresetRow(option, option == preset) {
-                        preset = option
-                        notice = null
+        if ((preferences != null || guest) && source.pushAvailable) {
+            Column(verticalArrangement = Arrangement.spacedBy(9.dp)) {
+                SettingsGroup(localized("notifications.preferencesTitle")) {
+                    NotificationPreset.entries.forEachIndexed { index, option ->
+                        if (index > 0) SettingsDivider()
+                        PresetRow(option, option == preset) {
+                            preset = option
+                            notice = null
+                        }
                     }
+                }
+                // Without an account the preset is the phone's, for every parcel it follows.
+                if (guest) {
+                    Text(
+                        localized("alerts.all.body"), Modifier.padding(start = 2.dp).testTag(SETTINGS_EVERY_PARCEL),
+                        color = colors.secondaryText, style = type.caption.sfLines(),
+                    )
                 }
             }
             SaveButton(working) {
-                val value = NotificationPreferencesDraft(preset, emailOnDelivery).preferences(TimeZone.getDefault().id)
-                run {
-                    source.saveNotificationPreferences(value)
-                    notice = localizer.text("notifications.saved")
+                if (guest) {
+                    val chosen = preset.alertPreset
+                    run {
+                        source.saveDeviceAlertPreset(chosen)
+                        notice = localizer.text("notifications.saved")
+                    }
+                } else {
+                    val value = NotificationPreferencesDraft(preset, emailOnDelivery).preferences(TimeZone.getDefault().id)
+                    run {
+                        source.saveNotificationPreferences(value)
+                        notice = localizer.text("notifications.saved")
+                    }
                 }
             }
         }
@@ -426,6 +453,7 @@ internal fun presetTag(option: NotificationPreset) = "$SETTINGS_SHEET.preset.${o
 internal const val SETTINGS_OPEN_SETTINGS = "$SETTINGS_SHEET.openSettings"
 internal const val SETTINGS_DEVICE_SWITCH = "$SETTINGS_SHEET.deviceNotifications"
 internal const val SETTINGS_SAVE = "$SETTINGS_SHEET.save"
+internal const val SETTINGS_EVERY_PARCEL = "$SETTINGS_SHEET.deliveryUpdates.everyParcel"
 internal const val SETTINGS_NOTICE = "$SETTINGS_SHEET.notice"
 internal const val SETTINGS_UPDATES_ERROR = "$SETTINGS_SHEET.deliveryUpdates.error"
 internal const val SETTINGS_DELIVERY_EMAIL = "$SETTINGS_SHEET.deliveryEmail"

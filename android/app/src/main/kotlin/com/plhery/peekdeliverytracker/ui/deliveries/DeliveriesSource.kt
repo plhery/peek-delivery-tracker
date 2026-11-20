@@ -45,6 +45,7 @@ import com.plhery.peekdeliverytracker.core.api.CarrierId
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.Parcel
+import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
@@ -387,6 +388,12 @@ interface DeliveriesSource {
     /** `store.saveNotificationPreferences(_:)`. */
     suspend fun saveNotificationPreferences(value: NotificationPreferences)
 
+    /** `store.deviceAlertPresetFlow`: the preset every parcel this phone follows without an account is signed up with. */
+    val deviceAlertPreset: StateFlow<ParcelAlertPreset?>
+
+    /** `store.saveDeviceAlertPreset(_:)`: chooses it from the Delivery updates page without an account. */
+    suspend fun saveDeviceAlertPreset(preset: ParcelAlertPreset)
+
     /** `store.exportAccount()`: the account's, the demo's or this phone's parcels, written to a file to share. */
     suspend fun exportAccount(): File
 
@@ -683,6 +690,10 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override suspend fun disableNotifications() = container.parcels.disableNotifications()
 
     override suspend fun saveNotificationPreferences(value: NotificationPreferences) = container.parcels.saveNotificationPreferences(value)
+
+    override val deviceAlertPreset get() = container.parcels.deviceAlertPresetFlow
+
+    override suspend fun saveDeviceAlertPreset(preset: ParcelAlertPreset) = container.parcels.saveDeviceAlertPreset(preset)
 
     override suspend fun exportAccount(): File = container.parcels.exportAccount()
 

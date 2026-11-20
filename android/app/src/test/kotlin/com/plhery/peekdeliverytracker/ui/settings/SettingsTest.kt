@@ -58,6 +58,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.NotificationAuthorizationStatus
 import com.plhery.peekdeliverytracker.core.NotificationPreset
+import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.platform.PlayListing
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
@@ -97,7 +98,7 @@ import org.robolectric.annotation.GraphicsMode
  * Settings (C-S35 to C-S45, A-S19): opened from the account button for an account, a guest and the demo, each row's
  * action, the appearance and the language, the data page's actions with their alerts, one at a time and closing as the
  * iPhone's do, the error under the data, Close and the back while it waits, the pages pushed and the back, Delivery
- * updates' presets, switch and email, and the guest's offer of an account in the list.
+ * updates' presets, switch and email, for an account and for a guest, and the guest's offer of an account in the list.
  */
 @RunWith(AndroidJUnit4::class)
 @GraphicsMode(GraphicsMode.Mode.NATIVE)
@@ -324,7 +325,7 @@ class SettingsTest {
         assertEquals(1, source.signIns)
 
         open()
-        assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
+        assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
         assertFalse(exists(SETTINGS_ACCOUNT))
         tap(SETTINGS_ACCOUNT_DATA)
         assertTrue(shows(text("peek.onThisDevice")))
@@ -440,10 +441,69 @@ class SettingsTest {
         assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES, SETTINGS_USAGE_STATISTICS), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
-    /** A guest has no updates, which need an account, nor a forwarding address: no deliveries' group at all. */
+    /**
+     * A guest's Delivery updates are the phone's: the row says Off until notifications are on, then the preset chosen
+     * for every parcel on it. The page has the status, the switch and the three presets, Important until one is saved,
+     * with the word that they reach every parcel; Save keeps the choice on the phone. No account is read, no welcome
+     * goes out, and there is no delivery email.
+     */
     @Test
-    fun aGuestHasNoDeliveriesGroup() {
-        show(AuthenticationState.Welcome) { isGuest = true }
+    fun aGuestsDeliveryUpdatesChooseThePresetOfEveryParcelOnThisPhone() {
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            welcomeSent = false
+        }
+        open()
+        assertTrue(shows(text("native.deliveries").uppercase()))
+        assertTrue(shows(text("settings.off")))
+        tap(SETTINGS_DELIVERY_UPDATES)
+        assertTrue(shows(text("notifications.state.prompt")))
+        assertTrue(exists(SETTINGS_DEVICE_SWITCH))
+        assertFalse(exists(SETTINGS_OPEN_SETTINGS))
+        for (preset in NotificationPreset.entries) assertTrue(exists(presetTag(preset)))
+        assertEquals(true, node(presetTag(NotificationPreset.Important)).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Selected))
+        assertTrue(exists(SETTINGS_EVERY_PARCEL))
+        assertTrue(shows(text("alerts.all.body")))
+        assertTrue(shows(text("notifications.schedule")))
+        assertFalse(exists(SETTINGS_DELIVERY_EMAIL))
+        assertFalse("loadNotificationPreferences" in source.accountCalls)
+
+        tap(presetTag(NotificationPreset.DeliveryDay))
+        tap(SETTINGS_SAVE)
+        assertEquals(ParcelAlertPreset.Delivery, source.deviceAlertPreset.value)
+        assertTrue(source.savedPreferences.isEmpty())
+        assertEquals(text("notifications.saved"), node(SETTINGS_NOTICE).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.joinToString())
+
+        flip(SETTINGS_DEVICE_SWITCH)
+        assertTrue("enableNotifications" in source.accountCalls)
+        assertTrue(shows(text("notifications.state.enabled")))
+        assertFalse(shows(text("notifications.error.welcome")))
+        press(SETTINGS_BACK)
+        assertTrue(shows(text(NotificationPreset.DeliveryDay.titleKey)))
+    }
+
+    /** Refused for good, a guest's page sends them to Android's settings in place of the switch. */
+    @Test
+    fun aGuestWhoRefusedNotificationsIsSentToAndroidsSettings() {
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            notificationStatus.value = NotificationAuthorizationStatus.Denied
+        }
+        open()
+        tap(SETTINGS_DELIVERY_UPDATES)
+        assertTrue(shows(text("notifications.state.blocked")))
+        assertTrue(exists(SETTINGS_OPEN_SETTINGS))
+        assertFalse(exists(SETTINGS_DEVICE_SWITCH))
+        for (preset in NotificationPreset.entries) assertTrue(exists(presetTag(preset)))
+    }
+
+    /** A guest on a phone without pushes has nothing to set, nor a forwarding address: no deliveries' group at all. */
+    @Test
+    fun aGuestOnAPhoneWithoutPushHasNoDeliveriesGroup() {
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            pushAvailable = false
+        }
         open()
         assertFalse(shows(text("native.deliveries").uppercase()))
         assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
@@ -507,9 +567,10 @@ class SettingsTest {
     private fun usageStatisticsSwitchTurnsOffAndOn() {
         open()
         node(SETTINGS_USAGE_STATISTICS).assert(hasText(text("settings.usageStatistics"))).assert(hasText(text("settings.usageStatisticsHint")))
+        // Where each starts, though the page may leave both below what it shows.
         assertTrue(
-            node(SETTINGS_USAGE_STATISTICS).fetchSemanticsNode().boundsInRoot.top >
-                node(SETTINGS_MARK_NEW_UPDATES).fetchSemanticsNode().boundsInRoot.top,
+            node(SETTINGS_USAGE_STATISTICS).fetchSemanticsNode().positionInRoot.y >
+                node(SETTINGS_MARK_NEW_UPDATES).fetchSemanticsNode().positionInRoot.y,
         )
         assertEquals(ToggleableState.On, toggled(SETTINGS_USAGE_STATISTICS))
         flip(SETTINGS_USAGE_STATISTICS)

@@ -24,6 +24,7 @@ import androidx.compose.ui.state.ToggleableState
 import androidx.compose.ui.test.SemanticsMatcher
 import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.assertIsNotEnabled
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.getBoundsInRoot
 import androidx.compose.ui.test.getUnclippedBoundsInRoot
 import androidx.compose.ui.test.hasAnyAncestor
@@ -67,6 +68,8 @@ import com.plhery.peekdeliverytracker.platform.notificationTap
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.arrival.UNLOCK_WHAT
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.deliveries.DEMO_EXIT
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesInbox
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
@@ -279,7 +282,7 @@ class FriendsTest {
     // Signed out (A-S20).
 
     @Test
-    fun signedOutTheTabSaysWhatItIsForAndSignInOpensTheSignIn() {
+    fun aGuestsTabSaysWhatItIsForAndSignInOpensTheUnlockSheet() {
         show(AuthenticationState.Welcome)
         assertTrue(shows(text("friends.title")))
         assertTrue(shows(text("friends.introSummary")))
@@ -288,7 +291,10 @@ class FriendsTest {
         assertFalse(shows("A"))
         assertFalse(shows("M"))
         tap(FRIENDS_SIGN_IN)
-        assertEquals(1, source.signIns)
+        // Over the tab, whose intro says what friends are for: the sheet adds only what comes with the guest.
+        assertEquals(UnlockReason.Friends, source.unlock.reason)
+        compose.onNodeWithTag(UNLOCK_WHAT).assertTextEquals(text("unlock.comes"))
+        assertEquals(0, source.signIns)
         assertEquals(0, client.loads)
         assertFalse(exists(FRIENDS_INVITE))
     }

@@ -64,6 +64,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -134,6 +135,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import com.plhery.peekdeliverytracker.core.AddParcelView as AddParcelLogic
+import com.plhery.peekdeliverytracker.core.AuthenticationState
 import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.CarrierPostcodes
 import com.plhery.peekdeliverytracker.core.CarrierRecognition
@@ -159,6 +161,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.NoSuggestions
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CarrierTruck
 import com.plhery.peekdeliverytracker.ui.draw.ContinuousRoundedShape
@@ -518,6 +521,13 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
 
     val error = if (form.pasteFailed) localizer.text("add.pasteFailed") else work.failure(request.id)
     val duplicate = work.duplicate(request.id)
+    val session by state.source.session.collectAsState()
+    val guest = session == AuthenticationState.Welcome
+    val spent = !form.pasteFailed && work.lookupsSpent(request.id)
+    // Signed in from the unlock sheet, the day's limit no longer stands: Add keeps the number for another try.
+    LaunchedEffect(spent, guest) {
+        if (spent && !guest) work.dismiss(request.id)
+    }
     AddAnnouncements(error, spokenNotice(addition, localizer))
 
     // What the title and Add leave the form, which the number's field needs.
@@ -574,11 +584,16 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                         RequiredDetails(state, shownDetails.value, form, focus, actions)
                     }
                     NameField(form, focus, actions, addition)
-                    val shownError = remember { Kept(error to duplicate) }
-                    if (error != null) shownError.value = error to duplicate
+                    val shownError = remember { Kept(Triple(error, duplicate, spent && guest)) }
+                    if (error != null) shownError.value = Triple(error, duplicate, spent && guest)
                     AddRows(error != null, STATE_MOTION, reduceMotion, fadeOnly = true) {
-                        val (message, existing) = shownError.value
-                        if (message != null) ErrorBanner(message, existing) { id -> state.openExisting(id) }
+                        val (message, existing, signIn) = shownError.value
+                        if (message != null) {
+                            ErrorBanner(
+                                message, existing, open = { id -> state.openExisting(id) },
+                                signIn = if (signIn) ({ state.source.unlock.ask(UnlockReason.Daily) }) else null,
+                            )
+                        }
                     }
                 }
             }
@@ -1208,7 +1223,8 @@ private fun CarrierLine(addition: ParcelAddition, open: () -> Unit) {
 
 /**
  * `numberChoice`: several numbers in one text, in the order written, the first added unless another is chosen; for a
- * guest, the question of following them all, and signing in to keep them together.
+ * guest, the question of following them all, and signing in to keep them together, which opens the unlock sheet over
+ * Add ([UnlockReason.Several]): Add and its text stay under it, for after the sign-in or "Not now".
  */
 @Composable
 private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actions: AddActions) {
@@ -1237,8 +1253,7 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
                         .wrapContentHeight(Alignment.CenterVertically)
                         .testTag(ADD_SIGN_IN)
                         .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) {
-                            state.closeAdd()
-                            state.source.showSignIn()
+                            state.source.unlock.ask(UnlockReason.Several)
                         },
                     // In the tabs' ink, as TintedButton's words.
                     color = if (enabled) colors.ink else colors.tertiaryLabel,
@@ -1639,10 +1654,12 @@ private fun AddTextField(
 
 /**
  * `errorBanner`: the red triangle and why it failed in subheadline medium, on the rose surface with 20-point corners;
- * where the number is in the box already, "Open the existing parcel" underlined, which closes Add and opens it.
+ * where the number is in the box already, "Open the existing parcel" underlined, which closes Add and opens it; where a
+ * guest's lookups for today are spent, "Sign in" underlined ([signIn]), which opens the unlock sheet over Add
+ * ([UnlockReason.Daily]), the website's daily note's button.
  */
 @Composable
-private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.util.UUID) -> Unit) {
+private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.util.UUID) -> Unit, signIn: (() -> Unit)? = null) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
     Column(
@@ -1663,6 +1680,16 @@ private fun ErrorBanner(message: String, existing: java.util.UUID?, open: (java.
                 Modifier
                     .testTag(ADD_OPEN_EXISTING)
                     .button(interactionSource = null, indication = PlainPress, role = Role.Button) { open(existing) },
+                color = colors.ink,
+                style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).copy(textDecoration = TextDecoration.Underline).sfLines(),
+            )
+        }
+        if (signIn != null) {
+            Text(
+                localized("arrival.signInTitle"),
+                Modifier
+                    .testTag(ADD_ERROR_SIGN_IN)
+                    .button(interactionSource = null, indication = PlainPress, role = Role.Button, onClick = signIn),
                 color = colors.ink,
                 style = type.style(IosTextStyle.Subheadline, FontWeight.SemiBold).copy(textDecoration = TextDecoration.Underline).sfLines(),
             )
@@ -1901,6 +1928,7 @@ internal const val ADD_LINE_DETAIL = "addParcel.carrier.detail"
 internal const val ADD_SAVE = "addParcel.save"
 internal const val ADD_NUMBER = "addParcel.number"
 internal const val ADD_SEVERAL = "addParcel.several"
+internal const val ADD_ERROR_SIGN_IN = "addParcel.error.signIn"
 internal const val ADD_SIGN_IN = "addParcel.signIn"
 internal const val ADD_FOUND = "addParcel.found"
 internal const val ADD_FEEDBACK = "addParcel.feedback"

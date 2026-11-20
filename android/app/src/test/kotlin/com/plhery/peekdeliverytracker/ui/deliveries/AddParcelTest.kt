@@ -72,6 +72,7 @@ import com.plhery.peekdeliverytracker.core.CarrierCatalog
 import com.plhery.peekdeliverytracker.core.DateParser
 import com.plhery.peekdeliverytracker.core.DeliveriesArrangement
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
+import com.plhery.peekdeliverytracker.core.DeviceLookupsSpent
 import com.plhery.peekdeliverytracker.core.FirstParcelRequest
 import com.plhery.peekdeliverytracker.core.GivenPostcode
 import com.plhery.peekdeliverytracker.core.Localizer
@@ -84,6 +85,10 @@ import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.Recreation
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.arrival.UNLOCK_LATER
+import com.plhery.peekdeliverytracker.ui.arrival.UNLOCK_SHEET
+import com.plhery.peekdeliverytracker.ui.arrival.UNLOCK_WHAT
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.sheet.COVER_PANEL
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_GRABBER
 import com.plhery.peekdeliverytracker.ui.sheet.SHEET_PANEL
@@ -752,15 +757,61 @@ class AddParcelTest {
         assertEquals("1Z999AA10123456793", source.additions.single().trackingNumber)
     }
 
+    /** The unlock sheet comes over Add, which keeps the numbers for after; "Not now" goes back to them. */
     @Test
-    fun aGuestWithSeveralNumbersIsOfferedToSignIn() {
-        show { isGuest = true }
+    fun aGuestWithSeveralNumbersIsOfferedToSignInOverAdd() {
+        show(session = AuthenticationState.Welcome) { isGuest = true }
         open()
         type("UPS 1Z999AA10123456784\nUPS 1Z999AA10123456793")
         node(ADD_SIGN_IN).performClick()
         settle()
-        assertClosed()
-        assertEquals(1, source.signIns)
+        assertEquals(UnlockReason.Several, source.unlock.reason)
+        node(UNLOCK_WHAT).assertTextEquals("${text("unlock.several")} ${text("unlock.comes")}")
+        assertNotNull(deliveries.addition)
+        assertEquals(0, source.signIns)
+        node(UNLOCK_LATER).performClick()
+        settle()
+        assertNull(source.unlock.reason)
+        assertFalse(exists(UNLOCK_SHEET))
+        assertTrue(exists(numberRowTag("1Z999AA10123456793")))
+        assertEquals("UPS 1Z999AA10123456784\nUPS 1Z999AA10123456793", fieldText(ADD_TRACKING))
+    }
+
+    /** A guest's lookups spent for today: the error offers the unlock sheet, which says why; Add keeps the number. */
+    @Test
+    fun aGuestOutOfLookupsForTodayIsOfferedToSignIn() {
+        show(session = AuthenticationState.Welcome) {
+            isGuest = true
+            failure = DeviceLookupsSpent()
+        }
+        open()
+        type("1Z999AA10123456784")
+        node(ADD_SAVE).performClick()
+        settle()
+        assertTrue(exists(ADD_ERROR))
+        node(ADD_ERROR_SIGN_IN).assertTextEquals(text("arrival.signInTitle")).performClick()
+        settle()
+        assertEquals(UnlockReason.Daily, source.unlock.reason)
+        node(UNLOCK_WHAT).assertTextEquals("${text("unlock.daily")} ${text("unlock.comes")}")
+        assertNotNull(deliveries.addition)
+        node(UNLOCK_LATER).performClick()
+        settle()
+        assertEquals("1Z999AA10123456784", fieldText(ADD_TRACKING))
+        assertTrue(exists(ADD_ERROR_SIGN_IN))
+    }
+
+    @Test
+    fun aGuestsOtherErrorsOfferNoSignIn() {
+        show(session = AuthenticationState.Welcome) {
+            isGuest = true
+            failure = IllegalStateException("No connection")
+        }
+        open()
+        type("1Z999AA10123456784")
+        node(ADD_SAVE).performClick()
+        settle()
+        assertTrue(exists(ADD_ERROR))
+        assertFalse(exists(ADD_ERROR_SIGN_IN))
     }
 
     @Test

@@ -18,6 +18,7 @@ import com.plhery.peekdeliverytracker.core.DeliveryAnalytics
 import com.plhery.peekdeliverytracker.core.DeliveryApiClient
 import com.plhery.peekdeliverytracker.core.DeliveryApiError
 import com.plhery.peekdeliverytracker.core.DeliveryEmail
+import com.plhery.peekdeliverytracker.core.DeviceLookupsSpent
 import com.plhery.peekdeliverytracker.core.FriendInvitationStore
 import com.plhery.peekdeliverytracker.core.FriendsActivityStore
 import com.plhery.peekdeliverytracker.core.FriendsClient
@@ -47,6 +48,7 @@ import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockRequests
 import java.io.File
 import java.time.Instant
 import java.util.UUID
@@ -302,8 +304,15 @@ interface DeliveriesSource {
     /** Leaves the demo for the first screen. */
     fun showWelcome()
 
-    /** `store.showSignIn()`: the sign-in screen over a guest's list, from Add, Settings, Friends or the first open's masthead. */
+    /** `store.showSignIn()`: the sign-in screen over a guest's list, from Settings, a link kept for later or the first open's masthead. */
     fun showSignIn()
+
+    /**
+     * The unlock sheet over the window ([UnlockRequests], [com.plhery.peekdeliverytracker.ui.arrival.UnlockSheetHost]):
+     * what a guest can't do without an account (several numbers, the day's lookups, friends), with the sign-in, over
+     * the screen they were on. One for the process, as its pages' work is.
+     */
+    val unlock: UnlockRequests
 
     /** `session.enterDemo()`: the demo, from the first open of a build without a server. */
     fun enterDemo()
@@ -621,6 +630,8 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun showSignIn() = container.parcels.showSignIn()
 
+    override val unlock: UnlockRequests get() = UNLOCK
+
     override fun enterDemo() = container.session.enterDemo()
 
     override fun view(screen: String) = container.analytics.view(screen)
@@ -689,6 +700,9 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
         /** What this process's pages wait for, for every window it makes, as its launch is. */
         val PAGE_WORK = PageWork()
+
+        /** This process's unlock sheet, for every window it makes, as its pages' work is. */
+        val UNLOCK = UnlockRequests()
 
         /** This process's share sheets, for every window it makes, as its pages' work is. */
         val SHARES = ParcelShares()
@@ -842,6 +856,7 @@ class PageWork {
     private val offerNews = mutableStateMapOf<UUID, EmailOfferPhase>()
     private val additions = mutableStateMapOf<UUID, UUID>()
     private val duplicates = mutableStateMapOf<UUID, UUID>()
+    private val spent = mutableStateMapOf<UUID, Unit>()
     private val exports = mutableStateMapOf<UUID, File>()
     private val emailChoices = mutableStateMapOf<UUID, EmailChoice>()
     private val emailFailures = mutableStateMapOf<UUID, Unit>()
@@ -855,6 +870,7 @@ class PageWork {
     fun dismiss(pageId: UUID) {
         failures -= pageId
         duplicates -= pageId
+        spent -= pageId
     }
 
     /**
@@ -917,18 +933,23 @@ class PageWork {
     /** The parcel that has the number the Add sheet with `id` tried to add, with why it failed (`duplicateParcelID`). */
     fun duplicate(id: UUID): UUID? = duplicates[id]
 
+    /** Whether the Add sheet with `id` failed as this network's lookups without an account are spent for today. */
+    fun lookupsSpent(id: UUID): Boolean = id in spent
+
     /**
      * Add's `save()` for the sheet with `id`: `work` adds the parcel in `scope` while the sheet waits, as [run] does.
-     * Once saved, the parcel it added ([added]); once failed, why, and the parcel that has the number already where
-     * that is why ([duplicate]).
+     * Once saved, the parcel it added ([added]); once failed, why, the parcel that has the number already where that is
+     * why ([duplicate]), and whether the day's lookups without an account ran out ([lookupsSpent]).
      */
     fun add(id: UUID, scope: CoroutineScope, message: (Throwable) -> String, work: suspend () -> UUID) {
         if (working(id)) return
         duplicates -= id
+        spent -= id
         run(
             id, scope,
             message = { error ->
                 if (error is DeliveryApiError.DuplicateTracking && working(id)) duplicates[id] = error.parcelId
+                if (error is DeviceLookupsSpent && working(id)) spent[id] = Unit
                 message(error)
             },
         ) {

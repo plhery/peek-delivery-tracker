@@ -152,7 +152,7 @@ internal enum class SignInStep { Methods, Code }
  * window being made again, as the iPhone's view lives on through a rotation.
  */
 @Stable
-private class SignInForm(
+internal class SignInForm(
     private val run: SignInRun,
     step: SignInStep,
     email: String,
@@ -188,7 +188,7 @@ private class SignInForm(
  * while none is. The process ending ends it.
  */
 @Stable
-private class SignInRun {
+internal class SignInRun {
     var working by mutableStateOf(false)
         private set
     var activeProvider: String? by mutableStateOf(null)
@@ -278,59 +278,10 @@ internal fun SignInView(
 ) {
     val colors = PeekTheme.colors
     val type = PeekTheme.type
-    val localizer = LocalLocalizer.current
     val density = LocalDensity.current
     val configuration = session.configuration
-    val underWay = retain { SignInRun() }
-    val form = rememberSaveable(saver = remember(underWay) { SignInForm.saver(underWay) }) {
-        SignInForm(underWay, SignInStep.Methods, "", "", "", false, null)
-    }
-    DisposableEffect(underWay, form) {
-        underWay.show(form)
-        onDispose { underWay.hide(form) }
-    }
-    // What went wrong is read out as it appears (`onChange(of: errorMessage)`), and TalkBack goes to the code's field
-    // once the code is sent, as the form it replaces goes (`.task(id: step)`).
-    var announcement by remember { mutableStateOf<Announcement?>(null) }
-    LaunchedEffect(form) {
-        snapshotFlow { form.errorMessage }.drop(1).collect { message ->
-            if (message != null) announcement = Announcement(message, (announcement?.count ?: 0) + 1)
-        }
-    }
-    Announcements(announcement, SIGN_IN_ANNOUNCEMENT) { if (announcement == it) announcement = it.copy(text = "") }
-    val codeFocus = remember { AccessibilityFocus() }
-    LaunchedEffect(form.step) {
-        if (form.step != SignInStep.Code) return@LaunchedEffect
-        delay(CODE_FOCUS_DELAY)
-        codeFocus.request()
-    }
-
-    /** `run(provider:_:)`, which on success does to the form on screen what [succeeded] says. */
-    fun run(provider: String? = null, succeeded: SignInForm.() -> Unit = {}, operation: suspend () -> Unit) {
-        if (underWay.working) return
-        underWay.start(provider)
-        form.errorMessage = null
-        work.launch {
-            var ended: SignInForm.() -> Unit = {}
-            try {
-                operation()
-                ended = succeeded
-            } catch (_: AuthenticationError.OauthCancelled) {
-            } catch (cancelled: CancellationException) {
-                // A change of account under way (`checkGeneration`) says nothing.
-                currentCoroutineContext().ensureActive()
-            } catch (error: Exception) {
-                val message = localizer.errorMessage(error)
-                val shown = if (provider == OIDC && message == localizer.text("error.generic")) {
-                    localizer.text("auth.oidcFailed", mapOf("provider" to configuration.oidcName))
-                } else {
-                    message
-                }
-                ended = { errorMessage = shown }
-            }
-            underWay.end(ended)
-        }
-    }
+    val flow = rememberSignInFlow(session, work)
+    val form = flow.form
 
     BackHandler(onBack = onBack)
     val safe = WindowInsets.systemBars.union(WindowInsets.displayCutout)
@@ -400,26 +351,7 @@ internal fun SignInView(
                             ActivityIndicator(Modifier.padding(top = top).testTag(SIGN_IN_INVITATION_LOADING), size = 20.dp, tint = colors.secondaryLabel)
                         }
                     }
-                    else -> Box(Modifier.padding(top = top)) {
-                        when {
-                            !configuration.authenticationConfigured -> if (invitation == null) {
-                                NoticeBanner(
-                                    symbol = "wrench.and.screwdriver.fill",
-                                    title = localized("auth.configTitle"),
-                                    message = localized("native.configurationHelp"),
-                                    tint = colors.orange,
-                                )
-                            } else {
-                                Text(localized("auth.configTitle"), color = colors.secondaryText, style = type.subheadline.sfLines())
-                            }
-                            form.step == SignInStep.Code -> CodeForm(form, invitation != null, codeFocus, onVerify = {
-                                val email = form.sentTo
-                                val code = form.code
-                                run { session.verifyCode(email = email, code = code) }
-                            })
-                            else -> Methods(session, form, invitation != null, ::run)
-                        }
-                    }
+                    else -> Box(Modifier.padding(top = top)) { SignInWays(flow, invited = invitation != null) }
                 }
                 if (invitation == null) PrivacyLine(configuration.privacyUrl, Modifier.padding(top = 18.dp))
             }
@@ -429,6 +361,112 @@ internal fun SignInView(
                 PrivacyNotice(configuration.privacyUrl, Modifier.padding(top = 12.dp))
             }
         }
+    }
+}
+
+/**
+ * The sign-in's form and its run (`SignInView`'s `@State` and `run(provider:_:)`), which the sign-in screen and the
+ * unlock sheet ([UnlockSheetHost]) each hold one of: the step, what is typed, the run under way and how the last one
+ * ended. [run] runs one way in at a time in the app's scope, and on success does to the form on screen what its
+ * `succeeded` says.
+ */
+@Stable
+internal class SignInFlow(val session: SessionStore, val form: SignInForm, val codeFocus: AccessibilityFocus) {
+    /** A run under way: every way in waits for it to end. */
+    val working: Boolean get() = form.working
+
+    internal var run: (provider: String?, succeeded: SignInForm.() -> Unit, operation: suspend () -> Unit) -> Unit = { _, _, _ -> }
+}
+
+/**
+ * A [SignInFlow] for the screen it is on. The form lives on through the window being made again and the process
+ * ending; the run through the window being made again ([SignInRun]). What went wrong is read out as it appears
+ * (`onChange(of: errorMessage)`), and TalkBack goes to the code's field once the code is sent, as the form it replaces
+ * goes (`.task(id: step)`). A run goes on in [work] once the screen has gone, as the iPhone's `Task` outlives its view;
+ * a cancelled one says nothing, any other failure says `Localizer.errorMessage`'s words, an OIDC one with only the
+ * generic message its own.
+ */
+@Composable
+internal fun rememberSignInFlow(session: SessionStore, work: CoroutineScope): SignInFlow {
+    val localizer = LocalLocalizer.current
+    val configuration = session.configuration
+    val underWay = retain { SignInRun() }
+    val form = rememberSaveable(saver = remember(underWay) { SignInForm.saver(underWay) }) {
+        SignInForm(underWay, SignInStep.Methods, "", "", "", false, null)
+    }
+    DisposableEffect(underWay, form) {
+        underWay.show(form)
+        onDispose { underWay.hide(form) }
+    }
+    var announcement by remember { mutableStateOf<Announcement?>(null) }
+    LaunchedEffect(form) {
+        snapshotFlow { form.errorMessage }.drop(1).collect { message ->
+            if (message != null) announcement = Announcement(message, (announcement?.count ?: 0) + 1)
+        }
+    }
+    Announcements(announcement, SIGN_IN_ANNOUNCEMENT) { if (announcement == it) announcement = it.copy(text = "") }
+    val codeFocus = remember { AccessibilityFocus() }
+    LaunchedEffect(form.step) {
+        if (form.step != SignInStep.Code) return@LaunchedEffect
+        delay(CODE_FOCUS_DELAY)
+        codeFocus.request()
+    }
+    val flow = remember(session, form) { SignInFlow(session, form, codeFocus) }
+    flow.run = run@{ provider, succeeded, operation ->
+        if (underWay.working) return@run
+        underWay.start(provider)
+        form.errorMessage = null
+        work.launch {
+            var ended: SignInForm.() -> Unit = {}
+            try {
+                operation()
+                ended = succeeded
+            } catch (_: AuthenticationError.OauthCancelled) {
+            } catch (cancelled: CancellationException) {
+                // A change of account under way (`checkGeneration`) says nothing.
+                currentCoroutineContext().ensureActive()
+            } catch (error: Exception) {
+                val message = localizer.errorMessage(error)
+                val shown = if (provider == OIDC && message == localizer.text("error.generic")) {
+                    localizer.text("auth.oidcFailed", mapOf("provider" to configuration.oidcName))
+                } else {
+                    message
+                }
+                ended = { errorMessage = shown }
+            }
+            underWay.end(ended)
+        }
+    }
+    return flow
+}
+
+/**
+ * The card's ways in: the configuration notice where sign-in isn't set up ("auth.configTitle" alone when [invited]),
+ * the code step once a code went, or the ways in ([Methods]).
+ */
+@Composable
+internal fun SignInWays(flow: SignInFlow, invited: Boolean = false) {
+    val colors = PeekTheme.colors
+    val type = PeekTheme.type
+    val session = flow.session
+    val form = flow.form
+    when {
+        !session.configuration.authenticationConfigured -> if (!invited) {
+            NoticeBanner(
+                symbol = "wrench.and.screwdriver.fill",
+                title = localized("auth.configTitle"),
+                message = localized("native.configurationHelp"),
+                tint = colors.orange,
+            )
+        } else {
+            Text(localized("auth.configTitle"), color = colors.secondaryText, style = type.subheadline.sfLines())
+        }
+        form.step == SignInStep.Code -> CodeForm(form, invited, flow.codeFocus, onVerify = {
+            val email = form.sentTo
+            val code = form.code
+            flow.run(null, {}) { session.verifyCode(email = email, code = code) }
+        })
+        else -> Methods(session, form, invited, flow.run)
     }
 }
 
@@ -861,7 +899,7 @@ private fun ErrorLabel(message: String) {
  * link "Privacy", which opens the privacy page in the browser; all in the secondary grey caption 2.
  */
 @Composable
-private fun PrivacyLine(privacyUrl: String, modifier: Modifier) {
+internal fun PrivacyLine(privacyUrl: String, modifier: Modifier) {
     val colors = PeekTheme.colors
     val style = PeekTheme.type.caption2
     val short = localized("auth.privacyShort")

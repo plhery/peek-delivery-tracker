@@ -86,6 +86,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendsActionRequest
 import com.plhery.peekdeliverytracker.core.api.FriendsSnapshot
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.deliveries.AccountBar
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
@@ -472,7 +473,9 @@ internal fun FriendsChrome(
 /**
  * `FriendsSignedOutView` (A-S20): the postage pair (12 over the rest), "friends.title" in semibold 26 (growing with the
  * text at the accessibility sizes, as `@ScaledMetric(relativeTo: .title)`), the summary in subheadline in the secondary
- * grey, centred, and Sign in, which opens the sign-in (`session.showSignIn()`); 22 apart, in by 70 and 20.
+ * grey, centred, and Sign in; 22 apart, in by 70 and 20. A guest's Sign in opens the unlock sheet over the tab
+ * ([UnlockReason.Friends]), whose sign-in leaves the guest's list as it is until it succeeds; otherwise the sign-in
+ * (`session.showSignIn()`).
  */
 @Composable
 private fun FriendsSignedOut(source: DeliveriesSource, top: Dp, bottom: Dp, start: Dp, end: Dp) {
@@ -485,7 +488,9 @@ private fun FriendsSignedOut(source: DeliveriesSource, top: Dp, bottom: Dp, star
             verticalArrangement = Arrangement.spacedBy(22.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Intro(localized("arrival.signInTitle"), FRIENDS_SIGN_IN, source::showSignIn)
+            Intro(localized("arrival.signInTitle"), FRIENDS_SIGN_IN) {
+                if (source.session.value == AuthenticationState.Welcome) source.unlock.ask(UnlockReason.Friends) else source.showSignIn()
+            }
         }
     }
 }

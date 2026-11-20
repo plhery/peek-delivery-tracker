@@ -40,6 +40,7 @@ import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.ui.arrival.ArrivalView
 import com.plhery.peekdeliverytracker.ui.arrival.InvitationArrival
 import com.plhery.peekdeliverytracker.ui.arrival.LocalArrivalMotion
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockSheetHost
 import com.plhery.peekdeliverytracker.ui.deliveries.AnnouncementHost
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerDeliveries
 import com.plhery.peekdeliverytracker.ui.deliveries.ContainerParcelLinks
@@ -126,7 +127,8 @@ fun PeekRoot(container: AppContainer, inbox: DeliveriesInbox? = null) {
  * What the tabs present after it, an alert or the browser check, comes over it there, in the order they came, so the
  * back closes what is on top. Once it closes on a parcel to open, or on one just added or followed, the deliveries
  * come forward and take it ([inbox]).
- * A link kept for after sign-in opens again once someone is signed in (B-L03). A friend's link in [inbox] reveals them
+ * A link kept for after sign-in opens again once someone is signed in (B-L03). A guest's unlock sheet
+ * ([UnlockSheetHost]) shows there too, over Add or the tab it was asked from. A friend's link in [inbox] reveals them
  * on the friends tab while someone is signed in. A friend's invitation ([InvitationArrival]) stands in place of all the
  * state shows while it is presented, once the session is read, without the notice of an invitation accepted, and
  * chooses the friends tab once it is accepted.
@@ -255,6 +257,8 @@ internal fun PeekRoot(
                     // The notice of an invitation accepted, over the tabs and under what stands over the window.
                     if (source != null) FriendNoticeHost(source, state, covered = window.covered, invitationShown = presenting)
                     if (links != null) CompositionLocalProvider(LocalTabOverlay provides front) { ParcelLinkSheetHost(links) }
+                    // A guest's unlock sheet, over Add or the tab it was asked from, there too.
+                    if (source != null) CompositionLocalProvider(LocalTabOverlay provides front) { UnlockSheetHost(source.unlock, state, session, work) }
                     // What the link's sheet presents in turn comes over it there.
                     CompositionLocalProvider(LocalWindowOverlay provides front, LocalTabOverlay provides front) { front.Content() }
                     // Each overlay's layers, the link's sheet's and the tabs', over all of it.

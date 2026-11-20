@@ -46,6 +46,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.SyncStatus
 import com.plhery.peekdeliverytracker.platform.PreferencesDefaults
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockRequests
 import com.plhery.peekdeliverytracker.ui.friends.FakeFriendsClient
 import com.plhery.peekdeliverytracker.ui.settings.FakeAddByEmailClient
 import com.plhery.peekdeliverytracker.ui.settings.FakeAssistantsClient
@@ -583,6 +584,8 @@ class FakeDeliveries(
     override fun showSignIn() {
         signIns++
     }
+
+    override val unlock = UnlockRequests()
 
     var demos = 0
 

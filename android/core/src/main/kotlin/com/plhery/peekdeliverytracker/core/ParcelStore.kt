@@ -927,7 +927,8 @@ class ParcelStore(
     /** The parcel this phone follows itself behind a link, by the link or by the parcel. */
     fun followedHere(response: PublicParcelResponse): UUID? {
         if (!tracksWithoutAccount || session.user != null) return null
-        return device.parcelId(response.link.id) ?: device.list().firstOrNull { it.id == response.parcel.id }?.id
+        // A copy the service forgot of the same parcel gives way to the link, which `follow` takes it over with.
+        return device.parcelId(response.link.id) ?: device.list().firstOrNull { it.id == response.parcel.id && !device.isFrozen(it.id) }?.id
     }
 
     /** The parcel this phone follows through a link, for a notification about it. */

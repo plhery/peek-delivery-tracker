@@ -750,23 +750,11 @@ class DeviceParcels(
             parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
             postcodeGiven = request.dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
         ).startingSeen()
-        // A copy the service forgot of the same number makes way for the new lookup, as on the website.
-        entries = entries.filter { !superseded(it, response.parcel) }
+        // A copy the service forgot of the same parcel or number makes way for the new lookup, as on the website, and
+        // leaves it its name.
+        supersede(response.parcel, request.trackingNumber).name?.let { name -> if (entry.label.isEmpty()) entry = entry.copy(label = name) }
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
-        val twin = entries.indexOfFirst { it.parcel.id == response.parcel.id }
-        if (twin >= 0) {
-            val old = entries[twin]
-            entries = entries.filterIndexed { index, _ -> index != twin }
-            val key = keys.keyOf(old.linkId)
-            keys = keys.setting(old.linkId, null)
-            // Its link is forgotten as one forgotten here would be: on file until the service has been told.
-            if (key != null) pendingForgets = pendingForgets.setting(old.linkId, key)
-            if (key != null || old.alertToken != null) {
-                scope.launch {
-                    old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, removal(token)) } }
-                    if (key != null) forgetIfPending(old.linkId, key, client)
-                }
-            }
+        removeTwin(response.parcel.id, besides = null, client)?.let { old ->
             // The parcel being replaced came back unchanged: only its link is new.
             if (old.parcel.id == replacing) {
                 entry = entry.copy(label = old.label, archivedAt = old.archivedAt, replaced = old.replaced, muted = old.muted)
@@ -986,6 +974,8 @@ class DeviceParcels(
                 keys = keys.setting(linkId, null)
                 continue
             }
+            // A copy the service forgot of the same parcel makes way for it, and leaves it its name.
+            val name = supersede(response.parcel).name
             val index = entries.indexOfFirst { it.parcel.id == response.parcel.id }
             if (index >= 0) {
                 if (entries[index].isViewer) {
@@ -996,7 +986,7 @@ class DeviceParcels(
                 continue
             }
             entries = entries + DeviceParcel(
-                linkId = linkId, label = "", archivedAt = null, parcel = Parcel(shared = response.parcel, link = response.link),
+                linkId = linkId, label = name ?: "", archivedAt = null, parcel = Parcel(shared = response.parcel, link = response.link),
                 checkedAt = now().timeIntervalSinceReferenceDate,
             ).startingSeen()
         }
@@ -1056,7 +1046,7 @@ class DeviceParcels(
         }
         if (key != null && (move != null || give != null)) {
             entries.firstOrNull {
-                it.parcel.id != id && it.parcel.trackingNumber.equalsCanonically(entry.parcel.trackingNumber) &&
+                it.parcel.id != id && !it.isFrozen && it.parcel.trackingNumber.equalsCanonically(entry.parcel.trackingNumber) &&
                     it.parcel.carrier.rawValue.equalsCanonically(carrier.rawValue)
             }?.let { existing -> throw DeliveryApiError.DuplicateTracking(existing.parcel.id) }
         }
@@ -1102,21 +1092,27 @@ class DeviceParcels(
 
     /**
      * The owner's link moved to another carrier, or filed under one with its postcode: its answer takes the parcel's
-     * place, and a page open on [id] follows it where the link now reaches another parcel of the number.
+     * place, and a page open on [id] follows it where the link now reaches another parcel of the number, whose answer so
+     * far is no news, as a new lookup's. That parcel followed here under another link, and a copy the service forgot of
+     * it or of the number, make way, the copy leaving its name to a parcel without one.
      */
     private fun refiled(linkId: String, id: UUID, response: PublicParcelResponse, postcodeGiven: Boolean): Parcel {
         // Forgotten here while the service was asked: it stays forgotten.
         val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) }
         if (index < 0) throw DeliveryApiError.ParcelMissing()
+        val number = entries[index].parcel.trackingNumber
         change(index) {
-            val moved = it.taking(Parcel(shared = response.parcel, link = response.link)).copy(
-                checkedAt = now().timeIntervalSinceReferenceDate, postcodeGiven = postcodeGiven,
-            )
+            val answer = Parcel(shared = response.parcel, link = response.link)
+            val stamped = { entry: DeviceParcel -> entry.copy(checkedAt = now().timeIntervalSinceReferenceDate, postcodeGiven = postcodeGiven) }
             // The link reaches another parcel of the number: the page open on the old one follows it.
-            if (response.parcel.id != id) moved.copy(replaced = it.replaced ?: id) else moved
+            if (response.parcel.id != id) stamped(it.copy(parcel = answer).startingSeen()).copy(replaced = it.replaced ?: id) else stamped(it.taking(answer))
         }
+        val name = supersede(response.parcel, number).name
+        client?.let { removeTwin(response.parcel.id, besides = linkId, it) }
+        val moved = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) }
+        if (name != null && entries[moved].label.isEmpty()) change(moved) { it.copy(label = name) }
         save()
-        return shown(entries[index])
+        return shown(entries[moved])
     }
 
     /** The parcel's link as others may open it, or nil once its sharing was stopped. */
@@ -1219,17 +1215,21 @@ class DeviceParcels(
         val linkId = response.link.id
         if (!ParcelLinkRoute.validId(linkId)) throw DeliveryApiError.InvalidResponse()
         val key = key?.takeIf { response.link.role == ParcelLinkRole.Owner && ParcelLinkRoute.validKey(it) }
-        // A copy the service forgot of the same number makes way for a link that still answers.
-        entries = entries.filter { !superseded(it, response.parcel) }
+        // A copy the service forgot of the same parcel or number, or of this link, makes way for a link that still
+        // answers, and leaves it its name.
+        val superseded = supersede(response.parcel, linkId = linkId)
         val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) || it.parcel.id == response.parcel.id }
         if (index >= 0) {
-            if (key == null || !entries[index].isViewer) return Followed(entries[index].parcel.id, false)
+            if (key == null || !entries[index].isViewer) {
+                if (superseded.any) save()
+                return Followed(entries[index].parcel.id, false)
+            }
             upgradeViewer(index, response, key)
             save()
             return Followed(entries[index].parcel.id, false)
         }
         var entry = DeviceParcel(
-            linkId = linkId, label = label?.nonEmpty ?: "", archivedAt = null,
+            linkId = linkId, label = label?.nonEmpty ?: superseded.name ?: "", archivedAt = null,
             parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
         ).startingSeen()
         // Followed again before its notifications were turned off: they go on, and are its own again.
@@ -1488,6 +1488,40 @@ class DeviceParcels(
         entries = entries.toMutableList().also { it[index] = change(it[index]) }
     }
 
+    /**
+     * Takes out the copies the service forgot that `answer` takes the place of ([superseded]), and the one of link
+     * `linkId` if it forgot that too, and gives the first name among them, which a parcel without one takes.
+     */
+    private fun supersede(answer: PublicPackage, number: String? = null, linkId: String? = null): Superseded {
+        val gone = entries.filter { superseded(it, answer, number) || (it.isFrozen && linkId != null && it.linkId.equalsCanonically(linkId)) }
+        if (gone.isNotEmpty()) entries = entries.filter { entry -> gone.none { it === entry } }
+        return Superseded(gone.isNotEmpty(), gone.firstNotNullOfOrNull { it.label.nonEmpty })
+    }
+
+    private data class Superseded(val any: Boolean, val name: String?)
+
+    /**
+     * Takes out the entry of parcel `parcelId` under another link than `linkId`: one parcel is followed here once. Its
+     * link of this phone's own is forgotten as one forgotten here would be, on file until the service has been told, and
+     * its notifications are turned off.
+     */
+    private fun removeTwin(parcelId: UUID, besides: String?, client: DeviceParcelClient): DeviceParcel? {
+        val twin = entries.indexOfFirst { it.parcel.id == parcelId && (besides == null || !it.linkId.equalsCanonically(besides)) }
+        if (twin < 0) return null
+        val old = entries[twin]
+        entries = entries.filterIndexed { index, _ -> index != twin }
+        val key = keys.keyOf(old.linkId)
+        keys = keys.setting(old.linkId, null)
+        if (key != null) pendingForgets = pendingForgets.setting(old.linkId, key)
+        if (key != null || old.alertToken != null) {
+            scope.launch {
+                old.alertToken?.let { token -> attempt { client.removeAlert(old.linkId, removal(token)) } }
+                if (key != null) forgetIfPending(old.linkId, key, client)
+            }
+        }
+        return old
+    }
+
     /** The parcel was opened on this phone (#72): what it tells now is seen, and its dot goes. Nothing leaves the device. */
     fun markSeen(id: UUID, newsAt: String) {
         val index = entries.indexOfFirst { it.parcel.id == id }
@@ -1535,10 +1569,14 @@ class DeviceParcels(
         fun alertPreset(parcel: Parcel): ParcelAlertPreset =
             if (!parcel.hasCarrierUpdate || parcel.currentStage == TrackingStage.Registered) ParcelAlertPreset.All else ParcelAlertPreset.Important
 
-        /** A copy the service forgot of the number `answer` is for, which a lookup or link that answers replaces. */
-        private fun superseded(entry: DeviceParcel, answer: PublicPackage): Boolean {
-            val number = answer.trackingNumber?.nonEmpty ?: return false
-            return entry.isFrozen && entry.parcel.trackingNumber.equalsCanonically(number)
+        /**
+         * A copy the service forgot of the parcel `answer` is for, or of its number (or `number`, the one asked about,
+         * which a link may hide), which a lookup or link that answers replaces.
+         */
+        private fun superseded(entry: DeviceParcel, answer: PublicPackage, number: String? = null): Boolean {
+            if (!entry.isFrozen) return false
+            if (entry.parcel.id == answer.id) return true
+            return listOfNotNull(answer.trackingNumber?.nonEmpty, number?.nonEmpty).any { entry.parcel.trackingNumber.equalsCanonically(it) }
         }
 
         private fun waiting(parcel: Parcel): Boolean = parcel.syncStatus == SyncStatus.Pending || parcel.syncStatus == SyncStatus.Syncing

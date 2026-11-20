@@ -1055,17 +1055,133 @@ class DeviceParcelTests {
         val lookup = PublicLookupResponse(link = link("22222222222C"), key = key, parcel = pkg(fresh, number = "TESTPARCEL123789"))
         val device = device(client(calls, lookup = lookup), storage, this)
 
-        // The same number and carrier is no duplicate of a copy no longer updated.
+        // The same number and carrier is no duplicate of a copy no longer updated, which leaves the lookup its name.
         val added = device.add(CreatePackageRequest(trackingNumber = "TESTPARCEL123789", carrier = CarrierId.Dhl))
         assertEquals(fresh, added.id)
-        assertEquals(listOf("Coat", ""), device.list().map { it.label })
+        assertEquals("Shoes", added.label)
+        assertEquals(listOf("Coat", "Shoes"), device.list().map { it.label })
         assertFalse(device.isFrozen(fresh))
 
         // So does someone else's link to it.
         val shared = PublicParcelResponse(link = reader("22222222222D"), parcel = pkg(UUID.randomUUID(), number = "TESTPARCEL555000"))
         assertTrue(device.follow(shared, null, null).added)
-        assertEquals(listOf("", ""), device.list().map { it.label })
+        assertEquals(listOf("Shoes", "Coat"), device.list().map { it.label })
         assertEquals(listOf("22222222222C", "22222222222D"), storage.parcels.map { it.linkId })
+    }
+
+    @Test
+    fun aLinkToTheSameParcelThatHidesItsNumberTakesTheCopysPlaceAndName() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.parcels = listOf(parcel("22222222222A", "Shoes", id).copy(frozen = "2026-11-01T08:00:00Z"))
+        val device = device(client(Calls()), storage, this)
+
+        val shared = PublicParcelResponse(link = reader("22222222222D"), parcel = pkg(id).copy(trackingNumber = null))
+        assertEquals(DeviceParcels.Followed(id, true), device.follow(shared, null, null))
+
+        assertEquals(listOf("Shoes"), device.list().map { it.label })
+        assertFalse(device.isFrozen(id))
+        assertEquals(listOf("22222222222D"), storage.parcels.map { it.linkId })
+    }
+
+    @Test
+    fun aLinkOfAParcelHereAlreadyStillTakesTheCopysPlace() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222B" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "Shoes", UUID.randomUUID()).copy(frozen = "2026-11-01T08:00:00Z"),
+            parcel("22222222222B", "Coat", id),
+        )
+        val device = device(client(Calls()), storage, this)
+
+        // The copy of the same number goes, on file at once, though the parcel was followed here already.
+        val shared = PublicParcelResponse(link = reader("22222222222D"), parcel = pkg(id))
+        assertEquals(DeviceParcels.Followed(id, false), device.follow(shared, null, null))
+        assertEquals(listOf("22222222222B"), storage.parcels.map { it.linkId })
+        assertEquals(listOf("Coat"), device.list().map { it.label })
+    }
+
+    @Test
+    fun aLostEntryReadAgainTakesTheCopysPlaceAndNameAndKeepsItsKey() = runTest {
+        val id = UUID.randomUUID()
+        var now = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222B" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Shoes", id, date(now)).copy(frozen = "2026-11-01T08:00:00Z"))
+        val calls = Calls()
+        val device = device(
+            client(calls, read = { linkId -> PublicParcelResponse(link = link(linkId), parcel = pkg(id)).takeIf { linkId == "22222222222B" } }),
+            storage, this, now = { now },
+        )
+
+        now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
+        device.refresh()
+
+        assertEquals(listOf("read 22222222222B k"), calls.all)
+        assertEquals(listOf("22222222222B"), storage.parcels.map { it.linkId })
+        assertEquals(listOf("Shoes"), device.list().map { it.label })
+        assertFalse(device.isFrozen(id))
+        assertEquals(mapOf("22222222222B" to key), storage.keys)
+    }
+
+    /** iPhone's testAMovedLinkTakesTheForgottenCopysPlaceAndName. */
+    @Test
+    fun aMovedLinkTakesTheForgottenCopysPlaceAndNameAndItsParcelIsNoNews() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "", previousId).copy(seenNewsAt = "2026-09-01T08:00:00Z"),
+            // The copy of the same number and the new carrier is no duplicate.
+            parcel("22222222222C", "Moon lamp", UUID.randomUUID(), pkg = pkg(UUID.randomUUID(), carrier = CarrierId.Dpd))
+                .copy(frozen = "2026-11-01T08:00:00Z"),
+        )
+        val calls = Calls()
+        val device = device(
+            client(calls, move = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(nextId, carrier = CarrierId.Dpd)) }),
+            storage, this,
+        )
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null)
+
+        assertEquals(nextId, parcel.id)
+        assertEquals("Moon lamp", parcel.label)
+        // What the other lookup of the number tells so far is no news, as a new lookup's.
+        assertFalse(parcel.hasNewUpdate)
+        assertEquals(previousId, parcel.carrierData?.originalPackageId)
+        assertEquals(listOf("22222222222A"), storage.parcels.map { it.linkId })
+        assertEquals(listOf("carrier 22222222222A k dpd"), calls.all)
+    }
+
+    @Test
+    fun aLinkMovedToAParcelFollowedHereUnderAnotherLinkTakesItsPlace() = runTest {
+        val previousId = UUID.randomUUID()
+        val nextId = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key, "22222222222B" to key)
+        storage.parcels = listOf(
+            parcel("22222222222A", "Moon lamp", previousId),
+            parcel("22222222222B", "Other", nextId, pkg = pkg(nextId, number = "TESTPARCEL555000")).copy(alertToken = "token2"),
+        )
+        val calls = Calls()
+        val device = device(
+            client(calls, move = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(nextId, carrier = CarrierId.Dpd)) }),
+            storage, this,
+        )
+
+        val parcel = device.changeCarrier(id = previousId, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = null)
+        advanceUntilIdle()
+
+        // One parcel is followed here once: the other link is forgotten, with its notifications.
+        assertEquals("Moon lamp", parcel.label)
+        assertEquals(listOf("22222222222A"), storage.parcels.map { it.linkId })
+        assertEquals(mapOf("22222222222A" to key), storage.keys)
+        assertEquals(
+            listOf("carrier 22222222222A k dpd", "unalert 22222222222B token2 ${NativePushTransport.Fcm.rawValue}", "forget 22222222222B"),
+            calls.all,
+        )
     }
 
     @Test
@@ -3095,6 +3211,29 @@ class DeviceParcelTests {
         assertEquals(0, store.unlistedDeviceParcelsFlow.value)
         assertTrue(storage.keys.isEmpty())
         assertEquals(listOf("forget 22222222222B", "forget 22222222222C"), calls.all.filter { it.startsWith("forget") })
+    }
+
+    @Test
+    fun aLinkToTheParcelOfACopyTheServiceForgotIsFollowedInItsPlace() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.parcels = listOf(parcel("22222222222A", "Shoes", id).copy(frozen = "2026-11-01T08:00:00Z"))
+        val shown = PublicParcelResponse(link = reader("33333333333A"), parcel = pkg(id))
+        val device = device(client(Calls(), read = { shown }), storage, backgroundScope)
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, localizer = Localizer(AppLanguage.En), device = device,
+            notifications = StubPushNotifications(),
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        // The link's sheet offers to follow it, rather than opening the copy no longer updated.
+        assertNull(store.followedHere(shown))
+        assertEquals(ParcelLinkClaim.Added(id), store.follow(ParcelLinkRoute(id = "33333333333A"), shown))
+        assertEquals(listOf("Shoes"), store.parcels.map { it.label })
+        assertEquals(id, store.followedHere(shown))
+        assertEquals(listOf("33333333333A"), storage.parcels.map { it.linkId })
     }
 
     @Test

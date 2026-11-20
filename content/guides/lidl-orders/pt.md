@@ -4,7 +4,7 @@ description: O Lidl Portugal vende nas lojas. Onde vende online, como em lidl.es
 slug: seguimento-encomenda-lidl
 picture: Uma cadeira de jardim ao lado de uma caixa de madeira com ferramentas embaladas e de uma carrinha de entregas, e o Pip de pé em cima da caixa.
 published: 2026-10-26
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
 O Lidl Portugal vende nas lojas: a sua ajuda fala dos artigos «vendidos nas nossas lojas», os artigos não alimentares estão à venda durante um período determinado e o serviço de reserva está indisponível. Em Espanha, o Lidl tem uma loja online, lidl.es, mas só entrega em moradas espanholas. Lá, a SEUR, a GLS e a Rhenus entregam as encomendas, e o email de confirmação de envio diz qual leva a tua e dá o número de seguimento.
@@ -82,7 +82,7 @@ Pagas por encomenda, leve os artigos que levar. «Si tu pedido supera los 79 €
 
 Os artigos pesados ou volumosos têm um suplemento por unidade: na página do produto, carrega em «Entrega», logo abaixo do preço, e voltas a vê-lo no resumo da encomenda. O envio grátis e os cupões de envio grátis só descontam o envio normal, nunca o suplemento. Podes usar um cupão por encomenda, no passo «Revisa y termina tu pedido» (revê e termina a tua encomenda).
 
-Levanta o pacote em 5 dias seguidos se estiver num cacifo e em 7 se estiver num ponto de recolha. Depois disso, volta ao armazém; se estava num ponto de recolha, o Lidl reembolsa-te a encomenda.
+Levanta o pacote em 5 dias seguidos se estiver num cacifo e em 7 se estiver num ponto de recolha (é o que diz a ajuda do Lidl; os termos e condições de compra dão 10). Depois disso, volta ao armazém; se estava num ponto de recolha, o Lidl reembolsa-te a encomenda.
 
 Mais: [cacifos e pontos de recolha](guide:parcel-lockers), [encomenda não levantada](guide:uncollected-parcel) e [prazos de entrega](guide:delivery-times).
 
@@ -104,7 +104,7 @@ Mais: [encomenda entregue mas não recebida](guide:delivered-not-received), [enc
 
 Tens 30 dias seguidos a contar da entrega: os 14 da lei e mais 16 que o Lidl dá. Com a devolução que pedes na tua conta, devolver é grátis e não precisas de imprimir nada. Seja qual for a transportadora que entregou, a devolução vai com a SEUR, a GLS ou a Rhenus, conforme o peso e o volume.
 
-1. Na tua conta, abre «Pedidos online» e carrega em «Hacer una devolución» (fazer uma devolução) na encomenda. Se compraste como convidado, usa a ligação da fatura ou do email de confirmação de entrega: depois de confirmares o teu email, recebes outra mensagem com os passos a seguir. Se o número da encomenda começar por `GO`, dois caracteres e um hífen (o exemplo do Lidl é `GOXX-1234567891`), escreve só os números depois do hífen.
+1. Na tua conta, abre «Pedidos online» e carrega em «Hacer una devolución» (fazer uma devolução) na encomenda. Se compraste como convidado, usa a ligação do email de confirmação da compra: escreves o teu email e o número da encomenda e, depois de confirmares, recebes outra mensagem com os passos a seguir. Se o número da encomenda começar por `GO` ou `SO`, dois caracteres e um hífen (`GO10-`, `SO10-` ou, no exemplo do Lidl, `GOXX-1234567891`), escreve só os números depois do hífen.
 2. Escolhe os produtos, a quantidade e o motivo, e carrega em «Continuar».
 3. Para a SEUR e a GLS, o Lidl dá-te um código QR no último passo e por email. Mostra-o numa loja SEUR ou GLS: vale 30 dias. Se perderes o email, volta a pedi-lo na tua conta.
 
@@ -126,7 +126,7 @@ Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica 
 - [Lidl Portugal: Posso reservar um artigo de campanha?](https://apoio-ao-cliente.lidl.pt/SelfServicePT/s/article/Posso-reservar-um-artigo-de-campanha) – reserva indisponível, telefone, Messenger, horário; rede fixa, LiA (lido a 18/11/2026)
 - [Lidl Portugal: Comprei um artigo nas vossas lojas, mas não funciona](https://apoio-ao-cliente.lidl.pt/SelfServicePT/s/article/Comprei-um-artigo-nas-vossas-Lojas-mas-nao-funciona-corretamente-o-que-devo-fazer) – trocas e devoluções em loja, Garantias
 - [Lidl Espanha: Posso comprar alimentação em lidl.es?](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Puedo-comprar-art%C3%ADculos-de-alimentaci%C3%B3n-en-lidl-es) – só bazar
-- [Lidl Espanha: Termos e condições de compra](https://www.lidl.es/c/terminos-y-condiciones-de-compra/s10076455) – envio grátis com conta, moradas, zona de entrega, prazos, cacifo, ponto de recolha, Formentera, 48 horas, garantia, 14 mais 16 dias
+- [Lidl Espanha: Termos e condições de compra](https://www.lidl.es/c/terminos-y-condiciones-de-compra/s10076455) – envio grátis com conta, moradas, zona de entrega, prazos, cacifo, ponto de recolha (10 dias), Formentera, 48 horas, garantia, 14 mais 16 dias
 - [Lidl Espanha: Quem entrega a minha encomenda?](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qui%C3%A9n-entregar%C3%A1-mi-pedido) – SEUR, GLS, Rhenus, condições de entrega de cada uma (lido a 18/11/2026)
 - [Lidl Espanha: Instalação de eletrodomésticos](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-incluye-el-servicio-de-instalaci%C3%B3n-de-electrodom%C3%A9sticos) – Rhenus, recolha do antigo
 - [Lidl Espanha: Como vejo o estado da encomenda?](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-ver-el-estado-de-mi-pedido) – email com transportadora e número, volumosos
@@ -135,14 +135,14 @@ Se um pacote muda de transportadora pelo caminho e a primeira nomeia a que fica 
 - [Lidl Espanha: Se não estiver em casa](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-ocurre-si-no-estoy-presente-cuando-me-entregan-el-pedido-a-casa) – email, ponto de recolha
 - [Lidl Espanha: Custos de envio](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1les-son-los-gastos-de-env%C3%ADo-de-mi-pedido) – preços, suplementos, mais de 79 €
 - [Lidl Espanha: Cupão de envio grátis](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-usar-un-cup%C3%B3n-de-gastos-de-env%C3%ADo-gratis) – um cupão por encomenda
-- [Lidl Espanha: Tempo num ponto de recolha](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1nto-tiempo-puede-estar-almacenado-mi-paquete-en-un-punto-de-recogida) – 7 dias, reembolso
+- [Lidl Espanha: Tempo num ponto de recolha](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1nto-tiempo-puede-estar-almacenado-mi-paquete-en-un-punto-de-recogida) – 7 dias, reembolso (lido a 20/11/2026)
 - [Lidl Espanha: Cancelar a encomenda](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Puedo-cancelar-mi-pedido) e [mudar a morada](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Puedo-modificar-mi-direcci%C3%B3n-de-env%C3%ADo-una-vez-finalizado-el-pedido) – 120 minutos, recusar a entrega, reembolso
 - [Lidl Espanha: Encomenda incompleta](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-puedo-hacer-si-mi-pedido-est%C3%A1-incompleto) – Entrega parcial, Apoio ao Cliente
 - [Lidl Espanha: Encomenda danificada](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-puedo-hacer-si-mi-pedido-est%C3%A1-da%C3%B1ado) – fotos, formulário
 - [Lidl Espanha: Garantia dos artigos de bazar](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-hacer-uso-de-la-garant%C3%ADa-del-art%C3%ADculo-de-bazar-que-he-comprado) – LiA, código IAN, conta
 - [Lidl Espanha: Contacto](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-ponerme-en-contacto-con-el-Servicio-de-Atenci%C3%B3n-al-Cliente) – formulário, telefone, horário
-- [Lidl Espanha: Devolver um artigo da loja online](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-devolver-un-art%C3%ADculo-comprado-en-tienda-online) e [o seu custo](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-coste-tiene-realizar-una-devoluci%C3%B3n) – 30 dias, grátis, passos, QR, embalagem original, prazos de reembolso; `GOXX-`, mensagem aos convidados (lido a 18/11/2026)
-- [Lidl Espanha: Devolução como convidado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-solicitar-una-devoluci%C3%B3n-de-mi-pedido-como-invitado) – número da encomenda
+- [Lidl Espanha: Devolver um artigo da loja online](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-devolver-un-art%C3%ADculo-comprado-en-tienda-online) e [o seu custo](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-coste-tiene-realizar-una-devoluci%C3%B3n) – 30 dias, grátis, passos, QR, embalagem original, prazos de reembolso; `GOXX-`, ligação do email da compra para convidados (lido a 20/11/2026)
+- [Lidl Espanha: Devolução como convidado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-solicitar-una-devoluci%C3%B3n-de-mi-pedido-como-invitado) – número da encomenda; `GO10-` ou `SO10-`, email da compra (lido a 20/11/2026)
 - [Lidl Espanha: Estado da devolução](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-saber-el-estado-de-mi-devoluci%C3%B3n) – 14 dias úteis, «Pedidos online»
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas dos números, o que o Peek reconhece
 :::

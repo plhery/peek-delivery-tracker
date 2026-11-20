@@ -4,10 +4,10 @@ description: Quién entrega un pedido de lidl.es, dónde está el número de seg
 slug: seguimiento-pedido-lidl
 picture: Una silla de jardín junto a una caja de madera con herramientas embaladas y una furgoneta de reparto, y Pip de pie sobre la caja.
 published: 2026-10-26
-updated: 2026-11-18
+updated: 2026-11-20
 ---
 
-Lidl vende online en España: en lidl.es y en la app Lidl Plus compras artículos de bazar, no alimentación. Entrega en la Península, Baleares y Canarias con SEUR, GLS y Rhenus, y cuando el pedido sale de su centro logístico te manda un email con el transportista y el número de seguimiento. Si falta algo o llega dañado, avisa a Lidl en las 48 horas siguientes a recibirlo.
+Lidl vende online en España: en lidl.es y en la app Lidl Plus compras artículos de bazar, no alimentación. Entrega en la Península, Baleares y Canarias con SEUR, GLS y Rhenus, y cuando el pedido sale de su centro logístico te manda un email con el transportista y el número de seguimiento; si tienes cuenta, también ves el estado en «Pedidos online». En la Península y Baleares, el envío a domicilio cuesta 4,99 € y es gratis en los pedidos de más de 79 € con tu cuenta Lidl. Si falta algo o llega dañado, avisa a Lidl en las 48 horas siguientes a recibirlo; si no lo quieres, tienes 30 días desde la entrega para devolverlo gratis.
 
 ## ¿Qué vende Lidl online en España?
 
@@ -42,7 +42,7 @@ En Formentera, los pedidos de más de 30 kg y algunos electrodomésticos se entr
 Cuando el pedido sale del centro logístico, Lidl te manda una confirmación de envío por email. «En ella se indicará la empresa de transporte y el número de seguimiento de tu pedido». Pulsa el número para ir a la página de seguimiento del transportista, o escríbelo en su web: el número de seguimiento, no el de pedido.
 
 - **Tu cuenta.** Si estás registrado, ves el estado en tiempo real en tu perfil, en «Pedidos online». Si compraste como invitado, te llegan los emails de Lidl y los de la empresa de transporte.
-- **La fecha prevista.** Viene en el email de confirmación del pedido.
+- **La fecha prevista.** Viene en el email de confirmación del pedido, y los emails de seguimiento que te llegan después te avisan si cambia.
 - **Una entrega parcial.** Si en tu cuenta el pedido sale como `Entrega parcial`, el repartidor todavía tiene algo por entregar.
 - **Artículos voluminosos.** Cuando el pedido sale del centro logístico, el transportista te llama o te escribe para acordar la fecha y la hora exactas de la entrega.
 
@@ -55,11 +55,11 @@ Para otras tiendas: [dónde está el número de seguimiento](guide:find-tracking
 
 Cuando nada se mueve, suele ser una de estas:
 
-- **Aún no ha pasado el plazo.** Cada ficha de producto da el suyo, en días laborables de lunes a viernes, sin sábados ni festivos nacionales. A Baleares suma 24 horas. Si el pedido tiene varios artículos, cuenta el plazo más largo, y algunos productos tienen una fecha de inicio propia.
-- **Vives en Canarias.** Los pedidos salen del almacén el jueves y viajan en barco el fin de semana. Llegan a Gran Canaria y Tenerife entre el martes y el miércoles, un día más tarde al resto de islas. Pide al menos 48 horas antes del jueves; los trámites portuarios pueden sumar hasta 7 días.
+- **Aún no ha pasado el plazo.** Cada ficha de producto da el suyo, en días laborables de lunes a viernes, sin sábados ni festivos nacionales. A Baleares suma 24 horas. Si el pedido tiene varios artículos, cuenta el plazo más largo, y algunos productos tienen una fecha de inicio propia. En temporada alta puede haber alguna entrega en sábado, con aviso previo del transportista.
+- **Vives en Canarias.** Los pedidos salen del almacén el jueves y viajan en barco el fin de semana. Llegan a Gran Canaria y Tenerife entre el martes y el miércoles, un día más tarde al resto de islas. Pide al menos 48 horas antes del jueves; los trámites portuarios, los festivos u otras incidencias logísticas pueden alargar el plazo hasta 7 días.
 - **Una entrega parcial.** Lo que falta sigue de camino: mira el estado en tu cuenta.
 - **Un artículo voluminoso.** Lo entregan el día que acuerdas con el transportista. Si no te encuentra en casa, te escribe para quedar otra fecha.
-- **No estabas en casa.** Lidl te manda un email para gestionar la entrega. En temporada alta puede no haber segundo intento: entonces el email te dice en qué punto de recogida te espera el pedido.
+- **No estabas en casa.** Lidl te manda un email para gestionar la entrega. En temporada alta puede no haber segundo intento: entonces el email te dice en qué punto de recogida te espera el pedido. Si sabes que no vas a estar, Lidl también puede enviarlo al punto de recogida más cercano, si cumple los requisitos de tamaño y peso.
 
 Si la fecha prevista ya ha pasado, espera 48 horas hábiles: en épocas de muchos pedidos, las agencias de transporte pueden retrasarse un poco. Después, escribe a LiA, la asistente virtual de Lidl, con el número de pedido y el email de la compra.
 
@@ -76,11 +76,11 @@ Pagas por pedido, lleve los artículos que lleve. «Si tu pedido supera los 79 �
 | Taquilla (locker) en una tienda Lidl | Gratis | Según el producto. Te llega un email con un código numérico y un QR |
 | Punto de recogida | 2,99 € | Según el producto. Lleva tu DNI, pasaporte o permiso de conducir |
 | A domicilio | 4,99 € | Península y Baleares |
-| Canarias | + 3,00 € por pedido | Sobre los gastos de envío estándar; sin artículos voluminosos |
+| Canarias | + 3,00 € por pedido | Sobre los gastos de envío estándar; llega a casa sin trámites adicionales y «con todos los gastos incluidos». Sin artículos voluminosos |
 
 Los artículos pesados o voluminosos llevan un suplemento por unidad: en la ficha del producto, pulsa «Entrega», justo bajo el precio, y lo vuelves a ver en el resumen del pedido. El envío gratis y los cupones de envío gratis solo descuentan el envío estándar, nunca el suplemento. Puedes usar un cupón por pedido, en el paso «Revisa y termina tu pedido».
 
-Recoge el paquete en 5 días naturales si está en un locker y en 7 si está en un punto de recogida. Pasado el plazo, vuelve al almacén; si estaba en un punto de recogida, Lidl te reembolsa el pedido.
+Recoge el paquete en 5 días naturales si está en un locker y en 7 si está en un punto de recogida (así lo dice la ayuda de Lidl; sus condiciones de compra dan 10). Pasado el plazo, vuelve al almacén; si estaba en un punto de recogida, Lidl te reembolsa el pedido.
 
 Más: [lockers y puntos de recogida](guide:parcel-lockers), [paquete no recogido](guide:uncollected-parcel) y [plazos de entrega](guide:delivery-times).
 
@@ -91,7 +91,7 @@ Primero mira, luego avisa. Por orden:
 :::steps
 - Revisa el seguimiento | Abre el seguimiento desde cada email de envío. Si en «Pedidos online» el pedido sale como `Entrega parcial`, el repartidor todavía tiene algo por entregar. Para un artículo voluminoso, espera la llamada o el email del transportista.
 - Busca y pregunta | Mira si tienes un email para gestionar la entrega o uno que te diga en qué punto de recogida está el pedido. Revisa el locker y el punto de recogida, y pregunta a tus vecinos y a quien te recoja los paquetes.
-- Contacta con Lidl | Escribe a LiA desde «Chatear ahora» o la burbuja azul de la ayuda, usa el formulario de contacto o llama al 900 958 311, gratis desde España, de lunes a sábado de 9:00 a 20:00. Ten a mano tu email y el número de pedido o de cliente.
+- Contacta con Lidl | Escribe a LiA desde «Chatear ahora» o la burbuja azul de la ayuda: está disponible 24 horas al día, 7 días a la semana, y si no resuelve tu duda te pasa con un agente en el horario de atención. También puedes usar el formulario de contacto o llamar al 900 958 311, gratis desde España, de lunes a sábado de 9:00 a 20:00. Ten a mano tu email y el número de pedido o de cliente.
 - Haz una reclamación | Avisa de una entrega parcial o de daños en el exterior del paquete en las 48 horas siguientes a recibirlo, por los canales de Atención al Cliente. Si todavía falta algo cuando han llegado todos los paquetes y tu cuenta dice que el pedido está entregado entero, dile a Atención al Cliente qué artículos no has recibido. Si llega dañado, manda fotos del embalaje y del producto por el formulario de contacto. Un artículo defectuoso tiene tres años de garantía legal desde la entrega: gestiónala con LiA o desde tu cuenta, con el código IAN del artículo, y guarda la factura simplificada.
 - Reembolso o artículo nuevo | Lidl te contacta para decirte cómo seguir. Si prefieres el dinero, devuélvelo gratis en los 30 días siguientes a la entrega. En una devolución por defecto, Lidl te devuelve el precio y los gastos de envío cuando comprueba el artículo.
 :::
@@ -102,9 +102,11 @@ Más: [paquete entregado pero no recibido](guide:delivered-not-received), [paque
 
 Tienes 30 días naturales desde la entrega: los 14 de la ley y 16 más que da Lidl. Con la devolución que pides desde tu cuenta, devolver es gratis y no tienes que imprimir nada. Sea quien sea el transportista que te lo trajo, la devolución va con SEUR, GLS o Rhenus, según el peso y el volumen.
 
-1. En tu cuenta, entra en «Pedidos online» y pulsa «Hacer una devolución» en el pedido. Si compraste como invitado, usa el enlace de la factura o del email de confirmación de entrega. Si tu número de pedido empieza por `GO`, dos caracteres y un guion (el ejemplo de Lidl es `GOXX-1234567891`), escribe solo los números que van después del guion.
+1. En tu cuenta, entra en «Pedidos online» y pulsa «Hacer una devolución» en el pedido. Si compraste como invitado, usa el enlace del email de confirmación de tu compra: escribe tu email y el número de pedido y, al confirmarlo, te llega otro mensaje con los pasos. Si tu número de pedido empieza por `GO` o `SO`, dos caracteres y un guion (`GO10-`, `SO10-` o, en el ejemplo de Lidl, `GOXX-1234567891`), escribe solo los números que van después del guion.
 2. Elige los productos, la cantidad y el motivo, y pulsa «Continuar».
 3. Para SEUR y GLS, Lidl te da un código QR en el último paso y por email. Enséñalo en una tienda SEUR o GLS: vale 30 días. Si pierdes el email, vuelve a pedirlo desde tu cuenta.
+
+Cada código QR de SEUR o GLS vale para una sola caja. Si los artículos no caben en una, pide una devolución por caja, con los artículos que quepan en cada una. Si ya tienes un único QR para todo, junta los artículos en una caja de hasta 120 × 60 × 60 cm o escribe «hablar con un agente» en el chat para que Lidl te dé otra etiqueta.
 
 El artículo tiene que estar intacto, sin desprecintar, y en su embalaje original. Por higiene, Lidl no acepta devoluciones de ropa interior, bañadores, mascarillas ni cepillos de pelo.
 
@@ -126,20 +128,20 @@ Si un paquete cambia de transportista por el camino y el primero nombra al que l
 - [Lidl España: ¿Quién entregará mi pedido?](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qui%C3%A9n-entregar%C3%A1-mi-pedido) – SEUR, GLS, Rhenus
 - [Lidl España: Servicio de instalación de electrodomésticos](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-incluye-el-servicio-de-instalaci%C3%B3n-de-electrodom%C3%A9sticos) – Rhenus, recogida del antiguo
 - [Lidl España: ¿Cómo puedo ver el estado de mi pedido?](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-ver-el-estado-de-mi-pedido) – email con transportista y número, voluminosos
-- [Lidl España: Confirmación de envío y estado de la entrega](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-recibo-la-confirmaci%C3%B3n-de-env%C3%ADo-y-el-estado-de-mi-entrega) – perfil, invitados, 48 horas hábiles, LiA
-- [Lidl España: Plazo de entrega](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1l-es-el-plazo-de-entrega-de-mi-pedido) y [para Canarias](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cual-es-el-plazo-de-entrega-de-mi-pedido-para-Canarias) – días laborables, Baleares, barco, sin voluminosos
+- [Lidl España: Confirmación de envío y estado de la entrega](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-recibo-la-confirmaci%C3%B3n-de-env%C3%ADo-y-el-estado-de-mi-entrega) – perfil, invitados, 48 horas hábiles, LiA; fecha prevista en los emails de seguimiento (leído el 20/11/2026)
+- [Lidl España: Plazo de entrega](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1l-es-el-plazo-de-entrega-de-mi-pedido) y [para Canarias](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cual-es-el-plazo-de-entrega-de-mi-pedido-para-Canarias) – días laborables, Baleares, barco, sin voluminosos; punto de recogida más cercano, hasta 7 días por trámites, festivos o incidencias, todos los gastos incluidos (leído el 20/11/2026)
 - [Lidl España: Si no estoy en casa](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-ocurre-si-no-estoy-presente-cuando-me-entregan-el-pedido-a-casa) – email, punto de recogida
-- [Lidl España: Gastos de envío](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1les-son-los-gastos-de-env%C3%ADo-de-mi-pedido) – precios, suplementos, más de 79 €
+- [Lidl España: Gastos de envío](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1les-son-los-gastos-de-env%C3%ADo-de-mi-pedido) – precios, suplementos, más de 79 € (leído el 20/11/2026)
 - [Lidl España: Cupón de envío gratis](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-usar-un-cup%C3%B3n-de-gastos-de-env%C3%ADo-gratis) – un cupón por pedido
-- [Lidl España: Tiempo en un punto de recogida](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1nto-tiempo-puede-estar-almacenado-mi-paquete-en-un-punto-de-recogida) – 7 días, reembolso
+- [Lidl España: Tiempo en un punto de recogida](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Cu%C3%A1nto-tiempo-puede-estar-almacenado-mi-paquete-en-un-punto-de-recogida) – 7 días, reembolso (leído el 20/11/2026)
 - [Lidl España: Cancelar un pedido](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Puedo-cancelar-mi-pedido) y [cambiar la dirección](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Puedo-modificar-mi-direcci%C3%B3n-de-env%C3%ADo-una-vez-finalizado-el-pedido) – 120 minutos, rechazar la entrega, reembolso
 - [Lidl España: Pedido incompleto](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-puedo-hacer-si-mi-pedido-est%C3%A1-incompleto) – Entrega parcial, Atención al Cliente
 - [Lidl España: Pedido dañado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-puedo-hacer-si-mi-pedido-est%C3%A1-da%C3%B1ado) – fotos, formulario
 - [Lidl España: Garantía de los artículos de bazar](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-hacer-uso-de-la-garant%C3%ADa-del-art%C3%ADculo-de-bazar-que-he-comprado) – LiA, código IAN, cuenta
-- [Lidl España: Contacto](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-ponerme-en-contacto-con-el-Servicio-de-Atenci%C3%B3n-al-Cliente) – formulario, teléfono, horario
-- [Lidl España: Devolver un artículo de la tienda online](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-devolver-un-art%C3%ADculo-comprado-en-tienda-online) y [su coste](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-coste-tiene-realizar-una-devoluci%C3%B3n) – 30 días, gratis, pasos, QR, embalaje original, plazos de reembolso; `GOXX-` (leído el 18/11/2026)
-- [Lidl España: Devolución como invitado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-solicitar-una-devoluci%C3%B3n-de-mi-pedido-como-invitado) – número de pedido
+- [Lidl España: Contacto](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-ponerme-en-contacto-con-el-Servicio-de-Atenci%C3%B3n-al-Cliente) – formulario, teléfono, horario; LiA 24/7 y paso a un agente (leído el 20/11/2026)
+- [Lidl España: Devolver un artículo de la tienda online](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-devolver-un-art%C3%ADculo-comprado-en-tienda-online) y [su coste](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/Qu%C3%A9-coste-tiene-realizar-una-devoluci%C3%B3n) – 30 días, gratis, pasos, QR, embalaje original, plazos de reembolso; `GOXX-`, enlace del email de compra para invitados, un QR por caja, 120 × 60 × 60 cm (leído el 20/11/2026)
+- [Lidl España: Devolución como invitado](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-solicitar-una-devoluci%C3%B3n-de-mi-pedido-como-invitado) – número de pedido; `GO10-` o `SO10-`, email de la compra (leído el 20/11/2026)
 - [Lidl España: Estado de mi devolución](https://atencion-al-cliente.lidl.es/SelfServiceES/s/article/C%C3%B3mo-puedo-saber-el-estado-de-mi-devoluci%C3%B3n) – 14 días laborables, «Pedidos online»
-- [Lidl España: Términos y condiciones de compra](https://www.lidl.es/c/terminos-y-condiciones-de-compra/s10076455) – envío gratis con cuenta, zona de entrega, plazos, locker, punto de recogida, Formentera, 48 horas, garantía, 14 más 16 días
+- [Lidl España: Términos y condiciones de compra](https://www.lidl.es/c/terminos-y-condiciones-de-compra/s10076455) – envío gratis con cuenta, zona de entrega, plazos, locker, punto de recogida (10 días), Formentera, 48 horas, garantía, 14 más 16 días; entregas en sábado en temporada alta (versión del 27/02/2026, leída el 20/11/2026)
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – formas de números, lo que reconoce Peek
 :::

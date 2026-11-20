@@ -4,7 +4,7 @@ description: Von „elektronisch angekündigt“ bis „zugestellt“: was die S
 slug: sendungsstatus-bedeutung-aller-meldungen
 picture: Eine kurvige Route mit abgehakten Stationen (Strichcode-Etikett, Depot, Flugzeug), ein Lieferwagen an der aktuellen Station, weiter vorn ein Haus und Pip, der eilig mitläuft.
 published: 2026-10-09
-updated: 2026-11-19
+updated: 2026-11-20
 ---
 
 Ein Sendungsstatus fasst den letzten Scan des Paketdienstes in ein paar Worten zusammen, und meistens musst du nichts tun. „Elektronisch angekündigt“ heißt, dass der Paketdienst dein Paket noch gar nicht hat, „in transit“ oder „unterwegs“, dass es irgendwo zwischen zwei Scans steckt, und „in Zustellung“, dass es heute im Zustellfahrzeug liegt. Gefragt bist du nur in wenigen Fällen: nach einem verpassten Zustellversuch, wenn ein Paket zur Abholung bereitliegt, wenn der Zoll etwas verlangt und wenn „zugestellt“ dasteht, aber nichts da ist.
@@ -106,7 +106,7 @@ Ob der Code auf der Karte auch als Sendungsnummer taugt, steht unter [Sendungsnu
 
 ## „Zur Abholung bereit“: Wo liegt mein Paket?
 
-In einer Filiale, einem Paketshop, einer Packstation oder, in Österreich, einer Poststation, [bis die Frist aus der Tabelle oben abläuft](guide:uncollected-parcel). Bei DHL heißt das `Die Sendung liegt zur Abholung in einem ParcelShop/in der Postfiliale bereit.`, in Peek „Abholbereit“. Steht dort noch `Die Sendung wird zur Abholung in die Filiale … gebracht.`, ist es erst auf dem Weg dorthin, und Peek zeigt „Unterwegs“. Bei der Österreichischen Post heißt das `Sendung abholbereit`: In der Post-Geschäftsstelle holst du es zu den Öffnungszeiten ab, aus der Poststation jederzeit mit dem Benachrichtigungscode. Bei `Sendung in Postempfangsbox abholbereit` kannst du es aus der Post Empfangsbox nehmen. Die Schweizerische Post zeigt mit `Ankunft an der Abhol-/Zustellstelle`, ab wann das Paket in der Filiale bereitliegt. Bei UPS lautet der Scan `Delivered to UPS Access Point™`.
+In einer Filiale, einem Paketshop, einer Packstation oder, in Österreich, einer Poststation, [bis die Frist aus der Tabelle oben abläuft](guide:uncollected-parcel). Bei DHL heißt das, die Sendung liege in Packstation, Filiale oder ParcelShop zur Abholung bereit, in Peek „Abholbereit“. Steht dort noch `Die Sendung wird zur Abholung in die Filiale … gebracht.`, ist es erst auf dem Weg dorthin, und Peek zeigt „Unterwegs“. Bei der Österreichischen Post heißt das `Sendung abholbereit`: In der Post-Geschäftsstelle holst du es zu den Öffnungszeiten ab, aus der Poststation jederzeit mit dem Benachrichtigungscode. Bei `Sendung in Postempfangsbox abholbereit` kannst du es aus der Post Empfangsbox nehmen. Die Schweizerische Post zeigt mit `Ankunft an der Abhol-/Zustellstelle`, ab wann das Paket in der Filiale bereitliegt. Bei UPS lautet der Scan `Delivered to UPS Access Point™`.
 
 Schau in die Sendungsverfolgung, bevor du losgehst. Bei DHL kann das Paket in Ausnahmefällen woanders landen als auf der Karte vermerkt. Der tatsächliche Ort steht in der Sendungsverfolgung. Stimmen beide überein, warst du vielleicht zu früh dran: Prüf die Uhrzeit auf der Karte. In der Schweiz lässt du dir das Paket mit einem Login bei „Meine Sendungen“ auch nochmals zustellen: kostenlos zum Deponieren oder an den Nachbarn, CHF 3.30 auf die Etage, CHF 7.00 am Samstag. Weiterleiten kostet CHF 8.00 von Montag bis Freitag.
 

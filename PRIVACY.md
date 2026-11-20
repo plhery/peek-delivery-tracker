@@ -105,7 +105,7 @@ and passes them to the service. An assistant you connect, such as Claude or
 ChatGPT, receives what you allowed it: your parcels' names, senders, carriers,
 tracking numbers, statuses, expected days, pickup points and scans, never the
 recipient's name, postcode or phone digits. Its provider's own privacy terms then apply to what it receives.
-A tool you give a personal token, such as Home Assistant, receives the same.
+Home Assistant, connected through Peek's integration, and a tool you give a personal token receive the same.
 
 To check and improve how it reads the emails you forward, Peek may send some of
 the kept emails to Anthropic, PBC, in the United States, whose AI model Claude

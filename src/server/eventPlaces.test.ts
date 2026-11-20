@@ -28,6 +28,20 @@ it('says when the named delivering carrier lists the parcel without a scan of it
     expect((withEventPlaces({ current_stage, carrier_data: { delivery_carrier: 'dhl', delivery_probe: probe } }) as
       { carrier_data: Record<string, unknown> }).carrier_data).not.toHaveProperty('delivery_announced');
   }
+  // The account's rows have no stage: their scans tell it, as the apps read them.
+  const scans = (stage: string) => [
+    { id: 'e1', stage: 'in_transit', description: 'In transit', occurred_at: '2026-11-04T09:00:00Z', provider_event_id: 'dhl:1' },
+    { id: 'e2', stage, description: 'Last scan', occurred_at: '2026-11-06T09:00:00Z', provider_event_id: 'dhl:2' },
+  ];
+  const account = (carrier: string, stage: string) => (withEventPlaces({ carrier, tracking_number: 'TESTPARCEL0001',
+    carrier_data: { delivery_carrier: 'dhl', delivery_probe: probe }, tracking_events: scans(stage) }) as
+    { carrier_data: Record<string, unknown> }).carrier_data;
+  for (const stage of ['delivered', 'returned']) expect(account('cainiao', stage)).not.toHaveProperty('delivery_announced');
+  expect(account('cainiao', 'out_for_delivery')).toMatchObject({ delivery_announced: true });
+  // A carrier that writes the delivered step on a schedule delivers nothing itself: the partner still only has it announced.
+  expect(account('gzyl', 'delivered')).toMatchObject({ delivery_announced: true });
+  expect((withEventPlaces({ carrier: 'gzyl', current_stage: 'delivered', carrier_data: { delivery_carrier: 'dhl', delivery_probe: probe } }) as
+    { carrier_data: Record<string, unknown> }).carrier_data).toMatchObject({ delivery_announced: true });
   // The check itself, with the partner's number, stays on the server.
   expect(served({ delivery_carrier: 'dhl', delivery_probe: probe })).not.toHaveProperty('delivery_probe');
   expect(served({ delivery_probe: { ...probe, listed: undefined } })).toEqual({});

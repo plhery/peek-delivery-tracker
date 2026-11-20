@@ -1,6 +1,7 @@
 import 'server-only';
 
-import { EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
+import { SCHEDULED_DELIVERIES } from '../lib/carriers';
+import { currentScan, EVENT_STAGE_ORDER, tieOrder } from '../lib/stages';
 import { captureOperationalError } from './observability';
 import { CARRIER_DEFINITIONS, classifyWording, RECIPIENT_ACTIONS, recipientAction, type CarrierId } from 'universal-parcel-scraper';
 import { placesForEvents, type EventPoint } from 'universal-parcel-scraper/places';
@@ -116,6 +117,13 @@ const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe
  */
 const SERVED_APART = ['planned', 'written_ahead'];
 
+/** Served scans newest first, those of one instant by delivery progress, then in their source's order (`tie_order`). */
+function newestFirst(left: JsonObject, right: JsonObject): number {
+  return (Date.parse(String(right.occurred_at)) || 0) - (Date.parse(String(left.occurred_at)) || 0)
+    || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage))
+    || tieOrder(right.tie_order) - tieOrder(left.tie_order);
+}
+
 /**
  * A package row without the carrier data that only the service reads (`SERVICE_DATA`), and with what the card says of
  * the delivering carrier's check: the partner it found holding the parcel (`probedPartner`), and whether that carrier
@@ -126,8 +134,13 @@ function withoutServiceData(row: JsonObject): JsonObject {
   const stored = isRecord(row.carrier_data) ? row.carrier_data : null;
   const apart = stored && isRecord(stored.routing) && SERVED_APART.some((key) => key in (stored.routing as JsonObject));
   const named = stored && { ...stored, ...probedPartner(stored) };
-  // A parcel delivered or returned waits for no partner, whatever its last probe found.
-  const announced = named !== null && !['delivered', 'returned'].includes(String(row.current_stage ?? '')) && deliveryAnnounced(named);
+  // A parcel delivered or returned waits for no partner, whatever its last probe found: in the stage its scans show, as
+  // the apps read them, where the row has none (the account's rows). But a carrier that writes the delivered step on a
+  // schedule (GZYL) delivers nothing itself: the partner that only has the parcel announced is why the apps tell the
+  // reader to ask the seller (`scheduledDelivery`).
+  const announced = named !== null && deliveryAnnounced(named) && (SCHEDULED_DELIVERIES.has(String(row.carrier) as CarrierId)
+    || !['delivered', 'returned'].includes(String(row.current_stage ?? currentScan(shownEvents(row)
+      .filter((event) => event.stage !== 'pending').sort(newestFirst))?.stage ?? '')));
   if (!stored || !named || !(SERVICE_DATA.some((key) => key in stored) || apart)) return row;
   const data: JsonObject = { ...named, ...announced ? { delivery_announced: true } : {} };
   for (const key of SERVICE_DATA) delete data[key];

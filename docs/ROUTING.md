@@ -1082,9 +1082,9 @@ A parcel often changes carrier at the border. The origin history is always kept.
   [`eventPlaces.ts`](../src/server/eventPlaces.ts)).
 - A parcel that records no handoff may hold another carrier's rows too: the carrier it was
   filed under before a correction, or one asked beside it, told the same scans. Such a row at
-  the same second and in the same stage as a row of the carrier tracking the parcel now, from
-  places that do not conflict once their words are read (case, accents, countries and state
-  codes left out), is served with `relay_of` that row's id and announces as a relay pair's row does.
+  the same second as a row of the carrier tracking the parcel now, in the same stage or, off a
+  minute's first second, in any, from places that do not conflict once their words are read
+  (case, accents, countries and state codes left out), is served with `relay_of` that row's id and announces as a relay pair's row does.
   So is a third carrier's row in a handed-over parcel that no relay pair holds (Australia Post's
   rows of a Parcelforce parcel EMS carries on), even beside the earlier carrier's copy of the scan.
 - Compatibility: AliExpress `L…CH` numbers keep a Swiss Post confirmation probe, and

@@ -54,9 +54,10 @@
  * A parcel that records no handoff may hold another carrier's rows too: the
  * carrier it was filed under before a correction, or one asked beside it, told
  * the same scans (BRT Chronopost's, SwiftX DHLink's). Such a row at the same
- * second and in the same stage as a row of the carrier tracking the parcel now,
- * from places that do not conflict once their words are read ("UTRECHT NL" and
- * "Utrecht, UT, NL"), goes under that row. So does a third carrier's row in a
+ * second as a row of the carrier tracking the parcel now, in the same stage or,
+ * off a minute's first second, in any (JS Express tells Royal Mail's acceptance
+ * as in transit), from places that do not conflict once their words are read
+ * ("UTRECHT NL" and "Utrecht, UT, NL"), goes under that row. So does a third carrier's row in a
  * handed-over parcel that no relay pair holds (Australia Post's rows of a
  * Parcelforce parcel EMS carries on), even under a scan that has the earlier
  * carrier's copy under it already.
@@ -292,8 +293,9 @@ export function relayCopies(row: JsonObject): Map<string, string> {
 
 /**
  * On a parcel that records no handoff, the rows of another carrier that tell a scan of the carrier tracking the parcel
- * now, each with that scan's id: the same second, the same stage, places that do not conflict. A scan is in one pair
- * at most; a universal provider's row is in none.
+ * now, each with that scan's id: the same second, places that do not conflict, and the same stage, or, off a minute's
+ * first second, any stage once the same stage's pairs are made. A scan is in one pair at most; a universal provider's
+ * row is in none.
  */
 function otherCarrierCopies(
   scans: readonly Pick<Scan, 'id' | 'stage' | 'source' | 'at' | 'words'>[], current: string,
@@ -304,13 +306,16 @@ function otherCarrierCopies(
   const paired = new Set<string>();
   const copies = scans.filter((scan) => scan.source !== current && scan.source !== UNIVERSAL_SOURCE)
     .sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
-  for (const copy of copies) {
-    const scan = own.filter((other) => !paired.has(other.id) && second(other.at) === second(copy.at)
-      && other.stage === copy.stage && !placesConflict(copy.words, other.words))
-      .sort((a, b) => a.id.localeCompare(b.id))[0];
-    if (!scan) continue;
-    pairs.set(copy.id, scan.id);
-    paired.add(scan.id);
+  for (const sameStage of [true, false]) {
+    for (const copy of copies) {
+      if (pairs.has(copy.id)) continue;
+      const scan = own.filter((other) => !paired.has(other.id) && second(other.at) === second(copy.at)
+        && (sameStage ? other.stage === copy.stage : second(copy.at) % 60 !== 0) && !placesConflict(copy.words, other.words))
+        .sort((a, b) => a.id.localeCompare(b.id))[0];
+      if (!scan) continue;
+      pairs.set(copy.id, scan.id);
+      paired.add(scan.id);
+    }
   }
   return pairs;
 }

@@ -431,7 +431,7 @@ describe('relayCopies', () => {
     ] })).toEqual(new Map([['sorted-copy', 'sorted']]));
   });
 
-  it('pairs another carrier\'s row of the parcel\'s scan when no handoff is recorded: same second, stage and place', () => {
+  it('pairs another carrier\'s row of the parcel\'s scan when no handoff is recorded: same second and place, same stage or off the minute', () => {
     const placed = (id: string, source: string, stage: string, at: string, location?: string) => ({ ...scan(id, source, stage, at), location });
     // BRT's rows stayed when the parcel was corrected to Chronopost, which tells the same scans.
     const corrected = (tracking_events: object[]) => ({
@@ -451,7 +451,15 @@ describe('relayCopies', () => {
       placed('depot-elsewhere', 'brt', 'in_transit', '2026-10-17T09:00:12Z', 'AMSTERDAM NL'),
       placed('round', 'chronopost', 'out_for_delivery', '2026-10-18T07:10:00Z', 'UTRECHT NL'),
       placed('round-provider', 'unknown', 'out_for_delivery', '2026-10-18T07:10:00Z', 'UTRECHT NL'),
-    ]))).toEqual(new Map([['label-copy', 'label'], ['sorted-copy', 'sorted']]));
+      // Off a minute's first second, BRT's row tells Chronopost's scan in another stage too, after the same stage's pairs.
+      placed('collected', 'chronopost', 'accepted', '2026-10-19T08:27:59Z', 'UTRECHT NL'),
+      placed('collected-copy', 'brt', 'in_transit', '2026-10-19T08:27:59Z', 'Utrecht, UT, NL'),
+      placed('loaded', 'chronopost', 'in_transit', '2026-10-20T06:12:31Z', 'UTRECHT NL'),
+      placed('loaded-again', 'brt', 'accepted', '2026-10-20T06:12:31Z', 'UTRECHT NL'),
+      placed('loaded-copy', 'brt', 'in_transit', '2026-10-20T06:12:31Z', 'UTRECHT NL'),
+    ]))).toEqual(new Map([
+      ['label-copy', 'label'], ['sorted-copy', 'sorted'], ['collected-copy', 'collected'], ['loaded-copy', 'loaded'],
+    ]));
     // Two rows of the carrier tracking the parcel are no pair, nor two of the other carrier's.
     expect(relayCopies(corrected([
       placed('first', 'chronopost', 'in_transit', '2026-10-15T16:11:42Z', 'UTRECHT NL'),

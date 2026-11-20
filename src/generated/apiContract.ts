@@ -1176,6 +1176,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "dpd-fr",
+      "recognitionRank": 693,
+      "recognitionPattern": "^(?:0\\d|1[1-9])\\d{12}$",
       "browserRecognitionRank": 700,
       "browserRecognitionPattern": "^(?:10\\d{12}|250\\d{13})$"
     },
@@ -15292,7 +15294,8 @@ export const CARRIER_CAPABILITIES = {
       "駝飛俠",
       "XZG",
       "QYEXP",
-      "Asus International"
+      "Asus International",
+      "YLE"
     ],
     "countries": [
       "CN"
@@ -25571,9 +25574,9 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "neighbour-express"
     },
-    "trackingUrlTemplate": "https://www.neighbourexpress.com/track?trackingNumber={trackingNumber}",
+    "trackingUrlTemplate": "https://neighbourexpress.com/track?no={trackingNumber}",
     "linkRules": [
       {
         "domains": [
@@ -25588,7 +25591,7 @@ export const CARRIER_CAPABILITIES = {
       }
     ],
     "detectionRules": [],
-    "trackingSearchUrl": "https://www.neighbourexpress.com/track"
+    "trackingSearchUrl": "https://neighbourexpress.com/track"
   },
   "packli-punkt": {
     "displayName": "Päckli Punkt",
@@ -32754,7 +32757,8 @@ export const CARRIER_CAPABILITIES = {
       "Maersk Parcel",
       "B2C Europe",
       "InterPost",
-      "Maersk E-Delivery"
+      "Maersk E-Delivery",
+      "TrackYourParcel"
     ],
     "countries": [
       "US"
@@ -34124,7 +34128,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Dubai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "first-flight-me"
     },
     "trackingUrlTemplate": "https://firstflightme.com/tracking/awb/{trackingNumber}",
     "linkRules": [
@@ -34481,7 +34485,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Sofia",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "interlogistica"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -34743,7 +34747,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Warsaw",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "ambro-express"
     },
     "trackingUrlTemplate": "https://ambroexpress.pl/sledzenie-przesylek#{trackingNumber}",
     "linkRules": [
@@ -34993,7 +34997,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "sway"
     },
     "trackingUrlTemplate": "https://track.shipsway.com/{trackingNumber}",
     "linkRules": [
@@ -35237,7 +35241,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "sentral-cargo"
     },
     "trackingUrlTemplate": "https://sentralcargo.co.id/cekresi?resi={trackingNumber}",
     "linkRules": [
@@ -35387,7 +35391,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Nicosia",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "akis-express"
     },
     "trackingUrlTemplate": "https://gapakisexpress.com/track-your-packages/?tracking_num={trackingNumber}",
     "linkRules": [
@@ -37408,7 +37412,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Rome",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rhenus-it"
     },
     "trackingUrlTemplate": "https://tracking.rhenusitalia.it/rhenus/tracking.jsf?s={trackingNumber}",
     "linkRules": [
@@ -37808,7 +37812,8 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Aruba",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "aruba-post",
+      "recognitionRank": 18
     },
     "trackingUrlTemplate": "https://cds.postaruba.com/ipswt/IPSWeb_item_events.aspx?itemid={trackingNumber}",
     "linkRules": [
@@ -37822,7 +37827,14 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^[A-Z]{2}\\d{9}AW$",
+        "confidence": "low",
+        "checksum": "s10",
+        "preferred": true
+      }
+    ],
     "trackingSearchUrl": "https://www.postaruba.com/track"
   },
   "bonds-couriers": {
@@ -40426,7 +40438,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Australia/Melbourne",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tig-freight"
     },
     "trackingUrlTemplate": "https://tracking.open360.com/tracking/{trackingNumber}",
     "linkRules": [
@@ -42068,7 +42080,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Athens",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "diakinisis"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -42462,7 +42474,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Hong_Kong",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "king-kong-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -42558,11 +42570,25 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Los_Angeles",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "shipgce"
     },
-    "linkRules": [],
-    "detectionRules": [],
-    "trackingSearchUrl": "https://ebuy.shipgce.com/listSubOrder.aspx"
+    "linkRules": [
+      {
+        "domains": [
+          "express.shipgce.com"
+        ],
+        "pathPattern": "^/postcheck\\.htm$",
+        "query": "^(?=(?:.*&)?type=identity(?:&|$))(?:.*&)?checkvalue=([^&]+)(?=&|$)"
+      }
+    ],
+    "detectionRules": [
+      {
+        "pattern": "^GC\\d{9}US$",
+        "confidence": "low"
+      }
+    ],
+    "trackingSearchUrl": "https://express.shipgce.com/postcheck.htm",
+    "trackingUrlTemplate": "https://express.shipgce.com/postcheck.htm?checkvalue={trackingNumber}&type=identity"
   },
   "showl": {
     "displayName": "Showl",
@@ -43170,7 +43196,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "wangjing-3cq"
     },
     "trackingUrlTemplate": "https://track.wjdrop.com/tracking/index?nums={trackingNumber}",
     "linkRules": [
@@ -44787,10 +44813,15 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rayspeed"
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^RAY\\d{13}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://rayspeed.com/en/track"
   },
   "rex-indonesia": {
@@ -45049,7 +45080,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Shanghai",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "uof-express"
     },
     "trackingUrlTemplate": "https://www.uofexp.com/search_order.aspx?trackNumber={trackingNumber}",
     "linkRules": [
@@ -46236,7 +46267,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "pxc-pacific"
     },
     "trackingUrlTemplate": "https://pacificexp.net/tracking-details.html?awbno={trackingNumber}",
     "linkRules": [
@@ -47014,7 +47045,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "m24-logistics"
     },
     "trackingUrlTemplate": "https://lms.m24logistics.com/track-my-order/{trackingNumber}",
     "linkRules": [
@@ -47995,7 +48026,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Almaty",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "spark-kz"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -48154,10 +48185,15 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Jakarta",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "herona-express"
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^TSMA\\d{8}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://tracking.heronaexpress.co.id/lacak.php"
   },
   "hub-group-final-mile": {
@@ -49112,7 +49148,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/New_York",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jas-worldwide"
     },
     "trackingUrlTemplate": "https://myjas.com/public/shipments?shipmentNumber={trackingNumber}",
     "linkRules": [
@@ -49635,7 +49671,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Riyadh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lafasta"
     },
     "trackingUrlTemplate": "https://c.lafasta.sa.com/Track/{trackingNumber}",
     "linkRules": [
@@ -49878,7 +49914,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Chicago",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rocket-shipping"
     },
     "trackingUrlTemplate": "https://tracking.rocketshipping.io/track/{trackingNumber}",
     "linkRules": [
@@ -50804,7 +50840,12 @@ export const CARRIER_CAPABILITIES = {
         "path": "^/([A-Za-z0-9]+)/?$"
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^FDA\\d{9}CA$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://track.fastship.co/"
   },
   "meitetsu-unyu": {
@@ -52405,7 +52446,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Athens",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "biz-courier"
     },
     "trackingUrlTemplate": "https://trackit.bizcourier.eu/app/en/{trackingNumber}",
     "linkRules": [
@@ -52417,7 +52458,12 @@ export const CARRIER_CAPABILITIES = {
         "path": "^/app/[a-z]{2}(?:-[a-z]{2})?/([^/]+)/?$"
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^SWS\\d{8}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://trackit.bizcourier.eu/app/en"
   },
   "city-courier-gr": {
@@ -53263,7 +53309,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Sofia",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "cvc"
     },
     "trackingUrlTemplate": "https://my.e-cvc.bg/track?wb={trackingNumber}&checkit=%D0%9F%D1%80%D0%BE%D0%B2%D0%B5%D1%80%D0%B8",
     "linkRules": [
@@ -53708,7 +53754,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Kyiv",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "delivery-auto"
     },
     "trackingUrlTemplate": "https://www.delivery-auto.com/uk-UA/Home/SearchReceipt?number={trackingNumber}",
     "linkRules": [
@@ -55392,7 +55438,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Toronto",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "gls-ca"
     },
     "trackingUrlTemplate": "https://gls-group.com/CA/en/send-and-receive/track-a-shipment/?match={trackingNumber}",
     "linkRules": [
@@ -56575,7 +56621,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Istanbul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "cargox"
     },
     "trackingUrlTemplate": "https://t.cargox.com.tr/getlink.php?barcode={trackingNumber}",
     "linkRules": [
@@ -57731,7 +57777,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Santo_Domingo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "bm-cargo"
     },
     "trackingUrlTemplate": "https://bmcargo-online.iplus.com.do/lg-es/ut/Estatus.aspx?id={trackingNumber}",
     "linkRules": [
@@ -58094,7 +58140,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "gollog"
     },
     "trackingUrlTemplate": "https://servicos.gollog.com.br/app/site/tracking?code={trackingNumber}",
     "linkRules": [
@@ -58108,7 +58154,13 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^127\\d{8}$",
+        "confidence": "high",
+        "rawPattern": "^127-\\d{4} ?\\d{4}$"
+      }
+    ],
     "trackingSearchUrl": "https://servicos.gollog.com.br/app/site/tracking"
   },
   "hop-envios": {
@@ -58124,7 +58176,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Argentina/Buenos_Aires",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "hop-envios"
     },
     "trackingUrlTemplate": "https://hopenvios.com.ar/segui-tu-envio?c={trackingNumber}",
     "linkRules": [
@@ -58166,7 +58218,12 @@ export const CARRIER_CAPABILITIES = {
         "fragment": "^/tracking/code/([^/?#]+)/?$"
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^TRI\\d{13}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://tracking.iflow21.com/"
   },
   "j-and-t-cargo-br": {
@@ -58938,7 +58995,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Johannesburg",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "fastway-za"
     },
     "trackingUrlTemplate": "https://www.fastway.co.za/our-services/track-your-parcel/?l={trackingNumber}",
     "linkRules": [
@@ -58953,7 +59010,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^(?:B1|D6)\\d{10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.fastway.co.za/our-services/track-your-parcel/"
   },
   "guepex": {
@@ -61227,7 +61289,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "gbs-broker"
     },
     "trackingUrlTemplate": "https://gbs.ru/track/?numbers={trackingNumber}",
     "linkRules": [
@@ -61241,7 +61303,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^RLAI\\d{8}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://gbs.ru/track/"
   },
   "rohlig-suus": {
@@ -61482,7 +61549,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "airways-courier-in"
     },
     "trackingUrlTemplate": "https://airwayscourier.co.in/Tracking_new.aspx?awb_no={trackingNumber}&type=w",
     "linkRules": [
@@ -61832,7 +61899,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Tokyo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "intras-jp"
     },
     "trackingUrlTemplate": "https://intras.co.jp/delivery/tracking?number={trackingNumber}",
     "linkRules": [
@@ -61940,7 +62007,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Bangkok",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "lex-th"
     },
     "trackingUrlTemplate": "https://lex.th/tracking?references={trackingNumber}",
     "linkRules": [
@@ -61954,7 +62021,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^LEX(?:PU|DO)\\d{10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://lex.th/tracking"
   },
   "line-1-logistics": {
@@ -62134,7 +62206,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "relay-express"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -62272,7 +62344,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xindus"
     },
     "trackingUrlTemplate": "https://www.xindus.net/tracking?awb={trackingNumber}",
     "linkRules": [
@@ -62530,6 +62602,46 @@ export const CARRIER_CAPABILITIES = {
     ],
     "detectionRules": [],
     "trackingSearchUrl": "https://gls-group.com/HU/hu/csomagkovetes/"
+  },
+  "muser": {
+    "displayName": "Muser International Logistics",
+    "aliases": [
+      "Muser",
+      "Shenzhen Muser International Logistics"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#04a9d2",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
+  },
+  "zhongzhou-logistics": {
+    "displayName": "Zhongzhou Logistics",
+    "aliases": [
+      "ZZWL",
+      "中洲物流",
+      "莆田市中洲物流供应链有限公司",
+      "Putian Zhongzhou Logistics Supply Chain"
+    ],
+    "countries": [
+      "CN"
+    ],
+    "color": "#0074d9",
+    "selectable": true,
+    "timezone": "Asia/Shanghai",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "universal"
+    },
+    "linkRules": [],
+    "detectionRules": []
   }
 } as const;
 
@@ -64441,7 +64553,9 @@ export const CARRIER_IDS = [
   "byt",
   "jch",
   "ywbz",
-  "gls-hu"
+  "gls-hu",
+  "muser",
+  "zhongzhou-logistics"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

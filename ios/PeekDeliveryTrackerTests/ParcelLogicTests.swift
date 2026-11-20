@@ -4901,6 +4901,52 @@ extension SessionIsolationTests {
         XCTAssertEqual(calls, [])
     }
 
+    @MainActor func testATokenLeftOnTheServiceByAnAccountTheAppSignedOutIsTakenOffByTheNextAccount() async throws {
+        let transport = transport()
+        defer { transport.invalidateAndCancel() }
+        let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let keys = ["sdt.notificationsDeviceOptOut", "sdt.notificationsOwner.v1", "sdt.notificationsRevocationPending.v1",
+                    "sdt.notificationsForwardedToken.v1", "sdt.notificationsNativePushRegistered.v1"]
+        for key in keys { UserDefaults.standard.removeObject(forKey: key) }
+        defer { for key in keys { UserDefaults.standard.removeObject(forKey: key) } }
+        let owner = UUID()
+        nonisolated(unsafe) var calls: [String] = []
+        let answer: (URLRequest, @escaping (Result<(Int, Data), Error>) -> Void) -> Void = { request, complete in
+            guard request.url?.path == "/api/push/devices" else { return complete(.success((200, Data("{}".utf8)))) }
+            let bearer = request.value(forHTTPHeaderField: "Authorization") ?? ""
+            calls.append("\(request.httpMethod ?? "") \(bearer.hasSuffix(owner.uuidString) ? "owner" : "other")")
+            complete(.success((200, Data(#"{"ok":true,"testSent":false}"#.utf8))))
+        }
+        try await authorize(session, id: owner)
+        let store = store(session, transport)
+        SessionTestURLProtocol.handler = answer
+        await store.forwardNativePushToken("synthetic-token", language: .en)
+
+        // Its session refused, the account is signed out by the app, which takes nothing off: the token is kept.
+        calls = []
+        session.forceSignOut()
+        XCTAssertEqual(calls, [])
+        XCTAssertEqual(UserDefaults.standard.string(forKey: "sdt.notificationsRevocationPending.v1"), "synthetic-token")
+
+        // The next account takes it over and off before the device registers with Apple again.
+        try await authorize(session)
+        SessionTestURLProtocol.handler = answer
+        let settled = await store.settleNativePushRevocation()
+        XCTAssertTrue(settled)
+        XCTAssertEqual(calls, ["POST other", "DELETE other"])
+        session.forceSignOut()
+
+        // A Sign out before Apple gave this launch its token takes off the one the account was given.
+        try await authorize(session, id: owner)
+        SessionTestURLProtocol.handler = answer
+        await store.forwardNativePushToken("synthetic-token", language: .en)
+        calls = []
+        try await store.signOut()
+        XCTAssertEqual(calls, ["DELETE owner"])
+        XCTAssertNil(UserDefaults.standard.string(forKey: "sdt.notificationsRevocationPending.v1"))
+    }
+
     @MainActor func testFailedAccountDeletionKeepsWatchingTheNextChecks() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }

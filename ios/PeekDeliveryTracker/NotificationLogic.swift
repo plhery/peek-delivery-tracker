@@ -116,6 +116,9 @@ enum NotificationDeviceKeys {
     static let owner = "sdt.notificationsOwner.v1"
     /// A token the account that signed out could not take off the service (`ParcelStore.settleNativePushRevocation`).
     static let revocation = "sdt.notificationsRevocationPending.v1"
+    /// The token last given to the account the notifications belong to, kept across launches: Apple may not have
+    /// answered this launch yet when the app signs that account out on its own.
+    static let forwarded = "sdt.notificationsForwardedToken.v1"
     static let demo = "sdt.demoNotificationsEnabled"
     static let optOutRepaired = "sdt.notificationsOptOutRepaired.v1"
 }

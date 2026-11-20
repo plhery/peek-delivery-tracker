@@ -165,6 +165,7 @@ final class ParcelStore: ObservableObject {
     private let nativePushRegisteredKey = "sdt.notificationsNativePushRegistered.v1"
     private let notificationOwnerKey = NotificationDeviceKeys.owner
     private let nativePushRevocationKey = NotificationDeviceKeys.revocation
+    private let forwardedTokenKey = NotificationDeviceKeys.forwarded
     private let demoNotificationsKey = NotificationDeviceKeys.demo
     private static let installationIDKey = "sdt.installationID.v1"
 
@@ -241,6 +242,7 @@ final class ParcelStore: ObservableObject {
             ParcelFeedbackMemory().forgetAll()
             // The next sign-in hears again about the parcels its account had no room for.
             LeftOnDeviceMemory.forget(cacheOwnerID)
+            keepTokenLeftOnTheService()
             releaseDeviceNotifications(from: cacheOwnerID)
         }
         cacheOwnerID = session.user?.id
@@ -1164,7 +1166,9 @@ final class ParcelStore: ObservableObject {
         jobMonitoringTask?.cancel()
         jobMonitoringTask = nil
         pendingJobIDs.removeAll()
-        if let token = AppDelegate.currentDeviceToken, !isDemo { await revokeNativePushToken(token) }
+        if let token = AppDelegate.currentDeviceToken ?? UserDefaults.standard.string(forKey: forwardedTokenKey), !isDemo {
+            await revokeNativePushToken(token)
+        }
         try session.checkGeneration(generation)
         if !isDemo { await liveActivityRevocations.drain() }
         stopDeliveryLiveActivityObservers()
@@ -1186,10 +1190,21 @@ final class ParcelStore: ObservableObject {
         PlatformApplication.shared.unregisterForRemoteNotifications()
         AppDelegate.clearDeviceToken()
         let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: forwardedTokenKey)
         if let account, defaults.bool(forKey: nativePushRegisteredKey), defaults.string(forKey: notificationOwnerKey) == nil {
             defaults.set(account.uuidString, forKey: notificationOwnerKey)
         }
         defaults.set(false, forKey: nativePushRegisteredKey)
+    }
+
+    /// An account the app signed out on its own, its session refused, took nothing off the service: its token is kept
+    /// to take off, as after a Sign out that couldn't reach the service (`settleNativePushRevocation`).
+    private func keepTokenLeftOnTheService() {
+        let defaults = UserDefaults.standard
+        let left = defaults.string(forKey: forwardedTokenKey)
+            ?? (defaults.bool(forKey: nativePushRegisteredKey) ? AppDelegate.currentDeviceToken : nil)
+        guard !isDemo, let left else { return }
+        defaults.set(left, forKey: nativePushRevocationKey)
     }
 
     private var notificationOwner: UUID? {
@@ -1296,6 +1311,7 @@ final class ParcelStore: ObservableObject {
         )
         try session.checkGeneration(generation)
         UserDefaults.standard.set(true, forKey: nativePushRegisteredKey)
+        UserDefaults.standard.set(token, forKey: forwardedTokenKey)
         if let user = session.user?.id { UserDefaults.standard.set(user.uuidString, forKey: notificationOwnerKey) }
         notificationsEnabledOnDevice = true
         nativePushRegistrationFailed = false
@@ -1308,8 +1324,9 @@ final class ParcelStore: ObservableObject {
         DeliveryAnalytics.shared.action("notifications-disable", .started)
         dismissNotificationInvitation()
         nativePushGeneration += 1
-        let token = AppDelegate.currentDeviceToken
+        let token = AppDelegate.currentDeviceToken ?? UserDefaults.standard.string(forKey: forwardedTokenKey)
         if let token, !isDemo { try await api.unregisterNativePushToken(token) }
+        UserDefaults.standard.removeObject(forKey: forwardedTokenKey)
         PlatformApplication.shared.unregisterForRemoteNotifications()
         AppDelegate.clearDeviceToken()
         UserDefaults.standard.set(true, forKey: notificationOptOutKey)
@@ -1432,6 +1449,7 @@ final class ParcelStore: ObservableObject {
                 return
             }
             UserDefaults.standard.set(true, forKey: nativePushRegisteredKey)
+            UserDefaults.standard.set(token, forKey: forwardedTokenKey)
             UserDefaults.standard.set(user.uuidString, forKey: notificationOwnerKey)
             notificationsEnabledOnDevice = session.isAuthenticated
             nativePushRegistrationFailed = false

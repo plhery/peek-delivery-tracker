@@ -33,10 +33,10 @@ describe('China Post provider priority', () => {
     const { router, universal } = setup();
     universal.mockRejectedValueOnce(new ChallengeError('17TRACK'));
     const first = await router.fetch(parcel(), false);
-    expect(universal.mock.calls.map(([source]) => source)).toEqual(['17TRACK', 'ParcelsApp']);
+    expect(universal.mock.calls.map(([source]) => source)).toEqual(['17TRACK', 'Ship24']);
     universal.mockClear();
     const second = await router.fetch({ ...parcel(), carrier_data: first.result }, false);
-    expect(universal.mock.calls.map(([source]) => source)).toEqual(['ParcelsApp']);
+    expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
     universal.mockClear();
     await new TrackingRouter({ ...router.options, now: () => new Date(now.getTime() + 3_600_001) })
       .fetch({ ...parcel(), carrier_data: second.result }, false);
@@ -52,7 +52,7 @@ describe('China Post provider priority', () => {
       return history;
     });
     await router.fetch(parcel({ discovery_cursor: 2, preferred_provider: 'Ship24' }), false);
-    expect(health.acquireTrackingProvider.mock.calls[0]).toEqual(['17TRACK']);
+    expect(health.acquireTrackingProvider.mock.calls[0]).toEqual(['17TRACK', false]);
     expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24', 'ParcelsApp', 'UPU']);
   });
 

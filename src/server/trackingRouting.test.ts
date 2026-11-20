@@ -52,42 +52,59 @@ function setup(now = time, options: Partial<ConstructorParameters<typeof Trackin
     router: new TrackingRouter({ direct, universal, health, recognize, recognizeBrowser, wait, now: () => now, ...options }) };
 }
 
-describe('FedEx public-page fallback', () => {
-  it('asks Track123 first after the direct FedEx challenge', async () => {
+describe('Track123 courier pages', () => {
+  const fedex = (overrides: JsonObject = {}) => parcel({ carrier: 'fedex', tracking_number: '909876543210', ...overrides });
+  // What the checks counted for FedEx: Track123 had every parcel, ParcelsApp half of them, the others next to none.
+  const observed = () => ({ Track123: { history: 20, missed: 0 }, ParcelsApp: { history: 10, missed: 10 },
+    Ship24: { history: 1, missed: 19 }, '17TRACK': { history: 1, missed: 19 } });
+
+  it('asks the HTTP providers that had as much before Track123, when someone waits for the answer', async () => {
     const { router, direct, universal } = setup(time, { enableTrack123: true });
     direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
-    universal.mockImplementation(async source => ({ ...history(), tracking_provider: source }));
-    await router.fetch(parcel({ carrier: 'fedex', tracking_number: '909876543210' }), false);
-    expect(universal.mock.calls[0]?.[0]).toBe('Track123');
-    expect(universal).toHaveBeenCalledTimes(1);
+    universal.mockImplementation(async source => { throw new NotFoundError(source); });
+    await router.fetch(fedex(), false).catch(() => undefined);
+    const asked = universal.mock.calls.map(call => call[0]);
+    expect(asked[0]).toBe('ParcelsApp');
+    expect(asked).toContain('Track123');
   });
 
-  it('keeps the existing providers when Track123 cannot answer', async () => {
-    const { router, direct, universal } = setup(time, { enableTrack123: true });
+  it('asks Track123 first about a carrier whose parcels it had more of than the others', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true, observed });
+    direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
+    universal.mockImplementation(async source => ({ ...history(), tracking_provider: source }));
+    await router.fetch(fedex(), false);
+    expect(universal.mock.calls.map(call => call[0])).toEqual(['Track123']);
+  });
+
+  it('keeps the other providers when Track123 cannot answer', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true, observed });
     direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
     universal.mockImplementation(async source => {
       if (source === 'Track123') throw new ChallengeError('Track123', 'Guest verification');
       return { ...history(), tracking_provider: source };
     });
-    await router.fetch(parcel({ carrier: 'fedex', tracking_number: '909876543210' }), false);
+    await router.fetch(fedex(), false);
     expect(universal.mock.calls.map(call => call[0])).toEqual(['Track123', 'ParcelsApp']);
   });
 
-  it('continues to the existing providers when Track123 trails stored progress', async () => {
-    const { router, direct, universal } = setup(time, { enableTrack123: true });
+  it('continues to the other providers when Track123 trails stored progress', async () => {
+    const { router, direct, universal } = setup(time, { enableTrack123: true, observed });
     direct.mockRejectedValue(new ChallengeError('FedEx', 'Tracking challenged'));
     universal.mockImplementation(async source => ({ ...history(source === 'Track123' ? '2026-09-09T11:00:00Z' : '2026-09-10T11:00:00Z'), tracking_provider: source }));
-    const result = await router.fetch(parcel({ carrier: 'fedex', tracking_number: '909876543210', current_stage: 'in_transit',
+    const result = await router.fetch(fedex({ current_stage: 'in_transit',
       carrier_data: { routing: state({ configured_carrier: 'fedex', last_event_at: '2026-09-10T10:00:00Z' }) } }), false);
     expect(universal.mock.calls.map(call => call[0])).toEqual(['Track123', 'ParcelsApp']);
     expect(result.result.tracking_provider).toBe('ParcelsApp');
   });
 
-  it('does not ask Track123 for another named carrier', async () => {
+  it('does not ask Track123 about a carrier it has no courier page for', async () => {
     const { router, direct, universal } = setup(time, { enableTrack123: true });
-    direct.mockRejectedValue(new ChallengeError('UPS', 'Tracking challenged'));
-    await router.fetch(parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784' }), false);
-    expect(universal.mock.calls.map(call => call[0])).not.toContain('Track123');
+    direct.mockRejectedValue(new ChallengeError('USPS', 'Tracking challenged'));
+    universal.mockImplementation(async source => { throw new NotFoundError(source); });
+    await router.fetch(parcel({ carrier: 'usps', tracking_number: '9400100000000000000000' }), false).catch(() => undefined);
+    const asked = universal.mock.calls.map(call => call[0]);
+    expect(asked).toContain('ParcelsApp');
+    expect(asked).not.toContain('Track123');
   });
 });
 beforeEach(() => {
@@ -2009,6 +2026,70 @@ describe('persistent tracking routing', () => {
     expect(universal).toHaveBeenCalledOnce();
     expect(universal.mock.calls[0][2]).toBe(15_000);
   });
+  describe('a provider sent its lookups for the hour', () => {
+    const limited = (retry_at: string) => ({ token: null, retry_at, limited: true as const });
+
+    it('is left for the next provider, without a wait or a rest it never gave', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, health, universal, wait } = setup();
+      // Free again within the seconds a spaced provider is waited for: the allowance is not.
+      health.acquireTrackingProvider.mockResolvedValueOnce(limited('2026-09-10T12:00:02Z'));
+      const result = await router.fetch(parcel(), false);
+      expect(wait).not.toHaveBeenCalled();
+      expect(health.acquireTrackingProvider.mock.calls).toEqual([['ParcelsApp', false], ['Ship24', false]]);
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
+      expect(result.result).toMatchObject({ tracking_provider: 'Ship24' });
+      expect((result.result.routing as JsonObject).failures).not.toHaveProperty('ParcelsApp');
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_limited', expect.objectContaining({ provider: 'ParcelsApp' }));
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_cooldown', expect.anything());
+    });
+
+    it('is left for the next provider when its hour ran out while another check held it', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, direct, health, universal, wait } = setup();
+      direct.mockRejectedValue(new UpstreamHttpError('UPS', 503));
+      health.acquireTrackingProvider.mockResolvedValueOnce({ token: null, retry_at: '2026-09-10T12:00:02Z', held: true })
+        .mockResolvedValueOnce(limited('2026-09-10T12:20:00Z'));
+      const result = await router.fetch(parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784' }), false);
+      expect(wait.mock.calls.map(([ms]) => ms)).toEqual([2_000]);
+      expect(health.acquireTrackingProvider.mock.calls.map(([source]) => source)).toEqual(['ParcelsApp', 'ParcelsApp', 'Ship24']);
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
+      expect((result.result.routing as JsonObject).failures).not.toHaveProperty('ParcelsApp');
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_limited', expect.objectContaining({ provider: 'ParcelsApp' }));
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_held', expect.anything());
+    });
+
+    it('is asked for a check nobody waits for as one that leaves the reserve', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, health } = setup();
+      await router.fetch(parcel(), true);
+      expect(health.acquireTrackingProvider.mock.calls).toEqual([['ParcelsApp', true]]);
+    });
+
+    it('brings the parcel back once the first of them is free, when every provider was', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, health, universal } = setup();
+      health.acquireTrackingProvider.mockResolvedValueOnce(limited('2026-09-10T12:40:00Z'))
+        .mockResolvedValueOnce(limited('2026-09-10T12:20:00Z'));
+      await expect(router.fetch(parcel(), true)).rejects.toMatchObject({ routing: { failures: {}, next_check_at: '2026-09-10T12:20:00.000Z' } });
+      expect(universal).not.toHaveBeenCalled();
+    });
+  });
+  describe('providers that had more of a carrier', () => {
+    it('are asked before the others whatever the discovery cursor', async () => {
+      const { router, universal } = setup(time, { observed: () => ({ ParcelsApp: { history: 1, missed: 19 },
+        Ship24: { history: 18, missed: 2 }, '17TRACK': { history: 19, missed: 1 } }) });
+      universal.mockImplementation(async source => { throw new NotFoundError(source); });
+      for (const discovery_cursor of [0, 1, 2]) {
+        universal.mockClear();
+        await router.fetch(parcel({ carrier: 'synthetic-carrier', carrier_data: { routing: state({ configured_carrier: 'synthetic-carrier', discovery_cursor }) } }), true)
+          .catch(() => undefined);
+        const asked = universal.mock.calls.map(([source]) => source);
+        expect(asked.slice(0, 2).sort()).toEqual(['17TRACK', 'Ship24']);
+        expect(asked[2]).toBe('ParcelsApp');
+      }
+    });
+  });
   describe('a provider another check holds', () => {
     // UPS fails in passing, so the check falls back to the providers, as one of a carrier with an adapter of its own does.
     const ups = (overrides: JsonObject = {}) => parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784', ...overrides });
@@ -2074,7 +2155,7 @@ describe('persistent tracking routing', () => {
     reusedUniversal.mockImplementation((source: string) => source === 'ParcelsApp' ? Promise.reject(new NotFoundError(source)) : undefined);
     const next = await router.fetch(parcel(), false);
     expect(next.result).toMatchObject({ tracking_provider: 'Ship24', routing: { failures: { ParcelsApp: { kind: 'not_found' } } } });
-    expect(health.acquireTrackingProvider).toHaveBeenCalledExactlyOnceWith('Ship24');
+    expect(health.acquireTrackingProvider).toHaveBeenCalledExactlyOnceWith('Ship24', false);
   });
   it('retains provider-specific Retry-After and stops cascading on a fresh universal 429', async () => {
     const { router, universal, health } = setup();
@@ -2923,6 +3004,7 @@ describe('persistent tracking routing', () => {
   it('ignores an older parcel of another carrier that a universal returns for a reused number', async () => {
     fixedPlan('Ship24', '17TRACK');
     const { router, direct, universal } = setup();
+    const mark = vi.spyOn(stepRecorder, 'markLookup');
     direct.mockResolvedValue(yearlessYamato());
     universal.mockResolvedValueOnce({ ...history('2026-01-09T13:19:00Z'), reported_carriers: ['FedEx', 'GLS'] });
     const result = await router.fetch(parcel({ carrier: 'yamato', tracking_number: '123456789012', created_at: '2026-09-01T00:00:00Z' }), false);
@@ -2934,6 +3016,9 @@ describe('persistent tracking routing', () => {
       events: [{ provider_time_text: '09月01日 10:00', stage: 'accepted' }] });
     expect(result.result.routing).toMatchObject({ failures: { Ship24: { kind: 'no_history' } } });
     expect(vi.mocked(monitoring.reportRoutingEvent)).toHaveBeenCalledWith('foreign_history_rejected', expect.objectContaining({ provider: 'Ship24' }));
+    // The check's records count the answer as one without history, not as Ship24 knowing the parcel.
+    expect(mark).toHaveBeenCalledWith('Ship24', 'older_parcel');
+    expect(mark).not.toHaveBeenCalledWith('17TRACK', expect.anything());
   });
   it.each([
     ['unknown', 'Example Post'], ['intl-post', 'Example Post'],
@@ -4112,9 +4197,11 @@ describe('universal preflight and recipient input', () => {
 
     it('is no history for a parcel filed under a carrier of other countries, and the next provider is asked', async () => {
       const { router, universal } = filed();
+      const mark = vi.spyOn(stepRecorder, 'markLookup');
       universal.mockResolvedValueOnce(stranger());
       universal.mockResolvedValueOnce(history());
       const result = await router.fetch(parcel({ carrier: 'la-poste', tracking_number: '1234567891' }), false);
+      expect(mark).toHaveBeenCalledWith('Ship24', 'set_aside_refused_number');
       expect(router.options.refuses).toHaveBeenCalledWith('dhl-ecommerce', '1234567891');
       expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24', 'ParcelsApp']);
       expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp', last_update: '2026-09-10T11:00:00Z' });
@@ -4561,7 +4648,7 @@ describe('a provider’s budget of answers without history', () => {
     universal.mockClear(); health.acquireTrackingProvider.mockClear();
     const held = await router.fetch(parcel({ id: 'held', tracking_number: 'TEST9012' }), true);
     expect(asked(universal)).toEqual(['Ship24']);
-    expect(health.acquireTrackingProvider).not.toHaveBeenCalledWith('ParcelsApp');
+    expect(health.acquireTrackingProvider.mock.calls.map(([source]) => source)).not.toContain('ParcelsApp');
     // Held back, the provider has no failure for the parcel to wait out.
     expect(held.result).toMatchObject({ tracking_provider: 'Ship24' });
     expect((held.result.routing as JsonObject).failures).not.toHaveProperty('ParcelsApp');

@@ -10,7 +10,7 @@ import { checksumRejections, fillPartialAnswer, inferStage, isPartialAnswer, nor
 import { isRecord, type JsonObject } from './types';
 import { STORED_EVENT_IDENTITIES } from './supabase';
 import { priorityUniversalSource, universalPlan, universalSourceBudget } from 'universal-parcel-scraper';
-import type { UniversalSource } from 'universal-parcel-scraper';
+import type { ObservedCoverage, UniversalSource } from 'universal-parcel-scraper';
 import { isCarrierFeedName, isKnownCarrierName, statusMapAnswer } from 'universal-parcel-scraper/app';
 import { brandCarrierIds, carrierBrand, carrierIdFromName, universalCarrierHints } from 'universal-parcel-scraper/app';
 import { errorType, raiseProviderBlock, reportRoutingEvent, reportTrackingRecognition } from './observability';
@@ -59,10 +59,12 @@ const KNOWN_REASONS: ReadonlySet<string> = new Set(['listed', 'written_ahead']);
 export type RoutingFailureKind = 'rate_limited' | 'not_found' | 'no_history' | 'input_required' | 'invalid_input' | 'verification' | 'schema' | 'transport';
 export interface ProviderHealth {
   /**
-   * A refused lease (`token` null) is `held` while another check calls the provider or spaces it after its call;
-   * without `held` the provider rests (a cooldown after a failure).
+   * A lease on a provider's next lookup. `background`: nobody waits for the answer, and the lookup leaves the reserve
+   * of the provider's hourly allowance (providerPolicy.ts). A refused lease (`token` null) is `limited` when that
+   * allowance refused it, and `held` while another check calls the provider or spaces it after its call; with
+   * neither the provider rests (a cooldown after a failure).
    */
-  acquireTrackingProvider(provider: string): Promise<{ token: string | null; retry_at: string; held?: boolean }>;
+  acquireTrackingProvider(provider: string, background?: boolean): Promise<{ token: string | null; retry_at: string; held?: boolean; limited?: true }>;
   finishTrackingProvider(provider: string, token: string, kind: Exclude<RoutingFailureKind, 'no_history' | 'input_required' | 'invalid_input'> | null, retryAfterMs: number, durationMs: number): Promise<void>;
 }
 export interface RoutedResult {
@@ -865,6 +867,8 @@ export class TrackingRouter {
     wait?: (ms: number, signal?: AbortSignal) => Promise<unknown>;
     enablePostalNinja?: boolean;
     enableTrack123?: boolean;
+    /** What each provider had for a carrier's parcels here (providerCoverage.ts): it grades the plan's order for that carrier. */
+    observed?: (carrier: string) => Partial<Record<UniversalSource, ObservedCoverage>> | undefined;
     /** `TRACKING_UNIVERSAL_PROVIDERS`: the universal providers a check may ask (providerPolicy.ts); all of them when unset. */
     providers?: string;
   }) {}
@@ -975,11 +979,13 @@ export class TrackingRouter {
       state.provider_input_needed = this.options.preflightInputNeeded?.(universalNumber);
       if (state.provider_input_needed) recordProviderInput(state.provider_input_needed.provider, 'asked');
     }
-    // Ordered by that carrier's coverage evidence, else by the carrier confirmed
-    // or discovered for the number, else the default order.
+    // Ordered by that carrier's coverage evidence, which includes what the providers had for its parcels here, else
+    // by the carrier confirmed or discovered for the number, else the default order. Providers with equally full
+    // history share the numbers; a check someone waits for asks the HTTP ones first.
     const plan = universalPlan({
       carriers: [universalCarrier, state.confirmed_number === universalNumber ? state.confirmed_carrier : undefined, state.discovered_carrier],
       trackingNumber: universalNumber, enablePostalNinja: this.options.enablePostalNinja, enableTrack123: this.options.enableTrack123,
+      background: scheduled, observed: this.options.observed?.(universalCarrier),
     });
     const sources = plan.sources.filter((source) => providerAllowed(source, this.options.providers));
     // A provider that asked for a postcode the parcel still lacks would only ask
@@ -1852,13 +1858,13 @@ export class TrackingRouter {
     const priority = sources.find((source) => source === priorityUniversalSource(universalNumber));
     // Providers with fuller history for this carrier come before the one the parcel stays with.
     const fuller = preferred ? richerSources.filter((source) => plan.rank(source) < plan.rank(preferred)) : [];
-    // The discovery cursor rotates which aggregator a check starts with. Postal Ninja, Track718
-    // (last in Juxi's plan: a browser read that rarely holds a parcel the others lack) and UPU
-    // keep their place after the others.
+    // The discovery cursor rotates which aggregator a check starts with, among those whose history for the carrier is
+    // equally full: one that had less is not asked before one that had more. Postal Ninja, Track718 (last in Juxi's
+    // plan: a browser read that rarely holds a parcel the others lack) and UPU keep their place after the others.
     const rotation: UniversalSource[] = richerSources.filter((source) => source !== 'Postal Ninja' && source !== 'Track718');
     const offset = state.discovery_cursor % Math.max(1, rotation.length);
-    const everyProvider = [...new Set<UniversalSource>([...(sources.includes('Track123') ? ['Track123' as const] : []), ...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...rotation.slice(offset), ...rotation.slice(0, offset),
-      ...sources])];
+    const turned = [...rotation.slice(offset), ...rotation.slice(0, offset)].sort((a, b) => plan.rank(a) - plan.rank(b));
+    const everyProvider = [...new Set<UniversalSource>([...(priority ? [priority] : []), ...fuller, ...(preferred ? [preferred] : []), ...turned, ...sources])];
     const ordered = sparse ? recheckSources(universalNumber, everyProvider, this.options.enablePostalNinja) : everyProvider;
     // When a scheduled check starting from the state this check leaves could first ask anyone, as
     // epoch milliseconds: the carrier asked first, and those detection and discovery point to,
@@ -1935,7 +1941,8 @@ export class TrackingRouter {
       return this.options.refuses(named, universalNumber);
     };
     const attemptedUniversal = new Set<UniversalSource>();
-    // Providers another check still held when this one had to move on, and when they free up: no rest of theirs.
+    // Providers another check still held, or that had been sent their lookups for the hour, when this one had to move
+    // on, and when they free up: no rest of theirs.
     const heldUntil = new Map<UniversalSource, number>();
     // Providers that answered without history for this number in this check.
     const answeredEmpty: UniversalSource[] = [];
@@ -1963,7 +1970,7 @@ export class TrackingRouter {
         report('provider_budget_held', source); return null;
       }
       const acquire = async () => {
-        try { return await this.options.health.acquireTrackingProvider(source); }
+        try { return await this.options.health.acquireTrackingProvider(source, scheduled); }
         catch {
           report('health_store_unavailable', source, 'transport');
           state.failures[source] = { count: 0, kind: 'transport', retry_at: iso(now().getTime() + 15 * 60_000) };
@@ -1979,7 +1986,7 @@ export class TrackingRouter {
         const keepsBudget = (ms: number) =>
           universalDeadline - Math.max(performance.now(), since + waited) - Math.max(0, ms) - 5_000 >= universalSourceBudget(source);
         let lease = await acquire();
-        for (let round = 0; lease && !lease.token && millis(lease.retry_at); ) {
+        for (let round = 0; lease && !lease.token && !lease.limited && millis(lease.retry_at); ) {
           const wait = millis(lease.retry_at) - now().getTime();
           if (lease.held) {
             // Another check calls the provider, or spaces it after its call: this one waits its turn, asking again
@@ -2001,10 +2008,11 @@ export class TrackingRouter {
           lease = await acquire();
         }
         if (!lease) return null; // Fail closed: do not flood upstreams when coordination is down.
-        if (!lease.token && lease.held) {
-          // Still another check's when the wait would cut into its budget: the check moves on, and the provider keeps no rest.
+        if (!lease.token && (lease.held || lease.limited)) {
+          // Still another check's when the wait would cut into its budget, or sent its lookups for the hour
+          // (providerPolicy.ts): the check moves on to the next provider, and this one keeps no rest.
           heldUntil.set(source, millis(lease.retry_at));
-          report('provider_held', source); return null;
+          report(lease.limited ? 'provider_limited' : 'provider_held', source); return null;
         }
         if (!lease.token) {
           state.failures[source] = { count: state.failures[source]?.count ?? 0, kind: 'rate_limited', retry_at: lease.retry_at };
@@ -2026,12 +2034,15 @@ export class TrackingRouter {
         const result = dueOnly(normalizeCarrierResult(answer), source);
         if (!result) throw new NoHistoryError(source, `${source} relays only rows the carrier holds back or not due yet`);
         if (!usable(result)) throw new TypeError('No usable universal progress');
+        // An answer about another parcel is recorded as one without history: the provider does not know this one.
         if (foreignHistory(result, universalCarrier, parcel.created_at, universalNumber, parcel[STORED_EVENT_IDENTITIES])) {
           report('foreign_history_rejected', source);
+          markLookup(source, 'older_parcel');
           throw new NoHistoryError(source, `${source} returned an older parcel for this number`);
         }
         if (await strangersHistory(result)) {
           report('foreign_history_rejected', source, 'refused_number');
+          markLookup(source, 'set_aside_refused_number');
           throw new NoHistoryError(source, `${source} returned a parcel of a carrier that refuses this number`);
         }
         const previousFailure = state.failures[source];

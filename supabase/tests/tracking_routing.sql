@@ -166,4 +166,108 @@ begin
   end loop;
 end;
 $$;
+
+-- A provider asked with an hourly limit gives half an hour of it at once, then a lookup each time one is refilled.
+do $$
+declare answer jsonb; other jsonb; spent integer := 0;
+  free constant text := $sql$update public.tracking_provider_health set next_allowed_at = now() - interval '1 second' where provider = 'Postal Ninja'$sql$;
+begin
+  if has_function_privilege('anon', 'public.acquire_tracking_provider(text,integer,integer)', 'execute')
+    or has_function_privilege('authenticated', 'public.acquire_tracking_provider(text,integer,integer)', 'execute')
+    or has_function_privilege('authenticated', 'public.provider_coverage(integer)', 'execute') then
+    raise exception 'Provider limit or coverage is not service-only';
+  end if;
+  loop
+    answer := public.acquire_tracking_provider('Postal Ninja', 8);
+    exit when answer->>'token' is null;
+    spent := spent + 1;
+    perform public.finish_tracking_provider('Postal Ninja', (answer->>'token')::uuid, null, 0, 1);
+    execute free;
+  end loop;
+  if spent <> 4 or answer->>'limited' <> 'true' then raise exception 'A limit of 8 an hour admitted % lookups at once', spent; end if;
+  -- The refusal says when the next lookup is refilled: 450 seconds for one of 8 an hour.
+  if (answer->>'retry_at')::timestamptz not between now() + interval '449 seconds' and now() + interval '451 seconds' then
+    raise exception 'A spent allowance names the wrong retry time: %', answer->>'retry_at';
+  end if;
+  update public.tracking_provider_health set allowance_at = now() - interval '451 seconds' where provider = 'Postal Ninja';
+  answer := public.acquire_tracking_provider('Postal Ninja', 8);
+  if answer->>'token' is null then raise exception 'A refilled lookup was refused'; end if;
+  perform public.finish_tracking_provider('Postal Ninja', (answer->>'token')::uuid, null, 0, 1);
+  execute free;
+  -- A check nobody waits for leaves the reserve to those someone does.
+  update public.tracking_provider_health set allowance = 2, allowance_at = now() where provider = 'Postal Ninja';
+  answer := public.acquire_tracking_provider('Postal Ninja', 8, 2);
+  if answer->>'token' is not null or answer->>'limited' <> 'true' then raise exception 'The reserve was spent by a check nobody waits for'; end if;
+  answer := public.acquire_tracking_provider('Postal Ninja', 8, 1);
+  if answer->>'token' is null then raise exception 'A lookup above the reserve was refused'; end if;
+  perform public.finish_tracking_provider('Postal Ninja', (answer->>'token')::uuid, null, 0, 1);
+  execute free;
+  answer := public.acquire_tracking_provider('Postal Ninja', 8);
+  if answer->>'token' is null then raise exception 'A waited lookup was refused the reserve'; end if;
+  perform public.finish_tracking_provider('Postal Ninja', (answer->>'token')::uuid, null, 0, 1);
+  execute free;
+  if public.acquire_tracking_provider('Postal Ninja', 8) ->> 'limited' <> 'true' then raise exception 'An empty allowance admitted a lookup'; end if;
+  -- A rest after a failure comes before the allowance, and is no `limited` refusal nor another check's lease.
+  update public.tracking_provider_health set next_allowed_at = now() + interval '1 minute', last_failure_kind = 'transport' where provider = 'Postal Ninja';
+  other := public.acquire_tracking_provider('Postal Ninja', 8);
+  if other ? 'limited' or (other->>'held')::boolean is not false or (other->>'retry_at')::timestamptz < now() + interval '59 seconds' then
+    raise exception 'A resting provider out of allowance answered %', other;
+  end if;
+  update public.tracking_provider_health set last_failure_kind = null where provider = 'Postal Ninja';
+  execute free;
+  -- The server running during the rollout states no limit: it is admitted, and the allowance stays as it was.
+  answer := public.acquire_tracking_provider('Postal Ninja');
+  if answer->>'token' is null or (select allowance from public.tracking_provider_health where provider = 'Postal Ninja') <> 0 then
+    raise exception 'A request without a limit was held to the allowance';
+  end if;
+  other := public.acquire_tracking_provider('Postal Ninja', 8);
+  if other ? 'limited' or (other->>'held')::boolean is not true then raise exception 'Another check''s lease was not reported as held'; end if;
+  perform public.finish_tracking_provider('Postal Ninja', (answer->>'token')::uuid, null, 0, 1);
+  begin
+    perform public.acquire_tracking_provider('Postal Ninja', 0);
+    raise exception 'A limit of no lookup was accepted';
+  exception when raise_exception then
+    if sqlerrm <> 'Invalid provider limit' then raise; end if;
+  end;
+  begin
+    perform public.acquire_tracking_provider('Postal Ninja', 8, 4);
+    raise exception 'A reserve of the whole allowance was accepted';
+  exception when raise_exception then
+    if sqlerrm <> 'Invalid provider limit' then raise; end if;
+  end;
+end;
+$$;
+
+-- What each provider had for a carrier's parcels: each parcel once, a miss only where another provider had history.
+insert into public.tracking_provider_health(provider) values ('ParcelsApp'), ('Ship24'), ('UPU') on conflict do nothing;
+insert into public.packages(id, user_id, tracking_number, carrier, current_stage, sync_status, carrier_data) values
+  ('96000000-0000-0000-0000-000000000011', '10000000-0000-0000-0000-000000000001', 'COVERAGE0001', 'purolator', 'in_transit', 'ok', '{}'),
+  ('96000000-0000-0000-0000-000000000012', '10000000-0000-0000-0000-000000000001', 'COVERAGE0002', 'purolator', 'in_transit', 'ok', '{}'),
+  ('96000000-0000-0000-0000-000000000013', '10000000-0000-0000-0000-000000000001', 'COVERAGE0003', 'purolator', 'in_transit', 'ok',
+    '{"original_carrier":"purolator","active_tracking_carrier":"canada-post","active_tracking_number":"COVERAGELEG3"}'),
+  ('96000000-0000-0000-0000-000000000014', '10000000-0000-0000-0000-000000000001', 'COVERAGE0004', 'unknown', 'in_transit', 'ok', '{}'),
+  ('96000000-0000-0000-0000-000000000015', '10000000-0000-0000-0000-000000000001', 'COVERAGE0005', 'purolator', 'in_transit', 'ok', '{}');
+insert into public.tracking_sync_attempts (package_id, trigger, configured_carrier, outcome, current_step, started_at, completed_at, lookups) values
+  -- Ship24 had nothing for a parcel ParcelsApp knew, at two checks: one parcel each.
+  ('96000000-0000-0000-0000-000000000011', 'scheduled', 'purolator', 'updated', 'complete', now() - interval '2 days', now(), '{"purolator":"error","Ship24":"no_history","ParcelsApp":"success"}'),
+  ('96000000-0000-0000-0000-000000000011', 'scheduled', 'purolator', 'unchanged', 'complete', now() - interval '1 day', now(), '{"purolator":"error","Ship24":"not_found","ParcelsApp":"success"}'),
+  -- Only the carrier answered: no provider had the parcel, which says nothing of either.
+  ('96000000-0000-0000-0000-000000000012', 'scheduled', 'purolator', 'unchanged', 'complete', now() - interval '2 days', now(), '{"purolator":"success","Ship24":"no_history","ParcelsApp":"not_found"}'),
+  -- Only UPU's postal feed had the parcel: no aggregator missed it.
+  ('96000000-0000-0000-0000-000000000015', 'scheduled', 'purolator', 'updated', 'complete', now() - interval '1 day', now(), '{"Ship24":"no_history","ParcelsApp":"not_found","UPU":"success"}'),
+  -- A provider that failed did not miss the parcel.
+  ('96000000-0000-0000-0000-000000000012', 'scheduled', 'purolator', 'updated', 'complete', now() - interval '1 day', now(), '{"Ship24":"success","ParcelsApp":"error"}'),
+  -- Before the period, under a delivery leg's number, and filed under no carrier.
+  ('96000000-0000-0000-0000-000000000012', 'scheduled', 'purolator', 'updated', 'complete', now() - interval '9 days', now() - interval '9 days', '{"Ship24":"no_history","ParcelsApp":"success"}'),
+  ('96000000-0000-0000-0000-000000000013', 'scheduled', 'purolator', 'updated', 'complete', now() - interval '1 day', now(), '{"Ship24":"success","ParcelsApp":"no_history"}'),
+  ('96000000-0000-0000-0000-000000000014', 'scheduled', 'unknown', 'updated', 'complete', now() - interval '1 day', now(), '{"Ship24":"success","ParcelsApp":"no_history"}');
+do $$
+declare counted jsonb := public.provider_coverage(7);
+begin
+  if counted -> 'purolator' is distinct from '{"ParcelsApp":{"history":1,"missed":0},"Ship24":{"history":1,"missed":1},"UPU":{"history":1,"missed":0}}'::jsonb then
+    raise exception 'Provider coverage miscounted: %', counted -> 'purolator';
+  end if;
+  if counted ? 'unknown' then raise exception 'Parcels filed under no carrier were counted'; end if;
+end;
+$$;
 rollback;

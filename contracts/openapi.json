@@ -2213,7 +2213,7 @@
       "linkRules": [],
       "detectionRules": [
         {
-          "pattern": "^(?![CLR][A-Z]\\d{9}DE$)(?!U[A-TV-Z]\\d{9}DE$)(?!(?:[CELR][A-Z]|F[TZ])\\d{9}TW$)(?![CEL][A-Z]\\d{9}AU$)(?![CELR][A-Z]\\d{9}SK$)(?![CELR][A-Z]\\d{9}AL$)(?![CELR][A-Z]\\d{9}RS$)(?![CELR][A-Z]\\d{9}UA$)(?![CELR][A-Z]\\d{9}RU$)(?![CELR][A-Z]\\d{9}SI$)(?![CELR][A-Z]\\d{9}HR$)(?![CELR][A-Z]\\d{9}LV$)(?!(?:[CE][A-Z]|HC)\\d{9}LT$)(?![CELR][A-Z]\\d{9}AE$)(?!(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$)(?!(?:C[A-QS-UW-Z]|R[A-NP-Z]|[EL][A-Z])\\d{9}EE$)(?!AS\\d{9}US$)(?!(?:C[A-DF-UW-Z]|[ELR][A-Z])\\d{9}US$)(?![CELR][A-Z]\\d{9}IT$)(?!ZC\\d{9}IT$)(?!(?:PZ|XR|XT|XU|XW|XY))[A-Z]{2}\\d{9}(?!WW$|CA$|CH$|FR$|IN$|NL$|GB$|IE$|BE$|PT$|NZ$|SG$|JP$|KR$|TH$|HK$|MY$|CN$|NO$|BR$|ES$|SE$|DK$|AT$|YP$|TS$|JF$|JB$|RV$|VF$|TY$|MI$|XX$|GO$|MH$|YW$|CS$|EN$|MB$|DY$|OI$|XB$|CL$)[A-Z]{2}$",
+          "pattern": "^(?![CLR][A-Z]\\d{9}DE$)(?!U[A-TV-Z]\\d{9}DE$)(?!(?:[CELR][A-Z]|F[TZ])\\d{9}TW$)(?![CEL][A-Z]\\d{9}AU$)(?![CELR][A-Z]\\d{9}SK$)(?![CELR][A-Z]\\d{9}AL$)(?![CELR][A-Z]\\d{9}RS$)(?![CELR][A-Z]\\d{9}UA$)(?![CELR][A-Z]\\d{9}RU$)(?![CELR][A-Z]\\d{9}SI$)(?![CELR][A-Z]\\d{9}HR$)(?![CELR][A-Z]\\d{9}LV$)(?!(?:[CE][A-Z]|HC)\\d{9}LT$)(?![CELR][A-Z]\\d{9}AE$)(?!(?:C[A-UW-Z]|[ELR][A-Z])\\d{9}PL$)(?!(?:C[A-QS-UW-Z]|R[A-NP-Z]|[EL][A-Z])\\d{9}EE$)(?!AS\\d{9}US$)(?!(?:C[A-DF-UW-Z]|[ELR][A-Z])\\d{9}US$)(?![CELR][A-Z]\\d{9}IT$)(?!ZC\\d{9}IT$)(?!(?:PZ|XR|XT|XU|XW|XY))[A-Z]{2}\\d{9}(?!CA$|CH$|FR$|IN$|NL$|GB$|IE$|BE$|PT$|NZ$|SG$|JP$|KR$|TH$|HK$|MY$|CN$|NO$|BR$|ES$|SE$|DK$|AT$|MH$|CL$)(?:A[D-GILMOQ-UWXZ]|B[ABD-JL-OQ-TVWYZ]|C[ACDF-IK-ORU-Z]|D[EJKMOZ]|E[CEGHR-T]|F[I-KMOR]|G[ABD-IL-NP-UWY]|H[KMNRTU]|I[DEL-OQ-T]|J[EMOP]|K[EG-IMNPRWYZ]|L[A-CIKR-VY]|M[AC-HK-Z]|N[ACE-GILOPRUZ]|OM|P[AE-HK-NR-TWY]|QA|R[EOSUW]|S[A-EG-OR-TVX-Z]|T[CDF-HJ-ORTVWZ]|U[AGMSYZ]|V[ACEGINU]|W[FS]|Y[ET]|Z[AMW])$",
           "confidence": "high",
           "checksum": "s10"
         }
@@ -13344,7 +13344,7 @@
       "timezone": "Europe/Zagreb",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "overseas-express"
       },
       "linkRules": [
         {
@@ -42058,7 +42058,7 @@
       "timezone": "America/Argentina/Buenos_Aires",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "bfe-express"
       },
       "trackingUrlTemplate": "https://www.bfeexpress.com/track?track_number={trackingNumber}",
       "linkRules": [
@@ -62636,10 +62636,16 @@
       "timezone": "Asia/Shanghai",
       "tracking": {
         "mode": "automatic",
-        "adapter": "universal"
+        "adapter": "muser",
+        "recognitionRank": 21
       },
       "linkRules": [],
-      "detectionRules": []
+      "detectionRules": [
+        {
+          "pattern": "^MS\\d{14}YD$",
+          "confidence": "low"
+        }
+      ]
     },
     "zhongzhou-logistics": {
       "displayName": "Zhongzhou Logistics",

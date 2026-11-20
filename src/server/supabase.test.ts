@@ -25,6 +25,37 @@ describe('guarded tracking writes', () => {
     await expect(client.acquireTrackingProvider('ParcelsApp')).resolves.toEqual({ token: null, retry_at: '2026-09-10T12:30:00Z' });
   });
 
+  it('states a provider\'s hourly limit with each lease, and the reserve a check nobody waits for leaves', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request')
+      .mockResolvedValueOnce({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' })
+      .mockResolvedValueOnce({ token: null, retry_at: '2026-09-10T12:10:00Z', limited: true })
+      .mockResolvedValueOnce({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+    await client.acquireTrackingProvider('ParcelsApp');
+    await expect(client.acquireTrackingProvider('ParcelsApp', true)).resolves.toEqual({ token: null, retry_at: '2026-09-10T12:10:00Z', limited: true });
+    // UPU has no limit: the request states none.
+    await client.acquireTrackingProvider('UPU', true);
+    expect(request.mock.calls.map(([, options]) => (options as { body: unknown }).body)).toEqual([
+      { p_provider: 'ParcelsApp', p_hourly_limit: 90, p_reserve: 0 },
+      { p_provider: 'ParcelsApp', p_hourly_limit: 90, p_reserve: 15 },
+      { p_provider: 'UPU' },
+    ]);
+  });
+
+  it('reads what each provider had for each carrier\'s parcels, leaving out what is no count', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    const request = vi.spyOn(client, 'request').mockResolvedValueOnce({
+      usps: { ParcelsApp: { history: 12, missed: 0 }, Ship24: { history: 1, missed: 27 }, Broken: 'x', '17TRACK': { history: -1 } },
+      broken: 7,
+    });
+    await expect(client.providerCoverage()).resolves.toEqual(new Map([['usps', {
+      ParcelsApp: { history: 12, missed: 0 }, Ship24: { history: 1, missed: 27 }, '17TRACK': { history: 0, missed: 0 },
+    }]]));
+    expect(request).toHaveBeenCalledExactlyOnceWith('/rest/v1/rpc/provider_coverage', { method: 'POST', body: { p_days: 14 } });
+    vi.spyOn(client, 'request').mockResolvedValueOnce([]);
+    await expect(client.providerCoverage()).rejects.toThrow('Invalid provider coverage response');
+  });
+
   it('resolves an old parcel id after a merge', async () => {
     const client = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce([]).mockResolvedValueOnce([{ id: 'delivery' }]);

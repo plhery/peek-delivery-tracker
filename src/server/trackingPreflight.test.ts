@@ -81,7 +81,7 @@ it('takes a postcode request for a number no carrier issues in that shape as no 
     if (source === 'ParcelsApp') throw new InputRequiredError(source, 'postcode');
     throw new NotFoundError(source);
   });
-  expect(await preflightTracking('NOSHAPE42', health())).toEqual({ providers: [{ provider: 'ParcelsApp', outcome: 'no_history' }, { provider: 'Ship24', outcome: 'no_history' }] });
+  expect(await preflightTracking('NOSHAPE42', health())).toEqual({ providers: [{ provider: 'Ship24', outcome: 'no_history' }, { provider: 'ParcelsApp', outcome: 'no_history' }] });
   expect(preflightInputNeeded('NOSHAPE42')).toBeUndefined();
 });
 it('distinguishes service failures and shared cooldowns from an empty answer', async () => {

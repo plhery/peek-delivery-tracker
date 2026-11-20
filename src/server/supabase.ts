@@ -1,5 +1,6 @@
 import 'server-only';
 
+import type { ObservedCoverage } from 'universal-parcel-scraper';
 import type { AdapterHold, DpdSession } from 'universal-parcel-scraper/node';
 import type { ApiGiftWords, ApiNativePushTransport } from '../generated/apiContract';
 import { ALL_NOTIFICATION_STAGES } from '../lib/notificationPresets';
@@ -9,6 +10,7 @@ import type { AssistantClient } from './assistants/clients';
 import type { SyncQueue } from './metrics';
 import { SCOPES, type Scope } from './assistants/settings';
 import { scanSource } from './scanRepeats';
+import { providerLimit } from './providerPolicy';
 import { withReviewDemo } from './reviewDemo';
 import { keptStage } from './stageNotices';
 import type { SyncReason } from './trackingAudit';
@@ -595,13 +597,28 @@ export class SupabaseClient {
     });
   }
 
-  async acquireTrackingProvider(provider: string): Promise<{ token: string | null; retry_at: string; held?: boolean }> {
+  async acquireTrackingProvider(provider: string, background = false): Promise<{ token: string | null; retry_at: string; held?: boolean; limited?: true }> {
+    const limit = providerLimit(provider, background);
     const result = await this.request('/rest/v1/rpc/acquire_tracking_provider', {
-      method: 'POST', body: { p_provider: provider },
+      method: 'POST', body: { p_provider: provider, ...(limit ? { p_hourly_limit: limit.limit, p_reserve: limit.reserve } : {}) },
     });
     if (!isRecord(result) || !(typeof result.token === 'string' || result.token === null)
       || typeof result.retry_at !== 'string') throw new TypeError('Invalid provider health response');
-    return { token: result.token, retry_at: result.retry_at, ...(result.held === true ? { held: true } : {}) };
+    return { token: result.token, retry_at: result.retry_at, ...(result.held === true ? { held: true } : {}),
+      ...(result.limited === true ? { limited: true } : {}) };
+  }
+
+  /**
+   * What each universal provider had for each carrier's parcels over the last two weeks (`provider_coverage`): by
+   * carrier and provider, the parcels it returned history for and those it had none for while another provider did.
+   */
+  async providerCoverage(): Promise<Map<string, Record<string, ObservedCoverage>>> {
+    const result = await this.request('/rest/v1/rpc/provider_coverage', { method: 'POST', body: { p_days: 14 } });
+    if (!isRecord(result)) throw new TypeError('Invalid provider coverage response');
+    const count = (value: unknown) => typeof value === 'number' && Number.isSafeInteger(value) && value >= 0 ? value : 0;
+    return new Map(Object.entries(result).flatMap(([carrier, providers]) => isRecord(providers)
+      ? [[carrier, Object.fromEntries(Object.entries(providers).flatMap(([provider, counted]) => isRecord(counted)
+        ? [[provider, { history: count(counted.history), missed: count(counted.missed) }]] : []))] as const] : []));
   }
 
   async finishTrackingProvider(provider: string, token: string, kind: string | null, retryAfterMs: number, durationMs: number): Promise<void> {

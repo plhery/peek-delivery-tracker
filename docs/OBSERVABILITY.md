@@ -762,7 +762,8 @@ Key JSON events:
   `no_history` on the `total` line, in `carrier_lookup_total` and in the check's `lookups`, and
   `not_found` in health and so in `direct_outcome`. The step that fetched it stays `success`.
   An answer the router did not take is recorded the same way: one it set aside (`set_aside_` and the
-  router's reason, such as `set_aside_local_clock`), a reused number's earlier parcel (`older_parcel`), or a
+  router's reason, such as `set_aside_local_clock`, or `set_aside_refused_number` for a provider's parcel of a
+  carrier that refuses the number), a reused number's earlier parcel (`older_parcel`), a provider's included, or a
   recognition that knows the number only with no movement in 60 days (`older_answer`). A check holds its
   successful lookups until it ends, or until the same carrier's next step or lookup, so an answer set aside and taken
   in the end stays `success`. These three do not count as a source that showed the label answering without it

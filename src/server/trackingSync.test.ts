@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { carrierResult } from '../test/carrierResults';
 import { CARRIER_DEFINITIONS, CarrierError, ChallengeError } from 'universal-parcel-scraper';
 import { REGISTRY } from 'universal-parcel-scraper/node';
-import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest';
 import { idlePollDelay, secondsUntilNextSync, syncWindowStart, workerPollDelay } from './background';
 import { deployedVersion } from './reviewQueues';
 import { normalizeCarrierResult, type CarrierResult } from 'universal-parcel-scraper';
@@ -10919,17 +10919,17 @@ describe('scans a carrier and a universal provider both report', () => {
       // Stored before rows named their provider, eight hours late.
       seed(universal(sorted), sorted, '2026-01-03T21:15:42Z', {});
       // Named, and GOFO's own row of the scan already stands at the corrected instant.
-      seed(universal(loaded), loaded, '2026-01-03T09:05:00Z', { universal_provider: 'ParcelsApp' });
+      seed(universal(loaded), loaded, '2026-01-03T09:05:00Z', { universal_provider: 'Ship24' });
       seed('gofo:loaded', { ...loaded, time: '2026-01-03T01:05:00Z' }, '2026-01-03T01:05:00Z', {});
       // Named, with nothing at the corrected instant.
-      seed(universal(weighed), weighed, '2026-01-03T08:40:00Z', { universal_provider: 'ParcelsApp' });
+      seed(universal(weighed), weighed, '2026-01-03T08:40:00Z', { universal_provider: 'Ship24' });
       const adapter = { fetch: vi.fn().mockRejectedValue(down),
         fetchUniversal: vi.fn().mockResolvedValue(answer('Asia/Shanghai', [sorted, loaded, weighed])) };
       const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, now);
       await service.syncPackage({ ...parcel, current_stage: 'in_transit', [STORED_EVENT_IDENTITIES]: store.identities() });
 
       expect((store.client.updatePackage.mock.calls.at(-1)![1] as JsonObject).carrier_data)
-        .toMatchObject({ tracking_provider: 'ParcelsApp' });
+        .toMatchObject({ tracking_provider: 'Ship24' });
       expect(ids(store.batch())).toEqual([universal(weighed)]);
       expect(store.rows.size).toBe(3);
       expect(store.rows.get(universal(weighed))).toMatchObject({ id: 'seed-3', occurred_at: '2026-01-03T00:40:00Z' });
@@ -10981,6 +10981,9 @@ describe('a carrier scan whose zone the scraper deduced', () => {
 });
 
 describe('a carrier a provider names, whose scans the provider copied in the wrong zone', () => {
+  // ParcelsApp answers here: of the providers, its scans dated past the check are the ones that wait until due.
+  beforeEach(() => { vi.stubEnv('TRACKING_UNIVERSAL_PROVIDERS', 'ParcelsApp'); });
+  afterEach(() => { vi.unstubAllEnvs(); });
   type Scan = { time: string; description: string; stage: string };
   // A synthetic number 4PX's adapter accepts and detection names no carrier for.
   const parcel = { id: 'four-px-parcel', user_id: 'owner', carrier: 'unknown', tracking_number: 'TEST0000000000001HD' };

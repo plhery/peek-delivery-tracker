@@ -209,7 +209,7 @@ describe('new direct adapters through the host', () => {
     });
     const value = await router.fetch({ carrier: 'unknown', tracking_number: 'H000000000000001' }, false);
     expect(value.correction).toBeUndefined();
-    expect(value.result).toMatchObject({ tracking_provider: 'ParcelsApp', current_stage: 'out_for_delivery',
+    expect(value.result).toMatchObject({ tracking_provider: 'Ship24', current_stage: 'out_for_delivery',
       direct_local_history: { carrier: 'evri', number: 'H000000000000001' } });
   });
 

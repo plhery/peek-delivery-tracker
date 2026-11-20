@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import { providerAllowed, reportProviderSetting, unknownProviders } from './providerPolicy';
+import { BROWSER_SOURCES, UNIVERSAL_SOURCES } from 'universal-parcel-scraper';
+import { PROVIDER_HOURLY_LIMITS, providerAllowed, providerLimit, reportProviderSetting, unknownProviders } from './providerPolicy';
 
 const observability = vi.hoisted(() => ({ log: vi.fn(), capture: vi.fn() }));
 vi.mock('./observability', () => ({ logOperationalEvent: observability.log, captureProviderSetting: observability.capture }));
@@ -21,6 +22,27 @@ describe('provider policy', () => {
       expect(providerAllowed('ParcelsApp', setting)).toBe(false);
       expect(providerAllowed('UPU', setting)).toBe(false);
     }
+  });
+});
+
+describe('hourly limits', () => {
+  it('name providers the scraper has, and give ParcelsApp less than the providers that could be lost', () => {
+    const providers = new Set<string>([...UNIVERSAL_SOURCES, ...BROWSER_SOURCES]);
+    expect(Object.keys(PROVIDER_HOURLY_LIMITS).filter((provider) => !providers.has(provider))).toEqual([]);
+    expect(PROVIDER_HOURLY_LIMITS.ParcelsApp).toBeLessThan(PROVIDER_HOURLY_LIMITS.Ship24!);
+  });
+  it('leave a reserve only on checks nobody waits for, one the database accepts', () => {
+    expect(providerLimit('ParcelsApp', false)).toEqual({ limit: 90, reserve: 0 });
+    expect(providerLimit('ParcelsApp', true)).toEqual({ limit: 90, reserve: 15 });
+    // acquire_tracking_provider refuses a reserve that leaves no lookup in half an hour of the limit.
+    for (const provider of Object.keys(PROVIDER_HOURLY_LIMITS)) {
+      const { limit, reserve } = providerLimit(provider, true)!;
+      expect(reserve + 1).toBeLessThanOrEqual(limit / 2);
+    }
+  });
+  it('are none for a provider without one', () => {
+    expect(providerLimit('UPU', true)).toBeUndefined();
+    expect(providerLimit('toString', true)).toBeUndefined();
   });
 });
 

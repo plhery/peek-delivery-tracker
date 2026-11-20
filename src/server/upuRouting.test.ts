@@ -59,7 +59,9 @@ describe('UPU fallback routing', () => {
   it.each(['19999999999980', 'EB000000006CN'])('skips UPU and its lease for ineligible %s', async (tracking_number) => {
     const { router, health, universal } = setup();
     await expect(router.fetch({ carrier: 'unknown', tracking_number }, false)).rejects.toThrow();
-    expect(universal.mock.calls.map(([source]) => source)).toEqual(['ParcelsApp', 'Ship24', '17TRACK']);
-    expect(health.acquireTrackingProvider).not.toHaveBeenCalledWith('UPU');
+    // The two HTTP providers share the numbers, so which leads depends on the number.
+    expect(universal.mock.calls.map(([source]) => source).sort()).toEqual(['17TRACK', 'ParcelsApp', 'Ship24']);
+    expect(universal.mock.calls.at(-1)![0]).toBe('17TRACK');
+    expect(health.acquireTrackingProvider.mock.calls.map(([source]) => source)).not.toContain('UPU');
   });
 });

@@ -27,6 +27,7 @@ import type { StepRecord, StepRecorder } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry, hostAdapterEnvironment } from './adapterRegistry';
 import { normalizedLookupCountry } from './lookupCountry';
 import { preflightInputNeeded, takePreflightHistory } from './trackingPreflight';
+import { loadProviderCoverage, observedCoverage } from './providerCoverage';
 import { providerMisses } from './providerMisses';
 import { providerRefusals } from './providerRefusals';
 import { refusesNumber } from './numberRefusal';
@@ -735,7 +736,7 @@ function numberKey(parcel: JsonObject): string {
  * number, which takes one call at a time across servers (acquire_tracking_provider), so a second check
  * would find it busy.
  */
-function checkKeys(parcel: JsonObject): string[] {
+function checkKeys(parcel: JsonObject, background: boolean): string[] {
   const carrier = String(parcel.carrier ?? '');
   const data = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
   const routing = isRecord(data.routing) ? data.routing : {};
@@ -743,14 +744,16 @@ function checkKeys(parcel: JsonObject): string[] {
   // A parcel whose carrier has no adapter of its own asks the providers first: with none named yet,
   // it holds the one its plan puts first. Two checks would otherwise ask it at once, and the
   // second would spend its time waiting for the first's call.
+  const plan = directCarrier(carrier) ? undefined : universalPlan({
+    carriers: [carrier], trackingNumber: number, background, observed: observedCoverage(carrier),
+    enableTrack123: true, enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true',
+  }).sources;
   const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '')
-    ?? (directCarrier(carrier) ? undefined : universalPlan({ carriers: [carrier], trackingNumber: number }).sources[0]);
+    ?? plan?.[0];
   // With an explicit allowlist the router can rotate among eligible sources. Hold them
   // across the whole provider-only check, including any fallback it may need.
   const setting = process.env.TRACKING_UNIVERSAL_PROVIDERS;
-  const reserved = setting?.trim() && !directCarrier(carrier)
-    ? universalPlan({ carriers: [carrier], trackingNumber: number, enableTrack123: true,
-      enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true' }).sources.filter((source) => providerAllowed(source, setting))
+  const reserved = setting?.trim() && plan ? plan.filter((source) => providerAllowed(source, setting))
     : typeof provider === 'string' && providerAllowed(provider, setting) ? [provider] : [];
   // A parcel handed over to another carrier, or whose earlier leg answered last, asks that carrier too.
   const active = typeof data.active_tracking_carrier === 'string' && directCarrier(data.active_tracking_carrier)
@@ -1990,7 +1993,7 @@ export class TrackingSyncService {
       // The parcels not started yet, in the run's order, with what each holds while it is checked;
       // what the checks under way hold, and those checks.
       const waiting = [...parcels];
-      const keys = new Map(parcels.map((parcel) => [parcel, checkKeys(parcel)]));
+      const keys = new Map(parcels.map((parcel) => [parcel, checkKeys(parcel, !askedForCheck(context.trigger))]));
       const browser = new Map(parcels.map((parcel) => [parcel, this.opensBrowser(parcel)]));
       const running = new Set<Promise<void>>();
       // Whether the run starts no more checks, and why: shutdown, or a check that failed.
@@ -2165,7 +2168,8 @@ export class TrackingSyncService {
     const lookups = joined && !same && joined.lookups ? joined.lookups : this.readerLane ? new SharedLookups([parcel]) : undefined;
     // Without a check, the merge below still holds the account.
     const hold: CheckHold = {
-      parcelId: id, keys: due ? checkKeys(parcel) : userId ? [`account:${userId}`] : [], browser: due && this.opensBrowser(parcel), lookups,
+      parcelId: id, keys: due ? checkKeys(parcel, !askedForCheck(context.trigger)) : userId ? [`account:${userId}`] : [],
+      browser: due && this.opensBrowser(parcel), lookups,
     };
     const release = await this.#holds.acquire(hold, context.signal);
     const checked = parcel;
@@ -2788,6 +2792,8 @@ export class TrackingSyncService {
       const sparse = !askedForCheck(context.trigger)
         && (unseenRecheckDue(subject, now) !== undefined || sparseLookupRecheck(subject, now));
       const unseen = unseenFor(subject, now);
+      // What the providers had for each carrier's parcels orders them: read hourly, and no check waits for the read.
+      void loadProviderCoverage(this.client, now.getTime());
       // Only a check someone asked for, or a lookup's, skips the scheduled cadence: a release's re-check keeps it.
       try {
         fetched = await audit.observeFetch(async () => this.adapter.fetchUniversal && carrierId !== 'amazon-shipping'
@@ -2799,7 +2805,7 @@ export class TrackingSyncService {
               () => this.adapter.fetchUniversal!(source, number, timeout, postcode, timezone, carrier)),
             ...(checks ? { reusedUniversal: (source: UniversalSource, number: string, postcode: string | null, timezone: string | null, carrier: string | null) =>
               checks.reuse<CarrierResult>(universalLookupKey(source, number, postcode, timezone, carrier)) } : {}),
-            health: this.client, now: this.now, refusals: providerRefusals, misses: providerMisses,
+            health: this.client, now: this.now, refusals: providerRefusals, misses: providerMisses, observed: observedCoverage,
             askedElsewhere: probeAsked, onAsk: (carrier: string) => { routerAsks.set(carrier, this.now().getTime()); },
             ...(unseen !== null ? { hourlyUntil: now.getTime() - unseen + UNSEEN_HOURLY_MS } : {}),
             takePrefetchedUniversal: takePreflightHistory, preflightInputNeeded, refuses: refusesNumber,

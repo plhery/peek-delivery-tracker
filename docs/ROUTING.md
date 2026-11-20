@@ -91,7 +91,7 @@ helps, and `proxy_refused` for any other.
    partial answer or label alone, below) and the Swiss Post handoff.
 2. **Carriers that recognize the number**, when the filed carrier cannot track it (see
    Carrier recognition below).
-3. **Universal providers**, by default ParcelsApp → Ship24 → 17TRACK → UPU.
+3. **Universal providers**: Ship24, ParcelsApp and 17TRACK, shared as below, then UPU.
    - They are a fallback meant to shrink, since one may refuse a client that asks it too much:
      they serve a carrier without an adapter, a number no carrier is known for, and a
      carrier's failed, partial or label-only answer. `TRACKING_UNIVERSAL_PROVIDERS` names the
@@ -102,13 +102,30 @@ helps, and `proxy_refused` for any other.
      logs such names at start (`provider_setting_unknown`) and reports them to Sentry. A parcel only a stopped provider
      answered waits for a carrier's adapter. What is sent to each provider, and why, is in
      [OBSERVABILITY.md](OBSERVABILITY.md).
-   - A carrier with results in [coverage.json](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/coverage.json)
-     gets its own order, listed in [COVERAGE.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COVERAGE.md):
-     providers by the tier its results give them (full history, partial history, nothing
-     conclusive, answered without history), HTTP providers (ParcelsApp, Ship24) before the
-     browser-service 17TRACK within a tier, then the default order. A
-     full history outranks a cheaper partial one because a parcel keeps the provider that
-     answers first. A provider that never had history and answered with another carrier's
+   - The scraper's plan orders them
+     ([providers/README.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/README.md)).
+     First by the tier of each provider's history for the carrier: full, partial, nothing
+     conclusive, answered without history. A full history outranks a cheaper partial one
+     because a parcel keeps the provider that answers first, so a tier is never traded for
+     speed or load.
+   - Providers of one tier share the carrier's numbers, each number keeping its order from
+     one check to the next. Ship24 leads the largest part, since losing it would cost least;
+     ParcelsApp, the only source of several carriers, half as many; the browser-service
+     providers fewer still. A check someone waits for asks the HTTP providers (ParcelsApp,
+     Ship24) before the browser-service ones of the same tier, which answer seconds later; a
+     check nobody waits for shares the numbers among them all.
+   - A carrier's tiers come from its results in [coverage.json](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/coverage.json),
+     listed in [COVERAGE.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COVERAGE.md),
+     and, from ten parcels on, from what each provider had for the carrier's parcels here
+     over two weeks (`provider_coverage`, read hourly by
+     [providerCoverage.ts](../src/server/providerCoverage.ts)): the parcels it returned
+     history for, against those it had nothing for in a check another provider answered. An
+     answer the router rejected as another parcel's counts as nothing, and UPU's postal feed,
+     asked last, makes no provider miss a parcel. A
+     provider that had most of them is full, some of them partial, and none of them no longer
+     asked about that carrier. So when a carrier's own site is down, its parcels go to the
+     providers that track that carrier, shared among them.
+   - A provider that never had history and answered with another carrier's
      parcel or refused the number format is not asked, unless no other would remain. Nor is
      one that keeps the carrier for its subscribers, whatever it once returned: Ship24 answers
      no anonymous lookup for those couriers.
@@ -123,10 +140,12 @@ helps, and `proxy_refused` for any other.
      the preferred source and never used for shadow checks.
    - Postal Ninja is off by default. `TRACKING_ENABLE_POSTAL_NINJA=true` adds it after the
      other aggregators, whatever its tier, before UPU, when the list above allows it.
-   - Track123's anonymous public page is asked only for a lookup filed under FedEx, before
-     the other providers once FedEx's own lookup has failed. The Add preflight and discovery for
-     a number with no carrier don't ask it. When it fails, refuses or answers behind the
-     parcel's stored progress, the other providers are asked in the same check.
+   - Track123 is asked through a courier's own page, so only about the carrier a lookup is
+     filed under, when the scraper lists a page that answered that carrier's public numbers
+     (FedEx, UPS and DHL among them). It then takes its place in the carrier's order like any
+     browser-service provider. The Add preflight and discovery for a number with no carrier
+     don't ask it. When it fails, refuses or answers behind the parcel's stored progress, the
+     other providers are asked in the same check.
    - Exception: checksum-valid China Post `C…CN` and `L…CN` numbers try 17TRACK first,
      because it returns much richer history for them (see
      [COMPARISON.md](https://github.com/plhery/universal-parcel-scraper/blob/main/providers/COMPARISON.md)), and ten-digit
@@ -164,8 +183,8 @@ for ParcelsApp (slow first lookups, one network retry), 30 s for the others, plu
 transport allowance each. That's 120 s in total by default, 155 s with Postal Ninja,
 less when a carrier's order leaves a provider out. Postal S10 lookups get 13 s more for UPU. A slow direct
 attempt doesn't eat into this budget. If the budget runs out first, the discovery cursor
-moves on so the next check starts with another of ParcelsApp, Ship24 and 17TRACK. Postal
-Ninja, Track718 (Juxi's last provider) and UPU stay after them. A carrier's own lookup has its
+moves on so the next check starts with another of the providers whose history for the
+carrier is equally full. Postal Ninja, Track718 (Juxi's last provider) and UPU stay after them. A carrier's own lookup has its
 adapter's budget. Australia Post's has the minute an adapter takes at most: the adapter keeps 15 s for
 the transport, and its two browser reads, the second through a residential proxy after a bot check,
 share the other 45 s ([`trackingSync.ts`](../src/server/trackingSync.ts)).
@@ -1262,6 +1281,15 @@ which parcel the carrier answered for. A link shows it only where it shows the p
   to the next provider and records no cooldown, and with no other answer checks again
   15 minutes later. A cooldown is waited for only when it ends within 6 s (twice at most);
   otherwise the check records it and moves on;
+- an hourly limit per provider, stated with each lease
+  ([providerPolicy.ts](../src/server/providerPolicy.ts)): ParcelsApp's well under what it
+  has refused an address for, Ship24's the highest, the browser-service providers' by what
+  their reads cost, none for UPU. The allowance fills at that rate and holds half an hour of
+  it, so a quiet provider takes a burst, such as a carrier's outage sending its parcels
+  over, and a busy one settles at its limit. A check nobody waits for leaves a third of the
+  allowance to the Adds and refreshes someone does wait for. A lookup the allowance refuses
+  goes to the next provider and records no cooldown; with no other answer the parcel is
+  checked again once the first of them has a lookup, 15 minutes later at the earliest;
 - cooldowns: 429 → at least 15 min, verification → 1 h, other failures → 1 min to 1 h
   (exponential);
 - not-found, `no_history` and a refused number (`invalid_input`) are per-parcel and never
@@ -1301,6 +1329,7 @@ hourly review in [OBSERVABILITY.md](OBSERVABILITY.md).
 | `provider_blocked` | A provider refuses this server whatever it is asked, and rests 30 minutes (Shared provider protection). A Sentry event when the block is found still in place after its pause: a first block only finds numbers the provider tracked, whose parcels keep that answer |
 | `provider_budget_spent` | A provider spent its budget of answers without history (Shared provider protection), at most once in 30 minutes: the budget at work, counted in `tracking_provider_budget_spent_total`, no Sentry event |
 | `provider_budget_held` | A check nobody asked for skipped a provider whose budget is spent, for a number it has not tracked |
+| `provider_limited` | A provider had been sent its lookups for the hour (Shared provider protection), and the check asked the next one |
 | `paced_deferred` | Our own pacing refused the parcel's carrier (`self_paced`) and the check waits for its next search |
 | `paced_fallback` | Our own pacing refused the carrier of an account's parcel nothing has answered for an hour, and the check asks the providers meanwhile |
 | `carrier_retry_awaited` | The carrier that answers for the parcel failed in passing and the scheduled check waits for its retry, asking no provider |

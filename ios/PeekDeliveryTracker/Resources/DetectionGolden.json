@@ -20620,6 +20620,16 @@
     "candidates": []
   },
   {
+    "input": "14294365",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "14320080713168",
     "carrier": "unknown",
     "confidence": "low",
@@ -25016,6 +25026,16 @@
     "confidence": "low",
     "candidates": [
       "seur"
+    ]
+  },
+  {
+    "input": "18497957",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
     ]
   },
   {
@@ -88265,6 +88285,17 @@
     ]
   },
   {
+    "input": "EC583147022LP",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "chronopost"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "ECESEXX013740511",
     "carrier": "ecms-express",
     "confidence": "high",
@@ -100055,6 +100086,17 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "MS73914286051937YD",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "muser"
+    ],
+    "asked": [
+      "muser"
+    ]
   },
   {
     "input": "MTDE-664743441",

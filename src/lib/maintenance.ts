@@ -37,14 +37,23 @@ function notice(value: object): MaintenanceNotice {
 }
 
 /**
- * Whether an answer means the server is down rather than refusing: a proxy's or Cloudflare's error status
- * (the database's 502 and the sign-in server's 503 too), or a 404 the app did not write, such as the proxy's
- * "404 page not found" while the app starts. The app's own 503 about one part it can't use is not maintenance.
+ * Whether an answer means the server is down rather than refusing: a proxy's or Cloudflare's error status (the
+ * database's 502 and the sign-in server's 503 too), or the edge guard's 503 in its place, which is also what the
+ * proxy's "404 page not found" becomes behind it while the app starts. The app's own 503 about one part it can't
+ * use is not maintenance, and a 404 is never the server down: a route a deploy removed, or a CDN's, is an error.
  */
 export function serverDown(status: number, body: unknown): boolean {
-  if (status === 404) return !isServiceAnswer(body);
   if (!DOWN_STATUSES.has(status)) return false;
   return !(status === 503 && isServiceAnswer(body) && !announcedMaintenance(body) && PART_UNAVAILABLE.test(body.error));
+}
+
+/**
+ * Whether a page's answer is not the server's own: a proxy's or Cloudflare's error, or what the edge guard answers
+ * in the server's place (`X-Maintenance`: its saved copy of a page, or its maintenance page). Any other answer, a
+ * 404 included, is the server's page.
+ */
+export function pageServerDown(response: Pick<Response, 'status' | 'headers'>): boolean {
+  return DOWN_STATUSES.has(response.status) || response.headers.has('X-Maintenance');
 }
 
 /** Whether the device says it is online: a request that got no answer while it is means the server is down. */

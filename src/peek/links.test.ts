@@ -235,12 +235,12 @@ describe('the API backend', () => {
     expect((await failure(links.readParcelLink(ID))).kind).toBe('server');
   });
 
-  it('reads a proxy’s 404, while the server is up and the app is not yet, as the server failing: nothing leads nowhere', async () => {
+  it('reads a proxy’s 404, while the server is up and the app is not yet, as the server failing, not down: nothing leads nowhere', async () => {
     const proxy = () => new Response('404 page not found\n', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } });
     const { links } = api(proxy(), proxy(), new Response('<!doctype html><title>404</title>', { status: 404, headers: { 'Content-Type': 'text/html' } }));
-    expect((await failure(links.readParcelLink(ID))).kind).toBe('server');
+    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: null });
     expect((await failure(links.forgetParcelLink(ID, KEY))).kind).toBe('server');
-    expect((await failure(links.readParcelLink(ID, { tellStopped: true }))).kind).toBe('server');
+    expect(await failure(links.readParcelLink(ID, { tellStopped: true }))).toMatchObject({ kind: 'server', down: null });
   });
 
   it('reads a link whose sharing was stopped as unavailable, and as stopped for a page that asks to be told', async () => {
@@ -425,14 +425,12 @@ describe('the API backend', () => {
       new TypeError('Failed to fetch'),
       new DOMException('The operation timed out.', 'TimeoutError'),
       new Response('error code: 1033', { status: 530, headers: { 'Content-Type': 'text/plain' } }),
-      new Response('404 page not found\n', { status: 404, headers: { 'Content-Type': 'text/plain; charset=utf-8' } }),
       json({ error: 'The delivery database is temporarily unavailable' }, 502),
       json({ error: 'Peek is down for maintenance', maintenance: { planned: true, mode: 'hard', since: null, backAround: '2026-11-17T09:30:00Z' } }, 503, { 'Retry-After': '300' }),
       json({ error: 'Push notifications are not configured' }, 503),
       new Response('not json', { status: 500 }),
     );
     // No answer while the device is online: the server is down, not the device.
-    expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
     expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
     expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });
     expect(await failure(links.readParcelLink(ID))).toMatchObject({ kind: 'server', down: unannounced });

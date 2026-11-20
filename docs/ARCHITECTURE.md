@@ -855,9 +855,11 @@ The clients read that as maintenance, not as an error ([`maintenance.ts`](../src
 Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekdeliverytracker/core/APIClient.kt)):
 
 - **What counts**: a request that gets no answer while the device is online; a 502, 503,
-  504, 520 to 527 or 530; a 404 that isn't the service's JSON, such as the proxy's text
-  while the app starts. The app's own 503 about a part it was never set up for, or about
-  Amazon's, a carrier's or the browser check, is that part failing, as is any other status.
+  504, 520 to 527 or 530, the edge guard's 503 among them (behind it, the proxy's text 404
+  while the app starts is one). The app's own 503 about a part it was never set up for, or
+  about Amazon's, a carrier's or the browser check, is that part failing, as is any other
+  status. On the web a 404 is always an error, such as a route a deploy removed or a CDN's;
+  the iPhone and Android apps also count a 404 that isn't the service's JSON.
 - **What stays**: the deliveries, the device's parcels and an open parcel page keep what
   they last read, under a soft yellow strip that says Peek is down for a few minutes of
   maintenance and how old what is shown is; the browser and the apps keep when the list was

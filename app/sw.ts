@@ -1,6 +1,7 @@
 import { defaultCache } from '@serwist/next/worker';
 import type { PrecacheEntry, SerwistGlobalConfig, SerwistPlugin } from 'serwist';
 import { ExpirationPlugin, NetworkFirst, NetworkOnly, Serwist } from 'serwist';
+import { pageServerDown } from '../src/lib/maintenance';
 import { isShareDraftId, SHARE_DRAFTS, shareDraftAddress, shareTargetAddress, type ShareFailure } from '../src/lib/shareTarget';
 
 declare global {
@@ -113,19 +114,6 @@ async function consumeShareTarget(url: URL): Promise<Response> {
   });
 }
 
-/** Statuses a proxy or Cloudflare answers with for a server that does not answer itself. */
-const SERVER_DOWN = new Set([502, 503, 504, 520, 521, 522, 523, 524, 525, 526, 527, 530]);
-
-/**
- * A page the server could not give: a proxy's or Cloudflare's error, the proxy's own "404 page not found" while the
- * app starts, or what the edge in front answers in the server's place (`X-Maintenance`: its saved copy of a page,
- * or its maintenance page).
- */
-function serverDown(response: Response): boolean {
-  return SERVER_DOWN.has(response.status) || response.headers.has('X-Maintenance')
-    || (response.status === 404 && (response.headers.get('Content-Type') ?? '').startsWith('text/plain'));
-}
-
 /**
  * While the server is down for maintenance, a page opens from the copy this browser kept of it. Without one, the
  * edge's own maintenance page says so; anything else, such as Cloudflare's error page, gives way to the offline page.
@@ -133,7 +121,7 @@ function serverDown(response: Response): boolean {
 const whileServerDown: SerwistPlugin = {
   // Throwing here makes the strategy look in its cache, as it does without a network.
   fetchDidSucceed: async ({ response, state }) => {
-    if (!serverDown(response)) return response;
+    if (!pageServerDown(response)) return response;
     if (state) state.down = response;
     throw new Error(`The server is down (${response.status})`);
   },
@@ -155,7 +143,7 @@ const pageNavigation = new NetworkFirst({
       // answer of the moment, such as a host whose pages moved: the browser
       // follows it, and it is asked again next time. Nor is what the edge
       // answered in the server's place.
-      cacheWillUpdate: async ({ response }) => (response.status === 200 && !response.redirected && !serverDown(response) ? response : null),
+      cacheWillUpdate: async ({ response }) => (response.status === 200 && !response.redirected && !pageServerDown(response) ? response : null),
     },
     whileServerDown,
   ],

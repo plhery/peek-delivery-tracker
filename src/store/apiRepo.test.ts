@@ -226,11 +226,12 @@ describe('createApiRepo', () => {
     await repo.list();
     expect(repo.cachedAt?.()).toBe('2026-11-17T09:05:00.000Z');
 
-    // Cloudflare's page while the host reboots, the proxy's 404 while the app starts, the edge's own answer, then none.
+    // Cloudflare's page while the host reboots, the database's 502, the edge's own answer, then none.
+    // A 404 the app did not write, such as a route a deploy removed, is an error, not the server down.
     fetch.mockResolvedValueOnce({ ok: false, status: 530, headers: new Headers({ 'Content-Type': 'text/html' }), json: vi.fn().mockRejectedValue(new SyntaxError('Not JSON')) });
     await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError', maintenance: null });
     fetch.mockResolvedValueOnce({ ok: false, status: 404, headers: new Headers({ 'Content-Type': 'text/plain' }), json: vi.fn().mockRejectedValue(new SyntaxError('Not JSON')) });
-    await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError' });
+    await expect(repo.list()).rejects.toMatchObject({ name: 'Error', status: 404, message: 'Delivery service failed (404)' });
     fetch.mockResolvedValueOnce(response({ error: 'The delivery database is temporarily unavailable' }, false, 502));
     await expect(repo.list()).rejects.toMatchObject({ name: 'ServerDownError', maintenance: null });
     fetch.mockResolvedValueOnce(response({

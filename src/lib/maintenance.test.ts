@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { announcedMaintenance, quietRetryDelay, readMaintenance, serverDown, unanswered } from './maintenance';
+import { announcedMaintenance, pageServerDown, quietRetryDelay, readMaintenance, serverDown, unanswered } from './maintenance';
 
 describe('the server down for maintenance', () => {
   afterEach(() => {
@@ -13,10 +13,22 @@ describe('the server down for maintenance', () => {
     expect(serverDown(503, { error: 'Supabase authentication is temporarily unavailable' })).toBe(true);
   });
 
-  it('is a 404 the app did not write, such as the proxy’s own while the app starts, never the app’s own', () => {
-    expect(serverDown(404, null)).toBe(true);
-    expect(serverDown(404, '404 page not found\n')).toBe(true);
+  it('is never a 404: a route a deploy removed, a CDN’s 404 or the proxy’s own text is an error, not maintenance', () => {
+    expect(serverDown(404, null)).toBe(false);
+    expect(serverDown(404, '404 page not found\n')).toBe(false);
     expect(serverDown(404, { error: 'Parcel unavailable' })).toBe(false);
+  });
+
+  it('is a page a proxy, Cloudflare or the edge guard answered in the server’s place, never a 404', () => {
+    const page = (status: number, headers: Record<string, string> = {}) => new Response(null, { status, headers });
+    expect(pageServerDown(page(530, { 'Content-Type': 'text/html' }))).toBe(true);
+    expect(pageServerDown(page(503, { 'Content-Type': 'text/html', 'X-Maintenance': 'planned' }))).toBe(true);
+    // The edge guard's saved copy of a page.
+    expect(pageServerDown(page(200, { 'Content-Type': 'text/html', 'X-Maintenance': 'unplanned' }))).toBe(true);
+    expect(pageServerDown(page(404, { 'Content-Type': 'text/plain; charset=utf-8' }))).toBe(false);
+    expect(pageServerDown(page(404, { 'Content-Type': 'text/html' }))).toBe(false);
+    expect(pageServerDown(page(500, { 'Content-Type': 'text/html' }))).toBe(false);
+    expect(pageServerDown(page(200, { 'Content-Type': 'text/html' }))).toBe(false);
   });
 
   it('is not the app refusing, failing on its own, or never set up for something', () => {

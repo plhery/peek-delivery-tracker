@@ -102,6 +102,27 @@ describe('a carrier asking for at most one check an hour, on the hourly cadences
   });
 });
 
+// A refresh by hand keeps the limit too, as it did for a carrier that also sets a wait after a failure: a Royal Mail
+// parcel refreshed 25 minutes after its last check asked Royal Mail again.
+describe('a refresh by hand within a carrier\'s own limit', () => {
+  it.each([['royal-mail', 60], ['china-post', 60], ['spring-gds', 30]])('does not ask %s again within its %i minutes', async (carrier, minutes) => {
+    const last = Date.parse('2026-09-09T10:00:00Z');
+    const parcel: JsonObject = { id: 'refreshed', user_id: 'owner', carrier, tracking_number: 'LZ123456785CN', current_stage: 'in_transit',
+      created_at: '2026-09-08T08:00:00Z', last_synced_at: new Date(last).toISOString(), sync_status: 'ok', archived_at: null,
+      carrier_data: { last_update: '2026-09-09T09:00:00Z', routing: { version: 1, configured_carrier: carrier, last_event_at: '2026-09-09T09:00:00Z' } } };
+    const refresh = async (after: number) => {
+      const fetch = vi.fn(async (): Promise<CarrierResult> => ({ status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-09T09:00:00Z' }));
+      const summary = await new TrackingSyncService(client([parcel]) as unknown as SupabaseServiceClient, { fetch }, null,
+        () => new Date(last + after * 60_000)).syncPackage(parcel, { trigger: 'refresh' });
+      return { checked: summary.checked, asked: fetch.mock.calls.length };
+    };
+    expect(await refresh(minutes / 2)).toEqual({ checked: 0, asked: 0 });
+    expect(await refresh(minutes - 6)).toEqual({ checked: 0, asked: 0 });
+    // Counted from the run that made the last check, which lands a little into it, as a scheduled check counts it.
+    expect(await refresh(minutes - 5)).toEqual({ checked: 1, asked: 1 });
+  });
+});
+
 // Every parcel of such a carrier came due at once as each of its intervals opened, so a run asked it for all of them
 // back to back and it answered the later ones with 429s.
 describe('a carrier that spaces its lookups out', () => {

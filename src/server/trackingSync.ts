@@ -495,8 +495,9 @@ function handedTo(parcel: JsonObject): string | null {
 
 /**
  * When the persisted cooldown lets the parcel be checked again, as epoch
- * milliseconds: a routing deferral or the carrier's refresh interval. Zero when
- * nothing holds it back, infinity when it is never checked.
+ * milliseconds: a routing deferral or the carrier's refresh interval, which holds
+ * for every check, a manual refresh's too. Zero when nothing holds it back,
+ * infinity when it is never checked.
  */
 export function trackingSyncDueAt(parcel: JsonObject): number {
   // A review demo parcel's scans are written in Peek: no carrier or provider is ever asked (reviewDemo.ts).
@@ -506,7 +507,7 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
   const deferred = Date.parse(String(routingState(parcel).next_check_at ?? ''));
   const after = Number.isFinite(deferred) ? deferred : 0;
   const refresh = refreshLimit(parcel);
-  if (!refresh?.afterFailureMinutes) return after;
+  if (!refresh) return after;
   const lastChecked = Date.parse(String(parcel.last_synced_at ?? ''));
   if (!Number.isFinite(lastChecked)) return after;
   // A provider just filed the parcel under its carrier and the check did not ask that carrier (`carrier_named_at`,
@@ -515,8 +516,7 @@ export function trackingSyncDueAt(parcel: JsonObject): number {
     && pacedBy(parcel) === String(parcel.carrier)) return after;
   // Counted from the run that made the last check, which lands a little into it, as a scheduled
   // check counts a limit alone (scheduledSyncDue).
-  const interval = parcel.sync_status === 'error'
-    ? refresh.afterFailureMinutes * 60_000 : refresh.minMinutes * 60_000;
+  const interval = (parcel.sync_status === 'error' ? refresh.afterFailureMinutes ?? refresh.minMinutes : refresh.minMinutes) * 60_000;
   return Math.max(after, lastChecked + interval - RUN_SPREAD_MS);
 }
 

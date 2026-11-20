@@ -5483,15 +5483,18 @@ describe('TrackingSyncService', () => {
       return delivery;
     }) });
     const asked = (adapter: ReturnType<typeof postnl>) => adapter.fetch.mock.calls.filter((call) => call[0] === 'spring-gds').map((call) => call[3]);
+    // PostNL is asked at most every 30 minutes, a refresh by hand included: `later` moves the clock past that.
     const setup = (found: (postcode: string) => boolean, given: JsonObject[] = [{ carrier: 'spring-gds', dpd_postcode: '1011 AB' }]) => {
       const client = { ...fakeClient(), accountPostcodes: vi.fn().mockResolvedValue(given) };
       const adapter = postnl(found);
-      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-11-18T09:00:00Z'));
-      return { client, adapter, service };
+      let now = new Date('2026-11-18T09:00:00Z');
+      const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => now);
+      const later = () => { now = new Date(now.getTime() + 30 * 60_000); };
+      return { client, adapter, service, later };
     };
 
     it('gives an account\'s parcel the postcode it gave last, and keeps asking with the one that found it', async () => {
-      const { client, adapter, service } = setup(() => true);
+      const { client, adapter, service, later } = setup(() => true);
       await service.syncPackage(parcel);
       expect(client.accountPostcodes).toHaveBeenCalledExactlyOnceWith('owner');
       expect(asked(adapter)).toEqual(['1011 AB']);
@@ -5500,6 +5503,7 @@ describe('TrackingSyncService', () => {
         handoff_postcode: { carrier: 'spring-gds', number, postcode: '1011 AB', country: null, found: true } });
       client.accountPostcodes.mockClear();
       adapter.fetch.mockClear();
+      later();
       await service.syncPackage({ ...parcel, ...values });
       expect(client.accountPostcodes).not.toHaveBeenCalled();
       expect(asked(adapter)).toEqual(['1011 AB']);
@@ -5507,7 +5511,7 @@ describe('TrackingSyncService', () => {
     });
 
     it('does not send a postcode that missed again, nor tell the owner, and tries the account\'s next one', async () => {
-      const { client, adapter, service } = setup((postcode) => postcode === '2511 CV');
+      const { client, adapter, service, later } = setup((postcode) => postcode === '2511 CV');
       await service.syncPackage(parcel);
       expect(asked(adapter)).toEqual(['1011 AB']);
       const values = client.updatePackage.mock.calls.at(-1)![1];
@@ -5517,14 +5521,16 @@ describe('TrackingSyncService', () => {
       expect(values.carrier_data.routing?.postcode_refused).toBeUndefined();
       expect(values.carrier_data.routing?.input_needed).toBeUndefined();
       adapter.fetch.mockClear();
-      const later = { ...parcel, ...values };
-      await service.syncPackage(later);
+      const stored = { ...parcel, ...values };
+      later();
+      await service.syncPackage(stored);
       expect(asked(adapter)).toEqual([null]);
       expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '1011 AB', found: false });
       // The owner gave another postcode since: that one is tried.
       client.accountPostcodes.mockResolvedValue([{ carrier: 'spring-gds', dpd_postcode: '2511 CV' }, { carrier: 'spring-gds', dpd_postcode: '1011 AB' }]);
       adapter.fetch.mockClear();
-      await service.syncPackage(later);
+      later();
+      await service.syncPackage(stored);
       expect(asked(adapter)).toEqual(['2511 CV']);
       expect(client.updatePackage.mock.calls.at(-1)![1].carrier_data.handoff_postcode).toMatchObject({ postcode: '2511 CV', found: true });
     });
@@ -6849,7 +6855,8 @@ describe('TrackingSyncService', () => {
       await service.syncPackage(parcel, { trigger: 'scheduled' });
       expect(adapter.fetch.mock.calls.map((call) => call[0])).toEqual(expected);
       parcel = { ...parcel, ...client.updatePackage.mock.calls.at(-1)![1] };
-      now = new Date(now.getTime() + 10 * 60_000);
+      // PostNL's own 30 minutes, counted from the run of the last check, and still inside the probe's 55-minute wait.
+      now = new Date(now.getTime() + 25 * 60_000);
       if (expected.length === 1) destination = 'FI';
     }
   });
@@ -7482,7 +7489,7 @@ describe('TrackingSyncService', () => {
     expect(isOpenedParcelSyncDue(delivering, new Date('2026-09-09T11:00:00Z'))).toBe(true);
   });
 
-  it.each(['ok', 'error'])('checks PostNL every thirty minutes after %s checks', async (syncStatus) => {
+  it.each(['ok', 'error'])('checks PostNL every thirty minutes after %s checks, a refresh by hand too', async (syncStatus) => {
     const parcel = {
       id: 'postnl', carrier: 'spring-gds', tracking_number: 'LX999999987NL',
       current_stage: 'in_transit',
@@ -7494,12 +7501,12 @@ describe('TrackingSyncService', () => {
     const service = new TrackingSyncService(client as unknown as SupabaseServiceClient,
       adapter, null, () => now);
     await expect(service.sync()).resolves.toMatchObject({ checked: 0 });
-    await expect(service.syncPackage(parcel)).resolves.toMatchObject({ checked: 1, unchanged: 1 });
+    await expect(service.syncPackage(parcel, { trigger: 'refresh' })).resolves.toMatchObject({ checked: 0 });
     now = new Date('2026-09-09T10:10:00Z');
     await expect(service.sync()).resolves.toMatchObject({ checked: 0 });
     now = new Date('2026-09-09T10:30:00Z');
     await expect(service.sync()).resolves.toMatchObject({ checked: 1, unchanged: 1 });
-    expect(adapter.fetch.mock.calls.filter(([carrier]) => carrier === 'spring-gds')).toHaveLength(2);
+    expect(adapter.fetch.mock.calls.filter(([carrier]) => carrier === 'spring-gds')).toHaveLength(1);
   });
 
   it('filters cooldowns before the per-owner quota without delaying other carriers', async () => {
@@ -9485,7 +9492,8 @@ it.each([false, true])('retains China Post provider history between backfills (l
   const saved = structuredClone(parcel.carrier_data) as JsonObject;
   const rows = structuredClone([...store.rows.values()]);
   expect(rows).toHaveLength(2);
-  now = new Date('2026-09-10T12:15:00Z');
+  // China Post's hour, counted from the run of the last check: inside the 3 h the provider's history is held.
+  now = new Date('2026-09-10T12:55:00Z');
   await sync();
   expect(adapter.fetch).toHaveBeenCalledTimes(2);
   expect(adapter.fetchUniversal).toHaveBeenCalledOnce();
@@ -9494,7 +9502,7 @@ it.each([false, true])('retains China Post provider history between backfills (l
   const data = parcel.carrier_data as JsonObject;
   expect(data).toMatchObject({ tracking_provider: 'Ship24', last_update: saved.last_update,
     routing: { last_event_at: (saved.routing as JsonObject).last_event_at, last_success_at: now.toISOString(),
-      partial_history: { checked_at: '2026-09-10T12:00:00.000Z' }, next_check_at: '2026-09-10T12:30:00.000Z' } });
+      partial_history: { checked_at: '2026-09-10T12:00:00.000Z' }, next_check_at: '2026-09-10T13:10:00.000Z' } });
   expect(parcel.last_status_text).toBe('In transit');
   expect(parcel.current_stage).toBe('in_transit');
   expect(store.batch()).toEqual([]);

@@ -557,7 +557,9 @@ or more while the check still answered (no alert reads these; the weekly review 
 samples are kept a week), the unfinished parcels a provider tracks, grouped by type, carrier and
 provider, with `why` they stay with it, followed parcels not checked for 24 h (a scheduler fault: an
 account's parcel with a scan, or a lookup with an alert or a link opened in 24 h; one whose check was queued in the last
-hour, as reopening a dormant lookup's link queues one, waits unlisted for it), such lookups not checked for 6 h, twice
+hour, as reopening a dormant lookup's link queues one, waits unlisted for it, and so does a delivered one that a hand fix
+reopened in the last hour with its old check, as the stored-scan replay does when it reads a delivery as a shop arrival,
+until the schedule checks it), such lookups not checked for 6 h, twice
 the 3 h of one nobody waits for (many at once: the worker can't keep up), and readers' answers that something is off. It
 only reads, and shows a number as its shape (`MY + 10 digits + US`, from
 `private.tracking_number_pattern`). Free text can name a place, a shop or a person, so

@@ -441,8 +441,9 @@ order by parcels desc, could_take, provider;
 \echo '   an account''s parcel with a scan, or a lookup with an alert or a link opened in 24 h; never-checked Amazon parcels'
 \echo '   and routing deferrals left out, a hold until every source''s turn (quiet_until) to the parcel''s next hour after it.'
 \echo '   Lookups nobody follows leave the schedule (the dormant lane above); a parcel whose check was queued in the last'
-\echo '   hour, as opening a link queues one, is left out until that check has come. A held return (return_held) is open:'
-\echo '   the schedule keeps it, here and in the list below.'
+\echo '   hour, as opening a link queues one, is left out until that check has come, and so is one a hand fix reopened in'
+\echo '   the last hour (the stored-scan replay taking a delivery back), which the schedule takes up again. A held return'
+\echo '   (return_held) is open: the schedule keeps it, here and in the list below.'
 select case when package.user_id is not null then 'account' else 'lookup' end as kind, package.carrier,
        package.carrier_data->>'tracking_provider' as provider, package.sync_status,
        count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
@@ -464,13 +465,18 @@ where package.archived_at is null
   -- One queued for over an hour stays listed, since the queue is stuck.
   and not exists (select 1 from public.sync_jobs as job where job.package_id = package.id and job.state in ('queued', 'running')
     and job.requested_at > now() - interval '1 hour')
+  -- A delivered or returned parcel leaves the schedule and keeps its last check; a hand fix that reopens it (the
+  -- stored-scan replay reading a delivery as a shop arrival) puts it back with that old check: the check is coming.
+  -- One still unchecked an hour after the fix stays listed.
+  and not exists (select 1 from private.hand_stage_changes as hand where hand.package_id = package.id
+    and hand.changed_at > package.last_synced_at and hand.changed_at > now() - interval '1 hour')
 group by 1, 2, 3, 4
 order by parcels desc, kind, carrier;
 
 \echo '== Followed lookups not checked for 6 h to 24 h: twice the 3 h of one nobody waits for, none expected'
 \echo '   (new: added in the window). A lookup with a scan, an alert or a link opened in 24 h; routing deferrals, a'
-\echo '   delivery postcode awaited, scans over 14 days old and a check queued in the last hour left out. Many at once: the'
-\echo '   runs'' lookups are full.'
+\echo '   delivery postcode awaited, scans over 14 days old, a check queued in the last hour and a hand fix reopening the'
+\echo '   lookup in the last hour left out. Many at once: the runs'' lookups are full.'
 select package.carrier, package.sync_status,
        count(*) filter (where package.created_at >= :since and package.created_at < :upto) as new, count(*) as parcels,
        min(package.last_synced_at)::timestamp(0) as oldest_check
@@ -492,6 +498,8 @@ where package.one_off and package.archived_at is null
       select 1 from public.parcel_link_alerts as alert where alert.link_id = link.id and (link.shared or alert.owner))))
   and not exists (select 1 from public.sync_jobs as job where job.package_id = package.id and job.state in ('queued', 'running')
     and job.requested_at > now() - interval '1 hour')
+  and not exists (select 1 from private.hand_stage_changes as hand where hand.package_id = package.id
+    and hand.changed_at > package.last_synced_at and hand.changed_at > now() - interval '1 hour')
 group by 1, 2
 order by parcels desc, carrier;
 

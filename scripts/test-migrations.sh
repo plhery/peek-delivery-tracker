@@ -515,6 +515,18 @@ if grep -q '^paack|' <<< "$support" || [[ "$learn" != "recognition_unknown|carri
   exit 1
 fi
 
+# A delivered parcel a hand fix reopened in the last hour waits for the check the schedule brings; one still unchecked
+# an hour after its fix, like one never reopened, is a scheduler fault.
+psql "$database_url" -X -q -f "$repo_root/supabase/tests/review_reopened_unchecked.sql"
+unchecked=$(psql "$database_url" -X -A -F '|' -v hours=24 -f "$repo_root/ops/review/signals.sql" \
+  | awk '/^== Followed parcels not checked for 24 h/ { section = 1; next } /^== / { section = 0 } section' \
+  | awk '/^account\|speedx\|/' | cut -d '|' -f 6)
+psql "$database_url" -X -q -v ON_ERROR_STOP=1 -c "delete from auth.users where id = '19000000-0000-0000-0000-000000000062'"
+if [[ "$unchecked" != "2" ]]; then
+  echo "followed parcels not checked for 24 h: parcels = '$unchecked' (2: a parcel a hand fix reopened 10 minutes ago waits for its check)" >&2
+  exit 1
+fi
+
 psql "$database_url" -X -v ON_ERROR_STOP=1 \
   -f "$repo_root/supabase/tests/j_and_t_phone_digits.sql"
 

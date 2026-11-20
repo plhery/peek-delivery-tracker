@@ -25034,7 +25034,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Amsterdam",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "peddler"
     },
     "trackingUrlTemplate": "https://track.pdlr.nl/trackntrace/{trackingNumber}",
     "linkRules": [
@@ -37563,7 +37563,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Yerevan",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "onex"
     },
     "trackingUrlTemplate": "https://onex.am/en/onextrack?track={trackingNumber}",
     "linkRules": [],
@@ -58768,11 +58768,12 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Indian/Mauritius",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "celero"
     },
     "linkRules": [],
     "detectionRules": [],
-    "trackingSearchUrl": "https://celerogroup.com/"
+    "trackingSearchUrl": "https://celerogroup.com/",
+    "trackingUrlTemplate": "https://celerogroup.com/"
   },
   "chark-express": {
     "displayName": "Chark Express",
@@ -61237,7 +61238,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Warsaw",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "rohlig-suus"
     },
     "trackingUrlTemplate": "https://portal.suus.com/order-details/{trackingNumber}",
     "linkRules": [

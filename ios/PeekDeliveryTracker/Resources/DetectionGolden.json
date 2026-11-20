@@ -95358,6 +95358,12 @@
     ]
   },
   {
+    "input": "LKRC 240028939",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "LL-KRGABB",
     "carrier": "unknown",
     "confidence": "low",
@@ -97121,6 +97127,12 @@
     ]
   },
   {
+    "input": "MKRI260070952",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "ML545911751MH",
     "carrier": "unknown",
     "confidence": "low",
@@ -97604,6 +97616,17 @@
   },
   {
     "input": "MU120097922415",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "speedaf"
+    ],
+    "asked": [
+      "speedaf"
+    ]
+  },
+  {
+    "input": "MU120109191821",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
@@ -98493,6 +98516,14 @@
   },
   {
     "input": "NLEXP0019271437INTPED",
+    "carrier": "peddler",
+    "confidence": "high",
+    "candidates": [
+      "peddler"
+    ]
+  },
+  {
+    "input": "NLEXP0024995356INTPED",
     "carrier": "peddler",
     "confidence": "high",
     "candidates": [
@@ -108136,6 +108167,18 @@
     ]
   },
   {
+    "input": "TM800329354AM",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "haypost",
+      "chronopost"
+    ]
+  },
+  {
     "input": "TMYLE003782555",
     "carrier": "unknown",
     "confidence": "low",
@@ -110526,6 +110569,12 @@
   },
   {
     "input": "WIN40910156472",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "WKRW260048622",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []

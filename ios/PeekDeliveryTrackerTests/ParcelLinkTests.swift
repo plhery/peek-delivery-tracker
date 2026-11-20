@@ -661,6 +661,45 @@ final class ParcelLinkTests: XCTestCase {
                                                                  "https://links.test/api/public/parcels/\(linkID)?hidden=true"])
     }
 
+    /// A change of carrier goes to the same link with its key, and with the proof a lookup takes: it asks a carrier as
+    /// one does. The service's 404 says the link is gone; a day's lookups spent are told as for a lookup.
+    @MainActor func testACarrierChangeMovesTheSameLinkWithItsKey() async throws {
+        let transport = LinkTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let moved = try JSONEncoder.deliveryTracker.encode(try fixture().publicParcel)
+        nonisolated(unsafe) var requests: [URLRequest] = []
+        nonisolated(unsafe) var answer = (200, moved)
+        LinkTestURLProtocol.handler = { request in requests.append(request); return (answer.0, [:], answer.1) }
+        let client = DeviceParcelClient.api(configuration: LinkTestURLProtocol.configuration, transport: transport)
+        let key = String(repeating: "K", count: 43)
+        let change = ParcelLinkCarrierRequest(carrier: .dpd, trackingURL: "https://example.com/track", dpdPostcode: "75001",
+                                              lookupCountryHint: "FR", language: "fr")
+
+        let response = try await client.changeCarrier(linkID, key, change)
+
+        XCTAssertNotNil(response)
+        let request = try XCTUnwrap(requests.first)
+        XCTAssertEqual(request.httpMethod, "PATCH")
+        XCTAssertEqual(request.url?.absoluteString, "https://links.test/api/public/parcels/\(linkID)/carrier")
+        XCTAssertEqual(request.value(forHTTPHeaderField: "X-Parcel-Key"), key)
+        XCTAssertEqual(request.value(forHTTPHeaderField: "X-Native-Verification"), "1")
+        XCTAssertFalse(request.httpShouldHandleCookies)
+        XCTAssertNil(request.value(forHTTPHeaderField: "Authorization"))
+        let body = try XCTUnwrap(JSONSerialization.jsonObject(with: LinkTestURLProtocol.body(of: request)) as? [String: String])
+        XCTAssertEqual(body, ["carrier": "dpd", "trackingUrl": "https://example.com/track", "dpdPostcode": "75001",
+                              "lookupCountryHint": "FR", "language": "fr"])
+
+        answer = (404, Data(#"{"error":"Parcel unavailable"}"#.utf8))
+        let gone = try await client.changeCarrier(linkID, key, change)
+        XCTAssertNil(gone)
+
+        answer = (429, Data(#"{"error":"Too many lookups","scope":"daily"}"#.utf8))
+        do {
+            _ = try await client.changeCarrier(linkID, key, change)
+            XCTFail("Expected the day's lookups spent")
+        } catch is DeviceLookupsSpent {}
+    }
+
     @MainActor func testAppAlertsGoWithTheKeyOnlyForTheOwnerAndStopWithTheTokenAlone() async throws {
         let transport = LinkTestURLProtocol.transport()
         defer { transport.invalidateAndCancel() }

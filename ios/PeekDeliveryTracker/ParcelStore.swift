@@ -947,7 +947,8 @@ final class ParcelStore: ObservableObject {
                 phoneDigits: cleanedDigits
             )
         } else if isGuest {
-            // A new lookup takes the old one's place, under a new id.
+            // The link moves to the parcel of its number with these details, which can be another one, under a new id.
+            // No provider asks a guest's parcel for a postcode: its link shows no routing.
             _ = try await device.changeCarrier(id: parcel.id, carrier: carrier, trackingURL: cleanedURL,
                                                dpdPostcode: cleanedPostcode, dpdPostcodeCountry: dpdPostcodeCountry,
                                                phoneDigits: cleanedDigits)

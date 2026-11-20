@@ -125,6 +125,9 @@ struct DeviceParcelClient: Sendable {
     /// screen, so the service doesn't count it as a look.
     var read: @Sendable (_ linkID: String, _ key: String?, _ hidden: Bool) async throws -> PublicParcelResponse?
     var forget: @Sendable (_ linkID: String, _ key: String) async throws -> Void
+    /// Moves a link of this iPhone's own to the parcel of its number with another carrier, link, postcode or phone
+    /// digits, which the service finds or looks up. The link keeps all it holds. Nil when the service no longer has it.
+    var changeCarrier: @Sendable (_ linkID: String, _ key: String, ParcelLinkCarrierRequest) async throws -> PublicParcelResponse? = { _, _, _ in nil }
     /// Changes what the link shows to others, or stops and resumes its sharing.
     var update: @Sendable (_ linkID: String, _ key: String, UpdateParcelLinkRequest) async throws -> PublicParcelResponse
     /// `typedNumber`: the number as typed, when it differs from the number itself. `prefixOfSaved`: the number is the
@@ -157,8 +160,10 @@ struct DeviceParcelClient: Sendable {
                 guard let response = response as? HTTPURLResponse else { throw DeliveryAPIError.invalidResponse }
                 return (data, response)
             }
-            if method == "POST", path == "api/public/parcels" || path == "api/public/detect" {
-                return try await verification.send(request, baseURL: configuration.apiBaseURL, allowPresentation: path == "api/public/parcels", using: perform)
+            // A change of carrier asks a carrier as a lookup does, with the same proof.
+            let asksCarrier = (method == "POST" && path == "api/public/parcels") || (method == "PATCH" && path.hasSuffix("/carrier"))
+            if asksCarrier || (method == "POST" && path == "api/public/detect") {
+                return try await verification.send(request, baseURL: configuration.apiBaseURL, allowPresentation: asksCarrier, using: perform)
             }
             return try await perform(request)
         }
@@ -191,6 +196,12 @@ struct DeviceParcelClient: Sendable {
             forget: { linkID, key in
                 let (data, response) = try await send("api/public/parcels/\(linkID)", method: "DELETE", key: key)
                 guard response.statusCode == 204 || response.isServiceNotFound(data) else { throw failure(data, response) }
+            },
+            changeCarrier: { linkID, key, change in
+                let (data, response) = try await send("api/public/parcels/\(linkID)/carrier", method: "PATCH", key: key, body: try JSONEncoder.deliveryTracker.encode(change))
+                if response.isServiceNotFound(data) { return nil }
+                guard response.statusCode == 200 else { throw failure(data, response) }
+                return try decode(PublicParcelResponse.self, data)
             },
             update: { linkID, key, change in
                 let (data, response) = try await send("api/public/parcels/\(linkID)", method: "PATCH", key: key, body: try JSONEncoder.deliveryTracker.encode(change))
@@ -465,16 +476,7 @@ final class DeviceParcels {
             if entry.label.isEmpty, let name = superseded.lazy.compactMap(\.label.nonEmpty).first { entry.label = name }
         }
         // The service gives one parcel one link for each lookup; a second lookup of a parcel takes the first one's place.
-        if let twin = entries.firstIndex(where: { $0.parcel.id == response.package.id }) {
-            let old = entries.remove(at: twin)
-            let key = keys.removeValue(forKey: old.linkID)
-            if let key { forgetting[old.linkID] = key }
-            if key != nil || old.alertToken != nil {
-                Task {
-                    if let token = old.alertToken { try? await client.removeAlert(old.linkID, DeleteParcelAppAlertRequest(token: token)) }
-                    if let key { await self.tellForgotten(old.linkID, key: key, client) }
-                }
-            }
+        if let old = removeTwin(of: response.package.id, besides: entry.linkID, client) {
             // The parcel being replaced came back unchanged: only its link is new.
             if old.parcel.id == id {
                 entry.label = old.label
@@ -489,6 +491,22 @@ final class DeviceParcels {
         if let postcode = request.dpdPostcode { postcodes.remember(postcode, for: request.carrier ?? response.package.carrier, country: request.dpdPostcodeCountry) }
         // Phone digits go to the service alone: no parcel's next field starts from them, and the link never shows them.
         return Self.shown(entry)
+    }
+
+    /// Takes out the entry of the same parcel under another link: one parcel is followed here once. Its link of this
+    /// iPhone's own is forgotten on the service, and its notifications are turned off.
+    private func removeTwin(of parcelID: UUID, besides linkID: String, _ client: DeviceParcelClient) -> DeviceParcel? {
+        guard let twin = entries.firstIndex(where: { $0.parcel.id == parcelID && $0.linkID != linkID }) else { return nil }
+        let old = entries.remove(at: twin)
+        let key = keys.removeValue(forKey: old.linkID)
+        if let key { forgetting[old.linkID] = key }
+        if key != nil || old.alertToken != nil {
+            Task {
+                if let token = old.alertToken { try? await client.removeAlert(old.linkID, DeleteParcelAppAlertRequest(token: token)) }
+                if let key { await self.tellForgotten(old.linkID, key: key, client) }
+            }
+        }
+        return old
     }
 
     /// Reads every parcel whose answer has gone stale, or every one when `all`, and brings back
@@ -711,13 +729,62 @@ final class DeviceParcels {
         return answered
     }
 
-    /// Follows the same number with another carrier, link, postcode or phone digits: a new lookup, which takes the old
-    /// one's place and name.
+    /// Follows the same number with another carrier, link, postcode or phone digits, on the same link: it keeps its key,
+    /// name, archive, sharing and notifications. The parcel behind it can be another lookup of the number, under another
+    /// id, which an open page follows (`replaced`). A link the service no longer has is looked up again: the new lookup
+    /// takes the old one's place and name.
     func changeCarrier(id: UUID, carrier: CarrierID, trackingURL: String?, dpdPostcode: String?,
                        dpdPostcodeCountry: String? = nil, phoneDigits: String? = nil) async throws -> Parcel {
+        guard let client else { throw DeliveryAPIError.serviceFailed(503) }
         // Someone else's parcel is followed as its link shows it, and its carrier stays theirs to change. A copy no
         // longer updated has nothing left to change.
-        guard let entry = entries.first(where: { $0.parcel.id == id }), !entry.isViewer, !entry.isFrozen else { throw DeliveryAPIError.parcelMissing }
+        guard let entry = entries.first(where: { $0.parcel.id == id }), !entry.isViewer, !entry.isFrozen,
+              let key = keys[entry.linkID] else { throw DeliveryAPIError.parcelMissing }
+        let number = entry.parcel.trackingNumber
+        if let existing = entries.first(where: {
+            $0.parcel.id != id && !$0.isFrozen && $0.parcel.trackingNumber == number && $0.parcel.carrier == carrier
+        }) {
+            throw DeliveryAPIError.duplicateTracking(existing.parcel.id)
+        }
+        let response = try await client.changeCarrier(entry.linkID, key, ParcelLinkCarrierRequest(
+            carrier: carrier, trackingURL: trackingURL, dpdPostcode: dpdPostcode, dpdPostcodeCountry: dpdPostcodeCountry,
+            phoneDigits: phoneDigits, lookupCountryHint: ParcelLookupCountry.hint(), language: AppLanguage.current.rawValue
+        ))
+        guard let response else {
+            return try await lookUpAgain(entry, carrier: carrier, trackingURL: trackingURL, dpdPostcode: dpdPostcode,
+                                         dpdPostcodeCountry: dpdPostcodeCountry, phoneDigits: phoneDigits)
+        }
+        guard response.link.id == entry.linkID else { throw DeliveryAPIError.invalidResponse }
+        // Forgotten here meanwhile: the link stays forgotten.
+        guard keys[entry.linkID] == key, let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else {
+            throw DeliveryAPIError.parcelMissing
+        }
+        let parcel = Parcel(shared: response.package)
+        if parcel.id == id {
+            entries[index].take(parcel)
+        } else {
+            // Another lookup of the number: what it tells so far is no news, as with a new lookup.
+            entries[index].parcel = parcel
+            entries[index].startSeen()
+            entries[index].replaced = entry.replaced ?? id
+        }
+        entries[index].checkedAt = now()
+        entries[index].postcodeGiven = dpdPostcode?.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty != nil
+        // A copy no longer updated of the same parcel or number gives way, and leaves its name to a parcel without one.
+        let superseded = entries.filter { Self.supersedes(parcel, $0, number: number) }
+        entries.removeAll { Self.supersedes(parcel, $0, number: number) }
+        _ = removeTwin(of: parcel.id, besides: entry.linkID, client)
+        guard let changed = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { throw DeliveryAPIError.parcelMissing }
+        if entries[changed].label.isEmpty, let name = superseded.lazy.compactMap(\.label.nonEmpty).first { entries[changed].label = name }
+        save()
+        if let dpdPostcode { postcodes.remember(dpdPostcode, for: carrier, country: dpdPostcodeCountry) }
+        return Self.shown(entries[changed])
+    }
+
+    /// A new lookup in place of a link the service no longer has, which takes its place and name.
+    private func lookUpAgain(_ entry: DeviceParcel, carrier: CarrierID, trackingURL: String?, dpdPostcode: String?,
+                             dpdPostcodeCountry: String?, phoneDigits: String?) async throws -> Parcel {
+        let id = entry.parcel.id
         let added = try await lookUp(CreatePackageRequest(
             trackingNumber: entry.parcel.trackingNumber, label: entry.label, carrier: carrier,
             trackingURL: trackingURL, dpdPostcode: dpdPostcode, dpdPostcodeCountry: dpdPostcodeCountry,

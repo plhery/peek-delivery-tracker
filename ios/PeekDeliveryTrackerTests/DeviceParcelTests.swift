@@ -74,7 +74,8 @@ final class DeviceParcelTests: XCTestCase {
                         read: @escaping @Sendable (String) throws -> PublicParcelResponse? = { _ in nil },
                         alert: @escaping @Sendable (String) throws -> DeviceAlertAnswer = { _ in .on },
                         unalert: @escaping @Sendable (String) throws -> Void = { _ in },
-                        forget: @escaping @Sendable (String) throws -> Void = { _ in }) -> DeviceParcelClient {
+                        forget: @escaping @Sendable (String) throws -> Void = { _ in },
+                        move: @escaping @Sendable (String) throws -> PublicPackage? = { _ in nil }) -> DeviceParcelClient {
         DeviceParcelClient(
             lookup: { request in
                 calls.add("lookup \(request.trackingNumber) \(request.carrier?.rawValue ?? "-")")
@@ -92,6 +93,18 @@ final class DeviceParcelTests: XCTestCase {
             forget: { linkID, _ in
                 calls.add("forget \(linkID)")
                 try forget(linkID)
+            },
+            changeCarrier: { linkID, key, change in
+                calls.add("carrier \(linkID) \(key.prefix(1)) \(change.carrier.rawValue)")
+                calls.lookupCountry(change.lookupCountryHint)
+                calls.lookupPostcode(change.dpdPostcode)
+                calls.lookupLanguage(change.language)
+                calls.lookupPhoneDigits(change.phoneDigits)
+                return try move(linkID).map {
+                    PublicParcelResponse(link: ParcelLink(id: linkID, role: .owner, kind: .lookup, createdAt: "2026-10-01T08:00:00Z",
+                                                          numberShown: true, canKeep: true, showNumber: false, gift: false, shared: true),
+                                         package: $0)
+                }
             },
             update: { linkID, _, change in
                 calls.add("update \(linkID) shared=\(change.shared.map(String.init) ?? "-")")
@@ -167,7 +180,40 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dhl"])
     }
 
-    func testChangingCarrierSendsTheDeviceCountryAndKeepsTheParcelName() async throws {
+    func testChangingCarrierMovesTheSameLinkWithTheDeviceCountryAndKeepsItsNameArchiveAndNotifications() async throws {
+        let previousID = UUID(), nextID = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        var kept = DeviceParcel(
+            linkID: "22222222222A", label: "Moon lamp", archivedAt: "2026-10-03T08:00:00Z",
+            parcel: Parcel(shared: package(previousID)), checkedAt: Date()
+        )
+        kept.alertToken = "token1"
+        kept.alertPreset = .all
+        storage.parcels = [kept]
+        let calls = Calls()
+        let moved = package(nextID, carrier: .dpd)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }), storage: storage)
+
+        let parcel = try await device.changeCarrier(id: previousID, carrier: .dpd, trackingURL: nil, dpdPostcode: nil)
+
+        XCTAssertEqual(parcel.id, nextID)
+        XCTAssertEqual(parcel.label, "Moon lamp")
+        XCTAssertEqual(parcel.archivedAt, "2026-10-03T08:00:00Z")
+        XCTAssertEqual(parcel.carrier, .dpd)
+        XCTAssertEqual(calls.lookupCountries, [ParcelLookupCountry.hint()])
+        XCTAssertEqual(calls.lookupLanguages, [AppLanguage.current.rawValue])
+        // One link, which keeps its sharing and notifications: no second lookup, nothing forgotten or turned off.
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd"])
+        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222A"])
+        XCTAssertEqual(storage.parcels.map(\.replaced), [previousID])
+        XCTAssertEqual(storage.parcels.map(\.alertToken), ["token1"])
+        XCTAssertEqual(storage.keys, ["22222222222A": key])
+        XCTAssertEqual(storage.forgetting, [:])
+        XCTAssertEqual(device.claims, [ClaimParcelLink(id: "22222222222A", key: key, label: "Moon lamp")])
+    }
+
+    func testALinkTheServiceNoLongerHasIsLookedUpAgainUnderItsName() async throws {
         let previousID = UUID(), nextID = UUID()
         let storage = Memory()
         storage.keys = ["22222222222A": key]
@@ -184,14 +230,36 @@ final class DeviceParcelTests: XCTestCase {
 
         XCTAssertEqual(parcel.id, nextID)
         XCTAssertEqual(parcel.label, "Moon lamp")
-        XCTAssertEqual(parcel.carrier, .dpd)
-        XCTAssertEqual(calls.lookupCountries, [ParcelLookupCountry.hint()])
-        XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dpd", "forget 22222222222A"])
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd", "lookup TESTPARCEL123789 dpd", "forget 22222222222A"])
+        XCTAssertEqual(calls.lookupCountries, [ParcelLookupCountry.hint(), ParcelLookupCountry.hint()])
         XCTAssertEqual(storage.parcels.map(\.replaced), [previousID])
-        XCTAssertNil(storage.keys["22222222222A"])
+        XCTAssertEqual(storage.keys, ["22222222222B": key])
     }
 
-    func testANewPostcodeForTheSameCarrierIsALookupThatTakesTheParcelsPlace() async throws {
+    func testAMovedLinkTakesTheForgottenCopysPlaceAndName() async throws {
+        let previousID = UUID(), copyID = UUID(), nextID = UUID()
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        var copy = DeviceParcel(linkID: "22222222222C", label: "Moon lamp", archivedAt: nil,
+                                parcel: Parcel(shared: package(copyID, carrier: .dpd)), checkedAt: Date())
+        copy.frozen = "2026-11-01T08:00:00Z"
+        storage.parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(previousID)), checkedAt: Date()),
+            copy,
+        ]
+        let calls = Calls()
+        let moved = package(nextID, carrier: .dpd)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }), storage: storage)
+
+        // The copy no longer updated is no parcel followed twice.
+        let parcel = try await device.changeCarrier(id: previousID, carrier: .dpd, trackingURL: nil, dpdPostcode: nil)
+
+        XCTAssertEqual(parcel.label, "Moon lamp")
+        XCTAssertEqual(device.list().map(\.id), [nextID])
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd"])
+    }
+
+    func testANewPostcodeForTheSameCarrierMovesTheLinkToTheParcelWithIt() async throws {
         let (defaults, suite) = defaults()
         defer { defaults.removePersistentDomain(forName: suite) }
         let previousID = UUID(), nextID = UUID()
@@ -202,20 +270,22 @@ final class DeviceParcelTests: XCTestCase {
             parcel: Parcel(shared: package(previousID, carrier: .dpd)), checkedAt: Date()
         )]
         let calls = Calls()
-        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(
-            link: link("22222222222B"), key: key, package: package(nextID, carrier: .dpd)
-        )), storage: storage, postcodes: PostcodeMemory(defaults: defaults))
+        let memory = PostcodeMemory(defaults: defaults)
+        let moved = package(nextID, carrier: .dpd)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }), storage: storage, postcodes: memory)
 
         let parcel = try await device.changeCarrier(id: previousID, carrier: .dpd, trackingURL: nil, dpdPostcode: "75002")
 
         XCTAssertEqual(parcel.id, nextID)
         XCTAssertEqual(parcel.label, "Moon lamp")
         XCTAssertEqual(parcel.carrierData?.originalPackageID, previousID)
-        XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dpd", "forget 22222222222A"])
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd"])
         XCTAssertEqual(calls.lookupPostcodes, ["75002"])
         XCTAssertEqual(device.list().map(\.id), [nextID])
         XCTAssertEqual(storage.parcels.map(\.replaced), [previousID])
-        XCTAssertEqual(storage.keys, ["22222222222B": key])
+        XCTAssertEqual(storage.parcels.map(\.postcodeGiven), [true])
+        XCTAssertEqual(storage.keys, ["22222222222A": key])
+        XCTAssertEqual(memory.entries, [given(.dpd, "75002")])
     }
 
     func testTheSameDetailsGivenAgainKeepWhatTheDeviceKnowsOfTheParcel() async throws {
@@ -229,10 +299,10 @@ final class DeviceParcelTests: XCTestCase {
             parcel: Parcel(shared: package(id, carrier: .dpd)), checkedAt: Date(), replaced: earlierID
         )]
         let calls = Calls()
-        // The service finds the parcel it already has and gives it one more link.
-        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(
-            link: link("22222222222B"), key: key, package: package(id, carrier: .dpd, stage: .outForDelivery)
-        )), storage: storage, postcodes: PostcodeMemory(defaults: defaults))
+        // The parcel already has these details: the service answers it as it stands.
+        let moved = package(id, carrier: .dpd, stage: .outForDelivery)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }),
+                                   storage: storage, postcodes: PostcodeMemory(defaults: defaults))
 
         let parcel = try await device.changeCarrier(id: id, carrier: .dpd, trackingURL: nil, dpdPostcode: "75001")
 
@@ -242,10 +312,9 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(parcel.carrierData?.originalPackageID, earlierID)
         XCTAssertEqual(parcel.currentStage, .outForDelivery)
         XCTAssertEqual(device.list(), [parcel])
-        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222B"])
-        XCTAssertEqual(storage.keys, ["22222222222B": key])
-        for _ in 0..<500 where !calls.all.contains("forget 22222222222A") { try await Task.sleep(for: .milliseconds(10)) }
-        XCTAssertEqual(calls.all, ["lookup TESTPARCEL123789 dpd", "forget 22222222222A"])
+        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222A"])
+        XCTAssertEqual(storage.keys, ["22222222222A": key])
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k dpd"])
     }
 
     func testChangingToTheNumberAndCarrierOfAnotherParcelIsRefused() async throws {
@@ -326,16 +395,16 @@ final class DeviceParcelTests: XCTestCase {
             parcel: Parcel(shared: package(previousID, number: "JMX000000000001")), checkedAt: Date()
         )]
         let calls = Calls()
-        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(
-            link: link("22222222222B"), key: key, package: package(nextID, number: "JMX000000000001", carrier: .jAndTMx)
-        )), storage: storage)
+        let moved = package(nextID, number: "JMX000000000001", carrier: .jAndTMx)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }),
+                                   storage: storage)
 
         let parcel = try await device.changeCarrier(id: previousID, carrier: .jAndTMx, trackingURL: nil, dpdPostcode: nil, phoneDigits: "0472")
 
         XCTAssertEqual(parcel.id, nextID)
         XCTAssertEqual(parcel.label, "Moon lamp")
         XCTAssertEqual(calls.lookupPhoneDigits, ["0472"])
-        XCTAssertEqual(calls.all, ["lookup JMX000000000001 j-and-t-mx", "forget 22222222222A"])
+        XCTAssertEqual(calls.all, ["carrier 22222222222A k j-and-t-mx"])
     }
 
     func testDetectionSendsTheNumberAsTypedWhenItSpellsTheNumberDifferently() async throws {
@@ -951,7 +1020,9 @@ final class DeviceParcelTests: XCTestCase {
         let storage = Memory()
         let calls = Calls()
         let found = PublicLookupResponse(link: link("22222222222A"), key: key, package: package(id, carrier: .dpd))
-        let device = DeviceParcels(client: client(calls, lookup: found), storage: storage, postcodes: memory)
+        let moved = package(UUID(), carrier: .mondialRelay)
+        let device = DeviceParcels(client: client(calls, lookup: found, move: { _ in moved }),
+                                   storage: storage, postcodes: memory)
 
         let parcel = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL123789", carrier: .dpd, dpdPostcode: "75001 "))
 
@@ -960,7 +1031,7 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(parcel.dpdPostcode)
         XCTAssertNil(storage.parcels.first?.parcel.dpdPostcode)
 
-        // A carrier changed is a new lookup, and its postcode comes first.
+        // A carrier changed asks with its postcode, which comes first.
         _ = try await device.changeCarrier(id: id, carrier: .mondialRelay, trackingURL: nil, dpdPostcode: "75002")
         XCTAssertEqual(memory.entries, [given(.mondialRelay, "75002"), given(.dpd, "75001")])
         _ = try await device.add(CreatePackageRequest(trackingNumber: "TESTPARCEL999", carrier: .heppner))
@@ -1356,7 +1427,7 @@ final class DeviceParcelTests: XCTestCase {
         }
     }
 
-    func testChangingTheCarrierWithoutAPostcodeNotesThatTheNewLookupHadNone() async throws {
+    func testChangingTheCarrierWithoutAPostcodeNotesThatItWentWithNone() async throws {
         let catalog = CarrierCatalog(cacheURL: nil)
         let previousID = UUID(), nextID = UUID()
         let storage = Memory()
@@ -1366,14 +1437,14 @@ final class DeviceParcelTests: XCTestCase {
             parcel: Parcel(shared: package(previousID, number: "06080000000002", carrier: .glsCh)), checkedAt: Date(), postcodeGiven: true
         )]
         let calls = Calls()
-        let device = DeviceParcels(client: client(calls, lookup: PublicLookupResponse(link: link("22222222222B"), key: key, package: checkedDPD(nextID))),
-                                   storage: storage)
+        let moved = checkedDPD(nextID)
+        let device = DeviceParcels(client: client(calls, move: { _ in moved }), storage: storage)
 
         let parcel = try await device.changeCarrier(id: previousID, carrier: .dpd, trackingURL: nil, dpdPostcode: nil)
 
         XCTAssertEqual(parcel.id, nextID)
         XCTAssertEqual(calls.lookupPostcodes, [nil])
-        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222B"])
+        XCTAssertEqual(storage.parcels.map(\.linkID), ["22222222222A"])
         XCTAssertEqual(storage.parcels.map(\.postcodeGiven), [false])
         XCTAssertEqual(device.postcodeGiven(id: nextID), false)
         XCTAssertTrue(parcel.showsMoreWithPostcode(catalog, postcodeGiven: device.postcodeGiven(id: nextID) == true))

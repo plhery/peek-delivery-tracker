@@ -33,8 +33,12 @@
  * MailAmericas scans). Of a scan dated by its day alone, with no time of day,
  * a copy in its words and stage (or none) at the start of that day on the
  * copy's own wall clock is left out: the provider knew the day alone too
- * (Track123's copy of FedEx's pickup). A provider's step the carrier never shows, such as
- * another leg's scans, stays.
+ * (Track123's copy of FedEx's pickup). The other way round, a provider's rows
+ * dated by their day alone, in a stage the carrier scanned that day with a time
+ * of day, are copies when the carrier's scans of that stage that day are as
+ * many or more (ParcelsApp gives Japan Post's posting and export steps their
+ * day alone). A provider's step the carrier never shows, such as another leg's
+ * scans, stays.
  * Push leaves the copies unannounced too (push.ts), and the Live Activity
  * queue tells them with the same rules in SQL (`public.hidden_provider_copy`):
  * change both together.
@@ -299,7 +303,31 @@ export function providerCopyScans(row: JsonObject): Map<string, Set<string>> {
     const repeated = shifted.get(minute(event));
     if (providerOnly(event) && repeated && !copied.has(String(event.id))) copied.set(String(event.id), repeated);
   }
+  // A provider's rows dated by their day alone repeat the carrier's scans with a time of day in their stage that day
+  // when those are as many or more: the provider gave the carrier's steps their day alone (ParcelsApp's copies of
+  // Japan Post's posting and export steps). Its row in a stage the carrier did not scan that day stays.
+  const scannedOn = new Map<string, JsonObject[]>();
+  for (const scan of own) {
+    const day = timedDay(scan);
+    if (day !== null) scannedOn.set(`${String(scan.stage)}@${day}`, [...scannedOn.get(`${String(scan.stage)}@${day}`) ?? [], scan]);
+  }
+  const dated = scans.filter((event) => providerOnly(event) && dayAlone(event) !== null && !['', 'pending'].includes(String(event.stage ?? '')));
+  const datedOn = (event: JsonObject) => `${String(event.stage)}@${dayAlone(event)!}`;
+  const peers = new Map<string, number>();
+  for (const event of dated) peers.set(`${providerName(event)}#${datedOn(event)}`, (peers.get(`${providerName(event)}#${datedOn(event)}`) ?? 0) + 1);
+  for (const event of dated) {
+    const scanned = scannedOn.get(datedOn(event)) ?? [];
+    if (copied.has(String(event.id)) || !scanned.length || peers.get(`${providerName(event)}#${datedOn(event)}`)! > scanned.length) continue;
+    copied.set(String(event.id), ids(scanned));
+  }
   return copied;
+}
+
+/** The day of a scan with a time of day, on its own wall clock; null for a scan dated by its day or none. */
+function timedDay(event: JsonObject): string | null {
+  const local = rawField(event, 'local_time');
+  return rawField(event, 'time').trim() !== '' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(local) && DateTime.fromISO(local.slice(0, 10)).isValid
+    ? local.slice(0, 10) : null;
 }
 
 /** The ids of the stored rows of `row` its timeline leaves out as a universal provider's copies of its carrier's scans. */

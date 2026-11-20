@@ -246,6 +246,35 @@ describe('providerCopies', () => {
     expect(providerCopyScans(row)).toEqual(new Map());
   });
 
+  it('leaves out a provider\'s rows dated by their day alone in a stage the carrier scanned that day as often or more', () => {
+    // Japan Post times its posting and export steps; ParcelsApp gives each its day alone, at midnight and a counter.
+    const parcelsApp = (id: string, occurredAt: string, stage: string, day: string) =>
+      scan(id, 'unknown', occurredAt, { ...named, stage, description: `Step ${id}`, local_time: day });
+    const timed = (id: string, occurredAt: string, stage: string, local: string) =>
+      scan(id, 'japan-post', occurredAt, { stage, time: occurredAt, local_time: local });
+    const events = [
+      timed('c1', '2026-11-14T07:10:00Z', 'accepted', '2026-11-14T16:10:00'),
+      timed('c2', '2026-11-15T03:19:00Z', 'in_transit', '2026-11-15T12:19:00'),
+      timed('c3', '2026-11-15T03:20:00Z', 'in_transit', '2026-11-15T12:20:00'),
+      // The provider's pre-advice, a stage the carrier did not scan that day, and a day it did not scan, stay.
+      parcelsApp('u1', '2026-11-14T00:00:00Z', 'registered', '2026-11-14'),
+      parcelsApp('u2', '2026-11-14T00:00:01Z', 'accepted', '2026-11-14'),
+      parcelsApp('u3', '2026-11-15T00:00:00Z', 'in_transit', '2026-11-15'),
+      parcelsApp('u4', '2026-11-15T00:00:01Z', 'in_transit', '2026-11-15'),
+      parcelsApp('u5', '2026-11-16T00:00:00Z', 'in_transit', '2026-11-16'),
+    ];
+    const row = { carrier_data: { routing: { confirmed_carrier: 'japan-post' } }, tracking_events: events };
+    expect(providerCopyScans(row)).toEqual(new Map([
+      ['u2', new Set(['c1'])], ['u3', new Set(['c2', 'c3'])], ['u4', new Set(['c2', 'c3'])],
+    ]));
+    // More of the provider's rows in a stage that day than the carrier's scans: one is a step of its own, so all stay.
+    const more = [...events, parcelsApp('u6', '2026-11-14T00:00:02Z', 'accepted', '2026-11-14')];
+    expect([...providerCopies({ ...row, tracking_events: more })].sort()).toEqual(['u3', 'u4']);
+    // A carrier's scan dated by its day alone has no time of day to tell the provider's from.
+    const untimed = events.map((event) => event.id === 'c1' ? { ...event, time: undefined, local_time: '2026-11-14' } : event);
+    expect(providerCopies({ ...row, tracking_events: untimed }).has('u2')).toBe(false);
+  });
+
   it('leaves out a provider\'s copy whole hours from a carrier\'s scan to its second, in any stage and words', () => {
     // ParcelsApp reads a Japanese scan an hour off, as another stage, with a Chinese line added.
     const events = [

@@ -119,6 +119,36 @@ do $$ begin
     raise exception 'A row at another time of the day a scan alone gives was hidden';
   end if;
 end; $$;
+-- A provider's row dated by its day alone, in a stage the carrier scanned that day with a time of day, as many times
+-- or more (ParcelsApp's copy of Japan Post's posting).
+update public.tracking_events set occurred_at = '2026-10-08T07:10:00Z', stage = 'accepted', description = 'Posted',
+  raw_data = '{"time": "2026-10-08T07:10:00Z", "local_time": "2026-10-08T16:10:00"}'
+where id = '97000000-0000-0000-0000-000000000006';
+update public.tracking_events set occurred_at = '2026-10-08T00:00:01Z', stage = 'accepted', description = 'Received',
+  raw_data = '{"universal_provider": "ParcelsApp", "local_time": "2026-10-08"}'
+where id = '97000000-0000-0000-0000-000000000007';
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A provider''s row dated by its day alone, in the stage of the carrier''s timed scan that day, was not hidden';
+  end if;
+end; $$;
+insert into public.tracking_events(id, package_id, stage, description, provider_event_id, occurred_at, created_at, raw_data)
+values ('97000000-0000-0000-0000-000000000097', '97000000-0000-0000-0000-000000000005', 'accepted', 'Accepted again',
+  'unknown:again', '2026-10-08T00:00:02Z', '2026-10-08T09:50:00Z', '{"universal_provider": "ParcelsApp", "local_time": "2026-10-08"}');
+do $$ begin
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A provider''s rows of a stage that day, more than the carrier''s scans, were hidden';
+  end if;
+end; $$;
+delete from public.tracking_events where id = '97000000-0000-0000-0000-000000000097';
+update public.tracking_events set occurred_at = '2026-10-09T00:00:01Z',
+  raw_data = '{"universal_provider": "ParcelsApp", "local_time": "2026-10-09"}'
+where id = '97000000-0000-0000-0000-000000000007';
+do $$ begin
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A provider''s row of a day the carrier did not scan in its stage was hidden';
+  end if;
+end; $$;
 -- A provider reading the carrier's scans a zone away tells every scan of that minute on the same clock: its other
 -- rows of the minute of a copy only whole hours from the carrier's scans are copies too, in any stage.
 update public.tracking_events set occurred_at = '2026-10-08T08:40:00Z', stage = 'in_transit',

@@ -1027,10 +1027,12 @@ export class TrackingRouter {
       // asks it again at once.
       const daily = kind === 'not_found' && (universalSource || providerNamed(provider));
       // A carrier's own "not found" within the hour after it answered for the number (confirmed, with no failure
-      // since, and an answer in the last hour) is a passing miss, as a lost connection is: a load balancer's empty
-      // reply between full ones (DHL eCommerce Iberia's). It waits 15 minutes rather than an hour and says nothing
-      // about the number, its postcode or what the carrier plans. A second in a row is a "not found" as usual.
+      // since, and its own answer in the last hour, not a provider's) is a passing miss, as a lost connection is: a
+      // load balancer's empty reply between full ones (DHL eCommerce Iberia's). It waits 15 minutes rather than an
+      // hour and says nothing about the number, its postcode or what the carrier plans. A second in a row is a "not
+      // found" as usual.
       const passing = !universalSource && kind === 'not_found' && !previous && recent()
+        && typeof metadata.tracking_provider !== 'string'
         && state.confirmed_carrier === provider && state.confirmed_number === number;
       // A carrier asking for what no reader can give for the number (no field its catalog lists)
       // answers the same until it scans the parcel: 6 h, then daily.

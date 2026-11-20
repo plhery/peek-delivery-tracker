@@ -186,7 +186,7 @@ leg may answer under its own number. The owner changing the postcode or link
 of the parcel's own carrier ends that carrier's wait, whatever the failure, since it answered
 for the old one, so the check that follows asks it again. A carrier often doesn't know a label
 before its first scan, hence its shorter not-found wait. A carrier's not found within the hour
-after it answered for the number, the carrier confirmed for it with no failure since, is a passing
+after it answered for the number itself (not a provider for it), the carrier confirmed for it with no failure since, is a passing
 miss, as a lost connection is (a load balancer's empty reply between full ones): it waits 15
 minutes, and the parcel keeps its stage, its confirmation, what the carrier planned and its
 postcode. A second in a row is a not found as usual. One a provider named lists the parcel

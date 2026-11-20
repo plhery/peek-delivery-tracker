@@ -595,13 +595,13 @@ export class SupabaseClient {
     });
   }
 
-  async acquireTrackingProvider(provider: string): Promise<{ token: string | null; retry_at: string }> {
+  async acquireTrackingProvider(provider: string): Promise<{ token: string | null; retry_at: string; held?: boolean }> {
     const result = await this.request('/rest/v1/rpc/acquire_tracking_provider', {
       method: 'POST', body: { p_provider: provider },
     });
     if (!isRecord(result) || !(typeof result.token === 'string' || result.token === null)
       || typeof result.retry_at !== 'string') throw new TypeError('Invalid provider health response');
-    return { token: result.token, retry_at: result.retry_at };
+    return { token: result.token, retry_at: result.retry_at, ...(result.held === true ? { held: true } : {}) };
   }
 
   async finishTrackingProvider(provider: string, token: string, kind: string | null, retryAfterMs: number, durationMs: number): Promise<void> {

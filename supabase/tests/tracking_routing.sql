@@ -14,11 +14,14 @@ begin
   if token is null then raise exception 'First request not admitted'; end if;
   second := public.acquire_tracking_provider('17TRACK');
   if second->>'token' is not null then raise exception 'Concurrent request admitted'; end if;
+  if (second->>'held')::boolean is not true then raise exception 'Another check''s lease read as a rest'; end if;
   perform public.finish_tracking_provider('17TRACK', token, 'rate_limited', 7200000, 400);
   if (select next_allowed_at from public.tracking_provider_health where provider = '17TRACK') < now() + interval '2 hours' then
     raise exception 'Retry-After not respected';
   end if;
-  if public.acquire_tracking_provider('17TRACK')->>'token' is not null then raise exception 'Cooldown bypassed'; end if;
+  second := public.acquire_tracking_provider('17TRACK');
+  if second->>'token' is not null then raise exception 'Cooldown bypassed'; end if;
+  if (second->>'held')::boolean then raise exception 'A rate limit read as held by another check'; end if;
   old_token := token;
   update public.tracking_provider_health set next_allowed_at = now() - interval '1 second' where provider = '17TRACK';
   token := (public.acquire_tracking_provider('17TRACK')->>'token')::uuid;
@@ -26,9 +29,17 @@ begin
   if (select lease_token from public.tracking_provider_health where provider = '17TRACK') <> token then raise exception 'Stale worker released new lease'; end if;
   perform public.finish_tracking_provider('17TRACK', token, null, 0, 200);
   if not exists (select 1 from public.tracking_provider_health where provider = '17TRACK' and failures = 0 and successes = 1 and last_success_at is not null) then raise exception 'Recovery not recorded'; end if;
+  second := public.acquire_tracking_provider('17TRACK');
+  if second->>'token' is not null or (second->>'held')::boolean is not true then raise exception 'Spacing after an answer not held'; end if;
   token := (public.acquire_tracking_provider('Ship24')->>'token')::uuid;
   perform public.finish_tracking_provider('Ship24', token, 'not_found', 86400000, 200);
   if (select next_allowed_at from public.tracking_provider_health where provider = 'Ship24') > now() + interval '10 seconds' then raise exception 'Parcel not-found disabled whole provider'; end if;
+  if (public.acquire_tracking_provider('Ship24')->>'held')::boolean is not true then raise exception 'Spacing after no history read as a rest'; end if;
+  update public.tracking_provider_health set next_allowed_at = now() - interval '1 second' where provider = 'Ship24';
+  token := (public.acquire_tracking_provider('Ship24')->>'token')::uuid;
+  perform public.finish_tracking_provider('Ship24', token, 'transport', 0, 200);
+  second := public.acquire_tracking_provider('Ship24');
+  if second->>'token' is not null or (second->>'held')::boolean then raise exception 'A failure''s backoff read as held'; end if;
   token := (public.acquire_tracking_provider('UPU')->>'token')::uuid;
   if token is null then raise exception 'UPU request not admitted'; end if;
   if public.acquire_tracking_provider('UPU')->>'token' is not null then raise exception 'Concurrent UPU request admitted'; end if;

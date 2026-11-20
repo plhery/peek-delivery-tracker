@@ -2009,6 +2009,57 @@ describe('persistent tracking routing', () => {
     expect(universal).toHaveBeenCalledOnce();
     expect(universal.mock.calls[0][2]).toBe(15_000);
   });
+  describe('a provider another check holds', () => {
+    // UPS fails in passing, so the check falls back to the providers, as one of a carrier with an adapter of its own does.
+    const ups = (overrides: JsonObject = {}) => parcel({ carrier: 'ups', tracking_number: '1Z999AA10123456784', ...overrides });
+    const held = (retry_at: string) => ({ token: null, retry_at, held: true });
+
+    it('is waited for while its call and spacing last, and keeps no rest it never gave', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, direct, health, universal, wait } = setup();
+      direct.mockRejectedValue(new UpstreamHttpError('UPS', 503));
+      // Another check's call holds ParcelsApp's lease, then spaces it 5 s after its answer.
+      health.acquireTrackingProvider.mockResolvedValueOnce(held('2026-09-10T12:01:30Z'))
+        .mockResolvedValueOnce(held('2026-09-10T12:01:30Z'))
+        .mockResolvedValueOnce(held('2026-09-10T12:00:05Z'));
+      const result = await router.fetch(ups(), false);
+      expect(wait.mock.calls.map(([ms]) => ms)).toEqual([2_000, 2_000, 5_000]);
+      expect(health.acquireTrackingProvider.mock.calls.map(([source]) => source)).toEqual(Array(4).fill('ParcelsApp'));
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['ParcelsApp']);
+      expect(result.result).toMatchObject({ tracking_provider: 'ParcelsApp' });
+      expect((result.result.routing as JsonObject).failures).not.toHaveProperty('ParcelsApp');
+      expect(vi.mocked(monitoring.reportRoutingEvent).mock.calls.filter(([code]) => code === 'provider_paced')).toHaveLength(1);
+    });
+
+    it('is left to it once waiting would cut into its budget, and keeps no rest', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, direct, health, universal, wait } = setup();
+      direct.mockRejectedValue(new UpstreamHttpError('UPS', 503));
+      health.acquireTrackingProvider.mockImplementation(async (source: string) => source === 'ParcelsApp'
+        ? held('2026-09-10T12:01:30Z') : { token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+      const result = await router.fetch(ups(), false);
+      // ParcelsApp keeps its whole budget: the check waits only the time it holds for Ship24, 2 s at a time.
+      const spare = scraper.universalSourceBudget('Ship24') + 5_000;
+      expect(wait.mock.calls.map(([ms]) => ms)).toEqual(Array(Math.floor(spare / 2_000)).fill(2_000));
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
+      expect((result.result.routing as JsonObject).failures).not.toHaveProperty('ParcelsApp');
+      expect(monitoring.reportRoutingEvent).toHaveBeenCalledWith('provider_held', expect.objectContaining({ provider: 'ParcelsApp' }));
+      expect(monitoring.reportRoutingEvent).not.toHaveBeenCalledWith('provider_cooldown', expect.anything());
+    });
+
+    it('brings the next check 15 minutes on when nothing else answers, as a rest did', async () => {
+      fixedPlan('ParcelsApp');
+      const { router, health, universal } = setup();
+      health.acquireTrackingProvider.mockResolvedValue(held('2026-09-10T12:01:30Z'));
+      // A parcel no carrier is asked for, whose providers alone could answer.
+      const deferred = await router.fetch(parcel(), false).catch((error: unknown) => error);
+      expect(deferred).toBeInstanceOf(RoutingDeferred);
+      expect(universal).not.toHaveBeenCalled();
+      const routing = (deferred as RoutingDeferred).routing;
+      expect(routing.failures).not.toHaveProperty('ParcelsApp');
+      expect(routing.next_check_at).toBe('2026-09-10T12:15:00.000Z');
+    });
+  });
   it('takes an answer another check of the run already has without contacting the provider', async () => {
     const { health, universal, direct, recognize, recognizeBrowser } = setup();
     const reusedUniversal = vi.fn((source: string) => source === 'ParcelsApp' ? Promise.resolve(history()) : undefined);
@@ -2662,6 +2713,22 @@ describe('persistent tracking routing', () => {
         await later.router.fetch(ups({ carrier_data: { routing } }), false);
         expect(later.universal.mock.calls.map(([source]) => source)).toEqual(asked);
       }
+    });
+
+    it('leaves a round the serving provider sat out while another check held it uncounted, keeping no rest', async () => {
+      fixedPlan('ParcelsApp', 'Ship24');
+      const { router, direct, universal, health } = setup();
+      direct.mockResolvedValue(label());
+      // Another check's call holds ParcelsApp for longer than this one can wait, and Ship24 holds the label alone.
+      health.acquireTrackingProvider.mockImplementation(async (source: string) => source === 'ParcelsApp'
+        ? { token: null, retry_at: '2026-09-10T12:01:30Z', held: true } : { token: 'lease', retry_at: '2026-09-10T12:01:30Z' });
+      universal.mockResolvedValue(label().result);
+      const result = await router.fetch(ups({ carrier_data: { routing: state({ configured_carrier: 'ups', preferred_provider: 'ParcelsApp' }) } }), false);
+      expect(universal.mock.calls.map(([source]) => source)).toEqual(['Ship24']);
+      const routing = routingOf(result);
+      expect(routing.partial_checked_at).toBe('2026-09-10T06:01:30.000Z');
+      expect(routing.failures).not.toHaveProperty('ParcelsApp');
+      expect(routing.label_rounds).toBeUndefined();
     });
 
     it.each([

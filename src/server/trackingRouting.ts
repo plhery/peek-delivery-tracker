@@ -58,7 +58,11 @@ const KNOWN_REASONS: ReadonlySet<string> = new Set(['listed', 'written_ahead']);
 // invalid_input: the source refused the number or an input as one it does not issue, or found several parcels under it.
 export type RoutingFailureKind = 'rate_limited' | 'not_found' | 'no_history' | 'input_required' | 'invalid_input' | 'verification' | 'schema' | 'transport';
 export interface ProviderHealth {
-  acquireTrackingProvider(provider: string): Promise<{ token: string | null; retry_at: string }>;
+  /**
+   * A refused lease (`token` null) is `held` while another check calls the provider or spaces it after its call;
+   * without `held` the provider rests (a cooldown after a failure).
+   */
+  acquireTrackingProvider(provider: string): Promise<{ token: string | null; retry_at: string; held?: boolean }>;
   finishTrackingProvider(provider: string, token: string, kind: Exclude<RoutingFailureKind, 'no_history' | 'input_required' | 'invalid_input'> | null, retryAfterMs: number, durationMs: number): Promise<void>;
 }
 export interface RoutedResult {
@@ -776,9 +780,12 @@ const RECOGNITION_VERDICTS = ['failed', 'unknown', 'no_history', 'known'] as con
 /**
  * A provider busy for no longer than this is only spaced after another check
  * (5 s after a healthy call): it is waited for, at most twice per provider.
+ * A lease that says so (`held`) waits as long as the call keeps its budget.
  */
 const PACING_WAIT_MS = 6_000;
 const PACING_ROUNDS = 2;
+/** How often a check waiting for another check's call asks for the provider again. */
+const HELD_POLL_MS = 2_000;
 /** The most clocks of rows written ahead kept for each carrier of a parcel. */
 const WRITTEN_AHEAD_KEPT = 50;
 
@@ -1928,6 +1935,8 @@ export class TrackingRouter {
       return this.options.refuses(named, universalNumber);
     };
     const attemptedUniversal = new Set<UniversalSource>();
+    // Providers another check still held when this one had to move on, and when they free up: no rest of theirs.
+    const heldUntil = new Map<UniversalSource, number>();
     // Providers that answered without history for this number in this check.
     const answeredEmpty: UniversalSource[] = [];
     const universal = async (source: UniversalSource): Promise<RoutedResult | null> => {
@@ -1963,18 +1972,40 @@ export class TrackingRouter {
       };
       let token: string | null = null;
       if (!reused) {
+        const pause = this.options.wait ?? ((ms, abort) => sleep(ms, undefined, { signal: abort }));
+        const since = performance.now();
+        let waited = 0;
+        // A wait is taken only when the call still keeps its full lookup budget after it.
+        const keepsBudget = (ms: number) =>
+          universalDeadline - Math.max(performance.now(), since + waited) - Math.max(0, ms) - 5_000 >= universalSourceBudget(source);
         let lease = await acquire();
-        for (let round = 0; lease && !lease.token && round < PACING_ROUNDS; round++) {
-          // Spacing after another check frees the provider within seconds: wait
-          // when the call keeps its full lookup budget. A cooldown is not waited for.
+        for (let round = 0; lease && !lease.token && millis(lease.retry_at); ) {
           const wait = millis(lease.retry_at) - now().getTime();
-          if (!millis(lease.retry_at) || wait > PACING_WAIT_MS
-            || universalDeadline - performance.now() - Math.max(0, wait) - 5_000 < universalSourceBudget(source)) break;
-          report('provider_paced', source);
-          await (this.options.wait ?? ((ms, abort) => sleep(ms, undefined, { signal: abort })))(Math.max(250, wait), signal);
+          if (lease.held) {
+            // Another check calls the provider, or spaces it after its call: this one waits its turn, asking again
+            // every 2 s while the other's lease runs, rather than record a rest the provider never gave.
+            const step = wait > PACING_WAIT_MS ? HELD_POLL_MS : Math.max(250, wait);
+            if (!keepsBudget(step)) break;
+            if (waited === 0) report('provider_paced', source);
+            await pause(step, signal);
+            waited += step;
+          } else {
+            // Spacing after another check frees the provider within seconds: wait
+            // when the call keeps its full lookup budget. A cooldown is not waited for.
+            if (round >= PACING_ROUNDS || wait > PACING_WAIT_MS || !keepsBudget(wait)) break;
+            report('provider_paced', source);
+            await pause(Math.max(250, wait), signal);
+            waited += Math.max(250, wait);
+            round++;
+          }
           lease = await acquire();
         }
         if (!lease) return null; // Fail closed: do not flood upstreams when coordination is down.
+        if (!lease.token && lease.held) {
+          // Still another check's when the wait would cut into its budget: the check moves on, and the provider keeps no rest.
+          heldUntil.set(source, millis(lease.retry_at));
+          report('provider_held', source); return null;
+        }
         if (!lease.token) {
           state.failures[source] = { count: state.failures[source]?.count ?? 0, kind: 'rate_limited', retry_at: lease.retry_at };
           report('provider_cooldown', source); return null;
@@ -2278,8 +2309,8 @@ export class TrackingRouter {
     if (partialDirect) {
       // A round beside the label that the provider serving the parcel sat out (its cooldown, a failure on the way) says
       // nothing of its progress: it is not counted, and the providers are asked again once that provider is free.
-      const missed = preferred && partialDirect.label && SERVICE_FAILURES.includes(String(state.failures[preferred]?.kind))
-        ? millis(state.failures[preferred]?.retry_at) : 0;
+      const missed = !preferred || !partialDirect.label ? 0 : Math.max(heldUntil.get(preferred) ?? 0,
+        SERVICE_FAILURES.includes(String(state.failures[preferred]?.kind)) ? millis(state.failures[preferred]?.retry_at) : 0);
       if (missed > now().getTime()) {
         state.partial_checked_at = iso(Math.min(now().getTime(), missed - labelSpacing(state.label_rounds, scanCount(partialDirect.value.result))));
       } else {
@@ -2300,8 +2331,8 @@ export class TrackingRouter {
     if (declared === 'unknown' && state.confirmed_carrier && state.confirmed_number === number
       && emptyDirect.has(state.confirmed_carrier)) clearConfirmation(state);
     state.discovery_cursor = (offset + Math.max(1, [...attemptedUniversal].filter((source) => rotation.includes(source)).length)) % Math.max(1, rotation.length);
-    const deadlines = Object.entries(state.failures).filter(([provider]) => !awaitsInput(provider))
-      .map(([, failure]) => millis(failure.retry_at)).filter((time) => time > now().getTime());
+    const deadlines = [...Object.entries(state.failures).filter(([provider]) => !awaitsInput(provider))
+      .map(([, failure]) => millis(failure.retry_at)), ...heldUntil.values()].filter((time) => time > now().getTime());
     state.next_check_at = iso(Math.max(now().getTime() + 15 * 60_000, Math.min(...deadlines, now().getTime() + HOUR)));
     // The parcel's own carrier, paced while the providers were asked, is asked again once it frees up.
     if (pacedUntil) state.next_check_at = iso(Math.min(millis(state.next_check_at), pacedUntil));

@@ -742,7 +742,7 @@ function checkKeys(parcel: JsonObject): string[] {
   const number = normalizeTrackingNumber(String(parcel.tracking_number ?? ''));
   // A parcel whose carrier has no adapter of its own asks the providers first: with none named yet,
   // it holds the one its plan puts first. Two checks would otherwise ask it at once, and the
-  // provider's lease would turn the second away as if it rested.
+  // second would spend its time waiting for the first's call.
   const provider = [routing.preferred_provider, data.tracking_provider].find((value) => typeof value === 'string' && value !== '')
     ?? (directCarrier(carrier) ? undefined : universalPlan({ carriers: [carrier], trackingNumber: number }).sources[0]);
   // With an explicit allowlist the router can rotate among eligible sources. Hold them

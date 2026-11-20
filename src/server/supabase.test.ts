@@ -13,6 +13,18 @@ describe('guarded tracking writes', () => {
     });
   });
 
+  it('passes on whether another check holds a refused provider lease', async () => {
+    const client = new SupabaseServiceClient('https://database.example', 'service-key');
+    vi.spyOn(client, 'request')
+      .mockResolvedValueOnce({ token: null, retry_at: '2026-09-10T12:01:30Z', held: true })
+      .mockResolvedValueOnce({ token: null, retry_at: '2026-09-10T12:30:00Z', held: false })
+      .mockResolvedValueOnce({ token: null, retry_at: '2026-09-10T12:30:00Z' });
+    await expect(client.acquireTrackingProvider('ParcelsApp')).resolves.toEqual({ token: null, retry_at: '2026-09-10T12:01:30Z', held: true });
+    // A rest, or a database without the field, leaves it out.
+    await expect(client.acquireTrackingProvider('ParcelsApp')).resolves.toEqual({ token: null, retry_at: '2026-09-10T12:30:00Z' });
+    await expect(client.acquireTrackingProvider('ParcelsApp')).resolves.toEqual({ token: null, retry_at: '2026-09-10T12:30:00Z' });
+  });
+
   it('resolves an old parcel id after a merge', async () => {
     const client = new SupabaseUserClient('https://database.example', 'public-key', 'token');
     const request = vi.spyOn(client, 'request').mockResolvedValueOnce([]).mockResolvedValueOnce([{ id: 'delivery' }]);

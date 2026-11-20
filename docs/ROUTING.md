@@ -1255,9 +1255,13 @@ which parcel the carrier answered for. A link shows it only where it shows the p
 `tracking_provider_health` (service role only) coordinates workers:
 
 - one 90 s lease per universal provider, token-fenced, expiring if a worker crashes;
-- 5 s spacing after a healthy call or one without history. A check that finds a provider
-  free again within 6 s waits for it (twice at most) when the call still keeps its full
-  lookup budget, rather than recording a cooldown and moving on;
+- 5 s spacing after a healthy call or one without history;
+- a refused lease says whether another check holds the provider (its lease, or the spacing
+  after its call) or the provider rests. A check waits for one another check holds, asking
+  again every 2 s, as long as the call still keeps its full lookup budget; then it moves on
+  to the next provider and records no cooldown, and with no other answer checks again
+  15 minutes later. A cooldown is waited for only when it ends within 6 s (twice at most);
+  otherwise the check records it and moves on;
 - cooldowns: 429 → at least 15 min, verification → 1 h, other failures → 1 min to 1 h
   (exponential);
 - not-found, `no_history` and a refused number (`invalid_input`) are per-parcel and never

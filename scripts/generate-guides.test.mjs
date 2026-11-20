@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
-import { cpSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, mkdirSync, mkdtempSync, readFileSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 import { CARRIER_CATALOG } from 'universal-parcel-scraper';
-import { carriersModule, guidesModule, readCarrierIndex, readCarriers, readGuides } from './generate-guides.mjs';
+import { carriersModule, checkDated, guidesModule, readCarrierIndex, readCarriers, readGuides } from './generate-guides.mjs';
 import { SUPPORTED_LOCALES } from '../src/lib/locale.ts';
 
 const content = fileURLToPath(new URL('../content/guides', import.meta.url));
@@ -329,4 +329,25 @@ test('a Chinese page asks its questions with the full-width "？", and its descr
   }
   refusesCarriers(chinese('?'), /zh\.md: "问题 1\?" stands among the questions, and ends with "？"/);
   refusesCarriers(chinese('？', '太短了。'), /zh\.md: the description has 4 characters; write 60 to 85/);
+});
+
+test('every dated line still holds, and its page still says it', () => {
+  checkDated();
+});
+
+test('a dated line stops the build once its last day has passed, and so does an entry its page no longer says', () => {
+  const directory = mkdtempSync(path.join(tmpdir(), 'dated-'));
+  try {
+    mkdirSync(path.join(directory, 'guides', 'returns'), { recursive: true });
+    writeFileSync(path.join(directory, 'guides', 'returns', 'en.md'), 'Returns start until 8 January.');
+    const entry = { page: 'guides/returns/en.md', line: 'until 8 January', until: '2027-01-08', then: 'Drop the line.' };
+    checkDated([entry], directory, '2027-01-08');
+    assert.throws(() => checkDated([entry], directory, '2027-01-09'), /still says "until 8 January", which held until 2027-01-08\. Drop the line\. Then remove its entry/);
+    assert.throws(() => checkDated([{ ...entry, line: 'until 9 January' }], directory, '2027-01-01'), /no longer says "until 9 January"/);
+    assert.throws(() => checkDated([{ ...entry, until: '8 January' }], directory, '2027-01-01'), /the last day they hold/);
+    assert.throws(() => checkDated([{ ...entry, page: '../returns.md' }], directory, '2027-01-01'), /the last day they hold/);
+    assert.throws(() => checkDated([{ ...entry, also: 1 }], directory, '2027-01-01'), /the last day they hold/);
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });

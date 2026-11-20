@@ -22,6 +22,7 @@ The guides and carrier pages (`content/guides/`, `content/carriers/`) are proofr
 - Christmas posting dates (`christmas-posting-dates`): replace last year's dates with this year's as each carrier publishes them, and say so in the opening paragraph.
 - The EU handling fee of €2 per item on online orders from outside the EU, due from 1 November 2026 (`customs`): once that day has passed, check that it applies, put it in the present tense and say how each post or carrier passes it on to the recipient.
 - Any other "not announced yet", "from <date>" or "until <date>" whose date has passed.
+- A line that holds only until a known day goes in `content/dated.json` with that day and what to do then; `npm run guides` and the script tests fail once the day has passed while the page still says it.
 
 <!-- BEGIN:nextjs-agent-rules -->
 

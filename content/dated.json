@@ -1,0 +1,14 @@
+[
+  {
+    "page": "guides/apple-orders/de.md",
+    "line": "bis zum 8. Januar 2027 eine Rückgabe starten",
+    "until": "2027-01-08",
+    "then": "Drop Apple's Christmas returns from the returns section, from „Zu Weihnachten gibt Apple mehr Zeit“ to „Käufe per Ratenkauf.“, unless Apple's pages give a new season's window."
+  },
+  {
+    "page": "guides/apple-orders/de.md",
+    "line": "Rückgabe bis 8. Januar 2027",
+    "until": "2027-01-08",
+    "then": "Drop „Rückgabe bis 8. Januar 2027“ from the three Apple sources that list it, and „Weihnachtsrückgabe“ from Apple's returns source."
+  }
+]

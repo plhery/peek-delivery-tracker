@@ -210,6 +210,25 @@ export function readCarriers(directory = carriersRoot, guides = JSON.parse(readF
   return carriers;
 }
 
+/**
+ * The lines that hold only until a date, listed in `content/dated.json`: each names its page under `content/`,
+ * words the page says, the last day they hold and what to do then. Once that day has passed (UTC), a page that
+ * still says them stops the build; so does an entry whose page no longer says them.
+ */
+export function checkDated(list = JSON.parse(readFileSync(path.join(root, 'content', 'dated.json'), 'utf8')), directory = path.join(root, 'content'), today = new Date().toISOString().slice(0, 10)) {
+  if (!Array.isArray(list)) throw new Error('content/dated.json lists the dated lines');
+  for (const entry of list) {
+    const { page, line, until, then } = entry ?? {};
+    if (Object.keys(entry ?? {}).sort().join() !== 'line,page,then,until' || !/^(guides|carriers)\/[a-z0-9-]+\/[a-z-]+\.md$/.test(page ?? '')
+      || [line, then].some((value) => typeof value !== 'string' || !value.trim()) || !/^\d{4}-\d{2}-\d{2}$/.test(until ?? '')) {
+      throw new Error(`content/dated.json: ${JSON.stringify(entry)} is a page, words on it, the last day they hold (YYYY-MM-DD) and what to do then`);
+    }
+    const file = path.join(directory, page);
+    if (!existsSync(file) || !readFileSync(file, 'utf8').includes(line)) throw new Error(`content/${page} no longer says "${line}": update or remove its entry in content/dated.json`);
+    if (today > until) throw new Error(`content/${page} still says "${line}", which held until ${until}. ${then} Then remove its entry from content/dated.json.`);
+  }
+}
+
 /** A list as module text. No-break spaces are written as their escapes, to be seen. */
 const written = (value) => JSON.stringify(value, null, 2).replace(/\u202f/g, '\\u202f').replace(/\u00a0/g, '\\u00a0');
 
@@ -263,6 +282,7 @@ export const CARRIER_LOCALES: readonly Locale[] = ${JSON.stringify(listed)};
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  checkDated();
   const carriers = readCarriers();
   const outputs = [[outputPath, guidesModule(readGuides(contentRoot, carriers))], [carriersOutputPath, carriersModule(carriers)]];
   if (process.argv.includes('--check')) {

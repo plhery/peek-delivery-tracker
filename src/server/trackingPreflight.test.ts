@@ -1,5 +1,5 @@
 import { afterEach, expect, it, vi } from 'vitest';
-import { InputRequiredError, InvalidInputError, NotFoundError, RateLimitedError, type CarrierResult, type UniversalSource } from 'universal-parcel-scraper';
+import { InputRequiredError, InvalidInputError, NotFoundError, RateLimitedError, UpstreamNetworkError, type CarrierResult, type UniversalSource } from 'universal-parcel-scraper';
 import { UniversalTracker } from 'universal-parcel-scraper/node';
 import type { ProviderHealth } from './trackingRouting';
 import { preflightInputNeeded, preflightTracking, takePreflightHistory } from './trackingPreflight';
@@ -196,6 +196,18 @@ it('keeps what the other provider answers within that second: its outcome, its h
   const prompt = preflightTracking('1234500403', health());
   await vi.advanceTimersByTimeAsync(1_200);
   expect(await prompt).toEqual({ trackingFound: true, providers: [{ provider: 'Ship24', outcome: 'input_required' }, { provider: 'ParcelsApp', outcome: 'history' }] });
+});
+
+it('takes a provider its own short wait cut off as unanswered, without counting a failure against it', async () => {
+  vi.useFakeTimers();
+  // A lookup stops with the time it was given and reports a network failure, as one that could not connect does.
+  scripted({ Ship24: { at: 300, error: new UpstreamNetworkError('Ship24', new Error('refused')) }, ParcelsApp: { at: 7_995, error: new UpstreamNetworkError('ParcelsApp', new Error('timed out')) } });
+  const service = health();
+  const answer = preflightTracking('1234500406', service);
+  await vi.advanceTimersByTimeAsync(7_995);
+  expect(await answer).toEqual({ providers: [{ provider: 'Ship24', outcome: 'unavailable' }, { provider: 'ParcelsApp', outcome: 'unavailable' }] });
+  expect(service.finishTrackingProvider.mock.calls.map(([provider, , kind]) => [provider, kind]))
+    .toEqual([['Ship24', 'transport'], ['ParcelsApp', 'not_found']]);
 });
 
 it('waits for both providers while neither has dated history', async () => {

@@ -22,6 +22,8 @@ const BUDGET_MS = 8_000;
  * is already arriving, and bounds what the visitor waits beyond the first.
  */
 const GRACE_MS = 1_000;
+/** A lookup given the time left stops a few milliseconds before the budget does: a failure this close to its end is the cut. */
+const CUT_MARGIN_MS = 100;
 const TTL_MS = 5 * 60_000;
 const MAX_ENTRIES = 500;
 interface PreflightAnswer { providers: PreflightOutcome[]; trackingFound?: boolean; carrier?: ApiCarrierId }
@@ -130,6 +132,10 @@ async function lookup(number: string, health: ProviderHealth, signal: AbortSigna
       if (failure === 'not_found' || failure === 'indeterminate' || failure === 'invalid_input') {
         kind = 'not_found'; missed(); return { provider, outcome: 'no_history' };
       }
+      // The sheet's short wait ended the call, which a lookup reports as a network failure: the provider was still
+      // working on its answer and rests no longer than after any answer. A saved parcel's check gives it its full
+      // budget (universalSourceBudget) and counts the failure if it has one.
+      if (failure !== 'rate_limited' && performance.now() >= deadline - CUT_MARGIN_MS) { kind = 'not_found'; return { provider, outcome: 'unavailable' }; }
       kind = failure === 'rate_limited' ? 'rate_limited'
         : failure === 'challenge' ? 'verification' : failure === 'schema' ? 'schema' : 'transport';
       return { provider, outcome: 'unavailable' };

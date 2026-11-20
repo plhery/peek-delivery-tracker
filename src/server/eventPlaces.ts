@@ -12,6 +12,7 @@ import { otherLanguages } from './scanLanguage';
 import { repeatLeads, scanSource, wordingTwins } from './scanRepeats';
 import { noticeScan, stageNotices } from './stageNotices';
 import { servedCarrierOutage } from './carrierOutages';
+import { passedEstimateDay } from './passedEstimate';
 import { datedAfterCheck } from './futureScans';
 import { servedPlannedSteps, servedWrittenAhead, servedWrittenSteps } from './plannedSteps';
 import { PLACEHOLDER_NUMBER, placeholderNumber } from './trackingFailure';
@@ -108,8 +109,11 @@ function probedPartner(data: JsonObject): JsonObject {
     ...typeof probe.number === 'string' && data.delivery_tracking_number == null ? { delivery_tracking_number: probe.number } : {} };
 }
 
-/** The carrier data only the service reads, the delivering carrier's last check with its number (`delivery_probe`) among them. */
-const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe'];
+/**
+ * The carrier data only the service reads, the delivering carrier's last check with its number (`delivery_probe`) among
+ * them, and the expected day a check stopped keeping once it passed, which is served as `expected_delivery_passed`.
+ */
+const SERVICE_DATA = ['add_recognition_pending', DIRECT_HISTORY, 'delivery_probe', 'last_expected_delivery'];
 
 /**
  * The routing state served on its own: planned steps (`planned_events`) and the rows written ahead (`written_ahead_by`,
@@ -486,7 +490,8 @@ function placeLenders(row: JsonObject): Map<string, JsonObject[]> {
  * (`planned_events`, plannedSteps.ts and `placedSteps`), and so is the carrier that writes the timeline in advance
  * (`written_ahead_by`, `servedWrittenAhead`), with the steps it wrote whose time has passed (`written_ahead_events`,
  * `servedWrittenSteps`). `news_at` dates the parcel's latest scan as Peek stored it (`newsAt`). A parcel whose carrier's
- * site is down says so (`carrier_outage`, carrierOutages.ts).
+ * site is down says so (`carrier_outage`, carrierOutages.ts), and one whose expected day passed up to a week ago names
+ * it (`expected_delivery_passed`, passedEstimate.ts).
  */
 export function withEventPlaces(row: JsonObject): JsonObject {
   const shown = shownEvents(row);
@@ -498,9 +503,11 @@ export function withEventPlaces(row: JsonObject): JsonObject {
   const ahead = servedWrittenAhead(answered);
   const written = ahead ? placedSteps(row, servedWrittenSteps(answered, shown)) : [];
   const outage = servedCarrierOutage(row, shown);
-  if (!planned.length && !ahead && !outage) return served;
+  const passed = passedEstimateDay(row, served);
+  if (!planned.length && !ahead && !outage && !passed) return served;
   return { ...served, ...planned.length ? { planned_events: planned } : {}, ...ahead ? { written_ahead_by: ahead } : {},
-    ...written.length ? { written_ahead_events: written } : {}, ...outage ? { carrier_outage: outage } : {} };
+    ...written.length ? { written_ahead_events: written } : {}, ...outage ? { carrier_outage: outage } : {},
+    ...passed ? { expected_delivery_passed: passed } : {} };
 }
 
 /**

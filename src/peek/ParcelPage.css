@@ -45,6 +45,7 @@
 .peekp-card h1 { margin: 0; font-size: 28px; line-height: 1.12; letter-spacing: -.8px; font-weight: 650; text-wrap: balance; overflow-wrap: anywhere; }
 .peekp-card__name { margin: 0 0 4px; font-size: 13px; font-weight: 600; overflow-wrap: anywhere; }
 .peekp-card__detail { margin: 8px 0 0; color: var(--tone); font-size: 15px; font-weight: 500; line-height: 1.35; }
+.peekp-card__detail--muted { color: var(--ink-soft); font-weight: 400; }
 .peekp-card__note { display: block; margin: 6px 0 0; color: var(--tone); font-size: 12px; line-height: 1.45; opacity: .9; overflow-wrap: anywhere; }
 .peekp-card__flag { position: relative; display: flex; align-items: center; gap: 6px; width: fit-content; max-width: 100%; margin: 12px 0 0; padding: 5px 10px 5px 8px; border-radius: 12px; background: color-mix(in srgb, var(--paper) 72%, transparent); color: var(--orange-text); font-size: 12px; font-weight: 500; line-height: 1.4; }
 .peekp-card__flag svg { width: 13px; height: 13px; flex: 0 0 auto; }

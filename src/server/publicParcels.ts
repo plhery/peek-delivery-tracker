@@ -614,6 +614,8 @@ export function publicParcelResponse(found: StoredParcelLink, alerts: ApiParcelA
       // A parcel several lookups share does not say when the first one was made.
       created_at: later(row.created_at, link.created_at),
       expected_delivery: optionalText(row.expected_delivery),
+      // A wrapped gift says nothing of a day it missed.
+      ...(!wrapped && typeof row.expected_delivery_passed === 'string' ? { expected_delivery_passed: row.expected_delivery_passed } : {}),
       // The carrier's status line can name the place the newest scan was made.
       last_status_text: wrapped ? null : owner ? toldText(row.last_status_text)
         : viewerStatusText(toldText(row.last_status_text), row.current_stage, recipient),

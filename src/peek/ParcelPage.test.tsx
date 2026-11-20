@@ -329,6 +329,17 @@ describe('ParcelPage stages and troubles', () => {
     expect(freshness()).toHaveTextContent('Last checked: 2 min ago');
   });
 
+  it('says when a parcel past its expected day was expected, muted, in place of the estimate', async () => {
+    const day = new Date(Date.now() - 72 * HOUR);
+    const passed = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, '0')}-${String(day.getDate()).padStart(2, '0')}`;
+    await shown(view([scan('accepted', 120), scan('in_transit', 80)], { expectedDeliveryPassed: passed }));
+    const parts = new Intl.DateTimeFormat('en', { weekday: 'short', day: 'numeric', month: 'short' }).formatToParts(day);
+    const part = (type: string) => parts.find((entry) => entry.type === type)!.value;
+    expect(within(card()).getByText(`Was expected ${part('weekday')} ${part('day')} ${part('month')}`))
+      .toHaveClass('peekp-card__detail', 'peekp-card__detail--muted');
+    expect(within(card()).queryByText('No delivery date yet')).toBeNull();
+  });
+
   it('says the sender still has the parcel once its label is a day old', async () => {
     await shown(view([scan('registered', 30)], { carrier: 'chronopost' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Label created' })).toBeVisible();

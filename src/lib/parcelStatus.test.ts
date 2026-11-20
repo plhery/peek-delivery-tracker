@@ -1,7 +1,7 @@
 import en from '../../shared/locales/en.json';
 import { describe, expect, it } from 'vitest';
 import type { ParcelWithEvents, SyncStatus } from '../types';
-import { parcelDeliveryEstimate, localizedParcelCompletionDate, parcelDisplayStatus, parcelDisplayStatusKey, parcelStatusLabel, shownCarrier } from './parcelStatus';
+import { parcelDeliveryEstimate, localizedParcelCompletionDate, parcelDisplayStatus, parcelDisplayStatusKey, parcelPassedEstimate, parcelStatusLabel, shownCarrier } from './parcelStatus';
 import { carrierInfo } from './carriers';
 import { parcelAttention } from './parcelPriority';
 import { translateMessage } from './messages';
@@ -199,6 +199,26 @@ describe('useful delivery estimates', () => {
       saved.expectedDelivery = value;
       expect(parcelDeliveryEstimate(saved, now)).toBeNull();
     }
+  });
+});
+
+describe('an expected day that passed', () => {
+  const now = new Date(2026, 10, 20, 12).getTime();
+  it('is the day the server names, once it has passed on this device too', () => {
+    const saved = parcel('ok', 'in_transit');
+    expect(parcelPassedEstimate(saved, now)).toBeNull();
+    saved.expectedDeliveryPassed = '2026-11-17';
+    expect(parcelPassedEstimate(saved, now)).toEqual(new Date(2026, 10, 17));
+    // Served by a clock that runs ahead of this device's: the day is still today here.
+    saved.expectedDeliveryPassed = '2026-11-20';
+    expect(parcelPassedEstimate(saved, now)).toBeNull();
+    saved.expectedDeliveryPassed = 'invalid';
+    expect(parcelPassedEstimate(saved, now)).toBeNull();
+  });
+  it('gives way to an estimate the page shows, and goes once the parcel is archived', () => {
+    const saved = { ...parcel('ok', 'in_transit'), expectedDeliveryPassed: '2026-11-17' };
+    expect(parcelPassedEstimate({ ...saved, expectedDelivery: '2026-11-23' }, now)).toBeNull();
+    expect(parcelPassedEstimate({ ...saved, archivedAt: '2026-11-19T10:00:00Z' }, now)).toBeNull();
   });
 });
 

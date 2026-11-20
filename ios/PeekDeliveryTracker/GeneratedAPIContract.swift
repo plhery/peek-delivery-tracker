@@ -3912,6 +3912,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var carrier: CarrierID
     var createdAt: String
     var expectedDelivery: String? = nil
+    var expectedDeliveryPassed: String? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
     var syncStatus: SyncStatus
@@ -3938,6 +3939,7 @@ struct Parcel: Codable, Equatable, Hashable, Sendable, Identifiable {
         case carrier
         case createdAt
         case expectedDelivery
+        case expectedDeliveryPassed
         case lastStatusText
         case lastSyncedAt
         case syncStatus
@@ -4499,6 +4501,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
     var carrier: CarrierID
     var createdAt: String
     var expectedDelivery: String? = nil
+    var expectedDeliveryPassed: String? = nil
     var lastStatusText: String? = nil
     var lastSyncedAt: String? = nil
     var syncStatus: SyncStatus
@@ -4523,6 +4526,7 @@ struct PublicPackage: Codable, Equatable, Hashable, Sendable, Identifiable {
         case carrier
         case createdAt
         case expectedDelivery
+        case expectedDeliveryPassed
         case lastStatusText
         case lastSyncedAt
         case syncStatus
@@ -5192,6 +5196,7 @@ extension Parcel {
         carrier = try values.decode(CarrierID.self, forKey: .carrier)
         createdAt = try values.decode(String.self, forKey: .createdAt)
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
+        expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)
         syncStatus = try values.decode(SyncStatus.self, forKey: .syncStatus)

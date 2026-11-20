@@ -91,7 +91,7 @@ const FLAG_ICONS: Record<ParcelAttention, ReactNode> = {
  * the open box in the middle (`hero`), or not at all when the map beside the
  * card has him.
  */
-export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, name, detail, notes, flag, outage, figure, number, map, bell, settled, gift }: {
+export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, name, detail, detailMuted, notes, flag, outage, figure, number, map, bell, settled, gift }: {
   parcel: ParcelWithEvents;
   stage: Stage | null;
   /** Null while no carrier is known. */
@@ -103,6 +103,8 @@ export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, n
   headline: string;
   name: string | null;
   detail: string | null;
+  /** The detail is a day that passed ("Was expected Tue 17 Nov"), said quietly. */
+  detailMuted?: boolean;
   notes: readonly string[];
   flag: ParcelAttention | null;
   /** The carrier's site down, said calmly in place of the flag. */
@@ -148,7 +150,7 @@ export function LinkCard({ parcel, stage, carrier, likely, delivery, headline, n
         {gift === 'own' && <p className="peekp-card__gift"><Icon name="gift" />{t('share.gift.marker')}</p>}
         {name && <p className="peekp-card__name">{name}</p>}
         <h1>{headline}</h1>
-        {detail && <p className="peekp-card__detail">{detail}</p>}
+        {detail && <p className={`peekp-card__detail${detailMuted ? ' peekp-card__detail--muted' : ''}`}>{detail}</p>}
         {notes.map((note) => <p key={note} className="peekp-card__note">{note}</p>)}
         <AutoCarrierNotice parcel={parcel} className="peekp-card__note" />
       </div>

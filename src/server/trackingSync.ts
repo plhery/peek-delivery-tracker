@@ -624,7 +624,7 @@ function expectedToday(parcel: JsonObject, now: Date): boolean {
 }
 
 /** The date `now` falls on on the delivery clock (`deliveryClock`), against which an expected day has passed or not. */
-function deliveryToday(parcel: JsonObject, now: Date): string {
+export function deliveryToday(parcel: JsonObject, now: Date): string {
   return DateTime.fromJSDate(now, { zone: deliveryClock(parcel) }).toISODate() ?? now.toISOString().slice(0, 10);
 }
 
@@ -3423,6 +3423,16 @@ export class TrackingSyncService {
           if (typeof previousData.expected_delivery_from === 'string' && carrierData.expected_delivery_from == null) {
             carrierData.expected_delivery_from = previousData.expected_delivery_from;
           }
+        }
+        // A day that passed goes with an answer that names none, but the parcel's page still says when it was expected
+        // (`expected_delivery_passed`, passedEstimate.ts): the day is kept apart until the carrier names a day again, the
+        // parcel arrives or goes back, or the router swaps the carrier, whose answer is another shipment's.
+        const lapsed = typeof parcel.expected_delivery === 'string' && parcel.expected_delivery.trim()
+          ? expectedDayAhead(parcel, now) ? null : parcel.expected_delivery
+          : previousData.last_expected_delivery;
+        if (typeof lapsed === 'string' && !result.expected_delivery && !fetched.correction && values.expected_delivery == null
+          && !['delivered', 'returned'].includes(String(values.current_stage ?? previousStage))) {
+          carrierData.last_expected_delivery = lapsed;
         }
         // A delivery only a provider reported, which the parcel's own carrier did not show, is
         // checked again daily for a while: the carrier may yet dispute it (activePackages). The

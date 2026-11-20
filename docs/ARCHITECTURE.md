@@ -897,6 +897,15 @@ Android app's [`APIClient.kt`](../android/core/src/main/kotlin/com/plhery/peekde
   place of its own newest scan). It goes once the parcel is delivered,
   held or waiting to be collected, once a new scan tells of a failed attempt or a hold, and
   when the router changes the carrier. A handover keeps it (`src/server/trackingSync.ts`).
+  A day that passed and goes this way is kept apart (`last_expected_delivery`) until the
+  carrier names a day again, the parcel arrives or goes back, or the router changes the carrier.
+- A parcel's page says when the parcel was expected once that day has passed, muted ("Was
+  expected Tue 17 Nov"), for up to seven days, while it is not delivered, returned, archived
+  or waiting at a pickup point. The server keeps the rule and serves the day
+  (`expected_delivery_passed`, [`passedEstimate.ts`](../src/server/passedEstimate.ts)), counted
+  on the delivery carrier's clock; the apps show it where they show no estimate, once the day
+  has passed on the device too. Cards, widgets, previews, shared lines and the sort by
+  delivery date leave it out.
 - Estimates appear only while a parcel is on its way. They are hidden after delivery, a
   failed attempt, pickup readiness or a return, and whenever they are in the past. Out for
   delivery already says the parcel comes today, so the apps, notifications and Live

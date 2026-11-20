@@ -634,6 +634,7 @@
   "parcel.onDate": "{{date}}",
   "parcel.byDate": "entro {{date}}",
   "parcel.byTomorrow": "entro domani",
+  "parcel.wasExpected": "Era previsto per {{date}}",
   "parcel.sender": "Mittente: {{sender}}",
   "parcel.pickedUpAt": "Ritirato presso {{place}}",
   "parcel.autoChangedCarrier": "Cambio automatico da {{carrier}}",

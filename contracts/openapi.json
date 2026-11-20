@@ -68679,6 +68679,11 @@
               "null"
             ]
           },
+          "expected_delivery_passed": {
+            "type": "string",
+            "format": "date",
+            "description": "The day the carrier last expected to deliver the parcel (YYYY-MM-DD), once it has passed: from the day after it through the seventh day after, on the clock of the carrier delivering it, while the parcel is not delivered, returned, archived or waiting at a pickup point; absent otherwise. It is `expected_delivery`'s day once that has passed, or the day a check stopped keeping because the carrier's answer named none. The parcel's page shows it muted, \"Was expected Tue 17 Nov\", where it shows no estimate of its own; cards, widgets, share lines and the sort by delivery date do not."
+          },
           "last_status_text": {
             "type": [
               "string",
@@ -70595,6 +70600,11 @@
               "string",
               "null"
             ]
+          },
+          "expected_delivery_passed": {
+            "type": "string",
+            "format": "date",
+            "description": "The day the carrier last expected to deliver the parcel (YYYY-MM-DD), once it has passed: from the day after it through the seventh day after, on the clock of the carrier delivering it, while the parcel is not delivered, returned, archived or waiting at a pickup point; absent otherwise. It is `expected_delivery`'s day once that has passed, or the day a check stopped keeping because the carrier's answer named none. The parcel's page shows it muted, \"Was expected Tue 17 Nov\", where it shows no estimate of its own; cards, widgets, share lines and the sort by delivery date do not. Not on a wrapped gift."
           },
           "last_status_text": {
             "type": [

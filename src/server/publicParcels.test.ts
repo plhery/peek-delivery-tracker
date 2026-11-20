@@ -374,6 +374,30 @@ describe('what a link shows', () => {
     expect(shown([scan, added], { gift: true, owner: true }).news_at).toBe('2026-10-02T07:20:00.123456+00:00');
   });
 
+  it('names the expected day that passed, except to whom a gift is still wrapped', () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(new Date('2026-10-05T10:00:00Z'));
+    try {
+      const scan = { id: 'scan', package_id: 'parcel', stage: 'in_transit', description: 'Sorted', location: null,
+        occurred_at: '2026-10-02T07:00:00+00:00', provider_event_id: 'swiss-post:sorted', point: null, recipient_action: null };
+      const shown = (link: Record<string, unknown>, carrier_data: Record<string, unknown> = {}) => publicParcelResponse({
+        link: { id: 'k7Qm2xHd9RtW', created_at: '2026-10-01T08:00:00Z', forget_at: null, ...link },
+        package: { id: 'parcel', tracking_number: 'TESTPARCEL983456', carrier: 'swiss-post', sync_status: 'ok', current_stage: 'in_transit',
+          created_at: '2026-10-01T08:00:00Z', expected_delivery: null, carrier_data, tracking_events: [scan] },
+      }, alerts).package;
+      const kept = { last_expected_delivery: '2026-10-03' };
+      expect(shown({}, kept).expected_delivery_passed).toBe('2026-10-03');
+      expect(shown({ owner: true }, kept).expected_delivery_passed).toBe('2026-10-03');
+      // The day is served on its own, never in the carrier data.
+      expect(shown({}, kept).carrier_data).not.toHaveProperty('last_expected_delivery');
+      expect(shown({ gift: true }, kept)).not.toHaveProperty('expected_delivery_passed');
+      expect(shown({ gift: true, owner: true }, kept).expected_delivery_passed).toBe('2026-10-03');
+      expect(shown({})).not.toHaveProperty('expected_delivery_passed');
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+
   it('asks the owner to correct a placeholder number, showing nothing of the shipments merged under it', () => {
     const merged = { id: 'merged', package_id: 'parcel', stage: 'delivered', description: 'Delivered', location: 'Lyon',
       occurred_at: '2026-10-02T07:00:00+00:00', provider_event_id: 'unknown:merged', point: null };

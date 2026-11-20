@@ -30,13 +30,14 @@ import {
   localizedScanAge,
   useI18n,
 } from '../i18n';
-import { dayAndTime, localizedClockTime } from '../lib/format';
+import { dayAndTime, localizedCalendarDate, localizedClockTime } from '../lib/format';
 import { NUMBER_UNKNOWN, numberToCheck, REFUSED_NUMBER } from '../lib/messages';
 import { formatDimensions, formatWeight } from '../lib/units';
 import {
   awaitedCarrier,
   localizedParcelCompletionDate,
   parcelDeliveryEstimate,
+  parcelPassedEstimate,
   parcelDisplayStatus,
   parcelStatusLabel,
   shownCarrier,
@@ -205,6 +206,8 @@ export function ParcelDetail({
   const statusLabel = parcelStatusLabel(parcel, t, locale);
   const completionDate = localizedParcelCompletionDate(parcel, languageTag, t);
   const estimate = parcelDeliveryEstimate(parcel);
+  // An estimate whose day passed in the last week still says when the parcel was due, muted, on this page alone.
+  const passedDay = completionDate ? null : parcelPassedEstimate(parcel);
   const { numbers: trackingNumbers, loose: looseLinks } = trackingLinksByNumber(parcelTrackingNumbers(parcel), parcelTrackingLinks(parcel, locale));
   // Each carrier names its own number once there are several; the one the carrier tracks the parcel by says so.
   const severalNumbers = trackingNumbers.filter((entry) => !entry.tracksAs).length > 1;
@@ -697,6 +700,7 @@ export function ParcelDetail({
               : localizedDeliveryWindow(parcel.expectedDeliveryFrom, estimate!, t, languageTag, undefined, use24HourTime)}
           </p>
         )}
+        {passedDay && <p className="detail__arrival detail__arrival--passed">{t('parcel.wasExpected', { date: localizedCalendarDate(passedDay, languageTag) })}</p>}
         <div className="detail__progress"><ProgressTrack stage={current?.stage ?? null} /></div>
       </section>
       {waitingAt && <PickupPointCard point={waitingAt} />}

@@ -18,10 +18,11 @@ import { activeTrackingCarrierId, carrierInfo, deliveringCarrierId, deliveryLine
 import { writeCarrierHandoff } from '../lib/carrierHandoff';
 import { LANDING_PATH } from '../lib/experience';
 import { numberToCheck } from '../lib/messages';
+import { localizedCalendarDate } from '../lib/format';
 import { captureCardOrigin } from '../lib/cardTransition';
 import { useCardDialog } from '../lib/cardDialog';
 import { focusClickedButton } from '../lib/modal';
-import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced, writtenAheadNote } from '../lib/parcelStatus';
+import { likelyCarrier, parcelDeliveryEstimate, parcelHasCarrierUpdate, parcelIsUnannounced, parcelPassedEstimate, writtenAheadNote } from '../lib/parcelStatus';
 import { pickupPoint } from '../lib/pickupPoint';
 import { awaitingHandover, currentEvent, heldReturn, isFinal, sortEventsDesc } from '../lib/stages';
 import { useTabTitle } from '../lib/tabTitle';
@@ -246,8 +247,11 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
   const number = parcel.trackingNumber ? formatTrackingNumber(parcel.trackingNumber, parcel.carrier)
     : numberHint ? maskedNumber(numberHint) : null;
   const headline = wrapped ? t('share.gift.headline') : opened ? t('share.gift.here') : parcelHeadline(parcel, t);
-  // The page gives a window of days whole, where cards and previews give the day it ends.
-  const detail = wrapped ? giftArrival(parcel, wording) : (opened ? giftDelivered(parcel, wording) : null) ?? parcelDetail(parcel, wording, true, true);
+  // The page gives a window of days whole, where cards and previews give the day it ends. An estimate whose day passed in
+  // the last week still says when the parcel was due, muted, on the page alone.
+  const passedDay = present ? null : parcelPassedEstimate(parcel, now);
+  const detail = wrapped ? giftArrival(parcel, wording) : (opened ? giftDelivered(parcel, wording) : null)
+    ?? (passedDay ? t('parcel.wasExpected', { date: localizedCalendarDate(passedDay, languageTag) }) : parcelDetail(parcel, wording, true, true));
   const offline = useOffline() || trouble?.kind === 'offline';
   // The server down for maintenance is not the parcel's trouble: the page keeps it as it was, and says so.
   const down = !offline ? trouble?.down ?? null : null;
@@ -562,7 +566,7 @@ function Parcel({ linkId, entrance, state, view, onHome }: {
         {followed && <AlreadyFollowed name={followed.label || t('common.parcel')} onOpen={() => { trackAction('parcel-link-open-existing'); openDeliveries?.(followed.id); }} />}
         {sample ? <SampleNote landingPath={landingPath} onLanding={toLanding} /> : !owner && !present && <SharedWithYou visitor={!signedIn} until={worksUntil} />}
         <LinkCard parcel={parcel} stage={stage} carrier={carrierKnown ? displayed : null} likely={likelyName} delivery={delivering}
-          headline={headline} name={name} detail={detail} notes={notes} flag={outageFlag ? null : flag} outage={outageFlag} figure={figure} number={number} settled={entrance === 'reveal' && !checking}
+          headline={headline} name={name} detail={detail} detailMuted={!!passedDay} notes={notes} flag={outageFlag ? null : flag} outage={outageFlag} figure={figure} number={number} settled={entrance === 'reveal' && !checking}
           gift={wrapped ? 'wrapped' : opened ? 'opened' : link.gift ? 'own' : undefined}
           map={figure === 'map' ? (covered, room) => map('card', covered, room) : undefined}
           bell={bell} />

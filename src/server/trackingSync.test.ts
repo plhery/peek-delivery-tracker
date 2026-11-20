@@ -1902,6 +1902,36 @@ describe('TrackingSyncService', () => {
       expect(first.started).toMatchObject({ previous_stage: 'pending', previous_expected_delivery: null, delivery_clock_date: null });
     });
 
+    it('is kept apart once its day has passed, for the page to say when it was expected, until a day is named again', async () => {
+      const check = parcel();
+      await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+      // The day passed and the answer names none: it goes, and the check keeps it apart (`expected_delivery_passed`).
+      const after = await check('2026-10-30T08:00:00Z', answer('in_transit', {}, hub));
+      expect(after).toMatchObject({ expected_delivery: null, carrier_data: { last_expected_delivery: '2026-10-29' } });
+      const later = await check('2026-10-31T08:00:00Z', new Error('down'), answer('in_transit', {}, hub));
+      expect(later).toMatchObject({ expected_delivery: null, carrier_data: { last_expected_delivery: '2026-10-29' } });
+      // A day named again is the estimate, a later one; once that one passes, it is the day kept.
+      const moved = await check('2026-10-31T12:00:00Z', answer('in_transit', { expected_delivery: '2026-11-02' }, hub));
+      expect(moved.expected_delivery).toBe('2026-11-02');
+      expect(moved.carrier_data).not.toHaveProperty('last_expected_delivery');
+      const missed = await check('2026-11-03T08:00:00Z', answer('in_transit', {}, hub));
+      expect(missed).toMatchObject({ expected_delivery: null, carrier_data: { last_expected_delivery: '2026-11-02' } });
+      // A delivered parcel missed no day.
+      const delivered = await check('2026-11-03T15:00:00Z', answer('delivered', {},
+        { time: '2026-11-03T14:00:00Z', description: 'Delivered', stage: 'delivered' }, onVehicle, hub));
+      expect(delivered.current_stage).toBe('delivered');
+      expect(delivered.carrier_data).not.toHaveProperty('last_expected_delivery');
+    });
+
+    it('is not kept when a failed attempt takes back a day still ahead', async () => {
+      const check = parcel();
+      await check('2026-10-26T20:00:00Z', answer('in_transit', dated));
+      const attempt = { time: '2026-10-27T12:00:00Z', description: 'Delivery attempt failed', stage: 'failed_attempt' };
+      const failed = await check('2026-10-27T13:00:00Z', answer('exception', {}, attempt, hub));
+      expect(failed.expected_delivery).toBeNull();
+      expect(failed.carrier_data).not.toHaveProperty('last_expected_delivery');
+    });
+
     it('stays through a handover, while the delivery carrier or a provider relaying it answers without one', async () => {
       // A France-to-Finland parcel La Poste hands to Posti.
       const check = parcel({ carrier: 'la-poste', tracking_number: 'CW123456785FR' });

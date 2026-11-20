@@ -64677,6 +64677,7 @@ export interface ApiPackageRow {
   "carrier": ApiCarrierId;
   "created_at": string;
   "expected_delivery": string | null;
+  "expected_delivery_passed"?: string;
   "last_status_text": string | null;
   "last_synced_at": string | null;
   "sync_status": ApiSyncStatus;
@@ -65092,6 +65093,7 @@ export interface ApiPublicPackage {
   "carrier": ApiCarrierId;
   "created_at": string;
   "expected_delivery": string | null;
+  "expected_delivery_passed"?: string;
   "last_status_text": string | null;
   "last_synced_at": string | null;
   "sync_status": ApiSyncStatus;

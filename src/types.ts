@@ -33,6 +33,11 @@ export interface Parcel {
   expectedDelivery?: string;
   senderName?: string;
   expectedDeliveryFrom?: string;
+  /**
+   * The day the carrier last expected to deliver the parcel, once it has passed (YYYY-MM-DD): the server serves it from
+   * the day after through the seventh, while the parcel is still due (`expected_delivery_passed`, passedEstimate.ts).
+   */
+  expectedDeliveryPassed?: string;
   pickupPoint?: string;
   receiverName?: string;
   weightKg?: number;

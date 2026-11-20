@@ -41,16 +41,22 @@ export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now(
 /**
  * The day the carrier last expected the parcel, once it has passed, for the parcel's page alone to say so, muted: "Was
  * expected Tue 17 Nov". The server keeps the rule (`expectedDeliveryPassed`, passedEstimate.ts); the page shows it where
- * it shows no estimate of its own, once the day has passed on this device's clock too, and not once the parcel is archived.
- * Cards, widgets, share lines and the sort by delivery date leave it out.
+ * it shows no estimate of its own, once the day has passed on this device's clock too, for the week the server gives it (a
+ * copy kept on the device, which no check updates, keeps it no longer), and not once the parcel is archived. Cards,
+ * widgets, share lines and the sort by delivery date leave it out.
  */
 export function parcelPassedEstimate(parcel: ParcelWithEvents, now = Date.now()): Date | null {
   if (!parcel.expectedDeliveryPassed || parcel.archivedAt || parcelDeliveryEstimate(parcel, now)) return null;
   const day = estimateDay(parcel.expectedDeliveryPassed);
   const today = new Date(now);
   today.setHours(0, 0, 0, 0);
-  return day && day < today ? day : null;
+  const oldest = new Date(today);
+  oldest.setDate(oldest.getDate() - PASSED_ESTIMATE_DAYS);
+  return day && day < today && day >= oldest ? day : null;
 }
+
+/** How many days after its expected day the parcel's page still says when the parcel was expected. */
+const PASSED_ESTIMATE_DAYS = 7;
 
 /**
  * Whether a parcel out for delivery with an estimate comes today: it was sent out today, whichever day the estimate

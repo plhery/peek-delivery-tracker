@@ -215,6 +215,12 @@ describe('an expected day that passed', () => {
     saved.expectedDeliveryPassed = 'invalid';
     expect(parcelPassedEstimate(saved, now)).toBeNull();
   });
+  it('is said for a week after the day, even on a copy the device kept that no check updates', () => {
+    const saved = { ...parcel('ok', 'in_transit'), expectedDeliveryPassed: '2026-11-13' };
+    expect(parcelPassedEstimate(saved, now)).toEqual(new Date(2026, 10, 13));
+    saved.expectedDeliveryPassed = '2026-11-12';
+    expect(parcelPassedEstimate(saved, now)).toBeNull();
+  });
   it('gives way to an estimate the page shows, and goes once the parcel is archived', () => {
     const saved = { ...parcel('ok', 'in_transit'), expectedDeliveryPassed: '2026-11-17' };
     expect(parcelPassedEstimate({ ...saved, expectedDelivery: '2026-11-23' }, now)).toBeNull();

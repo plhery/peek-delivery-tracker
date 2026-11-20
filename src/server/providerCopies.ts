@@ -323,11 +323,16 @@ export function providerCopyScans(row: JsonObject): Map<string, Set<string>> {
   return copied;
 }
 
-/** The day of a scan with a time of day, on its own wall clock; null for a scan dated by its day or none. */
+/**
+ * The day of a scan with a time of day, on its own wall clock: its local time's, else that of a time its carrier gave
+ * with its own offset (Poczta Polska's); null for a scan dated by its day or none, or only in UTC.
+ */
 function timedDay(event: JsonObject): string | null {
+  const time = rawField(event, 'time').trim();
   const local = rawField(event, 'local_time');
-  return rawField(event, 'time').trim() !== '' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(local) && DateTime.fromISO(local.slice(0, 10)).isValid
-    ? local.slice(0, 10) : null;
+  const wall = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(local) ? local
+    : /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?[+-]\d{2}(?::?\d{2})?$/.test(time) ? time : '';
+  return time !== '' && wall !== '' && DateTime.fromISO(wall.slice(0, 10)).isValid ? wall.slice(0, 10) : null;
 }
 
 /** The ids of the stored rows of `row` its timeline leaves out as a universal provider's copies of its carrier's scans. */

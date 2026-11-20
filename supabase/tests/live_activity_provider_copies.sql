@@ -149,6 +149,20 @@ do $$ begin
     raise exception 'A provider''s row of a day the carrier did not scan in its stage was hidden';
   end if;
 end; $$;
+-- The day of a carrier's scan with no local time is that of a time it gave with its own offset, not of one in UTC alone.
+update public.tracking_events set occurred_at = '2026-10-08T23:30:00Z',
+  raw_data = '{"time": "2026-10-09T01:30:00+02:00"}' where id = '97000000-0000-0000-0000-000000000006';
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A provider''s row dated by the day of a scan timed with its own offset was not hidden';
+  end if;
+end; $$;
+update public.tracking_events set raw_data = '{"time": "2026-10-08T23:30:00Z"}' where id = '97000000-0000-0000-0000-000000000006';
+do $$ begin
+  if public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+    raise exception 'A provider''s row was hidden by the day a scan timed in UTC alone gives';
+  end if;
+end; $$;
 -- A provider reading the carrier's scans a zone away tells every scan of that minute on the same clock: its other
 -- rows of the minute of a copy only whole hours from the carrier's scans are copies too, in any stage.
 update public.tracking_events set occurred_at = '2026-10-08T08:40:00Z', stage = 'in_transit',

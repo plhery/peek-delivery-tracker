@@ -275,6 +275,23 @@ describe('providerCopies', () => {
     expect(providerCopies({ ...row, tracking_events: untimed }).has('u2')).toBe(false);
   });
 
+  it('reads the day of a carrier\'s scan from its own offset when it has no local time', () => {
+    // Poczta Polska gives its time with its offset; ParcelsApp gives the scans of that day their day alone.
+    const parcelsApp = (id: string, occurredAt: string, stage: string, day: string) =>
+      scan(id, 'unknown', occurredAt, { ...named, stage, description: `Step ${id}`, local_time: day });
+    const events = [
+      scan('c1', 'poczta-polska', '2026-11-09T15:25:08Z', { stage: 'accepted', time: '2026-11-09T16:25:08+01:00' }),
+      scan('c2', 'poczta-polska', '2026-11-11T01:19:19Z', { time: '2026-11-11T02:19:19+01:00' }),
+      // A time in UTC alone tells no wall clock's day: 23:30 UTC is the next day in Warsaw.
+      scan('c3', 'poczta-polska', '2026-11-12T23:30:00Z', { time: '2026-11-12T23:30:00Z' }),
+      parcelsApp('u1', '2026-11-09T00:00:00Z', 'accepted', '2026-11-09'),
+      parcelsApp('u2', '2026-11-11T00:00:00Z', 'in_transit', '2026-11-11'),
+      parcelsApp('u3', '2026-11-13T00:00:00Z', 'in_transit', '2026-11-13'),
+    ];
+    const row = { carrier_data: { routing: { confirmed_carrier: 'poczta-polska' } }, tracking_events: events };
+    expect(providerCopyScans(row)).toEqual(new Map([['u1', new Set(['c1'])], ['u2', new Set(['c2'])]]));
+  });
+
   it('leaves out a provider\'s copy whole hours from a carrier\'s scan to its second, in any stage and words', () => {
     // ParcelsApp reads a Japanese scan an hour off, as another stage, with a Chinese line added.
     const events = [

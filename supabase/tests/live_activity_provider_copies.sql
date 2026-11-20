@@ -119,6 +119,23 @@ do $$ begin
     raise exception 'A row at another time of the day a scan alone gives was hidden';
   end if;
 end; $$;
+-- Nor one beside the time the sync gave such a scan to keep the day's order: at its minute, whole hours on, or in
+-- its stage minutes away.
+do $$
+declare
+  shown record;
+begin
+  for shown in select * from (values ('2026-10-08T21:09:00Z'::timestamptz, 'registered', 'Shipping label created'),
+    ('2026-10-08T22:09:01Z', 'accepted', 'Picked up at origin'), ('2026-10-08T21:20:00Z', 'accepted', 'Picked up'))
+    as beside (at, stage, description)
+  loop
+    update public.tracking_events set occurred_at = shown.at, stage = shown.stage, description = shown.description,
+      raw_data = '{"universal_provider": "17TRACK"}' where id = '97000000-0000-0000-0000-000000000007';
+    if public.hidden_provider_copy('97000000-0000-0000-0000-000000000007') then
+      raise exception 'A % row beside the time a day-alone scan was given (%) was hidden', shown.stage, shown.at;
+    end if;
+  end loop;
+end; $$;
 -- A provider's row dated by its day alone, in a stage the carrier scanned that day with a time of day, as many times
 -- or more (ParcelsApp's copy of Japan Post's posting).
 update public.tracking_events set occurred_at = '2026-10-08T07:10:00Z', stage = 'accepted', description = 'Posted',

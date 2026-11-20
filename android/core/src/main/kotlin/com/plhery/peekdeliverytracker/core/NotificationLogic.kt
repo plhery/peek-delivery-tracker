@@ -189,11 +189,17 @@ enum class NotificationAuthorizationStatus {
 
 /** Where the device keeps its notification state. */
 object NotificationDeviceKeys {
-    /**
-     * The person turned this device's notifications off: an account's, or without one those of the parcels the phone
-     * follows itself.
-     */
+    /** The person turned an account's notifications off on this device. */
     const val OPT_OUT = "sdt.notificationsDeviceOptOut"
+
+    /**
+     * The person turned off, on the Delivery updates page without an account, the notifications of the parcels the
+     * phone follows itself: kept apart from an account's [OPT_OUT], as the iPhone keeps it.
+     */
+    const val DEVICE_ALERTS_OFF = "sdt.deviceAlertsOff.v1"
+
+    /** Set once [NotificationDevicePolicy.carryDeviceAlertsOff] has run. */
+    const val DEVICE_ALERTS_OFF_CARRIED = "sdt.deviceAlertsOffCarried.v1"
 
     /** The account that last turned them on ([NotificationDevicePolicy.belongs]). */
     const val OWNER = "sdt.notificationsOwner.v1"
@@ -268,6 +274,16 @@ object NotificationDevicePolicy {
         if (defaults.hasObject(forKey = NotificationDeviceKeys.DEMO) && !defaults.bool(forKey = NotificationDeviceKeys.DEMO)) {
             defaults.set(nobody.uuidString, forKey = NotificationDeviceKeys.OWNER)
         }
+    }
+
+    /**
+     * Once: before a guest's "off" had a key of its own, it was [NotificationDeviceKeys.OPT_OUT], which an account's
+     * "off" also wrote. Whoever turned that off keeps this phone's own parcels quiet; an account keeps its "off" as it was.
+     */
+    fun carryDeviceAlertsOff(defaults: UserDefaults) {
+        if (defaults.bool(forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF_CARRIED)) return
+        defaults.set(true, forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF_CARRIED)
+        if (defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT)) defaults.set(true, forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF)
     }
 }
 

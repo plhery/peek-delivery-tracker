@@ -3246,7 +3246,8 @@ class DeviceParcelTests {
         store.disableNotifications()
         assertEquals("unalert 22222222222A token1 fcm", calls.all.last())
         assertFalse(store.notificationsEnabledOnDevice)
-        assertTrue(defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT))
+        assertTrue(defaults.bool(forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF))
+        assertFalse("An account keeps its own choice", defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT))
         assertTrue("The phone lets its token go", push.calls.containsAll(listOf("unregister", "clear")))
         assertEquals("token1", storage.parcels.first().alertToken)
         offline = false
@@ -3273,9 +3274,38 @@ class DeviceParcelTests {
         // On again, the parcel on its way is signed up; the one muted on its page stays off.
         assertFalse("No account, no welcome notification", relaunched.enableNotifications(AppLanguage.En))
         assertTrue(relaunched.notificationsEnabledOnDevice)
-        assertFalse(defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT))
+        assertFalse(defaults.bool(forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF))
         assertEquals(listOf("alert 22222222222A k important token2 en production fcm"), calls.all.filter { it.contains("token2") })
         assertEquals(listOf(null, true), storage.parcels.map { it.muted })
+    }
+
+    /** An account's "off" on this phone is its own: without an account, the parcels followed here still announce. */
+    @Test
+    fun anAccountsOffLeavesTheParcelsFollowedWithoutOneAlone() = runTest {
+        val transport = RecordingTransport { jsonResponse(404) }
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", UUID.randomUUID()))
+        val calls = Calls()
+        val push = StubPushNotifications(status = NotificationAuthorizationStatus.Authorized, granted = true, currentDeviceToken = "token1")
+        val defaults = MemoryDefaults(
+            mutableMapOf(
+                NotificationDeviceKeys.OPT_OUT to true, NotificationDeviceKeys.OWNER to UUID.randomUUID().toString(),
+                NotificationDeviceKeys.DEVICE_ALERTS_OFF_CARRIED to true,
+            ),
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(
+            postcodeConfiguration, session, transport, backgroundScope, defaults = defaults, device = device(client(calls), storage, backgroundScope),
+            notifications = push,
+        )
+        store.setDeliveryLiveActivitiesEnabled(false)
+        store.refreshNotificationState()
+        assertTrue(store.notificationsEnabledOnDevice)
+        store.registerDeviceAlerts("token1", AppLanguage.En)
+        assertEquals(listOf("alert 22222222222A k important token1 en production fcm"), calls.all)
+        assertTrue(defaults.bool(forKey = NotificationDeviceKeys.OPT_OUT))
     }
 
     /**

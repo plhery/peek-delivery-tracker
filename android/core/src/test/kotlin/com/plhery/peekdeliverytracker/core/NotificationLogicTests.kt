@@ -209,6 +209,27 @@ class NotificationLogicTests {
     }
 
     @Test
+    fun anOffWrittenBeforeAGuestHadItsOwnKeepsThePhonesParcelsQuietOnce() {
+        val optOut = NotificationDeviceKeys.OPT_OUT
+        val off = NotificationDeviceKeys.DEVICE_ALERTS_OFF
+        val turnedOff = MemoryDefaults(mutableMapOf<String, Any>(optOut to true))
+        NotificationDevicePolicy.carryDeviceAlertsOff(turnedOff)
+        assertTrue(turnedOff.bool(forKey = off))
+        assertTrue("An account's off stays as it was", turnedOff.bool(forKey = optOut))
+        // Once: turned on again without an account, it stays on.
+        turnedOff.removeObject(forKey = off)
+        NotificationDevicePolicy.carryDeviceAlertsOff(turnedOff)
+        assertFalse(turnedOff.bool(forKey = off))
+
+        val neverOff = MemoryDefaults()
+        NotificationDevicePolicy.carryDeviceAlertsOff(neverOff)
+        assertFalse(neverOff.bool(forKey = off))
+        neverOff.set(true, forKey = optOut)
+        NotificationDevicePolicy.carryDeviceAlertsOff(neverOff)
+        assertFalse("An account's off written later is its own", neverOff.bool(forKey = off))
+    }
+
+    @Test
     fun anOffWrittenByASignOutIsTakenBackOnceAndThePersonsOwnBecomesAQuestion() {
         val optOut = NotificationDeviceKeys.OPT_OUT
         val owner = NotificationDeviceKeys.OWNER

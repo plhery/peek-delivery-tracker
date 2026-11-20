@@ -552,6 +552,7 @@ class ParcelStore(
 
     init {
         NotificationDevicePolicy.repairAccountChangeOptOut(defaults)
+        NotificationDevicePolicy.carryDeviceAlertsOff(defaults)
         deliveryWidgetStore.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
         cacheOwnerId = session.user?.id
         listReadAt = if (session.isGuest) device.lastCheckedAt else null
@@ -971,7 +972,7 @@ class ParcelStore(
      */
     suspend fun askForDeviceAlerts(language: AppLanguage) {
         if (!notifications.available || !tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay) return
-        if (defaults.bool(forKey = notificationOptOutKey)) return
+        if (deviceAlertsHeld) return
         // Never asked yet, the phone is asked only from the list's invitation (`shouldInviteNotifications`).
         if (!NotificationDevicePolicy.isAuthorized(deviceNotifications.status())) return
         deviceNotifications.register()
@@ -980,8 +981,8 @@ class ParcelStore(
 
     /** At launch, with permission given already, the phone hands the token over again and the parcels are signed up on it. Nothing is asked. */
     private suspend fun resumeDeviceAlerts() {
-        if (!notifications.available || !tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay ||
-            defaults.bool(forKey = notificationOptOutKey) || !NotificationDevicePolicy.isAuthorized(deviceNotifications.status())
+        if (!notifications.available || !tracksWithoutAccount || isDemo || !device.hasParcelsOnTheirWay || deviceAlertsHeld ||
+            !NotificationDevicePolicy.isAuthorized(deviceNotifications.status())
         ) {
             return
         }
@@ -991,12 +992,11 @@ class ParcelStore(
     /**
      * Signs the device's own parcels up for notifications on this token, in this language, with the preset chosen for
      * every parcel ([deviceAlertPresetFlow]). Signed in, these are the parcels the account could not take over; the
-     * account's own registration stays as it is. Nothing is signed up while this phone's notifications are turned off,
-     * the account's or, without one, on the Delivery updates page.
+     * account's own registration stays as it is. Nothing is signed up while they are turned off ([deviceAlertsHeld]).
      */
     suspend fun registerDeviceAlerts(token: String, language: AppLanguage): Boolean {
         if (!tracksWithoutAccount || isDemo) return true
-        if (defaults.bool(forKey = notificationOptOutKey)) return true
+        if (deviceAlertsHeld) return true
         val locale = NativePushLocale(language)
         val preset = deviceAlertPresetState.value
         device.registerAlerts(token, locale, preset)
@@ -1005,17 +1005,30 @@ class ParcelStore(
 
     /**
      * Signs the device's parcels up again after a round cut short by an outage or a pause, on the conditions of the
-     * first. Without an account and with notifications turned off, it tells the service again about the links it could
-     * not tell then ([DeviceParcels.alertsOff]).
+     * first. Turned off on the Delivery updates page without an account, it tells the service again about the links it
+     * could not tell then ([DeviceParcels.alertsOff]), signed in since or not.
      */
     private suspend fun retryDeviceAlerts() {
         if (!tracksWithoutAccount || isDemo) return
-        if (defaults.bool(forKey = notificationOptOutKey)) {
-            if (isGuest) device.alertsOff()
+        if (deviceAlertsOff) {
+            device.alertsOff()
             return
         }
+        if (deviceAlertsHeld) return
         device.retryAlerts(deviceAlertPresetState.value)
     }
+
+    /** The person turned off, on the Delivery updates page without an account, the notifications of this phone's parcels. */
+    val deviceAlertsOff: Boolean
+        get() = defaults.bool(forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF)
+
+    /** No parcel this phone follows itself is signed up: turned off without an account, or by the account signed in. */
+    private val deviceAlertsHeld: Boolean
+        get() = deviceAlertsOff || (session.user != null && defaults.bool(forKey = notificationOptOutKey))
+
+    /** The "off" that applies: a guest's, for the parcels followed without an account, or the account's. */
+    private val notificationsOptedOut: Boolean
+        get() = if (isGuest) deviceAlertsOff else defaults.bool(forKey = notificationOptOutKey)
 
     /**
      * Chooses what every parcel this phone follows itself tells, from the Delivery updates page without an account: the
@@ -1453,7 +1466,7 @@ class ParcelStore(
         if (!stillCurrent(generation)) return
         // Every foreground checks this; publish only what changed.
         if (notificationStatus != status) notificationStatus = status
-        val optedOut = defaults.bool(forKey = notificationOptOutKey)
+        val optedOut = notificationsOptedOut
         // Without an account nothing registers the phone itself: its token signs each parcel up as it comes.
         val enabled = if (isGuest) {
             NotificationDevicePolicy.isEnabledWithoutAccount(notificationStatus, optedOut)
@@ -1491,8 +1504,8 @@ class ParcelStore(
                 }
                 if (isGuest) {
                     // No account to register: the phone's token signs each parcel on its way up, as it comes. A switch
-                    // turned off before is on again; a parcel muted on its page stays so.
-                    defaults.set(false, forKey = notificationOptOutKey)
+                    // turned off before is on again, an account's own "off" as it was; a parcel muted on its page stays so.
+                    defaults.removeObject(forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF)
                     notificationsEnabledOnDevice = true
                     dismissNotificationInvitation()
                     deviceNotifications.register()
@@ -1535,7 +1548,8 @@ class ParcelStore(
         if (isGuest) {
             // No account to tell: each link signed up here hears nothing more on this phone, the choice is kept so that
             // no round, launch or invitation signs one up again until the switch is on, and the phone lets its token go.
-            defaults.set(true, forKey = notificationOptOutKey)
+            // An account signed in later keeps its own choice.
+            defaults.set(true, forKey = NotificationDeviceKeys.DEVICE_ALERTS_OFF)
             notificationsEnabledOnDevice = false
             device.alertsOff()
             notifications.unregisterForRemoteNotifications()
@@ -1566,7 +1580,7 @@ class ParcelStore(
             if (!notifications.available || loading || errorMessage != null || authenticationRequired) return false
             if (isGuest) {
                 return notificationStateLoaded && notificationStatus == NotificationAuthorizationStatus.NotDetermined &&
-                    !notificationInvitationDismissed && !defaults.bool(forKey = notificationOptOutKey) && device.hasParcelsOnTheirWay
+                    !notificationInvitationDismissed && !deviceAlertsOff && device.hasParcelsOnTheirWay
             }
             return NotificationInvitationPolicy.shouldPresent(
                 isAuthenticated = session.isAuthenticated,

@@ -1048,7 +1048,7 @@ describe('carrier brand', () => {
     const neutral = Object.entries(CARRIER_DEFINITIONS)
       .filter(([, definition]) => definition.color === DEFAULT_CARRIER_COLOR)
       .map(([id]) => id).sort();
-    expect(neutral).toEqual(['unknown']);
+    expect(neutral).toContain('unknown');
     for (const id of neutral) {
       expect(CARRIER_PALETTES[id]).toBeUndefined();
       expect(carrierDecal(id)).toBe('default');

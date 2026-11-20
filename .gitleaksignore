@@ -45,3 +45,7 @@ a3e648c740d12fc7b33813d0a6386654ce59f146:scripts/indexnow.mjs:generic-api-key:20
 7268bfd79b4c935fe1bcaa8821b596d01e70e482:supabase/tests/amazon_order_links.sql:generic-api-key:10
 7268bfd79b4c935fe1bcaa8821b596d01e70e482:supabase/tests/amazon_order_links.sql:generic-api-key:11
 7268bfd79b4c935fe1bcaa8821b596d01e70e482:supabase/tests/amazon_order_links.sql:generic-api-key:67
+
+# The defaults key that holds a push token to take off, named in the test of a forced sign-out: a key's name, no secret.
+85e182c336a69c9fb231190217361570c7a33be5:ios/PeekDeliveryTrackerTests/ParcelLogicTests.swift:generic-api-key:4930
+85e182c336a69c9fb231190217361570c7a33be5:ios/PeekDeliveryTrackerTests/ParcelLogicTests.swift:generic-api-key:4947

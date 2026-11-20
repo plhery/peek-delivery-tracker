@@ -4927,7 +4927,7 @@ extension SessionIsolationTests {
         calls = []
         session.forceSignOut()
         XCTAssertEqual(calls, [])
-        XCTAssertEqual(UserDefaults.standard.string(forKey: "sdt.notificationsRevocationPending.v1"), "synthetic-token")
+        XCTAssertEqual(UserDefaults.standard.string(forKey: NotificationDeviceKeys.revocation), "synthetic-token")
 
         // The next account takes it over and off before the device registers with Apple again.
         try await authorize(session)
@@ -4944,7 +4944,7 @@ extension SessionIsolationTests {
         calls = []
         try await store.signOut()
         XCTAssertEqual(calls, ["DELETE owner"])
-        XCTAssertNil(UserDefaults.standard.string(forKey: "sdt.notificationsRevocationPending.v1"))
+        XCTAssertNil(UserDefaults.standard.string(forKey: NotificationDeviceKeys.revocation))
     }
 
     @MainActor func testFailedAccountDeletionKeepsWatchingTheNextChecks() async throws {

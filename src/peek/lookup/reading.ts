@@ -35,6 +35,14 @@ export interface Reading {
 export type OrderShop = 'amazon' | 'mercadolibre' | 'shein' | 'shopee' | 'temu';
 
 const LINK = /https?:\/\/[^\s<>"']+/gi;
+/**
+ * A percent escape, as a link encoded inside another link prints its "=" ("%3D") or "/" ("%2F"). The two characters
+ * after the "%" are no part of the number that follows: "%3D" before nine digits reads as WeDo's digit, letter and
+ * nine digits.
+ */
+const PERCENT_ESCAPE = /%[0-9A-F]{2}/gi;
+/** Whether a number read out of a link's own text stands in it once its percent escapes are set apart. */
+const standsInLink = (link: string, number: string) => link.replace(PERCENT_ESCAPE, ' ').toUpperCase().includes(number.toUpperCase());
 /** Each shop's order number, tried in turn and read without regard to case. The iPhone reads the same file. */
 const ORDER_NUMBERS = rules.shops.map(({ shop, pattern }) => ({ shop: shop as OrderShop, pattern: new RegExp(pattern, 'i') }));
 
@@ -196,7 +204,9 @@ const CANDIDATE_PATTERNS = TRACKING_CANDIDATE_PATTERNS.map((pattern) => new RegE
  * never run together. A link or a candidate met again reads as it did the
  * first time, so each is read once: detection reads a candidate in capitals.
  * A candidate holds a digit: some carriers' shapes also fit a word,
- * "additional" for one, and a word in a message is not a number.
+ * "additional" for one, and a word in a message is not a number. A percent
+ * escape is no part of a number, in a link the parser read as text or in the
+ * rest of one an email's text wrapped onto the next line.
  */
 export function numbersInText(text: string): NumberInText[] {
   const found = new Map<string, NumberInText>();
@@ -220,9 +230,9 @@ export function numbersInText(text: string): NumberInText[] {
       if (links.has(link) || links.size >= MOST_LINKS_READ) continue;
       links.add(link);
       const match = parseTrackingInput(link);
-      if (match.trackingNumber) keep(match);
+      if (match.trackingNumber && (match.source === 'link' || standsInLink(link, match.trackingNumber))) keep(match);
     }
-    const prose = line.replace(SHIPPING_DATE, ' ').replace(LINK, ' ');
+    const prose = line.replace(SHIPPING_DATE, ' ').replace(LINK, ' ').replace(PERCENT_ESCAPE, ' ');
     const candidates: { index: number; end: number; text: string; detection: CarrierDetection }[] = [];
     for (const pattern of CANDIDATE_PATTERNS) {
       for (const hit of prose.matchAll(pattern)) {

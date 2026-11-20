@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { carrierNumberInText, checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, readText, shopName } from './reading';
+import { carrierNumberInText, checkDigitTrouble, isContainerNumber, labelledNumbersInText, looksLikeNumber, nonTrackingNote, nonTrackingShape, numbersInText, readText, shopName } from './reading';
 import type { Translate } from '../../lib/messages';
 import { isPickupCode, normalizeTrackingNumber } from '../../lib/carriers';
 import rules from '../../../shared/reading.json';
@@ -44,6 +44,18 @@ describe('reading the field', () => {
     // The PRO printed with its dash before the check digit is R+L's in a text too.
     expect(labelledNumbersInText('Tracking number: AB123456-7').map(({ normalized, match }) => [normalized, match.candidates]))
       .toEqual([['AB1234567', ['rl-carriers']]]);
+  });
+
+  it('reads no number out of a percent escape in a link, and the numbers an encoded link holds', () => {
+    const read = (text: string) => numbersInText(text).map(({ normalized, match }) => [normalized, match.carrier]);
+    // A shop's help link inside its redirect: "%3D" then a nine-digit page id fits WeDo's digit, letter and nine digits.
+    const help = 'https://shop.example/r?C=2AB3C&U=https%3A%2F%2Fshop.example%2Fhelp%3Fie%3DUTF8%26nodeId%3D201234567%26qid%3D1763600000';
+    expect(read(`Read our help page\n${help}\nThank you`)).toEqual([]);
+    // The rest of such a link wrapped onto a line of its own.
+    expect(read('See help\nhttps://shop.example/r?U=https%3A%2F%2Fshop.example%2Fhelp\n%26nodeId%3D201234567%26qid\n')).toEqual([]);
+    // A number an encoded link names stays the link's.
+    expect(read('Track it\nhttps://shop.example/r?U=https%3A%2F%2Fshop.example%2Ftrack%3Fid%3D1ZDEMO202600000001')).toEqual([['1ZDEMO202600000001', 'ups']]);
+    expect(read('Your parcel 1ZDEMO202600000001, 100% on time')).toEqual([['1ZDEMO202600000001', 'ups']]);
   });
 
   it('lists the numbers a label calls tracking numbers though their shape proves no carrier', () => {

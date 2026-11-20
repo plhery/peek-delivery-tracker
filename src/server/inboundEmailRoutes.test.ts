@@ -212,6 +212,18 @@ describe('emails in the shapes readers forward', () => {
     expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
   });
 
+  it('adds nothing from a shop\'s note on a price that fell, whose encoded help links hold page ids after "%3D"', async () => {
+    const db = account();
+    const help = 'https://www.example-market.com/r?C=2AB3C&U=https%3A%2F%2Fwww.example-market.com%2Fhelp%3Fie%3DUTF8%26nodeId%3D201234567%26qid%3D1763600000';
+    await posted(mail('Example Market <store-news@example-market.com>', 'Good news: you saved on your pre-order', [
+      'The price of an item you pre-ordered went down, and we charged you the lower price.',
+      'You can follow this order and all your orders in your account. More on the price guarantee in our help pages.',
+      help,
+    ].join('\n')));
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.record).toHaveBeenCalledWith(userId, 'none', 0, null, 'Example Market');
+  });
+
   it('adds a Colissimo number after its label, named after the shop without its trademark sign or capitals', async () => {
     const db = account();
     await posted(mail('"EXEMPLE BOUTIQUE®" <contact@exemple-boutique.fr>', 'Votre commande est en route', [

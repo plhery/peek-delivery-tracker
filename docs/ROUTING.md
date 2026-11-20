@@ -1047,9 +1047,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the earlier carrier that names no place, dated to the second (off a minute's first second, or
   with milliseconds), one to three whole hours to the second from a row of the new carrier, in
   any stage, is that row on another clock (CTT Express tells CTT's scans an hour early), and is
-  served with `relay_of` its id after every other pairing. So is such a row that names a place
-  when it tells that row's words in its stage from a place that does not conflict (WanB Express
-  tells J&T Australia's scans two hours early, placed in the state). A universal provider's row in a carrier's
+  served with `relay_of` its id after every other pairing. So is such a row, placed or not, up to
+  14 whole hours away, when it tells that row's words in its stage from a place that does not
+  conflict (WanB Express tells J&T Australia's scans two hours early, placed in the state; DHLink
+  reads GOFO's US scans on Beijing's clock). A universal provider's row in a carrier's
   row's instant, stage, words and place (the one China Post's earlier answer took over, beside China
   Post's own) goes under that row before any pairing, and that row pairs for both. The earlier carrier may tell the new
   carrier's one scan of a minute as several rows at one instant (DHL tells La Poste's platform scan as its arrival in the

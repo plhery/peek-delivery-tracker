@@ -371,6 +371,18 @@ describe('relayCopies', () => {
       told('missed-early', 'wanbexpress', 'failed_attempt', '2026-11-18T18:12:28Z', 'Delivery attempted, address unclear', 'VIC, AU'),
       told('missed', 'j-and-t-au', 'failed_attempt', '2026-11-18T20:12:28Z', 'Delivery attempted: address unclear'),
     ]))).toEqual(new Map([['round-early', 'round'], ['missed-early', 'missed']]));
+    // Up to 14 hours, placed or not: DHLink reads GOFO's US scans on Beijing's clock.
+    expect(relayCopies(parcel([
+      told('sorted-early', 'wanbexpress', 'in_transit', '2026-11-16T01:20:05Z', 'Sorted at facility', 'Los Angeles, CA, US'),
+      told('sorted', 'j-and-t-au', 'in_transit', '2026-11-16T15:20:05Z', 'Sorted at facility', 'Los Angeles, CA, US'),
+      told('loaded-early', 'wanbexpress', 'in_transit', '2026-11-16T03:40:07Z', 'Loaded'),
+      told('loaded', 'j-and-t-au', 'in_transit', '2026-11-16T16:40:07Z', 'Loaded'),
+      // Past 14 hours, or in other words, two scans.
+      told('late', 'wanbexpress', 'in_transit', '2026-11-17T01:20:09Z', 'Departed'),
+      told('late-scan', 'j-and-t-au', 'in_transit', '2026-11-17T16:20:09Z', 'Departed'),
+      told('other', 'wanbexpress', 'in_transit', '2026-11-18T01:20:09Z', 'Arrived'),
+      told('other-scan', 'j-and-t-au', 'in_transit', '2026-11-18T08:20:09Z', 'Departed'),
+    ]))).toEqual(new Map([['sorted-early', 'sorted'], ['loaded-early', 'loaded']]));
     // Other words, another stage, a place that conflicts, a second off, or on a minute's first second: two scans.
     expect(relayCopies(parcel([
       told('words', 'wanbexpress', 'in_transit', '2026-11-16T10:00:05Z', 'Arrived at the depot', 'VIC, AU'),

@@ -44,9 +44,10 @@
  * CTT's scans an hour early). Its row that names no place, dated to the second
  * (off a minute's first second, or with milliseconds), one to three whole hours
  * to the second from the new carrier's row, in any stage, goes under that row.
- * So does such a row that names a place, when it tells the new carrier's words
- * in its stage from a place that does not conflict (WanB Express tells J&T
- * Australia's scans two hours early, placed in the state).
+ * So does such a row, placed or not, up to 14 whole hours away, when it tells
+ * the new carrier's words in its stage from a place that does not conflict
+ * (WanB Express tells J&T Australia's scans two hours early, placed in the
+ * state; DHLink reads GOFO's US scans on Beijing's clock).
  *
  * The earlier carrier also publishes some of its own scans late, after the
  * new carrier's later ones are stored (trackingSync.ts asks it again for a day
@@ -73,6 +74,8 @@ const RELAY_WINDOW_MS = 60_000;
 const EXCHANGE_WINDOW_MS = 3 * 60 * 60_000;
 /** The earlier carrier tells the new one's scan on another clock up to this many whole hours away. */
 const TWIN_HOURS = 3;
+/** In the new carrier's words and stage, as far as any zone can put a clock read a zone away (UTC−12 to UTC+14). */
+const WORDED_TWIN_HOURS = 14;
 const SECOND_MS = 1000;
 const MINUTE_MS = 60_000;
 const HOUR_MS = 60 * MINUTE_MS;
@@ -111,10 +114,10 @@ function relayGap(at: number, other: number): number {
   return exact < minute ? minute - exact : Math.max(0, exact - (minute + MINUTE_MS - 1));
 }
 
-/** Whether two times lie one to `TWIN_HOURS` whole hours apart, to the second. */
-function twinHours(at: number, other: number): boolean {
+/** Whether two times lie one to `hours` whole hours apart, to the second. */
+function twinHours(at: number, other: number, hours = TWIN_HOURS): boolean {
   const gap = Math.abs(Math.floor(at / SECOND_MS) - Math.floor(other / SECOND_MS)) * SECOND_MS;
-  return gap >= HOUR_MS && gap <= TWIN_HOURS * HOUR_MS && gap % HOUR_MS === 0;
+  return gap >= HOUR_MS && gap <= hours * HOUR_MS && gap % HOUR_MS === 0;
 }
 
 /** The countries a carrier delivers in under its own name. */
@@ -246,8 +249,9 @@ export function relayCopies(row: JsonObject): Map<string, string> {
       ? [{ copy, scan, gap: copy.at - scan.at }] : [];
   });
   const twins = scans.filter((copy) => copy.source === earlier && copy.at % MINUTE_MS !== 0)
-    .flatMap((copy) => scans.filter((scan) => scan.source === current && twinHours(copy.at, scan.at)
-      && (!copy.placed || (copy.stage === scan.stage && told(copy.text) !== '' && told(copy.text) === told(scan.text)
+    .flatMap((copy) => scans.filter((scan) => scan.source === current
+      && ((!copy.placed && twinHours(copy.at, scan.at)) || (twinHours(copy.at, scan.at, WORDED_TWIN_HOURS)
+        && copy.stage === scan.stage && told(copy.text) !== '' && told(copy.text) === told(scan.text)
         && !placesConflict(copy.words, scan.words))))
       .map((scan) => ({ copy, scan, gap: Math.abs(scan.at - copy.at) })));
   const paired = new Set<string>();

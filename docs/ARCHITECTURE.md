@@ -328,7 +328,9 @@ Key server modules:
     that choice, so nothing signs a link up again until it is turned back on. Browsers and
     phones share the same ten. A browser or
     phone that an account's notifications reach is passed over when that account has the
-    parcel too, the owner's or one a viewer kept, so it hears each update once.
+    parcel too, the owner's or one a viewer kept, so it hears each update once. A viewer's
+    copy counts only when it can tell the update: of the shared parcel's carrier, with the
+    postcode and phone digits the shared parcel has.
   - On an iPhone outside the Home Screen, "Notify me" offers the app first once the App
     Store's version follows links (`APP_FOLLOWS_LINKS_FROM` in `appStoreRelease.ts`, checked
     hourly against the App Store). Its "Open" leads through a legacy host, since Safari opens

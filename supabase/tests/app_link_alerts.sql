@@ -202,4 +202,45 @@ begin
   end if;
 end;
 $$;
+
+-- Only an account parcel that can tell the update takes the link's alert: one of the shared parcel's carrier, with
+-- the postcode its number needs.
+do $$
+declare
+  viewer constant uuid := 'd3000000-0000-4000-8000-000000000002';
+  browser constant text := 'https://fcm.googleapis.com/fcm/send/app-alert-tracking-copy';
+  made jsonb;
+  target_link text;
+  new_event uuid;
+  copy uuid;
+begin
+  made := public.create_one_off_parcel('48151623', 'mondial-relay', null, '75011', repeat('d', 64), null, 'FR');
+  target_link := made#>>'{link,id}';
+  if public.add_parcel_link_alert(target_link, null, browser, 'k', 'a', 'en', 'all') <> 'added' then
+    raise exception 'A viewer''s browser could not turn an alert on for a parcel with a postcode';
+  end if;
+  update public.parcel_link_alerts set created_at = now() - interval '1 hour' where link_id = target_link;
+  insert into public.push_subscriptions (user_id, endpoint, p256dh, auth) values (viewer, browser, 'k', 'a');
+  insert into public.tracking_events (package_id, provider_event_id, stage, description, occurred_at)
+  values ((made#>>'{package,id}')::uuid, 'test:tracking-copy', 'out_for_delivery', 'Synthetic scan', now())
+  returning id into new_event;
+  -- An old parcel of another carrier that used the number tells nothing.
+  insert into public.packages (user_id, tracking_number, carrier, current_stage)
+  values (viewer, '48151623', 'dpd', 'delivered') returning id into copy;
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from false then
+    raise exception 'The link''s alert stands aside for a parcel of another carrier with the same number';
+  end if;
+  delete from public.packages where id = copy;
+  -- Nor does a copy without the postcode the shared parcel's number needs.
+  insert into public.packages (user_id, tracking_number, carrier, current_stage)
+  values (viewer, '48151623', 'mondial-relay', 'in_transit') returning id into copy;
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from false then
+    raise exception 'The link''s alert stands aside for a copy without the shared parcel''s postcode';
+  end if;
+  update public.packages set dpd_postcode = '75011' where id = copy;
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from true then
+    raise exception 'A browser that gets the notifications of an account with a tracking copy is told twice';
+  end if;
+end;
+$$;
 rollback;

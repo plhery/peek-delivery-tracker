@@ -65,7 +65,7 @@ class PlayIntegrityTokensTests {
 
     @Test
     fun aThirdTransientFailureRegistersWithoutAToken() = runTest {
-        val api = Api(Unit, -12, -8, -18)
+        val api = Api(Unit, -12, -9, -18)
         val tokens = tokens(api)
         assertNull(tokens.token(123, "hash"))
         // Not a phone without Play: the next registration asks again.
@@ -86,13 +86,15 @@ class PlayIntegrityTokensTests {
 
     @Test
     fun aPhoneWithoutPlayIsNotAskedAgainInThisProcess() = runTest {
-        for (code in listOf(-1, -2, -5, -6, -7, -9, -14, -15)) {
+        for (code in listOf(-1, -2, -5, -6, -7, -14, -15)) {
             val api = Api(Unit, code)
             val tokens = tokens(api)
             assertNull(tokens.token(123, "hash"))
             assertNull(tokens.token(123, "hash"))
             assertFalse(tokens.prepare(123))
             assertEquals("code $code", 2, api.calls.size)
+            // An outdated Play Store or Play services is updated by Play: only a phone without Play stays so.
+            assertEquals("code $code", code !in listOf(-14, -15), tokens.unavailable)
         }
         // A prepare that finds no Play counts the same.
         val api = Api(-6)

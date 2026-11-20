@@ -29,8 +29,9 @@ class PlayIntegrityError(val code: Int) : Exception("Play Integrity error $code"
  *
  * One for the process. The provider is readied at launch, ahead of the registration's challenge, and kept; at most 5 are
  * readied a minute. A transient failure is asked again after 5 s, then 10 s; an invalid provider is replaced once. A
- * phone without Play (`API_NOT_AVAILABLE` and the like: a de-Googled phone, a sideload) isn't asked again, and a
- * configuration or client bug (an invalid project, a request hash too long) is [report]ed.
+ * phone without Play (`API_NOT_AVAILABLE` and the like: a de-Googled phone, a sideload) isn't asked again, an outdated
+ * Play Store or Play services isn't asked again until the next launch, which finds them updated, and a configuration or
+ * client bug (an invalid project, a request hash too long) is [report]ed.
  */
 class PlayIntegrityTokens(
     private val api: StandardIntegrity,
@@ -41,6 +42,9 @@ class PlayIntegrityTokens(
     private val lock = Mutex()
     private var prepared: Long? = null
     @Volatile private var gone = false
+    @Volatile private var outdated = false
+
+    /** No Play on this phone, which no later launch changes. */
     val unavailable: Boolean get() = gone
     private val prepares = ArrayDeque<Long>()
 
@@ -87,7 +91,7 @@ class PlayIntegrityTokens(
 
     /** Whether a provider for [project] is ready, readying one where it isn't (or where [fresh] asks for a new one). */
     private suspend fun ready(project: Long, fresh: Boolean): Boolean {
-        if (gone) return false
+        if (gone || outdated) return false
         if (prepared == project && !fresh) return true
         val at = now()
         while (prepares.isNotEmpty() && at - prepares.first() >= 60_000) prepares.removeFirst()
@@ -103,17 +107,21 @@ class PlayIntegrityTokens(
         if (error is CancellationException) throw error
         val code = (error as? PlayIntegrityError)?.code ?: return
         if (code in NO_PLAY) gone = true
+        if (code in OUTDATED) outdated = true
         if (code in BUGS) report(code)
     }
 
     companion object {
-        /** Network, too many requests, Google's servers, a transient client error, an internal error. */
-        val RETRIED = setOf(-3, -8, -12, -18, -100)
+        /** Network, too many requests, Play services unbound, Google's servers, a transient client error, an internal error. */
+        val RETRIED = setOf(-3, -8, -9, -12, -18, -100)
 
         const val PROVIDER_INVALID = -19
 
-        /** No Play here: no API, no Play Store, not installed by it, no Play services, a UID mismatch, no binding, outdated. */
-        val NO_PLAY = setOf(-1, -2, -5, -6, -7, -9, -14, -15)
+        /** No Play here: no API, no Play Store, not installed by it, no Play services, a UID mismatch. */
+        val NO_PLAY = setOf(-1, -2, -5, -6, -7)
+
+        /** The Play Store or Play services is too old, which Play updates on its own. */
+        val OUTDATED = setOf(-14, -15)
 
         /** The Cloud project number is invalid; the request hash is too long. */
         val BUGS = setOf(-16, -17)

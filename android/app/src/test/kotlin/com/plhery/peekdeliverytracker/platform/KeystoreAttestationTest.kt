@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.DeviceAttestation
 import com.plhery.peekdeliverytracker.core.KeyAttestation
 import com.plhery.peekdeliverytracker.core.NativeVerificationFailed
+import com.plhery.peekdeliverytracker.core.PlayIntegrityError
 import com.plhery.peekdeliverytracker.core.PlayIntegrityTokens
 import com.plhery.peekdeliverytracker.core.StandardIntegrity
 import com.plhery.peekdeliverytracker.ui.deliveries.MemoryDefaults
@@ -204,6 +205,21 @@ class KeystoreAttestationTest {
         val restored = attestation(keys, tokens = PlayIntegrityTokens(Integrity()))
         assertTrue(restored.supported())
         assertEquals("synthetic.integrity-token", restored.attest(restored.generateKey(), hash, 123L).playIntegrity)
+    }
+
+    @Test
+    fun anOutdatedPlayLeavesNativeVerificationAvailableOnTheNextLaunchAndNoPlayStopsIt() = runBlocking {
+        for ((code, kept) in listOf(-14 to true, -15 to true, -1 to false)) {
+            defaults.removeObject(KeystoreAttestation.STOPPED_SYSTEM)
+            val failing = object : StandardIntegrity {
+                override suspend fun prepare(projectNumber: Long) = throw PlayIntegrityError(code)
+                override suspend fun request(requestHash: String): String = "unused"
+            }
+            val keys = Keys(chain("software-attestation"))
+            val attempt = attestation(keys, tokens = PlayIntegrityTokens(failing))
+            assertTrue(runCatching { attempt.attest(attempt.generateKey(), hash, 123L) }.isFailure)
+            assertEquals("code $code", kept, attestation(keys, tokens = PlayIntegrityTokens(Integrity())).supported())
+        }
     }
 
     @Test

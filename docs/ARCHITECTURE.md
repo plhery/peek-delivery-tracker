@@ -319,9 +319,9 @@ Key server modules:
   - The iPhone app follows a link without an account and holds its alert with its APNs
     device token in place of a browser's subscription (`/api/public/parcels/{id}/app-alerts`),
     the Android app with its FCM token, or its installation token with a UnifiedPush
-    endpoint and keys or for its inbox. The Android app's bell on a parcel's page turns that
+    endpoint and keys or for its inbox. In both apps the bell on a parcel's page turns that
     link's alert off and passes over the parcel until it is turned on again. Without an
-    account, its Delivery updates page keeps one preset on the phone for every link, and asks
+    account, their Notifications page keeps one preset on the phone for every link, and asks
     again with it for those already on; its switch turns every link's alert off and keeps
     that choice, so nothing signs a link up again until it is turned back on. Browsers and
     phones share the same ten. A browser or

@@ -109,6 +109,8 @@ struct NotificationSettingsView: View {
     @State private var emailChoice: Bool?
     @State private var emailFailed = false
     @State private var showingEmailExample = false
+    /// Without an account, the delivery email is a sign-in away, over this page.
+    @State private var unlock: UnlockReason?
 
     var embedded = false
 
@@ -157,7 +159,8 @@ struct NotificationSettingsView: View {
                     }
                     .padding(15)
                 }
-                if store.notificationPreferences != nil {
+                // Without an account, the preset is the iPhone's own, for every parcel it follows.
+                if store.notificationPreferences != nil || store.isGuest {
                     SettingsGroup(title: localizer.text("notifications.preferencesTitle")) {
                         ForEach(NotificationPreset.allCases) { option in
                             if option != NotificationPreset.allCases.first { settingsDivider }
@@ -178,6 +181,12 @@ struct NotificationSettingsView: View {
                             .buttonStyle(.plain)
                             .accessibilityAddTraits(draft.preset == option ? .isSelected : [])
                         }
+                    }
+                    if store.isGuest {
+                        Text(localizer.text("alerts.all.body")).font(.caption).foregroundStyle(Brand.secondaryText)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, -15)
+                            .accessibilityIdentifier("settings.deliveryUpdates.everyParcel")
                     }
                     Button { savePreferences() } label: {
                         HStack {
@@ -210,6 +219,15 @@ struct NotificationSettingsView: View {
                             showingEmailExample = true
                         }
                     )
+                } else if store.isGuest {
+                    SettingsGroup(title: localizer.text("email.section")) {
+                        Button { unlock = .email } label: {
+                            SettingsRow(title: localizer.text("alerts.email.title"), symbol: "envelope",
+                                        detail: localizer.text("alerts.email.body"), chevron: true)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("settings.deliveryEmail.signIn")
+                    }
                 }
                 Text(localizer.text("notifications.schedule")).font(.caption).foregroundStyle(Brand.secondaryText)
             }
@@ -232,6 +250,7 @@ struct NotificationSettingsView: View {
         .sheet(isPresented: $showingEmailExample) {
             if let emailExampleURL { SafariPage(url: emailExampleURL).ignoresSafeArea() }
         }
+        .unlockSheet($unlock)
         .task {
             // What is already loaded shows at once; a change the reload brings follows below.
             hydrate()
@@ -261,11 +280,23 @@ struct NotificationSettingsView: View {
     }
 
     private func hydrate() {
+        if store.isGuest {
+            draft.preset = .withoutAccount(store.deviceAlertPreset)
+            return
+        }
         guard let preferences = store.notificationPreferences else { return }
         draft = NotificationPreferencesDraft(preferences: preferences)
     }
 
     private func savePreferences() {
+        if store.isGuest {
+            let chosen = draft.preset.alertPreset
+            run {
+                await store.saveDeviceAlertPreset(chosen)
+                notice = localizer.text("notifications.saved")
+            }
+            return
+        }
         let value = draft.preferences(timezone: TimeZone.current.identifier)
         run {
             try await store.saveNotificationPreferences(value)
@@ -467,11 +498,11 @@ struct AccountView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     profile
-                    // Alerts and Live Activities are kept up to date by pushes, which need an account. Without one, the
-                    // group shows only when the server offers a forwarding address.
-                    if !store.isGuest || addByEmail.offer != nil || assistants.offer != nil {
+                    // Live Activities are kept up to date by pushes to an account. Notifications reach the parcels
+                    // followed without one too, where there is a service to send them.
+                    if hasNotifications || addByEmail.offer != nil || assistants.offer != nil {
                         SettingsGroup(title: localizer.text("native.deliveries")) {
-                            if !store.isGuest {
+                            if hasNotifications {
                                 NavigationLink {
                                     NotificationSettingsView(embedded: true)
                                 } label: {
@@ -481,7 +512,7 @@ struct AccountView: View {
                             }
                             // Only once the server offers the account a forwarding address.
                             if addByEmail.offer != nil {
-                                if !store.isGuest { settingsDivider }
+                                if hasNotifications { settingsDivider }
                                 NavigationLink {
                                     AddByEmailPage(model: addByEmail, email: session.user?.email)
                                 } label: {
@@ -493,7 +524,7 @@ struct AccountView: View {
                             }
                             // Only once the server says assistants may connect to the account.
                             if assistants.offer != nil {
-                                if !store.isGuest || addByEmail.offer != nil { settingsDivider }
+                                if hasNotifications || addByEmail.offer != nil { settingsDivider }
                                 NavigationLink {
                                     AssistantsPage(model: assistants)
                                 } label: {
@@ -620,9 +651,13 @@ struct AccountView: View {
 
     private var notificationSummary: String {
         guard store.notificationsEnabledOnDevice else { return localizer.text("settings.off") }
+        if store.isGuest { return localizer.text(NotificationPreset.withoutAccount(store.deviceAlertPreset).titleKey) }
         guard let preferences = store.notificationPreferences else { return "" }
         return localizer.text(NotificationPreset.matching(preferences.enabledStages).titleKey)
     }
+
+    /// An account's notifications, or those of the parcels followed without one where a service sends them.
+    private var hasNotifications: Bool { !store.isGuest || store.tracksWithoutAccount }
 
     /// Nobody signed in gets the way to an account. On a Mac, Settings opens before anyone has.
     @ViewBuilder private var profile: some View {
@@ -1163,8 +1198,8 @@ struct SettingsWindow: View {
             Tab(localizer.text("settings.general"), systemImage: "gearshape") {
                 GeneralSettings()
             }
-            // Notifications come as pushes to an account, or the demo's.
-            if session.isAuthenticated {
+            // Notifications come as pushes to an account, the demo's, or the parcels followed without one.
+            if session.isAuthenticated || (store.isGuest && store.tracksWithoutAccount) {
                 Tab(localizer.text("settings.deliveryUpdates"), systemImage: "bell.badge") {
                     NotificationSettingsView(embedded: true).frame(height: 540)
                 }

@@ -270,6 +270,7 @@
   "unlock.several": "Accedi, e Peek segue insieme tutti i numeri di questo testo.",
   "unlock.daily": "Con l’accesso continui, a partire dal pacco che hai appena scritto.",
   "unlock.friends": "Accedi, e condividi francobolli e traguardi delle consegne con i tuoi amici.",
+  "unlock.email": "Accedi, e Peek ti scrive un’e-mail quando arriva un pacco.",
   "unlock.comes": "I pacchi su questo dispositivo possono venire con te, con i loro nomi.",
   "unlock.later": "Non ora",
   "door.several.title.few": "{{count}} numeri di tracciamento in questo testo",

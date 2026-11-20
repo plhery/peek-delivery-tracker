@@ -17,7 +17,8 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     var viewer: Bool? = nil
     /// Whether an account may keep the parcel behind someone else's link, as the link last said.
     var canKeep: Bool? = nil
-    /// What its notifications on this iPhone tell, chosen when they were first turned on.
+    /// What its notifications on this iPhone tell, as last asked for: the preset chosen for every parcel in Settings, or
+    /// while none is, the one picked when they were first turned on.
     var alertPreset: ParcelAlertPreset? = nil
     /// The device token the service last answered about for this parcel's notifications.
     var alertToken: String? = nil
@@ -31,8 +32,12 @@ struct DeviceParcel: Codable, Equatable, Sendable {
     /// started as seen. Nil on a parcel kept before this was noted, which shows no mark and starts as seen with its
     /// next answer: what an older version kept has no `newsAt` to start from.
     var openedNews: String? = nil
+    /// Its notifications were turned off with the bell on its page: rounds pass over it until they are turned on there
+    /// again.
+    var muted: Bool? = nil
 
     var isViewer: Bool { viewer == true }
+    var isMuted: Bool { muted == true }
 
     /// What `openedNews` holds for a parcel seen before its first scan: earlier than any news.
     static let seenBeforeAnyNews = "1970-01-01T00:00:00Z"
@@ -356,16 +361,24 @@ final class DeviceParcels {
     private var desiredAlert: String?
     private var alertGeneration = 0
     private var alertRounds: Set<Int> = []
-    /// The token and language each parcel's notifications were asked for since launch. Each
-    /// launch asks again, in case the service lost them.
+    /// The token and language each parcel's notifications were asked for since launch, and the preset when one is
+    /// chosen for every parcel (`alertKey`). Each launch asks again, in case the service lost them.
     private var alertsAsked: [String: String] = [:]
     /// The last round, when it was cut short: tried again on its token and in its language once its time comes.
     private var alertRetry: AlertRetry?
+    /// What the last round asked on, which a parcel's notifications turned on again are asked for on. None once they
+    /// are turned off for every parcel (`alertsOff`).
+    private var alertsWanted: AlertsWanted?
 
-    private struct AlertRetry {
+    private struct AlertsWanted {
         let token: String
         let locale: NativePushLocale
         let environment: NativePushEnvironment
+        let preset: ParcelAlertPreset?
+    }
+
+    private struct AlertRetry {
+        let wanted: AlertsWanted
         let at: Date
         let wait: TimeInterval
     }
@@ -454,6 +467,7 @@ final class DeviceParcels {
                 entry.label = old.label
                 entry.archivedAt = old.archivedAt
                 entry.replaced = old.replaced
+                entry.muted = old.muted
             }
         }
         entries.append(entry)
@@ -472,6 +486,7 @@ final class DeviceParcels {
     func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws -> Bool {
         guard let client else { return false }
         var contacted = await stopForgottenAlerts(client)
+        if await stopMutedAlerts(client) { contacted = true }
         if await tellForgotten(client) { contacted = true }
         var trouble: Error?
         for entry in entries where id == nil || entry.parcel.id == id {
@@ -670,6 +685,7 @@ final class DeviceParcels {
             await forget(id: id)
             if let index = entries.firstIndex(where: { $0.parcel.id == added.id }) {
                 entries[index].replaced = entry.replaced ?? id
+                entries[index].muted = entry.muted
                 save()
                 return Self.shown(entries[index])
             }
@@ -829,8 +845,15 @@ final class DeviceParcels {
     /// arrived needs none; a held return still does. A round is short and quiet: a few parcels at most, and it ends at the
     /// first sign that the service wants a pause, sends no notifications or can't be reached; `retryAlerts` tries it
     /// again later. A link that leads nowhere, has no room or is no longer shared is left until the next launch.
-    func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current) async {
-        let asked = "\(token) \(locale.rawValue) \(environment.rawValue)"
+    ///
+    /// Each parcel's notifications tell what `preset` says, the one chosen for every parcel in Settings: a new one asks
+    /// again for those already on, and the service replaces what they told. Until one is chosen (nil), a parcel keeps
+    /// what it was first asked for, or is given `alertPreset(for:)`'s. A parcel turned off with its bell is passed over.
+    func registerAlerts(token: String, locale: NativePushLocale, environment: NativePushEnvironment = .current,
+                        preset chosen: ParcelAlertPreset? = nil) async {
+        let wanted = AlertsWanted(token: token, locale: locale, environment: environment, preset: chosen)
+        let asked = Self.alertKey(wanted)
+        alertsWanted = wanted
         if desiredAlert != asked {
             desiredAlert = asked
             alertGeneration += 1
@@ -841,13 +864,13 @@ final class DeviceParcels {
         defer { alertRounds.remove(round) }
         // How long the service asked to be left alone, when the round is cut short.
         var pause: TimeInterval?
-        defer { if round == alertGeneration { holdAlerts(pause, token: token, locale: locale, environment: environment) } }
-        let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) }.prefix(Self.alertsPerRound)
+        defer { if round == alertGeneration { holdAlerts(pause, wanted) } }
+        let due = entries.filter { alertsAsked[$0.linkID] != asked && !Self.over($0.parcel) && !$0.isMuted }.prefix(Self.alertsPerRound)
         for entry in due {
             guard round == alertGeneration else { return }
-            // Forgotten, or followed through another link, since the round began.
-            guard entries.contains(where: { $0.linkID == entry.linkID }) else { continue }
-            let preset = entry.alertPreset ?? Self.alertPreset(for: entry.parcel)
+            // Forgotten, followed through another link or turned off with its bell since the round began.
+            guard entries.contains(where: { $0.linkID == entry.linkID && !$0.isMuted }) else { continue }
+            let preset = chosen ?? entry.alertPreset ?? Self.alertPreset(for: entry.parcel)
             let answer: DeviceAlertAnswer
             do {
                 answer = try await client.setAlert(entry.linkID, keys[entry.linkID],
@@ -856,7 +879,11 @@ final class DeviceParcels {
                 if case DeliveryAPIError.rateLimited(let after) = error { pause = after } else { pause = 0 }
                 break
             }
-            guard round == alertGeneration else { return }
+            guard round == alertGeneration else {
+                // Turned off for every parcel while the service was asked: this one hears nothing after all.
+                if desiredAlert == nil, answer == .on { try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token)) }
+                return
+            }
             if answer == .unavailable {
                 pause = 0
                 break
@@ -865,6 +892,11 @@ final class DeviceParcels {
                 // Forgotten, or followed through another link, while the service was asked: the link hears
                 // nothing more here.
                 if answer == .on { await stopAlert(entry, token: token, client) }
+                continue
+            }
+            if entries[index].isMuted {
+                // Turned off with its bell while the service was asked.
+                if answer == .on { try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token)) }
                 continue
             }
             alertsAsked[entry.linkID] = asked
@@ -880,6 +912,12 @@ final class DeviceParcels {
         }
     }
 
+    /// What `alertsAsked` notes for a link asked for on the token, in the language and with the preset when one is
+    /// chosen for every parcel: a new choice asks every link again.
+    private static func alertKey(_ wanted: AlertsWanted) -> String {
+        "\(wanted.token) \(wanted.locale.rawValue) \(wanted.environment.rawValue)" + (wanted.preset.map { " \($0.rawValue)" } ?? "")
+    }
+
     /// When the last round, cut short, is to be tried again; nil once a round went through.
     var alertsRetryAt: Date? { alertRetry?.at }
 
@@ -887,20 +925,92 @@ final class DeviceParcels {
     /// side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
     func retryAlerts() async {
         guard let retry = alertRetry, now() >= retry.at else { return }
-        await registerAlerts(token: retry.token, locale: retry.locale, environment: retry.environment)
+        let wanted = retry.wanted
+        await registerAlerts(token: wanted.token, locale: wanted.locale, environment: wanted.environment, preset: wanted.preset)
+    }
+
+    /// Asks again, on the last round's token and in its language, for the notifications still missing, with `preset`
+    /// for every parcel: a new preset chosen in Settings asks again for every parcel. Nothing before a first round, which
+    /// takes the preset when the token comes.
+    func alertsAgain(preset: ParcelAlertPreset?) async {
+        guard let wanted = alertsWanted else { return }
+        await registerAlerts(token: wanted.token, locale: wanted.locale, environment: wanted.environment, preset: preset)
     }
 
     /// Notes how a round ended: one cut short is tried again after a wait, longer each time it fails again; one that
     /// went through leaves nothing to try again.
-    private func holdAlerts(_ pause: TimeInterval?, token: String, locale: NativePushLocale, environment: NativePushEnvironment) {
+    private func holdAlerts(_ pause: TimeInterval?, _ wanted: AlertsWanted) {
         guard let pause else {
             alertRetry = nil
             return
         }
         var wait = Self.alertRetryFirst
-        if let last = alertRetry, last.token == token, last.locale == locale { wait = min(last.wait * 2, Self.alertRetryLongest) }
-        alertRetry = AlertRetry(token: token, locale: locale, environment: environment,
-                                at: now().addingTimeInterval(max(wait, pause)), wait: wait)
+        if let last = alertRetry, last.wanted.token == wanted.token, last.wanted.locale == wanted.locale {
+            wait = min(last.wait * 2, Self.alertRetryLongest)
+        }
+        alertRetry = AlertRetry(wanted: wanted, at: now().addingTimeInterval(max(wait, pause)), wait: wait)
+    }
+
+    /// Whether a parcel here still has notifications on, which `alertsOff` turns off.
+    var hasAlertsOn: Bool { entries.contains { $0.alertToken != nil } }
+
+    /// Turns every parcel's notifications on this iPhone off, from the switch in Settings: the service is told about
+    /// each link signed up here, and no round asks for any until `registerAlerts` is called again; a round under way
+    /// stops, and a link it signs up meanwhile is told too. A parcel turned off with its bell stays so.
+    ///
+    /// A link the service can't be told about yet keeps its token, and the next call tells it again; the first failure
+    /// ends the call, as the service may want a pause.
+    func alertsOff() async {
+        desiredAlert = nil
+        alertGeneration += 1
+        alertRetry = nil
+        alertsWanted = nil
+        alertsAsked = [:]
+        guard let client else { return }
+        for entry in entries {
+            guard let token = entry.alertToken else { continue }
+            guard (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil else { return }
+            // Turned on again meanwhile: the new round asks for every link, and replaces the token it finds.
+            guard desiredAlert == nil else { return }
+            guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }), entries[index].alertToken == token else { continue }
+            entries[index].alertToken = nil
+            save()
+        }
+    }
+
+    /// Turns one parcel's notifications on this iPhone off, or back on, from the bell on its page. Off, the service is
+    /// told at once, or by the next refresh when it can't be reached; on, the parcel is asked for again on the last
+    /// round's token, or by the next round when there was none.
+    func setMuted(id: UUID, muted: Bool) async throws -> Parcel {
+        let shown = try update(id) { $0.muted = muted ? true : nil }
+        guard let linkID = entries.first(where: { $0.parcel.id == id })?.linkID else { return shown }
+        alertsAsked[linkID] = nil
+        if muted {
+            if let client { await stopMutedAlerts(client) }
+        } else if let wanted = alertsWanted {
+            // A round under way listed its parcels before this one was back on: a new round asks for it.
+            alertGeneration += 1
+            await registerAlerts(token: wanted.token, locale: wanted.locale, environment: wanted.environment, preset: wanted.preset)
+        }
+        return shown
+    }
+
+    /// Turns off the notifications of parcels turned off with their bell while the service couldn't be told. The first
+    /// trouble ends the round; the rest wait for the next.
+    /// Returns whether the service answered.
+    @discardableResult
+    private func stopMutedAlerts(_ client: DeviceParcelClient) async -> Bool {
+        var answered = false
+        for entry in entries where entry.isMuted {
+            guard let token = entry.alertToken else { continue }
+            guard (try? await client.removeAlert(entry.linkID, DeleteParcelAppAlertRequest(token: token))) != nil else { return answered }
+            answered = true
+            guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }), entries[index].isMuted,
+                  entries[index].alertToken == token else { continue }
+            entries[index].alertToken = nil
+            save()
+        }
+        return answered
     }
 
     /// Turns off a link's notifications on the token, for a link no longer followed here. Someone else's link the
@@ -954,6 +1064,8 @@ final class DeviceParcels {
         parcel.archivedAt = entry.archivedAt
         // Without an account, the device keeps what was seen: the news it had when the parcel was last opened here.
         parcel.seenAt = entry.openedNews ?? parcel.newsAt
+        // Its bell shows whether it was turned off here.
+        parcel.notificationsMuted = entry.isMuted
         if let replaced = entry.replaced {
             var data = parcel.carrierData ?? CarrierData()
             data.originalPackageID = replaced

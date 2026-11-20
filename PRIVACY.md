@@ -390,12 +390,13 @@ asks for nothing more. The iPhone app asks when a parcel first comes to
 it without an account, and keeps the device token beside the parcels it follows
 that way so that forgetting one turns its notifications off. The Android app
 asks for Android's notification permission only when you choose to turn
-notifications on, keeps its token beside the parcels it follows without an
-account in the same way, and passes over one whose notifications you turned off
-on its page. Its Notifications page in Settings keeps on the phone which updates
-those parcels announce and whether you turned their notifications off there;
-turned off, the service deletes what it stored for their notifications on this
-phone, and no parcel is signed up again until you turn them back on. Adding a
+notifications on, and keeps its token beside the parcels it follows without an
+account in the same way. Both apps pass over a parcel whose notifications you
+turned off on its page. Their Notifications page in Settings keeps on the phone
+which updates those parcels announce and whether you turned their notifications
+off there; turned off, the service deletes what it stored for their
+notifications on this phone, and no parcel is signed up again until you turn
+them back on. Adding a
 delivery to your calendar makes a calendar file in the browser; nothing is sent
 for it.
 

@@ -133,10 +133,9 @@ final class NotificationLogicTests: XCTestCase {
         XCTAssertTrue(repaired.bool(forKey: optOut))
     }
 
-    func testInvitationWaitsForPermissionCheckAndARealAccountWithParcels() {
+    func testInvitationWaitsForPermissionCheckAndParcelsOutsideTheDemo() {
         XCTAssertTrue(invitation())
         XCTAssertFalse(invitation(status: nil))
-        XCTAssertFalse(invitation(isAuthenticated: false))
         XCTAssertFalse(invitation(isDemo: true))
         XCTAssertFalse(invitation(hasParcels: false))
     }
@@ -179,6 +178,19 @@ final class NotificationLogicTests: XCTestCase {
             for: user, defaults: UserDefaults(suiteName: suite)!
         ))
         XCTAssertFalse(NotificationInvitationPreference.isDismissed(for: UUID(), defaults: defaults))
+        // Without an account, the parcels on this device have a "Not now" of their own.
+        XCTAssertFalse(NotificationInvitationPreference.isDismissed(for: nil, defaults: defaults))
+        NotificationInvitationPreference.dismiss(for: nil, defaults: defaults)
+        XCTAssertTrue(NotificationInvitationPreference.isDismissed(for: nil, defaults: defaults))
+        XCTAssertFalse(NotificationInvitationPreference.isDismissed(for: UUID(), defaults: defaults))
+    }
+
+    func testAGuestsPresetShowsImportantStepsUntilOneIsChosen() {
+        XCTAssertEqual(NotificationPreset.withoutAccount(nil), .important)
+        for preset in NotificationPreset.allCases {
+            XCTAssertEqual(NotificationPreset.withoutAccount(preset.alertPreset), preset)
+        }
+        XCTAssertEqual(NotificationPreset.deliveryDay.alertPreset, .delivery)
     }
 
     func testInvitationPreservesPreviousOnboardingChoice() {
@@ -543,7 +555,6 @@ final class NotificationLogicTests: XCTestCase {
     }
 
     private func invitation(
-        isAuthenticated: Bool = true,
         isDemo: Bool = false,
         hasParcels: Bool = true,
         status: UNAuthorizationStatus? = .notDetermined,
@@ -553,7 +564,7 @@ final class NotificationLogicTests: XCTestCase {
         registering: Bool = false
     ) -> Bool {
         NotificationInvitationPolicy.shouldPresent(
-            isAuthenticated: isAuthenticated, isDemo: isDemo, hasParcels: hasParcels,
+            isDemo: isDemo, hasParcels: hasParcels,
             status: status, enabled: enabled, optedOut: optedOut, dismissed: dismissed, registering: registering
         )
     }

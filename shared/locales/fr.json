@@ -270,6 +270,7 @@
   "unlock.several": "Connecte-toi, et Peek suit ensemble tous les numéros de ce texte.",
   "unlock.daily": "Une fois connecté, tu continues, en commençant par le colis que tu viens de saisir.",
   "unlock.friends": "Connecte-toi, et partage tes timbres et les moments clés de tes livraisons avec tes amis.",
+  "unlock.email": "Connecte-toi, et Peek t’envoie un e-mail quand un colis arrive.",
   "unlock.comes": "Tes colis sur cet appareil peuvent venir avec toi, avec leurs noms.",
   "unlock.later": "Pas maintenant",
   "door.several.title.few": "{{count}} numéros de suivi dans ce texte",

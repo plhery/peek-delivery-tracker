@@ -359,8 +359,8 @@ struct ParcelDetailView: View {
                             .foregroundStyle(branding.ink.opacity(0.75))
                             .accessibilityLabel(localizer.text("link.shareAria"))
                         }
-                        // Alerts need an account: a parcel followed without one has no bell.
-                        if !store.isGuest, sample == nil {
+                        // Without an account, the bell turns the parcel's notifications on this iPhone off or on.
+                        if sample == nil {
                             Button {
                                 if opensAlerts {
                                     showingAlerts = true

@@ -69,6 +69,9 @@ final class ParcelStore: ObservableObject {
     @Published private(set) var notificationInvitationDismissed = false
     @Published private(set) var notificationStatus: UNAuthorizationStatus = .notDetermined
     @Published private(set) var notificationsEnabledOnDevice = false
+    /// What every parcel followed without an account announces, chosen in Settings; nil until one is.
+    @Published private(set) var deviceAlertPreset: ParcelAlertPreset? =
+        UserDefaults.standard.string(forKey: NotificationDeviceKeys.deviceAlertPreset).flatMap(ParcelAlertPreset.init(rawValue:))
     @Published private(set) var notificationPreferences: NotificationPreferences? {
         didSet {
             // An account's choice about the list's mark follows it here from its other devices.
@@ -193,7 +196,7 @@ final class ParcelStore: ObservableObject {
         deliveryWidgetStore?.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
         cacheOwnerID = session.user?.id
         listReadAt = session.isGuest ? self.device.lastCheckedAt : nil
-        notificationInvitationDismissed = session.user.map { NotificationInvitationPreference.isDismissed(for: $0.id) } ?? false
+        notificationInvitationDismissed = NotificationInvitationPreference.isDismissed(for: session.user?.id)
         identityObservation = session.identityChanges.sink { [weak self] in self?.resetForSessionChange() }
         timeZoneObservation = NotificationCenter.default.publisher(for: .NSSystemTimeZoneDidChange)
             .receive(on: DispatchQueue.main)
@@ -246,7 +249,7 @@ final class ParcelStore: ObservableObject {
             releaseDeviceNotifications(from: cacheOwnerID)
         }
         cacheOwnerID = session.user?.id
-        notificationInvitationDismissed = session.user.map { NotificationInvitationPreference.isDismissed(for: $0.id) } ?? false
+        notificationInvitationDismissed = NotificationInvitationPreference.isDismissed(for: session.user?.id)
         mutationRevision += 1
         loadSequence += 1
         holdingDeliverySurfaces = reopening
@@ -498,7 +501,8 @@ final class ParcelStore: ObservableObject {
             await load()
             guard (try? session.checkGeneration(generation)) != nil else { return }
             beginDevicePolling()
-            await resumeDeviceAlerts()
+            // With permission given already, iOS hands the token over again and the parcels are signed up on it.
+            await refreshNotificationState()
             return
         }
         if !isDemo { await claimDeviceParcels() }
@@ -530,7 +534,11 @@ final class ParcelStore: ObservableObject {
             // can be switched off outside the app, from a link in an email.
             if returning && !isDemo { Task { await refreshNotificationPreferences() } }
         } else if active && isGuest {
-            Task { await load() }
+            Task {
+                // Notifications allowed in iOS Settings meanwhile sign the parcels up as the token comes back.
+                await refreshNotificationState()
+                await load()
+            }
         }
     }
 
@@ -708,41 +716,80 @@ final class ParcelStore: ObservableObject {
 
     // MARK: - Notifications without an account
 
+    /// Whether the person turned off, in Settings, the notifications of the parcels followed without an account.
+    var deviceAlertsOff: Bool { UserDefaults.standard.bool(forKey: NotificationDeviceKeys.deviceAlertsOff) }
+
     /// Asks for notifications once a parcel comes to this iPhone without an account: iOS asks for
-    /// permission the first time, and the device's parcels are signed up once the token is known.
+    /// permission the first time, and the device's parcels are signed up once the token is known. Nothing is asked
+    /// once they were turned off in Settings.
     func askForDeviceAlerts(language: AppLanguage) async {
-        guard tracksWithoutAccount, !isDemo, device.hasParcelsOnTheirWay else { return }
+        guard tracksWithoutAccount, !isDemo, !deviceAlertsOff, device.hasParcelsOnTheirWay else { return }
         var status = await deviceNotifications.status()
         if status == .notDetermined {
             await deviceNotifications.request()
             status = await deviceNotifications.status()
         }
+        if isGuest { noteNotificationStatus(status) }
         guard NotificationDevicePolicy.isAuthorized(status) else { return }
         deviceNotifications.register()
         if let token = deviceNotifications.token() { await registerDeviceAlerts(token: token, language: language) }
     }
 
-    /// At launch, with permission given already, iOS hands the token over again and the parcels
-    /// are signed up on it. Nothing is asked.
-    private func resumeDeviceAlerts() async {
-        guard tracksWithoutAccount, !isDemo, device.hasParcelsOnTheirWay,
-              NotificationDevicePolicy.isAuthorized(await deviceNotifications.status()) else { return }
+    /// Turns the notifications of the parcels followed without an account on, from the invitation or the switch in
+    /// Settings: iOS is asked first when it hasn't been, and every parcel on its way is signed up once the token is
+    /// known. A refusal throws, and Settings then offers iOS's own settings.
+    private func enableDeviceAlerts(language: AppLanguage) async throws {
+        let generation = session.generation
+        var status = await deviceNotifications.status()
+        if status == .notDetermined {
+            await deviceNotifications.request()
+            status = await deviceNotifications.status()
+        }
+        try session.checkGeneration(generation)
+        let allowed = NotificationDevicePolicy.isAuthorized(status)
+        if allowed { UserDefaults.standard.removeObject(forKey: NotificationDeviceKeys.deviceAlertsOff) }
+        noteNotificationStatus(status)
+        dismissNotificationInvitation()
+        guard allowed else { throw DeliveryAPIError.notificationsDenied }
         deviceNotifications.register()
+        if let token = deviceNotifications.token() { await registerDeviceAlerts(token: token, language: language) }
+    }
+
+    /// Turns them off from the switch in Settings: the service is told about every link signed up here, and nothing
+    /// signs one up again until they are turned back on.
+    private func disableDeviceAlerts() async {
+        dismissNotificationInvitation()
+        UserDefaults.standard.set(true, forKey: NotificationDeviceKeys.deviceAlertsOff)
+        noteNotificationStatus(notificationStatus)
+        await device.alertsOff()
+    }
+
+    /// Saves on this iPhone what every parcel followed without an account announces, and asks again with it for the
+    /// notifications already on: the service replaces what they told.
+    func saveDeviceAlertPreset(_ preset: ParcelAlertPreset) async {
+        UserDefaults.standard.set(preset.rawValue, forKey: NotificationDeviceKeys.deviceAlertPreset)
+        deviceAlertPreset = preset
+        guard !deviceAlertsOff else { return }
+        await device.alertsAgain(preset: preset)
     }
 
     /// Signs the device's own parcels up for notifications on this token, in this language.
     /// Signed in, these are the parcels the account could not take over; the account's own
     /// registration stays as it is, and so does its choice to have no notifications on this iPhone.
     func registerDeviceAlerts(token: String, language: AppLanguage) async {
-        guard tracksWithoutAccount, !isDemo else { return }
+        guard tracksWithoutAccount, !isDemo, !deviceAlertsOff else { return }
         if session.user != nil, UserDefaults.standard.bool(forKey: notificationOptOutKey) { return }
-        await device.registerAlerts(token: token, locale: NativePushLocale(language))
+        await device.registerAlerts(token: token, locale: NativePushLocale(language), preset: deviceAlertPreset)
     }
 
     /// Signs the device's parcels up again after a round cut short by an outage or a pause, on the conditions of the
-    /// first.
+    /// first. Turned off, a link the service couldn't be told about yet is told again.
     private func retryDeviceAlerts() async {
         guard tracksWithoutAccount, !isDemo else { return }
+        if deviceAlertsOff {
+            if device.hasAlertsOn { await device.alertsOff() }
+            return
+        }
         if session.user != nil, UserDefaults.standard.bool(forKey: notificationOptOutKey) { return }
         await device.retryAlerts()
     }
@@ -912,12 +959,11 @@ final class ParcelStore: ObservableObject {
         upsert(updated)
     }
 
+    /// The bell on a parcel's page. Without an account, it turns the parcel's notifications on this iPhone off or on.
     func setMuted(_ parcel: Parcel, muted: Bool) async throws {
         let generation = session.generation
-        // A parcel followed without an account has no alerts to mute.
-        guard !isGuest else { return }
-        let updated = isDemo
-            ? try demo.setMuted(id: parcel.id, muted: muted)
+        let updated = isGuest ? try await device.setMuted(id: parcel.id, muted: muted)
+            : isDemo ? try demo.setMuted(id: parcel.id, muted: muted)
             : try await api.setMuted(id: parcel.id, muted: muted)
         try session.checkGeneration(generation)
         upsert(updated)
@@ -1215,31 +1261,43 @@ final class ParcelStore: ObservableObject {
         UserDefaults.standard.string(forKey: notificationOwnerKey).flatMap(UUID.init(uuidString:))
     }
 
+    /// Reads what iOS says of notifications, and asks Apple for the token when they are allowed and on: an account's,
+    /// or, without one, while a parcel is on its way.
     func refreshNotificationState() async {
         let generation = session.generation
-        let status = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
+        let status = await deviceNotifications.status()
         guard (try? session.checkGeneration(generation)) != nil else { return }
-        // Every foreground checks this; publish only what changed.
-        if notificationStatus != status { notificationStatus = status }
-        let optedOut = UserDefaults.standard.bool(forKey: notificationOptOutKey)
-        let enabled = NotificationDevicePolicy.isEnabled(
-            isDemo: isDemo,
-            status: notificationStatus,
-            optedOut: optedOut,
-            nativePushRegistered: UserDefaults.standard.bool(forKey: nativePushRegisteredKey),
-            demoNotificationsEnabled: UserDefaults.standard.bool(forKey: demoNotificationsKey)
-        )
-        if notificationsEnabledOnDevice != enabled { notificationsEnabledOnDevice = enabled }
-        if !notificationStateLoaded { notificationStateLoaded = true }
+        noteNotificationStatus(status)
         guard NotificationDevicePolicy.shouldRegisterForRemoteNotifications(
             status: notificationStatus,
-            optedOut: optedOut
-        ) else { return }
+            optedOut: notificationsOptedOut
+        ), !isGuest || device.hasParcelsOnTheirWay else { return }
         // Another account signed in brings the device back to Apple's service only once the token of the account
         // before is off the service, so that account's notifications can't come in under this one.
         let settled = await settleNativePushRevocation()
         guard (try? session.checkGeneration(generation)) != nil, settled || !session.isAuthenticated else { return }
-        PlatformApplication.shared.registerForRemoteNotifications()
+        deviceNotifications.register()
+    }
+
+    /// The "off" that applies: a guest's, for the parcels followed without an account, or the account's.
+    private var notificationsOptedOut: Bool {
+        isGuest ? deviceAlertsOff : UserDefaults.standard.bool(forKey: notificationOptOutKey)
+    }
+
+    /// Publishes what iOS says, and whether notifications are on here: an account's once its token is registered, a
+    /// guest's while allowed and not turned off, as their parcels are signed up as the token comes.
+    private func noteNotificationStatus(_ status: UNAuthorizationStatus) {
+        // Every foreground checks this; publish only what changed.
+        if notificationStatus != status { notificationStatus = status }
+        let enabled = NotificationDevicePolicy.isEnabled(
+            isDemo: isDemo,
+            status: status,
+            optedOut: notificationsOptedOut,
+            nativePushRegistered: isGuest || UserDefaults.standard.bool(forKey: nativePushRegisteredKey),
+            demoNotificationsEnabled: UserDefaults.standard.bool(forKey: demoNotificationsKey)
+        )
+        if notificationsEnabledOnDevice != enabled { notificationsEnabledOnDevice = enabled }
+        if !notificationStateLoaded { notificationStateLoaded = true }
     }
 
     /// Takes the device's token off the account signing out. When the service can't be reached, the token is kept
@@ -1285,6 +1343,12 @@ final class ParcelStore: ObservableObject {
         defer {
             if (try? session.checkGeneration(generation)) != nil { notificationEnableInProgress = false }
         }
+        // Without an account no welcome notification goes out, so none failed to.
+        if isGuest {
+            try await enableDeviceAlerts(language: language)
+            succeeded = true
+            return true
+        }
         let granted = try await UNUserNotificationCenter.current().requestAuthorization(
             options: [.alert, .badge, .sound]
         )
@@ -1326,6 +1390,11 @@ final class ParcelStore: ObservableObject {
 
     func disableNotifications() async throws {
         DeliveryAnalytics.shared.action("notifications-disable", .started)
+        if isGuest {
+            await disableDeviceAlerts()
+            DeliveryAnalytics.shared.action("notifications-disable", .success)
+            return
+        }
         dismissNotificationInvitation()
         nativePushGeneration += 1
         let token = AppDelegate.currentDeviceToken ?? UserDefaults.standard.string(forKey: forwardedTokenKey)
@@ -1344,12 +1413,12 @@ final class ParcelStore: ObservableObject {
     var shouldInviteNotifications: Bool {
         !loading && errorMessage == nil && !authenticationRequired
             && NotificationInvitationPolicy.shouldPresent(
-                isAuthenticated: session.isAuthenticated,
                 isDemo: isDemo,
-                hasParcels: !parcels.isEmpty,
+                // Without an account, only a parcel on its way has notifications to turn on.
+                hasParcels: isGuest ? device.hasParcelsOnTheirWay : !parcels.isEmpty,
                 status: notificationStateLoaded ? notificationStatus : nil,
                 enabled: notificationsEnabledOnDevice,
-                optedOut: UserDefaults.standard.bool(forKey: notificationOptOutKey),
+                optedOut: notificationsOptedOut,
                 dismissed: notificationInvitationDismissed,
                 registering: NotificationDevicePolicy.isRegistering(
                     status: notificationStatus,
@@ -1361,8 +1430,8 @@ final class ParcelStore: ObservableObject {
     }
 
     func dismissNotificationInvitation() {
-        guard !isDemo, let userID = session.user?.id else { return }
-        NotificationInvitationPreference.dismiss(for: userID)
+        guard !isDemo else { return }
+        NotificationInvitationPreference.dismiss(for: session.user?.id)
         notificationInvitationDismissed = true
     }
 

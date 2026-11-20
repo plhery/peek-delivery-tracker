@@ -2242,6 +2242,55 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertNil(device.alertsRetryAt)
     }
 
+    /// The switch and the preset on a guest's Notifications page in Settings.
+    func testAGuestsSwitchTurnsEveryParcelOffAndBackOnWithThePresetChosen() async throws {
+        let defaults = UserDefaults.standard
+        let kept = [NotificationDeviceKeys.deviceAlertsOff, NotificationDeviceKeys.deviceAlertPreset, "sdt.notificationInvitationDismissed.v1.device"]
+        for key in kept { defaults.removeObject(forKey: key) }
+        defer { for key in kept { defaults.removeObject(forKey: key) } }
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        PostcodeTestURLProtocol.handler = { _ in (404, Data()) }
+        let books = PublicParcelResponse(link: reader("33333333333A"), package: package(UUID()))
+        let shoes = PublicParcelResponse(link: reader("33333333333B"), package: package(UUID(), number: "TESTPARCEL999"))
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: Memory())
+        let notifications = DeviceNotificationAccess(status: { .authorized }, request: {}, register: {}, token: { "token1" })
+        let configuration = PostcodeTestURLProtocol.configuration
+        let session = SessionStore(configuration: configuration, persistence: PostcodeTestSessionPersistence(), transport: transport)
+        defer { session.forceSignOut() }
+        let localizer = Localizer()
+        let store = ParcelStore(configuration: configuration, session: session, localizer: localizer, transport: transport, device: device,
+                                deviceNotifications: notifications)
+        store.setDeliveryLiveActivitiesEnabled(false)
+        let tail = "token1 \(NativePushLocale(localizer.language).rawValue) \(NativePushEnvironment.current.rawValue)"
+        func alerts() -> [String] { calls.all.filter { $0.hasPrefix("alert") || $0.hasPrefix("unalert") } }
+
+        _ = try await store.follow(ParcelLinkRoute(id: "33333333333A", name: "Books"), books)
+        for _ in 0..<200 where !device.hasAlertsOn { await Task.yield() }
+        XCTAssertEqual(alerts(), ["alert 33333333333A - important \(tail)"])
+        XCTAssertTrue(store.notificationsEnabledOnDevice, "Allowed and not turned off: on for the parcels here")
+
+        try await store.disableNotifications()
+        XCTAssertFalse(store.notificationsEnabledOnDevice)
+        XCTAssertTrue(store.deviceAlertsOff)
+        XCTAssertEqual(alerts().last, "unalert 33333333333A token1")
+        // Off, a parcel followed next asks nothing.
+        _ = try await store.follow(ParcelLinkRoute(id: "33333333333B", name: "Shoes"), shoes)
+        for _ in 0..<50 { await Task.yield() }
+        XCTAssertEqual(alerts().count, 2)
+
+        let welcomed = try await store.enableNotifications(language: localizer.language)
+        XCTAssertTrue(welcomed, "No welcome notification goes out without an account, so none failed to")
+        XCTAssertTrue(store.notificationsEnabledOnDevice)
+        XCTAssertFalse(store.deviceAlertsOff)
+        XCTAssertEqual(Array(alerts().suffix(2)), ["alert 33333333333A - important \(tail)", "alert 33333333333B - important \(tail)"])
+
+        await store.saveDeviceAlertPreset(.delivery)
+        XCTAssertEqual(store.deviceAlertPreset, .delivery)
+        XCTAssertEqual(Array(alerts().suffix(2)), ["alert 33333333333A - delivery \(tail)", "alert 33333333333B - delivery \(tail)"])
+    }
+
     func testAParcelsNotificationsTellEveryScanUntilItsCarrierHasNews() {
         func preset(_ stage: TrackingStage?) -> ParcelAlertPreset { DeviceParcels.alertPreset(for: Parcel(shared: package(UUID(), stage: stage))) }
         XCTAssertEqual(preset(nil), .all)
@@ -2290,6 +2339,110 @@ final class DeviceParcelTests: XCTestCase {
         XCTAssertEqual(asked, ["status", "request", "status", "register"])
         let again = try await store.follow(ParcelLinkRoute(id: "33333333333A"), shown)
         XCTAssertEqual(again, .already(id))
+    }
+
+    /// Two parcels of this iPhone's own, on their way.
+    private func twoOwnParcels() -> Memory {
+        let storage = Memory()
+        storage.keys = ["22222222222A": key, "22222222222B": key]
+        storage.parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID())), checkedAt: Date()),
+            DeviceParcel(linkID: "22222222222B", label: "", archivedAt: nil, parcel: Parcel(shared: package(UUID(), number: "TESTPARCEL999")), checkedAt: Date()),
+        ]
+        return storage
+    }
+
+    func testAPresetChosenForEveryParcelAsksAgainForThoseAlreadyOn() async {
+        let storage = twoOwnParcels()
+        let calls = Calls()
+        let device = DeviceParcels(client: client(calls), storage: storage)
+        await device.alertsAgain(preset: .delivery)
+        XCTAssertEqual(calls.all, [], "Before a first round there is no token to ask on: the round takes the preset")
+
+        await device.registerAlerts(token: "token1", locale: .en, environment: .development)
+        await device.alertsAgain(preset: .delivery)
+        await device.alertsAgain(preset: .delivery)
+        XCTAssertEqual(calls.all, [
+            "alert 22222222222A k important token1 en development", "alert 22222222222B k important token1 en development",
+            "alert 22222222222A k delivery token1 en development", "alert 22222222222B k delivery token1 en development",
+        ])
+        XCTAssertEqual(storage.parcels.compactMap(\.alertPreset), [.delivery, .delivery])
+        // A new token keeps the choice.
+        await device.registerAlerts(token: "token2", locale: .en, environment: .development, preset: .delivery)
+        XCTAssertEqual(Array(calls.all.suffix(4)), [
+            "alert 22222222222A k delivery token2 en development", "unalert 22222222222A token1",
+            "alert 22222222222B k delivery token2 en development", "unalert 22222222222B token1",
+        ])
+        XCTAssertEqual(storage.parcels.compactMap(\.alertToken), ["token2", "token2"])
+    }
+
+    func testTurningEveryParcelOffTellsTheServiceAndNothingSignsThemUpAgainUntilItIsBackOn() async {
+        let storage = twoOwnParcels()
+        let calls = Calls()
+        let failing = Calls()
+        let device = DeviceParcels(client: client(calls, unalert: { linkID in
+            if linkID == "22222222222A", failing.all.isEmpty {
+                failing.add("down")
+                throw DeliveryAPIError.serviceFailed(503)
+            }
+        }), storage: storage)
+        await device.registerAlerts(token: "token1", locale: .en, environment: .development)
+        XCTAssertTrue(device.hasAlertsOn)
+
+        // The service can't be told about the first link: the call ends there, and its token is kept for the next.
+        await device.alertsOff()
+        XCTAssertEqual(calls.all.suffix(1), ["unalert 22222222222A token1"])
+        XCTAssertEqual(storage.parcels.compactMap(\.alertToken), ["token1", "token1"])
+        await device.alertsOff()
+        XCTAssertEqual(calls.all.suffix(2), ["unalert 22222222222A token1", "unalert 22222222222B token1"])
+        XCTAssertEqual(storage.parcels.compactMap(\.alertToken), [])
+        XCTAssertFalse(device.hasAlertsOn)
+
+        let before = calls.all.count
+        await device.alertsAgain(preset: .all)
+        await device.retryAlerts()
+        XCTAssertEqual(calls.all.count, before, "Off, nothing signs a parcel up again")
+        await device.registerAlerts(token: "token1", locale: .en, environment: .development)
+        XCTAssertEqual(calls.all.suffix(2), ["alert 22222222222A k important token1 en development", "alert 22222222222B k important token1 en development"])
+    }
+
+    func testABellTurnsOneParcelOffUntilItIsTurnedOnThereAgain() async throws {
+        let storage = twoOwnParcels()
+        let calls = Calls()
+        let offline = Calls()
+        let device = DeviceParcels(client: client(calls, unalert: { _ in
+            if offline.all.isEmpty { return }
+            throw DeliveryAPIError.serviceFailed(503)
+        }), storage: storage)
+        let first = try XCTUnwrap(device.list().first?.id)
+        await device.registerAlerts(token: "token1", locale: .en, environment: .development)
+
+        let muted = try await device.setMuted(id: first, muted: true)
+        XCTAssertTrue(muted.notificationsMuted)
+        XCTAssertEqual(device.list().map(\.notificationsMuted), [true, false])
+        XCTAssertEqual(calls.all.last, "unalert 22222222222A token1")
+        XCTAssertEqual(storage.parcels.map(\.alertToken), [nil, "token1"])
+
+        // A new language asks again for the other parcel only.
+        await device.registerAlerts(token: "token1", locale: .fr, environment: .development)
+        XCTAssertEqual(calls.all.last, "alert 22222222222B k important token1 fr development")
+
+        let unmuted = try await device.setMuted(id: first, muted: false)
+        XCTAssertFalse(unmuted.notificationsMuted)
+        XCTAssertEqual(calls.all.last, "alert 22222222222A k important token1 fr development")
+        XCTAssertEqual(storage.parcels.map(\.alertToken), ["token1", "token1"])
+
+        // Turned off while the service can't be told: it is told by the next refresh.
+        offline.add("down")
+        _ = try await device.setMuted(id: first, muted: true)
+        XCTAssertEqual(storage.parcels.map(\.alertToken), ["token1", "token1"])
+        XCTAssertEqual(storage.parcels.map(\.muted), [true, nil])
+        let tries = calls.all.count { $0 == "unalert 22222222222A token1" }
+        let back = DeviceParcels(client: client(calls), storage: storage)
+        try await back.refresh()
+        XCTAssertEqual(calls.all.count { $0 == "unalert 22222222222A token1" }, tries + 1)
+        XCTAssertEqual(storage.parcels.map(\.alertToken), [nil, "token1"])
+        XCTAssertEqual(back.list().map(\.notificationsMuted), [true, false], "Kept across launches")
     }
 
     func testTheSampleJourneyAddsOneScanAtATime() {

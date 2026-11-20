@@ -40,6 +40,24 @@ enum NotificationPreset: String, CaseIterable, Identifiable {
         let enabled = Set(stages)
         return allCases.first { Set($0.stages) == enabled } ?? .all
     }
+
+    /// The same list as a link's alerts name it, which is what a guest's choice is sent as.
+    var alertPreset: ParcelAlertPreset {
+        switch self {
+        case .all: .all
+        case .important: .important
+        case .deliveryDay: .delivery
+        }
+    }
+
+    /// A guest's choice as Settings shows it: Important steps until one is saved.
+    static func withoutAccount(_ chosen: ParcelAlertPreset?) -> NotificationPreset {
+        switch chosen {
+        case .all: .all
+        case .delivery: .deliveryDay
+        case .important, nil: .important
+        }
+    }
 }
 
 /// The events picked on the Notifications screen. The email switch saves on its own, so the draft holds no email.
@@ -121,6 +139,11 @@ enum NotificationDeviceKeys {
     static let forwarded = "sdt.notificationsForwardedToken.v1"
     static let demo = "sdt.demoNotificationsEnabled"
     static let optOutRepaired = "sdt.notificationsOptOutRepaired.v1"
+    /// The person turned off the notifications of the parcels this device follows without an account, apart from an
+    /// account's "off" (`optOut`).
+    static let deviceAlertsOff = "sdt.deviceAlertsOff.v1"
+    /// What every parcel followed without an account announces, chosen in Settings; none until one is.
+    static let deviceAlertPreset = "sdt.deviceAlertPreset.v1"
 }
 
 enum NotificationDevicePolicy {
@@ -181,8 +204,8 @@ enum NotificationDevicePolicy {
 }
 
 enum NotificationInvitationPolicy {
+    /// Asked of an account and of a guest alike: a guest's parcels on their way get notifications too.
     static func shouldPresent(
-        isAuthenticated: Bool,
         isDemo: Bool,
         hasParcels: Bool,
         status: UNAuthorizationStatus?,
@@ -192,24 +215,25 @@ enum NotificationInvitationPolicy {
         registering: Bool = false
     ) -> Bool {
         // `registering`: the device's notifications are this account's and its token is on its way, so there is nothing to ask.
-        guard isAuthenticated, !isDemo, hasParcels, !enabled, !optedOut, !dismissed, !registering,
+        guard !isDemo, hasParcels, !enabled, !optedOut, !dismissed, !registering,
               let status else { return false }
         return status == .notDetermined || status == .authorized || status == .provisional
     }
 }
 
+/// "Not now" on the invitation, kept for each account, and for the parcels followed without one (nil).
 enum NotificationInvitationPreference {
-    private static func key(for userID: UUID) -> String {
-        "sdt.notificationInvitationDismissed.v1.\(userID.uuidString)"
+    private static func key(for userID: UUID?) -> String {
+        "sdt.notificationInvitationDismissed.v1.\(userID?.uuidString ?? "device")"
     }
 
-    static func isDismissed(for userID: UUID, defaults: UserDefaults = .standard) -> Bool {
+    static func isDismissed(for userID: UUID?, defaults: UserDefaults = .standard) -> Bool {
         // Preserve choices made in the previous full-screen onboarding.
         defaults.bool(forKey: "sdt.notificationOnboardingCompleted.v1")
             || defaults.bool(forKey: key(for: userID))
     }
 
-    static func dismiss(for userID: UUID, defaults: UserDefaults = .standard) {
+    static func dismiss(for userID: UUID?, defaults: UserDefaults = .standard) {
         defaults.set(true, forKey: key(for: userID))
     }
 }

@@ -219,6 +219,8 @@ enum UnlockReason: String, Identifiable {
     case daily
     /// Friends compare passports between accounts.
     case friends
+    /// The delivery email goes to the address an account signs in with.
+    case email
 
     var id: String { rawValue }
 
@@ -229,6 +231,7 @@ enum UnlockReason: String, Identifiable {
         case .several: "unlock.several"
         case .daily: "unlock.daily"
         case .friends: "unlock.friends"
+        case .email: "unlock.email"
         }
     }
 }

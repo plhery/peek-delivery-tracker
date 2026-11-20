@@ -16,7 +16,6 @@ import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
-import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
@@ -107,8 +106,6 @@ class CountingTests {
             defaults.set(value, forKey = InstallCounting.STORAGE_KEY)
             assertNull(value, InstallCounting.read(defaults))
         }
-        InstallCounting.forget(defaults)
-        assertFalse(defaults.hasObject(InstallCounting.STORAGE_KEY))
     }
 
     /** The contract's InstallSighting, and nothing else: Android on a phone, a tablet and a Chromebook alike. */
@@ -214,45 +211,19 @@ class CountingTests {
         assertEquals(listOf(false, true), transport.sightings.map { it.json["signedIn"]!!.jsonPrimitive.boolean })
     }
 
+    /** An install whose reader turned statistics off before the switch went keeps them off: nothing is counted. */
     @Test
-    fun turningUsageStatisticsOffDeletesTheId() = runTest {
+    fun anInstallWhoseReaderTurnedStatisticsOffStaysOff() = runTest {
         val defaults = MemoryDefaults()
+        assertTrue(analytics(server(), defaults).enabled)
+        defaults.set(false, forKey = DeliveryAnalytics.PREFERENCE_KEY)
         val transport = server()
         val analytics = analytics(transport, defaults)
-        assertTrue(analytics.enabledFlow.value)
+        assertFalse(analytics.enabled)
         analytics.view("deliveries", DeliveryAnalytics.Mode.Anonymous)
         analytics.start()
         runCurrent()
-        val first = InstallCounting.read(defaults)!!.id
-        analytics.setEnabled(false)
-        assertFalse(defaults.hasObject(InstallCounting.STORAGE_KEY))
-        assertEquals(false, defaults.values[DeliveryAnalytics.PREFERENCE_KEY])
-        assertFalse(analytics.enabledFlow.value)
-        analytics.view("passport", DeliveryAnalytics.Mode.Anonymous)
-        runCurrent()
-        assertEquals(1, transport.sightings.size)
-        assertFalse(defaults.hasObject(InstallCounting.STORAGE_KEY))
-        // On again, the screen counts a new install.
-        analytics.setEnabled(true)
-        runCurrent()
-        assertTrue(analytics.enabledFlow.value)
-        assertEquals(2, transport.sightings.size)
-        assertNotEquals(first, InstallCounting.read(defaults)!!.id)
-        assertFalse(analytics(server(), defaults.also { it.set(false, forKey = DeliveryAnalytics.PREFERENCE_KEY) }).enabledFlow.value)
-    }
-
-    /** An answer in flight when the switch goes off is not kept. */
-    @Test
-    fun aSightingAnsweredAfterTurningOffKeepsNothing() = runTest {
-        val defaults = MemoryDefaults()
-        val answer = CompletableDeferred<HttpResponse>()
-        val analytics = analytics(server { answer.await() }, defaults)
-        analytics.start()
-        analytics.view("deliveries", DeliveryAnalytics.Mode.Anonymous)
-        runCurrent()
-        analytics.setEnabled(false)
-        answer.complete(HttpResponse(204))
-        runCurrent()
+        assertTrue(transport.requests.isEmpty())
         assertFalse(defaults.hasObject(InstallCounting.STORAGE_KEY))
     }
 

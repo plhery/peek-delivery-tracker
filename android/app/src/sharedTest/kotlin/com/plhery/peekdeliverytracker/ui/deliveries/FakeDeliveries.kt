@@ -355,12 +355,6 @@ class FakeDeliveries(
         markNewUpdates.value = enabled
     }
 
-    override val usageStatistics = MutableStateFlow(true)
-
-    override fun setUsageStatistics(enabled: Boolean) {
-        usageStatistics.value = enabled
-    }
-
     /** The parcels the pages saw (#72), in order; each is seen at once, as the store marks it. */
     val seen = mutableListOf<UUID>()
 

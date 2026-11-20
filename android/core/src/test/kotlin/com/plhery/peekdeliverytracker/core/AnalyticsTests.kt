@@ -306,29 +306,6 @@ class AnalyticsTests {
     }
 
     @Test
-    fun switchingOffDropsTheQueueAndSwitchingOnCountsTheScreenAgain() = runTest {
-        val defaults = MemoryDefaults()
-        val transport = collector { jsonResponse(200, """{"cache":"kept"}""") }
-        val analytics = analytics(transport, defaults)
-        analytics.view("passport", DeliveryAnalytics.Mode.Account)
-        analytics.start()
-        runCurrent()
-        analytics.setEnabled(false)
-        analytics.action("search")
-        analytics.view("friends")
-        runCurrent()
-        assertEquals(false, defaults.values[DeliveryAnalytics.PREFERENCE_KEY])
-        assertEquals(3, transport.events.size)
-        // Started already: the screen is counted again, and the cache went with the switch.
-        analytics.setEnabled(true)
-        runCurrent()
-        val again = transport.events.drop(3)
-        assertEquals(listOf("/friends"), again.map { it.payload.string("url") })
-        assertNull(again.single().header("x-umami-cache"))
-        assertEquals(null, again.single().payload["name"])
-    }
-
-    @Test
     fun aScreenIsCountedOnceUntilItOrTheModeChanges() = runTest {
         val transport = collector()
         val analytics = analytics(transport)

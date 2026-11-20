@@ -6,9 +6,6 @@ import java.util.IllformedLocaleException
 import java.util.Locale
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -82,31 +79,12 @@ class DeliveryAnalytics(
     private val deviceParcels: () -> Int = { 0 },
     private val now: () -> Instant = AppClock::now,
 ) {
-    // `object(forKey:) as? Bool ?? true`: on until switched off.
-    private val enabled: Boolean
+    /**
+     * An install whose reader once turned statistics off keeps them off (`object(forKey:) as? Bool ?? true`). No screen
+     * sets it.
+     */
+    val enabled: Boolean
         get() = defaults.bool(forKey = PREFERENCE_KEY) || !defaults.hasObject(forKey = PREFERENCE_KEY)
-
-    private val enabledState = MutableStateFlow(enabled)
-
-    /** "Usage statistics" in Settings: on until switched off. */
-    val enabledFlow: StateFlow<Boolean> = enabledState.asStateFlow()
-
-    fun setEnabled(value: Boolean) {
-        defaults.set(value, forKey = PREFERENCE_KEY)
-        enabledState.value = value
-        if (!value) {
-            queue.clear()
-            cache = null
-            InstallCounting.forget(defaults)
-        } else {
-            disabled = false
-            lastView = ""
-            scope.launch {
-                start()
-                view(screen)
-            }
-        }
-    }
 
     /**
      * What `/api/analytics/config` answers: Umami's collector and the app's property in it. Public ids, no keys. Android
@@ -308,7 +286,7 @@ class DeliveryAnalytics(
                     timeout = 5.0,
                     handlesCookies = false,
                 )
-                if (transport.data(request).statusCode == 204 && enabled) InstallCounting.keep(plan.counted, defaults)
+                if (transport.data(request).statusCode == 204) InstallCounting.keep(plan.counted, defaults)
             } catch (error: Exception) {
                 // Counting never affects the app.
                 if (error is CancellationException) throw error

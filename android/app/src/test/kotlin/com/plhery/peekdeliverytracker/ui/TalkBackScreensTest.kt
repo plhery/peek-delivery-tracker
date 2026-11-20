@@ -244,7 +244,7 @@ class TalkBackScreensTest {
     }
 
     @Test
-    fun settingsDownToUsageStatistics() {
+    fun settingsDownToAccountAndData() {
         show(READER)
         compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
         settle()
@@ -269,8 +269,7 @@ class TalkBackScreensTest {
                 "Distance [dropdownlist, Automatic (km)]",
                 "Weight [dropdownlist, Automatic (kg)]",
                 "Dot on updated parcels, A dot appears on a parcel with a new update since you last opened it. [switch, on]",
-                "Usage statistics, Counts how often Peek is opened and which features are used, never your parcels or your account. " +
-                    "Off, nothing is sent. [switch, on]",
+                "Account & data [button]",
             ),
         )
     }

@@ -246,12 +246,6 @@ interface DeliveriesSource {
     /** Switches "Dot on updated parcels" at once, then saves it with the account's preferences, if there is an account. */
     fun setMarkNewUpdates(enabled: Boolean)
 
-    /** Whether usage statistics are sent, "Usage statistics" in Settings: the analytics' switch, on until turned off. */
-    val usageStatistics: StateFlow<Boolean>
-
-    /** Switches usage statistics on this phone; off, nothing is sent and the counting id is deleted. */
-    fun setUsageStatistics(enabled: Boolean)
-
     /** The parcel's page is in front (#72): a parcel with news is seen now, here and on the account's other devices. */
     suspend fun markSeen(parcel: Parcel)
 
@@ -591,10 +585,6 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
     override fun setMarkNewUpdates(enabled: Boolean) {
         container.scope.launch { container.parcels.setMarkNewUpdates(enabled) }
     }
-
-    override val usageStatistics get() = container.analytics.enabledFlow
-
-    override fun setUsageStatistics(enabled: Boolean) = container.analytics.setEnabled(enabled)
 
     override suspend fun markSeen(parcel: Parcel) = container.parcels.markSeen(parcel)
 

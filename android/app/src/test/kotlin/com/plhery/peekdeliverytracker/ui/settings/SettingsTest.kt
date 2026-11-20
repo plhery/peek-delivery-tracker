@@ -428,7 +428,7 @@ class SettingsTest {
 
     /**
      * The deliveries' group holds the account's updates and no switch for the widget, which a reader removes from the
-     * home screen instead: the new-update dot's and usage statistics' are Settings' only switches.
+     * home screen instead: the new-update dot's is Settings' only switch.
      */
     @Test
     fun theDeliveriesHaveNoWidgetSwitch() {
@@ -438,7 +438,7 @@ class SettingsTest {
         assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
         assertFalse(exists("$SETTINGS_SHEET.widgets"))
         val switches = compose.onAllNodes(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch)).fetchSemanticsNodes()
-        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES, SETTINGS_USAGE_STATISTICS), switches.map { it.config[SemanticsProperties.TestTag] })
+        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
     /**
@@ -548,40 +548,23 @@ class SettingsTest {
         assertTrue(marked())
     }
 
-    /**
-     * "Usage statistics", under the new-update dot for an account and a guest alike, on at first: turned off, the
-     * analytics stop; turned on again from TalkBack, they start again.
-     */
+    /** No Usage statistics row, for an account or a guest: the new-update dot's is the page's only switch. */
     @Test
-    fun anAccountsUsageStatisticsSwitchTurnsAnalyticsOffAndOn() {
+    fun anAccountHasNoUsageStatisticsSwitch() {
         show()
-        usageStatisticsSwitchTurnsOffAndOn()
+        theDotIsTheOnlySwitch()
     }
 
     @Test
-    fun aGuestsUsageStatisticsSwitchTurnsAnalyticsOffAndOn() {
+    fun aGuestHasNoUsageStatisticsSwitch() {
         show(AuthenticationState.Welcome) { isGuest = true }
-        usageStatisticsSwitchTurnsOffAndOn()
+        theDotIsTheOnlySwitch()
     }
 
-    private fun usageStatisticsSwitchTurnsOffAndOn() {
+    private fun theDotIsTheOnlySwitch() {
         open()
-        node(SETTINGS_USAGE_STATISTICS).assert(hasText(text("settings.usageStatistics"))).assert(hasText(text("settings.usageStatisticsHint")))
-        // Where each starts, though the page may leave both below what it shows.
-        assertTrue(
-            node(SETTINGS_USAGE_STATISTICS).fetchSemanticsNode().positionInRoot.y >
-                node(SETTINGS_MARK_NEW_UPDATES).fetchSemanticsNode().positionInRoot.y,
-        )
-        assertEquals(ToggleableState.On, toggled(SETTINGS_USAGE_STATISTICS))
-        flip(SETTINGS_USAGE_STATISTICS)
-        assertFalse(source.usageStatistics.value)
-        assertEquals(ToggleableState.Off, toggled(SETTINGS_USAGE_STATISTICS))
-        // The dot's switch is its own.
-        assertTrue(source.markNewUpdates.value)
-        node(SETTINGS_USAGE_STATISTICS).performScrollTo().performSemanticsAction(SemanticsActions.OnClick)
-        settle()
-        assertTrue(source.usageStatistics.value)
-        assertEquals(ToggleableState.On, toggled(SETTINGS_USAGE_STATISTICS))
+        val switches = compose.onAllNodes(SemanticsMatcher.expectValue(SemanticsProperties.Role, Role.Switch)).fetchSemanticsNodes()
+        assertEquals(listOf(SETTINGS_MARK_NEW_UPDATES), switches.map { it.config[SemanticsProperties.TestTag] })
     }
 
     @Test

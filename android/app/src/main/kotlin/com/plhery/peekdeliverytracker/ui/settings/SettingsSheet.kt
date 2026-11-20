@@ -363,8 +363,8 @@ private fun Modifier.edgeSwipeBack(enabled: Boolean, push: Animatable<Float, *>,
  * profile (the account, or the way to one), the deliveries' updates (without an account, only on a phone with pushes),
  * Add parcels by email where the server offers it the account ([inboxOffered]) and Assistants where assistants may
  * connect to it ([assistantsOffered]), each with its "Beta" badge, a group shown only with one of them, the
- * appearance, the language, the time format, the distance and weight units, the new-update dot and usage statistics,
- * and the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's ground. It loads the
+ * appearance, the language, the time format, the distance and weight units and the new-update dot, and
+ * the data's row over the site's, 24 apart and 24 in, 520 wide at most, on the app's ground. It loads the
  * notifications' state as it opens (`.task`).
  */
 @Composable
@@ -393,7 +393,6 @@ private fun SettingsRootPage(
     val deliveryEmail by source.deliveryEmail.collectAsState()
     val devicePreset by source.deviceAlertPreset.collectAsState()
     val markNewUpdates by source.markNewUpdates.collectAsState()
-    val usageStatistics by source.usageStatistics.collectAsState()
     val appearance = appearanceSetting()
     val demo = source.isDemo
     val guest = source.isGuest
@@ -487,12 +486,6 @@ private fun SettingsRootPage(
                         SettingsToggleRow(
                             markNewUpdates, source::setMarkNewUpdates, localized("settings.markNewUpdates"), SETTINGS_MARK_NEW_UPDATES,
                             detail = localized("settings.markNewUpdatesHint"),
-                        )
-                        SettingsDivider()
-                        // The web's "Usage statistics": this phone's analytics and counting id.
-                        SettingsToggleRow(
-                            usageStatistics, source::setUsageStatistics, localized("settings.usageStatistics"), SETTINGS_USAGE_STATISTICS,
-                            detail = localized("settings.usageStatisticsHint"),
                         )
                     }
                     SettingsGroup {
@@ -868,7 +861,6 @@ internal const val SETTINGS_DELIVERY_UPDATES = "$SETTINGS_SHEET.deliveryUpdates"
 internal const val SETTINGS_ADD_BY_EMAIL = "$SETTINGS_SHEET.addByEmail"
 internal const val SETTINGS_ASSISTANTS = "$SETTINGS_SHEET.assistants"
 internal const val SETTINGS_MARK_NEW_UPDATES = "$SETTINGS_SHEET.markNewUpdates"
-internal const val SETTINGS_USAGE_STATISTICS = "$SETTINGS_SHEET.usageStatistics"
 internal const val SETTINGS_ACCOUNT_DATA = "$SETTINGS_SHEET.accountData"
 internal const val SETTINGS_HOME_PAGE = "$SETTINGS_SHEET.homePage"
 internal const val SETTINGS_RATE = "$SETTINGS_SHEET.rate"

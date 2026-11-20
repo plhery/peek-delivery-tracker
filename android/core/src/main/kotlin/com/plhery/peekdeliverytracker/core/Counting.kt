@@ -65,9 +65,6 @@ object InstallCounting {
         defaults.set(JsonEncoder().encode(CountingId.serializer(), id).decodeToString(), forKey = STORAGE_KEY)
     }
 
-    /** Usage statistics were turned off: the id goes. */
-    fun forget(defaults: UserDefaults) = defaults.removeObject(forKey = STORAGE_KEY)
-
     private fun day(now: Instant): String = now.atOffset(ZoneOffset.UTC).toLocalDate().toString()
 
     private fun date(day: String): LocalDate? = try {

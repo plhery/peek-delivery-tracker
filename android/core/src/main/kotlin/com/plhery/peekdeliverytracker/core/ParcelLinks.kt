@@ -407,13 +407,23 @@ class ParcelLinkStore(
         }
     }
 
-    /** Keeps the link across sign-in. The sheet closes; `resume` opens it again. */
+    /**
+     * Keeps the link across sign-in, which happens over the sheet: should the app be relaunched on the way, `resume`
+     * opens it again once someone is signed in.
+     */
     fun rememberForSignIn() {
         val route = route ?: return
         val pending = Pending(id = route.id, name = route.name, note = route.note, from = route.from, receivedAt = now().timeIntervalSinceReferenceDate)
         defaults.set(JsonEncoder().encode(Pending.serializer(), pending), forKey = storageKey)
+    }
+
+    /**
+     * Signed out, with the sign-in screen under the sheet: the sheet makes way for it, and `resume` opens the link again
+     * once someone is signed in.
+     */
+    fun makeWayForSignIn() {
         generation += 1
-        this.route = null
+        route = null
     }
 
     /** Opens the remembered link again, once someone is signed in. */

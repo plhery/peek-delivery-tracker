@@ -49,6 +49,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.platform.AppNotifications
 import com.plhery.peekdeliverytracker.platform.LauncherShortcuts
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.arrival.UnlockRequests
 import java.io.File
 import java.time.Instant
@@ -299,15 +300,21 @@ interface DeliveriesSource {
     /** Leaves the demo for the first screen. */
     fun showWelcome()
 
-    /** `store.showSignIn()`: the sign-in screen over a guest's list, from Settings, a link kept for later or the first open's masthead. */
+    /** `store.showSignIn()`: the sign-in screen over a guest's list, from the first open's masthead. */
     fun showSignIn()
 
     /**
      * The unlock sheet over the window ([UnlockRequests], [com.plhery.peekdeliverytracker.ui.arrival.UnlockSheetHost]):
-     * what a guest can't do without an account (several numbers, the day's lookups, friends), with the sign-in, over
-     * the screen they were on. One for the process, as its pages' work is.
+     * what nobody signed in can't do without an account (several numbers, the day's lookups, friends, the account
+     * itself), with the sign-in, over the screen they were on. One for the process, as its pages' work is.
      */
     val unlock: UnlockRequests
+
+    /** `unlock = reason`: the unlock sheet over the screen, counted as the sign-in's screen, as the iPhone's sheet counts itself. */
+    fun askToSignIn(reason: UnlockReason) {
+        unlock.ask(reason)
+        view("sign-in")
+    }
 
     /** `session.enterDemo()`: the demo, from the first open of a build without a server. */
     fun enterDemo()
@@ -627,7 +634,7 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
     override fun showSignIn() = container.parcels.showSignIn()
 
-    override val unlock: UnlockRequests get() = UNLOCK
+    override val unlock: UnlockRequests get() = UnlockRequests.process
 
     override fun enterDemo() = container.session.enterDemo()
 
@@ -701,9 +708,6 @@ class ContainerDeliveries(private val container: AppContainer) : DeliveriesSourc
 
         /** What this process's pages wait for, for every window it makes, as its launch is. */
         val PAGE_WORK = PageWork()
-
-        /** This process's unlock sheet, for every window it makes, as its pages' work is. */
-        val UNLOCK = UnlockRequests()
 
         /** This process's share sheets, for every window it makes, as its pages' work is. */
         val SHARES = ParcelShares()

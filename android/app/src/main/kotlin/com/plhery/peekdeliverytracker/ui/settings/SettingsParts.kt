@@ -614,7 +614,7 @@ internal fun AccountRow(email: String?, demo: Boolean) {
 /**
  * AccountView's `signInOffer` (C-S39): "link.account.title" in headline over "link.keep.body" in subheadline secondary,
  * 5 apart, then 14 under them the app's main button, "arrival.signInTitle" (`FirstParcelPrimaryLabel`), which gives
- * under the finger; 18 in, raised with 18-point continuous corners and a hairline of 0.75 in the sheet's line at 0.3.
+ * under the finger and asks to sign in over Settings (`unlock = .account`); 18 in, raised with 18-point continuous corners and a hairline of 0.75 in the sheet's line at 0.3.
  */
 @Composable
 internal fun SignInOffer(onSignIn: () -> Unit) {

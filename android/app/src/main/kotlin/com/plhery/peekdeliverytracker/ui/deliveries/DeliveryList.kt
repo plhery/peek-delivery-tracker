@@ -99,6 +99,7 @@ import com.plhery.peekdeliverytracker.core.notice
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
@@ -665,7 +666,7 @@ private fun ListItemContent(state: DeliveriesState, item: ListItem) {
         is ListItem.SectionCard -> SectionCard(state, item)
         is ListItem.Foot -> DeliveriesFoot(item.homePageUrl, item.privacyUrl)
         ListItem.DeviceAccount -> DeviceAccountRow(
-            state.source.accountInvitation, onSignIn = { state.source.showSignIn() }, onClose = state::closeAccountInvitation,
+            state.source.accountInvitation, onSignIn = { state.source.askToSignIn(UnlockReason.Account) }, onClose = state::closeAccountInvitation,
         )
     }
 }
@@ -696,7 +697,7 @@ private fun ListNotice(state: DeliveriesState, notice: ListItem.Notice) {
  * cream capsule 34 tall, 12 in (`HStack(spacing: 12)` round a `Spacer(minLength: 8)`); or the capsule 10 under the
  * words at the accessibility sizes. The row is 15 in, 10 above and below, 66 tall at least, on the paper with 16-point
  * continuous corners and a hairline of 0.75 in the separator at 0.3, and gives under the finger; a tap asks to sign in
- * (`session.showSignIn()`).
+ * over the list (`unlock = .account`).
  *
  * From its sixth visit ([AccountInvitationVisit.closable]) an × in caption semibold secondary stands at the row's end,
  * beside the capsule, or in its top corner at the accessibility sizes, in a target of its own 48 square that the row

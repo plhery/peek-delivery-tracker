@@ -63,6 +63,7 @@ import com.plhery.peekdeliverytracker.platform.PlayListing
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.Recreation
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ANNOUNCEMENT
 import com.plhery.peekdeliverytracker.ui.deliveries.DEVICE_ACCOUNT_ROW
@@ -322,7 +323,10 @@ class SettingsTest {
         settle()
         node(DEVICE_ACCOUNT_ROW).assert(hasText(text("link.account.title"))).performClick()
         settle()
-        assertEquals(1, source.signIns)
+        assertEquals("Asked over the list", UnlockReason.Account, source.unlock.reason)
+        assertEquals(0, source.signIns)
+        compose.runOnUiThread { source.unlock.close() }
+        settle()
 
         open()
         assertTrue(exists(SETTINGS_DELIVERY_UPDATES))
@@ -334,8 +338,9 @@ class SettingsTest {
         assertFalse(exists(SETTINGS_SIGN_OUT))
         back()
         tap(SETTINGS_SIGN_IN)
-        assertEquals(2, source.signIns)
-        assertFalse(deliveries.showingAccount)
+        assertEquals("Asked over Settings, which stays", UnlockReason.Account, source.unlock.reason)
+        assertEquals(0, source.signIns)
+        assertTrue(deliveries.showingAccount)
     }
 
     @Test

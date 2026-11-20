@@ -168,6 +168,9 @@ internal class DeliveriesNavigator(
 
     fun settle(arrangement: DeliveriesArrangement, rows: List<UUID>) = update(navigation.settle(arrangement, rows))
 
+    /** Back to the list alone, nothing chosen: what a page showed may have gone with the account taking it along. */
+    fun reset() = update(DeliveriesNavigation())
+
     /** The parcel shown beside the list has gone from it: the card after it shows instead. */
     fun leave(parcelId: UUID, rows: List<UUID>) = update(navigation.leave(parcelId, rows))
 
@@ -870,6 +873,16 @@ internal class DeliveriesState(
         revealParcel = null
         revealWaits = false
         parcelBurst = null
+    }
+
+    /**
+     * Someone signed in over the deliveries: `navigation = DeliveriesNavigation(); addedParcelID = nil;
+     * revealParcelID = nil; parcelBurstID = nil`.
+     */
+    fun signedIn() {
+        navigator.reset()
+        addedParcel = null
+        endArrival()
     }
 
     /**

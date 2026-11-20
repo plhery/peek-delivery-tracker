@@ -82,6 +82,9 @@ class FakeParcelLinks(
     var here: UUID? = null
     var deviceParcelsShown = 0
     var signIns = 0
+
+    /** Each sign-in asked for over the sheet (`unlock = .account`). */
+    var unlocks = 0
     val actions = mutableListOf<String>()
 
     override suspend fun keep(link: ParcelLinkRoute): ParcelLinkClaim {
@@ -107,6 +110,10 @@ class FakeParcelLinks(
 
     override fun showSignIn() {
         signIns += 1
+    }
+
+    override fun askToSignIn() {
+        unlocks += 1
     }
 
     override fun errorMessage(error: Throwable): String = error.message ?: "Something went wrong"

@@ -12,6 +12,8 @@ import com.plhery.peekdeliverytracker.core.ParcelLinkStore
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequestApp
 import com.plhery.peekdeliverytracker.core.api.PublicParcelResponse
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockRequests
 import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.StateFlow
@@ -68,6 +70,9 @@ interface ParcelLinkSource {
     /** `store.showSignIn()`: over a guest's list, which stays until someone signs in. */
     fun showSignIn()
 
+    /** `unlock = .account`: the sign-in over the sheet, which stays and then shows the parcel as someone signed in sees it. */
+    fun askToSignIn()
+
     /** `localizer.errorMessage(_:)`. */
     fun errorMessage(error: Throwable): String
 
@@ -106,6 +111,11 @@ class ContainerParcelLinks(private val container: AppContainer) : ParcelLinkSour
     override fun showDeviceParcels() = container.parcels.showDeviceParcels()
 
     override fun showSignIn() = container.parcels.showSignIn()
+
+    override fun askToSignIn() {
+        UnlockRequests.process.ask(UnlockReason.Account)
+        container.analytics.view("sign-in")
+    }
 
     override fun errorMessage(error: Throwable) = container.localizer.errorMessage(error)
 

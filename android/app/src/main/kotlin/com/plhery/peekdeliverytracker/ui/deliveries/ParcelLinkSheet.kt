@@ -138,6 +138,7 @@ import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.LocalNow
 import com.plhery.peekdeliverytracker.ui.LocalUse24HourTime
+import com.plhery.peekdeliverytracker.ui.arrival.unlockable
 import com.plhery.peekdeliverytracker.ui.draw.ActivityIndicator
 import com.plhery.peekdeliverytracker.ui.draw.CapsuleShape
 import com.plhery.peekdeliverytracker.ui.draw.CarrierFleetMark
@@ -324,11 +325,21 @@ class ParcelLinkSheetState {
         }
     }
 
-    /** `signIn()`: the link kept for after sign-in, without its key, and the sign-in shown. */
+    /**
+     * `signIn()`: the link kept for after sign-in, without its key, should the app be relaunched on the way, and the
+     * sign-in asked over the sheet, which stays.
+     */
     internal fun signIn(source: ParcelLinkSource) {
         source.action("parcel-link-sign-in")
         source.links.rememberForSignIn()
-        if (source.session.value !is AuthenticationState.SignedIn) source.showSignIn()
+        val session = source.session.value
+        if (session.unlockable) {
+            source.askToSignIn()
+        } else if (session !is AuthenticationState.SignedIn) {
+            // Signed out, the sign-in screen is under the sheet, which makes way for it.
+            source.links.makeWayForSignIn()
+            source.showSignIn()
+        }
     }
 }
 

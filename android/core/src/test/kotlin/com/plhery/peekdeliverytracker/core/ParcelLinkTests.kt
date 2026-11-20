@@ -682,7 +682,8 @@ class ParcelLinkTests {
         assertNull("Looking at a link does not remember it", store.remembered)
 
         store.rememberForSignIn()
-        assertNull("The sheet makes way for sign-in", store.route)
+        assertEquals("Sign-in happens over the sheet", link, store.route)
+        assertEquals(link, store.remembered)
 
         // The app may be relaunched by the sign-in round trip.
         now = now.plusSeconds(6 * 86_400)
@@ -697,6 +698,20 @@ class ParcelLinkTests {
         assertNull(relaunched.remembered)
         relaunched.resume()
         assertNull(relaunched.route)
+    }
+
+    @Test
+    fun overTheSignInScreenTheSheetMakesWayAndComesBackOnceSignedIn() {
+        val defaults = MemoryDefaults()
+        val link = ParcelLinkRoute(linkId)
+        val store = ParcelLinkStore(defaults = defaults, now = { Instant.ofEpochSecond(1_790_000_000) }, read = { _, _ -> null })
+        store.open(link)
+        store.rememberForSignIn()
+        store.makeWayForSignIn()
+        assertNull("The sign-in screen under the sheet shows", store.route)
+        assertEquals("The link is still remembered", link, store.remembered)
+        store.resume()
+        assertEquals(link, store.route)
     }
 
     @Test
@@ -715,6 +730,7 @@ class ParcelLinkTests {
         remember()
         now = now.plusSeconds(7 * 86_400)
         assertNull("Seven days on, the link is forgotten", store.remembered)
+        store.close()
         store.resume()
         assertNull(store.route)
         assertNull(defaults.values["sdt.pendingParcelLink.v1"])

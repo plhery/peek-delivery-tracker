@@ -53,24 +53,35 @@ import com.plhery.peekdeliverytracker.ui.theme.sfLines
 import kotlinx.coroutines.CoroutineScope
 
 /**
- * What signing in unlocks, as the unlock sheet says it (the website's `UnlockReason`): its line, or none where the
- * screen it opens over says it already.
+ * What a guest asked for that an account unlocks (the iPhone's `UnlockReason`): the line the sheet says it with, before
+ * the parcels coming along, and the title over it.
  */
 enum class UnlockReason(val key: String?) {
+    /** Signing in itself, from Settings, the list's account row or a link kept for later: only the parcels coming along. */
+    Account(null),
+
     /** Several numbers in one text, from Add: "unlock.several". */
     Several("unlock.several"),
 
     /** No lookups left for today, from Add: "unlock.daily". */
     Daily("unlock.daily"),
 
-    /** The friends tab, whose intro says what friends are for. */
-    Friends(null),
+    /** Friends compare passports between accounts, from the friends tab or the demo's invitation: "unlock.friends". */
+    Friends("unlock.friends"),
+    ;
+
+    /** "Sign in" where signing in is itself the ask, else "Sign in to unlock this". */
+    val title: String get() = if (key == null) "arrival.signInTitle" else "unlock.title"
 }
 
+/** Where the sheet may show: nobody is signed in, a guest's list or the demo under it. */
+internal val AuthenticationState.unlockable: Boolean
+    get() = this == AuthenticationState.Welcome || this == AuthenticationState.Demo
+
 /**
- * The unlock sheet asked for over the window ([UnlockSheetHost]): one for the process, so a window made again keeps it
- * up. What the guest was doing stays under it as it was (Add and what it holds, the friends tab), so closing it goes
- * back there and signing in carries on there.
+ * The unlock sheet asked for over the window ([UnlockSheetHost]): one for the process ([process]), so a window made
+ * again keeps it up. What the guest was doing stays under it as it was (Add and what it holds, Settings, a link's sheet,
+ * the friends tab), so closing it goes back there and signing in carries on there.
  */
 @Stable
 class UnlockRequests {
@@ -93,34 +104,39 @@ class UnlockRequests {
         if (!working) reason = null
     }
 
-    /** Signed in, or no longer a guest: the sheet goes, whatever runs. */
+    /** Signed in, or nobody to sign in any more: the sheet goes, whatever runs. */
     internal fun end() {
         working = false
         reason = null
     }
+
+    companion object {
+        /** This process's unlock sheet, for every window it makes and the link's sheet, as its pages' work is. */
+        val process = UnlockRequests()
+    }
 }
 
 /**
- * "Sign in to unlock this" (the website's `UnlockSheet`, the guest design's one sheet per platform): what a guest can't
+ * "Sign in to unlock this" (the iPhone's `UnlockSheet`, the guest design's one sheet per platform): what a guest can't
  * do without an account, asked over the screen where they wanted it rather than on the sign-in screen, which would
- * leave their list. It shows while the root's [state] is a guest's and signs in with [session], which leaves the
- * guest's list, the widget and the Next delivery shortcut as they are until it succeeds. Once someone is signed in it
- * goes and the screen under it carries on (Add with its text, the friends tab); nobody's a guest any more, it goes too.
- * A drag, the dim, the back, its ✕ and "Not now" close it, but not while a sign-in runs. It is as tall as it needs,
- * and takes the whole height once the email's form opens, for the keyboard.
+ * leave their list. It shows while nobody is signed in ([unlockable]: a guest's list, or the demo's invitation) and
+ * signs in with [session], which leaves the guest's list, the widget and the Next delivery shortcut as they are until it
+ * succeeds. Once someone is signed in it goes and the screen under it carries on (Add with its text, Settings, a link's
+ * sheet, the friends tab). A drag, the dim, the back, its ✕ and "Not now" close it, but not while a sign-in runs. It is
+ * as tall as it needs, and takes the whole height once the email's form opens, for the keyboard.
  */
 @Composable
 internal fun UnlockSheetHost(requests: UnlockRequests, state: AuthenticationState, session: SessionStore, work: CoroutineScope) {
     val reason = requests.reason
     LaunchedEffect(requests, reason != null, state) {
-        if (reason != null && state != AuthenticationState.Welcome) requests.end()
+        if (reason != null && !state.unlockable) requests.end()
     }
     var shown by remember { mutableStateOf(reason) }
     if (reason != null) shown = reason
     Sheet(
-        visible = reason != null && state == AuthenticationState.Welcome,
+        visible = reason != null && state.unlockable,
         onDismiss = requests::close,
-        paneTitle = localized("unlock.title"),
+        paneTitle = localized((shown ?: UnlockReason.Several).title),
         detents = listOf(SheetDetent.Fitted, SheetDetent.Large),
         onClosed = { shown = null },
         detent = if (requests.large) SheetDetent.Large else SheetDetent.Fitted,
@@ -134,10 +150,11 @@ internal fun UnlockSheetHost(requests: UnlockRequests, state: AuthenticationStat
 
 /**
  * The sheet, on the sheet's background, 22 in, 26 under its top and 18 over its foot, 560 wide at most, 14 apart: the
- * title in title2 semibold beside the ✕ ("common.close"); the reason's line and "unlock.comes" in one paragraph in
- * subheadline secondary, as the website writes them; the sign-in's card (paper, corners of 24, a hairline of the
- * separator at 35 %, 22 in) with the ways in and the short privacy line, as on the sign-in screen but without its title,
- * which the sheet's says; and "Not now" in subheadline secondary, centred, as the website's, which closes it.
+ * reason's title in title2 semibold beside the ✕ ("common.close"); the reason's line and "unlock.comes" in one
+ * paragraph in subheadline secondary, as the iPhone writes them, or "unlock.comes" alone for [UnlockReason.Account];
+ * the sign-in's card (paper, corners of 24, a hairline of the separator at 35 %, 22 in) with the ways in and the short
+ * privacy line, as on the sign-in screen but without its title, which the sheet's says; and "Not now" in subheadline
+ * secondary, centred, as the website's, which closes it.
  */
 @Composable
 private fun UnlockSheet(reason: UnlockReason, session: SessionStore, work: CoroutineScope, requests: UnlockRequests) {
@@ -167,7 +184,7 @@ private fun UnlockSheet(reason: UnlockReason, session: SessionStore, work: Corou
         ) {
             Row(horizontalArrangement = Arrangement.spacedBy(16.dp), verticalAlignment = Alignment.CenterVertically) {
                 Text(
-                    localized("unlock.title"),
+                    localized(reason.title),
                     Modifier.weight(1f).semantics { heading() },
                     color = colors.label,
                     style = type.style(IosTextStyle.Title2, FontWeight.SemiBold).sfLines(),

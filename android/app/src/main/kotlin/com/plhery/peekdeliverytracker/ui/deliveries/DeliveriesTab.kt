@@ -116,10 +116,12 @@ import java.util.UUID
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 /** What the deliveries' stack holds: the list at its root and, over it or beside it, a parcel's page. */
@@ -164,6 +166,14 @@ fun DeliveriesTab(
     val holdsUndo = holdsUndo()
     SideEffect { source.undoClock.held.value = holdsUndo }
     LaunchedEffect(state) { source.leftOnDevice.filterNotNull().collect(state::tellLeftOnDevice) }
+    // Signed in over the deliveries ([UnlockSheet]): a page open on this device's parcel would have none to show once
+    // the account takes it along. What Add or Settings show stays open, as signed in. A window made again starts from
+    // whoever is signed in by then.
+    LaunchedEffect(state) {
+        source.session.map { (it as? AuthenticationState.SignedIn)?.user?.id }.distinctUntilChanged().drop(1).collect { user ->
+            if (user != null) state.signedIn()
+        }
+    }
     ListPullEffects(state)
     val reduceMotion = PeekTheme.reduceMotion
     val largeText = PeekTheme.dynamicTypeSize.isAccessibilitySize

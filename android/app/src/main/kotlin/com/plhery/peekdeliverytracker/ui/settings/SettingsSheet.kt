@@ -68,6 +68,8 @@ import com.plhery.peekdeliverytracker.platform.SitePage
 import com.plhery.peekdeliverytracker.ui.AccessibilityFocus
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.accessibilityFocus
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
+import com.plhery.peekdeliverytracker.ui.arrival.unlockable
 import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesSource
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
@@ -424,9 +426,14 @@ private fun SettingsRootPage(
                     if (session is AuthenticationState.SignedIn || demo) {
                         AccountRow(email, demo)
                     } else {
+                        // Signing in happens over Settings, which a guest's parcels stay under.
                         SignInOffer {
-                            source.showSignIn()
-                            state.closeAccount()
+                            if (session.unlockable) {
+                                source.askToSignIn(UnlockReason.Account)
+                            } else {
+                                source.showSignIn()
+                                state.closeAccount()
+                            }
                         }
                     }
                     // Alerts are kept up to date by pushes, the F-Droid build's included; a phone without pushes keeps

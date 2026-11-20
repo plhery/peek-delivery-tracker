@@ -87,6 +87,7 @@ import com.plhery.peekdeliverytracker.core.api.FriendsSnapshot
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
 import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
+import com.plhery.peekdeliverytracker.ui.arrival.unlockable
 import com.plhery.peekdeliverytracker.ui.readFirst
 import com.plhery.peekdeliverytracker.ui.deliveries.AccountBar
 import com.plhery.peekdeliverytracker.ui.deliveries.Announcement
@@ -474,8 +475,7 @@ internal fun FriendsChrome(
  * `FriendsSignedOutView` (A-S20): the postage pair (12 over the rest), "friends.title" in semibold 26 (growing with the
  * text at the accessibility sizes, as `@ScaledMetric(relativeTo: .title)`), the summary in subheadline in the secondary
  * grey, centred, and Sign in; 22 apart, in by 70 and 20. A guest's Sign in opens the unlock sheet over the tab
- * ([UnlockReason.Friends]), whose sign-in leaves the guest's list as it is until it succeeds; otherwise the sign-in
- * (`session.showSignIn()`).
+ * ([UnlockReason.Friends]), whose sign-in leaves the guest's list as it is until it succeeds.
  */
 @Composable
 private fun FriendsSignedOut(source: DeliveriesSource, top: Dp, bottom: Dp, start: Dp, end: Dp) {
@@ -489,7 +489,7 @@ private fun FriendsSignedOut(source: DeliveriesSource, top: Dp, bottom: Dp, star
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Intro(localized("arrival.signInTitle"), FRIENDS_SIGN_IN) {
-                if (source.session.value == AuthenticationState.Welcome) source.unlock.ask(UnlockReason.Friends) else source.showSignIn()
+                if (source.session.value.unlockable) source.askToSignIn(UnlockReason.Friends) else source.showSignIn()
             }
         }
     }
@@ -543,6 +543,18 @@ private fun FriendsCircleView(source: DeliveriesSource, state: FriendsState, top
     LaunchedEffect(demo) {
         store.configure(demo)
         activity.arrivalSnapshot?.let(store::seed)
+    }
+    // Signed in over the demo ([UnlockSheet]): the account's friends, not the demo's, its panel and page closed. The
+    // activity's new presentation reads them. A window made again starts from whoever is signed in by then.
+    val user = (session as? AuthenticationState.SignedIn)?.user?.id
+    var seenUser by remember { mutableStateOf(user) }
+    LaunchedEffect(user) {
+        if (user == seenUser) return@LaunchedEffect
+        seenUser = user
+        state.hide()
+        state.arriving = null
+        store.clear()
+        store.configure(demo)
     }
     // `onDisappear`, but not as the window goes for now ([goesForNow]).
     val lifecycle = LocalLifecycleOwner.current.lifecycle
@@ -923,10 +935,10 @@ private fun PanelContent(state: FriendsState, panel: FriendsPanel, snapshot: Fri
         FriendsPanel.Invite -> if (demo) {
             FriendsInvitationParcel(nickname)
             Text(localized("friends.demoInvites"), color = colors.secondaryText, style = PeekTheme.type.subheadline.sfLines())
+            // The demo's invitation asks to sign in over itself; the demo stays underneath.
             ProminentButton(localized("welcome.signInInstead"), tag = FRIENDS_DEMO_SIGN_IN) {
-                state.closePanel()
                 store.errorKey = null
-                source.showWelcome()
+                source.askToSignIn(UnlockReason.Friends)
             }
         } else {
             FriendsInvitationView(

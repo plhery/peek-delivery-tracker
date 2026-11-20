@@ -1,6 +1,7 @@
 package com.plhery.peekdeliverytracker.ui.arrival
 
 import androidx.activity.ComponentActivity
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.semantics.SemanticsProperties
@@ -15,6 +16,7 @@ import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import androidx.compose.ui.test.performScrollTo
 import androidx.compose.ui.test.performTextInput
 import androidx.compose.ui.test.performTextReplacement
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -26,16 +28,22 @@ import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
 import com.plhery.peekdeliverytracker.ui.talkBackStops
+import com.plhery.peekdeliverytracker.ui.deliveries.ACCOUNT_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_ERROR
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_ERROR_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_PARCEL
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_SAVE
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_TRACKING
+import com.plhery.peekdeliverytracker.ui.deliveries.DeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.DemoCards
 import com.plhery.peekdeliverytracker.ui.deliveries.FakeDeliveries
+import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
+import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
 import kotlinx.coroutines.CompletableDeferred
 import org.junit.Assert.assertEquals
@@ -68,6 +76,7 @@ class UnlockSheetTest {
     private val en = Localizer(AppLanguage.En, variant = "android")
     private lateinit var session: SessionStore
     private lateinit var source: FakeDeliveries
+    private lateinit var deliveries: DeliveriesState
 
     /** A guest's list (the demo's parcels, followed on this phone), with email codes to sign in. */
     private fun show(prepare: FakeDeliveries.() -> Unit = {}) {
@@ -79,7 +88,7 @@ class UnlockSheetTest {
         compose.setContent {
             val scope = rememberCoroutineScope()
             session = remember { signInSession(scope, signInConfiguration(), service).also { it.showWelcome() } }
-            RootHost(session = session, source = source)
+            CompositionLocalProvider(LocalDeliveriesState provides { deliveries = it }) { RootHost(session = session, source = source) }
         }
         compose.waitForIdle()
     }
@@ -150,12 +159,45 @@ class UnlockSheetTest {
     }
 
     @Test
-    fun eachReasonHasItsLineAndTheFriendsTabNone() {
+    fun eachReasonHasItsLineAndAnAccountJustWhatComesAlong() {
         show()
         ask(UnlockReason.Daily)
         node(UNLOCK_WHAT).assertTextEquals("${text("unlock.daily")} ${text("unlock.comes")}")
         ask(UnlockReason.Friends)
+        node(UNLOCK_WHAT).assertTextEquals("${text("unlock.friends")} ${text("unlock.comes")}")
+        ask(UnlockReason.Account)
+        assertTrue(inSheet(text("arrival.signInTitle")))
+        assertFalse(inSheet(text("unlock.title")))
         node(UNLOCK_WHAT).assertTextEquals(text("unlock.comes"))
+    }
+
+    @Test
+    fun fromSettingsItAsksOverSettingsWhichStaysOnceSignedIn() {
+        show()
+        node(ACCOUNT_BUTTON).performClick()
+        compose.waitForIdle()
+        node(SETTINGS_SIGN_IN).performScrollTo().performClick()
+        compose.waitForIdle()
+        assertEquals(UnlockReason.Account, source.unlock.reason)
+        assertTrue(source.views.contains("sign-in"))
+        assertTrue(drawn(SETTINGS_SHEET))
+        signIn()
+        assertTrue(session.state is AuthenticationState.SignedIn)
+        assertFalse(exists(UNLOCK_SHEET))
+        assertTrue(exists(SETTINGS_SHEET))
+    }
+
+    @Test
+    fun signedInOverAParcelsPageTheListShowsAlone() {
+        show()
+        val parcel = source.parcels.value.first().id
+        compose.runOnIdle { deliveries.navigator.open(parcel) }
+        compose.waitForIdle()
+        assertEquals(parcel, deliveries.navigator.navigation.shown)
+        ask(UnlockReason.Several)
+        signIn()
+        assertNull("This device's parcel may have gone with the account taking it along", deliveries.navigator.navigation.shown)
+        assertTrue(exists(PARCEL_LIST))
     }
 
     @Test

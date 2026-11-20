@@ -591,7 +591,7 @@ private fun AddParcelView(state: DeliveriesState, request: AddRequest, form: Add
                         if (message != null) {
                             ErrorBanner(
                                 message, existing, open = { id -> state.openExisting(id) },
-                                signIn = if (signIn) ({ state.source.unlock.ask(UnlockReason.Daily) }) else null,
+                                signIn = if (signIn) ({ state.source.askToSignIn(UnlockReason.Daily) }) else null,
                             )
                         }
                     }
@@ -1253,7 +1253,7 @@ private fun NumberChoice(state: DeliveriesState, addition: ParcelAddition, actio
                         .wrapContentHeight(Alignment.CenterVertically)
                         .testTag(ADD_SIGN_IN)
                         .button(interactionSource = null, indication = PlainPress, enabled = enabled, role = Role.Button) {
-                            state.source.unlock.ask(UnlockReason.Several)
+                            state.source.askToSignIn(UnlockReason.Several)
                         },
                     // In the tabs' ink, as TintedButton's words.
                     color = if (enabled) colors.ink else colors.tertiaryLabel,

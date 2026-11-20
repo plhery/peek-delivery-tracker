@@ -438,9 +438,11 @@ class ParcelLinkSheetTest {
         assertFalse(exists(LINK_FOLLOW))
         compose.onNodeWithTag(LINK_SIGN_IN).performClick()
         settle()
-        assertEquals(1, links.signIns)
+        assertEquals("A guest is asked to sign in over the sheet", 1, links.unlocks)
+        assertEquals(0, links.signIns)
         assertTrue(links.actions.contains("parcel-link-sign-in"))
-        assertNull("The sheet closes for the sign-in", links.links.route)
+        assertEquals("The sheet stays under the sign-in", ParcelLinkRoute(id = viewerId), links.links.route)
+        assertTrue(exists(LINK_SHEET))
         assertNotNull(links.links.remembered)
     }
 
@@ -953,13 +955,35 @@ class ParcelLinkSheetTest {
     // Sign-in
 
     @Test
+    fun aGuestSignedInOverTheSheetSeesTheParcelAsSomeoneSignedIn() {
+        show(FakeParcelLinks(answer = LinkFixtures.keepable(), tracksWithoutAccount = false))
+        open()
+        compose.onNodeWithTag(LINK_SIGN_IN).performClick()
+        settle()
+        assertEquals(1, links.unlocks)
+
+        compose.runOnUiThread { links.session.value = FakeParcelLinks.READER }
+        settle()
+        assertEquals(ParcelLinkRoute(id = viewerId), links.links.route)
+        assertEquals("Read once, the sheet staying", 1, links.reads.size)
+        assertTrue(exists(LINK_ADD))
+        assertFalse(exists(LINK_SIGN_IN))
+        assertEquals(emptyList<ParcelLinkRoute>(), links.kept)
+    }
+
+    @Test
     fun aLinkKeptForSignInOpensAgainOnceSomeoneIsSignedInWithoutItsKey() {
-        show(FakeParcelLinks(tracksWithoutAccount = false).apply { read = { _, key -> if (key == null) LinkFixtures.keepable() else LinkFixtures.owner() } })
+        // Signed out, the sheet makes way for the sign-in screen under it.
+        show(
+            FakeParcelLinks(tracksWithoutAccount = false).apply { read = { _, key -> if (key == null) LinkFixtures.keepable() else LinkFixtures.owner() } },
+            AuthenticationState.SignedOut,
+        )
         open(key = LinkFixtures.KEY)
         assertEquals(emptyList<ParcelLinkRoute>(), links.followed)
         compose.onNodeWithTag(LINK_SIGN_IN).performClick()
         settle()
         assertEquals(1, links.signIns)
+        assertEquals(0, links.unlocks)
         assertFalse(exists(LINK_SHEET))
         assertFalse("The key is never written down", links.defaults.dump().contains(LinkFixtures.KEY))
 

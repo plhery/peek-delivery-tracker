@@ -291,10 +291,11 @@ class FriendsTest {
         assertFalse(shows("A"))
         assertFalse(shows("M"))
         tap(FRIENDS_SIGN_IN)
-        // Over the tab, whose intro says what friends are for: the sheet adds only what comes with the guest.
+        // Over the tab: what friends are, then what comes with the guest.
         assertEquals(UnlockReason.Friends, source.unlock.reason)
-        compose.onNodeWithTag(UNLOCK_WHAT).assertTextEquals(text("unlock.comes"))
+        compose.onNodeWithTag(UNLOCK_WHAT).assertTextEquals("${text("unlock.friends")} ${text("unlock.comes")}")
         assertEquals(0, source.signIns)
+        assertTrue(source.views.contains("sign-in"))
         assertEquals(0, client.loads)
         assertFalse(exists(FRIENDS_INVITE))
     }
@@ -673,7 +674,7 @@ class FriendsTest {
     }
 
     @Test
-    fun theDemosInvitationOffersToSignInInsteadWhichShowsTheWelcome() {
+    fun theDemosInvitationAsksToSignInOverTheDemoAndSignedInTheCircleIsTheAccounts() {
         show(AuthenticationState.Demo)
         tap(FRIENDS_INVITE)
         assertEquals(text("friends.inviteTitle"), panel())
@@ -682,9 +683,17 @@ class FriendsTest {
         assertFalse(exists(FRIENDS_INVITATION_URL))
         assertEquals(listOf(text("welcome.signInInstead")), words(FRIENDS_DEMO_SIGN_IN))
         tap(FRIENDS_DEMO_SIGN_IN)
-        assertEquals(1, source.welcomes)
-        assertNull(panel())
+        // Over the demo, which stays underneath.
+        assertEquals(UnlockReason.Friends, source.unlock.reason)
+        compose.onNodeWithTag(UNLOCK_WHAT).assertTextEquals("${text("unlock.friends")} ${text("unlock.comes")}")
+        assertEquals(0, source.welcomes)
         assertTrue(client.requests.isEmpty())
+
+        // Signed in over it: the sheet goes, and with it the demo's panel and circle.
+        switch(reader)
+        assertNull(source.unlock.reason)
+        assertNull(panel())
+        assertEquals(listOf("Ada", "Bo", "Cy", "Di"), cards())
     }
 
     @Test

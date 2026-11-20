@@ -28,10 +28,12 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.isDelivered
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import java.time.Duration
 import java.time.Instant
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -142,11 +144,14 @@ class AccountInvitationTest {
 
         compose.onNodeWithTag(DEVICE_ACCOUNT_ROW).performClick()
         compose.waitForIdle()
-        assertEquals(1, source.signIns)
+        assertEquals(UnlockReason.Account, source.unlock.reason)
+        compose.runOnUiThread { source.unlock.close() }
+        compose.waitForIdle()
 
         hide.performClick()
         compose.waitForIdle()
-        assertEquals("Hiding it never signs in", 1, source.signIns)
+        assertNull("Hiding it never asks to sign in", source.unlock.reason)
+        assertEquals(0, source.signIns)
         assertFalse(offered())
         assertFalse(exists(DEVICE_ACCOUNT_ROW))
         assertFalse("Remembered on the phone", AccountInvitationMemory(source.accountInvitationDefaults) { source.now }.shows)

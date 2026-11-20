@@ -50998,7 +50998,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "blitznow"
     },
     "trackingUrlTemplate": "https://track.blitznow.in/{trackingNumber}",
     "linkRules": [
@@ -54273,6 +54273,10 @@ export const CARRIER_CAPABILITIES = {
     "detectionRules": [
       {
         "pattern": "^NUDE\\d{10}EX$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^XLWL\\d{10}EXP?$",
         "confidence": "high"
       }
     ],

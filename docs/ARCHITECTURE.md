@@ -106,7 +106,9 @@ Key server modules:
   announced, nor is an earlier carrier's scan that reaches it after a later one
   ([ROUTING.md](ROUTING.md#handoffs-two-carriers)), nor a universal provider's copy the
   timeline leaves out: of a parcel with a confirmed carrier, when its batch holds a
-  provider's row, its rows are read once to find them (`src/server/providerCopies.ts`). None of
+  provider's row, its rows are read once to find them (`src/server/providerCopies.ts`), nor
+  a provider's row the timeline shows as one step with another provider's row of the scan
+  stored before it (`providerTwins`). None of
   these moves a Live Activity either. A scheduled run sends a
   parcel's notifications right after its check, without waiting for the parcels after it.
   One server dispatches at a time, under a lease ([DEPLOYMENT.md](DEPLOYMENT.md)).

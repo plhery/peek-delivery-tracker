@@ -24,11 +24,11 @@ import { servedPlannedSteps, servedWrittenSteps } from './plannedSteps';
 import { recordAccountPushSent, recordParcelAlertRemoved, recordParcelAlertSent } from './metrics';
 import { errorType, logOperationalEvent } from './observability';
 import { providerCopies } from './providerCopies';
-import { lateScans, relayRepeats } from './relayCopies';
+import { lateScans, providerTwins, relayRepeats } from './relayCopies';
 import { repeatedScans } from './scanRepeats';
 import { stageNotices } from './stageNotices';
 import { messagesFor } from './requestLocale';
-import type { SupabaseServiceClient } from './supabase';
+import type { RecentScan, SupabaseServiceClient } from './supabase';
 import { errorMessage, isRecord, type JsonObject } from './types';
 import { WorkerLease } from './workerLease';
 
@@ -767,9 +767,25 @@ function noticesIn(recent: RecentScans): Set<string> {
 }
 
 /**
+ * The rows just stored (`fresh`) of two universal providers' rows of one scan that the timeline shows as one step
+ * (`providerTwins`), when the other row was stored before: the step's news was the parcel's already.
+ */
+function twinRepeats(scans: readonly RecentScan[], fresh: ReadonlySet<string>): string[] {
+  const rows = scans.flatMap((scan) => {
+    const slash = scan.source.indexOf('/');
+    return slash < 0 ? [] : [{
+      id: scan.id, provider_event_id: `${scan.source.slice(0, slash)}:`, universal_provider: scan.source.slice(slash + 1),
+      stage: scan.stage, occurred_at: scan.occurredAt, ...(scan.location ? { location: scan.location } : {}),
+    }];
+  });
+  return [...providerTwins(rows)].flatMap(([copy, lead]) => fresh.has(copy) === fresh.has(lead) ? [] : [fresh.has(copy) ? copy : lead]);
+}
+
+/**
  * The scans of the batches whose news their parcel already had: a handed-over
  * parcel's relay repeats and late scans (relayCopies.ts) and the universal
- * copies its timeline leaves out (providerCopies.ts), a carrier's repeats
+ * copies its timeline leaves out (providerCopies.ts) or shows under another
+ * provider's row of the scan stored before (`twinRepeats`), a carrier's repeats
  * of a scan it had sent (scanRepeats.ts) and its notices in the stage of the
  * scan before them (stageNotices.ts). Copies are looked for only in
  * parcels with a confirmed carrier whose batch holds a universal row. A
@@ -792,6 +808,7 @@ async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObj
     ...notices,
     ...[...recent].flatMap(([packageId, scans]) => [
       ...moving.has(packageId) ? generatedScans(scans).map((scan) => scan.id) : [],
+      ...twinRepeats(scans, fresh),
       ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })), fresh)])]);
   return { known, recent, notices };
 }

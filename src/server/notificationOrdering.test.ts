@@ -579,6 +579,46 @@ it.each(['web', 'native'] as const)('announces a carrier\'s repeated scan once, 
   expect(await dispatched('earlier', 'again')).toEqual([]);
 });
 
+it.each(['web', 'native'] as const)('announces two providers\' rows of one scan once, whichever comes first, for %s', async (channel) => {
+  const client = new SupabaseServiceClient('https://example.test', 'test');
+  const clock = clocks('2026-11-05T12:30:00Z');
+  const apns = new NativePushNotificationService(client, 'team', 'key', privateKey, 'app', clock.apns);
+  const service = channel === 'web' ? new WebPushNotificationService(client, '', '', '', clock.web) : apns;
+  const send = vi.spyOn(service, 'send').mockResolvedValue();
+  if (channel === 'web') vi.spyOn(client, 'recordPushDeliveries').mockResolvedValue(); else vi.spyOn(client, 'recordNativePushDeliveries').mockResolvedValue();
+  const pending = channel === 'web' ? vi.spyOn(client, 'listPendingPushNotifications') : vi.spyOn(client, 'listPendingNativePushNotifications');
+  vi.spyOn(client, 'updatePushSubscription').mockResolvedValue();
+  vi.spyOn(client, 'updateNativePushDevice').mockResolvedValue();
+  vi.spyOn(client, 'packageJoinTimes').mockResolvedValue(new Map([['pkg', '2026-11-01T08:00:00Z']]));
+  // Synthetic rows: ParcelsApp gives to the minute the scan 17TRACK gives to the second, each in its own check.
+  const scans = [
+    { id: 'minute', provider: 'ParcelsApp', occurredAt: '2026-11-05T12:02:00Z', created: '2026-11-05T12:05:00Z' },
+    { id: 'second', provider: '17TRACK', occurredAt: '2026-11-05T12:02:26Z', created: '2026-11-05T12:20:00Z' },
+    { id: 'next', provider: '17TRACK', occurredAt: '2026-11-05T12:10:00Z', created: '2026-11-05T12:20:00Z' },
+  ] as const;
+  let stored: readonly string[] = [];
+  const kept = () => scans.filter((scan) => stored.includes(scan.id)).sort((a, b) => b.occurredAt.localeCompare(a.occurredAt));
+  vi.mocked(client.recentScans).mockImplementation(async () => new Map([['pkg', kept().map(({ id, provider, occurredAt }) => ({
+    id, stage: 'in_transit' as const, occurredAt, stageSource: 'carrier_map', description: `Fixture ${id}`, location: 'Depot',
+    source: `unknown/${provider}`,
+  }))]]));
+  vi.spyOn(client, 'latestScanTimes').mockImplementation(async () => new Map([['pkg', kept()[0]!.occurredAt]]));
+  const dispatched = async (...ids: string[]) => {
+    stored = [...new Set([...stored, ...ids])];
+    pending.mockResolvedValueOnce(ids.map((id) => {
+      const { occurredAt, created } = scans.find((scan) => scan.id === id)!;
+      return { subscription_id: 'sub', device_id: 'device', package_id: 'pkg', event_id: id, stage: 'in_transit', occurred_at: occurredAt, event_created_at: created };
+    }));
+    send.mockClear();
+    await service.dispatch();
+    return send.mock.calls.map(([event]) => event.event_id);
+  };
+  expect(await dispatched('minute')).toEqual(['minute']);
+  // The other provider's row of that scan, 26 s later, is no news; its next scan is.
+  expect(await dispatched('second')).toEqual([]);
+  expect(await dispatched('next')).toEqual(['next']);
+});
+
 it.each(['web', 'native'] as const)('records a notice in transit its carrier\'s map says keeps the stage as handled, for %s', async (channel) => {
   const client = new SupabaseServiceClient('https://example.test', 'test');
   const clock = clocks('2026-11-05T14:05:00Z');

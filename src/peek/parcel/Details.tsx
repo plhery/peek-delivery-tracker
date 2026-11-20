@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, type ReactNode } from 'react';
 import { Icon } from '../../components/Icon';
 import { trackingFailureMessage, useI18n, type MessageKey } from '../../i18n';
 import { AMAZON_HISTORY_EXPIRED } from '../../lib/amazon';
+import { guideHref } from '../../guides/paths';
 import type { Locale } from '../../lib/locale';
 import { numberToCheck, type Translate } from '../../lib/messages';
 import { trackAction } from '../../lib/analytics';
@@ -171,6 +172,7 @@ export function Notes({ view, stage, flag, trouble, carrier, outage }: {
   const active = carrierInfo(activeTrackingCarrierId(parcel));
   const expired = active.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automatic = tracksAutomatically(active.id) && !expired;
+  const amazonGuide = guideHref(locale, 'amazon-orders');
   const scan = currentEvent(parcel.events, parcel.returnHeld);
   const notes: Note[] = [];
 
@@ -179,6 +181,7 @@ export function Notes({ view, stage, flag, trouble, carrier, outage }: {
     notes.push({
       id: 'manual', icon: <Glyph name="info" />,
       body: t((expired ? 'add.amazonHistoryExpired' : carrierTrackingHintKey(active.id)) as MessageKey, { carrier: carrier.name }),
+      ...active.id === 'amazon-logistics' && amazonGuide ? { link: { label: t('add.amazonGuide'), href: amazonGuide, action: 'guides-open' } } : {},
     });
   } else if (outage) {
     // Down for every parcel, not this one's fault: the carrier's own page shows the reader so.

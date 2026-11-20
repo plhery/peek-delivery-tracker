@@ -83,6 +83,7 @@ import com.plhery.peekdeliverytracker.core.api.AddByEmailEntry
 import com.plhery.peekdeliverytracker.core.api.AddByEmailResponse
 import com.plhery.peekdeliverytracker.core.api.ForwardingConfirmation
 import com.plhery.peekdeliverytracker.core.heldNoNumberUnexplained
+import com.plhery.peekdeliverytracker.core.heldNumberInAmazonAccount
 import com.plhery.peekdeliverytracker.core.notifies
 import com.plhery.peekdeliverytracker.core.recentEmails
 import com.plhery.peekdeliverytracker.core.resultText
@@ -189,7 +190,7 @@ internal fun AddByEmailPage(state: AccountHost, account: UUID, scroll: ScrollSta
                 copy(inbox.address)
                 copied = true
             }
-            RecentEmails(inbox, offer)
+            RecentEmails(inbox, offer, source.linkBaseUrl)
             AutomaticForwarding(inbox, email, copy)
             SettingsGroup {
                 if (confirmingRenew) {
@@ -249,7 +250,7 @@ private fun share(context: Context, text: String) {
  * nothing, where one did, and how many emails today took, once half the day's allowance is used.
  */
 @Composable
-private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse) {
+private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse, linkBaseUrl: String) {
     val localizer = LocalLocalizer.current
     val emails = inbox.recentEmails()
     if (emails.isEmpty()) return
@@ -261,6 +262,12 @@ private fun RecentEmails(inbox: AddByEmail, offer: AddByEmailResponse) {
             }
         }
         if (emails.any { it.heldNoNumberUnexplained }) Note(localized("inbox.noNumber"))
+        if (emails.any { it.heldNumberInAmazonAccount }) {
+            StepLink(
+                CarrierCatalog.amazonGuideUrl(linkBaseUrl, LocalLanguage.current), "add.amazonGuide",
+                Modifier.testTag(ADD_BY_EMAIL_AMAZON_GUIDE),
+            )
+        }
         if (offer.showsUsage) Note(localizer.text("inbox.usage", mapOf("used" to inbox.usedToday, "limit" to offer.dailyLimit)))
     }
 }
@@ -794,6 +801,7 @@ internal const val ADD_BY_EMAIL_RENEW_CONFIRM = "$ADD_BY_EMAIL_RENEW.confirm"
 internal const val ADD_BY_EMAIL_OFF = "$ADD_BY_EMAIL_TAG.off"
 internal const val ADD_BY_EMAIL_ERROR = "$ADD_BY_EMAIL_TAG.error"
 internal const val ADD_BY_EMAIL_GUIDE = "$ADD_BY_EMAIL_TAG.guide"
+internal const val ADD_BY_EMAIL_AMAZON_GUIDE = "$ADD_BY_EMAIL_TAG.amazonGuide"
 internal const val ADD_BY_EMAIL_WORKING = "$ADD_BY_EMAIL_TAG.working"
 internal const val ADD_BY_EMAIL_FILTER = "$ADD_BY_EMAIL_TAG.filter"
 internal const val ADD_BY_EMAIL_FILTER_COPY = "$ADD_BY_EMAIL_FILTER.copy"

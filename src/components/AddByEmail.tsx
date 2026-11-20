@@ -75,10 +75,10 @@ function languageNames(languageTag: string): Record<FilterLanguage, string> {
 /** The services' own names, which no language translates. */
 const SERVICE_NAMES: Record<Exclude<MailService, 'other'>, string> = { gmail: 'Gmail', outlook: 'Outlook', icloud: 'iCloud', yahoo: 'Yahoo' };
 
-/** The guide to adding parcels by email, in the reader's language or the nearest one it is written in. */
-function GuideLink({ locale, children }: { locale: Locale; children: string }) {
+/** A guide, adding parcels by email unless another is named, in the reader's language or the nearest one it is written in. */
+function GuideLink({ locale, id: named = 'add-parcels-by-email', children }: { locale: Locale; id?: string; children: string }) {
   const language = guideLanguage(locale);
-  const guide = GUIDE_LINKS[language].find(({ id }) => id === 'add-parcels-by-email');
+  const guide = GUIDE_LINKS[language].find(({ id }) => id === named);
   if (!guide) return null;
   return <p className="add-by-email__note"><a className="add-by-email__link" href={guidePath(language, guide.slug)} target="_blank" rel="noopener"
     hrefLang={language === locale ? undefined : documentLanguage(language)}>{children}<span aria-hidden="true"> ›</span></a></p>;
@@ -263,6 +263,7 @@ export function AddByEmailPage({ apiAuth, email, offer, onChange, onBusy }: {
           </li>)}
         </ul> : <div className="settings-box"><PipEmpty>{t('inbox.empty')}</PipEmpty></div>}
         {recent.some(({ result, account }) => result === 'none' && !account) && <p className="add-by-email__note">{t('inbox.noNumber')}</p>}
+        {recent.some(({ result, account }) => result === 'none' && account === 'Amazon') && <GuideLink locale={locale} id="amazon-orders">{t('add.amazonGuide')}</GuideLink>}
         {inbox.usedToday * 2 >= offer.dailyLimit && <p className="add-by-email__note">{t('inbox.usage', { used: inbox.usedToday, limit: offer.dailyLimit })}</p>}
       </section>
       <details className="settings-box add-by-email__auto" open={Boolean(inbox.confirmation) || undefined}>

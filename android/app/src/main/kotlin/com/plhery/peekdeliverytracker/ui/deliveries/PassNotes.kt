@@ -310,7 +310,8 @@ internal fun ShipmentFacts(facts: List<ShipmentFact>, modifier: Modifier = Modif
  * - Where no carrier is asked, or Amazon no longer gives the history (B-ST06): why, in secondary ("add.autoSync",
  *   "add.linkSync", "add.amazonAccount", `trackingHintKey`, or "add.amazonHistoryExpired"), and 10 under it, in
  *   `ink`, a way to change the carrier where the parcel is the reader's to change (`editable`), unless Amazon wants
- *   an account or no longer has the history.
+ *   an account or no longer has the history. Where Amazon wants an account, the guide to the number its carrier
+ *   tracks instead (`amazonGuideUrl`), 44 tall at least, in `ink` with its arrow.
  * - While the site of its carrier is down for every parcel (`shownCarrierOutage`): that, in secondary, and 44 tall at
  *   least, the carrier's page for the number in `ink` with its arrow, which `onCarrierPage` hears of, by the carrier's
  *   name. Nothing of the failed check then: it is no fault of the parcel's.
@@ -335,6 +336,7 @@ internal fun TrackingNotes(
     onSwitch: (CarrierId, AccessibilityFocus) -> Unit,
     onDelete: ((AccessibilityFocus) -> Unit)? = null,
     onCarrierPage: (String) -> Unit = {},
+    amazonGuideUrl: String? = null,
 ) {
     val localizer = LocalLocalizer.current
     val language = LocalLanguage.current
@@ -356,6 +358,9 @@ internal fun TrackingNotes(
             )
             if (editable && !catalog.requiresAmazonAccount(active) && !expired) {
                 NoteButton(localizer.text("detail.changeCarrier"), ink, action = onEditCarrier)
+            }
+            if (amazonGuideUrl != null && catalog.requiresAmazonAccount(active) && !expired) {
+                OutageLink(localizer.text("add.amazonGuide"), amazonGuideUrl, ink, tag = PAGE_AMAZON_GUIDE) {}
             }
         }
         return
@@ -430,13 +435,13 @@ private fun NoteButton(
  * arrow, in `tint`, 44 tall at least, a button to TalkBack as the carriers' pages under the number are.
  */
 @Composable
-private fun OutageLink(text: String, url: String, tint: Color, onOpen: () -> Unit) {
+private fun OutageLink(text: String, url: String, tint: Color, tag: String = PAGE_CARRIER_OUTAGE_LINK, onOpen: () -> Unit) {
     val uriHandler = LocalUriHandler.current
     val type = PeekTheme.type
     Row(
         Modifier
             .heightIn(min = BUTTON_HEIGHT)
-            .testTag(PAGE_CARRIER_OUTAGE_LINK)
+            .testTag(tag)
             .button(interactionSource = null, indication = PlainPress, role = Role.Button) {
                 onOpen()
                 try {
@@ -483,3 +488,4 @@ const val PAGE_CARRIER_HINT = "parcelPage.carrierHint"
 const val PAGE_SYNC_ERROR = "parcelPage.syncError"
 const val PAGE_CARRIER_OUTAGE = "parcelPage.carrierOutage"
 const val PAGE_CARRIER_OUTAGE_LINK = "parcelPage.carrierOutageLink"
+const val PAGE_AMAZON_GUIDE = "parcelPage.amazonGuide"

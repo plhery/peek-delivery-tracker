@@ -598,6 +598,7 @@ describe('ParcelPage stages and troubles', () => {
     await shown(view([scan('pending', 1, 'Tracking added')], { carrier: 'amazon-logistics', trackingNumber: 'TBA000000000009', syncStatus: 'unsupported' }));
     expect(screen.getByRole('heading', { level: 1, name: 'Check the carrier’s website' })).toBeVisible();
     expect(screen.getByRole('note')).toHaveTextContent('Amazon Logistics deliveries are usually tracked in Your Orders on Amazon.');
+    expect(within(screen.getByRole('note')).getByRole('link', { name: /here’s how to find the number/ })).toHaveAttribute('href', '/guides/amazon-order-tracking');
   });
 
   it('names both carriers of a journey handed from one to another', async () => {

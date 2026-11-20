@@ -15,6 +15,8 @@ import { GET as homeAssistant } from '../../app/oauth/clients/home-assistant.jso
 import { POST as register } from '../../app/oauth/register/route';
 import { POST as revoke } from '../../app/oauth/revoke/route';
 import { POST as token } from '../../app/oauth/token/route';
+import { guideHref } from '../guides/paths';
+import { AMAZON_ACCOUNT_MESSAGE, AMAZON_GUIDE_URL } from '../lib/amazon';
 import { forgetAssistantEmails } from './assistants/access';
 import { newClientId, newSecret, pkceChallenge, secretDigest, type Scope } from './assistants/settings';
 import { SupabaseAuthenticator } from './auth';
@@ -599,10 +601,28 @@ describe('the MCP endpoint', () => {
     const description = tools.find(({ name }) => name === 'add_parcels')!.description;
     expect(description).toContain('Never send an Amazon order number');
     expect(description).toContain('Your Orders, then Track package');
+    vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
     vi.mocked(addParcelsFromText).mockResolvedValue([]);
     const none = await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' });
     expect(none.result!.structuredContent).toEqual({ parcels: [] });
     expect(none.result!.content![0]!.text).toContain('Amazon account: Your Orders, then Track package');
+    expect(none.result!.content![0]!.text).toContain(`Peek's guide shows where: ${AMAZON_GUIDE_URL}`);
+  });
+
+  it('links the Amazon guide in the language the account last used, read once a request', async () => {
+    const auth = vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: 'de-CH' });
+    const german = `https://peektracker.com${guideHref('de', 'amazon-orders')}`;
+    expect(german).not.toBe(AMAZON_GUIDE_URL);
+    const writer = connect(['parcels:write']);
+    vi.mocked(addParcelsFromText).mockResolvedValue([]);
+    expect((await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' })).result!.content![0]!.text).toContain(german);
+    // Synthetic Amazon numbers, as the public routes' tests use.
+    vi.mocked(addParcelsFromText).mockResolvedValue(['TBA999999999980', 'TBA999999999998'].map((trackingNumber) => (
+      { trackingNumber, carrier: 'amazon-logistics', outcome: 'refused' as const, reason: AMAZON_ACCOUNT_MESSAGE })));
+    const refused = await call(writer, 'add_parcels', { text: 'Tracking IDs: TBA999999999980, TBA999999999998' });
+    const reasons = (refused.result!.structuredContent!.parcels as Array<{ reason: string }>).map(({ reason }) => reason);
+    expect(reasons).toEqual(Array(2).fill(AMAZON_ACCOUNT_MESSAGE.replace(AMAZON_GUIDE_URL, german)));
+    expect(auth).toHaveBeenCalledTimes(2);
   });
 
   it('answers a call outside the token\'s scopes with the challenge that asks for a new sign-in', async () => {

@@ -1,4 +1,5 @@
 import { AMAZON_HISTORY_EXPIRED } from '../lib/amazon';
+import { guideHref } from '../guides/paths';
 import { AutoCarrierNotice } from './AutoCarrierNotice';
 import { trackAction } from '../lib/analytics';
 import { userErrorMessage } from '../lib/userMessages';
@@ -144,6 +145,8 @@ export function ParcelDetail({
   const deliveryLabel = delivery ? t(deliveryLineKey(parcel, current?.stage), { carrier: delivery.name }) : null;
   const amazonHistoryExpired = carrier.id === 'amazon-shipping' && parcel.syncError === AMAZON_HISTORY_EXPIRED;
   const automaticTracking = tracksAutomatically(carrier.id) && !amazonHistoryExpired;
+  // A parcel only the buyer's Amazon account tracks links the guide to finding the number its carrier tracks instead.
+  const amazonGuide = guideHref(locale, 'amazon-orders');
   // The carrier's site is down: the parcel waits for it, whatever its own last check said.
   const outage = parcel.carrierOutage && !['delivered', 'returned'].includes(current?.stage ?? '') ? parcel.carrierOutage : undefined;
   // While the parcel waits, its pickup point gets a card; afterwards it is a plain fact.
@@ -747,6 +750,12 @@ export function ParcelDetail({
         {!automaticTracking && (
           <div className="detail__tracking-help" role="note">
             <p>{t(amazonHistoryExpired ? 'add.amazonHistoryExpired' : carrierTrackingHintKey(carrier.id), { carrier: carrier.name })}</p>
+            {carrier.id === 'amazon-logistics' && amazonGuide && (
+              <a className="detail__outage-link" href={amazonGuide} target="_blank" rel="noopener" onClick={() => trackAction('guides-open')}>
+                <span>{t('add.amazonGuide')}</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
+              </a>
+            )}
             {carrier.id !== 'amazon-logistics' && !amazonHistoryExpired && (
               <button
                 type="button"

@@ -253,6 +253,8 @@ describe('adding parcels by email in Settings', () => {
       .toBe('Amazon.itThe tracking number shows only in your Amazon account');
     // The general note is for an email whose row doesn't say why it held no number.
     expect(screen.queryByText('Some shops, like Amazon, put no tracking number in their emails.')).not.toBeInTheDocument();
+    // Amazon's guide shows where its account shows the number another carrier tracks.
+    expect(screen.getByRole('link', { name: /here’s how to find the number/ })).toHaveAttribute('href', '/guides/amazon-order-tracking');
 
     const withOther = { ...shown, recent: [{ at: new Date(now - 60_000).toISOString(), sender: 'Other Shop', result: 'none' as const, added: 0 }, ...shown.recent] };
     rerender(<AddByEmailPage apiAuth={apiAuth} email="owner@example.com" offer={offer(withOther)} onChange={onChange} />);

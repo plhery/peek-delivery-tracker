@@ -24,7 +24,8 @@ describe('existing Amazon Logistics parcels', () => {
       onRefresh={vi.fn()} onRestore={vi.fn()} onArchive={vi.fn()} onDelete={vi.fn()}
     />);
     expect(screen.getByRole('note')).toHaveTextContent('Amazon Logistics deliveries are usually tracked in Your Orders on Amazon');
-    expect(screen.getByRole('link')).toHaveAttribute('href', 'https://www.amazon.fr/gp/your-account/order-history');
+    expect(screen.getAllByRole('link').map((link) => link.getAttribute('href')))
+      .toEqual(['https://www.amazon.fr/gp/your-account/order-history', '/guides/amazon-order-tracking']);
     expect(screen.queryByText('ParcelsApp')).not.toBeInTheDocument();
   });
 });

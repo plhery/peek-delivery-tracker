@@ -526,6 +526,7 @@ private fun ShipmentDetails(state: DeliveriesState, parcel: Parcel, pageId: UUID
             state.source.action("parcel-carrier-link")
             state.source.feedbacks.of(pageId)?.visited(name)
         },
+        amazonGuideUrl = CarrierCatalog.amazonGuideUrl(state.source.linkBaseUrl, LocalLanguage.current),
     )
 }
 

@@ -601,6 +601,20 @@ struct ParcelDetailView: View {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(localizer.text(parcel.amazonShippingHistoryExpired ? "add.amazonHistoryExpired" : catalog.trackingHintKey(for: parcel.activeTrackingCarrier), ["carrier": carrier.displayName]))
                         .font(.footnote).foregroundStyle(Brand.secondaryText)
+                    if catalog.requiresAmazonAccount(parcel.activeTrackingCarrier) && !parcel.amazonShippingHistoryExpired {
+                        // The guide shows where Amazon names the carrier and number that track the parcel instead.
+                        Link(destination: CarrierCatalog.amazonGuideURL(base: session.configuration.apiBaseURL, language: localizer.language)) {
+                            HStack(spacing: 6) {
+                                Text(localizer.text("add.amazonGuide"))
+                                Image(systemName: "arrow.up.right").font(.system(size: 10, weight: .regular)).accessibilityHidden(true)
+                            }
+                            .font(.footnote)
+                            .frame(minHeight: 44, alignment: .leading)
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(branding.ink)
+                        .accessibilityIdentifier("parcel.amazonGuide")
+                    }
                     if editable, !catalog.requiresAmazonAccount(parcel.activeTrackingCarrier) && !parcel.amazonShippingHistoryExpired {
                         Button(localizer.text("detail.changeCarrier")) { carrierEditor = CarrierEditorRequest() }
                             .font(.footnote).foregroundStyle(branding.ink)

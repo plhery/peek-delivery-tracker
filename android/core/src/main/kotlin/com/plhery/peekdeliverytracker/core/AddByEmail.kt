@@ -115,6 +115,13 @@ fun AddByEmailEntry.resultText(localizer: Localizer): String = when (result) {
 val AddByEmailEntry.heldNoNumberUnexplained: Boolean
     get() = result == AddByEmailResult.None && account == null
 
+/**
+ * Whether the email held no number because Amazon shows it only in the reader's account, which Settings' link to the
+ * Amazon guide then explains.
+ */
+val AddByEmailEntry.heldNumberInAmazonAccount: Boolean
+    get() = result == AddByEmailResult.None && account == "Amazon"
+
 /** Whether each parcel an email adds is notified: on unless switched off, as an address from before the switch is. */
 val AddByEmail.notifies: Boolean
     get() = notify ?: true

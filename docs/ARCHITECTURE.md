@@ -434,7 +434,8 @@ Key server modules:
     parcels followed already; a delivery told of; nothing. An email that held no number from
     a shop that shows its numbers only in the reader's account with it (Amazon, on every
     store's domain, by its sender's name: `inboundEmail/accountShop.ts`) names that shop
-    (`account`), and Settings says the number is in that account. A shop is added there once
+    (`account`), and Settings says the number is in that account, with Amazon's guide in the
+    reader's language for an Amazon email. A shop is added there once
     the email log shows its emails ending without a number while they link to its order page.
   - Each parcel an email adds starts unseen, so the list marks it new once it has a scan
     (`parcels_added_by_email`: its `seen_at` is the epoch, which its first answer keeps and
@@ -543,7 +544,8 @@ Key server modules:
     Track package on each package on its way or just delivered (older orders have no such
     button), and add the carrier named after "Delivery By" with the "Tracking ID", never the
     order number; it only reads there, never signs in, and says when Amazon tracks a parcel it
-    delivers itself in the account alone. `add_parcels`' description and its no-number answer point to the same page.
+    delivers itself in the account alone. `add_parcels`' description and its no-number answer point to the same page;
+    that answer and an Amazon refusal link Peek's Amazon guide in the language the account last used.
     The tools' answers leave out the receiver's name and postcode, mask the postcode a
     C Chez Vous reference ends with, and read the scans as a
     link's viewer does (`redactedScans`): a delivery reads "Delivered", a scan

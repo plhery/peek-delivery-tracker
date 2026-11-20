@@ -78,6 +78,10 @@ extension AddByEmailEntry {
 
     /// Whether the email held no number and its row doesn't say where it is, which Settings' note then explains.
     var heldNoNumberUnexplained: Bool { result == AddByEmailResult.none && account == nil }
+
+    /// Whether the email held no number because Amazon shows it only in the reader's account, which Settings' link to
+    /// the Amazon guide then explains.
+    var heldNumberInAmazonAccount: Bool { result == AddByEmailResult.none && account == "Amazon" }
 }
 
 extension AddByEmailResponse {

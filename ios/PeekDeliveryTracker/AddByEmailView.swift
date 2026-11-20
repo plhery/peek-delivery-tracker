@@ -114,6 +114,10 @@ struct AddByEmailPage: View {
                     }
                 }
                 if emails.contains(where: \.heldNoNumberUnexplained) { note(localizer.text("inbox.noNumber")) }
+                if emails.contains(where: \.heldNumberInAmazonAccount) {
+                    OutLink(url: CarrierCatalog.amazonGuideURL(base: linkBase, language: localizer.language), key: "add.amazonGuide")
+                        .accessibilityIdentifier("addByEmail.amazonGuide")
+                }
                 if offer.showsUsage {
                     note(localizer.text("inbox.usage", ["used": inbox.usedToday, "limit": offer.dailyLimit]))
                 }

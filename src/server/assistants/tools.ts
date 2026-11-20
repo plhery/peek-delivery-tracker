@@ -7,7 +7,10 @@ import en from '../../../shared/locales/en.json';
 import type {
   ApiPackageRow, ApiTokenParcel, ApiTokenParcelSort, ApiTokenParcelStatus, ApiTokenParcelsResponse,
 } from '../../generated/apiContract';
+import { guideHref } from '../../guides/paths';
+import { AMAZON_GUIDE_URL } from '../../lib/amazon';
 import { searchCarriers, shapeCarrier } from '../../lib/carrierPicker';
+import { tagLocale } from '../../lib/locale';
 import {
   carrierInfo, carrierRequirements, detectCarrierMatch, normalizeTrackingNumber, SELECTABLE_CARRIERS,
 } from '../../lib/carriers';
@@ -329,9 +332,20 @@ const AMAZON_INSTRUCTIONS = 'Amazon orders: Amazon\'s emails usually hold no tra
   + 'way or just delivered has its own Track package button; older orders have none, so leave them. That page names '
   + 'the carrier after "Delivery By" and shows the "Tracking ID", with labels in the site\'s language. Send both to add_parcels, '
   + 'with the item or "Amazon" as the name. When Amazon delivers a package itself and shows no tracking ID, or '
-  + 'add_parcels refuses it, tell the user Amazon tracks that one only in their Amazon account. On Amazon, only read: '
+  + 'add_parcels refuses it, tell the user Amazon tracks that one only in their Amazon account, with the guide link '
+  + 'add_parcels answers with. On Amazon, only read: '
   + 'never buy, cancel, return or change anything, and never sign in for the user. If you cannot browse it, the user '
   + 'finds the same under Your Orders, then Track package.';
+
+/**
+ * Peek's guide to finding the number an Amazon parcel's carrier tracks, in the language the account last used, as its
+ * delivery emails speak it, for the assistant to pass on. English when the account can't be read.
+ */
+async function amazonGuide(service: SupabaseServiceClient, userId: string): Promise<string> {
+  const stored = await service.getAuthAccount(userId).then((account) => account?.locale ?? null, () => null);
+  const path = guideHref((stored && tagLocale(stored)) || 'en', 'amazon-orders');
+  return path ? new URL(path, AMAZON_GUIDE_URL).href : AMAZON_GUIDE_URL;
+}
 
 /** add_parcels' line on Amazon, for a client that keeps the tools but not the server's instructions. */
 const AMAZON_LINE = 'Never send an Amazon order number: an Amazon order\'s carrier and tracking ID are in the user\'s '
@@ -362,6 +376,10 @@ function additionSummary(addition: ParcelAddition) {
  * to sign in again for a scope the token lacks.
  */
 export function assistantServer(service: SupabaseServiceClient, caller: AssistantCaller, resourceMetadata: string): McpServer {
+  // The account's language is read once a request, and only for an answer that links the Amazon guide.
+  let guide: Promise<string> | undefined;
+  const amazonGuideLink = () => (guide ??= amazonGuide(service, caller.userId));
+  const withAmazonGuide = async (text: string) => (text.includes(AMAZON_GUIDE_URL) ? text.replace(AMAZON_GUIDE_URL, await amazonGuideLink()) : text);
   const server = new McpServer(
     { name: 'peek', title: 'Peek', version: '1.0.0' },
     {
@@ -401,9 +419,12 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     const additions = await addParcelsFromText(service, caller.userId, text, name?.trim() ?? '');
     if (!additions.length) {
       return answer({ parcels: [] }, 'No tracking number found. Peek adds numbers whose carrier it recognises and numbers the text labels as a tracking number; an order number is never one. '
-        + 'An Amazon order\'s tracking number is in the user\'s Amazon account: Your Orders, then Track package.');
+        + `An Amazon order's tracking number is in the user's Amazon account: Your Orders, then Track package. Peek's guide shows where: ${await amazonGuideLink()}`);
     }
-    const parcels = additions.map(additionSummary);
+    const parcels = await Promise.all(additions.map(async (addition) => {
+      const summary = additionSummary(addition);
+      return summary.reason ? { ...summary, reason: await withAmazonGuide(summary.reason) } : summary;
+    }));
     const lines = additions.map((addition) => `${displayReference(addition)} (${carrierInfo(addition.carrier as Parameters<typeof carrierInfo>[0]).name}): ${OUTCOME_TEXT[addition.outcome]}`);
     return answer({ parcels }, `${lines.join('\n')}\n\n${JSON.stringify({ parcels })}`);
   }));
@@ -517,7 +538,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
       if (unchanged) return answer({ id, carrier: carrierInfo(values.carrier as CarrierId).name, carrierId: values.carrier, checking: false });
       await verifyAmazonShippingAddition(values.carrier, number);
     } catch (error) {
-      return refused(error);
+      return error instanceof HttpError ? refusal(await withAmazonGuide(error.message)) : refused(error);
     }
     try {
       if (!await service.changeAccountPackageCarrier(caller.userId, id, values.carrier, values.trackingUrl, values.dpdPostcode, values.phoneDigits)) {

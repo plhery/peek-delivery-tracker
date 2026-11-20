@@ -14,4 +14,5 @@ export const POST = apiRoute(async (context) => {
   const result = friendsActionResponse(await friendsRPC(requireUserClient(context), action), action.action);
   if (action.action === 'accept_invite') wakeFriendshipWorker();
   return json(result.snapshot ? { ...result, ...await withSharedPassports(requireService(context), requireUser(context).id, result.snapshot, result.acceptedFriend) } : result);
-}, { serviceRequired: true });
+  // An invitation's code, in the body to preview or accept it, is a credential.
+}, { serviceRequired: true, capability: true });

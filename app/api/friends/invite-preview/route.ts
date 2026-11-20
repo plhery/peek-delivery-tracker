@@ -6,4 +6,4 @@ export const runtime = 'nodejs';
 
 export const POST = apiRoute(async (context) => json(
   await invitationPreview(requireService(context), await readJsonObject(context.request)),
-), { authenticated: false, serviceRequired: true, publicRateLimit: { limit: 30, window: 60 } });
+), { authenticated: false, serviceRequired: true, publicRateLimit: { limit: 30, window: 60 }, capability: true });

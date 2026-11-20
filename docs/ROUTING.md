@@ -1058,6 +1058,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   "designated facility" for SpeedX's "Designated Facility"), is served in the other row's spelling.
   A scan several rows tell is one step: the first of its copies that would go on top does, else the
   scan, and every other row of it is served with `relay_of` that one, never a row with `relay_of` itself.
+  A copy an hour or more from the scan it tells, on another clock, never goes on top: the step keeps the
+  scan's time.
   An earlier carrier's copy whose words read as a stage neither row is in, or that tells the scan's
   second (not a minute's first) and stage in words sharing none of three letters or more, or adding
   none to the scan's words and place, or that tells the scan's stage within a minute of it, a minute's

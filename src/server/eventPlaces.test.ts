@@ -815,6 +815,27 @@ describe('withEventPlaces', () => {
       .toBe('【varese hub】arrived.');
   });
 
+  it('keeps a copy on another clock under the scan it tells', () => {
+    const scan = (id: string, source: string, stage: string, occurredAt: string, location: string | null = null) => ({
+      ...event(id, location, occurredAt), stage, description: `Fixture ${stage}`, provider_event_id: `${source}:${id}`,
+    });
+    // WanB Express tells J&T Australia's failed delivery two hours early, placed; J&T's own rows name no place.
+    const row = {
+      id: 'parcel', carrier: 'wanbexpress', carrier_data: { original_carrier: 'wanbexpress', active_tracking_carrier: 'j-and-t-au' },
+      tracking_events: [
+        scan('round', 'j-and-t-au', 'out_for_delivery', '2026-11-18T19:39:32Z'),
+        scan('missed-early', 'wanbexpress', 'failed_attempt', '2026-11-18T18:12:28Z', 'VIC, AU'),
+        scan('missed', 'j-and-t-au', 'failed_attempt', '2026-11-18T20:12:28Z'),
+      ],
+    };
+    const served = (withEventPlaces(row) as { tracking_events: Record<string, unknown>[] }).tracking_events;
+    // The failed delivery is dated by J&T's row, and stays the parcel's current step.
+    expect(served.find((item) => item.id === 'missed-early')?.relay_of).toBe('missed');
+    expect(served.find((item) => item.id === 'missed')?.relay_of).toBeUndefined();
+    expect(currentEvent(served.map((item) => ({ id: String(item.id), stage: item.stage as Stage, occurredAt: String(item.occurred_at),
+      relayOf: item.relay_of as string | undefined, description: String(item.description) })) as TrackingEvent[])?.id).toBe('missed');
+  });
+
   it('serves a carrier\'s repeats of one scan under the newest of them', () => {
     const scan = (id: string, occurredAt: string, extra: Record<string, unknown> = {}) => ({
       ...event(id, null, occurredAt), stage: 'failed_attempt', description: 'Address details incorrect',

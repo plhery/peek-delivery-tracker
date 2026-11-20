@@ -352,6 +352,7 @@ const OTHER_SCRIPT = /(?=\p{L})\P{Script=Latin}/u;
  * row's words hold the other's: DHL tells Poczta Polska's posting as an arrival at its origin centre, naming the
  * country. A collection after an earlier posting, or a posting after a scan on the way, stays under it.
  * An earlier carrier's copy in transit of the new carrier's acceptance at its second and place (`handOver`) is on top.
+ * A copy an hour or more from its scan, on another clock, never is: the step is dated by the row on top.
  * The apps show the lower row's words, not its place. Of a scan's several copies, the first in `relays` that leads is the
  * one on top.
  */
@@ -372,7 +373,11 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     && EVENT_STAGE_ORDER.indexOf(String(scan.stage)) > EVENT_STAGE_ORDER.indexOf('in_transit');
   const namesTheTown = (copy: JsonObject, scan: JsonObject) => source(scan) !== current && placeWithin(scan, copy)
     && !placeWithin(copy, copy) && typeof copy.location === 'string' && !OTHER_SCRIPT.test(copy.location);
-  const leads = (copy: JsonObject, scan: JsonObject) => (placed(copy) && !placed(scan) && !pastTransit(scan, copy))
+  // A copy an hour or more from its scan, on another clock (WanB Express tells J&T Australia's scans two hours early),
+  // never leads: the step takes the time of the row on top.
+  const otherClock = (copy: JsonObject, scan: JsonObject) =>
+    Math.abs(Date.parse(String(copy.occurred_at)) - Date.parse(String(scan.occurred_at))) >= 59 * 60_000;
+  const leads = (copy: JsonObject, scan: JsonObject) => !otherClock(copy, scan) && ((placed(copy) && !placed(scan) && !pastTransit(scan, copy))
     || copyTellsProblem(copy, scan)
     || (copy.stage === scan.stage && sameWords(copy, scan) && namesMoreOfThePlace(copy, scan))
     || (copy.stage === scan.stage && namesTheTown(copy, scan))
@@ -380,7 +385,7 @@ function relayLeads(events: readonly JsonObject[], relays: Map<string, string>, 
     || (scan.stage === 'registered' && further(copy, scan) && placed(copy) && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
     || (copy.stage === 'accepted' && scan.stage === 'in_transit' && firstStep(copy, scan) && placed(copy)
       && !wordsWithin(copy, scan) && !wordsWithin(scan, copy))
-    || handOver(copy, scan, current);
+    || handOver(copy, scan, current));
   // A scan told by several rows, or by a row that is itself told again, is one step: the first of its copies that leads
   // is on top and every other row of it goes under that one, as the apps show one row under another and no further.
   const top = (id: string) => {

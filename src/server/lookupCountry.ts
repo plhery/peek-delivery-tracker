@@ -30,10 +30,11 @@ export function lookupCountry(request: Pick<Request, 'headers'>, deviceRegion?: 
  * Called only for a newly created parcel, before its first sync is queued. It
  * also keeps the country of a postcode from abroad (`postcodeCountry`) with it,
  * and the app language a lookup without an account was made in (`lookup_language`).
+ * A parcel added from a text (a forwarded email, an assistant) has no request of the reader's to take a country from.
  */
-export async function rememberLookupCountry(service: SupabaseServiceClient, parcel: JsonObject, request: Pick<Request, 'headers'>,
+export async function rememberLookupCountry(service: SupabaseServiceClient, parcel: JsonObject, request: Pick<Request, 'headers'> | null,
   deviceRegion?: unknown, postcodeCountry?: string | null, language?: unknown): Promise<void> {
-  const country = lookupCountry(request, deviceRegion);
+  const country = request ? lookupCountry(request, deviceRegion) : null;
   const data = { ...withPostcodeCountry(parcel.carrier_data, parcel.dpd_postcode, postcodeCountry),
     add_recognition_pending: true, ...(country ? { lookup_country_hint: country } : {}),
     ...(isLocale(language) ? { lookup_language: language } : {}) };

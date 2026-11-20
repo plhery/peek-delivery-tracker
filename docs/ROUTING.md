@@ -709,8 +709,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   When dedicated carriers cannot confirm the number, preflight also asks the fast universal
   providers. Once they answer, their outcomes tell "not found yet" from "could not check",
   and the sheet names tracking services instead of the carriers asked. Saving continues the full provider chain. The detect route and a newly created
-  parcel's first saved check ask a second batch of unqueried HTTP candidates when the first
-  found none. Detection gives it three seconds of its own; the first check's batches share
+  parcel's first saved check (added on the Add sheet, from a forwarded email or by an assistant) ask a second batch
+  of unqueried HTTP candidates when the first found none. Detection gives it three seconds of its own; the first check's batches share
   its HTTP budget, and later refreshes ask one batch. Reused universal history still takes precedence over speculative confirmation.
   A pasted number continues into that lookup when recognition
   finds no carrier or cannot answer, so the universals can retrieve its history. A typed

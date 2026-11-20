@@ -274,6 +274,8 @@ function account(options: { known?: string[]; allowance?: number } = {}) {
       return { allowed: allowance >= 0, scope: allowance >= 0 ? null : 'account', overallUsed: 1 };
     }),
     create: vi.spyOn(service, 'createAccountPackage').mockImplementation(async (_, number) => `new-${number}`),
+    reload: vi.spyOn(service, 'getPackage').mockImplementation(async (id) => ({ id, carrier_data: {}, dpd_postcode: '' })),
+    update: vi.spyOn(service, 'updatePackage').mockResolvedValue(undefined),
     settle: vi.spyOn(service, 'ignoreTypedTrackingSupportCases').mockResolvedValue(0),
     queue: vi.spyOn(service, 'enqueueSyncJob').mockImplementation(async ({ packageId }) => ({ row: { id: `job-${packageId}` }, queued: true })),
     keep: vi.spyOn(service, 'keepInboundMail').mockResolvedValue(true),
@@ -293,6 +295,18 @@ describe('an email to a forwarding address', () => {
     expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([[UPS, 'Example Shop', 'ups'], [DHL, 'Example Shop', 'dhl']]);
     expect(db.queue).toHaveBeenCalledWith({ userId, packageId: `new-${UPS}`, reason: 'added' });
     expect(db.record).toHaveBeenCalledWith(userId, 'added', 2, null, 'Example Shop');
+    // Each is new to recognition, as one added on the Add sheet is, before its first check is queued; an email gives
+    // no country of the reader's.
+    expect(db.update.mock.calls).toEqual([UPS, DHL].map((number) => [`new-${number}`, { carrier_data: { add_recognition_pending: true } }]));
+    expect(db.update.mock.invocationCallOrder[0]).toBeLessThan(db.queue.mock.invocationCallOrder[0]!);
+  });
+
+  it('still queues the first check of a parcel it could not mark new to recognition', async () => {
+    const db = account();
+    db.reload.mockRejectedValueOnce(new SupabaseError('The database is unavailable', 503));
+    const added = await parcels.addNumbersToAccount(SupabaseServiceClient.prototype, userId, trackingNumbersInText(UPS), 'Example Shop');
+    expect(added).toEqual([{ trackingNumber: UPS, carrier: 'ups', outcome: 'added', packageId: `new-${UPS}`, jobId: `job-new-${UPS}` }]);
+    expect(db.update).not.toHaveBeenCalled();
   });
 
   it('retries an unavailable eligibility lookup within the same mailbox addition', async () => {
@@ -360,6 +374,8 @@ describe('an email to a forwarding address', () => {
     await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Your parcels ${UPS} and ${DHL} are on their way.`));
     expect(db.announce).toHaveBeenCalledExactlyOnceWith(userId, [`new-${DHL}`]);
     expect(wake).toHaveBeenCalledOnce();
+    // Only the parcel it added is new to recognition.
+    expect(db.update.mock.calls.map(([id]) => id)).toEqual([`new-${DHL}`]);
     // Switched off, or without a device: nothing is queued, and nothing woken.
     db.announce.mockResolvedValue(0);
     await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', `Tracking: ${DHL}`));

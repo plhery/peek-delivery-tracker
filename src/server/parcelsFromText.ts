@@ -7,6 +7,8 @@ import { claimAccountTracking } from './accountTrackingBudget';
 import { verifyAmazonShippingAddition } from './amazonShippingEligibility';
 import { HttpError } from './api';
 import { wakeSyncWorker } from './background';
+import { rememberLookupCountry } from './lookupCountry';
+import { captureOperationalError } from './observability';
 import { reviewDemoCarrier, reviewDemoNumbersInText } from './reviewDemo';
 import { settleTypedSupportCases } from './reviewQueues';
 import { SupabaseError, type SupabaseServiceClient } from './supabase';
@@ -178,6 +180,14 @@ export async function addNumbersToAccount(
       additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId: null });
       continue;
     }
+    // Marked new as the Add sheet marks it, so its first check asks a second batch of carriers when the first knows
+    // none of them. A reload that fails leaves it unmarked, not unchecked.
+    const parcel = await service.getPackage(packageId).catch((error: unknown) => {
+      if (!(error instanceof SupabaseError)) throw error;
+      captureOperationalError(error, { component: 'packages', operation: 'remember_lookup_country' });
+      return null;
+    });
+    if (parcel) await rememberLookupCountry(service, parcel, null);
     await settleTypedSupportCases(service, trackingNumber);
     const jobId = await queueFirstCheck(service, userId, packageId);
     additions.push({ trackingNumber, carrier: values.carrier, outcome: 'added', packageId, jobId });

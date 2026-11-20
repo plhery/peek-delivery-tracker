@@ -642,6 +642,8 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// Brands with several catalog networks ("DPD" is `dpd` and `dpd-fr`), as in
     /// Universal Parcel Scraper's catalog networks.
     private static let networkBrands = ["dhl", "dpd", "gls", "hermes", "evri", "gofo", "jumppoint"]
+    /// The brands whose networks one lookup answers for (`GROUP_LOOKUP_BRANDS`).
+    private static let groupLookupBrands: Set<String> = ["dpd"]
 
     static func networkBrand(_ carrier: CarrierID) -> String? {
         networkBrands.first { carrier.rawValue == $0 || carrier.rawValue.hasPrefix("\($0)-") }
@@ -680,9 +682,13 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         func rank(_ carrier: CarrierID) -> Int? {
             browser ? definitions[carrier]?.tracking.browserRecognitionRank : definitions[carrier]?.tracking.recognitionRank
         }
-        // A preferred carrier that cannot be asked (DPD France) keeps its brand's
-        // other networks out: DPD's guest API also answers for DPD France parcels.
-        let shadowed = Set(preferred.filter { rank($0) == nil }.compactMap(Self.networkBrand))
+        // A preferred carrier that cannot be asked about the number keeps its brand's
+        // other networks out when they share one lookup: DPD's guest API also answers
+        // for DPD France's own parcels, which only DPD France's trace page reads.
+        let shadowed = Set(preferred.filter { carrier in
+            rank(carrier) == nil || (Self.networkBrand(carrier).map(Self.groupLookupBrands.contains) == true && !browser
+                && definitions[carrier]?.tracking.recognitionPattern.map { !Self.matches(number, pattern: $0) } == true)
+        }.compactMap(Self.networkBrand))
         // Coordinadora's eleven digits are GLS's abroad; Paquetexpress's guías, letters and digits, are its own.
         let bareRun = !number.isEmpty && number.allSatisfy { $0.isASCII && $0.isNumber }
         let eligible = candidates.filter { carrier in

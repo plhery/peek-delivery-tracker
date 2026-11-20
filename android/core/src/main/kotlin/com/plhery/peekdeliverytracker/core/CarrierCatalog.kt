@@ -202,9 +202,13 @@ class CarrierCatalog private constructor(
         }
         fun rank(carrier: CarrierId): Int? =
             if (browser) definitions[carrier]?.tracking?.browserRecognitionRank else definitions[carrier]?.tracking?.recognitionRank
-        // A preferred carrier that cannot be asked (DPD France) keeps its brand's other networks out: DPD's
-        // guest API also answers for DPD France parcels.
-        val shadowed = preferred.filter { rank(it) == null }.mapNotNull { networkBrand(it) }.toSet()
+        // A preferred carrier that cannot be asked about the number keeps its brand's other networks out when they
+        // share one lookup: DPD's guest API also answers for DPD France's own parcels, which only DPD France's trace
+        // page reads.
+        val shadowed = preferred.filter { carrier ->
+            rank(carrier) == null || (networkBrand(carrier) in groupLookupBrands && !browser &&
+                definitions[carrier]?.tracking?.recognitionPattern?.let { !matches(number, it) } == true)
+        }.mapNotNull { networkBrand(it) }.toSet()
         // Coordinadora's eleven digits are GLS's abroad; Paquetexpress's guías, letters and digits, are its own.
         val bareRun = number.isNotEmpty() && number.all { it in '0'..'9' }
         val eligible = candidates.filter { carrier ->
@@ -1031,6 +1035,9 @@ class CarrierCatalog private constructor(
         /** Brands with several catalog networks ("DPD" is `dpd` and `dpd-fr`), as in Universal Parcel
          * Scraper's catalog networks. */
         private val networkBrands = listOf("dhl", "dpd", "gls", "hermes", "evri", "gofo", "jumppoint")
+
+        /** The brands whose networks one lookup answers for (`GROUP_LOOKUP_BRANDS`). */
+        private val groupLookupBrands = setOf("dpd")
 
         fun networkBrand(carrier: CarrierId): String? =
             networkBrands.firstOrNull { carrier.rawValue == it || carrier.rawValue.startsWith("$it-") }

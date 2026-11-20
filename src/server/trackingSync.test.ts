@@ -346,6 +346,10 @@ describe('tracking event normalization', () => {
     ]);
     expect(marked({ ...retention('2026-09-10T06:12:40Z'), stage: 'customs', stage_source: 'none' }, scan('2026-09-10T06:12:00Z', 'customs')))
       .toEqual([['customs', true], ['customs', undefined]]);
+    // Pending is no stage kept: an adapter that gives a notice pending, as AliExpress gives its last-mile notice, leaves
+    // it the stage of the scan before it.
+    expect(marked({ ...retention('2026-09-10T06:12:40Z'), stage: 'pending', stage_source: 'none' }, scan('2026-09-10T06:12:00Z', 'in_transit')))
+      .toEqual([['in_transit', true], ['in_transit', undefined]]);
     // Dated before it in whatever order the answer lists them, through another notice; first, it is registered.
     expect(stages('royal-mail', scan('2026-09-10T05:00:00Z', 'accepted'), retention('2026-09-10T07:00:00Z'),
       retention('2026-09-10T06:00:00Z'), scan('2026-09-10T08:00:00Z', 'in_transit')).map((row) => row[1])).toEqual([

@@ -709,8 +709,8 @@ and nothing typed is sent.
   delivery or a return: it is served under the scan (`relay_of`), or under the row that scan is
   itself shown under as another carrier's copy, so the headline stays on the scan, and it
   announces nothing (`src/server/stageNotices.ts`). A scan its adapter leaves in no
-  stage whose code or wording the carrier's map notes keeps the stage of the scan before it (Royal
-  Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of
+  stage, or pending (AliExpress's last-mile notice), whose code or wording the carrier's map notes keeps the
+  stage of the scan before it (Royal Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of
   the scan dated before it and marks it one (`kept_stage`, `keptNotices`), so it goes under that
   scan in transit too, where no stage of its own tells it from news that the parcel moves, and the
   apps' days without news count from that scan. A scan

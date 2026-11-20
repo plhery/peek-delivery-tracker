@@ -111,8 +111,10 @@ export function keptNotices(carrier: string, scans: readonly JsonObject[], insta
     return answer.kind === 'intentional_gap' && KEEPS_STAGE.test(answer.note);
   });
   if (!marked.includes(true)) return [...scans];
-  // An adapter that kept the stage itself leaves the scan as it gave it, marked.
-  const notices = scans.map((scan, index) => marked[index] && !(VALID_STAGES.has(String(scan.stage ?? '')) && scan.stage_source === 'none'));
+  // An adapter that kept the stage itself leaves the scan as it gave it, marked. Pending is no stage kept: AliExpress
+  // gives a notice that moves nothing pending, for the scan before it to stand.
+  const notices = scans.map((scan, index) => marked[index]
+    && !(VALID_STAGES.has(String(scan.stage ?? '')) && scan.stage !== 'pending' && scan.stage_source === 'none'));
   if (!notices.includes(true)) return scans.map((scan, index) => marked[index] ? { ...scan, kept_stage: true } : scan);
   const read = scanStages(scans, instants);
   const times = instants.map((instant) => Date.parse(instant ?? ''));

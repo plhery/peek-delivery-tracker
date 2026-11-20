@@ -336,9 +336,11 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
       const kept = scan.raw.stage_source === 'none' && declared !== null && declared !== 'pending' && (declared === previous || unordered(scan));
       if (answer.stage !== declared && !kept) [given, reason] = [{ stage: answer.stage, stage_source: 'carrier_map' }, 'mapped'];
     } else if (answer.kind === 'intentional_gap' && KEEPS_STAGE.test(answer.note)) {
-      // A notice stored as one kept the stage its adapter saw before it, which the stored rows may not show. One whose
-      // order among the scans of its instant is not known keeps the stage it has.
-      if (!(declared && scan.raw.stage_source === 'none') && !unordered(scan)) [given, reason] = [{ stage: previous ?? 'registered', stage_source: 'none' }, 'notice'];
+      // A notice stored as one kept the stage its adapter saw before it, which the stored rows may not show; pending is
+      // no stage kept (keptNotices). One whose order among the scans of its instant is not known keeps the stage it has.
+      if (!(declared && declared !== 'pending' && scan.raw.stage_source === 'none') && !unordered(scan)) {
+        [given, reason] = [{ stage: previous ?? 'registered', stage_source: 'none' }, 'notice'];
+      }
     } else if (answer.kind === 'unknown' && !declared && wording.source !== 'none') {
       reason = 'wording';
     }

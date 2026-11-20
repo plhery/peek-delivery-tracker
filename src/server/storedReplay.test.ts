@@ -139,6 +139,11 @@ describe('stored scan replay', () => {
 
     expect(listed).toEqual([expect.objectContaining({ row: 'a-notice', from: 'delivered', to: 'pending', reason: 'notice', declared: 'delivered' })]);
     expect(unknown).toEqual([]);
+    // A notice its adapter gave pending with no stage source kept no stage: it takes the scan's before it.
+    expect(replayParcel(parcel(
+      scan('scan', 'dpd-de', '2026-10-18T09:00:00Z', 'in_transit', 'Fixture scan', { provider_code: 'FIXTURE', stage: 'in_transit' }),
+      scan('pending', 'dpd-de', '2026-10-18T10:00:00Z', 'pending', 'Delivery notice sent', { provider_code: 'MSDLO', stage: 'pending', stage_source: 'none' }),
+    ))).toEqual([expect.objectContaining({ row: 'pending', from: 'pending', to: 'in_transit', reason: 'notice', declared: 'in_transit' })]);
     // A scan its adapter gave the stage of the scan before it, dated like that scan.
     expect(replayParcel(parcel(
       scan('z-round', 'chronopost', '2026-10-19T08:00:00Z', 'out_for_delivery', 'Colis en cours de livraison', { provider_code: 'TA', stage: 'out_for_delivery' }),

@@ -97,6 +97,17 @@ describe('a parcel’s bell', () => {
     expect(saves.email).not.toHaveBeenCalled();
   });
 
+  it('opens the parcel’s alerts on a held return, still scanned on its way back, as on any parcel on its way', async () => {
+    const { user } = await open({ parcel: { returnHeld: true }, stages: ['registered', 'in_transit', 'returned', 'in_transit'] });
+    expect(bell()).toHaveAccessibleName('Notifications for this parcel');
+    expect(bell()).toHaveAttribute('aria-haspopup', 'dialog');
+    await user.click(bell());
+    expect(within(sheet()).getByRole('switch', { name: 'Notifications' })).toBeChecked();
+    expect(within(sheet()).getByRole('switch', { name: 'Email when it arrives' })).toBeChecked();
+    expect(saves.notifications).not.toHaveBeenCalled();
+    expect(saves.email).not.toHaveBeenCalled();
+  });
+
   it('opens the parcel’s alerts while the account’s email is on and the parcel is on its way', async () => {
     const { user } = await open();
     expect(bell()).toHaveAccessibleName('Notifications for this parcel');

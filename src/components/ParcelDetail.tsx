@@ -241,10 +241,12 @@ export function ParcelDetail({
   const [switchingCarrier, setSwitchingCarrier] = useState(false);
   const delivered = current?.stage === 'delivered';
   const importCharges = importChargesLine(parcel.importCharges, delivered, t, languageTag);
-  // While the account's delivery email is on, a parcel still on its way has two alerts: the bell opens them.
+  // While the account's delivery email is on, a parcel still on its way has two alerts: the bell opens them. A held
+  // return is still on its way back, and keeps both, as the server keeps sending them.
   const preferences = useNotificationPreferences(apiAuth);
   const deliveryEmail = useDeliveryEmail(apiAuth, accountEmail);
-  const twoAlerts = deliveryEmail?.choice === true && !!onSetEmailMuted && !delivered && current?.stage !== 'returned';
+  const twoAlerts = deliveryEmail?.choice === true && !!onSetEmailMuted && !delivered
+    && (current?.stage !== 'returned' || heldReturn(parcel, current.stage));
   const [alertsOpen, setAlertsOpen] = useState(false);
   const shareClient = useMemo(() => apiAuth ? createAccountShare(apiAuth) : demoAccountShare, [apiAuth]);
   const canShare = !!shareClient && !parcel.archivedAt;

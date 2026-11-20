@@ -101,6 +101,13 @@ const nextConfig: NextConfig = {
         ],
       },
       {
+        // The guides' pictures. One may be redrawn under its name, so a day at most.
+        source: '/guide-pictures/:path*',
+        headers: [
+          { key: 'Cache-Control', value: 'public, max-age=86400' },
+        ],
+      },
+      {
         source: '/sw.js',
         headers: [
           { key: 'Cache-Control', value: 'no-store, max-age=0, must-revalidate' },

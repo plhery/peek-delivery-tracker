@@ -55,6 +55,35 @@ test('a translation whose drawings differ from the English guide’s, or that lo
   }, /differ from the English guide|a part is missing/);
 });
 
+test('a picture is a light WebP in its guide’s folder, as large as the page says or twice that', () => {
+  const real = fileURLToPath(new URL('../public/guide-pictures', import.meta.url));
+  const sample = readFileSync(path.join(real, 'amazon-orders', 'track-en.webp'));
+  const check = (line, write, message) => {
+    const pictures = mkdtempSync(path.join(tmpdir(), 'guide-pictures-'));
+    cpSync(real, pictures, { recursive: true });
+    const directory = copy(({ first, edit }) => {
+      for (const language of ['en', 'de', 'fr', 'it', 'es', 'pt', 'pl']) edit(language, /\n:::sources\n/, `\n:::picture ${line(first)}\nA sample page.\n:::\n\n:::sources\n`);
+      mkdirSync(path.join(pictures, first));
+      write(path.join(pictures, first, 'page.webp'));
+    });
+    try {
+      if (message) assert.throws(() => readGuides(directory, readCarrierIndex(), pictures), message);
+      else assert.equal(readGuides(directory, readCarrierIndex(), pictures).length, JSON.parse(readFileSync(path.join(directory, 'index.json'), 'utf8')).length);
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+      rmSync(pictures, { recursive: true, force: true });
+    }
+  };
+  const copied = (file) => writeFileSync(file, sample);
+  check((id) => `${id}/page.webp 480x300`, copied);
+  check((id) => `${id}/page.webp 960x600`, copied);
+  check((id) => `${id}/page.webp 500x300`, copied, /is 960x600; the page says 500x300/);
+  check(() => 'amazon-orders/track-en.webp 480x300', copied, /belongs in public\/guide-pictures\//);
+  check((id) => `${id}/other.webp 480x300`, copied, /other\.webp is missing/);
+  check((id) => `${id}/page.webp 480x300`, (file) => writeFileSync(file, Buffer.alloc(200)), /is not a WebP picture/);
+  check((id) => `${id}/page.webp 480x300`, (file) => writeFileSync(file, Buffer.concat([sample, Buffer.alloc(150_000)])), /weighs \d+ bytes/);
+});
+
 test('a link to a guide that does not exist, a shared address and a long title are refused', () => {
   refuses(({ edit }) => edit('en', /\n## /, '\nSee [this](guide:no-such-guide).\n\n## '), /guide:no-such-guide" leads nowhere/);
   refuses(({ directory, edit }) => {

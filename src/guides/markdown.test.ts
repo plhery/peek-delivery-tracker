@@ -115,6 +115,18 @@ describe('a guide’s Markdown', () => {
       .toThrow('content/guides/x/en.md: a guide holds one ":::checker" at most');
   });
 
+  it('reads a picture: its file in the guide’s folder, its size, and one line saying what it shows, which counts no words', () => {
+    const blocks = parseBlocks([':::picture amazon-orders/track-en.webp 480x300', 'Amazon’s Track package page, with sample values.', ':::'].join('\n'));
+    expect(blocks).toEqual([{ type: 'picture', file: 'amazon-orders/track-en.webp', width: 480, height: 300, alt: 'Amazon’s Track package page, with sample values.' }]);
+    expect(figureShape(blocks)).toEqual(['picture']);
+    expect(wordCount(blocks)).toBe(0);
+    expect(() => parseBlocks(':::picture track.png 480x300\nA page.\n:::')).toThrow(/a picture names its file and its size/);
+    expect(() => parseBlocks(':::picture amazon-orders/track-en.webp\nA page.\n:::')).toThrow(/a picture names its file and its size/);
+    expect(() => parseBlocks(':::picture amazon-orders/track-en.webp 480x300 big\nA page.\n:::')).toThrow(/a picture names its file and its size/);
+    expect(() => parseBlocks(':::picture amazon-orders/track-en.webp 480x300\n:::')).toThrow(/holds one line saying what it shows/);
+    expect(() => parseBlocks(':::picture amazon-orders/track-en.webp 480x300\nA page.\nAnd more.\n:::')).toThrow(/holds one line saying what it shows/);
+  });
+
   it('counts the words of Chinese, which puts no spaces between them, as a dictionary finds them', () => {
     // Eight characters, four words to a reader: the dictionary's split may differ a little between ICU versions.
     const chinese = wordCount(parseBlocks('邮件到达处理中心'));
@@ -235,6 +247,11 @@ describe('a guide’s typography', () => {
     expect(french.blocks[3]).toMatchObject({ items: [{ note: [{ text: `Un jour ou deux${narrow}?` }] }] });
     // The written guide is left as it was read.
     expect(written.title).toBe('Où est mon colis ?');
+  });
+
+  it('sets the words of a French picture as it sets the text', () => {
+    const french = typeset(parseGuide(`${head}\nLe début.\n\n:::picture x/page.webp 480x300\nLa page : un colis.\n:::\n`), 'fr');
+    expect(french.blocks[1]).toEqual({ type: 'picture', file: 'x/page.webp', width: 480, height: 300, alt: `La page${space}: un colis.` });
   });
 
   it('sets a French carrier page as it sets a guide, without giving it a picture', () => {

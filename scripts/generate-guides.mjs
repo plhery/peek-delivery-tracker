@@ -11,6 +11,7 @@ import {
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const contentRoot = path.join(root, 'content', 'guides');
 const carriersRoot = path.join(root, 'content', 'carriers');
+const picturesRoot = path.join(root, 'public', 'guide-pictures');
 const outputPath = path.join(root, 'src', 'generated', 'guides.ts');
 const carriersOutputPath = path.join(root, 'src', 'generated', 'carriers.ts');
 
@@ -60,6 +61,44 @@ function searchable(text, where, kind, language) {
   return text;
 }
 
+/** A picture's width and height, read from its WebP header (lossy, lossless or extended), or null for any other file. */
+export function webpSize(bytes) {
+  if (bytes.length < 30 || bytes.toString('latin1', 0, 4) !== 'RIFF' || bytes.toString('latin1', 8, 12) !== 'WEBP') return null;
+  const chunk = bytes.toString('latin1', 12, 16);
+  if (chunk === 'VP8 ') return { width: bytes.readUInt16LE(26) & 0x3fff, height: bytes.readUInt16LE(28) & 0x3fff };
+  if (chunk === 'VP8L') {
+    const bits = bytes.readUInt32LE(21);
+    return { width: (bits & 0x3fff) + 1, height: ((bits >> 14) & 0x3fff) + 1 };
+  }
+  if (chunk === 'VP8X') return { width: bytes.readUIntLE(24, 3) + 1, height: bytes.readUIntLE(27, 3) + 1 };
+  return null;
+}
+
+/** The most a picture weighs: a redrawn screenshot in WebP is a few dozen kilobytes. */
+const PICTURE_BYTES = 150_000;
+
+/**
+ * Each picture a page shows: a WebP file in its own folder of `public/guide-pictures` (`<id>/<name>.webp`), light,
+ * and as wide and high as the page says, which keeps the text from jumping while it loads. Twice as large is fine:
+ * a sharp screen draws it at half its size.
+ */
+function checkPictures(text, where, id, directory = picturesRoot) {
+  for (const block of text.blocks) {
+    if (block.type !== 'picture') continue;
+    if (!block.file.startsWith(`${id}/`)) throw new Error(`${where}: its picture "${block.file}" belongs in public/guide-pictures/${id}/`);
+    const file = path.join(directory, block.file);
+    if (!existsSync(file)) throw new Error(`${where}: public/guide-pictures/${block.file} is missing`);
+    const bytes = readFileSync(file);
+    if (bytes.length > PICTURE_BYTES) throw new Error(`${where}: public/guide-pictures/${block.file} weighs ${bytes.length} bytes; keep a picture under ${PICTURE_BYTES}`);
+    const size = webpSize(bytes);
+    if (!size) throw new Error(`${where}: public/guide-pictures/${block.file} is not a WebP picture`);
+    const scale = size.width / block.width;
+    if (![1, 2].includes(scale) || size.height !== block.height * scale) {
+      throw new Error(`${where}: public/guide-pictures/${block.file} is ${size.width}x${size.height}; the page says ${block.width}x${block.height} (the same, or half)`);
+    }
+  }
+}
+
 /** A translation as long as its English page, give or take: shorter or longer, a part is missing or doubled. */
 function translated(text, english, where, kind) {
   const ratio = wordCount(text.blocks) / wordCount(english.blocks);
@@ -74,7 +113,7 @@ function translated(text, english, where, kind) {
  * language. A guide that would publish half-made stops the build here. A guide
  * links a carrier's page only in a language the carrier is written in.
  */
-export function readGuides(directory = contentRoot, carriers = readCarrierIndex()) {
+export function readGuides(directory = contentRoot, carriers = readCarrierIndex(), pictures = picturesRoot) {
   const ids = JSON.parse(readFileSync(path.join(directory, 'index.json'), 'utf8'));
   if (!Array.isArray(ids) || new Set(ids).size !== ids.length) throw new Error('content/guides/index.json lists each guide once');
   // An id names the guide's screen in the analytics and its `guide:` links.
@@ -88,6 +127,7 @@ export function readGuides(directory = contentRoot, carriers = readCarrierIndex(
       const where = `content/guides/${id}/${locale}.md`;
       if (!existsSync(file)) throw new Error(`${where} is missing: a guide is written in every language`);
       const guide = searchable(parseGuide(readFileSync(file, 'utf8'), where), where, 'guide', locale);
+      checkPictures(guide, where, id, pictures);
       for (const linked of linkedGuides(guide.blocks)) {
         if (linked === id || !ids.includes(linked)) throw new Error(`${where}: "guide:${linked}" leads nowhere`);
       }
@@ -175,6 +215,7 @@ export function readCarriers(directory = carriersRoot, guides = JSON.parse(readF
     const pages = Object.fromEntries(carrier.languages.map((locale) => {
       const where = `content/carriers/${carrier.id}/${locale}.md`;
       const page = searchable(parseCarrierText(readFileSync(path.join(directory, carrier.id, `${locale}.md`), 'utf8'), where), where, 'carrier page', locale);
+      checkPictures(page, where, carrier.id);
       const asked = questions(page.blocks);
       const [fewest, most] = LIMITS.questions;
       if (asked.length < fewest || asked.length > most) {

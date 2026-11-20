@@ -72,6 +72,10 @@ a.guide__crumb:hover { color: var(--ink); }
 .guide-anatomy__parts li { display: grid; gap: 6px; align-content: start; padding-top: 12px; border-top: 3px solid var(--tone); color: var(--ink-soft); }
 .guide-body .guide-anatomy__parts code { justify-self: start; background: var(--tone-surface); color: var(--tone); font-size: 13px; font-weight: 650; }
 
+/* A picture, such as a screenshot redrawn with sample values: a card the width of the text at most. */
+.guide-picture { max-width: 720px; border-radius: 20px; overflow: hidden; background: var(--paper); box-shadow: var(--shadow); }
+.guide-picture img { display: block; width: 100%; height: auto; }
+
 /* A journey: stops along a dotted way, down the page on a phone and across it on a wide screen. */
 .guide-body .guide-journey { display: grid; gap: 0; padding: 22px; border-radius: 24px; background: var(--paper); box-shadow: var(--shadow); list-style: none; font-size: 14.5px; line-height: 1.45; }
 .guide-body .guide-journey li + li { margin-top: 0; }

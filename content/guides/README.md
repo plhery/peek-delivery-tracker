@@ -55,9 +55,9 @@ Text.
   its own page as `[ask an assistant](#ask-an-assistant)`: the heading's words in lowercase, without accents, with a
   hyphen for each run of other characters. `npm run guides` fails when no heading has that address.
 - A backslash before `*`, `[`, `]`, `|` or `!` writes the character itself. There are no
-  pictures, rules or `*`/`+` lists.
+  rules or `*`/`+` lists.
 
-Five blocks are drawn rather than set as text:
+Six blocks are drawn rather than set as text:
 
 ```md
 :::steps
@@ -81,6 +81,10 @@ Five blocks are drawn rather than set as text:
 :::checker
 :::
 
+:::picture amazon-orders/track-en.webp 480x300
+Amazon's Track package page: the carrier, then the tracking number. Sample values.
+:::
+
 :::sources
 - [Universal Postal Union](https://www.upu.int/) – the S10 standard
 :::
@@ -89,7 +93,11 @@ Five blocks are drawn rather than set as text:
 A journey's stops are `shop`, `label`, `warehouse`, `truck`, `plane`, `ship`, `customs`,
 `handover`, `locker` and `home`. `:::checker` holds nothing: it draws a field that names the
 carrier of a number as the reader types it, and tracks it on the landing, once per page at
-most. Every guide ends with its `:::sources`: the pages its facts were read on.
+most. A `:::picture` names a WebP file in `public/guide-pictures/<id>/` and the size it is
+shown at, and holds one line saying what it shows. The file is that size or twice it, and
+under 150 KB; each translation shows its own. A screenshot is redrawn with sample values:
+no real names, addresses, order or tracking numbers, products, prices or dates. Every guide
+ends with its `:::sources`: the pages its facts were read on.
 
 ## Writing and translating
 

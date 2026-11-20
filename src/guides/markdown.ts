@@ -39,6 +39,11 @@ export type Block =
   | { type: 'journey'; stops: { icon: JourneyIcon; title: Inline[]; note: Inline[] }[] }
   /** A field that names the carrier of a number as it is typed, and tracks it on the landing. */
   | { type: 'checker' }
+  /**
+   * A picture in `public/guide-pictures`, such as a screenshot redrawn with sample values: its file, its size in
+   * pixels as the page sets it, and what it shows, for readers who cannot see it.
+   */
+  | { type: 'picture'; file: string; width: number; height: number; alt: string }
   | { type: 'sources'; items: Inline[][] };
 
 export interface Guide {
@@ -57,10 +62,12 @@ export type CarrierText = Omit<Guide, 'picture'>;
 
 const FIELDS = ['title', 'description', 'slug', 'picture', 'published', 'updated'] as const;
 type Field = (typeof FIELDS)[number];
-const DIRECTIVES = ['steps', 'anatomy', 'journey', 'checker', 'sources'] as const;
+const DIRECTIVES = ['steps', 'anatomy', 'journey', 'checker', 'picture', 'sources'] as const;
 type Directive = (typeof DIRECTIVES)[number];
 
 export const GUIDE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+/** A picture's file below `public/guide-pictures`: its guide's id, then its name, in WebP. */
+export const PICTURE_FILE = /^[a-z0-9]+(?:-[a-z0-9]+)*\/[a-z0-9]+(?:-[a-z0-9]+)*\.webp$/;
 const DAY = /^\d{4}-\d{2}-\d{2}$/;
 
 /** Whether a date is written `2026-01-31` and is a day of the calendar: Date.parse moves 2026-02-30 to March. */
@@ -190,6 +197,16 @@ function directive(name: Directive, argument: string, lines: string[], where: st
   if (name === 'checker') {
     if (argument || lines.some((line) => line.trim())) throw new Error(`${where}: ":::checker" holds nothing: the field draws itself`);
     return { type: 'checker' };
+  }
+  if (name === 'picture') {
+    const [file, size, ...rest] = argument.split(/\s+/);
+    const pixels = /^([1-9]\d{1,3})x([1-9]\d{1,3})$/.exec(size ?? '');
+    if (!PICTURE_FILE.test(file ?? '') || !pixels || rest.length) {
+      throw new Error(`${where}: a picture names its file and its size, as ":::picture amazon-orders/track-en.webp 720x400", not ":::picture ${argument}"`);
+    }
+    const text = lines.map((line) => line.trim()).filter(Boolean);
+    if (text.length !== 1) throw new Error(`${where}: ":::picture ${file}" holds one line saying what it shows`);
+    return { type: 'picture', file, width: Number(pixels[1]), height: Number(pixels[2]), alt: text[0] };
   }
   const inline = (text: string) => parseInline(text, where);
   const rows = listItems(lines.filter((line) => line.trim()), /^- /, where).map(cells);
@@ -401,6 +418,7 @@ function spacedBlock(block: Block): Block {
     case 'anatomy': return { ...block, parts: block.parts.map(({ text, label }) => ({ text, label: spacedRun(label) })) };
     case 'journey': return { ...block, stops: block.stops.map(({ icon, title, note }) => ({ icon, title: spacedRun(title), note: spacedRun(note) })) };
     case 'checker': return block;
+    case 'picture': return { ...block, alt: frenchSpacing(block.alt) };
   }
 }
 
@@ -429,7 +447,7 @@ function runsOf(block: Block): Inline[][] {
     case 'steps': return block.items.flatMap(({ title, note }) => [title, note]);
     case 'anatomy': return block.parts.map(({ label }) => label);
     case 'journey': return block.stops.flatMap(({ title, note }) => [title, note]);
-    case 'checker': return [];
+    case 'checker': case 'picture': return [];
   }
 }
 
@@ -492,7 +510,7 @@ export function wordCount(blocks: readonly Block[]): number {
   return blocks.flatMap(runsOf).reduce((count, run) => count + plainText(run).split(/\s+/).filter(Boolean).reduce((words, token) => words + wordsIn(token), 0), 0);
 }
 
-/** The drawn blocks of a guide in order, which every translation shares: `steps:4`, `anatomy:RR 12345678 5 CH`. */
+/** The drawn blocks of a guide in order, which every translation shares: `steps:4`, `anatomy:RR 12345678 5 CH`, `picture`. */
 export function figureShape(blocks: readonly Block[]): string[] {
   return blocks.flatMap((block) => {
     switch (block.type) {
@@ -500,6 +518,7 @@ export function figureShape(blocks: readonly Block[]): string[] {
       case 'journey': return [`journey:${block.stops.map(({ icon }) => icon).join(',')}`];
       case 'anatomy': return [`anatomy:${block.parts.map(({ text }) => text).join(' ')}`];
       case 'checker': return ['checker'];
+      case 'picture': return ['picture'];
       default: return [];
     }
   });

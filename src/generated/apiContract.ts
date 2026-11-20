@@ -39797,7 +39797,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Riyadh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "thabit-logistics"
     },
     "trackingUrlTemplate": "https://thabit-logistics.com/track-shipment/{trackingNumber}",
     "linkRules": [
@@ -43788,7 +43788,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Tegucigalpa",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "honducor"
     },
     "trackingUrlTemplate": "https://rastreo.honducor.gob.hn/rastreo?tracking_number={trackingNumber}",
     "linkRules": [
@@ -48401,7 +48401,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Moscow",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "magic-trans"
     },
     "trackingUrlTemplate": "https://magic-trans.ru/otsledit-gruz/?id={trackingNumber}",
     "linkRules": [
@@ -51780,7 +51780,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Budapest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "xls-futar"
     },
     "trackingUrlTemplate": "https://xlsfutar.hu/track?id={trackingNumber}",
     "linkRules": [
@@ -58582,7 +58582,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Guayaquil",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tramaco"
     },
     "trackingUrlTemplate": "https://www.tramaco.com.ec/rastreo.html?guia={trackingNumber}",
     "linkRules": [
@@ -60599,7 +60599,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Berlin",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "hellmann"
     },
     "trackingUrlTemplate": "https://public.tracking.hellmann.net/search/{trackingNumber}",
     "linkRules": [

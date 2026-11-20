@@ -1812,6 +1812,34 @@
     ]
   },
   {
+    "input": "00340997551002094961",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "swiss-post-cargo",
+      "usps",
+      "nz-post"
+    ],
+    "asked": [
+      "swiss-post-cargo",
+      "nz-post"
+    ]
+  },
+  {
+    "input": "00340997554002328852",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "swiss-post-cargo",
+      "usps",
+      "nz-post"
+    ],
+    "asked": [
+      "swiss-post-cargo",
+      "nz-post"
+    ]
+  },
+  {
     "input": "00343177845170952648",
     "carrier": "unknown",
     "confidence": "low",
@@ -6240,6 +6268,12 @@
     ]
   },
   {
+    "input": "014886530",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "014971207565",
     "carrier": "unknown",
     "confidence": "low",
@@ -6378,6 +6412,24 @@
     ]
   },
   {
+    "input": "015169000",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ]
+  },
+  {
     "input": "015750676972097",
     "carrier": "unknown",
     "confidence": "low",
@@ -6461,6 +6513,12 @@
       "j-and-t",
       "metropolitan-warehouse"
     ]
+  },
+  {
+    "input": "016095253",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "016121218205",
@@ -6757,6 +6815,12 @@
       "j-and-t",
       "metropolitan-warehouse"
     ]
+  },
+  {
+    "input": "018031128",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "018034977605",
@@ -7057,12 +7121,30 @@
     ]
   },
   {
+    "input": "020960507",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
     "input": "021115C902CF0C99",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
       "royal-mail"
     ]
+  },
+  {
+    "input": "021147139",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "021161570",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "0212202000023",
@@ -7107,6 +7189,12 @@
       "dpd-nl",
       "dpd-de"
     ]
+  },
+  {
+    "input": "021921541",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
   },
   {
     "input": "02211189000554",
@@ -8075,6 +8163,34 @@
     "confidence": "high",
     "candidates": [
       "nacex"
+    ]
+  },
+  {
+    "input": "031002004307073",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "brt",
+      "yunda",
+      "ozon-logistics"
+    ],
+    "asked": [
+      "brt"
+    ]
+  },
+  {
+    "input": "031002005632898",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-fr",
+      "brt",
+      "yunda",
+      "ozon-logistics"
+    ],
+    "asked": [
+      "brt"
     ]
   },
   {
@@ -43453,6 +43569,14 @@
     ]
   },
   {
+    "input": "3885491",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "seur"
+    ]
+  },
+  {
     "input": "389408460019",
     "carrier": "unknown",
     "confidence": "low",
@@ -63720,6 +63844,16 @@
     ]
   },
   {
+    "input": "73854401",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
+    ]
+  },
+  {
     "input": "740 011 063 677",
     "carrier": "unknown",
     "confidence": "low",
@@ -76111,6 +76245,22 @@
     ]
   },
   {
+    "input": "9922397264990",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "delhivery"
+    ]
+  },
+  {
     "input": "992338535",
     "carrier": "unknown",
     "confidence": "low",
@@ -76260,6 +76410,24 @@
     "confidence": "low",
     "candidates": [
       "seur"
+    ]
+  },
+  {
+    "input": "9952992582670",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "ukrposhta",
+      "correos-chile",
+      "delhivery",
+      "yunda",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
+      "ukrposhta",
+      "delhivery"
     ]
   },
   {
@@ -96448,6 +96616,14 @@
     "confidence": "high",
     "candidates": [
       "canada-post"
+    ]
+  },
+  {
+    "input": "LX773395087TW",
+    "carrier": "chunghwa-post",
+    "confidence": "high",
+    "candidates": [
+      "chunghwa-post"
     ]
   },
   {

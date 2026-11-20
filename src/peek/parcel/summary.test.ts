@@ -217,6 +217,10 @@ describe('the tab’s title and the link preview', () => {
     expect(giftArrival(out({ expectedDeliveryFrom: '2026-10-01', expectedDelivery: '2026-10-03' }), wording)).toBe('Arrives today');
     expect(giftArrival(out({ expectedDelivery: '2026-10-02 13:00-17:00' }), wording)).toBe('Arrives today, 13:00–17:00');
     expect(giftArrival(out({}), wording)).toBeNull();
+    // Sent out yesterday with no scan since, it comes today only if the carrier still says today.
+    const outYesterday = (overrides: Partial<ParcelWithEvents>) => parcel([['in_transit', at(1, 6)], ['out_for_delivery', at(1, 7)]], overrides);
+    expect(giftArrival(outYesterday({ expectedDelivery: '2026-10-03' }), wording)).toBeNull();
+    expect(giftArrival(outYesterday({ expectedDelivery: '2026-10-02' }), wording)).toBe('Arrives today');
     const delivered = parcel([['in_transit', at(1, 8)], ['delivered', at(2, 9, 12)]]);
     expect(giftDelivered(delivered, wording)).toBe('Delivered today at 09:12');
     expect(giftDelivered(delivered, { ...wording, now: NOW + 86_400_000 })).toBe('Delivered yesterday at 09:12');

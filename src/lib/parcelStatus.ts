@@ -39,9 +39,18 @@ export function parcelDeliveryEstimate(parcel: ParcelWithEvents, now = Date.now(
   return value;
 }
 
-/** Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named. */
+/**
+ * Whether a parcel out for delivery with an estimate comes today: it was sent out today, whichever day the estimate
+ * named, or the estimate names today. Sent out on an earlier day and due on a later one, it doesn't.
+ */
 export function parcelArrivesToday(parcel: ParcelWithEvents, now = Date.now()): boolean {
-  return currentEvent(parcel.events, parcel.returnHeld)?.stage === 'out_for_delivery' && liveEstimate(parcel, now) !== null;
+  const current = currentEvent(parcel.events, parcel.returnHeld);
+  if (current?.stage !== 'out_for_delivery') return false;
+  const live = liveEstimate(parcel, now);
+  if (!live) return false;
+  if (live.day.getTime() === live.today.getTime()) return true;
+  const sent = scanDate(current)?.date;
+  return !!sent && new Date(sent.getFullYear(), sent.getMonth(), sent.getDate()).getTime() === live.today.getTime();
 }
 
 export function parcelHasCarrierUpdate(parcel: ParcelWithEvents): boolean {

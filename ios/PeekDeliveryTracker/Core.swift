@@ -843,9 +843,12 @@ final class Localizer: ObservableObject {
         return value
     }
 
-    /// Whether a parcel out for delivery has an estimate: it comes today, whichever day the estimate named.
+    /// Whether a parcel out for delivery with an estimate comes today: it was sent out today, whichever day the
+    /// estimate named, or the estimate names today. Sent out on an earlier day and due on a later one, it doesn't.
     func parcelArrivesToday(_ parcel: Parcel, now: Date = Date()) -> Bool {
-        parcel.currentStage == .outForDelivery && liveEstimate(parcel, now: now) != nil
+        guard parcel.currentStage == .outForDelivery, let (_, date) = liveEstimate(parcel, now: now) else { return false }
+        let calendar = Calendar.current
+        return calendar.isDate(date, inSameDayAs: now) || parcel.currentEvent?.displayDate.map { calendar.isDate($0, inSameDayAs: now) } == true
     }
 
     func parcelCompletionDate(_ parcel: Parcel, now: Date = Date()) -> String? {

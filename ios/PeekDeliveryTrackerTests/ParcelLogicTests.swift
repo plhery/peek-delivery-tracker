@@ -2403,6 +2403,14 @@ final class ParcelLogicTests: XCTestCase {
         moving.expectedDelivery = today.string(from: now)
         XCTAssertNil(localizer.sharedParcelDetail(moving))
         XCTAssertEqual(localizer.giftDetail(moving, opened: false), "Arrives today")
+        // Sent out yesterday with no scan since, it comes today only if the carrier still says today.
+        let calendar = Calendar.current
+        let noon = calendar.date(bySettingHour: 12, minute: 0, second: 0, of: now)!
+        var outYesterday = makeParcel(id: id, events: [event(id, .outForDelivery, DateParser.isoString(calendar.date(byAdding: .day, value: -1, to: noon)!))])
+        outYesterday.expectedDelivery = today.string(from: calendar.date(byAdding: .day, value: 1, to: noon)!)
+        XCTAssertNil(localizer.giftDetail(outYesterday, opened: false, now: noon))
+        outYesterday.expectedDelivery = today.string(from: noon)
+        XCTAssertEqual(localizer.giftDetail(outYesterday, opened: false, now: noon), "Arrives today")
 
         // Arrived: the day on the usual card, the day and the time for a gift that is opened.
         let arrived = makeParcel(id: id, events: [event(id, .delivered, DateParser.isoString(now))])

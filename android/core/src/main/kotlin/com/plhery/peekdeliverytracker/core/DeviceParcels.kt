@@ -16,6 +16,7 @@ import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelFeedbackRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkCarrierRequest
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkPostcodeRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.ParcelShare
 import com.plhery.peekdeliverytracker.core.api.PublicLookupRequest
@@ -199,6 +200,21 @@ class DeviceLookupsSpent : Exception() {
 }
 
 /**
+ * Why the delivery postcode a link asks for filed nothing ([DeviceParcelClient.addPostcode]), with the carrier it was
+ * given for, which the message names: the website's `link.postcode.*` lines.
+ */
+sealed class DevicePostcodeRefusal(val carrier: CarrierId) : Exception() {
+    /** The carrier has no parcel of the number for that postcode (422). */
+    class Refused(carrier: CarrierId) : DevicePostcodeRefusal(carrier)
+
+    /** Too many postcodes were tried for the link, or the carrier takes none for a while (429): until [until]. */
+    class Tries(carrier: CarrierId, val until: Instant) : DevicePostcodeRefusal(carrier)
+
+    /** The carrier couldn't be asked just now (503). */
+    class Unreachable(carrier: CarrierId) : DevicePostcodeRefusal(carrier)
+}
+
+/**
  * How the device's parcels reach the service: no sign-in and no cookies, the link's id and its owner key only.
  *
  * Each call throws as the iPhone's does: `DeliveryApiError` for the service's answers, `DeviceLookupsSpent` once the
@@ -238,6 +254,14 @@ class DeviceParcelClient(
      * client that can't, which reads as usual.
      */
     val check: (suspend (linkId: String, key: String) -> PublicParcelResponse?)? = null,
+    /**
+     * Gives the delivery postcode the owner's link asks for (`link.inputNeeded`), which the service tries with that
+     * carrier before it keeps anything: the link as it then stands, its parcel filed under the carrier, or as it stands
+     * already when nothing is asked any more; null when the service has no such link for the key (its 404). A postcode
+     * the carrier refuses, too many tried or a carrier that can't be asked throw [DevicePostcodeRefusal]. None for a
+     * client that can't, which moves the link to the carrier instead.
+     */
+    val addPostcode: (suspend (linkId: String, key: String, ParcelLinkPostcodeRequest) -> PublicParcelResponse?)? = null,
 ) {
     companion object {
         /**
@@ -371,6 +395,32 @@ class DeviceParcelClient(
                     } else {
                         if (response.statusCode != 200) throw failure(response)
                         decode(PublicParcelResponse.serializer(), response)
+                    }
+                },
+                addPostcode = { linkId, key, request ->
+                    val response = send("api/public/parcels/$linkId/postcode", "POST", key, encoder.encode(ParcelLinkPostcodeRequest.serializer(), request))
+                    when {
+                        response.statusCode == 200 -> decode(PublicParcelResponse.serializer(), response)
+                        response.isServiceNotFound -> null
+                        // Nothing is asked any more: the parcel as it now stands.
+                        response.statusCode == 409 -> {
+                            val current = send("api/public/parcels/$linkId", "GET", key)
+                            if (current.statusCode == 410 || current.isServiceNotFound) {
+                                null
+                            } else {
+                                if (current.statusCode != 200) throw failure(current)
+                                decode(PublicParcelResponse.serializer(), current)
+                            }
+                        }
+                        response.statusCode == 422 -> throw DevicePostcodeRefusal.Refused(request.carrier)
+                        // Too many postcodes tried for the link, or the carrier takes none for a while after wrong ones.
+                        response.statusCode == 429 && JsonSerialization.stringsOfObject(response.body)?.get("scope") != "daily" -> {
+                            val wait = response.header("Retry-After")?.let(::swiftDouble) ?: 60.0
+                            throw DevicePostcodeRefusal.Tries(request.carrier, AppClock.now().plusMillis((wait * 1_000).toLong()))
+                        }
+                        // The carrier couldn't be asked; the service itself down says so as everywhere else.
+                        response.statusCode == 503 && Maintenance.serverDown(response) == null -> throw DevicePostcodeRefusal.Unreachable(request.carrier)
+                        else -> throw failure(response)
                     }
                 },
             )
@@ -697,7 +747,7 @@ class DeviceParcels(
         if (!ParcelLinkRoute.validId(response.link.id)) throw DeliveryApiError.InvalidResponse()
         var entry = DeviceParcel(
             linkId = response.link.id, label = request.label ?: "", archivedAt = null,
-            parcel = Parcel(shared = response.parcel), checkedAt = now().timeIntervalSinceReferenceDate,
+            parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
             postcodeGiven = request.dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
         ).startingSeen()
         // A copy the service forgot of the same number makes way for the new lookup, as on the website.
@@ -782,7 +832,7 @@ class DeviceParcels(
                 if (response != null) noteCheck(entry.linkId, response) else queued = queued.setting(entry.linkId, null)
                 if (response != null) {
                     change(index) {
-                        it.taking(Parcel(shared = response.parcel)).copy(
+                        it.taking(Parcel(shared = response.parcel, link = response.link)).copy(
                             checkedAt = now().timeIntervalSinceReferenceDate,
                             canKeep = if (entry.isViewer) response.link.canKeep else it.canKeep,
                         )
@@ -926,7 +976,7 @@ class DeviceParcels(
                 continue
             }
             entries = entries + DeviceParcel(
-                linkId = linkId, label = "", archivedAt = null, parcel = Parcel(shared = response.parcel),
+                linkId = linkId, label = "", archivedAt = null, parcel = Parcel(shared = response.parcel, link = response.link),
                 checkedAt = now().timeIntervalSinceReferenceDate,
             ).startingSeen()
         }
@@ -959,7 +1009,9 @@ class DeviceParcels(
     /**
      * Follows the same number with another carrier, link, postcode or phone digits. The parcel's own link moves to it
      * (`PATCH …/carrier`), keeping its address, sharing and notifications, as on the website; where the service no
-     * longer has that link for its key, a new lookup takes the old one's place and name.
+     * longer has that link for its key, a new lookup takes the old one's place and name. The postcode the link asks
+     * for, given alone for the carrier that asks, goes to the link instead (`POST …/postcode`), as on the website: the
+     * service tries it with that carrier first, and one it refuses changes nothing ([DevicePostcodeRefusal]).
      */
     suspend fun changeCarrier(
         id: UUID,
@@ -974,31 +1026,35 @@ class DeviceParcels(
         if (entry == null || entry.isViewer || entry.isFrozen) throw DeliveryApiError.ParcelMissing()
         val key = keys.keyOf(entry.linkId)
         val move = client?.changeCarrier
-        if (key != null && move != null) {
+        val postcode = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty
+        val give = client?.addPostcode?.takeIf {
+            postcode != null && entry.parcel.inputNeeded?.carrier == carrier &&
+                trackingUrl?.trimmingWhitespacesAndNewlines()?.nonEmpty == null && phoneDigits?.trimmingWhitespacesAndNewlines()?.nonEmpty == null
+        }
+        if (key != null && (move != null || give != null)) {
             entries.firstOrNull {
                 it.parcel.id != id && it.parcel.trackingNumber.equalsCanonically(entry.parcel.trackingNumber) &&
                     it.parcel.carrier.rawValue.equalsCanonically(carrier.rawValue)
             }?.let { existing -> throw DeliveryApiError.DuplicateTracking(existing.parcel.id) }
+        }
+        if (key != null && give != null && postcode != null) {
+            val response = give(entry.linkId, key, ParcelLinkPostcodeRequest(carrier = carrier, postcode = postcode, postcodeCountry = dpdPostcodeCountry))
+            if (response != null) {
+                val parcel = refiled(entry.linkId, id, response, postcodeGiven = true)
+                postcodes.remember(postcode, carrier, dpdPostcodeCountry)
+                return parcel
+            }
+        }
+        if (key != null && move != null) {
             val change = ParcelLinkCarrierRequest(
                 carrier = carrier, trackingUrl = trackingUrl, dpdPostcode = dpdPostcode, dpdPostcodeCountry = dpdPostcodeCountry,
                 phoneDigits = phoneDigits, lookupCountryHint = ParcelLookupCountry.hint(region()), language = language().rawValue,
             )
             val response = move(entry.linkId, key, change)
             if (response != null) {
-                // Forgotten here while the service was asked: it stays forgotten.
-                val index = entries.indexOfFirst { it.linkId.equalsCanonically(entry.linkId) }
-                if (index < 0) throw DeliveryApiError.ParcelMissing()
-                change(index) {
-                    val moved = it.taking(Parcel(shared = response.parcel)).copy(
-                        checkedAt = now().timeIntervalSinceReferenceDate,
-                        postcodeGiven = dpdPostcode?.trimmingWhitespacesAndNewlines()?.nonEmpty != null,
-                    )
-                    // The link reaches another parcel of the number: the page open on the old one follows it.
-                    if (response.parcel.id != id) moved.copy(replaced = it.replaced ?: id) else moved
-                }
-                save()
+                val parcel = refiled(entry.linkId, id, response, postcodeGiven = postcode != null)
                 dpdPostcode?.let { postcodes.remember(it, carrier, dpdPostcodeCountry) }
-                return shown(entries[index])
+                return parcel
             }
         }
         val added = lookUp(
@@ -1019,6 +1075,25 @@ class DeviceParcels(
             }
         }
         return added
+    }
+
+    /**
+     * The owner's link moved to another carrier, or filed under one with its postcode: its answer takes the parcel's
+     * place, and a page open on [id] follows it where the link now reaches another parcel of the number.
+     */
+    private fun refiled(linkId: String, id: UUID, response: PublicParcelResponse, postcodeGiven: Boolean): Parcel {
+        // Forgotten here while the service was asked: it stays forgotten.
+        val index = entries.indexOfFirst { it.linkId.equalsCanonically(linkId) }
+        if (index < 0) throw DeliveryApiError.ParcelMissing()
+        change(index) {
+            val moved = it.taking(Parcel(shared = response.parcel, link = response.link)).copy(
+                checkedAt = now().timeIntervalSinceReferenceDate, postcodeGiven = postcodeGiven,
+            )
+            // The link reaches another parcel of the number: the page open on the old one follows it.
+            if (response.parcel.id != id) moved.copy(replaced = it.replaced ?: id) else moved
+        }
+        save()
+        return shown(entries[index])
     }
 
     /** The parcel's link as others may open it, or nil once its sharing was stopped. */
@@ -1132,7 +1207,7 @@ class DeviceParcels(
         }
         var entry = DeviceParcel(
             linkId = linkId, label = label?.nonEmpty ?: "", archivedAt = null,
-            parcel = Parcel(shared = response.parcel), checkedAt = now().timeIntervalSinceReferenceDate,
+            parcel = Parcel(shared = response.parcel, link = response.link), checkedAt = now().timeIntervalSinceReferenceDate,
         ).startingSeen()
         // Followed again before its notifications were turned off: they go on, and are its own again.
         forgotten.firstOrNull { it.linkId.equalsCanonically(linkId) }?.let { left ->
@@ -1155,7 +1230,7 @@ class DeviceParcels(
     private fun upgradeViewer(index: Int, response: PublicParcelResponse, key: String) {
         val linkId = response.link.id
         val old = entries[index]
-        var owned = old.taking(Parcel(shared = response.parcel)).copy(
+        var owned = old.taking(Parcel(shared = response.parcel, link = response.link)).copy(
             linkId = linkId, viewer = null, canKeep = null, checkedAt = now().timeIntervalSinceReferenceDate,
         )
         if (!old.linkId.equalsCanonically(linkId)) {

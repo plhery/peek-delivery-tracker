@@ -383,6 +383,14 @@ class Localizer(
             }
         }
         if (error is DeviceLookupsSpent) return text("peek.dailyLimit")
+        if (error is DevicePostcodeRefusal) {
+            val carrier = mapOf("carrier" to CarrierCatalog.shared.info(error.carrier, language).displayName)
+            return when (error) {
+                is DevicePostcodeRefusal.Refused -> text("link.postcode.refused", carrier)
+                is DevicePostcodeRefusal.Tries -> text("link.postcode.tries", mapOf("time" to clockTime(error.until)))
+                is DevicePostcodeRefusal.Unreachable -> text("link.postcode.unreachable", carrier)
+            }
+        }
         if (error is ServerDown) return maintenanceText(error.notice ?: MaintenanceNotice.Unannounced, readAt = null)
         if (error is AuthenticationError) {
             return when (error) {

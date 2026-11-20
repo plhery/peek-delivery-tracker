@@ -4,6 +4,8 @@ import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierData
 import com.plhery.peekdeliverytracker.core.api.CarrierDataRouting
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
+import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelResultOutcome
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelsResponse
 import com.plhery.peekdeliverytracker.core.api.EventPlace
@@ -11,6 +13,7 @@ import com.plhery.peekdeliverytracker.core.api.EventPlacePrecision
 import com.plhery.peekdeliverytracker.core.api.ImportCharges
 import com.plhery.peekdeliverytracker.core.api.Parcel
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputNeededField
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.ParcelNumberHint
 import com.plhery.peekdeliverytracker.core.api.PublicPackage
@@ -88,6 +91,22 @@ fun Parcel(shared: PublicPackage): Parcel {
         // Its `seen_at` is the phone's to keep (DeviceParcel.seenNewsAt).
         newsAt = shared.newsAt,
     )
+}
+
+/**
+ * The parcel behind a link this phone follows, as [Parcel] shows it, with the delivery postcode the link asks its owner
+ * for (`link.inputNeeded`, never a viewer's): another carrier holds the parcel, or its own can't find it without one.
+ * The parcel's page asks for it as an account's does, and [DeviceParcels.changeCarrier] gives it.
+ */
+fun Parcel(shared: PublicPackage, link: ParcelLink): Parcel {
+    val parcel = Parcel(shared = shared)
+    val asked = link.inputNeeded?.takeIf { link.role == ParcelLinkRole.Owner } ?: return parcel
+    val field = when (asked.field) {
+        ParcelLinkInputNeededField.DpdPostcode -> CarrierInputNeededField.DpdPostcode
+    }
+    val data = parcel.carrierData ?: CarrierData()
+    val routing = (data.routing ?: CarrierDataRouting()).copy(inputNeeded = CarrierInputNeeded(carrier = asked.carrier, field = field))
+    return parcel.copy(carrierData = data.copy(routing = routing))
 }
 
 /** How a hidden tracking number reads: "••• 0899". */

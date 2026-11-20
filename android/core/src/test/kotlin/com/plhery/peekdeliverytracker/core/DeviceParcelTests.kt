@@ -3,6 +3,8 @@ package com.plhery.peekdeliverytracker.core
 import com.plhery.peekdeliverytracker.core.api.ApiJson
 import com.plhery.peekdeliverytracker.core.api.CarrierDetectionRequest
 import com.plhery.peekdeliverytracker.core.api.CarrierId
+import com.plhery.peekdeliverytracker.core.api.CarrierInputNeeded
+import com.plhery.peekdeliverytracker.core.api.CarrierInputNeededField
 import com.plhery.peekdeliverytracker.core.api.ChangePackageCarrierRequest
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelLink
 import com.plhery.peekdeliverytracker.core.api.ClaimParcelResult
@@ -20,7 +22,10 @@ import com.plhery.peekdeliverytracker.core.api.ParcelAlertPreset
 import com.plhery.peekdeliverytracker.core.api.ParcelAppAlertRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLink
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkCarrierRequest
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputNeeded
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkInputNeededField
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkKind
+import com.plhery.peekdeliverytracker.core.api.ParcelLinkPostcodeRequest
 import com.plhery.peekdeliverytracker.core.api.ParcelLinkRole
 import com.plhery.peekdeliverytracker.core.api.PublicLookupRequest
 import com.plhery.peekdeliverytracker.core.api.PublicLookupResponse
@@ -145,6 +150,7 @@ class DeviceParcelTests {
         alert: (String) -> DeviceAlertAnswer = { DeviceAlertAnswer.On },
         unalert: (String) -> Unit = {},
         move: ((String, ParcelLinkCarrierRequest) -> PublicParcelResponse?)? = null,
+        postcode: ((String, ParcelLinkPostcodeRequest) -> PublicParcelResponse?)? = null,
     ) = DeviceParcelClient(
         lookup = { request ->
             calls.add("lookup ${request.trackingNumber} ${request.carrier?.rawValue ?: "-"}")
@@ -201,6 +207,12 @@ class DeviceParcelTests {
                 calls.lookupLanguage(change.language)
                 calls.lookupPhoneDigits(change.phoneDigits)
                 answer(linkId, change)
+            }
+        },
+        addPostcode = postcode?.let { answer ->
+            { linkId, key, request ->
+                calls.add("postcode $linkId ${key.take(1)} ${request.carrier.rawValue} ${request.postcode} ${request.postcodeCountry ?: "-"}")
+                answer(linkId, request)
             }
         },
     )
@@ -544,6 +556,133 @@ class DeviceParcelTests {
         } catch (error: DeviceLookupsSpent) {
             assertEquals(DeviceLookupsSpent(), error)
         }
+    }
+
+    /** The owner's link asking for the delivery postcode [carrier] needs. */
+    private fun asking(id: String, carrier: CarrierId = CarrierId.Dpd) =
+        link(id).copy(inputNeeded = ParcelLinkInputNeeded(carrier = carrier, field = ParcelLinkInputNeededField.DpdPostcode))
+
+    /**
+     * The postcode a lookup's link asks its owner for shows on the parcel, as an account's carrier asks, and stays with
+     * it on the phone; given alone for that carrier, it goes to the link (`POST …/postcode`), not as a move.
+     */
+    @Test
+    fun thePostcodeALinkAsksForShowsOnTheParcelAndGoesToTheLink() = runTest {
+        val id = UUID.randomUUID()
+        val filedId = UUID.randomUUID()
+        val storage = Memory()
+        val calls = Calls()
+        val postcodes = PostcodeMemory(MemoryDefaults())
+        val filed = { linkId: String -> PublicParcelResponse(link = link(linkId), parcel = pkg(filedId, carrier = CarrierId.Dpd)) }
+        val device = device(
+            client(
+                calls, lookup = PublicLookupResponse(link = asking("22222222222A"), key = key, parcel = pkg(id)),
+                postcode = { linkId, _ -> filed(linkId) }, move = { linkId, _ -> filed(linkId) },
+            ),
+            storage, this, postcodes = postcodes,
+        )
+        device.add(CreatePackageRequest(trackingNumber = "TESTPARCEL123789", label = "Moon lamp"))
+        assertEquals(CarrierInputNeeded(CarrierId.Dpd, CarrierInputNeededField.DpdPostcode), device.list().single().inputNeededPrompt)
+        assertEquals(CarrierId.Dpd, storage.parcels.single().parcel.inputNeeded?.carrier)
+
+        val parcel = device.changeCarrier(id = id, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = " 75002 ", dpdPostcodeCountry = "FR")
+
+        assertEquals(listOf("lookup TESTPARCEL123789 -", "postcode 22222222222A k dpd 75002 FR"), calls.all)
+        assertEquals(filedId, parcel.id)
+        assertEquals(CarrierId.Dpd, parcel.carrier)
+        assertEquals("Moon lamp", parcel.label)
+        assertEquals(id, parcel.carrierData?.originalPackageId)
+        assertNull(parcel.inputNeededPrompt)
+        assertEquals(true, storage.parcels.single().postcodeGiven)
+        assertEquals(listOf(GivenPostcode(CarrierId.Dpd, "75002", "FR")), postcodes.entries)
+    }
+
+    /** Another carrier than the one that asks, or no postcode, moves the link as before; a viewer's link asks nothing. */
+    @Test
+    fun anotherCarrierOrNoPostcodeMovesTheLinkAndAViewersLinkAsksNothing() = runTest {
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(
+            DeviceParcel(linkId = "22222222222A", label = "", archivedAt = null, parcel = Parcel(shared = pkg(id), link = asking("22222222222A")), checkedAt = date()),
+        )
+        val calls = Calls()
+        val device = device(
+            client(
+                calls,
+                postcode = { linkId, _ -> PublicParcelResponse(link = link(linkId), parcel = pkg(id, carrier = CarrierId.Dpd)) },
+                move = { linkId, change -> PublicParcelResponse(link = asking(linkId), parcel = pkg(id, carrier = change.carrier)) },
+            ),
+            storage, this,
+        )
+
+        device.changeCarrier(id = id, carrier = CarrierId.GlsDe, trackingUrl = null, dpdPostcode = "75002")
+        device.changeCarrier(id = id, carrier = CarrierId.Dpd, trackingUrl = null, dpdPostcode = " ")
+
+        assertEquals(listOf("carrier 22222222222A k gls-de", "carrier 22222222222A k dpd"), calls.all)
+        val viewer = reader("22222222222B").copy(inputNeeded = ParcelLinkInputNeeded(CarrierId.Dpd, ParcelLinkInputNeededField.DpdPostcode))
+        assertNull(Parcel(shared = pkg(id), link = viewer).inputNeeded)
+    }
+
+    /**
+     * The postcode goes to the link with its key and without the lookup's verification; nothing asked any more reads
+     * the link, and each refusal says why in the website's words.
+     */
+    @Test
+    fun thePostcodeGoesToTheLinkWithItsKeyAndEachRefusalSaysWhy() = runTest {
+        val filed = PublicParcelResponse(link = link("22222222222A"), parcel = pkg(UUID.randomUUID(), carrier = CarrierId.Dpd))
+        val body = JsonEncoder.deliveryTracker.encode(PublicParcelResponse.serializer(), filed).decodeToString()
+        var answer = jsonResponse(200, body)
+        val transport = RecordingTransport { request -> if (request.method == "GET") jsonResponse(200, body) else answer }
+        val verification = NativeVerification(
+            NativeAttestProvider(supported = { false }, generateKey = { "" }, attest = { _, _ -> ByteArray(0) }, assert = { _, _ -> ByteArray(0) }),
+            TurnstilePresenter { throw NativeVerificationFailed() }, emptyMap(), {}, language = { AppLanguage.En },
+        )
+        val give = DeviceParcelClient.api(postcodeConfiguration, transport, verification, region = { Locale.UK }).addPostcode!!
+        val request = ParcelLinkPostcodeRequest(carrier = CarrierId.Dpd, postcode = "75002", postcodeCountry = "FR")
+        val english = Localizer(AppLanguage.En)
+
+        assertEquals(filed.parcel.id, give("22222222222A", key, request)?.parcel?.id)
+        val sent = transport.requests.single()
+        assertEquals("POST", sent.method)
+        assertEquals("/api/public/parcels/22222222222A/postcode", sent.path)
+        assertEquals(key, sent.headers["X-Parcel-Key"])
+        assertNull(sent.headers["X-Native-Verification"])
+        assertEquals(setOf("carrier", "postcode", "postcodeCountry"), Json.parseToJsonElement(sent.body!!.decodeToString()).jsonObject.keys)
+
+        answer = jsonResponse(409, """{"error":"No postcode is asked for this parcel"}""")
+        assertEquals(filed.parcel.id, give("22222222222A", key, request)?.parcel?.id)
+        assertEquals(listOf("POST", "GET"), transport.requests.takeLast(2).map { it.method })
+
+        answer = jsonResponse(404, """{"error":"Parcel unavailable","code":"parcel_unavailable"}""")
+        assertNull(give("22222222222A", key, request))
+
+        answer = jsonResponse(422, """{"error":"The carrier does not have the parcel for this postcode"}""")
+        val refused = thrown<DevicePostcodeRefusal.Refused> { give("22222222222A", key, request) }
+        assertEquals("DPD Switzerland doesn’t have this parcel for that postcode. Check it and try again.", english.errorMessage(refused))
+
+        answer = jsonResponse(429, """{"error":"Too many postcodes were tried for this parcel"}""", mapOf("Retry-After" to "120"))
+        val before = AppClock.now()
+        val tries = thrown<DevicePostcodeRefusal.Tries> { give("22222222222A", key, request) }
+        assertFalse(tries.until.isBefore(before.plusSeconds(120)) || tries.until.isAfter(AppClock.now().plusSeconds(120)))
+        assertEquals("Too many postcodes were tried. Try again after ${english.clockTime(tries.until)}.", english.errorMessage(tries))
+
+        answer = jsonResponse(503, """{"error":"The carrier could not be asked. Try again later."}""")
+        val unreachable = thrown<DevicePostcodeRefusal.Unreachable> { give("22222222222A", key, request) }
+        assertEquals("DPD Switzerland couldn’t be asked just now. Try again in a moment.", english.errorMessage(unreachable))
+        // The service itself down is no answer of the carrier's.
+        answer = jsonResponse(503)
+        thrown<ServerDown> { give("22222222222A", key, request) }
+    }
+
+    private suspend inline fun <reified T : Throwable> thrown(block: suspend () -> Unit): T {
+        try {
+            block()
+        } catch (error: Throwable) {
+            if (error is T) return error
+            throw error
+        }
+        throw AssertionError("Expected ${T::class.simpleName}")
     }
 
     /** The owner's read by hand is the link's read with `refresh=true` and the key, and the service's 404 as no link. */

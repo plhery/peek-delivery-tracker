@@ -981,6 +981,36 @@ class DeviceParcelTests {
     }
 
     @Test
+    fun aCheckSaidToBeOnItsWayAfterTheLastRanOutOfTimeIsReadSoonToo() = runTest {
+        val mine = UUID.randomUUID()
+        var now = Instant.ofEpochSecond(1_800_000_000)
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "", mine, date(now)))
+        var landed: String? = "2026-11-19T20:00:00Z"
+        val read: (String) -> PublicParcelResponse = {
+            PublicParcelResponse(link = link(it), parcel = pkg(mine).copy(lastSyncedAt = landed), checkQueued = true)
+        }
+        val device = device(client(Calls(), read = read), storage, this, now = { now })
+
+        now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
+        device.refresh()
+        assertTrue(device.isWaiting)
+        // That check runs past its minute, unread; the next read says another is on its way, which is followed afresh.
+        now = now.plusSeconds(DeviceParcels.checkReadFor.toLong())
+        assertFalse(device.isWaiting)
+        now = now.plusSeconds(DeviceParcels.fresh.toLong() + 1)
+        device.refresh()
+        assertTrue(device.isWaiting)
+        // One that lands with the next already on its way: the new one gets a minute of its own.
+        now = now.plusSeconds(DeviceParcels.checkReadFor.toLong() - 5)
+        landed = "2026-11-19T20:10:00Z"
+        device.refresh()
+        now = now.plusSeconds(10)
+        assertTrue(device.isWaiting)
+    }
+
+    @Test
     fun aCopyTheServiceForgotIsNeverReadAgainAndOpensAgainWithoutItsKey() = runTest {
         val id = UUID.randomUUID()
         var now = Instant.ofEpochSecond(1_800_000_000)

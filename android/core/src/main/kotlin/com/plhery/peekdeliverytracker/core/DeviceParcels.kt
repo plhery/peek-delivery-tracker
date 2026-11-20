@@ -704,13 +704,16 @@ class DeviceParcels(
 
     /**
      * Notes what an answer says of the parcel's check: one on its way is followed until the parcel's last check
-     * changes, which is the check landing, or until [checkReadFor] has gone by.
+     * changes, which is the check landing, or until [checkReadFor] has gone by. A check said to be on its way after the
+     * last one landed or ran out of time is followed from then.
      */
     private fun noteCheck(linkId: String, response: PublicParcelResponse) {
         val check = queued.keyOf(linkId)
         val synced = response.parcel.lastSyncedAt
         queued = when {
-            response.checkQueued == true -> if (check != null) queued else queued.setting(linkId, QueuedCheck(now(), synced))
+            response.checkQueued == true ->
+                if (check != null && synced == check.synced && awaitsCheck(linkId)) queued
+                else queued.setting(linkId, QueuedCheck(now(), synced))
             check != null && (synced != check.synced || !awaitsCheck(linkId)) -> queued.setting(linkId, null)
             else -> queued
         }
@@ -1380,8 +1383,8 @@ class DeviceParcels(
     }
 
     /**
-     * Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
-     * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
+     * Whether every parcel that can still hear news has asked for it on this token, language and preset; frozen copies,
+     * muted parcels and parcels that are over need nothing.
      */
     fun alertsSettled(token: String, locale: NativePushLocale, preset: ParcelAlertPreset? = null): Boolean = entries.all {
         it.isFrozen || it.isMuted || it.parcel.isOver || alertsAsked.keyOf(it.linkId) == alertKey(token, locale, preset)
@@ -1415,6 +1418,10 @@ class DeviceParcels(
         registerAlerts(token, locale, preset)
     }
 
+    /**
+     * Tries the last round again when it was cut short and its time has come: an outage or a pause on the service's
+     * side leaves no parcel without notifications until the next launch. The list calls it as it refreshes.
+     */
     suspend fun retryAlerts(preset: ParcelAlertPreset? = null) {
         val retry = alertRetry ?: return
         if (now().isBefore(retry.at)) return

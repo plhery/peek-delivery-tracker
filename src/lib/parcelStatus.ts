@@ -10,7 +10,6 @@ export interface ParcelDisplayStatus {
   syncing: boolean;
 }
 
-/** Show estimates only when they still help explain what happens next. */
 /** The carrier's estimate while the parcel is on its way and the estimate's last day has not passed. */
 function liveEstimate(parcel: ParcelWithEvents, now: number): { value: string; day: Date; today: Date } | null {
   const value = parcel.expectedDelivery;

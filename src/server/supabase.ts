@@ -963,7 +963,7 @@ export class SupabaseClient {
   /**
    * The packages handed over from one carrier to another, each with its
    * carriers and its stored scans, saying when each was stored, so a relay copy
-   * can be told from news (relayCopies.ts). A package of one carrier is left out.
+   * can be told from news (relayCopies.ts), with the words some pairs need. A package of one carrier is left out.
    */
   async handoffScans(packageIds: string[]): Promise<JsonObject[]> {
     const ids = [...new Set(packageIds)];
@@ -972,7 +972,7 @@ export class SupabaseClient {
       ['id', `in.(${page.join(',')})`],
       ['carrier_data->>original_carrier', 'not.is.null'],
       ['select', 'id,carrier,original_carrier:carrier_data->>original_carrier,active_tracking_carrier:carrier_data->>active_tracking_carrier,'
-        + 'tracking_events(id,stage,location,occurred_at,created_at,provider_event_id)'],
+        + 'tracking_events(id,stage,description,location,occurred_at,created_at,provider_event_id)'],
     ])}`))));
     return found.flat().map(({ original_carrier, active_tracking_carrier, ...row }) => ({
       ...row, carrier_data: { original_carrier, active_tracking_carrier },

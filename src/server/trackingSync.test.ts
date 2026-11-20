@@ -1946,6 +1946,13 @@ describe('TrackingSyncService', () => {
           { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
           { time: '2026-10-27T11:00:00Z', description, stage }, hub));
         expect(held).toMatchObject({ current_stage: 'in_transit', expected_delivery: null });
+        // Published hours late, after a check that still gave the day, it drops it too.
+        const late = parcel();
+        await late('2026-10-26T20:00:00Z', answer('in_transit', dated));
+        await late('2026-10-27T12:00:00Z', answer('in_transit', dated));
+        expect(await late('2026-10-27T15:00:00Z', answer('in_transit', {},
+          { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },
+          { time: '2026-10-27T11:00:00Z', description, stage }, hub))).toMatchObject({ expected_delivery: null });
         // A day given again is kept again.
         const again = await check('2026-10-27T18:00:00Z', answer('in_transit', { expected_delivery: '2026-10-30' },
           { time: '2026-10-27T14:00:00Z', description: 'Back at the depot', stage: 'in_transit' },

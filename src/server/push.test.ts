@@ -450,6 +450,10 @@ describe('service worker fallback copy', () => {
       // A language Intl does not know leaves the day to the browser's own.
       await show({ ...web.payload(delivered), date_locale: 'not a language' });
       expect(shown.at(-1)!.replace(' ', ' ')).toBe(`Coffee beans · delivered at ${clock === 24 ? '05:32' : '5:32 AM'}`);
+      // The time goes into the sentence alone: the parcel's name and its place read as they were written.
+      await show({ ...web.payload(delivered), body_same_day: 'Clock {{time}} · Mum · delivered at {{time}}\nShop {{date}}' });
+      expect(shown.at(-1)!.replace(' ', ' '))
+        .toBe(`Clock {{time}} · Mum · delivered at ${clock === 24 ? '05:32' : '5:32 AM'}\nShop {{date}}`);
     } finally {
       vi.useRealTimers();
       if (zone === undefined) delete process.env.TZ;

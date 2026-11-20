@@ -33,7 +33,14 @@ function deviceClockBody(payload, use24HourTime) {
   const time = use24HourTime ? `${two(scanned.getHours())}:${two(scanned.getMinutes())}`
     : locale.startsWith('en') ? twelveHour().toUpperCase() : twelveHour();
   const date = day.format(scanned);
-  return (today ? sameDay : otherDay).replaceAll('{{time}}', () => time).replaceAll('{{date}}', () => date);
+  // Into the sentence alone: the end of the first line, after the parcel's name and its " · " (notificationBody in
+  // src/server/push.ts), or the whole line without a name. The name and the place under it read as written, as in the apps.
+  const body = today ? sameDay : otherDay;
+  const lineEnd = body.includes('\n') ? body.indexOf('\n') : body.length;
+  const named = body.slice(0, lineEnd).lastIndexOf(' · ');
+  const start = named < 0 ? 0 : named + ' · '.length;
+  const sentence = body.slice(start, lineEnd).replaceAll('{{time}}', () => time).replaceAll('{{date}}', () => date);
+  return body.slice(0, start) + sentence + body.slice(lineEnd);
 }
 
 /**

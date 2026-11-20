@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { decodeHTMLStrict } from 'entities';
 import { Parser } from 'htmlparser2';
 import PostalMime, { type Address, type Email } from 'postal-mime';
 import { carrierLink } from './carrierSender';
@@ -61,20 +62,12 @@ const INVISIBLE = /[\u00AD\u034F\u061C\u180E\u200B-\u200F\u202A-\u202E\u2060-\u2
 /** The text without its invisible characters, and each run of spaces they leave as one space. */
 const withoutPadding = (text: string) => text.replace(INVISIBLE, '').replace(/[ \t\f\v\u00A0]{2,}/g, ' ');
 
-const ENTITIES: Record<string, string> = {
-  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', ensp: ' ', emsp: ' ', thinsp: ' ',
-  shy: '\u00AD', zwnj: '\u200C', zwj: '\u200D', lrm: '\u200E', rlm: '\u200F',
-};
-
-function decodeEntities(text: string): string {
-  return text.replace(/&(#x[0-9a-f]{1,6}|#\d{1,7}|[a-z]{2,8});/gi, (whole, entity: string) => {
-    if (entity[0] === '#') {
-      const code = entity[1] === 'x' || entity[1] === 'X' ? parseInt(entity.slice(2), 16) : parseInt(entity.slice(1), 10);
-      return code > 0 && code <= 0x10ffff ? String.fromCodePoint(code) : ' ';
-    }
-    return ENTITIES[entity.toLowerCase()] ?? whole;
-  });
-}
+/**
+ * The text with HTML's entities written out, as the labels are read: a mailing tool writes a French email's accents
+ * as `&eacute;`. Only an entity that ends with `;` counts, so that an address in the text keeps its `&section=`, and
+ * the wider spaces become plain ones.
+ */
+const decodeEntities = (text: string) => decodeHTMLStrict(text).replace(/[\u2002\u2003\u2009]/g, ' ');
 
 /**
  * The HTML without its comments and the elements that hold no text to read, each found by a search that never looks

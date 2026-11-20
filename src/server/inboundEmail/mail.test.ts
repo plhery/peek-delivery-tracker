@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { trackingNumbersInText } from '../parcelsFromText';
 import { carriersOfAddress } from './carrierSender';
 import { headerFromAddress, htmlLinks, htmlText, readInboundMail } from './mail';
+import { shopNamedIn } from './shopName';
 
 // Synthetic mails only: example.com senders, UPS's published sample number and made-up numbers in valid shapes.
 const UPS = '1Z999AA10123456784';
@@ -217,6 +218,15 @@ describe('a carrier\'s own email', () => {
     expect(await read('DHL <noreply@dhl.com>', 'Info', 'Fragen? +41 848123456')).toEqual([]);
   });
 
+  it('reads an HTML email whose accents are written as entities', async () => {
+    const mail = await readInboundMail(alternative({ From: 'DHL <noreply@dhl.com>', Subject: 'Livré' }, null,
+      '<p>Le bordereau N&deg;&nbsp;4612345678 a &eacute;t&eacute; livr&eacute;.</p><p>Exp&eacute;diteur&#8239;: Example Shop</p>'));
+    expect(mail.text.split('\n').slice(1)).toEqual(['Le bordereau N° 4612345678 a été livré.', 'Expéditeur\u202F: Example Shop']);
+    expect(shopNamedIn(mail.subject, mail.text)).toBe('Example Shop');
+    expect(trackingNumbersInText(mail.text, carriersOfAddress(mail.origin)).map(({ normalized, match }) => [normalized, match.carrier]))
+      .toEqual([['4612345678', 'dhl']]);
+  });
+
   it('takes no unlabelled number from a shop', async () => {
     expect(await read('Example Shop <orders@example-shop.com>', 'Livré', 'Le bordereau N° 4612345678 a été livré.')).toEqual([]);
   });
@@ -281,6 +291,7 @@ describe('Gmail\'s request to confirm forwarding', () => {
 describe('the HTML helpers', () => {
   it('decode entities and keep only web links', () => {
     expect(htmlText('<p>A&amp;B&#33;&#x21;</p><div>next</div>')).toBe('A&B!!\nnext');
+    expect(htmlText('<p>&Eacute;t&eacute; &agrave; 19&euro;&ensp;&rsaquo;</p><p>?a=1&section=2&amp;b=3</p>')).toBe('Été à 19€ ›\n?a=1&section=2&b=3');
     expect(htmlLinks('<a data-href="https://wrong.example" href=https://carrier.example/parcel>Track</a>'))
       .toEqual(['https://carrier.example/parcel']);
     expect(htmlLinks('<a href="mailto:a@example.com">m</a><a href=\'https://x.example/?a=1&amp;b=2\'>x</a>')).toEqual(['https://x.example/?a=1&b=2']);

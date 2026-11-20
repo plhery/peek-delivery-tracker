@@ -34115,6 +34115,26 @@
     ]
   },
   {
+    "input": "2600370624",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
+  },
+  {
     "input": "26008766342",
     "carrier": "unknown",
     "confidence": "low",
@@ -34144,6 +34164,26 @@
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []
+  },
+  {
+    "input": "2601794363",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dhl",
+      "mondial-relay",
+      "relais-colis",
+      "estafeta",
+      "packeta",
+      "box-now",
+      "dhl-ecommerce-es",
+      "dhl-freight"
+    ],
+    "asked": [
+      "packeta",
+      "dhl-ecommerce-es",
+      "box-now"
+    ]
   },
   {
     "input": "260237129",
@@ -42786,6 +42826,16 @@
       "dpd-nl",
       "dpd-de",
       "chronopost"
+    ]
+  },
+  {
+    "input": "37161304",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "mondial-relay",
+      "colisweb",
+      "heppner"
     ]
   },
   {
@@ -58942,6 +58992,23 @@
     ],
     "asked": [
       "delhivery",
+      "aras-kargo"
+    ]
+  },
+  {
+    "input": "6509954188019",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "correos-chile",
+      "yunda",
+      "korea-post",
+      "aras-kargo",
+      "econt",
+      "ozon-logistics",
+      "paquetexpress"
+    ],
+    "asked": [
       "aras-kargo"
     ]
   },
@@ -85367,10 +85434,20 @@
     ]
   },
   {
+    "input": "DPK123456789012",
+    "carrier": "deppon",
+    "confidence": "high",
+    "candidates": [
+      "deppon"
+    ]
+  },
+  {
     "input": "DPK212604897303",
-    "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "carrier": "deppon",
+    "confidence": "high",
+    "candidates": [
+      "deppon"
+    ]
   },
   {
     "input": "DPV 0016700348",
@@ -86494,6 +86571,17 @@
     ]
   },
   {
+    "input": "EE647131288BA",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "EE787485919TW",
     "carrier": "chunghwa-post",
     "confidence": "high",
@@ -86924,6 +87012,18 @@
     "confidence": "high",
     "candidates": [
       "parcelforce"
+    ]
+  },
+  {
+    "input": "EK572324490VN",
+    "carrier": "intl-post",
+    "confidence": "high",
+    "candidates": [
+      "intl-post"
+    ],
+    "asked": [
+      "ems-vietnam",
+      "chronopost"
     ]
   },
   {
@@ -90150,6 +90250,14 @@
     "confidence": "low",
     "candidates": [
       "loggi"
+    ]
+  },
+  {
+    "input": "GZXH9999999980Y",
+    "carrier": "xinghe-freight",
+    "confidence": "high",
+    "candidates": [
+      "xinghe-freight"
     ]
   },
   {

@@ -10604,9 +10604,19 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Sao_Paulo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "azul-cargo"
     },
     "linkRules": [
+      {
+        "domains": [
+          "www.azullogistica.com.br",
+          "azullogistica.com.br"
+        ],
+        "pathPattern": "^/+Rastreio/Rastrear$",
+        "params": [
+          "awb"
+        ]
+      },
       {
         "domains": [
           "www.azulcargoexpress.com.br",
@@ -10619,7 +10629,9 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": []
+    "detectionRules": [],
+    "trackingUrlTemplate": "https://www.azullogistica.com.br/Rastreio/Rastrear?awb={trackingNumber}",
+    "trackingSearchUrl": "https://www.azullogistica.com.br/Rastreio"
   },
   "barid-al-maghrib": {
     "displayName": "Barid Al-Maghrib",
@@ -11777,7 +11789,12 @@ export const CARRIER_CAPABILITIES = {
       "adapter": "deppon"
     },
     "linkRules": [],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^DPK\\d{12}$",
+        "confidence": "high"
+      }
+    ],
     "trackingSearchUrl": "https://www.deppon.com/orderTrack"
   },
   "dhl-freight": {
@@ -15093,7 +15110,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Ho_Chi_Minh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "vnpost"
     },
     "linkRules": [
       {
@@ -19526,7 +19543,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Ho_Chi_Minh",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "best-express-vn"
     },
     "trackingUrlTemplate": "https://www.best-inc.vn/track?bills={trackingNumber}",
     "linkRules": [
@@ -27496,7 +27513,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Kolkata",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "tej-couriers"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -35009,6 +35026,10 @@ export const CARRIER_CAPABILITIES = {
       {
         "pattern": "^GZXH\\d{10}YQ$",
         "confidence": "high"
+      },
+      {
+        "pattern": "^GZXH\\d{10}Y$",
+        "confidence": "high"
       }
     ]
   },
@@ -38313,7 +38334,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Asia/Bangkok",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "best-express-th"
     },
     "trackingUrlTemplate": "https://www.best-inc.co.th/track?bills={trackingNumber}",
     "linkRules": [
@@ -48181,7 +48202,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Istanbul",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "jetizz"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -53200,7 +53221,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Sarajevo",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "bh-posta"
     },
     "linkRules": [],
     "detectionRules": [],

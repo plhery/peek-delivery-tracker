@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { isAmazonTrackingNumber } from '../lib/amazon';
 import { carrierNumberInText, fromCarrier, labelledNumbersInText, nonTrackingShape, numbersInText, type NumberInText } from '../peek/lookup/reading';
 import type { CarrierId } from '../types';
 import { claimAccountTracking } from './accountTrackingBudget';
@@ -110,7 +111,10 @@ export async function addNumbersToAccount(
   for (const { normalized, match } of numbers) {
     // A review demo number is filed under its scenario's carrier, costs no allowance and is never checked (reviewDemo.ts).
     const demo = reviewDemoCarrier(userId, normalized);
-    const carrier = demo ?? match.carrier;
+    // An Amazon-shaped number is Amazon Shipping's when Amazon Shipping's tracker follows it, as the Add sheet's
+    // detection decides; otherwise only the buyer's Amazon account tracks it, and it is refused.
+    const amazon = !demo && isAmazonTrackingNumber(normalized);
+    const carrier = demo ?? (amazon ? 'amazon-shipping' : match.carrier);
     if (known.has(normalized)) {
       additions.push({ trackingNumber: normalized, carrier, outcome: 'known', packageId: known.get(normalized) ?? null });
       continue;
@@ -129,14 +133,8 @@ export async function addNumbersToAccount(
       continue;
     }
     const trackingNumber = values.trackingNumber;
-    try {
-      if (!demo) await claimAccountTracking(service, userId, 'lookup');
-    } catch (error) {
-      if (!(error instanceof HttpError) || error.status !== 429) throw error;
-      stopped = { trackingNumber, carrier: values.carrier, outcome: 'limited', retryAfter: retryAfter(error) };
-      additions.push(stopped);
-      continue;
-    }
+    // Amazon Shipping's check comes before the allowance, so a number it refuses, or an email sent again while it
+    // can't answer, costs none.
     try {
       if (!demo) {
         const verify = () => verifyAmazonShippingAddition(values.carrier, trackingNumber);
@@ -148,8 +146,16 @@ export async function addNumbersToAccount(
     } catch (error) {
       if (!(error instanceof HttpError)) throw error;
       additions.push(error.status === 400
-        ? { trackingNumber, carrier: values.carrier, outcome: 'refused', reason: error.message }
+        ? { trackingNumber, carrier: amazon ? 'amazon-logistics' : values.carrier, outcome: 'refused', reason: error.message }
         : { trackingNumber, carrier: values.carrier, outcome: 'unavailable' });
+      continue;
+    }
+    try {
+      if (!demo) await claimAccountTracking(service, userId, 'lookup');
+    } catch (error) {
+      if (!(error instanceof HttpError) || error.status !== 429) throw error;
+      stopped = { trackingNumber, carrier: values.carrier, outcome: 'limited', retryAfter: retryAfter(error) };
+      additions.push(stopped);
       continue;
     }
     let packageId: string;

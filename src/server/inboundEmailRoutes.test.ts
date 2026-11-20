@@ -4,6 +4,7 @@ import { GET as exportAccount } from '../../app/api/account/export/route';
 import { DELETE as closeInbox, GET as readInbox, PATCH as notifyInbox, POST as openInbox } from '../../app/api/account/inbox/route';
 import { POST as receive } from '../../app/api/inbound/email/route';
 import contract from '../../contracts/openapi.json';
+import { AMAZON_ACCOUNT_MESSAGE } from '../lib/amazon';
 import { sign } from '../../ops/cloudflare/inbound-email-worker.js';
 import * as eligibility from './amazonShippingEligibility';
 import { HttpError } from './api';
@@ -315,6 +316,33 @@ describe('an email to a forwarding address', () => {
     ]);
     const response = await posted(mail('Example Shop <shop@example.test>', 'Shipped', 'Tracking number: ' + number));
     expect(response.status).toBe(503);
+    expect(db.record).not.toHaveBeenCalled();
+  });
+
+  // Synthetic numbers: the one the Add sheet's own Amazon Shipping tests use.
+  it('adds a number Amazon Shipping tracks publicly, as the Add sheet does, and claims the allowance only after its check', async () => {
+    const db = account();
+    const check = vi.spyOn(eligibility, 'verifyAmazonShippingAddition').mockResolvedValue(undefined);
+    const response = await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', 'Your order ships with Amazon Shipping.\nTracking ID: FR9999999980'));
+    expect(response.status).toBe(202);
+    expect(check).toHaveBeenCalledWith('amazon-shipping', 'FR9999999980');
+    expect(db.create.mock.calls.map(([, number, label, carrier]) => [number, label, carrier])).toEqual([['FR9999999980', 'Example Shop', 'amazon-shipping']]);
+    expect(check.mock.invocationCallOrder[0]).toBeLessThan(db.claim.mock.invocationCallOrder[0]!);
+  });
+
+  it('refuses an Amazon number only the buyer\'s Amazon account tracks, at no allowance, and answers 503 while the check is down', async () => {
+    let db = account();
+    vi.spyOn(eligibility, 'verifyAmazonShippingAddition').mockRejectedValue(new HttpError(400, AMAZON_ACCOUNT_MESSAGE));
+    expect((await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', 'Tracking ID: FR9999999980'))).status).toBe(202);
+    expect(db.create).not.toHaveBeenCalled();
+    expect(db.claim).not.toHaveBeenCalled();
+    vi.restoreAllMocks();
+
+    db = account();
+    const check = vi.spyOn(eligibility, 'verifyAmazonShippingAddition').mockRejectedValue(new HttpError(503, 'Try again'));
+    expect((await posted(mail('"Example Shop" <orders@example-shop.com>', 'Shipped', 'Tracking ID: FR9999999980'))).status).toBe(503);
+    expect(check).toHaveBeenCalledTimes(2);
+    expect(db.claim).not.toHaveBeenCalled();
     expect(db.record).not.toHaveBeenCalled();
   });
 

@@ -5987,6 +5987,12 @@ describe('TrackingSyncService', () => {
     expect(earlierLead([scan('2026-01-14T09:00:00Z', 'pending')], partnerAt, 'in_transit', now, new Set())).toBeNull();
     expect(earlierLead([scan('2026-01-14T15:00:00Z')], partnerAt, 'in_transit', now, new Set())).toBeNull();
     expect(earlierLead([scan('2026-01-14T09:00:00Z')], Number.NaN, 'in_transit', now, new Set())).toBeNull();
+    // A delivery or return leads as soon as it is newer, once the partner has moved the parcel.
+    expect(earlierLead([scan('2026-01-12T15:00:00Z', 'delivered'), scan('2026-01-12T11:00:00Z', 'out_for_delivery')], partnerAt,
+      'in_transit', now, new Set())).toMatchObject({ stage: 'delivered' });
+    expect(earlierLead([scan('2026-01-12T15:00:00Z', 'returned')], partnerAt, 'customs', now, new Set())).toMatchObject({ stage: 'returned' });
+    expect(earlierLead([scan('2026-01-12T09:00:00Z', 'delivered')], partnerAt, 'in_transit', now, new Set())).toBeNull();
+    expect(earlierLead([scan('2026-01-12T15:00:00Z', 'delivered')], partnerAt, 'accepted', now, new Set())).toBeNull();
   });
 
   it('dates no row from the earlier carrier’s stage it reports without a time', async () => {

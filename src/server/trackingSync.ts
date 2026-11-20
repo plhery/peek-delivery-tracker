@@ -343,7 +343,9 @@ const EARLIER_LEAD_MS = 26 * 60 * 60 * 1_000;
  * in a stage, when that is newer than everything the partner's answer shows by more than any zone can explain. The
  * partner adopted is then not where the parcel is: Chunghwa Post, asked from Taiwan while Ukrposhta was down, retold
  * Ukrposhta's export and nothing more, while Ukrposhta's later scans followed the parcel to Dutch customs. A partner's
- * delivery or return stands, and so does a partner whose answer shows no time.
+ * delivery or return stands, and so does a partner whose answer shows no time. The earlier carrier's delivery or return
+ * leads as soon as it is newer, once the partner has moved the parcel: it relays the end the partner's lookup does not
+ * show yet (JS Express and DHL eCommerce relay USPS's round and delivery hours before USPS's own lookup does).
  */
 export function earlierLead(
   earlier: readonly JsonObject[], partnerAt: number, partnerStage: string | null, now: Date, storedAhead: ReadonlySet<string>,
@@ -357,7 +359,9 @@ export function earlierLead(
   const tie = (event: JsonObject) => tieOrder(isRecord(event.raw_data) ? event.raw_data.tie_order : undefined);
   const [newest] = [...scans].sort((left, right) => at(right) - at(left)
     || EVENT_STAGE_ORDER.indexOf(String(right.stage)) - EVENT_STAGE_ORDER.indexOf(String(left.stage)) || tie(right) - tie(left));
-  return newest && at(newest) - partnerAt > EARLIER_LEAD_MS ? newest : null;
+  if (!newest) return null;
+  const end = ['delivered', 'returned'].includes(String(newest.stage)) && !EARLY_STAGES.includes(partnerStage ?? 'pending');
+  return at(newest) - partnerAt > (end ? 0 : EARLIER_LEAD_MS) ? newest : null;
 }
 
 /** The time of a result's first dated scan, 0 without one. */

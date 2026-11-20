@@ -995,7 +995,10 @@ A parcel often changes carrier at the border. The origin history is always kept.
   the partner is not where the parcel is (Chunghwa Post, asked from Taiwan while Ukrposhta was
   down, retold Ukrposhta's export, while Ukrposhta's later scans followed the parcel to Dutch
   customs). That scan then sets the stage, the status line and the watermark, so the partner's
-  next answer without it is older and leaves them. A partner's delivery or return stands. Such a
+  next answer without it is older and leaves them. Its delivery or return does so as soon as it is
+  newer, once the partner has moved the parcel past its acceptance: it relays an end the partner's
+  lookup does not show yet (JS Express and DHL eCommerce relay USPS's delivery hours before USPS's
+  lookup). A partner's delivery or return stands. Such a
   scan stored with a failure, past the watermark, sets them at the next answered check, though
   the origin is not asked then (its relayed delivery while the partner was down). A scan of the origin's that reaches the parcel
   after a later one announces no push or link alert

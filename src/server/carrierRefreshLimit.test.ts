@@ -1,5 +1,6 @@
+import { createHash } from 'node:crypto';
 import { describe, expect, it, vi } from 'vitest';
-import type { CarrierResult } from 'universal-parcel-scraper';
+import { NoHistoryError, type CarrierResult } from 'universal-parcel-scraper';
 import type { SupabaseServiceClient } from './supabase';
 import { TrackingSyncService } from './trackingSync';
 import type { JsonObject } from './types';
@@ -7,12 +8,12 @@ import type { JsonObject } from './types';
 // A carrier's catalog limit (tracking.refresh.minMinutes) counts from the parcel's last check, whether or not
 // it also sets a wait after a failure: a check late in one clock hour is not followed by another as the next starts.
 
-function client(packages: JsonObject[]) {
+function client(packages: JsonObject[], lookups: JsonObject[] = []) {
   return {
     listActivePackages: vi.fn().mockResolvedValue(packages),
-    getPackage: vi.fn(async (id: string) => packages.find((parcel) => parcel.id === id) ?? null),
+    getPackage: vi.fn(async (id: string) => [...packages, ...lookups].find((parcel) => parcel.id === id) ?? null),
     syncJobQueuedAhead: vi.fn().mockResolvedValue(null),
-    listFollowedOneOffPackages: vi.fn().mockResolvedValue([]),
+    listFollowedOneOffPackages: vi.fn().mockResolvedValue(lookups),
     listUnfiledOneOffPackages: vi.fn().mockResolvedValue([]),
     listSyncCandidates: vi.fn().mockResolvedValue([]),
     listUnwatchedPackageIds: vi.fn().mockResolvedValue([]),
@@ -62,6 +63,42 @@ describe('a carrier asking for at most one check an hour', () => {
 
   it('Royal Mail (an hourly limit alone) likewise', async () => {
     expect(await checks('royal-mail')).toBe(0);
+  });
+});
+
+// The limit holds on the hourly cadences too: a parcel a provider alone answers for, and a lookup nobody has answered
+// for yet. The last check landed 12 minutes before the parcel's next hour opens (its own minute, parcelWindowStart),
+// and the run comes 30 s into it.
+describe('a carrier asking for at most one check an hour, on the hourly cadences', () => {
+  const number = 'LZ123456785CN';
+  const opens = Date.parse('2026-09-09T11:00:00Z') + (createHash('sha256').update(number).digest().readUInt32BE(0) % 60) * 60_000;
+  const at = (ms: number) => new Date(ms).toISOString();
+  const routing = (carrier: string, extra: JsonObject): JsonObject => ({ version: 1, configured_carrier: carrier,
+    consecutive_failures: 0, probe_cursor: 0, discovery_cursor: 0, failures: {}, ...extra });
+  async function asked(packages: JsonObject[], lookups: JsonObject[] = []) {
+    const fetch = vi.fn(async (carrier: string): Promise<CarrierResult> => { throw new NoHistoryError(carrier); });
+    const fetchUniversal = vi.fn(async (): Promise<CarrierResult> => { throw new NoHistoryError('provider'); });
+    const fake = client(packages, lookups);
+    fake.listWaitingPackages.mockResolvedValue(new Map([...packages, ...lookups].map((parcel) => [String(parcel.id), 'on_screen'])));
+    await new TrackingSyncService(fake as unknown as SupabaseServiceClient, { fetch, fetchUniversal }, null,
+      () => new Date(opens + 30_000)).sync();
+    return fetch.mock.calls.map(([carrier]) => carrier);
+  }
+
+  it('China Post, for a parcel 17TRACK alone answers for', async () => {
+    expect(await asked([{ id: 'served', user_id: 'owner', carrier: 'china-post', tracking_number: number, current_stage: 'in_transit',
+      created_at: '2026-09-01T08:00:00Z', last_synced_at: at(opens - 12 * 60_000), sync_status: 'ok', archived_at: null,
+      carrier_data: { last_update: '2026-09-09T08:00:00Z', tracking_provider: '17TRACK', routing: routing('china-post', {
+        last_success_at: at(opens - 12 * 60_000), last_event_at: '2026-09-09T08:00:00Z', preferred_provider: '17TRACK',
+        direct_retry_at: at(opens - 60_000), failures: { 'china-post': { kind: 'transport', count: 1, retry_at: at(opens - 60_000) } } }) } }]))
+      .toEqual([]);
+  });
+
+  it.each(['china-post', 'royal-mail'])('%s, for a lookup nobody has answered for yet', async (carrier) => {
+    expect(await asked([], [{ id: 'lookup', user_id: null, one_off: true, carrier, tracking_number: number, current_stage: 'pending',
+      created_at: at(opens - 30 * 60_000), last_synced_at: at(opens - 12 * 60_000), sync_status: 'waiting', archived_at: null,
+      carrier_data: { routing: routing(carrier, { failures: { [carrier]: { kind: 'no_history', count: 1, retry_at: at(opens - 60_000) } } }) } }]))
+      .toEqual([]);
   });
 });
 

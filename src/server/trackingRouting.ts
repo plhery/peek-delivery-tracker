@@ -1213,7 +1213,7 @@ export class TrackingRouter {
     const pacedDirect = new Set<string>();
     // When a carrier the parcel is not filed under may next be asked about its number, as epoch milliseconds: once its
     // minimum interval since the last ask, the router's (`paced_asks`) or a handoff probe's, has passed, zero when it
-    // sets none. The parcel's own checks keep its carrier's interval (trackingSyncDueAt).
+    // sets none. The parcel's scheduled checks keep its carrier's interval (scheduledSyncDue in trackingSync.ts).
     const askableAt = (carrier: string): number => carrier === declared ? 0
       : Math.max(millis(state.paced_asks?.[carrier]), this.options.askedElsewhere?.(carrier, number) ?? 0) + minimumInterval(carrier);
     // Those this check asked: the lookup that follows a carrier's recognition is part of the same ask.

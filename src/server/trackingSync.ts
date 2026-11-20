@@ -870,6 +870,10 @@ function scheduledSyncDue(
   // mark; failing that, it lapses.
   const sinceNamed = now.getTime() - Date.parse(String(routingState(parcel).carrier_named_at ?? ''));
   if (sinceNamed >= 0 && sinceNamed < NAMED_CARRIER_DUE_MS) return true;
+  // A carrier's own limit counts from the last check, from the run that made it, whatever the cadence below: a check
+  // late in one window is not followed by another as the next opens.
+  const minimum = refreshLimit(parcel)?.minMinutes;
+  if (minimum && now.getTime() < lastChecked + minimum * 60_000 - RUN_SPREAD_MS) return false;
   // Archived, daily around the clock, as is a delivery its carrier may yet dispute.
   if (archived || unconfirmedDelivery(parcel, now)) return lastChecked < hourStart.minus({ hours: 23 }).toMillis();
   // A carrier waits for the parcel's delivery postcode, which the parcel asks the owner for, or its
@@ -907,7 +911,6 @@ function scheduledSyncDue(
   // scans late, so it keeps the regular cadence. Until shortly before a delivery window opens, the
   // regular cadence still catches a changed slot, as it does a round from an earlier day, and
   // until 06:00 on the carrier's clock, a round sorted overnight.
-  const minimum = refreshLimit(parcel)?.minMinutes;
   const delivering = parcel.current_stage === 'out_for_delivery' && deliveringToday(parcel, now);
   // A provider alone answers for it: hourly, every 3 hours once it has not moved for a day. Out for
   // delivery today it keeps the regular cadence, at the providers' own spacing.
@@ -943,9 +946,6 @@ function scheduledSyncDue(
     : minimum ? parcelWindowStart(parcel, local, intervalMinutes)
     : local.startOf('minute').minus({ minutes: local.minute % intervalMinutes });
   if (!(lastChecked < windowStart.toMillis())) return false;
-  // A carrier's own limit counts from the last check as well, from the run that made it: a check
-  // late in one window is not followed by another as the next opens.
-  if (minimum && now.getTime() < lastChecked + minimum * 60_000 - RUN_SPREAD_MS) return false;
   return byTheMinute && lastMile ? 'last_mile' : true;
 }
 

@@ -39,18 +39,19 @@ begin
     raise exception 'A link''s events do not say when they were stored';
   end if;
 
-  -- And they carry what an account's events carry: a provider's copy names its provider, a day-only scan its day.
+  -- And they carry what an account's events carry: a provider's copy names its provider, a day-only scan its day, a
+  -- re-dated row the time it was first given.
   insert into public.tracking_events (package_id, stage, description, occurred_at, provider_event_id, raw_data)
   values (parcel, 'in_transit', 'Scan', now() - interval '1 day', 'unknown:copy', jsonb_build_object(
     'universal_provider', '17TRACK', 'time', '2026-11-14', 'local_time', '2026-11-14', 'observed_without_provider_timestamp', true,
-    'tie_order', 2, 'stage_source', 'none'));
+    'tie_order', 2, 'stage_source', 'none', 'retimed_from', '2026-11-14T08:00:00Z'));
   if not exists (
     select 1 from jsonb_array_elements(public.parcel_link_view(link_id)#>'{package,tracking_events}') as event
     where event->>'provider_event_id' = 'unknown:copy' and event->>'universal_provider' = '17TRACK'
       and event->>'time' = '2026-11-14' and event->>'local_time' = '2026-11-14' and event->'observed' = 'true'::jsonb
-      and event->'tie_order' = '2'::jsonb and event->>'stage_source' = 'none'
+      and event->'tie_order' = '2'::jsonb and event->>'stage_source' = 'none' and event->>'retimed_from' = '2026-11-14T08:00:00Z'
   ) then
-    raise exception 'A link''s events do not carry their provider, times, order and stage source';
+    raise exception 'A link''s events do not carry their provider, times, order, stage source and first time';
   end if;
 end;
 $$;

@@ -101,6 +101,10 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Your parcel gets delivered today',
     'Choose how you want your parcel delivered',
     'Your parcel was delivered to the Amazon Hub Counter',
+    'Your order is arriving today – delivered by DPD',
+    'Arriving tomorrow, delivered by Evri',
+    'Your parcel arrives Friday, delivered by Royal Mail',
+    'Due tomorrow: delivered by Example Express',
   ],
   de: [
     'Ihr Paket wird heute zugestellt',
@@ -114,6 +118,7 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Ihre Bestellung ist unterwegs – zugestellt durch DHL',
     'Zustellung heute: Paket von Example Shop AG',
     'Zustellung erfolgt morgen zwischen 10:00 und 12:00',
+    'Ihr Paket kommt heute – zugestellt von DPD',
   ],
   fr: [
     'Votre colis sera livré demain',
@@ -133,6 +138,7 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Votre colis a été livré au point Mondial Relay',
     'Distribution aujourd’hui: Colis de Example Shop SA',
     'Suivez l’envoi en temps réel: Colis de Example Shop SA',
+    'Votre colis arrive aujourd’hui – livré par Colissimo',
   ],
   it: [
     'Il tuo pacco sarà consegnato domani',
@@ -141,6 +147,7 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'La tua spedizione è in consegna',
     'Il tuo pacco è stato consegnato al punto di ritiro',
     'Distribuzione oggi: pacco di Example Shop SA',
+    'Il tuo pacco arriva domani – consegnato da BRT',
   ],
   es: [
     'Tu pedido será entregado mañana',
@@ -149,6 +156,7 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'Tu paquete no ha sido entregado',
     'Tu paquete ha sido entregado en el punto de recogida',
     'Tu pedido ha sido enviado y será entregado por SEUR',
+    'Tu pedido llega mañana, entregado por SEUR',
   ],
   pt: [
     'A sua encomenda será entregue amanhã',
@@ -157,6 +165,7 @@ const ON_ITS_WAY: Record<string, string[]> = {
     'A sua encomenda vai ser entregue hoje',
     'A sua encomenda foi entregue no ponto de recolha',
     'O seu pedido foi enviado e será entregue pelos CTT',
+    'A sua encomenda chega amanhã – entregue pela CTT',
   ],
   nl: [
     'Je pakket wordt vandaag bezorgd',

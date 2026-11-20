@@ -523,7 +523,12 @@ describe('relayRepeats', () => {
       // A problem both tell stays the copy's to repeat.
       scan('damaged', 'chronopost', 'exception', '2026-10-28T08:00:12Z', '2026-10-28T09:00:00Z'),
       scan('damaged-scan', 'dpd-de', 'exception', '2026-10-28T08:00:12Z', '2026-10-28T09:00:00Z'),
-    ]))).toEqual(new Set(['on-its-way', 'round', 'damaged']));
+      // Beside a customs scan or the delivery round, the problem is the news too.
+      scan('refused', 'chronopost', 'exception', '2026-10-29T08:00:12Z', '2026-10-29T09:00:00Z'),
+      scan('customs', 'dpd-de', 'customs', '2026-10-29T08:00:12Z', '2026-10-29T09:00:00Z'),
+      scan('absent', 'chronopost', 'failed_attempt', '2026-10-30T15:20:41Z', '2026-10-30T16:00:00Z'),
+      scan('out', 'dpd-de', 'out_for_delivery', '2026-10-30T15:20:41Z', '2026-10-30T16:00:00Z'),
+    ]))).toEqual(new Set(['on-its-way', 'round', 'damaged', 'customs', 'out']));
   });
 });
 

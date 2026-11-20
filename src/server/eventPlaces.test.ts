@@ -387,9 +387,14 @@ describe('withEventPlaces', () => {
         // Nor does a copy that names none go over a scan that does.
         scan('left', 'ecoscooting', '2026-10-22T09:00:00+00:00', 'Salamanca'),
         scan('left-copy', 'yunexpress', '2026-10-22T09:00:00+00:00', null),
-        // Unless the copy alone tells a problem: the parcel held as damaged goes over "on its way".
+        // Unless the copy alone tells a problem: the parcel held as damaged goes over "on its way", a failed delivery
+        // over a customs scan or the delivery round.
         { ...scan('moving', 'ecoscooting', '2026-10-23T09:00:12+00:00', 'Salamanca'), stage: 'in_transit' },
         { ...scan('held', 'yunexpress', '2026-10-23T09:00:12+00:00', null), stage: 'exception' },
+        { ...scan('cleared', 'ecoscooting', '2026-10-23T11:00:12+00:00', 'Salamanca'), stage: 'customs' },
+        { ...scan('missed', 'yunexpress', '2026-10-23T11:00:12+00:00', null), stage: 'failed_attempt' },
+        { ...scan('rounds', 'ecoscooting', '2026-10-23T15:00:12+00:00', 'Salamanca'), stage: 'out_for_delivery' },
+        { ...scan('absent', 'yunexpress', '2026-10-23T15:00:12+00:00', null), stage: 'failed_attempt' },
         // A copy behind a scan past transit goes under it, place and all: Royal Mail's row in transit beside An Post's
         // out for delivery. One behind a scan in transit still leads: Poczta Polska's posting beside PostNord's first row.
         { ...scan('round', 'ecoscooting', '2026-10-24T07:13:21+00:00', null), stage: 'out_for_delivery' },
@@ -405,6 +410,8 @@ describe('withEventPlaces', () => {
       ['out', undefined], ['out-copy', 'out'],
       ['left', undefined], ['left-copy', 'left'],
       ['moving', 'held'], ['held', undefined],
+      ['cleared', 'missed'], ['missed', undefined],
+      ['rounds', 'absent'], ['absent', undefined],
       ['round', undefined], ['round-copy', 'round'],
       ['flown', 'flown-copy'], ['flown-copy', undefined],
     ]);

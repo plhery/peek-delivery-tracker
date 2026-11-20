@@ -1034,7 +1034,8 @@ A parcel often changes carrier at the border. The origin history is always kept.
   others, so two steps of one minute that both carriers tell pair stage by stage. When only
   the earlier carrier's row says where the scan was (unless the other row has passed transit and it
   has not: Royal Mail's row in transit beside An Post's out for delivery), or only it tells a problem beside the other's
-  routine step (Chronopost's parcel held as damaged beside DPD's "on its way"), or, in the other's
+  routine, customs or delivery-round step (Chronopost's parcel held as damaged beside DPD's "on its way", a
+  failed delivery beside the round), or, in the other's
   stage and words, names more of the place (a postcode or number aside), or has come further than
   a row that only tells again, in its stage and words, a step its carrier told before (La Poste
   repeats Posti's deposit whenever Posti's data reaches it, at the minute of Posti's sort), or, in the

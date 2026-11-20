@@ -140,11 +140,14 @@ function source(event: JsonObject): string {
 /** A universal provider's rows: their copies of a carrier's scans are providerCopies.ts's. */
 const UNIVERSAL_SOURCE = 'unknown';
 
-/** Steps that tell a problem, and the routine steps beside which such a step is the news. */
+/**
+ * Steps that tell a problem, and the steps beside which such a step is the news: the routine ones, customs and the
+ * delivery round (An Post's failed delivery beside Royal Mail's customs scan).
+ */
 const PROBLEM_STAGES = new Set(['exception', 'failed_attempt']);
-const ROUTINE_STAGES = new Set(['pending', 'registered', 'accepted', 'in_transit']);
+const ROUTINE_STAGES = new Set(['pending', 'registered', 'accepted', 'in_transit', 'customs', 'out_for_delivery']);
 
-/** Whether the earlier carrier's copy tells a problem that its pair's scan, a routine step, does not. */
+/** Whether the earlier carrier's copy tells a problem that its pair's scan, a routine step, customs or the round, does not. */
 export function copyTellsProblem(copy: JsonObject, scan: JsonObject): boolean {
   return PROBLEM_STAGES.has(String(copy.stage)) && ROUTINE_STAGES.has(String(scan.stage));
 }

@@ -67,7 +67,7 @@ import { upuHistory } from './upuHistory';
 import { ALERTED_UNSEEN_MS, NUMBER_UNKNOWN_AFTER_MS, sparseLookupRecheck, unansweredProbeTurn, UNSEEN_HOURLY_MS, unseenFor, unseenIntervalHours, unseenRecheckDue } from './unseenLookup';
 import { collectedPickupPoint } from './collectedPickupPoint';
 import { afterSameDayScans } from './dayScans';
-import { datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
+import { aheadOfCheck, datedAfterCheck, insteadOfAheadLine, scanKey, storedAheadOfCheck, withoutAheadWatermark, withoutFutureSummary } from './futureScans';
 import { directHistoryNumber, directLocalHistory, directLocalSnapshotIsOlder, hasUnresolvedDirectCurrent, localClockCarrier } from './directLocalHistory';
 import { carrierMovedAt, eventStage, keptNotices, scanStages, showsDelivery, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { DIRECT_HISTORY, directHistory } from './providerCopies';
@@ -1729,11 +1729,13 @@ export function heldStage(parcel: JsonObject, previousStage: string, rows: reado
  * The stage the parcel's rows show past an early stage to save, as the apps read them (`currentScan`):
  * an announcement or acceptance after the scans that moved the parcel, in one answer with them or a
  * partner's after the earlier carrier's scans, is a notice rather than a step back. After a problem, a
- * delivery or a return, a new label starts over.
+ * delivery or a return, a new label starts over. A row dated over an hour after its check (`aheadOfCheck`, with the
+ * parcel's `stored` rows) shows no stage, then or once its time has passed.
  */
-export function stageShown(stage: string, rows: readonly JsonObject[]): string {
+export function stageShown(stage: string, rows: readonly JsonObject[], now: Date, stored: readonly JsonObject[]): string {
   if (!EARLY_STAGES.includes(stage)) return stage;
-  const shown = String(currentScan(rows.filter((row) => row.stage !== 'pending').sort(newestScanFirst))?.stage ?? '');
+  const ahead = aheadOfCheck(stored, now);
+  const shown = String(currentScan(rows.filter((row) => row.stage !== 'pending' && !ahead(row)).sort(newestScanFirst))?.stage ?? '');
   return MOVING_STAGES.has(shown) ? shown : stage;
 }
 
@@ -1833,7 +1835,7 @@ export function detectSyncAnomalies(
   // they show (`stageShown`).
   const progressStage = rereadStage(parcel);
   const readPastLabel = typeof result.tracking_provider !== 'string'
-    && (!['pending', 'registered'].includes(selectedStage ?? 'pending') || MOVING_STAGES.has(stageShown(selectedStage ?? 'pending', events)));
+    && (!['pending', 'registered'].includes(selectedStage ?? 'pending') || MOVING_STAGES.has(stageShown(selectedStage ?? 'pending', events, now, storedEventIdentities(parcel))));
   if (progressStage !== 'pending' && !readPastLabel
     && !(progressStage === 'registered' ? resultHasUpdate(result) : hasRoutingProgress(result))) {
     // A fallback provider that knows less than the source of the saved summary
@@ -3370,7 +3372,7 @@ export class TrackingSyncService {
           const swappedBehind = fetched.correction && !events.some((event) => event.stage === previousStage
             || (stageRank(previousStage) >= 0 && stageRank(String(event.stage)) >= stageRank(previousStage)));
           const kept = swappedBehind ? selectedStage : stageToSave(heldStage(parcel, previousStage, rows), selectedStage);
-          values.current_stage = swappedBehind ? kept : stageShown(kept, rows);
+          values.current_stage = swappedBehind ? kept : stageShown(kept, rows, now, stored);
           // Only the check that brings such a scan, dated after the stored progress, flags it: not the
           // later checks that repeat it, nor an answer that only lacks the later scans.
           const cameAfter = persistedEvents.some((event) => !storedIds.has(String(event.provider_event_id))
@@ -3425,7 +3427,7 @@ export class TrackingSyncService {
         // pre-advice to its delivery partner after a provider's departure scans, are no step back.
         const rows = rowsOnceSaved();
         const kept = olderSnapshot && !unprovenProviderSummary ? heldStage(parcel, previousStage, rows) : previousStage;
-        const shown = stageShown(kept, rows);
+        const shown = stageShown(kept, rows, now, stored);
         if (shown !== previousStage && (stageRank(shown) < stageRank(previousStage) || MOVING_STAGES.has(shown))) {
           values.current_stage = shown;
         }

@@ -79,11 +79,10 @@ export function withoutFutureSummary(result: CarrierResult, carrierId: string, n
  */
 export function withoutAheadWatermark(time: number, events: readonly JsonObject[], stored: readonly JsonObject[], now: Date): number {
   if (!Number.isFinite(time)) return time;
-  const storedAhead = storedAheadOfCheck(stored);
   const raw = (row: JsonObject) => isRecord(row.raw_data) ? row.raw_data : row;
   const scans = [...events, ...stored].filter((row) => !String(row.provider_event_id ?? '').startsWith('app:')
     && raw(row).observed_without_provider_timestamp !== true);
-  const ahead = (row: JsonObject) => datedAfterCheck(row.occurred_at, 'UTC', now) || storedAhead.has(scanKey(raw(row).time, row.description));
+  const ahead = aheadOfCheck(stored, now);
   const instants = (rows: readonly JsonObject[]) => rows.map((row) => Date.parse(String(row.occurred_at ?? ''))).filter(Number.isFinite);
   const aheadOf = instants(scans.filter(ahead));
   const others = instants(scans.filter((row) => !ahead(row)));
@@ -99,10 +98,9 @@ export function withoutAheadWatermark(time: number, events: readonly JsonObject[
  * null when another scan tells the line, or none is stored.
  */
 export function insteadOfAheadLine(line: unknown, stored: readonly JsonObject[], now: Date): JsonObject | null {
-  const storedAhead = storedAheadOfCheck(stored);
   const scans = stored.filter((row) => !String(row.provider_event_id ?? '').startsWith('app:')
     && row.observed_without_provider_timestamp !== true);
-  const ahead = (row: JsonObject) => datedAfterCheck(row.occurred_at, 'UTC', now) || storedAhead.has(scanKey(row.time, row.description));
+  const ahead = aheadOfCheck(stored, now);
   const telling = scans.filter((row) => row.description === line);
   if (telling.length === 0 || !telling.every(ahead)) return null;
   return scans.filter((row) => !ahead(row) && Number.isFinite(Date.parse(String(row.occurred_at ?? ''))))
@@ -117,6 +115,16 @@ export function insteadOfAheadLine(line: unknown, stored: readonly JsonObject[],
 export function storedAheadOfCheck(stored: readonly JsonObject[]): Set<string> {
   return new Set(stored.filter((row) => !row.retimed_from && datedAfterCheck(row.occurred_at, 'UTC', new Date(String(row.created_at))))
     .map((row) => scanKey(row.time, row.description)));
+}
+
+/**
+ * Whether a row, of an answer (`raw_data.time`) or stored (`time`), is dated over an hour after its check: after
+ * `now`, or after when `stored` shows it was first stored.
+ */
+export function aheadOfCheck(stored: readonly JsonObject[], now: Date): (row: JsonObject) => boolean {
+  const storedAhead = storedAheadOfCheck(stored);
+  return (row) => datedAfterCheck(row.occurred_at, 'UTC', now)
+    || storedAhead.has(scanKey(isRecord(row.raw_data) ? row.raw_data.time : row.time, row.description));
 }
 
 /** A scan as its carrier gave it: its raw time and wording. */

@@ -3124,17 +3124,24 @@ describe('TrackingSyncService', () => {
   });
 
   it('saves an early stage as the moving one the rows show after it, as the apps read them', () => {
+    const now = new Date('2026-11-13T08:00:00Z');
     const rows = (...scans: [string, string][]) => scans.map(([stage, occurred_at]) => ({ stage, occurred_at }));
     // A notice after the scans that moved the parcel is no step back.
-    expect(stageShown('accepted', rows(['in_transit', '2026-11-10T08:00:00Z'], ['accepted', '2026-11-11T08:00:00Z']))).toBe('in_transit');
+    expect(stageShown('accepted', rows(['in_transit', '2026-11-10T08:00:00Z'], ['accepted', '2026-11-11T08:00:00Z']), now, [])).toBe('in_transit');
     expect(stageShown('registered', rows(['customs', '2026-11-10T08:00:00Z'], ['registered', '2026-11-11T08:00:00Z'],
-      ['pending', '2026-11-12T08:00:00Z']))).toBe('customs');
+      ['pending', '2026-11-12T08:00:00Z']), now, [])).toBe('customs');
     // After a problem a new label starts over, and rows that never moved hold the stage.
     expect(stageShown('registered', rows(['in_transit', '2026-11-09T08:00:00Z'], ['exception', '2026-11-10T08:00:00Z'],
-      ['registered', '2026-11-11T08:00:00Z']))).toBe('registered');
-    expect(stageShown('accepted', rows(['registered', '2026-11-10T08:00:00Z'], ['accepted', '2026-11-11T08:00:00Z']))).toBe('accepted');
+      ['registered', '2026-11-11T08:00:00Z']), now, [])).toBe('registered');
+    expect(stageShown('accepted', rows(['registered', '2026-11-10T08:00:00Z'], ['accepted', '2026-11-11T08:00:00Z']), now, [])).toBe('accepted');
     // Only an early stage moves on.
-    expect(stageShown('exception', rows(['in_transit', '2026-11-10T08:00:00Z']))).toBe('exception');
+    expect(stageShown('exception', rows(['in_transit', '2026-11-10T08:00:00Z']), now, [])).toBe('exception');
+    // A row dated over an hour after its check shows no stage, nor once its time has passed.
+    expect(stageShown('registered', rows(['registered', '2026-11-10T08:00:00Z'], ['out_for_delivery', '2026-11-13T10:00:00Z']), now, []))
+      .toBe('registered');
+    const stored = [{ stage: 'out_for_delivery', occurred_at: '2026-11-12T13:00:00Z', time: '2026-11-12T13:00:00Z',
+      description: 'Out for delivery', created_at: '2026-11-12T08:00:00Z' }];
+    expect(stageShown('registered', [...rows(['registered', '2026-11-10T08:00:00Z']), ...stored], now, stored)).toBe('registered');
   });
 
   it('saves the moving stage of an answer whose newest scan is a notice after the parcel moved', async () => {

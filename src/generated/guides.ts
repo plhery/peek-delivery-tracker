@@ -39,7 +39,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "amazon-order-tracking",
-      "title": "Amazon order tracking: Amazon, sellers and carriers"
+      "title": "Amazon order tracking: find your tracking number"
     },
     {
       "id": "ebay-orders",
@@ -341,7 +341,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "amazon-sendungsverfolgung",
-      "title": "Amazon-Sendungsverfolgung: Amazon, Verkäufer, Zusteller"
+      "title": "Amazon-Sendungsverfolgung: So findest du die Sendungsnummer"
     },
     {
       "id": "ebay-orders",
@@ -643,7 +643,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "suivi-commande-amazon",
-      "title": "Suivi de commande Amazon\u00a0: Amazon, vendeurs, transporteurs"
+      "title": "Suivi de commande Amazon\u00a0: trouver le numéro de suivi"
     },
     {
       "id": "ebay-orders",
@@ -945,7 +945,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "tracciamento-ordine-amazon",
-      "title": "Tracciare un ordine Amazon: Amazon, venditori e corrieri"
+      "title": "Tracciare un ordine Amazon: dov'è il numero di tracciamento"
     },
     {
       "id": "ebay-orders",
@@ -1247,7 +1247,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "seguimiento-pedido-amazon",
-      "title": "Seguimiento de pedidos Amazon: vendedores y transportistas"
+      "title": "Seguimiento de un pedido de Amazon: dónde está el número"
     },
     {
       "id": "ebay-orders",
@@ -1549,7 +1549,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "seguimento-encomenda-amazon",
-      "title": "Seguir encomendas da Amazon: vendedores e transportadoras"
+      "title": "Seguir encomenda da Amazon: onde está o número de seguimento"
     },
     {
       "id": "ebay-orders",
@@ -1851,7 +1851,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "amazon-orders",
       "slug": "sledzenie-zamowienia-amazon",
-      "title": "Śledzenie zamówienia Amazon: Amazon, sprzedawcy, przewoźnicy"
+      "title": "Śledzenie przesyłki Amazon: gdzie znaleźć numer śledzenia"
     },
     {
       "id": "ebay-orders",

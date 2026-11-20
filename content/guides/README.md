@@ -51,7 +51,9 @@ Text.
 - Links to an `https://` page (in `:::sources`, `http://` too, for a site that only answers
   over plain http), to the tracker as `[Peek](/)`, which leads to the landing in
   the guide's language, and to another guide by id as `[customs](guide:customs)`, which
-  leads to that guide in the guide's language. A guide does not link itself.
+  leads to that guide in the guide's language. A guide does not link itself, but it can link a heading further on
+  its own page as `[ask an assistant](#ask-an-assistant)`: the heading's words in lowercase, without accents, with a
+  hyphen for each run of other characters. `npm run guides` fails when no heading has that address.
 - A backslash before `*`, `[`, `]`, `|` or `!` writes the character itself. There are no
   pictures, rules or `*`/`+` lists.
 

@@ -17,7 +17,9 @@ export type Inline =
   /** Another guide, by its id: the page links the reader's own language. */
   | { type: 'guide'; id: string; children: Inline[] }
   /** A carrier's page, by its id: the page links the reader's own language, where the carrier has one. */
-  | { type: 'carrier'; id: string; children: Inline[] };
+  | { type: 'carrier'; id: string; children: Inline[] }
+  /** A heading further on the same page, by the address its heading is given (`#ask-an-assistant`). */
+  | { type: 'section'; id: string; children: Inline[] };
 
 /** The stops a journey can draw. */
 export const JOURNEY_ICONS = ['shop', 'label', 'warehouse', 'truck', 'plane', 'ship', 'customs', 'handover', 'locker', 'home'] as const;
@@ -87,8 +89,12 @@ function linkTarget(target: string, children: Inline[], where: string, plainHttp
     if (!GUIDE_SLUG.test(id)) throw new Error(`${where}: "${target}" does not name a ${type}`);
     return { type, id, children };
   }
+  if (target.startsWith('#')) {
+    if (!GUIDE_SLUG.test(target.slice(1))) throw new Error(`${where}: "${target}" does not name a heading's address`);
+    return { type: 'section', id: target.slice(1), children };
+  }
   if (target !== '/' && !(plainHttp ? /^https?:\/\/[^\s<>"]+$/ : /^https:\/\/[^\s<>"]+$/).test(target)) {
-    throw new Error(`${where}: a link leads to an https address (http too in the sources), to "/", to "guide:<id>" or to "carrier:<id>", not "${target}"`);
+    throw new Error(`${where}: a link leads to an https address (http too in the sources), to "/", to "#<heading>", to "guide:<id>" or to "carrier:<id>", not "${target}"`);
   }
   return { type: 'link', href: target, children };
 }
@@ -326,7 +332,19 @@ function checked<Text extends CarrierText>(text: Text, where: string, kind: stri
   if (!text.blocks.length) throw new Error(`${where}: the ${kind} has no text`);
   if (text.blocks[0].type !== 'paragraph') throw new Error(`${where}: a ${kind} opens with a paragraph, which the page sets as its lead`);
   if (text.blocks.filter((block) => block.type === 'checker').length > 1) throw new Error(`${where}: a ${kind} holds one ":::checker" at most`);
+  const headings = new Set(text.blocks.flatMap((block) => (block.type === 'heading' ? [block.id] : [])));
+  for (const id of sectionLinks(text.blocks)) {
+    if (!headings.has(id)) throw new Error(`${where}: "#${id}" names no heading of this ${kind}`);
+  }
   return text;
+}
+
+/** The headings a text's links lead to on its own page, wherever the links stand. */
+function sectionLinks(value: unknown): string[] {
+  if (Array.isArray(value)) return value.flatMap(sectionLinks);
+  if (!value || typeof value !== 'object') return [];
+  const node = value as Record<string, unknown>;
+  return [...(node.type === 'section' && typeof node.id === 'string' ? [node.id] : []), ...Object.values(node).flatMap(sectionLinks)];
 }
 
 /** A guide's file: what stands between the two `---` lines, then its body. */

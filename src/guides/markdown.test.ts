@@ -142,6 +142,14 @@ describe('a guide’s Markdown', () => {
       .toMatchObject({ items: [[{ type: 'link', href: 'http://plain.example/about.php' }, { text: ' – its line' }]] });
   });
 
+  it('links a heading further on the same page, and only one the page has', () => {
+    const guide = parseGuide(`${head}\nThe lead.\n\n> Short of time? [Ask an assistant](#ask-an-assistant).\n\n## Ask an assistant\n\nText.\n`);
+    expect(guide.blocks[1]).toMatchObject({ type: 'note' });
+    expect(JSON.stringify(guide.blocks[1])).toContain('{"type":"section","id":"ask-an-assistant"');
+    expect(() => parseGuide(`${head}\nThe lead and [a heading](#nowhere).\n\n## Somewhere\n\nText.\n`)).toThrow(/"#nowhere" names no heading/);
+    expect(() => parseInline('A [heading](#Not A Heading)')).toThrow(/does not name a heading/);
+  });
+
   it('finds the guides a guide links, wherever the link stands', () => {
     const blocks = parseBlocks('See [customs](guide:customs).\n\n- **[Statuses](guide:tracking-statuses)**\n\n| A |\n| --- |\n| [again](guide:customs) |\n\n:::steps\n- One | [Formats](guide:formats)\n:::');
     expect(linkedGuides(blocks)).toEqual(['customs', 'tracking-statuses', 'formats']);

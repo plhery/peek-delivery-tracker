@@ -80,6 +80,7 @@ export function GuideBody({ blocks, locale, language = locale, links, sources, c
         case 'em': return <em key={index}>{inline(node.children)}</em>;
         case 'guide': return <a key={index} href={guidePath(guideLanguage(locale), links.find((link) => link.id === node.id)?.slug)}>{inline(node.children)}</a>;
         case 'carrier': return <a key={index} href={carrierAddress(node.id)}>{inline(node.children)}</a>;
+        case 'section': return <a key={index} href={`#${node.id}`}>{inline(node.children)}</a>;
         case 'link': return node.href === '/'
           ? <a key={index} href={languagePath(locale)}>{inline(node.children)}</a>
           : <a key={index} href={node.href} target="_blank" rel="noopener noreferrer">{inline(node.children)}</a>;

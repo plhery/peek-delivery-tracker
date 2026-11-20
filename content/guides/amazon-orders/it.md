@@ -1,130 +1,128 @@
 ---
-title: Tracciare un ordine Amazon: Amazon, venditori e corrieri
-description: Chi spedisce il tuo ordine Amazon, quale corriere lo consegna, perché il tracciamento cambia o manca e come funziona la Garanzia dalla A alla Z.
+title: Tracciare un ordine Amazon: dov'è il numero di tracciamento
+description: Dove Amazon mostra il corriere e il numero di tracciamento del tuo pacco, sul sito e nell'app, e come seguirlo in Peek, a mano o con Claude o ChatGPT.
 slug: tracciamento-ordine-amazon
 picture: Un telefono mostra l'avanzamento di un ordine, due furgoni si passano un pacco e Pip guarda.
 published: 2026-10-16
-updated: 2026-10-27
+updated: 2026-11-20
 ---
 
-Per tracciare un ordine Amazon accedi al tuo account su amazon.it o apri l'app Amazon e vai in I miei ordini, lo storico dei tuoi ordini: è lì che si seguono di solito le consegne Amazon. Chi ti aiuta quando qualcosa va storto dipende da chi spedisce. Amazon segue i propri ordini e quelli gestiti con Logistica di Amazon, mentre se un venditore spedisce da sé ti rivolgi prima a lui.
+Amazon mostra il corriere e il numero di tracciamento del tuo pacco in un solo posto: I miei ordini, poi Traccia il mio pacco. Copia il numero in [Peek](/) e segui il pacco insieme a tutti gli altri. Ci vuole un minuto, e funziona allo stesso modo su ogni sito Amazon. L'eccezione è un pacco che Amazon consegna da sé: di solito lo segui solo nel tuo account Amazon.
 
-## Chi spedisce il mio ordine Amazon: Amazon o un venditore terzo?
+> Usi Claude o ChatGPT in Chrome? [Chiedigli di farlo al posto tuo](#claude-o-chatgpt-possono-aggiungere-i-pacchi-amazon-al-posto-mio).
 
-Un ordine Amazon rientra in uno di questi tre casi:
+## Dove trovo il numero di tracciamento su Amazon?
 
-| Chi vende, chi spedisce | Cosa significa | Chi ti aiuta per la consegna |
+Nella pagina Traccia il mio pacco di ogni pacco. Ecco come arrivarci:
+
+:::steps
+- Apri I miei ordini | Sul sito lo trovi in alto a destra. Nell'app Amazon, tocca l'icona della persona in basso, poi I miei ordini.
+- Trova l'ordine | Gli ordini più recenti sono in cima. Se un ordine arriva in più pacchi, ogni pacco ha il suo pulsante Traccia il mio pacco.
+- Seleziona Traccia il mio pacco | Sul sito è accanto all'ordine. Nell'app, tocca prima l'articolo.
+- Trova il corriere e il numero | La pagina indica il corriere, per esempio Poste Italiane, e il suo numero di tracciamento. Se non lo vedi, apri tutti gli aggiornamenti: lì Amazon elenca il numero.
+- Incollalo in Peek | Peek riconosce il corriere dal numero e inizia a seguire il pacco.
+:::
+
+### Quando compare il numero?
+
+Di solito dopo la spedizione. Un ordine appena fatto può non avere ancora un numero: il tracciamento può aggiornarsi in ritardo, o la prima parte del viaggio può essere affidata a un corriere intermedio che non rende visibile il tracciamento su Amazon. A volte il numero compare prima della prima scansione del corriere. Incollalo comunque: Peek mostra il primo aggiornamento appena il corriere ne ha uno. Per un articolo di un venditore terzo, il tracciamento compare solo se il venditore lo condivide con Amazon e hai scelto una spedizione tracciabile.
+
+Le e-mail di Amazon di solito non contengono il numero di tracciamento. Il pulsante per tracciare il pacco in quelle e-mail porta alla stessa pagina.
+
+### Funziona anche su amazon.de, .fr, .es e sugli altri siti Amazon?
+
+Sì. Tutti i siti Amazon funzionano allo stesso modo. Cambiano solo le parole, con la lingua del sito:
+
+| Sito | I miei ordini | Traccia il mio pacco |
 | --- | --- | --- |
-| Amazon vende e spedisce | Merce di Amazon | Amazon |
-| Un venditore vende, Amazon spedisce | "Logistica di Amazon": il venditore manda la merce ai centri logistici di Amazon, e Amazon la conserva, la imballa e la spedisce | Amazon |
-| Lo stesso venditore vende e spedisce | Il venditore spedisce da sé e, nell'UE, è responsabile della consegna | Prima il venditore |
+| amazon.it | I miei ordini | Traccia il mio pacco |
+| amazon.com, amazon.co.uk | Your Orders | Track package |
+| amazon.fr | Vos commandes | Suivre le colis |
+| amazon.de | Meine Bestellungen | Sendung verfolgen |
+| amazon.es | Mis pedidos | Localiza tu paquete |
+| amazon.pl | Moje zamówienia | Śledź przesyłkę |
 
-## Quale corriere consegna il mio pacco Amazon?
+## Quale numero è quello di tracciamento?
 
-Quando consegna Amazon stessa si tratta di [Amazon Logistics](carrier:amazon-logistics), la rete di consegna di Amazon: per l'ultimo miglio, dal deposito di smistamento fino a casa tua, Amazon collabora con decine di fornitori di servizi di consegna in tutta Italia. Questi sono i corrieri e i punti di ritiro che Amazon cita per l'Italia:
+Un ordine Amazon può mostrare tre tipi di numeri. Solo il numero di tracciamento del corriere permette sempre di seguire il pacco fuori da Amazon.
 
-| Corriere | Cosa dice Amazon |
-| --- | --- |
-| Amazon | Consegna dai depositi di smistamento con gli autisti dei suoi fornitori di servizi di consegna: a casa, in ufficio o in un Amazon Locker |
-| [Poste Italiane](carrier:poste-italiane) | Uno dei grandi corrieri nazionali con cui Amazon collabora, per esempio per le consegne nella Laguna di Venezia |
-| Amazon Locker e Amazon Counter | Oltre 44.000 punti di ritiro in Italia: i Locker sono self-service, i Counter sono negozi della zona con personale |
-
-Quando un venditore spedisce da sé, il suo corriere può essere uno di questi o un altro. Dove trovare il numero su ogni negozio: [trovare il numero di tracciamento](guide:find-tracking-number). Se non ritiri un pacco in giacenza: [pacco non ritirato](guide:uncollected-parcel).
-
-## Com'è fatto un numero di tracciamento Amazon?
-
-Ce ne sono di due tipi, più un numero d'ordine che non è né l'uno né l'altro.
-
-Queste sono le forme che Peek riconosce come Amazon, qui con cifre inventate:
+- **Il numero di tracciamento del corriere.** Viene dal corriere: Poste Italiane, BRT, GLS, SDA e così via. Amazon lo mostra accanto al nome del corriere. Peek lo segue come qualsiasi altro pacco.
+- **Il numero d'ordine.** Tre gruppi di cifre uniti da trattini, come `123-1234567-1234567`. Lo trovi sull'ordine, sulla fattura e nelle e-mail di Amazon. Non è mai un numero di tracciamento: se lo incolli in Peek, Peek risponde «Sembra un numero d’ordine Amazon».
+- **Un numero Amazon.** Amazon ne dà uno ai pacchi che consegna con la sua rete, e Peek lo verifica con Amazon: [vedi sotto](#peek-puo-tracciare-un-numero-amazon-tba). Eccone uno, con cifre inventate:
 
 :::anatomy TBA 123456789012
-- TBA | Lettere di Amazon. `TBC` e `TBM` funzionano allo stesso modo
+- TBA | Il prefisso di Amazon. Anche `TBC` (Canada) e `TBM` (Messico), o `TBAU` con 9 cifre (Australia)
 - 123456789012 | Dodici cifre
 :::
 
-| Forma (inventata) | Cos'è |
-| --- | --- |
-| `TBA123456789012` | Amazon: `TBA`, `TBC` o `TBM` e 12 cifre |
-| `IT1234567890` | Amazon in Europa: un codice paese (`IT` e altri) e 10 cifre |
-| `123-1234567-1234567` | Il tuo numero d'ordine Amazon: 3, 7 e 7 cifre. Non è un numero di tracciamento |
-| Tutto il resto | Il numero del corriere, per esempio di Poste Italiane o BRT |
-
-Il numero di un corriere funziona sul suo sito, come spiega [i formati dei numeri di tracciamento](guide:tracking-number-formats). Non sai quale hai? Scrivilo qui:
+In Europa un numero Amazon può anche essere formato da due lettere per il Paese, come `IT` o `FR`, e 10 cifre. Non sai quale hai? Scrivilo qui:
 
 :::checker
 :::
 
-## Perché il mio numero di tracciamento Amazon è cambiato, o ne ho due?
+Un pacco può cambiare corriere durante il viaggio. Per le consegne nella Laguna di Venezia, per esempio, Amazon si appoggia anche a grandi corrieri nazionali come Poste Italiane: il pacco passa dal magazzino di un partner di trasporto della zona, e da lì un postino lo consegna. In quel caso Traccia il mio pacco indica quel corriere: copia il suo numero.
 
-Due casi possono spiegarlo:
+## Peek può tracciare un numero Amazon TBA?
 
-- **Un altro corriere subentra.** Per un ordine consegnato a Murano, nella Laguna di Venezia, per esempio, Amazon manda il pacco al magazzino di un partner di trasporto della zona, e da lì un postino lo porta al cliente.
-- **Il venditore spedisce da sé.** Allora il numero è quello del suo corriere, BRT, GLS o un altro, non di Amazon.
+A volte. Quando incolli un numero Amazon, Peek lo verifica prima con il tracciamento pubblico di Amazon:
 
-:::journey
-- warehouse | Amazon o il venditore | Un articolo con Logistica di Amazon parte da un centro logistico Amazon, gli altri dal venditore
-- label | Etichetta creata | Se consegna Amazon, il pacco si segue da I miei ordini
-- handover | Partner di trasporto | Può subentrare, come Poste Italiane per le consegne nella Laguna di Venezia
-- truck | In consegna | Un autista di un fornitore di servizi di consegna di Amazon, di un corriere nazionale o del corriere del venditore
-- home | Tu | A casa, in ufficio, in un Amazon Locker o in un Amazon Counter
-:::
+- **Amazon lo conosce.** È un pacco che Amazon consegna per conto di un venditore, con [Amazon Shipping](carrier:amazon-shipping). Peek lo segue come qualsiasi altro.
+- **Amazon non lo conosce.** Allora molto probabilmente è [Amazon Logistics](carrier:amazon-logistics) a consegnare un tuo ordine Amazon, e Amazon lo mostra solo nel tuo account. Peek non lo aggiunge: te lo dice e propone «Apri i miei ordini Amazon», che apre i tuoi ordini sul sito Amazon giusto. Peek non ti chiede mai la password di Amazon.
+- **Amazon non è raggiungibile.** Peek te lo dice e propone «Riprova».
 
-Quando il primo corriere indica il partner che subentra, [Peek](/) tiene la prima cronologia, segue il partner appena il suo tracciamento mostra novità e indica sulla scheda nome e numero del partner.
+Quando Amazon consegna un pacco da sé, l'ordine può non mostrare nessun numero di tracciamento. Allora non c'è niente da copiare: quel pacco si segue solo dalla pagina Traccia il mio pacco di Amazon.
 
-## Perché non c'è il tracciamento del mio ordine Amazon?
+## Claude o ChatGPT possono aggiungere i pacchi Amazon al posto mio?
 
-Due motivi possibili:
+Sì, se l'assistente può usare il tuo browser. Questi due possono farlo:
 
-- **Consegna Amazon Logistics.** Non ha una pagina di tracciamento pubblica: il pacco si segue nel tuo account, in I miei ordini, sul negozio dove hai ordinato.
-- **Il venditore spedisce da sé.** È lui il primo a cui chiedere se il tracciamento manca.
+- **Claude in Chrome,** l'estensione di Claude per Chrome, con i piani Claude a pagamento.
+- **L'estensione di ChatGPT per Chrome,** che installi e usi dall'app ChatGPT per desktop.
 
-Se il pacco di un venditore non arriva e lui non risolve il problema, puoi chiedere un rimborso ad Amazon con la Garanzia dalla A alla Z. Se il tracciamento resta fermo per giorni: [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
+Entrambe funzionano nella finestra di Chrome in cui hai già effettuato l'accesso ad Amazon. Chiediglielo, e l'assistente apre I miei ordini, poi una per una le pagine Traccia il mio pacco, e annota corriere e numero di tracciamento di ogni pacco.
 
-## Cosa fare se l'ordine Amazon è in ritardo o risulta consegnato?
+Il seguito dipende da una cosa: Peek è collegato all'assistente?
 
-Nell'Unione europea il commerciante deve consegnarti la merce entro 30 giorni, salvo una diversa data concordata, ed è lui il responsabile della consegna. Procedi così:
+- **Se Peek è collegato** e l'assistente può usarlo in quella chat, aggiunge da solo i pacchi al tuo account Peek, con il nome dell'articolo. In Claude, apri «Peek Parcel Tracker» nella [directory dei connettori di Claude](https://claude.ai/directory/peek-parcel-tracker), seleziona «Connect», accedi a Peek e seleziona «Consenti». In ChatGPT, Peek si aggiunge come plugin con un piano Business, Enterprise o Edu. Tutti i passaggi sono in [tracciare i pacchi con ChatGPT o Claude](guide:ai-assistants).
+- **Se non lo è,** l'assistente elenca i numeri nella chat. Copia tutta la lista e incollala in [Peek](/): Peek trova ogni numero. Se hai effettuato l'accesso li segue tutti; altrimenti uno alla volta.
+
+Copia questo nell'assistente:
+
+> Apri I miei ordini su Amazon in questo browser. Per ogni pacco in arrivo o appena consegnato, apri Traccia il mio pacco e annota il corriere e il numero di tracciamento. Non usare mai il numero d'ordine (tre gruppi di cifre uniti da trattini). Se Peek è collegato, aggiungi ogni pacco a Peek con il nome del suo articolo. Altrimenti elenca qui i numeri, uno per riga. Dimmi quali pacchi non mostrano un numero di tracciamento. Su Amazon limitati a leggere: non comprare, annullare, restituire o modificare nulla, e non accedere al posto mio.
+
+In tutti e due i casi l'assistente deve solo leggere Amazon. Non deve mai comprare, annullare o restituire nulla, né accedere al posto tuo. Se Amazon ti chiede di accedere, fallo tu in quella finestra, poi chiediglielo di nuovo. Un pacco senza numero di tracciamento, o che Peek rifiuta, si segue solo nel tuo account Amazon.
+
+## Cosa fare se il pacco Amazon è in ritardo o risulta consegnato?
+
+Chi ti aiuta dipende da chi l'ha spedito. Per sapere se hai ordinato da un venditore terzo, apri I miei ordini e guarda il nome del venditore. Amazon si occupa dei propri ordini e di quelli che spedisce per i venditori. Se un venditore terzo vende e spedisce da sé, è lui il primo a cui chiedere.
 
 :::steps
-- Controlla l'ordine | Aprilo in I miei ordini, nel tuo account su amazon.it o nell'app Amazon, e verifica dove deve arrivare: a casa, in un Amazon Locker o in un Amazon Counter.
-- Guardati intorno | Controlla la cassetta delle lettere e il posto dove ricevi di solito i pacchi, e chiedi ai vicini.
-- Contatta il venditore | Se ha venduto e spedito lui, scrivigli prima. Spetta a lui dimostrare che l'articolo è stato consegnato; se non può, deve inviarti un articolo identico o rimborsarti.
-- Contatta Amazon | Per un ordine spedito da Amazon, o se il venditore non risolve: scrivi al servizio clienti dall'app o dal sito Amazon. Non chiamare numeri ricevuti per e-mail o SMS o trovati nei risultati di ricerca.
-- Fai valere i tuoi diritti | Nessuna consegna entro 30 giorni o alla data concordata? Sollecita il commerciante e concedigli un'ulteriore proroga ragionevole; se non consegna neppure allora, puoi recedere dal contratto ed essere rimborsato.
+- Controlla Traccia il mio pacco | Mostra l'ultimo aggiornamento e, quando consegna Amazon, dove si trova il pacco in tempo reale. Se è in ritardo, Amazon consiglia di aspettare 48 ore dalla data prevista.
+- Guardati intorno | Controlla il posto indicato nelle tue istruzioni di consegna e la foto della consegna, se c'è. Chiedi in famiglia, ai vicini o in portineria.
+- Chiedi al corriere | Se l'ha consegnato un altro corriere, la pagina Informazioni di contatto del corriere di Amazon dice come contattarlo.
+- Contatta il venditore | Se l'ha venduto e spedito un venditore terzo, apri l'ordine in I miei ordini e scegli l'opzione giusta, come Problema con l'ordine: da lì puoi scrivergli.
+- Chiedi ad Amazon | Per un ordine spedito da Amazon, contatta il Servizio Clienti entro 30 giorni dalla data di consegna prevista. Se il venditore non ti risponde entro 48 ore, puoi avere diritto alla Garanzia dalla A alla Z, che copre i problemi di consegna e le condizioni dell'articolo.
 :::
 
-Più dettagli su ogni caso: [risulta consegnato ma non è arrivato](guide:delivered-not-received) e [pacco smarrito](guide:lost-parcel).
-
-### Quando puoi chiedere la Garanzia dalla A alla Z?
-
-Copre i prodotti venduti e spediti dai partner di vendita di Amazon. Se non sei soddisfatto della consegna o delle condizioni del prodotto e non sei riuscito a risolvere il problema direttamente con il venditore, puoi chiedere un rimborso ad Amazon.
-
-| Problema | Cosa prevede la Garanzia dalla A alla Z |
-| --- | --- |
-| Pacco non arrivato o problema con la consegna | Rimborso |
-| Prodotto in cattive condizioni o diverso dalla descrizione | Rimborso |
-| Danni a cose o persone causati da un prodotto difettoso | Coperti in Italia da maggio 2024: Amazon aiuta a risolvere la richiesta tra te, il venditore e il suo assicuratore |
-
-Per un danno fai la richiesta al Servizio Clienti di Amazon, che informa il venditore.
-
-## Posso tracciare un pacco Amazon fuori da Amazon?
-
-Dipende dal numero. Incollalo in [Peek](/):
-
-- **Il numero di un corriere** (Poste Italiane, BRT, GLS, SDA…) si traccia come qualsiasi altro pacco.
-- **Un numero Amazon**, o un link track.amazon: Peek interroga prima il tracciamento pubblico di Amazon. Se risponde, il pacco viaggia con [Amazon Shipping](carrier:amazon-shipping), il servizio con cui Amazon consegna i pacchi dei venditori che gestiscono da sé le spedizioni, o con il Multi-Channel Fulfillment, in cui Amazon spedisce la merce di un venditore ai suoi clienti, ovunque abbiano ordinato. Allora Peek lo segue da solo.
-- Altrimenti è Amazon Logistics che consegna un ordine Amazon, e Amazon lo mostra solo nel tuo account. Peek te lo dice e propone "Apri i miei ordini Amazon", che apre i tuoi ordini sul sito Amazon giusto per quel numero: amazon.it per `IT`. Peek non ti chiede mai le credenziali Amazon.
-- **Un numero d'ordine** riceve "Sembra un numero d’ordine Amazon". Se l'e-mail di spedizione contiene un numero di tracciamento, incolla quello.
+Altro aiuto: [risulta consegnato ma non è arrivato](guide:delivered-not-received), [pacco smarrito](guide:lost-parcel) e [perché il tracciamento non si aggiorna](guide:tracking-not-updating).
 
 :::sources
-- [About Amazon Italia: Come evitare le truffe basate sui furti di identità di Amazon](https://www.aboutamazon.it/notizie/company-news/come-evitare-le-truffe-basate-sui-furti-di-identita-di-amazon-in-questo-periodo-festivo) – storico degli ordini nell'account o nell'app, Garanzia dalla A alla Z se il prodotto non arriva o non corrisponde alla descrizione, numeri da non chiamare (2022)
-- [About Amazon Italia: Un'alleanza pubblico-privato per contrastare le truffe basate sui furti d'identità](https://www.aboutamazon.it/news/customer-trust/unalleanza-pubblico-privato-per-contrastare-le-truffe-basate-sui-furti-didentita) – servizio clienti dall'app o dal sito Amazon
-- [About Amazon Italia: Consegna e logistica di Amazon](https://www.aboutamazon.it/cosa-facciamo/consegna-e-logistica) – ultimo miglio dal deposito di smistamento a case, aziende e Amazon Locker
-- [About Amazon Italia: L'impegno di Amazon verso i dipendenti e i fornitori di servizi](https://www.aboutamazon.it/notizie/lavorare-ad-amazon/il-nostro-impegno-nei-confronti-dei-dipendenti-e-degli-autisti-dei-fornitori-di-servizi-di-consegna) – decine di fornitori di servizi di consegna in tutta Italia
-- [About Amazon Italia: Segui una consegna Amazon a Murano, la città costruita sull'acqua nella laguna di Venezia](https://www.aboutamazon.it/notizie/logistica/segui-una-consegna-amazon-a-murano-la-citta-costruita-sullacqua-nella-laguna-di-venezia) – grandi corrieri nazionali come Poste Italiane, partner di trasporto nella Laguna di Venezia (2022)
-- [About Amazon Italia: Amazon continua a garantire consegne rapide e convenienti su un'ampia selezione di prodotti per i clienti Prime](https://www.aboutamazon.it/notizie/company-news/amazon-garantire-consegne-rapide-convenienti-clienti-prime) – oltre 44.000 punti di ritiro, Amazon Locker e Amazon Counter
-- [About Amazon Italia: Amazon espande la Garanzia dalla A alla Z per includere le richieste di risarcimento per danni alla proprietà e alle persone](https://www.aboutamazon.it/news/customer-trust/amazon-espande-la-garanzia-dalla-a-alla-z-per-includere-le-richieste-di-risarcimento-per-danni-alla-proprieta-e-alle-persone) – prima il venditore, rimborso, danni a cose o persone da maggio 2024
-- [Your Europe: Spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_it.htm) – 30 giorni, proroga ragionevole, recesso e rimborso
-- [Your Europe: Domande frequenti su spedizione e consegna](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_it.htm) – il commerciante è responsabile della consegna, articolo identico o rimborso
-- [About Amazon Italia: Lettera agli azionisti dal CEO Andy Jassy - 2024](https://www.aboutamazon.it/notizie/company-news/lettera-agli-azionisti-dal-ceo-andy-jassy-2024) – Logistica di Amazon: i venditori immagazzinano la merce nella rete di Amazon, che la preleva, la imballa e la spedisce; Amazon Shipping per i venditori che gestiscono da sé le spedizioni; Multi-Channel Fulfillment, ovunque il cliente abbia ordinato
-- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri Amazon, cosa controlla Peek, tracciamento di Amazon Logistics nell'account
+- [Aiuto Amazon: Traccia il tuo pacco](https://www.amazon.it/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – I miei ordini, Traccia il mio pacco, tutti gli aggiornamenti con i numeri di tracciamento, più pacchi in un ordine, il nome del venditore, tracciamento dei venditori terzi; la stessa pagina su amazon.com, .co.uk, .fr, .de, .es e .pl dà le loro etichette
+- [Aiuto Amazon: Informazioni di contatto del corriere](https://www.amazon.it/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – i corrieri principali per le spedizioni in Italia, tra cui Poste Italiane, BRT, GLS e SDA; corriere e codice della spedizione in I miei ordini; contatti dei corrieri
+- [Aiuto Amazon: Informazioni di tracciabilità mancanti](https://www.amazon.it/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – aggiornamento in ritardo, corriere intermedio, venditori terzi
+- [Aiuto Amazon: Consegne effettuate tramite Amazon Logistics](https://www.amazon.it/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – partner di consegna locali e grandi corrieri nazionali, tracciamento in I miei ordini, istruzioni di consegna
+- [Aiuto Amazon: Restituisci un regalo](https://www.amazon.it/gp/help/customer/display.html?nodeId=GMTDJ6XPUMN7NWNB) – il numero d'ordine a 17 cifre
+- [Aiuto Amazon: Consegne in ritardo](https://www.amazon.it/gp/help/customer/display.html?nodeId=GL669SSDXFCJ2ZA6) – posizione del pacco in tempo reale quando consegna Amazon, 48 ore, Servizio Clienti entro 30 giorni, venditore terzo
+- [Aiuto Amazon: Trova un pacco mancante che risulta essere stato consegnato](https://www.amazon.it/gp/help/customer/display.html?nodeId=GCU8BWGTQNJKQEBS) – istruzioni di consegna, foto della consegna, famiglia, vicini e portineria, il corriere
+- [Aiuto Amazon: Contatta un venditore del Marketplace](https://www.amazon.it/gp/help/customer/display.html?nodeId=GLC8ZMBWMBTR6QZZ) – I miei ordini, Problema con l'ordine, 48 ore, la Garanzia dalla A alla Z copre consegna e condizioni dell'articolo
+- [About Amazon: How to track your packages (in inglese)](https://www.aboutamazon.com/news/retail/track-amazon-package) – l'icona della persona nell'app, toccare l'articolo prima di tracciarlo
+- [About Amazon Italia: Segui una consegna Amazon a Murano, la città costruita sull'acqua nella laguna di Venezia](https://www.aboutamazon.it/notizie/logistica/segui-una-consegna-amazon-a-murano-la-citta-costruita-sullacqua-nella-laguna-di-venezia) – grandi corrieri nazionali come Poste Italiane, il magazzino di un partner di trasporto, il postino
+- [About Amazon Italia: Lettera agli azionisti dal CEO Andy Jassy - 2024](https://www.aboutamazon.it/notizie/company-news/lettera-agli-azionisti-dal-ceo-andy-jassy-2024) – Amazon Shipping per i venditori che gestiscono da sé le spedizioni
+- [Claude Help Center: Get started with Claude in Chrome (in inglese)](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome) – piani Claude a pagamento, solo Chrome, installare l'estensione
+- [Claude Help Center: Use Claude in Chrome safely (in inglese)](https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely) – resti tu responsabile degli acquisti; permessi per ogni sito
+- [ChatGPT: Chrome extension (in inglese)](https://learn.chatgpt.com/docs/chrome-extension) – si configura dall'app ChatGPT per desktop; funziona sui siti dove hai effettuato l'accesso
+- [Peek: Collegare Peek a Claude, ChatGPT o Gemini](https://peektracker.com/it/assistants) – i passaggi di Peek per Claude e ChatGPT
+- [Peek su GitHub: gli strumenti degli assistenti](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – cosa dice Peek a un assistente su Amazon: I miei ordini, Traccia il mio pacco, nessun numero di tracciamento nelle e-mail di Amazon, solo lettura
+- [Peek su GitHub: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – la nota sul numero d'ordine Amazon, «Apri i miei ordini Amazon», «Riprova», più numeri in un solo testo
+- [Universal Parcel Scraper: dati dei corrieri](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – forme dei numeri Amazon e cosa controlla Peek
 :::

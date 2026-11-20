@@ -1,151 +1,132 @@
 ---
-title: Amazon order tracking: Amazon, sellers and carriers
-description: Who ships your Amazon order, which carrier has it, why the tracking number changes or stays blank, and when to ask the seller or claim the A-to-z Guarantee.
+title: Amazon order tracking: find your tracking number
+description: Where Amazon shows your parcel's carrier and tracking number, on the website and in the app, and how to follow it in Peek, by hand or with Claude or ChatGPT.
 slug: amazon-order-tracking
 picture: A phone showing an order's progress, two vans passing a parcel between them, and Pip watching.
 published: 2026-10-16
-updated: 2026-11-14
+updated: 2026-11-20
 ---
 
-To track an Amazon order, open Your Orders (Returns & Orders at the top right of the website, or the person icon in the app), pick the order and select Track Package. Who helps when it goes wrong depends on who shipped it. Amazon looks after its own orders and Fulfilled by Amazon ones, while a seller who ships its own orders handles their customer service.
+Amazon shows your parcel's carrier and tracking number in one place: Your Orders, then Track package. Copy the number into [Peek](/), and you can follow the parcel next to all your others. It takes a minute, and it works the same way on every Amazon site. The exception is a parcel Amazon delivers itself: you can usually follow it only in your Amazon account.
 
-## Who ships my Amazon order: Amazon or a third-party seller?
+> Using Claude or ChatGPT in Chrome? [Ask it to do it for you](#can-claude-or-chatgpt-add-my-amazon-parcels-for-me).
 
-Look below the Buy Now button on the product page: it shows who sells the item and who ships it.
+## Where do I find the tracking number on Amazon?
 
-| Who sells and ships it | What it means | Who helps with delivery |
+On the Track package page of each parcel. Here's how to get there:
+
+:::steps
+- Open Your Orders | On the website, select Returns & Orders at the top right. In the Amazon app, tap the person icon at the bottom, then Your Orders.
+- Find the order | The newest orders come first. When an order comes in several parcels, each parcel has its own Track package button.
+- Select Track package | On the website, it's next to the order. In the app, tap the item first.
+- Find the carrier and the number | The page names the carrier, Royal Mail for example, and shows its tracking number, often labelled Tracking ID. If you don't see it, select All updates: Amazon lists the number there.
+- Paste it into Peek | Peek recognises the carrier from the number and starts following the parcel.
+:::
+
+### When does the number appear?
+
+Usually once the parcel has shipped. A new order may have no tracking number yet: the parcel is still on its way to the carrier, and the number appears after the carrier's first scan. Sometimes it shows up before that scan. Paste it anyway, and Peek shows the first update as soon as the carrier has one.
+
+Amazon's emails usually don't include the tracking number. The Track package button in those emails leads to the same page.
+
+### Does it work on amazon.fr, .de, .es and other Amazon sites?
+
+Yes. Every Amazon site works the same way. Only the words change with the site's language:
+
+| Site | Your Orders | Track package |
 | --- | --- | --- |
-| Sold and shipped by Amazon | Amazon's own stock | Amazon |
-| Sold by a seller, shipped by Amazon | Fulfilled by Amazon: the seller's stock, packed and sent from an Amazon warehouse | Amazon |
-| Sold and shipped by the same seller | The seller ships it itself | The seller first |
+| amazon.com, amazon.co.uk | Your Orders | Track package |
+| amazon.fr | Vos commandes | Suivre le colis |
+| amazon.de | Meine Bestellungen | Sendung verfolgen |
+| amazon.it | I miei ordini | Traccia il mio pacco |
+| amazon.es | Mis pedidos | Localiza tu paquete |
+| amazon.pl | Moje zamówienia | Śledź przesyłkę |
 
-Amazon.com.au makes the same split: sold and fulfilled by Amazon AU, sold by a seller and fulfilled by Amazon AU, or sold and fulfilled by a seller.
+## Which number is the tracking number?
 
-One more case on Amazon.com.au: the **Amazon Global Store**, which sells products from Amazon's stores in the UK, the US, Germany and Japan. Orders shipped from overseas can take longer than domestic ones, as can orders shipped by sellers. More in [parcels held at customs](guide:customs).
+An Amazon order can show three kinds of numbers. Only the carrier's tracking number always tracks your parcel outside Amazon.
 
-On Amazon.co.uk, if a seller's listing is eligible for Prime, you contact Amazon Customer Service instead of the seller.
-
-## Which carrier delivers my Amazon parcel?
-
-Amazon delivers many orders itself. That's [Amazon Logistics](carrier:amazon-logistics), its own delivery network: Delivery Service Partners, small firms with their own drivers, and independent Amazon Flex drivers. Other parcels leave Amazon's sort centres with a partner carrier. Amazon's own sites name these:
-
-| Country | Site | Who Amazon says delivers |
-| --- | --- | --- |
-| US | amazon.com | Amazon's Delivery Service Partners and Flex drivers, and [USPS](carrier:usps) for parcels Amazon hands to a post office |
-| UK | amazon.co.uk | Amazon, and couriers such as [DPD](carrier:dpd-uk), [Royal Mail](carrier:royal-mail) and [Evri](carrier:evri) (formerly Hermes) |
-| Ireland | amazon.ie | Amazon, seven days a week, from delivery stations in Rathcoole and Ballycoolin |
-| Canada | amazon.ca | Amazon, through local Delivery Service Partners |
-| Australia | amazon.com.au | Amazon's own network, [Australia Post](carrier:australia-post) and other third-party carriers |
-
-A seller who ships its own orders chooses how they travel, so its parcels can come with another carrier. Where exactly the number sits on each shop: [find your tracking number](guide:find-tracking-number).
-
-## What does an Amazon tracking number look like?
-
-There are two kinds, and an order number that is neither.
-
-These are the shapes Peek recognises as Amazon's, here with made-up digits:
+- **The carrier's tracking number.** It comes from the carrier: USPS, Royal Mail, DPD, Evri, Australia Post and so on. Amazon shows it next to the carrier's name. Peek follows it like any other parcel.
+- **The order number.** Three groups of digits joined by dashes, such as `123-1234567-1234567`. It's on the order, the invoice and Amazon's emails. It's never a tracking number: paste it into Peek, and Peek says "That looks like an Amazon order number".
+- **An Amazon number.** Amazon gives one to the parcels its own network delivers, and Peek checks it with Amazon: [see below](#can-peek-track-an-amazon-tba-number). It looks like this, here with made-up digits:
 
 :::anatomy TBA 123456789012
-- TBA | Amazon letters. `TBC` and `TBM` work the same way
+- TBA | Amazon's prefix. Also `TBC` (Canada) and `TBM` (Mexico), or `TBAU` with 9 digits (Australia)
 - 123456789012 | Twelve digits
 :::
 
-| Shape (made up) | What it is |
-| --- | --- |
-| `TBA123456789012` | Amazon: `TBA`, `TBC` or `TBM` and 12 digits; in Australia, `TBAU` and 9 digits |
-| `UK1234567890` | Amazon in Europe: a country code (`UK`, `GB`, `IE` and others) and 10 digits |
-| `123-1234567-1234567` | Your Amazon order number: 3, 7 and 7 digits. Not a tracking number |
-| Anything else | The carrier's own number, such as Royal Mail's or USPS's |
-
-The letters also tell Peek which Amazon store holds the order: amazon.ca for `TBC`, amazon.com.mx for `TBM`, amazon.com.au for `TBAU`, and amazon.com for `TBA`, or amazon.ca when the parcel is going to Canada. A carrier's number works on that carrier's site, as in [tracking number formats](guide:tracking-number-formats). Not sure which you have? Type it here:
+In Europe, an Amazon number can also be two letters for the country, such as `UK` or `FR`, then 10 digits. Not sure which you have? Type it here:
 
 :::checker
 :::
 
-## Why did my Amazon tracking number change, or why are there two?
+A parcel can change carrier on the way: Amazon hands some to a partner for the last stretch, such as USPS in the US or Royal Mail in the UK. Track package then names that partner: copy its number.
 
-Usually one of these:
+## Can Peek track an Amazon TBA number?
 
-- **A partner carrier takes over.** Amazon passes some parcels to a partner for the last stretch: a post office in the US, couriers such as DPD or Royal Mail in the UK, third-party carriers in Australia. The partner can give the parcel a number of its own.
-- **The seller uses its own carrier.** Then the number is that carrier's, not Amazon's.
+Sometimes. When you paste an Amazon number, Peek first checks it with Amazon's public tracker:
 
-:::journey
-- warehouse | Amazon or the seller | Amazon packs its own and Fulfilled by Amazon orders; a seller may ship its own
-- label | Labelled | Weighed and labelled, then sent on to a sort centre
-- handover | Sort centre or partner | Sorted by destination; some parcels go on with a partner carrier
-- truck | Out for delivery | From 10 stops away, Amazon's map shows the driver getting close
-- home | You | At your door, an Amazon Locker or another pickup point
-:::
+- **Amazon knows it.** The parcel is one Amazon delivers for another business, with [Amazon Shipping](carrier:amazon-shipping). Peek follows it like any other.
+- **Amazon doesn't know it.** Then it's most likely [Amazon Logistics](carrier:amazon-logistics) delivering your own Amazon order, which Amazon shows only in your account. Peek doesn't add it. It says so and offers "Open my Amazon orders", which opens your orders on the matching Amazon site. Peek never asks for your Amazon password.
+- **Amazon can't be reached.** Peek says so and offers "Check again".
 
-When the first carrier names the partner taking over, [Peek](/) keeps the first history, follows the partner once its own tracking shows fresh progress, and shows the partner's name and number on the card.
+When Amazon delivers a parcel itself, the order may say "Shipped with Amazon" and show no tracking number at all. There's nothing to copy then: only Amazon's own Track package page follows that parcel.
 
-## Why is there no tracking for my Amazon order?
+## Can Claude or ChatGPT add my Amazon parcels for me?
 
-Who holds the tracking depends on who shipped the order:
+Yes, if the assistant can use your browser. These two can:
 
-- **Amazon shipped it.** Select Track Package in Your Orders or in the shipment confirmation email. Once the parcel is 10 stops away, Amazon sends a push notification if you've opted into delivery alerts, and Amazon Map Tracking shows the driver on a map.
-- **A seller shipped it.** The seller handles it: ask them with Contact Seller, from the order in Your Orders.
-- **It's a gift.** Whoever ordered it can send you the tracking: on the Progress Tracker page, Share Tracking sends a link by text, email or WhatsApp.
+- **Claude in Chrome,** Claude's extension for Chrome, on paid Claude plans.
+- **ChatGPT's extension for Chrome,** which you install and use from the ChatGPT desktop app.
 
-When tracking shows nothing new for days: [why tracking stops updating](guide:tracking-not-updating).
+Both work in the Chrome window where you're already signed in to Amazon. Ask, and the assistant opens Your Orders, goes through each Track package page and notes each carrier and tracking number.
 
-## What to do if an Amazon order is late or says delivered
+What happens next depends on whether Peek is connected to the assistant:
 
-If the order is late, or shows as delivered but you don't have it, go in this order:
+- **If Peek is connected** and the assistant can use it in that chat, it adds the parcels to your Peek account itself, named after the item. In Claude, open "Peek Parcel Tracker" in [Claude's connector directory](https://claude.ai/directory/peek-parcel-tracker), select "Connect", sign in to Peek and select "Allow". In ChatGPT, Peek can be added as a plugin on a Business, Enterprise or Edu plan. All the steps are in [track your parcels in ChatGPT or Claude](guide:ai-assistants).
+- **If it isn't,** the assistant lists the numbers in the chat. Copy the whole list and paste it into [Peek](/): Peek picks out every number. Signed in, it follows them all; signed out, one at a time.
+
+Copy this into the assistant:
+
+> Open Your Orders on Amazon in this browser. For each parcel on its way or just delivered, open Track package and note the carrier and the tracking number. Never use the order number (three groups of digits joined by dashes). If Peek is connected, add each parcel to Peek, named after its item. If not, list the numbers here, one per line. Tell me which parcels show no tracking number. On Amazon, only read: don't buy, cancel, return or change anything, and don't sign in for me.
+
+Either way, the assistant only needs to read Amazon. It should never buy, cancel or return anything, and never sign in for you. If Amazon asks you to sign in, do it yourself in that window, then ask again. When a parcel has no tracking number, or Peek turns it down, Amazon tracks that one only in your account.
+
+## What if my Amazon parcel is late or says delivered?
+
+Who helps depends on who shipped it. The product page shows that below the Buy Now button. Amazon looks after its own orders and the ones it ships for sellers. A seller who ships its own orders answers delivery questions first.
 
 :::steps
-- Check the tracking | Track Package in Your Orders opens the Progress Tracker, with a map once the driver is 10 stops away.
-- Look around | Check the spot named in your delivery instructions and, if the driver took one, the delivery photo. At an Amazon Locker in the US, the delivery confirmation email says how to open it (a six-digit code, a barcode or the Amazon Shopping app), and you can forward it to someone who'll collect for you; you have three calendar days, after which Amazon returns the item and refunds you.
+- Check Track package | It shows the latest update and, once the driver is 10 stops away, a map.
+- Look around | Check the spot in your delivery instructions and the delivery photo, if the driver took one.
 - Ask the carrier | If another carrier delivered it, Amazon's Carrier Contact Information page says how to reach it.
-- Contact the seller | If a seller sold and shipped it, use Contact Seller from the order in Your Orders. On Amazon.co.uk, sellers should reply within two business days.
-- Ask Amazon | Orders Amazon shipped: Amazon Customer Service, by chat or phone from the Customer Service page. Seller orders: the A-to-z Guarantee.
+- Contact the seller | If a seller sold and shipped it, use Contact Seller from the order in Your Orders.
+- Ask Amazon | For orders Amazon shipped, chat with or call Amazon Customer Service. For a seller's own orders that the seller doesn't sort out, the A-to-z Guarantee covers late delivery and the item's condition.
 :::
 
-For more on each case: [delivered but not received](guide:delivered-not-received) and [lost parcels](guide:lost-parcel).
-
-### When can I claim the A-to-z Guarantee?
-
-It covers items a third-party seller sold and shipped itself: on-time delivery and the item's condition. Try to settle it with the seller first. If you can't, ask Amazon for a refund, and Amazon decides whether you're eligible.
-
-| Site | Seller replies within | When you can claim |
-| --- | --- | --- |
-| amazon.co.uk | Two business days | You want a refund and the seller hasn't answered within 48 hours: most seller orders are covered |
-| amazon.com.au | Two business days, for a return request | No answer by then: you can ask for a refund under the guarantee |
-
-## Can I track an Amazon parcel outside Amazon?
-
-It depends on the number. Paste it into [Peek](/):
-
-- **A carrier's number** (Royal Mail, USPS, Canada Post, Australia Post…) is tracked like any other parcel.
-- **An Amazon number**, or a track.amazon link: Peek first asks Amazon's public tracker. If Amazon answers, the parcel travels with [Amazon Shipping](carrier:amazon-shipping), Amazon's delivery service for other businesses, or with Multi-Channel Fulfilment, where Amazon ships a seller's stock to its customers wherever they ordered. Peek then tracks it automatically.
-- Otherwise it's Amazon Logistics delivering an Amazon order, and Amazon shows that only in your account. Peek says so and offers "Open my Amazon orders", which opens your order history on the Amazon site the number points to. Peek never asks for your Amazon login.
-- **An order number** gets "That looks like an Amazon order number". Use the tracking number from Track Package or the shipment confirmation email instead.
+More help: [delivered but not received](guide:delivered-not-received), [lost parcels](guide:lost-parcel) and [why tracking stops updating](guide:tracking-not-updating).
 
 :::sources
-- [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – Returns & Orders, Your Orders, Track Package, map tracking, Share Tracking
+- [Amazon Help: Tracking your package](https://www.amazon.com/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – Your Orders, Track package, all updates with the tracking numbers; the same page on amazon.co.uk, .fr, .de, .it, .es and .pl gives their labels
+- [Amazon Help: Contact a Carrier](https://www.amazon.com/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – the carrier's name and tracking number under Track package, one carrier per package
+- [Amazon Help: Missing Tracking Information](https://www.amazon.com/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – no number while the parcel is on its way to the carrier, details after the first scan
+- [Amazon Help: About Deliveries Shipped with Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – orders shipped by Amazon Logistics show as shipped with Amazon
+- [Amazon Help: Return a Gift](https://www.amazon.com/gp/help/customer/display.html?nodeId=GMTDJ6XPUMN7NWNB) – the 17-digit order number
+- [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – Returns & Orders, the person icon in the app, Track package, map tracking
 - [About Amazon UK: How to track an Amazon package](https://www.aboutamazon.co.uk/news/retail/how-to-track-an-amazon-package) – the same on Amazon.co.uk
-- [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – Track Package from the shipment email, delivery instructions, delivery photos
-- [About Amazon: Fulfillment by Amazon](https://www.aboutamazon.com/news/small-business/fulfillment-by-amazon-how-improving-delivery-fueled-independent-seller-growth-and-success) – Amazon delivers and supports sellers' FBA items; sellers' other ways to ship
-- [About Amazon UK: Fulfilment by Amazon](https://www.aboutamazon.co.uk/news/innovation/fulfilment-by-amazon) – Amazon stores, packs and delivers sellers' stock, with easy returns and Amazon customer service (2018)
+- [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – delivery instructions, delivery photos
 - [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – who sells and ships it, below Buy Now; Carrier Contact Information
-- [About Amazon Australia: How to change your delivery address](https://www.aboutamazon.com.au/news/retail/how-to-change-your-delivery-address-on-desktop-and-in-the-amazon-app) – the same on Amazon.com.au
-- [About Amazon Australia: How to cancel Amazon orders](https://www.aboutamazon.com.au/news/shopping/how-to-cancel-your-order-on-amazon-australia) – sold and fulfilled by Amazon AU, by a seller, or both; Contact Seller (2023)
-- [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – sellers' customer service, Prime listings, Contact Seller, two business days, 48 hours, A-to-z Guarantee
+- [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – Contact Seller, A-to-z Guarantee
 - [About Amazon: Contact Amazon Customer Service](https://www.aboutamazon.com/news/company-news/contact-amazon-customer-service) – chat or phone, help with late deliveries
-- [About Amazon UK: How to contact Amazon UK Customer Service](https://www.aboutamazon.co.uk/news/retail/how-to-contact-amazon-uk-customer-service) – chat and phone from the Customer Service page
-- [About Amazon: How do Amazon packages get delivered](https://www.aboutamazon.com/news/operations/how-do-amazon-packages-get-delivered) – sort centres, U.S. Post Offices, Delivery Service Partners, Flex, Lockers
-- [About Amazon: How to use Amazon Locker](https://www.aboutamazon.com/news/operations/how-to-use-amazon-locker) – delivery confirmation email, six-digit code, barcode or Amazon Shopping app, forwarding the email, three calendar days, return and refund (updated August 2026, read 14 November 2026)
-- [About Amazon UK: How are Amazon parcels delivered in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – labelling, sortation centres, Hermes, DPD, Royal Mail, Delivery Service Partners
-- [About Amazon EU: Amazon's €25 billion commitment to Ireland](https://www.aboutamazon.eu/news/job-creation-and-investment/amazons-25-billion-commitment-to-ireland-creating-jobs-driving-growth-and-building-infrastructure) – Irish delivery stations, seven days a week
-- [About Amazon Canada: New Delivery Service Partner Hubs in Lethbridge and Owen Sound](https://www.aboutamazon.ca/news/operations/amazon-announces-new-delivery-service-partner-hubs-in-lethbridge-and-owen-sound) – Delivery Service Partners in Canada
-- [About Amazon Australia: Amazon invests in its last mile network](https://www.aboutamazon.com.au/news/innovation/amazon-continues-to-invest-in-its-last-mile-network-to-enable-faster-deliveries-to-customers-in-australia) – Delivery Service Partners, Flex, third-party carriers
-- [About Amazon Australia: Inside the Western Sydney fulfilment centre](https://www.aboutamazon.com.au/news/workplace/take-a-behind-the-scenes-look-at-amazon-australias-robotics-fulfilment-centre-in-western-sydney) – Australia Post or Amazon's own network (2023)
-- [About Amazon Australia: J-Beauty brands now on Amazon](https://www.aboutamazon.com.au/news/retail/big-in-japan-and-now-australia-hundreds-of-j-beauty-brands-now-available-on-amazon-com-au) – Global Stores from the UK, US, Germany and Japan (2023)
-- [About Amazon Australia: How to get your Amazon order by Christmas](https://www.aboutamazon.com.au/news/shopping/how-to-get-your-amazon-order-by-christmas-5-tips-for-hassle-free-holidays) – orders from overseas or sellers can take longer (2023)
-- [About Amazon: Amazon's product guarantee](https://www.aboutamazon.com/news/policy-news-views/amazon-guarantee-backs-all-products-purchased-in-store) – A-to-z Guarantee: seller items, delivery and condition, refund
-- [About Amazon Canada: A-to-z Guarantee in Canada](https://www.aboutamazon.ca/news/customer-trust/amazon-expands-a-to-z-guarantee-in-canada-to-include-property-damage-and-personal-injury-claims) – the same in Canada
-- [About Amazon Australia: 12 tips for shopping on Amazon.com.au](https://www.aboutamazon.com.au/news/retail/12-tips-to-get-the-most-out-of-shopping-on-amazon-com-au) – A-to-z Guarantee in Australia (2022)
-- [About Amazon Australia: How to return an order you can't cancel](https://www.aboutamazon.com.au/news/shopping/how-to-return-an-order-if-you-cant-cancel-it-on-amazon-australia) – two business days, then the A-to-z Guarantee (2023)
-- [About Amazon UK: Amazon CEO Andy Jassy's 2023 Letter to Shareholders](https://www.aboutamazon.co.uk/news/company-news/ceo-andy-jassys-2023-letter-to-shareholders) – Amazon Shipping, Amazon's last-mile delivery network for other businesses' parcels; Multi-Channel Fulfillment, sellers' stock shipped wherever customers ordered
-- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Amazon number shapes, stores per prefix, Evri's former name, what Peek checks; `TBAU` and 9 digits for amazon.com.au (read 14 November 2026)
+- [About Amazon: Amazon's product guarantee](https://www.aboutamazon.com/news/policy-news-views/amazon-guarantee-backs-all-products-purchased-in-store) – A-to-z Guarantee: seller items, delivery and condition
+- [About Amazon: How do Amazon packages get delivered](https://www.aboutamazon.com/news/operations/how-do-amazon-packages-get-delivered) – sort centres, U.S. Post Offices, Delivery Service Partners
+- [About Amazon UK: How are Amazon parcels delivered in the UK?](https://www.aboutamazon.co.uk/news/operations/how-your-package-gets-from-amazons-warehouse-to-your-front-door) – DPD, Royal Mail and other partner carriers
+- [About Amazon UK: Amazon CEO Andy Jassy's 2023 Letter to Shareholders](https://www.aboutamazon.co.uk/news/company-news/ceo-andy-jassys-2023-letter-to-shareholders) – Amazon Shipping, Amazon's delivery network for other businesses' parcels
+- [Claude Help Center: Get started with Claude in Chrome](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome) – paid Claude plans, Chrome only, installing the extension
+- [Claude Help Center: Use Claude in Chrome safely](https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely) – you stay responsible for purchases; permissions per site
+- [ChatGPT: Chrome extension](https://learn.chatgpt.com/docs/chrome-extension) – set up from the ChatGPT desktop app; works on sites where you're signed in
+- [Peek: Connect Peek to Claude, ChatGPT or Gemini](https://peektracker.com/assistants) – Peek's steps for Claude and ChatGPT
+- [Peek on GitHub: the assistants' tools](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – what Peek tells an assistant about Amazon: Your Orders, Track package, no tracking number in Amazon's emails, only reading
+- [Peek on GitHub: English wording](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – the Amazon order number note, "Open my Amazon orders", "Check again", several numbers in one text
+- [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – Amazon number shapes and what Peek checks
 :::

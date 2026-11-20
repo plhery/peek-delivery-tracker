@@ -19,7 +19,7 @@ const LIMITS = { title: 60, description: [110, 165], words: 600, translated: [.6
 /** Chinese characters are about twice as wide as Latin letters: a search result shows about half as many. */
 const CHINESE_DESCRIPTION = [60, 85];
 
-const INLINE_TYPES = new Set(['text', 'strong', 'em', 'code', 'link', 'guide', 'carrier']);
+const INLINE_TYPES = new Set(['text', 'strong', 'em', 'code', 'link', 'guide', 'carrier', 'section']);
 /** Every run of inline text in a page's blocks: paragraphs, list items, table cells, notes, steps and sources. */
 function inlineRuns(value, runs = []) {
   if (Array.isArray(value) && value.length && value.every((node) => INLINE_TYPES.has(node?.type))) runs.push(value);

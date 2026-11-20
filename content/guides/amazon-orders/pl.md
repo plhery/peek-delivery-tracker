@@ -1,124 +1,134 @@
 ---
-title: Śledzenie zamówienia Amazon: Amazon, sprzedawcy, przewoźnicy
-description: Kto wysyła Twoje zamówienie z Amazon.pl, który przewoźnik je doręcza, czemu numer śledzenia się zmienia lub go nie ma i jak działa Gwarancja od A do Z.
+title: Śledzenie przesyłki Amazon: gdzie znaleźć numer śledzenia
+description: Gdzie Amazon.pl pokazuje przewoźnika i numer śledzenia Twojej paczki, na stronie i w aplikacji, i jak śledzić ją w Peek: ręcznie albo z Claude lub ChatGPT.
 slug: sledzenie-zamowienia-amazon
 picture: Telefon pokazuje postęp zamówienia, dwie furgonetki przekazują sobie paczkę, a Pip się przygląda.
 published: 2026-10-16
-updated: 2026-10-27
+updated: 2026-11-20
 ---
 
-Zamówienie z Amazona śledzisz na stronie zamówień na swoim koncie, w serwisie Amazon.pl albo w aplikacji Amazon. Jeśli paczkę doręcza Amazon, widzisz tam jej status, historię, przewidywaną datę dostawy i zdjęcie z doręczenia. Kto pomoże, gdy coś pójdzie nie tak, zależy od tego, kto wysyła. Amazon zajmuje się zamówieniami, które sam wysyła, także produktami z „Realizacją przez Amazon”, a sprzedawca, który wysyła sam, odpowiada za dostawę.
+Amazon pokazuje przewoźnika i numer śledzenia Twojej paczki w jednym miejscu: na stronie „Moje zamówienia”, w opcji „Śledź przesyłkę”. Skopiuj numer do [Peek](/), a będziesz śledzić tę paczkę obok wszystkich innych. Zajmuje to minutę i działa tak samo na amazon.pl i na każdej innej stronie Amazona. Wyjątkiem jest paczka, którą Amazon doręcza sam: zwykle śledzisz ją tylko na swoim koncie Amazon.
 
-## Kto wysyła moje zamówienie z Amazona: Amazon czy sprzedawca?
+> Używasz Claude albo ChatGPT w Chrome? [Poproś, żeby zrobił to za Ciebie](#czy-claude-albo-chatgpt-moga-dodac-za-mnie-paczki-z-amazona).
 
-Sprzedawcy wysyłają zamówienia sami, przez wybranego przewoźnika, albo z pomocą Amazona.
+## Gdzie na Amazonie znajdę numer śledzenia?
 
-| Sytuacja | Co to znaczy | Kto pomaga przy dostawie |
+Na stronie „Śledź przesyłkę” każdej paczki. Tak tam trafisz:
+
+:::steps
+- Otwórz „Moje zamówienia” | Na stronie wybierz „Zamówienia” w prawym górnym rogu. W aplikacji Amazon stuknij ikonę osoby na dole ekranu, a potem przejdź do zamówień.
+- Znajdź zamówienie | Najnowsze zamówienia są na górze. Gdy zamówienie przychodzi w kilku paczkach, każda paczka ma własny przycisk „Śledź przesyłkę”.
+- Wybierz „Śledź przesyłkę” | Na stronie ten przycisk jest obok zamówienia. W aplikacji najpierw stuknij produkt.
+- Znajdź przewoźnika i numer | Strona podaje przewoźnika, na przykład InPost albo DPD, i jego numer śledzenia. Pomoc Amazona nazywa go identyfikatorem przesyłki. Jeśli go nie widzisz, otwórz wszystkie aktualizacje przesyłki: Amazon podaje tam numer.
+- Wklej go do Peek | Peek rozpozna przewoźnika po numerze i zacznie śledzić paczkę.
+:::
+
+### Kiedy pojawia się numer?
+
+Zwykle po wysłaniu paczki. Nowe zamówienie może jeszcze nie mieć numeru: paczka jedzie dopiero do przewoźnika, a numer pojawia się po jego pierwszym skanie. Czasem numer widać już wcześniej. Wklej go i tak: Peek pokaże pierwszą aktualizację, gdy tylko przewoźnik ją poda.
+
+Paczkę z centrum logistycznego za granicą da się śledzić dopiero wtedy, gdy dotrze do centrum dystrybucyjnego przewoźnika w Polsce. Paczka od sprzedawcy ma numer tylko wtedy, gdy sprzedawca wybrał wysyłkę ze śledzeniem i przekazał numer Amazonowi.
+
+E-maile od Amazona zwykle nie zawierają numeru śledzenia. Przycisk śledzenia w tych e-mailach prowadzi na tę samą stronę.
+
+### Czy to działa też na amazon.de i innych stronach Amazona?
+
+Tak. Każda strona Amazona działa tak samo. Zmieniają się tylko słowa, zależnie od języka strony:
+
+| Strona | Moje zamówienia | Śledź przesyłkę |
 | --- | --- | --- |
-| Sprzedaje i wysyła Amazon | Towar Amazona | Amazon |
-| Sprzedaje sprzedawca, wysyła Amazon | „Realizacja przez Amazon” (FBA): Amazon składuje, pakuje i wysyła produkt sprzedawcy oraz obsługuje klienta | Amazon |
-| Sprzedaje i wysyła sprzedawca | „Realizacja przez sprzedawcę” (FBM): sprzedawca wysyła sam, przewoźnikiem, którego wybierze | Najpierw sprzedawca |
+| amazon.pl | Moje zamówienia | Śledź przesyłkę |
+| amazon.de | Meine Bestellungen | Sendung verfolgen |
+| amazon.com, amazon.co.uk | Your Orders | Track package |
+| amazon.fr | Vos commandes | Suivre le colis |
+| amazon.it | I miei ordini | Traccia il mio pacco |
+| amazon.es | Mis pedidos | Localiza tu paquete |
 
-Sprzedawca, który sam realizuje zamówienia, odpowiada za dostawę, obsługę klienta i zwroty. Jeśli nie rozwiąże problemu, możesz zwrócić się do Amazona w ramach Gwarancji od A do Z.
+## Który numer jest numerem śledzenia?
 
-## Który przewoźnik doręcza moją paczkę z Amazona?
+Zamówienie na Amazonie może pokazywać trzy rodzaje numerów. Tylko numer śledzenia przewoźnika zawsze pozwala śledzić paczkę poza Amazonem.
 
-To zależy od tego, kto wysyła. Jeśli przewoźnikiem jest sam Amazon, to [Amazon Logistics](carrier:amazon-logistics), własna sieć dostaw Amazona: w stacjach dostawczych paczki są sortowane według tras doręczeń i trafiają do partnerów odpowiedzialnych za ostatni etap dostawy. Amazon.pl dowozi zamówienia pod drzwi, do automatów Paczkomat i do tysięcy punktów odbioru w całej Polsce.
-
-| Przewoźnik | Kiedy doręcza |
-| --- | --- |
-| [InPost](carrier:inpost) | Gdy wybierzesz dostawę do Paczkomatu: InPost jest partnerem logistycznym Amazon.pl. W usłudze Easy Ship doręcza też paczki sprzedawców |
-| Przewoźnik sprzedawcy | Gdy sprzedawca wysyła sam: na przykład [DPD Polska](carrier:dpd-pl), [DHL Polska](carrier:dhl-ecommerce-pl) albo [Poczta Polska](carrier:poczta-polska) |
-
-Gdzie dokładnie jest numer w każdym sklepie: [jak znaleźć numer przesyłki](guide:find-tracking-number).
-
-## Jak wygląda numer śledzenia Amazon?
-
-Są dwa rodzaje, a do tego numer zamówienia, który nie jest żadnym z nich.
-
-Te kształty Peek rozpoznaje jako numery Amazona, tu z wymyślonymi cyframi:
+- **Numer śledzenia przewoźnika.** Nadaje go przewoźnik: InPost, DPD, DHL, Poczta Polska, UPS i inni. Amazon pokazuje go obok nazwy przewoźnika. Peek śledzi go jak każdą inną paczkę.
+- **Numer zamówienia.** Trzy grupy cyfr połączone myślnikami, na przykład `123-1234567-1234567`. Jest w zamówieniu, na fakturze i w e-mailach od Amazona. To nigdy nie jest numer śledzenia: gdy wkleisz go do Peek, Peek odpowie „To wygląda na numer zamówienia Amazon”.
+- **Numer Amazona.** Amazon nadaje go paczkom, które doręcza jego własna sieć, a Peek sprawdza go w Amazonie: [zobacz niżej](#czy-peek-sledzi-numer-tba-od-amazona). Wygląda tak, tu z wymyślonymi cyframi:
 
 :::anatomy TBA 123456789012
-- TBA | Litery Amazona. `TBC` i `TBM` działają tak samo
+- TBA | Prefiks Amazona. Także `TBC` (Kanada) i `TBM` (Meksyk) albo `TBAU` z 9 cyframi (Australia)
 - 123456789012 | Dwanaście cyfr
 :::
 
-| Kształt (wymyślony) | Co to jest |
-| --- | --- |
-| `TBA123456789012` | Amazon: `TBA`, `TBC` lub `TBM` i 12 cyfr |
-| `PL1234567890` | Amazon w Europie: kod kraju (`PL` i inne) i 10 cyfr |
-| `123-1234567-1234567` | Twój numer zamówienia Amazon: 3, 7 i 7 cyfr. To nie jest numer śledzenia |
-| Cokolwiek innego | Numer przewoźnika, na przykład InPost albo Poczty Polskiej |
-
-Numer przewoźnika działa na jego stronie, jak opisują [formaty numerów przesyłek](guide:tracking-number-formats). Nie wiesz, który masz? Wpisz go tutaj:
+W Europie numer Amazona może też składać się z dwóch liter kraju, na przykład `PL` albo `DE`, i 10 cyfr. Nie wiesz, który numer masz? Wpisz go tutaj:
 
 :::checker
 :::
 
-## Dlaczego zmienił się numer śledzenia Amazon albo mam dwa?
+Paczka może po drodze zmienić przewoźnika: Amazon przekazuje niektóre paczki partnerowi na ostatni etap dostawy. „Śledź przesyłkę” podaje wtedy tego partnera: skopiuj jego numer.
 
-Zwykle z jednego z tych powodów:
+## Czy Peek śledzi numer TBA od Amazona?
 
-- **Jeden z nich to numer zamówienia.** Numer z 3, 7 i 7 cyfr oznacza zakup, a nie przesyłkę.
-- **Sprzedawca ma własnego przewoźnika.** Wtedy numer należy do InPost, DPD czy innej firmy, a nie do Amazona.
-- **Paczkę przejmuje inny przewoźnik.** Niektórzy przewoźnicy przekazują paczkę partnerowi, który doręcza ją pod własnym numerem.
+Czasem. Gdy wkleisz numer Amazona, Peek najpierw sprawdza go w publicznym systemie śledzenia Amazona:
 
-:::journey
-- warehouse | Amazon lub sprzedawca | Przy FBA Amazon składuje, pakuje i wysyła produkt, przy FBM wysyła sprzedawca
-- label | Etykieta | W Easy Ship sprzedawca drukuje etykietę, a InPost odbiera paczkę spod jego drzwi
-- handover | Stacja dostawcza | Paczki Amazona są tu sortowane według tras doręczeń
-- truck | W trakcie dostawy | Ostatni etap przejmują partnerzy Amazona
-- home | Ty | Pod drzwiami, w Paczkomacie albo w punkcie odbioru
-:::
+- **Amazon go zna.** To paczka, którą Amazon doręcza dla innej firmy, w ramach [Amazon Shipping](carrier:amazon-shipping). Peek śledzi ją jak każdą inną.
+- **Amazon go nie zna.** Wtedy najpewniej [Amazon Logistics](carrier:amazon-logistics) doręcza Twoje własne zamówienie z Amazona, a Amazon pokazuje je tylko na Twoim koncie. Peek nie doda tego numeru. Powie Ci o tym i zaproponuje przycisk „Otwórz moje zamówienia Amazon”, który otwiera Twoje zamówienia na właściwej stronie Amazona. Peek nigdy nie prosi o hasło do Amazona.
+- **Nie ma połączenia z Amazonem.** Peek powie Ci o tym i zaproponuje „Sprawdź ponownie”.
 
-Gdy pierwszy przewoźnik poda partnera, który przejmuje paczkę, [Peek](/) zachowuje pierwszą historię, przechodzi na partnera, gdy jego śledzenie pokaże nowe postępy, i pokazuje na karcie jego nazwę i numer.
+Gdy Amazon doręcza paczkę sam, zamówienie może nie pokazywać żadnego numeru śledzenia. Nie ma wtedy czego kopiować: tę paczkę śledzi tylko strona „Śledź przesyłkę” na Amazonie.
 
-## Dlaczego nie ma śledzenia mojego zamówienia z Amazona?
+## Czy Claude albo ChatGPT mogą dodać za mnie paczki z Amazona?
 
-To zależy od tego, gdzie go szukasz i kto wysyła:
+Tak, jeśli asystent może korzystać z Twojej przeglądarki. Te dwa potrafią:
 
-- **Poza Amazonem.** Amazon Logistics nie ma publicznej strony śledzenia: status widać tylko na stronie zamówień na twoim koncie.
-- **Zamówienia od sprzedawców.** Jeśli sprzedawca wysyła sam, śledzenie zależy od niego i od jego przewoźnika. To on odpowiada za dostawę, więc najpierw zapytaj jego.
+- **Claude in Chrome,** rozszerzenie Claude do Chrome, w płatnych planach Claude.
+- **Rozszerzenie ChatGPT do Chrome,** które instalujesz i obsługujesz z aplikacji ChatGPT na komputer.
 
-Gdy śledzenie stoi od dni: [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
+Oba działają w tym oknie Chrome, w którym korzystasz z Amazona po zalogowaniu. Poproś, a asystent otworzy „Moje zamówienia”, przejdzie przez każdą stronę „Śledź przesyłkę” i zanotuje każdego przewoźnika i numer śledzenia.
 
-## Co zrobić, gdy zamówienie z Amazona się spóźnia albo jest „dostarczone”?
+Co dalej, zależy od tego, czy Peek jest połączony z asystentem:
 
-Według zasad unijnych sprzedawca powinien dostarczyć towar w uzgodnionym terminie, a jeśli żadnego nie uzgodniono, w ciągu 30 dni. Jeśli paczka nie dotrze, przypomnij mu o zamówieniu i wyznacz dodatkowy, rozsądny termin. Jeśli i w nim nie dostarczy towaru, masz prawo od razu rozwiązać umowę i odzyskać pieniądze. Działaj w tej kolejności:
+- **Jeśli Peek jest połączony** i asystent może z niego korzystać w tym czacie, sam doda paczki do Twojego konta Peek, każdą z nazwą produktu. W Claude otwórz „Peek Parcel Tracker” w [katalogu konektorów Claude](https://claude.ai/directory/peek-parcel-tracker), wybierz „Connect”, zaloguj się do Peek i wybierz „Zezwól”. W ChatGPT Peek można dodać jako wtyczkę w planie Business, Enterprise lub Edu. Wszystkie kroki znajdziesz w poradniku [jak śledzić przesyłki w ChatGPT lub Claude](guide:ai-assistants).
+- **Jeśli nie jest,** asystent wypisze numery w czacie. Skopiuj całą listę i wklej ją do [Peek](/): Peek wyłowi z niej każdy numer. Po zalogowaniu śledzi je wszystkie, bez logowania po jednym.
+
+Wklej asystentowi to polecenie:
+
+> Otwórz w tej przeglądarce „Moje zamówienia” na Amazonie. Dla każdej paczki, która jest w drodze albo właśnie dotarła, otwórz „Śledź przesyłkę” i zanotuj przewoźnika oraz numer śledzenia. Nigdy nie używaj numeru zamówienia (trzy grupy cyfr połączone myślnikami). Jeśli Peek jest połączony, dodaj każdą paczkę do Peek z nazwą jej produktu. Jeśli nie, wypisz tu numery, po jednym w wierszu. Napisz mi, które paczki nie mają numeru śledzenia. Na Amazonie tylko czytaj: niczego nie kupuj, nie anuluj, nie zwracaj ani nie zmieniaj i nie loguj się za mnie.
+
+W obu przypadkach asystent ma na Amazonie tylko czytać. Nie powinien niczego kupować, anulować ani zwracać i nigdy nie powinien logować się za Ciebie. Jeśli Amazon poprosi o zalogowanie, zaloguj się samodzielnie w tym oknie, a potem poproś jeszcze raz. Gdy paczka nie ma numeru śledzenia albo Peek jej nie przyjmie, Amazon śledzi ją tylko na Twoim koncie.
+
+## Co zrobić, gdy paczka z Amazona się spóźnia albo ma status „Dostarczono”?
+
+Kto pomoże, zależy od tego, kto ją wysłał. Pokazuje to strona produktu, pod przyciskami zakupu, a na stronie „Moje zamówienia” widać nazwę sprzedawcy. Amazon zajmuje się własnymi zamówieniami i tymi, które wysyła za sprzedawców. Sprzedawca, który wysyła sam, pierwszy odpowiada na pytania o dostawę.
 
 :::steps
-- Sprawdź swoje zamówienia | Jeśli paczkę doręcza Amazon, na stronie zamówień zobaczysz status, przewidywaną datę i zdjęcie z doręczenia.
-- Rozejrzyj się | Sprawdź skrzynkę pocztową i miejsce, w którym zwykle zostają paczki, i zapytaj sąsiadów. Przy dostawie do Paczkomatu albo punktu odbioru sprawdź, czy paczka już tam czeka.
-- Zapytaj przewoźnika | Jeśli numer należy do InPost, DPD czy innego przewoźnika, śledź paczkę na jego stronie albo w Peek.
-- Napisz do sprzedawcy | Jeśli to on sprzedał i wysłał: odpowiada za dostawę, a jeśli nie udowodni, że paczka została dostarczona, powinien wysłać ci taki sam produkt albo zwrócić pieniądze.
-- Zwróć się do Amazona | Przy problemie z terminową dostawą albo stanem produktu Amazon zwraca pieniądze lub wymienia produkt, także gdy sprzedaje niezależny sprzedawca. Przy zamówieniu od sprzedawcy najpierw spróbuj z nim.
+- Sprawdź „Śledź przesyłkę” | Tam jest najnowsza aktualizacja. Większość spóźnionych paczek dociera w ciągu 48 godzin od podanej daty dostawy.
+- Rozejrzyj się | Sprawdź miejsce z Twoich instrukcji dostawy i zdjęcie z doręczenia, jeśli kurier je zrobił. „Dostarczono” może też znaczyć, że paczka czeka w punkcie odbioru albo w automacie paczkowym.
+- Zapytaj przewoźnika | Jeśli doręczał InPost, DPD albo inny przewoźnik, strona pomocy Amazona „Informacje kontaktowe przewoźników” podaje jego telefon i stronę.
+- Napisz do sprzedawcy | Jeśli sprzedawca sprzedał i wysłał produkt, napisz do niego z zamówienia na stronie „Moje zamówienia”.
+- Zwróć się do Amazona | Przy zamówieniach wysłanych przez Amazon napisz na czacie albo zadzwoń do Działu Obsługi Klienta. Gdy sprzedawca nie rozwiąże problemu ze swoim zamówieniem, Gwarancja od A do Z obejmuje spóźnioną dostawę i stan produktu.
 :::
 
-Więcej o każdym przypadku: [paczka dostarczona, ale jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
-
-### Kiedy mogę skorzystać z Gwarancji od A do Z?
-
-Gwarancja od A do Z obejmuje każdy produkt w sklepie, niezależnie od tego, czy sprzedaje go Amazon, czy niezależny sprzedawca. Przy zakupie od sprzedawcy najpierw spróbuj rozwiązać problem z nim. Jeśli nie jesteś zadowolony z dostawy albo stanu produktu i sprawa nie została załatwiona, możesz zwrócić się bezpośrednio do Amazona o zwrot pieniędzy.
-
-## Czy mogę śledzić paczkę z Amazona poza Amazonem?
-
-To zależy od numeru. Wklej go do [Peek](/):
-
-- **Numer przewoźnika** (InPost, DPD, DHL, Poczta Polska…) śledzisz jak każdą inną paczkę.
-- **Numer Amazona** albo link track.amazon: Peek najpierw pyta publiczny system śledzenia Amazona. Jeśli Amazon odpowie, paczka jedzie z Amazon Shipping albo w ramach Multi-Channel Fulfillment (MCF) i nie pochodzi z zamówienia złożonego w samym Amazonie. Wtedy Peek śledzi ją sam.
-- Jeśli nie, to Amazon Logistics dowozi zamówienie z Amazona, a Amazon pokazuje je tylko na twoim koncie. Peek mówi ci o tym i proponuje „Otwórz moje zamówienia Amazon”, które otwiera twoje zamówienia na stronie Amazona pasującej do numeru: amazon.pl dla `PL`. Peek nigdy nie prosi o login do Amazona.
-- **Numer zamówienia** dostaje komunikat „To wygląda na numer zamówienia Amazon”. Użyj zamiast niego numeru przesyłki ze swojego konta.
+Więcej pomocy: [paczka dostarczona, ale jej nie ma](guide:delivered-not-received), [zaginiona paczka](guide:lost-parcel) i [dlaczego śledzenie się nie aktualizuje](guide:tracking-not-updating).
 
 :::sources
-- [About Amazon: 5 sposobów na bezpieczne zakupy z Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-sposobow-na-bezpieczne-zakupy-z-amazon-nie-daj-sie-oszustom) – śledzenie na stronie zamówień na koncie
-- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – historia zamówień na Amazon.pl i w aplikacji, Gwarancja od A do Z dla każdego produktu, zwrot pieniędzy lub wymiana
-- [About Amazon: Pierwsze kroki w sprzedaży na Amazon](https://www.aboutamazon.pl/wiadomosci/sprzedaz-na-amazon/pierwsze-kroki-w-sprzedazy-na-amazon) – wysyłka przez sprzedawcę i wybranego przewoźnika albo FBA, odpowiedzialność za dostawę, obsługę klienta i zwroty
-- [About Amazon: Easy Ship – jeszcze łatwiejsze i szybsze wysyłki dla sprzedawców na Amazon.pl](https://www.aboutamazon.pl/wiadomosci/sprzedaz-na-amazon/easy-ship-jeszcze-latwiejsze-i-szybsze-wysylki-dla-sprzedawcow-na-amazon-pl) – Realizacja przez Amazon i przez sprzedawcę, odbiór paczek, dostawa InPost
-- [About Amazon: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – stacje dostawcze, sortowanie według tras, partnerzy na ostatnim etapie dostawy
-- [About Amazon: Pozwól sobie nie pamiętać](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/pozwol-sobie-nie-pamietac-w-sklepie-amazon-pl-niskie-ceny-kazdego-dnia-oraz-szybka-i-darmowa-dostawa-to-mniej-stresu-przy-codziennych-zakupach) – dostawa pod drzwi, do Paczkomatów i punktów odbioru w całej Polsce
-- [About Amazon: Największy unboxing w Polsce](https://www.aboutamazon.pl/wiadomosci/amazon-w-polsce/najwiekszy-unboxing-w-polsce-tak-amazon-pl-swietowal-swoje-5-urodziny) – InPost jako partner logistyczny Amazon.pl, Paczkomaty InPost
-- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, zwrot pieniędzy od Amazona
-- [Your Europe: Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) – 30 dni, dodatkowy termin, rozwiązanie umowy i zwrot pieniędzy
-- [Your Europe: Najczęściej zadawane pytania – Wysyłka i dostawa](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/faq/index_pl.htm) – sprzedawca odpowiada za dostawę, taki sam produkt lub zwrot pieniędzy
-- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona, śledzenie tylko na koncie, co sprawdza Peek, Amazon Shipping i MCF w publicznym systemie śledzenia Amazona
+- [Pomoc Amazon.pl: Śledzenie paczki](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GENAFPTNLHV7ZACW) – „Moje zamówienia”, „Śledź przesyłkę”, identyfikator przesyłki, paczki z centrów logistycznych za granicą, numery od sprzedawców, nazwa sprzedawcy, „Dostarczono”, 48 godzin; „Zamówienia” w prawym górnym rogu; ta sama strona na amazon.com, .co.uk, .de, .fr, .it i .es podaje ich nazwy
+- [Pomoc Amazon.pl: Informacje kontaktowe przewoźników](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GBPEXEXYULHB5WCH) – nazwa przewoźnika i identyfikator przesyłki w „Śledź przesyłkę”; DHL, InPost, Poczta Polska, UPS i DPD z telefonem i stroną
+- [Pomoc Amazon.pl: Zwrot prezentu](https://www.amazon.pl/gp/help/customer/display.html?nodeId=GMTDJ6XPUMN7NWNB) – 17-cyfrowy numer zamówienia
+- [Amazon Help: Missing Tracking Information](https://www.amazon.com/gp/help/customer/display.html?nodeId=G6ZFEB9ZDU7QHMER) – brak numeru, gdy paczka jedzie do przewoźnika, szczegóły po pierwszym skanie
+- [Amazon Help: About Deliveries Shipped with Amazon](https://www.amazon.com/gp/help/customer/display.html?nodeId=GEW3XT9JEMBLTKRV) – zamówienia doręczane przez Amazon Logistics
+- [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – „Returns & Orders”, ikona osoby w aplikacji, „Track package”
+- [About Amazon: 10 tips to protect your Amazon packages from porch pirates](https://www.aboutamazon.com/news/operations/amazon-porch-pirate-prevention-tips) – instrukcje dostawy, zdjęcia z doręczenia
+- [About Amazon UK: How to change your delivery address on Amazon](https://www.aboutamazon.co.uk/news/retail/how-to-change-your-delivery-address-on-amazon) – kto sprzedaje i wysyła, pod przyciskiem zakupu
+- [About Amazon UK: How to contact a seller on Amazon](https://www.aboutamazon.co.uk/news/small-businesses/how-to-contact-amazon-seller) – kontakt ze sprzedawcą z zamówienia
+- [About Amazon: Contact Amazon Customer Service](https://www.aboutamazon.com/news/company-news/contact-amazon-customer-service) – czat lub telefon, pomoc przy spóźnionej dostawie
+- [About Amazon: Pierwsze kroki w sprzedaży na Amazon](https://www.aboutamazon.pl/wiadomosci/sprzedaz-na-amazon/pierwsze-kroki-w-sprzedazy-na-amazon) – wysyłka przez sprzedawcę albo przez Amazon, odpowiedzialność sprzedawcy za dostawę
+- [About Amazon: Amazon rozszerza w Europie Gwarancję od A do Z](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/amazon-rozszerza-w-europie-gwarancje-od-a-do-z) – najpierw sprzedawca, dostawa i stan produktu, zwrot pieniędzy od Amazona
+- [About Amazon: 5 wskazówek, jak rozpoznawać oszustów podszywających się pod Amazon](https://www.aboutamazon.pl/wiadomosci/zakupy-na-amazon/5-wskazowek-jak-rozpoznawac-oszustow-podszywajacych-sie-pod-amazon-i-unikac-ich) – Gwarancja od A do Z dla każdego produktu: terminowa dostawa i stan produktu
+- [About Amazon: Amazon unowocześnia dostawy w Europie](https://www.aboutamazon.pl/wiadomosci/miejsca-pracy-i-inwestycje/amazon-unowoczesnia-dostawy-w-europie) – stacje dostawcze, partnerzy na ostatnim etapie dostawy
+- [About Amazon UK: Amazon CEO Andy Jassy's 2023 Letter to Shareholders](https://www.aboutamazon.co.uk/news/company-news/ceo-andy-jassys-2023-letter-to-shareholders) – Amazon Shipping, sieć dostaw Amazona dla paczek innych firm
+- [Claude Help Center: Get started with Claude in Chrome](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome) – płatne plany Claude, tylko Chrome, instalacja rozszerzenia
+- [Claude Help Center: Use Claude in Chrome safely](https://support.claude.com/en/articles/12902428-use-claude-in-chrome-safely) – za zakupy odpowiadasz Ty; uprawnienia dla każdej strony
+- [ChatGPT: Chrome extension](https://learn.chatgpt.com/docs/chrome-extension) – konfiguracja z aplikacji ChatGPT na komputer; działa na stronach, na których korzystasz z konta po zalogowaniu
+- [Peek: Połącz Peek z Claude, ChatGPT lub Gemini](https://peektracker.com/pl/assistants) – kroki Peek dla Claude i ChatGPT
+- [Peek na GitHubie: narzędzia asystentów](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – co Peek mówi asystentowi o Amazonie: zamówienia i strona śledzenia przesyłki, brak numeru śledzenia w e-mailach Amazona, tylko czytanie
+- [Peek na GitHubie: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – komunikat o numerze zamówienia Amazon, „Otwórz moje zamówienia Amazon”, „Sprawdź ponownie”, kilka numerów w jednym tekście
+- [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona i co sprawdza Peek
 :::

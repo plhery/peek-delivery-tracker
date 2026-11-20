@@ -50876,7 +50876,22 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/London",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "the-delivery-group",
+      "requirements": [
+        {
+          "field": "dpdPostcode",
+          "validator": "internationalPostcode",
+          "optional": true,
+          "showsMore": true,
+          "label": "Delivery postcode",
+          "type": "text",
+          "help": "The delivery postcode can unlock TDG history. An unresolved reference leaves other sources available.",
+          "pattern": "^(?=.{3,12}$)(?=.*[0-9])[A-Za-z0-9]+(?:[ -][A-Za-z0-9]+)*$",
+          "maxLength": 12,
+          "inputMode": "text",
+          "autoComplete": "postal-code"
+        }
+      ]
     },
     "trackingUrlTemplate": "https://tracking.dockethub.com/shipment/{trackingNumber}?style=TDG",
     "linkRules": [],
@@ -58060,7 +58075,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "America/Argentina/Buenos_Aires",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "flechacarga"
     },
     "linkRules": [],
     "detectionRules": [],
@@ -61162,7 +61177,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Europe/Bucharest",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "altex-curier"
     },
     "linkRules": [],
     "detectionRules": [],

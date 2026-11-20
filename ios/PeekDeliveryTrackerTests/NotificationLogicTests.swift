@@ -219,7 +219,8 @@ final class NotificationLogicTests: XCTestCase {
         }
     }
 
-    func testSavingPresetKeepsTheEmailChoice() {
+    func testSavingPresetHoldsNoEmailChoice() {
+        // The email switch saves on its own, so a preset saved later can't put back a choice made since.
         for choice in [true, false, nil] as [Bool?] {
             let saved = preferences(email: choice)
             var draft = NotificationPreferencesDraft(preferences: saved)
@@ -227,11 +228,9 @@ final class NotificationLogicTests: XCTestCase {
             draft.preset = .deliveryDay
             let next = draft.preferences(timezone: saved.timezone)
             XCTAssertEqual(next.enabledStages, NotificationPreset.deliveryDay.stages)
-            XCTAssertEqual(next.emailOnDelivery, choice)
-            // Whether the server can email the account is not the app's to send.
+            XCTAssertNil(next.emailOnDelivery)
             XCTAssertNil(next.emailAvailable)
         }
-        XCTAssertNil(NotificationPreferencesDraft().preferences(timezone: "Europe/Zurich").emailOnDelivery)
     }
 
     func testRequestsLeaveOutWhatTheyDoNotChange() throws {
@@ -244,13 +243,6 @@ final class NotificationLogicTests: XCTestCase {
         let email = try object(PackageNotificationRequest(emailMuted: false))
         XCTAssertEqual(Set(email.keys), ["emailMuted"])
         XCTAssertEqual(email["emailMuted"] as? Bool, false)
-
-        // An account that never chose sends no choice, as a released app does.
-        let unchosen = try object(NotificationPreferencesDraft(preferences: preferences(email: nil)).preferences(timezone: "Europe/Zurich"))
-        XCTAssertEqual(Set(unchosen.keys), ["enabledStages", "timezone"])
-        let declined = try object(NotificationPreferencesDraft(preferences: preferences(email: false)).preferences(timezone: "Europe/Zurich"))
-        XCTAssertEqual(Set(declined.keys), ["enabledStages", "timezone", "emailOnDelivery"])
-        XCTAssertEqual(declined["emailOnDelivery"] as? Bool, false)
     }
 
     func testNothingAboutEmailShowsInTheDemoOrUntilTheServerCanWriteToTheAccount() {

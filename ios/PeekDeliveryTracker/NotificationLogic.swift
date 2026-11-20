@@ -42,25 +42,16 @@ enum NotificationPreset: String, CaseIterable, Identifiable {
     }
 }
 
+/// The events picked on the Notifications screen. The email switch saves on its own, so the draft holds no email.
 struct NotificationPreferencesDraft: Equatable {
     var preset: NotificationPreset
-    /// The account's email choice rides along as it was saved: the email switch
-    /// saves on its own, so saving a preset never changes it.
-    var emailOnDelivery: Bool?
 
     init(preferences: NotificationPreferences? = nil) {
         preset = preferences.map { NotificationPreset.matching($0.enabledStages) } ?? .all
-        emailOnDelivery = preferences?.emailOnDelivery
     }
 
     func preferences(timezone: String) -> NotificationPreferences {
-        NotificationPreferences(
-            enabledStages: preset.stages,
-            quietHoursStart: nil,
-            quietHoursEnd: nil,
-            timezone: timezone,
-            emailOnDelivery: emailOnDelivery
-        )
+        NotificationPreferences(enabledStages: preset.stages, quietHoursStart: nil, quietHoursEnd: nil, timezone: timezone)
     }
 }
 

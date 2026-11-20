@@ -416,13 +416,31 @@ final class DeliveryAPIClient {
                                  body: Patch(markNewUpdates: markNewUpdates, clock: clock, distance: distance))
     }
 
-    func saveNotificationPreferences(_ value: NotificationPreferences) async throws -> NotificationPreferences {
-        var sent = value
-        sent.emailAvailable = nil
-        sent.markNewUpdates = nil
-        sent.clock = nil
-        sent.distance = nil
-        return try await request("/api/push/preferences", method: "PATCH", body: sent)
+    /// Saves the events alone, and clears the retired quiet hours: the delivery email and the display choices save
+    /// on their own, so a change made to them elsewhere stays.
+    func saveNotificationEvents(_ stages: [NotificationStage], timezone: String) async throws -> NotificationPreferences {
+        struct Patch: Encodable {
+            let enabledStages: [NotificationStage]
+            let timezone: String
+            enum CodingKeys: String, CodingKey { case enabledStages, quietHoursStart, quietHoursEnd, timezone }
+            func encode(to encoder: Encoder) throws {
+                var container = encoder.container(keyedBy: CodingKeys.self)
+                try container.encode(enabledStages, forKey: .enabledStages)
+                try container.encodeNil(forKey: .quietHoursStart)
+                try container.encodeNil(forKey: .quietHoursEnd)
+                try container.encode(timezone, forKey: .timezone)
+            }
+        }
+        return try await request("/api/push/preferences", method: "PATCH", body: Patch(enabledStages: stages, timezone: timezone))
+    }
+
+    /// Switches the delivery email alone, so events chosen elsewhere stay.
+    func saveEmailOnDelivery(_ enabled: Bool, timezone: String) async throws -> NotificationPreferences {
+        struct Patch: Encodable {
+            let emailOnDelivery: Bool
+            let timezone: String
+        }
+        return try await request("/api/push/preferences", method: "PATCH", body: Patch(emailOnDelivery: enabled, timezone: timezone))
     }
 
     /// The name the account's device list shows for this one.

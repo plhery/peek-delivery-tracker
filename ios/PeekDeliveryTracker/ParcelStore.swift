@@ -1365,10 +1365,24 @@ final class ParcelStore: ObservableObject {
         }
     }
 
+    /// Saves the events of `value` and clears the retired quiet hours. The delivery email and the display choices
+    /// save on their own, so what `value` says of them is not sent.
     func saveNotificationPreferences(_ value: NotificationPreferences) async throws {
-        let saved = isDemo
-            ? demo.saveNotificationPreferences(value)
-            : try await api.saveNotificationPreferences(value)
+        let saved: NotificationPreferences
+        if isDemo {
+            var stored = demo.notificationPreferences
+            stored.enabledStages = value.enabledStages
+            stored.quietHoursStart = nil
+            stored.quietHoursEnd = nil
+            stored.timezone = value.timezone
+            saved = demo.saveNotificationPreferences(stored)
+        } else {
+            saved = try await api.saveNotificationEvents(value.enabledStages, timezone: value.timezone)
+        }
+        settleNotificationPreferences(saved)
+    }
+
+    private func settleNotificationPreferences(_ saved: NotificationPreferences) {
         notificationPreferenceSaves += 1
         notificationPreferences = saved
         notificationError = nil
@@ -1379,15 +1393,12 @@ final class ParcelStore: ObservableObject {
         DeliveryEmail(isDemo: isDemo, preferences: notificationPreferences, address: session.user?.email)
     }
 
-    /// Switches the account's delivery email at once and apart from the preset: the
-    /// preferences go back as they were last saved, with the new choice and this
-    /// device's time zone, and the server's answer becomes the state.
+    /// Switches the account's delivery email at once and apart from the preset: only the choice and this device's
+    /// time zone are sent, so events chosen elsewhere stay, and the server's answer becomes the state.
     func setEmailOnDelivery(_ enabled: Bool) async throws {
         // Nothing to switch in the demo, or while the server cannot email the account.
-        guard deliveryEmail != nil, var value = notificationPreferences else { return }
-        value.emailOnDelivery = enabled
-        value.timezone = TimeZone.current.identifier
-        try await saveNotificationPreferences(value)
+        guard deliveryEmail != nil else { return }
+        settleNotificationPreferences(try await api.saveEmailOnDelivery(enabled, timezone: TimeZone.current.identifier))
     }
 
     /// Reads the preferences again without a word when that fails: what is loaded stays.

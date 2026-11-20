@@ -4052,7 +4052,7 @@ extension SessionIsolationTests {
         """.utf8)
     }
 
-    @MainActor func testEmailSwitchSendsTheSavedPreferencesAndShowsTheServersAnswer() async throws {
+    @MainActor func testEmailSwitchSendsOnlyTheChoiceAndShowsTheServersAnswer() async throws {
         let transport = transport()
         defer { transport.invalidateAndCancel() }
         let session = SessionStore(configuration: configuration, persistence: MemorySessionPersistence(), transport: transport)
@@ -4075,24 +4075,25 @@ extension SessionIsolationTests {
         XCTAssertEqual(log.requests.map(\.method), ["PATCH"])
         XCTAssertEqual(log.requests.first?.path, "/api/push/preferences")
         let sent = try XCTUnwrap(log.requests.first?.body)
-        // What was last saved goes back with the choice; what only the server knows stays out.
-        XCTAssertEqual(Set(sent.keys), ["enabledStages", "quietHoursStart", "quietHoursEnd", "timezone", "emailOnDelivery"])
+        // Only the choice and the zone go: events chosen elsewhere since this device read them stay.
+        XCTAssertEqual(Set(sent.keys), ["timezone", "emailOnDelivery"])
         XCTAssertEqual(sent["emailOnDelivery"] as? Bool, true)
-        XCTAssertEqual(sent["enabledStages"] as? [String], saved.enabledStages.map(\.rawValue))
-        XCTAssertEqual(sent["quietHoursStart"] as? String, "22:00")
         XCTAssertEqual(sent["timezone"] as? String, TimeZone.current.identifier)
         XCTAssertEqual(store.deliveryEmail?.isOn, true)
 
-        // Saving a preset afterwards carries the choice along unchanged.
+        // Saving a preset afterwards sends the events alone and clears the retired quiet hours: an email switched off
+        // from its link since this device read it stays off.
         var draft = NotificationPreferencesDraft(preferences: store.notificationPreferences)
         draft.preset = .deliveryDay
         var presetAnswer = draft.preferences(timezone: "Europe/Zurich")
+        presetAnswer.emailOnDelivery = true
         presetAnswer.emailAvailable = true
         respond(try JSONEncoder.deliveryTracker.encode(presetAnswer), recording: log)
         try await store.saveNotificationPreferences(draft.preferences(timezone: "Europe/Zurich"))
         let preset = try XCTUnwrap(log.requests.last?.body)
-        XCTAssertEqual(Set(preset.keys), ["enabledStages", "timezone", "emailOnDelivery"])
-        XCTAssertEqual(preset["emailOnDelivery"] as? Bool, true)
+        XCTAssertEqual(Set(preset.keys), ["enabledStages", "quietHoursStart", "quietHoursEnd", "timezone"])
+        XCTAssertTrue(preset["quietHoursStart"] is NSNull)
+        XCTAssertTrue(preset["quietHoursEnd"] is NSNull)
         XCTAssertEqual(store.notificationPreferences?.enabledStages, NotificationPreset.deliveryDay.stages)
         XCTAssertEqual(store.deliveryEmail?.isOn, true)
 

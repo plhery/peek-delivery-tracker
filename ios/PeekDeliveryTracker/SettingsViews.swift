@@ -240,11 +240,7 @@ struct NotificationSettingsView: View {
         }
         .onChange(of: store.notificationPreferences) { old, new in
             // The email switch saves on its own: a preset picked but not saved yet stays picked.
-            if let old, let new, old.enabledStages == new.enabledStages {
-                draft.emailOnDelivery = new.emailOnDelivery
-            } else {
-                hydrate()
-            }
+            if old?.enabledStages != new?.enabledStages { hydrate() }
             // The choice changed after all, here or from a link in an email: the failure is old news.
             if old?.emailOnDelivery != new?.emailOnDelivery { emailFailed = false }
         }

@@ -80931,6 +80931,14 @@
     ]
   },
   {
+    "input": "BY000870933JB",
+    "carrier": "chronopost",
+    "confidence": "high",
+    "candidates": [
+      "chronopost"
+    ]
+  },
+  {
     "input": "BY080004154557",
     "carrier": "europochta",
     "confidence": "high",
@@ -88305,6 +88313,14 @@
     "confidence": "high",
     "candidates": [
       "pos-malaysia"
+    ]
+  },
+  {
+    "input": "EW178243201FR",
+    "carrier": "la-poste",
+    "confidence": "high",
+    "candidates": [
+      "la-poste"
     ]
   },
   {
@@ -107891,9 +107907,11 @@
   },
   {
     "input": "TE1000000010936808NGUS",
-    "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "carrier": "nova-global",
+    "confidence": "high",
+    "candidates": [
+      "nova-global"
+    ]
   },
   {
     "input": "TELP1000004829",
@@ -111645,6 +111663,12 @@
   },
   {
     "input": "YGN9125345TKI/AAF362660",
+    "carrier": "unknown",
+    "confidence": "none",
+    "candidates": []
+  },
+  {
+    "input": "YHC251680103912CN",
     "carrier": "unknown",
     "confidence": "none",
     "candidates": []

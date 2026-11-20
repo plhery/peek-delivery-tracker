@@ -11457,6 +11457,7 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Correo Oficial de la República Argentina",
       "Argentina Post",
+      "Argentine Post",
       "Correo Argentino S.A."
     ],
     "countries": [
@@ -28716,6 +28717,7 @@ export const CARRIER_CAPABILITIES = {
     "aliases": [
       "Nova Poshta Global",
       "NP Global",
+      "NovaPosta Global",
       "Нова Пошта Глобал",
       "Nova Poshta International"
     ],
@@ -28752,6 +28754,10 @@ export const CARRIER_CAPABILITIES = {
       },
       {
         "pattern": "^[A-Z]{5}\\d{10}NPG$",
+        "confidence": "high"
+      },
+      {
+        "pattern": "^TE\\d{16}NGUS$",
         "confidence": "high"
       }
     ],
@@ -58805,7 +58811,7 @@ export const CARRIER_CAPABILITIES = {
     "timezone": "Africa/Casablanca",
     "tracking": {
       "mode": "automatic",
-      "adapter": "universal"
+      "adapter": "chronopost-ma"
     },
     "trackingUrlTemplate": "https://chronopost.ma/suivez-votre-envoi?SendingNumber={trackingNumber}",
     "linkRules": [

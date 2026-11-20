@@ -744,7 +744,8 @@ export function compareNotificationEvents(left: JsonObject, right: JsonObject): 
 interface ParcelTimes {
   latest: ReadonlyMap<string, string>;
   joined: ReadonlyMap<string, string>;
-  known: ReadonlySet<string>;
+  /** The scans of one device's batch for a parcel (`scanNews`). */
+  known: KnownScans;
   archived: ReadonlySet<string>;
 }
 
@@ -756,6 +757,7 @@ async function orNone<T>(load: () => Promise<T>, none: T): Promise<T> {
 const batchParcels = (batches: readonly JsonObject[][]) => batches.map((events) => stringField(events[0]!, 'package_id')).filter(Boolean);
 
 type RecentScans = Awaited<ReturnType<SupabaseServiceClient['recentScans']>>;
+type KnownScans = (batch: readonly JsonObject[]) => ReadonlySet<string>;
 const NO_SCANS: RecentScans = new Map();
 
 /** The parcels' notices in the stage of their scan before them (stageNotices.ts). */
@@ -790,12 +792,13 @@ function twinRepeats(scans: readonly RecentScan[], fresh: ReadonlySet<string>): 
  * scan before them (stageNotices.ts). Copies are looked for only in
  * parcels with a confirmed carrier whose batch holds a universal row. A
  * generated track's moves are no news either (generatedTrack.ts): they are
- * looked for in parcels whose batch holds a scan in transit. With the
- * parcels' recent scans and their notices.
+ * looked for in parcels whose batch holds a scan in transit. A repeat is told
+ * from news by the scans the batch's own device still waits for: a scan only
+ * another device still waits for was told to this one. With the parcels'
+ * recent scans and their notices.
  */
 async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObject[][]) {
   const eventIds = batches.flat().map((event) => stringField(event, 'event_id')).filter(Boolean);
-  const fresh = new Set(eventIds);
   const moving = new Set(batchParcels(batches.filter((events) => events.some((event) => stringField(event, 'stage') === 'in_transit'))));
   const [handoffs, copied, recent] = await Promise.all([
     orNone(() => client.handoffScans(batchParcels(batches)), []),
@@ -803,17 +806,21 @@ async function scanNews(client: SupabaseServiceClient, batches: readonly JsonObj
     batches.length ? orNone(() => client.recentScans(batchParcels(batches)), NO_SCANS) : NO_SCANS,
   ]);
   const notices = noticesIn(recent);
-  const known = new Set([...handoffs.flatMap((row) => [...relayRepeats(row), ...lateScans(row)]),
+  const always = new Set([...handoffs.flatMap((row) => [...relayRepeats(row), ...lateScans(row)]),
     ...copied.flatMap((row) => [...providerCopies(row)]),
     ...notices,
-    ...[...recent].flatMap(([packageId, scans]) => [
-      ...moving.has(packageId) ? generatedScans(scans).map((scan) => scan.id) : [],
-      ...twinRepeats(scans, fresh),
-      ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })), fresh)])]);
+    ...[...recent].flatMap(([packageId, scans]) => moving.has(packageId) ? generatedScans(scans).map((scan) => scan.id) : [])]);
+  const known: KnownScans = (batch) => {
+    const scans = batch.length ? recent.get(stringField(batch[0]!, 'package_id')) : undefined;
+    if (!scans) return always;
+    const waiting = new Set(batch.map((event) => stringField(event, 'event_id')).filter(Boolean));
+    return new Set([...always, ...twinRepeats(scans, waiting),
+      ...repeatedScans(scans.map((scan) => ({ ...scan, at: Date.parse(scan.occurredAt), location: scan.location?.trim() ?? '' })), waiting)]);
+  };
   return { known, recent, notices };
 }
 
-async function knownScans(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<Set<string>> {
+async function knownScans(client: SupabaseServiceClient, batches: readonly JsonObject[][]): Promise<KnownScans> {
   return (await scanNews(client, batches)).known;
 }
 
@@ -861,8 +868,11 @@ async function parcelTimes(
  * news, and a universal copy of a carrier's scan, which the timeline leaves
  * out. None when that is all the batch holds.
  */
-function announcedScan(events: readonly JsonObject[], { known }: Pick<ParcelTimes, 'known'>): JsonObject | undefined {
-  return events.filter((event) => !known.has(stringField(event, 'event_id'))).sort(compareNotificationEvents)[0];
+function announcedScan(
+  events: readonly JsonObject[], { known }: Pick<ParcelTimes, 'known'>, batch: readonly JsonObject[] = events,
+): JsonObject | undefined {
+  const told = known(batch);
+  return events.filter((event) => !told.has(stringField(event, 'event_id'))).sort(compareNotificationEvents)[0];
 }
 
 /**
@@ -871,8 +881,11 @@ function announcedScan(events: readonly JsonObject[], { known }: Pick<ParcelTime
  * return held on the schedule, stored as returned, carries the parcel back further: its newest scan is told as the
  * return's trip back. Whether the batch is news is still judged on its newest scan.
  */
-function toldScan(newest: JsonObject, events: readonly JsonObject[], { known }: Pick<ParcelTimes, 'known'>): JsonObject {
-  const returned = returnUnderWay(events.filter((event) => !known.has(stringField(event, 'event_id'))).sort(compareNotificationEvents));
+function toldScan(
+  newest: JsonObject, events: readonly JsonObject[], { known }: Pick<ParcelTimes, 'known'>, batch: readonly JsonObject[] = events,
+): JsonObject {
+  const told = known(batch);
+  const returned = returnUnderWay(events.filter((event) => !told.has(stringField(event, 'event_id'))).sort(compareNotificationEvents));
   if (returned) return returned;
   return stringField(newest, 'package_stage') === 'returned' && carriesBack(newest.stage) ? { ...newest, stage: 'returned' } : newest;
 }
@@ -1135,7 +1148,7 @@ export class ParcelLinkAlertService {
       const owner = events[0]!.owner === true;
       if (owner && !archive.ids) continue;
       const announced = events.filter((event) => this.announces(event));
-      const newest = announcedScan(announced, times);
+      const newest = announcedScan(announced, times, events);
       const transport = linkAlertTransport(events[0]!);
       const app = transport === 'web' ? null : this.appService(transport);
       const channel = app?.app ?? 'web';
@@ -1161,7 +1174,7 @@ export class ParcelLinkAlertService {
         continue;
       }
       summary.attempted += 1;
-      const told = this.viewerScan(toldScan(newest, announced, times), hiding, recipients);
+      const told = this.viewerScan(toldScan(newest, announced, times, events), hiding, recipients);
       try {
         if (transport !== 'web') await app!.send(this.appDevice(told), this.appPayload(told), `link-${stringField(told, 'link_id')}`);
         else await this.web!.send(told, this.payload(told));

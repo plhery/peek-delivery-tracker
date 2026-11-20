@@ -7,7 +7,7 @@ import type { LookupRecord, StepRecord, StepRecorder } from 'universal-parcel-sc
 import { combineRecorders, errorTypeOf, outcomeOf } from 'universal-parcel-scraper/node';
 import { healthStepRecorder } from './trackingHealth';
 import { selfPacedRefusal } from './trackingFailure';
-import { prometheusStepRecorder, stepOutcome } from './metrics';
+import { currentLookupPurpose, prometheusStepRecorder, stepOutcome, type PurposedLookup } from './metrics';
 import {
   errorDetails, initObservability, logOperationalEvent, reportRoutingEvent, reportTrackingLookup, reportTrackingStep, trackingAttemptId,
 } from './observability';
@@ -188,7 +188,10 @@ export function hostStepRecorder(): StepRecorder {
       if (check) release(check, record.carrier);
       sinks.step(record);
     },
-    lookup: (record) => {
+    lookup: (recorded) => {
+      // A held lookup reaches the sinks once its check ends, outside the call that asked it, so it keeps why it was asked.
+      const purpose = currentLookupPurpose();
+      const record: PurposedLookup = purpose ? { ...recorded, purpose } : recorded;
       const held = heldLookups.getStore();
       if (held && record.outcome === 'ok' && record.carrier === held.carrier) held.records.push({ record, sinks });
       else deliver(record, sinks);

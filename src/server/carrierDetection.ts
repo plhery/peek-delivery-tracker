@@ -10,7 +10,8 @@ import { checkAmazonShipping } from './amazonShippingEligibility';
 import { HttpError } from './api';
 import { isPhoneNumber, isPlaceholderNumber, MAX_RECOGNITIONS, recognitionCandidates, recognizeAll, settleRecognition } from 'universal-parcel-scraper';
 import { preflightTracking } from './trackingPreflight';
-import { recordDetection } from './metrics';
+import { rememberPreflightRecognition } from './preflightRecognition';
+import { recordDetection, withLookupPurpose } from './metrics';
 import { logOperationalEvent } from './observability';
 import type { SupabaseServiceClient } from './supabase';
 import { retainDetectionSupport } from './trackingSupport';
@@ -55,8 +56,12 @@ async function recognize(trackingNumber: string, typed: string, beforeAsking?: (
   const ask = async (carrier: string, context: TrackingContext) => {
     const adapter = (registry ??= createAdapterRegistry()).for(carrier);
     if (!adapter?.recognize) throw new RangeError(`${carrier} cannot recognize a number`);
-    try { return await adapter.recognize(trackingNumber, context); }
-    catch (error) { errors.set(carrier, error); throw error; }
+    try {
+      const answer = await withLookupPurpose('recognition', () => adapter.recognize!(trackingNumber, context));
+      // The saved parcel's first check takes it instead of asking again; an answer past the batch's time took no part here.
+      if (!context.signal?.aborted) rememberPreflightRecognition(carrier, trackingNumber, answer);
+      return answer;
+    } catch (error) { errors.set(carrier, error); throw error; }
   };
   const askBrowser = (carrier: string, context: TrackingContext) => recognizeBrowser(carrier, trackingNumber, context, errors.get(carrier));
   const browserBudget = () => Math.max(1, Math.min(BROWSER_RECOGNITION_BUDGET_MS, Math.floor(deadline - performance.now())));

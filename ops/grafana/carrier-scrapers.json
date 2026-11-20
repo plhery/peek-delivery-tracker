@@ -2585,7 +2585,7 @@
           "type": "timeseries",
           "id": 9,
           "title": "Lookup outcomes",
-          "description": "Every lookup by how it ended, per hour.",
+          "description": "Every lookup by how it ended, per hour. Recognition, asking a carrier whether it knows a number filed under another carrier or none, is one bar of its own, so not_found counts the parcels filed under the carrier.",
           "datasource": {"type": "prometheus", "uid": "${datasource}"},
           "gridPos": {"x": 12, "y": 152, "w": 12, "h": 8},
           "interval": "1h",
@@ -2593,8 +2593,15 @@
             {
               "datasource": {"type": "prometheus", "uid": "${datasource}"},
               "refId": "A",
-              "expr": "sum by (outcome) (increase(carrier_lookup_total{carrier=~\"$carrier\"}[1h]))",
+              "expr": "sum by (outcome) (increase(carrier_lookup_total{carrier=~\"$carrier\", purpose!=\"recognition\"}[1h]))",
               "legendFormat": "{{outcome}}",
+              "range": true
+            },
+            {
+              "datasource": {"type": "prometheus", "uid": "${datasource}"},
+              "refId": "B",
+              "expr": "sum(increase(carrier_lookup_total{carrier=~\"$carrier\", purpose=\"recognition\"}[1h]))",
+              "legendFormat": "recognition",
               "range": true
             }
           ],
@@ -2670,6 +2677,10 @@
               {
                 "matcher": {"id": "byName", "options": "error"},
                 "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "dark-orange"}}]
+              },
+              {
+                "matcher": {"id": "byName", "options": "recognition"},
+                "properties": [{"id": "color", "value": {"mode": "fixed", "fixedColor": "#898781"}}]
               }
             ]
           },

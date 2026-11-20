@@ -1160,7 +1160,7 @@ dashboard's failure panels leave out.
 | --- | --- |
 | `carrier_step_duration_seconds` (carrier, step, outcome) | How long each step takes |
 | `carrier_step_total` (+ error_type, reason) | Which step fails, and how. `reason` is the scraper's code for why (`verification_refused`, `portal_not_found`), `none` without one |
-| `carrier_lookup_total` (carrier, final_step, outcome, attempts, reason) | Which step served the result, after how many attempts, and why the last one failed |
+| `carrier_lookup_total` (carrier, final_step, outcome, attempts, reason, purpose) | Which step served the result, after how many attempts, and why the last one failed. `purpose` is `recognition` for asking a carrier whether it knows a number filed under another carrier or none (the Add sheet's and a check's recognition, by HTTP or in a browser), `tracking` otherwise: a carrier's `not_found` among `tracking` lookups counts the parcels filed under it |
 | `carrier_fallback_total` (from_step, to_step, reason) | How often recovery is needed |
 | `carrier_recovery_total` (carrier, from_step, to_step, reason, outcome) | Whether each completed recovery step returned history or failed again |
 | `carrier_status_mapping_total` (carrier, stage_source) | Share of events mapped explicitly, by wording, or not at all |

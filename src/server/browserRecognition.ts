@@ -3,6 +3,7 @@ import 'server-only';
 import { explicitOffsetTime, isoTime, settleRecognition } from 'universal-parcel-scraper';
 import type { BrowserRecognition, TrackingContext } from 'universal-parcel-scraper/node';
 import { createAdapterRegistry } from './adapterRegistry';
+import { withLookupPurpose } from './metrics';
 import { requireRoyalBrowser, usesRoyalBrowser } from './royalBrowserAdmission';
 
 export const BROWSER_RECOGNITION_BUDGET_MS = 20_000;
@@ -60,10 +61,10 @@ export async function recognizeBrowser(carrier: string, number: string, context:
     const controller = new AbortController();
     const adapter = (registry ??= createAdapterRegistry()).for(carrier);
     if (!adapter?.recognizeWithBrowser) throw new RangeError(`${carrier} cannot confirm through a browser`);
-    const promise = Promise.resolve().then(() => adapter.recognizeWithBrowser!(number, {
+    const promise = Promise.resolve().then(() => withLookupPurpose('recognition', () => adapter.recognizeWithBrowser!(number, {
       // The first caller can be preflight; a joined saved-parcel caller must not inherit its shorter deadline.
       signal: controller.signal, budgetMs: workBudget,
-    }, previousError)).then((answer) => {
+    }, previousError))).then((answer) => {
       controller.signal.throwIfAborted();
       remember(key, structuredClone(answer));
       return answer;

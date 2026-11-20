@@ -54,6 +54,7 @@ import { BudgetExceededError, IndeterminateError, InputRequiredError, InvalidInp
 import * as scraper from 'universal-parcel-scraper';
 import { doubled, s10 } from '../test/trackingNumbers';
 import { withEventPlaces } from './eventPlaces';
+import { rememberPreflightRecognition } from './preflightRecognition';
 
 // Keep the published plan configurable without changing the scraper's other exports.
 vi.mock(import('universal-parcel-scraper'), async importOriginal => ({ ...await importOriginal() }));
@@ -1674,6 +1675,54 @@ describe('TrackingSyncService', () => {
     adapter.recognize.mockClear();
     await service.syncPackage({ ...parcel, ...saved });
     expect(adapter.recognize).toHaveBeenCalledTimes(5);
+  });
+
+  it('takes what carriers answered the Add sheet moments ago instead of asking them again, and asks the others', async () => {
+    const carriers = ['dpd', 'seur', 'brt', 'relais-colis', 'ciblex'];
+    vi.spyOn(scraper, 'recognitionCandidates').mockReturnValue(carriers.map((carrier) => ({ carrier, needsInput: null, preferred: false })));
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const adapter = { fetch: vi.fn(), fetchUniversal: vi.fn().mockRejectedValue(new NoHistoryError('ParcelsApp')),
+      recognize: vi.fn().mockResolvedValue({ known: false }) };
+    // The sheet had answers from DPD, SEUR and Relais Colis about the number; BRT did not answer it, and Ciblex was not asked.
+    const number = '00000000000002';
+    for (const carrier of ['dpd', 'seur', 'relais-colis']) rememberPreflightRecognition(carrier, number, { known: false });
+    const parcel: JsonObject = { id: 'from-sheet', carrier: 'unknown', tracking_number: number, current_stage: 'pending',
+      created_at: '2026-09-10T11:59:00Z', carrier_data: { add_recognition_pending: true } };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage(parcel);
+    expect(adapter.recognize.mock.calls.map(([carrier]) => carrier)).toEqual(['brt', 'ciblex']);
+    // Each of the five was asked about the number, so each waits its hour before the next ask.
+    const probes = client.updatePackage.mock.calls.at(-1)![1].carrier_data.routing.candidate_probes;
+    expect(Object.keys(probes).sort()).toEqual([...carriers].sort());
+    expect(Object.values(probes).map((probe) => (probe as JsonObject).count)).toEqual([1, 1, 1, 1, 1]);
+    // An answer stands in once: the parcel's next check asks every carrier itself.
+    adapter.recognize.mockClear();
+    await service.syncPackage({ ...parcel, carrier_data: { routing: { version: 1, configured_carrier: 'unknown', failures: {} } } });
+    expect(adapter.recognize.mock.calls.map(([carrier]) => carrier)).toEqual(carriers);
+  });
+
+  it('still files a parcel under the carrier that told the Add sheet it knows the number', async () => {
+    vi.spyOn(scraper, 'recognitionCandidates').mockReturnValue(['dpd', 'seur'].map((carrier) => ({ carrier, needsInput: null, preferred: false })));
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    const progress = { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:00:00Z',
+      events: [{ occurred_at: '2026-09-10T11:00:00Z', stage: 'in_transit', description: 'En tránsito' }] };
+    const adapter = { fetch: vi.fn().mockResolvedValue(progress), fetchUniversal: vi.fn().mockRejectedValue(new NoHistoryError('ParcelsApp')),
+      recognize: vi.fn().mockResolvedValue({ known: false }) };
+    const number = '00000000000003';
+    rememberPreflightRecognition('seur', number, { known: true, lastActivityAt: '2026-09-10T11:00:00Z' });
+    const parcel: JsonObject = { id: 'known-to-sheet', carrier: 'unknown', tracking_number: number, current_stage: 'pending',
+      created_at: '2026-09-10T11:59:00Z', carrier_data: { add_recognition_pending: true } };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage(parcel);
+    expect(adapter.recognize.mock.calls.map(([carrier]) => carrier)).toEqual(['dpd']);
+    expect(adapter.fetch.mock.calls.map(([carrier]) => carrier)).toContain('seur');
+    expect(client.updatePackage.mock.calls.at(-1)![1]).toMatchObject({ carrier_data: { routing: { confirmed_carrier: 'seur' } } });
   });
 
   it.each([

@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { AsyncLocalStorage } from 'node:async_hooks';
 import * as Sentry from '@sentry/node';
 import { Counter, Gauge, Histogram, Registry, collectDefaultMetrics, type LabelValues } from '@prometheus-io/client';
 import { CarrierError, NoHistoryError } from 'universal-parcel-scraper';
@@ -42,14 +43,14 @@ export type SyncQueueKind = 'account' | 'lookup' | 'scheduled' | 'release';
 export type SyncQueue = Record<SyncQueueKind, { queued: number; oldestSeconds: number }>;
 
 /** Bump when the series or their labels change, so a hot-reloaded copy does not reuse an older shape. */
-const RUNTIME_VERSION = 23;
+const RUNTIME_VERSION = 24;
 
 interface PrometheusRuntime {
   version: number;
   registry: Registry;
   stepDuration: Histogram<'carrier' | 'step' | 'outcome'>;
   stepTotal: Counter<'carrier' | 'step' | 'outcome' | 'error_type' | 'reason'>;
-  lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts' | 'reason'>;
+  lookupTotal: Counter<'carrier' | 'final_step' | 'outcome' | 'attempts' | 'reason' | 'purpose'>;
   fallbackTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason'>;
   recoveryTotal: Counter<'carrier' | 'from_step' | 'to_step' | 'reason' | 'outcome'>;
   browserNetworkBytes: Counter<'carrier' | 'attempt' | 'route'>;
@@ -131,8 +132,8 @@ function createRuntime(): PrometheusRuntime {
     }),
     lookupTotal: new Counter({
       name: METRICS.lookupTotal,
-      help: 'Carrier lookups by the step that produced the result and the step attempts it took.',
-      labelNames: ['carrier', 'final_step', 'outcome', 'attempts', 'reason'] as const,
+      help: 'Carrier lookups by the step that produced the result, the step attempts it took and why the carrier was asked.',
+      labelNames: ['carrier', 'final_step', 'outcome', 'attempts', 'reason', 'purpose'] as const,
       registers: [registry],
     }),
     fallbackTotal: new Counter({
@@ -490,9 +491,33 @@ export const prometheusStepRecorder: StepRecorder = {
       carrier: record.carrier, final_step: record.finalStep ?? 'none', outcome: stepOutcome(record.outcome, record.error),
       attempts: String(Math.min(Math.max(Math.trunc(record.attempts) || 0, 0), 9)),
       reason: carrierErrorReason(record.error) ?? 'none',
+      purpose: (record as PurposedLookup).purpose ?? lookupPurposes.getStore() ?? 'tracking',
     });
   },
 };
+
+/**
+ * Why a carrier was asked: `recognition` when the question was whether it knows a number filed under another carrier
+ * or none (the Add sheet's and a check's recognition, by HTTP or in a browser), `tracking` for every other lookup. A
+ * carrier's `not_found` then counts the parcels filed under it apart from the numbers it was only asked about.
+ */
+export type LookupPurpose = 'tracking' | 'recognition';
+/** A lookup that a check delivers after the call that asked it has ended carries its purpose on the record. */
+export type PurposedLookup = LookupRecord & { purpose?: LookupPurpose };
+// One store per process: Next compiles the API and instrumentation worker into different module instances.
+const purposeKey = Symbol.for('peek.lookupPurpose');
+const purposeScope = globalThis as typeof globalThis & { [purposeKey]?: AsyncLocalStorage<LookupPurpose> };
+const lookupPurposes = purposeScope[purposeKey] ??= new AsyncLocalStorage<LookupPurpose>();
+
+/** Runs the operation with its carrier lookups counted under `purpose`. */
+export function withLookupPurpose<T>(purpose: LookupPurpose, operation: () => T): T {
+  return lookupPurposes.run(purpose, operation);
+}
+
+/** Why the lookup running here was asked, when something said so. */
+export function currentLookupPurpose(): LookupPurpose | undefined {
+  return lookupPurposes.getStore();
+}
 
 export type RefreshSource = 'adapter' | 'other_adapter' | 'provider' | 'none';
 

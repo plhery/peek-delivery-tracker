@@ -140,7 +140,26 @@ describe('sentryStepRecorder', () => {
     hostStepRecorder().lookup({ carrier: 'gls-de', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 1, attempts: 1 });
     // A new series reads 0 on its first scrape; the second carries the count.
     await metricsText();
-    expect(await metricsText()).toContain('carrier_lookup_total{carrier="gls-de",final_step="direct",outcome="ok",attempts="1",reason="none"} 1');
+    expect(await metricsText()).toContain('carrier_lookup_total{carrier="gls-de",final_step="direct",outcome="ok",attempts="1",reason="none",purpose="tracking"} 1');
+  });
+
+  it('counts a recognition lookup apart, a successful one its check holds until the end included', async () => {
+    const { metricsText, withLookupPurpose } = await import('./metrics');
+    const recorder = hostStepRecorder();
+    const lookup = { finalStep: 'direct', durationMs: 1, attempts: 1 } as const;
+    await withLookupVerdicts(async () => {
+      await withLookupPurpose('recognition', async () => {
+        recorder.lookup({ ...lookup, carrier: 'dpd-pt', outcome: 'not_found', errorType: 'NotFoundError' });
+        recorder.lookup({ ...lookup, carrier: 'dpd-uk', outcome: 'ok', errorType: null });
+      });
+      // The parcel's own carrier, after recognition: it lets the held answer go, which stays a recognition's.
+      recorder.lookup({ ...lookup, carrier: 'dpd-uk', outcome: 'not_found', errorType: 'NotFoundError' });
+    });
+    await metricsText();
+    const text = await metricsText();
+    expect(text).toContain('carrier_lookup_total{carrier="dpd-pt",final_step="direct",outcome="not_found",attempts="1",reason="none",purpose="recognition"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="dpd-uk",final_step="direct",outcome="ok",attempts="1",reason="none",purpose="recognition"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="dpd-uk",final_step="direct",outcome="not_found",attempts="1",reason="none",purpose="tracking"} 1');
   });
 
   it('tells the running check which tier its lookup went through, for whom, and how it ended', () => {

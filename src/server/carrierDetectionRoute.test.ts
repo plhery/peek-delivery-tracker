@@ -6,6 +6,7 @@ import { POST } from '../../app/api/carriers/detect/route';
 import { POST as detectWithoutAccount } from '../../app/api/public/detect/route';
 import { detectCarrierMatch, MAX_RECOGNITIONS, recognitionAskedCarriers } from '../lib/carriers';
 import { preflightTracking } from './trackingPreflight';
+import { takePreflightRecognition } from './preflightRecognition';
 import * as amazon from './amazonShippingEligibility';
 import { SupabaseAuthenticator } from './auth';
 import * as metrics from './metrics';
@@ -286,6 +287,21 @@ it('answers unknown when no carrier knows the number or one fails, and asks agai
   expect(await (await request('06080000000035')).json()).toEqual({ trackingNumber: '06080000000035', carrier: 'unknown', asked: bothBatches('06080000000035') });
   await request('06080000000035');
   expect(asked()).toEqual(bothBatches('06080000000035'));
+});
+
+it("keeps each carrier's answer for the saved parcel's first check, and nothing from a carrier that failed", async () => {
+  const number = '06080000000126';
+  recognize.mockImplementation(async (carrier: string) => {
+    if (carrier === 'dpd') throw new Error('guest API unreachable');
+    return { known: false };
+  });
+  await request(number);
+  const answered = bothBatches(number).filter((carrier) => carrier !== 'dpd');
+  expect(answered.length).toBeGreaterThan(0);
+  expect(takePreflightRecognition('dpd', number)).toBeUndefined();
+  for (const carrier of answered) expect(takePreflightRecognition(carrier, number)).toEqual({ known: false });
+  // The check takes each answer once.
+  expect(takePreflightRecognition(answered[0]!, number)).toBeUndefined();
 });
 
 it('asks the next five carriers only when none of the first five knows the number', async () => {

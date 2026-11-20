@@ -93,7 +93,7 @@ describe('prometheus carrier metrics', () => {
     const text = await scraped();
     expect(text).toContain('carrier_step_total{carrier="ups",step="direct",outcome="challenge",error_type="ChallengeError",reason="none"} 1');
     expect(text).toContain('carrier_fallback_total{carrier="ups",from_step="direct",to_step="trawl",reason="challenge"} 1');
-    expect(text).toContain('carrier_lookup_total{carrier="ups",final_step="trawl",outcome="ok",attempts="2",reason="none"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="ups",final_step="trawl",outcome="ok",attempts="2",reason="none",purpose="tracking"} 1');
     expect(text).toContain('carrier_status_mapping_total{carrier="ups",stage_source="wording"} 1');
     expect(text).toContain('carrier_status_mapping_total{carrier="ups",stage_source="carrier_map"} 1');
     expect(text).toContain('carrier_detection_total{result="high"} 1');
@@ -116,7 +116,7 @@ describe('prometheus carrier metrics', () => {
     });
     const text = await scraped();
     expect(text).toContain('carrier_step_total{carrier="zto",step="trawl",outcome="challenge",error_type="ChallengeError",reason="verification_refused"} 1');
-    expect(text).toContain('carrier_lookup_total{carrier="zto",final_step="trawl",outcome="challenge",attempts="2",reason="verification_refused"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="zto",final_step="trawl",outcome="challenge",attempts="2",reason="verification_refused",purpose="tracking"} 1');
     expect(text).toContain('carrier_step_total{carrier="zto",step="direct",outcome="challenge",error_type="ChallengeError",reason="none"} 1');
     expect(text).not.toContain('Provider wording');
   });
@@ -125,7 +125,7 @@ describe('prometheus carrier metrics', () => {
     metrics.prometheusStepRecorder.lookup({ carrier: 'jd-logistics', finalStep: 'trawl', outcome: 'challenge',
       errorType: 'ChallengeError', durationMs: 1000, attempts: 2,
       error: new ChallengeError('JD Logistics', 'Unanswered verification', { reason: 'verification_unreadable' }) });
-    expect(await scraped()).toContain('carrier_lookup_total{carrier="jd-logistics",final_step="trawl",outcome="challenge",attempts="2",reason="verification_unreadable"} 1');
+    expect(await scraped()).toContain('carrier_lookup_total{carrier="jd-logistics",final_step="trawl",outcome="challenge",attempts="2",reason="verification_unreadable",purpose="tracking"} 1');
   });
 
   it('tells a provider with no history yet apart from an indeterminate failure', async () => {
@@ -148,7 +148,7 @@ describe('prometheus carrier metrics', () => {
     expect(text).toContain('carrier_step_total{carrier="india-post",step="direct",outcome="no_history",error_type="SeventeenTrackNoHistoryError",reason="none"} 1');
     expect(text).toContain('carrier_step_total{carrier="india-post",step="provider",outcome="indeterminate",error_type="IndeterminateError",reason="none"} 1');
     expect(text).toContain('carrier_fallback_total{carrier="india-post",from_step="direct",to_step="provider",reason="no_history"} 1');
-    expect(text).toContain('carrier_lookup_total{carrier="india-post",final_step="direct",outcome="no_history",attempts="2",reason="none"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="india-post",final_step="direct",outcome="no_history",attempts="2",reason="none",purpose="tracking"} 1');
   });
 
   it('files a carrier whose tracking does not know the item as no history, not as a failure', async () => {
@@ -182,7 +182,7 @@ describe('prometheus carrier metrics', () => {
     recording.prometheusStepRecorder.lookup({ carrier: 'dpd', finalStep: 'direct', outcome: 'ok', errorType: null, durationMs: 400, attempts: 1 });
     recording.recordStatusMapping('dpd', 'none');
     const text = await scraped(scraping);
-    expect(text).toContain('carrier_lookup_total{carrier="dpd",final_step="direct",outcome="ok",attempts="1",reason="none"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="dpd",final_step="direct",outcome="ok",attempts="1",reason="none",purpose="tracking"} 1');
     expect(text).toContain('carrier_status_mapping_total{carrier="dpd",stage_source="none"} 1');
     expect(scraping.registry).toBe(recording.registry);
   });
@@ -299,8 +299,8 @@ describe('prometheus carrier metrics', () => {
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'ok', errorType: null, durationMs: 3200, attempts: 3 });
     metrics.prometheusStepRecorder.lookup({ carrier: 'la-poste', finalStep: 'retry', outcome: 'challenge', errorType: 'UpstreamHttpError', durationMs: 6000, attempts: 40 });
     const text = await scraped();
-    expect(text).toContain('carrier_lookup_total{carrier="la-poste",final_step="retry",outcome="ok",attempts="3",reason="none"} 1');
-    expect(text).toContain('carrier_lookup_total{carrier="la-poste",final_step="retry",outcome="challenge",attempts="9",reason="none"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="la-poste",final_step="retry",outcome="ok",attempts="3",reason="none",purpose="tracking"} 1');
+    expect(text).toContain('carrier_lookup_total{carrier="la-poste",final_step="retry",outcome="challenge",attempts="9",reason="none",purpose="tracking"} 1');
   });
 
   it('shows a new series at 0 before counting it, so a restart cannot hide its first update', async () => {

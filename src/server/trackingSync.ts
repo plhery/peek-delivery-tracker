@@ -34,7 +34,8 @@ import { refusesNumber } from './numberRefusal';
 import { recognizeBrowser, takeBrowserHistory } from './browserRecognition';
 import { requireRoyalBrowser, royalBrowserAllowed, usesRoyalBrowser, withRoyalBrowserAdmission } from './royalBrowserAdmission';
 import { hostStepRecorder, watchingSteps, withHeldLookups } from './stepRecorder';
-import { recordScheduledBacklog, recordScheduledRunGaveWay, recordStatusMapping } from './metrics';
+import { recordScheduledBacklog, recordScheduledRunGaveWay, recordStatusMapping, withLookupPurpose } from './metrics';
+import { takePreflightRecognition } from './preflightRecognition';
 import {
   captureOperationalError,
   errorType,
@@ -1121,7 +1122,7 @@ export class CarrierTrackingAdapter implements TrackingAdapter {
   async recognize(carrierId: string, trackingNumber: string, context?: TrackingContext): Promise<Recognition> {
     const registered = this.registry.for(carrierId);
     if (!registered?.recognize) throw new RangeError(`${carrierId} cannot recognize a number`);
-    return await registered.recognize(trackingNumber, context);
+    return await withLookupPurpose('recognition', () => registered.recognize!(trackingNumber, context));
   }
 
   recognizeBrowser = recognizeBrowser;
@@ -2812,8 +2813,10 @@ export class TrackingSyncService {
             ...(this.adapter.plannedScans ? { plannedScans: (carrier: string) => this.adapter.plannedScans!(carrier) } : {}),
             withoutCopies: (watermark: number, value: RoutedResult, provider?: CarrierResult) => watermarkWithoutCopies(parcel, watermark, value, provider, now.getTime()),
             newScans: (value: RoutedResult) => scansMissing(parcel, value),
+            // What the carrier answered the Add sheet a moment ago stands for asking it again.
             ...(this.adapter.recognize ? { recognize: (carrier: string, number: string, context?: TrackingContext) =>
-              once(recognitionKey('http', carrier, number), () => this.adapter.recognize!(carrier, number, context)) } : {}),
+              once(recognitionKey('http', carrier, number), async () => takePreflightRecognition(carrier, number)
+                ?? await this.adapter.recognize!(carrier, number, context)) } : {}),
             ...(this.adapter.recognizeBrowser ? { recognizeBrowser: (carrier: string, number: string, context?: TrackingContext, previousError?: unknown) =>
               once(recognitionKey('browser', carrier, number), () => this.adapter.recognizeBrowser!(carrier, number, context, previousError)) } : {}),
             enablePostalNinja: process.env.TRACKING_ENABLE_POSTAL_NINJA === 'true',

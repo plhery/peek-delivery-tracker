@@ -46,6 +46,17 @@ describe('stored scan replay', () => {
     expect(changes).toEqual([expect.objectContaining({ row: 'read', from: 'in_transit', to: 'registered', reason: 'notice', stageSource: 'none' })]);
   });
 
+  it('marks a notice that keeps the stage it has, as the sync marks it, and leaves one already marked', () => {
+    const changes = replayParcel(parcel(
+      scan('hub', 'dpd-de', '2026-10-18T10:00:00Z', 'in_transit', 'At the hub', { provider_code: 'ZZZ', stage: 'in_transit' }),
+      scan('unmarked', 'dpd-de', '2026-10-18T11:00:00Z', 'in_transit', 'Delivery notice sent', { provider_code: 'MSDLO', stage_source: 'wording:language' }),
+      scan('marked', 'dpd-de', '2026-10-18T12:00:00Z', 'in_transit', 'Delivery notice sent again', { provider_code: 'MSDLO', stage_source: 'none', kept_stage: true }),
+    ));
+
+    expect(changes).toEqual([expect.objectContaining({ row: 'unmarked', from: 'in_transit', to: 'in_transit', reason: 'notice', stageSource: 'none' })]);
+    expect(replaySql(changes)).toContain(`raw_data = (raw_data - 'kept_stage') || '{"stage":"in_transit","stage_source":"none","kept_stage":true}'::jsonb`);
+  });
+
   it("reads a registration dated after the answer's first movement in transit, as the scraper reads each answer", () => {
     const moved = scan('moved', 'jrt', '2026-10-18T10:00:00Z', 'in_transit', 'Departed from facility', { stage: 'in_transit' });
     // A partner's label written once the parcel is on its way, stored as the sync stores it, and one stored before
@@ -108,7 +119,11 @@ describe('stored scan replay', () => {
       scan('pending', 'dpd-de', '2026-10-18T12:00:00Z', 'pending', 'Delivery notice sent again', { provider_code: 'MSDLO', stage_source: 'wording:language' }),
     ));
 
-    expect(changes).toEqual([expect.objectContaining({ row: 'mapped', from: 'delivered', to: 'pending', reason: 'notice', declared: 'delivered', stageSource: 'none' })]);
+    // The notice stored pending already is marked one too.
+    expect(changes).toEqual([
+      expect.objectContaining({ row: 'mapped', from: 'delivered', to: 'pending', reason: 'notice', declared: 'delivered', stageSource: 'none' }),
+      expect.objectContaining({ row: 'pending', from: 'pending', to: 'pending', reason: 'notice', declared: 'delivered', stageSource: 'none' }),
+    ]);
     const sql = replaySql(changes);
     expect(sql).toContain("set stage = 'pending'");
     // Marked a notice, as the sync marks it; a row restaged otherwise loses the mark.

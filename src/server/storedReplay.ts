@@ -10,7 +10,7 @@
  * what its source's status map says of its code and wording (`statusMapAnswer`): a stage the map
  * now gives otherwise, a notice the map says keeps the stage it had, which takes the stage its
  * adapter gave the source's scan before it and is stored as the sync stores it (`scanStages`:
- * pending after the delivery round), and, where the map knows neither, the wording rules for a
+ * pending after the delivery round, and marked one where its stage stays), and, where the map knows neither, the wording rules for a
  * scan its adapter gave no stage. A scan its adapter gave the stage of the scan before it, with no
  * source of its own, keeps it whatever the map says of its code. A registration dated over a minute after the answer's
  * first movement is in transit, as the scraper reads each answer (`resolveResult`), unless the sync stored it or its
@@ -35,6 +35,7 @@ import { currentScan, sortEventsDesc, tieOrder } from '../lib/stages';
 import type { Stage } from '../types';
 import { KEEPS_STAGE, scanStages, UNCONFIRMED_DELIVERY_MS } from './disputedDelivery';
 import { providerEventId, scanDay, UNIVERSAL_PROVIDER, unnamedRowCarrier } from './eventIdentity';
+import { keptStage } from './stageNotices';
 import { isRecord, type JsonObject } from './types';
 
 export interface StoredScan {
@@ -357,7 +358,9 @@ function replayedStages(parcel: StoredParcel, source: string, ordered: StoredSca
   return ordered.flatMap((scan, index): StageChange[] => {
     const reason = reasons[index];
     const to = stages[index];
-    if (!reason || to === scan.stage) return [];
+    // A notice that keeps the stage it has is still marked one, as the sync marks it (keptNotices): the apps show it
+    // under the scan before it, not as a step of its own (iMile's booked delivery day under its transit code).
+    if (!reason || (to === scan.stage && !(reason === 'notice' && !keptStage(scan.raw.kept_stage)))) return [];
     return [{
       kind: 'stage', parcel: parcel.id, row: scan.id, source, open: parcel.open, from: scan.stage, to,
       code: text(scan.raw.provider_code), reason, declared: text(scans[index].stage),

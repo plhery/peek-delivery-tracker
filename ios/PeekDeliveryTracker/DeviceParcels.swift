@@ -116,14 +116,20 @@ struct PostcodeMemory {
 /// Lookups are counted for each network; the day's count is spent.
 struct DeviceLookupsSpent: Error, Equatable {}
 
+/// How a parcel's link is read. On screen, the read counts as a look, and checks a parcel that is due one. With no
+/// window on screen, it does neither. By its owner's hand, with the key, it also checks one not due yet, at most every
+/// 2 minutes and as often as the carrier and the service allow.
+enum DeviceParcelRead: Equatable, Sendable {
+    case shown, hidden, byHand
+}
+
 /// How the device's parcels reach the service: no sign-in and no cookies, the link's id and
 /// its owner key only.
 struct DeviceParcelClient: Sendable {
     var lookup: @Sendable (PublicLookupRequest) async throws -> PublicLookupResponse
     /// Nil when the service no longer has the parcel, or no longer shares it with a reader without the key: its own 404
-    /// or 410. A proxy's 404 while the server restarts throws, and the parcel stays. `hidden`: read with no window on
-    /// screen, so the service doesn't count it as a look.
-    var read: @Sendable (_ linkID: String, _ key: String?, _ hidden: Bool) async throws -> PublicParcelResponse?
+    /// or 410. A proxy's 404 while the server restarts throws, and the parcel stays.
+    var read: @Sendable (_ linkID: String, _ key: String?, DeviceParcelRead) async throws -> PublicParcelResponse?
     var forget: @Sendable (_ linkID: String, _ key: String) async throws -> Void
     /// Moves a link of this iPhone's own to the parcel of its number with another carrier, link, postcode or phone
     /// digits, which the service finds or looks up. The link keeps all it holds. Nil when the service no longer has it.
@@ -186,9 +192,14 @@ struct DeviceParcelClient: Sendable {
                 guard response.statusCode == 201 || response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicLookupResponse.self, data)
             },
-            read: { linkID, key, hidden in
-                let (data, response) = try await send("api/public/parcels/\(linkID)", method: "GET", key: key,
-                                                      query: hidden ? [URLQueryItem(name: "hidden", value: "true")] : [])
+            read: { linkID, key, mode in
+                let query: [URLQueryItem] = switch mode {
+                case .shown: []
+                case .hidden: [URLQueryItem(name: "hidden", value: "true")]
+                // Only the owner's read asks for a check.
+                case .byHand: key == nil ? [] : [URLQueryItem(name: "refresh", value: "true")]
+                }
+                let (data, response) = try await send("api/public/parcels/\(linkID)", method: "GET", key: key, query: query)
                 if response.statusCode == 410 || response.isServiceNotFound(data) { return nil }
                 guard response.statusCode == 200 else { throw failure(data, response) }
                 return try decode(PublicParcelResponse.self, data)
@@ -372,6 +383,9 @@ final class DeviceParcels {
     private var forgotten: [DeviceParcel]
     /// Links of this iPhone's own forgotten here that the service is still to forget, with their keys.
     private var forgetting: [String: String]
+    /// Links whose last answer said a check of their parcel is queued or under way. Not kept on file: a launch reads
+    /// every parcel again anyway.
+    private var checking: Set<String> = []
     private var savedForgetting: [String: String]
     private var unqueuedForgetIDs: Set<String>
     /// The tokens and languages rounds of notification requests are under way for.
@@ -432,9 +446,16 @@ final class DeviceParcels {
     /// When the service last answered about one of the parcels: how old what the list shows is at most.
     var lastCheckedAt: Date? { entries.map(\.checkedAt).max() }
 
-    /// Whether a parcel still waits for its carrier's first answer, which is worth asking about again soon. A copy no
-    /// longer updated waits for nothing.
-    var isWaiting: Bool { entries.contains { !$0.isFrozen && Self.waiting($0.parcel) } }
+    /// Whether a parcel still waits for its carrier's first answer, or for a check the service said it queued, which is
+    /// worth asking about again soon. A copy no longer updated waits for nothing.
+    var isWaiting: Bool { entries.contains(where: waits) }
+
+    /// Whether a check the service said it queued, such as one its owner asked for by hand, is still to land.
+    var isChecking: Bool { entries.contains { !$0.isFrozen && checking.contains($0.linkID) } }
+
+    private func waits(_ entry: DeviceParcel) -> Bool {
+        !entry.isFrozen && (Self.waiting(entry.parcel) || checking.contains(entry.linkID))
+    }
 
     func detect(trackingNumber: String, typedNumber: String? = nil) async throws -> CarrierDetectionResponse {
         guard let client else { throw DeliveryAPIError.serviceFailed(503) }
@@ -512,10 +533,11 @@ final class DeviceParcels {
     /// Reads every parcel whose answer has gone stale, or every one when `all`, and brings back
     /// the ones whose last answer was lost. A lookup of this iPhone's own that the service no longer has stays as it was
     /// last shown, no longer updated (`freeze`); someone else's parcel it no longer has leaves the list, as the answer
-    /// doesn't say why its link ended. A copy no longer updated is never read again. The first trouble ends the round and is thrown; the list keeps what the device has. `hidden`: read with no
-    /// window on screen. Returns whether the service answered anything, a forget included.
+    /// doesn't say why its link ended. A copy no longer updated is never read again. The first trouble ends the round and is thrown; the list keeps what the device has. A parcel whose
+    /// answer says a check is queued or under way (`checkQueued`) is read again as soon as one waiting for its first
+    /// answer (`isWaiting`). Returns whether the service answered anything, a forget included.
     @discardableResult
-    func refresh(all: Bool = false, only id: UUID? = nil, hidden: Bool = false) async throws -> Bool {
+    func refresh(all: Bool = false, only id: UUID? = nil, read mode: DeviceParcelRead = .shown) async throws -> Bool {
         guard let client else { return false }
         var contacted = await stopForgottenAlerts(client)
         if await stopMutedAlerts(client) { contacted = true }
@@ -526,11 +548,13 @@ final class DeviceParcels {
             guard !entry.isFrozen, key != nil || entry.isViewer else { continue }
             let age = now().timeIntervalSince(entry.checkedAt)
             let settled = Self.over(entry.parcel)
-            let fresh = Self.waiting(entry.parcel) ? Self.waitingFresh : settled ? Self.settledFresh : Self.fresh
+            let fresh = waits(entry) ? Self.waitingFresh : settled ? Self.settledFresh : Self.fresh
             guard all || id != nil || age < 0 || age >= fresh else { continue }
             do {
-                let response = try await client.read(entry.linkID, key, hidden)
+                // Someone else's parcel is theirs to check: it is read as on screen.
+                let response = try await client.read(entry.linkID, key, key == nil && mode == .byHand ? .shown : mode)
                 contacted = true
+                if response?.checkQueued == true { checking.insert(entry.linkID) } else { checking.remove(entry.linkID) }
                 guard let index = entries.firstIndex(where: { $0.linkID == entry.linkID }) else { continue }
                 if let response {
                     entries[index].take(Parcel(shared: response.package))
@@ -548,7 +572,7 @@ final class DeviceParcels {
             }
         }
         if id == nil {
-            do { if try await recover(client, hidden: hidden) { contacted = true } } catch { trouble = trouble ?? error }
+            do { if try await recover(client, read: mode) { contacted = true } } catch { trouble = trouble ?? error }
         }
         save()
         if let trouble { throw trouble }
@@ -580,10 +604,10 @@ final class DeviceParcels {
     /// be read, and puts it back on the list, without the name it had here. Only a link the service
     /// no longer has, or no longer owns with the key, lets its key go: losing the list never forgets
     /// anything on the service. The first trouble ends the round and is returned; the rest wait.
-    private func recover(_ client: DeviceParcelClient, hidden: Bool) async throws -> Bool {
+    private func recover(_ client: DeviceParcelClient, read mode: DeviceParcelRead) async throws -> Bool {
         var contacted = false
         for (linkID, key) in keys where !entries.contains(where: { $0.linkID == linkID }) {
-            let response = try await client.read(linkID, key, hidden)
+            let response = try await client.read(linkID, key, mode)
             contacted = true
             // Forgotten, followed or let go meanwhile.
             guard keys[linkID] == key, !entries.contains(where: { $0.linkID == linkID }) else { continue }
@@ -805,7 +829,7 @@ final class DeviceParcels {
     /// The parcel's link as others may open it, or nil once its sharing was stopped.
     func share(id: UUID) async throws -> ParcelShare? {
         guard let client, let entry = entries.first(where: { $0.parcel.id == id }), let key = keys[entry.linkID] else { throw DeliveryAPIError.parcelMissing }
-        guard let response = try await client.read(entry.linkID, key, false) else { throw DeliveryAPIError.parcelMissing }
+        guard let response = try await client.read(entry.linkID, key, .shown) else { throw DeliveryAPIError.parcelMissing }
         return Self.share(response.link)
     }
 

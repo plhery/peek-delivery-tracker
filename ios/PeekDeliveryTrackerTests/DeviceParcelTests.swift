@@ -86,8 +86,8 @@ final class DeviceParcelTests: XCTestCase {
                 guard let lookup else { throw DeviceLookupsSpent() }
                 return lookup
             },
-            read: { linkID, key, hidden in
-                calls.add("read \(linkID) \((key ?? "-").prefix(1))\(hidden ? " hidden" : "")")
+            read: { linkID, key, mode in
+                calls.add("read \(linkID) \((key ?? "-").prefix(1))\(mode == .hidden ? " hidden" : mode == .byHand ? " by hand" : "")")
                 return try read(linkID)
             },
             forget: { linkID, _ in
@@ -688,7 +688,7 @@ final class DeviceParcelTests: XCTestCase {
         for (status, body, expected) in answers {
             PostcodeTestURLProtocol.handler = { _ in (status, Data(body.utf8)) }
             do {
-                _ = try await client.read("22222222222A", key, false)
+                _ = try await client.read("22222222222A", key, .shown)
                 XCTFail("Expected a failure for \(status)")
             } catch let down as ServerDown {
                 XCTAssertEqual(down, expected, "\(status) \(body)")
@@ -805,11 +805,67 @@ final class DeviceParcelTests: XCTestCase {
                        "22222222222B": PublicParcelResponse(link: link("22222222222B"), package: package(UUID()))]
         let device = DeviceParcels(client: client(calls, read: { answers[$0] }), storage: storage)
 
-        try await device.refresh(all: true, hidden: true)
+        try await device.refresh(all: true, read: .hidden)
         try await device.refresh(all: true)
 
         // The lost one comes back from a hidden read too.
         XCTAssertEqual(calls.all, ["read 22222222222A k hidden", "read 22222222222B k hidden", "read 22222222222A k", "read 22222222222B k"])
+    }
+
+    /// A refresh by hand asks the service to check this iPhone's own lookups before they are due; someone else's parcel
+    /// is read as on screen. A check the service queued is read again as soon as a parcel waiting for its first answer.
+    func testARefreshByHandAsksToCheckTheIPhonesOwnLookupsAndFollowsTheCheck() async throws {
+        let own = UUID(), shared = UUID()
+        var now = Date(timeIntervalSince1970: 1_800_000_000)
+        let storage = Memory()
+        storage.keys = ["22222222222A": key]
+        storage.parcels = [
+            DeviceParcel(linkID: "22222222222A", label: "", archivedAt: nil, parcel: Parcel(shared: package(own)), checkedAt: now),
+            DeviceParcel(linkID: "33333333333A", label: "", archivedAt: nil, parcel: Parcel(shared: package(shared)), checkedAt: now, viewer: true),
+        ]
+        let calls = Calls()
+        nonisolated(unsafe) var queued = true
+        let ownAnswer = PublicParcelResponse(link: link("22222222222A"), package: package(own, stage: .outForDelivery))
+        let sharedAnswer = PublicParcelResponse(link: reader("33333333333A"), package: package(shared))
+        let device = DeviceParcels(client: client(calls, read: { linkID in
+            guard linkID == "22222222222A" else { return sharedAnswer }
+            var answer = ownAnswer
+            answer.checkQueued = queued ? true : nil
+            return answer
+        }), storage: storage, now: { now })
+
+        try await device.refresh(all: true, read: .byHand)
+
+        XCTAssertEqual(calls.all, ["read 22222222222A k by hand", "read 33333333333A -"])
+        XCTAssertTrue(device.isChecking)
+        XCTAssertTrue(device.isWaiting)
+
+        // The check lands: one more read of that parcel alone, and nothing is waited for any more.
+        queued = false
+        now += 2
+        try await device.refresh()
+        XCTAssertEqual(Array(calls.all.dropFirst(2)), ["read 22222222222A k"])
+        XCTAssertFalse(device.isChecking)
+        XCTAssertFalse(device.isWaiting)
+        now += 2
+        try await device.refresh()
+        XCTAssertEqual(calls.all.count, 3)
+    }
+
+    /// Only the owner's read asks for a check: without the key, a refresh by hand reads as on screen.
+    @MainActor func testARefreshByHandGoesWithTheKeyAlone() async throws {
+        let transport = PostcodeTestURLProtocol.transport()
+        defer { transport.invalidateAndCancel() }
+        let body = try JSONEncoder.deliveryTracker.encode(PublicParcelResponse(link: link("22222222222A"), package: package(UUID())))
+        nonisolated(unsafe) var urls: [String] = []
+        PostcodeTestURLProtocol.handler = { request in urls.append(request.url?.absoluteString ?? ""); return (200, body) }
+        let client = DeviceParcelClient.api(configuration: PostcodeTestURLProtocol.configuration, transport: transport)
+
+        _ = try await client.read("22222222222A", key, .byHand)
+        _ = try await client.read("22222222222A", nil, .byHand)
+
+        XCTAssertEqual(urls.map { $0.hasSuffix("/api/public/parcels/22222222222A?refresh=true") }, [true, false])
+        XCTAssertTrue(urls.last?.hasSuffix("/api/public/parcels/22222222222A") == true)
     }
 
     private func news(_ package: PublicPackage, at newsAt: String?) -> PublicPackage {

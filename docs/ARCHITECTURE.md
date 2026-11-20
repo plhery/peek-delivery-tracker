@@ -183,6 +183,8 @@ Key server modules:
     most every 2 minutes, as often as the carrier allows and up to 10 times a minute per client.
     The Android app's list without an account asks for it from a parcel's page, and reads a
     parcel whose check is on its way again soon, until the check lands or a minute has passed.
+    The iPhone app's does the same from a parcel's page and from the list's refresh, which waits
+    for the checks as an account's refresh does.
   - `parcel_links` and the lookup counters are service-role only. An unknown, forgotten,
     expired or malformed link and a wrong key all get the same answer: a 404 with the
     service's JSON error. The web app and the iPhone and Android apps forget a parcel, or

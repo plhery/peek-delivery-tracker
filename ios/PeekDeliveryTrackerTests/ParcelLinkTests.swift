@@ -654,8 +654,8 @@ final class ParcelLinkTests: XCTestCase {
         LinkTestURLProtocol.handler = { request in requests.append(request); return (200, [:], body) }
         let client = DeviceParcelClient.api(configuration: LinkTestURLProtocol.configuration, transport: transport)
 
-        _ = try await client.read(linkID, nil, false)
-        _ = try await client.read(linkID, nil, true)
+        _ = try await client.read(linkID, nil, .shown)
+        _ = try await client.read(linkID, nil, .hidden)
 
         XCTAssertEqual(requests.map { $0.url?.absoluteString }, ["https://links.test/api/public/parcels/\(linkID)",
                                                                  "https://links.test/api/public/parcels/\(linkID)?hidden=true"])

@@ -1069,17 +1069,26 @@ final class ParcelStore: ObservableObject {
         if isGuest {
             var trouble: Error?
             var contacted = false
-            do { contacted = try await device.refresh(all: true) } catch { trouble = error }
+            // A refresh by hand asks the service to check this iPhone's own lookups before they are due.
+            do { contacted = try await device.refresh(all: true, read: .byHand) } catch { trouble = error }
             guard generation == session.generation else { throw CancellationError() }
             parcels = device.list()
             listReadAt = device.lastCheckedAt
-            refreshing = false
             if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }
             if let trouble {
+                refreshing = false
                 // A check given up on says nothing went wrong.
                 if trouble.isCancellation { throw CancellationError() }
                 return .completed(.failed(localizer.errorMessage(trouble)))
             }
+            // The checks it queued land in the background, as an account's do.
+            if device.isChecking {
+                refreshTask = Task { [weak self] in
+                    await self?.finishDeviceRefresh(since: before, generation: generation)
+                }
+                return .queued
+            }
+            refreshing = false
             return .completed(Parcel.trackingChanged(from: before, to: parcels) ? .updated : .unchanged)
         }
         let jobIDs: [UUID]
@@ -1131,14 +1140,53 @@ final class ParcelStore: ObservableObject {
             try session.checkGeneration(generation)
             upsert(try demo.refresh(id: parcel.id))
         } else if isGuest {
-            try await device.refresh(only: parcel.id)
+            try await device.refresh(only: parcel.id, read: .byHand)
             try session.checkGeneration(generation)
             parcels = device.list()
+            // The check it queued shows as it lands, while the arrow turns; one that takes longer comes with the list.
+            _ = try? await followDeviceChecks(generation: generation)
         } else {
             try await api.refresh(id: parcel.id)
             try session.checkGeneration(generation)
             await load(showSpinner: false)
         }
+    }
+
+    /// Follows the checks a guest's refresh by hand queued, and says what they found.
+    private func finishDeviceRefresh(since before: [Parcel], generation: UUID) async {
+        let result: RefreshResult
+        do {
+            result = try await followDeviceChecks(generation: generation)
+                ? (Parcel.trackingChanged(from: before, to: parcels) ? .updated : .unchanged)
+                : .stillChecking
+        } catch {
+            guard !error.isCancellation, generation == session.generation else { return }
+            if let down = error as? ServerDown { noteDown(down) }
+            result = .failed(localizer.errorMessage(error))
+        }
+        guard generation == session.generation else { return }
+        refreshing = false
+        refreshTask = nil
+        refreshOutcome = RefreshOutcome(result: result)
+    }
+
+    /// Reads the device's parcels again while the service says a check of one is queued or under way: after 2 s, then
+    /// ever more slowly up to 10 s, for a minute at most, as an opened link is read. Returns whether every check landed;
+    /// the first trouble is thrown.
+    private func followDeviceChecks(generation: UUID) async throws -> Bool {
+        var wait = ParcelLinkStore.checkReadFirst
+        var waited = Duration.zero
+        while device.isChecking, waited < ParcelLinkStore.checkReadFor {
+            try await Task.sleep(for: wait)
+            try session.checkGeneration(generation)
+            waited += wait
+            wait = min(wait * 1.5, ParcelLinkStore.checkReadMax)
+            try await device.refresh()
+            try session.checkGeneration(generation)
+            parcels = device.list()
+            listReadAt = device.lastCheckedAt
+        }
+        return !device.isChecking
     }
 
     func exportAccount() async throws -> URL {
@@ -2195,7 +2243,7 @@ final class ParcelStore: ObservableObject {
         let generation = session.generation
         var trouble: Error?
         var contacted = false
-        do { contacted = try await device.refresh(all: serverDown != nil, hidden: hidden) } catch { trouble = error }
+        do { contacted = try await device.refresh(all: serverDown != nil, read: hidden ? .hidden : .shown) } catch { trouble = error }
         guard generation == session.generation, isGuest else { return }
         // A round the service answered nothing says nothing of it; one that failed for it says it is down.
         if let down = trouble as? ServerDown { noteDown(down) } else if trouble == nil, contacted { noteUp() }

@@ -710,7 +710,9 @@ class FakeDeliveries(
     override suspend fun saveNotificationPreferences(value: NotificationPreferences) {
         accountCall("saveNotificationPreferences")
         savedPreferences += value
-        notificationPreferences.value = value.copy(emailAvailable = notificationPreferences.value?.emailAvailable)
+        // The events alone are saved: the email choice stays as the server had it.
+        val stored = notificationPreferences.value
+        notificationPreferences.value = value.copy(emailOnDelivery = stored?.emailOnDelivery, emailAvailable = stored?.emailAvailable)
         deliveryEmail.value = storedEmail
     }
 

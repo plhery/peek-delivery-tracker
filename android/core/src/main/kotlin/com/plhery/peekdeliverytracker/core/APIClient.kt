@@ -29,6 +29,7 @@ import com.plhery.peekdeliverytracker.core.api.NativePushLocale
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferences
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesClock
 import com.plhery.peekdeliverytracker.core.api.NotificationPreferencesDistance
+import com.plhery.peekdeliverytracker.core.api.NotificationStage
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalRequest
 import com.plhery.peekdeliverytracker.core.api.NumberRefusalResponse
 import com.plhery.peekdeliverytracker.core.api.OkResponse
@@ -76,6 +77,8 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.booleanOrNull
@@ -535,9 +538,27 @@ class DeliveryApiClient(
         return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", patch.toString().encodeToByteArray())
     }
 
-    suspend fun saveNotificationPreferences(value: NotificationPreferences): NotificationPreferences {
-        val sent = value.copy(emailAvailable = null, markNewUpdates = null, clock = null, distance = null)
-        return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", encode(NotificationPreferences.serializer(), sent))
+    /**
+     * Saves the events alone, and clears the retired quiet hours: the delivery email and the display choices save on
+     * their own, so a change made to them elsewhere stays.
+     */
+    suspend fun saveNotificationEvents(stages: List<NotificationStage>, timezone: String): NotificationPreferences {
+        val patch = kotlinx.serialization.json.buildJsonObject {
+            put("enabledStages", JsonArray(stages.map { JsonPrimitive(it.rawValue) }))
+            put("quietHoursStart", JsonNull)
+            put("quietHoursEnd", JsonNull)
+            put("timezone", JsonPrimitive(timezone))
+        }
+        return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", patch.toString().encodeToByteArray())
+    }
+
+    /** Switches the delivery email alone, so events chosen elsewhere stay. */
+    suspend fun saveEmailOnDelivery(enabled: Boolean, timezone: String): NotificationPreferences {
+        val patch = kotlinx.serialization.json.buildJsonObject {
+            put("emailOnDelivery", JsonPrimitive(enabled))
+            put("timezone", JsonPrimitive(timezone))
+        }
+        return request("/api/push/preferences", NotificationPreferences.serializer(), "PATCH", patch.toString().encodeToByteArray())
     }
 
     /**

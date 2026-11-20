@@ -1615,8 +1615,24 @@ class ParcelStore(
         }
     }
 
+    /**
+     * Saves the events of `value` and clears the retired quiet hours. The delivery email and the display choices save
+     * on their own, so what `value` says of them is not sent.
+     */
     suspend fun saveNotificationPreferences(value: NotificationPreferences) {
-        val saved = if (isDemo) demo.saveNotificationPreferences(value) else api.saveNotificationPreferences(value)
+        val saved = if (isDemo) {
+            demo.saveNotificationPreferences(
+                demo.notificationPreferences.copy(
+                    enabledStages = value.enabledStages, quietHoursStart = null, quietHoursEnd = null, timezone = value.timezone,
+                ),
+            )
+        } else {
+            api.saveNotificationEvents(value.enabledStages, timezone = value.timezone)
+        }
+        settleNotificationPreferences(saved)
+    }
+
+    private fun settleNotificationPreferences(saved: NotificationPreferences) {
         notificationPreferenceSaves += 1
         notificationPreferences = saved
         notificationError = null
@@ -1627,14 +1643,13 @@ class ParcelStore(
         get() = DeliveryEmail(isDemo = isDemo, preferences = notificationPreferences, address = session.user?.email)
 
     /**
-     * Switches the account's delivery email at once and apart from the preset: the preferences go back as they were
-     * last saved, with the new choice and this device's time zone, and the server's answer becomes the state.
+     * Switches the account's delivery email at once and apart from the preset: only the choice and this device's time
+     * zone are sent, so events chosen elsewhere stay, and the server's answer becomes the state.
      */
     suspend fun setEmailOnDelivery(enabled: Boolean) {
         // Nothing to switch in the demo, or while the server cannot email the account.
         if (deliveryEmail == null) return
-        val value = notificationPreferences ?: return
-        saveNotificationPreferences(value.copy(emailOnDelivery = enabled, timezone = ZoneId.systemDefault().id))
+        settleNotificationPreferences(api.saveEmailOnDelivery(enabled, timezone = ZoneId.systemDefault().id))
     }
 
     /**

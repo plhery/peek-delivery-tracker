@@ -73,29 +73,19 @@ enum class NotificationPreset(val rawValue: String) {
     }
 }
 
-data class NotificationPreferencesDraft(
-    val preset: NotificationPreset,
-    /**
-     * The account's email choice rides along as it was saved: the email switch saves on its own, so saving a preset
-     * never changes it.
-     */
-    val emailOnDelivery: Boolean?,
-) {
+/** The events picked on the Delivery updates page. The email switch saves on its own, so the draft holds no email. */
+data class NotificationPreferencesDraft(val preset: NotificationPreset) {
     fun preferences(timezone: String): NotificationPreferences = NotificationPreferences(
         enabledStages = preset.stages,
         quietHoursStart = null,
         quietHoursEnd = null,
         timezone = timezone,
-        emailOnDelivery = emailOnDelivery,
     )
 
     companion object {
         /** Swift's `init(preferences:)`. */
         operator fun invoke(preferences: NotificationPreferences? = null): NotificationPreferencesDraft =
-            NotificationPreferencesDraft(
-                preset = preferences?.let { NotificationPreset.matching(it.enabledStages) } ?: NotificationPreset.All,
-                emailOnDelivery = preferences?.emailOnDelivery,
-            )
+            NotificationPreferencesDraft(preset = preferences?.let { NotificationPreset.matching(it.enabledStages) } ?: NotificationPreset.All)
     }
 }
 

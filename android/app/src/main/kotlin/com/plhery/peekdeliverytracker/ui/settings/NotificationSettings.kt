@@ -105,7 +105,6 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
     var preset by rememberSaveable {
         mutableStateOf(if (guest) NotificationPreset.withoutAccount(devicePreset) else NotificationPreferencesDraft(preferences).preset)
     }
-    var emailOnDelivery by remember { mutableStateOf(preferences?.emailOnDelivery) }
     var notice by rememberSaveable { mutableStateOf<String?>(null) }
     // Held for the page in the app's scope, as its runs are: a window made again mid-save still waits for the answer.
     val emailChoice = work.emailChoice(DELIVERY_UPDATES_PAGE)
@@ -123,12 +122,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
         val old = seen
         val new = preferences
         if (old == new) return@LaunchedEffect
-        if (old != null && new != null && old.enabledStages == new.enabledStages) {
-            emailOnDelivery = new.emailOnDelivery
-        } else if (new != null) {
-            preset = NotificationPreferencesDraft(new).preset
-            emailOnDelivery = new.emailOnDelivery
-        }
+        if (new != null && old?.enabledStages != new.enabledStages) preset = NotificationPreferencesDraft(new).preset
         if (old?.emailOnDelivery != new?.emailOnDelivery) work.emailFailureSeen(DELIVERY_UPDATES_PAGE)
         seen = new
     }
@@ -208,7 +202,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                         notice = localizer.text("notifications.saved")
                     }
                 } else {
-                    val value = NotificationPreferencesDraft(preset, emailOnDelivery).preferences(TimeZone.getDefault().id)
+                    val value = NotificationPreferencesDraft(preset).preferences(TimeZone.getDefault().id)
                     run {
                         source.saveNotificationPreferences(value)
                         notice = localizer.text("notifications.saved")

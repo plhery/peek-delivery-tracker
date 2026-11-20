@@ -291,7 +291,8 @@ class NotificationLogicTests {
     }
 
     @Test
-    fun savingPresetKeepsTheEmailChoice() {
+    fun savingPresetHoldsNoEmailChoice() {
+        // The email switch saves on its own, so a preset saved later can't put back a choice made since.
         for (choice in listOf(true, false, null)) {
             val saved = preferences(email = choice)
             var draft = NotificationPreferencesDraft(preferences = saved)
@@ -299,11 +300,9 @@ class NotificationLogicTests {
             draft = draft.copy(preset = NotificationPreset.DeliveryDay)
             val next = draft.preferences(timezone = saved.timezone)
             assertEquals(NotificationPreset.DeliveryDay.stages, next.enabledStages)
-            assertEquals(choice, next.emailOnDelivery)
-            // Whether the server can email the account is not the app's to send.
+            assertNull(next.emailOnDelivery)
             assertNull(next.emailAvailable)
         }
-        assertNull(NotificationPreferencesDraft().preferences(timezone = "Europe/Zurich").emailOnDelivery)
     }
 
     @Test
@@ -314,17 +313,7 @@ class NotificationLogicTests {
         val email = ApiJson.encodeToJsonElement(PackageNotificationRequest.serializer(), PackageNotificationRequest(emailMuted = false)).jsonObject
         assertEquals(setOf("emailMuted"), email.keys)
         assertEquals(false, email.boolean("emailMuted"))
-
-        // An account that never chose sends no choice, as a released app does.
-        val unchosen = preferencesObject(NotificationPreferencesDraft(preferences = preferences(email = null)).preferences(timezone = "Europe/Zurich"))
-        assertEquals(setOf("enabledStages", "timezone"), unchosen.keys)
-        val declined = preferencesObject(NotificationPreferencesDraft(preferences = preferences(email = false)).preferences(timezone = "Europe/Zurich"))
-        assertEquals(setOf("enabledStages", "timezone", "emailOnDelivery"), declined.keys)
-        assertEquals(false, declined.boolean("emailOnDelivery"))
     }
-
-    private fun preferencesObject(value: NotificationPreferences): JsonObject =
-        ApiJson.encodeToJsonElement(NotificationPreferences.serializer(), value).jsonObject
 
     private fun JsonObject.boolean(key: String): Boolean? = (this[key] as? JsonPrimitive)?.boolean
 

@@ -820,6 +820,8 @@ class SettingsTest {
         tap(presetTag(NotificationPreset.DeliveryDay))
         tap(SETTINGS_SAVE)
         assertEquals(NotificationPreset.DeliveryDay.stages, source.savedPreferences.single().enabledStages)
+        // The email switch saves on its own: the preset carries no email choice.
+        assertNull(source.savedPreferences.single().emailOnDelivery)
         assertEquals(text("notifications.saved"), node(SETTINGS_NOTICE).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.joinToString())
 
         source.welcomeSent = false

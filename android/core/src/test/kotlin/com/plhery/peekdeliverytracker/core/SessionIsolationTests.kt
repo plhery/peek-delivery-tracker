@@ -30,6 +30,7 @@ import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.boolean
@@ -921,7 +922,7 @@ class SessionIsolationTests {
     }
 
     @Test
-    fun emailSwitchSendsTheSavedPreferencesAndShowsTheServersAnswer() = runTest {
+    fun emailSwitchSendsOnlyTheChoiceAndShowsTheServersAnswer() = runTest {
         val transport = RecordingTransport()
         val session = sessionStore(transport)
         authorize(session, transport, email = "alex@example.com")
@@ -942,22 +943,23 @@ class SessionIsolationTests {
         assertEquals(listOf("PATCH"), log.map { it.method })
         assertEquals("/api/push/preferences", log.first().path)
         val sent = body(log.first())
-        // What was last saved goes back with the choice; what only the server knows stays out.
-        assertEquals(setOf("enabledStages", "quietHoursStart", "quietHoursEnd", "timezone", "emailOnDelivery"), sent.keys)
+        // Only the choice and the zone go: events chosen elsewhere since this phone read them stay.
+        assertEquals(setOf("timezone", "emailOnDelivery"), sent.keys)
         assertEquals(true, sent["emailOnDelivery"]?.jsonPrimitive?.boolean)
-        assertEquals(saved.enabledStages.map { it.rawValue }, sent["enabledStages"]?.jsonArray?.map { it.jsonPrimitive.content })
-        assertEquals("22:00", sent["quietHoursStart"]?.jsonPrimitive?.content)
         assertEquals(ZoneId.systemDefault().id, sent["timezone"]?.jsonPrimitive?.content)
         assertEquals(true, store.deliveryEmail?.isOn)
 
-        // Saving a preset afterwards carries the choice along unchanged.
+        // Saving a preset afterwards sends the events alone and clears the retired quiet hours: an email switched off
+        // from its link since this phone read it stays off.
         val draft = NotificationPreferencesDraft(store.notificationPreferences).copy(preset = NotificationPreset.DeliveryDay)
-        var presetAnswer = draft.preferences(timezone = "Europe/Zurich").copy(emailAvailable = true)
+        var presetAnswer = draft.preferences(timezone = "Europe/Zurich").copy(emailOnDelivery = true, emailAvailable = true)
         transport.respond(json(NotificationPreferences.serializer(), presetAnswer))
         store.saveNotificationPreferences(draft.preferences(timezone = "Europe/Zurich"))
         val preset = body(transport.requests.last())
-        assertEquals(setOf("enabledStages", "timezone", "emailOnDelivery"), preset.keys)
-        assertEquals(true, preset["emailOnDelivery"]?.jsonPrimitive?.boolean)
+        assertEquals(setOf("enabledStages", "quietHoursStart", "quietHoursEnd", "timezone"), preset.keys)
+        assertEquals(JsonNull, preset["quietHoursStart"])
+        assertEquals(JsonNull, preset["quietHoursEnd"])
+        assertEquals(NotificationPreset.DeliveryDay.stages.map { it.rawValue }, preset["enabledStages"]?.jsonArray?.map { it.jsonPrimitive.content })
         assertEquals(NotificationPreset.DeliveryDay.stages, store.notificationPreferences?.enabledStages)
         assertEquals(true, store.deliveryEmail?.isOn)
 

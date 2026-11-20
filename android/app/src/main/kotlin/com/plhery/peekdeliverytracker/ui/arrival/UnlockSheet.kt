@@ -68,6 +68,9 @@ enum class UnlockReason(val key: String?) {
 
     /** Friends compare passports between accounts, from the friends tab or the demo's invitation: "unlock.friends". */
     Friends("unlock.friends"),
+
+    /** The delivery email goes to the address an account signs in with, from the Notifications page: "unlock.email". */
+    Email("unlock.email"),
     ;
 
     /** "Sign in" where signing in is itself the ask, else "Sign in to unlock this". */

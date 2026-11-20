@@ -54,6 +54,7 @@ import com.plhery.peekdeliverytracker.platform.SitePage
 import com.plhery.peekdeliverytracker.platform.Store
 import com.plhery.peekdeliverytracker.ui.LocalLanguage
 import com.plhery.peekdeliverytracker.ui.LocalLocalizer
+import com.plhery.peekdeliverytracker.ui.arrival.UnlockReason
 import com.plhery.peekdeliverytracker.ui.deliveries.PlainPress
 import com.plhery.peekdeliverytracker.ui.deliveries.REGULAR_SPINNER
 import com.plhery.peekdeliverytracker.ui.deliveries.localized
@@ -81,7 +82,8 @@ import kotlinx.coroutines.launch
  *
  * Without an account it is the phone's own: the switch turns on or off the notifications of every parcel it follows,
  * and the presets, saved on the phone, say what each of them tells (Important until one is saved), with a word under
- * them that they reach every parcel. There is no account to load, no welcome notification and no delivery email.
+ * them that they reach every parcel. There is no account to load and no welcome notification; the delivery email's row
+ * asks to sign in over the page ("unlock.email"), which then becomes the account's.
  */
 @Composable
 internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack: () -> Unit) {
@@ -99,7 +101,9 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
     val storeError by source.notificationError.collectAsState()
     val email by source.deliveryEmail.collectAsState()
     val devicePreset by source.deviceAlertPreset.collectAsState()
-    val guest = source.isGuest
+    // Read again as the session changes: signed in over this page, it becomes the account's.
+    val session by source.session.collectAsState()
+    val guest = remember(session) { source.isGuest }
     val working = work.working(DELIVERY_UPDATES_PAGE)
     val failure = work.failure(DELIVERY_UPDATES_PAGE)
     var preset by rememberSaveable {
@@ -110,7 +114,7 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
     val emailChoice = work.emailChoice(DELIVERY_UPDATES_PAGE)
     val emailFailed = work.emailFailed(DELIVERY_UPDATES_PAGE)
     var seen by remember { mutableStateOf(preferences) }
-    LaunchedEffect(Unit) {
+    LaunchedEffect(guest) {
         source.refreshNotificationState()
         if (!guest) source.loadNotificationPreferences()
     }
@@ -212,7 +216,8 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
         }
         notice?.let { Text(it, Modifier.testTag(SETTINGS_NOTICE), color = colors.resolve(settingsGreen), style = type.caption.sfLines()) }
         (failure ?: storeError)?.let { Text(it, Modifier.testTag(SETTINGS_UPDATES_ERROR), color = colors.red, style = type.caption.sfLines()) }
-        email?.let { shown ->
+        val shown = email
+        if (shown != null) {
             val example = DeliveryEmail.exampleUrl(source.linkBaseUrl, language)
             DeliveryEmailSettings(
                 address = shown.address,
@@ -230,6 +235,14 @@ internal fun DeliveryUpdatesPage(state: AccountHost, scroll: ScrollState, onBack
                     }
                 },
             )
+        } else if (guest) {
+            // Without an account, the delivery email is a sign-in away, asked over this page.
+            SettingsGroup(localized("email.section")) {
+                SettingsButtonRow(
+                    localized("alerts.email.title"), SETTINGS_DELIVERY_EMAIL_SIGN_IN, { source.askToSignIn(UnlockReason.Email) },
+                    symbol = "envelope", detail = localized("alerts.email.body"), chevron = true,
+                )
+            }
         }
         Text(localized("notifications.schedule"), color = colors.secondaryText, style = type.caption.sfLines())
     }
@@ -454,3 +467,4 @@ internal const val SETTINGS_DELIVERY_EMAIL = "$SETTINGS_SHEET.deliveryEmail"
 internal const val SETTINGS_DELIVERY_EMAIL_ERROR = "$SETTINGS_SHEET.deliveryEmail.error"
 internal const val SETTINGS_DELIVERY_EMAIL_EXAMPLE = "$SETTINGS_SHEET.deliveryEmail.example"
 internal const val SETTINGS_DELIVERY_EMAIL_PRIVACY = "$SETTINGS_SHEET.deliveryEmail.privacy"
+internal const val SETTINGS_DELIVERY_EMAIL_SIGN_IN = "$SETTINGS_SHEET.deliveryEmail.signIn"

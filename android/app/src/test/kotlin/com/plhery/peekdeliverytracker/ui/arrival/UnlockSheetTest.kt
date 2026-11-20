@@ -42,6 +42,8 @@ import com.plhery.peekdeliverytracker.ui.deliveries.LocalDeliveriesState
 import com.plhery.peekdeliverytracker.ui.deliveries.PARCEL_LIST
 import com.plhery.peekdeliverytracker.ui.deliveries.ZurichTime
 import com.plhery.peekdeliverytracker.ui.deliveries.waitsForMaps
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_EMAIL_SIGN_IN
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_UPDATES
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SHEET
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_SIGN_IN
 import com.plhery.peekdeliverytracker.ui.tabs.TAB_BAR
@@ -185,6 +187,21 @@ class UnlockSheetTest {
         assertTrue(session.state is AuthenticationState.SignedIn)
         assertFalse(exists(UNLOCK_SHEET))
         assertTrue(exists(SETTINGS_SHEET))
+    }
+
+    @Test
+    fun theNotificationsPagesEmailAsksOverThePage() {
+        show()
+        node(ACCOUNT_BUTTON).performClick()
+        compose.waitForIdle()
+        node(SETTINGS_DELIVERY_UPDATES).performScrollTo().performClick()
+        compose.waitForIdle()
+        node(SETTINGS_DELIVERY_EMAIL_SIGN_IN).performScrollTo().performClick()
+        compose.waitForIdle()
+        assertEquals(UnlockReason.Email, source.unlock.reason)
+        assertTrue(inSheet(text("unlock.title")))
+        node(UNLOCK_WHAT).assertTextEquals("${text("unlock.email")} ${text("unlock.comes")}")
+        assertTrue(drawn(SETTINGS_DELIVERY_EMAIL_SIGN_IN))
     }
 
     @Test

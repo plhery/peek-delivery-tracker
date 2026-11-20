@@ -302,7 +302,7 @@ class TalkBackScreensTest {
         )
     }
 
-    /** A guest's Delivery updates page: this device's switch, the preset and what it covers, with no email. */
+    /** A guest's Delivery updates page: this device's switch, the preset and what it covers, and the email a sign-in away. */
     @Test
     fun aGuestsDeliveryUpdatesPage() {
         show(AuthenticationState.Welcome) { isGuest = true }
@@ -324,6 +324,8 @@ class TalkBackScreensTest {
                 "Delivery only, When your parcel goes out for delivery and when it arrives. [button]",
                 "The parcels you track here get these notifications too. One whose notifications you turn off stays quiet.",
                 "Save preferences [button]",
+                "BY EMAIL [heading]",
+                "An email when it arrives, Sign in, and Peek writes to the address you sign in with. [button]",
                 "Parcels are checked hourly, day and night, and up to every 10 minutes on their delivery day or while you look at them.",
             ),
         )

@@ -471,6 +471,9 @@ class SettingsTest {
         assertTrue(shows(text("alerts.all.body")))
         assertTrue(shows(text("notifications.schedule")))
         assertFalse(exists(SETTINGS_DELIVERY_EMAIL))
+        // The delivery email, a sign-in away.
+        assertTrue(exists(SETTINGS_DELIVERY_EMAIL_SIGN_IN))
+        assertTrue(shows(text("alerts.email.title")))
         assertFalse("loadNotificationPreferences" in source.accountCalls)
 
         tap(presetTag(NotificationPreset.DeliveryDay))
@@ -485,6 +488,18 @@ class SettingsTest {
         assertFalse(shows(text("notifications.error.welcome")))
         press(SETTINGS_BACK)
         assertTrue(shows(text(NotificationPreset.DeliveryDay.titleKey)))
+    }
+
+    /** Without a service to send them, a guest's parcels have no notifications, and Settings no row for them. */
+    @Test
+    fun aGuestOfABuildWithoutAServerHasNoNotificationsRow() {
+        show(AuthenticationState.Welcome) {
+            isGuest = true
+            tracksWithoutAccount = false
+        }
+        open()
+        assertTrue(exists(SETTINGS_ACCOUNT_DATA))
+        assertFalse(exists(SETTINGS_DELIVERY_UPDATES))
     }
 
     /** Refused for good, a guest's page sends them to Android's settings in place of the switch. */

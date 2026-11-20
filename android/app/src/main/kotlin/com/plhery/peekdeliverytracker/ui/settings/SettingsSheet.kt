@@ -437,10 +437,10 @@ private fun SettingsRootPage(
                         }
                     }
                     // Alerts are kept up to date by pushes, the F-Droid build's included; a phone without pushes keeps
-                    // the row for the account's delivery email alone, where it has one, and without an account has no
-                    // row. Android has no Live Activities, the iPhone's row after them. The group shows only with a row
-                    // in it.
-                    val updates = source.pushAvailable || (!guest && deliveryEmail != null)
+                    // the row for the account's delivery email alone, where it has one. Without an account, the row
+                    // needs pushes and a service to send them to the parcels followed here. Android has no Live
+                    // Activities, the iPhone's row after them. The group shows only with a row in it.
+                    val updates = (source.pushAvailable && (!guest || source.tracksWithoutAccount)) || (!guest && deliveryEmail != null)
                     if (updates || inboxOffered || assistantsOffered) {
                         SettingsGroup(localized("native.deliveries")) {
                             if (updates) {

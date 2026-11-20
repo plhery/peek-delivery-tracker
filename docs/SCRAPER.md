@@ -290,7 +290,7 @@ archived, whose every row that showed the delivery or return the changes read in
 stage the newest of those rows reads then: the sync keeps a delivery or return no row shows. A parcel neither delivered
 nor returned whose saved stage is its current scan's, as the apps read it, takes the stage its current scan reads
 once the changes apply (a row they re-date at its new time), as the carrier's next answer would (a return an earlier release read as a problem), except an
-acceptance after the parcel moved: a parcel no longer checked would otherwise keep the old stage over its newest scan.
+acceptance while another row still shows the parcel moving: a parcel no longer checked would otherwise keep the old stage over its newest scan.
 It keeps what the sync keeps with that stage: a return the newer scans only carry back stays on the schedule
 (`return_held`), and a delivery only a universal provider's row shows is checked daily for a while
 (`unconfirmed_delivery_until`). So the replay runs after each

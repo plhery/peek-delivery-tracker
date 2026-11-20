@@ -423,8 +423,8 @@ export function steppedBack(parcels: readonly StoredParcel[], changes: readonly 
  * earlier release read as a problem, or a newest scan now read as a notice, so the one before it is current), and one
  * no longer checked would otherwise keep the old stage over its newest scan. A delivered or returned parcel keeps its
  * stage (one whose delivery or return no row shows steps back above), as do one stepped back, one whose saved stage no current scan gave, one the
- * changes would leave at its label, which `steppedBack` reads, and one on its way that would take an acceptance, which
- * the sync keeps the moving stage over (`stageToSave`, trackingSync.ts).
+ * changes would leave at its label, which `steppedBack` reads, and one on its way that would take an acceptance while a row
+ * still shows it on its way, as the sync holds it (`heldStage`, trackingSync.ts).
  */
 export function followedScans(parcels: readonly StoredParcel[], changes: readonly ReplayedChange[], stepBacks: readonly StepBack[] = []): StepBack[] {
   const restaged = new Map(changes.flatMap((change) => change.kind === 'stage' ? [[change.row, change.to] as const] : []));
@@ -445,7 +445,7 @@ export function followedScans(parcels: readonly StoredParcel[], changes: readonl
     const read = (scan: StoredScan) => restaged.get(scan.id) ?? scan.stage;
     const after = current(kept, read, true);
     if (before?.stage !== from || !after || after.stage === from || !PROGRESS_STAGES.has(after.stage)) return [];
-    if (after.stage === 'accepted' && ON_THE_WAY.has(from)) return [];
+    if (after.stage === 'accepted' && ON_THE_WAY.has(from) && kept.some((scan) => ON_THE_WAY.has(read(scan)))) return [];
     // A return that newer scans carry back, as the sync holds it; a delivery no row of the carrier's own shows.
     const providers = (scan: StoredScan) => typeof scan.raw[UNIVERSAL_PROVIDER] === 'string';
     const hold = after.stage === 'returned' && ordered(kept, read, true)[0]?.id !== after.id ? 'return' as const

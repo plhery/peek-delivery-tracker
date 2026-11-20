@@ -411,10 +411,14 @@ describe('stored scan replay', () => {
     expect(followedScans([open], [restage], [{ parcel: 'parcel-1', from: 'exception', to: 'pending' }])).toEqual([]);
     // The newest scan read as a notice after the attempt: the attempt is current again, and the parcel follows it.
     expect(followedScans([open], [{ ...restage, to: 'registered' }])).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'failed_attempt' }]);
-    // A parcel on its way whose one moving scan reads as an acceptance keeps its stage, as the sync keeps it.
+    // A parcel on its way whose one moving scan reads as an acceptance takes it, as the sync's next check would (`heldStage`);
+    // one whose other row still shows it on its way keeps its stage.
     const sorted = scan('sorted', 'dpd-pl', '2026-09-08T14:00:00Z', 'in_transit', 'Sorted', { provider_code: 'T1', stage: 'in_transit' });
-    expect(followedScans([{ ...parcel(sorted, added), stage: 'in_transit' }],
-      [{ ...restage, row: 'sorted', from: 'in_transit', to: 'accepted' }])).toEqual([]);
+    const toAccepted = { ...restage, row: 'sorted', from: 'in_transit', to: 'accepted' } as const;
+    expect(followedScans([{ ...parcel(sorted, added), stage: 'in_transit' }], [toAccepted]))
+      .toEqual([{ parcel: 'parcel-1', from: 'in_transit', to: 'accepted' }]);
+    const hub = scan('hub', 'dpd-pl', '2026-09-08T09:00:00Z', 'in_transit', 'At the hub', { provider_code: 'T2', stage: 'in_transit' });
+    expect(followedScans([{ ...parcel(hub, sorted, added), stage: 'in_transit' }], [toAccepted])).toEqual([]);
     // The scan restaged back to the attempt's stage at an older instant: the current scan, so the parcel follows it there too.
     expect(followedScans([open], [{ ...restage, to: 'in_transit' }])).toEqual([{ parcel: 'parcel-1', from: 'exception', to: 'in_transit' }]);
   });

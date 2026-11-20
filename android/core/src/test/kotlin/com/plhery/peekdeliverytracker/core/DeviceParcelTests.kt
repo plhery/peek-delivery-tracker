@@ -151,6 +151,7 @@ class DeviceParcelTests {
         unalert: (String) -> Unit = {},
         move: ((String, ParcelLinkCarrierRequest) -> PublicParcelResponse?)? = null,
         postcode: ((String, ParcelLinkPostcodeRequest) -> PublicParcelResponse?)? = null,
+        forget: (String) -> Unit = {},
     ) = DeviceParcelClient(
         lookup = { request ->
             calls.add("lookup ${request.trackingNumber} ${request.carrier?.rawValue ?: "-"}")
@@ -170,7 +171,10 @@ class DeviceParcelTests {
                 answer(linkId)
             }
         },
-        forget = { linkId, _ -> calls.add("forget $linkId") },
+        forget = { linkId, _ ->
+            calls.add("forget $linkId")
+            forget(linkId)
+        },
         update = { linkId, _, change ->
             calls.add("update $linkId shared=${change.shared?.toString() ?: "-"}")
             PublicParcelResponse(
@@ -1973,6 +1977,52 @@ class DeviceParcelTests {
         assertNull(store.serverDown)
         assertEquals(listOf("Running shoes"), store.parcels.map { it.label })
         assertTrue(store.listReadAt!! > checkedAt)
+    }
+
+    /**
+     * A guest who removes their last parcel while the server is down has nothing left to read: the service forgetting
+     * it once it is back takes the notice away, and the list invites them to add one. Forgetting every parcel does too.
+     */
+    @Test
+    fun aGuestWhoRemovedTheirLastParcelLosesTheNoticeOnceTheServiceForgetsIt() = runTest {
+        val transport = RecordingTransport { jsonResponse(404, "<!doctype html><title>Not found</title>") }
+        val id = UUID.randomUUID()
+        val storage = Memory()
+        storage.keys = mapOf("22222222222A" to key)
+        storage.parcels = listOf(parcel("22222222222A", "Running shoes", id, at = date(Instant.now().minusSeconds(5))))
+        var down = true
+        val calls = Calls()
+        val device = device(
+            client(calls, read = { throw ServerDown() }, forget = { if (down) throw ServerDown() }), storage, backgroundScope,
+        )
+        val session = testSessionStore(postcodeConfiguration, backgroundScope, transport = transport)
+        session.showWelcome()
+        val store = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = device, deviceNotifications = quietNotifications())
+        store.setDeliveryLiveActivitiesEnabled(false)
+
+        store.refreshAll()
+        store.load()
+        assertEquals(MaintenanceNotice.Unannounced, store.serverDown)
+        store.permanentlyDelete(store.parcels.single())
+        assertTrue(store.parcels.isEmpty())
+        assertEquals(MaintenanceNotice.Unannounced, store.serverDown)
+
+        down = false
+        store.load()
+        assertNull(store.serverDown)
+        assertEquals(listOf("forget 22222222222A", "forget 22222222222A"), calls.all.filter { it.startsWith("forget") })
+
+        // Forgetting every parcel the service answers for takes the notice away too.
+        storage.parcels = listOf(parcel("22222222222B", "Coat", UUID.randomUUID()))
+        storage.keys = mapOf("22222222222B" to key)
+        val again = device(client(calls, read = { throw ServerDown() }), storage, backgroundScope)
+        val other = testParcelStore(postcodeConfiguration, session, transport, backgroundScope, device = again, deviceNotifications = quietNotifications())
+        other.setDeliveryLiveActivitiesEnabled(false)
+        other.refreshAll()
+        assertEquals(MaintenanceNotice.Unannounced, other.serverDown)
+        other.forgetDeviceParcels()
+        assertNull(other.serverDown)
+        assertTrue(other.parcels.isEmpty())
     }
 
     /** A copy the service forgot no longer moves: the widget and its shortcut pass over it for the parcels still followed. */

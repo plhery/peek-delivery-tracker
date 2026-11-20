@@ -795,12 +795,15 @@ class DeviceParcels(
      * one parcel is read, the keys whose parcels were lost on this phone (a file this build could not read, say) read
      * their parcels again. A key that could not be read is trouble too, thrown once the round is done: with only such
      * keys left, a phone offline or out of lookups hears so, not that nothing changed.
+     *
+     * Returns whether the service answered anything, a forget or a notification turned off included: a guest who
+     * removed their last parcel while it was down has nothing left to read.
      */
     suspend fun refresh(all: Boolean = false, only: UUID? = null, check: Boolean = false): Boolean {
         val client = client ?: return false
-        stopForgottenAlerts(client)
+        var told = stopForgottenAlerts(client)
         val recovery = try {
-            tellPendingForgets(client)
+            if (tellPendingForgets(client)) told = true
             if (only == null) recoverParcels(client) else Recovery(emptySet(), null)
         } catch (cancellation: CancellationException) {
             // What was already told or read stays so on file, as the parcels' round keeps what it read.
@@ -808,7 +811,7 @@ class DeviceParcels(
             throw cancellation
         }
         val recovered = recovery.read
-        var contacted = recovered.isNotEmpty()
+        var contacted = told || recovered.isNotEmpty()
         var trouble: Exception? = null
         for (entry in entries) {
             if (only != null && entry.parcel.id != only) continue
@@ -869,10 +872,11 @@ class DeviceParcels(
      * notifications on this phone stop, and its link goes on working for others. When the service can't be told yet,
      * each refresh tells it again: this phone's own link is kept with its key until the service has forgotten it,
      * someone else's until its notifications are off. Out of the list before the service is asked, a parcel that a
-     * round of sign-ups on a new token answers for meanwhile has that token's notifications turned off too.
+     * round of sign-ups on a new token answers for meanwhile has that token's notifications turned off too. Returns
+     * whether the service answered.
      */
-    suspend fun forget(id: UUID) {
-        val entry = entries.firstOrNull { it.parcel.id == id } ?: return
+    suspend fun forget(id: UUID): Boolean {
+        val entry = entries.firstOrNull { it.parcel.id == id } ?: return false
         val client = client
         val key = keys.keyOf(entry.linkId)
         entries = entries.filter { !it.linkId.equalsCanonically(entry.linkId) }
@@ -886,32 +890,46 @@ class DeviceParcels(
         val token = if (client == null) null else entry.alertToken
         if (token != null && entry.isViewer) forgotten = forgotten + entry.copy(forgotten = true)
         save()
-        client ?: return
-        if (token != null && succeeds { client.removeAlert(entry.linkId, removal(token)) } && entry.isViewer) {
-            forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(token)) }
-            save()
+        client ?: return false
+        var answered = false
+        if (token != null && succeeds { client.removeAlert(entry.linkId, removal(token)) }) {
+            answered = true
+            if (entry.isViewer) {
+                forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(token)) }
+                save()
+            }
         }
-        if (key != null) forgetIfPending(entry.linkId, key, client)
+        if (key != null && forgetIfPending(entry.linkId, key, client)) answered = true
+        return answered
     }
 
-    private suspend fun forgetIfPending(linkId: String, key: String, client: DeviceParcelClient) {
-        if (pendingForgets.keyOf(linkId) != key) return
-        if (!succeeds { client.forget(linkId, key) } || pendingForgets.keyOf(linkId) != key) return
+    /** Tells the service to forget a link still to be forgotten with this key, and returns whether it answered. */
+    private suspend fun forgetIfPending(linkId: String, key: String, client: DeviceParcelClient): Boolean {
+        if (pendingForgets.keyOf(linkId) != key) return false
+        if (!succeeds { client.forget(linkId, key) }) return false
+        // Followed again while the service was told: the link stays.
+        if (pendingForgets.keyOf(linkId) != key) return true
         pendingForgets = pendingForgets.setting(linkId, null)
         save()
+        return true
     }
 
     /**
-     * Turns off the notifications of parcels forgotten while the service couldn't be told. The first trouble ends the
-     * round; the rest wait for the next.
+     * Turns off the notifications of parcels forgotten while the service couldn't be told, and returns whether it
+     * answered. The first trouble ends the round; the rest wait for the next.
      */
-    private suspend fun stopForgottenAlerts(client: DeviceParcelClient) {
+    private suspend fun stopForgottenAlerts(client: DeviceParcelClient): Boolean {
+        var answered = false
         for (entry in forgotten) {
             val token = entry.alertToken
-            if (token != null && !succeeds { client.removeAlert(entry.linkId, removal(token)) }) return
+            if (token != null) {
+                if (!succeeds { client.removeAlert(entry.linkId, removal(token)) }) return answered
+                answered = true
+            }
             forgotten = forgotten.filter { !(it.linkId.equalsCanonically(entry.linkId) && it.alertToken.equalsCanonically(entry.alertToken)) }
             save()
         }
+        return answered
     }
 
     /**
@@ -931,13 +949,15 @@ class DeviceParcels(
     }
 
     /**
-     * Tells the service of the links forgotten here while it couldn't be told. One it has forgotten, or no longer has,
-     * is done with; the others wait for the next refresh.
+     * Tells the service of the links forgotten here while it couldn't be told, and returns whether it answered. One it
+     * has forgotten, or no longer has, is done with; the others wait for the next refresh.
      */
-    private suspend fun tellPendingForgets(client: DeviceParcelClient) {
+    private suspend fun tellPendingForgets(client: DeviceParcelClient): Boolean {
+        var answered = false
         for ((linkId, key) in pendingForgets) {
-            forgetIfPending(linkId, key, client)
+            if (forgetIfPending(linkId, key, client)) answered = true
         }
+        return answered
     }
 
     /**
@@ -987,9 +1007,10 @@ class DeviceParcels(
      * Forgets every parcel, those whose saved copy was lost and is still to be read again included. The ones the
      * service could not be told about leave the list too, and each refresh tells it again. The keys of the lost ones
      * are set aside before any call to the service: a refresh that runs meanwhile no longer reads them again, and a
-     * read already under way lands for a key that has gone and is dropped (`recoverParcels`).
+     * read already under way lands for a key that has gone and is dropped (`recoverParcels`). Returns whether the
+     * service answered.
      */
-    suspend fun forgetAll() {
+    suspend fun forgetAll(): Boolean {
         val client = client
         val unread = keys.filterKeys { linkId -> entries.none { it.linkId.equalsCanonically(linkId) } }
         if (unread.isNotEmpty()) {
@@ -999,11 +1020,13 @@ class DeviceParcels(
             }
             save()
         }
-        for (entry in entries) forget(entry.parcel.id)
+        var answered = false
+        for (entry in entries) if (forget(entry.parcel.id)) answered = true
         if (unread.isNotEmpty() && client != null) {
-            tellPendingForgets(client)
+            if (tellPendingForgets(client)) answered = true
             save()
         }
+        return answered
     }
 
     /**

@@ -1216,15 +1216,18 @@ class ParcelStore(
 
     suspend fun permanentlyDelete(parcel: Parcel) {
         val generation = session.generation
+        var answered = false
         if (isDemo) {
             demo.permanentlyDelete(parcel.id)
             demoShares.stop(parcel.id)
         } else if (isGuest) {
-            device.forget(parcel.id)
+            answered = device.forget(parcel.id)
         } else {
             api.permanentlyDelete(parcel.id)
         }
         session.checkGeneration(generation)
+        // A guest's list may hold nothing more to read: the service forgetting the parcel says it is up.
+        if (answered) noteUp()
         // What its link carried goes with the parcel.
         shareNotes.forget(parcel.id)
         mutationRevision += 1
@@ -1365,8 +1368,9 @@ class ParcelStore(
         if (!isGuest) return
         val generation = session.generation
         try {
-            device.forgetAll()
+            val answered = device.forgetAll()
             undoParcel = null
+            if (answered && generation == session.generation && isGuest) noteUp()
         } finally {
             if (generation == session.generation && isGuest) {
                 mutationRevision += 1
@@ -2021,7 +2025,7 @@ class ParcelStore(
             trouble = error
         }
         if (generation != session.generation || !isGuest) return
-        // A round that read nothing new says nothing of the server; one that failed for it says it is down.
+        // A round the service answered nothing says nothing of it; one that failed for it says it is down.
         if (trouble is ServerDown) noteDown(trouble) else if (trouble == null && contacted) noteUp()
         listReadAt = device.lastCheckedAt
         if (pendingMutations.isEmpty()) {

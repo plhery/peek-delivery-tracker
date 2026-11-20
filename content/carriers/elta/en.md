@@ -51,11 +51,11 @@ If the tracker answers "No Tracking History", the item has no scans yet or is to
 
 ELTA delivers a domestic parcel to your home, to an ELTA store (you get an SMS or a notice) or to a PostBox locker where your postcode allows it. ELTA's domestic parcel page promises delivery in 3 working days across Greece.
 
-**Missed delivery.** A parcel from abroad that can't be handed over leaves a notice asking you to collect it at the nearest post office. Items with customs charges are delivered only against a signature. A domestic parcel that isn't delivered to your home is collected at the post office counter after a phone call, a notice slip or an SMS, and that notice or SMS states how long the parcel stays at the post office. Collect it within that time: an item nobody collects goes back to the sender (at no extra charge within Greece), and one the sender doesn't take back either is kept as unclaimed until at least six months after it was posted.
+**Missed delivery.** A parcel from abroad that can't be handed over leaves a notice asking you to collect it at the nearest post office. ELTA's charter gives no collection period for such a parcel; one that went through customs waits 20 days from the notice (see Customs below). If the postman finds nobody in, ELTA may also take the item back to the nearby store and put it in that store's PostBox, so you can collect it whenever you like, without queuing. Items with customs charges are delivered only against a signature. A domestic parcel that isn't delivered to your home is collected at the post office counter after a phone call, a notice slip or an SMS, and that notice or SMS states how long the parcel stays at the post office. Collect it within that time: an item nobody collects goes back to the sender (at no extra charge within Greece), and one the sender doesn't take back either is kept as unclaimed until at least six months after it was posted.
 
 **ELTA Courier** makes two delivery attempts. After the first notice, call your local courier store to schedule delivery; after two notices, collect it there or book a new delivery, which may cost extra. Courier stores open Monday to Friday 08:00 to 20:00 and Saturday 08:00 to 14:00, which may vary by area. A door-to-door courier item that can't be delivered goes back to the sender, within two weeks of being sent unless the sender's contract says otherwise.
 
-**PostBox lockers.** ELTA's smart lockers are open 24/7 (stations in the Metro and ISAP keep station hours). When your item is placed, a Viber or SMS message gives a 6-digit PIN and the locker's location. Collect within 48 hours; after that it moves to the nearest ELTA store and you get a new message. Items with duties or taxes don't go to a PostBox. You can ask for one with "Θέλω από PostBox" in ELTA's SMS or Viber.
+**PostBox lockers.** ELTA's smart lockers are open 24/7 (stations in the Metro and ISAP keep station hours). When your item is placed, a Viber or SMS message gives a 6-digit PIN and the locker's location. Collect within 48 hours; after that it moves to the nearest ELTA store and you get a new message. Items with duties or taxes don't go to a PostBox. You can ask for one with "Θέλω από PostBox" in ELTA's SMS or Viber; for an item from abroad, whether you can still choose one depends on when ELTA sorts it. A PostBox takes items up to 62 × 36 × 60 cm and 20 kg, and collecting from one costs nothing extra.
 
 **Changing the address.** For a courier item only the sender can, in writing to customerservice@elta-courier.gr. For a fully tracked postal item, the sender can file a change request at a store, in person with ID.
 
@@ -63,11 +63,11 @@ ELTA delivers a domestic parcel to your home, to an ELTA store (you get an SMS o
 
 If tracking stops moving for days, see [tracking that isn't updating](guide:tracking-not-updating) first.
 
-**Customs.** For parcels from outside the EU, duties are paid only at an ELTA store when you collect. A cleared item waits 20 days at the post office from the notice; bring the notice and ID (ID card, passport or driving licence). If you dispute the charges, don't collect: file a reasoned request at the store with proof of value. More in [parcels held at customs](guide:customs).
+**Customs.** For parcels from outside the EU, duties are paid only at an ELTA store when you collect. ELTA sends a notice that lists the charges and the post office to collect from. A cleared item waits 20 days at the post office from the notice; you, or someone you authorise, bring the notice and the ID of whoever collects (ID card, passport or driving licence), and pay the charges there. After 20 days it goes back to ELTA's customs centre, where it is declared unclaimed or, in some cases, returned to the sender. If you dispute the charges, don't collect: file a reasoned request at the store with proof of value. More in [parcels held at customs](guide:customs).
 
 **Lost.** The sender or recipient can file a search request at an ELTA store, with ID and the receipt of posting, up to six months after posting. It covers fully tracked items only. ELTA answers by registered letter within 8 weeks (4 weeks for some items abroad).
 
-**Damaged courier parcel.** Accept it with reservation and declare it within one working day, through the ELTA Courier contact form or at the store. Without that, ELTA bears no liability. The compensation form goes to apozimiwseis@elta-courier.gr with the voucher, the invoice and photos of the item and packaging. Compensation goes to the sender, or to you if the sender waives it in writing: for an online order, ask the shop.
+**Damaged courier parcel.** Accept it with reservation and declare it within one working day, through the ELTA Courier contact form or at the store. Without that, ELTA bears no liability. The compensation form goes to apozimiwseis@elta-courier.gr with the voucher, the invoice and photos of the item and packaging. Compensation goes to the sender, or to you if the sender waives it in writing: for an online order, ask the shop. For questions, call ELTA Courier's compensation department on +30 210-6073066.
 
 **Complaints.** ELTA must answer within 15 days. If you're not satisfied, ask Customer Service in writing to refer it to its Dispute Resolution Committee.
 
@@ -78,7 +78,7 @@ ELTA's channels, as elta.gr and elta-courier.gr listed them in November 2026. EL
 - **Call centre:** 800-11-82000 from a Greek landline, 212-0000-800 from a mobile, +30 212-0000-800 from abroad; Monday to Friday 08:00 to 18:00.
 - **New service points:** 212 00 00 700, a line only for questions about ELTA's new service points, Monday to Friday 08:00 to 18:00, at local call rates.
 - **E-mail:** service@elta-net.gr, or the form on [elta.gr/en/contact](https://www.elta.gr/en/contact).
-- **ELTA Courier:** 210 6073000 (charged as a normal call), tracking help Monday to Friday 08:00 to 16:00; info@elta-courier.gr and customercare@elta-courier.gr. Written complaints can also go by post to 200 Ionias Ave. & 61 Iakovaton St., 111 44 Athens, for the attention of the Customer Service Department.
+- **ELTA Courier:** 210 6073000 (charged as a normal call) or 11120 (charged at your phone provider's rates), tracking help Monday to Friday 08:00 to 16:00 (at weekends and on public holidays, online tracking only); info@elta-courier.gr and customercare@elta-courier.gr. Written complaints can also go by post to 200 Ionias Ave. & 61 Iakovaton St., 111 44 Athens, for the attention of the Customer Service Department.
 - **By post:** Hellenic Post Customer Service, Adrianoupoleos 45, 16070 Kessariani.
 - **In person:** any ELTA store (store finder on elta.gr).
 
@@ -117,13 +117,14 @@ Use the store finder on elta.gr; ELTA Courier stores are on elta-courier.gr's ne
 - [ELTA: Contact](https://www.elta.gr/en/contact) – call centre numbers, number from abroad, new service point line, courier phone, form
 - [ELTA: Επικοινωνία](https://www.elta.gr/contact) – call centre numbers, store finder, company details
 - [ELTA: Προστατευθείτε από το Phishing](https://www.elta.gr/prosochi-sto-phishing) – fake e-mail and SMS warning, duties paid only at stores
-- [ELTA Courier: FAQ](https://www.elta-courier.gr/faq?lang=en) – two attempts, notices, store hours, voucher number, address change, complaints by post
+- [ELTA Courier: FAQ](https://www.elta-courier.gr/faq?lang=en) – two attempts, notices, store hours, voucher number, address change, complaints by post, compensation department phone
+- [ELTA Courier: Συχνές ερωτήσεις](https://www.elta-courier.gr/faq) – 11120, charged at the provider's rates
 - [ELTA Courier: Αναζήτηση Αποστολής](https://www.elta-courier.gr/search) – courier number format, several numbers one per line
 - [ELTA Courier: Επικοινωνία](https://www.elta-courier.gr/contact) – 210 6073000, tracking help hours, e-mail, reservation within one working day
 - [ELTA Courier: Έντυπο Αποζημίωσης](https://www.elta-courier.gr/apozimiwseis) – compensation form, e-mail, documents
-- [ELTA Courier: Τηλεφωνική εξυπηρέτηση](https://www.elta-courier.gr/tilefwniki_eksypiresisi) – phone line charge
-- [ELTA: PostBox](https://www.elta.gr/paralabi-antikeimenon-apo-tin-isonexupni-thuridasin-elta) – PIN by SMS or Viber, 48 hours, opening hours, no duties
-- [ELTA: Εκτελωνισμός](https://www.elta.gr/ektelonismos-2) – customs clearance, 20 days, ID, disputes
+- [ELTA Courier: Τηλεφωνική εξυπηρέτηση](https://www.elta-courier.gr/tilefwniki_eksypiresisi) – phone line charge, tracking help hours, online only at weekends and on holidays
+- [ELTA: PostBox](https://www.elta.gr/paralabi-antikeimenon-apo-tin-isonexupni-thuridasin-elta) – PIN by SMS or Viber, 48 hours, opening hours, no duties, items from abroad, size and weight, no extra charge, the store's PostBox after a missed delivery
+- [ELTA: Εκτελωνισμός](https://www.elta.gr/ektelonismos-2) – customs clearance, notice with the charges, 20 days, ID, an authorised representative, unclaimed items, disputes
 - [ELTA: Δέματα Εσωτερικού](https://www.elta.gr/demata-esoterikou) – 3 working days, store, PostBox or home delivery
 - [ELTA: Υπηρεσίες Ταχυμεταφορών](https://www.elta.gr/ypiresia-esoterikou-porta-porta) – door-to-door courier service
 - [ELTA: Αίτηση Αναζήτησης](https://www.elta.gr/aitisi-anazitisis) – search request conditions, six months, 8 weeks

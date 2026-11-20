@@ -52,7 +52,7 @@ Order from several sellers and each one ships its own items. One seller can also
 
 ## Where is the tracking for a Kaufland order?
 
-In Kaufland's shipping email. Kaufland tells sellers that when they mark an item as sent with a tracking link and the carrier's name, Kaufland Global Marketplace emails both to you, with a link to follow the parcel. If your order comes in several parcels, the seller can add a tracking number for each.
+In Kaufland's shipping email. Kaufland tells sellers that when they mark an item as sent with a tracking link and the carrier's name, Kaufland Global Marketplace emails both to you, with a link to follow the parcel. If your order comes in several parcels, the seller can add a tracking number for each, and Kaufland asks it to let you know. Kaufland also asks sellers to mark an item as sent only once it has really left.
 
 Some parcels have no tracking number. Kaufland expects sellers to send at least 80% of their items with a valid one, and a seller who can't give a number marks the item as sent without it: Kaufland's example is a book sent with DHL at the book rate ("Büchersendung"), which has no tracking number. Other shops: [find your tracking number](guide:find-tracking-number).
 
@@ -63,7 +63,7 @@ Not sure which carrier your number belongs to? Type it here:
 
 ## Why is my Kaufland order late, or why isn't tracking moving?
 
-The delivery time on the offer is the seller's handling time plus the transport time. Kaufland counts only working days, Saturday isn't one, and public holidays don't count either. Kaufland tells sellers that an order placed on a nationwide German public holiday gets one more day in their delivery window; a regional holiday doesn't.
+The delivery time on the offer is the seller's handling time plus the transport time. Kaufland counts only working days, Saturday isn't one, and public holidays don't count either. Kaufland tells sellers that an order placed on a nationwide German public holiday gets one more day in their delivery window; a regional holiday doesn't. Kaufland asks sellers to keep that window reliable, from your order to the actual delivery, with their carrier's usual delays built in; some let Kaufland adjust it from their past deliveries ("Smart Delivery Time Automation").
 
 When nothing moves, it's usually one of these:
 
@@ -71,7 +71,7 @@ When nothing moves, it's usually one of these:
 - **Carrier delay.** DHL's usual delivery time is 1 to 2 working days, and in some cases it takes longer. If the status hasn't changed for more than 5 working days, DHL's help "Wo ist mein Paket?" (where is my parcel?) helps you search. If you're waiting for an online order, DHL asks you to contact the sender, who can probably sort it out faster.
 - **Several parcels.** One box can come later than the others.
 
-Kaufland tells sellers that if an item still isn't marked as sent 14 days after the latest delivery date, and no ticket is open for the order, it reminds them; if nothing changes within seven days, Kaufland cancels the item. A cancelled item is refunded to you automatically.
+Kaufland tells sellers that if an item still isn't marked as sent 14 days after the latest delivery date, and no ticket is open for the order, it reminds them; if nothing changes within seven days, Kaufland cancels the item. A cancelled item is refunded to you automatically. If an unforeseen delay comes up, Kaufland asks the seller to tell you about it through a ticket on your order, without waiting for you to ask.
 
 When waiting is still normal: [tracking not updating](guide:tracking-not-updating).
 
@@ -82,7 +82,7 @@ Start with the tracking, then go to the seller. In this order:
 :::steps
 - Check the tracking | Open the tracking link from Kaufland's shipping email and see what the carrier scanned last. A parcel can be waiting at a Packstation or parcel shop.
 - Look around and ask | If tracking says delivered, check your safe place and ask your neighbours.
-- Contact the seller | Your message becomes a ticket on the order, and Kaufland gives the seller 48 hours (working days) to answer. Reasons include "Lieferverzug" (delivery delayed), "Lieferung nicht erhalten" (delivery not received) and "Defekt/Schaden" (defect/damage).
+- Contact the seller | Your message becomes a ticket on the order, and Kaufland gives the seller 48 hours (working days) to answer. Reasons include "Lieferverzug" (delivery delayed), "Lieferung nicht erhalten" (delivery not received), "Unvollständige Lieferung" (incomplete delivery), "Falschlieferung" (wrong item) and "Defekt/Schaden" (defect/damage).
 - Involve customer service | If the seller doesn't help with a missing or damaged parcel, contact Kaufland's customer service from your order overview ("Bestellübersicht") or the help area ("Hilfebereich"). The seller can also involve customer service in your ticket, and Kaufland's support then takes over the conversation with you. Kaufland's pages for sellers list cancellations by the seller or by Kaufland for reasons such as "keine Reaktion des Händlers" (no response from the seller) and "Ware nicht erhalten" (goods not received).
 - Refund or new item | Until you have the goods, the seller carries the risk (Section 475(2) of the German Civil Code). If the parcel stays lost, ask the seller for a new one or a cancellation: a cancelled order is refunded automatically.
 :::
@@ -103,7 +103,7 @@ These are the deadlines that matter:
 
 Bulky items can come by freight forwarder ("Spedition"); for these, Kaufland asks for your phone number at checkout.
 
-Delivery to a Packstation or parcel shop ("Out-of-Home") is currently only offered when your basket holds one item, only with DHL, GLS or DPD, and only when the seller turns it on. Kaufland's limits for DHL: a Packstation takes parcels up to 75 × 60 × 40 cm and 31.5 kg, and a DHL branch ("Filiale") parcels up to 31.5 kg with a girth measurement ("Gurtmaß") of up to 360 cm. Bulky goods ("Sperrgut") can't go to a Packstation. DHL can't bring a parcel from another EU country to a Packstation or branch in Germany, so Kaufland tells such sellers to use another carrier for it. More on pickup points: [parcel lockers](guide:parcel-lockers).
+Delivery to a Packstation or parcel shop ("Out-of-Home") is currently only offered when your basket holds one item, only with DHL, GLS or DPD, and only when the seller turns it on. On its other marketplaces, Kaufland lets sellers use pickup points of DHL, GLS and DPD too, plus InPost in Poland, Packeta in the Czech Republic and Slovakia, and Czech Post in the Czech Republic. Kaufland's limits for DHL: a Packstation takes parcels up to 75 × 60 × 40 cm and 31.5 kg, and a DHL branch ("Filiale") parcels up to 31.5 kg with a girth measurement ("Gurtmaß") of up to 360 cm. Bulky goods ("Sperrgut") can't go to a Packstation. DHL can't bring a parcel from another EU country to a Packstation or branch in Germany, so Kaufland tells such sellers to use another carrier for it. More on pickup points: [parcel lockers](guide:parcel-lockers).
 
 To return a freight item, you always go through a ticket, and Kaufland suggests the seller arranges the collection with you, for example by asking for three dates that suit you.
 
@@ -137,10 +137,10 @@ If a parcel changes carrier on the way and the first carrier names the one takin
 - [Kaufland e-commerce: Über uns](https://kaufland-ecommerce.com/ueber-uns/) – real.de became Kaufland.de in 2021, Slovakia and Czech Republic in 2023, expansion since 2024
 - [Kaufland.de: Allgemeine Geschäftsbedingungen](https://www.kaufland.de/i/rechtliches/agb/~5zbYiMDtb8NSXAwcBS5ppZ/) – contract with the seller, seller's responsibility, "Verkäufer:", Kaufland Marketplace GmbH's own offers, complaints as tickets
 - [Kaufland: Häufige Fragen](https://filiale.kaufland.de/service/haeufige-fragen.html) – marketplace sellers' items beside Kaufland's own range, customer service via the order overview or help area, no returns in stores, returns to the seller
-- [Kaufland Global Marketplace: Shipping settings](https://www.kauflandglobalmarketplace.com/en/seller-university/selling/settings/shipping-settings/) – parcel or freight, phone number for freight, working days, Saturday, holidays, Packstation and parcel shop carriers, one item, sizes, bulky goods, DHL from other EU countries, shipping email with carrier and tracking link
+- [Kaufland Global Marketplace: Shipping settings](https://www.kauflandglobalmarketplace.com/en/seller-university/selling/settings/shipping-settings/) – parcel or freight, phone number for freight, working days, Saturday, holidays, Packstation and parcel shop carriers, pickup carriers on each marketplace, one item, sizes, bulky goods, DHL from other EU countries, Smart Delivery Time Automation, shipping email with carrier and tracking link
 - [Kaufland Global Marketplace: Handling national holidays](https://www.kauflandglobalmarketplace.com/en/seller-university/your-performance/service-performance/handling-national-holidays/) – one more day for nationwide holidays, not regional ones
 - [Kaufland Global Marketplace: Customer enquiries](https://www.kauflandglobalmarketplace.com/en/seller-university/selling/customer-enquiries/) – tickets, 48 hours, involve customer service, first reply with a return option, cancellation and full refund, collection dates, legal guarantee, excluded items
-- [Kaufland Global Marketplace: Kundenservice KPIs](https://www.kauflandglobalmarketplace.com/seller-university/ihre-performance/service-performance/kundenservice-kpis/) – ticket reasons, several tracking numbers per order, cancellations by the seller or Kaufland and their reasons
+- [Kaufland Global Marketplace: Kundenservice KPIs](https://www.kauflandglobalmarketplace.com/seller-university/ihre-performance/service-performance/kundenservice-kpis/) – ticket reasons, reliable delivery windows with carrier delays built in, several tracking numbers per order, telling customers about several parcels and delays, marking as sent only once sent, cancellations by the seller or Kaufland and their reasons
 - [Kaufland Global Marketplace: KPIs for your delivery performance](https://www.kauflandglobalmarketplace.com/en/seller-university/your-performance/service-performance/kpis-for-your-delivery-performance/) – 80% with a valid tracking number, 14 days, seven days, cancellation
 - [Kaufland Global Marketplace: Bestellabwicklung](https://www.kauflandglobalmarketplace.com/seller-university/verkaufen/bestellabwicklung/) – marking as sent, withdrawals handled as cancellations, who can cancel, automatic refund on cancellation
 - [Kaufland Global Marketplace: Returns settings](https://www.kauflandglobalmarketplace.com/en/seller-university/selling/settings/returns-settings/) – 14 days by default, over €40, €5 label, DHL QR code, DPD PDF label, refund after receipt or 3 working days, refund without return, freight returns by ticket

@@ -275,6 +275,26 @@ describe('providerCopies', () => {
     expect(providerCopies({ ...row, tracking_events: untimed }).has('u2')).toBe(false);
   });
 
+  it('leaves out a provider\'s copy at the time the carrier first gave a scan it re-dated since', () => {
+    // USPS moves a departure on; 17TRACK keeps the time USPS first gave it.
+    const track = (id: string, occurredAt: string, stage = 'in_transit') =>
+      scan(id, 'unknown', occurredAt, { universal_provider: '17TRACK', stage, description: `Track ${id}` });
+    const row = (moved: string) => ({
+      carrier_data: { routing: { confirmed_carrier: 'usps' } },
+      tracking_events: [
+        scan('c1', 'usps', moved, { retimed_from: '2026-11-19T02:10:00-07:00' }),
+        scan('c2', 'usps', '2026-11-18T08:00:00Z'),
+        track('u1', '2026-11-19T09:10:00Z'),
+        // Another stage at that minute, and a row the re-dating's hours from another scan, stay.
+        track('u2', '2026-11-19T09:10:00Z', 'out_for_delivery'),
+        track('u3', '2026-11-18T04:00:00Z', 'customs'),
+      ],
+    });
+    expect(providerCopyScans(row('2026-11-19T13:26:00Z'))).toEqual(new Map([['u1', new Set(['c1'])]]));
+    // Moved on whole hours, the copy still shows no zone the provider read the carrier's other scans in.
+    expect(providerCopyScans(row('2026-11-19T13:10:00Z'))).toEqual(new Map([['u1', new Set(['c1'])]]));
+  });
+
   it('reads the day of a carrier\'s scan from its own offset when it has no local time', () => {
     // Poczta Polska gives its time with its offset; ParcelsApp gives the scans of that day their day alone.
     const parcelsApp = (id: string, occurredAt: string, stage: string, day: string) =>

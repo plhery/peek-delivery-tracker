@@ -448,5 +448,41 @@ do $$ begin
     raise exception 'A copy over a day before a USPS departure, or of another USPS scan over three hours before it, was hidden';
   end if;
 end; $$;
+-- A provider's row at the minute USPS first gave a scan it has re-dated since, in its stage, is a copy, and shows no
+-- zone: the provider's row the re-dating's hours from another USPS scan, and its row of another stage then, stay.
+insert into public.packages(id, user_id, tracking_number, label, carrier, current_stage, carrier_data)
+values ('97000000-0000-0000-0000-0000000000a1', '97000000-0000-0000-0000-000000000001', 'COPYTEST10', 'First given',
+  'usps', 'in_transit', '{"routing": {"confirmed_carrier": "usps"}}');
+insert into public.tracking_events(id, package_id, stage, description, location, provider_event_id, occurred_at, created_at, raw_data)
+values
+ ('97000000-0000-0000-0000-0000000000a2', '97000000-0000-0000-0000-0000000000a1', 'in_transit', 'Departed USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'usps:moved', '2026-11-19T13:26:00Z', '2026-11-19T10:01:00Z',
+  '{"retimed_from": "2026-11-19T02:10:00-07:00"}'),
+ ('97000000-0000-0000-0000-0000000000a3', '97000000-0000-0000-0000-0000000000a1', 'in_transit', 'Arrived at USPS Facility',
+  'EXAMPLE CITY DISTRIBUTION CENTER', 'usps:arrived', '2026-11-18T08:00:00Z', '2026-11-18T09:00:00Z', '{}'),
+ ('97000000-0000-0000-0000-0000000000a4', '97000000-0000-0000-0000-0000000000a1', 'in_transit', 'Departed from facility',
+  null, 'unknown:first', '2026-11-19T09:10:00Z', '2026-11-19T18:00:00Z', '{"universal_provider": "17TRACK"}'),
+ ('97000000-0000-0000-0000-0000000000a5', '97000000-0000-0000-0000-0000000000a1', 'out_for_delivery', 'Out for delivery',
+  null, 'unknown:other-stage', '2026-11-19T09:10:00Z', '2026-11-19T18:00:00Z', '{"universal_provider": "17TRACK"}'),
+ ('97000000-0000-0000-0000-0000000000a6', '97000000-0000-0000-0000-0000000000a1', 'customs', 'Customs',
+  null, 'unknown:shifted', '2026-11-18T04:00:00Z', '2026-11-19T18:00:00Z', '{"universal_provider": "17TRACK"}');
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-0000000000a4') then
+    raise exception 'A copy at the time USPS first gave a scan it re-dated was not hidden';
+  end if;
+  if public.hidden_provider_copy('97000000-0000-0000-0000-0000000000a5') then
+    raise exception 'A row of another stage at the time USPS first gave a scan was hidden';
+  end if;
+end; $$;
+update public.tracking_events set occurred_at = '2026-11-19T13:10:00Z' where id = '97000000-0000-0000-0000-0000000000a2';
+do $$ begin
+  if not public.hidden_provider_copy('97000000-0000-0000-0000-0000000000a4') then
+    raise exception 'A copy at the time USPS first gave a scan it re-dated whole hours on was not hidden';
+  end if;
+  if public.hidden_provider_copy('97000000-0000-0000-0000-0000000000a5')
+    or public.hidden_provider_copy('97000000-0000-0000-0000-0000000000a6') then
+    raise exception 'A copy at a re-dated scan''s first time was read as a provider''s zone';
+  end if;
+end; $$;
 reset role;
 rollback;

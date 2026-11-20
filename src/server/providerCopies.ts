@@ -11,7 +11,9 @@
  * in the scan's words, alone or followed by the copy's place, or so worded up
  * to three hours before it at its place (ParcelsApp dates a USPS departure at
  * the time USPS first gave it, before USPS moved the departure on), up to a
- * day before a USPS departure, which USPS re-dates that far, or in any stage
+ * day before a USPS departure, which USPS re-dates that far, at the minute the
+ * carrier first gave a scan it re-dated since (`retimed_from`), in its stage
+ * (17TRACK keeps a USPS departure at its first time, hours away), or in any stage
  * and words whole hours away to the second when that second is not a minute's
  * first (ParcelsApp reads ECMS's Japanese scans an hour off). A copy only
  * whole hours from the carrier's scans shows the provider read them a zone
@@ -212,6 +214,7 @@ function movedOn(copy: JsonObject, scan: JsonObject): boolean {
  * dated by its day alone is repeated only in its words and stage at the start of that day on the copy's wall clock.
  */
 function copies(copy: JsonObject, scan: JsonObject): boolean {
+  if (firstGivenAt(copy, scan)) return true;
   const clock = wallClock(scan);
   if (Number.isFinite(clock)) {
     const shift = Math.floor(instant(copy) / MINUTE_MS) * MINUTE_MS - Math.floor(clock / MINUTE_MS) * MINUTE_MS;
@@ -242,9 +245,22 @@ function wholeHours(shift: number): boolean {
   return shift !== 0 && shift % HOUR_MS === 0 && Math.abs(shift) <= MAX_SHIFT_MS;
 }
 
-/** Whether `copy` repeats the carrier's `scan` whole hours from it, and so on a clock a zone away. */
+/**
+ * Whether `copy` repeats the carrier's `scan` whole hours from it, and so on a clock a zone away. A copy at the time
+ * the carrier first gave a scan it re-dated shows no zone.
+ */
 function hoursAway(copy: JsonObject, scan: JsonObject): boolean {
-  return !Number.isFinite(wallClock(scan)) && copies(copy, scan) && wholeHours(minutesApart(copy, scan));
+  return !Number.isFinite(wallClock(scan)) && !firstGivenAt(copy, scan) && copies(copy, scan)
+    && wholeHours(minutesApart(copy, scan));
+}
+
+/**
+ * Whether `copy` is at the minute the carrier first gave `scan`, before it re-dated the scan (`retimed_from`), in
+ * its stage or none: the provider kept the first time (17TRACK's copy of a USPS departure USPS moved on).
+ */
+function firstGivenAt(copy: JsonObject, scan: JsonObject): boolean {
+  const first = Date.parse(rawField(scan, 'retimed_from'));
+  return Number.isFinite(first) && Math.floor(first / MINUTE_MS) === Math.floor(instant(copy) / MINUTE_MS) && stagesAgree(copy, scan);
 }
 
 function place(event: JsonObject): string {

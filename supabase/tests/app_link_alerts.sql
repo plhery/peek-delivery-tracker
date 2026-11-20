@@ -241,6 +241,16 @@ begin
   if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from true then
     raise exception 'A browser that gets the notifications of an account with a tracking copy is told twice';
   end if;
+  -- The account's settings rule, as for the owner's archived parcels: a copy archived or muted there keeps the
+  -- link quiet too.
+  update public.packages set archived_at = now() where id = copy;
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from true then
+    raise exception 'A copy archived in the account let the link''s alert tell the browser';
+  end if;
+  update public.packages set archived_at = null, notifications_muted = true where id = copy;
+  if (select account_endpoint from public.pending_parcel_link_alerts where event_id = new_event) is distinct from true then
+    raise exception 'A copy muted in the account let the link''s alert tell the browser';
+  end if;
 end;
 $$;
 rollback;

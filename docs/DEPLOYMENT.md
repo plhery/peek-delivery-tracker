@@ -444,6 +444,14 @@ its own maintenance strip.
   database); `"mode": "hard"` turns requests away before the server goes down, `/health`
   aside. The switch and its steps are in the server's runbook.
 
+Before a planned host reboot, once the switch has put the guard in front and before the
+server goes down, `node scripts/warm-edge-guard.mjs https://peektracker.com`
+([warm-edge-guard.mjs](../scripts/warm-edge-guard.mjs)) asks for every carrier's page and
+guide in the sitemap through it, four at a time, so it has a copy of each. Each page is one
+Worker request (`--dry-run` lists them), and only the data centre the requests go through
+keeps the copies. It asks for nothing unless `/health` comes back marked `X-Edge-Guard: on`,
+and stops once the guard answers in the server's place.
+
 Deploy by hand with `npx wrangler@4 deploy --config ops/cloudflare/edge/wrangler.jsonc`, not during a maintenance: a deploy keeps
 only the routes in that file, so it would take the guard away. `node --test
 ops/cloudflare/edge/worker.test.mjs` tests it.

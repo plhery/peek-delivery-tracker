@@ -862,6 +862,23 @@ describe('withEventPlaces', () => {
     }));
     expect(currentEvent(parcelEvents)?.id).toBe('point');
     expect((withoutEventSources(row).tracking_events as Record<string, unknown>[]).some((event) => 'stage_source' in event)).toBe(false);
+    // The scan before a notice may be the answer stored when the parcel was added, before its carrier was known: the
+    // carrier's own row of that scan joined it. A universal provider's row is no such scan.
+    const added = (provider?: string) => ({
+      id: 'parcel', carrier: 'dpd-fr', tracking_events: [
+        scan('depot', 'in_transit', '2026-11-16T21:20:00Z', 'carrier_map'),
+        scan('round', 'out_for_delivery', '2026-11-17T07:28:00Z', 'carrier_map',
+          { provider_event_id: 'unknown:round', ...(provider ? { universal_provider: provider } : {}) }),
+        scan('text', 'out_for_delivery', '2026-11-17T07:33:00Z', 'none', { kept_stage: true }),
+      ],
+    });
+    const notices = (served: Record<string, unknown>[]) => served.map(({ id, relay_of }) => [id, relay_of]);
+    expect(notices((withEventPlaces(added()) as { tracking_events: Record<string, unknown>[] }).tracking_events)).toEqual([
+      ['depot', undefined], ['round', undefined], ['text', 'round'],
+    ]);
+    expect(notices((withEventPlaces(added('17TRACK')) as { tracking_events: Record<string, unknown>[] }).tracking_events)).toEqual([
+      ['depot', undefined], ['round', undefined], ['text', undefined],
+    ]);
   });
 
   it('serves a notice its carrier sent twice as one step, headed by the newer row', () => {

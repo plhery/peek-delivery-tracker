@@ -707,7 +707,8 @@ and nothing typed is sent.
   the apps' headline, alerts and the delivery email go by the newest scan in a stage, which a
   pending scan never makes look out of date. A notice in that scan's stage keeps it, but after a
   delivery or a return: it is served under the scan (`relay_of`), or under the row that scan is
-  itself shown under as another carrier's copy, so the headline stays on the scan, and it
+  itself shown under as another carrier's copy, the scan being the carrier's or the one of the
+  answer stored when the parcel was added, before its carrier was known, so the headline stays on the scan, and it
   announces nothing (`src/server/stageNotices.ts`). A scan its adapter leaves in no
   stage, or pending (AliExpress's last-mile notice), whose code or wording the carrier's map notes keeps the
   stage of the scan before it (Royal Mail's retention seconds after a customs hold) is such a notice: the sync gives it the stage of

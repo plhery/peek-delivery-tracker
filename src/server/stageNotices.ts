@@ -18,6 +18,12 @@ export type NoticeScan = {
   kept?: boolean;
 };
 
+/**
+ * The source of a carrier's answer stored when the parcel was added, before its carrier was known: the carrier's later
+ * answers tell those scans again, and each joins the row it repeats, so that row is the scan of the carrier's notices.
+ */
+const ADD_TIME_SOURCE = 'unknown';
+
 /** Stages a notice in `none` can't be told apart in unless it is stored as one, or that no stage of a scan's own is in. */
 const NOT_NOTICES = new Set(['pending', 'in_transit']);
 
@@ -37,9 +43,10 @@ export function keptStage(value: unknown): boolean {
 
 /**
  * Each notice in the stage of its scan before it, with that scan's id: the newest scan of the
- * notice's source in a stage dated at or before it, other such notices aside (a mail notice and a
- * text message of one instant both go under the scan). Peek's own rows are neither. Rows already
- * shown with another (`paired`) are no notices, but can be the scan before one.
+ * notice's source, or of the answer stored when the parcel was added (`ADD_TIME_SOURCE`), in a stage
+ * dated at or before it, other such notices aside (a mail notice and a text message of one instant
+ * both go under the scan). Peek's own rows are neither. Rows already shown with another (`paired`)
+ * are no notices, but can be the scan before one.
  */
 export function stageNotices(scans: readonly NoticeScan[], paired: ReadonlySet<string> = new Set()): Map<string, string> {
   const ordered = scans.filter((scan) => Number.isFinite(scan.at)).sort((a, b) => a.at - b.at || a.id.localeCompare(b.id));
@@ -50,7 +57,8 @@ export function stageNotices(scans: readonly NoticeScan[], paired: ReadonlySet<s
     let lead: NoticeScan | undefined;
     for (const scan of ordered) {
       if (scan.at > notice.at) break;
-      if (scan === notice || scan.source !== notice.source || scan.stage === 'pending' || notices.has(scan.id)) continue;
+      if (scan === notice || (scan.source !== notice.source && scan.source !== ADD_TIME_SOURCE) || scan.stage === 'pending'
+        || notices.has(scan.id)) continue;
       // Another notice of the same instant in the same stage goes under the scan too.
       if (scan.at === notice.at && scan.stageSource === 'none' && scan.stage === notice.stage) continue;
       if (!lead || scan.at > lead.at || (scan.at === lead.at && scan.stage === notice.stage)) lead = scan;

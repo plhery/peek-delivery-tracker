@@ -232,7 +232,8 @@ export function headerFromAddress(raw: Uint8Array): string {
 export async function readInboundMail(raw: Uint8Array): Promise<InboundMail> {
   const email = await PostalMime.parse(raw, { attachmentEncoding: 'arraybuffer', maxPartCount: 500, maxNestingDepth: 32 });
   const html = email.html ?? '';
-  const plain = email.text?.trim() ? withoutAddresses(email.text.slice(0, MOST_HTML_LENGTH)) : null;
+  // A mailing tool may write HTML's entities into the plain part too.
+  const plain = email.text?.trim() ? withoutAddresses(decodeEntities(email.text.slice(0, MOST_HTML_LENGTH))) : null;
   const body = withoutPadding(plain ? plain.text : htmlText(html));
   const links = [...new Set([...htmlLinks(html), ...plain?.links ?? []])];
   const read: string[] = [];

@@ -227,6 +227,15 @@ describe('a carrier\'s own email', () => {
       .toEqual([['4612345678', 'dhl']]);
   });
 
+  it('reads a plain part whose sender wrote HTML\'s entities into it', async () => {
+    const mail = await readInboundMail(alternative({ From: 'Example Shop <orders@example-shop.com>', Subject: 'Expédié' },
+      'Votre colis est en route.\nNum&eacute;ro de suivi&nbsp;: 4612345678\nC&rsquo;est parti&#8239;!\nhttps://shop.example/t?a=1&amp;b=2',
+      '<p>Votre colis est en route.</p>'));
+    expect(mail.text.split('\n').slice(1, 4)).toEqual(['Votre colis est en route.', 'Numéro de suivi\u00A0: 4612345678', 'C’est parti\u202F!']);
+    expect(mail.text).toContain('https://shop.example/t?a=1&b=2');
+    expect(trackingNumbersInText(mail.text, carriersOfAddress(mail.origin)).map(({ normalized }) => normalized)).toEqual(['4612345678']);
+  });
+
   it('takes no unlabelled number from a shop', async () => {
     expect(await read('Example Shop <orders@example-shop.com>', 'Livré', 'Le bordereau N° 4612345678 a été livré.')).toEqual([]);
   });

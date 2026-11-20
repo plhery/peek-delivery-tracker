@@ -111,13 +111,14 @@
       "uid": "peek-silent-sources",
       "title": "Peek source finding no parcels",
       "datasource": "metrics",
-      "sql": "select now() as time, silent_sources_3h as value from metrics.health",
+      "sql": "select now() as time, source, 1 as value from metrics.silent_sources",
+      "labelledBy": "source",
       "for": "0s",
       "severity": "warning",
       "noDataState": "OK",
       "execErrState": "KeepLast",
-      "summary": "A carrier or provider was asked about 20 parcels or more in the last 3 hours and found none of them: its answers changed, or it stopped answering.",
-      "description": "Each check leaves a provider health sample for every carrier or provider it asked; the rule counts those asked about 20 parcels or more in 3 hours (each sample's parcel is its check attempt's) without one ok sample. A \"not found\" or \"no history\" answer counts as healthy, so a provider that says it has no history for every number opens no incident and Sentry stays quiet. tracking_health_samples by subject and details->>'category' over the last 3 hours names it. Adapters and providers are fixed in Universal Parcel Scraper (the adapters lane); a carrier that refuses Peek's requests is also its own Sentry incident."
+      "summary": "{{ $labels.source }} was asked about 20 parcels or more in the last 3 hours and found none of them: its answers changed, or it stopped answering.",
+      "description": "Each check leaves a provider health sample for every carrier or provider it asked; the rule counts those asked about 20 parcels or more in 3 hours (each sample's parcel is its check attempt's) without one ok sample. A \"not found\" or \"no history\" answer counts as healthy, so a provider that says it has no history for every number opens no incident and Sentry stays quiet. The rule fires once for each such carrier or provider, labelled source; tracking_health_samples of that subject by details->>'category' over the last 3 hours shows what it answered. Adapters and providers are fixed in Universal Parcel Scraper (the adapters lane); a carrier that refuses Peek's requests is also its own Sentry incident."
     }
   ]
 }

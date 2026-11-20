@@ -1368,7 +1368,8 @@ carrier or provider outage, and a scheduled sync that is missed, fails or passes
 - **Peek source finding no parcels**: a carrier or provider was asked about 20 parcels or
   more in the last 3 hours and found none. A "not found" or "no history" answer counts as
   healthy, so a provider that says it has no history for every number opens no incident and
-  Sentry stays quiet. Ordinary days never reach it.
+  Sentry stays quiet. Ordinary days never reach it. It fires once for each such carrier or
+  provider, labelled `source`, read from `metrics.silent_sources`.
 
 Each threshold sits above what ordinary days reach; a future scan alerts every time, as each
 is a fault to fix. The database rules read

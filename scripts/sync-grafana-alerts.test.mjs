@@ -18,15 +18,28 @@ describe('the alert rules', () => {
     }
   });
 
-  it('read the database through the counts of metrics.health only', () => {
+  it('read the database through the views of the metrics schema only', () => {
     for (const rule of alerts.rules.filter(item => item.datasource === 'metrics')) {
-      assert.match(rule.sql, /^select now\(\) as time, .+ as value from metrics\.health$/, rule.uid);
+      assert.match(rule.sql, /^select now\(\) as time, .+ as value from metrics\.(health|silent_sources)$/, rule.uid);
     }
+  });
+
+  it('fire a rule labelledBy a column once for each of its rows, with that label', () => {
+    const labelled = alerts.rules.filter(rule => rule.labelledBy);
+    assert.deepEqual(labelled.map(rule => rule.uid), ['peek-silent-sources']);
+    const rule = group.rules.find(item => item.uid === 'peek-silent-sources');
+    assert.deepEqual(rule.data.map(entry => [entry.refId, entry.model.type ?? 'query', entry.model.expression]),
+      [['A', 'query', undefined], ['B', 'reduce', 'A'], ['C', 'threshold', 'B']]);
+    assert.match(labelled[0].summary, /\{\{ \$labels\.source \}\}/);
+    const [first] = alerts.rules;
+    assert.throws(() => provisionedGroup({ ...alerts, rules: [{ ...labelled[0], sql: 'select now() as time, 1 as value from metrics.health' }] },
+      datasources), /must select source/);
+    assert.throws(() => provisionedGroup({ ...alerts, rules: [{ ...labelled[0], onlyWhile: first }] }, datasources), /do not go together/);
   });
 
   it('point each query at its data source', () => {
     for (const rule of group.rules) {
-      for (const entry of rule.data.filter(item => item.refId !== 'C')) {
+      for (const entry of rule.data.filter(item => item.datasourceUid !== '__expr__')) {
         assert.ok(Object.values(datasources).includes(entry.datasourceUid), rule.uid);
         assert.equal(entry.model.datasource.uid, entry.datasourceUid);
       }

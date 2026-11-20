@@ -281,6 +281,12 @@ begin
   if after.silent_sources_3h <> before.silent_sources_3h + 2 then
     raise exception 'Carriers and providers that found nothing in the last three hours were miscounted: % then %', before, after;
   end if;
+  -- Grafana's rule names each of them.
+  if (select array_agg(source order by source) from metrics.silent_sources where source like 'health-%')
+      is distinct from array['health-down', 'health-silent']
+     or (select count(*) from metrics.silent_sources) <> after.silent_sources_3h then
+    raise exception 'metrics.silent_sources does not name the sources metrics.health counts';
+  end if;
 end;
 $$;
 
@@ -290,6 +296,7 @@ select accounts, active_day, parcels_open_account, link_alerts from metrics.live
 select stage, account, lookup from metrics.open_parcels;
 select day, carrier, parcels from metrics.carriers where carrier = 'unknown' limit 1;
 select checks_3h, failed_carriers_3h, seconds_since_check, open_health_incidents, failing_health_incidents, failing_incident_carriers, future_scan_parcels_1h, silent_sources_3h from metrics.health;
+select source, parcels_3h from metrics.silent_sources;
 do $$
 begin
   perform 1 from public.packages;

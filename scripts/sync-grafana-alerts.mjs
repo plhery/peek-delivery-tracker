@@ -36,14 +36,29 @@ function query(refId, source, datasources) {
 }
 
 // A classic condition makes one alert of all a rule's series. A rule with onlyWhile fires
-// only while that query is above 0.5 too, so one outage is one alert.
+// only while that query is above 0.5 too, so one outage is one alert. A rule labelledBy a
+// column of its query fires once for each of its rows instead, with that label.
 function condition(rule) {
+  if (rule.labelledBy) {
+    if (rule.onlyWhile) throw new Error(`${rule.uid}: labelledBy and onlyWhile do not go together`);
+    if (!new RegExp(`^select now\\(\\) as time, ${rule.labelledBy}, `).test(rule.sql ?? '')) {
+      throw new Error(`${rule.uid}: its query must select ${rule.labelledBy} after the time`);
+    }
+    const expression = { datasource: { type: '__expr__', uid: '__expr__' } };
+    return [
+      { refId: 'B', relativeTimeRange: { from: 0, to: 0 }, datasourceUid: '__expr__',
+        model: { ...expression, type: 'reduce', expression: 'A', reducer: 'last', refId: 'B' } },
+      { refId: 'C', relativeTimeRange: { from: 0, to: 0 }, datasourceUid: '__expr__',
+        model: { ...expression, type: 'threshold', expression: 'B',
+          conditions: [{ evaluator: { params: [rule.threshold ?? 0.5], type: 'gt' } }], refId: 'C' } },
+    ];
+  }
   const above = (refId, threshold) => ({ evaluator: { params: [threshold], type: 'gt' }, operator: { type: 'and' },
     query: { params: [refId] }, reducer: { params: [], type: 'last' }, type: 'query' });
   const conditions = [above('A', rule.threshold ?? 0.5)];
   if (rule.onlyWhile) conditions.push(above('G', 0.5));
-  return { refId: 'C', relativeTimeRange: { from: 0, to: 0 }, datasourceUid: '__expr__',
-    model: { type: 'classic_conditions', conditions, datasource: { type: '__expr__', uid: '__expr__' }, refId: 'C' } };
+  return [{ refId: 'C', relativeTimeRange: { from: 0, to: 0 }, datasourceUid: '__expr__',
+    model: { type: 'classic_conditions', conditions, datasource: { type: '__expr__', uid: '__expr__' }, refId: 'C' } }];
 }
 
 // Grafana's default notification policy keeps alerts in Grafana; a rule with "notify": "user"
@@ -56,7 +71,7 @@ function labels(rule) {
 export function provisionedRule(rule, alerts, datasources) {
   const data = [query('A', rule, datasources)];
   if (rule.onlyWhile) data.push(query('G', rule.onlyWhile, datasources));
-  data.push(condition(rule));
+  data.push(...condition(rule));
   return {
     uid: rule.uid,
     title: rule.title,
@@ -94,6 +109,8 @@ export function comparableRule(rule) {
       relativeTimeRange: entry.relativeTimeRange,
       query: (entry.model?.expr ?? entry.model?.rawSql)?.replace(/\s+/g, ' '),
       type: entry.model?.type,
+      expression: entry.model?.expression,
+      reducer: entry.model?.reducer,
       conditions: entry.model?.conditions?.map(item => [item.query?.params, item.evaluator]),
     })),
     for: rule.for,

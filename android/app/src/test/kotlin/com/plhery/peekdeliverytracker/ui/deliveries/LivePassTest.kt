@@ -8,10 +8,13 @@ import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -768,9 +771,11 @@ class LivePassTest {
      */
     private fun routeFrames(reduceMotion: Boolean): Triple<IntArray, IntArray, IntArray> {
         val birthday = DemoCards.parcel("Birthday gift")
-        val parcel = birthday.copy(
+        // New scans for each try, so each try's route is a new one whose picture no map has made.
+        var attempt by mutableIntStateOf(0)
+        fun parcel(attempt: Int) = birthday.copy(
             trackingEvents = birthday.trackingEvents.map {
-                it.copy(id = UUID.nameUUIDFromBytes("entrance $reduceMotion ${it.id}".toByteArray()))
+                it.copy(id = UUID.nameUUIDFromBytes("entrance $reduceMotion $attempt ${it.id}".toByteArray()))
             },
         )
         var pictured = false
@@ -779,20 +784,33 @@ class LivePassTest {
         compose.setContent {
             CompositionLocalProvider(LocalMapSceneWatch provides { _, _ -> pictured = true }) {
                 CardHost(reduceMotion = reduceMotion) {
-                    LivePassCard(
-                        parcel, WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false, onMap = {},
-                        onEditCarrier = { _, _ -> }, onRename = {}, onShare = {},
-                    )
+                    key(attempt) {
+                        LivePassCard(
+                            parcel(attempt), WorldAtlases.loadedOrNull(), sample = false, readerLink = false, bell = null, working = false,
+                            onMap = {}, onEditCarrier = { _, _ -> }, onRename = {}, onShare = {},
+                        )
+                    }
                 }
             }
         }
-        var frames = 0
-        while (!exists(PAGE_ROUTE)) {
-            check(frames++ < 10) { "No route" }
-            compose.mainClock.advanceTimeByFrame()
+        // The picture is made off the main thread while the frames that first show the route are made: on a busy
+        // machine it can come with them, and then the card shows it from its first frame. The card starts again then,
+        // with new scans, until a frame shows the route without its picture.
+        lateinit var blank: IntArray
+        while (true) {
+            var frames = 0
+            do {
+                check(frames++ < 10) { "No route" }
+                compose.mainClock.advanceTimeByFrame()
+            } while (!exists(PAGE_ROUTE))
+            blank = compose.drawn(compose.onNodeWithTag(PAGE_ROUTE))
+            if (!pictured) break
+            check(attempt < 4) { "The route came with the frame that first showed it each time" }
+            attempt++
+            pictured = false
+            Snapshot.sendApplyNotifications()
         }
         val route = compose.onNodeWithTag(PAGE_ROUTE)
-        val blank = compose.drawn(route)
         // Its picture is made off the main thread, which a busy machine slows: the frames wait for the one that first
         // shows it, as the test's clock moves no fade on before then.
         val until = System.nanoTime() + 10_000_000_000

@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "更换快递公司（当前为 {{carrier}}）",
   "detail.refusedNumberLooksLike": "这家快递公司不使用这种格式的运单号。它看起来像 {{carrier}} 的单号。",
   "detail.waitingForCarrier": "暂时无法连接 {{carrier}}，Peek 会继续尝试。",
+  "detail.pickedCarrierSilent": "你选择了 {{picked}}，但只有 {{carrier}} 有这个包裹的更新。",
   "detail.switchCarrier": "切换到 {{carrier}}",
   "detail.changingCarrier": "正在更换…",
   "detail.checkFailed": "查询失败，请重试。",

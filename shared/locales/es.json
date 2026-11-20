@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "Cambiar transportista ({{carrier}})",
   "detail.refusedNumberLooksLike": "Este transportista no emite números de seguimiento como este. Parece un número de {{carrier}}.",
   "detail.waitingForCarrier": "Aún no se ha podido conectar con {{carrier}}. Peek sigue intentándolo.",
+  "detail.pickedCarrierSilent": "Has elegido {{picked}}, pero solo {{carrier}} tiene novedades de este paquete.",
   "detail.switchCarrier": "Cambiar a {{carrier}}",
   "detail.changingCarrier": "Cambiando…",
   "detail.checkFailed": "No se ha podido comprobar. Inténtalo de nuevo.",

@@ -8723,6 +8723,30 @@ describe('TrackingSyncService', () => {
     expect(client.completeSyncAttempt.mock.calls.at(-1)![1]).toMatchObject({ outcome: 'refused' });
   });
 
+  it('keeps a carrier picked by hand that refuses the number, and stores the news of the carrier that served the parcel', async () => {
+    const client = { ...fakeClient(),
+      acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),
+      finishTrackingProvider: vi.fn().mockResolvedValue(undefined),
+    };
+    // A synthetic number in an AliExpress shape, which InPost's adapter refuses before asking.
+    const number = 'LP00000000000001';
+    const adapter = { fetch: vi.fn(async (carrier: string) => {
+      if (carrier === 'inpost') throw new InvalidInputError('InPost', 'Not an InPost number');
+      return { status: 'in_transit', current_stage: 'in_transit', last_update: '2026-09-10T11:00:00Z',
+        events: [{ time: '2026-09-10T11:00:00Z', description: 'Departed the sorting centre', stage: 'in_transit' }] } satisfies CarrierResult;
+    }), fetchUniversal: vi.fn(async (source: string) => { throw new NotFoundError(source); }) };
+    const parcel = { id: 'picked', carrier: 'inpost', tracking_number: number, current_stage: 'in_transit', sync_status: 'ok',
+      carrier_data: { routing: { version: 1, configured_carrier: 'aliexpress', confirmed_carrier: 'aliexpress', confirmed_number: number,
+        last_success_at: '2026-09-10T06:00:00Z', last_event_at: '2026-09-10T05:00:00Z', consecutive_failures: 0, probe_cursor: 0, discovery_cursor: 0 } } };
+    const service = new TrackingSyncService(client as unknown as SupabaseServiceClient, adapter, null, () => new Date('2026-09-10T12:00:00Z'));
+    await service.syncPackage(parcel, { trigger: 'changed' });
+    const saved = client.updatePackage.mock.calls.at(-1)![1];
+    expect(saved).not.toHaveProperty('carrier');
+    expect(saved).toMatchObject({ sync_status: 'ok', sync_error: null, carrier_data: { routing: { configured_carrier: 'inpost',
+      confirmed_carrier: 'aliexpress', served_elsewhere: { picked: 'inpost', carrier: 'aliexpress' } } } });
+    expect(saved.carrier_data).not.toHaveProperty('auto_changed_to');
+    expect(client.insertEvents.mock.calls.flat(2).map((row: JsonObject) => row.description)).toEqual(['Departed the sorting centre']);  });
+
   it('says the number is wrong when the carrier\'s answer says so, and asks for details on any other refusal', async () => {
     const client = { ...fakeClient(),
       acquireTrackingProvider: vi.fn().mockResolvedValue({ token: 'lease', retry_at: '2026-09-10T12:01:30Z' }),

@@ -720,8 +720,13 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   on the carrier line before tracking starts (`/api/public/refusal`), and the change-carrier
   sheet under the carrier it shows. The adapter's own check runs on the server and sends
   nothing, so no verification or allowance applies. The reader can still file the parcel
-  under that carrier, but Peek never asks it for the number: tracking services are asked,
-  and until one answers the parcel shows "Check the tracking number". The change-carrier
+  under that carrier, but Peek never asks it for the number. A carrier that tracked the
+  number before (`routing.confirmed_carrier`) is still asked, at every check its interval
+  allows and past a provider's wait, and its scans are stored. The parcel stays filed under
+  the reader's carrier, never swapped back; the web shows it under that carrier and says that
+  only the other carrier has news of it (`routing.served_elsewhere`; assistants get the
+  sentence as `carrierWarning`). Without such a carrier tracking services are asked, and until one
+  answers the parcel shows "Check the tracking number". The change-carrier
   sheet (web and iPhone) also goes back to automatic detection, which files the parcel as adding it would: under the carrier its number's shape
   names, else under no carrier, so routing looks for it. A parcel filed under no carrier opens
   on it; an Amazon number is not offered it.

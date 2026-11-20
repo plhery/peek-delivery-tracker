@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "Paketdienst ändern ({{carrier}})",
   "detail.refusedNumberLooksLike": "Dieser Paketdienst vergibt keine Sendungsnummern wie diese. Das sieht nach einer Sendungsnummer von {{carrier}} aus.",
   "detail.waitingForCarrier": "{{carrier}} war noch nicht erreichbar. Peek versucht es weiter.",
+  "detail.pickedCarrierSilent": "Du hast {{picked}} gewählt, aber nur {{carrier}} hat Neuigkeiten zu diesem Paket.",
   "detail.switchCarrier": "Zu {{carrier}} wechseln",
   "detail.changingCarrier": "Wird geändert…",
   "detail.checkFailed": "Prüfen fehlgeschlagen. Versuche es erneut.",

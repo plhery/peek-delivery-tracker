@@ -72,6 +72,8 @@ function parcelSummary(parcel: ParcelWithEvents, now = Date.now()): ApiTokenParc
     // delivery carrier's after a handoff, while the earlier carrier may have scanned the parcel since.
     statusText: latest?.description ?? parcel.lastStatusText ?? null,
     needsAttention: parcelAttention(parcel, now),
+    ...(parcel.servedElsewhere ? { carrierWarning: ENGLISH['detail.pickedCarrierSilent']!
+      .replace('{{picked}}', carrierInfo(parcel.carrier).name).replace('{{carrier}}', carrierInfo(parcel.servedElsewhere).name) } : {}),
     expectedDelivery: parcel.expectedDelivery ?? null,
     deliveredAt: delivered ? delivered.day ?? delivered.occurredAt : null,
     lastUpdate: latest ? { time: latest.day ?? latest.occurredAt, description: latest.description, location: latest.location ?? null } : null,

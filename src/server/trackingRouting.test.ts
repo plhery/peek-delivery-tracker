@@ -4510,3 +4510,74 @@ describe('a provider’s budget of answers without history', () => {
     expect(asked(universal)).toEqual(['ParcelsApp', 'Ship24', 'ParcelsApp', 'Ship24']);
   });
 });
+
+describe('a carrier picked by hand whose adapter refuses the number', () => {
+  // A synthetic number in an AliExpress shape, which InPost's adapter refuses; AliExpress served the parcel before.
+  const number = 'LP00000000000001';
+  const picked = (routing: JsonObject = {}) => parcel({ carrier: 'inpost', tracking_number: number, current_stage: 'in_transit',
+    carrier_data: { routing: state({ configured_carrier: 'aliexpress', confirmed_carrier: 'aliexpress', confirmed_number: number,
+      last_success_at: '2026-09-10T06:00:00Z', last_event_at: '2026-09-10T05:00:00Z', ...routing }) } });
+  // AliExpress answers with a scan at `stamp`; the providers hold only the scan the parcel already shows.
+  const answering = (now: Date, stamp: string, refused = true) => {
+    const value = setup(now);
+    value.router.options.refuses = vi.fn(async (carrier: string) => refused && carrier === 'inpost');
+    value.direct.mockImplementation(async (_parcel, carrier) => {
+      if (carrier === 'inpost') throw new InvalidInputError('InPost', 'Not an InPost number');
+      return { ...directValue(carrier), result: history(stamp) };
+    });
+    value.universal.mockResolvedValue(history('2026-09-10T05:00:00Z'));
+    return value;
+  };
+  const asked = (value: ReturnType<typeof setup>) => value.direct.mock.calls.map(([, carrier]) => carrier);
+
+  it('keeps the parcel under the reader\'s carrier and shows the news of the one that served it', async () => {
+    const value = answering(time, '2026-09-10T11:00:00Z');
+    const result = await value.router.fetch(picked(), false);
+    expect(asked(value)).toEqual(['inpost', 'aliexpress']);
+    expect(result.sourceCarrierId).toBe('aliexpress');
+    expect(result.correction).toBeUndefined();
+    expect(result.result).not.toHaveProperty('auto_changed_to');
+    expect(result.result.routing).toMatchObject({ configured_carrier: 'inpost', confirmed_carrier: 'aliexpress',
+      served_elsewhere: { picked: 'inpost', carrier: 'aliexpress' }, last_event_at: '2026-09-10T11:00:00.000Z' });
+  });
+
+  it('asks the carrier that served it at every check its interval allows, past the providers\' wait', async () => {
+    const first = answering(time, '2026-09-10T11:00:00Z');
+    const routing = (await first.router.fetch(picked(), false)).result.routing as JsonObject;
+    // The carrier is chosen again 22 minutes later: AliExpress, asked 30 minutes apart at most, waits, and the providers answer.
+    const again = answering(new Date('2026-09-10T12:22:00Z'), '2026-09-10T11:00:00Z');
+    const waited = await again.router.fetch(picked({ ...routing, configured_carrier: 'aliexpress' }), false)
+      .then((result) => result.result.routing as JsonObject, (error: unknown) => (error as RoutingDeferred).routing as unknown as JsonObject);
+    expect(asked(again)).toEqual(['inpost']);
+    expect(again.universal).toHaveBeenCalled();
+    expect(waited).toMatchObject({ confirmed_carrier: 'aliexpress', served_elsewhere: { picked: 'inpost', carrier: 'aliexpress' } });
+    // Once its interval is over, it is asked first and its newer scan is shown, the parcel still under InPost.
+    const later = answering(new Date('2026-09-10T12:38:00Z'), '2026-09-10T12:30:00Z');
+    const result = await later.router.fetch(picked(waited), true);
+    expect(asked(later)).toEqual(['aliexpress']);
+    expect(later.universal).not.toHaveBeenCalled();
+    expect(result.sourceCarrierId).toBe('aliexpress');
+    expect(result.correction).toBeUndefined();
+    expect(result.result.routing).toMatchObject({ configured_carrier: 'inpost', last_event_at: '2026-09-10T12:30:00.000Z' });
+  });
+
+  it('sets the carrier that served it aside for a picked carrier that tracks the number', async () => {
+    const value = answering(time, '2026-09-10T11:00:00Z', false);
+    value.direct.mockImplementation(async (_parcel, carrier) => {
+      if (carrier === 'inpost') throw new NotFoundError('InPost', 'Not found');
+      throw new Error('down');
+    });
+    const result = await value.router.fetch(picked(), false).catch((error: unknown) => ({ result: { routing: (error as RoutingDeferred).routing } }));
+    expect(result.result.routing).not.toHaveProperty('served_elsewhere');
+    expect(result.result.routing).not.toHaveProperty('confirmed_carrier');
+  });
+
+  it('drops the warning once the parcel is filed under the carrier that served it', async () => {
+    const first = answering(time, '2026-09-10T11:00:00Z');
+    const routing = (await first.router.fetch(picked(), false)).result.routing as JsonObject;
+    const back = answering(new Date('2026-09-10T13:00:00Z'), '2026-09-10T12:30:00Z');
+    const result = await back.router.fetch({ ...picked(routing), carrier: 'aliexpress' }, false);
+    expect(asked(back)).toEqual(['aliexpress']);
+    expect(result.result.routing).not.toHaveProperty('served_elsewhere');
+  });
+});

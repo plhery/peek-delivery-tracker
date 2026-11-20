@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "Cambia corriere ({{carrier}})",
   "detail.refusedNumberLooksLike": "Questo corriere non emette numeri di tracciamento come questo. Sembra un numero di {{carrier}}.",
   "detail.waitingForCarrier": "Non è ancora stato possibile raggiungere {{carrier}}. Peek continua a provare.",
+  "detail.pickedCarrierSilent": "Hai scelto {{picked}}, ma solo {{carrier}} ha novità su questo pacco.",
   "detail.switchCarrier": "Passa a {{carrier}}",
   "detail.changingCarrier": "Salvataggio…",
   "detail.checkFailed": "Impossibile controllare. Riprova.",

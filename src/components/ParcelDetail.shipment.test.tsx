@@ -267,6 +267,14 @@ describe('shipment details', () => {
     expect(screen.queryByText(syncError)).not.toBeInTheDocument();
   });
 
+  it('says only the carrier that served the parcel has news when the one picked by hand refuses its number', () => {
+    const { unmount } = show({ carrier: 'inpost', servedElsewhere: 'aliexpress' });
+    expect(screen.getByText('You picked InPost, but only AliExpress / Cainiao has news about this parcel.')).toBeInTheDocument();
+    unmount();
+    show({ carrier: 'inpost' });
+    expect(screen.queryByText(/but only .* has news about this parcel/)).not.toBeInTheDocument();
+  });
+
   it('says the carrier does not issue the number, and opens the carrier editor', async () => {
     show({ syncStatus: 'error', syncError: 'carrier:refused_number' });
     expect(screen.getByText('Check the tracking number')).toBeInTheDocument();

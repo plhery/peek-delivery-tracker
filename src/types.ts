@@ -74,6 +74,8 @@ export interface Parcel {
   dpdPostcodeVerified?: boolean;
   /** The parcel's own carrier refused the stored postcode on its last answer (PostNL finding no parcel with it). */
   postcodeRefused?: boolean;
+  /** The carrier picked by hand for the parcel does not issue its number: this carrier, which tracked it before, still has news of it. */
+  servedElsewhere?: CarrierId;
   /** Carrier currently supplying automatic updates for a multi-carrier journey. */
   trackingSource?: CarrierId;
   trackingProvider?: string;

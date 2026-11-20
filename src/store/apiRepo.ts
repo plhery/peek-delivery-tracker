@@ -142,6 +142,9 @@ function providerInputNeeded(row: ApiPackageRow): ParcelWithEvents['providerInpu
 
 /** A package row as the client model; a parcel link's package maps through it too. */
 export function toParcel(row: ApiPackageRow): ParcelWithEvents {
+  // A carrier picked by hand that refuses the number stays the parcel's, shown as it, while another carrier's news fills it.
+  const served = row.carrier_data?.routing?.served_elsewhere;
+  const servedElsewhere = served?.picked === row.carrier ? served.carrier : undefined;
   return {
     id: row.id,
     trackingNumber: row.tracking_number,
@@ -179,9 +182,10 @@ export function toParcel(row: ApiPackageRow): ParcelWithEvents {
     phoneDigits: row.phone_digits ?? undefined,
     dpdPostcodeVerified: row.carrier_data?.dpd_postcode_verified ?? undefined,
     postcodeRefused: row.carrier_data?.routing?.postcode_refused?.carrier === row.carrier || undefined,
+    servedElsewhere,
     trackingProvider: row.carrier_data?.tracking_provider ?? undefined,
     carrierAnswered: row.carrier_data?.carrier_answered ?? undefined,
-    trackingSource: row.carrier_data?.active_tracking_carrier ?? undefined,
+    trackingSource: servedElsewhere ? undefined : row.carrier_data?.active_tracking_carrier ?? undefined,
     activeTrackingNumber: row.carrier_data?.active_tracking_number ?? undefined,
     deliveryCarrier: row.carrier_data?.delivery_carrier ?? undefined,
     deliveryTrackingNumber: row.carrier_data?.delivery_tracking_number ?? undefined,

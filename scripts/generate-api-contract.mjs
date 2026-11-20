@@ -244,6 +244,7 @@ const swiftInlineNames = {
   'PackageRow.carrier_data.routing.input_needed': 'CarrierInputNeeded',
   'PackageRow.carrier_data.routing.input_needed.field': 'CarrierInputNeededField',
   'PackageRow.carrier_data.routing.postcode_refused': 'CarrierPostcodeRefused',
+  'PackageRow.carrier_data.routing.served_elsewhere': 'CarrierServedElsewhere',
   'PackageRow.carrier_data.routing.input_suggested': 'CarrierInputSuggested',
   'PackageRow.carrier_data.routing.input_suggested.field': 'CarrierInputSuggestedField',
   'ParcelLink.inputNeeded': 'ParcelLinkInputNeeded',

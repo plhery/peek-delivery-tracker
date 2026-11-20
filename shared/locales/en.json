@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "Change carrier from {{carrier}}",
   "detail.refusedNumberLooksLike": "This carrier doesn’t issue tracking numbers like this one. It looks like one from {{carrier}}.",
   "detail.waitingForCarrier": "{{carrier}} couldn’t be reached yet. Peek keeps trying.",
+  "detail.pickedCarrierSilent": "You picked {{picked}}, but only {{carrier}} has news about this parcel.",
   "detail.switchCarrier": "Switch to {{carrier}}",
   "detail.changingCarrier": "Changing…",
   "detail.checkFailed": "Couldn’t check. Try again.",

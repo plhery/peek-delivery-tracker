@@ -110,6 +110,11 @@ export interface RoutingState extends JsonObject {
    * confirming them again is no news. It files nothing, and the next confirmation takes its place.
    */
   cleared_confirmation?: { carrier: string; number: string };
+  /**
+   * The carrier the parcel is filed under (`picked`, chosen by hand) refuses its number as one it does not
+   * issue, while the carrier confirmed for the number (`carrier`) keeps being asked and its news is shown.
+   */
+  served_elsewhere?: { picked: string; carrier: string };
   discovered_carrier?: string;
   last_success_at?: string;
   consecutive_failures: number;
@@ -888,6 +893,13 @@ export class TrackingRouter {
     if (declared === 'unknown' || declared === 'intl-post') state.recognizers = recognizers(number);
     else delete state.recognizers;
     const metadata = isRecord(parcel.carrier_data) ? parcel.carrier_data : {};
+    // The parcel filed by hand under a carrier whose adapter refuses its number, while another carrier answered for this
+    // very number: that carrier is asked at every check its interval allows, and the parcel stays where the reader filed it.
+    const servedBy = declared !== 'unknown' && !metadata.original_carrier && typeof state.confirmed_carrier === 'string'
+      && state.confirmed_carrier !== declared && state.confirmed_number === number && directCarrier(state.confirmed_carrier)
+      && await this.options.refuses?.(declared, number) ? state.confirmed_carrier : undefined;
+    if (servedBy) state.served_elsewhere = { picked: declared, carrier: servedBy };
+    else delete state.served_elsewhere;
     const countryHint = normalizedLookupCountry(metadata.lookup_country_hint);
     const suggested = suggestedInput(parcel, state);
     if (suggested) state.input_suggested = suggested;
@@ -1137,7 +1149,7 @@ export class TrackingRouter {
       // the scans it answered with carry the filed carrier's codes.
       const filedScans = provider === state.discovered_carrier && !detectionNames(number, provider)
         && filedCarrierCodes(declared, provider, value.result);
-      const swap = provider !== declared && directCarrier(provider) && (value.sourceCarrierId === provider || answeredFirst)
+      const swap = provider !== declared && provider !== servedBy && directCarrier(provider) && (value.sourceCarrierId === provider || answeredFirst)
         && state.confirmed_number === number && !metadata.original_carrier && !earlierLeg(provider, value) && !filedScans;
       if (swap) {
         state.configured_carrier = provider;
@@ -1507,7 +1519,7 @@ export class TrackingRouter {
     // release's adapter may date the scans it gave on local clocks. A carrier whose lookup can
     // open a browser keeps it, and a failure's own retry time still holds.
     if (released && !opensBrowser(primary)) delete state.direct_retry_at;
-    if (!state.preferred_provider || changed || millis(state.direct_retry_at) <= now().getTime()) {
+    if (!state.preferred_provider || changed || servedBy || millis(state.direct_retry_at) <= now().getTime()) {
       const value = await tryDirect(primary, primary !== declared);
       const filed = value && primary === declared && universalNumber === number ? value : null;
       const sinceChecked = now().getTime() - millis(state.partial_checked_at);
@@ -1653,8 +1665,9 @@ export class TrackingRouter {
       if (value) return persistResult(value, 'aliexpress');
     }
     // A carrier chosen by hand that has its own adapter comes first from now on:
-    // the one confirmed before it is set aside unless it just tracked the number.
-    if (changed && directCarrier(declared) && state.confirmed_number === number && state.confirmed_carrier !== declared) {
+    // the one confirmed before it is set aside unless it just tracked the number,
+    // or the carrier chosen refuses the number.
+    if (changed && !servedBy && directCarrier(declared) && state.confirmed_number === number && state.confirmed_carrier !== declared) {
       delete state.confirmed_carrier; delete state.confirmed_number;
       delete state.confirmed_tracking_url; delete state.confirmed_postcode;
     }
@@ -1854,7 +1867,7 @@ export class TrackingRouter {
         && (carrier === declared || (state.confirmed_carrier === carrier && state.confirmed_number === number)
           || !requiredRequirements(carrier, number).length);
       const turns = everyProvider.filter((source) => !awaitsInput(source)).map((source) => millis(state.failures[source]?.retry_at));
-      const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider ? millis(state.direct_retry_at) : 0,
+      const own = asks(filed) ? Math.max(millis(state.failures[filed]?.retry_at), state.preferred_provider && !servedBy ? millis(state.direct_retry_at) : 0,
         askableAt(filed)) : null;
       if (own !== null) turns.push(own);
       for (const carrier of [detected.confidence === 'high' ? detected.carrier : undefined, state.discovered_carrier]) {

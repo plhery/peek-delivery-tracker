@@ -4857,6 +4857,7 @@ struct TokenParcel: Codable, Equatable, Hashable, Sendable, Identifiable {
     var status: TrackingStage
     var statusText: String? = nil
     var needsAttention: String? = nil
+    var carrierWarning: String? = nil
     var expectedDelivery: String? = nil
     var deliveredAt: String? = nil
     var lastUpdate: TokenParcelUpdate? = nil
@@ -5125,6 +5126,7 @@ enum CarrierDetectionInputSuggestedField: String, Codable, CaseIterable, Hashabl
 struct CarrierDataRouting: Codable, Equatable, Hashable, Sendable {
     var inputNeeded: CarrierInputNeeded? = nil
     var postcodeRefused: CarrierPostcodeRefused? = nil
+    var servedElsewhere: CarrierServedElsewhere? = nil
     var inputSuggested: CarrierInputSuggested? = nil
     var likelyCarrier: LikelyCarrier? = nil
     var providerInputNeeded: ProviderInputNeeded? = nil
@@ -5143,6 +5145,11 @@ struct CarrierInputNeeded: Codable, Equatable, Hashable, Sendable {
 }
 
 struct CarrierPostcodeRefused: Codable, Equatable, Hashable, Sendable {
+    var carrier: CarrierID
+}
+
+struct CarrierServedElsewhere: Codable, Equatable, Hashable, Sendable {
+    var picked: CarrierID
     var carrier: CarrierID
 }
 

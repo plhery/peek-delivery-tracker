@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "Zmień przewoźnika ({{carrier}})",
   "detail.refusedNumberLooksLike": "Ten przewoźnik nie wydaje takich numerów śledzenia. To wygląda na numer przewoźnika {{carrier}}.",
   "detail.waitingForCarrier": "Nie udało się jeszcze połączyć z przewoźnikiem {{carrier}}. Peek próbuje dalej.",
+  "detail.pickedCarrierSilent": "Wybrano przewoźnika {{picked}}, ale tylko przewoźnik {{carrier}} ma nowe informacje o tej przesyłce.",
   "detail.switchCarrier": "Zmień na {{carrier}}",
   "detail.changingCarrier": "Zmienianie…",
   "detail.checkFailed": "Nie udało się sprawdzić. Spróbuj ponownie.",

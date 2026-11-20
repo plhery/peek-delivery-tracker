@@ -64695,6 +64695,10 @@ export interface ApiPackageRow {
   "postcode_refused"?: {
   "carrier": ApiCarrierId;
 };
+  "served_elsewhere"?: {
+  "picked": ApiCarrierId;
+  "carrier": ApiCarrierId;
+};
   "input_suggested"?: {
   "carrier": ApiCarrierId;
   "field": "dpdPostcode";
@@ -65336,6 +65340,7 @@ export interface ApiTokenParcel {
   "status": ApiStage;
   "statusText": string | null;
   "needsAttention": string | null;
+  "carrierWarning"?: string;
   "expectedDelivery": string | null;
   "deliveredAt": string | null;
   "lastUpdate": ApiTokenParcelUpdate | null;

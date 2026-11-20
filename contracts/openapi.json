@@ -68942,6 +68942,23 @@
                       }
                     }
                   },
+                  "served_elsewhere": {
+                    "description": "The carrier the parcel is filed under (`picked`), chosen by hand, does not issue its number, while the carrier that tracked it before (`carrier`) is still asked and its news is shown. Shown only while `picked` is the parcel's carrier.",
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "picked",
+                      "carrier"
+                    ],
+                    "properties": {
+                      "picked": {
+                        "$ref": "#/components/schemas/CarrierId"
+                      },
+                      "carrier": {
+                        "$ref": "#/components/schemas/CarrierId"
+                      }
+                    }
+                  },
                   "input_suggested": {
                     "description": "For a parcel filed under no carrier, a carrier its number's shape and lookup country point to that needs the listed input before it can be asked about the number. Nothing says that carrier has the parcel.",
                     "type": "object",
@@ -71762,6 +71779,10 @@
               "null"
             ],
             "description": "Why the parcel needs the user, such as failed_attempt or ready_for_pickup; null when it doesn't."
+          },
+          "carrierWarning": {
+            "type": "string",
+            "description": "Only when the carrier the user picked does not issue the parcel's number while another carrier still has news of it: a sentence saying so, such as \"You picked InPost, but only AliExpress has news about this parcel.\""
           },
           "expectedDelivery": {
             "type": [

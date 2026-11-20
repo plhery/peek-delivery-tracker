@@ -4796,6 +4796,7 @@ data class TokenParcel(
     val status: TrackingStage,
     val statusText: String? = null,
     val needsAttention: String? = null,
+    val carrierWarning: String? = null,
     val expectedDelivery: String? = null,
     val deliveredAt: String? = null,
     val lastUpdate: TokenParcelUpdate? = null,
@@ -5096,6 +5097,7 @@ enum class CarrierDetectionInputSuggestedField(val rawValue: String) {
 data class CarrierDataRouting(
     @SerialName("input_needed") val inputNeeded: CarrierInputNeeded? = null,
     @SerialName("postcode_refused") val postcodeRefused: CarrierPostcodeRefused? = null,
+    @SerialName("served_elsewhere") val servedElsewhere: CarrierServedElsewhere? = null,
     @SerialName("input_suggested") val inputSuggested: CarrierInputSuggested? = null,
     @SerialName("likely_carrier") val likelyCarrier: LikelyCarrier? = null,
     @SerialName("provider_input_needed") val providerInputNeeded: ProviderInputNeeded? = null,
@@ -5120,6 +5122,12 @@ data class CarrierInputNeeded(
 
 @Serializable
 data class CarrierPostcodeRefused(
+    val carrier: CarrierId,
+)
+
+@Serializable
+data class CarrierServedElsewhere(
+    val picked: CarrierId,
     val carrier: CarrierId,
 )
 

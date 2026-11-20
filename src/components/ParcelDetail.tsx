@@ -752,6 +752,11 @@ export function ParcelDetail({
             )}
           </div>
         )}
+        {automaticTracking && parcel.servedElsewhere && (
+          <div className="detail__tracking-help" role="note">
+            <p>{t('detail.pickedCarrierSilent', { picked: carrier.name, carrier: carrierInfo(parcel.servedElsewhere, locale).name })}</p>
+          </div>
+        )}
         {outage ? (
           <div className="detail__outage" role="status">
             <p>{t('parcel.carrierOutage', { carrier: carrierInfo(outage.carrier, locale).name })}</p>

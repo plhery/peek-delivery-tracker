@@ -127,6 +127,18 @@ describe('createApiRepo', () => {
     expect(parcel.events.map((event) => event.description)).not.toContain('Delivered');
   });
 
+  it('shows a carrier picked by hand that refuses the number as the parcel’s, and names the one with its news', async () => {
+    const served = (carrier: string) => ({ ...packageRow, carrier, carrier_data: { ...packageRow.carrier_data, active_tracking_carrier: 'aliexpress',
+      routing: { served_elsewhere: { picked: 'inpost', carrier: 'aliexpress' } } } });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(response({ packages: [served('inpost'), served('dpd')] })));
+    const [picked, moved] = await createApiRepo().list();
+    expect(picked).toMatchObject({ carrier: 'inpost', servedElsewhere: 'aliexpress' });
+    expect(picked.trackingSource).toBeUndefined();
+    // Picked again since: the carrier the next check asks tracks it until then.
+    expect(moved).toMatchObject({ carrier: 'dpd', trackingSource: 'aliexpress' });
+    expect(moved.servedElsewhere).toBeUndefined();
+  });
+
   it('names the postcode a provider asked for one with while it is still the parcel’s', async () => {
     const asked = (postcode: string | null, refused?: string) => ({ ...packageRow, dpd_postcode: postcode, carrier_data: { ...packageRow.carrier_data,
       routing: { provider_input_needed: { provider: 'ParcelsApp', field: 'dpdPostcode', ...(refused ? { refused_postcode: refused } : {}) } } } });

@@ -396,6 +396,19 @@ describe('the MCP endpoint', () => {
     }
   });
 
+  it('says when the carrier picked by hand refuses the number and another carrier has its news', async () => {
+    const picked = { ...stored(1, 'in_transit'), carrier: 'inpost', carrier_data: { sender_name: 'Example Shop',
+      active_tracking_carrier: 'aliexpress', routing: { served_elsewhere: { picked: 'inpost', carrier: 'aliexpress' } } } };
+    // Picked again since: the warning was of the carrier picked before.
+    const moved = { ...stored(2, 'in_transit'), carrier: 'dpd', carrier_data: { routing: { served_elsewhere: { picked: 'inpost', carrier: 'aliexpress' } } } };
+    vi.spyOn(service, 'listAccountPackages').mockResolvedValue([picked, moved]);
+    const answer = await call(connect(['parcels:read']), 'list_parcels');
+    const parcels = (answer.result!.structuredContent as { parcels: Record<string, unknown>[] }).parcels;
+    expect(parcels.find((parcel) => parcel.id === picked.id)).toMatchObject({ carrier: 'InPost',
+      carrierWarning: 'You picked InPost, but only AliExpress / Cainiao has news about this parcel.' });
+    expect(parcels.find((parcel) => parcel.id === moved.id)).not.toHaveProperty('carrierWarning');
+  });
+
   it('gives the newest scan as the status line, as the apps head the parcel, and the saved one for a parcel without scans', async () => {
     // Handed over: the saved summary is the delivery carrier's, older than the earlier carrier's latest scan.
     const handedOver = { ...stored(5, 'in_transit'), last_status_text: 'Announced to the delivery carrier' };

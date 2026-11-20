@@ -172,6 +172,7 @@
   "detail.changeCarrierFrom": "Сменить службу доставки ({{carrier}})",
   "detail.refusedNumberLooksLike": "Эта служба доставки не выдаёт таких трек-номеров. Похоже, это номер {{carrier}}.",
   "detail.waitingForCarrier": "Пока не удалось связаться с {{carrier}}. Peek продолжает попытки.",
+  "detail.pickedCarrierSilent": "Вы выбрали {{picked}}, но новости об этой посылке есть только у {{carrier}}.",
   "detail.switchCarrier": "Перейти на {{carrier}}",
   "detail.changingCarrier": "Меняем…",
   "detail.checkFailed": "Не удалось проверить. Попробуйте ещё раз.",

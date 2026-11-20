@@ -32,6 +32,7 @@ import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ADD_BY_EMAIL
 import com.plhery.peekdeliverytracker.ui.settings.ASSISTANTS_SETUP
 import com.plhery.peekdeliverytracker.ui.settings.AssistantsFixtures
 import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_ASSISTANTS
+import com.plhery.peekdeliverytracker.ui.settings.SETTINGS_DELIVERY_UPDATES
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
@@ -297,6 +298,33 @@ class TalkBackScreensTest {
                 "Get a new address [button]",
                 "Notify me when an email adds a parcel [switch, on]",
                 "Turn off [button]",
+            ),
+        )
+    }
+
+    /** A guest's Delivery updates page: this device's switch, the preset and what it covers, with no email. */
+    @Test
+    fun aGuestsDeliveryUpdatesPage() {
+        show(AuthenticationState.Welcome) { isGuest = true }
+        compose.onNodeWithTag(ACCOUNT_BUTTON).performClick()
+        settle()
+        compose.onNodeWithTag(SETTINGS_DELIVERY_UPDATES).performScrollTo().performClick()
+        settle()
+        assertSpoken(
+            "a guest's Delivery updates page",
+            listOf(
+                "Drag handle",
+                "Settings [button]",
+                "Notifications [heading]",
+                "Choose your updates, then turn on notifications for this device.",
+                "Notifications [switch, off]",
+                "WHICH UPDATES? [heading]",
+                "Every scan, Every new tracking event, including routine carrier scans. [button]",
+                "Important steps, Delivery, pickup, customs, missed attempts and returns. [button, selected]",
+                "Delivery only, When your parcel goes out for delivery and when it arrives. [button]",
+                "The parcels you track here get these notifications too. One whose notifications you turn off stays quiet.",
+                "Save preferences [button]",
+                "Parcels are checked hourly, day and night, and up to every 10 minutes on their delivery day or while you look at them.",
             ),
         )
     }

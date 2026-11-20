@@ -25,6 +25,7 @@ import com.plhery.peekdeliverytracker.core.Localizer
 import com.plhery.peekdeliverytracker.core.SessionStore
 import com.plhery.peekdeliverytracker.ui.PHONE
 import com.plhery.peekdeliverytracker.ui.RootHost
+import com.plhery.peekdeliverytracker.ui.talkBackStops
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_BUTTON
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_ERROR
 import com.plhery.peekdeliverytracker.ui.deliveries.ADD_ERROR_SIGN_IN
@@ -123,6 +124,29 @@ class UnlockSheetTest {
         assertTrue(drawn(TAB_BAR))
         assertFalse(exists(SIGN_IN))
         assertEquals(AuthenticationState.Welcome, session.state)
+    }
+
+    /** TalkBack reads the sheet alone, from its grabber to Not now: nothing of the list under it. */
+    @Test
+    fun talkBackReadsTheSheetAlone() {
+        show()
+        ask(UnlockReason.Several)
+        compose.mainClock.advanceTimeBy(1_000)
+        compose.waitForIdle()
+        assertEquals(
+            listOf(
+                "Drag handle [button]",
+                "${text("unlock.title")} [heading]",
+                "${text("common.close")} [button]",
+                "${text("unlock.several")} ${text("unlock.comes")}",
+                "Peek will email you a sign-in code.",
+                "Email address [edit box]",
+                "Email me a code [button, unavailable]",
+                "Your tracking details stay private. Privacy",
+                "${text("unlock.later")} [button]",
+            ),
+            compose.talkBackStops(compose.activity.window.decorView, spoken = true),
+        )
     }
 
     @Test

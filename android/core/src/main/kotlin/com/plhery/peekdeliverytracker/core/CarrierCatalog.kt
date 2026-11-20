@@ -533,7 +533,8 @@ class CarrierCatalog private constructor(
      * Every number a text names with certainty, in the order written, when it names two or more: Add lists
      * them to choose from, as the front door does (`numbersInText` in src/peek/lookup/reading.ts). Links count
      * through their own number; each line is read on its own, so numbers on neighbouring lines never run
-     * together.
+     * together. A percent escape is no part of a number, in a link read as text or in the rest of one wrapped onto
+     * the next line.
      */
     fun numbers(raw: String): List<NumberInText> = memos.numbersRead.getOrPut(raw) {
         val found = mutableListOf<NumberInText>()
@@ -545,9 +546,10 @@ class CarrierCatalog private constructor(
         for (line in raw.split("\n")) {
             for (link in matchesIn(line, linkPattern, caseInsensitive = true)) {
                 val match = parse(link)
-                if (match.trackingNumber.isNotEmpty()) keep(match)
+                val stands = match.source == TrackingInputMatch.Source.Link || standsInLink(link, match.trackingNumber)
+                if (match.trackingNumber.isNotEmpty() && stands) keep(match)
             }
-            val prose = blanking(linkPattern, line, caseInsensitive = true)
+            val prose = blanking(percentEscape, blanking(linkPattern, line, caseInsensitive = true), caseInsensitive = true)
             val candidates = mutableListOf<Candidate>()
             for (shape in candidatePatterns) {
                 for (hit in hits(prose, shape.pattern, shape.caseInsensitive)) {
@@ -636,8 +638,9 @@ class CarrierCatalog private constructor(
             recognizedNumber(decoded)?.let { return makeMatch(it, TrackingInputMatch.Source.Link) }
         }
 
-        // No part of a shop's order number is read as a tracking number.
-        val prose = withoutOrders(input)
+        // No part of a shop's order number is read as a tracking number, nor a link's percent escape: a link whose
+        // decoded text named nothing is read here as it was pasted, where "%3D" before nine digits fits WeDo's shape.
+        val prose = withoutOrders(blanking(percentEscape, input, caseInsensitive = true))
         recognizedNumber(prose)?.let { recognized ->
             return makeMatch(recognized, if (input == recognized) TrackingInputMatch.Source.Number else TrackingInputMatch.Source.Text)
         }
@@ -1208,6 +1211,17 @@ class CarrierCatalog private constructor(
         private val numberWords: String? by lazy { readingRules?.numberWords }
 
         private const val linkPattern = "https?://[^\\s<>\\\"']+"
+
+        /**
+         * A percent escape, as a link encoded inside another prints its "=" ("%3D") or "/" ("%2F"). The two characters
+         * after the "%" are no part of the number that follows: "%3D" before nine digits reads as WeDo's digit, letter
+         * and nine digits (`PERCENT_ESCAPE` in src/peek/lookup/reading.ts).
+         */
+        private const val percentEscape = "%[0-9A-F]{2}"
+
+        /** Whether a number read out of a link's own text stands in it once its percent escapes are set apart. */
+        private fun standsInLink(link: String, number: String): Boolean =
+            blanking(percentEscape, link, caseInsensitive = true).uppercase().contains(number.uppercase())
 
         /** Letters a scanner or a tired eye reads where a label prints a digit, and the other way around. */
         private val digitForLetter: Map<String, String> by lazy { characters(readingRules?.lookalikes?.digitForLetter) }

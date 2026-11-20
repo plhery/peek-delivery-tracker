@@ -2352,6 +2352,36 @@ class CarrierCatalogTests {
         }
     }
 
+    /**
+     * No number is read out of a percent escape in a link (the front door's 32cfee29b): a shop's help link inside its
+     * redirect writes "=" as "%3D", which before a nine-digit page id fits WeDo's digit, letter and nine digits. A number
+     * an encoded link names is still read.
+     */
+    @Test
+    fun noNumberIsReadOutOfALinksPercentEscape() {
+        val help = "https://shop.example/r?C=2AB3C&U=https%3A%2F%2Fshop.example%2Fhelp%3Fie%3DUTF8%26nodeId%3D201234567%26qid%3D1763600000"
+        // A link pasted alone, or in a message, reads no number; nor does "%2F" before nine digits.
+        assertEquals("", catalog.parse(help).trackingNumber)
+        assertEquals("", catalog.parse("https://shop.example/help?nodeId%3D201234567").trackingNumber)
+        assertEquals("", catalog.parse("https://shop.example/help%2F201234567").trackingNumber)
+        assertEquals("", catalog.read("Read our help page\n$help\nThank you").trackingNumber)
+        // Among several numbers, in the link or in the rest of one wrapped onto a line of its own.
+        val listed = { text: String -> catalog.numbers(text).map { it.normalized to it.match.carrier } }
+        assertEquals(
+            listOf("1ZDEMO202600000001" to CarrierId.Ups, "RR123456785CH" to CarrierId.SwissPost),
+            listed("Your parcels 1ZDEMO202600000001 and RR123456785CH\nRead our help page\n$help"),
+        )
+        assertEquals(
+            listOf("1ZDEMO202600000001" to CarrierId.Ups, "RR123456785CH" to CarrierId.SwissPost),
+            listed("1ZDEMO202600000001 RR123456785CH\nhttps://shop.example/r?U=https%3A%2F%2Fshop.example%2Fhelp\n%26nodeId%3D201234567%26qid\n"),
+        )
+        // A number an encoded link names stays the link's, and a percent sign in a sentence changes nothing.
+        val track = catalog.parse("https://shop.example/r?U=https%3A%2F%2Fshop.example%2Ftrack%3Fid%3D1ZDEMO202600000001")
+        assertEquals("1ZDEMO202600000001" to CarrierId.Ups, track.trackingNumber to track.carrier)
+        assertEquals(TrackingInputMatch.Source.Link, track.source)
+        assertEquals("1ZDEMO202600000001", catalog.parse("Your parcel 1ZDEMO202600000001, 100% on time").trackingNumber)
+    }
+
     /** The shared engine's patterns and separators are JavaScript's. */
     @Test
     fun patternsAndSeparatorsReadAsInTheSharedEngine() {

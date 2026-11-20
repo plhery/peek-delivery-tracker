@@ -324,6 +324,24 @@ describe('the counting id', () => {
     expect(seen).toHaveLength(0);
   });
 
+  it('writes back no id deleted while the count was on its way', async () => {
+    answer = 204;
+    vi.stubGlobal('fetch', vi.fn(async (url: string, init?: RequestInit) => {
+      if (url === '/api/public/seen') {
+        seen.push(JSON.parse(init!.body as string));
+        // Another tab's page load, with statistics off, deletes the id.
+        localStorage.removeItem('sdt.counting.v1');
+        return new Response(null, { status: 204 });
+      }
+      return Response.json(url === '/api/analytics/config' ? config : { cache: 'session-cache' });
+    }));
+    const a = await import('./analytics');
+    await a.startAnalytics();
+    a.trackScreen('front-door', 'anonymous'); await settle();
+    expect(seen).toHaveLength(1);
+    expect(stored()).toBeNull();
+  });
+
   it('deletes the id in a browser whose reader turned statistics off, or that asks not to be tracked', async () => {
     const a = await import('./analytics');
     await a.startAnalytics();

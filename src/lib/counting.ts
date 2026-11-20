@@ -82,7 +82,8 @@ export async function countBrowser(signedIn: boolean, now = new Date()): Promise
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(sighting),
     });
-    if (response.status === 204) {
+    // Unless the id was deleted while the count was on its way: the reader stopped statistics in another tab.
+    if (response.status === 204 && read()?.id === stored.id) {
       localStorage.setItem(COUNTING_STORAGE_KEY, JSON.stringify({ ...stored, sent: today, signedIn }));
     }
   } catch { /* Counting must never affect the app. */ }

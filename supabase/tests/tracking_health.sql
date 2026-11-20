@@ -552,4 +552,28 @@ begin
   assert result->0->>'state'='recovered', 'Three answers end the run and recover';
 end;
 $$;
+-- A provider asked several times an hour that answered all day, then failed every lookup for over two hours, opens on
+-- its run though under half of the day failed. A refusal under a shared quota neither ends the run nor counts in it;
+-- an answer ends it.
+do $$
+declare result jsonb;
+begin
+  insert into public.tracking_health_samples(attempt_id, kind, subject, healthy, details, observed_at)
+    select gen_random_uuid(), 'provider', subject, true, '{"category":"ok"}'::jsonb, now() - interval '5 hours' - make_interval(mins => m)
+    from unnest(array['run-busy','run-answered']) subject, generate_series(1, 40) m
+    union all
+    select gen_random_uuid(), 'provider', subject, false, '{"category":"indeterminate","reason":"maintenance_page"}'::jsonb,
+      now() - make_interval(mins => 10 * m)
+    from unnest(array['run-busy','run-answered']) subject, generate_series(1, 14) m
+    union all
+    select gen_random_uuid(), 'provider', 'run-busy', true, '{"category":"shared_quota"}'::jsonb, now() - interval '65 minutes'
+    union all
+    select gen_random_uuid(), 'provider', 'run-answered', true, '{"category":"ok"}'::jsonb, now() - interval '25 minutes';
+  result := pg_temp.health_sample('run-busy',false);
+  assert result->0->>'state'='open' and (result->0->>'consecutive_failures')::boolean
+    and (result->0->>'failures')::int=15 and (result->0->>'attempts')::int=55,
+    'Every lookup failing for over two hours after a day of answers must open an incident under the rate';
+  assert pg_temp.health_sample('run-answered',false)='[]', 'An answer ends the run';
+end;
+$$;
 rollback;

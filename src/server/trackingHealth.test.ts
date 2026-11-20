@@ -275,7 +275,7 @@ describe('tracking health evidence', () => {
       consecutive_failures: true }).title).toBe('Shipment refreshes repeatedly failing: royal-mail (4/6 in 1h; 3 checks in a row failed for two parcels, or for one while no other answered)');
     // A provider refusing every lookup while a breaker lets about one probe an hour through.
     expect(healthMessage({ subject: 'ParcelsApp', kind: 'provider', state: 'open', attempts: 24, failures: 4, window_hours: 24,
-      consecutive_failures: true }).title).toBe('Provider lookups repeatedly failing: ParcelsApp (4/24 in 24h; its last 4 lookups failed, over 2 hours or more, for two parcels or more)');
+      consecutive_failures: true }).title).toBe('Provider lookups repeatedly failing: ParcelsApp (4/24 in 24h; every lookup failed since its last answer, 4 or more over 2 hours or more, for two parcels or more)');
     expect(healthMessage({ subject: 'dpd-fr', kind: 'direct', state: 'closed', reason: 'bypassed' })).toMatchObject({
       title: 'Direct tracking closed: dpd-fr answers through another step', nextSteps: expect.stringContaining('has not run for six hours') });
     expect(healthMessage({ subject: 'correios-br', kind: 'direct', state: 'closed', reason: 'rescued' })).toMatchObject({

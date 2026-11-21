@@ -1,4 +1,4 @@
-import { useId, useState } from 'react';
+import { useId, useState, useSyncExternalStore } from 'react';
 import { localizedDeliveryEstimate, useI18n } from '../i18n';
 import { trackAction } from '../lib/analytics';
 import type { ApiAuth } from '../lib/apiClient';
@@ -16,9 +16,45 @@ import { CarrierMark } from './CarrierMark';
 import { ParcelIllustration } from './Icon';
 import './PeekAi.css';
 
+// Every card with an estimate shares one timer, set for the next minute; a page coming back into view looks again.
+const minuteListeners = new Set<() => void>();
+let minuteTimer: ReturnType<typeof setTimeout> | undefined;
+const notifyMinute = () => minuteListeners.forEach((notify) => notify());
+function waitForNextMinute() {
+  minuteTimer = setTimeout(() => { notifyMinute(); waitForNextMinute(); }, 60_000 - (Date.now() % 60_000) + 20);
+}
+function lookOnReturn() {
+  if (document.visibilityState === 'visible') notifyMinute();
+}
+function subscribeToMinutes(notify: () => void) {
+  minuteListeners.add(notify);
+  if (minuteListeners.size === 1) {
+    waitForNextMinute();
+    document.addEventListener('visibilitychange', lookOnReturn);
+  }
+  return () => {
+    minuteListeners.delete(notify);
+    if (minuteListeners.size) return;
+    clearTimeout(minuteTimer);
+    document.removeEventListener('visibilitychange', lookOnReturn);
+  };
+}
+const unwatched = () => () => {};
+const thisMinute = () => Math.floor(Date.now() / 60_000);
+
+/**
+ * The time to the minute, looked at again each minute while `watching`: on a list or page left open, an estimate goes
+ * when its hour or its day passes, and "5 hours ago" moves on.
+ */
+function usePeekAiNow(watching: boolean): number {
+  return useSyncExternalStore(watching ? subscribeToMinutes : unwatched, thisMinute, thisMinute) * 60_000;
+}
+
 /** Peek AI's estimate for a parcel, while it holds and the reader shows them. */
 export function useParcelPeekAi(parcel: ParcelWithEvents): PeekAi | null {
-  return useShowPeekAi() ? parcelPeekAi(parcel) : null;
+  const shown = useShowPeekAi();
+  const now = usePeekAiNow(shown && !!parcel.peekAi);
+  return shown ? parcelPeekAi(parcel, now) : null;
 }
 
 /** Peek AI's sparkle. */
@@ -104,25 +140,28 @@ export function PeekAiSheet({ parcel, ai, auth, onClose }: { parcel: ParcelWithE
 
 /**
  * Peek AI on the parcel's page: a short card under the parcel's, "✦ Peek AI today is unlikely (i)" and one line of why.
- * It stays while its sheet is open, so switching Peek AI off there does not pull the sheet away.
+ * Its sheet stays when Peek AI is switched off there, and goes with the estimate once its hour or day has passed.
  */
 export function PeekAiCard({ parcel, auth, className = '' }: { parcel: ParcelWithEvents; auth?: ApiAuth; className?: string }) {
   const { t, locale, languageTag, use24HourTime } = useI18n();
   const shown = useShowPeekAi();
-  const [open, setOpen] = useState<PeekAi | null>(null);
-  const ai = shown ? parcelPeekAi(parcel) : null;
-  if (!ai && !open) return null;
+  const [open, setOpen] = useState(false);
+  const now = usePeekAiNow(!!parcel.peekAi && (shown || open));
+  const current = parcelPeekAi(parcel, now);
+  if (open && !current) setOpen(false);
+  const ai = shown ? current : null;
+  if (!ai && !(open && current)) return null;
   const carrier = carrierInfo(displayedCarrierId(parcel), locale).name;
-  const wording: PeekAiWording = { t, languageTag, use24HourTime };
+  const wording: PeekAiWording = { t, languageTag, use24HourTime, now };
   return <>
     {ai && <div className={`peekp-note peek-ai-card ${className}`} role="note">
       <div className="peek-ai-card__head">
         <PeekAiPhrase words={peekAiClaim(ai, wording)} />
         <button type="button" className="peek-ai-card__info" aria-label={t('peekAi.about')}
-          onClick={() => { setOpen(ai); trackAction('peek-ai-open'); }}><Glyph name="info" /></button>
+          onClick={() => { setOpen(true); trackAction('peek-ai-open'); }}><Glyph name="info" /></button>
       </div>
       <p>{peekAiWhy(ai, carrier, wording)}</p>
     </div>}
-    {open && <PeekAiSheet parcel={parcel} ai={open} auth={auth} onClose={() => setOpen(null)} />}
+    {open && current && <PeekAiSheet parcel={parcel} ai={current} auth={auth} onClose={() => setOpen(false)} />}
   </>;
 }

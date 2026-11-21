@@ -215,6 +215,20 @@ enum DeliveryWidgetSample {
               let snapshots = try? JSONDecoder().decode([String: DeliveryWidgetSnapshot].self, from: data) else { return nil }
         return snapshots[languageCode] ?? snapshots["en"]
     }
+
+    /// Peek AI beside the first sample, which is out for delivery, worked out as the gallery shows it, since it names an
+    /// hour: "by 16:00", or two hours on later in the day; none from 20:00, when no courier is still expected.
+    static func peekAi(at now: Date, copy: ExtensionLocalizer, uses24HourTime: Bool) -> String? {
+        let calendar = Calendar.current
+        let hour = calendar.component(.hour, from: now)
+        guard hour < 20, let by = calendar.date(bySettingHour: max(16, hour + 2), minute: 0, second: 0, of: now) else { return nil }
+        // As the app writes times (`Localizer.clockTime`).
+        let formatter = DateFormatter()
+        formatter.locale = ExtensionLocalizer.locale(for: copy.languageCode)
+        formatter.dateFormat = uses24HourTime ? "HH:mm" : (copy.languageCode == "zh" ? "ah:mm" : "h:mm a")
+        if copy.languageCode == "en" { (formatter.amSymbol, formatter.pmSymbol) = ("AM", "PM") }
+        return copy.text("peekAi.card.byTime").replacingOccurrences(of: "{{time}}", with: formatter.string(from: by))
+    }
 }
 
 enum DeliveryActivityPhase: String, Codable, Hashable, Sendable {

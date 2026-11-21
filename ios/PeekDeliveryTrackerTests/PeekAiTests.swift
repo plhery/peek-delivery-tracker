@@ -85,6 +85,22 @@ final class PeekAiTests: XCTestCase {
         XCTAssertNil(with(noDate) { $0.says = .thisWeek; $0.day = nil }.endsAt(after: now))
     }
 
+    /// A list left open draws a card again where its words can change: at the hour named, and at each midnight until the
+    /// day's estimate ends.
+    func testACardIsDrawnAgainWhereItsWordsCanChange() {
+        var parcel = Parcel(id: UUID(), trackingNumber: "TEST0000000004", label: "Test parcel", carrier: .unknown,
+                            createdAt: "2026-11-20T08:00:00Z", syncStatus: .ok, notificationsMuted: false)
+        parcel.trackingEvents = [event(parcel, .outForDelivery)]
+        XCTAssertEqual(parcel.peekAiChanges(after: now), [], "None while it says nothing")
+        parcel.peekAi = byTime
+        XCTAssertEqual(parcel.peekAiChanges(after: now), [at(2026, 11, 24, 16)])
+        parcel.trackingEvents = [event(parcel, .inTransit)]
+        parcel.peekAi = noDate
+        XCTAssertEqual(parcel.peekAiChanges(after: now), [at(2026, 11, 25), at(2026, 11, 26), at(2026, 11, 27)])
+        parcel.peekAi = with(noDate) { $0.says = .thisWeek; $0.day = nil }
+        XCTAssertEqual(parcel.peekAiChanges(after: now), (25...30).map { at(2026, 11, $0) } + [at(2026, 12, 1)])
+    }
+
     func testAParcelShowsItOnlyOnItsWayToTheDoor() {
         var parcel = Parcel(id: UUID(), trackingNumber: "TEST0000000001", label: "Test parcel", carrier: .unknown,
                             createdAt: "2026-11-20T08:00:00Z", syncStatus: .ok, notificationsMuted: false)
@@ -208,6 +224,17 @@ final class PeekAiTests: XCTestCase {
         XCTAssertTrue(DeliveryWidgetDays.changes(in: [shown], after: now).contains(at(2026, 11, 27)))
         XCTAssertEqual(shown.worded(at: at(2026, 11, 26, 23, 59)).peekAi, "by Thu 26 Nov")
         XCTAssertNil(shown.worded(at: at(2026, 11, 27)).peekAi)
+    }
+
+    /// The widget gallery's first sample is out for delivery, and Peek AI names an hour ahead of the gallery's.
+    func testTheWidgetGallerysSampleNamesAnHourAhead() {
+        let english = ExtensionLocalizer(languageCode: "en")
+        XCTAssertEqual(DeliveryWidgetSample.peekAi(at: at(2026, 11, 24, 9, 10), copy: english, uses24HourTime: true), "by 16:00")
+        XCTAssertEqual(DeliveryWidgetSample.peekAi(at: at(2026, 11, 24, 17, 50), copy: english, uses24HourTime: true), "by 19:00")
+        XCTAssertEqual(DeliveryWidgetSample.peekAi(at: at(2026, 11, 24, 9, 10), copy: english, uses24HourTime: false), "by 4:00 PM")
+        XCTAssertEqual(DeliveryWidgetSample.peekAi(at: at(2026, 11, 24, 9, 10), copy: ExtensionLocalizer(languageCode: "fr"), uses24HourTime: true),
+                       "avant 16:00")
+        XCTAssertNil(DeliveryWidgetSample.peekAi(at: at(2026, 11, 24, 20), copy: english, uses24HourTime: true), "No courier is expected so late")
     }
 
     // MARK: The demo

@@ -67,6 +67,21 @@ extension Parcel {
         if let stage = currentStage, Self.notDue.contains(stage) { return nil }
         return peekAi?.current(at: now)
     }
+
+    /// When what Peek AI says of the parcel on a card can next change, for a list left open: the hour or the midnight its
+    /// estimate ends, and each midnight before it, when "today" moves on. None while it says nothing.
+    func peekAiChanges(after now: Date = Date()) -> [Date] {
+        guard let ai = shownPeekAi(at: now) else { return [] }
+        let calendar = Calendar.current
+        let end = ai.endsAt(after: now).flatMap { $0 > now ? $0 : nil }
+        var changes: [Date] = []
+        var midnight = calendar.startOfDay(for: now)
+        while changes.count < 7, let next = calendar.date(byAdding: .day, value: 1, to: midnight), end.map({ next < $0 }) ?? true {
+            changes.append(next)
+            midnight = next
+        }
+        return changes + (end.map { [$0] } ?? [])
+    }
 }
 
 /// The strip in Peek AI's sheet: days with their chance, the carrier's date ringed; or, out for delivery, two hours to

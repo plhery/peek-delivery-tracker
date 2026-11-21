@@ -126,8 +126,8 @@ struct ParcelLinkSheet: View {
                     }
                 }
                 // Peek AI's own estimate while it holds; a wrapped gift's link has none.
-                if !wrapped, parcels.showPeekAi, let ai = parcel.shownPeekAi() {
-                    PeekAiCard(parcel: parcel, ai: ai) { peekAiSheet = $0 }
+                if !wrapped, parcels.showPeekAi, parcel.shownPeekAi() != nil {
+                    PeekAiPageCard(parcel: parcel) { peekAiSheet = $0 }
                 }
                 if let failure = links.refreshFailure {
                     note(localizer.text(failure.messageKey))

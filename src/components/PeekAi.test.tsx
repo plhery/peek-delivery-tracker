@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { ApiPackageRow } from '../generated/apiContract';
@@ -68,6 +68,18 @@ describe('Peek AI on a card', () => {
     expect(summary).toHaveTextContent('Out for delivery·Peek AIby 16:00');
   });
 
+  it('goes at the hour it named, on a list left open', () => {
+    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'clearTimeout'] });
+    vi.setSystemTime(NOW);
+    const { container } = render(<ParcelCard variant="hero" parcel={{ ...parcel, expectedDelivery: undefined, peekAi: BY_TIME,
+      events: [scan('in_transit', 23, 20), scan('out_for_delivery', 24, 8)] }} onOpen={vi.fn()} />);
+    const summary = container.querySelector('.parcel-card__summary')!;
+    act(() => { vi.advanceTimersByTime(29 * 60_000); });
+    expect(summary).toHaveTextContent('Peek AIby 16:00');
+    act(() => { vi.advanceTimersByTime(60_000 + 100); });
+    expect(summary).toHaveTextContent(/^Out for delivery$/);
+  });
+
   it('is gone everywhere once switched off', () => {
     window.localStorage.setItem(SHOW_PEEK_AI_STORAGE_KEY, 'off');
     const { container } = render(<ParcelCard parcel={parcel} onOpen={vi.fn()} />);
@@ -98,6 +110,18 @@ describe('Peek AI on the parcel’s page', () => {
     expect(within(screen.getByRole('dialog', { name: 'Peek AI' })).getByRole('switch', { name: 'Show Peek AI' })).not.toBeChecked();
     expect(document.querySelector('.peek-ai-card')).toBeNull();
     expect(window.localStorage.getItem(SHOW_PEEK_AI_STORAGE_KEY)).toBe('off');
+  });
+
+  it('goes with its sheet once the day it spoke of has passed, on a page left open', async () => {
+    vi.useFakeTimers({ toFake: ['Date', 'setTimeout', 'clearTimeout'], shouldAdvanceTime: true });
+    vi.setSystemTime(NOW);
+    const user = userEvent.setup({ advanceTimers: vi.advanceTimersByTime });
+    detail();
+    await user.click(screen.getByRole('button', { name: 'About Peek AI' }));
+    expect(screen.getByRole('dialog', { name: 'Peek AI' })).toBeInTheDocument();
+    act(() => { vi.advanceTimersByTime(8.5 * 3_600_000); });
+    expect(screen.queryByRole('dialog', { name: 'Peek AI' })).toBeNull();
+    expect(document.querySelector('.peek-ai-card')).toBeNull();
   });
 
   it('shows the days it expects when the carrier gives no date', async () => {

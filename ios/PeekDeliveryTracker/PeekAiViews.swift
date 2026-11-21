@@ -22,6 +22,8 @@ struct PeekAiSheetRequest: Identifiable {
 struct PeekAiCard: View {
     let parcel: Parcel
     let ai: PeekAi
+    /// The time it is drawn at, which the page moves on each minute: "5 hours ago" stays true.
+    var now = Date()
     let open: (PeekAiSheetRequest) -> Void
 
     @EnvironmentObject private var localizer: Localizer
@@ -29,7 +31,7 @@ struct PeekAiCard: View {
 
     var body: some View {
         let carrier = catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName
-        let claim = localizer.peekAiClaim(ai)
+        let claim = localizer.peekAiClaim(ai, now: now)
         VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .center, spacing: 6) {
                 HStack(alignment: .firstTextBaseline, spacing: 5) {
@@ -56,7 +58,7 @@ struct PeekAiCard: View {
                 .accessibilityLabel(localizer.text("peekAi.about"))
                 .accessibilityIdentifier("parcel.peekAi.about")
             }
-            Text(localizer.peekAiWhy(ai, carrier: carrier))
+            Text(localizer.peekAiWhy(ai, carrier: carrier, now: now))
                 .foregroundStyle(Brand.secondaryText)
                 .fixedSize(horizontal: false, vertical: true)
         }
@@ -68,6 +70,35 @@ struct PeekAiCard: View {
         .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("parcel.peekAi")
+    }
+}
+
+/// Draws a card again when what Peek AI says of its parcel can change (`Parcel.peekAiChanges`): on a list left open, "by
+/// 16:00" goes at 16:00, and a day's estimate the midnight after it.
+struct PeekAiClock<Content: View>: View {
+    let parcel: Parcel
+    let shown: Bool
+    @ViewBuilder let content: (Date) -> Content
+
+    var body: some View {
+        let now = Date()
+        TimelineView(.explicit([now] + (shown ? parcel.peekAiChanges(after: now) : []))) { context in
+            content(context.date)
+        }
+    }
+}
+
+/// Peek AI on the parcel's page, looked at again each minute: the card goes once its hour or day has passed.
+struct PeekAiPageCard: View {
+    let parcel: Parcel
+    let open: (PeekAiSheetRequest) -> Void
+
+    var body: some View {
+        TimelineView(.everyMinute) { context in
+            if let ai = parcel.shownPeekAi(at: context.date) {
+                PeekAiCard(parcel: parcel, ai: ai, now: context.date, open: open)
+            }
+        }
     }
 }
 
@@ -100,6 +131,12 @@ struct PeekAiSheet: View {
         .presentationBackground(Brand.sheet)
         .onChange(of: fitted, initial: true) { _, fitted in
             if detent != .large { detent = fitted }
+        }
+        // It goes with the estimate, once its hour or day has passed.
+        .task {
+            guard let end = request.ai.endsAt() else { return }
+            try? await Task.sleep(for: .seconds(max(0, end.timeIntervalSinceNow)))
+            if !Task.isCancelled { dismiss() }
         }
     }
 

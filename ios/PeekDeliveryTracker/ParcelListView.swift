@@ -1807,7 +1807,12 @@ private struct ExperimentalNextDeliveryPass: View {
         }
     }
 
+    /// Drawn again when what Peek AI says of the parcel can change.
     private var card: some View {
+        PeekAiClock(parcel: parcel, shown: showsPeekAi) { card(at: $0) }
+    }
+
+    private func card(at now: Date) -> some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .top, spacing: 12) {
                 CarrierFleetMark(identity: identity)
@@ -1853,7 +1858,7 @@ private struct ExperimentalNextDeliveryPass: View {
                                        localizer.parcelDeliveryEstimate(parcel) ?? (arrived ? localizer.parcelCompletionDate(parcel) : nil)]
                         .compactMap { $0 }.joined(separator: " · "))
                     // Peek AI's own estimate beside the status, or under it where the line has no room.
-                    if let words = localizer.parcelPeekAiWords(parcel, shown: showsPeekAi) {
+                    if let words = localizer.parcelPeekAiWords(parcel, shown: showsPeekAi, now: now) {
                         ViewThatFits(in: .horizontal) {
                             HStack(spacing: 5) {
                                 status.fixedSize()
@@ -1950,7 +1955,7 @@ private struct ExperimentalParcelPassCard: View {
         return localizer.parcelDeliveryEstimate(parcel) ?? localizer.parcelCompletionDate(parcel)
     }
     /// Peek AI's own estimate, under the carrier's date or in its place; none on a copy no longer updated.
-    private var peekAi: String? { frozen ? nil : localizer.parcelPeekAiWords(parcel, shown: showsPeekAi) }
+    private func peekAi(at now: Date) -> String? { frozen ? nil : localizer.parcelPeekAiWords(parcel, shown: showsPeekAi, now: now) }
     /// Scans with places are drawn as a small route at the end of the card.
     private var placed: Bool { parcel.hasMappedPlace }
     /// At the largest text sizes the words take the whole card, and the route goes.
@@ -2003,7 +2008,12 @@ private struct ExperimentalParcelPassCard: View {
         }
     }
 
+    /// Drawn again when what Peek AI says of the parcel can change.
     private var card: some View {
+        PeekAiClock(parcel: parcel, shown: showsPeekAi && !frozen) { card(at: $0) }
+    }
+
+    private func card(at now: Date) -> some View {
         VStack(alignment: .leading, spacing: 5) {
             ViewThatFits(in: .horizontal) {
                 HStack(alignment: .top, spacing: 12) {
@@ -2011,13 +2021,13 @@ private struct ExperimentalParcelPassCard: View {
                     Spacer(minLength: 0)
                     VStack(alignment: .trailing, spacing: 3) {
                         if let date { dateLabel(date).fixedSize() }
-                        if let peekAi { peekAiLabel(peekAi).fixedSize() }
+                        if let peekAi = peekAi(at: now) { peekAiLabel(peekAi).fixedSize() }
                     }
                 }
                 VStack(alignment: .leading, spacing: 6) {
                     CarrierFleetMark(identity: identity)
                     if let date { dateLabel(date) }
-                    if let peekAi { peekAiLabel(peekAi) }
+                    if let peekAi = peekAi(at: now) { peekAiLabel(peekAi) }
                 }
             }
             .padding(.bottom, 3)

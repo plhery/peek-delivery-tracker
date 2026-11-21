@@ -561,8 +561,8 @@ struct ParcelDetailView: View {
             .background(branding.surface, in: RoundedRectangle(cornerRadius: 18))
 
             // Peek AI's own estimate while it holds; none on a copy no longer updated.
-            if store.showPeekAi, !frozen, let ai = parcel.shownPeekAi() {
-                PeekAiCard(parcel: parcel, ai: ai) { peekAiSheet = $0 }
+            if store.showPeekAi, !frozen, parcel.shownPeekAi() != nil {
+                PeekAiPageCard(parcel: parcel) { peekAiSheet = $0 }
             }
 
             // Offered once, on a delivered parcel. Accepted, it stays as one line until the parcel is closed.

@@ -808,7 +808,8 @@ and nothing typed is sent.
   loads the newest at start and every hour, and with none loaded says nothing. A wrapped
   gift's link shows none, and an assistant's `list_parcels` gives it as `peekAi`. Cards show
   one line under the carrier's date, and the parcel's page a short card that opens what Peek
-  AI expects, why and how sure. Settings can switch it off: the device keeps the choice, and
+  AI expects, why and how sure; both drop it once its hour or day has passed, even on a
+  screen left open. Settings can switch it off: the device keeps the choice, and
   an account's follows it to its other devices (`show_peek_ai`).
 - **A customs request**: a scan in which the carrier asks the recipient to give a tax number,
   pay import duties or taxes, or send documents is served with `recipient_action`, as the

@@ -23,7 +23,12 @@ private struct ParcelListProvider: TimelineProvider {
         let languageCode = ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
         let folder = Bundle.main.url(forResource: DeliveryWidgetSample.folderName, withExtension: nil)
         let snapshot = folder.flatMap { DeliveryWidgetSample.snapshot(languageCode: languageCode, in: $0) }
-        var entry = makeEntry(at: Date(), languageCode: languageCode, parcels: snapshot?.parcels ?? [],
+        var parcels = snapshot?.parcels ?? []
+        if parcels.first?.isOutForDelivery == true {
+            let clock = DeviceClock.uses24HourTime(in: UserDefaults(suiteName: DeliveryWidgetSharedStore.appGroupIdentifier()))
+            parcels[0].peekAi = DeliveryWidgetSample.peekAi(at: Date(), copy: ExtensionLocalizer(languageCode: languageCode), uses24HourTime: clock)
+        }
+        var entry = makeEntry(at: Date(), languageCode: languageCode, parcels: parcels,
                               pictures: folder, trucks: nil, size: context.family.listSize)
         entry.isSample = true
         return entry

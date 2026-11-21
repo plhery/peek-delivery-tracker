@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-21
 ---
 
-You can track your parcels in Claude, ChatGPT or Gemini by connecting them to [Peek](/), a free parcel tracker: the assistant can then tell you where your parcels are and add the tracking numbers you give it. You need a Peek account, and each assistant decides who can: Claude on any plan, ChatGPT on a Plus, Pro, Business, Enterprise or Edu plan, Gemini for adults in the US with a personal Google Account, and OpenClaw for whoever runs it. Peek labels the feature "Beta", so it may still change.
+You can track your parcels in Claude, ChatGPT or Gemini by connecting them to [Peek](/), a free parcel tracker: the assistant can then tell you where your parcels are and add the tracking numbers you give it. You need a Peek account, and each assistant decides who can: Claude on any plan, ChatGPT on a Plus, Pro, Business, Enterprise or Edu plan, Gemini in English (in the US for adults with a personal Google Account, elsewhere through its Developer Mode), and OpenClaw for whoever runs it. Peek labels the feature "Beta", so it may still change.
 
 ## Can ChatGPT, Claude or Gemini track my parcels?
 
@@ -17,7 +17,7 @@ Yes, once you connect them to Peek. Each assistant sets its own conditions:
 | --- | --- | --- |
 | Claude | claude.ai, and Claude's desktop, iPhone and Android apps | Any plan. On a Team or Enterprise plan, an owner adds Peek first |
 | ChatGPT | Added on a computer, at chatgpt.com or in the ChatGPT desktop app | A Plus, Pro, Business, Enterprise or Edu plan, not Free or Go. In a workspace, an admin may have to add or allow Peek first |
-| Gemini | Connected at gemini.google.com, then in the Gemini app too | 18 or over, in the US, with a personal Google Account and History on, in English |
+| Gemini | Connected at gemini.google.com, then in the Gemini app too | In English. In the US: 18 or over, with a personal Google Account and History on. Elsewhere: through Gemini's Developer Mode |
 | OpenClaw | The computer or server you run it on, in the chats its agents answer | Whoever runs it, from a terminal there |
 | Another assistant | Any that lets you add a custom connector or MCP server | Whoever can add one there |
 
@@ -60,6 +60,15 @@ If Claude doesn't list "Peek Parcel Tracker", add Peek as a custom connector on 
 ### Gemini
 
 Google's help page says that to connect a custom app such as Peek, you must "Be 18 or over and in the US", use a personal Google Account, not a work or school one, and "Have History on". You connect it at gemini.google.com, and it then works in the Gemini mobile app too, in English only. Google names no paid plan. Google's page and Peek's both say to add Peek's address in Gemini's "Settings", then "Connected Apps", under "Custom apps".
+
+Outside the US, Gemini's "Settings" have no "Connected Apps". Add Peek through "Developer Mode" there instead: Google made it for testing apps like Peek, and Peek then works in your chats and in the Gemini app, as it does in the US.
+
+:::steps
+- Open "Developer Mode" | In Gemini's "Settings" on gemini.google.com, or at gemini.google.com/devmode. Select "Create new".
+- Paste Peek's address | Paste `https://peektracker.com/mcp` and select "Next". Tick the box to accept the risks, then select "Connect", then "Agree and continue".
+- Sign in to Peek | Peek calls it "Google": choose what it may do, then select "Allow".
+- Select "Connect" again | Gemini saves Peek. Then type @ in a chat and pick Peek.
+:::
 
 ### OpenClaw
 
@@ -145,6 +154,7 @@ More cases are under "If something goes wrong" on [Peek's assistants page](https
 - [ChatGPT: Pricing](https://chatgpt.com/pricing/) – "Developer mode", which a custom MCP server comes under: Plus and Pro, not Free or Go
 - [OpenAI Help Center: Connecting custom MCP servers in ChatGPT](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt) – Business, Enterprise and Edu, and who may add one in a workspace
 - [Gemini Apps Help: Connect & manage custom apps for Gemini Apps](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – who can connect a custom app, History on, English, connecting on the web
+- [Google for Developers: Test, debug, and evaluate in Gemini Apps Developer Mode](https://developers.google.com/connected-apps/mcp/dev-mode/usage) – opening Developer Mode, adding a server as a custom app, its dialogs and buttons
 - [OpenClaw: Transports and OAuth](https://docs.openclaw.ai/cli/mcp/transports) – saving a server with OAuth, `openclaw mcp login`, finishing with the code, one shared sign-in
 - [OpenClaw: Connect MCP servers](https://docs.openclaw.ai/tools/mcp) – agents use a saved server's tools
 - [OpenClaw on GitHub: MCP commands and the Gateway](https://github.com/openclaw/openclaw/blob/v2026.11.5/src/cli/mcp-cli-state-owner.ts) – `mcp set` and `mcp login` refused while the Gateway runs

@@ -20,7 +20,8 @@ export interface AssistantSetup { name: string; who: SetupLine; steps: readonly 
  * connectors to extend Claude's capabilities", with "Get started with custom connectors using remote MCP" for the
  * custom connector Claude falls back on; OpenAI's "Add custom MCP server", "Connect and test your plugin" and "Plugins in
  * ChatGPT", with its plans from ChatGPT's pricing page, where a custom MCP server comes under "Developer mode"; Google's
- * "Connect & manage custom apps for Gemini Apps"; and OpenClaw's "Transports and OAuth" and "Manage saved MCP servers"
+ * "Connect & manage custom apps for Gemini Apps", with "Test, debug, and evaluate in Gemini Apps Developer Mode" for the
+ * Developer Mode that adds Peek outside the US; and OpenClaw's "Transports and OAuth" and "Manage saved MCP servers"
  * (docs.openclaw.ai/cli/mcp), whose commands its released CLI runs only while the Gateway is stopped. Home Assistant
  * connects through Peek's integration (github.com/plhery/peek-ha), whose README gives its steps, named as Home
  * Assistant 2026.11 does. Their menus, buttons and commands are named in English, as those pages give them; `who` says

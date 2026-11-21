@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-21
 ---
 
-Du kannst deine Pakete in Claude, ChatGPT oder Gemini verfolgen, wenn du sie mit [Peek](/) verbindest, einem kostenlosen Paket-Tracker: Der Assistent kann dir dann sagen, wo deine Pakete sind, und die Sendungsnummern hinzufügen, die du ihm gibst. Du brauchst ein Peek-Konto, und wer es nutzen kann, legt jeder Assistent selbst fest: Claude mit jedem Tarif, ChatGPT mit einem Plus-, Pro-, Business-, Enterprise- oder Edu-Tarif, Gemini für Erwachsene in den USA mit einem privaten Google-Konto und OpenClaw für alle, die es selbst betreiben. Peek kennzeichnet die Funktion mit „Beta“, sie kann sich also noch ändern.
+Du kannst deine Pakete in Claude, ChatGPT oder Gemini verfolgen, wenn du sie mit [Peek](/) verbindest, einem kostenlosen Paket-Tracker: Der Assistent kann dir dann sagen, wo deine Pakete sind, und die Sendungsnummern hinzufügen, die du ihm gibst. Du brauchst ein Peek-Konto, und wer es nutzen kann, legt jeder Assistent selbst fest: Claude mit jedem Tarif, ChatGPT mit einem Plus-, Pro-, Business-, Enterprise- oder Edu-Tarif, Gemini auf Englisch (in den USA für Erwachsene mit einem privaten Google-Konto, anderswo über seinen „Developer Mode“) und OpenClaw für alle, die es selbst betreiben. Peek kennzeichnet die Funktion mit „Beta“, sie kann sich also noch ändern.
 
 ## Können ChatGPT, Claude oder Gemini meine Pakete verfolgen?
 
@@ -17,7 +17,7 @@ Ja, sobald du sie mit Peek verbindest. Jeder Assistent legt eigene Bedingungen f
 | --- | --- | --- |
 | Claude | claude.ai und die Claude-Apps für Desktop, iPhone und Android | Jeder Tarif. Mit einem Team- oder Enterprise-Tarif fügt zuerst ein Inhaber Peek hinzu |
 | ChatGPT | Am Computer hinzugefügt, auf chatgpt.com oder in der ChatGPT-Desktop-App | Ein Plus-, Pro-, Business-, Enterprise- oder Edu-Tarif, nicht Free oder Go. In einem Workspace muss ein Admin Peek eventuell zuerst hinzufügen oder erlauben |
-| Gemini | Verbunden auf gemini.google.com, danach auch in der Gemini-App | Ab 18, in den USA, mit privatem Google-Konto und eingeschalteter Einstellung „History“, auf Englisch |
+| Gemini | Verbunden auf gemini.google.com, danach auch in der Gemini-App | Auf Englisch. In den USA: ab 18, mit privatem Google-Konto und eingeschalteter Einstellung „History“. Anderswo: über den „Developer Mode“ von Gemini |
 | OpenClaw | Auf dem Computer oder Server, auf dem du es betreibst, in den Chats seiner Agenten | Wer es betreibt, über ein Terminal dort |
 | Ein anderer Assistent | Jeder, bei dem du einen benutzerdefinierten Konnektor oder MCP-Server hinzufügen kannst | Wer dort einen hinzufügen darf |
 
@@ -60,6 +60,15 @@ Zeigt Claude „Peek Parcel Tracker“ nicht an, füge Peek als benutzerdefinier
 ### Gemini
 
 Laut Googles Hilfeseite musst du, um eine benutzerdefinierte App wie Peek zu verbinden, mindestens 18 Jahre alt sein und dich in den USA befinden, ein privates Google-Konto nutzen, kein Arbeits- oder Schulkonto, und die Einstellung „History“ eingeschaltet haben. Du verbindest sie auf gemini.google.com, danach funktioniert sie auch in der Gemini-App fürs Handy, nur auf Englisch. Einen kostenpflichtigen Tarif nennt Google nicht. Googles Seite und die von Peek sagen beide: Die Adresse von Peek kommt in Gemini unter „Settings“, dann „Connected Apps“, in den Bereich „Custom apps“.
+
+Außerhalb der USA gibt es in Geminis „Settings“ kein „Connected Apps“. Dort fügst du Peek stattdessen über den „Developer Mode“ hinzu: Google hat ihn zum Testen von Apps wie Peek gemacht, und Peek funktioniert danach in deinen Chats und in der Gemini-App, wie in den USA.
+
+:::steps
+- Öffne „Developer Mode“ | In Geminis „Settings“ auf gemini.google.com oder unter gemini.google.com/devmode. Wähle „Create new“.
+- Füge die Adresse von Peek ein | Füge `https://peektracker.com/mcp` ein und wähle „Next“. Setze das Häkchen, um die Risiken zu akzeptieren, und wähle dann „Connect“ und danach „Agree and continue“.
+- Melde dich bei Peek an | Peek nennt es „Google“: Wähle aus, was es tun darf, und dann „Erlauben“.
+- Wähle noch einmal „Connect“ | Gemini speichert Peek. Tippe dann in einem Chat @ und wähle Peek.
+:::
 
 ### OpenClaw
 
@@ -145,6 +154,7 @@ Weitere Fälle stehen unter „Wenn etwas nicht klappt“ auf [Peeks Seite zu As
 - [ChatGPT: Pricing (auf Englisch)](https://chatgpt.com/pricing/) – „Developer mode“, zu dem ein eigener MCP-Server gehört: Plus und Pro, nicht Free oder Go
 - [OpenAI-Hilfe: Connecting custom MCP servers in ChatGPT (auf Englisch)](https://help.openai.com/en/articles/12584461-connecting-custom-mcp-servers-in-chatgpt) – Business, Enterprise und Edu, und wer in einem Workspace einen hinzufügen darf
 - [Gemini-Apps-Hilfe: Connect & manage custom apps for Gemini Apps (auf Englisch)](https://support.google.com/gemini/answer/17209137?hl=en&co=GENIE.Platform%3DDesktop) – wer eine benutzerdefinierte App verbinden kann, History eingeschaltet, Englisch, Verbinden im Web
+- [Google for Developers: Test, debug, and evaluate in Gemini Apps Developer Mode (auf Englisch)](https://developers.google.com/connected-apps/mcp/dev-mode/usage) – Developer Mode öffnen, einen Server als benutzerdefinierte App hinzufügen, seine Dialoge und Schaltflächen
 - [OpenClaw: Transports and OAuth (auf Englisch)](https://docs.openclaw.ai/cli/mcp/transports) – einen Server mit OAuth speichern, `openclaw mcp login`, Abschluss mit dem Code, eine gemeinsame Anmeldung
 - [OpenClaw: Connect MCP servers (auf Englisch)](https://docs.openclaw.ai/tools/mcp) – Agenten nutzen die Tools eines gespeicherten Servers
 - [OpenClaw auf GitHub: MCP-Befehle und das Gateway (auf Englisch)](https://github.com/openclaw/openclaw/blob/v2026.11.5/src/cli/mcp-cli-state-owner.ts) – `mcp set` und `mcp login` verweigert, solange das Gateway läuft

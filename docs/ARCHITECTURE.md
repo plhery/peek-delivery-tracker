@@ -536,7 +536,8 @@ Key server modules:
     one request at a time; Settings lists the assistants and disconnects any. The website's
     Settings and the iPhone, iPad, Mac and Android apps' show the same page.
   - Settings also shows how to add Peek to Claude (from its connector directory, or as a custom
-    connector where Claude doesn't list it), ChatGPT, Gemini and OpenClaw, with each one's menu
+    connector where Claude doesn't list it), ChatGPT, Gemini (through its Developer Mode outside
+    the US) and OpenClaw, with each one's menu
     names in English as its help pages give them and the plans and places that can, and to
     Home Assistant through Peek's integration ([peek-ha](https://github.com/plhery/peek-ha)),
     and what to ask a connected assistant, first to add the tracking numbers in the user's

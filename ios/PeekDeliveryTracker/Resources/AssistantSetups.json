@@ -101,6 +101,21 @@
         [
           "assistants.setup.gemini.use"
         ]
+      ],
+      "fallback": [
+        "assistants.setup.gemini.devMode",
+        {
+          "settings": "Settings",
+          "apps": "Connected Apps",
+          "devMode": {
+            "text": "Developer Mode",
+            "href": "https://gemini.google.com/devmode"
+          },
+          "create": "Create new",
+          "next": "Next",
+          "connect": "Connect",
+          "agree": "Agree and continue"
+        }
       ]
     },
     {

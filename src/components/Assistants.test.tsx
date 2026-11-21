@@ -99,6 +99,14 @@ describe('assistants in Settings', () => {
       'Sign in to Peek when it asks, then select Allow.',
       'In a chat, type @ and pick Peek.',
     ]);
+    // Outside the US, Gemini's Settings have no Connected Apps: its Developer Mode adds Peek, linked to its own page.
+    const gemini = Array.from(setup.querySelectorAll('details')).find((details) => details.querySelector('summary')?.textContent === 'Gemini›');
+    expect(gemini?.querySelector('.assistants__fallback')).toHaveTextContent(
+      'Outside the US, Settings has no Connected Apps: open Developer Mode instead and select Create new. Paste the address '
+      + 'above and select Next, tick the box to accept the risks, then select Connect and Agree and continue. Once you’ve '
+      + 'allowed Peek, select Connect again to save it.',
+    );
+    expect(screen.getByRole('link', { name: 'Developer Mode' })).toHaveAttribute('href', 'https://gemini.google.com/devmode');
     // OpenClaw saves Peek from a terminal while its Gateway is stopped, with the address in the command to type.
     await user.click(screen.getByText('OpenClaw'));
     const openClaw = Array.from(setup.querySelectorAll('details')).find((details) => details.querySelector('summary')?.textContent === 'OpenClaw›');
@@ -125,7 +133,7 @@ describe('assistants in Settings', () => {
       'Reload the page. Then edit a dashboard, select Add card, then By card, and pick Peek parcels.',
     ]);
     // The assistant's own names stay as its help pages give them, out of a page translator's reach.
-    expect(screen.getByText('Connected Apps')).toHaveAttribute('translate', 'no');
+    for (const name of screen.getAllByText('Connected Apps')) expect(name).toHaveAttribute('translate', 'no');
     const uses = screen.getByRole('region', { name: 'What to ask it' });
     expect(uses.querySelector('li')).toHaveTextContent('Ask it to look through your emails and add the tracking numbers it finds. This works when it can read your mail too, for example through its Gmail connector.');
   });

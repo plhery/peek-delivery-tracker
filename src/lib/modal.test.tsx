@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { describe, expect, it, vi } from 'vitest';
 import { useModalDialog } from './modal';
@@ -56,5 +57,30 @@ describe('useModalDialog', () => {
     expect(document.querySelector('main')).not.toHaveAttribute('inert');
     view.unmount();
     expect(document.body.style.overflow).toBe('');
+  });
+
+  it('gives focus back near the control that opened it when the sheet took that control away', () => {
+    function Gone({ onClose }: { onClose: () => void }) {
+      const dialog = useModalDialog<HTMLDivElement>(true, onClose);
+      return createPortal(<div ref={dialog} role="dialog" aria-label="A sheet" tabIndex={-1}>
+        <button type="button" onClick={onClose}>Done</button>
+      </div>, document.body);
+    }
+    function Card() {
+      const [open, setOpen] = useState(false);
+      const [shown, setShown] = useState(true);
+      return <section>
+        <button type="button">Back</button>
+        <div>{shown && <button type="button" onClick={() => setOpen(true)}>About</button>}</div>
+        {open && <Gone onClose={() => { setShown(false); setOpen(false); }} />}
+      </section>;
+    }
+    render(<Card />);
+    const about = screen.getByRole('button', { name: 'About' });
+    about.focus();
+    fireEvent.click(about);
+    fireEvent.click(screen.getByRole('button', { name: 'Done' }));
+    expect(screen.queryByRole('button', { name: 'About' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Back' })).toHaveFocus();
   });
 });

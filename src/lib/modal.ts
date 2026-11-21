@@ -97,6 +97,11 @@ export function useModalDialog<T extends HTMLElement>(
     const returnFocus = document.activeElement instanceof HTMLElement
       ? document.activeElement
       : null;
+    // Where that control sat, in case the sheet takes it away (an estimate that ends, a switch turned off inside).
+    const returnPlaces: HTMLElement[] = [];
+    for (let place = returnFocus?.parentElement; place && place !== document.body; place = place.parentElement) {
+      returnPlaces.push(place);
+    }
     const entry = { element: modal, original: hiddenState(modal) };
     modals.push(entry);
     // A sheet may still be on its way in from below the screen; nothing scrolls to meet it.
@@ -168,6 +173,16 @@ export function useModalDialog<T extends HTMLElement>(
       }
       if (wasTopmost) {
         if (returnFocus?.isConnected && !returnFocus.closest('[inert]')) returnFocus.focus({ preventScroll: true });
+        else {
+          for (const place of returnPlaces) {
+            if (!place.isConnected || place.closest('[inert]')) continue;
+            const near = focusableElements(place)[0];
+            if (near) {
+              near.focus({ preventScroll: true });
+              break;
+            }
+          }
+        }
         if (document.activeElement === document.body && modals.length > 0) {
           const parent = modals.at(-1)!.element;
           (focusableElements(parent)[0] ?? parent).focus();

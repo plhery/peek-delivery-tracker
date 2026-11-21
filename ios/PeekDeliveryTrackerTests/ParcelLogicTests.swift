@@ -1989,11 +1989,18 @@ final class ParcelLogicTests: XCTestCase {
         // One that lists it only as announced, without a scan of its own, has not taken it: the delivered step is still
         // the schedule's.
         delivered.carrierData?.deliveryAnnounced = true
-        XCTAssertEqual(delivered.deliveryLineKey, "parcel.deliveryAnnounced")
         XCTAssertTrue(delivered.scheduledDelivery)
-
+        // Delivered, it waits for no partner: the line names who delivers, as on the web.
+        XCTAssertEqual(delivered.deliveryLineKey, "parcel.deliveryCarrier")
+        var returned = makeParcel(id: id, events: [event(id, .returned, "2026-08-08T12:00:00Z")])
+        returned.carrier = .gzyl
+        returned.carrierData = delivered.carrierData
+        XCTAssertEqual(returned.deliveryLineKey, "parcel.deliveryCarrier")
+        // On its way, it is still only announced there.
         var moving = makeParcel(id: id, events: [event(id, .inTransit, "2026-08-08T12:00:00Z")])
         moving.carrier = .gzyl
+        moving.carrierData = delivered.carrierData
+        XCTAssertEqual(moving.deliveryLineKey, "parcel.deliveryAnnounced")
         XCTAssertFalse(moving.scheduledDelivery)
     }
 

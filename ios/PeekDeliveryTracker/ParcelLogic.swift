@@ -324,8 +324,13 @@ extension Parcel {
     }
 
     /// The words of the card's line on who delivers (`deliveringCarrier`): announced there and not received yet while the
-    /// carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web.
-    var deliveryLineKey: String { deliveryOnlyAnnounced ? "parcel.deliveryAnnounced" : "parcel.deliveryCarrier" }
+    /// carrier its carrier names lists the parcel without a scan of its own, else who delivers, as on the web. A parcel
+    /// delivered or returned waits for no partner: a carrier that writes its delivered step on a schedule (GZYL) keeps the
+    /// flag after delivery only to say so (`scheduledDelivery`).
+    var deliveryLineKey: String {
+        deliveryOnlyAnnounced && currentStage != .delivered && currentStage != .returned
+            ? "parcel.deliveryAnnounced" : "parcel.deliveryCarrier"
+    }
 
     /// The carrier its carrier names as delivering lists the parcel without a scan of its own: announced there, and not
     /// received yet.

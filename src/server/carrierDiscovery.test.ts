@@ -16,8 +16,9 @@ beforeEach(() => {
   vi.spyOn(console, 'log').mockImplementation(() => undefined);
 });
 
-// Twelve digits whose GLS check holds, so GLS's networks are asked too, and FedEx's: the scraper ranks FedEx first.
-const FEDEX_NUMBER = '100000000150';
+// Twelve digits whose GLS and Japan Post checks hold, so GLS's networks and Japan Post are asked too and a
+// second batch is left, and FedEx's: the scraper ranks FedEx first.
+const FEDEX_NUMBER = '100000001010';
 const httpBatches = () => recognitionCandidates(FEDEX_NUMBER).slice(0, 2 * MAX_RECOGNITIONS).map(({ carrier }) => carrier);
 /** Detection without the answers an earlier test left in its cache. */
 async function freshDetection() {
@@ -34,7 +35,7 @@ it('asks FedEx as soon as the first five miss a number that passes its check, an
     trackingNumber: FEDEX_NUMBER, carrier: 'fedex', asked: [...http.slice(0, MAX_RECOGNITIONS), 'fedex'],
   });
   expect(allowance).toHaveBeenCalledOnce();
-  expect(mocks.http).toHaveBeenCalledWith('colis-prive', FEDEX_NUMBER, expect.objectContaining({ budgetMs: 3_000, signal: expect.any(AbortSignal) }));
+  expect(mocks.http).toHaveBeenCalledWith('brt', FEDEX_NUMBER, expect.objectContaining({ budgetMs: 3_000, signal: expect.any(AbortSignal) }));
   expect(mocks.browser).toHaveBeenCalledWith('fedex', FEDEX_NUMBER, expect.objectContaining({ budgetMs: 20_000 }), undefined);
 });
 

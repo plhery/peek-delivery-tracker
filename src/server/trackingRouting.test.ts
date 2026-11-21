@@ -3912,8 +3912,8 @@ describe('persistent tracking routing', () => {
       it.each([
         ['scans that match by an offset that is no whole hour', ['sto'], dating('2026-09-10T01:30:00Z'), trackingNumber],
         ['a scan of another stage', ['sto'], dating('2026-09-10T01:00:00Z', 'out_for_delivery', 'Out for delivery'), trackingNumber],
-        // Twelve digits: no number evidence backs either carrier, so recognition settles on neither.
-        ['recognition that knows two carriers', ['brt', 'j-and-t'], dating(), '123456789012'],
+        // Twelve digits whose Japan Post check holds: no number evidence backs either carrier, so recognition settles on neither.
+        ['recognition that knows two carriers', ['brt', 'japan-post'], dating(), '100000001010'],
         // BRT's catalog lists it in UTC: read there, its 09:00 would be the provider's.
         ['a carrier the catalog lists in UTC', ['brt'], dating('2026-09-10T09:00:00Z'), trackingNumber],
         // Read as UTC, it would be STO's scan.

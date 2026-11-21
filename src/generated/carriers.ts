@@ -2604,6 +2604,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "ecms-express-sendungsverfolgung",
+      "title": "ECMS Express Sendungsverfolgung: 16-stellige Nummern & Zoll",
+      "name": "ECMS Express",
+      "color": "#12823d"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "jd-logistics-sendungsverfolgung",
@@ -3366,6 +3374,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "suivi-ecms-express",
+      "title": "Suivi ECMS Express\u00a0: numéros à 16 caractères et statuts",
+      "name": "ECMS Express",
+      "color": "#12823d"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "suivi-colis-jd-logistics",
@@ -4022,6 +4038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento YWE (YanwenExpress): numero, stati e aiuto",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "tracciamento-ecms-express",
+      "title": "Tracciamento ECMS Express: codici da 16 caratteri e dogana",
+      "name": "ECMS Express",
+      "color": "#12823d"
     },
     {
       "id": "chunghwa-post",
@@ -4698,6 +4722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#055aa1"
     },
     {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "seguimiento-ecms-express",
+      "title": "Seguimiento ECMS Express: códigos de 16 caracteres y aduana",
+      "name": "ECMS Express",
+      "color": "#12823d"
+    },
+    {
       "id": "jd-logistics",
       "catalog": "jd-logistics",
       "slug": "seguimiento-jd-logistics",
@@ -5322,6 +5354,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento YWE (YanwenExpress): número, estados e ajuda",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "seguimento-ecms-express",
+      "title": "Seguimento ECMS Express: códigos de 16 caracteres e entrega",
+      "name": "ECMS Express",
+      "color": "#12823d"
     },
     {
       "id": "jd-logistics",
@@ -6006,6 +6046,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie YWE (YanwenExpress): numer, statusy i pomoc",
       "name": "YWE",
       "color": "#055aa1"
+    },
+    {
+      "id": "ecms-express",
+      "catalog": "ecms-express",
+      "slug": "sledzenie-ecms-express",
+      "title": "Śledzenie ECMS Express: 16-znakowe numery, cło i statusy",
+      "name": "ECMS Express",
+      "color": "#12823d"
     },
     {
       "id": "jd-logistics",

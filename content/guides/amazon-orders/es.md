@@ -44,15 +44,7 @@ En otras webs de Amazon, los mismos botones se llaman así:
 
 ## ¿Pueden Claude o ChatGPT hacerlo por mí?
 
-Sí, si el asistente puede abrir páginas y hacer clic en el navegador en el que has iniciado sesión en Amazon: Claude in Chrome con un plan de pago de Claude, o un chat de Work en la app de escritorio de ChatGPT, con su extensión de navegador. Para eso hace falta un ordenador: desde su app del móvil, desde un chat en el que solo puede leer tus pestañas abiertas, o con un navegador que ejecuta en sus propios servidores, el asistente no llega a tus pedidos, y los correos de Amazon no traen el número de seguimiento.
-
-### Sin el conector de Peek
-
-Copia esto en el asistente:
-
-> Abre Mis pedidos en Amazon en este navegador. Para cada paquete en camino o recién entregado, abre Localiza tu paquete y apunta el transportista y el número de seguimiento, nunca el número de pedido. Ponlos aquí, un paquete por línea, y luego dime que pegue la lista en peektracker.com. En Amazon, solo lee: no compres, canceles, devuelvas ni cambies nada, y no inicies sesión por mí.
-
-Después pega toda la lista en [Peek](/): Peek encuentra cada número.
+Sí, en un ordenador: el asistente tiene que controlar el navegador en el que has iniciado sesión en Amazon. Claude lo hace con Claude in Chrome, con un plan de pago de Claude; ChatGPT, desde un chat de Work en su app de escritorio, con su extensión de navegador. En el móvil, o en un chat que solo puede leer tus pestañas abiertas o que navega desde sus propios servidores, el asistente no llega a tus pedidos, y los correos de Amazon no traen el número de seguimiento.
 
 ### Con Peek en el asistente
 
@@ -63,6 +55,14 @@ Luego pide:
 > Importa mis paquetes de Amazon a Peek.
 
 Peek le dice al asistente dónde muestra Amazon los números. El asistente añade cada paquete, con el nombre de su producto, y te dice cuáles sigue Amazon solo en tu cuenta.
+
+### Sin el conector de Peek
+
+Copia esto en el asistente:
+
+> Importa mis paquetes de Amazon a Peek en este navegador, como muestra https://peektracker.com/es/guides/seguimiento-pedido-amazon: copia el número de seguimiento de cada paquete desde Mis pedidos, luego Localiza tu paquete, y añádelo en peektracker.com. En Amazon, solo lee: no compres, canceles, devuelvas ni cambies nada, y no inicies sesión por mí.
+
+Antes, inicia sesión en Peek en ese navegador: sin cuenta, Peek busca solo unos pocos paquetes al día.
 
 En los dos casos, el asistente solo lee Amazon. Si Amazon te pide iniciar sesión, hazlo tú en esa ventana y vuelve a pedírselo.
 
@@ -80,6 +80,6 @@ En los dos casos, el asistente solo lee Amazon. Si Amazon te pide iniciar sesió
 - [ChatGPT: Browser (en inglés)](https://learn.chatgpt.com/codex/browser) – ChatGPT Work en la web y en el móvil navega en la nube, sin tus sesiones
 - [Peek: Conectar Peek a Claude, ChatGPT o Gemini](https://peektracker.com/es/assistants) – los pasos de Peek para Claude y ChatGPT
 - [Peek en GitHub: las herramientas de los asistentes](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – lo que Peek le dice a un asistente sobre Amazon: Your Orders, Track package, «Delivery By», «Tracking ID», solo leer
-- [Peek en GitHub: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – varios números en un texto pegado
+- [Peek en GitHub: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – sin cuenta, unas pocas búsquedas al día
 - [Universal Parcel Scraper: datos de transportistas](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – las formas de los números de Amazon
 :::

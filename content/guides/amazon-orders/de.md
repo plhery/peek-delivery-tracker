@@ -44,15 +44,7 @@ Auf anderen Amazon-Seiten heißen dieselben Buttons so:
 
 ## Können Claude oder ChatGPT das für mich erledigen?
 
-Ja, wenn der Assistent in dem Browser, in dem du bei Amazon angemeldet bist, Seiten öffnen und klicken kann: Claude in Chrome mit einem bezahlten Claude-Tarif oder ein Work-Chat in der ChatGPT-Desktop-App mit der Browser-Erweiterung von ChatGPT. Dafür brauchst du einen Computer: Aus seiner Handy-App, aus einem Chat, in dem er deine offenen Tabs nur lesen kann, oder mit einem Browser, den er auf seinen eigenen Servern betreibt, kommt der Assistent nicht an deine Bestellungen, und in den E-Mails von Amazon steht die Sendungsnummer nicht.
-
-### Ohne den Peek-Konnektor
-
-Kopier das in den Assistenten:
-
-> Öffne in diesem Browser „Meine Bestellungen“ auf Amazon. Öffne für jedes Paket, das unterwegs ist oder gerade zugestellt wurde, „Sendung verfolgen“ und notiere den Paketdienst und die Sendungsnummer, nie die Bestellnummer. Liste sie hier auf, ein Paket pro Zeile, und sag mir dann, dass ich die Liste auf peektracker.com einfügen soll. Auf Amazon nur lesen: nichts kaufen, stornieren, zurückschicken oder ändern und mich nicht anmelden.
-
-Füg dann die ganze Liste in [Peek](/) ein: Peek findet jede Nummer darin.
+Ja, an einem Computer: Der Assistent muss den Browser steuern, in dem du bei Amazon angemeldet bist. Claude macht das mit Claude in Chrome, mit einem bezahlten Claude-Tarif; ChatGPT aus einem Work-Chat in seiner Desktop-App, mit seiner Browser-Erweiterung. Auf dem Handy oder in einem Chat, der deine offenen Tabs nur lesen kann oder von seinen eigenen Servern aus surft, kommt der Assistent nicht an deine Bestellungen, und in den E-Mails von Amazon steht die Sendungsnummer nicht.
 
 ### Mit Peek im Assistenten
 
@@ -63,6 +55,14 @@ Dann schreib:
 > Importiere meine Amazon-Pakete in Peek.
 
 Peek sagt dem Assistenten, wo Amazon die Nummern zeigt. Der Assistent fügt jedes Paket hinzu, benannt nach seinem Artikel, und sagt dir, welche Pakete Amazon nur in deinem Konto verfolgt.
+
+### Ohne den Peek-Konnektor
+
+Kopier das in den Assistenten:
+
+> Importiere meine Amazon-Pakete in diesem Browser in Peek, wie https://peektracker.com/de/guides/amazon-sendungsverfolgung es zeigt: Kopiere die Sendungsnummer jedes Pakets aus „Meine Bestellungen“, dann „Sendung verfolgen“, und füg sie auf peektracker.com hinzu. Auf Amazon nur lesen: nichts kaufen, stornieren, zurückschicken oder ändern und mich nicht anmelden.
+
+Melde dich in diesem Browser vorher bei Peek an: Ohne Konto fragt Peek nur ein paar Pakete am Tag ab.
 
 So oder so schaut sich der Assistent Amazon nur an. Will Amazon, dass du dich anmeldest, mach das selbst in diesem Fenster und frag dann noch einmal.
 
@@ -80,6 +80,6 @@ Paket zu spät oder als zugestellt markiert, aber nicht da? Lies [zugestellt, ab
 - [ChatGPT: Browser (auf Englisch)](https://learn.chatgpt.com/codex/browser) – ChatGPT Work im Web und auf dem Handy surft in der Cloud, ohne deine Anmeldungen
 - [Peek: Peek mit Claude, ChatGPT oder Gemini verbinden](https://peektracker.com/de/assistants) – Peeks Schritte für Claude und ChatGPT
 - [Peek auf GitHub: die Tools für Assistenten](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – was Peek einem Assistenten über Amazon sagt: Your Orders, Track package, „Delivery By“, „Tracking ID“, nur lesen
-- [Peek auf GitHub: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – mehrere Nummern in einem eingefügten Text
+- [Peek auf GitHub: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – ohne Konto ein paar Abfragen am Tag
 - [Universal Parcel Scraper: Zustellerdaten](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – die Formen von Amazons eigenen Nummern
 :::

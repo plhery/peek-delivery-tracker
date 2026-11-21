@@ -48,15 +48,7 @@ Os mesmos botões, na Amazon.es e noutros sites da Amazon:
 
 ## O Claude ou o ChatGPT podem fazê-lo por mim?
 
-Sim, se o assistente puder abrir páginas e clicar no navegador onde tens sessão iniciada na Amazon: o Claude in Chrome num plano pago do Claude, ou uma conversa Work na app do ChatGPT para computador, com a extensão de navegador do ChatGPT. Para isso é preciso um computador: a partir da app no telemóvel, de uma conversa em que só consegue ler os teus separadores abertos, ou com um navegador que corre nos seus próprios servidores, o assistente não chega aos teus pedidos, e os e-mails da Amazon não trazem o número de seguimento.
-
-### Sem o conector do Peek
-
-Copia isto para o assistente:
-
-> Abre os meus pedidos na Amazon.es neste navegador (Mis pedidos ou Os meus pedidos). Para cada encomenda a caminho ou acabada de entregar, abre Localiza tu paquete (ou Acompanhar embalagem) e anota a transportadora e o número de seguimento, nunca o número de pedido. Lista-os aqui, uma encomenda por linha, e depois diz-me para colar a lista em peektracker.com. Na Amazon, só lê: não compres, não canceles, não devolvas nem alteres nada, e não inicies sessão por mim.
-
-Depois cola a lista toda no [Peek](/): ele encontra cada número.
+Sim, num computador: o assistente tem de controlar o navegador onde tens sessão iniciada na Amazon. O Claude fá-lo com o Claude in Chrome, num plano pago do Claude; o ChatGPT, a partir de uma conversa Work na sua app para computador, com a sua extensão de navegador. No telemóvel, ou numa conversa que só consegue ler os teus separadores abertos ou que navega a partir dos seus próprios servidores, o assistente não chega aos teus pedidos, e os e-mails da Amazon não trazem o número de seguimento.
 
 ### Com o Peek no assistente
 
@@ -67,6 +59,14 @@ Depois pede:
 > Importa as minhas encomendas da Amazon para o Peek.
 
 O Peek diz ao assistente onde a Amazon mostra os números. O assistente adiciona cada encomenda, com o nome do artigo, e diz-te quais é que a Amazon só segue na tua conta.
+
+### Sem o conector do Peek
+
+Copia isto para o assistente:
+
+> Importa as minhas encomendas da Amazon.es para o Peek neste navegador, como mostra https://peektracker.com/pt/guides/seguimento-encomenda-amazon: copia o número de seguimento de cada encomenda a partir de Mis pedidos (ou Os meus pedidos), depois Localiza tu paquete (ou Acompanhar embalagem), e adiciona-o em peektracker.com. Na Amazon, só lê: não compres, não canceles, não devolvas nem alteres nada, e não inicies sessão por mim.
+
+Inicia primeiro sessão no Peek nesse navegador: sem conta, o Peek só pesquisa algumas encomendas por dia.
 
 Em qualquer dos casos, o assistente só lê a Amazon. Se a Amazon te pedir para iniciar sessão, fá-lo tu nessa janela e depois volta a pedir-lhe.
 
@@ -84,6 +84,6 @@ Encomenda atrasada, ou dada como entregue mas não está lá? Lê [entregue mas 
 - [ChatGPT: Browser (em inglês)](https://learn.chatgpt.com/codex/browser) – o ChatGPT Work na web e no telemóvel navega na nuvem, sem as tuas sessões
 - [Peek: Ligar o Peek ao Claude, ao ChatGPT ou ao Gemini](https://peektracker.com/pt/assistants) – os passos do Peek para o Claude e o ChatGPT
 - [Peek no GitHub: as ferramentas dos assistentes](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – o que o Peek diz a um assistente sobre a Amazon: Your Orders, Track package, «Delivery By», «Tracking ID», só ler
-- [Peek no GitHub: textos em português](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pt.json) – vários números num só texto colado
+- [Peek no GitHub: textos em português](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pt.json) – sem conta, algumas pesquisas por dia
 - [Universal Parcel Scraper: dados das transportadoras](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – as formas dos números da Amazon
 :::

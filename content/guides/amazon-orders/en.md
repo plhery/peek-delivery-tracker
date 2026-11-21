@@ -44,15 +44,7 @@ On other Amazon sites, the same buttons are called:
 
 ## Can ChatGPT or Claude do it for me?
 
-Yes, if the assistant can open pages and click in the browser where you're signed in to Amazon: Claude in Chrome on a paid Claude plan, or a Work chat in the ChatGPT desktop app, with its browser extension. That takes a computer: from its phone app, from a chat where it can only read your open tabs, or with a browser it runs on its own servers, the assistant can't reach your orders, and Amazon's emails don't give the tracking number.
-
-### Without the Peek connector
-
-Copy this into the assistant:
-
-> Open Your Orders on Amazon in this browser. For each parcel on its way or just delivered, open Track package and note the carrier and the Tracking ID, never the order number. List them here, one parcel per line, then tell me to paste the list at peektracker.com. On Amazon, only read: don't buy, cancel, return or change anything, and don't sign in for me.
-
-Then paste the whole list into [Peek](/): it picks out every number.
+Yes, on a computer: the assistant has to control the web browser where you're signed in to Amazon. Claude does it with Claude in Chrome, on a paid Claude plan; ChatGPT does it from a Work chat in its desktop app, with its browser extension. On a phone, or in a chat that can only read your open tabs or browses from its own servers, the assistant can't reach your orders, and Amazon's emails don't give the tracking number.
 
 ### With Peek in the assistant
 
@@ -63,6 +55,14 @@ Then ask:
 > Import my Amazon parcels into Peek.
 
 Peek tells the assistant where Amazon shows the numbers. The assistant adds each parcel, named after its item, and tells you which ones Amazon tracks only in your account.
+
+### Without the Peek connector
+
+Copy this into the assistant:
+
+> Import my Amazon parcels into Peek in this browser, as https://peektracker.com/guides/amazon-order-tracking shows: copy each parcel's Tracking ID from Your Orders, then Track package, and add it at peektracker.com. On Amazon, only read: don't buy, cancel, return or change anything, and don't sign in for me.
+
+Sign in to Peek in that browser first: without an account, Peek looks up only a few parcels a day.
 
 Either way, the assistant only reads Amazon. If Amazon asks you to sign in, do it yourself in that window, then ask again.
 
@@ -80,6 +80,6 @@ Parcel late, or marked delivered but not there? See [delivered but not received]
 - [ChatGPT: Browser](https://learn.chatgpt.com/codex/browser) – ChatGPT Work on the web and on the phone browses in the cloud, without your logins
 - [Peek: Connect Peek to Claude, ChatGPT or Gemini](https://peektracker.com/assistants) – Peek's steps for Claude and ChatGPT
 - [Peek on GitHub: the assistants' tools](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – what Peek tells an assistant about Amazon: Your Orders, Track package, "Delivery By", "Tracking ID", only reading
-- [Peek on GitHub: English wording](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – several numbers in one pasted text
+- [Peek on GitHub: English wording](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – a few lookups a day without an account
 - [Universal Parcel Scraper: carrier data](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – the shapes of Amazon's own numbers
 :::

@@ -44,15 +44,7 @@ Sur les autres sites Amazon, les mêmes boutons s'appellent :
 
 ## Claude ou ChatGPT peuvent-ils le faire pour moi ?
 
-Oui, si l'assistant peut ouvrir des pages et cliquer dans le navigateur où tu es connecté à Amazon : Claude in Chrome avec une offre Claude payante, ou une conversation Work dans l'application ChatGPT pour ordinateur, avec son extension de navigateur. Il faut donc un ordinateur : depuis son application sur téléphone, depuis une conversation où il peut seulement lire tes onglets ouverts, ou avec un navigateur qu'il fait tourner sur ses propres serveurs, l'assistant n'a pas accès à tes commandes, et les e-mails d'Amazon ne donnent pas le numéro de suivi.
-
-### Sans le connecteur Peek
-
-Copie ceci dans l'assistant :
-
-> Ouvre Vos commandes sur Amazon dans ce navigateur. Pour chaque colis en route ou tout juste livré, ouvre Suivre le colis et note le transporteur et le numéro de suivi, jamais le numéro de commande. Liste-les ici, un colis par ligne, puis dis-moi de coller la liste sur peektracker.com. Sur Amazon, lis seulement : n'achète, n'annule, ne retourne et ne modifie rien, et ne te connecte pas à ma place.
-
-Colle ensuite toute la liste dans [Peek](/) : il repère chaque numéro.
+Oui, sur un ordinateur : l'assistant doit piloter le navigateur où tu es connecté à Amazon. Claude le fait avec Claude in Chrome, avec une offre Claude payante ; ChatGPT, depuis une conversation Work dans son application pour ordinateur, avec son extension de navigateur. Sur téléphone, ou dans une conversation qui peut seulement lire tes onglets ouverts ou qui navigue depuis ses propres serveurs, l'assistant n'a pas accès à tes commandes, et les e-mails d'Amazon ne donnent pas le numéro de suivi.
 
 ### Avec Peek dans l'assistant
 
@@ -63,6 +55,14 @@ Puis demande :
 > Importe mes colis Amazon dans Peek.
 
 Peek indique à l'assistant où Amazon affiche les numéros. L'assistant ajoute chaque colis, avec le nom de son article, et te dit lesquels Amazon suit seulement dans ton compte.
+
+### Sans le connecteur Peek
+
+Copie ceci dans l'assistant :
+
+> Importe mes colis Amazon dans Peek, dans ce navigateur, comme le montre https://peektracker.com/fr/guides/suivi-commande-amazon : copie le numéro de suivi de chaque colis depuis Vos commandes, puis Suivre le colis, et ajoute-le sur peektracker.com. Sur Amazon, lis seulement : n'achète, n'annule, ne retourne et ne modifie rien, et ne te connecte pas à ma place.
+
+Connecte-toi d'abord à Peek dans ce navigateur : sans compte, Peek ne recherche que quelques colis par jour.
 
 Dans les deux cas, l'assistant ne fait que lire Amazon. Si Amazon te demande de te connecter, fais-le toi-même dans cette fenêtre, puis redemande-lui.
 
@@ -80,6 +80,6 @@ Colis en retard, ou marqué livré mais introuvable ? Lis [livré mais pas reçu
 - [ChatGPT : Browser (en anglais)](https://learn.chatgpt.com/codex/browser) – ChatGPT Work sur le web et sur téléphone navigue dans le cloud, sans tes connexions
 - [Peek : Connecter Peek à Claude, ChatGPT ou Gemini](https://peektracker.com/fr/assistants) – les étapes de Peek pour Claude et ChatGPT
 - [Peek sur GitHub : les outils des assistants](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – ce que Peek dit à un assistant sur Amazon : Your Orders, Track package, « Delivery By », « Tracking ID », lecture seule
-- [Peek sur GitHub : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – plusieurs numéros dans un même texte collé
+- [Peek sur GitHub : textes en français](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/fr.json) – sans compte, quelques recherches par jour
 - [Universal Parcel Scraper : données transporteurs](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – les formes des numéros d'Amazon
 :::

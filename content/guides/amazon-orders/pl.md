@@ -44,15 +44,7 @@ Na innych stronach Amazona te same przyciski nazywają się tak:
 
 ## Czy Claude albo ChatGPT mogą to zrobić za mnie?
 
-Tak, jeśli asystent może otwierać strony i klikać w przeglądarce, w której logujesz się na Amazonie: Claude in Chrome w płatnym planie Claude albo czat Work w aplikacji ChatGPT na komputer, z rozszerzeniem przeglądarki ChatGPT. Potrzebny jest do tego komputer: z aplikacji w telefonie, z czatu, w którym może tylko czytać twoje otwarte karty, albo przez przeglądarkę, którą uruchamia na własnych serwerach, asystent nie dostanie się do twoich zamówień, a e-maile od Amazona nie podają numeru śledzenia.
-
-### Bez konektora Peek
-
-Skopiuj to do asystenta:
-
-> Otwórz w tej przeglądarce „Moje zamówienia” na Amazonie. Dla każdej paczki, która jest w drodze albo właśnie dotarła, otwórz „Śledź przesyłkę” i zanotuj przewoźnika oraz numer śledzenia, nigdy numer zamówienia. Wypisz je tutaj, po jednej paczce w wierszu, a potem napisz mi, że listę mam wkleić na peektracker.com. Na Amazonie tylko czytaj: niczego nie kupuj, nie anuluj, nie zwracaj ani nie zmieniaj i nie loguj się za mnie.
-
-Potem wklej całą listę do [Peek](/): znajdzie w niej każdy numer.
+Tak, na komputerze: asystent musi sterować przeglądarką, w której logujesz się na Amazonie. Claude robi to przez Claude in Chrome, w płatnym planie Claude; ChatGPT z czatu Work w swojej aplikacji na komputer, z rozszerzeniem przeglądarki. W telefonie albo w czacie, który może tylko czytać twoje otwarte karty lub przegląda strony z własnych serwerów, asystent nie dostanie się do twoich zamówień, a e-maile od Amazona nie podają numeru śledzenia.
 
 ### Z Peek w asystencie
 
@@ -63,6 +55,14 @@ Potem napisz:
 > Zaimportuj moje paczki z Amazona do Peek.
 
 Peek mówi asystentowi, gdzie Amazon pokazuje numery. Asystent dodaje każdą paczkę z nazwą jej produktu i mówi ci, które Amazon śledzi tylko na twoim koncie.
+
+### Bez konektora Peek
+
+Skopiuj to do asystenta:
+
+> Zaimportuj moje paczki z Amazona do Peek w tej przeglądarce, tak jak pokazuje https://peektracker.com/pl/guides/sledzenie-zamowienia-amazon: skopiuj numer śledzenia każdej paczki z „Moje zamówienia”, potem „Śledź przesyłkę”, i dodaj go na peektracker.com. Na Amazonie tylko czytaj: niczego nie kupuj, nie anuluj, nie zwracaj ani nie zmieniaj i nie loguj się za mnie.
+
+Najpierw zaloguj się do Peek w tej przeglądarce: bez konta Peek wyszukuje tylko kilka paczek dziennie.
 
 W obu przypadkach asystent na Amazonie tylko czyta. Jeśli Amazon poprosi o zalogowanie, zaloguj się samodzielnie w tym oknie, a potem poproś jeszcze raz.
 
@@ -80,6 +80,6 @@ Paczka się spóźnia albo jest oznaczona jako dostarczona, ale jej nie ma? Prze
 - [ChatGPT: Browser (po angielsku)](https://learn.chatgpt.com/codex/browser) – ChatGPT Work w wersji webowej i w telefonie korzysta z przeglądarki w chmurze, bez twoich sesji logowania
 - [Peek: Połącz Peek z Claude, ChatGPT lub Gemini](https://peektracker.com/pl/assistants) – kroki Peek dla Claude i ChatGPT
 - [Peek na GitHubie: narzędzia asystentów](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – co Peek mówi asystentowi o Amazonie: Your Orders, Track package, „Delivery By”, „Tracking ID”, tylko czytanie
-- [Peek na GitHubie: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – kilka numerów w jednym wklejonym tekście
+- [Peek na GitHubie: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – bez konta kilka wyszukiwań dziennie
 - [Universal Parcel Scraper: dane przewoźników](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers) – kształty numerów Amazona
 :::

@@ -26,15 +26,15 @@ Spaces, dashes and lower case don't matter when you paste the number into Peek.
 
 ## SXW Express tracking statuses explained
 
-Of the steps Peek knows from SXW's tracker, eight are in English and three in Chinese. Here they are, each in its own words:
+Most of the steps on SXW's tracker are in English; three are in Chinese, and Peek shows those in English. Here are the main ones:
 
 | SXW's tracker says | What it means for you | Peek shows |
 | --- | --- | --- |
 | `Parcel Data Received` | The seller has sent the parcel's details. Nobody has the parcel yet. | "Label created" |
-| `货物电子信息已经收到` | Means that the goods' electronic information has been received: the same thing, written by SXW's tracking system. | "Label created" |
-| `到达收货点` | Means that the parcel has arrived at the receiving point: SXW has it. This is the first scan in its hands. | "Received by carrier" |
+| `货物电子信息已经收到` → `The electronic cargo information has been received` | Means that the goods' electronic information has been received: the same thing, written by SXW's tracking system. | "Label created" |
+| `到达收货点` → `Arrived at the receiving point` | Means that the parcel has arrived at the receiving point: SXW has it. This is the first scan in its hands. | "Received by carrier" |
 | `Parcel picked up` | The parcel has been collected: the first scan on the shipping line that carries it. | "Received by carrier" |
-| `货物离开操作中心` | Means that the goods have left the operation centre: SXW's own centre. | "In transit" |
+| `货物离开操作中心` → `Goods leave the operation center` | Means that the goods have left the operation centre: SXW's own centre. | "In transit" |
 | `Parcel received at Shenzhen Sorting Centre.` | A sorting centre in Shenzhen has the parcel. | "In transit" |
 | `Parcel processed at Shenzhen Sorting Centre.` | Sorted there. | "In transit" |
 | `Parcel departure in Shenzhen Sorting Centre.` | On its way out of that sorting centre. | "In transit" |
@@ -46,13 +46,13 @@ Of the steps Peek knows from SXW's tracker, eight are in English and three in Ch
 
 **Other lines.** SXW's tracker can show lines that aren't in this table. Peek reads such a line by its words where it can, and shows it as SXW's tracker wrote it.
 
-**Times.** Peek reads every time on SXW's tracker as Beijing time and shows it in your device's time zone. In winter, a step at 20:00 in Beijing is 13:00 in Paris or Berlin, 12:00 in London and 7:00 in New York. A step dated after the moment Peek checks, on Beijing time, waits until its time has come.
+**Times.** Peek reads times in China as Beijing time and shows them in your device's time zone; from the first line whose place ends in another country's code, it keeps that country's local time. In winter, a step at 20:00 in Beijing is 13:00 in Paris or Berlin, 12:00 in London and 7:00 in New York. A step dated after the moment Peek checks, on Beijing time, waits until its time has come.
 
 ## Who delivers SXW Express parcels
 
 SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile delivery", and that its network covers Europe, America, Southeast Asia, the Middle East and Africa. Its product list names UPS lines from Hong Kong, an "ARAMEX Special Line", a "Middle East and Europe small package" and a "US Express Mail Small Packet". It doesn't say which company delivers the parcel in your country.
 
-**What Peek's code shows.** For a parcel to the US, SXW's record can give a [GOFO Express](carrier:gofo) number (GFUS and fourteen digits) beside SXW's own. When it does, Peek names GOFO Express as the company that delivers ("Delivery with GOFO Express") and shows its number and a link to GOFO's tracking. The one exception is a record whose shipping channel names another company, UPS for one: then Peek names no delivering company. While GOFO lists the parcel but hasn't scanned it, the line reads "Announced to GOFO Express, not received yet". Once GOFO's own tracking shows a scan as recent as SXW's latest, or newer, Peek follows the parcel there. GOFO Express is the only delivering company Peek's code names for SXW.
+**What Peek's code shows.** For a parcel to the US, SXW's record can give a [GOFO Express](carrier:gofo) number (GFUS and fourteen digits) beside SXW's own. When it does, Peek names GOFO Express as the company that delivers ("Delivery with GOFO Express") and shows its number and a link to GOFO's tracking. The one exception is a record whose shipping channel names another company, UPS for one: then Peek names no delivering company. While GOFO lists the parcel but hasn't scanned it, the line reads "Announced to GOFO Express, not received yet". Once GOFO's own tracking shows a scan as recent as SXW's latest, or newer, Peek follows the parcel there. When the record's shipping channel names [Swiss Post](carrier:swiss-post), with a valid Swiss Post number, for a parcel to Switzerland or Liechtenstein, Peek hands over to Swiss Post the same way.
 
 **Delivery attempts and pickup.** These follow the delivering company's rules, and SXW's site gives none. Ask the seller which company delivers and for its tracking number, and see [missed delivery](guide:missed-delivery).
 
@@ -62,7 +62,7 @@ SXW's site says it offers "DDU/DDP door-to-door delivery" and "local last-mile d
 
 **Only `Parcel Data Received` or `货物电子信息已经收到`.** The seller has created the shipment, but nobody has scanned the parcel. If nothing follows after a few days, ask the seller whether it has really been sent.
 
-**"Waiting for SXW Express".** Peek has no step for your number yet: SXW's tracker doesn't know it, has no steps for it or holds only steps written ahead, and the tracking services Peek asks have nothing either. Peek keeps checking, asking SXW's tracker every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. Peek takes SXW's answer for a number it doesn't know as SXW listing the shipment without a scan yet, and steps written ahead as SXW having the order, so either way it keeps showing "Waiting for SXW Express", with no request to check the number: compare the number with the seller's message yourself, SXW and twelve digits.
+**"Waiting for SXW Express".** Peek has no step for your number yet: SXW's tracker doesn't know it, has no steps for it or holds only steps written ahead, and the tracking services Peek asks have nothing either. Peek keeps checking, asking SXW's tracker every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. When SXW lists the shipment without a scan yet, or holds only steps written ahead, Peek keeps showing "Waiting for SXW Express". When neither SXW's tracker nor the tracking services know the number, Peek shows "Waiting for SXW Express" first and, after two days, "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel." Compare the number with the seller's message: SXW and twelve digits.
 
 **`Customs declaration completed`.** That's the export declaration in China, before the flight, not customs in your country. The parcel isn't held, so Peek shows "In transit". If you're later asked to pay import charges, see [parcels held at customs](guide:customs).
 
@@ -84,11 +84,11 @@ SXW's customer is the seller, so ask the seller about your order first, and the 
 
 Peek asks SXW's own tracker, the one the box on sxwexpress.cn opens, with no account, postcode or phone number. It shows the status, each step with its place when the tracker gives one, and the destination country. It leaves out the names, address, postcodes, weight, number of pieces, customer reference, payment details, signature and proof of delivery the record can hold. SXW's tracker gives no delivery date, so Peek shows none.
 
-Peek holds back any step dated after the moment it checks, and any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step: steps written ahead are plans, not scans. When it holds back steps written ahead, Peek says so under the parcel's status until the parcel is delivered or returned: "SXW Express’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Such a step never counts as a scan: it changes no status and sends no alert. When SXW's tracker doesn't know your number or can't be reached, Peek asks tracking services instead and shows their copy of the steps, in their own words.
+Peek holds back any step dated after the moment it checks, and any step written more than 12 hours before the time it shows, or more than 6 hours before it in the same second as such a step: steps written ahead are plans, not scans. Peek shows them greyed: under "Planned by the carrier" while their time is still ahead, then under "Written in advance by SXW Express", with "… so it shows them greyed …" under the parcel's status, until the parcel is delivered or returned. While it shows none, it says: "SXW Express’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." Such a step never counts as a scan: it changes no status and sends no alert. When SXW's tracker doesn't know your number or can't be reached, Peek asks tracking services instead and shows their copy of the steps, in their own words.
 
-Apart from the GOFO hand-over above, Peek stays with SXW's tracker. If the seller gives you the delivering company's number, add it to Peek as a parcel of its own.
+Apart from the GOFO Express and Swiss Post hand-overs above, Peek stays with SXW's tracker. If the seller gives you the delivering company's number, add it to Peek as a parcel of its own.
 
-Peek checks up to every 10 minutes, and hourly once the parcel has gone quiet. It can notify you of every scan, important steps only or the delivery only. "Important steps" covers customs, problems, the delivery round, missed deliveries, pickup, the delivery and returns, so none of the steps in the table above sets one off, `Customs declaration completed` included. "Delivery only" covers the delivery round and the delivery. Peek can't contact SXW Express or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes; otherwise, and once the parcel has gone quiet, hourly. It can notify you of every scan, important steps only or the delivery only. "Important steps" covers customs, problems, the delivery round, missed deliveries, pickup, the delivery and returns, so none of the steps in the table above sets one off, `Customs declaration completed` included. "Delivery only" covers the delivery round and the delivery. Peek can't contact SXW Express or the seller for you.
 
 ## Questions about SXW Express tracking
 

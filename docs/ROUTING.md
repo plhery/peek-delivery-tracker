@@ -755,8 +755,8 @@ the carriers checked. A failed request does not manufacture a queried-carrier li
   under that carrier, but Peek never asks it for the number. A carrier that tracked the
   number before (`routing.confirmed_carrier`) is still asked, at every check its interval
   allows and past a provider's wait, and its scans are stored. The parcel stays filed under
-  the reader's carrier, never swapped back; the web shows it under that carrier and says that
-  only the other carrier has news of it (`routing.served_elsewhere`; assistants get the
+  the reader's carrier, never swapped back; the web and the iPhone app show it under that carrier and
+  say that only the other carrier has news of it (`routing.served_elsewhere`; assistants get the
   sentence as `carrierWarning`). Without such a carrier tracking services are asked, and until one
   answers the parcel shows "Check the tracking number". The change-carrier
   sheet (web and iPhone) also goes back to automatic detection, which files the parcel as adding it would: under the carrier its number's shape

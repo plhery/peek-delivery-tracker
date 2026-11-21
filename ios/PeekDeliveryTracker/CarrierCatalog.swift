@@ -1323,7 +1323,7 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
                 role: .active)]
         }
         let links = carrierTrackingLinks(for: parcel, language: language)
-        let lookupNumber = parcel.carrierData?.originalCarrier != nil && parcel.carrierData?.activeTrackingCarrier != nil
+        let lookupNumber = parcel.carrierData?.originalCarrier != nil && parcel.trackingSource != nil
             ? parcel.carrierData?.activeTrackingNumber?.nonEmpty ?? parcel.trackingNumber : parcel.trackingNumber
         let number = Self.urlEncode(lookupNumber)
         // A carrier that answered the same check keeps the link, even when its clock sent the result elsewhere.

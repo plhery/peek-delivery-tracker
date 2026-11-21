@@ -309,6 +309,13 @@ extension Parcel {
 
     var displayedCarrier: CarrierID { carrierData?.originalCarrier ?? activeTrackingCarrier }
 
+    /// The carrier whose news fills a parcel the reader filed under one that refuses its number. The parcel stays filed
+    /// and shown under the reader's carrier, and its page says only this one has news of it (`detail.pickedCarrierSilent`).
+    var servedElsewhere: CarrierID? {
+        guard let served = carrierData?.routing?.servedElsewhere, served.picked == carrier else { return nil }
+        return served.carrier
+    }
+
     /// The carrier the followed one names as delivering, while the parcel is not followed there yet, and the number it
     /// gave. Once it is followed, the parcel has been handed over and `trackingSource` says so.
     var namedDelivery: (carrier: CarrierID, number: String?)? {

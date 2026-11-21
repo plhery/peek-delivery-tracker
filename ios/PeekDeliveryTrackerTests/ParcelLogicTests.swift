@@ -1977,6 +1977,28 @@ final class ParcelLogicTests: XCTestCase {
         XCTAssertEqual(localizer.dimensions("30 × 20 × 10 cm"), "11.8 × 7.9 × 3.9 in")
     }
 
+    func testACarrierPickedByHandThatRefusesTheNumberStaysShownWhileAnotherOnesNewsFillsIt() {
+        var parcel = makeParcel(trackingNumber: "LP00123456789012")
+        parcel.carrier = .inpost
+        parcel.carrierData = CarrierData(activeTrackingCarrier: .aliexpress,
+                                         routing: CarrierDataRouting(servedElsewhere: CarrierServedElsewhere(picked: .inpost, carrier: .aliexpress)))
+        XCTAssertEqual(parcel.servedElsewhere, .aliexpress)
+        // The reader's carrier stays the one shown, with no handover to the one that has news, as on the web.
+        XCTAssertNil(parcel.trackingSource)
+        XCTAssertEqual(parcel.activeTrackingCarrier, .inpost)
+        XCTAssertEqual(parcel.displayedCarrier, .inpost)
+        XCTAssertNil(parcel.deliveringCarrier)
+        // Filed back under the carrier that has news, the note no longer applies.
+        parcel.carrier = .aliexpress
+        XCTAssertNil(parcel.servedElsewhere)
+        XCTAssertEqual(parcel.activeTrackingCarrier, .aliexpress)
+        // Without the routing note, the carrier that follows it now is the one shown, as before.
+        parcel.carrier = .inpost
+        parcel.carrierData?.routing = nil
+        XCTAssertNil(parcel.servedElsewhere)
+        XCTAssertEqual(parcel.activeTrackingCarrier, .aliexpress)
+    }
+
     func testScheduledDeliveryMatchesWebApp() {
         let id = UUID()
         var delivered = makeParcel(id: id, events: [event(id, .delivered, "2026-08-08T12:00:00Z")])

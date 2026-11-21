@@ -898,7 +898,10 @@ struct ImportChargesLine: Equatable, Sendable {
 }
 
 extension Parcel {
-    var trackingSource: CarrierID? { carrierData?.activeTrackingCarrier }
+    /// The carrier that follows the parcel now, when it isn't the parcel's own: none while a carrier picked by hand
+    /// refuses the number and another one's news fills it (`servedElsewhere`), so the parcel stays shown as the pick, as
+    /// on the web.
+    var trackingSource: CarrierID? { servedElsewhere == nil ? carrierData?.activeTrackingCarrier : nil }
     var swissPostReady: Bool { carrierData?.swissPostReady == true }
 }
 

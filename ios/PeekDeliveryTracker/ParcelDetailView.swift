@@ -597,6 +597,16 @@ struct ParcelDetailView: View {
                     }
                 }
             }
+            if catalog.tracksAutomatically(parcel.activeTrackingCarrier), !parcel.amazonShippingHistoryExpired,
+               let served = parcel.servedElsewhere {
+                // The carrier picked by hand refuses the number; the one that tracked it before still has news of it.
+                Text(localizer.text("detail.pickedCarrierSilent", [
+                    "picked": carrier.displayName,
+                    "carrier": catalog.info(for: served, language: localizer.language).displayName,
+                ]))
+                .font(.footnote).foregroundStyle(Brand.secondaryText)
+                .accessibilityIdentifier("parcel.pickedCarrierSilent")
+            }
             if !catalog.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.amazonShippingHistoryExpired {
                 VStack(alignment: .leading, spacing: 10) {
                     Text(localizer.text(parcel.amazonShippingHistoryExpired ? "add.amazonHistoryExpired" : catalog.trackingHintKey(for: parcel.activeTrackingCarrier), ["carrier": carrier.displayName]))

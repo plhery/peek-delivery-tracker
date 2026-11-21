@@ -2740,6 +2740,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fe9b00"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "wanbexpress-sendungsverfolgung",
+      "title": "WanbExpress Sendungsverfolgung: WNB…YQ-Nummern und Status",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-sendungsverfolgung",
@@ -3718,6 +3726,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fe9b00"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "suivi-wanbexpress",
+      "title": "Suivi WanbExpress\u00a0: numéros WNB…YQ, statuts et livraison",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-suivi-colis",
@@ -4624,6 +4640,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fe9b00"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "tracking-wanbexpress",
+      "title": "Tracking WanbExpress: codici WNB…YQ, stati e consegna",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-tracking",
@@ -5522,6 +5546,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#fe9b00"
     },
     {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "seguimiento-wanbexpress",
+      "title": "Seguimiento WanbExpress: números WNB…YQ, estados y entrega",
+      "name": "WanbExpress",
+      "color": "#da381b"
+    },
+    {
       "id": "gzyl",
       "catalog": "gzyl",
       "slug": "gzyl-seguimiento",
@@ -6402,6 +6434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JS Express rastreio: número JSE…YQ, estados e entrega",
       "name": "JS Express",
       "color": "#fe9b00"
+    },
+    {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "rastreio-wanbexpress",
+      "title": "Rastreio WanbExpress: números WNB…YQ, estados e entrega",
+      "name": "WanbExpress",
+      "color": "#da381b"
     },
     {
       "id": "gzyl",
@@ -7326,6 +7366,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "JS Express śledzenie przesyłki: numer JSE, statusy",
       "name": "JS Express",
       "color": "#fe9b00"
+    },
+    {
+      "id": "wanbexpress",
+      "catalog": "wanbexpress",
+      "slug": "sledzenie-wanbexpress",
+      "title": "Śledzenie WanbExpress: numery WNB…YQ, statusy i doręczenie",
+      "name": "WanbExpress",
+      "color": "#da381b"
     },
     {
       "id": "gzyl",

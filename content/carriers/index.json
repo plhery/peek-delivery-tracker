@@ -169,7 +169,7 @@
   { "id": "jrt", "catalog": "jrt", "name": "JRT", "languages": ["en", "pl", "it", "es", "de", "fr", "pt"] },
   { "id": "thhy", "catalog": "thhy", "name": "Tianhui Hengyuan", "languages": ["en", "de"] },
   { "id": "js-express", "catalog": "js-express", "name": "JS Express", "languages": ["en", "de", "fr", "pt", "es", "it", "pl"] },
-  { "id": "wanbexpress", "catalog": "wanbexpress", "name": "WanbExpress", "languages": ["en"] },
+  { "id": "wanbexpress", "catalog": "wanbexpress", "name": "WanbExpress", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gzyl", "catalog": "gzyl", "name": "GZYL", "languages": ["en", "de", "pl", "ru", "fr", "es", "nl", "bg", "el", "sk", "hr", "hu", "it", "pt"] },
   { "id": "shouwu", "catalog": "shouwu", "name": "Shouwu International", "languages": ["en", "it", "de", "fr", "es", "pt", "pl"] },
   { "id": "geodis-pl", "catalog": "geodis-pl", "name": "GEODIS Poland", "languages": ["en", "pl", "fr", "de", "es", "it", "pt"] },

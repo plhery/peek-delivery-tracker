@@ -6,7 +6,7 @@ published: 2026-10-28
 updated: 2026-11-20
 ---
 
-Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, China, that ships express and small parcels abroad. Its tracking numbers are MY, ten digits and US, and its tracker also knows numbers made of MYYF, eight digits and CN: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on mayiyinfu.com.cn, which opens Mayi Yinfu's tracker. Mayi Yinfu flies parcels to your region and hands them to a company that delivers there: into Europe, Deutsche Post DHL.
+Mayi Yinfu (蚂蚁银服) is the short name of 广东蚂蚁银服国际物流有限公司, a forwarder in Guangdong, mainland China, that ships express and small parcels abroad. Its tracking numbers are MY, ten digits and US, and its tracker also knows numbers made of MYYF, eight digits and CN: paste yours in the box above, or type it in the 快递查询 (parcel lookup) box on mayiyinfu.com.cn, which opens Mayi Yinfu's tracker. Mayi Yinfu flies parcels to your region and hands them to a company that delivers there: into Europe, Deutsche Post DHL.
 
 ## Mayi Yinfu tracking number: what it looks like
 
@@ -14,10 +14,10 @@ MY stands for 蚂蚁 (mayi, "ant"). With invented digits:
 
 | Number | What it is |
 | --- | --- |
-| `MY0000000017US` | MY, ten digits and US: a Mayi Yinfu number. |
-| `MYYF00000042CN` | MYYF (蚂蚁银服's initials), eight digits and CN: a number Mayi Yinfu's tracker also knows. |
-| `MY000000017US` | Only nine digits: not Mayi Yinfu's layout. Check for a missing digit. |
-| `RR000000005CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number. |
+| `MY4829105736US` | MY, ten digits and US: a Mayi Yinfu number. |
+| `MYYF48291057CN` | MYYF (蚂蚁银服's initials), eight digits and CN: a number Mayi Yinfu's tracker also knows. |
+| `MY482910573US` | Only nine digits: not Mayi Yinfu's layout. Check for a missing digit. |
+| `RR482910576CN` | Two letters, nine digits and CN: a [China Post](carrier:china-post) number. |
 
 Lower case and spaces don't matter in Peek.
 
@@ -47,7 +47,7 @@ Mayi Yinfu publishes no status list. Its own lines are in Chinese, most followed
 
 **Lines that run ahead.** `国内清关中` (export clearance), `已排航班` (flight booked), `起运地航班起飞` (flight has left), `已到达目的国` (arrived in the destination country) and `清关完成` (clearance done), on their own, come from a script: they can have your parcel abroad before it reaches the airport, so go by the lines around them.
 
-Mayi Yinfu's times carry no time zone. Its lines in China are Beijing time, and so, usually, are the DHL lines it copies: a DHL scan at 10:00 in Germany shows on Mayi Yinfu's tracker as 17:00 in winter.
+Mayi Yinfu's times carry no time zone. Its lines in mainland China are Beijing time, and so, usually, are the DHL lines it copies: a DHL scan at 10:00 in Germany shows on Mayi Yinfu's tracker as 17:00 in winter.
 
 ## Who delivers Mayi Yinfu parcels
 
@@ -63,19 +63,19 @@ Mayi Yinfu's site doesn't say who delivers where. Its tracker shows the hand-ove
 
 **Stuck after `已转运transferred`.** Mayi Yinfu's part is done: follow the delivering company's number from its tracker. More in [tracking a parcel from China](guide:tracking-from-china) and [why tracking stops updating](guide:tracking-not-updating).
 
-**Nothing found.** For a number it doesn't know, the tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as Mayi Yinfu listing the shipment without a scan yet: it keeps checking (for a lookup without an account, during its first 6 hours, then when you open its link and, up to 30 days after the lookup, while notifications are on for it) and shows "Waiting for Mayi Yinfu", with no request to check the number. So compare it with the seller's message yourself, character by character.
+**Nothing found.** For a number it doesn't know, the tracker shows one result with the number under 参考号 (reference) and every other field empty. Peek takes that answer as not found: it shows "Waiting for Mayi Yinfu" and, if the number is still unknown two days on, asks you to check it. So compare it with the seller's message, character by character.
 
 **Lost, damaged or returned.** Mayi Yinfu publishes no claim process, so ask the seller or the marketplace for a refund or a new parcel. See [lost parcels](guide:lost-parcel), [returned to sender](guide:returned-to-sender) and [delivered but not received](guide:delivered-not-received).
 
 ## Mayi Yinfu contact number and customer service
 
-As of 28 October 2026, Mayi Yinfu's site, in Chinese only, gives one phone number, +86 13705996996, a Chinese mobile number: in its header as its 全国服务热线 (national service hotline), and in its 在线咨询 (online enquiries) box. Its contact, company, legal and privacy pages are empty: no address, email or form.
+Mayi Yinfu's site, in Chinese only, gives one phone number, +86 13705996996, a mobile number in mainland China: in its header as its 全国服务热线 (national service hotline), and in its 在线咨询 (online enquiries) box. Its contact, company, legal and privacy pages are empty: no address, email or form.
 
 ## Track a Mayi Yinfu parcel with Peek
 
 Paste an MY…US number into [Peek](/) and it goes straight to Mayi Yinfu: no other carrier in Peek's catalog uses that layout. For an MYYF…CN number, Peek asks Mayi Yinfu whether it knows it, and follows it there when it does. A link to Mayi Yinfu's tracker with `documentCode=` and the number or the seller's reference in it goes straight to Mayi Yinfu too. A reference you type has no shape to go by, but Peek follows more than 3,500 carriers: add it anyway, press "Change" and pick Mayi Yinfu (typing 蚂蚁银服 or MYYF finds it too), or use "Change carrier" on a parcel you already added. Peek then shows the MY number under "Mayi Yinfu tracks this as". Peek drops dashes, though, so look up a reference with dashes in Mayi Yinfu's own box.
 
-Peek shows each line in Mayi Yinfu's words with its place, and the destination country when given; a flight line with the day it expects shows as its step alone, in English, such as "The first leg has departed". The first lines show as "Label created", `已入库,到达收货点` as "Received by carrier", `航班落地，拆板清关…` as "At customs", the delivery-vehicle and delivered lines as "Out for delivery" and "Delivered", and the other known lines as "In transit". The lines that run ahead stay out, and so does a line Mayi Yinfu's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line: a forecast, not a scan. When it holds back lines written ahead, Peek says so under the parcel's status until the parcel is delivered or returned: "Mayi Yinfu’s site shows steps written in advance, even a delivery. Peek can’t confirm them, so it leaves them out. Look there for the company that delivers in your country and its tracking number; if there’s none, ask the seller." A line dated after Peek's check waits until then. Lines in China, and DHL's copied lines placed in a country once DHL's number is in the record, are read on Beijing time; the others on the clock of where the parcel was, as best Peek can tell. Names, address, postcodes, weight, fees, signature and proof of delivery stay out, and there's no expected delivery date.
+Peek shows each line in Mayi Yinfu's words with its place, and the destination country when given; a flight line with the day it expects shows as its step alone, in English, such as "The first leg has departed". The first lines show as "Label created", `已入库,到达收货点` as "Received by carrier", `航班落地，拆板清关…` as "At customs", the delivery-vehicle and delivered lines as "Out for delivery" and "Delivered", and the other known lines as "In transit". The lines that run ahead, and a line Mayi Yinfu's record shows was written more than twelve hours before the time it carries, or more than six hours before it in the same second as such a line, are forecasts, not scans: they don't change the parcel's status. On the web, the history then opens with "Other sites may show more steps, but they’re only predictions.", with those steps greyed behind "Show them". A line dated after Peek's check waits until then. Lines in mainland China, and DHL's copied lines placed in a country once DHL's number is in the record, are read on Beijing time; the others on the clock of where the parcel was, as best Peek can tell. Names, address, postcodes, weight, fees, signature and proof of delivery stay out, and there's no expected delivery date.
 
 **DHL takes over.** DHL is the only delivering company Peek takes from Mayi Yinfu's record, and only when the delivering number there has a shape Peek's catalog gives to DHL alone. The parcel then shows "Delivery with DHL" and DHL's number after yours, and Peek asks DHL whether it has the parcel. While DHL has only the announcement of the parcel, with no scan of its own, it shows "Announced to DHL, not received yet" instead. Once DHL shows a scan at least as recent as Mayi Yinfu's latest line, Peek follows the parcel at DHL and keeps Mayi Yinfu's lines in the history. Any other delivering number, a DHL one of a shape other carriers share included, doesn't show in Peek, and Peek doesn't follow the parcel under it: copy it from Mayi Yinfu's tracker and add it as a parcel of its own.
 

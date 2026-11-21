@@ -83,18 +83,23 @@ struct PostcodeMemory {
     static let limit = 5
 
     private let defaults: UserDefaults
+    private let catalog: CarrierCatalog
 
-    init(defaults: UserDefaults = .standard) {
+    init(defaults: UserDefaults = .standard, catalog: CarrierCatalog = .shared) {
         self.defaults = defaults
+        self.catalog = catalog
     }
 
     var entries: [GivenPostcode] {
         defaults.data(forKey: Self.key).flatMap { try? JSONDecoder().decode([GivenPostcode].self, from: $0) } ?? []
     }
 
-    /// The pair goes first; given before, it moves there rather than coming twice.
+    /// The pair goes first; given before, it moves there rather than coming twice. It keeps the country sent with it,
+    /// or the carrier's home where its lookup reads the country: one kept without any was kept before this iPhone kept
+    /// the home country too, and its country is not known (`givenPostcodeCountry`).
     func remember(_ postcode: String, for carrier: CarrierID, country: String? = nil) {
         guard let postcode = postcode.trimmingCharacters(in: .whitespacesAndNewlines).nonEmpty else { return }
+        let country = country?.nonEmpty ?? (catalog.readsPostcodeCountry(carrier) ? catalog.homeCountry(of: carrier) : nil)
         write([GivenPostcode(carrier: carrier, postcode: postcode, country: country)]
             + entries.filter { $0.carrier != carrier || Self.bare($0.postcode) != Self.bare(postcode) })
     }

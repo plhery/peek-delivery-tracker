@@ -108,12 +108,14 @@ struct GivenPostcode: Codable, Hashable, Sendable {
     var country: String? = nil
 
     /// What the add sheet suggests from: the postcodes of the account's parcels, newest parcel
-    /// first, then the ones this iPhone remembers, in their order.
-    static func candidates(parcels: [Parcel], remembered: [GivenPostcode]) -> [GivenPostcode] {
+    /// first, then the ones this iPhone remembers, in their order. A parcel's postcode stored without its country is
+    /// from its carrier's home where its lookup reads the country, as only another country is stored.
+    static func candidates(parcels: [Parcel], remembered: [GivenPostcode], catalog: CarrierCatalog = .shared) -> [GivenPostcode] {
         parcels.sorted { $0.createdAt > $1.createdAt }
             .compactMap { parcel in parcel.dpdPostcode.map { postcode in
                 let stored = parcel.carrierData?.postcodeCountry
-                return GivenPostcode(carrier: parcel.carrier, postcode: postcode, country: stored?.postcode == postcode ? stored?.country : nil)
+                let home = catalog.readsPostcodeCountry(parcel.carrier) ? catalog.homeCountry(of: parcel.carrier) : nil
+                return GivenPostcode(carrier: parcel.carrier, postcode: postcode, country: stored?.postcode == postcode ? stored?.country : home)
             } }
             + remembered
     }
@@ -908,14 +910,20 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
         return field
     }
 
+    /// Whether the carrier's lookup reads the country of a postcode given for any of its numbers.
+    func readsPostcodeCountry(_ carrier: CarrierID) -> Bool {
+        (info(for: carrier).tracking.requirements ?? []).contains { $0.readsCountry == true }
+    }
+
     /// The country of a postcode given before: the one recorded with it. Otherwise, where the carrier it was given to
-    /// reads the country, that carrier's home, as only another country is recorded. Where it reads the postcode alone,
-    /// its home only when none of its requirements takes any country's postcode: one that does says nothing of the
-    /// country, so it is not known (nil).
-    func givenPostcodeCountry(_ entry: GivenPostcode) -> String? {
+    /// reads the country, that carrier's home, as only another country is sent (`homeUnrecorded`; false for a postcode
+    /// this iPhone remembered before it recorded the home country too, whose country is then not known). Where it reads
+    /// the postcode alone, its home only when none of its requirements takes any country's postcode: one that does says
+    /// nothing of the country, so it is not known (nil). As on the web.
+    func givenPostcodeCountry(_ entry: GivenPostcode, homeUnrecorded: Bool = true) -> String? {
         if let country = entry.country?.nonEmpty { return country.uppercased() }
         let requirements = info(for: entry.carrier).tracking.requirements ?? []
-        if requirements.contains(where: { $0.readsCountry == true }) { return homeCountry(of: entry.carrier) }
+        if requirements.contains(where: { $0.readsCountry == true }) { return homeUnrecorded ? homeCountry(of: entry.carrier) : nil }
         return requirements.contains { $0.field == .dpdPostcode && $0.takesAnyPostcode } ? nil : homeCountry(of: entry.carrier)
     }
 
@@ -923,13 +931,14 @@ final class CarrierCatalog: ObservableObject, @unchecked Sendable {
     /// one given to the same carrier, otherwise the last one given to any carrier that the field takes, as it takes it.
     /// Most parcels go to the same address. A field that reads the postcode's country takes one only from a country it
     /// lists (`givenPostcodeCountry`), the one chosen beside it once one is, in that country's shape, and the postcode
-    /// brings its country.
+    /// brings its country. `given` holds the countries as recorded (`candidates`): one given to a carrier that reads the
+    /// country and kept without it is from a country not known, and fills no such field.
     func rememberedPostcode(for carrier: CarrierID, requirement: CarrierRequirement, among given: [GivenPostcode],
                             chosen: String? = nil) -> GivenPostcode? {
         let readsCountry = requirement.readsCountry == true
         let countries = postcodeCountries(for: carrier, requirement: requirement)
         let fitting = given.compactMap { entry -> GivenPostcode? in
-            let country = readsCountry ? givenPostcodeCountry(entry) : homeCountry(of: carrier)
+            let country = readsCountry ? givenPostcodeCountry(entry, homeUnrecorded: false) : homeCountry(of: carrier)
             if readsCountry {
                 guard let country, countries.contains(country), chosen == nil || chosen == country else { return nil }
             }

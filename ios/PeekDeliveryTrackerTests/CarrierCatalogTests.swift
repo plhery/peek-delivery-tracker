@@ -1039,11 +1039,14 @@ final class CarrierCatalogTests: XCTestCase {
         let mondialRelay = try XCTUnwrap(catalog.requirements(for: .mondialRelay, trackingNumber: "76434219").first { $0.field == .dpdPostcode })
         let gls = try XCTUnwrap(catalog.requirements(for: .glsCh, trackingNumber: "999999999916").first { $0.field == .dpdPostcode })
         let belgian = GivenPostcode(carrier: .springGDS, postcode: "1000", country: "BE")
-        // The country it was given from goes with it; one kept without its country was given from its carrier's home.
+        // The country it was given from goes with it, the carrier's home included; one given to a carrier that reads the
+        // country and kept without it is from a country not known.
         XCTAssertEqual(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay, among: [belgian]),
                        GivenPostcode(carrier: .springGDS, postcode: "1000", country: "BE"))
         XCTAssertEqual(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay,
-                                                  among: [GivenPostcode(carrier: .mondialRelay, postcode: "75001")])?.country, "FR")
+                                                  among: [GivenPostcode(carrier: .mondialRelay, postcode: "75001", country: "FR")])?.country, "FR")
+        XCTAssertNil(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay,
+                                                among: [GivenPostcode(carrier: .mondialRelay, postcode: "75001")]))
         XCTAssertEqual(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay,
                                                   among: [GivenPostcode(carrier: .glsCh, postcode: "8000")])?.country, "CH")
         // The carrier's own still comes first; a country the reader named takes only a postcode from there.
@@ -1083,6 +1086,21 @@ final class CarrierCatalogTests: XCTestCase {
         XCTAssertEqual(catalog.givenPostcodeCountry(GivenPostcode(carrier: .glsCh, postcode: "8004")), "CH")
         XCTAssertNil(catalog.givenPostcodeCountry(GivenPostcode(carrier: .dpd, postcode: "75001")))
         XCTAssertNil(catalog.givenPostcodeCountry(GivenPostcode(carrier: .dhl, postcode: "75001")))
+
+        // A postcode this iPhone remembered for a carrier that reads the country, kept without one, was kept before the
+        // home country was kept too: it may be another country's (a Spanish "28001" sent to Mondial Relay as Spanish),
+        // so its country is not known and it fills no such field, as on the web.
+        XCTAssertNil(catalog.givenPostcodeCountry(GivenPostcode(carrier: .mondialRelay, postcode: "28001"), homeUnrecorded: false))
+        XCTAssertNil(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay,
+                                                among: [GivenPostcode(carrier: .mondialRelay, postcode: "28001")]))
+        XCTAssertEqual(catalog.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay,
+                                                  among: [GivenPostcode(carrier: .mondialRelay, postcode: "75002", country: "FR")]),
+                       GivenPostcode(carrier: .mondialRelay, postcode: "75002", country: "FR"))
+        // An account parcel's postcode stored without a country is from its carrier's home.
+        let account = Parcel(id: UUID(), trackingNumber: "76434219", label: "", carrier: .mondialRelay, createdAt: "2026-10-01T08:00:00Z",
+                             syncStatus: .ok, dpdPostcode: "75002", notificationsMuted: false)
+        XCTAssertEqual(GivenPostcode.candidates(parcels: [account], remembered: [], catalog: catalog),
+                       [GivenPostcode(carrier: .mondialRelay, postcode: "75002", country: "FR")])
     }
 
     func testThePostcodeSuggestedIsTheNewestThatFitsTheCarriersOwnFirst() throws {

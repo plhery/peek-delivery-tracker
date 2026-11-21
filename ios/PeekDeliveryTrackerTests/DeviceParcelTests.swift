@@ -44,7 +44,13 @@ final class DeviceParcelTests: XCTestCase {
 
     private let key = String(repeating: "k", count: 43)
 
-    private func given(_ carrier: CarrierID, _ postcode: String) -> GivenPostcode { GivenPostcode(carrier: carrier, postcode: postcode) }
+    /// A postcode given before, as this iPhone remembers it: with its country, the home one too where the carrier's
+    /// lookup reads it.
+    private func given(_ carrier: CarrierID, _ postcode: String, _ country: String? = nil) -> GivenPostcode {
+        let catalog = CarrierCatalog.shared
+        return GivenPostcode(carrier: carrier, postcode: postcode,
+                             country: country ?? (catalog.readsPostcodeCountry(carrier) ? catalog.homeCountry(of: carrier) : nil))
+    }
 
     /// The carrier's postcode field for a number of that shape.
     private func postcodeField(_ carrier: CarrierID, _ number: String) throws -> CarrierRequirement {
@@ -1066,6 +1072,29 @@ final class DeviceParcelTests: XCTestCase {
         memory.forget("3000")
         XCTAssertEqual(memory.entries, [])
         XCTAssertEqual(defaults.persistentDomain(forName: suite)?.isEmpty ?? true, true, "Nothing is left behind")
+    }
+
+    /// A postcode remembered for Mondial Relay without its country, as this iPhone kept them before it kept the home
+    /// country too, may be another country's (a Spanish one sent as Spanish): it is no longer offered as French. One
+    /// remembered now keeps its country, France included.
+    func testAPostcodeRememberedWithoutItsCountryForACarrierThatReadsItIsNotOffered() throws {
+        let (defaults, suite) = defaults()
+        defer { defaults.removePersistentDomain(forName: suite) }
+        defaults.set(Data(#"[{"carrier":"mondial-relay","postcode":"28001"}]"#.utf8), forKey: "sdt.postcodeMemory.v1")
+        let memory = PostcodeMemory(defaults: defaults)
+        let mondialRelay = try postcodeField(.mondialRelay, "76434219")
+        XCTAssertEqual(memory.entries, [GivenPostcode(carrier: .mondialRelay, postcode: "28001")])
+        XCTAssertNil(CarrierCatalog.shared.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay, among: memory.entries))
+
+        memory.remember("75002", for: .mondialRelay)
+        XCTAssertEqual(memory.entries.first, GivenPostcode(carrier: .mondialRelay, postcode: "75002", country: "FR"))
+        XCTAssertEqual(CarrierCatalog.shared.rememberedPostcode(for: .mondialRelay, requirement: mondialRelay, among: memory.entries),
+                       GivenPostcode(carrier: .mondialRelay, postcode: "75002", country: "FR"))
+        memory.remember("28001", for: .mondialRelay, country: "ES")
+        XCTAssertEqual(memory.entries.first, GivenPostcode(carrier: .mondialRelay, postcode: "28001", country: "ES"))
+        // A carrier that reads the postcode alone keeps none.
+        memory.remember("75001", for: .dpd)
+        XCTAssertEqual(memory.entries.first, GivenPostcode(carrier: .dpd, postcode: "75001"))
     }
 
     func testAGuestLookupRemembersItsPostcodeApartFromTheParcel() async throws {

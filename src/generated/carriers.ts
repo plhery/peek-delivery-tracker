@@ -2628,6 +2628,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "epost-global-sendungsverfolgung",
+      "title": "ePost Global Sendungsverfolgung: EPG-Nummern & Zusteller",
+      "name": "ePost Global",
+      "color": "#27967a"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "india-post-sendungsverfolgung",
@@ -3382,6 +3390,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "suivi-epost-global",
+      "title": "Suivi ePost Global\u00a0: numéros EPG, statuts et livraison",
+      "name": "ePost Global",
+      "color": "#27967a"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "suivi-india-post",
@@ -4038,6 +4054,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento HuaHan Logistics: codice HHW…YQ e consegna",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "tracciamento-epost-global",
+      "title": "Tracciamento ePost Global: numeri EPG, stati e consegna",
+      "name": "ePost Global",
+      "color": "#27967a"
     },
     {
       "id": "india-post",
@@ -4698,6 +4722,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#0069e8"
     },
     {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "seguimiento-epost-global",
+      "title": "Seguimiento ePost Global: números EPG, estados y reparto",
+      "name": "ePost Global",
+      "color": "#27967a"
+    },
+    {
       "id": "india-post",
       "catalog": "india-post",
       "slug": "seguimiento-india-post",
@@ -5314,6 +5346,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento HuaHan Logistics: código HHW…YQ e entrega",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "seguimento-epost-global",
+      "title": "Seguimento ePost Global: números EPG, estados e entrega",
+      "name": "ePost Global",
+      "color": "#27967a"
     },
     {
       "id": "india-post",
@@ -5990,6 +6030,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie HuaHan Logistics: numer HHW…YQ i doręczenie",
       "name": "HuaHan Logistics",
       "color": "#0069e8"
+    },
+    {
+      "id": "epost-global",
+      "catalog": "epost-global",
+      "slug": "sledzenie-epost-global",
+      "title": "Śledzenie ePost Global: numery EPG, statusy i doręczenie",
+      "name": "ePost Global",
+      "color": "#27967a"
     },
     {
       "id": "india-post",

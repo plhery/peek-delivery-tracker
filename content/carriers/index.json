@@ -187,7 +187,7 @@
   { "id": "japan-post", "catalog": "japan-post", "name": "Japan Post", "languages": ["en"] },
   { "id": "russian-post", "catalog": "russian-post", "name": "Russian Post", "languages": ["en", "ru"] },
   { "id": "huahan", "catalog": "huahan", "name": "HuaHan Logistics", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
-  { "id": "epost-global", "catalog": "epost-global", "name": "ePost Global", "languages": ["en"] },
+  { "id": "epost-global", "catalog": "epost-global", "name": "ePost Global", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "gls-at", "catalog": "gls-at", "name": "GLS Austria", "languages": ["en"] },
   { "id": "india-post", "catalog": "india-post", "name": "India Post", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "morning-global", "catalog": "morning-global", "name": "Morning Global", "languages": ["en"] },

@@ -2540,6 +2540,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "huaya-express-sendungsverfolgung",
+      "title": "Huaya Express Sendungsverfolgung: HYYT-Nummern & Status",
+      "name": "Huaya Express",
+      "color": "#e60013"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-sendungsverfolgung",
@@ -3342,6 +3350,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff8300"
     },
     {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "suivi-huaya-express",
+      "title": "Suivi Huaya Express\u00a0: numéros HYYT…GZ, statuts et relais",
+      "name": "Huaya Express",
+      "color": "#e60013"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-suivi-colis",
@@ -4038,6 +4054,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento Speedaf Express: numero, stati e contatti",
       "name": "Speedaf",
       "color": "#ff8300"
+    },
+    {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "tracciamento-huaya-express",
+      "title": "Tracciamento Huaya Express: codici HYYT…GZ e stati",
+      "name": "Huaya Express",
+      "color": "#e60013"
     },
     {
       "id": "topyou",
@@ -4754,6 +4778,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f6851f"
     },
     {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "seguimiento-huaya-express",
+      "title": "Seguimiento Huaya Express: códigos HYYT…GZ y estados",
+      "name": "Huaya Express",
+      "color": "#e60013"
+    },
+    {
       "id": "topyou",
       "catalog": "topyou",
       "slug": "topyou-seguimiento",
@@ -5426,6 +5458,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Speedaf Express: número, estados e apoio",
       "name": "Speedaf",
       "color": "#ff8300"
+    },
+    {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "seguimento-huaya-express",
+      "title": "Seguimento Huaya Express: números HYYT…GZ e estados",
+      "name": "Huaya Express",
+      "color": "#e60013"
     },
     {
       "id": "topyou",
@@ -6150,6 +6190,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek Speedaf Express: numery i statusy",
       "name": "Speedaf",
       "color": "#ff8300"
+    },
+    {
+      "id": "huaya-express",
+      "catalog": "huaya-express",
+      "slug": "sledzenie-huaya-express",
+      "title": "Śledzenie Huaya Express: numery HYYT…GZ, statusy i dostawa",
+      "name": "Huaya Express",
+      "color": "#e60013"
     },
     {
       "id": "topyou",

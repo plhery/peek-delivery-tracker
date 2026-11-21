@@ -29,10 +29,10 @@
   "Waiting for you at the pickup point": "Te espera en el punto de recogida",
   "A little surprise is on its way": "Una pequeña sorpresa está en camino",
   "Handed over at the post office counter": "Depositado en la ventanilla de correos",
-  "Customs is taking a look. No peeking.": "La aduana está echando un vistazo. Sin espiar.",
+  "Customs is taking a look. No peeking.": "La aduana está echando un vistazo. No vale espiar.",
   "Pralines boxed with great care": "Bombones empaquetados con mucho mimo",
   "Collected from the chocolatier": "Ha salido de la chocolatería",
-  "Crossed the border. Swiss chocolate was not informed.": "Frontera cruzada. El chocolate suizo no ha sido informado.",
+  "Crossed the border. Swiss chocolate was not informed.": "Frontera cruzada. Nadie se lo ha dicho al chocolate suizo.",
   "With the courier for delivery today": "Con el repartidor, entrega hoy",
   "Your bedside moon is ready to travel": "Tu luna de mesilla está lista para viajar",
   "Collected from the design studio": "Ha salido del estudio de diseño",
@@ -91,7 +91,7 @@
   "Post branch": "Oficina de correos",
   "Home": "Casa",
   "Customs cleared": "Despachado de aduanas",
-  "Arrived at the local delivery centre": "Llegó al centro de reparto local",
+  "Arrived at the local delivery centre": "Ha llegado al centro de reparto local",
   "Out for delivery": "En reparto",
   "Delivered": "Entregado"
 }

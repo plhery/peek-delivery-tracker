@@ -78,7 +78,7 @@ O [Peek](/) identifica logo a OnTrac («Transportadora detetada») para números
 
 O Peek lê o serviço JSON da OnTrac e apresenta o estado, cada leitura com cidade e estado no mapa (até às 100 mais recentes), entrega prevista, hora de entrega, peso e dimensões, deixando de fora destinatário, assinatura e fotografia de entrega. Quando o evento inclui fuso horário, o instante é convertido para o fuso do teu dispositivo («Horas no teu fuso horário: …»); sem fuso, o Peek lê-a na hora do estado norte-americano da leitura e converte-a da mesma forma. `Order has been transferred to another carrier` permanece «Em trânsito» no Peek, sem transição adicional porque a OnTrac não nomeia o operador seguinte.
 
-Com a encomenda aberta ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos desde as `06:00` locais no dia da leitura `Out for Delivery` enquanto o serviço da OnTrac responder; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora («Todas as leituras», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a OnTrac nem a loja por ti.
+Com a encomenda aberta ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos desde as `06:00` locais no dia da leitura `Out for Delivery` enquanto o serviço da OnTrac responder; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora («Todos os registos», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a OnTrac nem a loja por ti.
 
 ## Perguntas frequentes sobre o seguimento da OnTrac
 

@@ -34,7 +34,7 @@ Peek odczytuje skany FedEx po angielsku, tak jak zapisuje je FedEx, a nad nimi p
 | `International shipment release - Import` | W transporcie | Urząd celny zwolnił paczkę w kraju docelowym. |
 | `On FedEx vehicle for delivery` | W doręczeniu | Jest w samochodzie kuriera. |
 | `Delivery exception`, `Customer not available or business closed` | Próba doręczenia | Doręczenie się nie udało. |
-| `Ready for pickup` | Do odbioru | Czeka na Ciebie w punkcie odbioru. |
+| `Ready for pickup` | Do odbioru | Czeka na ciebie w punkcie odbioru. |
 | `Delivered` | Dostarczona | Paczka została doręczona. |
 | `Shipment exception` | Zgłoszono problem | FedEx zgłasza problem z przesyłką. |
 | `Returning to shipper` | Zwrócona nadawcy | Wraca do nadawcy. |

@@ -39,7 +39,7 @@ postnl.post pokazuje pasek postępu: `Pre-advised`, `Preparing`, `Departed`, `Tr
 | `The item is at the local delivery office` | W placówce, która ją doręczy. |
 | `The item is out for delivery` | W doręczeniu. |
 | `Driver is en route to the pickup location` | Jedzie do punktu odbioru, nie pod Twój adres. |
-| `Pick-up point` | Czeka na Ciebie w punkcie odbioru. |
+| `Pick-up point` | Czeka na ciebie w punkcie odbioru. |
 | `Unsuccesfull`, `Undelivered` | Próba doręczenia się nie udała. Literówka pochodzi od PostNL. |
 | `Undeliverable item, has been returned to shipper` | Wraca do nadawcy. |
 | `Delivered` | Doręczona. |

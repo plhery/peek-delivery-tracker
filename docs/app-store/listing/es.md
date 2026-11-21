@@ -37,7 +37,7 @@ No hace falta cuenta. Sin anuncios.
 Inicia sesión con Apple, Google o un código por correo y Peek te envía notificaciones: en cada escaneo, solo en los pasos importantes o solo en la entrega. Si quieres, también te escribe un correo cuando llega.
 
 ¿SIGUES MÁS DE UNO?
-Van todos en una sola lista, con el siguiente en llegar arriba, viajando en su mapa. Con una cuenta tienes la misma lista en tu iPhone y en la web, en peektracker.com. Un widget muestra tu próxima entrega en la pantalla de inicio.
+Van todos en una sola lista, con el siguiente en llegar arriba y su viaje en el mapa. Con una cuenta tienes la misma lista en tu iPhone y en la web, en peektracker.com. Un widget muestra tu próxima entrega en la pantalla de inicio.
 
 ¿LO ESPERA ALGUIEN MÁS?
 Comparte la página del paquete con un enlace: para abrirla no hace falta app ni cuenta. Envuélvelo como regalo y lo que lleva dentro seguirá siendo una sorpresa hasta que llegue.

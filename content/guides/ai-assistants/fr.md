@@ -106,7 +106,7 @@ Décoche ce que tu ne veux pas ; « Autoriser » reste grisé tant qu'aucune cas
 
 ## Que voit l'assistant, et comment le déconnecter ?
 
-Il reçoit ce que tu as autorisé : le nom de tes colis, leurs expéditeurs, transporteurs, numéros de suivi, statuts, jours prévus, points de retrait et scans. Jamais le nom du destinataire, ni le code postal ou les chiffres de téléphone que tu as donnés : un scan qui nomme le destinataire, la personne qui a signé, un code ou une porte ne lui arrive que sous forme d'étape, comme « Livré ». Le lieu d'un scan reste tel que le transporteur l'a écrit : il peut nommer la ville de livraison et son code postal. Les règles de confidentialité de son fournisseur s'appliquent ensuite. La [politique de confidentialité](https://peektracker.com/privacy.html) de Peek indique ce qu'il conserve sur chaque assistant que tu connectes.
+Il reçoit ce que tu as autorisé : le nom de tes colis, leurs expéditeurs, transporteurs, numéros de suivi, statuts, jours prévus, points de retrait et scans. Jamais le nom du destinataire, ni le code postal ou les chiffres de téléphone que tu as donnés : un scan qui nomme le destinataire, la personne qui a signé, un code ou une porte ne lui arrive que sous forme d'étape, comme « Livré ». Le lieu d'un scan reste tel que le transporteur l'a écrit : il peut nommer la ville de livraison et son code postal. Les règles de confidentialité de son fournisseur s'appliquent ensuite. L'[avis de confidentialité](https://peektracker.com/privacy.html) de Peek indique ce qu'il conserve sur chaque assistant que tu connectes.
 
 Pour déconnecter un assistant, sur le site de Peek :
 
@@ -136,7 +136,7 @@ D'autres cas sont décrits sous « En cas de problème » sur [la page de Peek c
 - [Peek sur GitHub : les outils des assistants](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – ce qu'un assistant peut lister, ajouter et modifier, pas de suppression, Amazon
 - [Peek sur GitHub : l'écran d'autorisation](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AssistantConsentScreen.tsx) – cases à cocher, Autoriser, connexion récente
 - [Peek sur GitHub : Réglages, Assistants](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Assistants.tsx) – adresse, assistants connectés, Déconnecter
-- [Peek : politique de confidentialité (en anglais)](https://peektracker.com/privacy.html) – ce que reçoit un assistant, ce que Peek conserve, 60 jours, suppression du compte
+- [Peek : avis de confidentialité (en anglais)](https://peektracker.com/privacy.html) – ce que reçoit un assistant, ce que Peek conserve, 60 jours, suppression du compte
 - [Peek sur GitHub : conditions d'utilisation (en anglais)](https://github.com/plhery/peek-delivery-tracker/blob/main/TERMS.md) – gratuit, sans frais ni abonnement
 - [Peek : aide (en anglais)](https://peektracker.com/support.html) – connexion avec un code à six chiffres
 - [Aide Claude : Commencer avec les connecteurs personnalisés utilisant MCP distant](https://support.claude.com/fr/articles/11175166-commencer-avec-les-connecteurs-personnalises-utilisant-mcp-distant) – étapes du connecteur personnalisé, un seul avec l'offre Free

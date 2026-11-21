@@ -7,16 +7,16 @@ published: 2026-11-19
 updated: 2026-11-21
 ---
 
-Inoltra l'e-mail di spedizione al tuo indirizzo e-mail Peek personale e Peek aggiunge il pacco alle tue consegne. L'indirizzo lo trovi in «Impostazioni» → «Consegne» → «Aggiungi pacchi via email», e puoi inoltrare un'e-mail a mano oppure lasciare che la tua app di posta inoltri da sola le e-mail di spedizione.
+Inoltra l'e-mail di spedizione al tuo indirizzo e-mail Peek personale e Peek aggiunge il pacco alle tue consegne. L'indirizzo lo trovi in «Impostazioni» → «Consegne» → «Aggiungi pacchi via e-mail», e puoi inoltrare un'e-mail a mano oppure lasciare che la tua app di posta inoltri da sola le e-mail di spedizione.
 
 Serve un account Peek: gli ospiti, che seguono i pacchi senza account, non ricevono un indirizzo. E Peek indica la funzione come «Beta»: con parole sue, «può perdere un pacco e potrebbe ancora cambiare».
 
 :::steps
-- Apri «Aggiungi pacchi via email» | Se hai effettuato l'accesso sul sito o nell'app per iPhone, iPad o Android, il pulsante rotondo dell'account con la tua iniziale apre «Impostazioni»: in «Consegne», scegli «Aggiungi pacchi via email». Su Mac è una scheda della finestra «Impostazioni» di Peek (⌘,).
+- Apri «Aggiungi pacchi via e-mail» | Se hai effettuato l'accesso sul sito o nell'app per iPhone, iPad o Android, il pulsante rotondo dell'account con la tua iniziale apre «Impostazioni»: in «Consegne», scegli «Aggiungi pacchi via e-mail». Su Mac è una scheda della finestra «Impostazioni» di Peek (⌘,).
 - Seleziona «Ottieni il mio indirizzo» | Compare sotto «Il tuo indirizzo». Un codice casuale di 16 lettere e cifre lo rende solo tuo.
 - Copialo | Seleziona «Copia indirizzo». Le app per iPhone, iPad e Android hanno anche «Condividi».
 - Inoltra un'e-mail di spedizione | Nella tua app di posta, inoltra a quell'indirizzo l'e-mail del negozio o del corriere. Peek trova il negozio nella riga «Da:» del messaggio inoltrato stesso.
-- Controlla «Ultime email» | La pagina elenca le tue ultime cinque e-mail, chi ha inviato ciascuna e con quale esito, per esempio «2 pacchi aggiunti».
+- Controlla «Ultime e-mail» | La pagina elenca le tue ultime cinque e-mail, chi ha inviato ciascuna e con quale esito, per esempio «2 pacchi aggiunti».
 :::
 
 Ogni pacco prende il nome del negozio che ha inviato l'e-mail, ripulito («EXAMPLE® SHOP AG» diventa «Example Shop»), oppure, per l'e-mail di un corriere, quello del negozio per cui dice di consegnare. Peek lo segna come nuovo nel tuo elenco e invia una sola notifica, «Aggiunto dalla tua email», con il suo nome e il corriere.
@@ -25,11 +25,11 @@ Ogni pacco prende il nome del negozio che ha inviato l'e-mail, ripulito («EXAMP
 
 Sì, con una regola nella tua app di posta che inoltra le e-mail di spedizione al tuo indirizzo Peek: ognuna poi aggiunge da sola il suo pacco. Peek non si collega mai alla tua casella di posta. Vede solo ciò che arriva al suo indirizzo, da qualsiasi negozio o corriere: non esiste un elenco di negozi supportati. Alcuni altri tracker chiedono invece di collegare la tua casella; il [tracking universale](guide:universal-tracker) mette a confronto i due modi.
 
-La notifica «Aggiunto dalla tua email» arriva su ogni browser e telefono in cui il tuo account ha attivato le notifiche di Peek (vedi la guida alle [notifiche di consegna dei pacchi](guide:parcel-notifications)), a meno che tu non disattivi «Avvisami quando un’email aggiunge un pacco». Non viene inviata se hai già aperto o archiviato il pacco.
+La notifica «Aggiunto dalla tua email» arriva su ogni browser e telefono in cui il tuo account ha attivato le notifiche di Peek (vedi la guida alle [notifiche di consegna dei pacchi](guide:parcel-notifications)), a meno che tu non disattivi «Avvisami quando un’e-mail aggiunge un pacco». Non viene inviata se hai già aperto o archiviato il pacco.
 
 ## Dove trovo il mio indirizzo e-mail Peek?
 
-In «Aggiungi pacchi via email», sotto «Il tuo indirizzo», dopo aver selezionato «Ottieni il mio indirizzo»: un solo indirizzo per account, lo stesso sul web, su iPhone, iPad, Mac e Android. Non vedi questa voce? Controlla di aver effettuato l'accesso: ogni account ha la funzione, e solo gli account ce l'hanno.
+In «Aggiungi pacchi via e-mail», sotto «Il tuo indirizzo», dopo aver selezionato «Ottieni il mio indirizzo»: un solo indirizzo per account, lo stesso sul web, su iPhone, iPad, Mac e Android. Non vedi questa voce? Controlla di aver effettuato l'accesso: ogni account ha la funzione, e solo gli account ce l'hanno.
 
 ## Come inoltro in automatico le e-mail di spedizione in Gmail, Outlook o iCloud?
 
@@ -64,16 +64,16 @@ Un'e-mail ignorata non viene conservata, e nemmeno una bloccata da un limite o l
 
 ## Perché il mio pacco non è stato aggiunto?
 
-Guarda in «Ultime email»: per ogni e-mail c'è l'esito.
+Guarda in «Ultime e-mail»: per ogni e-mail c'è l'esito.
 
 | Cosa dice la pagina | Cosa è successo |
 | --- | --- |
-| «Nessun numero di tracciamento» | Peek non ne ha trovato nessuno. «Alcuni negozi, come Amazon, non mettono il numero di tracciamento nelle email.» |
+| «Nessun numero di tracciamento» | Peek non ne ha trovato nessuno. «Alcuni negozi, come Amazon, non mettono il numero di tracciamento nelle e-mail.» |
 | «Il numero di tracciamento compare solo nel tuo account Amazon» | Un'e-mail di spedizione di Amazon, che di solito non ne contiene |
 | «Già tra le tue consegne» | Segui già quel pacco: non viene mai aggiunto due volte |
 | «Già tra le tue consegne: aggiunto il nome del negozio» | Lo stesso, e il pacco senza nome ha preso quello del negozio. Un nome che hai dato tu resta |
 | «Già consegnato: non aggiunto» | L'oggetto dice che è stato consegnato. Una consegna fallita, o una consegna in un punto di ritiro o in un locker, conta come in viaggio |
-| «Non è un’email di spedizione: non letta» | L'oggetto non ha parole di spedizione in nessuna lingua e non arriva da un corriere: una newsletter, una fattura. Peek non la legge e non la conserva. Più e-mail di fila stanno su una riga |
+| «Non è un’e-mail di spedizione: non letta» | L'oggetto non ha parole di spedizione in nessuna lingua e non arriva da un corriere: una newsletter, una fattura. Peek non la legge e non la conserva. Più e-mail di fila stanno su una riga |
 | «Non letta: limite di oggi raggiunto» | È stato raggiunto un limite giornaliero: sulle e-mail al tuo indirizzo (per giorno UTC) o sui pacchi che il tuo account aggiunge, via e-mail o a mano. Da metà del limite di e-mail, la pagina mostra quante ne hai usate |
 | «Non aggiunto: le tue consegne sono al completo» | Il tuo account ha 50 pacchi attivi, 500 contando quelli archiviati |
 
@@ -83,15 +83,15 @@ Nessun numero nell'e-mail? Di solito è nella pagina dell'ordine: vedi [dove si 
 
 ## Come si disattiva?
 
-Seleziona «Disattiva» in fondo alla pagina «Aggiungi pacchi via email»: elimina il tuo indirizzo, ciò che ha registrato e le e-mail conservate che vi sono arrivate. Elimina anche la regola di inoltro nella tua app di posta, altrimenti continua a inoltrare nel vuoto.
+Seleziona «Disattiva» in fondo alla pagina «Aggiungi pacchi via e-mail»: elimina il tuo indirizzo, ciò che ha registrato e le e-mail conservate che vi sono arrivate. Elimina anche la regola di inoltro nella tua app di posta, altrimenti continua a inoltrare nel vuoto.
 
-- **Solo la notifica:** disattiva «Avvisami quando un’email aggiunge un pacco». L'indirizzo continua a funzionare.
+- **Solo la notifica:** disattiva «Avvisami quando un’e-mail aggiunge un pacco». L'indirizzo continua a funzionare.
 - **Un nuovo indirizzo:** seleziona «Ottieni un nuovo indirizzo». Peek ti chiede di confermare: «L’indirizzo attuale smette subito di funzionare.» Metti il nuovo indirizzo nella tua regola.
 - **Tutto:** eliminare il tuo account Peek elimina l'indirizzo e le e-mail conservate.
 
 :::sources
 - [Peek: informativa sulla privacy (in inglese)](https://peektracker.com/privacy.html) – cosa conserva Peek delle e-mail inoltrate, per quanto tempo, e il ruolo di Anthropic
-- [Peek: la pagina «Aggiungi pacchi via email»](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AddByEmail.tsx) – l'indirizzo, le ultime e-mail, l'inoltro automatico, gli interruttori
+- [Peek: la pagina «Aggiungi pacchi via e-mail»](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AddByEmail.tsx) – l'indirizzo, le ultime e-mail, l'inoltro automatico, gli interruttori
 - [Peek: testi in italiano](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/it.json) – Beta, tutte le etichette, i risultati, le note su Yahoo e Proton
 - [Peek: servizi di posta e parole del filtro](https://github.com/plhery/peek-delivery-tracker/blob/main/src/lib/emailFilter.ts) – servizi, lingue, la ricerca di Gmail senza le parole per «consegnato»
 - [Peek: ricezione di un'e-mail inoltrata](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/inboundEmail/receive.ts) – qualsiasi mittente, niente doppioni, pacchi consegnati, vecchi indirizzi

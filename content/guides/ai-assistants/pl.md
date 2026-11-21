@@ -98,9 +98,9 @@ Nigdy nie może usunąć przesyłki: to robisz Ty w Peek. Reszta zależy od Cieb
 
 | Uprawnienie na ekranie Peek | Co asystent może wtedy robić |
 | --- | --- |
-| „Widzieć Twoje przesyłki: gdzie jest każda z nich, kiedy ma dotrzeć i jej historię” | Wyświetlać listę Twoich przesyłek i otwierać pojedynczą przesyłkę z jej skanami |
+| „Widzieć twoje przesyłki: gdzie jest każda z nich, kiedy ma dotrzeć i jej historię” | Wyświetlać listę Twoich przesyłek i otwierać pojedynczą przesyłkę z jej skanami |
 | „Dodawać przesyłki na podstawie numerów śledzenia, które mu podasz” | Dodawać przesyłki |
-| „Zmieniać nazwę, przewoźnika lub powiadomienia Twoich przesyłek, archiwizować je i przywracać z archiwum” | Zmieniać nazwę lub przewoźnika przesyłki, wyłączać lub włączać jej powiadomienia albo e-maile od Peek, archiwizować ją i przywracać z archiwum |
+| „Zmieniać nazwę, przewoźnika lub powiadomienia twoich przesyłek, archiwizować je i przywracać z archiwum” | Zmieniać nazwę lub przewoźnika przesyłki, wyłączać lub włączać jej powiadomienia albo e-maile od Peek, archiwizować ją i przywracać z archiwum |
 
 Odznacz to, czego nie chcesz; przycisk „Zezwól” pozostaje wyszarzony, dopóki nie zaznaczysz co najmniej jednego pola. Jeśli później poprosisz o coś, na co nie było zgody, asystent dostanie informację, że ma ponownie połączyć Peek z tym uprawnieniem.
 

@@ -41,7 +41,7 @@ Sonst sagt Peek „Keine Sendungsnummer gefunden. Füge die Nummer oder einen Tr
 
 Peek listet sie auf, und du verfolgst sie einzeln. Nummern, deren Paketdienst sicher ist, stehen etwa unter „3 Sendungsnummern in diesem Text“, jede einmal, mit ihrem Paketdienst, in der Reihenfolge, in der sie dastehen; eine, deren Prüfziffer nicht aufgeht, fehlt. Die erste ist ausgewählt: Nimm eine andere, wenn du willst, dann wähle „Diese verfolgen“, das in den Apps an die Stelle von „Paket hinzufügen“ tritt.
 
-Ohne Konto endet die Liste mit „Du verfolgst alle?“ und einem Knopf „Anmelden, und Peek behält alle im Blick“. Mit Konto kannst du die Versandmail stattdessen weiterleiten, und Peek fügt jedes Paket darin hinzu: siehe [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email). Das Fenster der Website für Angemeldete zeigt keine Liste, füge dort also nur die gewünschte Nummer ein.
+Ohne Konto endet die Liste mit „Verfolgst du alle?“ und einem Knopf „Anmelden, und Peek behält alle im Blick“. Mit Konto kannst du die Versandmail stattdessen weiterleiten, und Peek fügt jedes Paket darin hinzu: siehe [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email). Das Fenster der Website für Angemeldete zeigt keine Liste, füge dort also nur die gewünschte Nummer ein.
 
 ## Was, wenn mehrere Paketdienste meine Nummer kennen?
 

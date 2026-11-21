@@ -86,7 +86,7 @@ O [Peek](/) reconhece logo a Poste Italiane em `RA`, `1UW`, `3UW`, `8UW`, `JJITA
 
 A partir de Portugal, o Peek verifica também números postais válidos acabados em `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) nos [CTT](carrier:ctt) e muda assim que haja leituras mais recentes; no sentido inverso, etiquetas de 16 caracteres da [Vinted Go](carrier:vinted-go) ou [Cainiao](carrier:cainiao) com um código `1UW`, `3UW`, `8UW` ou `5P` passam automaticamente para a Poste Italiane.
 
-Consulta de hora a hora e alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega». Mostra até 20 leituras no mapa, dia previsto, serviço, «Encargos de importação» e horas locais («Horas no teu fuso horário: …» em peektracker.com, iPhone e Android). Remetente, peso, dimensões e estação de levantamento não são mostrados. Ao fim de dois dias sem dados: «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.»
+Consulta de hora a hora e alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». Mostra até 20 leituras no mapa, dia previsto, serviço, «Encargos de importação» e horas locais («Horas no teu fuso horário: …» em peektracker.com, iPhone e Android). Remetente, peso, dimensões e estação de levantamento não são mostrados. Ao fim de dois dias sem dados: «Ao fim de dois dias, a transportadora ainda não reconhece este número. Verifica-o, escolhe outra transportadora ou elimina a encomenda.»
 
 ## Perguntas frequentes sobre o rastreio Poste Italiane
 

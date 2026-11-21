@@ -43,7 +43,7 @@ Cola o número ou um link de `track.amazon` (`/tracking/` e o código) no [Peek]
 
 O Peek mostra estado, histórico com cidade, região e país num mapa, dia previsto (exceto `TBA`, `TBC` e `TBM`) e hora de entrega («Horas no teu fuso horário: …»). Usa etapas curtas em português («Em distribuição», «Entregue»), deixando em inglês apenas `Arrived at sorting center`, `Arrived at delivery center` e `Departed facility`, e omite loja, nome, morada, assinatura e foto. Quando o rastreador da Amazon deixa de dar o histórico (após 45 dias), o Peek avisa e pára de consultar.
 
-O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas, e a cada hora nos outros casos (também após dois dias sem novidades ou 12 horas em «Etiqueta criada» ou «Aceite pela transportadora»). Nas mesmas condições, em «Em distribuição» desde as 6:00 locais verifica até a cada 2 minutos, com alertas «Todas as leituras», «Passos importantes» ou «Só a entrega».
+O Peek verifica até a cada 10 minutos com a encomenda aberta ou no dia da entrega com notificações ativas, e a cada hora nos outros casos (também após dois dias sem novidades ou 12 horas em «Etiqueta criada» ou «Aceite pela transportadora»). Nas mesmas condições, em «Em distribuição» desde as 6:00 locais verifica até a cada 2 minutos, com alertas «Todos os registos», «Passos importantes» ou «Só a entrega».
 
 ## Perguntas sobre a Amazon Shipping
 

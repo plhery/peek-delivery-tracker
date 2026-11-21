@@ -86,7 +86,7 @@ Sprawdzone na poste.it 16 listopada 2026 r.:
 
 Z Polski Peek sprawdza też poprawne numery pocztowe na `IT` (`RR…IT`, `CW…IT`, `ZC…IT`) w [Poczcie Polskiej](carrier:poczta-polska) i przełącza na nią przy nowszych skanach; w drugą stronę 16-znakowe etykiety [Vinted Go](carrier:vinted-go) lub [Cainiao](carrier:cainiao) z kodem `1UW`, `3UW`, `8UW` albo `5P` przechodzą automatycznie na Poste Italiane.
 
-Odpytywanie co godzinę i powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje do 20 skanów na mapie, planowany dzień, usługę, „Opłaty importowe” i godziny lokalne („Godziny w Twojej strefie czasowej: …” i iPhonie). Nadawcy, wagi, wymiarów ani adresu placówki Peek nie pokazuje. Po dwóch dniach bez rozpoznania: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
+Odpytywanie co godzinę i powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje do 20 skanów na mapie, planowany dzień, usługę, „Opłaty importowe” i godziny lokalne („Godziny w twojej strefie czasowej: …” i iPhonie). Nadawcy, wagi, wymiarów ani adresu placówki Peek nie pokazuje. Po dwóch dniach bez rozpoznania: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”
 
 ## Najczęstsze pytania o śledzenie Poste Italiane
 

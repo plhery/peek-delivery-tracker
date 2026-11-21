@@ -69,13 +69,13 @@ Zajrzyj do sekcji „Ostatnie e-maile”: przy każdym e-mailu widać, z jakim s
 | Co pokazuje strona | Co się stało |
 | --- | --- |
 | „Brak numeru śledzenia” | Peek nie znalazł żadnego. „Niektóre sklepy, np. Amazon, nie podają numeru śledzenia w e-mailach”. |
-| „Numer śledzenia widać tylko na Twoim koncie Amazon” | E-mail o wysyłce od Amazona, w którym zwykle go nie ma |
+| „Numer śledzenia widać tylko na twoim koncie Amazon” | E-mail o wysyłce od Amazona, w którym zwykle go nie ma |
 | „Już w twoich dostawach” | Już śledzisz tę przesyłkę: nigdy nie jest dodawana dwa razy |
 | „Już w twoich dostawach: dodano nazwę sklepu” | To samo, a przesyłka bez nazwy dostała nazwę sklepu. Nazwa nadana przez Ciebie zostaje |
 | „Już doręczona: nie dodano” | Temat mówi, że przesyłka została doręczona. Nieudane doręczenie albo doręczenie do punktu odbioru czy automatu paczkowego liczy się jako przesyłka w drodze |
 | „To nie e-mail o wysyłce: nie przeczytano” | Temat nie ma słowa o wysyłce w żadnym języku, a e-mail nie pochodzi od przewoźnika: newsletter, rachunek. Peek go nie czyta i nie przechowuje. Kilka z rzędu zajmuje jeden wiersz |
 | „Nie przeczytano: dzisiejszy limit wyczerpany” | Osiągnięto dzienny limit: e-maili na Twój adres (według doby UTC) albo przesyłek dodawanych przez Twoje konto, e-mailem lub ręcznie. Od połowy limitu e-maili strona pokazuje, ile już wykorzystano |
-| „Nie dodano: twoje dostawy są pełne” | Twoje konto ma 50 aktywnych przesyłek, 500 razem z zarchiwizowanymi |
+| „Nie dodano: lista dostaw jest pełna” | Twoje konto ma 50 aktywnych przesyłek, 500 razem z zarchiwizowanymi |
 
 Dwa przypadki nie zostawiają wiersza: e-mail większy niż 1 MB zostaje odrzucony, a Ty dostajesz z powrotem odpowiedź po angielsku: „This email is too large for Peek. Forward the shipping email alone” (ten e-mail jest za duży dla Peek; przekaż sam e-mail o wysyłce); poczta wysłana na stary lub wyłączony adres przepada bez słowa.
 

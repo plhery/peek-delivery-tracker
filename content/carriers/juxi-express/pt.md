@@ -85,7 +85,7 @@ A Juxi já não mantém qualquer página de seguimento ativa: o botão «在线�
 
 Quando um serviço de seguimento identifica a transportadora que assumiu a distribuição juntamente com o respetivo código, o Peek mostra «Entrega: …» seguido dessa transportadora e do seu número. Enquanto nesse operador existir apenas o pré-aviso sem leituras próprias, apresenta «Anunciada a …, ainda não recebida». Se o Peek conseguir ler o seguimento direto dessa transportadora, consulta-o também e, assim que aparece uma leitura tão recente ou mais recente do que a última registada, passa a seguir o envio diretamente nela preservando o histórico anterior.
 
-Enquanto o Peek acompanha a encomenda através de serviços de seguimento, verifica novidades de hora a hora, de 3 em 3 horas após um dia inteiro sem novas leituras e até de 15 em 15 minutos no dia em que a encomenda está em distribuição se a tiveres aberta ou tiveres as notificações ativas; quando outra transportadora assume a entrega, o Peek adota o ritmo desse operador. Podes ativar alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Juxi Express nem o vendedor por ti.
+Enquanto o Peek acompanha a encomenda através de serviços de seguimento, verifica novidades de hora a hora, de 3 em 3 horas após um dia inteiro sem novas leituras e até de 15 em 15 minutos no dia em que a encomenda está em distribuição se a tiveres aberta ou tiveres as notificações ativas; quando outra transportadora assume a entrega, o Peek adota o ritmo desse operador. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a Juxi Express nem o vendedor por ti.
 
 ## Perguntas frequentes sobre o seguimento da Juxi Express
 

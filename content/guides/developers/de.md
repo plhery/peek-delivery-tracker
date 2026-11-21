@@ -85,7 +85,7 @@ Peek übernimmt neue Releases des Scrapers von selbst, ein Paketdienst braucht a
 Kein GitHub-Konto? Sag es Peek auf der Seite des Pakets, im Web, auf dem iPhone oder auf Android, mit oder ohne Peek-Konto:
 
 :::steps
-- Beantworte die Frage | Findet Peek für ein Paket keinen Paketdienst, fragt seine Seite „Zeigt die Website des Paketdiensts das Paket?“ Wähle „Ja“.
+- Beantworte die Frage | Findet Peek für ein Paket keinen Paketdienst, fragt seine Seite „Zeigt die Website des Paketdienstes das Paket?“ Wähle „Ja“.
 - Nenne den Paketdienst | Gib ihn unter „Wer liefert es?“ bei „Paketdienst oder Shop“ an, oder füge seinen Tracking-Link bei „Seine Tracking-Seite, falls du den Link hast“ ein. Eins von beiden reicht.
 - Schick es ab | Wähle „Senden“. Mitgeschickt wird die Nummer des Pakets, nichts über dich.
 :::

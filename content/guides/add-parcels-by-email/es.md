@@ -71,8 +71,8 @@ Mira en «Últimos correos»: cada correo dice qué hizo.
 | «Sin número de seguimiento» | Peek no encontró ninguno. «Algunas tiendas, como Amazon, no ponen número de seguimiento en sus correos». |
 | «El número de seguimiento solo aparece en tu cuenta de Amazon» | Un correo de envío de Amazon, que normalmente no trae ninguno |
 | «Ya en tus entregas» | Ya sigues ese paquete: nunca se añade dos veces |
-| «Ya en tus entregas: se añadió el nombre de la tienda» | Lo mismo, y el paquete sin nombre tomó el de la tienda. Un nombre que le hayas puesto tú se mantiene |
-| «Ya entregado: no se añadió» | El asunto dice que se entregó. Una entrega fallida, o en un punto de recogida o una taquilla, cuenta como en camino |
+| «Ya en tus entregas: se ha añadido el nombre de la tienda» | Lo mismo, y el paquete sin nombre tomó el de la tienda. Un nombre que le hayas puesto tú se mantiene |
+| «Ya entregado: no se ha añadido» | El asunto dice que se entregó. Una entrega fallida, o en un punto de recogida o una taquilla, cuenta como en camino |
 | «No es un correo de envío: no leído» | El asunto no tiene ninguna palabra de envío en ningún idioma y no viene de un transportista: un boletín, una factura. Peek ni lo lee ni lo guarda. Varios seguidos ocupan una sola línea |
 | «No leído: límite de hoy alcanzado» | Se alcanzó un límite diario: el de correos a tu dirección (por día UTC) o el de paquetes que añade tu cuenta, por correo o a mano. A partir de la mitad del límite de correos, la página muestra cuántos has usado |
 | «No añadido: tus entregas están llenas» | Tu cuenta tiene 50 paquetes activos, 500 contando los archivados |

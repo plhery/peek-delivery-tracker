@@ -22,8 +22,8 @@ afterEach(() => { vi.useRealTimers(); vi.restoreAllMocks(); });
 describe('"Added from your email"', () => {
   it.each([
     ['en', 'Added from your email'], ['fr-FR', 'Ajouté depuis ton e-mail'], ['de', 'Aus deiner E-Mail hinzugefügt'],
-    ['it', 'Aggiunto dalla tua email'], ['es', 'Añadido desde tu correo'], ['pt-PT', 'Adicionado a partir do teu e-mail'],
-    ['pt-BR', 'Adicionado a partir do seu e-mail'], ['pl', 'Dodano z Twojego e-maila'], ['ru', 'Добавлено из вашего письма'],
+    ['it', 'Aggiunto dalla tua e-mail'], ['es', 'Añadido desde tu correo'], ['pt-PT', 'Adicionada a partir do teu e-mail'],
+    ['pt-BR', 'Adicionada pelo seu e-mail'], ['pl', 'Dodano z e-maila'], ['ru', 'Добавлено из вашего письма'],
     ['zh-CN', '已从你的邮件添加'], ['unknown', 'Added from your email'],
   ])('names the parcel and its carrier in the device\'s language, and opens the parcel: %s', (locale, title) => {
     const payload = emailAddedNotification({ ...row, locale, tracking_number: 'PRIVATE', email: 'PRIVATE' });

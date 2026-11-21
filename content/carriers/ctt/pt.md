@@ -94,7 +94,7 @@ Mostra o estado, o código de estado dos CTT e as 20 leituras mais recentes num 
 
 Os números de 22 e 25 algarismos (`00`, quatro algarismos, `00` e 14 algarismos, mais `001` nos de 25) vão para a CTT Express, que o Peek lista à parte, mesmo quando é o Seguir objeto que os segue. Para esses, mostra o histórico sem locais, o dia de entrega previsto, o peso, a hora de entrega e os estados em espanhol, como `El envío fue entregado correctamente`.
 
-Verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento dos CTT a responder; através de serviços de seguimento, de 15 em 15 minutos), e envia-te notificações conforme escolheres: «Todas as leituras», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue acelerar a encomenda nem reclamar por ti.
+Verifica até de 10 em 10 minutos, até de 2 em 2 quando a encomenda sai para entrega (nesse dia, a partir das 6h00, hora local, e enquanto for o próprio seguimento dos CTT a responder; através de serviços de seguimento, de 15 em 15 minutos), e envia-te notificações conforme escolheres: «Todos os registos», «Passos importantes» ou «Só a entrega». Depois de dois dias sem novidades, ou de 12 horas se a encomenda ainda estiver em «Etiqueta criada» ou «Aceite pela transportadora», o Peek passa a consultar apenas uma vez por hora. Não consegue acelerar a encomenda nem reclamar por ti.
 
 ## Perguntas sobre o rastreio CTT
 

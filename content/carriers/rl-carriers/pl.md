@@ -87,7 +87,7 @@ Peek odpytuje wyszukiwarkę R+L wyłącznie po numerze PRO, bez konta i kodu poc
 
 Gdy wyszukiwarka R+L jest niedostępna lub nie udaje się odczytać odpowiedzi, Peek korzysta z [serwisów śledzenia](guide:universal-tracker) i prezentuje zebraną przez nie historię w ich własnym brzmieniu.
 
-Wiersze R+L zawierają datę i godzinę bez strefy czasowej. Peek odczytuje każdy wpis według zegara miasta terminalu, w drugiej kolejności według stanu terminalu (głównej strefy, gdy dany stan USA leży w więcej niż jednej), następnie według sąsiedniego wiersza historii, a w ostateczności według czasu wschodnioamerykańskiego (`America/New_York`), i przelicza wszystkie godziny na strefę Twojego urządzenia („Godziny w Twojej strefie czasowej: …”).
+Wiersze R+L zawierają datę i godzinę bez strefy czasowej. Peek odczytuje każdy wpis według zegara miasta terminalu, w drugiej kolejności według stanu terminalu (głównej strefy, gdy dany stan USA leży w więcej niż jednej), następnie według sąsiedniego wiersza historii, a w ostateczności według czasu wschodnioamerykańskiego (`America/New_York`), i przelicza wszystkie godziny na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”).
 
 Peek sprawdza aktualizacje nawet co 10 minut, dopóki masz otwartą przesyłkę albo w dniu dostawy przy włączonych powiadomieniach; w pozostałym czasie oraz po dwóch dniach bez nowego wiersza (12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w Twoim imieniu z R+L, sklepem ani nadawcą, nie umawia terminu dostawy i nie składa reklamacji.
 

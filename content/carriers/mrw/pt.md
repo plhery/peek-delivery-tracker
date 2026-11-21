@@ -83,7 +83,7 @@ A MRW não indica chat nem e-mail para destinatários, e pede que tires os seus 
 
 O [Peek](/) reconhece logo como MRW a forma de cinco algarismos, uma letra e seis algarismos. Um número de 12 algarismos serve para muitas transportadoras e o Peek não pode perguntar à MRW se o conhece, por isso não escolhe a MRW sozinho: escolhe-a tu em «Alterar transportadora». Escreve os 12 algarismos sem a barra. Uma ligação de seguimento do mrw.es só funciona se tiver dentro a forma com letra; as ligações dos SMS da MRW não funcionam.
 
-No Peek, os estados lidos na MRW aparecem em espanhol, e os desconhecidos aparecem como «Actualización de seguimiento». O Peek mostra o estado, o histórico e cada loja MRW (código postal e localidade, «(Plataforma)» para um centro) num mapa, e pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega». Deixa de fora a morada do ponto de recolha e não dá data prevista de entrega.
+No Peek, os estados lidos na MRW aparecem em espanhol, e os desconhecidos aparecem como «Actualización de seguimiento». O Peek mostra o estado, o histórico e cada loja MRW (código postal e localidade, «(Plataforma)» para um centro) num mapa, e pode enviar-te notificações: «Todos os registos», «Passos importantes» ou «Só a entrega». Deixa de fora a morada do ponto de recolha e não dá data prevista de entrega.
 
 As horas da MRW não trazem fuso horário: o Peek lê-as na hora do local de cada loja e mostra o histórico da própria MRW. Se a MRW der só um resumo, o histórico vem de serviços de seguimento universais; se nenhum o tiver, vês só o estado atual da MRW. A consulta é feita ao seguimento espanhol da MRW, que também responde pelas encomendas da MRW Portugal.
 

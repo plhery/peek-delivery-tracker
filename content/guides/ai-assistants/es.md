@@ -72,7 +72,7 @@ OpenClaw es un asistente que ejecutas tú mismo, en tu propio ordenador o servid
 - Vuelve a iniciar el Gateway | Ejecuta `openclaw gateway start` y luego pregunta a tu agente por tus paquetes.
 :::
 
-Si tu navegador está en otro dispositivo, la página que abre después de iniciar sesión no carga: termina con el código que aparece en su dirección, como explica OpenClaw en el terminal.
+Si tu navegador está en otro dispositivo, la página que abre después de iniciar sesión no cargará: termina con el código que aparece en su dirección, como explica OpenClaw en el terminal.
 
 ## ¿Qué le puedo pedir?
 

@@ -30,7 +30,7 @@ Scaricala dall'[App Store](https://apps.apple.com/app/id6823615370); su un compu
 | Cosa cerchi | Dove trovarlo |
 | --- | --- |
 | Notifiche | «Impostazioni» › «Consegne» › «Notifiche», con un account; vedi [le notifiche di consegna](guide:parcel-notifications) |
-| Aggiungere pacchi via e-mail | «Impostazioni» › «Consegne» › «Aggiungi pacchi via email», con l'etichetta «Beta», con un account; vedi [tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email) |
+| Aggiungere pacchi via e-mail | «Impostazioni» › «Consegne» › «Aggiungi pacchi via e-mail», con l'etichetta «Beta», con un account; vedi [tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email) |
 | Modalità scura | «Impostazioni» › «Preferenze» › «Aspetto», poi «Scuro» |
 | Assistenti IA | Non nell'app: vedi [la guida agli assistenti](guide:ai-assistants) |
 
@@ -40,7 +40,7 @@ Sì. I pacchi che aggiungi compaiono solo su quel dispositivo, e il widget, «Ag
 
 Un pacco seguito senza account viene dimenticato 30 giorni dopo la consegna; «Impostazioni» › «Su questo dispositivo» › «Dimentica tutti» li dimentica tutti in una volta.
 
-Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, gli Amici, le impostazioni delle notifiche e «Aggiungi pacchi via email». Accedi con Apple, con Google o con un codice monouso inviato via e-mail. Per dare prima un'occhiata, tocca «Accedi» nella prima schermata, poi «Esplora la demo» in fondo. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
+Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, gli Amici, le impostazioni delle notifiche e «Aggiungi pacchi via e-mail». Accedi con Apple, con Google o con un codice monouso inviato via e-mail. Per dare prima un'occhiata, tocca «Accedi» nella prima schermata, poi «Esplora la demo» in fondo. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
 
 ## Come aggiungo il widget di Peek alla schermata Home?
 

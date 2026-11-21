@@ -54,7 +54,7 @@ En la web, elige «Ábrelos en otro dispositivo» debajo de tu lista «En este d
 - Ábrelo allí | El otro dispositivo añade los paquetes para los que tiene sitio y dice cuántos han llegado. Vuelve a abrir el enlace para traer el resto.
 :::
 
-> «Quien tenga este enlace puede seguir estos paquetes y olvidarlos: guárdalo para ti.»
+> «Quien tenga este enlace puede seguir estos paquetes y olvidarlos: no lo compartas.»
 
 Las apps no abren estos enlaces: en un móvil, el enlace se abre en el navegador. Para tener los mismos paquetes en las apps y en la web, inicia sesión en cada una.
 

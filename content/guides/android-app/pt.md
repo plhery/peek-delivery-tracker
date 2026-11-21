@@ -60,7 +60,7 @@ Podes. Cola um número de seguimento no primeiro ecrã e o Peek segue-o, listado
 
 Uma encomenda é esquecida 30 dias depois da entrega; «Definições» › «Neste dispositivo» › «Esquecer todas» esquece-as todas de uma vez. As cópias de segurança do próprio telemóvel guardam as encomendas que ele segue e as preferências do Peek.
 
-Uma conta acrescenta a mesma lista em todos os teus dispositivos e em peektracker.com, o passaporte e os amigos, as definições de notificações e «Adicionar encomendas por e-mail» ([como adicionar encomendas por e-mail](guide:add-parcels-by-email)). Inicia sessão com «Continuar com Google» ou «Iniciar sessão com e-mail»; no Android não há início de sessão com a Apple. «Explorar a demonstração», no ecrã de início de sessão, também não precisa de conta. [Usar o Peek sem conta](guide:account-or-guest) compara as duas opções.
+Uma conta acrescenta a mesma lista em todos os teus dispositivos e em peektracker.com, o passaporte e os amigos, as definições de notificações e «Adicionar encomendas por e-mail» ([como adicionar encomendas por e-mail](guide:add-parcels-by-email)). Inicia sessão com «Continuar com o Google» ou «Iniciar sessão com e-mail»; no Android não há início de sessão com a Apple. «Explorar a demonstração», no ecrã de início de sessão, também não precisa de conta. [Usar o Peek sem conta](guide:account-or-guest) compara as duas opções.
 
 ## Como adiciono o widget do Peek ao ecrã principal?
 

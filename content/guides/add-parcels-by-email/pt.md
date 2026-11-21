@@ -75,7 +75,7 @@ Vê em «Últimos e-mails»: cada e-mail diz o que fez.
 | «Já entregue: não adicionada» | O assunto diz que foi entregue. Uma entrega falhada, ou num ponto de levantamento ou num cacifo, conta como a caminho |
 | «Não é um e-mail de envio: não lido» | O assunto não tem nenhuma palavra de envio em nenhuma língua e não vem de uma transportadora: uma newsletter, uma fatura. O Peek nem o lê nem o guarda. Vários seguidos ocupam uma linha |
 | «Não lido: limite de hoje atingido» | Foi atingido um limite diário: o de e-mails para o teu endereço (por dia UTC) ou o de encomendas que a tua conta adiciona, por e-mail ou à mão. A partir de metade do limite de e-mails, a página mostra quantos já usaste |
-| «Não adicionado: as tuas entregas estão cheias» | A tua conta tem 50 encomendas ativas, 500 contando com as arquivadas |
+| «Não adicionada: as tuas entregas estão cheias» | A tua conta tem 50 encomendas ativas, 500 contando com as arquivadas |
 
 Dois casos não deixam linha: um e-mail com mais de 1 MB é recusado, e recebes de volta, em inglês, «This email is too large for Peek. Forward the shipping email alone» (este e-mail é demasiado grande para o Peek; reencaminha só o e-mail de envio); o correio enviado para um endereço antigo ou desativado é descartado sem aviso.
 

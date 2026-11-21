@@ -7,14 +7,14 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-O Peek envia uma notificação quando a tua encomenda tem novidades, no teu navegador em peektracker.com ou na app Peek para iPhone, iPad, Mac e Android. Tu escolhes quanto te conta, «Todas as leituras», «Passos importantes» ou «Só a entrega», e com uma conta o Peek também te pode enviar um e-mail quando uma encomenda estiver pronta para levantamento ou for entregue.
+O Peek envia uma notificação quando a tua encomenda tem novidades, no teu navegador em peektracker.com ou na app Peek para iPhone, iPad, Mac e Android. Tu escolhes quanto te conta, «Todos os registos», «Passos importantes» ou «Só a entrega», e com uma conta o Peek também te pode enviar um e-mail quando uma encomenda estiver pronta para levantamento ou for entregue.
 
 Com uma conta, são três passos:
 
 :::steps
 - Abre «Notificações» | No site ou nas apps para iPhone, iPad e Android, o botão redondo da conta, com a tua inicial, abre «Definições»: em «Entregas», escolhe «Notificações». Num Mac, é um separador da janela de definições do Peek.
 - Ativa «Notificações» | Assim ficam ativas neste navegador ou neste telemóvel. O Peek confirma com uma primeira notificação, «O Peek vai dando notícias».
-- Escolhe em «Que atualizações queres receber?» | «Todas as leituras», «Passos importantes» ou «Só a entrega», e depois «Guardar preferências». A escolha fica guardada com a tua conta, «Em todos os teus dispositivos».
+- Escolhe em «Que atualizações queres receber?» | «Todos os registos», «Passos importantes» ou «Só a entrega», e depois «Guardar preferências». A escolha fica guardada com a tua conta, «Em todos os teus dispositivos».
 :::
 
 O Peek também pode mostrar um pequeno cartão, «Receber atualizações de entrega»: o teu navegador ou telemóvel só pede autorização quando tocas em «Ativar notificações».
@@ -35,7 +35,7 @@ Até dez passos do seguimento, conforme a tua escolha:
 
 | Opção | Descrição do Peek | Passos que notifica |
 | --- | --- | --- |
-| «Todas as leituras» | «Cada novo evento, incluindo os registos habituais da transportadora.» | Etiqueta criada, aceite pela transportadora, em trânsito, na alfândega, problema reportado, em distribuição, tentativa de entrega, pronta para levantamento, entregue, devolvida |
+| «Todos os registos» | «Cada novo evento, incluindo os registos habituais da transportadora.» | Etiqueta criada, aceite pela transportadora, em trânsito, na alfândega, problema reportado, em distribuição, tentativa de entrega, pronta para levantamento, entregue, devolvida |
 | «Passos importantes» | «Entrega, levantamento, alfândega, tentativas falhadas e devoluções.» | Na alfândega, problema reportado, em distribuição, tentativa de entrega, pronta para levantamento, entregue, devolvida |
 | «Só a entrega» | «Quando a encomenda sai para entrega e quando chega.» | Em distribuição, entregue |
 
@@ -45,7 +45,7 @@ O que significa cada passo: [os estados do seguimento explicados](guide:tracking
 
 ## Posso receber notificações sem conta?
 
-Sim, encomenda a encomenda. No site, a página de uma encomenda tem um botão «Notificar-me»: antes de a encomenda se mexer diz «Notificar-me quando se mexer» e, enquanto a transportadora ainda não é conhecida, «Notificar-me quando for encontrada». Em «Notificar-me de», escolhe «Todas as leituras», «Passos importantes» ou «Só a entrega» e depois «Ativar». Como resume o Peek: «Funciona com esta página fechada. Termina quando a encomenda for entregue». Depois de ativado, «Para cada encomenda neste navegador» dá as mesmas notificações às encomendas que segues nesse navegador.
+Sim, encomenda a encomenda. No site, a página de uma encomenda tem um botão «Notificar-me»: antes de a encomenda se mexer diz «Notificar-me quando se mexer» e, enquanto a transportadora ainda não é conhecida, «Notificar-me quando for encontrada». Em «Notificar-me de», escolhe «Todos os registos», «Passos importantes» ou «Só a entrega» e depois «Ativar». Como resume o Peek: «Funciona com esta página fechada. Termina quando a encomenda for entregue». Depois de ativado, «Para cada encomenda neste navegador» dá as mesmas notificações às encomendas que segues nesse navegador.
 
 As apps sem conta não têm a definição «Notificações» nem escolha de passos. As apps para iPhone e Android pedem autorização na primeira vez que uma encomenda chega ao telemóvel e depois inscrevem sozinhas cada encomenda que ainda está a caminho: todas as leituras até se mexer, os passos importantes a partir daí. Num Mac, sem conta, a janela de definições não tem o separador Notificações.
 

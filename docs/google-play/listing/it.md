@@ -28,7 +28,7 @@ Incolla un numero di tracciamento, un link del corriere o un’intera e-mail di 
 Non serve un account. Niente pubblicità.
 
 SAPRÒ QUANDO ARRIVA?
-Accedi con Google o un codice via e-mail e un’e-mail può dirti che è arrivato.
+Accedi con Google o con un codice via e-mail, e Peek può scriverti che è arrivato.
 
 NE SEGUI PIÙ DI UNO?
 Stanno tutti in una lista sola: in cima il prossimo ad arrivare, in viaggio sulla sua mappa. Con un account ritrovi la stessa lista sul tuo telefono e sul web, su peektracker.com. Un widget mostra la prossima consegna nella schermata Home.
@@ -54,4 +54,4 @@ Peek non mostra pubblicità e non vende dati. Disegna da sé le sue mappe: nessu
 Peek è indipendente dai corrieri che consulta. I loro nomi appartengono ai rispettivi proprietari.
 ```
 
-(2063 characters)
+(2067 characters)

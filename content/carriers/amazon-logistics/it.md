@@ -53,7 +53,7 @@ Per assistenza su un ordine, e quindi anche su un pacco Amazon Logistics, Amazon
 
 [Peek](/) non può seguire né salvare un pacco Amazon Logistics: stato, cronologia e foto Amazon li mostra solo nel tuo account. Se incolli uno di questi numeri, o un link track.amazon, Peek controlla prima il tracker pubblico di Amazon Shipping. Se Amazon risponde, è un pacco [Amazon Shipping](carrier:amazon-shipping) o un ordine fatto fuori da Amazon che Amazon spedisce per conto del venditore, e Peek lo segue: «Il tracciamento pubblico è disponibile con Amazon Shipping. Peek terrà aggiornata questa consegna.» Se Amazon non fornisce più la cronologia, puoi tenerlo come riferimento.
 
-Altrimenti compare «Le consegne Amazon Logistics si seguono solitamente da I miei ordini su Amazon.», con il pulsante «Apri i miei ordini Amazon», che apre lo storico ordini del sito indicato dal numero: amazon.it per `IT`, amazon.com per `TBA`, amazon.com.au per `TBAU`. Se il controllo non riesce, tocca «Riprova». Con un numero d'ordine compare invece «Sembra un numero d’ordine Amazon».
+Altrimenti compare «Le consegne Amazon Logistics si seguono di solito da «I miei ordini» su Amazon.», con il pulsante «Apri i miei ordini Amazon», che apre lo storico ordini del sito indicato dal numero: amazon.it per `IT`, amazon.com per `TBA`, amazon.com.au per `TBAU`. Se il controllo non riesce, tocca «Riprova». Con un numero d'ordine compare invece «Sembra un numero d’ordine Amazon».
 
 ## Domande su Amazon Logistics
 

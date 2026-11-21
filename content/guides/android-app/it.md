@@ -60,7 +60,7 @@ Sì. Incolla un codice tracking nella prima schermata e Peek lo segue, elencato 
 
 Un pacco viene dimenticato 30 giorni dopo la consegna; «Impostazioni» › «Su questo dispositivo» › «Dimentica tutti» li dimentica tutti in una volta. I backup del telefono stesso includono i pacchi che segue e le preferenze di Peek.
 
-Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, il passaporto e gli amici, le impostazioni delle notifiche e «Aggiungi pacchi via email» ([tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email)). Accedi con «Continua con Google» o «Accedi con l’e-mail»; su Android non c'è l'accesso con Apple. Neanche «Esplora la demo», nella schermata di accesso, richiede un account. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
+Un account aggiunge la stessa lista su ogni dispositivo e su peektracker.com, il passaporto e gli amici, le impostazioni delle notifiche e «Aggiungi pacchi via e-mail» ([tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email)). Accedi con «Continua con Google» o «Accedi con l’e-mail»; su Android non c'è l'accesso con Apple. Neanche «Esplora la demo», nella schermata di accesso, richiede un account. [Usare Peek senza account](guide:account-or-guest) mette a confronto le due scelte.
 
 ## Come aggiungo il widget di Peek alla schermata Home?
 

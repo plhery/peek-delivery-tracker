@@ -83,7 +83,7 @@ Enquanto a GOFO ainda não conhecer um número `GF`, `CR` ou `MGP`, o Peek mant�
 
 O Peek mostra o estado atual, cada leitura com a cidade e o estado norte-americano indicados pela GOFO (como `Jamaica, NY`), esses pontos num mapa, a hora de entrega e o país de destino. Os eventos aparecem em inglês tal como a GOFO os escreve, enquanto a etapa principal surge em português («Etiqueta criada», «Aceite pela transportadora», «Em trânsito», «Em distribuição», «Entregue» — sem o detalhe adicional que a GOFO por vezes escreve após a vírgula na entrega). A GOFO calcula uma data prevista de entrega, que o Peek exibe até a encomenda entrar «Em distribuição», «Entregue» ou «Devolvida ao remetente»; ficam de fora as fotografias de entrega, coordenadas GPS e peso.
 
-O Peek consulta a GOFO até a cada 30 minutos (inclusive enquanto a encomenda está «Em distribuição»), aguarda 60 minutos após uma consulta falhada e passa para intervalos de uma hora após dois dias sem novidades ou após 12 horas se o envio continuar em «Etiqueta criada» ou «Aceite pela transportadora». Podes ativar alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega». O Peek não consegue contactar a GOFO nem a loja em teu nome.
+O Peek consulta a GOFO até a cada 30 minutos (inclusive enquanto a encomenda está «Em distribuição»), aguarda 60 minutos após uma consulta falhada e passa para intervalos de uma hora após dois dias sem novidades ou após 12 horas se o envio continuar em «Etiqueta criada» ou «Aceite pela transportadora». Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não consegue contactar a GOFO nem a loja em teu nome.
 
 ## Perguntas frequentes sobre o seguimento GOFO Express
 

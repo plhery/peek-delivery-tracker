@@ -43,9 +43,9 @@ Ciascuno dei 12 francobolli ha la sua regola. Toccane uno per leggerla e vedere 
 | «Oltre confine» | Un pacco consegnato scansionato in due paesi, in due momenti diversi |
 | «Intorno al mondo» | Pacchi scansionati per la prima volta in cinque paesi diversi |
 | «Cliente abituale» | 25 pacchi consegnati, archiviati inclusi |
-| «Qui vicino» | Un pacco scansionato per la prima volta e consegnato nello stesso paese |
-| «Finalmente arrivato» | Un pacco che ha impiegato più di 30 giorni dalla prima scansione alla consegna |
-| «Tante consegne» | Tre pacchi consegnati nello stesso giorno |
+| «A due passi» | Un pacco scansionato per la prima volta e consegnato nello stesso paese |
+| «Valeva l’attesa» | Un pacco che ha impiegato più di 30 giorni dalla prima scansione alla consegna |
+| «Citofono rovente» | Tre pacchi consegnati nello stesso giorno |
 | «Ritirato» | Un pacco che hai ritirato di persona in un punto di ritiro o in un [locker](guide:parcel-lockers) |
 | «A casa per le feste» | Un pacco consegnato a dicembre |
 
@@ -53,7 +53,7 @@ Alcune regole mantengono il conteggio corretto:
 
 - Se un corriere ripete la scansione di consegna, il pacco conta comunque una volta sola.
 - I francobolli dei paesi richiedono una scansione collocata in un paese: le scansioni di registrazione, due scansioni nello stesso istante, un semplice codice di uno stato e i resi non contano.
-- «Tante consegne» e «A casa per le feste» seguono il fuso orario del tuo dispositivo nel tuo passaporto, ma l'UTC in ciò che vedono gli amici, quindi i due possono differire intorno alla mezzanotte.
+- «Citofono rovente» e «A casa per le feste» seguono il fuso orario del tuo dispositivo nel tuo passaporto, ma l'UTC in ciò che vedono gli amici, quindi i due possono differire intorno alla mezzanotte.
 
 Cosa conta come consegnato è spiegato in [cosa vogliono dire gli stati della spedizione](guide:tracking-statuses).
 

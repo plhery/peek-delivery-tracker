@@ -28,7 +28,7 @@ Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce. Może
 Bez konta. Bez reklam.
 
 CZY DOWIEM SIĘ, GDY DOTRZE?
-Zaloguj się przez Google albo kodem wysłanym e-mailem, a e-mail może dać Ci znać, że paczka dotarła.
+Zaloguj się przez Google albo kodem wysłanym e-mailem, a dostaniesz e-mail, gdy paczka dotrze.
 
 ŚLEDZISZ WIĘCEJ NIŻ JEDNĄ?
 Wszystkie trafiają na jedną listę: najbliższa jest na górze i podróżuje na swojej mapie. Z kontem masz tę samą listę na telefonie i w przeglądarce, pod adresem peektracker.com. Widżet pokazuje najbliższą dostawę na ekranie głównym.
@@ -37,7 +37,7 @@ KTOŚ JESZCZE NA NIĄ CZEKA?
 Udostępnij link do strony paczki. Żeby ją otworzyć, nie trzeba aplikacji ani konta. Zapakuj ją na prezent, a to, co jest w środku, pozostanie niespodzianką aż do doręczenia.
 
 PASZPORT DOSTAW
-Z kontem każda dostawa liczy się w Twoim paszporcie, a za niektóre dostajesz znaczek. Porównuj paszporty ze znajomymi; Twoje paczki pozostają prywatne.
+Z kontem każda dostawa liczy się w twoim paszporcie, a za niektóre dostajesz znaczek. Porównuj paszporty ze znajomymi; twoje paczki pozostają prywatne.
 
 PONAD 3500 PRZEWOŹNIKÓW
 InPost, Poczta Polska, DPD, DHL, GLS, UPS, FedEx, Packeta, Nova Poshta, Cainiao, China Post, YunExpress i tysiące innych: poczty narodowe, firmy kurierskie i przewoźnicy dużych platform zakupowych.
@@ -49,9 +49,9 @@ W PACZCE ZNAJDZIESZ TEŻ
 • Polski, angielski, niemiecki, francuski, włoski, hiszpański, portugalski, brazylijski portugalski, rosyjski i chiński uproszczony
 
 PRYWATNIE I Z OTWARTYM KODEM
-Peek nie wyświetla reklam i nie sprzedaje danych. Sam rysuje swoje mapy: żaden serwis z mapami nie widzi, którędy jadą Twoje paczki. O paczce śledzonej bez konta zapomina 30 dni po jej doręczeniu. Pobierz swoje dane albo usuń konto w aplikacji, kiedy chcesz. Każda linijka kodu jest na GitHubie: github.com/plhery/peek-delivery-tracker
+Peek nie wyświetla reklam i nie sprzedaje danych. Sam rysuje swoje mapy: żaden serwis z mapami nie widzi, którędy jadą twoje paczki. O paczce śledzonej bez konta zapomina 30 dni po jej doręczeniu. Pobierz swoje dane albo usuń konto w aplikacji, kiedy chcesz. Każda linijka kodu jest na GitHubie: github.com/plhery/peek-delivery-tracker
 
 Peek jest niezależny od przewoźników, których dane odczytuje. Ich nazwy należą do odpowiednich właścicieli.
 ```
 
-(2045 characters)
+(2039 characters)

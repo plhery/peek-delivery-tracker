@@ -31,7 +31,7 @@ No hace falta cuenta. Sin anuncios.
 Inicia sesión con Google o un código por correo y, si quieres, Peek te escribe un correo cuando llega.
 
 ¿SIGUES MÁS DE UNO?
-Van todos en una sola lista, con el siguiente en llegar arriba, viajando en su mapa. Con una cuenta tienes la misma lista en tu móvil y en la web, en peektracker.com. Un widget muestra tu próxima entrega en la pantalla de inicio.
+Van todos en una sola lista, con el siguiente en llegar arriba y su viaje en el mapa. Con una cuenta tienes la misma lista en tu móvil y en la web, en peektracker.com. Un widget muestra tu próxima entrega en la pantalla de inicio.
 
 ¿LO ESPERA ALGUIEN MÁS?
 Comparte la página del paquete con un enlace: para abrirla no hace falta app ni cuenta. Envuélvelo como regalo y lo que lleva dentro seguirá siendo una sorpresa hasta que llegue.
@@ -54,4 +54,4 @@ Peek no muestra anuncios ni vende datos. Dibuja sus propios mapas: ningún servi
 Peek es independiente de los transportistas que consulta. Sus nombres pertenecen a sus respectivos propietarios.
 ```
 
-(2149 characters)
+(2150 characters)

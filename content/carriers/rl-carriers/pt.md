@@ -89,7 +89,7 @@ Quando o rastreador da R+L está inacessível ou não consegue ler o envio, o Pe
 
 As linhas da R+L indicam data e hora sem fuso horário. O Peek lê cada registo pelo relógio da cidade do terminal, na falta dele pelo do estado do terminal (o fuso principal quando um estado norte-americano tem mais de um), senão pelo da linha anterior ou seguinte e, em último caso, na hora da Costa Leste dos EUA (`America/New_York`), convertendo todas as horas para o fuso do teu dispositivo («Horas no teu fuso horário: …»).
 
-O Peek verifica novidades até de 10 em 10 minutos enquanto manténs o envio aberto, ou no dia da entrega com as notificações ativas; no resto do tempo, e após dois dias sem novas linhas (12 horas enquanto estiver em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes ativar alertas para «Todas as leituras», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a R+L, a loja ou o expedidor por ti, agendar entregas nem submeter reclamações.
+O Peek verifica novidades até de 10 em 10 minutos enquanto manténs o envio aberto, ou no dia da entrega com as notificações ativas; no resto do tempo, e após dois dias sem novas linhas (12 horas enquanto estiver em «Etiqueta criada» ou «Aceite pela transportadora»), verifica de hora a hora. Podes ativar alertas para «Todos os registos», «Passos importantes» ou «Só a entrega». O Peek não pode contactar a R+L, a loja ou o expedidor por ti, agendar entregas nem submeter reclamações.
 
 ## Perguntas frequentes sobre o seguimento da R+L Carriers
 

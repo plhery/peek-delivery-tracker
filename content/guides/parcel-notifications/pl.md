@@ -14,7 +14,7 @@ Z kontem to trzy kroki:
 :::steps
 - Otwórz „Powiadomienia” | Na stronie albo w aplikacjach na iPhone’a, iPada i Androida okrągły przycisk konta z Twoim inicjałem otwiera „Ustawienia”: w sekcji „Dostawy” wybierz „Powiadomienia”. Na Macu to karta w oknie ustawień Peek.
 - Włącz „Powiadomienia” | Tak włączysz je w tej przeglądarce lub na tym telefonie. Peek potwierdza to pierwszym powiadomieniem: „Peek da Ci znać”.
-- Wybierz w „Które aktualizacje?” | „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”, a potem „Zapisz ustawienia”. Wybór zapisuje się na Twoim koncie, „Na wszystkich Twoich urządzeniach”.
+- Wybierz w „Które aktualizacje?” | „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”, a potem „Zapisz ustawienia”. Wybór zapisuje się na Twoim koncie, „Na wszystkich urządzeniach”.
 :::
 
 Peek może też pokazać małą kartę „Otrzymuj aktualizacje dostaw”: przeglądarka lub telefon poprosi o zgodę dopiero wtedy, gdy stukniesz „Włącz powiadomienia”.

@@ -74,7 +74,7 @@ Cola o AWB de 13 ou 14 algarismos no [Peek](/): como várias transportadoras usa
 
 Guardada na Delhivery, antes da primeira leitura surge «À espera de Delhivery». O Peek lê o seguimento público sem conta: mostra as leituras concluídas com a cidade (ignorando etapas futuras da barra e dados do destinatário), determina o ano dos marcos de carga pelo dia da semana, lê as horas no fuso indiano (`Asia/Kolkata`, `UTC+5:30`) e converte-as para o fuso do teu dispositivo («Horas no teu fuso horário: …»), sem data prevista. Uma encomenda devolvida ao vendedor aparece como «Devolvida ao remetente» e não «Entregue».
 
-Com a encomenda aberta ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos desde as `06:00` da Índia no dia em que a Delhivery regista «Em distribuição» enquanto o localizador da Delhivery responder; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora («Todas as leituras», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a Delhivery nem a loja por ti.
+Com a encomenda aberta ou no dia da entrega com notificações ativas, o Peek verifica até a cada 10 minutos, e até a cada 2 minutos desde as `06:00` da Índia no dia em que a Delhivery regista «Em distribuição» enquanto o localizador da Delhivery responder; nos restantes casos, e após 12 horas em «Etiqueta criada» / «Aceite pela transportadora» ou dois dias sem leituras, de hora a hora («Todos os registos», «Passos importantes» ou «Só a entrega»). O Peek não pode contactar a Delhivery nem a loja por ti.
 
 ## Perguntas frequentes sobre o seguimento da Delhivery
 

@@ -44,7 +44,7 @@ W trackerze SXW trzy wpisy pochodzą po chińsku z wewnętrznego systemu SXW —
 
 Ponieważ wpisów dokonuje zarówno system SXW, jak i linia przewozowa, dwa komunikaty mogą mówić niemal to samo (`货物电子信息已经收到` obok `Parcel Data Received` albo `到达收货点` obok `Parcel picked up`). Na części tras SXW kopiuje także skany przewoźnika ostatniej mili (np. `Arrived at GOFO Regional Hub` w USA, `Outward MC - Handheld Acceptance` z Royal Mail w Wielkiej Brytanii albo `Onboard for delivery` i `Delivered - Left in a safe place` z Australia Post). Więcej w poradniku [co oznaczają statusy śledzenia](guide:tracking-statuses).
 
-**Godziny i strefy czasowe.** Etapy z Chin Peek odczytuje według czasu pekińskiego (`Asia/Shanghai`, UTC+8) i przelicza na strefę czasową Twojego urządzenia; począwszy od najwcześniejszego wpisu, którego lokalizacja kończy się kodem innego kraju (np. `…, US`, `…, GB` lub `AU`), Peek zachowuje czas lokalny kraju docelowego. Na peektracker.com oraz w aplikacjach na iPhone'a i Androida pod historią widnieje „Godziny w Twojej strefie czasowej: …”.
+**Godziny i strefy czasowe.** Etapy z Chin Peek odczytuje według czasu pekińskiego (`Asia/Shanghai`, UTC+8) i przelicza na strefę czasową Twojego urządzenia; począwszy od najwcześniejszego wpisu, którego lokalizacja kończy się kodem innego kraju (np. `…, US`, `…, GB` lub `AU`), Peek zachowuje czas lokalny kraju docelowego. Na peektracker.com oraz w aplikacjach na iPhone'a i Androida pod historią widnieje „Godziny w twojej strefie czasowej: …”.
 
 ## Kto doręcza paczki SXW Express i jakie opłaty celne obowiązują
 

@@ -23,7 +23,7 @@ Segue as tuas encomendas de qualquer transportadora num mapa, sem conta.
 ```text
 Onde está a minha encomenda?
 
-Cola um número de seguimento, uma ligação da transportadora ou um e-mail de envio inteiro, ou lê o código de barras da etiqueta. O Peek descobre qual das mais de 3500 transportadoras tem a encomenda e mostra a viagem num mapa, cada leitura e o dia em que deve chegar.
+Cola um número de seguimento, uma ligação da transportadora ou um e-mail de envio inteiro, ou lê o código de barras da etiqueta. O Peek descobre qual das mais de 3500 transportadoras tem a encomenda e mostra a viagem num mapa, cada registo e o dia em que deve chegar.
 
 Não precisas de conta. Sem anúncios.
 

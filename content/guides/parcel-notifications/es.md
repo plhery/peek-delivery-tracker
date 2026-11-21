@@ -35,7 +35,7 @@ De hasta diez pasos del seguimiento, según lo que elijas:
 
 | Opción | Descripción de Peek | Pasos que notifica |
 | --- | --- | --- |
-| «Cada escaneo» | «Cada evento nuevo, incluidos los escaneos habituales del transportista.» | Etiqueta creada, admitido por el transportista, en tránsito, en aduanas, incidencia, en reparto, intento de entrega, listo para recoger, entregado, devuelto |
+| «Cada escaneo» | «Cada novedad, incluidos los escaneos habituales del transportista.» | Etiqueta creada, admitido por el transportista, en tránsito, en aduanas, incidencia, en reparto, intento de entrega, listo para recoger, entregado, devuelto |
 | «Pasos importantes» | «Entregas, paquetes listos para recoger, aduanas, intentos fallidos y devoluciones.» | En aduanas, incidencia, en reparto, intento de entrega, listo para recoger, entregado, devuelto |
 | «Solo la entrega» | «Cuando el paquete sale a reparto y cuando llega.» | En reparto, entregado |
 
@@ -45,7 +45,7 @@ Qué significa cada paso: [los estados del seguimiento, explicados](guide:tracki
 
 ## ¿Puedo recibir notificaciones sin cuenta?
 
-Sí, paquete a paquete. En la web, la página de un paquete tiene un botón «Notificarme»: antes de que el paquete se mueva dice «Notificarme cuando se mueva» y, mientras aún no se sabe el transportista, «Notificarme cuando aparezca». En «Notificarme de», elige «Cada escaneo», «Pasos importantes» o «Solo la entrega» y luego «Activar». Peek lo resume así: «Funciona aunque esta página esté cerrada. Se detiene cuando se entrega el paquete». Una vez activado, «Para cada paquete en este navegador» da las mismas notificaciones a los paquetes que sigues en ese navegador.
+Sí, paquete a paquete. En la web, la página de un paquete tiene un botón «Notificarme»: antes de que el paquete se mueva dice «Notificarme cuando se mueva» y, mientras aún no se sabe el transportista, «Notificarme cuando aparezca». En «Notificarme de», elige «Cada escaneo», «Pasos importantes» o «Solo la entrega» y luego «Activar». Peek lo resume así: «Funciona aunque esta página esté cerrada. Se detiene cuando se entrega el paquete». Una vez activado, «Para todos los paquetes de este navegador» da las mismas notificaciones a los paquetes que sigues en ese navegador.
 
 Las apps sin cuenta no tienen el ajuste «Notificaciones» ni elección de pasos. Las apps de iPhone y Android piden permiso la primera vez que llega un paquete al móvil y después suscriben solas cada paquete que sigue en camino: cada escaneo hasta que se mueve, y los pasos importantes a partir de ahí. En un Mac, sin cuenta, la ventana de ajustes no tiene la pestaña Notificaciones.
 

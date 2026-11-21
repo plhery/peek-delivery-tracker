@@ -29,12 +29,12 @@ Cola um número de seguimento, uma ligação ou todo o e-mail de envio. O Peek e
 ```text
 Onde está a minha encomenda?
 
-Cola um número de seguimento, uma ligação da transportadora ou um e-mail de envio inteiro, ou lê o código de barras da etiqueta. O Peek descobre qual das mais de 3500 transportadoras tem a encomenda e mostra a viagem num mapa, cada leitura e o dia em que deve chegar.
+Cola um número de seguimento, uma ligação da transportadora ou um e-mail de envio inteiro, ou lê o código de barras da etiqueta. O Peek descobre qual das mais de 3500 transportadoras tem a encomenda e mostra a viagem num mapa, cada registo e o dia em que deve chegar.
 
 Não precisas de conta. Sem anúncios.
 
 VOU SABER QUANDO SE MEXER?
-Inicia sessão com Apple, Google ou um código por e-mail e o Peek envia-te notificações: em todas as leituras, só nos passos importantes ou só na entrega. Um e-mail também te pode avisar quando chegar.
+Inicia sessão com Apple, Google ou um código por e-mail e o Peek envia-te notificações: em todos os registos, só nos passos importantes ou só na entrega. Um e-mail também te pode avisar quando chegar.
 
 SEGUES MAIS DO QUE UMA?
 Ficam todas numa só lista, com a próxima a chegar no topo, a viajar no seu mapa. Com uma conta, tens a mesma lista no teu iPhone e na web, em peektracker.com. Um widget mantém a tua próxima entrega no ecrã principal.

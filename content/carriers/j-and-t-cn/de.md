@@ -56,7 +56,7 @@ Auf deinen Wunsch oder mit deiner Zustimmung kann der Kurier es auch an einer an
 
 ## J&T-Paket aktualisiert sich nicht, fehlt oder geht zurück
 
-**Noch kein Ergebnis.** Meldet J&Ts Tracker `抱歉！未查到此运单` (Frachtbrief nicht gefunden), prüfe die Nummer beim Verkäufer. Peek zeigt unterdessen „Noch kein Sendungsverlauf“ ohne zugeordneten Dienst bzw. „Warten auf J&T Express China“ unter J&T Express China. Fehlen die letzten vier Telefonziffern und kennt auch kein Tracking-Dienst das Paket, zeigt Peek ab der zweiten Prüfung „Aktualisierung nicht verfügbar“ mit „Sendungsdaten ergänzen“.
+**Noch kein Ergebnis.** Meldet J&Ts Tracker `抱歉！未查到此运单` (Frachtbrief nicht gefunden), prüfe die Nummer beim Verkäufer. Peek zeigt unterdessen „Noch kein Sendungsverlauf“ ohne zugeordneten Dienst bzw. „Warten auf J&T Express China“ unter J&T Express China. Fehlen die letzten vier Telefonziffern und kennt auch kein Tracking-Dienst das Paket, zeigt Peek ab der zweiten Prüfung „Aktualisierung fehlgeschlagen“ mit „Sendungsdaten ergänzen“.
 
 **Keine Bewegung.** Nach vier Tagen ohne neuen Schritt unterwegs meldet Peek mit dem Tag des letzten Schritts „Keine Aktualisierung seit Mo 12. Okt“ (samt Button „Hol dir Hilfe bei J&T Express China“). Siehe [Warum sich das Tracking nicht aktualisiert](guide:tracking-not-updating) und [Pakete aus China verfolgen](guide:tracking-from-china).
 

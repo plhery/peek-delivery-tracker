@@ -614,7 +614,7 @@ describe('FrontDoor', () => {
     await user.type(screen.getByRole('textbox', { name: 'Tracking number or link' }), `${UPS}{Enter}`);
     await user.click(within(await screen.findByRole('alert')).getByRole('button', { name: 'Sign in' }));
     const sheet = screen.getByRole('dialog', { name: 'Sign in to unlock this' });
-    expect(sheet.querySelector('.peek-unlock__what')).toHaveTextContent('Signed in, you keep going, starting with the parcel you just typed. Your parcels on this device can come with you, with their names.');
+    expect(sheet.querySelector('.peek-unlock__what')).toHaveTextContent('Sign in, and you keep going, starting with the parcel you just typed. Your parcels on this device can come with you, with their names.');
     // Not now leaves the door as it was, and notes nothing.
     await user.click(within(sheet).getByRole('button', { name: 'Not now' }));
     await waitFor(() => expect(screen.queryByRole('dialog')).toBeNull());

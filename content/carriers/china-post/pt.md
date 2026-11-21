@@ -106,7 +106,7 @@ Mostra o estado, o histórico com a estação de cada leitura (uma estação esc
 
 Se o número acabar em `CN` e a China Post indicar Portugal como destino, o Peek pergunta também aos CTT com o mesmo número e passa para eles assim que mostram leituras novas, sem perder o histórico da China Post. Se a China Post não indicar o destino ou não responder, o Peek escolhe o correio nacional pela região do teu telemóvel (iPhone ou Android) ou, na web, pelo país da tua ligação quando adicionaste a encomenda.
 
-O Peek verifica de hora a hora, também quando a encomenda sai para entrega. Quando outra transportadora fica com a entrega, como os CTT, o Peek segue o ritmo da que entrega a encomenda. Pode enviar-te notificações: «Todas as leituras», «Passos importantes» ou «Só a entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
+O Peek verifica de hora a hora, também quando a encomenda sai para entrega. Quando outra transportadora fica com a entrega, como os CTT, o Peek segue o ritmo da que entrega a encomenda. Pode enviar-te notificações: «Todos os registos», «Passos importantes» ou «Só a entrega». Não pode contactar a China Post, os CTT nem a loja por ti.
 
 ## Perguntas sobre o rastreio China Post
 

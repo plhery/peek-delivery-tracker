@@ -325,7 +325,7 @@ class TalkBackScreensTest {
                 "Every scan, Every new tracking event, including routine carrier scans. [button]",
                 "Important steps, Delivery, pickup, customs, missed attempts and returns. [button, selected]",
                 "Delivery only, When your parcel goes out for delivery and when it arrives. [button]",
-                "The parcels you track here get these notifications too. One whose notifications you turn off stays quiet.",
+                "The parcels you track here get these notifications too. Mute one, and it stays quiet.",
                 "Save preferences [button]",
                 "BY EMAIL [heading]",
                 "An email when it arrives, Sign in, and Peek writes to the address you sign in with. [button]",

@@ -124,7 +124,7 @@ Normalmente é o plano, o país ou a conta:
 
 - **O teu plano ou o teu país.** Vê a tabela acima e, num plano de equipa ou de espaço de trabalho, pergunta ao proprietário ou ao administrador.
 - **Não tens conta Peek.** Inicia sessão quando o assistente pedir, com um código de seis dígitos que o Peek te envia por e-mail, ou com Google ou Apple, quando o ecrã o oferecer. O teu primeiro início de sessão cria a conta.
-- **O Peek pede-te para iniciar sessão outra vez.** Permitir um assistente exige um início de sessão recente, mesmo com a sessão já iniciada: inicia sessão e depois seleciona «Permitir».
+- **O Peek pede-te que inicies sessão outra vez.** Permitir um assistente exige um início de sessão recente, mesmo com a sessão já iniciada: inicia sessão e depois seleciona «Permitir».
 - **«Esta ligação não serve para ligar um assistente».** Volta a ligar a partir do teu assistente.
 
 Há mais casos em «Se algo correr mal», na [página dos assistentes do Peek](https://peektracker.com/pt/assistants), e a [página de ajuda](https://peektracker.com/support.html) do Peek diz como contactar o Peek.

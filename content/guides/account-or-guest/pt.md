@@ -70,7 +70,7 @@ As apps passam sozinhas as encomendas para a conta quando inicias sessão; as qu
 
 O Peek não tem palavras-passe: envia-te por e-mail um código de seis dígitos, válido durante 30 minutos. Não chegou? [A ajuda do Peek](https://peektracker.com/support.html) diz para veres o spam e confirmares o endereço, esperares um minuto e escolheres de novo «Enviar-me um código».
 
-O site também oferece «Continuar com Google», que abre a mesma conta que o código por e-mail para um endereço Google, e «Continuar com Apple». A app para Android nunca oferece a opção da Apple.
+O site também oferece «Continuar com o Google», que abre a mesma conta que o código por e-mail para um endereço Google, e «Continuar com a Apple». A app para Android nunca oferece a opção da Apple.
 
 ## Como elimino a minha conta do Peek ou os meus dados?
 

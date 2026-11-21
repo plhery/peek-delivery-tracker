@@ -35,7 +35,7 @@ Nie potrzebujesz konta, żeby udostępniać: bez niego właścicielem przesyłki
 
 ## Co widzi druga osoba i czy potrzebuje konta?
 
-Nie potrzebuje konta: link otwiera stronę przesyłki z napisem „Udostępniono Ci · bez konta”. Widzi to samo co Ty, ale bez Twoich prywatnych danych:
+Nie potrzebuje konta: link otwiera stronę przesyłki z napisem „Udostępniono ci · bez konta”. Widzi to samo co Ty, ale bez Twoich prywatnych danych:
 
 | Widzi | Nigdy nie widzi |
 | --- | --- |
@@ -61,7 +61,7 @@ Oto, co widzi druga osoba:
 
 :::journey
 - label | Udostępniasz | Zapakowana, a Twój liścik przechowuje Peek
-- truck | W drodze | „Coś jest do Ciebie w drodze”, data dotarcia, jeśli jest przewidywana, i przesyłka przewiązana wstążką
+- truck | W drodze | „Coś jest w drodze do ciebie”, data dotarcia, jeśli jest przewidywana, i przesyłka przewiązana wstążką
 - home | Doręczona | „Już jest”, Twój liścik, od kogo jest, nazwa przesyłki po „W środku:” i cała trasa
 :::
 

@@ -106,7 +106,7 @@ Nimm den Haken bei allem heraus, was du nicht willst; „Erlauben“ bleibt ausg
 
 ## Was sieht der Assistent, und wie trenne ich ihn?
 
-Er bekommt, was du erlaubt hast: Namen, Absender, Paketdienste, Sendungsnummern, Status, erwartete Tage, Abholstellen und Scans deiner Pakete. Nie den Namen des Empfängers und nie die Postleitzahl oder Telefonziffern, die du angegeben hast: Ein Scan, der den Empfänger, die unterschreibende Person, einen Code oder eine Tür nennt, erreicht ihn nur als Status, etwa „Zugestellt“. Der Ort eines Scans bleibt, wie der Paketdienst ihn geschrieben hat, und kann so den Zustellort mit seiner Postleitzahl nennen. Danach gelten die Datenschutzbestimmungen seines Anbieters. In Peeks [Datenschutzerklärung](https://peektracker.com/privacy.html) steht, was Peek über jeden Assistenten speichert, den du verbindest.
+Er bekommt, was du erlaubt hast: Namen, Absender, Paketdienste, Sendungsnummern, Status, erwartete Tage, Abholstellen und Scans deiner Pakete. Nie den Namen des Empfängers und nie die Postleitzahl oder Telefonziffern, die du angegeben hast: Ein Scan, der den Empfänger, die unterschreibende Person, einen Code oder eine Tür nennt, erreicht ihn nur als Status, etwa „Zugestellt“. Der Ort eines Scans bleibt, wie der Paketdienst ihn geschrieben hat, und kann so den Zustellort mit seiner Postleitzahl nennen. Danach gelten die Datenschutzbestimmungen seines Anbieters. In Peeks [Datenschutzhinweis](https://peektracker.com/privacy.html) steht, was Peek über jeden Assistenten speichert, den du verbindest.
 
 Um einen Assistenten zu trennen, auf Peeks Website:
 
@@ -124,7 +124,7 @@ Meist liegt es am Tarif, am Land oder am Konto:
 
 - **Dein Tarif oder dein Land.** Sieh in der Tabelle oben nach, und frag bei einem Team- oder Workspace-Tarif dessen Inhaber oder Admin.
 - **Kein Peek-Konto.** Melde dich an, wenn der Assistent danach fragt, mit einem sechsstelligen Code, den Peek dir mailt, oder mit Google oder Apple, wo der Bildschirm das anbietet. Bei deiner ersten Anmeldung wird das Konto angelegt.
-- **Peek will, dass du dich erneut anmeldest.** Um einen Assistenten zu erlauben, braucht Peek eine frische Anmeldung, auch wenn du schon angemeldet bist: Melde dich an und wähle dann „Erlauben“.
+- **Peek bittet dich, dich erneut anzumelden.** Um einen Assistenten zu erlauben, braucht Peek eine frische Anmeldung, auch wenn du schon angemeldet bist: Melde dich an und wähle dann „Erlauben“.
 - **„Dieser Link kann keinen Assistenten verbinden“.** Starte die Verbindung in deinem Assistenten noch einmal.
 
 Weitere Fälle stehen unter „Wenn etwas nicht klappt“ auf [Peeks Seite zu Assistenten](https://peektracker.com/de/assistants), und auf Peeks [Hilfeseite](https://peektracker.com/support.html) steht, wie du Peek erreichst.
@@ -136,7 +136,7 @@ Weitere Fälle stehen unter „Wenn etwas nicht klappt“ auf [Peeks Seite zu As
 - [Peek auf GitHub: die Werkzeuge der Assistenten](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – was ein Assistent auflisten, hinzufügen und bearbeiten kann, kein Löschen, Amazon
 - [Peek auf GitHub: der Zustimmungsbildschirm](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/AssistantConsentScreen.tsx) – Kästchen, Erlauben, frische Anmeldung
 - [Peek auf GitHub: Einstellungen, Assistenten](https://github.com/plhery/peek-delivery-tracker/blob/main/src/components/Assistants.tsx) – Adresse, verbundene Assistenten, Trennen
-- [Peek: Datenschutzerklärung (auf Englisch)](https://peektracker.com/privacy.html) – was ein Assistent bekommt, was Peek speichert, 60 Tage, Löschen des Kontos
+- [Peek: Datenschutzhinweis (auf Englisch)](https://peektracker.com/privacy.html) – was ein Assistent bekommt, was Peek speichert, 60 Tage, Löschen des Kontos
 - [Peek auf GitHub: Nutzungsbedingungen (auf Englisch)](https://github.com/plhery/peek-delivery-tracker/blob/main/TERMS.md) – kostenlos, keine Gebühren, kein Abo
 - [Peek: Hilfe (auf Englisch)](https://peektracker.com/support.html) – Anmeldung mit einem sechsstelligen Code
 - [Claude-Hilfe: Erste Schritte mit benutzerdefinierten Connectoren mit Remote MCP](https://support.claude.com/de/articles/11175166-erste-schritte-mit-benutzerdefinierten-connectoren-mit-remote-mcp) – Schritte für einen benutzerdefinierten Konnektor, einer im Free-Tarif

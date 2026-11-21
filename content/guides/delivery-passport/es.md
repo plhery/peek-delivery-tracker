@@ -70,7 +70,7 @@ Crea un perfil de Amigos y envía a tu amigo un enlace de invitación.
 :::steps
 - Crea tu perfil | En «Amigos», elige «Crear perfil», escoge un alias de hasta 24 caracteres, revisa la vista previa y elige «Crear perfil».
 - Elige lo que compartes | «Estadísticas y sellos» empieza activado y «Entregas de esta semana», desactivado; la sección siguiente dice qué muestra cada uno.
-- Invita | Elige «Invitar a un amigo» (al principio, bajo «Añade tu primera amistad»). El enlace es de «Un solo uso · caduca en 7 días».
+- Invita | Elige «Invitar a un amigo» (al principio, bajo «Añade a tu primer amigo»). El enlace es de «Un solo uso · caduca en 7 días».
 - Envíalo | Elige «Compartir invitación», si tu dispositivo permite compartir, o «Copiar enlace».
 :::
 

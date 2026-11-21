@@ -45,7 +45,7 @@ Bez konta lista kończy się pytaniem „Śledzisz wszystkie?” i przyciskiem �
 
 ## Co, jeśli mój numer zna więcej niż jeden przewoźnik?
 
-Wybierasz tego, którego podaje e-mail o wysyłce. Na stronie głównej wiersz przewoźnika mówi na przykład „3 przewoźników zna ten numer” i „wybierz swojego”, a pod nim są ci przewoźnicy, każdy z oznaczeniem „Zna ten numer”, i podpowiedź „Przewoźnicy po pewnym czasie używają numerów ponownie. Wybierz tego, którego podaje wiadomość o wysyłce.” W panelu na stronie po zalogowaniu wiersz po słowach „znają ją:” wymienia przewoźników i kończy się przyciskiem „Wybierz”; jeśli nie wybierzesz, Peek zapyta ponownie po dodaniu przesyłki. AliExpress, który śledzi niektóre paczki pod numerem przewoźnika, który je doręcza, zostaje wybrany bez pytania.
+Wybierasz tego, którego podaje e-mail o wysyłce. Na stronie głównej wiersz przewoźnika mówi na przykład „3 przewoźnicy znają ten numer” i „wybierz swojego”, a pod nim są ci przewoźnicy, każdy z oznaczeniem „Zna ten numer”, i podpowiedź „Przewoźnicy po pewnym czasie używają numerów ponownie. Wybierz tego, którego podaje wiadomość o wysyłce.” W panelu na stronie po zalogowaniu wiersz po słowach „znają ją:” wymienia przewoźników i kończy się przyciskiem „Wybierz”; jeśli nie wybierzesz, Peek zapyta ponownie po dodaniu przesyłki. AliExpress, który śledzi niektóre paczki pod numerem przewoźnika, który je doręcza, zostaje wybrany bez pytania.
 
 Żeby samodzielnie wskazać przewoźnika, wybierz „Zmień” na końcu wiersza przewoźnika. Lista „Przewoźnik” zaczyna się od opcji „Wykryj automatycznie”, potem są sekcje takie jak „Znają ten numer”, „Pasują do numeru” i „Już używane”, a na końcu „Wszyscy przewoźnicy” od A do Z. Szukaj po nazwie, po innej nazwie, na przykład Colissimo, albo po kraju.
 

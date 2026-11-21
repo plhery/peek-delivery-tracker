@@ -102,7 +102,7 @@ Dónde está el número de seguimiento de la devolución: [seguimiento de devolu
 
 ## ¿Puedo seguir un paquete de Douglas en Peek?
 
-Sí, con el número de seguimiento del transportista: pégalo en [Peek](/). Cuando varios transportistas comparten una forma de número, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Peek sigue a más de 3500 transportistas, así que pega el número aunque no sepas de quién es. Si el pedido llega en varios paquetes, añade cada número, y el de tu devolución igual.
+Sí, con el número de seguimiento del transportista: pégalo en [Peek](/). Cuando varios transportistas comparten una forma de número, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Peek sigue a más de 4000 transportistas, así que pega el número aunque no sepas de quién es. Si el pedido llega en varios paquetes, añade cada número, y el de tu devolución igual.
 
 Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con Douglas.
 

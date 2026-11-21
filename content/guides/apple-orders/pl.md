@@ -115,7 +115,7 @@ Kupiłeś w innym sklepie? Warunki Apple obowiązują tylko w internetowym sklep
 
 ## Czy mogę śledzić zamówienie z Apple w Peek?
 
-Tak: wklej do [Peek](/) numer przesyłki z e-maila z powiadomieniem o wysyłce albo ze Stanu zamówienia. Apple nie wymienia przewoźników na swoich stronach, więc i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli numer ma taki sam kształt jak numery innych przewoźników, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika.
+Tak: wklej do [Peek](/) numer przesyłki z e-maila z powiadomieniem o wysyłce albo ze Stanu zamówienia. Apple nie wymienia przewoźników na swoich stronach, więc i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Jeśli numer ma taki sam kształt jak numery innych przewoźników, Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika.
 
 Jeśli w e-mailu nie ma numeru przesyłki, wybierz produkt w zestawieniu zamówień: tam są informacje o jego wysyłce. Apple uprzedza: „W przypadku przesyłek pocztowych nie można śledzić stanu zamówienia”. Jeśli zwrot ma numer przesyłki, wklej go tak samo. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
 

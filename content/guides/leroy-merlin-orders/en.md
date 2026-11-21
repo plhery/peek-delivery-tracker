@@ -95,7 +95,7 @@ A faulty item is covered by the legal guarantee for at least 2 years, free of ch
 
 Yes, with the carrier's tracking number from the shipping email or your order: paste it into [Peek](/). Peek recognises most Colissimo numbers of a digit, a letter and 11 digits by their shape alone, like `6A12345678905` (made up).
 
-Mondial Relay's numbers of 8, 10 or 12 digits share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For any other carrier, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
+Mondial Relay's numbers of 8, 10 or 12 digits share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For any other carrier, paste its number all the same: Peek follows more than 4,000 carriers. If your order comes in several parcels, add each number.
 
 Once the parcel is out for delivery, Peek checks up to every 2 minutes with the carriers it reads directly, or every 5 minutes when the check has to open a browser (on that day, from 6 a.m. local time or, when the carrier gives a window, from half an hour before it opens, while the carrier's own tracker answers). Through tracking services such as 17TRACK it checks every 15 minutes, and a few carriers set a longer interval.
 

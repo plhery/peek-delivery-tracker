@@ -56,7 +56,7 @@ W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Plan
 
 ## Śledzenie przesyłki FedEx Polska w Peek
 
-[Peek](/) nie rozpozna FedEx Polska po samym numerze: 13 cyfr zaczynających się od 6 mają też Correos Chile, Delhivery, Yunda i Korea Post. I tak wklej numer: Peek śledzi ponad 3500 przewoźników. Po dodaniu pyta przewoźników z takimi numerami, w tym FedEx Poland, i pokazuje „FedEx Poland ma tę przesyłkę.”, gdy numer zna tylko FedEx. Jeśli nie zna go nikt albo zna kilku, wybierz FedEx Poland przyciskiem „Zmień”; znajdziesz go też, wpisując „Opek” albo „FedEx Polska”. Peek proponuje FedEx Poland tylko wtedy, gdy zgadza się cyfra kontrolna numeru, ale ręcznie możesz go wybrać zawsze.
+[Peek](/) nie rozpozna FedEx Polska po samym numerze: 13 cyfr zaczynających się od 6 mają też Correos Chile, Delhivery, Yunda i Korea Post. I tak wklej numer: Peek śledzi ponad 4000 przewoźników. Po dodaniu pyta przewoźników z takimi numerami, w tym FedEx Poland, i pokazuje „FedEx Poland ma tę przesyłkę.”, gdy numer zna tylko FedEx. Jeśli nie zna go nikt albo zna kilku, wybierz FedEx Poland przyciskiem „Zmień”; znajdziesz go też, wpisując „Opek” albo „FedEx Polska”. Peek proponuje FedEx Poland tylko wtedy, gdy zgadza się cyfra kontrolna numeru, ale ręcznie możesz go wybrać zawsze.
 
 Link ze strony śledzenia krajowego, z fds2tracking.emea.fedex.com lub fedex.com, albo link z poland.fedex.com z `packageId=` od razu otwiera się jako FedEx Poland.
 

@@ -11,7 +11,7 @@ Peek: Paket-Sendungsverfolgung
 ## Subtitle
 
 ```text
-3500+ Paketdienste, ohne Konto
+4000+ Paketdienste, ohne Konto
 ```
 
 (30 characters)
@@ -29,7 +29,7 @@ Füge eine Sendungsnummer, einen Link oder eine ganze Versandmail ein. Peek find
 ```text
 Wo ist mein Paket?
 
-Füge eine Sendungsnummer, einen Link vom Paketdienst oder eine ganze Versandmail ein, oder scanne den Barcode auf dem Etikett. Peek findet heraus, welcher von über 3500 Paketdiensten das Paket hat, und zeigt seine Reise auf einer Karte, jeden Scan und den Tag, an dem es ankommen soll.
+Füge eine Sendungsnummer, einen Link vom Paketdienst oder eine ganze Versandmail ein, oder scanne den Barcode auf dem Etikett. Peek findet heraus, welcher von über 4000 Paketdiensten das Paket hat, und zeigt seine Reise auf einer Karte, jeden Scan und den Tag, an dem es ankommen soll.
 
 Kein Konto nötig. Keine Werbung.
 
@@ -45,7 +45,7 @@ Teile die Seite des Pakets per Link. Zum Öffnen braucht es weder App noch Konto
 EIN REISEPASS VOLLER LIEFERUNGEN
 Mit einem Konto zählt jede Zustellung in deinem Reisepass, und für manche gibt es eine Briefmarke. Vergleiche Reisepässe mit Freunden; deine Pakete bleiben privat.
 
-3500+ PAKETDIENSTE
+4000+ PAKETDIENSTE
 DHL, Hermes, DPD, GLS, UPS, FedEx, Österreichische Post, Schweizerische Post, PostNL, La Poste, Royal Mail, InPost, China Post, Cainiao, YunExpress und Tausende weitere: nationale Postgesellschaften, Kurierdienste und die Zustelldienste großer Onlineshops.
 
 AUSSERDEM IM PAKET

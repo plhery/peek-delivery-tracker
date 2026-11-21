@@ -83,7 +83,7 @@ Besides Cainiao, you'll see [YunExpress](carrier:yunexpress), [4PX](carrier:4px)
 | `UUS…` | [UniUni](carrier:uniuni), a last-mile courier (US and Canada) |
 | `SPX…` or `GFUS…` | [SpeedX](carrier:speedx) or [GOFO](carrier:gofo), last-mile couriers (US) |
 
-Paste either number into [Peek](/) and it works out the carrier among more than 3,500. For numbers in general, see [tracking number formats](guide:tracking-number-formats).
+Paste either number into [Peek](/) and it works out the carrier among more than 4,000. For numbers in general, see [tracking number formats](guide:tracking-number-formats).
 
 ## Who delivers AliExpress, Temu and Shein parcels in your country?
 

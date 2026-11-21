@@ -37,7 +37,7 @@ Dall'esterno, l'unico modo per entrare è l'accesso di un assistente. Claude, Ch
 
 Con Universal Parcel Scraper, il motore che interroga i corrieri per Peek. Trova il corriere, legge il sito del corriere stesso, ripiega sui tracker universali solo quando deve, e restituisce lo stesso JSON per ogni corriere, con ogni scansione assegnata a una fase di consegna comune.
 
-Il suo README conta oltre 3.500 corrieri, tramite più di 800 adattatori dedicati e fallback universali. Nel suo benchmark su 100 corrieri scelti per chi compra in Europa, gli adattatori restituiscono una cronologia per 91 corrieri, 95 con tutti i fallback, contro i 73 del miglior aggregatore singolo.
+Il suo README conta oltre 4.000 corrieri, tramite più di 800 adattatori dedicati e fallback universali. Nel suo benchmark su 100 corrieri scelti per chi compra in Europa, gli adattatori restituiscono una cronologia per 91 corrieri, 95 con tutti i fallback, contro i 73 del miglior aggregatore singolo.
 
 Oltre alla riga di comando, funziona in tre modi:
 

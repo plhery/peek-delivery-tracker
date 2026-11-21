@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-You don't need to know the carrier to track a parcel: paste its tracking number, the carrier's tracking link or the whole shipping email or text into the field on [Peek](/), and Peek picks out the number, works out the carrier and opens the parcel's page. On peektracker.com there's no account to make, and Peek follows parcels across more than 3,500 carriers.
+You don't need to know the carrier to track a parcel: paste its tracking number, the carrier's tracking link or the whole shipping email or text into the field on [Peek](/), and Peek picks out the number, works out the carrier and opens the parcel's page. On peektracker.com there's no account to make, and Peek follows parcels across more than 4,000 carriers.
 
 :::steps
 - Open peektracker.com | The field under "Where’s my parcel?" says "Paste a number, link or message".
@@ -76,7 +76,7 @@ The number may hold a typo. A number in the 13-character postal format (two lett
 If a letter stands where a digit belongs, or the other way round, and its lookalike makes the number add up, Peek adds "A letter may have been read as a digit." and offers the fix, the changed character highlighted: for `RR12345678SCH`, "Did you mean RR123456785CH?". A wrong digit has too many possible fixes, so Peek says "Compare it with your shipping message." Either way, "Track it as typed" keeps the number as it is.
 
 :::sources
-- [Peek: homepage](https://peektracker.com/) – the field, no account needed, 3,500+ carriers
+- [Peek: homepage](https://peektracker.com/) – the field, no account needed, 4,000+ carriers
 - [Peek: the home page's field](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – "Paste", "Paste and track" on a phone's first visit, the button's wording
 - [Peek: what the field says](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – the carrier line, several numbers, several carriers, the typo, order and pickup notes, the extra fields, the daily limit
 - [Peek: reading a pasted text](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – links, numbers an email labels, check digits and lookalikes

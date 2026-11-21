@@ -78,7 +78,7 @@ Its FAQ, written for shops, says it offers their customers phone, email and live
 
 ## Track a euShipments parcel with Peek
 
-[Peek](/) can't tell a euShipments number by its shape: it has no number rule for euShipments, and an 8-digit number is a weak match for other carriers. Paste it all the same: Peek follows more than 3,500 carriers. Then press "Change" and pick "euShipments", or "Change carrier" on a parcel you already added.
+[Peek](/) can't tell a euShipments number by its shape: it has no number rule for euShipments, and an 8-digit number is a weak match for other carriers. Paste it all the same: Peek follows more than 4,000 carriers. Then press "Change" and pick "euShipments", or "Change carrier" on a parcel you already added.
 
 Peek reads euShipments' tracker. It shows the status, the history, and for warehouse and hub lines the place, with the country for hubs. It keeps euShipments' English status and leaves out the courier's wording from "Tracking Information". When the "Tracking Link:" goes to the tracker of a courier Peek can follow, such as [Econt](carrier:econt), Sameday, FAN Courier, [Packeta](carrier:packeta), Slovenská pošta or Geniki Taxydromiki, with the courier's number in the link, Peek shows "Delivery with" that courier, and the courier's number when it differs from yours. While that courier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. It asks the courier, and follows the parcel there once the courier's tracker shows dated progress at least as recent as euShipments' latest line, keeping euShipments' lines. Otherwise it stays on euShipments' history.
 

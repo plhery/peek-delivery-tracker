@@ -37,7 +37,7 @@ Depuis l'extérieur, la seule porte d'entrée est la connexion d'un assistant. C
 
 Avec Universal Parcel Scraper, le moteur qui interroge les transporteurs pour Peek. Il trouve le transporteur, lit directement le site de ce transporteur, ne se rabat sur des trackers universels que lorsqu'il le faut, et renvoie le même JSON pour chaque transporteur, chaque scan étant classé dans une étape de livraison commune.
 
-Son README compte plus de 3 500 transporteurs, grâce à plus de 800 adaptateurs dédiés et à des services de repli universels. Dans son benchmark de 100 transporteurs choisis pour les acheteurs en Europe, les adaptateurs renvoient un historique pour 91 d'entre eux, 95 avec tous les services de repli, contre 73 pour le meilleur agrégateur seul.
+Son README compte plus de 4 000 transporteurs, grâce à plus de 800 adaptateurs dédiés et à des services de repli universels. Dans son benchmark de 100 transporteurs choisis pour les acheteurs en Europe, les adaptateurs renvoient un historique pour 91 d'entre eux, 95 avec tous les services de repli, contre 73 pour le meilleur agrégateur seul.
 
 En plus de la ligne de commande, il fonctionne de trois façons :
 

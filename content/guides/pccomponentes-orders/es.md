@@ -116,7 +116,7 @@ La devolución es gratis para productos nuevos y reacondicionados. En los del Ma
 
 ## ¿Puedo seguir un paquete de PcComponentes en Peek?
 
-Sí, con el número de la agencia. Cópialo del correo de envío de PcComponentes o de los mensajes de la agencia y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Correos de arriba. La forma de los de GLS la comparten otros transportistas: Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige la agencia que dice el correo. Con otra agencia, pega su número igualmente: Peek sigue a más de 3500 transportistas.
+Sí, con el número de la agencia. Cópialo del correo de envío de PcComponentes o de los mensajes de la agencia y pégalo en [Peek](/). Peek reconoce solo por la forma los números de Correos de arriba. La forma de los de GLS la comparten otros transportistas: Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige la agencia que dice el correo. Con otra agencia, pega su número igualmente: Peek sigue a más de 4000 transportistas.
 
 Un artículo del Marketplace tiene su propio número solo si el vendedor lo envía con seguimiento. Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. El número de pedido de PcComponentes no es un número de seguimiento: Peek no puede seguirlo.
 

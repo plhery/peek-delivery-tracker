@@ -127,7 +127,7 @@ Onde está o número da devolução e quando chega o dinheiro: [seguimento de de
 
 ## Posso seguir uma encomenda Worten no Peek?
 
-Sim, com o número da transportadora. Abre «Ver Detalhes», segue o link até ao site da transportadora, copia o número e cola-o no [Peek](/). O Peek reconhece alguns números só pela forma, como os dos [CTT](carrier:ctt): 2 letras, 9 dígitos e `PT`, como `RR000000005PT` (inventado). Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a de «Enviado por». Com outra transportadora, cola o número na mesma: o Peek segue mais de 3500.
+Sim, com o número da transportadora. Abre «Ver Detalhes», segue o link até ao site da transportadora, copia o número e cola-o no [Peek](/). O Peek reconhece alguns números só pela forma, como os dos [CTT](carrier:ctt): 2 letras, 9 dígitos e `PT`, como `RR000000005PT` (inventado). Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a de «Enviado por». Com outra transportadora, cola o número na mesma: o Peek segue mais de 4000.
 
 Um artigo do Marketplace só tem número próprio se o vendedor o enviar com seguimento. Se a encomenda mudar de transportadora pelo caminho e a primeira indicar a que fica com ela, o Peek guarda o histórico desde o início e passa a seguir a nova. O número da encomenda Worten não é um número de seguimento: cola no Peek o da transportadora.
 

@@ -123,7 +123,7 @@ Une fois l'article collecté ou déposé, le retour est en général finalisé e
 
 ## Puis-je suivre un colis PcComponentes dans Peek ?
 
-Oui, avec le numéro du transporteur. Copie-le depuis l'e-mail d'expédition et colle-le dans [Peek](/). Le numéro Mondial Relay à 8 chiffres a la même forme que ceux d'autres transporteurs : Peek interroge les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; si Peek affiche le mauvais, appuie sur « Changer » et choisis le transporteur que nomme l'e-mail. Si l'e-mail nomme un autre transporteur, colle quand même son numéro : Peek suit plus de 3 500 transporteurs.
+Oui, avec le numéro du transporteur. Copie-le depuis l'e-mail d'expédition et colle-le dans [Peek](/). Le numéro Mondial Relay à 8 chiffres a la même forme que ceux d'autres transporteurs : Peek interroge les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; si Peek affiche le mauvais, appuie sur « Changer » et choisis le transporteur que nomme l'e-mail. Si l'e-mail nomme un autre transporteur, colle quand même son numéro : Peek suit plus de 4 000 transporteurs.
 
 L'article d'un vendeur de la Marketplace a son propre numéro seulement si le vendeur l'expédie avec suivi. Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Le numéro de commande PcComponentes n'est pas un numéro de suivi : Peek ne peut pas le suivre.
 

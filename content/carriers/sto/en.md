@@ -79,7 +79,7 @@ This page lists no phone number: Peek gives only contacts read in the text of ST
 
 ## Track an STO Express parcel with Peek
 
-An STO number's shape alone doesn't tell Peek it's STO's. Paste it all the same: [Peek](/) follows more than 3,500 carriers.
+An STO number's shape alone doesn't tell Peek it's STO's. Paste it all the same: [Peek](/) follows more than 4,000 carriers.
 
 For a 77 number with 15 digits, Peek asks STO Express and BRT at once, and shows "Checking tracking services…" meanwhile. If STO has the parcel, the line under the number names STO Express and says "has this parcel", and Peek files it there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably STO Express" and "Waiting for STO Express’s first scan", and Peek keeps asking STO, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
 

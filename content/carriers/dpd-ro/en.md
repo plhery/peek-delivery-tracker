@@ -88,7 +88,7 @@ DPD doesn't say whether its staff speak English.
 
 ## Tracking a DPD Romania parcel with Peek
 
-Paste the 11-digit waybill in [Peek](/). Other carriers share that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). In Romania it asks DPD Romania first, and you'll see "DPD Romania has this parcel." when DPD knows the number. Elsewhere it asks other carriers: if you see "not found yet · Peek keeps checking", press "Change" and pick DPD Romania, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 3,500 carriers. A tracking.dpd.ro link with `shipmentNumber=` works too.
+Paste the 11-digit waybill in [Peek](/). Other carriers share that shape, so Peek asks the likely ones, by your country (your phone's region, or on the web where you connect from). In Romania it asks DPD Romania first, and you'll see "DPD Romania has this parcel." when DPD knows the number. Elsewhere it asks other carriers: if you see "not found yet · Peek keeps checking", press "Change" and pick DPD Romania, or use "Change carrier" on a parcel already added. Paste it all the same: Peek follows more than 4,000 carriers. A tracking.dpd.ro link with `shipmentNumber=` works too.
 
 Peek asks DPD for its English tracking and shows the status, the history in DPD's words with each scan's town (and country), the expected delivery date while the parcel is on its way, and the delivery time. It leaves out who received it, the signature and the return waybill; DPD gives no weight or sender.
 

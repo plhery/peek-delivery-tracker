@@ -91,7 +91,7 @@ For a parcel that hasn't come, GlobalPost sends you to the seller first: the sel
 
 ## Track a GlobalPost parcel with Peek
 
-[Peek](/) names GlobalPost at once from a GP number ("Detected carrier") and asks GlobalPost's tracker by that number alone: no postcode or account. A link from GlobalPost's tracker works too. For an older SDC number, choose GlobalPost with "Change". If all you have is the delivery company's number, paste it all the same: Peek follows more than 3,500 carriers.
+[Peek](/) names GlobalPost at once from a GP number ("Detected carrier") and asks GlobalPost's tracker by that number alone: no postcode or account. A link from GlobalPost's tracker works too. For an older SDC number, choose GlobalPost with "Change". If all you have is the delivery company's number, paste it all the same: Peek follows more than 4,000 carriers.
 
 Peek shows the status, each scan with its place, the destination country, and the delivery company with its number when GlobalPost names them. It leaves out the progress bar, the sender's and your towns, and postcodes. GlobalPost gives no expected delivery date, weight or proof of delivery, so Peek shows none. "Open the GlobalPost website" opens the number on GlobalPost's tracker.
 

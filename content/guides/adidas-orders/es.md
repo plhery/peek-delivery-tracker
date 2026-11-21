@@ -123,7 +123,7 @@ Sí: pega en [Peek](/) el número de seguimiento del correo de confirmación del
 - CTT Express: 22 cifras, que empiezan por `00`, cuatro cifras más y otra vez `00`.
 - UPS: `1Z` y 16 letras o cifras.
 
-Para un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si su forma la comparten varios, Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Los números de devolución funcionan igual.
+Para un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 4000 transportistas. Si su forma la comparten varios, Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Los números de devolución funcionan igual.
 
 Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con adidas.
 

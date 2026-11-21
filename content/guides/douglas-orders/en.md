@@ -125,7 +125,7 @@ Yes, with the carrier's tracking number: paste it into [Peek](/). Peek recognise
 | DHL (Germany) | Most 20-digit numbers starting with `00340434`, like `00340434610000000001` |
 | Austrian Post | 2 letters, 9 digits and `AT`, like `RR000000005AT` |
 
-DHL's 12-digit numbers, DPD's 14-digit numbers and Austrian Post's 22-digit numbers share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For Atalogic, a Swiss delivery or a partner's carrier, paste its number all the same: Peek follows more than 3,500 carriers. If your order comes in several parcels, add each number.
+DHL's 12-digit numbers, DPD's 14-digit numbers and Austrian Post's 22-digit numbers share their shape with other carriers' numbers. Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the right carrier. For Atalogic, a Swiss delivery or a partner's carrier, paste its number all the same: Peek follows more than 4,000 carriers. If your order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns stay with Douglas.
 

@@ -99,7 +99,7 @@ So stand es am 27. Oktober 2026 auf Heppners deutschen Seiten:
 
 ## Heppner-Lieferung mit Peek verfolgen
 
-[Peek](/) kann Heppner, Mondial Relay oder Colisweb nicht fragen, ob sie eine 8-stellige Nummer kennen. Füg die Nummer trotzdem ein, denn Peek verfolgt mehr als 3.500 Paketdienste. Tipp dann auf „Ändern“ und wähle Heppner unter „Passt zu dieser Nummer“. Heppner-Links helfen Peek nicht weiter, gib die Ziffern ein.
+[Peek](/) kann Heppner, Mondial Relay oder Colisweb nicht fragen, ob sie eine 8-stellige Nummer kennen. Füg die Nummer trotzdem ein, denn Peek verfolgt mehr als 4.000 Paketdienste. Tipp dann auf „Ändern“ und wähle Heppner unter „Passt zu dieser Nummer“. Heppner-Links helfen Peek nicht weiter, gib die Ziffern ein.
 
 Peek fragt dann nach der „Postleitzahl der Lieferadresse“ und verfolgt ohne sie nichts. Eine vierstellige Postleitzahl sucht es bei Heppner zuerst in der Schweiz, dann in Belgien und Luxemburg. Eine falsche Postleitzahl sieht aus wie eine unbekannte Nummer.
 

@@ -86,7 +86,7 @@ Oltre a Cainiao vedrai [YunExpress](carrier:yunexpress), [4PX](carrier:4px), [Su
 | `3A5V` + 9 cifre | CNE |
 | `SF` + 13 cifre | SF Express |
 
-Incolla uno dei due codici su [Peek](/), che trova il corriere tra più di 3.500. Per i codici in generale, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
+Incolla uno dei due codici su [Peek](/), che trova il corriere tra più di 4.000. Per i codici in generale, leggi [come capire il corriere dal numero di tracking](guide:tracking-number-formats).
 
 ## Con quale corriere spediscono AliExpress, Temu e Shein?
 

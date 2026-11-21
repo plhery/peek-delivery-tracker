@@ -85,7 +85,7 @@ Além da Cainiao, é comum aparecerem a [YunExpress](carrier:yunexpress), a [4PX
 | `3A5V` + 9 algarismos | CNE |
 | `CNPRT` + 20 algarismos | Ecoscooting, que entrega em Portugal e Espanha |
 
-Cola qualquer um dos números no [Peek](/), que descobre a transportadora entre mais de 3500. Para os números em geral, vê [como saber qual é a transportadora](guide:tracking-number-formats).
+Cola qualquer um dos números no [Peek](/), que descobre a transportadora entre mais de 4000. Para os números em geral, vê [como saber qual é a transportadora](guide:tracking-number-formats).
 
 ## Qual é a transportadora do AliExpress, da Temu e da Shein em Portugal?
 

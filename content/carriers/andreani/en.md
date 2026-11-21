@@ -81,7 +81,7 @@ For an online order, ask the shop first: it booked the delivery and has the ship
 
 ## Track an Andreani parcel with Peek
 
-A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's. Paste it all the same: Peek follows more than 3,500 carriers.
+A 15-digit number doesn't tell [Peek](/) by its shape alone that it's Andreani's. Paste it all the same: Peek follows more than 4,000 carriers.
 
 **A number starting with 36000, 31000 or 30000.** Peek asks Andreani and BRT at once, and shows "Checking tracking services…" meanwhile. If Andreani has the parcel, the line under the number names Andreani and says "has this parcel", and Peek files the parcel there. If not, it says "not found yet · Peek keeps checking". Add it all the same: the parcel shows "Probably Andreani" and "Waiting for Andreani’s first scan", and Peek keeps asking Andreani, every 6 hours after the first few hours for a parcel in the iPhone or Android app, or in your account. For a lookup without an account, Peek asks during its first 6 hours, then when you open its link (at most every 6 hours, at most daily after the first two days) and, while notifications are on for it, daily until 30 days after the lookup. After a week with nothing, it asks you to check the number with the sender or choose another carrier.
 

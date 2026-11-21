@@ -22,7 +22,7 @@ Anche altri spedizionieri cinesi chiudono i loro numeri con YQ, con davanti lett
 
 **Dove trovarlo.** Se non è nell'e-mail di spedizione del negozio o nella pagina dell'ordine, leggi [dove si trova il codice tracking](guide:find-tracking-number).
 
-**Potresti avere il numero del corriere.** Secondo le pagine delle sue linee, il numero Shouwu segue il pacco dall'inizio alla fine, e quello del corriere la consegna finale: in Italia di UniUni o Poste Italiane, nel Regno Unito di Royal Mail, Yodel o Evri, negli Stati Uniti di USPS. Se il tuo numero non è un SWECN…YQ, incollalo lo stesso: Peek segue più di 3.500 corrieri.
+**Potresti avere il numero del corriere.** Secondo le pagine delle sue linee, il numero Shouwu segue il pacco dall'inizio alla fine, e quello del corriere la consegna finale: in Italia di UniUni o Poste Italiane, nel Regno Unito di Royal Mail, Yodel o Evri, negli Stati Uniti di USPS. Se il tuo numero non è un SWECN…YQ, incollalo lo stesso: Peek segue più di 4.000 corrieri.
 
 **Un link al tracking.** Il pulsante «Copy Link» del tracking di Shouwu copia un link con `?q=` e il numero. Il link apre quel pacco, e puoi incollarlo in Peek così com'è. Il tracking di Shouwu accetta fino a 40 numeri alla volta, uno per riga.
 

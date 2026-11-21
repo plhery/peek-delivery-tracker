@@ -97,7 +97,7 @@ Laut `epostglobalshipping.com`:
 
 ## ePost-Global-Pakete mit Peek verfolgen
 
-[Peek](/) erkennt `EPG` mit 10 bis 15 Ziffern sofort („Erkannter Paketdienst“) und fragt `epgtrack.com` ohne Konto oder Postleitzahl ab. Auch ein Tracking-Link von `epgtrack.com` oder `ppxtrack.com` funktioniert direkt: Peek liest die Nummer aus (bei mehreren Einträgen in `?id=` die erste). Hast du nur die Nummer des Zustellpartners, füge sie trotzdem ein – Peek unterstützt mehr als 3.500 Paketdienste.
+[Peek](/) erkennt `EPG` mit 10 bis 15 Ziffern sofort („Erkannter Paketdienst“) und fragt `epgtrack.com` ohne Konto oder Postleitzahl ab. Auch ein Tracking-Link von `epgtrack.com` oder `ppxtrack.com` funktioniert direkt: Peek liest die Nummer aus (bei mehreren Einträgen in `?id=` die erste). Hast du nur die Nummer des Zustellpartners, füge sie trotzdem ein – Peek unterstützt mehr als 4.000 Paketdienste.
 
 Peek zeigt den Status, jeden Scan mit seinem Ort, das Zielland sowie den benannten Partner samt Partnernummer. Fortschrittsbalken, Postleitzahlen, Depot- oder Hausnummern, Kundenreferenz und Luftfrachtbriefnummern (`MAWB`) lässt Peek weg; voraussichtliches Lieferdatum, Gewicht oder Zustellnachweis liefert `epgtrack.com` nicht. Über „Website von ePost Global öffnen“ gelangst du direkt zu deiner Sendung auf `epgtrack.com`.
 

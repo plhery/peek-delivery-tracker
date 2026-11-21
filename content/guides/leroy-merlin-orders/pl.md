@@ -114,7 +114,7 @@ Tak: wklej do [Peek](/) numer przesyłki od przewoźnika albo numer śledzenia o
 
 - DPD Polska: 13 cyfr i litera, np. `1000000000000A`.
 
-Numery DHL i Rabena mają taki sam kształt jak numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika. Dla Rhenus, Geis albo przewoźnika wybranego przez sprzedawcę Marketplace i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
+Numery DHL i Rabena mają taki sam kształt jak numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika. Dla Rhenus, Geis albo przewoźnika wybranego przez sprzedawcę Marketplace i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
 
 Gdy paczka jest wydana do doręczenia, Peek sprawdza ją nawet co 2 minuty u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp, wśród nich DHL eCommerce w Polsce: co godzinę.
 

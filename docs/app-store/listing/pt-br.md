@@ -29,7 +29,7 @@ Cole um código de rastreamento, um link ou o e-mail de envio inteiro. O Peek de
 ```text
 Cadê minha encomenda?
 
-Cole um código de rastreamento, um link da transportadora ou um e-mail de envio inteiro, ou escaneie o código de barras da etiqueta. O Peek descobre qual das mais de 3.500 transportadoras está com a encomenda e mostra o trajeto num mapa, cada movimentação e o dia em que ela deve chegar.
+Cole um código de rastreamento, um link da transportadora ou um e-mail de envio inteiro, ou escaneie o código de barras da etiqueta. O Peek descobre qual das mais de 4.000 transportadoras está com a encomenda e mostra o trajeto num mapa, cada movimentação e o dia em que ela deve chegar.
 
 Não precisa de conta. Sem anúncios.
 
@@ -45,7 +45,7 @@ Compartilhe a página da encomenda com um link. Quem abrir não precisa de app n
 UM PASSAPORTE DE ENTREGAS
 Com uma conta, toda entrega conta no seu passaporte, e algumas valem um selo. Compare passaportes com os amigos; suas encomendas continuam privadas.
 
-MAIS DE 3.500 TRANSPORTADORAS
+MAIS DE 4.000 TRANSPORTADORAS
 Correios, Jadlog, Loggi, Total Express, J&T Express, SPX Express, Azul Cargo Express, Mandaê, AliExpress/Cainiao, China Post, YunExpress, DHL, FedEx, UPS e milhares de outras: correios nacionais, empresas de entrega expressa e as transportadoras das grandes lojas online.
 
 TAMBÉM VEM NA CAIXA

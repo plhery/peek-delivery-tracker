@@ -56,7 +56,7 @@ On delivery day, FedEx may add a planned slot under the out-for-delivery scan: `
 
 ## Track a FedEx Poland parcel with Peek
 
-[Peek](/) can't tell a FedEx Poland number by its shape: 13 digits starting with 6 also fit Correos Chile, Delhivery, Yunda and Korea Post. Paste it all the same: Peek follows more than 3,500 carriers. When you add it, Peek asks the carriers whose numbers look like this, FedEx Poland among them, and shows "FedEx Poland has this parcel." when only FedEx Poland knows it. If none knows it yet or several do, pick FedEx Poland with "Change"; typing "Opek" or "FedEx Polska" in the search finds it too. Peek suggests FedEx Poland only when the last digit passes the number's check, but you can pick it by hand.
+[Peek](/) can't tell a FedEx Poland number by its shape: 13 digits starting with 6 also fit Correos Chile, Delhivery, Yunda and Korea Post. Paste it all the same: Peek follows more than 4,000 carriers. When you add it, Peek asks the carriers whose numbers look like this, FedEx Poland among them, and shows "FedEx Poland has this parcel." when only FedEx Poland knows it. If none knows it yet or several do, pick FedEx Poland with "Change"; typing "Opek" or "FedEx Polska" in the search finds it too. Peek suggests FedEx Poland only when the last digit passes the number's check, but you can pick it by hand.
 
 A link from FedEx's domestic tracking page, on fds2tracking.emea.fedex.com or fedex.com, or a poland.fedex.com link with `packageId=`, opens as FedEx Poland straight away.
 

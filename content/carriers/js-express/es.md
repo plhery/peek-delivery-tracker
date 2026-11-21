@@ -106,7 +106,7 @@ Como las reclamaciones ante JS Express las tramita el vendedor que contrató el 
 
 ## Seguir un paquete de JS Express con Peek
 
-[Peek](/) reconoce un número de JS Express por su forma (JSE, dos letras, diez cifras y YQ), que no usa ningún otro transportista de su catálogo, y consulta directamente el buscador de JS Express. Si solo tienes el código del repartidor local, pega ese: Peek sigue más de 3500 transportistas y, si no reconoce la empresa por el formato, puedes elegirla con «Cambiar».
+[Peek](/) reconoce un número de JS Express por su forma (JSE, dos letras, diez cifras y YQ), que no usa ningún otro transportista de su catálogo, y consulta directamente el buscador de JS Express. Si solo tienes el código del repartidor local, pega ese: Peek sigue más de 4000 transportistas y, si no reconoce la empresa por el formato, puedes elegirla con «Cambiar».
 
 Peek lee la página en inglés de JS Express y muestra el historial completo, el lugar de cada escaneo y el país de destino, que esa web omite. `到达待取` se muestra en inglés como `Arrived, awaiting collection`, igual que el aviso chino por dirección incorrecta. Peek elimina los nombres de quien recoge el paquete y los números de teléfono, y deja fuera las fotos de entrega y la referencia interna de la tienda. Como entrega prevista enseña el día estimado por JS Express y lo quita en cuanto el paquete pasa a «En reparto», puesto que el reparto corresponde a ese día. Las filas informativas no cambian el estado.
 

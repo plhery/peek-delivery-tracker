@@ -106,7 +106,7 @@ Sim, com o número de seguimento da transportadora: copia-o de «Acompanhar a mi
 | UPS | `1Z` e 16 letras ou algarismos, como `1Z0000000000000000` |
 | DHL Express | `JD01` e 16 algarismos, como `JD014600000000000000` |
 
-Os números de 12 algarismos da FedEx e os de 10 algarismos da DHL Express têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. Para uma transportadora que este guia não nomeia, cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se receberes várias encomendas, adiciona cada número.
+Os números de 12 algarismos da FedEx e os de 10 algarismos da DHL Express têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa. Para uma transportadora que este guia não nomeia, cola o número na mesma: o Peek segue mais de 4000 transportadoras. Se receberes várias encomendas, adiciona cada número.
 
 Se uma encomenda mudar de transportadora pelo caminho e a primeira indicar a que a recebe, o Peek mantém o histórico desde o início e segue a nova. O Peek mostra o que a transportadora publica. As reclamações, os reembolsos, as devoluções e as reparações em garantia ficam com o Back Market e o vendedor.
 

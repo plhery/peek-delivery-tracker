@@ -135,7 +135,7 @@ Ordini mancanti, danneggiati o incompleti vanno segnalati entro due mesi. Dove t
 
 ## Posso tracciare un pacco IKEA in Peek?
 
-Sì, per i pacchi: incolla il numero del corriere in [Peek](/). Peek riconosce dalla sola forma i numeri di Poste Italiane della tabella. Con un altro corriere, incolla comunque il numero: Peek segue più di 3.500 corrieri. Se la forma è comune a più corrieri, Peek chiede a quelli probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere indicato nell'email. Se ricevi più numeri, aggiungili tutti.
+Sì, per i pacchi: incolla il numero del corriere in [Peek](/). Peek riconosce dalla sola forma i numeri di Poste Italiane della tabella. Con un altro corriere, incolla comunque il numero: Peek segue più di 4.000 corrieri. Se la forma è comune a più corrieri, Peek chiede a quelli probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere indicato nell'email. Se ricevi più numeri, aggiungili tutti.
 
 Segui le consegne su appuntamento con i trasportatori di IKEA in «Traccia e gestisci il tuo ordine» e con la telefonata del trasportatore.
 

@@ -77,7 +77,7 @@ Auf `jtexpress.com.cn` (für Festlandchina):
 
 ## J&T-Express-China-Pakete mit Peek verfolgen
 
-Da sich `JT` mit 13 Ziffern mit J&T Express in Südostasien überschneidet, kannst du die Nummer dennoch direkt in [Peek](/) einfügen (über 3.500 unterstützte Paketdienste):
+Da sich `JT` mit 13 Ziffern mit J&T Express in Südostasien überschneidet, kannst du die Nummer dennoch direkt in [Peek](/) einfügen (über 4.000 unterstützte Paketdienste):
 
 - **Allein eingefügt.** Peek zeigt „Tracking-Dienste werden geprüft…“: Nennen die Dienste übereinstimmend J&T Express China samt datierten Schritten, ordnet Peek das Paket dort ein; liegt ein Verlauf ohne eindeutigen Dienst vor, erscheint „Sendungsverlauf gefunden. Peek bestätigt den Paketdienst nach dem Speichern.“; sonst „noch nicht gefunden · Peek prüft weiter“.
 - **Manuell gewählt.** Tippe auf „Ändern“ und wähle J&T Express China unter „Passt zu dieser Nummer“ oder per Suche nach `J&T` bzw. `极兔` unter „Alle Paketdienste“ (oder später über „Paketdienst ändern“, falls ein Paket unter J&T Express gelandet ist).

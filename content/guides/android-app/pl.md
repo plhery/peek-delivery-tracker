@@ -9,7 +9,7 @@ updated: 2026-11-19
 
 Peek na Androida to wersja beta, niedostępna publicznie w Google Play: pobierzesz go ze strony [peektracker.com/android](https://peektracker.com/android), dołączając do testów w Google Play albo instalując go z własnego repozytorium F-Droid Peeka lub z GitHuba. Wymaga Androida 12 lub nowszego i nie wymaga konta, a do ekranu głównego dodaje widżet „Przesyłki”, do menu udostępniania zaś „Dodaj do Peeka”.
 
-Śledzi przesyłki ponad 3500 przewoźników: wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce, a [Peek](/) rozpozna przewoźnika i pokaże trasę na mapie. Jest darmowy, bez zakupów w aplikacji i bez reklam. Wersję na iPhone’a, iPada i Maca opisuje poradnik [Peek na iPhone’a, iPada i Maca](guide:iphone-app).
+Śledzi przesyłki ponad 4000 przewoźników: wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce, a [Peek](/) rozpozna przewoźnika i pokaże trasę na mapie. Jest darmowy, bez zakupów w aplikacji i bez reklam. Wersję na iPhone’a, iPada i Maca opisuje poradnik [Peek na iPhone’a, iPada i Maca](guide:iphone-app).
 
 ## Czy Peek jest w Google Play?
 

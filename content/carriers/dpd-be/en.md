@@ -98,7 +98,7 @@ Paste the 14-digit number in [Peek](/). Other carriers use that shape, so Peek a
 
 You see "DPD Belgium has this parcel." when DPD files the parcel under DPD Belgium, as it does for a parcel sent by a DPD customer in Belgium. A parcel sent through DPD in another country isn't taken for DPD Belgium's, even once it is in Belgium. A parcel from a German shop, for example, may show as DPD Germany's while it is still in Germany, and Peek then follows it from there into Belgium.
 
-If you see "not found yet · Peek keeps checking", press "Change" and pick DPD Belgium, or use "Change carrier" on a parcel already added. Picked by hand, DPD Belgium follows the parcel whichever DPD company sent it. Paste it all the same: Peek follows more than 3,500 carriers.
+If you see "not found yet · Peek keeps checking", press "Change" and pick DPD Belgium, or use "Change carrier" on a parcel already added. Picked by hand, DPD Belgium follows the parcel whichever DPD company sent it. Paste it all the same: Peek follows more than 4,000 carriers.
 
 Paste the 14 digits alone: with a character added after them, Peek's carrier check leaves DPD Belgium out. A myDPD link from www.dpdgroup.com/be/ with `parcelNumber=` works too, and names DPD Belgium straight away.
 

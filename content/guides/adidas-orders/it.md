@@ -122,7 +122,7 @@ Sì: incolla in [Peek](/) il numero di tracking dell'e-mail di conferma della sp
 - Poste Italiane: C, E, L o R, un'altra lettera, 9 cifre e `IT`, come `RR000000005IT`; `RA` o `JF` e 11 cifre; `2IMA` e 10 cifre.
 - UPS: `1Z` e 16 lettere o cifre.
 
-I numeri BRT di 12, 14 o 15 cifre hanno la stessa forma di quelli di altri corrieri. Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Per un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 3.500 corrieri. I numeri di reso funzionano allo stesso modo.
+I numeri BRT di 12, 14 o 15 cifre hanno la stessa forma di quelli di altri corrieri. Peek chiede ai corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Per un corriere che questa guida non nomina, incolla comunque il numero: Peek segue più di 4.000 corrieri. I numeri di reso funzionano allo stesso modo.
 
 Se un pacco cambia corriere lungo la strada e il primo nomina quello che lo prende in carico, Peek tiene la cronologia dall'inizio e segue il nuovo corriere. Peek mostra quello che pubblica il corriere. Reclami, rimborsi e resi restano ad adidas.
 

@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Per tracciare un pacco non serve sapere il corriere: incolla il numero di tracciamento, il link di tracciamento del corriere o l'intera e-mail o SMS di spedizione nel campo di [Peek](/), e Peek trova il numero, capisce il corriere e apre la pagina del pacco. Su peektracker.com non c'è nessun account da creare, e Peek segue i pacchi di oltre 3.500 corrieri.
+Per tracciare un pacco non serve sapere il corriere: incolla il numero di tracciamento, il link di tracciamento del corriere o l'intera e-mail o SMS di spedizione nel campo di [Peek](/), e Peek trova il numero, capisce il corriere e apre la pagina del pacco. Su peektracker.com non c'è nessun account da creare, e Peek segue i pacchi di oltre 4.000 corrieri.
 
 :::steps
 - Apri peektracker.com | Il campo sotto «Dov’è il mio pacco?» dice «Incolla un numero, link o messaggio».
@@ -76,7 +76,7 @@ Nel numero potrebbe esserci un errore di battitura. Un numero nel formato postal
 Se una lettera sta dove dovrebbe esserci una cifra, o viceversa, e il suo sosia fa tornare il numero, Peek aggiunge «Forse una lettera è stata letta come una cifra.» e propone la correzione, con il carattere cambiato evidenziato: per `RR12345678SCH`, «Intendevi RR123456785CH?». Una cifra sbagliata ha troppe correzioni possibili, quindi Peek dice «Confrontalo con il messaggio di spedizione.» In entrambi i casi, «Traccia così com’è» lascia il numero invariato.
 
 :::sources
-- [Peek: home page](https://peektracker.com/it) – il campo, nessun account, oltre 3.500 corrieri
+- [Peek: home page](https://peektracker.com/it) – il campo, nessun account, oltre 4.000 corrieri
 - [Peek: il campo della home page](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – «Incolla», «Incolla e traccia» alla prima visita da telefono, il testo del pulsante
 - [Peek: cosa dice il campo](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – la riga del corriere, più numeri, più corrieri, le note su errori di battitura, ordini e codici di ritiro, i campi in più, il limite giornaliero
 - [Peek: la lettura di un testo incollato](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – link, numeri indicati da un'e-mail, cifre di controllo e sosia

@@ -96,7 +96,7 @@ For an online order, ask the shop first: it booked the delivery and is Quantium'
 
 ## Track a Quantium Solutions parcel with Peek
 
-[Peek](/) can't tell a Quantium number from its shape alone. Paste it all the same: Peek follows more than 3,500 carriers. For ten digits, Peek asks the carriers whose numbers look like it, then tracking services ("Checking tracking services…"). For a number ending in SG or TH, it names Singapore Post or Thailand Post ("Detected carrier"). To follow Quantium's own lines, tap "Change" and pick Quantium Solutions; on a parcel you've already added, use "Change carrier". Pick Quantium for a number of another shape and Peek says it "doesn’t issue numbers like this one".
+[Peek](/) can't tell a Quantium number from its shape alone. Paste it all the same: Peek follows more than 4,000 carriers. For ten digits, Peek asks the carriers whose numbers look like it, then tracking services ("Checking tracking services…"). For a number ending in SG or TH, it names Singapore Post or Thailand Post ("Detected carrier"). To follow Quantium's own lines, tap "Change" and pick Quantium Solutions; on a parcel you've already added, use "Change carrier". Pick Quantium for a number of another shape and Peek says it "doesn’t issue numbers like this one".
 
 A link to Quantium's tracker with `trackno=` works too: Peek takes the number from it and names Quantium Solutions straight away.
 

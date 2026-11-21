@@ -141,7 +141,7 @@ Dónde está el número de seguimiento de la devolución: [seguimiento de devolu
 
 ## ¿Puedo seguir un paquete de IKEA en Peek?
 
-Sí, los paquetes: pega el número de SEUR o Correos en [Peek](/). Peek reconoce solo por la forma los números de Correos de la tabla. Los de SEUR, de 14 cifras, y los de [Correos Express](carrier:correos-express), de 16, comparten forma con otros transportistas. Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el del enlace del correo de IKEA. Si recibes varios números, añade cada uno. Si te lo entrega otra agencia, pega su número igualmente: Peek sigue a más de 3500 transportistas.
+Sí, los paquetes: pega el número de SEUR o Correos en [Peek](/). Peek reconoce solo por la forma los números de Correos de la tabla. Los de SEUR, de 14 cifras, y los de [Correos Express](carrier:correos-express), de 16, comparten forma con otros transportistas. Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el del enlace del correo de IKEA. Si recibes varios números, añade cada uno. Si te lo entrega otra agencia, pega su número igualmente: Peek sigue a más de 4000 transportistas.
 
 Sigue las entregas en camión en «Sigue y gestiona tu pedido» de IKEA y con el aviso de la franja del mismo día.
 

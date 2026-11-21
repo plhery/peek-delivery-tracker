@@ -95,7 +95,7 @@ Al 27 ottobre 2026 Asendia non pubblica un numero di telefono o un'e-mail per ch
 
 ## Seguire un pacco Asendia con Peek
 
-[Peek](/) riconosce subito i numeri `ASE`, `AS…US` e `AHOY`; un numero `ESUS` lo chiede sia ad Asendia sia a DHL eCommerce. Puoi incollare anche un link di track.asendia.com o di A1 Tracking. Un numero postale internazionale va alla posta che l'ha emesso, e se il pacco è diretto in Italia Peek può chiedere anche a Poste Italiane. Se il negozio ti dà un riferimento che non indica nessun corriere, incollalo lo stesso: Peek segue più di 3.500 corrieri. Poi scegli Asendia con «Cambia»: A1 risponde anche ad alcuni riferimenti del negozio o del partner.
+[Peek](/) riconosce subito i numeri `ASE`, `AS…US` e `AHOY`; un numero `ESUS` lo chiede sia ad Asendia sia a DHL eCommerce. Puoi incollare anche un link di track.asendia.com o di A1 Tracking. Un numero postale internazionale va alla posta che l'ha emesso, e se il pacco è diretto in Italia Peek può chiedere anche a Poste Italiane. Se il negozio ti dà un riferimento che non indica nessun corriere, incollalo lo stesso: Peek segue più di 4.000 corrieri. Poi scegli Asendia con «Cambia»: A1 risponde anche ad alcuni riferimenti del negozio o del partner.
 
 Peek chiede prima ad A1 e, se A1 non trova il pacco o non risponde, apre in un browser track.asendia.com. Quel sito mostra le scansioni solo con il «Codice postale di consegna», un campo facoltativo quando aggiungi il pacco: senza, Peek ci legge lo stato attuale e prende la cronologia dai servizi di tracking universali, quando ce l'hanno.
 

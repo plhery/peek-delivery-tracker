@@ -106,7 +106,7 @@ Come seguire un reso: [tracking dei resi](guide:returns-tracking).
 
 ## Posso seguire un pacco Leroy Merlin su Peek?
 
-Sì, se hai il numero di tracking del corriere, per esempio da «Segui il mio ordine» di un ordine del Marketplace: incollalo in [Peek](/). Le pagine di Leroy Merlin Italia non nominano i corrieri, quindi incolla comunque il numero: Peek segue più di 3.500 corrieri.
+Sì, se hai il numero di tracking del corriere, per esempio da «Segui il mio ordine» di un ordine del Marketplace: incollalo in [Peek](/). Le pagine di Leroy Merlin Italia non nominano i corrieri, quindi incolla comunque il numero: Peek segue più di 4.000 corrieri.
 
 Molti numeri hanno la stessa forma di quelli di altri corrieri. Peek interroga i corrieri probabili e mostra quello che conosce il numero. Se lo conoscono in più di uno, premi «Scegli»; se ne mostra uno sbagliato, premi «Cambia» e scegli il corriere giusto. Se l'ordine arriva in più pacchi, aggiungi ogni numero.
 

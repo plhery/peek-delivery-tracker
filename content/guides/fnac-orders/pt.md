@@ -90,7 +90,7 @@ Os custos da devolução são teus, salvo se a loja aceitar pagá-los ou não te
 
 Sim, com o número da transportadora: cola-o no [Peek](/). O Peek reconhece muitos números só pela forma. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que a Fnac ou o vendedor indicam.
 
-O Peek procura entre mais de 3500 transportadoras. Se a encomenda de um vendedor mudar de transportadora pelo caminho e a primeira indicar a que fica com ela, o Peek guarda o histórico desde o início e muda quando o seguimento da nova transportadora avança; o cartão mostra então essa transportadora e o seu número.
+O Peek procura entre mais de 4000 transportadoras. Se a encomenda de um vendedor mudar de transportadora pelo caminho e a primeira indicar a que fica com ela, o Peek guarda o histórico desde o início e muda quando o seguimento da nova transportadora avança; o cartão mostra então essa transportadora e o seu número.
 
 O Peek mostra o que a transportadora publica. As reclamações, os reembolsos e as devoluções ficam entre ti e a Fnac ou o vendedor.
 

@@ -111,7 +111,7 @@ Tak, numerem przewoźnika: skopiuj go z „Mein Paket verfolgen” i wklej do [P
 | UPS | `1Z` i 16 liter lub cyfr, np. `1Z0000000000000000` |
 | DHL Express | `JD01` i 16 cyfr, np. `JD014600000000000000` |
 
-12-cyfrowe numery FedEx, 14-cyfrowe numery DPD i 10-cyfrowe numery listów przewozowych DHL Express mają ten sam kształt co numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Dla przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamawiasz u kilku sprzedawców, dodaj każdy numer.
+12-cyfrowe numery FedEx, 14-cyfrowe numery DPD i 10-cyfrowe numery listów przewozowych DHL Express mają ten sam kształt co numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Dla przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Jeśli zamawiasz u kilku sprzedawców, dodaj każdy numer.
 
 Jeśli paczka po drodze zmienia przewoźnika, a pierwszy podaje następnego, Peek zachowuje historię od początku i śledzi nowego. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy, zwroty towaru i naprawy gwarancyjne załatwiasz z Back Market i sprzedawcą.
 

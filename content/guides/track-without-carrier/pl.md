@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Nie musisz znać przewoźnika, żeby śledzić przesyłkę: wklej jej numer, link do śledzenia od przewoźnika albo cały e-mail czy SMS o wysyłce do pola na stronie [Peeka](/), a Peek wyłowi numer, ustali przewoźnika i otworzy stronę przesyłki. Na peektracker.com nie trzeba zakładać konta, a Peek śledzi przesyłki ponad 3500 przewoźników.
+Nie musisz znać przewoźnika, żeby śledzić przesyłkę: wklej jej numer, link do śledzenia od przewoźnika albo cały e-mail czy SMS o wysyłce do pola na stronie [Peeka](/), a Peek wyłowi numer, ustali przewoźnika i otworzy stronę przesyłki. Na peektracker.com nie trzeba zakładać konta, a Peek śledzi przesyłki ponad 4000 przewoźników.
 
 :::steps
 - Otwórz peektracker.com | W polu pod napisem „Gdzie jest moja paczka?” widać podpowiedź „Wklej numer, link lub wiadomość”.
@@ -76,7 +76,7 @@ Numer może zawierać literówkę. Numer w 13-znakowym formacie pocztowym (dwie 
 Jeśli w miejscu cyfry stoi litera albo odwrotnie, a podobny do niej znak sprawia, że numer się zgadza, Peek dodaje „Być może litera została odczytana jako cyfra.” i proponuje poprawkę z wyróżnionym zmienionym znakiem: dla `RR12345678SCH` „Czy chodziło o RR123456785CH?”. Błędna cyfra ma zbyt wiele możliwych poprawek, więc Peek mówi „Porównaj go z wiadomością o wysyłce.” W obu przypadkach „Śledź tak, jak wpisano” zostawia numer bez zmian.
 
 :::sources
-- [Peek: strona główna](https://peektracker.com/pl) – pole, bez konta, ponad 3500 przewoźników
+- [Peek: strona główna](https://peektracker.com/pl) – pole, bez konta, ponad 4000 przewoźników
 - [Peek: pole na stronie głównej](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – „Wklej”, „Wklej i śledź” przy pierwszej wizycie na telefonie, napis na przycisku
 - [Peek: co mówi pole](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – wiersz przewoźnika, kilka numerów, kilku przewoźników, uwagi o literówce, zamówieniu i kodzie odbioru, dodatkowe pola, dzienny limit
 - [Peek: odczytywanie wklejonego tekstu](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – linki, numery opisane w e-mailu, cyfry kontrolne i podobne znaki

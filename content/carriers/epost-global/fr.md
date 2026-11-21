@@ -97,7 +97,7 @@ Sur `epostglobalshipping.com` :
 
 ## Suivre un colis ePost Global avec Peek
 
-[Peek](/) identifie aussitôt un numéro composé de `EPG` et 10 à 15 chiffres (« Transporteur détecté ») et interroge `epgtrack.com` sans compte ni code postal. Tu peux aussi coller un lien de suivi `epgtrack.com` ou `ppxtrack.com` : Peek en extrait le numéro (le premier si `?id=` en contient plusieurs). Si tu n'as que le numéro du transporteur partenaire, colle-le quand même : Peek suit plus de 3 500 transporteurs.
+[Peek](/) identifie aussitôt un numéro composé de `EPG` et 10 à 15 chiffres (« Transporteur détecté ») et interroge `epgtrack.com` sans compte ni code postal. Tu peux aussi coller un lien de suivi `epgtrack.com` ou `ppxtrack.com` : Peek en extrait le numéro (le premier si `?id=` en contient plusieurs). Si tu n'as que le numéro du transporteur partenaire, colle-le quand même : Peek suit plus de 4 000 transporteurs.
 
 Peek affiche le statut, chaque étape avec son lieu, le pays de destination ainsi que le partenaire et son numéro lorsqu'ePost Global les communique. Il écarte la barre de progression, les codes postaux, les numéros de dépôt ou de rue, la référence client et les numéros de lettre de transport aérien (`MAWB`). Comme `epgtrack.com` ne fournit ni date de livraison prévue, ni poids, ni preuve de livraison, Peek n'en affiche pas. Le lien « Ouvrir le site ePost Global » ouvre directement ton numéro sur `epgtrack.com`.
 

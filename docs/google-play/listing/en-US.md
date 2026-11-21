@@ -23,7 +23,7 @@ Track any package or order, from any carrier, on a map. No account needed.
 ```text
 Where’s my package?
 
-Track any package or order: paste a tracking number, a carrier link, or a whole shipping email, or scan the barcode on the label. Peek figures out which of 3,500+ carriers has the shipment and shows its journey on a map, every scan, and the day it should arrive.
+Track any package or order: paste a tracking number, a carrier link, or a whole shipping email, or scan the barcode on the label. Peek figures out which of 4,000+ carriers has the shipment and shows its journey on a map, every scan, and the day it should arrive.
 
 No account needed. No ads.
 
@@ -39,7 +39,7 @@ Share the package’s page with a link. They need no app and no account. Wrap it
 A PASSPORT OF DELIVERIES
 With an account, every delivery counts in your passport, and some earn a stamp. Compare passports with friends; your packages stay private.
 
-3,500+ CARRIERS
+4,000+ CARRIERS
 USPS, UPS, FedEx, DHL, Canada Post, Royal Mail, Evri, DPD, GLS, An Post, Australia Post, La Poste, Swiss Post, PostNL, Correos, Poste Italiane, InPost, China Post, Cainiao, YunExpress, and thousands more: national postal services, couriers, and marketplace shippers, for domestic and international shipments.
 
 ALSO IN THE BOX

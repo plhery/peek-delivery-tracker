@@ -110,7 +110,7 @@ A devolução é grátis para produtos novos e recondicionados. Nos do Marketpla
 
 ## Posso seguir uma encomenda PcComponentes no Peek?
 
-Sim, com o número da transportadora. Copia-o do e-mail de envio da PcComponentes ou das mensagens da transportadora e cola-o no [Peek](/). O Peek procura a transportadora entre mais de 3500. Reconhece só pela forma, por exemplo, os números dos [CTT](carrier:ctt) com 2 letras, 9 dígitos e `PT`, como `DA000000005PT` (inventado). Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que o e-mail indica.
+Sim, com o número da transportadora. Copia-o do e-mail de envio da PcComponentes ou das mensagens da transportadora e cola-o no [Peek](/). O Peek procura a transportadora entre mais de 4000. Reconhece só pela forma, por exemplo, os números dos [CTT](carrier:ctt) com 2 letras, 9 dígitos e `PT`, como `DA000000005PT` (inventado). Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que o e-mail indica.
 
 Um artigo do Marketplace só tem número próprio se o vendedor o enviar com seguimento. Se a encomenda mudar de transportadora pelo caminho e a primeira indicar a que fica com ela, o Peek guarda o histórico desde o início e segue a nova. O número da encomenda da PcComponentes não é um número de seguimento: o Peek não o consegue seguir.
 

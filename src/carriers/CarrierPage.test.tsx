@@ -78,7 +78,7 @@ describe('the carriers’ own page', () => {
   it('lists the carriers of its language, each with its name, its page’s title and what it answers', () => {
     render(<CarrierIndex locale="en" t={t('en', en)} carriers={CARRIER_LINKS.en.map((link) => ({ link, description: `About ${link.id}.` }))} />);
     expect(screen.getByRole('heading', { level: 1, name: 'Tracking by carrier' })).toBeVisible();
-    expect(screen.getByText(/Peek tracks more than 3,500 carriers/)).toBeVisible();
+    expect(screen.getByText(/Peek tracks more than 4,000 carriers/)).toBeVisible();
     const cards = screen.getAllByRole('link');
     expect(cards.map((card) => card.getAttribute('href'))).toEqual(CARRIER_LINKS.en.map(({ slug }) => `/carriers/${slug}`));
     expect(within(cards[0]).getByText(carrier.title)).toBeVisible();

@@ -128,7 +128,7 @@ Tak, z numerem przesyłki od przewoźnika: wklej go do [Peek](/). Tak wyglądaj�
 | --- | --- | --- |
 | InPost | 24 cyfry | Pyta prawdopodobnych przewoźników |
 
-Taki kształt mają też numery kilku innych przewoźników. Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Z numerem DHL postępuj tak samo. Dla przewoźnika, którego ten poradnik nie wymienia, na przykład przewoźnika innej marki, i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Jeśli zamówienie przyszło w dwóch paczkach, dodaj oba numery. Z numerem przesyłki zwrotnej postępuj tak samo.
+Taki kształt mają też numery kilku innych przewoźników. Peek pyta prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego. Z numerem DHL postępuj tak samo. Dla przewoźnika, którego ten poradnik nie wymienia, na przykład przewoźnika innej marki, i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Jeśli zamówienie przyszło w dwóch paczkach, dodaj oba numery. Z numerem przesyłki zwrotnej postępuj tak samo.
 
 Gdy paczka jest wydana do doręczenia, Peek sprawdza ją nawet co 2 minuty u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza co 15 minut, a niektórzy przewoźnicy mają dłuższy odstęp, na przykład DHL eCommerce w Polsce: co godzinę.
 

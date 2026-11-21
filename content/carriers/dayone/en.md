@@ -96,7 +96,7 @@ DayOne's tracker gives no phone number, chat, contact form or address. It stores
 
 ## Track a DayOne parcel with Peek
 
-[Peek](/) names DayOne at once from a DOT number with 16 digits ("Detected carrier"). A dayonetrack.com tracking link with `trackNo=` works too. For any other number, paste it all the same: Peek follows more than 3,500 carriers. When a number's shape fits several carriers, Peek shows "Checking tracking services…" while it asks around. If Peek doesn't name DayOne for your number, tap "Change" and pick DayOne under "All carriers" (searching Day One finds it too), or use "Change carrier" on a parcel you've already added.
+[Peek](/) names DayOne at once from a DOT number with 16 digits ("Detected carrier"). A dayonetrack.com tracking link with `trackNo=` works too. For any other number, paste it all the same: Peek follows more than 4,000 carriers. When a number's shape fits several carriers, Peek shows "Checking tracking services…" while it asks around. If Peek doesn't name DayOne for your number, tap "Change" and pick DayOne under "All carriers" (searching Day One finds it too), or use "Change carrier" on a parcel you've already added.
 
 For a DOT0 number, Peek reads DayOne's own tracker: the status, each scan with its place, the destination country and the time of delivery. For a DOT1 number, it asks tracking services instead.
 

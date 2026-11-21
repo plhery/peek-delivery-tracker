@@ -91,7 +91,7 @@ Il sito è solo in cinese, senza moduli di contatto né chat per chi riceve: per
 
 [Peek](/) riconosce subito Jifan da un codice `JFGJ…CN` («Corriere rilevato»): nessun altro corriere seguito da Peek usa questa struttura. Funziona anche un link a `szjf56.cn/index/tracknumber/track` con un codice `JFGJ…CN` dopo `nos=` (se ne contiene più d'uno, Peek prende il primo).
 
-Se il venditore ti ha dato un altro codice, incollalo comunque: Peek segue oltre 3.500 corrieri, interroga i servizi di tracciamento quando il formato non individua un vettore e ti permette di scegliere con «Cambia» o «Cambia corriere». Peek interroga il tracker di Jifan solo per i numeri `JFGJ…CN`: se selezioni Jifan su un altro formato, avvisa che «non emette numeri come questo».
+Se il venditore ti ha dato un altro codice, incollalo comunque: Peek segue oltre 4.000 corrieri, interroga i servizi di tracciamento quando il formato non individua un vettore e ti permette di scegliere con «Cambia» o «Cambia corriere». Peek interroga il tracker di Jifan solo per i numeri `JFGJ…CN`: se selezioni Jifan su un altro formato, avvisa che «non emette numeri come questo».
 
 Peek legge dal tracker di Jifan lo stato, ogni riga nell'inglese originale e il Paese di destinazione. Quando negli Stati Uniti una riga inizia con città, Stato e codice ZIP, Peek usa città e Stato come località della scansione ed elimina lo ZIP. Ogni orario viene letto come ora di Pechino (`UTC+8`) e mostrato nel fuso del tuo dispositivo; su `peektracker.com` e nelle app iPhone e Android la cronologia termina con «Orari nel tuo fuso orario: …». «Apri il sito Jifan» apre il tuo numero su `szjf56.cn`.
 

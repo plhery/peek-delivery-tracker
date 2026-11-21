@@ -104,7 +104,7 @@ Poiché i reclami verso JS Express spettano al venditore che ha acquistato la sp
 
 ## Tracciare un pacco JS Express con Peek
 
-[Peek](/) riconosce un codice JS Express dalla sua forma (JSE, due lettere, dieci cifre e YQ), non usata da nessun altro corriere del suo catalogo, e interroga direttamente il tracking di JS Express. Se hai solo il codice del corriere locale, incolla quello: Peek segue più di 3.500 corrieri e, se non riconosce il vettore dal formato, puoi sceglierlo con «Cambia».
+[Peek](/) riconosce un codice JS Express dalla sua forma (JSE, due lettere, dieci cifre e YQ), non usata da nessun altro corriere del suo catalogo, e interroga direttamente il tracking di JS Express. Se hai solo il codice del corriere locale, incolla quello: Peek segue più di 4.000 corrieri e, se non riconosce il vettore dal formato, puoi sceglierlo con «Cambia».
 
 Peek legge la pagina inglese di JS Express e mostra l'intera cronologia, il luogo di ogni scansione e il Paese di destinazione, che quella pagina tralascia. `到达待取` compare in inglese come `Arrived, awaiting collection`, così come l'avviso cinese sull'indirizzo errato. I nomi di chi ritira la consegna e i numeri di telefono vengono rimossi, e restano fuori anche le foto di consegna e il numero d'ordine del negozio. Come consegna prevista Peek mostra il giorno stimato da JS Express e lo nasconde non appena il pacco passa «In consegna», dato che il giro avviene in giornata. Le righe che non sono scansioni non cambiano lo stato.
 

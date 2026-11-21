@@ -139,7 +139,7 @@ Ja: Füg die Sendungsnummer aus der Versandbestätigung in [Peek](/) ein. Allein
 - UPS: `1Z` und 16 Buchstaben oder Ziffern.
 - Schweizerische Post: 18 Ziffern ab `98` oder `99`, oder zwei Buchstaben, 9 Ziffern und `CH`, wie `RR000000005CH`.
 
-Die 12-stelligen DHL-Nummern und die 14-stelligen Nummern von Hermes und DPD teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für einen Paketdienst, den dieser Ratgeber nicht nennt, gilt: Füg seine Nummer trotzdem ein, Peek verfolgt mehr als 3.500 Paketdienste. Rücksendenummern funktionieren genauso.
+Die 12-stelligen DHL-Nummern und die 14-stelligen Nummern von Hermes und DPD teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für einen Paketdienst, den dieser Ratgeber nicht nennt, gilt: Füg seine Nummer trotzdem ein, Peek verfolgt mehr als 4.000 Paketdienste. Rücksendenummern funktionieren genauso.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Meldungen, Erstattungen und Rückgaben laufen über adidas.
 

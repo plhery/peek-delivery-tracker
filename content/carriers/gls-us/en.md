@@ -81,7 +81,7 @@ As listed on GLS US's [customer support page](https://gls-group.com/US/en/suppor
 
 **An SH number.** Paste it in the box above. While Peek asks GLS US, the carrier line reads "Checking tracking services…". When GLS US knows the number, the line names GLS US and says "has this parcel", and Peek files the parcel under it. When GLS US doesn't know it yet, the line says "not found yet · Peek keeps checking". Add the parcel anyway: it shows "Probably GLS US" as its carrier until GLS US scans it.
 
-**Another number.** Paste it all the same: Peek follows more than 3,500 carriers. Then pick GLS US yourself:
+**Another number.** Paste it all the same: Peek follows more than 4,000 carriers. Then pick GLS US yourself:
 
 1. Press "Change" beside the carrier line and search for GLS US ("GSO", "Golden State Overnight", "General Logistics Systems US" or "United States" finds it too).
 2. Pick GLS US: the line then reads "Chosen by you". Track the parcel.

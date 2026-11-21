@@ -120,7 +120,7 @@ O reembolso vai para o mesmo método de pagamento, até 14 dias depois de a H&M 
 
 ## Posso seguir uma encomenda H&M no Peek?
 
-Sim, se tiveres o número da transportadora: cola-o no [Peek](/). A H&M Portugal não nomeia as suas transportadoras, por isso cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Se a encomenda vier em vários pacotes, adiciona cada número.
+Sim, se tiveres o número da transportadora: cola-o no [Peek](/). A H&M Portugal não nomeia as suas transportadoras, por isso cola o número na mesma: o Peek segue mais de 4000 transportadoras. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Se a encomenda vier em vários pacotes, adiciona cada número.
 
 Quando o pacote sai para entrega, o Peek verifica até de 2 em 2 minutos nas transportadoras que lê diretamente, ou de 5 em 5 minutos quando a verificação tem de abrir um navegador (nesse dia, a partir das 6h00, hora local, ou, se a transportadora der uma janela, a partir de meia hora antes de ela começar, e enquanto for o próprio seguimento da transportadora a responder). Através de serviços de seguimento como o 17TRACK, verifica de 15 em 15 minutos, e algumas transportadoras fixam um intervalo maior.
 

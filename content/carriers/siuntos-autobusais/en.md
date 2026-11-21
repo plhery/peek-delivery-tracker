@@ -83,7 +83,7 @@ For a parcel, call the terminal in the town it was sent to or from, and give the
 
 ## Track a Siuntos autobusais parcel with Peek
 
-[Peek](/) can't tell a Siuntos autobusais parcel by its number, because Peek knows no number shape for it. Paste the number all the same: Peek follows more than 3,500 carriers. While you add it, Peek may check tracking services or carriers whose numbers have the same shape ("Checking tracking services…"). That doesn't mean they carry your parcel.
+[Peek](/) can't tell a Siuntos autobusais parcel by its number, because Peek knows no number shape for it. Paste the number all the same: Peek follows more than 4,000 carriers. While you add it, Peek may check tracking services or carriers whose numbers have the same shape ("Checking tracking services…"). That doesn't mean they carry your parcel.
 
 To follow the parcel as a Siuntos autobusais one, press "Change" and type "Siuntos autobusais" in "Search carriers". "Kautra" finds it too. It isn't listed under "Fits this number". On a parcel you've already added, press "Change carrier". A link from siuntosautobusais.lt doesn't help: the tracker there takes the number in a form, so its address holds no number, and Peek reads none from it.
 

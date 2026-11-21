@@ -129,7 +129,7 @@ Ja, mit der Sendungsnummer des Paketdienstes: Füg sie in [Peek](/) ein. Peek er
 | DHL | Die meisten 20-stelligen Nummern ab `00340434`, wie `00340434610000000001` |
 | Österreichische Post | 2 Buchstaben, 9 Ziffern und `AT`, wie `RR000000005AT` |
 
-Die 12-stelligen DHL-Nummern, die 14-stelligen DPD-Nummern und die 22-stelligen Nummern der Österreichischen Post teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für Atalogic, eine Lieferung in die Schweiz oder den Paketdienst eines Partners füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
+Die 12-stelligen DHL-Nummern, die 14-stelligen DPD-Nummern und die 22-stelligen Nummern der Österreichischen Post teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für Atalogic, eine Lieferung in die Schweiz oder den Paketdienst eines Partners füg die Nummer trotzdem ein: Peek verfolgt mehr als 4.000 Paketdienste. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rückgaben laufen über Douglas.
 

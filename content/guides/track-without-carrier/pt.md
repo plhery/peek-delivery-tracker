@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Não precisas de saber a transportadora para seguir uma encomenda: cola o número de seguimento, a ligação de seguimento da transportadora ou o e-mail ou SMS de envio inteiro no campo do [Peek](/), e o Peek encontra o número, descobre a transportadora e abre a página da encomenda. Em peektracker.com não tens de criar conta, e o Peek segue encomendas de mais de 3500 transportadoras.
+Não precisas de saber a transportadora para seguir uma encomenda: cola o número de seguimento, a ligação de seguimento da transportadora ou o e-mail ou SMS de envio inteiro no campo do [Peek](/), e o Peek encontra o número, descobre a transportadora e abre a página da encomenda. Em peektracker.com não tens de criar conta, e o Peek segue encomendas de mais de 4000 transportadoras.
 
 :::steps
 - Abre peektracker.com | O campo por baixo de «Onde está a minha encomenda?» diz «Cola um número, ligação ou mensagem».
@@ -76,7 +76,7 @@ O número pode ter uma gralha. Um número no formato postal de 13 caracteres (du
 Se estiver uma letra onde devia estar um algarismo, ou o contrário, e o carácter parecido fizer o número bater certo, o Peek acrescenta «Talvez uma letra tenha sido lida como um algarismo.» e propõe a correção, com o carácter alterado destacado: para `RR12345678SCH`, «Querias dizer RR123456785CH?». Um algarismo errado tem demasiadas correções possíveis, por isso o Peek diz «Compara-o com a tua mensagem de envio.» Em ambos os casos, «Seguir tal como está» mantém o número tal como o escreveste.
 
 :::sources
-- [Peek: página inicial](https://peektracker.com/pt) – o campo, sem conta, mais de 3500 transportadoras
+- [Peek: página inicial](https://peektracker.com/pt) – o campo, sem conta, mais de 4000 transportadoras
 - [Peek: o campo da página inicial](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – «Colar», «Colar e seguir» na primeira visita num telemóvel, o texto do botão
 - [Peek: o que o campo diz](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – a linha da transportadora, vários números, várias transportadoras, os avisos de gralha, de pedido e de código de levantamento, os campos extra, o limite diário
 - [Peek: como lê um texto colado](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – ligações, números que o e-mail identifica, dígitos de controlo e caracteres parecidos

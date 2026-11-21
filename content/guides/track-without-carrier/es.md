@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-No necesitas saber el transportista para seguir un paquete: pega su número de seguimiento, el enlace de seguimiento del transportista o el correo o SMS de envío entero en el campo de [Peek](/), y Peek saca el número, averigua el transportista y abre la página del paquete. En peektracker.com no hay que crear ninguna cuenta, y Peek sigue paquetes de más de 3500 transportistas.
+No necesitas saber el transportista para seguir un paquete: pega su número de seguimiento, el enlace de seguimiento del transportista o el correo o SMS de envío entero en el campo de [Peek](/), y Peek saca el número, averigua el transportista y abre la página del paquete. En peektracker.com no hay que crear ninguna cuenta, y Peek sigue paquetes de más de 4000 transportistas.
 
 :::steps
 - Abre peektracker.com | El campo bajo «¿Dónde está mi paquete?» dice «Pega un número, enlace o mensaje».
@@ -76,7 +76,7 @@ Puede que el número tenga una errata. Un número con el formato postal de 13 ca
 Si hay una letra donde va una cifra, o al revés, y el carácter que se le parece hace cuadrar el número, Peek añade «Puede que una letra se haya leído como una cifra.» y te ofrece la corrección, con el carácter cambiado resaltado: para `RR12345678SCH`, «¿Querías decir RR123456785CH?». Una cifra equivocada tiene demasiadas correcciones posibles, así que Peek dice «Compáralo con tu mensaje de envío.» En los dos casos, «Seguir tal como está» deja el número como lo escribiste.
 
 :::sources
-- [Peek: página de inicio](https://peektracker.com/es) – el campo, sin cuenta, más de 3500 transportistas
+- [Peek: página de inicio](https://peektracker.com/es) – el campo, sin cuenta, más de 4000 transportistas
 - [Peek: el campo de la página de inicio](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – «Pegar», «Pegar y seguir» en la primera visita desde un móvil, el texto del botón
 - [Peek: lo que dice el campo](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – la línea del transportista, varios números, varios transportistas, los avisos de errata, de pedido y de código de recogida, los campos extra, el límite diario
 - [Peek: cómo lee un texto pegado](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – enlaces, números que el correo nombra, dígitos de control y caracteres parecidos

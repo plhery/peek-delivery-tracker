@@ -109,7 +109,7 @@ Onde está o número da devolução e quando chega o dinheiro: [seguimento de de
 
 ## Posso seguir uma encomenda MediaMarkt ou Darty no Peek?
 
-Sim, com o número da transportadora. Copia-o do e-mail ou do link de seguimento e cola-o no [Peek](/), que descobre a transportadora entre mais de 3500. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que aparece no e-mail da transportadora.
+Sim, com o número da transportadora. Copia-o do e-mail ou do link de seguimento e cola-o no [Peek](/), que descobre a transportadora entre mais de 4000. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a que aparece no e-mail da transportadora.
 
 Se vierem vários produtos em envios diferentes, adiciona cada número. O número da encomenda da Darty não é um número de seguimento, e a recolha em loja não tem número para seguir.
 

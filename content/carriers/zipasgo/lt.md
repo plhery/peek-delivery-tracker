@@ -63,7 +63,7 @@ Telefono ar biuro adreso gavėjams svetainės puslapiuose nerasite. Rašydami nu
 
 ## „ZipasGo“ siuntos sekimas su Peek
 
-[Peek](/) pagal numerį „ZipasGo“ siuntos atpažinti negali, nes jokios šios tarnybos numerio formos nežino. Vis tiek numerį įklijuokite – Peek seka daugiau nei 3 500 vežėjų. Jei numeris tokios formos kaip partnerio, pavyzdžiui, UPS, Peek gali nurodyti tą vežėją.
+[Peek](/) pagal numerį „ZipasGo“ siuntos atpažinti negali, nes jokios šios tarnybos numerio formos nežino. Vis tiek numerį įklijuokite – Peek seka daugiau nei 4 000 vežėjų. Jei numeris tokios formos kaip partnerio, pavyzdžiui, UPS, Peek gali nurodyti tą vežėją.
 
 Kad siunta būtų sekama kaip „ZipasGo“, paspauskite „Change“ ir lauke „Search carriers“ įrašykite „ZipasGo“; tinka ir „Parcel Stars“ ar „Zipas“. Skiltyje „Fits this number“ jos nebus. Jau pridėtai siuntai spauskite „Change carrier“.
 

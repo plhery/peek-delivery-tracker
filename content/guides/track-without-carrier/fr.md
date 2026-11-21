@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Pas besoin de connaître le transporteur pour suivre un colis : colle son numéro de suivi, le lien de suivi du transporteur ou tout l'e-mail ou le SMS d'expédition dans le champ de [Peek](/), et Peek repère le numéro, trouve le transporteur et ouvre la page du colis. Sur peektracker.com, il n'y a pas de compte à créer, et Peek suit les colis de plus de 3 500 transporteurs.
+Pas besoin de connaître le transporteur pour suivre un colis : colle son numéro de suivi, le lien de suivi du transporteur ou tout l'e-mail ou le SMS d'expédition dans le champ de [Peek](/), et Peek repère le numéro, trouve le transporteur et ouvre la page du colis. Sur peektracker.com, il n'y a pas de compte à créer, et Peek suit les colis de plus de 4 000 transporteurs.
 
 :::steps
 - Ouvre peektracker.com | Le champ sous « Où est mon colis ? » indique « Colle un numéro, un lien ou un message ».
@@ -76,7 +76,7 @@ Le numéro contient peut-être une faute de frappe. Un numéro au format postal 
 Si une lettre se trouve là où il faut un chiffre, ou l'inverse, et que son sosie rend le numéro juste, Peek ajoute « Une lettre a peut-être été lue comme un chiffre. » et propose la correction, le caractère modifié mis en évidence : pour `RR12345678SCH`, « Voulais-tu dire RR123456785CH ? ». Un chiffre erroné a trop de corrections possibles, alors Peek dit « Compare-le avec ton message d’expédition. » Dans les deux cas, « Suivre tel quel » garde le numéro tel qu'il est.
 
 :::sources
-- [Peek : page d'accueil](https://peektracker.com/fr) – le champ, pas besoin de compte, plus de 3 500 transporteurs
+- [Peek : page d'accueil](https://peektracker.com/fr) – le champ, pas besoin de compte, plus de 4 000 transporteurs
 - [Peek : le champ de la page d'accueil](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/FrontDoor.tsx) – « Coller », « Coller et suivre » lors d'une première visite sur un téléphone, le texte du bouton
 - [Peek : ce que dit le champ](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/LookupFeedback.tsx) – la ligne du transporteur, plusieurs numéros, plusieurs transporteurs, les notes sur les fautes de frappe, les commandes et les codes de retrait, les champs supplémentaires, la limite quotidienne
 - [Peek : la lecture d'un texte collé](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – liens, numéros qu'un e-mail désigne, chiffres de contrôle et sosies

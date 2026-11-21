@@ -116,7 +116,7 @@ Tu devolución viaja con su propio número de seguimiento. Más: [seguimiento de
 
 Sí: pega en [Peek](/) el número de seguimiento del transportista que ves en tu página de pedidos. Peek reconoce los números de Correos solo por su forma: 2 letras, 9 cifras y `ES`, como `RR000000005ES`, o `PR`, 15 cifras y `C`.
 
-Los números de SEUR, como los de 14 cifras, y los de DHL, como los de 10, comparten forma con los de otros transportistas. Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Para Mobel, o para un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Los números de devolución funcionan igual. Si el pedido llega en varios paquetes, añade cada número.
+Los números de SEUR, como los de 14 cifras, y los de DHL, como los de 10, comparten forma con los de otros transportistas. Peek pregunta a los probables y muestra el que conoce el número. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el correcto. Para Mobel, o para un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 4000 transportistas. Los números de devolución funcionan igual. Si el pedido llega en varios paquetes, añade cada número.
 
 Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos y las devoluciones se quedan con Xiaomi.
 

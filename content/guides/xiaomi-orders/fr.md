@@ -112,7 +112,7 @@ Ton retour a son propre numéro de suivi. Plus d'infos : [suivre un retour](guid
 
 Oui : colle le numéro de suivi dans [Peek](/). Peek reconnaît les numéros Colissimo à leur seule forme : un chiffre, une lettre et 11 chiffres, comme `6A00000000000`.
 
-Les numéros DPD de 14 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Les numéros de retour fonctionnent de la même façon. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
+Les numéros DPD de 14 chiffres partagent leur forme avec d'autres transporteurs. Peek interroge alors les transporteurs probables et affiche celui qui connaît le numéro. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un transporteur que ce guide ne nomme pas, colle son numéro quand même : Peek suit plus de 4 000 transporteurs. Les numéros de retour fonctionnent de la même façon. Si ta commande arrive en plusieurs colis, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours se font chez Xiaomi.
 

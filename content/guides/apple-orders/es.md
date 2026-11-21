@@ -122,7 +122,7 @@ Devuélvelo con el recibo, el embalaje original y los accesorios. Las tarjetas r
 
 ## ¿Puedo seguir un paquete de Apple en Peek?
 
-Sí: pega en [Peek](/) el número de seguimiento del email de notificación de envío o de Estado del pedido. Apple no nombra en sus páginas el transportista que te entrega, así que pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el número tiene la misma forma que los de otros transportistas, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que dice tu email.
+Sí: pega en [Peek](/) el número de seguimiento del email de notificación de envío o de Estado del pedido. Apple no nombra en sus páginas el transportista que te entrega, así que pega su número igualmente: Peek sigue a más de 4000 transportistas. Si el número tiene la misma forma que los de otros transportistas, Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el que dice tu email.
 
 Los números de UPS, que recoge las devoluciones en casa, son `1Z` y 16 letras o cifras, como `1Z0000000000000000` (inventado): Peek los reconoce solo por su forma. Apple avisa: «Los envíos por correo postal no permiten hacer un seguimiento online del pedido». Si el pedido llega en varios paquetes, añade cada número.
 

@@ -75,7 +75,7 @@ For an order from a shop, ask the shop first: it booked the delivery.
 
 ## Track a Russian Post parcel with Peek
 
-[Peek](/) can't be sure of a Russian Post number by its shape alone. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek shows "Checking tracking services…".
+[Peek](/) can't be sure of a Russian Post number by its shape alone. Paste it all the same: Peek follows more than 4,000 carriers. While you add it, Peek shows "Checking tracking services…".
 
 - **14 digits starting with 80, with a valid check digit.** Peek asks Russian Post's tracker, with DPD and other carriers whose numbers fit, whether it has the parcel. If only Russian Post has it, Peek says "Russian Post has this parcel." and files it there. If not, press "Change": Russian Post is under "Fits this number", with DPD and other carriers whose numbers fit, those based in your country first. Pick it there. On a parcel you've already added, use "Change carrier".
 - **An RU number.** Peek shows it as "Unknown postal carrier". When the number starts with C, E, L or R, Peek also asks Russian Post's tracker whether it has the parcel: if it does, Peek says "Russian Post has this parcel." and files it there. Otherwise press "Change", or "Change carrier" later, and pick Russian Post: typing Почта России finds it. Peek then names Russian Post. Either way, Peek can follow the parcel to the post in your country (below).

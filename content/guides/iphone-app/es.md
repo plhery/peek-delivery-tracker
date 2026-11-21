@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Peek para iPhone, iPad y Mac es una app gratuita que sigue paquetes de más de 3500 transportistas, sin necesidad de cuenta. Añade su widget «Paquetes» a la pantalla de inicio, envíale enlaces de seguimiento con «Añadir a Peek» desde el menú de compartir o escanea el código de barras de la etiqueta con tu iPhone o iPad.
+Peek para iPhone, iPad y Mac es una app gratuita que sigue paquetes de más de 4000 transportistas, sin necesidad de cuenta. Añade su widget «Paquetes» a la pantalla de inicio, envíale enlaces de seguimiento con «Añadir a Peek» desde el menú de compartir o escanea el código de barras de la etiqueta con tu iPhone o iPad.
 
 Pega un número de seguimiento, el enlace de un transportista o un correo de envío entero, y [Peek](/) encuentra el transportista y muestra el trayecto en un mapa. No tiene compras dentro de la app ni anuncios.
 
@@ -99,7 +99,7 @@ En la ventana de ajustes de Peek, «General» tiene «Mostrar en la barra de men
 
 :::sources
 - [Peek: app de iPhone, iPad y Mac (en inglés)](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – enlaces de paquetes, contenido y actualización del widget, respuestas de Siri, atajos de teclado, arrastrar y soltar
-- [Peek: texto de la ficha del App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/es.md) – nombre, más de 3500 transportistas, gratis y sin anuncios, compartir desde Mail, Mensajes o Safari
+- [Peek: texto de la ficha del App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/es.md) – nombre, más de 4000 transportistas, gratis y sin anuncios, compartir desde Mail, Mensajes o Safari
 - [Peek: textos en español](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/es.json) – cada etiqueta de Peek citada aquí
 - [Peek: ajustes del proyecto](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, hecha para iPhone y iPad
 - [Peek: accesibilidad (en inglés)](https://peektracker.com/accessibility.html) – la app del App Store en iPhone, iPad y Mac

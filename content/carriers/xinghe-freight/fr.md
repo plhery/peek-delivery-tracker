@@ -87,7 +87,7 @@ Le site ne prévoit aucun service d'assistance pour les destinataires à l'étra
 
 ## Suivre un colis Xinghe Freight avec Peek
 
-[Peek](/) identifie aussitôt Xinghe Freight devant un numéro GZXH…YQ, avec la mention « Transporteur détecté ». Si la boutique t'a communiqué un numéro d'un autre format, colle-le quand même : Peek suit plus de 3 500 transporteurs. Pour attribuer manuellement un envoi à Xinghe, touche « Changer » et cherche Xinghe Freight (tu peux aussi taper 星和货运), ou utilise « Changer de transporteur » sur un colis déjà enregistré.
+[Peek](/) identifie aussitôt Xinghe Freight devant un numéro GZXH…YQ, avec la mention « Transporteur détecté ». Si la boutique t'a communiqué un numéro d'un autre format, colle-le quand même : Peek suit plus de 4 000 transporteurs. Pour attribuer manuellement un envoi à Xinghe, touche « Changer » et cherche Xinghe Freight (tu peux aussi taper 星和货运), ou utilise « Changer de transporteur » sur un colis déjà enregistré.
 
 Peek interroge le site de suivi de GZYL, exactement comme le fait le champ de suivi du site de Xinghe. Il affiche le statut, chaque étape avec son lieu et, lorsque la fiche le renseigne, le pays de destination. Les horaires sont lus à l'heure de Pékin et présentés dans le fuseau horaire de ton appareil ; sur peektracker.com et dans les applications iPhone et Android, l'historique s'achève par « Heures dans ton fuseau horaire : » suivi du nom du fuseau. Peek écarte les noms, l'adresse, les codes postaux, le poids, les détails de paiement, la signature et la preuve de livraison pouvant figurer dans la fiche, et n'affiche aucune date de livraison prévue, car le site n'en fournit pas.
 

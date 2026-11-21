@@ -93,7 +93,7 @@ Para uma encomenda em falta, a GlobalPost encaminha primeiro para o vendedor que
 
 ## Seguir uma encomenda da GlobalPost com o Peek
 
-O [Peek](/) identifica de imediato um número `GP` («Transportadora detetada») e consulta o localizador da GlobalPost sem conta nem código postal (o site guarda em cache durante alguns minutos cada página encontrada). Uma ligação `goglobalpost.com/track-detail/?t=` ou `/track/?t=` também funciona; para um código `SDC` antigo, escolhe a GlobalPost em «Alterar». Se tiveres apenas o número da transportadora de entrega, cola-o na mesma: o Peek acompanha mais de 3 500 transportadoras.
+O [Peek](/) identifica de imediato um número `GP` («Transportadora detetada») e consulta o localizador da GlobalPost sem conta nem código postal (o site guarda em cache durante alguns minutos cada página encontrada). Uma ligação `goglobalpost.com/track-detail/?t=` ou `/track/?t=` também funciona; para um código `SDC` antigo, escolhe a GlobalPost em «Alterar». Se tiveres apenas o número da transportadora de entrega, cola-o na mesma: o Peek acompanha mais de 4 000 transportadoras.
 
 O Peek mostra o estado, cada leitura com o seu local (cortando códigos postais), o país de destino e a empresa de entrega com o respetivo número quando a GlobalPost os indica. Deixa de fora a barra de progresso, as localidades de origem e destino do cabeçalho (lidas só para identificar devoluções) e os códigos postais; a GlobalPost não dá data prevista de entrega, peso nem comprovativo de entrega. «Abrir o site de GlobalPost» abre o teu código em `goglobalpost.com`.
 

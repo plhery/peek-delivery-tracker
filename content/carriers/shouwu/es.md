@@ -22,7 +22,7 @@ Otros transitarios chinos cierran igualmente sus códigos con `YQ`, aunque con s
 
 **Dónde encontrarlo.** Si no aparece en el correo de confirmación de envío ni en el detalle de tu compra en la tienda o plataforma, consulta [cómo encontrar tu número de seguimiento](guide:find-tracking-number).
 
-**Puede que te hayan dado el número del transportista final.** Según las páginas de líneas de Shouwu, el vendedor puede elegir qué código entrega al comprador: el número propio de Shouwu, que acompaña al paquete de principio a fin, o directamente el código de la empresa de reparto que entrega en el país de destino. Por eso un pedido gestionado por Shouwu puede llegarte bajo el número de una mensajería o correo europeo. Pégalo igualmente arriba: Peek reconoce más de 3.500 transportistas.
+**Puede que te hayan dado el número del transportista final.** Según las páginas de líneas de Shouwu, el vendedor puede elegir qué código entrega al comprador: el número propio de Shouwu, que acompaña al paquete de principio a fin, o directamente el código de la empresa de reparto que entrega en el país de destino. Por eso un pedido gestionado por Shouwu puede llegarte bajo el número de una mensajería o correo europeo. Pégalo igualmente arriba: Peek reconoce más de 4.000 transportistas.
 
 **Un enlace de seguimiento.** El botón «Copy Link» del rastreador de Shouwu copia una dirección terminada en `?q=` seguida del número. Ese enlace abre directamente el envío y también puedes pegarlo entero en Peek. El buscador de Shouwu admite hasta 40 números a la vez, uno por línea.
 

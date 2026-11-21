@@ -64,7 +64,7 @@ The site's language menu lists English, but the page stays in Chinese. Xuchuan l
 
 ## Track a Xuchuan parcel with Peek
 
-[Peek](/) can't tell a Xuchuan parcel by its number alone. The XC shape above is only a weak match, so Peek doesn't name Xuchuan when you add one. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks tracking services ("Checking tracking services…"). If none of them knows the number yet, the carrier list says "Not found by tracking services yet. Peek will keep checking after you add it."
+[Peek](/) can't tell a Xuchuan parcel by its number alone. The XC shape above is only a weak match, so Peek doesn't name Xuchuan when you add one. Paste it all the same: Peek follows more than 4,000 carriers. While you add it, Peek asks tracking services ("Checking tracking services…"). If none of them knows the number yet, the carrier list says "Not found by tracking services yet. Peek will keep checking after you add it."
 
 To follow the parcel as Xuchuan's, press "Change": Xuchuan International Logistics is listed under "Fits this number", and typing "Xuchuan", "旭川" or "xcwl" finds it too. If you leave the carrier to Peek and the services name Xuchuan as the carrier, with scans showing the parcel moving, Peek names Xuchuan for you.
 

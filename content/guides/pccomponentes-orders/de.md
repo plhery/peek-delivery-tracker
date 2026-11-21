@@ -106,7 +106,7 @@ Ist das Produkt abgeholt oder bei PcComponentes eingegangen, ist die Rücksendun
 
 ## Kann ich ein PcComponentes-Paket in Peek verfolgen?
 
-Ja, mit der Nummer der Agentur. Kopier sie aus der Versand-E-Mail und füg sie in [Peek](/) ein, egal welche Agentur es ist: Peek verfolgt mehr als 3.500 Paketdienste. Haben mehrere Paketdienste dasselbe Nummernformat, fragt Peek die wahrscheinlichen ab und zeigt dir den, der die Nummer kennt. Kennen sie mehrere, tipp auf „Wählen“; zeigt Peek den falschen, tipp auf „Ändern“ und wähl die Agentur aus der E-Mail.
+Ja, mit der Nummer der Agentur. Kopier sie aus der Versand-E-Mail und füg sie in [Peek](/) ein, egal welche Agentur es ist: Peek verfolgt mehr als 4.000 Paketdienste. Haben mehrere Paketdienste dasselbe Nummernformat, fragt Peek die wahrscheinlichen ab und zeigt dir den, der die Nummer kennt. Kennen sie mehrere, tipp auf „Wählen“; zeigt Peek den falschen, tipp auf „Ändern“ und wähl die Agentur aus der E-Mail.
 
 Ein Artikel eines Marktplatz-Verkäufers hat nur dann eine eigene Nummer, wenn der Verkäufer ihn mit Sendungsverfolgung verschickt. Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den neuen, behält Peek den Verlauf von Anfang an und folgt dem neuen Paketdienst. Die Bestellnummer von PcComponentes ist keine Sendungsnummer: Peek kann sie nicht verfolgen.
 

@@ -29,7 +29,7 @@ Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce. Peek 
 ```text
 Gdzie jest moja paczka?
 
-Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce. Możesz też zeskanować kod kreskowy z etykiety. Peek ustali, który z ponad 3500 przewoźników ma paczkę, i pokaże jej trasę na mapie, każdy skan oraz dzień, w którym powinna dotrzeć.
+Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce. Możesz też zeskanować kod kreskowy z etykiety. Peek ustali, który z ponad 4000 przewoźników ma paczkę, i pokaże jej trasę na mapie, każdy skan oraz dzień, w którym powinna dotrzeć.
 
 Bez konta. Bez reklam.
 
@@ -45,7 +45,7 @@ Udostępnij link do strony paczki. Żeby ją otworzyć, nie trzeba aplikacji ani
 PASZPORT DOSTAW
 Z kontem każda dostawa liczy się w twoim paszporcie, a za niektóre dostajesz znaczek. Porównuj paszporty ze znajomymi; twoje paczki pozostają prywatne.
 
-PONAD 3500 PRZEWOŹNIKÓW
+PONAD 4000 PRZEWOŹNIKÓW
 InPost, Poczta Polska, DPD, DHL, GLS, UPS, FedEx, Packeta, Nova Poshta, Cainiao, China Post, YunExpress i tysiące innych: poczty narodowe, firmy kurierskie i przewoźnicy dużych platform zakupowych.
 
 W PACZCE ZNAJDZIESZ TEŻ

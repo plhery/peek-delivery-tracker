@@ -129,7 +129,7 @@ Where the return's tracking number is and when the money arrives: [returns track
 
 ## Can I track a Worten parcel in Peek?
 
-Yes, with the carrier's tracking number. Open "Ver Detalhes", follow the link to the carrier's site, copy the number and paste it into [Peek](/). Peek recognises some numbers by their shape alone, such as those of [CTT](carrier:ctt), Portugal's postal service: 2 letters, 9 digits and `PT`, as in `RR000000005PT` (made up). When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the carrier under "Enviado por". For another carrier, paste its number all the same: Peek follows more than 3,500 carriers.
+Yes, with the carrier's tracking number. Open "Ver Detalhes", follow the link to the carrier's site, copy the number and paste it into [Peek](/). Peek recognises some numbers by their shape alone, such as those of [CTT](carrier:ctt), Portugal's postal service: 2 letters, 9 digits and `PT`, as in `RR000000005PT` (made up). When several carriers share a number shape, Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the carrier under "Enviado por". For another carrier, paste its number all the same: Peek follows more than 4,000 carriers.
 
 A Marketplace item has its own number only if the seller ships it with tracking. If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. The Worten order number isn't a tracking number: paste the carrier's number into Peek instead.
 

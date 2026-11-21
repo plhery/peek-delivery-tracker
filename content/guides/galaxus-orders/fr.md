@@ -125,7 +125,7 @@ Oui, avec le numéro du transporteur. Colle-le dans [Peek](/). Peek reconnaît c
 
 Pour une forme que plusieurs transporteurs partagent, Peek interroge les transporteurs possibles et affiche celui qui connaît le numéro. S'ils sont plusieurs, touche « Choisir » ; s'il affiche le mauvais, touche « Changer » et choisis le bon.
 
-Quand DHL passe ton colis à La Poste / Colissimo ou à bpost, Peek garde l'historique depuis le début et suit le relais si DHL le nomme. Si un commerçant, un fournisseur ou une entreprise de transport passe par un autre service, colle son numéro quand même : Peek suit plus de 3 500 transporteurs. Un article de commerçant n'a son propre numéro que s'il est envoyé avec suivi.
+Quand DHL passe ton colis à La Poste / Colissimo ou à bpost, Peek garde l'historique depuis le début et suit le relais si DHL le nomme. Si un commerçant, un fournisseur ou une entreprise de transport passe par un autre service, colle son numéro quand même : Peek suit plus de 4 000 transporteurs. Un article de commerçant n'a son propre numéro que s'il est envoyé avec suivi.
 
 Peek montre ce que publie le transporteur. Demandes, remboursements et retours restent dans ton compte Galaxus.
 

@@ -91,7 +91,7 @@ About your order, ask the seller first: the seller booked Stone3PL, not you.
 
 [Peek](/) follows Stone3PL parcels, but it can't tell a Stone3PL number by its shape alone. When you paste a number made of S and 18 digits, Peek shows "Checking tracking services…" while it asks Stone3PL. If Stone3PL has the parcel, the carrier line says Stone3PL "has this parcel", and Peek follows it there. A link to Stone3PL's tracker with one number after `nums=` names Stone3PL at once ("Detected carrier").
 
-For any other number, paste it all the same: Peek follows more than 3,500 carriers. When a shape fits some carriers only weakly, Peek shows "Checking tracking services…" while it asks them; a number that fits no shape is looked up once you add it. If Peek doesn't name the carrier, tap "Change" and pick Stone3PL under "All carriers", or use "Change carrier" on a parcel you've already added.
+For any other number, paste it all the same: Peek follows more than 4,000 carriers. When a shape fits some carriers only weakly, Peek shows "Checking tracking services…" while it asks them; a number that fits no shape is looked up once you add it. If Peek doesn't name the carrier, tap "Change" and pick Stone3PL under "All carriers", or use "Change carrier" on a parcel you've already added.
 
 Peek reads the overall status, each line with its time, the countries the parcel leaves from and goes to, and the delivering company and its number when given. It drops phone numbers and the names of people who signed. Stone3PL gives no expected delivery date, weight, scan places or proof of delivery.
 

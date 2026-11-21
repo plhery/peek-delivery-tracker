@@ -130,7 +130,7 @@ Sì, con il numero di tracciamento del corriere: incollalo in [Peek](/). Ecco co
 | GLS | 2 lettere e 9 cifre | Chiede ai corrieri probabili |
 | InPost | 24 cifre | Chiede ai corrieri probabili |
 
-Quando più corrieri usano la stessa forma di numero, Peek chiede a quelli probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Per un corriere che questa guida non nomina, come quello di un'altra marca, incolla comunque il numero: Peek segue più di 3.500 corrieri. Se l'ordine arriva in due pacchi, aggiungi tutti e due i numeri.
+Quando più corrieri usano la stessa forma di numero, Peek chiede a quelli probabili e mostra quello che conosce il numero. Se lo conoscono in più, premi «Scegli»; se mostra quello sbagliato, premi «Cambia» e scegli il corriere giusto. Per un corriere che questa guida non nomina, come quello di un'altra marca, incolla comunque il numero: Peek segue più di 4.000 corrieri. Se l'ordine arriva in due pacchi, aggiungi tutti e due i numeri.
 
 Quando il pacco è in consegna, Peek lo ricontrolla fino a ogni 2 minuti con i corrieri che legge direttamente, o ogni 5 minuti quando il controllo deve aprire un browser (il giorno stesso, dalle 6:00 ora locale o, se il corriere indica una fascia oraria, da mezz'ora prima che inizi, e finché risponde il tracking del corriere stesso). Poste Italiane ha un intervallo più lungo, ogni ora, e quando rispondono servizi di tracciamento come 17TRACK Peek controlla ogni 15 minuti.
 

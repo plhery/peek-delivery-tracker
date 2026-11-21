@@ -87,7 +87,7 @@ The site has nothing for recipients abroad: its contact form only opens an email
 
 ## Track a Xinghe Freight parcel with Peek
 
-[Peek](/) names Xinghe Freight straight away for a GZXH…YQ number, with "Detected carrier". If the seller gave you a number of another shape, paste it all the same: Peek follows more than 3,500 carriers. To put a number under Xinghe by hand, press "Change" and search for Xinghe Freight (typing 星和货运 finds it too), or use "Change carrier" on a parcel you've already added.
+[Peek](/) names Xinghe Freight straight away for a GZXH…YQ number, with "Detected carrier". If the seller gave you a number of another shape, paste it all the same: Peek follows more than 4,000 carriers. To put a number under Xinghe by hand, press "Change" and search for Xinghe Freight (typing 星和货运 finds it too), or use "Change carrier" on a parcel you've already added.
 
 Peek asks GZYL's tracker, as Xinghe's own tracking box does. It shows the status, each step with its place, and the destination country when the record gives it. Times are read on Beijing time and shown in your device's time zone. Peek leaves out the names, address, postcodes, weight, payment details, signature and proof of delivery the record can hold, and shows no expected delivery date: the tracker gives none.
 

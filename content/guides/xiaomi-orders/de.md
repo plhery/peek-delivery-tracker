@@ -124,7 +124,7 @@ Ja, mit der Sendungsnummer: Füg sie in [Peek](/) ein. Peek erkennt allein an ih
 - UPS: `1Z` und 16 Buchstaben oder Ziffern.
 - DHL Express: `JD01` und 16 Ziffern.
 
-Die 12-stelligen DHL-Nummern, die 10-stelligen Nummern von DHL Express und die Nummern von Hermes für große Fernseher teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für einen Dienst, den dieser Ratgeber nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 3.500 Paketdienste. Rücksendenummern funktionieren genauso. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
+Die 12-stelligen DHL-Nummern, die 10-stelligen Nummern von DHL Express und die Nummern von Hermes für große Fernseher teilen sich ihre Form mit anderen Diensten. Dann fragt Peek die infrage kommenden Dienste und zeigt den, der die Nummer kennt. Kennen sie mehrere, tippst du auf „Wählen“; zeigt Peek den falschen, tippst du auf „Ändern“ und wählst den richtigen Dienst. Für einen Dienst, den dieser Ratgeber nicht nennt, füg die Nummer trotzdem ein: Peek verfolgt mehr als 4.000 Paketdienste. Rücksendenummern funktionieren genauso. Kommt die Bestellung in mehreren Paketen, füg jede Nummer hinzu.
 
 Wechselt ein Paket unterwegs den Paketdienst und nennt der erste den nächsten, behält Peek den Verlauf von Anfang an und folgt dem neuen Dienst. Peek zeigt, was der Paketdienst veröffentlicht. Reklamationen, Erstattungen und Rückgaben laufen über Xiaomi.
 

@@ -131,7 +131,7 @@ Yes, with the carrier's tracking number from the shipment notification email or 
 | TNT | `GE`, 9 digits and `WW`, like `GE000000005WW` |
 | Australia Post | `C`, `E` or `L`, another letter, 9 digits and `AU`, like `CE000000005AU` |
 
-Peek recognises these by their shape alone. FedEx's 12-digit numbers and TNT's 9-digit ones share their shape with other carriers' numbers: Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if Peek shows the wrong one, press "Change" and pick the right carrier. For a carrier this guide doesn't name, paste its number all the same: Peek follows more than 3,500 carriers. If the order comes in several parcels, add each number.
+Peek recognises these by their shape alone. FedEx's 12-digit numbers and TNT's 9-digit ones share their shape with other carriers' numbers: Peek asks the likely carriers and shows the one that knows the number. If several know it, press "Choose"; if Peek shows the wrong one, press "Change" and pick the right carrier. For a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,000 carriers. If the order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns go through Apple.
 

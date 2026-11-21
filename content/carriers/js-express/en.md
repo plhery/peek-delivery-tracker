@@ -106,7 +106,7 @@ JS Express's claims go through the seller who booked the parcel. For your order,
 
 ## Track a JS Express parcel with Peek
 
-[Peek](/) recognises a JS Express number by its shape: JSE, two letters, ten digits and YQ, which no other carrier in its catalog uses, and asks JS Express's tracker by it. If all you have is the local courier's number, paste that instead: Peek follows more than 3,500 carriers.
+[Peek](/) recognises a JS Express number by its shape: JSE, two letters, ten digits and YQ, which no other carrier in its catalog uses, and asks JS Express's tracker by it. If all you have is the local courier's number, paste that instead: Peek follows more than 4,000 carriers.
 
 Peek shows the history of JS Express's English page, each scan with its place, and the destination country, which that page leaves out. `到达待取` shows as "Arrived, awaiting collection". Names of who took a delivery and phone numbers are dropped. Peek leaves out the delivery photos and the shop's order number that JS Express's record can hold. As the expected delivery, it shows the day of JS Express's estimate; once the parcel is out for delivery, Straightship's `Package will be delivered before 9:00pm` included, it shows no day, since "Out for delivery" already means today. Lines that aren't scans don't change the status.
 

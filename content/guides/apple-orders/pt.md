@@ -116,7 +116,7 @@ Compraste noutra loja? As condições da Apple só valem para a Apple Store Onli
 
 ## Posso seguir uma encomenda Apple no Peek?
 
-Sim: cola no [Peek](/) o número de seguimento do email de notificação de envio ou da Lista de encomendas. A Apple não nomeia as transportadoras nas suas páginas, por isso cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se o número tiver a mesma forma que os de outras transportadoras, o Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa.
+Sim: cola no [Peek](/) o número de seguimento do email de notificação de envio ou da Lista de encomendas. A Apple não nomeia as transportadoras nas suas páginas, por isso cola o número na mesma: o Peek segue mais de 4000 transportadoras. Se o número tiver a mesma forma que os de outras transportadoras, o Peek pergunta às prováveis e mostra a que conhece o número. Se o conhecerem várias, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa.
 
 Para entregas por correio, diz a Apple, «não é possível acompanhar o estado da encomenda online». Se a devolução tiver número de seguimento, cola-o da mesma maneira. Se a encomenda vier em vários pacotes, adiciona cada número.
 

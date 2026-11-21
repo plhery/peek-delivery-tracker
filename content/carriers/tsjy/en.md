@@ -109,7 +109,7 @@ The site is in Chinese only and says nothing about service in English.
 
 [Peek](/) names TSJY at once from a TSJY…CN number ("Detected carrier"): no other carrier Peek follows uses this shape. A link to TSJY's result page with a TSJY number after `nos=` works too; with several numbers in it, Peek takes the first. A TSJY link holding the line's number, or any number not of TSJY's shape, isn't filed under TSJY: Peek reads that number on its own, as if you'd pasted it.
 
-For any other number, paste it all the same: Peek follows more than 3,500 carriers. When the shape fits several carriers, Peek shows "Checking tracking services…" while it asks around; when it fits none, Peek looks the number up once you add it. If Peek doesn't name the carrier, tap "Change" and pick it under "All carriers", or use "Change carrier" later. If you pick TSJY for another number, Peek says TSJY "doesn’t issue numbers like this one".
+For any other number, paste it all the same: Peek follows more than 4,000 carriers. When the shape fits several carriers, Peek shows "Checking tracking services…" while it asks around; when it fits none, Peek looks the number up once you add it. If Peek doesn't name the carrier, tap "Change" and pick it under "All carriers", or use "Change carrier" later. If you pick TSJY for another number, Peek says TSJY "doesn’t issue numbers like this one".
 
 Peek reads TSJY's tracker: every line with its place and time. It leaves out the origin, the destination country and the line's name. TSJY gives no delivery date or weight. Peek's status follows the newest line it understands.
 

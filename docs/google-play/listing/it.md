@@ -23,7 +23,7 @@ Segui i tuoi pacchi su una mappa, con ogni corriere e senza account.
 ```text
 Dov’è il mio pacco?
 
-Incolla un numero di tracciamento, un link del corriere o un’intera e-mail di spedizione, oppure scansiona il codice a barre sull’etichetta. Peek capisce quale degli oltre 3.500 corrieri ha il pacco e ne mostra il viaggio su una mappa, ogni scansione e il giorno in cui dovrebbe arrivare.
+Incolla un numero di tracciamento, un link del corriere o un’intera e-mail di spedizione, oppure scansiona il codice a barre sull’etichetta. Peek capisce quale degli oltre 4.000 corrieri ha il pacco e ne mostra il viaggio su una mappa, ogni scansione e il giorno in cui dovrebbe arrivare.
 
 Non serve un account. Niente pubblicità.
 
@@ -39,7 +39,7 @@ Condividi la pagina del pacco con un link: per aprirla non servono né app né a
 UN PASSAPORTO DI CONSEGNE
 Con un account, ogni consegna conta nel tuo passaporto, e alcune valgono un francobollo. Confronta i passaporti con gli amici; i tuoi pacchi restano privati.
 
-OLTRE 3.500 CORRIERI
+OLTRE 4.000 CORRIERI
 Poste Italiane, BRT, GLS, DHL, UPS, FedEx, DPD, InPost, La Posta Svizzera, Cainiao, China Post, YunExpress e migliaia di altri: poste nazionali, corrieri e servizi di consegna dei grandi negozi online.
 
 NELLA SCATOLA TROVI ANCHE

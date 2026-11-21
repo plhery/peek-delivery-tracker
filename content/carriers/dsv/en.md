@@ -94,7 +94,7 @@ DSV's help pages give no phone number for tracking.
 
 Paste a 14-character number like `DEXXX000000000` and Peek asks DSV while you add it ("Checking tracking services…"), then shows "DSV has this parcel." when DSV knows it. If DSV doesn't list it yet, the parcel reads "Waiting for DSV’s first scan", marked "Probably DSV", while Peek keeps asking; after a week, Peek asks you to check the number or choose another carrier.
 
-Peek can't tell DSV by any other number's shape. Paste it all the same: Peek follows more than 3,500 carriers. To set DSV yourself, press "Change" and search for DSV; "Schenker" finds it too ("Also called DB Schenker"). On a parcel you've already added, use "Change carrier". A mydsv.com tracking link files the parcel under DSV straight away, and so does a link from the Schenker tracker on dsv.com with `refNumber=`.
+Peek can't tell DSV by any other number's shape. Paste it all the same: Peek follows more than 4,000 carriers. To set DSV yourself, press "Change" and search for DSV; "Schenker" finds it too ("Also called DB Schenker"). On a parcel you've already added, use "Change carrier". A mydsv.com tracking link files the parcel under DSV straight away, and so does a link from the Schenker tracker on dsv.com with `refNumber=`.
 
 Peek asks myDSV first. A former DB Schenker road number or package barcode that myDSV doesn't know goes to the Schenker tracker, which Peek reads for road shipments only: for an air or sea shipment found only there, use "Track Schenker shipment" on dsv.com.
 

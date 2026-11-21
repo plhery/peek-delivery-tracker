@@ -129,7 +129,7 @@ Haz un paquete por pedido, y uno por vendedor si el pedido tiene varios. El dine
 
 Sí, con el número del transportista: pégalo en [Peek](/). Peek reconoce solo por la forma los números de Paack que empiezan por `PK`. Los de SEUR, de 14 cifras, y los de GLS, de 10, comparten forma con otros transportistas. Peek pregunta a los transportistas probables y muestra el que conoce el número. Si lo conocen varios, Peek los muestra todos con «Conoce este número»: elige el que nombra tu email de envío. Si muestra el que no es, pulsa «Cambiar» y elige el correcto. Con un número de InPost, pégalo, pulsa «Cambiar» y elige Mondial Relay, que aparece si buscas InPost.
 
-Si te lo entrega otra empresa, o un vendedor de Marketplace con su propio transportista, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si el pedido llega en varios paquetes, añade cada número.
+Si te lo entrega otra empresa, o un vendedor de Marketplace con su propio transportista, pega su número igualmente: Peek sigue a más de 4000 transportistas. Si el pedido llega en varios paquetes, añade cada número.
 
 :::sources
 - [Decathlon España: Métodos y gastos de envío](https://www.decathlon.es/es/c/legal/metodos-y-gastos-de-envio-decathlon_f7874964-bf4b-47d6-9f35-c0be39139626) – varios paquetes, recogida en tienda, 15 días, QR, otra persona, más de 22 000 puntos de SEUR, InPost, Paack y GLS, 20 kg y 150 cm, entrega a domicilio, paso 3, voluminosos, dentro de casa y cita, mismo día y SMS, montaje, 7 días laborables, correo de seguimiento y 24 horas, espacio personal, Marketplace sin tienda ni punto

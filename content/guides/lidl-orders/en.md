@@ -118,7 +118,7 @@ Yes: paste the tracking number from the shipping confirmation into [Peek](/). Pe
 - DHL: most 20-digit numbers starting `00340434`, like `00340434100000000007`.
 - Hermes: `H` and 16 to 19 digits, like `H1000000000000000`.
 
-DHL's 12-digit numbers and the 14-digit numbers of DPD and Hermes share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. It doesn't ask Hermes, so for a 14-digit Hermes number press "Change" and pick Hermes. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the carrier named in the shipping confirmation. For a freight forwarder, or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 3,500 carriers. Return numbers work the same way. If your order comes in several parcels, add each number.
+DHL's 12-digit numbers and the 14-digit numbers of DPD and Hermes share their shape with other carriers. Peek asks the likely carriers and shows the one that knows the number. It doesn't ask Hermes, so for a 14-digit Hermes number press "Change" and pick Hermes. If several know it, press "Choose"; if it shows the wrong one, press "Change" and pick the carrier named in the shipping confirmation. For a freight forwarder, or a carrier this guide doesn't name, paste its number all the same: Peek follows more than 4,000 carriers. Return numbers work the same way. If your order comes in several parcels, add each number.
 
 If a parcel changes carrier on the way and the first carrier names the one taking over, Peek keeps the history from the start and follows the new carrier. Peek shows what the carrier publishes. Claims, refunds and returns stay with Lidl.
 

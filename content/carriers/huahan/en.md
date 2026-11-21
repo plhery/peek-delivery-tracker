@@ -124,7 +124,7 @@ On its website ([hh-exp.com/lxwm](https://www.hh-exp.com/lxwm)), HuaHan gives a 
 
 ## Track a HuaHan parcel with Peek
 
-[Peek](/) names HuaHan Logistics at once from an HHW…YQ number ("Detected carrier"), and asks HuaHan's tracker by that whole number only: no account, postcode or phone number is needed. For an order number, ask the seller for the HHW…YQ waybill. If all you have is the local carrier's number, paste that instead: Peek follows more than 3,500 carriers.
+[Peek](/) names HuaHan Logistics at once from an HHW…YQ number ("Detected carrier"), and asks HuaHan's tracker by that whole number only: no account, postcode or phone number is needed. For an order number, ask the seller for the HHW…YQ waybill. If all you have is the local carrier's number, paste that instead: Peek follows more than 4,000 carriers.
 
 Peek shows the status, each scan with its place, and the destination country on HuaHan's record. HuaHan's tracker prints times with no time zone. Peek reads HuaHan's own scans on the clock of their place or of the leg the parcel was on: Beijing time in China. The local carrier's scans after `Has been given to local carrier` are read on your country's clock when it has one time zone. Every time is shown in your device's time zone. HuaHan gives no expected delivery date or weight, so Peek shows neither.
 

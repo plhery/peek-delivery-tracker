@@ -22,7 +22,7 @@ D'autres transitaires chinois terminent aussi leurs numéros par YQ, avec leurs 
 
 **Où le trouver.** S'il n'est ni dans l'e-mail d'expédition de la boutique ni sur la page de ta commande, lis [où trouver son numéro de suivi](guide:find-tracking-number).
 
-**Tu as peut-être le numéro du transporteur.** Selon les pages de ses lignes, le numéro Shouwu suit le colis de bout en bout, et celui du transporteur, la livraison finale. Si la boutique t'a donné un numéro Colissimo, colle-le quand même : Peek suit plus de 3 500 transporteurs.
+**Tu as peut-être le numéro du transporteur.** Selon les pages de ses lignes, le numéro Shouwu suit le colis de bout en bout, et celui du transporteur, la livraison finale. Si la boutique t'a donné un numéro Colissimo, colle-le quand même : Peek suit plus de 4 000 transporteurs.
 
 **Un lien de suivi.** Le bouton « Copy Link » du site de Shouwu copie un lien avec `?q=` et le numéro. Il ouvre ce colis et se colle tel quel dans Peek. Le site de Shouwu accepte jusqu'à 40 numéros à la fois, un par ligne.
 

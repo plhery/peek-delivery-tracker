@@ -93,7 +93,7 @@ Bei ausbleibenden Paketen verweist GlobalPost zuerst an den Verkäufer. Außerde
 
 ## GlobalPost-Pakete mit Peek verfolgen
 
-[Peek](/) erkennt eine `GP`-Nummer sofort („Erkannter Paketdienst“) und fragt den GlobalPost-Tracker ohne Konto oder Postleitzahl ab (gefundene Seiten speichert die Website einige Minuten im Cache). Ein Link von `goglobalpost.com/track-detail/?t=` oder `/track/?t=` klappt ebenso; für eine ältere `SDC`-Nummer wählst du GlobalPost über „Ändern“. Hast du nur die Nummer des Endzustellers, füge sie trotzdem ein – Peek unterstützt über 3.500 Paketdienste.
+[Peek](/) erkennt eine `GP`-Nummer sofort („Erkannter Paketdienst“) und fragt den GlobalPost-Tracker ohne Konto oder Postleitzahl ab (gefundene Seiten speichert die Website einige Minuten im Cache). Ein Link von `goglobalpost.com/track-detail/?t=` oder `/track/?t=` klappt ebenso; für eine ältere `SDC`-Nummer wählst du GlobalPost über „Ändern“. Hast du nur die Nummer des Endzustellers, füge sie trotzdem ein – Peek unterstützt über 4.000 Paketdienste.
 
 Peek zeigt den Status, jeden Scan mit seinem Ort (ohne Postleitzahlen), das Zielland sowie den benannten Endzusteller samt Nummer. Fortschrittsbalken, Absender- und Empfängerort aus dem Seitenkopf (nur zur Rücksenderkennung ausgewertet) und Postleitzahlen lässt Peek weg; Lieferdatum, Gewicht oder Zustellnachweis liefert GlobalPost nicht. „Website von GlobalPost öffnen“ öffnet deine Nummer auf `goglobalpost.com`.
 

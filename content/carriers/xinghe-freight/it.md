@@ -83,7 +83,7 @@ Il sito non offre assistenza per i destinatari privati all'estero e il modulo di
 
 ## Tracciare un pacco Xinghe Freight con Peek
 
-[Peek](/) riconosce immediatamente Xinghe Freight da un codice `GZXH…YQ`. Se il venditore ti ha dato un numero con un formato diverso, incollalo comunque: Peek segue oltre 3.500 corrieri. Per assegnare manualmente una spedizione a Xinghe, premi per cambiare corriere durante l'aggiunta e cerca Xinghe Freight (puoi digitare anche `星和货运`), oppure usa «Cambia corriere» su un pacco già salvato.
+[Peek](/) riconosce immediatamente Xinghe Freight da un codice `GZXH…YQ`. Se il venditore ti ha dato un numero con un formato diverso, incollalo comunque: Peek segue oltre 4.000 corrieri. Per assegnare manualmente una spedizione a Xinghe, premi per cambiare corriere durante l'aggiunta e cerca Xinghe Freight (puoi digitare anche `星和货运`), oppure usa «Cambia corriere» su un pacco già salvato.
 
 Peek interroga il sistema di GZYL proprio come fa il riquadro di ricerca sul sito di Xinghe, mostrando lo stato attuale, ogni tappa con la relativa località e il Paese di destinazione quando il record lo indica. Gli orari vengono letti sull'ora di Pechino e convertiti nel fuso del tuo dispositivo (con la nota «Orari nel tuo fuso orario: …» su `peektracker.com` e nelle app per iPhone e Android). Peek scarta nomi, indirizzo, codici postali, peso, dettagli di pagamento, firma e prova di consegna eventualmente presenti nel record, e non mostra una data di consegna prevista perché il sistema non ne fornisce alcuna.
 

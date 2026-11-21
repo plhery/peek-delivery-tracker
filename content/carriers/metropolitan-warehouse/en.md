@@ -79,7 +79,7 @@ The contact page's "Info About My Order" route is for clients, the businesses th
 
 ## Track an MWD order with Peek
 
-[Peek](/) can't tell MWD from the number alone: twelve digits fit many carriers ([why lengths overlap](guide:tracking-number-formats)). Paste it all the same: Peek follows more than 3,500 carriers. It asks the carriers whose numbers look like it whether they know it, MWD among the first when you're in the US, and shows "Metropolitan Warehouse & Delivery has this parcel." when MWD does. Otherwise press "Change" and pick Metropolitan Warehouse & Delivery (searching "MWD" finds it too). Spaces are fine. Paste the number itself: Peek has no rule for MWD's links.
+[Peek](/) can't tell MWD from the number alone: twelve digits fit many carriers ([why lengths overlap](guide:tracking-number-formats)). Paste it all the same: Peek follows more than 4,000 carriers. It asks the carriers whose numbers look like it whether they know it, MWD among the first when you're in the US, and shows "Metropolitan Warehouse & Delivery has this parcel." when MWD does. Otherwise press "Change" and pick Metropolitan Warehouse & Delivery (searching "MWD" finds it too). Spaces are fine. Paste the number itself: Peek has no rule for MWD's links.
 
 Peek reads MWD's own tracker: the status, the history in MWD's words, each line's town and state on a map, and the weight. It shows each time in your device's time zone. Peek leaves out your town and zip code, the order and client references, the partner carrier's PRO number, the item count and volume, and the progress steps MWD draws above the history. It shows no expected delivery date, no proof of delivery and no live crew tracking, and it doesn't follow a partner carrier.
 

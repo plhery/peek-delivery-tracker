@@ -137,7 +137,7 @@ O reembolso vai para o mesmo meio de pagamento; se pagaste por referência Multi
 
 Sim, com o número da transportadora: cola-o no [Peek](/). O Peek reconhece pela forma, sem mais nada, os números CTT, NACEX e Paack da tabela. Os da DPD, de 14 algarismos, têm a mesma forma que os de outras transportadoras. O Peek pergunta às prováveis e mostra a que conhece o número. Se várias o conhecerem, o Peek mostra-as todas com «Conhece este número»: escolhe a que o teu email de envio indica. Se mostrar a errada, carrega em «Alterar» e escolhe a transportadora certa.
 
-Com a VASP, cola o número, carrega em «Alterar» e escolhe a Vasp Expresso. Com a TTMB, a ExigentExpress ou um vendedor Marketplace, que escolhe a sua transportadora, cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se a encomenda vier em vários envios, adiciona cada número.
+Com a VASP, cola o número, carrega em «Alterar» e escolhe a Vasp Expresso. Com a TTMB, a ExigentExpress ou um vendedor Marketplace, que escolhe a sua transportadora, cola o número na mesma: o Peek segue mais de 4000 transportadoras. Se a encomenda vier em vários envios, adiciona cada número.
 
 :::sources
 - [Decathlon Portugal: Métodos e custos de envio](https://suporte.decathlon.pt/hc/pt/articles/5069682023697-M%C3%A9todos-e-custos-de-envio) – métodos, preços e prazos, data antes do pagamento, ilhas, Marketplace

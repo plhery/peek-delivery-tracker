@@ -37,7 +37,7 @@ De fora, a única porta de entrada é o início de sessão de um assistente. O C
 
 Com o Universal Parcel Scraper, o motor que lê as transportadoras para o Peek. Descobre a transportadora, lê o próprio site dessa transportadora, recorre a serviços universais de seguimento só quando tem de ser, e devolve o mesmo JSON para todas as transportadoras, com cada leitura arrumada numa etapa de entrega comum.
 
-O README dele conta mais de 3500 transportadoras, através de mais de 800 adaptadores dedicados e de serviços de recurso universais. No benchmark dele, com 100 transportadoras escolhidas para quem compra na Europa, os adaptadores devolvem um histórico para 91, ou 95 com todos os serviços de recurso, contra 73 do melhor agregador sozinho.
+O README dele conta mais de 4000 transportadoras, através de mais de 800 adaptadores dedicados e de serviços de recurso universais. No benchmark dele, com 100 transportadoras escolhidas para quem compra na Europa, os adaptadores devolvem um histórico para 91, ou 95 com todos os serviços de recurso, contra 73 do melhor agregador sozinho.
 
 Além da linha de comandos, funciona de três formas:
 

@@ -1297,7 +1297,7 @@ describe('FrontDoor: the landing', () => {
 
   it('opens the landing for a first visit: the pill, the question, what to paste, Pip as the way to a sample, the carriers, and three more questions', () => {
     door();
-    expect(screen.getByRole('link', { name: 'Open source 3,500+ carriers' })).toHaveAttribute('href', 'https://github.com/plhery/peek-delivery-tracker');
+    expect(screen.getByRole('link', { name: 'Open source 4,000+ carriers' })).toHaveAttribute('href', 'https://github.com/plhery/peek-delivery-tracker');
     expect(screen.getByText('Paste a tracking number, a carrier link or a whole shipping email. No account needed.')).toBeVisible();
     expect(screen.getByRole('link', { name: 'Open a sample parcel' })).toHaveAttribute('href', '/sample');
     expect(screen.getByRole('img', { name: /^Works with Swiss Post, DHL, UPS/ })).toBeVisible();
@@ -1454,7 +1454,7 @@ describe('FrontDoor: the landing', () => {
     scroll(hero(), 1);
     pass(3 * SAMPLE_PERIOD_MS);
     expect(document.querySelector('.door')).toHaveAttribute('data-view', 'device');
-    expect(screen.queryByRole('link', { name: 'Open source 3,500+ carriers' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('link', { name: 'Open source 4,000+ carriers' })).not.toBeInTheDocument();
     expect(screen.queryByText(/No account needed\.$/)).not.toBeInTheDocument();
     expect(document.querySelector('.door-sample')).toBeNull();
     expect(line()).toBeNull();

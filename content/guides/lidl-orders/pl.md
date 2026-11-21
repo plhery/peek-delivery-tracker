@@ -113,7 +113,7 @@ Tak: wklej do [Peek](/) numer przesyłki z e-maila o wysyłce albo ze „Śledze
 
 - DPD Polska: 13 cyfr i litera, np. `1000000000000A`.
 
-24-cyfrowe numery InPost mają taki sam kształt jak numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika. Dla Rhenus, Inntralog albo przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 3500 przewoźników. Numery zwrotów działają tak samo. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
+24-cyfrowe numery InPost mają taki sam kształt jak numery innych przewoźników. Peek pyta wtedy prawdopodobnych przewoźników i pokazuje tego, który zna numer. Jeśli zna go kilku, naciśnij „Wybierz”; jeśli pokaże złego, naciśnij „Zmień” i wybierz właściwego przewoźnika. Dla Rhenus, Inntralog albo przewoźnika, którego ten poradnik nie wymienia, i tak wklej numer: Peek śledzi ponad 4000 przewoźników. Numery zwrotów działają tak samo. Jeśli zamówienie przyszło w kilku paczkach, dodaj każdy numer.
 
 Jeśli paczka zmienia przewoźnika po drodze, a pierwszy podaje, kto ją przejmuje, Peek zachowuje historię od początku i śledzi nowego przewoźnika. Peek pokazuje to, co publikuje przewoźnik. Reklamacje, zwroty pieniędzy i zwroty produktów załatwiasz z Lidlem.
 

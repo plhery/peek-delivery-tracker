@@ -101,7 +101,7 @@ Podaci sa sajta posta.rs, 26. oktobra 2026:
 
 ## Praćenje pošiljke Pošte Srbije u Peeku
 
-[Peek](/) po obliku prepoznaje broj Pošte Srbije kada počinje slovom `C`, `E`, `L` ili `R`, završava se sa `RS` i ima ispravnu kontrolnu cifru. Za druga slova, kao `PE` ili `V`, oblik ne otkriva prevoznika: svejedno nalepite broj, Peek prati više od 3.500 prevoznika. Tada pita Poštu Srbije, M-ONE i [Chronopost](carrier:chronopost) i, kad Pošta zna broj, piše „Pošta Srbije has this parcel.”, a ako još ne zna, „Not found at … yet. Peek will keep checking after you add it.” Prevoznika uvek možete izabrati i sami, preko „Change”.
+[Peek](/) po obliku prepoznaje broj Pošte Srbije kada počinje slovom `C`, `E`, `L` ili `R`, završava se sa `RS` i ima ispravnu kontrolnu cifru. Za druga slova, kao `PE` ili `V`, oblik ne otkriva prevoznika: svejedno nalepite broj, Peek prati više od 4.000 prevoznika. Tada pita Poštu Srbije, M-ONE i [Chronopost](carrier:chronopost) i, kad Pošta zna broj, piše „Pošta Srbije has this parcel.”, a ako još ne zna, „Not found at … yet. Peek will keep checking after you add it.” Prevoznika uvek možete izabrati i sami, preko „Change”.
 
 Ako kontrolna cifra nije ispravna, Peek ne pita nijednog prevoznika i javlja „This number’s check digit doesn’t add up.” Uporedite broj sa porukom o slanju: ni kod Pošte Srbije Peek ne prati broj sa pogrešnom kontrolnom cifrom, pa izbor preko „Change” tu ne pomaže. Link za praćenje sa posta.rs Peek uvek vezuje za Poštu Srbije. Pošiljku iz inostranstva Peek prati kod strane pošte, a kod Pošte Srbije je traži kad strana pošta kao odredište navede Srbiju ili kao partnera navede „Serbian Post” ili „Post Express”. Pošta Srbije prima i brojeve stranih pošta, pa je možete izabrati i sami.
 

@@ -80,7 +80,7 @@ SXW's customer is the seller, so ask the seller about your order first, and the 
 
 ## Track an SXW Express parcel with Peek
 
-[Peek](/) names SXW Express straight away for a number of SXW and twelve digits, with "Detected carrier". No other carrier in Peek's catalog uses that shape. If the seller gave you a number of another shape, paste it all the same: Peek follows more than 3,500 carriers. To put a number under SXW by hand, press "Change" and search for SXW Express (typing Shengxingwang or 胜兴旺 finds it too), or use "Change carrier" on a parcel you've already added.
+[Peek](/) names SXW Express straight away for a number of SXW and twelve digits, with "Detected carrier". No other carrier in Peek's catalog uses that shape. If the seller gave you a number of another shape, paste it all the same: Peek follows more than 4,000 carriers. To put a number under SXW by hand, press "Change" and search for SXW Express (typing Shengxingwang or 胜兴旺 finds it too), or use "Change carrier" on a parcel you've already added.
 
 Peek asks SXW's own tracker, the one the box on sxwexpress.cn opens, with no account, postcode or phone number. It shows the status, each step with its place when the tracker gives one, and the destination country. It leaves out the names, address, postcodes, weight, number of pieces, customer reference, payment details, signature and proof of delivery the record can hold. SXW's tracker gives no delivery date, so Peek shows none.
 

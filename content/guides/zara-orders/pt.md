@@ -118,7 +118,7 @@ A Zara trata da devolução nas 72 horas seguintes a recebê-la nas suas instala
 
 ## Posso seguir uma encomenda Zara no Peek?
 
-Sim, se tiveres o número da transportadora: cola-o no [Peek](/). A Zara não nomeia as suas transportadoras, por isso cola o número na mesma: o Peek segue mais de 3500 transportadoras. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Se cada entrega tiver o seu número, adiciona-os todos. A etiqueta de devolução tem o seu próprio número: cola-o da mesma forma.
+Sim, se tiveres o número da transportadora: cola-o no [Peek](/). A Zara não nomeia as suas transportadoras, por isso cola o número na mesma: o Peek segue mais de 4000 transportadoras. Se várias transportadoras usarem a mesma forma de número, o Peek pergunta às prováveis e mostra a que o conhece. Se várias o conhecerem, carrega em «Escolher»; se mostrar a errada, carrega em «Alterar» e escolhe a certa. Se cada entrega tiver o seu número, adiciona-os todos. A etiqueta de devolução tem o seu próprio número: cola-o da mesma forma.
 
 Os estados da Zara, de `Comprado` a `Entregue ao cliente`, vês na tua conta ou no link dos seus e-mails.
 

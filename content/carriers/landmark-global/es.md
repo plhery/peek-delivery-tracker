@@ -92,7 +92,7 @@ La página de [contacto](https://landmarkglobal.com/eu/es/contact/) es para cons
 
 ## Seguir un paquete de Landmark Global con Peek
 
-[Peek](/) reconoce al momento un LTN como de Landmark Global. También sirve un enlace de track.landmarkglobal.com o de landmarkglobal.com con `search=` o `trck=`, aunque lleve dentro una referencia de la tienda. Una referencia de pedido o de paquete escrita sola no basta para que Peek sepa que es de Landmark: pégala igualmente, porque Peek sigue más de 3500 transportistas, y elige Landmark Global con «Cambiar».
+[Peek](/) reconoce al momento un LTN como de Landmark Global. También sirve un enlace de track.landmarkglobal.com o de landmarkglobal.com con `search=` o `trck=`, aunque lleve dentro una referencia de la tienda. Una referencia de pedido o de paquete escrita sola no basta para que Peek sepa que es de Landmark: pégala igualmente, porque Peek sigue más de 4000 transportistas, y elige Landmark Global con «Cambiar».
 
 Peek muestra el estado, el lugar de cada paso en un mapa, el país de destino y la empresa que reparte con su número. No da fecha de entrega prevista y deja fuera las referencias de pedido y de paquete y los avisos de pago. Landmark da la hora de cada escaneo en la hora central de Estados Unidos; Peek te la muestra en tu zona horaria. Si el paquete vuelve a la tienda, lo verás como «Devuelto al remitente».
 

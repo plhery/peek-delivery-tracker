@@ -83,7 +83,7 @@ For the order itself, ask the seller.
 
 ## Track a J&T Express China parcel with Peek
 
-Its shape alone doesn't tell Peek that a JT number is J&T China's rather than J&T Express's in Southeast Asia. Paste it all the same: [Peek](/) follows more than 3,500 carriers.
+Its shape alone doesn't tell Peek that a JT number is J&T China's rather than J&T Express's in Southeast Asia. Paste it all the same: [Peek](/) follows more than 4,000 carriers.
 
 - **Pasted alone.** Peek asks tracking services about it and shows "Checking tracking services…" meanwhile. If the tracking services have the parcel and name J&T Express China, with dated steps, Peek files it there by itself. If one has the parcel but the carrier isn't settled yet, you see "Tracking history found. Peek will confirm the carrier after saving." If none has it yet, the line under the number says "not found yet · Peek keeps checking". Add it all the same.
 - **Picked by you.** Tap "Change" and pick J&T Express China under "Fits this number", or search for J&T or 极兔 under "All carriers". On a parcel you've already added, use "Change carrier". Do the same if Peek ever files a J&T China parcel under J&T Express.

@@ -108,7 +108,7 @@ Sí, con el número de seguimiento del transportista: cópialo de «Seguimiento 
 | UPS | `1Z` y 16 letras o cifras, como `1Z0000000000000000` |
 | DHL Express | `JD01` y 16 cifras, como `JD014600000000000000` |
 
-Los números de SEUR de 14 cifras y los de DHL de 10 cifras tienen la misma forma que los de otros transportistas. Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el transportista correcto. Para un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 3500 transportistas. Si recibes varios paquetes, añade cada número.
+Los números de SEUR de 14 cifras y los de DHL de 10 cifras tienen la misma forma que los de otros transportistas. Peek pregunta a los probables y muestra el que lo conoce. Si lo conocen varios, pulsa «Elegir»; si muestra el que no es, pulsa «Cambiar» y elige el transportista correcto. Para un transportista que esta guía no nombra, pega su número igualmente: Peek sigue a más de 4000 transportistas. Si recibes varios paquetes, añade cada número.
 
 Si un paquete cambia de transportista por el camino y el primero nombra al que lo coge, Peek conserva el historial desde el principio y sigue al nuevo. Peek muestra lo que publica el transportista. Las reclamaciones, los reembolsos, las devoluciones y las reparaciones en garantía se quedan con Back Market y el vendedor.
 

@@ -120,7 +120,7 @@ Oui, avec le numéro de suivi du transporteur, pris dans l'avis d'expédition ou
 | --- | --- |
 | UPS | `1Z` et 16 lettres ou chiffres, comme `1Z0000000000000000` |
 
-Peek reconnaît ce numéro à sa seule forme. Pour le service de course ou la poste qui livre ton colis, et qu'Apple ne nomme pas, colle le numéro quand même : Peek suit plus de 3 500 transporteurs. Si un numéro partage sa forme avec ceux d'autres transporteurs, Peek interroge les transporteurs probables et affiche celui qui le connaît. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un envoi postal, Apple écrit : « Le suivi de commande en ligne n'est pas disponible pour les livraisons postales. » Si la commande arrive en plusieurs colis, ajoute chaque numéro.
+Peek reconnaît ce numéro à sa seule forme. Pour le service de course ou la poste qui livre ton colis, et qu'Apple ne nomme pas, colle le numéro quand même : Peek suit plus de 4 000 transporteurs. Si un numéro partage sa forme avec ceux d'autres transporteurs, Peek interroge les transporteurs probables et affiche celui qui le connaît. Si plusieurs le connaissent, appuie sur « Choisir » ; s'il affiche le mauvais, appuie sur « Changer » et choisis le bon transporteur. Pour un envoi postal, Apple écrit : « Le suivi de commande en ligne n'est pas disponible pour les livraisons postales. » Si la commande arrive en plusieurs colis, ajoute chaque numéro.
 
 Si un colis change de transporteur en route et que le premier nomme celui qui prend le relais, Peek garde l'historique depuis le début et suit le nouveau transporteur. Peek affiche ce que publie le transporteur. Les réclamations, remboursements et retours passent par Apple.
 

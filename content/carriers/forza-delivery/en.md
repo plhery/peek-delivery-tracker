@@ -82,7 +82,7 @@ Forza's site header shows Monday to Saturday, 7:00 to 19:00. Each Express Center
 
 ## Track a Forza Delivery parcel with Peek
 
-[Peek](/) can't tell Forza by the FD guía alone. Paste it all the same: Peek follows more than 3,500 carriers. For FD with six to eight digits, Peek asks Forza ("Checking tracking services…") and says "Forza Delivery Express has this parcel." when Forza's tracker knows the guía. A rastreo.forzadelivery.com link with the guía in it is filed under Forza at once ("Detected carrier").
+[Peek](/) can't tell Forza by the FD guía alone. Paste it all the same: Peek follows more than 4,000 carriers. For FD with six to eight digits, Peek asks Forza ("Checking tracking services…") and says "Forza Delivery Express has this parcel." when Forza's tracker knows the guía. A rastreo.forzadelivery.com link with the guía in it is filed under Forza at once ("Detected carrier").
 
 If Peek doesn't find it, press "Change" and pick Forza Delivery Express under "Fits this number", or under "All carriers" for a guía with nine digits (typing "Forza" finds it). On a parcel you've already added, use "Change carrier". If you pick Forza for a number that isn't FD and six to nine digits, Peek says Forza "doesn’t issue numbers like this one": check the number.
 

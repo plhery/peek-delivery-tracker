@@ -91,7 +91,7 @@ The seller booked the parcel with HYWL and is the one to ask about your order, a
 
 ## Track an HYWL parcel with Peek
 
-[Peek](/) can't be sure of an HYWL number by its shape alone. Paste it all the same: Peek follows more than 3,500 carriers. While you add it, Peek asks HYWL's tracker ("Checking tracking services…") and shows "Huiyi Logistics has this parcel." when the tracker knows the number. Otherwise press "Change" and pick Huiyi Logistics under "Fits this number" (typing HYWL or 汇一物流 finds it too), or use "Change carrier" on a parcel you've already added.
+[Peek](/) can't be sure of an HYWL number by its shape alone. Paste it all the same: Peek follows more than 4,000 carriers. While you add it, Peek asks HYWL's tracker ("Checking tracking services…") and shows "Huiyi Logistics has this parcel." when the tracker knows the number. Otherwise press "Change" and pick Huiyi Logistics under "Fits this number" (typing HYWL or 汇一物流 finds it too), or use "Change carrier" on a parcel you've already added.
 
 If you add a TRK number without picking a carrier and HYWL doesn't list it yet, Peek shows "Probably Huiyi Logistics" and "Waiting for Huiyi Logistics’s first scan", and keeps asking. After a week, it asks you to check the number or choose another carrier.
 

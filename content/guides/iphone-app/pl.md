@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Peek na iPhone’a, iPada i Maca to darmowa aplikacja, która śledzi przesyłki ponad 3500 przewoźników, bez zakładania konta. Dodaj jej widżet „Przesyłki” do ekranu głównego, wysyłaj do niej linki do śledzenia przez „Dodaj do Peeka” w menu udostępniania albo zeskanuj kod kreskowy z etykiety iPhone’em lub iPadem.
+Peek na iPhone’a, iPada i Maca to darmowa aplikacja, która śledzi przesyłki ponad 4000 przewoźników, bez zakładania konta. Dodaj jej widżet „Przesyłki” do ekranu głównego, wysyłaj do niej linki do śledzenia przez „Dodaj do Peeka” w menu udostępniania albo zeskanuj kod kreskowy z etykiety iPhone’em lub iPadem.
 
 Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce, a [Peek](/) rozpozna przewoźnika i pokaże trasę na mapie. Nie ma zakupów w aplikacji ani reklam.
 
@@ -99,7 +99,7 @@ W oknie ustawień Peeka karta „Ogólne” ma „Pokazuj na pasku menu”, dzi�
 
 :::sources
 - [Peek: aplikacja na iPhone’a, iPada i Maca](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/README.md) – linki do przesyłek, zawartość i odświeżanie widżetu, odpowiedzi Siri, skróty klawiszowe, przeciąganie i upuszczanie
-- [Peek: tekst karty w App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/pl.md) – nazwa, ponad 3500 przewoźników, za darmo i bez reklam, udostępnianie z aplikacji Poczta (Mail), Wiadomości lub Safari
+- [Peek: tekst karty w App Store](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/app-store/listing/pl.md) – nazwa, ponad 4000 przewoźników, za darmo i bez reklam, udostępnianie z aplikacji Poczta (Mail), Wiadomości lub Safari
 - [Peek: teksty po polsku](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/pl.json) – każda cytowana tu etykieta Peeka
 - [Peek: ustawienia projektu](https://github.com/plhery/peek-delivery-tracker/blob/main/ios/PeekDeliveryTracker.xcodeproj/project.pbxproj) – iOS 18, iPadOS 18, macOS 15, zrobiona na iPhone’a i iPada
 - [Peek: dostępność](https://peektracker.com/accessibility.html) – aplikacja z App Store na iPhonie, iPadzie i Macu

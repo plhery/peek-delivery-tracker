@@ -2580,6 +2580,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "cttyex-sendungsverfolgung",
+      "title": "CTTYEX Sendungsverfolgung: CTTY…CN-Nummern & Pekinger Zeit",
+      "name": "CTTYEX",
+      "color": "#0068AC"
+    },
+    {
       "id": "speedaf",
       "catalog": "speedaf",
       "slug": "speedaf-sendungsverfolgung",
@@ -3478,6 +3486,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "suivi-cttyex",
+      "title": "Suivi CTTYEX\u00a0: numéros CTTY…CN, statuts et heure de Pékin",
+      "name": "CTTYEX",
+      "color": "#0068AC"
+    },
+    {
       "id": "speedaf",
       "catalog": "speedaf",
       "slug": "speedaf-suivi",
@@ -4262,6 +4278,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracking Meiteshun: numero AMTS…FS, stati e chi contattare",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "tracciamento-cttyex",
+      "title": "Tracciamento CTTYEX: codici CTTY…CN, stati e ora Pechino",
+      "name": "CTTYEX",
+      "color": "#0068AC"
     },
     {
       "id": "speedaf",
@@ -5066,6 +5090,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f89f3b"
     },
     {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "seguimiento-cttyex",
+      "title": "Seguimiento CTTYEX: códigos CTTY…CN, estados y hora Pekín",
+      "name": "CTTYEX",
+      "color": "#0068AC"
+    },
+    {
       "id": "speedaf",
       "catalog": "speedaf",
       "slug": "seguimiento-speedaf",
@@ -5842,6 +5874,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Meiteshun: número AMTS, estados e a quem perguntar",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "seguimento-cttyex",
+      "title": "Seguimento CTTYEX: números CTTY…CN, estados e hora Pequim",
+      "name": "CTTYEX",
+      "color": "#0068AC"
     },
     {
       "id": "speedaf",
@@ -6662,6 +6702,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Meiteshun (MTSCN): numery AMTS i statusy",
       "name": "Meiteshun Logistics",
       "color": "#f89f3b"
+    },
+    {
+      "id": "cttyex",
+      "catalog": "cttyex",
+      "slug": "sledzenie-cttyex",
+      "title": "Śledzenie CTTYEX: numery CTTY…CN, statusy i czas pekiński",
+      "name": "CTTYEX",
+      "color": "#0068AC"
     },
     {
       "id": "speedaf",

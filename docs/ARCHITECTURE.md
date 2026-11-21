@@ -390,9 +390,9 @@ Key server modules:
       settings as well as linking there, and says what to check when they don't show what
       it speaks of: a computer, the account that gets the shipping emails, a work or school
       administrator who turned forwarding off, and iCloud's Advanced Data Protection.
-    - Gmail: add the address, confirm it (Gmail's confirmation shows in that step, and
-      Settings reads the address again when the reader comes back to Peek), leave
-      forwarding of all mail off, then a filter made from a search to copy that forwards
+    - Gmail, in four steps: add the address; confirm it, leaving forwarding of all mail
+      off (Gmail's confirmation shows in that step, and Settings reads the address again
+      when the reader comes back to Peek); copy a search; make it a filter that forwards
       the emails with those languages' shipping words in the subject.
     - Outlook, iCloud and any other service whose rules forward get each language's main
       words, copied one at a time, since their rules take them so.

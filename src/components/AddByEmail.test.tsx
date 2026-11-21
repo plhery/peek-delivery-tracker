@@ -127,7 +127,7 @@ describe('adding parcels by email in Settings', () => {
     expect(screen.getByRole('button', { name: 'Copy search' })).toBeInTheDocument();
   });
 
-  it('walks through Gmail in its order: the address confirmed, forwarding of all mail left off, then the filter', async () => {
+  it('walks through Gmail in four steps: the address added, confirmed with forwarding of all mail left off, then the filter', async () => {
     vi.spyOn(navigator, 'languages', 'get').mockReturnValue(['fr-CH', 'en']);
     const user = userEvent.setup();
     render(<AddByEmailPage apiAuth={apiAuth} email="owner@example.test" offer={offer(inbox)} onChange={vi.fn()} />, { wrapper: servingGuides });
@@ -137,28 +137,27 @@ describe('adding parcels by email in Settings', () => {
     expect(within(services).getAllByRole('button').map((button) => button.textContent)).toEqual(['Gmail', 'Outlook', 'iCloud', 'Yahoo', 'Other']);
     expect(within(services).getByRole('button', { pressed: true })).toHaveTextContent('Gmail');
     const steps = screen.getAllByRole('listitem');
-    expect(steps).toHaveLength(7);
+    expect(steps).toHaveLength(4);
     // The link opens Gmail's settings: opened from a link or reloaded, the forwarding tab can leave its button out.
     expect(within(steps[0]!).getByRole('link', { name: /Open Gmail’s settings/ })).toHaveAttribute('href', 'https://mail.google.com/mail/#settings/general');
-    expect(steps[0]).toHaveTextContent('click the Settings gear at the top right, then See all settings.');
     // Gmail's own button names stand out, and its options button, which has no name on screen, is drawn.
-    expect(steps[1]).toHaveTextContent(/^Click the Forwarding and POP\/IMAP tab, then Add a forwarding address\./);
-    expect(within(steps[1]!).getAllByText('Add a forwarding address').map((name) => name.tagName)).toEqual(['STRONG', 'STRONG']);
-    // Where the button isn't: a tab opened from a link, a phone, another account, or an administrator who turned forwarding off.
-    expect(within(steps[1]!).getByText(/^No/).closest('p')).toHaveTextContent(
-      'No Add a forwarding address button? Gmail can leave it out when the tab was opened from a link or reloaded: click the General tab, then Forwarding and POP/IMAP again. Otherwise, check that you’re on a computer, in the account that gets your shipping emails: your picture at the top right switches accounts. On a work or school account, the administrator may have turned forwarding off: ask them, or forward your shipping emails by hand.');
-    expect(steps[2]).toHaveTextContent(/confirmation link to your Peek address. It shows up below/);
-    expect(within(steps[3]!).getByText('Disable forwarding').tagName).toBe('STRONG');
-    expect(steps[4]).toHaveTextContent(/^Choose the languages your shops write in, then copy the search below/);
-    expect(steps[5]!.querySelector('svg.add-by-email__glyph')).not.toBeNull();
-    expect(steps[5]).toHaveTextContent('Paste the search into Has the words, then click Create filter at the bottom.');
-    expect(steps[6]).toHaveTextContent(/^Select Forward it, choose your Peek address/);
+    expect(steps[0]).toHaveTextContent(/^On a computer, open Gmail’s settings, then the Forwarding and POP\/IMAP tab\. Click Add a forwarding address/);
+    expect(within(steps[0]!).getAllByText('Add a forwarding address').map((name) => name.tagName)).toEqual(['STRONG', 'STRONG']);
+    // Where the button isn't: a tab opened from a link, or an administrator who turned forwarding off.
+    expect(within(steps[0]!).getByText(/^No/).closest('p')).toHaveTextContent(
+      'No Add a forwarding address button? Click the General tab, then Forwarding and POP/IMAP again. On a work or school account, the administrator may have turned forwarding off.');
+    expect(steps[1]).toHaveTextContent(/confirmation link to your Peek address: it shows up below/);
+    // Forwarding every email stays off: the filter forwards.
+    expect(within(steps[1]!).getByText('Disable forwarding').tagName).toBe('STRONG');
+    expect(steps[2]).toHaveTextContent(/^Copy the search below/);
+    expect(steps[3]!.querySelector('svg.add-by-email__glyph')).not.toBeNull();
+    expect(steps[3]).toHaveTextContent('paste the search into Has the words and click Create filter. Select Forward it, choose your Peek address and click Create filter again.');
     expect(screen.queryByText(/\*\*|\{\{|\[\[/)).not.toBeInTheDocument();
     // No link fills Gmail's filter: the search is copied and pasted.
     expect(steps.flatMap((step) => within(step).queryAllByRole('link'))).toHaveLength(1);
-    expect(within(steps[4]!).getByText(gmailFilter(['en', 'fr']))).toBeInTheDocument();
+    expect(within(steps[2]!).getByText(gmailFilter(['en', 'fr']))).toBeInTheDocument();
     await user.click(screen.getByRole('button', { name: 'German' }));
-    expect(within(steps[4]!).getByText(gmailFilter(['en', 'de', 'fr']))).toBeInTheDocument();
+    expect(within(steps[2]!).getByText(gmailFilter(['en', 'de', 'fr']))).toBeInTheDocument();
   });
 
   it('starts on the service the account\'s address belongs to, and gives a rule its words one at a time', async () => {
@@ -219,7 +218,7 @@ describe('adding parcels by email in Settings', () => {
     // confirmation in the step that asks for it.
     expect(screen.getByText('Forward automatically').closest('details')).toHaveAttribute('open');
     expect(within(screen.getByRole('group', { name: 'Your mail service' })).getByRole('button', { pressed: true })).toHaveTextContent('Gmail');
-    const confirming = within(within(screen.getByText('Forward automatically').closest('details')!).getAllByRole('listitem')[2]!);
+    const confirming = within(within(screen.getByText('Forward automatically').closest('details')!).getAllByRole('listitem')[1]!);
     expect(confirming.getByText('If Gmail asks for a code, enter this one: 123456789')).toBeInTheDocument();
     expect(confirming.getByRole('link', { name: /Gmail’s confirmation link/ })).toHaveAttribute('href', shown.confirmation!.link);
     const recent = within(screen.getByRole('region', { name: 'Recent emails' }));

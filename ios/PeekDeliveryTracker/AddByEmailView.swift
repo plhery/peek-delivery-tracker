@@ -334,9 +334,11 @@ private struct ForwardingSteps: View {
     }
 
     @ViewBuilder private var gmail: some View {
-        step(1, "inbox.gmail.settings") { stepLink(MailService.gmailSettings, "inbox.gmail.settingsLink") }
-        step(2, "inbox.gmail.add") { missing("inbox.gmail.noButton") }
-        step(3, "inbox.gmail.confirm") {
+        step(1, "inbox.gmail.settings") {
+            stepLink(MailService.gmailSettings, "inbox.gmail.settingsLink")
+            missing("inbox.gmail.noButton")
+        }
+        step(2, "inbox.gmail.confirm") {
             if let confirmation, confirmationLink(confirmation) != nil || confirmation.code != nil {
                 VStack(alignment: .leading, spacing: 0) {
                     if let link = confirmationLink(confirmation) {
@@ -358,8 +360,7 @@ private struct ForwardingSteps: View {
                 .stepBox()
             }
         }
-        step(4, "inbox.gmail.keepOff")
-        step(5, "inbox.gmail.search") {
+        step(3, "inbox.gmail.search") {
             let search = filter.gmailFilter(chosen)
             VStack(alignment: .leading, spacing: 12) {
                 languagePicker
@@ -384,8 +385,7 @@ private struct ForwardingSteps: View {
             }
             .stepBox(padded: true)
         }
-        step(6, "inbox.gmail.filter")
-        step(7, "inbox.gmail.forward")
+        step(4, "inbox.gmail.filter")
     }
 
     /// Gmail's confirmation link, which the server takes only from a google.com host: opened only over https.

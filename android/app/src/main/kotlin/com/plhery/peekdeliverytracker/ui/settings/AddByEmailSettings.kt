@@ -426,11 +426,12 @@ private fun ForwardingSteps(email: String?, confirmation: ForwardingConfirmation
         }
         when (service) {
             MailService.Gmail -> {
-                Step(1, "inbox.gmail.settings") { StepLink(EmailFilter.GMAIL_SETTINGS_LINK, "inbox.gmail.settingsLink") }
-                Step(2, "inbox.gmail.add") { Missing("inbox.gmail.noButton") }
-                Step(3, "inbox.gmail.confirm") { if (confirmation != null) Confirmation(confirmation) }
-                Step(4, "inbox.gmail.keepOff")
-                Step(5, "inbox.gmail.search") {
+                Step(1, "inbox.gmail.settings") {
+                    StepLink(EmailFilter.GMAIL_SETTINGS_LINK, "inbox.gmail.settingsLink")
+                    Missing("inbox.gmail.noButton")
+                }
+                Step(2, "inbox.gmail.confirm") { if (confirmation != null) Confirmation(confirmation) }
+                Step(3, "inbox.gmail.search") {
                     val search = EmailFilter.gmailFilter(chosen)
                     StepBox(padded = true) {
                         Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -439,8 +440,7 @@ private fun ForwardingSteps(email: String?, confirmation: ForwardingConfirmation
                         }
                     }
                 }
-                Step(6, "inbox.gmail.filter")
-                Step(7, "inbox.gmail.forward")
+                Step(4, "inbox.gmail.filter")
             }
             MailService.Outlook -> {
                 Step(1, "inbox.outlook.rule") {

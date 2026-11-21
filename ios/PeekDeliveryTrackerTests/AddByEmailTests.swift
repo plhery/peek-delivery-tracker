@@ -114,8 +114,8 @@ final class AddByEmailFilterTests: XCTestCase {
         let original = localizer.language
         defer { localizer.language = original }
         let keys = [
-            "inbox.gmail.settings", "inbox.gmail.add", "inbox.gmail.noButton", "inbox.gmail.confirm", "inbox.gmail.keepOff",
-            "inbox.gmail.search", "inbox.gmail.filter", "inbox.gmail.forward", "inbox.outlook.rule", "inbox.outlook.work",
+            "inbox.gmail.settings", "inbox.gmail.noButton", "inbox.gmail.confirm", "inbox.gmail.search", "inbox.gmail.filter",
+            "inbox.outlook.rule", "inbox.outlook.work",
             "inbox.outlook.condition", "inbox.outlook.action", "inbox.icloud.rule", "inbox.icloud.noMail", "inbox.icloud.words",
             "inbox.icloud.more", "inbox.other.rule",
         ]

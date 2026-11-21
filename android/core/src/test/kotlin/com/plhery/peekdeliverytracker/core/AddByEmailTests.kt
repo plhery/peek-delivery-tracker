@@ -250,14 +250,16 @@ class AddByEmailTests {
         val text = localizer.text("inbox.gmail.filter", mapOf("options" to StepText.OPTIONS_MARK))
         assertEquals(
             listOf(
-                StepPiece.Plain("In Gmail’s search box at the top, click the "), StepPiece.Options, StepPiece.Plain(" button ("),
-                StepPiece.Bold("Show search options"), StepPiece.Plain("). Paste the search into "), StepPiece.Bold("Has the words"),
-                StepPiece.Plain(", then click "), StepPiece.Bold("Create filter"), StepPiece.Plain(" at the bottom."),
+                StepPiece.Plain("In Gmail’s search box, click the "), StepPiece.Options, StepPiece.Plain(" button ("),
+                StepPiece.Bold("Show search options"), StepPiece.Plain("), paste the search into "), StepPiece.Bold("Has the words"),
+                StepPiece.Plain(" and click "), StepPiece.Bold("Create filter"), StepPiece.Plain(". Select "), StepPiece.Bold("Forward it"),
+                StepPiece.Plain(", choose your Peek address and click "), StepPiece.Bold("Create filter"), StepPiece.Plain(" again."),
             ),
             StepText.pieces(text),
         )
         assertEquals(
-            "In Gmail’s search box at the top, click the button (Show search options). Paste the search into Has the words, then click Create filter at the bottom.",
+            "In Gmail’s search box, click the button (Show search options), paste the search into Has the words and click Create filter. " +
+                "Select Forward it, choose your Peek address and click Create filter again.",
             StepText.spoken(text),
         )
         // Marks that don't close stay as written.
@@ -268,7 +270,7 @@ class AddByEmailTests {
         // Every language's steps close their marks.
         for (language in AppLanguage.entries) {
             val words = Localizer(language)
-            for (key in listOf("inbox.gmail.settings", "inbox.gmail.add", "inbox.gmail.noButton", "inbox.gmail.keepOff", "inbox.gmail.filter", "inbox.gmail.forward", "inbox.outlook.rule", "inbox.outlook.condition", "inbox.outlook.action", "inbox.icloud.rule", "inbox.icloud.words")) {
+            for (key in listOf("inbox.gmail.settings", "inbox.gmail.noButton", "inbox.gmail.confirm", "inbox.gmail.filter", "inbox.outlook.rule", "inbox.outlook.condition", "inbox.outlook.action", "inbox.icloud.rule", "inbox.icloud.words")) {
                 val spoken = StepText.spoken(words.text(key, mapOf("options" to StepText.OPTIONS_MARK)))
                 assertFalse("$language $key", "**" in spoken || "[[" in spoken)
             }

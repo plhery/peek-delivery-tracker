@@ -2228,6 +2228,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "dpd-uk-sendungsverfolgung",
+      "title": "DPD UK Sendungsverfolgung: 14-stellige Nummer und Status",
+      "name": "DPD UK",
+      "color": "#dc0032"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-sendungsverfolgung",
@@ -2892,6 +2900,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Logistics suivi\u00a0: où suivre ton colis et que faire",
       "name": "Amazon Logistics",
       "color": "#ff9900"
+    },
+    {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "suivi-dpd-uk",
+      "title": "Suivi DPD UK\u00a0: numéros à 14 chiffres, statuts et contact",
+      "name": "DPD UK",
+      "color": "#dc0032"
     },
     {
       "id": "bpost",
@@ -3600,6 +3616,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "tracciamento-dpd-uk",
+      "title": "Tracciamento DPD UK: numero a 14 cifre, stati e contatti",
+      "name": "DPD UK",
+      "color": "#dc0032"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-tracciamento",
@@ -4208,6 +4232,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Logistics seguimiento: dónde mirarlo y qué hacer",
       "name": "Amazon Logistics",
       "color": "#ff9900"
+    },
+    {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "seguimiento-dpd-uk",
+      "title": "Seguimiento de DPD UK: número de 14 dígitos y estados",
+      "name": "DPD UK",
+      "color": "#dc0032"
     },
     {
       "id": "bpost",
@@ -4852,6 +4884,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ff9900"
     },
     {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "seguimento-dpd-uk",
+      "title": "Seguimento DPD UK: número de 14 dígitos, estados e apoio",
+      "name": "DPD UK",
+      "color": "#dc0032"
+    },
+    {
       "id": "bpost",
       "catalog": "bpost",
       "slug": "bpost-seguimento",
@@ -5470,6 +5510,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Amazon Logistics tracking: gdzie śledzić paczkę Amazon",
       "name": "Amazon Logistics",
       "color": "#ff9900"
+    },
+    {
+      "id": "dpd-uk",
+      "catalog": "dpd-uk",
+      "slug": "sledzenie-dpd-uk",
+      "title": "Śledzenie DPD UK: 14-cyfrowy numer, statusy i kontakt",
+      "name": "DPD UK",
+      "color": "#dc0032"
     },
     {
       "id": "bpost",

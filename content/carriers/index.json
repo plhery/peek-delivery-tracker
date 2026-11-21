@@ -38,7 +38,7 @@
   { "id": "an-post", "catalog": "an-post", "name": "An Post", "languages": ["en"] },
   { "id": "vinted-go", "catalog": "vinted-go", "name": "Vinted Go", "languages": ["en", "fr", "es", "pt", "nl", "it", "de", "pl"] },
   { "id": "amazon-logistics", "catalog": "amazon-logistics", "name": "Amazon Logistics", "languages": ["en", "de", "fr", "it", "es", "pt", "pl"] },
-  { "id": "dpd-uk", "catalog": "dpd-uk", "name": "DPD UK", "languages": ["en"] },
+  { "id": "dpd-uk", "catalog": "dpd-uk", "name": "DPD UK", "languages": ["en", "fr", "de", "es", "it", "pt", "pl"] },
   { "id": "parcelforce", "catalog": "parcelforce", "name": "Parcelforce Worldwide", "languages": ["en"] },
   { "id": "bpost", "catalog": "bpost", "name": "bpost", "languages": ["en", "fr", "nl", "de", "pt", "es", "it", "pl"] },
   { "id": "dpd-ie", "catalog": "dpd-ie", "name": "DPD Ireland", "languages": ["en"] },

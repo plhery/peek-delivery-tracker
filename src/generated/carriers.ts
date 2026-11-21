@@ -2460,6 +2460,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-tracking",
+      "title": "UniUni Sendungsverfolgung: Status, Zustellung und Kontakt",
+      "name": "UniUni",
+      "color": "#f68841"
+    },
+    {
       "id": "ontrac",
       "catalog": "ontrac",
       "slug": "ontrac-sendungsverfolgung",
@@ -4248,6 +4256,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-tracking",
+      "title": "Tracking UniUni: codici, stati, consegna, foto e contatti",
+      "name": "UniUni",
+      "color": "#f68841"
+    },
+    {
       "id": "ontrac",
       "catalog": "ontrac",
       "slug": "tracciamento-ontrac",
@@ -5088,6 +5104,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Canada Post: números, estados y aviso postal",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-tracking",
+      "title": "Seguimiento UniUni: estados, entregas fallidas y contacto",
+      "name": "UniUni",
+      "color": "#f68841"
     },
     {
       "id": "ontrac",
@@ -5938,6 +5962,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento Canada Post: códigos, estados e alfândega",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-tracking",
+      "title": "Seguimento UniUni: códigos, estados, entrega e contactos",
+      "name": "UniUni",
+      "color": "#f68841"
     },
     {
       "id": "ontrac",
@@ -6798,6 +6830,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Canada Post: numery, statusy, awizo i cło",
       "name": "Canada Post",
       "color": "#e4002b"
+    },
+    {
+      "id": "uniuni",
+      "catalog": "uniuni",
+      "slug": "uniuni-tracking",
+      "title": "Śledzenie UniUni: numery, statusy, zdjęcia i kontakt",
+      "name": "UniUni",
+      "color": "#f68841"
     },
     {
       "id": "ontrac",

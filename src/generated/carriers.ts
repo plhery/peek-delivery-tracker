@@ -2428,6 +2428,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e4002b"
     },
     {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "ontrac-sendungsverfolgung",
+      "title": "OnTrac Sendungsverfolgung: Nummern, Status und Hilfe",
+      "name": "OnTrac",
+      "color": "#cc2027"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-sendungsverfolgung",
@@ -3254,6 +3262,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#f68841"
     },
     {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "suivi-ontrac",
+      "title": "Suivi OnTrac\u00a0: numéros, statuts et livraisons manquées",
+      "name": "OnTrac",
+      "color": "#cc2027"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-suivi",
@@ -3958,6 +3974,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Tracciamento USPS: numero, stati e pacchi dagli Stati Uniti",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "tracciamento-ontrac",
+      "title": "Tracciamento OnTrac: codici, stati e mancate consegne",
+      "name": "OnTrac",
+      "color": "#cc2027"
     },
     {
       "id": "gofo",
@@ -4682,6 +4706,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#004b87"
     },
     {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "seguimiento-ontrac",
+      "title": "Seguimiento de OnTrac: números, estados y entregas fallidas",
+      "name": "OnTrac",
+      "color": "#cc2027"
+    },
+    {
       "id": "gofo",
       "catalog": "gofo",
       "slug": "gofo-express-rastreo",
@@ -5402,6 +5434,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimento USPS: número, estados e encomendas dos EUA",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "seguimento-ontrac",
+      "title": "Seguimento OnTrac: números, estados e entregas falhadas",
+      "name": "OnTrac",
+      "color": "#cc2027"
     },
     {
       "id": "gofo",
@@ -6142,6 +6182,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie przesyłek USPS: numer, statusy i paczki z USA",
       "name": "USPS",
       "color": "#004b87"
+    },
+    {
+      "id": "ontrac",
+      "catalog": "ontrac",
+      "slug": "sledzenie-ontrac",
+      "title": "Śledzenie przesyłek OnTrac: numery, statusy i doręczenia",
+      "name": "OnTrac",
+      "color": "#cc2027"
     },
     {
       "id": "gofo",

@@ -16,6 +16,7 @@ afterEach(() => {
     runtime.scheduler.stop();
     runtime.friendshipWorker.stop();
     runtime.emailAddedWorker.stop();
+    runtime.assistantAddedWorker.stop();
     runtime.reviews.stop();
   }
   // A request still on its way when the file ends logs after its worker has closed.
@@ -46,6 +47,7 @@ function background(): Runtime {
   vi.spyOn(runtime.client, 'claimReaderSyncJob').mockResolvedValue(null);
   vi.spyOn(runtime.client, 'claimFriendshipPush').mockResolvedValue([]);
   vi.spyOn(runtime.client, 'claimEmailAddedPush').mockResolvedValue([]);
+  vi.spyOn(runtime.client, 'claimAssistantAddedPush').mockResolvedValue([]);
   // The review replay starts a minute in, and finds this version's done.
   vi.spyOn(runtime.client, 'claimTrackingReviewRun').mockResolvedValue('done');
   return runtime;

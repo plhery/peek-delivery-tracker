@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "“把已签收的包裹都归档。”",
   "assistants.connected": "已连接",
   "assistants.none": "还没有连接任何助手。",
+  "assistants.notify": "助手添加包裹时通知我",
   "assistants.scope.read": "可查看你的包裹",
   "assistants.scope.write": "可添加包裹",
   "assistants.scope.both": "可查看和添加包裹",

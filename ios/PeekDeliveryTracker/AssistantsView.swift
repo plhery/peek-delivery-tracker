@@ -1,8 +1,8 @@
 import SwiftUI
 
 /// The assistants' page in Settings, as the website's: the address to give an assistant, how to add Peek to each one,
-/// what to ask one, and the ones connected, each with Disconnect. Its first lines lead to the public page on
-/// connecting an assistant, which says the same and more.
+/// what to ask one, and the ones connected, each with Disconnect, then whether the parcels they add are notified. Its
+/// first lines lead to the public page on connecting an assistant, which says the same and more.
 struct AssistantsPage: View {
     @ObservedObject var model: AssistantsModel
 
@@ -13,6 +13,8 @@ struct AssistantsPage: View {
     /// The assistant whose steps are open.
     @State private var open: String?
     @State private var showingGuide = false
+    /// The notification's choice while it is saved.
+    @State private var notifyChoice: Bool?
     private let setups = AssistantSetup.bundled
 
     var body: some View {
@@ -190,7 +192,30 @@ struct AssistantsPage: View {
                     Task { await model.revoke(connection.id) }
                 }
             }
+            if !assistants.isEmpty, let offer = model.offer {
+                settingsDivider
+                notification(offer)
+            }
         }
+    }
+
+    /// The switch shows the choice while it is saved, then the server's answer; a failure puts it back.
+    private func notification(_ offer: AssistantsResponse) -> some View {
+        Toggle(isOn: Binding(get: { notifyChoice ?? offer.notifyAdded }, set: { on in
+            guard notifyChoice == nil else { return }
+            notifyChoice = on
+            Task {
+                await model.setNotify(on)
+                notifyChoice = nil
+            }
+        })) {
+            SettingsRow(title: localizer.text("assistants.notify"), symbol: "bell", padded: false)
+        }
+        .rowToggle()
+        .padding(15)
+        .tint(settingsGreen)
+        .disabled(model.working || notifyChoice != nil)
+        .accessibilityIdentifier("assistants.notify")
     }
 
     private func note(_ text: String) -> some View {

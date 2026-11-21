@@ -5078,6 +5078,7 @@ data class AssistantConnection(
 data class AssistantsResponse(
     val connections: List<AssistantConnection>,
     val mcpUrl: String,
+    val notifyAdded: Boolean,
 )
 
 @Serializable

@@ -11,13 +11,15 @@ import kotlinx.coroutines.CompletableDeferred
 /**
  * Assistants as a test sets them: each read answers [offer] (null for a server that lets assistants connect to no
  * account, as its 404 reads), or fails with [failure]; a Disconnect waits for [revoking] when a test holds it, then
- * fails with [revokeFailure] if a test sets one, or takes the assistant out of [offer]. [requests] notes what was
- * asked, in order. Nothing leaves the test.
+ * fails with [revokeFailure] if a test sets one, or takes the assistant out of [offer]; the notification's switch fails
+ * with [notifyFailure] if a test sets one, or saves the choice in [offer]. [requests] notes what was asked, in order.
+ * Nothing leaves the test.
  */
 class FakeAssistantsClient : AssistantsClient {
     var offer: AssistantsResponse? = null
     var failure: Exception? = null
     var revokeFailure: Exception? = null
+    var notifyFailure: Exception? = null
     var revoking: CompletableDeferred<Unit>? = null
     val requests = mutableListOf<String>()
 
@@ -32,6 +34,12 @@ class FakeAssistantsClient : AssistantsClient {
         revoking?.await()
         revokeFailure?.let { throw it }
         offer = offer?.let { it.copy(connections = it.connections.filter { connection -> connection.id != id }) }
+    }
+
+    override suspend fun notify(on: Boolean): AssistantsResponse {
+        requests += "notify $on"
+        notifyFailure?.let { throw it }
+        return checkNotNull(offer).copy(notifyAdded = on).also { offer = it }
     }
 }
 
@@ -58,5 +66,6 @@ object AssistantsFixtures {
         scopes = listOf(AssistantScope.ParcelsRead), createdAt = "2026-10-01T08:00:00.000Z",
     )
 
-    fun offer(connections: List<AssistantConnection> = listOf(claude, chatGpt, token)) = AssistantsResponse(connections = connections, mcpUrl = ADDRESS)
+    fun offer(connections: List<AssistantConnection> = listOf(claude, chatGpt, token), notifyAdded: Boolean = true) =
+        AssistantsResponse(connections = connections, mcpUrl = ADDRESS, notifyAdded = notifyAdded)
 }

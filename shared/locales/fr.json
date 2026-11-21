@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "« Archive tout ce qui a été livré. »",
   "assistants.connected": "Connectés",
   "assistants.none": "Aucun assistant n’est encore connecté.",
+  "assistants.notify": "M’avertir quand un assistant ajoute un colis",
   "assistants.scope.read": "Voit tes colis",
   "assistants.scope.write": "Ajoute des colis",
   "assistants.scope.both": "Voit et ajoute des colis",

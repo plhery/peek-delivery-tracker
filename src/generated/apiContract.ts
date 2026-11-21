@@ -70198,6 +70198,7 @@ export interface ApiAssistantConnection {
 export interface ApiAssistantsResponse {
   "connections": Array<ApiAssistantConnection>;
   "mcpUrl": string;
+  "notifyAdded": boolean;
 }
 
 export interface ApiCreatePersonalTokenRequest {

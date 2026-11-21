@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "«Archiva todo lo que ya se ha entregado».",
   "assistants.connected": "Conectados",
   "assistants.none": "Aún no hay ningún asistente conectado.",
+  "assistants.notify": "Avisarme cuando un asistente añada un paquete",
   "assistants.scope.read": "Ve tus paquetes",
   "assistants.scope.write": "Añade paquetes",
   "assistants.scope.both": "Ve y añade paquetes",

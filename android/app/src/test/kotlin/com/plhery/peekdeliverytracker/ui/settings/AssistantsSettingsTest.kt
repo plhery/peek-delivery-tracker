@@ -3,6 +3,7 @@ package com.plhery.peekdeliverytracker.ui.settings
 import android.content.ClipboardManager
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.semantics.SemanticsActions
 import androidx.compose.ui.semantics.SemanticsProperties
 import androidx.compose.ui.semantics.getOrNull
 import androidx.compose.ui.test.SemanticsNodeInteraction
@@ -12,6 +13,8 @@ import androidx.compose.ui.test.junit4.v2.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollTo
+import androidx.compose.ui.test.performSemanticsAction
+import androidx.compose.ui.state.ToggleableState
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.plhery.peekdeliverytracker.core.AppLanguage
 import com.plhery.peekdeliverytracker.core.AuthUser
@@ -104,6 +107,8 @@ class AssistantsSettingsTest {
 
     private fun disconnect(id: UUID) = "$ASSISTANTS_DISCONNECT.$id"
 
+    private fun toggled(tag: String): ToggleableState? = node(tag).fetchSemanticsNode().config.getOrNull(SemanticsProperties.ToggleableState)
+
     @Test
     fun anAccountAssistantsMayConnectToHasTheRowWithItsBadge() {
         show { assistantsClient.offer = offer() }
@@ -179,6 +184,29 @@ class AssistantsSettingsTest {
         tap(SETTINGS_ASSISTANTS)
         assertTrue(exists(ASSISTANTS_NONE))
         assertEquals(text("assistants.none"), words(ASSISTANTS_NONE))
+        // With no assistant, there is nothing to be notified of.
+        assertFalse(exists(ASSISTANTS_NOTIFY))
+    }
+
+    @Test
+    fun theParcelsTheyAddAreNotifiedUntilSwitchedOff() {
+        show { assistantsClient.offer = offer() }
+        tap(SETTINGS_ASSISTANTS)
+        node(ASSISTANTS_NOTIFY).performScrollTo()
+        settle()
+        assertEquals(ToggleableState.On, toggled(ASSISTANTS_NOTIFY))
+        assertEquals(listOf(text("assistants.notify")), node(ASSISTANTS_NOTIFY).fetchSemanticsNode().config.getOrNull(SemanticsProperties.Text)?.map { it.text })
+        node(ASSISTANTS_NOTIFY).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertEquals(ToggleableState.Off, toggled(ASSISTANTS_NOTIFY))
+        assertEquals(listOf("read", "notify false"), source.assistantsClient.requests)
+
+        // A save that fails leaves the switch as the server last answered, and says why.
+        source.assistantsClient.notifyFailure = IOException("Offline")
+        node(ASSISTANTS_NOTIFY).performSemanticsAction(SemanticsActions.OnClick)
+        settle()
+        assertEquals(ToggleableState.Off, toggled(ASSISTANTS_NOTIFY))
+        assertEquals(localizer.errorMessage(IOException("Offline"), fallback = "assistants.failed"), words(ASSISTANTS_ERROR))
     }
 
     @Test

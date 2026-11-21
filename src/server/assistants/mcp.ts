@@ -145,7 +145,7 @@ export async function serveMcp(
   if (owner instanceof Response) return owner;
   const single = await oneMessage(request);
   if (single instanceof Response) return single;
-  const peek: McpRequestData = { service, caller: { userId: owner.userId, scopes: owner.scopes }, resourceMetadata: resourceMetadataUrl(settings) };
+  const peek: McpRequestData = { service, caller: { userId: owner.userId, grantId: owner.grantId, scopes: owner.scopes }, resourceMetadata: resourceMetadataUrl(settings) };
   return mcpHandler().fetch(single, {
     authInfo: {
       token,

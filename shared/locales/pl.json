@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "„Zarchiwizuj wszystko, co zostało doręczone”.",
   "assistants.connected": "Połączone",
   "assistants.none": "Nie połączono jeszcze żadnego asystenta.",
+  "assistants.notify": "Powiadamiaj, gdy asystent doda przesyłkę",
   "assistants.scope.read": "Widzi przesyłki",
   "assistants.scope.write": "Dodaje przesyłki",
   "assistants.scope.both": "Widzi i dodaje przesyłki",

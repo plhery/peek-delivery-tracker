@@ -255,14 +255,17 @@ class SettingsScreenshotTest {
         compose.screenshot("settings_assistants_claude_light")
     }
 
-    /** The same in dark, then the foot: the uses and the two assistants connected with OAuth, each with Disconnect. */
+    /**
+     * The same in dark, then the foot: the two assistants connected with OAuth, each with Disconnect, and the switch for
+     * the notification of each parcel they add.
+     */
     @Test
     fun assistantsInDark() {
         show(dark = true) { assistantsClient.offer = AssistantsFixtures.offer() }
         tap(SETTINGS_ASSISTANTS)
         tap("$ASSISTANTS_SETUP.OpenClaw")
         compose.screenshot("settings_assistants_openclaw_dark")
-        compose.onNodeWithTag("$ASSISTANTS_DISCONNECT.${AssistantsFixtures.chatGpt.id}").performScrollTo()
+        compose.onNodeWithTag(ASSISTANTS_NOTIFY).performScrollTo()
         settle()
         compose.screenshot("settings_assistants_connected_dark")
     }

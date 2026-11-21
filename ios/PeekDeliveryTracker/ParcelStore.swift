@@ -913,6 +913,11 @@ final class ParcelStore: ObservableObject {
             revoke: { [self] id in
                 try await api.revokeAssistant(id)
                 try session.checkGeneration(generation)
+            },
+            notify: { [self] on in
+                let offer = try await api.setAssistantsNotify(on)
+                try session.checkGeneration(generation)
+                return offer
             }
         )
     }

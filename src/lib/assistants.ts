@@ -27,6 +27,11 @@ export async function readAssistants(auth: ApiAuth): Promise<ApiAssistantsRespon
   return response.status === 404 ? null : answer(response);
 }
 
+/** Switches the notification of each parcel an assistant adds on or off, and answers the connections again. */
+export async function setAssistantsNotify(auth: ApiAuth, notifyAdded: boolean): Promise<ApiAssistantsResponse> {
+  return answer(await authenticatedFetch(PATH, auth, { method: 'PATCH', body: JSON.stringify({ notifyAdded }) }));
+}
+
 /** Disconnects an assistant; one already gone counts as done. */
 export async function revokeAssistant(auth: ApiAuth, id: string): Promise<void> {
   const response = await authenticatedFetch(`${PATH}/${encodeURIComponent(id)}`, auth, { method: 'DELETE' });

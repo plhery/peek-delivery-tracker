@@ -591,6 +591,12 @@ final class DeliveryAPIClient {
         return response.statusCode == 404 ? nil : try AssistantsOffer.decode(data)
     }
 
+    /// Switches the notification of each parcel an assistant adds on or off, and answers the offer again.
+    func setAssistantsNotify(_ on: Bool) async throws -> AssistantsResponse {
+        let body = try JSONEncoder.deliveryTracker.encode(["notifyAdded": on])
+        return try AssistantsOffer.decode(try await rawRequest("/api/account/assistants", method: "PATCH", body: body).0)
+    }
+
     /// Disconnects an assistant: its tokens stop working at once. One already gone counts as done.
     func revokeAssistant(_ id: UUID) async throws {
         _ = try await rawRequest("/api/account/assistants/\(id.uuidString.lowercased())", method: "DELETE", accepting: 404)

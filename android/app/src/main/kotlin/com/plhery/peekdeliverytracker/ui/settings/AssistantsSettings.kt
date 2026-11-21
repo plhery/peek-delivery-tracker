@@ -145,7 +145,11 @@ internal fun AssistantsPage(state: AccountHost, account: UUID, scroll: ScrollSta
             AddressGroup(state, offer.mcpUrl)
             Setups(offer.mcpUrl)
             Uses()
-            Connected(offer.assistants, working) { id -> source.scope.launch { store.revoke(account, id) } }
+            Connected(
+                offer.assistants, offer.notifyAdded, working,
+                onRevoke = { id -> source.scope.launch { store.revoke(account, id) } },
+                onNotify = { on -> source.scope.launch { store.setNotify(account, on) } },
+            )
         }
     }
 }
@@ -345,9 +349,19 @@ private fun Uses() {
     }
 }
 
-/** "assistants.connected": "assistants.none" in subheadline secondary, or each assistant connected with OAuth. */
+/**
+ * "assistants.connected": "assistants.none" in subheadline secondary, or each assistant connected with OAuth, then the
+ * switch for the parcels they add. The switch shows what the server last answered: it moves once the change is saved,
+ * and stays on failure.
+ */
 @Composable
-private fun Connected(assistants: List<AssistantConnection>, working: Boolean, onRevoke: (UUID) -> Unit) {
+private fun Connected(
+    assistants: List<AssistantConnection>,
+    notifyAdded: Boolean,
+    working: Boolean,
+    onRevoke: (UUID) -> Unit,
+    onNotify: (Boolean) -> Unit,
+) {
     SettingsGroup(localized("assistants.connected")) {
         if (assistants.isEmpty()) {
             Text(
@@ -358,6 +372,10 @@ private fun Connected(assistants: List<AssistantConnection>, working: Boolean, o
         assistants.forEachIndexed { index, connection ->
             if (index > 0) SettingsDivider()
             AssistantRow(connection, working) { onRevoke(connection.id) }
+        }
+        if (assistants.isNotEmpty()) {
+            SettingsDivider()
+            SettingsToggleRow(notifyAdded, onNotify, localized("assistants.notify"), ASSISTANTS_NOTIFY, symbol = "bell", enabled = !working)
         }
     }
 }
@@ -419,3 +437,4 @@ internal const val ASSISTANTS_SETUP = "$ASSISTANTS_TAG.setup"
 internal const val ASSISTANTS_STEPS = "$ASSISTANTS_TAG.steps"
 internal const val ASSISTANTS_NONE = "$ASSISTANTS_TAG.none"
 internal const val ASSISTANTS_DISCONNECT = "$ASSISTANTS_TAG.disconnect"
+internal const val ASSISTANTS_NOTIFY = "$ASSISTANTS_TAG.notify"

@@ -185,6 +185,9 @@ class AssistantsTests {
         assertEquals(address, offer?.mcpUrl)
         assertEquals(listOf(UUID.fromString(claudeId)), offer?.connections?.map { it.id })
         assertEquals("assistants.scope.both", offer?.connections?.single()?.scopeKey)
+        // A server from before the notification's choice has it on, as the server starts it.
+        assertEquals(true, offer?.notifyAdded)
+        assertEquals(false, client(serving(jsonResponse(200, """{"mcpUrl":"$address","connections":[],"notifyAdded":false}"""))).readAssistants()?.notifyAdded)
         // An answer without its address is no answer.
         val missing = runCatching { client(serving(jsonResponse(200, """{"connections":[]}"""))).readAssistants() }.exceptionOrNull()
         assertNotNull(missing)
@@ -201,6 +204,16 @@ class AssistantsTests {
         client(serving(jsonResponse(404, """{"error":"Not found"}"""))).revokeAssistant(UUID.fromString(claudeId))
         val failed = runCatching { client(serving(jsonResponse(500))).revokeAssistant(UUID.fromString(claudeId)) }.exceptionOrNull()
         assertTrue(failed is DeliveryApiError.ServiceFailed)
+    }
+
+    @Test
+    fun theNotificationsSwitchSendsTheChoice() = runTest {
+        val transport = serving(jsonResponse(200, """{"mcpUrl":"$address","connections":[${connection(claudeId)}],"notifyAdded":false}"""))
+        val offer = client(transport).setAssistantsNotify(false)
+        assertEquals(false, offer.notifyAdded)
+        val request = transport.requests.single()
+        assertEquals("PATCH https://peek.example/api/account/assistants", "${request.method} ${request.url}")
+        assertEquals("""{"notifyAdded":false}""", request.body?.decodeToString())
     }
 
     // What Settings shows of it
@@ -249,7 +262,7 @@ class AssistantsTests {
         assertEquals("Sees your parcels · not used yet", assistant(redirectHost = null).detail(localizer, now))
         // Only the assistants connected with OAuth show: a personal token has no screen.
         val token = assistant(kind = AssistantConnectionKind.Personal)
-        assertEquals(listOf(used), AssistantsResponse(connections = listOf(used, token), mcpUrl = address).assistants)
+        assertEquals(listOf(used), AssistantsResponse(connections = listOf(used, token), mcpUrl = address, notifyAdded = true).assistants)
     }
 
     @Test
@@ -266,6 +279,7 @@ class AssistantsTests {
         var answer: AssistantsResponse? = null
         var failure: Exception? = null
         var revokeFailure: Exception? = null
+        var notifyFailure: Exception? = null
         var holding: CompletableDeferred<Unit>? = null
         var revoking: CompletableDeferred<Unit>? = null
         val calls = mutableListOf<String>()
@@ -282,13 +296,19 @@ class AssistantsTests {
             revoking?.await()
             revokeFailure?.let { throw it }
         }
+
+        override suspend fun notify(on: Boolean): AssistantsResponse {
+            calls += "notify $on"
+            notifyFailure?.let { throw it }
+            return checkNotNull(answer).copy(notifyAdded = on)
+        }
     }
 
     private val reader = UUID(0, 7)
     private val other = UUID(0, 8)
     private val claude = assistant(id = UUID(1, 1))
     private val chatGpt = assistant(id = UUID(1, 2), redirectHost = "chatgpt.com")
-    private val offered = AssistantsResponse(connections = listOf(claude, chatGpt), mcpUrl = "https://peek.example.test/mcp")
+    private val offered = AssistantsResponse(connections = listOf(claude, chatGpt), mcpUrl = "https://peek.example.test/mcp", notifyAdded = true)
 
     @Test
     fun theRowShowsOnlyOnceOfferedAndForTheAccountItWasReadFor() = runTest {
@@ -385,5 +405,20 @@ class AssistantsTests {
         client.holding?.complete(Unit)
         reading.await()
         assertEquals(listOf(chatGpt), store.offer(reader)?.connections)
+    }
+
+    @Test
+    fun theSwitchSavesTheChoiceAndAFailureKeepsTheOldOne() = runTest {
+        val client = FakeClient().apply { answer = offered }
+        val store = AssistantsStore(client)
+        store.read(reader)
+        assertTrue(store.setNotify(reader, false))
+        assertEquals(false, store.offer(reader)?.notifyAdded)
+
+        client.notifyFailure = IOException("offline")
+        assertFalse(store.setNotify(reader, true))
+        assertEquals(false, store.offer(reader)?.notifyAdded)
+        assertNotNull(store.failureFlow.value)
+        assertEquals(listOf("read", "notify false", "notify true"), client.calls)
     }
 }

@@ -28,6 +28,9 @@ interface AssistantsClient {
 
     /** Disconnects an assistant; one already gone counts as done. */
     suspend fun revoke(id: UUID)
+
+    /** Switches the notification of each parcel an assistant adds: the offer as it then is. */
+    suspend fun notify(on: Boolean): AssistantsResponse
 }
 
 /** The assistants' requests through the app's API client. */
@@ -35,17 +38,21 @@ fun DeliveryApiClient.assistantsClient(): AssistantsClient = object : Assistants
     override suspend fun read() = readAssistants()
 
     override suspend fun revoke(id: UUID) = revokeAssistant(id)
+
+    override suspend fun notify(on: Boolean) = setAssistantsNotify(on)
 }
 
 /**
  * [AssistantsResponse] read leniently (`AssistantsOffer`): a connection this version can't read, such as a kind or a
- * permission a newer server adds, drops out of the list instead of failing the whole page.
+ * permission a newer server adds, drops out of the list instead of failing the whole page, and an answer without the
+ * notification's choice has it on, as the server starts it.
  */
 object AssistantsResponseReader : JsonTransformingSerializer<AssistantsResponse>(AssistantsResponse.serializer()) {
     override fun transformDeserialize(element: JsonElement): JsonElement {
         val response = element as? JsonObject ?: return element
         val connections = response["connections"] as? JsonArray ?: return element
-        return JsonObject(response + ("connections" to JsonArray(connections.filter(::readable))))
+        val notify = response["notifyAdded"] as? JsonPrimitive ?: JsonPrimitive(true)
+        return JsonObject(response + ("connections" to JsonArray(connections.filter(::readable))) + ("notifyAdded" to notify))
     }
 
     private fun readable(element: JsonElement): Boolean =
@@ -298,6 +305,31 @@ class AssistantsStore(private val client: AssistantsClient) {
             if (current != null && current.account == account) {
                 offerState.value = current.copy(value = current.value.copy(connections = current.value.connections.filter { it.id != id }))
             }
+            return true
+        } catch (error: CancellationException) {
+            throw error
+        } catch (error: Exception) {
+            failureState.value = error
+            return false
+        } finally {
+            changes += 1
+            workingState.value = false
+        }
+    }
+
+    /**
+     * Switches the notification of each parcel the connected assistants add, for [account]. A failure leaves the choice
+     * as it was and says why ([failureFlow]). False when it failed, or another change still waits.
+     */
+    suspend fun setNotify(account: UUID, on: Boolean): Boolean {
+        if (workingState.value) return false
+        workingState.value = true
+        failureState.value = null
+        changes += 1
+        try {
+            val value = client.notify(on)
+            val current = offerState.value
+            if (current == null || current.account == account) offerState.value = AssistantsOffer(account, value)
             return true
         } catch (error: CancellationException) {
             throw error

@@ -637,12 +637,38 @@ final class AssistantsTests: XCTestCase {
         XCTAssertEqual(offer.mcpURL, address)
         XCTAssertEqual(offer.connections.map(\.name), ["Claude"])
         XCTAssertEqual(offer.connections[0].scopeKey, "assistants.scope.both")
+        // A server from before the notification's choice has it on, as the server starts it.
+        XCTAssertTrue(offer.notifyAdded)
+        XCTAssertFalse(try AssistantsOffer.decode(Data(#"{"mcpUrl":"\#(address)","connections":[],"notifyAdded":false}"#.utf8)).notifyAdded)
+    }
+
+    func testTheSwitchSavesTheChoiceAndAFailureKeepsTheOldOne() async {
+        let connection = AssistantConnection(id: UUID(), kind: .oauth, name: "Claude", scopes: [.parcelsWrite], createdAt: "2026-11-01T09:00:00Z")
+        let address = address
+        let offer = AssistantsResponse(connections: [connection], mcpURL: address, notifyAdded: true)
+        nonisolated(unsafe) var choices: [Bool] = []
+        let model = AssistantsModel(client: AssistantsModel.Client(read: { offer }, revoke: { _ in }, notify: { on in
+            choices.append(on)
+            return AssistantsResponse(connections: [connection], mcpURL: address, notifyAdded: on)
+        }))
+        await model.load()
+        let saved = await model.setNotify(false)
+        XCTAssertTrue(saved)
+        XCTAssertEqual(choices, [false])
+        XCTAssertEqual(model.offer?.notifyAdded, false)
+
+        model.configure(AssistantsModel.Client(read: { offer }, revoke: { _ in }, notify: { _ in throw DeliveryAPIError.serviceFailed(502) }))
+        await model.load()
+        let failed = await model.setNotify(false)
+        XCTAssertFalse(failed)
+        XCTAssertNotNil(model.failure)
+        XCTAssertEqual(model.offer?.notifyAdded, true)
     }
 
     func testTheRowShowsOnceOfferedAndDisconnectTakesTheAssistantAway() async {
         let connection = AssistantConnection(id: UUID(), kind: .oauth, name: "Claude", scopes: [.parcelsRead], createdAt: "2026-11-01T09:00:00Z")
         let token = AssistantConnection(id: UUID(), kind: .personal, name: "Script", scopes: [.parcelsRead], createdAt: "2026-11-01T09:00:00Z")
-        let offer = AssistantsResponse(connections: [connection, token], mcpURL: address)
+        let offer = AssistantsResponse(connections: [connection, token], mcpURL: address, notifyAdded: true)
         nonisolated(unsafe) var revoked: [UUID] = []
         let model = AssistantsModel()
         await model.load()

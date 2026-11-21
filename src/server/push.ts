@@ -48,6 +48,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} is in',
     friend_body: 'Your passports are side by side now. Have a peek.',
     email_added_title: 'Added from your email',
+    assistant_added_title: 'Added by {{name}}',
     update: 'Parcel update',
     title_registered: 'Label created',
     title_in_transit: 'On its way',
@@ -86,6 +87,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} ist dabei',
     friend_body: 'Eure Reisepässe liegen jetzt nebeneinander. Wirf einen Blick drauf.',
     email_added_title: 'Aus deiner E-Mail hinzugefügt',
+    assistant_added_title: 'Von {{name}} hinzugefügt',
     update: 'Neues vom Paket',
     title_registered: 'Etikett erstellt',
     title_in_transit: 'Unterwegs',
@@ -124,6 +126,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} est de la partie',
     friend_body: 'Vos passeports sont maintenant côte à côte. Jette un œil.',
     email_added_title: 'Ajouté depuis ton e-mail',
+    assistant_added_title: 'Ajouté par {{name}}',
     update: 'Des nouvelles du colis',
     title_registered: 'Étiquette créée',
     title_in_transit: 'En route',
@@ -162,6 +165,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} è nella tua cerchia',
     friend_body: 'I vostri passaporti ora sono fianco a fianco. Dai un’occhiata.',
     email_added_title: 'Aggiunto dalla tua e-mail',
+    assistant_added_title: 'Aggiunto da {{name}}',
     update: 'Novità sul pacco',
     title_registered: 'Etichetta creata',
     title_in_transit: 'In viaggio',
@@ -200,6 +204,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} se apunta',
     friend_body: 'Vuestros pasaportes ya están uno al lado del otro. Echa un vistazo.',
     email_added_title: 'Añadido desde tu correo',
+    assistant_added_title: 'Añadido por {{name}}',
     update: 'Novedades del paquete',
     title_registered: 'Etiqueta creada',
     title_in_transit: 'En camino',
@@ -238,6 +243,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} juntou-se a ti',
     friend_body: 'Os vossos passaportes já estão lado a lado. Dá uma espreitadela.',
     email_added_title: 'Adicionada a partir do teu e-mail',
+    assistant_added_title: 'Adicionada por {{name}}',
     update: 'Atualização da encomenda',
     title_registered: 'Etiqueta criada',
     title_in_transit: 'A caminho',
@@ -276,6 +282,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} jest już w twoim kręgu',
     friend_body: 'Wasze paszporty leżą teraz obok siebie. Zerknij.',
     email_added_title: 'Dodano z e-maila',
+    assistant_added_title: 'Dodano przez {{name}}',
     update: 'Nowe wieści o przesyłce',
     title_registered: 'Zarejestrowana przez nadawcę',
     title_in_transit: 'W drodze',
@@ -314,6 +321,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} entrou no seu círculo',
     friend_body: 'Agora seus passaportes estão lado a lado. Dê uma espiada.',
     email_added_title: 'Adicionada pelo seu e-mail',
+    assistant_added_title: 'Adicionada por {{name}}',
     update: 'Atualização da encomenda',
     title_registered: 'Etiqueta criada',
     title_in_transit: 'A caminho',
@@ -352,6 +360,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} теперь в вашем круге',
     friend_body: 'Ваши паспорта теперь рядом. Загляните.',
     email_added_title: 'Добавлено из вашего письма',
+    assistant_added_title: 'Добавлено через {{name}}',
     update: 'Новости о посылке',
     title_registered: 'Этикетка создана',
     title_in_transit: 'Уже в пути',
@@ -390,6 +399,7 @@ const PUSH_COPY: Record<Locale, Record<string, string>> = {
     friend_title: '{{name}} 已加入',
     friend_body: '你们的护照现在并排放在一起了。快去看看吧。',
     email_added_title: '已从你的邮件添加',
+    assistant_added_title: '由 {{name}} 添加',
     update: '包裹动态',
     title_registered: '已生成面单',
     title_in_transit: '在路上了',
@@ -504,6 +514,18 @@ export function emailAddedNotificationCopy(language: unknown, label: unknown, ca
   const name = notificationText(label, 80);
   const carrierName = notificationText(carrierDisplayName(carrier, locale), 80);
   return { locale, title: pushCopy(locale).email_added_title!, body: name ? `${name} · ${carrierName}` : carrierName };
+}
+
+/**
+ * What tells someone an assistant added a parcel, in the language of the device it goes to: the assistant's name in the
+ * title, as the account's list of connected assistants shows it, then the parcel's name and carrier as for an email.
+ */
+export function assistantAddedNotificationCopy(
+  language: unknown, assistant: unknown, label: unknown, carrier: unknown,
+): { locale: Locale; title: string; body: string } {
+  const { locale, body } = emailAddedNotificationCopy(language, label, carrier);
+  const name = notificationText(assistant, 40) || 'AI';
+  return { locale, title: pushCopy(locale).assistant_added_title!.replace('{{name}}', () => name), body };
 }
 
 /** One of the app's own words in a notification's language, so both say the same. */

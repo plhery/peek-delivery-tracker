@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "«Arquiva tudo o que já foi entregue».",
   "assistants.connected": "Ligados",
   "assistants.none": "Ainda não há nenhum assistente ligado.",
+  "assistants.notify": "Avisar-me quando um assistente adicionar uma encomenda",
   "assistants.scope.read": "Vê as tuas encomendas",
   "assistants.scope.write": "Adiciona encomendas",
   "assistants.scope.both": "Vê e adiciona encomendas",

@@ -2,7 +2,8 @@ import Foundation
 import SwiftUI
 
 /// The answer of `/api/account/assistants`, read leniently: a connection this app can't read, such as a kind or a
-/// permission a newer server adds, drops out of the list instead of failing the whole page.
+/// permission a newer server adds, drops out of the list instead of failing the whole page, and an answer without the
+/// notification's choice has it on, as the server starts it.
 struct AssistantsOffer: Decodable {
     let value: AssistantsResponse
 
@@ -11,13 +12,14 @@ struct AssistantsOffer: Decodable {
         catch { throw DeliveryAPIError.invalidResponse }
     }
 
-    private enum Keys: String, CodingKey { case connections, mcpUrl }
+    private enum Keys: String, CodingKey { case connections, mcpUrl, notifyAdded }
 
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: Keys.self)
         value = AssistantsResponse(
             connections: (try container.decode([Known].self, forKey: .connections)).compactMap(\.value),
-            mcpURL: try container.decode(String.self, forKey: .mcpUrl)
+            mcpURL: try container.decode(String.self, forKey: .mcpUrl),
+            notifyAdded: try container.decodeIfPresent(Bool.self, forKey: .notifyAdded) ?? true
         )
     }
 
@@ -165,6 +167,8 @@ final class AssistantsModel: ObservableObject {
         var read: @MainActor () async throws -> AssistantsResponse?
         /// Disconnects an assistant; one already gone counts as done.
         var revoke: @MainActor (_ id: UUID) async throws -> Void
+        /// Switches the notification of each parcel an assistant adds, and answers the offer again.
+        var notify: @MainActor (_ on: Bool) async throws -> AssistantsResponse? = { _ in nil }
     }
 
     /// Nil hides the row.
@@ -218,8 +222,31 @@ final class AssistantsModel: ObservableObject {
             try await client.revoke(id)
             changes += 1
             if let offer {
-                self.offer = AssistantsResponse(connections: offer.connections.filter { $0.id != id }, mcpURL: offer.mcpURL)
+                self.offer = AssistantsResponse(
+                    connections: offer.connections.filter { $0.id != id }, mcpURL: offer.mcpURL, notifyAdded: offer.notifyAdded
+                )
             }
+            return true
+        } catch is CancellationError {
+            return false
+        } catch {
+            failure = error
+            return false
+        }
+    }
+    /// Switches the notification of each parcel the connected assistants add. A failure leaves the choice as it was.
+    @discardableResult func setNotify(_ on: Bool) async -> Bool {
+        guard let client, !working else { return false }
+        working = true
+        failure = nil
+        changes += 1
+        defer { working = false }
+        do {
+            let generation = changes
+            let next = try await client.notify(on)
+            guard generation == changes else { return false }
+            changes += 1
+            if let next { offer = next }
             return true
         } catch is CancellationError {
             return false

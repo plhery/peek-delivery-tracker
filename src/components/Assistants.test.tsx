@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import type { ApiAssistantConnection, ApiAssistantsResponse } from '../generated/apiContract';
 import { readAddByEmail } from '../lib/addByEmail';
-import { readAssistants, revokeAssistant } from '../lib/assistants';
+import { readAssistants, revokeAssistant, setAssistantsNotify } from '../lib/assistants';
 import { AccountMenu } from './AccountMenu';
 import { AssistantsPage } from './Assistants';
 
 vi.mock('../lib/addByEmail', () => ({ readAddByEmail: vi.fn(), openAddByEmail: vi.fn(), closeAddByEmail: vi.fn() }));
-vi.mock('../lib/assistants', () => ({ readAssistants: vi.fn(), revokeAssistant: vi.fn() }));
+vi.mock('../lib/assistants', () => ({ readAssistants: vi.fn(), revokeAssistant: vi.fn(), setAssistantsNotify: vi.fn() }));
 vi.mock('./NotificationControl', () => ({ NotificationControl: () => null }));
 
 const apiAuth = { userId: 'user-a', getAccessToken: async () => 'session' };
@@ -20,7 +20,7 @@ const script: ApiAssistantConnection = {
   id: '6c000000-0000-4000-a000-0000000000b1', kind: 'personal', name: 'Home script', redirectHost: null,
   scopes: ['parcels:read'], createdAt: '2026-11-03T10:00:00.000Z', lastUsedAt: null,
 };
-const offer = (connections: ApiAssistantConnection[]): ApiAssistantsResponse => ({ connections, mcpUrl: 'https://peek.example/mcp' });
+const offer = (connections: ApiAssistantConnection[], notifyAdded = true): ApiAssistantsResponse => ({ connections, mcpUrl: 'https://peek.example/mcp', notifyAdded });
 
 afterEach(() => { vi.clearAllMocks(); });
 
@@ -68,6 +68,23 @@ describe('assistants in Settings', () => {
     // The empty list says so in a plain line: Pip stays over the address only.
     expect((await screen.findByText('No assistant is connected yet.')).closest('.pip-empty')).toBeNull();
     expect(document.querySelectorAll('.small-pip')).toHaveLength(1);
+    // With no assistant left, there is nothing to be notified of.
+    expect(screen.queryByRole('switch', { name: 'Notify me when an assistant adds a parcel' })).not.toBeInTheDocument();
+  });
+
+  it('notifies the parcels the connected assistants add until switched off', async () => {
+    vi.mocked(readAddByEmail).mockResolvedValue(null);
+    vi.mocked(readAssistants).mockResolvedValue(offer([claude]));
+    vi.mocked(setAssistantsNotify).mockResolvedValue(offer([claude], false));
+    const user = userEvent.setup();
+    render(<AccountMenu email="owner@example.test" apiAuth={apiAuth} />);
+    await user.click(screen.getByLabelText('Account options for owner@example.test'));
+    await user.click(await screen.findByRole('button', { name: /^Assistants ?Beta$/ }));
+    const notify = screen.getByRole('switch', { name: 'Notify me when an assistant adds a parcel' });
+    expect(notify).toHaveAttribute('aria-checked', 'true');
+    await user.click(notify);
+    expect(setAssistantsNotify).toHaveBeenCalledExactlyOnceWith(apiAuth, false);
+    await waitFor(() => expect(screen.getByRole('switch', { name: 'Notify me when an assistant adds a parcel' })).toHaveAttribute('aria-checked', 'false'));
   });
 
   it('shows how to add Peek to Claude, ChatGPT, Gemini, OpenClaw and Home Assistant, in their own words, and what to ask', async () => {

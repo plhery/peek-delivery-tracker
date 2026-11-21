@@ -565,6 +565,13 @@ Key server modules:
     that carrier, and the number may be shorter than tracking numbers mostly are.
     `find_carriers` gives the other name it found a carrier by, so a shop's name for it can be
     checked.
+  - Each parcel an assistant adds starts unseen and is notified once, "Added by <assistant>"
+    then its name and carrier, to each browser and phone of the account, after quiet hours
+    (`assistant_added_push_deliveries`, `src/server/assistantAddedPush.ts`), as one an email
+    adds is: a parcel the account already followed isn't. One opened, archived, waiting more
+    than twelve hours or whose assistant was disconnected is dropped. The switch under the
+    connected assistants turns it off for the account (`PATCH /api/account/assistants`,
+    `private.assistant_preferences`).
   - Amazon shows a parcel's carrier and tracking ID only in the buyer's signed-in account, and
     its emails hold no tracking number. So the instructions say first what an import takes: a
     browser on the user's own computer where they are signed in to Amazon, such as Claude in

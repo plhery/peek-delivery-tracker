@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "“Archive everything that’s been delivered.”",
   "assistants.connected": "Connected",
   "assistants.none": "No assistant is connected yet.",
+  "assistants.notify": "Notify me when an assistant adds a parcel",
   "assistants.scope.read": "Sees your parcels",
   "assistants.scope.write": "Adds parcels",
   "assistants.scope.both": "Sees and adds parcels",

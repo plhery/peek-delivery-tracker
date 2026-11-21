@@ -23,7 +23,8 @@ import { verifyAmazonShippingAddition } from '../amazonShippingEligibility';
 import { HttpError } from '../api';
 import { queueCarrierCheck } from '../carrierCheck';
 import { withEventPlaces } from '../eventPlaces';
-import { logOperationalEvent } from '../observability';
+import { wakeAssistantAddedWorker } from '../background';
+import { captureOperationalError, errorType, logOperationalEvent } from '../observability';
 import { addParcelsFromText, MOST_TEXT_LENGTH, type ParcelAddition } from '../parcelsFromText';
 import { holdsPostcodeCountry, savePostcodeCountry } from '../postcodeCountry';
 import { privateValues, redactedScans, viewerStatusText } from '../privateDetails';
@@ -50,9 +51,10 @@ const MOST_CARRIERS = 10;
 const NO_PARCEL = 'No such parcel in this Peek account.';
 const NO_CARRIER = 'Peek has no carrier with this id: find_carriers gives the ids.';
 
-/** Who a call is for: the account behind the token, and what the token may do. */
+/** Who a call is for: the account behind the token, the grant it was issued for, and what the token may do. */
 export interface AssistantCaller {
   userId: string;
+  grantId: string;
   scopes: readonly Scope[];
 }
 
@@ -406,6 +408,21 @@ const OUTCOME_TEXT: Record<ParcelAddition['outcome'], string> = {
   unavailable: 'not added: try again later',
 };
 
+/**
+ * The parcels the assistant added start unseen, and are notified to the account's browsers and phones with the
+ * assistant's name unless it switched that off. A failure leaves them added, seen and unannounced, and is reported.
+ */
+async function announce(service: SupabaseServiceClient, caller: AssistantCaller, additions: readonly ParcelAddition[]): Promise<void> {
+  const added = additions.flatMap((addition) => (addition.outcome === 'added' ? [addition.packageId] : []));
+  if (!added.length) return;
+  try {
+    if (await service.parcelsAddedByAssistant(caller.userId, caller.grantId, added) > 0) wakeAssistantAddedWorker();
+  } catch (error) {
+    logOperationalEvent('assistant_added_announce_failed', { error_type: errorType(error) }, 'error');
+    captureOperationalError(error, { component: 'assistants', operation: 'announce' });
+  }
+}
+
 function additionSummary(addition: ParcelAddition) {
   return {
     trackingNumber: displayReference(addition),
@@ -487,6 +504,7 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     const additions = carrier
       ? await addParcelsFromText(service, caller.userId, text, label, [carrier as CarrierId], { trust: 'named' })
       : await addParcelsFromText(service, caller.userId, text, label, [], { trust: 'sent' });
+    await announce(service, caller, additions);
     if (!additions.length) {
       const link = await amazonGuideLink();
       const amazon = ABOUT_AMAZON.test(text)

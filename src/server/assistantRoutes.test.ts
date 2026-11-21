@@ -8,7 +8,7 @@ import { GET as protectedResource } from '../../app/.well-known/oauth-protected-
 import { DELETE as deleteAccount } from '../../app/api/account/route';
 import { DELETE as disconnect } from '../../app/api/account/assistants/[id]/route';
 import { POST as consent } from '../../app/api/account/assistants/consent/route';
-import { GET as readAssistants, POST as createToken } from '../../app/api/account/assistants/route';
+import { GET as readAssistants, PATCH as setAssistantsNotify, POST as createToken } from '../../app/api/account/assistants/route';
 import * as tokenApi from '../../app/api/parcels/route';
 import { GET as tokenParcels } from '../../app/api/parcels/route';
 import { DELETE as mcpDelete, GET as mcpGet, POST as mcpPost } from '../../app/mcp/route';
@@ -78,6 +78,8 @@ beforeEach(() => {
     id: userId, email: 'alex@example.com', authenticatedAt: new Date(), sessionId: '7d000000-0000-4000-a000-000000000001',
   });
   vi.spyOn(service, 'assistantToken').mockImplementation(async (digest) => owners.get(digest) ?? null);
+  vi.spyOn(service, 'parcelsAddedByAssistant').mockResolvedValue(0);
+  vi.spyOn(service, 'assistantAddedNotify').mockResolvedValue(true);
   // The account's days are this machine's, as `dayFromToday` counts them.
   vi.spyOn(service, 'accountTimeZone').mockResolvedValue(Intl.DateTimeFormat().resolvedOptions().timeZone);
   vi.mocked(addParcelsFromText).mockReset();
@@ -617,8 +619,21 @@ describe('the MCP endpoint', () => {
       ],
     });
     expect(answer.result!.content![0]!.text).toContain(`${UPS} (UPS): added`);
+    // The parcel added, not the one refused, starts unseen and is announced with the assistant's name.
+    expect(service.parcelsAddedByAssistant).toHaveBeenCalledExactlyOnceWith(userId, owners.get(secretDigest(writer))!.grantId, ['7d000000-0000-4000-a000-0000000000aa']);
 
     expect(addParcelsFromText).toHaveBeenCalledTimes(1);
+  });
+
+  it('announces nothing when no parcel was added, and still answers when the announcement fails', async () => {
+    vi.mocked(addParcelsFromText).mockResolvedValue([{ trackingNumber: UPS, carrier: 'ups', outcome: 'known', packageId: '7d000000-0000-4000-a000-0000000000aa' }]);
+    const writer = connect(['parcels:write']);
+    expect((await call(writer, 'add_parcels', { text: UPS })).result!.content![0]!.text).toContain(`${UPS} (UPS): already followed`);
+    expect(service.parcelsAddedByAssistant).not.toHaveBeenCalled();
+
+    vi.mocked(addParcelsFromText).mockResolvedValue([{ trackingNumber: UPS, carrier: 'ups', outcome: 'added', packageId: '7d000000-0000-4000-a000-0000000000aa', jobId: null }]);
+    vi.mocked(service.parcelsAddedByAssistant).mockRejectedValueOnce(new SupabaseError('Supabase POST request failed (503)', 503));
+    expect((await call(writer, 'add_parcels', { text: UPS })).result!.content![0]!.text).toContain(`${UPS} (UPS): added`);
   });
 
   it('tells the assistant where an Amazon order\'s tracking number is, and never to send its order number', async () => {
@@ -1342,12 +1357,29 @@ describe('the account\'s assistants', () => {
     expect((await readAssistants(signedIn('GET'), none)).status).toBe(200);
   });
 
-  it('lists the connections and the address to connect to', async () => {
+  it('lists the connections, the address to connect to and whether what they add is notified', async () => {
     const read = vi.spyOn(service, 'assistantGrants').mockResolvedValue([connection]);
+    const notify = vi.spyOn(service, 'assistantAddedNotify').mockResolvedValue(true);
     const response = await readAssistants(signedIn('GET'), none);
     expect(response.status).toBe(200);
-    expect(await response.json()).toEqual({ connections: [connection], mcpUrl: 'https://peek.example/mcp' });
+    expect(await response.json()).toEqual({ connections: [connection], mcpUrl: 'https://peek.example/mcp', notifyAdded: true });
     expect(read).toHaveBeenCalledWith(userId);
+    expect(notify).toHaveBeenCalledWith(userId);
+  });
+
+  it('switches the notification of the parcels they add, for an account they may connect to', async () => {
+    vi.spyOn(service, 'assistantGrants').mockResolvedValue([connection]);
+    const save = vi.spyOn(service, 'setAssistantAddedNotify').mockResolvedValue(false);
+    const response = await setAssistantsNotify(signedIn('PATCH', undefined, { notifyAdded: false }), none);
+    expect(response.status).toBe(200);
+    expect(await response.json()).toEqual({ connections: [connection], mcpUrl: 'https://peek.example/mcp', notifyAdded: false });
+    expect(save).toHaveBeenCalledExactlyOnceWith(userId, false);
+    for (const payload of [{}, { notifyAdded: 'no' }, { notifyAdded: null }]) {
+      expect((await setAssistantsNotify(signedIn('PATCH', undefined, payload), none)).status, JSON.stringify(payload)).toBe(400);
+    }
+    vi.stubEnv('ASSISTANT_ACCOUNTS', otherUser);
+    expect((await setAssistantsNotify(signedIn('PATCH', undefined, { notifyAdded: true }), none)).status).toBe(404);
+    expect(save).toHaveBeenCalledOnce();
   });
 
   it('makes no personal token while personal tokens are off', async () => {

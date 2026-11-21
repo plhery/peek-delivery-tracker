@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "„Archiviere alles, was zugestellt wurde.“",
   "assistants.connected": "Verbunden",
   "assistants.none": "Noch ist kein Assistent verbunden.",
+  "assistants.notify": "Mitteilung, wenn ein Assistent ein Paket hinzufügt",
   "assistants.scope.read": "Sieht deine Pakete",
   "assistants.scope.write": "Fügt Pakete hinzu",
   "assistants.scope.both": "Sieht deine Pakete und fügt neue hinzu",

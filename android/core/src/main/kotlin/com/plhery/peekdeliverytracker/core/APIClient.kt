@@ -687,6 +687,11 @@ class DeliveryApiClient(
         return decodeAnswer(AssistantsResponseReader, response.body)
     }
 
+    /** Switches the notification of each parcel an assistant adds on or off: the offer as it then is. */
+    suspend fun setAssistantsNotify(on: Boolean): AssistantsResponse = request(
+        ASSISTANTS, AssistantsResponseReader, "PATCH", """{"notifyAdded":$on}""".toByteArray(Charsets.UTF_8),
+    )
+
     /** Disconnects an assistant: its tokens stop working at once. One already gone (404) counts as done. The answer has no body. */
     suspend fun revokeAssistant(id: UUID) {
         rawRequest("$ASSISTANTS/${id.toString().lowercase()}", "DELETE", missing = 404)

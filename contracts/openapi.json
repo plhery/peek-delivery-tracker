@@ -70744,6 +70744,53 @@
           }
         }
       },
+      "patch": {
+        "operationId": "setAssistantsNotify",
+        "description": "Switches the notification of each parcel an assistant adds on or off. 404 when assistants may not connect to this account.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "notifyAdded"
+                ],
+                "properties": {
+                  "notifyAdded": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "The connections, with the choice saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AssistantsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "401": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "404": {
+            "$ref": "#/components/responses/ApiError"
+          },
+          "502": {
+            "$ref": "#/components/responses/ApiError"
+          }
+        }
+      },
       "post": {
         "operationId": "createPersonalToken",
         "description": "Makes a personal token for a script, at most ten an account. It needs a sign-in from the last ten minutes, checked with Auth afresh: a 401 with code recent_sign_in otherwise. 404 while personal tokens are off (`PERSONAL_TOKENS`).",
@@ -76660,7 +76707,8 @@
         "additionalProperties": false,
         "required": [
           "connections",
-          "mcpUrl"
+          "mcpUrl",
+          "notifyAdded"
         ],
         "properties": {
           "connections": {
@@ -76673,6 +76721,10 @@
             "type": "string",
             "format": "uri",
             "description": "The MCP server address assistants connect to."
+          },
+          "notifyAdded": {
+            "type": "boolean",
+            "description": "Whether each parcel an assistant adds is notified to the account's browsers and phones, naming the assistant. On until switched off."
           }
         }
       },

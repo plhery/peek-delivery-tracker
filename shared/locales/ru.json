@@ -1417,6 +1417,7 @@
   "assistants.uses.archive": "«Перенеси в архив всё, что уже доставлено».",
   "assistants.connected": "Подключены",
   "assistants.none": "Пока не подключено ни одного ассистента.",
+  "assistants.notify": "Уведомлять, когда ассистент добавляет посылку",
   "assistants.scope.read": "Видит ваши посылки",
   "assistants.scope.write": "Добавляет посылки",
   "assistants.scope.both": "Видит и добавляет посылки",

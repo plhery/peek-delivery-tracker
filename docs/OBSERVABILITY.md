@@ -964,12 +964,12 @@ provider failure in an `AggregateError` so every cause is visible.
   late. A run whose worker died three times is failed by the next claim; the next run closes
   its check-in as `error` before opening its own, so the monitor alerts. Each reclaim
   before that was reported.
-- **Background work**: each run of the sync worker, the scheduler, the friendship and
-  email-added notifications and the review queue replay has Sentry scopes and a trace of its own
-  (`inBackgroundScope`). A request that wakes a worker leaves its transaction, headers, tags,
-  user and trace out of the worker's reports. Their transaction and `background_job` tag name
-  the work: `sync-worker`, `sync-scheduler`, `friendship-notifications`,
-  `email-added-notifications` or `review-queues`.
+- **Background work**: each run of the sync worker, the scheduler, the friendship,
+  email-added and assistant-added notifications and the review queue replay has Sentry scopes
+  and a trace of its own (`inBackgroundScope`). A request that wakes a worker leaves its
+  transaction, headers, tags, user and trace out of the worker's reports. Their transaction and
+  `background_job` tag name the work: `sync-worker`, `sync-scheduler`, `friendship-notifications`,
+  `email-added-notifications`, `assistant-added-notifications` or `review-queues`.
 - **Alerts**: notify on new issues and regressions in `production`, and keep the Cron
   alerts. Avoid "more than 0 times in 5 minutes" rules: they fire on every failed check.
 - **Incidents**: carrier and provider outages open once, from thresholds computed in

@@ -19,6 +19,7 @@ import { deliveryEmailService } from './email/deliveryEmails';
 import { readSyncQueueWith, recordParcelAlertRemoved, recordParcelsForgotten, recordPublicLookupUsage } from './metrics';
 import { pushServices } from './push';
 import { EmailAddedPushService, EmailAddedPushWorker } from './emailAddedPush';
+import { AssistantAddedPushService, AssistantAddedPushWorker } from './assistantAddedPush';
 import { FriendshipPushService, FriendshipPushWorker } from './friendshipPush';
 import { ReviewQueueReplay } from './reviewQueues';
 import { serviceClient } from './runtime';
@@ -715,6 +716,8 @@ interface BackgroundRuntime {
   friendshipWorker: FriendshipPushWorker;
   /** "Added from your email": each parcel an email added, to its account's browsers and phones. */
   emailAddedWorker: EmailAddedPushWorker;
+  /** "Added by Claude": each parcel an assistant added, to its account's browsers and phones. */
+  assistantAddedWorker: AssistantAddedPushWorker;
   reviews: ReviewQueueReplay;
 }
 
@@ -727,12 +730,13 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   if (!client) return null;
   const current = globalBackground.__deliveryBackgroundRuntime;
   if (current?.state.draining) return current;
-  if (current?.client === client && current.friendshipWorker && current.emailAddedWorker && current.reviews) {
+  if (current?.client === client && current.friendshipWorker && current.emailAddedWorker && current.assistantAddedWorker && current.reviews) {
     current.worker.start();
     for (const reader of current.readerWorkers) reader.start();
     current.scheduler.start();
     current.friendshipWorker.start();
     current.emailAddedWorker.start();
+    current.assistantAddedWorker.start();
     current.reviews.start();
     return current;
   }
@@ -741,6 +745,7 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   current?.scheduler.stop();
   current?.friendshipWorker?.stop();
   current?.emailAddedWorker?.stop();
+  current?.assistantAddedWorker?.stop();
   current?.reviews?.stop();
   const state = initialState();
   const notifier = pushServices(client);
@@ -758,9 +763,12 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   const emailAddedWorker = new EmailAddedPushWorker(new EmailAddedPushService(
     client, notifier.web, notifier.native, notifier.fcm, notifier.unifiedpush, notifier.inbox,
   ));
+  const assistantAddedWorker = new AssistantAddedPushWorker(new AssistantAddedPushService(
+    client, notifier.web, notifier.native, notifier.fcm, notifier.unifiedpush, notifier.inbox,
+  ));
   // Once per deployed version, the support backlog is replayed against it.
   const reviews = new ReviewQueueReplay(client);
-  const runtime = { client, state, worker, readerWorkers, scheduler, friendshipWorker, emailAddedWorker, reviews };
+  const runtime = { client, state, worker, readerWorkers, scheduler, friendshipWorker, emailAddedWorker, assistantAddedWorker, reviews };
   globalBackground.__deliveryBackgroundRuntime = runtime;
   // Each scrape reads the queue this worker serves.
   readSyncQueueWith(() => client.syncQueue());
@@ -769,6 +777,7 @@ export function startBackgroundServices(): BackgroundRuntime | null {
   scheduler.start();
   friendshipWorker.start();
   emailAddedWorker.start();
+  assistantAddedWorker.start();
   reviews.start();
   logOperationalEvent('background_services_started', {
     sync_enabled: true,
@@ -791,6 +800,8 @@ export function wakeSyncWorker(): void {
 export function wakeFriendshipWorker(): void { globalBackground.__deliveryBackgroundRuntime?.friendshipWorker?.wake(); }
 
 export function wakeEmailAddedWorker(): void { globalBackground.__deliveryBackgroundRuntime?.emailAddedWorker?.wake(); }
+
+export function wakeAssistantAddedWorker(): void { globalBackground.__deliveryBackgroundRuntime?.assistantAddedWorker?.wake(); }
 
 export function backgroundState(): BackgroundState | null {
   return globalBackground.__deliveryBackgroundRuntime?.state ?? null;

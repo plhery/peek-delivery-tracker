@@ -1482,6 +1482,42 @@ export class SupabaseServiceClient extends SupabaseClient {
     });
   }
 
+  /** Whether each parcel an assistant adds is notified to the account's browsers and phones: on until switched off. */
+  async assistantAddedNotify(userId: string): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/assistant_added_notify', { method: 'POST', body: { p_user_id: userId } }) !== false;
+  }
+
+  /** Switches the notification of each parcel an assistant adds on or off, and answers the choice saved. */
+  async setAssistantAddedNotify(userId: string, notify: boolean): Promise<boolean> {
+    return await this.request('/rest/v1/rpc/set_assistant_added_notify', {
+      method: 'POST', body: { p_user_id: userId, p_notify: notify },
+    }) === true;
+  }
+
+  /**
+   * The parcels an assistant just added to the account through one of its grants: each starts unseen and, unless the
+   * account switched it off, is queued to be notified to each of its browsers and phones. Returns how many
+   * notifications were queued.
+   */
+  async parcelsAddedByAssistant(userId: string, grantId: string, packageIds: readonly string[]): Promise<number> {
+    const queued = await this.request('/rest/v1/rpc/parcels_added_by_assistant', {
+      method: 'POST', body: { p_user_id: userId, p_grant_id: grantId, p_package_ids: packageIds },
+    });
+    return typeof queued === 'number' ? queued : 0;
+  }
+
+  async claimAssistantAddedPush(web: boolean, native: boolean, fcm = false, unifiedpush = false, inbox = false): Promise<JsonObject[]> {
+    return rows(await this.request('/rest/v1/rpc/claim_assistant_added_push', {
+      method: 'POST', body: { p_web: web, p_native: native, p_limit: 10, p_fcm: fcm, p_unifiedpush: unifiedpush, p_inbox: inbox },
+    }));
+  }
+
+  async finishAssistantAddedPush(id: string, lease: string, success: boolean): Promise<void> {
+    await this.request('/rest/v1/rpc/finish_assistant_added_push', {
+      method: 'POST', body: { p_id: id, p_lease: lease, p_success: success },
+    });
+  }
+
   /** The account a forwarding address's token names, or null. Counts nothing. */
   async inboundMailboxOwner(token: string): Promise<string | null> {
     const result = await this.request('/rest/v1/rpc/inbound_mailbox_owner', { method: 'POST', body: { p_token: token } });

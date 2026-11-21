@@ -4,7 +4,7 @@ import { ASSISTANT_SETUPS, setupSteps, SetupText } from '../assistants/setups';
 import type { ApiAssistantConnection, ApiAssistantScope, ApiAssistantsResponse } from '../generated/apiContract';
 import { useI18n } from '../i18n';
 import type { ApiAuth } from '../lib/apiClient';
-import { readAssistants, revokeAssistant } from '../lib/assistants';
+import { readAssistants, revokeAssistant, setAssistantsNotify } from '../lib/assistants';
 import { localizedRelativeTime, type MessageKey, type Translate } from '../lib/messages';
 import { userErrorMessage } from '../lib/userMessages';
 import { Icon } from './Icon';
@@ -104,7 +104,7 @@ function Connection({ connection, working, onRevoke }: {
 
 /**
  * The assistants' page in Settings: the address to give an assistant, how to add Peek to each one, what to ask one, and
- * the ones connected. Its first lines lead to the public page on connecting an assistant, in a tab of its own, which
+ * the ones connected, with whether the parcels they add are notified. Its first lines lead to the public page on connecting an assistant, in a tab of its own, which
  * says the same and more. Personal tokens have no screen: the server makes none while they are off.
  */
 export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
@@ -124,18 +124,22 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
     catch { /* It stays on screen to select by hand. */ }
   }
 
-  const revoke = (id: string) => void (async () => {
+  async function run(work: () => Promise<ApiAssistantsResponse>) {
     if (working) return;
     setWorking(true); onBusy?.(true); setError(null);
     try {
-      await revokeAssistant(apiAuth, id);
-      onChange({ ...offer, connections: offer.connections.filter((connection) => connection.id !== id) });
+      onChange(await work());
     } catch (reason) {
       setError(userErrorMessage(reason, t, 'assistants.failed'));
     } finally {
       setWorking(false); onBusy?.(false);
     }
-  })();
+  }
+  const revoke = (id: string) => void run(async () => {
+    await revokeAssistant(apiAuth, id);
+    return { ...offer, connections: offer.connections.filter((connection) => connection.id !== id) };
+  });
+  const notify = offer.notifyAdded !== false;
 
   return <>
     <p className="settings-description">{t('assistants.intro')} <a href={assistantsPath(locale)} target="_blank" rel="noopener">{t('assistants.page.link')}</a></p>
@@ -153,6 +157,10 @@ export function AssistantsPage({ apiAuth, offer, onChange, onBusy }: {
         {assistants.length
           ? assistants.map((connection) => <Connection key={connection.id} connection={connection} working={working} onRevoke={() => revoke(connection.id)} />)
           : <p className="assistants__empty">{t('assistants.none')}</p>}
+        {assistants.length > 0 && <button className="settings-row assistants__notify" type="button" role="switch" aria-checked={notify}
+          aria-busy={working || undefined} disabled={working} onClick={() => void run(() => setAssistantsNotify(apiAuth, !notify))}>
+          <Icon name="bell" /><span>{t('assistants.notify')}</span><span className="settings-switch" aria-hidden="true" />
+        </button>}
       </div>
     </section>
   </>;

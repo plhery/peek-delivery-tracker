@@ -5139,10 +5139,12 @@ struct AssistantConnection: Codable, Equatable, Hashable, Sendable, Identifiable
 struct AssistantsResponse: Codable, Equatable, Hashable, Sendable {
     var connections: [AssistantConnection]
     var mcpURL: String
+    var notifyAdded: Bool
 
     private enum CodingKeys: String, CodingKey {
         case connections
         case mcpURL = "mcpUrl"
+        case notifyAdded
     }
 }
 

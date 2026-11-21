@@ -24,11 +24,27 @@ async function openSettings(context: ApiContext): Promise<AssistantSettings> {
   return settings;
 }
 
-/** The account's connected assistants and personal tokens, and the address assistants connect to. */
+/**
+ * The account's connected assistants and personal tokens, the address assistants connect to, and whether each parcel
+ * an assistant adds is notified.
+ */
 export const GET = apiRoute(async (context) => {
   const settings = await openSettings(context);
-  const connections = await requireService(context).assistantGrants(requireUser(context).id);
-  return json({ connections, mcpUrl: settings.resource });
+  const service = requireService(context);
+  const userId = requireUser(context).id;
+  const [connections, notifyAdded] = await Promise.all([service.assistantGrants(userId), service.assistantAddedNotify(userId)]);
+  return json({ connections, mcpUrl: settings.resource, notifyAdded });
+}, { serviceRequired: true });
+
+/** Switches the notification of each parcel an assistant adds on or off (`{"notifyAdded": false}`). */
+export const PATCH = apiRoute(async (context) => {
+  const settings = await openSettings(context);
+  const payload = await readJsonObject(context.request);
+  if (typeof payload.notifyAdded !== 'boolean') throw new HttpError(400, 'notifyAdded must be true or false');
+  const service = requireService(context);
+  const userId = requireUser(context).id;
+  const notifyAdded = await service.setAssistantAddedNotify(userId, payload.notifyAdded);
+  return json({ connections: await service.assistantGrants(userId), mcpUrl: settings.resource, notifyAdded });
 }, { serviceRequired: true });
 
 /**

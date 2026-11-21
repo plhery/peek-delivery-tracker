@@ -85,20 +85,26 @@
   {
     "input": "000.003.472",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "000.003.596",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "000.004.870",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "00000000000000000000000000",
@@ -436,7 +442,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -645,7 +652,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -788,7 +796,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1148,8 +1157,10 @@
   {
     "input": "000848407",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "000920018274",
@@ -1250,7 +1261,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1268,7 +1280,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1365,7 +1378,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1383,7 +1397,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -1518,7 +1533,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -3296,8 +3312,10 @@
   {
     "input": "006002524",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "006071578588",
@@ -3626,7 +3644,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -3680,7 +3699,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -3987,8 +4007,10 @@
   {
     "input": "008243062",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "0082800011298638008391",
@@ -4278,8 +4300,10 @@
   {
     "input": "008654745",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "00873402216036753115",
@@ -4412,8 +4436,10 @@
   {
     "input": "009000119",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "00903289909999",
@@ -5461,7 +5487,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -5578,8 +5605,10 @@
   {
     "input": "011356565",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "01143307588",
@@ -6465,7 +6494,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -6548,8 +6578,10 @@
   {
     "input": "014886530",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "014971207565",
@@ -6619,8 +6651,10 @@
   {
     "input": "015010663",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "01505428811640",
@@ -6694,6 +6728,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -6793,8 +6828,10 @@
   {
     "input": "016095253",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "016121218205",
@@ -6870,7 +6907,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -7086,8 +7124,10 @@
   {
     "input": "018031128",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "018034977605",
@@ -7415,8 +7455,10 @@
   {
     "input": "020960507",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "021115C902CF0C99",
@@ -7429,14 +7471,18 @@
   {
     "input": "021147139",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "021161570",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "0212202000023",
@@ -7485,8 +7531,10 @@
   {
     "input": "021921541",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "02211189000554",
@@ -7727,8 +7775,10 @@
   {
     "input": "023756819",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "024000000109776633",
@@ -7774,7 +7824,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8047,7 +8098,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8068,6 +8120,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -8314,7 +8367,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8849,8 +8903,10 @@
   {
     "input": "035129052",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "0352470864",
@@ -8863,7 +8919,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -8983,7 +9040,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -9014,6 +9072,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -9172,26 +9231,34 @@
   {
     "input": "042494945",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "042496442",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "042496472",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "042496479",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "04316F377803",
@@ -9322,8 +9389,10 @@
   {
     "input": "045338454",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "045687739115920260828",
@@ -9483,7 +9552,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -9955,8 +10025,10 @@
   {
     "input": "051988940",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "05222070232792",
@@ -10170,7 +10242,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -10219,7 +10292,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -10257,7 +10331,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -10278,6 +10353,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -10474,8 +10550,10 @@
   {
     "input": "061618092",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "062083922814",
@@ -10858,6 +10936,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -10882,7 +10961,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -10930,7 +11010,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -10940,8 +11021,10 @@
   {
     "input": "067115630",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "068119",
@@ -11045,6 +11128,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -11276,8 +11360,10 @@
   {
     "input": "074630712",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "07474002501967",
@@ -11312,14 +11398,18 @@
   {
     "input": "075049389",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "075989007",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "076250118711",
@@ -11526,8 +11616,10 @@
   {
     "input": "082821142",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "083030000063547779",
@@ -11556,14 +11648,18 @@
   {
     "input": "083461007",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "083461076",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "083920000098172383",
@@ -11846,20 +11942,26 @@
   {
     "input": "093015503",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "093018547",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "094058593",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "0941054535",
@@ -11872,7 +11974,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -11968,7 +12071,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -12327,6 +12431,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -12991,8 +13096,10 @@
   {
     "input": "100234857",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1002979333511567",
@@ -13029,6 +13136,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -13116,6 +13224,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -13169,6 +13278,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -13191,6 +13301,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -13227,8 +13338,10 @@
   {
     "input": "100760296",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "100820-4491-A2-C5",
@@ -13618,8 +13731,10 @@
   {
     "input": "101038384",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1010855902",
@@ -13635,6 +13750,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -13860,6 +13976,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -13962,6 +14079,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -13984,6 +14102,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -14089,6 +14208,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -14193,6 +14313,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -14266,8 +14387,10 @@
   {
     "input": "101693565",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1018037180007791",
@@ -14316,8 +14439,10 @@
   {
     "input": "101811185",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "101811611847",
@@ -14447,6 +14572,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -14692,6 +14818,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -14784,6 +14911,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -14977,6 +15105,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15196,8 +15325,10 @@
   {
     "input": "104134631",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1041517310381U",
@@ -15285,6 +15416,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15573,6 +15705,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15684,6 +15817,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15706,6 +15840,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15728,6 +15863,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15784,6 +15920,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15833,6 +15970,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15855,6 +15993,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15877,6 +16016,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -15986,6 +16126,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -16157,6 +16298,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -16218,6 +16360,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -16386,6 +16529,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -16430,8 +16574,10 @@
   {
     "input": "110018728",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "11002479974684",
@@ -16859,6 +17005,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -16892,8 +17039,10 @@
   {
     "input": "110293488",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1103615274",
@@ -16909,6 +17058,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -16922,7 +17072,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -17014,6 +17165,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17036,6 +17188,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17049,7 +17202,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -17075,8 +17229,10 @@
   {
     "input": "111467809",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "11150175390",
@@ -17222,6 +17378,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17369,6 +17526,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17393,6 +17551,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -17481,8 +17640,10 @@
   {
     "input": "113944789",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "114011114595",
@@ -17585,6 +17746,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17607,6 +17769,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17663,6 +17826,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17700,6 +17864,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17811,6 +17976,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -17841,6 +18007,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -18052,6 +18219,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -18113,6 +18281,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -18137,6 +18306,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -18430,6 +18600,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -18565,8 +18736,10 @@
   {
     "input": "121705277",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1224385976",
@@ -18582,6 +18755,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -18697,8 +18871,10 @@
   {
     "input": "123456-123",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "12345678",
@@ -18724,6 +18900,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -18810,6 +18987,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -18928,8 +19106,10 @@
   {
     "input": "124664681",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "126-87809422",
@@ -19068,6 +19248,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19079,8 +19260,10 @@
   {
     "input": "127570509",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1277384144",
@@ -19096,6 +19279,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19118,6 +19302,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19196,6 +19381,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19247,6 +19433,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19435,6 +19622,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19457,6 +19645,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19536,6 +19725,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19599,6 +19789,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19610,8 +19801,10 @@
   {
     "input": "132692255",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "13290055180152",
@@ -19754,6 +19947,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19776,6 +19970,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19904,6 +20099,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -19949,6 +20145,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20014,6 +20211,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20156,6 +20354,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20212,6 +20411,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20270,6 +20470,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20493,8 +20694,10 @@
   {
     "input": "139815455",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "13CF4B49016730467J",
@@ -20533,6 +20736,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20605,6 +20809,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -20831,7 +21036,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -20875,8 +21081,10 @@
   {
     "input": "141611567",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "14181702470101802623075446",
@@ -20914,8 +21122,10 @@
   {
     "input": "142150583",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "14294365",
@@ -21048,6 +21258,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21156,6 +21367,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21178,6 +21390,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21200,6 +21413,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21222,6 +21436,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21323,8 +21538,10 @@
   {
     "input": "149189307",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1492485036031",
@@ -21355,6 +21572,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21738,6 +21956,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -21803,6 +22022,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -22616,6 +22836,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -22652,6 +22873,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -22916,6 +23138,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -22957,6 +23180,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -22979,6 +23203,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23040,6 +23265,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -23160,6 +23386,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23357,6 +23584,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -23418,6 +23646,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23498,6 +23727,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -23601,6 +23831,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23623,6 +23854,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23647,6 +23879,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -23675,6 +23908,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23721,6 +23955,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23743,6 +23978,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23765,6 +24001,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23858,7 +24095,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -23945,6 +24183,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23967,6 +24206,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -23989,6 +24229,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -24000,8 +24241,10 @@
   {
     "input": "168894556",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "16889P0904250000848753",
@@ -24039,6 +24282,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -24118,6 +24362,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "preferred": [
@@ -24143,6 +24388,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -24264,8 +24510,10 @@
   {
     "input": "171242402",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "1716207887335440",
@@ -24312,12 +24560,35 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
       "packeta",
       "dhl-ecommerce-es",
       "box-now"
+    ]
+  },
+  {
+    "input": "172-87779521",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics"
     ]
   },
   {
@@ -24456,6 +24727,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -24688,6 +24960,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -24994,6 +25267,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25093,6 +25367,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25133,6 +25408,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25334,6 +25610,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25478,6 +25755,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25502,6 +25780,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -25530,6 +25809,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25552,6 +25832,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25574,6 +25855,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25596,6 +25878,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25618,6 +25901,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25672,6 +25956,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25694,6 +25979,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -25845,6 +26131,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -26191,6 +26478,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -26210,8 +26498,10 @@
   {
     "input": "193530790",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "193989692",
@@ -26219,6 +26509,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -26269,6 +26560,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -26452,6 +26744,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "gls-es"
     ],
     "asked": [
@@ -26497,6 +26790,7 @@
       "cargus",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki",
       "gls-es"
     ],
@@ -26522,8 +26816,10 @@
   {
     "input": "199999980",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "19999999980",
@@ -27868,6 +28164,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -27893,7 +28190,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -27947,7 +28245,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -28356,8 +28655,10 @@
   {
     "input": "200643613",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "200736191962",
@@ -28391,8 +28692,10 @@
   {
     "input": "200747159",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "200812063341",
@@ -28489,6 +28792,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -28749,7 +29053,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -28828,8 +29133,10 @@
   {
     "input": "2014348-19",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "201452885645",
@@ -28908,7 +29215,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -29256,14 +29564,18 @@
   {
     "input": "202347869",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "202401794",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2026090302014380017949",
@@ -29430,7 +29742,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -29450,7 +29763,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -29464,6 +29778,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -29549,8 +29864,10 @@
   {
     "input": "204249547",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2042981700",
@@ -29564,7 +29881,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -29722,8 +30040,10 @@
   {
     "input": "204586786",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2050000734106",
@@ -29748,14 +30068,18 @@
   {
     "input": "205093117",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "205366829",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "20554358748",
@@ -29885,6 +30209,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -30040,8 +30365,10 @@
   {
     "input": "207289997",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "20750807442",
@@ -30167,7 +30494,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -30194,7 +30522,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -30212,7 +30541,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -30652,8 +30982,10 @@
   {
     "input": "210376776",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "21038100055157",
@@ -30921,7 +31253,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -30970,7 +31303,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -31313,7 +31647,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -31360,6 +31695,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -31394,8 +31730,10 @@
   {
     "input": "216312354",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "217-04563042",
@@ -31664,6 +32002,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -31763,7 +32102,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -31819,7 +32159,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -31900,8 +32241,10 @@
   {
     "input": "220817558",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "22088765",
@@ -31929,6 +32272,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -31993,8 +32337,10 @@
   {
     "input": "221602856",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "22175325",
@@ -32046,8 +32392,10 @@
   {
     "input": "221842392",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "222010431454",
@@ -32213,7 +32561,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32349,6 +32698,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -32367,6 +32717,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -32385,6 +32736,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -32495,7 +32847,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32518,6 +32871,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -32543,7 +32897,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32594,7 +32949,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32622,7 +32978,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32642,7 +32999,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32662,7 +33020,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32778,7 +33137,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32798,7 +33158,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -32862,6 +33223,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -32878,14 +33240,18 @@
   {
     "input": "228629348",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "228659948",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "228866304634",
@@ -33011,10 +33377,36 @@
     ]
   },
   {
+    "input": "230-61044093",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
+    ]
+  },
+  {
     "input": "230087671",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2301136016MONRW3S7FR",
@@ -33094,7 +33486,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -33254,8 +33647,10 @@
   {
     "input": "233399313",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2337600120003",
@@ -33287,7 +33682,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -33310,6 +33706,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33340,7 +33737,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -33373,6 +33771,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -33489,8 +33888,10 @@
   {
     "input": "237493021",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2375184",
@@ -33539,7 +33940,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -33608,6 +34010,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33865,14 +34268,18 @@
   {
     "input": "240127163",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "240278577",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "24034200454699",
@@ -33906,8 +34313,10 @@
   {
     "input": "240853931",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2408964154",
@@ -33924,6 +34333,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -33965,6 +34375,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -33989,7 +34400,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -34012,6 +34424,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -34171,8 +34584,10 @@
   {
     "input": "243630400",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "24369093961",
@@ -34282,7 +34697,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -34570,8 +34986,10 @@
   {
     "input": "250064999",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2500655251129094",
@@ -34794,8 +35212,10 @@
   {
     "input": "250411646",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2504681369124",
@@ -34911,7 +35331,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -34934,6 +35355,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -34953,6 +35375,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -35055,6 +35478,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -35155,8 +35579,10 @@
   {
     "input": "252865252",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "25286675",
@@ -35180,7 +35606,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -35191,8 +35618,10 @@
   {
     "input": "253638187",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "25402140002878",
@@ -35235,7 +35664,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -35281,8 +35711,10 @@
   {
     "input": "255658625",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "25631818",
@@ -35352,8 +35784,10 @@
   {
     "input": "258523787",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "25895566398",
@@ -35395,6 +35829,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -35421,8 +35856,10 @@
   {
     "input": "259759575",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2598242905",
@@ -35439,6 +35876,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -35514,8 +35952,10 @@
   {
     "input": "26-1211221",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2600002952",
@@ -35532,6 +35972,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -35557,7 +35998,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -35593,8 +36035,10 @@
   {
     "input": "260129735",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2601794363",
@@ -35608,7 +36052,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -35621,7 +36066,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -35646,8 +36092,10 @@
   {
     "input": "260697314",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2609226XH5",
@@ -35724,8 +36172,10 @@
   {
     "input": "261538238",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "26181000287",
@@ -35882,6 +36332,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -35897,8 +36348,10 @@
   {
     "input": "262586044",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "262780949064",
@@ -36043,6 +36496,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -36087,8 +36541,10 @@
   {
     "input": "264387006",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "264530183409",
@@ -36290,14 +36746,17 @@
   {
     "input": "266224087",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "26637264-9",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dpd-ie",
       "rl-carriers"
     ],
     "asked": [
@@ -36364,14 +36823,18 @@
   {
     "input": "267225816",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "267553427",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "26781022022",
@@ -36450,7 +36913,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -36566,8 +37030,10 @@
   {
     "input": "271156397",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "271272514871",
@@ -36629,8 +37095,10 @@
   {
     "input": "271897355",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "2719919119816",
@@ -36729,7 +37197,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -36877,7 +37346,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -37335,7 +37805,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -37366,8 +37837,10 @@
   {
     "input": "281517586",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "281790J005342",
@@ -37553,6 +38026,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -37590,6 +38064,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -37616,7 +38091,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -37711,7 +38187,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -38029,7 +38506,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -38141,6 +38619,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -38284,8 +38763,10 @@
   {
     "input": "291730710",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "292803085481",
@@ -38335,7 +38816,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -38368,6 +38850,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -38387,6 +38870,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -38476,6 +38960,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -38534,6 +39019,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -38777,7 +39263,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -38975,7 +39462,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -39020,8 +39508,10 @@
   {
     "input": "300111725",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "3002063035",
@@ -39038,6 +39528,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -39208,8 +39699,10 @@
   {
     "input": "300911727",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "30109165494",
@@ -39339,8 +39832,10 @@
   {
     "input": "301628376",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "30165929177",
@@ -39371,7 +39866,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -39419,7 +39915,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -39439,7 +39936,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -39499,6 +39997,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -39584,8 +40083,10 @@
   {
     "input": "304079767",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "30409831109",
@@ -39643,8 +40144,10 @@
   {
     "input": "304504408",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "3046645",
@@ -39669,6 +40172,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -39821,6 +40325,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -39876,6 +40381,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -39901,7 +40407,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -39997,7 +40504,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -40068,7 +40576,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -40161,7 +40670,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -40215,6 +40725,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -40546,8 +41057,10 @@
   {
     "input": "313062085",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "313108480375007",
@@ -40944,7 +41457,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -40970,7 +41484,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -41028,7 +41543,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -41169,6 +41685,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -41220,6 +41737,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -41729,6 +42247,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -41774,7 +42293,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -41871,7 +42391,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -41966,6 +42487,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -42038,7 +42560,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -42080,6 +42603,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -42128,8 +42652,10 @@
   {
     "input": "332808665",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "3331T1WVAD2K",
@@ -42158,6 +42684,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -42408,6 +42935,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -42424,8 +42952,10 @@
   {
     "input": "337122110",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "338 0000 318",
@@ -42439,7 +42969,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -42538,7 +43069,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -42621,6 +43153,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -42646,7 +43179,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -42669,6 +43203,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -42688,6 +43223,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -42712,7 +43248,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -42732,7 +43269,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -43085,7 +43623,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -43185,8 +43724,10 @@
   {
     "input": "351768593",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "35211086",
@@ -43298,6 +43839,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -43526,6 +44068,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -43542,8 +44085,10 @@
   {
     "input": "358782585",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "358784414",
@@ -43551,6 +44096,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -43768,14 +44314,18 @@
   {
     "input": "360522583",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "360952416",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "361604625012",
@@ -44332,7 +44882,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -44346,6 +44897,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -44398,8 +44950,10 @@
   {
     "input": "369976186",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "36GMB353861501000935107",
@@ -45034,8 +45588,10 @@
   {
     "input": "374058474",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "374303",
@@ -45131,7 +45687,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -45250,6 +45807,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -45274,8 +45832,10 @@
   {
     "input": "385789088",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "3881896",
@@ -45378,8 +45938,10 @@
   {
     "input": "391458585",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "39146283686",
@@ -45440,8 +46002,10 @@
   {
     "input": "391727132",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "39181147009513",
@@ -45520,14 +46084,18 @@
   {
     "input": "392686067",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "392882912",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "393705780012",
@@ -45702,8 +46270,10 @@
   {
     "input": "396514038",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "396557764681",
@@ -45738,8 +46308,10 @@
   {
     "input": "396824668",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "3971122",
@@ -46383,8 +46955,10 @@
   {
     "input": "400026435",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "400084919920",
@@ -46500,7 +47074,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -46576,8 +47151,10 @@
   {
     "input": "401889379",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "40257145950217501184",
@@ -46631,8 +47208,10 @@
   {
     "input": "403246878",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "40387973287255",
@@ -46669,7 +47248,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -46684,6 +47264,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -46699,8 +47280,10 @@
   {
     "input": "404706580",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4049400010188",
@@ -46759,14 +47342,18 @@
   {
     "input": "405803832",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "405803850",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "40613333787",
@@ -46820,6 +47407,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -46938,6 +47526,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -47009,7 +47598,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -47115,7 +47705,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -47146,7 +47737,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -47203,7 +47795,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -47267,7 +47860,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -47355,8 +47949,10 @@
   {
     "input": "415283731",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4168200000008209607",
@@ -47389,6 +47985,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -47462,7 +48059,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -47509,7 +48107,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -47520,8 +48119,10 @@
   {
     "input": "418242194",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "41841427",
@@ -47539,6 +48140,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -47582,8 +48184,10 @@
   {
     "input": "419108119",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "419400000112555834",
@@ -47808,8 +48412,10 @@
   {
     "input": "421810511",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4218700000000002427",
@@ -48010,6 +48616,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48058,26 +48665,34 @@
   {
     "input": "428419407",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "429191153",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "429210402",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "429616223",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "430010046955120",
@@ -48104,20 +48719,26 @@
   {
     "input": "430154920",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "430610807",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "430689471",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "431 001 411 698",
@@ -48210,6 +48831,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48228,6 +48850,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48246,6 +48869,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48304,6 +48928,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48321,7 +48946,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -48349,6 +48975,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48367,6 +48994,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -48382,8 +49010,10 @@
   {
     "input": "435821879",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "436150902298",
@@ -48432,7 +49062,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -48467,8 +49098,10 @@
   {
     "input": "437425658",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4375390000976",
@@ -48491,8 +49124,10 @@
   {
     "input": "437650784",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4380277101",
@@ -48509,6 +49144,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -48571,8 +49207,10 @@
   {
     "input": "439364498",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "440010011954679368",
@@ -48754,8 +49392,10 @@
   {
     "input": "445662077",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "44608128627",
@@ -48861,14 +49501,18 @@
   {
     "input": "449631977",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "449894385",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "449999999999999980",
@@ -48969,14 +49613,18 @@
   {
     "input": "451105333",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "451119865",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "45182460950",
@@ -49024,7 +49672,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -49082,6 +49731,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -49286,8 +49936,10 @@
   {
     "input": "457573699",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4579101439323091725",
@@ -49534,8 +50186,10 @@
   {
     "input": "463592792",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "463670208300154370008111",
@@ -49618,7 +50272,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -49638,6 +50293,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -49810,7 +50466,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -50189,7 +50846,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -50336,8 +50994,10 @@
   {
     "input": "477069894",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "477179081230",
@@ -50430,6 +51090,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -50455,7 +51116,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -50564,8 +51226,10 @@
   {
     "input": "481728900",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "481817",
@@ -50760,8 +51424,10 @@
   {
     "input": "489520520",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "49-55636302",
@@ -50775,7 +51441,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "preferred": [
       "dhl-express"
@@ -50789,8 +51456,10 @@
   {
     "input": "490092588",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "490567612253",
@@ -50855,8 +51524,10 @@
   {
     "input": "491037719",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "49105202255041",
@@ -50927,8 +51598,10 @@
   {
     "input": "491223853",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "4913151017350381",
@@ -50990,8 +51663,10 @@
   {
     "input": "492193407",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "492207594082",
@@ -51070,6 +51745,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51177,7 +51853,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51267,6 +51944,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dpd-ie",
       "rl-carriers"
     ],
     "asked": [
@@ -51287,8 +51965,10 @@
   {
     "input": "499465278",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "49999999999987",
@@ -51532,7 +52212,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51552,7 +52233,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51664,7 +52346,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51684,7 +52367,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51736,7 +52420,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51784,7 +52469,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -51834,6 +52520,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -51859,7 +52546,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52010,7 +52698,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52059,7 +52748,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52070,8 +52760,10 @@
   {
     "input": "504011349",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5041196242",
@@ -52085,7 +52777,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52105,7 +52798,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52125,7 +52819,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52297,7 +52992,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52317,7 +53013,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52518,7 +53215,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -52580,7 +53278,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -52702,8 +53401,10 @@
   {
     "input": "508580055",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5085910406",
@@ -52720,6 +53421,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -52889,8 +53591,10 @@
   {
     "input": "509206348",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "50926038413",
@@ -52931,8 +53635,10 @@
   {
     "input": "509395381",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "509466710003247",
@@ -52954,8 +53660,10 @@
   {
     "input": "509528291",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "509625839731",
@@ -53017,7 +53725,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -53059,8 +53768,10 @@
   {
     "input": "510311168",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5106030800485",
@@ -53153,6 +53864,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53208,7 +53920,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -53348,8 +54061,10 @@
   {
     "input": "515895618",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "516 500 004 348",
@@ -53387,7 +54102,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -53457,8 +54173,10 @@
   {
     "input": "517047995",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "517982200083",
@@ -53503,6 +54221,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53531,6 +54250,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53580,6 +54300,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -53595,26 +54316,34 @@
   {
     "input": "518915234",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "518950615",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "518951842",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "518952636",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5190865971",
@@ -53631,6 +54360,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53691,6 +54421,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53719,6 +54450,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53747,6 +54479,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53775,6 +54508,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -53800,7 +54534,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -54061,7 +54796,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -54250,7 +54986,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -54766,7 +55503,8 @@
       "box-now",
       "cdl",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "preferred": [
       "dhl-express"
@@ -55130,14 +55868,18 @@
   {
     "input": "543583314",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "543648807",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5449458519",
@@ -55151,7 +55893,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -55417,6 +56160,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -55434,6 +56178,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dpd-ie",
       "rl-carriers"
     ],
     "asked": [
@@ -55452,7 +56197,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -55606,7 +56352,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -55700,8 +56447,10 @@
   {
     "input": "556477555",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "556587",
@@ -55728,6 +56477,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -55792,6 +56542,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -55903,6 +56654,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -56071,6 +56823,46 @@
     ]
   },
   {
+    "input": "571954006",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
+    "input": "572473116",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
+    "input": "572474086",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
+    "input": "572496211",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
+    "input": "572517660",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
     "input": "572739713813",
     "carrier": "unknown",
     "confidence": "low",
@@ -56097,6 +56889,25 @@
     ]
   },
   {
+    "input": "572764710",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "tnt",
+      "dpd-ie",
+      "tforce-freight",
+      "xpo-ltl"
+    ],
+    "preferred": [
+      "tnt"
+    ],
+    "asked": [
+      "tnt",
+      "tforce-freight",
+      "xpo-ltl"
+    ]
+  },
+  {
     "input": "5746700000000096306",
     "carrier": "unknown",
     "confidence": "low",
@@ -56107,8 +56918,10 @@
   {
     "input": "579027961",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5808491333813464",
@@ -56188,8 +57001,10 @@
   {
     "input": "581658135",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "5819443781",
@@ -56206,6 +57021,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -56271,6 +57087,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -56377,6 +57194,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -56393,27 +57211,34 @@
   {
     "input": "587038676",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "587087882",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "588073837",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "589448649",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -56645,8 +57470,10 @@
   {
     "input": "590479936",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "59099999999980",
@@ -56812,6 +57639,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -57289,7 +58117,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -57858,7 +58687,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -57930,8 +58760,10 @@
   {
     "input": "602117582",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "6026547346434",
@@ -58035,8 +58867,10 @@
   {
     "input": "603943866",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "603973900825",
@@ -58067,7 +58901,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -58880,6 +59715,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -58920,6 +59756,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -59421,6 +60258,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -59987,7 +60825,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -60215,7 +61054,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -60238,6 +61078,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -60430,6 +61271,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -60546,6 +61388,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -60879,7 +61722,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -60983,8 +61827,10 @@
   {
     "input": "642578408",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "642600027844200234823732",
@@ -61093,6 +61939,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -61112,6 +61959,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -61136,7 +61984,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -61156,7 +62005,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -61387,8 +62237,10 @@
   {
     "input": "651440755",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "65210213915489",
@@ -61439,7 +62291,8 @@
       "box-now",
       "cdl",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -61506,7 +62359,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -61929,6 +62783,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -61954,7 +62809,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -61977,6 +62833,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62069,6 +62926,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62584,14 +63442,18 @@
   {
     "input": "670332550",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "671493274",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "67151313",
@@ -62691,6 +63553,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -62906,7 +63769,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63110,6 +63974,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63177,7 +64042,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63207,7 +64073,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63227,7 +64094,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63250,6 +64118,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63379,8 +64248,10 @@
   {
     "input": "692684912",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "694492247944",
@@ -63422,7 +64293,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63475,6 +64347,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63546,7 +64419,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63566,7 +64440,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63589,6 +64464,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -63614,7 +64490,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63879,7 +64756,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63925,7 +64803,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -63945,7 +64824,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -64074,8 +64954,10 @@
   {
     "input": "700038149",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "700040965699",
@@ -64239,7 +65121,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -64456,7 +65339,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -64467,15 +65351,18 @@
   {
     "input": "701327991",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "701359916",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -64862,7 +65749,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -64882,7 +65770,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -65071,7 +65960,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -65161,14 +66051,18 @@
   {
     "input": "711370361",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "711370379",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "71195123302501",
@@ -65327,6 +66221,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -65503,6 +66398,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -65521,6 +66417,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -65584,6 +66481,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65612,6 +66510,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65640,6 +66539,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65668,6 +66568,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65696,6 +66597,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -65767,14 +66669,18 @@
   {
     "input": "723587724",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "723593997",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "72402550",
@@ -65833,7 +66739,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -65889,7 +66796,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -66068,6 +66976,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66093,7 +67002,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -66159,6 +67069,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66224,8 +67135,10 @@
   {
     "input": "737627547",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "7377475001311",
@@ -66381,7 +67294,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -66404,6 +67318,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66610,6 +67525,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -66634,7 +67550,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -66657,6 +67574,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66795,6 +67713,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -66954,7 +67873,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -67079,7 +67999,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -67485,6 +68406,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -67664,7 +68586,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -67805,7 +68728,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -67982,6 +68906,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68123,6 +69048,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68260,6 +69186,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68734,6 +69661,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -68877,7 +69805,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -69280,7 +70209,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -69328,7 +70258,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -69479,8 +70410,10 @@
   {
     "input": "801335809",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "80149374",
@@ -69725,8 +70658,10 @@
   {
     "input": "804313478",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "8047293726",
@@ -69743,6 +70678,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -69768,7 +70704,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -69826,6 +70763,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -70053,7 +70991,8 @@
       "estafeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -70063,8 +71002,10 @@
   {
     "input": "807012132",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "80720052822",
@@ -70103,7 +71044,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70142,6 +71084,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -70310,7 +71253,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70358,6 +71302,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -70523,7 +71468,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70543,7 +71489,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70563,7 +71510,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70583,7 +71531,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70603,7 +71552,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70623,7 +71573,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -70637,6 +71588,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -70877,8 +71829,10 @@
   {
     "input": "823691187",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "82547066970101107373021207",
@@ -70899,8 +71853,10 @@
   {
     "input": "827777154",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "82874367590",
@@ -71015,6 +71971,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -71130,6 +72087,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -71149,6 +72107,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -71390,7 +72349,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -71415,6 +72375,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -71451,6 +72412,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -71478,6 +72440,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -71572,7 +72535,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -71617,7 +72581,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -71701,6 +72666,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -71753,7 +72719,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -72072,7 +73039,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72080,7 +73048,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72101,7 +73070,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -72121,7 +73091,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -72163,7 +73134,8 @@
     "confidence": "low",
     "candidates": [
       "tnt",
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -72177,7 +73149,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72230,7 +73203,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -72243,7 +73217,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72251,7 +73226,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72269,6 +73245,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -72394,7 +73371,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72410,7 +73388,8 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "cargus"
+      "cargus",
+      "dpd-ie"
     ]
   },
   {
@@ -72795,8 +73774,10 @@
   {
     "input": "877612446",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "87778793",
@@ -72947,7 +73928,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -72958,8 +73940,10 @@
   {
     "input": "880077897",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "881171022565",
@@ -73410,7 +74394,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -73430,7 +74415,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -73502,8 +74488,10 @@
   {
     "input": "890518109",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "89112087",
@@ -73566,8 +74554,10 @@
   {
     "input": "892620773",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "893050028378893",
@@ -73643,7 +74633,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -73791,7 +74782,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -74044,7 +75036,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -74064,7 +75057,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -74183,6 +75177,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74199,8 +75194,10 @@
   {
     "input": "900556998",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "900780082616",
@@ -74291,6 +75288,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "fragilepak"
     ],
     "asked": [
@@ -74338,6 +75336,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "fragilepak"
     ],
     "asked": [
@@ -74724,7 +75723,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -74917,6 +75917,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -74942,7 +75943,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -74956,6 +75958,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -74999,7 +76002,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -75012,6 +76016,7 @@
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
+      "dpd-ie",
       "rl-carriers"
     ],
     "asked": [
@@ -75039,14 +76044,18 @@
   {
     "input": "913547136",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "914569667",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "914627431",
@@ -75054,6 +76063,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -75079,8 +76089,10 @@
   {
     "input": "915504404",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "916222079-0",
@@ -75094,7 +76106,8 @@
       "box-now",
       "cdl",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -75114,7 +76127,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -75135,8 +76149,10 @@
   {
     "input": "917226316",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "9182007473",
@@ -75150,7 +76166,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -75170,7 +76187,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -75190,7 +76208,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -75478,6 +76497,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -75516,14 +76536,18 @@
   {
     "input": "925897112",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "925897117",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "926014421411",
@@ -75792,6 +76816,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -75855,7 +76880,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -75914,15 +76940,18 @@
   {
     "input": "928341972",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "928567507",
     "carrier": "unknown",
     "confidence": "low",
     "candidates": [
-      "tnt"
+      "tnt",
+      "dpd-ie"
     ],
     "preferred": [
       "tnt"
@@ -76134,7 +77163,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -76154,7 +77184,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -76251,7 +77282,8 @@
       "box-now",
       "cdl",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -76352,8 +77384,10 @@
   {
     "input": "937043890",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "9374889692090679280873",
@@ -76677,7 +77711,8 @@
       "box-now",
       "cdl",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "dhl-ecommerce-es",
@@ -76731,8 +77766,10 @@
   {
     "input": "94664-2412",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "9489603699300000025094",
@@ -76782,8 +77819,10 @@
   {
     "input": "950046405",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "95043929262115",
@@ -76821,6 +77860,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -76836,8 +77876,10 @@
   {
     "input": "950568090",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "95101648331",
@@ -76899,6 +77941,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -77389,8 +78432,10 @@
   {
     "input": "954125849",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "9542519247157582",
@@ -77422,8 +78467,10 @@
   {
     "input": "955311993",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "957140685412",
@@ -77693,6 +78740,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -77759,6 +78807,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -77787,6 +78836,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -77827,8 +78877,10 @@
   {
     "input": "963991371",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "965115060",
@@ -77836,6 +78888,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -77854,6 +78907,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -77881,6 +78935,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -77909,6 +78964,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -77928,6 +78984,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -77987,6 +79044,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -78206,8 +79264,35 @@
   {
     "input": "974849998",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
+  },
+  {
+    "input": "975-21467692",
+    "carrier": "unknown",
+    "confidence": "low",
+    "candidates": [
+      "postlogistics",
+      "gls-ch",
+      "gls-fr",
+      "gls-de",
+      "old-dominion",
+      "coordinadora",
+      "gls-at",
+      "gls-pl",
+      "mainfreight",
+      "paquetexpress",
+      "ppl"
+    ],
+    "asked": [
+      "gls-fr",
+      "gls-de",
+      "gls-ch",
+      "postlogistics",
+      "ppl"
+    ]
   },
   {
     "input": "97515621",
@@ -78321,7 +79406,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -78332,8 +79418,10 @@
   {
     "input": "978236863",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "978563530",
@@ -78341,6 +79429,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -78356,8 +79445,10 @@
   {
     "input": "979675083",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "98.11.223344.99999980",
@@ -78389,6 +79480,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -78424,6 +79516,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -78482,6 +79575,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -78597,7 +79691,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -78729,8 +79824,10 @@
   {
     "input": "988397715",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "9887-9301-EGXK",
@@ -78768,8 +79865,10 @@
   {
     "input": "99-0087856",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "99.34.123456.99999980",
@@ -78791,7 +79890,8 @@
       "packeta",
       "box-now",
       "dhl-ecommerce-es",
-      "dhl-freight"
+      "dhl-freight",
+      "dpd-ie"
     ],
     "asked": [
       "packeta",
@@ -78937,6 +80037,7 @@
     "confidence": "low",
     "candidates": [
       "tnt",
+      "dpd-ie",
       "tforce-freight",
       "xpo-ltl"
     ],
@@ -79020,6 +80121,7 @@
       "box-now",
       "dhl-ecommerce-es",
       "dhl-freight",
+      "dpd-ie",
       "geniki-taxydromiki"
     ],
     "preferred": [
@@ -79208,8 +80310,10 @@
   {
     "input": "996961867",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "997-67220602",
@@ -79343,8 +80447,10 @@
   {
     "input": "999 116 371",
     "carrier": "unknown",
-    "confidence": "none",
-    "candidates": []
+    "confidence": "low",
+    "candidates": [
+      "dpd-ie"
+    ]
   },
   {
     "input": "999.90.99999987",

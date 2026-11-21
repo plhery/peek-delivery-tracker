@@ -8889,7 +8889,8 @@ export const CARRIER_CAPABILITIES = {
     "tracking": {
       "mode": "automatic",
       "adapter": "dpd-ie",
-      "recognitionRank": 960
+      "recognitionRank": 960,
+      "recognitionServedCountriesOnly": true
     },
     "trackingUrlTemplate": "https://www.dpd.ie/tracking/?consignmentNumber={trackingNumber}",
     "linkRules": [
@@ -8902,7 +8903,12 @@ export const CARRIER_CAPABILITIES = {
         ]
       }
     ],
-    "detectionRules": [],
+    "detectionRules": [
+      {
+        "pattern": "^\\d{9,10}$",
+        "confidence": "low"
+      }
+    ],
     "trackingSearchUrl": "https://www.dpd.ie/tracking/"
   },
   "early-bird": {
@@ -65719,6 +65725,98 @@ export const CARRIER_CAPABILITIES = {
     "linkRules": [],
     "detectionRules": [],
     "trackingSearchUrl": "https://myturkonline.turkon.com/tracking"
+  },
+  "airasia-cargo": {
+    "displayName": "AirAsia Cargo",
+    "aliases": [
+      "Air Asia Cargo"
+    ],
+    "countries": [
+      "MY",
+      "ID"
+    ],
+    "color": "#ff0000",
+    "selectable": true,
+    "timezone": "Asia/Kuala_Lumpur",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "airasia-cargo"
+    },
+    "trackingUrlTemplate": "https://airasia.smartkargo.com/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://airasia.smartkargo.com/FrmAWBTracking.aspx"
+  },
+  "cargolux": {
+    "displayName": "Cargolux",
+    "aliases": [
+      "Cargolux Airlines",
+      "Cargolux Airlines International",
+      "Cargolux Italia"
+    ],
+    "countries": [
+      "LU",
+      "IT"
+    ],
+    "color": "#CC0033",
+    "selectable": true,
+    "timezone": "Europe/Luxembourg",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "cargolux"
+    },
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.cargolux.com/track-and-trace/"
+  },
+  "copa-airlines-cargo": {
+    "displayName": "Copa Airlines Cargo",
+    "aliases": [
+      "Copa Cargo",
+      "COPA Airlines Cargo"
+    ],
+    "countries": [
+      "PA"
+    ],
+    "color": "#0032a0",
+    "selectable": true,
+    "timezone": "America/Panama",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "copa-airlines-cargo"
+    },
+    "trackingUrlTemplate": "https://copa.smartkargo.com/FrmAWBTracking.aspx",
+    "linkRules": [],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://copa.smartkargo.com/FrmAWBTracking.aspx"
+  },
+  "daytona-express": {
+    "displayName": "Daytona Express",
+    "countries": [
+      "BR"
+    ],
+    "color": "#005BAB",
+    "selectable": true,
+    "timezone": "America/Sao_Paulo",
+    "tracking": {
+      "mode": "automatic",
+      "adapter": "daytona-express"
+    },
+    "trackingUrlTemplate": "https://daytonaonline.daytonaexpress.com.br/Conhecimento_daytona/Index?txtcto={trackingNumber}",
+    "linkRules": [
+      {
+        "domains": [
+          "daytonaonline.daytonaexpress.com.br"
+        ],
+        "pathPattern": "^/Conhecimento_daytona/Index/?$",
+        "params": [
+          "txtcto"
+        ]
+      }
+    ],
+    "detectionRules": [],
+    "trackingSearchUrl": "https://www.daytonaexpress.com.br/rastreamento",
+    "helpUrl": "https://www.daytonaexpress.com.br/fale-conosco"
   }
 } as const;
 
@@ -67762,7 +67860,11 @@ export const CARRIER_IDS = [
   "gintracom",
   "hapag-lloyd",
   "transglobal-express",
-  "turkon-line"
+  "turkon-line",
+  "airasia-cargo",
+  "cargolux",
+  "copa-airlines-cargo",
+  "daytona-express"
 ] as const;
 export type ApiCarrierId = (typeof CARRIER_IDS)[number];
 

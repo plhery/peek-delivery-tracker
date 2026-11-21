@@ -335,26 +335,34 @@ function missingScope(scope: Scope, resourceMetadata: string) {
  * What an assistant must know before it tries to add a user's Amazon parcels. Amazon's shipping emails hold no
  * tracking number, and its order number is none: the carrier and tracking ID are on each package's Track package page,
  * in the user's signed-in account, as Amazon's help ("Track Your Package", "Carrier Contact Information") tells its
- * customers. An assistant reads that page only in a browser on the user's own computer where they are signed in:
- * Claude in Chrome, the ChatGPT browser extension, or the like. One it runs elsewhere is not signed in, and Amazon
- * turns it away; a phone app has none. So the words say what the import takes, what to tell the user when the
- * assistant has no such browser, and only then the steps: the page names the carrier after "Delivery By", by a name
- * or one of Amazon's codes ("VIR_TR"), and shows the "Tracking ID"; only a package on its way or just delivered has
- * the button, and amazon.de's page has no "share tracking" link. A parcel Amazon delivers itself is mostly tracked in
- * the user's Amazon account alone: adding its tracking ID says so (`verifyAmazonShippingAddition`).
+ * customers. Reaching that page takes opening pages and clicking in a browser on the user's own computer, where they
+ * are signed in or which they can see and sign in to: Claude in Chrome, a Work chat in the ChatGPT desktop app with its
+ * browser extension or built-in browser, a coding assistant's browser window. Reading the open tabs isn't enough, and
+ * that is all ChatGPT's extension does in a chat at chatgpt.com, where ChatGPT Work's browser runs in the cloud. A
+ * browser that runs elsewhere is not signed in, and Amazon turns it away; a phone app has none. So the words say what
+ * the import takes, what to tell the user when the assistant can't (copying the tracking IDs themselves first, as the
+ * quickest), and only then the steps: the page names the carrier after "Delivery By", by a name or one of Amazon's
+ * codes ("VIR_TR"), and shows the "Tracking ID"; only a package on its way or just delivered has the button, and
+ * amazon.de's page has no "share tracking" link. A parcel Amazon delivers itself is mostly tracked in the user's
+ * Amazon account alone: adding its tracking ID says so (`verifyAmazonShippingAddition`).
  */
 const AMAZON_WHERE = 'Amazon shows a parcel\'s carrier and tracking ID only inside the user\'s Amazon account, under '
   + 'Your Orders, then Track package. Amazon\'s emails hold no tracking number, and an Amazon order number (three '
   + 'groups of digits joined by dashes) is never one: never send it, and don\'t search the user\'s emails for Amazon orders.';
-const AMAZON_BROWSER = 'You can read that page only in a browser on the user\'s own computer where they are signed in '
-  + 'to Amazon: Claude in Chrome, the ChatGPT browser extension (set up from the ChatGPT desktop app) or another tool '
-  + 'that works in the user\'s own browser. A browser that runs elsewhere (a cloud, agent or sandbox browser), web '
-  + 'search and page fetching can\'t: they aren\'t signed in, and Amazon turns them away. Don\'t try them, and never '
-  + 'sign in for the user or ask for their Amazon password.';
-const AMAZON_WITHOUT = 'Without such a browser, as in a phone app, don\'t start. Tell the user, in their language, '
-  + 'that you can\'t reach their Amazon account from here, and that they can either ask you again on a computer, with '
-  + 'Claude in Chrome or the ChatGPT browser extension turned on for the chat and Amazon signed in, or open Your '
-  + 'Orders, then Track package, themselves and paste each tracking ID to you or into Peek.';
+const AMAZON_BROWSER = 'You can do it only if you can open pages and click in a browser on the user\'s own computer, '
+  + 'one where they are signed in to Amazon or that they can see and sign in to themselves: Claude in Chrome, a Work '
+  + 'chat in the ChatGPT desktop app with its browser extension or built-in browser, or a browser tool that opens a '
+  + 'window on their computer, as coding assistants have. Reading the tabs they have open isn\'t enough: each tracking '
+  + 'ID is behind its own button. A browser that runs elsewhere (a cloud, agent or sandbox browser), web search and '
+  + 'page fetching can\'t: they aren\'t signed in, and Amazon turns them away. Don\'t try them or suggest them, and '
+  + 'never sign in for the user or ask for their Amazon password.';
+const AMAZON_WITHOUT = 'Without such a browser, as in a phone app or in a chat that can only read the user\'s tabs, '
+  + 'don\'t start: don\'t read their tabs, browse or search their emails. Tell the user, in their language and in a '
+  + 'few short lines, that you can\'t open their Amazon orders from here, and why in a few words (for example, that '
+  + 'you can read their tabs but not click in them). Then give them the next steps: the quickest is to open Your '
+  + 'Orders, then Track package on each parcel on its way, and paste each Tracking ID here, for you to add, or into '
+  + 'Peek; or they can ask you again on a computer, signed in to Amazon, where you can use their browser: Claude in '
+  + 'Chrome for Claude; for ChatGPT, a Work chat in its desktop app with its browser extension.';
 const amazonWith = (guide: boolean) => 'With one, open Your Orders on the Amazon site the user uses (amazon.fr, .de, .it, .es, .co.uk, '
   + '.nl, .com and so on: every Amazon site works the same way), at /gp/css/order-history (on amazon.de, for example, '
   + 'https://www.amazon.de/gp/css/order-history). If Amazon asks to sign in, stop and ask the user to sign in there '
@@ -365,7 +373,8 @@ const amazonWith = (guide: boolean) => 'With one, open Your Orders on the Amazon
   + 'which may be a code such as VIR_TR, give its id as the carrier in the same call. When '
   + 'Amazon delivers a package itself and shows no tracking ID, or add_parcels refuses it, tell the user Amazon tracks '
   + 'that one only in their Amazon account' + (guide ? ', with the guide link add_parcels answers with' : '')
-  + '. On Amazon, only read: never buy, cancel, return or change anything.';
+  + '. If Amazon shows an error, or anything else stops you before the end, say which parcels you added and give '
+  + 'the next steps above for the rest. On Amazon, only read: never buy, cancel, return or change anything.';
 const amazonInstructions = (guide: boolean) => `Amazon orders: ${AMAZON_WHERE} ${AMAZON_BROWSER} ${AMAZON_WITHOUT} ${amazonWith(guide)}`;
 
 /** A text that speaks of Amazon or holds one of its order numbers: its no-number answer says what an Amazon import takes. */
@@ -385,7 +394,7 @@ async function amazonGuide(service: SupabaseServiceClient, userId: string): Prom
 /** add_parcels' line on Amazon, for a client that keeps the tools but not the server's instructions. */
 const AMAZON_LINE = 'Never send an Amazon order number, and don\'t search the user\'s emails for Amazon orders: an '
   + 'Amazon parcel\'s carrier and tracking ID are only in the user\'s Amazon account, under Your Orders, then Track '
-  + 'package, which you can read only in a browser on the user\'s own computer where they are signed in to Amazon. '
+  + 'package, which you can reach only by opening pages and clicking in a browser on the user\'s own computer. '
   + 'Call amazon_import_steps before you try.';
 
 const OUTCOME_TEXT: Record<ParcelAddition['outcome'], string> = {
@@ -501,15 +510,15 @@ export function assistantServer(service: SupabaseServiceClient, caller: Assistan
     title: 'How to import Amazon parcels',
     description: 'What adding the user\'s Amazon parcels to Peek takes, and the steps. Call it first whenever the user '
       + 'asks you to import, add or follow their Amazon orders, before you browse, search their emails or call '
-      + 'add_parcels: Amazon shows tracking numbers only inside the user\'s signed-in account, so it works from a '
-      + 'browser on their own computer and nowhere else, and this says what to tell the user when you have none. It '
-      + 'changes nothing.',
+      + 'add_parcels: Amazon shows tracking numbers only inside the user\'s signed-in account, so it works only when '
+      + 'you can open pages and click in a browser on their own computer, and this says what to tell the user when '
+      + 'you can\'t. It changes nothing.',
     inputSchema: z.object({}),
     annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
     _meta: security('amazon_import_steps'),
   }, allowed('amazon_import_steps', async () => {
     const guide = await amazonGuideLink();
-    const pictures = guide ? ` Peek's guide shows where, with pictures: ${guide}` : '';
+    const pictures = guide ? ` Give the user Peek's guide, which shows where with pictures: ${guide}` : '';
     const steps = `${AMAZON_WHERE}\n\n${AMAZON_BROWSER}\n\n${AMAZON_WITHOUT}${pictures}\n\n${amazonWith(guide !== null)}`;
     return answer({ guide, steps }, steps);
   }));

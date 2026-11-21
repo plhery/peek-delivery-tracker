@@ -44,7 +44,7 @@ On other Amazon sites, the same buttons are called:
 
 ## Can ChatGPT or Claude do it for me?
 
-Yes, if the assistant can use the browser where you're signed in to Amazon: Claude in Chrome on a paid Claude plan, or ChatGPT's browser extension, from the ChatGPT desktop app. That takes a computer: from its phone app, or with a browser it runs on its own servers, the assistant can't reach your orders, and Amazon's emails don't give the tracking number.
+Yes, if the assistant can open pages and click in the browser where you're signed in to Amazon: Claude in Chrome on a paid Claude plan, or a Work chat in the ChatGPT desktop app, with its browser extension. That takes a computer: from its phone app, from a chat where it can only read your open tabs, or with a browser it runs on its own servers, the assistant can't reach your orders, and Amazon's emails don't give the tracking number.
 
 ### Without the Peek connector
 
@@ -76,7 +76,8 @@ Parcel late, or marked delivered but not there? See [delivered but not received]
 - [Amazon Help: Return a Gift](https://www.amazon.com/gp/help/customer/display.html?nodeId=GMTDJ6XPUMN7NWNB) – the 17-digit order number
 - [About Amazon: How to track your packages](https://www.aboutamazon.com/news/retail/track-amazon-package) – Returns & Orders, the person icon in the app, Track package
 - [Claude Help Center: Get started with Claude in Chrome](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome) – paid Claude plans, the side panel, Claude in Chrome in a chat's connectors
-- [ChatGPT: Browser extension](https://learn.chatgpt.com/docs/chrome-extension) – set up from the ChatGPT desktop app; reads sites where you're signed in, and uses plugins too
+- [ChatGPT: Browser extension](https://learn.chatgpt.com/docs/chrome-extension) – set up from the ChatGPT desktop app; reads and acts on sites where you're signed in, from a Work chat there, and uses plugins too
+- [ChatGPT: Browser](https://learn.chatgpt.com/codex/browser) – ChatGPT Work on the web and on the phone browses in the cloud, without your logins
 - [Peek: Connect Peek to Claude, ChatGPT or Gemini](https://peektracker.com/assistants) – Peek's steps for Claude and ChatGPT
 - [Peek on GitHub: the assistants' tools](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – what Peek tells an assistant about Amazon: Your Orders, Track package, "Delivery By", "Tracking ID", only reading
 - [Peek on GitHub: English wording](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/en.json) – several numbers in one pasted text

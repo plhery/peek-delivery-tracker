@@ -278,14 +278,20 @@ describe('the MCP endpoint', () => {
     // The instructions send the model to Peek's own tools alone, never to another connector.
     expect(initialized.instructions).toContain('add_parcels');
     expect(initialized.instructions).not.toMatch(/gmail|connector|plugin/i);
-    // An Amazon import takes a browser on the user's own computer, signed in to Amazon: nothing else reaches the page,
-    // and an assistant without one says so instead of trying a browser of its own or the user's emails.
+    // An Amazon import takes opening pages and clicking in a browser on the user's own computer, one they are signed in
+    // to Amazon in or can sign in to: reading their open tabs doesn't reach the page, nor does anything that runs
+    // elsewhere. An assistant that can't says so, and what the user can do, instead of trying.
     expect(initialized.instructions).toContain('only inside the user\'s Amazon account, under Your Orders, then Track package');
     expect(initialized.instructions).toContain('don\'t search the user\'s emails for Amazon orders');
-    expect(initialized.instructions).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon: Claude in Chrome, the ChatGPT browser extension');
+    expect(initialized.instructions).toContain('only if you can open pages and click in a browser on the user\'s own computer, one where they are signed in to Amazon or that they can see and sign in to themselves: Claude in Chrome, a Work chat in the ChatGPT desktop app');
+    expect(initialized.instructions).toContain('Reading the tabs they have open isn\'t enough');
     expect(initialized.instructions).toContain('A browser that runs elsewhere (a cloud, agent or sandbox browser), web search and page fetching can\'t');
-    expect(initialized.instructions).toContain('Without such a browser, as in a phone app, don\'t start. Tell the user, in their language, that you can\'t reach their Amazon account from here');
-    expect(initialized.instructions).toContain('paste each tracking ID to you or into Peek');
+    expect(initialized.instructions).toContain('Don\'t try them or suggest them');
+    expect(initialized.instructions).toContain('Without such a browser, as in a phone app or in a chat that can only read the user\'s tabs, don\'t start: don\'t read their tabs, browse or search their emails');
+    expect(initialized.instructions).toContain('that you can\'t open their Amazon orders from here, and why in a few words');
+    // The next steps put the quickest first: the user copies each tracking ID, and the assistant adds it.
+    expect(initialized.instructions).toContain('the quickest is to open Your Orders, then Track package on each parcel on its way, and paste each Tracking ID here, for you to add, or into Peek; or they can ask you again on a computer');
+    expect(initialized.instructions).toContain('say which parcels you added and give the next steps above for the rest');
     // An assistant that browses the user's Amazon site reads each shipment's carrier and tracking ID, and changes nothing.
     expect(initialized.instructions).toContain('the Amazon site the user uses (amazon.fr, .de, .it, .es, .co.uk, .nl, .com and so on: every Amazon site works the same way)');
     expect(initialized.instructions).toContain('at /gp/css/order-history (on amazon.de, for example,');
@@ -623,7 +629,7 @@ describe('the MCP endpoint', () => {
     const description = tools.find(({ name }) => name === 'add_parcels')!.description;
     expect(description).toContain('Never send an Amazon order number, and don\'t search the user\'s emails for Amazon orders');
     expect(description).toContain('Your Orders, then Track package');
-    expect(description).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon');
+    expect(description).toContain('only by opening pages and clicking in a browser on the user\'s own computer');
     expect(description).toContain('Call amazon_import_steps before you try');
     vi.spyOn(service, 'getAuthAccount').mockResolvedValue({ email: null, emailConfirmed: false, locale: null });
     vi.mocked(addParcelsFromText).mockResolvedValue([]);
@@ -647,8 +653,8 @@ describe('the MCP endpoint', () => {
       expect(answer.structuredContent).toEqual({ parcels: [] });
       const told = answer.content![0]!.text;
       expect(told, text).toContain('Amazon\'s emails hold no tracking number');
-      expect(told, text).toContain('only in a browser on the user\'s own computer where they are signed in to Amazon');
-      expect(told, text).toContain('Without such a browser, as in a phone app, don\'t start');
+      expect(told, text).toContain('only if you can open pages and click in a browser on the user\'s own computer');
+      expect(told, text).toContain('Without such a browser, as in a phone app or in a chat that can only read the user\'s tabs, don\'t start');
       expect(told, text).toContain(`Peek's guide shows where: https://peek.example${guideHref('en', 'amazon-orders')}`);
     }
   });
@@ -667,9 +673,9 @@ describe('the MCP endpoint', () => {
     // What it takes comes first, then what to tell the user without it, then the steps.
     const order = [
       'only inside the user\'s Amazon account',
-      'only in a browser on the user\'s own computer where they are signed in to Amazon',
-      'Without such a browser, as in a phone app, don\'t start',
-      `Peek's guide shows where, with pictures: ${french}`,
+      'only if you can open pages and click in a browser on the user\'s own computer',
+      'Without such a browser, as in a phone app or in a chat that can only read the user\'s tabs, don\'t start',
+      `Give the user Peek's guide, which shows where with pictures: ${french}`,
       'With one, open Your Orders',
       'On Amazon, only read',
     ].map((words) => steps.indexOf(words));
@@ -732,7 +738,7 @@ describe('the MCP endpoint', () => {
     const writer = connect(['parcels:write']);
     const started = await mcp(writer, 'initialize', { protocolVersion: LATEST_PROTOCOL_VERSION, capabilities: {}, clientInfo: { name: 'example-client', version: '1.0.0' } });
     const { instructions } = (await rpc(started)).result! as { instructions: string };
-    expect(instructions).toContain('tell the user Amazon tracks that one only in their Amazon account. On Amazon');
+    expect(instructions).toContain('tell the user Amazon tracks that one only in their Amazon account. If Amazon shows an error');
     expect(instructions).not.toContain('guide');
     vi.mocked(addParcelsFromText).mockResolvedValue([]);
     const none = await call(writer, 'add_parcels', { text: 'Your Example Shop order has shipped.' });

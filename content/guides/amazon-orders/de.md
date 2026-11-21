@@ -44,7 +44,7 @@ Auf anderen Amazon-Seiten heißen dieselben Buttons so:
 
 ## Können Claude oder ChatGPT das für mich erledigen?
 
-Ja, wenn der Assistent den Browser nutzen kann, in dem du bei Amazon angemeldet bist: Claude in Chrome mit einem bezahlten Claude-Tarif oder die Browser-Erweiterung von ChatGPT, die du über die ChatGPT-Desktop-App einrichtest. Dafür brauchst du einen Computer: Aus seiner Handy-App oder mit einem Browser, den er auf seinen eigenen Servern betreibt, kommt der Assistent nicht an deine Bestellungen, und in den E-Mails von Amazon steht die Sendungsnummer nicht.
+Ja, wenn der Assistent in dem Browser, in dem du bei Amazon angemeldet bist, Seiten öffnen und klicken kann: Claude in Chrome mit einem bezahlten Claude-Tarif oder ein Work-Chat in der ChatGPT-Desktop-App mit der Browser-Erweiterung von ChatGPT. Dafür brauchst du einen Computer: Aus seiner Handy-App, aus einem Chat, in dem er deine offenen Tabs nur lesen kann, oder mit einem Browser, den er auf seinen eigenen Servern betreibt, kommt der Assistent nicht an deine Bestellungen, und in den E-Mails von Amazon steht die Sendungsnummer nicht.
 
 ### Ohne den Peek-Konnektor
 
@@ -76,7 +76,8 @@ Paket zu spät oder als zugestellt markiert, aber nicht da? Lies [zugestellt, ab
 - [Amazon.de-Hilfe: Ein Geschenk zurückgeben](https://www.amazon.de/gp/help/customer/display.html?nodeId=GMTDJ6XPUMN7NWNB) – die 17-stellige Bestellnummer
 - [About Amazon: How to track your packages (auf Englisch)](https://www.aboutamazon.com/news/retail/track-amazon-package) – die Bestellungen oben rechts auf der Website, das Personensymbol in der App, Track package
 - [Claude Help Center: Get started with Claude in Chrome (auf Englisch)](https://support.claude.com/en/articles/12012173-get-started-with-claude-in-chrome) – bezahlte Claude-Tarife, das Seitenfenster, Claude in Chrome unter den Konnektoren eines Chats
-- [ChatGPT: Browser extension (auf Englisch)](https://learn.chatgpt.com/docs/chrome-extension) – Einrichtung über die ChatGPT-Desktop-App; liest Websites, bei denen du angemeldet bist, und nutzt auch Plugins
+- [ChatGPT: Browser extension (auf Englisch)](https://learn.chatgpt.com/docs/chrome-extension) – Einrichtung über die ChatGPT-Desktop-App; liest und bedient Websites, bei denen du angemeldet bist, aus einem Work-Chat dort, und nutzt auch Plugins
+- [ChatGPT: Browser (auf Englisch)](https://learn.chatgpt.com/codex/browser) – ChatGPT Work im Web und auf dem Handy surft in der Cloud, ohne deine Anmeldungen
 - [Peek: Peek mit Claude, ChatGPT oder Gemini verbinden](https://peektracker.com/de/assistants) – Peeks Schritte für Claude und ChatGPT
 - [Peek auf GitHub: die Tools für Assistenten](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/tools.ts) – was Peek einem Assistenten über Amazon sagt: Your Orders, Track package, „Delivery By“, „Tracking ID“, nur lesen
 - [Peek auf GitHub: deutsche Texte](https://github.com/plhery/peek-delivery-tracker/blob/main/shared/locales/de.json) – mehrere Nummern in einem eingefügten Text

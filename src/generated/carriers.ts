@@ -2642,6 +2642,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Xinghe Freight Sendungsverfolgung: GZXH…YQ-Nummer & Status",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "sxw-express-sendungsverfolgung",
+      "title": "SXW Express Sendungsverfolgung: SXW-Nummer und Status",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "fr": [
@@ -3380,6 +3388,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Suivi colis Xinghe Freight\u00a0: numéro GZXH…YQ et statuts",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "suivi-sxw-express",
+      "title": "Suivi SXW Express\u00a0: numéros SXW, statuts et livraison",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "it": [
@@ -4022,6 +4038,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Xinghe Freight tracking: numeri GZXH, stati e consegna",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "tracciamento-sxw-express",
+      "title": "Tracciamento SXW Express: numeri SXW, stati e dogana",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "es": [
@@ -4672,6 +4696,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Seguimiento Xinghe Freight: número GZXH…YQ y estados",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "seguimiento-sxw-express",
+      "title": "Seguimiento de SXW Express: números SXW y estados",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "pt": [
@@ -5266,6 +5298,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Xinghe Freight: números GZXH, estados e entrega",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "seguimento-sxw-express",
+      "title": "Seguimento SXW Express: números SXW, estados e entrega",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "pt-br": [
@@ -5926,6 +5966,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Śledzenie Xinghe Freight: numery GZXH, statusy i dostawa",
       "name": "Xinghe Freight",
       "color": "#0e3a6b"
+    },
+    {
+      "id": "sxw-express",
+      "catalog": "sxw-express",
+      "slug": "sledzenie-sxw-express",
+      "title": "Śledzenie SXW Express: numery SXW, statusy i dostawa",
+      "name": "SXW Express",
+      "color": "#003876"
     }
   ],
   "ru": [

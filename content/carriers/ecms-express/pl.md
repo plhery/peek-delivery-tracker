@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-ECMS Express (`易客满`, także `ECMS Global` lub `ECMSGlobal`, chińska nazwa spółki `天津易客满国际物流有限公司`) to założona w 2013 roku międzynarodowa firma kurierska i logistyczna obsługująca sklepy internetowe w ponad 200 krajach i regionach. Jeśli sprzedawca nadał Twoje zamówienie przez ECMS, numer śledzenia ma 16 znaków i zaczyna się od `EC`, `ES`, `AP` lub `AX` — wklej go w polu powyżej. ECMS odpowiada za przelot międzynarodowy i odprawę celną, natomiast doręczenie na ostatniej mili realizuje lokalny przewoźnik. W katalogu Peek znajdziesz tę firmę również pod hasłami `ECMS`, `ECMS Global`, `ECMSGlobal`, `ECMS International Logistics Co.`, `易客满`, `易客满国际物流有限公司` oraz `易客满国际快递`.
+ECMS Express (`易客满`, także `ECMS Global` lub `ECMSGlobal`, chińska nazwa spółki `天津易客满国际物流有限公司`) to założona w 2013 roku międzynarodowa firma kurierska i logistyczna obsługująca sklepy internetowe w ponad 200 krajach i regionach. Jeśli sprzedawca nadał twoje zamówienie przez ECMS, numer śledzenia ma 16 znaków i zaczyna się od `EC`, `ES`, `AP` lub `AX` — wklej go w polu powyżej. ECMS odpowiada za przelot międzynarodowy i odprawę celną, natomiast doręczenie na ostatniej mili realizuje lokalny przewoźnik. W katalogu Peek znajdziesz tę firmę również pod hasłami `ECMS`, `ECMS Global`, `ECMSGlobal`, `ECMS International Logistics Co.`, `易客满`, `易客满国际物流有限公司` oraz `易客满国际快递`.
 
 ## Numer śledzenia ECMS Express: format i przykłady
 
@@ -30,7 +30,7 @@ Numery ECMS liczą zawsze dokładnie 16 znaków: `EC`, `ES`, `AP` lub `AX`, po n
 
 Na stronie `ecmsglobal.com` tracker najpierw prosi o przejście zabezpieczenia obrazkowego (*Security verification*: *Enter the characters shown below to continue tracking.*), następnie podsumowuje przesyłkę jednym z ośmiu haseł (od *Shipment Information Received* po *Delivered* lub *Exception*) i wypisuje skany od najnowszego z datą, godziną i miejscem. Peek wyświetla każdy skan w brzmieniu zapisanym w rekordzie ECMS. W kolejności przebiegu trasy:
 
-| Zapis w ECMS | Co to oznacza dla Ciebie | Peek pokazuje |
+| Zapis w ECMS | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Virtual Manifest has been received by carrier`, `Virtual Manifest has been received`, `Shipment info confirmed` | Sklep przesłał elektroniczne dane paczki do ECMS, ale fizyczna przesyłka jeszcze nie dotarła do magazynu. | „Zarejestrowana” |
 | `Documents and information required for clearance have been received by the carrier.`, `ID information has been reviewed and verified` | ECMS otrzymał dokumenty potrzebne do odprawy celnej albo zweryfikował dane dokumentu tożsamości odbiorcy; to wciąż nie jest skan paczki. | „Zarejestrowana” |
@@ -90,11 +90,11 @@ Według strony *Contact Us* w serwisie `www.ecmsglobal.com` (bez podanej strefy 
 
 Zabezpieczenie obrazkowe ECMS to proste jednocyfrowe działanie rachunkowe: Peek odczytuje je automatycznie, a w razie niepowodzenia ponawia próbę z nowym obrazkiem. Gdy tracker ECMS nadal nie odpowiada, Peek odpytuje usługi śledzenia i pokazuje zapisaną u nich historię w ich własnym brzmieniu.
 
-Peek wyświetla status, każdy skan z miastem, regionem i krajem oraz kraj przeznaczenia — od najnowszego do najstarszego — w strefie czasowej Twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej: …”. Pomija referencję sklepu, lokalizację przy wpisach elektronicznego manifestu oraz linki płatnicze, a także nie pokazuje wagi ani przewidywanej daty doręczenia. Przycisk „Otwórz stronę przewoźnika ECMS Express” otwiera Twój numer na `www.ecmsglobal.com`.
+Peek wyświetla status, każdy skan z miastem, regionem i krajem oraz kraj przeznaczenia — od najnowszego do najstarszego — w strefie czasowej twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej: …”. Pomija referencję sklepu, lokalizację przy wpisach elektronicznego manifestu oraz linki płatnicze, a także nie pokazuje wagi ani przewidywanej daty doręczenia. Przycisk „Otwórz stronę przewoźnika ECMS Express” otwiera twój numer na `www.ecmsglobal.com`.
 
 Gdy rekord ECMS wymienia lokalnego przewoźnika znanego w Peek, na karcie widać „Doręcza: …” (wraz z jego numerem, jeśli w przekazywanych skanach partnera widnieje pojedyncza referencja) albo „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”, dopóki ten przewoźnik ma tylko zapowiedź paczki bez własnego skanu. Jeżeli Peek obsługuje bezpośredni tracker tego przewoźnika bez dodatkowych danych, odpytuje również jego i przełącza tam śledzenie, gdy tylko pojawi się skan co najmniej tak świeży jak ostatni wpis ECMS, zachowując wcześniejsze skany ECMS; w przeciwnym razie dodaj `LM Tracking No.` jako osobną paczkę — Peek śledzi ponad 4 500 przewoźników.
 
-Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza aktualizacje nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty, dopóki odpowiada własny tracker ECMS (po przekazaniu do lokalnego przewoźnika Peek przejmuje jego tempo; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie ciszy i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych sytuacjach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz wybrać powiadomienia „Każdy skan”, „Ważne etapy” (rozpoczęcie odprawy importowej, `Return to origin`, wydanie do doręczenia, `Available for pickup` i doręczenie, bez lotów ani skanów magazynowych) albo „Tylko doręczenie”. Peek nie kontaktuje się w Twoim imieniu z ECMS ani ze sprzedawcą.
+Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza aktualizacje nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty, dopóki odpowiada własny tracker ECMS (po przekazaniu do lokalnego przewoźnika Peek przejmuje jego tempo; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie ciszy i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych sytuacjach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz wybrać powiadomienia „Każdy skan”, „Ważne etapy” (rozpoczęcie odprawy importowej, `Return to origin`, wydanie do doręczenia, `Available for pickup` i doręczenie, bez lotów ani skanów magazynowych) albo „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu z ECMS ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie ECMS Express
 
@@ -112,7 +112,7 @@ Lokalny przewoźnik współpracujący z ECMS, którego nazwę i numer przesyłki
 
 ### Co oznacza status „Shipment is tendering to third party carrier for final delivery”?
 
-ECMS przekazuje Twoją paczkę lokalnej firmie kurierskiej realizującej doręczenie końcowe; jej własny numer śledzenia może pojawić się w polu `LM Tracking No.`. Peek pokazuje „W transporcie”.
+ECMS przekazuje twoją paczkę lokalnej firmie kurierskiej realizującej doręczenie końcowe; jej własny numer śledzenia może pojawić się w polu `LM Tracking No.`. Peek pokazuje „W transporcie”.
 
 ### Z kim się skontaktować, gdy paczka ECMS Express zaginęła?
 

@@ -23,20 +23,20 @@ Nie masz numeru? Zapytaj sklep. Zobacz też, [gdzie szukać numeru przesyłki](g
 
 FedEx opisuje skany po polsku i przy każdym podaje oddział. Obok numeru strona śledzenia FedEx podaje krótki status całej przesyłki: `W ODDZIALE FEDEX`, `WYDANA DO DORĘCZENIA` albo `DORĘCZONA`. Skany po kolei:
 
-| FedEx pisze | Co to znaczy dla Ciebie |
+| FedEx pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Przesyłka przygotowana przez nadawcę do odbioru przez kuriera FedEx.` | Nadawca przygotował etykietę i czeka na kuriera. FedEx jeszcze nie ma paczki. |
 | `Kurier odebrał przesyłkę od nadawcy.` | Kurier FedEx odebrał paczkę od nadawcy. |
 | `Przesyłka w oddziale FedEx.` | Paczka jest w oddziale FedEx. Skan w każdym oddziale brzmi tak samo, więc może się powtarzać. |
-| `Przesyłka wydana do doręczenia kurierowi FedEx.` | Kurier wiezie dziś paczkę do Ciebie. |
+| `Przesyłka wydana do doręczenia kurierowi FedEx.` | Kurier wiezie dziś paczkę do ciebie. |
 | `Dyspozycja zmiany terminu doręczenia` | Ktoś poprosił o inny termin doręczenia. Paczka się nie ruszyła. |
-| `Nieudana próba doręczenia. Przesyłka awizowana.` | Kurier Cię nie zastał i zostawił awizo. |
+| `Nieudana próba doręczenia. Przesyłka awizowana.` | Kurier cię nie zastał i zostawił awizo. |
 | `Nieudana próba doręczenia. Odbiorca odmówił przyjęcia przesyłki.` | Doręczenie się nie udało: odbiorca odmówił przyjęcia paczki. |
 | `Zwrot przesyłki przez kuriera do oddziału FedEx.` | Kurier odwiózł niedoręczoną paczkę do oddziału. Może wyjechać ponownie. |
 | `Kurier doręczył przesyłkę do odbiorcy.` | Doręczona. `Przesyłka doręczona do odbiorcy.` znaczy to samo. |
 | `Zwrot przesyłki do nadawcy.` | Paczka wraca do nadawcy. |
 
-W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Planowane doręczenie w przedziale godzinowym` z dwiema godzinami: w tym oknie kurier ma do Ciebie dotrzeć. Ogólne etapy opisuje poradnik o [statusach przesyłek](guide:tracking-statuses), a co zrobić po awizo – poradnik o [nieudanym doręczeniu](guide:missed-delivery).
+W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Planowane doręczenie w przedziale godzinowym` z dwiema godzinami: w tym oknie kurier ma do ciebie dotrzeć. Ogólne etapy opisuje poradnik o [statusach przesyłek](guide:tracking-statuses), a co zrobić po awizo – poradnik o [nieudanym doręczeniu](guide:missed-delivery).
 
 ## Przesyłka FedEx nie dotarła, utknęła lub jest uszkodzona
 
@@ -44,7 +44,7 @@ W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Plan
 
 **Brak ruchu od kilku dni.** Zapytaj sklep, który wysłał paczkę, i zajrzyj do poradnika, [co robić, gdy status się nie zmienia](guide:tracking-not-updating).
 
-**Zamówienie z internetu.** Dopóki nie otrzymasz paczki, za jej utratę lub uszkodzenie odpowiada sklep, o ile to on wybrał FedEx albo dał go do wyboru wśród swoich form dostawy. Gdy FedEx paczkę uszkodzi, reklamujesz ją w sklepie, a sklep powinien dochodzić roszczeń od FedEx. Przy zaginięciu reklamację w samym FedEx składa nadawca, chyba że zrzeknie się na Twoją rzecz prawa dochodzenia roszczeń.
+**Zamówienie z internetu.** Dopóki nie otrzymasz paczki, za jej utratę lub uszkodzenie odpowiada sklep, o ile to on wybrał FedEx albo dał go do wyboru wśród swoich form dostawy. Gdy FedEx paczkę uszkodzi, reklamujesz ją w sklepie, a sklep powinien dochodzić roszczeń od FedEx. Przy zaginięciu reklamację w samym FedEx składa nadawca, chyba że zrzeknie się na twoją rzecz prawa dochodzenia roszczeń.
 
 **Uszkodzona.** Jeśli uszkodzenie widać z zewnątrz, możesz odmówić przyjęcia paczki albo przyjąć ją i otworzyć przy kurierze, żeby spisać protokół szkody; protokół jest potem podstawą reklamacji. Uszkodzenia niewidoczne z zewnątrz zgłaszasz FedEx najpóźniej 7 dni po otrzymaniu paczki. Więcej w poradniku o [uszkodzonej paczce](guide:damaged-parcel).
 
@@ -52,7 +52,7 @@ W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Plan
 
 **Doręczona, a jej nie ma.** Zapytaj domowników. Potwierdzenie doręczenia FedEx wymaga numeru konta płatnika, więc poproś o nie nadawcę. Więcej w poradniku [doręczona, ale nie dotarła](guide:delivered-not-received).
 
-**Reklamacja.** Przesyłki kurierskie podlegają w Polsce Prawu pocztowemu i nadzorowi UKE, regulatora rynku pocztowego. Reklamację złożysz w FedEx pisemnie, elektronicznie (np. przez formularz na stronie operatora) albo ustnie, w ciągu 12 miesięcy od nadania. Może ją złożyć nadawca, a adresat wtedy, gdy przesyłka została mu doręczona albo nadawca zrzekł się na jego rzecz prawa dochodzenia roszczeń. FedEx ma 30 dni na odpowiedź; brak odpowiedzi w terminie oznacza uznanie reklamacji. Od odmowy odwołasz się w ciągu 14 dni. Jeśli odpowiedź Cię nie zadowala, zostaje interwencja Prezesa UKE, bezpłatne pozasądowe rozwiązywanie sporów konsumenckich (ADR) albo sąd.
+**Reklamacja.** Przesyłki kurierskie podlegają w Polsce Prawu pocztowemu i nadzorowi UKE, regulatora rynku pocztowego. Reklamację złożysz w FedEx pisemnie, elektronicznie (np. przez formularz na stronie operatora) albo ustnie, w ciągu 12 miesięcy od nadania. Może ją złożyć nadawca, a adresat wtedy, gdy przesyłka została mu doręczona albo nadawca zrzekł się na jego rzecz prawa dochodzenia roszczeń. FedEx ma 30 dni na odpowiedź; brak odpowiedzi w terminie oznacza uznanie reklamacji. Od odmowy odwołasz się w ciągu 14 dni. Jeśli odpowiedź cię nie zadowala, zostaje interwencja Prezesa UKE, bezpłatne pozasądowe rozwiązywanie sporów konsumenckich (ADR) albo sąd.
 
 ## Śledzenie przesyłki FedEx Polska w Peek
 
@@ -60,7 +60,7 @@ W dniu doręczenia przy wydaniu do doręczenia może pojawić się dopisek `Plan
 
 Link ze strony śledzenia krajowego, z fds2tracking.emea.fedex.com lub fedex.com, albo link z poland.fedex.com z `packageId=` od razu otwiera się jako FedEx Poland.
 
-Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan w polskim brzmieniu FedEx z oddziałem i dokładną godziną, przedział godzinowy kuriera w dniu doręczenia, godzinę doręczenia i wagę. Pomija liczbę paczek, oddział nadania i doręczenia, datę wysyłki, numer przesyłki zwrotnej i potwierdzenie doręczenia; nadawcy, nazwiska ani adresu FedEx tam nie podaje. Peek sprawdza przesyłkę nawet co 10 minut, a gdy jest wydana do doręczenia, nawet co 2 minuty, w dniu wydania od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie FedEx; jeśli FedEx podał okno kuriera, od pół godziny przed jego początkiem. Przez serwisy śledzenia przesyłek sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni doręczenia i nie złoży reklamacji: to załatwisz w FedEx albo u nadawcy.
+Peek czyta krajowe śledzenie FedEx bezpośrednio. Pokazuje status, każdy skan w polskim brzmieniu FedEx z oddziałem i dokładną godziną, przedział godzinowy kuriera w dniu doręczenia, godzinę doręczenia i wagę. Pomija liczbę paczek, oddział nadania i doręczenia, datę wysyłki, numer przesyłki zwrotnej i potwierdzenie doręczenia; nadawcy, nazwiska ani adresu FedEx tam nie podaje. Peek sprawdza przesyłkę nawet co 10 minut, a gdy jest wydana do doręczenia, nawet co 2 minuty, w dniu wydania od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie FedEx; jeśli FedEx podał okno kuriera, od pół godziny przed jego początkiem. Przez serwisy śledzenia przesyłek sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni doręczenia i nie złoży reklamacji: to załatwisz w FedEx albo u nadawcy.
 
 ## Pytania o śledzenie przesyłek FedEx Polska
 

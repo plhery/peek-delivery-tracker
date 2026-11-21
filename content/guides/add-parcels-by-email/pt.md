@@ -19,13 +19,13 @@ Precisas de uma conta Peek: os convidados, que seguem encomendas sem conta, não
 - Vê «Últimos e-mails» | A página mostra os teus cinco últimos e-mails, quem enviou cada um e o que fez, por exemplo «2 encomendas adicionadas».
 :::
 
-Cada encomenda recebe o nome da loja que enviou o e-mail, arrumado («EXAMPLE® SHOP AG» passa a «Example Shop»), ou, num e-mail de uma transportadora, o da loja para a qual esta diz que a transporta. O Peek marca-a como nova na tua lista e envia uma única notificação, «Adicionado a partir do teu e-mail», com o nome e a transportadora.
+Cada encomenda recebe o nome da loja que enviou o e-mail, arrumado («EXAMPLE® SHOP AG» passa a «Example Shop»), ou, num e-mail de uma transportadora, o da loja para a qual esta diz que a transporta. O Peek marca-a como nova na tua lista e envia uma única notificação, «Adicionada a partir do teu e-mail», com o nome e a transportadora.
 
 ## Posso seguir encomendas automaticamente a partir do meu e-mail?
 
 Sim, com uma regra na tua app de e-mail que reencaminhe os e-mails de envio para o teu endereço Peek: assim, cada um adiciona a sua encomenda sozinho. O Peek nunca se liga à tua caixa de correio. Só vê o que chega ao endereço dele, de qualquer loja ou transportadora: não há uma lista de lojas compatíveis. Alguns outros serviços de seguimento pedem, em vez disso, que ligues a tua caixa de entrada; o [seguimento universal de encomendas](guide:universal-tracker) compara as duas formas.
 
-A notificação «Adicionado a partir do teu e-mail» chega a cada navegador e a cada telemóvel em que a tua conta tem as notificações do Peek ativadas (vê o guia das [notificações de entrega de encomendas](guide:parcel-notifications)), a não ser que desatives «Avisar-me quando um e-mail adicionar uma encomenda». Não é enviada depois de abrires ou arquivares a encomenda.
+A notificação «Adicionada a partir do teu e-mail» chega a cada navegador e a cada telemóvel em que a tua conta tem as notificações do Peek ativadas (vê o guia das [notificações de entrega de encomendas](guide:parcel-notifications)), a não ser que desatives «Avisar-me quando um e-mail adicionar uma encomenda». Não é enviada depois de abrires ou arquivares a encomenda.
 
 ## Onde encontro o meu endereço de e-mail Peek?
 
@@ -100,6 +100,6 @@ Seleciona «Desativar», no fundo de «Adicionar encomendas por e-mail»: apaga 
 - [Peek no GitHub: nomes das lojas](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/inboundEmail/shopName.ts) – como uma encomenda recebe o nome
 - [Peek no GitHub: endereço e limites](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/inboundEmail/settings.ts) – o endereço aleatório de 16 caracteres, o limite diário
 - [Peek no GitHub: worker de e-mail da Cloudflare](https://github.com/plhery/peek-delivery-tracker/blob/main/ops/cloudflare/inbound-email-worker.js) – Cloudflare Email Routing, o limite de 1 MB
-- [Peek no GitHub: a notificação «Adicionado a partir do teu e-mail»](https://github.com/plhery/peek-delivery-tracker/blob/main/supabase/migrations/20261117200000_email_added_push.sql) – colocada na fila quando o e-mail adiciona a encomenda, não para encomendas abertas ou arquivadas
+- [Peek no GitHub: a notificação «Adicionada a partir do teu e-mail»](https://github.com/plhery/peek-delivery-tracker/blob/main/supabase/migrations/20261117200000_email_added_push.sql) – colocada na fila quando o e-mail adiciona a encomenda, não para encomendas abertas ou arquivadas
 - [Peek no GitHub: Architecture (em inglês)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ARCHITECTURE.md) – como os e-mails reencaminhados são lidos, nomeados e guardados
 :::

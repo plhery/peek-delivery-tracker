@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-20
 ---
 
-Shouwu International (守务国际, w skrócie SWE) to szanghajska firma logistyczna, która wysyła paczki od sprzedawców internetowych w Chinach do Europy i Stanów Zjednoczonych, gdzie doręczeniem pod wskazany adres zajmuje się operator pocztowy albo lokalna firma kurierska. Jeśli sklep nadał Twoje zamówienie przez Shouwu, numer przesyłki zaczyna się od `SWECN` i kończy na `YQ`: wklej go w polu powyżej albo w anglojęzycznej wyszukiwarce Shouwu pod adresem [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Numer przekazuje sprzedawca wraz z informacją o wysyłce zamówienia — samo Shouwu nie publikuje żadnego kontaktu dla odbiorców paczek.
+Shouwu International (守务国际, w skrócie SWE) to szanghajska firma logistyczna, która wysyła paczki od sprzedawców internetowych w Chinach do Europy i Stanów Zjednoczonych, gdzie doręczeniem pod wskazany adres zajmuje się operator pocztowy albo lokalna firma kurierska. Jeśli sklep nadał twoje zamówienie przez Shouwu, numer przesyłki zaczyna się od `SWECN` i kończy na `YQ`: wklej go w polu powyżej albo w anglojęzycznej wyszukiwarce Shouwu pod adresem [admin.shshouwu.com](https://admin.shshouwu.com/track.html). Numer przekazuje sprzedawca wraz z informacją o wysyłce zamówienia — samo Shouwu nie publikuje żadnego kontaktu dla odbiorców paczek.
 
 ## Numer śledzenia Shouwu: jak wygląda
 
@@ -30,7 +30,7 @@ Wielu innych chińskich spedytorów e-commerce także kończy swoje numery liter
 
 Strona śledzenia Shouwu działa po angielsku pod chińskim nagłówkiem `包裹追踪`. Dla każdej przesyłki podaje ogólny status oraz kraj przeznaczenia, a niżej czas i treść poszczególnych skanów — bez wyświetlania kolumny z nazwą miejscowości.
 
-| Status w Shouwu | Co to oznacza dla Ciebie | Co pokazuje Peek |
+| Status w Shouwu | Co to oznacza dla ciebie | Co pokazuje Peek |
 | --- | --- | --- |
 | `Not Found` | Shouwu nie ma jeszcze żadnych danych pod tym numerem: „We seem can't identify the number.” | „Oczekiwanie na przewoźnika Shouwu International” |
 | `Preparing` | Według opisu na stronie Shouwu paczka została przekazana do magazynu firmy w Chinach albo trwa tam jej ważenie i plombowanie. Status ten potrafi pojawić się jeszcze przed pierwszym skanem. | „Zarejestrowana”, a po odbiorze przez partnera lub skanie magazynowym „Przyjęta przez przewoźnika” |
@@ -40,7 +40,7 @@ Strona śledzenia Shouwu działa po angielsku pod chińskim nagłówkiem `包裹
 
 Samo Shouwu zaznacza na stronie, że te ogólne statusy są nadawane automatycznie przez system („auto-judged by the system”) i mają charakter wyłącznie orientacyjny („only for information reference use”). Dużo dokładniejszy obraz dają poszczególne wpisy w historii:
 
-| Komunikat w Shouwu | Co to oznacza dla Ciebie | Co pokazuje Peek |
+| Komunikat w Shouwu | Co to oznacza dla ciebie | Co pokazuje Peek |
 | --- | --- | --- |
 | `Shipment information received`, `Order information received. We're expecting your parcel to arrive with us.` | Sprzedawca zgłosił przesyłkę elektronicznie; Shouwu nie ma jeszcze fizycznej paczki w rękach. | „Zarejestrowana” |
 | `Carrier received the shipment` | Wpis dopisywany przez Shouwu dwie godziny po danych zamówienia, na całe dni przed pierwszym skanem w magazynie — nikt jeszcze nie odebrał paczki od nadawcy. | „Zarejestrowana” |
@@ -48,7 +48,7 @@ Samo Shouwu zaznacza na stronie, że te ogólne statusy są nadawane automatyczn
 | `Arrival processing center`, `Arrived at Transit logistics facility` | Magazyn Shouwu w Chinach przyjął przesyłkę na stan. | „Przyjęta przez przewoźnika” |
 | `Package processing completed` | Obsługa magazynowa w Chinach zakończona przed przekazaniem na lot. | „Przyjęta przez przewoźnika” |
 | `Item inbound in sorting center`, `Item outbound in sorting center`, `Item is in transit in Hong Kong` | Wejście i wyjście z sortowni oraz tranzyt przez Hongkong w drodze na lotnisko wylotu. | „W transporcie” |
-| `Shipment started the customs clearance process at origin`, `Export Clearance` | Rozpoczęła się odprawa eksportowa w Chinach — rutynowa formalność przed wylotem; urząd celny nie zatrzymuje Twojej paczki. | „W transporcie” |
+| `Shipment started the customs clearance process at origin`, `Export Clearance` | Rozpoczęła się odprawa eksportowa w Chinach — rutynowa formalność przed wylotem; urząd celny nie zatrzymuje twojej paczki. | „W transporcie” |
 | `The package is shipped from the transfer warehouse to the airport Export customs clearance in progress` | Paczka jedzie z magazynu przeładunkowego na lotnisko, podczas gdy w Chinach trwa odprawa wywozowa (to nie jest urząd celny w kraju odbiorcy). | „W transporcie” |
 | `Export customs declaration completed`, `Export customs clearance completed`, `Export Released` | Chińska odprawa eksportowa zakończyła się zwolnieniem przesyłki do wywozu. | „W transporcie” |
 | `The parcel has arrived at the airport and is currently being loaded onto a flight` | Przesyłka dotarła na lotnisko wylotu po odprawie eksportowej i jest ładowana do samolotu. | „W transporcie” |
@@ -59,11 +59,11 @@ Samo Shouwu zaznacza na stronie, że te ogólne statusy są nadawane automatyczn
 | `Shipment started the customs clearance process at destination`, `Customs clearance in progress`, `Currently undergoing customs clearance in the destination country`, `Currently processing import customs clearance`, `Customs clearance for imports`, `Under Clearance`, `Item has started customs clearance process` | Trwa odprawa celna importowa w kraju przeznaczenia. | „W urzędzie celnym” |
 | `Custom clearance completed`, `Shipment completed the customs clearance process at destination`, `Customs clearance has been completed`, `Customs clearance in the destination country has been completed` | Urząd celny kraju docelowego zwolnił przesyłkę po odprawie. | „W transporcie” |
 | `Scheduled For Delivery` | Wpis Shouwu zaraz po zwolnieniu celnym, na kilka dni przed przyjęciem w oddziale kuriera i wyjazdem w trasę: doręczenie jest dopiero zaplanowane, a nie w toku. | „W transporcie” |
-| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Przekazanie przesyłki lokalnemu przewoźnikowi odpowiedzialnemu za ostatnią milę — to jeszcze nie doręczenie do Ciebie (pisownia „deliverey” pochodzi wprost z systemu Shouwu). | „W transporcie” |
+| `Delivery to local courier`, `The goods have been deliverey to the final delivery service provider`, `The goods have been delivered to the carrier` | Przekazanie przesyłki lokalnemu przewoźnikowi odpowiedzialnemu za ostatnią milę — to jeszcze nie doręczenie do ciebie (pisownia „deliverey” pochodzi wprost z systemu Shouwu). | „W transporcie” |
 | `Your consignment has been picked up` | Lokalny kurier odebrał paczkę z zagranicznego magazynu Shouwu po odprawie celnej; nie oznacza to odbioru od sprzedawcy (`Picked up by Shipping Partner`) ani odbioru osobistego przez adresata. | „W transporcie” |
 | `Picked up`, `Arrived at FedEx location`, `Departed FedEx location` | W USA firma FedEx odebrała paczkę z magazynu Shouwu po odprawie importowej (z podaniem miasta i kodu pocztowego) i przesyła ją między swoimi oddziałami. | „W transporcie” |
 | `Parcel on its way`, `arrival city`, `leave the city` | Krajowy przewóz u lokalnego partnera po zwolnieniu celnym — przyjazd do kolejnych miast i wyjazd z nich. | „W transporcie” |
-| `The shipment has been processed in the destination parcel center` | DHL posortował paczkę w docelowym centrum paczkowym obsługującym Twój rejon przed wydaniem kurierowi. | „W transporcie” |
+| `The shipment has been processed in the destination parcel center` | DHL posortował paczkę w docelowym centrum paczkowym obsługującym twój rejon przed wydaniem kurierowi. | „W transporcie” |
 | `Mis routed` | W Niemczech przewoźnik skierował paczkę do niewłaściwej sortowni i przekierowuje ją dalej — oznacza to opóźnienie, a nie blokadę, i doręczenie bywa jeszcze tego samego dnia. | „W transporcie” |
 | `Out for delivery` | Przesyłka wyjechała z lokalnym kurierem do doręczenia. | „W doręczeniu” |
 | `Abnormal delivery` | Kurier nie zdołał doręczyć przesyłki; powód pojawia się w osobnym wierszu w nawiasach ostrokątnych, np. `<Incorrect address.>`. | „Próba doręczenia” |
@@ -72,9 +72,9 @@ Samo Shouwu zaznacza na stronie, że te ogólne statusy są nadawane automatyczn
 | `Delivered by post man`, `This parcel has been delivered` | Lokalna poczta lub kurier doręczył przesyłkę. | „Dostarczona”, gdy ogólny status Shouwu również wskazuje `Delivered` |
 | `Shipment sent directly from parcel center to business customer` | DHL doręczył paczkę bezpośrednio z centrum paczkowego do klienta firmowego; jeśli wcześniej trwał zwrot, ten sam komunikat oznacza oddanie przesyłki nadawcy. | „Dostarczona” albo „Zwrócona nadawcy” po zwrocie |
 
-Gdy we Włoszech doręcza [iMile](carrier:imile), historia w Shouwu powtarza komunikaty iMile z nazwą centrum w nawiasach `【】` (w Twojej przesyłce może pojawić się inne centrum niż `Milan center` czy `ROM 10`):
+Gdy we Włoszech doręcza [iMile](carrier:imile), historia w Shouwu powtarza komunikaty iMile z nazwą centrum w nawiasach `【】` (w twojej przesyłce może pojawić się inne centrum niż `Milan center` czy `ROM 10`):
 
-| Komunikat w Shouwu | Co to oznacza dla Ciebie | Co pokazuje Peek |
+| Komunikat w Shouwu | Co to oznacza dla ciebie | Co pokazuje Peek |
 | --- | --- | --- |
 | `【Milan center】Received.` | Regionalne centrum iMile przyjęło przesyłkę. | „W transporcie” |
 | `【Milan center】Parcel shipped to【ROM 10】.`, `【ROM 10】Arrived.` | Wysłano do stacji doręczeń iMile i przyjęto na miejscu. | „W transporcie” |
@@ -88,13 +88,13 @@ Gdy we Włoszech doręcza [iMile](carrier:imile), historia w Shouwu powtarza kom
 
 **Wpisy po chińsku.** W części przesyłek pojawiają się również komunikaty zapisane po chińsku, które Peek wyświetla w oryginalnym brzmieniu. `货物电子信息已经收到` (odebrano elektroniczne dane towaru) towarzyszy rejestracji zlecenia: „Zarejestrowana”. Następnie status „W transporcie” otrzymują kolejno: `申报过港中` po kodzie partii zbiorczej (zgłoszenie partii do przewozu drogowego do Hongkongu), `已到港，安排航班中` (dotarcie do portu wylotu, oczekiwanie na przydział lotu), `预计23号的航班` (zarezerwowany lot, tutaj na 23. dzień miesiąca; z dopiskiem `二程` na początku dla drugiego odcinka lotniczego), `航班已飞` oraz `二程航班已飞` (wylot samolotu lub drugiego odcinka) i `已落地` (lądowanie samolotu). `已落地，清关提货中` (po lądowaniu, trwa odprawa celna i odbiór ładunku od linii lotniczej) oznacza „W urzędzie celnym”, natomiast `清关完成` (odprawa celna zakończona) oraz `已交仓扫描` (skan przekazania do magazynu firmy doręczającej) ponownie „W transporcie”.
 
-**Godziny przesunięte o kilka godzin.** Zaplecze systemowe Shouwu zapisuje lokalną godzinę niemal każdego skanu — także skanów linii lotniczych i kurierów za granicą — tak, jakby był to czas pekiński (`UTC+8`), a strona śledzenia przelicza ten zapis na strefę czasową Twojej przeglądarki. W efekcie skan wykonany o 10:00 w Polsce pokazuje się na stronie Shouwu jako 03:00 zimą (`UTC+1`) oraz jako 04:00 w czasie letnim (`UTC+2`, od ostatniej niedzieli marca do ostatniej niedzieli października), czyli o siedem albo sześć godzin za wcześnie, przez co sam lot wygląda na krótszy o kilka godzin. Kieruj się kolejnością wierszy. Peek ustala właściwy zegar każdego zdarzenia na podstawie jego miejsca albo etapu podróży i przelicza godziny na strefę czasową Twojego urządzenia; w serwisie peektracker.com oraz w aplikacjach na iPhone'a i Androida pod historią widnieje informacja „Godziny w twojej strefie czasowej: …”.
+**Godziny przesunięte o kilka godzin.** Zaplecze systemowe Shouwu zapisuje lokalną godzinę niemal każdego skanu — także skanów linii lotniczych i kurierów za granicą — tak, jakby był to czas pekiński (`UTC+8`), a strona śledzenia przelicza ten zapis na strefę czasową twojej przeglądarki. W efekcie skan wykonany o 10:00 w Polsce pokazuje się na stronie Shouwu jako 03:00 zimą (`UTC+1`) oraz jako 04:00 w czasie letnim (`UTC+2`, od ostatniej niedzieli marca do ostatniej niedzieli października), czyli o siedem albo sześć godzin za wcześnie, przez co sam lot wygląda na krótszy o kilka godzin. Kieruj się kolejnością wierszy. Peek ustala właściwy zegar każdego zdarzenia na podstawie jego miejsca albo etapu podróży i przelicza godziny na strefę czasową twojego urządzenia; w serwisie peektracker.com oraz w aplikacjach na iPhone'a i Androida pod historią widnieje informacja „Godziny w twojej strefie czasowej: …”.
 
 ## Kto doręcza paczki Shouwu w Polsce i w Europie
 
 Na swojej chińskojęzycznej stronie o firmie Shouwu podaje, że współpracuje bezpośrednio z operatorami USPS, Royal Mail, La Poste, DHL, DPD oraz Hermes. Karty poszczególnych tras, również po chińsku, wymieniają lokalnych doręczycieli w krajach, dla których przewoźnik publikuje własne linie:
 
-- **Polska.** W serwisie `www.sedel.com` Shouwu **nie wymienia żadnej dedykowanej linii do Polski ani nie wskazuje polskiego przewoźnika ostatniej mili**, a sama wyszukiwarka śledzenia nie podaje nazwy firmy kurierskiej ani jej krajowego numeru poza tym, co może czasem wynikać z treści skanu. Aby ustalić, kto doręcza Twoją paczkę w Polsce i pod jakim numerem krajowym, zapytaj bezpośrednio sprzedawcę.
+- **Polska.** W serwisie `www.sedel.com` Shouwu **nie wymienia żadnej dedykowanej linii do Polski ani nie wskazuje polskiego przewoźnika ostatniej mili**, a sama wyszukiwarka śledzenia nie podaje nazwy firmy kurierskiej ani jej krajowego numeru poza tym, co może czasem wynikać z treści skanu. Aby ustalić, kto doręcza twoją paczkę w Polsce i pod jakim numerem krajowym, zapytaj bezpośrednio sprzedawcę.
 - **Inne kraje Unii Europejskiej.** Shouwu publikuje własne linie do Niemiec — doręczane głównie przez [DHL](carrier:dhl), [Hermes](carrier:hermes-de) lub [DPD](carrier:dpd-de) zależnie od wariantu —, Francji (głównie [Colissimo](carrier:la-poste), a w części historii również Colis Privé), Holandii (głównie DHL), Szwecji (głównie Early Bird) oraz Włoch (linia ekonomiczna 10–12 dni roboczych doręczana przez UniUni i [Poste Italiane](carrier:poste-italiane), a w historiach odczytywanych przez Peeka także przez [iMile](carrier:imile)).
 - **Wielka Brytania i Stany Zjednoczone.** W Wielkiej Brytanii paczki doręczają [Royal Mail](carrier:royal-mail), Yodel oraz [Evri](carrier:evri) (zapisane na stronie jako `ERVI`; linia dla towarów z bateriami idzie głównie przez Royal Mail), natomiast w USA głównie [USPS](carrier:usps), a w części przesyłek także [FedEx](carrier:fedex).
 
@@ -118,7 +118,7 @@ Na swojej chińskojęzycznej stronie o firmie Shouwu podaje, że współpracuje 
 
 Firmowa witryna Shouwu pod adresem `http://www.sedel.com/` działa wyłącznie po chińsku i jest przeznaczona dla sprzedawców zlecających wysyłki. Podaje chińskie numery telefonów komórkowych do centrali w Szanghaju i pięciu oddziałów, link do czatu QQ oraz kody QR komunikatora WeChat — nie zawiera natomiast adresu e-mail, formularza kontaktowego, obsługi po polsku ani po angielsku, ani żadnego kanału dla odbiorców paczek. Sama strona śledzenia `admin.shshouwu.com` nie podaje żadnych danych kontaktowych.
 
-W sprawie zamówienia lub reklamacji kontaktuj się ze sprzedawcą, który nadał paczkę przez Shouwu; w sprawie samego doręczenia pod Twój adres zwróć się do lokalnego przewoźnika, gdy znasz już jego numer przesyłki.
+W sprawie zamówienia lub reklamacji kontaktuj się ze sprzedawcą, który nadał paczkę przez Shouwu; w sprawie samego doręczenia pod twój adres zwróć się do lokalnego przewoźnika, gdy znasz już jego numer przesyłki.
 
 ## Śledzenie paczki Shouwu w aplikacji Peek
 
@@ -128,7 +128,7 @@ Peek wyznacza bieżący etap przesyłki na podstawie statusu Shouwu i najnowszeg
 
 Ponieważ Shouwu nie przekazuje osobno nazwy ani numeru kuriera końcowego, Peek nie pokazuje wiersza „Dostawa przez” i nie przełącza automatycznie śledzenia na lokalnego przewoźnika, nawet jeśli w treści skanów pojawiają się komunikaty iMile lub DPD. Jeśli otrzymasz od sprzedawcy numer krajowego kuriera, dodaj go w Peeku jako osobną przesyłkę.
 
-Gdy masz otwartą kartę przesyłki lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza aktualizacje nawet co 10 minut, a w dniu wydania paczki do doręczenia od godziny 6:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio wyszukiwarka Shouwu; w pozostałym czasie sprawdza co godzinę, podobnie jak po dwóch dniach bez nowych zdarzeń albo po 12 godzinach, gdy przesyłka nadal ma etap „Zarejestrowana” lub „Przyjęta przez przewoźnika”. Gdy odczyt odbywa się przez zewnętrzne serwisy śledzenia, sprawdzanie następuje co godzinę, co 3 godziny po dobie bez nowego skanu oraz w dniu, gdy paczka jest w doręczeniu, nawet co 15 minut przy otwartej przesyłce lub włączonych powiadomieniach. Do wyboru masz powiadomienia „Wszystkie aktualizacje”, „Tylko ważne” (dostawa, odbiór, odprawa celna, nieudane doręczenia i zwroty) albo „Tylko w dniu dostawy”. Peek nie może skontaktować się z Shouwu ani ze sprzedawcą w Twoim imieniu.
+Gdy masz otwartą kartę przesyłki lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza aktualizacje nawet co 10 minut, a w dniu wydania paczki do doręczenia od godziny 6:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio wyszukiwarka Shouwu; w pozostałym czasie sprawdza co godzinę, podobnie jak po dwóch dniach bez nowych zdarzeń albo po 12 godzinach, gdy przesyłka nadal ma etap „Zarejestrowana” lub „Przyjęta przez przewoźnika”. Gdy odczyt odbywa się przez zewnętrzne serwisy śledzenia, sprawdzanie następuje co godzinę, co 3 godziny po dobie bez nowego skanu oraz w dniu, gdy paczka jest w doręczeniu, nawet co 15 minut przy otwartej przesyłce lub włączonych powiadomieniach. Do wyboru masz powiadomienia „Wszystkie aktualizacje”, „Tylko ważne” (dostawa, odbiór, odprawa celna, nieudane doręczenia i zwroty) albo „Tylko w dniu dostawy”. Peek nie może skontaktować się z Shouwu ani ze sprzedawcą w twoim imieniu.
 
 ## Najczęstsze pytania o śledzenie Shouwu
 

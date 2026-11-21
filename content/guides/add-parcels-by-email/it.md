@@ -19,13 +19,13 @@ Serve un account Peek: gli ospiti, che seguono i pacchi senza account, non ricev
 - Controlla «Ultime e-mail» | La pagina elenca le tue ultime cinque e-mail, chi ha inviato ciascuna e con quale esito, per esempio «2 pacchi aggiunti».
 :::
 
-Ogni pacco prende il nome del negozio che ha inviato l'e-mail, ripulito («EXAMPLE® SHOP AG» diventa «Example Shop»), oppure, per l'e-mail di un corriere, quello del negozio per cui dice di consegnare. Peek lo segna come nuovo nel tuo elenco e invia una sola notifica, «Aggiunto dalla tua email», con il suo nome e il corriere.
+Ogni pacco prende il nome del negozio che ha inviato l'e-mail, ripulito («EXAMPLE® SHOP AG» diventa «Example Shop»), oppure, per l'e-mail di un corriere, quello del negozio per cui dice di consegnare. Peek lo segna come nuovo nel tuo elenco e invia una sola notifica, «Aggiunto dalla tua e-mail», con il suo nome e il corriere.
 
 ## Posso tracciare i pacchi in automatico dalle mie e-mail?
 
 Sì, con una regola nella tua app di posta che inoltra le e-mail di spedizione al tuo indirizzo Peek: ognuna poi aggiunge da sola il suo pacco. Peek non si collega mai alla tua casella di posta. Vede solo ciò che arriva al suo indirizzo, da qualsiasi negozio o corriere: non esiste un elenco di negozi supportati. Alcuni altri tracker chiedono invece di collegare la tua casella; il [tracking universale](guide:universal-tracker) mette a confronto i due modi.
 
-La notifica «Aggiunto dalla tua email» arriva su ogni browser e telefono in cui il tuo account ha attivato le notifiche di Peek (vedi la guida alle [notifiche di consegna dei pacchi](guide:parcel-notifications)), a meno che tu non disattivi «Avvisami quando un’e-mail aggiunge un pacco». Non viene inviata se hai già aperto o archiviato il pacco.
+La notifica «Aggiunto dalla tua e-mail» arriva su ogni browser e telefono in cui il tuo account ha attivato le notifiche di Peek (vedi la guida alle [notifiche di consegna dei pacchi](guide:parcel-notifications)), a meno che tu non disattivi «Avvisami quando un’e-mail aggiunge un pacco». Non viene inviata se hai già aperto o archiviato il pacco.
 
 ## Dove trovo il mio indirizzo e-mail Peek?
 
@@ -100,6 +100,6 @@ Seleziona «Disattiva» in fondo alla pagina «Aggiungi pacchi via e-mail»: eli
 - [Peek: nomi dei negozi](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/inboundEmail/shopName.ts) – come viene chiamato un pacco
 - [Peek: indirizzo e limiti](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/inboundEmail/settings.ts) – l'indirizzo casuale di 16 caratteri, il limite giornaliero
 - [Peek: worker e-mail di Cloudflare](https://github.com/plhery/peek-delivery-tracker/blob/main/ops/cloudflare/inbound-email-worker.js) – Cloudflare Email Routing, il limite di 1 MB
-- [Peek: la notifica «Aggiunto dalla tua email»](https://github.com/plhery/peek-delivery-tracker/blob/main/supabase/migrations/20261117200000_email_added_push.sql) – messa in coda quando l'e-mail aggiunge il pacco, non per i pacchi aperti o archiviati
+- [Peek: la notifica «Aggiunto dalla tua e-mail»](https://github.com/plhery/peek-delivery-tracker/blob/main/supabase/migrations/20261117200000_email_added_push.sql) – messa in coda quando l'e-mail aggiunge il pacco, non per i pacchi aperti o archiviati
 - [Peek: architettura (in inglese)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ARCHITECTURE.md) – come le e-mail inoltrate vengono lette, nominate e conservate
 :::

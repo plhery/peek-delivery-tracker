@@ -53,8 +53,8 @@ W **Chinach** kurier YTO dostarcza paczkę pod wskazany adres (`派件扫描`) a
 
 Przepisy dotyczące rynku usług kurierskich obowiązujące w **Chinach** od 1 marca 2024 r. stanowią, że:
 
-- YTO musi poinformować Cię o prawie sprawdzenia przesyłki przy odbiorze pod kątem zgodności z listem przewozowym; jeśli opakowanie jest wyraźnie uszkodzone lub zawartość delikatna, możesz zajrzeć do środka albo odmówić przyjęcia.
-- Firma kurierska nie może potwierdzić odbioru w Twoim imieniu ani zostawić paczki w inteligentnym automacie paczkowym lub stacji obsługi bez Twojej zgody.
+- YTO musi poinformować cię o prawie sprawdzenia przesyłki przy odbiorze pod kątem zgodności z listem przewozowym; jeśli opakowanie jest wyraźnie uszkodzone lub zawartość delikatna, możesz zajrzeć do środka albo odmówić przyjęcia.
+- Firma kurierska nie może potwierdzić odbioru w twoim imieniu ani zostawić paczki w inteligentnym automacie paczkowym lub stacji obsługi bez twojej zgody.
 
 Aby zlecić zwrot paczki lub zmianę adresu jeszcze przed wydaniem (`退回/更址`), YTO odsyła m.in. do swojej aplikacji oraz miniprogramu. Według polityki prywatności w sprawie korekty adresu lub numeru telefonu należy skontaktować się z obsługą klienta.
 
@@ -62,7 +62,7 @@ Aby zlecić zwrot paczki lub zmianę adresu jeszcze przed wydaniem (`退回/更�
 
 YTO International (圆通国际) sięga historią 2006 roku i podaje ponad 50 biur w 18 krajach i regionach. Jego własna wyszukiwarka pod adresem [ytoglobal.com/service](https://www.ytoglobal.com/service) działa po angielsku („Express Freight Tracking”) oraz po chińsku (`国际快递查询`) i przyjmuje do 10 numerów oddzielonych przecinkami lub średnikami.
 
-Strony YTO nie podają, który przewoźnik doręcza przesyłkę na ostatnim odcinku w Twoim kraju, wspominając jedynie o współpracy z czołowymi globalnymi operatorami logistycznymi („top-notch global logistics service providers”). W usłudze dla klientów indywidualnych International Standard Express YTO wskazuje ze swojego magazynu międzynarodowego wyłącznie orientacyjne czasy przewozu („for reference only”): 7–12 dni roboczych do Polski, Niemiec, Francji, Włoch, Hiszpanii, Portugalii, Szwajcarii, Wielkiej Brytanii i Kanady (12–17 do Bułgarii i Rumunii), 9–12 do USA oraz 8–13 do Australii.
+Strony YTO nie podają, który przewoźnik doręcza przesyłkę na ostatnim odcinku w twoim kraju, wspominając jedynie o współpracy z czołowymi globalnymi operatorami logistycznymi („top-notch global logistics service providers”). W usłudze dla klientów indywidualnych International Standard Express YTO wskazuje ze swojego magazynu międzynarodowego wyłącznie orientacyjne czasy przewozu („for reference only”): 7–12 dni roboczych do Polski, Niemiec, Francji, Włoch, Hiszpanii, Portugalii, Szwajcarii, Wielkiej Brytanii i Kanady (12–17 do Bułgarii i Rumunii), 9–12 do USA oraz 8–13 do Australii.
 
 W razie nieobecności odbiorcy sekcja FAQ YTO International zaleca skorzystać z powiadomienia o ponownym doręczeniu („Redelivery Notification”), aby bezpłatnie umówić drugą próbę; jeśli również się nie powiedzie, YTO prosi nadawcę o dalsze dyspozycje. W celu wcześniejszego ustalenia pory dostawy FAQ podaje numer `400 60 95554`. W transporcie lotniczym przesyłki przechodzą kontrolę celną i bezpieczeństwa na lotnisku, a urząd celny może zająć lub zniszczyć paczkę zawierającą przedmioty zabronione.
 
@@ -78,7 +78,7 @@ W razie nieobecności odbiorcy sekcja FAQ YTO International zaleca skorzystać z
 
 **Zwrot do nadawcy.** Po skanie `退回件扫描` przesyłka jest w drodze powrotnej, a późniejsze skany doręczenia dotyczą wydania jej z powrotem nadawcy. Napisz do sprzedawcy; zobacz [zwrot do nadawcy](guide:returned-to-sender).
 
-**Status dostarczona, ale paczki nie ma.** W **Chinach** umowa YTO dopuszcza pokwitowanie przez domowników albo wskazaną przez Ciebie osobę, a także pozostawienie przesyłki w automacie lub stacji odbioru w pobliżu adresu – sprawdź te miejsca oraz recepcję budynku. Zobacz [dostarczona, ale nieodebrana](guide:delivered-not-received).
+**Status dostarczona, ale paczki nie ma.** W **Chinach** umowa YTO dopuszcza pokwitowanie przez domowników albo wskazaną przez ciebie osobę, a także pozostawienie przesyłki w automacie lub stacji odbioru w pobliżu adresu – sprawdź te miejsca oraz recepcję budynku. Zobacz [dostarczona, ale nieodebrana](guide:delivered-not-received).
 
 ## Numer telefonu i obsługa klienta YTO Express
 
@@ -95,11 +95,11 @@ YTO nie podaje godzin pracy ani obsługiwanych języków dla tych numerów. Na c
 
 [Peek](/) od razu rozpoznaje YTO Express po literach `YT` i 13 cyfrach. Kod złożony z `D` lub `G` oraz 11 cyfr pasuje natomiast również do Colis Privé, więc sam układ znaków nie przesądza o przewoźniku. Mimo to wklej numer: Peek obsługuje ponad 4500 przewoźników i odpytuje usługi śledzenia („Sprawdzanie usług śledzenia…”). Jeśli YTO Express nie ustawi się sam, kliknij „Zmień” i wskaż go w sekcji „Pasują do numeru” albo użyj opcji „Zmień przewoźnika” na karcie dodanej już przesyłki. Moduł YTO w Peek odczytuje także listy przewozowe YTO w innych formatach po wybraniu YTO Express z listy „Wszyscy przewoźnicy”. Link z domeny `yto.net.cn` zawierający `mailNo=` lub `waybillNo=` wraz z numerem również od razu przypisuje paczkę do YTO.
 
-Peek odczytuje krajowe chińskie śledzenie YTO, a nie system YTO International: pokazuje status, skany zwrócone przez YTO wraz z miastem oddziału lub stacji (albo ich chińską nazwą, gdy nie da się jej przypisać do miasta) oraz godzinę doręczenia. Czasy są odczytywane według czasu chińskiego (`UTC+8`: `20:00` w Pekinie to w Polsce `13:00` CET zimą i `14:00` CEST w czasie letnim) i przeliczane na strefę czasową Twojego urządzenia; na peektracker.com i w aplikacjach na iPhone’a i Androida historia kończy się dopiskiem „Godziny w twojej strefie czasowej:” z jej nazwą. Powtórzone skany wyświetlają się tylko raz. Tuż po `退回件扫描` status zmienia się na „Zgłoszono problem”, a etapy drogi powrotnej Peek pokazuje po angielsku jako `Out for delivery back to the sender` i `In a parcel locker or station on its way back`, natomiast podpis nadawcy jako `Returned to the sender` ze statusem „Zwrócona nadawcy”.
+Peek odczytuje krajowe chińskie śledzenie YTO, a nie system YTO International: pokazuje status, skany zwrócone przez YTO wraz z miastem oddziału lub stacji (albo ich chińską nazwą, gdy nie da się jej przypisać do miasta) oraz godzinę doręczenia. Czasy są odczytywane według czasu chińskiego (`UTC+8`: `20:00` w Pekinie to w Polsce `13:00` CET zimą i `14:00` CEST w czasie letnim) i przeliczane na strefę czasową twojego urządzenia; na peektracker.com i w aplikacjach na iPhone’a i Androida historia kończy się dopiskiem „Godziny w twojej strefie czasowej:” z jej nazwą. Powtórzone skany wyświetlają się tylko raz. Tuż po `退回件扫描` status zmienia się na „Zgłoszono problem”, a etapy drogi powrotnej Peek pokazuje po angielsku jako `Out for delivery back to the sender` i `In a parcel locker or station on its way back`, natomiast podpis nadawcy jako `Returned to the sender` ze statusem „Zwrócona nadawcy”.
 
 YTO nie udostępnia przewidywanej daty dostawy. Peek pomija imiona i numery telefonów kurierów, dane odbiorcy oraz adresy odbioru osobistego – zobaczysz je wyłącznie w wyszukiwarce YTO. Ponieważ YTO odpowiada na każdy poprawny składniowo numer, brak skanów nie dowodzi literówki: Peek wyświetla „Oczekiwanie na przewoźnika YTO Express” i sprawdza dalej. Jeżeli po dwóch dniach przesyłka zapisana pod YTO nadal nie jest znana YTO i żadne inne źródło nie odpowiedziało, Peek pokazuje komunikat „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i przechodzi na sprawdzanie raz dziennie, a po tygodniu od dodania – raz w tygodniu.
 
-Peek sprawdza aktualizacje nawet co 10 minut, gdy masz przesyłkę otwartą na ekranie lub w dniu doręczenia przy włączonych powiadomieniach, oraz nawet co 2 minuty od 6:00 czasu chińskiego w dniu skanu wydania do doręczenia (`派件扫描`), dopóki odpowiada własna wyszukiwarka YTO; przez zewnętrzne serwisy śledzenia sprawdza najwyżej co godzinę, co 3 godziny po dobie bez nowego skanu i nawet co 15 minut w dniu doręczenia, gdy masz paczkę otwartą lub włączone powiadomienia. W pozostałym czasie oraz po dwóch dniach bez nowych skanów (12 godzin, gdy widnieje „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z YTO ani ze sprzedawcą.
+Peek sprawdza aktualizacje nawet co 10 minut, gdy masz przesyłkę otwartą na ekranie lub w dniu doręczenia przy włączonych powiadomieniach, oraz nawet co 2 minuty od 6:00 czasu chińskiego w dniu skanu wydania do doręczenia (`派件扫描`), dopóki odpowiada własna wyszukiwarka YTO; przez zewnętrzne serwisy śledzenia sprawdza najwyżej co godzinę, co 3 godziny po dobie bez nowego skanu i nawet co 15 minut w dniu doręczenia, gdy masz paczkę otwartą lub włączone powiadomienia. W pozostałym czasie oraz po dwóch dniach bez nowych skanów (12 godzin, gdy widnieje „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz wybrać powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w twoim imieniu z YTO ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie YTO Express
 
@@ -109,7 +109,7 @@ Tak. YTO Express powstało w Szanghaju 28 maja 2000 r. Grupa obejmuje dwie spó�
 
 ### Co oznacza 签收 w śledzeniu YTO?
 
-Odebrano za podpisem: kurier doręczył przesyłkę i zapisał potwierdzenie na swoim terminalu (`PDA正常签收扫描`), co Peek pokazuje jako „Dostarczona”. Paczkę mogłeś odebrać Ty, osoba upoważniona pod Twoim adresem albo magazyn spedytora w Chinach. Jeśli nikt jej nie ma, zajrzyj do poradnika [dostarczona, ale nieodebrana](guide:delivered-not-received).
+Odebrano za podpisem: kurier doręczył przesyłkę i zapisał potwierdzenie na swoim terminalu (`PDA正常签收扫描`), co Peek pokazuje jako „Dostarczona”. Paczkę mogłeś odebrać ty, osoba upoważniona pod twoim adresem albo magazyn spedytora w Chinach. Jeśli nikt jej nie ma, zajrzyj do poradnika [dostarczona, ale nieodebrana](guide:delivered-not-received).
 
 ### Dlaczego mój numer YTO nie pokazuje żadnej historii?
 

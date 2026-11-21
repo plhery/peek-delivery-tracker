@@ -25,7 +25,7 @@ Pobierz ją z [App Store](https://apps.apple.com/app/id6823615370); na komputerz
 
 ### Gdzie są ustawienia Peeka?
 
-„Ustawienia” otwierasz przyciskiem Konto w prawym górnym rogu ekranu Dostawy: to ikona postaci albo Twój inicjał po zalogowaniu.
+„Ustawienia” otwierasz przyciskiem Konto w prawym górnym rogu ekranu Dostawy: to ikona postaci albo twój inicjał po zalogowaniu.
 
 | Czego szukasz | Gdzie to jest |
 | --- | --- |
@@ -55,7 +55,7 @@ Dodaj „Przesyłki”, jedyny widżet Peeka, z galerii widżetów, gdzie ma opi
 
 Według aktualnej instrukcji Apple możesz też dotknąć i przytrzymać ikonę Peeka i wybrać rozmiar na dole menu.
 
-Widżet pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej doby, w kolejności z Peeka. W średnim lub dużym widżecie stuknięcie przesyłki ją otwiera; mały widżet otwiera Twoją listę. Odświeża się co najmniej co 20 minut i o północy, więc „jutro” zmienia się w „dziś” nawet przy zamkniętej aplikacji.
+Widżet pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej doby, w kolejności z Peeka. W średnim lub dużym widżecie stuknięcie przesyłki ją otwiera; mały widżet otwiera twoją listę. Odświeża się co najmniej co 20 minut i o północy, więc „jutro” zmienia się w „dziś” nawet przy zamkniętej aplikacji.
 
 | Widżet pokazuje | Co to znaczy |
 | --- | --- |
@@ -85,7 +85,7 @@ Nie widzisz ikony? Pojawia się tylko wtedy, gdy aparat obsługuje skaner na ży
 
 ## Czy mogę zapytać Siri o najbliższą dostawę?
 
-Tak. Zapytaj „Kiedy dotrze moja następna przesyłka w aplikacji Peek”, a Siri poda Twoją najbliższą przesyłkę, jej przewoźnika, przewidywany termin (albo, jeśli go nie ma, status) i liczbę pozostałych przesyłek w drodze, bez otwierania Peeka. Powiedz „Dodaj przesyłkę w aplikacji Peek”, a Siri zapyta „Jaki jest numer śledzenia?”, po czym otworzy ekran dodawania z wpisanym numerem.
+Tak. Zapytaj „Kiedy dotrze moja następna przesyłka w aplikacji Peek”, a Siri poda twoją najbliższą przesyłkę, jej przewoźnika, przewidywany termin (albo, jeśli go nie ma, status) i liczbę pozostałych przesyłek w drodze, bez otwierania Peeka. Powiedz „Dodaj przesyłkę w aplikacji Peek”, a Siri zapyta „Jaki jest numer śledzenia?”, po czym otworzy ekran dodawania z wpisanym numerem.
 
 Obie czynności, „Najbliższa dostawa” i „Dodaj przesyłkę”, są też w Spotlight i w aplikacji Skróty, na iPhonie, iPadzie i Macu, a ich frazy zależą od języka urządzenia, nie języka ustawionego w Peeku. „Najbliższa dostawa” korzysta z danych widżetu, więc dopóki nie otworzysz Peeka choć raz, Siri mówi „Otwórz aplikację Peek, aby zobaczyć najbliższą dostawę.”
 

@@ -10,7 +10,7 @@ DPD Szwajcaria to spółka **DPD (Schweiz) AG** z siedzibą w Buchs ZH, należą
 
 ## Numer śledzenia DPD Szwajcaria: gdzie go znaleźć i jak wygląda
 
-DPD nazywa go „numerem paczki” (*parcel number* / *Paketnummer* / *numéro de colis*). Najczęściej otrzymujesz go w wiadomości od nadawcy lub od DPD; jeśli kurier nie zastał Cię w domu, numer jest wydrukowany także na karcie awiza, której kod kreskowy potrafi zeskanować aplikacja myDPD. Brak wiadomości? Sprawdź poradnik [jak znaleźć numer śledzenia](guide:find-tracking-number).
+DPD nazywa go „numerem paczki” (*parcel number* / *Paketnummer* / *numéro de colis*). Najczęściej otrzymujesz go w wiadomości od nadawcy lub od DPD; jeśli kurier nie zastał cię w domu, numer jest wydrukowany także na karcie awiza, której kod kreskowy potrafi zeskanować aplikacja myDPD. Brak wiadomości? Sprawdź poradnik [jak znaleźć numer śledzenia](guide:find-tracking-number).
 
 | Numer (przykładowy) | Co oznacza |
 | --- | --- |
@@ -23,20 +23,20 @@ Kod zaczynający się od `P00` na awizie **nie** jest numerem paczki — to nume
 
 Szwajcarski portal myDPD działa po angielsku, niemiecku, francusku i włosku (nie ma wersji polskiej). Poniżej znajdziesz angielskie komunikaty z myDPD — te same, które wyświetla Peek — w typowej kolejności na trasie przesyłki:
 
-| Status w DPD Szwajcaria | Co oznacza dla Ciebie |
+| Status w DPD Szwajcaria | Co oznacza dla ciebie |
 | --- | --- |
 | `Order created` | Utworzono etykietę: DPD nie ma jeszcze fizycznie paczki. |
 | `Parcel handed to DPD` | DPD odebrało przesyłkę od nadawcy. |
 | `Your parcel is on its way`, `In transit` | Paczka przemieszcza się między sortowniami DPD; nie wyjechała jeszcze do doręczenia. |
-| `At delivery center`, `At delivery centre` | Dotarła do oddziału doręczającego w Twoim regionie. |
+| `At delivery center`, `At delivery centre` | Dotarła do oddziału doręczającego w twoim regionie. |
 | `Parcel out for delivery` | Jest w samochodzie kuriera z planowanym doręczeniem dzisiaj. |
 | `Unsuccessful delivery attempt` | Nie udało się doręczyć — poszukaj awiza w skrzynce na listy. |
 | `Ready for collection`, `Available for collection` | Gotowa do odbioru w punkcie DPD Pickup Location. |
 | `Delivered`, `Your parcel has been delivered successfully` | Doręczona (pojedynczy wpis `Delivered` Peek wyświetla po polsku jako „Dostarczona”). |
 | `Return to sender`, `Return to shipper` | Przesyłka wraca do nadawcy. |
-| `Delivered (Returned to Sender)` | Zwrócona i wydana z powrotem nadawcy — nie Tobie. |
+| `Delivered (Returned to Sender)` | Zwrócona i wydana z powrotem nadawcy — nie tobie. |
 
-Jeśli przeglądasz myDPD po francusku, uważaj na dwa zwodnicze sformułowania: `En cours de livraison` oznacza zwykły transport między magazynami (dopiero `Colis en cours de livraison` to wyjazd kuriera na rejon), a `Disponible pour enlèvement` informuje, że paczka czeka na Ciebie w punkcie DPD Pickup. Więcej wyjaśnień w poradniku [statusy śledzenia przesyłek](guide:tracking-statuses).
+Jeśli przeglądasz myDPD po francusku, uważaj na dwa zwodnicze sformułowania: `En cours de livraison` oznacza zwykły transport między magazynami (dopiero `Colis en cours de livraison` to wyjazd kuriera na rejon), a `Disponible pour enlèvement` informuje, że paczka czeka na ciebie w punkcie DPD Pickup. Więcej wyjaśnień w poradniku [statusy śledzenia przesyłek](guide:tracking-statuses).
 
 W sekcji ochrony danych („Data protection”) myDPD prosi o kod pocztowy odbiorcy albo pozwala przejść dalej bez weryfikacji („Continue without verification”): bez kodu widać tylko po jednym skróconym wpisie na etap; po podaniu kodu odblokowują się szczegółowe skany z sortowni (`Your parcel arrived at our hub`), komunikaty doręczeniowe (`Your parcel will be delivered to a safe place according to your instructions`) oraz okno godzinowe.
 
@@ -48,7 +48,7 @@ W sekcji ochrony danych („Data protection”) myDPD prosi o kod pocztowy odbio
 
 **Nieobecność w domu.** Kurier zostawia kartę awiza; zobacz też [nieudana próba doręczenia](guide:missed-delivery). W zależności od usługi nadawcy DPD może ponowić próbę (maksymalnie **trzy razy**, według poradnika DPD Szwajcaria), zostawić przesyłkę u sąsiada w promieniu **50 metrów**, przekazać ją do punktu DPD Pickup Location albo odesłać nadawcy. Nowy termin doręczenia zamówisz na [stronie ponownej dostawy myDPD](https://www.dpdgroup.com/ch/mydpd/fmp/login), wpisując kod z SMS-a lub numer `P00` z awiza.
 
-**Punkty DPD Pickup Location.** Ponad 1000 sklepów partnerskich w Szwajcarii, z których wiele działa wieczorami oraz w **soboty** — godziny otwarcia sprawdzisz w [wyszukiwarce punktów DPD Pickup](https://www.dpd.com/ch/en/dpd-pickup-location/). Od powiadomienia e-mailem lub SMS-em masz **7 dni kalendarzowych** (wliczając weekend) na odbiór, zanim paczka wróci do nadawcy; sprawdź też [nieodebrana przesyłka](guide:uncollected-parcel). Zabierz urzędowy dokument ze zdjęciem; osoba odbierająca w Twoim imieniu musi okazać własny dokument ze zdjęciem oraz Twoje pełnomocnictwo cyfrowe lub podpisany odwrót awiza.
+**Punkty DPD Pickup Location.** Ponad 1000 sklepów partnerskich w Szwajcarii, z których wiele działa wieczorami oraz w **soboty** — godziny otwarcia sprawdzisz w [wyszukiwarce punktów DPD Pickup](https://www.dpd.com/ch/en/dpd-pickup-location/). Od powiadomienia e-mailem lub SMS-em masz **7 dni kalendarzowych** (wliczając weekend) na odbiór, zanim paczka wróci do nadawcy; sprawdź też [nieodebrana przesyłka](guide:uncollected-parcel). Zabierz urzędowy dokument ze zdjęciem; osoba odbierająca w twoim imieniu musi okazać własny dokument ze zdjęciem oraz twoje pełnomocnictwo cyfrowe lub podpisany odwrót awiza.
 
 **Odprawa celna w Szwajcarii.** Szwajcaria nie należy do unii celnej UE: przy paczkach wysyłanych z Polski lub innych krajów do Szwajcarii Federalny Urząd Celny i Bezpieczeństwa Granic (BAZG) wskazuje, że operatorzy pocztowi i kurierzy zgłaszają każdą przesyłkę do odprawy. Szwajcarski podatek VAT wynosi **8,1 %** (**2,6 %** stawki obniżonej, np. na książki i żywność), należności celnych lub podatku VAT do kwoty **5 CHF** nie pobiera się, natomiast przewoźnik może doliczyć opłatę za obsługę celną. Więcej w artykule [paczka w urzędzie celnym](guide:customs).
 
@@ -77,7 +77,7 @@ Dane kontaktowe ze szwajcarskich stron DPD (stan na listopad 2026 r., dla całeg
 
 Opcjonalne pole „Kod pocztowy odbiorcy” przyjmuje format dowolnego kraju i trafia do DPD oraz — gdy trzeba — do serwisów śledzenia. Bez kodu zobaczysz po jednym wpisie na etap i przewidywaną datę doręczenia; z kodem dochodzą skany na mapie z miejscowością i krajem, komunikaty DPD, okno godzinowe (w czasie szwajcarskim), nazwa nadawcy, waga oraz pełny adres punktu Pickup (bez kodu pocztowego widoczna jest zazwyczaj tylko nazwa sklepu, o ile DPD ją podaje). Gdy DPD odrzuci kod pocztowy, Peek pokaże „Nie znaleziono z podanym kodem pocztowym” i przycisk „Zmień kod pocztowy”.
 
-Statusy pozostają po angielsku (poza pojedynczym `Delivered`, pokazywanym jako „Dostarczona”), a godziny są przeliczane na Twoją strefę czasową („Godziny w twojej strefie czasowej: …” na peektracker.com i w aplikacjach na iPhone’a i Androida); imię i nazwisko, adres domowy oraz link do potwierdzenia odbioru są pomijane. Peek sprawdza przesyłkę nawet co 10 minut, a w dniu doręczenia nawet co 2 minuty od 6:00 czasu lokalnego lub na pół godziny przed otwarciem okna czasowego (co 5 minut, gdy musi otworzyć stronę śledzenia DPD w przeglądarce; co 15 minut po błędzie lub przez serwisy śledzenia), z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach bez zmian — albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” — przechodzi na sprawdzanie co godzinę; jeśli po dwóch dniach żaden przewoźnik nie rozpozna numeru, wyświetla komunikat: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Paczka nie jest przekazywana do innego przewoźnika.
+Statusy pozostają po angielsku (poza pojedynczym `Delivered`, pokazywanym jako „Dostarczona”), a godziny są przeliczane na twoją strefę czasową („Godziny w twojej strefie czasowej: …” na peektracker.com i w aplikacjach na iPhone’a i Androida); imię i nazwisko, adres domowy oraz link do potwierdzenia odbioru są pomijane. Peek sprawdza przesyłkę nawet co 10 minut, a w dniu doręczenia nawet co 2 minuty od 6:00 czasu lokalnego lub na pół godziny przed otwarciem okna czasowego (co 5 minut, gdy musi otworzyć stronę śledzenia DPD w przeglądarce; co 15 minut po błędzie lub przez serwisy śledzenia), z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach bez zmian — albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” — przechodzi na sprawdzanie co godzinę; jeśli po dwóch dniach żaden przewoźnik nie rozpozna numeru, wyświetla komunikat: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Paczka nie jest przekazywana do innego przewoźnika.
 
 ## Najczęstsze pytania o śledzenie DPD Szwajcaria
 

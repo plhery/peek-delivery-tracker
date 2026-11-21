@@ -19,7 +19,7 @@ Część produktów na douglas.pl wysyłają Partnerzy Douglas, w ramach program
 
 ## Kto dostarcza zamówienie Douglas?
 
-Regulamin Douglas nie wymienia przewoźników z nazwy. Opisuje sposoby dostawy, a który wybierzesz, zależy od Ciebie:
+Regulamin Douglas nie wymienia przewoźników z nazwy. Opisuje sposoby dostawy, a który wybierzesz, zależy od ciebie:
 
 | Sposób dostawy | Co mówi regulamin |
 | --- | --- |
@@ -59,14 +59,14 @@ Gdy nic się nie dzieje, zwykle chodzi o jedno z tych:
 - **Zamówienie w częściach.** Produkty Partnerów jadą osobno, a Douglas może wysłać zamówienie w kilku częściach. Sprawdź każdy e-mail z potwierdzeniem wysłania. Dodatkowe koszty dostawy w częściach pokrywa Douglas.
 - **Click&Collect po 17:50.** Czas z karty produktu obowiązuje, jeśli zamówisz między otwarciem perfumerii a 17:50. Później zamówienie może przejść na kolejny dzień otwarcia i będzie do odbioru najwcześniej o 11:00.
 - **Więcej niż 10 sztuk.** Jednego produktu kupisz najwyżej 10 sztuk w jednej transakcji lub w ciągu 7 kolejnych dni. Większe zamówienie Douglas może anulować w ciągu 30 dni, więc jeśli potrzebujesz więcej, najpierw skontaktuj się z Douglas.
-- **Błędny adres.** Jeśli dostawa się nie udaje przez błędny adres albo nikt jej nie przyjął, odpowiedzialność spada na Ciebie: sprawdź adres w zamówieniu.
-- **Minęło 30 dni.** Jeśli paczka nie dotarła w 30 dni ani w uzgodnionym terminie, przypomnij Douglas o zamówieniu i wyznacz dodatkowy, rozsądny termin. Gdy i ten minie, możesz rozwiązać umowę i odzyskać pieniądze. Dodatkowego terminu nie musisz dawać, jeśli sprzedawca odmówi dostawy albo jeśli termin miał dla Ciebie zasadnicze znaczenie i uprzedziłeś go o tym.
+- **Błędny adres.** Jeśli dostawa się nie udaje przez błędny adres albo nikt jej nie przyjął, odpowiedzialność spada na ciebie: sprawdź adres w zamówieniu.
+- **Minęło 30 dni.** Jeśli paczka nie dotarła w 30 dni ani w uzgodnionym terminie, przypomnij Douglas o zamówieniu i wyznacz dodatkowy, rozsądny termin. Gdy i ten minie, możesz rozwiązać umowę i odzyskać pieniądze. Dodatkowego terminu nie musisz dawać, jeśli sprzedawca odmówi dostawy albo jeśli termin miał dla ciebie zasadnicze znaczenie i uprzedziłeś go o tym.
 
 Kiedy czekanie jest jeszcze normalne: [śledzenie się nie aktualizuje](guide:tracking-not-updating) i [czas dostawy](guide:delivery-times).
 
 ## Opcje i koszty dostawy Douglas
 
-Ceny w sklepie zawierają podatki i cła, ale nie koszty dostawy. Dostawę płacisz Ty, chyba że umowa mówi inaczej; Douglas może ją pokryć na warunkach z zakładki „Dostawa i zwroty”. Dokładny koszt zobaczysz w trakcie składania zamówienia, zanim je złożysz. Na dopłaty, na przykład za wysyłkę ekspresową albo pakowanie na prezent, sprzedawca potrzebuje Twojej wyraźnej zgody: pole zaznaczone z góry nie jest zgodą, a pobraną tak kwotę możesz odzyskać.
+Ceny w sklepie zawierają podatki i cła, ale nie koszty dostawy. Dostawę płacisz ty, chyba że umowa mówi inaczej; Douglas może ją pokryć na warunkach z zakładki „Dostawa i zwroty”. Dokładny koszt zobaczysz w trakcie składania zamówienia, zanim je złożysz. Na dopłaty, na przykład za wysyłkę ekspresową albo pakowanie na prezent, sprzedawca potrzebuje twojej wyraźnej zgody: pole zaznaczone z góry nie jest zgodą, a pobraną tak kwotę możesz odzyskać.
 
 Formy płatności zależą od zamówienia:
 
@@ -77,9 +77,9 @@ Formy płatności zależą od zamówienia:
 | Za pobraniem | Tylko przy dostawie kurierem, bez produktów Partnera |
 | Przy odbiorze w perfumerii | Gdy odbierasz zamówienie w perfumerii, bez produktów Partnera |
 
-**Pobranie.** Jeśli nie odbierzesz dwóch kolejnych zamówień płatnych za pobraniem, Douglas może wyłączyć Ci tę formę płatności. Żeby ją przywrócić, skontaktuj się z Douglas.
+**Pobranie.** Jeśli nie odbierzesz dwóch kolejnych zamówień płatnych za pobraniem, Douglas może wyłączyć ci tę formę płatności. Żeby ją przywrócić, skontaktuj się z Douglas.
 
-**Odbiór w perfumerii i Click&Collect.** Zamówienie odbierasz dopiero po informacji, że czeka na odbiór. Ile dni na Ciebie czeka, Douglas podaje w zakładce „Dostawa i zwroty” i przy składaniu zamówienia; dni liczą się od tej informacji. Jeśli nie odbierzesz go w terminie, Douglas je anuluje. Click&Collect działa w godzinach otwarcia perfumerii, a czas przygotowania liczy się od e-maila z potwierdzeniem zamówienia.
+**Odbiór w perfumerii i Click&Collect.** Zamówienie odbierasz dopiero po informacji, że czeka na odbiór. Ile dni na ciebie czeka, Douglas podaje w zakładce „Dostawa i zwroty” i przy składaniu zamówienia; dni liczą się od tej informacji. Jeśli nie odbierzesz go w terminie, Douglas je anuluje. Click&Collect działa w godzinach otwarcia perfumerii, a czas przygotowania liczy się od e-maila z potwierdzeniem zamówienia.
 
 Więcej: [paczkomaty i punkty odbioru](guide:parcel-lockers) i [nieodebrana paczka](guide:uncollected-parcel).
 
@@ -89,7 +89,7 @@ Najpierw sprawdź, potem zgłoś. Po kolei:
 
 :::steps
 - Sprawdź śledzenie | Otwórz śledzenie każdej przesyłki, której numer masz. Produkty Partnerów jadą osobno, a zamówienie może przyjść w częściach: sprawdź wszystkie paczki, zanim zgłosisz brak.
-- Rozejrzyj się i zapytaj | Paczka jest doręczona, a jej nie masz: sprawdź wybrany automat, punkt odbioru albo perfumerię, zapytaj domowników i sąsiadów, czy ktoś jej nie odebrał. Douglas nie sprawdza, kto odbiera przesyłkę pod Twoim adresem.
+- Rozejrzyj się i zapytaj | Paczka jest doręczona, a jej nie masz: sprawdź wybrany automat, punkt odbioru albo perfumerię, zapytaj domowników i sąsiadów, czy ktoś jej nie odebrał. Douglas nie sprawdza, kto odbiera przesyłkę pod twoim adresem.
 - Skontaktuj się z Douglas | Zadzwoń pod 22 278 14 14, od poniedziałku do piątku w godz. 8:00–20:00 i w soboty w godz. 10:00–18:00, albo napisz na info@douglas.pl. Miej pod ręką numer zamówienia.
 - Złóż reklamację | Reklamację złożysz e-mailem, telefonicznie albo pisemnie na adres zwrotów w Mszczonowie. Opisz, czego brakuje albo co jest nie tak z produktem; możesz do tego użyć formularza zwrotu, który przychodzi z towarem. Zachowaj karton i zrób zdjęcia: za uszkodzenia od wysłania do doręczenia odpowiada sprzedawca. Douglas odpowiada w ciągu 14 dni; jeśli nie odpowie, reklamacja jest uznana.
 - Zwrot pieniędzy albo nowy produkt | Jeśli produkt jest wadliwy, Douglas musi go bezpłatnie naprawić albo wymienić; jeśli to niemożliwe, masz prawo do pełnego lub częściowego zwrotu pieniędzy. Masz na to co najmniej 2 lata od otrzymania towaru. Douglas odbiera reklamowany towar na swój koszt, chyba że uzna to za zbędne; możesz go też oddać w perfumerii.
@@ -104,14 +104,14 @@ Na douglas.pl możesz odstąpić od umowy bez podania przyczyny w ciągu 30 dni 
 Towar odsyłasz razem z prezentami, które do niego dostałeś, najpóźniej w 14 dni od złożenia oświadczenia, z wypełnionym formularzem w paczce. Formularz odstąpienia dla towaru wysłanego przez Douglas podaje trzy drogi:
 
 - **Na koszt Douglas.** Kurierem DHL albo przez automaty InPost Paczkomat i ORLEN Paczka. Jak nadać taki zwrot, Douglas opisuje w zakładce „Dostawa i zwroty”.
-- **Na własny koszt.** Inną drogą, na adres: Douglas Supply Chain and Services CEE Sp. z o.o., c/o Arvato Polska Sp. z o.o., ul. Tarczyńska 111, 96-320 Mszczonów DC01. Bezpośredni koszt zwrotu płacisz wtedy Ty.
+- **Na własny koszt.** Inną drogą, na adres: Douglas Supply Chain and Services CEE Sp. z o.o., c/o Arvato Polska Sp. z o.o., ul. Tarczyńska 111, 96-320 Mszczonów DC01. Bezpośredni koszt zwrotu płacisz wtedy ty.
 - **W perfumerii.** W wybranej perfumerii Douglas, poza perfumerią w Ptak Outlet w Rzgowie. Jeśli nie wysłałeś wcześniej oświadczenia, przynieś je razem z towarem.
 
 **Produkty Partnerów.** Nie zwrócisz ich w perfumerii: według regulaminu odsyłasz je na adres w Mszczonowie.
 
 **Czego nie zwrócisz.** Towaru w zapieczętowanym opakowaniu, którego ze względów zdrowotnych lub higienicznych nie można zwrócić, jeśli otworzyłeś je po dostawie. Odpowiadasz też za zmniejszenie wartości towaru, jeśli korzystałeś z niego bardziej, niż trzeba, by sprawdzić jego charakter, cechy i działanie.
 
-**Zwrot pieniędzy.** Douglas zwraca cenę i koszt dostawy najpóźniej w 14 dni od otrzymania oświadczenia o odstąpieniu, tą samą metodą płatności, ale może poczekać, aż dostanie towar albo dowód jego odesłania. Jeśli wybrałeś droższą dostawę niż najtańsza zwykła, różnicy nie zwraca. Przy przelewie pieniądze wracają na wskazane przez Ciebie konto, a przy płatności za pobraniem gotówką albo na konto podane w oświadczeniu (formularz ma na nie miejsce). Za kartę podarunkową dostajesz elektroniczny voucher Douglas.
+**Zwrot pieniędzy.** Douglas zwraca cenę i koszt dostawy najpóźniej w 14 dni od otrzymania oświadczenia o odstąpieniu, tą samą metodą płatności, ale może poczekać, aż dostanie towar albo dowód jego odesłania. Jeśli wybrałeś droższą dostawę niż najtańsza zwykła, różnicy nie zwraca. Przy przelewie pieniądze wracają na wskazane przez ciebie konto, a przy płatności za pobraniem gotówką albo na konto podane w oświadczeniu (formularz ma na nie miejsce). Za kartę podarunkową dostajesz elektroniczny voucher Douglas.
 
 Jak śledzić zwrot: [śledzenie zwrotów](guide:returns-tracking).
 

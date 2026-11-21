@@ -30,7 +30,7 @@ W wyniku wyszukiwania DHLink pokazuje „DHLink No.”, „Tracking No.” oraz 
 
 Wynik grupuje przesyłki jako `In transit`, `Delivered` lub `Not found`, podaje kody krajów nadania i przeznaczenia oraz czas każdego skanu, a po doręczeniu dopisuje `Signed for`. Ponieważ wpisy spływają z kilku źródeł, to samo zdarzenie często widnieje na stronie DHLink podwójnie. Najczęstsze angielskie komunikaty w kolejności trasy:
 
-| DHLink pisze | Co to dla Ciebie znaczy |
+| DHLink pisze | Co to dla ciebie znaczy |
 | --- | --- |
 | `Data Received; Data transferred and received by carrier` | Na linii do Europy Południowo-Wschodniej: Pactic, węgierska platforma, przez którą biegnie ta trasa, otrzymała dane przesyłki. Przed skanem w magazynie DHLink Peek pokazuje „Zarejestrowana”; gdy wpis powtórzy się po locie, zostaje status „W transporcie”. |
 | `Arrive at the collection warehouse` | Paczka dotarła do magazynu zbiorczego DHLink w Chinach. |
@@ -47,8 +47,8 @@ Wynik grupuje przesyłki jako `In transit`, `Delivered` lub `Not found`, podaje 
 | `Arrived to … hub`, `Linehaul transit; Parcel has entered the linehaul network.` | Po locie: przyjęcie w europejskim hubie partnera (oznaczonym kodem w miejscu wielokropka, np. `HU` na Węgrzech dla Pactic) i dalszy przewóz między oddziałami („W transporcie” w Peek). |
 | `Customs clearance completed`, `Customs import clearance completed, awaiting pickup by local carrier` | Odprawa celna importowa zakończona; paczka czeka na odbiór przez lokalnego przewoźnika. |
 | `UPS/USPS/Fedex` | Zbliża się przekazanie amerykańskiemu przewoźnikowi. |
-| `货物已交UPS/USPS/Fedex,The goods have been delivered to UPS/USPS/Fedex` | Przekazano do [UPS](carrier:ups), USPS lub [FedEx](carrier:fedex) w USA. To jeszcze nie jest doręczenie do Ciebie. |
-| `Package picked up by last-mile carrier` | Przewoźnik ostatniej mili w Twoim kraju odebrał przesyłkę. |
+| `货物已交UPS/USPS/Fedex,The goods have been delivered to UPS/USPS/Fedex` | Przekazano do [UPS](carrier:ups), USPS lub [FedEx](carrier:fedex) w USA. To jeszcze nie jest doręczenie do ciebie. |
+| `Package picked up by last-mile carrier` | Przewoźnik ostatniej mili w twoim kraju odebrał przesyłkę. |
 | `Scheduled for Delivery` | Wydana do doręczenia. |
 | `Shipment has delivered at …` | Doręczona. |
 
@@ -68,7 +68,7 @@ Gdy znasz już lokalnego przewoźnika i jego numer, w jego własnym śledzeniu z
 
 **Brak nowych skanów po locie lub odprawie.** Sprawdź, czy w wyniku pojawiło się pole „Last Leg No.”, i wyszukaj ten numer u przewoźnika końcowego – jego skany bywają świeższe niż w DHLink. Więcej w poradnikach [śledzenie się nie aktualizuje](guide:tracking-not-updating) oraz [śledzenie paczki z Chin](guide:tracking-from-china).
 
-**Doręczona, ale jej nie masz, opóźniona lub zaginiona.** Zasady zwrotów i odszkodowań DHLink dotyczą sprzedawców: to sklep składa reklamację w DHLink, a Ty wyjaśniasz sprawę ze sprzedawcą lub przez DHgate. Regulaminy wyłączają problemy wynikłe z winy kupującego, takie jak opóźnienie z powodu nieodebrania przesyłki lub braku podpisu albo nieudana odprawa celna, gdy odbiorca nie pomógł na czas. Szybko reaguj na wezwania urzędu celnego lub kuriera i wcześnie powiadom sprzedawcę – ma on tylko 90 dni kalendarzowych od utworzenia zlecenia logistycznego na zgłoszenie roszczenia. Zobacz [doręczona, ale nie dotarła](guide:delivered-not-received) oraz [paczka zaginęła](guide:lost-parcel).
+**Doręczona, ale jej nie masz, opóźniona lub zaginiona.** Zasady zwrotów i odszkodowań DHLink dotyczą sprzedawców: to sklep składa reklamację w DHLink, a ty wyjaśniasz sprawę ze sprzedawcą lub przez DHgate. Regulaminy wyłączają problemy wynikłe z winy kupującego, takie jak opóźnienie z powodu nieodebrania przesyłki lub braku podpisu albo nieudana odprawa celna, gdy odbiorca nie pomógł na czas. Szybko reaguj na wezwania urzędu celnego lub kuriera i wcześnie powiadom sprzedawcę – ma on tylko 90 dni kalendarzowych od utworzenia zlecenia logistycznego na zgłoszenie roszczenia. Zobacz [doręczona, ale nie dotarła](guide:delivered-not-received) oraz [paczka zaginęła](guide:lost-parcel).
 
 ## Kontakt z DHLink i obsługa klienta
 
@@ -78,9 +78,9 @@ Według stanu na 16 listopada 2026 roku strona kontaktowa DHLink podaje jeden ad
 
 [Peek](/) nie rozpoznaje DHLink na pewno po samym kształcie numeru: serie `FC`, `XZG`, `YLUS`, `QH`, `EYT`, `CYS`, `JXCYI`, `JXCZO`, `JXCUS` i `JXCZI` to jedynie słabe dopasowania. Wklej numer mimo to – Peek obsługuje ponad 4500 przewoźników, pokazuje „Sprawdzanie usług śledzenia…”, a gdy DHLink potwierdzi przesyłkę, wyświetla „DHLink ma tę przesyłkę.”; w przeciwnym razie wybierz DHLink przyciskiem „Zmień”. Numer `JXCYI`, `JXCZO`, `JXCUS` lub `JXCZI` może należeć również do Juxi Express: Peek odpytuje najpierw DHLink i dopóki żaden przewoźnik nie odpowie, oznacza paczkę jako „Prawdopodobnie DHLink”; jeśli sprzedawca nadał ją przez Juxi, przełącz na Juxi Express przez „Zmień”. Numer pocztowy (dwie litery, 9 cyfr i `CN`) trafia do [China Post](carrier:china-post).
 
-Peek czyta bezpośrednio śledzenie DHLink, pokazuje status, kraj przeznaczenia i miejscowość każdego zdarzenia oraz wyświetla każdy skan tylko raz (tak jak zapisuje go DHLink, zazwyczaj po angielsku), odrzucając duplikaty między źródłami, kody pocztowe i numery referencyjne zamówienia. Skany z Chin odczytuje według czasu pekińskiego, skany USPS według czasu danego stanu USA, a wpisy Pactic z trasy przez Węgry według czasu w Budapeszcie, po czym przelicza je na strefę czasową Twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w twojej strefie czasowej: …”); pozostałe wpisy zachowują czas podany przez DHLink. DHLink nie podaje wagi, nazwy usługi ani godziny doręczenia, a jedyną prognozą w Peek jest przekazany skan USPS typu `Out for Delivery, Expected Delivery …`, o ile pozostaje najnowszy i zawiera przedział godzinowy na ten sam dzień. Gdy „Last Leg No.” to numer GOFO (`GFUS` i 14 cyfr), SwiftX (`SWX` i 18 cyfr) lub szwajcarskiego DPD (14 cyfr zaczynających się od `060` lub `061`), Peek pokazuje tego przewoźnika i jego numer, odpytuje go i przełącza na niego, gdy tylko pojawi się tam nowszy postęp; inne numery ostatniej mili zostają na historii DHLink.
+Peek czyta bezpośrednio śledzenie DHLink, pokazuje status, kraj przeznaczenia i miejscowość każdego zdarzenia oraz wyświetla każdy skan tylko raz (tak jak zapisuje go DHLink, zazwyczaj po angielsku), odrzucając duplikaty między źródłami, kody pocztowe i numery referencyjne zamówienia. Skany z Chin odczytuje według czasu pekińskiego, skany USPS według czasu danego stanu USA, a wpisy Pactic z trasy przez Węgry według czasu w Budapeszcie, po czym przelicza je na strefę czasową twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w twojej strefie czasowej: …”); pozostałe wpisy zachowują czas podany przez DHLink. DHLink nie podaje wagi, nazwy usługi ani godziny doręczenia, a jedyną prognozą w Peek jest przekazany skan USPS typu `Out for Delivery, Expected Delivery …`, o ile pozostaje najnowszy i zawiera przedział godzinowy na ten sam dzień. Gdy „Last Leg No.” to numer GOFO (`GFUS` i 14 cyfr), SwiftX (`SWX` i 18 cyfr) lub szwajcarskiego DPD (14 cyfr zaczynających się od `060` lub `061`), Peek pokazuje tego przewoźnika i jego numer, odpytuje go i przełącza na niego, gdy tylko pojawi się tam nowszy postęp; inne numery ostatniej mili zostają na historii DHLink.
 
-Dopóki odpowiada bezpośrednio śledzenie DHLink, Peek sprawdza paczkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego albo – jeśli podano okno doręczenia – od pół godziny przed jego początkiem); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po przełączeniu na GOFO sprawdza najwyżej co 30 minut, także w doręczeniu. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w Twoim imieniu z DHLink, DHgate ani sprzedawcą.
+Dopóki odpowiada bezpośrednio śledzenie DHLink, Peek sprawdza paczkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego albo – jeśli podano okno doręczenia – od pół godziny przed jego początkiem); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po przełączeniu na GOFO sprawdza najwyżej co 30 minut, także w doręczeniu. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się w twoim imieniu z DHLink, DHgate ani sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie DHLink
 
@@ -90,11 +90,11 @@ To transgraniczna platforma logistyczna grupy DHgate, prowadzona w Pekinie przez
 
 ### Kto doręcza moją paczkę z DHLink?
 
-Lokalny przewoźnik w Twoim kraju. Na liniach amerykańskich DHLink przekazuje przesyłki do UPS, USPS lub FedEx albo do GOFO, SwiftX czy UniUni; w Szwajcarii czasem do DPD; a przy przesyłkach pocztowych zakończonych na `CN` – operatorowi pocztowemu, który obsługuje pocztę zagraniczną z China Post. Sprawdź pole „Last Leg No.” w wyniku na stronie DHLink.
+Lokalny przewoźnik w twoim kraju. Na liniach amerykańskich DHLink przekazuje przesyłki do UPS, USPS lub FedEx albo do GOFO, SwiftX czy UniUni; w Szwajcarii czasem do DPD; a przy przesyłkach pocztowych zakończonych na `CN` – operatorowi pocztowemu, który obsługuje pocztę zagraniczną z China Post. Sprawdź pole „Last Leg No.” w wyniku na stronie DHLink.
 
 ### Co oznacza status „The goods have been delivered to UPS/USPS/Fedex”?
 
-DHLink przekazał paczkę amerykańskiemu przewoźnikowi odpowiedzialnemu za dalszy odcinek trasy. Przesyłka nie została jeszcze doręczona pod Twój adres – kolejne skany będą już pochodzić od tej firmy.
+DHLink przekazał paczkę amerykańskiemu przewoźnikowi odpowiedzialnemu za dalszy odcinek trasy. Przesyłka nie została jeszcze doręczona pod twój adres – kolejne skany będą już pochodzić od tej firmy.
 
 :::sources
 - [DHLink: O nas (关于我们)](https://www.dhlink.com/about/introduce) – założona w 2014 r. platforma logistyczna DHgate, magazyny zagraniczne i doręczenie w kraju docelowym

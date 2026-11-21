@@ -11,7 +11,7 @@ Paczka z AliExpress, Temu albo Shein przechodzi z rąk do rąk: chińska firma l
 
 ## Jak śledzić paczkę z Chin i czy śledzenie jest dokładne?
 
-Śledzenie w AliExpress, Temu i Shein jest tak dokładne, jak skany przewoźników. Żaden tracker, także Peek, nie pokaże skanu, którego przewoźnik nie opublikował. AliExpress odsyła Cię do strony śledzenia [Cainiao](carrier:cainiao). Luki w śledzeniu biorą się z samej trasy:
+Śledzenie w AliExpress, Temu i Shein jest tak dokładne, jak skany przewoźników. Żaden tracker, także Peek, nie pokaże skanu, którego przewoźnik nie opublikował. AliExpress odsyła cię do strony śledzenia [Cainiao](carrier:cainiao). Luki w śledzeniu biorą się z samej trasy:
 
 :::journey
 - shop | Sprzedawca | Przekazuje paczkę chińskiej firmie logistycznej. Do 11 dni bez skanu
@@ -19,7 +19,7 @@ Paczka z AliExpress, Temu albo Shein przechodzi z rąk do rąk: chińska firma l
 - plane | Lot | `Hand over to airline`, potem cisza aż do lądowania
 - customs | Urząd celny | Po `Arrive at Destination` paczka czeka tutaj
 - handover | Przewoźnik w Polsce | Przejmuje paczkę, często pod własnym numerem
-- home | U Ciebie | Ostatnie skany bywają tylko na stronie przewoźnika w Polsce
+- home | U ciebie | Ostatnie skany bywają tylko na stronie przewoźnika w Polsce
 :::
 
 Do Europy Cainiao wozi paczki nie tylko samolotem, ale też pociągami Chiny–Europa i statkami, przez swój hub w Liège w Belgii. Dlatego w śledzeniu może się pojawić inny kraj, na przykład Belgia, zanim paczka trafi do Polski. Cainiao zresztą uprzedza, że po statusie `Leaving Origin` paczka może jechać przez inne kraje.
@@ -61,7 +61,7 @@ Status „wydana do doręczenia” i inne codzienne statusy wyjaśnia [poradnik 
 
 Zwykle z jednego z trzech powodów:
 
-- **AliExpress połączył Twoje zamówienia.** Według AliExpress wspólny numer kilku zamówień oznacza, że ich wysyłkę zmieniono na szybszą i odbierzesz je razem. W Polsce AliExpress oznacza w wynikach wyszukiwania ikoną „Combine Delivery” produkty, które łączy w jedną wysyłkę, gdy zamawiasz je naraz za ponad 5 USD.
+- **AliExpress połączył twoje zamówienia.** Według AliExpress wspólny numer kilku zamówień oznacza, że ich wysyłkę zmieniono na szybszą i odbierzesz je razem. W Polsce AliExpress oznacza w wynikach wyszukiwania ikoną „Combine Delivery” produkty, które łączy w jedną wysyłkę, gdy zamawiasz je naraz za ponad 5 USD.
 - **Jedno zamówienie, kilka paczek.** W Shein część produktów z zamówienia może przyjść z magazynu w Europie, a część spoza Europy, w osobnych paczkach ([gdzie znaleźć numer każdej z nich](guide:find-tracking-number)).
 - **Paczkę przejął przewoźnik w Polsce** z własną etykietą i numerem. Cainiao pokazuje ten numer na swojej stronie śledzenia, o ile go udostępni. Od tej chwili sprawdzaj stronę tego przewoźnika.
 
@@ -103,7 +103,7 @@ Nie wszystko leci z Chin. W Shein produkty z etykietą „Magazyn w UE” mogą 
 
 Dla śledzenia oznacza to, że paczka z magazynu w UE nie leci samolotem z Chin i nie czeka w Polsce na odprawę celną. Komisja Europejska przypomina, że towar odprawiony w jednym kraju UE może swobodnie trafić do innych bez dodatkowych kontroli. Dwie długie przerwy w śledzeniu, opisane wyżej, znikają, a śledzenie zaczyna się już w Europie.
 
-Zmienia się też to, ile płacisz. Według Komisji Europejskiej przy towarach, które w chwili zakupu są już w UE, nie ma formalności celnych, a VAT jest już wliczony w cenę. AliExpress pisze to samo o sprzedawcach, którzy wysyłają z magazynu w Twoim kraju: wtedy nie zapłacisz dodatkowego cła ani podatków. Dopłaty przy odbiorze, opisane niżej, Poczta Polska pobiera przy przesyłkach spoza Unii Europejskiej.
+Zmienia się też to, ile płacisz. Według Komisji Europejskiej przy towarach, które w chwili zakupu są już w UE, nie ma formalności celnych, a VAT jest już wliczony w cenę. AliExpress pisze to samo o sprzedawcach, którzy wysyłają z magazynu w twoim kraju: wtedy nie zapłacisz dodatkowego cła ani podatków. Dopłaty przy odbiorze, opisane niżej, Poczta Polska pobiera przy przesyłkach spoza Unii Europejskiej.
 
 ## Ile idzie paczka z Chin do Polski?
 
@@ -123,7 +123,7 @@ Od 1 lipca 2026 r. często tak, nawet przy tanich zamówieniach. Za paczkę do 1
 - **Cło:** 3 euro za każdy rodzaj produktu, także przy VAT zapłaconym w kasie. Jeśli sklep nie wliczył go w cenę, Poczta Polska pobierze je przy odbiorze.
 - **Opłatę Poczty Polskiej:** 20,00 zł za zgłoszenie celne, gdy paczkę zgłasza Poczta, nawet przy VAT w cenie.
 
-Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, liczony tak jak przy cle, ale bez względu na wartość paczki. Należy się od tego, kto zgłasza towar do odprawy, w chwili przyjęcia zgłoszenia celnego. Sklep albo przewoźnik może ją przerzucić na Ciebie. Szczegóły, także o fałszywych SMS-ach z żądaniem dopłaty, znajdziesz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
+Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, liczony tak jak przy cle, ale bez względu na wartość paczki. Należy się od tego, kto zgłasza towar do odprawy, w chwili przyjęcia zgłoszenia celnego. Sklep albo przewoźnik może ją przerzucić na ciebie. Szczegóły, także o fałszywych SMS-ach z żądaniem dopłaty, znajdziesz w poradniku [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Paczka z Chin nie dotarła: kiedy żądać zwrotu pieniędzy?
 
@@ -132,7 +132,7 @@ Działaj po kolei:
 :::steps
 - Poczekaj na pierwszy skan | Do 11 dni od wysłania przez sprzedawcę to normalne.
 - Znajdź polski numer | Poszukaj na stronie śledzenia drugiego numeru albo nazwy przewoźnika w Polsce.
-- Zapytaj właściwą firmę | Paczka utknęła na odprawie: przewoźnik w Polsce. Wysyłka ekonomiczna zamilkła: sprzedawca, który poda Ci przewoźnika.
+- Zapytaj właściwą firmę | Paczka utknęła na odprawie: przewoźnik w Polsce. Wysyłka ekonomiczna zamilkła: sprzedawca, który poda ci przewoźnika.
 - Zgłoś problem przed terminem | Każda platforma liczy termin od innego dnia.
 :::
 
@@ -143,7 +143,7 @@ Działaj po kolei:
 
 Przy produktach z etykietą „Szybka dostawa” AliExpress daje kupon za spóźnienie, a po określonej liczbie dni zwrot pieniędzy. Bez tej etykiety zwrot przysługuje po 60, 75, 90 albo 120 dniach, zależnie od warunków dostawy.
 
-> Na AliExpress po potwierdzeniu odbioru zostaje Ci już tylko 15 dni na wniosek o zwrot. Nie potwierdzaj odbioru, dopóki nie trzymasz paczki w rękach.
+> Na AliExpress po potwierdzeniu odbioru zostaje ci już tylko 15 dni na wniosek o zwrot. Nie potwierdzaj odbioru, dopóki nie trzymasz paczki w rękach.
 
 Status mówi „doręczona”, a paczki nie ma? Zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
@@ -161,7 +161,7 @@ Ekrany, statusy, rekompensaty i reklamacje w każdym sklepie: [śledzenie zamów
 - [AliExpress: What is Buyer Protection?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015100&language=en) – 15 dni po potwierdzeniu odbioru
 - [AliExpress: Delivered but not received](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060071162&language=en) – najpierw przewoźnik w kraju docelowym
 - [AliExpress: Gwarancja AliExpress](https://pl.aliexpress.com/p/service-mindset/index.html) – etykieta „Szybka dostawa”, kupon, zwrot pieniędzy, 60–120 dni
-- [AliExpress: Do I have to pay for customs and import taxes?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – magazyn w Twoim kraju, bez dodatkowego cła i podatków
+- [AliExpress: Do I have to pay for customs and import taxes?](https://service.aliexpress.com/page/knowledge?pageId=82&knowledge=1060015161&language=en) – magazyn w twoim kraju, bez dodatkowego cła i podatków
 - [Shein Polska: Informacje o wysyłce](https://pl.shein.com/Shipping-Info-a-280.html) – przygotowanie, przedział dat, Magazyn w UE, automat paczkowy lub punkt odbioru, 45 i 30 dni
 - [Yanwen: strona główna](https://www.yw56.com.cn/) – linie z Temu w nazwie
 - [SF International: komunikaty](https://www.sf-international.com/cn/sc) – święta w Chinach w 2026 r.

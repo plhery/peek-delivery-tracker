@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-21
 ---
 
-R+L Carriers to drogowy przewoźnik ładunków towarowych w **Stanach Zjednoczonych**. W kodzie Peek odbiera towar od nadawcy, przewozi go między terminalami przeładunkowymi i doręcza z terminalu docelowego na terenie USA. Jeśli duże zamówienie albo inna przesyłka towarowa jedzie do Ciebie w Stanach Zjednoczonych za pośrednictwem R+L, sprawdzasz ją po numerze PRO otrzymanym ze sklepu lub od firmy zlecającej fracht: wklej go w polu powyżej. Własna wyszukiwarka R+L to strona *Shipment Tracing* w serwisie rlcarriers.com: przyjmuje numer PRO albo identyfikator zlecenia odbioru (*Pickup Request ID*), do 25 numerów naraz, a po zalogowaniu na konto MyRLC również inne numery referencyjne.
+R+L Carriers to drogowy przewoźnik ładunków towarowych w **Stanach Zjednoczonych**. W kodzie Peek odbiera towar od nadawcy, przewozi go między terminalami przeładunkowymi i doręcza z terminalu docelowego na terenie USA. Jeśli duże zamówienie albo inna przesyłka towarowa jedzie do ciebie w Stanach Zjednoczonych za pośrednictwem R+L, sprawdzasz ją po numerze PRO otrzymanym ze sklepu lub od firmy zlecającej fracht: wklej go w polu powyżej. Własna wyszukiwarka R+L to strona *Shipment Tracing* w serwisie rlcarriers.com: przyjmuje numer PRO albo identyfikator zlecenia odbioru (*Pickup Request ID*), do 25 numerów naraz, a po zalogowaniu na konto MyRLC również inne numery referencyjne.
 
 ## Numer śledzenia R+L Carriers: numer PRO
 
@@ -29,13 +29,13 @@ Wyszukiwarka R+L weryfikuje ostatnią cyfrę, dzięki czemu wyłapuje literówki
 
 System R+L wyświetla nad historią krótkie podsumowanie przesyłki, a poniżej wymienia kolejne wiersze z datą i godziną. Amerykańskie terminale oznaczane są nazwą miasta i dwuliterowym skrótem stanu. Wiersze nie mają kodów numerycznych: Peek odczytuje ich angielską treść. W typowej kolejności na trasie w **USA** (wielokropek zastępuje miasto i stan albo terminal):
 
-| Komunikat R+L | Co oznacza dla Ciebie | Peek pokazuje |
+| Komunikat R+L | Co oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Picked Up in …` | R+L odebrało ładunek od nadawcy w jego miejscowości. Peek zachowuje pełne brzmienie komunikatu, nie traktując miasta nadawcy jako lokalizacji skanu. | „Przyjęta przez przewoźnika” |
 | `Arrived at origin terminal` | Przesyłka dotarła do początkowego terminalu R+L po stronie nadawcy. | „W transporcie” |
 | `Departed … in route to …` | Wyjechała z jednego terminalu w kierunku następnego albo terminalu docelowego. | „W transporcie” |
 | `Arrived at …` | Dotarła do pośredniego terminalu na trasie, nazwanego miastem i stanem USA. | „W transporcie” |
-| `Arrived at destination terminal` | Znajduje się w terminalu docelowym w Twoim rejonie — to ostatni przystanek przed doręczeniem. | „W transporcie” |
+| `Arrived at destination terminal` | Znajduje się w terminalu docelowym w twoim rejonie — to ostatni przystanek przed doręczeniem. | „W transporcie” |
 | `Shipment Delayed` | Coś wstrzymało przewóz. Podsumowanie R+L oznacza wtedy przesyłkę jako opóźnioną (*Delayed*), zachowując przewidywany dzień dostawy. | „W transporcie” |
 | `Delivered` | Doręczona. | „Dostarczona” |
 
@@ -83,13 +83,13 @@ Sam dziewięciocyfrowy kształt numeru PRO nie zdradza, że należy on do R+L, p
 
 Z literą `I` przed dziewięcioma cyframi numer pasuje do R+L Carriers oraz Australia Post: Peek odpytuje obu przewoźników i zapisuje przesyłkę pod tym, który ją rozpozna. Działa również link do strony *Shipment Tracing* R+L zawierający parametr `pro=` — Peek od razu wskazuje wtedy R+L („Wykryty przewoźnik”).
 
-Peek odpytuje wyszukiwarkę R+L wyłącznie po numerze PRO, bez konta i kodu pocztowego. Pokazuje aktualny status, każdy wiersz historii (z miastem i stanem terminalu, gdy wiersz je wymienia), przewidywany dzień dostawy, nazwę odbiorcy na Twojej własnej karcie przesyłki („Odbiorca”, ukrytą na udostępnionych linkach) oraz wagę w jednostkach Twojego urządzenia (w funtach na urządzeniach z amerykańskim systemem miar, w kilogramach w pozostałych krajach; R+L podaje wagę w funtach). Pomija adres odbiorcy, dane nadawcy i płatnika, liczbę sztuk, referencje, rodzaj usługi, numer listu przewozowego oraz dokumenty. Wyszukiwarka R+L nie udostępnia w Peek potwierdzenia doręczenia. Przycisk „Otwórz stronę przewoźnika R+L Carriers” na karcie przesyłki otwiera dany PRO bezpośrednio w wyszukiwarce R+L.
+Peek odpytuje wyszukiwarkę R+L wyłącznie po numerze PRO, bez konta i kodu pocztowego. Pokazuje aktualny status, każdy wiersz historii (z miastem i stanem terminalu, gdy wiersz je wymienia), przewidywany dzień dostawy, nazwę odbiorcy na twojej własnej karcie przesyłki („Odbiorca”, ukrytą na udostępnionych linkach) oraz wagę w jednostkach twojego urządzenia (w funtach na urządzeniach z amerykańskim systemem miar, w kilogramach w pozostałych krajach; R+L podaje wagę w funtach). Pomija adres odbiorcy, dane nadawcy i płatnika, liczbę sztuk, referencje, rodzaj usługi, numer listu przewozowego oraz dokumenty. Wyszukiwarka R+L nie udostępnia w Peek potwierdzenia doręczenia. Przycisk „Otwórz stronę przewoźnika R+L Carriers” na karcie przesyłki otwiera dany PRO bezpośrednio w wyszukiwarce R+L.
 
 Gdy wyszukiwarka R+L jest niedostępna lub nie udaje się odczytać odpowiedzi, Peek korzysta z [serwisów śledzenia](guide:universal-tracker) i prezentuje zebraną przez nie historię w ich własnym brzmieniu.
 
-Wiersze R+L zawierają datę i godzinę bez strefy czasowej. Peek odczytuje każdy wpis według zegara miasta terminalu, w drugiej kolejności według stanu terminalu (głównej strefy, gdy dany stan USA leży w więcej niż jednej), następnie według sąsiedniego wiersza historii, a w ostateczności według czasu wschodnioamerykańskiego (`America/New_York`), i przelicza wszystkie godziny na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”).
+Wiersze R+L zawierają datę i godzinę bez strefy czasowej. Peek odczytuje każdy wpis według zegara miasta terminalu, w drugiej kolejności według stanu terminalu (głównej strefy, gdy dany stan USA leży w więcej niż jednej), następnie według sąsiedniego wiersza historii, a w ostateczności według czasu wschodnioamerykańskiego (`America/New_York`), i przelicza wszystkie godziny na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”).
 
-Peek sprawdza aktualizacje nawet co 10 minut, dopóki masz otwartą przesyłkę albo w dniu dostawy przy włączonych powiadomieniach; w pozostałym czasie oraz po dwóch dniach bez nowego wiersza (12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w Twoim imieniu z R+L, sklepem ani nadawcą, nie umawia terminu dostawy i nie składa reklamacji.
+Peek sprawdza aktualizacje nawet co 10 minut, dopóki masz otwartą przesyłkę albo w dniu dostawy przy włączonych powiadomieniach; w pozostałym czasie oraz po dwóch dniach bez nowego wiersza (12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu z R+L, sklepem ani nadawcą, nie umawia terminu dostawy i nie składa reklamacji.
 
 ## Najczęstsze pytania o śledzenie R+L Carriers
 

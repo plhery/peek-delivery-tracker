@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-21
 ---
 
-Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt ostatnio nie zeskanował Twojej paczki, a nie że stoi w miejscu. Przewoźnicy skanują paczki w sortowniach i na granicach, nie w trasie, więc długi przejazd, lot, odprawa celna albo weekend to czasem kilka dni bez nowego wpisu. Martw się dopiero wtedy, gdy minie termin podany przez samego przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach od nadania, nie licząc dni ustawowo wolnych od pracy, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia). I nawet wtedy najpierw napisz do sprzedawcy: to on jest klientem przewoźnika.
+Jeśli status przesyłki się nie zmienia, zwykle znaczy to tylko tyle, że nikt ostatnio nie zeskanował twojej paczki, a nie że stoi w miejscu. Przewoźnicy skanują paczki w sortowniach i na granicach, nie w trasie, więc długi przejazd, lot, odprawa celna albo weekend to czasem kilka dni bez nowego wpisu. Martw się dopiero wtedy, gdy minie termin podany przez samego przewoźnika ([Poczta Polska](carrier:poczta-polska) przyjmuje reklamację zaginionej paczki pocztowej po 14 dniach od nadania, nie licząc dni ustawowo wolnych od pracy, a [DPD](carrier:dpd-pl) uznaje paczkę za utraconą 30 dni po terminie doręczenia). I nawet wtedy najpierw napisz do sprzedawcy: to on jest klientem przewoźnika.
 
 ## Dlaczego status przesyłki nie zmienia się od kilku dni?
 
@@ -77,9 +77,9 @@ Na reklamację krajową w Poczcie Polskiej, Pocztex i InPost masz 12 miesięcy o
 
 Do sprzedawcy. To on zamówił przewóz, więc to on jest klientem przewoźnika. Widać to w zasadach reklamacji: w Poczcie Polskiej składa ją nadawca, w DPD zleceniodawca. Regulamin Allegro Ochrony Kupujących też każe zacząć od sprzedającego: zanim złożysz wniosek o rekompensatę, zgłaszasz mu problem albo składasz reklamację.
 
-Prawo mówi to samo, jeśli kupujesz jako konsument od firmy: paczka jest na ryzyko sprzedawcy, dopóki nie zostanie Ci wydana, chyba że sam wybrałeś przewoźnika spoza jego oferty (art. 548 § 3 Kodeksu cywilnego). Wyjątki i to, jak złożyć reklamację u przewoźnika, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). Jeśli umowa nie mówi inaczej, sprzedawca musi też wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego bezskutecznym upływie odstąpić od umowy.
+Prawo mówi to samo, jeśli kupujesz jako konsument od firmy: paczka jest na ryzyko sprzedawcy, dopóki nie zostanie ci wydana, chyba że sam wybrałeś przewoźnika spoza jego oferty (art. 548 § 3 Kodeksu cywilnego). Wyjątki i to, jak złożyć reklamację u przewoźnika, opisuje poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). Jeśli umowa nie mówi inaczej, sprzedawca musi też wydać rzecz niezwłocznie, najpóźniej 30 dni od zawarcia umowy. Gdy się spóźnia, możesz wyznaczyć mu dodatkowy termin, a po jego bezskutecznym upływie odstąpić od umowy.
 
-Kupujesz od osoby prywatnej, na przykład na Vinted, OLX albo Allegro Lokalnie? Te przepisy Cię wtedy nie chronią, więc liczy się ochrona, którą daje sama platforma.
+Kupujesz od osoby prywatnej, na przykład na Vinted, OLX albo Allegro Lokalnie? Te przepisy cię wtedy nie chronią, więc liczy się ochrona, którą daje sama platforma.
 
 Co robić po kolei:
 
@@ -87,17 +87,17 @@ Co robić po kolei:
 - Sprawdź datę | Przed przewidywaną datą doręczenia cisza jest normalna. Licz tak jak przewoźnik: od nadania albo od terminu doręczenia, a nie od ostatniego skanu.
 - Sprawdź przewoźnika | Jego śledzenie i komunikaty, a jeśli paczkę przejął inny przewoźnik, także jego stronę.
 - Napisz do sprzedawcy | Niech potwierdzi, że wysłał paczkę na właściwy adres, poda numer przesyłki albo potwierdzenie nadania i powie, kiedy ma dotrzeć.
-- Termin minął | Sprzedawca składa reklamację u przewoźnika. W Poczcie Polskiej możesz ją złożyć Ty, jeśli nadawca zrzeknie się roszczeń na Twoją rzecz.
+- Termin minął | Sprzedawca składa reklamację u przewoźnika. W Poczcie Polskiej możesz ją złożyć ty, jeśli nadawca zrzeknie się roszczeń na twoją rzecz.
 - Pilnuj terminu platformy | Zgłoś problem z zakupem na Allegro albo problem na Vinted, zanim minie ich termin.
 :::
 
 ## Kiedy zgłosić spóźnioną paczkę na Allegro, Amazonie i Vinted?
 
-Platforma może oddać Ci pieniądze, ale tylko w swoim terminie:
+Platforma może oddać ci pieniądze, ale tylko w swoim terminie:
 
 | Platforma | Od kiedy | Do kiedy |
 | --- | --- | --- |
-| Allegro (Allegro Ochrona Kupujących) | Problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal Dyskusja): najwcześniej godzinę po opłaceniu zamówienia, sprzedający ma 24 godziny na odpowiedź na Twoją pierwszą wiadomość (bez sobót, niedziel i dni wolnych od pracy). Przy opóźnieniu albo zagubieniu paczki ma 7 dni na rozwiązanie zgłoszenia. Jeśli po tym czasie Allegro nie widzi, że problem rozwiązano, zapyta Cię o to, a gdy odpowiesz, że nadal występuje, zaproponuje Ci wniosek w ramach Allegro Ochrony Kupujących | Wniosek o rekompensatę najpóźniej 730 dni od zakupu. Rekompensata do 20 000 zł |
+| Allegro (Allegro Ochrona Kupujących) | Problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal Dyskusja): najwcześniej godzinę po opłaceniu zamówienia, sprzedający ma 24 godziny na odpowiedź na twoją pierwszą wiadomość (bez sobót, niedziel i dni wolnych od pracy). Przy opóźnieniu albo zagubieniu paczki ma 7 dni na rozwiązanie zgłoszenia. Jeśli po tym czasie Allegro nie widzi, że problem rozwiązano, zapyta cię o to, a gdy odpowiesz, że nadal występuje, zaproponuje ci wniosek w ramach Allegro Ochrony Kupujących | Wniosek o rekompensatę najpóźniej 730 dni od zakupu. Rekompensata do 20 000 zł |
 | Vinted | Etykieta wygenerowana na Vinted: po 25 dniach roboczych od chwili, gdy zamówienie oznaczono jako wysłane | 2 dni od powiadomienia od Vinted albo od zmiany statusu na „Doręczono” |
 
 Na Amazonie każdy produkt, także od niezależnego sprzedawcy, jest objęty Gwarancją od A do Z. Jeśli masz problem z terminową dostawą, Amazon obiecuje zwrot pieniędzy albo wymianę produktu. Gdy sprzedaje ktoś inny niż Amazon, najpierw spróbuj rozwiązać problem bezpośrednio ze sprzedawcą.
@@ -114,7 +114,7 @@ W kraju to długo. DPD doręcza standardowo następnego dnia roboczego, a dla pr
 
 ### Czy da się przyspieszyć aktualizację statusu?
 
-Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i da Ci znać na iPhonie, na Androidzie lub w przeglądarce: „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co godzinę, co 3 godziny, gdy przez dobę nie pojawi się nowy skan, a w dniu doręczenia nawet co 15 minut. Niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Gdy ostatni skan ma ponad dwa dni (12 godzin, jeśli paczka jest dopiero zarejestrowana albo przyjęta przez przewoźnika) i od jej dodania minęło więcej niż tyle, Peek sprawdza ją co godzinę, aż pojawi się nowy skan.
+Nie, i żaden tracker tego nie zrobi: pokazuje tylko to, co opublikował przewoźnik. [Peek](/) sprawdza śledzenie nawet co 10 minut, także w nocy, a w dniu doręczenia nawet co 2 minuty, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy paczka jest już wydana do doręczenia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i da ci znać na iPhonie, na Androidzie lub w przeglądarce: „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Nie musisz więc w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, Peek sprawdza co godzinę, co 3 godziny, gdy przez dobę nie pojawi się nowy skan, a w dniu doręczenia nawet co 15 minut. Niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Gdy ostatni skan ma ponad dwa dni (12 godzin, jeśli paczka jest dopiero zarejestrowana albo przyjęta przez przewoźnika) i od jej dodania minęło więcej niż tyle, Peek sprawdza ją co godzinę, aż pojawi się nowy skan.
 
 ### Numer przesyłki nie działa
 

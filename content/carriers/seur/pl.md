@@ -28,12 +28,12 @@ Szukaj go w e-mailu o wysyłce lub w zamówieniu; w razie braku zobacz [jak znal
 
 SEUR zapisuje opisy skanów wielkimi literami po hiszpańsku:
 
-| Status w SEUR | Znaczenie dla Ciebie |
+| Status w SEUR | Znaczenie dla ciebie |
 | --- | --- |
 | `EL ENVÍO HA SIDO REGISTRADO.` | Nadawca zgłosił przesyłkę; SEUR nie ma jeszcze paczki. |
 | `LA RECOGIDA HA SIDO REGISTRADA.` | Zamówiono odbiór u nadawcy; paczka nie jest jeszcze w SEUR. |
 | `LA RECOGIDA HA SIDO CONFIRMADA POR EL REPATIDOR.` | Kurier ma odbiór na trasie (*REPATIDOR* to pisownia SEUR). |
-| `RECOGIDA NO REALIZADA: CLIENTE CERRADO O AUSENTE. SE PUEDE REPROGRAMAR UNA NUEVA FECHA DE RECOGIDA.` | Nieudany odbiór u nadawcy, nie u Ciebie: Peek pokazuje „Zarejestrowana”. |
+| `RECOGIDA NO REALIZADA: CLIENTE CERRADO O AUSENTE. SE PUEDE REPROGRAMAR UNA NUEVA FECHA DE RECOGIDA.` | Nieudany odbiór u nadawcy, nie u ciebie: Peek pokazuje „Zarejestrowana”. |
 | `LA RECOGIDA HA SIDO REALIZADA.` | Kurier odebrał paczkę od nadawcy — ma ją SEUR. |
 | `EL ENVÍO HA SIDO DEPOSITADO EN UN PUNTO SEUR PICKUP.` | Nadawca zostawił paczkę w punkcie SEUR Pickup. |
 | `EL ENVÍO HA SIDO RECEPCIONADO EN LAS INSTALACIONES DE ORIGEN DE SEUR. COMIENZA EL TRÁNSITO A DESTINO` | Przyjęta w oddziale nadawczym SEUR; rusza w trasę. |

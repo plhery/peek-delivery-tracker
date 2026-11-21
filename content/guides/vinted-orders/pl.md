@@ -19,7 +19,7 @@ Każde zamówienie złożone przyciskiem „Kup teraz” z wysyłką zintegrowan
 - handover | Punkt nadania | Automat paczkowy, punkt, Żabka albo poczta. Śledzenie do 48 godzin
 - truck | Przewoźnik | Zwykle 2 do 5 dni roboczych w kraju, 4 do 7 za granicę
 - locker | Punkt odbioru | Kod odbioru przychodzi na telefon i maila. Odbierz paczkę na czas
-- home | Kupujący | „Doręczono” uruchamia Twoje 2 dni na sprawdzenie
+- home | Kupujący | „Doręczono” uruchamia twoje 2 dni na sprawdzenie
 :::
 
 Przedmiot kupiony z Weryfikacją Przedmiotów albo Weryfikacją Elektroniki trafia najpierw do centrum weryfikacji Vinted, więc dostawa może potrwać do 10 dni roboczych.
@@ -47,7 +47,7 @@ Ten, którego wybrał kupujący. Polska jest połączona z 12 krajami: Szwecją,
 | [DHL Express](carrier:dhl-express) | Dom albo punkt | Wszystkie 12 krajów |
 | GLS | Punkt albo automat | Dania, Czechy, Słowacja, Węgry, Rumunia, Chorwacja |
 
-Sprzedający może wyłączyć część przewoźników w **Profil** → **Ustawienia** → **Wysyłka**. Niektórych, ustawionych jako domyślni, wyłączyć się nie da. Jeśli przy zakupie nie widzisz jakiegoś przewoźnika, sprzedający mógł go wyłączyć albo przewoźnik nie przyjmuje dużych paczek lub nie dociera pod Twój adres, zwłaszcza w odległych miejscach.
+Sprzedający może wyłączyć część przewoźników w **Profil** → **Ustawienia** → **Wysyłka**. Niektórych, ustawionych jako domyślni, wyłączyć się nie da. Jeśli przy zakupie nie widzisz jakiegoś przewoźnika, sprzedający mógł go wyłączyć albo przewoźnik nie przyjmuje dużych paczek lub nie dociera pod twój adres, zwłaszcza w odległych miejscach.
 
 Vinted ma też własnego przewoźnika, Vinted Go, z automatami i punktami we Francji, Belgii, Holandii, Hiszpanii, Portugalii i Finlandii. Na liście przewoźników vinted.pl go nie ma.
 
@@ -64,7 +64,7 @@ To numer przewoźnika, więc działa też na jego stronie. Kształty, które zna
 | DHL | 11 cyfr |
 | DHL Express | 10 cyfr |
 
-Kilka kodów to nie numery przesyłki: kod QR i 9-cyfrowy kod nadania od InPost, kod nadania DHL, kod PIN, którym DPD Collect drukuje etykietę, a także kod odbioru albo PIN, który dostajesz, gdy paczka na Ciebie czeka. Numer Vinted Go, przewoźnika Vinted w innych krajach, to zwykle `VGS` i 13 lub 14 cyfr albo 16 cyfr. Wymyślony przykład numeru 16-cyfrowego:
+Kilka kodów to nie numery przesyłki: kod QR i 9-cyfrowy kod nadania od InPost, kod nadania DHL, kod PIN, którym DPD Collect drukuje etykietę, a także kod odbioru albo PIN, który dostajesz, gdy paczka na ciebie czeka. Numer Vinted Go, przewoźnika Vinted w innych krajach, to zwykle `VGS` i 13 lub 14 cyfr albo 16 cyfr. Wymyślony przykład numeru 16-cyfrowego:
 
 :::anatomy 17 1234567890123 8
 - 17 | Zawsze `17` albo `18`
@@ -85,7 +85,7 @@ Zwykle dlatego, że kod zamienił się w etykietę albo paczka pojechała dłuż
 
 - **Najpierw kod, potem etykieta.** Przy etykiecie cyfrowej InPost sprzedający dostaje kod QR i 9-cyfrowy kod nadania, a InPost dołącza później etykietę w fizycznej postaci. Przy DHL sprzedający pisze kod nadania na paczce, a kurier nakleja etykietę, gdy odbiera ją ze skrytki. Śledź numer przewoźnika, nie kod.
 - **Zamówienie z zagranicy.** Vinted uprzedza, że z przyczyn logistycznych na etykiecie bywa inny adres, a nawet inny kraj, zwykle przy zamówieniach za granicę.
-- **Centrum weryfikacji.** Z Weryfikacją Przedmiotów albo Elektroniki paczka jedzie najpierw do centrum Vinted, a dopiero potem do Ciebie.
+- **Centrum weryfikacji.** Z Weryfikacją Przedmiotów albo Elektroniki paczka jedzie najpierw do centrum Vinted, a dopiero potem do ciebie.
 - **Nowe zamówienie.** Etykiety nie da się wymienić na etykietę innego przewoźnika. Jeśli zamówienie anulowano i złożono jeszcze raz, nowa etykieta ma nowy numer.
 - **Inny punkt odbioru.** Kurierzy InPost i DHL Express próbują doręczyć paczkę dwa razy, a potem zostawiają ją w punkcie odbioru. Paczkę mogą też przekierować do innego punktu w okolicy: sprawdź link do śledzenia, zanim wyjdziesz z domu.
 
@@ -94,8 +94,8 @@ Zwykle dlatego, że kod zamienił się w etykietę albo paczka pojechała dłuż
 Każda cisza ma swój powód:
 
 - **Do 48 godzin po nadaniu.** To normalne: Vinted pisze, że „może minąć do 48 godzin”, zanim pierwsze informacje o statusie pojawią się na Vinted.
-- **Brak skanu po 5 dniach roboczych.** Sprzedający mógł nie wysłać paczki. Jeśli nie potwierdził wysłania, a termin nie został przedłużony, Vinted anuluje zamówienie i zwraca Ci pieniądze.
-- **Paczka utknęła w drodze.** Gdy paczka się spóźnia, Vinted daje Ci znać i podaje nowy termin w oknie rozmowy. Jeśli status stoi i na Vinted, i u przewoźnika, odczekaj do 25 dni roboczych od oznaczenia zamówienia jako wysłanego.
+- **Brak skanu po 5 dniach roboczych.** Sprzedający mógł nie wysłać paczki. Jeśli nie potwierdził wysłania, a termin nie został przedłużony, Vinted anuluje zamówienie i zwraca ci pieniądze.
+- **Paczka utknęła w drodze.** Gdy paczka się spóźnia, Vinted daje ci znać i podaje nowy termin w oknie rozmowy. Jeśli status stoi i na Vinted, i u przewoźnika, odczekaj do 25 dni roboczych od oznaczenia zamówienia jako wysłanego.
 - **Odebrana, ale bez „Doręczono”.** System Vinted nie zawsze aktualizuje się od razu: naciśnij „Śledź przesyłkę”, a potem „Oznacz jako odebraną”.
 - **Wysyłka indywidualna.** To dawna opcja, niedostępna już w nowych ogłoszeniach. Paczki bez etykiety Vinted nie śledzi się na Vinted: śledzenie działa tylko dla przedmiotów kupionych przyciskiem „Kup teraz” i wysłanych zgodnie z instrukcjami w aplikacji. Jeśli potrzebujesz pomocy, wejdź na stronę główną Centrum Pomocy i wybierz swoje zamówienie.
 
@@ -106,7 +106,7 @@ Więcej o przerwach w śledzeniu: [dlaczego status przesyłki się nie zmienia](
 To zależy od przewoźnika: termin zwykle podaje jego wiadomość z kodem odbioru. Vinted ostrzega, że „niektórzy przewoźnicy przechowują przesyłki tylko przez 2 dni kalendarzowe”, a potem odsyłają je sprzedającemu. Odbierając w punkcie paczkę InPost albo Poczty Polskiej, miej przy sobie dokument tożsamości.
 
 - **Nie masz kodu odbioru?** Sprawdź SMS-y i maila, także folder Spam. Jeśli kod nie dotrze w ciągu 24 godzin albo nie działa, skontaktuj się z obsługą klienta przewoźnika: Vinted nie wygeneruje kodu odbioru za niego. W punkcie z obsługą zapytaj, czy wydadzą paczkę na podstawie dowodu tożsamości i numeru przesyłki.
-- **Paczka nieodebrana na czas?** Wraca do sprzedającego. Vinted automatycznie anuluje zamówienie i zwraca Ci pieniądze.
+- **Paczka nieodebrana na czas?** Wraca do sprzedającego. Vinted automatycznie anuluje zamówienie i zwraca ci pieniądze.
 - **Sprzedający, odbierajcie też zwroty.** Jeśli przegapicie termin, od razu zapytajcie przewoźnika, czy paczkę da się jeszcze odebrać: zwrócona paczka nieodebrana w terminie ani w dodatkowym okresie przechowywania przechodzi na własność Vinted Go UAB.
 
 Więcej: [co się dzieje z nieodebraną paczką](guide:uncollected-parcel).
@@ -122,7 +122,7 @@ Działaj w tej kolejności:
 - Poczekaj na wyjaśnienie | Vinted bada sprawę z przewoźnikiem, co może potrwać kilka tygodni.
 :::
 
-Gdy zamówienie jest zawieszone, Twoja płatność jest bezpiecznie przechowywana. Jeśli zaginięcie się potwierdzi, dostajesz pełny zwrot: cenę przedmiotu, koszt wysyłki i Opłatę Vinted. Pusta skrytka albo paczki nie ma w punkcie? To też zgłoś Vinted. Sprzedający dostaje odszkodowanie za paczkę zgubioną lub uszkodzoną, jeśli poszła z etykietą Vinted, była dobrze zapakowana, a przewoźnik potwierdził szkodę. Limit ustala przewoźnik:
+Gdy zamówienie jest zawieszone, twoja płatność jest bezpiecznie przechowywana. Jeśli zaginięcie się potwierdzi, dostajesz pełny zwrot: cenę przedmiotu, koszt wysyłki i Opłatę Vinted. Pusta skrytka albo paczki nie ma w punkcie? To też zgłoś Vinted. Sprzedający dostaje odszkodowanie za paczkę zgubioną lub uszkodzoną, jeśli poszła z etykietą Vinted, była dobrze zapakowana, a przewoźnik potwierdził szkodę. Limit ustala przewoźnik:
 
 | Przewoźnik | Odszkodowanie do |
 | --- | --- |
@@ -149,7 +149,7 @@ Polityka zwrotów Vinted obejmuje zakupy przez „Kup teraz”: zamówienie niew
 
 ## Jak śledzić paczkę z Vinted poza aplikacją?
 
-Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numer Vinted Go zaczynający się od `VGS` i link do śledzenia z vintedgo.com Peek rozpoznaje od razu; przy numerze 16-cyfrowym pyta Vinted Go, DHL eCommerce i TNT, która z tych firm go zna. Paczki GLS w Polsce Peek też śledzi: jeśli nie rozpozna przewoźnika po numerze, naciśnij „Zmień” i wybierz GLS Poland. Problemu Peek za Ciebie nie zgłosi: to zostaje w oknie rozmowy.
+Skopiuj numer w „Śledź przesyłkę” i wklej go do [Peeka](/). Peek rozpoznaje po numerze ORLEN Paczkę, InPost, DPD, Pocztę Polską, DHL i DHL Express. Kształt wspólny dla kilku firm, jak 11 albo 14 cyfr, może wymagać naciśnięcia „Zmień” i wybrania przewoźnika, którego podaje Vinted. Numer Vinted Go zaczynający się od `VGS` i link do śledzenia z vintedgo.com Peek rozpoznaje od razu; przy numerze 16-cyfrowym pyta Vinted Go, DHL eCommerce i TNT, która z tych firm go zna. Paczki GLS w Polsce Peek też śledzi: jeśli nie rozpozna przewoźnika po numerze, naciśnij „Zmień” i wybierz GLS Poland. Problemu Peek za ciebie nie zgłosi: to zostaje w oknie rozmowy.
 
 :::sources
 - [Vinted: Wysyłka na Vinted](https://www.vinted.pl/help/234) – przewoźnicy, 12 krajów, etykieta albo kod, anulowanie, przewoźnicy domyślni, duże paczki i odległe adresy

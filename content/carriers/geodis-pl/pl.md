@@ -6,7 +6,7 @@ published: 2026-10-30
 updated: 2026-11-17
 ---
 
-GEODIS Polska to polska sieć przewozu palet i paczek francuskiej grupy GEODIS, której właścicielem są koleje SNCF. GEODIS przejął PEKAES w 2021 roku, a dziś sieć prowadzi spółka GEODIS Road Network z siedzibą w Błoniu. Co zrobić, zależy od tego, co przekazał Ci nadawca:
+GEODIS Polska to polska sieć przewozu palet i paczek francuskiej grupy GEODIS, której właścicielem są koleje SNCF. GEODIS przejął PEKAES w 2021 roku, a dziś sieć prowadzi spółka GEODIS Road Network z siedzibą w Błoniu. Co zrobić, zależy od tego, co przekazał ci nadawca:
 
 - **Numer z PL i 16 cyframi albo link do Strefy Klienta:** to przesyłka GEODIS Polska, paczka lub paleta. Wklej numer lub link w pole powyżej albo wyszukaj numer w śledzeniu GEODIS Polska, [Strefie Klienta](https://strefaklienta.pekaes.geodis.pl/pl/).
 - **Inny numer GEODIS:** Peek czyta jeszcze jedno śledzenie GEODIS, francuskie, w którym numery zaczynają się od 1G (niżej). Wyszukiwarka na geodis.com znajduje przesyłki lotnicze, morskie i dostawy na ostatnim etapie, a przy transporcie drogowym odsyła do Strefy Klienta.
@@ -14,7 +14,7 @@ GEODIS Polska to polska sieć przewozu palet i paczek francuskiej grupy GEODIS, 
 
 ## Numer przesyłki GEODIS: jak wygląda i gdzie go szukać
 
-GEODIS pracuje wyłącznie dla firm, więc numer ma ten, kto wysłał Ci coś przez GEODIS, zwykle sklep albo producent: jeśli go nie masz, zapytaj nadawcę. Nadal nic? Zobacz, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
+GEODIS pracuje wyłącznie dla firm, więc numer ma ten, kto wysłał ci coś przez GEODIS, zwykle sklep albo producent: jeśli go nie masz, zapytaj nadawcę. Nadal nic? Zobacz, [gdzie jeszcze szukać numeru przesyłki](guide:find-tracking-number).
 
 | Numer (wymyślony) | Co to jest |
 | --- | --- |
@@ -27,15 +27,15 @@ Wpisz numer w pole „Wpisz numer przesyłki” i kliknij „Szukaj”. Gdy stro
 
 Strefa Klienta działa po polsku i po angielsku. Po wyszukaniu widzisz najpierw podsumowanie: status, kraj dostawy, terminale, daty, listę towarów oraz kod pocztowy i miejscowość dostawy. Link przy podsumowaniu otwiera historię skanów, każdy z godziną i lokalizacją terminala. Peek czyta wersję angielską, dlatego w tabeli są oba brzmienia, w kolejności, w jakiej zwykle spotyka je przesyłka:
 
-| Strona GEODIS po polsku | W Peek (po angielsku) | Co to znaczy dla Ciebie |
+| Strona GEODIS po polsku | W Peek (po angielsku) | Co to znaczy dla ciebie |
 | --- | --- | --- |
 | `Odebrana od nadawcy` | `Received from the sender` | GEODIS odebrał przesyłkę od nadawcy. |
 | `wejście do terminala od kierowcy` | `Inbound Scan From Driver to Terminal` | Kierowca przywiózł ją do terminala: po odbiorze do terminala nadania, a po `wydanie do dostawy` do terminala dostawy, na koniec kursu. Jeśli wcześniej nie ma `odbiorca nieobecny` ani `Niedostarczona (SMS)`, w tym kursie nie było próby doręczenia: przesyłka czeka na następny. |
-| `wyjście z terminala (odbioru) na linię` | `Outbound Scan from (Collection) Terminal to Line-haul` | Wyjechała z terminala nadania w trasę do terminala, który obsługuje Twój adres. |
+| `wyjście z terminala (odbioru) na linię` | `Outbound Scan from (Collection) Terminal to Line-haul` | Wyjechała z terminala nadania w trasę do terminala, który obsługuje twój adres. |
 | `wejscie z linii do terminala (dostawy)` | `Inbound Scan from Line-haul to (Delivery) Terminal` | Dotarła do terminala, który ją doręczy. |
 | `oczekiwanie na dostawę` | `Awaiting Delivery` | Czeka w tym terminalu na kurs z dostawą. |
-| `wydanie do dostawy` | `Outbound for Delivery` | Jedzie do Ciebie samochodem dostawczym. |
-| `odbiorca nieobecny` | `Consignee Absent` | Kierowca Cię nie zastał. |
+| `wydanie do dostawy` | `Outbound for Delivery` | Jedzie do ciebie samochodem dostawczym. |
+| `odbiorca nieobecny` | `Consignee Absent` | Kierowca cię nie zastał. |
 | `Niedostarczona (SMS)` | `Failed delivery (SMS)` | Nieudane doręczenie, potwierdzone SMS-em. |
 | `oczekiwanie - zmiana terminu dostawy` | `Awaiting designation of new delivery date` | GEODIS czeka na nowy termin dostawy. |
 | `oczekiwanie na decyzję` | `Awaiting Decision` | GEODIS czeka na decyzję nadawcy. |
@@ -51,7 +51,7 @@ Na przestój wskazują `zatrzymana w sortowni` i `zatrzymana w magazynie termina
 Zasady dostawy ustala Ogólny Regulamin Świadczenia Usług GEODIS, obowiązujący od 4 listopada 2024 roku. Wiąże on zleceniodawcę, czyli firmę, która zamówiła przewóz (zwykle sklep), a większość z nich opisuje dla przesyłek paletowych, czyli drobnicowych:
 
 - **Nikogo nie ma w domu.** Kierowca zostawia informację o próbie doręczenia. Po drugiej nieudanej próbie przesyłka wraca do nadawcy; wraca też, gdy odmówisz jej przyjęcia albo nadawca podał błędny adres. Więcej w poradnikach o [nieudanym doręczeniu](guide:missed-delivery) i [zwrocie do nadawcy](guide:returned-to-sender).
-- **Palety na adres prywatny.** Taką dostawę GEODIS realizuje tylko w dni robocze, od poniedziałku do piątku, w godzinach 8:00–16:00. Zleceniodawca musi podać Twój numer komórki: GEODIS wysyła na niego informacje o dostawie i wcześniej ją awizuje telefonicznie, SMS-em lub e-mailem, a dzwoni najpóźniej w dniu możliwej dostawy. Jeśli przez dwa dni robocze nie zdoła się z Tobą skontaktować, po kontakcie ze zleceniodawcą odsyła przesyłkę do nadawcy.
+- **Palety na adres prywatny.** Taką dostawę GEODIS realizuje tylko w dni robocze, od poniedziałku do piątku, w godzinach 8:00–16:00. Zleceniodawca musi podać twój numer komórki: GEODIS wysyła na niego informacje o dostawie i wcześniej ją awizuje telefonicznie, SMS-em lub e-mailem, a dzwoni najpóźniej w dniu możliwej dostawy. Jeśli przez dwa dni robocze nie zdoła się z tobą skontaktować, po kontakcie ze zleceniodawcą odsyła przesyłkę do nadawcy.
 - **Rozładunek.** Przesyłkę paletową na adres prywatny kierowca rozładowuje do poziomu podłoża w miejscu dostawy, a gdy samochód nie może tam bezpiecznie podjechać – w najbliższym bezpiecznym, utwardzonym miejscu. Wniesienie, dostawa na wskazaną godzinę i dostawa do 10:00 lub 12:00 (tylko pod wybrane kody pocztowe) to osobne usługi, które może zamówić zleceniodawca.
 - **Odbiór z terminala.** Gdy zleceniodawca zleci odbiór własny z terminala GEODIS, przesyłka czeka 48 godzin, liczonych w dniach roboczych od tej dyspozycji. Odbierzesz ją od poniedziałku do piątku w godzinach 11:00–16:00; potem wraca do nadawcy.
 - **Pobranie.** Pobranie do 10 000 zł zapłacisz gotówką, kartą, BLIK-iem albo inną metodą bezgotówkową, którą dopuszcza GEODIS.
@@ -63,7 +63,7 @@ Zasady dostawy ustala Ogólny Regulamin Świadczenia Usług GEODIS, obowiązują
 
 **Opóźnienie.** Według UOKiK sprzedawca musi wydać towar niezwłocznie, najpóźniej w ciągu 30 dni od zawarcia umowy, chyba że umówiliście się inaczej. Po tym terminie możesz wyznaczyć mu dodatkowy czas, a gdy towar dalej nie dotrze, odstąpić od umowy.
 
-**Uszkodzenie lub braki.** Widoczne uszkodzenie albo brak części towaru opisz w protokole szkody, spisanym przy kierowcy na wzorze GEODIS i podpisanym przez Ciebie i kierowcę. Ukryte uszkodzenia i braki zgłoś do GEODIS przed upływem 7 dni od odbioru; to reklamujący musi udowodnić, że powstały przed doręczeniem. Zostaw towar do oględzin i zrób zdjęcia z datą i godziną. Formularz reklamacyjny GEODIS przypomina, że sam protokół szkody to jeszcze nie reklamacja. Więcej w poradniku o [uszkodzonej paczce](guide:damaged-parcel).
+**Uszkodzenie lub braki.** Widoczne uszkodzenie albo brak części towaru opisz w protokole szkody, spisanym przy kierowcy na wzorze GEODIS i podpisanym przez ciebie i kierowcę. Ukryte uszkodzenia i braki zgłoś do GEODIS przed upływem 7 dni od odbioru; to reklamujący musi udowodnić, że powstały przed doręczeniem. Zostaw towar do oględzin i zrób zdjęcia z datą i godziną. Formularz reklamacyjny GEODIS przypomina, że sam protokół szkody to jeszcze nie reklamacja. Więcej w poradniku o [uszkodzonej paczce](guide:damaged-parcel).
 
 **Kto składa reklamację.** Według regulaminu: zleceniodawca albo osoba, którą upoważni na piśmie. Reklamację składa się na piśmie do Działu Reklamacji w Błoniu, niezwłocznie: przy uszkodzeniu lub ubytku nie później niż 14 dni od odbioru, a przy opóźnieniu lub utracie nie później niż 21 dni od dnia, w którym przesyłka miała dotrzeć. Jako kupujący załatwiasz sprawę ze sklepem: UOKiK przypomina, że sprzedawca odpowiada za przesyłkę, dopóki jej nie otrzymasz, nawet gdy uszkodził ją przewoźnik. Reklamację składasz więc sprzedawcy, a on dochodzi roszczeń od przewoźnika.
 
@@ -82,7 +82,7 @@ PL i 16 cyfr to nie znak rozpoznawczy GEODIS (PL oznacza Polskę), więc Peek ni
 
 Peek czyta angielską wersję Strefy Klienta i pokazuje status, każdy skan w angielskim brzmieniu GEODIS z lokalizacją terminala, godzinę doręczenia i kraj dostawy. Skany z polskich terminali odczytuje w czasie warszawskim, a skan z terminala za granicą ma godzinę lokalną tego terminala. Gdy wiersz `Pseudoscan` skasuje wcześniejsze skany, Peek też je pomija, a `Claim Received` nie zmienia statusu. Strona GEODIS nie podaje przewidywanej daty dostawy, wagi, nazwy usługi, nazwiska odbiorcy ani dowodu doręczenia. Peek pomija kod pocztowy i adres dostawy, liczbę sztuk, kody terminali i uwagi, w których może paść nazwisko osoby podpisującej odbiór.
 
-Gdy masz przesyłkę otwartą albo w dniu doręczenia masz włączone powiadomienia, Peek sprawdza ją nawet co 10 minut, a gdy jedzie już do Ciebie – nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie GEODIS; przez serwisy śledzenia przesyłek nawet co 15 minut); w pozostałych przypadkach co godzinę. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni terminu dostawy, nie umówi odbioru z terminala i nie złoży reklamacji: zadzwoń do GEODIS albo napisz do sklepu.
+Gdy masz przesyłkę otwartą albo w dniu doręczenia masz włączone powiadomienia, Peek sprawdza ją nawet co 10 minut, a gdy jedzie już do ciebie – nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie GEODIS; przez serwisy śledzenia przesyłek nawet co 15 minut); w pozostałych przypadkach co godzinę. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie zmieni terminu dostawy, nie umówi odbioru z terminala i nie złoży reklamacji: zadzwoń do GEODIS albo napisz do sklepu.
 
 ## Pytania o śledzenie przesyłek GEODIS
 
@@ -96,7 +96,7 @@ Regulamin GEODIS nie mówi o dostawach w soboty. Przesyłki paletowe na adres pr
 
 ### Czy kierowca GEODIS wniesie przesyłkę do mieszkania?
 
-Tylko przesyłkę paletową i tylko wtedy, gdy zleceniodawca zamówił usługę wniesienia: do 300 kg, nie dalej niż 150 m od miejsca rozładunku, a bez windy do drugiej kondygnacji. Bez tej usługi kierowca rozładowuje przesyłkę do poziomu podłoża pod Twoim adresem.
+Tylko przesyłkę paletową i tylko wtedy, gdy zleceniodawca zamówił usługę wniesienia: do 300 kg, nie dalej niż 150 m od miejsca rozładunku, a bez windy do drugiej kondygnacji. Bez tej usługi kierowca rozładowuje przesyłkę do poziomu podłoża pod twoim adresem.
 
 ### Ile trwa dostawa GEODIS?
 

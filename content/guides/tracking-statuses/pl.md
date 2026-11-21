@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-19
 ---
 
-Status przesyłki to ostatni skan przewoźnika w kilku słowach i zwykle niczego od Ciebie nie wymaga. „Przesyłka utworzona” albo „przygotowana przez nadawcę” znaczy, że przewoźnik nie ma jeszcze Twojej paczki, „w trasie” albo „w tranzycie”, że jest gdzieś między dwoma skanami, a „wydana do doręczenia”, że jedzie już do Ciebie. Działać musisz tylko w kilku sytuacjach: po nieudanej próbie doręczenia, gdy paczka czeka w automacie albo punkcie, gdy trzeba zapłacić należności celne i gdy status brzmi „doręczona”, a paczki nie ma.
+Status przesyłki to ostatni skan przewoźnika w kilku słowach i zwykle niczego od ciebie nie wymaga. „Przesyłka utworzona” albo „przygotowana przez nadawcę” znaczy, że przewoźnik nie ma jeszcze twojej paczki, „w trasie” albo „w tranzycie”, że jest gdzieś między dwoma skanami, a „wydana do doręczenia”, że jedzie już do ciebie. Działać musisz tylko w kilku sytuacjach: po nieudanej próbie doręczenia, gdy paczka czeka w automacie albo punkcie, gdy trzeba zapłacić należności celne i gdy status brzmi „doręczona”, a paczki nie ma.
 
 ## Przez jakie etapy przechodzi paczka?
 
@@ -21,7 +21,7 @@ Każda paczka mija te same przystanki, a paczka z zagranicy jeszcze trzy.
 - handover | Przewoźnik w Polsce | Tylko z zagranicy. Jego skany bywają tylko na jego stronie.
 - truck | Wydana do doręczenia | Jest już w aucie kuriera, zwykle dotrze dziś.
 - locker | Gotowa do odbioru | Czeka w automacie paczkowym, punkcie albo na poczcie.
-- home | Doręczona | Trafiła do Twoich rąk albo tam, gdzie przewoźnik uznaje ją za doręczoną.
+- home | Doręczona | Trafiła do twoich rąk albo tam, gdzie przewoźnik uznaje ją za doręczoną.
 :::
 
 ## Co oznaczają statusy InPost i FedEx?
@@ -41,7 +41,7 @@ Krajowe przesyłki [FedEx Polska](carrier:fedex-pl) (dawniej Opek) mają 13-cyfr
 
 ## „Przesyłka utworzona” albo „przygotowana przez nadawcę”: co to znaczy?
 
-Tylko tyle, że przewoźnik ma dane Twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` znaczy, że przesyłka „nie jest gotowa do nadania”, a `Przygotowana przez Nadawcę.`, że „wkrótce zostanie przekazana w nasze ręce”. W globalnym śledzeniu FedEx ten etap to `Shipment information sent to FedEx`, a gdy paczka trafi już do FedEx, pojawia się `Picked up` albo `Tendered at FedEx location`.
+Tylko tyle, że przewoźnik ma dane twojej paczki, ale nie samą paczkę. U InPost `Przesyłka utworzona.` znaczy, że przesyłka „nie jest gotowa do nadania”, a `Przygotowana przez Nadawcę.`, że „wkrótce zostanie przekazana w nasze ręce”. W globalnym śledzeniu FedEx ten etap to `Shipment information sent to FedEx`, a gdy paczka trafi już do FedEx, pojawia się `Picked up` albo `Tendered at FedEx location`.
 
 Jeśli pierwszy status długo się nie zmienia, napisz do sprzedawcy, nie do przewoźnika: paczka wciąż jest u sprzedawcy. Tak samo radzi [Cainiao](carrier:cainiao) przy zamówieniach z Chin bez danych śledzenia: zamówienie „jest przetwarzane”, a po szczegóły trzeba się zwrócić do sprzedawcy.
 
@@ -49,7 +49,7 @@ Paczka nadana w automacie też nie od razu rusza: po `Sent through Parcel Locker
 
 ## Przesyłka w trasie albo w tranzycie: co to znaczy?
 
-Przewoźnik ma Twoją paczkę gdzieś w swojej sieci, ale nie znaczy to, że akurat jedzie. U InPost na tym etapie zobaczysz w Peek `Accepted at the Logistics Centre`, `Dispatched from the Logistics Centre` i `On the way`.
+Przewoźnik ma twoją paczkę gdzieś w swojej sieci, ale nie znaczy to, że akurat jedzie. U InPost na tym etapie zobaczysz w Peek `Accepted at the Logistics Centre`, `Dispatched from the Logistics Centre` i `On the way`.
 
 Między skanami cisza jest normalna: [Poczta Polska](carrier:poczta-polska) przy listach poleconych pokazuje tylko dzień nadania i dzień doręczenia, bez drogi przesyłki.
 
@@ -62,8 +62,8 @@ Cisza dłuższa niż czas podany przez przewoźnika? Zobacz, [dlaczego status pr
 ## Paczka z zagranicy: „opuściła kraj nadania”, cło i przewoźnik w Polsce
 
 - **Opuściła kraj nadania.** Paczka jest w drodze samolotem, statkiem albo pociągiem. Po drodze nikt jej nie skanuje, więc do następnego skanu, zwykle już w kraju docelowym, bywa cicho.
-- **Odprawa celna.** Każdą przesyłkę pocztową z towarem spoza Unii Europejskiej trzeba zgłosić do urzędu celnego, bez względu na wartość, ale paczkę do 150 euro Poczta Polska zgłasza za Ciebie. Gdy brakuje danych albo opis towaru jest niejasny, paczka może na jakiś czas utknąć w magazynie pocztowo-celnym. Po odprawie jedzie do doręczenia, a należności Poczta Polska pobiera przy doręczeniu albo przed odbiorem. Działaj tylko wtedy, gdy poczta albo urząd celny o coś poprosi. Ile zapłacisz, łącznie z cłem 3 euro za każdy rodzaj produktu, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
-- **Przewoźnik w Polsce.** Ostatni odcinek często przejmuje inna firma, czasem [pod nowym numerem](guide:tracking-number-formats). Przy ekonomicznej wysyłce Cainiao pisze, że jego śledzenie kończy się na przekazaniu „przewoźnikowi w kraju/regionie docelowym”, a o dalsze statusy trzeba pytać tego przewoźnika. U [YunExpress](carrier:yunexpress) ten moment opisuje `Delivered to local carrier`: mimo słowa „Delivered” paczka trafiła do przewoźnika, nie do Ciebie. Paczek od Temu, AliExpress i Shein DPD nie przekierowuje; gdy już je ma, możesz je najwyżej skierować do punktu DPD Pickup na trasie kuriera. Zamawiasz w Chinach? Zobacz, jak [śledzić paczkę z Chin](guide:tracking-from-china).
+- **Odprawa celna.** Każdą przesyłkę pocztową z towarem spoza Unii Europejskiej trzeba zgłosić do urzędu celnego, bez względu na wartość, ale paczkę do 150 euro Poczta Polska zgłasza za ciebie. Gdy brakuje danych albo opis towaru jest niejasny, paczka może na jakiś czas utknąć w magazynie pocztowo-celnym. Po odprawie jedzie do doręczenia, a należności Poczta Polska pobiera przy doręczeniu albo przed odbiorem. Działaj tylko wtedy, gdy poczta albo urząd celny o coś poprosi. Ile zapłacisz, łącznie z cłem 3 euro za każdy rodzaj produktu, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
+- **Przewoźnik w Polsce.** Ostatni odcinek często przejmuje inna firma, czasem [pod nowym numerem](guide:tracking-number-formats). Przy ekonomicznej wysyłce Cainiao pisze, że jego śledzenie kończy się na przekazaniu „przewoźnikowi w kraju/regionie docelowym”, a o dalsze statusy trzeba pytać tego przewoźnika. U [YunExpress](carrier:yunexpress) ten moment opisuje `Delivered to local carrier`: mimo słowa „Delivered” paczka trafiła do przewoźnika, nie do ciebie. Paczek od Temu, AliExpress i Shein DPD nie przekierowuje; gdy już je ma, możesz je najwyżej skierować do punktu DPD Pickup na trasie kuriera. Zamawiasz w Chinach? Zobacz, jak [śledzić paczkę z Chin](guide:tracking-from-china).
 
 ## Czy „wydana do doręczenia” znaczy, że paczka będzie dziś?
 
@@ -72,9 +72,9 @@ Zwykle tak, ale przewoźnicy ujmują to różnie:
 - **InPost, paczka kurierska:** `W doręczeniu.` znaczy, że paczka jest „na ostatnim etapie podróży”, u kuriera.
 - **DPD:** po wydaniu paczki do doręczenia w aplikacji DPD Mobile i na tt.dpd.com.pl pojawia się numer telefonu kuriera. Gdy przy zamówieniu był wybór przedziału godzin, paczka przyjedzie w wybranym. W sobotę DPD doręcza tylko paczki z usługą Sobota.
 
-Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier Cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
+Uwaga: `W doręczeniu.` pojawia się u InPost także wtedy, gdy kurier cię nie zastał: w opisie zobaczysz wtedy, że kolejna próba będzie w następnym dniu roboczym.
 
-[Peek](/) sprawdza paczkę nawet co 2 minuty w dniu doręczenia, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy jest już wydana do doręczenia, a Ty masz ją otwartą albo włączone powiadomienia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza tego dnia nawet co 15 minut, gdy masz paczkę otwartą albo włączone powiadomienia, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+[Peek](/) sprawdza paczkę nawet co 2 minuty w dniu doręczenia, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (gdy jest już wydana do doręczenia, a ty masz ją otwartą albo włączone powiadomienia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, od pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), a powiadomienia możesz ograniczyć do samego doręczenia (ustawienie „Tylko doręczenie”). Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza tego dnia nawet co 15 minut, gdy masz paczkę otwartą albo włączone powiadomienia, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 ## Awizo i nieudana próba doręczenia: co teraz?
 
@@ -84,7 +84,7 @@ Tu musisz coś zrobić: [nikt nie odebrał paczki albo kurier nie mógł jej dor
 - Przeczytaj powiadomienie | SMS, e-mail, aplikacja albo awizo w skrzynce: gdzie jest paczka i do kiedy czeka.
 - Sprawdź termin | Od 2 dni roboczych w automacie paczkowym do 14 dni na poczcie, liczonych w godzinach, dniach albo dniach roboczych.
 - Zmień dostawę | Tylko na stronie lub w aplikacji przewoźnika: inny dzień, adres, sąsiad, automat paczkowy albo punkt.
-- Odbierz paczkę | Kodem odbioru albo w aplikacji. W DPD z Twoim kodem odbierze ją też ktoś inny, jeśli nie trzeba nic podpisywać.
+- Odbierz paczkę | Kodem odbioru albo w aplikacji. W DPD z twoim kodem odbierze ją też ktoś inny, jeśli nie trzeba nic podpisywać.
 :::
 
 | Przewoźnik | Po nieudanej próbie | Jak długo czeka |
@@ -106,13 +106,13 @@ Gdy w wybranym automacie Paczkomat nie ma miejsca, paczka czeka w pobliskim auto
 
 Nie idź po paczkę przed tym statusem albo powiadomieniem od przewoźnika: dopiero wtedy masz kod i znasz adres.
 
-## Czy „doręczona” znaczy, że paczka jest u Ciebie?
+## Czy „doręczona” znaczy, że paczka jest u ciebie?
 
 Nie zawsze. Znaczy, że kurier zeskanował ją jako wydaną albo zostawioną:
 
 - **Domownikowi.** Jeśli na liście przewozowym nie ma dopisku „do rąk własnych”, DPD uznaje za skuteczne doręczenie dorosłemu domownikowi albo innej uprawnionej osobie.
-- **We wskazanym miejscu.** W DPD Mobile możesz sam wybrać sąsiada albo safeplace. Kurierowi Pocztex możesz przez telefon wskazać miejsce tuż przy adresie, jeśli nadawca podał Twój numer; za to, co stanie się z paczką potem, Poczta Polska już nie odpowiada.
-- **W punkcie, nie u Ciebie.** Poczta Polska przyznaje, że przy paczce do punktu odbioru status „doręczono” bywa błędnym skanem: kurier dostarczył ją do punktu, a poprawny status to „dostarczono do punktu odbioru”. Zgłoś to infolinii Poczty Polskiej: 801 333 444 z telefonu stacjonarnego albo +48 438 420 600 z komórki.
+- **We wskazanym miejscu.** W DPD Mobile możesz sam wybrać sąsiada albo safeplace. Kurierowi Pocztex możesz przez telefon wskazać miejsce tuż przy adresie, jeśli nadawca podał twój numer; za to, co stanie się z paczką potem, Poczta Polska już nie odpowiada.
+- **W punkcie, nie u ciebie.** Poczta Polska przyznaje, że przy paczce do punktu odbioru status „doręczono” bywa błędnym skanem: kurier dostarczył ją do punktu, a poprawny status to „dostarczono do punktu odbioru”. Zgłoś to infolinii Poczty Polskiej: 801 333 444 z telefonu stacjonarnego albo +48 438 420 600 z komórki.
 
 Nie ma paczki? Sprawdź w pełnej historii śledzenia, gdzie i komu ją wydano, a potem przeczytaj poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 

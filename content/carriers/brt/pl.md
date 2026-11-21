@@ -6,13 +6,13 @@ published: 2026-11-17
 updated: 2026-11-17
 ---
 
-BRT to włoska firma kurierska należąca – podobnie jak [DPD Polska](carrier:dpd-pl) i [Chronopost](carrier:chronopost) – do grupy Geopost. Przesyłkę możesz śledzić z linku w SMS-ie lub e-mailu od BRT, w wyszukiwarce na stronie [brt.it](https://www.brt.it/en/) albo wklejając numer w pole powyżej. Numer ten – *BRTcode* – BRT wysyła od razu po przejęciu paczki, jeśli nadawca przekazał Twoje dane kontaktowe.
+BRT to włoska firma kurierska należąca – podobnie jak [DPD Polska](carrier:dpd-pl) i [Chronopost](carrier:chronopost) – do grupy Geopost. Przesyłkę możesz śledzić z linku w SMS-ie lub e-mailu od BRT, w wyszukiwarce na stronie [brt.it](https://www.brt.it/en/) albo wklejając numer w pole powyżej. Numer ten – *BRTcode* – BRT wysyła od razu po przejęciu paczki, jeśli nadawca przekazał twoje dane kontaktowe.
 
 ## Numer przesyłki BRT: gdzie go szukać, formaty i prawdziwe wiadomości
 
 *BRTcode* znajdziesz w SMS-ach i e-mailach od BRT oraz na awizie zostawionym przez kuriera po nieudanej próbie doręczenia. Nie dostałeś żadnej wiadomości? Sprawdź e-mail ze sklepu o wysyłce albo poradnik [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
-Gdy sprzedawca przekaże Twój numer telefonu lub adres e-mail, BRT wysyła prawdziwe powiadomienia z kodem *BRTcode* po odebraniu przesyłki oraz komunikaty o nieudanej próbie doręczenia, złożeniu w magazynie (*giacenza*) albo dostarczeniu do punktu *BRT-fermopoint* lub automatu *BRT Locker*. Jednocześnie 16 kwietnia 2026 r. przewoźnik opublikował [ostrzeżenie przed phishingiem SMS i e-mail](https://www.brt.it/en/news/2026/04/16/alert-phishing-sms-email/), opisując podszywanie się pod BRT przy fałszywych powiadomieniach o niedoręczeniu i fałszywych fakturach ze złośliwym oprogramowaniem: zwróć uwagę na błędy językowe, podejrzany lub lekko zmieniony adres nadawcy oraz pilne wezwania do kliknięcia linku, a w razie wątpliwości nie klikaj linków, nie pobieraj załączników i wpisz *BRTcode* ręcznie na `brt.it` lub `vas.brt.it` (zobacz też [jak rozpoznać fałszywe SMS-y o paczce](guide:delivery-scam-texts)).
+Gdy sprzedawca przekaże twój numer telefonu lub adres e-mail, BRT wysyła prawdziwe powiadomienia z kodem *BRTcode* po odebraniu przesyłki oraz komunikaty o nieudanej próbie doręczenia, złożeniu w magazynie (*giacenza*) albo dostarczeniu do punktu *BRT-fermopoint* lub automatu *BRT Locker*. Jednocześnie 16 kwietnia 2026 r. przewoźnik opublikował [ostrzeżenie przed phishingiem SMS i e-mail](https://www.brt.it/en/news/2026/04/16/alert-phishing-sms-email/), opisując podszywanie się pod BRT przy fałszywych powiadomieniach o niedoręczeniu i fałszywych fakturach ze złośliwym oprogramowaniem: zwróć uwagę na błędy językowe, podejrzany lub lekko zmieniony adres nadawcy oraz pilne wezwania do kliknięcia linku, a w razie wątpliwości nie klikaj linków, nie pobieraj załączników i wpisz *BRTcode* ręcznie na `brt.it` lub `vas.brt.it` (zobacz też [jak rozpoznać fałszywe SMS-y o paczce](guide:delivery-scam-texts)).
 
 Oto formaty przyjmowane przez Peek dla BRT (przykłady są zmyślone):
 
@@ -31,7 +31,7 @@ Jeśli BRT nic nie znajduje, sprawdź, czy nie ma literówki, lub poczekaj, aż 
 
 Śledzenie na `vas.brt.it` otwiera się po włosku i pozwala przełączyć widok na angielski, francuski lub niemiecki (polskiej wersji nie ma). Peek odczytuje wersję angielską, w której nagłówki kolumn pozostają włoskie: *Data* (data), *Ora* (godzina), *Filiale* (oddział BRT) i *Evento* (zdarzenie). W historii w Peek zobaczysz dokładne angielskie opisy poniżej, z wyjątkiem każdego wydania paczki – także odbioru w *BRT-fermopoint* lub *BRT Locker* – które na liście zdarzeń widnieje jako `Delivered` (jeśli masz Peek ustawiony po włosku, zobaczysz włoskie komunikaty BRT oraz `Consegnata`, a zdarzenia znane tylko po angielsku, np. z automatu, pozostaną po angielsku). Po prawej stronie podajemy etap w Peek:
 
-| Komunikat BRT | Co oznacza dla Ciebie | Etap w Peek |
+| Komunikat BRT | Co oznacza dla ciebie | Etap w Peek |
 | --- | --- | --- |
 | `SHIPPING INFO SENT TO BRT` | BRT otrzymało dane od nadawcy, ale nie ma jeszcze samej paczki. Zobacz [statusy przesyłek – wyjaśnienie](guide:tracking-statuses). | „Zarejestrowana” |
 | `COLLECTED` | BRT odebrało przesyłkę od nadawcy. | „Przyjęta przez przewoźnika” |
@@ -52,7 +52,7 @@ Jeśli BRT nic nie znajduje, sprawdź, czy nie ma literówki, lub poczekaj, aż 
 | `DELIVERED` | Doręczona. | „Dostarczona” |
 | `RETURNED TO SENDER` | Przesyłka wraca do nadawcy. | „Zwrócona nadawcy” |
 
-Warto pamiętać o trzech szczegółach: `COLLECTED` to odbiór od sprzedawcy, a nie przez Ciebie; jeśli paczkę przywiózł do Włoch z zagranicy [Chronopost](carrier:chronopost) lub DPD, `COLLECTED` oznacza przekazanie jej do BRT i w Peek wyświetla się jako „W transporcie”. Podobnie `FOR DELIVERY` w zagranicznym oddziale DPD oznacza przekazanie paczki tej sieci („W transporcie”). Z kolei gdy `DELIVERED` pojawia się po `RETURNED TO SENDER`, paczka wróciła do nadawcy: wiersz zdarzenia ma opis `Delivered`, ale ogólny etap w Peek pozostaje „Zwrócona nadawcy”.
+Warto pamiętać o trzech szczegółach: `COLLECTED` to odbiór od sprzedawcy, a nie przez ciebie; jeśli paczkę przywiózł do Włoch z zagranicy [Chronopost](carrier:chronopost) lub DPD, `COLLECTED` oznacza przekazanie jej do BRT i w Peek wyświetla się jako „W transporcie”. Podobnie `FOR DELIVERY` w zagranicznym oddziale DPD oznacza przekazanie paczki tej sieci („W transporcie”). Z kolei gdy `DELIVERED` pojawia się po `RETURNED TO SENDER`, paczka wróciła do nadawcy: wiersz zdarzenia ma opis `Delivered`, ale ogólny etap w Peek pozostaje „Zwrócona nadawcy”.
 
 ## Paczka BRT z Włoch do Polski
 
@@ -62,13 +62,13 @@ Warto pamiętać o trzech szczegółach: `COLLECTED` to odbiór od sprzedawcy, a
 
 ## Niedoręczona paczka we Włoszech: kolejna próba, BRT-fermopoint i Locker
 
-Jeśli odbierasz przesyłkę pod włoskim adresem i kurier Cię nie zastanie, BRT zostawia powiadomienie e-mailem, SMS-em lub na kartce. Ponowna próba odbywa się zazwyczaj w następnym dniu roboczym, a gdy i ona się nie powiedzie, oddział BRT według karty usług (*Carta dei servizi*) dzwoni do odbiorcy.
+Jeśli odbierasz przesyłkę pod włoskim adresem i kurier cię nie zastanie, BRT zostawia powiadomienie e-mailem, SMS-em lub na kartce. Ponowna próba odbywa się zazwyczaj w następnym dniu roboczym, a gdy i ona się nie powiedzie, oddział BRT według karty usług (*Carta dei servizi*) dzwoni do odbiorcy.
 
 Przez link w wiadomości od BRT lub w serwisie myBRT (z użyciem *BRTcode* i kodu pocztowego lub PIN-u) możesz – zależnie od usług dla danej paczki – wybrać inny dzień lub przedział godzinowy, przekierować paczkę do punktu *BRT-fermopoint* albo do odbioru w oddziale, zwolnić przesyłkę z magazynu bądź zmienić adres za zgodą nadawcy. Więcej w poradniku [nieudana próba doręczenia](guide:missed-delivery).
 
 **Przechowywanie w magazynie (*in giacenza*).** Paczka trafia do magazynu m.in. z powodu nieobecnego lub nieznanego odbiorcy, błędnego bądź niepełnego adresu albo odmowy przyjęcia; powód widnieje w szczegółach przesyłki. Dyspozycję możesz wydać z poziomu wiadomości BRT lub śledzenia (czasem wymagany jest 3-cyfrowy kod bezpieczeństwa). BRT prosi też o instrukcje nadawcę: zgodnie z *Carta dei servizi* brak pisemnej odpowiedzi w ciągu 10 dni od powiadomienia skutkuje zwrotem paczki (ogólne warunki odsyłają do liczby dni uzgodnionej z nadawcą). Po odpowiedzi nadawcy szczegóły pokazują również, czy naliczane są koszty składowania i kto je pokrywa.
 
-**Odbiór w oddziale (*fermo deposito*).** Paczkę odbierzesz osobiście z dokumentem tożsamości albo przez osobę upoważnioną z pisemnym upoważnieniem, jej własnym dokumentem tożsamości i kopią Twojego. Jeśli nadawca podał Twój kontakt, BRT prześle adres oddziału, godziny otwarcia i ewentualną kwotę pobrania.
+**Odbiór w oddziale (*fermo deposito*).** Paczkę odbierzesz osobiście z dokumentem tożsamości albo przez osobę upoważnioną z pisemnym upoważnieniem, jej własnym dokumentem tożsamości i kopią twojego. Jeśli nadawca podał twój kontakt, BRT prześle adres oddziału, godziny otwarcia i ewentualną kwotę pobrania.
 
 **BRT-fermopoint.** To partnerskie punkty w sklepach (kioski, sklepy tytoniowe, papiernicze i inne), z których część działa także w weekendy. O dostarczeniu informuje e-mail lub SMS, a paczka czeka 10 dni.
 
@@ -78,7 +78,7 @@ Przez link w wiadomości od BRT lub w serwisie myBRT (z użyciem *BRTcode* i kod
 
 Czasy dostawy podawane przez BRT mają charakter orientacyjny. Gdy śledzenie stoi w miejscu, skontaktuj się z oddziałem z kolumny *Filiale* albo ze sklepem internetowym, który zawarł umowę z BRT, i sprawdź [śledzenie przesyłki się nie aktualizuje](guide:tracking-not-updating).
 
-**Uszkodzenie lub zaginięcie.** Jeżeli to Ty opłaciłeś transport, zgłoś szkodę przez formularz wsparcia BRT (przy uszkodzeniu dołącz zdjęcia); w przeciwnym razie powiadom sprzedawcę. Widoczne uszkodzenia opakowania trzeba wpisać przy odbiorze jako konkretne zastrzeżenie („*con riserva di controllo*” ze wskazaniem rodzaju szkody), bo ogólne zastrzeżenia są według BRT nieważne. Szkody ukryte zgłasza się pisemnie w ciągu 8 dni od doręczenia na terenie Włoch (art. 1698 włoskiego kodeksu cywilnego) albo w ciągu 7 dni bez niedziel i świąt w międzynarodowym transporcie drogowym zgodnie z konwencją CMR. Więcej w poradniku [uszkodzona paczka](guide:damaged-parcel).
+**Uszkodzenie lub zaginięcie.** Jeżeli to ty opłaciłeś transport, zgłoś szkodę przez formularz wsparcia BRT (przy uszkodzeniu dołącz zdjęcia); w przeciwnym razie powiadom sprzedawcę. Widoczne uszkodzenia opakowania trzeba wpisać przy odbiorze jako konkretne zastrzeżenie („*con riserva di controllo*” ze wskazaniem rodzaju szkody), bo ogólne zastrzeżenia są według BRT nieważne. Szkody ukryte zgłasza się pisemnie w ciągu 8 dni od doręczenia na terenie Włoch (art. 1698 włoskiego kodeksu cywilnego) albo w ciągu 7 dni bez niedziel i świąt w międzynarodowym transporcie drogowym zgodnie z konwencją CMR. Więcej w poradniku [uszkodzona paczka](guide:damaged-parcel).
 
 **Reklamacja i koncyliacja.** Reklamację może złożyć odbiorca lub nadawca: pobierz plik PDF *Modulo di Reclamo* ze strony [Carta dei servizi](https://www.brt.it/it/carta-dei-servizi/), wypełnij go i dołącz do formularza na `services.brt.it/it/form-agcom`. BRT odpowiada w ciągu 45 dni. W razie braku odpowiedzi lub niezadowolenia możesz wystąpić o postępowanie polubowne pod adresem `conciliazioni@brt.it`, np. przez organizację *Casa del Consumatore* (składka roczna 50 €, a przy sporach do 50 € – 25 €, zwracana przez BRT po zawarciu ugody) lub inny podmiot, a następnie do włoskiego regulatora AGCOM. Paczka ma status doręczonej, ale jej nie masz? Sprawdź [przesyłka doręczona, ale nieodebrana](guide:delivered-not-received).
 
@@ -95,7 +95,7 @@ Boloński numer telefonu widniejący w *Carta dei servizi* należy do siedziby z
 
 ## Śledzenie paczek BRT w Peek
 
-Wklej numer w [Peek](/). Dla kodów `EOB` i większości numerów 15-cyfrowych Peek odpytuje wyłącznie BRT (nawet przed [FedEx](carrier:fedex), gdy 15 cyfr przechodzi też jego sumę kontrolną); przy 12 cyfrach sprawdza BRT w pierwszej turze obok innych przewoźników. Przy 14 cyfrach pyta BRT od razu, jeśli Twoim krajem są Włochy; w Polsce i innych krajach pyta najpierw pięciu głównych kandydatów (w Polsce sieci DPD oraz [Chronopost](carrier:chronopost)), a dopiero gdy żaden nie rozpozna numeru – BRT. Jeśli wybrano innego przewoźnika, stuknij „Zmień” i wskaż BRT w sekcji „Pasują do numeru” lub „Wszyscy przewoźnicy” (wyszukiwarka zna też nazwę „Bartolini”). Linki z `vas.brt.it` z parametrem `brtCode=` działają; linki myBRT i numery 19-cyfrowe nie.
+Wklej numer w [Peek](/). Dla kodów `EOB` i większości numerów 15-cyfrowych Peek odpytuje wyłącznie BRT (nawet przed [FedEx](carrier:fedex), gdy 15 cyfr przechodzi też jego sumę kontrolną); przy 12 cyfrach sprawdza BRT w pierwszej turze obok innych przewoźników. Przy 14 cyfrach pyta BRT od razu, jeśli twoim krajem są Włochy; w Polsce i innych krajach pyta najpierw pięciu głównych kandydatów (w Polsce sieci DPD oraz [Chronopost](carrier:chronopost)), a dopiero gdy żaden nie rozpozna numeru – BRT. Jeśli wybrano innego przewoźnika, stuknij „Zmień” i wskaż BRT w sekcji „Pasują do numeru” lub „Wszyscy przewoźnicy” (wyszukiwarka zna też nazwę „Bartolini”). Linki z `vas.brt.it` z parametrem `brtCode=` działają; linki myBRT i numery 19-cyfrowe nie.
 
 Peek odpytuje BRT bezpośrednio bez przeglądarki: pokazuje status, lokalizację każdego skanu na mapie oraz wagę, pomijając dane nadawcy i odbiorcy, referencję sklepu, liczbę paczek, objętość i szczegóły punktu odbioru. Samo BRT nie podaje przewidywanej daty dostawy, ale przy 14 cyfrach Peek może pobrać termin z sieci DPD albo z [Chronopost](carrier:chronopost) (jeśli to on wiózł paczkę do Włoch); prognoza znika po upływie dnia albo wcześniej przy doręczeniu, zwrocie, złożeniu w punkcie, nieudanej próbie lub problemie. Godziny bez strefy czasowej Peek odczytuje jako czas włoski – taki sam jak w Polsce – a skany z samą datą pozostawia bez godziny.
 

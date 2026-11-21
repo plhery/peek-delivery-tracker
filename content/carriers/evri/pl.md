@@ -28,7 +28,7 @@ Litera `H` i 15 samych cyfr (`H000000000000008`) pasuje jednocześnie do numerac
 
 W przypadku paczek wysyłanych z Wielkiej Brytanii do Polski portal GlobalEco usługi Evri International wyświetla komunikaty po angielsku:
 
-| GlobalEco wyświetla | Co to oznacza dla Twojej paczki |
+| GlobalEco wyświetla | Co to oznacza dla twojej paczki |
 | --- | --- |
 | `Created` | Zgłoszono przesyłkę; Evri fizycznie jeszcze jej nie odebrało. |
 | `Received at Evri`, `Accepted` | Evri przyjęło paczkę do swojej sieci w Wielkiej Brytanii. |
@@ -70,7 +70,7 @@ Jeśli śledzenie na `evri.com` prosi o kontakt z Evri, przewoźnik potrzebuje d
 ## Paczka Evri utknęła, spóźnia się, zaginęła lub dotarła uszkodzona
 
 - **Brak ruchu w śledzeniu:** jeśli status nie wychodzi poza `We're expecting it` albo `Created`, nadawca nie przekazał jeszcze paczki do Evri — napisz do sklepu. Gdy inny brytyjski status nie zmienia się przez 24 godziny (lub przez 5 dni w usłudze Standard po stronie nadawcy), Evri prosi o rozpoczęcie czatu. Zobacz [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
-- **Ponad 7 dni oczekiwania:** zgłoś sprawę sprzedawcy, który ma umowę z Evri. Przy zakupach w UE przedsiębiorca powinien dostarczyć towar w ciągu 30 dni (chyba że uzgodniliście inny termin) i odpowiada za wszelkie uszkodzenia towaru od chwili wysyłki aż do odebrania go przez Ciebie.
+- **Ponad 7 dni oczekiwania:** zgłoś sprawę sprzedawcy, który ma umowę z Evri. Przy zakupach w UE przedsiębiorca powinien dostarczyć towar w ciągu 30 dni (chyba że uzgodniliście inny termin) i odpowiada za wszelkie uszkodzenia towaru od chwili wysyłki aż do odebrania go przez ciebie.
 - **Status „doręczono”, ale paczki nie ma:** zapytaj domowników i bezpośrednich sąsiadów. W Wielkiej Brytanii czat uruchamia wyjaśnienie w lokalnym oddziale; w Polsce sprawdź również numer partnera krajowego i powiadom sklep. Więcej w poradniku [przesyłka oznaczona jako doręczona, ale nieodebrana](guide:delivered-not-received).
 - **Zaginiona lub uszkodzona:** Evri nie wypłaca zwrotu bezpośrednio odbiorcy; [reklamację może złożyć wyłącznie nadawca](guide:damaged-parcel) — Evri zaleca zrobienie tego w ciągu 28 dni od zamówienia dla usług krajowych w UK oraz 45 dni dla usług międzynarodowych.
 
@@ -79,7 +79,7 @@ Jeśli śledzenie na `evri.com` prosi o kontakt z Evri, przewoźnik potrzebuje d
 Evri udostępnia wyłącznie brytyjskie kanały obsługi po angielsku (sprawdzone 17 listopada 2026 r.), bez polskiej infolinii:
 
 - **Czat 24/7** na stronie [evri.com/contact-us](https://www.evri.com/contact-us) przez wirtualnego asystenta Ezra, z odpowiedzią w ciągu maksymalnie 24 godzin. Przygotuj numer śledzenia, potwierdzenie nadania z ParcelShopu (`P` i 7 cyfr) lub 8 cyfr z *calling card*. W przypadku przesyłek międzynarodowych do krajów i terytoriów bez kodów pocztowych Evri zaleca wpisać `0`, gdy Ezra poprosi o kod pocztowy.
-- **Telefon w Wielkiej Brytanii:** `0330 808 5456`, automat głosowy 24/7 oraz konsultanci od poniedziałku do piątku w godz. 8:00–16:00 i w soboty w godz. 8:00–14:00 (czasu brytyjskiego). Na klawiaturze telefonu trzeba wybrać ostatnie 8 cyfr numeru śledzenia, 7 cyfr po literze `P` z paragonu ParcelShop albo 8 cyfr z *calling card*. W Wielkiej Brytanii numery `03` kosztują tyle co zwykłe połączenia stacjonarne `01`/`02`; z Polski obowiązuje stawka Twojego operatora za połączenie międzynarodowe do Wielkiej Brytanii.
+- **Telefon w Wielkiej Brytanii:** `0330 808 5456`, automat głosowy 24/7 oraz konsultanci od poniedziałku do piątku w godz. 8:00–16:00 i w soboty w godz. 8:00–14:00 (czasu brytyjskiego). Na klawiaturze telefonu trzeba wybrać ostatnie 8 cyfr numeru śledzenia, 7 cyfr po literze `P` z paragonu ParcelShop albo 8 cyfr z *calling card*. W Wielkiej Brytanii numery `03` kosztują tyle co zwykłe połączenia stacjonarne `01`/`02`; z Polski obowiązuje stawka twojego operatora za połączenie międzynarodowe do Wielkiej Brytanii.
 - **Tell us straight:** jeśli dział obsługi klienta próbował już pomóc, ale problem pozostał nierozwiązany, przycisk „Email us” na stronie kontaktowej otwiera wiadomość na adres `noreply.priority@evri.com` do zespołu wyższego szczebla (potwierdzenie wpływu w ciągu godziny w brytyjskich godzinach biurowych i codzienna informacja w trakcie wyjaśniania sprawy).
 
 > Prawdziwe e-maile od Evri przychodzą zazwyczaj z domen `@evri.com`, `@hermes-europe.co.uk` lub `@myhermes.co.uk`, a pełna lista obejmuje także `@custhelp.com`, `@globalco.uk`, `@globaleco.app` oraz ich subdomeny (np. `@international.evri.com`). Brytyjskie SMS-y mają zawsze nadawcę „Evri” (nigdy zwykły numer komórkowy), nigdy nie żądają dopłaty za zmianę terminu doręczenia ani instalacji aplikacji i prowadzą wyłącznie do `evri.com` lub `evri.link` (pod które oszuści mimo wszystko potrafią się podszyć). W razie wątpliwości nie odpowiadaj i sprawdź numer samodzielnie w GlobalEco lub na `evri.com`; w Wielkiej Brytanii podejrzane SMS-y zgłasza się bezpłatnie pod numer `7726`. Więcej w poradniku o [fałszywych SMS-ach o paczce](guide:delivery-scam-texts).
@@ -96,7 +96,7 @@ W **Evri UK** widzisz aktualny status i historię. Evri UK nie udostępnia lokal
 
 ### Czy Evri i Hermes to ta sama firma?
 
-W Wielkiej Brytanii tak: Evri to dawny Hermes UK po zmianie nazwy w marcu 2022 roku. Z kolei Hermes w Niemczech jest osobnym przewoźnikiem; jeśli Twój numer zaczyna się od `H` i 15 cyfr, sprawdź w wiadomości ze sklepu, który z nich realizuje wysyłkę.
+W Wielkiej Brytanii tak: Evri to dawny Hermes UK po zmianie nazwy w marcu 2022 roku. Z kolei Hermes w Niemczech jest osobnym przewoźnikiem; jeśli twój numer zaczyna się od `H` i 15 cyfr, sprawdź w wiadomości ze sklepu, który z nich realizuje wysyłkę.
 
 ### Czy Evri należy do DHL albo Royal Mail?
 

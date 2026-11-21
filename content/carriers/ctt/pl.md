@@ -27,7 +27,7 @@ Wpisuj numer bez spacji: według angielskiej pomocy CTT komunikat `Item not foun
 
 Wyszukiwarka „Seguir objeto” działa po portugalsku i angielsku. Oto najczęstsze statusy portugalskie oraz międzynarodowe:
 
-| Status CTT | Co oznacza dla Ciebie |
+| Status CTT | Co oznacza dla ciebie |
 | --- | --- |
 | `Aguarda entrada nos CTT` | CTT otrzymało dane elektroniczne od nadawcy, ale nie ma jeszcze samej paczki. |
 | `Aceite` | Przyjęta przez CTT lub pocztę kraju nadania — rozpoczyna się przewóz. |
@@ -87,7 +87,7 @@ Oficjalne kanały CTT sprawdzone 17 listopada 2026 r.:
 
 [Peek](/) natychmiast rozpoznaje kody pocztowe i Expresso należące do CTT (`PT` z poprawną cyfrą kontrolną) oraz linki `ctt.pt` zawierające `objects=`. Gdy pomylisz jedną cyfrę (np. `RR482910575PT`), suma kontrolna się nie zgadza i Peek nie przypisze żadnego przewoźnika — sprawdź wtedy numer lub naciśnij „Zmień”. Pozostałe numery CTT spoza standardu pocztowego są odczytywane przez uniwersalne serwisy śledzenia, a kody 22- i 25-cyfrowe trafiają do [CTT Express](carrier:ctt-express).
 
-Peek pokazuje aktualny status, do 20 najnowszych skanów z przybliżoną lokalizacją (sortownia lub punkt odbioru) na mapie oraz numeryczny kod statusu CTT; CTT nie podaje przewidywanej daty doręczenia. Portugalskie skany są odczytywane według czasu lizbońskiego (lub azorskiego dla kodów pocztowych od `9500`), a hiszpańskie oddziały CTT Express według czasu Madrytu lub Wysp Kanaryjskich — po czym Peek przelicza je na strefę Twojego urządzenia (na peektracker.com i w aplikacji na iPhonie pod historią widnieje dopisek: „Godziny w twojej strefie czasowej: …”). Gdy paczka `PT` zmierza do Polski, Peek odpytuje również [Pocztę Polską](carrier:poczta-polska): dopóki widnieje tam sama zapowiedź bez własnego skanu, karta pokazuje „Zgłoszona przewoźnikowi Poczta Polska, jeszcze nieprzyjęta”, a po pojawieniu się aktualnego skanu zmienia opis na „Doręcza: Poczta Polska”, zachowując wcześniejszą historię z CTT (i odwrotnie: „CTT Portugal” dla paczek z Polski do Portugalii).
+Peek pokazuje aktualny status, do 20 najnowszych skanów z przybliżoną lokalizacją (sortownia lub punkt odbioru) na mapie oraz numeryczny kod statusu CTT; CTT nie podaje przewidywanej daty doręczenia. Portugalskie skany są odczytywane według czasu lizbońskiego (lub azorskiego dla kodów pocztowych od `9500`), a hiszpańskie oddziały CTT Express według czasu Madrytu lub Wysp Kanaryjskich — po czym Peek przelicza je na strefę twojego urządzenia (na peektracker.com i w aplikacji na iPhonie pod historią widnieje dopisek: „Godziny w twojej strefie czasowej: …”). Gdy paczka `PT` zmierza do Polski, Peek odpytuje również [Pocztę Polską](carrier:poczta-polska): dopóki widnieje tam sama zapowiedź bez własnego skanu, karta pokazuje „Zgłoszona przewoźnikowi Poczta Polska, jeszcze nieprzyjęta”, a po pojawieniu się aktualnego skanu zmienia opis na „Doręcza: Poczta Polska”, zachowując wcześniejszą historię z CTT (i odwrotnie: „CTT Portugal” dla paczek z Polski do Portugalii).
 
 Peek sprawdza CTT nawet co 10 minut — a w dniu wyjazdu kuriera od 6:00 czasu lokalnego nawet co 2 minuty, gdy przesyłka ma etap „W doręczeniu” i odpowiada bezpośredni system CTT (przez serwisy śledzenia co 15 minut) — oraz co godzinę po 48 godzinach bez zmian lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”. Powiadomienia możesz ustawić jako „Wszystkie aktualizacje”, „Tylko ważne” albo „Tylko w dniu dostawy”.
 

@@ -8,7 +8,7 @@ updated: 2026-11-17
 
 Correos Express (dawniej Chronoexprés, pełna nazwa spółki *Correos Express Paquetería Urgente, S.A., S.M.E.*) to ekspresowa spółka kurierska należąca do hiszpańskiej grupy Correos. Doręcza przesyłki w całej Hiszpanii i Portugalii oraz wysyła paczki do Polski, Europy i na cały świat w ramach usług międzynarodowych; nie należy jej mylić z Correos, czyli publiczną pocztą hiszpańską. Aby sprawdzić losy przesyłki, wpisz numer na [hiszpańskojęzycznej stronie śledzenia Correos Express](https://s.correosexpress.com/) albo wklej go w polu powyżej. Przesyłkę rejestruje nadawca (zazwyczaj sklep internetowy), więc w razie braku numeru zapytaj sprzedawcę.
 
-## Correos czy Correos Express: który przewoźnik wiezie Twoją paczkę?
+## Correos czy Correos Express: który przewoźnik wiezie twoją paczkę?
 
 Correos to spółka matka realizująca w Hiszpanii powszechne usługi pocztowe, natomiast Correos Express odpowiada za pilne przesyłki kurierskie. Choć korzystają ze wspólnej sieci placówek pocztowych i punktów *Punto Correos*, w internecie mają osobne wyszukiwarki i inne formaty numerów:
 
@@ -34,7 +34,7 @@ Jeżeli wyszukiwarka zwróci komunikat *„Lo sentimos, no se ha encontrado ning
 
 Correos Express nie prowadzi śledzenia po polsku ani po angielsku: główna wyszukiwarka działa po hiszpańsku, a [wersja portugalska](https://s.correosexpress.com/SeguimientoSinCP/search-pt) ma portugalskie menu. Dla użytkowników z Polski Peek odpytuje system hiszpański i tłumaczy poniższe statusy:
 
-| Status Correos Express | Co oznacza dla Twojej paczki |
+| Status Correos Express | Co oznacza dla twojej paczki |
 | --- | --- |
 | `INFORMADO` | Nadawca zarejestrował przesyłkę, ale paczka nie dotarła jeszcze do obiektów Correos Express. |
 | `ADMITIDO` | Paczka została odebrana i wyruszyła z oddziału nadawczego (jako `ADMITIDO EN OFICINA DE CORREOS` – nadana w placówce pocztowej Correos). |
@@ -48,7 +48,7 @@ Correos Express nie prowadzi śledzenia po polsku ani po angielsku: główna wys
 | `EN ALMACÉN` / `EN GESTIÓN` | „W magazynie” / „W trakcie obsługi”: paczka oczekuje w oddziale na wyjaśnienie incydentu. |
 | `ENTREGADO EN PUNTO DE CONVENIENCIA` | Dostarczona do punktu odbioru *Punto Correos*, ale **jeszcze niegotowa** do wydania odbiorcy. |
 | `DISPONIBLE EN PUNTO DE CONVENIENCIA` | Gotowa do odbioru w punkcie za okazaniem kodu PIN. |
-| `ENTREGADO` | Doręczona Tobie lub osobie upoważnionej. |
+| `ENTREGADO` | Doręczona tobie lub osobie upoważnionej. |
 | `DEVUELTO` | Zwrócona do nadawcy (podobnie jak długi komunikat informujący o upływie terminu odbioru w punkcie). |
 
 **Częsta pułapka:** wpis `ENTREGADO EN PUNTO DE CONVENIENCIA` zawiera słowo *entregado* („doręczono”), ale oznacza wyłącznie przekazanie paczki obsłudze punktu przez kuriera. Z wyjściem po paczkę zaczekaj na status `DISPONIBLE EN PUNTO DE CONVENIENCIA` i przygotuj kod PIN. Na hiszpańskiej stronie pomocy Correos Express opisuje jedynie `INFORMADO`, `ADMITIDO`, `EN RUTA A LOCALIDAD DE DESTINO`, `EN REPARTO` oraz `ENTREGADO`, a `ESTACIONADO` wyjaśnia w portugalskim FAQ; pozostałe objaśnienia wynikają z dosłownego brzmienia i mapowania w Peek (ogólny przewodnik znajdziesz w artykule [co oznaczają statusy śledzenia](guide:tracking-statuses)).
@@ -80,7 +80,7 @@ Między kontynentalną Hiszpanią (lub Balearami) a Polską paczki krążą wewn
 Stroną umowy przewozu z Correos Express jest nadawca, a regulamin dopuszcza tylko jedną reklamację na przesyłkę – w większości spraw należy więc działać przez sprzedawcę:
 
 - **Brak aktualizacji statusu:** między centrami logistycznymi wpisy mogą pojawiać się z kilkugodzinnym poślizgiem. Jeżeli przez **24–48 godzin** nic się nie zmienia, Correos Express zaleca kontakt z nadawcą; sprawdź też [co zrobić, gdy śledzenie stoi w miejscu](guide:tracking-not-updating).
-- **Wpis o próbie doręczenia mimo Twojej obecności:** zajrzyj do szczegółów w śledzeniu (przeszkodą bywa utrudniony dostęp do budynku lub niepełny adres), a następnie umów ponowną dostawę.
+- **Wpis o próbie doręczenia mimo twojej obecności:** zajrzyj do szczegółów w śledzeniu (przeszkodą bywa utrudniony dostęp do budynku lub niepełny adres), a następnie umów ponowną dostawę.
 - **Status `ENTREGADO`, ale brak paczki:** w Hiszpanii sprawdź szczegóły doręczenia w wyszukiwarce i zgłoś sprawę sprzedawcy; w Portugalii odbiorcy mogą napisać na `destinatarioscep@correosexpress.com`. Więcej wskazówek w poradniku [status dostarczono, ale brak przesyłki](guide:delivered-not-received).
 - **Uszkodzenie lub ubytek:** widoczne z zewnątrz szkody zawsze wpisz do protokołu w chwili odbioru. Przy szkodach ukrytych hiszpańskie warunki przewozu wymagają pisemnych zastrzeżeń w ciągu **7 dni kalendarzowych** w ruchu krajowym (oraz **21 dni** przy opóźnieniu), natomiast w transporcie międzynarodowym – w ciągu **7 dni w przewozie drogowym** i **14 dni w przewozie lotniczym** (w Portugalii **8 dni** według regulaminu oraz zgłoszenie ze zdjęciami do nadawcy w ciągu **7 dni** według FAQ).
 - **Odmowa przyjęcia lub `DEVUELTO`:** po odmowie przyjęcia Correos Express powiadamia nadawcę i czeka na jego dyspozycje. Przy zakupach konsumenckich w UE serwis *Your Europe* przypomina, że sprzedawca odpowiada za przesyłkę aż do fizycznego wydania jej kupującemu (dostawa w ciągu **30 dni**, o ile nie uzgodniono inaczej) – w sprawie ponownej wysyłki lub zwrotu pieniędzy skontaktuj się ze sklepem.
@@ -96,7 +96,7 @@ Correos Express prowadzi obsługę klienta i strony pomocy wyłącznie po hiszpa
 
 Ponieważ 16-cyfrowe numery są używane przez pięciu przewoźników, [Peek](/) odpytuje ich równocześnie, aby ustalić właściwego kuriera; poprawny numer 23-cyfrowy wskazuje bezpośrednio na Correos Express (poza zakresem `000` należącym do Australia Post).
 
-Peek odświeża status nawet co 10 minut, a w dniu wydania paczki kurierowi („W doręczeniu”) od 06:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio system Correos Express (przez pośrednie serwisy śledzące – nawet co 15 minut). Po dwóch dniach bez nowych wpisów – albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” – aplikacja sprawdza przesyłkę raz na godzinę. Powiadomienia możesz włączyć dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje przetłumaczony status, przewidywaną dostawę w czasie podróży oraz każdy skan na mapie. Aplikacja pomija potwierdzenie odbioru, dane kontaktowe i komentarze do doręczenia oraz nie kontaktuje się w Twoim imieniu z Correos Express.
+Peek odświeża status nawet co 10 minut, a w dniu wydania paczki kurierowi („W doręczeniu”) od 06:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio system Correos Express (przez pośrednie serwisy śledzące – nawet co 15 minut). Po dwóch dniach bez nowych wpisów – albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” – aplikacja sprawdza przesyłkę raz na godzinę. Powiadomienia możesz włączyć dla opcji „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek pokazuje przetłumaczony status, przewidywaną dostawę w czasie podróży oraz każdy skan na mapie. Aplikacja pomija potwierdzenie odbioru, dane kontaktowe i komentarze do doręczenia oraz nie kontaktuje się w twoim imieniu z Correos Express.
 
 ## Najczęstsze pytania o śledzenie Correos Express
 
@@ -106,7 +106,7 @@ Nie. Correos to hiszpański publiczny operator pocztowy realizujący usługę po
 
 ### Ile idzie paczka Correos Express i o której godzinie przyjeżdża kurier?
 
-Na Półwyspie Iberyjskim Correos Express deklaruje dostawę w 24 godziny (*Paq 24*), między Hiszpanią a kontynentalną Portugalią zazwyczaj 24–48 godzin, a do Ceuty, Melilli, Andory i Gibraltaru na drugi dzień roboczy (z płatną opcją sobotnią *Entrega en sábados* dla *Paq 24* w kontynentalnej Hiszpanii). Usługi terminowe doręczają przed 10:00 (*Paq 10*) lub przed 14:00 (*Paq 14*). W Europie orientacyjny czas przewozu wynosi 2–3 dni robocze dla *Internacional Estándar* oraz 1–2 dni robocze dla *Internacional Express*. Szacowana godzina w śledzeniu jest wyliczana na podstawie wcześniejszych doręczeń w Twoim kodzie pocztowym i może ulec zmianie na trasie.
+Na Półwyspie Iberyjskim Correos Express deklaruje dostawę w 24 godziny (*Paq 24*), między Hiszpanią a kontynentalną Portugalią zazwyczaj 24–48 godzin, a do Ceuty, Melilli, Andory i Gibraltaru na drugi dzień roboczy (z płatną opcją sobotnią *Entrega en sábados* dla *Paq 24* w kontynentalnej Hiszpanii). Usługi terminowe doręczają przed 10:00 (*Paq 10*) lub przed 14:00 (*Paq 14*). W Europie orientacyjny czas przewozu wynosi 2–3 dni robocze dla *Internacional Estándar* oraz 1–2 dni robocze dla *Internacional Express*. Szacowana godzina w śledzeniu jest wyliczana na podstawie wcześniejszych doręczeń w twoim kodzie pocztowym i może ulec zmianie na trasie.
 
 ### Dlaczego widzę status `ENTREGADO EN PUNTO DE CONVENIENCIA`, ale nie mam jeszcze kodu PIN?
 

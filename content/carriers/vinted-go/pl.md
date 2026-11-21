@@ -32,15 +32,15 @@ Nie możesz znaleźć numeru? Zobacz poradnik, [jak znaleźć numer śledzenia p
 
 Anglojęzyczna usługa śledzenia Vinted Go zwraca komunikaty po angielsku wraz ze znacznikiem czasu. Oto skany znane kodowi Peek z systemu Vinted Go — w typowej kolejności od utworzenia etykiety po odbiór lub zwrot:
 
-| Vinted Go wyświetla | Co to oznacza dla Ciebie |
+| Vinted Go wyświetla | Co to oznacza dla ciebie |
 | --- | --- |
 | `Shipment created` | Sprzedający wygenerował etykietę, ale nie przekazał jeszcze paczki do Vinted Go. |
 | `Parcel was dropped off at the locker` | Sprzedający włożył paczkę do automatu (lub nadał ją w punkcie: `Parcel was dropped off at the parcel shop`). |
 | `At sorting center in <town>, <country>` | Przyjęcie w sortowni na trasie; występują też skany `In transit to <town>, <country>` oraz `The parcel is on its way to the locker (<point>)`. |
 | `Parcel redirected to the parcel shop` | Wybrany punkt nie mógł przyjąć paczki — jedzie ona do innego punktu, automatu, magazynu albo sieci partnerskiej (np. `Change: Parcel redirected to Colissimo`). |
 | `Parcel is on the way to <country>` | Przesyłka opuściła własną sieć Vinted Go i jedzie dalej z inną siecią w kraju docelowym (np. Poste Italiane do Włoch). |
-| `Ready to collect at the locker` | Czeka na Ciebie w automacie (albo w punkcie partnerskim: `Ready to collect at the parcel shop`). W punktach Vinted Go masz 7 dni na odbiór. |
-| `Parcel was collected by the recipient` | Ty — lub ktoś znający Twój kod odbioru — odebrałeś paczkę. |
+| `Ready to collect at the locker` | Czeka na ciebie w automacie (albo w punkcie partnerskim: `Ready to collect at the parcel shop`). W punktach Vinted Go masz 7 dni na odbiór. |
+| `Parcel was collected by the recipient` | Ty — lub ktoś znający twój kod odbioru — odebrałeś paczkę. |
 | `Delivered` | Pojawia się w systemie Vinted Go w ciągu sekundy po `Parcel was collected by the recipient` (Peek pomija ten zduplikowany wiersz). |
 | `Missing from locker` | Skrytka w automacie okazała się pusta: zgłoś problem w oknie rozmowy na Vinted. |
 | `Return: Parcel will be returned. Reason: pickup time has expired` | Minął termin odbioru i rusza zwrot do nadawcy (kolejne etapy zwrotu to `Return: At sorting center in <town>, <country>`, `Return ready to collect` oraz `Return delivered`). |
@@ -53,7 +53,7 @@ Zwróć uwagę na potoczne sformułowanie w FAQ Vinted Go: gdy automat nie przyj
 
 **Powiadomienie i odbiór.** Gdy paczka dotrze na miejsce, Vinted Go wysyła e-mail z kodem odbioru na adres przypisany do konta Vinted (czasem także SMS), a status aktualizuje się w rozmowie na Vinted; regulamin Vinted Go przewiduje ponadto ponowne powiadomienie po 3 dniach od dostarczenia paczki do punktu. Przy automacie zeskanuj lub wpisz kod odbioru na ekranie, aby otworzyć skrytkę; w punkcie partnerskim lub sąsiedzkim okaż personelowi kod odbioru lub dokument tożsamości. Godziny otwarcia punktów sprawdzisz na mapie Vinted Go. Jeśli odebrałeś już przesyłkę, a rozmowa na Vinted wciąż nie pokazuje „Doręczono”, możesz wybrać w niej „Oznacz jako odebraną”.
 
-**Ile dni czeka paczka.** W automatach i punktach sieci Vinted Go masz na odbiór **7 dni kalendarzowych** — terminu nie da się przedłużyć ani zatrzymać paczki, gdy ruszy już w drogę powrotną. Nieodebrana przesyłka wraca do punktu nadania sprzedającego, a Vinted automatycznie anuluje zamówienie i zwraca Ci pieniądze.
+**Ile dni czeka paczka.** W automatach i punktach sieci Vinted Go masz na odbiór **7 dni kalendarzowych** — terminu nie da się przedłużyć ani zatrzymać paczki, gdy ruszy już w drogę powrotną. Nieodebrana przesyłka wraca do punktu nadania sprzedającego, a Vinted automatycznie anuluje zamówienie i zwraca ci pieniądze.
 
 **Dostawa pod drzwi i czas przewozu.** We Francji wybrane punkty pozwalają zamówić dowóz do domu kurierem Uber Direct na wybraną godzinę przez link z Vinted (regulamin Vinted Go przewiduje jedną próbę doręczenia z umówionym oknem czasowym i kodem PIN oraz dwie próby bez wybranego okna). W ramach własnej sieci regulamin Vinted Go zakłada dostawę w **3 do 6 dni roboczych** od nadania; Centrum Pomocy Vinted podaje ogólnie do 5 dni roboczych dla przesyłek krajowych i około 7 dni roboczych dla międzynarodowych.
 
@@ -80,11 +80,11 @@ Według stanu sprawdzonego 16 listopada 2026 r. Vinted Go nie udostępnia kupuj�
 
 ## Śledzenie przesyłki Vinted Go w Peek
 
-[Peek](/) odczytuje bezpośrednio śledzenie Vinted Go — bez konta i bez kodu pocztowego: pokazuje każdy skan z dokładną godziną w oryginalnym angielskim brzmieniu Vinted Go (np. `Ready to collect at the locker`), miejscowość każdego centrum sortowania na mapie oraz czytelny polski status główny („Do odbioru”, „Dostarczona”, „Zwrócona nadawcy”). Wskazuje nazwę automatu lub punktu partnerskiego, w którym paczka czeka albo z którego została odebrana, pomija natomiast punkty sąsiedzkie mogące być prywatnym adresem; pełny adres punktu, godziny otwarcia i ostateczny termin odbioru pozostają na stronie Vinted Go, która nie podaje też przewidywanej daty doręczenia. Godziny skanów wyświetlają się w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie przypomina o tym linijka pod historią („Godziny w twojej strefie czasowej: …”).
+[Peek](/) odczytuje bezpośrednio śledzenie Vinted Go — bez konta i bez kodu pocztowego: pokazuje każdy skan z dokładną godziną w oryginalnym angielskim brzmieniu Vinted Go (np. `Ready to collect at the locker`), miejscowość każdego centrum sortowania na mapie oraz czytelny polski status główny („Do odbioru”, „Dostarczona”, „Zwrócona nadawcy”). Wskazuje nazwę automatu lub punktu partnerskiego, w którym paczka czeka albo z którego została odebrana, pomija natomiast punkty sąsiedzkie mogące być prywatnym adresem; pełny adres punktu, godziny otwarcia i ostateczny termin odbioru pozostają na stronie Vinted Go, która nie podaje też przewidywanej daty doręczenia. Godziny skanów wyświetlają się w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacji na iPhonie przypomina o tym linijka pod historią („Godziny w twojej strefie czasowej: …”).
 
 Po numerze zaczynającym się od `VGS` — albo po wklejeniu linku `vintedgo.com/en/tracking/...` — Peek od razu rozpoznaje Vinted Go („Wykryty przewoźnik”). Gdy wpiszesz sam 16-cyfrowy numer z prefiksem `17` lub `18`, Peek odpytuje Vinted Go, [TNT](carrier:tnt) i DHL eCommerce (przy niektórych numerach także innych przewoźników), przypisując przesyłkę do Vinted Go, gdy przewoźnik potwierdzi numer („Vinted Go ma tę przesyłkę.”); kod z `UW` sprawdza w Vinted Go. W innym wypadku naciśnij „Zmień” i wybierz Vinted Go.
 
-Jeśli Vinted Go przekaże paczkę innej sieci pod nowym numerem śledzenia, Peek może śledzić ją dalej u nowego przewoźnika, o ile obsługuje go bezpośrednio; gdy ostatnie 13 znaków 16-znakowego kodu z `UW` tworzy kod paczki Poste Italiane, Peek odpytuje również Poste Italiane i przełącza kartę na „Doręcza: Poste Italiane”, jak tylko włoska poczta zapisze najnowszy skan. Dopóki przesyłka idzie w sieci Vinted Go, Peek sprawdza status nawet co 10 minut, a po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) — raz na godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z Vinted ani nie zgłosi reklamacji.
+Jeśli Vinted Go przekaże paczkę innej sieci pod nowym numerem śledzenia, Peek może śledzić ją dalej u nowego przewoźnika, o ile obsługuje go bezpośrednio; gdy ostatnie 13 znaków 16-znakowego kodu z `UW` tworzy kod paczki Poste Italiane, Peek odpytuje również Poste Italiane i przełącza kartę na „Doręcza: Poste Italiane”, jak tylko włoska poczta zapisze najnowszy skan. Dopóki przesyłka idzie w sieci Vinted Go, Peek sprawdza status nawet co 10 minut, a po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) — raz na godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Vinted ani nie zgłosi reklamacji.
 
 ## Najczęstsze pytania o śledzenie Vinted Go
 

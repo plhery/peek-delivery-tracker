@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-10-27
 ---
 
-Uniwersalny tracker paczek to strona albo aplikacja, w której śledzisz przesyłki wszystkich firm w jednym miejscu: wklejasz numer od dowolnego przewoźnika, a tracker sam ustala, czyj to numer, pobiera skany i trzyma wszystkie Twoje paczki na jednej liście. Pokazuje tylko te skany, które zapisał przewoźnik, więc nigdy nie wie więcej niż on. Trackery różnią się tym, czego chcą od Ciebie w zamian: konta, dostępu do skrzynki mailowej, abonamentu za powiadomienia albo cierpliwości do reklam.
+Uniwersalny tracker paczek to strona albo aplikacja, w której śledzisz przesyłki wszystkich firm w jednym miejscu: wklejasz numer od dowolnego przewoźnika, a tracker sam ustala, czyj to numer, pobiera skany i trzyma wszystkie twoje paczki na jednej liście. Pokazuje tylko te skany, które zapisał przewoźnik, więc nigdy nie wie więcej niż on. Trackery różnią się tym, czego chcą od ciebie w zamian: konta, dostępu do skrzynki mailowej, abonamentu za powiadomienia albo cierpliwości do reklam.
 
 ## Czy da się śledzić przesyłki wszystkich firm w jednym miejscu?
 
@@ -18,17 +18,17 @@ Tak, i może nawet już masz coś takiego: oprócz uniwersalnych trackerów pacz
 | Wklejasz numer albo link | Ten numer | Każdy tracker |
 | Przesyłasz dalej jednego e-maila | Tego e-maila | ParcelsApp, Shop, Deliveries |
 | Podłączasz skrzynkę mailową | Twoją skrzynkę, przefiltrowaną według reguł serwisu | Shop, AfterShip |
-| Przewoźnik albo sklep sam przypisuje Ci paczkę | Twój numer telefonu, e-mail albo konto w sklepie | DPD Mobile, Pocztex Mobile, Allegro; zamówienia ze sklepów na Shopify w Shop |
+| Przewoźnik albo sklep sam przypisuje ci paczkę | Twój numer telefonu, e-mail albo konto w sklepie | DPD Mobile, Pocztex Mobile, Allegro; zamówienia ze sklepów na Shopify w Shop |
 
-## Jak zobaczyć wszystkie paczki, które do Ciebie idą?
+## Jak zobaczyć wszystkie paczki, które do ciebie idą?
 
-Zacznij od darmowych aplikacji, które same przypisują Ci paczki, także gdy [nie masz numeru przesyłki](guide:find-tracking-number):
+Zacznij od darmowych aplikacji, które same przypisują ci paczki, także gdy [nie masz numeru przesyłki](guide:find-tracking-number):
 
 | Aplikacja | Co pokazuje | Powiadomienia |
 | --- | --- | --- |
-| DPD Mobile | Paczki w sieci [DPD Polska](carrier:dpd-pl) przypisane do numeru telefonu lub adresu e-mail z Twojego konta w aplikacji. Te dane muszą się zgadzać z listem przewozowym | W aplikacji i e-mailem, na bieżąco o statusie doręczenia |
+| DPD Mobile | Paczki w sieci [DPD Polska](carrier:dpd-pl) przypisane do numeru telefonu lub adresu e-mail z twojego konta w aplikacji. Te dane muszą się zgadzać z listem przewozowym | W aplikacji i e-mailem, na bieżąco o statusie doręczenia |
 | Pocztex Mobile ([Poczta Polska](carrier:poczta-polska)) | Wszystkie przesyłki rejestrowane, „do których został przypisany Twój numer telefonu” | O zmianach statusu przesyłek |
-| Allegro | Zakładka „Moje zakupy” albo „Kupione” na koncie: numery przesyłek z Twoich zakupów, które przekazał przewoźnik albo sprzedający, a przy metodach dostawy ze śledzeniem także status | E-mailem, gdy numer pojawi się w zakupach: z nazwą przewoźnika i linkiem do śledzenia |
+| Allegro | Zakładka „Moje zakupy” albo „Kupione” na koncie: numery przesyłek z twoich zakupów, które przekazał przewoźnik albo sprzedający, a przy metodach dostawy ze śledzeniem także status | E-mailem, gdy numer pojawi się w zakupach: z nazwą przewoźnika i linkiem do śledzenia |
 
 Inne możliwości i ich ograniczenia:
 
@@ -47,7 +47,7 @@ Nie ma jednej najlepszej dla wszystkich: to zależy od firm kurierskich, z któr
 | Reklamy | App Store: „Zawiera: Reklamy” pod „Wiek”. Google Play: „Zawiera reklamy” pod nazwą aplikacji | Obie etykiety deklaruje sam twórca aplikacji |
 | Powiadomienia | Opis aplikacji albo strony pomocy | Parcel daje powiadomienia push tylko abonentom premium |
 | Twoja skrzynka | „Połącz Gmaila lub Outlooka” albo „prześlij maila dalej” | Shop przegląda e-maile z ostatnich 30 dni, a potem na bieżąco sprawdza nowe |
-| Twoje dane | „Prywatność w aplikacji” w App Store, „Bezpieczeństwo danych” w Google Play, polityka prywatności | App Store dopisuje: „Informacje te nie zostały zweryfikowane przez Apple”. Każdy tracker przekazuje Twój numer dalej |
+| Twoje dane | „Prywatność w aplikacji” w App Store, „Bezpieczeństwo danych” w Google Play, polityka prywatności | App Store dopisuje: „Informacje te nie zostały zweryfikowane przez Apple”. Każdy tracker przekazuje twój numer dalej |
 | Jak długo przechowuje dane | Polityka prywatności | Deliveries trzyma przesłane e-maile do dziesięciu dni. Przy ParcelsApp na Androida Google Play podaje: „Nie można usunąć danych” |
 | Język | Pole „Języki” w App Store | Polski podają Parcel, Packages i Shop, a AfterShip i Deliveries nie. 17TRACK podaje tam tylko angielski, ale w opisie obiecuje ponad 30 języków, a jego strona ma wersję polską |
 | Dostawca | Sekcja „Dostawca” w polskim App Store | Czy twórca deklaruje, że jest przedsiębiorcą. AfterShip tego nie robi, więc App Store uprzedza, że do umów z nim nie mają zastosowania prawa konsumenta obowiązujące w EOG |
@@ -75,7 +75,7 @@ Większość trackerów działa w pięciu krokach:
 :::steps
 - Wklejasz | Numer przesyłki, link od przewoźnika albo e-maila o wysyłce. Link jest najpewniejszy: wskazuje przewoźnika.
 - Czyta numer | Litery, długość i cyfra kontrolna zawężają wybór. `1Z999AA10123456784` zaczyna się od `1Z` [UPS-a](carrier:ups), a `RR000000005CH` ma 13 znaków w układzie, którego używają poczty krajowe.
-- Typuje przewoźnika | Niektóre układy pasują do kilku firm: numer z samych 14 cyfr może należeć m.in. do DPD, SEUR, BRT albo niemieckiego Hermesa. Tracker pyta kilku przewoźników albo daje Ci wybrać.
+- Typuje przewoźnika | Niektóre układy pasują do kilku firm: numer z samych 14 cyfr może należeć m.in. do DPD, SEUR, BRT albo niemieckiego Hermesa. Tracker pyta kilku przewoźników albo daje ci wybrać.
 - Pobiera skany | Od przewoźnika albo z innego trackera, a potem układa je w jedną historię.
 - Sprawdza ponownie | Robi to w stałych odstępach i daje znać o każdej nowości.
 :::
@@ -103,7 +103,7 @@ Paczki z zagranicy często zmieniają przewoźnika, a lokalna firma, jak czytamy
 - warehouse | Sortownia eksportowa | Skany pod numerem A
 - plane | Lot | Przekracza granicę z numerem A
 - handover | Przewoźnik w Polsce | Przejmuje paczkę i może nadać jej numer B
-- home | U Ciebie | Ostatnie skany bywają tylko pod numerem B
+- home | U ciebie | Ostatnie skany bywają tylko pod numerem B
 :::
 
 Trackery, które wiążą ze sobą numery (na przykład ParcelsApp), połączą A z B, jeśli B pojawi się w danych pierwszego przewoźnika. Jeśli się nie pojawi, poszukaj nowego numeru w pełnej historii przesyłki i sprawdź go na stronie firmy, która doręcza w Polsce, na przykład Poczty Polskiej, InPost albo DPD. Gdzie szukać numeru B przy paczkach z Chin, podpowiadają strony o [śledzeniu Cainiao](carrier:cainiao) i [YunExpress](carrier:yunexpress). O zamówieniach z chińskich platform piszemy w poradniku [śledzenie paczki z Chin](guide:tracking-from-china).
@@ -117,7 +117,7 @@ Niczego, czego przewoźnik nie opublikował. ParcelsApp mówi to wprost: nie stw
 
 **Paczki Allegro Delivery śledzisz pod numerem Allegro.** Numer od `AD` nadaje Allegro także wtedy, gdy paczkę wiezie partner, na przykład ORLEN Paczka, więc na stronie ORLEN Paczki jej nie znajdziesz. Jeśli taki numer nic nie pokazuje w trackerze, zajrzyj do zakupów na swoim koncie Allegro.
 
-Tracker nie załatwi też niczego za Ciebie: żeby zmienić dostawę, zapłacić należność albo zgłosić zaginięcie paczki, ParcelsApp odsyła na stronę przewoźnika. Jeśli status od kilku dni stoi w miejscu, przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Jeśli status brzmi „doręczona”, a paczki nie ma, zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+Tracker nie załatwi też niczego za ciebie: żeby zmienić dostawę, zapłacić należność albo zgłosić zaginięcie paczki, ParcelsApp odsyła na stronę przewoźnika. Jeśli status od kilku dni stoi w miejscu, przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Jeśli status brzmi „doręczona”, a paczki nie ma, zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 ## Jak sprawdzić, czy 17TRACK i ParcelsApp są bezpieczne?
 

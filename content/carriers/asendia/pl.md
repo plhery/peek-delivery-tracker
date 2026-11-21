@@ -30,7 +30,7 @@ Wiele paczek obsługiwanych przez Asendię od początku podróżuje pod numerem 
 
 System A1 firmy Asendia USA podaje szczegółowe skany wyłącznie po angielsku (oraz komunikaty lokalnego doręczyciela w jego własnym brzmieniu), a europejski portal `track.asendia.com` pokazuje główne etapy podróży:
 
-| Komunikat Asendia | Co oznacza dla Twojej paczki |
+| Komunikat Asendia | Co oznacza dla twojej paczki |
 | --- | --- |
 | `Shipment Information Received` / `Information Received` | Sklep przesłał dane elektroniczne lub utworzył etykietę (`Label created`); Asendia nie ma jeszcze fizycznie paczki. |
 | `Manifest to Asendia created` | Przesyłka wpisana na listę odbioru u sprzedawcy, przed przyjęciem w sortowni. |
@@ -76,7 +76,7 @@ Peek najpierw pyta amerykański system A1, a gdy ten nie odpowie, otwiera w prze
 
 Gdy odpowiada A1, widzisz status, angielskie skany na mapie (miasto, region i kraj), wagę, kraj docelowy oraz przewoźnika doręczającego wraz z jego numerem — bez przewidywanej daty dostawy oraz z pominięciem adresów ulic, kodów pocztowych, referencji zamówienia i skanów bez strefy czasowej. Jeśli Peek obsługuje rozpoznanego partnera końcowego (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost) lub USPS), karta paczki pokazuje „Doręcza: …” i może przejąć dalsze śledzenie (nie dla każdej paczki; po przejściu na USPS odpytywanie odbywa się do co 30 minut).
 
-Peek sprawdza zmiany **do co 10 minut** — a w dniu wydania do doręczenia od 6:00 czasu lokalnego **do co 2 minuty** (**do co 5 minut** podczas odczytu `track.asendia.com` oraz **do co 15 minut** przez serwisy uniwersalne) — z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach bez ruchu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Peek nie kontaktuje się w Twoim imieniu z Asendią ani ze sklepem.
+Peek sprawdza zmiany **do co 10 minut** — a w dniu wydania do doręczenia od 6:00 czasu lokalnego **do co 2 minuty** (**do co 5 minut** podczas odczytu `track.asendia.com` oraz **do co 15 minut** przez serwisy uniwersalne) — z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach bez ruchu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie co godzinę. Peek nie kontaktuje się w twoim imieniu z Asendią ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie Asendia
 

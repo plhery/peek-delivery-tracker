@@ -6,7 +6,7 @@ published: 2026-10-27
 updated: 2026-11-17
 ---
 
-TNT przewozi paczki, dokumenty i palety za granicę, a w Polsce także przesyłki krajowe. Dziś należy do FedEx, ale przesyłki TNT nadal śledzisz na tnt.com. Potrzebny Ci 9-cyfrowy numer przesyłki, nazywany też numerem listu przewozowego. Wpisz go na stronie [„Śledź przesyłkę” na tnt.com](https://www.tnt.com/express/pl_pl/site/shipping-tools/tracking.html) albo wklej w pole powyżej. Na tnt.com przesyłkę znajdziesz też po numerze referencyjnym.
+TNT przewozi paczki, dokumenty i palety za granicę, a w Polsce także przesyłki krajowe. Dziś należy do FedEx, ale przesyłki TNT nadal śledzisz na tnt.com. Potrzebny ci 9-cyfrowy numer przesyłki, nazywany też numerem listu przewozowego. Wpisz go na stronie [„Śledź przesyłkę” na tnt.com](https://www.tnt.com/express/pl_pl/site/shipping-tools/tracking.html) albo wklej w pole powyżej. Na tnt.com przesyłkę znajdziesz też po numerze referencyjnym.
 
 ## Numer przesyłki TNT: gdzie go znaleźć i ile ma cyfr
 
@@ -17,13 +17,13 @@ TNT przewozi paczki, dokumenty i palety za granicę, a w Polsce także przesyłk
 | Numer referencyjny | Dodatkowy numer nadany przy zamawianiu wysyłki. Sprawdzisz go tylko na tnt.com. | – |
 | 3 litery i 9 cyfr | Przesyłka krajowa w Australii. Śledzi się ją na stronie śledzenia TNT Australia, nie na tnt.com. | `XYZ000000000` |
 
-TNT podaje, że numer przesyłki jest w e-mailu potwierdzającym wysyłkę i w manifeście, pod kodem kreskowym, a na fakturze TNT po lewej stronie, około 3 cm pod numerem klienta. Jeśli to Ty czekasz na paczkę, poproś o numer sklep albo nadawcę. Na tnt.com sprawdzisz kilka przesyłek naraz: oddziel numery przecinkami. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
+TNT podaje, że numer przesyłki jest w e-mailu potwierdzającym wysyłkę i w manifeście, pod kodem kreskowym, a na fakturze TNT po lewej stronie, około 3 cm pod numerem klienta. Jeśli to ty czekasz na paczkę, poproś o numer sklep albo nadawcę. Na tnt.com sprawdzisz kilka przesyłek naraz: oddziel numery przecinkami. Więcej w poradniku [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
 ## Statusy przesyłki TNT: co znaczą
 
 Peek pobiera śledzenie z tnt.com w wersji angielskiej. W historii przesyłki widzisz więc wpisy TNT po angielsku (pierwsza kolumna), a etap przesyłki Peek nazywa po polsku (druga kolumna). Na tnt.com treść wpisów zależy od wersji językowej strony, więc na polskiej może brzmieć inaczej. Najczęstsze wpisy, mniej więcej w kolejności, w jakiej się pojawiają:
 
-| W Peek (tnt.com po angielsku) | Etap w Peek | Co to znaczy dla Ciebie |
+| W Peek (tnt.com po angielsku) | Etap w Peek | Co to znaczy dla ciebie |
 | --- | --- | --- |
 | `Shipment collected from collection address` | Przyjęta przez przewoźnika | Kurier TNT odebrał przesyłkę od nadawcy. |
 | `Shipment now at the depot nearest to collection address` | W transporcie | Jest w oddziale TNT najbliżej nadawcy. |
@@ -33,31 +33,31 @@ Peek pobiera śledzenie z tnt.com w wersji angielskiej. W historii przesyłki wi
 | `Shipment being processed at TNT location.` | W transporcie | Jest obsługiwana w placówce TNT. |
 | `Customs has released the goods` | W transporcie | Urząd celny zwolnił towar. |
 | `Shipment now at depot nearest to delivery address` | W transporcie | Jest w oddziale TNT najbliżej adresu doręczenia. |
-| `Shipment is out for delivery.` | W doręczeniu | Kurier wiezie ją dziś do Ciebie. |
-| `Receiver not home. We've left them a message and we're waiting for them to get in contact` | Próba doręczenia | Kurier Cię nie zastał, zostawił wiadomość i TNT czeka, aż się odezwiesz. |
+| `Shipment is out for delivery.` | W doręczeniu | Kurier wiezie ją dziś do ciebie. |
+| `Receiver not home. We've left them a message and we're waiting for them to get in contact` | Próba doręczenia | Kurier cię nie zastał, zostawił wiadomość i TNT czeka, aż się odezwiesz. |
 | `Shipment delivered in good condition` | Dostarczona | Doręczona w dobrym stanie. |
 | `Shipment partially delivered. Recovery actions underway` | Zgłoszono problem | Dotarła tylko część przesyłki, a TNT szuka reszty. |
 | `Delay due to routing error. We're working hard to deliver on time.` | Zgłoszono problem | Pojechała złą trasą. TNT stara się doręczyć ją na czas. |
 | `Delay due to routing error. Recovery actions underway` | Zgłoszono problem | Pojechała złą trasą, a TNT kieruje ją z powrotem na właściwą. |
 | `Returned to sender as agreed` | Zwrócona nadawcy | Wraca do nadawcy zgodnie z ustaleniami. |
 
-Na tnt.com widzisz też, kiedy TNT spodziewa się doręczenia, a po doręczeniu, kto pokwitował odbiór. Jeśli status jest dla Ciebie niejasny, strona śledzenia odsyła do Działu Obsługi Klienta TNT.
+Na tnt.com widzisz też, kiedy TNT spodziewa się doręczenia, a po doręczeniu, kto pokwitował odbiór. Jeśli status jest dla ciebie niejasny, strona śledzenia odsyła do Działu Obsługi Klienta TNT.
 
 ## Doręczenie TNT: awizo, ponowne doręczenie i odbiór z oddziału
 
 Część zasad poniżej pochodzi z „Warunków Przewozu TNT w Europie”. Obejmują one przesyłki z Europy, także te do Polski. Nie dotyczą przesyłek krajowych, które mają osobne warunki, ani przesyłek spoza Europy: te podlegają warunkom oddziału TNT, który je przyjął.
 
-Według warunków TNT może wydać przesyłkę Tobie albo osobie, co do której można przypuszczać, że odbierze ją w Twoim imieniu. Odbiór kwitujesz podpisem, który służy jako dowód doręczenia. FAQ TNT mówi, że TNT nie doręcza do skrytek pocztowych i potrzebuje pełnego adresu, z ulicą i numerem budynku. Warunki dopuszczają jednak skrytki w wybranych lokalizacjach międzynarodowych, jeśli nadawca poda TNT Twój numer telefonu.
+Według warunków TNT może wydać przesyłkę tobie albo osobie, co do której można przypuszczać, że odbierze ją w twoim imieniu. Odbiór kwitujesz podpisem, który służy jako dowód doręczenia. FAQ TNT mówi, że TNT nie doręcza do skrytek pocztowych i potrzebuje pełnego adresu, z ulicą i numerem budynku. Warunki dopuszczają jednak skrytki w wybranych lokalizacjach międzynarodowych, jeśli nadawca poda TNT twój numer telefonu.
 
-**Awizo.** Jeśli kurier Cię nie zastanie, może zostawić kartkę z informacją „Nie zastaliśmy Cię podczas próby doręczenia przesyłki”. FAQ TNT radzi skorzystać wtedy z Usługi Ponownego doręczenia: przełożyć doręczenie albo umówić odbiór paczki z oddziału TNT. Słownik A-Z TNT podaje do tego numer Działu Obsługi Klienta: 801 31 00 00. Nie masz kartki albo kurier jeszcze nie próbował doręczenia? Skontaktuj się z TNT i podaj numer przesyłki, adres doręczenia i datę, kiedy chcesz ją dostać. Ponownie TNT doręcza tylko od poniedziałku do piątku. Więcej w poradniku [awizo: jak odebrać paczkę po nieudanej próbie doręczenia](guide:missed-delivery).
+**Awizo.** Jeśli kurier cię nie zastanie, może zostawić kartkę z informacją „Nie zastaliśmy Cię podczas próby doręczenia przesyłki”. FAQ TNT radzi skorzystać wtedy z Usługi Ponownego doręczenia: przełożyć doręczenie albo umówić odbiór paczki z oddziału TNT. Słownik A-Z TNT podaje do tego numer Działu Obsługi Klienta: 801 31 00 00. Nie masz kartki albo kurier jeszcze nie próbował doręczenia? Skontaktuj się z TNT i podaj numer przesyłki, adres doręczenia i datę, kiedy chcesz ją dostać. Ponownie TNT doręcza tylko od poniedziałku do piątku. Więcej w poradniku [awizo: jak odebrać paczkę po nieudanej próbie doręczenia](guide:missed-delivery).
 
-**Gdy doręczenie się nie uda.** Jeśli pierwsza próba doręczenia za podpisem na adres prywatny się nie powiedzie, TNT może spróbować ponownie, wstrzymać przesyłkę do dalszych instrukcji Twoich lub nadawcy albo dostarczyć ją w wybrane przez siebie miejsce. Gdy przesyłka okaże się niedoręczalna, TNT może próbować ustalić z nadawcą zwrot. Jeśli nie zdoła go powiadomić w ciągu pięciu dni roboczych albo nadawca nie da dalszych instrukcji, może przesyłkę zwrócić, oddać do magazynu albo zutylizować zgodnie z miejscowym prawem.
+**Gdy doręczenie się nie uda.** Jeśli pierwsza próba doręczenia za podpisem na adres prywatny się nie powiedzie, TNT może spróbować ponownie, wstrzymać przesyłkę do dalszych instrukcji twoich lub nadawcy albo dostarczyć ją w wybrane przez siebie miejsce. Gdy przesyłka okaże się niedoręczalna, TNT może próbować ustalić z nadawcą zwrot. Jeśli nie zdoła go powiadomić w ciągu pięciu dni roboczych albo nadawca nie da dalszych instrukcji, może przesyłkę zwrócić, oddać do magazynu albo zutylizować zgodnie z miejscowym prawem.
 
 ## Cło i VAT przy przesyłkach TNT spoza UE
 
-Przesyłki z Europy spoza UE, na przykład z Wielkiej Brytanii czy Szwajcarii, podlegają Warunkom Przewozu. Gdy prawo na to pozwala, TNT sama odprawia je jako przedstawiciel nadawcy lub odbiorcy. Może zapłacić cło i podatki za płatnika, doliczyć za to opłatę i zażądać zapłaty, zanim wyda Ci przesyłkę. Wobec TNT ostatecznie odpowiada za nie nadawca: jeśli odmówisz zapłaty, TNT może zwrócić się do niego, a gdy i on odmówi, przesyłka może do niego wrócić, trafić do magazynu albo zostać uznana za niedoręczalną. Płacisz na przykład gotówką, kartą kredytową albo przekazem pieniężnym; przedpłat na poczet cła TNT nie przyjmuje. Niedoręczalna może być też przesyłka, do której nie dostarczysz w czasie wyznaczonym przez TNT dokumentów żądanych przez urząd celny.
+Przesyłki z Europy spoza UE, na przykład z Wielkiej Brytanii czy Szwajcarii, podlegają Warunkom Przewozu. Gdy prawo na to pozwala, TNT sama odprawia je jako przedstawiciel nadawcy lub odbiorcy. Może zapłacić cło i podatki za płatnika, doliczyć za to opłatę i zażądać zapłaty, zanim wyda ci przesyłkę. Wobec TNT ostatecznie odpowiada za nie nadawca: jeśli odmówisz zapłaty, TNT może zwrócić się do niego, a gdy i on odmówi, przesyłka może do niego wrócić, trafić do magazynu albo zostać uznana za niedoręczalną. Płacisz na przykład gotówką, kartą kredytową albo przekazem pieniężnym; przedpłat na poczet cła TNT nie przyjmuje. Niedoręczalna może być też przesyłka, do której nie dostarczysz w czasie wyznaczonym przez TNT dokumentów żądanych przez urząd celny.
 
-**Opłata TNT.** Za zapłacenie należności w Twoim imieniu TNT pobiera od płatnika „Opłatę za zabezpieczenie należności celnych”. Strona „Dopłaty” podaje, że od 20 lipca 2026 r. wynosi ona 2,5% cła i podatków, ale nie mniej niż 15 euro, i zastępuje dawne progi. Cennik TNT na 2026 rok wciąż podaje te progi w złotych, na przykład 30%, co najmniej 51 zł, przy należnościach do 212 zł.
+**Opłata TNT.** Za zapłacenie należności w twoim imieniu TNT pobiera od płatnika „Opłatę za zabezpieczenie należności celnych”. Strona „Dopłaty” podaje, że od 20 lipca 2026 r. wynosi ona 2,5% cła i podatków, ale nie mniej niż 15 euro, i zastępuje dawne progi. Cennik TNT na 2026 rok wciąż podaje te progi w złotych, na przykład 30%, co najmniej 51 zł, przy należnościach do 212 zł.
 
 **Oświadczenie importera.** Dla osób prywatnych TNT ma formularz „Oświadczenie importera” (w „Pomocnych materiałach”: „Upoważnienie do odpraw celnych (PL)”). Podajesz w nim wartość towaru według dowodu zapłaty, opisujesz każdą pozycję z faktury i zobowiązujesz się zapłacić należności celno-podatkowe. Liczą się do nich też koszty transportu: jeśli nie ma ich na fakturze, TNT przyjmie wartość z systemu FedEx.
 
@@ -91,9 +91,9 @@ Według polskich stron TNT, stan na 27 października 2026:
 
 Wklej 9-cyfrowy numer. Jeśli jego cyfra kontrolna się zgadza, [Peek](/) pyta o niego TNT, a gdy numer przechodzi też kontrolę TForce Freight i XPO, również te firmy. Jeśli TNT zna przesyłkę, zobaczysz komunikat „TNT ma tę przesyłkę.” Gdy cyfra kontrolna się nie zgadza, wklej numer mimo to: Peek śledzi ponad 4500 przewoźników. Jeśli TNT się nie pojawi, wybierz go przyciskiem „Zmień”, a przy dodanej już przesyłce przez „Zmień przewoźnika”. Numer z `GE` na początku, 9 cyframi i `WW` na końcu Peek od razu przypisuje TNT, jeśli cyfra kontrolna się zgadza. Możesz też wkleić link do śledzenia z tnt.com, także z polskiej strony (z `shipping-tools/tracking.html?cons=` i numerem): Peek odczyta z niego numer. Numery 8-cyfrowe i numer referencyjny sprawdzisz tylko na tnt.com. Przesyłki krajowe TNT w Australii, z 3 literami i 9 cyframi, Peek śledzi jako osobnego przewoźnika, TNT Australia, na jego własnej stronie śledzenia: status, każdy skan z jego oddziałem i przewidywaną datę doręczenia. Ten sam format mają numery innych przewoźników, więc Peek nie przypisuje go TNT Australia po samym formacie: pyta TNT Australia razem z tymi przewoźnikami i gdy TNT Australia zna numer, pokazuje „TNT Australia ma tę przesyłkę.” Jeśli nie, wybierz go przyciskiem „Zmień”, a przy dodanej już przesyłce przez „Zmień przewoźnika”. Link ze strony śledzenia TNT Australia z `con=` i numerem Peek przypisuje za to TNT Australia od razu.
 
-Peek pokazuje status, historię z miastem i krajem każdego skanu, kraj docelowy i przewidywaną datę doręczenia, dopóki TNT ją podaje. Godziny skanów widzisz w strefie czasowej Twojego urządzenia. Numer referencyjny i podpis zostają na tnt.com. Ponieważ TNT używa numerów ponownie, Peek wybiera przesyłkę z najnowszym skanem: sprawdź, czy trasa się zgadza.
+Peek pokazuje status, historię z miastem i krajem każdego skanu, kraj docelowy i przewidywaną datę doręczenia, dopóki TNT ją podaje. Godziny skanów widzisz w strefie czasowej twojego urządzenia. Numer referencyjny i podpis zostają na tnt.com. Ponieważ TNT używa numerów ponownie, Peek wybiera przesyłkę z najnowszym skanem: sprawdź, czy trasa się zgadza.
 
-Peek sprawdza przesyłkę nawet co 10 minut, a gdy jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie TNT; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Peek nie zadzwoni za Ciebie do TNT ani do nadawcy, nie zapłaci cła i nie zmieni doręczenia.
+Peek sprawdza przesyłkę nawet co 10 minut, a gdy jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie TNT; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Peek nie zadzwoni za ciebie do TNT ani do nadawcy, nie zapłaci cła i nie zmieni doręczenia.
 
 ## Pytania o śledzenie przesyłki TNT
 

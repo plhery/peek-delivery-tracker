@@ -2026,7 +2026,7 @@ export const GUIDE_LINKS: Record<GuideLanguage, readonly GuideLink[]> = {
     {
       "id": "parcel-notifications",
       "slug": "powiadomienia-o-dostawie-przesylek",
-      "title": "Powiadomienia o dostawie przesyłek: wybierz, co mówi Ci Peek"
+      "title": "Powiadomienia o dostawie przesyłek: wybierz, co mówi ci Peek"
     },
     {
       "id": "iphone-app",

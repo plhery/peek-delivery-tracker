@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-14
 ---
 
-Nieodebrana paczka z automatu, punktu albo poczty wraca do nadawcy, gdy minie ostatni dzień odbioru. Najdłużej czeka na poczcie (przesyłka polecona Poczty Polskiej 14 dni od dnia po pierwszym awizo), najkrócej w automacie: w Allegro One Box 2 dni kalendarzowe. Liczy się termin z Twojego SMS-a, e-maila albo awizo. Potem to sklep decyduje, czy odda Ci pieniądze, czy wyśle paczkę jeszcze raz.
+Nieodebrana paczka z automatu, punktu albo poczty wraca do nadawcy, gdy minie ostatni dzień odbioru. Najdłużej czeka na poczcie (przesyłka polecona Poczty Polskiej 14 dni od dnia po pierwszym awizo), najkrócej w automacie: w Allegro One Box 2 dni kalendarzowe. Liczy się termin z twojego SMS-a, e-maila albo awizo. Potem to sklep decyduje, czy odda ci pieniądze, czy wyśle paczkę jeszcze raz.
 
 Kod nie przyszedł albo automat był pełny? Zobacz [Paczkomat i automat paczkowy](guide:parcel-lockers).
 
@@ -19,7 +19,7 @@ Wraca do nadawcy. Zwykle odwozi ją ta sama firma, która ją przywiozła.
 - home | Powiadomienie | SMS, e-mail albo awizo z ostatnim dniem odbioru.
 - locker | Czeka | Na poczcie, w punkcie odbioru albo w automacie.
 - truck | Wraca | Po ostatnim dniu jedzie z powrotem do nadawcy.
-- shop | Nadawca | Decyduje, czy oddać Ci pieniądze, czy wysłać paczkę jeszcze raz.
+- shop | Nadawca | Decyduje, czy oddać ci pieniądze, czy wysłać paczkę jeszcze raz.
 :::
 
 - **[InPost](carrier:inpost):** gdy paczka wraca, Peek pokazuje ją z etapem „Zwrócona nadawcy” (statusy InPost są po polsku, gdy korzystasz z Peek po polsku).
@@ -27,7 +27,7 @@ Wraca do nadawcy. Zwykle odwozi ją ta sama firma, która ją przywiozła.
 - **[DPD](carrier:dpd-pl)** po terminie odsyła paczkę z punktu albo automatu DPD Pickup do nadawcy. W Peek zobaczysz wtedy `Zwrot przesyłki` (albo `Parcel return`, gdy Peek pobiera historię tej paczki po angielsku), z etapem „Zwrócona nadawcy”.
 - **[Allegro One](carrier:allegro-one)** i inni przewoźnicy z programu Allegro Delivery odsyłają paczkę do sprzedającego.
 
-Przewoźnik nie wyśle Ci jej drugi raz sam z siebie: o ponownej wysyłce albo zwrocie pieniędzy decyduje sklep. Gdy paczka jest już w drodze powrotnej, poradnik [paczka wraca do nadawcy](guide:returned-to-sender) opisuje tę drogę i to, o co poprosić sprzedawcę.
+Przewoźnik nie wyśle ci jej drugi raz sam z siebie: o ponownej wysyłce albo zwrocie pieniędzy decyduje sklep. Gdy paczka jest już w drodze powrotnej, poradnik [paczka wraca do nadawcy](guide:returned-to-sender) opisuje tę drogę i to, o co poprosić sprzedawcę.
 
 ## Jak długo czeka paczka w paczkomacie i na poczcie?
 
@@ -49,7 +49,7 @@ Paczka InPost może też czekać w dwóch miejscach po kolei. Status mówiący o
 
 Potocznie każdy automat to „paczkomat”, ale terminy zależą od firmy: Paczkomat InPost to co innego niż automat DPD Pickup czy ORLEN Paczka.
 
-### Dlaczego Twój termin może być inny niż w tabeli
+### Dlaczego twój termin może być inny niż w tabeli
 
 Firmy liczą różnie: Pocztex AUTOMAT w godzinach, DPD w dniach roboczych, Poczta Polska w dniach. Jeśli automat Pocztex stoi w budynku zamkniętym w dni ustawowo wolne od pracy, tych dni się nie liczy. Termin z powiadomienia jest ważniejszy od każdej tabeli, także tej.
 
@@ -57,9 +57,9 @@ Firmy liczą różnie: Pocztex AUTOMAT w godzinach, DPD w dniach roboczych, Pocz
 
 Albo przy zamówieniu wybrano automat lub punkt odbioru, albo kurier czy listonosz nie zastał nikogo w domu. Poczta Polska może też od razu zostawić awizo, bez próby doręczenia do drzwi, przy paczce ekonomicznej cięższej niż 2 kg i przy przesyłce z należnościami celnymi, o ile nie jedzie w obrębie jednej miejscowości.
 
-U InPost Peek pokaże wtedy status o paczce gotowej do odbioru, a u DPD `Przyjęcie przesyłki do punktu Pickup` (albo `Parcel collected by pickup point`), w obu przypadkach z etapem „Do odbioru”. Co znaczą poszczególne statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Awizo, kod odbioru i to, kto może odebrać paczkę za Ciebie, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery). Jeśli trzeba coś dopłacić, poradnik [o cle i opłatach przy odbiorze](guide:customs) wyjaśnia, kto i za co chce pieniędzy.
+U InPost Peek pokaże wtedy status o paczce gotowej do odbioru, a u DPD `Przyjęcie przesyłki do punktu Pickup` (albo `Parcel collected by pickup point`), w obu przypadkach z etapem „Do odbioru”. Co znaczą poszczególne statusy, wyjaśnia poradnik [statusy przesyłek](guide:tracking-statuses). Awizo, kod odbioru i to, kto może odebrać paczkę za ciebie, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery). Jeśli trzeba coś dopłacić, poradnik [o cle i opłatach przy odbiorze](guide:customs) wyjaśnia, kto i za co chce pieniędzy.
 
-[Peek](/) może wysłać Ci powiadomienie, gdy śledzenie pokaże, że paczka czeka na odbiór, i drugie, gdy paczka wraca do nadawcy: ustawienie „Ważne etapy” zgłasza jedno i drugie, „Tylko doręczenie” żadnego z nich. Terminu nie przedłuży: to może zrobić tylko przewoźnik albo sklep.
+[Peek](/) może wysłać ci powiadomienie, gdy śledzenie pokaże, że paczka czeka na odbiór, i drugie, gdy paczka wraca do nadawcy: ustawienie „Ważne etapy” zgłasza jedno i drugie, „Tylko doręczenie” żadnego z nich. Terminu nie przedłuży: to może zrobić tylko przewoźnik albo sklep.
 
 ## Jak przedłużyć termin odbioru paczki?
 
@@ -67,18 +67,18 @@ Rzadko się da. DPD pisze wprost, że czasu w punkcie i automacie DPD Pickup nie
 
 Inaczej jest na poczcie: Poczta Polska przechowa przesyłkę poleconą albo paczkę pocztową do 14 dni po terminie, jeśli złożysz [zlecenie przechowywania](https://eformularze.poczta-polska.pl/zlecenie-przechowywania/). Przez internet zlecenie jest bezpłatne, na poczcie kosztuje 6,00 zł, a samo przechowanie paczki pocztowej 2,00 zł za każdy dzień. Zlecenie obowiązuje od dnia następnego po jego przyjęciu, więc nie zostawiaj go na ostatni dzień odbioru. Nie dotyczy to Pocztex, PACZKI24, PACZKI48 ani Paczki+, a placówka może odmówić, gdy brakuje jej miejsca.
 
-Czy i jak przedłużysz czas w Paczkomacie InPost, sprawdź w aplikacji InPost Mobile. Allegro może dać Ci możliwość przedłużenia czasu na odbiór paczki z Allegro Delivery w wybranych punktach i automatach, na zasadach z osobnego regulaminu: sprawdź to na Allegro.
+Czy i jak przedłużysz czas w Paczkomacie InPost, sprawdź w aplikacji InPost Mobile. Allegro może dać ci możliwość przedłużenia czasu na odbiór paczki z Allegro Delivery w wybranych punktach i automatach, na zasadach z osobnego regulaminu: sprawdź to na Allegro.
 
 Jeśli i tak nie zdążysz:
 
 :::steps
 - Sprawdź termin | Jest w SMS-ie, e-mailu, aplikacji albo na awizo.
 - Przedłuż, jeśli się da | Poczta Polska: płatne przechowywanie przesyłki poleconej.
-- Wyślij kogoś | Na poczcie odbierze ją Twój pełnomocnik; przy automatach i punktach zasady zależą od firmy.
-- Napisz do sklepu | Przed terminem, jeśli już jej nie chcesz, a po terminie, jeśli Ci umknął.
+- Wyślij kogoś | Na poczcie odbierze ją twój pełnomocnik; przy automatach i punktach zasady zależą od firmy.
+- Napisz do sklepu | Przed terminem, jeśli już jej nie chcesz, a po terminie, jeśli ci umknął.
 :::
 
-InPost może przypomnieć o czekającej paczce osobnym statusem. Poczta Polska zostawia powtórne awizo dzień po upływie 7-dniowego terminu z pierwszego, a przy Pocztex PUNKT i AUTOMAT dostaniesz trzy SMS-y: z miejscem, terminem i kodem odbioru, a potem dwa przypomnienia (oraz powiadomienie e-mailem, jeśli nadawca podał Twój adres). Nie odkładaj odbioru do ostatniej wiadomości.
+InPost może przypomnieć o czekającej paczce osobnym statusem. Poczta Polska zostawia powtórne awizo dzień po upływie 7-dniowego terminu z pierwszego, a przy Pocztex PUNKT i AUTOMAT dostaniesz trzy SMS-y: z miejscem, terminem i kodem odbioru, a potem dwa przypomnienia (oraz powiadomienie e-mailem, jeśli nadawca podał twój adres). Nie odkładaj odbioru do ostatniej wiadomości.
 
 ## Czy dostanę zwrot pieniędzy za nieodebraną paczkę?
 
@@ -86,12 +86,12 @@ Decyduje o tym sklep, a przy zakupie od firmy także [ustawa o prawach konsument
 
 | Pytanie | Co mówi prawo |
 | --- | --- |
-| Kiedy zaczyna się 14 dni na odstąpienie? | Od dnia, w którym paczkę odbierzesz Ty albo wskazana przez Ciebie osoba (inna niż kurier). UOKiK: liczy się dzień odebrania z paczkomatu, nie SMS. |
+| Kiedy zaczyna się 14 dni na odstąpienie? | Od dnia, w którym paczkę odbierzesz ty albo wskazana przez ciebie osoba (inna niż kurier). UOKiK: liczy się dzień odebrania z paczkomatu, nie SMS. |
 | Czy nieodebranie paczki to odstąpienie od umowy? | Nie. Odstępujesz, składając sklepowi oświadczenie, na formularzu albo inaczej. UOKiK radzi zrobić to na piśmie. |
-| Czy mogę odstąpić, zanim paczkę odbiorę? | Tak, mówi UOKiK. Jeśli sklep już ją wysłał, może obciążyć Cię bezpośrednim kosztem odesłania, tak jak po odbiorze. |
+| Czy mogę odstąpić, zanim paczkę odbiorę? | Tak, mówi UOKiK. Jeśli sklep już ją wysłał, może obciążyć cię bezpośrednim kosztem odesłania, tak jak po odbiorze. |
 | Kiedy dostanę pieniądze? | W ciągu 14 dni od oświadczenia, tą samą metodą płatności. Sklep może wstrzymać zwrot, aż paczka do niego wróci. |
 | Czy odzyskam koszt dostawy? | Tak, do wysokości najtańszej zwykłej dostawy w ofercie sklepu. Dopłaty do droższej dostawy sklep nie oddaje. |
-| Co sklep może potrącić? | Bezpośredni koszt odesłania, jeśli uprzedził Cię, że go poniesiesz. |
+| Co sklep może potrącić? | Bezpośredni koszt odesłania, jeśli uprzedził cię, że go poniesiesz. |
 
 > Nie zostawiaj paczki w automacie tylko dlatego, że zmieniasz zdanie. Samo nieodebranie nie jest odstąpieniem od umowy: napisz do sklepu albo wyślij jego formularz odstąpienia i zachowaj kopię.
 
@@ -107,7 +107,7 @@ Czasem. Na poczcie tylko wtedy, gdy wcześniej złożysz zlecenie przechowywania
 
 ### Czy ktoś inny może odebrać moją paczkę?
 
-Tak. Na poczcie Twój pełnomocnik, z pełnomocnictwem pocztowym albo zwykłym. Jak to wygląda w automatach i punktach, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery).
+Tak. Na poczcie twój pełnomocnik, z pełnomocnictwem pocztowym albo zwykłym. Jak to wygląda w automatach i punktach, opisuje poradnik [awizo i nieudane doręczenie](guide:missed-delivery).
 
 ### Dlaczego paczka wraca do nadawcy?
 

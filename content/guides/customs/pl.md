@@ -7,18 +7,18 @@ published: 2026-10-09
 updated: 2026-11-20
 ---
 
-„Paczka zatrzymana przez urząd celny” zwykle oznacza, że Twoja przesyłka spoza Unii Europejskiej przechodzi rutynową odprawę celną, a nie że ktoś ją skonfiskował. Jeśli utknęła na dłużej, [Poczta Polska](carrier:poczta-polska) albo kurier może czekać na Twoją zapłatę, pełnomocnictwo lub dokumenty. Sprawdź to na stronie albo w aplikacji przewoźnika, nigdy przez link z SMS-a.
+„Paczka zatrzymana przez urząd celny” zwykle oznacza, że twoja przesyłka spoza Unii Europejskiej przechodzi rutynową odprawę celną, a nie że ktoś ją skonfiskował. Jeśli utknęła na dłużej, [Poczta Polska](carrier:poczta-polska) albo kurier może czekać na twoją zapłatę, pełnomocnictwo lub dokumenty. Sprawdź to na stronie albo w aplikacji przewoźnika, nigdy przez link z SMS-a.
 
 ## Co znaczy „paczka zatrzymana przez urząd celny”?
 
-Każdą przesyłkę pocztową spoza UE trzeba zgłosić do urzędu celnego, bez względu na wartość towaru, przypomina Krajowa Administracja Skarbowa (KAS). Paczkę do 150 euro Poczta Polska zgłasza za Ciebie na podstawie tak zwanego pełnomocnictwa domyślnego, chyba że z niego zrezygnujesz. Przy wartości od 150 do 1000 euro potrzebuje Twojego pełnomocnictwa, udzielonego w placówce pocztowej. Przy przesyłce kurierskiej formalności celne zwykle załatwia kurier i pobiera za to opłatę, a VAT, którego nie zapłaciłeś w sklepie, może pobrać od Ciebie przy doręczeniu, pisze Komisja Europejska.
+Każdą przesyłkę pocztową spoza UE trzeba zgłosić do urzędu celnego, bez względu na wartość towaru, przypomina Krajowa Administracja Skarbowa (KAS). Paczkę do 150 euro Poczta Polska zgłasza za ciebie na podstawie tak zwanego pełnomocnictwa domyślnego, chyba że z niego zrezygnujesz. Przy wartości od 150 do 1000 euro potrzebuje twojego pełnomocnictwa, udzielonego w placówce pocztowej. Przy przesyłce kurierskiej formalności celne zwykle załatwia kurier i pobiera za to opłatę, a VAT, którego nie zapłaciłeś w sklepie, może pobrać od ciebie przy doręczeniu, pisze Komisja Europejska.
 
 Urząd celny sprawdza deklarację nadawcy (zawartość, wartość), może skontrolować paczkę, ustala należności, a potem zwalnia ją do doręczenia. Na tym etapie możesz zobaczyć:
 
 | Co widzisz | Co to znaczy |
 | --- | --- |
 | Paczka leży w magazynie pocztowo-celnym | Odprawa wymaga dodatkowego sprawdzenia, na przykład brakuje danych albo opis towaru jest niejednoznaczny |
-| Powiadomienie od Poczty Polskiej w sprawie pełnomocnictwa, elektroniczne albo w przesyłce rejestrowanej | Paczka jest warta od 150 do 1000 euro, a Poczta może ją zgłosić dopiero z Twoim pełnomocnictwem |
+| Powiadomienie od Poczty Polskiej w sprawie pełnomocnictwa, elektroniczne albo w przesyłce rejestrowanej | Paczka jest warta od 150 do 1000 euro, a Poczta może ją zgłosić dopiero z twoim pełnomocnictwem |
 | Informacja, że musisz zgłosić paczkę we własnym zakresie | Paczka jest warta ponad 1000 euro albo zawiera towary akcyzowe lub objęte ograniczeniami, na przykład leki. Zgłaszasz ją samodzielnie albo przez agencję celną |
 | Kurier, na przykład [DHL Express](carrier:dhl-express), prosi o zapłatę | Kurier załatwił formalności celne. Pobiera VAT, jeśli nie zapłaciłeś go w sklepie, i swoją opłatę za odprawę |
 
@@ -30,7 +30,7 @@ Często nic. Żeby się upewnić:
 
 :::steps
 - Otwórz śledzenie u przewoźnika | Wpisz adres jego strony ręcznie albo otwórz jego aplikację. Nigdy nie wchodź przez link z SMS-a czy e-maila.
-- Sprawdź, czy czegoś brakuje | Powiadomienie Poczty Polskiej o pełnomocnictwie lub dokumentach albo prośba kuriera o zapłatę oznaczają, że paczka czeka na Ciebie. Jeśli nic takiego nie ma, na razie nic nie rób.
+- Sprawdź, czy czegoś brakuje | Powiadomienie Poczty Polskiej o pełnomocnictwie lub dokumentach albo prośba kuriera o zapłatę oznaczają, że paczka czeka na ciebie. Jeśli nic takiego nie ma, na razie nic nie rób.
 - Zrób, o co proszą | Pełnomocnictwa (jednorazowego albo na okres do 5 lat) udzielasz w placówce Poczty Polskiej, nie w agencji ani punkcie pocztowym. Gdy urząd chce dokumentów, dostarcz fakturę albo paragon.
 - Zapytaj przewoźnika, potem sprzedawcę | Paczka dalej stoi? KAS po informacje o oczekiwanej przesyłce odsyła do Poczty Polskiej, nie do urzędu. Sprzedawcę poproś o fakturę albo o dane, których brakuje w deklaracji.
 :::
@@ -52,7 +52,7 @@ Paczka czeka dłużej, gdy:
 
 - brakuje danych albo opis towaru jest niejednoznaczny, więc trafia do magazynu pocztowo-celnego (Poczta Polska);
 - urząd celny chce zobaczyć dokumenty, na przykład fakturę albo paragon;
-- jest warta od 150 do 1000 euro, a Poczta Polska czeka na Twoje pełnomocnictwo;
+- jest warta od 150 do 1000 euro, a Poczta Polska czeka na twoje pełnomocnictwo;
 - jest warta ponad 1000 euro albo zawiera towary akcyzowe lub objęte ograniczeniami, więc musisz ją zgłosić we własnym zakresie;
 - nie zapłacono jeszcze cła i podatków: do tego czasu urząd celny może ją zatrzymać.
 
@@ -64,11 +64,11 @@ Nie zwlekaj zbyt długo:
 | Ponad 1000 euro, towary akcyzowe albo brak danych | Czeka w magazynie pocztowo-celnym, aż urząd ją zwolni albo wyda inną decyzję |
 | Odmawiasz przyjęcia albo zapłaty | Wraca do nadawcy |
 
-Masz dość odświeżania? Wklej numer do [Peeka](/): sprawdza paczkę nawet co 10 minut i da Ci znać, gdy status się zmieni. Nie zapłaci jednak cła ani nie przyspieszy odprawy. Jeśli długo nic się nie dzieje, a nikt o nic nie prosi, przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+Masz dość odświeżania? Wklej numer do [Peeka](/): sprawdza paczkę nawet co 10 minut i da ci znać, gdy status się zmieni. Nie zapłaci jednak cła ani nie przyspieszy odprawy. Jeśli długo nic się nie dzieje, a nikt o nic nie prosi, przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 ### Odprawa celna zakończona: kiedy będzie paczka?
 
-Gdy urząd celny zwolni przesyłkę, Poczta Polska doręcza ją albo wydaje w placówce pocztowej i wtedy pobiera należności ustalone przez KAS oraz swoją opłatę. Na Twoje żądanie wystawi pokwitowanie. Co znaczą kolejne statusy, wyjaśnia [poradnik o statusach przesyłki](guide:tracking-statuses).
+Gdy urząd celny zwolni przesyłkę, Poczta Polska doręcza ją albo wydaje w placówce pocztowej i wtedy pobiera należności ustalone przez KAS oraz swoją opłatę. Na twoje żądanie wystawi pokwitowanie. Co znaczą kolejne statusy, wyjaśnia [poradnik o statusach przesyłki](guide:tracking-statuses).
 
 ## Ile zapłacę za paczkę spoza UE i komu?
 
@@ -94,7 +94,7 @@ To, gdzie płacisz, zależy od tego, co sklep pobrał przy zamówieniu:
 | Zakup do 150 euro z VAT pobranym w sklepie (IOSS) | Opłatę Poczty Polskiej, a do tego 3 euro cła i 2 euro opłaty manipulacyjnej za rodzaj produktu, jeśli sklep nie doliczył ich do ceny |
 | Zakup do 150 euro bez IOSS | VAT, 3 euro cła i 2 euro opłaty manipulacyjnej za rodzaj produktu oraz opłatę Poczty Polskiej |
 | Zakup od 150 do 1000 euro | Cło według stawek taryfy, 2 euro opłaty manipulacyjnej za rodzaj produktu, VAT i opłatę Poczty Polskiej. Najpierw udzielasz Poczcie pełnomocnictwa |
-| Ponad 1000 euro, towary akcyzowe lub objęte ograniczeniami | Należności z Twojego zgłoszenia (robisz je samodzielnie albo przez agencję celną), a Poczta Polska dolicza przy doręczeniu 25,00 zł za obsługę takiej przesyłki |
+| Ponad 1000 euro, towary akcyzowe lub objęte ograniczeniami | Należności z twojego zgłoszenia (robisz je samodzielnie albo przez agencję celną), a Poczta Polska dolicza przy doręczeniu 25,00 zł za obsługę takiej przesyłki |
 
 Opłaty z cennika Poczty Polskiej płacisz gotówką albo kartą, ale w placówce agenta pocztowego kartą nie zapłacisz.
 
@@ -105,7 +105,7 @@ Liczy się liczba różnych rodzajów towaru w paczce, a nie liczba sztuk. Przyk
 - koszulka, słuchawki i etui do telefonu: 9 euro;
 - trzy takie same koszulki: 3 euro.
 
-Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi do tego unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, tak jak cło, ale bez względu na wartość przesyłki. Jeśli sklep albo przewoźnik przerzuci ją na Ciebie, za koszulkę, słuchawki i etui cło i opłata wyniosą razem 15 euro zamiast 9. Na to wszystko nalicza się jeszcze VAT. Powyżej 150 euro obowiązują zwykłe stawki celne, a 2 euro i tak się dolicza. Przy paczkach Poczty Polskiej opłatę, tak jak cło i VAT, ponosi adresat: zależnie od rodzaju odprawy Poczta pobiera ją przed doręczeniem albo przy odbiorze i wpłaca do KAS.
+Według Komisji Europejskiej od 1 listopada 2026 r. dochodzi do tego unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, tak jak cło, ale bez względu na wartość przesyłki. Jeśli sklep albo przewoźnik przerzuci ją na ciebie, za koszulkę, słuchawki i etui cło i opłata wyniosą razem 15 euro zamiast 9. Na to wszystko nalicza się jeszcze VAT. Powyżej 150 euro obowiązują zwykłe stawki celne, a 2 euro i tak się dolicza. Przy paczkach Poczty Polskiej opłatę, tak jak cło i VAT, ponosi adresat: zależnie od rodzaju odprawy Poczta pobiera ją przed doręczeniem albo przy odbiorze i wpłaca do KAS.
 
 ## Czy płacę cło za zamówienia z Temu, Shein i AliExpress?
 
@@ -135,7 +135,7 @@ Na co jeszcze uważać:
 
 Najbezpieczniej postąpisz jak w kroku 1: samodzielnie otwórz stronę albo aplikację przewoźnika. Poczta Polska podaje dwa oficjalne adresy śledzenia: poczta-polska.pl/sledzenie-przesylek i pocztex.pl/sledzenie-przesylek.
 
-> Dane karty trafiły już na stronę z linku? Od razu zadzwoń do banku. Kartę zastrzeżesz też pod numerem +48 828 828 828 (System Zastrzegania Kart, bezpłatny i czynny całą dobę), jeśli Twój bank w nim uczestniczy.
+> Dane karty trafiły już na stronę z linku? Od razu zadzwoń do banku. Kartę zastrzeżesz też pod numerem +48 828 828 828 (System Zastrzegania Kart, bezpłatny i czynny całą dobę), jeśli twój bank w nim uczestniczy.
 
 Jak zgłosić oszustwo:
 

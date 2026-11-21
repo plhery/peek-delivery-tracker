@@ -10,7 +10,7 @@ USPS, czyli United States Postal Service, to publiczna poczta Stanów Zjednoczon
 
 ## Numer śledzenia USPS: gdzie go znaleźć i jak wygląda
 
-Na etykiecie jest to ciąg znaków pod kodem kreskowym. Jako odbiorca poproś o niego nadawcę: ani placówki pocztowe (Post Offices), ani infolinia USPS nie są w stanie go dla Ciebie wyszukać. Osoby korzystające w USA z usługi Informed Delivery widzą numery nadchodzących paczek w swoim panelu. Więcej wskazówek w poradniku [jak znaleźć numer przesyłki](guide:find-tracking-number).
+Na etykiecie jest to ciąg znaków pod kodem kreskowym. Jako odbiorca poproś o niego nadawcę: ani placówki pocztowe (Post Offices), ani infolinia USPS nie są w stanie go dla ciebie wyszukać. Osoby korzystające w USA z usługi Informed Delivery widzą numery nadchodzących paczek w swoim panelu. Więcej wskazówek w poradniku [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
 Numery USPS liczą od 13 do 34 znaków. Najczęstsze formaty, na fikcyjnych przykładach:
 
@@ -29,14 +29,14 @@ Niektóre formaty występują również u innych operatorów: 22-cyfrowe numery 
 
 USPS prowadzi historię śledzenia po angielsku. Prawie wszystkie poniższe komunikaty wyjaśnia oficjalna pomoc USPS – pokazują one kolejno typową drogę przesyłki i najczęstsze utrudnienia:
 
-| USPS wyświetla | Co to oznacza dla Ciebie | W Peek |
+| USPS wyświetla | Co to oznacza dla ciebie | W Peek |
 | --- | --- | --- |
 | `Merchant Order Receipt Notification` | Elektroniczne powiadomienie ze sklepu o przyjęciu zamówienia; przesyłka nie została jeszcze zeskanowana przez USPS. | „Zarejestrowana” |
 | `Shipping Label Created, USPS Awaiting Item` | Nadawca wygenerował etykietę, ale USPS nie ma jeszcze paczki. W razie opóźnienia pytaj sklep. | „Zarejestrowana” |
 | `Picked Up by Shipping Partner, USPS Awaiting Item` | Partner logistyczny odebrał paczkę i przekaże ją do USPS. Przewidywany termin dostawy pojawi się po przejęciu jej przez USPS. | „Zarejestrowana” |
 | `USPS in Possession of Item` | USPS przyjął lub odebrał przesyłkę. Nie musisz nic robić. | „Przyjęta przez przewoźnika” |
 | `Arrived at USPS Facility` | Przesyłka jest sortowana lub jedzie do urzędu doręczającego. Ten wpis może powtarzać się w tej samej sortowni lub w kolejne dni. | „W transporcie” |
-| `Arrived at Post Office` | Paczka dotarła do urzędu pocztowego obsługującego Twój adres: według USPS powinna zostać doręczona dziś albo w następny pocztowy dzień roboczy. | „W transporcie” |
+| `Arrived at Post Office` | Paczka dotarła do urzędu pocztowego obsługującego twój adres: według USPS powinna zostać doręczona dziś albo w następny pocztowy dzień roboczy. | „W transporcie” |
 | `Out for Delivery` | Doręczyciel wiezie ją dzisiaj – niekoniecznie ten sam, który przynosi listy, i nieraz później w ciągu dnia. | „W doręczeniu” |
 | `Delivered` | Doręczono, z zapisaną datą, godziną i miejscowością. | „Dostarczona” |
 | `Delivery Status Not Updated`, `Awaiting Delivery` | Do 21:00 czasu lokalnego w dniu `Out for Delivery` nie pojawił się skan doręczenia; USPS zakłada dostawę w następny dzień roboczy. | `Awaiting Delivery`: „W transporcie”; `Delivery Status Not Updated`: brak osobnego etapu, Peek zostaje przy poprzednim, zwykle „W doręczeniu” |
@@ -51,7 +51,7 @@ USPS podaje godzinę każdego skanu w czasie lokalnym miejsca, w którym wykonan
 
 ## Paczka z USA do Polski: doręczenie, cło i odbiór w USA
 
-**Kto doręcza w Polsce.** Jeśli numer paczki to międzynarodowy numer pocztowy zakończony na `US` z poprawną cyfrą kontrolną, Peek sprawdza tym samym numerem również pocztę Twojego kraju – w Polsce [Pocztę Polską](carrier:poczta-polska). Jako Twój kraj liczy się region ustawiony w aplikacji na iPhonie albo kraj połączenia w przeglądarce. Gdy Poczta Polska pokaże skan co najmniej tak świeży jak ostatni wpis USPS, Peek przełącza dalsze śledzenie na nią i zachowuje dotychczasową historię z USPS. Dla numerów złożonych wyłącznie z cyfr Peek nie odpytuje innej poczty.
+**Kto doręcza w Polsce.** Jeśli numer paczki to międzynarodowy numer pocztowy zakończony na `US` z poprawną cyfrą kontrolną, Peek sprawdza tym samym numerem również pocztę twojego kraju – w Polsce [Pocztę Polską](carrier:poczta-polska). Jako twój kraj liczy się region ustawiony w aplikacji na iPhonie albo kraj połączenia w przeglądarce. Gdy Poczta Polska pokaże skan co najmniej tak świeży jak ostatni wpis USPS, Peek przełącza dalsze śledzenie na nią i zachowuje dotychczasową historię z USPS. Dla numerów złożonych wyłącznie z cyfr Peek nie odpytuje innej poczty.
 
 **Cło i opłaty.** Przesyłka z USA przechodzi odprawę celną – szczegóły znajdziesz w poradniku [paczka zatrzymana na cle](guide:customs). W Polsce, podobnie jak w całej Unii Europejskiej, dla zakupów internetowych spoza UE o wartości do 150 € od 1 lipca 2026 r. obowiązuje zryczałtowane cło 3 € za każdą kategorię towarową. Od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna (*Union handling fee*) w wysokości 2 € za każdą pozycję towarową w przesyłce, niezależnie od jej wartości – jak wyjaśnia Poczta Polska, opłata ta jest przekazywana Krajowej Administracji Skarbowej. Gdy paczka trafia w Polsce do sieci Pocztex PUNKT (placówki pocztowe oraz sklepy partnerskie, m.in. Żabka, ABC, Lewiatan czy Groszek) albo Pocztex AUTOMAT, odbiór następuje po powiadomieniu SMS lub e-mail.
 
@@ -61,7 +61,7 @@ USPS podaje godzinę każdego skanu w czasie lokalnym miejsca, w którym wykonan
 
 **Z USA do Polski.** Według USPS poszukiwanie międzynarodowej przesyłki może rozpocząć online wyłącznie nadawca w Stanach Zjednoczonych, a USPS wyjaśnia sprawę z pocztą kraju docelowego. Przy zakupach internetowych skontaktuj się więc ze sklepem. Zaginięcie nadawca może zgłosić od 3 do 90 dni po nadaniu dla Priority Mail Express International oraz od 7 dni do 6 miesięcy dla Priority Mail International i Registered Mail; dla zwykłego First-Class Package International Service bez polecenia zgłoszenie online nie przysługuje. Więcej w poradnikach [zagubiona paczka](guide:lost-parcel) i [śledzenie nie aktualizuje się](guide:tracking-not-updating).
 
-**Z Polski do USA.** Jeżeli wysłana przez Ciebie paczka zaginie lub dotrze uszkodzona w USA, odszkodowanie według USPS przysługuje Tobie jako nadawcy zagranicznemu, chyba że pisemnie zrzekniesz się go na rzecz odbiorcy w USA. USPS radzi odbiorcy poprosić Cię o złożenie reklamacji na poczcie nadania, natomiast uszkodzoną przesyłkę odbiorca powinien niezwłocznie okazać w amerykańskiej placówce pocztowej.
+**Z Polski do USA.** Jeżeli wysłana przez ciebie paczka zaginie lub dotrze uszkodzona w USA, odszkodowanie według USPS przysługuje tobie jako nadawcy zagranicznemu, chyba że pisemnie zrzekniesz się go na rzecz odbiorcy w USA. USPS radzi odbiorcy poprosić cię o złożenie reklamacji na poczcie nadania, natomiast uszkodzoną przesyłkę odbiorca powinien niezwłocznie okazać w amerykańskiej placówce pocztowej.
 
 **W obrębie USA.** Orientacyjne czasy przewozu USPS: Priority Mail 2–3 dni robocze, Ground Advantage 2–5, Parcel Select 2–8; gwarantowany termin ma tylko Priority Mail Express. Doręczenia odbywają się od poniedziałku do soboty, według USPS zazwyczaj do 17:00 czasu lokalnego. Jeżeli status `Out for Delivery`, `Arrived at Post Office` lub `Delivery Status Not Updated` nie zmienia się przez pełny pocztowy dzień roboczy, złóż w USPS zgłoszenie serwisowe (*service request*) z numerem śledzenia; zrób to samo, gdy widnieje `Delivered`, a po upływie ponad jednego dnia roboczego paczki nie ma na ganku, w skrzynce, w garażu, u domowników ani w administracji budynku – zobacz [dostarczona, ale nieodebrana](guide:delivered-not-received). Od 7 dni po nadaniu nadawca lub odbiorca mogą uruchomić na usps.com poszukiwanie Missing Mail, dołączając adresy, opis i zdjęcia.
 
@@ -72,7 +72,7 @@ USPS podaje godzinę każdego skanu w czasie lokalnym miejsca, w którym wykonan
 Według stanu na 17 listopada 2026 r. strona „Contact Us” w serwisie USPS podaje:
 
 - **1-800-ASK-USPS** (`1-800-275-8777`), od poniedziałku do piątku 8:00–20:30 oraz w soboty 8:00–18:00 czasu wschodniego (ET, zazwyczaj 6 godzin za czasem polskim – 8:00 ET to 14:00 w Warszawie); automatyczna informacja o śledzeniu działa całą dobę.
-- **1-800-222-1811** w sprawach śledzenia krajowego i międzynarodowego, w tych samych godzinach. USPS zaznacza, że konsultanci widzą te same dane co Ty w USPS Tracking.
+- **1-800-222-1811** w sprawach śledzenia krajowego i międzynarodowego, w tych samych godzinach. USPS zaznacza, że konsultanci widzą te same dane co ty w USPS Tracking.
 - Formularz „Email Customer Service” oraz czat do problemów technicznych ze stroną usps.com.
 - W USA połączenia przez `7-1-1` dla osób niesłyszących, słabosłyszących i z trudnościami w mówieniu.
 
@@ -84,11 +84,11 @@ Strony USPS przywołane w tym tekście, odczytane 17 listopada 2026 r.: w serwis
 
 [Peek](/) od razu rozpoznaje USPS po większości 22-cyfrowych etykiet ze zgodną cyfrą kontrolną, większości 26-cyfrowych numerów zaczynających się od `92` oraz zeskanowanych kodach `420`, z których usuwa prefiks z kodem ZIP. Międzynarodowe numery zakończone na `US` rozpoznaje natychmiast, gdy zaczynają się od `C` (poza `CE` i `CV`), `E`, `L` lub `R` i przechodzą kontrolę. Dla formatów współdzielonych (numerów zaczynających się od `9261` lub `9361` oraz numerów 20-cyfrowych) Peek wyświetla „Sprawdzanie usług śledzenia…”, najpierw pyta pozostałych możliwych przewoźników (DHL eCommerce, Austrian Post albo NZ Post) oraz serwisy śledzące, a stronę USPS otwiera na końcu – może to chwilę potrwać. Jeśli USPS się nie pojawi, stuknij „Zmień” i wybierz go w sekcji „Pasują do numeru” albo użyj później opcji „Zmień przewoźnika”. Działa też link śledzenia z usps.com zawierający numer.
 
-Peek otwiera stronę śledzenia USPS w przeglądarce na swoim serwerze. Jeżeli USPS przekieruje zapytanie na stronę awarii lub je odrzuci, dane uzupełniają serwisy śledzące, choć nie zawsze mają pełną historię. Peek pokazuje status, oś zdarzeń z miejscem każdego skanu i przewidywany dzień doręczenia (oraz 2-godzinne okno, jeśli USPS je podaje). Godzinę każdego skanu odczytuje w strefie czasowej amerykańskiego stanu, w którym go wykonano, i przelicza na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”). Nazwisko osoby kwitującej odbiór i wskazówki dla doręczyciela są pomijane. Wpisy pozostają w oryginalnym angielskim brzmieniu USPS – jedynie `Delivered` wyświetla się po polsku jako „Dostarczona”.
+Peek otwiera stronę śledzenia USPS w przeglądarce na swoim serwerze. Jeżeli USPS przekieruje zapytanie na stronę awarii lub je odrzuci, dane uzupełniają serwisy śledzące, choć nie zawsze mają pełną historię. Peek pokazuje status, oś zdarzeń z miejscem każdego skanu i przewidywany dzień doręczenia (oraz 2-godzinne okno, jeśli USPS je podaje). Godzinę każdego skanu odczytuje w strefie czasowej amerykańskiego stanu, w którym go wykonano, i przelicza na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”). Nazwisko osoby kwitującej odbiór i wskazówki dla doręczyciela są pomijane. Wpisy pozostają w oryginalnym angielskim brzmieniu USPS – jedynie `Delivered` wyświetla się po polsku jako „Dostarczona”.
 
 Peek sprawdza USPS do każdych 30 minut, gdy masz przesyłkę otwartą na ekranie albo w dniu doręczenia masz włączone powiadomienia (także wtedy, gdy paczka jest w doręczeniu), po nieudanym odpytaniu odczekuje godzinę, a w pozostałym czasie sprawdza co godzinę – również po dwóch dniach bez nowego skanu lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika” (oraz co 3 godziny po dobie ciszy, gdy odpowiadają wyłącznie serwisy śledzące). W powiadomieniach wybierasz „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”.
 
-Gdy [UPS](carrier:ups) lub [FedEx](carrier:fedex) przekazują paczkę do USPS, Peek może kontynuować jej śledzenie w USPS, jak tylko pojawi się tam postęp. Z kolei dla międzynarodowej przesyłki pocztowej z końcówką `PL` lecącej do USA Peek odpytuje tym samym numerem także USPS – gdy poczta nadania wskaże Stany Zjednoczone jako kraj przeznaczenia albo gdy Twoim krajem dla Peek są USA. Ponowne doręczenie, Informed Delivery i reklamacje obsługuje bezpośrednio usps.com: Peek nie kontaktuje się w Twoim imieniu ani z USPS, ani ze sklepem.
+Gdy [UPS](carrier:ups) lub [FedEx](carrier:fedex) przekazują paczkę do USPS, Peek może kontynuować jej śledzenie w USPS, jak tylko pojawi się tam postęp. Z kolei dla międzynarodowej przesyłki pocztowej z końcówką `PL` lecącej do USA Peek odpytuje tym samym numerem także USPS – gdy poczta nadania wskaże Stany Zjednoczone jako kraj przeznaczenia albo gdy twoim krajem dla Peek są USA. Ponowne doręczenie, Informed Delivery i reklamacje obsługuje bezpośrednio usps.com: Peek nie kontaktuje się w twoim imieniu ani z USPS, ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie USPS
 

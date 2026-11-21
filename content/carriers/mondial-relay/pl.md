@@ -23,13 +23,13 @@ Mondial Relay nazywa go *numéro d'expédition*: to 8 cyfr przesyłanych w e-mai
 | `00123456780101700000000000` | 26 cyfr: pełny kod kreskowy z etykiety — wyłącznie w Mondial Relay, z 8-cyfrowym numerem nadania na pozycjach od 3 do 10. |
 | `FV48291057` | `FV` i 8 cyfr: numer przesyłki InPost Hiszpania (w Hiszpanii i Portugalii dawne Mondial Relay działa od 2021 r. pod marką InPost). |
 
-Na części francuskich etykiet numer nadania bywa sklejony bez spacji z 5-cyfrowym francuskim kodem pocztowym (łącznie 13, 15 lub 17 cyfr). Jeżeli natomiast sklep lub aplikacja InPost Mobile pokaże Ci osobny, 24-cyfrowy krajowy numer [InPost](carrier:inpost) na polski odcinek dostawy, to właśnie nim prześledzisz ostatni etap w Polsce; zobacz też [jak rozpoznać przewoźnika po formacie numeru](guide:tracking-number-formats).
+Na części francuskich etykiet numer nadania bywa sklejony bez spacji z 5-cyfrowym francuskim kodem pocztowym (łącznie 13, 15 lub 17 cyfr). Jeżeli natomiast sklep lub aplikacja InPost Mobile pokaże ci osobny, 24-cyfrowy krajowy numer [InPost](carrier:inpost) na polski odcinek dostawy, to właśnie nim prześledzisz ostatni etap w Polsce; zobacz też [jak rozpoznać przewoźnika po formacie numeru](guide:tracking-number-formats).
 
 ## Francuskie statusy Mondial Relay po polsku
 
 Śledzenie Mondial Relay wyświetla komunikaty po francusku (w Belgii i Holandii również po niderlandzku). Oto najczęstsze wpisy w kolejności, w jakiej pojawiają się na trasie:
 
-| Komunikat Mondial Relay | Co to oznacza dla Ciebie |
+| Komunikat Mondial Relay | Co to oznacza dla ciebie |
 | --- | --- |
 | `Colis en préparation chez l'expéditeur` | Etykieta została utworzona, ale Mondial Relay nie odebrał jeszcze paczki od nadawcy. |
 | `Prise en charge` / `Colis pris en charge en Locker` | Nadawca nadał przesyłkę w punkcie Point Relais lub w automacie Locker. |
@@ -71,7 +71,7 @@ Przy dostawie do punktu lub automatu poczekaj na status `Disponible…` (albo po
 
 Standardowy 8-cyfrowy numer wymaga też pola „Kod pocztowy odbiorcy”: wpisz najpierw sam numer, a następnie kod pocztowy miejsca doręczenia lub wybranego punktu odbioru; portugalski kod pocztowy wymaga wszystkich siedmiu cyfr (`1234-567`), natomiast 13-, 15- i 17-cyfrowe numery z francuskich etykiet zakończone 5-cyfrowym kodem pocztowym Francji Peek rozdziela sam po wybraniu Mondial Relay. Z błędnym kodem pocztowym przesyłka nie zostanie odnaleziona. Kod trafia do Mondial Relay (i w razie potrzeby do serwisów śledzenia), ale nigdy nie pojawia się w udostępnianych linkach.
 
-Peek pokazuje oryginalne francuskie statusy Mondial Relay bez zmian, zaznacza każdą sortownię na mapie i przelicza czasy z francuskiej strefy `Europe/Paris` z dopiskiem „Godziny w twojej strefie czasowej: …”. Gdy paczka ma etap „Do odbioru”, widzisz nazwę i adres punktu Point Relais lub automatu Locker, nigdy jednak Twój kod odbioru ani nazwisko. Peek sprawdza przesyłkę nawet co 10 minut, a w dniu wydania do doręczenia od 6:00 czasu paryskiego nawet co 2 minuty (co 5 minut przez przeglądarkę, co 15 minut przez serwisy śledzenia), przechodząc na sprawdzanie co godzinę po dwóch dniach bez nowości albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Ponieważ Mondial Relay po pewnym czasie ponownie wykorzystuje stare numery, dawny numer może pokazać nowszą paczkę. Peek nie przekazuje śledzenia Mondial Relay do innych przewoźników — jeśli paczka dostanie osobny polski numer [InPost](carrier:inpost), dodaj go w Peek jako oddzielną przesyłkę.
+Peek pokazuje oryginalne francuskie statusy Mondial Relay bez zmian, zaznacza każdą sortownię na mapie i przelicza czasy z francuskiej strefy `Europe/Paris` z dopiskiem „Godziny w twojej strefie czasowej: …”. Gdy paczka ma etap „Do odbioru”, widzisz nazwę i adres punktu Point Relais lub automatu Locker, nigdy jednak twój kod odbioru ani nazwisko. Peek sprawdza przesyłkę nawet co 10 minut, a w dniu wydania do doręczenia od 6:00 czasu paryskiego nawet co 2 minuty (co 5 minut przez przeglądarkę, co 15 minut przez serwisy śledzenia), przechodząc na sprawdzanie co godzinę po dwóch dniach bez nowości albo po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Ponieważ Mondial Relay po pewnym czasie ponownie wykorzystuje stare numery, dawny numer może pokazać nowszą paczkę. Peek nie przekazuje śledzenia Mondial Relay do innych przewoźników — jeśli paczka dostanie osobny polski numer [InPost](carrier:inpost), dodaj go w Peek jako oddzielną przesyłkę.
 
 ## Najczęstsze pytania o śledzenie Mondial Relay
 
@@ -85,11 +85,11 @@ Tak, jeśli masz 26-cyfrowy kod kreskowy z etykiety albo wariant 10-, 12- bądź
 
 ### Kto doręcza w Polsce paczkę wysłaną z Francji przez Mondial Relay?
 
-W obrębie międzynarodowej sieci Grupy InPost przesyłki kierowane do Polski trafiają do Paczkomatów lub punktów [InPost](carrier:inpost). Jeśli nadawca lub sklep przekaże Ci osobny, krajowy numer śledzenia InPost na polski odcinek trasy, wklej go osobno w Peek lub sprawdź w aplikacji InPost Mobile.
+W obrębie międzynarodowej sieci Grupy InPost przesyłki kierowane do Polski trafiają do Paczkomatów lub punktów [InPost](carrier:inpost). Jeśli nadawca lub sklep przekaże ci osobny, krajowy numer śledzenia InPost na polski odcinek trasy, wklej go osobno w Peek lub sprawdź w aplikacji InPost Mobile.
 
 ### Co się stanie, jeśli nie odbiorę paczki Mondial Relay w terminie?
 
-Po upływie terminu wskazanego w powiadomieniu SMS lub e-mail przesyłka wraca automatycznie do nadawcy (w przypadku zamówień z Vinted oznacza to automatyczne anulowanie zakupu i zwrot pieniędzy na Twoje konto).
+Po upływie terminu wskazanego w powiadomieniu SMS lub e-mail przesyłka wraca automatycznie do nadawcy (w przypadku zamówień z Vinted oznacza to automatyczne anulowanie zakupu i zwrot pieniędzy na twoje konto).
 
 :::sources
 - [Grupa InPost: Regulamin Konta InPost (od 01.10.2026 r.)](https://terms.inpost-group.com/pl/regulamin) – dane rejestrowe Mondial Relay SASU w Villeneuve-d'Ascq oraz InPost sp. z o.o. w Krakowie (ul. Pana Tadeusza 4, infolinia 746 600 000 i 722 444 000), ręczne śledzenie z kodem pocztowym i archiwizacja w aplikacji po 7 dniach

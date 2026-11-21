@@ -7,11 +7,11 @@ published: 2026-10-17
 updated: 2026-10-17
 ---
 
-Gdy paczka wyjedzie z magazynu, Shein wysyła Ci e-mail z linkiem do śledzenia, a w „Moich zamówieniach” pod przyciskiem „Śledź” widzisz numer, szacowany termin i aktualny status. Jeśli produkt idzie z magazynu poza Europą, paczka leci do Polski samolotem i dopiero tu przejmuje ją przewoźnik, więc śledzenie potrafi milczeć kilka dni. Gdy paczka nie dociera, masz 45 dni od daty płatności, żeby zgłosić to Shein.
+Gdy paczka wyjedzie z magazynu, Shein wysyła ci e-mail z linkiem do śledzenia, a w „Moich zamówieniach” pod przyciskiem „Śledź” widzisz numer, szacowany termin i aktualny status. Jeśli produkt idzie z magazynu poza Europą, paczka leci do Polski samolotem i dopiero tu przejmuje ją przewoźnik, więc śledzenie potrafi milczeć kilka dni. Gdy paczka nie dociera, masz 45 dni od daty płatności, żeby zgłosić to Shein.
 
 ## Kto dostarcza paczki z Shein w Polsce?
 
-Przewoźnika wybiera system, Ty nie masz na to wpływu. Strony pomocy Shein Polska nie podają listy firm: tego, kto wiezie Twoją paczkę, szukasz na stronie śledzenia w „Moich zamówieniach”. Shein mówi tylko tyle:
+Przewoźnika wybiera system, ty nie masz na to wpływu. Strony pomocy Shein Polska nie podają listy firm: tego, kto wiezie twoją paczkę, szukasz na stronie śledzenia w „Moich zamówieniach”. Shein mówi tylko tyle:
 
 - **Do automatu albo pod drzwi.** Przy zamówieniu wybierasz dostawę do automatu paczkowego lub punktu odbioru albo wysyłkę standardową. Jako jedną z opcji Shein wymienia [InPost](carrier:inpost) Paczkomat 24/7.
 - **Kod odbioru.** Gdy paczka czeka w automacie lub punkcie, przewoźnik wysyła kod odbioru zwykle i SMS-em, i e-mailem, na dane z zamówienia.
@@ -74,11 +74,11 @@ Jeśli paczka nie przyszła w terminie, skontaktuj się z obsługą klienta w ci
 
 Bezpłatna gwarancja dostawy na czas daje 200 punktów SHEIN, jeśli zamówienie nie dotrze w terminie. Według regulaminu usługi obejmuje ona wszystkie opcje dostawy (strona pomocy Shein mówi tylko o ekspresowej wysyłce): przy zamówieniu zaznaczasz pole „Terminowa dostawa”, a punkty trafiają na konto w ciągu 2 dni roboczych po minięciu szacowanej daty i wygasają po 30 dniach. Każde zamówienie dostaje je tylko raz. Nie dostaniesz ich między innymi, gdy adres był błędny, za późno zapłaciłeś podatki lub cło albo kurier zdążył w terminie zostawić paczkę w paczkomacie lub na poczcie do odbioru.
 
-O cle Shein pisze, że kwota przy kasie obejmuje już podatki importowe, cło i opłaty za dostawę, niezależnie od tego, z którego magazynu idzie paczka: „Nie zostaniesz poproszony o zapłatę dodatkowych podatków importowych ani opłat związanych z dostawą przed ani po dostarczeniu paczki”. Ogólne zasady: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu. Sklep albo przewoźnik może ją przerzucić na Ciebie. Kwoty, terminy i fałszywe SMS-y z żądaniem dopłaty: [paczka zatrzymana przez urząd celny](guide:customs).
+O cle Shein pisze, że kwota przy kasie obejmuje już podatki importowe, cło i opłaty za dostawę, niezależnie od tego, z którego magazynu idzie paczka: „Nie zostaniesz poproszony o zapłatę dodatkowych podatków importowych ani opłat związanych z dostawą przed ani po dostarczeniu paczki”. Ogólne zasady: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu. Sklep albo przewoźnik może ją przerzucić na ciebie. Kwoty, terminy i fałszywe SMS-y z żądaniem dopłaty: [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Paczka z Shein nie dotarła albo jest oznaczona jako doręczona: co robić
 
-Jeśli śledzenie pokazuje doręczenie, a paczki nie masz, albo brakuje w niej produktów lub są niewłaściwe, Shein daje Ci 30 dni od daty doręczenia podanej na stronie śledzenia. Jego pomoc podpowiada taką kolejność:
+Jeśli śledzenie pokazuje doręczenie, a paczki nie masz, albo brakuje w niej produktów lub są niewłaściwe, Shein daje ci 30 dni od daty doręczenia podanej na stronie śledzenia. Jego pomoc podpowiada taką kolejność:
 
 :::steps
 - Sprawdź śledzenie | W „Moich zamówieniach” potwierdź adres dostawy i zajrzyj do „Szczegółów logistycznych”.

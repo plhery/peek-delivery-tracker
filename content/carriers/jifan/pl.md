@@ -28,14 +28,14 @@ Na `peektracker.com` kod `JFGJ…CN` krótszy o jeden znak otrzymuje komunikat: 
 
 Wyszukiwarka Jifan jest po chińsku, ale wpisy historii pojawiają się po angielsku, od najnowszego, każdy z datą i godziną. Nad nimi wiersz podsumowania podaje kraj przeznaczenia (`目的地`), status ogólny (`状态`), ostatni czas (`最新时间`) i ostatni wpis (`最新记录`). Dwa główne statusy podsumowania:
 
-| Wyszukiwarka podaje | Co to oznacza dla Ciebie |
+| Wyszukiwarka podaje | Co to oznacza dla ciebie |
 | --- | --- |
 | `运输途中` | Po chińsku „w transporcie”. Przeczytaj angielskie wiersze poniżej, aby sprawdzić rzeczywiste położenie paczki. |
 | `查询不到` | Po chińsku „nie znaleziono”. Wyszukiwarka nie ma przesyłki o tym numerze i nie pokazuje żadnych skanów. |
 
 Najpierw widnieją etapy Jifan w Chinach kontynentalnych — bez podanej miejscowości — od danych zamówienia do wylotu samolotu, a po locie wpisy w USA przekazywane przez agenta docelowego i sieć doręczającą (której nazwę tracker zastępuje słowami `logistics carrier`). Wyszukiwarka Jifan działa na tym samym systemie co CTTYEX i stosuje identyczne sformułowania:
 
-| Jifan podaje | Co to oznacza dla Twojej paczki | Peek pokazuje |
+| Jifan podaje | Co to oznacza dla twojej paczki | Peek pokazuje |
 | --- | --- | --- |
 | `Order information received` | Sprzedawca przekazał dane przesyłki; Jifan nie ma jeszcze samej paczki. | „Zarejestrowana” |
 | `Arrive at the cross border receiving point`, `Arrive at the receiving point` | Jifan przyjął paczkę w swoim transgranicznym punkcie przyjęć w Chinach kontynentalnych. | „Przyjęta przez przewoźnika” |
@@ -61,7 +61,7 @@ Strona Jifan wymienia cztery linie wysyłkowe, wszystkie z Chin kontynentalnych 
 - **Paczki morskie Matson** (`美森正班（限时达）海运大/小包`): małe paczki do 4,5 kg są doręczane tak samo jak linia lotnicza (`UPS MI`, całe USA); większe od 4,5 do 68 kg jadą usługą `UPS GROUND` wyłącznie na kontynentalne terytorium USA (`仅限美国本土`). Około 20–25 dni kalendarzowych.
 - **Morski transport ponadgabarytowy do USA** (`美国海运超大件专线`): od 100 do 2000 kg na sztukę na statkach Matson i COSCO, a następnie ciężarówką pod drzwi (adresy firmowe i prywatne), tylko kontynentalne USA bez wysp zamorskich i adresów wojskowych. Około 25–40 dni kalendarzowych.
 
-Dla paczek ekonomicznych oraz małych paczek do 4,5 kg drogą lotniczą lub morską Jifan deklaruje jeden list przewozowy na całą trasę (`一单到底`). Wyszukiwarka nie podaje nazwy firmy doręczającej ani drugiego numeru; jeśli sprzedawca przekazał Ci osobny numer UPS, możesz śledzić go w [UPS](carrier:ups). Jifan nie publikuje dla odbiorców zasad awizowania i punktów odbioru ([nieudane doręczenie](guide:missed-delivery)) ani informacji o cłach i podatkach w kraju docelowym ([paczka zatrzymana przez urząd celny](guide:customs)).
+Dla paczek ekonomicznych oraz małych paczek do 4,5 kg drogą lotniczą lub morską Jifan deklaruje jeden list przewozowy na całą trasę (`一单到底`). Wyszukiwarka nie podaje nazwy firmy doręczającej ani drugiego numeru; jeśli sprzedawca przekazał ci osobny numer UPS, możesz śledzić go w [UPS](carrier:ups). Jifan nie publikuje dla odbiorców zasad awizowania i punktów odbioru ([nieudane doręczenie](guide:missed-delivery)) ani informacji o cłach i podatkach w kraju docelowym ([paczka zatrzymana przez urząd celny](guide:customs)).
 
 ## Paczka Jifan stoi w miejscu, nie ma jej w systemie lub wraca
 
@@ -91,13 +91,13 @@ Strona jest wyłącznie po chińsku i nie ma formularza ani czatu dla odbiorców
 
 [Peek](/) od razu rozpoznaje przewoźnika Jifan po numerze `JFGJ…CN` („Wykryty przewoźnik”) — żaden inny obsługiwany przewoźnik nie używa takiego układu. Działa również link do `szjf56.cn/index/tracknumber/track` z numerem `JFGJ…CN` po parametrze `nos=` (jeśli w linku jest kilka numerów, Peek bierze pierwszy).
 
-Jeśli sprzedawca podał Ci inny numer, wklej go tak samo: Peek śledzi ponad 4 500 przewoźników, sprawdza serwisy śledzenia przy niejednoznacznym formacie i pozwala wybrać operatora przez „Zmień” lub „Zmień przewoźnika”. Wyszukiwarkę Jifan Peek odpytuje wyłącznie dla numerów `JFGJ…CN` — po ręcznym wybraniu Jifan dla innego numeru wskaże, że przewoźnik „nie wydaje takich numerów”.
+Jeśli sprzedawca podał ci inny numer, wklej go tak samo: Peek śledzi ponad 4 500 przewoźników, sprawdza serwisy śledzenia przy niejednoznacznym formacie i pozwala wybrać operatora przez „Zmień” lub „Zmień przewoźnika”. Wyszukiwarkę Jifan Peek odpytuje wyłącznie dla numerów `JFGJ…CN` — po ręcznym wybraniu Jifan dla innego numeru wskaże, że przewoźnik „nie wydaje takich numerów”.
 
-Peek pobiera z wyszukiwarki Jifan status, wszystkie wiersze po angielsku oraz kraj docelowy. Gdy wiersz w USA otwiera miasto, stan i kod ZIP, Peek zapisuje miasto i stan jako miejsce skanu, a kod ZIP odrzuca. Każdy czas jest odczytywany jako czas pekiński (`UTC+8`) i przeliczany na strefę Twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się dopiskiem „Godziny w twojej strefie czasowej: …”. Przycisk „Otwórz stronę przewoźnika Jifan” otwiera Twój numer na `szjf56.cn`.
+Peek pobiera z wyszukiwarki Jifan status, wszystkie wiersze po angielsku oraz kraj docelowy. Gdy wiersz w USA otwiera miasto, stan i kod ZIP, Peek zapisuje miasto i stan jako miejsce skanu, a kod ZIP odrzuca. Każdy czas jest odczytywany jako czas pekiński (`UTC+8`) i przeliczany na strefę twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się dopiskiem „Godziny w twojej strefie czasowej: …”. Przycisk „Otwórz stronę przewoźnika Jifan” otwiera twój numer na `szjf56.cn`.
 
 Status w Peek wynika z najnowszego rozpoznanego skanu, a ze statusu podsumowania (`运输途中`) korzysta tylko wtedy, gdy żaden wiersz nie określa etapu. Ponieważ tracker Jifan nie podaje przewidywanej daty doręczenia, wagi, nazwy usługi, firmy doręczającej ani drugiego numeru, Peek śledzi numer `JFGJ…CN` bezpośrednio w Jifan aż do doręczenia.
 
-Dopóki odpowiada wyszukiwarka Jifan, Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub z włączonymi powiadomieniami, jeśli dostawa jest spodziewana dzisiaj. Od 6:00 według zegara przewoźnika (czasu pekińskiego) w dniu, w którym Jifan zgłasza wydanie do doręczenia, przy otwartej paczce lub włączonych alertach sprawdzanie może przyspieszyć do co 2 minut. Poza ekranem i bez alertów oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę; gdy odpowiada tylko serwis śledzenia, sprawdza co godzinę, co 3 godziny gdy ostatni skan ma ponad dobę i do co 15 minut w dniu doręczenia, ale tylko przy otwartej paczce lub włączonych alertach. Dostępne powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z Jifan ani ze sprzedawcą.
+Dopóki odpowiada wyszukiwarka Jifan, Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub z włączonymi powiadomieniami, jeśli dostawa jest spodziewana dzisiaj. Od 6:00 według zegara przewoźnika (czasu pekińskiego) w dniu, w którym Jifan zgłasza wydanie do doręczenia, przy otwartej paczce lub włączonych alertach sprawdzanie może przyspieszyć do co 2 minut. Poza ekranem i bez alertów oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę; gdy odpowiada tylko serwis śledzenia, sprawdza co godzinę, co 3 godziny gdy ostatni skan ma ponad dobę i do co 15 minut w dniu doręczenia, ale tylko przy otwartej paczce lub włączonych alertach. Dostępne powiadomienia: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z Jifan ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie Jifan
 
@@ -111,7 +111,7 @@ Na stronie [快件跟踪 w serwisie szjf56.cn](https://www.szjf56.cn/index/track
 
 ### Dlaczego godziny w wyszukiwarce Jifan wydają się błędne?
 
-Są podawane w czasie pekińskim (`UTC+8`), również dla skanów wykonanych w Stanach Zjednoczonych. Zimą Pekin wyprzedza Nowy Jork o 13 godzin, a Los Angeles o 16 godzin, więc skan po 11:00 w Nowym Jorku lub po 08:00 w Los Angeles ma datę kolejnego dnia. Peek pokazuje każdy czas w strefie czasowej Twojego urządzenia.
+Są podawane w czasie pekińskim (`UTC+8`), również dla skanów wykonanych w Stanach Zjednoczonych. Zimą Pekin wyprzedza Nowy Jork o 13 godzin, a Los Angeles o 16 godzin, więc skan po 11:00 w Nowym Jorku lub po 08:00 w Los Angeles ma datę kolejnego dnia. Peek pokazuje każdy czas w strefie czasowej twojego urządzenia.
 
 ### Co oznacza `查询不到` w wyszukiwarce Jifan?
 

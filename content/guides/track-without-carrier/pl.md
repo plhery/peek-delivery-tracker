@@ -1,6 +1,6 @@
 ---
 title: Śledź przesyłkę, nawet gdy nie znasz przewoźnika
-description: Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce: Peek znajdzie numer i przewoźnika, a gdy numer zna kilku przewoźników, zapyta Cię o wybór.
+description: Wklej numer przesyłki, link od przewoźnika albo cały e-mail o wysyłce: Peek znajdzie numer i przewoźnika, a gdy numer zna kilku przewoźników, zapyta cię o wybór.
 slug: sledzenie-przesylki-bez-znajomosci-przewoznika
 picture: Pip, paczka z buzią, czyta długi e-mail o wysyłce wklejony w pole wyszukiwania, a za wielkim znakiem zapytania czekają trzy furgonetki kurierskie.
 published: 2026-11-19
@@ -16,13 +16,13 @@ Nie musisz znać przewoźnika, żeby śledzić przesyłkę: wklej jej numer, lin
 - Wybierz „Śledź” | Przesyłka otworzy się na własnej stronie, a strona główna pokaże ją na liście na tym urządzeniu.
 :::
 
-Aplikacje czytają wklejony tekst tak samo: przycisk + otwiera „Dodaj przesyłkę” z przyciskiem „Wklej”, a tekst albo link możesz udostępnić przez „Dodaj do Peeka” (zobacz [Peek na iPhone’a, iPada i Maca](guide:iphone-app) i [Peek na Androida](guide:android-app)). Po zalogowaniu na stronie przycisk „Dodaj przesyłkę” nad listą Twoich dostaw otwiera panel, który też czyta wklejony tekst albo link, ale bez listy kilku numerów, podpowiedzi przy literówce i uwag o numerach zamówień ze sklepów.
+Aplikacje czytają wklejony tekst tak samo: przycisk + otwiera „Dodaj przesyłkę” z przyciskiem „Wklej”, a tekst albo link możesz udostępnić przez „Dodaj do Peeka” (zobacz [Peek na iPhone’a, iPada i Maca](guide:iphone-app) i [Peek na Androida](guide:android-app)). Po zalogowaniu na stronie przycisk „Dodaj przesyłkę” nad listą twoich dostaw otwiera panel, który też czyta wklejony tekst albo link, ale bez listy kilku numerów, podpowiedzi przy literówce i uwag o numerach zamówień ze sklepów.
 
 ## Czy mogę śledzić przesyłkę, nie znając przewoźnika?
 
 Tak. Peek rozpozna przewoźnika po numerze albo zapyta przewoźników, do których numer może należeć.
 
-Numer, którego kształt jednoznacznie wskazuje przewoźnika, na przykład numer UPS zaczynający się od `1Z`, od razu go zdradza: wiersz przewoźnika mówi „Wykryty przewoźnik”. W przeciwnym razie Peek pyta najbardziej prawdopodobnych przewoźników, po pięciu naraz, zaczynając od tych, którzy obsługują Twój kraj, a wiersz mówi wtedy „Sprawdzanie usług śledzenia…”. Liczy się tylko odpowiedź o niedawnej przesyłce, bo przewoźnicy po czasie używają starych numerów ponownie. Jak wyglądają numery, opisuje poradnik o [formatach numerów przesyłek](guide:tracking-number-formats), a jak działają trackery, poradnik o [śledzeniu przesyłek wszystkich firm w jednym miejscu](guide:universal-tracker).
+Numer, którego kształt jednoznacznie wskazuje przewoźnika, na przykład numer UPS zaczynający się od `1Z`, od razu go zdradza: wiersz przewoźnika mówi „Wykryty przewoźnik”. W przeciwnym razie Peek pyta najbardziej prawdopodobnych przewoźników, po pięciu naraz, zaczynając od tych, którzy obsługują twój kraj, a wiersz mówi wtedy „Sprawdzanie usług śledzenia…”. Liczy się tylko odpowiedź o niedawnej przesyłce, bo przewoźnicy po czasie używają starych numerów ponownie. Jak wyglądają numery, opisuje poradnik o [formatach numerów przesyłek](guide:tracking-number-formats), a jak działają trackery, poradnik o [śledzeniu przesyłek wszystkich firm w jednym miejscu](guide:universal-tracker).
 
 Bez konta strona wyszukuje kilka przesyłek dziennie na każdą sieć, a potem mówi „Na dziś nie ma już wyszukiwań” i proponuje „Zaloguj się”, żeby kontynuować.
 
@@ -39,9 +39,9 @@ W przeciwnym razie Peek mówi „Nie znaleziono numeru śledzenia. Wklej numer l
 
 ## Co, jeśli w e-mailu jest kilka numerów przesyłek?
 
-Peek wypisze je na liście, a Ty śledzisz je po jednym. Numery, których przewoźnik jest pewny, pojawiają się pod nagłówkiem, na przykład „3 numery śledzenia w tym tekście”, każdy raz, ze swoim przewoźnikiem, w kolejności z wiadomości; numer, którego cyfra kontrolna się nie zgadza, zostaje pominięty. Pierwszy jest zaznaczony: wybierz inny, jeśli chcesz, a potem „Śledź ten”, który w aplikacjach zastępuje „Dodaj przesyłkę”.
+Peek wypisze je na liście, a ty śledzisz je po jednym. Numery, których przewoźnik jest pewny, pojawiają się pod nagłówkiem, na przykład „3 numery śledzenia w tym tekście”, każdy raz, ze swoim przewoźnikiem, w kolejności z wiadomości; numer, którego cyfra kontrolna się nie zgadza, zostaje pominięty. Pierwszy jest zaznaczony: wybierz inny, jeśli chcesz, a potem „Śledź ten”, który w aplikacjach zastępuje „Dodaj przesyłkę”.
 
-Bez konta lista kończy się pytaniem „Śledzisz wszystkie?” i przyciskiem „Zaloguj się, a Peek zachowa je razem”. Z kontem możesz zamiast tego przekazać dalej e-mail o wysyłce, a Peek doda każdą przesyłkę, która w nim jest: zobacz [dodawanie przesyłek e-mailem](guide:add-parcels-by-email). Panel na stronie po zalogowaniu nie pokazuje listy, więc wklej tam sam numer, o który Ci chodzi.
+Bez konta lista kończy się pytaniem „Śledzisz wszystkie?” i przyciskiem „Zaloguj się, a Peek zachowa je razem”. Z kontem możesz zamiast tego przekazać dalej e-mail o wysyłce, a Peek doda każdą przesyłkę, która w nim jest: zobacz [dodawanie przesyłek e-mailem](guide:add-parcels-by-email). Panel na stronie po zalogowaniu nie pokazuje listy, więc wklej tam sam numer, o który ci chodzi.
 
 ## Co, jeśli mój numer zna więcej niż jeden przewoźnik?
 
@@ -59,7 +59,7 @@ Wymagany kod pocztowy ma opis „Przewoźnik potrzebuje kodu pocztowego odbiorcy
 
 Bo wpisany numer nie jest numerem przesyłki, a Peek mówi, gdzie znaleźć właściwy. Na stronie głównej i w aplikacjach wstrzymuje numery zamówień z pięciu sklepów: nie pyta o nie żadnego przewoźnika i ich nie dodaje. Komunikat mówi na przykład „To wygląda na numer zamówienia Shein”:
 
-| Sklep | Numer zamówienia | Dokąd odsyła Cię Peek |
+| Sklep | Numer zamówienia | Dokąd odsyła cię Peek |
 | --- | --- | --- |
 | [Amazon](guide:amazon-orders) | 3-7-7 cyfr albo D01-… przy zamówieniach cyfrowych | **Twoje zamówienia**, z przyciskiem „Otwórz moje zamówienia Amazon” |
 | [Shein](guide:shein-orders) | GSH, GSO lub GSU i 12 liter lub cyfr | **Moje zamówienia**, potem **Śledź** |

@@ -28,14 +28,14 @@ Spacje nie mają znaczenia przy wklejaniu do Peek. Oficjalny tracker ZTO przyjmu
 
 Każdy skan ma krótką chińską nazwę etapu, którą Peek pokazuje po angielsku:
 
-| ZTO podaje | Peek wyświetla | Etap w Peek | Co to oznacza dla Twojej paczki |
+| ZTO podaje | Peek wyświetla | Etap w Peek | Co to oznacza dla twojej paczki |
 | --- | --- | --- | --- |
 | `已取件` | `Collected` | „Przyjęta przez przewoźnika” | Kurier ZTO odebrał przesyłkę od nadawcy. |
 | `已收件` | `Received` | „Przyjęta przez przewoźnika” | Placówka ZTO przyjęła paczkę do systemu. |
 | `运输中` | `In transit` | „W transporcie” | W drodze między sortowniami a oddziałami ZTO. |
 | `派件中` | `Out for delivery` | „W doręczeniu” | Kurier ZTO zabrał paczkę w trasę doręczeń. |
 | `已代收` | `Held at a collection point for the recipient` | „Do odbioru” | Punkt odbioru (np. stacja paczkowa) przechowuje przesyłkę do odebrania. |
-| `已签收` | `Signed for` | „Dostarczona” | Ktoś pokwitował odbiór (`签收`): Ty, osoba upoważniona lub magazyn docelowy. |
+| `已签收` | `Signed for` | „Dostarczona” | Ktoś pokwitował odbiór (`签收`): ty, osoba upoważniona lub magazyn docelowy. |
 | `异常通知` | `Exception notice` | „Zgłoszono problem” | ZTO odnotowało utrudnienie. Peek pokazuje samą nazwę etapu; pełny opis znajduje się w trackerze ZTO. |
 
 Pozostałe wpisy, takie jak zwrot (`退回件`) czy przekierowanie, zachowują w Peek oryginalne chińskie brzmienie. Więcej o ogólnych etapach w poradniku [co oznaczają statusy śledzenia](guide:tracking-statuses).
@@ -46,13 +46,13 @@ Pozostałe wpisy, takie jak zwrot (`退回件`) czy przekierowanie, zachowują w
 
 Poniższe zasady obowiązują przy doręczeniach na terenie **Chin kontynentalnych**:
 
-Kurier ZTO przynosi paczkę pod adres albo zostawia ją w pobliskiej stacji paczkowej (`驿站`), punkcie odbioru (`代收点`) lub inteligentnym automacie paczkowym (`智能快件箱`) — umowa o świadczenie usług ZTO dopuszcza te formy. Chińskie *Przepisy o zarządzaniu rynkiem usług kurierskich* (`快递市场管理办法`), obowiązujące od 1 marca 2024 r., wymagają jednak Twojej zgody na umieszczenie przesyłki w automacie lub stacji i dają prawo sprawdzenia paczki przy odbiorze z listem przewozowym, a przy widocznym uszkodzeniu opakowania lub delikatnej zawartości — zajrzenia do środka albo odmowy przyjęcia.
+Kurier ZTO przynosi paczkę pod adres albo zostawia ją w pobliskiej stacji paczkowej (`驿站`), punkcie odbioru (`代收点`) lub inteligentnym automacie paczkowym (`智能快件箱`) — umowa o świadczenie usług ZTO dopuszcza te formy. Chińskie *Przepisy o zarządzaniu rynkiem usług kurierskich* (`快递市场管理办法`), obowiązujące od 1 marca 2024 r., wymagają jednak twojej zgody na umieszczenie przesyłki w automacie lub stacji i dają prawo sprawdzenia paczki przy odbiorze z listem przewozowym, a przy widocznym uszkodzeniu opakowania lub delikatnej zawartości — zajrzenia do środka albo odmowy przyjęcia.
 
 W przypadku paczek pozostawionych bez osobistego przekazania (pod drzwiami, w automacie lub stacji) umowa ZTO wymaga nagrania wideo (`录制视频`) z odbioru, otwarcia i sprawdzenia zawartości jako dowodu; doręczenie wykonane zgodnie z ustaleniami uznaje się za potwierdzone, jeśli w ciągu trzech dni (`三日`) nikt nie zgłosi pisemnego sprzeciwu.
 
 Według oficjalnego FAQ ZTO w Chinach:
 
-- **Brak kodu odbioru do automatu?** Wyszukaj oddział obsługujący Twój adres w [wyszukiwarce oddziałów ZTO](https://www.zto.com/service/station) (`服务网点查询`) i zadzwoń tam albo podaj numer listu na infolinii `95311`, aby uzyskać telefon do kuriera lub oddziału.
+- **Brak kodu odbioru do automatu?** Wyszukaj oddział obsługujący twój adres w [wyszukiwarce oddziałów ZTO](https://www.zto.com/service/station) (`服务网点查询`) i zadzwoń tam albo podaj numer listu na infolinii `95311`, aby uzyskać telefon do kuriera lub oddziału.
 - **Automat prosi o dopłatę za przeterminowany odbiór?** ZTO informuje, by przy odbiorze stuknąć pomiń (`跳过`) — nie zapłacisz wtedy nic.
 - **Żądanie opłaty za doręczenie?** Oddział doręczający nie ma prawa pobierać od odbiorcy żadnej opłaty za doręczenie (`派件网点不可以向收件客户收取任何派送费`).
 - **Adres poza strefą doręczeń?** Odbierz paczkę osobiście w oddziale (`自提`) lub poproś nadawcę o przeadresowanie inną firmą kurierską.
@@ -84,9 +84,9 @@ W sprawie samego zamówienia skontaktuj się w pierwszej kolejności ze sprzedaw
 
 Wklej numer w [Peek](/): obsługuje ponad 4 500 przewoźników. Samo wklejenie numeru ZTO nie powoduje automatycznego odpytania ZTO Express: Peek sprawdza najpierw wybranych innych przewoźników używających tego samego układu cyfr (np. [DHL](carrier:dhl) i [BRT](carrier:brt) dla 12 cyfr; DPD, [Chronopost](carrier:chronopost), [Hermes](carrier:hermes-de), [SEUR](carrier:seur) i [BRT](carrier:brt) dla 14 cyfr; najpierw ZTO International dla numerów `771`), a potem usługi śledzenia, pokazując „Sprawdzanie usług śledzenia…”. Jeśli znajdą one przesyłkę i wskażą ZTO Express, Peek zapisze ją pod ZTO Express i odpyta ZTO przy kolejnym sprawdzeniu; jeśli nic się nie pojawi, zobaczysz „jeszcze nie znaleziono · Peek sprawdza dalej”. Aby od razu czytać oficjalny tracker ZTO Express, naciśnij „Zmień” i wybierz **ZTO Express** w sekcji „Pasują do numeru” albo wyszukaj `ZTO` lub `中通快递` (samo `中通` pokazuje też ZTO International); na dodanej już paczce użyj „Zmień przewoźnika”. ZTO Express przyjmuje w Peek wyłącznie 12 cyfr lub 14 cyfr od `7` — przy innym numerze pojawia się komunikat „nie wydaje takich numerów”.
 
-Peek odczytuje własny tracker ZTO i otwiera przeglądarkę, gdy ZTO zażąda weryfikacji. Dla każdego skanu pokazuje angielską nazwę etapu (tabela wyżej), miasto lub chińską nazwę placówki ZTO oraz czas w strefie Twojego urządzenia (na peektracker.com oraz w aplikacjach na iPhone'a i Androida pod historią widnieje „Godziny w twojej strefie czasowej: …”). Pomija pełne zdanie opisu skanu wraz z kontaktami do kurierów, numerami telefonów oraz imieniem i adresem odbiorcy, i nie pokazuje szacowanej daty dostawy. Ponieważ publiczny tracker ZTO na komputerze potrafi ukrywać najwcześniejsze wpisy zamówienia, może ich brakować również w Peek. Numer międzynarodowy od spedytora dodaj jako osobną przesyłkę.
+Peek odczytuje własny tracker ZTO i otwiera przeglądarkę, gdy ZTO zażąda weryfikacji. Dla każdego skanu pokazuje angielską nazwę etapu (tabela wyżej), miasto lub chińską nazwę placówki ZTO oraz czas w strefie twojego urządzenia (na peektracker.com oraz w aplikacjach na iPhone'a i Androida pod historią widnieje „Godziny w twojej strefie czasowej: …”). Pomija pełne zdanie opisu skanu wraz z kontaktami do kurierów, numerami telefonów oraz imieniem i adresem odbiorcy, i nie pokazuje szacowanej daty dostawy. Ponieważ publiczny tracker ZTO na komputerze potrafi ukrywać najwcześniejsze wpisy zamówienia, może ich brakować również w Peek. Numer międzynarodowy od spedytora dodaj jako osobną przesyłkę.
 
-Dopóki masz otwartą paczkę lub w dniu doręczenia włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu zeskanowania paczki jako „W doręczeniu” nawet co 2 minuty (co 5 minut, gdy zapytanie do ZTO otworzyło przeglądarkę), dopóki odpowiada tracker ZTO (przez same usługi śledzenia: co godzinę, co 3 godziny po dobie bez ruchu i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach). W pozostałych przypadkach oraz po dwóch dniach ciszy (lub 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę. Alerty do wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie” / „Tylko w dniu dostawy”. Peek nie skontaktuje się za Ciebie z ZTO, spedytorem ani sprzedawcą.
+Dopóki masz otwartą paczkę lub w dniu doręczenia włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu zeskanowania paczki jako „W doręczeniu” nawet co 2 minuty (co 5 minut, gdy zapytanie do ZTO otworzyło przeglądarkę), dopóki odpowiada tracker ZTO (przez same usługi śledzenia: co godzinę, co 3 godziny po dobie bez ruchu i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach). W pozostałych przypadkach oraz po dwóch dniach ciszy (lub 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) Peek sprawdza co godzinę. Alerty do wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie” / „Tylko w dniu dostawy”. Peek nie skontaktuje się za ciebie z ZTO, spedytorem ani sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie ZTO Express
 
@@ -104,7 +104,7 @@ Według FAQ ZTO (czasy orientacyjne) przesyłki wewnątrz jednej prowincji oraz 
 
 ### Co oznacza status „已签收” w śledzeniu ZTO?
 
-Odebrano za pokwitowaniem: Peek pokazuje `Signed for` i etap „Dostarczona”. Podpisać mógł odbiorca, inna osoba w jego imieniu, recepcja budynku albo magazyn spedytora. Inne znaczenie ma `已代收` („Do odbioru”): paczka czeka na Ciebie w punkcie odbioru lub stacji paczkowej.
+Odebrano za pokwitowaniem: Peek pokazuje `Signed for` i etap „Dostarczona”. Podpisać mógł odbiorca, inna osoba w jego imieniu, recepcja budynku albo magazyn spedytora. Inne znaczenie ma `已代收` („Do odbioru”): paczka czeka na ciebie w punkcie odbioru lub stacji paczkowej.
 
 ### Jaki jest numer telefonu do ZTO Express?
 

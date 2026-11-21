@@ -23,7 +23,7 @@ Strona `econt.com` otwiera się po bułgarsku (`Проследи пратка`) 
 | Status Econt | Co to oznacza dla paczki | Peek pokazuje |
 | --- | --- | --- |
 | `Awaiting delivery to Econt` | Nadawca [utworzył etykietę](guide:tracking-statuses), ale nie przekazał jeszcze paczki firmie Econt. | „Zarejestrowana” |
-| `Submitted to courier` | Na samym początku historii: kurier odebrał paczkę od nadawcy („Przyjęta przez przewoźnika”). Po skanie w oddziale lub na trasie: paczka wyjechała do Ciebie („W doręczeniu”). | „Przyjęta przez przewoźnika” / „W doręczeniu” |
+| `Submitted to courier` | Na samym początku historii: kurier odebrał paczkę od nadawcy („Przyjęta przez przewoźnika”). Po skanie w oddziale lub na trasie: paczka wyjechała do ciebie („W doręczeniu”). | „Przyjęta przez przewoźnika” / „W doręczeniu” |
 | `Arrival at an office` | Dotarcie do wskazanego obok oddziału Econt lub centrum logistycznego (w tym punktu odbioru). | „W transporcie” (lub „Do odbioru”) |
 | `Received by line-haul` | Przewóz na linii międzymiastowej między centrami; dopisek podaje trasę z miasta do miasta. | „W transporcie” |
 | `Change delivery terms` | Zmieniono dyspozycję doręczenia (np. oddział lub dzień); temat widnieje po `Change delivery terms:`, a paczka nie zmieniła miejsca. | *(notatka bez etapu)* |
@@ -33,7 +33,7 @@ Strona `econt.com` otwiera się po bułgarsku (`Проследи пратка`) 
 | `Delivery return` | Przesyłka wraca do nadawcy. | „Zwrócona nadawcy” |
 | `Shipment destruction` | Przesyłka skierowana do utylizacji; od razu skontaktuj się ze sklepem lub z Econt. | „Zgłoszono problem” |
 | `Information` | Komunikat informacyjny bez zmiany etapu. | *(notatka bez etapu)* |
-| `Return receipt: Delivered` | Skan podpisanego zwrotnego potwierdzenia odbioru wracającego do nadawcy — nie dotyczy już Twojej paczki. | *(potwierdzenie, bez etapu)* |
+| `Return receipt: Delivered` | Skan podpisanego zwrotnego potwierdzenia odbioru wracającego do nadawcy — nie dotyczy już twojej paczki. | *(potwierdzenie, bez etapu)* |
 
 Zwróć uwagę na `Submitted to courier`: przed jakimkolwiek oddziałem, trasą liniową, przekierowaniem lub próbą doręczenia oznacza odbiór od nadawcy, a później — ostatnią milę do odbiorcy.
 
@@ -59,8 +59,8 @@ W razie uszkodzenia, braków lub zaginięcia ([uszkodzona paczka](guide:damaged-
 
 Na [stronie centrum obsługi klienta](https://www.econt.com/en/client-center) Econt podaje:
 
-- **Z Bułgarii i Grecji:** `0 7001 7300` (w cenie połączenia lokalnego lub zgodnie z taryfą Twojego operatora).
-- **Z pozostałych krajów:** `+359 88 565 43 21` (zgodnie z cennikiem Twojego operatora).
+- **Z Bułgarii i Grecji:** `0 7001 7300` (w cenie połączenia lokalnego lub zgodnie z taryfą twojego operatora).
+- **Z pozostałych krajów:** `+359 88 565 43 21` (zgodnie z cennikiem twojego operatora).
 - **Online:** wirtualna asystentka `Ask Ena`, wyszukiwarka placówek i godzin pracy (`I want to find offices and working time`) oraz formularz reklamacyjny (`I want to file a claim`).
 
 Gdy podejrzany SMS żąda dopłaty poza oficjalną aplikacją lub domeną `econt.com`, porównaj go z poradnikiem o [fałszywych SMS-ach o dostawie](guide:delivery-scam-texts).
@@ -71,7 +71,7 @@ Ponieważ 13 cyfr pasuje do wielu firm, po samym numerze [Peek](/) odpytuje Econ
 
 Peek pobiera dane z usługi śledzenia Econt bez konta i kodu pocztowego, pokazuje bieżący status, zaznacza oddziały na mapie, przy statusie „Do odbioru” podaje oddział przechowujący paczkę i zachowuje do 100 najnowszych skanów. Dla osoby, która dodała przesyłkę, widoczne pozostają nazwa odbiorcy i osoba kwitująca po `Delivered:` (ukryte pod udostępnionym linkiem), natomiast liczba paczek, nazwisko kuriera, nadawca i numery zleceń są pomijane; Econt nie udostępnia prognozy dnia doręczenia, wagi ani zdjęcia doręczenia.
 
-Godziny są odczytywane w strefie Sofii (`Europe/Sofia`, zimą `UTC+2`, latem `UTC+3`) i przeliczane na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”). Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a od `06:00` czasu sofijskiego w dniu skanu „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka Econt (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez skanu — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie zmieni dyspozycji w Econt ani nie złoży reklamacji w Twoim imieniu.
+Godziny są odczytywane w strefie Sofii (`Europe/Sofia`, zimą `UTC+2`, latem `UTC+3`) i przeliczane na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”). Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a od `06:00` czasu sofijskiego w dniu skanu „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka Econt (przez serwisy śledzące: co godzinę, co 3 godz. po spokojnej dobie i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych alertach); poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez skanu — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie zmieni dyspozycji w Econt ani nie złoży reklamacji w twoim imieniu.
 
 ## Najczęstsze pytania o śledzenie Econt
 

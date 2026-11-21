@@ -1,6 +1,6 @@
 ---
 title: FedEx śledzenie: numer przesyłki, statusy i cło
-description: Śledzenie przesyłki FedEx: jak wygląda 12-cyfrowy numer, co znaczą „Delivery exception” i inne skany, cło za paczki spoza UE i Twoje prawa, gdy paczka zaginie.
+description: Śledzenie przesyłki FedEx: jak wygląda 12-cyfrowy numer, co znaczą „Delivery exception” i inne skany, cło za paczki spoza UE i twoje prawa, gdy paczka zaginie.
 slug: fedex-sledzenie
 published: 2026-10-13
 updated: 2026-11-17
@@ -25,7 +25,7 @@ Dwanaście cyfr mają też numery DPD France, Mondial Relay, BRT i kilku azjatyc
 
 Peek odczytuje skany FedEx po angielsku, tak jak zapisuje je FedEx, a nad nimi pokazuje etap po polsku. Oto najważniejsze, mniej więcej w kolejności, w jakiej spotyka je paczka:
 
-| FedEx pisze | Peek pokazuje | Co to znaczy dla Ciebie |
+| FedEx pisze | Peek pokazuje | Co to znaczy dla ciebie |
 | --- | --- | --- |
 | `Shipment information sent to FedEx` | Zarejestrowana | Nadawca przekazał FedEx dane przesyłki. |
 | `Picked up`, `Tendered at FedEx location` | Przyjęta przez przewoźnika | FedEx ma paczkę: odebrał ją kurier albo nadawca oddał ją w placówce FedEx. |
@@ -41,7 +41,7 @@ Peek odczytuje skany FedEx po angielsku, tak jak zapisuje je FedEx, a nad nimi p
 
 Gdy FedEx oznaczy paczkę jako opóźnioną, Peek pokazuje „Zgłoszono problem”, chyba że ostatni skan to `Package received after FedEx cutoff`: FedEx przyjął paczkę po godzinie granicznej danego dnia, więc wyruszy w następnym dniu roboczym.
 
-## Kurier FedEx Cię nie zastał: nieudane doręczenie i punkty odbioru
+## Kurier FedEx cię nie zastał: nieudane doręczenie i punkty odbioru
 
 Gdy doręczenie się nie uda, skan może podać powód: `Customer not available or business closed`, gdy nikogo nie było, albo `Local delivery restriction - Delivery not attempted`, gdy lokalne ograniczenie nie pozwoliło na próbę doręczenia.
 
@@ -57,7 +57,7 @@ Według Krajowej Administracji Skarbowej od 1 lipca 2026 r. zakupy internetowe s
 
 Jeśli status stoi w miejscu, zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating).
 
-Przy zakupach w sklepie to sprzedawca odpowiada za to, żeby paczka do Ciebie dotarła, nawet gdy wiezie ją FedEx. Według Your Europe sprzedawca odpowiada za uszkodzenia towaru od wysyłki aż do chwili, gdy go otrzymasz. Jeśli nie umówiliście się inaczej, musi dostarczyć towar w ciągu 30 dni. Gdy towaru nie ma, przypomnij sprzedawcy o zamówieniu i wyznacz mu dodatkowy, rozsądny termin. Jeśli i tego nie dotrzyma, możesz rozwiązać umowę i odzyskać pieniądze.
+Przy zakupach w sklepie to sprzedawca odpowiada za to, żeby paczka do ciebie dotarła, nawet gdy wiezie ją FedEx. Według Your Europe sprzedawca odpowiada za uszkodzenia towaru od wysyłki aż do chwili, gdy go otrzymasz. Jeśli nie umówiliście się inaczej, musi dostarczyć towar w ciągu 30 dni. Gdy towaru nie ma, przypomnij sprzedawcy o zamówieniu i wyznacz mu dodatkowy, rozsądny termin. Jeśli i tego nie dotrzyma, możesz rozwiązać umowę i odzyskać pieniądze.
 
 **Peek pokazuje „Dostarczona”, a paczki nie ma?** Skan doręczenia FedEx podaje, kto pokwitował odbiór, ale Peek tego nie zapisuje. Sprawdź to na fedex.com, a potem skontaktuj się ze sprzedawcą. Więcej w poradnikach [paczka doręczona, a jej nie ma](guide:delivered-not-received) i [zaginiona paczka](guide:lost-parcel).
 
@@ -67,7 +67,7 @@ Przy zakupach w sklepie to sprzedawca odpowiada za to, żeby paczka do Ciebie do
 
 Serwer Peek otwiera stronę śledzenia fedex.com w przeglądarce nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 5 minut: tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego, i dopóki odpowiada własne śledzenie FedEx. Przez serwisy śledzenia przesyłek Peek sprawdza co godzinę, a w dniu doręczenia nawet co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. FedEx często odmawia takich wizyt. Gdy odmówi albo zażąda weryfikacji odbiorcy, historię uzupełniają serwisy śledzenia przesyłek.
 
-Widzisz status, każdy skan z miejscem i godziną podaną przez FedEx (w strefie czasowej Twojego urządzenia), trasę przez te miejsca na mapie, przewidywany dzień doręczenia, godzinę doręczenia i, dopóki paczka czeka, nazwę i adres placówki FedEx, jeśli FedEx je podaje. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie ma tam Twojego imienia i adresu, nadawcy, podpisu, wagi ani wymiarów. Skany są po angielsku, tak jak zapisuje je FedEx (`On FedEx vehicle for delivery` to wydanie do doręczenia). Skan doręczenia, odbiór w placówce i wyjątek w przesyłce (`Delivered`, `Ready for pickup`, `Shipment exception`) Peek pokazuje własnymi słowami: „Dostarczona”, „Do odbioru” i „Problem z przesyłką”. Zmianę doręczenia, cło i reklamację załatwisz tylko w FedEx albo u nadawcy.
+Widzisz status, każdy skan z miejscem i godziną podaną przez FedEx (w strefie czasowej twojego urządzenia), trasę przez te miejsca na mapie, przewidywany dzień doręczenia, godzinę doręczenia i, dopóki paczka czeka, nazwę i adres placówki FedEx, jeśli FedEx je podaje. Powiadomienia możesz dostawać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Nie ma tam twojego imienia i adresu, nadawcy, podpisu, wagi ani wymiarów. Skany są po angielsku, tak jak zapisuje je FedEx (`On FedEx vehicle for delivery` to wydanie do doręczenia). Skan doręczenia, odbiór w placówce i wyjątek w przesyłce (`Delivered`, `Ready for pickup`, `Shipment exception`) Peek pokazuje własnymi słowami: „Dostarczona”, „Do odbioru” i „Problem z przesyłką”. Zmianę doręczenia, cło i reklamację załatwisz tylko w FedEx albo u nadawcy.
 
 ## Pytania o FedEx śledzenie
 

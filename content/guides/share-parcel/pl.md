@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Żeby udostępnić śledzenie przesyłki w [Peeku](/), otwórz przesyłkę, stuknij jej przycisk udostępniania i wyślij link, który utworzy Peek: osoba, która go dostanie, otworzy stronę przesyłki bez konta. Jeśli najpierw włączysz „Zapakuj jako prezent”, strona do czasu doręczenia zachowa w tajemnicy, co jest w środku i kto to wysłał, a potem pokaże Twój liścik.
+Żeby udostępnić śledzenie przesyłki w [Peeku](/), otwórz przesyłkę, stuknij jej przycisk udostępniania i wyślij link, który utworzy Peek: osoba, która go dostanie, otworzy stronę przesyłki bez konta. Jeśli najpierw włączysz „Zapakuj jako prezent”, strona do czasu doręczenia zachowa w tajemnicy, co jest w środku i kto to wysłał, a potem pokaże twój liścik.
 
 Udostępnianie działa tak samo na stronie internetowej i w aplikacjach na iPhone’a, iPada, Maca i Androida.
 
@@ -29,27 +29,27 @@ Otwórz przesyłkę i stuknij jej przycisk udostępniania albo wybierz „Udost�
 | Strona internetowa, bez konta | Przycisk udostępniania w nagłówku strony albo „Udostępnij” w rzędzie działań przesyłki |
 | iPhone, iPad, Mac | Przycisk udostępniania na stronie przesyłki albo „Udostępnij…” po przytrzymaniu jej karty (na Macu po kliknięciu drugim przyciskiem) |
 | Android | Przycisk udostępniania na stronie przesyłki albo menu jej karty |
-| Przesyłka, którą ktoś Ci udostępnił | Jej przycisk udostępniania, tylko do zwykłego linku. Prezent go nie ma |
+| Przesyłka, którą ktoś ci udostępnił | Jej przycisk udostępniania, tylko do zwykłego linku. Prezent go nie ma |
 
 Nie potrzebujesz konta, żeby udostępniać: bez niego właścicielem przesyłki jest przeglądarka albo telefon, który ją wyszukał, i ma do dyspozycji to samo okno. Osoba, której udostępniono przesyłkę, może przekazać ją dalej, ale tylko jako zwykły link, bez przełączników i bez nazwy. Zarchiwizowanej przesyłki na koncie nie da się udostępnić, dopóki jej nie przywrócisz. Co jeszcze zmienia konto, opisuje poradnik [korzystanie z Peeka bez konta](guide:account-or-guest).
 
 ## Co widzi druga osoba i czy potrzebuje konta?
 
-Nie potrzebuje konta: link otwiera stronę przesyłki z napisem „Udostępniono ci · bez konta”. Widzi to samo co Ty, ale bez Twoich prywatnych danych:
+Nie potrzebuje konta: link otwiera stronę przesyłki z napisem „Udostępniono ci · bez konta”. Widzi to samo co ty, ale bez twoich prywatnych danych:
 
 | Widzi | Nigdy nie widzi |
 | --- | --- |
 | Status, przewidywaną datę, przewoźnika, mapę i historię śledzenia | Kodu odbioru, PIN-u, tego, kto pokwitował odbiór, numeru drzwi, kodu pocztowego, cyfr telefonu ani imienia, nazwiska czy adresu odbiorcy. Przy doręczeniu widnieje tylko „Dostarczona” |
 | Numer przesyłki, jeśli „Pokaż cały numer” jest włączone | W przeciwnym razie tylko jego ostatnie znaki, np. „••• 0899”, nawet w opisach skanów przewoźnika |
-| Nazwę przesyłki, jeśli „Pokaż nazwę” jest włączone | W przeciwnym razie żadnej nadanej przez Ciebie nazwy |
+| Nazwę przesyłki, jeśli „Pokaż nazwę” jest włączone | W przeciwnym razie żadnej nadanej przez ciebie nazwy |
 
 Nazwa, którą pokażesz, jest zapisana w samym linku, po znaku #, więc Peek jej nie przechowuje. Podgląd linku w komunikatorze pokazuje status, przewoźnika i przewidywaną datę, nigdy numer, nazwę ani miejsce. Wyszukiwarki nigdy nie indeksują linków do przesyłek.
 
-Może też użyć „Dodaj do kalendarza”, gdy jest przewidywana data. Jeśli jest zalogowana, a cały numer jest widoczny, „Dodaj do moich dostaw” kopiuje przesyłkę na jej konto: „Osoba, która ją udostępniła, nie widzi nic z Twojego konta.” Jej kopia sama pobiera skany, więc nic, co przewoźnik przekazał tylko Tobie, do niej nie trafia. Gdy numer jest ukryty, nie może zachować przesyłki.
+Może też użyć „Dodaj do kalendarza”, gdy jest przewidywana data. Jeśli jest zalogowana, a cały numer jest widoczny, „Dodaj do moich dostaw” kopiuje przesyłkę na jej konto: „Osoba, która ją udostępniła, nie widzi nic z twojego konta.” Jej kopia sama pobiera skany, więc nic, co przewoźnik przekazał tylko tobie, do niej nie trafia. Gdy numer jest ukryty, nie może zachować przesyłki.
 
 ## Jak udostępnić przesyłkę jako prezent i nie zepsuć niespodzianki?
 
-Przed wysłaniem linku włącz w oknie udostępniania „Zapakuj jako prezent”. Do czasu doręczenia strona ukrywa, co jest w środku, kto to wysłał i z jakiej miejscowości; po doręczeniu pokazuje Twój liścik i od kogo jest.
+Przed wysłaniem linku włącz w oknie udostępniania „Zapakuj jako prezent”. Do czasu doręczenia strona ukrywa, co jest w środku, kto to wysłał i z jakiej miejscowości; po doręczeniu pokazuje twój liścik i od kogo jest.
 
 :::steps
 - Włącz „Zapakuj jako prezent” | Podpis nad podglądem zmienia się na „Co pokazuje link do czasu doręczenia”.
@@ -60,9 +60,9 @@ Przed wysłaniem linku włącz w oknie udostępniania „Zapakuj jako prezent”
 Oto, co widzi druga osoba:
 
 :::journey
-- label | Udostępniasz | Zapakowana, a Twój liścik przechowuje Peek
+- label | Udostępniasz | Zapakowana, a twój liścik przechowuje Peek
 - truck | W drodze | „Coś jest w drodze do ciebie”, data dotarcia, jeśli jest przewidywana, i przesyłka przewiązana wstążką
-- home | Doręczona | „Już jest”, Twój liścik, od kogo jest, nazwa przesyłki po „W środku:” i cała trasa
+- home | Doręczona | „Już jest”, twój liścik, od kogo jest, nazwa przesyłki po „W środku:” i cała trasa
 :::
 
 Przed doręczeniem strona nie pokazuje nadawcy, wagi, wymiarów, punktu odbioru, numeru przesyłki (niezależnie od przełącznika numeru), linii statusu przewoźnika ani linku do jego strony. Przy przesyłce z zagranicy skany z kraju nadania łączą się w jeden wiersz, „Opuściła nadawcę”, z nazwą tego kraju i bez miejscowości; gdy przesyłka nie opuszcza kraju, do tego wiersza trafiają tylko skany przyjęcia przez przewoźnika. Opłaty importowe nadal są widoczne, bo zwykle płaci je odbiorca przy doręczeniu: zobacz [paczki zatrzymane przez urząd celny](guide:customs).
@@ -81,13 +81,13 @@ Otwarcie linku nie zapisuje jej do niczego, a jej powiadomienia nigdy nie zawier
 
 Otwórz ponownie okno udostępniania i stuknij „Zakończ udostępnianie” na samym dole: link od razu przestaje działać. Każdy, kto go potem otworzy, przeczyta „Ta przesyłka nie jest już udostępniana” i przestanie dostawać powiadomienia o tej przesyłce.
 
-W przypadku przesyłki na Twoim koncie ponowne udostępnienie („Udostępnij ponownie” w aplikacjach, „Udostępnij…” albo „Kopiuj” na stronie internetowej) tworzy nowy link, a stary już nigdy nie zadziała. Usunięcie przesyłki lub konta od razu usuwa jej linki. Na stronie internetowej bez konta zakończenie udostępniania zachowuje ten sam link: okno pokazuje „Udostępnianie zakończone. Link nic nie pokazuje innym.”, a „Udostępnij ponownie” znowu włącza ten sam link.
+W przypadku przesyłki na twoim koncie ponowne udostępnienie („Udostępnij ponownie” w aplikacjach, „Udostępnij…” albo „Kopiuj” na stronie internetowej) tworzy nowy link, a stary już nigdy nie zadziała. Usunięcie przesyłki lub konta od razu usuwa jej linki. Na stronie internetowej bez konta zakończenie udostępniania zachowuje ten sam link: okno pokazuje „Udostępnianie zakończone. Link nic nie pokazuje innym.”, a „Udostępnij ponownie” znowu włącza ten sam link.
 
 Żeby samodzielnie śledzić przesyłkę, druga osoba potrzebuje jej numeru: zobacz, [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
 ## Jak długo działa udostępniony link do śledzenia?
 
-Link z konta działa tak długo, jak go udostępniasz. Bez konta link wygasa, gdy Peek zapomni o przesyłce: 30 dni po doręczeniu lub zwrocie albo po 90 dniach bez nowych informacji. Na stronie internetowej, gdy ta przesyłka zostanie doręczona, w Twoim oknie widnieje „Działa do” i data, a obok „Zachowaj go na dłużej”, które prowadzi do logowania.
+Link z konta działa tak długo, jak go udostępniasz. Bez konta link wygasa, gdy Peek zapomni o przesyłce: 30 dni po doręczeniu lub zwrocie albo po 90 dniach bez nowych informacji. Na stronie internetowej, gdy ta przesyłka zostanie doręczona, w twoim oknie widnieje „Działa do” i data, a obok „Zachowaj go na dłużej”, które prowadzi do logowania.
 
 Zapomniany link pokazuje „Ta przesyłka została zapomniana”, tak samo jak link, który nigdy nie istniał, więc linków nie da się odgadnąć.
 

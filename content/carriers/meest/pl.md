@@ -29,7 +29,7 @@ Paczki z sieci Meest International, odbierane w punktach Meest Point, mają osob
 
 t.meest-group.com to strona po ukraińsku, ale każdy etap ma tam też wersję angielską, i to angielskie komunikaty pokazuje Peek. Pole śledzenia Meest ma przełącznik „Język statusu” z polskim, tyle że polskie statusy to dosłowne tłumaczenia z angielskiego, czasem mylące. Najczęstsze etapy, w kolejności, w jakiej spotyka je paczka:
 
-| Meest pisze | Co to znaczy dla Ciebie |
+| Meest pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Parcel/shipment registered` | Paczka jest przygotowana do wysyłki w magazynie Meest w kraju nadania. |
 | `Departure from outward office of exchange` | Wyjeżdża z sortowni eksportowej za granicę. |
@@ -37,8 +37,8 @@ t.meest-group.com to strona po ukraińsku, ale każdy etap ma tam też wersję a
 | `Pending customs clearance` | Czeka na odprawę celną przy wwozie ([jak działa cło](guide:customs)). |
 | `Customs clearance completed` | Urząd celny ją zwolnił. |
 | `Arrived at international sorting center` | Paczka do Ukrainy dotarła do międzynarodowej sortowni. |
-| `Shipment handed over to the courier` | Ma ją kurier: wiezie ją pod Twoje drzwi albo do oddziału, w którym ją odbierzesz. |
-| `Shipment ready for pickup` | Czeka na Ciebie w oddziale albo punkcie. |
+| `Shipment handed over to the courier` | Ma ją kurier: wiezie ją pod twoje drzwi albo do oddziału, w którym ją odbierzesz. |
+| `Shipment ready for pickup` | Czeka na ciebie w oddziale albo punkcie. |
 | `Your Parcel is located at the locker` | Czeka w automacie paczkowym. |
 | `Parcel is DELIVERED` albo `Shipment received` | Doręczona albo odebrana. |
 | `Delivery suspended by the sender` | Nadawca wstrzymał doręczenie: zapytaj go. |
@@ -49,7 +49,7 @@ Najbardziej mylą polskie wersje z pola śledzenia. `Przybycie do urzędu wymian
 
 ## Meest paczka: doręczenie, punkty odbioru i automaty
 
-**Meest International (zamówienia ze sklepów).** Lokalna firma kurierska, która doręcza dla Meest, „podejmie dwie próby” doręczenia, a jeśli Cię nie zastanie, zostawi paczkę w najbliższym punkcie odbioru. Paczka czeka tam zwykle 7 dni kalendarzowych, w placówce pocztowej zazwyczaj 2–3 dni. Odbierasz ją, „korzystając z numeru śledzenia lub kodu odbioru, który został wysłany w powiadomieniu”. Nieodebrana może wrócić do nadawcy, podobnie jak paczka, której nie przyjmiesz od kuriera.
+**Meest International (zamówienia ze sklepów).** Lokalna firma kurierska, która doręcza dla Meest, „podejmie dwie próby” doręczenia, a jeśli cię nie zastanie, zostawi paczkę w najbliższym punkcie odbioru. Paczka czeka tam zwykle 7 dni kalendarzowych, w placówce pocztowej zazwyczaj 2–3 dni. Odbierasz ją, „korzystając z numeru śledzenia lub kodu odbioru, który został wysłany w powiadomieniu”. Nieodebrana może wrócić do nadawcy, podobnie jak paczka, której nie przyjmiesz od kuriera.
 
 Zmianę adresu, innego punktu odbioru, późniejszej daty albo dłuższego przechowania (tylko u niektórych lokalnych firm) zgłaszasz w Dziale Obsługi Klienta Meest z numerem paczki. Meest uprzedza, że zmiana adresu może opóźnić doręczenie lub kosztować więcej.
 
@@ -81,7 +81,7 @@ Strona meest.pl nie należy do przewoźnika: to inna firma.
 
 [Peek](/) rozpoznaje numer zbiorczy Meest (`AB1234567CD12345G`) i pyta tylko Meest, a jego odpowiedź to rozstrzyga. Przy numerze z IHB i 10 cyframi pyta i Meest, i HR Parcel, czy go znają, i wybiera tego, który go zna. Numery pocztowe i numery referencyjne nadawców trafiają do Meest dopiero, gdy wybierzesz „Meest” przyciskiem „Zmień” albo wkleisz link Meest: wpisany numer pocztowy idzie do poczty, która go nadała, albo do poczty kraju docelowego (dla Ukrainy to Ukrposzta). Peek czyta linki z t.meest-group.com, ze stron krajowych meest.com (z `parcel_number=`) i z tracking-iframe.meest.com, ale nie z trackera pl.meest.com/sledz-przesylke.
 
-Meest nie podaje strefy czasowej przy skanach, więc Peek odczytuje je według czasu miejsca skanu i pokazuje własną historię Meest. Peek zachowuje status, kraj docelowy, a gdy doręcza partner za granicą, także tego przewoźnika i jego numer: strona paczki pokazuje wtedy na przykład „Doręcza: BOX NOW” (albo „Zgłoszona przewoźnikowi BOX NOW, jeszcze nieprzyjęta”, dopóki paczka jest u niego tylko zgłoszona, bez jego własnego skanu), a paczka jest śledzona dalej u niego, jeśli da się go sprawdzić bezpośrednio. Może Cię też powiadomić, gdy zmieni się status.
+Meest nie podaje strefy czasowej przy skanach, więc Peek odczytuje je według czasu miejsca skanu i pokazuje własną historię Meest. Peek zachowuje status, kraj docelowy, a gdy doręcza partner za granicą, także tego przewoźnika i jego numer: strona paczki pokazuje wtedy na przykład „Doręcza: BOX NOW” (albo „Zgłoszona przewoźnikowi BOX NOW, jeszcze nieprzyjęta”, dopóki paczka jest u niego tylko zgłoszona, bez jego własnego skanu), a paczka jest śledzona dalej u niego, jeśli da się go sprawdzić bezpośrednio. Może cię też powiadomić, gdy zmieni się status.
 
 Nie ma planowanej dostawy, wagi ani punktu odbioru, a oddział, jego godziny i termin odbioru są pominięte: to sprawdzisz u Meest. Numer, który Meest zna tylko jako numer partnera, nie jest śledzony, a stare historie znikają i wyglądają jak nieznaleziona przesyłka.
 

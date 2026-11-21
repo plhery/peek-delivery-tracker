@@ -26,7 +26,7 @@ Trzynastoznakowy zapis to zarazem międzynarodowy standard pocztowy. Numer zako�
 
 Peek pobiera historię Chronopost po francusku i pokazuje komunikaty tak, jak zapisuje je przewoźnik; obok każdego zdarzenia przypisuje czytelny etap po polsku. Najczęstsze wpisy w kolejności, w jakiej zwykle przechodzi je paczka:
 
-| Chronopost pisze | Co to oznacza dla Ciebie | Etap w Peek |
+| Chronopost pisze | Co to oznacza dla ciebie | Etap w Peek |
 | --- | --- | --- |
 | `Colis en cours de préparation chez l'expéditeur` | Nadawca wygenerował etykietę, ale nie przekazał jeszcze paczki kurierowi. | „Zarejestrowana” |
 | `Colis déposé par l'expéditeur` | Nadawca nadał paczkę w Chronopost. | „Przyjęta przez przewoźnika” |
@@ -38,13 +38,13 @@ Peek pobiera historię Chronopost po francusku i pokazuje komunikaty tak, jak za
 | `Livraison reportée` | Partner doręczający w kraju docelowym przełożył dostawę bez podania przyczyny i bez próby doręczenia. | „W transporcie” |
 | `Colis en cours de livraison` | Wydana kurierowi do doręczenia na dziś. | „W doręczeniu” |
 | `Echec de livraison suite à l'absence du destinataire.` | Kurier nie zastał adresata. | „Próba doręczenia” |
-| `Colis non livré : client absent` | Partner zagraniczny nie zastał Cię pod adresem. | „Próba doręczenia” |
+| `Colis non livré : client absent` | Partner zagraniczny nie zastał cię pod adresem. | „Próba doręczenia” |
 | `Colis mis à disposition au point de retrait` | Czeka na ciebie w punkcie odbioru lub automacie. | „Do odbioru” |
 | `Colis remis au destinataire au point de retrait` | Odebrana w punkcie odbioru. | „Dostarczona” |
 | `Colis en retour expéditeur` | Wraca do nadawcy. | „Zgłoszono problem” |
 | `Livraison effectuée` | Paczka doręczona. | „Dostarczona” |
 
-Wpis `Livraison reportée de 24h` (np. po omyłkowym skierowaniu, podczas weryfikacji adresu albo gdy firma odbiorcy jest zamknięta) nie oznacza zagubienia przesyłki. Komunikaty `Destinataire informé par SMS ou mail` oraz `Instruction de livraison reçue` odnotowują jedynie wysłane powiadomienie lub Twoją dyspozycję – paczka nie zmieniła miejsca, więc etap w Peek pozostaje ten sam. Jeżeli po `Colis en retour expéditeur` pojawi się `Livraison effectuée`, przesyłkę odebrał z powrotem nadawca, a nie Ty: Peek oznacza wtedy paczkę jako „Zwrócona nadawcy”. Zobacz też [co oznaczają statusy przesyłek](guide:tracking-statuses).
+Wpis `Livraison reportée de 24h` (np. po omyłkowym skierowaniu, podczas weryfikacji adresu albo gdy firma odbiorcy jest zamknięta) nie oznacza zagubienia przesyłki. Komunikaty `Destinataire informé par SMS ou mail` oraz `Instruction de livraison reçue` odnotowują jedynie wysłane powiadomienie lub twoją dyspozycję – paczka nie zmieniła miejsca, więc etap w Peek pozostaje ten sam. Jeżeli po `Colis en retour expéditeur` pojawi się `Livraison effectuée`, przesyłkę odebrał z powrotem nadawca, a nie ty: Peek oznacza wtedy paczkę jako „Zwrócona nadawcy”. Zobacz też [co oznaczają statusy przesyłek](guide:tracking-statuses).
 
 ## Paczka Chronopost z Francji do Polski: kto doręcza i czy jest cło
 
@@ -61,7 +61,7 @@ Jeśli odbierasz paczkę na terenie Francji (np. przy zakupach z odbiorem w punk
 - **8 dni** w punkcie sklepowym Pickup (*relais*);
 - **5 dni** w automacie paczkowym Pickup (*consigne*).
 
-Po tym terminie paczka automatycznie wraca do nadawcy; zobacz [nieodebrana paczka](guide:uncollected-parcel) oraz [automaty paczkowe](guide:parcel-lockers). Do odbioru wystarczy Pickup Pass (kod QR) albo kody PIN z wiadomości e-mail/SMS, a w sklepie Pickup także oryginał dokumentu tożsamości. Ktoś inny może odebrać przesyłkę Twoim kodem lub Pickup Passem, a w punkcie sklepowym również z oryginałami swojego i Twojego dokumentu tożsamości – pisemnych upoważnień sieć Pickup nie honoruje.
+Po tym terminie paczka automatycznie wraca do nadawcy; zobacz [nieodebrana paczka](guide:uncollected-parcel) oraz [automaty paczkowe](guide:parcel-lockers). Do odbioru wystarczy Pickup Pass (kod QR) albo kody PIN z wiadomości e-mail/SMS, a w sklepie Pickup także oryginał dokumentu tożsamości. Ktoś inny może odebrać przesyłkę twoim kodem lub Pickup Passem, a w punkcie sklepowym również z oryginałami swojego i twojego dokumentu tożsamości – pisemnych upoważnień sieć Pickup nie honoruje.
 
 ## Paczka Chronopost stoi w miejscu, zaginęła lub dotarła uszkodzona
 
@@ -77,7 +77,7 @@ Dane kontaktowe podawane przez La Poste Groupe, Geopost i sieć Pickup (stan na 
 - **Telefon we Francji:** `09 69 39 13 91` – francuski numer infolinii Chronopost wskazywany m.in. przez Pickup, gdy nie dotarły kody odbioru.
 - **Przesyłki Shop2Shop:** serwis `chronoshop2shop.fr`.
 
-Jeżeli złożyłeś do Chronopost pisemną, opatrzoną datą i podpisaną reklamację i przez dwa miesiące nie dostałeś odpowiedzi albo odpowiedź Cię nie satysfakcjonuje, w ciągu roku od złożenia reklamacji możesz bezpłatnie zwrócić się do rzecznika grupy pocztowej – *Médiateur du Groupe La Poste*.
+Jeżeli złożyłeś do Chronopost pisemną, opatrzoną datą i podpisaną reklamację i przez dwa miesiące nie dostałeś odpowiedzi albo odpowiedź cię nie satysfakcjonuje, w ciągu roku od złożenia reklamacji możesz bezpłatnie zwrócić się do rzecznika grupy pocztowej – *Médiateur du Groupe La Poste*.
 
 > Francuska rządowa platforma Cybermalveillance.gouv.fr ostrzega przed fałszywymi SMS-ami i e-mailami podszywającymi się pod Chronopost. We Francji Chronopost nie żąda przy doręczeniu skanu dowodu osobistego ani dopłat za dostawę przez linki w wiadomościach; podejrzane e-maile możesz przesłać na `abuse@chronopost.fr`. Zobacz [jak rozpoznać fałszywe SMS-y o paczce](guide:delivery-scam-texts).
 
@@ -87,7 +87,7 @@ Wklej numer na [Peek](/). Trzynastoznakowe kody zaczynające się od `PZ`, `XR`,
 
 Przy 15-znakowym numerze DPD zaczynającym się od `13` Peek pyta w pierwszej kolejności [DPD Poland](carrier:dpd-pl) razem z DPD Switzerland, DPD Germany, Chronopost i DPD UK (a gdy wszystkie 15 znaków to cyfry zgodne z cyfrą kontrolną FedEx i pierwsza piątka nie zna numeru – sprawdza też FedEx); przy innych 15-znakowych numerach DPD pyta Chronopost wraz z czterema sieciami DPD. Przy 14 cyfrach niezaczynających się od `10` sprawdza w jednej lub dwóch piątkach przewoźników używających tego formatu (dla `13…` zaczyna od DPD Poland, a jeśli pierwsza piątka nie zna numeru, w drugiej pyta m.in. Chronopost), pokazując w tym czasie „Sprawdzanie usług śledzenia…”. Gdy Chronopost potwierdzi paczkę, zobaczysz „Chronopost ma tę przesyłkę.”; zawsze możesz też wybrać przewoźnika ręcznie przyciskiem „Zmień” lub „Zmień przewoźnika”. Działają również linki ze śledzenia `chronopost.fr`, `chronotrace.chronopost.fr` oraz `chronoshop2shop.fr` (z parametrami `listeNumerosLT`, `listeNumeros` lub `numeroLT`), bez kodu pocztowego.
 
-Peek pokazuje aktualny etap, trasę ze skanami na mapie, kraj przeznaczenia, moment doręczenia oraz – dopóki przesyłka czeka na odbiór – nazwę i adres punktu lub automatu. Przewidywaną datę dostawy wyświetla wtedy, gdy Chronopost poda termin ponownego doręczenia, przedział godzinowy albo między piątkiem a niedzielą zapisze `Livraison prévue lundi prochain`. Twojego adresu domowego ani telefonu punktu Peek nie zachowuje. Jeśli skan nie ma zaszytej strefy czasowej, Peek odczytuje go według czasu lokalnego miejsca skanu i przelicza na strefę Twojego urządzenia (z dopiskiem „Godziny w twojej strefie czasowej: …” pod historią na peektracker.com i w aplikacji na iPhonie).
+Peek pokazuje aktualny etap, trasę ze skanami na mapie, kraj przeznaczenia, moment doręczenia oraz – dopóki przesyłka czeka na odbiór – nazwę i adres punktu lub automatu. Przewidywaną datę dostawy wyświetla wtedy, gdy Chronopost poda termin ponownego doręczenia, przedział godzinowy albo między piątkiem a niedzielą zapisze `Livraison prévue lundi prochain`. Twojego adresu domowego ani telefonu punktu Peek nie zachowuje. Jeśli skan nie ma zaszytej strefy czasowej, Peek odczytuje go według czasu lokalnego miejsca skanu i przelicza na strefę twojego urządzenia (z dopiskiem „Godziny w twojej strefie czasowej: …” pod historią na peektracker.com i w aplikacji na iPhonie).
 
 Sprawdzanie odbywa się nawet co 10 minut, a w dniu doręczenia od 6:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio Chronopost (po nieudanym zapytaniu lub przez zewnętrzne serwisy śledzenia – co 15 minut; jeśli podane jest okno czasowe, rytm 2-minutowy rusza 30 minut przed jego początkiem). Gdy paczkę przejmie partner doręczający, Peek przechodzi na jego własny rytm odpytywania. Po dwóch dniach bez nowego skanu (lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”) sprawdza historię co godzinę, a po dwóch dniach bez rozpoznania nieznanego numeru wyświetla: „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”.
 

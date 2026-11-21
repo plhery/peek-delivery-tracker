@@ -20,13 +20,13 @@ updated: 2026-11-17
 | `RR000000005CN` | [Numer pocztowy](guide:tracking-number-formats) z kodem kraju na końcu, tu China Post. |
 | `YT1234567890123456` | Nie 4PX, tylko [YunExpress](carrier:yunexpress). |
 
-Na stronie 4PX wpisuj sam ciąg liter i cyfr, bez spacji. Na stronie wyniku 4PX może pokazać dwa numery: „4PX Order No.” i „Tracking No.”, czyli numer przewoźnika, który doręcza paczkę w Twoim kraju. Sklep może podać Ci właśnie ten drugi numer zamiast numeru 4PX; strona 4PX odpowiada też na część takich numerów.
+Na stronie 4PX wpisuj sam ciąg liter i cyfr, bez spacji. Na stronie wyniku 4PX może pokazać dwa numery: „4PX Order No.” i „Tracking No.”, czyli numer przewoźnika, który doręcza paczkę w twoim kraju. Sklep może podać ci właśnie ten drugi numer zamiast numeru 4PX; strona 4PX odpowiada też na część takich numerów.
 
 ## Statusy 4PX: co znaczą angielskie komunikaty
 
 Strona 4PX nie ma wersji polskiej: przeglądarka ustawiona na polski dostaje interfejs po angielsku. Linie skanów są zwykle po angielsku, a przycisk „translate:” tłumaczy je tylko na angielski albo chiński uproszczony, albo pokazuje oryginał. Linie, które widać najczęściej, w kolejności, w jakiej spotyka je paczka:
 
-| 4PX pisze | Co to znaczy dla Ciebie |
+| 4PX pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Parcel information received` | Sprzedawca utworzył przesyłkę. 4PX jeszcze nie ma paczki. |
 | `4px received shipment.` | Paczka jest już w magazynie 4PX. |
@@ -76,7 +76,7 @@ Polskiego numeru, adresu ani biura dla odbiorców 4PX nie podaje. W sprawie zam�
 
 Peek czyta 4PX po angielsku i pokazuje status, historię z miejscem każdego skanu na mapie, godzinę doręczenia, kraj docelowy oraz lokalnego przewoźnika z jego numerem. Gdy ten przewoźnik jest na liście Peek (na przykład USPS), śledzenie przechodzi do niego, gdy tam pojawią się nowsze skany. `Out for delivery` i `Delivery attempt unsuccessful` widzisz w słowach Peek, pozostałe linie tak, jak pisze je 4PX. Przewidywanej daty dostawy, danych punktu odbioru ani wagi przy 4PX tu nie zobaczysz.
 
-Godziny skanów Peek odczytuje w strefach czasowych 4PX (skan bez strefy czasowej według czasu miejsca skanu) i pokazuje w strefie czasowej Twojego urządzenia. Peek sprawdza paczkę nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie 4PX; przez serwisy śledzenia przesyłek co 15 minut), i powiadomi Cię o każdym skanie, tylko o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL i USPS co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie skontaktuje się za Ciebie z 4PX ani ze sklepem.
+Godziny skanów Peek odczytuje w strefach czasowych 4PX (skan bez strefy czasowej według czasu miejsca skanu) i pokazuje w strefie czasowej twojego urządzenia. Peek sprawdza paczkę nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie 4PX; przez serwisy śledzenia przesyłek co 15 minut), i powiadomi cię o każdym skanie, tylko o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL i USPS co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie skontaktuje się za ciebie z 4PX ani ze sklepem.
 
 ## Pytania o śledzenie 4PX
 
@@ -86,7 +86,7 @@ To chińska firma logistyczna z siedzibą w Shenzhen, działająca od 2004 roku,
 
 ### Jaki kurier doręcza paczki 4PX w Polsce?
 
-4PX nie podaje jednego przewoźnika dla Polski. Firmę, która ma Twoją paczkę, pokazuje pole „Terminal Service Provider” na stronie wyniku, razem z jej numerem w „Tracking No.”.
+4PX nie podaje jednego przewoźnika dla Polski. Firmę, która ma twoją paczkę, pokazuje pole „Terminal Service Provider” na stronie wyniku, razem z jej numerem w „Tracking No.”.
 
 ### Jaki jest czas dostawy 4PX Express?
 

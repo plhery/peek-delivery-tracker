@@ -44,7 +44,7 @@ Strona `myhermes.de` działa wyłącznie po niemiecku; gdy sprawdzasz paczkę po
 Dwie istotne uwagi przy czytaniu osi czasu:
 
 - Wpisy `Für die Sendung wurde ein WunschPaketShop gebucht.` oraz `Ein WunschTag für die Zustellung wurde gebucht.` potwierdzają jedynie zapisanie preferencji doręczenia przez odbiorcę, a nie ruch paczki — Peek je pomija, aby nie cofać aktualnego etapu przesyłki.
-- Jeśli kurierowi zabraknie czasu na trasie przed dotarciem pod Twój adres (*round ran out of time*), próba doręczenia nie została podjęta: przesyłka zachowuje status "W transporcie" i wyjeżdża ponownie w następnym dniu roboczym.
+- Jeśli kurierowi zabraknie czasu na trasie przed dotarciem pod twój adres (*round ran out of time*), próba doręczenia nie została podjęta: przesyłka zachowuje status "W transporcie" i wyjeżdża ponownie w następnym dniu roboczym.
 
 ## Doręczenie w Niemczech, punkty odbioru i paczki do Polski
 
@@ -63,7 +63,7 @@ Dwie istotne uwagi przy czytaniu osi czasu:
 
 - **Brak ruchu po "Zarejestrowana":** dopóki widnieje wyłącznie elektroniczne zgłoszenie, nadawca nie przekazał jeszcze paczki do sieci Hermes. Gdy stan nie zmienia się przez kilka dni, skontaktuj się ze sklepem i sprawdź, [dlaczego śledzenie przestaje się aktualizować](guide:tracking-not-updating).
 - **Status "Dostarczona", ale paczki nie ma:** upewnij się, czy przesyłka nie trafiła do sąsiada albo punktu odbioru, i od razu zgłoś sprawę sprzedawcy; kolejne kroki opisuje poradnik [przesyłka oznaczona jako dostarczona, ale nieodebrana](guide:delivered-not-received).
-- **Zakupy w sklepie internetowym (prawa w UE i Niemczech):** zgodnie z prawem unijnym oraz niemieckim kodeksem cywilnym (§ 475 BGB) profesjonalny sprzedawca ponosi ryzyko utraty lub uszkodzenia rzeczy w transporcie aż do chwili wydania jej kupującemu i ma obowiązek dostarczyć zamówienie w ciągu **30 dni**, o ile nie uzgodniono inaczej. Od odebrania towaru przysługuje Ci także **14 dni** na odstąpienie od umowy zawartej na odległość (§§ 355 i 356 BGB). W razie zaginięcia, opóźnienia lub szkody reklamację kieruj bezpośrednio do sklepu.
+- **Zakupy w sklepie internetowym (prawa w UE i Niemczech):** zgodnie z prawem unijnym oraz niemieckim kodeksem cywilnym (§ 475 BGB) profesjonalny sprzedawca ponosi ryzyko utraty lub uszkodzenia rzeczy w transporcie aż do chwili wydania jej kupującemu i ma obowiązek dostarczyć zamówienie w ciągu **30 dni**, o ile nie uzgodniono inaczej. Od odebrania towaru przysługuje ci także **14 dni** na odstąpienie od umowy zawartej na odległość (§§ 355 i 356 BGB). W razie zaginięcia, opóźnienia lub szkody reklamację kieruj bezpośrednio do sklepu.
 - **Niemieckie prawo przewozowe i bezpłatny arbitraż pocztowy:** przy przewozach podlegających niemieckiemu kodeksowi handlowemu (§ 438 HGB) widoczne uszkodzenie należy zgłosić przy odbiorze, szkodę ukrytą pisemnie w ciągu **7 dni** od wydania, a przekroczenie terminu dostawy w ciągu **21 dni**; odbiorca może też dochodzić we własnym imieniu roszczeń wynikających z umowy przewozu (§ 421 HGB). Jeśli pisemna reklamacja w Hermes Germany dotycząca utraty, kradzieży lub uszkodzenia przesyłki pocztowej bez warunków specjalnych nie przyniesie porozumienia (wartość sporu od 10 EUR do 2500 EUR), nadawca lub odbiorca może bezpłatnie złożyć wniosek po niemiecku do **Schlichtungsstelle Post** przy urzędzie *Bundesnetzagentur* — gdy wniosek składa konsument, operator pocztowy ma obowiązek wziąć udział w postępowaniu.
 
 ## Śledzenie przesyłek Hermes Germany w Peek

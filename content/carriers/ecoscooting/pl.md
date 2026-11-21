@@ -21,7 +21,7 @@ Przewoźnik nie publikuje na stronie wzoru numeracji, ale w praktyce jego numery
 | `280010000123456789` | 18 cyfr, hiszpańska etykieta Ecoscooting: 5-cyfrowy kod pocztowy w Hiszpanii (`01`–`52`), `0000` oraz 9 cyfr. |
 | `C26111512345678` | `C` lub `E`, 6-cyfrowa data (`RRMMDD`) i 8 cyfr: numer paczki z zamówienia SHEIN, które w Hiszpanii doręcza również [Paack](carrier:paack). |
 
-Zbliżone oznaczenia często należą do wcześniejszych operatorów na trasie: przy zakupach na AliExpress zobaczysz zwykle kod `LP` z 14 cyframi — to numer logistyczny śledzony przez [Cainiao](carrier:cainiao). Przed lokalnym doręczeniem paczka z Chin przechodzi też odprawę celną, np. u agenta celnego CACESA. Jeśli `ecoscooting.com` nie rozpoznaje jeszcze Twojego kodu, sprawdź numer na karcie zamówienia; więcej szczegółów znajdziesz w poradnikach [śledzenie paczki z Chin](guide:tracking-from-china) oraz [formaty numerów śledzenia](guide:tracking-number-formats).
+Zbliżone oznaczenia często należą do wcześniejszych operatorów na trasie: przy zakupach na AliExpress zobaczysz zwykle kod `LP` z 14 cyframi — to numer logistyczny śledzony przez [Cainiao](carrier:cainiao). Przed lokalnym doręczeniem paczka z Chin przechodzi też odprawę celną, np. u agenta celnego CACESA. Jeśli `ecoscooting.com` nie rozpoznaje jeszcze twojego kodu, sprawdź numer na karcie zamówienia; więcej szczegółów znajdziesz w poradnikach [śledzenie paczki z Chin](guide:tracking-from-china) oraz [formaty numerów śledzenia](guide:tracking-number-formats).
 
 Dla nieznanego numeru strona `ecoscooting.com` wyświetla `No data found` i prosi o sprawdzenie numeru zamówienia.
 
@@ -29,7 +29,7 @@ Dla nieznanego numeru strona `ecoscooting.com` wyświetla `No data found` i pros
 
 Serwis `ecoscooting.com` wyświetla śledzenie po angielsku, hiszpańsku lub portugalsku zależnie od języka przeglądarki (przy polskiej przeglądarce otwiera się po angielsku, z przełącznikiem języka na górze). Każdy wpis składa się z pogrubionego nagłówka i opisu pod spodem — poniżej znajdują się angielskie opisy widoczne na stronie przewoźnika oraz w Peek:
 
-| Status w Ecoscooting | Co oznacza dla Ciebie |
+| Status w Ecoscooting | Co oznacza dla ciebie |
 | --- | --- |
 | `Shipment data information received` | Zamówienie zostało zarejestrowane; Ecoscooting nie ma jeszcze fizycznie paczki. |
 | `Shipment is in transit to Cainiao Express` | Przesyłka jest nadal w transporcie w sieci [Cainiao](carrier:cainiao), zanim dotrze do Hiszpanii lub Portugalii. |
@@ -37,7 +37,7 @@ Serwis `ecoscooting.com` wyświetla śledzenie po angielsku, hiszpańsku lub por
 | `Your shipment has arrived at sorting center` | Paczka dotarła do sortowni Ecoscooting. |
 | `Your shipment is out for delivery` | Jest dziś u kuriera w doręczeniu. |
 | `Your shipment delivery attempt failed [Recipient not at home]` | Kurier był pod adresem, ale nikt nie odebrał; sprawdź e-mail, aby dowiedzieć się, co dalej. |
-| `Service point closed` | Po nieudanych próbach pod drzwiami kurier nie mógł zostawić paczki także w punkcie odbioru — przesyłka tam na Ciebie nie czeka, a Peek pokazuje „Próba doręczenia”. |
+| `Service point closed` | Po nieudanych próbach pod drzwiami kurier nie mógł zostawić paczki także w punkcie odbioru — przesyłka tam na ciebie nie czeka, a Peek pokazuje „Próba doręczenia”. |
 | `Your package has been processed by the courier. We will notify you when it is ready for pickup at the point.` | Kurier przekazał paczkę do punktu odbioru, ale punkt jeszcze jej nie przyjął do wydania. |
 | `Your shipment has arrived at parcelshop and you‘ll receive pickup instructions shortly` | Gotowa do odbioru w punkcie (parcelshop) — kod PIN przyjdzie e-mailem lub SMS-em. |
 | `Your shipment has been collected by consignee at the parcelshop` | Odebrana przez adresata w punkcie odbioru. |
@@ -55,7 +55,7 @@ W **Hiszpanii** Ecoscooting doręcza paczki **codziennie, również w soboty i n
 
 Pod wskazany adres kurier podejmuje **dwie próby doręczenia**; zobacz też [nieudana próba doręczenia](guide:missed-delivery). Po nieudanym podjeździe Ecoscooting wysyła e-mail z podaniem przyczyny: jeśli adres był błędny, poprawisz go bezpośrednio z linku w wiadomości, a kolejna próba nastąpi w ciągu **3 dni roboczych**; przy innych powodach kurier również ponawia próbę w ciągu **3 dni roboczych**. Po dwóch nieudanych próbach dalszy tryb zależy od sytuacji i jest potwierdzany e-mailem — w Hiszpanii, tam gdzie to możliwe, przesyłka trafia do pobliskiego punktu odbioru.
 
-Wiesz z wyprzedzeniem, że nie będzie Cię w domu? Z linku w e-mailu wysyłanym przez Ecoscooting na początku trasy możesz upoważnić inną osobę do podpisu albo przekierować paczkę do punktu odbioru lub automatu paczkowego.
+Wiesz z wyprzedzeniem, że nie będzie cię w domu? Z linku w e-mailu wysyłanym przez Ecoscooting na początku trasy możesz upoważnić inną osobę do podpisu albo przekierować paczkę do punktu odbioru lub automatu paczkowego.
 
 Sieć Ecoscooting obejmuje **ponad 8000 punktów odbioru** (*pickup points*) oraz automaty paczkowe (*lockers*). Po dotarciu paczki do punktu otrzymasz e-mail lub SMS z **kodem PIN**, adresem i godzinami otwarcia. Na odbiór masz **14 dni** — po tym czasie przesyłka wraca do nadawcy i możesz poprosić sprzedawcę o zwrot pieniędzy; sprawdź też [nieodebrana przesyłka](guide:uncollected-parcel). Hiszpańskie FAQ zastrzega, że paczki znajdującej się już w punkcie odbioru nie da się przenieść do innego punktu ani z powrotem pod adres domowy.
 
@@ -86,7 +86,7 @@ Nota prawna (*Aviso legal*) podaje ponadto numer `931 222 879` do zapytań i ska
 
 Gdy [Cainiao](carrier:cainiao) lub CACESA zwróci numer `CNESP`/`CNPRT` bądź 18-cyfrową etykietę rozpoznawaną przez Peek jako Ecoscooting, Peek automatycznie przełącza dalsze śledzenie na Ecoscooting; pozostałe 18-cyfrowe numery tylko wtedy, gdy Cainiao lub CACESA wskaże Ecoscooting jako przewoźnika.
 
-Peek pokazuje aktualny status, historię z dokładnymi godzinami skanów Ecoscooting (bez miejscowości, ponieważ przewoźnik ich nie podaje), wagę, godzinę doręczenia oraz — po dotarciu do punktu odbioru — nazwę i adres punktu, zachowywane również po odebraniu przesyłki. Przewidywana data dostawy nie jest udostępniana. Godziny widnieją w Twojej strefie czasowej, o czym na peektracker.com i w aplikacjach na iPhone’a i Androida przypomina wiersz pod historią: „Godziny w twojej strefie czasowej: …”. W chwili zostawienia paczki przez kuriera w punkcie (`Delivered to PUDO`) Peek utrzymuje jeszcze etap „W doręczeniu” i przełącza go na „Do odbioru” dopiero wtedy, gdy punkt potwierdzi przyjęcie paczki — mimo to zaczekaj na e-mail lub SMS z kodem PIN. Peek pomija kod PIN, telefon i godziny otwarcia punktu, kody pocztowe oraz numery zamówień. Komunikaty w historii pozostają po angielsku, z wyjątkiem pojedynczego `Out for delivery`, wyświetlanego jako „W doręczeniu”. Ponieważ Ecoscooting nie zwraca jednoznacznej odmowy dla nieistniejącego numeru, błędny kod pozostaje po prostu bez aktualizacji.
+Peek pokazuje aktualny status, historię z dokładnymi godzinami skanów Ecoscooting (bez miejscowości, ponieważ przewoźnik ich nie podaje), wagę, godzinę doręczenia oraz — po dotarciu do punktu odbioru — nazwę i adres punktu, zachowywane również po odebraniu przesyłki. Przewidywana data dostawy nie jest udostępniana. Godziny widnieją w twojej strefie czasowej, o czym na peektracker.com i w aplikacjach na iPhone’a i Androida przypomina wiersz pod historią: „Godziny w twojej strefie czasowej: …”. W chwili zostawienia paczki przez kuriera w punkcie (`Delivered to PUDO`) Peek utrzymuje jeszcze etap „W doręczeniu” i przełącza go na „Do odbioru” dopiero wtedy, gdy punkt potwierdzi przyjęcie paczki — mimo to zaczekaj na e-mail lub SMS z kodem PIN. Peek pomija kod PIN, telefon i godziny otwarcia punktu, kody pocztowe oraz numery zamówień. Komunikaty w historii pozostają po angielsku, z wyjątkiem pojedynczego `Out for delivery`, wyświetlanego jako „W doręczeniu”. Ponieważ Ecoscooting nie zwraca jednoznacznej odmowy dla nieistniejącego numeru, błędny kod pozostaje po prostu bez aktualizacji.
 
 Peek sprawdza status nawet co 10 minut, a w dniu wydania paczki do doręczenia nawet co 2 minuty od 6:00 czasu lokalnego, dopóki odpowiada bezpośrednio system Ecoscooting (przez serwisy śledzenia co 15 minut), wysyłając powiadomienia „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach bez nowości lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika” sprawdzanie przechodzi na tryb godzinowy.
 

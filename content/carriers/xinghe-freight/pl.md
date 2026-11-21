@@ -6,7 +6,7 @@ published: 2026-11-18
 updated: 2026-11-21
 ---
 
-Xinghe Freight (星和货运, 广州星和货运代理有限公司, Guangzhou Xinghe Freight Forwarding) to spedytor z Kantonu (Guangzhou) w Chinach, którego śledzenie działa na systemie przewoźnika [GZYL](carrier:gzyl). Jeśli sklep internetowy podał Ci numer zaczynający się od `GZXH` i kończący na `YQ`, wklej go w pole powyżej albo wpisz w wyszukiwarkę przesyłek na chińskiej stronie Xinghe, xinghe-express.cn. Do historii podchodź jednak ostrożnie: na tej platformie cały harmonogram trasy – łącznie z `Delivered` – bywa wpisany z góry, zanim ktokolwiek fizycznie zeskanuje paczkę.
+Xinghe Freight (星和货运, 广州星和货运代理有限公司, Guangzhou Xinghe Freight Forwarding) to spedytor z Kantonu (Guangzhou) w Chinach, którego śledzenie działa na systemie przewoźnika [GZYL](carrier:gzyl). Jeśli sklep internetowy podał ci numer zaczynający się od `GZXH` i kończący na `YQ`, wklej go w pole powyżej albo wpisz w wyszukiwarkę przesyłek na chińskiej stronie Xinghe, xinghe-express.cn. Do historii podchodź jednak ostrożnie: na tej platformie cały harmonogram trasy – łącznie z `Delivered` – bywa wpisany z góry, zanim ktokolwiek fizycznie zeskanuje paczkę.
 
 ## Numer śledzenia Xinghe Freight: jak wygląda
 
@@ -27,7 +27,7 @@ Spacje, myślniki i wielkość liter nie mają znaczenia, gdy wklejasz numer do 
 
 Ponieważ śledzenie Xinghe działa na systemie GZYL, poszczególne kroki wyświetlają się z angielskimi komunikatami GZYL, łącznie z literówkami. Peek odczytuje je według listy etapów GZYL. W kolejności, w jakiej zazwyczaj pojawiają się na trasie paczki:
 
-| System pokazuje | Co to oznacza dla Ciebie | Peek pokazuje |
+| System pokazuje | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Order information received` | Sprzedawca przesłał dane zamówienia. Nikt nie ma jeszcze fizycznie paczki. | „Zarejestrowana” |
 | `Arrive at the cross border receiving point` | Spedytor przyjął paczkę: to pierwszy fizyczny skan w jego rękach. | „Przyjęta przez przewoźnika” |
@@ -40,7 +40,7 @@ Ponieważ śledzenie Xinghe działa na systemie GZYL, poszczególne kroki wyświ
 | `Customs clearance completed` | Odprawa celna zakończona; paczka rusza dalej. | „W transporcie” |
 | `Internationaliy Package received at processing center` | Centrum opracowywania w kraju docelowym przyjęło ocloną paczkę (`Internationaliy` to literówka platformy). To nie jest ponowne nadanie. | „W transporcie” |
 | `Leave the email processing center` | Paczka opuściła to centrum opracowywania. | „W transporcie” |
-| `Arrival sorting, distribution center` | Przyjęcie w centrum dystrybucyjnym w Twoim kraju, z nazwą miejscowości po komunikacie. | „W transporcie” |
+| `Arrival sorting, distribution center` | Przyjęcie w centrum dystrybucyjnym w twoim kraju, z nazwą miejscowości po komunikacie. | „W transporcie” |
 | `Leaving the sorting center` | Wyjazd z sortowni, wraz z nazwą miejscowości. | „W transporcie” |
 | `Package is on the way` | Przesyłka przemieszcza się w kraju docelowym, z podaną miejscowością. Nie oznacza to jeszcze wydania kurierowi do doręczenia dziś. | „W transporcie” |
 | `Delivered` | Wpis o doręczeniu z miejscowością. Może być częścią z góry zapisanego planu, a nie prawdziwym skanem (patrz niżej). | „Dostarczona”, z uwagą o stałym harmonogramie, chyba że Peek wstrzyma ten etap (patrz niżej) |
@@ -49,9 +49,9 @@ Ponieważ śledzenie Xinghe działa na systemie GZYL, poszczególne kroki wyświ
 
 **Wiersz po chińsku.** Przy zamówieniu, które nie ma jeszcze żadnych skanów, strona systemu potrafi pokazać `货物电子信息已经收到`, czyli „otrzymano elektroniczne informacje o towarze”. Platforma dopisuje ten wiersz automatycznie po utworzeniu zlecenia przez sprzedawcę, zanim ktokolwiek zeskanuje paczkę. Peek pokazuje go po chińsku pod etapem „Zarejestrowana”.
 
-**Godziny i strefa czasowa.** Peek odczytuje każdą godzinę z systemu jako czas pekiński (`UTC+8`) – także przy etapach w Europie – i przelicza ją na strefę czasową Twojego urządzenia. W czasie zimowym (od ostatniej niedzieli października do ostatniej niedzieli marca) zdarzenie z `20:00` w Pekinie to `13:00` w Warszawie, a w czasie letnim (od ostatniej niedzieli marca do ostatniej niedzieli października) to `14:00`.
+**Godziny i strefa czasowa.** Peek odczytuje każdą godzinę z systemu jako czas pekiński (`UTC+8`) – także przy etapach w Europie – i przelicza ją na strefę czasową twojego urządzenia. W czasie zimowym (od ostatniej niedzieli października do ostatniej niedzieli marca) zdarzenie z `20:00` w Pekinie to `13:00` w Warszawie, a w czasie letnim (od ostatniej niedzieli marca do ostatniej niedzieli października) to `14:00`.
 
-**Etapy zapisane z wyprzedzeniem.** Na tej platformie spedytorzy mogą wpisać z góry całą oś czasu przesyłki, od przyjęcia aż po ostatni krok w kraju docelowym, a system odsłania kolejne wpisy wraz z nadejściem ich zaplanowanej godziny. Taki wpis jest planem, a nie fizycznym skanem. W systemie GZYL harmonogram kończy się wpisem `Delivered` dodawanym zbiorczo wieczorem wskazanego dnia: nosi datę dnia następującego po ostatnim zaplanowanym etapie, w godzinach pracy biur w Pekinie, niezależnie od kraju odbiorcy. Peek wstrzymuje takie wpisy (patrz niżej), ale zewnętrzne serwisy śledzenia kopiujące rekord mogą je mimo to pokazać – widoczne tam `Delivered` nie dowodzi więc, że paczka dotarła pod Twoje drzwi.
+**Etapy zapisane z wyprzedzeniem.** Na tej platformie spedytorzy mogą wpisać z góry całą oś czasu przesyłki, od przyjęcia aż po ostatni krok w kraju docelowym, a system odsłania kolejne wpisy wraz z nadejściem ich zaplanowanej godziny. Taki wpis jest planem, a nie fizycznym skanem. W systemie GZYL harmonogram kończy się wpisem `Delivered` dodawanym zbiorczo wieczorem wskazanego dnia: nosi datę dnia następującego po ostatnim zaplanowanym etapie, w godzinach pracy biur w Pekinie, niezależnie od kraju odbiorcy. Peek wstrzymuje takie wpisy (patrz niżej), ale zewnętrzne serwisy śledzenia kopiujące rekord mogą je mimo to pokazać – widoczne tam `Delivered` nie dowodzi więc, że paczka dotarła pod twoje drzwi.
 
 ## Kto doręcza paczki Xinghe Freight w Polsce
 
@@ -83,15 +83,15 @@ Witryna nie udostępnia obsługi dla odbiorców indywidualnych za granicą, a fo
 
 ## Śledzenie paczki Xinghe Freight w Peek
 
-[Peek](/) natychmiast rozpoznaje Xinghe Freight po numerze w formacie `GZXH…YQ`. Jeśli sprzedawca przekazał Ci numer o innym układzie, również go wklej: Peek obsługuje ponad 4500 przewoźników. Aby przypisać przesyłkę do Xinghe ręcznie, naciśnij zmianę przewoźnika podczas dodawania i wyszukaj Xinghe Freight (możesz też wpisać `星和货运`) albo wybierz „Zmień przewoźnika” na karcie dodanej już paczki.
+[Peek](/) natychmiast rozpoznaje Xinghe Freight po numerze w formacie `GZXH…YQ`. Jeśli sprzedawca przekazał ci numer o innym układzie, również go wklej: Peek obsługuje ponad 4500 przewoźników. Aby przypisać przesyłkę do Xinghe ręcznie, naciśnij zmianę przewoźnika podczas dodawania i wyszukaj Xinghe Freight (możesz też wpisać `星和货运`) albo wybierz „Zmień przewoźnika” na karcie dodanej już paczki.
 
-Peek odpytuje system GZYL dokładnie tak jak pole wyszukiwania na stronie Xinghe, wyświetlając bieżący etap, każdy krok z miejscowością oraz kraj docelowy, o ile rekord go podaje. Godziny są odczytywane według czasu pekińskiego i przeliczane na strefę czasową Twojego urządzenia (z informacją „Godziny w twojej strefie czasowej: …” na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida). Peek pomija imiona i nazwiska, adres, kody pocztowe, wagę, szczegóły płatności, podpis i potwierdzenie doręczenia, które mogą znajdować się w rekordzie, a także nie pokazuje przewidywanej daty dostawy, bo system jej nie podaje.
+Peek odpytuje system GZYL dokładnie tak jak pole wyszukiwania na stronie Xinghe, wyświetlając bieżący etap, każdy krok z miejscowością oraz kraj docelowy, o ile rekord go podaje. Godziny są odczytywane według czasu pekińskiego i przeliczane na strefę czasową twojego urządzenia (z informacją „Godziny w twojej strefie czasowej: …” na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida). Peek pomija imiona i nazwiska, adres, kody pocztowe, wagę, szczegóły płatności, podpis i potwierdzenie doręczenia, które mogą znajdować się w rekordzie, a także nie pokazuje przewidywanej daty dostawy, bo system jej nie podaje.
 
-Gdy system GZYL nie zna Twojego numeru, Peek odpytuje zapasowo zewnętrzne serwisy śledzenia przesyłek i pokazuje zapisaną u nich kopię zdarzeń, która dla części numerów Xinghe bywa jedynym dostępnym źródłem. Dopóki ani system bezpośredni, ani serwisy śledzenia nie zwrócą żadnego kroku, paczka ma komunikat „Oczekiwanie na przewoźnika Xinghe Freight”, bez prośby o sprawdzenie numeru.
+Gdy system GZYL nie zna twojego numeru, Peek odpytuje zapasowo zewnętrzne serwisy śledzenia przesyłek i pokazuje zapisaną u nich kopię zdarzeń, która dla części numerów Xinghe bywa jedynym dostępnym źródłem. Dopóki ani system bezpośredni, ani serwisy śledzenia nie zwrócą żadnego kroku, paczka ma komunikat „Oczekiwanie na przewoźnika Xinghe Freight”, bez prośby o sprawdzenie numeru.
 
 Peek wstrzymuje każdy krok zapisany ponad 12 godzin przed godziną widniejącą przy zdarzeniu albo ponad 6 godzin przed nią w tej samej sekundzie co taki krok, a także wszelkie wpisy z datą późniejszą niż chwila sprawdzenia (według zegara w Pekinie). W rekordzie zawierającym kroki zapisane z wyprzedzeniem wstrzymuje również `Delivered`, nawet wpisane tego samego dnia. Peek wyznacza status wyłącznie na podstawie zachowanych kroków, ignorując zbiorczy status rekordu, i odrzuca także kopie wstrzymanych kroków (w tym `Delivered`) pobrane z serwisów śledzenia, nawet gdy zachowuje inne zdarzenia. Jeśli jednak bezpośredni system nie ma rekordu dla danego numeru lub jest nieosiągalny, w kopii z serwisu śledzenia Peek nie jest w stanie odróżnić zaplanowanego kroku od prawdziwego skanu. Gdy wstrzymuje kroki zapisane z wyprzedzeniem, historia śledzenia aż do doręczenia lub zwrotu zaczyna się od jednej linijki: „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.” Po kliknięciu „Pokaż” obok niej widać te kroki, wyszarzone, od najnowszego, każdy z dniem, który podał system („Prognoza: pon 12 paź”). Taki krok nigdy nie liczy się jako skan: nie zmienia statusu i nie wysyła powiadomienia. Gdy wszystkie kroki są wstrzymane albo przesyłka widnieje w systemie bez skanów, w aplikacji na iPhone'a lub Androida albo na koncie Peek ponawia zapytania co 6 godzin po pierwszych godzinach; przy sprawdzeniu bez konta pyta przez pierwsze 6 godzin, następnie po otwarciu linku (najwyżej co 6 godzin przez pierwsze dwa dni, potem najwyżej raz dziennie), a przy włączonych powiadomieniach – raz dziennie przez 30 dni od wyszukania.
 
-Poza Pocztą Szwajcarską w Szwajcarii i Liechtensteinie Peek nie przełącza przesyłki Xinghe na firmę doręczającą: jeśli otrzymasz od sprzedawcy numer lokalnego kuriera, dodaj go jako osobną paczkę. Gdy masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, dopóki odpowiada bezpośredni system; w pozostałym czasie oraz gdy paczka ucichnie – co godzinę (przez same serwisy śledzenia: co godzinę, co 3 godziny po dobie bez nowego skanu, a w dniu wydania do doręczenia nawet co 15 minut, dopóki masz paczkę otwartą lub włączone powiadomienia). Możesz wybrać powiadomienia „Wszystkie aktualizacje”, „Tylko ważne” (obejmujące tutaj dwa etapy celne oraz `Delivered`, bez lotów i sortowni) albo „Tylko w dniu dostawy”. Peek nie skontaktuje się w Twoim imieniu z Xinghe Freight, GZYL ani ze sprzedawcą.
+Poza Pocztą Szwajcarską w Szwajcarii i Liechtensteinie Peek nie przełącza przesyłki Xinghe na firmę doręczającą: jeśli otrzymasz od sprzedawcy numer lokalnego kuriera, dodaj go jako osobną paczkę. Gdy masz przesyłkę otwartą na ekranie albo w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza ją nawet co 10 minut, dopóki odpowiada bezpośredni system; w pozostałym czasie oraz gdy paczka ucichnie – co godzinę (przez same serwisy śledzenia: co godzinę, co 3 godziny po dobie bez nowego skanu, a w dniu wydania do doręczenia nawet co 15 minut, dopóki masz paczkę otwartą lub włączone powiadomienia). Możesz wybrać powiadomienia „Wszystkie aktualizacje”, „Tylko ważne” (obejmujące tutaj dwa etapy celne oraz `Delivered`, bez lotów i sortowni) albo „Tylko w dniu dostawy”. Peek nie skontaktuje się w twoim imieniu z Xinghe Freight, GZYL ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie Xinghe Freight
 
@@ -101,7 +101,7 @@ To 广州星和货运代理有限公司 (Guangzhou Xinghe Freight Forwarding), s
 
 ### Dlaczego moja paczka Xinghe Freight pokazuje śledzenie GZYL?
 
-Ponieważ śledzenie Xinghe działa na platformie [GZYL](carrier:gzyl): wyszukiwarka na własnej stronie Xinghe przekazuje Twój numer właśnie tam, dlatego zdarzenia wracają w brzmieniu GZYL. Peek zachowuje przesyłkę pod nazwą Xinghe Freight i bezpośrednio odczytuje ten system.
+Ponieważ śledzenie Xinghe działa na platformie [GZYL](carrier:gzyl): wyszukiwarka na własnej stronie Xinghe przekazuje twój numer właśnie tam, dlatego zdarzenia wracają w brzmieniu GZYL. Peek zachowuje przesyłkę pod nazwą Xinghe Freight i bezpośrednio odczytuje ten system.
 
 ### Kto doręcza paczki Xinghe Freight w Polsce?
 

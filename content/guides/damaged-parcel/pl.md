@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-09
 ---
 
-Jeśli paczka przyszła uszkodzona, zrób zdjęcia, zanim zaczniesz ją dalej rozpakowywać, zachowaj karton i wszystko, co było w środku, i jeszcze tego samego dnia napisz do sprzedawcy. Przy zakupie od firmy sprzedawca odpowiada za uszkodzenie w transporcie, a dochodzenie pieniędzy od kuriera to jego sprawa, nie Twoja. Jeśli karton jest zgnieciony, rozdarty albo mokry już przy odbiorze, możesz odmówić przyjęcia paczki albo przyjąć ją i spisać z kurierem protokół szkody.
+Jeśli paczka przyszła uszkodzona, zrób zdjęcia, zanim zaczniesz ją dalej rozpakowywać, zachowaj karton i wszystko, co było w środku, i jeszcze tego samego dnia napisz do sprzedawcy. Przy zakupie od firmy sprzedawca odpowiada za uszkodzenie w transporcie, a dochodzenie pieniędzy od kuriera to jego sprawa, nie twoja. Jeśli karton jest zgnieciony, rozdarty albo mokry już przy odbiorze, możesz odmówić przyjęcia paczki albo przyjąć ją i spisać z kurierem protokół szkody.
 
 ## Uszkodzona paczka – co robić?
 
@@ -17,7 +17,7 @@ Jeśli paczka przyszła uszkodzona, zrób zdjęcia, zanim zaczniesz ją dalej ro
 - Zrób zdjęcia | Każdą ścianę kartonu, etykietę z numerem przesyłki, zabezpieczenie w środku i uszkodzony przedmiot.
 - Zachowaj wszystko | Nie wyrzucaj kartonu, wypełniacza ani zepsutej rzeczy, dopóki sprawa się nie zakończy. Przewoźnik może chcieć je obejrzeć.
 - Napisz do sprzedawcy dziś | Wyślij zdjęcia i numer zamówienia. Na Vinted zgłoś problem w aplikacji, zanim minie termin.
-- Kuriera zostaw sprzedawcy | Reklamację u przewoźnika składaj sam tylko wtedy, gdy to Ty jesteś nadawcą, przewoźnika wybierasz sam albo przewoźnik przyjmuje reklamacje od odbiorców.
+- Kuriera zostaw sprzedawcy | Reklamację u przewoźnika składaj sam tylko wtedy, gdy to ty jesteś nadawcą, przewoźnika wybierasz sam albo przewoźnik przyjmuje reklamacje od odbiorców.
 :::
 
 Uszkodzenie, które zauważysz dopiero po rozpakowaniu, też się liczy: zgłoś je, gdy tylko je zobaczysz. Poczcie Polskiej i DPD ukryte uszkodzenie trzeba zgłosić w ciągu 7 dni od odbioru (szczegóły niżej).
@@ -26,36 +26,36 @@ Uszkodzenie, które zauważysz dopiero po rozpakowaniu, też się liczy: zgłoś
 
 Jeśli kupujesz od firmy, odpowiada sprzedawca. W Polsce paczka podróżuje na ryzyko sklepu, dopóki jej nie dostaniesz (art. 548 § 3 Kodeksu cywilnego), co wyjaśnia poradnik [paczka doręczona, a jej nie ma](guide:delivered-not-received). UOKiK dodaje, że sklep nie może uchylić się od odpowiedzialności za przesyłkę, także w regulaminie, „nawet jeśli do jej uszkodzenia doszło z winy profesjonalnego przewoźnika”, a reklamację składasz u sprzedawcy, który potem dochodzi roszczeń od firmy kurierskiej. Przewoźnik odpowiada przed sklepem, swoim klientem.
 
-Gdy przedmiot dotrze zepsuty, składasz sklepowi reklamację z tytułu niezgodności towaru z umową. Co Ci wtedy przysługuje według ustawy o prawach konsumenta:
+Gdy przedmiot dotrze zepsuty, składasz sklepowi reklamację z tytułu niezgodności towaru z umową. Co ci wtedy przysługuje według ustawy o prawach konsumenta:
 
 | Kwestia | Co mówi prawo |
 | --- | --- |
 | Kiedy towar jest niezgodny z umową | Gdy nie zgadza się z nią między innymi jego jakość, kompletność albo funkcjonalność (art. 43b) |
-| Czego możesz żądać | Naprawy albo wymiany, i to Ty wybierasz, chyba że Twój wybór jest niemożliwy albo zbyt kosztowny dla sklepu. Gdy sklep odmówi albo nie da rady, obniżenia ceny, a przy istotnej niezgodności odstąpienia od umowy. Przy istotnej niezgodności możesz od razu żądać obniżenia ceny albo odstąpienia. Koszty naprawy albo wymiany, także przesyłki, ponosi sprzedawca (art. 43d i 43e) |
+| Czego możesz żądać | Naprawy albo wymiany, i to ty wybierasz, chyba że twój wybór jest niemożliwy albo zbyt kosztowny dla sklepu. Gdy sklep odmówi albo nie da rady, obniżenia ceny, a przy istotnej niezgodności odstąpienia od umowy. Przy istotnej niezgodności możesz od razu żądać obniżenia ceny albo odstąpienia. Koszty naprawy albo wymiany, także przesyłki, ponosi sprzedawca (art. 43d i 43e) |
 | Ile masz czasu | Sprzedawca odpowiada za niezgodność, która wyjdzie w ciągu 2 lat od dostarczenia towaru. Przyjmuje się wtedy, że istniała już przy dostarczeniu, chyba że sklep udowodni co innego (art. 43c) |
 | Ile sklep ma na odpowiedź | 14 dni od otrzymania reklamacji. Jeśli nie odpowie, uważa się, że ją uznał (art. 7a) |
-| Zwrot pieniędzy | Po odstąpieniu od umowy odsyłasz towar na koszt sklepu, a sklep zwraca cenę w 14 dni od otrzymania towaru albo dowodu jego odesłania, tak jak zapłaciłeś, chyba że zgodzisz się na inny, bezpłatny dla Ciebie sposób (art. 43e) |
+| Zwrot pieniędzy | Po odstąpieniu od umowy odsyłasz towar na koszt sklepu, a sklep zwraca cenę w 14 dni od otrzymania towaru albo dowodu jego odesłania, tak jak zapłaciłeś, chyba że zgodzisz się na inny, bezpłatny dla ciebie sposób (art. 43e) |
 
-Regulamin sklepu, który każe zgłosić uszkodzenie w ciągu 24 godzin albo uznaje je tylko z protokołem od kuriera, nie odbiera Ci tych praw: postanowienia umowy mniej korzystne dla konsumenta niż ustawa są nieważne, a w ich miejsce stosuje się ustawę (art. 7 ustawy o prawach konsumenta). Reklamację możesz złożyć w dowolnej formie, ale dla dowodu najlepiej na piśmie albo e-mailem.
+Regulamin sklepu, który każe zgłosić uszkodzenie w ciągu 24 godzin albo uznaje je tylko z protokołem od kuriera, nie odbiera ci tych praw: postanowienia umowy mniej korzystne dla konsumenta niż ustawa są nieważne, a w ich miejsce stosuje się ustawę (art. 7 ustawy o prawach konsumenta). Reklamację możesz złożyć w dowolnej formie, ale dla dowodu najlepiej na piśmie albo e-mailem.
 
 Inaczej jest w trzech sytuacjach:
 
-- **Przewoźnik spoza oferty sklepu**, którego wybierasz sam. Wtedy według UOKiK ryzyko uszkodzenia przechodzi na Ciebie już w chwili, gdy sklep odda paczkę temu przewoźnikowi.
-- **Zakup od osoby prywatnej**, na przykład na Vinted, OLX czy Allegro Lokalnie. Przepisy konsumenckie Cię wtedy nie chronią, więc najwięcej daje ochrona kupujących na platformie.
+- **Przewoźnik spoza oferty sklepu**, którego wybierasz sam. Wtedy według UOKiK ryzyko uszkodzenia przechodzi na ciebie już w chwili, gdy sklep odda paczkę temu przewoźnikowi.
+- **Zakup od osoby prywatnej**, na przykład na Vinted, OLX czy Allegro Lokalnie. Przepisy konsumenckie cię wtedy nie chronią, więc najwięcej daje ochrona kupujących na platformie.
 - **Płatność poza platformą.** Vinted pisze, że przy płatności bez przycisku „Kup teraz” „nie przysługuje Ci ochrona”.
 
 ## Reklamacja uszkodzonej paczki u przewoźnika
 
-Przewoźnicy rozliczają się przede wszystkim z nadawcą, więc Twoja reklamacja zwykle idzie przez sklep. Odbiorca może ją złożyć sam w kilku przypadkach. Paczka w ogóle nie dotarła? Zajrzyj do poradnika o [zaginionej paczce](guide:lost-parcel).
+Przewoźnicy rozliczają się przede wszystkim z nadawcą, więc twoja reklamacja zwykle idzie przez sklep. Odbiorca może ją złożyć sam w kilku przypadkach. Paczka w ogóle nie dotarła? Zajrzyj do poradnika o [zaginionej paczce](guide:lost-parcel).
 
 | Przewoźnik | Kto składa reklamację | Termin przy uszkodzeniu | Jak zgłosić |
 | --- | --- | --- | --- |
 | [Poczta Polska](carrier:poczta-polska) | Nadawca. Adresat, gdy paczkę mu doręczono albo nadawca zrzekł się na jego rzecz roszczeń | Przy odbiorze, jeśli spisano protokół. Ukryte uszkodzenie: 7 dni od odebrania. Najpóźniej 12 miesięcy od nadania | Formularz w eReklamacjach albo druk w placówce. Odpowiedź do 30 dni |
-| [DPD Polska](carrier:dpd-pl) | Zleceniodawca, czyli zwykle sklep. Ty, gdy sklep zrzeknie się na Twoją rzecz roszczeń, gdy jako konsument masz prawo rozporządzać paczką albo gdy doręczono Ci pocztową przesyłkę kurierską | Ukryte uszkodzenie: 7 dni od przyjęcia paczki. Reklamacja: 12 miesięcy od nadania | Elektroniczny protokół szkody na protokol.dpd.com.pl, potem osobno reklamacja. Decyzja do 30 dni kalendarzowych |
+| [DPD Polska](carrier:dpd-pl) | Zleceniodawca, czyli zwykle sklep. Ty, gdy sklep zrzeknie się na twoją rzecz roszczeń, gdy jako konsument masz prawo rozporządzać paczką albo gdy doręczono ci pocztową przesyłkę kurierską | Ukryte uszkodzenie: 7 dni od przyjęcia paczki. Reklamacja: 12 miesięcy od nadania | Elektroniczny protokół szkody na protokol.dpd.com.pl, potem osobno reklamacja. Decyzja do 30 dni kalendarzowych |
 
 Inny przewoźnik, na przykład [InPost](carrier:inpost)? Szczegóły znajdziesz w jego regulaminie, a ogólne zasady dla wszystkich operatorów pocztowych, także kurierów, podaje UKE: reklamację składa nadawca albo adresat, gdy paczkę mu doręczono albo nadawca zrzekł się na jego rzecz roszczeń, najpóźniej 12 miesięcy od nadania. Operator ma 30 dni na odpowiedź, a jeśli nie odpowie w terminie, reklamację uważa się za uznaną. Złożysz ją na piśmie, elektronicznie, na przykład w formularzu na stronie operatora, albo ustnie. Gdy operator jej nie uzna, masz 14 dni na odwołanie, a on 30 dni na odpowiedź. Potem zostaje interwencja Prezesa UKE, bezpłatne pozasądowe rozwiązanie sporu (ADR) w UKE albo droga sądowa. Jak zgłosić szkodę w InPost, także przy paczce z Paczkomatu, sprawdzisz na stronie InPost albo w aplikacji InPost Mobile.
 
-Prawo przewozowe dodaje jeszcze jedną zasadę: jeśli uszkodzenia nie dało się zauważyć z zewnątrz przy odbiorze, przewoźnik ustala stan paczki na Twoje żądanie zgłoszone niezwłocznie po odkryciu szkody, „nie później jednak niż w ciągu 7 dni od dnia odbioru przesyłki” (art. 74). Dostajesz bezpłatnie egzemplarz protokołu i możesz wpisać do niego swoje zastrzeżenia.
+Prawo przewozowe dodaje jeszcze jedną zasadę: jeśli uszkodzenia nie dało się zauważyć z zewnątrz przy odbiorze, przewoźnik ustala stan paczki na twoje żądanie zgłoszone niezwłocznie po odkryciu szkody, „nie później jednak niż w ciągu 7 dni od dnia odbioru przesyłki” (art. 74). Dostajesz bezpłatnie egzemplarz protokołu i możesz wpisać do niego swoje zastrzeżenia.
 
 ### Uszkodzona paczka z Poczty Polskiej lub DPD
 
@@ -65,15 +65,15 @@ DPD Polska prosi o elektroniczny protokół szkody na protokol.dpd.com.pl i od r
 
 ## Czy można odmówić przyjęcia uszkodzonej paczki?
 
-Zwykle tak, przy drzwiach albo w punkcie odbioru. Paczka wraca wtedy do nadawcy, który załatwia sprawę z przewoźnikiem, a sklep nadal jest Ci winien sprawny towar albo zwrot pieniędzy. Co dzieje się z odrzuconą paczką w drodze powrotnej, przeczytasz w poradniku [paczka wraca do nadawcy](guide:returned-to-sender).
+Zwykle tak, przy drzwiach albo w punkcie odbioru. Paczka wraca wtedy do nadawcy, który załatwia sprawę z przewoźnikiem, a sklep nadal jest ci winien sprawny towar albo zwrot pieniędzy. Co dzieje się z odrzuconą paczką w drodze powrotnej, przeczytasz w poradniku [paczka wraca do nadawcy](guide:returned-to-sender).
 
 Odmawiaj, gdy karton wygląda tak, że zawartość najpewniej ucierpiała: jest zgnieciony, przedziurawiony, przemoczony albo otwarty. Przetarty róg, gdy reszta kartonu jest cała, nie jest wart takiego opóźnienia. Vinted pisze, żeby w miarę możliwości nie przyjmować widocznie uszkodzonej paczki, ale problem zgłaszasz tak samo, czy ją przyjmiesz, czy nie. Jeśli odmówiłeś odbioru, dołącz do zgłoszenia notatki przewoźnika, zdjęcia albo status przesyłki.
 
-Czy można otworzyć paczkę przy kurierze? Według UKE kurier ani pracownik placówki nie musi pozwolić Ci sprawdzić zawartości przed pokwitowaniem odbioru, chyba że operator oferuje to jako usługę dodatkową (zasady i cenę podaje jego regulamin). Gdy jednak uszkodzenie widać z zewnątrz, możesz odmówić odbioru albo przyjąć paczkę, otworzyć ją przy kurierze i spisać z nim protokół szkody.
+Czy można otworzyć paczkę przy kurierze? Według UKE kurier ani pracownik placówki nie musi pozwolić ci sprawdzić zawartości przed pokwitowaniem odbioru, chyba że operator oferuje to jako usługę dodatkową (zasady i cenę podaje jego regulamin). Gdy jednak uszkodzenie widać z zewnątrz, możesz odmówić odbioru albo przyjąć paczkę, otworzyć ją przy kurierze i spisać z nim protokół szkody.
 
 ### Do kiedy możesz odmówić przyjęcia paczki?
 
-Tylko do chwili, w której ją odbierzesz. Potem pozostaje zgłoszenie uszkodzenia. [Peek](/) może wysłać Ci powiadomienie, gdy przewoźnik poda, że paczka została wydana do doręczenia (ustawienie „Tylko doręczenie”), żeby ktoś był w domu i obejrzał karton przy kurierze.
+Tylko do chwili, w której ją odbierzesz. Potem pozostaje zgłoszenie uszkodzenia. [Peek](/) może wysłać ci powiadomienie, gdy przewoźnik poda, że paczka została wydana do doręczenia (ustawienie „Tylko doręczenie”), żeby ktoś był w domu i obejrzał karton przy kurierze.
 
 ### Co, jeśli paczka jest już odebrana bez uwag?
 
@@ -95,7 +95,7 @@ Potem zachowaj wszystko. Vinted zaleca „zachowanie opakowania do czasu zakońc
 
 ## Ile masz czasu na zgłoszenie uszkodzonej paczki?
 
-Najlepiej tego samego dnia. Wobec sklepu prawo daje Ci dużo czasu, ale sklep ma u przewoźnika krótkie terminy na ukryte uszkodzenia, a Vinted daje Ci jeszcze mniej czasu:
+Najlepiej tego samego dnia. Wobec sklepu prawo daje ci dużo czasu, ale sklep ma u przewoźnika krótkie terminy na ukryte uszkodzenia, a Vinted daje ci jeszcze mniej czasu:
 
 | Gdzie robisz zakupy | Termin na zgłoszenie |
 | --- | --- |
@@ -103,7 +103,7 @@ Najlepiej tego samego dnia. Wobec sklepu prawo daje Ci dużo czasu, ale sklep ma
 | Sklep internetowy | Niezgodność, która wyjdzie w ciągu 2 lat od dostarczenia towaru. Sklep odpowiada na reklamację w 14 dni |
 | Poczta Polska i DPD, ukryte uszkodzenie | 7 dni od odbioru paczki |
 
-> Na Vinted naciśnij „Mam problem” w oknie rozmowy albo „Napisz do nas” na dole strony pomocy, a potem „Prześlij”: zamówienie zostanie wtedy wstrzymane, a Twoje pieniądze zabezpieczone. Jeśli naciśniesz „Wszystko OK” albo przez 2 dni nic nie zgłosisz, pieniądze trafią do sprzedającego.
+> Na Vinted naciśnij „Mam problem” w oknie rozmowy albo „Napisz do nas” na dole strony pomocy, a potem „Prześlij”: zamówienie zostanie wtedy wstrzymane, a twoje pieniądze zabezpieczone. Jeśli naciśniesz „Wszystko OK” albo przez 2 dni nic nie zgłosisz, pieniądze trafią do sprzedającego.
 
 Vinted sprawdza uszkodzenie sam albo przekazuje zgłoszenie przewoźnikowi, więc może to potrwać kilka tygodni. Gdy potwierdzi uszkodzenie, dostaniesz pełny zwrot pieniędzy i nie musisz odsyłać uszkodzonej rzeczy. Wyjątek: gdy w zestawie uszkodzona jest tylko część przedmiotów, Vinted może poprosić o zwrot całego zestawu.
 

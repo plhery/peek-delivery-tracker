@@ -6,7 +6,7 @@ published: 2026-11-17
 updated: 2026-11-20
 ---
 
-TopYou (通邮, Tongyou, także 通邮集团 lub SZTY56) to spółka 深圳市通邮物流科技（集团）股份有限公司 – międzynarodowy operator logistyczny z Shenzhen w Chinach, wysyłający zamówienia internetowe na własnych liniach międzynarodowych i pocztowych. Jeśli chiński sklep nadał Twoje zamówienie przez TopYou, numer zaczyna się od TYZ i kończy na YQ: wklej go w pole powyżej. Historia TopYou prowadzi od magazynu w Chinach przez lot i odprawę celną, po czym doręczenie przejmuje lokalny przewoźnik.
+TopYou (通邮, Tongyou, także 通邮集团 lub SZTY56) to spółka 深圳市通邮物流科技（集团）股份有限公司 – międzynarodowy operator logistyczny z Shenzhen w Chinach, wysyłający zamówienia internetowe na własnych liniach międzynarodowych i pocztowych. Jeśli chiński sklep nadał twoje zamówienie przez TopYou, numer zaczyna się od TYZ i kończy na YQ: wklej go w pole powyżej. Historia TopYou prowadzi od magazynu w Chinach przez lot i odprawę celną, po czym doręczenie przejmuje lokalny przewoźnik.
 
 ## Numer śledzenia TopYou: jak wygląda
 
@@ -26,7 +26,7 @@ W Peek nie przeszkadzają spacje ani małe litery. Natomiast wyszukiwarka TopYou
 
 TopYou zapisuje swoje skany po angielsku, a Peek pokazuje je w oryginalnym brzmieniu. W kolejności, w jakiej otrzymuje je paczka:
 
-| TopYou pisze | Co to oznacza dla Ciebie | Peek pokazuje |
+| TopYou pisze | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Parcel Data Received` | Sklep przesłał dane elektroniczne, ale magazyn TopYou nie ma jeszcze fizycznej paczki. | „Zarejestrowana” |
 | `Arrived at the first mile sorting center` | Pierwszy fizyczny skan: magazyn TopYou w Chinach przyjął przesyłkę. | „Przyjęta przez przewoźnika” |
@@ -38,7 +38,7 @@ TopYou zapisuje swoje skany po angielsku, a Peek pokazuje je w oryginalnym brzmi
 
 **Nowsze numery.** W nowszych przesyłkach TopYou opisuje te etapy innymi zdaniami:
 
-| TopYou pisze | Co to oznacza dla Ciebie | Peek pokazuje |
+| TopYou pisze | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Carrier received the shipment` | TopYou przyjął paczkę w Chinach: to pierwszy fizyczny skan. | „Przyjęta przez przewoźnika” |
 | `Shipment arrived at a carrier facility` | Paczka ruszyła dalej z pierwszego magazynu TopYou – nie oznacza to ponownego nadania. | „W transporcie” |
@@ -50,7 +50,7 @@ TopYou zapisuje swoje skany po angielsku, a Peek pokazuje je w oryginalnym brzmi
 
 **Linie doręczane przez pocztę kraju docelowego.** Na liniach pocztowych TopYou używa jeszcze innego zestawu komunikatów aż do odprawy celnej:
 
-| TopYou pisze | Co to oznacza dla Ciebie | Peek pokazuje |
+| TopYou pisze | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Accepted by carrier` | TopYou ma paczkę w Chinach: pierwszy skan. | „Przyjęta przez przewoźnika” |
 | `Inbound in sorting center` | Zarejestrowana w pierwszej sortowni TopYou kilka minut później; jeszcze stamtąd nie wyjechała. | „Przyjęta przez przewoźnika” |
@@ -67,7 +67,7 @@ TopYou zapisuje swoje skany po angielsku, a Peek pokazuje je w oryginalnym brzmi
 
 ## Kto doręcza paczki TopYou w Polsce
 
-Po odprawie celnej TopYou przekazuje przesyłkę firmie doręczającej w Polsce. Karta przesyłki w TopYou może podawać numer nadawczy tej firmy, ale nigdy nie podaje jej nazwy, a nazwa linii TopYou też jej nie zdradza – linia potrafi nosić handlową nazwę innego przewoźnika niż ten, który faktycznie doręcza paczkę. Na linii pocztowej numer poczty pojawia się także na końcu `Outbound in sorting center` na stronie TopYou, po `Lastmile Number:`. Dlatego zapytaj sprzedawcę, jaka firma doręcza Twoje zamówienie w Polsce i pod jakim numerem – od niej zależą próby doręczenia, awiza i punkty odbioru.
+Po odprawie celnej TopYou przekazuje przesyłkę firmie doręczającej w Polsce. Karta przesyłki w TopYou może podawać numer nadawczy tej firmy, ale nigdy nie podaje jej nazwy, a nazwa linii TopYou też jej nie zdradza – linia potrafi nosić handlową nazwę innego przewoźnika niż ten, który faktycznie doręcza paczkę. Na linii pocztowej numer poczty pojawia się także na końcu `Outbound in sorting center` na stronie TopYou, po `Lastmile Number:`. Dlatego zapytaj sprzedawcę, jaka firma doręcza twoje zamówienie w Polsce i pod jakim numerem – od niej zależą próby doręczenia, awiza i punkty odbioru.
 
 Jeśli ten drugi numer jest prawidłowym [międzynarodowym numerem pocztowym](guide:tracking-number-formats) (dwie litery, dziewięć cyfr z poprawną cyfrą kontrolną i dwie litery), a krajem docelowym w danych TopYou jest Polska, Peek odpytuje [Pocztę Polską](carrier:poczta-polska). Samo zapytanie nie przesądza jeszcze, że to Poczta Polska doręcza przesyłkę: Peek przełącza na nią śledzenie dopiero wtedy, gdy pokaże ona świeże skany (więcej niżej). Zobacz też [nieudana próba doręczenia i awizo](guide:missed-delivery) oraz [nieodebrana paczka](guide:uncollected-parcel).
 
@@ -79,7 +79,7 @@ Jeśli ten drugi numer jest prawidłowym [międzynarodowym numerem pocztowym](gu
 
 **Cisza po `Departed from customs`, `Shipment completed the customs clearance process at destination`, `Customs Clearance Completed Successfully` lub `Import clearance success`.** Paczkę powinien mieć już lokalny przewoźnik. Poszukaj drugiego numeru na stronie [track.szty56.com](https://track.szty56.com/) albo zapytaj sprzedawcę, kto doręcza zamówienie i pod jakim numerem. Więcej w poradniku [śledzenie paczek z Chin](guide:tracking-from-china).
 
-**Nie znaleziono lub brak jeszcze skanów.** Wyszukiwarka TopYou odpowiada `查询不到` (nie znaleziono), gdy nie zna numeru, a przed pierwszym skanem może zwrócić `暂无轨迹信息` (brak jeszcze informacji o śledzeniu). Peek pokazuje wtedy „Oczekiwanie na przewoźnika TopYou” i sprawdza dalej; jeśli po dwóch dniach TopYou nadal nie zna numeru i żadne inne źródło go nie potwierdzi, pojawia się „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a Peek sprawdza go odtąd raz dziennie i – po tygodniu od dodania – raz w tygodniu. Na podstawie odpowiedzi TopYou Peek potrafi rozpoznać sytuację, w której przesyłka jest już wpisana z krajem docelowym, ale nie ma jeszcze żadnego skanu: wtedy TopYou zna numer, więc Peek nadal wyświetla „Oczekiwanie na przewoźnika TopYou” bez proszenia Cię o poprawianie numeru. Jeśli od co najmniej doby widnieje wyłącznie `Parcel Data Received`, Peek informuje: „Nadawca nie przekazał jej jeszcze przewoźnikowi TopYou. Śledzenie zacznie się po przekazaniu.” – zapytaj wtedy sklep, kiedy wyśle paczkę. Zawsze porównaj numer znak po znaku z potwierdzeniem ze sklepu.
+**Nie znaleziono lub brak jeszcze skanów.** Wyszukiwarka TopYou odpowiada `查询不到` (nie znaleziono), gdy nie zna numeru, a przed pierwszym skanem może zwrócić `暂无轨迹信息` (brak jeszcze informacji o śledzeniu). Peek pokazuje wtedy „Oczekiwanie na przewoźnika TopYou” i sprawdza dalej; jeśli po dwóch dniach TopYou nadal nie zna numeru i żadne inne źródło go nie potwierdzi, pojawia się „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.”, a Peek sprawdza go odtąd raz dziennie i – po tygodniu od dodania – raz w tygodniu. Na podstawie odpowiedzi TopYou Peek potrafi rozpoznać sytuację, w której przesyłka jest już wpisana z krajem docelowym, ale nie ma jeszcze żadnego skanu: wtedy TopYou zna numer, więc Peek nadal wyświetla „Oczekiwanie na przewoźnika TopYou” bez proszenia cię o poprawianie numeru. Jeśli od co najmniej doby widnieje wyłącznie `Parcel Data Received`, Peek informuje: „Nadawca nie przekazał jej jeszcze przewoźnikowi TopYou. Śledzenie zacznie się po przekazaniu.” – zapytaj wtedy sklep, kiedy wyśle paczkę. Zawsze porównaj numer znak po znaku z potwierdzeniem ze sklepu.
 
 **Status doręczono, ale nic nie przyszło.** Doręczenie realizuje lokalna firma, a nie TopYou: skontaktuj się najpierw z tym przewoźnikiem, a następnie zgłoś sprawę sprzedawcy. Zobacz [przesyłka dostarczona, ale nieotrzymana](guide:delivered-not-received).
 
@@ -93,11 +93,11 @@ Na dzień 16 listopada 2026 r. strona TopYou, [szty56.com](https://www.szty56.co
 
 [Peek](/) rozpoznaje numer TopYou po układzie znaków (TYZR, jedna litera, dziesięć cyfr i YQ), którego nie używa żaden inny przewoźnik w katalogu. Jeśli w miejscu litery R stoi inna litera, kształt jest jedynie słabą wskazówką: Peek pokazuje „Sprawdzanie usług śledzenia…” i pyta TopYou, czy rozpoznaje ten numer. Peek odpytuje TopYou wyłącznie dla tych dwóch układów. Gdy masz tylko numer lokalnego przewoźnika, wklej go mimo to: Peek śledzi ponad 4500 przewoźników, a w razie potrzeby wybierzesz właściwego przyciskiem „Zmień”.
 
-Peek pobiera dane ze strony TopYou i pokazuje aktualny status, każdy skan w brzmieniu TopYou lub firmy lokalnej, kraj docelowy oraz – w polu „Waga” – wagę zapisaną przez TopYou. Z własnych skanów TopYou Peek usuwa miejsce, gdy jest nim wyłącznie nazwa kraju docelowego, dzięki czemu skan z chińskiego lotniska nie wygląda jak wykonany w Polsce. Gdy podsumowanie karty TopYou oznacza paczkę jako doręczoną lub zwróconą, Peek pokazuje „Dostarczona” albo „Zwrócona nadawcy”, nawet jeśli ostatni wiersz brzmi inaczej. Własne skany TopYou mają czas pekiński (UTC+8); w skanach kopiowanych od lokalnego przewoźnika strona TopYou nie zawsze podaje właściwą strefę czasową, więc Peek sam wylicza poprawną godzinę i pokazuje wszystko w strefie Twojego urządzenia. Przewidywanej daty doręczenia nie ma, bo TopYou jej nie udostępnia.
+Peek pobiera dane ze strony TopYou i pokazuje aktualny status, każdy skan w brzmieniu TopYou lub firmy lokalnej, kraj docelowy oraz – w polu „Waga” – wagę zapisaną przez TopYou. Z własnych skanów TopYou Peek usuwa miejsce, gdy jest nim wyłącznie nazwa kraju docelowego, dzięki czemu skan z chińskiego lotniska nie wygląda jak wykonany w Polsce. Gdy podsumowanie karty TopYou oznacza paczkę jako doręczoną lub zwróconą, Peek pokazuje „Dostarczona” albo „Zwrócona nadawcy”, nawet jeśli ostatni wiersz brzmi inaczej. Własne skany TopYou mają czas pekiński (UTC+8); w skanach kopiowanych od lokalnego przewoźnika strona TopYou nie zawsze podaje właściwą strefę czasową, więc Peek sam wylicza poprawną godzinę i pokazuje wszystko w strefie twojego urządzenia. Przewidywanej daty doręczenia nie ma, bo TopYou jej nie udostępnia.
 
 Gdy dane TopYou zawierają numer firmy doręczającej, Peek sprawdza go w Poczcie Polskiej (dla prawidłowego międzynarodowego numeru pocztowego z Polską jako krajem docelowym) albo u jedynego przewoźnika, do którego taki układ numeru należy na pewno, o ile Peek obsługuje jego śledzenie. Gdy tylko ten przewoźnik pokaże skan co najmniej tak świeży jak ostatni wpis TopYou, Peek śledzi paczkę u niego i wyświetla oba numery, zachowując wcześniejsze skany TopYou. Numer niejednoznaczny (np. same 20 cyfr używane przez kilka firm) nie jest przełączany automatycznie – Peek zostaje przy stronie TopYou.
 
-Gdy masz przesyłkę otwartą albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza ją nawet co 10 minut; w pozostałych przypadkach co godzinę. Raz na godzinę sprawdza ją też, gdy przestają spływać nowości: po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” albo po dwóch dniach na pozostałych etapach. Gdy paczka ma status „W doręczeniu”, na tych samych warunkach sprawdza nawet co 2 minuty od 6:00 czasu lokalnego w tym dniu, dopóki odpowiada śledzenie TopYou; przez serwisy śledzenia przesyłek nawet co 15 minut. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane nie częściej niż co godzinę, PostNL i USPS nie częściej niż co 30 minut, także w doręczeniu. Dostępne powiadomienia to „Każdy skan”, „Ważne etapy” oraz „Tylko doręczenie”: „Ważne etapy” powiadomią Cię o odprawie importowej (`Shipment started the customs clearance process at destination`), przejściu w stan „W doręczeniu” i samym doręczeniu, ale pominą odprawę eksportową w Chinach, lot, wyjście z cła oraz `Shipment is out for delivery`. Peek nie skontaktuje się za Ciebie z TopYou, sklepem ani Pocztą Polską.
+Gdy masz przesyłkę otwartą albo w dniu doręczenia z włączonymi powiadomieniami, Peek sprawdza ją nawet co 10 minut; w pozostałych przypadkach co godzinę. Raz na godzinę sprawdza ją też, gdy przestają spływać nowości: po 12 godzinach na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika” albo po dwóch dniach na pozostałych etapach. Gdy paczka ma status „W doręczeniu”, na tych samych warunkach sprawdza nawet co 2 minuty od 6:00 czasu lokalnego w tym dniu, dopóki odpowiada śledzenie TopYou; przez serwisy śledzenia przesyłek nawet co 15 minut. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane nie częściej niż co godzinę, PostNL i USPS nie częściej niż co 30 minut, także w doręczeniu. Dostępne powiadomienia to „Każdy skan”, „Ważne etapy” oraz „Tylko doręczenie”: „Ważne etapy” powiadomią cię o odprawie importowej (`Shipment started the customs clearance process at destination`), przejściu w stan „W doręczeniu” i samym doręczeniu, ale pominą odprawę eksportową w Chinach, lot, wyjście z cła oraz `Shipment is out for delivery`. Peek nie skontaktuje się za ciebie z TopYou, sklepem ani Pocztą Polską.
 
 ## Najczęstsze pytania o śledzenie TopYou
 

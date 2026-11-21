@@ -1,6 +1,6 @@
 ---
 title: Śledzenie przesyłki Amazon: gdzie znaleźć numer śledzenia
-description: Gdzie Amazon.pl pokazuje przewoźnika i numer śledzenia Twojej paczki i jak śledzić ją w Peek: samodzielnie albo z Claude lub ChatGPT, które zrobią to za Ciebie.
+description: Gdzie Amazon.pl pokazuje przewoźnika i numer śledzenia twojej paczki i jak śledzić ją w Peek: samodzielnie albo z Claude lub ChatGPT, które zrobią to za ciebie.
 slug: sledzenie-zamowienia-amazon
 picture: Telefon pokazuje postęp zamówienia, dwie furgonetki przekazują sobie paczkę, a Pip się przygląda.
 published: 2026-10-16
@@ -39,12 +39,12 @@ Na innych stronach Amazona te same przyciski nazywają się tak:
 ### Brak numeru śledzenia?
 
 - **Nowe zamówienie.** Numer zwykle pojawia się, gdy przewoźnik ma już paczkę.
-- **Amazon dostarcza sam.** Zamówienie może nie pokazywać żadnego numeru albo numer Amazona: dwie litery kraju i 10 cyfr, np. `PL1234567890`. Mimo to wklej go do Peek: Peek będzie go śledzić, jeśli Amazon pokazuje go w publicznym śledzeniu, a jeśli widać go tylko na Twoim koncie Amazon, Peek Ci o tym powie.
+- **Amazon dostarcza sam.** Zamówienie może nie pokazywać żadnego numeru albo numer Amazona: dwie litery kraju i 10 cyfr, np. `PL1234567890`. Mimo to wklej go do Peek: Peek będzie go śledzić, jeśli Amazon pokazuje go w publicznym śledzeniu, a jeśli widać go tylko na twoim koncie Amazon, Peek ci o tym powie.
 - **Numer zamówienia,** trzy grupy cyfr, np. `123-1234567-1234567`, nigdy nie jest numerem śledzenia.
 
 ## Czy Claude albo ChatGPT mogą to zrobić za mnie?
 
-Tak, jeśli asystent może korzystać z przeglądarki, w której logujesz się na Amazonie: Claude in Chrome w płatnym planie Claude albo rozszerzenie przeglądarki ChatGPT, które konfigurujesz w aplikacji ChatGPT na komputer. Potrzebny jest do tego komputer: z aplikacji w telefonie albo przez przeglądarkę, którą uruchamia na własnych serwerach, asystent nie dostanie się do Twoich zamówień, a e-maile od Amazona nie podają numeru śledzenia.
+Tak, jeśli asystent może korzystać z przeglądarki, w której logujesz się na Amazonie: Claude in Chrome w płatnym planie Claude albo rozszerzenie przeglądarki ChatGPT, które konfigurujesz w aplikacji ChatGPT na komputer. Potrzebny jest do tego komputer: z aplikacji w telefonie albo przez przeglądarkę, którą uruchamia na własnych serwerach, asystent nie dostanie się do twoich zamówień, a e-maile od Amazona nie podają numeru śledzenia.
 
 ### Bez konektora Peek
 
@@ -62,7 +62,7 @@ Potem napisz:
 
 > Zaimportuj moje paczki z Amazona do Peek.
 
-Peek mówi asystentowi, gdzie Amazon pokazuje numery. Asystent dodaje każdą paczkę z nazwą jej produktu i mówi Ci, które Amazon śledzi tylko na Twoim koncie.
+Peek mówi asystentowi, gdzie Amazon pokazuje numery. Asystent dodaje każdą paczkę z nazwą jej produktu i mówi ci, które Amazon śledzi tylko na twoim koncie.
 
 W obu przypadkach asystent na Amazonie tylko czyta. Jeśli Amazon poprosi o zalogowanie, zaloguj się samodzielnie w tym oknie, a potem poproś jeszcze raz.
 

@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-10-28
 ---
 
-Jeśli SMS albo e-mail informuje, że Twoja paczka czeka na dopłatę, wróci do nadawcy albo wymaga poprawienia adresu, i podsuwa link, żeby to załatwić, to prawie na pewno oszustwo. Nie klikaj: sam otwórz stronę albo aplikację przewoźnika i sprawdź numer przesyłki z e-maila od sklepu. Jeśli dane karty są już wpisane na stronie z linku, od razu zadzwoń do banku. Kartę zastrzeżesz też pod numerem +48 828 828 828, jeśli Twój bank uczestniczy w Systemie Zastrzegania Kart.
+Jeśli SMS albo e-mail informuje, że twoja paczka czeka na dopłatę, wróci do nadawcy albo wymaga poprawienia adresu, i podsuwa link, żeby to załatwić, to prawie na pewno oszustwo. Nie klikaj: sam otwórz stronę albo aplikację przewoźnika i sprawdź numer przesyłki z e-maila od sklepu. Jeśli dane karty są już wpisane na stronie z linku, od razu zadzwoń do banku. Kartę zastrzeżesz też pod numerem +48 828 828 828, jeśli twój bank uczestniczy w Systemie Zastrzegania Kart.
 
 ## Jak rozpoznać fałszywy SMS o paczce?
 
@@ -15,7 +15,7 @@ Fałszywka zwykle ma kilka z tych cech:
 
 - **Chce pieniędzy za doręczenie.** Prosi o dopłatę za paczkę albo za kuriera. [DPD Polska](carrier:dpd-pl) nigdy nie wysyła linków do dopłat SMS-em ani e-mailem, a [Poczta Polska](carrier:poczta-polska) nie wysyła SMS-ów z prośbą o dodatkową płatność za odebranie przesyłki.
 - **Przychodzi akurat wtedy, gdy czekasz na paczkę.** To, że czekasz na zamówienie, niczego nie dowodzi. Policja ostrzega, że ktoś, kto często dostaje paczki, jest łatwym celem, „zwłaszcza jeśli oczekuje akurat na przesyłkę”.
-- **Popędza Cię.** DPD podaje typowy przykład: „kliknij teraz, inaczej paczka wróci do nadawcy”. Presję czasu wymienia też Poczta Polska.
+- **Popędza cię.** DPD podaje typowy przykład: „kliknij teraz, inaczej paczka wróci do nadawcy”. Presję czasu wymienia też Poczta Polska.
 - **Link nie prowadzi do przewoźnika.** Strona spoza domeny dpd.com.pl, skrócony adres (DPD) albo adres, który tylko przypomina prawdziwy.
 - **Nadawca wygląda podejrzanie.** DPD wśród sygnałów ostrzegawczych wymienia nietypowego nadawcę wiadomości. Poczta Polska opisuje fałszywki wysyłane z zagranicznych numerów, na przykład francuskich (+33) i filipińskich (+63).
 - **Prosi o coś dziwnego:** instalację aplikacji z linku albo otwarcie załącznika. DPD nie każe instalować aplikacji z linków i nie wysyła e-maili z załącznikami do potwierdzenia nadania ani doręczenia.
@@ -40,7 +40,7 @@ Nawet gdy link wygląda dobrze, nie korzystaj z niego: sam wpisz adres przewoźn
 
 Tak, większość wysyła, i właśnie dlatego fałszywki działają. Oto co DPD i Poczta Polska piszą o swoich wiadomościach:
 
-| Przewoźnik | Jak naprawdę się z Tobą kontaktuje | Czego według swojej strony nigdy nie robi |
+| Przewoźnik | Jak naprawdę się z tobą kontaktuje | Czego według swojej strony nigdy nie robi |
 | --- | --- | --- |
 | DPD Polska | Oficjalne informacje tylko na dpd.com/pl, status na tracktrace.dpd.com.pl, aplikacja tylko z Google Play i App Store | Nie wysyła linków do dopłat, nie prosi przez link o dane ani hasła, nie pośredniczy w płatnościach między osobami prywatnymi, nie każe instalować aplikacji z linku, nie wysyła załączników do potwierdzenia nadania czy doręczenia |
 | Poczta Polska | SMS-y o statusie przesyłki; śledzenie na emonitoring.poczta-polska.pl i pocztex.pl. Opłaty, na przykład pobranie, płacisz dopiero przy odbiorze | Nie wysyła SMS-ów z prośbą o dopłatę za odebranie przesyłki |
@@ -76,7 +76,7 @@ Prawdziwe nieudane doręczenie wygląda inaczej niż SMS z linkiem do płatnośc
 
 ## Co zrobić po kliknięciu w podejrzany link?
 
-Sam SMS w telefonie nic Ci nie zrobi. Kłopot zaczyna się, gdy klikniesz, odpowiesz, zadzwonisz albo coś wpiszesz. Co robić dalej, zależy od tego, jak daleko to zaszło:
+Sam SMS w telefonie nic ci nie zrobi. Kłopot zaczyna się, gdy klikniesz, odpowiesz, zadzwonisz albo coś wpiszesz. Co robić dalej, zależy od tego, jak daleko to zaszło:
 
 :::steps
 - Zamknij stronę | Nic więcej nie wpisuj i nie odpowiadaj na SMS.
@@ -90,7 +90,7 @@ Sam SMS w telefonie nic Ci nie zrobi. Kłopot zaczyna się, gdy klikniesz, odpow
 
 **Dane karty podane albo płatność wysłana?** Poczta Polska radzi „niezwłocznie” skontaktować się z bankiem i zmienić hasła. Kartę zastrzeżesz też pod numerem +48 828 828 828: System Zastrzegania Kart działa całą dobę i jest bezpłatny, ale obsługuje tylko banki, które w nim uczestniczą. Mała kwota nie oznacza małej szkody: pamiętaj o tych 0,87 zł, po których z konta zniknęło kilka tysięcy złotych. Sprawdzaj też wyciągi.
 
-Telefon „z banku” może wyglądać wiarygodnie. Związek Banków Polskich, policja i FinCERT ostrzegają, że oszuści potrafią wyświetlić na Twoim ekranie numer infolinii banku albo jego nazwę, więc nie oddzwaniaj na ostatnie połączenie.
+Telefon „z banku” może wyglądać wiarygodnie. Związek Banków Polskich, policja i FinCERT ostrzegają, że oszuści potrafią wyświetlić na twoim ekranie numer infolinii banku albo jego nazwę, więc nie oddzwaniaj na ostatnie połączenie.
 
 ## Fałszywy SMS o paczce: gdzie zgłosić oszustwo?
 

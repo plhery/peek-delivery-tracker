@@ -28,7 +28,7 @@ Na stronie śledzenia Landmark możesz wpisać jednocześnie do 25 numerów oddz
 
 Witryna Landmark ma polską wersję językową, natomiast Peek odczytuje jej stronę angielską (tłumacząc doręczenia Landmark na „Dostarczona” i zachowując skany lokalnego przewoźnika w oryginale). Kolejność typowych etapów:
 
-| Komunikat Landmark | Co oznacza dla Twojej przesyłki |
+| Komunikat Landmark | Co oznacza dla twojej przesyłki |
 | --- | --- |
 | `Shipment Data Uploaded` | Sklep przesłał dane elektroniczne; Landmark nie odebrał jeszcze fizycznie paczki. |
 | `Processed` | Paczka została przyjęta i przetworzona przez Landmark. |
@@ -45,7 +45,7 @@ Witryna Landmark ma polską wersję językową, natomiast Peek odczytuje jej str
 
 ## Kto doręcza paczki Landmark Global w Polsce, awizo i zmiana adresu
 
-W większości państw Landmark nie doręcza przesyłek własnymi autami: współpracuje z operatorami pocztowymi i lokalnymi sieciami kurierskimi (w Belgii wskazuje [bpost](carrier:bpost), a w USA [UPS](carrier:ups) i DHL eCommerce; dla Polski nie podaje na stronie jednego stałego przewoźnika). O tym, kto doręczy Twoją paczkę, decyduje wpis partnera widoczny w szczegółach Twojej przesyłki na stronie Landmark.
+W większości państw Landmark nie doręcza przesyłek własnymi autami: współpracuje z operatorami pocztowymi i lokalnymi sieciami kurierskimi (w Belgii wskazuje [bpost](carrier:bpost), a w USA [UPS](carrier:ups) i DHL eCommerce; dla Polski nie podaje na stronie jednego stałego przewoźnika). O tym, kto doręczy twoją paczkę, decyduje wpis partnera widoczny w szczegółach twojej przesyłki na stronie Landmark.
 
 Powiadomienia SMS/e-mail, punkty odbioru, termin odbioru i ponowna próba doręczenia podlegają zasadom tego polskiego przewoźnika. W razie nieobecności polska strona pomocy Landmark radzi postępować zgodnie z instrukcjami kuriera albo skontaktować się z obsługą klienta w celu zmiany terminu lub odbioru, zastrzegając, że nie wszystkie firmy kurierskie oferują ponowną dostawę lub punkt odbioru. Zmiana adresu dostawy po nadaniu nie jest już możliwa, gdy przesyłka została przetworzona i otrzymała etykietę. Zobacz też [nieudane doręczenie](guide:missed-delivery) oraz [nieodebrana paczka](guide:uncollected-parcel).
 
@@ -78,7 +78,7 @@ Ogólna strona kontaktowa Landmark (`landmarkglobal.com/eu/pl/contact/`) służy
 
 Peek pobiera dane z angielskiej strony Landmark: widzisz aktualny status, angielskie skany na mapie (doręczenia Landmark wyświetlają się jako „Dostarczona”), kraj przeznaczenia oraz przewoźnika doręczającego wraz z jego numerem. Brak przewidywanej daty dostawy, a referencje zamówienia i paczki są pomijane.
 
-Gdy partner końcowy jest bezpośrednio obsługiwany przez Peek (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost), [DPD Polska](carrier:dpd-pl), [bpost](carrier:bpost), [Evri](carrier:evri) lub [UPS](carrier:ups)), karta paczki może przełączyć się na „Doręcza: …” po pojawieniu się nowszych zdarzeń u tego przewoźnika (nie dzieje się tak dla każdej przesyłki). Peek odpytuje o zmiany **do co 10 minut** — a w dniu doręczenia od 6:00 **do co 2 minuty** (**do co 15 minut** przez serwisy uniwersalne) — z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach ciszy (lub 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika”) sprawdza status raz na godzinę. Peek nie kontaktuje się z Landmark ani ze sklepem w Twoim imieniu.
+Gdy partner końcowy jest bezpośrednio obsługiwany przez Peek (np. [Poczta Polska](carrier:poczta-polska), [InPost](carrier:inpost), [DPD Polska](carrier:dpd-pl), [bpost](carrier:bpost), [Evri](carrier:evri) lub [UPS](carrier:ups)), karta paczki może przełączyć się na „Doręcza: …” po pojawieniu się nowszych zdarzeń u tego przewoźnika (nie dzieje się tak dla każdej przesyłki). Peek odpytuje o zmiany **do co 10 minut** — a w dniu doręczenia od 6:00 **do co 2 minuty** (**do co 15 minut** przez serwisy uniwersalne) — z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”. Po dwóch dniach ciszy (lub 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika”) sprawdza status raz na godzinę. Peek nie kontaktuje się z Landmark ani ze sklepem w twoim imieniu.
 
 ## Najczęstsze pytania o śledzenie Landmark Global
 

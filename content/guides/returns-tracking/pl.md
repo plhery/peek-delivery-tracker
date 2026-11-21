@@ -1,13 +1,13 @@
 ---
 title: Śledzenie zwrotu: gdzie jest paczka i moje pieniądze?
-description: Gdzie znaleźć numer zwrotu na Allegro, Zalando i Shein, dlaczego śledzenie urywa się w magazynie i kiedy sklep odda Ci pieniądze.
+description: Gdzie znaleźć numer zwrotu na Allegro, Zalando i Shein, dlaczego śledzenie urywa się w magazynie i kiedy sklep odda ci pieniądze.
 slug: sledzenie-zwrotu-paczki
 picture: Paczka w drodze do magazynu sklepu, potwierdzenie nadania i Pip, który macha jej na pożegnanie.
 published: 2026-10-17
 updated: 2026-10-27
 ---
 
-Zwrot ma własny numer przesyłki, inny niż Twoje zamówienie. Jest na etykiecie zwrotnej albo na potwierdzeniu nadania z punktu, a pokazuje go też strona zwrotów w sklepie. Sklep oddaje pieniądze, kiedy jego centrum zwrotów odbierze paczkę i ją sprawdzi. Ile to trwa, zależy od sklepu, a jeśli odstępujesz od umowy w ustawowych 14 dniach, także od prawa.
+Zwrot ma własny numer przesyłki, inny niż twoje zamówienie. Jest na etykiecie zwrotnej albo na potwierdzeniu nadania z punktu, a pokazuje go też strona zwrotów w sklepie. Sklep oddaje pieniądze, kiedy jego centrum zwrotów odbierze paczkę i ją sprawdzi. Ile to trwa, zależy od sklepu, a jeśli odstępujesz od umowy w ustawowych 14 dniach, także od prawa.
 
 ## Czy mój zwrot ma numer do śledzenia?
 
@@ -39,20 +39,20 @@ Przewoźnicy mają też własne śledzenie: [InPost](carrier:inpost), [DPD](carr
 
 Poza darmowym zwrotem w ramach Allegro Smart! możesz na Allegro odesłać paczkę na własny koszt, na przykład z płatnym kodem Allegro Paczkomaty InPost.
 
-Jedna paczka, jeden numer. Zalando: "Na każdą przesyłkę potrzebny jest jeden kod zwrotu." Artykuły od Zalando i od Partnera pakujesz osobno, a to, co przysłał Ci bezpośrednio Partner, wraca do Partnera z dołączoną etykietą.
+Jedna paczka, jeden numer. Zalando: "Na każdą przesyłkę potrzebny jest jeden kod zwrotu." Artykuły od Zalando i od Partnera pakujesz osobno, a to, co przysłał ci bezpośrednio Partner, wraca do Partnera z dołączoną etykietą.
 
 Nie wiesz, czyj to numer? Wpisz go tutaj:
 
 :::checker
 :::
 
-Numer paczki, która przyszła do Ciebie, jest gdzie indziej: [jak znaleźć numer przesyłki](guide:find-tracking-number).
+Numer paczki, która przyszła do ciebie, jest gdzie indziej: [jak znaleźć numer przesyłki](guide:find-tracking-number).
 
 ## Ile trwa droga do sklepu i dlaczego śledzenie się urywa?
 
 Ostatni skan, który widzisz, to zwykle przewoźnik oddający paczkę, a nie sklep, który ją otwiera. Na Allegro to właśnie status „Dostarczona” przesyłki zwrotnej uruchamia 7 dni, w których sprzedający powinien oddać pieniądze.
 
-Zwrot rzadko jedzie prosto do sklepu. Shein ostrzega, żeby nie odsyłać paczki na adres nadawcy z oryginalnej paczki ani na adres z etykiety zwrotnej, "ponieważ nie są to rzeczywiste adresy zwrotne". Jeśli używasz starego kartonu, zakryj starą etykietę, żeby zwrot nie wrócił do Ciebie. W Allegro Delivery zwrot nadany z kodem zwrotu jedzie do sprzedającego.
+Zwrot rzadko jedzie prosto do sklepu. Shein ostrzega, żeby nie odsyłać paczki na adres nadawcy z oryginalnej paczki ani na adres z etykiety zwrotnej, "ponieważ nie są to rzeczywiste adresy zwrotne". Jeśli używasz starego kartonu, zakryj starą etykietę, żeby zwrot nie wrócił do ciebie. W Allegro Delivery zwrot nadany z kodem zwrotu jedzie do sprzedającego.
 
 Co sklepy mówią o czasie:
 
@@ -66,7 +66,7 @@ Jeśli śledzenie u przewoźnika stoi od kilku dni przed centrum zwrotów, zobac
 
 ## Kiedy dostanę pieniądze?
 
-Po sprawdzeniu zwrotu, plus czas Twojego banku:
+Po sprawdzeniu zwrotu, plus czas twojego banku:
 
 | Sklep | Zwrot wystawiony | Potem w banku |
 | --- | --- | --- |
@@ -89,22 +89,22 @@ Używany produkt może być wart mniej. Na Allegro sprzedający może obniżyć 
 ### Co mówi prawo?
 
 - **14 dni na odstąpienie.** Kupując przez internet od firmy, możesz odstąpić od umowy w 14 dni od otrzymania towaru, bez podawania przyczyny. Potem masz 14 dni na odesłanie, a "do zachowania 14-dniowego terminu wystarczy odesłanie rzeczy przed jego upływem".
-- **Zwrot pieniędzy w 14 dni** od otrzymania Twojego oświadczenia. UOKiK wyjaśnia: "Przedsiębiorca może wstrzymać się ze zwrotem pieniędzy do chwili otrzymania zwracanej rzeczy lub potwierdzenia jej odesłania (w zależności od tego, co nastąpi wcześniej)." Do tego służy potwierdzenie nadania.
-- **Koszty odesłania** ponosisz Ty, chyba że sklep zgodził się je pokryć albo Cię o nich nie poinformował. Shein płaci za pierwszy zwrot z każdego zamówienia, a od drugiego potrąca 19 zł. Na Allegro odeślesz zwrot za darmo przy zakupie z dostawą Allegro Delivery, Allegro Kurier24 InPost albo Allegro miniKurier24 InPost, a przy innych zakupach w ramach Allegro Smart! albo promocji na darmowe zwroty.
+- **Zwrot pieniędzy w 14 dni** od otrzymania twojego oświadczenia. UOKiK wyjaśnia: "Przedsiębiorca może wstrzymać się ze zwrotem pieniędzy do chwili otrzymania zwracanej rzeczy lub potwierdzenia jej odesłania (w zależności od tego, co nastąpi wcześniej)." Do tego służy potwierdzenie nadania.
+- **Koszty odesłania** ponosisz ty, chyba że sklep zgodził się je pokryć albo cię o nich nie poinformował. Shein płaci za pierwszy zwrot z każdego zamówienia, a od drugiego potrąca 19 zł. Na Allegro odeślesz zwrot za darmo przy zakupie z dostawą Allegro Delivery, Allegro Kurier24 InPost albo Allegro miniKurier24 InPost, a przy innych zakupach w ramach Allegro Smart! albo promocji na darmowe zwroty.
 - **Od osoby prywatnej** zwrotu nie wymusisz: jak przypomina Your Europe, prawo do odstąpienia od umowy nie obowiązuje przy towarach kupionych od osoby prywatnej. Więcej: [OLX i Allegro Lokalnie](guide:second-hand-orders).
 
 30 dni Zalando to zasada sklepu, ponad to, co daje prawo.
 
 ## Co, jeśli sklep twierdzi, że zwrot nie dotarł?
 
-Śledzenie i potwierdzenie nadania to Twoje dowody. Idź po kolei:
+Śledzenie i potwierdzenie nadania to twoje dowody. Idź po kolei:
 
 - **Sprawdź śledzenie.** Jeśli paczka ma status doręczonej do centrum zwrotów albo sprzedającego, wyślij sklepowi zrzut ekranu i zdjęcie potwierdzenia.
 - **Daj sklepowi czas.** Shein liczy do dwóch tygodni na drogę i kontrolę.
-- **Na Allegro** zgłoś sprzedającemu problem z zakupem. Na pierwszą wiadomość ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy, a na Twoją prośbę do rozmowy włączy się Allegro. Jeśli problem nie zostanie rozwiązany, możesz złożyć wniosek w ramach Allegro Ochrony Kupujących.
+- **Na Allegro** zgłoś sprzedającemu problem z zakupem. Na pierwszą wiadomość ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy, a na twoją prośbę do rozmowy włączy się Allegro. Jeśli problem nie zostanie rozwiązany, możesz złożyć wniosek w ramach Allegro Ochrony Kupujących.
 - **Dowód nadania.** Gdy odstępujesz od umowy i masz dowód nadania, sklep nie może już wstrzymywać pieniędzy w oczekiwaniu na paczkę.
 
-Jak szukać zagubionej paczki: [zaginiona paczka](guide:lost-parcel) i [doręczona, ale nie dotarła](guide:delivered-not-received). Paczka, która wraca do sprzedawcy, zanim do Ciebie dotrze, to inna sprawa: [paczka wraca do nadawcy](guide:returned-to-sender). Sklep po sklepie: [zamówienia z Amazona](guide:amazon-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders) i [Kaufland](guide:kaufland-orders).
+Jak szukać zagubionej paczki: [zaginiona paczka](guide:lost-parcel) i [doręczona, ale nie dotarła](guide:delivered-not-received). Paczka, która wraca do sprzedawcy, zanim do ciebie dotrze, to inna sprawa: [paczka wraca do nadawcy](guide:returned-to-sender). Sklep po sklepie: [zamówienia z Amazona](guide:amazon-orders), [Temu](guide:temu-orders), [Shein](guide:shein-orders), [AliExpress](guide:aliexpress-orders), [IKEA](guide:ikea-orders), [Zara](guide:zara-orders), [Decathlon](guide:decathlon-orders), [adidas](guide:adidas-orders), [H&M](guide:h-m-orders), [Xiaomi](guide:xiaomi-orders), [Apple](guide:apple-orders), [Douglas](guide:douglas-orders), [Lidl](guide:lidl-orders), [Leroy Merlin](guide:leroy-merlin-orders), [Back Market](guide:back-market-orders) i [Kaufland](guide:kaufland-orders).
 
 ## Czy mogę śledzić zwrot w Peek?
 

@@ -23,7 +23,7 @@ Gdzie go szukać:
 
 - **Potwierdzenie nadania** ma nadawca: jeśli w mailu ze sklepu nie ma numeru, zapytaj sklep.
 - **Powiadomienie o paczce w punkcie lub automacie Pocztex** (SMS, czasem e-mail lub aplikacja) podaje numer przesyłki, nazwę i adres miejsca, termin odbioru i jednorazowy kod.
-- **Wiadomość po nieudanej próbie doręczenia** kuriera podaje numer, termin odbioru i adres placówki. Przy przesyłkach poleconych elektroniczne awizo podaje to samo, jeśli Ty lub nadawca o nie prosiliście.
+- **Wiadomość po nieudanej próbie doręczenia** kuriera podaje numer, termin odbioru i adres placówki. Przy przesyłkach poleconych elektroniczne awizo podaje to samo, jeśli ty lub nadawca o nie prosiliście.
 
 Gdy eMonitoring odpowiada `Podany numer przesyłki jest błędny`, sprawdź każdy znak i to, którego przewoźnika podał sklep. Nie masz numeru? Zobacz, [gdzie znaleźć numer przesyłki](guide:find-tracking-number).
 
@@ -31,7 +31,7 @@ Gdy eMonitoring odpowiada `Podany numer przesyłki jest błędny`, sprawdź każ
 
 eMonitoring otwiera się po polsku i dla każdego kroku pokazuje nazwę zdarzenia, datę, godzinę i placówkę. Linie, które widzisz najczęściej, w kolejności, w jakiej spotyka je przesyłka:
 
-| Poczta Polska pisze | Co to znaczy dla Ciebie |
+| Poczta Polska pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Przygotowana` | Nadawca zarejestrował przesyłkę, ale Poczta Polska jeszcze jej nie ma. |
 | `Nadana` | Nadana w placówce albo odebrana od nadawcy. |
@@ -39,9 +39,9 @@ eMonitoring otwiera się po polsku i dla każdego kroku pokazuje nazwę zdarzeni
 | `Wysłano z Polski` | Wyjechała z Polski za granicę. |
 | `Przyjęta w Polsce` | Przesyłka z zagranicy dotarła do polskiego urzędu wymiany. |
 | `Obsługa celna` | Odprawa celna. |
-| `W doręczeniu` | Listonosz lub kurier wiezie ją do Ciebie. W tym samym stanie Poczta Polska zapisuje też nieudaną próbę doręczenia: Peek odróżnia ją po kodzie zdarzenia i pokazuje wtedy „Próba doręczenia”. |
+| `W doręczeniu` | Listonosz lub kurier wiezie ją do ciebie. W tym samym stanie Poczta Polska zapisuje też nieudaną próbę doręczenia: Peek odróżnia ją po kodzie zdarzenia i pokazuje wtedy „Próba doręczenia”. |
 | `Awizowana` | Nikogo nie było. Zostało awizo, a przesyłka trafia do placówki. |
-| `Oczekuje na odbiór` | Czeka na Ciebie w placówce podanej w zdarzeniu. |
+| `Oczekuje na odbiór` | Czeka na ciebie w placówce podanej w zdarzeniu. |
 | `Odebrana w urzędzie pocztowym` | Została odebrana w placówce. |
 | `Doręczona` | Doręczona. |
 | `Zwrócona` | Wraca do nadawcy. |
@@ -52,7 +52,7 @@ Paczka Pocztex w punkcie pokazuje „doręczono”, a nie masz jej w rękach? We
 
 ## Przesyłka awizowana: placówka, punkt i automat Pocztex
 
-**Kurier Pocztex.** Kurier doręcza paczkę Tobie, dorosłemu domownikowi albo osobie upoważnionej, za pokwitowaniem, którym może być jednorazowy kod. Gdy Cię nie ma, a nadawca podał Twój telefon lub e-mail (albo masz aplikację), dostajesz tylko SMS, e-mail lub powiadomienie w aplikacji; w innym razie kurier zostawia awizo w skrzynce. Drugą wiadomość dostajesz drugiego dnia po próbie. Paczka czeka w placówce 7 dni, licząc od dnia po awizo, potem wraca do nadawcy. Możesz też zadzwonić do kuriera (jeśli nadawca podał Twój numer) i poprosić o zostawienie paczki tuż przy adresie, ale nie przy pobraniu, wartości deklarowanej, „do rąk własnych” ani gdy za przesyłkę płaci odbiorca. Za tak zostawioną paczkę Poczta Polska już nie odpowiada.
+**Kurier Pocztex.** Kurier doręcza paczkę tobie, dorosłemu domownikowi albo osobie upoważnionej, za pokwitowaniem, którym może być jednorazowy kod. Gdy cię nie ma, a nadawca podał twój telefon lub e-mail (albo masz aplikację), dostajesz tylko SMS, e-mail lub powiadomienie w aplikacji; w innym razie kurier zostawia awizo w skrzynce. Drugą wiadomość dostajesz drugiego dnia po próbie. Paczka czeka w placówce 7 dni, licząc od dnia po awizo, potem wraca do nadawcy. Możesz też zadzwonić do kuriera (jeśli nadawca podał twój numer) i poprosić o zostawienie paczki tuż przy adresie, ale nie przy pobraniu, wartości deklarowanej, „do rąk własnych” ani gdy za przesyłkę płaci odbiorca. Za tak zostawioną paczkę Poczta Polska już nie odpowiada.
 
 **Punkt i automat.** W punkcie Pocztex (PUNKT) wybranym przez nadawcę paczka czeka 7 dni w placówce albo 3 dni w sklepie partnerskim, takim jak Żabka, ABC, Lewiatan czy Delikatesy Centrum. Automat (AUTOMAT), na poczcie, stacji paliw, przy sklepach takich jak Biedronka czy na osiedlu, trzyma ją 72 godziny, z przypomnieniami po 24 i 48 godzinach. Otworzysz go numerem telefonu i kodem albo aplikacją Pocztex Mobile. Terminu nie da się przedłużyć, a paczki nie przeniesiesz do innego punktu, ale odbierze ją każdy, komu dasz kod.
 
@@ -62,7 +62,7 @@ Paczka Pocztex w punkcie pokazuje „doręczono”, a nie masz jej w rękach? We
 
 Śledzenie Poczty Polskiej ma charakter informacyjny i nie może być podstawą roszczeń. Poczta Polska nie pisze, co robić, gdy status stoi w miejscu: zapytaj nadawcę i przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating). Gdy przesyłka jest zarejestrowana, przyjęta albo w transporcie, a jej ostatni skan ma cztery dni lub więcej, Peek pokazuje na liście dzień ostatniego skanu, na przykład „Brak aktualizacji od pon 12 paź”, a na stronie paczki notkę „Przesyłki często milkną podczas długich lotów, w urzędzie celnym albo w weekend. Peek dalej pyta przewoźnika Poczta Polska.” z linkiem „Poproś przewoźnika Poczta Polska o pomoc” do strony kontaktowej Poczty Polskiej. Po trzech tygodniach bez nowego skanu notka brzmi: „Od ponad trzech tygodni nic nowego. Jeśli przesyłka wciąż nie dotarła, zapytaj sprzedawcę. Peek dalej pyta przewoźnika Poczta Polska.”
 
-**Kto składa reklamację.** Nadawca, a Ty, gdy przesyłkę Ci doręczono albo nadawca przekazał Ci roszczenie. Złożysz ją przez formularz online na poczta-polska.pl (eReklamacje), na piśmie lub ustnie w każdej placówce.
+**Kto składa reklamację.** Nadawca, a ty, gdy przesyłkę ci doręczono albo nadawca przekazał ci roszczenie. Złożysz ją przez formularz online na poczta-polska.pl (eReklamacje), na piśmie lub ustnie w każdej placówce.
 
 **Terminy** dla przesyłek krajowych, według regulaminów Poczty Polskiej:
 
@@ -92,7 +92,7 @@ Stan na 11 października 2026, według stron kontaktowych Poczty Polskiej i Pocz
 
 [Peek](/) rozpoznaje od razu numery PX oraz numery 20-cyfrowe w kształcie z tabeli i z poprawną cyfrą kontrolną. O numery 19-cyfrowe zaczynające się od `00` pyta tylko Pocztę Polską, dopisując cyfrę kontrolną tak jak jej strona. Poprawny numer międzynarodowy kończący się na PL, który zaczyna się od R, E, L albo C (poza CV), na przykład `RR`, `EE` czy `CP`, Peek od razu przypisuje Poczcie Polskiej. Inny poprawny numer z PL na końcu, na przykład od `VV`, pokazuje najpierw jako nieznanego przewoźnika pocztowego i pyta Pocztę Polską oraz Chronopost; gdy Poczta Polska zna numer, wygrywa. Numeru z błędną cyfrą kontrolną nie przypisuje żadnemu przewoźnikowi i szuka go w serwisach śledzenia przesyłek. Rozpoznaje też numer 18-cyfrowy z 5900773 po pierwszej cyfrze i poprawną cyfrą kontrolną: to kod z etykiety bez początkowych zer `00`, które Peek dopisuje sam. Linki z eMonitoringu z `numer=` też działają, a kodu pocztowego nie trzeba.
 
-Pocztę Polską Peek pyta po polsku, gdy używasz go po polsku: jej zdarzenia zobaczysz wtedy pod jej polskimi nazwami, na przykład `W doręczeniu`, a w innym języku po angielsku, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Angielskie `In delivery` oznacza wydanie do doręczenia albo nieudaną próbę doręczenia: Peek rozróżnia je po kodzie zdarzenia i pokazuje odpowiednio „W doręczeniu” albo „Próba doręczenia”. Inne angielskie nazwy z listy zdarzeń Poczty Polskiej Peek oznacza tak: `Attempted delivery - redirected` (z dosłaniem) i `Delivery at sender's request - delivery attempt` jako „Próba doręczenia”, `Unsuccessful (physical) delivery - lost` jako „Zgłoszono problem”, `Added to postal notice book - Item can be collected` i `Ready for pick up at the point` jako „Do odbioru”, `Delivered to the PO box`, `Delivery at sender's request - delivered` i `Collected at the delivery point` jako „Dostarczona”, `Returned to sender` i `Not collected at the delivery point` jako „Zwrócona nadawcy”, `Item arrived at the shipping point` jako „Przyjęta przez przewoźnika”, a `Item returned from import customs` jako „W urzędzie celnym”. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia i placówkę, w której przesyłka czeka. Planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc Peek odczytuje je według zegara kraju, z którego pochodzą. Wszystkie godziny pokazuje w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie przypomina o tym linijka pod historią: „Godziny w twojej strefie czasowej: …”. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
+Pocztę Polską Peek pyta po polsku, gdy używasz go po polsku: jej zdarzenia zobaczysz wtedy pod jej polskimi nazwami, na przykład `W doręczeniu`, a w innym języku po angielsku, na przykład `Final delivery` czy `Ready for pick-up at the Post Office`. Angielskie `In delivery` oznacza wydanie do doręczenia albo nieudaną próbę doręczenia: Peek rozróżnia je po kodzie zdarzenia i pokazuje odpowiednio „W doręczeniu” albo „Próba doręczenia”. Inne angielskie nazwy z listy zdarzeń Poczty Polskiej Peek oznacza tak: `Attempted delivery - redirected` (z dosłaniem) i `Delivery at sender's request - delivery attempt` jako „Próba doręczenia”, `Unsuccessful (physical) delivery - lost` jako „Zgłoszono problem”, `Added to postal notice book - Item can be collected` i `Ready for pick up at the point` jako „Do odbioru”, `Delivered to the PO box`, `Delivery at sender's request - delivered` i `Collected at the delivery point` jako „Dostarczona”, `Returned to sender` i `Not collected at the delivery point` jako „Zwrócona nadawcy”, `Item arrived at the shipping point` jako „Przyjęta przez przewoźnika”, a `Item returned from import customs` jako „W urzędzie celnym”. Pokazuje każdą placówkę na mapie, wagę, kraj przeznaczenia i placówkę, w której przesyłka czeka. Planowanej daty dostawy Poczta Polska nie podaje. Pomija adresy placówek, godziny otwarcia, dokumenty płatności i usługi dodatkowe. Skany przekazane z zagranicy nie mają strefy czasowej, więc Peek odczytuje je według zegara kraju, z którego pochodzą. Wszystkie godziny pokazuje w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacji na iPhonie przypomina o tym linijka pod historią: „Godziny w twojej strefie czasowej: …”. Palet, przesyłek grupowych i nierejestrowanych nie da się śledzić.
 
 Peek sprawdza śledzenie nawet co 10 minut, a gdy przesyłka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Poczty Polskiej; przez serwisy śledzenia przesyłek co 15 minut), i może wysyłać powiadomienia o zmianie statusu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Przy międzynarodowym numerze pocztowym paczki jadącej do Polski Peek może przejść na śledzenie w Poczcie Polskiej, gdy ta pokaże nowsze zdarzenia. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
@@ -131,7 +131,7 @@ W eMonitoringu, tym samym numerem. Status `Przyjęta w kraju przeznaczenia` znac
 - [Poczta Polska: Zmiany w opłatach dla przesyłek spoza Unii Europejskiej od 1 lipca 2026 r.](https://www.poczta-polska.pl/news/zmiany-w-oplatach-dla-przesylek-spoza-unii-europejskiej-od-1-lipca-2026-r/) – opłata 3 EUR, prezenty do 45 EUR, odmowa przyjęcia
 - [Poczta Polska: Nowe przepisy Unii Europejskiej. Tak działa nowa opłata za przesyłki spoza UE](https://media.poczta-polska.pl/releases/nowe-przepisy-unii-europejskiej-tak-dziala-nowa-oplata-za-przesylki-spoza-ue) – 2 listopada 2026: opłata manipulacyjna 2 EUR za pozycję towarową, ponosi ją adresat, odczytane 10 listopada 2026
 - [Poczta Polska: Cennik opłat dodatkowych](https://www.poczta-polska.pl/wp-content/uploads/2025/04/cennik-oplat-dodatkowych.pdf) – opłaty za zgłoszenie celne
-- [Pocztex: Dla Ciebie](https://www.pocztex.pl/) – Pocztex jako usługa kurierska Poczty Polskiej
+- [Pocztex: Dla ciebie](https://www.pocztex.pl/) – Pocztex jako usługa kurierska Poczty Polskiej
 - [Poczta Polska: Poczta Polska SA Group](https://www.poczta-polska.pl/en/grupa-pp/poczta-polska/) – spółka państwowa
 - [Pocztex Mobile w App Store](https://apps.apple.com/pl/app/pocztex-mobile/id1661761150) – aplikacja Poczty Polskiej
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – co Peek odczytuje i pokazuje

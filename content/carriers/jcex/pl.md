@@ -25,10 +25,10 @@ W Peek wielkość liter i spacje nie mają znaczenia. Strona JCEX przyjmuje do 1
 
 Strona śledzenia JCEX jest tylko po chińsku, ale same linie bywają po angielsku, po chińsku albo w obu językach naraz. Każda ma przesunięcie względem UTC, godzinę i zwykle miejsce. Gdy JCEX ma linię w dwóch wersjach, jego strona pokazuje chińską, a Peek angielską: `签收` to `Delivered`, `正在派送` to `out for delivery`, a `预报订单信息已收到` to `Shipment order info received`. Poniżej linie tak, jak pokazuje je Peek, w kolejności, w jakiej zwykle spotyka je paczka:
 
-| JCEX pisze | Co to znaczy dla Ciebie |
+| JCEX pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Shipment order info received` | Sprzedawca przesłał JCEX dane zamówienia. JCEX nie ma jeszcze paczki. |
-| `Arrive at the delivery point` | Magazyn JCEX w Chinach przyjął paczkę. To nie punkt odbioru w Twojej okolicy. |
+| `Arrive at the delivery point` | Magazyn JCEX w Chinach przyjął paczkę. To nie punkt odbioru w twojej okolicy. |
 | `Item outbound in sorting center` | Paczka wyjechała z sortowni JCEX. |
 | `Departed from origin facility to airport` | Jedzie na lotnisko. |
 | `Flight dispatched（航班已飞）` | Samolot z paczką wystartował. |
@@ -36,7 +36,7 @@ Strona śledzenia JCEX jest tylko po chińsku, ale same linie bywają po angiels
 | `Customs held（清关中）` | Odprawa celna przywozowa. Chiński dopisek znaczy „trwa odprawa”: to nie musi oznaczać problemu. |
 | `Clearance processing complete（清关完成）` | Odprawa zakończona. |
 | `Handed over to the trucking company, waiting for transport（已交卡车公司 待运输）` | Paczka czeka na ciężarówkę do przewoźnika, który ją doręczy. |
-| `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` | Trafiła do magazynu przewoźnika doręczającego, nie do Ciebie. |
+| `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` | Trafiła do magazynu przewoźnika doręczającego, nie do ciebie. |
 | `CONSIGNMENT RECEIVED BY OVERSEAS FORWARDER` | Przewoźnik doręczający przejął paczkę. |
 | `out for delivery` | Paczka jest w doręczeniu. |
 | `Delivered` | Paczka została doręczona. |
@@ -51,7 +51,7 @@ Uwaga na `已签收` (doręczona): JCEX zapisuje jako doręczenie przekazanie pa
 
 JCEX sam nie doręcza w Polsce i nie podaje, z kim tu współpracuje. Pisze tylko, że małe paczki (do 2 kg, samolotem) doręcza poczta, a przesyłki ekspresowe od 0,5 do 20 kg poczta albo firma kurierska.
 
-Kto ma Twoją paczkę, sprawdzisz tak:
+Kto ma twoją paczkę, sprawdzisz tak:
 
 - **Najnowsze linie.** Po `CONSIGNMENT RECEIVED BY OVERSEAS FORWARDER` albo `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` paczkę ma przewoźnik doręczający. Jego własne linie i miejsca skanów mogą zdradzić, kto to jest.
 - **Drugi numer.** Gdy JCEX go ma, jego strona pokazuje obok numeru listu przewozowego („运单号”) drugi, „跟踪单号” (numer śledzenia); w znanych historiach go nie było. Jeśli go widzisz, wklej go do Peek. Gdy Peek nie rozpozna przewoźnika po samym kształcie numeru, dodaj go mimo to: Peek śledzi ponad 4500 przewoźników, a właściwego wybierzesz przyciskiem „Zmień”.
@@ -75,7 +75,7 @@ Czy cło i VAT są już w cenie, czy zapłacisz je przy odbiorze, zależy od skl
 
 **Doręczona, a jej nie ma.** Sprawdź, czy linia o doręczeniu pochodzi od przewoźnika w Polsce, a nie jest przekazaniem do jego magazynu. Jeśli doręczenie zgłosił przewoźnik, zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
-**Reklamacja u przewoźnika w Polsce.** Jeśli w Polsce doręczał operator pocztowy, a problem dotyczy jego usługi, reklamację składa się u niego. Według UKE może to zrobić nadawca, a adresat dopiero wtedy, gdy przesyłka zostanie mu doręczona albo nadawca zrzeknie się na jego rzecz prawa do dochodzenia roszczeń. Termin to 12 miesięcy od nadania, a przy powszechnej usłudze pocztowej w obrocie zagranicznym 6 miesięcy. Jeśli odpowiedź operatora Cię nie zadowoli, możesz poprosić o interwencję Prezesa UKE, skorzystać z bezpłatnego pozasądowego rozwiązywania sporów albo pójść do sądu. UKE zajmuje się usługami pocztowymi, nie JCEX ani sklepem.
+**Reklamacja u przewoźnika w Polsce.** Jeśli w Polsce doręczał operator pocztowy, a problem dotyczy jego usługi, reklamację składa się u niego. Według UKE może to zrobić nadawca, a adresat dopiero wtedy, gdy przesyłka zostanie mu doręczona albo nadawca zrzeknie się na jego rzecz prawa do dochodzenia roszczeń. Termin to 12 miesięcy od nadania, a przy powszechnej usłudze pocztowej w obrocie zagranicznym 6 miesięcy. Jeśli odpowiedź operatora cię nie zadowoli, możesz poprosić o interwencję Prezesa UKE, skorzystać z bezpłatnego pozasądowego rozwiązywania sporów albo pójść do sądu. UKE zajmuje się usługami pocztowymi, nie JCEX ani sklepem.
 
 ## JCEX kontakt: telefon i e-mail
 
@@ -92,11 +92,11 @@ Strona kontaktowa wymienia też oddziały w całych Chinach, ale nie podaje żad
 
 [Peek](/) od razu rozpoznaje JCEX po numerze `JCZ…DH`: takich numerów nie ma żaden inny przewoźnik z jego katalogu. Zadziała też wklejony link z track.jcex.com z `?nums=` i numerem. Peek śledzi tylko numery JCZ: jeśli masz od JCEX inny numer, poproś sprzedawcę o numer listu przewozowego.
 
-Peek odczytuje śledzenie JCEX i pokazuje status, historię z miejscami skanów na mapie, godzinę doręczenia i kraj docelowy. Linie pokazuje w wersji angielskiej, jeśli JCEX ją ma, a linie przewoźnika doręczającego tak, jak je zapisał. `Delivered` pokazuje po swojemu, jako „Dostarczona”. `Arrive at the delivery point` i przekazanie do magazynu przewoźnika liczą się jako „W transporcie”, nie jako „Do odbioru” ani „Dostarczona”. Godzinę każdego skanu Peek odczytuje na zegarze, który podaje JCEX (chińskim albo kraju doręczenia), i pokazuje ją w Twojej strefie czasowej. Linie, które JCEX czasem zapisuje z wyprzedzeniem aż do przekazania paczki przewoźnikowi, nie są skanami: Peek odkłada je na bok. Historia zaczyna się wtedy, aż do doręczenia lub zwrotu paczki, od zdania „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.”, a „Pokaż” wyświetla te linie na szaro, każdą z dopiskiem „Prognoza:” i dniem. Takie linie nie zmieniają statusu paczki i nie wysyłają powiadomień.
+Peek odczytuje śledzenie JCEX i pokazuje status, historię z miejscami skanów na mapie, godzinę doręczenia i kraj docelowy. Linie pokazuje w wersji angielskiej, jeśli JCEX ją ma, a linie przewoźnika doręczającego tak, jak je zapisał. `Delivered` pokazuje po swojemu, jako „Dostarczona”. `Arrive at the delivery point` i przekazanie do magazynu przewoźnika liczą się jako „W transporcie”, nie jako „Do odbioru” ani „Dostarczona”. Godzinę każdego skanu Peek odczytuje na zegarze, który podaje JCEX (chińskim albo kraju doręczenia), i pokazuje ją w twojej strefie czasowej. Linie, które JCEX czasem zapisuje z wyprzedzeniem aż do przekazania paczki przewoźnikowi, nie są skanami: Peek odkłada je na bok. Historia zaczyna się wtedy, aż do doręczenia lub zwrotu paczki, od zdania „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.”, a „Pokaż” wyświetla te linie na szaro, każdą z dopiskiem „Prognoza:” i dniem. Takie linie nie zmieniają statusu paczki i nie wysyłają powiadomień.
 
 JCEX nie podaje nazwy przewoźnika doręczającego, a Peek nie odczytuje pola „跟踪单号”, więc śledzi paczkę numerem JCEX do końca i nie przełącza się na przewoźnika w Polsce. Nie pokazuje też przewidywanej daty doręczenia, nazwy usługi ani potwierdzenia doręczenia.
 
-Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie JCEX; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z JCEX ani ze sklepem.
+Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie JCEX; przez serwisy śledzenia przesyłek co 15 minut). Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za ciebie z JCEX ani ze sklepem.
 
 ## Pytania o śledzenie JCEX
 
@@ -110,15 +110,15 @@ To znaczy, że magazyn JCEX w Chinach przyjął paczkę. Ta linia pojawia się n
 
 ### Dlaczego JCEX pokazuje doręczenie, a paczki nie mam?
 
-JCEX zapisuje jako doręczenie przekazanie paczki do magazynu przewoźnika w kraju docelowym: linia `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` znaczy, że paczkę ma teraz przewoźnik doręczający. Doręczenie do Ciebie potwierdzi dopiero ten przewoźnik.
+JCEX zapisuje jako doręczenie przekazanie paczki do magazynu przewoźnika w kraju docelowym: linia `Delivered to warehouse, waiting to be scanned（已交仓，待扫描）` znaczy, że paczkę ma teraz przewoźnik doręczający. Doręczenie do ciebie potwierdzi dopiero ten przewoźnik.
 
 ### Kto doręcza paczki JCEX w Polsce?
 
-JCEX tego nie podaje. Pisze tylko, że małe paczki doręcza poczta, a cięższe poczta albo firma kurierska. Kto ma Twoją paczkę, pokażą linie po przekazaniu; jeśli nic z nich nie wynika, zapytaj sprzedawcę.
+JCEX tego nie podaje. Pisze tylko, że małe paczki doręcza poczta, a cięższe poczta albo firma kurierska. Kto ma twoją paczkę, pokażą linie po przekazaniu; jeśli nic z nich nie wynika, zapytaj sprzedawcę.
 
 ### Ile idzie paczka JCEX do Polski?
 
-Dla małych paczek JCEX podaje sprzedawcom 9–13 dni roboczych do Europy, bez osobnego terminu dla Polski. Kieruj się terminem, który sklep pokazał przy Twoim zamówieniu.
+Dla małych paczek JCEX podaje sprzedawcom 9–13 dni roboczych do Europy, bez osobnego terminu dla Polski. Kieruj się terminem, który sklep pokazał przy twoim zamówieniu.
 
 :::sources
 - [JCEX: 物流查询 (śledzenie)](https://track.jcex.com/) – strona tylko po chińsku, do 100 numerów, chińska wersja linii, kategorie z opisami, pole 跟踪单号, 查询不到 i 暂无轨迹详情

@@ -41,7 +41,7 @@ Até dez passos do seguimento, conforme a tua escolha:
 
 Uma conta que nunca escolheu recebe todos os passos. Seis passos têm título próprio: «Etiqueta criada», «A caminho», «Pronta para levantamento», «Chegou», «Entrega falhada» e «De regresso»; os outros usam o nome do passo, como «Em distribuição».
 
-O que significa cada passo: [os estados do seguimento explicados](guide:tracking-statuses). Depois de «Entrega falhada», vê [o que fazer após uma entrega falhada](guide:missed-delivery); depois de «Pronta para levantamento», [as encomendas em cacifos](guide:parcel-lockers) ou [as encomendas não levantadas](guide:uncollected-parcel). Reencaminhar e-mails de envio para o Peek acrescenta mais um, «Adicionado a partir do teu e-mail»: vê o guia [Segue as tuas encomendas pelo e-mail](guide:add-parcels-by-email).
+O que significa cada passo: [os estados do seguimento explicados](guide:tracking-statuses). Depois de «Entrega falhada», vê [o que fazer após uma entrega falhada](guide:missed-delivery); depois de «Pronta para levantamento», [as encomendas em cacifos](guide:parcel-lockers) ou [as encomendas não levantadas](guide:uncollected-parcel). Reencaminhar e-mails de envio para o Peek acrescenta mais um, «Adicionada a partir do teu e-mail»: vê o guia [Segue as tuas encomendas pelo e-mail](guide:add-parcels-by-email).
 
 ## Posso receber notificações sem conta?
 

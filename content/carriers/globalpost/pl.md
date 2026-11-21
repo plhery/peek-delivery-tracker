@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-GlobalPost, część grupy Auctane, to międzynarodowa usługa wysyłkowa kupowana przez sprzedawców internetowych za pośrednictwem platform takich jak ShipStation oraz Stamps.com (GlobalPost obsługuje ponad 220 krajów i podaje ponad 60 milionów doręczonych przesyłek). Paczka trafia najpierw do centrum wysyłkowego GlobalPost, gdzie otrzymuje międzynarodową etykietę i dokumentację celną, a następnie partnerzy pocztowi i komercyjni przewożą ją za granicę do lokalnej poczty lub firmy kurierskiej w kraju docelowym. Sprzedawca przekazuje Ci numer zaczynający się zazwyczaj od `GP` — wklej go w polu powyżej. Oficjalny tracker działa pod adresem `goglobalpost.com/tracking`; w katalogu Peek znajdziesz przewoźnika także pod nazwami `Go GlobalPost`, `GoGlobalPost`, `Global Post`, `Go Global Post` i `GlobalPost UK`.
+GlobalPost, część grupy Auctane, to międzynarodowa usługa wysyłkowa kupowana przez sprzedawców internetowych za pośrednictwem platform takich jak ShipStation oraz Stamps.com (GlobalPost obsługuje ponad 220 krajów i podaje ponad 60 milionów doręczonych przesyłek). Paczka trafia najpierw do centrum wysyłkowego GlobalPost, gdzie otrzymuje międzynarodową etykietę i dokumentację celną, a następnie partnerzy pocztowi i komercyjni przewożą ją za granicę do lokalnej poczty lub firmy kurierskiej w kraju docelowym. Sprzedawca przekazuje ci numer zaczynający się zazwyczaj od `GP` — wklej go w polu powyżej. Oficjalny tracker działa pod adresem `goglobalpost.com/tracking`; w katalogu Peek znajdziesz przewoźnika także pod nazwami `Go GlobalPost`, `GoGlobalPost`, `Global Post`, `Go Global Post` i `GlobalPost UK`.
 
 ## Numer śledzenia GlobalPost: jak wygląda
 
@@ -30,7 +30,7 @@ Spacje, myślniki i małe litery są przez Peek ignorowane.
 
 Tracker GlobalPost wyświetla skany od najnowszego pod nagłówkami kolejnych dni — każdy z godziną, angielskim opisem i przeważnie miejscem — opisując skany partnerów własnymi słowami. W typowej kolejności:
 
-| GlobalPost podaje | Co to oznacza dla Ciebie | Peek pokazuje |
+| GlobalPost podaje | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Label Created` | Sprzedawca utworzył etykietę; paczka jeszcze nie wyruszyła. | „Zarejestrowana” |
 | `Data Received` | GlobalPost otrzymał dane przesyłki od sprzedawcy, ale jeszcze nie samą paczkę. | „Zarejestrowana” |
@@ -44,7 +44,7 @@ Tracker GlobalPost wyświetla skany od najnowszego pod nagłówkami kolejnych dn
 | `Cleared Customs` | Zwolniona przez urząd celny; jedzie dalej. | „W transporcie” |
 | `Out for Delivery` | Wydana kurierowi do doręczenia w danym dniu. | „W doręczeniu” |
 | `Attempted Delivery` | Nieudana próba doręczenia. | „Próba doręczenia” |
-| `Exception, No Action Required` | Utrudnienie przy doręczeniu w kraju docelowym, które nie wymaga żadnego działania z Twojej strony. | „Zgłoszono problem” |
+| `Exception, No Action Required` | Utrudnienie przy doręczeniu w kraju docelowym, które nie wymaga żadnego działania z twojej strony. | „Zgłoszono problem” |
 | `Delayed, No Action Required` | Opóźnienie w trasie niewymagające reakcji odbiorcy. | „Zgłoszono problem” |
 | `Delivered` | Doręczona (albo zwrócona do nadawcy — patrz niżej). | „Dostarczona” |
 
@@ -60,10 +60,10 @@ GlobalPost przekazuje przesyłki *Economy* i *Standard* operatorowi pocztowemu (
 
 | Usługa | Śledzenie | Cło i podatki | Czas podawany sprzedawcy |
 | --- | --- | --- | --- |
-| `Economy` | do dotarcia do kraju i odprawy celnej | płacisz Ty (`DDU`) | `10 – 14 business days` |
-| `Standard` | pod Twoje drzwi | płacisz Ty (`DDU`) | `6 – 10 business days` |
-| `Plus`, `Plus – Duties & Taxes Included` | pod Twoje drzwi | płaci sprzedawca (`DDP`) | `5 – 8 business days` |
-| `Flat Rate (formerly Go)` | pod Twoje drzwi | wliczone w cenę sprzedawcy | `6 – 10 business days` |
+| `Economy` | do dotarcia do kraju i odprawy celnej | płacisz ty (`DDU`) | `10 – 14 business days` |
+| `Standard` | pod twoje drzwi | płacisz ty (`DDU`) | `6 – 10 business days` |
+| `Plus`, `Plus – Duties & Taxes Included` | pod twoje drzwi | płaci sprzedawca (`DDP`) | `5 – 8 business days` |
+| `Flat Rate (formerly Go)` | pod twoje drzwi | wliczone w cenę sprzedawcy | `6 – 10 business days` |
 
 Przy wysyłce z USA usługa *GlobalPost Plus – Duties & Taxes Included* obejmuje m.in. **Polskę** (a także Kanadę i inne kraje europejskie), natomiast *Flat Rate (formerly Go)* działa do Kanady, Australii, Nowej Zelandii, Hongkongu i Meksyku. Zasady prób doręczenia i odbioru w placówce ustala przewoźnik końcowy — zobacz [Poczta Polska](carrier:poczta-polska), [nieudane doręczenie](guide:missed-delivery) oraz [nieodebrana paczka](guide:uncollected-parcel).
 
@@ -95,19 +95,19 @@ W sprawie niedostarczonej paczki GlobalPost odsyła najpierw do sprzedawcy, któ
 
 [Peek](/) od razu rozpoznaje numer `GP` („Wykryty przewoźnik”) i odpytuje tracker GlobalPost bez konta ani kodu pocztowego (znalezioną kartę strona przechowuje przez kilka minut w pamięci podręcznej). Działa też link `goglobalpost.com/track-detail/?t=` lub `/track/?t=`; dla starszego numeru `SDC` wybierz GlobalPost przez „Zmień”. Jeśli masz tylko numer firmy doręczającej, wklej go tak samo — Peek obsługuje ponad 4 500 przewoźników.
 
-Peek pokazuje status, każdy skan z lokalizacją (obcinając kody pocztowe), kraj docelowy oraz firmę doręczającą wraz z jej numerem, gdy podaje je GlobalPost. Pomija pasek postępu, miasta nadawcy i odbiorcy z nagłówka (odczytywane wyłącznie do rozpoznania zwrotu) oraz kody pocztowe; GlobalPost nie podaje przewidywanej daty dostawy, wagi ani potwierdzenia doręczenia. Przycisk „Otwórz stronę przewoźnika GlobalPost” otwiera Twój numer na `goglobalpost.com`.
+Peek pokazuje status, każdy skan z lokalizacją (obcinając kody pocztowe), kraj docelowy oraz firmę doręczającą wraz z jej numerem, gdy podaje je GlobalPost. Pomija pasek postępu, miasta nadawcy i odbiorcy z nagłówka (odczytywane wyłącznie do rozpoznania zwrotu) oraz kody pocztowe; GlobalPost nie podaje przewidywanej daty dostawy, wagi ani potwierdzenia doręczenia. Przycisk „Otwórz stronę przewoźnika GlobalPost” otwiera twój numer na `goglobalpost.com`.
 
-Godziny w GlobalPost nie mają strefy czasowej: Peek odczytuje każdy skan według zegara jego miejsca albo odcinka, na którym była wtedy paczka, i pokazuje go w strefie czasowej Twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej: …”.
+Godziny w GlobalPost nie mają strefy czasowej: Peek odczytuje każdy skan według zegara jego miejsca albo odcinka, na którym była wtedy paczka, i pokazuje go w strefie czasowej twojego urządzenia; na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida historia kończy się wierszem „Godziny w twojej strefie czasowej: …”.
 
 Gdy GlobalPost wymienia firmę doręczającą znaną w Peek pod tą nazwą, karta pokazuje „Doręcza: …” i wypisuje jej numer po kodzie `GP` — albo „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”, dopóki firma ta ma tylko zapowiedź bez własnych skanów. Jeśli jest drugi numer bez rozpoznanej nazwy partnera, przy poprawnym numerze pocztowym Peek odpytuje pocztę kraju docelowego ([Poczta Polska](carrier:poczta-polska) w Polsce) lub jedynego przewoźnika wynikającego z formatu numeru. Gdy pojawi się tam skan co najmniej tak świeży jak ostatni wpis GlobalPost, Peek przełącza śledzenie na tego przewoźnika, zachowując historię z GlobalPost.
 
-Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty (co 5 minut, gdy musi otworzyć tracker GlobalPost w przeglądarce), dopóki odpowiada własny tracker GlobalPost (po przekazaniu do firmy doręczającej Peek przejmuje jej tempo; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie ciszy i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych sytuacjach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć alerty „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się z GlobalPost ani ze sprzedawcą w Twoim imieniu.
+Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty (co 5 minut, gdy musi otworzyć tracker GlobalPost w przeglądarce), dopóki odpowiada własny tracker GlobalPost (po przekazaniu do firmy doręczającej Peek przejmuje jej tempo; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie ciszy i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych sytuacjach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć alerty „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się z GlobalPost ani ze sprzedawcą w twoim imieniu.
 
 ## Najczęstsze pytania o śledzenie GlobalPost
 
 ### Dlaczego śledzenie GlobalPost urwało się po odprawie celnej?
 
-W usłudze *GlobalPost Economy* śledzenie kończy się z chwilą dotarcia przesyłki do kraju docelowego i przejścia odprawy celnej, a GlobalPost uprzedza, że część paczek ma na miejscu ograniczone śledzenie. Przesyłka nadal jedzie i może dotrzeć bez kolejnych wpisów; jeśli w `Final Mile Tracking By:` widnieje numer lokalny, Peek odpytuje tego przewoźnika i Ty również możesz go sprawdzić.
+W usłudze *GlobalPost Economy* śledzenie kończy się z chwilą dotarcia przesyłki do kraju docelowego i przejścia odprawy celnej, a GlobalPost uprzedza, że część paczek ma na miejscu ograniczone śledzenie. Przesyłka nadal jedzie i może dotrzeć bez kolejnych wpisów; jeśli w `Final Mile Tracking By:` widnieje numer lokalny, Peek odpytuje tego przewoźnika i ty również możesz go sprawdzić.
 
 ### Kto doręcza przesyłki GlobalPost?
 

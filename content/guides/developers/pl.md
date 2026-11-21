@@ -14,7 +14,7 @@ updated: 2026-11-19
 :::steps
 - Zainstaluj go | Potrzebujesz aktualnego Node.js (minimalną wersję podaje README). Uruchom `npm install -g universal-parcel-scraper` albo wpisuj `npx universal-parcel-scraper` wszędzie tam, gdzie poniżej pojawia się `parcel-scraper`.
 - Ustal przewoźnika | `parcel-scraper detect 1Z999AA10123456784` mówi offline, do którego przewoźnika należy numer.
-- Pobierz historię | `parcel-scraper track` z Twoim numerem pyta przewoźnika i wypisuje historię przesyłki jako JSON. Jeśli numer pasuje do kilku przewoźników, dodaj na przykład `--carrier dhl`. Niektórzy przewoźnicy chcą też `--postcode`, `--phone-digits` albo `--tracking-url`.
+- Pobierz historię | `parcel-scraper track` z twoim numerem pyta przewoźnika i wypisuje historię przesyłki jako JSON. Jeśli numer pasuje do kilku przewoźników, dodaj na przykład `--carrier dhl`. Niektórzy przewoźnicy chcą też `--postcode`, `--phone-digits` albo `--tracking-url`.
 :::
 
 ## Czy Peek jest open source i na jakiej licencji?
@@ -31,7 +31,7 @@ Nie ma publicznego: Peek nie wydaje kluczy API. Jego API to API samej aplikacji,
 
 Katalog przewoźników, `GET /api/carriers`, nie wymaga logowania. Śledzenie przesyłki bez konta też nie, ale nowe wyszukiwanie musi tam najpierw przejść weryfikację przeglądarki albo aplikacji. Osobiste tokeny do skryptów są wyłączone, chyba że serwer je włączy, a w sekcji „Ustawienia” nie ma ekranu, który by taki token tworzył.
 
-Z zewnątrz jedyną drogą jest logowanie asystenta. Claude, ChatGPT, Gemini albo inny asystent loguje się na Twoje konto przez standardowy OAuth i korzysta z serwera MCP Peeka, `https://peektracker.com/mcp`, w zakresie, na jaki mu pozwalasz. Tym samym tokenem można odczytać Twoje przesyłki jako JSON z `GET /api/parcels`, a integracja Peeka z Home Assistant loguje się w ten sam sposób. Zobacz [poradnik o asystentach](guide:ai-assistants), [stronę Peeka dla asystentów](https://peektracker.com/pl/assistants) i [poradnik o Home Assistant](guide:home-assistant).
+Z zewnątrz jedyną drogą jest logowanie asystenta. Claude, ChatGPT, Gemini albo inny asystent loguje się na twoje konto przez standardowy OAuth i korzysta z serwera MCP Peeka, `https://peektracker.com/mcp`, w zakresie, na jaki mu pozwalasz. Tym samym tokenem można odczytać twoje przesyłki jako JSON z `GET /api/parcels`, a integracja Peeka z Home Assistant loguje się w ten sam sposób. Zobacz [poradnik o asystentach](guide:ai-assistants), [stronę Peeka dla asystentów](https://peektracker.com/pl/assistants) i [poradnik o Home Assistant](guide:home-assistant).
 
 ## Jak śledzić przesyłki z własnego kodu bez klucza API?
 
@@ -49,7 +49,7 @@ Oprócz wiersza poleceń działa na trzy sposoby:
 
 Zanim zaczniesz na nim budować:
 
-- **Odpowiada na jedno zapytanie naraz.** Zapisywanie przesyłek i ponowne ich sprawdzanie należą do Ciebie: to właśnie tę część dokłada Peek.
+- **Odpowiada na jedno zapytanie naraz.** Zapisywanie przesyłek i ponowne ich sprawdzanie należą do ciebie: to właśnie tę część dokłada Peek.
 - **Niektóre strony przewoźników odpowiadają tylko przeglądarce.** Do nich potrzebuje Chromium, którym steruje przez opcjonalne pakiety, albo swojej usługi przeglądarkowej TRAWL. Obraz Dockera ma Chromium w środku.
 - **Trackery zapasowe trzeba włączyć.** Domyślnie włączony jest tylko UPU; ParcelsApp, Ship24, 17TRACK, Postal Ninja i Track718 czekają, aż je włączysz, a każdy włączony dostaje numer przesyłki.
 - **Zapytanie wysyła numer do przewoźnika**, razem z kodem pocztowym, linkiem albo cyframi telefonu, jeśli przewoźnik o nie prosi. Telemetrii nie ma.
@@ -62,7 +62,7 @@ Tak. Samodzielnie hostowany Peek to jeden stale działający kontener z aplikacj
 - **SMTP**, jeśli włączone jest logowanie e-mailem albo e-mail o dostarczeniu;
 - **hosta, który zbuduje Dockerfile i utrzyma kontener w działaniu.** Hosting serverless się nie nada: worker musi cały czas działać.
 
-Web push, powiadomienia na iPhonie (zespół Apple i klucz APNs) i na Androidzie (Firebase) są opcjonalne. Asystenci też: bez `ASSISTANT_ACCOUNTS` nie ma `/mcp` ani `/oauth`. Ta zmienna wymienia konta, które mogą się łączyć, albo `*` dla wszystkich, i wymaga `CANONICAL_ORIGIN`. Gdy jest ustawiona, `PERSONAL_TOKENS=on` włącza osobiste tokeny dla Twoich skryptów, tworzone przez API. [docs/DEPLOYMENT.md](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) opisuje kroki: od bazy danych i logowania po aktualizacje, kopie zapasowe i przenosiny na inny host.
+Web push, powiadomienia na iPhonie (zespół Apple i klucz APNs) i na Androidzie (Firebase) są opcjonalne. Asystenci też: bez `ASSISTANT_ACCOUNTS` nie ma `/mcp` ani `/oauth`. Ta zmienna wymienia konta, które mogą się łączyć, albo `*` dla wszystkich, i wymaga `CANONICAL_ORIGIN`. Gdy jest ustawiona, `PERSONAL_TOKENS=on` włącza osobiste tokeny dla twoich skryptów, tworzone przez API. [docs/DEPLOYMENT.md](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) opisuje kroki: od bazy danych i logowania po aktualizacje, kopie zapasowe i przenosiny na inny host.
 
 ### Najpierw uruchom go na swoim komputerze
 
@@ -87,10 +87,10 @@ Nie masz konta na GitHubie? Daj znać Peekowi ze strony przesyłki, w przegląda
 :::steps
 - Odpowiedz na pytanie | Gdy Peek nie znajduje przewoźnika dla przesyłki, jej strona pyta „Czy strona przewoźnika ją pokazuje?”. Wybierz „Tak”.
 - Wskaż przewoźnika | Pod pytaniem „Kto ją wiezie?” wpisz go w polu „Przewoźnik lub sklep” albo wklej jego link do śledzenia w polu „Strona śledzenia, jeśli masz link”. Wystarczy jedno z dwóch.
-- Wyślij | Wybierz „Wyślij”. Wraz z odpowiedzią idzie numer przesyłki i nic o Tobie.
+- Wyślij | Wybierz „Wyślij”. Wraz z odpowiedzią idzie numer przesyłki i nic o tobie.
 :::
 
-Te odpowiedzi czyta człowiek, ale nikt nie może Ci odpisać: jeśli chcesz odpowiedzi, napisz na hello@peektracker.com, adres podany na [stronie pomocy Peeka](https://peektracker.com/support.html). Jak Peek ustala przewoźnika na podstawie tego, co wklejasz, opisuje poradnik [Śledź przesyłkę, nawet gdy nie znasz przewoźnika](guide:track-without-carrier).
+Te odpowiedzi czyta człowiek, ale nikt nie może ci odpisać: jeśli chcesz odpowiedzi, napisz na hello@peektracker.com, adres podany na [stronie pomocy Peeka](https://peektracker.com/support.html). Jak Peek ustala przewoźnika na podstawie tego, co wklejasz, opisuje poradnik [Śledź przesyłkę, nawet gdy nie znasz przewoźnika](guide:track-without-carrier).
 
 :::sources
 - [Peek na GitHubie: README](https://github.com/plhery/peek-delivery-tracker) – co zawiera repozytorium, przewoźnicy w scraperze, uruchomienie lokalne, własny hosting, build na iPhone’a
@@ -102,7 +102,7 @@ Te odpowiedzi czyta człowiek, ale nikt nie może Ci odpisać: jeśli chcesz odp
 - [Peek na GitHubie: Architecture](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ARCHITECTURE.md) – logowanie asystentów i Home Assistant, GET /api/parcels, osobiste tokeny wyłączone
 - [Peek na GitHubie: konfiguracja asystentów na serwerze](https://github.com/plhery/peek-delivery-tracker/blob/main/src/server/assistants/settings.ts) – osobiste tokeny wyłączone, o ile PERSONAL_TOKENS nie jest włączone, ASSISTANT_ACCOUNTS
 - [Peek: Połącz Peek z Claude, ChatGPT lub Gemini](https://peektracker.com/pl/assistants) – droga dla asystentów
-- [Peek na GitHubie: Deployment](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – czego potrzeba do własnego hostingu, części opcjonalne, asystenci i osobiste tokeny na Twojej instancji
+- [Peek na GitHubie: Deployment](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/DEPLOYMENT.md) – czego potrzeba do własnego hostingu, części opcjonalne, asystenci i osobiste tokeny na twojej instancji
 - [Peek na GitHubie: Contributing](https://github.com/plhery/peek-delivery-tracker/blob/main/CONTRIBUTING.md) – sprawdzenia przed pull requestem, przewoźnicy trafiają do scrapera, nowe wydania przyjmowane automatycznie
 - [Peek na GitHubie: opinia o przesyłce](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/parcel/Feedback.tsx) – „Kto ją wiezie?”, gdy nie znaleziono przewoźnika, do wysłania wystarczy jedno z dwóch pól
 - [Peek: Help](https://peektracker.com/support.html) – zgłaszanie przewoźnika bez GitHuba, publiczne Issues, zgłoszenia bezpieczeństwa, kontakt

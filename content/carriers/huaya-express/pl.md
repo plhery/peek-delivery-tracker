@@ -6,7 +6,7 @@ published: 2026-11-21
 updated: 2026-11-21
 ---
 
-Huaya Express (`华亚运通`) to marka z logo firmy `华亚运通国际货运代理有限公司` (*Huaya Yuntong International Freight Forwarding*) — spedytora z Kantonu (Guangzhou) w Chinach kontynentalnych, wysyłającego zagraniczne paczki dla sklepów internetowych. List przewozowy Huaya zaczyna się od `HYYT` i kończy na `GZ`. Wklej go w polu powyżej albo przejdź przez link `物流跟踪` (śledzenie logistyki) w górnym menu strony `hyytgz.com` do własnej wyszukiwarki Huaya. Historia w Huaya urywa się z chwilą przekazania paczki lokalnemu przewoźnikowi w Twoim kraju lub po kilku jego skanach (w USA czasem aż do doręczenia), nie podając nazwy tej firmy — z wyjątkiem linii przez [DHL](carrier:dhl) w Niemczech, gdzie kopiuje skany DHL, szwedzkiego wpisu o Early Bird oraz linii do Meksyku, gdzie kopiuje skany J&T Express.
+Huaya Express (`华亚运通`) to marka z logo firmy `华亚运通国际货运代理有限公司` (*Huaya Yuntong International Freight Forwarding*) — spedytora z Kantonu (Guangzhou) w Chinach kontynentalnych, wysyłającego zagraniczne paczki dla sklepów internetowych. List przewozowy Huaya zaczyna się od `HYYT` i kończy na `GZ`. Wklej go w polu powyżej albo przejdź przez link `物流跟踪` (śledzenie logistyki) w górnym menu strony `hyytgz.com` do własnej wyszukiwarki Huaya. Historia w Huaya urywa się z chwilą przekazania paczki lokalnemu przewoźnikowi w twoim kraju lub po kilku jego skanach (w USA czasem aż do doręczenia), nie podając nazwy tej firmy — z wyjątkiem linii przez [DHL](carrier:dhl) w Niemczech, gdzie kopiuje skany DHL, szwedzkiego wpisu o Early Bird oraz linii do Meksyku, gdzie kopiuje skany J&T Express.
 
 ## Numer śledzenia Huaya Express: jak wygląda
 
@@ -28,20 +28,20 @@ Spacje oraz wielkość liter nie mają w Peek znaczenia.
 
 Wyszukiwarka Huaya ma wersję chińską i angielską. Znane w Peek wpisy są głównie po angielsku, poza przyjęciem w magazynie oraz wybranymi krokami dotyczącymi lotniska, lotu, odprawy celnej i wydania partnerowi po chińsku, a także jednym komunikatem po szwedzku w Szwecji. W typowej kolejności:
 
-| Huaya podaje | Co to oznacza dla Ciebie | Peek pokazuje |
+| Huaya podaje | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
-| `Shipping Label Created` | Utworzono etykietę przewoźnika doręczającego w Twoim kraju: same dane zamówienia, Huaya nie ma jeszcze paczki. | „Zarejestrowana” |
+| `Shipping Label Created` | Utworzono etykietę przewoźnika doręczającego w twoim kraju: same dane zamówienia, Huaya nie ma jeszcze paczki. | „Zarejestrowana” |
 | `Shipment not yet received or processed` | Wiersz przewoźnika końcowego przekazany zanim paczka dotarła do punktu przyjęć Huaya: również same dane. | „Zarejestrowana” |
 | `Package received & scanned at warehouse`, `到达收货点` | Huaya przyjęła paczkę w magazynie w Kantonie w Chinach kontynentalnych: pierwszy skan w rękach Huaya (`到达收货点` oznacza dotarcie do punktu odbioru). | „Przyjęta przez przewoźnika” |
 | `Package departed from the warehouse` | Przesyłka opuściła magazyn w Kantonie. | „W transporcie” |
 | `货物发往机场途中`, `货物到达机场` | W drodze na lotnisko oraz przybycie na lotnisko w Chinach kontynentalnych, przed odprawą eksportową. | „W transporcie” |
-| `Customs export clearance completed`, `国内清关完成` | Odprawa eksportowa w Chinach kontynentalnych zakończona; kontrola importowa w Twoim kraju nastąpi po przylocie. | „W transporcie” |
+| `Customs export clearance completed`, `国内清关完成` | Odprawa eksportowa w Chinach kontynentalnych zakończona; kontrola importowa w twoim kraju nastąpi po przylocie. | „W transporcie” |
 | `安排航班中`, `Package handed over to airline` | Rezerwacja lotu oraz przekazanie przesyłki linii lotniczej. | „W transporcie” |
 | `Shipment Announced` | Huaya zaanonsowała paczkę przewoźnikowi w kraju docelowym, który jeszcze jej nie odebrał. | „W transporcie” |
 | `Package in transit to destination country`, `航班起飞，预计航班落地时间(…)` | W locie do kraju docelowego (chiński wpis podaje w nawiasie planowany dzień lądowania). | „W transporcie” |
 | `Package arrived at destination country` | Dotarła do kraju docelowego. | „W transporcie” |
 | `航班落地，清关中` | Samolot wylądował, trwa odprawa celna importowa. | „W urzędzie celnym” |
-| `Customs import clearance completed, awaiting pickup by local carrier`, `清关完成` | Urząd celny Twojego kraju zwolnił paczkę; lokalny przewoźnik musi ją jeszcze odebrać. | „W transporcie” |
+| `Customs import clearance completed, awaiting pickup by local carrier`, `清关完成` | Urząd celny twojego kraju zwolnił paczkę; lokalny przewoźnik musi ją jeszcze odebrać. | „W transporcie” |
 | `It has been handed over to the service provider.`, `已交仓`, `Preparing for delivery` | Wydano lokalnemu przewoźnikowi (lub do jego magazynu) albo trwa przygotowanie do wydania kurierowi. Huaya nie podaje nazwy firmy ani nowego numeru; dalej pojawiają się skany amerykańskiego partnera (`Arrived at Origin Hub` koło Chicago O'Hare, `Departed Origin Hub`, `Arrived at Destination Hub`, `Departed Destination Hub`, `Arrived At Warehouse`, a potem `Out for Delivery` jako „W doręczeniu” i `Delivered` jako „Dostarczona”) albo kopiowane do Niemiec skany [DHL](carrier:dhl), albo kopiowane do Meksyku skany J&T Express. Peek zna też inne angielskie wpisy o doręczeniu, których kraju żadne źródło nie podaje (`Arrived at the regional hub`, `Departed from the regional hub`, `Arrived at the sorting center`, `Departed from the sorting center`, `Arrived in your region`, `Out for delivery with the courier` jako „W doręczeniu”). | „W transporcie” |
 | `Din leverans ?r bokad med Early Bird.` | Po szwedzku „Twoja dostawa jest zarezerwowana w Early Bird” (`ä` w `är` wyświetla się jako `?`): w Szwecji doręcza Early Bird. | „W transporcie” |
 
@@ -78,9 +78,9 @@ Podstrony `关于我们` (`about.php`) i `服务网点` (`outlets.php`) zawieraj
 
 Wklej numer `HYYT…GZ` albo link do wyszukiwarki z `documentCode=`, a [Peek](/) od razu przypisze go do Huaya Express („Wykryty przewoźnik”) — żaden inny przewoźnik w katalogu nie używa takiego wzoru. Aby wyszukać po referencji zamówienia ze sklepu (wśród ponad 4 500 przewoźników), wpisz ją i wybierz Huaya Express przez „Zmień” (znajdziesz go też po `华亚运通` lub `GZHY`, a dla dodanej paczki przez „Zmień przewoźnika”): Peek pokaże wtedy również właściwy numer Huaya, ale usuwa myślniki — referencje z myślnikami sprawdzaj bezpośrednio w wyszukiwarce Huaya.
 
-**Skany, strefy czasowe i etapy zapisane z wyprzedzeniem.** Peek odczytuje własny tracker Huaya, pokazuje każdy krok z miejscem i krajem docelowym, odrzuca dane osobowe (nazwiska, adresy, kody pocztowe, podpisy, zdjęcia, wagę) i nie wyświetla przewidywanej daty dostawy (Huaya jej nie podaje). Przelicza godziny z czasu pekińskiego (`UTC+8`) — a przy skopiowanych skanach DHL i skanach w miastach USA z tamtejszego czasu lokalnego, przy skanach J&T Express z czasu miasta Meksyk — na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”). Wiersze z przyszłą godziną w Pekinie Peek trzyma do tego momentu poza skanami. Peek wstrzymuje też wpisy utworzone ponad 12 godzin przed widniejącą przy nich godziną lub ponad 6 godzin przed nią w tej samej sekundzie co taki wpis (prognozy zamiast skanów). Historia zaczyna się wtedy, aż do doręczenia lub zwrotu paczki, od zdania „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.”, a „Pokaż” wyświetla te wpisy na szaro, każdy z dopiskiem „Prognoza:” i dniem. Takie wpisy nigdy nie liczą się jako skan, nie zmieniają statusu ani nie wysyłają powiadomień.
+**Skany, strefy czasowe i etapy zapisane z wyprzedzeniem.** Peek odczytuje własny tracker Huaya, pokazuje każdy krok z miejscem i krajem docelowym, odrzuca dane osobowe (nazwiska, adresy, kody pocztowe, podpisy, zdjęcia, wagę) i nie wyświetla przewidywanej daty dostawy (Huaya jej nie podaje). Przelicza godziny z czasu pekińskiego (`UTC+8`) — a przy skopiowanych skanach DHL i skanach w miastach USA z tamtejszego czasu lokalnego, przy skanach J&T Express z czasu miasta Meksyk — na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”). Wiersze z przyszłą godziną w Pekinie Peek trzyma do tego momentu poza skanami. Peek wstrzymuje też wpisy utworzone ponad 12 godzin przed widniejącą przy nich godziną lub ponad 6 godzin przed nią w tej samej sekundzie co taki wpis (prognozy zamiast skanów). Historia zaczyna się wtedy, aż do doręczenia lub zwrotu paczki, od zdania „Inne strony mogą pokazywać więcej etapów, ale to tylko prognozy.”, a „Pokaż” wyświetla te wpisy na szaro, każdy z dopiskiem „Prognoza:” i dniem. Takie wpisy nigdy nie liczą się jako skan, nie zmieniają statusu ani nie wysyłają powiadomień.
 
-**Brak automatycznego przełączenia i powiadomienia.** Ponieważ rekord Huaya nie wskazuje obsługiwanego doręczyciela ani drugiego numeru, Peek pozostaje przy wyszukiwarce Huaya; dodaj numer lokalnego kuriera od sprzedawcy jako drugą przesyłkę. Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz nawet co 2 minuty od 6:00 czasu lokalnego w dniu „W doręczeniu” (poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch spokojnych dniach — co godzinę). Spośród własnych wierszy Huaya tylko `航班落地，清关中` trafia jako „W urzędzie celnym” do „Ważne etapy”, natomiast „Tylko doręczenie” zadziała wyłącznie przy kopiowanych skanach DHL, J&T Express lub partnera z USA — wybierz więc „Każdy skan” albo „Ważne etapy”. Peek nie skontaktuje się za Ciebie z Huaya ani ze sprzedawcą.
+**Brak automatycznego przełączenia i powiadomienia.** Ponieważ rekord Huaya nie wskazuje obsługiwanego doręczyciela ani drugiego numeru, Peek pozostaje przy wyszukiwarce Huaya; dodaj numer lokalnego kuriera od sprzedawcy jako drugą przesyłkę. Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz nawet co 2 minuty od 6:00 czasu lokalnego w dniu „W doręczeniu” (poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch spokojnych dniach — co godzinę). Spośród własnych wierszy Huaya tylko `航班落地，清关中` trafia jako „W urzędzie celnym” do „Ważne etapy”, natomiast „Tylko doręczenie” zadziała wyłącznie przy kopiowanych skanach DHL, J&T Express lub partnera z USA — wybierz więc „Każdy skan” albo „Ważne etapy”. Peek nie skontaktuje się za ciebie z Huaya ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie Huaya Express
 
@@ -90,7 +90,7 @@ To marka firmy `华亚运通国际货运代理有限公司` (*Huaya Yuntong Inte
 
 ### Dlaczego śledzenie zatrzymało się na `It has been handed over to the service provider.`?
 
-Ponieważ w tym miejscu kończy się odcinek Huaya: przewoźnik w Twoim kraju przejął paczkę pod własnym numerem, którego wpis Huaya nie ujawnia. Nazwę firmy i drugi numer uzyskasz od sprzedawcy.
+Ponieważ w tym miejscu kończy się odcinek Huaya: przewoźnik w twoim kraju przejął paczkę pod własnym numerem, którego wpis Huaya nie ujawnia. Nazwę firmy i drugi numer uzyskasz od sprzedawcy.
 
 ### Co oznaczają szare wpisy w Peek?
 

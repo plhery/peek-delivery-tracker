@@ -23,7 +23,7 @@ Sama liczba cyfr nie przesądza więc o przewoźniku: sprawdź w SMS-ie lub e-ma
 
 Wyszukiwarka Delhivery łączy pasek postępu ze spisem dotychczasowych skanów i miast. Oto komunikaty oraz kody odczytywane przez Peek:
 
-| Status Delhivery | Co oznacza dla Twojej paczki | Peek pokazuje |
+| Status Delhivery | Co oznacza dla twojej paczki | Peek pokazuje |
 | --- | --- | --- |
 | `WAITING_PICKUP` | Przesyłka zgłoszona, ale jeszcze nieodebrana od nadawcy (bez skanu widoczna jako `Waiting pickup`). | „Zarejestrowana” |
 | `Picked Up` | Delhivery odebrało przesyłkę od nadawcy (również kamień milowy we frachcie bez pojedynczych skanów). | „Przyjęta przez przewoźnika” |
@@ -34,7 +34,7 @@ Wyszukiwarka Delhivery łączy pasek postępu ze spisem dotychczasowych skanów 
 | `Undelivered` | Niedoręczona i skierowana z powrotem do sprzedawcy; we frachcie Delhivery przemianowuje tak etap `On the Way` z jego pierwotną datą, więc data nie oznacza próby doręczenia. | „Zgłoszono problem” |
 | `REACHED_SEL_CITY` | Zwracana przesyłka dotarła do miasta sprzedawcy. | „W transporcie” |
 | `RTO`, `DELIVERED_SELLER` | *Return to Origin*: niedoręczona paczka wróciła do sprzedawcy. | „Zwrócona nadawcy” |
-| `DTO` | Zwrot konsumencki nadany przez Ciebie dotarł do sprzedawcy. | „Zwrócona nadawcy” |
+| `DTO` | Zwrot konsumencki nadany przez ciebie dotarł do sprzedawcy. | „Zwrócona nadawcy” |
 | `LOST` | Delhivery oznaczyło przesyłkę jako zagubioną. | „Zgłoszono problem” |
 | `CANCELLED`, `Canceled` | Przesyłka lub zlecenie odbioru zwrotu zostało anulowane. | „Zgłoszono problem” |
 
@@ -72,9 +72,9 @@ W sprawie zwrotu pieniędzy lub ponownej wysyłki zamówienia ze sklepu internet
 
 Wklej 13- lub 14-cyfrowy numer AWB w [Peek](/): ponieważ układ ten dzieli wielu przewoźników, Peek wyświetla „Sprawdzanie usług śledzenia…” i automatycznie odpytuje Delhivery, gdy łączysz się z Indii, a numer zaczyna się od `1`–`9` i kończy na `0`–`6` („Delhivery ma tę przesyłkę.”). Spoza Indii — albo przy numerze zaczynającym się od `0` bądź kończącym na `7`, `8` lub `9` — stuknij „Zmień” i wskaż Delhivery. Przy innej liczbie cyfr ręczny wybór pokaże, że przewoźnik „nie wydaje takich numerów”.
 
-Przed pierwszym skanem widnieje „Oczekiwanie na przewoźnika Delhivery”. Peek odczytuje publiczny kanał śledzenia bez logowania: pokazuje wykonane skany z miastem (pomijając przyszłe kroki na pasku postępu i dane odbiorcy), ustala rok etapów frachtowych na podstawie dnia tygodnia, odczytuje czas indyjski (`Asia/Kolkata`, `UTC+5:30`) i przelicza go na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”), bez szacowanej daty dostawy. Paczka wydana z powrotem sprzedawcy ma status „Zwrócona nadawcy”, a nie „Dostarczona”.
+Przed pierwszym skanem widnieje „Oczekiwanie na przewoźnika Delhivery”. Peek odczytuje publiczny kanał śledzenia bez logowania: pokazuje wykonane skany z miastem (pomijając przyszłe kroki na pasku postępu i dane odbiorcy), ustala rok etapów frachtowych na podstawie dnia tygodnia, odczytuje czas indyjski (`Asia/Kolkata`, `UTC+5:30`) i przelicza go na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”), bez szacowanej daty dostawy. Paczka wydana z powrotem sprzedawcy ma status „Zwrócona nadawcy”, a nie „Dostarczona”.
 
-Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a od `06:00` czasu indyjskiego w dniu skanu „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka Delhivery; poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez zmian — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z Delhivery ani ze sklepem.
+Przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami Peek sprawdza status nawet co 10 minut, a od `06:00` czasu indyjskiego w dniu skanu „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka Delhivery; poza tym i po 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” lub dwóch dniach bez zmian — co godzinę („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie skontaktuje się za ciebie z Delhivery ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie Delhivery
 

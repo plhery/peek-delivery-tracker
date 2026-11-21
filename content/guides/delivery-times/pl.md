@@ -7,7 +7,7 @@ published: 2026-10-14
 updated: 2026-11-17
 ---
 
-Kurierzy rozwożą paczki przez cały dzień i prawie żaden nie obiecuje Ci konkretnej godziny. DPD dokładny czas dostawy podaje Ci SMS-em lub e-mailem. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
+Kurierzy rozwożą paczki przez cały dzień i prawie żaden nie obiecuje ci konkretnej godziny. DPD dokładny czas dostawy podaje ci SMS-em lub e-mailem. W tygodniu jeżdżą wszyscy, a sobota i niedziela zwykle zależą od usługi, którą wykupił nadawca.
 
 ## O której przyjedzie kurier? Godziny przewoźników
 
@@ -23,7 +23,7 @@ Godziny kurierów [InPost](carrier:inpost), [Allegro One](carrier:allegro-one) i
 
 **Sobota** to dla większości przewoźników dodatkowa usługa, a nie zwykły dzień pracy:
 
-- **DPD:** w soboty kurierzy doręczają wyłącznie paczki z usługą dodatkową Sobota. Czy Twoja ją ma, sprawdzisz u nadawcy albo w aplikacji DPD Mobile.
+- **DPD:** w soboty kurierzy doręczają wyłącznie paczki z usługą dodatkową Sobota. Czy twoja ją ma, sprawdzisz u nadawcy albo w aplikacji DPD Mobile.
 - **Pocztex:** regulamin dla klientów indywidualnych liczy dni robocze od poniedziałku do piątku i nie ma opcji weekendowej.
 
 **Niedziela** to w Polsce ustawowo dzień wolny od pracy i żaden przewoźnik z tabeli nie obiecuje w nią dostaw. Niedziela handlowa niczego tu nie zmienia: w regulaminach InPost i Pocztex dzień roboczy to zawsze poniedziałek–piątek.
@@ -42,7 +42,7 @@ Przewoźnik wylicza przybliżoną porę z trasy kuriera i zwykle podaje ją dopi
 
 DPD dodaje, że jeśli przy zamówieniu w sklepie był wybór przedziału czasowego, kurier przyjedzie w wybranym. Przewidywaną porę zwykle trudno przesunąć, ale w DPD zmienisz dzień albo miejsce w aplikacji DPD Mobile, także na punkt DPD Pickup.
 
-Konkretną porę zwykle kupuje nadawca, nie Ty. W Pocztex może to być usługa Doręczenie do 12:00: paczka nadana w dniu roboczym do godziny granicznej (17:00 w mieście wojewódzkim, 15:00 w pozostałych miejscowościach) dojedzie następnego dnia do południa. Na [Peek](/) okno doręczenia, które poda przewoźnik, dodasz do kalendarza.
+Konkretną porę zwykle kupuje nadawca, nie ty. W Pocztex może to być usługa Doręczenie do 12:00: paczka nadana w dniu roboczym do godziny granicznej (17:00 w mieście wojewódzkim, 15:00 w pozostałych miejscowościach) dojedzie następnego dnia do południa. Na [Peek](/) okno doręczenia, które poda przewoźnik, dodasz do kalendarza.
 
 ## Paczka wydana do doręczenia: kiedy będzie?
 
@@ -69,9 +69,9 @@ Wieczorny telefon na infolinię zwykle niewiele daje. Lepiej zrób tak:
 
 W DPD numer telefonu do kuriera znajdziesz w aplikacji DPD Mobile i na tt.dpd.com.pl, ale dopiero po wydaniu paczki do doręczenia. DPD gwarantuje doręczenie krajowej paczki w 3 dni robocze, a regulamin Pocztex dla klientów indywidualnych daje w serwisie Kurier termin do piątego dnia roboczego po dniu nadania (dla paczki 2XL albo niestandardowej do siódmego).
 
-Kurier był, ale Cię nie zastał? Zobacz [awizo i nieudana próba doręczenia](guide:missed-delivery). Brak nowego skanu od kilku dni? Przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+Kurier był, ale cię nie zastał? Zobacz [awizo i nieudana próba doręczenia](guide:missed-delivery). Brak nowego skanu od kilku dni? Przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
-Peek sprawdza paczkę nawet co 2 minuty, gdy jest wydana do doręczenia u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, gdy masz paczkę otwartą albo włączone powiadomienia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, nie wcześniej niż pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i może dać Ci znać tylko wtedy, gdy przesyłka trafia do doręczenia i gdy dociera („Tylko doręczenie”), więc nie musisz w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza tego dnia nawet co 15 minut, gdy masz paczkę otwartą albo włączone powiadomienia, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
+Peek sprawdza paczkę nawet co 2 minuty, gdy jest wydana do doręczenia u przewoźników, których czyta bezpośrednio, albo co 5 minut, jeśli sprawdzenie wymaga otwarcia przeglądarki (tego dnia, gdy masz paczkę otwartą albo włączone powiadomienia, od 6:00 czasu lokalnego, a gdy przewoźnik podaje okno doręczenia, nie wcześniej niż pół godziny przed jego początkiem, i dopóki odpowiada własne śledzenie przewoźnika), i może dać ci znać tylko wtedy, gdy przesyłka trafia do doręczenia i gdy dociera („Tylko doręczenie”), więc nie musisz w kółko odświeżać strony. Przez serwisy śledzenia przesyłek, takie jak 17TRACK, sprawdza tego dnia nawet co 15 minut, gdy masz paczkę otwartą albo włączone powiadomienia, a niektórzy przewoźnicy mają dłuższy odstęp (co godzinę GLS w Niemczech, Austrii, Szwajcarii, Francji, Holandii i w Polsce, DHL eCommerce w Polsce, Royal Mail, Poste Italiane, China Post i Morning Global; co 30 minut PostNL, USPS, GOFO w USA, Cainiao, J&T Express w Brazylii i Onlog Express). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza.
 
 ## Czy kurierzy dostarczają paczki w święta?
 

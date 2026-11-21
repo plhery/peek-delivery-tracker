@@ -33,9 +33,9 @@ Za dostawę odpowiada sprzedawca, nie firma kurierska. Na Amazon.pl sprzedawcą 
 
 - **Termin.** Jeśli nie uzgodniono innego terminu, sprzedawca powinien dostarczyć towar w ciągu 30 dni.
 - **Spóźnienie.** Przypomnij sprzedawcy o zamówieniu i wyznacz mu dodatkowy, rozsądny termin. Jeśli i w nim nie dostarczy towaru, możesz od razu rozwiązać umowę i odzyskać pieniądze. Dodatkowego terminu nie trzeba dawać, gdy sprzedawca odmawia dostawy albo gdy termin był kluczowy, a sprzedawca wiedział o tym przed zakupem.
-- **Zaginięcie.** To sprzedawca musi skontaktować się z firmą kurierską i udowodnić, że przesyłka została dostarczona. Jeśli nie może tego dowieść, powinien wysłać Ci taki sam produkt albo zwrócić pieniądze.
+- **Zaginięcie.** To sprzedawca musi skontaktować się z firmą kurierską i udowodnić, że przesyłka została dostarczona. Jeśli nie może tego dowieść, powinien wysłać ci taki sam produkt albo zwrócić pieniądze.
 - **Uszkodzenie.** Sprzedawca odpowiada za uszkodzenia od wysyłki do chwili, gdy otrzymasz towar. Your Europe radzi sprawdzić stan przesyłki w obecności kuriera.
-- **Brak reakcji.** Jeśli sprzedawca ma siedzibę w UE, a jego odpowiedź Cię nie zadowala, możesz zwrócić się do Europejskiego Centrum Konsumenckiego w swoim kraju.
+- **Brak reakcji.** Jeśli sprzedawca ma siedzibę w UE, a jego odpowiedź cię nie zadowala, możesz zwrócić się do Europejskiego Centrum Konsumenckiego w swoim kraju.
 
 Na Amazon.pl dochodzi do tego Gwarancja od A do Z. Obejmuje każdy produkt w sklepie, także od niezależnego sprzedawcy: gdy masz problem z terminową dostawą albo stanem produktu, Amazon zwraca pieniądze albo wymienia produkt. Przy zakupie od niezależnego sprzedawcy najpierw spróbuj załatwić sprawę z nim; jeśli się nie uda, możesz zwrócić się o zwrot pieniędzy bezpośrednio do Amazona.
 
@@ -47,7 +47,7 @@ W sprawie paczki kontaktujesz się z obsługą klienta Amazona, a przy zakupie o
 
 ## Amazon Logistics tracking w Peek
 
-[Peek](/) nie śledzi i nie zapisuje paczek Amazon Logistics: Amazon pokazuje ich status i historię tylko na Twoim koncie. Gdy wkleisz taki numer albo link z track.amazon, Peek najpierw sprawdza publiczne śledzenie Amazon Shipping. Jeśli Amazon odpowie, to przesyłka Amazon Shipping albo przesyłka ze sprzedaży poza Amazonem, którą Amazon wysyła w imieniu sprzedawcy, i Peek ją śledzi: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli Amazon nie udostępnia już historii, możesz zachować przesyłkę jako informację.
+[Peek](/) nie śledzi i nie zapisuje paczek Amazon Logistics: Amazon pokazuje ich status i historię tylko na twoim koncie. Gdy wkleisz taki numer albo link z track.amazon, Peek najpierw sprawdza publiczne śledzenie Amazon Shipping. Jeśli Amazon odpowie, to przesyłka Amazon Shipping albo przesyłka ze sprzedaży poza Amazonem, którą Amazon wysyła w imieniu sprzedawcy, i Peek ją śledzi: „Publiczne śledzenie jest dostępne w Amazon Shipping. Peek będzie aktualizować informacje o tej dostawie.” Jeśli Amazon nie udostępnia już historii, możesz zachować przesyłkę jako informację.
 
 W przeciwnym razie Peek pisze „Dostawy Amazon Logistics można zwykle śledzić w sekcji »Twoje zamówienia« na Amazonie.” i pokazuje przycisk „Otwórz moje zamówienia Amazon”. Otwiera on historię zamówień na stronie, na którą wskazuje numer: amazon.pl dla `PL`, amazon.de dla `DE` i `AT`, amazon.co.uk dla `UK` i `GB`, amazon.com dla `TBA`, amazon.com.au dla `TBAU`. Gdy sprawdzenie się nie uda, kliknij „Sprawdź ponownie”. Numer zamówienia dostaje komunikat „To wygląda na numer zamówienia Amazon”.
 

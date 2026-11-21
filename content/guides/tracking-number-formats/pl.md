@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-16
 ---
 
-Litery i długość numeru przesyłki często zdradzają, który przewoźnik ma Twoją paczkę. `1Z` i 16 liter lub cyfr to UPS, `PX` i 10 cyfr to [Poczta Polska](carrier:poczta-polska), numer [InPost](carrier:inpost) ma zwykle 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty, która go nadała. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
+Litery i długość numeru przesyłki często zdradzają, który przewoźnik ma twoją paczkę. `1Z` i 16 liter lub cyfr to UPS, `PX` i 10 cyfr to [Poczta Polska](carrier:poczta-polska), numer [InPost](carrier:inpost) ma zwykle 24 cyfry, a 13 znaków w układzie `RR000000005CH` (dwie litery, dziewięć cyfr, dwie litery) to zwykle numer pocztowy, w którym dwie ostatnie litery wskazują kraj poczty, która go nadała. Najtrudniej jest z samymi cyframi: 10 albo 14 cyfr pasuje do kilku firm, więc rozstrzyga e-mail o wysyłce albo narzędzie, które sprawdzi numer u wszystkich pasujących przewoźników.
 
 :::checker
 :::
@@ -19,8 +19,8 @@ Ten numer bywa różnie nazywany: numer przesyłki, numer paczki, numer listu pr
 :::steps
 - Spójrz na litery | To one najbardziej zawężają wybór. `1Z` na początku to UPS, `PX` to Poczta Polska, a dwie litery na końcu zwykle oznaczają pocztę.
 - Policz znaki | Sama długość rzadko przesądza sprawę, ale wyklucza część firm. Spacji nie licz: są tylko dla wygody czytania. Poczta Polska wprost prosi, żeby wpisywać numer „bez spacji oraz nawiasów”.
-- Sprawdź e-maila | E-mail albo SMS o wysyłce zwykle podaje przewoźnika albo link do jego strony śledzenia. Allegro, gdy numer pojawi się w Twoich zakupach, wysyła e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia. To pewniejsze niż zgadywanie.
-- Wypróbuj przewoźników | Wpisz numer na stronie każdego przewoźnika, który wchodzi w grę. Ten, u którego pojawi się historia przesyłki, ma Twoją paczkę.
+- Sprawdź e-maila | E-mail albo SMS o wysyłce zwykle podaje przewoźnika albo link do jego strony śledzenia. Allegro, gdy numer pojawi się w twoich zakupach, wysyła e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia. To pewniejsze niż zgadywanie.
+- Wypróbuj przewoźników | Wpisz numer na stronie każdego przewoźnika, który wchodzi w grę. Ten, u którego pojawi się historia przesyłki, ma twoją paczkę.
 :::
 
 Jeśli nie chcesz bawić się w detektywa, wklej numer, link od przewoźnika albo całego e-maila o wysyłce do [Peeka](/): wyłowi z niego numer i rozpozna przewoźnika spośród ponad 4500. Jak działają takie trackery i czym się różnią, wyjaśnia poradnik o [śledzeniu przesyłek wszystkich firm](guide:universal-tracker).
@@ -99,7 +99,7 @@ W przesyłkach zagranicznych pierwsza litera mówi, co to za przesyłka. W obroc
 - `R`: list polecony
 - `L`: list ze śledzeniem
 - `V`: list wartościowy
-- `U`: towar wysłany jako list, bez śledzenia dla Ciebie
+- `U`: towar wysłany jako list, bez śledzenia dla ciebie
 
 Poczta Polska podaje w swojej wyszukiwarce przykłady w tym formacie, zaczynające się od `RR`, `CP`, `VV` i `EE`, wszystkie z `PL` na końcu. To tylko wzory: opisanego niżej testu cyfry kontrolnej nie przechodzą.
 
@@ -170,7 +170,7 @@ Numer, który nic nie pokazuje, nie zawsze jest źle wpisany. Mój DHL wśród p
 - [Cainiao: Help centre](https://global.cainiao.com/helpDoc.htm) – przy taniej wysyłce brak śledzenia po przekazaniu lokalnemu przewoźnikowi
 - [Cainiao: Guidance](https://global.cainiao.com/helpDoc.htm?slug=ofzig4) – numery Cainiao bez opisu formatu, tylko litery i cyfry
 - [bpost: Puis-je suivre mon colis en ligne ?](https://www.bpost.be/fr/faq/puis-je-suivre-mon-colis-en-ligne) – kodów kreskowych zaczynających się od U nie da się śledzić
-- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – jak Peek potwierdza przewoźnika niejednoznacznego numeru: najwyżej pięciu naraz, pięciu kolejnych, gdy żaden z pierwszych nie ma przesyłki, liczą się tylko niedawne przesyłki, wybór należy do Ciebie, gdy numer zna kilku; numer kontenera, na który nie odpowiada żaden przewoźnik: gdzie jest numer śledzenia, wybór przewoźnika
+- [Peek: Routing (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/docs/ROUTING.md) – jak Peek potwierdza przewoźnika niejednoznacznego numeru: najwyżej pięciu naraz, pięciu kolejnych, gdy żaden z pierwszych nie ma przesyłki, liczą się tylko niedawne przesyłki, wybór należy do ciebie, gdy numer zna kilku; numer kontenera, na który nie odpowiada żaden przewoźnik: gdzie jest numer śledzenia, wybór przewoźnika
 - [Peek: reading.ts (po angielsku)](https://github.com/plhery/peek-delivery-tracker/blob/main/src/peek/lookup/reading.ts) – numer o jeden znak krótszy albo dłuższy niż numery przewoźnika, na który nie odpowiada żaden przewoźnik
 - [BIC: Container Identification Number (po angielsku)](https://www.bic-code.org/identification-number/) – kod właściciela, U dla kontenerów ładunkowych, sześciocyfrowy numer seryjny i cyfra kontrolna
 - [BIC: Registered BIC Code TEMU (po angielsku)](https://www.bic-code.org/bic-codes/temu/) – Textainer Equipment Management

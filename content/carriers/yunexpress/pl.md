@@ -27,32 +27,32 @@ Gdy paczkę przejmie przewoźnik w Polsce, może ona dostać drugi numer: yuntra
 
 Yuntrack działa tylko po angielsku, także w przeglądarce ustawionej na polski, i nie ma wyboru języka. Każdą paczkę przypisuje do jednej z sześciu zakładek: `Processing` (w przygotowaniu), `Transit` (w drodze), `Delivered` (doręczona), `Not Found` (nie znaleziono), `Alert` (ostrzeżenie) i `Returned` (zwrot). Pod spodem są kolejne skany, też po angielsku. Najczęstsze, mniej więcej w kolejności, w jakiej spotyka je paczka:
 
-| YunExpress pisze | Co to znaczy dla Ciebie |
+| YunExpress pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Shipment information received` | Sprzedawca przesłał dane paczki. YunExpress może jeszcze jej nie mieć. |
 | `Shipment picked up` | YunExpress odebrał paczkę od sprzedawcy. |
-| `The country of origin commences customs declaration.` | Zgłoszenie wywozowe w kraju nadania, jeszcze nie Twoja odprawa celna. |
+| `The country of origin commences customs declaration.` | Zgłoszenie wywozowe w kraju nadania, jeszcze nie twoja odprawa celna. |
 | `International flight has departed`, `Departed from AIRPORT` | Paczka leci do kraju docelowego. |
 | `Start Customs Clearence` | Zaczyna się odprawa celna przywozowa (pisownia YunExpress). |
 | `Customs inspection - Import` | Celnicy wybrali paczkę do kontroli. |
 | `Clearance processing completed - Import` | Odprawa zakończona, paczka jedzie dalej. |
-| `Delivered to local carrier` | Przekazana lokalnemu przewoźnikowi, nie Tobie. |
-| `Item accepted` | Linia od tego przewoźnika: przyjął paczkę od YunExpress. To przekazanie, a nie doręczenie do Ciebie. |
+| `Delivered to local carrier` | Przekazana lokalnemu przewoźnikowi, nie tobie. |
+| `Item accepted` | Linia od tego przewoźnika: przyjął paczkę od YunExpress. To przekazanie, a nie doręczenie do ciebie. |
 | `Shipment in transit to DHL` | W drodze do DHL, który przejmuje ostatni odcinek. |
 | `Your parcel is out for delivery.` | Linia od J&T Express w Australii, przy paczce wysłanej tam: kurier wiezie ją do adresata. Może kończyć się numerem obsługi klienta J&T. |
-| `Item is out for delivery` | Linia od tego samego przewoźnika co `Item accepted`: kurier wiezie paczkę do Ciebie. |
-| `Delivered by Mailbox` | Włożona do Twojej skrzynki pocztowej. |
+| `Item is out for delivery` | Linia od tego samego przewoźnika co `Item accepted`: kurier wiezie paczkę do ciebie. |
+| `Delivered by Mailbox` | Włożona do twojej skrzynki pocztowej. |
 | `POD available` | Linia od DPD: jest potwierdzenie doręczenia, paczka doręczona. |
 
-Najwięcej zamieszania robi `Delivered to local carrier`: „Delivered” znaczy tu tylko, że YunExpress oddał paczkę przewoźnikowi w kraju docelowym. Potem pojawiają się już linie tego przewoźnika, również po angielsku. Jeśli na początku historii widzisz `Sender goods issue`, to linia od DPD: zapis danych utworzony, gdy paczka była jeszcze w Chinach, a nie problem z Twoim towarem. Gdy paczkę przejmuje DHL w Niemczech, YunExpress przekazuje też jego linie: `The instruction data for this shipment have been provided by the sender to DHL electronically` to tylko zapis danych w DHL, w Peek „Zarejestrowana”; `Pick-up was successful.` to odbiór przez DHL po przekazaniu, a nie od sprzedawcy. Dalej są `The shipment has been processed in the parcel center of origin`, `Loaded to movement / tour vehicle` (między sortowniami, jeszcze nie trasa doręczenia) i `The shipment has been processed in the destination parcel center`, sortownia blisko Ciebie, oraz `Movement / tour vehicle arrived`, pojazd w bazie doręczeń przed załadunkiem na trasę: w Peek wszystkie „W transporcie”. `Not delivered-Consignee could not be reached` oznacza, że kurier nikogo nie zastał: „Próba doręczenia”.
+Najwięcej zamieszania robi `Delivered to local carrier`: „Delivered” znaczy tu tylko, że YunExpress oddał paczkę przewoźnikowi w kraju docelowym. Potem pojawiają się już linie tego przewoźnika, również po angielsku. Jeśli na początku historii widzisz `Sender goods issue`, to linia od DPD: zapis danych utworzony, gdy paczka była jeszcze w Chinach, a nie problem z twoim towarem. Gdy paczkę przejmuje DHL w Niemczech, YunExpress przekazuje też jego linie: `The instruction data for this shipment have been provided by the sender to DHL electronically` to tylko zapis danych w DHL, w Peek „Zarejestrowana”; `Pick-up was successful.` to odbiór przez DHL po przekazaniu, a nie od sprzedawcy. Dalej są `The shipment has been processed in the parcel center of origin`, `Loaded to movement / tour vehicle` (między sortowniami, jeszcze nie trasa doręczenia) i `The shipment has been processed in the destination parcel center`, sortownia blisko ciebie, oraz `Movement / tour vehicle arrived`, pojazd w bazie doręczeń przed załadunkiem na trasę: w Peek wszystkie „W transporcie”. `Not delivered-Consignee could not be reached` oznacza, że kurier nikogo nie zastał: „Próba doręczenia”.
 
 `Transit` oznacza tylko, że paczka jest w drodze; gdzie dokładnie, mówi najnowsza linia. Czym jest `Alert`, YunExpress nie wyjaśnia: przeczytaj linię pod spodem i napisz do sklepu, jeśli nic się nie zmienia. W kodzie strony yuntrack jest też pasek postępu (`Pickup`, `Departed from origin`, `Arrived at destination`, `Local carrier on the way`, `Delivered successfully`). Jego `Pickup` to odebranie paczki od sprzedawcy w Chinach, a nie paczka „do odbioru” w punkcie. Ogólne etapy drogi paczki, od nadania po zwrot, opisuje [poradnik o statusach przesyłki](guide:tracking-statuses).
 
 ## Kto doręcza paczki YunExpress w Polsce
 
-YunExpress wiezie paczki z Chin samolotem, a po odprawie celnej w kraju docelowym przekazuje je lokalnemu przewoźnikowi. Według własnych danych uruchomił linię do Polski w 2018 roku, a w 2020 roku został oficjalnym partnerem logistycznym Allegro. Kto doręcza w Polsce, na swoich stronach nie podaje; pisze tylko ogólnie o „premium global carrier networks”. W historiach YunExpress pojawiają się linie DHL w Niemczech, a także `Shipment in transit to DHL` i linie DPD; przy tych ostatnich nie zapisano, o który kraj chodzi. Kto ma Twoją paczkę, pokazują linie po `Delivered to local carrier` i kolumna „Last Mile Tracking”. Jak śledzić paczkę dalej u przewoźnika w Polsce, opisuje poradnik o [śledzeniu paczki z Chin](guide:tracking-from-china).
+YunExpress wiezie paczki z Chin samolotem, a po odprawie celnej w kraju docelowym przekazuje je lokalnemu przewoźnikowi. Według własnych danych uruchomił linię do Polski w 2018 roku, a w 2020 roku został oficjalnym partnerem logistycznym Allegro. Kto doręcza w Polsce, na swoich stronach nie podaje; pisze tylko ogólnie o „premium global carrier networks”. W historiach YunExpress pojawiają się linie DHL w Niemczech, a także `Shipment in transit to DHL` i linie DPD; przy tych ostatnich nie zapisano, o który kraj chodzi. Kto ma twoją paczkę, pokazują linie po `Delivered to local carrier` i kolumna „Last Mile Tracking”. Jak śledzić paczkę dalej u przewoźnika w Polsce, opisuje poradnik o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
-Liczby prób doręczenia, awizo, czasu przechowania ani zmiany terminu YunExpress dla odbiorców nigdzie nie opisuje. Jeśli kurier Cię nie zastał, sprawdź zasady awizowania, przechowania i odbioru u lokalnego przewoźnika, którego nazwa stoi w śledzeniu.
+Liczby prób doręczenia, awizo, czasu przechowania ani zmiany terminu YunExpress dla odbiorców nigdzie nie opisuje. Jeśli kurier cię nie zastał, sprawdź zasady awizowania, przechowania i odbioru u lokalnego przewoźnika, którego nazwa stoi w śledzeniu.
 
 **Punkty odbioru i automaty paczkowe.** Dla Europy YunExpress oferuje sprzedawcom dwie linie z odbiorem w punkcie. W jednej sam wybiera punkt albo automat paczkowy najbliżej kupującego, w promieniu 3 km (zwykle około 500 m), a gdy nie ma żadnego, wstrzymuje zamówienie. W drugiej punkt wybiera kupujący. Według niedatowanego artykułu paczka dociera do punktu średnio w 6–10 dni kalendarzowych od przyjęcia przez YunExpress, a śledzenie pokazuje adres punktu. Jakie to punkty i automaty w Polsce, YunExpress nie pisze.
 
@@ -62,7 +62,7 @@ Gdy paczka stoi w miejscu, spóźnia się, zginęła albo przyszła uszkodzona, 
 
 Utknęła na `Customs inspection - Import`? Na blogu dla sprzedawców YunExpress pisze, że samo wytypowanie do kontroli nie oznacza długiego postoju; liczy się jej poziom. Kontrola dokumentów trwa zwykle od kilku dni roboczych do około tygodnia, prześwietlenie lub kontrola fizyczna często dodaje od jednego do dwóch tygodni, czasem z opłatami za magazyn lub kontrolę, a pobranie próbek albo ocena przez urząd od kilku tygodni do ponad miesiąca. To typowe przedziały, nie obietnice.
 
-18 czerwca 2026 roku YunExpress napisał, że od 1 lipca 2026 roku UE zniesie zwolnienie z cła dla paczek o wartości do 150 euro i wprowadzi tymczasowe stałe cło w wysokości 3 € za rodzaj produktu („€3 per item”). Kto płaci je przy Twoim zamówieniu, YunExpress nie podaje. Co może Cię czekać w Polsce, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
+18 czerwca 2026 roku YunExpress napisał, że od 1 lipca 2026 roku UE zniesie zwolnienie z cła dla paczek o wartości do 150 euro i wprowadzi tymczasowe stałe cło w wysokości 3 € za rodzaj produktu („€3 per item”). Kto płaci je przy twoim zamówieniu, YunExpress nie podaje. Co może cię czekać w Polsce, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs).
 
 Przy płatności PayPalem YunExpress przekazuje dane śledzenia do PayPala, jeśli sprzedawca to włączył, a tam, jak podaje YunExpress, służą one jako dowód w sporach. Jakie zasady wtedy obowiązują, sprawdź u PayPala.
 
@@ -76,13 +76,13 @@ Stan na 10 października 2026: YunExpress nie podaje dla odbiorców w Polsce ani
 - **Telefon:** 400-8575-500 na yunexpress.cn, numer z Chin kontynentalnych. Nigdzie nie ma informacji, czy działa z zagranicy.
 - **Kontakty regionalne:** tylko dla krajów Azji i dla Australii.
 
-Pole „Feedback” na yuntrack dotyczy strony, a nie Twojej paczki. Zacznij więc od sklepu, który ma umowę z YunExpressem. Po przekazaniu paczki pytaj przewoźnika, którego nazwa stoi w śledzeniu, jego własnymi kanałami.
+Pole „Feedback” na yuntrack dotyczy strony, a nie twojej paczki. Zacznij więc od sklepu, który ma umowę z YunExpressem. Po przekazaniu paczki pytaj przewoźnika, którego nazwa stoi w śledzeniu, jego własnymi kanałami.
 
 ## Śledzenie paczki YunExpress w Peek
 
-[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 5 minut (tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego, i dopóki odpowiada własne śledzenie YunExpress; przez serwisy śledzenia przesyłek co 15 minut), pokazuje każdy skan na mapie i może Cię powiadomić, gdy zmieni się status. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia. Godziny skanów Peek odczytuje tak: w Chinach według czasu chińskiego; przy przylocie samolotu i liniach kończących się na `- Import`, gdy nie podają miasta, według czasu lotniska docelowego, które podaje YunExpress; przy skanach J&T Express dla paczki wysłanej do Australii według czasu Sydney, niezależnie od tego, w którym stanie jest oddział; a przy większości pozostałych według czasu ich miejsca albo, gdy go nie podają, według skanów przed nimi lub po nich. Każdą godzinę pokazuje w strefie czasowej Twojego urządzenia.
+[Peek](/) rozpoznaje YT i 16 cyfr jako YunExpress i przyjmuje też linki z yuntrack.com. Sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 5 minut (tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego, i dopóki odpowiada własne śledzenie YunExpress; przez serwisy śledzenia przesyłek co 15 minut), pokazuje każdy skan na mapie i może cię powiadomić, gdy zmieni się status. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status, historię, miejsce każdego skanu i godzinę doręczenia. Godziny skanów Peek odczytuje tak: w Chinach według czasu chińskiego; przy przylocie samolotu i liniach kończących się na `- Import`, gdy nie podają miasta, według czasu lotniska docelowego, które podaje YunExpress; przy skanach J&T Express dla paczki wysłanej do Australii według czasu Sydney, niezależnie od tego, w którym stanie jest oddział; a przy większości pozostałych według czasu ich miejsca albo, gdy go nie podają, według skanów przed nimi lub po nich. Każdą godzinę pokazuje w strefie czasowej twojego urządzenia.
 
-Gdy YunExpress podaje lokalnego przewoźnika i jego numer, Peek może śledzić paczkę dalej u tego przewoźnika, choć nie przy każdej paczce. Przy paczkach YunExpress nie pokazuje przewidywanej daty doręczenia ani punktu odbioru, pomija numery zamówienia i nie skontaktuje się za Ciebie z YunExpressem ani nie złoży reklamacji.
+Gdy YunExpress podaje lokalnego przewoźnika i jego numer, Peek może śledzić paczkę dalej u tego przewoźnika, choć nie przy każdej paczce. Przy paczkach YunExpress nie pokazuje przewidywanej daty doręczenia ani punktu odbioru, pomija numery zamówienia i nie skontaktuje się za ciebie z YunExpressem ani nie złoży reklamacji.
 
 ## Pytania o śledzenie YunExpress
 

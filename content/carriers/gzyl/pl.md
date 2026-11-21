@@ -6,7 +6,7 @@ published: 2026-11-03
 updated: 2026-11-21
 ---
 
-GZYL (广州云链, Guangzhou Yunlian) to 广州云链货运代理有限公司, firma spedycyjna z Kantonu (Guangzhou) w Chinach. Jeśli chiński sklep wysłał Twoje zamówienie przez GZYL, dostajesz numer, który zaczyna się od YL i kończy na YQ: wklej go w pole powyżej. Strona internetowa GZYL, yunlianhouyun.com, jest po chińsku, a jej wyszukiwarka paczek (小包查询) prowadzi do strony śledzenia, która działa pod samym adresem IP serwera. Czytaj ją z rezerwą: GZYL zapisuje dużą część drogi paczki z góry, więc nie każdy etap na tej stronie, nawet `Delivered`, jest skanem.
+GZYL (广州云链, Guangzhou Yunlian) to 广州云链货运代理有限公司, firma spedycyjna z Kantonu (Guangzhou) w Chinach. Jeśli chiński sklep wysłał twoje zamówienie przez GZYL, dostajesz numer, który zaczyna się od YL i kończy na YQ: wklej go w pole powyżej. Strona internetowa GZYL, yunlianhouyun.com, jest po chińsku, a jej wyszukiwarka paczek (小包查询) prowadzi do strony śledzenia, która działa pod samym adresem IP serwera. Czytaj ją z rezerwą: GZYL zapisuje dużą część drogi paczki z góry, więc nie każdy etap na tej stronie, nawet `Delivered`, jest skanem.
 
 ## Numer przesyłki GZYL: jak wygląda
 
@@ -22,13 +22,13 @@ Numery listów przewozowych GZYL to litery YL, dziesięć cyfr i litery YQ, raze
 
 W Peek spacje i wielkość liter nie mają znaczenia.
 
-**Gdzie go znaleźć.** Przesyłkę u GZYL zamawia sprzedawca i to on przekazuje Ci numer. Nie możesz go znaleźć? Zobacz, [gdzie szukać numeru przesyłki](guide:find-tracking-number).
+**Gdzie go znaleźć.** Przesyłkę u GZYL zamawia sprzedawca i to on przekazuje ci numer. Nie możesz go znaleźć? Zobacz, [gdzie szukać numeru przesyłki](guide:find-tracking-number).
 
 ## Statusy GZYL: co znaczą
 
 GZYL zapisuje własne etapy po angielsku, z literówkami włącznie. W kolejności, w jakiej spotyka je paczka:
 
-| GZYL pisze | Co to znaczy dla Ciebie | W Peek |
+| GZYL pisze | Co to znaczy dla ciebie | W Peek |
 | --- | --- | --- |
 | `Order information received` | Sprzedawca przesłał GZYL dane zamówienia. GZYL nie ma jeszcze paczki. | „Zarejestrowana” |
 | `Arrive at the cross border receiving point` | Paczka trafiła do GZYL: to jej pierwszy skan u tej firmy. | „Przyjęta przez przewoźnika” |
@@ -43,7 +43,7 @@ GZYL zapisuje własne etapy po angielsku, z literówkami włącznie. W kolejnoś
 | `Leave the email processing center` | Paczka wyjechała z tego centrum logistycznego. | „W transporcie” |
 | `Arrival sorting, distribution center` | Paczka jest w centrum dystrybucyjnym w kraju docelowym; po tych słowach GZYL podaje miejscowość. | „W transporcie” |
 | `Leaving the sorting center` | Paczka wyjeżdża z sortowni; GZYL dopisuje miejscowość. | „W transporcie” |
-| `Package is on the way` | Paczka jedzie dalej po kraju docelowym; GZYL dopisuje miejscowość. To nie znaczy, że kurier już ją do Ciebie wiezie. | „W transporcie” |
+| `Package is on the way` | Paczka jedzie dalej po kraju docelowym; GZYL dopisuje miejscowość. To nie znaczy, że kurier już ją do ciebie wiezie. | „W transporcie” |
 | `Delivered` | Doręczenie; GZYL dopisuje miejscowość. Może to być plan, a nie skan: zobacz niżej. | „Dostarczona”, z dopiskiem o stałym harmonogramie, chyba że Peek pominie ten etap (zobacz niżej) |
 
 Miejscowość, którą GZYL dopisuje po słowach etapu, Peek pokazuje jako miejsce tego etapu. Treść etapów zostawia tak, jak napisał ją GZYL, z jednym wyjątkiem: `Delivered` widzisz w historii przesyłki jako „Dostarczona”.
@@ -56,13 +56,13 @@ Miejscowość, którą GZYL dopisuje po słowach etapu, Peek pokazuje jako miejs
 
 **Godziny.** Wszystkie godziny na stronie śledzenia GZYL są w czasie pekińskim (UTC+8), także przy etapach w kraju docelowym, choć strona nie wskazuje strefy czasowej. Godzina 20:00 w Pekinie to w Polsce 13:00 zimą i 14:00 w czasie letnim, który trwa od ostatniej niedzieli marca do ostatniej niedzieli października.
 
-**Etapy zapisane z góry.** GZYL potrafi zapisać całą drogę paczki z wyprzedzeniem, od przyjęcia aż po ostatni etap w Twoim kraju, na długo przed godzinami podanymi przy etapach, a strona śledzenia pokazuje każdy etap, gdy nadejdzie jego godzina. Tak zapisany etap to plan, a nie skan Twojej paczki. Meiteshun, który korzysta z tej samej platformy śledzenia, robi tak samo. Plan GZYL kończy się potem etapem `Delivered`, który platforma dopisuje zbiorczo wieczorem dnia, który ten etap pokazuje: z datą dnia po ostatnim etapie planu, o godzinie, gdy w Pekinie pracują biura, bez względu na kraj docelowy. Serwisy śledzenia, które kopiują rekord GZYL, też mogą pokazywać takie etapy, więc `Delivered` na stronie GZYL czy w serwisie śledzenia nie dowodzi, że paczka dotarła.
+**Etapy zapisane z góry.** GZYL potrafi zapisać całą drogę paczki z wyprzedzeniem, od przyjęcia aż po ostatni etap w twoim kraju, na długo przed godzinami podanymi przy etapach, a strona śledzenia pokazuje każdy etap, gdy nadejdzie jego godzina. Tak zapisany etap to plan, a nie skan twojej paczki. Meiteshun, który korzysta z tej samej platformy śledzenia, robi tak samo. Plan GZYL kończy się potem etapem `Delivered`, który platforma dopisuje zbiorczo wieczorem dnia, który ten etap pokazuje: z datą dnia po ostatnim etapie planu, o godzinie, gdy w Pekinie pracują biura, bez względu na kraj docelowy. Serwisy śledzenia, które kopiują rekord GZYL, też mogą pokazywać takie etapy, więc `Delivered` na stronie GZYL czy w serwisie śledzenia nie dowodzi, że paczka dotarła.
 
 ## Kto doręcza paczki GZYL w Polsce
 
 Peek nie wie, kto doręcza paczki GZYL w Polsce: etapy GZYL w kraju docelowym nie wymieniają żadnej firmy, a Peek nie przenosi śledzenia paczek GZYL do żadnego polskiego przewoźnika. Jedyna firma, u której Peek może dalej śledzić paczkę GZYL, to Poczta Szwajcarska (Swiss Post), i to tylko w Szwajcarii i Liechtensteinie.
 
-Peek nie znalazł podawanych przez GZYL czasów dostawy ani zasad dotyczących prób doręczenia, punktów odbioru czy czasu przechowania paczki: to zasady firmy doręczającej. Zapytaj sprzedawcę, która firma doręcza Twoje zamówienie i pod jakim numerem.
+Peek nie znalazł podawanych przez GZYL czasów dostawy ani zasad dotyczących prób doręczenia, punktów odbioru czy czasu przechowania paczki: to zasady firmy doręczającej. Zapytaj sprzedawcę, która firma doręcza twoje zamówienie i pod jakim numerem.
 
 ## Paczka GZYL nie dochodzi albo śledzenie stoi
 
@@ -74,7 +74,7 @@ Peek nie znalazł podawanych przez GZYL czasów dostawy ani zasad dotyczących p
 
 **`Delivered`, a paczki nie ma.** Ten etap może być częścią planu GZYL, a nie skanem. Jeśli paczki nie doręcza Poczta Szwajcarska, Peek dopisuje pod statusem „Dostarczona”: „Statusy przewoźnika GZYL pojawiają się według stałego harmonogramu, bez podpisu. Jeśli nic nie dotarło, zapytaj sprzedawcę.” Napisz sprzedawcy, że paczka nie dotarła, i zapytaj, która firma ją doręcza i pod jakim numerem. Więcej w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
-**Nic nie znaleziono.** Gdy strona śledzenia GZYL nie zna numeru, pokazuje jeden wynik z Twoim numerem w kolumnie 参考号 (numer referencyjny) i wszystkimi innymi polami pustymi. Peek traktuje taką odpowiedź tak, jakby GZYL miał już przesyłkę w systemie, choć jeszcze bez skanu: pokazuje wtedy „Oczekiwanie na przewoźnika GZYL” i sprawdza dalej, tak często, jak podano niżej dla etapów zapisanych z góry, bez prośby o sprawdzenie numeru. Porównaj więc sam numer z wiadomością od sprzedawcy, znak po znaku.
+**Nic nie znaleziono.** Gdy strona śledzenia GZYL nie zna numeru, pokazuje jeden wynik z twoim numerem w kolumnie 参考号 (numer referencyjny) i wszystkimi innymi polami pustymi. Peek traktuje taką odpowiedź tak, jakby GZYL miał już przesyłkę w systemie, choć jeszcze bez skanu: pokazuje wtedy „Oczekiwanie na przewoźnika GZYL” i sprawdza dalej, tak często, jak podano niżej dla etapów zapisanych z góry, bez prośby o sprawdzenie numeru. Porównaj więc sam numer z wiadomością od sprzedawcy, znak po znaku.
 
 **Zgubiona albo zwrócona.** Przesyłkę u GZYL zamówił sprzedawca, więc to od niego, albo od platformy, na której kupowałeś, żądaj zwrotu pieniędzy lub nowej paczki. Zobacz poradniki o [zgubionej paczce](guide:lost-parcel) i [zwrocie do nadawcy](guide:returned-to-sender).
 
@@ -86,11 +86,11 @@ Stan na 4 listopada 2026: strona kontaktowa (联系我们) chińskiej witryny GZ
 
 Numer, który zaczyna się od YL738, a dalej ma siedem cyfr i YQ, [Peek](/) od razu rozpoznaje po kształcie jako numer GZYL („Wykryty przewoźnik”). Przy innych numerach z YL, dziesięcioma cyframi i YQ kształt to tylko słaba wskazówka. I tak go wklej: Peek śledzi ponad 4500 przewoźników. Gdy dodajesz numer, Peek pyta stronę śledzenia GZYL („Sprawdzanie usług śledzenia…”) i pokazuje „GZYL ma tę przesyłkę.”, jeśli strona zwróci dla numeru jakikolwiek wynik, nawet ten pusty, który pokazuje dla nieznanego numeru. Jeśli nie, kliknij „Zmień” i wybierz GZYL w sekcji „Pasują do numeru” (znajdziesz go też, wpisując 广州云链), a przy dodanej już przesyłce użyj „Zmień przewoźnika”. Po numerze referencyjnym sprzedawcy też śledzisz, ale tylko gdy sam wybierzesz GZYL: kliknij „Zmień” (albo „Zmień przewoźnika”) i wyszukaj GZYL. Peek pokaże wtedy numer, pod którym GZYL prowadzi zamówienie, przy napisie „GZYL śledzi przesyłkę pod numerem”. Peek usuwa jednak myślniki, więc numeru referencyjnego z myślnikami przez Peek nie znajdziesz: poproś sprzedawcę o numer YL…YQ.
 
-Peek czyta stronę śledzenia GZYL i pokazuje status, każdy etap z jego miejscem i kraj docelowy, gdy rekord GZYL go podaje. Godziny odczytuje w czasie pekińskim i pokazuje w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Nie pokazuje nazwisk, adresu, kodów pocztowych, wagi, opłat, podpisu ani potwierdzenia doręczenia, nawet jeśli rekord GZYL je zawiera. Przewidywanej daty doręczenia też nie ma, bo GZYL jej nie podaje.
+Peek czyta stronę śledzenia GZYL i pokazuje status, każdy etap z jego miejscem i kraj docelowy, gdy rekord GZYL go podaje. Godziny odczytuje w czasie pekińskim i pokazuje w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Nie pokazuje nazwisk, adresu, kodów pocztowych, wagi, opłat, podpisu ani potwierdzenia doręczenia, nawet jeśli rekord GZYL je zawiera. Przewidywanej daty doręczenia też nie ma, bo GZYL jej nie podaje.
 
-Peek pomija każdy etap zapisany ponad dwanaście godzin przed godziną, którą nosi, albo ponad sześć godzin przed nią w tej samej sekundzie co taki etap, i każdy etap, którego godzina w czasie pekińskim jeszcze nie nadeszła. Jeśli zamówienie ma etapy zapisane z góry, Peek pomija też `Delivered`, nawet zapisany w dniu, który pokazuje. Gdy interfejs danych strony śledzenia nie ma dla numeru żadnych etapów, Peek czyta zamiast niego samą stronę śledzenia GZYL; ta strona nie pokazuje, kiedy etap został zapisany, więc tam Peek pomija każdy `Delivered`. Status ustala na podstawie etapów, które zostawia, a nie ogólnego statusu w rekordzie. Gdy Peek pominie wszystkie etapy zamówienia, przesyłka nie ma jeszcze w Peek historii śledzenia. Peek pokazuje wtedy „Oczekiwanie na przewoźnika GZYL”, bez prośby o sprawdzenie numeru: etapy zapisane z góry oznaczają dla Peek, że GZYL ma już zamówienie, tak jak przy przesyłce, którą GZYL ma w systemie, choć jeszcze bez skanu. Peek dalej sprawdza stronę śledzenia GZYL, po pierwszych godzinach co 6 godzin, jeśli przesyłka jest w aplikacji na iPhonie lub na Twoim koncie. Gdy szukasz numeru bez konta, Peek sprawdza tę stronę przez pierwsze 6 godzin, potem gdy otworzysz link do przesyłki (najwyżej co 6 godzin, po pierwszych dwóch dniach najwyżej raz na dobę), a przy włączonych powiadomieniach także raz dziennie, do 30 dni od wyszukania. Peek pomija też kopie etapów, które uznaje za plan GZYL, łącznie z `Delivered`, gdy pokazują je serwisy śledzenia, nawet jeśli zostawia inne etapy zamówienia. Jeśli jednak strona GZYL nie odpowiada, Peek pyta serwisy śledzenia, a ich kopie mogą zawierać etapy, które GZYL zapisał z góry.
+Peek pomija każdy etap zapisany ponad dwanaście godzin przed godziną, którą nosi, albo ponad sześć godzin przed nią w tej samej sekundzie co taki etap, i każdy etap, którego godzina w czasie pekińskim jeszcze nie nadeszła. Jeśli zamówienie ma etapy zapisane z góry, Peek pomija też `Delivered`, nawet zapisany w dniu, który pokazuje. Gdy interfejs danych strony śledzenia nie ma dla numeru żadnych etapów, Peek czyta zamiast niego samą stronę śledzenia GZYL; ta strona nie pokazuje, kiedy etap został zapisany, więc tam Peek pomija każdy `Delivered`. Status ustala na podstawie etapów, które zostawia, a nie ogólnego statusu w rekordzie. Gdy Peek pominie wszystkie etapy zamówienia, przesyłka nie ma jeszcze w Peek historii śledzenia. Peek pokazuje wtedy „Oczekiwanie na przewoźnika GZYL”, bez prośby o sprawdzenie numeru: etapy zapisane z góry oznaczają dla Peek, że GZYL ma już zamówienie, tak jak przy przesyłce, którą GZYL ma w systemie, choć jeszcze bez skanu. Peek dalej sprawdza stronę śledzenia GZYL, po pierwszych godzinach co 6 godzin, jeśli przesyłka jest w aplikacji na iPhonie lub na twoim koncie. Gdy szukasz numeru bez konta, Peek sprawdza tę stronę przez pierwsze 6 godzin, potem gdy otworzysz link do przesyłki (najwyżej co 6 godzin, po pierwszych dwóch dniach najwyżej raz na dobę), a przy włączonych powiadomieniach także raz dziennie, do 30 dni od wyszukania. Peek pomija też kopie etapów, które uznaje za plan GZYL, łącznie z `Delivered`, gdy pokazują je serwisy śledzenia, nawet jeśli zostawia inne etapy zamówienia. Jeśli jednak strona GZYL nie odpowiada, Peek pyta serwisy śledzenia, a ich kopie mogą zawierać etapy, które GZYL zapisał z góry.
 
-Poza przekazaniem paczki Poczcie Szwajcarskiej Peek zostaje przy GZYL: jeśli sprzedawca poda Ci numer firmy, która ją doręcza, dodaj go jako osobną przesyłkę. Peek sprawdza przesyłkę nawet co 10 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). „Ważne etapy” obejmują dwa etapy celne GZYL i doręczenie, ale nie loty ani sortowanie. Peek nie skontaktuje się za Ciebie z GZYL ani ze sprzedawcą.
+Poza przekazaniem paczki Poczcie Szwajcarskiej Peek zostaje przy GZYL: jeśli sprzedawca poda ci numer firmy, która ją doręcza, dodaj go jako osobną przesyłkę. Peek sprawdza przesyłkę nawet co 10 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy przesyłka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie („Każdy skan”), tylko o ważnych etapach („Ważne etapy”) albo tylko o doręczeniu („Tylko doręczenie”). „Ważne etapy” obejmują dwa etapy celne GZYL i doręczenie, ale nie loty ani sortowanie. Peek nie skontaktuje się za ciebie z GZYL ani ze sprzedawcą.
 
 ## Pytania o śledzenie GZYL
 
@@ -108,7 +108,7 @@ Może to być część planu GZYL. GZYL zapisuje dużą część drogi paczki z 
 
 ### Kto doręcza paczki GZYL w Polsce?
 
-Peek tego nie wie: etapy GZYL w kraju docelowym nie wymieniają żadnej firmy, a Peek nie przenosi śledzenia paczek GZYL do polskiego przewoźnika. Zapytaj sprzedawcę, która firma doręcza Twoje zamówienie i pod jakim numerem, i dodaj ten numer w Peek jako osobną przesyłkę.
+Peek tego nie wie: etapy GZYL w kraju docelowym nie wymieniają żadnej firmy, a Peek nie przenosi śledzenia paczek GZYL do polskiego przewoźnika. Zapytaj sprzedawcę, która firma doręcza twoje zamówienie i pod jakim numerem, i dodaj ten numer w Peek jako osobną przesyłkę.
 
 :::sources
 - [广州云链货运代理有限公司 (GZYL): strona główna (po chińsku)](http://yunlianhouyun.com/) – nazwa firmy, strona po chińsku, wyszukiwarka paczek (小包查询) prowadząca do strony śledzenia GZYL

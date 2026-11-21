@@ -27,39 +27,39 @@ Strona Cainiao odpowiada też na inne kształty, na przykład AP i 14 cyfr. Gdzi
 
 Stronę global.cainiao.com przełączysz na polski przyciskiem języka w prawym górnym rogu; nazywa się wtedy „Globalne śledzenie zamówień”. Tłumaczenie jest jednak niepełne: po polsku jest 46 z 88 tekstów, reszta zostaje po angielsku. Wśród polskich komunikatów strony są `Brak nowych informacji dot. śledzenia` i informacja, że zamówienie jest przetwarzane, z odesłaniem po szczegóły do sprzedawcy. Czy Cainiao tłumaczy same skany, nie dało się sprawdzić. Linie poniżej są więc po angielsku, tak jak pokazuje je strona bez wybranego języka, mniej więcej w kolejności, w jakiej spotyka je paczka:
 
-| Cainiao pisze | Co to znaczy dla Ciebie |
+| Cainiao pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Shipment information received by warehouse electronically` | Magazyn sprzedawcy dostał dane zamówienia. |
 | `Warehouse packaging complete` | Magazyn sprzedawcy spakował zamówienie; żaden przewoźnik jeszcze go nie ma. |
 | `Received by logistics company` | Pierwszy skan u przewoźnika. |
-| `Export customs clearance complete` | Odprawa wywozowa w kraju nadania zakończona, to jeszcze nie Twoje cło. |
+| `Export customs clearance complete` | Odprawa wywozowa w kraju nadania zakończona, to jeszcze nie twoje cło. |
 | `Departed from departure country/region` | Paczka opuszcza kraj nadania, samolotem albo ciężarówką. |
 | `Import customs clearance started` | Zaczęła się odprawa celna w kraju docelowym. |
-| `Received by local delivery company` | Paczkę przejął przewoźnik w kraju docelowym, nie Ty. |
+| `Received by local delivery company` | Paczkę przejął przewoźnik w kraju docelowym, nie ty. |
 | `Out for delivery` | Paczka jest w doręczeniu. |
 | `Delivery attempt unsuccessful.Unable to deliver to mailbox` | Próba doręczenia się nie udała. Powód stoi po pierwszym zdaniu. |
-| `Arrived at pick-up point. Package available for collection.` | Paczka czeka na Ciebie w punkcie odbioru. |
-| `Package delivered` | Doręczona albo odebrana przez Ciebie. |
+| `Arrived at pick-up point. Package available for collection.` | Paczka czeka na ciebie w punkcie odbioru. |
+| `Package delivered` | Doręczona albo odebrana przez ciebie. |
 
 `Carrier update` to komunikat Cainiao: paczka jest w drodze. `Accepted for transportation by postal service` znaczy, że po przekazaniu przejął ją partner pocztowy, a nie że to pierwszy skan; `Delivery Carrier Accepted`, że ma ją przewoźnik na miejscu. Linie w rodzaju `Arrived in transit country/region` mówią, że paczka jedzie przez kraj trzeci. Już przy statusie `Leaving Origin` (paczka opuściła kraj nadania) pomoc Cainiao pisze, żeby się nie martwić, jeśli nie jedzie prosto do kraju docelowego. `Processing delay at sorting center` to opóźnienie, nie błąd.
 
-Linia o punkcie odbioru znaczy, że paczkę pokwitował punkt, nie Ty: `Package delivered` pojawia się dopiero, gdy ją odbierzesz. `Delivery failed` zamyka doręczenie jako nieudane po wszystkich próbach. `Shipment cancelled` znaczy, że zlecenie odbioru paczki u sprzedawcy zamknięto, zanim ktokolwiek ją odebrał: przesyłka jest anulowana i nie zostanie doręczona, a Peek pokazuje „Zgłoszono problem”. Etapy, przez które przechodzi każda paczka, opisuje poradnik [statusy przesyłek krok po kroku](guide:tracking-statuses).
+Linia o punkcie odbioru znaczy, że paczkę pokwitował punkt, nie ty: `Package delivered` pojawia się dopiero, gdy ją odbierzesz. `Delivery failed` zamyka doręczenie jako nieudane po wszystkich próbach. `Shipment cancelled` znaczy, że zlecenie odbioru paczki u sprzedawcy zamknięto, zanim ktokolwiek ją odebrał: przesyłka jest anulowana i nie zostanie doręczona, a Peek pokazuje „Zgłoszono problem”. Etapy, przez które przechodzi każda paczka, opisuje poradnik [statusy przesyłek krok po kroku](guide:tracking-statuses).
 
 ## Paczka Cainiao w Polsce: doręczenie, punkty i automaty
 
 Cainiao pisze, że oferuje lokalne doręczanie paczek w dziewięciu krajach i regionach, nie mówiąc, w których, a jako przykłady miejsc z lokalnym doręczaniem podaje Hiszpanię, Francję i Polskę. Podaje też, że ma w Polsce własne automaty paczkowe do samodzielnego odbioru. Na tym informacje się kończą: żadna strona Cainiao nie mówi, kto doręcza w Polsce, ani nie opisuje prób doręczenia, czasu przechowania w punkcie, doręczeń w sobotę czy podpisu przy odbiorze. Kogo możesz zobaczyć na ostatnim odcinku paczki z AliExpress, opisuje poradnik o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
-Kto ma Twoją paczkę, pokazuje śledzenie: po `Received by local delivery company` albo `Delivery Carrier Accepted` przejął ją przewoźnik w kraju docelowym. Jeśli nadał jej własny numer, strona Cainiao pokazuje go pod numerem głównym, a przycisk kontaktu pokazuje dane przewoźnika, gdy Cainiao je ma. Według AliExpress przez zaznaczone miejsce przejdziesz na stronę tego przewoźnika z jego kontaktem; o czas przechowania i odbiór pytaj właśnie jego.
+Kto ma twoją paczkę, pokazuje śledzenie: po `Received by local delivery company` albo `Delivery Carrier Accepted` przejął ją przewoźnik w kraju docelowym. Jeśli nadał jej własny numer, strona Cainiao pokazuje go pod numerem głównym, a przycisk kontaktu pokazuje dane przewoźnika, gdy Cainiao je ma. Według AliExpress przez zaznaczone miejsce przejdziesz na stronę tego przewoźnika z jego kontaktem; o czas przechowania i odbiór pytaj właśnie jego.
 
 Przy wysyłce ekonomicznej śledzenie może się w tym miejscu skończyć. Komunikat `Zawiadomienie o śledzeniu` mówi: „Śledzenie ekonomicznej przesyłki jest aktualizowane tylko do etapu przekazania do przewoźnika w kraju/regionie docelowym.” i kończy się słowami „Skontaktuj się z przewoźnikiem, aby uzyskać więcej informacji.” Kto to jest, wie zwykle obsługa klienta sprzedawcy, pisze Cainiao.
 
-Kurier Cię nie zastał? `Undelivered` zbiera u Cainiao nieudane doręczenia: nikogo nie było, doręczenie przełożono albo przesunięto na Twoją prośbę, adresu nie dało się znaleźć. Cainiao radzi wtedy umówić u przewoźnika ponowne doręczenie albo odebrać paczkę samemu. `Waiting for Pick Up` znaczy według Cainiao, że paczka jest na poczcie albo w drodze na nią; `Awaiting Collection`, `First Notification to recipient` i `A reminder has been sent to the recipient` też oznaczają, że czeka na Ciebie. Odbierz ją od razu, radzi Cainiao, bo inaczej może wrócić do nadawcy. Liczby dni nie podaje.
+Kurier cię nie zastał? `Undelivered` zbiera u Cainiao nieudane doręczenia: nikogo nie było, doręczenie przełożono albo przesunięto na twoją prośbę, adresu nie dało się znaleźć. Cainiao radzi wtedy umówić u przewoźnika ponowne doręczenie albo odebrać paczkę samemu. `Waiting for Pick Up` znaczy według Cainiao, że paczka jest na poczcie albo w drodze na nią; `Awaiting Collection`, `First Notification to recipient` i `A reminder has been sent to the recipient` też oznaczają, że czeka na ciebie. Odbierz ją od razu, radzi Cainiao, bo inaczej może wrócić do nadawcy. Liczby dni nie podaje.
 
 ## Przesyłka Cainiao utknęła albo nie dotarła
 
-**Brak śledzenia.** Według FAQ Cainiao od wysłania przez sprzedawcę do pierwszych informacji mija zwykle najwyżej 11 dni; jeśli po 12 dniach nic się nie zmienia, napisz do sprzedawcy. `Not Found` może też znaczyć, że numer jest błędny, nieważny lub nieaktualny albo że przewoźnik jeszcze nie przyjął lub nie wprowadził paczki. Jeśli sprzedawca nie wyśle zamówienia w terminie podanym na stronie zamówienia, AliExpress je zamyka i zwraca Ci całą kwotę.
+**Brak śledzenia.** Według FAQ Cainiao od wysłania przez sprzedawcę do pierwszych informacji mija zwykle najwyżej 11 dni; jeśli po 12 dniach nic się nie zmienia, napisz do sprzedawcy. `Not Found` może też znaczyć, że numer jest błędny, nieważny lub nieaktualny albo że przewoźnik jeszcze nie przyjął lub nie wprowadził paczki. Jeśli sprzedawca nie wyśle zamówienia w terminie podanym na stronie zamówienia, AliExpress je zamyka i zwraca ci całą kwotę.
 
-**Stoi w kraju docelowym.** W FAQ Cainiao jest pytanie, czemu po `Arrival at Destination` nic się nie dzieje. Odpowiedź: zwykle kraj docelowy nie przesłał danych, więc Cainiao radzi zapytać lokalną pocztę. Paczkę może też zatrzymać błędny adres albo numer telefonu; wtedy angielska pomoc odsyła do poczty, francuska do przewoźnika ostatniej mili. Przy odprawie celnej Cainiao radzi odbiorcy skontaktować się z urzędem celnym i współpracować przy odprawie; co może Cię czekać w Polsce, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs). Przy dłuższej ciszy przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
+**Stoi w kraju docelowym.** W FAQ Cainiao jest pytanie, czemu po `Arrival at Destination` nic się nie dzieje. Odpowiedź: zwykle kraj docelowy nie przesłał danych, więc Cainiao radzi zapytać lokalną pocztę. Paczkę może też zatrzymać błędny adres albo numer telefonu; wtedy angielska pomoc odsyła do poczty, francuska do przewoźnika ostatniej mili. Przy odprawie celnej Cainiao radzi odbiorcy skontaktować się z urzędem celnym i współpracować przy odprawie; co może cię czekać w Polsce, wyjaśnia poradnik [paczka zatrzymana przez urząd celny](guide:customs). Przy dłuższej ciszy przeczytaj, [dlaczego status przesyłki się nie zmienia](guide:tracking-not-updating).
 
 **Bardzo spóźniona albo zaginiona.** Cainiao prosi, by czekać do najpóźniejszej obiecanej daty doręczenia. Gdy minie, przy zamówieniu z AliExpress wejdź na AliExpress w „Help->Customer Service” albo „Disputes&Reports”. Na stronach Cainiao nie ma formularza reklamacji dla odbiorców: o zwrot pieniędzy prosisz AliExpress albo sprzedawcę.
 
@@ -83,7 +83,7 @@ Numery z chińskiej strony Cainiao są dla klientów w Chinach oraz dla sprzedaw
 
 Czasem AliExpress od razu podaje numer przewoźnika, który doręczy paczkę, na przykład numer SDA przy paczce do Włoch, choć paczka jest jeszcze w Cainiao. Przy niektórych takich kształtach Peek pyta Cainiao obok tego przewoźnika. Jeśli obaj znają numer, Peek zapisuje paczkę pod „AliExpress / Cainiao”, gdzie są skany sprzed granicy, i na ostatni odcinek pyta też przewoźnika doręczającego: jego skany trafiają do historii, gdy tylko zgłosi on paczkę.
 
-Sprawdza śledzenie nawet co 30 minut, również wtedy, gdy paczka jest już w doręczeniu (po nieudanym sprawdzeniu czeka godzinę), pokazuje każdy skan na mapie i powiadomi Cię o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status i historię, miejsce skanu, gdy Cainiao je podaje, planowaną dostawę jako przedział dni, gdy Cainiao go podaje, i godzinę doręczenia. Nie skontaktuje się za Ciebie z Cainiao ani nie złoży reklamacji.
+Sprawdza śledzenie nawet co 30 minut, również wtedy, gdy paczka jest już w doręczeniu (po nieudanym sprawdzeniu czeka godzinę), pokazuje każdy skan na mapie i powiadomi cię o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Widzisz status i historię, miejsce skanu, gdy Cainiao je podaje, planowaną dostawę jako przedział dni, gdy Cainiao go podaje, i godzinę doręczenia. Nie skontaktuje się za ciebie z Cainiao ani nie złoży reklamacji.
 
 ## Pytania o śledzenie Cainiao
 
@@ -93,7 +93,7 @@ Etap pokazuje najnowsza linia w śledzeniu, a miasto tylko wtedy, gdy skan je po
 
 ### Ile idzie paczka Cainiao do Polski?
 
-Osobnego czasu dostawy do Polski Cainiao nie podaje. Sprzedawcom obiecuje do głównych krajów od 10 do 18 dni kalendarzowych w opcji Standard i od 20 do 45 w Economy, a w opcji Premium od 5 do 10 dni do krajów takich jak Hiszpania, Holandia, Wielka Brytania i Belgia. To nie termin Twojego zamówienia: przedział dni dla konkretnej paczki strona śledzenia pokazuje, gdy Cainiao go ma.
+Osobnego czasu dostawy do Polski Cainiao nie podaje. Sprzedawcom obiecuje do głównych krajów od 10 do 18 dni kalendarzowych w opcji Standard i od 20 do 45 w Economy, a w opcji Premium od 5 do 10 dni do krajów takich jak Hiszpania, Holandia, Wielka Brytania i Belgia. To nie termin twojego zamówienia: przedział dni dla konkretnej paczki strona śledzenia pokazuje, gdy Cainiao go ma.
 
 ### Co to za firma Cainiao?
 

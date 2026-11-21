@@ -27,14 +27,14 @@ Pozostałe krajowe sieci GOFO stosują ten sam układ z kodem kraju po `GF` lub 
 
 Peek pobiera dane z francuskiego systemu GOFO, dlatego skany wyświetlają się w oryginalnym brzmieniu francuskim, bez względu na wybrany język aplikacji. Najczęstsze wpisy w typowej kolejności:
 
-| Komunikat GOFO | Co to oznacza dla Ciebie |
+| Komunikat GOFO | Co to oznacza dla ciebie |
 | --- | --- |
 | `Votre colis est en cours de préparation par l'expéditeur` | Sklep przygotowuje przesyłkę; GOFO jeszcze jej nie odebrało. |
 | `Expédition en transit vers GOFO` | Paczka jedzie do GOFO, ale przewoźnik jeszcze jej fizycznie nie przyjął. |
 | `Arrivé au site de prise en charge` | Dotarła do punktu przyjęć GOFO – to pierwszy skan wykonany przez GOFO. |
 | `Votre colis a été pris en charge au centre de tri` | Zeskanowana przy wejściu do sortowni GOFO. |
 | `Colis en cours d'acheminement` | W drodze między oddziałami GOFO. |
-| `Votre colis est arrivé à l’agence régionale GOFO de destination` | Jest w regionalnym oddziale GOFO w Twojej okolicy, skąd wyjedzie do doręczenia. |
+| `Votre colis est arrivé à l’agence régionale GOFO de destination` | Jest w regionalnym oddziale GOFO w twojej okolicy, skąd wyjedzie do doręczenia. |
 | `Le chauffeur est en route pour la livraison` | Kurier wyjechał z paczką na trasę doręczeń. |
 | `Échec de la livraison, motif : Le destinataire n'est pas chez lui` | Nieudana próba doręczenia: nikogo nie było w domu. |
 | `Livré` | Dostarczona. |
@@ -51,21 +51,21 @@ System GOFO dzieli ponadto przesyłki na ogólne kategorie. `Alerte` (alert) ozn
 
 **Opóźniona dostawa.** Zgodnie z unijnymi przepisami konsumenckimi sprzedawca musi dostarczyć zamówienie w terminie 30 dni, chyba że wspólnie ustaliliście inny termin. Jeśli tego nie zrobi, skontaktuj się z nim i wyznacz dodatkowy rozsądny termin; po jego bezskutecznym upływie możesz odstąpić od umowy i odzyskać pieniądze.
 
-**Oznaczona jako `Livré`, ale jej nie masz.** Za dostarczenie zamówienia odpowiada sklep: to sprzedawca musi skontaktować się z przewoźnikiem i udowodnić, że paczka została Ci doręczona, a jeśli nie potrafi tego wykazać – wysłać identyczny produkt albo zwrócić pieniądze. Co najpierw sprawdzić w domu i u sąsiadów, przeczytasz w poradniku [dostarczona, ale nieodebrana](guide:delivered-not-received).
+**Oznaczona jako `Livré`, ale jej nie masz.** Za dostarczenie zamówienia odpowiada sklep: to sprzedawca musi skontaktować się z przewoźnikiem i udowodnić, że paczka została ci doręczona, a jeśli nie potrafi tego wykazać – wysłać identyczny produkt albo zwrócić pieniądze. Co najpierw sprawdzić w domu i u sąsiadów, przeczytasz w poradniku [dostarczona, ale nieodebrana](guide:delivered-not-received).
 
-**Uszkodzona przesyłka.** Sprzedawca odpowiada za wszelkie uszkodzenia towaru od momentu wysyłki aż do chwili jego odbioru przez Ciebie, w tym za szkody powstałe podczas transportu. Jeśli masz taką możliwość, sprawdź stan paczki w obecności kuriera. Więcej w artykule [uszkodzona paczka](guide:damaged-parcel).
+**Uszkodzona przesyłka.** Sprzedawca odpowiada za wszelkie uszkodzenia towaru od momentu wysyłki aż do chwili jego odbioru przez ciebie, w tym za szkody powstałe podczas transportu. Jeśli masz taką możliwość, sprawdź stan paczki w obecności kuriera. Więcej w artykule [uszkodzona paczka](guide:damaged-parcel).
 
 **Opłaty przy imporcie do UE.** Według Komisji Europejskiej przy zakupach internetowych spoza UE od 1 lipca 2026 r. od przesyłek o wartości do 150 € pobierane jest cło w wysokości 3 € za każdą pozycję towarową, a od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna 2 € za pozycję (obejmująca także sprzedaż na odległość powyżej 150 €). Jedna pozycja grupuje towary o tym samym kodzie taryfowym i tym samym kraju pochodzenia: za dwie koszulki zapłacisz 3 € cła i 2 € opłaty, natomiast za koszulkę i spodnie – podwójnie. Dostałeś wezwanie do dopłaty? Sprawdź [przesyłka zatrzymana w urzędzie celnym](guide:customs).
 
 ## Obsługa klienta GOFO France
 
-Strona pomocy GOFO France znajduje się we francuskim serwisie gofo.com; Peek kieruje do niej linkiem „Poproś przewoźnika GOFO France o pomoc”, gdy przed wydaniem paczki do doręczenia miną cztery dni bez nowego skanu. Jeśli zamówienie dociera z opóźnieniem, zaginie lub przyjdzie uszkodzone, zacznij od kontaktu ze sklepem, który je wysłał – to on odpowiada przed Tobą za dostawę. Przygotuj numer `GFFR` lub `CIFR` oraz numer zamówienia.
+Strona pomocy GOFO France znajduje się we francuskim serwisie gofo.com; Peek kieruje do niej linkiem „Poproś przewoźnika GOFO France o pomoc”, gdy przed wydaniem paczki do doręczenia miną cztery dni bez nowego skanu. Jeśli zamówienie dociera z opóźnieniem, zaginie lub przyjdzie uszkodzone, zacznij od kontaktu ze sklepem, który je wysłał – to on odpowiada przed tobą za dostawę. Przygotuj numer `GFFR` lub `CIFR` oraz numer zamówienia.
 
 ## Śledzenie przesyłki GOFO France z Peek
 
 [Peek](/) sam rozpoznaje numery `GFFR` i `CIFR`. Możesz też wkleić link z francuskiej strony śledzenia GOFO (w domenie gofo.com lub gofoexpress.fr, z parametrem `id=` i numerem). Działa również referencja `PK`: Peek pyta o nią GOFO France i przypisuje przesyłkę do tego przewoźnika, gdy tylko GOFO rozpozna numer; do tego czasu widzisz komunikat „Oczekiwanie na pierwszy skan przewoźnika GOFO France”.
 
-Peek sprawdza status w GOFO France do każdych 10 minut, gdy masz paczkę otwartą albo w dniu doręczenia masz włączone powiadomienia, a w pozostałym czasie co godzinę – również po dwóch dniach bez nowego skanu lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”. W dniu doręczenia sprawdza do każdych 2 minut od 6:00 czasu lokalnego, gdy paczka jest w doręczeniu i odpowiada bezpośrednio system GOFO; gdy odpowiadają wyłącznie serwisy śledzące, sprawdza co godzinę, co 3 godziny po dobie bez skanu i do każdych 15 minut w dniu dostawy, gdy masz paczkę otwartą albo włączone powiadomienia. Pokazuje aktualny status, historię z miejscem podanym przez GOFO przy każdym skanie, godzinę doręczenia oraz te miejsca na mapie, a powiadomienia wyśle na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Gdy GOFO podaje sam kod oddziału albo wyłącznie kraj, skan wyświetla się bez miejscowości. Godziny skanów z czasu francuskiego Peek przelicza na Twoją strefę czasową (pod historią widnieje „Godziny w twojej strefie czasowej: …”). Dopóki GOFO nie zwróci żadnego wpisu, widać „Oczekiwanie na przewoźnika GOFO France”, a Peek dalej odpytuje przewoźnika. Jeśli po dwóch dniach GOFO wciąż nie zna numeru i nie odpowie żadne inne źródło, Peek wyświetla „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i przechodzi na sprawdzanie raz dziennie, a po tygodniu od dodania – raz w tygodniu. Jeżeli przesyłka jest już zarejestrowana w GOFO, lecz jeszcze niezeskanowana, pozostaje „Oczekiwanie na przewoźnika GOFO France” bez prośby o weryfikację numeru. Przewidywaną datę dostawy od GOFO Peek pokazuje w czasie transportu aż do wydania do doręczenia, dostarczenia, zwrotu, złożenia w punkcie odbioru albo odnotowania próby doręczenia lub problemu; pomija wagę, zdjęcia z doręczenia i komunikaty GOFO. Nie może też skontaktować się w Twoim imieniu z GOFO ani ze sklepem.
+Peek sprawdza status w GOFO France do każdych 10 minut, gdy masz paczkę otwartą albo w dniu doręczenia masz włączone powiadomienia, a w pozostałym czasie co godzinę – również po dwóch dniach bez nowego skanu lub po 12 godzinach na etapie „Zarejestrowana” bądź „Przyjęta przez przewoźnika”. W dniu doręczenia sprawdza do każdych 2 minut od 6:00 czasu lokalnego, gdy paczka jest w doręczeniu i odpowiada bezpośrednio system GOFO; gdy odpowiadają wyłącznie serwisy śledzące, sprawdza co godzinę, co 3 godziny po dobie bez skanu i do każdych 15 minut w dniu dostawy, gdy masz paczkę otwartą albo włączone powiadomienia. Pokazuje aktualny status, historię z miejscem podanym przez GOFO przy każdym skanie, godzinę doręczenia oraz te miejsca na mapie, a powiadomienia wyśle na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Gdy GOFO podaje sam kod oddziału albo wyłącznie kraj, skan wyświetla się bez miejscowości. Godziny skanów z czasu francuskiego Peek przelicza na twoją strefę czasową (pod historią widnieje „Godziny w twojej strefie czasowej: …”). Dopóki GOFO nie zwróci żadnego wpisu, widać „Oczekiwanie na przewoźnika GOFO France”, a Peek dalej odpytuje przewoźnika. Jeśli po dwóch dniach GOFO wciąż nie zna numeru i nie odpowie żadne inne źródło, Peek wyświetla „Po dwóch dniach przewoźnik nadal nie zna tego numeru. Sprawdź go, wybierz innego przewoźnika lub usuń przesyłkę.” i przechodzi na sprawdzanie raz dziennie, a po tygodniu od dodania – raz w tygodniu. Jeżeli przesyłka jest już zarejestrowana w GOFO, lecz jeszcze niezeskanowana, pozostaje „Oczekiwanie na przewoźnika GOFO France” bez prośby o weryfikację numeru. Przewidywaną datę dostawy od GOFO Peek pokazuje w czasie transportu aż do wydania do doręczenia, dostarczenia, zwrotu, złożenia w punkcie odbioru albo odnotowania próby doręczenia lub problemu; pomija wagę, zdjęcia z doręczenia i komunikaty GOFO. Nie może też skontaktować się w twoim imieniu z GOFO ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie GOFO France
 
@@ -83,7 +83,7 @@ We Francji na potrzeby śledzenia tak: na liście przewoźników w Peek CIRRO Pa
 
 ### Co zrobić, jeśli paczka GOFO zaginęła?
 
-Skontaktuj się ze sklepem, w którym kupiłeś towar. Zgodnie z prawem UE sprzedawca odpowiada za przesyłkę aż do chwili, gdy trafia ona w Twoje ręce: jeśli nie potrafi udowodnić doręczenia, musi wysłać identyczny towar ponownie albo zwrócić Ci pieniądze. Więcej w poradniku [zagubiona paczka](guide:lost-parcel).
+Skontaktuj się ze sklepem, w którym kupiłeś towar. Zgodnie z prawem UE sprzedawca odpowiada za przesyłkę aż do chwili, gdy trafia ona w twoje ręce: jeśli nie potrafi udowodnić doręczenia, musi wysłać identyczny towar ponownie albo zwrócić ci pieniądze. Więcej w poradniku [zagubiona paczka](guide:lost-parcel).
 
 :::sources
 - [INSEE: Avis de situation au répertoire Sirene](https://avis-situation-sirene.insee.fr/) – GOFO FRANCE, Siren 978 559 839, spółka SAS aktywna od 26 maja 2023 r., siedziba w 95670 Marly-la-Ville

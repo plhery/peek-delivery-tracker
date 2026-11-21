@@ -30,7 +30,7 @@ Małe litery, spacje i myślniki nie mają znaczenia w Peek. Międzynarodowa wys
 
 Międzynarodowe śledzenie JD wyświetla każdy etap po angielsku wraz z miejscowością skanu. Oto oryginalne komunikaty JD odczytywane przez Peek, w typowej kolejności dla zamówienia wysłanego z zagranicznego magazynu JD:
 
-| Komunikat JD | Status w Peek | Co oznacza dla Twojej przesyłki |
+| Komunikat JD | Status w Peek | Co oznacza dla twojej przesyłki |
 | --- | --- | --- |
 | `Picking Completed.` | „Przyjęta przez przewoźnika” | Zamówienie zostało skompletowane w magazynie JD, w którym sprzedawca trzymał już zapas towaru. |
 | `Weighed at Warehouse.` | „Przyjęta przez przewoźnika” | Zważone w tym samym magazynie przed wyjazdem. |
@@ -53,7 +53,7 @@ Pozostałe zdarzenia JD Peek rozpoznaje po ich wewnętrznym kodzie: utworzenie z
 
 **Paczki z magazynu JD w Polsce lub w Europie.** JD Logistics prowadzi własne magazyny poza Chinami — w tym dwa pod Warszawą w **Polsce** (`PL-JD-WAW1` w Urzucie przy al. Katowickiej 283 oraz `PL-JD-WAW2` w Brwinowie, Moszna Lot 29), a także w **Niemczech** pod Frankfurtem (`DE-JD-FRA1` w Buseck) i Dortmundem (`DE-JD-DTM1` w Unnie), we **Francji** pod Paryżem (`FR-JD-PAR1` w Dugny), w **Holandii** w Venray (`NL-JD-VEN1`) i Tilburgu (`NL-JD-TIL1`), w **Wielkiej Brytanii** (`GB-JD-BHM1` w Lutterworth), w **USA** (New Jersey, rejon Los Angeles i Georgia) oraz w **Australii** (Sydney). Gdy sprzedawca wysyła towar z takiego lokalnego zapasu, historia zaczyna się od `Picking Completed.` i `Weighed at Warehouse.` zamiast `Shipment Picked up`.
 
-Strony JD nie określają liczby prób doręczenia ani miejsca oczekiwania awizowanej paczki: decyduje o tym regulamin przewoźnika doręczającego w Twoim kraju. Zobacz [nieudane doręczenie](guide:missed-delivery).
+Strony JD nie określają liczby prób doręczenia ani miejsca oczekiwania awizowanej paczki: decyduje o tym regulamin przewoźnika doręczającego w twoim kraju. Zobacz [nieudane doręczenie](guide:missed-delivery).
 
 ## Odprawa celna, opłaty importowe i fałszywe SMS-y
 
@@ -88,9 +88,9 @@ W **Chinach** główna infolinia JD Logistics ma numer `950616` (`0086 950616` n
 
 ## Śledzenie przesyłki JD Logistics w Peek
 
-[Peek](/) od razu rozpoznaje JD Logistics po formatach `JD…` z powyższej tabeli („Wykryty przewoźnik”). Numer `VG` z 11 cyframi pasuje także do La Poste, dlatego Peek sprawdza go najpierw w La Poste i innych serwisach śledzenia („Sprawdzanie usług śledzenia…”); jeśli go tam nie znajdą, stuknij „Zmień” i wybierz JD Logistics. Link z domeny `jingdonglogistics.com` zawierający `waybillCodes=` przypisuje paczkę do JD Logistics niezależnie od kształtu numeru; z linku `jdl.com` Peek pobiera numer, gdy odpowiada jednemu z układów `JD…`. Jeśli Twój numer JD wygląda inaczej, i tak go wklej: Peek obsługuje ponad 4500 przewoźników — stuknij „Zmień” i wskaż JD Logistics na liście „Wszyscy przewoźnicy” (wyszukiwarka znajduje też `Jingdong` oraz `京东物流`) albo użyj opcji „Zmień przewoźnika” na zapisanej przesyłce.
+[Peek](/) od razu rozpoznaje JD Logistics po formatach `JD…` z powyższej tabeli („Wykryty przewoźnik”). Numer `VG` z 11 cyframi pasuje także do La Poste, dlatego Peek sprawdza go najpierw w La Poste i innych serwisach śledzenia („Sprawdzanie usług śledzenia…”); jeśli go tam nie znajdą, stuknij „Zmień” i wybierz JD Logistics. Link z domeny `jingdonglogistics.com` zawierający `waybillCodes=` przypisuje paczkę do JD Logistics niezależnie od kształtu numeru; z linku `jdl.com` Peek pobiera numer, gdy odpowiada jednemu z układów `JD…`. Jeśli twój numer JD wygląda inaczej, i tak go wklej: Peek obsługuje ponad 4500 przewoźników — stuknij „Zmień” i wskaż JD Logistics na liście „Wszyscy przewoźnicy” (wyszukiwarka znajduje też `Jingdong` oraz `京东物流`) albo użyj opcji „Zmień przewoźnika” na zapisanej przesyłce.
 
-Peek pobiera dane z międzynarodowego śledzenia JD: status, każdy etap w oryginalnym brzmieniu JD wraz z miastem i krajem po angielsku (nawet gdy JD zapisuje kraj po chińsku) oraz godzinę doręczenia. Czasy są odczytywane według zegara miejsca skanu i pokazywane w strefie czasowej Twojego urządzenia („Godziny w twojej strefie czasowej: …” na peektracker.com i w aplikacjach na iPhone’a i Androida). Peek nie wyświetla przewidywanej daty dostawy dla paczek JD i pomija dane odbiorcy, ewentualne zdjęcia z doręczenia, imię i telefon kuriera oraz numer partnera lokalnego dopisany na końcu wiersza wyjazdu z magazynu.
+Peek pobiera dane z międzynarodowego śledzenia JD: status, każdy etap w oryginalnym brzmieniu JD wraz z miastem i krajem po angielsku (nawet gdy JD zapisuje kraj po chińsku) oraz godzinę doręczenia. Czasy są odczytywane według zegara miejsca skanu i pokazywane w strefie czasowej twojego urządzenia („Godziny w twojej strefie czasowej: …” na peektracker.com i w aplikacjach na iPhone’a i Androida). Peek nie wyświetla przewidywanej daty dostawy dla paczek JD i pomija dane odbiorcy, ewentualne zdjęcia z doręczenia, imię i telefon kuriera oraz numer partnera lokalnego dopisany na końcu wiersza wyjazdu z magazynu.
 
 Dla serii numerów przeznaczonych do **ruchu krajowego w Chinach** (`JD` i 13 cyfr zaczynających się od `0`; `JDJ`, `JDK`, `JDV` lub `JDX` i 12 cyfr; `JDVA`, `JDVB`, `JDVC` lub `JDAZ` i 11 cyfr) Peek otwiera chińską wyszukiwarkę na `jdl.com`. Dla `JDW` z 12 cyframi oraz `JDAP` z 11 odpytuje wyłącznie wyszukiwarkę międzynarodową; dla pozostałych numerów `JD` najpierw międzynarodową, a gdy ta nic nie zwróci — chińską. Chińskie wiersze wyświetlane są po chińsku bez imienia i telefonu kuriera oraz bez nazwiska osoby kwitującej odbiór. Ponieważ `jdl.com` często wymaga weryfikacji, której Peek nie może przejść, po odmowie Peek wstrzymuje otwieranie `jdl.com` dla tego numeru na 6 godzin lub dłużej, maksymalnie na dobę: jeśli paczka wewnątrz Chin nie pokazuje wpisów w Peek, sprawdź ją bezpośrednio na `jdl.com`.
 

@@ -24,22 +24,22 @@ Czternaście cyfr mają też numery DPD w Niemczech, Szwajcarii, Wielkiej Brytan
 
 Strona śledzenia DPD otwiera się po polsku. Gdy korzystasz z Peek po polsku, Peek też czyta ją po polsku i pokazuje komunikaty tak, jak pisze je DPD; w każdym innym języku czyta jej wersję angielską. Jeśli w historii paczki trafi na polski komunikat, którego jeszcze nie zna, pobiera całą historię po angielsku. Poniżej są komunikaty w kolejności, w jakiej zwykle spotyka je paczka: najpierw po polsku, w nawiasie po angielsku. Trzy są tylko po angielsku, bo ich polskiego brzmienia Peek jeszcze nie zna. DPD nigdzie nie objaśnia swoich statusów; opisy poniżej mówią, co dzieje się wtedy z paczką.
 
-| DPD pisze | Etap w Peek | Co to znaczy dla Ciebie |
+| DPD pisze | Etap w Peek | Co to znaczy dla ciebie |
 | --- | --- | --- |
 | `Zarejestrowano dane przesyłki, przesyłka jeszcze nienadana` (`Registered parcel data, parcel not dispatched yet`) | Zarejestrowana | Nadawca utworzył etykietę, DPD jeszcze nie ma paczki. |
 | `Nadanie przesyłki w punkcie Pickup` (`Parcel dropped-off in pickup point`) | Przyjęta przez przewoźnika | Nadawca zostawił paczkę w punkcie lub automacie DPD Pickup. |
 | `Przesyłka odebrana przez Kuriera` (`Parcel collected by courier`) | Przyjęta przez przewoźnika (po wcześniejszym nadaniu lub skanie w oddziale: W transporcie) | Kurier odebrał paczkę od nadawcy (później: przekazanie w trasie). |
 | `Przyjęcie przesyłki w oddziale DPD` (`Parcel received by DPD depot`) | W transporcie | Paczka jest w oddziale DPD. |
 | `Przekazano za granicę` (`Sent outside Poland`) | W transporcie | Paczka jedzie do innego kraju, gdzie doręczy ją tamtejsze DPD. |
-| `Wydanie przesyłki do doręczenia` (`Parcel dispatched to be delivered`) | W doręczeniu | Kurier wiezie paczkę do Ciebie. |
-| `Przesyłka niedoręczona - odbiorca nieobecny` (`Parcel not delivered - recipient not available`) | Próba doręczenia | Kurier Cię nie zastał. |
+| `Wydanie przesyłki do doręczenia` (`Parcel dispatched to be delivered`) | W doręczeniu | Kurier wiezie paczkę do ciebie. |
+| `Przesyłka niedoręczona - odbiorca nieobecny` (`Parcel not delivered - recipient not available`) | Próba doręczenia | Kurier cię nie zastał. |
 | `Parcel dispatched to be collected by pickup point` (tylko po angielsku) | W transporcie | Paczka jedzie do punktu, który ją przechowa. |
 | `Przyjęcie przesyłki do punktu Pickup` (`Parcel collected by pickup point`) | Do odbioru | Punkt przyjął paczkę: możesz ją odebrać. |
 | `The Parcel has been placed in the DPD Pickup Station` (tylko po angielsku) | Do odbioru | Paczka czeka w automacie DPD Pickup. |
 | `Waiting for pickup timeout` (tylko po angielsku) | Zgłoszono problem | Nikt nie odebrał paczki na czas, wraca do nadawcy. |
 | `Przesyłka doręczona` (`Parcel delivered`) | Dostarczona | Doręczona. |
 
-W angielskich komunikatach słowo „collected” myli: znaczy, że paczkę wziął kurier albo punkt, nie Ty. `Parcel collected by pickup point` to więc dobra wiadomość. `Przesyłka niedoręczona - rezygnacja klienta z przesyłki` (`Parcel not delivered - recipient resigned`) oznacza, że odbiorca odmówił przyjęcia; paczka wraca wtedy do nadawcy, który płaci za zwrot. Przy tym komunikacie Peek pokazuje etap „Zgłoszono problem”. `Zwrot przesyłki` (`Parcel return`) to zwrot pod nowym numerem, z etapem „Zwrócona nadawcy”. `Powiadomienie mail` i `Powiadomienie SMS` (`Mail notification`, `SMS notification`) to wiadomości wysłane do Ciebie, nie ruch paczki, więc nie zmieniają etapu. Ogólne etapy opisuje poradnik o [statusach przesyłek](guide:tracking-statuses).
+W angielskich komunikatach słowo „collected” myli: znaczy, że paczkę wziął kurier albo punkt, nie ty. `Parcel collected by pickup point` to więc dobra wiadomość. `Przesyłka niedoręczona - rezygnacja klienta z przesyłki` (`Parcel not delivered - recipient resigned`) oznacza, że odbiorca odmówił przyjęcia; paczka wraca wtedy do nadawcy, który płaci za zwrot. Przy tym komunikacie Peek pokazuje etap „Zgłoszono problem”. `Zwrot przesyłki` (`Parcel return`) to zwrot pod nowym numerem, z etapem „Zwrócona nadawcy”. `Powiadomienie mail` i `Powiadomienie SMS` (`Mail notification`, `SMS notification`) to wiadomości wysłane do ciebie, nie ruch paczki, więc nie zmieniają etapu. Ogólne etapy opisuje poradnik o [statusach przesyłek](guide:tracking-statuses).
 
 ## Dostawa DPD, punkty i automaty DPD Pickup
 
@@ -49,7 +49,7 @@ W angielskich komunikatach słowo „collected” myli: znaczy, że paczkę wzi�
 
 **Zmiany.** Gdy kurier ma już paczkę, w DPD Mobile albo w Moja Paczka (mojapaczka.dpd.com.pl, z numerem przesyłki i kodem PIN) możesz przesunąć doręczenie do 3 dni roboczych, zmienić adres, wybrać sąsiada lub safeplace, skierować paczkę do punktu albo automatu DPD Pickup lub z niej zrezygnować. Paczek niektórych nadawców, m.in. Temu, AliExpress i Shein, nie da się przekierować; po przekazaniu ich do DPD możesz jednak wybrać punkt DPD Pickup na trasie kuriera.
 
-**Punkty i automaty.** DPD podaje, że ma ponad 35 000 automatów i punktów DPD Pickup, także w sklepach takich jak Żabka, Lidl czy Auchan. Paczka czeka w nich 2 pełne dni robocze, a dokładny termin jest w powiadomieniu i w DPD Mobile. Przedłużyć się go nie da: potem paczka wraca do nadawcy. Odbierzesz ją w DPD Mobile albo kodem odbioru z e-maila, wpisanym na klawiaturze automatu. Ktoś inny może odebrać ją Twoim kodem, jeśli nie trzeba podpisywać dodatkowych dokumentów. Gdy wybrany punkt jest pełny, DPD kieruje paczkę do jednego z najbliższych i informuje Cię o tym.
+**Punkty i automaty.** DPD podaje, że ma ponad 35 000 automatów i punktów DPD Pickup, także w sklepach takich jak Żabka, Lidl czy Auchan. Paczka czeka w nich 2 pełne dni robocze, a dokładny termin jest w powiadomieniu i w DPD Mobile. Przedłużyć się go nie da: potem paczka wraca do nadawcy. Odbierzesz ją w DPD Mobile albo kodem odbioru z e-maila, wpisanym na klawiaturze automatu. Ktoś inny może odebrać ją twoim kodem, jeśli nie trzeba podpisywać dodatkowych dokumentów. Gdy wybrany punkt jest pełny, DPD kieruje paczkę do jednego z najbliższych i informuje cię o tym.
 
 ## Paczka DPD nie dotarła, opóźniona lub uszkodzona
 
@@ -78,13 +78,13 @@ Według strony DPD Polska (stan na 11 października 2026):
 
 [Peek](/) od razu rozpoznaje DPD Poland po 13 cyfrach i literze. Przy 14 cyfrach zaczynających się od 13 pyta naraz kilku przewoźników, z DPD Poland jako najbardziej prawdopodobnym, i pokazuje „DPD Poland ma tę przesyłkę.”, gdy numer zna tylko DPD Poland. Jeśli zna go kilku przewoźników albo żaden, a także przy innych 14-cyfrowych numerach, wybierz DPD Poland przyciskiem „Zmień”. Zadziała też link z tracktrace.dpd.com.pl lub tt.dpd.com.pl z `p1=`; kodu nadania, numeru referencyjnego ani numeru zlecenia nie rozpoznaje.
 
-Gdy korzystasz z Peek po polsku, Peek czyta polską stronę DPD (a całą historię po angielsku, gdy trafi na polski komunikat, którego jeszcze nie zna), w innych językach angielską, i pokazuje status, historię i godzinę doręczenia, z komunikatami takimi, jak pisze je DPD. DPD nie podaje tam miejsca skanów, przewidywanej daty dostawy, nadawcy ani wagi, a Peek pomija Twoje nazwisko, punkt odbioru z adresem, kod oddziału i liczbę paczek. Peek odczytuje wszystkie skany w czasie warszawskim, także rejestrację, odbiór bez kodu oddziału i skany za granicą. Peek sprawdza DPD nawet co 10 minut, a od wydania do doręczenia nawet co 2 minuty (tylko w dniu wydania, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie DPD; przez serwisy śledzenia przesyłek co 15 minut), i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki po `Przekazano za granicę` (`Sent outside Poland`) i nie zapamiętuje nowego numeru zwrotu.
+Gdy korzystasz z Peek po polsku, Peek czyta polską stronę DPD (a całą historię po angielsku, gdy trafi na polski komunikat, którego jeszcze nie zna), w innych językach angielską, i pokazuje status, historię i godzinę doręczenia, z komunikatami takimi, jak pisze je DPD. DPD nie podaje tam miejsca skanów, przewidywanej daty dostawy, nadawcy ani wagi, a Peek pomija twoje nazwisko, punkt odbioru z adresem, kod oddziału i liczbę paczek. Peek odczytuje wszystkie skany w czasie warszawskim, także rejestrację, odbiór bez kodu oddziału i skany za granicą. Peek sprawdza DPD nawet co 10 minut, a od wydania do doręczenia nawet co 2 minuty (tylko w dniu wydania, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie DPD; przez serwisy śledzenia przesyłek co 15 minut), i może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki po `Przekazano za granicę` (`Sent outside Poland`) i nie zapamiętuje nowego numeru zwrotu.
 
 ## Pytania o śledzenie paczki DPD
 
 ### Czy paczkę DPD można śledzić po numerze telefonu?
 
-Tylko w aplikacji DPD Mobile, która pokazuje paczki przypisane do telefonu lub e-maila z Twojego konta. Strona śledzenia DPD nie ma wyszukiwania po numerze telefonu.
+Tylko w aplikacji DPD Mobile, która pokazuje paczki przypisane do telefonu lub e-maila z twojego konta. Strona śledzenia DPD nie ma wyszukiwania po numerze telefonu.
 
 ### Czy do śledzenia przesyłki DPD potrzebny jest PIN?
 

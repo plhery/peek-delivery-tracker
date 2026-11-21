@@ -31,7 +31,7 @@ Kod zaczynający się od `U` (`UA…BE`) służy wyłącznie do odprawy celnej: 
 
 Serwis Track & Trace bpost działa tylko po angielsku, francusku, niderlandzku i niemiecku, a dla zwykłych paczek wymaga kodu pocztowego odbiorcy. Peek odpytuje bpost bezpośrednio bez kodu pocztowego i wyświetla angielskie wpisy:
 
-| Komunikat bpost | Co to dla Ciebie oznacza |
+| Komunikat bpost | Co to dla ciebie oznacza |
 | --- | --- |
 | `Confirmation of preparation of the shipment received` | Nadawca zgłosił przesyłkę do bpost, ale jeszcze jej nie przekazał. |
 | `Item accepted after deposit by sender` | Nadana przez nadawcę w punkcie bpost i przyjęta do sieci. |
@@ -42,8 +42,8 @@ Serwis Track & Trace bpost działa tylko po angielsku, francusku, niderlandzku i
 | `Awaiting presentation to Customs` / `No extra costs` | Oczekuje na odprawę celną albo została zwolniona bez opłat. |
 | `Departure to country of destination` | Wyruszyła z Belgii do kraju docelowego. |
 | `Your shipment has arrived at the postal operator of the country of destination and will be delivered in the coming days` | Poczta kraju docelowego (w Polsce [Poczta Polska](carrier:poczta-polska)) przejęła paczkę do doręczenia. |
-| `The postman's delivery round for your item has started` | Listonosz wyjechał dziś z Twoją paczką w trasę. |
-| `Delivery interrupted due to unforeseen circumstances` | Trasa została przerwana po stronie bpost przed Twoim adresem; wyznaczono nowy dzień (`New delivery scheduled`). |
+| `The postman's delivery round for your item has started` | Listonosz wyjechał dziś z twoją paczką w trasę. |
+| `Delivery interrupted due to unforeseen circumstances` | Trasa została przerwana po stronie bpost przed twoim adresem; wyznaczono nowy dzień (`New delivery scheduled`). |
 | `Item on it's way to bbox locker` | W drodze do automatu bbox, jeszcze niedostępna do odbioru. |
 | `Item available at Pick-up point` / `Item available at the bbox locker` | Gotowa do odbioru w Punkcie odbioru lub w automacie bbox. |
 | `Item delivered` / `Item delivered in mailbox` / `Item delivered at safeplace` | Doręczona do rąk lub odebrana w punkcie, w skrzynce albo w bezpiecznym miejscu. |

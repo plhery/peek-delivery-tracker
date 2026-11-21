@@ -35,7 +35,7 @@ Dodaj ręcznie własne repozytorium Peeka w aplikacji F-Droid albo pobierz aplik
 
 Możesz też stuknąć „Otwórz GitHub” na tej samej stronie: w najnowszym wydaniu na stronie [wydań Peeka na GitHubie](https://github.com/plhery/peek-delivery-tracker/releases) stuknij plik .apk, a potem pozwól przeglądarce go zainstalować. Wydania Peeka mają tam oznaczenie „Pre-release”.
 
-Tę wersję podpisuje Peek, a nie Google, więc nie może zaktualizować kopii z Google Play ani odwrotnie: jeśli masz Peeka z Google Play albo wczesną kopię z repozytorium lub z GitHuba, najpierw ją odinstaluj. Aktualizacje przychodzą z repozytorium F-Droid Peeka. Żadna z tych dwóch dróg nie czyni Cię testerem w Google Play.
+Tę wersję podpisuje Peek, a nie Google, więc nie może zaktualizować kopii z Google Play ani odwrotnie: jeśli masz Peeka z Google Play albo wczesną kopię z repozytorium lub z GitHuba, najpierw ją odinstaluj. Aktualizacje przychodzą z repozytorium F-Droid Peeka. Żadna z tych dwóch dróg nie czyni cię testerem w Google Play.
 
 ### Czym różni się wersja z Google Play od wersji z F-Droid?
 
@@ -74,7 +74,7 @@ Dodaj „Przesyłki”, jedyny widżet Peeka, z selektora widżetów, gdzie ma o
 
 Google uprzedza: „niektóre z opisanych tu czynności można wykonać tylko na urządzeniach z Androidem 14 lub nowszym”.
 
-Widżet „Przesyłki” ma na start rozmiar cztery na dwie komórki i można go zmniejszyć do dwóch na dwie. Pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej doby, w kolejności z Peeka. Każda przesyłka otwiera swoją stronę; reszta widżetu otwiera Twoją listę. Widżet odrysowuje się co najmniej co 20 minut, a dni zmieniają się w nim o północy, nawet przy zamkniętej aplikacji.
+Widżet „Przesyłki” ma na start rozmiar cztery na dwie komórki i można go zmniejszyć do dwóch na dwie. Pokazuje przesyłki w drodze, a potem te doręczone w ciągu ostatniej doby, w kolejności z Peeka. Każda przesyłka otwiera swoją stronę; reszta widżetu otwiera twoją listę. Widżet odrysowuje się co najmniej co 20 minut, a dni zmieniają się w nim o północy, nawet przy zamkniętej aplikacji.
 
 | Widżet pokazuje | Co to znaczy |
 | --- | --- |
@@ -84,7 +84,7 @@ Widżet „Przesyłki” działa tylko na ekranie głównym: nie ma widżetu na 
 
 ### Czy Peek ma skróty na ikonie aplikacji?
 
-Tak. Naciśnij i przytrzymaj ikonę Peeka, a zobaczysz skrót „Dodaj przesyłkę”, który otwiera ekran dodawania, oraz skrót nazwany tak jak Twoja najbliższa przesyłka w drodze, który ją otwiera. Żeby przypiąć skrót do ekranu głównego, naciśnij go, przytrzymaj i przeciągnij na miejsce. Na Androidzie Peek nie ma fraz głosowych: te skróty zastępują czynności Siri z iPhone’a.
+Tak. Naciśnij i przytrzymaj ikonę Peeka, a zobaczysz skrót „Dodaj przesyłkę”, który otwiera ekran dodawania, oraz skrót nazwany tak jak twoja najbliższa przesyłka w drodze, który ją otwiera. Żeby przypiąć skrót do ekranu głównego, naciśnij go, przytrzymaj i przeciągnij na miejsce. Na Androidzie Peek nie ma fraz głosowych: te skróty zastępują czynności Siri z iPhone’a.
 
 ## Jak udostępnić link do śledzenia Peekowi na Androidzie?
 

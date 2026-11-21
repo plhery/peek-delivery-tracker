@@ -41,7 +41,7 @@ Fino a dieci passaggi del tracking, a seconda della tua scelta:
 
 Un account che non ha mai scelto riceve ogni passaggio. Sei passaggi hanno un titolo proprio: «Etichetta creata», «In viaggio», «Pronto per il ritiro», «È arrivato», «Consegna mancata» e «Sulla via del ritorno»; gli altri usano il nome del passaggio, come «In consegna».
 
-Cosa significa ogni passaggio: [gli stati del tracking spiegati](guide:tracking-statuses). Dopo «Consegna mancata», vedi [la mancata consegna](guide:missed-delivery); dopo «Pronto per il ritiro», [i pacchi nel locker](guide:parcel-lockers) o [i pacchi non ritirati](guide:uncollected-parcel). Inoltrare a Peek le e-mail di spedizione ne aggiunge un altro, «Aggiunto dalla tua email»: vedi la guida [Tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email).
+Cosa significa ogni passaggio: [gli stati del tracking spiegati](guide:tracking-statuses). Dopo «Consegna mancata», vedi [la mancata consegna](guide:missed-delivery); dopo «Pronto per il ritiro», [i pacchi nel locker](guide:parcel-lockers) o [i pacchi non ritirati](guide:uncollected-parcel). Inoltrare a Peek le e-mail di spedizione ne aggiunge un altro, «Aggiunto dalla tua e-mail»: vedi la guida [Tracciare i pacchi dalle tue e-mail](guide:add-parcels-by-email).
 
 ## Posso ricevere notifiche senza un account?
 

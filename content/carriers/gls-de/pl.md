@@ -27,7 +27,7 @@ Numer odrzucony? Jeżeli w wiadomości ze sklepu widnieje inna firma kurierska, 
 
 Międzynarodowa strona grupy GLS wyświetla komunikaty po angielsku w typowej kolejności drogi przesyłki:
 
-| Komunikat GLS | Co to oznacza dla Ciebie |
+| Komunikat GLS | Co to oznacza dla ciebie |
 | --- | --- |
 | `The parcel data was entered into the GLS IT system…`, `The parcel has not been handed over to GLS.` | GLS otrzymał dane elektroniczne od nadawcy, ale nie ma jeszcze fizycznie paczki. |
 | `The parcel was handed over to GLS.` | GLS przyjął paczkę do transportu. |
@@ -35,9 +35,9 @@ Międzynarodowa strona grupy GLS wyświetla komunikaty po angielsku w typowej ko
 | `The parcel was released by customs.` | Urząd celny zwolnił przesyłkę do dalszej drogi; Peek pokazuje „W transporcie”. |
 | `The parcel is in delivery.`, `The parcel is expected to be delivered during the day.` | Paczka jedzie dziś w samochodzie kuriera GLS. |
 | `The parcel is ready for collection at the ParcelShop.` | Gotowa do odbioru w punkcie ParcelShop albo w automacie Parcelstation. |
-| `The parcel has been delivered.` | Doręczona Tobie albo osobie, która przyjęła ją w Twoim imieniu, np. sąsiadowi. |
+| `The parcel has been delivered.` | Doręczona tobie albo osobie, która przyjęła ją w twoim imieniu, np. sąsiadowi. |
 
-Między tymi etapami pojawiają się skany wejścia i wyjścia z sortowni oraz filii GLS. Jeśli kurier nikogo nie zastał lub nie mógł doręczyć przesyłki, Peek pokazuje „Próba doręczenia”. W Niemczech GLS podejmuje drugą próbę albo przekazuje paczkę do pobliskiego punktu ParcelShop, filii lub automatu Parcelstation, podając adres na awizie lub w e-mailu. Gdy paczka nie zostanie odebrana w terminie albo doręczenie okaże się niemożliwe, wraca do nadawcy, a Peek wyświetla „Zwrócona nadawcy”. Uwaga: GLS oznacza przyjęcie paczki w punkcie ParcelShop jako przesyłkę doręczoną, choć nadal czeka tam na Twój odbiór. Dopóki ostatnim wpisem pozostaje `The parcel has not been handed over to GLS.`, sprzedawca nie przekazał paczki kurierowi — skontaktuj się ze sklepem.
+Między tymi etapami pojawiają się skany wejścia i wyjścia z sortowni oraz filii GLS. Jeśli kurier nikogo nie zastał lub nie mógł doręczyć przesyłki, Peek pokazuje „Próba doręczenia”. W Niemczech GLS podejmuje drugą próbę albo przekazuje paczkę do pobliskiego punktu ParcelShop, filii lub automatu Parcelstation, podając adres na awizie lub w e-mailu. Gdy paczka nie zostanie odebrana w terminie albo doręczenie okaże się niemożliwe, wraca do nadawcy, a Peek wyświetla „Zwrócona nadawcy”. Uwaga: GLS oznacza przyjęcie paczki w punkcie ParcelShop jako przesyłkę doręczoną, choć nadal czeka tam na twój odbiór. Dopóki ostatnim wpisem pozostaje `The parcel has not been handed over to GLS.`, sprzedawca nie przekazał paczki kurierowi — skontaktuj się ze sklepem.
 
 ## Doręczenia GLS w Niemczech, punkty ParcelShop i automaty
 
@@ -45,7 +45,7 @@ Między tymi etapami pojawiają się skany wejścia i wyjścia z sortowni oraz f
 
 **Skrzynka pocztowa.** W Niemczech mała paczka do 2 kg, o wymiarach maksymalnie DIN C4 i grubości do 5 cm może zostać włożona bezpośrednio do skrzynki na listy.
 
-**Gdy nikogo nie ma pod adresem.** W Niemczech kurier może wydać paczkę osobie obecnej w mieszkaniu lub firmie albo sąsiadowi z tego samego lub najbliższego budynku, o ile Ty lub nadawca tego nie wykluczyliście; na awizie lub w e-mailu widnieje nazwisko sąsiada. W przeciwnym razie GLS kieruje przesyłkę do najbliższego punktu ParcelShop, filii lub automatu Parcelstation. GLS wykonuje najwyżej dwie próby doręczenia.
+**Gdy nikogo nie ma pod adresem.** W Niemczech kurier może wydać paczkę osobie obecnej w mieszkaniu lub firmie albo sąsiadowi z tego samego lub najbliższego budynku, o ile ty lub nadawca tego nie wykluczyliście; na awizie lub w e-mailu widnieje nazwisko sąsiada. W przeciwnym razie GLS kieruje przesyłkę do najbliższego punktu ParcelShop, filii lub automatu Parcelstation. GLS wykonuje najwyżej dwie próby doręczenia.
 
 **Zmiana opcji doręczenia.** Gdy GLS udostępnia w Niemczech opcje przekierowania, możesz wybrać inny dzień, inny adres, punkt ParcelShop lub odbiór w filii; informacja konsumencka GLS Germany (styczeń 2018 r.) potwierdza, że opcje te są bezpłatne dla odbiorcy. Przy przesyłkach wysyłanych z zagranicy z usługą *FlexDeliveryService* GLS powiadamia e-mailem, podaje przewidywaną datę lub przedział czasowy, gdy jest dostępny, i pozwala zmienić sposób wydania; jeśli już przy zakupie w zagranicznym sklepie wybierzesz punkt odbioru (*ShopDeliveryService*), paczka trafia od razu do ParcelShopu bez próby doręczenia pod drzwi. Upoważnienie do pozostawienia przesyłki w Niemczech pozwala też zostawić ją we wskazanym miejscu z potwierdzeniem na karcie lub e-mailem.
 
@@ -79,7 +79,7 @@ W sprawie zamówienia ze sklepu internetowego pierwszym kontaktem pozostaje sprz
 
 Ponieważ GLS Germany wymaga kodu pocztowego odbiorcy do pobrania szczegółowej historii, pole „Kod pocztowy odbiorcy” jest obowiązkowe, a gdy wpisany kod nie zgadza się z przesyłką („GLS Germany nie znajduje tej przesyłki z kodem pocztowym …”), poprawisz go przyciskiem „Zmień kod pocztowy”. Działa format kodu pocztowego z dowolnego kraju; trafia on do GLS oraz, w razie potrzeby, do serwisów śledzenia przesyłek.
 
-Zobaczysz wtedy aktualny status, komunikaty po angielsku w brzmieniu GLS, miejscowość i kraj każdego skanu na mapie, przewidywany dzień doręczenia, wagę, godzinę wydania oraz — przy odbiorze w ParcelShopie — jego nazwę i adres pod statusem „Do odbioru”. Twoje imię i nazwisko, adres, dane kontaktowe, podpis i numer referencyjny nadawcy są pomijane. Godziny są odczytywane według czasu niemieckiego i wyświetlane w strefie czasowej Twojego urządzenia; na `peektracker.com` i w aplikacji na iPhonie przypomina o tym dopisek pod historią („Godziny w twojej strefie czasowej: …”). Peek sprawdza GLS mniej więcej raz na godzinę, również w dniu doręczenia (co 4 godziny po nieudanym zapytaniu), a ręczne odświeżenie nie przyspiesza kolejnego sprawdzenia. Tylko przesyłki przekazane przez GLS do [Swiss Post](carrier:swiss-post) przełączają się automatycznie na drugiego przewoźnika; gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Powiadomienia do wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
+Zobaczysz wtedy aktualny status, komunikaty po angielsku w brzmieniu GLS, miejscowość i kraj każdego skanu na mapie, przewidywany dzień doręczenia, wagę, godzinę wydania oraz — przy odbiorze w ParcelShopie — jego nazwę i adres pod statusem „Do odbioru”. Twoje imię i nazwisko, adres, dane kontaktowe, podpis i numer referencyjny nadawcy są pomijane. Godziny są odczytywane według czasu niemieckiego i wyświetlane w strefie czasowej twojego urządzenia; na `peektracker.com` i w aplikacji na iPhonie przypomina o tym dopisek pod historią („Godziny w twojej strefie czasowej: …”). Peek sprawdza GLS mniej więcej raz na godzinę, również w dniu doręczenia (co 4 godziny po nieudanym zapytaniu), a ręczne odświeżenie nie przyspiesza kolejnego sprawdzenia. Tylko przesyłki przekazane przez GLS do [Swiss Post](carrier:swiss-post) przełączają się automatycznie na drugiego przewoźnika; gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza. Powiadomienia do wyboru: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”.
 
 ## Najczęstsze pytania o śledzenie GLS Niemcy
 

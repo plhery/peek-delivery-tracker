@@ -1,13 +1,13 @@
 ---
 title: Śledź swoje przesyłki w ChatGPT, Claude lub Gemini
-description: Połącz Peek z ChatGPT, Claude lub Gemini i pytaj, gdzie są Twoje przesyłki, albo poproś o dodanie numerów śledzenia z e-maili. Kto może i jak to ustawić.
+description: Połącz Peek z ChatGPT, Claude lub Gemini i pytaj, gdzie są twoje przesyłki, albo poproś o dodanie numerów śledzenia z e-maili. Kto może i jak to ustawić.
 slug: sledzenie-przesylek-chatgpt-claude-gemini
 picture: Pip, paczka z buzią, wychyla się z okna czatu na laptopie, a na pytanie o przesyłki z tego tygodnia przychodzi tam krótka lista.
 published: 2026-11-19
 updated: 2026-11-21
 ---
 
-Swoje przesyłki możesz śledzić w Claude, ChatGPT lub Gemini, jeśli połączysz je z [Peek](/), darmowym trackerem przesyłek: asystent może Ci wtedy powiedzieć, gdzie są Twoje przesyłki, i dodać numery śledzenia, które mu podasz. Potrzebujesz konta Peek, a o tym, kto może z tego korzystać, decyduje każdy asystent: Claude w każdym planie, ChatGPT w planie Plus, Pro, Business, Enterprise lub Edu, w przypadku Gemini dorośli w USA z osobistym kontem Google, a w przypadku OpenClaw ten, kto go uruchamia. Peek oznacza tę funkcję jako „Beta”, więc może się ona jeszcze zmienić.
+Swoje przesyłki możesz śledzić w Claude, ChatGPT lub Gemini, jeśli połączysz je z [Peek](/), darmowym trackerem przesyłek: asystent może ci wtedy powiedzieć, gdzie są twoje przesyłki, i dodać numery śledzenia, które mu podasz. Potrzebujesz konta Peek, a o tym, kto może z tego korzystać, decyduje każdy asystent: Claude w każdym planie, ChatGPT w planie Plus, Pro, Business, Enterprise lub Edu, w przypadku Gemini dorośli w USA z osobistym kontem Google, a w przypadku OpenClaw ten, kto go uruchamia. Peek oznacza tę funkcję jako „Beta”, więc może się ona jeszcze zmienić.
 
 ## Czy ChatGPT, Claude albo Gemini mogą śledzić moje przesyłki?
 
@@ -33,7 +33,7 @@ Peek dodajesz w asystencie, podając adres Peek dla asystentów: `https://peektr
 
 :::steps
 - Otwórz „Peek Parcel Tracker” | W [katalogu konektorów Claude](https://claude.ai/directory/peek-parcel-tracker) albo w Claude otwórz „Customize › Connectors”, wybierz „+” i wyszukaj Peek.
-- Wybierz „Connect” | Claude poprosi Cię wtedy o zalogowanie się do Peek.
+- Wybierz „Connect” | Claude poprosi cię wtedy o zalogowanie się do Peek.
 - Zaloguj się do Peek | Zdecyduj, co Claude może robić, i wybierz „Zezwól”.
 - Włącz Peek w czacie | Wybierz „+” w lewym dolnym rogu, potem „Connectors”, i włącz Peek.
 :::
@@ -63,7 +63,7 @@ Strona pomocy Google podaje, że aby połączyć własną aplikację, taką jak 
 
 ### OpenClaw
 
-OpenClaw to asystent, którego uruchamiasz na własnym komputerze lub serwerze. Peek dodajesz z terminala na tym urządzeniu, a jego agenci korzystają potem z Twojego konta Peek w każdym czacie, niezależnie od tego, z kim rozmawiają. Polecenia `openclaw mcp set` i `openclaw mcp login` nie działają, gdy działa jego Gateway, więc najpierw zatrzymujesz Gateway:
+OpenClaw to asystent, którego uruchamiasz na własnym komputerze lub serwerze. Peek dodajesz z terminala na tym urządzeniu, a jego agenci korzystają potem z twojego konta Peek w każdym czacie, niezależnie od tego, z kim rozmawiają. Polecenia `openclaw mcp set` i `openclaw mcp login` nie działają, gdy działa jego Gateway, więc najpierw zatrzymujesz Gateway:
 
 :::steps
 - Zatrzymaj Gateway | Uruchom `openclaw gateway stop`.
@@ -78,27 +78,27 @@ Jeśli przeglądarka jest na innym urządzeniu, strona, którą otworzy po zalog
 
 Pytaj własnymi słowami, na przykład:
 
-- „Przejrzyj moje e-maile i dodaj numery śledzenia, które znajdziesz”. To działa, jeśli asystent sam może czytać Twoją pocztę, na przykład przez swój konektor Gmail: Peek nigdy nie czyta Twojej poczty.
+- „Przejrzyj moje e-maile i dodaj numery śledzenia, które znajdziesz”. To działa, jeśli asystent sam może czytać twoją pocztę, na przykład przez swój konektor Gmail: Peek nigdy nie czyta twojej poczty.
 - „Co dotrze w tym tygodniu?”
 - „Gdzie jest moja przesyłka z IKEA?”
 - „Zarchiwizuj wszystko, co zostało doręczone”.
 - „Jaka była moja ostatnia doręczona przesyłka?”
 
-Potrafi też wskazać przesyłki, które wymagają Twojej uwagi, na przykład taką, która czeka w punkcie odbioru, oraz te spodziewane dzisiaj, według Twojej strefy czasowej.
+Potrafi też wskazać przesyłki, które wymagają twojej uwagi, na przykład taką, która czeka w punkcie odbioru, oraz te spodziewane dzisiaj, według twojej strefy czasowej.
 
 Żeby dodać przesyłki, podaj mu numer śledzenia albo część e-maila o wysyłce: Peek śledzi każdy znaleziony numer, do 10 naraz, i zapisuje tylko numery oraz podaną nazwę, nigdy tekst. Numer zamówienia to nie numer śledzenia: [zobacz, jak je odróżnić](guide:find-tracking-number).
 
 ### Zamówienia z Amazona
 
-E-maile od Amazona zwykle nie zawierają numeru śledzenia. Asystent potrzebuje więc przeglądarki, w której masz otwartą sesję na Amazonie, na komputerze: Claude in Chrome albo rozszerzenia przeglądarki ChatGPT. Z aplikacji w telefonie albo przez przeglądarkę, którą uruchamia na własnych serwerach, nie dostanie się do Twoich zamówień i ma polecenie, żeby to powiedzieć, zamiast próbować. Jeśli asystent może przeglądać stronę Amazona, na której masz otwartą sesję, dostaje polecenie, żeby otworzyć „Twoje zamówienia”, potem „Track package”, i przekazać przewoźnika oraz „Tracking ID”, nigdy numer zamówienia. Może tam tylko czytać: nie wolno mu niczego kupować, anulować, zwracać ani zmieniać, ani logować się za Ciebie. W przeciwnym razie znajdź numer samodzielnie: [nasz poradnik o Amazonie](guide:amazon-orders) pokazuje, gdzie. Przesyłkę, którą Amazon doręcza sam i bez identyfikatora śledzenia, śledzisz tylko na swoim koncie Amazon.
+E-maile od Amazona zwykle nie zawierają numeru śledzenia. Asystent potrzebuje więc przeglądarki, w której masz otwartą sesję na Amazonie, na komputerze: Claude in Chrome albo rozszerzenia przeglądarki ChatGPT. Z aplikacji w telefonie albo przez przeglądarkę, którą uruchamia na własnych serwerach, nie dostanie się do twoich zamówień i ma polecenie, żeby to powiedzieć, zamiast próbować. Jeśli asystent może przeglądać stronę Amazona, na której masz otwartą sesję, dostaje polecenie, żeby otworzyć „Twoje zamówienia”, potem „Track package”, i przekazać przewoźnika oraz „Tracking ID”, nigdy numer zamówienia. Może tam tylko czytać: nie wolno mu niczego kupować, anulować, zwracać ani zmieniać, ani logować się za ciebie. W przeciwnym razie znajdź numer samodzielnie: [nasz poradnik o Amazonie](guide:amazon-orders) pokazuje, gdzie. Przesyłkę, którą Amazon doręcza sam i bez identyfikatora śledzenia, śledzisz tylko na swoim koncie Amazon.
 
 ## Czy asystent może usunąć lub zmienić moje przesyłki?
 
-Nigdy nie może usunąć przesyłki: to robisz Ty w Peek. Reszta zależy od Ciebie: gdy go łączysz, ekran Peek (na przykład „Połączyć Claude z Peek?”) pokazuje Twój adres e-mail i pole wyboru przy każdym uprawnieniu, o które prosi asystent:
+Nigdy nie może usunąć przesyłki: to robisz ty w Peek. Reszta zależy od ciebie: gdy go łączysz, ekran Peek (na przykład „Połączyć Claude z Peek?”) pokazuje twój adres e-mail i pole wyboru przy każdym uprawnieniu, o które prosi asystent:
 
 | Uprawnienie na ekranie Peek | Co asystent może wtedy robić |
 | --- | --- |
-| „Widzieć twoje przesyłki: gdzie jest każda z nich, kiedy ma dotrzeć i jej historię” | Wyświetlać listę Twoich przesyłek i otwierać pojedynczą przesyłkę z jej skanami |
+| „Widzieć twoje przesyłki: gdzie jest każda z nich, kiedy ma dotrzeć i jej historię” | Wyświetlać listę twoich przesyłek i otwierać pojedynczą przesyłkę z jej skanami |
 | „Dodawać przesyłki na podstawie numerów śledzenia, które mu podasz” | Dodawać przesyłki |
 | „Zmieniać nazwę, przewoźnika lub powiadomienia twoich przesyłek, archiwizować je i przywracać z archiwum” | Zmieniać nazwę lub przewoźnika przesyłki, wyłączać lub włączać jej powiadomienia albo e-maile od Peek, archiwizować ją i przywracać z archiwum |
 
@@ -106,12 +106,12 @@ Odznacz to, czego nie chcesz; przycisk „Zezwól” pozostaje wyszarzony, dopó
 
 ## Co widzi asystent i jak go odłączyć?
 
-Dostaje to, na co mu pozwalasz: nazwy, nadawców, przewoźników, numery śledzenia, statusy, przewidywane dni, punkty odbioru i skany Twoich przesyłek. Nigdy imienia i nazwiska odbiorcy ani podanego przez Ciebie kodu pocztowego czy cyfr telefonu: skan, który wymienia odbiorcę, osobę podpisującą odbiór, kod albo drzwi, trafia do niego tylko jako etap, na przykład „Dostarczona”. Miejsce skanu zostaje takie, jak zapisał je przewoźnik, więc może zawierać miejscowość doręczenia i jej kod pocztowy. Potem obowiązują zasady prywatności dostawcy asystenta. [Informacja o prywatności](https://peektracker.com/privacy.html) Peek opisuje, co Peek przechowuje o każdym połączonym asystencie.
+Dostaje to, na co mu pozwalasz: nazwy, nadawców, przewoźników, numery śledzenia, statusy, przewidywane dni, punkty odbioru i skany twoich przesyłek. Nigdy imienia i nazwiska odbiorcy ani podanego przez ciebie kodu pocztowego czy cyfr telefonu: skan, który wymienia odbiorcę, osobę podpisującą odbiór, kod albo drzwi, trafia do niego tylko jako etap, na przykład „Dostarczona”. Miejsce skanu zostaje takie, jak zapisał je przewoźnik, więc może zawierać miejscowość doręczenia i jej kod pocztowy. Potem obowiązują zasady prywatności dostawcy asystenta. [Informacja o prywatności](https://peektracker.com/privacy.html) Peek opisuje, co Peek przechowuje o każdym połączonym asystencie.
 
 Aby odłączyć asystenta, na stronie Peek:
 
 :::steps
-- Otwórz „Ustawienia” | Przez okrągły przycisk na górze z pierwszą literą Twojego adresu e-mail.
+- Otwórz „Ustawienia” | Przez okrągły przycisk na górze z pierwszą literą twojego adresu e-mail.
 - Wybierz „Asystenci” | W sekcji „Dostawy”. Przy każdym asystencie widać, co może robić i kiedy ostatnio go używano.
 - Wybierz „Odłącz” | Obok asystenta.
 :::
@@ -123,7 +123,7 @@ Możesz też usunąć Peek w ustawieniach samego asystenta. Połączenie nieuży
 Zwykle chodzi o plan, kraj albo konto:
 
 - **Twój plan lub kraj.** Sprawdź tabelę powyżej, a w planie zespołowym lub w obszarze roboczym zapytaj jego właściciela albo administratora.
-- **Nie masz konta Peek.** Zaloguj się, gdy asystent o to poprosi, sześciocyfrowym kodem, który Peek wyśle Ci e-mailem, albo przez Google lub Apple, jeśli ekran to proponuje. Pierwsze logowanie tworzy konto.
+- **Nie masz konta Peek.** Zaloguj się, gdy asystent o to poprosi, sześciocyfrowym kodem, który Peek wyśle ci e-mailem, albo przez Google lub Apple, jeśli ekran to proponuje. Pierwsze logowanie tworzy konto.
 - **Peek znowu prosi o zalogowanie.** Żeby zezwolić asystentowi na dostęp, potrzebne jest niedawne logowanie, nawet przy otwartej sesji: zaloguj się, a potem wybierz „Zezwól”.
 - **„Ten link nie może połączyć asystenta”.** Zacznij łączenie od nowa w swoim asystencie.
 

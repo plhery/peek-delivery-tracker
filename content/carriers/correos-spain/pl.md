@@ -25,7 +25,7 @@ Kod PIN do automatu `Citypaq` służy wyłącznie do otwarcia skrytki w Hiszpani
 
 Wyszukiwarka Correos działa po hiszpańsku i po angielsku. Najczęstsze komunikaty w kolejności, w jakiej zwykle pojawiają się w historii:
 
-| Status Correos | Co to oznacza dla Ciebie |
+| Status Correos | Co to oznacza dla ciebie |
 | --- | --- |
 | `Pre-registered` / `Pre-admisión` | Nadawca zarejestrował przesyłkę elektronicznie, ale jeszcze nie przekazał jej Correos. |
 | `Accepted` / `Admitido.` | Correos przyjął paczkę w punkcie nadania. |
@@ -39,7 +39,7 @@ Wyszukiwarka Correos działa po hiszpańsku i po angielsku. Najczęstsze komunik
 | `Delivery attempt. Absent.` / `Realizado intento de entrega` | Nieudana próba doręczenia, np. z powodu nieobecności adresata. |
 | `At recipient’s disposal` / `A disposición del destinatario` | Gotowa do odbioru w placówce pocztowej lub w wybranym automacie `Citypaq`. |
 | `Delivered` / `Entregado` | Doręczona. |
-| `Entregado al remitente` | Zwrócona nadawcy – mimo słowa „entregado” paczka wróciła do wysyłającego, a nie do Ciebie. |
+| `Entregado al remitente` | Zwrócona nadawcy – mimo słowa „entregado” paczka wróciła do wysyłającego, a nie do ciebie. |
 
 Uważaj na dwa komunikaty: angielskie `In delivery` obejmuje zarówno hiszpańskie `En reparto` (w drodze z listonoszem), jak i `En proceso de entrega` (oczekiwanie na następną próbę po nieudanym doręczeniu). Z kolei `Finalizado plazo retirada` (upłynął termin odbioru) oraz `Recipient unknown` (adresat nieznany pod wskazanym adresem) oznaczają zwrot do Hiszpanii. Ogólny opis etapów znajdziesz w poradniku o [statusach śledzenia](guide:tracking-statuses).
 
@@ -53,7 +53,7 @@ Uważaj na dwa komunikaty: angielskie `In delivery` obejmuje zarówno hiszpańsk
 
 ## Gdy odbierasz paczkę w Hiszpanii: placówka, Citypaq i odprawa celna
 
-Po SMS-ie zapowiadającym doręczenie Correos dostarcza przesyłkę krajową w ciągu 24–72 godzin zależnie od usługi. Jeśli Cię nie zastanie, a wariant obejmuje dwie próby, kolejny SMS zapowiada ponowne doręczenie w ciągu 24 godzin; potem przychodzi SMS ze wskazaniem urzędu pocztowego (`oficina`), w którym paczkę odbierzesz od następnego dnia roboczego. Standardowo czeka tam 15 dni od dnia po SMS-ie (inny termin może widnieć na papierowym `aviso de llegada`). Zabierz oryginał dokumentu tożsamości ze zdjęciem; osoba odbierająca w Twoim imieniu musi mieć Twoje podpisane upoważnienie, kopię Twojego dokumentu i własny oryginał dokumentu (chyba że przesyłka jest zastrzeżona wyłącznie do rąk adresata).
+Po SMS-ie zapowiadającym doręczenie Correos dostarcza przesyłkę krajową w ciągu 24–72 godzin zależnie od usługi. Jeśli cię nie zastanie, a wariant obejmuje dwie próby, kolejny SMS zapowiada ponowne doręczenie w ciągu 24 godzin; potem przychodzi SMS ze wskazaniem urzędu pocztowego (`oficina`), w którym paczkę odbierzesz od następnego dnia roboczego. Standardowo czeka tam 15 dni od dnia po SMS-ie (inny termin może widnieć na papierowym `aviso de llegada`). Zabierz oryginał dokumentu tożsamości ze zdjęciem; osoba odbierająca w twoim imieniu musi mieć twoje podpisane upoważnienie, kopię twojego dokumentu i własny oryginał dokumentu (chyba że przesyłka jest zastrzeżona wyłącznie do rąk adresata).
 
 W automacie `Citypaq` (w supermarketach, na stacjach paliw i w centrach handlowych) przesyłka czeka 5 dni kalendarzowych, a skrytkę otwierasz o dowolnej porze jednorazowym kodem PIN z SMS-a, e-maila lub aplikacji `App de Correos` (kod można ponowić na stronie `Citypaq`). Usługa `Correos Modify` (przez link z SMS-a lub e-maila albo w aplikacji) pozwala zmienić adres, urząd lub `Citypaq` w obrębie tej samej prowincji, o ile zezwala na to nadawca i paczka nie ma jeszcze statusu `En reparto`.
 
@@ -79,7 +79,7 @@ Według stron informacyjnych Correos:
 
 [Peek](/) od razu rozpoznaje Correos po 23-znakowych kodach paczek, 16-znakowych kodach przesyłek, numerach `PR` oraz numerach pocztowych kończących się na `ES`. Gdy litera kontrolna na końcu się nie zgadza, Peek nie wskazuje przewoźnika: sprawdź literówki albo wybierz Correos ręcznie przez „Zmień przewoźnika”. Jeśli 16-znakowy kod przesyłki obejmuje jedną paczkę, Peek śledzi ją automatycznie; przy kilku paczkach wklej osobno 23-znakowy kod każdej z nich. Działają też linki z `correos.es` zawierające `tracking-number=` (oraz starsze linki z `numero=`, jeśli niosą poprawny numer Correos), bez podawania kodu pocztowego.
 
-Gdy korzystasz z Peek po polsku, aplikacja pobiera angielskie opisy zdarzeń Correos (po hiszpańsku, portugalsku lub francusku pokazuje odpowiednie wersje językowe Correos). Wyświetla do 20 najnowszych zdarzeń (bez miejscowości przy poszczególnych skanach), wagę i wymiary, godzinę doręczenia oraz – dopóki paczka czeka na odbiór – nazwę i adres urzędu pocztowego. Pomija Twój adres domowy i podpis, imię i nazwisko odbiorcy pokazuje wyłącznie Tobie (ukrywając je w udostępnianych linkach), a przewidywanej daty dostawy Correos nie udostępnia. Godziny odczytywane są według czasu madryckiego, z wyjątkiem jednostek doręczeniowych na Wyspach Kanaryjskich (czas kanaryjski) oraz skanów poczty nadania przy przesyłkach przychodzących z zagranicy do Hiszpanii (czas kraju nadania), i przeliczane na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”).
+Gdy korzystasz z Peek po polsku, aplikacja pobiera angielskie opisy zdarzeń Correos (po hiszpańsku, portugalsku lub francusku pokazuje odpowiednie wersje językowe Correos). Wyświetla do 20 najnowszych zdarzeń (bez miejscowości przy poszczególnych skanach), wagę i wymiary, godzinę doręczenia oraz – dopóki paczka czeka na odbiór – nazwę i adres urzędu pocztowego. Pomija twój adres domowy i podpis, imię i nazwisko odbiorcy pokazuje wyłącznie tobie (ukrywając je w udostępnianych linkach), a przewidywanej daty dostawy Correos nie udostępnia. Godziny odczytywane są według czasu madryckiego, z wyjątkiem jednostek doręczeniowych na Wyspach Kanaryjskich (czas kanaryjski) oraz skanów poczty nadania przy przesyłkach przychodzących z zagranicy do Hiszpanii (czas kraju nadania), i przeliczane na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”).
 
 Międzynarodowy numer z końcówką `ES` sprawdzany z Polski może automatycznie przełączyć się na [Pocztę Polską](carrier:poczta-polska), gdy ta pokaże nowsze zdarzenia; 23-znakowe kody paczek zostają w Correos, natomiast zagraniczne numery pocztowe jadące do Hiszpanii przełączają się na Correos. Gdy masz przesyłkę otwartą na ekranie lub w dniu doręczenia przy włączonych powiadomieniach, Peek odpytuje śledzenie do co 10 minut, a w doręczeniu od 6:00 czasu lokalnego tego dnia do co 2 minut, dopóki odpowiada własny tracker Correos lub Poczty Polskiej (przez serwisy śledzenia tego dnia do co 15 minut, poza tym co godzinę lub co 3 godziny po dobie bez nowości); w pozostałych sytuacjach oraz po dwóch dniach bez nowości (12 godzinach w stanie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę, z powiadomieniami „Wszystkie aktualizacje”, „Tylko ważne” lub „Tylko w dniu dostawy”.
 

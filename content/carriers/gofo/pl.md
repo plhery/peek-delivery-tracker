@@ -31,7 +31,7 @@ W Stanach Zjednoczonych GOFO Express korzysta z czterech własnych serii numerac
 
 Komunikaty śledzenia GOFO Express w USA są publikowane po angielsku. Przesyłka przechodzi przez kolejne punkty mniej więcej w tej kolejności (nie każda paczka ma wszystkie wpisy pośrednie):
 
-| Komunikat GOFO | Co to oznacza dla Ciebie |
+| Komunikat GOFO | Co to oznacza dla ciebie |
 | --- | --- |
 | `Shipping Label Created` | Nadawca utworzył etykietę wysyłkową; GOFO nie odebrało jeszcze paczki. |
 | `Pick Up Start` | GOFO rozpoczęło zlecenie odbioru u nadawcy, ale nie ma jeszcze paczki fizycznie. |
@@ -45,7 +45,7 @@ Komunikaty śledzenia GOFO Express w USA są publikowane po angielsku. Przesyłk
 | `Departed GOFO Regional Hub` | Paczka opuściła regionalne centrum przeładunkowe. |
 | `Loaded on Vehicle` | Załadowana do pojazdu w drodze do kolejnego obiektu. |
 | `In Transit to Next Facility` | W transporcie do następnej stacji GOFO. |
-| `Arrived at GOFO Delivery Station` | Dotarła do lokalnej stacji doręczeń GOFO obsługującej Twój adres. |
+| `Arrived at GOFO Delivery Station` | Dotarła do lokalnej stacji doręczeń GOFO obsługującej twój adres. |
 | `Departed GOFO Delivery Station` | Wyruszyła ze stacji doręczeń. |
 | `Out for Delivery` | Kurier wyjechał dziś z paczką w trasę doręczeniową. |
 | `Delivered` | Doręczona. |
@@ -57,7 +57,7 @@ Komunikaty śledzenia GOFO Express w USA są publikowane po angielsku. Przesyłk
 
 Przy wpisie `Delivery Exception, …` Peek ustawia etap „Próba doręczenia” i pokazuje pełne angielskie zdanie z powodem. Gdy następnego dnia pojawi się `Package Returned to GOFO Facility`, przesyłka wraca na etap „W transporcie” w lokalnej stacji przed kolejną próbą doręczenia (a nie na „Zwrócona nadawcy”). Z kolei `Incorrect/Insufficient Address…` oraz `Label Cancelled` przełączają paczkę na „Zgłoszono problem”: w pierwszym przypadku podaj sprzedawcy numer mieszkania, kod domofonu lub godziny otwarcia, a w drugim poproś sklep o nowy ważny numer śledzenia. Do niektórych wpisów GOFO dokleja na końcu stopkę kontaktową po angielsku lub hiszpańsku — Peek ją usuwa. Zobacz też [co oznaczają statusy przesyłek](guide:tracking-statuses).
 
-**Strefy czasowe.** GOFO zapisuje `Shipping Label Created` zawsze w amerykańskim czasie pacyficznym (`America/Los_Angeles`), a każdy kolejny skan w strefie czasowej danej stacji w USA. Peek przelicza wszystkie godziny na strefę czasową Twojego urządzenia („Godziny w twojej strefie czasowej: …”): etykieta utworzona o `22:00` czasu pacyficznego wyświetli się w Polsce jako `07:00` następnego dnia (a przez kilkanaście dni w marcu i na przełomie października i listopada, gdy USA i Europa nie zmieniają czasu tego samego dnia, jako `06:00`; na wschodnim wybrzeżu USA jako `01:00`).
+**Strefy czasowe.** GOFO zapisuje `Shipping Label Created` zawsze w amerykańskim czasie pacyficznym (`America/Los_Angeles`), a każdy kolejny skan w strefie czasowej danej stacji w USA. Peek przelicza wszystkie godziny na strefę czasową twojego urządzenia („Godziny w twojej strefie czasowej: …”): etykieta utworzona o `22:00` czasu pacyficznego wyświetli się w Polsce jako `07:00` następnego dnia (a przez kilkanaście dni w marcu i na przełomie października i listopada, gdy USA i Europa nie zmieniają czasu tego samego dnia, jako `06:00`; na wschodnim wybrzeżu USA jako `01:00`).
 
 ## Paczka GOFO Express stoi w miejscu, spóźnia się lub zginęła
 
@@ -67,7 +67,7 @@ Przy wpisie `Delivery Exception, …` Peek ustawia etap „Próba doręczenia”
 
 **Oznaczona jako `Delivered`, ale jej nie ma.** Peek nie pobiera zdjęć z doręczenia z GOFO. Sprawdź najpierw ganek (*porch*), skrzynkę lub pokój pocztowy (*mailroom*), recepcję budynku oraz bezpośrednio stronę śledzenia GOFO pod kątem zdjęcia dowodu dostawy, a następnie zgłoś sprawę sprzedawcy. Kolejne kroki znajdziesz w [przesyłka doręczona, a jej nie ma](guide:delivered-not-received).
 
-**Zaginięcie, zwrot i prawa kupującego.** Umowę przewozu z GOFO zawiera zawsze sprzedawca — to u niego żądaj ponownej wysyłki albo zwrotu pieniędzy (zobacz [zaginiona paczka](guide:lost-parcel) i [przesyłka zwrócona do nadawcy](guide:returned-to-sender)). Dla dostaw w USA federalna zasada sprzedaży wysyłkowej FTC ([16 CFR § 435.2](https://www.law.cornell.edu/cfr/text/16/435.2)) zobowiązuje sprzedawcę do wysyłki w obiecanym terminie — a gdy go nie podano, w ciągu 30 dni — oraz do uzyskania Twojej zgody na opóźnienie albo niezwłocznego zwrotu pieniędzy. Jeśli za niedostarczony towar obciążono amerykańską kartę kredytową, ustawa Fair Credit Billing Act ([15 U.S.C. § 1666](https://www.law.cornell.edu/uscode/text/15/1666)) daje 60 dni od wysłania wyciągu na pisemne zakwestionowanie transakcji u wystawcy karty. Przy zamówieniu u przedsiębiorcy z siedzibą w UE obowiązuje również ustawowy domyślny termin dostawy 30 dni ([Your Europe](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm)). Natomiast niezamówiony towar przysłany pocztą na adres w USA (*brushing*) można zgodnie z prawem federalnym ([39 U.S.C. § 3009](https://www.law.cornell.edu/uscode/text/39/3009)) zatrzymać jako prezent bez obowiązku zapłaty ani odsyłania (przepis mówi o przesyłkach pocztowych, nie wymieniając wprost kurierów prywatnych takich jak GOFO).
+**Zaginięcie, zwrot i prawa kupującego.** Umowę przewozu z GOFO zawiera zawsze sprzedawca — to u niego żądaj ponownej wysyłki albo zwrotu pieniędzy (zobacz [zaginiona paczka](guide:lost-parcel) i [przesyłka zwrócona do nadawcy](guide:returned-to-sender)). Dla dostaw w USA federalna zasada sprzedaży wysyłkowej FTC ([16 CFR § 435.2](https://www.law.cornell.edu/cfr/text/16/435.2)) zobowiązuje sprzedawcę do wysyłki w obiecanym terminie — a gdy go nie podano, w ciągu 30 dni — oraz do uzyskania twojej zgody na opóźnienie albo niezwłocznego zwrotu pieniędzy. Jeśli za niedostarczony towar obciążono amerykańską kartę kredytową, ustawa Fair Credit Billing Act ([15 U.S.C. § 1666](https://www.law.cornell.edu/uscode/text/15/1666)) daje 60 dni od wysłania wyciągu na pisemne zakwestionowanie transakcji u wystawcy karty. Przy zamówieniu u przedsiębiorcy z siedzibą w UE obowiązuje również ustawowy domyślny termin dostawy 30 dni ([Your Europe](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm)). Natomiast niezamówiony towar przysłany pocztą na adres w USA (*brushing*) można zgodnie z prawem federalnym ([39 U.S.C. § 3009](https://www.law.cornell.edu/uscode/text/39/3009)) zatrzymać jako prezent bez obowiązku zapłaty ani odsyłania (przepis mówi o przesyłkach pocztowych, nie wymieniając wprost kurierów prywatnych takich jak GOFO).
 
 ## Kontakt z obsługą klienta GOFO Express
 
@@ -81,7 +81,7 @@ Dopóki GOFO nie zna jeszcze numeru `GF`, `CR` lub `MGP`, Peek sprawdza dalej w 
 
 Peek pokazuje aktualny etap po polsku („Zarejestrowana”, „Przyjęta przez przewoźnika”, „W transporcie”, „W doręczeniu”, „Dostarczona” — bez dopisków, które GOFO czasem umieszcza po przecinku przy doręczeniu), oryginalną angielską treść każdego skanu wraz z miastem i stanem USA (np. `Jamaica, NY`) na mapie, godzinę doręczenia oraz kraj docelowy. Szacowaną przez GOFO datę dostawy wyświetla do chwili przejścia paczki w stan „W doręczeniu”, „Dostarczona” lub „Zwrócona nadawcy”, natomiast zdjęcia z doręczenia, współrzędne GPS i wagę pomija.
 
-Peek sprawdza GOFO nawet co 30 minut, gdy masz przesyłkę otwartą albo w dniu dostawy z włączonymi powiadomieniami (także na etapie „W doręczeniu”), po nieudanym zapytaniu odczekuje 60 minut, a w pozostałych przypadkach — oraz po dwóch dniach bez nowych wpisów lub po 12 godzinach na „Zarejestrowana” bądź „Przyjęta przez przewoźnika” — przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w Twoim imieniu z GOFO ani ze sklepem.
+Peek sprawdza GOFO nawet co 30 minut, gdy masz przesyłkę otwartą albo w dniu dostawy z włączonymi powiadomieniami (także na etapie „W doręczeniu”), po nieudanym zapytaniu odczekuje 60 minut, a w pozostałych przypadkach — oraz po dwóch dniach bez nowych wpisów lub po 12 godzinach na „Zarejestrowana” bądź „Przyjęta przez przewoźnika” — przechodzi na sprawdzanie co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu z GOFO ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie GOFO Express
 

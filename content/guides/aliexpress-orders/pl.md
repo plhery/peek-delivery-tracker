@@ -11,7 +11,7 @@ Na AliExpress numer śledzenia jest przy zamówieniu: otwórz „Moje zamówieni
 
 ## Kto dostarcza paczki z AliExpress w Polsce?
 
-Metody wysyłki udostępniają sprzedawcy, a Ty wybierasz jedną przy zamówieniu. Niezależnie od niej, po najnowsze skany strony pomocy AliExpress odsyłają na stronę śledzenia [Cainiao](carrier:cainiao), global.cainiao.com. Ostatni odcinek robi przewoźnik w Polsce: pomoc AliExpress wymienia [Pocztę Polską](carrier:poczta-polska), PEKAES, DHL, [DPD](carrier:dpd-pl), FedEx i UPS, a strona śledzenia zamówienia pokazuje kontakt do tego, który ma Twoją paczkę. Cainiao podaje, że sam też doręcza paczki w Polsce.
+Metody wysyłki udostępniają sprzedawcy, a ty wybierasz jedną przy zamówieniu. Niezależnie od niej, po najnowsze skany strony pomocy AliExpress odsyłają na stronę śledzenia [Cainiao](carrier:cainiao), global.cainiao.com. Ostatni odcinek robi przewoźnik w Polsce: pomoc AliExpress wymienia [Pocztę Polską](carrier:poczta-polska), PEKAES, DHL, [DPD](carrier:dpd-pl), FedEx i UPS, a strona śledzenia zamówienia pokazuje kontakt do tego, który ma twoją paczkę. Cainiao podaje, że sam też doręcza paczki w Polsce.
 
 Kogo jeszcze możesz zobaczyć zależnie od linii wysyłki: tabela w poradniku [śledzenie paczki z Chin](guide:tracking-from-china). Przy tanich metodach, takich jak Cainiao Super Economy, AliExpress uprzedza, że śledzenie może przestać się aktualizować po przekazaniu paczki liniom lotniczym, po wyjeździe z kraju nadania albo po dotarciu do kraju docelowego: zwykle paczka przychodzi w ciągu 30 dni od tego statusu.
 
@@ -23,7 +23,7 @@ Kogo jeszcze możesz zobaczyć zależnie od linii wysyłki: tabela w poradniku [
 - home | Ty | Potwierdź odbiór dopiero, gdy masz paczkę w ręku
 :::
 
-O cle: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, bez względu na wartość paczki. Sklep albo przewoźnik może ją przerzucić na Ciebie. AliExpress przypomina, że nigdy nie pokrywa ceł ani podatków i że zwykle pobiera je przewoźnik przy doręczeniu. Kwoty i terminy: [paczka zatrzymana przez urząd celny](guide:customs).
+O cle: od 1 lipca 2026 r. paczka spoza UE do 150 euro płaci 3 euro cła za każdy rodzaj produktu, a według Komisji Europejskiej od 1 listopada 2026 r. dochodzi unijna opłata manipulacyjna: 2 euro za każdy rodzaj produktu, bez względu na wartość paczki. Sklep albo przewoźnik może ją przerzucić na ciebie. AliExpress przypomina, że nigdy nie pokrywa ceł ani podatków i że zwykle pobiera je przewoźnik przy doręczeniu. Kwoty i terminy: [paczka zatrzymana przez urząd celny](guide:customs).
 
 ## Gdzie jest numer śledzenia AliExpress?
 
@@ -105,7 +105,7 @@ Zwrot ma własny numer: śledzisz go przez „Śledź przesyłkę zwrotną” w 
 
 ## Czy mogę śledzić paczkę z AliExpress w Peek?
 
-Tak, numerem ze strony „Śledź zamówienie”. Wklej go do [Peek](/), który pokazuje te paczki jako „AliExpress / Cainiao”. Numery DOFR albo CNFR z 13 cyframi i HD, jak `DOFR1234567890123HD`, rozpoznaje od razu, tak samo AP albo CNG z 14 cyframi. Numery LP nie są pewne po samym kształcie: Peek pyta Cainiao i każdego innego przewoźnika, do którego pasuje kształt, i pokazuje tego, który zna numer. Jeśli zna go kilku, poprosi Cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz „AliExpress / Cainiao”.
+Tak, numerem ze strony „Śledź zamówienie”. Wklej go do [Peek](/), który pokazuje te paczki jako „AliExpress / Cainiao”. Numery DOFR albo CNFR z 13 cyframi i HD, jak `DOFR1234567890123HD`, rozpoznaje od razu, tak samo AP albo CNG z 14 cyframi. Numery LP nie są pewne po samym kształcie: Peek pyta Cainiao i każdego innego przewoźnika, do którego pasuje kształt, i pokazuje tego, który zna numer. Jeśli zna go kilku, poprosi cię o wybór; jeśli pokaże złego, naciśnij „Zmień” i wybierz „AliExpress / Cainiao”.
 
 - **Kształt numeru, który ma kilku przewoźników.** Z kształtami, które ma kilku przewoźników, jest tak samo: jeśli Peek pokaże złego przewoźnika, naciśnij „Zmień” i wybierz tego, którego podaje śledzenie AliExpress.
 - **Numery pocztowe.** Numer taki jak `RR000000005CN` Peek sprawdza w [China Post](carrier:china-post). Żeby śledzić go przez Cainiao, wklej link śledzenia z global.cainiao.com.

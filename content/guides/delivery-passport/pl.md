@@ -7,7 +7,7 @@ published: 2026-11-19
 updated: 2026-11-19
 ---
 
-Paszport dostaw to zakładka „Paszport” w [Peeku](/): liczy przesyłki dostarczone do Ciebie i za niektóre z nich daje Ci znaczek, na przykład za pierwszą dostawę albo za przesyłkę, która przekroczyła granicę. Pokazuje też Twój średni czas dostawy i najszybszą dostawę, a z kontem możesz porównywać paszporty ze znajomymi, przy czym Twoje przesyłki pozostają prywatne.
+Paszport dostaw to zakładka „Paszport” w [Peeku](/): liczy przesyłki dostarczone do ciebie i za niektóre z nich daje ci znaczek, na przykład za pierwszą dostawę albo za przesyłkę, która przekroczyła granicę. Pokazuje też twój średni czas dostawy i najszybszą dostawę, a z kontem możesz porównywać paszporty ze znajomymi, przy czym twoje przesyłki pozostają prywatne.
 
 Co dostajesz, zależy od tego, gdzie korzystasz z Peeka:
 
@@ -19,16 +19,16 @@ Co dostajesz, zależy od tego, gdzie korzystasz z Peeka:
 Na stronie bez konta dostarczona przesyłka, która przekroczyła granicę, pokazuje „Ponad granicami” i „Załóż paszport”, co prowadzi do logowania. Jak działa logowanie, wyjaśnia poradnik o [korzystaniu z Peeka bez konta](guide:account-or-guest).
 
 :::steps
-- Otwórz „Paszport” | To zakładka obok Twoich dostaw.
+- Otwórz „Paszport” | To zakładka obok twoich dostaw.
 - Stuknij to, co chcesz zrozumieć | Licznik, znaczek, czas albo „Kraj pierwszego skanu” wyjaśniają, jak są liczone.
 - Zobacz wszystkie znaczki | Siatka pokazuje znaczki, które masz, i trzy kolejne, które możesz zdobyć; „Wszystkie znaczki” pokazuje resztę.
 :::
 
 ## Czym jest paszport dostaw w Peeku?
 
-To strona, która podsumowuje Twoje dostawy: licznik z podpisem „Dostarczonych”, Twoje „Znaczki”, Twój „Średni czas dostawy” i „Najszybsza dostawa” oraz trzy główne kraje w sekcji „Kraj pierwszego skanu”.
+To strona, która podsumowuje twoje dostawy: licznik z podpisem „Dostarczonych”, twoje „Znaczki”, twój „Średni czas dostawy” i „Najszybsza dostawa” oraz trzy główne kraje w sekcji „Kraj pierwszego skanu”.
 
-„Liczy się każda dostarczona przesyłka, także z archiwum.” Paszport jest wyliczany z przesyłek na Twojej liście przy każdym otwarciu, więc przesyłka usunięta na dobre przestaje się liczyć. „Kraj pierwszego skanu” to kraj, w którym przewoźnik po raz pierwszy zeskanował każdą przesyłkę: „Może się różnić od kraju nadawcy.”
+„Liczy się każda dostarczona przesyłka, także z archiwum.” Paszport jest wyliczany z przesyłek na twojej liście przy każdym otwarciu, więc przesyłka usunięta na dobre przestaje się liczyć. „Kraj pierwszego skanu” to kraj, w którym przewoźnik po raz pierwszy zeskanował każdą przesyłkę: „Może się różnić od kraju nadawcy.”
 
 ## Jak zdobyć każdy znaczek?
 
@@ -53,7 +53,7 @@ Kilka zasad dba o uczciwe liczenie:
 
 - Jeśli przewoźnik powtórzy skan doręczenia, przesyłka i tak liczy się raz.
 - Znaczki za kraje wymagają skanu przypisanego do kraju: nie liczą się skany rejestracji, dwa skany w tej samej chwili, sam skrót nazwy stanu ani zwroty.
-- „Dzwonek nie milknie” i „W domu na święta” w Twoim własnym paszporcie liczą się według strefy czasowej Twojego urządzenia, ale w tym, co widzą znajomi, według czasu UTC, więc blisko północy oba wyniki mogą się różnić.
+- „Dzwonek nie milknie” i „W domu na święta” w twoim własnym paszporcie liczą się według strefy czasowej twojego urządzenia, ale w tym, co widzą znajomi, według czasu UTC, więc blisko północy oba wyniki mogą się różnić.
 
 Co liczy się jako dostarczone, wyjaśnia poradnik o [statusach śledzenia](guide:tracking-statuses).
 
@@ -74,20 +74,20 @@ Utwórz profil w Znajomych, a potem wyślij znajomemu link z zaproszeniem.
 - Wyślij go | Wybierz „Udostępnij zaproszenie”, jeśli urządzenie pozwala udostępniać, albo „Kopiuj link”.
 :::
 
-Kto otworzy link, zobaczy tylko Twój pseudonim; link nie daje dostępu do Twojego konta ani przesyłek. Znajomy bez konta zobaczy prośbę „Zaloguj się, aby przyjąć zaproszenie”, a zaproszenie poczeka, aż się zaloguje. Ktoś nowy w Znajomych wybiera „Włącz funkcję Znajomi, aby przyjąć”, ustawia pseudonim i przełączniki, a potem „Włącz funkcję Znajomi i przyjmij”; ktoś, kto już korzysta ze Znajomych, wybiera „Przyjmij zaproszenie”. Strona mówi wtedy „Przyjaźń dostarczona”, a Ty dostajesz informację, że zaproszenie zostało przyjęte. Na iPhonie z zainstalowanym Peekiem link otwiera się w aplikacji.
+Kto otworzy link, zobaczy tylko twój pseudonim; link nie daje dostępu do twojego konta ani przesyłek. Znajomy bez konta zobaczy prośbę „Zaloguj się, aby przyjąć zaproszenie”, a zaproszenie poczeka, aż się zaloguje. Ktoś nowy w Znajomych wybiera „Włącz funkcję Znajomi, aby przyjąć”, ustawia pseudonim i przełączniki, a potem „Włącz funkcję Znajomi i przyjmij”; ktoś, kto już korzysta ze Znajomych, wybiera „Przyjmij zaproszenie”. Strona mówi wtedy „Przyjaźń dostarczona”, a ty dostajesz informację, że zaproszenie zostało przyjęte. Na iPhonie z zainstalowanym Peekiem link otwiera się w aplikacji.
 
-Możesz mieć naraz 20 niewykorzystanych linków; powyżej tej liczby najstarszy przestaje działać. W sekcji „Zarządzaj linkami” przycisk „Anuluj to zaproszenie” unieważnia bieżący link, a drugi przycisk anuluje Twoje starsze niewykorzystane linki, nie ruszając Twoich znajomych. Wykorzystany, anulowany albo wygasły link pokazuje „To zaproszenie jest już niedostępne. Poproś o nowy link.” W kręgu może być do 50 znajomych.
+Możesz mieć naraz 20 niewykorzystanych linków; powyżej tej liczby najstarszy przestaje działać. W sekcji „Zarządzaj linkami” przycisk „Anuluj to zaproszenie” unieważnia bieżący link, a drugi przycisk anuluje twoje starsze niewykorzystane linki, nie ruszając twoich znajomych. Wykorzystany, anulowany albo wygasły link pokazuje „To zaproszenie jest już niedostępne. Poproś o nowy link.” W kręgu może być do 50 znajomych.
 
 ## Co znajomi widzą o moich przesyłkach?
 
 Tylko liczby, które zdecydujesz się udostępnić, nigdy żadnej przesyłki. Decydują o tym dwa przełączniki:
 
-- „Statystyki i znaczki”: liczba dostarczonych przesyłek, średni czas dostawy w pełnych dniach (zaokrąglony w górę) i zdobyte znaczki. Po wyłączeniu Twoja karta pokazuje „Statystyki są prywatne”.
+- „Statystyki i znaczki”: liczba dostarczonych przesyłek, średni czas dostawy w pełnych dniach (zaokrąglony w górę) i zdobyte znaczki. Po wyłączeniu twoja karta pokazuje „Statystyki są prywatne”.
 - „Dostawy w tym tygodniu”: tylko „W tym tygodniu dotarła przesyłka”, bez przesyłki i bez dokładnej godziny.
 
-Znajomi nigdy nie widzą nazw ani zawartości przesyłek, numerów przesyłek, przewoźników, miejsc, dokładnych godzin doręczenia ani przesyłek jeszcze w drodze, ani Twojego e-maila, nazwy z konta Google czy zdjęcia. Liczby wylicza serwer Peeka z Twoich przesyłek, więc żadna aplikacja nie może wysłać zmyślonych. Nie ma publicznych profili, wyszukiwania, wgrywania kontaktów, liczników obserwujących, rankingów ani tablicy aktywności.
+Znajomi nigdy nie widzą nazw ani zawartości przesyłek, numerów przesyłek, przewoźników, miejsc, dokładnych godzin doręczenia ani przesyłek jeszcze w drodze, ani twojego e-maila, nazwy z konta Google czy zdjęcia. Liczby wylicza serwer Peeka z twoich przesyłek, więc żadna aplikacja nie może wysłać zmyślonych. Nie ma publicznych profili, wyszukiwania, wgrywania kontaktów, liczników obserwujących, rankingów ani tablicy aktywności.
 
-Żeby zmienić, co udostępniasz, wybierz „Co udostępniasz” u góry zakładki Znajomi, zmień przełączniki w oknie „Ustawienia udostępniania”, a potem wybierz „Zapisz”. Znajomi zobaczą zmianę przy następnym odświeżeniu, w ciągu mniej więcej minuty, gdy mają otwartą zakładkę Znajomi, a karty znajomych nigdy nie są zapisywane do przeglądania offline. Ktoś, kto już widział Twoją kartę, mógł zrobić zrzut ekranu, na co zwraca uwagę [informacja o prywatności](https://peektracker.com/privacy.html) Peeka.
+Żeby zmienić, co udostępniasz, wybierz „Co udostępniasz” u góry zakładki Znajomi, zmień przełączniki w oknie „Ustawienia udostępniania”, a potem wybierz „Zapisz”. Znajomi zobaczą zmianę przy następnym odświeżeniu, w ciągu mniej więcej minuty, gdy mają otwartą zakładkę Znajomi, a karty znajomych nigdy nie są zapisywane do przeglądania offline. Ktoś, kto już widział twoją kartę, mógł zrobić zrzut ekranu, na co zwraca uwagę [informacja o prywatności](https://peektracker.com/privacy.html) Peeka.
 
 Swoich znajomych widzisz tak samo: „Twój krąg” pokazuje ich listę, każda karta z pseudonimem i liczbą znaczków, a stuknięcie karty otwiera paszport tego znajomego.
 
@@ -95,7 +95,7 @@ Swoich znajomych widzisz tak samo: „Twój krąg” pokazuje ich listę, każda
 
 Otwórz kartę znajomego, potem „Zarządzaj znajomością” › „Usuń ze znajomych” i potwierdź przyciskiem „Usuń ze znajomych”: „Nie będziecie już widzieć nawzajem swoich Paszportów. Nowe zaproszenie pozwoli odnowić znajomość.” Każda ze stron może usunąć drugą, a znajomość kończy się po obu stronach jednocześnie.
 
-Usunięcie konta usuwa Twój profil w Znajomych, połączenia i zaproszenia; jak to zrobić, wyjaśnia poradnik o [korzystaniu z Peeka bez konta](guide:account-or-guest). „Pobierz moje dane” obejmuje Twój profil w Znajomych i pseudonimy Twoich znajomych, nigdy ich statystyki.
+Usunięcie konta usuwa twój profil w Znajomych, połączenia i zaproszenia; jak to zrobić, wyjaśnia poradnik o [korzystaniu z Peeka bez konta](guide:account-or-guest). „Pobierz moje dane” obejmuje twój profil w Znajomych i pseudonimy twoich znajomych, nigdy ich statystyki.
 
 :::sources
 - [Peek: strona główna](https://peektracker.com/pl) – „Paszport dostaw”, Twoje przesyłki pozostają prywatne

@@ -26,7 +26,7 @@ Małe litery, spacje i myślniki nie mają w Peek znaczenia. Wyszukiwarka CNE pr
 
 Nad wierszami historii wyszukiwarka CNE wyświetla ogólny status przesyłki po angielsku:
 
-| Status CNE | Co to oznacza dla Ciebie | Peek pokazuje |
+| Status CNE | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Shipping` | W drodze. | status najnowszego wiersza |
 | `Customs inspection` | Zatrzymana przez urząd celny (`扣关` na chińskiej stronie CNE). | „W urzędzie celnym” |
@@ -37,7 +37,7 @@ Nad wierszami historii wyszukiwarka CNE wyświetla ogólny status przesyłki po 
 
 Mogą też wystąpić `Time out` i `Unknown` — wówczas Peek kieruje się samymi wierszami historii. Każdy wiersz ma godzinę, opis i miejsce:
 
-| CNE podaje | Co to oznacza dla Twojej paczki | Peek pokazuje |
+| CNE podaje | Co to oznacza dla twojej paczki | Peek pokazuje |
 | --- | --- | --- |
 | `Parcel Infomation Received` | Sprzedawca przekazał dane paczki (oryginalna pisownia CNE); CNE jeszcze jej nie odebrał. | „Zarejestrowana” |
 | `Picked Up by Courier` | Kurier CNE odebrał przesyłkę od sprzedawcy w Chinach kontynentalnych. | „Przyjęta przez przewoźnika” |
@@ -46,7 +46,7 @@ Mogą też wystąpić `Time out` i `Unknown` — wówczas Peek kieruje się samy
 | `Arrived Export Airport`, `Released From Export Customs` | Na lotnisku wylotu w Chinach kontynentalnych, a potem zwolnienie przez chiński urząd celny eksportowy. | „W transporcie” |
 | `Shipment Departed From Original Country` | Samolot wyleciał z Chin kontynentalnych. | „W transporcie” |
 | `Arrived At Transit Airport`, `Shipment Depart From Transit Airport` | Przystanek na lotnisku tranzytowym. | „W transporcie” |
-| `Arrived at Import Airport`, `Arrived at destination` | Dotarcie do kraju docelowego: przed paczką jeszcze sortowanie i odprawa celna importowa (to nie jest jeszcze Twój lokalny oddział doręczeń). | „W transporcie” |
+| `Arrived at Import Airport`, `Arrived at destination` | Dotarcie do kraju docelowego: przed paczką jeszcze sortowanie i odprawa celna importowa (to nie jest jeszcze twój lokalny oddział doręczeń). | „W transporcie” |
 | `The shipment is picked up by customs broker` | Przesyłka odebrana przez agencję celną do odprawy importowej. | „W urzędzie celnym” |
 | `Released From Import Customs`, `Pickup from airport` | Zwolniona z odprawy celnej importowej i odebrana z lotniska. | „W transporcie” |
 | `Handled by local carrier` | Przekazana przez CNE do lokalnej sieci doręczeń; jej własny skan przyjęcia pojawi się jako kolejny. | „W transporcie” |
@@ -94,9 +94,9 @@ Na stronie [Contact us przewoźnika CNE](https://www.cne.com/en/about/contact):
 
 [Peek](/) natychmiast rozpoznaje CNE Express po numerze `3A5V` („Wykryty przewoźnik”), a każdy link `cne.com` z parametrem `?no=` przypisuje paczkę do CNE Express (biorąc pierwszy numer, gdy jest ich więcej). Dla innego alfanumerycznego numeru CNE od 6 do 40 znaków, gdy Peek wyświetla „Sprawdzanie usług śledzenia…” albo nie wskaże CNE, stuknij „Zmień” i wybierz CNE Express na liście „Wszyscy przewoźnicy” (albo użyj później „Zmień przewoźnika”); poza zakresem 6–40 liter i cyfr Peek pokaże, że przewoźnik „nie wydaje takich numerów”.
 
-Peek odczytuje status, każdy skan z lokalizacją, kraj przeznaczenia oraz przewoźnika końcowego z numerem transferowym. Wpisy `Arrived at destination` i `Handled by local carrier` odczytuje według czasu pekińskiego (`UTC+8`), a przekazywane hiszpańskie statusy [CTT Express](carrier:ctt-express) w `UTC+02:00` (lub `UTC+01:00` dla kroków doręczenia [CTT](carrier:ctt) do Portugalii), pozostałe wpisy według zegara ich miejsca albo odcinka, na którym była wtedy paczka, i pokazuje każdą godzinę w strefie czasowej Twojego urządzenia („Godziny w twojej strefie czasowej: …”); pomija numer zamówienia sprzedawcy, pozbawioną strefy datę doręczenia z podsumowania oraz `View POD` (CNE nie udostępnia szacowanej daty ani wagi). Przycisk „Otwórz stronę przewoźnika CNE Express” otwiera Twój numer na `cne.com`. Gdy odpytywany przewoźnik końcowy pokaże skan co najmniej tak świeży jak ostatni wpis CNE, Peek przełącza się na niego, zachowując historię z CNE.
+Peek odczytuje status, każdy skan z lokalizacją, kraj przeznaczenia oraz przewoźnika końcowego z numerem transferowym. Wpisy `Arrived at destination` i `Handled by local carrier` odczytuje według czasu pekińskiego (`UTC+8`), a przekazywane hiszpańskie statusy [CTT Express](carrier:ctt-express) w `UTC+02:00` (lub `UTC+01:00` dla kroków doręczenia [CTT](carrier:ctt) do Portugalii), pozostałe wpisy według zegara ich miejsca albo odcinka, na którym była wtedy paczka, i pokazuje każdą godzinę w strefie czasowej twojego urządzenia („Godziny w twojej strefie czasowej: …”); pomija numer zamówienia sprzedawcy, pozbawioną strefy datę doręczenia z podsumowania oraz `View POD` (CNE nie udostępnia szacowanej daty ani wagi). Przycisk „Otwórz stronę przewoźnika CNE Express” otwiera twój numer na `cne.com`. Gdy odpytywany przewoźnik końcowy pokaże skan co najmniej tak świeży jak ostatni wpis CNE, Peek przełącza się na niego, zachowując historię z CNE.
 
-Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka CNE (po przejęciu przez firmę końcową przejmuje jej tempo; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie bez zmian i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych przypadkach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Alerty: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się z CNE ani ze sprzedawcą za Ciebie.
+Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty, dopóki odpowiada wyszukiwarka CNE (po przejęciu przez firmę końcową przejmuje jej tempo; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie bez zmian i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych przypadkach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Alerty: „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się z CNE ani ze sprzedawcą za ciebie.
 
 ## Najczęstsze pytania o śledzenie CNE Express
 
@@ -110,7 +110,7 @@ Poczta lub firma kurierska wybrana przez CNE w kraju docelowym (na liście partn
 
 ### Co oznacza `Arrived at destination` w CNE Express?
 
-Paczka dotarła do kraju docelowego, ale przed nią mogą być jeszcze sortowanie i odprawa celna importowa — nie leży jeszcze w Twojej lokalnej stacji doręczeń. CNE zapisuje ten wpis w czasie pekińskim (`UTC+8`, zimą 7 godzin przed Warszawą), podczas gdy sąsiednie wpisy zagraniczne mają czas lokalny bez strefy i mogą wyglądać na niechronologiczne.
+Paczka dotarła do kraju docelowego, ale przed nią mogą być jeszcze sortowanie i odprawa celna importowa — nie leży jeszcze w twojej lokalnej stacji doręczeń. CNE zapisuje ten wpis w czasie pekińskim (`UTC+8`, zimą 7 godzin przed Warszawą), podczas gdy sąsiednie wpisy zagraniczne mają czas lokalny bez strefy i mogą wyglądać na niechronologiczne.
 
 ### Ile trwa dostawa przez CNE Express?
 

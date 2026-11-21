@@ -25,11 +25,11 @@ Gdzie szukać numeru? Dostajesz go od nadawcy. InPost we Włoszech pisze, że nu
 
 Gdy korzystasz z Peek po polsku, statusy InPost są po polsku. Kroki, które może przejść paczka, mniej więcej w kolejności, w jakiej je spotyka:
 
-| Krok | Co to znaczy dla Ciebie |
+| Krok | Co to znaczy dla ciebie |
 | --- | --- |
 | Nadanie w Paczkomacie albo punkcie odbioru | Nadawca zostawił paczkę w Paczkomacie albo w punkcie odbioru. |
 | Odbiór przez kuriera | Kurier InPost zabrał paczkę od nadawcy albo z Paczkomatu, w którym ją nadano. Ty jej jeszcze nie masz. |
-| Wydanie do doręczenia | Kurier wiezie paczkę: pod Twoje drzwi albo do Paczkomatu. |
+| Wydanie do doręczenia | Kurier wiezie paczkę: pod twoje drzwi albo do Paczkomatu. |
 | Paczka przekierowana | Paczka jedzie do innego punktu odbioru. Ten krok bywa widoczny nawet zaraz po utworzeniu etykiety, więc Peek zostawia paczce etap, który miała. |
 | Brak możliwości doręczenia | Kurier nie mógł doręczyć paczki; w Peek to „Próba doręczenia”. |
 | Odmowa przyjęcia | Odbiorca odmówił przyjęcia paczki. |
@@ -42,7 +42,7 @@ Gdy korzystasz z Peek po polsku, statusy InPost są po polsku. Kroki, które mo�
 
 **Po terminie.** Gdy paczka wraca do nadawcy, śledzenie pokazuje zwrot; więcej w poradniku o [nieodebranej paczce](guide:uncollected-parcel).
 
-**Pełny Paczkomat.** Status o tymczasowym Paczkomacie znaczy, że Twój był pełny: paczka czeka w pobliskim, na ten sam kod odbioru. Jeśli jej stamtąd nie odbierzesz na czas, InPost zawiezie ją do wybranego Paczkomatu.
+**Pełny Paczkomat.** Status o tymczasowym Paczkomacie znaczy, że twój był pełny: paczka czeka w pobliskim, na ten sam kod odbioru. Jeśli jej stamtąd nie odbierzesz na czas, InPost zawiezie ją do wybranego Paczkomatu.
 
 ## Paczka InPost nie dotarła albo jest uszkodzona: reklamacja
 
@@ -50,11 +50,11 @@ Gdy korzystasz z Peek po polsku, statusy InPost są po polsku. Kroki, które mo�
 
 Poniżej są ogólne zasady UKE dla każdego operatora pocztowego, a nie regulamin InPost: InPost figuruje w prowadzonym przez UKE rejestrze operatorów pocztowych.
 
-**Kto składa reklamację.** Nadawca. Ty możesz ją złożyć, gdy nadawca przekaże Ci to prawo albo gdy paczka została Ci już doręczona. Przy zakupach w sklepie nadawcą jest zwykle sklep, więc gdy paczka nie dociera, zacznij od niego.
+**Kto składa reklamację.** Nadawca. Ty możesz ją złożyć, gdy nadawca przekaże ci to prawo albo gdy paczka została ci już doręczona. Przy zakupach w sklepie nadawcą jest zwykle sklep, więc gdy paczka nie dociera, zacznij od niego.
 
 **Terminy.** Najpóźniej 12 miesięcy od dnia nadania. Ukryte uszkodzenie zgłaszasz w ciągu 7 dni od otrzymania paczki. Przy widocznym uszkodzeniu podstawą reklamacji jest protokół spisany przy pracowniku operatora, który paczkę dostarczył.
 
-**Jak.** Pisemnie, elektronicznie, na przykład formularzem na stronie operatora, albo ustnie. Jeśli odpowiedź Cię nie zadowoli, możesz poprosić o interwencję Prezesa UKE, skorzystać z bezpłatnego pozasądowego rozwiązywania sporów (ADR) albo iść do sądu.
+**Jak.** Pisemnie, elektronicznie, na przykład formularzem na stronie operatora, albo ustnie. Jeśli odpowiedź cię nie zadowoli, możesz poprosić o interwencję Prezesa UKE, skorzystać z bezpłatnego pozasądowego rozwiązywania sporów (ADR) albo iść do sądu.
 
 ## InPost kontakt: infolinia, czat i formularz
 
@@ -71,9 +71,9 @@ Według regulaminu Konta InPost obowiązującego od 1 października 2026 roku:
 
 Peek czyta śledzenie z serwisu InPost na inposteasy.com, tego samego dla Polski, Włoch, Portugalii i Wielkiej Brytanii; czy odpowiada on dla brytyjskich numerów JJD, JD i 8YDR, nie jest jeszcze potwierdzone. Widzisz status, najnowsze 20 skanów z miastem albo sortownią i krajem na mapie, godzinę doręczenia i kraj docelowy. Przewidywanej daty dostawy InPost nie podaje. Gdy paczka z 24-cyfrowym numerem czeka w Paczkomacie albo punkcie odbioru, albo została już stamtąd odebrana, widzisz nazwę i adres punktu, jeśli potwierdzi je polskie śledzenie InPost, ale nigdy godzin otwarcia ani kodu odbioru.
 
-Statusy są takie, jak przysyła je serwis InPost: po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku; gdy krok nie ma tytułu, możesz zobaczyć surowy kod InPost. Nie każdy kod InPost ma w Peek swój etap, więc paczka czekająca w Paczkomacie nie zawsze dostaje etap „Do odbioru”. Skany bez strefy czasowej są pomijane, a Twoje imię, adres, telefon i podpis nie są odczytywane.
+Statusy są takie, jak przysyła je serwis InPost: po polsku, gdy korzystasz z Peek po polsku, a w innych językach po angielsku; gdy krok nie ma tytułu, możesz zobaczyć surowy kod InPost. Nie każdy kod InPost ma w Peek swój etap, więc paczka czekająca w Paczkomacie nie zawsze dostaje etap „Do odbioru”. Skany bez strefy czasowej są pomijane, a twoje imię, adres, telefon i podpis nie są odczytywane.
 
-Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie InPost; przez serwisy śledzenia przesyłek co 15 minut), i może Cię powiadamiać: „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Gdy doręczenie przejmuje inny przewoźnik, na przykład gdy InPost doręcza część paczek z zagranicy, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki dalej, gdy InPost przekaże ją innemu przewoźnikowi, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za Ciebie z InPost.
+Peek sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie InPost; przez serwisy śledzenia przesyłek co 15 minut), i może cię powiadamiać: „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Gdy doręczenie przejmuje inny przewoźnik, na przykład gdy InPost doręcza część paczek z zagranicy, Peek sprawdza paczkę w tempie tego, który ją doręcza. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie śledzi paczki dalej, gdy InPost przekaże ją innemu przewoźnikowi, nie przedłuży czasu odbioru, nie złoży reklamacji i nie skontaktuje się za ciebie z InPost.
 
 ## Pytania o śledzenie przesyłek InPost
 
@@ -83,7 +83,7 @@ Pokaże to śledzenie na inpost.pl: po wpisaniu numeru przesyłki zobaczysz najn
 
 ### Czy paczkę InPost można śledzić po numerze telefonu?
 
-W Peek nie: śledzisz po numerze przesyłki. Regulamin Konta InPost uznaje jednak za „Twoją paczkę” tę, przy której nadawca podał numer telefonu adresata taki sam jak ten z rejestracji Twojego Konta InPost.
+W Peek nie: śledzisz po numerze przesyłki. Regulamin Konta InPost uznaje jednak za „Twoją paczkę” tę, przy której nadawca podał numer telefonu adresata taki sam jak ten z rejestracji twojego Konta InPost.
 
 ### Gdzie jest kod nadania InPost?
 

@@ -28,7 +28,7 @@ Spacje, myślniki i małe litery nie mają znaczenia przy wklejaniu numeru w Pee
 
 Tracker ePost Global wyświetla każdy wpis po angielsku wraz z datą, godziną, opisem i zazwyczaj miejscem. Najpierw pojawiają się własne etapy ePost Global:
 
-| Komunikat ePost Global | Co to oznacza dla Ciebie | Peek pokazuje |
+| Komunikat ePost Global | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Data Received` | Sklep przesłał dane elektroniczne przesyłki do ePost Global, ale fizyczna paczka jeszcze tam nie dotarła. | „Zarejestrowana” |
 | `Shipment in Transit to the ePost Global Processing Center` | Dopisywane automatycznie minutę po `Data Received` przy każdej przesyłce: to część rejestracji etykiety, a nie fizyczny skan w trasie. | „Zarejestrowana” |
@@ -39,7 +39,7 @@ Tracker ePost Global wyświetla każdy wpis po angielsku wraz z datą, godziną,
 
 **Wpisy przekazywane od partnerów.** Po wydaniu przesyłki `epgtrack.com` przekazuje komunikaty przewoźnika partnerskiego. Wpisy rozpoznawane bezpośrednio w kodzie Peek:
 
-| Po przekazaniu | Co to oznacza dla Ciebie | Peek pokazuje |
+| Po przekazaniu | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Shipping label created - OSM awaiting item` | Amerykański partner OSM Worldwide otrzymał dane przesyłki. | bez cofnięcia etapu |
 | `Arrived at OSM facility`, `Departed OSM facility`, `Package accepted at courier partner`, `Package processed by courier partner` | Przejście przez sortownię OSM Worldwide i wydanie kolejnemu kurierowi współpracującemu. | „W transporcie” |
@@ -99,13 +99,13 @@ Według `epostglobalshipping.com`:
 
 [Peek](/) natychmiast rozpoznaje numer złożony z `EPG` i 10–15 cyfr („Wykryty przewoźnik”) i odpytuje `epgtrack.com` bez zakładania konta ani podawania kodu pocztowego. Działa również wklejenie linku z `epgtrack.com` lub `ppxtrack.com`: Peek wyciąga z niego numer (pierwszy z listy, jeśli parametr `?id=` zawiera ich kilka). Gdy masz wyłącznie numer lokalnego partnera, wklej go tak samo — Peek obsługuje ponad 4 500 przewoźników.
 
-Peek pokazuje aktualny status, każdy skan z jego miejscem, kraj przeznaczenia oraz nazwę i numer partnera, gdy podaje je ePost Global. Pomija pasek postępu, kody pocztowe, numery magazynów lub ulic, referencję klienta oraz lotnicze listy przewozowe (`MAWB`); ponieważ `epgtrack.com` nie udostępnia przewidywanej daty dostawy, wagi ani potwierdzenia doręczenia, Peek ich nie wyświetla. Przycisk „Otwórz stronę przewoźnika ePost Global” otwiera Twoją paczkę bezpośrednio na `epgtrack.com`.
+Peek pokazuje aktualny status, każdy skan z jego miejscem, kraj przeznaczenia oraz nazwę i numer partnera, gdy podaje je ePost Global. Pomija pasek postępu, kody pocztowe, numery magazynów lub ulic, referencję klienta oraz lotnicze listy przewozowe (`MAWB`); ponieważ `epgtrack.com` nie udostępnia przewidywanej daty dostawy, wagi ani potwierdzenia doręczenia, Peek ich nie wyświetla. Przycisk „Otwórz stronę przewoźnika ePost Global” otwiera twoją paczkę bezpośrednio na `epgtrack.com`.
 
 Tracker publikuje godziny bez strefy czasowej. Peek odczytuje `Parcel Received and Processing` oraz `Parcel Shipped` według czasu stanu USA danego centrum (o ile cały stan leży w jednej strefie), wpisy PostNL bez kraju według zegara PostNL, wpisy europejskiej sieci GLS w czasie środkowoeuropejskim, a wpisy brytyjskiego partnera Royal Mail w czasie brytyjskim; pozostałe zdarzenia datuje na podstawie miejsca lub odcinka trasy. Wszystkie godziny widzisz w strefie swojego urządzenia, a na `peektracker.com` oraz w aplikacjach na iPhone'a i Androida oś czasu kończy się informacją „Godziny w twojej strefie czasowej: …”.
 
 Gdy ePost Global wskazuje znanego w Peek partnera, karta przesyłki pokazuje np. „Doręcza: PostNL” — albo „Zgłoszona przewoźnikowi PostNL, jeszcze nieprzyjęta”, dopóki partner ma tylko zapowiedź paczki bez własnych skanów — i wyświetla numer partnera obok numeru `EPG`. Peek odpytuje wtedy także tego przewoźnika (pod jego numerem lub pod kodem `EPG`, jeśli drugiego numeru brak); bez wskazanego partnera przy poprawnym numerze pocztowym pyta pocztę kraju docelowego lub jedynego przewoźnika wynikającego z formatu drugiego numeru (spośród tych, których własny tracker Peek odczytuje bez dodatkowych danych). Gdy u tego przewoźnika pojawi się skan co najmniej tak świeży jak najnowszy wpis ePost Global, Peek przełącza śledzenie na niego, zachowując wcześniejszą historię (dla europejskiej sieci GLS, ponieważ ePost Global nie podaje, która krajowa spółka GLS doręcza, Peek pozostaje przy wpisach przekazywanych przez ePost Global).
 
-Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty, dopóki odpowiada tracker ePost Global (po przejęciu przesyłki przez partnera końcowego Peek dostosowuje się do jego tempa; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie ciszy i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych przypadkach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w Twoim imieniu z ePost Global ani ze sklepem.
+Dopóki masz otwartą przesyłkę lub w dniu dostawy włączone powiadomienia, Peek sprawdza zmiany nawet co 10 minut — a od 6:00 czasu lokalnego w dniu ze statusem „W doręczeniu” nawet co 2 minuty, dopóki odpowiada tracker ePost Global (po przejęciu przesyłki przez partnera końcowego Peek dostosowuje się do jego tempa; przez same usługi śledzenia: co godzinę, co 3 godziny po dobie ciszy i do co 15 minut w dniu dostawy przy otwartej paczce lub włączonych powiadomieniach); w pozostałych przypadkach oraz po dwóch dniach bez nowości (12 godzin na etapie „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Możesz włączyć powiadomienia „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu z ePost Global ani ze sklepem.
 
 ## Najczęstsze pytania o śledzenie ePost Global
 

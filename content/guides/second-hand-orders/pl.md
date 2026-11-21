@@ -23,7 +23,7 @@ Sprzedający ma 72 godziny na potwierdzenie sprzedaży. Wtedy dostaje etykietę 
 - home | Ty | Sprawdzasz i w 48 godzin potwierdzasz albo zgłaszasz problem
 :::
 
-Allegro Lokalnie to wydzielona część Allegro, w której sprzedają osoby z kontem zwykłym, czyli prywatnym. Allegro organizuje tam dostawę metodą „Allegro Paczkomaty InPost”: sprzedający dostaje etykietę albo 9-cyfrowy kod nadania i nadaje paczkę w Paczkomacie InPost, a Ty płacisz za dostawę najwyżej 10,95 zł. Zakupy w sklepach na allegro.pl opisujemy w poradniku o [paczkach z Allegro](guide:allegro-orders).
+Allegro Lokalnie to wydzielona część Allegro, w której sprzedają osoby z kontem zwykłym, czyli prywatnym. Allegro organizuje tam dostawę metodą „Allegro Paczkomaty InPost”: sprzedający dostaje etykietę albo 9-cyfrowy kod nadania i nadaje paczkę w Paczkomacie InPost, a ty płacisz za dostawę najwyżej 10,95 zł. Zakupy w sklepach na allegro.pl opisujemy w poradniku o [paczkach z Allegro](guide:allegro-orders).
 
 ## Który przewoźnik dowozi paczkę?
 
@@ -32,8 +32,8 @@ Na OLX dostępni przewoźnicy zależą od kategorii. Wybierasz ich przy zakupie,
 | Przewoźnik | Dokąd doręcza |
 | --- | --- |
 | [InPost](carrier:inpost) Paczkomat | Paczkomat |
-| [InPost](carrier:inpost) Kurier | Pod Twój adres, dwie próby doręczenia |
-| [DPD](carrier:dpd-pl) | Pod Twój adres, dwie próby, potem punkt DPD |
+| [InPost](carrier:inpost) Kurier | Pod twój adres, dwie próby doręczenia |
+| [DPD](carrier:dpd-pl) | Pod twój adres, dwie próby, potem punkt DPD |
 | [ORLEN Paczka](carrier:orlen-paczka) | Kiosk Ruch, punkt partnerski, automat albo wybrana stacja ORLEN |
 | [Poczta Polska](carrier:poczta-polska) | Urząd pocztowy, stacja ORLEN, kiosk Ruch, Delikatesy Centrum, Lewiatan, ABC, Biedronka |
 
@@ -90,20 +90,20 @@ Krótko, więc odbierz ją szybko, gdy w **Twoje przesyłki** zobaczysz status �
 | Poczta Polska | 7 dni na poczcie, 6 w punkcie partnerskim |
 | DPD | 3 dni robocze w punkcie DPD, po dwóch nieudanych próbach doręczenia |
 
-Nie zdążysz? Paczka wraca do sprzedającego, a Ty dostajesz zwrot za przedmiot, usługę i przesyłkę w ciągu 7 dni roboczych. Jeśli nadal chcesz ten przedmiot, napisz do sprzedającego: może wystawić go jeszcze raz.
+Nie zdążysz? Paczka wraca do sprzedającego, a ty dostajesz zwrot za przedmiot, usługę i przesyłkę w ciągu 7 dni roboczych. Jeśli nadal chcesz ten przedmiot, napisz do sprzedającego: może wystawić go jeszcze raz.
 
 Terminy przewoźników i jak zyskać więcej czasu: [nieodebrana paczka](guide:uncollected-parcel). Co dzieje się potem: [paczka wróciła do nadawcy](guide:returned-to-sender).
 
 ## Kiedy sprzedający dostaje pieniądze i ile mam czasu na zgłoszenie problemu?
 
-OLX trzyma pieniądze do odbioru paczki, a potem daje Ci mało czasu:
+OLX trzyma pieniądze do odbioru paczki, a potem daje ci mało czasu:
 
 :::steps
 - Płacisz | Pieniądze trzyma PayU, nie sprzedający.
 - Sprzedający wysyła | Potwierdza w 72 godziny, nadaje w 3 dni robocze.
-- Paczka dociera albo czeka | W automacie, w punkcie albo pod Twoim adresem.
+- Paczka dociera albo czeka | W automacie, w punkcie albo pod twoim adresem.
 - Potwierdzasz albo zgłaszasz | Masz 48 godzin od odbioru paczki.
-- Sprzedający dostaje pieniądze | W 3 dni robocze po Twoim potwierdzeniu albo po 48 godzinach.
+- Sprzedający dostaje pieniądze | W 3 dni robocze po twoim potwierdzeniu albo po 48 godzinach.
 :::
 
 Po rozpakowaniu wejdź w **Twoje przesyłki** → **Kupujesz**. Jeśli wszystko gra, potwierdź, że zamówienie jest OK. Jeśli nie, kliknij **Mam problem**.
@@ -113,13 +113,13 @@ Po rozpakowaniu wejdź w **Twoje przesyłki** → **Kupujesz**. Jeśli wszystko 
 - **Paczka zaginęła.** Zaginięcie zgłasza sprzedający. Przy ORLEN Paczce, Poczcie Polskiej i DPD może to zrobić 30 dni po nadaniu.
 - **Minęło 48 godzin.** W ramach Pakietu Ochronnego jest już za późno. Napisz do sprzedającego; jeśli podejrzewasz oszustwo, OLX radzi zgłosić sprawę na policję.
 
-Zgłoszenie wstrzymuje wypłatę dla sprzedającego do wyjaśnienia sprawy. Na Allegro Lokalnie problem zgłaszasz w Dyskusji, najwcześniej godzinę po zakupie. Sprzedający powinien odpowiedzieć w ciągu 24 godzin, nie licząc sobót, niedziel i dni ustawowo wolnych od pracy; jeśli milczy, Allegro na Twoją prośbę może włączyć się do Dyskusji. Allegro Ochrona Kupujących obejmuje tam tylko ogłoszenia „Kup Teraz” i licytacje, z wyjątkiem transakcji, w których płacisz przy odbiorze osobistym. Od osoby prywatnej nie przysługuje Ci prawo odstąpienia od umowy.
+Zgłoszenie wstrzymuje wypłatę dla sprzedającego do wyjaśnienia sprawy. Na Allegro Lokalnie problem zgłaszasz w Dyskusji, najwcześniej godzinę po zakupie. Sprzedający powinien odpowiedzieć w ciągu 24 godzin, nie licząc sobót, niedziel i dni ustawowo wolnych od pracy; jeśli milczy, Allegro na twoją prośbę może włączyć się do Dyskusji. Allegro Ochrona Kupujących obejmuje tam tylko ogłoszenia „Kup Teraz” i licytacje, z wyjątkiem transakcji, w których płacisz przy odbiorze osobistym. Od osoby prywatnej nie przysługuje ci prawo odstąpienia od umowy.
 
 Więcej: [paczka doręczona, ale jej nie ma](guide:delivered-not-received), [uszkodzona paczka](guide:damaged-parcel) i [zaginiona paczka](guide:lost-parcel).
 
 ## Co, jeśli płacisz albo wysyłasz poza OLX?
 
-Wtedy nie masz Pakietu Ochronnego: obejmuje wyłącznie transakcje z Przesyłką OLX. Numer przesyłki będziesz mieć tylko wtedy, gdy sprzedający Ci go poda.
+Wtedy nie masz Pakietu Ochronnego: obejmuje wyłącznie transakcje z Przesyłką OLX. Numer przesyłki będziesz mieć tylko wtedy, gdy sprzedający ci go poda.
 
 Uważaj zwłaszcza na link do „odbioru wpłaty”. OLX nie generuje linków do opłacenia zakupu przez Przesyłki OLX. Link do rzekomych pieniędzy z OLX, który dostajesz na przykład poza serwisem, to na pewno oszustwo. Na stronie głównej centrum pomocy OLX możesz wkleić link i sprawdzić, czy jest fałszywy.
 
@@ -137,7 +137,7 @@ Tak. Skopiuj numer z **Twoje przesyłki** i wklej go do [Peeka](/). Peek rozpozn
 - [OLX: Sprzedaj z Przesyłką OLX — instrukcja krok po kroku](https://pomoc.olx.pl/olxplhelp/s/article/sprzedaj-z-przesy%C5%82k%C4%85-olx-instrukcja-krok-po-kroku-V49-olx) – przewoźnicy zależni od kategorii, PayU, kurier DPD i InPost, etykieta albo kod nadania
 - [OLX: Etykieta / kod nadania dla Przesyłki OLX](https://pomoc.olx.pl/olxplhelp/s/article/jak-wygenerowa%C4%87-etykiet%C4%99-dla-przesy%C5%82ki-olx-V27-olx) – 9-cyfrowy kod nadania tylko z InPost, 3 dni robocze od potwierdzenia, anulowanie
 - [OLX: Przesyłka OLX z kurierem DPD](https://pomoc.olx.pl/olxplhelp/s/article/Przesy%C5%82ka-OLX-kurierem-DPD) – przyjazd kuriera, orientacyjna godzina, DPD Pickup, punkt DPD
-- [OLX: Kiedy paczka zostanie wysłana? Jak śledzić i odebrać?](https://pomoc.olx.pl/olxplhelp/s/article/kiedy-paczka-zostanie-wys%C5%82ana-jak-%C5%9Bledzi%C4%87-i-odebra%C4%87-V26-olx) – numer przesyłki w Twoje przesyłki, strona przewoźnika, Gotowa do odbioru, kody odbioru, powrót do sprzedającego
+- [OLX: Kiedy paczka zostanie wysłana? Jak śledzić i odebrać?](https://pomoc.olx.pl/olxplhelp/s/article/kiedy-paczka-zostanie-wys%C5%82ana-jak-%C5%9Bledzi%C4%87-i-odebra%C4%87-V26-olx) – numer przesyłki w twoje przesyłki, strona przewoźnika, Gotowa do odbioru, kody odbioru, powrót do sprzedającego
 - [OLX: Gdzie znajdę kod do odbioru przesyłki?](https://pomoc.olx.pl/olxplhelp/s/article/gdzie-znajd%C4%99-kod-do-odbioru-przesy%C5%82ki-V8-olx) – SMS i e-mail, InPost Mobile, przyjęcie w punkcie Poczty Polskiej, SMS Premium
 - [OLX: Co, jeśli nie mogę odebrać przesyłki z punktu odbioru?](https://pomoc.olx.pl/olxplhelp/s/article/co-je%C5%9Bli-nie-mog%C4%99-odebra%C4%87-przesy%C5%82ki-z-punktu-odbioru-V47-olx) – powrót paczki, zwrot w 7 dni roboczych
 - [OLX: Zwrot pieniędzy za transakcję z Przesyłką OLX](https://pomoc.olx.pl/olxplhelp/s/article/kiedy-otrzymam-zwrot-pieni%C4%99dzy-za-transakcj%C4%99-z-przesy%C5%82k%C4%85-olx-V31-olx) – brak potwierdzenia lub wysyłki, 7 dni roboczych, PayU albo BLIK

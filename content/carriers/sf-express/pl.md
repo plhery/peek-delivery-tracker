@@ -27,7 +27,7 @@ Wielkość liter i spacje nie mają znaczenia w Peek.
 
 Anglojęzyczne śledzenie SF wyświetla nad osią czasu ogólny znacznik stanu przesyłki:
 
-| SF pokazuje | Co to oznacza dla Ciebie |
+| SF pokazuje | Co to oznacza dla ciebie |
 | --- | --- |
 | `In transit` | W drodze. Wiele poszczególnych wpisów na osi czasu nosi ten sam nagłówek. |
 | `Accepted` | Doręczona: to angielskie tłumaczenie chińskiego 已签收 („odebrano za podpisem”), a nie przyjęcie paczki do nadania. |
@@ -47,10 +47,10 @@ System SF zapisuje wszystkie znaczniki czasu według czasu chińskiego (`UTC+8`)
 
 Warunki przewozu SF dla przesyłek nadawanych z Chin kontynentalnych za granicę (*Terms and Conditions of Waybill – Chinese Mainland to Overseas Countries*) określają następujące zasady doręczenia:
 
-- Paczka trafia pod adres wskazany przez nadawcę, niekoniecznie do Twoich rąk własnych: może ją przyjąć domownik lub inna osoba pod tym adresem, a w budynkach z centralnym punktem odbioru (recepcja, kancelaria, portiernia) pozostawienie przesyłki w tym miejscu uznaje się za skuteczne doręczenie.
+- Paczka trafia pod adres wskazany przez nadawcę, niekoniecznie do twoich rąk własnych: może ją przyjąć domownik lub inna osoba pod tym adresem, a w budynkach z centralnym punktem odbioru (recepcja, kancelaria, portiernia) pozostawienie przesyłki w tym miejscu uznaje się za skuteczne doręczenie.
 - SF nie doręcza na adresy składające się wyłącznie ze skrytki pocztowej (*PO Box*) ani samego kodu pocztowego.
 - Lokalny kurier nie ma obowiązku dzwonić przed przyjazdem.
-- Dowodem doręczenia może być podpis lub pieczęć, wiadomość SMS, zdjęcie wykonane pod Twoim adresem, w punkcie SF albo przy automacie paczkowym, bądź zapis odbioru w systemie SF.
+- Dowodem doręczenia może być podpis lub pieczęć, wiadomość SMS, zdjęcie wykonane pod twoim adresem, w punkcie SF albo przy automacie paczkowym, bądź zapis odbioru w systemie SF.
 
 **E-Parcel i E-Commerce Express.** Sklepy internetowe często wysyłają lekkie zamówienia z Chin usługami E-Parcel (do 2 kg) albo E-Commerce Express (`EXD` / `EX-CD`). W kraju docelowym SF przekazuje ostatnią milę lokalnemu partnerowi określanemu na stronach SF ogólnie jako „service partner” lub „agent”, bez wskazywania konkretnego przewoźnika w Polsce. Dla wariantu `EX-CD` karta produktu SF zastrzega wprost: „Return, change of address, and re-delivery will not be accepted for EX-CD” — zwrot, zmiana adresu ani ponowne doręczenie nie są w nim obsługiwane.
 
@@ -64,7 +64,7 @@ Jeśli odmówisz przyjęcia paczki albo nie uregulujesz należności celno-podat
 
 ## Paczka SF Express stoi w miejscu, zaginęła lub została uszkodzona
 
-**Kto składa reklamację.** Zasady odszkodowań SF są skierowane do nadawcy: w usługach E-Parcel i `EX-CD` roszczenie składa sklep internetowy, dołączając zrzuty ekranu potwierdzające zwrot pieniędzy kupującemu na platformie. Przy zamówieniach online zgłoś się więc najpierw do sprzedawcy; przy zakupie od przedsiębiorcy w UE według [Your Europe](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) sprzedawca odpowiada za towar aż do chwili wydania go Tobie i ma domyślnie 30 dni na dostawę.
+**Kto składa reklamację.** Zasady odszkodowań SF są skierowane do nadawcy: w usługach E-Parcel i `EX-CD` roszczenie składa sklep internetowy, dołączając zrzuty ekranu potwierdzające zwrot pieniędzy kupującemu na platformie. Przy zamówieniach online zgłoś się więc najpierw do sprzedawcy; przy zakupie od przedsiębiorcy w UE według [Your Europe](https://europa.eu/youreurope/citizens/consumers/shopping/shipping-delivery/index_pl.htm) sprzedawca odpowiada za towar aż do chwili wydania go tobie i ma domyślnie 30 dni na dostawę.
 
 **Brak nowych skanów.** Sprzedawca może zlecić w SF poszukiwanie paczki po 10 dniach roboczych bez aktualizacji (licząc po upływie 15 dni roboczych od nadania) w usłudze E-Parcel albo po 7 dniach roboczych bez skanu w `EX-CD`. Termin na złożenie reklamacji wynosi 90 dni od wysyłki w E-Parcel (odszkodowanie do 200 RMB bez wykupionej ochrony wartości) oraz 60 dni w `EX-CD` (do 300 RMB). Zobacz też [śledzenie się nie aktualizuje](guide:tracking-not-updating) oraz [śledzenie paczek z Chin](guide:tracking-from-china).
 
@@ -84,9 +84,9 @@ Strony SF przywołane w tym poradniku: na `www.sf-express.com` zakładki „Abou
 
 [Peek](/) od razu rozpoznaje SF Express po numerze z prefiksem `SF` i poprawną cyfrą kontrolną, a także po linkach `sf-express.com` z `waybill-detail/`, linkach tajwańskich z `#search/bill-number/` oraz linkach SF International z numerem po `No=`. Zwykły 12-cyfrowy numer pasuje do wielu firm kurierskich — w Polsce Peek sprawdza przy nim automatycznie m.in. [BRT](carrier:brt) czy Colis Privé, ale nie może odpytać SF w tle podczas samego rozpoznawania. Jeśli masz 12-cyfrowy list SF, stuknij „Zmień” (albo później „Zmień przewoźnika” na karcie paczki) i wybierz SF Express na liście dopasowań.
 
-Peek pobiera angielską historię z tajwańskiego serwisu SF: zachowuje oryginalne komunikaty skanów, tłumaczy wpisy o wydaniu paczki na etap „Dostarczona” i przekłada globalne znaczniki SF na statusy anulowania, przekierowania, „Zwrócona nadawcy”, zatrzymania lub zagubienia. Wszystkie chińskie godziny (`UTC+8`) przelicza na strefę czasową Twojego telefonu lub komputera („Godziny w twojej strefie czasowej: …”). SF nie zwraca tym kanałem przewidywanej daty doręczenia ani zdjęcia dowodu dostawy, a Peek śledzi numer SF do końca bez przełączania na numer lokalnego partnera.
+Peek pobiera angielską historię z tajwańskiego serwisu SF: zachowuje oryginalne komunikaty skanów, tłumaczy wpisy o wydaniu paczki na etap „Dostarczona” i przekłada globalne znaczniki SF na statusy anulowania, przekierowania, „Zwrócona nadawcy”, zatrzymania lub zagubienia. Wszystkie chińskie godziny (`UTC+8`) przelicza na strefę czasową twojego telefonu lub komputera („Godziny w twojej strefie czasowej: …”). SF nie zwraca tym kanałem przewidywanej daty doręczenia ani zdjęcia dowodu dostawy, a Peek śledzi numer SF do końca bez przełączania na numer lokalnego partnera.
 
-Peek sprawdza status nawet co 10 minut, gdy masz paczkę otwartą na ekranie albo w dniu dostawy przy włączonych powiadomieniach, a w pozostałym czasie — oraz po dwóch dniach bez nowego skanu lub po 12 godzinach na etapie „Przyjęta przez przewoźnika” — co godzinę. Gdy przesyłka ma status „W doręczeniu” i odpowiada bezpośrednio serwis SF, w godzinach `06:00–24:00` czasu chińskiego (czyli do `17:00` zimą i `18:00` latem czasu polskiego) sprawdza nawet co 5 minut; przez zewnętrzne serwisy śledzenia pyta co godzinę, co 3 godziny po dniu bez skanu i nawet co 15 minut w dniu dostawy przy otwartej karcie lub aktywnych alertach („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie może skontaktować się w Twoim imieniu z SF ani ze sprzedawcą.
+Peek sprawdza status nawet co 10 minut, gdy masz paczkę otwartą na ekranie albo w dniu dostawy przy włączonych powiadomieniach, a w pozostałym czasie — oraz po dwóch dniach bez nowego skanu lub po 12 godzinach na etapie „Przyjęta przez przewoźnika” — co godzinę. Gdy przesyłka ma status „W doręczeniu” i odpowiada bezpośrednio serwis SF, w godzinach `06:00–24:00` czasu chińskiego (czyli do `17:00` zimą i `18:00` latem czasu polskiego) sprawdza nawet co 5 minut; przez zewnętrzne serwisy śledzenia pyta co godzinę, co 3 godziny po dniu bez skanu i nawet co 15 minut w dniu dostawy przy otwartej karcie lub aktywnych alertach („Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”). Peek nie może skontaktować się w twoim imieniu z SF ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie SF Express
 

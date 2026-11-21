@@ -30,22 +30,22 @@ Paczki z Allegro Delivery mają numer zaczynający się od `AD`: śledzisz je w 
 
 Śledzenie ORLEN Paczki podaje przy każdym kroku datę, godzinę i opis po polsku. Statusy, w kolejności, w jakiej spotyka je paczka:
 
-| ORLEN Paczka pisze | Co to znaczy dla Ciebie |
+| ORLEN Paczka pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Twoja paczka jest w trakcie przygotowania przez nadawcę` | Nadawca utworzył paczkę. ORLEN Paczka jeszcze jej nie ma. |
 | `Paczka nadana w punkcie` | Nadawca zostawił paczkę w punkcie. |
 | `Twoja paczka została odebrana przez kuriera i ruszyła w drogę` | Kurier zabrał paczkę od nadawcy. |
 | `Twoja paczka została przyjęta w sortowni` | Paczka jest w sortowni regionalnej; po komunikacie pojawia się miasto. |
 | `W sortowni centralnej` | Paczka jest w sortowni centralnej. |
-| `Twoja paczka znajduje się w sortowni` | Paczka jest w sortowni, z której pojedzie do Twojego punktu odbioru. |
-| `Twoja paczka jest już w drodze do punktu odbioru` | Paczka jedzie do Twojego punktu odbioru. |
-| `Twoja paczka czeka na odbiór w punkcie` | Paczka czeka na Ciebie w punkcie. |
+| `Twoja paczka znajduje się w sortowni` | Paczka jest w sortowni, z której pojedzie do twojego punktu odbioru. |
+| `Twoja paczka jest już w drodze do punktu odbioru` | Paczka jedzie do twojego punktu odbioru. |
+| `Twoja paczka czeka na odbiór w punkcie` | Paczka czeka na ciebie w punkcie. |
 | `Paczka przekazana do przewoźnika w innym kraju. Dalszą drogę możesz śledzić w aplikacji Vinted` | Paczka z Vinted trafiła do przewoźnika za granicą. Dalej śledzisz ją w aplikacji Vinted. |
 | `Cieszymy się, że Twoja paczka została już odebrana z punktu odbioru` | Paczka została odebrana z punktu. |
 
-Przy niektórych paczkach te same kroki mają starsze brzmienie: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (bez miasta) i `Odebrana przez Klienta`, gdzie „Klient” to Ty. Przekazanie paczki za granicę bywa opisane krócej: `Paczka w innym kraju`.
+Przy niektórych paczkach te same kroki mają starsze brzmienie: `Paczka przygotowywana przez nadawcę`, `Paczka przyjęta w sortowni regionalnej` (bez miasta) i `Odebrana przez Klienta`, gdzie „Klient” to ty. Przekazanie paczki za granicę bywa opisane krócej: `Paczka w innym kraju`.
 
-Mylący bywa pierwszy status. „W trakcie przygotowania” znaczy, że sklep wygenerował etykietę, ale paczka jeszcze nie ruszyła; więcej o takich krokach w poradniku [statusy przesyłek](guide:tracking-statuses). Z kolei `Twoja paczka została odebrana przez kuriera i ruszyła w drogę` nie znaczy, że paczka jest u Ciebie: odebrał ją kurier od nadawcy. W Peek ten krok i nadanie w punkcie mają status „Przyjęta przez przewoźnika”, pobyt w sortowniach i droga do punktu – „W transporcie”, paczka w punkcie – „Do odbioru”, a odebrana – „Dostarczona”.
+Mylący bywa pierwszy status. „W trakcie przygotowania” znaczy, że sklep wygenerował etykietę, ale paczka jeszcze nie ruszyła; więcej o takich krokach w poradniku [statusy przesyłek](guide:tracking-statuses). Z kolei `Twoja paczka została odebrana przez kuriera i ruszyła w drogę` nie znaczy, że paczka jest u ciebie: odebrał ją kurier od nadawcy. W Peek ten krok i nadanie w punkcie mają status „Przyjęta przez przewoźnika”, pobyt w sortowniach i droga do punktu – „W transporcie”, paczka w punkcie – „Do odbioru”, a odebrana – „Dostarczona”.
 
 ## ORLEN Paczka: punkty odbioru, automaty i czas na odbiór
 
@@ -61,11 +61,11 @@ ORLEN Paczka dowozi paczkę do automatu paczkowego (wiele z nich stoi na stacjac
 
 Według ORLEN Paczki paczka ze sklepu internetowego dociera do punktu w 1 dzień roboczy (98% paczek), a paczka od osoby prywatnej i z Vinted w 1–3 dni robocze. Gdy śledzenie stoi w miejscu, zapytaj sklep, bo to on ma umowę z przewoźnikiem, i zajrzyj do poradnika [status przesyłki się nie zmienia](guide:tracking-not-updating). Jeśli status mówi, że paczka zaginęła, ORLEN Paczka prosi o kontakt z Centrum Obsługi Klienta przez formularz kontaktowy; zobacz też [zaginiona paczka](guide:lost-parcel).
 
-**Spóźniona paczka.** Jeśli paczka dotarła do Ciebie po terminie, czyli później niż cztery dni robocze po dniu nadania, jako odbiorca możesz według ORLEN Paczki ubiegać się o zwrot kwoty za niewywiązanie się z usługi.
+**Spóźniona paczka.** Jeśli paczka dotarła do ciebie po terminie, czyli później niż cztery dni robocze po dniu nadania, jako odbiorca możesz według ORLEN Paczki ubiegać się o zwrot kwoty za niewywiązanie się z usługi.
 
 **Uszkodzenie.** ORLEN Paczka jest wpisana do rejestru operatorów pocztowych, który prowadzi Urząd Komunikacji Elektronicznej (UKE). Według ogólnych zasad dla operatorów pocztowych, które opisuje UKE, podstawą reklamacji uszkodzonej paczki jest protokół spisany przy odbiorze w obecności pracownika operatora. Uszkodzenia niewidoczne z zewnątrz zgłaszasz najpóźniej 7 dni po otrzymaniu paczki.
 
-**Kto składa reklamację.** Według tych samych zasad nadawca albo Ty, gdy paczka została Ci doręczona lub gdy nadawca przekazał Ci prawo dochodzenia roszczeń. Reklamację złożysz pisemnie, elektronicznie, na przykład przez [formularz reklamacyjny ORLEN Paczki](https://www.orlenpaczka.pl/reklamacje/), albo ustnie, w ciągu 12 miesięcy od nadania. Operator ma 30 dni na odpowiedź; brak odpowiedzi w terminie oznacza, że reklamację uznano. Wysokość odszkodowania wynika z Prawa pocztowego i regulaminu usługi; ORLEN Paczka podaje, że odpowiada za paczkę do 500 zł, gdy nadał ją klient indywidualny, a do 5000 zł, gdy klient biznesowy.
+**Kto składa reklamację.** Według tych samych zasad nadawca albo ty, gdy paczka została ci doręczona lub gdy nadawca przekazał ci prawo dochodzenia roszczeń. Reklamację złożysz pisemnie, elektronicznie, na przykład przez [formularz reklamacyjny ORLEN Paczki](https://www.orlenpaczka.pl/reklamacje/), albo ustnie, w ciągu 12 miesięcy od nadania. Operator ma 30 dni na odpowiedź; brak odpowiedzi w terminie oznacza, że reklamację uznano. Wysokość odszkodowania wynika z Prawa pocztowego i regulaminu usługi; ORLEN Paczka podaje, że odpowiada za paczkę do 500 zł, gdy nadał ją klient indywidualny, a do 5000 zł, gdy klient biznesowy.
 
 ## ORLEN Paczka kontakt
 
@@ -81,9 +81,9 @@ ORLEN Paczka nie wysyła linków w SMS-ach i nie prosi o dopłatę do paczki prz
 
 [Peek](/) rozpoznaje numery z 13 cyfr zaczynające się od 210 z poprawną cyfrą kontrolną. Taki sam kształt mają numery innych przewoźników, więc Peek pyta naraz ORLEN Paczkę i kilku z nich, na przykład Delhivery i FAN Courier, i pisze „ORLEN Paczka ma tę przesyłkę.”, gdy zna ją tylko ORLEN Paczka. Przy innych numerach z 13 cyfr od 2 albo 3 wybierz ORLEN Paczkę przez „Zmień przewoźnika” albo wklej link śledzenia z orlenpaczka.pl z 13-cyfrowym numerem. Kodów nadania z 7 i 10 cyfr Peek nie śledzi, a numery `AD` nie należą do ORLEN Paczki.
 
-Statusy widzisz po polsku, tak jak pisze je ORLEN Paczka, z miastem sortowni na mapie, gdy komunikat je podaje, i z godziną odbioru. Godziny Peek odczytuje według czasu warszawskiego i pokazuje w strefie czasowej Twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Peek nie pokazuje punktu odbioru, przewidywanej daty dostawy, wagi ani nadawcy, a numer paczki zwrotnej pomija. Paczka z Vinted przekazana przewoźnikowi w innym kraju nie jest śledzona dalej i zostaje w drodze. Odebrane paczki po kilku miesiącach znikają ze śledzenia ORLEN Paczki.
+Statusy widzisz po polsku, tak jak pisze je ORLEN Paczka, z miastem sortowni na mapie, gdy komunikat je podaje, i z godziną odbioru. Godziny Peek odczytuje według czasu warszawskiego i pokazuje w strefie czasowej twojego urządzenia; na peektracker.com i w aplikacji na iPhonie historię zamyka wiersz „Godziny w twojej strefie czasowej:” z nazwą tej strefy. Peek nie pokazuje punktu odbioru, przewidywanej daty dostawy, wagi ani nadawcy, a numer paczki zwrotnej pomija. Paczka z Vinted przekazana przewoźnikowi w innym kraju nie jest śledzona dalej i zostaje w drodze. Odebrane paczki po kilku miesiącach znikają ze śledzenia ORLEN Paczki.
 
-Peek sprawdza śledzenie nawet co 10 minut i może Cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
+Peek sprawdza śledzenie nawet co 10 minut i może cię powiadomić o każdej zmianie statusu, tylko o ważnych krokach albo tylko w dniu dostawy. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
 
 ## Pytania o śledzenie ORLEN Paczka
 

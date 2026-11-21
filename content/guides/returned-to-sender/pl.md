@@ -7,13 +7,13 @@ published: 2026-10-14
 updated: 2026-10-27
 ---
 
-„Zwrot do nadawcy” znaczy, że przewoźnik nie mógł Ci wydać paczki i wiezie ją z powrotem do tego, kto ją wysłał. Powodem bywa błędny adres, odmowa przyjęcia, minięty termin odbioru albo nieopłacone należności. Gdy paczka już jedzie z powrotem, nie zatrzymasz jej, a wcześniej może to zrobić zwykle tylko nadawca. Napisz od razu do sprzedawcy i powiedz na piśmie, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy.
+„Zwrot do nadawcy” znaczy, że przewoźnik nie mógł ci wydać paczki i wiezie ją z powrotem do tego, kto ją wysłał. Powodem bywa błędny adres, odmowa przyjęcia, minięty termin odbioru albo nieopłacone należności. Gdy paczka już jedzie z powrotem, nie zatrzymasz jej, a wcześniej może to zrobić zwykle tylko nadawca. Napisz od razu do sprzedawcy i powiedz na piśmie, czy chcesz ponownej wysyłki, czy zwrotu pieniędzy.
 
 Sam odsyłasz coś do sklepu? To inna droga: [śledzenie zwrotu i zwrotu pieniędzy](guide:returns-tracking).
 
 ## Dlaczego paczka wraca do nadawcy?
 
-Powód zwykle widać w ostatnim statusie i na samej paczce, więc nadawca często poznaje go przed Tobą.
+Powód zwykle widać w ostatnim statusie i na samej paczce, więc nadawca często poznaje go przed tobą.
 
 | Powód | Co pisze przewoźnik |
 | --- | --- |
@@ -41,7 +41,7 @@ Zatrzymać albo przekierować paczkę w drodze może nadawca, bo to on jest klie
 | Poczta Polska, list polecony lub paczka za granicę | Odstąpienie albo zmiana adresu | Nadawca | 38,00 zł plus opłata za zwrot, przed wyjazdem przesyłki z Polski i po nim |
 | Pocztex | Żądanie odstąpienia od umowy i zwrotu albo zmiany adresu | Nadawca: formularz na pocztex.pl, infolinia albo placówka | Tylko przed doręczeniem; nie dla Pocztex AUTOMAT ani PUNKT z odbiorem w punkcie partnerskim; opłata z cennika albo umowy |
 
-Dopóki paczka jedzie do Ciebie, pytaj sprzedawcę. Jeśli wolisz odebrać ją gdzie indziej, zajrzyj do poradnika [zmiana adresu dostawy i przekierowanie paczki](guide:change-delivery-address).
+Dopóki paczka jedzie do ciebie, pytaj sprzedawcę. Jeśli wolisz odebrać ją gdzie indziej, zajrzyj do poradnika [zmiana adresu dostawy i przekierowanie paczki](guide:change-delivery-address).
 
 ## Paczka wraca do nadawcy: co zrobić?
 
@@ -81,7 +81,7 @@ Przewoźnikowi płaci nadawca, a ile, zależy od usługi:
 - **Poczta Polska** wymienia zwrot przesyłki poleconej do nadawcy wśród usług płatnych. Gdy nadawca sam żąda zwrotu, płaci za niego tyle, ile za tę przesyłkę.
 - **Z zagranicy** zwrot paczki pocztowej opłaca nadawca: zgodnie z zasadami Światowego Związku Pocztowego pokrywa koszt dalszego przewozu i opłaty, których nie anulowano w kraju odbiorcy.
 
-Czy sklep może przerzucić ten koszt na Ciebie? Tylko bezpośredni koszt odesłania towaru, tylko po odstąpieniu od umowy i tylko jeśli Cię o nim uprzedził. Dopłaty do droższej dostawy niż najtańsza w ofercie też nie musi oddać.
+Czy sklep może przerzucić ten koszt na ciebie? Tylko bezpośredni koszt odesłania towaru, tylko po odstąpieniu od umowy i tylko jeśli cię o nim uprzedził. Dopłaty do droższej dostawy niż najtańsza w ofercie też nie musi oddać.
 
 ## Po jakim czasie paczka wraca do nadawcy?
 
@@ -89,14 +89,14 @@ Czy sklep może przerzucić ten koszt na Ciebie? Tylko bezpośredni koszt odesł
 
 **Droga powrotna.** Żaden przewoźnik, którego strony czytaliśmy, nie podaje, ile trwa zwrot. Vinted uprzedza, że „zwrot paczki do osoby sprzedającej może potrwać do 25 dni roboczych”.
 
-Z zagranicy trwa to dłużej. Według tych samych zasad paczka czeka na odbiór dwa tygodnie, najwyżej miesiąc, a potem wraca najtańszą drogą, chyba że nadawca zapłaci za samolot. Licz się z tym, że powrót potrwa tyle co droga do Ciebie albo dłużej.
+Z zagranicy trwa to dłużej. Według tych samych zasad paczka czeka na odbiór dwa tygodnie, najwyżej miesiąc, a potem wraca najtańszą drogą, chyba że nadawca zapłaci za samolot. Licz się z tym, że powrót potrwa tyle co droga do ciebie albo dłużej.
 
 W historii śledzenia zwrot wygląda jak ta sama trasa od końca:
 
 :::journey
-- shop | Sprzedawca | Wysyła paczkę do Ciebie.
-- warehouse | Sortownie | Statusy zbliżają się do Ciebie.
-- locker | Blisko Ciebie | Odmowa, nieodebranie albo nikogo pod adresem.
+- shop | Sprzedawca | Wysyła paczkę do ciebie.
+- warehouse | Sortownie | Statusy zbliżają się do ciebie.
+- locker | Blisko ciebie | Odmowa, nieodebranie albo nikogo pod adresem.
 - truck | Zawraca | Wpis w rodzaju `Przesyłka została zwrócona do nadawcy`, po angielsku `Returned` albo `On the way back to the Sender`.
 - warehouse | Znowu sortownie | Ta sama trasa, od końca.
 - shop | Sprzedawca | „Doręczona” znaczy tu: doręczona nadawcy.
@@ -110,7 +110,7 @@ To myli wiele osób: ostatnie „doręczona” w historii zwrotu dotyczy nadawcy
 
 ### Odmowa przyjęcia przez pomyłkę: czy odzyskam paczkę?
 
-Raczej nie od przewoźnika: Pocztex na przykład odsyła odmówioną paczkę niezwłocznie. Poproś sklep, żeby wysłał ją ponownie, gdy do niego wróci. W Pocztex odmowa domownika, który nie jest Twoim pełnomocnikiem, nie liczy się jako odmowa: dostaniesz wtedy awizo.
+Raczej nie od przewoźnika: Pocztex na przykład odsyła odmówioną paczkę niezwłocznie. Poproś sklep, żeby wysłał ją ponownie, gdy do niego wróci. W Pocztex odmowa domownika, który nie jest twoim pełnomocnikiem, nie liczy się jako odmowa: dostaniesz wtedy awizo.
 
 ### Co, jeśli na paczce nie ma adresu nadawcy?
 
@@ -118,7 +118,7 @@ Poczta Polska kieruje taką przesyłkę niedoręczalną do wyznaczonej jednostki
 
 ### Paczka wróciła, a nie wiem, od kogo była
 
-Po zwrocie nieodebranej przesyłki poleconej Poczta Polska może Ci podać nazwę nadawcy.
+Po zwrocie nieodebranej przesyłki poleconej Poczta Polska może ci podać nazwę nadawcy.
 
 :::sources
 - [Universal Parcel Scraper: InPost](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/inpost) – statusy InPost, które czyta Peek (po polsku albo po angielsku, w języku aplikacji): odmowa przyjęcia, powrót do nadawcy

@@ -28,15 +28,15 @@ Spacje ani małe litery nie mają znaczenia podczas wklejania numeru do Peek.
 
 Wyszukiwarka YWE wyświetla każdy skan z datą i godziną, przesunięciem względem czasu GMT oraz miastem i stanem w USA, od najnowszego na górze. Komunikaty są po angielsku. W kolejności, w jakiej przesyłka przechodzi przez sieć w Stanach Zjednoczonych:
 
-| Komunikat YWE | Co to oznacza dla Ciebie | Peek pokazuje |
+| Komunikat YWE | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `Shipping Order Created.` | Nadawca zgłosił zlecenie doręczenia w YWE, ale fizyczna paczka nie trafiła jeszcze do YWE. | „Zarejestrowana” |
 | `Container picked up by YWE,LAX01 Awaiting Item.` | YWE odebrało w Stanach Zjednoczonych kontener lotniczy, w którym przyleciała paczka; pojedyncza przesyłka nie została jeszcze zeskanowana. | „W transporcie” |
 | `Container received` | Amerykański hub YWE przyjął kontener na magazyn. | „W transporcie” |
-| `Parcel received by in LAX01.` | Pierwszy indywidualny skan Twojej paczki w amerykańskiej sortowni YWE. `Parcel received by NJC01.`, bez słowa „in”, oznacza to samo przyjęcie w innym hubie. | „W transporcie” |
+| `Parcel received by in LAX01.` | Pierwszy indywidualny skan twojej paczki w amerykańskiej sortowni YWE. `Parcel received by NJC01.`, bez słowa „in”, oznacza to samo przyjęcie w innym hubie. | „W transporcie” |
 | `Parcel departed from Facility.` | Przesyłka opuściła sortownię. | „W transporcie” |
 | `Parcel received by transit facility.`, `In processing at transit facility.`, `Parcel departed from Transit Facility.`, `In transit - departure`, `In transit to next facility.` | Przejście przez pośredni punkt tranzytowy w USA przed stacją doręczeń obsługującą dany rejon. | „W transporcie” |
-| `Parcel received by local  Facility.` | Przyjęcie w lokalnej stacji doręczeń w USA, z której kurierzy rozwożą paczki w Twojej okolicy. | „W transporcie” |
+| `Parcel received by local  Facility.` | Przyjęcie w lokalnej stacji doręczeń w USA, z której kurierzy rozwożą paczki w twojej okolicy. | „W transporcie” |
 | `Parcel is out for delivery.` | Wydana kurierowi do doręczenia w Stanach Zjednoczonych. | „W doręczeniu” |
 | `Parcel has been delivered.(Front door)` | Doręczona w USA. W nawiasie okrągłym podano miejsce pozostawienia paczki. | „Dostarczona” |
 | `Parcel delivery abnormal [Restricted Address].Parcel will be returned to the warehouse.` | Próba doręczenia w USA nie powiodła się z powodu podanego w nawiasie kwadratowym; paczka wraca do amerykańskiego magazynu YWE, a nie do nadawcy. | „Próba doręczenia” |
@@ -50,7 +50,7 @@ Wyszukiwarka YWE wyświetla każdy skan z datą i godziną, przesunięciem wzgl�
 
 **Inne brzmienia.** Skan spoza powyższej tabeli wyświetla się w Peek dokładnie tak, jak zapisało go YWE, a Peek w miarę możliwości rozpoznaje etap na podstawie użytych słów.
 
-**Godziny.** Każdy wpis zawiera przesunięcie względem czasu GMT danego centrum YWE w USA. Peek odczytuje w ten sposób dokładny moment zdarzenia i przelicza wszystkie godziny na strefę czasową Twojego urządzenia; na peektracker.com i w aplikacjach na iPhone’a i Androida oś czasu kończy się informacją „Godziny w twojej strefie czasowej:” wraz z jej nazwą.
+**Godziny.** Każdy wpis zawiera przesunięcie względem czasu GMT danego centrum YWE w USA. Peek odczytuje w ten sposób dokładny moment zdarzenia i przelicza wszystkie godziny na strefę czasową twojego urządzenia; na peektracker.com i w aplikacjach na iPhone’a i Androida oś czasu kończy się informacją „Godziny w twojej strefie czasowej:” wraz z jej nazwą.
 
 ## Kto doręcza przesyłki YWE
 
@@ -60,7 +60,7 @@ Na podstronie o firmie YWE podaje, że wystartowało w Los Angeles w 2024 roku i
 
 **Próby doręczenia i odbiór w USA.** YWE nie publikuje zasad dotyczących liczby prób doręczenia w Stanach Zjednoczonych, awizowania ani punktów odbioru. Po nieudanej próbie w USA skan informuje, że paczka wraca do magazynu YWE (`Parcel will be returned to the warehouse.`). Aby poprosić o ponowne doręczenie lub przekazać wskazówki dojazdu, napisz do YWE e-mailem (szczegóły niżej), podając numer śledzenia, pełny adres w USA oraz instrukcje dla kuriera. Zobacz też [nieudana próba doręczenia](guide:missed-delivery).
 
-**Polska i inne kraje poza Stanami Zjednoczonymi.** YWE nie wymienia żadnych usług poza terytorium Stanów Zjednoczonych. Jeśli sprzedawca podał Ci numer YWE dla zamówienia adresowanego do Polski albo innego kraju poza USA, zapytaj sklep, który przewoźnik faktycznie doręcza paczkę na miejscu.
+**Polska i inne kraje poza Stanami Zjednoczonymi.** YWE nie wymienia żadnych usług poza terytorium Stanów Zjednoczonych. Jeśli sprzedawca podał ci numer YWE dla zamówienia adresowanego do Polski albo innego kraju poza USA, zapytaj sklep, który przewoźnik faktycznie doręcza paczkę na miejscu.
 
 **YWE a Yanwen.** [Yanwen](carrier:yanwen) funkcjonuje w Peek jako osobny przewoźnik z własnymi formatami numerów i osobną wyszukiwarką, a strona YWE nie wyjaśnia, czy obie firmy są ze sobą powiązane. Gdy śledzenie Yanwen wskazuje `YanwenExpress` jako dystrybutora przesyłki w USA i podaje numer YWE, Peek wyświetla „Doręcza: YWE” oraz odpytuje również system YWE. Dopóki w YWE widnieje sama zapowiedź bez własnego skanu, wyświetla się „Zgłoszona przewoźnikowi YWE, jeszcze nieprzyjęta”. Gdy tylko YWE opublikuje skan co najmniej tak świeży jak ostatni wpis Yanwen, Peek przełącza dalsze śledzenie na YWE, zachowując wcześniejsze zdarzenia Yanwen.
 
@@ -70,7 +70,7 @@ Na podstronie o firmie YWE podaje, że wystartowało w Los Angeles w 2024 roku i
 
 **Zatrzymana na `Shipping Order Created.`** YWE ma wyłącznie dane elektroniczne zlecenia, a nie samą paczkę. Ponieważ pierwszy fizyczny skan YWE wykonuje dopiero w swoim hubie w USA, dopytaj sprzedawcę, gdzie przesyłka znajduje się obecnie i kiedy została wysłana. Jeśli jedzie z Chin do Stanów Zjednoczonych, sprawdź poradnik [śledzenie paczki z Chin](guide:tracking-from-china).
 
-**Zatrzymana na `Container picked up by YWE,LAX01 Awaiting Item.`** YWE odebrało już w USA zbiorczy kontener lotniczy, ale nie zeskanowało jeszcze Twojej pojedynczej paczki podczas rozładunku.
+**Zatrzymana na `Container picked up by YWE,LAX01 Awaiting Item.`** YWE odebrało już w USA zbiorczy kontener lotniczy, ale nie zeskanowało jeszcze twojej pojedynczej paczki podczas rozładunku.
 
 **`Parcel delivery abnormal` lub `Parcel delivery failed`.** Doręczenie w USA nie udało się z przyczyny podanej w nawiasie kwadratowym, a przesyłka wraca do magazynu YWE. Wyślij wiadomość e-mail do YWE z numerem śledzenia, pełnym adresem w USA oraz wskazówkami doręczenia i powiadom sprzedawcę.
 
@@ -100,7 +100,7 @@ Własna strona YWE potrafi też pokazywać dwugodzinne okno doręczenia w trakci
 
 Ponieważ wyszukiwarka YWE nie wymienia innego przewoźnika, przy przesyłce dodanej bezpośrednio numerem YWE Peek nie pokazuje wiersza „Doręcza:” i pozostaje przy systemie YWE aż do doręczenia. Jeśli serwer YWE chwilowo nie odpowiada, w międzyczasie Peek sprawdza usługi śledzenia.
 
-Dopóki masz otwartą kartę przesyłki lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza aktualizacje nawet co 10 minut — a od godziny 6:00 czasu lokalnego w dniu wydania paczki do doręczenia nawet co 2 minuty — o ile odpowiada własna wyszukiwarka YWE (przez same usługi śledzenia: co godzinę, co 3 godziny po dobie bez nowego skanu i nawet co 15 minut w dniu doręczenia przy otwartej przesyłce lub aktywnych powiadomieniach); w pozostałym czasie oraz po dwóch dniach bez zmian (po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Peek nie kontaktuje się w Twoim imieniu ani z YWE, ani ze sprzedawcą.
+Dopóki masz otwartą kartę przesyłki lub w dniu doręczenia przy włączonych powiadomieniach, Peek sprawdza aktualizacje nawet co 10 minut — a od godziny 6:00 czasu lokalnego w dniu wydania paczki do doręczenia nawet co 2 minuty — o ile odpowiada własna wyszukiwarka YWE (przez same usługi śledzenia: co godzinę, co 3 godziny po dobie bez nowego skanu i nawet co 15 minut w dniu doręczenia przy otwartej przesyłce lub aktywnych powiadomieniach); w pozostałym czasie oraz po dwóch dniach bez zmian (po 12 godzinach, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”) sprawdza co godzinę. Powiadomienia możesz ustawić na „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”. Peek nie kontaktuje się w twoim imieniu ani z YWE, ani ze sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie YWE
 
@@ -118,7 +118,7 @@ W polu wyszukiwania na górze tej strony lub na oficjalnej stronie YWE pod adres
 
 ### Co oznacza „Container picked up by YWE”?
 
-Oznacza to, że YWE odebrało w Stanach Zjednoczonych kontener lotniczy, w którym przyleciała Twoja przesyłka. Kod po przecinku, na przykład `LAX01`, wskazuje amerykańską sortownię YWE. Pierwszy skan samej paczki (`Parcel received by in LAX01.`) pojawia się później, po rozformowaniu kontenera. Dla obu zdarzeń Peek pokazuje „W transporcie”.
+Oznacza to, że YWE odebrało w Stanach Zjednoczonych kontener lotniczy, w którym przyleciała twoja przesyłka. Kod po przecinku, na przykład `LAX01`, wskazuje amerykańską sortownię YWE. Pierwszy skan samej paczki (`Parcel received by in LAX01.`) pojawia się później, po rozformowaniu kontenera. Dla obu zdarzeń Peek pokazuje „W transporcie”.
 
 ### Z kim się skontaktować w sprawie zaginionej paczki YWE?
 

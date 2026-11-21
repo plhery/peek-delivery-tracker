@@ -28,18 +28,18 @@ Podobne numery, których nie warto mylić:
 
 Royal Mail publikuje historię śledzenia wyłącznie po angielsku. Poniżej znajdziesz najczęstsze komunikaty przy paczkach z Wielkiej Brytanii (lub wysyłanych tam z Polski), w typowej kolejności:
 
-| Komunikat Royal Mail | Co to oznacza dla Ciebie |
+| Komunikat Royal Mail | Co to oznacza dla ciebie |
 | --- | --- |
 | `Sender preparing item` / `Sender has despatched item` | Nadawca wygenerował etykietę lub zgłosił wysyłkę, ale Royal Mail nie ma jeszcze paczki. |
 | `We're expecting it` | Elektroniczna zapowiedź nadania przed fizycznym przyjęciem przesyłki. |
 | `Item Received` | Royal Mail przyjęła przesyłkę. Ten sam wpis pojawia się ponownie w brytyjskich sortowniach oraz po dotarciu do urzędu wymiany w kraju docelowym. |
 | `In transit` | Przesyłka przemieszcza się między sortowniami w sieci. |
 | `Item Leaving the UK` | Paczka opuściła Wielką Brytanię w drodze do kraju doręczenia. |
-| `Your item is currently with Customs in the destination country.` | Przesyłka przechodzi kontrolę i odprawę celną w Twoim kraju. |
+| `Your item is currently with Customs in the destination country.` | Przesyłka przechodzi kontrolę i odprawę celną w twoim kraju. |
 | `Released from Customs` | Odprawa celna zakończona — paczka wraca do krajowej sieci doręczeń. |
 | `Customs charges raised` | Przed odbiorem trzeba opłacić naliczony VAT, cło lub opłatę pocztową (szczegóły niżej). |
 | `Item has left the overseas International Processing Centre` | Paczka opuściła międzynarodowy węzeł pocztowy w kraju przeznaczenia. |
-| `Despatched to delivery office` / `Item received at Sorting Office` | W drodze do placówki lub sortowni obsługującej Twój rejon. |
+| `Despatched to delivery office` / `Item received at Sorting Office` | W drodze do placówki lub sortowni obsługującej twój rejon. |
 | `Ready for Delivery` | Przyjęta w lokalnej jednostce i przygotowana do wydania doręczycielowi. |
 | `Out for delivery` / `Due to be delivered today` | Wydana dziś listonoszowi lub kurierowi do doręczenia. |
 | `Delivery attempted` | Nieudana próba doręczenia — sprawdź skrzynkę na listy, SMS-y lub e-mail. |
@@ -54,7 +54,7 @@ Gdy w nagłówku podsumowania Royal Mail widnieje ogólne `Pending` (często prz
 
 Przesyłka wysłana z Wielkiej Brytanii z numerem kończącym się na `…GB` trafia do międzynarodowego obiegu pocztowego i w Polsce przejmuje ją [Poczta Polska](carrier:poczta-polska), zachowując dokładnie ten sam numer:
 
-- **Śledzenie i awizo:** krajowe skany sprawdzisz pod adresem `www.poczta-polska.pl/sledzenie-przesylek` lub w Peek. Jeśli listonosz bądź kurier nie zastanie Cię pod adresem, zostawi zawiadomienie (*awizo*). Gdy nie odbierzesz przesyłki w ciągu pierwszych 7 dni, następnego dnia wystawiane jest powtórne zawiadomienie, a po upływie **14 dni** liczonych od dnia następnego po pierwszym awizie nieodebrana przesyłka wraca do nadawcy (na stronie `poczta-polska.pl` można odpłatnie zlecić przechowywanie przesyłki rejestrowanej jeszcze przez maksymalnie 14 dni, o ile placówka ma na to miejsce).
+- **Śledzenie i awizo:** krajowe skany sprawdzisz pod adresem `www.poczta-polska.pl/sledzenie-przesylek` lub w Peek. Jeśli listonosz bądź kurier nie zastanie cię pod adresem, zostawi zawiadomienie (*awizo*). Gdy nie odbierzesz przesyłki w ciągu pierwszych 7 dni, następnego dnia wystawiane jest powtórne zawiadomienie, a po upływie **14 dni** liczonych od dnia następnego po pierwszym awizie nieodebrana przesyłka wraca do nadawcy (na stronie `poczta-polska.pl` można odpłatnie zlecić przechowywanie przesyłki rejestrowanej jeszcze przez maksymalnie 14 dni, o ile placówka ma na to miejsce).
 
 ## Cło, VAT i opłaty unijne przy paczkach z Wielkiej Brytanii
 

@@ -39,9 +39,9 @@ Bis zu zehn Sendungsschritte, je nach deiner Wahl:
 | „Wichtige Schritte“ | „Zustellung, Abholung, Zoll, fehlgeschlagene Zustellversuche und Rücksendungen.“ | Beim Zoll, Problem gemeldet, in Zustellung, Zustellversuch, abholbereit, zugestellt, zurück an Absender |
 | „Nur die Zustellung“ | „Wenn dein Paket in Zustellung geht und wenn es ankommt.“ | In Zustellung, zugestellt |
 
-Ein Konto, das nie gewählt hat, bekommt jeden Schritt. Sechs Schritte haben eigene Titel: „Etikett erstellt“, „Unterwegs“, „Abholbereit“, „Angekommen“, „Zustellung nicht geklappt“ und „Auf dem Rückweg“; die übrigen tragen den Namen des Schritts, etwa „In Zustellung“.
+Ein Konto, das nie gewählt hat, bekommt jeden Schritt. Sechs Schritte haben eigene Titel: „Etikett erstellt“, „Unterwegs“, „Abholbereit“, „Angekommen“, „Zustellung verpasst“ und „Auf dem Rückweg“; die übrigen tragen den Namen des Schritts, etwa „In Zustellung“.
 
-Was jeder Schritt bedeutet: [Sendungsstatus erklärt](guide:tracking-statuses). Nach „Zustellung nicht geklappt“ hilft [Paket verpasst](guide:missed-delivery), nach „Abholbereit“ [Packstation und Paketautomat](guide:parcel-lockers) oder [Paket nicht abgeholt](guide:uncollected-parcel). Wenn du Versandmails an Peek weiterleitest, kommt noch einer dazu, „Aus deiner E-Mail hinzugefügt“: siehe den Ratgeber [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email).
+Was jeder Schritt bedeutet: [Sendungsstatus erklärt](guide:tracking-statuses). Nach „Zustellung verpasst“ hilft [Paket verpasst](guide:missed-delivery), nach „Abholbereit“ [Packstation und Paketautomat](guide:parcel-lockers) oder [Paket nicht abgeholt](guide:uncollected-parcel). Wenn du Versandmails an Peek weiterleitest, kommt noch einer dazu, „Aus deiner E-Mail hinzugefügt“: siehe den Ratgeber [Pakete aus deinen E-Mails verfolgen](guide:add-parcels-by-email).
 
 ## Bekomme ich Benachrichtigungen auch ohne Konto?
 

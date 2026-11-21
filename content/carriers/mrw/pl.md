@@ -22,7 +22,7 @@ Gdzie szukać numeru:
 
 - **Nadanie w oddziale MRW:** na papierowym pokwitowaniu; w razie jego braku MRW odsyła do placówki nadawczej.
 - **Zakupy online:** w potwierdzeniu wysyłki ze sklepu albo w historii zamówień.
-- **Powiadomienie SMS:** jeśli nadawca podał Twój numer telefonu komórkowego, MRW wysyła bezpłatną zapowiedź doręczenia SMS-em; strona `concertarmrw.asp` („Concertar entrega” / „Agendar entrega”) służy jednak wyłącznie do ustalenia terminu z kodem z SMS-a, a nie do ogólnego śledzenia.
+- **Powiadomienie SMS:** jeśli nadawca podał twój numer telefonu komórkowego, MRW wysyła bezpłatną zapowiedź doręczenia SMS-em; strona `concertarmrw.asp` („Concertar entrega” / „Agendar entrega”) służy jednak wyłącznie do ustalenia terminu z kodem z SMS-a, a nie do ogólnego śledzenia.
 
 Ciągi złożone z samych 12 cyfr stosują również [FedEx](carrier:fedex), [Mondial Relay](carrier:mondial-relay), [BRT](carrier:brt), [SF Express](carrier:sf-express), DPD France czy Colis Privé. Jeśli MRW nie rozpoznaje numeru, sprawdź przewoźnika w e-mailu ze sklepu albo zajrzyj do poradnika [formaty numerów śledzenia](guide:tracking-number-formats).
 
@@ -32,7 +32,7 @@ Gdy `mrw.es` wyświetla komunikat „Envío no encontrado” (`mrw.pt`: „Envio
 
 Na `mrw.es` (oraz w Peek) wpisy pojawiają się po hiszpańsku, a na `mrw.pt` po portugalsku. Oto hiszpańskie statusy rozpoznawane przez Peek w typowej kolejności:
 
-| Status na `mrw.es` | Co to oznacza dla Ciebie |
+| Status na `mrw.es` | Co to oznacza dla ciebie |
 | --- | --- |
 | `Pendiente de recoger` | „Oczekuje na odbiór od nadawcy”: etykieta istnieje, ale sprzedawca nie przekazał jeszcze paczki kurierowi MRW. |
 | `Envío recogido en origen` | „Odebrana w miejscu nadania”: MRW przyjęło paczkę do sieci. |
@@ -44,15 +44,15 @@ Na `mrw.es` (oraz w Peek) wpisy pojawiają się po hiszpańsku, a na `mrw.pt` po
 | `Depositado en PointCorner destino` | „Złożona w docelowym PointCorner”: czeka na odbiór w sklepie partnerskim `PointCorner`. |
 | `Envío entregado` | „Przesyłka doręczona”. |
 
-Najczęściej mylony bywa wpis `Pendiente de recoger`: nie oznacza on, że paczka czeka na Twój odbiór w punkcie (to sygnalizuje `Depositado en punto MRW`), lecz że MRW dopiero czeka na odebranie towaru od nadawcy. Jeśli ten stan utrzymuje się przez kilka dni, zapytaj sprzedawcę; ogólne objaśnienia znajdziesz w [co oznaczają statusy przesyłek](guide:tracking-statuses).
+Najczęściej mylony bywa wpis `Pendiente de recoger`: nie oznacza on, że paczka czeka na twój odbiór w punkcie (to sygnalizuje `Depositado en punto MRW`), lecz że MRW dopiero czeka na odebranie towaru od nadawcy. Jeśli ten stan utrzymuje się przez kilka dni, zapytaj sprzedawcę; ogólne objaśnienia znajdziesz w [co oznaczają statusy przesyłek](guide:tracking-statuses).
 
 ## Doręczenie, punkty MRW Point i nieobecność odbiorcy
 
-**Pod drzwiami.** Według ogólnych warunków świadczenia usług MRW przesyłkę uznaje się za doręczoną, gdy pełnoletnia osoba obecna pod adresem dostawy przyjmie paczkę i złoży podpis na papierze lub terminalu mobilnym — nawet jeśli nie jest adresatem wskazanym z imienia i nazwiska; osobom poniżej 18. roku życia MRW przesyłek nie wydaje. Do automatów paczkowych MRW wkłada przesyłki wyłącznie za Twoją uprzednią wyraźną zgodą albo gdy wybrano automat w koszyku sklepu.
+**Pod drzwiami.** Według ogólnych warunków świadczenia usług MRW przesyłkę uznaje się za doręczoną, gdy pełnoletnia osoba obecna pod adresem dostawy przyjmie paczkę i złoży podpis na papierze lub terminalu mobilnym — nawet jeśli nie jest adresatem wskazanym z imienia i nazwiska; osobom poniżej 18. roku życia MRW przesyłek nie wydaje. Do automatów paczkowych MRW wkłada przesyłki wyłącznie za twoją uprzednią wyraźną zgodą albo gdy wybrano automat w koszyku sklepu.
 
 **Zmiana terminu.** Wiadomości SMS od MRW zawierają link lub numer telefonu do przełożenia dostawy; formularz „Concertar entrega” (`mrw.es`) lub „Agendar entrega” (`mrw.pt`) wymaga kodu z otrzymanego SMS-a.
 
-**MRW Point.** Pod szyldem MRW Point działają trzy rodzaje punktów nadania i odbioru: `PointOffice`, sklepy partnerskie `PointCorner` oraz automaty paczkowe `PointMatic`. Punkt wybierasz podczas zakupów online, a po dotarciu paczki dostajesz SMS lub e-mail (w przypadku `PointMatic` z kodem PIN otwierającym skrytkę). W `PointOffice`, `PointCorner` lub zwykłym oddziale MRW zabierz ze sobą dowód osobisty albo paszport; jeśli odbiera ktoś inny, potrzebna jest kopia Twojego dokumentu i podpisane upoważnienie. Centra przeładunkowe oznaczone w historii dopiskiem `(Plataforma)` nie obsługują klientów indywidualnych i nie wydają paczek; właściwy oddział znajdziesz w [wyszukiwarce placówek MRW](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp).
+**MRW Point.** Pod szyldem MRW Point działają trzy rodzaje punktów nadania i odbioru: `PointOffice`, sklepy partnerskie `PointCorner` oraz automaty paczkowe `PointMatic`. Punkt wybierasz podczas zakupów online, a po dotarciu paczki dostajesz SMS lub e-mail (w przypadku `PointMatic` z kodem PIN otwierającym skrytkę). W `PointOffice`, `PointCorner` lub zwykłym oddziale MRW zabierz ze sobą dowód osobisty albo paszport; jeśli odbiera ktoś inny, potrzebna jest kopia twojego dokumentu i podpisane upoważnienie. Centra przeładunkowe oznaczone w historii dopiskiem `(Plataforma)` nie obsługują klientów indywidualnych i nie wydają paczek; właściwy oddział znajdziesz w [wyszukiwarce placówek MRW](https://www.mrw.es/oficina_transporte_urgente/MRW_franquicia.asp).
 
 **Gdy doręczenie się nie powiedzie.** MRW powiadamia nadawcę, który ma maksymalnie 15 dni na decyzję o zwrocie albo przekierowaniu przesyłki. Publiczne strony MRW nie podają jednej stałej liczby prób doręczenia ani dni składowania w oddziale — w razie wątpliwości zadzwoń bezpośrednio do oddziału widocznego w śledzeniu.
 
@@ -79,7 +79,7 @@ Według oficjalnych stron MRW w Hiszpanii i Portugalii:
 
 Peek odpytuje hiszpańską wyszukiwarkę MRW, która zwraca dane również dla paczek MRW Portugalia. Opisy zdarzeń pozostają po hiszpańsku (niesklasyfikowane wiersze pojawiają się jako `Actualización de seguimiento`), każdy oddział MRW (kod pocztowy i miejscowość, przy hubach z dopiskiem `(Plataforma)`) trafia na mapę z pominięciem ulicznych adresów sklepów `PointCorner`, a MRW nie podaje przewidywanej daty dostawy. Gdy `mrw.es` zwraca jedynie skrócone podsumowanie bez tabeli historii, Peek uzupełnia przebieg z uniwersalnych serwisów śledzenia albo pokazuje bieżący status z MRW.
 
-Ponieważ godziny z MRW nie zawierają strefy czasowej, Peek odczytuje je w czasie lokalnym danej placówki i przelicza na strefę Twojego urządzenia („Godziny w twojej strefie czasowej: …”). Gdy masz przesyłkę otwartą albo w dniu dostawy przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut, a na etapie „W doręczeniu” od 6:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio serwis MRW (przez zewnętrzne serwisy śledzenia tego dnia nawet co 15 minut, a poza tym co godzinę lub co 3 godziny po dniu bez skanu); w pozostałym czasie oraz po dwóch dniach bez nowości — lub po 12 godzinach na „Zarejestrowana” bądź „Przyjęta przez przewoźnika” — sprawdza co godzinę, z powiadomieniami „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”.
+Ponieważ godziny z MRW nie zawierają strefy czasowej, Peek odczytuje je w czasie lokalnym danej placówki i przelicza na strefę twojego urządzenia („Godziny w twojej strefie czasowej: …”). Gdy masz przesyłkę otwartą albo w dniu dostawy przy włączonych powiadomieniach, Peek sprawdza status nawet co 10 minut, a na etapie „W doręczeniu” od 6:00 czasu lokalnego nawet co 2 minuty, dopóki odpowiada bezpośrednio serwis MRW (przez zewnętrzne serwisy śledzenia tego dnia nawet co 15 minut, a poza tym co godzinę lub co 3 godziny po dniu bez skanu); w pozostałym czasie oraz po dwóch dniach bez nowości — lub po 12 godzinach na „Zarejestrowana” bądź „Przyjęta przez przewoźnika” — sprawdza co godzinę, z powiadomieniami „Każdy skan”, „Ważne etapy” albo „Tylko doręczenie”.
 
 ## Najczęstsze pytania o śledzenie MRW
 
@@ -93,7 +93,7 @@ Dla zamówień ze sklepów internetowych MRW nie publikuje jednej ogólnej godzi
 
 ### Co oznacza status „Pendiente de recoger” w MRW?
 
-Oznacza, że wygenerowano etykietę, ale nadawca nie przekazał jeszcze paczki kurierowi MRW — a nie że przesyłka czeka już na Twój odbiór w punkcie (`Depositado en punto MRW`).
+Oznacza, że wygenerowano etykietę, ale nadawca nie przekazał jeszcze paczki kurierowi MRW — a nie że przesyłka czeka już na twój odbiór w punkcie (`Depositado en punto MRW`).
 
 ### Jak napisać do obsługi klienta MRW?
 

@@ -37,16 +37,16 @@ Więcej o rozpoznawaniu numerów w poradniku [jaki kurier po numerze przesyłki]
 
 Polska strona śledzenia działa po polsku, ukraińsku i angielsku. Pokazuje bieżący status i każdy ruch z datą, godziną i miastem, od najnowszego. Liczby w komunikatach to numery oddziałów, magazynów lub automatów, nie numer przesyłki. Statusy w kolejności, w jakiej spotyka je paczka:
 
-| Nova Post pisze | Co to znaczy dla Ciebie |
+| Nova Post pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Zarejestrowano i jest w trakcie przygotowania` | Nadawca założył list przewozowy, ale jeszcze nie oddał paczki. |
 | `Przyjęto w oddział 141` | Nadawca nadał paczkę w tym oddziale. |
 | `Dotarła do centrum sortowania` | Paczka jedzie przez sieć Nova Post. |
 | `Umieszczono w terminalu celnym` | Paczka zza granicy czeka w terminalu celnym. |
-| `Przesyłka wymaga odprawy celnej` | Potrzebna jest odprawa; opłaty mogą być po Twojej stronie. |
+| `Przesyłka wymaga odprawy celnej` | Potrzebna jest odprawa; opłaty mogą być po twojej stronie. |
 | `Odprawa celna zakończona, w drodze` | Odprawa za nią, paczka jedzie dalej. |
 | `Zmieniono miejsce dostawy` | Ty albo nadawca przekierowaliście paczkę. |
-| `The courier has left for the recipient` | Kurier jedzie do Ciebie (tak brzmi ten komunikat po angielsku). |
+| `The courier has left for the recipient` | Kurier jedzie do ciebie (tak brzmi ten komunikat po angielsku). |
 | `Dotarła do oddziału 300` | Paczka czeka na odbiór w tym oddziale. |
 | `Dotarła do paczkomatu 34256` | Paczka czeka w automacie paczkowym. |
 | `Odebrano w oddział 300` | Paczka została odebrana w oddziale. |
@@ -60,11 +60,11 @@ Nova Post doręcza w Polsce kurierem pod adres, do swojego oddziału, do Paczkom
 
 **W oddziale** podajesz numer listu przewozowego i potwierdzasz odbiór w aplikacji, kodem z SMS-a albo dowodem tożsamości. Możesz obejrzeć paczkę na miejscu. Według regulaminu Nova Post Poland oddział trzyma paczkę bezpłatnie 7 dni kalendarzowych, od 8. do 30. dnia płacisz za przechowanie, a po 30 dniach paczka uchodzi za nieodebraną.
 
-**W Paczkomacie InPost** kod do skrytki przychodzi SMS-em i e-mailem od partnera. Paczka czeka tam 2 dni kalendarzowe, a potem Nova Post przewozi ją do swojego oddziału i Cię o tym powiadamia: tak podają i strona o Paczkomatach, i regulamin. Jeśli paczkę już zabrano z Paczkomatu, zadzwoń pod +48 573 504 069.
+**W Paczkomacie InPost** kod do skrytki przychodzi SMS-em i e-mailem od partnera. Paczka czeka tam 2 dni kalendarzowe, a potem Nova Post przewozi ją do swojego oddziału i cię o tym powiadamia: tak podają i strona o Paczkomatach, i regulamin. Jeśli paczkę już zabrano z Paczkomatu, zadzwoń pod +48 573 504 069.
 
 **W punkcie Nova Post** paczka czeka do 5 dni. W punkcie nie zapłacisz za przesyłkę ani nie sprawdzisz zawartości.
 
-**Kurier** pod adres kosztuje dodatkowo 12 zł za paczkę do 30 kg. Gdy Cię nie zastanie, paczka trafia do oddziału albo do Paczkomatu.
+**Kurier** pod adres kosztuje dodatkowo 12 zł za paczkę do 30 kg. Gdy cię nie zastanie, paczka trafia do oddziału albo do Paczkomatu.
 
 **Na Ukrainie** oddział trzyma paczkę bezpłatnie 5 dni (od 1 października 2026, wcześniej 7), potem nalicza opłatę dzienną, a po 30 dniach paczka uchodzi za nieodebraną. Automat paczkowy otwierasz w aplikacji i masz na to 5 dni.
 
@@ -74,7 +74,7 @@ Nova Post nie mówi, co robić, gdy śledzenie stoi. W polskim FAQ jako przyczyn
 
 Za paczkę spoza UE, także z Ukrainy, cło i podatek płaci odbiorca. Nova Post powiadamia w aplikacji, SMS-em lub e-mailem i wysyła link do płatności; zapłacisz w aplikacji, przez link albo przy odbiorze. Zasady opisuje strona [opłaty celne za przesyłki z zagranicy](https://novapost.com/pl-pl/international/customs-clearance) i poradnik [paczka zatrzymana przez urząd celny](guide:customs).
 
-Reklamację w Polsce składa według regulaminu nadawca. Ty możesz ją złożyć, gdy nadawca przeniesie na Ciebie to prawo albo gdy paczkę Ci doręczono. Składa się ją w oddziale, pisemnie, ustnie albo e-mailem na support@novapost.pl, w ciągu 12 miesięcy od nadania (2 miesiące przy utracie lub uszkodzeniu przesyłki kurierskiej). Nova Post odpowiada w ciągu 30 dni. Na stronie śledzenia jest też przycisk „Złożyć reklamację”.
+Reklamację w Polsce składa według regulaminu nadawca. Ty możesz ją złożyć, gdy nadawca przeniesie na ciebie to prawo albo gdy paczkę ci doręczono. Składa się ją w oddziale, pisemnie, ustnie albo e-mailem na support@novapost.pl, w ciągu 12 miesięcy od nadania (2 miesiące przy utracie lub uszkodzeniu przesyłki kurierskiej). Nova Post odpowiada w ciągu 30 dni. Na stronie śledzenia jest też przycisk „Złożyć reklamację”.
 
 Na Ukrainie skargę składasz w aplikacji, na stronie śledzenia, telefonicznie albo w oddziale, z numerem podatkowym lub paszportem. Nova Poshta rozpatruje ją do 3 dni roboczych, a odszkodowanie wypłaca do wysokości zadeklarowanej wartości.
 
@@ -92,7 +92,7 @@ Stan na 22 października 2026, według stron Nova Post:
 
 Te same 14-cyfrowe kształty numerów mają inne firmy, a po samym numerze [Peek](/) nie wskaże Nova Poshta. Pyta za to przewoźników, którzy takich numerów używają, a wśród nich Nova Poshta: od razu, jeśli szukasz z Ukrainy albo numer zaczyna się od 595000, a w innym wypadku dopiero wtedy, gdy pierwsi przewoźnicy go nie znają. O numer zaczynający się od SH albo TN pyta tylko Nova Poshta. Jeśli Nova Poshta zna numer, zobaczysz „Nova Poshta (Ukraine) ma tę przesyłkę.”. Jeśli nie, naciśnij „Zmień” i wybierz „Nova Poshta (Ukraine)” albo wklej link do śledzenia z novaposhta.ua lub novapost.com. Peek śledzi ukraińskie listy przewozowe, także nadane w oddziałach Nova Post za granicą, i międzynarodowe numery Nova Post zaczynające się od SH albo TN. Numery Nova Global z `NPG` na końcu to osobny przewoźnik, którego Peek rozpoznaje po samym numerze.
 
-Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GOFO Express, Peek może przejść za nią do tego przewoźnika. Sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Nova Poshta; przez serwisy śledzenia przesyłek co 15 minut), i powiadomi Cię o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: w dniu doręczenia przez UPS co 5 minut zamiast co 2, bo śledzenie UPS otwiera się w przeglądarce, a u GOFO Express co 30 minut, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu dopiero po godzinie. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie skontaktuje się za Ciebie z Nova Post ani nie złoży reklamacji.
+Pokazuje angielskie komunikaty Nova Poshta, na przykład `Arrived at the branch 12` zamiast polskiego „Dotarła do oddziału”. Widzisz miasto każdego skanu na mapie, przewidywane dotarcie do oddziału lub pod drzwi, wagę, wymiary pojedynczej paczki, oddział lub automat, w którym czeka, kraj docelowy i godzinę doręczenia. Nazwisk, adresów i płatności nie pokazuje. Gdy przesyłka eksportowa wymienia partnera za granicą, [UPS](carrier:ups) albo GOFO Express, Peek może przejść za nią do tego przewoźnika. Sprawdza śledzenie nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie Nova Poshta; przez serwisy śledzenia przesyłek co 15 minut), i powiadomi cię o każdym skanie, o ważnych etapach albo tylko w dniu dostawy. Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: w dniu doręczenia przez UPS co 5 minut zamiast co 2, bo śledzenie UPS otwiera się w przeglądarce, a u GOFO Express co 30 minut, także gdy paczka jest w doręczeniu, a po nieudanym sprawdzeniu dopiero po godzinie. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Nie skontaktuje się za ciebie z Nova Post ani nie złoży reklamacji.
 
 ## Pytania o śledzenie Nova Post
 

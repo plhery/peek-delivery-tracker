@@ -7,7 +7,7 @@ published: 2026-10-09
 updated: 2026-11-07
 ---
 
-Numer przesyłki zwykle znajdziesz w e-mailu lub SMS-ie o wysyłce albo w szczegółach zamówienia na stronie czy w aplikacji sklepu, o jedno kliknięcie dalej niż numer zamówienia. Jeśli to Ty nadajesz paczkę, numer jest na potwierdzeniu nadania. Żaden przewoźnik nie wyszuka paczki po nazwisku ani adresie, ale numer może Ci dać awizo albo nadawca, a aplikacja przewoźnika sama pokaże paczki wysłane na Twój numer telefonu.
+Numer przesyłki zwykle znajdziesz w e-mailu lub SMS-ie o wysyłce albo w szczegółach zamówienia na stronie czy w aplikacji sklepu, o jedno kliknięcie dalej niż numer zamówienia. Jeśli to ty nadajesz paczkę, numer jest na potwierdzeniu nadania. Żaden przewoźnik nie wyszuka paczki po nazwisku ani adresie, ale numer może ci dać awizo albo nadawca, a aplikacja przewoźnika sama pokaże paczki wysłane na twój numer telefonu.
 
 ## Gdzie znaleźć numer przesyłki?
 
@@ -17,7 +17,7 @@ GLS mówi to wprost: paczkę śledzisz po numerze, „który przekazał Ci Nadaw
 - Skrzynka mailowa i SMS-y | Wyszukaj w e-mailach „przesyłka”, „wysłane”, „numer przesyłki” albo nazwę sklepu. Zajrzyj też do spamu.
 - Zamówienie w sklepie | O jedno kliknięcie dalej niż numer zamówienia (tabela niżej).
 - Awizo | Na wielu awizach jest numer, który przyjmie wyszukiwarka przewoźnika.
-- Aplikacja przewoźnika | [DPD](carrier:dpd-pl) i Pocztex same pokazują paczki wysłane na Twój numer telefonu (DPD także na e-mail).
+- Aplikacja przewoźnika | [DPD](carrier:dpd-pl) i Pocztex same pokazują paczki wysłane na twój numer telefonu (DPD także na e-mail).
 - Nadawca | Napisz do sklepu albo sprzedawcy i poproś o numer przesyłki.
 :::
 
@@ -27,8 +27,8 @@ Masz e-maila, ale nie wiesz, który numer jest który? Wklej całą wiadomość 
 
 | Gdzie kupujesz | Gdzie jest numer przesyłki |
 | --- | --- |
-| Allegro | Po zalogowaniu na konto, w zakładce **Moje zakupy** albo **Kupione**. Gdy numer się tam pojawi, Allegro wyśle Ci też e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia |
-| Amazon.pl | Historia zamówień na Twoim koncie, na Amazon.pl lub w aplikacji Amazon. Tam zwykle śledzi się dostawy Amazon |
+| Allegro | Po zalogowaniu na konto, w zakładce **Moje zakupy** albo **Kupione**. Gdy numer się tam pojawi, Allegro wyśle ci też e-mail z nazwą przewoźnika, numerem przesyłki i linkiem do śledzenia |
+| Amazon.pl | Historia zamówień na twoim koncie, na Amazon.pl lub w aplikacji Amazon. Tam zwykle śledzi się dostawy Amazon |
 | Vinted | Okno rozmowy dotyczącej zamówienia → **Śledź przesyłkę**. Stamtąd skopiujesz numer |
 | Zalando | Link do śledzenia w e-mailu z potwierdzeniem wysyłki, a także zakładka **Moje konto** |
 | Shein | **Moje zamówienia** → **Śledź**. Numer śledzenia widać przy zamówieniu |
@@ -41,8 +41,8 @@ Zamawiasz z AliExpress albo innego chińskiego sklepu? Zajrzyj do poradnika o [�
 
 ### Na awizie, także w SMS-ie lub e-mailu
 
-- **[Poczta Polska](carrier:poczta-polska)**: oprócz papierowego awiza dostaniesz SMS albo e-maila z terminem odbioru i adresem placówki, jeśli nadawca podał Twój telefon lub e-mail. Wtedy przy odbiorze wystarczy podać „numer przesyłki wskazany w SMS-ie czy w mailu”.
-- **Poczta Polska, eINFO:awizo**: tę bezpłatną usługę zamówisz przez profil zaufany albo w placówce, która doręcza Ci przesyłki. Od następnego dnia powiadomienie o awizowanej przesyłce przyjdzie SMS-em albo e-mailem, z jej numerem, terminem odbioru i adresem placówki. Wyjątek: zawiadomienia o pismach w postępowaniach karnych, cywilnych, administracyjnych czy podatkowych nadal przychodzą na papierze.
+- **[Poczta Polska](carrier:poczta-polska)**: oprócz papierowego awiza dostaniesz SMS albo e-maila z terminem odbioru i adresem placówki, jeśli nadawca podał twój telefon lub e-mail. Wtedy przy odbiorze wystarczy podać „numer przesyłki wskazany w SMS-ie czy w mailu”.
+- **Poczta Polska, eINFO:awizo**: tę bezpłatną usługę zamówisz przez profil zaufany albo w placówce, która doręcza ci przesyłki. Od następnego dnia powiadomienie o awizowanej przesyłce przyjdzie SMS-em albo e-mailem, z jej numerem, terminem odbioru i adresem placówki. Wyjątek: zawiadomienia o pismach w postępowaniach karnych, cywilnych, administracyjnych czy podatkowych nadal przychodzą na papierze.
 - **GLS**: numer Track-ID z awiza działa w śledzeniu GLS.
 
 ## Jak śledzić paczkę bez numeru przesyłki?
@@ -59,14 +59,14 @@ Przewoźnicy, którzy piszą o braku numeru, odsyłają do nadawcy. GLS: „popr
 
 Kupujesz na Allegro, Amazonie czy Vinted? Pisz do sprzedawcy przez platformę. Jeśli sprzedający na Allegro nie odpowiada, zgłoś problem z zakupem (na Allegro Lokalnie i u sprzedających korzystających z Magazynu Allegro nadal zakładasz Dyskusję). Możesz to zrobić już godzinę po opłaceniu zamówienia, a na pierwszą wiadomość sprzedający ma 24 godziny na odpowiedź, nie licząc sobót, niedziel i dni wolnych od pracy. Na Amazon.pl problem z dostawą wyjaśnij najpierw ze sprzedawcą. Jeśli się nie uda, możesz poprosić Amazon bezpośrednio o zwrot pieniędzy. Na Vinted, jeśli potrzebujesz pomocy ze śledzeniem, wejdź na stronę główną Centrum Pomocy i wybierz swoje zamówienie.
 
-### Sprawdź w aplikacji przewoźnika, czy idzie do Ciebie paczka
+### Sprawdź w aplikacji przewoźnika, czy idzie do ciebie paczka
 
-Niektórzy przewoźnicy sami pokazują w aplikacji albo na koncie paczki, które do Ciebie jadą, o ile dane podane przez nadawcę zgadzają się z Twoimi. Każda aplikacja widzi tylko paczki swojego przewoźnika.
+Niektórzy przewoźnicy sami pokazują w aplikacji albo na koncie paczki, które do ciebie jadą, o ile dane podane przez nadawcę zgadzają się z twoimi. Każda aplikacja widzi tylko paczki swojego przewoźnika.
 
 | Usługa | Jakie paczki pokazuje | Warto wiedzieć |
 | --- | --- | --- |
 | DPD Mobile | Przypisane do numeru telefonu lub adresu e-mail podanego przy rejestracji konta | Dane w aplikacji muszą się zgadzać z tymi na liście przewozowym |
-| Pocztex Mobile (Poczta Polska) | Przesyłki rejestrowane, do których przypisano Twój numer telefonu | Zwykłych, nierejestrowanych listów tu nie zobaczysz |
+| Pocztex Mobile (Poczta Polska) | Przesyłki rejestrowane, do których przypisano twój numer telefonu | Zwykłych, nierejestrowanych listów tu nie zobaczysz |
 
 Paczki nie ma na liście? Jeśli nadawca podał inny numer telefonu albo inny e-mail, i tak potrzebujesz numeru przesyłki.
 
@@ -76,11 +76,11 @@ Po nazwisku i adresie się nie da. Wyszukiwarki Poczty Polskiej i DPD przyjmują
 
 Po numerze telefonu: tylko w aplikacji przewoźnika i tylko paczki wysłane na numer, na który masz w niej konto (tabela wyżej). [Trackery paczek](guide:universal-tracker) też nie szukają po nazwisku, Peek również: żeby zapytać przewoźnika o paczkę, potrzebuje jej numeru.
 
-> Strona, która obiecuje znaleźć wszystkie paczki wysłane na Twoje nazwisko, adres albo numer telefonu, nie korzysta ze śledzenia przewoźnika: żaden przewoźnik nie udostępnia publicznie takiej wyszukiwarki. Nie podawaj tam swoich danych.
+> Strona, która obiecuje znaleźć wszystkie paczki wysłane na twoje nazwisko, adres albo numer telefonu, nie korzysta ze śledzenia przewoźnika: żaden przewoźnik nie udostępnia publicznie takiej wyszukiwarki. Nie podawaj tam swoich danych.
 
 ## Zgubiony numer przesyłki: co zrobić?
 
-Czekasz na paczkę? Przeszukaj jeszcze raz skrzynkę mailową albo otwórz zamówienie. Jeśli nic nie znajdziesz, poproś nadawcę, żeby wysłał Ci numer jeszcze raz.
+Czekasz na paczkę? Przeszukaj jeszcze raz skrzynkę mailową albo otwórz zamówienie. Jeśli nic nie znajdziesz, poproś nadawcę, żeby wysłał ci numer jeszcze raz.
 
 Nadajesz paczkę? Numer jest na potwierdzeniu nadania albo w aplikacji, w której nadajesz. Zachowaj potwierdzenie, aż paczka dotrze: bez numeru nie sprawdzisz, gdzie jest.
 
@@ -99,7 +99,7 @@ Nie. Poczta Polska prosi o numer „podany na potwierdzeniu nadania”, a niemie
 To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamówienia: ten drugi nadaje sklep. Numer przesyłki powstaje dopiero wtedy, gdy ktoś wydrukuje etykietę.
 
 :::journey
-- shop | Zamówienie złożone | Sklep daje Ci numer zamówienia
+- shop | Zamówienie złożone | Sklep daje ci numer zamówienia
 - label | Etykieta wydrukowana | Numer przesyłki już jest, ale przewoźnik nie ma jeszcze paczki
 - truck | Pierwszy skan | Śledzenie rusza, często w ciągu doby lub dwóch
 - home | Nieudane doręczenie | Awizo często ma numer, który też działa
@@ -107,7 +107,7 @@ To dwa różne numery. DHL pisze wprost, że numer przesyłki to nie numer zamó
 
 Jak je odróżnić? Numer opisany jako „zamówienie” należy do sklepu i u przewoźnika nie zadziała. Numer przesyłki zwykle stoi obok nazwy przewoźnika albo linku do jego śledzenia. Numer [InPost](carrier:inpost) ma zwykle 24 cyfry, `1Z999AA10123456784` to numer UPS, a wiele przesyłek pocztowych ma międzynarodowy format 13 znaków, jak `RR000000005CH`. Do którego przewoźnika należy numer, podpowie poradnik [jaki kurier po numerze przesyłki](guide:tracking-number-formats).
 
-Numer kontenera morskiego też nie jest numerem paczki: to trzy litery, U i siedem cyfr, jak `TEMU1234565` (zmyślony). Oznacza stalową skrzynię, którą wiezie statek, a nie Twoją paczkę. Jeśli żaden przewoźnik nie zna numeru o takim kształcie, [Peek](/) napisze: „To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.” i zaproponuje „Wybierz przewoźnika”.
+Numer kontenera morskiego też nie jest numerem paczki: to trzy litery, U i siedem cyfr, jak `TEMU1234565` (zmyślony). Oznacza stalową skrzynię, którą wiezie statek, a nie twoją paczkę. Jeśli żaden przewoźnik nie zna numeru o takim kształcie, [Peek](/) napisze: „To wygląda na numer kontenera morskiego. Numer śledzenia znajdziesz w e-mailu o wysyłce albo na stronie zamówienia.” i zaproponuje „Wybierz przewoźnika”.
 
 ## Dlaczego numer przesyłki nic nie pokazuje?
 

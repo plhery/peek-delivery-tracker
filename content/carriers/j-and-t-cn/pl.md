@@ -27,14 +27,14 @@ Małe litery, spacje i myślniki są w Peek pomijane.
 
 Wyszukiwarka J&T obsługuje poniższe statusy, mniej więcej w kolejności podróży:
 
-| J&T podaje | Co to oznacza dla Ciebie | Peek pokazuje |
+| J&T podaje | Co to oznacza dla ciebie | Peek pokazuje |
 | --- | --- | --- |
 | `已揽件` | Odebrana: kurier J&T odebrał paczkę od nadawcy w Chinach kontynentalnych. | „Przyjęta przez przewoźnika” |
 | `运送中` | W drodze przez sieć J&T. | „W transporcie” |
 | `发往代理点` | Wysłana do punktu agencyjnego (`代理点`), oznaczana na stronie ikoną doręczenia. | „W transporcie” |
 | `派件中` | W doręczeniu: kurier zabrał paczkę w trasę. | „W doręczeniu” |
-| `已代收` | Odebrana w Twoim imieniu przez punkt odbioru (`代收点`): udaj się po odbiór. | „Do odbioru” |
-| `已签收` | Podpisana / doręczona: wydana Tobie lub w Twoim imieniu, z godziną (`签收时间`) oraz — gdy jest dostępne — zdjęciem (`查看签收图片`). | „Dostarczona” |
+| `已代收` | Odebrana w twoim imieniu przez punkt odbioru (`代收点`): udaj się po odbiór. | „Do odbioru” |
+| `已签收` | Podpisana / doręczona: wydana tobie lub w twoim imieniu, z godziną (`签收时间`) oraz — gdy jest dostępne — zdjęciem (`查看签收图片`). | „Dostarczona” |
 | `已拒收` | Odmowa przyjęcia przez odbiorcę. | „Zgłoszono problem” |
 | `已退回` | Zwrócona do nadawcy wraz z czasem zwrotu (`退回时间`). | „Zwrócona nadawcy” |
 | `已取消` | Anulowana. | „Zgłoszono problem” |
@@ -52,7 +52,7 @@ Regulamin elektronicznego listu przewozowego J&T w Chinach kontynentalnych dopus
 - do punktu odbioru (`代收点`) lub automatu paczkowego (`自提柜`) w pobliżu adresu;
 - w inny sposób uzgodniony z nadawcą lub odbiorcą.
 
-Na Twoją prośbę lub za Twoją zgodą kurier może też zostawić przesyłkę pod innym wskazanym adresem albo w punkcie paczkowym utworzonym przez lokalny urząd, komitet mieszkańców czy administrację budynku; jeśli opakowanie zewnętrzne jest nienaruszone, usługa zostaje uznana za wykonaną. Obowiązujące w Chinach kontynentalnych od 1 marca 2024 roku przepisy o zarządzaniu rynkiem przesyłek ekspresowych (`快递市场管理办法`) wymagają zgody odbiorcy przed umieszczeniem paczki w automacie lub stacji paczkowej, zabraniają potwierdzania odbioru bez tej zgody i dają prawo do sprawdzenia przesyłki przy odbiorze (oraz zajrzenia do środka lub odmowy przyjęcia, gdy opakowanie jest widocznie uszkodzone albo zawartość delikatna).
+Na twoją prośbę lub za twoją zgodą kurier może też zostawić przesyłkę pod innym wskazanym adresem albo w punkcie paczkowym utworzonym przez lokalny urząd, komitet mieszkańców czy administrację budynku; jeśli opakowanie zewnętrzne jest nienaruszone, usługa zostaje uznana za wykonaną. Obowiązujące w Chinach kontynentalnych od 1 marca 2024 roku przepisy o zarządzaniu rynkiem przesyłek ekspresowych (`快递市场管理办法`) wymagają zgody odbiorcy przed umieszczeniem paczki w automacie lub stacji paczkowej, zabraniają potwierdzania odbioru bez tej zgody i dają prawo do sprawdzenia przesyłki przy odbiorze (oraz zajrzenia do środka lub odmowy przyjęcia, gdy opakowanie jest widocznie uszkodzone albo zawartość delikatna).
 
 ## Paczka J&T stoi w miejscu, zaginęła lub wraca
 
@@ -83,9 +83,9 @@ Choć układ `JT` i 13 cyfr pokrywa się z J&T Express w Azji Południowo-Wschod
 - **Wybrany ręcznie.** Stuknij „Zmień” i wybierz J&T Express China w sekcji „Pasują do numeru” albo wyszukując `J&T` lub `极兔` na liście „Wszyscy przewoźnicy” (lub użyj „Zmień przewoźnika” przy zapisanej paczce, także gdy trafiła pod J&T Express).
 - **Z linku.** Link `jtexpress.com.cn/service.html?indexIpt=…` od razu przypisuje przesyłkę do J&T Express China („Wykryty przewoźnik”).
 
-**Z ostatnimi 4 cyframi telefonu lub bez nich.** Wpisz je w polu „Ostatnie 4 cyfry numeru telefonu” przy dodawaniu lub kliknij „Dodaj cyfry” na karcie paczki: Peek zapisuje je wyłącznie przy tej przesyłce, wysyła tylko do J&T i pobiera dane prosto z wyszukiwarki J&T (chińskie statusy, czas pekiński `UTC+8` przeliczony na Twoją strefę z wierszem „Godziny w twojej strefie czasowej: …”, bez miejscowości oraz z pominięciem nazwisk kurierów i odbiorców, telefonów i zdjęć). Bez cyfr (lub gdy się nie zgadzają) Peek odpytuje po kolei, w zmiennej kolejności, ParcelsApp, Ship24 i 17TRACK; przycisk „Otwórz stronę przewoźnika J&T Express China” prowadzi wtedy do serwisu, który odpowiedział, a jeśli wskaże on obsługiwanego doręczyciela końcowego z jego numerem, Peek przełączy się na niego po pojawieniu się równie świeżego skanu.
+**Z ostatnimi 4 cyframi telefonu lub bez nich.** Wpisz je w polu „Ostatnie 4 cyfry numeru telefonu” przy dodawaniu lub kliknij „Dodaj cyfry” na karcie paczki: Peek zapisuje je wyłącznie przy tej przesyłce, wysyła tylko do J&T i pobiera dane prosto z wyszukiwarki J&T (chińskie statusy, czas pekiński `UTC+8` przeliczony na twoją strefę z wierszem „Godziny w twojej strefie czasowej: …”, bez miejscowości oraz z pominięciem nazwisk kurierów i odbiorców, telefonów i zdjęć). Bez cyfr (lub gdy się nie zgadzają) Peek odpytuje po kolei, w zmiennej kolejności, ParcelsApp, Ship24 i 17TRACK; przycisk „Otwórz stronę przewoźnika J&T Express China” prowadzi wtedy do serwisu, który odpowiedział, a jeśli wskaże on obsługiwanego doręczyciela końcowego z jego numerem, Peek przełączy się na niego po pojawieniu się równie świeżego skanu.
 
-**Częstotliwość i powiadomienia.** Gdy odpowiada własny tracker J&T, Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz co 2 minuty od 6:00 czasu pekińskiego w dniu „W doręczeniu” (poza tym i po dwóch dniach ciszy lub 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” — co godzinę). Przez serwis śledzenia sprawdza co godzinę, co 3 godziny po dobie bez nowego kroku i do co 15 minut w dniu doręczenia przy otwartej przesyłce lub włączonych powiadomieniach. Gdy paczka może trafić do punktu lub automatu (`已代收`), wybierz „Ważne etapy” lub „Każdy skan” zamiast „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z J&T, spedytorem ani sprzedawcą.
+**Częstotliwość i powiadomienia.** Gdy odpowiada własny tracker J&T, Peek sprawdza zmiany nawet co 10 minut przy otwartej paczce lub w dniu dostawy z włączonymi powiadomieniami oraz co 2 minuty od 6:00 czasu pekińskiego w dniu „W doręczeniu” (poza tym i po dwóch dniach ciszy lub 12 godzinach na etapie „Zarejestrowana” / „Przyjęta przez przewoźnika” — co godzinę). Przez serwis śledzenia sprawdza co godzinę, co 3 godziny po dobie bez nowego kroku i do co 15 minut w dniu doręczenia przy otwartej przesyłce lub włączonych powiadomieniach. Gdy paczka może trafić do punktu lub automatu (`已代收`), wybierz „Ważne etapy” lub „Każdy skan” zamiast „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z J&T, spedytorem ani sprzedawcą.
 
 ## Najczęstsze pytania o śledzenie J&T Express China
 
@@ -99,7 +99,7 @@ Litery `JT` i 13 cyfr, np. `JT4829105736491`. Nie usuwaj `JT` w Peek, ponieważ 
 
 ### Co oznacza status `已签收` w J&T?
 
-Podpisana / doręczona: odebrana przez Ciebie, domownika, wyznaczoną osobę, punkt odbioru lub automat albo magazyn spedytora w Chinach kontynentalnych. `已代收` oznacza natomiast, że paczkę przyjął w Twoim imieniu np. punkt odbioru i musisz ją dopiero odebrać.
+Podpisana / doręczona: odebrana przez ciebie, domownika, wyznaczoną osobę, punkt odbioru lub automat albo magazyn spedytora w Chinach kontynentalnych. `已代收` oznacza natomiast, że paczkę przyjął w twoim imieniu np. punkt odbioru i musisz ją dopiero odebrać.
 
 ### Czy J&T Express China doręcza do Polski lub reszty Europy?
 

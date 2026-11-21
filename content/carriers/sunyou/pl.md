@@ -21,7 +21,7 @@ SunYou nie publikuje formatu numeru, ale numery widoczne w jego śledzeniu mają
 
 Dwie litery po SY nie zawsze oznaczają kraj docelowy. W śledzeniu SunYou numer `SYRM` trafił do Japonii, inny do Bułgarii, a numer `SYAE` do Grecji. Nie wnioskuj więc z nich, dokąd jedzie paczka.
 
-**Gdzie go znaleźć.** Żadna strona SunYou nie mówi, jak numer do Ciebie trafia. Paczkę nadaje sprzedawca i to on podaje numer w danych wysyłki przy zamówieniu. Nie widzisz go? Zapytaj sklep.
+**Gdzie go znaleźć.** Żadna strona SunYou nie mówi, jak numer do ciebie trafia. Paczkę nadaje sprzedawca i to on podaje numer w danych wysyłki przy zamówieniu. Nie widzisz go? Zapytaj sklep.
 
 **Podobne numery.** Niektóre sklepy piszą, że paczka z numerem `LP` jedzie z SunYou, ale ten kształt należy do logistyki AliExpress: śledź go jako [paczkę Cainiao](carrier:cainiao). Numer SY z 10 cyframi albo z więcej niż 11 to nie jest kształt SunYou.
 
@@ -31,7 +31,7 @@ Dwie litery po SY nie zawsze oznaczają kraj docelowy. W śledzeniu SunYou numer
 
 Strona sypost.net ma 13 wersji językowych, ale polskiej wśród nich nie ma: przy polskim zapytaniu odpowiada po angielsku. Najczęstsze linie, w kolejności, w jakiej spotyka je paczka:
 
-| SunYou pisze | Co to znaczy dla Ciebie |
+| SunYou pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `Pre-Shipment Info Sent To United Kingdom` | Sprzedawca zarejestrował paczkę. SunYou jeszcze jej nie ma. Kraj na końcu to cel paczki. |
 | `Acceptance, Sent To United Kingdom` | SunYou odebrał paczkę w Chinach. |
@@ -56,7 +56,7 @@ Przy cle zwróć uwagę na `Customs Clearance Hold` i `Delivery failed, Reason: 
 
 SunYou sam nie doręcza w Europie: jego linia komercyjna oddaje paczki lokalnym przewoźnikom w kraju docelowym, a śledzenie podaje nazwę tego przewoźnika i jego numer. W historiach odczytanych na stronie SunYou w Wielkiej Brytanii doręczał Royal Mail, w Niemczech [DHL Paket](carrier:dhl), w USA USPS albo GOFO, a w Kanadzie Canada Post.
 
-Dla Polski SunYou nie podaje przewoźnika: nie wymienia jej wśród krajów swojej linii komercyjnej, a wśród logotypów partnerów nie ma ani Poczty Polskiej, ani InPostu. Kto doręcza Twoją paczkę, sprawdzisz więc tylko w jej historii, po `Departed Sunyou Facility`.
+Dla Polski SunYou nie podaje przewoźnika: nie wymienia jej wśród krajów swojej linii komercyjnej, a wśród logotypów partnerów nie ma ani Poczty Polskiej, ani InPostu. Kto doręcza twoją paczkę, sprawdzisz więc tylko w jej historii, po `Departed Sunyou Facility`.
 
 Liczby prób doręczenia, awizo, punktów odbioru ani czasu przechowania SunYou nie opisuje. To zasady przewoźnika, który doręcza, więc z jego nazwą i numerem sprawdź na jego stronie, jak zmienić termin albo gdzie czeka paczka.
 
@@ -68,7 +68,7 @@ Część paczek SunYou jedzie jako zwykła przesyłka pocztowa. Według SunYou d
 
 **Kto działa.** Klientem SunYou jest sprzedawca: zakłada konto, nadaje paczkę i ma umowę. Strony SunYou nie dają odbiorcom żadnej drogi reklamacji, a zasady odszkodowań SunYou dotyczą sprzedawców. Przy spóźnionej, zgubionej, uszkodzonej albo zwróconej paczce pisz więc do sklepu lub platformy, na której kupowałeś, na przykład AliExpress, Temu albo Allegro.
 
-**Ile to trwa.** Sprzedawcom SunYou podaje „4-5 dni od przyjęcia do niektórych głównych krajów” na linii ogólnej i „najszybciej w 5 dni” do głównych krajów Europy i Ameryki na linii komercyjnej. To liczby sprzedażowe dla sklepów, nie termin Twojego zamówienia.
+**Ile to trwa.** Sprzedawcom SunYou podaje „4-5 dni od przyjęcia do niektórych głównych krajów” na linii ogólnej i „najszybciej w 5 dni” do głównych krajów Europy i Ameryki na linii komercyjnej. To liczby sprzedażowe dla sklepów, nie termin twojego zamówienia.
 
 **Brak aktualizacji.** Jeśli historia pokazuje numer przewoźnika, najpierw sprawdź jego śledzenie. Więcej w poradniku [status przesyłki się nie zmienia](guide:tracking-not-updating), a o całej drodze paczki z Chin w [śledzeniu paczki z Chin](guide:tracking-from-china).
 
@@ -88,17 +88,17 @@ Strony kontaktowej po polsku nie ma. W sprawie zamówienia odpowie sklep, a w sp
 
 [Peek](/) od razu rozpoznaje oba kształty SY jako SunYou, bo żaden inny przewoźnik w jego katalogu ich nie używa. Możesz też wkleić link z sypost.net z numerem, na przykład ten z przycisku „Copy Link”.
 
-Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takimi jak `Delivered`, które aplikacja pokazuje własnymi słowami. Widzisz status, historię (do 20 skanów, bez miejsca przy każdym), kraj docelowy, godzinę doręczenia i lokalnego przewoźnika z jego numerem. Przewidywanej daty doręczenia ani punktu odbioru przy paczkach SunYou nie ma. Godziny skanów Peek odczytuje w strefie czasowej podanej przez SunYou (najpierw chińskiej, potem kraju docelowego) i pokazuje w strefie czasowej Twojego urządzenia.
+Linie SunYou pojawiają się po angielsku, poza dokładnymi dopasowaniami, takimi jak `Delivered`, które aplikacja pokazuje własnymi słowami. Widzisz status, historię (do 20 skanów, bez miejsca przy każdym), kraj docelowy, godzinę doręczenia i lokalnego przewoźnika z jego numerem. Przewidywanej daty doręczenia ani punktu odbioru przy paczkach SunYou nie ma. Godziny skanów Peek odczytuje w strefie czasowej podanej przez SunYou (najpierw chińskiej, potem kraju docelowego) i pokazuje w strefie czasowej twojego urządzenia.
 
 Gdy SunYou podaje numer lokalnego przewoźnika, aplikacja może zapytać tego przewoźnika i przełączyć się na niego, gdy pokaże nowsze postępy. Gdy tym numerem jest numer pocztowy (dwie litery, 9 cyfr, dwie litery) paczki do Polski, pyta [Pocztę Polską](carrier:poczta-polska). Paczka zachowuje numer SunYou, a jej strona pokazuje „Doręcza:” z nazwą przewoźnika oraz jego numer z linkiem. Dopóki Peek widzi paczkę u tego przewoźnika tylko jako zgłoszoną, bez jego własnego skanu, strona pokazuje zamiast tego „Zgłoszona przewoźnikowi …, jeszcze nieprzyjęta”. Nie dzieje się tak przy każdej paczce.
 
-Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie SunYou; przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za Ciebie z SunYou ani ze sklepem.
+Śledzenie jest sprawdzane nawet co 10 minut, a gdy paczka jest w doręczeniu, nawet co 2 minuty (w dniu wydania do doręczenia, od 6:00 czasu lokalnego i dopóki odpowiada własne śledzenie SunYou; przez serwisy śledzenia przesyłek co 15 minut). Gdy doręczenie przejmuje inny przewoźnik, Peek sprawdza paczkę w tempie tego, który ją doręcza: Royal Mail i Poste Italiane co godzinę, PostNL, USPS i GOFO w USA co 30 minut, także gdy paczka jest w doręczeniu. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę. Powiadomienia możesz dostawać o każdym skanie, o ważnych etapach albo tylko o doręczeniu („Tylko doręczenie”). Peek nie skontaktuje się za ciebie z SunYou ani ze sklepem.
 
 ## Pytania o SunYou tracking
 
 ### Czy SunYou tracking to fake?
 
-Nie, SunYou to prawdziwa firma logistyczna, założona w 2008 roku w Shenzhen, a jej śledzenie działa na sypost.net. Jeśli Twój numer pokazuje tam `Not Found`, poproś sprzedawcę, by go sprawdził.
+Nie, SunYou to prawdziwa firma logistyczna, założona w 2008 roku w Shenzhen, a jej śledzenie działa na sypost.net. Jeśli twój numer pokazuje tam `Not Found`, poproś sprzedawcę, by go sprawdził.
 
 ### Co to jest SunYou Post?
 

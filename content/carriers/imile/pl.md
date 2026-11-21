@@ -26,9 +26,9 @@ Na stronie śledzenia iMile wpisz numer pod „TYPE YOUR ORDER NUMBER”; histor
 
 ## Statusy śledzenia iMile: co oznacza każdy z nich
 
-Skany iMile są po angielsku – dokładnie tak, jak odczytuje je Peek. Nazwy w nawiasach `【】` to centra iMile lub kody lotnisk, więc przy Twojej paczce zobaczysz inne miejsca. Najczęstsze wpisy w kolejności drogi przesyłki:
+Skany iMile są po angielsku – dokładnie tak, jak odczytuje je Peek. Nazwy w nawiasach `【】` to centra iMile lub kody lotnisk, więc przy twojej paczce zobaczysz inne miejsca. Najczęstsze wpisy w kolejności drogi przesyłki:
 
-| iMile pisze | Co to dla Ciebie znaczy |
+| iMile pisze | Co to dla ciebie znaczy |
 | --- | --- |
 | `Order submitted, pending to receive.` | Sprzedawca utworzył zlecenie wysyłki. iMile nie ma jeszcze paczki. |
 | `Your order has been picked up.` | iMile odebrało przesyłkę od nadawcy. |
@@ -37,20 +37,20 @@ Skany iMile są po angielsku – dokładnie tak, jak odczytuje je Peek. Nazwy w 
 | `Clearance Processing` | Urząd celny sprawdza przesyłkę. |
 | `【Milan center】Your order has been received.` | Paczka dotarła do pierwszego centrum iMile w kraju docelowym. |
 | `Your order has been shipped from 【Milan center】.` | Wyruszyła do kolejnego centrum lub oddziału doręczającego. |
-| `Parcel is currently being processed.` | Jest w oddziale obsługującym Twoją okolicę. |
+| `Parcel is currently being processed.` | Jest w oddziale obsługującym twoją okolicę. |
 | `Our delivery associate is out for delivery.` | Wydana dziś kurierowi do doręczenia. |
 | `User not at home` | Próba doręczenia się nie powiodła: to powód wpisany przez kuriera. |
 | `Delivery attempt finished,return to Local logistics company warehouse.` | Po nieudanej próbie paczka wraca do lokalnego magazynu. |
 | `The delivery method has been confirmed with the recipient as Self-Pickup.` | Po nieudanej próbie ustalono odbiór osobisty. Paczka jeszcze nie zmieniła miejsca. |
-| `The parcel has been delivered to …. Please collect your parcel promptly at … using your pickup code.` | Czeka w punkcie odbioru wskazanym w treści wpisu, pod podanym adresem – odbierz ją z kodem odbioru. „Delivered” oznacza tu dostarczenie do punktu, a nie do Ciebie; Peek pokazuje „Do odbioru”. |
-| `【Contact Error】need to return.` | Kurier nie zdołał się z Tobą skontaktować i rusza zwrot. |
+| `The parcel has been delivered to …. Please collect your parcel promptly at … using your pickup code.` | Czeka w punkcie odbioru wskazanym w treści wpisu, pod podanym adresem – odbierz ją z kodem odbioru. „Delivered” oznacza tu dostarczenie do punktu, a nie do ciebie; Peek pokazuje „Do odbioru”. |
+| `【Contact Error】need to return.` | Kurier nie zdołał się z tobą skontaktować i rusza zwrot. |
 | `Your order has been delivered successfully.` | Doręczona. |
 | `Order delivery failed, returning to sender.` | Przesyłka wraca do nadawcy. |
 | `【Milan Transit Center】Shipment returned to origin.` | Zwrócona nadawcy. |
 
 Przy przesyłkach europejskich pierwszy wpis ma postać `Order Submited.` – literówka pochodzi od iMile, podobnie jak w `Your order has assigned delivery drvier.`, które informuje o przypisaniu kuriera przed wyjazdem na trasę. `Shipment is scheduled to` z datą w nawiasach kwadratowych oznacza wyznaczony dzień doręczenia. Z kolei `Scheduled Delivery`, pojawiające się między wyjazdem na rejon a końcem próby lub kolejnym kursem, planuje ponowne doręczenie bez podania daty: paczka się nie przemieszcza, więc Peek utrzymuje dotychczasowy status.
 
-Inne powody nieudanej próby wpisywane przez kurierów obok `User not at home`: `wrong address` (albo `Wrong Address(Insufficient address details)`, gdy w adresie brakuje szczegółów), `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, komunikat zaczynający się od `failed to schedule due to` z powodem w nawiasach kwadratowych, np. `noanswer` (kurier nie zdołał umówić z Tobą doręczenia), a także `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Podczas kursu może pojawić się też wpis `Lost order` – sam w sobie nie przesądza jeszcze o zaginięciu paczki, więc obserwuj kolejne skany. Gdy przesyłka utknie na cle, pomoże poradnik [paczka zatrzymana w urzędzie celnym](guide:customs).
+Inne powody nieudanej próby wpisywane przez kurierów obok `User not at home`: `wrong address` (albo `Wrong Address(Insufficient address details)`, gdy w adresie brakuje szczegółów), `switch off`, `Customer Wants to Change Location`, `Route not completed`, `Traffic, Strike, Bad weather`, komunikat zaczynający się od `failed to schedule due to` z powodem w nawiasach kwadratowych, np. `noanswer` (kurier nie zdołał umówić z tobą doręczenia), a także `The driver failed to deliver due to shop(building) closure, we will try to deliver again.` Podczas kursu może pojawić się też wpis `Lost order` – sam w sobie nie przesądza jeszcze o zaginięciu paczki, więc obserwuj kolejne skany. Gdy przesyłka utknie na cle, pomoże poradnik [paczka zatrzymana w urzędzie celnym](guide:customs).
 
 ## Dostawa iMile w Polsce
 
@@ -90,9 +90,9 @@ W sprawie samego zamówienia szybciej pomoże sklep: to on zlecił przewóz w iM
 
 [Peek](/) od razu rozpoznaje numery `IM0601…` jako iMile. Przy pozostałych numerach `IM` z 14 cyframi, przy 14-cyfrowych numerach zaczynających się od `49` oraz przy 13-cyfrowych numerach zaczynających się od `6` lub `3`, z których korzystają też inni przewoźnicy, sam układ znaków nie wystarcza – wklej numer mimo to, bo Peek obsługuje ponad 4500 przewoźników. Po dodaniu przesyłki Peek wyświetla „Sprawdzanie usług śledzenia…”, odpytuje pasujących przewoźników (stawiając iMile wśród pierwszych dla numerów z `49` na początku oraz dla numerów z `6` i datą) i pokazuje „iMile ma tę przesyłkę.”, gdy iMile ją potwierdzi. Jeśli żaden przewoźnik jeszcze nie odpowiada lub wybierze się inna firma, wskaż iMile przyciskiem „Zmień”. Działają też linki ze strony śledzenia imile.com (`/track?waybillNo=`).
 
-Peek odpytuje iMile po angielsku. Pokazuje aktualny status, historię z centrum lub miastem każdego skanu na mapie oraz kraj przeznaczenia, odczytując godziny według zegara tego kraju i wyświetlając je w strefie czasowej Twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w twojej strefie czasowej: …”). Jeżeli paczkę wywozi z Chin dla iMile [Cainiao](carrier:cainiao), Peek dokłada na początku wcześniejsze skany z Cainiao: odbiór, sortowanie, eksport, lot i import.
+Peek odpytuje iMile po angielsku. Pokazuje aktualny status, historię z centrum lub miastem każdego skanu na mapie oraz kraj przeznaczenia, odczytując godziny według zegara tego kraju i wyświetlając je w strefie czasowej twojego urządzenia (na peektracker.com i w aplikacji na iPhonie przypomina o tym dopisek pod historią: „Godziny w twojej strefie czasowej: …”). Jeżeli paczkę wywozi z Chin dla iMile [Cainiao](carrier:cainiao), Peek dokłada na początku wcześniejsze skany z Cainiao: odbiór, sortowanie, eksport, lot i import.
 
-Jako przewidywaną datę doręczenia Peek pokazuje dzień wskazany w najnowszym wpisie `Shipment is scheduled to`, dopóki nie nastąpi nieudana próba, problem, przyjęcie w punkcie odbioru, doręczenie, zwrot lub skan z datą późniejszą niż ten dzień. Pomija zaplanowany lot, dowód doręczenia, dane osoby kwitującej odbiór, kontakty i szczegóły płatności, a z treści skanów usuwa numer telefonu kuriera i infolinii iMile. Nazwy etapów takie jak „W doręczeniu” czy „Próba doręczenia” pochodzą z Peek; same wiersze historii pozostają w oryginalnym zapisie iMile. Dopóki odpowiada bezpośrednio śledzenie iMile, Peek sprawdza przesyłkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, dopóki paczka ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie raz na godzinę. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za Ciebie z iMile ani ze sklepem.
+Jako przewidywaną datę doręczenia Peek pokazuje dzień wskazany w najnowszym wpisie `Shipment is scheduled to`, dopóki nie nastąpi nieudana próba, problem, przyjęcie w punkcie odbioru, doręczenie, zwrot lub skan z datą późniejszą niż ten dzień. Pomija zaplanowany lot, dowód doręczenia, dane osoby kwitującej odbiór, kontakty i szczegóły płatności, a z treści skanów usuwa numer telefonu kuriera i infolinii iMile. Nazwy etapów takie jak „W doręczeniu” czy „Próba doręczenia” pochodzą z Peek; same wiersze historii pozostają w oryginalnym zapisie iMile. Dopóki odpowiada bezpośrednio śledzenie iMile, Peek sprawdza przesyłkę nawet co 10 minut, a w dniu wydania do doręczenia nawet co 2 minuty (od 6:00 czasu lokalnego); przez serwisy śledzące co godzinę, a w dniu doręczenia nawet co 15 minut. Po dwóch dniach bez nowych zdarzeń (lub po 12 godzinach, dopóki paczka ma status „Zarejestrowana” albo „Przyjęta przez przewoźnika”) przechodzi na sprawdzanie raz na godzinę. Powiadomienia ustawisz na „Każdy skan”, „Ważne etapy” lub „Tylko doręczenie”. Peek nie skontaktuje się za ciebie z iMile ani ze sklepem.
 
 ## Pytania o śledzenie iMile
 

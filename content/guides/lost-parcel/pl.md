@@ -14,12 +14,12 @@ Jeśli paczka zaginęła, a zakup był w sklepie, reklamację składasz u sprzed
 :::steps
 - Odczekaj termin przewoźnika | Wcześniej paczka jest spóźniona, a nie zaginiona.
 - Napisz do sprzedawcy | Na piśmie, z numerem zamówienia i numerem przesyłki. Poproś o ponowną wysyłkę albo zwrot pieniędzy.
-- Zgłoś problem na platformie | Allegro, Amazon czy Vinted mogą oddać Ci pieniądze, gdy sprzedawca tego nie zrobi, ale tylko w swoim terminie i na swoich zasadach.
-- Reklamacja u przewoźnika | Jeśli to Ty jesteś nadawcą. Jako odbiorca złożysz ją, gdy nadawca zrzeknie się na Twoją rzecz roszczeń. Przygotuj dowód nadania i wartości.
-- Na końcu bank albo PayPal | Ostatnia deska ratunku: obciążenie zwrotne może zamknąć Ci drogę na platformie.
+- Zgłoś problem na platformie | Allegro, Amazon czy Vinted mogą oddać ci pieniądze, gdy sprzedawca tego nie zrobi, ale tylko w swoim terminie i na swoich zasadach.
+- Reklamacja u przewoźnika | Jeśli to ty jesteś nadawcą. Jako odbiorca złożysz ją, gdy nadawca zrzeknie się na twoją rzecz roszczeń. Przygotuj dowód nadania i wartości.
+- Na końcu bank albo PayPal | Ostatnia deska ratunku: obciążenie zwrotne może zamknąć ci drogę na platformie.
 :::
 
-Sprzedawca może poprosić, żebyś poczekał, aż przewoźnik zakończy poszukiwania. Nie powinien jednak odsyłać Cię do kuriera: UOKiK pisze, że sklep odpowiada za przesyłkę także wtedy, gdy zawinił przewoźnik, któremu powierzył dostawę.
+Sprzedawca może poprosić, żebyś poczekał, aż przewoźnik zakończy poszukiwania. Nie powinien jednak odsyłać cię do kuriera: UOKiK pisze, że sklep odpowiada za przesyłkę także wtedy, gdy zawinił przewoźnik, któremu powierzył dostawę.
 
 Śledzenie pokazuje „doręczona”, a paczki nie ma? Zajrzyj do poradnika [paczka doręczona, a jej nie ma](guide:delivered-not-received). Przyszła, ale zniszczona? Przeczytaj, co zrobić z [uszkodzoną paczką](guide:damaged-parcel).
 
@@ -40,9 +40,9 @@ W wierszu InPost są ogólne zasady, które UKE podaje dla operatorów pocztowyc
 
 ## Kto odpowiada za zaginioną paczkę: sprzedawca czy kupujący?
 
-Jeśli kupujesz od firmy, odpowiada sprzedawca. Ryzyko przypadkowej utraty przechodzi na Ciebie dopiero z chwilą wydania Ci paczki (art. 548 § 3 Kodeksu cywilnego), a UOKiK pisze, że sklep nie może uchylić się od tej odpowiedzialności, np. w regulaminie, także wtedy, gdy paczkę wiózł przewoźnik z jego oferty. Paczka w ogóle nie wyszła? Sprzedawca musi wydać rzecz najpóźniej 30 dni od zawarcia umowy, chyba że umowa mówi inaczej. Gdy się spóźnia, wyznacz mu dodatkowy termin, a po jego upływie możesz odstąpić od umowy.
+Jeśli kupujesz od firmy, odpowiada sprzedawca. Ryzyko przypadkowej utraty przechodzi na ciebie dopiero z chwilą wydania ci paczki (art. 548 § 3 Kodeksu cywilnego), a UOKiK pisze, że sklep nie może uchylić się od tej odpowiedzialności, np. w regulaminie, także wtedy, gdy paczkę wiózł przewoźnik z jego oferty. Paczka w ogóle nie wyszła? Sprzedawca musi wydać rzecz najpóźniej 30 dni od zawarcia umowy, chyba że umowa mówi inaczej. Gdy się spóźnia, wyznacz mu dodatkowy termin, a po jego upływie możesz odstąpić od umowy.
 
-Ryzyko jest po Twojej stronie, gdy wybierasz sposób dostawy, którego sklep nie proponował (UOKiK podaje list ekonomiczny albo znajomego wysłanego po odbiór), albo gdy kupujesz od osoby prywatnej. Wszystkie zasady i wyjątki zebraliśmy w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
+Ryzyko jest po twojej stronie, gdy wybierasz sposób dostawy, którego sklep nie proponował (UOKiK podaje list ekonomiczny albo znajomego wysłanego po odbiór), albo gdy kupujesz od osoby prywatnej. Wszystkie zasady i wyjątki zebraliśmy w poradniku [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
 ## Zaginiona paczka na Allegro, Amazonie, Vinted i AliExpress
 
@@ -54,7 +54,7 @@ Jeśli sprzedawca nie pomoże, może to zrobić platforma, ale tylko na swoich z
 | Vinted (etykieta z Vinted) | Status `Paczka wydaje się zaginiona` albo 25 dni roboczych od oznaczenia zamówienia jako wysłanego | 2 dni kalendarzowe od powiadomienia Vinted, przycisk „Mam problem” |
 | AliExpress | Od 11. dnia po wysłaniu, a gdy paczka normalnie jedzie, dopiero po upływie czasu dostawy | 15 dni po upływie czasu dostawy |
 
-Na Amazon.pl każdy produkt, czy sprzedaje go Amazon, czy niezależny sprzedawca, jest objęty Gwarancją od A do Z: jeśli masz problem z terminową dostawą, Amazon zwróci Ci pieniądze albo wymieni produkt. Gdy kupujesz od innego sprzedawcy, najpierw spróbuj rozwiązać problem z nim, a jeśli się nie uda, skontaktuj się bezpośrednio z Amazonem i poproś o zwrot pieniędzy.
+Na Amazon.pl każdy produkt, czy sprzedaje go Amazon, czy niezależny sprzedawca, jest objęty Gwarancją od A do Z: jeśli masz problem z terminową dostawą, Amazon zwróci ci pieniądze albo wymieni produkt. Gdy kupujesz od innego sprzedawcy, najpierw spróbuj rozwiązać problem z nim, a jeśli się nie uda, skontaktuj się bezpośrednio z Amazonem i poproś o zwrot pieniędzy.
 
 Allegro decyduje o wniosku w ciągu 30 dni roboczych od otrzymania kompletnego wniosku. Rekompensata pokrywa szkodę najwyżej do ceny towaru, a koszt przesyłki tylko wtedy, gdy płaciłeś przez Allegro. Regulamin obejmuje towar opłacony, a nieotrzymany, ale wyłącza towar zniszczony lub zagubiony podczas transportu z winy przewoźnika. Jeśli sprzedający naprawi szkodę później, rekompensatę musisz zwrócić Allegro najpóźniej w 7 dni. Na Vinted po naciśnięciu „Mam problem” dostajesz zwrot środków, a sprzedający odszkodowanie. Terminy Temu i Shein znajdziesz w poradniku o [śledzeniu paczki z Chin](guide:tracking-from-china).
 
@@ -71,7 +71,7 @@ Niewiele, jeśli nie zadeklarujesz wartości. Limity wynikają z Prawa pocztoweg
 | InPost i inni kurierzy | Według UKE przy usługach innych niż powszechne, np. kurierskich, wysokość odszkodowania wynika z regulaminu operatora | Zadeklarowana wartość, jeśli operator ją oferuje |
 | Paczki zagraniczne między pocztami (UPU) | 40 SDR za paczkę plus 4,50 SDR za kg, plus opłaty | Przesyłki z zadeklarowaną wartością |
 
-SDR to jednostka rozliczeniowa Międzynarodowego Funduszu Walutowego. Według kursu NBP z 13 października 2026 r. 1 SDR to 5,2901 zł, więc zagubiona paczka zagraniczna ważąca 2 kg da najwyżej 49 SDR, czyli około 259 zł, plus zwrot opłat, chyba że obie poczty uzgodniły stałe 130 SDR. Za paczkę pocztową nadaną w kraju za 20 zł dostaniesz najwyżej 200 zł plus zwrot opłaty. Przy zakupie w sklepie i tak należy Ci się cała cena.
+SDR to jednostka rozliczeniowa Międzynarodowego Funduszu Walutowego. Według kursu NBP z 13 października 2026 r. 1 SDR to 5,2901 zł, więc zagubiona paczka zagraniczna ważąca 2 kg da najwyżej 49 SDR, czyli około 259 zł, plus zwrot opłat, chyba że obie poczty uzgodniły stałe 130 SDR. Za paczkę pocztową nadaną w kraju za 20 zł dostaniesz najwyżej 200 zł plus zwrot opłaty. Przy zakupie w sklepie i tak należy ci się cała cena.
 
 „Zwykła wartość” trzeba udowodnić: DPD wymaga faktury zakupu. Poczta Polska wypłaca odszkodowanie w ciągu 30 dni od decyzji.
 
@@ -85,23 +85,23 @@ Na stronie przewoźnika albo w jego placówce, przed upływem terminu z tabeli w
 
 Przygotuj:
 
-- **Numer przesyłki i historię śledzenia.** Zrób zrzuty ekranu, bo strony śledzenia z czasem znikają. [Peek](/) pokazuje każdy skan na stronie przesyłki, ale nie złoży reklamacji za Ciebie.
+- **Numer przesyłki i historię śledzenia.** Zrób zrzuty ekranu, bo strony śledzenia z czasem znikają. [Peek](/) pokazuje każdy skan na stronie przesyłki, ale nie złoży reklamacji za ciebie.
 - **Dowód nadania.** DPD prosi o list przewozowy.
 - **Dowód wartości.** Faktura, paragon, wyciąg z konta albo potwierdzenie z PayPala.
 - **Kwotę roszczenia i numer konta**, na które ma trafić odszkodowanie.
 - **Zrzeczenie się roszczeń przez nadawcę**, jeśli reklamację składasz jako odbiorca.
 
-DPD traktuje niekompletną reklamację jak niewniesioną i daje 14 dni na dosłanie dokumentów, o które poprosi. Każdy operator pocztowy musi odpowiedzieć w ciągu 30 dni, a jeśli nie odpowie, reklamację uważa się za uznaną. Na odwołanie od odmowy masz 14 dni. Gdy odpowiedź operatora Cię nie zadowala, UKE wskazuje interwencję Prezesa UKE, bezpłatne pozasądowe rozwiązanie sporu (ADR) albo sąd. Roszczenia przedawniają się po 12 miesiącach od nadania, ale bieg przedawnienia stoi, dopóki trwa reklamacja.
+DPD traktuje niekompletną reklamację jak niewniesioną i daje 14 dni na dosłanie dokumentów, o które poprosi. Każdy operator pocztowy musi odpowiedzieć w ciągu 30 dni, a jeśli nie odpowie, reklamację uważa się za uznaną. Na odwołanie od odmowy masz 14 dni. Gdy odpowiedź operatora cię nie zadowala, UKE wskazuje interwencję Prezesa UKE, bezpłatne pozasądowe rozwiązanie sporu (ADR) albo sąd. Roszczenia przedawniają się po 12 miesiącach od nadania, ale bieg przedawnienia stoi, dopóki trwa reklamacja.
 
 ## Zaginęła paczka od osoby prywatnej z Vinted lub Allegro Lokalnie?
 
-Przepisy konsumenckie nie chronią Cię przy zakupie od osoby prywatnej: według UOKiK konsumentem jest się w umowie z przedsiębiorcą. Chroni Cię to, jak płacisz:
+Przepisy konsumenckie nie chronią cię przy zakupie od osoby prywatnej: według UOKiK konsumentem jest się w umowie z przedsiębiorcą. Chroni cię to, jak płacisz:
 
 - **Allegro Ochrona Kupujących** obejmuje też zakupy na Allegro Lokalnie. Nie obejmuje umów zawartych i zrealizowanych na innych zasadach niż w regulaminie Allegro ani zakupów, za które zapłaciłeś przy odbiorze osobistym. Jeśli płaciłeś poza Allegro, dołączysz dowód wpłaty.
 - **Vinted** oddaje pieniądze, gdy paczka z etykietą z Vinted zaginie, a sprzedający dostaje odszkodowanie. Płatność bez przycisku „Kup teraz” nie jest chroniona.
 - **PayPal** chroni płatności za towary. Płatności osobiste, w tym „znajomi i rodzina”, są wyłączone.
 
-Płatność przelewem? Poproś sprzedającego, żeby złożył reklamację u przewoźnika i przekazał Ci odszkodowanie, albo żeby zrzekł się roszczeń na Twoją rzecz: wtedy reklamację złożysz sam.
+Płatność przelewem? Poproś sprzedającego, żeby złożył reklamację u przewoźnika i przekazał ci odszkodowanie, albo żeby zrzekł się roszczeń na twoją rzecz: wtedy reklamację złożysz sam.
 
 ## Bank albo PayPal: ostatni krok
 

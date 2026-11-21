@@ -6,7 +6,7 @@ published: 2026-10-22
 updated: 2026-11-17
 ---
 
-DHL Paket to niemiecka usługa paczkowa DHL Group, działająca pod markami Deutsche Post i DHL. Paczkę śledzisz po numerze na dhl.de (po niemiecku lub po angielsku), w aplikacji Post & DHL albo wklejając numer w pole powyżej. Numer dostajesz od nadawcy: sklepy podają go zwykle w e-mailu o wysyłce. Ta strona przyda Ci się, gdy mieszkasz w Niemczech, i wtedy, gdy czekasz w Polsce na paczkę nadaną w Niemczech.
+DHL Paket to niemiecka usługa paczkowa DHL Group, działająca pod markami Deutsche Post i DHL. Paczkę śledzisz po numerze na dhl.de (po niemiecku lub po angielsku), w aplikacji Post & DHL albo wklejając numer w pole powyżej. Numer dostajesz od nadawcy: sklepy podają go zwykle w e-mailu o wysyłce. Ta strona przyda ci się, gdy mieszkasz w Niemczech, i wtedy, gdy czekasz w Polsce na paczkę nadaną w Niemczech.
 
 ## Numer przesyłki DHL Paket: gdzie go znaleźć i jak wygląda
 
@@ -27,18 +27,18 @@ Nowy numer może pojawić się w śledzeniu dopiero po 24 godzinach. Jeśli DHL 
 
 Po polsku dhl.de nie pokazuje śledzenia: jest ono po niemiecku albo po angielsku. Poniżej angielskie komunikaty DHL; po niemiecku doręczona paczka ma wpis `Die Sendung wurde erfolgreich zugestellt.`
 
-| DHL pisze | Co to znaczy dla Ciebie |
+| DHL pisze | Co to znaczy dla ciebie |
 | --- | --- |
 | `The instruction data for this shipment have been provided by the sender to DHL electronically` | Nadawca utworzył etykietę i wysłał dane do DHL. DHL nie ma jeszcze paczki. |
 | `The shipment was handed over to DHL.` | DHL ma paczkę. |
 | `The shipment has been processed in the parcel center` | Paczka przeszła przez sortownię (Paketzentrum). |
 | `The shipment will be transported to the destination country/destination area and, from there, handed over to the delivery organization.` | Wyjeżdża z Niemiec; na miejscu przejmie ją firma doręczająca w kraju docelowym. |
 | `The shipment has arrived in the destination country/destination area.` | Dotarła do kraju docelowego, np. do Polski. |
-| `The shipment has been processed in the destination parcel centre.` | W Niemczech: jest w sortowni, która obsługuje Twoją okolicę. |
+| `The shipment has been processed in the destination parcel centre.` | W Niemczech: jest w sortowni, która obsługuje twoją okolicę. |
 | `The shipment has been loaded into the delivery vehicle` | Jest w doręczeniu i zwykle dotrze tego samego dnia. |
-| `The shipment has been delivered` | Doręczona: Tobie, sąsiadowi, domownikowi albo do skrzynki. |
+| `The shipment has been delivered` | Doręczona: tobie, sąsiadowi, domownikowi albo do skrzynki. |
 | `The shipment could not be delivered` | Próba doręczenia się nie udała. |
-| `The shipment is ready for collection` | Czeka na Ciebie w Filiale, Paketshopie albo Packstation. |
+| `The shipment is ready for collection` | Czeka na ciebie w Filiale, Paketshopie albo Packstation. |
 | `The shipment has not been picked up and will be returned.` | Minął termin odbioru, paczka wraca. |
 | `The shipment is returning to sender` | Jedzie z powrotem do nadawcy. |
 
@@ -46,9 +46,9 @@ Wpis z sortowni, który stoi godzinami albo dniami, to nic złego. Jeśli jednak
 
 ## Paczka DHL w Niemczech: awizo, Filiale i Packstation
 
-Gdy Cię nie ma, DHL może zostawić paczkę u sąsiada albo domownika i zawiadomić Cię awizem (Benachrichtigungskarte) lub e-mailem. W przeciwnym razie paczka trafia do pobliskiej Filiale (placówki pocztowej), Paketshopu albo Packstation (automatu DHL). Śledzenie pokazuje prawdziwe miejsce, nawet jeśli na awizo jest inne; jeśli po 3–4 dniach awizo nie przyszło, sprawdź właśnie tam. Zobacz też [nieudane doręczenie](guide:missed-delivery).
+Gdy cię nie ma, DHL może zostawić paczkę u sąsiada albo domownika i zawiadomić cię awizem (Benachrichtigungskarte) lub e-mailem. W przeciwnym razie paczka trafia do pobliskiej Filiale (placówki pocztowej), Paketshopu albo Packstation (automatu DHL). Śledzenie pokazuje prawdziwe miejsce, nawet jeśli na awizo jest inne; jeśli po 3–4 dniach awizo nie przyszło, sprawdź właśnie tam. Zobacz też [nieudane doręczenie](guide:missed-delivery).
 
-- **Filiale lub Paketshop:** paczka czeka 7 dni roboczych, licząc soboty, od dnia po pierwszej próbie doręczenia. Na 2 dni robocze przed końcem terminu przychodzi przypomnienie. Weź dowód tożsamości ze zdjęciem; w Filiale awizo nie jest potrzebne. Ktoś inny odbierze paczkę z Twoim podpisanym pełnomocnictwem (Vollmacht), awizem i własnym dokumentem.
+- **Filiale lub Paketshop:** paczka czeka 7 dni roboczych, licząc soboty, od dnia po pierwszej próbie doręczenia. Na 2 dni robocze przed końcem terminu przychodzi przypomnienie. Weź dowód tożsamości ze zdjęciem; w Filiale awizo nie jest potrzebne. Ktoś inny odbierze paczkę z twoim podpisanym pełnomocnictwem (Vollmacht), awizem i własnym dokumentem.
 - **Packstation:** 7 dni kalendarzowych dla paczki zaadresowanej lub przekierowanej do automatu, 9 po nieudanym doręczeniu, bez przedłużenia. Skrytkę otwierasz kodem odbioru z aplikacji Post & DHL, a po nieudanym doręczeniu wystarczy awizo.
 - **Ponowne doręczenie (Zweitzustellung):** po nieudanej próbie możesz je zamówić raz, najpóźniej 2 dni przed końcem terminu odbioru. Zwykle przychodzi 2 dni robocze później.
 
@@ -56,10 +56,10 @@ Przed doręczeniem możesz za darmo przesunąć je maksymalnie o sześć dni rob
 
 ## Paczka z Niemiec w Polsce: kto ją doręcza
 
-DHL podaje tu dwie firmy. Strona DHL dla klientów indywidualnych o wysyłce do Polski wymienia DHL Express Polska ([DHL Express](carrier:dhl-express)), a arkusz DHL dla klientów biznesowych (stan na wrzesień 2026) [DHL eCommerce Polska](carrier:dhl-ecommerce-pl). Która z nich ma Twoją paczkę, pokaże śledzenie albo powiadomienie, które dostaniesz.
+DHL podaje tu dwie firmy. Strona DHL dla klientów indywidualnych o wysyłce do Polski wymienia DHL Express Polska ([DHL Express](carrier:dhl-express)), a arkusz DHL dla klientów biznesowych (stan na wrzesień 2026) [DHL eCommerce Polska](carrier:dhl-ecommerce-pl). Która z nich ma twoją paczkę, pokaże śledzenie albo powiadomienie, które dostaniesz.
 
 - **Doręczenie:** według DHL jedna próba doręczenia, potem paczkę odbierasz w punkcie. Doręczenia od poniedziałku do piątku, orientacyjnie 2–3 dni robocze z Niemiec.
-- **Śledzenie:** dalej na dhl.de pod tym samym numerem, ale DHL uprzedza, że nie każdy kraj przekazuje wszystkie zdarzenia, a paczkę często da się śledzić na stronie partnera. Faktyczne miejsce odbioru widać w śledzeniu partnera, który powiadomi Cię e-mailem lub SMS-em, jeśli ma Twoje dane.
+- **Śledzenie:** dalej na dhl.de pod tym samym numerem, ale DHL uprzedza, że nie każdy kraj przekazuje wszystkie zdarzenia, a paczkę często da się śledzić na stronie partnera. Faktyczne miejsce odbioru widać w śledzeniu partnera, który powiadomi cię e-mailem lub SMS-em, jeśli ma twoje dane.
 - **Odbiór:** gdy paczkę doręcza DHL eCommerce Polska, dostajesz e-mail lub SMS z datą, miejscem i przewidywanymi godzinami doręczenia. Według DHL eCommerce Polska datę lub adres doręczenia zmienisz sam, bez kontaktu z nadawcą, a w aplikacji Mój DHL przekierujesz paczkę do punktu DHL POP albo odzyskasz PIN.
 - **Status stoi:** kilka dni bez zmian po wyjeździe z Niemiec (np. ostatni wpis w międzynarodowym centrum we Frankfurcie) to według DHL nic złego, dopóki paczka mieści się w zwykłym czasie dostawy.
 
@@ -67,7 +67,7 @@ Między Niemcami a Polską nie ma cła, bo oba kraje są w Unii Europejskiej. O 
 
 ## Paczka DHL stoi, doręczona, ale jej nie ma, albo uszkodzona
 
-**W Niemczech.** Jeśli status nie zmienia się od mniej niż 5 dni roboczych, DHL prosi o cierpliwość; potem można zlecić poszukiwanie (Nachforschung). Najpierw jednak porozmawiaj z nadawcą: przy zakupach online sklep zwykle załatwi to szybciej. Obsługa klienta DHL widzi to samo śledzenie co Ty i nie przyspieszy paczki. Zobacz [co robić, gdy status się nie zmienia](guide:tracking-not-updating).
+**W Niemczech.** Jeśli status nie zmienia się od mniej niż 5 dni roboczych, DHL prosi o cierpliwość; potem można zlecić poszukiwanie (Nachforschung). Najpierw jednak porozmawiaj z nadawcą: przy zakupach online sklep zwykle załatwi to szybciej. Obsługa klienta DHL widzi to samo śledzenie co ty i nie przyspieszy paczki. Zobacz [co robić, gdy status się nie zmienia](guide:tracking-not-updating).
 
 Status „doręczona”, a paczki nie ma? Pole „Zugestellt an” (lub „Delivered to”) mówi, kto ją odebrał: sąsiad czy skrzynka. Jeśli nieznany sąsiad nie odezwie się po dwóch dniach, skontaktuj się z obsługą klienta. Poszukaj też `Rücksendung eingeleitet`: paczka mogła wrócić do nadawcy, a rozpoczętego zwrotu nie da się zatrzymać. Zobacz [paczka doręczona, a jej nie ma](guide:delivered-not-received).
 
@@ -90,15 +90,15 @@ DHL nigdy nie prosi SMS-em o dane osobowe ani o płatność; podejrzaną wiadomo
 
 [Peek](/) od razu rozpoznaje DHL po numerze `JJD` z 18 cyframi (etykiety `JJD0146…` trafiają do [DHL Express](carrier:dhl-express)), numerze `0034043…` z poprawną cyfrą kontrolną albo poprawnym numerze `C…DE` lub `L…DE`. 12-cyfrowy Identcode czy numer 10-cyfrowy pasuje też do innych przewoźników: wklej go mimo to, Peek śledzi ponad 4500 przewoźników, a jeśli paczka nie trafi pod DHL, wybierz „DHL” przez „Zmień przewoźnika”. Działają też linki z dhl.de i deutschepost.de.
 
-Peek czyta śledzenie z dhl.de po angielsku (po niemiecku, jeśli aplikacja Peek jest ustawiona na niemiecki), a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy kilka przesyłek ma ten sam 12-cyfrowy numer, DHL żąda kodu pocztowego adresu doręczenia: wtedy Peek poprosi Cię o niego przy paczce („Dodaj kod pocztowy”), a dopóki go nie dodasz, pomagają serwisy śledzenia przesyłek. Dopóki DHL czeka na kod pocztowy albo odrzuca podany przez Ciebie, a przez dobę nie odpowiedział ani DHL, ani żaden serwis śledzenia, Peek sprawdza paczkę raz dziennie; dodanie lub zmiana kodu pocztowego od razu uruchamia sprawdzenie. Serwisy śledzenia pomagają też, gdy DHL odsyła do innej usługi DHL. Peek sprawdza paczkę nawet co 10 minut, a gdy jest w doręczeniu, nawet co 2 minuty (co 5, gdy musi otworzyć dhl.de w przeglądarce), i może Cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Częstsze sprawdzanie działa tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego (gdy DHL podaje przedział godzin, od pół godziny przed jego początkiem), i dopóki odpowiada własne śledzenie DHL; przez serwisy śledzenia przesyłek Peek sprawdza co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
+Peek czyta śledzenie z dhl.de po angielsku (po niemiecku, jeśli aplikacja Peek jest ustawiona na niemiecki), a gdy DHL odmawia, otwiera je w przeglądarce na swoim serwerze. Gdy kilka przesyłek ma ten sam 12-cyfrowy numer, DHL żąda kodu pocztowego adresu doręczenia: wtedy Peek poprosi cię o niego przy paczce („Dodaj kod pocztowy”), a dopóki go nie dodasz, pomagają serwisy śledzenia przesyłek. Dopóki DHL czeka na kod pocztowy albo odrzuca podany przez ciebie, a przez dobę nie odpowiedział ani DHL, ani żaden serwis śledzenia, Peek sprawdza paczkę raz dziennie; dodanie lub zmiana kodu pocztowego od razu uruchamia sprawdzenie. Serwisy śledzenia pomagają też, gdy DHL odsyła do innej usługi DHL. Peek sprawdza paczkę nawet co 10 minut, a gdy jest w doręczeniu, nawet co 2 minuty (co 5, gdy musi otworzyć dhl.de w przeglądarce), i może cię powiadamiać o każdym skanie, tylko o ważnych etapach albo tylko w dniu dostawy. Częstsze sprawdzanie działa tylko w dniu wydania do doręczenia, od 6:00 czasu lokalnego (gdy DHL podaje przedział godzin, od pół godziny przed jego początkiem), i dopóki odpowiada własne śledzenie DHL; przez serwisy śledzenia przesyłek Peek sprawdza co 15 minut. Jeśli przez dwa dni nie ma nowych informacji (albo przez 12 godzin, gdy paczka wciąż ma status „Zarejestrowana” lub „Przyjęta przez przewoźnika”), Peek sprawdza ją już tylko co godzinę.
 
-Widzisz status, każdy skan z miejscem na mapie i dokładną godziną DHL, przewidywany dzień doręczenia (z przedziałem godzin od DHL, jeśli go podaje) i kraj docelowy, w brzmieniu DHL. Peek nie zapisuje Twojego imienia i nazwiska, adresu ani podpisu, ale Filiale czy Packstation wymienione przez DHL w skanie zostają tak, jak zapisał je DHL. Jeśli skan za granicą zawiera link do śledzenia DHL eCommerce Polska (sprawdz.dhl.com.pl lub mojdhl.pl) albo DHL Express, Peek może śledzić paczkę dalej u nich. Nie przekieruje paczki, nie zamówi Liefertag i nie skontaktuje się za Ciebie z DHL ani ze sklepem.
+Widzisz status, każdy skan z miejscem na mapie i dokładną godziną DHL, przewidywany dzień doręczenia (z przedziałem godzin od DHL, jeśli go podaje) i kraj docelowy, w brzmieniu DHL. Peek nie zapisuje twojego imienia i nazwiska, adresu ani podpisu, ale Filiale czy Packstation wymienione przez DHL w skanie zostają tak, jak zapisał je DHL. Jeśli skan za granicą zawiera link do śledzenia DHL eCommerce Polska (sprawdz.dhl.com.pl lub mojdhl.pl) albo DHL Express, Peek może śledzić paczkę dalej u nich. Nie przekieruje paczki, nie zamówi Liefertag i nie skontaktuje się za ciebie z DHL ani ze sklepem.
 
 ## Pytania o śledzenie DHL Paket
 
 ### Kto doręcza w Polsce paczkę DHL z Niemiec?
 
-DHL podaje dwie firmy: DHL Express Polska (strona dla klientów indywidualnych) i DHL eCommerce Polska (arkusz dla firm z września 2026). Która ma Twoją paczkę, pokaże śledzenie na dhl.de, pod tym samym numerem.
+DHL podaje dwie firmy: DHL Express Polska (strona dla klientów indywidualnych) i DHL eCommerce Polska (arkusz dla firm z września 2026). Która ma twoją paczkę, pokaże śledzenie na dhl.de, pod tym samym numerem.
 
 ### Ile idzie paczka DHL z Niemiec do Polski?
 

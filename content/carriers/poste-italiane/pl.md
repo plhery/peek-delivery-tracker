@@ -60,7 +60,7 @@ Każdy skan ma włoskie zdanie z *Legenda degli stati di spedizione*, pokazywane
 
 **We Włoszech (*giacenza* i Punto Poste).** Poste podejmuje 2 próby pod budynek (*piano strada*): po pierwszej zostawia awizo, ponawia następnego dnia roboczego w Crono i Poste Delivery Business, a potem bezpłatnie przechowuje paczkę (*giacenza*) na poczcie; zobacz [nieodebrana paczka](guide:uncollected-parcel):
 
-- **Terminy i pełnomocnictwo:** od 3 dni roboczych w automacie do 10 na poczcie (Poste Delivery Web: 10 poczta, 7 Punto Poste, 3 automat; Crono: 10 w Punto Poste; polecone: 30 dni, Raccomandata 1: 15 dni). Rezerwacja wizyty przez „Prenota” lub pod 06 4526 4526; na poczcie osoba trzecia odbiera ze szczegółowym upoważnieniem, swoim dokumentem i kopią Twojego, a w Punto Poste/automacie kodem PIN.
+- **Terminy i pełnomocnictwo:** od 3 dni roboczych w automacie do 10 na poczcie (Poste Delivery Web: 10 poczta, 7 Punto Poste, 3 automat; Crono: 10 w Punto Poste; polecone: 30 dni, Raccomandata 1: 15 dni). Rezerwacja wizyty przez „Prenota” lub pod 06 4526 4526; na poczcie osoba trzecia odbiera ze szczegółowym upoważnieniem, swoim dokumentem i kopią twojego, a w Punto Poste/automacie kodem PIN.
 - **Scegli Tu i PostePlus:** w Scegli Tu jednorazowo zmienisz dzień, adres we Włoszech, placówkę/Punto Poste, sąsiada, bezpieczne miejsce lub urlop; PostePlus działa dla mieszkańców Włoch.
 - **Odprawa spoza UE we Włoszech:** płatna przy odbiorze, na poczcie lub taniej na www.poste.it przyciskiem „Paga” (opłata handlowa Poste: 3 € do 22 €, 7 € do 150 €, 21 € powyżej; online: 1 € do 150 €, 18 € powyżej). Według Komisji Europejskiej od 1 lipca 2026 r. dochodzi cło 3 € za każdy rodzaj towaru w przesyłkach do 150 €, a od 1 listopada 2026 r. opłata unijna 2 € za każdy rodzaj towaru przy zakupach online, niezależnie od wartości. Poste ostrzega też o znacznych spowolnieniach (*significativi rallentamenti*) odpraw spoza UE z przyczyn technicznych, bez możliwego terminu rozładowania zaległości; zobacz [paczka na cle](guide:customs).
 
@@ -74,7 +74,7 @@ Przy zakupach online zgłoś się najpierw do sklepu (w UE ma 30 dni na dostawę
 
 Sprawdzone na poste.it 16 listopada 2026 r.:
 
-- **Z Polski, zagranicy i komórki:** `+39 06 4526 3160`, pon.–sob. poza włoskimi świętami, 8:00–20:00, według cennika Twojego operatora.
+- **Z Polski, zagranicy i komórki:** `+39 06 4526 3160`, pon.–sob. poza włoskimi świętami, 8:00–20:00, według cennika twojego operatora.
 - **Włoski telefon stacjonarny:** `803 160` (bezpłatny, te same godziny). Informacje tylko dla właściciela konta.
 - **Pisemnie i czat:** `assistenza.spedizioni@posteitaliane.it`, [Scrivici](https://www.poste.it/assistenza/scrivici), [Contact us](https://www.poste.it/assistenza/scrivici-en) oraz całodobowy *Assistente Digitale*.
 
@@ -104,7 +104,7 @@ W Poste Delivery Web: 7 dni roboczych w Punto Poste, 3 w automacie i 10 w urzęd
 
 ### Jak zadzwonić do Poste Italiane z Polski?
 
-Pod `+39 06 4526 3160`, od poniedziałku do soboty w godz. 8:00–20:00 (poza włoskimi świętami; koszt według Twojego operatora); `803 160` działa tylko z włoskich telefonów stacjonarnych.
+Pod `+39 06 4526 3160`, od poniedziałku do soboty w godz. 8:00–20:00 (poza włoskimi świętami; koszt według twojego operatora); `803 160` działa tylko z włoskich telefonów stacjonarnych.
 
 :::sources
 - [Poste Italiane: FAQ Spedizioni](https://www.poste.it/assistenza/faq-spedizioni-e-consegne/) – kod, awizo, pełnomocnictwo, polecone

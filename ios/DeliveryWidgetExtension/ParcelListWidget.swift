@@ -17,14 +17,14 @@ private struct ParcelListEntry: TimelineEntry {
 }
 
 private struct ParcelListProvider: TimelineProvider {
-    /// The demo's next deliveries, in the reader's language.
+    /// The demo's next deliveries, in the reader's language, with Peek AI unless the reader switched it off.
     func placeholder(in context: Context) -> ParcelListEntry {
         let store = DeliveryWidgetSharedStore(appGroupIdentifier: DeliveryWidgetSharedStore.appGroupIdentifier())
         let languageCode = ExtensionLocalizer(savedLanguageCode: store?.languageCode).languageCode
         let folder = Bundle.main.url(forResource: DeliveryWidgetSample.folderName, withExtension: nil)
         let snapshot = folder.flatMap { DeliveryWidgetSample.snapshot(languageCode: languageCode, in: $0) }
         var parcels = snapshot?.parcels ?? []
-        if parcels.first?.isOutForDelivery == true {
+        if parcels.first?.isOutForDelivery == true, store?.showsPeekAi != false {
             let clock = DeviceClock.uses24HourTime(in: UserDefaults(suiteName: DeliveryWidgetSharedStore.appGroupIdentifier()))
             parcels[0].peekAi = DeliveryWidgetSample.peekAi(at: Date(), copy: ExtensionLocalizer(languageCode: languageCode), uses24HourTime: clock)
         }
@@ -267,6 +267,7 @@ private struct ParcelListCard: View {
     let card: DeliveryWidgetCard
     let art: DeliveryWidgetCardArt
 
+    @Environment(\.peekAiCopy) private var peekAiCopy
     @Environment(\.colorScheme) private var scheme
     @Environment(\.widgetRenderingMode) private var renderingMode
     @Environment(\.locale) private var locale
@@ -307,7 +308,9 @@ private struct ParcelListCard: View {
         }
         .background(colored ? DeliveryWidgetCardColors.color(card.surface, scheme) : Color.primary.opacity(0.12))
         .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
-        .accessibilityElement(children: .combine)
+        // Read as a row is, Peek AI's words too where the day leaves them no room.
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(listAccessibilityLabel(parcel, peekAiCopy))
         .widgetNewUpdateSaidFirst(parcel.newUpdate == true)
     }
 }
@@ -680,7 +683,8 @@ private struct ParcelListMark: View {
     }
 }
 
-/// What VoiceOver reads for a row or a pass: the parcel's name, its carrier, its stage, its day and Peek AI's words.
+/// What VoiceOver reads for a row, a pass or a card: the parcel's name, its carrier, its stage, its day and Peek AI's
+/// words.
 private func listAccessibilityLabel(_ parcel: DeliveryWidgetParcel, _ peekAi: PeekAiCopy) -> String {
     let line = parcel.listLine
     return ([parcel.listName, parcel.named == false ? nil : parcel.carrier, line.status, line.day, parcel.peekAi.map(peekAi.spoken)] as [String?])

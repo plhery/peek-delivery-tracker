@@ -5552,7 +5552,7 @@ extension Parcel {
         createdAt = try values.decode(String.self, forKey: .createdAt)
         expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
         expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
-        peekAi = try values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
+        peekAi = try? values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
         lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
         lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)
         syncStatus = try values.decode(SyncStatus.self, forKey: .syncStatus)
@@ -5571,5 +5571,35 @@ extension Parcel {
         emailMuted = try values.decodeIfPresent(Bool.self, forKey: .emailMuted)
         newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
         seenAt = try values.decodeIfPresent(String.self, forKey: .seenAt)
+    }
+}
+
+extension PublicPackage {
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(UUID.self, forKey: .id)
+        trackingNumber = try values.decodeIfPresent(String.self, forKey: .trackingNumber)
+        numberHint = try values.decodeIfPresent(ParcelNumberHint.self, forKey: .numberHint)
+        label = try values.decode(String.self, forKey: .label)
+        carrier = try values.decode(CarrierID.self, forKey: .carrier)
+        createdAt = try values.decode(String.self, forKey: .createdAt)
+        expectedDelivery = try values.decodeIfPresent(String.self, forKey: .expectedDelivery)
+        expectedDeliveryPassed = try values.decodeIfPresent(String.self, forKey: .expectedDeliveryPassed)
+        peekAi = try? values.decodeIfPresent(PeekAi.self, forKey: .peekAi)
+        lastStatusText = try values.decodeIfPresent(String.self, forKey: .lastStatusText)
+        lastSyncedAt = try values.decodeIfPresent(String.self, forKey: .lastSyncedAt)
+        syncStatus = try values.decode(SyncStatus.self, forKey: .syncStatus)
+        syncError = try values.decodeIfPresent(String.self, forKey: .syncError)
+        trackingURL = try values.decodeIfPresent(String.self, forKey: .trackingURL)
+        dpdPostcode = try values.decodeIfPresent(String.self, forKey: .dpdPostcode)
+        carrierData = try values.decode(PublicPackageCarrierData.self, forKey: .carrierData)
+        archivedAt = try values.decodeIfPresent(String.self, forKey: .archivedAt)
+        notificationsMuted = try values.decode(Bool.self, forKey: .notificationsMuted)
+        trackingEvents = try values.decode([TrackingEvent].self, forKey: .trackingEvents)
+        plannedEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .plannedEvents)
+        writtenAheadBy = try values.decodeIfPresent(CarrierID.self, forKey: .writtenAheadBy)
+        writtenAheadEvents = try values.decodeIfPresent([PlannedTrackingEvent].self, forKey: .writtenAheadEvents)
+        carrierOutage = try values.decodeIfPresent(CarrierOutage.self, forKey: .carrierOutage)
+        newsAt = try values.decodeIfPresent(String.self, forKey: .newsAt)
     }
 }

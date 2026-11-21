@@ -119,6 +119,13 @@ struct DeliveryWidgetCardView: View {
 
     private var ink: Color { DeliveryWidgetCardColors.color(card.ink, scheme) }
     private var status: String { card.status == parcel.detail ? card.status : "\(card.status) · \(parcel.detail)" }
+    /// Peek AI's words as the card shows them. At the top of a whole medium widget they stand apart from the carrier's
+    /// date in the bottom line, and say "not today" rather than "unlikely" beside it.
+    private var peekAi: String? { shape == .wide ? parcel.peekAiAlone ?? parcel.peekAi : parcel.peekAi }
+    /// What VoiceOver reads, Peek AI's words too where the card has no room to show them.
+    private var spoken: String {
+        ([parcel.carrier, parcel.label, status, peekAi.map(peekAiCopy.spoken)] as [String?]).compactMap { $0 }.joined(separator: ", ")
+    }
 
     static func markHeight(_ shape: DeliveryWidgetPicture) -> CGFloat { shape == .half ? 13 : 15 }
 
@@ -132,7 +139,7 @@ struct DeliveryWidgetCardView: View {
                     .accessibilityLabel(parcel.carrier)
                 Spacer(minLength: 0)
                 // Peek AI's own estimate at the top, as on the app's cards, where a whole medium widget has the room.
-                if shape == .wide, let words = parcel.peekAi {
+                if shape == .wide, let words = peekAi {
                     ViewThatFits(in: .horizontal) {
                         peekAiCopy.phrase(words).font(.caption).foregroundStyle(ink)
                         EmptyView()
@@ -155,7 +162,7 @@ struct DeliveryWidgetCardView: View {
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
                 // Under the status line on a smaller card, where it fits.
-                if shape != .wide, let words = parcel.peekAi {
+                if shape != .wide, let words = peekAi {
                     ViewThatFits(in: .horizontal) {
                         peekAiCopy.phrase(words)
                         EmptyView()
@@ -166,7 +173,8 @@ struct DeliveryWidgetCardView: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(spoken)
         .widgetNewUpdateSaidFirst(marked)
     }
 }
@@ -256,20 +264,35 @@ struct PeekAiPill: View {
     }
 }
 
-/// The pill, then Peek AI's words, which VoiceOver reads as one: "Peek AI: by 16:00".
+/// The pill, then Peek AI's words, which VoiceOver reads as one: "Peek AI: by 16:00". On one line, unless the words
+/// `wrap`: then they run on beside the pill, which never breaks, or go under it at the largest text sizes.
 struct PeekAiPhrase: View {
     let name: String
     let words: String
     /// What VoiceOver reads.
     let spoken: String
     var weight: Font.Weight = .regular
+    var wraps = false
+
+    @Environment(\.dynamicTypeSize) private var typeSize
 
     var body: some View {
-        HStack(spacing: 4) {
-            PeekAiPill(name: name)
-            Text(words).fontWeight(weight)
+        Group {
+            if wraps {
+                let layout = typeSize.isAccessibilitySize
+                    ? AnyLayout(VStackLayout(alignment: .leading, spacing: 2)) : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 4))
+                layout {
+                    PeekAiPill(name: name)
+                    Text(words).fontWeight(weight).fixedSize(horizontal: false, vertical: true)
+                }
+            } else {
+                HStack(spacing: 4) {
+                    PeekAiPill(name: name)
+                    Text(words).fontWeight(weight)
+                }
+                .lineLimit(1)
+            }
         }
-        .lineLimit(1)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(spoken)
     }
@@ -284,8 +307,8 @@ struct PeekAiCopy: Equatable {
     /// "Peek AI: by 16:00".
     func spoken(_ words: String) -> String { says.replacingOccurrences(of: "{{words}}", with: words) }
 
-    func phrase(_ words: String, weight: Font.Weight = .regular) -> PeekAiPhrase {
-        PeekAiPhrase(name: name, words: words, spoken: spoken(words), weight: weight)
+    func phrase(_ words: String, weight: Font.Weight = .regular, wraps: Bool = false) -> PeekAiPhrase {
+        PeekAiPhrase(name: name, words: words, spoken: spoken(words), weight: weight, wraps: wraps)
     }
 }
 

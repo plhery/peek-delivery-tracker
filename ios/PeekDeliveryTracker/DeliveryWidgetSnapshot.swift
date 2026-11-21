@@ -39,6 +39,8 @@ struct DeliveryWidgetParcel: Codable, Equatable, Hashable, Identifiable, Sendabl
     /// after the carrier's date. None while Settings has Peek AI off, or from an app that didn't publish them.
     var peekAi: String? = nil
     var peekAiUntil: Date? = nil
+    /// Peek AI's words where they stand apart from the carrier's date, when they differ: "not today" for "unlikely".
+    var peekAiAlone: String? = nil
 
     var deepLink: URL {
         URL(string: "peekdeliverytracker://parcel/\(id.uuidString)")!
@@ -467,7 +469,7 @@ extension DeliveryWidgetParcel {
     /// AI's words once they no longer hold.
     func worded(at date: Date) -> DeliveryWidgetParcel {
         var parcel = self
-        if let until = peekAiUntil, until <= date { parcel.peekAi = nil }
+        if let until = peekAiUntil, until <= date { (parcel.peekAi, parcel.peekAiAlone) = (nil, nil) }
         guard let wording = later?.last(where: { $0.midnight() <= date }) else { return parcel }
         parcel.detail = wording.detail
         parcel.section = wording.section ?? section
@@ -501,6 +503,8 @@ struct DeliveryWidgetSharedStore {
     private static let retiredWidgetSwitchKey = "sdt.deliveryWidget.enabled.v1"
     private static let liveActivitiesEnabledKey = "sdt.deliveryLiveActivities.enabled.v1"
     private static let languageKey = "sdt.deliveryWidget.language.v1"
+    /// Set while Settings has Peek AI off, which the widget gallery's sample follows.
+    private static let peekAiOffKey = "sdt.deliveryWidget.peekAiOff.v1"
     private static let snapshotKey = "sdt.deliveryWidget.snapshot.v1"
     private let defaults: UserDefaults
 
@@ -525,6 +529,13 @@ struct DeliveryWidgetSharedStore {
 
     var languageCode: String? {
         defaults.string(forKey: Self.languageKey)
+    }
+
+    /// Whether the reader shows Peek AI's estimates, as Settings has it.
+    var showsPeekAi: Bool { !defaults.bool(forKey: Self.peekAiOffKey) }
+
+    func setShowsPeekAi(_ shown: Bool) {
+        defaults.set(!shown, forKey: Self.peekAiOffKey)
     }
 
     var liveActivitiesEnabled: Bool {

@@ -203,8 +203,9 @@ struct ParcelDetailView: View {
                     .environmentObject(localizer)
             }
         }
-        .sheet(item: $peekAiSheet) { request in
-            PeekAiSheet(request: request)
+        .sheet(item: $peekAiSheet) { _ in
+            // The parcel as it is now: the sheet goes once its estimate does.
+            PeekAiSheet(parcel: parcel)
                 .environmentObject(store)
                 .environmentObject(localizer)
         }

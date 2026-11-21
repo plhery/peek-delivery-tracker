@@ -53,7 +53,8 @@ struct ParcelLinkSheet: View {
         .interactiveDismissDisabled(adding)
         .unlockSheet($unlock)
         .sheet(item: $peekAiSheet) { request in
-            PeekAiSheet(request: request)
+            // The parcel as the link shows it now: the sheet goes once its estimate does.
+            PeekAiSheet(parcel: shownParcel(request.id))
                 .environmentObject(parcels)
                 .environmentObject(localizer)
         }
@@ -92,6 +93,13 @@ struct ParcelLinkSheet: View {
 
     private static func showsHistory(_ parcel: Parcel) -> Bool {
         CarrierCatalog.shared.tracksAutomatically(parcel.activeTrackingCarrier) || parcel.hasCarrierUpdate
+    }
+
+    /// The parcel the link shows now, while it is the one `id` names.
+    private func shownParcel(_ id: UUID) -> Parcel? {
+        guard case .shown(let response) = links.phase else { return nil }
+        let parcel = response.shownParcel
+        return parcel.id == id ? parcel : nil
     }
 
     /// A gift keeps the sheet to itself; so does a link that shows nothing.

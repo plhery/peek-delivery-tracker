@@ -10,11 +10,10 @@ extension Localizer {
     var peekAiCopy: PeekAiCopy { PeekAiCopy(name: text("peekAi.name"), says: text("peekAi.says", ["words": "{{words}}"])) }
 }
 
-/// The parcel and the estimate Peek AI's sheet explains, kept as it was opened: switching Peek AI off there leaves it.
+/// The parcel whose estimate Peek AI's sheet explains. The sheet reads the parcel as it is now, from the page that holds
+/// it, so that it goes once the estimate does and switching Peek AI off there leaves it.
 struct PeekAiSheetRequest: Identifiable {
-    let parcel: Parcel
-    let ai: PeekAi
-    var id: UUID { parcel.id }
+    let id: UUID
 }
 
 /// Peek AI on the parcel's page: a short card under the parcel's, "✦ Peek AI today is unlikely (i)" and why. The (i)
@@ -27,14 +26,18 @@ struct PeekAiCard: View {
     let open: (PeekAiSheetRequest) -> Void
 
     @EnvironmentObject private var localizer: Localizer
+    @Environment(\.dynamicTypeSize) private var typeSize
     @ObservedObject private var catalog = CarrierCatalog.shared
 
     var body: some View {
         let carrier = catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName
         let claim = localizer.peekAiClaim(ai, now: now)
+        // At the largest text sizes the claim goes under the name, which leaves it too little room beside it.
+        let phrase = typeSize.isAccessibilitySize
+            ? AnyLayout(VStackLayout(alignment: .leading, spacing: 3)) : AnyLayout(HStackLayout(alignment: .firstTextBaseline, spacing: 5))
         VStack(alignment: .leading, spacing: 3) {
             HStack(alignment: .center, spacing: 6) {
-                HStack(alignment: .firstTextBaseline, spacing: 5) {
+                phrase {
                     PeekAiPill(name: localizer.text("peekAi.name"))
                     Text(claim).fontWeight(.semibold)
                         .fixedSize(horizontal: false, vertical: true)
@@ -44,11 +47,11 @@ struct PeekAiCard: View {
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel(localizer.text("peekAi.says", ["words": claim]))
                 Button {
-                    open(PeekAiSheetRequest(parcel: parcel, ai: ai))
+                    open(PeekAiSheetRequest(id: parcel.id))
                     DeliveryAnalytics.shared.action("peek-ai-open")
                 } label: {
                     Image(systemName: "info.circle")
-                        .font(.system(size: 15))
+                        .font(.subheadline)
                         .foregroundStyle(Brand.secondaryText)
                         .frame(width: 44, height: 44)
                         .contentShape(Rectangle())
@@ -88,15 +91,24 @@ struct PeekAiClock<Content: View>: View {
     }
 }
 
-/// Peek AI on the parcel's page, looked at again each minute: the card goes once its hour or day has passed.
+/// Peek AI on the parcel's page, drawn again each minute, so that "5 hours ago" stays true. The card goes, with its room
+/// in the page, the moment its estimate ends.
 struct PeekAiPageCard: View {
     let parcel: Parcel
     let open: (PeekAiSheetRequest) -> Void
+    /// When the estimate shown last ended: the page draws again then, and the card is left out.
+    @State private var ended: Date?
 
     var body: some View {
-        TimelineView(.everyMinute) { context in
-            if let ai = parcel.shownPeekAi(at: context.date) {
-                PeekAiCard(parcel: parcel, ai: ai, now: context.date, open: open)
+        let now = max(Date(), ended ?? .distantPast)
+        if let ai = parcel.shownPeekAi(at: now) {
+            TimelineView(.everyMinute) { context in
+                PeekAiCard(parcel: parcel, ai: parcel.shownPeekAi(at: context.date) ?? ai, now: context.date, open: open)
+            }
+            .task(id: ai) {
+                guard let end = ai.end(after: now) else { return }
+                try? await Task.sleep(for: .seconds(max(0, end.timeIntervalSinceNow)))
+                if !Task.isCancelled { ended = end }
             }
         }
     }
@@ -105,7 +117,8 @@ struct PeekAiPageCard: View {
 /// The (i): what Peek AI expects on the parcel's own card, with the carrier's word under it, the days or hours, why, how
 /// often it is right, the switch that hides it, and what it is.
 struct PeekAiSheet: View {
-    let request: PeekAiSheetRequest
+    /// The parcel as it is now, which the page holding the sheet looks up each time it draws: none once it has gone.
+    let parcel: Parcel?
 
     @EnvironmentObject private var store: ParcelStore
     @EnvironmentObject private var localizer: Localizer
@@ -114,13 +127,31 @@ struct PeekAiSheet: View {
     @ObservedObject private var catalog = CarrierCatalog.shared
     @State private var contentHeight: CGFloat = 560
     @State private var detent = PresentationDetent.height(560)
+    /// What the sheet showed last, which stays while it goes.
+    @State private var kept: Shown?
 
     private var fitted: PresentationDetent { .height(contentHeight) }
 
+    private struct Shown: Equatable {
+        let parcel: Parcel
+        let ai: PeekAi
+    }
+
+    /// The parcel and its estimate while it holds.
+    private func estimate(at now: Date) -> Shown? {
+        parcel.flatMap { parcel in parcel.shownPeekAi(at: now).map { Shown(parcel: parcel, ai: $0) } }
+    }
+
     var body: some View {
+        let live = estimate(at: Date())
         ScrollView {
-            content
-                .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { contentHeight = $0 }
+            // Drawn again each minute: the hours gone fade, and "5 hours ago" moves on.
+            TimelineView(.everyMinute) { context in
+                if let shown = estimate(at: context.date) ?? live ?? kept {
+                    content(shown.parcel, shown.ai, now: context.date)
+                }
+            }
+            .onGeometryChange(for: CGFloat.self) { $0.size.height } action: { contentHeight = $0 }
         }
         .scrollBounceBehavior(.basedOnSize)
         .sheetGround()
@@ -132,16 +163,17 @@ struct PeekAiSheet: View {
         .onChange(of: fitted, initial: true) { _, fitted in
             if detent != .large { detent = fitted }
         }
-        // It goes with the estimate, once its hour or day has passed.
-        .task {
-            guard let end = request.ai.endsAt() else { return }
+        // It goes with the estimate: as soon as the parcel is delivered or its estimate is withdrawn, else once it ends.
+        .task(id: live) {
+            guard let live else { return dismiss() }
+            kept = live
+            guard let end = live.ai.end(after: Date()) else { return }
             try? await Task.sleep(for: .seconds(max(0, end.timeIntervalSinceNow)))
             if !Task.isCancelled { dismiss() }
         }
     }
 
-    private var content: some View {
-        let parcel = request.parcel, ai = request.ai
+    private func content(_ parcel: Parcel, _ ai: PeekAi, now: Date) -> some View {
         let identity = CarrierVisualIdentity.of(parcel.displayedCarrier, catalog: catalog, language: localizer.language)
         let carrier = catalog.info(for: parcel.displayedCarrier, language: localizer.language).displayName
         return VStack(alignment: .leading, spacing: 14) {
@@ -154,8 +186,8 @@ struct PeekAiSheet: View {
                 HStack(alignment: .center, spacing: 12) {
                     VStack(alignment: .leading, spacing: 3) {
                         CarrierFleetMark(identity: identity).padding(.bottom, 4)
-                        Text(localizer.peekAiHeading(ai)).font(.title3.weight(.semibold))
-                        Text(localizer.peekAiCarrierWord(ai, carrier: carrier, estimate: localizer.parcelDeliveryEstimate(parcel)))
+                        Text(localizer.peekAiHeading(ai, now: now)).font(.title3.weight(.semibold))
+                        Text(localizer.peekAiCarrierWord(ai, carrier: carrier, estimate: localizer.parcelDeliveryEstimate(parcel, now: now)))
                             .font(.footnote.weight(.medium))
                             .foregroundStyle(identity.ink)
                     }
@@ -173,11 +205,11 @@ struct PeekAiSheet: View {
                 .background(identity.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                 .accessibilityElement(children: .combine)
             }
-            if let strip = localizer.peekAiStrip(ai) {
+            if let strip = localizer.peekAiStrip(ai, now: now) {
                 PeekAiStripView(strip: strip, carrier: carrier)
             }
             VStack(spacing: 7) {
-                fact(symbol: "lightbulb", title: localizer.text("peekAi.sheet.why"), text: localizer.peekAiWhy(ai, carrier: carrier))
+                fact(symbol: "lightbulb", title: localizer.text("peekAi.sheet.why"), text: localizer.peekAiWhy(ai, carrier: carrier, now: now))
                 fact(symbol: "chart.bar", title: localizer.text("peekAi.sheet.sure"), text: localizer.peekAiRecord(ai))
                 Toggle(isOn: Binding(get: { store.showPeekAi }, set: { shown in
                     store.setShowPeekAi(shown)
@@ -285,6 +317,8 @@ private struct PeekAiStripView: View {
                     .opacity(cell.past ? 0.45 : 1)
                 }
             }
+            // Five hours side by side, "10:00 AM" among them, have no room for larger type: VoiceOver reads them in words.
+            .dynamicTypeSize(...DynamicTypeSize.xxLarge)
             .accessibilityHidden(true)
             HStack(spacing: 12) {
                 key(localizer.text(strip.kind == .hours ? "peekAi.sheet.hours" : "peekAi.sheet.days"), ringed: false)
@@ -298,8 +332,8 @@ private struct PeekAiStripView: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 12)
         .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(spoken)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(localizer.peekAiStripSpoken(strip, carrier: carrier))
     }
 
     private func key(_ text: String, ringed: Bool) -> some View {
@@ -310,15 +344,5 @@ private struct PeekAiStripView: View {
                 .frame(width: 9, height: 9)
             Text(text).fixedSize(horizontal: false, vertical: true)
         }
-    }
-
-    /// The likely cells, then the carrier's, as VoiceOver reads the strip: "Most likely days: Wed 25, Thu 26".
-    private var spoken: String {
-        let likely = strip.cells.filter(\.likely).map { [$0.over, $0.main].filter { !$0.isEmpty }.joined(separator: " ") }
-        var parts = [localizer.text(strip.kind == .hours ? "peekAi.sheet.hours" : "peekAi.sheet.days") + ": " + likely.joined(separator: ", ")]
-        if let ringed = strip.cells.first(where: \.carrier) {
-            parts.append(localizer.text("peekAi.sheet.carrierDate", ["carrier": carrier]) + ": " + "\(ringed.over) \(ringed.main)")
-        }
-        return parts.joined(separator: ". ")
     }
 }

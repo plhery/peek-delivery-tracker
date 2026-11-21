@@ -1865,9 +1865,10 @@ private struct ExperimentalNextDeliveryPass: View {
                                 Text(verbatim: "·").accessibilityHidden(true)
                                 localizer.peekAiCopy.phrase(words).fixedSize()
                             }
+                            // Under it, the words wrap rather than be cut at larger text sizes.
                             VStack(alignment: .leading, spacing: 4) {
                                 status
-                                localizer.peekAiCopy.phrase(words)
+                                localizer.peekAiCopy.phrase(words, wraps: true)
                             }
                         }
                     } else {
@@ -2027,7 +2028,7 @@ private struct ExperimentalParcelPassCard: View {
                 VStack(alignment: .leading, spacing: 6) {
                     CarrierFleetMark(identity: identity)
                     if let date { dateLabel(date) }
-                    if let peekAi = peekAi(at: now) { peekAiLabel(peekAi) }
+                    if let peekAi = peekAi(at: now) { peekAiLabel(peekAi, wraps: true) }
                 }
             }
             .padding(.bottom, 3)
@@ -2097,8 +2098,9 @@ private struct ExperimentalParcelPassCard: View {
             .fixedSize(horizontal: false, vertical: true)
     }
 
-    private func peekAiLabel(_ words: String) -> some View {
-        localizer.peekAiCopy.phrase(words).font(.caption).foregroundStyle(identity.ink)
+    /// Peek AI's words on one line beside the date, or, where they `wrap`, on as many as they need under it.
+    private func peekAiLabel(_ words: String, wraps: Bool = false) -> some View {
+        localizer.peekAiCopy.phrase(words, wraps: wraps).font(.caption).foregroundStyle(identity.ink)
     }
 }
 

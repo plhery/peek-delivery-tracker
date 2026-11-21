@@ -87,9 +87,12 @@ them in the order written, and Add adds the first unless another is chosen.
 Peek AI, the server's `peekAi` on a parcel ([ARCHITECTURE.md](../docs/ARCHITECTURE.md)), is worded
 as the web words it (`PeekAi.swift`): a line on the card, beside the status on Next up, and on the
 parcel's page a short card whose (i) opens the likely days or hours, why, how sure and its switch
-(`PeekAiViews.swift`). It shows only while the parcel is on its way and its call still holds. Settings
-has the same switch: the device keeps the choice, and an account's follows it (`showPeekAi`). The
-demo works out its two samples' calls for the moment they show, as the web's does.
+(`PeekAiViews.swift`). It shows only while the parcel is on its way and its call still holds: until
+the moment the server gives (`endsAt`), whatever the device's zone. The sheet closes when it ends.
+One the app cannot read, in a newer server's words, is left out and the parcel kept.
+Settings has the same switch: the device keeps the choice, and an account's follows it
+(`showPeekAi`); the widget gallery's sample follows it too. The demo works out its two samples'
+calls for the moment they show, as the web's does.
 
 With a keyboard, ⌘N adds a parcel, ⌘F searches, ⌘R refreshes where its button shows, ⌘1 to ⌘3
 choose the tabs and ⌘, opens Settings. On the parcel shown, beside the list or over it, ⇧⌘C

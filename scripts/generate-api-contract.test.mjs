@@ -91,6 +91,18 @@ test('writes an object whose values are all strings as a dictionary of strings',
   assert.match(kotlin, /val messages: List<Map<String, String>>,/);
 });
 
+test('reads Peek AI leniently in Swift, so an estimate it cannot read leaves out only that', (t) => {
+  const { root, run } = generateWith(t, []);
+  assert.equal(run.status, 0, run.stderr);
+  const swift = readFileSync(path.join(root, 'ios', 'PeekDeliveryTracker', 'GeneratedAPIContract.swift'), 'utf8');
+  for (const name of ['Parcel', 'PublicPackage']) {
+    const decoder = swift.match(new RegExp(`extension ${name} \\{\\n    init\\(from decoder: Decoder\\) throws \\{[\\s\\S]*?\\n    \\}`))?.[0];
+    assert.ok(decoder, name);
+    assert.match(decoder, /peekAi = try\? values\.decodeIfPresent\(PeekAi\.self, forKey: \.peekAi\)/);
+    assert.match(decoder, /syncStatus = try values\.decode\(SyncStatus\.self, forKey: \.syncStatus\)/);
+  }
+});
+
 test('stops on two carriers given one Swift and Kotlin name, naming both, and writes nothing', (t) => {
   const { run } = generateWith(t, ['2go', 'two-go']);
   assert.notEqual(run.status, 0);

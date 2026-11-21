@@ -4864,11 +4864,16 @@ extension SessionIsolationTests {
         XCTAssertEqual(shared.snapshot?.parcels.count, 2)
         XCTAssertEqual(words(), [guessed.id: thisWeek])
 
+        XCTAssertTrue(shared.showsPeekAi)
+
+        // The widget gallery's sample follows the switch too.
         respond(Data("{}".utf8))
         store.setShowPeekAi(false)
         XCTAssertEqual(words(), [:])
+        XCTAssertFalse(shared.showsPeekAi)
         store.setShowPeekAi(true)
         XCTAssertEqual(words(), [guessed.id: thisWeek])
+        XCTAssertTrue(shared.showsPeekAi)
     }
 
     @MainActor func testReturningToTheAppReadsTheEmailChoiceAgain() async throws {

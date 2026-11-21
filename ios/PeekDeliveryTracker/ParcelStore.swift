@@ -231,6 +231,7 @@ final class ParcelStore: ObservableObject {
         deliveryLiveActivitiesEnabled = Self.offersLiveActivities && (deliveryWidgetStore?.liveActivitiesEnabled ?? true)
         deliveryLiveActivityRegistrationRemovalPending = !deliveryLiveActivitiesEnabled
         deliveryWidgetStore?.setLiveActivitiesEnabled(deliveryLiveActivitiesEnabled)
+        deliveryWidgetStore?.setShowsPeekAi(showPeekAi)
         cacheOwnerID = session.user?.id
         listReadAt = session.isGuest ? self.device.lastCheckedAt : nil
         notificationInvitationDismissed = NotificationInvitationPreference.isDismissed(for: session.user?.id)
@@ -412,7 +413,8 @@ final class ParcelStore: ObservableObject {
             case .markNewUpdates: markNewUpdates = enabled
             case .showPeekAi: showPeekAi = enabled
             }
-            // The Parcels widget shows the list's mark and Peek AI.
+            // The Parcels widget shows the list's mark and Peek AI, and its sample in the gallery Peek AI.
+            if choice == .showPeekAi { deliveryWidgetStore?.setShowsPeekAi(enabled) }
             publishDeliveryWidget()
         }
         UserDefaults.standard.set(!enabled, forKey: choice.offKey)
@@ -1754,7 +1756,12 @@ final class ParcelStore: ObservableObject {
             item.steps = index < DeliveryWidgetSelection.limit ? widgetSteps(parcel, localizer: localizer) : nil
             item.newUpdate = parcel.showsNewUpdate(marking: marking) ? true : nil
             item.peekAi = localizer.parcelPeekAiWords(parcel, shown: peekAi, now: now)
-            item.peekAiUntil = item.peekAi == nil ? nil : parcel.shownPeekAi(at: now)?.endsAt(after: now)
+            if item.peekAi != nil, let ai = parcel.shownPeekAi(at: now) {
+                item.peekAiUntil = ai.end(after: now)
+                // Apart from the carrier's date, as at the top of a whole medium widget, "unlikely" says "not today".
+                let alone = localizer.peekAiCardWords(ai, estimate: nil, now: now)
+                item.peekAiAlone = alone == item.peekAi ? nil : alone
+            }
             let first = DeliveryWidgetWording(from: now, detail: item.detail, section: item.section, nextUp: item.nextUp)
             item.later = DeliveryWidgetDays.later(than: first, at: midnights) { midnight in
                 let at = midnights.firstIndex(of: midnight) ?? 0

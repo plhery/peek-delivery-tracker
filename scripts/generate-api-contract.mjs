@@ -500,14 +500,24 @@ function swiftBaseType(schema, parentSchemaName, propertyName) {
   }
 }
 
+/**
+ * Schemas the iPhone app reads leniently: Peek AI's estimate is a hint beside the carrier's, so one it cannot read, such
+ * as a kind of call newer than the app, is left out, never the parcel or the list it came in.
+ */
+const swiftLenientSchemas = new Set(['PeekAi']);
+
 function swiftProperty(schemaName, propertyName, schema, required) {
   const specialEmptyArray = schemaName === 'PackageRow' && propertyName === 'tracking_events';
+  const optional = !specialEmptyArray && (!required || schemaAllowsNull(schema));
+  const lenient = typeof schema.$ref === 'string' && swiftLenientSchemas.has(schema.$ref.split('/').pop());
+  if (lenient && !optional) throw new Error(`${schemaName}.${propertyName} must be optional to be read leniently`);
   return {
     jsonName: propertyName,
     name: swiftPropertyName(propertyName),
     type: swiftBaseType(schema, schemaName, propertyName),
-    optional: !specialEmptyArray && (!required || schemaAllowsNull(schema)),
+    optional,
     specialEmptyArray,
+    lenient,
   };
 }
 
@@ -576,7 +586,7 @@ function generatedSwiftStruct(schemaName, swiftName, schema) {
     const defaultValue = property.specialEmptyArray ? ' = []' : property.optional ? ' = nil' : '';
     lines.push(`    var ${property.name}: ${property.type}${property.optional ? '?' : ''}${defaultValue}`);
   }
-  if (properties.some((property) => property.name !== lowerCamelIdentifier(property.jsonName))) {
+  if (properties.some((property) => property.lenient || property.name !== lowerCamelIdentifier(property.jsonName))) {
     lines.push('', '    private enum CodingKeys: String, CodingKey {');
     properties.forEach((property) => lines.push(swiftCodingKey(property)));
     lines.push('    }');
@@ -585,9 +595,10 @@ function generatedSwiftStruct(schemaName, swiftName, schema) {
   return { lines, properties };
 }
 
-function generatedParcelDecoder(properties) {
+/** A decoder for the parcel, whose events default to none, and for each struct holding a property read leniently. */
+function generatedSwiftDecoder(swiftName, properties) {
   const lines = [
-    'extension Parcel {',
+    `extension ${swiftName} {`,
     '    init(from decoder: Decoder) throws {',
     '        let values = try decoder.container(keyedBy: CodingKeys.self)',
   ];
@@ -596,6 +607,8 @@ function generatedParcelDecoder(properties) {
       lines.push(
         `        ${property.name} = try values.decodeIfPresent(${property.type}.self, forKey: .${property.name}) ?? []`,
       );
+    } else if (property.lenient) {
+      lines.push(`        ${property.name} = try? values.decodeIfPresent(${property.type}.self, forKey: .${property.name})`);
     } else if (property.optional) {
       lines.push(
         `        ${property.name} = try values.decodeIfPresent(${property.type}.self, forKey: .${property.name})`,
@@ -617,6 +630,7 @@ function generatedSwift() {
     '',
   ];
   let parcelProperties = null;
+  const lenientDecoders = [];
   for (const [schemaName, schema] of Object.entries(schemas)) {
     const swiftName = swiftTypeName(schemaName);
     if (schema.enum) {
@@ -628,6 +642,7 @@ function generatedSwift() {
       const generated = generatedSwiftStruct(schemaName, swiftName, schema);
       lines.push(...generated.lines, '');
       if (schemaName === 'PackageRow') parcelProperties = generated.properties;
+      else if (generated.properties.some((property) => property.lenient)) lenientDecoders.push(generatedSwiftDecoder(swiftName, generated.properties));
     } else {
       throw new Error(`Unsupported top-level Swift schema: ${schemaName}`);
     }
@@ -640,7 +655,8 @@ function generatedSwift() {
     }
   }
   if (!parcelProperties) throw new Error('PackageRow is required to generate the native Parcel model');
-  lines.push(...generatedParcelDecoder(parcelProperties), '');
+  lines.push(...generatedSwiftDecoder('Parcel', parcelProperties), '');
+  for (const decoder of lenientDecoders) lines.push(...decoder, '');
   return `${lines.join('\n').trim()}\n`;
 }
 

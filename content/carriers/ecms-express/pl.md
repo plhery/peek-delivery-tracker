@@ -24,7 +24,7 @@ Numery ECMS liczą zawsze dokładnie 16 znaków: `EC`, `ES`, `AP` lub `AX`, po n
 
 **Gdzie znaleźć numer.** ECMS drukuje numer listu przewozowego (*waybill*) na etykiecie paczki, a sklep przesyła go w wiadomości e-mail o wysyłce lub pokazuje na karcie zamówienia. Gdy nie możesz go znaleźć, sprawdź [jak znaleźć numer śledzenia](guide:find-tracking-number) oraz [formaty numerów śledzenia](guide:tracking-number-formats).
 
-**Link do śledzenia.** Link do wyszukiwarki `ecmsglobal.com` zakończony parametrem `?number=` wpisuje ten numer w formularz i otwiera weryfikację obrazkową (*Security verification*). Starsze linki ECMS przekazują numer po `orderNumber=`, `trackingno=` (np. w domenie `consignee.ecmsglobal.com`) albo `order_number=`. Wklej dowolny z nich w Peek — aplikacja sama wyodrębni z linku numer ECMS.
+**Link do śledzenia.** Link do wyszukiwarki `ecmsglobal.com` zakończony parametrem `?number=` wpisuje ten numer w formularz i otwiera weryfikację obrazkową (*Security verification*). Inne linki ECMS przekazują numer po `orderNumber=`, `trackingno=` (np. w domenie `consignee.ecmsglobal.com`) albo `order_number=`. Wklej dowolny z nich w Peek — aplikacja sama wyodrębni z linku numer ECMS.
 
 ## Statusy śledzenia ECMS Express — co oznaczają
 
@@ -53,7 +53,7 @@ Na stronie `ecmsglobal.com` tracker najpierw prosi o przejście zabezpieczenia o
 
 **Wpisy po chińsku.** Część rekordów podaje te kroki po chińsku; Peek wyświetla chiński tekst i przypisuje mu ten sam etap co angielskiemu odpowiednikowi: `发货预报已收到，正在等待货物到达我们的始发站仓库` („Zarejestrowana”), `干线航班起飞` i `干线航班已到达` („W transporcie”), `货物已进入清关流程` („W urzędzie celnym”), `货物已清关放行`, `货物已到达目的站仓库` oraz `货物出库前往配送中心安排最终派送` („W transporcie”).
 
-**Godziny.** ECMS zapisuje własne skany z czasem lokalnym i przesunięciem UTC stacji, która je wykonała, a Peek zachowuje to przesunięcie. Przekazywane skany lokalnego przewoźnika mają przesunięcie równe zero: Peek odczytuje je w UTC, chyba że skan z takiego źródła wypadłby wtedy ponad dziesięć minut po dacie zapisania go w systemie ECMS — wówczas Peek traktuje go jako czas lokalny ustalany na podstawie miejsca. Wiersz lotu (`Flight departure`, `Flight arrival`) z godziną dokładnie o północy podaje wyłącznie dzień lotu i wyświetla się w Peek bez godziny. Zobacz też [śledzenie paczki z Chin](guide:tracking-from-china).
+**Godziny.** ECMS zapisuje własne skany z czasem lokalnym i przesunięciem UTC stacji, która je wykonała, a Peek zachowuje to przesunięcie. Przekazywane skany lokalnego przewoźnika mają przesunięcie równe zero: Peek odczytuje je w UTC, chyba że skan z takiego źródła wypadłby wtedy ponad dziesięć minut po dacie zapisania go w systemie ECMS — wówczas Peek traktuje godziny z tego źródła jako czas lokalny ustalany na podstawie miejsca. Wiersz lotu (`Flight departure`, `Flight arrival`) z godziną dokładnie o północy podaje wyłącznie dzień lotu i wyświetla się w Peek bez godziny. Zobacz też [śledzenie paczki z Chin](guide:tracking-from-china).
 
 ## Kto doręcza paczki ECMS Express w Polsce
 
@@ -75,14 +75,14 @@ Na ostatnim odcinku (*Final Mile Delivery*) ECMS deklaruje na stronie *Parcel De
 
 ## Kontakt z obsługą klienta ECMS Express
 
-Dane odczytane 21 listopada 2026 r. na stronie *Contact Us* w serwisie `www.ecmsglobal.com` (bez podanej strefy czasowej dla godzin pracy; Polska nie ma osobnego numeru na liście):
+Według strony *Contact Us* w serwisie `www.ecmsglobal.com` (bez podanej strefy czasowej dla godzin pracy; Polska nie ma osobnego numeru na liście):
 
 - **Formularz online**: na `www.ecmsglobal.com/en-us/contact-us.html` wybierz `Shipment Support` w polu *Inquiry Type* i wpisz numer paczki w *Tracking Number (Optional)*.
 - **Europa (Wielka Brytania)**: `(+44) 01753528888`, `cs.uk@ecmsglobal.com`, od poniedziałku do piątku `08:30`–`17:00`.
 - **Chiny kontynentalne**: `(+86) 400 086 1756`, `service@ecmsglobal.com`, od poniedziałku do piątku `08:30`–`17:30`.
 - **Stany Zjednoczone**: `(+1) 626 956 5388`, `customerserviceus@ecmsglobal.com`, od poniedziałku do piątku `09:00`–`18:00`.
 
-**Uwaga na fałszywe SMS-y.** Oficjalne domeny śledzenia ECMS to `www.ecmsglobal.com` (`ecmsglobal.com`) oraz starszy portal `consignee.ecmsglobal.com`. Peek odrzuca wszelkie linki płatnicze z rekordu; jeśli dostaniesz SMS z żądaniem dopłaty do cła lub doręczenia, upewnij się, że pochodzi od lokalnego przewoźnika wskazanego w `LM Provider`, i przeczytaj [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
+**Uwaga na fałszywe SMS-y.** Oficjalne domeny śledzenia ECMS to `www.ecmsglobal.com` (`ecmsglobal.com`) oraz starszy portal `consignee.ecmsglobal.com`. Peek odrzuca wszelkie linki płatnicze z rekordu; jeśli dostaniesz SMS z żądaniem dopłaty do cła lub doręczenia, przeczytaj [fałszywe SMS-y o paczkach](guide:delivery-scam-texts).
 
 ## Śledzenie przesyłki ECMS Express w Peek
 

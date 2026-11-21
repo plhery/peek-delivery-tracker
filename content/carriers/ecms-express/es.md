@@ -24,7 +24,7 @@ Ningún otro operador del catálogo de Peek usa estos formatos. Los espacios y l
 
 **Dónde encontrarlo.** ECMS imprime el número de albarán (*waybill*) en la etiqueta del paquete, y la tienda lo incluye en el correo de envío o en tu página de pedido. Si no aparece, consulta [cómo encontrar el número de seguimiento](guide:find-tracking-number) y [formatos de números de seguimiento](guide:tracking-number-formats).
 
-**Un enlace de seguimiento.** Un enlace al buscador de `ecmsglobal.com` terminado en `?number=` rellena el código y abre la verificación con imagen (*Security verification*). Los enlaces antiguos de ECMS llevan el código tras `orderNumber=`, `trackingno=` (como en `consignee.ecmsglobal.com`) u `order_number=`. Pega cualquiera de ellos en Peek: extraerá el código ECMS automáticamente.
+**Un enlace de seguimiento.** Un enlace al buscador de `ecmsglobal.com` terminado en `?number=` rellena el código y abre la verificación con imagen (*Security verification*). Otros enlaces de ECMS llevan el código tras `orderNumber=`, `trackingno=` (como en `consignee.ecmsglobal.com`) u `order_number=`. Pega cualquiera de ellos en Peek: extraerá el código ECMS automáticamente.
 
 ## Estados de seguimiento de ECMS Express explicados
 
@@ -75,14 +75,14 @@ Para el tramo final (*Final Mile Delivery*), ECMS señala en su página *Parcel 
 
 ## Teléfono y atención al cliente de ECMS Express
 
-Datos leídos el 21 de noviembre de 2026 en la página *Contact Us* de `www.ecmsglobal.com` (sin huso horario indicado para los horarios; España no tiene teléfono propio en la lista):
+Según la página *Contact Us* de `www.ecmsglobal.com` (sin huso horario indicado para los horarios; España no tiene teléfono propio en la lista):
 
 - **Formulario web**: en `www.ecmsglobal.com/en-us/contact-us.html`, elige `Shipment Support` en *Inquiry Type* e introduce tu código en *Tracking Number (Optional)*.
 - **Europa (Reino Unido)**: `(+44) 01753528888`, `cs.uk@ecmsglobal.com`, de lunes a viernes de `08:30` a `17:00`.
 - **China continental**: `(+86) 400 086 1756`, `service@ecmsglobal.com`, de lunes a viernes de `08:30` a `17:30`.
 - **Estados Unidos**: `(+1) 626 956 5388`, `customerserviceus@ecmsglobal.com`, de lunes a viernes de `09:00` a `18:00`.
 
-**Cuidado con los SMS fraudulentos.** Los dominios oficiales de seguimiento de ECMS son `www.ecmsglobal.com` (`ecmsglobal.com`) y el antiguo portal `consignee.ecmsglobal.com`. Peek descarta cualquier enlace de pago del registro; si recibes un SMS pidiendo pagar aduanas o redespacho, verifica que corresponda al operador local indicado bajo `LM Provider` y revisa [mensajes falsos de entrega](guide:delivery-scam-texts).
+**Cuidado con los SMS fraudulentos.** Los dominios oficiales de seguimiento de ECMS son `www.ecmsglobal.com` (`ecmsglobal.com`) y el antiguo portal `consignee.ecmsglobal.com`. Peek descarta cualquier enlace de pago del registro; si recibes un SMS pidiendo pagar aduanas o redespacho, revisa [mensajes falsos de entrega](guide:delivery-scam-texts).
 
 ## Seguir un paquete de ECMS Express con Peek
 

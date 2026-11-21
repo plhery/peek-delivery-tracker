@@ -24,7 +24,7 @@ Aucun autre transporteur du catalogue de Peek n'utilise ces structures. Les espa
 
 **Où le trouver.** ECMS imprime le numéro de lettre de transport (*waybill*) sur l'étiquette du colis, et la boutique le transmet dans son e-mail d'expédition ou sur la page de commande. Si tu ne le trouves pas, consulte [comment trouver son numéro de suivi](guide:find-tracking-number) et [les formats des numéros de suivi](guide:tracking-number-formats).
 
-**Un lien de suivi.** Un lien vers le traceur `ecmsglobal.com` se terminant par `?number=` préremplit ce numéro et ouvre la vérification par image (*Security verification*). Les anciens liens ECMS portent le numéro après `orderNumber=`, `trackingno=` (dont `consignee.ecmsglobal.com`) ou `order_number=`. Colle n'importe lequel dans Peek : il en extrait automatiquement le numéro ECMS.
+**Un lien de suivi.** Un lien vers le traceur `ecmsglobal.com` se terminant par `?number=` préremplit ce numéro et ouvre la vérification par image (*Security verification*). D'autres liens ECMS portent le numéro après `orderNumber=`, `trackingno=` (dont `consignee.ecmsglobal.com`) ou `order_number=`. Colle n'importe lequel dans Peek : il en extrait automatiquement le numéro ECMS.
 
 ## Statuts de suivi ECMS Express expliqués
 
@@ -75,14 +75,14 @@ Pour le dernier kilomètre (*Final Mile Delivery*), ECMS indique sur sa page *Pa
 
 ## Service client et contact ECMS Express
 
-Relevé le 21 novembre 2026 sur la page *Contact Us* de `www.ecmsglobal.com` (sans fuseau horaire précisé pour les horaires ; la France, la Belgique et la Suisse n'ont pas de numéro national propre) :
+Selon la page *Contact Us* de `www.ecmsglobal.com` (sans fuseau horaire précisé pour les horaires ; la France, la Belgique et la Suisse n'ont pas de numéro national propre) :
 
 - **Formulaire en ligne** : sur `www.ecmsglobal.com/en-us/contact-us.html`, choisis `Shipment Support` dans *Inquiry Type* et renseigne ton numéro dans *Tracking Number (Optional)*.
 - **Europe (Royaume-Uni)** : `(+44) 01753528888`, `cs.uk@ecmsglobal.com`, du lundi au vendredi de `08:30` à `17:00`.
 - **Chine continentale** : `(+86) 400 086 1756`, `service@ecmsglobal.com`, du lundi au vendredi de `08:30` à `17:30`.
 - **États-Unis** : `(+1) 626 956 5388`, `customerserviceus@ecmsglobal.com`, du lundi au vendredi de `09:00` à `18:00`.
 
-**Attention aux SMS frauduleux.** Les domaines officiels d'ECMS utilisés pour le suivi sont `www.ecmsglobal.com` (`ecmsglobal.com`) et l'ancien portail `consignee.ecmsglobal.com`. Peek écarte tout lien de paiement figurant sur un dossier ; si tu reçois un message réclamant des frais de douane ou de livraison, vérifie qu'il émane bien du transporteur local nommé sous `LM Provider` et consulte [reconnaître les SMS de livraison frauduleux](guide:delivery-scam-texts).
+**Attention aux SMS frauduleux.** Les domaines officiels d'ECMS utilisés pour le suivi sont `www.ecmsglobal.com` (`ecmsglobal.com`) et l'ancien portail `consignee.ecmsglobal.com`. Peek écarte tout lien de paiement figurant sur un dossier ; si tu reçois un message réclamant des frais de douane ou de livraison, consulte [reconnaître les SMS de livraison frauduleux](guide:delivery-scam-texts).
 
 ## Suivre un colis ECMS Express avec Peek
 
@@ -129,7 +129,7 @@ Contacte d'abord le marchand chez qui tu as commandé : la FAQ d'ECMS renvoie le
 - [Commission européenne : Réforme douanière de l'UE](https://taxation-customs.ec.europa.eu/customs/eu-customs-reform_en) – droit de douane de 3 € depuis le 1er juillet 2026 et frais de traitement de 2 € depuis le 1er novembre 2026
 - [Commission européenne : Orientations sur le droit de 3 € et les frais de l'Union (PDF)](https://taxation-customs.ec.europa.eu/document/download/053e5b4e-f0be-4f20-9a23-3e3b659a6676_en?filename=Customs%20Guidance%20on%20EUR%203%20customs%20duty.pdf) – calcul par article et exonération de TVA via IOSS
 - [Douane française : Vous achetez sur internet](https://www.douane.gouv.fr/demarche/vous-achetez-sur-internet) – TVA en France métropolitaine et dans les DOM
-- [OFDF : Réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – TVA suisse de 8,1 % / 2,6 % et franchise jusqu'à 5 francs
+- [OFDF : Réception de lettres et de paquets](https://www.bazg.admin.ch/fr/reception-de-lettres-et-paquets) – TVA suisse de 8,1 % / 2,6 % et montants inférieurs à 5 francs non perçus
 - [Universal Parcel Scraper : ECMS Express](https://github.com/plhery/universal-parcel-scraper/tree/main/carriers/ecms-express) – alias, format à 16 caractères, liens, calcul visuel et nouvel essai, statuts anglais et chinois, horloges et champs écartés
 - [Universal Parcel Scraper](https://github.com/plhery/universal-parcel-scraper) – relais vers le transporteur local et services de suivi en secours
 :::

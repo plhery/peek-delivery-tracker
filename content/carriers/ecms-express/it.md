@@ -24,7 +24,7 @@ Nessun altro corriere nel catalogo di Peek adotta questi schemi. Spazi e minusco
 
 **Dove trovarlo.** ECMS stampa il numero della lettera di vettura (*waybill*) sull'etichetta del pacco, e il negozio lo comunica nell'email di spedizione o nella pagina dell'ordine. Se non lo trovi, vedi [come trovare il numero di tracciamento](guide:find-tracking-number) e [formati dei numeri di tracciamento](guide:tracking-number-formats).
 
-**Un link di tracciamento.** Un link al tracker `ecmsglobal.com` che termina con `?number=` compila il numero e apre la verifica con immagine (*Security verification*). I link ECMS meno recenti passano il codice dopo `orderNumber=`, `trackingno=` (come su `consignee.ecmsglobal.com`) oppure `order_number=`. Incolla uno qualsiasi di questi link in Peek: estrarrà automaticamente il numero ECMS.
+**Un link di tracciamento.** Un link al tracker `ecmsglobal.com` che termina con `?number=` compila il numero e apre la verifica con immagine (*Security verification*). Altri link ECMS passano il codice dopo `orderNumber=`, `trackingno=` (come su `consignee.ecmsglobal.com`) oppure `order_number=`. Incolla uno qualsiasi di questi link in Peek: estrarrà automaticamente il numero ECMS.
 
 ## Stati del tracciamento ECMS Express spiegati
 
@@ -53,7 +53,7 @@ Su `ecmsglobal.com` il tracker chiede prima di superare una verifica visiva (*Se
 
 **Voci in cinese.** Alcune schede riportano questi passaggi in cinese; Peek mostra la frase cinese e le assegna lo stesso stato della gemella inglese: `发货预报已收到，正在等待货物到达我们的始发站仓库` («Etichetta creata»), `干线航班起飞` e `干线航班已到达` («In transito»), `货物已进入清关流程` («In dogana»), `货物已清关放行`, `货物已到达目的站仓库` e `货物出库前往配送中心安排最终派送` («In transito»).
 
-**Orari.** ECMS associa alle proprie scansioni l'orologio e lo scostamento UTC della stazione che le registra, e Peek li legge così. Le scansioni ritrasmesse del corriere locale portano scostamento zero: Peek le legge in UTC, a meno che una scansione di quel flusso cada oltre dieci minuti dopo il momento in cui ECMS l'ha registrata — in tal caso Peek la tratta come ora locale datata in base alla località. Una riga di volo (`Flight departure`, `Flight arrival`) timbrata esattamente a mezzanotte riporta soltanto il giorno del volo e compare in Peek senza orario. Vedi anche [tracciare un pacco dalla Cina](guide:tracking-from-china).
+**Orari.** ECMS associa alle proprie scansioni l'orologio e lo scostamento UTC della stazione che le registra, e Peek li legge così. Le scansioni ritrasmesse del corriere locale portano scostamento zero: Peek le legge in UTC, a meno che una scansione di quel flusso cada oltre dieci minuti dopo il momento in cui ECMS l'ha registrata — in tal caso Peek tratta gli orari di quel flusso come ora locale datata in base alla località. Una riga di volo (`Flight departure`, `Flight arrival`) timbrata esattamente a mezzanotte riporta soltanto il giorno del volo e compare in Peek senza orario. Vedi anche [tracciare un pacco dalla Cina](guide:tracking-from-china).
 
 ## Chi consegna i pacchi ECMS Express in Italia e in Svizzera
 
@@ -75,14 +75,14 @@ Per l'ultimo miglio (*Final Mile Delivery*), ECMS dichiara nella pagina *Parcel 
 
 ## Contatti e assistenza clienti ECMS Express
 
-Dati rilevati il 21 novembre 2026 sulla pagina *Contact Us* di `www.ecmsglobal.com` (senza fuso orario indicato per gli orari; Italia e Svizzera non hanno un numero telefonico dedicato in elenco):
+Secondo la pagina *Contact Us* di `www.ecmsglobal.com` (senza fuso orario indicato per gli orari; Italia e Svizzera non hanno un numero telefonico dedicato in elenco):
 
 - **Modulo online**: su `www.ecmsglobal.com/en-us/contact-us.html`, scegli `Shipment Support` sotto *Inquiry Type* e inserisci il codice in *Tracking Number (Optional)*.
 - **Europa (Regno Unito)**: `(+44) 01753528888`, `cs.uk@ecmsglobal.com`, dal lunedì al venerdì `08:30`–`17:00`.
 - **Cina continentale**: `(+86) 400 086 1756`, `service@ecmsglobal.com`, dal lunedì al venerdì `08:30`–`17:30`.
 - **Stati Uniti**: `(+1) 626 956 5388`, `customerserviceus@ecmsglobal.com`, dal lunedì al venerdì `09:00`–`18:00`.
 
-**Attenzione agli SMS truffa.** I domini ufficiali di ECMS per il tracciamento sono `www.ecmsglobal.com` (`ecmsglobal.com`) e il vecchio portale `consignee.ecmsglobal.com`. Peek scarta eventuali link di pagamento presenti nella scheda; se ricevi un SMS che chiede oneri doganali o di riconsegna, verifica che provenga davvero dal corriere locale indicato sotto `LM Provider` e consulta [SMS truffa sulle consegne](guide:delivery-scam-texts).
+**Attenzione agli SMS truffa.** I domini ufficiali di ECMS per il tracciamento sono `www.ecmsglobal.com` (`ecmsglobal.com`) e il vecchio portale `consignee.ecmsglobal.com`. Peek scarta eventuali link di pagamento presenti nella scheda; se ricevi un SMS che chiede oneri doganali o di riconsegna, consulta [SMS truffa sulle consegne](guide:delivery-scam-texts).
 
 ## Tracciare un pacco ECMS Express con Peek
 

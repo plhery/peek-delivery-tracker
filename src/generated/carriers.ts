@@ -2292,6 +2292,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#ffcc00"
     },
     {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "allegro-one-sendungsverfolgung",
+      "title": "Allegro One Sendungsverfolgung: One Box, Punkt & Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
+    },
+    {
       "id": "sunyou",
       "catalog": "sunyou",
       "slug": "sunyou-sendungsverfolgung",
@@ -3148,6 +3156,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Landmark Global suivi\u00a0: statuts, livreur et contact",
       "name": "Landmark Global",
       "color": "#e62337"
+    },
+    {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "suivi-allegro-one",
+      "title": "Suivi Allegro One\u00a0: One Box, One Punkt et One Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
     },
     {
       "id": "sunyou",
@@ -4040,6 +4056,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "color": "#e62337"
     },
     {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "tracciamento-allegro-one",
+      "title": "Tracciamento Allegro One: One Box, One Punkt e One Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
+    },
+    {
       "id": "sunyou",
       "catalog": "sunyou",
       "slug": "sunyou-tracking",
@@ -4840,6 +4864,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Landmark Global seguimiento: estados, entrega y contacto",
       "name": "Landmark Global",
       "color": "#e62337"
+    },
+    {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "seguimiento-allegro-one",
+      "title": "Seguimiento Allegro One: One Box, One Punkt y One Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
     },
     {
       "id": "cacesa",
@@ -5650,6 +5682,14 @@ export const CARRIER_LINKS: Record<PageLanguage, readonly CarrierLink[]> = {
       "title": "Rastreio Landmark Global: estados, parceiros e alfândega",
       "name": "Landmark Global",
       "color": "#e62337"
+    },
+    {
+      "id": "allegro-one",
+      "catalog": "allegro-one",
+      "slug": "seguimento-allegro-one",
+      "title": "Seguimento Allegro One: One Box, One Punkt e One Kurier",
+      "name": "Allegro One",
+      "color": "#006d57"
     },
     {
       "id": "cacesa",

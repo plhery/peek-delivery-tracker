@@ -14,17 +14,17 @@ ECMS's numbers are 16 characters: EC, ES, AP or AX, then three to five letters, 
 
 | Number | What it is |
 | --- | --- |
-| `ECAAA00000000000` | EC, three letters and eleven digits: an ECMS number. |
-| `ECAAAA0000000000` | EC, four letters and ten digits: ECMS too. |
-| `ECAAAAA000000000` | EC, five letters and nine digits: ECMS too. |
-| `ESAAA00000000000`, `APAAA00000000000`, `AXAAA00000000000` | The same layouts, opening with ES, AP or AX. |
-| `ECAAA0000000000` | Only 15 characters: not ECMS's layout. Check for a missing digit. |
+| `ECLAX48291057364` | EC, three letters and eleven digits: an ECMS number. |
+| `ECSZXA4829105736` | EC, four letters and ten digits: ECMS too. |
+| `ECSZXAB482910573` | EC, five letters and nine digits: ECMS too. |
+| `ESLAX48291057364`, `APLAX48291057364`, `AXLAX48291057364` | The same layouts, opening with ES, AP or AX. |
+| `ECLAX4829105736` | Only 15 characters: not ECMS's layout. Check for a missing digit. |
 
 No other carrier in Peek's catalog uses these layouts. Spaces and lower case don't matter in Peek.
 
 **Where to find it.** ECMS prints the number on the waybill on the parcel's label, and the shop passes it on in its shipping email or on your order page. If you can't find it, see [how to find your tracking number](guide:find-tracking-number).
 
-**A tracking link.** A link to ECMS's tracker ending in `?number=` and a number fills that number in and opens the picture check. Older ECMS links carry the number after `orderNumber=` or `trackingno=`. You can paste any of them into Peek: it finds the ECMS number in the link.
+**A tracking link.** A link to ECMS's tracker ending in `?number=` and a number fills that number in and opens the picture check. Other ECMS links carry the number after `orderNumber=` or `trackingno=`. You can paste any of them into Peek: it finds the ECMS number in the link.
 
 ## ECMS Express tracking statuses explained
 
@@ -53,7 +53,7 @@ ECMS's tracker first asks you to pass a picture check ("Security verification").
 
 **In Chinese.** Some histories give these steps in Chinese, and Peek gives them the same stage as their English twins: `发货预报已收到，正在等待货物到达我们的始发站仓库` (details received, waiting for the parcel), `干线航班起飞` and `干线航班已到达` (flight left, landed), `货物已进入清关流程` (in customs), `货物已清关放行` (cleared), `货物已到达目的站仓库` (at the destination warehouse) and `货物出库前往配送中心安排最终派送` (on its way to the local carrier).
 
-**Times.** ECMS gives its own scans the clock and UTC offset of the station that made them, and Peek reads them that way. The local carrier's scans, as ECMS relays them, carry an offset of zero: their times are in UTC, and Peek reads them so. A line stamped at midnight sharp, as a flight line giving only the flight's day can be, shows in Peek as that day, without a time. See also [tracking a parcel from China](guide:tracking-from-china).
+**Times.** ECMS gives its own scans the clock and UTC offset of the station that made them, and Peek reads them that way. The local carrier's scans, as ECMS relays them, carry an offset of zero: Peek reads them as UTC, unless a scan of that feed would then fall more than ten minutes after ECMS recorded it; then Peek reads the feed's times as local times, dated by the place. A flight line (`Flight departure`, `Flight arrival`) stamped at midnight sharp gives only the flight's day, and shows in Peek as that day, without a time. See also [tracking a parcel from China](guide:tracking-from-china).
 
 ## Who delivers ECMS Express parcels
 
@@ -65,7 +65,7 @@ For the last leg, ECMS says it partners "with trusted local carriers". Its track
 
 ## ECMS Express parcel not arriving or tracking stuck
 
-**"We could not find a shipment for this tracking number."** ECMS's tracker doesn't know the number: a typo, or the shop hasn't sent ECMS the details yet. Peek shows "Waiting for ECMS Express" and keeps checking. Check the number; if nothing comes after a few days, ask the seller whether the parcel was really sent.
+**"We could not find a shipment for this tracking number."** ECMS's tracker doesn't know the number: a typo, or the shop hasn't sent ECMS the details yet. Peek shows "Waiting for ECMS Express" and keeps checking. Check the number; if nothing comes after a few days, ask the seller whether the parcel was really sent. If ECMS still doesn't know the number after two days and no tracking service finds it either, Peek says: "After two days, the carrier still doesn’t know this number. Check it, choose another carrier or delete the parcel."
 
 **Stuck on `Virtual Manifest has been received`.** ECMS has the details, not the parcel. Ask the shop when it handed the parcel over.
 
@@ -83,7 +83,7 @@ For the last leg, ECMS says it partners "with trusted local carriers". Its track
 
 ## ECMS Express contact number and customer service
 
-As read on 10 November 2026, ECMS's Contact Us page lists these numbers for English-speaking countries, with no time zone for the hours. Canada and Ireland have no entry of their own.
+ECMS's Contact Us page lists these numbers for English-speaking countries, with no time zone for the hours. Canada and Ireland have no entry of their own.
 
 - **United States**: +1 626 956 5388, Monday to Friday, 09:00 to 18:00.
 - **United Kingdom**: 01753 528888, Monday to Friday, 08:30 to 17:00.
@@ -100,7 +100,7 @@ Peek shows the status, each scan with its town, region and country, and the dest
 
 When ECMS's record names a local carrier Peek knows, Peek shows "Delivery with" that carrier, with its number when ECMS's scans give one. While that carrier has only the announcement of the parcel, with no scan of its own, it shows "Announced to …, not received yet" instead. If Peek reads that carrier's own tracker, it asks it too, and once that carrier shows a scan at least as recent as ECMS's latest, Peek follows the parcel there and keeps ECMS's scans. Otherwise, add the "LM Tracking No." as a parcel of its own: Peek follows more than 3,500 carriers.
 
-Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ECMS's own tracker answers (through tracking services, every 15 minutes). After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers ECMS's customs step, `Return to origin`, the delivery run, `Available for pickup` and the delivery, not its flights or warehouse scans. Peek can't contact ECMS or the seller for you.
+While you have the parcel open, or on its delivery day with notifications on, Peek checks up to every 10 minutes, and up to every 2 minutes from 6 a.m. local time on the day the parcel goes out for delivery, while ECMS's own tracker answers (through tracking services, up to every 15 minutes); otherwise hourly. Once Peek follows the parcel with the local carrier, it follows that carrier's pace. After two days without news (12 hours while the parcel still shows "Label created" or "Received by carrier"), Peek checks hourly. It can notify you of "Every scan", "Important steps" or "Delivery only". "Important steps" covers ECMS's customs step, `Return to origin`, the delivery run, `Available for pickup` and the delivery, not its flights or warehouse scans. Peek can't contact ECMS or the seller for you.
 
 ## Questions about ECMS Express tracking
 

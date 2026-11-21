@@ -29,7 +29,8 @@ describe('carrier outages', () => {
     await loadCarrierOutages(down, NOW);
     expect(withEventPlaces(parcel()).carrier_outage).toEqual({
       carrier: 'colis-prive', since: SINCE,
-      tracking_url: 'https://colisprive.com/moncolis/pages/DetailColis.aspx?numColis=TESTCP00001&lang=fr',
+      // The catalog's page for the number, on whichever host Colis Privé serves it from.
+      tracking_url: expect.stringMatching(/^https:\/\/(?:www\.)?colisprive\.com\/moncolis\/pages\/DetailColis\.aspx\?numColis=TESTCP00001&lang=fr$/),
     });
     // Read once a minute: the list a minute old stands until then.
     await loadCarrierOutages(down, NOW + 30_000);
